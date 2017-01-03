@@ -7,6 +7,8 @@ import {
   TextInput,
   View
 } from 'react-native'
+import fetchGraphQL from '../util/fetchGraphQL'
+import MyPosts from './MyPosts'
 
 const placeholderUser = {
   name: 'Axolotl',
@@ -20,24 +22,13 @@ export default class HyloReactNative extends Component {
   }
 
   componentDidMount () {
-    fetch('http://localhost:9000/noo/graphql', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'X-Access-Token': '49fb6b050322fc58c58fb215ab6bed8438b0436b10735213'
-      },
-      body: JSON.stringify({
-        query: `{ me { name avatarUrl } }`
-      })
-    })
-    .then(resp => resp.json())
-    .then(json => this.setState({currentUser: json.data.me}))
+    fetchGraphQL('{ me { id name avatarUrl } }')
+    .then(data => this.setState({currentUser: data.me}))
   }
 
   render () {
     const food = this.state.food || 'unknown'
-    const { name, avatarUrl } = this.state.currentUser || placeholderUser
+    const { id, name, avatarUrl } = this.state.currentUser || placeholderUser
     return <View style={styles.container}>
       <Text style={styles.welcome}>
         Hello, {name}!
@@ -55,6 +46,7 @@ export default class HyloReactNative extends Component {
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         Cmd+D/shake: dev menu
       </Text>
+      {id && <MyPosts />}
     </View>
   }
 }
@@ -64,8 +56,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-start',
     alignItems: 'center',
-    backgroundColor: '#a13f66',
-    paddingTop: 80
+    backgroundColor: '#22bf99',
+    paddingTop: 20
   },
   welcome: {
     fontSize: 20,
@@ -79,7 +71,8 @@ const styles = StyleSheet.create({
     marginBottom: 5
   },
   fineprint: {
-    color: '#bbb',
+    color: '#fff',
+    opacity: 0.7,
     fontSize: 12
   },
   axolotl: {
