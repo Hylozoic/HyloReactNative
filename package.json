@@ -18,11 +18,13 @@
 		"react-test-renderer": "15.4.1"
 	},
 	"jest": {
-		"preset": "react-native"
+		"preset": "react-native",
+		"setupFiles": "./config/jest/mockFetch.js"
 	},
 	"standard": {
 		"global": [
-			"fetch"
+			"fetch",
+			"it"
 		]
 	}
 }
