@@ -1,5 +1,5 @@
 const fetchGraphQL = query =>
-  fetch('http://localhost:9000/noo/graphql', {
+  fetch('http://localhost:3001/noo/graphql', {
     method: 'POST',
     headers: {
       'Accept': 'application/json',

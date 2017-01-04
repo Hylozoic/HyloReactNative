@@ -24,7 +24,8 @@ export default class MyPosts extends Component {
 
   render () {
     return <ListView
-      style={{marginTop: 20}}
+      title='My Posts'
+      style={styles.container}
       dataSource={this.state.posts}
       renderRow={post => <Post post={post} />}
       enableEmptySections />
@@ -32,7 +33,18 @@ export default class MyPosts extends Component {
 }
 
 const Post = ({ post }) => {
-  return <View style={{margin: 10, marginBottom: 0}}>
+  return <View style={styles.post}>
     <Text>{post.title}</Text>
   </View>
+}
+
+const styles = {
+  container: {
+    padding: 20,
+    paddingTop: 80,
+    backgroundColor: '#fff'
+  },
+  post: {
+    paddingBottom: 10
+  }
 }
