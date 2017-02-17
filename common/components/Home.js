@@ -25,11 +25,15 @@ const router = (route, navigator) => {
 }
 
 export default class Home extends React.Component {
-  render () {
-    const routeMapper = {
+  constructor (props) {
+    super(props)
+
+    this.routeMapper = {
       LeftButton: (route, navigator, index, navState) => {
         if (route.index === 0) {
-          return null
+          return <TouchableOpacity onPress={this.props.openDrawer}>
+            <Text style={styles.navigationLeftButton}>Menu</Text>
+          </TouchableOpacity>
         }
         return <TouchableOpacity onPress={() => navigator.pop()}>
           <Text style={styles.navigationLeftButton}>&lt; Back</Text>
@@ -42,15 +46,18 @@ export default class Home extends React.Component {
         return <Text style={styles.navigationTitle}>{route.title}</Text>
       }
     }
+  }
 
+  render () {
     return <Navigator
       initialRoute={{name: 'root', title: 'Welcome', index: 0}}
       renderScene={router}
       navigationBar={<Navigator.NavigationBar
         style={styles.navigationBar}
-        routeMapper={routeMapper} />} />
+        routeMapper={this.routeMapper} />} />
   }
 }
+Home.propTypes = {openDrawer: React.PropTypes.func}
 
 const styles = {
   navigationBar: {
