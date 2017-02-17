@@ -1,7 +1,7 @@
 import { API_ACCESS_TOKEN, API_HOST } from 'react-native-dotenv'
 
-const fetchGraphQL = query =>
-  fetch(`${API_HOST}/noo/graphql`, {
+export default function fetchGraphQL (query) {
+  return fetch(`${API_HOST}/noo/graphql`, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -12,5 +12,4 @@ const fetchGraphQL = query =>
   })
   .then(resp => resp.json())
   .then(json => json.data)
-
-export default fetchGraphQL
+}
