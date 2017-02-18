@@ -1,6 +1,6 @@
 export default {
   navigationText: {
-    color: 'black',
+    color: 'white',
     fontSize: 18,
     lineHeight: 42
   },

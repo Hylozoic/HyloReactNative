@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 import {
   Navigator,
   Text,
@@ -7,15 +7,19 @@ import {
 import mixins from '../style/mixins'
 import { renderScene } from '../routing'
 
-export default class Home extends React.Component {
-  static propTypes = {openDrawer: React.PropTypes.func}
+export default class NavigatorWithBar extends React.Component {
+  static propTypes = {
+    openDrawer: PropTypes.func.isRequired,
+    variant: PropTypes.string,
+    navigatorProps: PropTypes.object
+  }
 
   constructor (props) {
     super(props)
 
     this.routeMapper = {
       LeftButton: (route, navigator, index, navState) => {
-        if (route.index === 0) {
+        if (navigator.getCurrentRoutes().length === 1) {
           return <TouchableOpacity onPress={this.props.openDrawer}>
             <Text style={styles.navigationLeftButton}>Menu</Text>
           </TouchableOpacity>
@@ -33,19 +37,32 @@ export default class Home extends React.Component {
     }
   }
 
+  push (route) {
+    return this.navigator.push(route)
+  }
+
   render () {
-    return <Navigator
-      initialRoute={{id: 'root', title: 'Welcome', index: 0}}
-      renderScene={renderScene}
-      navigationBar={<Navigator.NavigationBar
-        style={styles.navigationBar}
-        routeMapper={this.routeMapper} />} />
+    const navigationBar = <Navigator.NavigationBar
+      style={styles.navigationBar[this.props.variant]}
+      routeMapper={this.routeMapper} />
+
+    return <Navigator {...this.props.navigatorProps} renderScene={renderScene}
+      navigationBar={navigationBar}
+      ref={ref => { this.navigator = ref }} />
   }
 }
 
 const styles = {
   navigationBar: {
-    backgroundColor: '#22bf99'
+    home: {
+      backgroundColor: '#0dc3a0'
+    },
+    members: {
+      backgroundColor: '#9883e5'
+    },
+    topics: {
+      backgroundColor: '#bb60a8'
+    }
   },
   navigationTitle: {
     ...mixins.navigationText

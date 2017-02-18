@@ -1,14 +1,42 @@
 import React from 'react'
-import {
-  TabBarIOS,
-  Text,
-  View
-} from 'react-native'
-import mixins from '../style/mixins'
+import { TabBarIOS } from 'react-native'
 import placeholderIcon from '../assets/placeholder-icon.png'
-import Home from './Home'
+import NavigatorWithBar from './NavigatorWithBar'
 import DrawerMenu from './DrawerMenu'
 import Drawer from 'react-native-drawer'
+
+export default class RootView extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {selectedTabId: tabs[0].id}
+  }
+
+  renderTabContent (id, title) {
+    return <NavigatorWithBar openDrawer={() => this.drawer.open()} variant={id}
+      ref={ref => { this.selectedTab = ref }}
+      navigatorProps={{initialRoute: {id: 'root', title: 'Welcome'}}} />
+  }
+
+  render () {
+    const drawerMenu = <DrawerMenu close={() => this.drawer.close()}
+      showPosts={() => this.selectedTab.push({id: 'myPosts'})} />
+
+    return <Drawer ref={x => { this.drawer = x }} content={drawerMenu}
+      openDrawerOffset={0.1}
+      panOpenMask={0.1}
+      tweenDuration={180}
+      tweenEasing='easeInOutCubic'>
+      <TabBarIOS>
+        {tabs.map(({ id, title, icon }) =>
+          <TabBarIOS.Item title={title} icon={icon} key={id}
+            selected={this.state.selectedTabId === id}
+            onPress={() => this.setState({selectedTabId: id})}>
+            {this.renderTabContent(id, title)}
+          </TabBarIOS.Item>)}
+      </TabBarIOS>
+    </Drawer>
+  }
+}
 
 const tabs = [
   {id: 'home', title: 'Home', icon: placeholderIcon},
@@ -17,48 +45,3 @@ const tabs = [
   {id: 'members', title: 'Members', icon: placeholderIcon},
   {id: 'topics', title: 'Topics', icon: placeholderIcon}
 ]
-
-export default class RootView extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {selectedTab: tabs[0].id}
-  }
-
-  renderTabContent (id, title) {
-    if (id === 'home') return <Home openDrawer={() => this.drawer.open()} />
-
-    return <View style={styles.tabView}>
-      <Text>{id}: {title}</Text>
-    </View>
-  }
-
-  selectTab (id) {
-    this.setState({selectedTab: id})
-  }
-
-  render () {
-    return <Drawer ref={x => { this.drawer = x }}
-      content={<DrawerMenu close={() => this.drawer.close()} />}
-      openDrawerOffset={0.1}
-      panOpenMask={0.1}
-      tweenDuration={180}
-      tweenEasing='easeInOutCubic'>
-      <TabBarIOS>
-        {tabs.map(({ id, title, icon }) =>
-          <TabBarIOS.Item title={title} icon={icon} key={id}
-            selected={this.state.selectedTab === id}
-            onPress={() => this.selectTab(id)}>
-            {this.renderTabContent(id, title)}
-          </TabBarIOS.Item>)}
-      </TabBarIOS>
-    </Drawer>
-  }
-}
-
-const styles = {
-  tabView: {
-    ...mixins.belowStatusBar,
-    paddingLeft: 10,
-    paddingRight: 10
-  }
-}
