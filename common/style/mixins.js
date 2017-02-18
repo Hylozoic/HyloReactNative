@@ -7,5 +7,9 @@ export default {
 
   belowStatusBar: {
     paddingTop: 36
+  },
+
+  belowNavigationBar: {
+    paddingTop: 80
   }
 }

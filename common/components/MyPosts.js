@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { ListView, Text, View } from 'react-native'
+import { ListView, Text, TouchableOpacity, View } from 'react-native'
 import fetchGraphQL from '../util/fetchGraphQL'
+import mixins from '../style/mixins'
 
 export default class MyPosts extends Component {
   constructor (props) {
@@ -14,7 +15,7 @@ export default class MyPosts extends Component {
   }
 
   componentDidMount () {
-    fetchGraphQL('{ me { posts(first: 100) { id title } } }')
+    fetchGraphQL('{ me { posts(first: 100, order: "desc") { id title } } }')
     .then(data => {
       this.setState({
         posts: this.dataSource.cloneWithRows(data.me.posts)
@@ -27,24 +28,28 @@ export default class MyPosts extends Component {
       title='My Posts'
       style={styles.container}
       dataSource={this.state.posts}
-      renderRow={post => <Post post={post} />}
+      renderRow={post => <PostRow post={post} />}
       enableEmptySections />
   }
 }
 
-const Post = ({ post }) => {
-  return <View style={styles.post}>
-    <Text>{post.title}</Text>
+function PostRow ({ post }, { navigator }) {
+  const showPost = () => navigator.push({title: 'Post', id: 'post', post})
+  return <View style={styles.postRow}>
+    <TouchableOpacity onPress={showPost}>
+      <Text>{post.title}</Text>
+    </TouchableOpacity>
   </View>
 }
+PostRow.contextTypes = {navigator: React.PropTypes.object}
 
 const styles = {
   container: {
-    padding: 20,
-    paddingTop: 80,
-    backgroundColor: '#fff'
+    padding: 10,
+    ...mixins.belowNavigationBar,
+    backgroundColor: '#eee'
   },
-  post: {
+  postRow: {
     paddingBottom: 10
   }
 }

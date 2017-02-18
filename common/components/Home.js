@@ -1,30 +1,15 @@
 import React from 'react'
-import WelcomeScene from './WelcomeScene'
-import MyPosts from './MyPosts'
 import {
   Navigator,
   Text,
   TouchableOpacity
 } from 'react-native'
 import mixins from '../style/mixins'
-
-const router = (route, navigator) => {
-  switch (route.name) {
-    case 'root':
-      return <WelcomeScene
-        showMyPosts={() => {
-          navigator.push({
-            title: 'Your Posts',
-            name: 'myPosts',
-            index: route.index + 1
-          })
-        }} />
-    case 'myPosts':
-      return <MyPosts title={route.title} />
-  }
-}
+import { renderScene } from '../routing'
 
 export default class Home extends React.Component {
+  static propTypes = {openDrawer: React.PropTypes.func}
+
   constructor (props) {
     super(props)
 
@@ -50,14 +35,13 @@ export default class Home extends React.Component {
 
   render () {
     return <Navigator
-      initialRoute={{name: 'root', title: 'Welcome', index: 0}}
-      renderScene={router}
+      initialRoute={{id: 'root', title: 'Welcome', index: 0}}
+      renderScene={renderScene}
       navigationBar={<Navigator.NavigationBar
         style={styles.navigationBar}
         routeMapper={this.routeMapper} />} />
   }
 }
-Home.propTypes = {openDrawer: React.PropTypes.func}
 
 const styles = {
   navigationBar: {

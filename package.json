@@ -24,6 +24,7 @@
 		"setupFiles": "./config/jest/mockFetch.js"
 	},
 	"standard": {
+    "parser": "babel-eslint",
 		"global": [
 			"fetch",
 			"it"
