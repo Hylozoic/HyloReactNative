@@ -17,6 +17,14 @@ export default class RootView extends React.Component {
       navigatorProps={{initialRoute: {id: 'root', title: 'Welcome'}}} />
   }
 
+  handleTabPress (id) {
+    if (this.state.selectedTabId === id) {
+      this.selectedTab.popToTop()
+    } else {
+      this.setState({selectedTabId: id})
+    }
+  }
+
   render () {
     const drawerMenu = <DrawerMenu close={() => this.drawer.close()}
       showPosts={() => this.selectedTab.push({id: 'myPosts'})} />
@@ -30,7 +38,7 @@ export default class RootView extends React.Component {
         {tabs.map(({ id, title, icon }) =>
           <TabBarIOS.Item title={title} icon={icon} key={id}
             selected={this.state.selectedTabId === id}
-            onPress={() => this.setState({selectedTabId: id})}>
+            onPress={() => this.handleTabPress(id)}>
             {this.renderTabContent(id, title)}
           </TabBarIOS.Item>)}
       </TabBarIOS>

@@ -37,8 +37,10 @@ export default class NavigatorWithBar extends React.Component {
     }
   }
 
-  push (route) {
-    return this.navigator.push(route)
+  componentDidMount () {
+    ['push', 'popToTop'].forEach(fn => {
+      this[fn] = this.navigator[fn]
+    })
   }
 
   render () {
