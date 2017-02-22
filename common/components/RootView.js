@@ -8,30 +8,47 @@ import Drawer from 'react-native-drawer'
 export default class RootView extends React.Component {
   constructor (props) {
     super(props)
-    this.state = {selectedTabId: tabs[0].id}
+    this.state = {selectedTabId: tabs[0].id, isAtTop: true}
+    this.tabs = {}
   }
 
   renderTabContent (id, title) {
+    const unsetIsAtTop = () => {
+      if (this.state.isAtTop) this.setState({isAtTop: false})
+    }
+
     return <NavigatorWithBar openDrawer={() => this.drawer.open()} variant={id}
-      ref={ref => { this.selectedTab = ref }}
-      navigatorProps={{initialRoute: {id: 'root', title: 'Welcome'}}} />
+      ref={ref => { this.tabs[id] = ref }}
+      navigatorProps={{initialRoute: {id: 'root', title: 'Welcome'}}}
+      onNavigate={unsetIsAtTop} />
   }
 
   handleTabPress (id) {
-    if (this.state.selectedTabId === id) {
-      this.selectedTab.popToTop()
+    const { selectedTabId } = this.state
+    if (selectedTabId === id) {
+      this.tabs[selectedTabId].popToTop()
+      this.setState({isAtTop: true})
     } else {
       this.setState({selectedTabId: id})
     }
   }
 
+  componentDidUpdate (prevProps, prevState) {
+    const { selectedTabId } = this.state
+    if (selectedTabId !== prevState.selectedTabId) {
+      this.setState({isAtTop: this.tabs[selectedTabId].isAtTop()})
+    }
+  }
+
   render () {
+    const { isAtTop, selectedTabId } = this.state
     const drawerMenu = <DrawerMenu close={() => this.drawer.close()}
-      showPosts={() => this.selectedTab.push({id: 'myPosts'})} />
+      showPosts={() => this.tabs[selectedTabId].push({id: 'myPosts'})} />
 
     return <Drawer ref={x => { this.drawer = x }} content={drawerMenu}
       openDrawerOffset={0.1}
       panOpenMask={0.1}
+      disabled={!isAtTop}
       tweenDuration={180}
       tweenEasing='easeInOutCubic'>
       <TabBarIOS>

@@ -33,15 +33,15 @@ export default class MyPosts extends Component {
   }
 }
 
-function PostRow ({ post }, { navigator }) {
-  const showPost = () => navigator.push({title: 'Post', id: 'post', post})
+function PostRow ({ post }, { navigate }) {
+  const showPost = () => navigate({title: 'Post', id: 'post', post})
   return <View style={styles.postRow}>
     <TouchableOpacity onPress={showPost}>
       <Text>{post.title}</Text>
     </TouchableOpacity>
   </View>
 }
-PostRow.contextTypes = {navigator: React.PropTypes.object}
+PostRow.contextTypes = {navigate: React.PropTypes.func}
 
 const styles = {
   container: {

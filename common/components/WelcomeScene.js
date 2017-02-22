@@ -16,7 +16,7 @@ const placeholderUser = {
 }
 
 export default class WelcomeScene extends React.Component {
-  static contextTypes = {navigator: React.PropTypes.object}
+  static contextTypes = {navigate: React.PropTypes.func}
 
   constructor (props) {
     super(props)
@@ -31,9 +31,9 @@ export default class WelcomeScene extends React.Component {
   render () {
     const food = this.state.food || 'unknown'
     const { name, avatarUrl } = this.state.currentUser || placeholderUser
-    const { navigator } = this.context
+    const { navigate } = this.context
     const showMyPosts = () =>
-      navigator.push({title: 'Your Posts', id: 'myPosts'})
+      navigate({title: 'Your Posts', id: 'myPosts'})
     return <View style={styles.container}>
       <Text style={styles.fineprint}>
         Cmd+R: reload

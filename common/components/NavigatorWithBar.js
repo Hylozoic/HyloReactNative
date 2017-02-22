@@ -5,13 +5,14 @@ import {
   TouchableOpacity
 } from 'react-native'
 import mixins from '../style/mixins'
-import { renderScene } from '../routing'
+import { makeRenderScene } from '../routing'
 
 export default class NavigatorWithBar extends React.Component {
   static propTypes = {
     openDrawer: PropTypes.func.isRequired,
     variant: PropTypes.string,
-    navigatorProps: PropTypes.object
+    navigatorProps: PropTypes.object,
+    onNavigate: PropTypes.func
   }
 
   constructor (props) {
@@ -19,7 +20,7 @@ export default class NavigatorWithBar extends React.Component {
 
     this.routeMapper = {
       LeftButton: (route, navigator, index, navState) => {
-        if (navigator.getCurrentRoutes().length === 1) {
+        if (this.isAtTop(navigator)) {
           return <TouchableOpacity onPress={this.props.openDrawer}>
             <Text style={styles.navigationLeftButton}>Menu</Text>
           </TouchableOpacity>
@@ -43,7 +44,14 @@ export default class NavigatorWithBar extends React.Component {
     })
   }
 
+  isAtTop (navigator = this.navigator) {
+    return navigator.getCurrentRoutes().length === 1
+  }
+
   render () {
+    const { onNavigate } = this.props
+    const renderScene = makeRenderScene({onNavigate})
+
     const navigationBar = <Navigator.NavigationBar
       style={styles.navigationBar[this.props.variant]}
       routeMapper={this.routeMapper} />
