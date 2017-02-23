@@ -1,9 +1,10 @@
 import React from 'react'
-import { TabBarIOS } from 'react-native'
+import { Image, Platform, TabBarIOS } from 'react-native'
 import placeholderIcon from '../assets/placeholder-icon.png'
 import NavigatorWithBar from './NavigatorWithBar'
 import DrawerMenu from './DrawerMenu'
 import Drawer from 'react-native-drawer'
+import TabNavigator from 'react-native-tab-navigator'
 
 export default class RootView extends React.Component {
   constructor (props) {
@@ -45,20 +46,35 @@ export default class RootView extends React.Component {
     const drawerMenu = <DrawerMenu close={() => this.drawer.close()}
       showPosts={() => this.tabs[selectedTabId].push({id: 'myPosts'})} />
 
+    const TabBar = Platform.OS === 'ios' ? TabBarIOS : TabNavigator
+
+    const makeTabBarItem = ({ id, title, icon }) => {
+      const sharedProps = {
+        title,
+        key: id,
+        selected: this.state.selectedTabId === id,
+        onPress: () => this.handleTabPress(id)
+      }
+      if (Platform.OS === 'ios') {
+        return <TabBar.Item {...sharedProps} icon={icon}>
+          {this.renderTabContent(id, title)}
+        </TabBar.Item>
+      } else {
+        return <TabNavigator.Item {...sharedProps}
+          renderIcon={() => <Image source={icon} />}
+          renderSelectedIcon={() => <Image source={icon} />}>
+          {this.renderTabContent(id, title)}
+        </TabNavigator.Item>
+      }
+    }
+
     return <Drawer ref={x => { this.drawer = x }} content={drawerMenu}
       openDrawerOffset={0.1}
       panOpenMask={0.1}
       disabled={!isAtTop}
       tweenDuration={180}
       tweenEasing='easeInOutCubic'>
-      <TabBarIOS>
-        {tabs.map(({ id, title, icon }) =>
-          <TabBarIOS.Item title={title} icon={icon} key={id}
-            selected={this.state.selectedTabId === id}
-            onPress={() => this.handleTabPress(id)}>
-            {this.renderTabContent(id, title)}
-          </TabBarIOS.Item>)}
-      </TabBarIOS>
+      <TabBar>{tabs.map(makeTabBarItem)}</TabBar>
     </Drawer>
   }
 }
