@@ -8,6 +8,7 @@ import {
   TextInput,
   View
 } from 'react-native'
+import MyPosts from './MyPosts'
 import fetchGraphQL from '../util/fetchGraphQL'
 
 const placeholderUser = {
@@ -33,7 +34,8 @@ export default class WelcomeScene extends React.Component {
     const { name, avatarUrl } = this.state.currentUser || placeholderUser
     const { navigate } = this.context
     const showMyPosts = () =>
-      navigate({title: 'Your Posts', id: 'myPosts'})
+      navigate({title: 'Your Posts', component: MyPosts})
+
     return <View style={styles.container}>
       <Text style={styles.fineprint}>
         Cmd+R: reload

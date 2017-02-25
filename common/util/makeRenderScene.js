@@ -1,24 +1,10 @@
-import React, { PropTypes } from 'react'
-import WelcomeScene from './components/WelcomeScene'
-import MyPosts from './components/MyPosts'
-import Post from './components/Post'
+import React, { createElement, PropTypes } from 'react'
 
-export function makeRenderScene ({ onNavigate }) {
-  return function renderScene (route, navigator) {
+export default function makeRenderScene ({ onNavigate }) {
+  return function renderScene ({ component, props }, navigator) {
     return <NavigationContext navigator={navigator} onNavigate={onNavigate}>
-      {componentForRoute(route)}
+      {createElement(component, props)}
     </NavigationContext>
-  }
-}
-
-function componentForRoute (route) {
-  switch (route.id) {
-    case 'root':
-      return <WelcomeScene />
-    case 'myPosts':
-      return <MyPosts />
-    case 'post':
-      return <Post post={route.post} />
   }
 }
 

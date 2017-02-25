@@ -5,7 +5,7 @@ import {
   TouchableOpacity
 } from 'react-native'
 import mixins from '../style/mixins'
-import { makeRenderScene } from '../routing'
+import makeRenderScene from '../util/makeRenderScene'
 
 export default class NavigatorWithBar extends React.Component {
   static propTypes = {
@@ -49,14 +49,14 @@ export default class NavigatorWithBar extends React.Component {
   }
 
   render () {
-    const { onNavigate } = this.props
+    const { onNavigate, navigatorProps } = this.props
     const renderScene = makeRenderScene({onNavigate})
 
     const navigationBar = <Navigator.NavigationBar
       style={styles.navigationBar[this.props.variant]}
       routeMapper={this.routeMapper} />
 
-    return <Navigator {...this.props.navigatorProps} renderScene={renderScene}
+    return <Navigator {...navigatorProps} renderScene={renderScene}
       navigationBar={navigationBar}
       ref={ref => { this.navigator = ref }} />
   }

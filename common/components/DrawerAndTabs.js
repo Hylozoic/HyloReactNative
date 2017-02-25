@@ -3,6 +3,8 @@ import { Image, Platform, TabBarIOS } from 'react-native'
 import placeholderIcon from '../assets/placeholder-icon.png'
 import NavigatorWithBar from './NavigatorWithBar'
 import DrawerMenu from './DrawerMenu'
+import WelcomeScene from './WelcomeScene'
+import MyPosts from './MyPosts'
 import Settings from './Settings'
 import Drawer from 'react-native-drawer'
 import TabNavigator from 'react-native-tab-navigator'
@@ -22,7 +24,9 @@ export default class DrawerAndTabs extends React.Component {
 
     return <NavigatorWithBar openDrawer={() => this.drawer.open()} variant={id}
       ref={ref => { this.tabs[id] = ref }}
-      navigatorProps={{initialRoute: {id: 'root', title: 'Welcome'}}}
+      navigatorProps={{
+        initialRoute: {title: 'Welcome', component: WelcomeScene}
+      }}
       onNavigate={unsetIsAtTop} />
   }
 
@@ -66,7 +70,7 @@ export default class DrawerAndTabs extends React.Component {
   render () {
     const { isAtTop, selectedTabId } = this.state
     const drawerMenu = <DrawerMenu close={() => this.drawer.close()}
-      showPosts={() => this.tabs[selectedTabId].push({id: 'myPosts'})}
+      showPosts={() => this.tabs[selectedTabId].push({component: MyPosts})}
       showSettings={() => this.props.rootNavigator.push({
         component: Settings,
         props: {name: 'you'}

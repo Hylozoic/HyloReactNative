@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { ListView, Text, TouchableOpacity, View } from 'react-native'
 import fetchGraphQL from '../util/fetchGraphQL'
 import mixins from '../style/mixins'
+import Post from './Post'
 
 export default class MyPosts extends Component {
   constructor (props) {
@@ -34,7 +35,9 @@ export default class MyPosts extends Component {
 }
 
 function PostRow ({ post }, { navigate }) {
-  const showPost = () => navigate({title: 'Post', id: 'post', post})
+  const showPost = () =>
+    navigate({title: 'Post', component: Post, props: {post}})
+
   return <View style={styles.postRow}>
     <TouchableOpacity onPress={showPost}>
       <Text>{post.title}</Text>
