@@ -1,17 +1,21 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 import { Button, Text, View } from 'react-native'
 import mixins from '../style/mixins'
+import { delay } from 'lodash'
 
-export default class DrawerMenu extends React.Component {
-
-  render () {
-    const { close, showPosts } = this.props
-    return <View style={styles.menu}>
-      <Text style={styles.text}>Hi! I am a drawer menu! Pleased to meet you.</Text>
-      <Button onPress={() => [showPosts(), close()]} title='Show posts' />
-      <Button onPress={close} title='Close' />
-    </View>
-  }
+export default function DrawerMenu ({ close, showPosts, showSettings }) {
+  return <View style={styles.menu}>
+    <Text style={styles.text}>Hi! I am a drawer menu! Pleased to meet you.</Text>
+    <Button onPress={() => [showPosts(), close()]} title='Show posts' />
+    <Button onPress={() => [showSettings(), delay(close, 300)]}
+      title='Show settings' />
+    <Button onPress={close} title='Close menu' />
+  </View>
+}
+DrawerMenu.propTypes = {
+  close: PropTypes.func,
+  showPosts: PropTypes.func,
+  showSheet: PropTypes.func
 }
 
 const styles = {
@@ -25,4 +29,3 @@ const styles = {
     color: 'white'
   }
 }
-DrawerMenu.propTypes = {close: React.PropTypes.func}
