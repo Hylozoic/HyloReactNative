@@ -21,13 +21,17 @@ export default class DrawerAndTabs extends React.Component {
     const unsetIsAtTop = () => {
       if (this.state.isAtTop) this.setState({isAtTop: false})
     }
+    const setIsAtTop = () => {
+      if (!this.state.isAtTop) this.setState({isAtTop: true})
+    }
 
     return <NavigatorWithBar openDrawer={() => this.drawer.open()} variant={id}
       ref={ref => { this.tabs[id] = ref }}
       navigatorProps={{
         initialRoute: {title: 'Welcome', component: WelcomeScene}
       }}
-      onNavigate={unsetIsAtTop} />
+      onNavigate={unsetIsAtTop}
+      onBackToTop={setIsAtTop} />
   }
 
   handleTabPress (id) {

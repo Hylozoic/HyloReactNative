@@ -12,7 +12,8 @@ export default class NavigatorWithBar extends React.Component {
     openDrawer: PropTypes.func.isRequired,
     variant: PropTypes.string,
     navigatorProps: PropTypes.object,
-    onNavigate: PropTypes.func
+    onNavigate: PropTypes.func,
+    onBackToTop: PropTypes.func
   }
 
   constructor (props) {
@@ -25,7 +26,12 @@ export default class NavigatorWithBar extends React.Component {
             <Text style={styles.navigationLeftButton}>Menu</Text>
           </TouchableOpacity>
         }
-        return <TouchableOpacity onPress={() => navigator.pop()}>
+        const onBackPress = () => {
+          const willBeAtTop = navigator.getCurrentRoutes().length === 2
+          navigator.pop()
+          willBeAtTop && this.props.onBackToTop()
+        }
+        return <TouchableOpacity onPress={onBackPress}>
           <Text style={styles.navigationLeftButton}>&lt; Back</Text>
         </TouchableOpacity>
       },
