@@ -91,7 +91,8 @@ export default class DrawerAndTabs extends React.Component {
       panOpenMask={0.1}
       disabled={!isAtTop}
       tweenDuration={250}
-      tweenEasing='easeInOutCubic'>
+      tweenEasing='easeInOutCubic'
+      tapToClose={true}>
       <this.TabBar>{tabs.map(this.makeTabBarItem)}</this.TabBar>
     </Drawer>
   }
