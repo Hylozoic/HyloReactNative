@@ -9,7 +9,7 @@
 	"dependencies": {
 		"lodash": "^4.17.4",
 		"react": "^15.4.1",
-		"react-native": "0.41.2",
+		"react-native": "0.42.0",
 		"react-native-dotenv": "^0.0.2",
 		"react-native-drawer": "^2.3.0",
 		"react-native-tab-navigator": "^0.3.3"
