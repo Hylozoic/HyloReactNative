@@ -2,9 +2,16 @@ import React, { createElement } from 'react'
 import { Navigator } from 'react-native'
 import DrawerAndTabs from './DrawerAndTabs'
 
+export default class RootView extends React.Component {
+  render () {
+    const loggedIn = true
+    if (loggedIn) return <LoggedInView />
+  }
+}
+
 // this component just sets up a navigator so that views can open full-screen,
 // above the tab bar
-export default class RootView extends React.Component {
+class LoggedInView extends React.Component {
   render () {
     const initialRoute = {
       render: navigator => <DrawerAndTabs rootNavigator={navigator} />

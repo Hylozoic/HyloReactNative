@@ -30,8 +30,8 @@ export default class DrawerMenu extends Component {
 
   resetToTop () {
     // hack to fix apparent scroll bug: https://github.com/facebook/react-native/issues/1831
-    this.listView.scrollTo({x: 0,y: 1})
-    this.listView.scrollTo({x: 0,y: 0})
+    this.listView.scrollTo({x: 0, y: 1})
+    this.listView.scrollTo({x: 0, y: 0})
   }
 
   renderHeader = () => {
@@ -50,11 +50,12 @@ export default class DrawerMenu extends Component {
 
   render () {
     return <ListView style={styles.menu}
-        ref={listView => this.listView = listView}
-        dataSource={this.state.memberships}
-        renderRow={membership => <CommunityRow community={membership.community} />}
-        renderHeader={this.renderHeader}
-        renderFooter={this.renderFooter} />
+      ref={ref => { this.listView = ref }}
+      dataSource={this.state.memberships}
+      renderRow={membership => <CommunityRow community={membership.community} />}
+      renderHeader={this.renderHeader}
+      renderFooter={this.renderFooter}
+      enableEmptySections />
   }
 }
 DrawerMenu.propTypes = {
@@ -65,7 +66,7 @@ DrawerMenu.propTypes = {
 
 function CommunityRow ({ community }, { navigate }) {
   const showCommunity = () => {}
-    //navigate({title: 'Community', component: Post, props: {post}})
+    // navigate({title: 'Community', component: Post, props: {post}})
 
   return <View style={styles.communityRow}>
     <TouchableOpacity onPress={showCommunity}>

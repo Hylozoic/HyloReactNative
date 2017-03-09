@@ -27,9 +27,8 @@ export default class NavigatorWithBar extends React.Component {
           </TouchableOpacity>
         }
         const onBackPress = () => {
-          const willBeAtTop = navigator.getCurrentRoutes().length === 2
           navigator.pop()
-          willBeAtTop && this.props.onBackToTop()
+          if (this.willBeAtTop(navigator)) this.props.onBackToTop()
         }
         return <TouchableOpacity onPress={onBackPress}>
           <Text style={styles.navigationLeftButton}>&lt; Back</Text>
@@ -48,6 +47,10 @@ export default class NavigatorWithBar extends React.Component {
     ['push', 'popToTop'].forEach(fn => {
       this[fn] = this.navigator[fn]
     })
+  }
+
+  willBeAtTop (navigator = this.navigator) {
+    return navigator.getCurrentRoutes().length === 2
   }
 
   isAtTop (navigator = this.navigator) {
