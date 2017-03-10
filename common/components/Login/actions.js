@@ -1,4 +1,7 @@
+import { clearSessionCookie } from '../../util/session'
+
 export const LOGIN = 'LOGIN'
+export const LOGOUT = 'LOGOUT'
 
 export function login (email, password) {
   return {
@@ -6,5 +9,14 @@ export function login (email, password) {
     payload: {
       api: {method: 'post', path: '/noo/login', params: {email, password}}
     }
+  }
+}
+
+export function logout () {
+  return {
+    type: LOGOUT,
+    payload: clearSessionCookie().then(() => ({
+      api: {method: 'delete', path: '/noo/session'}
+    }))
   }
 }

@@ -1,4 +1,4 @@
-import { LOGIN } from '../components/Login/actions'
+import { LOGIN, LOGOUT } from '../components/Login/actions'
 import { CHECK_SESSION } from '../components/SessionCheck/actions'
 
 export default function rootReducer (state, action) {
@@ -26,6 +26,11 @@ export default function rootReducer (state, action) {
       return {
         ...state,
         loggedIn: payload
+      }
+    case LOGOUT:
+      return {
+        ...state,
+        loggedIn: false
       }
   }
   return {}

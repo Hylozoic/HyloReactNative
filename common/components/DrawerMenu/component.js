@@ -1,10 +1,16 @@
 import React, { PropTypes, Component } from 'react'
 import { Button, ListView, Text, TouchableOpacity, View } from 'react-native'
-import fetchGraphQL from '../util/fetchGraphQL'
-import mixins from '../style/mixins'
+import fetchGraphQL from '../../util/fetchGraphQL'
+import mixins from '../../style/mixins'
 import { delay } from 'lodash'
 
 export default class DrawerMenu extends Component {
+  static propTypes = {
+    actions: PropTypes.shape({
+      logout: PropTypes.func.isRequired
+    }).isRequired
+  }
+
   constructor (props) {
     super(props)
     this.dataSource = new ListView.DataSource({
@@ -39,12 +45,12 @@ export default class DrawerMenu extends Component {
   }
 
   renderFooter = () => {
-    const { close, showPosts, showSettings } = this.props
+    const { close, showPosts, showSettings, actions: { logout } } = this.props
     return <View>
       <Button onPress={() => [showPosts(), close()]} title='Show posts' />
       <Button onPress={() => [showSettings(), delay(close, 300)]}
         title='Show settings' />
-      <Button onPress={close} title='Close menu' />
+      <Button onPress={logout} title='Log out' />
     </View>
   }
 

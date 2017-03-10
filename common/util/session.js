@@ -14,3 +14,7 @@ export function setSessionCookie (resp) {
 export function getSessionCookie () {
   return AsyncStorage.getItem(SESSION_COOKIE_KEY)
 }
+
+export function clearSessionCookie () {
+  return AsyncStorage.removeItem(SESSION_COOKIE_KEY)
+}
