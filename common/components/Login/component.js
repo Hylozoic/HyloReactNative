@@ -5,6 +5,7 @@ import { focus } from '../../util/textInput'
 
 export default class Login extends React.Component {
   static propTypes = {
+    error: PropTypes.string,
     actions: PropTypes.shape({
       login: PropTypes.func.isRequired
     }).isRequired
@@ -24,8 +25,11 @@ export default class Login extends React.Component {
   }
 
   render () {
+    const { error } = this.props
+
     return <ScrollView contentContainerStyle={styles.login}>
       <Text style={styles.title}>Hylo!</Text>
+      {error && <Text style={styles.error}>{error}</Text>}
       <View>{/* this wrapper view is needed to get TextInput to center-align */}
         <TextInput style={styles.email} placeholder='Email address'
           onChangeText={this.setKeyInState('email')}
@@ -68,5 +72,9 @@ const styles = {
   },
   password: {
     ...mixins.textInput
+  },
+  error: {
+    color: 'red',
+    marginBottom: 10
   }
 }
