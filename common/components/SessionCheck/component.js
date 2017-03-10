@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react'
 import { Text, View } from 'react-native'
 import LoggedInRoot from '../LoggedInRoot'
 import Login from '../Login'
+import mixins from '../../style/mixins'
 
 export default class SessionCheck extends React.Component {
   static propTypes = {
@@ -22,17 +23,9 @@ export default class SessionCheck extends React.Component {
       case false:
         return <Login />
       default:
-        return <View style={styles.view}>
+        return <View style={mixins.allCentered}>
           <Text>Loading...</Text>
         </View>
     }
-  }
-}
-
-const styles = {
-  view: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
   }
 }
