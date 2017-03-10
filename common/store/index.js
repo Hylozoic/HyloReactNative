@@ -1,5 +1,5 @@
 import { applyMiddleware, createStore } from 'redux'
-import { compact, memoize } from 'lodash'
+import { compact } from 'lodash'
 import rootReducer from '../reducer'
 import promiseMiddleware from 'redux-promise'
 import apiMiddleware from './middleware/api'
@@ -11,18 +11,26 @@ const middleware = compact([
   __DEV__ && createLogger({collapsed: true})
 ])
 
-export default memoize(function getStore () {
-  const initialState = {}
-  const store = createStore(rootReducer, initialState,
-    applyMiddleware(...middleware))
+function getInitialState () {
+  // TODO retrieve values from local storage for initial state
+  return new Promise(resolve => {
+    setTimeout(resolve, 1000)
+  })
+}
 
-  // Enable Webpack hot module replacement for reducers
-  if (module.hot) {
-    module.hot.accept(() => {
-      const nextRootReducer = require('../reducer')
-      store.replaceReducer(nextRootReducer)
-    })
-  }
+export default function getStore () {
+  return getInitialState().then(initialState => {
+    const store = createStore(rootReducer, initialState,
+      applyMiddleware(...middleware))
 
-  return store
-})
+    // Enable Webpack hot module replacement for reducers
+    if (module.hot) {
+      module.hot.accept(() => {
+        const nextRootReducer = require('../reducer')
+        store.replaceReducer(nextRootReducer)
+      })
+    }
+
+    return store
+  })
+}
