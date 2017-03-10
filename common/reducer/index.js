@@ -2,14 +2,14 @@ import { LOGIN, LOGOUT } from '../components/Login/actions'
 import { CHECK_SESSION } from '../components/SessionCheck/actions'
 
 export default function rootReducer (state, action) {
-  const { type, error, payload } = action
+  const { type, error, payload, meta } = action
 
   if (error) {
     switch (type) {
       case LOGIN:
         return {
           ...state,
-          loginError: payload.response.body
+          loginError: payload.message || payload.response.body
         }
     }
     return
@@ -20,7 +20,8 @@ export default function rootReducer (state, action) {
       return {
         ...state,
         loginError: null,
-        loggedIn: true
+        loggedIn: true,
+        defaultLoginEmail: meta.email // TODO persist this
       }
     case CHECK_SESSION:
       return {

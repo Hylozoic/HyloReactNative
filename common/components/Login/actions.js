@@ -8,7 +8,8 @@ export function login (email, password) {
     type: LOGIN,
     payload: {
       api: {method: 'post', path: '/noo/login', params: {email, password}}
-    }
+    },
+    meta: {email}
   }
 }
 

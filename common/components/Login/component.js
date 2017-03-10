@@ -6,6 +6,7 @@ import { focus } from '../../util/textInput'
 export default class Login extends React.Component {
   static propTypes = {
     error: PropTypes.string,
+    defaultEmail: PropTypes.string,
     actions: PropTypes.shape({
       login: PropTypes.func.isRequired
     }).isRequired
@@ -13,11 +14,7 @@ export default class Login extends React.Component {
 
   constructor (props) {
     super(props)
-    this.state = {} // TODO: remember email
-  }
-
-  setKeyInState (key) {
-    return value => this.setState({[key]: value})
+    this.state = {email: this.props.defaultEmail}
   }
 
   login () {
@@ -25,23 +22,26 @@ export default class Login extends React.Component {
   }
 
   render () {
-    const { error } = this.props
+    const { error, defaultEmail } = this.props
 
     return <ScrollView contentContainerStyle={styles.login}>
       <Text style={styles.title}>Hylo!</Text>
       {error && <Text style={styles.error}>{error}</Text>}
       <View>{/* this wrapper view is needed to get TextInput to center-align */}
         <TextInput style={styles.email} placeholder='Email address'
-          onChangeText={this.setKeyInState('email')}
+          defaultValue={defaultEmail}
+          onChangeText={email => this.setState({email})}
           returnKeyType='next'
+          autoCapitalize='none'
           onSubmitEditing={() => focus(this.passwordInput)} />
       </View>
       <View>
         <TextInput style={styles.password} placeholder='Password'
           secureTextEntry
           ref={ref => { this.passwordInput = ref }}
-          onChangeText={this.setKeyInState('password')}
+          onChangeText={password => this.setState({password})}
           returnKeyType='go'
+          selectTextOnFocus
           onSubmitEditing={() => this.login()} />
       </View>
       <Button onPress={() => this.login()} title='Log in' />

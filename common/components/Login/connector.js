@@ -3,7 +3,10 @@ import { connect } from 'react-redux'
 import { login } from './actions'
 
 function mapStateToProps (state) {
-  return {error: state.loginError}
+  return {
+    error: state.loginError,
+    defaultEmail: state.defaultLoginEmail
+  }
 }
 
 function mapDispatchToProps (dispatch) {
