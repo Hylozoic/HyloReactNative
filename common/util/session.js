@@ -13,8 +13,4 @@ export function setSessionCookie (resp) {
 
 export function getSessionCookie () {
   return AsyncStorage.getItem(SESSION_COOKIE_KEY)
-  .then(cookie => {
-    console.log(`retrieved cookie: ${cookie}`)
-    return cookie
-  })
 }
