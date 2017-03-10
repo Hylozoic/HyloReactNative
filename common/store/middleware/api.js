@@ -1,5 +1,8 @@
-import { API_HOST } from 'react-native-dotenv'
+import { API_HOST, EMULATOR_API_HOST } from 'react-native-dotenv'
 import { getSessionCookie, setSessionCookie } from '../../util/session'
+import DeviceInfo from 'react-native-device-info'
+
+const HOST = DeviceInfo.isEmulator() ? EMULATOR_API_HOST : API_HOST
 
 export default function apiMiddleware (store) {
   return next => action => {
@@ -17,7 +20,8 @@ export default function apiMiddleware (store) {
 
 function fetchJSON (path, params, options = {}) {
   const { host, method, cookie } = options
-  return fetch((host || API_HOST) + path, {
+  const url = (host || HOST) + path
+  return fetch(url, {
     method: method || 'get',
     headers: {
       'Accept': 'application/json',

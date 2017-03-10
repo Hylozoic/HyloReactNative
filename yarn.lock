@@ -2969,6 +2969,10 @@ react-deep-force-update@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/react-deep-force-update/-/react-deep-force-update-1.0.1.tgz#f911b5be1d2a6fe387507dd6e9a767aa2924b4c7"
 
+react-native-device-info@^0.10.1:
+  version "0.10.1"
+  resolved "https://registry.yarnpkg.com/react-native-device-info/-/react-native-device-info-0.10.1.tgz#8eb675fa624a356a14455c97ec82590ee1d1fdd8"
+
 react-native-dotenv@^0.0.2:
   version "0.0.2"
   resolved "https://registry.yarnpkg.com/react-native-dotenv/-/react-native-dotenv-0.0.2.tgz#bd936954c48af9d42759f426867b88d0b299b927"
