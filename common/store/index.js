@@ -4,6 +4,8 @@ import rootReducer from '../reducer'
 import promiseMiddleware from 'redux-promise'
 import apiMiddleware from './middleware/api'
 import createLogger from 'redux-logger'
+import { AsyncStorage } from 'react-native'
+import { PERSISTED_STATE_KEY } from '../reducer/persistence'
 
 const middleware = compact([
   apiMiddleware,
@@ -12,10 +14,8 @@ const middleware = compact([
 ])
 
 function getInitialState () {
-  // TODO retrieve values from local storage for initial state
-  return new Promise(resolve => {
-    setTimeout(resolve, 1000)
-  })
+  return AsyncStorage.getItem(PERSISTED_STATE_KEY)
+  .then(state => state ? JSON.parse(state) : {})
 }
 
 export default function getStore () {

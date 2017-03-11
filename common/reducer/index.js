@@ -1,7 +1,9 @@
 import { LOGIN, LOGOUT } from '../components/Login/actions'
 import { CHECK_SESSION } from '../components/SessionCheck/actions'
+import { persist } from './persistence'
+import { omit } from 'lodash/fp'
 
-export default function rootReducer (state, action) {
+function rootReducer (state = {}, action) {
   const { type, error, payload, meta } = action
 
   if (error) {
@@ -18,21 +20,23 @@ export default function rootReducer (state, action) {
   switch (type) {
     case LOGIN:
       return {
-        ...state,
-        loginError: null,
+        ...omit('loginError', state),
         loggedIn: true,
-        defaultLoginEmail: meta.email // TODO persist this
+        defaultLoginEmail: meta.email
       }
     case CHECK_SESSION:
-      return {
-        ...state,
-        loggedIn: payload
+      if (payload !== state.loggedIn) {
+        return {...state, loggedIn: payload}
       }
+      return state
     case LOGOUT:
       return {
         ...state,
         loggedIn: false
       }
   }
-  return {}
+
+  return state
 }
+
+export default persist(rootReducer)
