@@ -5,7 +5,6 @@ import {
   Image,
   StyleSheet,
   Text,
-  TextInput,
   View
 } from 'react-native'
 import MyPosts from './MyPosts'
@@ -30,7 +29,6 @@ export default class WelcomeScene extends React.Component {
   }
 
   render () {
-    const food = this.state.food || 'unknown'
     const { name, avatarUrl } = this.state.currentUser || placeholderUser
     const { navigate } = this.context
     const showMyPosts = () =>
@@ -46,13 +44,6 @@ export default class WelcomeScene extends React.Component {
         Hello, {name}!
       </Text>
       <Image source={{uri: avatarUrl}} style={styles.axolotl} />
-      <Text style={styles.welcome}>
-        Your favorite food is {food}
-      </Text>
-      <TextInput
-        style={styles.input}
-        placeholder='Type your favorite food here'
-        onChangeText={food => this.setState({food})} />
       <Button onPress={showMyPosts} title='Show my posts' />
     </View>
   }

@@ -36,7 +36,7 @@ export default class DrawerAndTabs extends React.Component {
 
   openDrawer = () => {
     this.drawer.open()
-    this.drawerMenu.resetToTop()
+    this.drawerMenu.getWrappedInstance().resetToTop()
   }
 
   handleTabPress (id) {
