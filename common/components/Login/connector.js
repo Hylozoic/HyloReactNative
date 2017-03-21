@@ -1,6 +1,6 @@
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { login } from './actions'
+import { login, loginWithFacebook } from './actions'
 
 function mapStateToProps (state) {
   return {
@@ -12,7 +12,8 @@ function mapStateToProps (state) {
 function mapDispatchToProps (dispatch) {
   return {
     actions: bindActionCreators({
-      login
+      login,
+      loginWithFacebook
     }, dispatch)
   }
 }

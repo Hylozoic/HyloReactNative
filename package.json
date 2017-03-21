@@ -13,6 +13,7 @@
 		"react-native-device-info": "^0.10.1",
 		"react-native-dotenv": "^0.0.2",
 		"react-native-drawer": "^2.3.0",
+		"react-native-fbsdk": "^0.5.0",
 		"react-native-tab-navigator": "^0.3.3",
 		"react-redux": "^5.0.3",
 		"redux": "^3.6.0",
@@ -24,12 +25,12 @@
 		"jest": "^19.0.2",
 		"react-test-renderer": "^15.4.2"
 	},
-  "babel": {
-    "presets": [
-      "react-native",
-      "react-native-dotenv"
-    ]
-  },
+	"babel": {
+		"presets": [
+			"react-native",
+			"react-native-dotenv"
+		]
+	},
 	"jest": {
 		"preset": "react-native",
 		"setupFiles": [
