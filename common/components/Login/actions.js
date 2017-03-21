@@ -1,5 +1,7 @@
 import { clearSessionCookie } from '../../util/session'
 
+import { LoginManager } from 'react-native-fbsdk'
+
 export const LOGIN = 'LOGIN'
 export const LOGIN_WITH_FACEBOOK = 'LOGIN_WITH_FACEBOOK'
 export const LOGOUT = 'LOGOUT'
@@ -26,7 +28,9 @@ export function loginWithFacebook (accessToken) {
 export function logout () {
   return {
     type: LOGOUT,
-    payload: clearSessionCookie().then(() => ({
+    payload: clearSessionCookie()
+    .then(() => LoginManager.logOut())
+    .then(() => ({
       api: {method: 'delete', path: '/noo/session'}
     }))
   }
