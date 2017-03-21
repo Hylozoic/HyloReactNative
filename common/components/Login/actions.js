@@ -15,7 +15,6 @@ export function login (email, password) {
 }
 
 export function loginWithFacebook (accessToken) {
-  console.log(accessToken)
   return {
     type: LOGIN_WITH_FACEBOOK,
     payload: {
