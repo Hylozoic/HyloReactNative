@@ -9,11 +9,12 @@
   "dependencies": {
     "lodash": "^4.17.4",
     "react": "^15.4.1",
-    "react-native": "0.42.3",
+    "react-native": "0.42.0",
     "react-native-device-info": "^0.10.1",
     "react-native-dotenv": "^0.0.2",
     "react-native-drawer": "^2.3.0",
     "react-native-fbsdk": "^0.5.0",
+    "react-native-google-signin": "github:devfd/react-native-google-signin#f8d6e32",
     "react-native-tab-navigator": "^0.3.3",
     "react-redux": "^5.0.3",
     "redux": "^3.6.0",

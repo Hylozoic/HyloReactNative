@@ -1,4 +1,4 @@
-import { LOGIN, LOGIN_WITH_FACEBOOK, LOGOUT } from '../components/Login/actions'
+import { LOGIN, LOGIN_WITH_FACEBOOK, LOGIN_WITH_GOOGLE, LOGOUT } from '../components/Login/actions'
 import { CHECK_SESSION } from '../components/SessionCheck/actions'
 import { persist } from './persistence'
 import { omit } from 'lodash/fp'
@@ -10,6 +10,7 @@ function rootReducer (state = {}, action) {
     switch (type) {
       case LOGIN:
       case LOGIN_WITH_FACEBOOK:
+      case LOGIN_WITH_GOOGLE:
         return {
           ...state,
           loginError: payload.message || payload.response.body
@@ -26,6 +27,7 @@ function rootReducer (state = {}, action) {
         defaultLoginEmail: meta.email
       }
     case LOGIN_WITH_FACEBOOK:
+    case LOGIN_WITH_GOOGLE:
       return {
         ...omit('loginError', state),
         loggedIn: true

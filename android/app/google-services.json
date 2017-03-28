@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "796344328028",
+    "project_id": "local-hylo"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:796344328028:android:a02dc1d7bace78b9",
+        "android_client_info": {
+          "package_name": "com.hyloreactnative"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "796344328028-snduv8i9feae1gvooqvt963orr25pjto.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.hyloreactnative",
+            "certificate_hash": "4da3e18b190691e035e92a4735f1b63a62ad0354"
+          }
+        },
+        {
+          "client_id": "796344328028-fsj3adiig4cc0av2654sv4771bpq0uok.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC5v1nIQMszzPTpnbuwIdusAoySC-I-WKA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
