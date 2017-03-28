@@ -1,8 +1,9 @@
-import { API_HOST, EMULATOR_API_HOST } from 'react-native-dotenv'
+import { Platform } from 'react-native'
+import { API_HOST, IOS_EMULATOR_API_HOST, ANDROID_EMULATOR_API_HOST } from 'react-native-dotenv'
 import { getSessionCookie, setSessionCookie } from '../../util/session'
 import DeviceInfo from 'react-native-device-info'
 
-const HOST = DeviceInfo.isEmulator() ? EMULATOR_API_HOST : API_HOST
+const HOST = DeviceInfo.isEmulator() ? (Platform.OS === 'ios' ? IOS_EMULATOR_API_HOST : ANDROID_EMULATOR_API_HOST) : API_HOST
 
 export default function apiMiddleware (store) {
   return next => action => {

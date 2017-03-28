@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react'
 import { Button, ScrollView, Text, TextInput, View } from 'react-native'
+import FbLoginButton from './FbLoginButton'
 import { vw } from '../../util/viewport'
 import { focus } from '../../util/textInput'
 
@@ -8,7 +9,8 @@ export default class Login extends React.Component {
     error: PropTypes.string,
     defaultEmail: PropTypes.string,
     actions: PropTypes.shape({
-      login: PropTypes.func.isRequired
+      login: PropTypes.func.isRequired,
+      loginWithFacebook: PropTypes.func.isRequired
     }).isRequired
   }
 
@@ -45,6 +47,7 @@ export default class Login extends React.Component {
           onSubmitEditing={() => this.login()} />
       </View>
       <Button onPress={() => this.login()} title='Log in' />
+      <FbLoginButton onLoginFinished={this.props.actions.loginWithFacebook} />
     </ScrollView>
   }
 }

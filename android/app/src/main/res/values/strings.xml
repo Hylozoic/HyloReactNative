@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">HyloReactNative</string>
+    <string name="facebook_app_id">186895474801147</string>
 </resources>
