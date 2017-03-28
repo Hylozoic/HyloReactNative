@@ -1,19 +1,19 @@
 {
   "project_info": {
-    "project_number": "796344328028",
-    "project_id": "local-hylo"
+    "project_number": "499795713870",
+    "project_id": "firebase-hylo2"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:796344328028:android:a02dc1d7bace78b9",
+        "mobilesdk_app_id": "1:499795713870:android:ccb4e661f059615b",
         "android_client_info": {
           "package_name": "com.hyloreactnative"
         }
       },
       "oauth_client": [
         {
-          "client_id": "796344328028-snduv8i9feae1gvooqvt963orr25pjto.apps.googleusercontent.com",
+          "client_id": "499795713870-5978vlqli576c0sbks2kgtu8l4nmtfg0.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.hyloreactnative",
@@ -21,13 +21,17 @@
           }
         },
         {
-          "client_id": "796344328028-fsj3adiig4cc0av2654sv4771bpq0uok.apps.googleusercontent.com",
+          "client_id": "499795713870-upgsivhaj3ou9qmlnr8777b7fgcacuea.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "499795713870-v3mc7ciqrfkvprig1314fgk85gops461.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyC5v1nIQMszzPTpnbuwIdusAoySC-I-WKA"
+          "current_key": "AIzaSyAtYM1YyXoBZ_PicfOWXaio_QKhdrf62TI"
         }
       ],
       "services": {

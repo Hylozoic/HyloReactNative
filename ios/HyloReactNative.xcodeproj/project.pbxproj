@@ -37,11 +37,17 @@
 		2DCD954D1E0B4F2C00145EB5 /* HyloReactNativeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* HyloReactNativeTests.m */; };
 		47DD2EEB841A45D1BDC1B154 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A124C005CCE847248DAC720F /* FBSDKLoginKit.framework */; };
 		48EA3405720D37257E6DD97E /* Pods_HyloReactNative.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D522416CACFEA85FA9591F6F /* Pods_HyloReactNative.framework */; };
+		57859702B413478A8B272853 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C5672ACA397455C9B9FA940 /* SystemConfiguration.framework */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		9C50ADD71B58449C8F6CC7EA /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 065E1A64F841408C9EA9ABC2 /* FBSDKShareKit.framework */; };
 		9D1A1039384F49CE865DDE7D /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3118DE6A34B8432F8E880642 /* FBSDKCoreKit.framework */; };
 		A42EE77C33284502AEE6A525 /* libRCTFBSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8095D639078647CDB52B6F92 /* libRCTFBSDK.a */; };
+		B337FC1B1E8AD5FA006F9336 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B337FC1A1E8AD5FA006F9336 /* GoogleService-Info.plist */; };
+		BC29B6FF53064F59984B2712 /* libRNGoogleSignin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F3B441C7C1D5498C98877B6D /* libRNGoogleSignin.a */; };
+		DE64BE9474164C11990A70F2 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA4705C6FEED4BE4932D18C1 /* SafariServices.framework */; };
+		E26B659CBE044AC8AF25472F /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 25420C5D521C4F19A773CA3C /* libz.tbd */; };
+		ED7972F1CE424C6C8062D138 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BA1D430DD6C46F781C67BCF /* AddressBook.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -248,6 +254,13 @@
 			remoteGlobalIDString = 9350E0F11CE3B0920041D815;
 			remoteInfo = RCTFBSDK;
 		};
+		B337FBEC1E8ABCCD006F9336 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9EB73EBA157745BDA56C0650 /* RNGoogleSignin.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9FD355121D3E4A2900D06170;
+			remoteInfo = RNGoogleSignin;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -272,22 +285,29 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = HyloReactNative/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		23891DFFC00D4139B0A02519 /* RNDeviceInfo.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNDeviceInfo.xcodeproj; path = "../node_modules/react-native-device-info/RNDeviceInfo.xcodeproj"; sourceTree = "<group>"; };
+		25420C5D521C4F19A773CA3C /* libz.tbd */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		2D02E47B1E0B4A5D006451C7 /* HyloReactNative-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "HyloReactNative-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* HyloReactNative-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "HyloReactNative-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3118DE6A34B8432F8E880642 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = ./ios/Frameworks/FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		319209AC2AF24431B9DCA761 /* libRNDeviceInfo.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNDeviceInfo.a; sourceTree = "<group>"; };
+		4BA1D430DD6C46F781C67BCF /* AddressBook.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		5AF97D1AA7A06ED99997C525 /* Pods-HyloReactNative.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HyloReactNative.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HyloReactNative/Pods-HyloReactNative.debug.xcconfig"; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		60F3890A2381C017B829A2DD /* Pods_HyloReactNative_tvOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HyloReactNative_tvOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6448076B0FD71B50778CBE9E /* Pods_HyloReactNativeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HyloReactNativeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F57CD06C635DD7DEA9EDBBB /* Pods-HyloReactNative.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HyloReactNative.release.xcconfig"; path = "Pods/Target Support Files/Pods-HyloReactNative/Pods-HyloReactNative.release.xcconfig"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
+		7C5672ACA397455C9B9FA940 /* SystemConfiguration.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		8095D639078647CDB52B6F92 /* libRCTFBSDK.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTFBSDK.a; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		8D2260BC36FB3322CE2F15AD /* Pods_HyloReactNative_tvOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HyloReactNative_tvOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9EB73EBA157745BDA56C0650 /* RNGoogleSignin.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNGoogleSignin.xcodeproj; path = "../node_modules/react-native-google-signin/ios/RNGoogleSignin.xcodeproj"; sourceTree = "<group>"; };
 		A124C005CCE847248DAC720F /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = ./ios/Frameworks/FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		B337FC1A1E8AD5FA006F9336 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D522416CACFEA85FA9591F6F /* Pods_HyloReactNative.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HyloReactNative.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8D8EF684577482EA58D1C23 /* RCTFBSDK.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTFBSDK.xcodeproj; path = "../node_modules/react-native-fbsdk/ios/RCTFBSDK.xcodeproj"; sourceTree = "<group>"; };
+		F3B441C7C1D5498C98877B6D /* libRNGoogleSignin.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNGoogleSignin.a; sourceTree = "<group>"; };
+		FA4705C6FEED4BE4932D18C1 /* SafariServices.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -320,6 +340,11 @@
 				47DD2EEB841A45D1BDC1B154 /* FBSDKLoginKit.framework in Frameworks */,
 				A42EE77C33284502AEE6A525 /* libRCTFBSDK.a in Frameworks */,
 				48EA3405720D37257E6DD97E /* Pods_HyloReactNative.framework in Frameworks */,
+				BC29B6FF53064F59984B2712 /* libRNGoogleSignin.a in Frameworks */,
+				E26B659CBE044AC8AF25472F /* libz.tbd in Frameworks */,
+				DE64BE9474164C11990A70F2 /* SafariServices.framework in Frameworks */,
+				57859702B413478A8B272853 /* SystemConfiguration.framework in Frameworks */,
+				ED7972F1CE424C6C8062D138 /* AddressBook.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -428,6 +453,7 @@
 		13B07FAE1A68108700A75B9A /* HyloReactNative */ = {
 			isa = PBXGroup;
 			children = (
+				B337FC1A1E8AD5FA006F9336 /* GoogleService-Info.plist */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -505,6 +531,7 @@
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
 				23891DFFC00D4139B0A02519 /* RNDeviceInfo.xcodeproj */,
 				D8D8EF684577482EA58D1C23 /* RCTFBSDK.xcodeproj */,
+				9EB73EBA157745BDA56C0650 /* RNGoogleSignin.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -551,6 +578,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		B337FBCE1E8ABCCD006F9336 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B337FBED1E8ABCCD006F9336 /* libRNGoogleSignin.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		FEA88A75C2295C1DB7CFFD96 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -558,6 +593,10 @@
 				60F3890A2381C017B829A2DD /* Pods_HyloReactNative_tvOS.framework */,
 				8D2260BC36FB3322CE2F15AD /* Pods_HyloReactNative_tvOSTests.framework */,
 				6448076B0FD71B50778CBE9E /* Pods_HyloReactNativeTests.framework */,
+				25420C5D521C4F19A773CA3C /* libz.tbd */,
+				FA4705C6FEED4BE4932D18C1 /* SafariServices.framework */,
+				7C5672ACA397455C9B9FA940 /* SystemConfiguration.framework */,
+				4BA1D430DD6C46F781C67BCF /* AddressBook.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -733,6 +772,10 @@
 				{
 					ProductGroup = 21398DED1E7351A9003139E1 /* Products */;
 					ProjectRef = 23891DFFC00D4139B0A02519 /* RNDeviceInfo.xcodeproj */;
+				},
+				{
+					ProductGroup = B337FBCE1E8ABCCD006F9336 /* Products */;
+					ProjectRef = 9EB73EBA157745BDA56C0650 /* RNGoogleSignin.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -935,6 +978,13 @@
 			remoteRef = B3066ED91E81B005009C4B34 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		B337FBED1E8ABCCD006F9336 /* libRNGoogleSignin.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNGoogleSignin.a;
+			remoteRef = B337FBEC1E8ABCCD006F9336 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -951,6 +1001,7 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				B337FC1B1E8AD5FA006F9336 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1123,12 +1174,14 @@
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-device-info/RNDeviceInfo",
 					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**",
+					"$(SRCROOT)/../node_modules/react-native-google-signin/ios/RNGoogleSignin/**",
 				);
 				INFOPLIST_FILE = HyloReactNativeTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
@@ -1151,12 +1204,14 @@
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-device-info/RNDeviceInfo",
 					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**",
+					"$(SRCROOT)/../node_modules/react-native-google-signin/ios/RNGoogleSignin/**",
 				);
 				INFOPLIST_FILE = HyloReactNativeTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
@@ -1181,6 +1236,7 @@
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-device-info/RNDeviceInfo",
 					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**",
+					"$(SRCROOT)/../node_modules/react-native-google-signin/ios/RNGoogleSignin/**",
 				);
 				INFOPLIST_FILE = HyloReactNative/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1205,6 +1261,7 @@
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-device-info/RNDeviceInfo",
 					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**",
+					"$(SRCROOT)/../node_modules/react-native-google-signin/ios/RNGoogleSignin/**",
 				);
 				INFOPLIST_FILE = HyloReactNative/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1235,11 +1292,13 @@
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-device-info/RNDeviceInfo",
 					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**",
+					"$(SRCROOT)/../node_modules/react-native-google-signin/ios/RNGoogleSignin/**",
 				);
 				INFOPLIST_FILE = "HyloReactNative-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
@@ -1272,11 +1331,13 @@
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-device-info/RNDeviceInfo",
 					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**",
+					"$(SRCROOT)/../node_modules/react-native-google-signin/ios/RNGoogleSignin/**",
 				);
 				INFOPLIST_FILE = "HyloReactNative-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
@@ -1310,6 +1371,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.HyloReactNative-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1335,6 +1397,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
