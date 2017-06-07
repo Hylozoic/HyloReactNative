@@ -9,7 +9,8 @@ export default class DrawerMenu extends Component {
   static propTypes = {
     actions: PropTypes.shape({
       logout: PropTypes.func.isRequired
-    }).isRequired
+    }).isRequired,
+    showPosts: PropTypes.func
   }
 
   constructor (props) {
@@ -52,7 +53,7 @@ export default class DrawerMenu extends Component {
   }
 
   render () {
-    const { close, showPosts, showSettings, actions: { logout } } = this.props
+    const { close, showPosts, showSettings, actions: { logout }, currentUser } = this.props
 
     return <View style={styles.parent}>
       <View style={styles.header}>
@@ -64,7 +65,7 @@ export default class DrawerMenu extends Component {
         renderRow={membership => <CommunityRow community={membership.community} />}
         enableEmptySections />
       <View style={styles.footer}>
-        <Text style={styles.footerTopText}>Hello, Placeholder!</Text>
+        <Text style={styles.footerTopText}>Hello, {currentUser.name}!</Text>
         <View style={styles.footerButtons}>
           <TouchableOpacity style={styles.footerButton}>
             <Text style={styles.footerText}>View Profile</Text>

@@ -8,14 +8,16 @@ import {
   View
 } from 'react-native'
 import MyPosts from './MyPosts'
-import fetchGraphQL from '../util/fetchGraphQL'
+import fetchCurrentUser from '../store/actions/fetchCurrentUser'
+import { connect } from 'react-redux'
 
 const placeholderUser = {
   name: 'Axolotl',
   avatarUrl: 'https://d3ngex8q79bk55.cloudfront.net/user/13986/avatar/1444260480878_AxolotlPic.png'
 }
 
-export default class WelcomeScene extends React.Component {
+
+class WelcomeScene extends React.Component {
   static contextTypes = {navigate: React.PropTypes.func}
 
   constructor (props) {
@@ -24,12 +26,12 @@ export default class WelcomeScene extends React.Component {
   }
 
   componentDidMount () {
-    fetchGraphQL('{ me { id name avatarUrl } }')
-    .then(data => this.setState({currentUser: data.me}))
+    this.props.fetchCurrentUser()
   }
 
   render () {
-    const { name, avatarUrl } = this.state.currentUser || placeholderUser
+    const { currentUser } = this.props
+    const { name, avatarUrl } = currentUser || placeholderUser
     const { navigate } = this.context
     const showMyPosts = () =>
       navigate({title: 'Your Posts', component: MyPosts})
@@ -82,3 +84,14 @@ const styles = StyleSheet.create({
     fontStyle: 'italic'
   }
 })
+
+export default connect((state, props) => {
+  return {
+    currentUser: state.currentUser
+  }
+},
+(dispatch, props) => {
+  return {
+    fetchCurrentUser: () => dispatch(fetchCurrentUser())
+  }
+})(WelcomeScene)
