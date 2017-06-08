@@ -1,6 +1,6 @@
 import React from 'react'
 import { Text, View } from 'react-native'
-import mixins from '../style/mixins'
+import mixins from '../../style/mixins'
 
 export default function Post ({ post }) {
   return <View style={styles.post}>
