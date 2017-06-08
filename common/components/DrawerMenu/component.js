@@ -1,9 +1,10 @@
 import React, { PropTypes, Component } from 'react'
-import { Button, Image, ListView, Text, TouchableOpacity, View } from 'react-native'
+import { Image, ListView, Text, TouchableOpacity, View } from 'react-native'
 import fetchGraphQL from '../../util/fetchGraphQL'
 import mixins from '../../style/mixins'
 import { delay } from 'lodash'
 import { bigStone, rhino } from '../../style/colors'
+import { get } from 'lodash/fp'
 
 export default class DrawerMenu extends Component {
   static propTypes = {
@@ -53,7 +54,8 @@ export default class DrawerMenu extends Component {
   }
 
   render () {
-    const { close, showPosts, showSettings, actions: { logout }, currentUser } = this.props
+    const { close, showSettings, actions: { logout }, currentUser } = this.props
+    const name = get('name', currentUser) || 'you'
 
     return <View style={styles.parent}>
       <View style={styles.header}>
@@ -65,7 +67,7 @@ export default class DrawerMenu extends Component {
         renderRow={membership => <CommunityRow community={membership.community} />}
         enableEmptySections />
       <View style={styles.footer}>
-        <Text style={styles.footerTopText}>Hello, {currentUser.name}!</Text>
+        <Text style={styles.footerTopText}>Hello, {name}!</Text>
         <View style={styles.footerButtons}>
           <TouchableOpacity style={styles.footerButton}>
             <Text style={styles.footerText}>View Profile</Text>
@@ -74,7 +76,7 @@ export default class DrawerMenu extends Component {
             onPress={() => [showSettings(), delay(close, 300)]}>
             <Text style={styles.footerText}>Settings</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.footerButton}>
+          <TouchableOpacity style={styles.footerButton} onPress={logout}>
             <Text style={styles.footerText}>Log Out</Text>
           </TouchableOpacity>
         </View>
