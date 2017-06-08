@@ -3,11 +3,13 @@ import { compact } from 'lodash'
 import rootReducer from '../reducer'
 import promiseMiddleware from 'redux-promise'
 import apiMiddleware from './middleware/api'
+import graphQLMiddleware from './middleware/graphQL'
 import createLogger from 'redux-logger'
 import { AsyncStorage } from 'react-native'
 import { PERSISTED_STATE_KEY } from '../reducer/persistence'
 
 const middleware = compact([
+  graphQLMiddleware,
   apiMiddleware,
   promiseMiddleware,
   __DEV__ && createLogger({collapsed: true})

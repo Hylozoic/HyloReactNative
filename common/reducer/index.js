@@ -1,4 +1,5 @@
 import { LOGIN, LOGIN_WITH_FACEBOOK, LOGOUT } from '../components/Login/actions'
+import { FETCH_CURRENT_USER } from '../store/actions/fetchCurrentUser'
 import { CHECK_SESSION } from '../components/SessionCheck/actions'
 import { persist } from './persistence'
 import { omit } from 'lodash/fp'
@@ -39,6 +40,11 @@ function rootReducer (state = {}, action) {
       return {
         ...state,
         loggedIn: false
+      }
+    case FETCH_CURRENT_USER:
+      return {
+        ...state,
+        currentUser: payload.data.me
       }
   }
 

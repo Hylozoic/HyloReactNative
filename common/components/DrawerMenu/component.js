@@ -1,14 +1,16 @@
 import React, { PropTypes, Component } from 'react'
-import { Button, ListView, Text, TouchableOpacity, View } from 'react-native'
+import { Button, Image, ListView, Text, TouchableOpacity, View } from 'react-native'
 import fetchGraphQL from '../../util/fetchGraphQL'
 import mixins from '../../style/mixins'
 import { delay } from 'lodash'
+import { bigStone, rhino } from '../../style/colors'
 
 export default class DrawerMenu extends Component {
   static propTypes = {
     actions: PropTypes.shape({
       logout: PropTypes.func.isRequired
-    }).isRequired
+    }).isRequired,
+    showPosts: PropTypes.func
   }
 
   constructor (props) {
@@ -26,7 +28,17 @@ export default class DrawerMenu extends Component {
   }
 
   fetchCommunities () {
-    fetchGraphQL('{ me { memberships { community { id name } } } }')
+    fetchGraphQL(`{
+      me {
+        memberships {
+          community {
+            id
+            name
+            avatarUrl
+          }
+        }
+      }
+    }`)
     .then(data => {
       this.setState({
         memberships: this.dataSource.cloneWithRows(data.me.memberships)
@@ -40,28 +52,34 @@ export default class DrawerMenu extends Component {
     this.listView.scrollTo({x: 0, y: 0})
   }
 
-  renderHeader = () => {
-    return <Text style={styles.text}>Search...</Text>
-  }
-
-  renderFooter = () => {
-    const { close, showPosts, showSettings, actions: { logout } } = this.props
-    return <View>
-      <Button onPress={() => [showPosts(), close()]} title='Show posts' />
-      <Button onPress={() => [showSettings(), delay(close, 300)]}
-        title='Show settings' />
-      <Button onPress={logout} title='Log out' />
-    </View>
-  }
-
   render () {
-    return <ListView style={styles.menu}
-      ref={ref => { this.listView = ref }}
-      dataSource={this.state.memberships}
-      renderRow={membership => <CommunityRow community={membership.community} />}
-      renderHeader={this.renderHeader}
-      renderFooter={this.renderFooter}
-      enableEmptySections />
+    const { close, showPosts, showSettings, actions: { logout }, currentUser } = this.props
+
+    return <View style={styles.parent}>
+      <View style={styles.header}>
+        <Text style={styles.text}>Search...</Text>
+      </View>
+      <ListView style={styles.menu}
+        ref={ref => { this.listView = ref }}
+        dataSource={this.state.memberships}
+        renderRow={membership => <CommunityRow community={membership.community} />}
+        enableEmptySections />
+      <View style={styles.footer}>
+        <Text style={styles.footerTopText}>Hello, {currentUser.name}!</Text>
+        <View style={styles.footerButtons}>
+          <TouchableOpacity style={styles.footerButton}>
+            <Text style={styles.footerText}>View Profile</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.footerButton}
+            onPress={() => [showSettings(), delay(close, 300)]}>
+            <Text style={styles.footerText}>Settings</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.footerButton}>
+            <Text style={styles.footerText}>Log Out</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </View>
   }
 }
 DrawerMenu.propTypes = {
@@ -71,11 +89,14 @@ DrawerMenu.propTypes = {
 }
 
 function CommunityRow ({ community }, { navigate }) {
-  const showCommunity = () => {}
+  const showCommunity = () => {
+    console.log(`clicked on ${community.name}`)
+  }
     // navigate({title: 'Community', component: Post, props: {post}})
 
   return <View style={styles.communityRow}>
-    <TouchableOpacity onPress={showCommunity}>
+    <TouchableOpacity onPress={showCommunity} style={styles.communityRowTouchable}>
+      <Image source={{uri: community.avatarUrl}} style={styles.communityAvatar} />
       <Text style={styles.text}>{community.name}</Text>
     </TouchableOpacity>
   </View>
@@ -83,14 +104,51 @@ function CommunityRow ({ community }, { navigate }) {
 CommunityRow.contextTypes = {navigate: React.PropTypes.func}
 
 const styles = {
-  menu: {
+  parent: {
     ...mixins.belowStatusBar,
-    backgroundColor: '#2c4059',
+    flex: 1,
+    backgroundColor: rhino
+  },
+  menu: {
     padding: 10,
     flex: 1
   },
+  header: {
+    height: 40
+  },
+  footer: {
+    backgroundColor: bigStone,
+    padding: 10,
+    height: 64
+  },
+  footerTopText: {
+    color: 'white',
+    fontSize: 16
+  },
+  footerText: {
+    color: 'white',
+    fontSize: 14
+  },
+  footerButtons: {
+    flex: 1,
+    flexDirection: 'row',
+    marginTop: 6
+  },
+  footerButton: {
+    marginRight: 15
+  },
   communityRow: {
     padding: 10
+  },
+  communityRowTouchable: {
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  communityAvatar: {
+    height: 30,
+    width: 30,
+    marginRight: 8,
+    borderRadius: 4
   },
   text: {
     color: 'white'

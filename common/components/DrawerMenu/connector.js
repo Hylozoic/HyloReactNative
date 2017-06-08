@@ -3,7 +3,9 @@ import { connect } from 'react-redux'
 import { logout } from '../Login/actions'
 
 function mapStateToProps (state) {
-  return {} // TODO
+  return {
+    currentUser: state.currentUser
+  }
 }
 
 function mapDispatchToProps (dispatch) {

@@ -27,7 +27,7 @@ export default class Login extends React.Component {
     const { error, defaultEmail } = this.props
 
     return <ScrollView contentContainerStyle={styles.login}>
-      <Text style={styles.title}>Hylo!</Text>
+      <Text style={styles.title}>This is Hylo!</Text>
       {error && <Text style={styles.error}>{error}</Text>}
       <View>{/* this wrapper view is needed to get TextInput to center-align */}
         <TextInput style={styles.email} placeholder='Email address'
