@@ -21,7 +21,7 @@ export default function samplePost () {
     votesTotal: faker.random.number(),
     tags: ['activism', 'petition'],
     communities: [{id: '1', slug: 'great', name: 'Great Cause'}],
-    commentsTotal: 100,
+    commentsTotal: faker.random.number(),
     commenters: fakePerson(4),
     commentersTotal: faker.random.number(),
     creator: fakePerson(),

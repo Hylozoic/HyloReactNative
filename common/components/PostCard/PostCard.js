@@ -111,6 +111,11 @@ export const PostBody = ({ id, title, details, imageUrl, linkPreview, slug, expa
   const decodedTitle = decode(title)
 
   // TODO: present details with linked mentions and tags
+  linkPreview = {
+    title: 'This is greatest article you will ever read!!!',
+    url: 'http://www.goodtimes.com',
+    imageUrl: SAMPLE_IMAGE_URL
+  }
 
   return <View style={styles.postBody.container}>
     <Text style={styles.postBody.title}>{decodedTitle}</Text>
@@ -121,10 +126,10 @@ export const PostBody = ({ id, title, details, imageUrl, linkPreview, slug, expa
 
 export const LinkPreview = ({ title, url, imageUrl }) => {
   const domain = parse(url).hostname.replace('www.', '')
-  return <View>
-    <Image source={{uri: imageUrl}} />
-    <Text>{title}</Text>
-    <Text>{domain}</Text>
+  return <View style={styles.postBody.linkContainer}>
+    <Image style={styles.postBody.linkPreviewImage} source={{uri: imageUrl}} />
+    <Text style={styles.postBody.linkTitle}>{title}</Text>
+    <Text style={styles.postBody.linkDomain}>{domain.toUpperCase()}</Text>
   </View>
 }
 
@@ -133,6 +138,7 @@ const styles = {
     borderWidth: 1,
     borderColor: '#EAEBEB',
     borderRadius: 2,
+    backgroundColor: 'white',
     marginLeft: 8, // TODO: remove this, let the wrapper handle this
     marginRight: 8 // TODO: remove this, let the wrapper handle this
   },
@@ -153,6 +159,33 @@ const styles = {
       marginTop: 20,
       color: '#5D757A',
       fontSize: 14
+    },
+    linkContainer: {
+      backgroundColor: '#FAFBFC',
+      flex: 1,
+      borderRadius: 2,
+      borderColor: '#EAEBEB',
+      borderWidth: 1,
+      marginTop: 19,
+      marginBottom: 6
+    },
+    linkPreviewImage: {
+      flex: 1
+    },
+    linkTitle: {
+      color: '#3F536E',
+      fontSize: 14,
+      marginTop: 10,
+      marginBottom: 6,
+      marginLeft: 7,
+      marginRight: 7
+    },
+    linkDomain: {
+      color: '#3F536E',
+      fontSize: 10,
+      marginBottom: 9,
+      marginLeft: 7,
+      marginRight: 7
     }
   }
 }
