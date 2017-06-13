@@ -7,6 +7,7 @@ import graphQLMiddleware from './middleware/graphQL'
 import createLogger from 'redux-logger'
 import { AsyncStorage } from 'react-native'
 import { PERSISTED_STATE_KEY } from '../reducer/persistence'
+import orm from './models'
 
 const middleware = compact([
   graphQLMiddleware,
@@ -14,11 +15,6 @@ const middleware = compact([
   promiseMiddleware,
   __DEV__ && createLogger({collapsed: true})
 ])
-
-function getInitialState () {
-  return AsyncStorage.getItem(PERSISTED_STATE_KEY)
-  .then(state => state ? JSON.parse(state) : {})
-}
 
 export default function getStore () {
   return getInitialState().then(initialState => {
@@ -35,4 +31,15 @@ export default function getStore () {
 
     return store
   })
+}
+
+function getInitialState () {
+  return AsyncStorage.getItem(PERSISTED_STATE_KEY)
+  .then(state => state ? JSON.parse(state) : getEmptyState())
+}
+
+function getEmptyState () {
+  return {
+    orm: orm.getEmptyState()
+  }
 }
