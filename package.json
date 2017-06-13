@@ -8,23 +8,23 @@
   },
   "dependencies": {
     "lodash": "^4.17.4",
-    "react": "^15.4.1",
-    "react-native": "0.42.3",
-    "react-native-device-info": "^0.10.1",
-    "react-native-dotenv": "^0.0.2",
+    "react": "16.0.0-alpha.12",
+    "react-native": "^0.45.1",
+    "react-native-device-info": "^0.10.2",
+    "react-native-dotenv": "^0.0.4",
     "react-native-drawer": "^2.3.0",
-    "react-native-fbsdk": "^0.5.0",
+    "react-native-fbsdk": "^0.6.0",
     "react-native-tab-navigator": "^0.3.3",
-    "react-redux": "^5.0.3",
+    "react-redux": "^5.0.5",
     "redux": "^3.6.0",
-    "redux-logger": "^2.8.2",
+    "redux-logger": "^3.0.6",
     "redux-orm": "Hylozoic/redux-orm#model-createClass-dist",
     "redux-promise": "^0.5.3"
   },
   "devDependencies": {
-    "babel-preset-react-native": "^1.9.1",
-    "jest": "^19.0.2",
-    "react-test-renderer": "^15.4.2"
+    "babel-preset-react-native": "^1.9.2",
+    "jest": "^20.0.4",
+    "react-test-renderer": "^15.5.4"
   },
   "babel": {
     "presets": [
