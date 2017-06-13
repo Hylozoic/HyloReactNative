@@ -27,7 +27,8 @@
   "devDependencies": {
     "babel-preset-react-native": "^1.9.1",
     "jest": "^19.0.2",
-    "react-test-renderer": "^15.4.2"
+    "react-test-renderer": "^15.4.2",
+    "remote-redux-devtools": "^0.5.11"
   },
   "babel": {
     "presets": [
@@ -45,8 +46,14 @@
     "parser": "babel-eslint",
     "global": [
       "__DEV__",
+      "afterAll",
+      "afterEach",
+      "beforeAll",
+      "beforeEach",
+      "expect",
       "fetch",
-      "it"
+      "it",
+      "jest"
     ]
   }
 }

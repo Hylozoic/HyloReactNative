@@ -1,10 +1,13 @@
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { logout } from '../Login/actions'
+import getMe from '../../store/selectors/getMe'
 
 function mapStateToProps (state) {
+  const currentUser = getMe(state)
   return {
-    currentUser: state.currentUser
+    currentUser,
+    memberships: currentUser ? currentUser.memberships.toModelArray() : []
   }
 }
 

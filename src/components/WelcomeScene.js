@@ -10,12 +10,12 @@ import {
 import MyPosts from './MyPosts'
 import fetchCurrentUser from '../store/actions/fetchCurrentUser'
 import { connect } from 'react-redux'
+import getMe from '../store/selectors/getMe'
 
 const placeholderUser = {
   name: 'Axolotl',
   avatarUrl: 'https://d3ngex8q79bk55.cloudfront.net/user/13986/avatar/1444260480878_AxolotlPic.png'
 }
-
 
 class WelcomeScene extends React.Component {
   static contextTypes = {navigate: React.PropTypes.func}
@@ -85,13 +85,7 @@ const styles = StyleSheet.create({
   }
 })
 
-export default connect((state, props) => {
-  return {
-    currentUser: state.currentUser
-  }
-},
-(dispatch, props) => {
-  return {
-    fetchCurrentUser: () => dispatch(fetchCurrentUser())
-  }
-})(WelcomeScene)
+const mapStateToProps = state => ({currentUser: getMe(state)})
+const mapDispatchToProps = {fetchCurrentUser}
+const connector = connect(mapStateToProps, mapDispatchToProps)
+export default connector(WelcomeScene)

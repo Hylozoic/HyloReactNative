@@ -1,10 +1,9 @@
 import React, { PropTypes, Component } from 'react'
 import { Image, ListView, Text, TouchableOpacity, View } from 'react-native'
-import fetchGraphQL from '../../util/fetchGraphQL'
 import mixins from '../../style/mixins'
 import { delay } from 'lodash'
 import { bigStone, rhino } from '../../style/colors'
-import { get } from 'lodash/fp'
+import { get, isEmpty } from 'lodash/fp'
 
 export default class DrawerMenu extends Component {
   static propTypes = {
@@ -24,27 +23,12 @@ export default class DrawerMenu extends Component {
     }
   }
 
-  componentDidMount () {
-    this.fetchCommunities()
-  }
-
-  fetchCommunities () {
-    fetchGraphQL(`{
-      me {
-        memberships {
-          community {
-            id
-            name
-            avatarUrl
-          }
-        }
-      }
-    }`)
-    .then(data => {
+  componentDidUpdate (prevProps) {
+    if (isEmpty(prevProps.memberships) && !isEmpty(this.props.memberships)) {
       this.setState({
-        memberships: this.dataSource.cloneWithRows(data.me.memberships)
+        memberships: this.dataSource.cloneWithRows(this.props.memberships)
       })
-    })
+    }
   }
 
   resetToTop () {

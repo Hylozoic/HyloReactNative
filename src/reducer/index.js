@@ -1,10 +1,11 @@
 import { LOGIN, LOGIN_WITH_FACEBOOK, LOGOUT } from '../components/Login/actions'
-import { FETCH_CURRENT_USER } from '../store/actions/fetchCurrentUser'
 import { CHECK_SESSION } from '../components/SessionCheck/actions'
 import { persist } from './persistence'
 import { omit } from 'lodash/fp'
+import { combineReducers } from 'redux'
+import ormReducer from './ormReducer'
 
-function rootReducer (state = {}, action) {
+function sessionReducer (state = {}, action) {
   const { type, error, payload, meta } = action
 
   if (error) {
@@ -41,14 +42,14 @@ function rootReducer (state = {}, action) {
         ...state,
         loggedIn: false
       }
-    case FETCH_CURRENT_USER:
-      return {
-        ...state,
-        currentUser: payload.data.me
-      }
   }
 
   return state
 }
 
-export default persist(rootReducer)
+const combinedReducers = combineReducers({
+  orm: ormReducer,
+  session: sessionReducer
+})
+
+export default persist(combinedReducers)

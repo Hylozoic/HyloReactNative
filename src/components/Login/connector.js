@@ -4,8 +4,8 @@ import { login, loginWithFacebook } from './actions'
 
 function mapStateToProps (state) {
   return {
-    error: state.loginError,
-    defaultEmail: state.defaultLoginEmail
+    error: state.session.loginError,
+    defaultEmail: state.session.defaultLoginEmail
   }
 }
 
