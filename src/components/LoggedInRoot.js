@@ -1,5 +1,5 @@
 import React, { createElement } from 'react'
-import { Navigator } from 'react-native'
+import { Navigator } from 'react-native-deprecated-custom-components'
 import DrawerAndTabs from './DrawerAndTabs'
 
 // this component just sets up a navigator so that views can open full-screen,
