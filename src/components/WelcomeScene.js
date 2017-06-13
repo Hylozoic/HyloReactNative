@@ -8,7 +8,6 @@ import {
   View
 } from 'react-native'
 import MyPosts from './MyPosts'
-import fetchCurrentUser from '../store/actions/fetchCurrentUser'
 import { connect } from 'react-redux'
 import getMe from '../store/selectors/getMe'
 
@@ -23,10 +22,6 @@ class WelcomeScene extends React.Component {
   constructor (props) {
     super(props)
     this.state = {}
-  }
-
-  componentDidMount () {
-    this.props.fetchCurrentUser()
   }
 
   render () {
@@ -86,6 +81,4 @@ const styles = StyleSheet.create({
 })
 
 const mapStateToProps = state => ({currentUser: getMe(state)})
-const mapDispatchToProps = {fetchCurrentUser}
-const connector = connect(mapStateToProps, mapDispatchToProps)
-export default connector(WelcomeScene)
+export default connect(mapStateToProps)(WelcomeScene)
