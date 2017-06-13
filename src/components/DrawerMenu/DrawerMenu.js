@@ -51,7 +51,9 @@ export default class DrawerMenu extends Component {
         renderRow={membership => <CommunityRow community={membership.community} />}
         enableEmptySections />
       <View style={styles.footer}>
-        <Text style={styles.footerTopText}>Hello, {name}!</Text>
+        <Text style={styles.footerTopText} numberOfLines={1}>
+          Hello, {name}!
+        </Text>
         <View style={styles.footerButtons}>
           <TouchableOpacity style={styles.footerButton}>
             <Text style={styles.footerText}>View Profile</Text>
