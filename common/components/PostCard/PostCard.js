@@ -99,6 +99,7 @@ export default class PostCard extends React.Component {
 }
 
 export const PostImage = ({ imageUrl, imageWidth, imageHeight }) => {
+  // TODO: get image sizing correctly
   return null
   if (!imageUrl || !imageWidth || !imageHeight) return null
   return <Image style={styles.postImage} source={{uri: imageUrl}} />
