@@ -1,13 +1,11 @@
 /* eslint-disable camelcase */
 import React from 'react'
-import { View, Image, Text } from 'react-native'
-import { parse } from 'url'
+import { View, Image } from 'react-native'
 import PostHeader from './PostHeader'
+import PostBody from './PostBody'
 import PostFooter from './PostFooter'
 import samplePost, { SAMPLE_IMAGE_URL } from './samplePost'
 import { get } from 'lodash/fp'
-import { decode } from 'ent'
-export { PostHeader, PostFooter }
 
 const { shape, any, object, string, func, array, bool } = React.PropTypes
 
@@ -42,8 +40,9 @@ export default class PostCard extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      imageWidth: 0,
-      imageHeight: 0
+      imageWidth: null,
+      imageHeight: null,
+      postWidth: null
     }
   }
 
@@ -64,16 +63,20 @@ export default class PostCard extends React.Component {
     })
   }
 
+  setPostWidth = event => {
+    this.setState({postWidth: event.nativeEvent.layout.width})
+  }
+
   render () {
     const {
       post, showDetails, editPost, showCommunity, currentUser
     } = this.props
-    const { imageWidth, imageHeight } = this.state
+    const { imageWidth, imageHeight, postWidth } = this.state
     const slug = get('0.slug', post.communities)
 
     post.imageUrl = SAMPLE_IMAGE_URL
 
-    return <View style={styles.container}>
+    return <View style={styles.container} onLayout={this.setPostWidth}>
       <PostHeader creator={post.creator}
         date={post.updatedAt || post.createdAt}
         type={post.type}
@@ -82,12 +85,11 @@ export default class PostCard extends React.Component {
         communities={post.communities}
         slug={slug}
         id={post.id} />
-      <PostImage imageUrl={post.imageUrl} {...{imageWidth, imageHeight}} />
+      <PostImage imageUrl={post.imageUrl}
+        {...{postWidth, imageWidth, imageHeight}} />
       <PostBody title={post.title}
-        id={post.id}
         details={post.details}
-        linkPreview={post.linkPreview}
-        slug={slug} />
+        linkPreview={post.linkPreview} />
       <PostFooter id={post.id}
         currentUser={currentUser}
         commenters={post.commenters}
@@ -98,39 +100,27 @@ export default class PostCard extends React.Component {
   }
 }
 
-export const PostImage = ({ imageUrl, imageWidth, imageHeight }) => {
-  // TODO: get image sizing correctly
-  return null
-  if (!imageUrl || !imageWidth || !imageHeight) return null
-  return <Image style={styles.postImage} source={{uri: imageUrl}} />
-}
-
-// const maxDetailsLength = 144
-
-export const PostBody = ({ id, title, details, imageUrl, linkPreview, slug, expanded, className }) => {
-  const decodedTitle = decode(title)
-
-  // TODO: present details with linked mentions and tags
-  linkPreview = {
-    title: 'This is greatest article you will ever read!!!',
-    url: 'http://www.goodtimes.com',
-    imageUrl: SAMPLE_IMAGE_URL
+export function generateImageDimensions (containerWidth, imageWidth, imageHeight) {
+  const width = Math.min(containerWidth, imageWidth)
+  let height
+  if (width === containerWidth) {
+    // image is bigger than available space, maintain aspect ratio
+    height = imageHeight / (imageWidth / containerWidth)
+  } else {
+    // use natural width, use natural height
+    // TODO: should there be a max height, and a resizing?
+    height = imageHeight
   }
-
-  return <View style={styles.postBody.container}>
-    <Text style={styles.postBody.title}>{decodedTitle}</Text>
-    <Text style={styles.postBody.details}>{details}</Text>
-    {linkPreview && <LinkPreview {...linkPreview} />}
-  </View>
+  return {
+    width,
+    height
+  }
 }
 
-export const LinkPreview = ({ title, url, imageUrl }) => {
-  const domain = parse(url).hostname.replace('www.', '')
-  return <View style={styles.postBody.linkContainer}>
-    <Image style={styles.postBody.linkPreviewImage} source={{uri: imageUrl}} />
-    <Text style={styles.postBody.linkTitle}>{title}</Text>
-    <Text style={styles.postBody.linkDomain}>{domain.toUpperCase()}</Text>
-  </View>
+export const PostImage = ({ imageUrl, imageWidth, imageHeight, postWidth }) => {
+  if (!imageUrl) return null
+  const imageStyle = generateImageDimensions(postWidth, imageWidth, imageHeight)
+  return <Image style={imageStyle} source={{uri: imageUrl}} />
 }
 
 const styles = {
@@ -141,51 +131,5 @@ const styles = {
     backgroundColor: 'white',
     marginLeft: 8, // TODO: remove this, let the wrapper handle this
     marginRight: 8 // TODO: remove this, let the wrapper handle this
-  },
-  postImage: {
-    flex: 1
-  },
-  postBody: {
-    container: {
-      marginLeft: 12,
-      marginRight: 12,
-      marginBottom: 20
-    },
-    title: {
-      color: '#363D3C',
-      fontSize: 19
-    },
-    details: {
-      marginTop: 20,
-      color: '#5D757A',
-      fontSize: 14
-    },
-    linkContainer: {
-      backgroundColor: '#FAFBFC',
-      flex: 1,
-      borderRadius: 2,
-      borderColor: '#EAEBEB',
-      borderWidth: 1,
-      marginTop: 19,
-      marginBottom: 6
-    },
-    linkPreviewImage: {
-      flex: 1
-    },
-    linkTitle: {
-      color: '#3F536E',
-      fontSize: 14,
-      marginTop: 10,
-      marginBottom: 6,
-      marginLeft: 7,
-      marginRight: 7
-    },
-    linkDomain: {
-      color: '#3F536E',
-      fontSize: 10,
-      marginBottom: 9,
-      marginLeft: 7,
-      marginRight: 7
-    }
   }
 }
