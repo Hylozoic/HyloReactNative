@@ -1,19 +1,11 @@
 import React, { PropTypes, Component } from 'react'
 import { Image, ListView, Text, TouchableOpacity, View } from 'react-native'
-import fetchGraphQL from '../../util/fetchGraphQL'
 import mixins from '../../style/mixins'
 import { delay } from 'lodash'
-import { bigStone, rhino } from '../../style/colors'
-import { get } from 'lodash/fp'
+import { bigStone, mirage, rhino } from '../../style/colors'
+import { get, isEmpty } from 'lodash/fp'
 
 export default class DrawerMenu extends Component {
-  static propTypes = {
-    actions: PropTypes.shape({
-      logout: PropTypes.func.isRequired
-    }).isRequired,
-    showPosts: PropTypes.func
-  }
-
   constructor (props) {
     super(props)
     this.dataSource = new ListView.DataSource({
@@ -24,27 +16,12 @@ export default class DrawerMenu extends Component {
     }
   }
 
-  componentDidMount () {
-    this.fetchCommunities()
-  }
-
-  fetchCommunities () {
-    fetchGraphQL(`{
-      me {
-        memberships {
-          community {
-            id
-            name
-            avatarUrl
-          }
-        }
-      }
-    }`)
-    .then(data => {
+  componentDidUpdate (prevProps) {
+    if (isEmpty(prevProps.memberships) && !isEmpty(this.props.memberships)) {
       this.setState({
-        memberships: this.dataSource.cloneWithRows(data.me.memberships)
+        memberships: this.dataSource.cloneWithRows(this.props.memberships)
       })
-    })
+    }
   }
 
   resetToTop () {
@@ -54,12 +31,14 @@ export default class DrawerMenu extends Component {
   }
 
   render () {
-    const { close, showSettings, actions: { logout }, currentUser } = this.props
+    const { close, showSettings, currentUser } = this.props
     const name = get('name', currentUser) || 'you'
 
     return <View style={styles.parent}>
       <View style={styles.header}>
-        <Text style={styles.text}>Search...</Text>
+        <View style={styles.search}>
+          <Text style={styles.searchText}>Search your communities</Text>
+        </View>
       </View>
       <ListView style={styles.menu}
         ref={ref => { this.listView = ref }}
@@ -67,18 +46,15 @@ export default class DrawerMenu extends Component {
         renderRow={membership => <CommunityRow community={membership.community} />}
         enableEmptySections />
       <View style={styles.footer}>
-        <Text style={styles.footerTopText}>Hello, {name}!</Text>
-        <View style={styles.footerButtons}>
-          <TouchableOpacity style={styles.footerButton}>
-            <Text style={styles.footerText}>View Profile</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.footerButton}
-            onPress={() => [showSettings(), delay(close, 300)]}>
-            <Text style={styles.footerText}>Settings</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.footerButton} onPress={logout}>
-            <Text style={styles.footerText}>Log Out</Text>
-          </TouchableOpacity>
+        <Image source={{uri: get('avatarUrl', currentUser)}} style={styles.avatar} />
+        <View>
+          <Text style={styles.footerTopText} numberOfLines={1}>
+            Hello, {name}!
+          </Text>
+          <View style={styles.footerButtons}>
+            <TextButton text='View Profile' onPress={() => {}} />
+            <TextButton text='Settings' onPress={() => [showSettings(), delay(close, 300)]} />
+          </View>
         </View>
       </View>
     </View>
@@ -88,6 +64,12 @@ DrawerMenu.propTypes = {
   close: PropTypes.func,
   showPosts: PropTypes.func,
   showSheet: PropTypes.func
+}
+
+function TextButton ({ text, onPress }) {
+  return <TouchableOpacity onPress={onPress} style={styles.footerButton}>
+    <Text style={{color: 'white', fontSize: 14}}>{text}</Text>
+  </TouchableOpacity>
 }
 
 function CommunityRow ({ community }, { navigate }) {
@@ -112,16 +94,41 @@ const styles = {
     backgroundColor: rhino
   },
   menu: {
-    padding: 10,
     flex: 1
   },
   header: {
     height: 40
   },
+  search: {
+    backgroundColor: mirage,
+    height: 36,
+    borderRadius: 36,
+    marginLeft: 15,
+    marginRight: 20,
+    borderWidth: 0.5,
+    borderColor: 'black',
+    marginBottom: 0
+  },
+  searchText: {
+    lineHeight: 34,
+    marginLeft: 15,
+    marginRight: 15,
+    color: 'white',
+    opacity: 0.5,
+    fontSize: 15
+  },
   footer: {
     backgroundColor: bigStone,
     padding: 10,
-    height: 64
+    height: 64,
+    flexDirection: 'row',
+    alignItems: 'stretch'
+  },
+  avatar: {
+    marginRight: 10,
+    width: 40,
+    height: 40,
+    borderRadius: 20
   },
   footerTopText: {
     color: 'white',
@@ -134,13 +141,16 @@ const styles = {
   footerButtons: {
     flex: 1,
     flexDirection: 'row',
-    marginTop: 6
+    justifyContent: 'space-between',
+    marginTop: 4
   },
   footerButton: {
-    marginRight: 15
+    marginRight: 30
   },
   communityRow: {
-    padding: 10
+    padding: 10,
+    paddingLeft: 20,
+    paddingRight: 20
   },
   communityRowTouchable: {
     flexDirection: 'row',

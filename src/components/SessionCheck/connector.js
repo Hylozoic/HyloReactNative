@@ -1,9 +1,12 @@
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { pick } from 'lodash/fp'
 import { checkSession } from './actions'
 
-const mapStateToProps = pick('loggedIn')
+function mapStateToProps (state) {
+  return {
+    loggedIn: state.session.loggedIn
+  }
+}
 
 function mapDispatchToProps (dispatch) {
   return {

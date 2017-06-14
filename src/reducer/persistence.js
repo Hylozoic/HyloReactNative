@@ -1,5 +1,5 @@
 import { AsyncStorage } from 'react-native'
-export const PERSISTED_STATE_KEY = 'persisted-app-state-v1'
+export const PERSISTED_STATE_KEY = 'persisted-app-state-v2'
 
 export function persist (reducer) {
   return function (state, action) {
