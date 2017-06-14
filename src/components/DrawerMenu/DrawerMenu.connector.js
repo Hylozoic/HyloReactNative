@@ -1,6 +1,4 @@
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { logout } from '../Login/actions'
 import getMe from '../../store/selectors/getMe'
 
 function mapStateToProps (state) {
@@ -11,12 +9,4 @@ function mapStateToProps (state) {
   }
 }
 
-function mapDispatchToProps (dispatch) {
-  return {
-    actions: bindActionCreators({
-      logout
-    }, dispatch)
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps, null, {withRef: true})
+export default connect(mapStateToProps, null, null, {withRef: true})
