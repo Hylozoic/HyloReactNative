@@ -8,8 +8,6 @@ const HOST = __DEV__
   ? Platform.OS === 'ios' ? IOS_EMULATOR_API_HOST : ANDROID_EMULATOR_API_HOST
   : API_HOST
 
-console.log('HOST value:', HOST)
-
 export default function fetchJSON (path, params, options = {}) {
   const { host, method, cookie } = options
   const url = (host || HOST) + path
