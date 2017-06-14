@@ -8,6 +8,7 @@ import MyPosts from './MyPosts'
 import Settings from './Settings'
 import Drawer from 'react-native-drawer'
 import TabNavigator from 'react-native-tab-navigator'
+import Icon from '../style/icon';
 
 export default class DrawerAndTabs extends React.Component {
   constructor (props) {
@@ -64,13 +65,13 @@ export default class DrawerAndTabs extends React.Component {
       onPress: () => this.handleTabPress(id)
     }
     if (Platform.OS === 'ios') {
-      return <this.TabBar.Item {...sharedProps} icon={icon}>
+      return <this.TabBar.Item {...sharedProps} iconName={icon}>
         {this.renderTabContent(id, title)}
       </this.TabBar.Item>
     } else {
       return <TabNavigator.Item {...sharedProps}
-        renderIcon={() => <Image source={icon} />}
-        renderSelectedIcon={() => <Image source={icon} />}>
+        renderIcon={() => <Icon src={icon} size={25}/>}
+        renderSelectedIcon={() => <Icon src={icon} size={25}/>}>
         {this.renderTabContent(id, title)}
       </TabNavigator.Item>
     }
@@ -99,9 +100,9 @@ export default class DrawerAndTabs extends React.Component {
 }
 
 const tabs = [
-  {id: 'home', title: 'Home', icon: placeholderIcon},
+  {id: 'home', title: 'Home', icon: 'Home'},
   // {id: 'events', title: 'Events', icon: placeholderIcon},
   // {id: 'projects', title: 'Projects', icon: placeholderIcon},
-  {id: 'members', title: 'Members', icon: placeholderIcon},
-  {id: 'topics', title: 'Topics', icon: placeholderIcon}
+  {id: 'members', title: 'Members', icon: 'Members'},
+  {id: 'topics', title: 'Topics', icon: 'Topics'}
 ]
