@@ -17,6 +17,7 @@ export default function samplePost () {
     type: 'offer',
     title: 'We put this together as a PDF for hand-out at your next event or university class',
     context: 'Stop Wombat Walrus',
+    imageUrl: faker.internet.avatar(),
     details: 'Feel free to print and distribute if you would like to suggest anything we have missed or better clarity, let us know!',
     votesTotal: faker.random.number(),
     tags: ['activism', 'petition'],
@@ -25,12 +26,13 @@ export default function samplePost () {
     commenters: fakePerson(4),
     commentersTotal: faker.random.number(),
     creator: fakePerson(),
-    updatedAt: faker.date.recent().toString(),
+    updatedAt: faker.date.recent().toString()
+    /* ,
     linkPreview: {
       title: 'This is greatest article you will ever read!!!',
       url: 'http://www.goodtimes.com',
-      imageUrl: SAMPLE_IMAGE_URL
-    }
+      imageUrl: faker.internet.avatar()
+    } */
   }
 }
 
