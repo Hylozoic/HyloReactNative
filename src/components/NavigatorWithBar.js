@@ -1,9 +1,9 @@
 import React, { PropTypes } from 'react'
 import {
-  Navigator,
   Text,
   TouchableOpacity
 } from 'react-native'
+import { Navigator } from 'react-native-deprecated-custom-components'
 import mixins from '../style/mixins'
 import makeRenderScene from '../util/makeRenderScene'
 

@@ -1,5 +1,5 @@
 import React, { createElement } from 'react'
-import { Navigator } from 'react-native'
+import { Navigator } from 'react-native-deprecated-custom-components'
 import DrawerAndTabs from './DrawerAndTabs'
 import fetchCurrentUser from '../store/actions/fetchCurrentUser'
 import { connect } from 'react-redux'
