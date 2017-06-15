@@ -110,7 +110,7 @@ const styles = {
     marginBottom: 0
   },
   searchText: {
-    lineHeight: 34,
+    marginTop: 8,
     marginLeft: 15,
     marginRight: 15,
     color: 'white',
