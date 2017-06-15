@@ -1,6 +1,5 @@
 import React from 'react'
-import { Image, Platform, TabBarIOS } from 'react-native'
-import placeholderIcon from '../assets/placeholder-icon.png'
+import { Platform, TabBarIOS } from 'react-native'
 import NavigatorWithBar from './NavigatorWithBar'
 import DrawerMenu from './DrawerMenu'
 import WelcomeScene from './WelcomeScene'
@@ -8,7 +7,7 @@ import MyPosts from './MyPosts'
 import Settings from './Settings'
 import Drawer from 'react-native-drawer'
 import TabNavigator from 'react-native-tab-navigator'
-import Icon from '../style/icon';
+import Icon from './Icon'
 
 export default class DrawerAndTabs extends React.Component {
   constructor (props) {
@@ -70,8 +69,8 @@ export default class DrawerAndTabs extends React.Component {
       </this.TabBar.Item>
     } else {
       return <TabNavigator.Item {...sharedProps}
-        renderIcon={() => <Icon src={icon} size={25}/>}
-        renderSelectedIcon={() => <Icon src={icon} size={25}/>}>
+        renderIcon={() => <Icon src={icon} size={25} />}
+        renderSelectedIcon={() => <Icon src={icon} size={25} />}>
         {this.renderTabContent(id, title)}
       </TabNavigator.Item>
     }
