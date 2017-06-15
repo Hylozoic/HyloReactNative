@@ -1,6 +1,5 @@
 import React from 'react'
-import { Image, Platform, TabBarIOS } from 'react-native'
-import placeholderIcon from '../assets/placeholder-icon.png'
+import { Platform, TabBarIOS } from 'react-native'
 import NavigatorWithBar from './NavigatorWithBar'
 import DrawerMenu from './DrawerMenu'
 import WelcomeScene from './WelcomeScene'
@@ -8,6 +7,7 @@ import MyPosts from './MyPosts'
 import Settings from './Settings'
 import Drawer from 'react-native-drawer'
 import TabNavigator from 'react-native-tab-navigator'
+import Icon from './Icon'
 
 export default class DrawerAndTabs extends React.Component {
   constructor (props) {
@@ -64,13 +64,13 @@ export default class DrawerAndTabs extends React.Component {
       onPress: () => this.handleTabPress(id)
     }
     if (Platform.OS === 'ios') {
-      return <this.TabBar.Item {...sharedProps} icon={icon}>
+      return <Icon.TabBarItemIOS {...sharedProps} iconName={icon}>
         {this.renderTabContent(id, title)}
-      </this.TabBar.Item>
+      </Icon.TabBarItemIOS>
     } else {
       return <TabNavigator.Item {...sharedProps}
-        renderIcon={() => <Image source={icon} />}
-        renderSelectedIcon={() => <Image source={icon} />}>
+        renderIcon={() => <Icon name={icon} size={25} />}
+        renderSelectedIcon={() => <Icon name={icon} size={25} color='#007AFF'/>}>
         {this.renderTabContent(id, title)}
       </TabNavigator.Item>
     }
@@ -92,16 +92,16 @@ export default class DrawerAndTabs extends React.Component {
       disabled={!isAtTop}
       tweenDuration={250}
       tweenEasing='easeInOutCubic'
-      tapToClose={true}>
+      tapToClose>
       <this.TabBar>{tabs.map(this.makeTabBarItem)}</this.TabBar>
     </Drawer>
   }
 }
 
 const tabs = [
-  {id: 'home', title: 'Home', icon: placeholderIcon},
+  {id: 'home', title: 'Home', icon: 'Home'},
   // {id: 'events', title: 'Events', icon: placeholderIcon},
   // {id: 'projects', title: 'Projects', icon: placeholderIcon},
-  {id: 'members', title: 'Members', icon: placeholderIcon},
-  {id: 'topics', title: 'Topics', icon: placeholderIcon}
+  {id: 'members', title: 'Members', icon: 'Members'},
+  {id: 'topics', title: 'Topics', icon: 'Topics'}
 ]
