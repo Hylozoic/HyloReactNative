@@ -64,13 +64,13 @@ export default class DrawerAndTabs extends React.Component {
       onPress: () => this.handleTabPress(id)
     }
     if (Platform.OS === 'ios') {
-      return <this.TabBar.Item {...sharedProps} iconName={icon}>
+      return <Icon.TabBarItemIOS {...sharedProps} iconName={icon}>
         {this.renderTabContent(id, title)}
-      </this.TabBar.Item>
+      </Icon.TabBarItemIOS>
     } else {
       return <TabNavigator.Item {...sharedProps}
-        renderIcon={() => <Icon src={icon} size={25} />}
-        renderSelectedIcon={() => <Icon src={icon} size={25} />}>
+        renderIcon={() => <Icon name={icon} size={25} />}
+        renderSelectedIcon={() => <Icon name={icon} size={25} color='#007AFF'/>}>
         {this.renderTabContent(id, title)}
       </TabNavigator.Item>
     }
@@ -92,7 +92,7 @@ export default class DrawerAndTabs extends React.Component {
       disabled={!isAtTop}
       tweenDuration={250}
       tweenEasing='easeInOutCubic'
-      tapToClose={true}>
+      tapToClose>
       <this.TabBar>{tabs.map(this.makeTabBarItem)}</this.TabBar>
     </Drawer>
   }
