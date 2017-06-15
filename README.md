@@ -58,4 +58,4 @@ It's crucial to remember that, unlike a server-side `.env`, these values are _no
 
 ## Updating icon fonts
 
-If you have made changes to the "hylo-evo-icons" font in IcoMoon, select the "Download JSON" option from [the menu](https://www.dropbox.com/s/jv5itcspwfhg0uk/icomoon-menu.png?dl=0), and replace `src/style/hylo-evo-icons.json` with the contents of that downloaded file. Also update the `hylo-evo-icons.ttf` file in two places: `src/assets` and `android/app/src/main/assets/fonts`.
+If you have made changes to the "hylo-evo-icons" font in IcoMoon, select the "Download JSON" option from [the menu](https://www.dropbox.com/s/jv5itcspwfhg0uk/icomoon-menu.png?dl=0), and replace `components/Icon/config.json` with the contents of that downloaded file. Also update the `hylo-evo-icons.ttf` file in two places: `src/assets` and `android/app/src/main/assets/fonts`.
