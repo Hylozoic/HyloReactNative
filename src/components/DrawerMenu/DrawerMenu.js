@@ -1,9 +1,9 @@
 import React, { PropTypes, Component } from 'react'
 import { Image, ListView, Text, TouchableOpacity, View } from 'react-native'
-import mixins from '../../style/mixins'
 import { delay } from 'lodash'
-import { bigStone, mirage, rhino } from '../../style/colors'
 import { get, isEmpty } from 'lodash/fp'
+import Icon from '../Icon'
+import styles from './DrawerMenu.styles'
 
 export default class DrawerMenu extends Component {
   constructor (props) {
@@ -37,6 +37,7 @@ export default class DrawerMenu extends Component {
     return <View style={styles.parent}>
       <View style={styles.header}>
         <View style={styles.search}>
+          <Icon name='Search' style={styles.searchIcon} />
           <Text style={styles.searchText}>Search your communities</Text>
         </View>
       </View>
@@ -86,83 +87,3 @@ function CommunityRow ({ community }, { navigate }) {
   </View>
 }
 CommunityRow.contextTypes = {navigate: React.PropTypes.func}
-
-const styles = {
-  parent: {
-    ...mixins.belowStatusBar,
-    flex: 1,
-    backgroundColor: rhino
-  },
-  menu: {
-    flex: 1
-  },
-  header: {
-    height: 40
-  },
-  search: {
-    backgroundColor: mirage,
-    height: 36,
-    borderRadius: 36,
-    marginLeft: 15,
-    marginRight: 20,
-    borderWidth: 0.5,
-    borderColor: 'black',
-    marginBottom: 0
-  },
-  searchText: {
-    marginTop: 8,
-    marginLeft: 15,
-    marginRight: 15,
-    color: 'white',
-    opacity: 0.5,
-    fontSize: 15
-  },
-  footer: {
-    backgroundColor: bigStone,
-    padding: 10,
-    height: 64,
-    flexDirection: 'row',
-    alignItems: 'stretch'
-  },
-  avatar: {
-    marginRight: 10,
-    width: 40,
-    height: 40,
-    borderRadius: 20
-  },
-  footerTopText: {
-    color: 'white',
-    fontSize: 16
-  },
-  footerText: {
-    color: 'white',
-    fontSize: 14
-  },
-  footerButtons: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginTop: 4
-  },
-  footerButton: {
-    marginRight: 30
-  },
-  communityRow: {
-    padding: 10,
-    paddingLeft: 20,
-    paddingRight: 20
-  },
-  communityRowTouchable: {
-    flexDirection: 'row',
-    alignItems: 'center'
-  },
-  communityAvatar: {
-    height: 30,
-    width: 30,
-    marginRight: 8,
-    borderRadius: 4
-  },
-  text: {
-    color: 'white'
-  }
-}

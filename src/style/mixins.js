@@ -1,3 +1,6 @@
+import { Platform } from 'react-native'
+const isIOS = Platform.OS === 'ios'
+
 export default {
   allCentered: {
     flex: 1,
@@ -12,7 +15,7 @@ export default {
   },
 
   belowStatusBar: {
-    paddingTop: 36
+    paddingTop: isIOS ? 20 : 0
   },
 
   belowNavigationBar: {
