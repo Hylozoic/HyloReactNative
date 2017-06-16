@@ -1,0 +1,1 @@
+export const EXTRACT_MODEL = 'EXTRACT_MODEL'

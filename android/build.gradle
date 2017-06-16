@@ -12,6 +12,14 @@ buildscript {
     }
 }
 
+project(':react-native-fbsdk') {
+  configurations.all {
+    resolutionStrategy {
+      force 'com.facebook.android:facebook-android-sdk:4.22.1'
+    }
+  }
+}
+
 allprojects {
     repositories {
         mavenLocal()
@@ -19,6 +27,21 @@ allprojects {
         maven {
             // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
             url "$rootDir/../node_modules/react-native/android"
+        }
+        configurations.all {
+            resolutionStrategy {
+              force 'com.facebook.android:facebook-android-sdk:4.22.1'
+            }
+        }
+    }
+}
+
+subprojects {
+    afterEvaluate {project ->
+        if (project.hasProperty("android")) {
+            android {
+                buildToolsVersion '25.0.0'
+            }
         }
     }
 }

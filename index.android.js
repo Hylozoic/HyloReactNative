@@ -1,4 +1,4 @@
-import RootView from './common/components/RootView'
+import RootView from './src/components/RootView'
 import { AppRegistry } from 'react-native'
 
 AppRegistry.registerComponent('HyloReactNative', () => RootView)
