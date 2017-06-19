@@ -3282,6 +3282,14 @@ react-native-tab-navigator@^0.3.3:
   dependencies:
     immutable "^3.8.1"
 
+react-native-vector-icons@^4.2.0:
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/react-native-vector-icons/-/react-native-vector-icons-4.2.0.tgz#0594b68debdd758dce4c565bf02e2d64d7004d82"
+  dependencies:
+    lodash "^4.0.0"
+    prop-types "^15.5.8"
+    yargs "^6.3.0"
+
 react-native@^0.45.1:
   version "0.45.1"
   resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.45.1.tgz#b3283c4a88233421f9c662a2ff1a4ccc8a9f07c0"
@@ -3389,9 +3397,9 @@ react-redux@^5.0.5:
     loose-envify "^1.1.0"
     prop-types "^15.5.10"
 
-react-test-renderer@^15.5.4:
-  version "15.5.4"
-  resolved "https://registry.yarnpkg.com/react-test-renderer/-/react-test-renderer-15.5.4.tgz#d4ebb23f613d685ea8f5390109c2d20fbf7c83bc"
+react-test-renderer@16.0.0-alpha.12:
+  version "16.0.0-alpha.12"
+  resolved "https://registry.yarnpkg.com/react-test-renderer/-/react-test-renderer-16.0.0-alpha.12.tgz#9e4cc5d8ce8bfca72778340de3e1454b9d6c0cc5"
   dependencies:
     fbjs "^0.8.9"
     object-assign "^4.1.0"
@@ -4369,7 +4377,7 @@ yargs-parser@^5.0.0:
   dependencies:
     camelcase "^3.0.0"
 
-yargs@^6.4.0:
+yargs@^6.3.0, yargs@^6.4.0:
   version "6.6.0"
   resolved "https://registry.yarnpkg.com/yargs/-/yargs-6.6.0.tgz#782ec21ef403345f830a808ca3d513af56065208"
   dependencies:
