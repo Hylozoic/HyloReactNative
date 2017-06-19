@@ -3236,10 +3236,6 @@ react-native-deprecated-custom-components@^0.1.0:
     react-timer-mixin "^0.13.2"
     rebound "^0.0.13"
 
-react-native-device-info@^0.10.2:
-  version "0.10.2"
-  resolved "https://registry.yarnpkg.com/react-native-device-info/-/react-native-device-info-0.10.2.tgz#350cd68ed43839022ddea0a3a423439f16fa4fba"
-
 react-native-dotenv@^0.0.4:
   version "0.0.4"
   resolved "https://registry.yarnpkg.com/react-native-dotenv/-/react-native-dotenv-0.0.4.tgz#cd66e8e5f227e0f8c9775004f158505fd60b7be0"
