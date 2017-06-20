@@ -2,10 +2,20 @@ import React from 'react'
 import { View, Text, TouchableOpacity } from 'react-native'
 import { slice } from 'lodash/fp'
 import Avatar from '../../Avatar'
+import Icon from '../../Icon'
+import { rhino30 } from '../../../style/colors'
 
 const { string, array, number, func, object } = React.PropTypes
 
-export default function PostFooter ({ id, currentUser, commenters, commentsTotal, votesTotal, myVote, vote }) {
+export default function PostFooter ({
+  id,
+  currentUser,
+  commenters,
+  commentsTotal,
+  votesTotal,
+  myVote,
+  vote
+}) {
   const voteStyle = myVote ? styles.votes.active : styles.votes.inactive
 
   return <View style={styles.container}>
@@ -18,10 +28,13 @@ export default function PostFooter ({ id, currentUser, commenters, commentsTotal
           withOverlap={index > 0}
           zIndex={3 - index} />
       })}
-      <Text style={styles.commentsText}>{`${commentsTotal} comment`}{commentsTotal === 1 ? '' : 's'}</Text>
+      <Text style={styles.commentsText}>
+        {`${commentsTotal} comment`}{commentsTotal === 1 ? '' : 's'}
+      </Text>
     </View>
     <TouchableOpacity style={styles.votes.container}>
-      <Text style={{...styles.votes.text, ...voteStyle}}>{votesTotal}</Text>
+      <Icon name='ArrowUp' style={[styles.votes.icon, voteStyle]} />
+      <Text style={[styles.votes.text, voteStyle]}>{votesTotal}</Text>
     </TouchableOpacity>
   </View>
 }
@@ -48,8 +61,9 @@ const styles = {
   },
   commentsText: {
     paddingLeft: 6,
-    color: '#363D3C',
-    fontSize: 13
+    color: rhino30,
+    fontSize: 13,
+    fontFamily: 'Circular-Book'
   },
   votes: {
     container: {
@@ -59,14 +73,20 @@ const styles = {
       flexDirection: 'row',
       alignItems: 'center'
     },
+    icon: {
+      fontSize: 18,
+      marginRight: 4
+    },
     text: {
       fontSize: 14
     },
     active: {
-      color: '#0DC3A0'
+      color: '#0DC3A0',
+      fontFamily: 'Circular-Bold'
     },
     inactive: {
-      color: '#8A94A3'
+      color: '#8A94A3',
+      fontFamily: 'Circular-Book'
     }
   }
 }

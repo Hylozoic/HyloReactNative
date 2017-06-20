@@ -26,7 +26,8 @@ export default function samplePost () {
     commenters: fakePerson(4),
     commentersTotal: faker.random.number(),
     creator: fakePerson(),
-    updatedAt: faker.date.recent().toString()
+    updatedAt: faker.date.recent().toString(),
+    myVote: faker.random.boolean()
     /* ,
     linkPreview: {
       title: 'This is greatest article you will ever read!!!',
