@@ -23,6 +23,14 @@
 		140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		16B3D6DEF13D4173BD37A100 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AB9133C74E75480C8C2C1054 /* Ionicons.ttf */; };
+		210371F71EF8A77F00A4D12C /* lineto-circular-black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 210371EF1EF8A77F00A4D12C /* lineto-circular-black.ttf */; };
+		210371F81EF8A77F00A4D12C /* lineto-circular-blackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 210371F01EF8A77F00A4D12C /* lineto-circular-blackItalic.ttf */; };
+		210371F91EF8A77F00A4D12C /* lineto-circular-bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 210371F11EF8A77F00A4D12C /* lineto-circular-bold.ttf */; };
+		210371FA1EF8A77F00A4D12C /* lineto-circular-boldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 210371F21EF8A77F00A4D12C /* lineto-circular-boldItalic.ttf */; };
+		210371FB1EF8A77F00A4D12C /* lineto-circular-book.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 210371F31EF8A77F00A4D12C /* lineto-circular-book.ttf */; };
+		210371FC1EF8A77F00A4D12C /* lineto-circular-bookItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 210371F41EF8A77F00A4D12C /* lineto-circular-bookItalic.ttf */; };
+		210371FD1EF8A77F00A4D12C /* lineto-circular-medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 210371F51EF8A77F00A4D12C /* lineto-circular-medium.ttf */; };
+		210371FE1EF8A77F00A4D12C /* lineto-circular-mediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 210371F61EF8A77F00A4D12C /* lineto-circular-mediumItalic.ttf */; };
 		217A25F51EF2287900F95ED4 /* hylo-evo-icons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 217A25F41EF2287900F95ED4 /* hylo-evo-icons.ttf */; };
 		2B0F6438F94645FFB012E0D1 /* libRNDeviceInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 319209AC2AF24431B9DCA761 /* libRNDeviceInfo.a */; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
@@ -305,6 +313,14 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = HyloReactNative/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = HyloReactNative/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
+		210371EF1EF8A77F00A4D12C /* lineto-circular-black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "lineto-circular-black.ttf"; path = "../src/assets/lineto-circular-black.ttf"; sourceTree = "<group>"; };
+		210371F01EF8A77F00A4D12C /* lineto-circular-blackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "lineto-circular-blackItalic.ttf"; path = "../src/assets/lineto-circular-blackItalic.ttf"; sourceTree = "<group>"; };
+		210371F11EF8A77F00A4D12C /* lineto-circular-bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "lineto-circular-bold.ttf"; path = "../src/assets/lineto-circular-bold.ttf"; sourceTree = "<group>"; };
+		210371F21EF8A77F00A4D12C /* lineto-circular-boldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "lineto-circular-boldItalic.ttf"; path = "../src/assets/lineto-circular-boldItalic.ttf"; sourceTree = "<group>"; };
+		210371F31EF8A77F00A4D12C /* lineto-circular-book.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "lineto-circular-book.ttf"; path = "../src/assets/lineto-circular-book.ttf"; sourceTree = "<group>"; };
+		210371F41EF8A77F00A4D12C /* lineto-circular-bookItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "lineto-circular-bookItalic.ttf"; path = "../src/assets/lineto-circular-bookItalic.ttf"; sourceTree = "<group>"; };
+		210371F51EF8A77F00A4D12C /* lineto-circular-medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "lineto-circular-medium.ttf"; path = "../src/assets/lineto-circular-medium.ttf"; sourceTree = "<group>"; };
+		210371F61EF8A77F00A4D12C /* lineto-circular-mediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "lineto-circular-mediumItalic.ttf"; path = "../src/assets/lineto-circular-mediumItalic.ttf"; sourceTree = "<group>"; };
 		217A25F41EF2287900F95ED4 /* hylo-evo-icons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "hylo-evo-icons.ttf"; path = "../src/assets/hylo-evo-icons.ttf"; sourceTree = "<group>"; };
 		23891DFFC00D4139B0A02519 /* RNDeviceInfo.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNDeviceInfo.xcodeproj; path = "../node_modules/react-native-device-info/RNDeviceInfo.xcodeproj"; sourceTree = "<group>"; };
 		277CC724C19944EC9C127E8B /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
@@ -613,6 +629,14 @@
 		E55698735DF3479E8A064D2A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				210371EF1EF8A77F00A4D12C /* lineto-circular-black.ttf */,
+				210371F01EF8A77F00A4D12C /* lineto-circular-blackItalic.ttf */,
+				210371F11EF8A77F00A4D12C /* lineto-circular-bold.ttf */,
+				210371F21EF8A77F00A4D12C /* lineto-circular-boldItalic.ttf */,
+				210371F31EF8A77F00A4D12C /* lineto-circular-book.ttf */,
+				210371F41EF8A77F00A4D12C /* lineto-circular-bookItalic.ttf */,
+				210371F51EF8A77F00A4D12C /* lineto-circular-medium.ttf */,
+				210371F61EF8A77F00A4D12C /* lineto-circular-mediumItalic.ttf */,
 				217A25F41EF2287900F95ED4 /* hylo-evo-icons.ttf */,
 				D7FA3503889940E79431AEA6 /* Entypo.ttf */,
 				42225D2281FA4B428F69D1EB /* EvilIcons.ttf */,
@@ -1053,17 +1077,25 @@
 			files = (
 				217A25F51EF2287900F95ED4 /* hylo-evo-icons.ttf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				210371F81EF8A77F00A4D12C /* lineto-circular-blackItalic.ttf in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				F2EC3BA09EC6472AA471493D /* Entypo.ttf in Resources */,
+				210371FD1EF8A77F00A4D12C /* lineto-circular-medium.ttf in Resources */,
 				30BE8B73FDC3486F8481F181 /* EvilIcons.ttf in Resources */,
 				A1405DC119F7429AAA1C2298 /* FontAwesome.ttf in Resources */,
 				85DC696FF9A94E13B2D0E5AD /* Foundation.ttf in Resources */,
 				16B3D6DEF13D4173BD37A100 /* Ionicons.ttf in Resources */,
+				210371FE1EF8A77F00A4D12C /* lineto-circular-mediumItalic.ttf in Resources */,
 				59582AB5127847F4B8351B2D /* MaterialCommunityIcons.ttf in Resources */,
 				55C60443711945879410FC1B /* MaterialIcons.ttf in Resources */,
 				AB36E1E180274C84B9E4B8E2 /* Octicons.ttf in Resources */,
 				A2AAFB7D959040F8B29F5BE3 /* SimpleLineIcons.ttf in Resources */,
+				210371F71EF8A77F00A4D12C /* lineto-circular-black.ttf in Resources */,
+				210371FA1EF8A77F00A4D12C /* lineto-circular-boldItalic.ttf in Resources */,
 				7768133609C648E3B87571D9 /* Zocial.ttf in Resources */,
+				210371F91EF8A77F00A4D12C /* lineto-circular-bold.ttf in Resources */,
+				210371FC1EF8A77F00A4D12C /* lineto-circular-bookItalic.ttf in Resources */,
+				210371FB1EF8A77F00A4D12C /* lineto-circular-book.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
