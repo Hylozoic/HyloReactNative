@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
-import { ListView, Text, TouchableOpacity, View } from 'react-native'
+import { ListView, TouchableOpacity, View } from 'react-native'
 import fetchGraphQL from '../util/fetchGraphQL'
 import mixins from '../style/mixins'
 import Post from './Post'
+import PostCard from './PostCard'
+import samplePost from './PostCard/samplePost'
 
 export default class MyPosts extends Component {
   constructor (props) {
@@ -18,8 +20,11 @@ export default class MyPosts extends Component {
   componentDidMount () {
     fetchGraphQL('{ me { posts(first: 100, order: "desc") { id title } } }')
     .then(data => {
+      const posts = data.me.posts.map(p => {
+        return Object.assign({}, samplePost(), p)
+      })
       this.setState({
-        posts: this.dataSource.cloneWithRows(data.me.posts)
+        posts: this.dataSource.cloneWithRows(posts)
       })
     })
   }
@@ -40,7 +45,7 @@ function PostRow ({ post }, { navigate }) {
 
   return <View style={styles.postRow}>
     <TouchableOpacity onPress={showPost}>
-      <Text>{post.title}</Text>
+      <PostCard post={post} />
     </TouchableOpacity>
   </View>
 }
@@ -50,9 +55,9 @@ const styles = {
   container: {
     padding: 10,
     ...mixins.belowNavigationBar,
-    backgroundColor: '#eee'
+    backgroundColor: 'white'
   },
   postRow: {
-    paddingBottom: 10
+    paddingBottom: 15
   }
 }
