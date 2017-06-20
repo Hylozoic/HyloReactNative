@@ -23,9 +23,9 @@ export default function PostFooter ({
       {slice(0, 3, commenters).map((c, index) => {
         return <Avatar key={index}
           avatarUrl={c.avatarUrl}
-          forFooter
-          withBorder
-          withOverlap={index > 0}
+          size='small'
+          hasBorder
+          hasOverlap={index > 0}
           zIndex={3 - index} />
       })}
       <Text style={styles.commentsText}>
