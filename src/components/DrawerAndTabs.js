@@ -25,11 +25,13 @@ export default class DrawerAndTabs extends React.Component {
       if (!this.state.isAtTop) this.setState({isAtTop: true})
     }
 
+    const initialRoute = id === 'home'
+      ? {title: 'Welcome', component: MyPosts}
+      : {title: 'Welcome', component: WelcomeScene}
+
     return <NavigatorWithBar openDrawer={this.openDrawer} variant={id}
       ref={ref => { this.tabs[id] = ref }}
-      navigatorProps={{
-        initialRoute: {title: 'Welcome', component: WelcomeScene}
-      }}
+      navigatorProps={{initialRoute}}
       onNavigate={unsetIsAtTop}
       onBackToTop={setIsAtTop} />
   }
@@ -78,10 +80,9 @@ export default class DrawerAndTabs extends React.Component {
   }
 
   render () {
-    const { isAtTop, selectedTabId } = this.state
+    const { isAtTop } = this.state
     const drawerMenu = <DrawerMenu close={() => this.drawer.close()}
       ref={x => { this.drawerMenu = x }}
-      showPosts={() => this.tabs[selectedTabId].push({component: MyPosts})}
       showSettings={() => this.props.rootNavigator.push({
         component: Settings,
         props: {name: 'you'}

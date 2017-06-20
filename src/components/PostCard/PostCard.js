@@ -7,7 +7,7 @@ import SpaceFillingImage from '../SpaceFillingImage'
 import PostFooter from './PostFooter'
 import samplePost from './samplePost'
 import { get } from 'lodash/fp'
-
+import { capeCod10 } from '../../style/colors'
 const { shape, any, object, string, func, array, bool } = React.PropTypes
 
 export default class PostCard extends React.Component {
@@ -73,8 +73,8 @@ export default class PostCard extends React.Component {
 const styles = {
   container: {
     borderWidth: 1,
-    borderColor: '#EAEBEB',
-    borderRadius: 2,
+    borderColor: capeCod10,
+    borderRadius: 4,
     backgroundColor: 'white',
     marginLeft: 8, // TODO: remove this, let the wrapper handle this
     marginRight: 8 // TODO: remove this, let the wrapper handle this

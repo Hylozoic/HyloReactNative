@@ -55,9 +55,9 @@ const styles = {
   container: {
     padding: 10,
     ...mixins.belowNavigationBar,
-    backgroundColor: '#eee'
+    backgroundColor: 'white'
   },
   postRow: {
-    paddingBottom: 10
+    paddingBottom: 15
   }
 }

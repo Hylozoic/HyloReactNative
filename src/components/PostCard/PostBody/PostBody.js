@@ -25,11 +25,14 @@ const styles = {
   },
   title: {
     color: '#363D3C',
-    fontSize: 19
+    fontSize: 19,
+    fontFamily: 'Circular-Medium'
   },
   details: {
-    marginTop: 20,
+    marginTop: 12,
     color: '#5D757A',
-    fontSize: 14
+    fontSize: 14,
+    lineHeight: 20,
+    fontFamily: 'Circular-Book'
   }
 }
