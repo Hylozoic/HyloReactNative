@@ -70,7 +70,8 @@ export default class DrawerAndTabs extends React.Component {
     } else {
       return <TabNavigator.Item {...sharedProps}
         renderIcon={() => <Icon name={icon} size={25} />}
-        renderSelectedIcon={() => <Icon name={icon} size={25} color='#007AFF'/>}>
+        renderSelectedIcon={() =>
+          <Icon name={icon} size={25} color='azureRadiance' />}>
         {this.renderTabContent(id, title)}
       </TabNavigator.Item>
     }
