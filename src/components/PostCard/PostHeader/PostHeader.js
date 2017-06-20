@@ -64,7 +64,8 @@ const styles = {
   },
   username: {
     fontSize: 14,
-    color: '#363D3C'
+    color: '#363D3C',
+    fontFamily: 'Circular-Book'
   },
   metaText: {
     fontSize: 12,
