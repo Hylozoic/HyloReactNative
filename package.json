@@ -46,6 +46,13 @@
     "preset": "react-native",
     "setupFiles": [
       "<rootDir>/config/jest/mockFetch.js"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}"
+    ],
+    "coverageReporters": [
+      "json",
+      "lcov"
     ]
   },
   "standard": {
