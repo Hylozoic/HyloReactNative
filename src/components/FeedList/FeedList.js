@@ -2,12 +2,20 @@ import React, { Component } from 'react'
 import { FlatList, Text, TouchableOpacity, View } from 'react-native'
 import styles from './FeedList.styles'
 import PostCard from '../PostCard'
+import Icon from '../Icon'
 import Post from '../Post'
+import { find } from 'lodash/fp'
 
 export default class FeedList extends Component {
   render () {
-    const { posts, loadMorePosts } = this.props
+    const { posts, loadMorePosts, filter, sortBy, setFilter, setSort } = this.props
     return <View style={styles.container}>
+      <ListControls
+        filter={filter}
+        sortBy={sortBy}
+        setFilter={setFilter}
+        setSort={setSort}
+        />
       <FlatList
         style={styles.list}
         data={posts}
@@ -17,6 +25,37 @@ export default class FeedList extends Component {
         />
     </View>
   }
+}
+
+const filterOptions = [
+  {id: 'all', label: 'All Posts'},
+  {id: 'discussion', label: 'Discussions'},
+  {id: 'request', label: 'Requests'},
+  {id: 'offer', label: 'Offers'}
+]
+
+const sortOptions = [
+  {id: 'updated', label: 'Latest'},
+  {id: 'votes', label: 'Popular'}
+]
+
+const optionText = (id, options) => {
+  const option = find(o => o.id === id, options) || options[0]
+  return option.label
+}
+
+export function ListControls ({ filter, sortBy, setFilter, setSort }) {
+  return <View style={styles.listControls}>
+    <ListControl selected={filter} onPress={setFilter} options={filterOptions} />
+    <ListControl selected={sortBy} onPress={setSort} options={sortOptions} />
+  </View>
+}
+
+export function ListControl ({ selected, options, onPress }) {
+  return <TouchableOpacity style={styles.listControl}>
+    <Text style={styles.optionText}>{optionText(selected, options)}</Text>
+    <Icon name='ArrowDown' style={[styles.optionText, styles.downArrow]} />
+  </TouchableOpacity>
 }
 
 export function PostRow ({ post }, { navigate }) {

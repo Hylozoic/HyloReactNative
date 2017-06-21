@@ -1,9 +1,8 @@
-// import mixins from '../../style/mixins'
 import { capeCod40 } from '../../style/colors'
 
 export default {
   container: {
-    marginBottom: 96
+    marginBottom: 44
   },
   image: {
     height: 152
