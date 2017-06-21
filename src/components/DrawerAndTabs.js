@@ -8,6 +8,7 @@ import Settings from './Settings'
 import Drawer from 'react-native-drawer'
 import TabNavigator from 'react-native-tab-navigator'
 import Icon from './Icon'
+import Editor from './Editor'
 
 export default class DrawerAndTabs extends React.Component {
   constructor (props) {
@@ -86,6 +87,9 @@ export default class DrawerAndTabs extends React.Component {
       showSettings={() => this.props.rootNavigator.push({
         component: Settings,
         props: {name: 'you'}
+      })}
+      showEditor={() => this.props.rootNavigator.push({
+        component: Editor
       })} />
 
     return <Drawer ref={x => { this.drawer = x }} content={drawerMenu}
