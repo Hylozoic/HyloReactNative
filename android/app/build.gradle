@@ -136,6 +136,7 @@ dependencies {
         exclude group: "com.google.android.gms"
     }
     compile project(':react-native-vector-icons')
+    compile project(':react-native-webview-bridge')
 
     compile "com.android.support:appcompat-v7:23.0.1"
     compile 'com.google.android.gms:play-services-auth:10.2.0'
@@ -152,3 +153,8 @@ task copyDownloadableDepsToLibs(type: Copy) {
 }
 
 apply plugin: "com.google.gms.google-services"
+
+project.afterEvaluate {
+    apply from: '../../node_modules/react-native-zss-rich-text-editor/htmlCopy.gradle';
+    copyEditorHtmlToAppAssets(file('../../node_modules/react-native-zss-rich-text-editor'))
+}
