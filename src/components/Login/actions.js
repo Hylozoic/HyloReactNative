@@ -1,9 +1,11 @@
 import { clearSessionCookie } from '../../util/session'
 
 import { LoginManager } from 'react-native-fbsdk'
+import { GoogleSignin } from 'react-native-google-signin'
 
 export const LOGIN = 'LOGIN'
 export const LOGIN_WITH_FACEBOOK = 'LOGIN_WITH_FACEBOOK'
+export const LOGIN_WITH_GOOGLE = 'LOGIN_WITH_GOOGLE'
 export const LOGOUT = 'LOGOUT'
 
 export function login (email, password) {
@@ -25,13 +27,24 @@ export function loginWithFacebook (accessToken) {
   }
 }
 
+export function loginWithGoogle (accessToken) {
+  return {
+    type: LOGIN_WITH_GOOGLE,
+    payload: {
+      api: {method: 'post', path: `/noo/login/google-token/oauth?access_token=${accessToken}`}
+    }
+  }
+}
+
 export function logout () {
   return {
     type: LOGOUT,
-    payload: clearSessionCookie()
-    .then(() => LoginManager.logOut())
-    .then(() => ({
-      api: {method: 'delete', path: '/noo/session'}
-    }))
+    payload: () =>
+      clearSessionCookie()
+      .then(() => LoginManager.logOut())
+      .then(() => GoogleSignin.currentUser() && GoogleSignin.signOut())
+      .then(() => ({
+        api: {method: 'delete', path: '/noo/session'}
+      }))
   }
 }

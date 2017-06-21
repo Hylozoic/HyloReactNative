@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react'
 import { Button, ScrollView, Text, TextInput, View } from 'react-native'
 import FbLoginButton from './FbLoginButton'
+import GoogleLoginButton from './GoogleLoginButton'
 import { vw } from '../../util/viewport'
 import { focus } from '../../util/textInput'
 
@@ -24,7 +25,7 @@ export default class Login extends React.Component {
   }
 
   render () {
-    const { error, defaultEmail } = this.props
+    const { error, defaultEmail, actions: { loginWithGoogle, loginWithFacebook } } = this.props
 
     return <ScrollView contentContainerStyle={styles.login}>
       <Text style={styles.title}>This is Hylo!</Text>
@@ -47,7 +48,8 @@ export default class Login extends React.Component {
           onSubmitEditing={() => this.login()} />
       </View>
       <Button onPress={() => this.login()} title='Log in' />
-      <FbLoginButton onLoginFinished={this.props.actions.loginWithFacebook} />
+      <FbLoginButton onLoginFinished={loginWithFacebook} />
+      <GoogleLoginButton onLoginFinished={loginWithGoogle} />
     </ScrollView>
   }
 }
