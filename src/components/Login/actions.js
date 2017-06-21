@@ -39,11 +39,12 @@ export function loginWithGoogle (accessToken) {
 export function logout () {
   return {
     type: LOGOUT,
-    payload: clearSessionCookie()
-    .then(() => LoginManager.logOut())
-    .then(() => GoogleSignin.signOut())
-    .then(() => ({
-      api: {method: 'delete', path: '/noo/session'}
-    }))
+    payload: () =>
+      clearSessionCookie()
+      .then(() => LoginManager.logOut())
+      .then(() => GoogleSignin.currentUser() && GoogleSignin.signOut())
+      .then(() => ({
+        api: {method: 'delete', path: '/noo/session'}
+      }))
   }
 }
