@@ -19,6 +19,10 @@ export default {
   },
 
   belowNavigationBar: {
-    paddingTop: 80
+    marginTop: 80
+  },
+
+  justBelowNavigationBar: {
+    marginTop: 64
   }
 }

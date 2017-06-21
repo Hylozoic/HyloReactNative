@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { ListView, TouchableOpacity, View } from 'react-native'
+import { ListView, TouchableOpacity, View, Text } from 'react-native'
 import fetchGraphQL from '../util/fetchGraphQL'
 import mixins from '../style/mixins'
 import Post from './Post'
@@ -30,12 +30,24 @@ export default class MyPosts extends Component {
   }
 
   render () {
-    return <ListView
-      title='My Posts'
-      style={styles.container}
-      dataSource={this.state.posts}
-      renderRow={post => <PostRow post={post} />}
-      enableEmptySections />
+    const style = {
+      marginTop: 10,
+      marginLeft: 6,
+      marginRight: 15,
+      color: 'black',
+      opacity: 0.5,
+      fontSize: 25
+    }
+
+    return <View>
+      <Text style={style}>Can I see this</Text>
+      <ListView
+        title='My Posts'
+        style={styles.container}
+        dataSource={this.state.posts}
+        renderRow={post => <PostRow post={post} />}
+        enableEmptySections />
+    </View>
   }
 }
 
