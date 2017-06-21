@@ -31,7 +31,7 @@ export default class DrawerMenu extends Component {
   }
 
   render () {
-    const { close, showSettings, showEditor, currentUser } = this.props
+    const { close, showSettings, currentUser } = this.props
     const name = get('name', currentUser) || 'you'
 
     return <View style={styles.parent}>
@@ -48,14 +48,13 @@ export default class DrawerMenu extends Component {
         enableEmptySections />
       <View style={styles.footer}>
         <Image source={{uri: get('avatarUrl', currentUser)}} style={styles.avatar} />
-        <View>
+        <View style={{flex: 1}}>
           <Text style={styles.footerTopText} numberOfLines={1}>
             Hello, {name}!
           </Text>
           <View style={styles.footerButtons}>
             <TextButton text='View Profile' onPress={() => {}} />
             <TextButton text='Settings' onPress={() => [showSettings(), delay(close, 300)]} />
-            <TextButton text='Editor' onPress={() => showEditor()} />
           </View>
         </View>
       </View>
@@ -69,8 +68,8 @@ DrawerMenu.propTypes = {
 }
 
 function TextButton ({ text, onPress }) {
-  return <TouchableOpacity onPress={onPress} style={styles.footerButton}>
-    <Text style={{color: 'white', fontSize: 14}}>{text}</Text>
+  return <TouchableOpacity onPress={onPress}>
+    <Text style={styles.footerButtonText}>{text}</Text>
   </TouchableOpacity>
 }
 

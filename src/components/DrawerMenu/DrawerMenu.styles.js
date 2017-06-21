@@ -69,8 +69,9 @@ export default {
     justifyContent: 'space-between',
     marginTop: 4
   },
-  footerButton: {
-    marginRight: 30
+  footerButtonText: {
+    color: 'white',
+    fontSize: 14
   },
   communityRow: {
     padding: 10,

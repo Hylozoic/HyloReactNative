@@ -1,15 +1,34 @@
 import React from 'react'
-import mixins from '../../style/mixins'
-import { KeyboardAvoidingView, Text, View } from 'react-native'
-import { RichTextEditor } from 'react-native-zss-rich-text-editor'
+import { Button, KeyboardAvoidingView, View } from 'react-native'
+import { RichTextEditor, RichTextToolbar } from 'react-native-zss-rich-text-editor'
 
-export default function () {
-  return <KeyboardAvoidingView style={styles.container} behavior='height'>
-    <Text style={styles.text}>hark! a text editor.</Text>
-    <View style={styles.wrapper}>
-      <RichTextEditor titlePlaceholder='title' contentPlaceholder='details' />
-    </View>
-  </KeyboardAvoidingView>
+export default class Editor extends React.Component {
+
+  save = () => {
+    Promise.all([
+      this.editor.getTitleText(),
+      this.editor.getContentHtml()
+    ])
+    .then(([ title, content ]) => {
+      console.log(title)
+      console.log(content)
+    })
+  }
+
+  render () {
+    return <KeyboardAvoidingView style={styles.container} behavior='height'>
+      <View style={styles.header}>
+        <Button title='Save' onPress={this.save} />
+      </View>
+      <View style={styles.wrapper}>
+        <RichTextEditor
+          ref={ref => { this.editor = ref }}
+          titlePlaceholder='title'
+          contentPlaceholder='details' />
+      </View>
+      <RichTextToolbar getEditor={() => this.editor} />
+    </KeyboardAvoidingView>
+  }
 }
 
 const styles = {
@@ -18,13 +37,11 @@ const styles = {
     backgroundColor: 'white',
     justifyContent: 'flex-start'
   },
-  text: {
-    ...mixins.belowStatusBar,
-    marginBottom: 5,
-    textAlign: 'center'
+  header: {
+    height: 40
   },
   wrapper: {
-    padding: 10,
+    paddingTop: 10,
     flex: 1,
     borderWidth: 3,
     borderColor: 'blue'
