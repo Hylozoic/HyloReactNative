@@ -18,7 +18,7 @@ function sessionReducer (state = {}, action) {
           loginError: payload.message || payload.response.body
         }
     }
-    return
+    return state
   }
 
   switch (type) {
