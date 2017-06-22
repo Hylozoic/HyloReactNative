@@ -18,6 +18,7 @@ export default function FeedBanner ({ community, newPost, currentUser }) {
 }
 
 export function PostPrompt ({ currentUser, newPost }) {
+  if (!currentUser) return null
   const { avatarUrl } = currentUser
   return <View style={styles.postPrompt}>
     <TouchableOpacity onPress={newPost} style={styles.promptButton}>

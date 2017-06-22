@@ -7,8 +7,20 @@ import Post from '../Post'
 import { find } from 'lodash/fp'
 
 export default class FeedList extends Component {
+
+  componentDidMount () {
+    this.props.fetchPosts()
+  }
+
+  componentDidUpdate (prevProps) {
+    if (prevProps.sortBy !== this.props.sortBy ||
+        prevProps.filter !== this.props.filter) {
+      this.props.fetchPosts()
+    }
+  }
+
   render () {
-    const { posts, loadMorePosts, filter, sortBy, setFilter, setSort } = this.props
+    const { posts, fetchMorePosts, filter, sortBy, setFilter, setSort } = this.props
     return <View style={styles.container}>
       <ListControls
         filter={filter}
@@ -21,7 +33,7 @@ export default class FeedList extends Component {
         data={posts}
         renderItem={({ item }) => <PostRow post={item} />}
         keyExtractor={(item, index) => item.id}
-        onEndReached={loadMorePosts}
+        onEndReached={fetchMorePosts}
         />
     </View>
   }
