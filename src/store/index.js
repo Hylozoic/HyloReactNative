@@ -6,6 +6,8 @@ import apiMiddleware from './middleware/api'
 import graphQLMiddleware from './middleware/graphQL'
 import { createLogger } from 'redux-logger'
 import extractModelMiddleware from './middleware/extractModel'
+import optimisticMiddleware from './middleware/optimistic'
+import pendingMiddleware from './middleware/pending'
 import { AsyncStorage } from 'react-native'
 import { PERSISTED_STATE_KEY } from '../reducer/persistence'
 import orm from './models'
@@ -15,6 +17,8 @@ const middleware = compact([
   graphQLMiddleware,
   apiMiddleware,
   extractModelMiddleware,
+  optimisticMiddleware,
+  pendingMiddleware,
   promiseMiddleware,
   __DEV__ && createLogger({collapsed: true})
 ])
