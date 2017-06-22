@@ -46,13 +46,13 @@ const optionText = (id, options) => {
 
 export function ListControls ({ filter, sortBy, setFilter, setSort }) {
   return <View style={styles.listControls}>
-    <ListControl selected={filter} onPress={setFilter} options={filterOptions} />
-    <ListControl selected={sortBy} onPress={setSort} options={sortOptions} />
+    <ListControl selected={filter} onPress={() => setFilter('request')} options={filterOptions} />
+    <ListControl selected={sortBy} onPress={() => setSort('updated')} options={sortOptions} />
   </View>
 }
 
 export function ListControl ({ selected, options, onPress }) {
-  return <TouchableOpacity style={styles.listControl}>
+  return <TouchableOpacity style={styles.listControl} onPress={onPress}>
     <Text style={styles.optionText}>{optionText(selected, options)}</Text>
     <Icon name='ArrowDown' style={[styles.optionText, styles.downArrow]} />
   </TouchableOpacity>

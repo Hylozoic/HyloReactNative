@@ -4,6 +4,7 @@ import { persist } from './persistence'
 import { omit } from 'lodash/fp'
 import { combineReducers } from 'redux'
 import ormReducer from './ormReducer'
+import FeedList from '../components/FeedList/FeedList.store'
 
 function sessionReducer (state = {}, action) {
   const { type, error, payload, meta } = action
@@ -49,7 +50,8 @@ function sessionReducer (state = {}, action) {
 
 const combinedReducers = combineReducers({
   orm: ormReducer,
-  session: sessionReducer
+  session: sessionReducer,
+  FeedList
 })
 
 export default persist(combinedReducers)

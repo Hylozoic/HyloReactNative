@@ -1,5 +1,6 @@
 import { connect } from 'react-redux'
 import samplePost from '../PostCard/samplePost'
+import { getSort, getFilter, setSort, setFilter } from './FeedList.store'
 
 const samplePosts = [
   samplePost(), samplePost(), samplePost(), samplePost(), samplePost()
@@ -8,16 +9,16 @@ const samplePosts = [
 export function mapStateToProps (state, props) {
   return {
     posts: samplePosts,
-    sortBy: 'votes',
-    filter: 'request'
+    sortBy: getSort(state, props),
+    filter: getFilter(state, props)
   }
 }
 
 export function mapDispatchToProps (dispatch, props) {
   return {
     loadMorePosts: () => console.log('loadMorePosts'),
-    setFilter: filter => console.log('setFilter', filter),
-    setSort: sort => console.log('setSort', sort)
+    setFilter: filter => dispatch(setFilter(filter)),
+    setSort: sort => dispatch(setSort(sort))
   }
 }
 
