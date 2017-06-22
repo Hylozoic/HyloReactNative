@@ -13,11 +13,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "499795713870-5978vlqli576c0sbks2kgtu8l4nmtfg0.apps.googleusercontent.com",
+          "client_id": "499795713870-k8cj5uvjj54q66g9ps84anlk1278631p.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.hyloreactnative",
-            "certificate_hash": "4da3e18b190691e035e92a4735f1b63a62ad0354"
+            "certificate_hash": "e4a6515f9030b526bf61a5333f3c72b8ab701e8a"
           }
         },
         {
