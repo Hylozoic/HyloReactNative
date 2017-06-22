@@ -3,6 +3,14 @@ import { Text, View } from 'react-native'
 import mixins from '../../style/mixins'
 
 export default function Post ({ post }) {
+  console.log('props');
+  console.log(this.props);
+  console.log('end props');
+
+  console.log('post');
+  console.log(this.post);
+  console.log('end post');
+
   return <View style={styles.post}>
     <Text>The title of this post is "{post.title}"</Text>
     <Text style={styles.lips}>

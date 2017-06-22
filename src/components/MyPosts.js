@@ -9,6 +9,7 @@ import samplePost from './PostCard/samplePost'
 export default class MyPosts extends Component {
   constructor (props) {
     super(props)
+    console.log(this.props);
     this.dataSource = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1.title !== r2.title
     })
@@ -30,20 +31,19 @@ export default class MyPosts extends Component {
   }
 
   render () {
-    return <View>
-      <ListView
-        title='My Posts'
-        style={styles.container}
-        dataSource={this.state.posts}
-        renderRow={post => <PostRow post={post} />}
-        enableEmptySections />
-    </View>
+    return <ListView
+      title='My Posts'
+      style={styles.container}
+      dataSource={this.state.posts}
+      renderRow={post =>
+        <PostRow post={post} navigation={this.props.navigation} />}
+      enableEmptySections />
   }
 }
 
-function PostRow ({ post }, { navigate }) {
+function PostRow ({ post, navigation }) {
   const showPost = () =>
-    navigate({title: 'Post', component: Post, props: {post}})
+    navigation.navigate('Post', { post: {post} })
 
   return <View style={styles.postRow}>
     <TouchableOpacity onPress={showPost}>
