@@ -2,17 +2,9 @@ import React from 'react'
 import { Text, View } from 'react-native'
 import mixins from '../../style/mixins'
 
-export default function Post ({ post }) {
-  console.log('props');
-  console.log(this.props);
-  console.log('end props');
-
-  console.log('post');
-  console.log(this.post);
-  console.log('end post');
-
+export default function Post ({ navigation }) {
   return <View style={styles.post}>
-    <Text>The title of this post is "{post.title}"</Text>
+    <Text>The title of this post is "{navigation.state.params.title}"</Text>
     <Text style={styles.lips}>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce aliquam
       lorem in condimentum ultricies. Nunc et purus mollis magna scelerisque

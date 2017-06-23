@@ -29,10 +29,7 @@ export default class DrawerAndTabs extends React.Component {
   render () {
     const drawerMenu = <DrawerMenu close={() => this.drawer.close()}
       ref={x => { this.drawerMenu = x }}
-      showSettings={() => this.props.rootNavigator.push({
-        component: Settings,
-        props: {name: 'you'}
-      })} />
+    />
 
     return <Drawer ref={x => { this.drawer = x }} content={drawerMenu}
       openDrawerOffset={0.1}
@@ -40,20 +37,29 @@ export default class DrawerAndTabs extends React.Component {
       tweenDuration={250}
       tweenEasing='easeInOutCubic'
       tapToClose>
-      <StackNav />
+      <TabNav />
     </Drawer>
   }
 }
 
-const TabNav = TabNavigator({
+const StackNav = StackNavigator({
   Home: { screen: MyPosts },
-  Members: { screen: WelcomeScene },
-  Topics: { screen: WelcomeScene },
+  Post: { screen: Post }
+});
+
+const MembersNav = StackNavigator({
+  Home: { screen: WelcomeScene },
+  MembersPosts: { screen: MyPosts }
+});
+
+const TabNav = TabNavigator({
+  Home: { screen: StackNav },
+  Members: { screen: MembersNav },
+  Topics: { screen: WelcomeScene }
 }, {
   tabBarPosition: 'bottom'
 });
 
-const StackNav = StackNavigator({
-  Home: { screen: TabNav },
-  Post: { screen: Post },
-});
+TabNav.navigationOptions = {
+  title: "Hylo"
+}

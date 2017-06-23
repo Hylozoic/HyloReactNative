@@ -25,11 +25,12 @@ class WelcomeScene extends React.Component {
   }
 
   render () {
-    const { currentUser } = this.props
+    const { currentUser, navigation } = this.props
     const { name, avatarUrl } = currentUser || placeholderUser
-    const { navigate } = this.context
+    // const { navigate } = this.context
     const showMyPosts = () =>
-      navigate({title: 'Your Posts', component: MyPosts})
+      // navigate({title: 'Your Posts', component: MyPosts})
+      navigation.navigate('MembersPosts');
 
     return <View style={styles.container}>
       <Text style={styles.fineprint}>
