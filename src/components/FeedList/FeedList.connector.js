@@ -7,7 +7,8 @@ import {
   fetchPosts,
   getPosts,
   getHasMorePosts,
-  ALL_COMMUNITIES_ID
+  ALL_COMMUNITIES_ID,
+  FETCH_POSTS
 } from './FeedList.store'
 import { get } from 'lodash/fp'
 
@@ -35,7 +36,8 @@ export function mapStateToProps (state, props) {
     posts: getPosts(state, queryProps),
     sortBy,
     filter,
-    hasMore: getHasMorePosts(state, queryProps)
+    hasMore: getHasMorePosts(state, queryProps),
+    pending: state.pending[FETCH_POSTS]  
   }
 }
 

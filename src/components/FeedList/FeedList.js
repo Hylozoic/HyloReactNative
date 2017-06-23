@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { FlatList, Text, TouchableOpacity, View } from 'react-native'
 import styles from './FeedList.styles'
 import PostCard from '../PostCard'
+import Loading from '../Loading'
 import Icon from '../Icon'
 import Post from '../Post'
 import { find } from 'lodash/fp'
@@ -20,7 +21,10 @@ export default class FeedList extends Component {
   }
 
   render () {
-    const { posts, fetchMorePosts, filter, sortBy, setFilter, setSort } = this.props
+    const { posts, fetchMorePosts, filter, sortBy, setFilter, setSort, pending } = this.props
+
+    console.log('pending', pending)
+
     return <View style={styles.container}>
       <ListControls
         filter={filter}
@@ -28,6 +32,7 @@ export default class FeedList extends Component {
         setFilter={setFilter}
         setSort={setSort}
         />
+      {pending && <Loading />}
       <FlatList
         style={styles.list}
         data={posts}
