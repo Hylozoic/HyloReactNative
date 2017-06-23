@@ -44,6 +44,3 @@ android/app/libs
 .env.development
 .env.production
 coverage/
-
-# Allow debug.keystore but not release
-!android/app/debug.keystore
