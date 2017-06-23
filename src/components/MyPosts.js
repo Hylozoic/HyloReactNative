@@ -18,7 +18,19 @@ export default class MyPosts extends Component {
   }
 
   componentDidMount () {
-    fetchGraphQL('{ me { posts(first: 100, order: "desc") { id title } } }')
+    fetchGraphQL(`{
+      me {
+        posts(first: 10, order: "desc") {
+          id
+          type
+          title
+          details
+          communities {
+            id
+          }
+        }
+      }
+    }`)
     .then(data => {
       const posts = data.me.posts.map(p => {
         return Object.assign({}, samplePost(), p)
