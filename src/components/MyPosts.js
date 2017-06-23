@@ -9,7 +9,6 @@ import samplePost from './PostCard/samplePost'
 export default class MyPosts extends Component {
   constructor (props) {
     super(props)
-    console.log(this.props);
     this.dataSource = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1.title !== r2.title
     })
@@ -43,7 +42,7 @@ export default class MyPosts extends Component {
 
 function PostRow ({ post, navigation }) {
   const showPost = () =>
-    navigation.navigate('Post2', { post: {post} })
+    navigation.navigate('Post', { post })
 
   return <View style={styles.postRow}>
     <TouchableOpacity onPress={showPost}>

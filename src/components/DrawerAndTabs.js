@@ -51,19 +51,26 @@ function TestComponent2 () {
 }
 
 const StackNav = StackNavigator({
-  Home1: { screen: TestComponent },
+  Home1: { screen: MyPosts },
   Post: { screen: Post }
 })
 
 const MembersNav = StackNavigator({
-  Home: { screen: WelcomeScene },
-  MembersPosts: { screen: MyPosts }
+  Home2: { screen: WelcomeScene },
+  MembersPosts: { screen: MyPosts },
+  Post: { screen: Post }
+})
+
+const TopicsNav = StackNavigator({
+  Home3: { screen: WelcomeScene },
+  MembersPosts: { screen: MyPosts },
+  Post: { screen: Post }
 })
 
 const TabNav = TabNavigator({
-  Home2: { screen: StackNav },
+  Home: { screen: StackNav },
   Members: { screen: MembersNav },
-  Topics: { screen: TestComponent2 }
+  Topics: { screen: TopicsNav }
 }, {
   tabBarPosition: 'bottom'
 })
@@ -71,3 +78,7 @@ const TabNav = TabNavigator({
 TabNav.navigationOptions = {
   title: 'Hylo'
 }
+
+const OthersNav = StackNavigator({
+  Other: { screen: Post}
+})
