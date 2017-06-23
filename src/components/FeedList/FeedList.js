@@ -41,7 +41,7 @@ export default class FeedList extends Component {
   }
 }
 
-const filterOptions = [
+export const filterOptions = [
   {id: 'all', label: 'All Posts'},
   {id: 'discussion', label: 'Discussions'},
   {id: 'request', label: 'Requests'},
@@ -65,8 +65,10 @@ export function ListControls ({ filter, sortBy, setFilter, setSort }) {
   </View>
 }
 
-export function ListControl ({ selected, options, onPress }) {
-  return <TouchableOpacity style={styles.listControl} onPress={onPress}>
+export function ListControl ({ selected, options, onChange }) {
+  // TODO: onPress should open a platform specific dropdown/sheet, which
+  // calls onChange
+  return <TouchableOpacity style={styles.listControl} onPress={onChange}>
     <Text style={styles.optionText}>{optionText(selected, options)}</Text>
     <Icon name='ArrowDown' style={[styles.optionText, styles.downArrow]} />
   </TouchableOpacity>

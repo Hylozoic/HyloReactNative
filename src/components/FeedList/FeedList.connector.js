@@ -10,12 +10,12 @@ import {
   ALL_COMMUNITIES_ID,
   FETCH_POSTS
 } from './FeedList.store'
-import { get } from 'lodash/fp'
+import { get, omit } from 'lodash/fp'
 
 function makeFetchOpts (props) {
   const { community } = props
   return {
-    ...props,
+    ...omit('community', props),
     subject: community ? 'community' : 'all-communities',
     slug: get('slug', community) || ALL_COMMUNITIES_ID
   }
@@ -37,7 +37,7 @@ export function mapStateToProps (state, props) {
     sortBy,
     filter,
     hasMore: getHasMorePosts(state, queryProps),
-    pending: state.pending[FETCH_POSTS]  
+    pending: state.pending[FETCH_POSTS]
   }
 }
 

@@ -1,0 +1,101 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly with all=true, and no community or user 1`] = `
+<View
+  style={
+    Object {
+      "flexDirection": "row",
+      "marginBottom": 10,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "paddingLeft": 12,
+        "paddingRight": 7,
+        "paddingTop": 16,
+      }
+    }
+  >
+    <Avatar
+      avatarUrl="foo.png"
+    />
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 1,
+        "paddingRight": 7,
+        "paddingTop": 16,
+      }
+    }
+  >
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "color": "#363D3C",
+          "fontFamily": "Circular-Bold",
+          "fontSize": 14,
+        }
+      }
+    >
+      Zeus
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "color": "#AAACAC",
+          "fontFamily": "Circular-Book",
+          "fontSize": 12,
+        }
+      }
+    >
+      Go!
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "color": "#AAACAC",
+          "fontFamily": "Circular-Book",
+          "fontSize": 12,
+        }
+      }
+    >
+      10 mins ago
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "alignItems": "flex-start",
+        "flexDirection": "row",
+        "paddingRight": 6,
+        "paddingTop": 19,
+      }
+    }
+  >
+    <Icon
+      name="More"
+      style={
+        Object {
+          "color": "#8994A3",
+          "fontSize": 20,
+        }
+      }
+    />
+  </View>
+</View>
+`;

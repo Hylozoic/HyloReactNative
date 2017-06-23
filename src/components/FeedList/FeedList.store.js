@@ -10,7 +10,7 @@ export const SET_FILTER = `${MODULE_NAME}/SET_FILTER`
 export const SET_SORT = `${MODULE_NAME}/SET_SORT`
 export const FETCH_POSTS = `${MODULE_NAME}/FETCH_POSTS`
 
-const defaultState = {
+export const defaultState = {
   filter: 'all',
   sortBy: 'updated'
 }

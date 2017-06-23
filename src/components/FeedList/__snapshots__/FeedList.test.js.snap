@@ -1,0 +1,163 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FeedList renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "white",
+      "paddingLeft": 16,
+      "paddingRight": 16,
+    }
+  }
+>
+  <ListControls
+    filter="all"
+    setFilter={[Function]}
+    setSort={[Function]}
+    sortBy="latest"
+  />
+  <Loading />
+  <FlatList
+    data={
+      Array [
+        1,
+        2,
+        3,
+      ]
+    }
+    disableVirtualization={false}
+    horizontal={false}
+    initialNumToRender={10}
+    keyExtractor={[Function]}
+    maxToRenderPerBatch={10}
+    numColumns={1}
+    onEndReached={[Function]}
+    onEndReachedThreshold={2}
+    renderItem={[Function]}
+    renderScrollComponent={[Function]}
+    scrollEventThrottle={50}
+    updateCellsBatchingPeriod={50}
+    windowSize={21}
+  />
+</View>
+`;
+
+exports[`ListControl renders correctly 1`] = `
+<TouchableOpacity
+  activeOpacity={0.2}
+  focusedOpacity={0.7}
+  onPress={[Function]}
+  style={
+    Object {
+      "flexDirection": "row",
+    }
+  }
+>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    disabled={false}
+    ellipsizeMode="tail"
+    style={
+      Object {
+        "color": undefined,
+        "fontSize": 12,
+      }
+    }
+  >
+    Discussions
+  </Text>
+  <Icon
+    name="ArrowDown"
+    style={
+      Array [
+        Object {
+          "color": undefined,
+          "fontSize": 12,
+        },
+        Object {
+          "marginLeft": 4,
+          "top": 2,
+        },
+      ]
+    }
+  />
+</TouchableOpacity>
+`;
+
+exports[`ListControls renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "flexDirection": "row",
+      "justifyContent": "space-between",
+      "marginBottom": 10,
+    }
+  }
+>
+  <ListControl
+    onPress={[Function]}
+    options={
+      Array [
+        Object {
+          "id": "all",
+          "label": "All Posts",
+        },
+        Object {
+          "id": "discussion",
+          "label": "Discussions",
+        },
+        Object {
+          "id": "request",
+          "label": "Requests",
+        },
+        Object {
+          "id": "offer",
+          "label": "Offers",
+        },
+      ]
+    }
+    selected="all"
+  />
+  <ListControl
+    onPress={[Function]}
+    options={
+      Array [
+        Object {
+          "id": "updated",
+          "label": "Latest",
+        },
+        Object {
+          "id": "votes",
+          "label": "Popular",
+        },
+      ]
+    }
+    selected="latest"
+  />
+</View>
+`;
+
+exports[`PostRow renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "paddingBottom": 15,
+    }
+  }
+>
+  <TouchableOpacity
+    activeOpacity={0.2}
+    focusedOpacity={0.7}
+    onPress={[Function]}
+  >
+    <PostCard
+      post={
+        Object {
+          "id": 1,
+        }
+      }
+    />
+  </TouchableOpacity>
+</View>
+`;
