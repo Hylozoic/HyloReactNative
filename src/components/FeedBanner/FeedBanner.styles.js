@@ -1,8 +1,20 @@
-import { capeCod40 } from '../../style/colors'
+import { capeCod40, capeCod10 } from '../../style/colors'
+
+const postPromptShape = {
+  position: 'absolute',
+  top: 122,
+  height: 60,
+  borderRadius: 4,
+  left: 0,
+  right: 0,
+  marginLeft: 16,
+  marginRight: 16
+}
 
 export default {
   container: {
-    marginBottom: 44
+    marginBottom: 54,
+    zIndex: 10
   },
   image: {
     height: 152
@@ -30,16 +42,18 @@ export default {
     backgroundColor: 'transparent'
   },
   postPrompt: {
-    position: 'absolute',
-    top: 122,
-    marginLeft: 16,
-    marginRight: 16,
+    ...postPromptShape,
     padding: 12,
-    height: 60,
-    borderRadius: 4,
-    left: 0,
-    right: 0,
     backgroundColor: 'white'
+  },
+  promptShadow: {
+    ...postPromptShape,
+    backgroundColor: 'white',
+    shadowOffset: {width: 0, height: 4},
+    shadowRadius: 5,
+    shadowOpacity: 1.0,
+    shadowColor: capeCod10,
+    zIndex: -10
   },
   promptButton: {
     flexDirection: 'row',

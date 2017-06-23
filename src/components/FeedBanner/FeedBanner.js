@@ -24,6 +24,7 @@ export default function FeedBanner ({ all, community, newPost, currentUser }) {
       <Icon name='More' style={styles.icon} />
     </View>
     <PostPrompt currentUser={currentUser} newPost={newPost} />
+    {!!currentUser && <View style={styles.promptShadow} />}
   </View>
 }
 

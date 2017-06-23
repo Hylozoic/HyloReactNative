@@ -23,8 +23,6 @@ export default class FeedList extends Component {
   render () {
     const { posts, fetchMorePosts, filter, sortBy, setFilter, setSort, pending } = this.props
 
-    console.log('pending', pending)
-
     return <View style={styles.container}>
       <ListControls
         filter={filter}
@@ -34,7 +32,6 @@ export default class FeedList extends Component {
         />
       {pending && <Loading />}
       <FlatList
-        style={styles.list}
         data={posts}
         renderItem={({ item }) => <PostRow post={item} />}
         keyExtractor={(item, index) => item.id}

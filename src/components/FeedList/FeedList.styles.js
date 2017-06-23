@@ -22,10 +22,6 @@ export default {
     top: 2,
     marginLeft: 4
   },
-  list: {
-    // TODO: Height should be dynamic
-    height: 306
-  },
   postRow: {
     paddingBottom: 15
   }
