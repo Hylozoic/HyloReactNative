@@ -43,7 +43,7 @@ export default class MyPosts extends Component {
 
 function PostRow ({ post, navigation }) {
   const showPost = () =>
-    navigation.navigate('Post', { post: {post} })
+    navigation.navigate('Post2', { post: {post} })
 
   return <View style={styles.postRow}>
     <TouchableOpacity onPress={showPost}>

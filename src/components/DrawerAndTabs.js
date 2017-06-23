@@ -42,24 +42,32 @@ export default class DrawerAndTabs extends React.Component {
   }
 }
 
+function TestComponent () {
+  return <View style={{flex: 1, backgroundColor: 'red'}}><Text>Test</Text></View>
+}
+
+function TestComponent2 () {
+  return <View style={{flex: 1, backgroundColor: 'blue'}}><Text>Test</Text></View>
+}
+
 const StackNav = StackNavigator({
-  Home: { screen: MyPosts },
+  Home1: { screen: TestComponent },
   Post: { screen: Post }
-});
+})
 
 const MembersNav = StackNavigator({
   Home: { screen: WelcomeScene },
   MembersPosts: { screen: MyPosts }
-});
+})
 
 const TabNav = TabNavigator({
-  Home: { screen: StackNav },
+  Home2: { screen: StackNav },
   Members: { screen: MembersNav },
-  Topics: { screen: WelcomeScene }
+  Topics: { screen: TestComponent2 }
 }, {
   tabBarPosition: 'bottom'
-});
+})
 
 TabNav.navigationOptions = {
-  title: "Hylo"
+  title: 'Hylo'
 }
