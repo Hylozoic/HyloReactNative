@@ -1,3 +1,9 @@
+import { makeGetQueryResults } from '../../reducer/queryResults'
+import { createSelector } from 'reselect'
+import { createSelector as ormCreateSelector } from 'redux-orm'
+import { get, includes, isEmpty } from 'lodash/fp'
+import orm from '../../store/models'
+
 export const MODULE_NAME = 'FeedList'
 
 export const SET_FILTER = `${MODULE_NAME}/SET_FILTER`
@@ -53,7 +59,7 @@ export function getSort (state) {
 
 export const ALL_COMMUNITIES_ID = 'all-communities'
 
-export function fetchPosts ({ subject, id, sortBy, offset, search, filter, topic }) {
+export function fetchPosts ({ subject, slug, sortBy, offset, search, filter, topic }) {
   var query, extractModel
 
   if (subject === 'community') {
@@ -61,7 +67,7 @@ export function fetchPosts ({ subject, id, sortBy, offset, search, filter, topic
     extractModel = 'Community'
   } else if (subject === 'all-communities') {
     query = allCommunitiesQuery
-    id = ALL_COMMUNITIES_ID // this is just for queryResults, not the API
+    slug = ALL_COMMUNITIES_ID // this is just for queryResults, not the API
     extractModel = 'Post'
   } else {
     throw new Error(`FETCH_POSTS with subject=${subject} is not implemented`)
@@ -72,7 +78,7 @@ export function fetchPosts ({ subject, id, sortBy, offset, search, filter, topic
     graphql: {
       query,
       variables: {
-        id,
+        slug,
         sortBy,
         offset,
         search,
@@ -131,7 +137,7 @@ posts(
 }`
 
 const communityQuery = `query (
-  $id: String,
+  $slug: String,
   $sortBy: String,
   $offset: Int,
   $search: String,
@@ -139,7 +145,7 @@ const communityQuery = `query (
   $topic: Int,
   $first: Int
 ) {
-  community(slug: $id) {
+  community(slug: $slug) {
     id
     slug
     name
@@ -160,3 +166,26 @@ const allCommunitiesQuery = `query (
 ) {
   ${postsQueryFragment}
 }`
+
+const getPostResults = makeGetQueryResults(FETCH_POSTS)
+
+export const getPosts = ormCreateSelector(
+  orm,
+  state => state.orm,
+  getPostResults,
+  (session, results) => {
+    if (isEmpty(results) || isEmpty(results.ids)) return []
+    return session.Post.all()
+    .filter(x => includes(x.id, results.ids))
+    .orderBy(x => results.ids.indexOf(x.id))
+    .toModelArray()
+    .map(post => ({
+      ...post.ref,
+      creator: post.creator,
+      commenters: post.commenters.toModelArray(),
+      communities: post.communities.toModelArray()
+    }))
+  }
+)
+
+export const getHasMorePosts = createSelector(getPostResults, get('hasMore'))

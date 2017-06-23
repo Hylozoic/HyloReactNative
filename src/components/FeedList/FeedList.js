@@ -59,7 +59,7 @@ const optionText = (id, options) => {
 export function ListControls ({ filter, sortBy, setFilter, setSort }) {
   return <View style={styles.listControls}>
     <ListControl selected={filter} onPress={() => setFilter('request')} options={filterOptions} />
-    <ListControl selected={sortBy} onPress={() => setSort('updated')} options={sortOptions} />
+    <ListControl selected={sortBy} onPress={() => setSort('votes')} options={sortOptions} />
   </View>
 }
 

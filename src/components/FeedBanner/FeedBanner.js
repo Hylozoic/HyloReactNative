@@ -3,9 +3,19 @@ import { Image, View, Text, TouchableOpacity } from 'react-native'
 import styles from './FeedBanner.styles'
 import Icon from '../Icon'
 import Avatar from '../Avatar'
+import { DEFAULT_BANNER } from '../../store/models/Community'
 
-export default function FeedBanner ({ community, newPost, currentUser }) {
-  const { bannerUrl, name } = community
+export default function FeedBanner ({ all, community, newPost, currentUser }) {
+  let bannerUrl, name
+
+  if (all) {
+    name = 'All Communities'
+    bannerUrl = DEFAULT_BANNER
+  } else if (!community) {
+    return null
+  } else {
+    ({ bannerUrl, name } = community)
+  }
 
   return <View style={styles.container}>
     <Image source={{uri: bannerUrl}} style={styles.image} />

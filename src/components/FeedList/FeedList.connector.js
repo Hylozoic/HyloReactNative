@@ -1,18 +1,41 @@
 import { connect } from 'react-redux'
-import samplePost from '../PostCard/samplePost'
-import { getSort, getFilter, setSort, setFilter, fetchPosts } from './FeedList.store'
+import {
+  getSort,
+  getFilter,
+  setSort,
+  setFilter,
+  fetchPosts,
+  getPosts,
+  getHasMorePosts,
+  ALL_COMMUNITIES_ID
+} from './FeedList.store'
 import { get } from 'lodash/fp'
 
-const samplePosts = [
-  samplePost(), samplePost(), samplePost(), samplePost(), samplePost()
-]
+function makeFetchOpts (props) {
+  const { community } = props
+  return {
+    ...props,
+    subject: community ? 'community' : 'all-communities',
+    slug: get('slug', community) || ALL_COMMUNITIES_ID
+  }
+}
 
 export function mapStateToProps (state, props) {
+  const sortBy = getSort(state, props)
+  const filter = getFilter(state, props)
+  const { community } = props
+
+  const queryProps = makeFetchOpts({
+    community,
+    sortBy,
+    filter
+  })
+
   return {
-    posts: samplePosts,
-    sortBy: getSort(state, props),
-    filter: getFilter(state, props),
-    hasMore: true
+    posts: getPosts(state, queryProps),
+    sortBy,
+    filter,
+    hasMore: getHasMorePosts(state, queryProps)
   }
 }
 
@@ -29,21 +52,16 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
   const { fetchPostsRaw } = dispatchProps
   const { community } = ownProps
 
-  const fetchOpts = {
-    subject: community ? 'community' : 'all-communities',
-    id: get('id', community),
-    sortBy,
-    filter
-  }
+  const fetchOpts = makeFetchOpts({community, sortBy, filter})
 
   const fetchPosts = () =>
-    fetchPostsRaw(fetchOpts) && console.log('fetchPosts')
+    fetchPostsRaw(fetchOpts)
 
   const offset = posts.length
 
   const fetchMorePosts = hasMore
-    ? () => fetchPostsRaw({...fetchOpts, offset}) && console.log('fetchPostsRaw', offset)
-    : () => {console.log('dont have more')}
+    ? () => fetchPostsRaw({...fetchOpts, offset})
+    : () => { }
 
   return {
     ...stateProps,

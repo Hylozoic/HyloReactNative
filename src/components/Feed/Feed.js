@@ -11,7 +11,7 @@ export default class Feed extends Component {
     return <View style={styles.container}>
       <FeedBanner community={community} currentUser={currentUser}
         all={!community} newPost={newPost} />
-      <FeedList />
+      <FeedList community={community} />
     </View>
   }
 }
