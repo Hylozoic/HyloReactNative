@@ -44,3 +44,7 @@ android/app/libs
 .env.development
 .env.production
 coverage/
+
+# Google login
+google-services.json
+GoogleService-Info.plist
