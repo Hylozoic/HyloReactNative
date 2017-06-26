@@ -1,19 +1,7 @@
 import React from 'react'
-import { Platform, TabBarIOS, View } from 'react-native'
-import { TabNavigator, DrawerNavigator, StackNavigator } from "react-navigation"
-import {
-  Text,
-  TouchableOpacity
-} from 'react-native'
-
 import DrawerMenu from './DrawerMenu'
-import WelcomeScene from './WelcomeScene'
-import MyPosts from './MyPosts'
-import Feed from './Feed'
-import Settings from './Settings'
 import Drawer from 'react-native-drawer'
-import Icon from './Icon'
-import Post from './Post'
+
 import NavigatorWithBar from './NavigatorWithBar'
 
 export default class DrawerAndTabs extends React.Component {

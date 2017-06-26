@@ -20,7 +20,6 @@ export default function NavigatorWithBar () {
       routeConfigs[key] = { screen: stackNavigators[`${key}Navigator`]};
   }
   const nav = TabNavigator(routeConfigs, navigatorConfig);
-  console.log(nav);
   return nav;
 }
 
