@@ -4,6 +4,7 @@
 target 'HyloReactNative' do
   use_frameworks!
 
+  pod 'GoogleSignIn'
   pod 'FBSDKCoreKit'
   pod 'FBSDKShareKit'
   pod 'FBSDKLoginKit'
