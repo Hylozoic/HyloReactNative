@@ -1,5 +1,5 @@
 import queryResults, { buildKey } from './queryResults'
-import { FETCH_POSTS } from '../components/FeedList/FeedList.store'
+import { FETCH_POSTS } from '../../components/FeedList/FeedList.store'
 
 const variables = {slug: 'foo', sortBy: 'name'}
 

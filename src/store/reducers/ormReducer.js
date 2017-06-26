@@ -1,6 +1,6 @@
-import { EXTRACT_MODEL } from '../store/constants'
-import { LOGOUT } from '../components/Login/actions'
-import orm from '../store/models'
+import { EXTRACT_MODEL } from '../constants'
+import { LOGOUT } from '../../components/Login/actions'
+import orm from '../models'
 import ModelExtractor from './ModelExtractor'
 
 export default function ormReducer (state = {}, action) {

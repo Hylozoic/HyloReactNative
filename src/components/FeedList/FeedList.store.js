@@ -1,4 +1,4 @@
-import { makeGetQueryResults } from '../../reducer/queryResults'
+import { makeGetQueryResults } from '../../store/reducers/queryResults'
 import { createSelector } from 'reselect'
 import { createSelector as ormCreateSelector } from 'redux-orm'
 import { get, includes, isEmpty } from 'lodash/fp'

@@ -1,5 +1,5 @@
 import orm from '../../store/models'
-import { buildKey } from '../../reducer/queryResults'
+import { buildKey } from '../../store/reducers/queryResults'
 import { times } from 'lodash/fp'
 import { mapStateToProps, mergeProps } from './FeedList.connector'
 import { MODULE_NAME, defaultState, FETCH_POSTS } from './FeedList.store'

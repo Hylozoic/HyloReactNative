@@ -1,12 +1,12 @@
-import { LOGIN, LOGIN_WITH_FACEBOOK, LOGIN_WITH_GOOGLE, LOGOUT } from '../components/Login/actions'
-import { CHECK_SESSION } from '../components/SessionCheck/actions'
+import { LOGIN, LOGIN_WITH_FACEBOOK, LOGIN_WITH_GOOGLE, LOGOUT } from '../../components/Login/actions'
+import { CHECK_SESSION } from '../../components/SessionCheck/actions'
 import { persist } from './persistence'
 import { omit } from 'lodash/fp'
 import { combineReducers } from 'redux'
 import ormReducer from './ormReducer'
 import pending from './pending'
 import queryResults from './queryResults'
-import FeedList from '../components/FeedList/FeedList.store'
+import FeedList from '../../components/FeedList/FeedList.store'
 
 function sessionReducer (state = {}, action) {
   const { type, error, payload, meta } = action

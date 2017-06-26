@@ -8,7 +8,7 @@
 
 import {
   FETCH_POSTS
-} from '../components/FeedList/FeedList.store'
+} from '../../components/FeedList/FeedList.store'
 import { get, isNull, omitBy, pick, reduce, uniq } from 'lodash/fp'
 
 // reducer
