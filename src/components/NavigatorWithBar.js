@@ -4,6 +4,7 @@ import { TabNavigator, StackNavigator } from "react-navigation"
 import WelcomeScene from './WelcomeScene'
 import MyPosts from './MyPosts'
 import Post from './Post'
+import Settings from './Settings'
 
 const tabScreens = {
   Home: {screen: MyPosts},
@@ -11,7 +12,7 @@ const tabScreens = {
   Topics: {screen: WelcomeScene}
 }
 
-const paths = {
+let paths = {
   Post: {screen: Post},
   MyPosts: {screen: MyPosts},
   WelcomeScene: {screen: WelcomeScene}
@@ -23,16 +24,18 @@ const navigatorConfig = {
 
 const stackNavigators = {};
 const routeConfigs = {};
+console.log('keys');
+console.log(Object.keys(tabScreens))
 for (const key of Object.keys(tabScreens)) {
     const obj = {};
     obj[key] = tabScreens[key];
-    const tabPaths = Object.assign(paths, obj);
+    const tabPaths = Object.assign({}, ...[obj, paths]);
     const tabConfigs = {
       initialRouteName: key
     }
     stackNavigators[`${key}Navigator`] = StackNavigator(tabPaths, tabConfigs);
     routeConfigs[key] = { screen: stackNavigators[`${key}Navigator`]};
 }
-const NavigatorWithBar = TabNavigator(routeConfigs, navigatorConfig);
 
+const NavigatorWithBar = TabNavigator(routeConfigs, navigatorConfig);
 export default NavigatorWithBar;
