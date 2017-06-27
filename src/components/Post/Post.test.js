@@ -4,9 +4,15 @@ import renderer from 'react-test-renderer'
 import Post from './index'
 
 it('renders a Post', () => {
-  const post = {
-    title: 'Wombat'
+  const navigation = {
+    state: {
+      params: {
+        post: {
+          title: 'Wombat'
+        }
+      }
+    }
   }
-  const actual = renderer.create(<Post post={post} />)
+  const actual = renderer.create(<Post navigation={navigation} />)
   expect(actual).toMatchSnapshot()
 })
