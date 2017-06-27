@@ -25,7 +25,7 @@ export default class DrawerAndTabs extends React.Component {
       tweenDuration={250}
       tweenEasing='easeInOutCubic'
       tapToClose>
-      <NavigatorWithBar />
+      <NavigatorWithBar openDrawer={this.openDrawer} />
     </Drawer>
   }
 }
