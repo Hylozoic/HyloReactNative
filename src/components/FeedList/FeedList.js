@@ -4,7 +4,7 @@ import styles from './FeedList.styles'
 import PostCard from '../PostCard'
 import Loading from '../Loading'
 import Icon from '../Icon'
-import Post from '../Post'
+import PostDetails from '../PostDetails'
 import { find } from 'lodash/fp'
 
 export default class FeedList extends Component {
@@ -76,7 +76,7 @@ export function ListControl ({ selected, options, onChange }) {
 
 export function PostRow ({ post }, { navigate }) {
   const showPost = () =>
-    navigate({title: 'Post', component: Post, props: {post}})
+    navigate({title: 'Post', component: PostDetails, props: {id: post.id}})
 
   return <View style={styles.postRow}>
     <TouchableOpacity onPress={showPost}>

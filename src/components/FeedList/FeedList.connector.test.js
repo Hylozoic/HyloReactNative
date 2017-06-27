@@ -2,7 +2,8 @@ import orm from '../../store/models'
 import { buildKey } from '../../store/reducers/queryResults'
 import { times } from 'lodash/fp'
 import { mapStateToProps, mergeProps } from './FeedList.connector'
-import { MODULE_NAME, defaultState, FETCH_POSTS } from './FeedList.store'
+import { MODULE_NAME, defaultState } from './FeedList.store'
+import { FETCH_POSTS } from '../../store/actions/fetchPosts'
 
 describe('mapStateToProps', () => {
   let state

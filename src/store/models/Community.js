@@ -48,3 +48,5 @@ export const bannerUploadSettings = ({ id, slug }) => ({
   path: `community/${id}/banner`,
   convert: {width: 1600, format: 'jpg', fit: 'max', rotate: 'exif'}
 })
+
+export const ALL_COMMUNITIES_ID = 'all-communities'

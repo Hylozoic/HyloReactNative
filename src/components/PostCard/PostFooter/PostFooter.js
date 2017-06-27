@@ -14,7 +14,8 @@ export default function PostFooter ({
   commentsTotal,
   votesTotal,
   myVote,
-  vote
+  vote,
+  showActivityLabel
 }) {
   const voteStyle = myVote ? styles.votes.active : styles.votes.inactive
 
