@@ -38,13 +38,17 @@ export default function NavigatorWithBar ({ openDrawer }) {
 }
 
 function mergeRouteConfigsByTab(openDrawer, tabs, screens) {
+  // merge tabs and scenes
+  // add configuration options for each scene
+  // create a StackNavigator for each tab
+  // return an object that can be passed into TabNavigator
   const stackNavigators = {};
   const routeConfigs = {};
   for (const key of Object.keys(tabs)) {
       const obj = {};
       obj[key] = tabs[key];
-      const tabPaths = Object.assign({}, ...[obj, screens]);
-      const tabConfigs = {
+      const stackPaths = Object.assign({}, ...[obj, screens]);
+      const sceneConfigs = {
         initialRouteName: key,
         navigationOptions: {
           title: key,
@@ -54,7 +58,7 @@ function mergeRouteConfigsByTab(openDrawer, tabs, screens) {
         }
       }
       stackNavigators[`${key}Navigator`] = StackNavigator(
-        tabPaths, tabConfigs
+        stackPaths, sceneConfigs
       );
       routeConfigs[key] = { screen: stackNavigators[`${key}Navigator`]};
   }
