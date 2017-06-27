@@ -69,6 +69,7 @@
       "expect",
       "fetch",
       "it",
+      "describe",
       "jest"
     ]
   }
