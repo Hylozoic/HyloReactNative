@@ -26,7 +26,7 @@ const tabNavigatorConfig = {
   tabBarPosition: 'bottom'
 }
 
-function createRouteConfigs() {
+function mergeRouteConfigsByTab() {
   const stackNavigators = {};
   const routeConfigs = {};
   for (const key of Object.keys(tabs)) {
@@ -42,5 +42,5 @@ function createRouteConfigs() {
   return routeConfigs;
 }
 
-const NavigatorWithBar = TabNavigator(createRouteConfigs(), tabNavigatorConfig);
+const NavigatorWithBar = TabNavigator(mergeRouteConfigsByTab(), tabNavigatorConfig);
 export default NavigatorWithBar;
