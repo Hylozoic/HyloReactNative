@@ -48,7 +48,7 @@ export default class DrawerMenu extends Component {
         enableEmptySections />
       <View style={styles.footer}>
         <Image source={{uri: get('avatarUrl', currentUser)}} style={styles.avatar} />
-        <View>
+        <View style={{flex: 1}}>
           <Text style={styles.footerTopText} numberOfLines={1}>
             Hello, {name}!
           </Text>
@@ -68,8 +68,8 @@ DrawerMenu.propTypes = {
 }
 
 function TextButton ({ text, onPress }) {
-  return <TouchableOpacity onPress={onPress} style={styles.footerButton}>
-    <Text style={{color: 'white', fontSize: 14}}>{text}</Text>
+  return <TouchableOpacity onPress={onPress}>
+    <Text style={styles.footerButtonText}>{text}</Text>
   </TouchableOpacity>
 }
 

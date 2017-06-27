@@ -14,7 +14,8 @@ class NavigationContext extends React.Component {
   }
 
   static childContextTypes = {
-    navigate: PropTypes.func
+    navigate: PropTypes.func,
+    goBack: PropTypes.func
   }
 
   getChildContext () {
@@ -23,6 +24,9 @@ class NavigationContext extends React.Component {
       navigate: route => {
         if (onNavigate) onNavigate(route)
         return this.props.navigator.push(route)
+      },
+      goBack: () => {
+        return this.props.navigator.pop()
       }
     }
   }
