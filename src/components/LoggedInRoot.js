@@ -7,7 +7,7 @@ import { connect } from 'react-redux'
 // above the tab bar
 class LoggedInRoot extends React.Component {
   static navigationOptions = {
-    title: 'Menu',
+    title: 'Menu'
   };
 
   componentDidMount () {
@@ -15,7 +15,7 @@ class LoggedInRoot extends React.Component {
   }
 
   render () {
-     return <DrawerAndTabs />
+    return <DrawerAndTabs />
   }
 }
 
