@@ -29,32 +29,34 @@ export default function NavigatorWithBar ({ openDrawer }) {
     tabBarPosition: 'bottom'
   }
 
-  function mergeRouteConfigsByTab(openDrawer) {
-    const stackNavigators = {};
-    const routeConfigs = {};
-    for (const key of Object.keys(tabs)) {
-        const obj = {};
-        obj[key] = tabs[key];
-        const tabPaths = Object.assign({}, ...[obj, screens]);
-        const tabConfigs = {
-          initialRouteName: key,
-          navigationOptions: {
-            title: key,
-            headerLeft: <TouchableOpacity>
-                          <Text onPress={openDrawer}>Menu</Text>
-                        </TouchableOpacity>
-          }
-        }
-        stackNavigators[`${key}Navigator`] = StackNavigator(tabPaths, tabConfigs);
-        routeConfigs[key] = { screen: stackNavigators[`${key}Navigator`]};
-    }
-    return routeConfigs;
-  }
-
   const NavigatorWithBar = TabNavigator(
-    mergeRouteConfigsByTab(openDrawer),
+    mergeRouteConfigsByTab(openDrawer, tabs, screens),
     tabNavigatorConfig
   );
-  
+
   return <NavigatorWithBar />;
+}
+
+function mergeRouteConfigsByTab(openDrawer, tabs, screens) {
+  const stackNavigators = {};
+  const routeConfigs = {};
+  for (const key of Object.keys(tabs)) {
+      const obj = {};
+      obj[key] = tabs[key];
+      const tabPaths = Object.assign({}, ...[obj, screens]);
+      const tabConfigs = {
+        initialRouteName: key,
+        navigationOptions: {
+          title: key,
+          headerRight: <TouchableOpacity>
+                        <Text onPress={openDrawer}>Menu</Text>
+                      </TouchableOpacity>
+        }
+      }
+      stackNavigators[`${key}Navigator`] = StackNavigator(
+        tabPaths, tabConfigs
+      );
+      routeConfigs[key] = { screen: stackNavigators[`${key}Navigator`]};
+  }
+  return routeConfigs;
 }
