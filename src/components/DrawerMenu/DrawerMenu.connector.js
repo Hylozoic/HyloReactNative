@@ -1,5 +1,6 @@
 import { connect } from 'react-redux'
 import getMe from '../../store/selectors/getMe'
+import { logout } from '../Login/actions'
 
 function mapStateToProps (state) {
   const currentUser = getMe(state)
@@ -9,4 +10,4 @@ function mapStateToProps (state) {
   }
 }
 
-export default connect(mapStateToProps, null, null, {withRef: true})
+export default connect(mapStateToProps, {logout}, null, {withRef: true})
