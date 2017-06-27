@@ -41,6 +41,5 @@ function createRouteConfigs() {
   return routeConfigs;
 }
 
-
 const NavigatorWithBar = TabNavigator(createRouteConfigs(), tabNavigatorConfig);
 export default NavigatorWithBar;
