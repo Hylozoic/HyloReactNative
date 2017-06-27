@@ -1,5 +1,6 @@
 import React from 'react'
 import { TabNavigator, StackNavigator } from "react-navigation"
+import { Text, TouchableOpacity } from 'react-native'
 
 import WelcomeScene from './WelcomeScene'
 import MyPosts from './MyPosts'
@@ -34,7 +35,13 @@ function mergeRouteConfigsByTab() {
       obj[key] = tabs[key];
       const tabPaths = Object.assign({}, ...[obj, screens]);
       const tabConfigs = {
-        initialRouteName: key
+        initialRouteName: key,
+        navigationOptions: {
+          title: key,
+          headerLeft: <TouchableOpacity>
+                        <Text>Menu</Text>
+                      </TouchableOpacity>
+        }
       }
       stackNavigators[`${key}Navigator`] = StackNavigator(tabPaths, tabConfigs);
       routeConfigs[key] = { screen: stackNavigators[`${key}Navigator`]};
