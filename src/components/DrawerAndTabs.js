@@ -27,7 +27,7 @@ export default class DrawerAndTabs extends React.Component {
     }
 
     const initialRoute = id === 'home'
-        ? {title: 'Welcome', component: Feed}
+      ? {title: 'Welcome', component: Feed}
       : {title: 'Welcome', component: WelcomeScene}
 
     return <NavigatorWithBar openDrawer={this.openDrawer} variant={id}
