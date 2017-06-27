@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, PureComponent } from 'react'
 import { FlatList, Text, TouchableOpacity, View } from 'react-native'
 import styles from './FeedList.styles'
 import PostCard from '../PostCard'
@@ -8,7 +8,6 @@ import Post from '../Post'
 import { find } from 'lodash/fp'
 
 export default class FeedList extends Component {
-
   componentDidMount () {
     this.props.fetchPosts()
   }
@@ -74,6 +73,28 @@ export function ListControl ({ selected, options, onChange }) {
   </TouchableOpacity>
 }
 
+export class PostRow extends PureComponent {
+  static contextTypes = {
+    navigate: React.PropTypes.func
+  }
+
+  render () {
+    const { post } = this.props
+    const { navigate } = this.context
+
+    const showPost = () =>
+      navigate({title: 'Post', component: Post, props: {post}})
+
+    return <View style={styles.postRow}>
+      <TouchableOpacity onPress={showPost}>
+        <PostCard post={post} />
+      </TouchableOpacity>
+    </View>
+  }
+}
+
+/*
+
 export function PostRow ({ post }, { navigate }) {
   const showPost = () =>
     navigate({title: 'Post', component: Post, props: {post}})
@@ -85,3 +106,5 @@ export function PostRow ({ post }, { navigate }) {
   </View>
 }
 PostRow.contextTypes = {navigate: React.PropTypes.func}
+
+*/
