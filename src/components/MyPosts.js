@@ -31,13 +31,13 @@ export default class MyPosts extends Component {
 
   render () {
     return <View>
-    <ListView
-      title='My Posts'
-      style={styles.container}
-      dataSource={this.state.posts}
-      renderRow={post =>
-        <PostRow post={post} navigation={this.props.navigation} />}
-      enableEmptySections />
+      <ListView
+        title='My Posts'
+        style={styles.container}
+        dataSource={this.state.posts}
+        renderRow={post =>
+          <PostRow post={post} navigation={this.props.navigation} />}
+        enableEmptySections />
     </View>
   }
 }
@@ -57,7 +57,6 @@ PostRow.contextTypes = {navigate: React.PropTypes.func}
 const styles = {
   container: {
     padding: 10,
-    ...mixins.belowNavigationBar,
     backgroundColor: 'white'
   },
   postRow: {
