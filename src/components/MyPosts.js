@@ -30,13 +30,15 @@ export default class MyPosts extends Component {
   }
 
   render () {
-    return <ListView
+    return <View>
+    <ListView
       title='My Posts'
       style={styles.container}
       dataSource={this.state.posts}
       renderRow={post =>
         <PostRow post={post} navigation={this.props.navigation} />}
       enableEmptySections />
+    </View>
   }
 }
 
