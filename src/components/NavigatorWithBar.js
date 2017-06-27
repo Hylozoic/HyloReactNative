@@ -15,7 +15,8 @@ const tabs = {
 const screens = {
   Post: {screen: Post},
   MyPosts: {screen: MyPosts},
-  WelcomeScene: {screen: WelcomeScene}
+  WelcomeScene: {screen: WelcomeScene},
+  Settings: {screen: Settings}
 }
 
 Object.freeze(tabs);
