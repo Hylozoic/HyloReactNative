@@ -35,15 +35,16 @@ export default class MyPosts extends Component {
         title='My Posts'
         style={styles.container}
         dataSource={this.state.posts}
-        renderRow={post => <PostRow post={post} />}
+        renderRow={post =>
+          <PostRow post={post} navigation={this.props.navigation} />}
         enableEmptySections />
     </View>
   }
 }
 
-function PostRow ({ post }, { navigate }) {
+function PostRow ({ post, navigation }) {
   const showPost = () =>
-    navigate({title: 'Post', component: Post, props: {post}})
+    navigation.navigate('Post', { post })
 
   return <View style={styles.postRow}>
     <TouchableOpacity onPress={showPost}>
@@ -56,7 +57,6 @@ PostRow.contextTypes = {navigate: React.PropTypes.func}
 const styles = {
   container: {
     padding: 10,
-    ...mixins.belowNavigationBar,
     backgroundColor: 'white'
   },
   postRow: {

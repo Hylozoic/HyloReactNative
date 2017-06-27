@@ -1,5 +1,4 @@
-import React, { createElement } from 'react'
-import { Navigator } from 'react-native-deprecated-custom-components'
+import React from 'react'
 import DrawerAndTabs from './DrawerAndTabs'
 import fetchCurrentUser from '../store/actions/fetchCurrentUser'
 import { connect } from 'react-redux'
@@ -7,25 +6,16 @@ import { connect } from 'react-redux'
 // this component just sets up a navigator so that views can open full-screen,
 // above the tab bar
 class LoggedInRoot extends React.Component {
+  static navigationOptions = {
+    title: 'Menu'
+  };
+
   componentDidMount () {
     this.props.fetchCurrentUser()
   }
 
   render () {
-    const initialRoute = {
-      render: navigator => <DrawerAndTabs rootNavigator={navigator} />
-    }
-
-    const renderScene = ({ render, component, props }, navigator) => {
-      if (render) return render(navigator)
-
-      // using createElement instead of JSX here because mixing destructuring
-      // and JSX doesn't work as expected
-      if (component) return createElement(component, {navigator, ...props})
-    }
-
-    return <Navigator style={styles.navigator} {...{initialRoute, renderScene}}
-      configureScene={() => Navigator.SceneConfigs.FloatFromBottom} />
+    return <DrawerAndTabs />
   }
 }
 

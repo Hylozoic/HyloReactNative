@@ -1,94 +1,65 @@
-import React, { PropTypes } from 'react'
-import {
-  Text,
-  TouchableOpacity
-} from 'react-native'
-import { Navigator } from 'react-native-deprecated-custom-components'
-import mixins from '../style/mixins'
-import makeRenderScene from '../util/makeRenderScene'
+import React from 'react'
+import { TabNavigator, StackNavigator } from 'react-navigation'
+import { Text, TouchableOpacity } from 'react-native'
 
-export default class NavigatorWithBar extends React.Component {
-  static propTypes = {
-    openDrawer: PropTypes.func.isRequired,
-    variant: PropTypes.string,
-    navigatorProps: PropTypes.object,
-    onNavigate: PropTypes.func,
-    onBackToTop: PropTypes.func
+import WelcomeScene from './WelcomeScene'
+import MyPosts from './MyPosts'
+import Post from './Post'
+import Settings from './Settings'
+
+export default function NavigatorWithBar ({ openDrawer }) {
+  const tabs = {
+    Home: {screen: MyPosts},
+    Members: {screen: WelcomeScene},
+    Topics: {screen: WelcomeScene}
   }
 
-  constructor (props) {
-    super(props)
-
-    this.routeMapper = {
-      LeftButton: (route, navigator, index, navState) => {
-        if (this.isAtTop(navigator)) {
-          return <TouchableOpacity onPress={this.props.openDrawer}>
-            <Text style={styles.navigationLeftButton}>Menu</Text>
-          </TouchableOpacity>
-        }
-        const onBackPress = () => {
-          navigator.pop()
-          if (this.willBeAtTop(navigator)) this.props.onBackToTop()
-        }
-        return <TouchableOpacity onPress={onBackPress}>
-          <Text style={styles.navigationLeftButton}>&lt; Back</Text>
-        </TouchableOpacity>
-      },
-      RightButton: (route, navigator, index, navState) => {
-        return null
-      },
-      Title: (route, navigator, index, navState) => {
-        return <Text style={styles.navigationTitle}>{route.title}</Text>
-      }
-    }
+  const screens = {
+    Post: {screen: Post},
+    MyPosts: {screen: MyPosts},
+    WelcomeScene: {screen: WelcomeScene},
+    Settings: {screen: Settings}
   }
 
-  componentDidMount () {
-    ['push', 'popToTop'].forEach(fn => {
-      this[fn] = this.navigator[fn]
-    })
+  Object.freeze(tabs)
+  Object.freeze(screens)
+
+  const tabNavigatorConfig = {
+    tabBarPosition: 'bottom'
   }
 
-  willBeAtTop (navigator = this.navigator) {
-    return navigator.getCurrentRoutes().length === 2
-  }
+  const NavigatorWithBar = TabNavigator(
+    mergeRouteConfigsByTab(openDrawer, tabs, screens),
+    tabNavigatorConfig
+  )
 
-  isAtTop (navigator = this.navigator) {
-    return navigator.getCurrentRoutes().length === 1
-  }
-
-  render () {
-    const { onNavigate, navigatorProps } = this.props
-    const renderScene = makeRenderScene({onNavigate})
-
-    const navigationBar = <Navigator.NavigationBar
-      style={styles.navigationBar[this.props.variant]}
-      routeMapper={this.routeMapper} />
-
-    return <Navigator {...navigatorProps} renderScene={renderScene}
-      navigationBar={navigationBar}
-      ref={ref => { this.navigator = ref }} />
-  }
+  return <NavigatorWithBar />
 }
 
-const styles = {
-  navigationBar: {
-    home: {
-      backgroundColor: '#0dc3a0'
-    },
-    members: {
-      backgroundColor: '#9883e5'
-    },
-    topics: {
-      backgroundColor: '#bb60a8'
+function mergeRouteConfigsByTab (openDrawer, tabs, screens) {
+  // merge tabs and scenes
+  // add configuration options for each scene
+  // create a StackNavigator for each tab
+  // return an object that can be passed into TabNavigator
+  const stackNavigators = {}
+  const routeConfigs = {}
+  for (const key of Object.keys(tabs)) {
+    const obj = {}
+    obj[key] = tabs[key]
+    const stackPaths = Object.assign({}, ...[obj, screens])
+    const sceneConfigs = {
+      initialRouteName: key,
+      navigationOptions: {
+        title: key,
+        headerRight: <TouchableOpacity>
+          <Text onPress={openDrawer}>Menu</Text>
+        </TouchableOpacity>
+      }
     }
-  },
-  navigationTitle: {
-    ...mixins.navigationText
-  },
-  navigationLeftButton: {
-    ...mixins.navigationText,
-    paddingLeft: 10,
-    paddingRight: 10
+    stackNavigators[`${key}Navigator`] = StackNavigator(
+        stackPaths, sceneConfigs
+      )
+    routeConfigs[key] = {screen: stackNavigators[`${key}Navigator`]}
   }
+  return routeConfigs
 }
