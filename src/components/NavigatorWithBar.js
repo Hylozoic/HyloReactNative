@@ -6,36 +6,41 @@ import MyPosts from './MyPosts'
 import Post from './Post'
 import Settings from './Settings'
 
-const tabScreens = {
+const tabs = {
   Home: {screen: MyPosts},
   Members: {screen: WelcomeScene},
   Topics: {screen: WelcomeScene}
 }
 
-let paths = {
+const screens = {
   Post: {screen: Post},
   MyPosts: {screen: MyPosts},
   WelcomeScene: {screen: WelcomeScene}
 }
 
-const navigatorConfig = {
+Object.freeze(tabs);
+Object.freeze(screens);
+
+const tabNavigatorConfig = {
   tabBarPosition: 'bottom'
 }
 
-const stackNavigators = {};
-const routeConfigs = {};
-console.log('keys');
-console.log(Object.keys(tabScreens))
-for (const key of Object.keys(tabScreens)) {
-    const obj = {};
-    obj[key] = tabScreens[key];
-    const tabPaths = Object.assign({}, ...[obj, paths]);
-    const tabConfigs = {
-      initialRouteName: key
-    }
-    stackNavigators[`${key}Navigator`] = StackNavigator(tabPaths, tabConfigs);
-    routeConfigs[key] = { screen: stackNavigators[`${key}Navigator`]};
+function createRouteConfigs() {
+  const stackNavigators = {};
+  const routeConfigs = {};
+  for (const key of Object.keys(tabs)) {
+      const obj = {};
+      obj[key] = tabs[key];
+      const tabPaths = Object.assign({}, ...[obj, screens]);
+      const tabConfigs = {
+        initialRouteName: key
+      }
+      stackNavigators[`${key}Navigator`] = StackNavigator(tabPaths, tabConfigs);
+      routeConfigs[key] = { screen: stackNavigators[`${key}Navigator`]};
+  }
+  return routeConfigs;
 }
 
-const NavigatorWithBar = TabNavigator(routeConfigs, navigatorConfig);
+
+const NavigatorWithBar = TabNavigator(createRouteConfigs(), tabNavigatorConfig);
 export default NavigatorWithBar;
