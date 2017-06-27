@@ -4,6 +4,7 @@ import NavigatorWithBar from './NavigatorWithBar'
 import DrawerMenu from './DrawerMenu'
 import WelcomeScene from './WelcomeScene'
 import MyPosts from './MyPosts'
+import Feed from './Feed'
 import Settings from './Settings'
 import Drawer from 'react-native-drawer'
 import TabNavigator from 'react-native-tab-navigator'
@@ -26,7 +27,7 @@ export default class DrawerAndTabs extends React.Component {
     }
 
     const initialRoute = id === 'home'
-      ? {title: 'Welcome', component: MyPosts}
+      ? {title: 'Welcome', component: Feed}
       : {title: 'Welcome', component: WelcomeScene}
 
     return <NavigatorWithBar openDrawer={this.openDrawer} variant={id}

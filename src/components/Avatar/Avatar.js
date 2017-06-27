@@ -2,9 +2,9 @@ import React, { PropTypes } from 'react'
 import { Image, View } from 'react-native'
 import { memoize } from 'lodash'
 
-export default function Avatar ({ size, hasBorder, hasOverlap, avatarUrl, zIndex }) {
+export default function Avatar ({ size, hasBorder, hasOverlap, avatarUrl, zIndex, style }) {
   const styles = generateStyles({ size, hasBorder, hasOverlap })
-  return <View style={[styles.container, {zIndex}]}>
+  return <View style={[styles.container, {zIndex}, style]}>
     <Image style={styles.image} source={{uri: avatarUrl}} />
   </View>
 }

@@ -18,13 +18,14 @@ export default function PostHeader ({
 }) {
   // TODO: person name and avatar should link to={personUrl(creator.id, slug)}
   // TODO: date should use humanDate, but importing hylo-utils needs fixing
+
   return <View style={styles.container}>
     <View style={styles.avatarSpacing}>
       <Avatar avatarUrl={avatarUrl} />
     </View>
     <View style={styles.meta}>
       <Text style={styles.username}>{name}</Text>
-      {tagline && <Text style={styles.metaText}>{tagline}</Text>}
+      {!!tagline && <Text style={styles.metaText}>{tagline}</Text>}
       <Text style={styles.metaText}>10 mins ago</Text>
     </View>
     <View style={styles.upperRight}>

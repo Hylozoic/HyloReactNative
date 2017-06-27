@@ -19,6 +19,21 @@ WEB_GOOGLE_CLIENT_ID=xyzw.apps.googleusercontent.com
 
 It's crucial to remember that, unlike a server-side `.env`, these values are _not protected_ and will be bundled into code that is sent to the user's device. If there's anything that a user isn't supposed to know about: keys, passwords, hashes etc, best practice is to store them behind the API and not client-side.
 
+3. We share a couple of login-related config files which need some configuration on your machine. First, obtain a copy of `google-services.json` from a team member and place it in `android/app`.
+
+4. Next, obtain a copy of `GoogleService-Info.plist` from a team member and place it in `ios`.
+
+5. Finally, get a copy of `debug.keystore` and place it in `android/app`. Note that we use a shared keystore for development, so the one that React Native might've generated in `~/.android/debug.keystore` won't work.
+
+So that's four files you need:
+
+```
+.env.development
+android/app/google-services.json
+android/app/debug.keystore
+ios/GoogleService-Info.plist
+```
+
 
 #### Every time
 

@@ -42,12 +42,14 @@ export default class MyPosts extends Component {
   }
 
   render () {
-    return <ListView
-      title='My Posts'
-      style={styles.container}
-      dataSource={this.state.posts}
-      renderRow={post => <PostRow post={post} />}
-      enableEmptySections />
+    return <View>
+      <ListView
+        title='My Posts'
+        style={styles.container}
+        dataSource={this.state.posts}
+        renderRow={post => <PostRow post={post} />}
+        enableEmptySections />
+    </View>
   }
 }
 

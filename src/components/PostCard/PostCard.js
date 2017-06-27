@@ -75,9 +75,7 @@ const styles = {
     borderWidth: 1,
     borderColor: capeCod10,
     borderRadius: 4,
-    backgroundColor: 'white',
-    marginLeft: 8, // TODO: remove this, let the wrapper handle this
-    marginRight: 8 // TODO: remove this, let the wrapper handle this
+    backgroundColor: 'white'
   },
   imageMargin: {
     marginBottom: 12

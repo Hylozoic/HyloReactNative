@@ -1,0 +1,201 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FeedBanner renders correctly with a community and user 1`] = `
+<View
+  style={
+    Object {
+      "marginBottom": 54,
+      "zIndex": 10,
+    }
+  }
+>
+  <Image
+    source={
+      Object {
+        "uri": "community.png",
+      }
+    }
+    style={
+      Object {
+        "height": 152,
+      }
+    }
+  />
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "left": 0,
+        "marginLeft": 16,
+        "marginRight": 16,
+        "position": "absolute",
+        "right": 0,
+        "top": 75,
+      }
+    }
+  >
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "backgroundColor": "transparent",
+          "color": "white",
+          "fontSize": 24,
+          "fontWeight": "bold",
+        }
+      }
+    />
+  </View>
+  <PostPrompt
+    currentUser={
+      Object {
+        "avatarUrl": "user.png",
+        "firstName": [Function],
+        "id": "2",
+        "name": "John Wayne",
+      }
+    }
+    newPost={[Function]}
+  />
+  <View
+    style={
+      Object {
+        "backgroundColor": "white",
+        "borderRadius": 4,
+        "height": 60,
+        "left": 0,
+        "marginLeft": 16,
+        "marginRight": 16,
+        "position": "absolute",
+        "right": 0,
+        "shadowColor": "#EBEBEB",
+        "shadowOffset": Object {
+          "height": 4,
+          "width": 0,
+        },
+        "shadowOpacity": 1,
+        "shadowRadius": 5,
+        "top": 122,
+        "zIndex": -10,
+      }
+    }
+  />
+</View>
+`;
+
+exports[`FeedBanner renders correctly with all=true, and no community or user 1`] = `
+<View
+  style={
+    Object {
+      "marginBottom": 54,
+      "zIndex": 10,
+    }
+  }
+>
+  <Image
+    source={
+      Object {
+        "uri": "https://d3ngex8q79bk55.cloudfront.net/misc/default_community_banner.jpg",
+      }
+    }
+    style={
+      Object {
+        "height": 152,
+      }
+    }
+  />
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "left": 0,
+        "marginLeft": 16,
+        "marginRight": 16,
+        "position": "absolute",
+        "right": 0,
+        "top": 75,
+      }
+    }
+  >
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "backgroundColor": "transparent",
+          "color": "white",
+          "fontSize": 24,
+          "fontWeight": "bold",
+        }
+      }
+    >
+      All Communities
+    </Text>
+  </View>
+  <PostPrompt
+    currentUser={undefined}
+    newPost={[Function]}
+  />
+</View>
+`;
+
+exports[`PostPrompt renders correctly with a user 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "white",
+      "borderRadius": 4,
+      "height": 60,
+      "left": 0,
+      "marginLeft": 16,
+      "marginRight": 16,
+      "padding": 12,
+      "position": "absolute",
+      "right": 0,
+      "top": 122,
+    }
+  }
+>
+  <TouchableOpacity
+    activeOpacity={0.2}
+    focusedOpacity={0.7}
+    onPress={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "flexDirection": "row",
+      }
+    }
+  >
+    <Avatar
+      avatarUrl="user.png"
+      style={
+        Object {
+          "marginRight": 12,
+        }
+      }
+    />
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "color": "#A79A9A",
+          "fontSize": 15,
+        }
+      }
+    >
+      Hi, 
+      John
+      , what's on your mind?
+    </Text>
+  </TouchableOpacity>
+</View>
+`;

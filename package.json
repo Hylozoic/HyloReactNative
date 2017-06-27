@@ -4,6 +4,9 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
+    "android": "react-native run-android",
+    "android:device": "adb reverse tcp:3001 tcp:3001 && react-native run-android",
+    "ios": "react-native run-ios",
     "test": "jest"
   },
   "dependencies": {
@@ -69,6 +72,7 @@
       "expect",
       "fetch",
       "it",
+      "describe",
       "jest"
     ]
   }
