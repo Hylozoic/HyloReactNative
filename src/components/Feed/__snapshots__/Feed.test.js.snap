@@ -10,25 +10,27 @@ exports[`renders correctly 1`] = `
     }
   }
 >
-  <FeedBanner
-    all={false}
-    community={
-      Object {
-        "id": "1",
-      }
-    }
-    currentUser={
-      Object {
-        "id": "2",
-      }
-    }
-    newPost={[Function]}
-  />
   <Connect(FeedList)
     community={
       Object {
         "id": "1",
       }
+    }
+    header={
+      <FeedBanner
+        all={false}
+        community={
+          Object {
+            "id": "1",
+          }
+        }
+        currentUser={
+          Object {
+            "id": "2",
+          }
+        }
+        newPost={[Function]}
+      />
     }
   />
 </View>

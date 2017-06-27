@@ -20,21 +20,27 @@ export default class FeedList extends Component {
   }
 
   render () {
-    const { posts, fetchMorePosts, filter, sortBy, setFilter, setSort, pending } = this.props
+    const { posts, fetchMorePosts, filter, sortBy, setFilter, setSort, pending, header } = this.props
 
-    return <View style={styles.container}>
+    const listHeaderComponent = <View>
+      {header}
       <ListControls
         filter={filter}
         sortBy={sortBy}
         setFilter={setFilter}
         setSort={setSort}
+        pending={pending}
         />
       {pending && <Loading />}
+    </View>
+
+    return <View style={styles.container}>
       <FlatList
         data={posts}
         renderItem={({ item }) => <PostRow post={item} />}
         keyExtractor={(item, index) => item.id}
         onEndReached={fetchMorePosts}
+        ListHeaderComponent={listHeaderComponent}
         />
     </View>
   }
