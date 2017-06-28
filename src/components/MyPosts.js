@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import { ListView, TouchableOpacity, View } from 'react-native'
 import fetchGraphQL from '../util/fetchGraphQL'
-import mixins from '../style/mixins'
-import Post from './Post'
 import PostCard from './PostCard'
 import samplePost from './PostCard/samplePost'
 
