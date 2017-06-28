@@ -22,7 +22,6 @@ const styles = {
   post: {
     padding: 10,
     backgroundColor: '#fff',
-    ...mixins.belowNavigationBar,
     flex: 1
   },
   lips: {
