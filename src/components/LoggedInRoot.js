@@ -1,5 +1,5 @@
 import React from 'react'
-import DrawerAndTabs from './DrawerAndTabs'
+import RootNavigator from './RootNavigator'
 import fetchCurrentUser from '../store/actions/fetchCurrentUser'
 import { connect } from 'react-redux'
 import { ActionSheetProvider } from '@expo/react-native-action-sheet'
@@ -18,17 +18,10 @@ class LoggedInRoot extends React.Component {
   render () {
     return (
       <ActionSheetProvider>
-        <DrawerAndTabs />
+        <RootNavigator />
       </ActionSheetProvider>
     )
   }
 }
 
 export default connect(null, {fetchCurrentUser})(LoggedInRoot)
-
-const styles = {
-  navigator: {
-    // this is the color behind the receding view during FloatFromBottom
-    backgroundColor: 'black'
-  }
-}

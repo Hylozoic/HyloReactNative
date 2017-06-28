@@ -10,14 +10,19 @@ exports[`FeedList renders correctly 1`] = `
     }
   }
 >
-  <ListControls
-    filter="all"
-    setFilter={[Function]}
-    setSort={[Function]}
-    sortBy="latest"
-  />
-  <Loading />
   <FlatList
+    ListHeaderComponent={
+      <View>
+        <ListControls
+          filter="all"
+          pending={true}
+          setFilter={[Function]}
+          setSort={[Function]}
+          sortBy="latest"
+        />
+        <Loading />
+      </View>
+    }
     data={
       Array [
         1,

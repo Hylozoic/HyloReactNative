@@ -1,4 +1,5 @@
-import React, { PropTypes, Component } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { Image, ListView, Text, TouchableOpacity, View } from 'react-native'
 import { delay } from 'lodash'
 import { get, isEmpty } from 'lodash/fp'
@@ -48,7 +49,7 @@ export default class DrawerMenu extends Component {
         enableEmptySections />
       <View style={styles.footer}>
         <Image source={{uri: get('avatarUrl', currentUser)}} style={styles.avatar} />
-        <View>
+        <View style={styles.footerContent}>
           <Text style={styles.footerTopText} numberOfLines={1}>
             Hello, {name}!
           </Text>
@@ -74,11 +75,10 @@ function TextButton ({ text, onPress }) {
   </TouchableOpacity>
 }
 
-function CommunityRow ({ community }, { navigate }) {
+function CommunityRow ({ community }) {
   const showCommunity = () => {
     console.log(`clicked on ${community.name}`)
   }
-    // navigate({title: 'Community', component: Post, props: {post}})
 
   return <View style={styles.communityRow}>
     <TouchableOpacity onPress={showCommunity} style={styles.communityRowTouchable}>
@@ -87,4 +87,3 @@ function CommunityRow ({ community }, { navigate }) {
     </TouchableOpacity>
   </View>
 }
-CommunityRow.contextTypes = {navigate: React.PropTypes.func}

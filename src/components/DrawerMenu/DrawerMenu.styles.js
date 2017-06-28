@@ -49,6 +49,9 @@ export default {
     flexDirection: 'row',
     alignItems: 'stretch'
   },
+  footerContent: {
+    flex: 1
+  },
   avatar: {
     marginRight: 10,
     width: 40,

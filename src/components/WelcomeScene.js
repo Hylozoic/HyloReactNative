@@ -7,7 +7,6 @@ import {
   Text,
   View
 } from 'react-native'
-import MyPosts from './MyPosts'
 import { connect } from 'react-redux'
 import getMe from '../store/selectors/getMe'
 
@@ -17,8 +16,6 @@ const placeholderUser = {
 }
 
 class WelcomeScene extends React.Component {
-  static contextTypes = {navigate: React.PropTypes.func}
-
   constructor (props) {
     super(props)
     this.state = {}
@@ -27,8 +24,8 @@ class WelcomeScene extends React.Component {
   render () {
     const { currentUser, navigation } = this.props
     const { name, avatarUrl } = currentUser || placeholderUser
-    const showMyPosts = () =>
-      navigation.navigate('MyPosts');
+    const showFeed = () =>
+      navigation.navigate('Feed')
 
     return <View style={styles.container}>
       <Text style={styles.fineprint}>
@@ -40,7 +37,7 @@ class WelcomeScene extends React.Component {
         Hello, {name}!
       </Text>
       <Image source={{uri: avatarUrl}} style={styles.axolotl} />
-      <Button onPress={showMyPosts} title='Show my posts' />
+      <Button onPress={showFeed} title='Show feed' />
     </View>
   }
 }

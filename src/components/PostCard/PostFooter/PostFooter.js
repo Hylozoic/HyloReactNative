@@ -4,8 +4,7 @@ import { slice } from 'lodash/fp'
 import Avatar from '../../Avatar'
 import Icon from '../../Icon'
 import { rhino30 } from '../../../style/colors'
-
-const { string, array, number, func, object } = React.PropTypes
+import { string, array, number, func, object } from 'prop-types'
 
 export default function PostFooter ({
   id,
