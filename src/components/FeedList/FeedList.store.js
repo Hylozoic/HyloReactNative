@@ -83,7 +83,7 @@ export function fetchPosts ({ subject, slug, sortBy, offset, search, filter, top
         offset,
         search,
         filter,
-        first: 20,
+        first: 10,
         topic
       }
     },

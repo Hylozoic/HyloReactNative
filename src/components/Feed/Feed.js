@@ -9,9 +9,12 @@ export default class Feed extends Component {
     const { community, currentUser, newPost } = this.props
 
     return <View style={styles.container}>
-      <FeedBanner community={community} currentUser={currentUser}
-        all={!community} newPost={newPost} />
-      <FeedList community={community} />
+      <FeedList
+        community={community}
+        header={
+          <FeedBanner community={community} currentUser={currentUser}
+            all={!community} newPost={newPost} />
+        } />
     </View>
   }
 }
