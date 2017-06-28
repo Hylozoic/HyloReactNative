@@ -13,15 +13,15 @@ export default class Comments extends React.Component {
 
   render () {
     const {
-      comments
+      comments,
+      header
     } = this.props
-
-    console.log('rendering comments', comments)
 
     return <FlatList
       data={comments}
       renderItem={({ item }) => <Comment comment={item} style={styles.commentRow} />}
       keyExtractor={(item, index) => item.id}
+      ListHeaderComponent={header}
     />
   }
 }

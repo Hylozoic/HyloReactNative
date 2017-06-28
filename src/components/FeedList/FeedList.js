@@ -90,7 +90,7 @@ export function ListControl ({ selected, options, onChange }) {
 
 export class PostRow extends PureComponent {
   render () {
-    const { post, showPost} = this.props
+    const { post, showPost } = this.props
 
     return <View style={styles.postRow}>
       <TouchableOpacity onPress={() => showPost(post.id)}>

@@ -41,7 +41,7 @@ export default class PostCard extends React.Component {
 
   render () {
     const {
-      post, showDetails, editPost, showCommunity, currentUser
+      post, editPost, showCommunity, currentUser
     } = this.props
     const slug = get('0.slug', post.communities)
 

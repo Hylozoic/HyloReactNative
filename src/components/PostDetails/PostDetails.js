@@ -45,7 +45,7 @@ export default class PostDetails extends React.Component {
 
     const { location } = post
 
-    return <View style={styles.container}>
+    const postCard = <View>
       <PostHeader creator={post.creator}
         date={post.updatedAt || post.createdAt}
         type={post.type}
@@ -70,7 +70,12 @@ export default class PostDetails extends React.Component {
         votesTotal={post.votesTotal}
         myVote={post.myVote}
         showActivityLabel />
-      <Comments postId={post.id} />
+    </View>
+
+    return <View style={styles.container}>
+      <Comments
+        header={postCard}
+        postId={post.id} />
     </View>
   }
 }
