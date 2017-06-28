@@ -31,7 +31,7 @@ export default class DrawerMenu extends Component {
   }
 
   render () {
-    const { close, showSettings, currentUser } = this.props
+    const { close, showSettings, logout, currentUser } = this.props
     const name = get('name', currentUser) || 'you'
 
     return <View style={styles.parent}>
@@ -48,13 +48,14 @@ export default class DrawerMenu extends Component {
         enableEmptySections />
       <View style={styles.footer}>
         <Image source={{uri: get('avatarUrl', currentUser)}} style={styles.avatar} />
-        <View>
+        <View style={styles.footerContent}>
           <Text style={styles.footerTopText} numberOfLines={1}>
             Hello, {name}!
           </Text>
           <View style={styles.footerButtons}>
             <TextButton text='View Profile' onPress={() => {}} />
             <TextButton text='Settings' onPress={() => [showSettings(), delay(close, 300)]} />
+            <TextButton text='Log out' onPress={logout} />
           </View>
         </View>
       </View>

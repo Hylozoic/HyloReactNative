@@ -6,29 +6,30 @@ exports[`renders correctly 1`] = `
     Object {
       "backgroundColor": "white",
       "flex": 1,
-      "marginTop": 64,
     }
   }
 >
-  <FeedBanner
-    all={false}
-    community={
-      Object {
-        "id": "1",
-      }
-    }
-    currentUser={
-      Object {
-        "id": "2",
-      }
-    }
-    newPost={[Function]}
-  />
   <Connect(FeedList)
     community={
       Object {
         "id": "1",
       }
+    }
+    header={
+      <FeedBanner
+        all={false}
+        community={
+          Object {
+            "id": "1",
+          }
+        }
+        currentUser={
+          Object {
+            "id": "2",
+          }
+        }
+        newPost={[Function]}
+      />
     }
   />
 </View>

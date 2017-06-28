@@ -18,10 +18,6 @@ export default {
     paddingTop: isIOS ? 20 : 0
   },
 
-  belowNavigationBar: {
-    marginTop: 80
-  },
-
   justBelowNavigationBar: {
     marginTop: 64
   }
