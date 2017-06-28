@@ -1,5 +1,5 @@
 import React from 'react'
-import DrawerAndTabs from './DrawerAndTabs'
+import NavigatorWithBar from './NavigatorWithBar'
 import fetchCurrentUser from '../store/actions/fetchCurrentUser'
 import { connect } from 'react-redux'
 
@@ -15,7 +15,7 @@ class LoggedInRoot extends React.Component {
   }
 
   render () {
-    return <DrawerAndTabs />
+    return <NavigatorWithBar />
   }
 }
 

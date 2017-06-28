@@ -1,42 +1,56 @@
-import React from 'react'
-import { TabNavigator, StackNavigator } from 'react-navigation'
-import { Text, TouchableOpacity } from 'react-native'
+import {
+  DrawerNavigator,
+  TabNavigator,
+  StackNavigator
+} from 'react-navigation'
 
 import WelcomeScene from './WelcomeScene'
 import MyPosts from './MyPosts'
 import Post from './Post'
 import Settings from './Settings'
+import DrawerMenu from './DrawerMenu'
 
-export default function NavigatorWithBar ({ openDrawer }) {
-  const tabs = {
-    Home: {screen: MyPosts},
-    Members: {screen: WelcomeScene},
-    Topics: {screen: WelcomeScene}
-  }
-
-  const screens = {
-    Post: {screen: Post},
-    MyPosts: {screen: MyPosts},
-    WelcomeScene: {screen: WelcomeScene},
-    Settings: {screen: Settings}
-  }
-
-  Object.freeze(tabs)
-  Object.freeze(screens)
-
-  const tabNavigatorConfig = {
-    tabBarPosition: 'bottom'
-  }
-
-  const NavigatorWithBar = TabNavigator(
-    mergeRouteConfigsByTab(openDrawer, tabs, screens),
-    tabNavigatorConfig
-  )
-
-  return <NavigatorWithBar />
+const tabs = {
+  Home: {screen: MyPosts},
+  Members: {screen: WelcomeScene},
+  Topics: {screen: WelcomeScene}
 }
 
-function mergeRouteConfigsByTab (openDrawer, tabs, screens) {
+const screens = {
+  Post: {screen: Post},
+  MyPosts: {screen: MyPosts},
+  WelcomeScene: {screen: WelcomeScene},
+  Settings: {screen: Settings}
+}
+
+Object.freeze(tabs)
+Object.freeze(screens)
+
+const tabNavigatorConfig = {
+  tabBarPosition: 'bottom'
+}
+
+const TabNavigatorWithBar = TabNavigator(
+  mergeRouteConfigsByTab(tabs, screens),
+  tabNavigatorConfig
+)
+
+const drawerNavigatorRoutes = {
+  Home: { screen: TabNavigatorWithBar }
+}
+
+const drawerNavigatorConfig = {
+  contentComponent: DrawerMenu
+}
+
+const NavigatorWithBar = DrawerNavigator(
+  drawerNavigatorRoutes,
+  drawerNavigatorConfig
+)
+
+export default NavigatorWithBar
+
+function mergeRouteConfigsByTab (tabs, screens) {
   // merge tabs and scenes
   // add configuration options for each scene
   // create a StackNavigator for each tab
@@ -50,10 +64,7 @@ function mergeRouteConfigsByTab (openDrawer, tabs, screens) {
     const sceneConfigs = {
       initialRouteName: key,
       navigationOptions: {
-        title: key,
-        headerRight: <TouchableOpacity>
-          <Text onPress={openDrawer}>Menu</Text>
-        </TouchableOpacity>
+        title: key
       }
     }
     stackNavigators[`${key}Navigator`] = StackNavigator(
