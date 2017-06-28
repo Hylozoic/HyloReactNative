@@ -16,22 +16,22 @@ export default {
     marginLeft: 12,
     marginRight: 12,
     borderTopWidth: 1,
+    borderBottomWidth: 1,
     borderColor: capeCod10,
     height: 46,
     flexDirection: 'row',
-    alignItems: 'center',
-    fontSize: 14,
-    color: mineralGreen,
-  },
-  bottomInfoRow: {
-    marginBottom: 15,
-    borderBottomWidth: 1,
+    alignItems: 'center'
   },
   infoRowLabel: {
+    color: mineralGreen,
     fontFamily: 'Circular-Bold',
     marginRight: 10
   },
   infoRowInfo: {
+    color: mineralGreen,
     fontFamily: 'Circular-Regular'
+  },
+  commentRow: {
+    
   }
 }

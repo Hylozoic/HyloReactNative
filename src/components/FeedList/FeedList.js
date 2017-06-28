@@ -18,6 +18,11 @@ export default class FeedList extends Component {
         prevProps.filter !== this.props.filter) {
       this.props.fetchPosts()
     }
+
+    const { navigate } = this.context
+    if (typeof navigate === 'function') {
+      navigate({title: 'Post', component: PostDetails, props: {id: '23805'}})
+    }
   }
 
   render () {

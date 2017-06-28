@@ -5,6 +5,9 @@ export const bigStone = '#142132'
 export const mirage = '#1F2C3D'
 export const rhino = '#2C4059'
 export const mineralGreen = '#304843'
+export const limedSpruce = '#38474A'
+export const slateGrey = '#67768A'
+export const nevada = '#5D757A'
 
 // these colors are the equivalent of reducing the opacity of the colors named
 // above, on a white background. use these where possible, to avoid any impact
@@ -13,3 +16,5 @@ export const capeCod10 = '#EBEBEB'
 export const capeCod40 = '#A79A9A'
 export const rhino30 = '#AAACAC'
 export const rhino50 = '#8994A3'
+export const rhino80 = '#56667a'
+export const slateGrey80 = '#8490a1'

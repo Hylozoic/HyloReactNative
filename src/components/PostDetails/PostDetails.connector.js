@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 import { createSelector as ormCreateSelector } from 'reselect'
 import orm from '../../store/models'
+import fetchPost from '../../store/actions/fetchPost'
 
 const getPost = ormCreateSelector(
   state => state,
@@ -23,17 +24,17 @@ const getPost = ormCreateSelector(
 
 function mapStateToProps (state, props) {
   const post = getPost(state, props)
-
-  console.log('post', post)
-  console.log('post.comments', post.comments)
-
   return {
     post
   }
 }
 
 function mapDispatchToProps (dispatch, props) {
-  return {}
+  const { id } = props
+
+  return {
+    fetchPost: () => dispatch(fetchPost(id))
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)

@@ -5,8 +5,9 @@ import PostHeader from '../PostCard/PostHeader'
 import PostBody from '../PostCard/PostBody'
 import SpaceFillingImage from '../SpaceFillingImage'
 import PostFooter from '../PostCard/PostFooter'
+import Comments from '../Comments'
 import { get } from 'lodash/fp'
-const { shape, any, object, string, func, array, bool } = React.PropTypes
+const { shape, any, object, string, func, array } = React.PropTypes
 import styles from './PostDetails.styles'
 
 export default class PostDetails extends React.Component {
@@ -28,6 +29,10 @@ export default class PostDetails extends React.Component {
       avatarUrl: string
     }),
     editPost: func
+  }
+
+  componentDidMount () {
+    this.props.fetchPost()
   }
 
   render () {
@@ -54,7 +59,7 @@ export default class PostDetails extends React.Component {
       <PostBody title={post.title}
         details={post.details}
         linkPreview={post.linkPreview} />
-      {!!location && <View style={styles.infoRow}>
+      {!!location && <View style={[styles.infoRow, styles.bottomInfoRow]}>
         <Text style={styles.infoRowLabel}>Location:</Text>
         <Text style={styles.infoRowinfo}>{location}</Text>
       </View>}
@@ -65,6 +70,7 @@ export default class PostDetails extends React.Component {
         votesTotal={post.votesTotal}
         myVote={post.myVote}
         showActivityLabel />
+      <Comments postId={post.id} />
     </View>
   }
 }
