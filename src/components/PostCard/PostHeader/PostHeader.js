@@ -1,10 +1,9 @@
 import React from 'react'
-import { View, Text, TouchableOpacity } from 'react-native'
+import { View, Text } from 'react-native'
 import Avatar from '../../Avatar'
 import Icon from '../../Icon'
 import { rhino30, rhino50 } from '../../../style/colors'
 // import { humanDate } from 'hylo-utils/text'
-import { connectActionSheet} from '@expo/react-native-action-sheet'
 import PopupMenu from '../../PopupMenu'
 
 export default function PostHeader ({
