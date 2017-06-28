@@ -16,6 +16,8 @@ export default class Comments extends React.Component {
       comments
     } = this.props
 
+    console.log('rendering comments', comments)
+
     return <FlatList
       data={comments}
       renderItem={({ item }) => <Comment comment={item} style={styles.commentRow} />}

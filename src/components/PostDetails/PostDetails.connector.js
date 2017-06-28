@@ -22,8 +22,12 @@ const getPost = ormCreateSelector(
   }
 )
 
+function getPostId (state, props) {
+  return props.navigation.state.params.id
+}
+
 function mapStateToProps (state, props) {
-  const { id } = props.navigation.state.params
+  const id = getPostId(state, props)
   const post = getPost(state, {id})
 
   return {
@@ -32,7 +36,7 @@ function mapStateToProps (state, props) {
 }
 
 function mapDispatchToProps (dispatch, props) {
-  const { id } = props
+  const id = getPostId(null, props)
 
   return {
     fetchPost: () => dispatch(fetchPost(id))
