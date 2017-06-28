@@ -8,7 +8,7 @@ import PostFooter from './PostFooter'
 import samplePost from './samplePost'
 import { get } from 'lodash/fp'
 import { capeCod10 } from '../../style/colors'
-const { shape, any, object, string, func, array, bool } = React.PropTypes
+import { shape, any, object, string, func, array, bool } from 'prop-types'
 
 export default class PostCard extends React.Component {
   static propTypes = {

@@ -1,7 +1,6 @@
 import React from 'react'
 import { View, Image } from 'react-native'
-
-const { string } = React.PropTypes
+import { string } from 'prop-types'
 
 export default class SpaceFillingImage extends React.Component {
   static propTypes = {

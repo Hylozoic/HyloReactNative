@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import { IOS_GOOGLE_CLIENT_ID, WEB_GOOGLE_CLIENT_ID } from 'react-native-dotenv'
 import { GoogleSignin, GoogleSigninButton } from 'react-native-google-signin'
 

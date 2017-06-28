@@ -4,8 +4,7 @@ import { slice } from 'lodash/fp'
 import Avatar from '../../Avatar'
 import Icon from '../../Icon'
 import { rhino30, rhino80 } from '../../../style/colors'
-
-const { string, array, number, func, object } = React.PropTypes
+import { string, array, number, func, object } from 'prop-types'
 
 export default function PostFooter ({
   id,
@@ -65,7 +64,7 @@ const styles = {
   comments: {
     flex: 1,
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   commentsText: {
     paddingLeft: 6,
