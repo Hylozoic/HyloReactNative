@@ -15,9 +15,7 @@ class LoggedInRoot extends React.Component {
   }
 
   render () {
-    return (
-      <RootNavigator />
-    )
+    return <RootNavigator />
   }
 }
 
