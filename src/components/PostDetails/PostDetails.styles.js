@@ -1,6 +1,9 @@
 import { capeCod10, mineralGreen } from '../../style/colors'
 
 export default {
+  postCard: {
+    marginBottom: 8
+  },
   container: {
     flex: 1,
     backgroundColor: 'white',

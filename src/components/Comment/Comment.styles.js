@@ -1,11 +1,11 @@
-import mixins from '../../style/mixins'
 import { limedSpruce, slateGrey80, nevada } from '../../style/colors'
 
 export default {
   container: {
     flexDirection: 'row',
     marginLeft: 12,
-    marginRight: 12
+    marginRight: 12,
+    marginBottom: 30
   },
   avatar: {
     marginRight: 10

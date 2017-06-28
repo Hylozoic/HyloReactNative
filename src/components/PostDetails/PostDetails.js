@@ -45,7 +45,7 @@ export default class PostDetails extends React.Component {
 
     const { location } = post
 
-    const postCard = <View>
+    const postCard = <View style={styles.postCard}>
       <PostHeader creator={post.creator}
         date={post.updatedAt || post.createdAt}
         type={post.type}
