@@ -43,12 +43,12 @@ const drawerNavigatorConfig = {
   contentComponent: DrawerMenu
 }
 
-const NavigatorWithBar = DrawerNavigator(
+const RootNavigator = DrawerNavigator(
   drawerNavigatorRoutes,
   drawerNavigatorConfig
 )
 
-export default NavigatorWithBar
+export default RootNavigator
 
 function mergeRouteConfigsByTab (tabs, screens) {
   // merge tabs and scenes
