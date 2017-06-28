@@ -1,4 +1,5 @@
-import React, { createElement, PropTypes } from 'react'
+import React, { createElement } from 'react'
+import { func } from 'prop-types'
 
 export default function makeRenderScene ({ onNavigate }) {
   return function renderScene ({ component, props }, navigator) {
@@ -10,11 +11,11 @@ export default function makeRenderScene ({ onNavigate }) {
 
 class NavigationContext extends React.Component {
   static propTypes = {
-    onNavigate: PropTypes.func
+    onNavigate: func
   }
 
   static childContextTypes = {
-    navigate: PropTypes.func
+    navigate: func
   }
 
   getChildContext () {
