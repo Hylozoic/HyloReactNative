@@ -28,7 +28,7 @@ export default class FeedList extends Component {
       setSort,
       pending,
       header,
-      navigation
+      showPost
     } = this.props
 
     const listHeaderComponent = <View>
@@ -46,7 +46,7 @@ export default class FeedList extends Component {
     return <View style={styles.container}>
       <FlatList
         data={posts}
-        renderItem={({ item }) => <PostRow post={item} navigation={navigation} />}
+        renderItem={({ item }) => <PostRow post={item} showPost={showPost} />}
         keyExtractor={(item, index) => item.id}
         onEndReached={fetchMorePosts}
         ListHeaderComponent={listHeaderComponent}
@@ -90,13 +90,10 @@ export function ListControl ({ selected, options, onChange }) {
 
 export class PostRow extends PureComponent {
   render () {
-    const { post, navigation } = this.props
-
-    const showPost = () =>
-      navigation.navigate('PostDetails', {id: post.id})
+    const { post, showPost} = this.props
 
     return <View style={styles.postRow}>
-      <TouchableOpacity onPress={showPost}>
+      <TouchableOpacity onPress={() => showPost(post.id)}>
         <PostCard post={post} />
       </TouchableOpacity>
     </View>
