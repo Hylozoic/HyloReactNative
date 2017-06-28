@@ -6,7 +6,6 @@ exports[`renders a Post 1`] = `
     Object {
       "backgroundColor": "#fff",
       "flex": 1,
-      "marginTop": 80,
       "padding": 10,
     }
   }
