@@ -4,7 +4,6 @@ import styles from './FeedList.styles'
 import PostCard from '../PostCard'
 import Loading from '../Loading'
 import Icon from '../Icon'
-import PostDetails from '../PostDetails'
 import { find } from 'lodash/fp'
 
 export default class FeedList extends Component {
@@ -17,15 +16,20 @@ export default class FeedList extends Component {
         prevProps.filter !== this.props.filter) {
       this.props.fetchPosts()
     }
-
-    const { navigate } = this.context
-    if (typeof navigate === 'function') {
-      navigate({title: 'Post', component: PostDetails, props: {id: '23805'}})
-    }
   }
 
   render () {
-    const { posts, fetchMorePosts, filter, sortBy, setFilter, setSort, pending, header } = this.props
+    const {
+      posts,
+      fetchMorePosts,
+      filter,
+      sortBy,
+      setFilter,
+      setSort,
+      pending,
+      header,
+      navigation
+    } = this.props
 
     const listHeaderComponent = <View>
       {header}
@@ -42,7 +46,7 @@ export default class FeedList extends Component {
     return <View style={styles.container}>
       <FlatList
         data={posts}
-        renderItem={({ item }) => <PostRow post={item} />}
+        renderItem={({ item }) => <PostRow post={item} navigation={navigation} />}
         keyExtractor={(item, index) => item.id}
         onEndReached={fetchMorePosts}
         ListHeaderComponent={listHeaderComponent}
@@ -85,16 +89,11 @@ export function ListControl ({ selected, options, onChange }) {
 }
 
 export class PostRow extends PureComponent {
-  static contextTypes = {
-    navigate: React.PropTypes.func
-  }
-
   render () {
-    const { post } = this.props
-    const { navigate } = this.context
+    const { post, navigation } = this.props
 
     const showPost = () =>
-      navigate({title: 'Post', component: Post, props: {post}})
+      navigation.navigate('PostDetails', {id: post.id})
 
     return <View style={styles.postRow}>
       <TouchableOpacity onPress={showPost}>
@@ -103,19 +102,3 @@ export class PostRow extends PureComponent {
     </View>
   }
 }
-
-/*
-
-export function PostRow ({ post }, { navigate }) {
-  const showPost = () =>
-    navigate({title: 'Post', component: PostDetails, props: {id: post.id}})
-
-  return <View style={styles.postRow}>
-    <TouchableOpacity onPress={showPost}>
-      <PostCard post={post} />
-    </TouchableOpacity>
-  </View>
-}
-PostRow.contextTypes = {navigate: React.PropTypes.func}
-
-*/

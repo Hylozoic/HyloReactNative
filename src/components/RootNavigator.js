@@ -6,7 +6,7 @@ import {
 
 import WelcomeScene from './WelcomeScene'
 import Feed from './Feed'
-import Post from './Post'
+import PostDetails from './PostDetails'
 import Settings from './Settings'
 import DrawerMenu from './DrawerMenu'
 
@@ -17,7 +17,7 @@ const tabs = {
 }
 
 const screens = {
-  Post: {screen: Post},
+  PostDetails: {screen: PostDetails},
   Feed: {screen: Feed},
   WelcomeScene: {screen: WelcomeScene},
   Settings: {screen: Settings}

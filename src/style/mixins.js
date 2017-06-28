@@ -16,9 +16,5 @@ export default {
 
   belowStatusBar: {
     paddingTop: isIOS ? 20 : 0
-  },
-
-  justBelowNavigationBar: {
-    marginTop: 64
   }
 }

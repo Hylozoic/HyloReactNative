@@ -23,7 +23,9 @@ const getPost = ormCreateSelector(
 )
 
 function mapStateToProps (state, props) {
-  const post = getPost(state, props)
+  const { id } = props.navigation.state.params
+  const post = getPost(state, {id})
+
   return {
     post
   }

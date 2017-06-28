@@ -6,11 +6,12 @@ import styles from './Feed.styles'
 
 export default class Feed extends Component {
   render () {
-    const { community, currentUser, newPost } = this.props
+    const { community, currentUser, newPost, navigation } = this.props
 
     return <View style={styles.container}>
       <FeedList
         community={community}
+        navigation={navigation}
         header={
           <FeedBanner community={community} currentUser={currentUser}
             all={!community} newPost={newPost} />

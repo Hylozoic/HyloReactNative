@@ -16,8 +16,6 @@ const placeholderUser = {
 }
 
 class WelcomeScene extends React.Component {
-  static contextTypes = {navigate: React.PropTypes.func}
-
   constructor (props) {
     super(props)
     this.state = {}
