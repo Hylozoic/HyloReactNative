@@ -48,7 +48,7 @@ export default class DrawerMenu extends Component {
         enableEmptySections />
       <View style={styles.footer}>
         <Image source={{uri: get('avatarUrl', currentUser)}} style={styles.avatar} />
-        <View>
+        <View style={styles.footerContent}>
           <Text style={styles.footerTopText} numberOfLines={1}>
             Hello, {name}!
           </Text>
