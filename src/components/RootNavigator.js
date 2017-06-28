@@ -5,20 +5,20 @@ import {
 } from 'react-navigation'
 
 import WelcomeScene from './WelcomeScene'
-import MyPosts from './MyPosts'
+import Feed from './Feed'
 import Post from './Post'
 import Settings from './Settings'
 import DrawerMenu from './DrawerMenu'
 
 const tabs = {
-  Home: {screen: MyPosts},
+  Home: {screen: Feed},
   Members: {screen: WelcomeScene},
   Topics: {screen: WelcomeScene}
 }
 
 const screens = {
   Post: {screen: Post},
-  MyPosts: {screen: MyPosts},
+  Feed: {screen: Feed},
   WelcomeScene: {screen: WelcomeScene},
   Settings: {screen: Settings}
 }
