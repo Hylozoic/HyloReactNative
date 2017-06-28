@@ -1,9 +1,11 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, TouchableOpacity } from 'react-native'
 import Avatar from '../../Avatar'
 import Icon from '../../Icon'
 import { rhino30, rhino50 } from '../../../style/colors'
 // import { humanDate } from 'hylo-utils/text'
+import { connectActionSheet} from '@expo/react-native-action-sheet'
+import PopupMenu from '../../PopupMenu'
 
 export default function PostHeader ({
   creator: { avatarUrl, name, tagline },
@@ -19,6 +21,15 @@ export default function PostHeader ({
   // TODO: person name and avatar should link to={personUrl(creator.id, slug)}
   // TODO: date should use humanDate, but importing hylo-utils needs fixing
 
+  const onSelect = index => {
+    switch (index) {
+      case 0:
+        return deletePost()
+      case 1:
+        return editPost()
+    }
+  }
+
   return <View style={styles.container}>
     <View style={styles.avatarSpacing}>
       <Avatar avatarUrl={avatarUrl} />
@@ -30,7 +41,10 @@ export default function PostHeader ({
     </View>
     <View style={styles.upperRight}>
       {type && <PostLabel type={type} />}
-      <Icon name='More' style={styles.menuIcon} />
+
+      <PopupMenu actions={['Delete', 'Edit']} onSelect={onSelect} destructiveButtonIndex={0}>
+        <Icon name='More' style={styles.menuIcon} />
+      </PopupMenu>
     </View>
   </View>
 }
