@@ -1,0 +1,78 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "margin": 12,
+      },
+      Object {
+        "flexDirection": "row",
+        "marginBottom": 30,
+        "marginLeft": 12,
+        "marginRight": 12,
+      },
+    ]
+  }
+>
+  <Avatar
+    avatarUrl="foo.png"
+    style={
+      Object {
+        "marginRight": 10,
+      }
+    }
+  />
+  <View
+    style={undefined}
+  >
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "color": "#38474A",
+          "fontFamily": "Circular-Bold",
+          "fontSize": 14,
+        }
+      }
+    >
+      Ishamel
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "color": "#8490a1",
+          "fontFamily": "Circular-Book",
+          "fontSize": 12,
+          "marginBottom": 8,
+        }
+      }
+    >
+      3 hours ago
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "color": "#5D757A",
+          "fontFamily": "Circular-Book",
+          "fontSize": 14,
+        }
+      }
+    >
+      tick followed tock followed tick followed tock
+    </Text>
+  </View>
+</View>
+`;

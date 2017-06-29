@@ -2,13 +2,12 @@
 import React from 'react'
 import { View, Text } from 'react-native'
 import Avatar from '../Avatar'
-const { func, array } = React.PropTypes
+const { object } = React.PropTypes
 import styles from './Comment.styles'
 
-export default class Comments extends React.Component {
+export default class Comment extends React.Component {
   static propTypes = {
-    comment: array,
-    fetchComments: func
+    comment: object
   }
 
   render () {

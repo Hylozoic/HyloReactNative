@@ -40,7 +40,7 @@ export default class Comments extends React.Component {
   }
 }
 
-export function ShowMore ({commentsLength, total, hasMore, fetchComments}) {
+export function ShowMore ({total, hasMore, fetchComments}) {
   if (!hasMore) return null
 
   const extra = total - 10
