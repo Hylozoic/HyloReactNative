@@ -50,7 +50,7 @@ export default class Editor extends React.Component {
             case INSERT_TOPIC:
               return this.insertTopic()
           }
-        }}/>
+        }} />
     </KeyboardAvoidingView>
   }
 }

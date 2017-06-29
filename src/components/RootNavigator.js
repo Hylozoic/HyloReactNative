@@ -9,6 +9,7 @@ import Feed from './Feed'
 import Post from './Post'
 import Settings from './Settings'
 import DrawerMenu from './DrawerMenu'
+import PostEditor from './PostEditor'
 
 const tabs = {
   Home: {screen: Feed},
@@ -20,7 +21,8 @@ const screens = {
   Post: {screen: Post},
   Feed: {screen: Feed},
   WelcomeScene: {screen: WelcomeScene},
-  Settings: {screen: Settings}
+  Settings: {screen: Settings},
+  PostEditor: {screen: PostEditor}
 }
 
 Object.freeze(tabs)

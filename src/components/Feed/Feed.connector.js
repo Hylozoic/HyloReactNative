@@ -9,8 +9,6 @@ const sampleCommunity = {
   bannerUrl: 'https://d3ngex8q79bk55.cloudfront.net/community/1944/banner/1489687099172_ggbridge.jpg'
 }
 
-const newPost = () => console.log('open post editor')
-
 export function mapStateToProps (state, props) {
   const currentUser = getMe(state)
   return {
@@ -19,9 +17,9 @@ export function mapStateToProps (state, props) {
   }
 }
 
-export function mapDispatchToProps (dispatch, props) {
+export function mapDispatchToProps (dispatch, { navigation }) {
   return {
-    newPost
+    newPost: () => navigation.navigate('PostEditor')
   }
 }
 
