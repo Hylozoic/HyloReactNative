@@ -7,7 +7,7 @@ import SpaceFillingImage from '../SpaceFillingImage'
 import PostFooter from '../PostCard/PostFooter'
 import Comments from '../Comments'
 import { get } from 'lodash/fp'
-const { shape, any, object, string, func, array } = React.PropTypes
+const { shape, any, object, string, func, array, bool } = React.PropTypes
 import styles from './PostDetails.styles'
 
 export default class PostDetails extends React.Component {
@@ -28,7 +28,8 @@ export default class PostDetails extends React.Component {
       name: string,
       avatarUrl: string
     }),
-    editPost: func
+    editPost: func,
+    pending: bool
   }
 
   componentDidMount () {
@@ -39,7 +40,8 @@ export default class PostDetails extends React.Component {
     const {
       post,
       currentUser,
-      editPost
+      editPost,
+      pending
     } = this.props
     const slug = get('0.slug', post.communities)
 
@@ -75,7 +77,8 @@ export default class PostDetails extends React.Component {
     return <View style={styles.container}>
       <Comments
         header={postCard}
-        postId={post.id} />
+        postId={post.id}
+        postPending={pending} />
     </View>
   }
 }

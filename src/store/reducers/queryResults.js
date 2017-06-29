@@ -9,6 +9,12 @@
 import {
   FETCH_POSTS
 } from '../actions/fetchPosts'
+import {
+  FETCH_POST
+} from '../actions/fetchPost'
+import {
+  FETCH_COMMENTS
+} from '../../components/Comments/Comments.store'
 import { get, isNull, omitBy, pick, reduce, uniq } from 'lodash/fp'
 
 // reducer
@@ -26,6 +32,10 @@ export default function (state = {}, action) {
     case FETCH_POSTS:
       root = payload.data.posts || payload.data.community.posts
       return appendIds(state, type, meta.graphql.variables, root)
+    case FETCH_POST:
+    case FETCH_COMMENTS:
+      if (!payload.data.post) break
+      return appendIds(state, FETCH_COMMENTS, meta.graphql.variables, payload.data.post.comments)
   }
   return state
 }
