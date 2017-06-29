@@ -5,8 +5,6 @@ exports[`FeedList renders correctly 1`] = `
   style={
     Object {
       "backgroundColor": "white",
-      "paddingLeft": 16,
-      "paddingRight": 16,
     }
   }
 >
@@ -97,6 +95,8 @@ exports[`ListControls renders correctly 1`] = `
       "flexDirection": "row",
       "justifyContent": "space-between",
       "marginBottom": 10,
+      "marginLeft": 16,
+      "marginRight": 16,
     }
   }
 >
@@ -147,6 +147,8 @@ exports[`PostRow renders correctly 1`] = `
 <View
   style={
     Object {
+      "marginLeft": 16,
+      "marginRight": 16,
       "paddingBottom": 15,
     }
   }
