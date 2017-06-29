@@ -1,15 +1,17 @@
 import { capeCod } from '../../style/colors'
 
+const feedMargin = 16
+
 export default {
   container: {
-    backgroundColor: 'white',
-    paddingLeft: 16,
-    paddingRight: 16
+    backgroundColor: 'white'
   },
   listControls: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: 10
+    marginBottom: 10,
+    marginRight: feedMargin,
+    marginLeft: feedMargin
   },
   listControl: {
     flexDirection: 'row'
@@ -23,6 +25,8 @@ export default {
     marginLeft: 4
   },
   postRow: {
-    paddingBottom: 15
+    paddingBottom: 15,
+    marginRight: feedMargin,
+    marginLeft: feedMargin
   }
 }

@@ -6,7 +6,7 @@ import { get } from 'lodash/fp'
 const newPost = () => console.log('open post editor')
 
 export function mapStateToProps (state, props) {
-  const id = get('navigation.state.params.communityId', props)
+  const id = get('navigation.state.params.communityId', props) || 29
   const community = getCommunity(state, {id})
   const currentUser = getMe(state)
   return {
