@@ -22,8 +22,6 @@ export default class Comments extends React.Component {
       fetchComments
     } = this.props
 
-    console.log('pending', pending)
-
     const listHeaderComponent = <View>
       {header}
       {pending && <Loading />}
@@ -35,7 +33,7 @@ export default class Comments extends React.Component {
 
     return <FlatList
       data={comments}
-      renderItem={({ item }) => <Comment comment={item} style={styles.commentRow} />}
+      renderItem={({ item }) => <Comment comment={item} />}
       keyExtractor={(item, index) => item.id}
       ListHeaderComponent={listHeaderComponent}
     />

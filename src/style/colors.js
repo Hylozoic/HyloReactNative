@@ -18,6 +18,7 @@ export const nevada = '#5D757A'
 export const rhino = '#2C4059'
 export const slateGrey = '#67768A'
 export const westSide = '#FF9712'
+export const caribbeanGreen = '#0DC39F'
 
 // these colors are the equivalent of reducing the opacity of the colors named
 // above, on a white background. use these where possible, to avoid any impact

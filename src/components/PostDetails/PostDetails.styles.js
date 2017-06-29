@@ -2,7 +2,7 @@ import { capeCod10, mineralGreen } from '../../style/colors'
 
 export default {
   postCard: {
-    marginBottom: 8
+    marginBottom: 16
   },
   container: {
     flex: 1,

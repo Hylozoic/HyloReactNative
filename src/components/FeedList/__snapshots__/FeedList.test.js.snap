@@ -65,7 +65,7 @@ exports[`ListControl renders correctly 1`] = `
     ellipsizeMode="tail"
     style={
       Object {
-        "color": undefined,
+        "color": "#363D3C",
         "fontSize": 12,
       }
     }
@@ -77,7 +77,7 @@ exports[`ListControl renders correctly 1`] = `
     style={
       Array [
         Object {
-          "color": undefined,
+          "color": "#363D3C",
           "fontSize": 12,
         },
         Object {
