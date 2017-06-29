@@ -1,15 +1,11 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+
 import { View, UIManager, findNodeHandle, TouchableOpacity } from 'react-native'
 
 export default class PopupMenu extends Component {
-  static propTypes = {
-    // array of strings, will be list items of Menu
-    actions: PropTypes.arrayOf(PropTypes.string).isRequired,
-    onSelect: PropTypes.func.isRequired
-  }
 
-  onError () {
-    console.log('Popup Error')
+  onError (e) {
+    console.error("Error opening popupMenu", e)
   }
 
   onPress = () => {
