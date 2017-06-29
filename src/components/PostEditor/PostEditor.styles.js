@@ -12,9 +12,6 @@ export default {
     flex: 1,
     backgroundColor: 'white'
   },
-  header: {
-    height: 40
-  },
   titleWrapper: {
     padding: 10,
     borderBottomWidth: 1,
@@ -26,8 +23,8 @@ export default {
   typeButtonRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingLeft: 16,
-    paddingRight: 16
+    paddingTop: 12,
+    paddingHorizontal: 16
   },
   typeButton: {
     box: {

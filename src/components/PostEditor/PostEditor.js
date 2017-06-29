@@ -15,12 +15,27 @@ import { get } from 'lodash/fp'
 export default class PostEditor extends React.Component {
   static contextTypes = {navigate: PropTypes.func}
 
+  static navigationOptions = ({ navigation }) => {
+    const params = get('state.params', navigation) || {}
+    return {
+      headerTitle: params.headerTitle || 'New Post',
+      headerRight: <Button title='Save' onPress={params.save} />
+    }
+  }
+
   constructor (props) {
     super(props)
     this.state = {
       title: get('title', props.post) || '',
       type: 'discussion'
     }
+  }
+
+  componentDidMount () {
+    this.props.navigation.setParams({
+      headerTitle: 'New Post!',
+      save: this.props.save
+    })
   }
 
   save = () => {
@@ -45,13 +60,10 @@ export default class PostEditor extends React.Component {
     const { title, type } = this.state
 
     return <KeyboardAvoidingView style={styles.container} behavior='height'>
-      <View style={styles.header}>
-        <Button title='Save' onPress={this.save} />
-      </View>
       <View style={styles.typeButtonRow}>
         {['discussion', 'request', 'offer'].map(t =>
           <TypeButton type={t} key={t} selected={t === type}
-            onPress={() => this.setState({type: t})}/>)}
+            onPress={() => this.setState({type: t})} />)}
       </View>
       <View style={styles.titleWrapper}>
         <TextInput value={title} style={styles.title}
