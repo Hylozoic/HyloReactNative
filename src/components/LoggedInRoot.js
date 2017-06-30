@@ -1,4 +1,5 @@
 import React from 'react'
+import RootNavigator from './RootNavigatorFolder'
 import RootNavigator from './RootNavigator'
 import fetchCurrentUser from '../store/actions/fetchCurrentUser'
 import { connect } from 'react-redux'
