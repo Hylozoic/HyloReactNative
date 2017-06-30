@@ -77,9 +77,17 @@ export function updatePost (post) {
   }
 }
 
-export default function reducer (state, action) {
+export function setDetails (details) {
+  return {
+    type: SET_DETAILS,
+    payload: details
+  }
+}
 
-  
-
+export default function reducer (state = {}, action) {
+  switch (action.type) {
+    case SET_DETAILS:
+      return {...state, details: action.payload}
+  }
   return state
 }

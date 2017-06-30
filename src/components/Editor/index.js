@@ -1,5 +1,5 @@
 import React from 'react'
-import { KeyboardAvoidingView, Text, View } from 'react-native'
+import { Text, View } from 'react-native'
 import { RichTextEditor, RichTextToolbar, actions } from 'react-native-zss-rich-text-editor'
 import Icon from '../Icon'
 
@@ -20,14 +20,11 @@ export default class Editor extends React.Component {
   }
 
   render () {
-    return <KeyboardAvoidingView style={styles.container} behavior='height'>
-      <View style={styles.wrapper}>
-        <RichTextEditor initialContentHTML={this.props.initialContent}
-          hiddenTitle
-          ref={ref => { this.editor = ref }}
-          titlePlaceholder='title'
-          contentPlaceholder='details' />
-      </View>
+    return <View style={[styles.container, this.props.style]}>
+      <RichTextEditor initialContentHTML={this.props.initialContent}
+        hiddenTitle
+        ref={ref => { this.editor = ref }}
+        contentPlaceholder='details' />
       <RichTextToolbar getEditor={() => this.editor}
         actions={[
           actions.setBold,
@@ -51,7 +48,7 @@ export default class Editor extends React.Component {
               return this.insertTopic()
           }
         }} />
-    </KeyboardAvoidingView>
+    </View>
   }
 }
 

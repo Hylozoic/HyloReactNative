@@ -1,18 +1,22 @@
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { createPost, updatePost } from './PostEditor.store'
+import { createPost, updatePost, setDetails } from './PostEditor.store'
 
 function mapStateToProps (state, props) {
-  return {}
+  return {
+    details: state.PostEditor.details
+  }
 }
 
 function mapDispatchToProps (dispatch, props) {
   return {
-    ...bindActionCreators({
-      createPost,
-      updatePost
-    }, dispatch),
-    save: () => console.log('save tapped')
+    save: postData => {
+      // TODO validate and create/update
+      alert('TODO')
+    },
+    editDetails: () => {
+      return props.navigation.navigate('DetailsEditor')
+    },
+    setDetails: content => dispatch(setDetails(content))
   }
 }
 

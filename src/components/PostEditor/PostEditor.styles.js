@@ -1,6 +1,7 @@
 import {
   havelockBlue,
   fakeAlpha,
+  ghost,
   jade,
   limedSpruce,
   rhino10,
@@ -12,19 +13,29 @@ export default {
     flex: 1,
     backgroundColor: 'white'
   },
-  titleWrapper: {
-    padding: 10,
-    borderBottomWidth: 1,
-    borderColor: 'blue'
+  scrollContainer: {
+    paddingHorizontal: 16,
+    flex: 1
   },
-  title: {
-    height: 30
+  scrollContent: {
+    paddingVertical: 12
+  },
+  textInputWrapper: {
+    borderBottomWidth: 0.5,
+    borderColor: ghost
+  },
+  textInput: {
+    height: 22,
+    fontSize: 14,
+    fontFamily: 'Circular-Book',
+    paddingBottom: 4
+  },
+  details: {
+    height: 300
   },
   typeButtonRow: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingTop: 12,
-    paddingHorizontal: 16
+    justifyContent: 'space-between'
   },
   typeButton: {
     box: {
@@ -37,7 +48,8 @@ export default {
       color: limedSpruce,
       letterSpacing: 0.8,
       fontSize: 10,
-      textAlign: 'center'
+      textAlign: 'center',
+      fontFamily: 'Circular-Bold'
     },
     discussion: {
       box: {
@@ -63,5 +75,12 @@ export default {
         color: jade
       }
     }
+  },
+  section: {
+    marginBottom: 20
+  },
+  sectionLabel: {
+    marginBottom: 8,
+    fontFamily: 'Circular-Medium'
   }
 }
