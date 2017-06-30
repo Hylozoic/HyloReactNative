@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
-
 import { View, UIManager, findNodeHandle, TouchableOpacity } from 'react-native'
 
-export default class PopupMenu extends Component {
+export default class PopupMenuButton extends Component {
 
   onError (e) {
     console.error("Error opening popupMenu", e)

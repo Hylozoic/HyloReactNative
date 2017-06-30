@@ -4,7 +4,7 @@ import Avatar from '../../Avatar'
 import Icon from '../../Icon'
 import { rhino30, rhino50 } from '../../../style/colors'
 // import { humanDate } from 'hylo-utils/text'
-import PopupMenu from '../../PopupMenu'
+import PopupMenuButton from '../../PopupMenuButton'
 
 export default function PostHeader ({
   creator: { avatarUrl, name, tagline },
@@ -41,9 +41,9 @@ export default function PostHeader ({
     <View style={styles.upperRight}>
       {type && <PostLabel type={type} />}
 
-      <PopupMenu actions={['Delete', 'Edit']} onSelect={onSelect} destructiveButtonIndex={0}>
+      <PopupMenuButton actions={['Delete', 'Edit']} onSelect={onSelect} destructiveButtonIndex={0}>
         <Icon name='More' style={styles.menuIcon} />
-      </PopupMenu>
+      </PopupMenuButton>
     </View>
   </View>
 }

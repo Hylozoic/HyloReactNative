@@ -1,7 +1,7 @@
 import { ActionSheetIOS, TouchableOpacity } from 'react-native'
 import React from 'react'
 
-export default function ({ actions, onSelect, destructiveButtonIndex, children }) {
+export default function PopupMenuButton ({ actions, onSelect, destructiveButtonIndex, children }) {
   const onPress = () => {
     const cancelButtonIndex = actions.length
     ActionSheetIOS.showActionSheetWithOptions({
