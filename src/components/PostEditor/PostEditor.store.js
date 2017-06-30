@@ -3,6 +3,8 @@ import { get } from 'lodash/fp'
 export const MODULE_NAME = 'PostEditor'
 export const CREATE_POST = `${MODULE_NAME}/CREATE_POST`
 export const UPDATE_POST = `${MODULE_NAME}/UPDATE_POST`
+export const SET_DETAILS = `${MODULE_NAME}/SET_DETAILS`
+export const CLEAR_DETAILS = `${MODULE_NAME}/CLEAR_DETAILS`
 
 export function createPost (post) {
   const { type, title, details, communities } = post
@@ -73,4 +75,11 @@ export function updatePost (post) {
       }
     }
   }
+}
+
+export default function reducer (state, action) {
+
+  
+
+  return state
 }
