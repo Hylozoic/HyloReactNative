@@ -32,7 +32,7 @@ const tabNavigatorConfig = {
 }
 
 const TabNavigatorWithBar = TabNavigator(
-  mergeRouteConfigsByTab(tabs, screens),
+  stacksInTabsFactory(tabs, screens),
   tabNavigatorConfig
 )
 
@@ -51,27 +51,33 @@ const RootNavigator = DrawerNavigator(
 
 export default RootNavigator
 
-function mergeRouteConfigsByTab (tabs, screens) {
+function stacksInTabsFactory (tabs, screens) {
   // merge tabs and scenes
   // add configuration options for each scene
   // create a StackNavigator for each tab
   // return an object that can be passed into TabNavigator
-  const stackNavigators = {}
   const routeConfigs = {}
   for (const key of Object.keys(tabs)) {
     const obj = {}
     obj[key] = tabs[key]
-    const stackPaths = Object.assign({}, ...[obj, screens])
-    const sceneConfigs = {
-      initialRouteName: key,
-      navigationOptions: {
-        title: key
-      }
-    }
-    stackNavigators[`${key}Navigator`] = StackNavigator(
-        stackPaths, sceneConfigs
-      )
-    routeConfigs[key] = {screen: stackNavigators[`${key}Navigator`]}
+    routeConfigs[key] = {screen: stackNavigatorFactory(obj, screens, key)}
   }
   return routeConfigs
+}
+
+function stackNavigatorFactory (tabObject, otherScreens, tabName) {
+  const paths = Object.assign({}, ...[tabObject, otherScreens])
+  const config = {
+    initialRouteName: tabName,
+    navigationOptions: {
+      title: tabName
+    }
+  }
+
+  const stackNavigator = StackNavigator(
+    paths,
+    config
+  )
+
+  return stackNavigator
 }
