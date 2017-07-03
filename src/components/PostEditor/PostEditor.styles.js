@@ -1,3 +1,6 @@
+import { Platform } from 'react-native'
+const isIOS = Platform.OS === 'ios'
+
 import {
   havelockBlue,
   fakeAlpha,
@@ -25,7 +28,7 @@ export default {
     borderColor: ghost
   },
   textInput: {
-    height: 22,
+    height: isIOS ? 22 : null,
     fontSize: 14,
     fontFamily: 'Circular-Book',
     paddingBottom: 4

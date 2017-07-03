@@ -2,6 +2,7 @@ import React from 'react'
 import {
   Button,
   KeyboardAvoidingView,
+  Platform,
   ScrollView,
   Text,
   TextInput,
@@ -12,6 +13,8 @@ import PropTypes from 'prop-types'
 import styles from './PostEditor.styles'
 import { get } from 'lodash/fp'
 import striptags from 'striptags'
+
+const keyboardVerticalOffset = Platform.os === 'ios' ? 64 : 80
 
 export default class PostEditor extends React.Component {
   static contextTypes = {navigate: PropTypes.func}
@@ -53,7 +56,7 @@ export default class PostEditor extends React.Component {
     const detailsExcerpt = striptags(details).substring(0, 100)
 
     return <KeyboardAvoidingView style={styles.container} behavior='padding'
-      keyboardVerticalOffset={64}>
+      keyboardVerticalOffset={keyboardVerticalOffset}>
       <ScrollView style={styles.scrollContainer}>
         <View style={styles.scrollContent}>
           <SectionLabel>What are you posting today?</SectionLabel>
@@ -67,7 +70,8 @@ export default class PostEditor extends React.Component {
           <View style={[styles.textInputWrapper, styles.section]}>
             <TextInput value={title} style={styles.textInput}
               onChangeText={title => this.setState({title})}
-              placeholder={titlePlaceholders[type]} />
+              placeholder={titlePlaceholders[type]}
+              underlineColorAndroid='transparent' />
           </View>
 
           <SectionLabel>Details</SectionLabel>
@@ -75,7 +79,8 @@ export default class PostEditor extends React.Component {
             onPress={editDetails}>
             <TextInput value={detailsExcerpt} style={styles.textInput}
               placeholder={detailsPlaceholder}
-              editable={false} />
+              editable={false}
+              underlineColorAndroid='transparent' />
           </TouchableOpacity>
         </View>
       </ScrollView>
