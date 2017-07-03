@@ -1,7 +1,6 @@
 import React from 'react'
 import { Image, View, Text, TouchableOpacity } from 'react-native'
 import styles from './FeedBanner.styles'
-import Icon from '../Icon'
 import Avatar from '../Avatar'
 import { DEFAULT_BANNER } from '../../store/models/Community'
 

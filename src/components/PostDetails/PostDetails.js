@@ -1,6 +1,7 @@
 /* eslint-disable camelcase */
 import React from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, TouchableOpacity } from 'react-native'
+import Avatar from '../Avatar'
 import PostHeader from '../PostCard/PostHeader'
 import PostBody from '../PostCard/PostBody'
 import SpaceFillingImage from '../SpaceFillingImage'
@@ -41,7 +42,8 @@ export default class PostDetails extends React.Component {
       post,
       currentUser,
       editPost,
-      pending
+      pending,
+      newComment
     } = this.props
     const slug = get('0.slug', post.communities)
 
@@ -77,8 +79,20 @@ export default class PostDetails extends React.Component {
     return <View style={styles.container}>
       <Comments
         header={postCard}
+        footer={<CommentPrompt {...{currentUser, newComment}} />}
         postId={post.id}
         postPending={pending} />
     </View>
   }
+}
+
+export function CommentPrompt ({ currentUser, newComment }) {
+  if (!currentUser) return null
+  const { avatarUrl } = currentUser
+  return <View style={styles.commentPrompt}>
+    <TouchableOpacity onPress={newComment} style={styles.promptButton}>
+      <Avatar avatarUrl={avatarUrl} style={styles.avatar} />
+      <Text style={styles.promptText}>Hi {currentUser.firstName()}, how can you help today?</Text>
+    </TouchableOpacity>
+  </View>
 }

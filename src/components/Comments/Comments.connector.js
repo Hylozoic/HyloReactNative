@@ -15,12 +15,12 @@ export function mapStateToProps (state, props) {
 
 
   return {
-    comments: getComments(state, props),
+    comments: [], // getComments(state, props),
     total: getTotalComments(state, {id: props.postId}),
     hasMore: getHasMoreComments(state, {id: props.postId}),
     slug: 'hylo',
     currentUser: getMe(state),
-    pending
+    pending: true
   }
 }
 

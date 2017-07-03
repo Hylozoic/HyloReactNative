@@ -1,6 +1,9 @@
 import { caribbeanGreen } from '../../style/colors'
 
 export default {
+  listContent: {
+    flex: 1
+  },
   showMore: {
     marginLeft: 12,
     marginRight: 12,

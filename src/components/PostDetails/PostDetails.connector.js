@@ -2,6 +2,7 @@ import { connect } from 'react-redux'
 import { createSelector as ormCreateSelector } from 'reselect'
 import orm from '../../store/models'
 import fetchPost, { FETCH_POST } from '../../store/actions/fetchPost'
+import getMe from '../../store/selectors/getMe'
 
 const getPost = ormCreateSelector(
   state => state,
@@ -30,10 +31,13 @@ function mapStateToProps (state, props) {
   const id = getPostId(state, props)
   const post = getPost(state, {id})
   const pending = !!state.pending[FETCH_POST]
+  const currentUser = getMe(state, props)
 
   return {
     post,
-    pending
+    pending,
+    newComment: () => console.log('newComment', id),
+    currentUser
   }
 }
 
