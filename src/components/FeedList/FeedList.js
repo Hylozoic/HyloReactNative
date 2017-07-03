@@ -47,7 +47,7 @@ export default class FeedList extends Component {
 }
 
 export const filterOptions = [
-  {id: 'all', label: 'All Posts'},
+  {id: null, label: 'All Posts'},
   {id: 'discussion', label: 'Discussions'},
   {id: 'request', label: 'Requests'},
   {id: 'offer', label: 'Offers'}

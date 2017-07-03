@@ -70,6 +70,7 @@
       "__DEV__",
       "afterAll",
       "afterEach",
+      "alert",
       "beforeAll",
       "beforeEach",
       "expect",

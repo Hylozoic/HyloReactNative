@@ -11,7 +11,7 @@ export const SET_SORT = `${MODULE_NAME}/SET_SORT`
 export const FETCH_POSTS = `${MODULE_NAME}/FETCH_POSTS`
 
 export const defaultState = {
-  filter: 'all',
+  filter: null,
   sortBy: 'updated'
 }
 

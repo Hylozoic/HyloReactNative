@@ -14,8 +14,9 @@ export function mapStateToProps (state, props) {
 }
 
 export function mapDispatchToProps (dispatch, { navigation }) {
+  const communityId = get('state.params.communityId', navigation) || 29
   return {
-    newPost: () => navigation.navigate('PostEditor')
+    newPost: () => navigation.navigate('PostEditor', {communityId})
   }
 }
 
