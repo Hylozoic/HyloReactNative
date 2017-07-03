@@ -14,6 +14,7 @@ import stacksInTabsFactory from './stacksInTabsFactory'
 import PostEditor from '../PostEditor'
 import DetailsEditor from '../PostEditor/DetailsEditor'
 import PostDetails from '../PostDetails'
+import { capeCod10 } from '../../style/colors'
 
 const tabs = {
   Home: {screen: Home},
@@ -35,9 +36,18 @@ Object.freeze(tabs)
 Object.freeze(screens)
 
 const tabNavigatorConfig = {
+  activeTintColor: 'blue',
   tabBarPosition: 'bottom',
   animationEnabled: false,
-  swipeEnabled: false
+  swipeEnabled: false,
+  tabBarOptions: {
+    indicatorStyle: {
+      display: 'none'
+    },
+    style: {
+      backgroundColor: capeCod10
+    }
+  }
 }
 
 const TabNavigatorWithBar = TabNavigator(

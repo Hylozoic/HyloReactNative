@@ -2,6 +2,7 @@ import {
   StackNavigator
 } from 'react-navigation'
 import React from 'react'
+import { View, Text } from 'react-native'
 
 import Icon from '../Icon'
 
@@ -31,7 +32,10 @@ export default function stacksInTabsFactory (tabs, screens) {
     routeConfigs[key] = {
       screen: stackNavigatorFactory(obj, screens, key),
       navigationOptions: {
-        tabBarLabel: <Icon name={key} size={25} />
+        tabBarLabel: <View>
+          <Icon name={key} size={25} />
+          <Text>{key}</Text>
+        </View>
       }
     }
   }
