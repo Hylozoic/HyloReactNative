@@ -1,19 +1,15 @@
 import { connect } from 'react-redux'
 import getMe from '../../store/selectors/getMe'
-
-const sampleCommunity = {
-  name: 'Hylo on Hylo',
-  id: 29,
-  slug: 'hylo',
-  avatarUrl: 'https://d3ngex8q79bk55.cloudfront.net/community/1944/avatar/1489438401225_face.png',
-  bannerUrl: 'https://d3ngex8q79bk55.cloudfront.net/community/1944/banner/1489687099172_ggbridge.jpg'
-}
+import getCommunity from '../../store/selectors/getCommunity'
+import { get } from 'lodash/fp'
 
 export function mapStateToProps (state, props) {
+  const id = get('navigation.state.params.communityId', props) || 29
+  const community = getCommunity(state, {id})
   const currentUser = getMe(state)
   return {
     currentUser,
-    community: sampleCommunity
+    community
   }
 }
 
