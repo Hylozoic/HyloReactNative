@@ -12,7 +12,7 @@ import { Home, Members, Topics } from '../Tabs'
 import stacksInTabsFactory from './stacksInTabsFactory'
 import PostEditor from '../PostEditor'
 import DetailsEditor from '../PostEditor/DetailsEditor'
-import PostDetails from './PostDetails'
+import PostDetails from '../PostDetails'
 
 const tabs = {
   Home: {screen: Home},
