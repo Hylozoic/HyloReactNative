@@ -4,7 +4,6 @@ exports[`FeedBanner renders correctly with a community and user 1`] = `
 <View
   style={
     Object {
-      "marginBottom": 54,
       "zIndex": 10,
     }
   }
@@ -18,6 +17,7 @@ exports[`FeedBanner renders correctly with a community and user 1`] = `
     style={
       Object {
         "height": 152,
+        "marginBottom": 54,
       }
     }
   />
@@ -90,7 +90,6 @@ exports[`FeedBanner renders correctly with all=true, and no community or user 1`
 <View
   style={
     Object {
-      "marginBottom": 54,
       "zIndex": 10,
     }
   }
@@ -104,6 +103,7 @@ exports[`FeedBanner renders correctly with all=true, and no community or user 1`
     style={
       Object {
         "height": 152,
+        "marginBottom": 54,
       }
     }
   />
@@ -149,7 +149,9 @@ exports[`PostPrompt renders correctly with a user 1`] = `
   style={
     Object {
       "backgroundColor": "white",
+      "borderColor": "#EBEBEB",
       "borderRadius": 4,
+      "borderWidth": 1,
       "height": 60,
       "left": 0,
       "marginLeft": 16,

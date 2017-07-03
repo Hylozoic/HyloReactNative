@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.facebook.react.ReactApplication;
 import co.apptailor.googlesignin.RNGoogleSigninPackage;
+import com.github.alinz.reactnativewebviewbridge.WebViewBridgePackage;
 import com.facebook.reactnative.androidsdk.FBSDKPackage;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;
@@ -39,7 +40,8 @@ public class MainApplication extends Application implements ReactApplication {
           new MainReactPackage(),
           new RNGoogleSigninPackage(),
           new FBSDKPackage(mCallbackManager),
-          new VectorIconsPackage()
+          new VectorIconsPackage(),
+          new WebViewBridgePackage()
       );
     }
   };

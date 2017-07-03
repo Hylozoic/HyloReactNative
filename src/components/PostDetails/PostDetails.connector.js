@@ -29,7 +29,7 @@ function getPostId (state, props) {
 function mapStateToProps (state, props) {
   const id = getPostId(state, props)
   const post = getPost(state, {id})
-  const pending = state.pending[FETCH_POST]
+  const pending = !!state.pending[FETCH_POST]
 
   return {
     post,

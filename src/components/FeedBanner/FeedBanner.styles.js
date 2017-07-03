@@ -1,4 +1,7 @@
 import { capeCod40, capeCod10 } from '../../style/colors'
+import { Platform } from 'react-native'
+
+const isIOS = Platform.os === 'ios'
 
 const postPromptShape = {
   position: 'absolute',
@@ -13,11 +16,11 @@ const postPromptShape = {
 
 export default {
   container: {
-    marginBottom: 54,
     zIndex: 10
   },
   image: {
-    height: 152
+    height: 152,
+    marginBottom: 54
   },
   titleRow: {
     position: 'absolute',
@@ -43,7 +46,9 @@ export default {
   postPrompt: {
     ...postPromptShape,
     padding: 12,
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+    borderWidth: isIOS ? 0 : 1,
+    borderColor: capeCod10
   },
   promptShadow: {
     ...postPromptShape,
