@@ -2,7 +2,6 @@ import React from 'react'
 import {
   Button,
   KeyboardAvoidingView,
-  Platform,
   ScrollView,
   Text,
   TextInput,
@@ -13,8 +12,9 @@ import PropTypes from 'prop-types'
 import styles from './PostEditor.styles'
 import { get } from 'lodash/fp'
 import striptags from 'striptags'
+import { isIOS } from 'util/platform'
 
-const keyboardVerticalOffset = Platform.os === 'ios' ? 64 : 80
+const keyboardVerticalOffset = isIOS ? 64 : 80
 
 export default class PostEditor extends React.Component {
   static contextTypes = {navigate: PropTypes.func}

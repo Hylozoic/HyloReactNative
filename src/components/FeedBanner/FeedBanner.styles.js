@@ -1,7 +1,5 @@
 import { capeCod40, capeCod10 } from '../../style/colors'
-import { Platform } from 'react-native'
-
-const isIOS = Platform.os === 'ios'
+import { isIOS } from 'util/platform'
 
 const postPromptShape = {
   position: 'absolute',

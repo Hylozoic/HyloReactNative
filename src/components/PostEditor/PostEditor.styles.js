@@ -1,5 +1,4 @@
-import { Platform } from 'react-native'
-const isIOS = Platform.OS === 'ios'
+import { isIOS } from 'util/platform'
 
 import {
   havelockBlue,
