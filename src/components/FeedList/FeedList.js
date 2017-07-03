@@ -4,7 +4,6 @@ import styles from './FeedList.styles'
 import PostCard from '../PostCard'
 import Loading from '../Loading'
 import Icon from '../Icon'
-import Post from '../Post'
 import { find } from 'lodash/fp'
 
 export default class FeedList extends Component {
@@ -20,7 +19,17 @@ export default class FeedList extends Component {
   }
 
   render () {
-    const { posts, fetchMorePosts, filter, sortBy, setFilter, setSort, pending, header } = this.props
+    const {
+      posts,
+      fetchMorePosts,
+      filter,
+      sortBy,
+      setFilter,
+      setSort,
+      pending,
+      header,
+      showPost
+    } = this.props
 
     const listHeaderComponent = <View>
       {header}
@@ -37,7 +46,7 @@ export default class FeedList extends Component {
     return <View style={styles.container}>
       <FlatList
         data={posts}
-        renderItem={({ item }) => <PostRow post={item} />}
+        renderItem={({ item }) => <PostRow post={item} showPost={showPost} />}
         keyExtractor={(item, index) => item.id}
         onEndReached={fetchMorePosts}
         ListHeaderComponent={listHeaderComponent}
@@ -80,37 +89,13 @@ export function ListControl ({ selected, options, onChange }) {
 }
 
 export class PostRow extends PureComponent {
-  static contextTypes = {
-    navigate: React.PropTypes.func
-  }
-
   render () {
-    const { post } = this.props
-    const { navigate } = this.context
-
-    const showPost = () =>
-      navigate({title: 'Post', component: Post, props: {post}})
+    const { post, showPost } = this.props
 
     return <View style={styles.postRow}>
-      <TouchableOpacity onPress={showPost}>
+      <TouchableOpacity onPress={() => showPost(post.id)}>
         <PostCard post={post} />
       </TouchableOpacity>
     </View>
   }
 }
-
-/*
-
-export function PostRow ({ post }, { navigate }) {
-  const showPost = () =>
-    navigate({title: 'Post', component: Post, props: {post}})
-
-  return <View style={styles.postRow}>
-    <TouchableOpacity onPress={showPost}>
-      <PostCard post={post} />
-    </TouchableOpacity>
-  </View>
-}
-PostRow.contextTypes = {navigate: React.PropTypes.func}
-
-*/

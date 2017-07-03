@@ -1,16 +1,16 @@
 /* eslint-disable camelcase */
 import React from 'react'
-import { View } from 'react-native'
-import PostHeader from './PostHeader'
-import PostBody from './PostBody'
+import { View, Text } from 'react-native'
+import PostHeader from '../PostCard/PostHeader'
+import PostBody from '../PostCard/PostBody'
 import SpaceFillingImage from '../SpaceFillingImage'
-import PostFooter from './PostFooter'
-import samplePost from './samplePost'
+import PostFooter from '../PostCard/PostFooter'
+import Comments from '../Comments'
 import { get } from 'lodash/fp'
-import { capeCod10 } from '../../style/colors'
-import { shape, any, object, string, func, array, bool } from 'prop-types'
+const { shape, any, object, string, func, array, bool } = React.PropTypes
+import styles from './PostDetails.styles'
 
-export default class PostCard extends React.Component {
+export default class PostDetails extends React.Component {
   static propTypes = {
     post: shape({
       id: any,
@@ -28,28 +28,29 @@ export default class PostCard extends React.Component {
       name: string,
       avatarUrl: string
     }),
-    fetchPost: func,
-    expanded: bool,
-    showDetails: func,
     editPost: func,
-    showCommunity: bool
+    pending: bool
   }
 
-  static defaultProps = {
-    post: samplePost()
+  componentDidMount () {
+    this.props.fetchPost()
   }
 
   render () {
     const {
-      post, editPost, showCommunity, currentUser
+      post,
+      currentUser,
+      editPost,
+      pending
     } = this.props
     const slug = get('0.slug', post.communities)
 
-    return <View style={styles.container}>
+    const { location } = post
+
+    const postCard = <View style={styles.postCard}>
       <PostHeader creator={post.creator}
         date={post.updatedAt || post.createdAt}
         type={post.type}
-        showCommunity={showCommunity}
         editPost={editPost}
         communities={post.communities}
         slug={slug}
@@ -60,24 +61,24 @@ export default class PostCard extends React.Component {
       <PostBody title={post.title}
         details={post.details}
         linkPreview={post.linkPreview} />
+      {!!location && <View style={[styles.infoRow, styles.bottomInfoRow]}>
+        <Text style={styles.infoRowLabel}>Location:</Text>
+        <Text style={styles.infoRowinfo}>{location}</Text>
+      </View>}
       <PostFooter id={post.id}
         currentUser={currentUser}
         commenters={post.commenters}
         commentsTotal={post.commentsTotal}
         votesTotal={post.votesTotal}
-        myVote={post.myVote} />
+        myVote={post.myVote}
+        showActivityLabel />
     </View>
-  }
-}
 
-const styles = {
-  container: {
-    borderWidth: 1,
-    borderColor: capeCod10,
-    borderRadius: 4,
-    backgroundColor: 'white'
-  },
-  imageMargin: {
-    marginBottom: 12
+    return <View style={styles.container}>
+      <Comments
+        header={postCard}
+        postId={post.id}
+        postPending={pending} />
+    </View>
   }
 }
