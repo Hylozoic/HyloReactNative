@@ -33,7 +33,7 @@ export default function stacksInTabsFactory (tabs, screens) {
       screen: stackNavigatorFactory(obj, screens, key),
       navigationOptions: {
         tabBarLabel: <View>
-          <Icon name={key} size={25} />
+          <Icon name={key} style={{textAlign: 'center'}} size={25} />
           <Text>{key}</Text>
         </View>
       }

@@ -2,7 +2,6 @@ import {
   DrawerNavigator,
   TabNavigator
 } from 'react-navigation'
-// import React from 'react'
 
 import WelcomeScene from '../WelcomeScene'
 import Feed from '../Feed'
@@ -36,7 +35,6 @@ Object.freeze(tabs)
 Object.freeze(screens)
 
 const tabNavigatorConfig = {
-  activeTintColor: 'blue',
   tabBarPosition: 'bottom',
   animationEnabled: false,
   swipeEnabled: false,
