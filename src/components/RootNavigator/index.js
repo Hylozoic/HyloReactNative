@@ -1,7 +1,6 @@
 import {
   DrawerNavigator,
-  TabNavigator,
-  StackNavigator
+  TabNavigator
 } from 'react-navigation'
 
 import WelcomeScene from '../WelcomeScene'
@@ -11,6 +10,8 @@ import Settings from '../Settings'
 import DrawerMenu from '../DrawerMenu'
 import { Home, Members, Topics } from '../Tabs'
 import stacksInTabsFactory from './stacksInTabsFactory'
+import PostEditor from '../PostEditor'
+import DetailsEditor from '../PostEditor/DetailsEditor'
 
 const tabs = {
   Home: {screen: Home},
@@ -22,7 +23,9 @@ const screens = {
   Post: {screen: Post},
   Feed: {screen: Feed},
   WelcomeScene: {screen: WelcomeScene},
-  Settings: {screen: Settings}
+  Settings: {screen: Settings},
+  PostEditor: {screen: PostEditor},
+  DetailsEditor: {screen: DetailsEditor}
 }
 
 Object.freeze(tabs)

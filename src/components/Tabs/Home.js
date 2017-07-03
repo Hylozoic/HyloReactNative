@@ -10,6 +10,6 @@ export default class Home extends React.Component {
   })
 
   render () {
-    return <Feed />
+    return <Feed navigation={this.props.navigation} />
   }
 }

@@ -3,8 +3,6 @@ import getMe from '../../store/selectors/getMe'
 import getCommunity from '../../store/selectors/getCommunity'
 import { get } from 'lodash/fp'
 
-const newPost = () => console.log('open post editor')
-
 export function mapStateToProps (state, props) {
   const id = get('navigation.state.params.communityId', props) || 29
   const community = getCommunity(state, {id})
@@ -15,9 +13,9 @@ export function mapStateToProps (state, props) {
   }
 }
 
-export function mapDispatchToProps (dispatch, props) {
+export function mapDispatchToProps (dispatch, { navigation }) {
   return {
-    newPost
+    newPost: () => navigation.navigate('PostEditor')
   }
 }
 

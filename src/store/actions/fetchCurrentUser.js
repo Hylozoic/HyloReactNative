@@ -21,6 +21,7 @@ export default function fetchCurrentUser () {
               name
               slug
               avatarUrl
+              bannerUrl
             }
           }
         }
