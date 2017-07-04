@@ -1,5 +1,5 @@
 import React from 'react'
-import { TouchableOpacity, Text, Image } from 'react-native'
+import { TouchableOpacity, Image } from 'react-native'
 import { connect } from 'react-redux'
 import { get } from 'lodash/fp'
 
