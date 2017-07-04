@@ -7,7 +7,7 @@ import SpaceFillingImage from '../SpaceFillingImage'
 import PostFooter from '../PostCard/PostFooter'
 import Comments from '../Comments'
 import { get } from 'lodash/fp'
-const { shape, any, object, string, func, array, bool } = React.PropTypes
+import { shape, any, object, string, func, array, bool } from 'prop-types'
 import styles from './PostDetails.styles'
 
 export default class PostDetails extends React.Component {
