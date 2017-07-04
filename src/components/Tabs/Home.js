@@ -8,7 +8,7 @@ export default class Home extends React.Component {
   static navigationOptions = ({navigation}) => ({
     headerTitle: <Text style={{
       alignSelf: 'center',
-      marginLeft: -50,
+      marginLeft: -40,
       fontWeight: '900',
       fontSize: 18
     }}>Home</Text>,
