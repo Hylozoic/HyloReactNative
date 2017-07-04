@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity } from 'react-native'
 import { slice } from 'lodash/fp'
 import Avatar from '../../Avatar'
 import Icon from '../../Icon'
-import { rhino30 } from '../../../style/colors'
+import { rhino30, rhino80 } from '../../../style/colors'
 import { string, array, number, func, object } from 'prop-types'
 
 export default function PostFooter ({
@@ -13,11 +13,13 @@ export default function PostFooter ({
   commentsTotal,
   votesTotal,
   myVote,
-  vote
+  vote,
+  showActivityLabel
 }) {
   const voteStyle = myVote ? styles.votes.active : styles.votes.inactive
 
   return <View style={styles.container}>
+    {showActivityLabel && <Text style={styles.activityLabel}>Activity</Text>}
     <View style={styles.comments}>
       {slice(0, 3, commenters).map((c, index) => {
         return <Avatar key={index}
@@ -50,13 +52,19 @@ const styles = {
   container: {
     height: 40,
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
+    paddingLeft: 12
+  },
+  activityLabel: {
+    color: rhino80,
+    fontSize: 18,
+    fontFamily: 'Circular-Book',
+    marginRight: 8
   },
   comments: {
     flex: 1,
     flexDirection: 'row',
-    alignItems: 'center',
-    paddingLeft: 10
+    alignItems: 'center'
   },
   commentsText: {
     paddingLeft: 6,

@@ -1,0 +1,79 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Comments renders correctly 1`] = `
+<FlatList
+  ListHeaderComponent={
+    <View>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        disabled={false}
+        ellipsizeMode="tail"
+      >
+        Some React Code
+      </Text>
+      <Loading />
+      <ShowMore
+        commentsLength={3}
+        fetchComments={[Function]}
+        hasMore={true}
+        total={17}
+      />
+    </View>
+  }
+  data={
+    Array [
+      Object {
+        "id": 1,
+      },
+      Object {
+        "id": 2,
+      },
+      Object {
+        "id": 3,
+      },
+    ]
+  }
+  disableVirtualization={false}
+  horizontal={false}
+  initialNumToRender={10}
+  keyExtractor={[Function]}
+  maxToRenderPerBatch={10}
+  numColumns={1}
+  onEndReachedThreshold={2}
+  renderItem={[Function]}
+  renderScrollComponent={[Function]}
+  scrollEventThrottle={50}
+  updateCellsBatchingPeriod={50}
+  windowSize={21}
+/>
+`;
+
+exports[`ShowMore renders correctly 1`] = `
+<TouchableOpacity
+  activeOpacity={0.2}
+  focusedOpacity={0.7}
+>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    disabled={false}
+    ellipsizeMode="tail"
+    onPress={[Function]}
+    style={
+      Object {
+        "color": "#0DC39F",
+        "fontSize": 13,
+        "marginBottom": 20,
+        "marginLeft": 12,
+        "marginRight": 12,
+      }
+    }
+  >
+    View 
+    7
+     previous comment
+    s
+  </Text>
+</TouchableOpacity>
+`;

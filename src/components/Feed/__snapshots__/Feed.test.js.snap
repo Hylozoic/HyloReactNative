@@ -31,6 +31,7 @@ exports[`renders correctly 1`] = `
         newPost={[Function]}
       />
     }
+    showPost={[Function]}
   />
 </View>
 `;
