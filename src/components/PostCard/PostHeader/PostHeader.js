@@ -5,6 +5,7 @@ import Icon from '../../Icon'
 import { rhino30, rhino50 } from '../../../style/colors'
 // import { humanDate } from 'hylo-utils/text'
 import PopupMenuButton from '../../PopupMenuButton'
+import { filter } from 'lodash/fp'
 
 export default function PostHeader ({
   creator: { avatarUrl, name, tagline },
@@ -20,15 +21,6 @@ export default function PostHeader ({
   // TODO: person name and avatar should link to={personUrl(creator.id, slug)}
   // TODO: date should use humanDate, but importing hylo-utils needs fixing
 
-  const onSelect = index => {
-    switch (index) {
-      case 0:
-        return deletePost()
-      case 1:
-        return editPost()
-    }
-  }
-
   return <View style={styles.container}>
     <View style={styles.avatarSpacing}>
       <Avatar avatarUrl={avatarUrl} />
@@ -40,12 +32,23 @@ export default function PostHeader ({
     </View>
     <View style={styles.upperRight}>
       {type && <PostLabel type={type} />}
-
-      <PopupMenuButton actions={['Delete', 'Edit']} onSelect={onSelect} destructiveButtonIndex={0}>
-        <Icon name='More' style={styles.menuIcon} />
-      </PopupMenuButton>
+      <PostMenu {...{editPost, deletePost}} />
     </View>
   </View>
+}
+
+function PostMenu ({ deletePost, editPost }) {
+  const actions = filter(x => x[1], [
+    ['Delete this post', deletePost],
+    ['Edit this post', editPost]
+  ])
+  const onSelect = index => actions[index][1]()
+  const destructiveButtonIndex = actions[0][0] === 'Delete this post' ? 0 : -1
+
+  return <PopupMenuButton actions={actions.map(x => x[0])} onSelect={onSelect}
+    destructiveButtonIndex={destructiveButtonIndex}>
+    <Icon name='More' style={styles.menuIcon} />
+  </PopupMenuButton>
 }
 
 export function PostLabel ({ type }) {

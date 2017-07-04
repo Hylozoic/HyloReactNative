@@ -10,7 +10,8 @@ it('renders correctly with all=true, and no community or user', () => {
     avatarUrl: 'foo.png'
   }
   const renderer = new ReactShallowRenderer()
-  renderer.render(<PostHeader creator={creator} />)
+  renderer.render(<PostHeader creator={creator} deletePost={() => {}}
+    editPost={() => {}} />)
   const actual = renderer.getRenderOutput()
 
   expect(actual).toMatchSnapshot()

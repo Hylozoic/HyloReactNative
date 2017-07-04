@@ -8,17 +8,17 @@ export default function graphqlMiddleware (store) {
       type,
       meta: {
         ...meta,
-        graphql: {query, variables},
-        then: payload => {
-          if (payload.errors) return Promise.reject(payload.errors)
-          return payload
-        }
+        graphql: {query, variables}
       },
       payload: {
         api: {
           path: '/noo/graphql',
           params: {query, variables},
-          method: 'POST'
+          method: 'POST',
+          transform: payload => {
+            if (payload.errors) return Promise.reject(payload.errors[0])
+            return payload
+          }
         }
       }
     })

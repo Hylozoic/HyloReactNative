@@ -1,4 +1,4 @@
-import React, { Component, PureComponent } from 'react'
+import React, { Component } from 'react'
 import { FlatList, Text, TouchableOpacity, View } from 'react-native'
 import styles from './FeedList.styles'
 import PostCard from '../PostCard'
@@ -28,7 +28,8 @@ export default class FeedList extends Component {
       setSort,
       pending,
       header,
-      showPost
+      showPost,
+      editPost
     } = this.props
 
     const listHeaderComponent = <View>
@@ -46,7 +47,8 @@ export default class FeedList extends Component {
     return <View style={styles.container}>
       <FlatList
         data={posts}
-        renderItem={({ item }) => <PostRow post={item} showPost={showPost} />}
+        renderItem={({ item }) =>
+          <PostRow post={item} showPost={showPost} editPost={editPost} />}
         keyExtractor={(item, index) => item.id}
         onEndReached={fetchMorePosts}
         ListHeaderComponent={listHeaderComponent}
@@ -88,14 +90,10 @@ export function ListControl ({ selected, options, onChange }) {
   </TouchableOpacity>
 }
 
-export class PostRow extends PureComponent {
-  render () {
-    const { post, showPost } = this.props
-
-    return <View style={styles.postRow}>
-      <TouchableOpacity onPress={() => showPost(post.id)}>
-        <PostCard post={post} />
-      </TouchableOpacity>
-    </View>
-  }
+export function PostRow ({ post, showPost, editPost }) {
+  return <View style={styles.postRow}>
+    <TouchableOpacity onPress={() => showPost(post.id)}>
+      <PostCard post={post} editPost={() => editPost(post.id)} />
+    </TouchableOpacity>
+  </View>
 }
