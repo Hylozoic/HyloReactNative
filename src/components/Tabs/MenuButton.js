@@ -42,7 +42,6 @@ export default connect(mapStateToProps, {})(MenuButton)
 const styles = {
   avatar: {
     marginLeft: 20,
-    marginRight: 20,
     width: 40,
     height: 40,
     borderRadius: 20
