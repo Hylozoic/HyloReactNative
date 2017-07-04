@@ -30,13 +30,13 @@ exports[`renders correctly 1`] = `
           }
           creator={
             Object {
-              "id": 77,
+              "id": "77",
               "name": "Houdini",
             }
           }
           date="2017-05-19T23:24:58Z"
           editPost={[Function]}
-          id={91}
+          id="91"
           slug="foom"
           type="request"
         />
@@ -55,7 +55,7 @@ exports[`renders correctly 1`] = `
           details="Lo"
           linkPreview={
             Object {
-              "id": 34,
+              "id": "34",
             }
           }
           title="Hi"
@@ -77,14 +77,14 @@ exports[`renders correctly 1`] = `
               "id": 123,
             }
           }
-          id={91}
+          id="91"
           myVote={true}
           showActivityLabel={true}
           votesTotal={8}
         />
       </View>
     }
-    postId={91}
+    postId="91"
     postPending={true}
   />
 </View>

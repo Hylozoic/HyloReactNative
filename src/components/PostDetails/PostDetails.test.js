@@ -4,9 +4,9 @@ import PostDetails from './PostDetails'
 
 it('renders correctly', () => {
   const post = {
-    id: 91,
+    id: '91',
     creator: {
-      id: 77,
+      id: '77',
       name: 'Houdini'
     },
     communities: [{slug: 'foom'}],
@@ -15,7 +15,7 @@ it('renders correctly', () => {
     title: 'Hi',
     details: 'Lo',
     linkPreview: {
-      id: 34
+      id: '34'
     },
     commenters: [{id: 9}, {id: 7}],
     commentsTotal: 12,

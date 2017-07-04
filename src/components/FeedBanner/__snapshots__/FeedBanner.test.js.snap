@@ -151,7 +151,7 @@ exports[`PostPrompt renders correctly with a user 1`] = `
       "backgroundColor": "white",
       "borderColor": "#EBEBEB",
       "borderRadius": 4,
-      "borderWidth": 1,
+      "borderWidth": 0,
       "height": 60,
       "left": 0,
       "marginLeft": 16,
