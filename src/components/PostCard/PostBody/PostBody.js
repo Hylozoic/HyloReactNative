@@ -1,23 +1,28 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { Image, View, StyleSheet, Text } from 'react-native'
+import HTMLView from 'react-native-htmlview'
 import { decode } from 'ent'
+import { present, sanitize } from 'hylo-utils/text'
+
 import LinkPreview from '../LinkPreview'
 
 // const maxDetailsLength = 144
 
-export default function PostBody ({ title, details, linkPreview }) {
+export default function PostBody ({ title, details, linkPreview, slug }) {
   const decodedTitle = decode(title)
-
-  // TODO: present details with linked mentions and tags
+  const presentedDetails = present(sanitize(details), {slug})
 
   return <View style={styles.container}>
     <Text style={styles.title}>{decodedTitle}</Text>
-    <Text style={styles.details}>{details}</Text>
+    <HTMLView
+      stylesheet={richTextStyles}
+      textComponentProps={{ style: styles.details }}
+      value={presentedDetails} />
     {linkPreview && <LinkPreview {...linkPreview} />}
   </View>
 }
 
-const styles = {
+const styles = StyleSheet.create({
   container: {
     marginLeft: 12,
     marginRight: 12,
@@ -35,4 +40,10 @@ const styles = {
     lineHeight: 20,
     fontFamily: 'Circular-Book'
   }
-}
+})
+
+const richTextStyles = StyleSheet.create({
+  a: {
+    color: '#0DC39F'
+  }
+})
