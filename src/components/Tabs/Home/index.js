@@ -1,7 +1,7 @@
 import React from 'react'
 
-import Feed from '../Feed'
-import header from './header'
+import Feed from '../../Feed'
+import header from '../header'
 
 const title = 'Home'
 

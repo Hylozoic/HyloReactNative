@@ -1,7 +1,7 @@
 import React from 'react'
 
-import WelcomeScene from '../WelcomeScene'
-import header from './header'
+import WelcomeScene from '../../WelcomeScene'
+import header from '../header'
 
 const title = 'Members'
 
