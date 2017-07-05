@@ -4,6 +4,7 @@ import {
 import React from 'react'
 import { View, Text } from 'react-native'
 
+import { jade } from 'style/colors'
 import Icon from '../Icon'
 
 function stackNavigatorFactory (tabObject, otherScreens, tabName) {
@@ -32,10 +33,14 @@ export default function stacksInTabsFactory (tabs, screens) {
     routeConfigs[key] = {
       screen: stackNavigatorFactory(obj, screens, key),
       navigationOptions: {
-        tabBarLabel: <View>
-          <Icon name={key} style={{textAlign: 'center'}} size={25} />
-          <Text>{key}</Text>
-        </View>
+        tabBarLabel: ({ focused, tintColor }) => {
+          const styles = {textAlign: 'center'}
+          if (focused) styles.color = jade
+          return <View>
+            <Icon name={key} style={styles} size={25} />
+            <Text style={styles}>{key}</Text>
+          </View>
+        }
       }
     }
   }

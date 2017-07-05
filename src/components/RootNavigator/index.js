@@ -34,13 +34,10 @@ Object.freeze(tabs)
 Object.freeze(screens)
 
 const tabNavigatorConfig = {
-  activeTintColor: 'green',
   tabBarPosition: 'bottom',
   animationEnabled: false,
   swipeEnabled: false,
   tabBarOptions: {
-    activeTintColor: 'white',
-    inactiveTintColor: 'lightgray',
     indicatorStyle: {
       display: 'none'
     },
