@@ -1,15 +1,12 @@
 import React from 'react'
-import { Text } from 'react-native'
 
 import WelcomeScene from '../WelcomeScene'
-import MenuButton from './MenuButton'
-import styles from './styles'
+import header from './header'
+
+const title = 'Topics'
 
 export default class Topics extends React.Component {
-  static navigationOptions = ({navigation}) => ({
-    headerTitle: <Text style={styles.headerTitle}>Topics</Text>,
-    headerLeft: <MenuButton navigation={navigation} />
-  })
+  static navigationOptions = ({navigation}) => (header(navigation, title))
 
   render () {
     const { navigation } = this.props
