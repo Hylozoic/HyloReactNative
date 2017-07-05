@@ -3,8 +3,8 @@ import { TouchableOpacity, Image } from 'react-native'
 import { connect } from 'react-redux'
 import { get } from 'lodash/fp'
 
-import getMe from '../../store/selectors/getMe'
-import styles from './styles'
+import getMe from '../../../store/selectors/getMe'
+import styles from '../styles'
 
 function MenuButton (props) {
   function drawerOpen () {
