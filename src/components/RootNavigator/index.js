@@ -10,13 +10,10 @@ import Settings from '../Settings'
 import DrawerMenu from '../DrawerMenu'
 import { Home, Members, Topics } from '../Tabs'
 import stacksInTabsFactory from './stacksInTabsFactory'
-<<<<<<< HEAD
 import PostEditor from '../PostEditor'
 import DetailsEditor from '../PostEditor/DetailsEditor'
 import PostDetails from '../PostDetails'
 import { capeCod10 } from '../../style/colors'
-=======
->>>>>>> Add avatar to menu button
 
 const tabs = {
   Home: {screen: Home},
@@ -32,6 +29,7 @@ const screens = {
   PostEditor: {screen: PostEditor},
   DetailsEditor: {screen: DetailsEditor},
   PostDetails: {screen: PostDetails}
+}
 
 Object.freeze(tabs)
 Object.freeze(screens)
