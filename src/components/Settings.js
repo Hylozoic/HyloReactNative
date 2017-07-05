@@ -9,7 +9,7 @@ function Settings ({ navigation, logout }) {
   const { name } = navigation.state.params
   const close = () =>
     navigation.dispatch({ type: 'Navigation/BACK' })
-    // navigation.goBack()// && navigation.navigate('DrawerOpen')
+
   return <View style={styles.view}>
     <Text>Hello, {name}! Here be settings. Arr</Text>
     <Button onPress={logout} title='Log out' />

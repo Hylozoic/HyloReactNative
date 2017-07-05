@@ -35,7 +35,6 @@ export default class DrawerMenu extends Component {
     const name = get('name', currentUser) || 'you'
     const showSettings = () =>
       navigation.navigate('Settings', {name})
-      // navigate({title: 'Post', component: Post, props: {post}})
 
     return <View style={styles.parent}>
       <View style={styles.header}>

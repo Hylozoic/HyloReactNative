@@ -3,15 +3,11 @@ import { Text } from 'react-native'
 
 import WelcomeScene from '../WelcomeScene'
 import MenuButton from './MenuButton'
+import styles from './styles'
 
 export default class Members extends React.Component {
   static navigationOptions = ({navigation}) => ({
-    headerTitle: <Text style={{
-      alignSelf: 'center',
-      marginLeft: -40,
-      fontWeight: '900',
-      fontSize: 18
-    }}>Members</Text>,
+    headerTitle: <Text style={styles.headerTitle}>Members</Text>,
     headerLeft: <MenuButton navigation={navigation} />
   })
 

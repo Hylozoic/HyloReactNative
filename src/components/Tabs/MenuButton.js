@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { get } from 'lodash/fp'
 
 import getMe from '../../store/selectors/getMe'
+import styles from './styles'
 
 function MenuButton (props) {
   function drawerOpen () {
@@ -38,15 +39,3 @@ function mapStateToProps (state) {
 }
 
 export default connect(mapStateToProps, {})(MenuButton)
-
-const styles = {
-  avatar: {
-    marginLeft: 20,
-    width: 40,
-    height: 40,
-    borderRadius: 20
-  },
-  menuText: {
-    marginLeft: 20
-  }
-}

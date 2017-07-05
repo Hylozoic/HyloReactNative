@@ -3,15 +3,11 @@ import { Text } from 'react-native'
 
 import WelcomeScene from '../WelcomeScene'
 import MenuButton from './MenuButton'
+import styles from './styles'
 
 export default class Topics extends React.Component {
   static navigationOptions = ({navigation}) => ({
-    headerTitle: <Text style={{
-      alignSelf: 'center',
-      marginLeft: -40,
-      fontWeight: '900',
-      fontSize: 18
-    }}>Topics</Text>,
+    headerTitle: <Text style={styles.headerTitle}>Topics</Text>,
     headerLeft: <MenuButton navigation={navigation} />
   })
 
