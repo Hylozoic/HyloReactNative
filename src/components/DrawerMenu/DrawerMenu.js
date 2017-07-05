@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Image, ListView, Text, TouchableOpacity, View } from 'react-native'
-import { delay } from 'lodash'
 import { get, isEmpty } from 'lodash/fp'
 import Icon from '../Icon'
 import styles from './DrawerMenu.styles'
@@ -32,8 +31,11 @@ export default class DrawerMenu extends Component {
   }
 
   render () {
-    const { close, showSettings, logout, currentUser } = this.props
+    const { logout, currentUser, navigation } = this.props
     const name = get('name', currentUser) || 'you'
+    const showSettings = () =>
+      navigation.navigate('Settings', {name})
+      // navigate({title: 'Post', component: Post, props: {post}})
 
     return <View style={styles.parent}>
       <View style={styles.header}>
@@ -55,7 +57,7 @@ export default class DrawerMenu extends Component {
           </Text>
           <View style={styles.footerButtons}>
             <TextButton text='View Profile' onPress={() => {}} />
-            <TextButton text='Settings' onPress={() => [showSettings(), delay(close, 300)]} />
+            <TextButton text='Settings' onPress={showSettings} />
             <TextButton text='Log out' onPress={logout} />
           </View>
         </View>

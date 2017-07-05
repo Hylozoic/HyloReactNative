@@ -60,11 +60,13 @@ const TabNavigatorWithBar = TabNavigator(
 )
 
 const drawerNavigatorRoutes = {
-  Home: { screen: TabNavigatorWithBar }
+  Home: { screen: TabNavigatorWithBar },
+  Settings: { screen: Settings }
 }
 
 const drawerNavigatorConfig = {
-  contentComponent: DrawerMenu
+  contentComponent: DrawerMenu,
+  initialRouteName: 'Home'
 }
 
 const RootNavigator = DrawerNavigator(
