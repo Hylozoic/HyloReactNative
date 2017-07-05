@@ -21,7 +21,7 @@ const tabs = {
   Topics: {screen: Topics}
 }
 
-const screens = {
+const screensInTabs = {
   Post: {screen: Post},
   Feed: {screen: Feed},
   WelcomeScene: {screen: WelcomeScene},
@@ -30,8 +30,12 @@ const screens = {
   PostDetails: {screen: PostDetails}
 }
 
+const screensInStack = {
+  Settings: {screen: Settings}
+}
+
 Object.freeze(tabs)
-Object.freeze(screens)
+Object.freeze(screensInTabs)
 
 const tabNavigatorConfig = {
   tabBarPosition: 'bottom',
@@ -49,7 +53,7 @@ const tabNavigatorConfig = {
 }
 
 const TabNavigatorWithBar = TabNavigator(
-  stacksInTabsFactory(tabs, screens),
+  stacksInTabsFactory(tabs, screensInTabs),
   tabNavigatorConfig
 )
 
@@ -67,22 +71,19 @@ const DrawerAndTabsNavigator = DrawerNavigator(
   drawerNavigatorConfig
 )
 
-const rootNavigatorRoutes = {
+const mainStackRoute = {
   Main: {
     screen: DrawerAndTabsNavigator,
     navigationOptions: {
       header: null
     }
-  },
-  Settings: {screen: Settings}
+  }
 }
 
-const rootNavigatorConfig = {
-
-}
+const rootNavigatorRoutes = Object.assign({}, ...[mainStackRoute, screensInStack])
 
 const RootNavigator = StackNavigator(
-  rootNavigatorRoutes,
-  rootNavigatorConfig
+  rootNavigatorRoutes
 )
+
 export default RootNavigator
