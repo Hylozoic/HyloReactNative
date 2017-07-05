@@ -15,12 +15,14 @@ import PostEditor from '../PostEditor'
 import DetailsEditor from '../PostEditor/DetailsEditor'
 import PostDetails from '../PostDetails'
 
+// Tab Home Screens
 const tabs = {
   Home: {screen: Home},
   Members: {screen: Members},
   Topics: {screen: Topics}
 }
 
+// Screens that work within Tabs (the same tab icon stays highlighted)
 const screensInTabs = {
   Post: {screen: Post},
   Feed: {screen: Feed},
@@ -30,6 +32,7 @@ const screensInTabs = {
   PostDetails: {screen: PostDetails}
 }
 
+// Screens that work outside of tabs, Settings, Messages, etc.
 const screensInStack = {
   Settings: {screen: Settings}
 }
