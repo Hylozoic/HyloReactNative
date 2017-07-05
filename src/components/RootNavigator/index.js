@@ -1,6 +1,7 @@
 import {
   DrawerNavigator,
-  TabNavigator
+  TabNavigator,
+  StackNavigator
 } from 'react-navigation'
 
 import WelcomeScene from '../WelcomeScene'
@@ -24,7 +25,6 @@ const screens = {
   Post: {screen: Post},
   Feed: {screen: Feed},
   WelcomeScene: {screen: WelcomeScene},
-  Settings: {screen: Settings},
   PostEditor: {screen: PostEditor},
   DetailsEditor: {screen: DetailsEditor},
   PostDetails: {screen: PostDetails}
@@ -54,8 +54,7 @@ const TabNavigatorWithBar = TabNavigator(
 )
 
 const drawerNavigatorRoutes = {
-  Home: { screen: TabNavigatorWithBar },
-  Settings: { screen: Settings }
+  Home: { screen: TabNavigatorWithBar }
 }
 
 const drawerNavigatorConfig = {
@@ -63,8 +62,27 @@ const drawerNavigatorConfig = {
   initialRouteName: 'Home'
 }
 
-const RootNavigator = DrawerNavigator(
+const DrawerAndTabsNavigator = DrawerNavigator(
   drawerNavigatorRoutes,
   drawerNavigatorConfig
+)
+
+const rootNavigatorRoutes = {
+  Main: {
+    screen: DrawerAndTabsNavigator,
+    navigationOptions: {
+      header: null
+    }
+  },
+  Settings: {screen: Settings}
+}
+
+const rootNavigatorConfig = {
+
+}
+
+const RootNavigator = StackNavigator(
+  rootNavigatorRoutes,
+  rootNavigatorConfig
 )
 export default RootNavigator
