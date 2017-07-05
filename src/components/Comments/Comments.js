@@ -32,12 +32,11 @@ export default class Comments extends React.Component {
         fetchComments={fetchComments} />
     </View>
 
-    const listFooterComponent = footer
-
-//       contentContainerStyle={styles.listContent}
+    const listFooterComponent = <View style={styles.footer}>
+      {footer}
+    </View>
 
     return <FlatList
-      style={{height: 200}}
       data={comments}
       renderItem={({ item }) => <Comment comment={item} />}
       keyExtractor={(item, index) => item.id}

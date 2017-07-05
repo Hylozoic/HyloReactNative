@@ -1,4 +1,4 @@
-import { capeCod10, capeCod40, mineralGreen } from '../../style/colors'
+import { capeCod10, capeCod40, mineralGreen, mercury } from '../../style/colors'
 
 export default {
   postCard: {
@@ -38,18 +38,19 @@ export default {
     fontFamily: 'Circular-Regular'
   },
   commentPrompt: {
-    position: 'absolute',
-    top: 122,
     height: 50,
     borderRadius: 4,
     left: 0,
     right: 0,
-    marginLeft: 16,
-    marginRight: 16,
-    padding: 12,
+    marginHorizontal: 8,
+    paddingHorizontal: 7,
+    paddingVertical: 12,
     backgroundColor: 'white',
-    borderColor: capeCod10,
-    justifyContent: 'center'
+    justifyContent: 'center',
+    shadowColor: mercury,
+    shadowOffset: {width: 0, height: 5},
+    shadowRadius: 15,
+    shadowOpacity: 0.1
   },
   promptButton: {
     flexDirection: 'row',

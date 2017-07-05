@@ -10,17 +10,15 @@ import {
 } from './Comments.store'
 
 export function mapStateToProps (state, props) {
-
   const pending = props.postPending || state.pending[FETCH_COMMENTS]
 
-
   return {
-    comments: [], // getComments(state, props),
+    comments: getComments(state, props),
     total: getTotalComments(state, {id: props.postId}),
     hasMore: getHasMoreComments(state, {id: props.postId}),
     slug: 'hylo',
     currentUser: getMe(state),
-    pending: true
+    pending
   }
 }
 
