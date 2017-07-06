@@ -1,0 +1,12 @@
+import 'react-native'
+import React from 'react'
+import ReactShallowRenderer from 'react-test-renderer/shallow'
+import Members from './index'
+
+it('renders correctly with all=true, and no community or user', () => {
+  const renderer = new ReactShallowRenderer()
+  renderer.render(<Members />)
+  const actual = renderer.getRenderOutput()
+
+  expect(actual).toMatchSnapshot()
+})

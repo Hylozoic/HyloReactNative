@@ -1,6 +1,7 @@
 import {
   DrawerNavigator,
-  TabNavigator
+  TabNavigator,
+  StackNavigator
 } from 'react-navigation'
 
 import WelcomeScene from '../WelcomeScene'
@@ -13,32 +14,47 @@ import stacksInTabsFactory from './stacksInTabsFactory'
 import PostEditor from '../PostEditor'
 import DetailsEditor from '../PostEditor/DetailsEditor'
 import PostDetails from '../PostDetails'
+import tabStyles from '../Tabs/styles'
 
+// Tab Home Screens
 const tabs = {
   Home: {screen: Home},
   Members: {screen: Members},
   Topics: {screen: Topics}
 }
 
-const screens = {
+// Screens that work within Tabs (the same tab icon stays highlighted)
+const screensInTabs = {
   Post: {screen: Post},
   Feed: {screen: Feed},
   WelcomeScene: {screen: WelcomeScene},
-  Settings: {screen: Settings},
   PostEditor: {screen: PostEditor},
   DetailsEditor: {screen: DetailsEditor},
   PostDetails: {screen: PostDetails}
 }
 
+// Screens that work outside of tabs, Settings, Messages, etc.
+const screensInStack = {
+  Settings: {screen: Settings}
+}
+
 Object.freeze(tabs)
-Object.freeze(screens)
+Object.freeze(screensInTabs)
 
 const tabNavigatorConfig = {
-  tabBarPosition: 'bottom'
+  tabBarPosition: 'bottom',
+  animationEnabled: false,
+  swipeEnabled: false,
+  tabBarOptions: {
+    indicatorStyle: {
+      display: 'none'
+    },
+    style: tabStyles.tabNavigator
+  }
 }
 
 const TabNavigatorWithBar = TabNavigator(
-  stacksInTabsFactory(tabs, screens),
+  stacksInTabsFactory(tabs, screensInTabs),
   tabNavigatorConfig
 )
 
@@ -47,12 +63,28 @@ const drawerNavigatorRoutes = {
 }
 
 const drawerNavigatorConfig = {
-  contentComponent: DrawerMenu
+  contentComponent: DrawerMenu,
+  initialRouteName: 'Home'
 }
 
-const RootNavigator = DrawerNavigator(
+const DrawerAndTabsNavigator = DrawerNavigator(
   drawerNavigatorRoutes,
   drawerNavigatorConfig
+)
+
+const mainStackRoute = {
+  Main: {
+    screen: DrawerAndTabsNavigator,
+    navigationOptions: {
+      header: null
+    }
+  }
+}
+
+const rootNavigatorRoutes = Object.assign({}, mainStackRoute, screensInStack)
+
+const RootNavigator = StackNavigator(
+  rootNavigatorRoutes
 )
 
 export default RootNavigator
