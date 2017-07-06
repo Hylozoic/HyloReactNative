@@ -1,13 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`FeedList renders correctly 1`] = `
-<View
-  style={
-    Object {
-      "backgroundColor": "white",
-    }
-  }
->
+<View>
   <FlatList
     ListHeaderComponent={
       <View>
@@ -50,56 +44,23 @@ exports[`ListControl renders correctly 1`] = `
   activeOpacity={0.2}
   focusedOpacity={0.7}
   onPress={[Function]}
-  style={
-    Object {
-      "flexDirection": "row",
-    }
-  }
 >
   <Text
     accessible={true}
     allowFontScaling={true}
     disabled={false}
     ellipsizeMode="tail"
-    style={
-      Object {
-        "color": "#363D3C",
-        "fontSize": 12,
-      }
-    }
   >
     Discussions
   </Text>
   <Icon
     name="ArrowDown"
-    style={
-      Array [
-        Object {
-          "color": "#363D3C",
-          "fontSize": 12,
-        },
-        Object {
-          "marginLeft": 4,
-          "top": 2,
-        },
-      ]
-    }
   />
 </TouchableOpacity>
 `;
 
 exports[`ListControls renders correctly 1`] = `
-<View
-  style={
-    Object {
-      "flexDirection": "row",
-      "justifyContent": "space-between",
-      "marginBottom": 10,
-      "marginLeft": 16,
-      "marginRight": 16,
-    }
-  }
->
+<View>
   <ListControl
     onChange={[Function]}
     options={
@@ -144,15 +105,7 @@ exports[`ListControls renders correctly 1`] = `
 `;
 
 exports[`PostRow renders correctly 1`] = `
-<View
-  style={
-    Object {
-      "marginLeft": 16,
-      "marginRight": 16,
-      "paddingBottom": 15,
-    }
-  }
->
+<View>
   <TouchableOpacity
     activeOpacity={0.2}
     focusedOpacity={0.7}

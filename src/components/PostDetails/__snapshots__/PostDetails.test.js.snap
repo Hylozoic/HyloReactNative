@@ -1,25 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
-<View
-  style={
-    Object {
-      "backgroundColor": "white",
-      "flex": 1,
-      "paddingLeft": 4,
-      "paddingRight": 4,
-    }
-  }
->
+<View>
   <Connect(Comments)
     header={
-      <View
-        style={
-          Object {
-            "marginBottom": 16,
-          }
-        }
-      >
+      <View>
         <PostHeader
           communities={
             Array [
@@ -40,13 +25,7 @@ exports[`renders correctly 1`] = `
           slug="foom"
           type="request"
         />
-        <View
-          style={
-            Object {
-              "marginBottom": 12,
-            }
-          }
-        >
+        <View>
           <SpaceFillingImage
             imageUrl="foom.png"
           />
