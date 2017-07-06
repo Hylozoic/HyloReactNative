@@ -39,6 +39,7 @@
     "url": "^0.11.0"
   },
   "devDependencies": {
+    "babel-plugin-remove-style": "^0.1.0",
     "babel-preset-react-native": "^1.9.2",
     "jest": "^20.0.4",
     "react-test-renderer": "16.0.0-alpha.12",
@@ -48,7 +49,14 @@
     "presets": [
       "react-native",
       "react-native-dotenv"
-    ]
+    ],
+    "env": {
+      "test": {
+        "plugins": [
+          "remove-style"
+        ]
+      }
+    }
   },
   "jest": {
     "preset": "react-native",

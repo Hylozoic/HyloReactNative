@@ -1,64 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`CommentPrompt renders correctly 1`] = `
-<View
-  style={
-    Object {
-      "backgroundColor": "white",
-      "borderRadius": 4,
-      "height": 50,
-      "justifyContent": "center",
-      "left": 0,
-      "marginHorizontal": 8,
-      "paddingHorizontal": 7,
-      "paddingVertical": 12,
-      "right": 0,
-      "shadowColor": undefined,
-      "shadowOffset": Object {
-        "height": 5,
-        "width": 0,
-      },
-      "shadowOpacity": 0.1,
-      "shadowRadius": 15,
-    }
-  }
->
+<View>
   <TouchableOpacity
     activeOpacity={0.2}
     focusedOpacity={0.7}
     onPress={[Function]}
-    style={
-      Object {
-        "alignItems": "center",
-        "flexDirection": "row",
-      }
-    }
   >
     <Avatar
       avatarUrl="me.png"
-      style={
-        Object {
-          "marginRight": 12,
-        }
-      }
     />
     <Text
       accessible={true}
       allowFontScaling={true}
       disabled={false}
       ellipsizeMode="tail"
-      style={
-        Array [
-          Object {
-            "color": "#5D757A",
-            "fontSize": 15,
-          },
-          Object {
-            "color": "#A79A9A",
-            "fontStyle": "italic",
-          },
-        ]
-      }
     >
       Hi Joe, how can you help today?
     </Text>
@@ -67,61 +23,20 @@ exports[`CommentPrompt renders correctly 1`] = `
 `;
 
 exports[`CommentPrompt renders with comment text 1`] = `
-<View
-  style={
-    Object {
-      "backgroundColor": "white",
-      "borderRadius": 4,
-      "height": 50,
-      "justifyContent": "center",
-      "left": 0,
-      "marginHorizontal": 8,
-      "paddingHorizontal": 7,
-      "paddingVertical": 12,
-      "right": 0,
-      "shadowColor": undefined,
-      "shadowOffset": Object {
-        "height": 5,
-        "width": 0,
-      },
-      "shadowOpacity": 0.1,
-      "shadowRadius": 15,
-    }
-  }
->
+<View>
   <TouchableOpacity
     activeOpacity={0.2}
     focusedOpacity={0.7}
     onPress={[Function]}
-    style={
-      Object {
-        "alignItems": "center",
-        "flexDirection": "row",
-      }
-    }
   >
     <Avatar
       avatarUrl="me.png"
-      style={
-        Object {
-          "marginRight": 12,
-        }
-      }
     />
     <Text
       accessible={true}
       allowFontScaling={true}
       disabled={false}
       ellipsizeMode="tail"
-      style={
-        Array [
-          Object {
-            "color": "#5D757A",
-            "fontSize": 15,
-          },
-          null,
-        ]
-      }
     >
       A long enough comment that it will 
     </Text>
@@ -130,16 +45,7 @@ exports[`CommentPrompt renders with comment text 1`] = `
 `;
 
 exports[`PostDetails renders correctly 1`] = `
-<View
-  style={
-    Object {
-      "backgroundColor": "white",
-      "flex": 1,
-      "paddingLeft": 4,
-      "paddingRight": 4,
-    }
-  }
->
+<View>
   <Connect(Comments)
     footer={
       <CommentPrompt
@@ -155,13 +61,7 @@ exports[`PostDetails renders correctly 1`] = `
       />
     }
     header={
-      <View
-        style={
-          Object {
-            "marginBottom": 16,
-          }
-        }
-      >
+      <View>
         <PostHeader
           communities={
             Array [
@@ -182,13 +82,7 @@ exports[`PostDetails renders correctly 1`] = `
           slug="foom"
           type="request"
         />
-        <View
-          style={
-            Object {
-              "marginBottom": 12,
-            }
-          }
-        >
+        <View>
           <SpaceFillingImage
             imageUrl="foom.png"
           />
