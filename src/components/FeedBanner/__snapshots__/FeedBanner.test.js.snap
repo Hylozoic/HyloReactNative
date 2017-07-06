@@ -191,6 +191,7 @@ exports[`PostPrompt renders correctly with a user 1`] = `
         Object {
           "color": "#A79A9A",
           "fontSize": 15,
+          "fontStyle": "italic",
         }
       }
     >
