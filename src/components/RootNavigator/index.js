@@ -14,6 +14,7 @@ import stacksInTabsFactory from './stacksInTabsFactory'
 import PostEditor from '../PostEditor'
 import DetailsEditor from '../PostEditor/DetailsEditor'
 import PostDetails from '../PostDetails'
+import tabStyles from '../Tabs/styles'
 
 // Tab Home Screens
 const tabs = {
@@ -48,10 +49,7 @@ const tabNavigatorConfig = {
     indicatorStyle: {
       display: 'none'
     },
-    style: {
-      backgroundColor: 'white',
-      borderTopWidth: 0.4
-    }
+    style: tabStyles.tabNavigator
   }
 }
 
@@ -83,7 +81,7 @@ const mainStackRoute = {
   }
 }
 
-const rootNavigatorRoutes = Object.assign({}, ...[mainStackRoute, screensInStack])
+const rootNavigatorRoutes = Object.assign({}, mainStackRoute, screensInStack)
 
 const RootNavigator = StackNavigator(
   rootNavigatorRoutes

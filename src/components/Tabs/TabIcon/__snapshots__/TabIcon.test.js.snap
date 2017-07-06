@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly with all=true, and no community or user 1`] = `
+<View>
+  <Icon
+    name={Object {}}
+    size={25}
+    style={
+      Object {
+        "color": "#06C470",
+        "textAlign": "center",
+      }
+    }
+  />
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    disabled={false}
+    ellipsizeMode="tail"
+    style={
+      Object {
+        "color": "#06C470",
+        "textAlign": "center",
+      }
+    }
+  >
+    Object {}
+  </Text>
+</View>
+`;
