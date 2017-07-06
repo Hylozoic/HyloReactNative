@@ -1,6 +1,5 @@
-import {
-  StackNavigator
-} from 'react-navigation'
+import { StackNavigator } from 'react-navigation'
+import React from 'react'
 
 import TabIcon from '../Tabs/TabIcon'
 
@@ -30,9 +29,9 @@ export default function stacksInTabsFactory (tabs, screens) {
     routeConfigs[key] = {
       screen: stackNavigatorFactory(obj, screens, key),
       navigationOptions: {
-        tabBarLabel: ({ focused }) => {
-          return TabIcon(key, focused)
-        }
+        tabBarLabel: ({ focused }) => (
+          <TabIcon name={key} focused={focused} />
+        )
       }
     }
   }
