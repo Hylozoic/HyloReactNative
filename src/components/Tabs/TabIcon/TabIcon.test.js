@@ -5,7 +5,10 @@ import TabIcon from './index'
 
 it('renders correctly with all=true, and no community or user', () => {
   const renderer = new ReactShallowRenderer()
-  renderer.render(<TabIcon />)
+  const name = 'Home'
+  const focused = false
+
+  renderer.render(<TabIcon name={name} focused={focused} />)
   const actual = renderer.getRenderOutput()
 
   expect(actual).toMatchSnapshot()
