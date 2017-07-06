@@ -5,22 +5,12 @@ exports[`renders correctly with all=true, and no community or user 1`] = `
   <Icon
     name="Home"
     size={25}
-    style={
-      Object {
-        "textAlign": "center",
-      }
-    }
   />
   <Text
     accessible={true}
     allowFontScaling={true}
     disabled={false}
     ellipsizeMode="tail"
-    style={
-      Object {
-        "textAlign": "center",
-      }
-    }
   >
     Home
   </Text>

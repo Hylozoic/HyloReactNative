@@ -60,15 +60,6 @@ exports[`ShowMore renders correctly 1`] = `
     disabled={false}
     ellipsizeMode="tail"
     onPress={[Function]}
-    style={
-      Object {
-        "color": "#0DC39F",
-        "fontSize": 13,
-        "marginBottom": 20,
-        "marginLeft": 12,
-        "marginRight": 12,
-      }
-    }
   >
     View 
     7
