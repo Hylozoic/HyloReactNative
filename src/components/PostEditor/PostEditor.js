@@ -2,7 +2,6 @@ import React from 'react'
 import {
   Button,
   KeyboardAvoidingView,
-  Platform,
   ScrollView,
   Text,
   TextInput,
@@ -13,8 +12,9 @@ import PropTypes from 'prop-types'
 import styles from './PostEditor.styles'
 import { get } from 'lodash/fp'
 import striptags from 'striptags'
+import { isIOS } from 'util/platform'
 
-const keyboardVerticalOffset = Platform.os === 'ios' ? 64 : 80
+const keyboardVerticalOffset = isIOS ? 64 : 80
 
 export default class PostEditor extends React.Component {
   static contextTypes = {navigate: PropTypes.func}
@@ -29,23 +29,29 @@ export default class PostEditor extends React.Component {
 
   constructor (props) {
     super(props)
+    const { post, communityId } = props
     this.state = {
-      title: get('title', props.post) || '',
-      type: 'discussion'
+      title: get('title', post) || '',
+      type: 'discussion',
+      communityIds: post ? post.communities.map(x => x.id) : [communityId]
     }
   }
 
   componentDidMount () {
-    const { post, navigation, setDetails, save } = this.props
+    const { post, navigation, setDetails } = this.props
     setDetails(get('details', post))
 
     navigation.setParams({
-      headerTitle: 'New Post', // TODO change for editing
+      headerTitle: post ? 'Edit Post' : 'New Post',
       save: () => {
+        const { title, type, communityIds } = this.state
         const postData = {
-          // TODO
+          title,
+          type,
+          details: this.props.details,
+          communities: communityIds.map(id => ({id}))
         }
-        return save(postData)
+        return this.props.save(postData)
       }
     })
   }

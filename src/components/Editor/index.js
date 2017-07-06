@@ -12,11 +12,11 @@ export default class Editor extends React.Component {
   }
 
   insertMention () {
-    console.log('insertMention')
+    alert('insertMention: TODO')
   }
 
   insertTopic () {
-    console.log('insertTopic')
+    alert('insertTopic: TODO')
   }
 
   render () {

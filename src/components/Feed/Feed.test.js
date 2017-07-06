@@ -16,7 +16,9 @@ it('renders correctly', () => {
   renderer.render(<Feed
     community={community}
     currentUser={currentUser}
-    newPost={newPost} />)
+    newPost={newPost}
+    showPost={() => {}}
+    editPost={() => {}} />)
   const actual = renderer.getRenderOutput()
 
   expect(actual).toMatchSnapshot()

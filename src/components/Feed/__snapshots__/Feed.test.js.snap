@@ -15,6 +15,7 @@ exports[`renders correctly 1`] = `
         "id": "1",
       }
     }
+    editPost={[Function]}
     header={
       <FeedBanner
         all={false}

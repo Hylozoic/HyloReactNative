@@ -3,7 +3,7 @@ import React from 'react'
 import { Text, TouchableOpacity, View, FlatList } from 'react-native'
 import Comment from '../Comment'
 import Loading from '../Loading'
-const { func, array } = React.PropTypes
+import { func, array } from 'prop-types'
 import styles from './Comments.styles'
 
 export default class Comments extends React.Component {

@@ -2,7 +2,7 @@
 import React from 'react'
 import { View, Text } from 'react-native'
 import Avatar from '../Avatar'
-const { object } = React.PropTypes
+import { object } from 'prop-types'
 import styles from './Comment.styles'
 
 export default class Comment extends React.Component {

@@ -1,9 +1,10 @@
 import React from 'react'
-import { Button, Platform, KeyboardAvoidingView } from 'react-native'
+import { Button, KeyboardAvoidingView } from 'react-native'
 import Editor from '../../Editor'
 import { get } from 'lodash/fp'
+import { isIOS } from 'util/platform'
 
-const keyboardVerticalOffset = Platform.os === 'ios' ? 64 : 80
+const keyboardVerticalOffset = isIOS ? 64 : 80
 
 export default class DetailsEditor extends React.Component {
   static navigationOptions = ({ navigation }) => {

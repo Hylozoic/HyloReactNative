@@ -1,14 +1,19 @@
 import React from 'react'
 import { Button, Text, View } from 'react-native'
-import mixins from '../style/mixins'
 import { connect } from 'react-redux'
+
+import mixins from '../style/mixins'
 import { logout } from './Login/actions'
 
-function Settings ({ name, navigator, logout }) {
+function Settings ({ navigation, logout }) {
+  const { name } = navigation.state.params
+  const close = () =>
+    navigation.dispatch({ type: 'Navigation/BACK' })
+
   return <View style={styles.view}>
     <Text>Hello, {name}! Here be settings. Arr</Text>
     <Button onPress={logout} title='Log out' />
-    <Button onPress={navigator.pop} title='Close' />
+    <Button onPress={close} title='Close' />
   </View>
 }
 

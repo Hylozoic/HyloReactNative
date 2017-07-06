@@ -10,6 +10,9 @@ import {
   FETCH_POSTS
 } from '../actions/fetchPosts'
 import {
+  CREATE_POST
+} from '../../components/PostEditor/PostEditor.store'
+import {
   FETCH_POST
 } from '../actions/fetchPost'
 import {
@@ -29,6 +32,10 @@ export default function (state = {}, action) {
   // detect the metadata and produce a generic action, and have this reducer
   // handle only that action.
   switch (type) {
+    case CREATE_POST:
+      root = payload.data.createPost
+      return matchNewPostIntoQueryResults(state, root)
+
     case FETCH_POSTS:
       root = payload.data.posts || payload.data.community.posts
       return appendIds(state, type, meta.graphql.variables, root)
@@ -49,10 +56,10 @@ function matchNewPostIntoQueryResults (state, {id, type, communities}) {
   */
   return reduce((memo, community) => {
     const queriesToMatch = [
-      {id: community.slug},
-      {id: community.slug, filter: type},
-      {id: community.slug, sortBy: 'updated'},
-      {id: community.slug, sortBy: 'updated', filter: type}
+      {slug: community.slug},
+      {slug: community.slug, filter: type},
+      {slug: community.slug, sortBy: 'updated'},
+      {slug: community.slug, sortBy: 'updated', filter: type}
     ]
     return reduce((innerMemo, params) => {
       return prependIdForCreate(innerMemo, FETCH_POSTS, params, id)
@@ -62,13 +69,14 @@ function matchNewPostIntoQueryResults (state, {id, type, communities}) {
 
 function prependIdForCreate (state, type, params, id) {
   const key = buildKey(type, params)
-  const existingIds = get('ids', state[key]) || []
+  if (!state[key]) return state
+
   return {
     ...state,
     [key]: {
-      ids: [id].concat(existingIds),
-      total: state[key] && state[key].total + 1,
-      hasMore: state[key] && state[key].hasMore
+      ids: [id].concat(state[key].ids),
+      total: state[key].total + 1,
+      hasMore: state[key].hasMore
     }
   }
 }

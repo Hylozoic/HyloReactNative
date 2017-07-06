@@ -1,11 +1,11 @@
 import {
   API_HOST, IOS_EMULATOR_API_HOST, ANDROID_EMULATOR_API_HOST
 } from 'react-native-dotenv'
-import { Platform } from 'react-native'
 import { setSessionCookie } from './session'
+import { isIOS } from 'util/platform'
 
 const HOST = __DEV__
-  ? Platform.OS === 'ios' ? IOS_EMULATOR_API_HOST : ANDROID_EMULATOR_API_HOST
+  ? isIOS ? IOS_EMULATOR_API_HOST : ANDROID_EMULATOR_API_HOST
   : API_HOST
 
 export default function fetchJSON (path, params, options = {}) {

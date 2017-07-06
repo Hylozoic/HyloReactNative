@@ -1,14 +1,12 @@
-import {
-  StackNavigator
-} from 'react-navigation'
+import { StackNavigator } from 'react-navigation'
+import React from 'react'
+
+import TabIcon from '../Tabs/TabIcon'
 
 function stackNavigatorFactory (tabObject, otherScreens, tabName) {
-  const paths = Object.assign({}, ...[tabObject, otherScreens])
+  const paths = Object.assign({}, tabObject, otherScreens)
   const config = {
-    initialRouteName: tabName,
-    navigationOptions: {
-      title: tabName
-    }
+    initialRouteName: tabName
   }
 
   const stackNavigator = StackNavigator(
@@ -28,7 +26,14 @@ export default function stacksInTabsFactory (tabs, screens) {
   for (const key of Object.keys(tabs)) {
     const obj = {}
     obj[key] = tabs[key]
-    routeConfigs[key] = {screen: stackNavigatorFactory(obj, screens, key)}
+    routeConfigs[key] = {
+      screen: stackNavigatorFactory(obj, screens, key),
+      navigationOptions: {
+        tabBarLabel: ({ focused }) => (
+          <TabIcon name={key} focused={focused} />
+        )
+      }
+    }
   }
   return routeConfigs
 }
