@@ -10,6 +10,7 @@ import Comments from '../Comments'
 import { get } from 'lodash/fp'
 const { shape, any, object, string, func, array, bool } = React.PropTypes
 import styles from './PostDetails.styles'
+import striptags from 'striptags'
 
 export default class PostDetails extends React.Component {
   static propTypes = {
@@ -43,7 +44,8 @@ export default class PostDetails extends React.Component {
       currentUser,
       editPost,
       pending,
-      newComment
+      newComment,
+      commentEdit
     } = this.props
     const slug = get('0.slug', post.communities)
 
@@ -79,20 +81,29 @@ export default class PostDetails extends React.Component {
     return <View style={styles.container}>
       <Comments
         header={postCard}
-        footer={<CommentPrompt {...{currentUser, newComment}} />}
+        footer={<CommentPrompt {...{currentUser, newComment, commentEdit}} />}
         postId={post.id}
         postPending={pending} />
     </View>
   }
 }
 
-export function CommentPrompt ({ currentUser, newComment }) {
+export function CommentPrompt ({ currentUser, newComment, commentEdit }) {
   if (!currentUser) return null
   const { avatarUrl } = currentUser
+
+  const commentExcerpt = commentEdit && striptags(commentEdit, [], ' ').substring(0, 35)
+
+  const promptText = commentExcerpt || `Hi ${currentUser.firstName()}, how can you help today?`
+  const promptTextStyle = [
+    styles.promptText,
+    commentEdit ? null : styles.placeholder
+  ]
+
   return <View style={styles.commentPrompt}>
     <TouchableOpacity onPress={newComment} style={styles.promptButton}>
       <Avatar avatarUrl={avatarUrl} style={styles.avatar} />
-      <Text style={styles.promptText}>Hi {currentUser.firstName()}, how can you help today?</Text>
+      <Text style={promptTextStyle}>{promptText}</Text>
     </TouchableOpacity>
   </View>
 }

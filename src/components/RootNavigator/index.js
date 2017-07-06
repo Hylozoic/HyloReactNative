@@ -13,6 +13,7 @@ import stacksInTabsFactory from './stacksInTabsFactory'
 import PostEditor from '../PostEditor'
 import DetailsEditor from '../PostEditor/DetailsEditor'
 import PostDetails from '../PostDetails'
+import CommentEditor from '../PostDetails/CommentEditor'
 
 const tabs = {
   Home: {screen: Home},
@@ -27,7 +28,8 @@ const screens = {
   Settings: {screen: Settings},
   PostEditor: {screen: PostEditor},
   DetailsEditor: {screen: DetailsEditor},
-  PostDetails: {screen: PostDetails}
+  PostDetails: {screen: PostDetails},
+  CommentEditor: {screen: CommentEditor}
 }
 
 Object.freeze(tabs)

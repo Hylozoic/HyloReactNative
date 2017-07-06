@@ -1,4 +1,4 @@
-import { capeCod10, capeCod40, mineralGreen, mercury } from '../../style/colors'
+import { capeCod10, capeCod40, mineralGreen, mercury, nevada } from '../../style/colors'
 
 export default {
   postCard: {
@@ -60,8 +60,11 @@ export default {
     marginRight: 12
   },
   promptText: {
-    color: capeCod40,
     fontSize: 15,
-    fontStyle: 'italic'
+    color: nevada
+  },
+  placeholder: {
+    fontStyle: 'italic',
+    color: capeCod40
   }
 }
