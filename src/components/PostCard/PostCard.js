@@ -59,7 +59,8 @@ export default class PostCard extends React.Component {
       </View>
       <PostBody title={post.title}
         details={post.details}
-        linkPreview={post.linkPreview} />
+        linkPreview={post.linkPreview}
+        slug={slug} />
       <PostFooter id={post.id}
         currentUser={currentUser}
         commenters={post.commenters}
