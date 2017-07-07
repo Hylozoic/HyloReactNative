@@ -1,9 +1,8 @@
 import React from 'react'
-import { Button, Platform, KeyboardAvoidingView } from 'react-native'
+import { Button, KeyboardAvoidingView } from 'react-native'
 import Editor from '../../Editor'
 import { get } from 'lodash/fp'
-
-const keyboardVerticalOffset = Platform.os === 'ios' ? 64 : 80
+import { keyboardAvoidingViewProps as kavProps } from 'util/viewHelpers'
 
 export default class CommentEditor extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -35,8 +34,7 @@ export default class CommentEditor extends React.Component {
   }
 
   render () {
-    return <KeyboardAvoidingView style={styles.container} behavior='padding'
-      keyboardVerticalOffset={keyboardVerticalOffset}>
+    return <KeyboardAvoidingView style={styles.container} {...kavProps}>
       <Editor ref={ref => { this.editor = ref }}
         initialContent={this.props.content} />
     </KeyboardAvoidingView>
