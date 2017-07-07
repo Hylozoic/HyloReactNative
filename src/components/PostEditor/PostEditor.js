@@ -12,9 +12,7 @@ import PropTypes from 'prop-types'
 import styles from './PostEditor.styles'
 import { get } from 'lodash/fp'
 import striptags from 'striptags'
-import { isIOS } from 'util/platform'
-
-const keyboardVerticalOffset = isIOS ? 64 : 80
+import { keyboardAvoidingViewProps as kavProps } from 'util/viewHelpers'
 
 export default class PostEditor extends React.Component {
   static contextTypes = {navigate: PropTypes.func}
@@ -61,8 +59,7 @@ export default class PostEditor extends React.Component {
     const { title, type } = this.state
     const detailsExcerpt = striptags(details).substring(0, 100)
 
-    return <KeyboardAvoidingView style={styles.container} behavior='padding'
-      keyboardVerticalOffset={keyboardVerticalOffset}>
+    return <KeyboardAvoidingView style={styles.container} {...kavProps}>
       <ScrollView style={styles.scrollContainer}>
         <View style={styles.scrollContent}>
           <SectionLabel>What are you posting today?</SectionLabel>
