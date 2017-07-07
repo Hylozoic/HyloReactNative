@@ -6,6 +6,7 @@ import Comments, { ShowMore } from './Comments'
 describe('Comments', () => {
   it('renders correctly', () => {
     const header = <Text>Some React Code</Text>
+    const footer = <Text>Some More Code</Text>
     const comments = [
       {id: 1},
       {id: 2},
@@ -16,6 +17,7 @@ describe('Comments', () => {
     renderer.render(<Comments
       comments={comments}
       header={header}
+      footer={footer}
       total={17}
       fetchComments={() => {}}
       hasMore

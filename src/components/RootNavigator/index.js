@@ -14,6 +14,7 @@ import stacksInTabsFactory from './stacksInTabsFactory'
 import PostEditor from '../PostEditor'
 import DetailsEditor from '../PostEditor/DetailsEditor'
 import PostDetails from '../PostDetails'
+import CommentEditor from '../PostDetails/CommentEditor'
 import tabStyles from '../Tabs/styles'
 
 // Tab Home Screens
@@ -30,7 +31,8 @@ const screensInTabs = {
   WelcomeScene: {screen: WelcomeScene},
   PostEditor: {screen: PostEditor},
   DetailsEditor: {screen: DetailsEditor},
-  PostDetails: {screen: PostDetails}
+  PostDetails: {screen: PostDetails},
+  CommentEditor: {screen: CommentEditor}
 }
 
 // Screens that work outside of tabs, Settings, Messages, etc.

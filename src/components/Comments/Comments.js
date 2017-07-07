@@ -16,6 +16,7 @@ export default class Comments extends React.Component {
     const {
       comments,
       header,
+      footer,
       pending,
       total,
       hasMore,
@@ -31,11 +32,16 @@ export default class Comments extends React.Component {
         fetchComments={fetchComments} />
     </View>
 
+    const listFooterComponent = <View style={styles.footer}>
+      {footer}
+    </View>
+
     return <FlatList
       data={comments}
       renderItem={({ item }) => <Comment comment={item} />}
       keyExtractor={(item, index) => item.id}
       ListHeaderComponent={listHeaderComponent}
+      ListFooterComponent={listFooterComponent}
     />
   }
 }
