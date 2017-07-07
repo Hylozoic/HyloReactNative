@@ -2,15 +2,18 @@ import React from 'react'
 import { Image, View, StyleSheet, Text } from 'react-native'
 import HTMLView from 'react-native-htmlview'
 import { decode } from 'ent'
-import { present, sanitize } from 'hylo-utils/text'
+import { present, sanitize, textLength, truncate } from 'hylo-utils/text'
 
 import LinkPreview from '../LinkPreview'
 
-// const maxDetailsLength = 144
+const MAX_DETAILS_LENGTH = 144
 
 export default function PostBody ({ title, details, linkPreview, slug }) {
   const decodedTitle = decode(title)
-  const presentedDetails = present(sanitize(details), {slug})
+  let presentedDetails = present(sanitize(details), {slug})
+  if (textLength(presentedDetails) > MAX_DETAILS_LENGTH) {
+    presentedDetails = truncate(presentedDetails, MAX_DETAILS_LENGTH)
+  }
 
   return <View style={styles.container}>
     <Text style={styles.title}>{decodedTitle}</Text>

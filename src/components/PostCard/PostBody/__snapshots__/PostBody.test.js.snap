@@ -1,0 +1,262 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches the last snapshot 1`] = `
+<View>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    disabled={false}
+    ellipsizeMode="tail"
+  >
+    Combined breaks and links
+  </Text>
+  <View>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+      onPress={null}
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        disabled={false}
+        ellipsizeMode="tail"
+        style={
+          Object {
+            "color": "#5D757A",
+            "fontFamily": "Circular-Book",
+            "fontSize": 14,
+            "lineHeight": 20,
+            "marginTop": 12,
+          }
+        }
+      >
+        This post has a 
+      </Text>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        disabled={false}
+        ellipsizeMode="tail"
+        onPress={[Function]}
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          disabled={false}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#5D757A",
+              "fontFamily": "Circular-Book",
+              "fontSize": 14,
+              "lineHeight": 20,
+              "marginTop": 12,
+            }
+          }
+        >
+          Flargle
+        </Text>
+      </Text>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        disabled={false}
+        ellipsizeMode="tail"
+        style={
+          Object {
+            "color": "#5D757A",
+            "fontFamily": "Circular-Book",
+            "fontSize": 14,
+            "lineHeight": 20,
+            "marginTop": 12,
+          }
+        }
+      >
+         mention.
+      </Text>
+      
+      
+      
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+      onPress={null}
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        disabled={false}
+        ellipsizeMode="tail"
+        style={
+          Object {
+            "color": "#5D757A",
+            "fontFamily": "Circular-Book",
+            "fontSize": 14,
+            "lineHeight": 20,
+            "marginTop": 12,
+          }
+        }
+      >
+        Then a break.
+      </Text>
+      
+      
+      
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+      onPress={null}
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        disabled={false}
+        ellipsizeMode="tail"
+        style={
+          Object {
+            "color": "#5D757A",
+            "fontFamily": "Circular-Book",
+            "fontSize": 14,
+            "lineHeight": 20,
+            "marginTop": 12,
+          }
+        }
+      >
+        Then a para ending with a mention 
+      </Text>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        disabled={false}
+        ellipsizeMode="tail"
+        onPress={[Function]}
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          disabled={false}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#5D757A",
+              "fontFamily": "Circular-Book",
+              "fontSize": 14,
+              "lineHeight": 20,
+              "marginTop": 12,
+            }
+          }
+        >
+          Anita Cartwright
+        </Text>
+      </Text>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        disabled={false}
+        ellipsizeMode="tail"
+        style={
+          Object {
+            "color": "#5D757A",
+            "fontFamily": "Circular-Book",
+            "fontSize": 14,
+            "lineHeight": 20,
+            "marginTop": 12,
+          }
+        }
+      >
+         
+      </Text>
+      
+      
+      
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+      onPress={null}
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        disabled={false}
+        ellipsizeMode="tail"
+        onPress={[Function]}
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          disabled={false}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#5D757A",
+              "fontFamily": "Circular-Book",
+              "fontSize": 14,
+              "lineHeight": 20,
+              "marginTop": 12,
+            }
+          }
+        >
+          Alexane Rowe
+        </Text>
+      </Text>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        disabled={false}
+        ellipsizeMode="tail"
+        style={
+          Object {
+            "color": "#5D757A",
+            "fontFamily": "Circular-Book",
+            "fontSize": 14,
+            "lineHeight": 20,
+            "marginTop": 12,
+          }
+        }
+      >
+         
+      </Text>
+      
+      
+      
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+      onPress={null}
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        disabled={false}
+        ellipsizeMode="tail"
+        style={
+          Object {
+            "color": "#5D757A",
+            "fontFamily": "Circular-Book",
+            "fontSize": 14,
+            "lineHeight": 20,
+            "marginTop": 12,
+          }
+        }
+      >
+        More characters to trigger …
+      </Text>
+    </Text>
+  </View>
+</View>
+`;
