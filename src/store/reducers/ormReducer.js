@@ -28,7 +28,6 @@ export default function ormReducer (state = {}, action) {
       break
 
     case CREATE_COMMENT:
-      console.log('ormReducer')
       const post = session.Post.safeGet({id: meta.postId})
       if (!post) break
       post.update({commentsTotal: (post.commentsTotal || 0) + 1})
