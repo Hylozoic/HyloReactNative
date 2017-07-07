@@ -1,3 +1,7 @@
+/**
+ * @providesModule store/models
+ */
+
 import { ORM } from 'redux-orm'
 import './Model.extension'
 import Activity from './Activity'

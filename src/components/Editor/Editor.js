@@ -2,6 +2,7 @@ import React from 'react'
 import { Text, View } from 'react-native'
 import { RichTextEditor, RichTextToolbar, actions } from 'react-native-zss-rich-text-editor'
 import Icon from '../Icon'
+import { SearchType } from '../Search'
 
 const INSERT_MENTION = 'Hylo/INSERT_MENTION'
 const INSERT_TOPIC = 'Hylo/INSERT_TOPIC'
@@ -14,20 +15,22 @@ export default class Editor extends React.Component {
   insertMention () {
     const { navigation } = this.props
     navigation.navigate('Search', {
-      type: 'mention',
+      type: SearchType.MENTION,
       title: 'Mention a person',
       onSelect: person => {
         alert(`You chose ${person.name}! Good choice!`)
+        // TODO: format as HTML and insert
       }
     })
   }
 
   insertTopic () {
     this.props.navigation.navigate('Search', {
-      type: 'topic',
+      type: SearchType.TOPIC,
       title: 'Insert a topic tag',
       onSelect: topic => {
         alert(`You chose ${topic.name}! Good choice!`)
+        // TODO: format as HTML and insert
       }
     })
   }

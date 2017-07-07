@@ -9,8 +9,6 @@ import {
   View
 } from 'react-native'
 import { keyboardAvoidingViewProps as kavProps } from 'util/viewHelpers'
-import faker from 'faker'
-import { get, times } from 'lodash/fp'
 import Icon from '../Icon'
 import styles from './Search.styles'
 
@@ -20,18 +18,7 @@ export default class Search extends React.Component {
   })
 
   render () {
-    const { onSelect, type } = get('navigation.state.params', this.props) || {}
-
-    const results = times(() => ({
-      id: faker.random.number(),
-      name: faker.name.findName(),
-      avatarUrl: faker.image.avatar()
-    }), 10)
-
-    const select = item => {
-      this.props.navigation.goBack()
-      onSelect(item)
-    }
+    const { type, results, select, updateSearch } = this.props
 
     const renderItem = ({ item }) =>
       <SearchResult item={item} type={type} onPress={() => select(item)} />
@@ -39,7 +26,8 @@ export default class Search extends React.Component {
     return <KeyboardAvoidingView style={styles.container} {...kavProps}>
       <View style={styles.inputWrapper}>
         <Icon name='Search' style={styles.inputIcon} />
-        <TextInput style={styles.input} autoFocus />
+        <TextInput style={styles.input} autoFocus
+          onChangeText={updateSearch} />
       </View>
       <View style={styles.resultsWrapper}>
         <FlatList data={results}
