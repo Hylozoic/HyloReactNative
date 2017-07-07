@@ -26,7 +26,8 @@ export default class DetailsEditor extends React.Component {
   render () {
     return <KeyboardAvoidingView style={styles.container} {...kavProps}>
       <Editor ref={ref => { this.editor = ref }}
-        initialContent={this.props.content} />
+        initialContent={this.props.content}
+        navigation={this.props.navigation} />
     </KeyboardAvoidingView>
   }
 }

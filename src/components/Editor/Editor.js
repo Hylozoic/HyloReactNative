@@ -12,11 +12,24 @@ export default class Editor extends React.Component {
   }
 
   insertMention () {
-    alert('insertMention: TODO')
+    const { navigation } = this.props
+    navigation.navigate('Search', {
+      type: 'mention',
+      title: 'Mention a person',
+      onSelect: person => {
+        alert(`You chose ${person.name}! Good choice!`)
+      }
+    })
   }
 
   insertTopic () {
-    alert('insertTopic: TODO')
+    this.props.navigation.navigate('Search', {
+      type: 'topic',
+      title: 'Insert a topic tag',
+      onSelect: topic => {
+        alert(`You chose ${topic.name}! Good choice!`)
+      }
+    })
   }
 
   render () {
