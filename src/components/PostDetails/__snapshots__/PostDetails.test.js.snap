@@ -1,8 +1,65 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders correctly 1`] = `
+exports[`CommentPrompt renders correctly 1`] = `
+<View>
+  <TouchableOpacity
+    activeOpacity={0.2}
+    focusedOpacity={0.7}
+    onPress={[Function]}
+  >
+    <Avatar
+      avatarUrl="me.png"
+    />
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+    >
+      Hi Joe, how can you help today?
+    </Text>
+  </TouchableOpacity>
+</View>
+`;
+
+exports[`CommentPrompt renders with comment text 1`] = `
+<View>
+  <TouchableOpacity
+    activeOpacity={0.2}
+    focusedOpacity={0.7}
+    onPress={[Function]}
+  >
+    <Avatar
+      avatarUrl="me.png"
+    />
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+    >
+      A long enough comment that it will 
+    </Text>
+  </TouchableOpacity>
+</View>
+`;
+
+exports[`PostDetails renders correctly 1`] = `
 <View>
   <Connect(Comments)
+    footer={
+      <CommentPrompt
+        commentEdit={undefined}
+        currentUser={
+          Object {
+            "avatarUrl": "me.png",
+            "firstName": [Function],
+            "id": 123,
+          }
+        }
+        newComment={undefined}
+      />
+    }
     header={
       <View>
         <PostHeader
@@ -53,6 +110,8 @@ exports[`renders correctly 1`] = `
           commentsTotal={12}
           currentUser={
             Object {
+              "avatarUrl": "me.png",
+              "firstName": [Function],
               "id": 123,
             }
           }

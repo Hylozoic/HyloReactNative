@@ -10,9 +10,7 @@ import {
 } from './Comments.store'
 
 export function mapStateToProps (state, props) {
-
   const pending = props.postPending || state.pending[FETCH_COMMENTS]
-
 
   return {
     comments: getComments(state, props),

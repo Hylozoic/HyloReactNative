@@ -5,8 +5,6 @@ import Icon from '../../Icon'
 import styles from '../styles'
 
 export default function TabIcon (props) {
-  console.log('TabIcon')
-  console.log(props)
   return <View>
     <Icon
       name={props.name}

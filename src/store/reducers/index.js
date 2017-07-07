@@ -6,6 +6,7 @@ import pending from './pending'
 import queryResults from './queryResults'
 import FeedList from '../../components/FeedList/FeedList.store'
 import PostEditor from '../../components/PostEditor/PostEditor.store'
+import CommentEditor from '../../components/PostDetails/CommentEditor/CommentEditor.store'
 
 const combinedReducers = combineReducers({
   orm: ormReducer,
@@ -13,7 +14,8 @@ const combinedReducers = combineReducers({
   pending,
   queryResults,
   FeedList,
-  PostEditor
+  PostEditor,
+  CommentEditor
 })
 
 export default persist(combinedReducers)

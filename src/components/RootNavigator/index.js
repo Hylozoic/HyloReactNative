@@ -15,6 +15,7 @@ import PostEditor from '../PostEditor'
 import DetailsEditor from '../PostEditor/DetailsEditor'
 import PostDetails from '../PostDetails'
 import Search from '../Search'
+import CommentEditor from '../PostDetails/CommentEditor'
 import tabStyles from '../Tabs/styles'
 
 // Tab Home Screens
@@ -32,7 +33,8 @@ const screensInTabs = {
   PostEditor: {screen: PostEditor},
   DetailsEditor: {screen: DetailsEditor},
   PostDetails: {screen: PostDetails},
-  Search: {screen: Search}
+  Search: {screen: Search},
+  CommentEditor: {screen: CommentEditor}
 }
 
 // Screens that work outside of tabs, Settings, Messages, etc.

@@ -35,12 +35,6 @@ export default {
     color: 'white',
     backgroundColor: 'transparent'
   },
-  icon: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: 'white',
-    backgroundColor: 'transparent'
-  },
   postPrompt: {
     ...postPromptShape,
     padding: 12,
@@ -66,6 +60,7 @@ export default {
   },
   promptText: {
     color: capeCod40,
-    fontSize: 15
+    fontSize: 15,
+    fontStyle: 'italic'
   }
 }
