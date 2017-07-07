@@ -29,7 +29,9 @@ export default class FeedList extends Component {
       pending,
       header,
       showPost,
-      editPost
+      editPost,
+      showMember,
+      showTopic
     } = this.props
 
     const listHeaderComponent = <View>
@@ -93,7 +95,11 @@ export function ListControl ({ selected, options, onChange }) {
 export function PostRow ({ post, showPost, editPost }) {
   return <View style={styles.postRow}>
     <TouchableOpacity onPress={() => showPost(post.id)}>
-      <PostCard post={post} editPost={() => editPost(post.id)} />
+      <PostCard
+        post={post}
+        editPost={() => editPost(post.id)}
+        showMember={showMember}
+        showTopic={showTopic} />
     </TouchableOpacity>
   </View>
 }

@@ -15,6 +15,8 @@ export default class Feed extends Component {
         community={community}
         showPost={showPost}
         editPost={editPost}
+        showMember={showMember}
+        showTopic={showTopic}
         header={
           <FeedBanner community={community} currentUser={currentUser}
             all={!community} newPost={newPost} />
