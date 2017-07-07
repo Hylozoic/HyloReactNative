@@ -1,9 +1,8 @@
 import { connect } from 'react-redux'
-import { get } from 'lodash/fp'
 import { findMentions, findTopics, getResults, SearchType } from './Search.store'
 
 function mapStateToProps (state, props) {
-  const type = get('state.params.type', props.navigation)
+  const { type } = props.navigation.state.params
   return {
     results: getResults(state, props),
     type
@@ -11,14 +10,14 @@ function mapStateToProps (state, props) {
 }
 
 function mapDispatchToProps (dispatch, { navigation }) {
-  const type = get('state.params.type', navigation)
+  const { type, communityId } = navigation.state.params
   let updateSearch
   switch (type) {
     case SearchType.MENTION:
       updateSearch = term => dispatch(findMentions(term))
       break
     case SearchType.TOPIC:
-      updateSearch = term => dispatch(findTopics(term))
+      updateSearch = term => dispatch(findTopics(term, communityId))
       break
   }
   return {

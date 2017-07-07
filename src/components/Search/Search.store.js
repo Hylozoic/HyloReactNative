@@ -1,10 +1,11 @@
 import { createSelector as ormCreateSelector } from 'redux-orm'
 import orm from 'store/models'
-import { get } from 'lodash/fp'
 
 export const MODULE_NAME = 'Search'
 export const FIND_MENTIONS = `${MODULE_NAME}/FIND_MENTIONS`
 export const FIND_MENTIONS_PENDING = `${MODULE_NAME}/FIND_MENTIONS_PENDING`
+export const FIND_TOPICS = `${MODULE_NAME}/FIND_TOPICS`
+export const FIND_TOPICS_PENDING = `${MODULE_NAME}/FIND_TOPICS_PENDING`
 export const SearchType = {
   MENTION: 'mention',
   TOPIC: 'topic'
@@ -17,6 +18,11 @@ export default function reducer (state = {}, action) {
       return {
         ...state,
         mentionSearchTerm: meta.graphql.variables.term
+      }
+    case FIND_TOPICS_PENDING:
+      return {
+        ...state,
+        topicSearchTerm: meta.graphql.variables.term
       }
   }
   return state
@@ -41,25 +47,74 @@ export function findMentions (term) {
   }
 }
 
+// TODO make this work for all communities & multiple specific communities
+export function findTopics (term, communityId) {
+  const collectTopics = results =>
+    results.community.communityTopics.items.map(item => item.topic)
+  return {
+    type: FIND_TOPICS,
+    graphql: {
+      query: `query ($term: String, $communityId: ID) {
+        community(id: $communityId) {
+          communityTopics(autocomplete: $term, first: 1) {
+            items {
+              topic {
+                id
+                name
+              }
+            }
+          }
+        }
+      }`,
+      variables: {
+        term,
+        communityId
+      }
+    },
+    meta: {
+      extractModel: {
+        getRoot: collectTopics,
+        modelName: 'Topic',
+        append: true
+      }
+    }
+  }
+}
+
 const moduleSelector = state => state[MODULE_NAME]
 
 export const getMentions = ormCreateSelector(
   orm,
   state => state.orm,
   moduleSelector,
-  (session, moduleNode) => {
-    const { mentionSearchTerm } = moduleNode
+  (session, substate) => {
+    const { mentionSearchTerm } = substate
     if (!mentionSearchTerm) return []
 
+    const term = mentionSearchTerm.toLowerCase()
     return session.Person.all()
-    .filter(({ name }) => name &&
-      name.toLowerCase().match(mentionSearchTerm.toLowerCase()))
+    .filter(({ name }) => name && name.toLowerCase().match(term))
+    .toRefArray()
+  }
+)
+
+export const getTopics = ormCreateSelector(
+  orm,
+  state => state.orm,
+  moduleSelector,
+  (session, substate) => {
+    const { topicSearchTerm } = substate
+    if (!topicSearchTerm) return []
+
+    const term = topicSearchTerm.toLowerCase()
+    return session.Topic.all()
+    .filter(({ name }) => name && name.toLowerCase().match(term))
     .toRefArray()
   }
 )
 
 export function getSearchTerm (state, props) {
-  const type = get('state.params.type', props.navigation)
+  const { type } = props.navigation.state.params
   switch (type) {
     case SearchType.MENTION:
       return moduleSelector(state).mentionSearchTerm
@@ -69,20 +124,11 @@ export function getSearchTerm (state, props) {
 }
 
 export function getResults (state, props) {
-  const type = get('state.params.type', props.navigation)
+  const { type } = props.navigation.state.params
   switch (type) {
     case SearchType.MENTION:
       return getMentions(state, props)
+    case SearchType.TOPIC:
+      return getTopics(state, props)
   }
-}
-
-import faker from 'faker'
-import { times } from 'lodash/fp'
-
-function fakeResults (count) {
-  return times(() => ({
-    id: faker.random.number(),
-    name: faker.name.findName(),
-    avatarUrl: faker.image.avatar()
-  }), count)
 }

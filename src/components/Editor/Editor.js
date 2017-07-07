@@ -25,9 +25,11 @@ export default class Editor extends React.Component {
   }
 
   insertTopic () {
-    this.props.navigation.navigate('Search', {
+    const { navigation, communityId } = this.props
+    navigation.navigate('Search', {
       type: SearchType.TOPIC,
       title: 'Insert a topic tag',
+      communityId,
       onSelect: topic => {
         alert(`You chose ${topic.name}! Good choice!`)
         // TODO: format as HTML and insert

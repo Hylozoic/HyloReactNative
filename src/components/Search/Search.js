@@ -26,8 +26,7 @@ export default class Search extends React.Component {
     return <KeyboardAvoidingView style={styles.container} {...kavProps}>
       <View style={styles.inputWrapper}>
         <Icon name='Search' style={styles.inputIcon} />
-        <TextInput style={styles.input} autoFocus
-          onChangeText={updateSearch} />
+        <TextInput style={styles.input} autoFocus onChangeText={updateSearch} />
       </View>
       <View style={styles.resultsWrapper}>
         <FlatList data={results}
