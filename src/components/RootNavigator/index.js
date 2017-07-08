@@ -33,7 +33,7 @@ const screensInTabs = {
   PostEditor: {screen: PostEditor},
   DetailsEditor: {screen: DetailsEditor},
   PostDetails: {screen: PostDetails},
-  MemberProfile: {screen: MemberProfile}
+  MemberProfile: {screen: MemberProfile},
   CommentEditor: {screen: CommentEditor}
 }
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Image, View, StyleSheet, Text } from 'react-native'
+import { Image, Linking, StyleSheet, Text, View } from 'react-native'
 import HTMLView from 'react-native-htmlview'
 import { decode } from 'ent'
 import { present, sanitize, textLength, truncate } from 'hylo-utils/text'
@@ -12,7 +12,17 @@ const MAX_DETAILS_LENGTH = 144
 // the more robust solution would be to use a different method to `present`, or
 // teach `present` to do React navigation.
 function linkHandler (url, showMember, showTopic, slug) {
-  showMember(1)
+  const communityRoute = `/c/${slug}/`
+  const variableRoute = url.substring(communityRoute.length)
+  const [ prefix, suffix ] = variableRoute.split('/')
+  switch (prefix) {
+    case 'm':
+      return showMember(suffix)
+    case 'tag':
+      return showTopic(suffix)
+    default:
+      Linking.openURL(url)
+  }
 }
 
 export default function PostBody ({ title, details, linkPreview, slug, showMember, showTopic }) {
