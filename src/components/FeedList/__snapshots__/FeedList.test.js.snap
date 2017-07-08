@@ -118,6 +118,8 @@ exports[`PostRow renders correctly 1`] = `
           "id": 1,
         }
       }
+      showMember={undefined}
+      showTopic={undefined}
     />
   </TouchableOpacity>
 </View>

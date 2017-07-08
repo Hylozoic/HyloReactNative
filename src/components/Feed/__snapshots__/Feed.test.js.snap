@@ -25,7 +25,9 @@ exports[`renders correctly 1`] = `
         newPost={[Function]}
       />
     }
+    showMember={undefined}
     showPost={[Function]}
+    showTopic={undefined}
   />
 </View>
 `;
