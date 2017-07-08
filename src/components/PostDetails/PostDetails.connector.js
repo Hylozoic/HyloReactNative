@@ -1,5 +1,7 @@
 import { connect } from 'react-redux'
 import fetchPost, { FETCH_POST } from '../../store/actions/fetchPost'
+import getMe from '../../store/selectors/getMe'
+import { getCommentEdits } from './CommentEditor/CommentEditor.store'
 import getPost from '../../store/selectors/getPost'
 
 function getPostId (state, props) {
@@ -10,10 +12,14 @@ function mapStateToProps (state, props) {
   const id = getPostId(state, props)
   const post = getPost(state, {id})
   const pending = !!state.pending[FETCH_POST]
+  const currentUser = getMe(state, props)
+  const commentEdit = getCommentEdits(state, {postId: id})
 
   return {
     post,
-    pending
+    pending,
+    currentUser,
+    commentEdit
   }
 }
 
@@ -24,7 +30,11 @@ function mapDispatchToProps (dispatch, props) {
     fetchPost: () => dispatch(fetchPost(id)),
     editPost: () => props.navigation.navigate('PostEditor', {id}),
     showMember: id => props.navigation.navigate('MemberProfile', {id}),
-    showTopic: topicName => props.navigation.navigate('Feed', {topicName})
+    showTopic: topicName => props.navigation.navigate('Feed', {topicName}),
+    newComment: () => {
+      return props.navigation.navigate('CommentEditor', {postId: id})
+    },
+    editPost: () => props.navigation.navigate('PostEditor', {id})
   }
 }
 

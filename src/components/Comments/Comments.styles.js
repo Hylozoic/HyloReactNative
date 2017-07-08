@@ -1,6 +1,9 @@
 import { caribbeanGreen } from '../../style/colors'
 
 export default {
+  footer: {
+    marginBottom: 30
+  },
   showMore: {
     marginLeft: 12,
     marginRight: 12,

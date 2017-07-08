@@ -2,6 +2,18 @@
 
 exports[`Comments renders correctly 1`] = `
 <FlatList
+  ListFooterComponent={
+    <View>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        disabled={false}
+        ellipsizeMode="tail"
+      >
+        Some More Code
+      </Text>
+    </View>
+  }
   ListHeaderComponent={
     <View>
       <Text
