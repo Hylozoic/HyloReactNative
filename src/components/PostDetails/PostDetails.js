@@ -29,7 +29,9 @@ export default class PostDetails extends React.Component {
       avatarUrl: string
     }),
     editPost: func,
-    pending: bool
+    pending: bool,
+    showMember: func,
+    showTopic: func
   }
 
   componentDidMount () {
@@ -41,7 +43,9 @@ export default class PostDetails extends React.Component {
       post,
       currentUser,
       editPost,
-      pending
+      pending,
+      showMember,
+      showTopic
     } = this.props
     const slug = get('0.slug', post.communities)
 
@@ -60,7 +64,10 @@ export default class PostDetails extends React.Component {
       </View>
       <PostBody title={post.title}
         details={post.details}
-        linkPreview={post.linkPreview} />
+        linkPreview={post.linkPreview}
+        slug={slug}
+        showMember={showMember}
+        showTopic={showTopic} />
       {!!location && <View style={[styles.infoRow, styles.bottomInfoRow]}>
         <Text style={styles.infoRowLabel}>Location:</Text>
         <Text style={styles.infoRowinfo}>{location}</Text>

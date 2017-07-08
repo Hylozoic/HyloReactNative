@@ -22,7 +22,9 @@ function mapDispatchToProps (dispatch, props) {
 
   return {
     fetchPost: () => dispatch(fetchPost(id)),
-    editPost: () => props.navigation.navigate('PostEditor', {id})
+    editPost: () => props.navigation.navigate('PostEditor', {id}),
+    showMember: id => props.navigation.navigate('MemberProfile', {id}),
+    showTopic: topicName => props.navigation.navigate('Topic', {topicName})
   }
 }
 
