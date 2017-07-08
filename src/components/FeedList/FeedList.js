@@ -92,7 +92,7 @@ export function ListControl ({ selected, options, onChange }) {
   </TouchableOpacity>
 }
 
-export function PostRow ({ post, showPost, editPost }) {
+export function PostRow ({ post, showPost, editPost, showMember, showTopic }) {
   return <View style={styles.postRow}>
     <TouchableOpacity onPress={() => showPost(post.id)}>
       <PostCard

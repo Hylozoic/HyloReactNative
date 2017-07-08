@@ -7,7 +7,15 @@ import styles from './Feed.styles'
 
 export default class Feed extends Component {
   render () {
-    const { community, currentUser, newPost, showPost, editPost } = this.props
+    const {
+      community,
+      currentUser,
+      newPost,
+      showPost,
+      editPost,
+      showMember,
+      showTopic
+    } = this.props
     if (!currentUser) return <Loading style={{flex: 1}} />
 
     return <View style={styles.container}>
