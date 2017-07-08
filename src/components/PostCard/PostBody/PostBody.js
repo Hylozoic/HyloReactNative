@@ -8,7 +8,14 @@ import LinkPreview from '../LinkPreview'
 
 const MAX_DETAILS_LENGTH = 144
 
-export default function PostBody ({ title, details, linkPreview, slug }) {
+// TODO: Arguably, we shouldn't be translating routes from the web client here...
+// the more robust solution would be to use a different method to `present`, or
+// teach `present` to do React navigation.
+function linkHandler (url, showMember, showTopic, slug) {
+  showMember(1)
+}
+
+export default function PostBody ({ title, details, linkPreview, slug, showMember, showTopic }) {
   const decodedTitle = decode(title)
   let presentedDetails = present(sanitize(details), {slug})
   if (textLength(presentedDetails) > MAX_DETAILS_LENGTH) {
@@ -18,6 +25,7 @@ export default function PostBody ({ title, details, linkPreview, slug }) {
   return <View style={styles.container}>
     <Text style={styles.title}>{decodedTitle}</Text>
     <HTMLView
+      onLinkPress={url => linkHandler(url, showMember, showTopic, slug)}
       stylesheet={richTextStyles}
       textComponentProps={{ style: styles.details }}
       value={presentedDetails} />

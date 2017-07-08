@@ -50,7 +50,12 @@ export default class FeedList extends Component {
       <FlatList
         data={posts}
         renderItem={({ item }) =>
-          <PostRow post={item} showPost={showPost} editPost={editPost} />}
+          <PostRow
+            post={item}
+            showPost={showPost}
+            editPost={editPost}
+            showMember={showMember}
+            showTopic={showTopic} />}
         keyExtractor={(item, index) => item.id}
         onEndReached={fetchMorePosts}
         ListHeaderComponent={listHeaderComponent}
