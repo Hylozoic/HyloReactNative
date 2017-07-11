@@ -37,11 +37,19 @@ export default class Editor extends React.Component {
     })
   }
 
+  setupEditor (ref) {
+    this.editor = ref
+    if (ref && this.props.onChange) {
+      this.editor.registerContentChangeListener(this.props.onChange)
+    }
+  }
+
   render () {
     return <View style={[styles.container, this.props.style]}>
       <RichTextEditor initialContentHTML={this.props.initialContent}
         hiddenTitle
-        ref={ref => { this.editor = ref }}
+        enableOnChange
+        ref={ref => this.setupEditor(ref)}
         contentPlaceholder='details' />
       <RichTextToolbar getEditor={() => this.editor}
         actions={[
