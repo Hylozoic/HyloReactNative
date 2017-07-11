@@ -94,6 +94,9 @@ exports[`PostDetails renders correctly 1`] = `
               "id": "34",
             }
           }
+          showMember={undefined}
+          showTopic={undefined}
+          slug="foom"
           title="Hi"
         />
         <PostFooter
