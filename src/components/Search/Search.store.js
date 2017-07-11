@@ -98,6 +98,7 @@ export const getMentions = ormCreateSelector(
   }
 )
 
+// FIXME this could return topics that are not in the current community
 export const getTopics = ormCreateSelector(
   orm,
   state => state.orm,
@@ -112,16 +113,6 @@ export const getTopics = ormCreateSelector(
     .toRefArray()
   }
 )
-
-export function getSearchTerm (state, props) {
-  const { type } = props.navigation.state.params
-  switch (type) {
-    case SearchType.MENTION:
-      return moduleSelector(state).mentionSearchTerm
-    case SearchType.TOPIC:
-      return moduleSelector(state).topicSearchTerm
-  }
-}
 
 export function getResults (state, props) {
   const { type } = props.navigation.state.params
