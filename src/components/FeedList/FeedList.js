@@ -4,18 +4,23 @@ import styles from './FeedList.styles'
 import PostCard from '../PostCard'
 import Loading from '../Loading'
 import Icon from '../Icon'
-import { find, get } from 'lodash/fp'
+import { find, get, isEmpty } from 'lodash/fp'
 
 export default class FeedList extends Component {
+  fetchOrShowCached () {
+    const { hasMore, posts, fetchPosts } = this.props
+    if (isEmpty(posts) && hasMore !== false) fetchPosts()
+  }
+
   componentDidMount () {
-    this.props.fetchPosts()
+    this.fetchOrShowCached()
   }
 
   componentDidUpdate (prevProps) {
     if (prevProps.sortBy !== this.props.sortBy ||
         prevProps.filter !== this.props.filter ||
         get('id', prevProps.community) !== get('id', this.props.community)) {
-      this.props.fetchPosts()
+      this.fetchOrShowCached()
     }
   }
 
