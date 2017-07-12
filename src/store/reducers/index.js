@@ -3,6 +3,7 @@ import { persist } from './persistence'
 import { combineReducers } from 'redux'
 import ormReducer from './ormReducer'
 import pending from './pending'
+import currentCommunity from './currentCommunity'
 import queryResults from './queryResults'
 import FeedList from '../../components/FeedList/FeedList.store'
 import PostEditor from '../../components/PostEditor/PostEditor.store'
@@ -14,6 +15,7 @@ const combinedReducers = combineReducers({
   session: sessionReducer,
   pending,
   queryResults,
+  currentCommunity,
   FeedList,
   PostEditor,
   CommentEditor,

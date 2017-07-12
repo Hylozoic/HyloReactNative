@@ -31,10 +31,14 @@ export default class DrawerMenu extends Component {
   }
 
   render () {
-    const { logout, currentUser, navigation } = this.props
+    const { logout, currentUser, navigation, changeCommunity } = this.props
     const name = get('name', currentUser) || 'you'
-    const showSettings = () =>
-      navigation.navigate('Settings', {name})
+    const showSettings = () => navigation.navigate('Settings', {name})
+
+    const selectCommunity = community => {
+      changeCommunity(community.id)
+      navigation.navigate('DrawerClose')
+    }
 
     return <View style={styles.parent}>
       <View style={styles.header}>
@@ -46,7 +50,9 @@ export default class DrawerMenu extends Component {
       <ListView style={styles.menu}
         ref={ref => { this.listView = ref }}
         dataSource={this.state.memberships}
-        renderRow={membership => <CommunityRow community={membership.community} />}
+        renderRow={({ community }) =>
+          <CommunityRow community={community}
+            onPress={() => selectCommunity(community)} />}
         enableEmptySections />
       <View style={styles.footer}>
         <Image source={{uri: get('avatarUrl', currentUser)}} style={styles.avatar} />
@@ -76,13 +82,9 @@ function TextButton ({ text, onPress }) {
   </TouchableOpacity>
 }
 
-function CommunityRow ({ community }) {
-  const showCommunity = () => {
-    console.log(`clicked on ${community.name}`)
-  }
-
+function CommunityRow ({ community, onPress }) {
   return <View style={styles.communityRow}>
-    <TouchableOpacity onPress={showCommunity} style={styles.communityRowTouchable}>
+    <TouchableOpacity onPress={onPress} style={styles.communityRowTouchable}>
       <Image source={{uri: community.avatarUrl}} style={styles.communityAvatar} />
       <Text style={styles.text}>{community.name}</Text>
     </TouchableOpacity>
