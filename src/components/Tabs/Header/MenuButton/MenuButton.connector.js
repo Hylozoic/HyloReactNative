@@ -1,12 +1,9 @@
 import { connect } from 'react-redux'
-import component from './MenuButton'
+import getCommunity from '../../../../store/selectors/getCommunity'
 
 export function mapStateToProps (state) {
-  const placeholderCurrentCommunity = {
-    avatarUrl: 'https://s3.amazonaws.com/uifaces/faces/twitter/josevnclch/128.jpg'
-  }
   return {
-    currentCommunity: placeholderCurrentCommunity
+    currentCommunity: getCommunity(state, {id: state.currentCommunity})
   }
 }
 

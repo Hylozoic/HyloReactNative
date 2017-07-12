@@ -4,7 +4,7 @@ import styles from './FeedList.styles'
 import PostCard from '../PostCard'
 import Loading from '../Loading'
 import Icon from '../Icon'
-import { find } from 'lodash/fp'
+import { find, get } from 'lodash/fp'
 
 export default class FeedList extends Component {
   componentDidMount () {
@@ -13,7 +13,8 @@ export default class FeedList extends Component {
 
   componentDidUpdate (prevProps) {
     if (prevProps.sortBy !== this.props.sortBy ||
-        prevProps.filter !== this.props.filter) {
+        prevProps.filter !== this.props.filter ||
+        get('id', prevProps.community) !== get('id', this.props.community)) {
       this.props.fetchPosts()
     }
   }
