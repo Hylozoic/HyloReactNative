@@ -19,6 +19,7 @@ function mapDispatchToProps (dispatch, props) {
   const { navigation } = props
   const postId = getPostId(null, props)
   const saveAction = postId ? updatePost : createPost
+  const communityId = get('navigation.state.params.communityId', props)
 
   return {
     save: postData => {
@@ -41,7 +42,7 @@ function mapDispatchToProps (dispatch, props) {
       })
     },
     editDetails: () => {
-      return navigation.navigate('DetailsEditor')
+      return navigation.navigate('DetailsEditor', {communityId})
     },
     setDetails: content => dispatch(setDetails(content))
   }

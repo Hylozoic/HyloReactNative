@@ -34,9 +34,12 @@ export default class CommentEditor extends React.Component {
   }
 
   render () {
+    const { content, navigation } = this.props
     return <KeyboardAvoidingView style={styles.container} {...kavProps}>
       <Editor ref={ref => { this.editor = ref }}
-        initialContent={this.props.content} />
+        initialContent={content}
+        navigation={navigation}
+        communityId={navigation.state.params.communityId} />
     </KeyboardAvoidingView>
   }
 }

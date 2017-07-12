@@ -3,7 +3,7 @@ import { setDetails } from '../PostEditor.store'
 
 function mapStateToProps (state, props) {
   return {
-    content: state.PostEditor.details
+    initialContent: state.PostEditor.details
   }
 }
 

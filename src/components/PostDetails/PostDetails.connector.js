@@ -3,6 +3,7 @@ import fetchPost, { FETCH_POST } from '../../store/actions/fetchPost'
 import getMe from '../../store/selectors/getMe'
 import { getCommentEdits } from './CommentEditor/CommentEditor.store'
 import getPost from '../../store/selectors/getPost'
+import { get } from 'lodash/fp'
 
 function getPostId (state, props) {
   return props.navigation.state.params.id
@@ -31,11 +32,23 @@ function mapDispatchToProps (dispatch, props) {
     editPost: () => props.navigation.navigate('PostEditor', {id}),
     showMember: id => props.navigation.navigate('MemberProfile', {id}),
     showTopic: topicName => props.navigation.navigate('Feed', {topicName}),
-    newComment: () => {
-      return props.navigation.navigate('CommentEditor', {postId: id})
-    },
-    editPost: () => props.navigation.navigate('PostEditor', {id})
+    newComment: communityId => {
+      return props.navigation.navigate('CommentEditor', {
+        postId: id,
+        communityId
+      })
+    }
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)
+function mergeProps (stateProps, dispatchProps, ownProps) {
+  // TODO: handle posts in multiple communities
+  const communityId = get('communities.0.id', stateProps.post)
+  return {
+    ...stateProps,
+    ...dispatchProps,
+    newComment: () => dispatchProps.newComment(communityId)
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps)

@@ -13,6 +13,7 @@ import styles from './PostEditor.styles'
 import { get } from 'lodash/fp'
 import striptags from 'striptags'
 import { keyboardAvoidingViewProps as kavProps } from 'util/viewHelpers'
+import { decode } from 'ent'
 
 export default class PostEditor extends React.Component {
   static contextTypes = {navigate: PropTypes.func}
@@ -57,7 +58,6 @@ export default class PostEditor extends React.Component {
   render () {
     const { details, editDetails } = this.props
     const { title, type } = this.state
-    const detailsExcerpt = striptags(details).substring(0, 100)
 
     return <KeyboardAvoidingView style={styles.container} {...kavProps}>
       <ScrollView style={styles.scrollContainer}>
@@ -80,7 +80,7 @@ export default class PostEditor extends React.Component {
           <SectionLabel>Details</SectionLabel>
           <TouchableOpacity style={[styles.textInputWrapper, styles.section]}
             onPress={editDetails}>
-            <TextInput value={detailsExcerpt} style={styles.textInput}
+            <TextInput value={excerptDetails(details)} style={styles.textInput}
               placeholder={detailsPlaceholder}
               editable={false}
               underlineColorAndroid='transparent' />
@@ -113,4 +113,10 @@ function TypeButton ({ type, selected, onPress }) {
       {type.toUpperCase()}
     </Text>
   </TouchableOpacity>
+}
+
+function excerptDetails (details) {
+  return decode(striptags(details, [], ' '))
+  .replace(/\s+/g, ' ')
+  .substring(0, 100)
 }
