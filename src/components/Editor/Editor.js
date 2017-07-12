@@ -4,6 +4,7 @@ import { RichTextEditor, RichTextToolbar, actions } from 'react-native-zss-rich-
 import Icon from '../Icon'
 import Search, { SearchType } from './Search'
 import styles from './Editor.styles'
+import { MENTION_ENTITY_TYPE, TOPIC_ENTITY_TYPE } from 'hylo-utils/constants'
 
 const INSERT_MENTION = 'Hylo/INSERT_MENTION'
 const INSERT_TOPIC = 'Hylo/INSERT_TOPIC'
@@ -35,19 +36,17 @@ export default class Editor extends React.Component {
   }
 
   insertPicked = choice => {
-    const type = this.state.showPicker
-    this.setState({showPicker: false})
-    let url, html
-    switch (type) {
+    let html
+    switch (this.state.showPicker) {
       case SearchType.MENTION:
-        url = `/u/${choice.id}`
-        html = `<a href="${url}">${choice.name}</a>`
+        html = createMentionTag(choice)
         break
       case SearchType.TOPIC:
-        url = `/t/${choice.id}`
-        html = `<a href="${url}">#${choice.name}</a>`
+        html = createTopicTag(choice)
+        break
     }
     this.editor.insertCustomHTML(html)
+    this.setState({showPicker: false})
   }
 
   setupEditor (ref) {
@@ -106,3 +105,9 @@ function ToolbarIcon ({ action }) {
     {content}
   </View>
 }
+
+const createMentionTag = ({ id, name }) =>
+  `<a data-entity-type="${MENTION_ENTITY_TYPE}" data-user-id="${id}">${name}</a>`
+
+const createTopicTag = topic =>
+  `<a data-entity-type="${TOPIC_ENTITY_TYPE}">#${topic.name}</a>`
