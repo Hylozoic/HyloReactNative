@@ -37,8 +37,7 @@ function mapDispatchToProps (dispatch, props) {
         postId: id,
         communityId
       })
-    },
-    editPost: () => props.navigation.navigate('PostEditor', {id})
+    }
   }
 }
 
