@@ -14,7 +14,6 @@ import stacksInTabsFactory from './stacksInTabsFactory'
 import PostEditor from '../PostEditor'
 import DetailsEditor from '../PostEditor/DetailsEditor'
 import PostDetails from '../PostDetails'
-import Search from '../Search'
 import CommentEditor from '../PostDetails/CommentEditor'
 import tabStyles from '../Tabs/styles'
 
@@ -33,7 +32,6 @@ const screensInTabs = {
   PostEditor: {screen: PostEditor},
   DetailsEditor: {screen: DetailsEditor},
   PostDetails: {screen: PostDetails},
-  Search: {screen: Search},
   CommentEditor: {screen: CommentEditor}
 }
 

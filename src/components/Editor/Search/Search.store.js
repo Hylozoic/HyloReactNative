@@ -115,8 +115,7 @@ export const getTopics = ormCreateSelector(
 )
 
 export function getResults (state, props) {
-  const { type } = props.navigation.state.params
-  switch (type) {
+  switch (props.type) {
     case SearchType.MENTION:
       return getMentions(state, props)
     case SearchType.TOPIC:

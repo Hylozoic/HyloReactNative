@@ -8,6 +8,7 @@ export default {
     height: 40,
     padding: 8,
     flexDirection: 'row',
+    alignItems: 'center',
     borderBottomWidth: 0.5,
     borderColor: rhino50
   },
@@ -25,12 +26,14 @@ export default {
     container: {
       paddingVertical: 8,
       paddingHorizontal: 10,
-      flexDirection: 'row'
+      flexDirection: 'row',
+      alignItems: 'center'
     },
     avatar: {
-      height: 20,
-      width: 20,
-      marginRight: 10
+      height: 32,
+      width: 32,
+      marginRight: 10,
+      borderRadius: 16
     }
   }
 }
