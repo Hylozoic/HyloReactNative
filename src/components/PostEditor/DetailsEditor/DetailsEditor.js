@@ -12,7 +12,9 @@ export default class DetailsEditor extends React.Component {
 
   constructor (props) {
     super(props)
-    this.state = {}
+    this.state = {
+      content: props.initialContent
+    }
   }
 
   componentWillUnmount () {
@@ -20,10 +22,10 @@ export default class DetailsEditor extends React.Component {
   }
 
   render () {
-    const { content, navigation } = this.props
+    const { initialContent, navigation } = this.props
     return <KeyboardAvoidingView style={styles.container} {...kavProps}>
       <Editor ref={ref => { this.editor = ref }}
-        initialContent={content}
+        initialContent={initialContent}
         navigation={navigation}
         onChange={content => this.setState({content})}
         communityId={navigation.state.params.communityId} />
