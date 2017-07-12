@@ -29,6 +29,9 @@ function mapDispatchToProps (dispatch, props) {
 
   return {
     fetchPost: () => dispatch(fetchPost(id)),
+    editPost: () => props.navigation.navigate('PostEditor', {id}),
+    showMember: id => props.navigation.navigate('MemberProfile', {id}),
+    showTopic: topicName => props.navigation.navigate('Feed', {topicName}),
     newComment: communityId => {
       return props.navigation.navigate('CommentEditor', {
         postId: id,

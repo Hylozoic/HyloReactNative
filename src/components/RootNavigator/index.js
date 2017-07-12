@@ -14,6 +14,7 @@ import stacksInTabsFactory from './stacksInTabsFactory'
 import PostEditor from '../PostEditor'
 import DetailsEditor from '../PostEditor/DetailsEditor'
 import PostDetails from '../PostDetails'
+import MemberProfile from '../MemberProfile'
 import CommentEditor from '../PostDetails/CommentEditor'
 import tabStyles from '../Tabs/styles'
 
@@ -32,6 +33,7 @@ const screensInTabs = {
   PostEditor: {screen: PostEditor},
   DetailsEditor: {screen: DetailsEditor},
   PostDetails: {screen: PostDetails},
+  MemberProfile: {screen: MemberProfile},
   CommentEditor: {screen: CommentEditor}
 }
 
