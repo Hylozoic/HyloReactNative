@@ -5,6 +5,7 @@ import Icon from '../Icon'
 import Search, { SearchType } from './Search'
 import styles from './Editor.styles'
 import { MENTION_ENTITY_TYPE, TOPIC_ENTITY_TYPE } from 'hylo-utils/constants'
+import { caribbeanGreen } from 'style/colors'
 
 const INSERT_MENTION = 'Hylo/INSERT_MENTION'
 const INSERT_TOPIC = 'Hylo/INSERT_TOPIC'
@@ -45,7 +46,7 @@ export default class Editor extends React.Component {
         html = createTopicTag(choice)
         break
     }
-    this.editor.insertCustomHTML(html + '&nbsp;')
+    this.editor.insertCustomHTML(html)
     this.setState({showPicker: false})
   }
 
@@ -63,7 +64,8 @@ export default class Editor extends React.Component {
         hiddenTitle
         enableOnChange
         ref={ref => this.setupEditor(ref)}
-        contentPlaceholder='details' />
+        contentPlaceholder='details'
+        customCSS={customCSS} />
       <RichTextToolbar getEditor={() => this.editor}
         actions={[
           actions.setBold,
@@ -106,8 +108,24 @@ function ToolbarIcon ({ action }) {
   </View>
 }
 
+// the href atributes below are not used, but their presence changes the
+// behavior of the editor when typing immediately after inserting a tag. without
+// the href attributes, new typing ends up inside the tag.
+
 const createMentionTag = ({ id, name }) =>
-  `<a data-entity-type="${MENTION_ENTITY_TYPE}" data-user-id="${id}">${name}</a>`
+  `<a href="#" data-entity-type="${MENTION_ENTITY_TYPE}" data-user-id="${id}">${name}</a>`
 
 const createTopicTag = topic =>
-  `<a data-entity-type="${TOPIC_ENTITY_TYPE}">#${topic.name}</a>`
+  `<a href="#" data-entity-type="${TOPIC_ENTITY_TYPE}">#${topic.name}</a>`
+
+const customCSS = `
+[data-entity-type="${MENTION_ENTITY_TYPE}"] {
+  text-decoration: none;
+  color: ${caribbeanGreen};
+}
+
+[data-entity-type="${TOPIC_ENTITY_TYPE}"] {
+  text-decoration: none;
+  color: ${caribbeanGreen};
+}
+`
