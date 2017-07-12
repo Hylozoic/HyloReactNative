@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MessagesIcon renders correctly 1`] = `
+<Icon
+  name="Messages"
+  onPress={[Function]}
+/>
+`;
