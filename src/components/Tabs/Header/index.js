@@ -2,11 +2,21 @@ import React from 'react'
 import { Text } from 'react-native'
 
 import MenuButton from './MenuButton'
-import styles from '../styles'
+import MessagesIcon from './MessagesIcon'
+import styles from './Header.styles'
 
 export default function Header (navigation, title) {
+  const openDrawer = () => {
+    navigation.navigate('DrawerOpen')
+  }
+
+  const showMessages = () => {
+    navigation.navigate('Messages')
+  }
+
   return {
     headerTitle: <Text style={styles.headerTitle}>{title}</Text>,
-    headerLeft: <MenuButton navigation={navigation} />
+    headerLeft: <MenuButton openDrawer={openDrawer} />,
+    headerRight: <MessagesIcon showMessages={showMessages} />
   }
 }
