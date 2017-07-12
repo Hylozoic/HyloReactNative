@@ -2,8 +2,6 @@ import React from 'react'
 import { TouchableOpacity, Image } from 'react-native'
 import { get } from 'lodash/fp'
 
-import styles from '../../styles'
-
 export default function MenuButton (props) {
   const { currentCommunity, openDrawer } = props
   // TODO replace with hylo logo
@@ -23,4 +21,13 @@ export default function MenuButton (props) {
       style={styles.avatar}
     />
   </TouchableOpacity>
+}
+
+const styles = {
+  avatar: {
+    marginLeft: 10,
+    width: 30,
+    height: 30,
+    borderRadius: 4
+  }
 }
