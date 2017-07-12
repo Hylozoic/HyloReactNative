@@ -13,6 +13,7 @@ import styles from './PostEditor.styles'
 import { get } from 'lodash/fp'
 import striptags from 'striptags'
 import { keyboardAvoidingViewProps as kavProps } from 'util/viewHelpers'
+import { decode } from 'ent'
 
 export default class PostEditor extends React.Component {
   static contextTypes = {navigate: PropTypes.func}
@@ -115,5 +116,7 @@ function TypeButton ({ type, selected, onPress }) {
 }
 
 function excerptDetails (details) {
-  return striptags(details, [], ' ').replace(/[ ]+/g, ' ').substring(0, 100)
+  return decode(striptags(details, [], ' '))
+  .replace(/\s+/g, ' ')
+  .substring(0, 100)
 }
