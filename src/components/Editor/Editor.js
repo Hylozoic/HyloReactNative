@@ -45,7 +45,7 @@ export default class Editor extends React.Component {
         html = createTopicTag(choice)
         break
     }
-    this.editor.insertCustomHTML(html)
+    this.editor.insertCustomHTML(html + '&nbsp;')
     this.setState({showPicker: false})
   }
 
