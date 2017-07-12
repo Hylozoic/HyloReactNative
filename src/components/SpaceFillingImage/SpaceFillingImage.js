@@ -20,6 +20,10 @@ export default class SpaceFillingImage extends React.Component {
     this.setDimensionsForImage()
   }
 
+  componentWillUnmount () {
+    this.unmounted = true
+  }
+
   componentDidUpdate (prevProps) {
     if (this.props.imageUrl !== prevProps.imageUrl) this.setDimensionsForImage()
   }
@@ -27,11 +31,13 @@ export default class SpaceFillingImage extends React.Component {
   setDimensionsForImage () {
     const { imageUrl } = this.props
     imageUrl && Image.getSize(imageUrl, (imageWidth, imageHeight) => {
+      if (this.unmounted) return
       this.setState({imageWidth, imageHeight})
     })
   }
 
   setContainerWidth = event => {
+    if (this.unmounted) return
     this.setState({containerWidth: event.nativeEvent.layout.width})
   }
 
