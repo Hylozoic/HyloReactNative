@@ -1,7 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders correctly with all=true, and no community or user 1`] = `
+exports[`shows Feed with a community and user 1`] = `
 <Connect(Feed)
+  communityId="1"
   navigation={undefined}
 />
 `;
+
+exports[`shows Loading with no community or user 1`] = `<Loading />`;
