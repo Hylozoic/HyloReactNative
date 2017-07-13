@@ -18,7 +18,7 @@ import PostDetails from '../PostDetails'
 import MemberProfile from '../MemberProfile'
 import CommentEditor from '../PostDetails/CommentEditor'
 import Messages from '../Messages'
-import tabStyles from '../Tabs/styles'
+import tabStyles from '../Tabs/Tabs.styles'
 
 // Tab Home Screens
 const tabs = {

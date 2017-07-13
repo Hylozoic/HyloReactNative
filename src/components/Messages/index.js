@@ -1,13 +1,3 @@
-import React from 'react'
-import { View, Text } from 'react-native'
-
-export default class Messages extends React.Component {
-  static navigationOptions = {
-    title: 'Messages'
-  }
-  render () {
-    return <View>
-      <Text>Messages Container</Text>
-    </View>
-  }
-}
+import component from './Messages'
+import connector from './Messages.connector'
+export default connector(component)

@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`gets threads and denormalizes messages and participants 1`] = `
+Array [
+  Object {
+    "id": 1,
+    "messages": Array [
+      Object {
+        "id": 1,
+        "messageThread": 1,
+        "text": "First message",
+      },
+      Object {
+        "id": 2,
+        "messageThread": 1,
+        "text": "Second message",
+      },
+    ],
+    "participants": Array [
+      Object {
+        "id": 1,
+        "memberships": undefined,
+        "name": "First Person",
+      },
+      Object {
+        "id": 2,
+        "memberships": undefined,
+        "name": "Second Person",
+      },
+    ],
+    "unreadCount": 1,
+  },
+  Object {
+    "id": 2,
+    "messages": Array [
+      Object {
+        "id": 3,
+        "messageThread": 2,
+        "text": "Third message",
+      },
+    ],
+    "participants": Array [
+      Object {
+        "id": 2,
+        "memberships": undefined,
+        "name": "Second Person",
+      },
+      Object {
+        "id": 3,
+        "memberships": undefined,
+        "name": "Third Person",
+      },
+    ],
+    "unreadCount": 1,
+  },
+]
+`;
