@@ -1,5 +1,5 @@
 import { attr, many, Model } from 'redux-orm'
-import { find, get } from 'lodash/fp'
+import { find, get, maxBy } from 'lodash/fp'
 
 const Me = Model.createClass({
   toString () {
@@ -17,6 +17,14 @@ const Me = Model.createClass({
     const membership = find(m =>
       m.community === get('id', community), memberships)
     return get('hasModeratorRole', membership)
+  },
+
+  lastViewedMembership () {
+    return maxBy(m => new Date(m.lastViewedAt), this.memberships.toModelArray())
+  },
+
+  lastViewedCommunity () {
+    return this.lastViewedMembership().community
   }
 })
 

@@ -49,7 +49,7 @@ export function mapDispatchToProps (dispatch, props) {
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
-  const { sortBy, filter, hasMore, posts } = stateProps
+  const { sortBy, filter, hasMore, pending, posts } = stateProps
   const { fetchPostsRaw } = dispatchProps
   const { community } = ownProps
 
@@ -60,9 +60,9 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
 
   const offset = posts.length
 
-  const fetchMorePosts = hasMore
+  const fetchMorePosts = hasMore && !pending
     ? () => fetchPostsRaw({...fetchOpts, offset})
-    : () => { }
+    : () => {}
 
   return {
     ...stateProps,
