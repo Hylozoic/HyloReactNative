@@ -36,7 +36,8 @@ const styles = StyleSheet.create({
   title: {
     color: '#363D3C',
     fontSize: 19,
-    fontFamily: 'Circular-Medium'
+    fontFamily: 'Circular-Medium',
+    marginBottom: 12
   },
   details: {
     marginTop: 12,
