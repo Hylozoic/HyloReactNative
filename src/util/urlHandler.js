@@ -1,6 +1,6 @@
 import { Linking } from 'react-native'
 
-export default function linkHandler (url, showMember, showTopic, slug) {
+export default function urlHandler (url, showMember, showTopic, slug) {
   const communityRoute = `/c/${slug}/`
   const variableRoute = url.substring(communityRoute.length)
   const [ prefix, suffix ] = variableRoute.split('/')
