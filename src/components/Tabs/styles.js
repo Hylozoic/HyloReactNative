@@ -1,9 +1,12 @@
 import { jade } from 'style/colors'
 
 export default {
-  tabNavigator: {
+  tabNavigatorAndroid: {
     backgroundColor: 'white',
     borderTopWidth: 0.4
+  },
+  tabNavigatorIOS: {
+    backgroundColor: 'white'
   },
   activeTab: {
     textAlign: 'center',
@@ -11,5 +14,8 @@ export default {
   },
   inactiveTab: {
     textAlign: 'center'
+  },
+  tabView: {
+    backgroundColor: 'white'
   }
 }

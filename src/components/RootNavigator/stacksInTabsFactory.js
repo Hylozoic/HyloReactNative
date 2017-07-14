@@ -1,7 +1,8 @@
 import { StackNavigator } from 'react-navigation'
 import React from 'react'
-
+import { View } from 'react-native'
 import TabIcon from '../Tabs/TabIcon'
+import TabLabel from '../Tabs/TabLabel'
 
 function stackNavigatorFactory (tabObject, otherScreens, tabName) {
   const paths = Object.assign({}, tabObject, otherScreens)
@@ -29,8 +30,11 @@ export default function stacksInTabsFactory (tabs, screens) {
     routeConfigs[key] = {
       screen: stackNavigatorFactory(obj, screens, key),
       navigationOptions: {
-        tabBarLabel: ({ focused }) => (
+        tabBarIcon: ({ focused }) => (
           <TabIcon name={key} focused={focused} />
+        ),
+        tabBarLabel: ({ focused }) => (
+          <TabLabel name={key} focused={focused} />
         )
       }
     }
