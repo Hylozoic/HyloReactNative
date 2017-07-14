@@ -1,6 +1,5 @@
 import { StackNavigator } from 'react-navigation'
 import React from 'react'
-import { View } from 'react-native'
 import TabIcon from '../Tabs/TabIcon'
 import TabLabel from '../Tabs/TabLabel'
 

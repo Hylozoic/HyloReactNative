@@ -14,8 +14,5 @@ export default {
   },
   inactiveTab: {
     textAlign: 'center'
-  },
-  tabView: {
-    backgroundColor: 'white'
   }
 }
