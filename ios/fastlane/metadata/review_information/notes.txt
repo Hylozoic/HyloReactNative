@@ -1,0 +1,6 @@
+Re the app crashing during the last review: Sorry about that! We found the bug. Turned out it was an issue with the way we were using keychain, not related to IPv6. It's resolved now. 
+
+---
+Hi! The demo user account has access to the "Sandbox" community. This is a private internal community that is not viewable by the public, so feel free to make any changes, post on anything, edit the user profile etc.
+
+Also feel free to contact me if you have any issues or questions using the app.

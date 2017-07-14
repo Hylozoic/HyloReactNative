@@ -1426,6 +1426,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.hylo.HyloA;
 				PRODUCT_NAME = HyloReactNative;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1453,6 +1454,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.hylo.HyloA;
 				PRODUCT_NAME = HyloReactNative;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
