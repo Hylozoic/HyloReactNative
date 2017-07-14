@@ -3,7 +3,7 @@ import {
   TabNavigator,
   StackNavigator
 } from 'react-navigation'
-import { Platform } from 'react-native';
+import { Platform } from 'react-native'
 
 import WelcomeScene from '../WelcomeScene'
 import Feed from '../Feed'
