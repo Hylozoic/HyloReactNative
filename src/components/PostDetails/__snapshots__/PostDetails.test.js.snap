@@ -94,8 +94,8 @@ exports[`PostDetails renders correctly 1`] = `
               "id": "34",
             }
           }
-          showMember={undefined}
-          showTopic={undefined}
+          showMember={[Function]}
+          showTopic={[Function]}
           slug="foom"
           title="Hi"
         />
@@ -127,6 +127,9 @@ exports[`PostDetails renders correctly 1`] = `
     }
     postId="91"
     postPending={true}
+    showMember={[Function]}
+    showTopic={[Function]}
+    slug="foom"
   />
 </View>
 `;

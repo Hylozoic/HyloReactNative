@@ -65,7 +65,8 @@ export default class PostCard extends React.Component {
         linkPreview={post.linkPreview}
         slug={slug}
         showMember={showMember}
-        showTopic={showTopic} />
+        showTopic={showTopic}
+        shouldTruncate={true} />
       <PostFooter id={post.id}
         currentUser={currentUser}
         commenters={post.commenters}
