@@ -78,7 +78,7 @@ export default {
   communityRow: {
     padding: 10,
     paddingLeft: 20,
-    paddingRight: 20
+    paddingRight: 10
   },
   communityRowTouchable: {
     flexDirection: 'row',
@@ -89,6 +89,9 @@ export default {
     width: 30,
     marginRight: 8,
     borderRadius: 4
+  },
+  communityRowText: {
+    flex: 1
   },
   text: {
     color: 'white'

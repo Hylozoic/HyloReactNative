@@ -104,7 +104,7 @@ export function CommentPrompt ({ currentUser, newComment, commentEdit }) {
 
   const commentExcerpt = commentEdit && striptags(commentEdit, [], ' ').substring(0, 35)
 
-  const promptText = commentExcerpt || `Hi ${currentUser.firstName()}, how can you help today?`
+  const promptText = commentExcerpt || `${currentUser.firstName()}, how can you help?`
   const promptTextStyle = [
     styles.promptText,
     commentEdit ? null : styles.placeholder

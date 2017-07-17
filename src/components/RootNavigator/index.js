@@ -3,7 +3,7 @@ import {
   TabNavigator,
   StackNavigator
 } from 'react-navigation'
-import { Platform } from 'react-native'
+import { Dimensions, Platform } from 'react-native'
 
 import WelcomeScene from '../WelcomeScene'
 import Feed from '../Feed'
@@ -73,7 +73,8 @@ const drawerNavigatorRoutes = {
 
 const drawerNavigatorConfig = {
   contentComponent: DrawerMenu,
-  initialRouteName: 'Home'
+  initialRouteName: 'Home',
+  drawerWidth: Dimensions.get('window').width * 0.9
 }
 
 const DrawerAndTabsNavigator = DrawerNavigator(

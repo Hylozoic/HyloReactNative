@@ -32,7 +32,7 @@ export function PostPrompt ({ currentUser, newPost }) {
   return <View style={styles.postPrompt}>
     <TouchableOpacity onPress={newPost} style={styles.promptButton}>
       <Avatar avatarUrl={avatarUrl} style={styles.avatar} />
-      <Text style={styles.promptText}>Hi, {currentUser.firstName()}, what's on your mind?</Text>
+      <Text style={styles.promptText}>{currentUser.firstName()}, what's on your mind?</Text>
     </TouchableOpacity>
   </View>
 }

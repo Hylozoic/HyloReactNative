@@ -60,7 +60,7 @@ export default {
     marginRight: 12
   },
   promptText: {
-    fontSize: 15,
+    fontSize: 14,
     color: nevada
   },
   placeholder: {

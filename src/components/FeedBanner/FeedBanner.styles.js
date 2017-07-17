@@ -4,7 +4,7 @@ import { isIOS } from 'util/platform'
 const postPromptShape = {
   position: 'absolute',
   top: 122,
-  height: 60,
+  height: 52,
   borderRadius: 4,
   left: 0,
   right: 0,
@@ -37,7 +37,8 @@ export default {
   },
   postPrompt: {
     ...postPromptShape,
-    padding: 12,
+    paddingHorizontal: 12,
+    paddingVertical: 8,
     backgroundColor: 'white',
     borderWidth: isIOS ? 0 : 1,
     borderColor: capeCod10
@@ -56,11 +57,11 @@ export default {
     alignItems: 'center'
   },
   avatar: {
-    marginRight: 12
+    marginRight: 10
   },
   promptText: {
     color: capeCod40,
-    fontSize: 15,
+    fontSize: 14,
     fontStyle: 'italic'
   }
 }

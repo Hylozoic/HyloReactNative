@@ -31,7 +31,7 @@ export default class DrawerMenu extends Component {
   }
 
   render () {
-    const { logout, currentUser, navigation, changeCommunity } = this.props
+    const { currentUser, navigation, changeCommunity } = this.props
     const name = get('name', currentUser) || 'you'
     const showSettings = () => navigation.navigate('Settings', {name})
 
@@ -63,7 +63,6 @@ export default class DrawerMenu extends Component {
           <View style={styles.footerButtons}>
             <TextButton text='View Profile' onPress={() => {}} />
             <TextButton text='Settings' onPress={showSettings} />
-            <TextButton text='Log out' onPress={logout} />
           </View>
         </View>
       </View>
@@ -86,7 +85,10 @@ function CommunityRow ({ community, onPress }) {
   return <View style={styles.communityRow}>
     <TouchableOpacity onPress={onPress} style={styles.communityRowTouchable}>
       <Image source={{uri: community.avatarUrl}} style={styles.communityAvatar} />
-      <Text style={styles.text}>{community.name}</Text>
+      <Text style={[styles.text, styles.communityRowText]} ellipsizeMode='tail'
+        numberOfLines={1}>
+        {community.name}
+      </Text>
     </TouchableOpacity>
   </View>
 }
