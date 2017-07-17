@@ -94,7 +94,10 @@ const mainStackRoute = {
 const rootNavigatorRoutes = Object.assign({}, mainStackRoute, screensInStack)
 
 const RootNavigator = StackNavigator(
-  rootNavigatorRoutes
+  rootNavigatorRoutes,
+  {
+    mode: 'modal'
+  }
 )
 
 export default RootNavigator
