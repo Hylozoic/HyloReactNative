@@ -35,7 +35,9 @@ describe('PostDetails', () => {
       post={post}
       currentUser={currentUser}
       editPost={() => {}}
-      pending />)
+      pending
+      showMember={() => {}}
+      showTopic={() => {}} />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()

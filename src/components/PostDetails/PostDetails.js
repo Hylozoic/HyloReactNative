@@ -90,7 +90,10 @@ export default class PostDetails extends React.Component {
         header={postCard}
         footer={<CommentPrompt {...{currentUser, newComment, commentEdit}} />}
         postId={post.id}
-        postPending={pending} />
+        postPending={pending}
+        showMember={showMember}
+        showTopic={showTopic}
+        slug={slug} />
     </View>
   }
 }

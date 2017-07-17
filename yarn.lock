@@ -3584,9 +3584,9 @@ react-native-google-signin@^0.10.0:
   version "0.10.0"
   resolved "https://registry.yarnpkg.com/react-native-google-signin/-/react-native-google-signin-0.10.0.tgz#cc47d3726165735ee61e3a4a589c2ced888f1a98"
 
-react-native-htmlview@^0.10.0:
-  version "0.10.0"
-  resolved "https://registry.yarnpkg.com/react-native-htmlview/-/react-native-htmlview-0.10.0.tgz#bfe3208e1db937e24e9cf4706009d94c18be1f0e"
+react-native-htmlview@^0.11.1:
+  version "0.11.1"
+  resolved "https://registry.yarnpkg.com/react-native-htmlview/-/react-native-htmlview-0.11.1.tgz#cc8cf18b7076a476e39974ed95270d4850725226"
   dependencies:
     entities "^1.1.1"
     htmlparser2-without-node-native "^3.9.0"
@@ -3635,9 +3635,9 @@ react-native-webview-bridge-updated@^1.0.0, react-native-webview-bridge-updated@
     invariant "2.2.0"
     keymirror "0.1.1"
 
-react-native-zss-rich-text-editor@Hylozoic/react-native-zss-rich-text-editor#b8ebfe96:
+react-native-zss-rich-text-editor@Hylozoic/react-native-zss-rich-text-editor#bee3cf5:
   version "1.0.2"
-  resolved "https://codeload.github.com/Hylozoic/react-native-zss-rich-text-editor/tar.gz/b8ebfe96"
+  resolved "https://codeload.github.com/Hylozoic/react-native-zss-rich-text-editor/tar.gz/bee3cf5"
   dependencies:
     react-native-webview-bridge-updated "^1.0.0"
 

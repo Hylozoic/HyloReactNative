@@ -3,6 +3,7 @@ import {
   TabNavigator,
   StackNavigator
 } from 'react-navigation'
+import { Platform } from 'react-native'
 
 import WelcomeScene from '../WelcomeScene'
 import Feed from '../Feed'
@@ -52,10 +53,12 @@ const tabNavigatorConfig = {
   animationEnabled: false,
   swipeEnabled: false,
   tabBarOptions: {
+    showIcon: true,
+    showLabel: true,
     indicatorStyle: {
       display: 'none'
     },
-    style: tabStyles.tabNavigator
+    style: (Platform.OS === 'ios') ? tabStyles.tabNavigatorIOS : tabStyles.tabNavigatorAndroid
   }
 }
 

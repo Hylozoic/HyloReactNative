@@ -4,6 +4,8 @@ import { RichTextEditor, RichTextToolbar, actions } from 'react-native-zss-rich-
 import Icon from '../Icon'
 import Search, { SearchType } from './Search'
 import styles from './Editor.styles'
+import { MENTION_ENTITY_TYPE, TOPIC_ENTITY_TYPE } from 'hylo-utils/constants'
+import { caribbeanGreen } from 'style/colors'
 
 const INSERT_MENTION = 'Hylo/INSERT_MENTION'
 const INSERT_TOPIC = 'Hylo/INSERT_TOPIC'
@@ -35,19 +37,17 @@ export default class Editor extends React.Component {
   }
 
   insertPicked = choice => {
-    const type = this.state.showPicker
-    this.setState({showPicker: false})
-    let url, html
-    switch (type) {
+    let html
+    switch (this.state.showPicker) {
       case SearchType.MENTION:
-        url = `/u/${choice.id}`
-        html = `<a href="${url}">${choice.name}</a>`
+        html = createMentionTag(choice)
         break
       case SearchType.TOPIC:
-        url = `/t/${choice.id}`
-        html = `<a href="${url}">#${choice.name}</a>`
+        html = createTopicTag(choice)
+        break
     }
     this.editor.insertCustomHTML(html)
+    this.setState({showPicker: false})
   }
 
   setupEditor (ref) {
@@ -64,7 +64,8 @@ export default class Editor extends React.Component {
         hiddenTitle
         enableOnChange
         ref={ref => this.setupEditor(ref)}
-        contentPlaceholder='details' />
+        contentPlaceholder='details'
+        customCSS={customCSS} />
       <RichTextToolbar getEditor={() => this.editor}
         actions={[
           actions.setBold,
@@ -106,3 +107,25 @@ function ToolbarIcon ({ action }) {
     {content}
   </View>
 }
+
+// the href atributes below are not used, but their presence changes the
+// behavior of the editor when typing immediately after inserting a tag. without
+// the href attributes, new typing ends up inside the tag.
+
+const createMentionTag = ({ id, name }) =>
+  `<a href="#" data-entity-type="${MENTION_ENTITY_TYPE}" data-user-id="${id}">${name}</a>`
+
+const createTopicTag = topic =>
+  `<a href="#" data-entity-type="${TOPIC_ENTITY_TYPE}">#${topic.name}</a>`
+
+const customCSS = `
+[data-entity-type="${MENTION_ENTITY_TYPE}"] {
+  text-decoration: none;
+  color: ${caribbeanGreen};
+}
+
+[data-entity-type="${TOPIC_ENTITY_TYPE}"] {
+  text-decoration: none;
+  color: ${caribbeanGreen};
+}
+`
