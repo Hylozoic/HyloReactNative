@@ -16,7 +16,7 @@ exports[`CommentPrompt renders correctly 1`] = `
       disabled={false}
       ellipsizeMode="tail"
     >
-      Hi Joe, how can you help today?
+      Joe, how can you help?
     </Text>
   </TouchableOpacity>
 </View>

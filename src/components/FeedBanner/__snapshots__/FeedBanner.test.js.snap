@@ -74,7 +74,6 @@ exports[`PostPrompt renders correctly with a user 1`] = `
       disabled={false}
       ellipsizeMode="tail"
     >
-      Hi, 
       John
       , what's on your mind?
     </Text>
