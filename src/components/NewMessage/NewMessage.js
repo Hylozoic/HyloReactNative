@@ -5,7 +5,7 @@ import styles from './NewMessage.styles'
 
 export default class NewMessage extends React.Component {
   render () {
-    const { recentContacts, allContacts } = this.props
+    const { recentContacts, allContacts, currentUser } = this.props
 
     return <View style={styles.container}>
       <MessageRecipients />
@@ -16,6 +16,7 @@ export default class NewMessage extends React.Component {
         label='All Contacts'
         contacts={allContacts}
         grayed />
+      <MessagePrompt currentUser={currentUser} />
     </View>
   }
 }
@@ -38,13 +39,16 @@ export function ContactRow ({ contact, grayed }) {
   </View>
 }
 
-export function MessagePrompt ({ currentUser, newPost }) {
+export function MessagePrompt ({ currentUser }) {
   if (!currentUser) return null
   const { avatarUrl } = currentUser
-  return <View style={styles.postPrompt}>
-    <TouchableOpacity onPress={newPost} style={styles.promptButton}>
-      <Avatar avatarUrl={avatarUrl} style={styles.promptAvatar} />
-      <Text style={styles.promptText}>{currentUser.firstName()}, what's on your mind?</Text>
-    </TouchableOpacity>
+  return <View style={styles.promptContainer}>
+    <View style={styles.messagePrompt}>
+      <TouchableOpacity style={styles.promptButton}>
+        <Avatar avatarUrl={avatarUrl} style={styles.promptAvatar} dimension={30} />
+        <Text style={styles.promptText}>Type your message here</Text>
+      </TouchableOpacity>
+    </View>
+    <View style={styles.promptShadow} />
   </View>
 }

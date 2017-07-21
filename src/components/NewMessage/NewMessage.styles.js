@@ -1,19 +1,16 @@
-import { capeCod40, capeCod10, rhino80 } from '../../style/colors'
+import { capeCod40, capeCod10, capeCod20, rhino80 } from '../../style/colors'
 import { isIOS } from 'util/platform'
 
 const messagePromptShape = {
-  position: 'absolute',
-  top: 122,
   height: 52,
   borderRadius: 4,
   left: 0,
   right: 0,
-  marginLeft: 16,
-  marginRight: 16
+  flex: 1
 }
 
 const defaultPadding = {
-  paddingHorizontal: 10
+  paddingHorizontal: 12
 }
 
 export default {
@@ -49,9 +46,17 @@ export default {
   contactName: {
     fontFamily: 'Circular-Bold'
   },
-  postPrompt: {
+  promptContainer: {
+    position: 'absolute',
+    bottom: 50,
+    left: 6,
+    right: 6
+  },
+  messagePrompt: {
     ...messagePromptShape,
-    paddingHorizontal: 12,
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 6,
     paddingVertical: 8,
     backgroundColor: 'white',
     borderWidth: isIOS ? 0 : 1,
@@ -59,18 +64,19 @@ export default {
   },
   promptShadow: {
     ...messagePromptShape,
+    position: 'absolute',
     backgroundColor: 'white',
     shadowOffset: {width: 0, height: 4},
     shadowRadius: 5,
     shadowOpacity: 1.0,
-    shadowColor: capeCod10,
+    shadowColor: capeCod20,
     zIndex: -10
   },
   promptButton: {
     flexDirection: 'row',
     alignItems: 'center'
   },
-  avatar: {
+  promptAvatar: {
     marginRight: 10
   },
   promptText: {
