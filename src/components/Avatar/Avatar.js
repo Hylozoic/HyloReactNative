@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 import { Image, View } from 'react-native'
 import { memoize } from 'lodash'
 
-export default function Avatar ({ size, hasBorder, hasOverlap, avatarUrl, zIndex, style }) {
-  const styles = generateStyles({ size, hasBorder, hasOverlap })
+export default function Avatar ({ size, hasBorder, hasOverlap, avatarUrl, zIndex, style, dimension }) {
+  const styles = generateStyles({ size, hasBorder, hasOverlap, dimension })
   return <View style={[styles.container, {zIndex}, style]}>
     <Image style={styles.image} source={{uri: avatarUrl}} />
   </View>
@@ -17,8 +17,8 @@ Avatar.propTypes = {
   zIndex: PropTypes.number
 }
 
-const generateStyles = memoize(({ size = 'medium', hasBorder, hasOverlap }) => {
-  const containerSize = sizes[size]
+const generateStyles = memoize(({ size = 'medium', hasBorder, hasOverlap, dimension }) => {
+  const containerSize = dimension || sizes[size]
   const imageSize = hasBorder ? containerSize - BORDER_WIDTH * 2 : containerSize
   return {
     container: {
@@ -35,8 +35,8 @@ const generateStyles = memoize(({ size = 'medium', hasBorder, hasOverlap }) => {
       height: imageSize
     }
   }
-}, ({ size, hasBorder, hasOverlap }) => {
-  return (size === 'small' << 2) + (hasBorder << 1) + (hasOverlap << 0)
+}, ({ size, hasBorder, hasOverlap, dimension }) => {
+  return (dimension << 3) + (size === 'small' << 2) + (hasBorder << 1) + (hasOverlap << 0)
 })
 
 const BORDER_WIDTH = 2
