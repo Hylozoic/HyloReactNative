@@ -1,5 +1,4 @@
 import { clearSessionCookie } from '../../util/session'
-
 import { LoginManager } from 'react-native-fbsdk'
 import { GoogleSignin } from 'react-native-google-signin'
 
@@ -39,12 +38,15 @@ export function loginWithGoogle (accessToken) {
 export function logout () {
   return {
     type: LOGOUT,
-    payload: () =>
-      clearSessionCookie()
-      .then(() => LoginManager.logOut())
-      .then(() => GoogleSignin.currentUser() && GoogleSignin.signOut())
-      .then(() => ({
-        api: {method: 'delete', path: '/noo/session'}
-      }))
+    payload: {
+      api: {
+        method: 'delete',
+        path: '/noo/session',
+        transform: () =>
+          clearSessionCookie()
+          .then(() => LoginManager.logOut())
+          .then(() => GoogleSignin.currentUser() && GoogleSignin.signOut())
+      }
+    }
   }
 }
