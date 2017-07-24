@@ -1,4 +1,4 @@
-import { capeCod40, capeCod10, capeCod20, rhino80, rhino50 } from '../../style/colors'
+import { capeCod, capeCod10, capeCod20, rhino80, rhino50 } from '../../style/colors'
 import { isIOS } from 'util/platform'
 
 const messagePromptShape = {
@@ -104,9 +104,9 @@ export default {
   promptAvatar: {
     marginRight: 10
   },
-  promptText: {
-    color: capeCod40,
+  promptTextInput: {
+    color: capeCod,
     fontSize: 14,
-    fontStyle: 'italic'
+    flex: 1
   }
 }

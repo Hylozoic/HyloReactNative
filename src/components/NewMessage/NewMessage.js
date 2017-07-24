@@ -10,6 +10,7 @@ import {
 import Avatar from '../Avatar'
 import Icon from '../Icon'
 import styles from './NewMessage.styles'
+import { capeCod40 } from '../../style/colors'
 
 export default class NewMessage extends React.Component {
   render () {
@@ -79,10 +80,10 @@ export function MessagePrompt ({ currentUser }) {
   const { avatarUrl } = currentUser
   return <View style={styles.promptContainer}>
     <View style={styles.messagePrompt}>
-      <TouchableOpacity style={styles.promptButton}>
-        <Avatar avatarUrl={avatarUrl} style={styles.promptAvatar} dimension={30} />
-        <Text style={styles.promptText}>Type your message here</Text>
-      </TouchableOpacity>
+      <Avatar avatarUrl={avatarUrl} style={styles.promptAvatar} dimension={30} />
+      <TextInput style={styles.promptTextInput}
+        placeholder='Type your message here'
+        placeholderTextColor={capeCod40} />
     </View>
     <View style={styles.promptShadow} />
   </View>
