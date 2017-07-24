@@ -1,13 +1,14 @@
 import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
-import ThreadCard, { threadNames, ThreadAvatars } from './ThreadCard'
+import ThreadCard, { threadNames, ThreadAvatars } from './index'
 
 it('renders correctly', () => {
   const message = {
     text: 'Hey, just checking in. Test, test, test.'
   }
+  const currentUser = {id: 1}
   const renderer = new ReactShallowRenderer()
-  renderer.render(<ThreadCard message={message} />)
+  renderer.render(<ThreadCard message={message} currentUser={currentUser} />)
   const actual = renderer.getRenderOutput()
 
   expect(actual).toMatchSnapshot()

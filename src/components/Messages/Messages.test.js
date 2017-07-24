@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
-import Messages from './Messages'
+import Messages from './index'
 
 it('renders correctly', () => {
   const renderer = new ReactShallowRenderer()

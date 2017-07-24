@@ -7,7 +7,8 @@ exports[`MessageRow renders correctly 1`] = `
     focusedOpacity={0.7}
     onPress={[Function]}
   >
-    <Connect(ThreadCard)
+    <ThreadCard
+      currentUser={undefined}
       message={
         Array [
           Object {
