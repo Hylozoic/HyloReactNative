@@ -1,4 +1,4 @@
-import { capeCod40, capeCod10, capeCod20, rhino80 } from '../../style/colors'
+import { capeCod40, capeCod10, capeCod20, rhino80, rhino50 } from '../../style/colors'
 import { isIOS } from 'util/platform'
 
 const messagePromptShape = {
@@ -17,10 +17,35 @@ export default {
   container: {
     backgroundColor: 'white'
   },
-  messageRecipients: {
+  scrollViewContainer: {
     height: 60,
     borderBottomWidth: 1,
-    borderBottomColor: capeCod10
+    borderBottomColor: capeCod20,
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 15
+  },
+  contactTextInput: {
+    flex: 1
+  },
+  contactCard: {
+    borderWidth: 1,
+    borderColor: capeCod20,
+    borderRadius: 4,
+    flexDirection: 'row',
+    alignItems: 'center',
+    height: 38,
+    marginRight: 9,
+    paddingLeft: 5,
+    paddingRight: 10
+  },
+  contactCardAvatar: {
+    marginRight: 10
+  },
+  closeIcon: {
+    paddingLeft: 15,
+    fontSize: 20,
+    color: rhino50
   },
   contactList: {
     ...defaultPadding,

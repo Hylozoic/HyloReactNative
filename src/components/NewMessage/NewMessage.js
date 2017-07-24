@@ -1,14 +1,34 @@
 import React from 'react'
-import { Text, View, TouchableOpacity } from 'react-native'
+import {
+  Dimensions,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  TextInput,
+  View
+} from 'react-native'
 import Avatar from '../Avatar'
+import Icon from '../Icon'
 import styles from './NewMessage.styles'
 
 export default class NewMessage extends React.Component {
   render () {
-    const { recentContacts, allContacts, currentUser } = this.props
+    const {
+      recentContacts,
+      allContacts,
+      currentUser,
+      selectedContacts,
+      removeContact,
+      setContactInput,
+      contactInputText
+     } = this.props
 
     return <View style={styles.container}>
-      <MessageRecipients />
+      <ContactInput
+        contacts={selectedContacts}
+        removeContact={removeContact}
+        onChangeText={setContactInput}
+        text={contactInputText} />
       <ContactList
         label='Recent'
         contacts={recentContacts} />
@@ -21,8 +41,23 @@ export default class NewMessage extends React.Component {
   }
 }
 
-export function MessageRecipients () {
-  return <View style={styles.messageRecipients} />
+export function ContactInput ({ contacts, onChangeText, removeContact }) {
+  const { width } = Dimensions.get('window')
+  const inputStyle = {width: width - 30}
+  return <ScrollView contentContainerStyle={styles.scrollViewContainer} horizontal>
+    {contacts.map(c => <ContactCard contact={c} key={c.id} remove={removeContact} />)}
+    <TextInput onChangeText={onChangeText} style={[styles.contactTextInput, inputStyle]} />
+  </ScrollView>
+}
+
+export function ContactCard ({ contact, remove }) {
+  return <View style={styles.contactCard}>
+    <Avatar avatarUrl={contact.avatarUrl} style={styles.contactCardAvatar} dimension={24} />
+    <Text style={styles.contactName}>{contact.name}</Text>
+    <TouchableOpacity onPress={() => remove(contact.id)}>
+      <Icon name='Ex' style={styles.closeIcon} />
+    </TouchableOpacity>
+  </View>
 }
 
 export function ContactList ({ contacts, label, grayed }) {
