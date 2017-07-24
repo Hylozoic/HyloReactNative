@@ -5,19 +5,22 @@ import {
 } from 'react-navigation'
 import { Dimensions, Platform } from 'react-native'
 
-import WelcomeScene from '../WelcomeScene'
-import Feed from '../Feed'
-import Post from '../Post'
-import Settings from '../Settings'
-import DrawerMenu from '../DrawerMenu'
-import { Home, Members, Topics } from '../Tabs'
-import stacksInTabsFactory from './stacksInTabsFactory'
-import PostEditor from '../PostEditor'
-import DetailsEditor from '../PostEditor/DetailsEditor'
-import PostDetails from '../PostDetails'
-import MemberProfile from '../MemberProfile'
 import CommentEditor from '../PostDetails/CommentEditor'
+import DetailsEditor from '../PostEditor/DetailsEditor'
+import DrawerMenu from '../DrawerMenu'
+import Feed from '../Feed'
+import MemberProfile from '../MemberProfile'
+import Messages from '../Messages'
+import Post from '../Post'
+import PostDetails from '../PostDetails'
+import PostEditor from '../PostEditor'
+import Settings from '../Settings'
+import stacksInTabsFactory from './stacksInTabsFactory'
+import Thread from '../Thread'
 import ThreadList from '../ThreadList'
+import { Home, Members, Topics } from '../Tabs'
+import WelcomeScene from '../WelcomeScene'
+
 import tabStyles from '../Tabs/Tabs.styles'
 
 // Tab Home Screens
@@ -41,7 +44,9 @@ const screensInTabs = {
 
 // Screens that work outside of tabs, Settings, Messages, etc.
 const screensInStack = {
+  Messages: {screen: Messages},
   Settings: {screen: Settings},
+  Thread: {screen: Thread},
   ThreadList: {screen: ThreadList}
 }
 
