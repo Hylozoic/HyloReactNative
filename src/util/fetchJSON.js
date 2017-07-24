@@ -4,7 +4,7 @@ import {
 import { setSessionCookie } from './session'
 import { isIOS } from 'util/platform'
 
-const HOST = __DEV__
+export const HOST = __DEV__
   ? isIOS ? IOS_EMULATOR_API_HOST : ANDROID_EMULATOR_API_HOST
   : API_HOST
 
@@ -23,6 +23,7 @@ export default function fetchJSON (path, params, options = {}) {
   .then(resp => {
     let { status, statusText, url } = resp
     if (status === 200) {
+      // FIXME: this doesn't need to happen every time
       return setSessionCookie(resp).then(() => resp.json())
     }
 
