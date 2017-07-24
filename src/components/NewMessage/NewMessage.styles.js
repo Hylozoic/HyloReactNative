@@ -25,10 +25,10 @@ export default {
     alignItems: 'center',
     paddingHorizontal: 15
   },
-  contactTextInput: {
+  participantTextInput: {
     flex: 1
   },
-  contactCard: {
+  participant: {
     borderWidth: 1,
     borderColor: capeCod20,
     borderRadius: 4,
@@ -39,7 +39,7 @@ export default {
     paddingLeft: 5,
     paddingRight: 10
   },
-  contactCardAvatar: {
+  participantAvatar: {
     marginRight: 10
   },
   closeIcon: {
