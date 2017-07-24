@@ -1,86 +1,108 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import { Button, ScrollView, Text, TextInput, View } from 'react-native'
+import {
+  ScrollView,
+  Text,
+  TextInput,
+  View,
+  TouchableOpacity,
+  Image
+} from 'react-native'
+import validator from 'validator'
+import EntypoIcon from 'react-native-vector-icons/Entypo'
 import FbLoginButton from './FbLoginButton'
 import GoogleLoginButton from './GoogleLoginButton'
-import { vw } from '../../util/viewport'
 import { focus } from '../../util/textInput'
+import styles from './Login.styles'
 
 export default class Login extends React.Component {
-  static propTypes = {
-    error: PropTypes.string,
-    defaultEmail: PropTypes.string,
-    actions: PropTypes.shape({
-      login: PropTypes.func.isRequired,
-      loginWithFacebook: PropTypes.func.isRequired
-    }).isRequired
-  }
-
   constructor (props) {
     super(props)
-    this.state = {email: this.props.defaultEmail}
+    this.state = {
+      email: this.props.defaultEmail,
+      securePassword: true,
+      emailIsValid: false
+    }
   }
 
   login () {
     this.props.actions.login(this.state.email, this.state.password)
   }
 
+  togglePassword () {
+    this.setState({
+      securePassword: !this.state.securePassword
+    })
+  }
+
+  validateEmail (email) {
+    return validator.isEmail(email)
+  }
+
+  setAndValidateEmail (email) {
+    this.setState({
+      email,
+      emailIsValid: this.validateEmail(email)
+    })
+  }
+
   render () {
-    const { error, defaultEmail, actions: { loginWithGoogle, loginWithFacebook } } = this.props
+    const { error, actions: { loginWithGoogle, loginWithFacebook } } = this.props
+    const emailIsValid = this.state.emailIsValid
 
     return <ScrollView contentContainerStyle={styles.login}>
-      <Text style={styles.title}>This is Hylo!</Text>
+      <Image style={styles.logo} source={require('../../assets/Hylo_Logotype_Circle.png')} />
+      <Text style={styles.title}>Log in to Hylo</Text>
       {error && <Text style={styles.error}>{error}</Text>}
       <View>{/* this wrapper view is needed to get TextInput to center-align */}
-        <TextInput style={styles.email} placeholder='Email address'
-          defaultValue={defaultEmail}
-          onChangeText={email => this.setState({email})}
-          returnKeyType='next'
-          autoCapitalize='none'
-          onSubmitEditing={() => focus(this.passwordInput)} />
+        <Text style={styles.label}>Your email address</Text>
+        <View style={emailIsValid ? styles.inputWithIconValid : styles.inputWithIcon}>
+          <TextInput style={emailIsValid ? styles.emailInput : styles.emailInputWithoutIcon}
+            onChangeText={email => this.setAndValidateEmail(email)}
+            returnKeyType='next'
+            autoCapitalize='none'
+            keyboardType='email-address'
+            onSubmitEditing={() => focus(this.passwordInput)}
+            underlineColorAndroid={styles.androidInvisibleUnderline} />
+          {emailIsValid && <EntypoIcon name='check'
+            style={styles.iconGreen}
+          />}
+        </View>
       </View>
-      <View>
-        <TextInput style={styles.password} placeholder='Password'
-          secureTextEntry
-          ref={ref => { this.passwordInput = ref }}
-          onChangeText={password => this.setState({password})}
-          returnKeyType='go'
-          selectTextOnFocus
-          onSubmitEditing={() => this.login()} />
+      <View style={styles.passwordView}>
+        <Text style={styles.label}>Password</Text>
+        <View style={styles.inputWithIcon}>
+          <TextInput style={styles.passwordInput}
+            secureTextEntry={this.state.securePassword}
+            ref={ref => { this.passwordInput = ref }}
+            onChangeText={password => this.setState({password})}
+            returnKeyType='go'
+            selectTextOnFocus
+            onSubmitEditing={() => this.login()}
+            underlineColorAndroid={'rgba(0,0,0,0)'} />
+          <EntypoIcon name={this.state.securePassword ? 'eye' : 'eye-with-line'}
+            style={styles.iconOpaque}
+            onPress={() => this.togglePassword()}
+          />
+        </View>
       </View>
-      <Button onPress={() => this.login()} title='Log in' />
-      <FbLoginButton onLoginFinished={loginWithFacebook} />
-      <GoogleLoginButton onLoginFinished={loginWithGoogle} />
+      <TouchableOpacity onPress={() => this.login()}>
+        <View style={styles.loginButton}>
+          <Text style={styles.loginText}>Log In</Text>
+        </View>
+      </TouchableOpacity>
+      <View style={styles.connectWith}>
+        <Text style={styles.heavyText}>Or connect with:</Text>
+      </View>
+      <View style={styles.loginButtons}>
+        <FbLoginButton onLoginFinished={loginWithFacebook} />
+        <GoogleLoginButton onLoginFinished={loginWithGoogle} />
+      </View>
+      <View style={styles.signup}>
+        <Text style={styles.accountText}>Dont have an account? </Text>
+        <TouchableOpacity>
+          <Text style={styles.signupText}>Sign up now</Text>
+        </TouchableOpacity>
+      </View>
     </ScrollView>
-  }
-}
-
-const mixins = {
-  textInput: {
-    width: 80 * vw,
-    height: 40,
-    marginBottom: 10
-  }
-}
-
-const styles = {
-  login: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  title: {
-    fontSize: 24,
-    marginBottom: 10
-  },
-  email: {
-    ...mixins.textInput
-  },
-  password: {
-    ...mixins.textInput
-  },
-  error: {
-    color: 'red',
-    marginBottom: 10
   }
 }
