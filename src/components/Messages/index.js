@@ -1,3 +1,15 @@
-import component from './Messages'
-import connector from './Messages.connector'
-export default connector(component)
+import React from 'react'
+import { View } from 'react-native'
+
+import ThreadList from '../ThreadList'
+import Header from './Header'
+
+export default class Messages extends React.Component {
+  static navigationOptions = ({navigation}) => (Header(navigation))
+
+  render () {
+    return <View>
+      <ThreadList />
+    </View>
+  }
+}
