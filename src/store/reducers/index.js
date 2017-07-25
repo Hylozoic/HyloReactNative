@@ -9,6 +9,7 @@ import FeedList from '../../components/FeedList/FeedList.store'
 import PostEditor from '../../components/PostEditor/PostEditor.store'
 import CommentEditor from '../../components/PostDetails/CommentEditor/CommentEditor.store'
 import Search from '../../components/Editor/Search/Search.store'
+import SocketListener from '../../components/SocketListener/SocketListener.store'
 
 const combinedReducers = combineReducers({
   orm: ormReducer,
@@ -19,7 +20,8 @@ const combinedReducers = combineReducers({
   FeedList,
   PostEditor,
   CommentEditor,
-  Search
+  Search,
+  SocketListener
 })
 
 export default persist(combinedReducers)

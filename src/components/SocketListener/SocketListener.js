@@ -1,19 +1,7 @@
-import { PropTypes, Component } from 'react'
+import React from 'react'
 import { getSocket, socketUrl } from 'util/websockets'
-const { func, object } = PropTypes
 
-export default class SocketListener extends Component {
-  static propTypes = {
-    location: object,
-    receiveThread: func,
-    receiveMessage: func,
-    receiveComment: func,
-    receiveNotification: func,
-    receivePost: func,
-    addUserTyping: func,
-    clearUserTyping: func
-  }
-
+export default class SocketListener extends React.Component {
   constructor (props) {
     super(props)
     this.handlers = {
@@ -29,6 +17,7 @@ export default class SocketListener extends Component {
   componentDidMount () {
     getSocket().then(socket => {
       this.socket = socket
+      this.props.setupCoreEventHandlers(socket)
       this.reconnect()
       Object.keys(this.handlers).forEach(socketEvent =>
         this.socket.on(socketEvent, this.handlers[socketEvent]))

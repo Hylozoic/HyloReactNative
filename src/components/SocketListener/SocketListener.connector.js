@@ -6,7 +6,8 @@ import {
   receiveMessage,
   receiveNotification,
   receivePost,
-  receiveThread
+  receiveThread,
+  handleEvent
 } from './SocketListener.store'
 // import {
 //   addUserTyping,
@@ -40,6 +41,8 @@ export function mapDispatchToProps (dispatch, props) {
       const comment = convertToComment(data.comment, data.postId)
       return dispatch(receiveComment(comment))
     },
+
+    setupCoreEventHandlers: setupCoreEventHandlers(dispatch),
 
     ...bindActionCreators({
       // addUserTyping,
@@ -98,4 +101,21 @@ function convertToComment ({ id, text, created_at, user_id }, postId) {
     creator: user_id,
     post: postId
   }
+}
+
+const setupCoreEventHandlers = dispatch => socket => {
+  const handle = name => arg => dispatch(handleEvent(name, arg))
+  const events = [
+    'connect',
+    'connect_timeout',
+    'error',
+    'disconnect',
+    'reconnect',
+    'reconnect_attempt',
+    'reconnecting',
+    'reconnect_error',
+    'reconnect_failed',
+    'pong'
+  ]
+  events.forEach(name => socket.on(name, handle(name)))
 }

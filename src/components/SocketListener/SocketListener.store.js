@@ -4,6 +4,7 @@ export const RECEIVE_COMMENT = `${MODULE_NAME}/RECEIVE_COMMENT`
 export const RECEIVE_POST = `${MODULE_NAME}/RECEIVE_POST`
 export const RECEIVE_THREAD = `${MODULE_NAME}/RECEIVE_THREAD`
 export const RECEIVE_NOTIFICATION = `${MODULE_NAME}/RECEIVE_NOTIFICATION`
+export const HANDLE_EVENT = `${MODULE_NAME}/HANDLE_EVENT`
 
 export function receiveMessage (message, opts = {}) {
   return {
@@ -71,4 +72,39 @@ export function receiveNotification (notification) {
       extractModel: 'Notification'
     }
   }
+}
+
+export function handleEvent (name, value) {
+  return {
+    type: HANDLE_EVENT,
+    payload: {name, value}
+  }
+}
+
+export default function reducer (state = {}, action) {
+  if (action.type === HANDLE_EVENT) {
+    const events = state.events || {}
+    const { name, value } = action.payload
+    const newState = {
+      ...state,
+      events: {
+        ...events,
+        [name]: {
+          count: (events[name] ? events[name].count : 0) + 1,
+          latest: new Date(),
+          value: value && value.message ? value.message : value
+        }
+      }
+    }
+
+    // toggle connected boolean status
+    if (['connect', 'reconnect'].includes(name)) {
+      newState.connected = true
+    } else if (name === 'disconnect') {
+      newState.connected = false
+    }
+
+    return newState
+  }
+  return state
 }
