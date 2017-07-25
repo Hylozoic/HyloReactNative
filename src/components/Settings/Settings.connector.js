@@ -12,25 +12,25 @@ function mapStateToProps (state, props) {
 function mapDispatchToProps (dispatch, props) {
   return {
     logout: () => dispatch(logout()),
-    close: () => props.navigation.dispatch({type: 'Navigation/BACK'})
+    close: () => props.navigation.goBack()
   }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)
 
 function safeStringify (obj, space) {
-   let cache = []
+  let cache = []
 
-   const stringified = JSON.stringify(obj, function (key, value) {
-     if (typeof value === 'object' && value !== null) {
-       if (cache.indexOf(value) !== -1) {
-         return
-       }
-       cache.push(value)
-     }
-     return value
-   }, space)
-   cache = null
+  const stringified = JSON.stringify(obj, function (key, value) {
+    if (typeof value === 'object' && value !== null) {
+      if (cache.indexOf(value) !== -1) {
+        return
+      }
+      cache.push(value)
+    }
+    return value
+  }, space)
+  cache = null
 
-   return stringified
- }
+  return stringified
+}
