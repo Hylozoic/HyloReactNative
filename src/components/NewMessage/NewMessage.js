@@ -10,6 +10,7 @@ import {
 } from 'react-native'
 import Avatar from '../Avatar'
 import Icon from '../Icon'
+import Loading from '../Loading'
 import styles from './NewMessage.styles'
 import { capeCod40 } from '../../style/colors'
 import { isEmpty } from 'lodash/fp'
@@ -47,10 +48,13 @@ export default class NewMessage extends React.Component {
       participantInputText,
       createMessage,
       setMessage,
-      message
+      message,
+      pending
     } = this.props
 
     const { viewKey } = this.state
+
+    const showSuggestions = !isEmpty(suggestions) || pending.suggestions
 
     return <KeyboardAvoidingView style={styles.container} {...{...kavProps, behavior: 'height'}} key={viewKey}>
       <ParticipantInput
@@ -59,18 +63,21 @@ export default class NewMessage extends React.Component {
         onChangeText={setParticipantInput}
         text={participantInputText} />
       <ScrollView contentContainerStyle={styles.scrollView}>
-        {!isEmpty(suggestions) && <ContactList
+        {showSuggestions && <ContactList
           contacts={suggestions}
-          addParticipant={addParticipant} />}
-        {isEmpty(suggestions) && <ContactList
+          addParticipant={addParticipant}
+          loading={pending.suggestions} />}
+        {!showSuggestions && <ContactList
           label='Recent'
           contacts={recentContacts}
-          addParticipant={addParticipant} />}
-        {isEmpty(suggestions) && <ContactList
+          addParticipant={addParticipant}
+          loading={pending.recent} />}
+        {!showSuggestions && <ContactList
           label='All Contacts'
           contacts={allContacts}
           grayed
-          addParticipant={addParticipant} />}
+          addParticipant={addParticipant}
+          loading={pending.all} />}
       </ScrollView>
       <MessagePrompt
         currentUser={currentUser}
@@ -108,9 +115,10 @@ export function Participant ({ participant, remove }) {
   </View>
 }
 
-export function ContactList ({ contacts, label, grayed, addParticipant }) {
+export function ContactList ({ contacts, label, grayed, addParticipant, loading }) {
   return <View style={styles.contactList}>
     {label && <Text style={styles.listLabel}>{label}</Text>}
+    {loading && <Loading />}
     {contacts.map(c =>
       <ContactRow contact={c} grayed={grayed} key={c.id} add={addParticipant} />)}
   </View>

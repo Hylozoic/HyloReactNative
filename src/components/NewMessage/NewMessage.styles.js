@@ -31,7 +31,7 @@ export default {
     alignItems: 'center',
     paddingHorizontal: 15,
     borderBottomWidth: 1,
-    borderBottomColor: capeCod20,
+    borderBottomColor: capeCod20
   },
   participantTextInput: {
   },
