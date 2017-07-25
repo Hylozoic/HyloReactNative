@@ -1,15 +1,43 @@
-import { pick, get, isEmpty, includes } from 'lodash/fp'
+import { pick, get, isEmpty, includes, uniqueId } from 'lodash/fp'
 import orm from 'store/models'
 import { createSelector as ormCreateSelector } from 'redux-orm'
 import { makeGetQueryResults } from 'store/reducers/queryResults'
 
 export const MODULE_NAME = 'NewMessage'
 export const SET_CONTACT_INPUT = `${MODULE_NAME}/SET_CONTACT_INPUT`
+export const SET_MESSAGE = `${MODULE_NAME}/SET_MESSAGE`
 export const ADD_PARTICIPANT = `${MODULE_NAME}/ADD_PARTICIPANT`
 export const REMOVE_PARTICIPANT = `${MODULE_NAME}/REMOVE_PARTICIPANT`
 export const FETCH_SUGGESTIONS = `${MODULE_NAME}/FETCH_SUGGESTIONS`
 export const FETCH_CONTACTS = `${MODULE_NAME}/FETCH_CONTACTS`
 export const FETCH_RECENT_CONTACTS = `${MODULE_NAME}/FETCH_RECENT_CONTACTS`
+export const CREATE_MESSAGE = `${MODULE_NAME}/CREATE_MESSAGE`
+export const FIND_OR_CREATE_THREAD = `${MODULE_NAME}/FIND_OR_CREATE_THREAD`
+
+const findOrCreateThreadQuery =
+`mutation ($participantIds: [String]) {
+  findOrCreateThread(data: {participantIds: $participantIds}) {
+    id
+    createdAt
+    updatedAt
+    participants {
+      id
+      name
+      avatarUrl
+    }
+  }
+}`
+
+export function findOrCreateThread (participantIds) {
+  return {
+    type: FIND_OR_CREATE_THREAD,
+    graphql: {
+      query: findOrCreateThreadQuery,
+      variables: {participantIds}
+    },
+    meta: { extractModel: 'MessageThread' }
+  }
+}
 
 const fetchPeopleQuery =
 `query PeopleAutocomplete ($autocomplete: String, $first: Int) {
@@ -118,8 +146,42 @@ export function fetchRecentContacts (first = 6) {
   }
 }
 
+export function createMessage (messageThreadId, text, forNewThread) {
+  return {
+    type: CREATE_MESSAGE,
+    graphql: {
+      query: `mutation ($messageThreadId: String, $text: String) {
+        createMessage(data: {messageThreadId: $messageThreadId, text: $text}) {
+          id
+          text
+          createdAt
+          creator {
+            id
+          }
+          messageThread {
+            id
+          }
+        }
+      }`,
+      variables: {
+        messageThreadId,
+        text
+      }
+    },
+    meta: {
+      optimistic: true,
+      extractModel: 'Message',
+      tempId: uniqueId(`messageThread${messageThreadId}_`),
+      messageThreadId,
+      text,
+      forNewThread
+    }
+  }
+}
+
 const defaultState = {
   input: '',
+  message: '',
   participants: []
 }
 
@@ -130,6 +192,11 @@ export default function reducer (state = defaultState, action) {
       return {
         ...state,
         input: payload
+      }
+    case SET_MESSAGE:
+      return {
+        ...state,
+        message: payload
       }
     case ADD_PARTICIPANT:
       return {
@@ -156,6 +223,13 @@ export function setParticipantInput (input) {
   }
 }
 
+export function setMessage (input) {
+  return {
+    type: SET_MESSAGE,
+    payload: input
+  }
+}
+
 export function addParticipant (id) {
   return {
     type: ADD_PARTICIPANT,
@@ -168,6 +242,14 @@ export function removeParticipant (id) {
     type: REMOVE_PARTICIPANT,
     payload: id
   }
+}
+
+export function getMessage (state) {
+  return state[MODULE_NAME].message
+}
+
+export function getInputText (state) {
+  return state[MODULE_NAME].input
 }
 
 export function getParticipantIds (state) {

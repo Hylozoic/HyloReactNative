@@ -1,4 +1,4 @@
-import { capeCod, capeCod10, capeCod20, rhino80, rhino50 } from '../../style/colors'
+import { caribbeanGreen, capeCod, capeCod10, capeCod20, capeCod40, rhino80, rhino50 } from '../../style/colors'
 import { isIOS } from 'util/platform'
 
 const messagePromptShape = {
@@ -15,18 +15,25 @@ const defaultPadding = {
 
 export default {
   container: {
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+    position: 'relative',
+    flex: 1
   },
-  scrollViewContainer: {
+  scrollView: {
+    paddingBottom: 72
+  },
+  scrollViewWrapper: {
+    height: 60
+  },
+  participantInputContainer: {
     height: 60,
-    borderBottomWidth: 1,
-    borderBottomColor: capeCod20,
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: 15
+    paddingHorizontal: 15,
+    borderBottomWidth: 1,
+    borderBottomColor: capeCod20,
   },
   participantTextInput: {
-    flex: 1
   },
   participant: {
     borderWidth: 1,
@@ -73,7 +80,7 @@ export default {
   },
   promptContainer: {
     position: 'absolute',
-    bottom: 50,
+    bottom: 10,
     left: 6,
     right: 6
   },
@@ -81,7 +88,8 @@ export default {
     ...messagePromptShape,
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: 6,
+    paddingLeft: 6,
+    paddingRight: 12,
     paddingVertical: 8,
     backgroundColor: 'white',
     borderWidth: isIOS ? 0 : 1,
@@ -108,5 +116,11 @@ export default {
     color: capeCod,
     fontSize: 14,
     flex: 1
+  },
+  sendButton: {
+    color: caribbeanGreen
+  },
+  grayButton: {
+    color: capeCod40
   }
 }

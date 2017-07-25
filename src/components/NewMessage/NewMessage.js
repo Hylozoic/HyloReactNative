@@ -5,15 +5,22 @@ import {
   Text,
   TouchableOpacity,
   TextInput,
-  View
+  View,
+  KeyboardAvoidingView
 } from 'react-native'
 import Avatar from '../Avatar'
 import Icon from '../Icon'
 import styles from './NewMessage.styles'
 import { capeCod40 } from '../../style/colors'
 import { isEmpty } from 'lodash/fp'
+import { keyboardAvoidingViewProps as kavProps } from 'util/viewHelpers'
 
 export default class NewMessage extends React.Component {
+
+  constructor (props) {
+    super(props)
+    this.state = {viewKey: 0}
+  }
 
   componentDidMount () {
     this.props.fetchContacts()
@@ -37,42 +44,58 @@ export default class NewMessage extends React.Component {
       addParticipant,
       removeParticipant,
       setParticipantInput,
-      participantInputText
-     } = this.props
+      participantInputText,
+      createMessage,
+      setMessage,
+      message
+    } = this.props
 
-    return <View style={styles.container}>
+    const { viewKey } = this.state
+
+    return <KeyboardAvoidingView style={styles.container} {...{...kavProps, behavior: 'height'}} key={viewKey}>
       <ParticipantInput
         participants={participants}
         removeParticipant={removeParticipant}
         onChangeText={setParticipantInput}
         text={participantInputText} />
-      {!isEmpty(suggestions) && <ContactList
-        contacts={suggestions}
-        addParticipant={addParticipant} />}
-      {isEmpty(suggestions) && <ContactList
-        label='Recent'
-        contacts={recentContacts}
-        addParticipant={addParticipant} />}
-      {isEmpty(suggestions) && <ContactList
-        label='All Contacts'
-        contacts={allContacts}
-        grayed
-        addParticipant={addParticipant} />}
-      <MessagePrompt currentUser={currentUser} />
-    </View>
+      <ScrollView contentContainerStyle={styles.scrollView}>
+        {!isEmpty(suggestions) && <ContactList
+          contacts={suggestions}
+          addParticipant={addParticipant} />}
+        {isEmpty(suggestions) && <ContactList
+          label='Recent'
+          contacts={recentContacts}
+          addParticipant={addParticipant} />}
+        {isEmpty(suggestions) && <ContactList
+          label='All Contacts'
+          contacts={allContacts}
+          grayed
+          addParticipant={addParticipant} />}
+      </ScrollView>
+      <MessagePrompt
+        currentUser={currentUser}
+        setMessage={setMessage}
+        message={message}
+        createMessage={createMessage}
+        onBlur={() => this.setState({viewKey: viewKey + 1})} />
+    </KeyboardAvoidingView>
   }
 }
 
 export function ParticipantInput ({ participants, onChangeText, removeParticipant, text }) {
   const { width } = Dimensions.get('window')
   const inputStyle = {width: width - 30}
-  return <ScrollView contentContainerStyle={styles.scrollViewContainer} horizontal>
-    {participants.map(p => <Participant participant={p} key={p.id} remove={removeParticipant} />)}
-    <TextInput
-      value={text}
-      onChangeText={onChangeText}
-      style={[styles.participantTextInput, inputStyle]} />
-  </ScrollView>
+  return <View style={styles.scrollViewWrapper}>
+    <ScrollView
+      contentContainerStyle={styles.participantInputContainer}
+      horizontal>
+      {participants.map(p => <Participant participant={p} key={p.id} remove={removeParticipant} />)}
+      <TextInput
+        value={text}
+        onChangeText={onChangeText}
+        style={[styles.participantTextInput, inputStyle]} />
+    </ScrollView>
+  </View>
 }
 
 export function Participant ({ participant, remove }) {
@@ -102,15 +125,22 @@ export function ContactRow ({ contact, grayed, add }) {
   </TouchableOpacity>
 }
 
-export function MessagePrompt ({ currentUser }) {
+export function MessagePrompt ({ currentUser, createMessage, setMessage, message, onBlur }) {
   if (!currentUser) return null
   const { avatarUrl } = currentUser
+  const gray = isEmpty(message)
   return <View style={styles.promptContainer}>
     <View style={styles.messagePrompt}>
       <Avatar avatarUrl={avatarUrl} style={styles.promptAvatar} dimension={30} />
       <TextInput style={styles.promptTextInput}
+        value={message}
+        onChangeText={setMessage}
+        onBlur={onBlur}
         placeholder='Type your message here'
         placeholderTextColor={capeCod40} />
+      <TouchableOpacity onPress={() => createMessage()}>
+        <Text style={[styles.sendButton, gray && styles.grayButton]}>Send</Text>
+      </TouchableOpacity>
     </View>
     <View style={styles.promptShadow} />
   </View>
