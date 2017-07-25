@@ -69,9 +69,9 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     ? () => {}
     : () => dispatchProps.findOrCreateThread(participantIds)
       .then(resp => {
-        console.log('creating message', message)
         const messageThreadId = get('payload.data.findOrCreateThread.id', resp)
-        createMessage(messageThreadId, message, true)
+        dispatchProps.createMessage(messageThreadId, message, true)
+        // TODO: redirect to thread page
       })
 
   return {
