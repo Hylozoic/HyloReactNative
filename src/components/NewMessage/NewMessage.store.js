@@ -57,11 +57,11 @@ const fetchPeopleQuery =
   }
 }`
 
-export function fetchSuggestions (autocomplete, query = fetchPeopleQuery, first = 10) {
+export function fetchSuggestions (autocomplete, first = 10) {
   return {
     type: FETCH_SUGGESTIONS,
     graphql: {
-      query,
+      query: fetchPeopleQuery,
       variables: { autocomplete, first }
     },
     meta: {

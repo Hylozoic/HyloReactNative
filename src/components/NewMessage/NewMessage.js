@@ -54,7 +54,7 @@ export default class NewMessage extends React.Component {
 
     const { viewKey } = this.state
 
-    const showSuggestions = !isEmpty(suggestions) || pending.suggestions
+    const showSuggestions = !isEmpty(participantInputText)
 
     return <KeyboardAvoidingView style={styles.container} {...{...kavProps, behavior: 'height'}} key={viewKey}>
       <ParticipantInput

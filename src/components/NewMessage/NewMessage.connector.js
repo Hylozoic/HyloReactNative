@@ -1,4 +1,5 @@
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import getMe from '../../store/selectors/getMe'
 import {
   setParticipantInput,
@@ -21,7 +22,7 @@ import {
   FETCH_CONTACTS,
   FETCH_RECENT_CONTACTS
  } from './NewMessage.store.js'
-import { isEmpty, get } from 'lodash/fp'
+import { isEmpty, get, debounce } from 'lodash/fp'
 
 export function mapStateToProps (state, props) {
   const participantInputText = getInputText(state, props)
@@ -45,16 +46,21 @@ export function mapStateToProps (state, props) {
   }
 }
 
-export const mapDispatchToProps = {
-  setParticipantInput,
-  addParticipant,
-  removeParticipant,
-  fetchContacts,
-  fetchRecentContacts,
-  fetchSuggestions,
-  createMessage,
-  setMessage,
-  findOrCreateThread
+export function mapDispatchToProps (dispatch, props) {
+  return {
+    fetchSuggestions: debounce(400, autocomplete =>
+      dispatch(fetchSuggestions(autocomplete))),
+    ...bindActionCreators({
+      setParticipantInput,
+      addParticipant,
+      removeParticipant,
+      fetchContacts,
+      fetchRecentContacts,
+      createMessage,
+      setMessage,
+      findOrCreateThread
+    }, dispatch)
+  }
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
