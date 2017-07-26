@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
-import { shape, any, object, string, func, array, bool } from 'prop-types'
+import { any, func, object, shape, string } from 'prop-types'
 
 import Avatar from '../Avatar'
 import { capeCod10 } from '../../style/colors'

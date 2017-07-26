@@ -1,5 +1,6 @@
 import { createSelector } from 'redux-orm'
-import { get } from 'lodash/fp'
+import { get, pick } from 'lodash/fp'
+import { humanDate, sanitize } from 'hylo-utils/text'
 
 import orm from '../../store/models'
 import { makeGetQueryResults } from '../../store/reducers/queryResults'
@@ -50,13 +51,27 @@ export function updateThreadReadTime (id) {
   }
 }
 
+function refineMessages ({ id, createdAt, text, creator }) {
+  return {
+    id,
+    createdAt: humanDate(createdAt),
+    text: sanitize(text),
+    creator: pick([ 'id', 'name', 'avatarUrl' ], creator.ref)
+  }
+}
+
 export const getMessages = createSelector(
   orm,
   state => state.orm,
   (_, { navigation }) => navigation.state.params.id,
   (session, id) => {
     if (session.MessageThread.hasId(id)) {
-      return session.MessageThread.withId(id).messages.orderBy(c => Number(c.id)).toModelArray()
+      const messages = session.MessageThread
+        .withId(id)
+        .messages
+        .orderBy(m => Number(m.id))
+        .toModelArray()
+      return messages.map(refineMessages)
     }
     return []
   })
