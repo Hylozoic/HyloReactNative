@@ -3,7 +3,7 @@ import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import FbLoginButton from './FbLoginButton'
 import GoogleLoginButton from './GoogleLoginButton'
-import Login from './component'
+import Login from './Login'
 
 jest.mock('react-native-google-signin', () => {})
 
