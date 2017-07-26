@@ -3,7 +3,8 @@ import { StyleSheet, Text, View } from 'react-native'
 import { any, func, object, shape, string } from 'prop-types'
 
 import Avatar from '../Avatar'
-import { capeCod10 } from '../../style/colors'
+
+import styles from './MessageCard.style'
 
 export default class MessageCard extends React.Component {
   static propTypes = {
@@ -23,18 +24,11 @@ export default class MessageCard extends React.Component {
     const { message } = this.props
     return <View style={styles.container}>
       <Avatar avatarUrl={message.creator.avatarUrl}/>
-      <Text>{message.creator.name}</Text>
-      <Text>{message.text}</Text>
-      <Text>{message.createdAt}</Text>
+      <View style={styles.body}>
+        <Text style={styles.name}>{message.creator.name}</Text>
+        <Text style={styles.text}>{message.text}</Text>
+        <Text style={styles.date}>{message.createdAt}</Text>
+      </View>
     </View>
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    borderWidth: 1,
-    borderColor: capeCod10,
-    borderRadius: 4,
-    backgroundColor: 'white'
-  }
-})

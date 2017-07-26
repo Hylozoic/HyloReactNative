@@ -1,9 +1,10 @@
 import React from 'react'
-import { Text, View } from 'react-native'
+import { TextInput, ScrollView } from 'react-native'
 import { any, arrayOf, func, shape, string } from 'prop-types'
 
 import Header from './Header'
 import MessageCard from '../MessageCard'
+
 import styles from './Thread.styles.js'
 
 export default class Thread extends React.Component {
@@ -29,8 +30,9 @@ export default class Thread extends React.Component {
 
   render () {
     const { messages } = this.props
-    return <View>
+    return <ScrollView style={styles.container}>
       {messages.map(message => <MessageCard key={message.id} message={message}/>)}
-    </View>
+      <TextInput style={styles.input} underlineColorAndroid='transparent' />
+    </ScrollView>
   }
 }
