@@ -1,7 +1,8 @@
 import React from 'react'
-import { TextInput, ScrollView } from 'react-native'
+import { ScrollView } from 'react-native'
 import { any, arrayOf, func, shape, string } from 'prop-types'
 
+import AvatarInput from '../AvatarInput'
 import Header from './Header'
 import MessageCard from '../MessageCard'
 
@@ -30,9 +31,13 @@ export default class Thread extends React.Component {
 
   render () {
     const { messages } = this.props
+    const avatar = messages[0] ? messages[0].creator.avatarUrl : 'foo'
     return <ScrollView style={styles.container}>
-      {messages.map(message => <MessageCard key={message.id} message={message}/>)}
-      <TextInput style={styles.input} underlineColorAndroid='transparent' />
+      {messages.map(message => <MessageCard key={message.id} message={message} />)}
+      <AvatarInput
+        avatarUrl={avatar}
+        multiline
+        placeholder='Write something...' />
     </ScrollView>
   }
 }
