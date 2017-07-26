@@ -4,9 +4,11 @@ import { isEmpty } from 'lodash/fp'
 
 import Loading from '../Loading'
 import ThreadCard from '../ThreadCard'
+import Header from './Header'
 import styles from './ThreadList.styles'
 
 export default class ThreadList extends Component {
+  static navigationOptions = ({navigation}) => (Header(navigation))
   componentDidMount () {
     if (isEmpty(this.props.threads)) this.props.fetchThreads()
   }
