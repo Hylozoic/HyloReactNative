@@ -25,7 +25,7 @@ export default class Login extends React.Component {
   }
 
   login () {
-    this.props.actions.login(this.state.email, this.state.password)
+    this.props.login(this.state.email, this.state.password)
   }
 
   togglePassword () {
@@ -46,7 +46,7 @@ export default class Login extends React.Component {
   }
 
   render () {
-    const { error, actions: { loginWithGoogle, loginWithFacebook } } = this.props
+    const { error, loginWithGoogle, loginWithFacebook } = this.props
     const emailIsValid = this.state.emailIsValid
 
     return <ScrollView contentContainerStyle={styles.login}>

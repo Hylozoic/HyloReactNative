@@ -3,8 +3,16 @@ import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import FbLoginButton from './FbLoginButton'
 import GoogleLoginButton from './GoogleLoginButton'
+import Login from './component'
 
 jest.mock('react-native-google-signin', () => {})
+
+it('renders FB login correctly', () => {
+  const renderer = new ReactShallowRenderer()
+  renderer.render(<Login />)
+  const actual = renderer.getRenderOutput()
+  expect(actual).toMatchSnapshot()
+})
 
 it('renders FB login correctly', () => {
   const renderer = new ReactShallowRenderer()

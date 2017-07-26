@@ -1,6 +1,133 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders FB login correctly 1`] = `
+<ScrollViewMock
+  contentContainerStyle={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }
+>
+  <Image
+    source={1}
+  />
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    disabled={false}
+    ellipsizeMode="tail"
+  >
+    Log in to Hylo
+  </Text>
+  <View>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+    >
+      Your email address
+    </Text>
+    <View>
+      <TextInput
+        autoCapitalize="none"
+        keyboardType="email-address"
+        onChangeText={[Function]}
+        onSubmitEditing={[Function]}
+        returnKeyType="next"
+        underlineColorAndroid="rgba(0,0,0,0)"
+      />
+    </View>
+  </View>
+  <View>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+    >
+      Password
+    </Text>
+    <View>
+      <TextInput
+        onChangeText={[Function]}
+        onSubmitEditing={[Function]}
+        returnKeyType="go"
+        secureTextEntry={true}
+        selectTextOnFocus={true}
+        underlineColorAndroid="rgba(0,0,0,0)"
+      />
+      <Icon
+        allowFontScaling={false}
+        name="eye"
+        onPress={[Function]}
+        size={12}
+      />
+    </View>
+  </View>
+  <TouchableOpacity
+    activeOpacity={0.2}
+    focusedOpacity={0.7}
+    onPress={[Function]}
+  >
+    <View>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        disabled={false}
+        ellipsizeMode="tail"
+      >
+        Log In
+      </Text>
+    </View>
+  </TouchableOpacity>
+  <View>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+    >
+      Or connect with:
+    </Text>
+  </View>
+  <View>
+    <FbLoginButton
+      onLoginFinished={undefined}
+    />
+    <GoogleLoginButton
+      onLoginFinished={undefined}
+    />
+  </View>
+  <View>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+    >
+      Dont have an account? 
+    </Text>
+    <TouchableOpacity
+      activeOpacity={0.2}
+      focusedOpacity={0.7}
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        disabled={false}
+        ellipsizeMode="tail"
+      >
+        Sign up now
+      </Text>
+    </TouchableOpacity>
+  </View>
+</ScrollViewMock>
+`;
+
+exports[`renders FB login correctly 2`] = `
 <View>
   <TouchableOpacity
     activeOpacity={0.2}
