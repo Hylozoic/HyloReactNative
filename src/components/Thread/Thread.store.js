@@ -1,39 +1,30 @@
-import { createSelector as ormCreateSelector } from 'redux-orm'
-import orm from 'store/models'
-import {
-  FETCH_THREAD
-} from 'store/constants'
+import { createSelector } from 'redux-orm'
+import { get } from 'lodash/fp'
 
-export const MODULE_NAME = 'Thread'
+import orm from '../../store/models'
+import { makeGetQueryResults } from '../../store/reducers/queryResults'
 
-// Action Creators
-export function fetchThread (id) {
+export const FETCH_MESSAGES = 'Thread/FETCH_MESSAGES'
+export const UPDATE_THREAD_READ_TIME = 'Thread/UPDATE_THREAD_READ_TIME'
+
+export function fetchMessages (id, opts = {}) {
   return {
-    type: FETCH_THREAD,
+    type: FETCH_MESSAGES,
     graphql: {
       query: `
-        query ($id: ID) {
+        query ($id: ID, $cursor: ID) {
           messageThread (id: $id) {
             id
-            unreadCount
-            lastReadAt
-            createdAt
-            updatedAt
-            participants {
-              id
-              name
-              avatarUrl
-            }
-            messages(first: 40, order: "desc") {
+            messages(first: 20, cursor: $cursor, order: "desc") {
               items {
                 id
+                createdAt
                 text
                 creator {
                   id
                   name
                   avatarUrl
                 }
-                createdAt
               }
               total
               hasMore
@@ -41,30 +32,44 @@ export function fetchThread (id) {
           }
         }
       `,
-      variables: {
-        id
-      }
+      variables: opts.cursor ? {id, cursor: opts.cursor} : {id}
     },
     meta: {
-      extractModel: 'MessageThread'
+      extractModel: 'MessageThread',
+      reset: opts.reset,
+      id
     }
   }
 }
 
-// Selectors
-export const moduleSelector = (state) => state[MODULE_NAME]
+export function updateThreadReadTime (id) {
+  return {
+    type: UPDATE_THREAD_READ_TIME,
+    payload: {api: {path: `/noo/post/${id}/update-last-read`, method: 'POST'}},
+    meta: {id}
+  }
+}
 
-export const getThread = ormCreateSelector(
+export const getMessages = createSelector(
   orm,
   state => state.orm,
   (_, { navigation }) => navigation.state.params.id,
   (session, id) => {
     if (session.MessageThread.hasId(id)) {
-      const thread = session.MessageThread.withId(id)
-      return {
-        ...thread.ref,
-        participants: thread.participants.toModelArray()
-      }
+      return session.MessageThread.withId(id).messages.orderBy(c => Number(c.id)).toModelArray()
     }
-    return null
+    return []
   })
+
+
+const getMessageResults = makeGetQueryResults(FETCH_MESSAGES)
+
+export const getHasMoreMessages = createSelector(
+  getMessageResults,
+  get('hasMore')
+)
+
+export const getTotalMessages = createSelector(
+  getMessageResults,
+  get('total')
+)
