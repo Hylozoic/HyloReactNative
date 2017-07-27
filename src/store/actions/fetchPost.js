@@ -1,3 +1,5 @@
+import { get } from 'lodash/fp'
+import { FETCH_COMMENTS } from '../../components/Comments/Comments.store'
 export const FETCH_POST = `FETCH_POST`
 
 export const postFieldsFragment = `
@@ -61,7 +63,11 @@ export default function fetchPost (id, opts = {}) {
       }
     },
     meta: {
-      extractModel: 'Post'
+      extractModel: 'Post',
+      extractQueryResults: {
+        getItems: get('payload.data.post.comments'),
+        getType: () => FETCH_COMMENTS
+      }
     }
   }
 }
