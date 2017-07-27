@@ -13,9 +13,18 @@ describe('ThreadList', () => {
 
     expect(actual).toMatchSnapshot()
   })
-  it('handles pending correctly', () => {
+  it('handles pending correctly without threads', () => {
     const renderer = new ReactShallowRenderer()
     const threads = []
+    const pending = true
+    renderer.render(<ThreadList threads={threads} pending={pending} />)
+    const actual = renderer.getRenderOutput()
+
+    expect(actual).toMatchSnapshot()
+  })
+  it('handles pending correctly with threads', () => {
+    const renderer = new ReactShallowRenderer()
+    const threads = {id: 1}
     const pending = true
     renderer.render(<ThreadList threads={threads} pending={pending} />)
     const actual = renderer.getRenderOutput()

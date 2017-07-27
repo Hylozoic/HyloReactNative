@@ -1,6 +1,7 @@
 import orm from 'store/models'
-
 import { getThreads } from './ThreadList.store'
+import { FETCH_THREADS } from '../../store/actions/fetchThreads'
+import { buildKey } from '../../store/reducers/queryResults'
 
 const session = orm.session(orm.getEmptyState())
 
@@ -72,7 +73,14 @@ specs.forEach(spec => session[spec.modelName].create(spec.values))
 
 it('gets threads and denormalizes messages and participants', () => {
   const state = {
-    orm: session.state
+    orm: session.state,
+    pending: {},
+    queryResults: {
+      [buildKey(FETCH_THREADS, {slug: 'foo'})]: {
+        ids: ['1', '3', '2'],
+        hasMore: true
+      }
+    }
   }
 
   expect(getThreads(state, null)).toMatchSnapshot()
