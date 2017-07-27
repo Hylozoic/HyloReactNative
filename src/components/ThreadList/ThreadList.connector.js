@@ -15,9 +15,10 @@ export function mapStateToProps (state, props) {
   }
 }
 
-export function mapDispatchToProps (dispatch) {
+export function mapDispatchToProps (dispatch, { navigation }) {
   return {
-    fetchThreads: (first, offset) => dispatch(fetchThreads(first, offset))
+    fetchThreads: (first, offset) => dispatch(fetchThreads(first, offset)),
+    showThread: id => navigation.navigate('Thread', {id})
   }
 }
 
