@@ -34,15 +34,19 @@ export default {
     borderBottomWidth: StyleSheet.hairlineWidth
   },
   count: {
-    borderRadius: 100,
     backgroundColor: jade,
-    color: 'white',
-    textAlign: 'center',
-    fontWeight: '900',
+    borderRadius: 100,
     height: 34,
     width: 34,
     paddingTop: 5,
     marginTop: -20,
     marginLeft: 10
+  },
+  countText: {
+    color: 'white',
+    textAlign: 'center',
+    fontWeight: '900',
+    overflow: 'hidden',
+    backgroundColor: 'transparent'
   }
 }
