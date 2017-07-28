@@ -54,11 +54,13 @@ export function updateThreadReadTime (id) {
 }
 
 function refineMessages ({ id, createdAt, text, creator }) {
+  const creatorFields = pick([ 'id', 'name', 'avatarUrl' ], creator.ref)
+  if (!creatorFields.avatarUrl) creatorFields.avatarUrl = DEFAULT_AVATAR
   return {
     id,
     createdAt: humanDate(createdAt),
     text: sanitize(text),
-    creator: pick([ 'id', 'name', 'avatarUrl' ], creator.ref)
+    creator: creatorFields
   }
 }
 
@@ -81,10 +83,7 @@ export const getMessages = createSelector(
 export const getMyAvatar = createSelector(
   orm,
   state => state.orm,
-  session => {
-    console.log('ME', session.Me.first())
-    session.Me.first().avatarUrl
-  }
+  session => session.Me.count() > 0 ? session.Me.first().avatarUrl : DEFAULT_AVATAR
 )
 
 const getMessageResults = makeGetQueryResults(FETCH_MESSAGES)

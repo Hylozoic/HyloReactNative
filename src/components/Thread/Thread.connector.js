@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 import {
   fetchMessages,
+  FETCH_MESSAGES,
   getMessages,
   getMyAvatar
 } from './Thread.store'
@@ -9,7 +10,8 @@ import getMe from '../../store/selectors/getMe'
 function mapStateToProps (state, props) {
   return {
     avatarUrl: getMyAvatar(state),
-    messages: getMessages(state, props)
+    messages: getMessages(state, props),
+    pending: state.pending[FETCH_MESSAGES]
   }
 }
 

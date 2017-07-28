@@ -4,6 +4,7 @@ import { any, arrayOf, func, shape, string } from 'prop-types'
 
 import AvatarInput from '../AvatarInput'
 import Header from './Header'
+import Loading from '../Loading'
 import MessageCard from '../MessageCard'
 
 import styles from './Thread.styles.js'
@@ -25,8 +26,7 @@ export default class Thread extends React.Component {
 
   static navigationOptions = ({ navigation }) => Header(navigation)
 
-  constructor () {
-    super()
+  componentWillMount () {
     this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this._keyboardDidShow)
   }
 
@@ -55,6 +55,7 @@ export default class Thread extends React.Component {
   }
 
   render () {
+    if (this.props.pending) return <Loading />
     return Platform.isIOS
       ? <KeyboardAvoidingView style={styles.container}>{this.messageView()}</KeyboardAvoidingView>
       : this.messageView()
