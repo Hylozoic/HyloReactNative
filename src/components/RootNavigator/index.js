@@ -10,7 +10,6 @@ import DetailsEditor from '../PostEditor/DetailsEditor'
 import DrawerMenu from '../DrawerMenu'
 import Feed from '../Feed'
 import MemberProfile from '../MemberProfile'
-import Messages from '../Messages'
 import Post from '../Post'
 import PostDetails from '../PostDetails'
 import PostEditor from '../PostEditor'
@@ -44,7 +43,6 @@ const screensInTabs = {
 
 // Screens that work outside of tabs, Settings, Messages, etc.
 const screensInStack = {
-  Messages: {screen: Messages},
   Settings: {screen: Settings},
   Thread: {screen: Thread},
   ThreadList: {screen: ThreadList}
