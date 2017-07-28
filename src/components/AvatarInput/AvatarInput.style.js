@@ -1,8 +1,9 @@
-import { Platform, StyleSheet } from 'react-native'
+import { Platform } from 'react-native'
 
 import { mercury } from '../../style/colors'
 
-export default StyleSheet.create({
+// Deliberately not a StyleSheet, too many calls to `flatten` required!
+export default {
   container: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -24,7 +25,8 @@ export default StyleSheet.create({
     flex: 2,
     height: Platform.isIOS ? 22 : null,
     fontSize: 14,
+    lineHeight: 18,
     fontFamily: 'Circular-Book',
     marginLeft: 5
   }
-})
+}

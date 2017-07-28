@@ -8,6 +8,8 @@ import { makeGetQueryResults } from '../../store/reducers/queryResults'
 export const FETCH_MESSAGES = 'Thread/FETCH_MESSAGES'
 export const UPDATE_THREAD_READ_TIME = 'Thread/UPDATE_THREAD_READ_TIME'
 
+const DEFAULT_AVATAR = 'https://www.gravatar.com/avatar/2a518750c39d5f59b4b1675492b0ba61?d=mm&s=140'
+
 export function fetchMessages (id, opts = {}) {
   return {
     type: FETCH_MESSAGES,
@@ -76,6 +78,14 @@ export const getMessages = createSelector(
     return []
   })
 
+export const getMyAvatar = createSelector(
+  orm,
+  state => state.orm,
+  session => {
+    console.log('ME', session.Me.first())
+    session.Me.first().avatarUrl
+  }
+)
 
 const getMessageResults = makeGetQueryResults(FETCH_MESSAGES)
 

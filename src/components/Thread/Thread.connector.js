@@ -1,12 +1,14 @@
 import { connect } from 'react-redux'
 import {
   fetchMessages,
-  getMessages
+  getMessages,
+  getMyAvatar
 } from './Thread.store'
 import getMe from '../../store/selectors/getMe'
 
 function mapStateToProps (state, props) {
   return {
+    avatarUrl: getMyAvatar(state),
     messages: getMessages(state, props)
   }
 }
