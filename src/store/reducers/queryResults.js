@@ -27,6 +27,19 @@ export default function (state = {}, action) {
   if (error) return state
   let root
 
+  const { extractQueryResults } = meta || {}
+  // parameters below into the action's metadata, write a piece of middleware to
+  if (extractQueryResults && payload) {
+  // detect the metadata and produce a generic action, and have this reducer
+    const { getItems, getParams, getType } = extractQueryResults
+  // handle only that action.
+    return appendIds(state,
+      getType ? getType(action) : action.type,
+      getParams ? getParams(action) : meta.graphql.variables,
+      getItems(action)
+    )
+  }
+
   // If this starts to feel too coupled to specific actions, we could move the
   // parameters below into the action's metadata, write a piece of middleware to
   // detect the metadata and produce a generic action, and have this reducer
