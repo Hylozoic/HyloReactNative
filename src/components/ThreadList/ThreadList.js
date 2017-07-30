@@ -50,7 +50,7 @@ export default class ThreadList extends Component {
 
 export function MessageRow ({message, participants, currentUser, showThread}) {
   return <View>
-    <TouchableOpacity onPress={() => showThread(message.id)}>
+    <TouchableOpacity onPress={() => showThread(message.messageThread)}>
       <ThreadCard
         message={message}
         participants={participants}
