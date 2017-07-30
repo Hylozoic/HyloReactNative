@@ -5,7 +5,6 @@ import {
   getMessages,
   getMyAvatar
 } from './Thread.store'
-import getMe from '../../store/selectors/getMe'
 
 function mapStateToProps (state, props) {
   return {
