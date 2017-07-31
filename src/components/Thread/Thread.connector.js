@@ -1,5 +1,8 @@
 import { connect } from 'react-redux'
+import { sanitize } from 'hylo-utils/text'
+
 import {
+  createMessage,
   fetchMessages,
   FETCH_MESSAGES,
   getMessages,
@@ -15,8 +18,10 @@ function mapStateToProps (state, props) {
 }
 
 function mapDispatchToProps (dispatch, { navigation }) {
+  const threadId = navigation.state.params.id
   return {
-    fetchMessages: () => dispatch(fetchMessages(navigation.state.params.id))
+    createMessage: text => dispatch(createMessage(threadId, sanitize(text))),
+    fetchMessages: () => dispatch(fetchMessages(threadId))
   }
 }
 

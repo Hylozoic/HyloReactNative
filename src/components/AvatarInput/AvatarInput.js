@@ -23,8 +23,7 @@ export default class extends React.PureComponent {
   handleContentSizeChange = ({ nativeEvent }) => {
     const { height } = nativeEvent.contentSize
     this.setState({
-      // inputHeight: height > MAX_INPUT_HEIGHT ? MAX_INPUT_HEIGHT : height
-      inputHeight: height
+      inputHeight: height > MAX_INPUT_HEIGHT ? MAX_INPUT_HEIGHT : height
     })
     if (this.props.scrollParentToEnd) this.props.scrollParentToEnd()
   }

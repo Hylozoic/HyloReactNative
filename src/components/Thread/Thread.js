@@ -21,10 +21,16 @@ export default class Thread extends React.Component {
         avatarUrl: string
       })
     })),
+    createMessage: func,
     fetchMessages: func
   }
 
   static navigationOptions = ({ navigation }) => Header(navigation)
+
+  constructor () {
+    super()
+    this.state = { inputValue: '' }
+  }
 
   componentWillMount () {
     this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this._keyboardDidShow)
@@ -42,15 +48,24 @@ export default class Thread extends React.Component {
 
   scrollToEnd = () => this.container.scrollToEnd()
 
+  createMessage = () => {
+    this.props.createMessage(this.state.inputValue)
+    this.setState({ inputValue: '' })
+  }
+
   messageView = () => {
-    const { avatarUrl, messages } = this.props
+    const { avatarUrl, messages, createMessage } = this.props
     return <ScrollView ref={sv => this.container = sv} style={styles.container}>
       {messages.map(message => <MessageCard key={message.id} message={message} />)}
       <AvatarInput
         avatarUrl={avatarUrl}
+        blurOnSubmit
         multiline
+        onChangeText={text => this.setState({ inputValue: text })}
+        onSubmitEditing={this.createMessage}
         placeholder='Write something...'
-        scrollParentToEnd={this.scrollToEnd} />
+        scrollParentToEnd={this.scrollToEnd}
+        value={this.state.inputValue} />
     </ScrollView>
   }
 

@@ -1,10 +1,11 @@
 import { createSelector } from 'redux-orm'
-import { get, pick } from 'lodash/fp'
+import { get, pick, uniqueId } from 'lodash/fp'
 import { humanDate, sanitize } from 'hylo-utils/text'
 
 import orm from '../../store/models'
 import { makeGetQueryResults } from '../../store/reducers/queryResults'
 
+export const CREATE_MESSAGE = 'Thread/CREATE_MESSAGE'
 export const FETCH_MESSAGES = 'Thread/FETCH_MESSAGES'
 export const UPDATE_THREAD_READ_TIME = 'Thread/UPDATE_THREAD_READ_TIME'
 
@@ -41,6 +42,39 @@ export function fetchMessages (id, opts = {}) {
       extractModel: 'MessageThread',
       reset: opts.reset,
       id
+    }
+  }
+}
+
+export function createMessage (messageThreadId, text, forNewThread) {
+  return {
+    type: CREATE_MESSAGE,
+    graphql: {
+      query: `mutation ($messageThreadId: String, $text: String) {
+        createMessage(data: {messageThreadId: $messageThreadId, text: $text}) {
+          id
+          text
+          createdAt
+          creator {
+            id
+          }
+          messageThread {
+            id
+          }
+        }
+      }`,
+      variables: {
+        messageThreadId,
+        text
+      }
+    },
+    meta: {
+      optimistic: true,
+      extractModel: 'Message',
+      tempId: uniqueId(`messageThread${messageThreadId}_`),
+      messageThreadId,
+      text,
+      forNewThread
     }
   }
 }
