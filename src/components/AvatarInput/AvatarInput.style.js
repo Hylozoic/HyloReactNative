@@ -23,7 +23,6 @@ export default {
   },
   input: {
     flex: 2,
-    height: Platform.isIOS ? 22 : null,
     fontSize: 14,
     lineHeight: 18,
     fontFamily: 'Circular-Book',
