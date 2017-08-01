@@ -11,7 +11,7 @@ export default function Header (navigation, title) {
   }
 
   const showMessages = () => {
-    navigation.navigate('NewMessage')
+    navigation.navigate('ThreadList')
   }
 
   return {
