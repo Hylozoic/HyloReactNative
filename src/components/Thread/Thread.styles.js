@@ -4,6 +4,7 @@ import { mercury } from '../../style/colors'
 
 export default StyleSheet.create({
   container: {
+    flex: 1,
     backgroundColor: 'white'
   },
   input: {
@@ -22,5 +23,8 @@ export default StyleSheet.create({
 
     // Android-only
     elevation: 1
+  },
+  messageList: {
+    paddingRight: 15
   }
 })

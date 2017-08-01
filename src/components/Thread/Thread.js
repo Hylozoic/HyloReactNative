@@ -1,5 +1,5 @@
 import React from 'react'
-import { Keyboard, Platform, ScrollView, StyleSheet } from 'react-native'
+import { Keyboard, Platform, ScrollView, StyleSheet, View } from 'react-native'
 import { any, arrayOf, func, shape, string } from 'prop-types'
 
 import AvatarInput from '../AvatarInput'
@@ -55,8 +55,10 @@ export default class Thread extends React.Component {
 
   messageView = () => {
     const { avatarUrl, messages, createMessage } = this.props
-    return <ScrollView ref={sv => this.container = sv} style={styles.container}>
-      {messages.map(message => <MessageCard key={message.id} message={message} />)}
+    return <View style={styles.container}>
+      <ScrollView ref={sv => this.container = sv} style={styles.messageList}>
+        {messages.map(message => <MessageCard key={message.id} message={message} />)}
+      </ScrollView>
       <AvatarInput
         avatarUrl={avatarUrl}
         blurOnSubmit
@@ -66,7 +68,7 @@ export default class Thread extends React.Component {
         placeholder='Write something...'
         scrollParentToEnd={this.scrollToEnd}
         value={this.state.inputValue} />
-    </ScrollView>
+    </View>
   }
 
   render () {

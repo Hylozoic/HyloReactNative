@@ -4,6 +4,8 @@ import { rhino30 } from '../../style/colors'
 
 export default StyleSheet.create({
   body: {
+    flexDirection: 'column',
+    flex: 0.9,
     paddingLeft: 10
   },
   container: {

@@ -9,7 +9,6 @@ import styles from './AvatarInput.style'
 
 const MIN_INPUT_HEIGHT = 22
 const MAX_INPUT_HEIGHT = 100
-const MAX_INPUT_LINES = 4
 
 export default class extends React.PureComponent {
   static propTypes = {
