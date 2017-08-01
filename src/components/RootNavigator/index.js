@@ -3,11 +3,10 @@ import {
   TabNavigator,
   StackNavigator
 } from 'react-navigation'
-import { Dimensions, Platform } from 'react-native'
+import { Dimensions } from 'react-native'
 
 import WelcomeScene from '../WelcomeScene'
 import Feed from '../Feed'
-import Post from '../Post'
 import Settings from '../Settings'
 import DrawerMenu from '../DrawerMenu'
 import { Home, Members, Topics } from '../Tabs'
@@ -19,30 +18,31 @@ import MemberProfile from '../MemberProfile'
 import CommentEditor from '../PostDetails/CommentEditor'
 import ThreadList from '../ThreadList'
 import tabStyles from '../Tabs/Tabs.styles'
+import createLinkingAwareContainer from './createLinkingAwareContainer'
+import { isIOS } from 'util/platform'
 
 // Tab Home Screens
 const tabs = {
-  Home: {screen: Home},
-  Members: {screen: Members},
-  Topics: {screen: Topics}
+  Home: {screen: Home, path: ''},
+  Members: {screen: Members, path: 'people'},
+  Topics: {screen: Topics, path: 'topics'}
 }
 
 // Screens that work within Tabs (the same tab icon stays highlighted)
 const screensInTabs = {
-  Post: {screen: Post},
-  Feed: {screen: Feed},
-  WelcomeScene: {screen: WelcomeScene},
-  PostEditor: {screen: PostEditor},
-  DetailsEditor: {screen: DetailsEditor},
-  PostDetails: {screen: PostDetails},
-  MemberProfile: {screen: MemberProfile},
-  CommentEditor: {screen: CommentEditor}
+  Feed: {screen: Feed, path: 'feed'},
+  WelcomeScene: {screen: WelcomeScene, path: 'welcome'},
+  PostEditor: {screen: PostEditor, path: 'post/:id/edit'},
+  DetailsEditor: {screen: DetailsEditor, path: 'details/:id/edit'},
+  PostDetails: {screen: PostDetails, path: 'post/:id'},
+  MemberProfile: {screen: MemberProfile, path: 'people/:id'},
+  CommentEditor: {screen: CommentEditor, path: 'comment/:postId/new'}
 }
 
 // Screens that work outside of tabs, Settings, Messages, etc.
 const screensInStack = {
-  Settings: {screen: Settings},
-  ThreadList: {screen: ThreadList}
+  Settings: {screen: Settings, path: 'settings'},
+  ThreadList: {screen: ThreadList, path: 'messages'}
 }
 
 Object.freeze(tabs)
@@ -58,7 +58,7 @@ const tabNavigatorConfig = {
     indicatorStyle: {
       display: 'none'
     },
-    style: (Platform.OS === 'ios') ? tabStyles.tabNavigatorIOS : tabStyles.tabNavigatorAndroid
+    style: isIOS ? tabStyles.tabNavigatorIOS : tabStyles.tabNavigatorAndroid
   }
 }
 
@@ -67,8 +67,10 @@ const TabNavigatorWithBar = TabNavigator(
   tabNavigatorConfig
 )
 
+const prefix = isIOS ? 'HyloReactNative://' : 'HyloReactNative://HyloReactNative/'
+
 const drawerNavigatorRoutes = {
-  Home: { screen: TabNavigatorWithBar }
+  Home: { screen: createLinkingAwareContainer(TabNavigatorWithBar, prefix) }
 }
 
 const drawerNavigatorConfig = {
@@ -92,7 +94,6 @@ const mainStackRoute = {
 }
 
 const rootNavigatorRoutes = Object.assign({}, mainStackRoute, screensInStack)
-
 const RootNavigator = StackNavigator(
   rootNavigatorRoutes,
   {

@@ -4,6 +4,7 @@ import SocketListener from './SocketListener'
 import fetchCurrentUser from '../store/actions/fetchCurrentUser'
 import { connect } from 'react-redux'
 import { View } from 'react-native'
+import { isIOS } from 'util/platform'
 
 // this component just sets up a navigator so that views can open full-screen,
 // above the tab bar
@@ -13,8 +14,10 @@ class LoggedInRoot extends React.Component {
   }
 
   render () {
+    const prefix = isIOS ? 'HyloReactNative://' : 'HyloReactNative://HyloReactNative/'
+
     return <View style={{flex: 1}}>
-      <RootNavigator />
+      <RootNavigator uriPrefix={prefix} />
       <SocketListener />
     </View>
   }
