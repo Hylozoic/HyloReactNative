@@ -1,13 +1,16 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { IOS_GOOGLE_CLIENT_ID, WEB_GOOGLE_CLIENT_ID } from 'react-native-dotenv'
-import { GoogleSignin, GoogleSigninButton } from 'react-native-google-signin'
+import {
+  View,
+  TouchableOpacity,
+  Text
+} from 'react-native'
+import { GoogleSignin } from 'react-native-google-signin'
+
+import Icon from '../Icon'
+import styles from './Login.styles'
 
 export default class GoogleLoginButton extends React.Component {
-  static propTypes = {
-    onLoginFinished: PropTypes.func.isRequired
-  }
-
   componentDidMount () {
     GoogleSignin.configure({
       iosClientId: IOS_GOOGLE_CLIENT_ID,
@@ -25,10 +28,10 @@ export default class GoogleLoginButton extends React.Component {
   }
 
   render () {
-    return <GoogleSigninButton
-      style={{width: 48, height: 48}}
-      size={GoogleSigninButton.Size.Icon}
-      color={GoogleSigninButton.Color.Dark}
-      onPress={this.signIn} />
+    return <View style={styles.googleLoginContainer}>
+      <TouchableOpacity onPress={this.signIn}>
+        <Text style={styles.heavyText}><Icon name='Google' size={12} />  Google</Text>
+      </TouchableOpacity>
+    </View>
   }
 }

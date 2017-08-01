@@ -17,9 +17,9 @@ import DetailsEditor from '../PostEditor/DetailsEditor'
 import PostDetails from '../PostDetails'
 import MemberProfile from '../MemberProfile'
 import CommentEditor from '../PostDetails/CommentEditor'
-import Messages from '../Messages'
 import tabStyles from '../Tabs/styles'
 import NewMessage from '../NewMessage'
+import ThreadList from '../ThreadList'
 
 // Tab Home Screens
 const tabs = {
@@ -44,7 +44,7 @@ const screensInTabs = {
 // Screens that work outside of tabs, Settings, Messages, etc.
 const screensInStack = {
   Settings: {screen: Settings},
-  Messages: {screen: Messages}
+  ThreadList: {screen: ThreadList}
 }
 
 Object.freeze(tabs)

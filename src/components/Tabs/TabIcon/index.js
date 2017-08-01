@@ -1,7 +1,7 @@
 import React from 'react'
 
 import Icon from '../../Icon'
-import styles from '../styles'
+import styles from '../Tabs.styles'
 
 export default function TabIcon (props) {
   return <Icon

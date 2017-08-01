@@ -2,7 +2,7 @@ export default {
   messagesIcon: {
     opacity: 0.75,
     backgroundColor: 'transparent',
-    fontSize: 36,
+    fontSize: 32,
     marginTop: 8,
     marginBottom: 7,
     marginRight: 12

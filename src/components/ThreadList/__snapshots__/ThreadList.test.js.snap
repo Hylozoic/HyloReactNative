@@ -1,0 +1,94 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MessageRow renders correctly 1`] = `
+<View>
+  <TouchableOpacity
+    activeOpacity={0.2}
+    focusedOpacity={0.7}
+    onPress={[Function]}
+  >
+    <ThreadCard
+      currentUser={undefined}
+      message={
+        Array [
+          Object {
+            "id": 1,
+          },
+        ]
+      }
+      participants={
+        Array [
+          Object {
+            "id": 2,
+          },
+        ]
+      }
+    />
+  </TouchableOpacity>
+</View>
+`;
+
+exports[`ThreadList handles pending correctly with threads 1`] = `
+<View>
+  <FlatList
+    data={
+      Object {
+        "id": 1,
+      }
+    }
+    disableVirtualization={false}
+    horizontal={false}
+    initialNumToRender={10}
+    keyExtractor={[Function]}
+    maxToRenderPerBatch={10}
+    numColumns={1}
+    onEndReached={undefined}
+    onEndReachedThreshold={2}
+    renderItem={[Function]}
+    renderScrollComponent={[Function]}
+    scrollEventThrottle={50}
+    updateCellsBatchingPeriod={50}
+    windowSize={21}
+  />
+</View>
+`;
+
+exports[`ThreadList handles pending correctly without threads 1`] = `<Loading />`;
+
+exports[`ThreadList handles when there are no threads correctly 1`] = `
+<Text
+  accessible={true}
+  allowFontScaling={true}
+  disabled={false}
+  ellipsizeMode="tail"
+>
+  No active conversations
+</Text>
+`;
+
+exports[`ThreadList renders correctly 1`] = `
+<View>
+  <FlatList
+    data={
+      Array [
+        Object {
+          "id": 1,
+        },
+      ]
+    }
+    disableVirtualization={false}
+    horizontal={false}
+    initialNumToRender={10}
+    keyExtractor={[Function]}
+    maxToRenderPerBatch={10}
+    numColumns={1}
+    onEndReached={undefined}
+    onEndReachedThreshold={2}
+    renderItem={[Function]}
+    renderScrollComponent={[Function]}
+    scrollEventThrottle={50}
+    updateCellsBatchingPeriod={50}
+    windowSize={21}
+  />
+</View>
+`;

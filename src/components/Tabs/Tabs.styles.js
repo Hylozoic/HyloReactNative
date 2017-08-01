@@ -1,9 +1,10 @@
 import { jade } from 'style/colors'
+import { StyleSheet } from 'react-native'
 
 export default {
   tabNavigatorAndroid: {
     backgroundColor: 'white',
-    borderTopWidth: 0.4
+    borderTopWidth: StyleSheet.hairlineWidth
   },
   tabNavigatorIOS: {
     backgroundColor: 'white'

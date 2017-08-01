@@ -1,0 +1,92 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`handles ThreadAvatars correctly handles when there are more than three participants 1`] = `
+<View>
+  <Avatar
+    avatarUrl="http://avatar.url"
+  />
+  <Avatar
+    avatarUrl="http://avatar.url"
+  />
+  <Avatar
+    avatarUrl="http://avatar.url"
+  />
+  <View>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+    >
+      +
+      1
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`handles ThreadAvatars correctly handles when there are three participants 1`] = `
+<View>
+  <Avatar
+    avatarUrl="http://avatar.url"
+  />
+  <Avatar
+    avatarUrl="http://avatar.url"
+  />
+  <Avatar
+    avatarUrl="http://avatar.url"
+  />
+</View>
+`;
+
+exports[`handles ThreadAvatars correctly handles when there are two participants 1`] = `
+<View>
+  <Avatar
+    avatarUrl="http://avatar.url"
+  />
+  <Avatar
+    avatarUrl="http://avatar.url"
+  />
+</View>
+`;
+
+exports[`handles ThreadAvatars correctly handles when there is one participant 1`] = `
+<View>
+  <Avatar
+    avatarUrl="http://avatar.url"
+  />
+</View>
+`;
+
+exports[`renders correctly 1`] = `
+<View>
+  <ThreadAvatars
+    avatarUrls={Array []}
+  />
+  <View>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+    >
+       and -1 other
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+      numberOfLines={2}
+    >
+      Hey, just checking in. Test, test, test.
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+    />
+  </View>
+</View>
+`;
