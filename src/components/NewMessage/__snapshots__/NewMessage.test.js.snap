@@ -1,0 +1,315 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ContactList renders correctly 1`] = `
+<View>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    disabled={false}
+    ellipsizeMode="tail"
+  >
+    Recent Contacts
+  </Text>
+  <Loading />
+  <ContactRow
+    add={[Function]}
+    contact={
+      Object {
+        "id": 4,
+      }
+    }
+    grayed={true}
+  />
+  <ContactRow
+    add={[Function]}
+    contact={
+      Object {
+        "id": 5,
+      }
+    }
+    grayed={true}
+  />
+  <ContactRow
+    add={[Function]}
+    contact={
+      Object {
+        "id": 6,
+      }
+    }
+    grayed={true}
+  />
+</View>
+`;
+
+exports[`ContactRow renders correctly 1`] = `
+<TouchableOpacity
+  activeOpacity={0.2}
+  focusedOpacity={0.7}
+  onPress={[Function]}
+>
+  <View>
+    <Avatar
+      avatarUrl="cone.png"
+      dimension={30}
+    />
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+    >
+      Contact One
+    </Text>
+  </View>
+</TouchableOpacity>
+`;
+
+exports[`MessagePrompt renders correctly 1`] = `
+<View>
+  <View>
+    <Avatar
+      avatarUrl="cone.png"
+      dimension={30}
+    />
+    <TextInput
+      onBlur={[Function]}
+      onChangeText={[Function]}
+      placeholder="Type your message here"
+      placeholderTextColor="#A79A9A"
+      value="hi mom"
+    />
+    <TouchableOpacity
+      activeOpacity={0.2}
+      focusedOpacity={0.7}
+      onPress={[Function]}
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        disabled={false}
+        ellipsizeMode="tail"
+      >
+        Send
+      </Text>
+    </TouchableOpacity>
+  </View>
+  <View />
+</View>
+`;
+
+exports[`NewMessage renders correctly 1`] = `
+<KeyboardAvoidingView
+  behavior="height"
+  keyboardVerticalOffset={64}
+>
+  <ParticipantInput
+    onChangeText={[Function]}
+    participants={
+      Array [
+        Object {
+          "id": 10,
+        },
+        Object {
+          "id": 11,
+        },
+        Object {
+          "id": 12,
+        },
+      ]
+    }
+    removeParticipant={[Function]}
+    text=""
+  />
+  <ScrollViewMock
+    contentContainerStyle={
+      Object {
+        "paddingBottom": 72,
+      }
+    }
+  >
+    <ContactList
+      addParticipant={[Function]}
+      contacts={
+        Array [
+          Object {
+            "id": 1,
+          },
+          Object {
+            "id": 2,
+          },
+          Object {
+            "id": 3,
+          },
+        ]
+      }
+      label="Recent"
+      loading={true}
+    />
+    <ContactList
+      addParticipant={[Function]}
+      contacts={
+        Array [
+          Object {
+            "id": 4,
+          },
+          Object {
+            "id": 5,
+          },
+          Object {
+            "id": 6,
+          },
+        ]
+      }
+      grayed={true}
+      label="All Contacts"
+      loading={false}
+    />
+  </ScrollViewMock>
+  <MessagePrompt
+    createMessage={[Function]}
+    currentUser={
+      Object {
+        "id": 1,
+      }
+    }
+    message="hi mom"
+    onBlur={[Function]}
+    setMessage={[Function]}
+  />
+</KeyboardAvoidingView>
+`;
+
+exports[`NewMessage renders correctly 2`] = `
+<KeyboardAvoidingView
+  behavior="height"
+  keyboardVerticalOffset={64}
+>
+  <ParticipantInput
+    onChangeText={[Function]}
+    participants={
+      Array [
+        Object {
+          "id": 10,
+        },
+        Object {
+          "id": 11,
+        },
+        Object {
+          "id": 12,
+        },
+      ]
+    }
+    removeParticipant={[Function]}
+    text="Jon"
+  />
+  <ScrollViewMock
+    contentContainerStyle={
+      Object {
+        "paddingBottom": 72,
+      }
+    }
+  >
+    <ContactList
+      addParticipant={[Function]}
+      contacts={
+        Array [
+          Object {
+            "id": 7,
+          },
+          Object {
+            "id": 8,
+          },
+          Object {
+            "id": 9,
+          },
+        ]
+      }
+      loading={true}
+    />
+  </ScrollViewMock>
+  <MessagePrompt
+    createMessage={[Function]}
+    currentUser={
+      Object {
+        "id": 1,
+      }
+    }
+    message="hi mom"
+    onBlur={[Function]}
+    setMessage={[Function]}
+  />
+</KeyboardAvoidingView>
+`;
+
+exports[`Participant renders correctly 1`] = `
+<View>
+  <Avatar
+    avatarUrl="pone.png"
+    dimension={24}
+  />
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    disabled={false}
+    ellipsizeMode="tail"
+  >
+    Participant One
+  </Text>
+  <TouchableOpacity
+    activeOpacity={0.2}
+    focusedOpacity={0.7}
+    onPress={[Function]}
+  >
+    <Icon
+      name="Ex"
+    />
+  </TouchableOpacity>
+</View>
+`;
+
+exports[`ParticipantInput renders correctly 1`] = `
+<View>
+  <ScrollViewMock
+    contentContainerStyle={
+      Object {
+        "alignItems": "center",
+        "borderBottomColor": "#d7d8d8",
+        "borderBottomWidth": 1,
+        "flexDirection": "row",
+        "height": 60,
+        "paddingHorizontal": 15,
+      }
+    }
+    horizontal={true}
+  >
+    <Participant
+      participant={
+        Object {
+          "id": 10,
+        }
+      }
+      remove={[Function]}
+    />
+    <Participant
+      participant={
+        Object {
+          "id": 11,
+        }
+      }
+      remove={[Function]}
+    />
+    <Participant
+      participant={
+        Object {
+          "id": 12,
+        }
+      }
+      remove={[Function]}
+    />
+    <TextInput
+      onChangeText={[Function]}
+      value="Jon"
+    />
+  </ScrollViewMock>
+</View>
+`;

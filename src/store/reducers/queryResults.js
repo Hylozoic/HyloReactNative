@@ -1,3 +1,7 @@
+/**
+ * @providesModule store/reducers/queryResults
+ */
+
 // The purpose of this reducer is to provide a general-purpose store for keeping
 // track of the ordering of lists of data fetched from the API.
 //
@@ -40,10 +44,6 @@ export default function (state = {}, action) {
     )
   }
 
-  // If this starts to feel too coupled to specific actions, we could move the
-  // parameters below into the action's metadata, write a piece of middleware to
-  // detect the metadata and produce a generic action, and have this reducer
-  // handle only that action.
   switch (type) {
     case CREATE_POST:
       root = payload.data.createPost

@@ -16,8 +16,9 @@ import DetailsEditor from '../PostEditor/DetailsEditor'
 import PostDetails from '../PostDetails'
 import MemberProfile from '../MemberProfile'
 import CommentEditor from '../PostDetails/CommentEditor'
-import ThreadList from '../ThreadList'
 import tabStyles from '../Tabs/Tabs.styles'
+import NewMessage from '../NewMessage'
+import ThreadList from '../ThreadList'
 import createLinkingAwareContainer from './createLinkingAwareContainer'
 import { isIOS } from 'util/platform'
 
@@ -36,7 +37,8 @@ const screensInTabs = {
   DetailsEditor: {screen: DetailsEditor, path: 'details/:id/edit'},
   PostDetails: {screen: PostDetails, path: 'post/:id'},
   MemberProfile: {screen: MemberProfile, path: 'people/:id'},
-  CommentEditor: {screen: CommentEditor, path: 'comment/:postId/new'}
+  CommentEditor: {screen: CommentEditor, path: 'comment/:postId/new'},
+  NewMessage: {screen: NewMessage}
 }
 
 // Screens that work outside of tabs, Settings, Messages, etc.
