@@ -3,7 +3,7 @@ import {
   TabNavigator,
   StackNavigator
 } from 'react-navigation'
-import { Dimensions, Platform } from 'react-native'
+import { Dimensions } from 'react-native'
 
 import WelcomeScene from '../WelcomeScene'
 import Feed from '../Feed'
@@ -19,6 +19,7 @@ import CommentEditor from '../PostDetails/CommentEditor'
 import ThreadList from '../ThreadList'
 import tabStyles from '../Tabs/Tabs.styles'
 import createLinkingAwareContainer from './createLinkingAwareContainer'
+import { isIOS } from 'util/platform'
 
 // Tab Home Screens
 const tabs = {
@@ -57,7 +58,7 @@ const tabNavigatorConfig = {
     indicatorStyle: {
       display: 'none'
     },
-    style: (Platform.OS === 'ios') ? tabStyles.tabNavigatorIOS : tabStyles.tabNavigatorAndroid
+    style: isIOS ? tabStyles.tabNavigatorIOS : tabStyles.tabNavigatorAndroid
   }
 }
 
@@ -66,7 +67,7 @@ const TabNavigatorWithBar = TabNavigator(
   tabNavigatorConfig
 )
 
-const prefix = Platform.OS === 'android' ? 'HyloReactNative://HyloReactNative/' : 'HyloReactNative://'
+const prefix = isIOS ? 'HyloReactNative://' : 'HyloReactNative://HyloReactNative/'
 
 const drawerNavigatorRoutes = {
   Home: { screen: createLinkingAwareContainer(TabNavigatorWithBar, prefix) }
