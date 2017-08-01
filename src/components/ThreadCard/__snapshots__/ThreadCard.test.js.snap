@@ -11,15 +11,17 @@ exports[`handles ThreadAvatars correctly handles when there are more than three 
   <Avatar
     avatarUrl="http://avatar.url"
   />
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    disabled={false}
-    ellipsizeMode="tail"
-  >
-    +
-    1
-  </Text>
+  <View>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+    >
+      +
+      1
+    </Text>
+  </View>
 </View>
 `;
 

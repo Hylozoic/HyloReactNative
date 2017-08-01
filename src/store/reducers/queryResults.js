@@ -1,3 +1,7 @@
+/**
+ * @providesModule store/reducers/queryResults
+ */
+
 // The purpose of this reducer is to provide a general-purpose store for keeping
 // track of the ordering of lists of data fetched from the API.
 //
@@ -22,8 +26,11 @@ export default function (state = {}, action) {
   let root
 
   const { extractQueryResults } = meta || {}
+  // parameters below into the action's metadata, write a piece of middleware to
   if (extractQueryResults && payload) {
+  // detect the metadata and produce a generic action, and have this reducer
     const { getItems, getParams, getType } = extractQueryResults
+  // handle only that action.
     return appendIds(state,
       getType ? getType(action) : action.type,
       getParams ? getParams(action) : meta.graphql.variables,

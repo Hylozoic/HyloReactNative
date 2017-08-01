@@ -9,16 +9,21 @@ import styles from './ThreadList.styles'
 
 export default class ThreadList extends Component {
   static navigationOptions = ({navigation}) => (Header(navigation))
-  componentDidMount () {
-    if (isEmpty(this.props.threads)) this.props.fetchThreads()
+
+  fetchOrShowCached () {
+    const { hasMore, threads, fetchThreads } = this.props
+    if (isEmpty(threads) && hasMore !== false) fetchThreads()
   }
 
+  componentDidMount () {
+    this.fetchOrShowCached()
+  }
   _keyExtractor = (item, index) => item.id;
 
   render () {
-    const { threads, pending, currentUser } = this.props
+    const { threads, pending, currentUser, fetchMoreThreads } = this.props
 
-    if (pending) return <Loading />
+    if (pending && threads.length === 0) return <Loading />
     if (!pending && threads.length === 0) {
       return <Text style={styles.center}>No active conversations</Text>
     }
@@ -27,6 +32,7 @@ export default class ThreadList extends Component {
       <FlatList
         data={threads}
         keyExtractor={this._keyExtractor}
+        onEndReached={fetchMoreThreads}
         renderItem={({ item }) =>
           <MessageRow
             participants={item.participants}

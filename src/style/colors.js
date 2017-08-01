@@ -27,6 +27,7 @@ export const black = 'black'
 // to mobile performance.
 // You can calculate this using: http://tdekoning.github.io/rgba-converter/
 export const capeCod10 = '#EBEBEB'
+export const capeCod20 = fakeAlpha(capeCod, 0.2)
 export const capeCod40 = '#A79A9A'
 export const rhino10 = fakeAlpha(rhino, 0.1)
 export const rhino30 = '#AAACAC'
