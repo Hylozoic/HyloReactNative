@@ -6,12 +6,12 @@ import {
   fetchMessages,
   FETCH_MESSAGES,
   getMessages,
-  getMyAvatar
+  getMeForThread
 } from './Thread.store'
 
 function mapStateToProps (state, props) {
   return {
-    avatarUrl: getMyAvatar(state),
+    currentUser: getMeForThread(state),
     messages: getMessages(state, props),
     pending: state.pending[FETCH_MESSAGES]
   }

@@ -1,6 +1,7 @@
 import React from 'react'
 import { Keyboard, Platform, ScrollView, StyleSheet, View } from 'react-native'
 import { any, arrayOf, func, shape, string } from 'prop-types'
+import { get } from 'lodash/fp'
 
 import AvatarInput from '../AvatarInput'
 import Header from './Header'
@@ -44,6 +45,39 @@ export default class Thread extends React.Component {
     this.keyboardDidShowListener.remove()
   }
 
+  componentWillUpdate (nextProps) {
+    const { currentUser, messages, pending } = nextProps
+    if (pending) return
+
+    const oldMessages = this.props.messages
+    const deltaLength = Math.abs(messages.length - oldMessages.length)
+
+    // Note: we write directly to the object here rather than using setState.
+    // This avoids an automatic re-render on scroll, and any inconsistencies
+    // owing to the async nature of setState and/or setState batching.
+    this.shouldScroll = false
+
+    if (deltaLength) {
+      const latest = messages[messages.length - 1]
+      const oldLatest = oldMessages[oldMessages.length - 1]
+
+      // Are additional messages old (at the beginning of the sorted array)?
+      if (get('id', latest) === get('id', oldLatest)) return
+
+      // If there's one new message, it's not from currentUser,
+      // and we're not already at the bottom, don't scroll
+      if (deltaLength === 1 &&
+        get('creator.id', latest) !== currentUser.id &&
+        !this.atBottom(this.list)) return
+
+      this.shouldScroll = true
+    }
+  }
+
+  componentDidUpdate () {
+    if (this.shouldScroll) this.container.scrollToEnd()
+  }
+
   _keyboardDidShow = () => this.container.scrollToEnd()
 
   scrollToEnd = () => this.container.scrollToEnd()
@@ -54,13 +88,13 @@ export default class Thread extends React.Component {
   }
 
   messageView = () => {
-    const { avatarUrl, messages, createMessage } = this.props
+    const { currentUser, messages, createMessage } = this.props
     return <View style={styles.container}>
       <ScrollView ref={sv => this.container = sv} style={styles.messageList}>
         {messages.map(message => <MessageCard key={message.id} message={message} />)}
       </ScrollView>
       <AvatarInput
-        avatarUrl={avatarUrl}
+        avatarUrl={currentUser.avatarUrl}
         blurOnSubmit
         multiline
         onChangeText={text => this.setState({ inputValue: text })}

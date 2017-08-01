@@ -114,10 +114,10 @@ export const getMessages = createSelector(
     return []
   })
 
-export const getMyAvatar = createSelector(
+export const getMeForThread = createSelector(
   orm,
   state => state.orm,
-  session => session.Me.count() > 0 ? session.Me.first().avatarUrl : DEFAULT_AVATAR
+  session => pick(['id', 'avatarUrl'], session.Me.first().ref)
 )
 
 const getMessageResults = makeGetQueryResults(FETCH_MESSAGES)
