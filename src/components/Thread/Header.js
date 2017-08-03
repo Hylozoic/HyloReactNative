@@ -2,10 +2,10 @@ import React from 'react'
 import { StyleSheet, Text } from 'react-native'
 
 export default function Header (navigation) {
-  const { goBack } = navigation
-
+  console.log('NAV', navigation)
   return {
-    headerTitle: <Text style={styles.title}>Thread</Text>,
+    title: navigation.state.params.title,
+    headerTitle: navigation.state.params.title
   }
 }
 

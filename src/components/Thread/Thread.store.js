@@ -26,12 +26,15 @@ export function fetchMessages (id, opts = {}) {
                 text
                 creator {
                   id
-                  name
-                  avatarUrl
                 }
               }
               total
               hasMore
+            }
+            participants {
+              id
+              name
+              avatarUrl
             }
           }
         }
@@ -98,20 +101,32 @@ function refineMessages ({ id, createdAt, text, creator }) {
   }
 }
 
-export const getMessages = createSelector(
+// TODO: replace with hylo-utils/text/threadNames
+function threadNames (names) {
+  if (names.length < 3) return names.join(' & ')
+  return `${names[0]} & ${names.length - 1} others`
+}
+
+const firstName = person => person.name.split(' ')[0]
+
+export const getThread = createSelector(
   orm,
   state => state.orm,
   (_, { navigation }) => navigation.state.params.id,
   (session, id) => {
     if (session.MessageThread.hasId(id)) {
-      const messages = session.MessageThread
-        .withId(id)
-        .messages
+      const thread = session.MessageThread.withId(id)
+      const messages = thread.messages
         .orderBy(m => Number(m.id))
         .toModelArray()
-      return messages.map(refineMessages)
+        .map(refineMessages)
+      const title = threadNames(thread.participants.toRefArray().map(firstName))
+      return {
+        messages,
+        title
+      }
     }
-    return []
+    return null
   })
 
 export const getMeForThread = createSelector(

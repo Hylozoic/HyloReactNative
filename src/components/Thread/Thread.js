@@ -12,6 +12,8 @@ import styles from './Thread.styles.js'
 
 export default class Thread extends React.Component {
   static propTypes = {
+    createMessage: func,
+    fetchMessages: func,
     messages: arrayOf(shape({
       id: any,
       createdAt: string,
@@ -22,8 +24,8 @@ export default class Thread extends React.Component {
         avatarUrl: string
       })
     })),
-    createMessage: func,
-    fetchMessages: func
+    setTitle: func,
+    title: string
   }
 
   static navigationOptions = ({ navigation }) => Header(navigation)
@@ -38,7 +40,9 @@ export default class Thread extends React.Component {
   }
 
   componentDidMount () {
+    const { fetchMessages, setTitle, title } = this.props
     this.props.fetchMessages()
+    if (title) setTitle(title)
   }
 
   componentWillUnmount () {
@@ -74,7 +78,9 @@ export default class Thread extends React.Component {
     }
   }
 
-  componentDidUpdate () {
+  componentDidUpdate (prevProps) {
+    const { setTitle, title } = this.props
+    if (prevProps.title !== title) setTitle(title)
     if (this.shouldScroll) this.container.scrollToEnd()
   }
 
@@ -106,7 +112,7 @@ export default class Thread extends React.Component {
   }
 
   render () {
-    if (this.props.pending) return <Loading />
+    if (this.props.pending || !this.props.messages) return <Loading />
     return Platform.isIOS
       ? <KeyboardAvoidingView style={styles.container}>{this.messageView()}</KeyboardAvoidingView>
       : this.messageView()
