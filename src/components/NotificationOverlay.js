@@ -1,12 +1,13 @@
 import React from 'react'
-import { Animated, StyleSheet, Text } from 'react-native'
-import { bool, string } from 'prop-types'
+import { Animated, StyleSheet, Text, TouchableOpacity } from 'react-native'
+import { bool, func, string } from 'prop-types'
 
 import { persimmon } from '../style/colors'
 
 export default class Thread extends React.Component {
   static propTypes = {
     message: string.isRequired,
+    onPress: func,
     visible: bool.isRequired
   }
 
@@ -19,29 +20,40 @@ export default class Thread extends React.Component {
   }
 
   componentDidMount() {
-    Animated.parallel([
-      Animated.timing(
-        this.state.opacityAnim,
-        { toValue: 1, duration: 2000 }
-      ),
+    const height = lineHeight + padding * 2
+    Animated.sequence([
+      // TODO: remove initial delay
+      Animated.delay(3000),
       Animated.timing(
         this.state.heightAnim,
-        { toValue: fontSize + padding * 2, duration: 2000 }
+        { toValue: height, duration: 800 }
+      ),
+      Animated.delay(4000),
+      Animated.timing(
+        this.state.heightAnim,
+        { toValue: 0, duration: 800 }
       )
     ]).start()
   }
 
   render () {
     return <Animated.View style={{
-      height: this.state.heightAnim,
-      opacity: this.state.opacityAnim
+      position: 'absolute',
+      bottom: 0,
+      right: 0,
+      left: 0,
+      elevation: 3, // Android only
+      height: this.state.heightAnim
     }}>
-      <Text style={styles.message}>{this.props.message}</Text>
+      <TouchableOpacity onPress={this.props.onPress}>
+        <Text style={styles.message}>{this.props.message}</Text>
+      </TouchableOpacity>
     </Animated.View>
   }
 }
 
 const fontSize = 16
+const lineHeight = 20
 const padding = 10
 
 const styles = StyleSheet.create({
@@ -52,6 +64,7 @@ const styles = StyleSheet.create({
     fontSize,
     // Note: letterSpacing not supported on Android
     letterSpacing: 0.2,
+    lineHeight,
     padding,
     textAlign: 'center'
   }

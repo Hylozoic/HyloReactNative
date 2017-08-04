@@ -89,6 +89,7 @@ export default class Thread extends React.Component {
   scrollToEnd = () => {
     this.container.scrollToEnd()
     this.shouldScroll = false
+    this.notify = false
   }
 
   createMessage = () => {
@@ -119,6 +120,7 @@ export default class Thread extends React.Component {
         value={this.state.inputValue} />
       <NotificationOverlay
         message={`${this.newMessages} NEW MESSAGES`}
+        onPress={this.scrollToEnd}
         visible={this.notify} />
     </View>
   }
