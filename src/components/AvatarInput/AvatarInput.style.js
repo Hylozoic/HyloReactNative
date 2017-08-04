@@ -1,5 +1,3 @@
-import { Platform } from 'react-native'
-
 import { mercury } from '../../style/colors'
 
 // Deliberately not a StyleSheet, too many calls to `flatten` required!

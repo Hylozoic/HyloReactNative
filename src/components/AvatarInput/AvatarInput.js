@@ -18,18 +18,28 @@ export default class extends React.PureComponent {
 
   constructor () {
     super()
-    // Avoiding use of setState here as it would double-render on each content size change
-    this.inputheight = MIN_INPUT_HEIGHT
+    this.state = {
+      inputheight: MIN_INPUT_HEIGHT
+    }
   }
 
   handleContentSizeChange = ({ nativeEvent }) => {
-    this.inputHeight = nativeEvent.contentSize.height
-    if (this.props.scrollParentToEnd) this.props.scrollParentToEnd()
+    this.setState({
+      inputHeight: nativeEvent.contentSize.height
+    })
   }
 
-  restrictHeight = () => Math.min(MAX_INPUT_HEIGHT, Math.max(MIN_INPUT_HEIGHT, this.inputHeight))
+  restrictHeight = () => Math.min(
+    MAX_INPUT_HEIGHT,
+    Math.max(MIN_INPUT_HEIGHT, this.state.inputHeight)
+  )
 
   clear = () => this.textInput.clear()
+
+  onSubmitEditing = evt => {
+    // TODO: grey out text while submitting?
+    if (this.props.onSubmitEditing) this.props.onSubmitEditing(evt)
+  }
 
   render () {
     const inputProps = {
@@ -39,9 +49,11 @@ export default class extends React.PureComponent {
 
       ...this.props,
 
+      // Cannot be overridden, but will call the parent function if provided
+      onSubmitEditing: this.onSubmitEditing,
+
       // Cannot be overridden
       onContentSizeChange: this.handleContentSizeChange,
-      onChange: this.handleChange,
       underlineColorAndroid: 'transparent',
       ref: ti => this.textInput = ti,
       style: { ...styles.input, height: this.restrictHeight() }

@@ -93,12 +93,6 @@ export default class Thread extends React.Component {
     this.avatarInput.clear()
   }
 
-  toggleModal () {
-    this.setState({
-      notify: !this.state.notify
-    })
-  }
-
   messageView = () => {
     const { currentUser, messages, createMessage } = this.props
     return <View style={styles.container}>
@@ -109,7 +103,6 @@ export default class Thread extends React.Component {
         avatarUrl={currentUser.avatarUrl}
         blurOnSubmit
         multiline
-        onChangeText={text => this.setState({ inputValue: text })}
         onSubmitEditing={this.createMessage}
         placeholder='Write something...'
         ref={ai => this.avatarInput = ai}
