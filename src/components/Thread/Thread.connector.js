@@ -26,7 +26,6 @@ function mapDispatchToProps (dispatch, { navigation }) {
     createMessage: text => dispatch(createMessage(threadId, sanitize(text))),
     fetchMessages: () => dispatch(fetchMessages(threadId)),
     setTitle: title => {
-      console.log('SET', title)
       navigation.setParams({ title })
     }
   }

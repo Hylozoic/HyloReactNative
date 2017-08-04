@@ -2,7 +2,6 @@ import React from 'react'
 import { StyleSheet, Text } from 'react-native'
 
 export default function Header (navigation) {
-  console.log('NAV', navigation)
   return {
     title: navigation.state.params.title,
     headerTitle: navigation.state.params.title
@@ -10,5 +9,7 @@ export default function Header (navigation) {
 }
 
 const styles = StyleSheet.create({
-  title: {}
+  title: {
+    fontFamily: 'Circular Bold'
+  }
 })

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Keyboard, Platform, ScrollView, StyleSheet, View } from 'react-native'
+import { Keyboard, Platform, ScrollView, StyleSheet, Text, View } from 'react-native'
 import { any, arrayOf, func, shape, string } from 'prop-types'
 import { get } from 'lodash/fp'
 
@@ -7,6 +7,7 @@ import AvatarInput from '../AvatarInput'
 import Header from './Header'
 import Loading from '../Loading'
 import MessageCard from '../MessageCard'
+import NotificationOverlay from '../NotificationOverlay'
 
 import styles from './Thread.styles.js'
 
@@ -32,21 +33,17 @@ export default class Thread extends React.Component {
 
   constructor () {
     super()
-    this.state = { inputValue: '' }
-  }
-
-  componentWillMount () {
-    this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this._keyboardDidShow)
+    this.state = {
+      inputValue: '',
+    }
+    this.newMessages = 0
+    this.notify = false
   }
 
   componentDidMount () {
     const { fetchMessages, setTitle, title } = this.props
     this.props.fetchMessages()
     if (title) setTitle(title)
-  }
-
-  componentWillUnmount () {
-    this.keyboardDidShowListener.remove()
   }
 
   componentWillUpdate (nextProps) {
@@ -70,9 +67,13 @@ export default class Thread extends React.Component {
 
       // If there's one new message, it's not from currentUser,
       // and we're not already at the bottom, don't scroll
-      if (deltaLength === 1 &&
-        get('creator.id', latest) !== currentUser.id &&
-        !this.atBottom(this.list)) return
+      if (deltaLength === 1
+        && get('creator.id', latest) !== currentUser.id
+        && !this.atBottom(this.list)) {
+          this.newMessages++
+          this.notify = true
+          return
+        }
 
       this.shouldScroll = true
     }
@@ -81,16 +82,24 @@ export default class Thread extends React.Component {
   componentDidUpdate (prevProps) {
     const { setTitle, title } = this.props
     if (prevProps.title !== title) setTitle(title)
-    if (this.shouldScroll) this.container.scrollToEnd()
+    if (this.shouldScroll) this.scrollToEnd()
+    if (this.state.inputValue === 'show' && !this.state.notify) this.toggleModal()
   }
 
-  _keyboardDidShow = () => this.container.scrollToEnd()
-
-  scrollToEnd = () => this.container.scrollToEnd()
+  scrollToEnd = () => {
+    this.container.scrollToEnd()
+    this.shouldScroll = false
+  }
 
   createMessage = () => {
     this.props.createMessage(this.state.inputValue)
     this.setState({ inputValue: '' })
+  }
+
+  toggleModal () {
+    this.setState({
+      notify: !this.state.notify
+    })
   }
 
   messageView = () => {
@@ -108,6 +117,9 @@ export default class Thread extends React.Component {
         placeholder='Write something...'
         scrollParentToEnd={this.scrollToEnd}
         value={this.state.inputValue} />
+      <NotificationOverlay
+        message={`${this.newMessages} NEW MESSAGES`}
+        visible={this.notify} />
     </View>
   }
 
