@@ -10,6 +10,8 @@ export default function ThreadCard (props) {
   const otherParticipants = filter(p => p.id !== get('id', props.currentUser), props.participants)
   const names = threadNames(map('name', otherParticipants))
   const avatarUrls = map('avatarUrl', otherParticipants)
+  if (!props.message) return null
+
   return <View style={styles.threadCard}>
     <ThreadAvatars avatarUrls={avatarUrls} />
     <View style={styles.messageContent}>
