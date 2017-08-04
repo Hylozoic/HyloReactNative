@@ -20,7 +20,7 @@ import tabStyles from '../Tabs/Tabs.styles'
 import NewMessage from '../NewMessage'
 import ThreadList from '../ThreadList'
 import createLinkingAwareContainer from './createLinkingAwareContainer'
-import { isIOS } from 'util/platform'
+import { isIOS, urlPrefix } from 'util/platform'
 
 // Tab Home Screens
 const tabs = {
@@ -69,10 +69,8 @@ const TabNavigatorWithBar = TabNavigator(
   tabNavigatorConfig
 )
 
-const prefix = isIOS ? 'HyloReactNative://' : 'HyloReactNative://HyloReactNative/'
-
 const drawerNavigatorRoutes = {
-  Home: { screen: createLinkingAwareContainer(TabNavigatorWithBar, prefix) }
+  Home: { screen: createLinkingAwareContainer(TabNavigatorWithBar, urlPrefix) }
 }
 
 const drawerNavigatorConfig = {
