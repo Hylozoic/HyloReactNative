@@ -33,9 +33,6 @@ export default class Thread extends React.Component {
 
   constructor () {
     super()
-    this.state = {
-      inputValue: '',
-    }
     this.newMessages = 0
     this.notify = false
   }
@@ -83,7 +80,6 @@ export default class Thread extends React.Component {
     const { setTitle, title } = this.props
     if (prevProps.title !== title) setTitle(title)
     if (this.shouldScroll) this.scrollToEnd()
-    if (this.state.inputValue === 'show' && !this.state.notify) this.toggleModal()
   }
 
   scrollToEnd = () => {
@@ -92,9 +88,9 @@ export default class Thread extends React.Component {
     this.notify = false
   }
 
-  createMessage = () => {
-    this.props.createMessage(this.state.inputValue)
-    this.setState({ inputValue: '' })
+  createMessage = ({ nativeEvent }) => {
+    this.props.createMessage(nativeEvent.text)
+    this.avatarInput.clear()
   }
 
   toggleModal () {
@@ -116,8 +112,8 @@ export default class Thread extends React.Component {
         onChangeText={text => this.setState({ inputValue: text })}
         onSubmitEditing={this.createMessage}
         placeholder='Write something...'
-        scrollParentToEnd={this.scrollToEnd}
-        value={this.state.inputValue} />
+        ref={ai => this.avatarInput = ai}
+        scrollParentToEnd={this.scrollToEnd} />
       <NotificationOverlay
         message={`${this.newMessages} NEW MESSAGES`}
         onPress={this.scrollToEnd}

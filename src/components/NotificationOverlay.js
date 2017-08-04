@@ -22,8 +22,6 @@ export default class Thread extends React.Component {
   componentDidMount() {
     const height = lineHeight + padding * 2
     Animated.sequence([
-      // TODO: remove initial delay
-      Animated.delay(3000),
       Animated.timing(
         this.state.heightAnim,
         { toValue: height, duration: 800 }
