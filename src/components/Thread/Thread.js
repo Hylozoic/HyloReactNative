@@ -107,10 +107,9 @@ export default class Thread extends React.Component {
         placeholder='Write something...'
         ref={ai => this.avatarInput = ai}
         scrollParentToEnd={this.scrollToEnd} />
-      <NotificationOverlay
+      {this.notify && <NotificationOverlay
         message={`${this.newMessages} NEW MESSAGES`}
-        onPress={this.scrollToEnd}
-        visible={this.notify} />
+        onPress={this.scrollToEnd} />}
     </View>
   }
 
