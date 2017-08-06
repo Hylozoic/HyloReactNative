@@ -2211,9 +2211,9 @@ http-signature@~1.1.0:
     jsprim "^1.2.2"
     sshpk "^1.7.0"
 
-hylo-utils@Hylozoic/hylo-utils#0a1a89c5:
-  version "1.0.5"
-  resolved "https://codeload.github.com/Hylozoic/hylo-utils/tar.gz/0a1a89c5"
+hylo-utils@Hylozoic/hylo-utils:
+  version "1.0.6"
+  resolved "https://codeload.github.com/Hylozoic/hylo-utils/tar.gz/6871e7f79a6b5a03ae398ccf337431fb56af4b0b"
   dependencies:
     buffer "^5.0.6"
     cheerio "^0.22.0"
