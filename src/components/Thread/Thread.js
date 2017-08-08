@@ -87,10 +87,13 @@ export default class Thread extends React.Component {
     if (this.shouldScroll) this.scrollToEnd()
   }
 
-  // scrollHandler = ({ nativeEvent: { contentOffset }) => {
-  scrollHandler = ({ nativeEvent }) => {
-    console.log(nativeEvent)
-    // this.yOffset = contentOffset.y
+  refresh = () => {
+    if (this.props.pending) return
+    const { hasMore, fetchMessages, messages } = this.props
+    const cursor = get('id', messages[0])
+    if (cursor && hasMore) {
+      fetchMessages()
+    }
   }
 
   scrollToEnd = () => {
@@ -109,14 +112,14 @@ export default class Thread extends React.Component {
   }
 
   messageView = () => {
-    const { currentUser, messages, createMessage } = this.props
+    const { createMessage, currentUser, messages, pending } = this.props
     return <View style={styles.container}>
-      <FlatList
-        ref={sv => this.messageList = sv}
+      <FlatList style={styles.messageList}
         data={messages}
-        onScroll={this.scrollHandler}
-        style={styles.messageList}
         keyExtractor={item => item.id}
+        onRefresh={this.refresh}
+        ref={sv => this.messageList = sv}
+        refreshing={pending || false}
         renderItem={({ item }) => <MessageCard message={item} />} />
       <AvatarInput
         avatarUrl={currentUser.avatarUrl}
