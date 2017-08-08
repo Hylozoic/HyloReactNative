@@ -36,6 +36,7 @@ export default class Thread extends React.Component {
     super()
     this.newMessages = 0
     this.notify = false
+    this.firstFetch = true
   }
 
   componentDidMount () {
@@ -61,9 +62,7 @@ export default class Thread extends React.Component {
       const oldLatest = oldMessages[oldMessages.length - 1]
 
       // Are additional messages old (at the beginning of the sorted array)?
-      // ThreadList always loads one message into the ORM. This masks the
-      // initial update from server, hence we check for exactly n === pageSize
-      if (get('id', latest) === get('id', oldLatest) && messages.length !== pageSize) return
+      if (get('id', latest) === get('id', oldLatest) && !this.firstFetch) return
 
       // If there's one new message, it's not from currentUser,
       // and we're not already at the bottom, don't scroll
@@ -75,6 +74,7 @@ export default class Thread extends React.Component {
           return
         }
 
+      if (this.firstFetch) this.firstFetch = false
       this.shouldScroll = true
     }
   }
@@ -94,9 +94,11 @@ export default class Thread extends React.Component {
   }
 
   scrollToEnd = () => {
-    const endIndex = this.props.messages.length - 1
-    // Wait until messages are drawn before scrolling
-    requestAnimationFrame(() => this.messageList.scrollToIndex(endIndex))
+    // NOTE: `requestAnimationFrame` was not sufficient to guarantee all messages were drawn
+    // prior to scroll when using FlatList (as opposed to ScrollView). 300ms seems to be
+    // about the sweet spot. `scrollToIndex` is not available due to the variable height of
+    // each message.
+    setTimeout(() => this.messageList.scrollToEnd(), 300)
     this.notify = false
     this.newMessages = 0
   }
