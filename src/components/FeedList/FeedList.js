@@ -5,7 +5,6 @@ import PostCard from '../PostCard'
 import Loading from '../Loading'
 import Icon from '../Icon'
 import { find, get, isEmpty } from 'lodash/fp'
-import ImagePicker from '../ImagePicker'
 
 export default class FeedList extends Component {
   fetchOrShowCached () {
@@ -43,7 +42,6 @@ export default class FeedList extends Component {
 
     const listHeaderComponent = <View>
       {header}
-      <ImagePicker title='choose a cat' />
       <ListControls
         filter={filter}
         sortBy={sortBy}
