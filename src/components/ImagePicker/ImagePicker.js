@@ -41,7 +41,7 @@ export default class ImagePicker extends Component {
 
     this.setPending(true)
 
-    var options = {
+    const pickerOptions = {
       title,
       storageOptions: {
         skipBackup: true,
@@ -49,7 +49,7 @@ export default class ImagePicker extends Component {
       }
     }
 
-    RNImagePicker.showImagePicker(options, pickerResponse => {
+    RNImagePicker.showImagePicker(pickerOptions, pickerResponse => {
       if (pickerResponse.didCancel) {
         this.setPending(false)
         onCancel && onCancel()
@@ -63,7 +63,7 @@ export default class ImagePicker extends Component {
           type: 'image/png'
         }
 
-        const options = {
+        const awsOptions = {
           keyPrefix: path,
           bucket: AWS_S3_BUCKET,
           region: AWS_S3_REGION,
@@ -72,7 +72,7 @@ export default class ImagePicker extends Component {
           successActionStatus: 201
         }
 
-        RNS3.put(file, options).then(awsResponse => {
+        RNS3.put(file, awsOptions).then(awsResponse => {
           this.setPending(false)
           if (awsResponse.status !== 201) {
             throw new Error('Failed to upload image to S3')
