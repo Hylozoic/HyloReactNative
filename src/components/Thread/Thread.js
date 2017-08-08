@@ -1,5 +1,5 @@
 import React from 'react'
-import { Keyboard, Platform, ScrollView, StyleSheet, Text, View } from 'react-native'
+import { FlatList, Keyboard, Platform, StyleSheet, Text, View } from 'react-native'
 import { any, arrayOf, func, number, shape, string } from 'prop-types'
 import { get } from 'lodash/fp'
 
@@ -79,26 +79,24 @@ export default class Thread extends React.Component {
     }
   }
 
-  atBottom = () => {
-  // atBottom = ({ offsetHeight, scrollHeight, scrollTop }) => {
-    console.log('SCROLL VALS', offsetHeight, scrollHeight, scrollTop, 'atBottom', scrollHeight - scrollTop - offsetHeight < 1)
-    return scrollHeight - scrollTop - offsetHeight < 1
-  }
+  atBottom = () => this.yOffset
 
   componentDidUpdate (prevProps) {
     const { setTitle, title } = this.props
     if (prevProps.title !== title) setTitle(title)
-
-    // Wait until messages are drawn before scrolling
-    if (this.shouldScroll) requestAnimationFrame(() => this.scrollToEnd())
+    if (this.shouldScroll) this.scrollToEnd()
   }
 
+  // scrollHandler = ({ nativeEvent: { contentOffset }) => {
   scrollHandler = ({ nativeEvent }) => {
-    // console.log('SCROLL', nativeEvent)
+    console.log(nativeEvent)
+    // this.yOffset = contentOffset.y
   }
 
   scrollToEnd = () => {
-    if (this.messageList) this.messageList.scrollToEnd()
+    const endIndex = this.props.messages.length - 1
+    // Wait until messages are drawn before scrolling
+    requestAnimationFrame(() => this.messageList.scrollToIndex(endIndex))
     this.notify = false
     this.newMessages = 0
   }
@@ -111,12 +109,13 @@ export default class Thread extends React.Component {
   messageView = () => {
     const { currentUser, messages, createMessage } = this.props
     return <View style={styles.container}>
-      <ScrollView
+      <FlatList
         ref={sv => this.messageList = sv}
+        data={messages}
         onScroll={this.scrollHandler}
-        style={styles.messageList}>
-        {messages.map(message => <MessageCard key={message.id} message={message} />)}
-      </ScrollView>
+        style={styles.messageList}
+        keyExtractor={item => item.id}
+        renderItem={({ item }) => <MessageCard message={item} />} />
       <AvatarInput
         avatarUrl={currentUser.avatarUrl}
         blurOnSubmit
@@ -132,7 +131,7 @@ export default class Thread extends React.Component {
   }
 
   render () {
-    if (!this.props.messages) return <Loading />
+    if (this.props.pending) return <Loading />
     return Platform.isIOS
       ? <KeyboardAvoidingView style={styles.container}>{this.messageView()}</KeyboardAvoidingView>
       : this.messageView()
