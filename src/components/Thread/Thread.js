@@ -1,6 +1,6 @@
 import React from 'react'
 import { Keyboard, Platform, ScrollView, StyleSheet, Text, View } from 'react-native'
-import { any, arrayOf, func, shape, string } from 'prop-types'
+import { any, arrayOf, func, number, shape, string } from 'prop-types'
 import { get } from 'lodash/fp'
 
 import AvatarInput from '../AvatarInput'
@@ -25,6 +25,7 @@ export default class Thread extends React.Component {
         avatarUrl: string
       })
     })),
+    pageSize: number,
     setTitle: func,
     title: string
   }
@@ -45,7 +46,7 @@ export default class Thread extends React.Component {
 
   componentWillUpdate (nextProps) {
     const { currentUser, messages, pending } = nextProps
-    if (pending) return
+    const { pageSize } = this.props
 
     const oldMessages = this.props.messages
     const deltaLength = Math.abs(messages.length - oldMessages.length)
@@ -60,13 +61,15 @@ export default class Thread extends React.Component {
       const oldLatest = oldMessages[oldMessages.length - 1]
 
       // Are additional messages old (at the beginning of the sorted array)?
-      if (get('id', latest) === get('id', oldLatest)) return
+      // ThreadList always loads one message into the ORM. This masks the
+      // initial update from server, hence we check for exactly n === pageSize
+      if (get('id', latest) === get('id', oldLatest) && messages.length !== pageSize) return
 
       // If there's one new message, it's not from currentUser,
       // and we're not already at the bottom, don't scroll
       if (deltaLength === 1
-        && get('creator.id', latest) !== currentUser.id
-        && !this.atBottom(this.list)) {
+        && !this.atBottom()
+        && get('creator.id', latest) !== currentUser.id) {
           this.newMessages++
           this.notify = true
           return
@@ -76,16 +79,28 @@ export default class Thread extends React.Component {
     }
   }
 
+  atBottom = () => {
+  // atBottom = ({ offsetHeight, scrollHeight, scrollTop }) => {
+    console.log('SCROLL VALS', offsetHeight, scrollHeight, scrollTop, 'atBottom', scrollHeight - scrollTop - offsetHeight < 1)
+    return scrollHeight - scrollTop - offsetHeight < 1
+  }
+
   componentDidUpdate (prevProps) {
     const { setTitle, title } = this.props
     if (prevProps.title !== title) setTitle(title)
-    if (this.shouldScroll) this.scrollToEnd()
+
+    // Wait until messages are drawn before scrolling
+    if (this.shouldScroll) requestAnimationFrame(() => this.scrollToEnd())
+  }
+
+  scrollHandler = ({ nativeEvent }) => {
+    // console.log('SCROLL', nativeEvent)
   }
 
   scrollToEnd = () => {
-    this.container.scrollToEnd()
-    this.shouldScroll = false
+    if (this.messageList) this.messageList.scrollToEnd()
     this.notify = false
+    this.newMessages = 0
   }
 
   createMessage = ({ nativeEvent }) => {
@@ -96,7 +111,10 @@ export default class Thread extends React.Component {
   messageView = () => {
     const { currentUser, messages, createMessage } = this.props
     return <View style={styles.container}>
-      <ScrollView ref={sv => this.container = sv} style={styles.messageList}>
+      <ScrollView
+        ref={sv => this.messageList = sv}
+        onScroll={this.scrollHandler}
+        style={styles.messageList}>
         {messages.map(message => <MessageCard key={message.id} message={message} />)}
       </ScrollView>
       <AvatarInput
@@ -114,7 +132,7 @@ export default class Thread extends React.Component {
   }
 
   render () {
-    if (this.props.pending || !this.props.messages) return <Loading />
+    if (!this.props.messages) return <Loading />
     return Platform.isIOS
       ? <KeyboardAvoidingView style={styles.container}>{this.messageView()}</KeyboardAvoidingView>
       : this.messageView()

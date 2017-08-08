@@ -9,15 +9,20 @@ export const CREATE_MESSAGE = 'Thread/CREATE_MESSAGE'
 export const FETCH_MESSAGES = 'Thread/FETCH_MESSAGES'
 export const UPDATE_THREAD_READ_TIME = 'Thread/UPDATE_THREAD_READ_TIME'
 
+export const MESSAGE_PAGE_SIZE = 20
+
 export function fetchMessages (id, opts = {}) {
+  const variables = { id, messagePageSize: MESSAGE_PAGE_SIZE }
+  if (opts.cursor) variables.cursor = opts.cursor
+
   return {
     type: FETCH_MESSAGES,
     graphql: {
       query: `
-        query ($id: ID, $cursor: ID) {
+        query ($id: ID, $cursor: ID, $messagePageSize: Int) {
           messageThread (id: $id) {
             id
-            messages(first: 20, cursor: $cursor, order: "desc") {
+            messages(first: $messagePageSize, cursor: $cursor, order: "desc") {
               items {
                 id
                 createdAt
@@ -37,7 +42,7 @@ export function fetchMessages (id, opts = {}) {
           }
         }
       `,
-      variables: opts.cursor ? {id, cursor: opts.cursor} : {id}
+      variables
     },
     meta: {
       extractModel: 'MessageThread',

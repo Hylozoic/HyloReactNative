@@ -7,7 +7,8 @@ import {
   fetchMessages,
   FETCH_MESSAGES,
   getMeForThread,
-  getThread
+  getThread,
+  MESSAGE_PAGE_SIZE
 } from './Thread.store'
 
 function mapStateToProps (state, props) {
@@ -15,6 +16,7 @@ function mapStateToProps (state, props) {
   return {
     currentUser: getMeForThread(state),
     messages,
+    pageSize: MESSAGE_PAGE_SIZE,
     pending: state.pending[FETCH_MESSAGES],
     title
   }
