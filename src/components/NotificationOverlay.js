@@ -7,8 +7,7 @@ import { persimmon } from '../style/colors'
 export default class Thread extends React.Component {
   static propTypes = {
     message: string.isRequired,
-    onPress: func,
-    visible: bool.isRequired
+    onPress: func
   }
 
   constructor () {

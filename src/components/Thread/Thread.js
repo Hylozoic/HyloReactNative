@@ -79,7 +79,7 @@ export default class Thread extends React.Component {
     }
   }
 
-  atBottom = () => this.yOffset
+  atBottom = () => this.currentYOffset >= this.bottomYOffset - 1
 
   componentDidUpdate (prevProps) {
     const { setTitle, title } = this.props
@@ -87,7 +87,9 @@ export default class Thread extends React.Component {
     if (this.shouldScroll) this.scrollToEnd()
   }
 
-  refresh = () => {
+  endHandler = ({ distanceFromEnd }) => this.bottomYOffset = distanceFromEnd
+
+  refreshHandler = () => {
     if (this.props.pending) return
     const { hasMore, fetchMessages, messages } = this.props
     const cursor = get('id', messages[0])
@@ -95,6 +97,8 @@ export default class Thread extends React.Component {
       fetchMessages()
     }
   }
+
+  scrollHandler = ({ nativeEvent: { contentOffset } }) => this.currentYOffset = contentOffset.y
 
   scrollToEnd = () => {
     // NOTE: `requestAnimationFrame` was not sufficient to guarantee all messages were drawn
@@ -117,7 +121,9 @@ export default class Thread extends React.Component {
       <FlatList style={styles.messageList}
         data={messages}
         keyExtractor={item => item.id}
-        onRefresh={this.refresh}
+        onEndReached={this.endHandler}
+        onRefresh={this.refreshHandler}
+        onScroll={this.scrollHandler}
         ref={sv => this.messageList = sv}
         refreshing={pending || false}
         renderItem={({ item }) => <MessageCard message={item} />} />
@@ -130,7 +136,7 @@ export default class Thread extends React.Component {
         ref={ai => this.avatarInput = ai}
         scrollParentToEnd={this.scrollToEnd} />
       {this.notify && <NotificationOverlay
-        message={`${this.newMessages} NEW MESSAGES`}
+        message={`${this.newMessages} NEW MESSAGE${this.newMessages > 1 ? 'S' : ''}`}
         onPress={this.scrollToEnd} />}
     </View>
   }
