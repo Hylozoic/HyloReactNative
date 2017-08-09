@@ -9,7 +9,8 @@ import {
   getHasMoreMessages,
   getMeForThread,
   getThread,
-  MESSAGE_PAGE_SIZE
+  MESSAGE_PAGE_SIZE,
+  updateThreadReadTime
 } from './Thread.store'
 
 function mapStateToProps (state, props) {
@@ -29,7 +30,8 @@ function mapDispatchToProps (dispatch, { navigation }) {
   return {
     createMessage: text => dispatch(createMessage(threadId, sanitize(text))),
     fetchMessages: cursor => dispatch(fetchMessages(threadId, { cursor })),
-    setTitle: title => navigation.setParams({ title })
+    setTitle: title => navigation.setParams({ title }),
+    updateThreadReadTime: () => dispatch(updateThreadReadTime(threadId))
   }
 }
 

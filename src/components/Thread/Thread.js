@@ -1,10 +1,12 @@
 import React from 'react'
 import { FlatList, Keyboard, Platform, StyleSheet, Text, View } from 'react-native'
 import { any, arrayOf, func, number, shape, string } from 'prop-types'
+import { throttle, debounce } from 'lodash'
 import { get } from 'lodash/fp'
 
 import AvatarInput from '../AvatarInput'
 import Header from './Header'
+import Loading from '../Loading'
 import MessageCard from '../MessageCard'
 import NotificationOverlay from '../NotificationOverlay'
 
@@ -12,8 +14,12 @@ import styles from './Thread.styles.js'
 
 export default class Thread extends React.Component {
   static propTypes = {
-    createMessage: func,
-    fetchMessages: func,
+    createMessage: func.isRequired,
+    currentUser: shape({
+      id: any,
+      avatarUrl: string
+    }).isRequired,
+    fetchMessages: func.isRequired,
     messages: arrayOf(shape({
       id: any,
       createdAt: string,
@@ -24,8 +30,10 @@ export default class Thread extends React.Component {
         avatarUrl: string
       })
     })),
-    pageSize: number,
-    setTitle: func,
+    pageSize: number.isRequired,
+    pending: any,
+    setTitle: func.isRequired,
+    updateThreadReadTime: func.isRequired,
     title: string
   }
 
@@ -103,39 +111,54 @@ export default class Thread extends React.Component {
     // we can update this to be much more accurate. Here we're setting a value that
     // the scroll handler can use when triggered by `scrollToOffset` to grab the
     // new height of the content and use it to accurately determine the old position.
-    if (this.messageList.bumpScroll) {
-      this.messageList.adjustScroll = true
-      this.scrollToOffset(1)
-    }
+    // if (this.messageList.bumpScroll) {
+    //   this.messageList.adjustScroll = true
+    //   this.scrollToOffset(1)
+    // }
   }
 
   endHandler = ({ distanceFromEnd }) =>
     this.messageList.endOffset = distanceFromEnd
 
-  refreshHandler = () => {
-    const { fetchMessages, hasMore, messages, pending } = this.props
-    if (pending || !hasMore) return
-    this.messageList.bumpScroll = true
-    this.messageList.oldSize = this.messageList.ySize
-    fetchMessages(messages[0].id)
-  }
+  // refreshHandler = () => {
+  //   const { fetchMessages, hasMore, messages, pending } = this.props
+  //   if (pending || !hasMore) return
+  //   this.messageList.bumpScroll = true
+  //   this.messageList.oldSize = this.messageList.ySize
+  //   fetchMessages(messages[0].id)
+  // }
 
   renderItem = ({ item }) => <MessageCard message={item} />
 
-  scrollHandler = ({ nativeEvent: { contentOffset, contentSize } }) => {
+  detectScrollExtremes = throttle(() => {
+    if (this.props.pending) return
+    if (this.atBottom()) this.markAsRead()
+    if (this.messageList.yOffset <= 150) this.fetchMore()
+  }, 500, {trailing: true})
+
+  fetchMore = () => {
+    const { fetchMessages, hasMore, messages, pending } = this.props
+    if (pending || !hasMore) return
+    fetchMessages(messages[0].id)
+  }
+
+  markAsRead = debounce(() => updateThreadReadTime(thread.id), 2000)
+
+  scrollHandler = ({ nativeEvent: { contentOffset } }) => {
     this.messageList.yOffset = contentOffset.y
-    this.messageList.ySize = contentSize.height
+    this.detectScrollExtremes(contentOffset.y)
+    // this.messageList.ySize = contentSize.height
 
     // Fine-tune the new scroll position: we want the old messages[0], prior to fetch.
     // TODO: This percentage-based method is close, but imperfect. Ideally we could
     // scroll the exact message into view at the same position each time, but unless
     // we can fix the height of each message that's always going to come at a cost.
-    if (this.messageList.adjustScroll) {
-      this.messageList.adjustScroll = false
-      const heightChange = (contentSize.height - this.messageList.oldSize) / contentSize.height
-      const newOffset = (heightChange * this.messageList.endOffset) + this.messageList.endOffset
-      this.scrollToOffset(newOffset)  
-    }
+    // if (this.messageList.adjustScroll) {
+    //   this.messageList.adjustScroll = false
+    //   const heightChange = (contentSize.height - this.messageList.oldSize) / contentSize.height
+    //   const newOffset = (heightChange * this.messageList.endOffset) + this.messageList.endOffset
+    //   this.scrollToOffset(newOffset)
+    // }
   }
 
   scrollToEnd = () => {
@@ -159,11 +182,12 @@ export default class Thread extends React.Component {
   messageView = () => {
     const { createMessage, currentUser, messages, pending } = this.props
     return <View style={styles.container}>
+      {pending && <Loading />}
       <FlatList style={styles.messageList}
         data={messages}
         keyExtractor={item => item.id}
         onEndReached={this.endHandler}
-        onRefresh={this.refreshHandler}
+        // onRefresh={this.refreshHandler}
         onScroll={this.scrollHandler}
         ref={sv => this.messageList.ref = sv}
         refreshing={!!pending}
