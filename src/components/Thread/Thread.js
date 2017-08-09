@@ -92,10 +92,8 @@ export default class Thread extends React.Component {
   refreshHandler = () => {
     if (this.props.pending) return
     const { hasMore, fetchMessages, messages } = this.props
-    const cursor = get('id', messages[0])
-    if (cursor && hasMore) {
-      fetchMessages()
-    }
+    console.log('REFRESH?', hasMore, 'CURSOR', messages[0].id)
+    if (hasMore) fetchMessages(messages[0].id)
   }
 
   scrollHandler = ({ nativeEvent: { contentOffset } }) => this.currentYOffset = contentOffset.y

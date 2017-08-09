@@ -1,4 +1,5 @@
-import { createSelector } from 'redux-orm'
+import { createSelector } from 'reselect'
+import { createSelector as ormCreateSelector} from 'redux-orm'
 import { get, pick, uniqueId } from 'lodash/fp'
 import { humanDate, sanitize } from 'hylo-utils/text'
 
@@ -112,6 +113,7 @@ function refineThread (session, id) {
       .map(refineMessages)
     const title = threadNames(thread.participants.toRefArray().map(firstName))
     return {
+      id: thread.id,
       messages,
       title
     }
@@ -127,14 +129,14 @@ function threadNames (names) {
 
 const firstName = person => person.name.split(' ')[0]
 
-export const getThread = createSelector(
+export const getThread = ormCreateSelector(
   orm,
   state => state.orm,
   (_, { navigation }) => navigation.state.params.id,
   refineThread
 )
 
-export const getMeForThread = createSelector(
+export const getMeForThread = ormCreateSelector(
   orm,
   state => state.orm,
   session => pick(['id', 'avatarUrl'], session.Me.first().ref)
@@ -145,9 +147,4 @@ const getMessageResults = makeGetQueryResults(FETCH_MESSAGES)
 export const getHasMoreMessages = createSelector(
   getMessageResults,
   get('hasMore')
-)
-
-export const getTotalMessages = createSelector(
-  getMessageResults,
-  get('total')
 )

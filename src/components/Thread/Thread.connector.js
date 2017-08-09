@@ -6,15 +6,17 @@ import {
   createMessage,
   fetchMessages,
   FETCH_MESSAGES,
+  getHasMoreMessages,
   getMeForThread,
   getThread,
   MESSAGE_PAGE_SIZE
 } from './Thread.store'
 
 function mapStateToProps (state, props) {
-  const { messages, title } = pick([ 'messages', 'title' ], getThread(state, props))
+  const { id, messages, title } = getThread(state, props) || {}
   return {
     currentUser: getMeForThread(state),
+    hasMore: getHasMoreMessages(state, { id }),
     messages,
     pageSize: MESSAGE_PAGE_SIZE,
     pending: state.pending[FETCH_MESSAGES],
@@ -26,10 +28,8 @@ function mapDispatchToProps (dispatch, { navigation }) {
   const threadId = navigation.state.params.id
   return {
     createMessage: text => dispatch(createMessage(threadId, sanitize(text))),
-    fetchMessages: () => dispatch(fetchMessages(threadId)),
-    setTitle: title => {
-      navigation.setParams({ title })
-    }
+    fetchMessages: cursor => dispatch(fetchMessages(threadId, { cursor })),
+    setTitle: title => navigation.setParams({ title })
   }
 }
 
