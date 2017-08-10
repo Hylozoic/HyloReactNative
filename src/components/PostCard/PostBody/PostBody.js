@@ -1,5 +1,5 @@
 import React from 'react'
-import { Image, Linking, StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 import HTMLView from 'react-native-htmlview'
 import { decode } from 'ent'
 import { present, sanitize, textLength, truncate } from 'hylo-utils/text'
