@@ -32,6 +32,7 @@ export const capeCod40 = '#A79A9A'
 export const rhino10 = fakeAlpha(rhino, 0.1)
 export const rhino30 = '#AAACAC'
 export const rhino50 = '#8994A3'
+export const rhino60 = fakeAlpha(rhino, 0.6)
 export const rhino80 = '#56667a'
 export const slateGrey80 = '#8490a1'
 
