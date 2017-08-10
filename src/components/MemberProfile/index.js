@@ -1,2 +1,3 @@
 import component from './MemberProfile'
-export default component
+import connector from './MemberProfile.connector'
+export default connector(component)
