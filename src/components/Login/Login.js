@@ -53,47 +53,71 @@ export default class Login extends React.Component {
       <Image style={styles.logo} source={require('../../assets/Hylo_Logotype_Circle.png')} />
       <Text style={styles.title}>Log in to Hylo</Text>
       {error && <Text style={styles.error}>{error}</Text>}
-      <View>{/* this wrapper view is needed to get TextInput to center-align */}
-        <Text style={styles.label}>Your email address</Text>
-        <View style={emailIsValid ? styles.inputWithIconValid : styles.inputWithIcon}>
-          <TextInput style={emailIsValid ? styles.emailInput : styles.emailInputWithoutIcon}
-            onChangeText={email => this.setAndValidateEmail(email)}
-            returnKeyType='next'
-            autoCapitalize='none'
-            keyboardType='email-address'
-            onSubmitEditing={() => focus(this.passwordInput)}
-            underlineColorAndroid={styles.androidInvisibleUnderline} />
-          {emailIsValid && <EntypoIcon name='check'
-            style={styles.iconGreen}
-          />}
+      <View style={styles.paddedRowLabel}>
+        <View style={styles.label}>
+          <Text>Your email address</Text>
         </View>
       </View>
-      <View style={styles.passwordView}>
-        <Text style={styles.label}>Password</Text>
-        <View style={styles.inputWithIcon}>
-          <TextInput style={styles.passwordInput}
-            secureTextEntry={this.state.securePassword}
-            ref={ref => { this.passwordInput = ref }}
-            onChangeText={password => this.setState({password})}
-            returnKeyType='go'
-            selectTextOnFocus
-            onSubmitEditing={() => this.login()}
-            underlineColorAndroid={'rgba(0,0,0,0)'} />
-          <EntypoIcon name={this.state.securePassword ? 'eye' : 'eye-with-line'}
-            style={styles.iconOpaque}
-            onPress={() => this.togglePassword()}
-          />
+      <View style={styles.paddedRow}>
+        <View style={emailIsValid ? styles.paddedBorderValid : styles.paddedBorder}>
+          <View style={styles.leftInputView}>
+            <TextInput
+              style={styles.textInput}
+              onChangeText={email => this.setAndValidateEmail(email)}
+              returnKeyType='next'
+              autoCapitalize='none'
+              keyboardType='email-address'
+              onSubmitEditing={() => focus(this.passwordInput)}
+              underlineColorAndroid={styles.androidInvisibleUnderline} />
+          </View>
+          <View style={styles.rightIconView}>
+            { emailIsValid && <EntypoIcon name='check'
+              style={styles.iconGreen}
+            /> }
+          </View>
         </View>
       </View>
-      <TouchableOpacity onPress={() => this.login()}>
-        <View style={styles.loginButton}>
-          <Text style={styles.loginText}>Log In</Text>
+
+      <View style={styles.paddedRowLabel}>
+        <View style={styles.label}>
+          <Text>Password</Text>
         </View>
-      </TouchableOpacity>
+      </View>
+      <View style={styles.paddedRow}>
+        <View style={styles.paddedBorder}>
+          <View style={styles.leftInputView}>
+            <TextInput style={styles.textInput}
+              secureTextEntry={this.state.securePassword}
+              ref={ref => { this.passwordInput = ref }}
+              onChangeText={password => this.setState({password})}
+              returnKeyType='go'
+              selectTextOnFocus
+              onSubmitEditing={() => this.login()}
+              underlineColorAndroid={'rgba(0,0,0,0)'} />
+          </View>
+          <View style={styles.rightIconView}>
+            <EntypoIcon name={this.state.securePassword ? 'eye' : 'eye-with-line'}
+              style={styles.iconOpaque}
+              onPress={() => this.togglePassword()}
+            />
+          </View>
+        </View>
+      </View>
+
+      <View style={styles.paddedRowExtraMarginBottom}>
+        <View style={styles.paddedButton}>
+          <TouchableOpacity onPress={() => this.login()}>
+            <View style={styles.loginButton}>
+              <Text style={styles.loginText}>Log In</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
+      </View>
+
       <View style={styles.connectWith}>
         <Text style={styles.heavyText}>Or connect with:</Text>
       </View>
-      <View style={styles.loginButtons}>
+      <View style={styles.paddedRowWithOpacity}>
         <FbLoginButton onLoginFinished={loginWithFacebook} />
         <GoogleLoginButton onLoginFinished={loginWithGoogle} />
       </View>

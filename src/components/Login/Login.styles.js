@@ -2,28 +2,33 @@ import { StyleSheet } from 'react-native'
 import { caribbeanGreen } from 'style/colors'
 
 const mixins = {
-  textInput: {
-    width: 288,
-    height: 40,
-    marginBottom: 10
-  },
   loginContainer: {
-    width: 162,
     height: 36,
     backgroundColor: 'lightgray',
-    marginLeft: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    opacity: 0.5
+    opacity: 0.5,
+    marginLeft: 1
   },
   icon: {
-    marginRight: 24,
     fontSize: 20,
     marginTop: 10
+  },
+  paddedRow: {
+    maxHeight: 40,
+    paddingRight: 15,
+    paddingLeft: 15,
+    marginBottom: 10,
+    flex: 1,
+    flexDirection: 'row'
   }
 }
 
 export default {
+  textInput: {
+    height: 40,
+    marginBottom: 10
+  },
   logo: {
     height: 80,
     width: 80,
@@ -51,25 +56,14 @@ export default {
   facebookLoginContainer: {
     ...mixins.loginContainer,
     borderTopLeftRadius: 50,
-    borderBottomLeftRadius: 50
+    borderBottomLeftRadius: 50,
+    flex: 0.5
   },
   googleLoginContainer: {
     ...mixins.loginContainer,
     borderTopRightRadius: 50,
-    borderBottomRightRadius: 50
-  },
-  emailInput: {
-    ...mixins.textInput
-  },
-  emailInputWithoutIcon: {
-    ...mixins.textInput,
-    width: 332
-  },
-  passwordInput: {
-    ...mixins.textInput
-  },
-  passwordView: {
-    marginTop: 12
+    borderBottomRightRadius: 50,
+    flex: 0.5
   },
   error: {
     color: 'red',
@@ -84,12 +78,7 @@ export default {
     fontWeight: '600'
   },
   loginButton: {
-    backgroundColor: caribbeanGreen,
-    height: 36,
-    borderRadius: 50,
-    width: 324,
-    justifyContent: 'center',
-    marginTop: 48
+    marginTop: 7
   },
   loginText: {
     color: 'white',
@@ -102,32 +91,67 @@ export default {
     marginBottom: 12,
     opacity: 0.5
   },
-  loginButtons: {
-    flexDirection: 'row',
-    opacity: 0.7
-  },
-  label: {
-    marginBottom: 12
-  },
-  inputWithIcon: {
-    flexDirection: 'row',
-    borderWidth: StyleSheet.hairlineWidth,
-    borderRadius: 5,
-    height: 40
-  },
-  inputWithIconValid: {
-    flexDirection: 'row',
-    borderWidth: StyleSheet.hairlineWidth,
-    borderRadius: 5,
-    height: 40,
-    borderColor: caribbeanGreen
-  },
   heavyText: {
     fontWeight: '500'
   },
   accountText: {
     fontWeight: '500',
     opacity: 0.7
+  },
+  paddedRow: {
+    ...mixins.paddedRow
+  },
+  paddedRowWithOpacity: {
+    ...mixins.paddedRow,
+    opacity: 0.7
+  },
+  paddedRowExtraMarginBottom: {
+    ...mixins.paddedRow,
+    marginBottom: 30
+  },
+  paddedRowLabel: {
+    ...mixins.paddedRow,
+    marginBottom: -8
+  },
+  paddedBorder: {
+    flex: 1,
+    flexDirection: 'row',
+    borderWidth: StyleSheet.hairlineWidth,
+    borderRadius: 5,
+    minHeight: 40
+  },
+  paddedButton: {
+    flex: 1,
+    flexDirection: 'row',
+    minHeight: 30,
+    backgroundColor: caribbeanGreen,
+    height: 36,
+    borderRadius: 50,
+    justifyContent: 'center',
+    marginTop: 36,
+    marginBottom: 36
+  },
+  paddedBorderValid: {
+    flex: 1,
+    flexDirection: 'row',
+    borderWidth: StyleSheet.hairlineWidth,
+    borderRadius: 5,
+    minHeight: 40,
+    borderColor: caribbeanGreen
+  },
+  leftInputView: {
+    height: 40,
+    flex: 0.9,
+    borderRadius: 5
+  },
+  label: {
+    flex: 0.9,
+    borderRadius: 5
+  },
+  rightIconView: {
+    height: 40,
+    flex: 0.1,
+    borderRadius: 5
   },
   androidInvisibleUnderline: 'rgba(0,0,0,0)'
 }
