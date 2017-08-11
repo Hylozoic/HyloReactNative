@@ -1,7 +1,7 @@
 import 'react-native'
 import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
-import Members from './index'
+import Members from './Members'
 
 it('renders correctly with all=true, and no community or user', () => {
   const renderer = new ReactShallowRenderer()
