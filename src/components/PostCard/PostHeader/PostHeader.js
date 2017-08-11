@@ -3,7 +3,7 @@ import { View, Text } from 'react-native'
 import Avatar from '../../Avatar'
 import Icon from '../../Icon'
 import { rhino30, rhino50 } from '../../../style/colors'
-// import { humanDate } from 'hylo-utils/text'
+import { humanDate } from 'hylo-utils/text'
 import PopupMenuButton from '../../PopupMenuButton'
 import { filter } from 'lodash/fp'
 
@@ -19,7 +19,6 @@ export default function PostHeader ({
   deletePost
 }) {
   // TODO: person name and avatar should link to={personUrl(creator.id, slug)}
-  // TODO: date should use humanDate, but importing hylo-utils needs fixing
 
   return <View style={styles.container}>
     <View style={styles.avatarSpacing}>
@@ -28,7 +27,7 @@ export default function PostHeader ({
     <View style={styles.meta}>
       <Text style={styles.username}>{name}</Text>
       {!!tagline && <Text style={styles.metaText}>{tagline}</Text>}
-      <Text style={styles.metaText}>10 mins ago</Text>
+      <Text style={styles.metaText}>{humanDate(date)}</Text>
     </View>
     <View style={styles.upperRight}>
       {type && <PostLabel type={type} />}
