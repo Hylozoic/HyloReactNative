@@ -5,7 +5,7 @@ import Icon from '../../Icon'
 import { rhino30, rhino50 } from '../../../style/colors'
 // import { humanDate } from 'hylo-utils/text'
 import PopupMenuButton from '../../PopupMenuButton'
-import { filter } from 'lodash/fp'
+import { filter, isEmpty } from 'lodash/fp'
 
 export default function PostHeader ({
   creator: { avatarUrl, name, tagline, id },
@@ -47,6 +47,9 @@ function PostMenu ({ deletePost, editPost }) {
     ['Delete this post', deletePost],
     ['Edit this post', editPost]
   ])
+
+  if (isEmpty(actions)) return null
+
   const onSelect = index => actions[index][1]()
   const destructiveButtonIndex = actions[0][0] === 'Delete this post' ? 0 : -1
 

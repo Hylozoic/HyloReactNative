@@ -1,4 +1,6 @@
-import { capeCod, rhino80, rhino60, rhino50 } from '../../style/colors'
+import {
+  capeCod, rhino80, rhino60, rhino50, caribbeanGreen, alabaster
+} from '../../style/colors'
 
 const screenMargin = 16
 
@@ -26,7 +28,8 @@ export default {
     borderColor: 'white'
   },
   header: {
-    marginHorizontal: screenMargin
+    marginHorizontal: screenMargin,
+    marginBottom: 15
   },
   nameRow: {
     flexDirection: 'row',
@@ -60,5 +63,25 @@ export default {
     fontSize: 16,
     color: rhino80,
     fontFamily: 'Circular-Book'
+  },
+  bioContainer: {
+    marginHorizontal: screenMargin,
+    marginBottom: 30,
+    alignItems: 'center'
+  },
+  bio: {
+
+  },
+  button: {
+    width: 200,
+    height: 30,
+    backgroundColor: alabaster,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  buttonText: {
+    color: caribbeanGreen,
+    fontSize: 13,
+    fontFamily: 'Circular-Bold'
   }
 }

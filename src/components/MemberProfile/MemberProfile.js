@@ -1,9 +1,10 @@
 import React from 'react'
-import { Text, View, Image } from 'react-native'
+import { Text, View, Image, TouchableOpacity, ScrollView } from 'react-native'
 import Icon from '../Icon'
 import styles from './MemberProfile.styles'
+import MemberFeed from './MemberFeed'
 
-export default class NewMessage extends React.Component {
+export default class MemberProfile extends React.Component {
 
   componentDidMount () {
     this.props.fetchPerson()
@@ -16,12 +17,14 @@ export default class NewMessage extends React.Component {
   }
 
   render () {
-    const { person } = this.props
+    const { person, id } = this.props
 
-    return <View style={styles.container}>
+    return <ScrollView contentContainerStyle={styles.container}>
       <MemberBanner person={person} />
       <MemberHeader person={person} />
-    </View>
+      <MemberBio person={person} />
+      <MemberFeed id={id} />
+    </ScrollView>
   }
 }
 
@@ -48,4 +51,27 @@ export function MemberHeader ({ person }) {
     <Text style={styles.location}>{location}</Text>
     <Text style={styles.tagline}>{tagline}</Text>
   </View>
+}
+
+export class MemberBio extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {expanded: false}
+  }
+
+  render () {
+    const { person: { bio } } = this.props
+    const { expanded } = this.state
+    const onPress = () => this.setState({expanded: !expanded})
+    const buttonText = expanded ? 'Show Less' : 'Read More'
+
+    return <View style={styles.bioContainer}>
+      {expanded && <Text>{bio}</Text>}
+      <TouchableOpacity onPress={onPress}>
+        <View style={styles.button}>
+          <Text style={styles.buttonText}>{buttonText}</Text>
+        </View>
+      </TouchableOpacity>
+    </View>
+  }
 }
