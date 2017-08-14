@@ -1,14 +1,15 @@
 import React from 'react'
-import { FlatList, Keyboard, Platform, StyleSheet, Text, View } from 'react-native'
-import { any, arrayOf, func, number, shape, string } from 'prop-types'
+import { FlatList, KeyboardAvoidingView, View } from 'react-native'
+import { any, arrayOf, func, shape, string } from 'prop-types'
 import { throttle, debounce } from 'lodash'
 import { get } from 'lodash/fp'
-
+import { isIOS } from 'util/platform'
 import AvatarInput from '../AvatarInput'
 import Header from './Header'
 import Loading from '../Loading'
 import MessageCard from '../MessageCard'
 import NotificationOverlay from '../NotificationOverlay'
+import { keyboardAvoidingViewProps as kavProps } from 'util/viewHelpers'
 
 import styles from './Thread.styles.js'
 
@@ -164,8 +165,10 @@ export default class Thread extends React.Component {
   }
 
   render () {
-    return Platform.isIOS
-      ? <KeyboardAvoidingView style={styles.container}>{this.messageView()}</KeyboardAvoidingView>
+    return isIOS
+      ? <KeyboardAvoidingView style={styles.container} {...kavProps}>
+        {this.messageView()}
+      </KeyboardAvoidingView>
       : this.messageView()
   }
 }
