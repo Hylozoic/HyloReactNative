@@ -3,13 +3,14 @@ import { StyleSheet, Text } from 'react-native'
 
 export default function Header (navigation) {
   return {
-    title: navigation.state.params.title,
-    headerTitle: navigation.state.params.title
+    headerTitle: <Text style={styles.title}>{navigation.state.params.title}</Text>
   }
 }
 
 const styles = StyleSheet.create({
   title: {
-    fontFamily: 'Circular Bold'
+    fontFamily: 'Circular-Bold',
+    fontSize: 18,
+    marginLeft: 10
   }
 })
