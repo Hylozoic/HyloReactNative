@@ -63,6 +63,7 @@
 		A42EE77C33284502AEE6A525 /* libRCTFBSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8095D639078647CDB52B6F92 /* libRCTFBSDK.a */; };
 		AB36E1E180274C84B9E4B8E2 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FBD4B806D2A045338952B601 /* Octicons.ttf */; };
 		B337FC1B1E8AD5FA006F9336 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B337FC1A1E8AD5FA006F9336 /* GoogleService-Info.plist */; };
+		B726CF951F34F0B200CA78B5 /* libRNImagePicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B726CF931F34ECE100CA78B5 /* libRNImagePicker.a */; };
 		BC29B6FF53064F59984B2712 /* libRNGoogleSignin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F3B441C7C1D5498C98877B6D /* libRNGoogleSignin.a */; };
 		DE64BE9474164C11990A70F2 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA4705C6FEED4BE4932D18C1 /* SafariServices.framework */; };
 		E26B659CBE044AC8AF25472F /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 25420C5D521C4F19A773CA3C /* libz.tbd */; };
@@ -309,6 +310,13 @@
 			remoteGlobalIDString = 9350E0F11CE3B0920041D815;
 			remoteInfo = RCTFBSDK;
 		};
+		B726CF921F34ECE100CA78B5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B726CF8E1F34ECE100CA78B5 /* RNImagePicker.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 014A3B5C1C6CF33500B6D375;
+			remoteInfo = RNImagePicker;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -370,6 +378,7 @@
 		AB9133C74E75480C8C2C1054 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		B337FC1A1E8AD5FA006F9336 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B5D4613FF5E54E88BAEB1223 /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
+		B726CF8E1F34ECE100CA78B5 /* RNImagePicker.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNImagePicker.xcodeproj; path = "../node_modules/react-native-image-picker/ios/RNImagePicker.xcodeproj"; sourceTree = "<group>"; };
 		C399AB4A83A944CC9B2E2DBF /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
 		D522416CACFEA85FA9591F6F /* Pods_HyloReactNative.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HyloReactNative.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7FA3503889940E79431AEA6 /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
@@ -393,6 +402,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B726CF951F34F0B200CA78B5 /* libRNImagePicker.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
 				5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */,
 				00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */,
@@ -615,6 +625,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				B726CF8E1F34ECE100CA78B5 /* RNImagePicker.xcodeproj */,
 				5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
 				00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */,
@@ -674,6 +685,14 @@
 			isa = PBXGroup;
 			children = (
 				B3066EDA1E81B005009C4B34 /* libRCTFBSDK.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B726CF8F1F34ECE100CA78B5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B726CF931F34ECE100CA78B5 /* libRNImagePicker.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -808,12 +827,12 @@
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
-						DevelopmentTeam = 2VPG9D23Z7;
+						DevelopmentTeam = L4KZBPS2F3;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = L4KZBPS2F3;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -899,6 +918,10 @@
 				{
 					ProductGroup = 215674381EF4B50300E04217 /* Products */;
 					ProjectRef = 9EB73EBA157745BDA56C0650 /* RNGoogleSignin.xcodeproj */;
+				},
+				{
+					ProductGroup = B726CF8F1F34ECE100CA78B5 /* Products */;
+					ProjectRef = B726CF8E1F34ECE100CA78B5 /* RNImagePicker.xcodeproj */;
 				},
 				{
 					ProductGroup = 217A25D21EF2261F00F95ED4 /* Products */;
@@ -1140,6 +1163,13 @@
 			remoteRef = B3066ED91E81B005009C4B34 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		B726CF931F34ECE100CA78B5 /* libRNImagePicker.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNImagePicker.a;
+			remoteRef = B726CF921F34ECE100CA78B5 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -1339,6 +1369,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = L4KZBPS2F3;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Frameworks/";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -1376,6 +1407,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = L4KZBPS2F3;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Frameworks/";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1409,7 +1441,8 @@
 			baseConfigurationReference = 5AF97D1AA7A06ED99997C525 /* Pods-HyloReactNative.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CURRENT_PROJECT_VERSION = 3;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 6;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = L4KZBPS2F3;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)/**";
@@ -1430,8 +1463,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hylo.HyloA;
 				PRODUCT_NAME = HyloReactNative;
-				PROVISIONING_PROFILE = "330d4386-39e1-40b9-a785-56ab31751e98";
-				PROVISIONING_PROFILE_SPECIFIER = "match Development com.hylo.HyloA";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1441,8 +1474,8 @@
 			baseConfigurationReference = 6F57CD06C635DD7DEA9EDBBB /* Pods-HyloReactNative.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CURRENT_PROJECT_VERSION = 3;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = L4KZBPS2F3;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)/**";
 				HEADER_SEARCH_PATHS = (
@@ -1462,8 +1495,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hylo.HyloA;
 				PRODUCT_NAME = HyloReactNative;
-				PROVISIONING_PROFILE = "581737b5-0e1e-4b8f-afd4-3c3a64a271d2";
-				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.hylo.HyloA";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;

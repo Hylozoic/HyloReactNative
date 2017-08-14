@@ -106,21 +106,21 @@ exports[`ListControls renders correctly 1`] = `
 
 exports[`PostRow renders correctly 1`] = `
 <View>
-  <TouchableOpacity
-    activeOpacity={0.2}
-    focusedOpacity={0.7}
+  <TouchableWithoutFeedback
     onPress={[Function]}
   >
-    <PostCard
-      editPost={[Function]}
-      post={
-        Object {
-          "id": 1,
+    <View>
+      <PostCard
+        editPost={[Function]}
+        post={
+          Object {
+            "id": 1,
+          }
         }
-      }
-      showMember={undefined}
-      showTopic={undefined}
-    />
-  </TouchableOpacity>
+        showMember={undefined}
+        showTopic={undefined}
+      />
+    </View>
+  </TouchableWithoutFeedback>
 </View>
 `;

@@ -1,17 +1,20 @@
 import { ALL_COMMUNITIES_ID } from '../models/Community'
+import { get } from 'lodash/fp'
 
 export const FETCH_POSTS = `FETCH_POSTS`
 
 export function fetchPosts ({ subject, slug, sortBy, offset, search, filter, topic }) {
-  var query, extractModel
+  var query, extractModel, getItems
 
   if (subject === 'community') {
     query = communityQuery
     extractModel = 'Community'
+    getItems = get('payload.data.community.posts')
   } else if (subject === 'all-communities') {
     query = allCommunitiesQuery
     slug = ALL_COMMUNITIES_ID // this is just for queryResults, not the API
     extractModel = 'Post'
+    getItems = get('payload.data.posts')
   } else {
     throw new Error(`FETCH_POSTS with subject=${subject} is not implemented`)
   }
@@ -30,7 +33,12 @@ export function fetchPosts ({ subject, slug, sortBy, offset, search, filter, top
         topic
       }
     },
-    meta: {extractModel}
+    meta: {
+      extractModel,
+      extractQueryResults: {
+        getItems
+      }
+    }
   }
 }
 

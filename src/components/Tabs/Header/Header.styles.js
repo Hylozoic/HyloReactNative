@@ -9,7 +9,7 @@ export default {
   },
   headerTitle: {
     alignSelf: 'center',
-    fontWeight: '900',
+    fontFamily: 'Circular-Bold',
     fontSize: 18
   }
 }

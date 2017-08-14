@@ -7,6 +7,7 @@ import PostBody from '../PostCard/PostBody'
 import SpaceFillingImage from '../SpaceFillingImage'
 import PostFooter from '../PostCard/PostFooter'
 import Comments from '../Comments'
+import Loading from '../Loading'
 import { get } from 'lodash/fp'
 import { shape, any, object, string, func, array, bool } from 'prop-types'
 import styles from './PostDetails.styles'
@@ -51,6 +52,9 @@ export default class PostDetails extends React.Component {
       newComment,
       commentEdit
     } = this.props
+
+    if (!post) return <Loading />
+
     const slug = get('0.slug', post.communities)
 
     const { location } = post

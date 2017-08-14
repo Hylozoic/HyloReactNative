@@ -3,7 +3,20 @@ import React from 'react'
 import TabIcon from '../Tabs/TabIcon'
 import TabLabel from '../Tabs/TabLabel'
 
+function removePathsUnlessHomeTab (screens, tabName) {
+  const screensCopy = screens
+  if (tabName !== 'Home') {
+    for (let key in screensCopy) {
+      if (screensCopy.hasOwnProperty(key)) {
+        delete screensCopy[key].path
+      }
+    }
+  }
+  return screensCopy
+}
+
 function stackNavigatorFactory (tabObject, otherScreens, tabName) {
+  otherScreens = removePathsUnlessHomeTab(otherScreens, tabName)
   const paths = Object.assign({}, tabObject, otherScreens)
   const config = {
     initialRouteName: tabName

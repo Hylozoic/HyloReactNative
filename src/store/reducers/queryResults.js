@@ -1,3 +1,7 @@
+/**
+ * @providesModule store/reducers/queryResults
+ */
+
 // The purpose of this reducer is to provide a general-purpose store for keeping
 // track of the ordering of lists of data fetched from the API.
 //
@@ -6,11 +10,9 @@
 // to "Location". And both of these lists are different from what should be
 // shown when something has been typed into the search field.
 
-import { FETCH_POSTS } from '../actions/fetchPosts'
 import { CREATE_POST } from '../../components/PostEditor/PostEditor.store'
-import { FETCH_POST } from '../actions/fetchPost'
-import { FETCH_COMMENTS } from '../../components/Comments/Comments.store'
 import { FETCH_MESSAGES } from '../../components/Thread/Thread.store.js'
+import { FETCH_POSTS } from '../actions/fetchPosts'
 import { get, isNull, omitBy, pick, reduce, uniq } from 'lodash/fp'
 
 // reducer
@@ -33,23 +35,10 @@ export default function (state = {}, action) {
     )
   }
 
-  // If this starts to feel too coupled to specific actions, we could move the
-  // parameters below into the action's metadata, write a piece of middleware to
-  // detect the metadata and produce a generic action, and have this reducer
-  // handle only that action.
   switch (type) {
     case CREATE_POST:
       root = payload.data.createPost
       return matchNewPostIntoQueryResults(state, root)
-
-    case FETCH_POSTS:
-      root = payload.data.posts || payload.data.community.posts
-      return appendIds(state, type, meta.graphql.variables, root)
-    case FETCH_POST:
-    case FETCH_COMMENTS:
-      if (!payload.data.post) break
-      return appendIds(state, FETCH_COMMENTS, meta.graphql.variables, payload.data.post.comments)
-
     case FETCH_MESSAGES:
       return appendIds(state, FETCH_MESSAGES, meta.graphql.variables, payload.data.messageThread.messages)
   }
@@ -90,7 +79,9 @@ function prependIdForCreate (state, type, params, id) {
   }
 }
 
-function appendIds (state, type, params, { items, total, hasMore }) {
+function appendIds (state, type, params, data) {
+  if (!data) return state
+  const { items, total, hasMore } = data
   const key = buildKey(type, params)
   const existingIds = get('ids', state[key]) || []
   return {

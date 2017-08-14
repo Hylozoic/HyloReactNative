@@ -9,6 +9,7 @@ import FeedList from '../../components/FeedList/FeedList.store'
 import PostEditor from '../../components/PostEditor/PostEditor.store'
 import CommentEditor from '../../components/PostDetails/CommentEditor/CommentEditor.store'
 import Search from '../../components/Editor/Search/Search.store'
+import NewMessage from '../../components/NewMessage/NewMessage.store'
 import SocketListener from '../../components/SocketListener/SocketListener.store'
 
 const combinedReducers = combineReducers({
@@ -21,6 +22,7 @@ const combinedReducers = combineReducers({
   PostEditor,
   CommentEditor,
   Search,
+  NewMessage,
   SocketListener
 })
 

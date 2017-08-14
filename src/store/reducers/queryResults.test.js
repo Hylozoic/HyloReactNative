@@ -1,5 +1,6 @@
 import queryResults, { buildKey } from './queryResults'
 import { FETCH_POSTS } from '../actions/fetchPosts'
+import { get } from 'lodash/fp'
 
 const variables = {slug: 'foo', sortBy: 'name'}
 
@@ -24,7 +25,10 @@ it('adds data to empty state', () => {
       }
     },
     meta: {
-      graphql: {variables}
+      graphql: {variables},
+      extractQueryResults: {
+        getItems: get('payload.data.community.posts')
+      }
     }
   }
 
@@ -60,7 +64,10 @@ it('appends to existing data, ignoring duplicates', () => {
       }
     },
     meta: {
-      graphql: {variables}
+      graphql: {variables},
+      extractQueryResults: {
+        getItems: get('payload.data.community.posts')
+      }
     }
   }
 
@@ -69,6 +76,43 @@ it('appends to existing data, ignoring duplicates', () => {
       ids: [4, 7, 5, 6, 8, 9],
       total: 22,
       hasMore: false
+    }
+  })
+})
+
+it('uses getType and getParams from extractQueryResults', () => {
+  const state = {}
+  const action = {
+    type: 'DIFFERENT_TYPE',
+    payload: {
+      data: {
+        community: {
+          posts: {
+            total: 22,
+            items: [{id: 7}, {id: 8}, {id: 9}],
+            hasMore: true
+          }
+        }
+      }
+    },
+    meta: {
+      graphql: {
+        slug: 'wrongslug',
+        sortBy: 'irrelevance'
+      },
+      extractQueryResults: {
+        getType: () => FETCH_POSTS,
+        getParams: () => variables,
+        getItems: get('payload.data.community.posts')
+      }
+    }
+  }
+
+  expect(queryResults(state, action)).toEqual({
+    [key]: {
+      ids: [7, 8, 9],
+      total: 22,
+      hasMore: true
     }
   })
 })
