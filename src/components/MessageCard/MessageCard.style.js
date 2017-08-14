@@ -11,7 +11,10 @@ export default StyleSheet.create({
   container: {
     flexDirection: 'row',
     padding: 10,
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+
+    // Prevents the card from appearing upside down in the inverted FlatList
+    transform: [{ scaleY: -1 }]
   },
   date: {
     fontSize: 12,

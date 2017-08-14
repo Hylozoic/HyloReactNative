@@ -25,6 +25,10 @@ export default StyleSheet.create({
     elevation: 1
   },
   messageList: {
+    // NOTE: FlatList's `inverted` prop doesn't seem to work on all platforms,
+    // but this is essentially how it does it anyway. MessageCard also needs
+    // the same treatment to avoid appearing, well, upside down!
+    transform: [{ scaleY: -1 }],
     paddingRight: 15
   }
 })

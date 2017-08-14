@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect'
-import { createSelector as ormCreateSelector} from 'redux-orm'
+import { createSelector as ormCreateSelector } from 'redux-orm'
 import { get, pick, uniqueId } from 'lodash/fp'
 import { humanDate, sanitize } from 'hylo-utils/text'
 
@@ -10,7 +10,7 @@ export const CREATE_MESSAGE = 'Thread/CREATE_MESSAGE'
 export const FETCH_MESSAGES = 'Thread/FETCH_MESSAGES'
 export const UPDATE_THREAD_READ_TIME = 'Thread/UPDATE_THREAD_READ_TIME'
 
-export const MESSAGE_PAGE_SIZE = 20
+const MESSAGE_PAGE_SIZE = 20
 
 export function fetchMessages (id, opts = {}) {
   const variables = { id, messagePageSize: MESSAGE_PAGE_SIZE }
@@ -104,11 +104,12 @@ function refineMessages ({ id, createdAt, text, creator }) {
   }
 }
 
+// NOTE: descending order to accommodate inverted FlatList
 function refineThread (session, id) {
   if (session.MessageThread.hasId(id)) {
     const thread = session.MessageThread.withId(id)
     const messages = thread.messages
-      .orderBy(m => Number(m.id))
+      .orderBy(m => Number(m.id), 'desc')
       .toModelArray()
       .map(refineMessages)
     const title = threadNames(thread.participants.toRefArray().map(firstName))

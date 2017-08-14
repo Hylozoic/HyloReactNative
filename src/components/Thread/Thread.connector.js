@@ -9,7 +9,6 @@ import {
   getHasMoreMessages,
   getMeForThread,
   getThread,
-  MESSAGE_PAGE_SIZE,
   updateThreadReadTime
 } from './Thread.store'
 
@@ -19,7 +18,6 @@ function mapStateToProps (state, props) {
     currentUser: getMeForThread(state),
     hasMore: getHasMoreMessages(state, { id }),
     messages,
-    pageSize: MESSAGE_PAGE_SIZE,
     pending: state.pending[FETCH_MESSAGES],
     title
   }
