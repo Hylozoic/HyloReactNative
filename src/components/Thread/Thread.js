@@ -12,6 +12,8 @@ import NotificationOverlay from '../NotificationOverlay'
 
 import styles from './Thread.styles.js'
 
+const BOTTOM_THRESHOLD = 10
+
 export default class Thread extends React.Component {
   static propTypes = {
     createMessage: func.isRequired,
@@ -90,12 +92,12 @@ export default class Thread extends React.Component {
 
   componentDidUpdate (prevProps) {
     const { messages, setTitle, title } = this.props
-
     if (prevProps.title !== title) setTitle(title)
-    if (this.shouldScroll) return this.scrollToBottom()
+    if (this.atBottom()) this.markAsRead()
+    if (this.shouldScroll) this.scrollToBottom()
   }
 
-  atBottom = () => this.yOffset < 10
+  atBottom = () => this.yOffset < BOTTOM_THRESHOLD
 
   createMessage = ({ nativeEvent }) => {
     this.props.createMessage(nativeEvent.text)
@@ -112,8 +114,10 @@ export default class Thread extends React.Component {
 
   renderItem = ({ item }) => <MessageCard message={item} />
 
-  scrollHandler = ({ nativeEvent: { contentOffset } }) =>
+  scrollHandler = ({ nativeEvent: { contentOffset } }) => {
     this.yOffset = contentOffset.y
+    if (contentOffset.y < BOTTOM_THRESHOLD) this.markAsRead()
+  }
 
   // NOTE: This scrolls to the 'perceived' (by the user) bottom of the thread,
   // which is actually the top! Confused? Inverted lists are fun.
@@ -123,7 +127,7 @@ export default class Thread extends React.Component {
       newMessages: 0,
       notify: false
     })
-    // TODO: markAsRead
+    this.markAsRead()
   }
 
   messageView = () => {
