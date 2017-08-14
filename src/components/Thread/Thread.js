@@ -44,6 +44,11 @@ export default class Thread extends React.Component {
       newMessages: 0,
       notify: false
     }
+
+    // NOTE: we write directly to the object rather than using setState.
+    // This avoids an automatic re-render on scroll, and any inconsistencies
+    // owing to the async nature of setState and/or setState batching.
+    this.yOffset = 0
   }
 
   componentDidMount () {
@@ -58,9 +63,6 @@ export default class Thread extends React.Component {
     const oldMessages = this.props.messages
     const deltaLength = Math.abs(messages.length - oldMessages.length)
 
-    // NOTE: we write directly to the object rather than using setState.
-    // This avoids an automatic re-render on scroll, and any inconsistencies
-    // owing to the async nature of setState and/or setState batching.
     this.shouldScroll = false
 
     if (deltaLength) {
@@ -93,7 +95,7 @@ export default class Thread extends React.Component {
     if (this.shouldScroll) return this.scrollToBottom()
   }
 
-  atBottom = () => this.messageList
+  atBottom = () => this.yOffset < 10
 
   createMessage = ({ nativeEvent }) => {
     this.props.createMessage(nativeEvent.text)
@@ -109,6 +111,9 @@ export default class Thread extends React.Component {
   markAsRead = debounce(() => this.props.updateThreadReadTime(), 2000)
 
   renderItem = ({ item }) => <MessageCard message={item} />
+
+  scrollHandler = ({ nativeEvent: { contentOffset } }) =>
+    this.yOffset = contentOffset.y
 
   // NOTE: This scrolls to the 'perceived' (by the user) bottom of the thread,
   // which is actually the top! Confused? Inverted lists are fun.
@@ -135,7 +140,7 @@ export default class Thread extends React.Component {
         data={messages}
         keyExtractor={item => item.id}
         onEndReached={() => this.fetchMore()}
-        onEndReachedThreshold={0.1}
+        onEndReachedThreshold={0.3}
         onScroll={this.scrollHandler}
         ref={flatList => this.messageList = flatList}
         refreshing={!!pending}
