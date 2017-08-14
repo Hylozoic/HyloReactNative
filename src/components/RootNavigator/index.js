@@ -5,34 +5,20 @@ import {
 } from 'react-navigation'
 import { Dimensions } from 'react-native'
 
-import CommentEditor from '../PostDetails/CommentEditor'
-import DetailsEditor from '../PostEditor/DetailsEditor'
-import DrawerMenu from '../DrawerMenu'
-import Feed from '../Feed'
-<<<<<<< HEAD
-import MemberProfile from '../MemberProfile'
-import Post from '../Post'
-import PostDetails from '../PostDetails'
-import PostEditor from '../PostEditor'
-=======
->>>>>>> master
-import Settings from '../Settings'
-import stacksInTabsFactory from './stacksInTabsFactory'
-<<<<<<< HEAD
-import Thread from '../Thread'
-import ThreadList from '../ThreadList'
-import { Home, Members, Topics } from '../Tabs'
 import WelcomeScene from '../WelcomeScene'
-
-=======
+import Feed from '../Feed'
+import Settings from '../Settings'
+import DrawerMenu from '../DrawerMenu'
+import { Home, Members, Topics } from '../Tabs'
+import stacksInTabsFactory from './stacksInTabsFactory'
 import PostEditor from '../PostEditor'
 import DetailsEditor from '../PostEditor/DetailsEditor'
 import PostDetails from '../PostDetails'
 import MemberProfile from '../MemberProfile'
 import CommentEditor from '../PostDetails/CommentEditor'
->>>>>>> master
 import tabStyles from '../Tabs/Tabs.styles'
 import NewMessage from '../NewMessage'
+import Thread from '../Thread'
 import ThreadList from '../ThreadList'
 import createLinkingAwareContainer from './createLinkingAwareContainer'
 import { isIOS, urlPrefix } from 'util/platform'
@@ -58,8 +44,8 @@ const screensInTabs = {
 
 // Screens that work outside of tabs, Settings, Messages, etc.
 const screensInStack = {
-  Thread: {screen: Thread, path: 'messages/:id' },
   Settings: {screen: Settings, path: 'settings'},
+  Thread: {screen: Thread, path: 'thread/:id'},
   ThreadList: {screen: ThreadList, path: 'messages'}
 }
 

@@ -3,8 +3,7 @@ import RootNavigator from './RootNavigator'
 import SocketListener from './SocketListener'
 import fetchCurrentUser from '../store/actions/fetchCurrentUser'
 import { connect } from 'react-redux'
-// import { Platform, View } from 'react-native'
-import { View } from 'react-native'
+import { Platform, View } from 'react-native'
 import { urlPrefix } from 'util/platform'
 
 // this component just sets up a navigator so that views can open full-screen,
@@ -16,9 +15,8 @@ class LoggedInRoot extends React.Component {
 
   render () {
     return <View style={{flex: 1}}>
-      // {Platform.isIOS === true ? <SocketListener /> : null}
       <RootNavigator uriPrefix={urlPrefix} />
-      <SocketListener />
+      {Platform.isIOS === true ? <SocketListener /> : null}
     </View>
   }
 }
