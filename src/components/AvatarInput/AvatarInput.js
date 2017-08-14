@@ -29,7 +29,7 @@ export default class extends React.PureComponent {
     })
   }
 
-  restrictHeight = () => Math.min(
+  restrictedHeight = () => Math.min(
     MAX_INPUT_HEIGHT,
     Math.max(MIN_INPUT_HEIGHT, this.state.inputHeight)
   )
@@ -56,7 +56,7 @@ export default class extends React.PureComponent {
       onContentSizeChange: this.handleContentSizeChange,
       underlineColorAndroid: 'transparent',
       ref: ti => this.textInput = ti,
-      style: { ...styles.input, height: this.restrictHeight() }
+      style: { ...styles.input, height: this.restrictedHeight() }
     }
     return <View style={styles.container}>
       <Avatar avatarUrl={this.props.avatarUrl} />
