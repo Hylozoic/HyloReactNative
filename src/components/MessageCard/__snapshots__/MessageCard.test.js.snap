@@ -11,9 +11,7 @@ exports[`matches the last snapshot 1`] = `
       allowFontScaling={true}
       disabled={false}
       ellipsizeMode="tail"
-    >
-      Flargleargle
-    </Text>
+    />
     <Text
       accessible={true}
       allowFontScaling={true}

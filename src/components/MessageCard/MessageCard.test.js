@@ -8,15 +8,12 @@ it('matches the last snapshot', () => {
     id: '55905',
     creator: {
       id: '86894',
-      avatarUrl: 'https://wombat.com/test.jpg',
-      name: "Flargleargle"
+      avatarUrl: 'https://wombat.com/test.jpg'
     },
     text: 'Hi',
     createdAt: '1 mo ago'
   }
   const renderer = new ReactShallowRenderer()
   renderer.render(<MessageCard message={message} />)
-  const actual = renderer.getRenderOutput()
-
-  expect(actual).toMatchSnapshot()
+  expect(renderer.getRenderOutput()).toMatchSnapshot()
 })

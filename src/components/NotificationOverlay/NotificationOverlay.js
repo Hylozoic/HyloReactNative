@@ -2,7 +2,7 @@ import React from 'react'
 import { Animated, StyleSheet, Text, TouchableOpacity } from 'react-native'
 import { bool, func, string } from 'prop-types'
 
-import { persimmon } from '../style/colors'
+import { persimmon } from '../../style/colors'
 
 export default class Thread extends React.Component {
   static propTypes = {
