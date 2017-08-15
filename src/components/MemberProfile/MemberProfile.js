@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, View, Image, TouchableOpacity, ScrollView } from 'react-native'
+import { Text, View, Image, TouchableOpacity } from 'react-native'
 import Icon from '../Icon'
 import styles from './MemberProfile.styles'
 import MemberFeed from './MemberFeed'
@@ -19,12 +19,13 @@ export default class MemberProfile extends React.Component {
   render () {
     const { person, id } = this.props
 
-    return <ScrollView contentContainerStyle={styles.container}>
+    const header = <View>
       <MemberBanner person={person} />
       <MemberHeader person={person} />
       <MemberBio person={person} />
-      <MemberFeed id={id} />
-    </ScrollView>
+    </View>
+
+    return <MemberFeed id={id} header={header} />
   }
 }
 
@@ -66,7 +67,7 @@ export class MemberBio extends React.Component {
     const buttonText = expanded ? 'Show Less' : 'Read More'
 
     return <View style={styles.bioContainer}>
-      {expanded && <Text>{bio}</Text>}
+      {expanded && <Text style={styles.bio}>{bio}</Text>}
       <TouchableOpacity onPress={onPress}>
         <View style={styles.button}>
           <Text style={styles.buttonText}>{buttonText}</Text>

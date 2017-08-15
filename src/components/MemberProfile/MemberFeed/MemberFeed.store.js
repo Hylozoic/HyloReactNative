@@ -1,11 +1,134 @@
 import { createSelector as ormCreateSelector } from 'redux-orm'
+import { createSelector } from 'reselect'
 import orm from 'store/models'
+import { postsQueryFragment } from '../../../store/actions/fetchPosts'
+import { isEmpty, includes, get } from 'lodash/fp'
+import { makeGetQueryResults } from '../../../store/reducers/queryResults'
 
 export const MODULE_NAME = 'MemberFeed'
 export const SET_CHOICE = `${MODULE_NAME}/SET_CHOICE`
+export const FETCH_MEMBER_POSTS = `${MODULE_NAME}/FETCH_MEMBER_POSTS`
+export const FETCH_MEMBER_COMMENTS = `${MODULE_NAME}/FETCH_MEMBER_COMMENTS`
+export const FETCH_MEMBER_UPVOTES = `${MODULE_NAME}/FETCH_MEMBER_UPVOTES`
 
 export const defaultState = {
   choice: 'Posts'
+}
+
+export function fetchMemberPosts ({id, first = 10, offset}) {
+  return {
+    type: FETCH_MEMBER_POSTS,
+    graphql: {
+      query: `query MemberPosts (
+        $id: ID,
+        $sortBy: String,
+        $offset: Int,
+        $search: String,
+        $filter: String,
+        $first: Int,
+        $topic: Int
+      ) {
+        person (id: $id) {
+          id
+          ${postsQueryFragment}
+        }
+      }`,
+      variables: {id, first, offset}
+    },
+    meta: {
+      extractModel: 'Person',
+      extractQueryResults: {
+        getItems: get('payload.data.person.posts')
+      }
+    }
+  }
+}
+
+export function fetchMemberComments ({id, first = 20, offset}) {
+  return {
+    type: FETCH_MEMBER_COMMENTS,
+    graphql: {
+      query: `query MemberComments ($id: ID, $first: Int, $offset: Int) {
+        person (id: $id) {
+          id
+          comments (first: $first, offset: $offset, order: "desc") {
+            hasMore
+            items {
+              id
+              text
+              creator {
+                id
+              }
+              post {
+                id
+                title
+              }
+              createdAt
+            }
+          }
+        }
+      }`,
+      variables: { id, first, offset }
+    },
+    meta: {
+      extractModel: 'Person',
+      extractQueryResults: {
+        getItems: get('payload.data.person.comments')
+      }
+    }
+  }
+}
+
+export function fetchMemberUpvotes ({id, first = 20, offset}) {
+  return {
+    type: FETCH_MEMBER_UPVOTES,
+    graphql: {
+      query: `query MemberVotes ($id: ID, $first: Int, $offset: Int) {
+        person (id: $id) {
+          id
+          votes (first: $first, offset: $offset, order: "desc") {
+            hasMore
+            items {
+              id
+              post {
+                id
+                title
+                details
+                type
+                creator {
+                  id
+                  name
+                  avatarUrl
+                }
+                commenters {
+                  id,
+                  name,
+                  avatarUrl
+                }
+                commentersTotal
+                communities {
+                  id
+                  name
+                }
+                createdAt
+              }
+              voter {
+                id
+              }
+              createdAt
+            }
+          }
+        }
+      }`,
+      variables: { id, first, offset }
+    },
+    meta: {
+      extractModel: 'Person',
+      extractQueryResults: {
+        getItems: get('payload.data.person.votes')
+      }
+    }
+  }
 }
 
 export default function reducer (state = defaultState, action) {
@@ -33,3 +156,70 @@ export function setChoice (choice) {
 export function getChoice (state) {
   return state[MODULE_NAME].choice
 }
+
+const getMemberPostResults = makeGetQueryResults(FETCH_MEMBER_POSTS)
+
+export const getHasMoreMemberPosts = createSelector(getMemberPostResults, get('hasMore'))
+
+export const getMemberPosts = ormCreateSelector(
+  orm,
+  state => state.orm,
+  getMemberPostResults,
+  (session, results) => {
+    if (isEmpty(results) || isEmpty(results.ids)) return []
+    return session.Post.all()
+    .filter(x => includes(x.id, results.ids))
+    .orderBy(x => results.ids.indexOf(x.id))
+    .toModelArray()
+    .map(post => ({
+      ...post.ref,
+      creator: post.creator,
+      commenters: post.commenters.toModelArray(),
+      communities: post.communities.toModelArray()
+    }))
+  }
+)
+
+const getMemberCommentResults = makeGetQueryResults(FETCH_MEMBER_COMMENTS)
+
+export const getHasMoreMemberComments = createSelector(getMemberCommentResults, get('hasMore'))
+
+export const getMemberComments = ormCreateSelector(
+  orm,
+  state => state.orm,
+  getMemberCommentResults,
+  (session, results) => {
+    if (isEmpty(results) || isEmpty(results.ids)) return []
+    return session.Comment.all()
+    .filter(x => includes(x.id, results.ids))
+    .orderBy(x => results.ids.indexOf(x.id))
+    .toModelArray()
+    .map(comment => ({
+      ...comment.ref,
+      creator: comment.creator
+    }))
+  }
+)
+
+const getMemberUpvotesResults = makeGetQueryResults(FETCH_MEMBER_UPVOTES)
+
+export const getHasMoreMemberUpvotes = createSelector(getMemberUpvotesResults, get('hasMore'))
+
+export const getMemberUpvotes = ormCreateSelector(
+  orm,
+  state => state.orm,
+  getMemberUpvotesResults,
+  (session, results) => {
+    if (isEmpty(results) || isEmpty(results.ids)) return []
+    return session.Vote.all()
+    .filter(x => includes(x.id, results.ids))
+    .orderBy(x => results.ids.indexOf(x.id))
+    .toModelArray()
+    .map(vote => ({
+      ...vote.post.ref,
+      creator: vote.post.creator,
+      commenters: vote.post.commenters.toModelArray(),
+      communities: vote.post.communities.toModelArray()
+    }))
+  }
+)

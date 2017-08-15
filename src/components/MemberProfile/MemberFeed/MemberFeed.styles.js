@@ -10,12 +10,18 @@ const option = {
 }
 
 export default {
+  superContainer: {
+    backgroundColor: 'white',
+    flex: 1
+  },
   container: {
-    marginHorizontal: screenMargin
+    backgroundColor: 'white'
   },
   feedTabs: {
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    marginHorizontal: screenMargin,
+    marginBottom: 16
   },
   option,
   chosenOption: {
@@ -23,5 +29,12 @@ export default {
     color: rhino,
     backgroundColor: alabaster,
     fontFamily: 'Circular-Bold'
+  },
+  contentRow: {
+    marginHorizontal: screenMargin,
+    marginBottom: 16
+  },
+  footer: {
+    paddingBottom: 40
   }
 }

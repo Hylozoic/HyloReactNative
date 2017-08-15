@@ -1,8 +1,9 @@
 import React from 'react'
-import { Text, View, TouchableOpacity } from 'react-native'
+import { Text, View, TouchableOpacity, FlatList } from 'react-native'
 import styles from './MemberFeed.styles'
 import PostCard from '../../PostCard'
 import Comment from '../../Comment'
+import Loading from '../../Loading'
 
 const feedOptions = [
   'Posts', 'Comments', 'Upvotes'
@@ -20,9 +21,10 @@ export default class MemberFeed extends React.Component {
   }
 
   render () {
-    const { items, itemType, choice, setChoice } = this.props
+    const { items, itemType, choice, setChoice, header, fetchMoreItems, pending } = this.props
 
-    return <View style={styles.container}>
+    const listHeaderComponent = <View>
+      {header}
       <View style={styles.feedTabs}>
         {feedOptions.map(option =>
           <FeedTab
@@ -32,11 +34,34 @@ export default class MemberFeed extends React.Component {
             onPress={() => setChoice(option)}
             />)}
       </View>
-      {items.map(item => itemType === 'post'
-        ? <PostCard key={item.id} post={item} />
-        : <Comment key={item.id} comment={item} />)}
+    </View>
+
+    const listFooterComponent = <View style={styles.footer}>
+      {pending && <Loading />}
+    </View>
+
+    return <View style={styles.superContainer}><FlatList
+      data={items}
+      renderItem={({ item }) => <ContentRow item={item} itemType={itemType} />}
+      keyExtractor={item => item.id}
+      onEndReached={fetchMoreItems}
+      ListHeaderComponent={listHeaderComponent}
+      ListFooterComponent={listFooterComponent}
+      contentContainerStyle={styles.container} />
     </View>
   }
+}
+
+export function ContentRow ({ item, itemType }) {
+  var content
+  if (itemType === 'post') {
+    content = <PostCard post={item} />
+  } else {
+    content = <Comment comment={item} />
+  }
+  return <View style={styles.contentRow}>
+    {content}
+  </View>
 }
 
 export function FeedTab ({ option, chosen, onPress }) {

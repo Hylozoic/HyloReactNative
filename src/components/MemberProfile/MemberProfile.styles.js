@@ -5,10 +5,6 @@ import {
 const screenMargin = 16
 
 export default {
-  container: {
-    backgroundColor: 'white',
-    flex: 1
-  },
   bannerImage: {
     height: 140
   },
@@ -70,7 +66,8 @@ export default {
     alignItems: 'center'
   },
   bio: {
-
+    color: capeCod,
+    marginBottom: 15
   },
   button: {
     width: 200,
