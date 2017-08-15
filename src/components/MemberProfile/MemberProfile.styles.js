@@ -69,12 +69,16 @@ export default {
     color: capeCod,
     marginBottom: 15
   },
+  buttonWrapper: {
+    flexDirection: 'row'
+  },
   button: {
-    width: 200,
     height: 30,
     backgroundColor: alabaster,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    flex: 1,
+    borderRadius: 15
   },
   buttonText: {
     color: caribbeanGreen,

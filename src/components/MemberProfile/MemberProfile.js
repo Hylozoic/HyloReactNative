@@ -68,7 +68,7 @@ export class MemberBio extends React.Component {
 
     return <View style={styles.bioContainer}>
       {expanded && <Text style={styles.bio}>{bio}</Text>}
-      <TouchableOpacity onPress={onPress}>
+      <TouchableOpacity onPress={onPress} style={styles.buttonWrapper}>
         <View style={styles.button}>
           <Text style={styles.buttonText}>{buttonText}</Text>
         </View>
