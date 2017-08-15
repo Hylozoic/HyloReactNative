@@ -157,69 +157,60 @@ export function getChoice (state) {
   return state[MODULE_NAME].choice
 }
 
+export function makeGetItems (results, modelName, transform) {
+  return ormCreateSelector(
+    orm,
+    state => state.orm,
+    results,
+    (session, results) => {
+      if (isEmpty(results) || isEmpty(results.ids)) return []
+      return session[modelName].all()
+      .filter(x => includes(x.id, results.ids))
+      .orderBy(x => results.ids.indexOf(x.id))
+      .toModelArray()
+      .map(transform)
+    })
+}
+
 const getMemberPostResults = makeGetQueryResults(FETCH_MEMBER_POSTS)
 
 export const getHasMoreMemberPosts = createSelector(getMemberPostResults, get('hasMore'))
 
-export const getMemberPosts = ormCreateSelector(
-  orm,
-  state => state.orm,
+export const getMemberPosts = makeGetItems(
   getMemberPostResults,
-  (session, results) => {
-    if (isEmpty(results) || isEmpty(results.ids)) return []
-    return session.Post.all()
-    .filter(x => includes(x.id, results.ids))
-    .orderBy(x => results.ids.indexOf(x.id))
-    .toModelArray()
-    .map(post => ({
-      ...post.ref,
-      creator: post.creator,
-      commenters: post.commenters.toModelArray(),
-      communities: post.communities.toModelArray()
-    }))
-  }
+  'Post',
+  post => ({
+    ...post.ref,
+    creator: post.creator,
+    commenters: post.commenters.toModelArray(),
+    communities: post.communities.toModelArray()
+  })
 )
 
 const getMemberCommentResults = makeGetQueryResults(FETCH_MEMBER_COMMENTS)
 
 export const getHasMoreMemberComments = createSelector(getMemberCommentResults, get('hasMore'))
 
-export const getMemberComments = ormCreateSelector(
-  orm,
-  state => state.orm,
+export const getMemberComments = makeGetItems(
   getMemberCommentResults,
-  (session, results) => {
-    if (isEmpty(results) || isEmpty(results.ids)) return []
-    return session.Comment.all()
-    .filter(x => includes(x.id, results.ids))
-    .orderBy(x => results.ids.indexOf(x.id))
-    .toModelArray()
-    .map(comment => ({
-      ...comment.ref,
-      creator: comment.creator
-    }))
-  }
+  'Comment',
+  comment => ({
+    ...comment.ref,
+    creator: comment.creator
+  })
 )
 
 const getMemberUpvotesResults = makeGetQueryResults(FETCH_MEMBER_UPVOTES)
 
 export const getHasMoreMemberUpvotes = createSelector(getMemberUpvotesResults, get('hasMore'))
 
-export const getMemberUpvotes = ormCreateSelector(
-  orm,
-  state => state.orm,
+export const getMemberUpvotes = makeGetItems(
   getMemberUpvotesResults,
-  (session, results) => {
-    if (isEmpty(results) || isEmpty(results.ids)) return []
-    return session.Vote.all()
-    .filter(x => includes(x.id, results.ids))
-    .orderBy(x => results.ids.indexOf(x.id))
-    .toModelArray()
-    .map(vote => ({
-      ...vote.post.ref,
-      creator: vote.post.creator,
-      commenters: vote.post.commenters.toModelArray(),
-      communities: vote.post.communities.toModelArray()
-    }))
-  }
+  'Vote',
+  vote => ({
+    ...vote.post.ref,
+    creator: vote.post.creator,
+    commenters: vote.post.commenters.toModelArray(),
+    communities: vote.post.communities.toModelArray()
+  })
 )
