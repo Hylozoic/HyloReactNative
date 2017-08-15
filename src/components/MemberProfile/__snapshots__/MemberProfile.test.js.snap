@@ -1,20 +1,113 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`matches the last snapshot 1`] = `
+exports[`MemberBanner matches the last snapshot 1`] = `
+<View>
+  <Image
+    source={
+      Object {
+        "uri": "yay.png",
+      }
+    }
+  />
+  <View>
+    <Image
+      source={
+        Object {
+          "uri": "pong.png",
+        }
+      }
+    />
+  </View>
+</View>
+`;
+
+exports[`MemberBio matches the last snapshot 1`] = `
+<View>
+  <TouchableOpacity
+    activeOpacity={0.2}
+    focusedOpacity={0.7}
+    onPress={[Function]}
+  >
+    <View>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        disabled={false}
+        ellipsizeMode="tail"
+      >
+        Read More
+      </Text>
+    </View>
+  </TouchableOpacity>
+</View>
+`;
+
+exports[`MemberHeader matches the last snapshot 1`] = `
+<View>
+  <View>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+    >
+      Jonas
+    </Text>
+    <View>
+      <Icon
+        name="Messages"
+      />
+      <Icon
+        name="More"
+      />
+    </View>
+  </View>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    disabled={false}
+    ellipsizeMode="tail"
+  >
+    whale
+  </Text>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    disabled={false}
+    ellipsizeMode="tail"
+  >
+    fingers crossed
+  </Text>
+</View>
+`;
+
+exports[`MemberProfile matches the last snapshot 1`] = `
 <Connect(MemberFeed)
   header={
     <View>
       <MemberBanner
-        person={undefined}
+        person={
+          Object {
+            "id": 1,
+          }
+        }
       />
       <MemberHeader
-        person={undefined}
+        person={
+          Object {
+            "id": 1,
+          }
+        }
       />
       <MemberBio
-        person={undefined}
+        person={
+          Object {
+            "id": 1,
+          }
+        }
       />
     </View>
   }
-  id={undefined}
+  id={1}
 />
 `;

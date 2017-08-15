@@ -57,7 +57,7 @@ export function ContentRow ({ item, itemType }) {
   if (itemType === 'post') {
     content = <PostCard post={item} />
   } else {
-    content = <Comment comment={item} />
+    content = <Comment comment={item} displayPostTitle />
   }
   return <View style={styles.contentRow}>
     {content}

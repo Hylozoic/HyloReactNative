@@ -196,7 +196,8 @@ export const getMemberComments = makeGetItems(
   'Comment',
   comment => ({
     ...comment.ref,
-    creator: comment.creator
+    creator: comment.creator,
+    post: comment.post
   })
 )
 
