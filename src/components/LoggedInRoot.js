@@ -14,7 +14,6 @@ class LoggedInRoot extends React.Component {
   }
 
   render () {
-    console.log(Platform)
     return <View style={{flex: 1}}>
       <RootNavigator uriPrefix={urlPrefix} />
       {/* FIXME: SocketListener turned off for Android pending https://hylozoic.atlassian.net/browse/MBL-49 */}
