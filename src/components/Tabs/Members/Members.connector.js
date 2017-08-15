@@ -10,10 +10,10 @@ function mapStateToProps (state, props) {
     (currentUser && currentUser.lastViewedCommunity().id)
   const community = getCommunity(state, {id: communityId})
   const slug = community && community.slug
-  console.log(slug)
 
   const search = getSearch(state)
   const sortBy = getSort(state)
+  const subject = 'community'  // TODO make this work with Networks
 
   return {
     currentUser,
@@ -22,9 +22,9 @@ function mapStateToProps (state, props) {
     slug,
     search,
     sortBy,
-    subject: 'community', // TODO make this work with Networks
-    members: getMembers(state, {slug, search, sortBy}),
-    hasMore: getHasMoreMembers(state),
+    subject,
+    members: getMembers(state, {subject, slug, search, sortBy}),
+    hasMore: getHasMoreMembers(state, {subject, slug, search, sortBy}),
     pending: state.pending[FETCH_MEMBERS]
   }
 }
@@ -39,9 +39,7 @@ export function mapDispatchToProps (dispatch, { navigation }) {
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
-  const { sortBy, hasMore, pending, members, slug } = stateProps
-  const subject = ''
-  const search = ''
+  const { sortBy, hasMore, pending, slug, search, subject } = stateProps
 
   // TODO
 

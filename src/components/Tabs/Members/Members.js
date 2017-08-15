@@ -7,7 +7,8 @@ import Icon from '../../Icon'
 import { DEFAULT_BANNER } from '../../../store/models/Community'
 import styles from './Members.styles'
 import { some, values, keys, isUndefined } from 'lodash/fp'
-
+import { focus } from '../../../util/textInput'
+import { debounce } from 'lodash'
 const title = 'Members'
 
 export default class Members extends React.Component {
@@ -35,10 +36,13 @@ export default class Members extends React.Component {
 
     const sortKeys = sortKeysFactory(subject)
 
-    console.log('Values', sortKeys.values)
+    const onSearch = debounce((text) => {
+      console.log("debounced", text)
+      this.props.setSearch(text)
+    }, 300)
+
     const onSelect = (action, index) => {
       if (!isUndefined(index)) {
-        console.log('sortKeys', sortKeys, keys(sortKeys)[index])
         setSort(keys(sortKeys)[index])
       }
     }
@@ -53,12 +57,18 @@ export default class Members extends React.Component {
     const headerComponent = <View>
       <Banner community={community} all={!community} />
       <View style={styles.listControls}>
-        <TextInput placeholder='Search Members' style={styles.listControl} />
+        <View style={styles.searchWrapper}>
+          <Icon style={styles.searchIcon} name='Search' size={30} onPress={() => focus(this.searchRef)}/>
+          <TextInput placeholder='Search Members'
+                     ref={ref => this.searchRef = ref}
+                     onChangeText={onSearch}
+                     underlineColorAndroid='transparent' style={styles.searchBar} />
+        </View>
 
         <PopupMenuButton actions={values(sortKeys)} onSelect={onSelect}>
-          <View style={styles.listControl}>
+          <View style={styles.sortBy}>
             <Text>{sortKeys[sortBy]}</Text>
-            <Icon name='ArrowDown' style={[styles.optionText, styles.downArrow]} />
+            <Icon name='ArrowDown' style={styles.downArrow} />
           </View>
         </PopupMenuButton>
       </View>
@@ -86,10 +96,11 @@ function Member ({ member, showMember }) {
   return <TouchableOpacity onPress={() => showMember(member.id)}
                            style={[styles.cell, styles.memberCell]} >
     <View style={styles.avatarSpacing}>
-      <Avatar avatarUrl={member.avatarUrl} />
+      <Avatar avatarUrl={member.avatarUrl} dimension={62} />
     </View>
-    <Text>{member.name}</Text>
-    <Text>{member.bio}</Text>
+    <Text style={styles.memberName}>{member.name}</Text>
+    {member.location && <Text style={styles.memberLocation}>{member.location}</Text>}
+    <Text style={styles.memberBio}>{member.bio}</Text>
   </TouchableOpacity>
 }
 

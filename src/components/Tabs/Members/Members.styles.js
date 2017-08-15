@@ -1,8 +1,9 @@
-import { capeCod } from '../../../style/colors'
+import { capeCod, rhino, rhino50, ghost } from '../../../style/colors'
 
 export default {
   container: {
-    backgroundColor: '#FFF'
+    backgroundColor: '#FFF',
+    height: 900
   },
   bannerContainer: {
     zIndex: 10
@@ -28,7 +29,6 @@ export default {
   cell: {
     flex: 1,
     margin: 8,
-    height: 100,
     alignItems: 'center'
   },
   memberCell: {
@@ -38,22 +38,66 @@ export default {
     borderWidth: 1,
     borderRadius: 4
   },
+  avatarSpacing: {
+    marginTop: 12,
+  },
+  avatar: {
+    width: 50,
+    height: 50
+  },
+  memberName: {
+    fontSize: 20,
+    marginTop: 14,
+    color: rhino,
+    fontFamily: 'Circular-Bold'
+  },
+  memberLocation: {
+    fontFamily: 'Circular-Book',
+    fontSize: 13,
+    textAlign: 'center',
+    color: ghost
+  },
+  memberBio: {
+    fontFamily: 'Circular-Book',
+    color: rhino50,
+    textAlign: 'center',
+    padding: 10
+  },
   listControls: {
+    flex: 1,
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 10,
-    marginRight: 16,
-    marginLeft: 16
   },
-  listControl: {
-    flexDirection: 'row'
+  searchWrapper: {
+    marginTop: 10,
+    marginLeft: 8,
+    marginBottom: 5,
+    flex: 1,
+    flexDirection: 'row',
+    borderWidth: 1,
+    height: 40,
+    borderColor: ghost,
+    borderRadius: 32,
   },
-  optionText: {
-    fontSize: 12,
-    color: capeCod
+  searchIcon: {
+    top: 4,
+    marginLeft: 5,
+    color: rhino50
+  },
+  searchBar: {
+    flex: 1,
+  },
+  sortBy: {
+    flexDirection: 'row',
+    flex: 1,
+    width: 80,
+    marginTop: 19,
+    justifyContent: 'flex-end',
+    marginRight: 8
   },
   downArrow: {
-    top: 2,
-    marginLeft: 4
+    top: 5,
+    marginLeft: 4,
+    fontSize: 12,
+    color: capeCod,
   },
 }

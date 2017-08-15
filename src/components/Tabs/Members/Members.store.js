@@ -27,6 +27,7 @@ query ($slug: String, $first: Int, $sortBy: String, $offset: Int, $search: Strin
       items {
         id
         name
+        bio
         avatarUrl
         location
         tagline
@@ -55,6 +56,7 @@ query ($slug: String, $first: Int, $sortBy: String, $offset: Int, $search: Strin
       items {
         id
         name
+        bio
         avatarUrl
         location
         tagline
@@ -159,7 +161,6 @@ export const getMembers = ormCreateSelector(
   getMemberResults,
   state => getCommunity(state, {id: state.currentCommunity}),
   (session, results, community) => {
-    console.log('getMembers', results, community)
     if (isEmpty(results) || isEmpty(results.ids)) return []
 
     return session.Community.withId(community.id).members
