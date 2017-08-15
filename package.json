@@ -15,7 +15,7 @@
     "babel-preset-stage-2": "^6.24.1",
     "ent": "^2.2.0",
     "faker": "^4.1.0",
-    "hylo-utils": "Hylozoic/hylo-utils#0a1a89c5",
+    "hylo-utils": "Hylozoic/hylo-utils#23bc470",
     "lodash": "^4.17.4",
     "parse": "^1.9.2",
     "prop-types": "^15.5.10",
