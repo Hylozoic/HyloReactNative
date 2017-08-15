@@ -3,6 +3,7 @@
 exports[`FeedList renders correctly 1`] = `
 <View>
   <FlatList
+    ListFooterComponent={<Loading />}
     ListHeaderComponent={
       <View>
         <ListControls
@@ -12,7 +13,6 @@ exports[`FeedList renders correctly 1`] = `
           setSort={[Function]}
           sortBy="latest"
         />
-        <Loading />
       </View>
     }
     data={

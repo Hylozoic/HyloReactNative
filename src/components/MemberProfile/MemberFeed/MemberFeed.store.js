@@ -1,9 +1,9 @@
-import { createSelector as ormCreateSelector } from 'redux-orm'
 import { createSelector } from 'reselect'
-import orm from 'store/models'
 import { postsQueryFragment } from '../../../store/actions/fetchPosts'
-import { isEmpty, includes, get } from 'lodash/fp'
-import { makeGetQueryResults } from '../../../store/reducers/queryResults'
+import { get } from 'lodash/fp'
+import {
+  makeGetQueryResults, makeQueryResultsModelSelector
+} from '../../../store/reducers/queryResults'
 
 export const MODULE_NAME = 'MemberFeed'
 export const SET_CHOICE = `${MODULE_NAME}/SET_CHOICE`
@@ -157,26 +157,11 @@ export function getChoice (state) {
   return state[MODULE_NAME].choice
 }
 
-export function makeGetItems (results, modelName, transform) {
-  return ormCreateSelector(
-    orm,
-    state => state.orm,
-    results,
-    (session, results) => {
-      if (isEmpty(results) || isEmpty(results.ids)) return []
-      return session[modelName].all()
-      .filter(x => includes(x.id, results.ids))
-      .orderBy(x => results.ids.indexOf(x.id))
-      .toModelArray()
-      .map(transform)
-    })
-}
-
 const getMemberPostResults = makeGetQueryResults(FETCH_MEMBER_POSTS)
 
 export const getHasMoreMemberPosts = createSelector(getMemberPostResults, get('hasMore'))
 
-export const getMemberPosts = makeGetItems(
+export const getMemberPosts = makeQueryResultsModelSelector(
   getMemberPostResults,
   'Post',
   post => ({
@@ -191,7 +176,7 @@ const getMemberCommentResults = makeGetQueryResults(FETCH_MEMBER_COMMENTS)
 
 export const getHasMoreMemberComments = createSelector(getMemberCommentResults, get('hasMore'))
 
-export const getMemberComments = makeGetItems(
+export const getMemberComments = makeQueryResultsModelSelector(
   getMemberCommentResults,
   'Comment',
   comment => ({
@@ -205,7 +190,7 @@ const getMemberUpvotesResults = makeGetQueryResults(FETCH_MEMBER_UPVOTES)
 
 export const getHasMoreMemberUpvotes = createSelector(getMemberUpvotesResults, get('hasMore'))
 
-export const getMemberUpvotes = makeGetItems(
+export const getMemberUpvotes = makeQueryResultsModelSelector(
   getMemberUpvotesResults,
   'Vote',
   vote => ({
