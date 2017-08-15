@@ -92,8 +92,8 @@ export default class ImagePicker extends Component {
 
     if (!children) {
       children = pending
-        ? <Icon name='Clock' />
-        : <Icon name='AddImage' />
+        ? <Icon name='Clock' style={styles.icon}/>
+        : <Icon name='AddImage' style={styles.icon} />
     }
 
     return <View style={style}>
@@ -101,5 +101,11 @@ export default class ImagePicker extends Component {
         {children}
       </TouchableOpacity>
     </View>
+  }
+}
+
+const styles = {
+  icon: {
+    fontSize: 36
   }
 }
