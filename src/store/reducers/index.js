@@ -12,6 +12,7 @@ import CommentEditor from '../../components/PostDetails/CommentEditor/CommentEdi
 import Search from '../../components/Editor/Search/Search.store'
 import NewMessage from '../../components/NewMessage/NewMessage.store'
 import SocketListener from '../../components/SocketListener/SocketListener.store'
+import MemberFeed from '../../components/MemberProfile/MemberFeed/MemberFeed.store'
 
 const combinedReducers = combineReducers({
   orm: ormReducer,
@@ -25,7 +26,8 @@ const combinedReducers = combineReducers({
   CommentEditor,
   Search,
   NewMessage,
-  SocketListener
+  SocketListener,
+  MemberFeed
 })
 
 export default persist(combinedReducers)

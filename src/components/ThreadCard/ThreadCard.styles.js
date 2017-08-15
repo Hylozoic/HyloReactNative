@@ -45,7 +45,7 @@ export default {
   countText: {
     color: 'white',
     textAlign: 'center',
-    fontWeight: '900',
+    fontFamily: 'Circular-Bold',
     overflow: 'hidden',
     backgroundColor: 'transparent'
   }

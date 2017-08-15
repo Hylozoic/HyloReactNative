@@ -10,6 +10,9 @@ export default {
   avatar: {
     marginRight: 10
   },
+  header: {
+    marginBottom: 8
+  },
   name: {
     color: limedSpruce,
     fontFamily: 'Circular-Bold',
@@ -18,8 +21,7 @@ export default {
   date: {
     color: slateGrey80,
     fontFamily: 'Circular-Book',
-    fontSize: 12,
-    marginBottom: 8
+    fontSize: 12
   },
   text: {
     color: nevada,

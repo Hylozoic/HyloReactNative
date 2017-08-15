@@ -5,7 +5,7 @@ export default {
   },
   title: {
     alignSelf: 'center',
-    fontWeight: '900',
+    fontFamily: 'Circular-Bold',
     fontSize: 18
   },
   newButton: {

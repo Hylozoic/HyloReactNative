@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
-import { FlatList, Text, TouchableOpacity, View } from 'react-native'
+import { FlatList, Text, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native'
 import styles from './FeedList.styles'
 import PostCard from '../PostCard'
 import Loading from '../Loading'
 import Icon from '../Icon'
 import { find, get, isEmpty } from 'lodash/fp'
+
+import ImagePicker from '../ImagePicker'
 
 export default class FeedList extends Component {
   fetchOrShowCached () {
@@ -105,12 +107,14 @@ export function ListControl ({ selected, options, onChange }) {
 
 export function PostRow ({ post, showPost, editPost, showMember, showTopic }) {
   return <View style={styles.postRow}>
-    <TouchableOpacity onPress={() => showPost(post.id)}>
-      <PostCard
-        post={post}
-        editPost={() => editPost(post.id)}
-        showMember={showMember}
-        showTopic={showTopic} />
-    </TouchableOpacity>
+    <TouchableWithoutFeedback onPress={() => showPost(post.id)}>
+      <View>
+        <PostCard
+          post={post}
+          editPost={() => editPost(post.id)}
+          showMember={showMember}
+          showTopic={showTopic} />
+      </View>
+    </TouchableWithoutFeedback>
   </View>
 }

@@ -55,7 +55,8 @@ export default class PostCard extends React.Component {
         editPost={editPost}
         communities={post.communities}
         slug={slug}
-        id={post.id} />
+        id={post.id}
+        showMember={showMember} />
       <View style={post.imageUrl ? styles.imageMargin : {}}>
         <SpaceFillingImage imageUrl={post.imageUrl} />
       </View>
@@ -66,7 +67,7 @@ export default class PostCard extends React.Component {
         slug={slug}
         showMember={showMember}
         showTopic={showTopic}
-        shouldTruncate={true} />
+        shouldTruncate />
       <PostFooter id={post.id}
         currentUser={currentUser}
         commenters={post.commenters}

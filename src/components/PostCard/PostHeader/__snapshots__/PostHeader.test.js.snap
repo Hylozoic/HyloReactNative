@@ -3,34 +3,46 @@
 exports[`renders correctly with all=true, and no community or user 1`] = `
 <View>
   <View>
-    <Avatar
-      avatarUrl="foo.png"
-    />
+    <TouchableOpacity
+      activeOpacity={0.2}
+      focusedOpacity={0.7}
+      onPress={[Function]}
+    >
+      <Avatar
+        avatarUrl="foo.png"
+      />
+    </TouchableOpacity>
   </View>
   <View>
+    <TouchableOpacity
+      activeOpacity={0.2}
+      focusedOpacity={0.7}
+      onPress={[Function]}
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        disabled={false}
+        ellipsizeMode="tail"
+      >
+        Zeus
+      </Text>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        disabled={false}
+        ellipsizeMode="tail"
+      >
+        Go!
+      </Text>
+    </TouchableOpacity>
     <Text
       accessible={true}
       allowFontScaling={true}
       disabled={false}
       ellipsizeMode="tail"
     >
-      Zeus
-    </Text>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      disabled={false}
-      ellipsizeMode="tail"
-    >
-      Go!
-    </Text>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      disabled={false}
-      ellipsizeMode="tail"
-    >
-      10 mins ago
+      10m ago
     </Text>
   </View>
   <View>
