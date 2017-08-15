@@ -39,8 +39,6 @@ export default function (state = {}, action) {
     case CREATE_POST:
       root = payload.data.createPost
       return matchNewPostIntoQueryResults(state, root)
-    case FETCH_MESSAGES:
-      return appendIds(state, FETCH_MESSAGES, meta.graphql.variables, payload.data.messageThread.messages)
   }
   return state
 }
