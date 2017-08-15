@@ -16,7 +16,9 @@ import {
 import {
   CREATE_POST
 } from '../../components/PostEditor/PostEditor.store'
-import { get, isNull, omitBy, pick, reduce, uniq } from 'lodash/fp'
+import { get, isNull, omitBy, pick, reduce, uniq, isEmpty, includes } from 'lodash/fp'
+import { createSelector as ormCreateSelector } from 'redux-orm'
+import orm from 'store/models'
 
 // reducer
 
@@ -126,3 +128,18 @@ export const queryParamWhitelist = [
   'topic',
   'type'
 ]
+
+export function makeQueryResultsModelSelector (resultsSelector, modelName, transform) {
+  return ormCreateSelector(
+    orm,
+    state => state.orm,
+    resultsSelector,
+    (session, results) => {
+      if (isEmpty(results) || isEmpty(results.ids)) return []
+      return session[modelName].all()
+      .filter(x => includes(x.id, results.ids))
+      .orderBy(x => results.ids.indexOf(x.id))
+      .toModelArray()
+      .map(transform)
+    })
+}
