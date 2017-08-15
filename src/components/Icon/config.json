@@ -600,9 +600,7 @@
     "showSVGs": true,
     "fontPref": {
       "prefix": "icon-",
-      "metadata": {
-        "fontFamily": "icomoon"
-      },
+      "metadata": {},
       "metrics": {
         "emSize": 1024,
         "baseline": 6.25,
