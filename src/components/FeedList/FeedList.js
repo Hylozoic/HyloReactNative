@@ -49,8 +49,11 @@ export default class FeedList extends Component {
         setSort={setSort}
         pending={pending}
         />
-      {pending && <Loading />}
     </View>
+
+    const listFooterComponent = pending
+      ? <Loading style={styles.loading} />
+      : null
 
     return <View style={styles.container}>
       <FlatList
@@ -65,7 +68,7 @@ export default class FeedList extends Component {
         keyExtractor={(item, index) => item.id}
         onEndReached={fetchMorePosts}
         ListHeaderComponent={listHeaderComponent}
-        />
+        ListFooterComponent={listFooterComponent} />
     </View>
   }
 }
