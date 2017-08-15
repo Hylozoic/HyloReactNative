@@ -1,10 +1,9 @@
 import React from 'react'
-import { Platform, StyleSheet, Text, TextInput, View } from 'react-native'
-import { func, shape, string } from 'prop-types'
+import { Image, TextInput, TouchableOpacity, View } from 'react-native'
+import { bool, func, string } from 'prop-types'
 
-import Avatar from '../Avatar'
-
-import { rhino30 } from '../../style/colors'
+import Icon from '../Icon'
+import { jade, rhino30 } from '../../style/colors'
 import styles from './AvatarInput.style'
 
 const MIN_INPUT_HEIGHT = 22
@@ -13,33 +12,50 @@ const MAX_INPUT_HEIGHT = 100
 export default class extends React.PureComponent {
   static propTypes = {
     avatarUrl: string,
-    scrollParentToEnd: func
+    blurOnSubmit: bool,
+    multiline: bool,
+    onSubmit: func,
+    placeholder: string
   }
 
   constructor () {
     super()
     this.state = {
-      inputheight: MIN_INPUT_HEIGHT
+      inputheight: MIN_INPUT_HEIGHT,
+      submittable: false,
+      text: ''
     }
   }
 
-  handleContentSizeChange = ({ nativeEvent }) => {
+  clear = () => {
+    this.textInput.clear()
     this.setState({
-      inputHeight: nativeEvent.contentSize.height
+      text: '',
+      submittable: false
     })
+  }
+
+  handleChange = ({ nativeEvent: { text } }) => {
+    this.setState({
+      submittable: text.trim().length > 0,
+      text
+    })
+  }
+
+  handleContentSizeChange = ({ nativeEvent }) => 
+    this.setState({ inputHeight: nativeEvent.contentSize.height })
+
+  handleSubmit = () => {
+    const { text, submittable } = this.state
+    // NOTE: The calling code is responsible for sanitisation.
+    if (submittable) this.props.onSubmit(text)
+    this.clear()
   }
 
   restrictedHeight = () => Math.min(
     MAX_INPUT_HEIGHT,
     Math.max(MIN_INPUT_HEIGHT, this.state.inputHeight)
   )
-
-  clear = () => this.textInput.clear()
-
-  onSubmitEditing = evt => {
-    // TODO: grey out text while submitting?
-    if (this.props.onSubmitEditing) this.props.onSubmitEditing(evt)
-  }
 
   render () {
     const inputProps = {
@@ -49,18 +65,23 @@ export default class extends React.PureComponent {
 
       ...this.props,
 
-      // Cannot be overridden, but will call the parent function if provided
-      onSubmitEditing: this.onSubmitEditing,
-
       // Cannot be overridden
+      onChange: this.handleChange,
       onContentSizeChange: this.handleContentSizeChange,
       underlineColorAndroid: 'transparent',
       ref: ti => this.textInput = ti,
-      style: { ...styles.input, height: this.restrictedHeight() }
+      style: { ...styles.input, height: this.restrictedHeight() },
+      value: this.state.text
     }
+    const { onSubmit } = this.props
+    const { submittable } = this.state
+    const iconStyle = { ...styles.sendButton, color: submittable ? jade : rhino30 }
+
     return <View style={styles.container}>
-      <Avatar avatarUrl={this.props.avatarUrl} />
       <TextInput { ...inputProps } />
+      <TouchableOpacity onPress={this.handleSubmit}>
+        <Icon name='Send' style={iconStyle} />
+      </TouchableOpacity>
     </View>
   }
 }

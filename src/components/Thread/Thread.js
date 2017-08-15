@@ -100,10 +100,7 @@ export default class Thread extends React.Component {
 
   atBottom = () => this.yOffset < BOTTOM_THRESHOLD
 
-  createMessage = ({ nativeEvent }) => {
-    this.props.createMessage(nativeEvent.text)
-    this.avatarInput.clear()
-  }
+  createMessage = text => this.props.createMessage(text)
 
   fetchMore = throttle(() => {
     const { fetchMessages, hasMore, messages, pending } = this.props
@@ -152,12 +149,10 @@ export default class Thread extends React.Component {
         renderItem={this.renderItem} />
       <AvatarInput
         avatarUrl={currentUser.avatarUrl}
-        blurOnSubmit
+        blurOnSubmit={false}
         multiline
-        onSubmitEditing={this.createMessage}
-        placeholder='Write something...'
-        ref={ai => this.avatarInput = ai}
-        scrollParentToEnd={this.scrollToEnd} />
+        onSubmit={this.createMessage}
+        placeholder='Write something...' />
       {notify && <NotificationOverlay
         message={`${newMessages} NEW MESSAGE${newMessages > 1 ? 'S' : ''}`}
         onPress={this.scrollToBottom} />}

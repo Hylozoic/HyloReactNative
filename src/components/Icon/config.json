@@ -1,153 +1,242 @@
 {
   "selection": [
     {
-      "order": 0,
-      "ligatures": ""
+      "order": 42,
+      "name": "Send",
+      "prevSize": 32
     },
     {
-      "order": 0,
-      "ligatures": ""
+      "order": 43,
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "Checkmark"
     },
     {
-      "order": 0,
-      "ligatures": ""
+      "order": 50,
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "Empty"
     },
     {
-      "order": 0,
-      "ligatures": ""
+      "order": 54,
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "Back"
     },
     {
-      "order": 0,
-      "ligatures": ""
+      "order": 55,
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "AddImage"
     },
     {
-      "order": 0,
-      "ligatures": ""
+      "order": 56,
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "Clock"
     },
     {
-      "order": 0,
-      "ligatures": ""
+      "order": 57,
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "Star"
     },
     {
-      "order": 0,
-      "ligatures": ""
+      "order": 58,
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "ProfileUrl"
     },
     {
-      "order": 0,
-      "ligatures": ""
+      "order": 59,
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "ProfileTwitter"
     },
     {
-      "order": 0,
-      "ligatures": ""
+      "order": 60,
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "ProfileLinkedin"
     },
     {
-      "order": 0,
-      "ligatures": ""
+      "order": 61,
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "ProfileFacebook"
     },
     {
-      "order": 0,
-      "ligatures": ""
+      "order": 44,
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "Reply"
     },
     {
-      "order": 0,
-      "ligatures": ""
+      "order": 45,
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "LinkedIn"
     },
     {
-      "order": 0,
-      "ligatures": ""
+      "order": 51,
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "Google"
     },
     {
-      "order": 0,
-      "ligatures": ""
+      "order": 62,
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "Facebook"
     },
     {
-      "order": 0,
-      "ligatures": ""
+      "order": 63,
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "Ex"
     },
     {
-      "order": 0,
-      "ligatures": ""
+      "order": 64,
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "NewCommunity"
     },
     {
-      "order": 0,
-      "ligatures": ""
+      "order": 65,
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "Projects"
     },
     {
-      "order": 0,
-      "ligatures": ""
+      "order": 66,
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "Events"
     },
     {
-      "order": 0,
-      "ligatures": ""
+      "order": 67,
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "Home"
     },
     {
-      "order": 0,
-      "ligatures": ""
+      "order": 68,
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "Topics"
     },
     {
-      "order": 0,
-      "ligatures": ""
+      "order": 69,
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "Members"
     },
     {
-      "order": 0,
-      "ligatures": ""
+      "order": 46,
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "Messages"
     },
     {
-      "order": 0,
-      "ligatures": ""
+      "order": 47,
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "Notifications"
     },
     {
-      "order": 0,
-      "ligatures": ""
+      "order": 52,
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "Search"
     },
     {
-      "order": 0,
-      "ligatures": ""
+      "order": 70,
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "Share"
     },
     {
-      "order": 0,
-      "ligatures": ""
+      "order": 71,
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "More"
     },
     {
-      "order": 0,
-      "ligatures": ""
+      "order": 72,
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "ArrowUp"
     },
     {
-      "order": 0,
-      "ligatures": ""
+      "order": 73,
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "ArrowDown"
     },
     {
-      "order": 0,
-      "ligatures": ""
+      "order": 74,
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "Location"
     },
     {
-      "order": 0,
-      "ligatures": ""
+      "order": 75,
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "Trash"
     },
     {
-      "order": 0,
-      "ligatures": ""
+      "order": 76,
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "Pin"
     },
     {
-      "order": 0,
-      "ligatures": ""
+      "order": 77,
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "Complete"
     },
     {
-      "order": 0,
-      "ligatures": ""
+      "order": 48,
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "Flag"
     },
     {
-      "order": 0,
-      "ligatures": ""
+      "order": 49,
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "Circle"
+    },
+    {
+      "order": 53,
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "Edit"
     }
   ],
   "metadata": {
     "name": "hylo-evo-icons",
-    "iconsHash": 2037782344
+    "importSize": {
+      "width": 62,
+      "height": 62
+    },
+    "iconsHash": 1734784515
   },
   "height": 1024,
   "prevSize": 32,
   "icons": [
+    {
+      "paths": [
+        "M689.542 540.146l-294.899 147.449c-16.317 8.159-36.159 1.545-44.317-14.772-4.345-8.689-4.644-18.85-0.818-27.78l52.412-122.344c3.573-8.341 3.558-17.784-0.042-26.113l-51.922-120.125c-7.238-16.746 0.469-36.189 17.215-43.427 8.952-3.869 19.156-3.585 27.878 0.776l294.493 147.247c16.317 8.159 22.931 28 14.772 44.317-3.196 6.393-8.38 11.576-14.772 14.772z"
+      ],
+      "grid": 0,
+      "tags": [
+        "Send"
+      ],
+      "defaultCode": 59648
+    },
     {
       "paths": [
         "M512 984.615c-261.018 0-472.615-211.597-472.615-472.615s211.597-472.615 472.615-472.615c261.018 0 472.615 211.597 472.615 472.615s-211.597 472.615-472.615 472.615zM332.696 502.696c-15.381-15.381-40.318-15.381-55.698 0s-15.381 40.318 0 55.698l178.379 178.379c18.126 18.126 48.463 14.38 61.636-7.61l235.92-393.846c11.178-18.66 5.112-42.848-13.548-54.025s-42.848-5.112-54.025 13.548l-209.98 350.541-142.684-142.684z"
@@ -155,7 +244,7 @@
       "tags": [
         "Checkmark"
       ],
-      "defaultCode": 59648,
+      "defaultCode": 59649,
       "grid": 0
     },
     {
@@ -165,7 +254,7 @@
       "tags": [
         "Empty"
       ],
-      "defaultCode": 59649,
+      "defaultCode": 59650,
       "grid": 0
     },
     {
@@ -176,7 +265,7 @@
       "tags": [
         "Back"
       ],
-      "defaultCode": 59650,
+      "defaultCode": 59651,
       "grid": 0
     },
     {
@@ -186,7 +275,7 @@
       "tags": [
         "AddImage"
       ],
-      "defaultCode": 59651,
+      "defaultCode": 59652,
       "grid": 0
     },
     {
@@ -196,7 +285,7 @@
       "tags": [
         "Clock"
       ],
-      "defaultCode": 59652,
+      "defaultCode": 59653,
       "grid": 0
     },
     {
@@ -206,7 +295,7 @@
       "tags": [
         "Star"
       ],
-      "defaultCode": 59653,
+      "defaultCode": 59654,
       "grid": 0
     },
     {
@@ -216,7 +305,7 @@
       "tags": [
         "ProfileUrl"
       ],
-      "defaultCode": 59654,
+      "defaultCode": 59655,
       "grid": 0
     },
     {
@@ -226,7 +315,7 @@
       "tags": [
         "ProfileTwitter"
       ],
-      "defaultCode": 59655,
+      "defaultCode": 59656,
       "grid": 0
     },
     {
@@ -236,7 +325,7 @@
       "tags": [
         "ProfileLinkedin"
       ],
-      "defaultCode": 59656,
+      "defaultCode": 59657,
       "grid": 0
     },
     {
@@ -246,7 +335,7 @@
       "tags": [
         "ProfileFacebook"
       ],
-      "defaultCode": 59657,
+      "defaultCode": 59658,
       "grid": 0
     },
     {
@@ -257,7 +346,7 @@
       "tags": [
         "Reply"
       ],
-      "defaultCode": 59658,
+      "defaultCode": 59659,
       "grid": 0
     },
     {
@@ -267,7 +356,7 @@
       "tags": [
         "LinkedIn"
       ],
-      "defaultCode": 59659,
+      "defaultCode": 59660,
       "grid": 0
     },
     {
@@ -277,7 +366,7 @@
       "tags": [
         "Google"
       ],
-      "defaultCode": 59660,
+      "defaultCode": 59661,
       "grid": 0
     },
     {
@@ -288,7 +377,7 @@
       "tags": [
         "Facebook"
       ],
-      "defaultCode": 59661,
+      "defaultCode": 59662,
       "grid": 0
     },
     {
@@ -298,7 +387,7 @@
       "tags": [
         "Ex"
       ],
-      "defaultCode": 59662,
+      "defaultCode": 59663,
       "grid": 0
     },
     {
@@ -308,7 +397,7 @@
       "tags": [
         "NewCommunity"
       ],
-      "defaultCode": 59663,
+      "defaultCode": 59664,
       "grid": 0
     },
     {
@@ -318,7 +407,7 @@
       "tags": [
         "Projects"
       ],
-      "defaultCode": 59664,
+      "defaultCode": 59665,
       "grid": 0
     },
     {
@@ -328,7 +417,7 @@
       "tags": [
         "Events"
       ],
-      "defaultCode": 59665,
+      "defaultCode": 59666,
       "grid": 0
     },
     {
@@ -338,7 +427,7 @@
       "tags": [
         "Home"
       ],
-      "defaultCode": 59666,
+      "defaultCode": 59667,
       "grid": 0
     },
     {
@@ -348,7 +437,7 @@
       "tags": [
         "Topics"
       ],
-      "defaultCode": 59667,
+      "defaultCode": 59668,
       "grid": 0
     },
     {
@@ -358,7 +447,7 @@
       "tags": [
         "Members"
       ],
-      "defaultCode": 59668,
+      "defaultCode": 59669,
       "grid": 0
     },
     {
@@ -368,7 +457,7 @@
       "tags": [
         "Messages"
       ],
-      "defaultCode": 59669,
+      "defaultCode": 59670,
       "grid": 0
     },
     {
@@ -378,7 +467,7 @@
       "tags": [
         "Notifications"
       ],
-      "defaultCode": 59670,
+      "defaultCode": 59671,
       "grid": 0
     },
     {
@@ -388,7 +477,7 @@
       "tags": [
         "Search"
       ],
-      "defaultCode": 59671,
+      "defaultCode": 59672,
       "grid": 0
     },
     {
@@ -398,7 +487,7 @@
       "tags": [
         "Share"
       ],
-      "defaultCode": 59672,
+      "defaultCode": 59673,
       "grid": 0
     },
     {
@@ -408,7 +497,7 @@
       "tags": [
         "More"
       ],
-      "defaultCode": 59673,
+      "defaultCode": 59674,
       "grid": 0
     },
     {
@@ -418,7 +507,7 @@
       "tags": [
         "ArrowUp"
       ],
-      "defaultCode": 59674,
+      "defaultCode": 59675,
       "grid": 0
     },
     {
@@ -428,7 +517,7 @@
       "tags": [
         "ArrowDown"
       ],
-      "defaultCode": 59675,
+      "defaultCode": 59676,
       "grid": 0
     },
     {
@@ -438,7 +527,7 @@
       "tags": [
         "Location"
       ],
-      "defaultCode": 59676,
+      "defaultCode": 59677,
       "grid": 0
     },
     {
@@ -448,7 +537,7 @@
       "tags": [
         "Trash"
       ],
-      "defaultCode": 59677,
+      "defaultCode": 59678,
       "grid": 0
     },
     {
@@ -458,7 +547,7 @@
       "tags": [
         "Pin"
       ],
-      "defaultCode": 59678,
+      "defaultCode": 59679,
       "grid": 0
     },
     {
@@ -468,7 +557,7 @@
       "tags": [
         "Complete"
       ],
-      "defaultCode": 59679,
+      "defaultCode": 59680,
       "grid": 0
     },
     {
@@ -478,7 +567,7 @@
       "tags": [
         "Flag"
       ],
-      "defaultCode": 59680,
+      "defaultCode": 59681,
       "grid": 0
     },
     {
@@ -488,7 +577,7 @@
       "tags": [
         "Circle"
       ],
-      "defaultCode": 59681,
+      "defaultCode": 59682,
       "grid": 0
     },
     {
@@ -503,29 +592,35 @@
       "grid": 0
     }
   ],
+  "colorThemes": [],
   "preferences": {
     "showGlyphs": true,
-    "showCodes": true,
     "showQuickUse": true,
     "showQuickUse2": true,
     "showSVGs": true,
     "fontPref": {
       "prefix": "icon-",
-      "metadata": {},
+      "metadata": {
+        "fontFamily": "icomoon"
+      },
       "metrics": {
         "emSize": 1024,
         "baseline": 6.25,
         "whitespace": 50
-      }
+      },
+      "embed": false
     },
     "imagePref": {
       "prefix": "icon-",
       "png": true,
       "useClassSelector": true,
       "color": 0,
-      "bgColor": 16777215
+      "bgColor": 16777215,
+      "classSelector": ".icon"
     },
-    "historySize": 50
+    "historySize": 50,
+    "showCodes": true,
+    "gridSize": 16
   },
   "IcoMoonType": "icon-set"
 }

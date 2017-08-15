@@ -25,5 +25,9 @@ export default {
     lineHeight: 18,
     fontFamily: 'Circular-Book',
     marginLeft: 5
+  },
+  sendButton: {
+    fontSize: 36,
+    marginRight: 10
   }
 }
