@@ -2,7 +2,7 @@ import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import HTMLView from 'react-native-htmlview'
 import { decode } from 'ent'
-import { present, sanitize, textLength, truncate } from 'hylo-utils/text'
+import { present, sanitize } from 'hylo-utils/text'
 import urlHandler from '../../../util/urlHandler'
 
 import LinkPreview from '../LinkPreview'
@@ -11,10 +11,10 @@ const MAX_DETAILS_LENGTH = 144
 
 export default function PostBody ({ title, details, linkPreview, slug, showMember, showTopic, shouldTruncate }) {
   const decodedTitle = decode(title)
-  let presentedDetails = present(sanitize(details), {slug})
-  if (shouldTruncate && textLength(presentedDetails) > MAX_DETAILS_LENGTH) {
-    presentedDetails = truncate(presentedDetails, MAX_DETAILS_LENGTH)
-  }
+  const presentedDetails = present(
+    sanitize(details).replace(/\n/g, '').replace('<p>&nbsp;</p>', ''),
+    {slug, maxlength: shouldTruncate && MAX_DETAILS_LENGTH}
+  )
 
   return <View style={styles.container}>
     <Text style={styles.title}>{decodedTitle}</Text>
