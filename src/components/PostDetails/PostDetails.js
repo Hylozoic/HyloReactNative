@@ -66,7 +66,8 @@ export default class PostDetails extends React.Component {
         editPost={editPost}
         communities={post.communities}
         slug={slug}
-        id={post.id} />
+        id={post.id}
+        showMember={showMember} />
       <View style={post.imageUrl ? styles.imageMargin : {}}>
         <SpaceFillingImage imageUrl={post.imageUrl} />
       </View>
