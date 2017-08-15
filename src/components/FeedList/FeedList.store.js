@@ -59,25 +59,6 @@ export function getSort (state) {
 
 const getPostResults = makeGetQueryResults(FETCH_POSTS)
 
-// export const getPosts = ormCreateSelector(
-//   orm,
-//   state => state.orm,
-//   getPostResults,
-//   (session, results) => {
-//     if (isEmpty(results) || isEmpty(results.ids)) return []
-//     return session.Post.all()
-//     .filter(x => includes(x.id, results.ids))
-//     .orderBy(x => results.ids.indexOf(x.id))
-//     .toModelArray()
-//     .map(post => ({
-//       ...post.ref,
-//       creator: post.creator,
-//       commenters: post.commenters.toModelArray(),
-//       communities: post.communities.toModelArray()
-//     }))
-//   }
-// )
-
 export const getPosts = makeQueryResultsModelSelector(
   getPostResults,
   'Post',
