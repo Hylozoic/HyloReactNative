@@ -6,16 +6,20 @@ import PopupMenuButton from '../../PopupMenuButton'
 import Icon from '../../Icon'
 import { DEFAULT_BANNER } from '../../../store/models/Community'
 import styles from './Members.styles'
-import { some, values, keys, isUndefined } from 'lodash/fp'
+import { some, values, keys, isUndefined, isEmpty, debounce } from 'lodash/fp'
 import { focus } from '../../../util/textInput'
-import { debounce } from 'lodash'
 const title = 'Members'
 
 export default class Members extends React.Component {
   static navigationOptions = ({navigation}) => (Header(navigation, title))
 
+  fetchOrShowCached () {
+    const { hasMore, members, fetchMembers } = this.props
+    if (isEmpty(members) && hasMore !== false) fetchMembers()
+  }
+
   componentDidMount () {
-    this.props.fetchMembers()
+    this.fetchOrShowCached()
   }
 
   componentDidUpdate (prevProps) {
@@ -27,19 +31,18 @@ export default class Members extends React.Component {
         'sortBy',
         'search',
       ])) {
-      this.props.fetchMembers()
+      this.fetchOrShowCached()
     }
   }
 
   render () {
-    const { community, subject, sortBy, setSort } = this.props
+    const { community, subject, sortBy, setSort, fetchMoreMembers } = this.props
 
     const sortKeys = sortKeysFactory(subject)
 
-    const onSearch = debounce((text) => {
-      console.log("debounced", text)
+    const onSearch = debounce(300, text => {
       this.props.setSearch(text)
-    }, 300)
+    })
 
     const onSelect = (action, index) => {
       if (!isUndefined(index)) {
@@ -62,12 +65,12 @@ export default class Members extends React.Component {
           <TextInput placeholder='Search Members'
                      ref={ref => this.searchRef = ref}
                      onChangeText={onSearch}
-                     underlineColorAndroid='transparent' style={styles.searchBar} />
+                     underlineColorAndroid='transparent' style={styles.searchInput} />
         </View>
 
         <PopupMenuButton actions={values(sortKeys)} onSelect={onSelect}>
           <View style={styles.sortBy}>
-            <Text>{sortKeys[sortBy]}</Text>
+            <Text style={styles.sortByText}>{sortKeys[sortBy]}</Text>
             <Icon name='ArrowDown' style={styles.downArrow} />
           </View>
         </PopupMenuButton>
@@ -85,6 +88,7 @@ export default class Members extends React.Component {
             return <View style={styles.cell} />
           }
         }}
+        onEndReached={fetchMoreMembers}
         keyExtractor={(item, index) => item.id}
         ListHeaderComponent={headerComponent}
       />
@@ -96,7 +100,7 @@ function Member ({ member, showMember }) {
   return <TouchableOpacity onPress={() => showMember(member.id)}
                            style={[styles.cell, styles.memberCell]} >
     <View style={styles.avatarSpacing}>
-      <Avatar avatarUrl={member.avatarUrl} dimension={62} />
+      <Avatar avatarUrl={member.avatarUrl} dimension={72} />
     </View>
     <Text style={styles.memberName}>{member.name}</Text>
     {member.location && <Text style={styles.memberLocation}>{member.location}</Text>}

@@ -9,7 +9,7 @@ export default {
     zIndex: 10
   },
   image: {
-    height: 100
+    height: 110
   },
   titleRow: {
     position: 'absolute',
@@ -39,21 +39,21 @@ export default {
     borderRadius: 4
   },
   avatarSpacing: {
-    marginTop: 12,
+    marginTop: 16,
   },
   avatar: {
     width: 50,
     height: 50
   },
   memberName: {
-    fontSize: 20,
+    fontSize: 22,
     marginTop: 14,
     color: rhino,
-    fontFamily: 'Circular-Bold'
+    fontFamily: 'Circular-Black'
   },
   memberLocation: {
     fontFamily: 'Circular-Book',
-    fontSize: 13,
+    fontSize: 14,
     textAlign: 'center',
     color: ghost
   },
@@ -74,7 +74,7 @@ export default {
     flex: 1,
     flexDirection: 'row',
     borderWidth: 1,
-    height: 40,
+    height: 38,
     borderColor: ghost,
     borderRadius: 32,
   },
@@ -83,19 +83,26 @@ export default {
     marginLeft: 5,
     color: rhino50
   },
-  searchBar: {
+  searchInput: {
+    top: 1,
+    fontSize: 14,
+    fontFamily: 'Circular-Book',
     flex: 1,
   },
   sortBy: {
     flexDirection: 'row',
     flex: 1,
     width: 80,
-    marginTop: 19,
+    marginTop: 21,
     justifyContent: 'flex-end',
     marginRight: 8
   },
+  sortByText: {
+    color: rhino,
+    fontFamily: 'Circular-Book',
+  },
   downArrow: {
-    top: 5,
+    top: 4,
     marginLeft: 4,
     fontSize: 12,
     color: capeCod,
