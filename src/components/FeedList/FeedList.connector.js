@@ -21,6 +21,7 @@ function makeFetchOpts (props) {
 }
 
 export function mapStateToProps (state, props) {
+
   const sortBy = getSort(state, props)
   const filter = getFilter(state, props)
   const { community } = props

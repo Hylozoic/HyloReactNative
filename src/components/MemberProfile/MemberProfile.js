@@ -1,6 +1,7 @@
 import React from 'react'
 import { Text, View, Image, TouchableOpacity } from 'react-native'
 import Icon from '../Icon'
+import Loading from '../Loading'
 import styles from './MemberProfile.styles'
 import MemberFeed from './MemberFeed'
 
@@ -17,12 +18,16 @@ export default class MemberProfile extends React.Component {
   }
 
   render () {
-    const { person, id } = this.props
+    const { person, id, showDetails } = this.props
+
+    if (!person) return <Loading />
 
     const header = <View>
       <MemberBanner person={person} />
-      <MemberHeader person={person} />
-      <MemberBio person={person} />
+      <View style={styles.marginContainer}>
+        <MemberHeader person={person} />
+        <ReadMoreButton showDetails={showDetails} />
+      </View>
     </View>
 
     return <MemberFeed id={id} header={header} />
@@ -40,6 +45,7 @@ export function MemberBanner ({ person }) {
 }
 
 export function MemberHeader ({ person }) {
+  if (!person) return null
   const { name, location, tagline } = person
   return <View style={styles.header}>
     <View style={styles.nameRow}>
@@ -54,25 +60,12 @@ export function MemberHeader ({ person }) {
   </View>
 }
 
-export class MemberBio extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {expanded: false}
-  }
-
-  render () {
-    const { person: { bio } } = this.props
-    const { expanded } = this.state
-    const onPress = () => this.setState({expanded: !expanded})
-    const buttonText = expanded ? 'Show Less' : 'Read More'
-
-    return <View style={styles.bioContainer}>
-      {expanded && <Text style={styles.bio}>{bio}</Text>}
-      <TouchableOpacity onPress={onPress} style={styles.buttonWrapper}>
-        <View style={styles.button}>
-          <Text style={styles.buttonText}>{buttonText}</Text>
-        </View>
-      </TouchableOpacity>
-    </View>
-  }
+export function ReadMoreButton ({ showDetails }) {
+  return <View style={styles.buttonContainer}>
+    <TouchableOpacity onPress={showDetails} style={styles.buttonWrapper}>
+      <View style={styles.button}>
+        <Text style={styles.buttonText}>Read More</Text>
+      </View>
+    </TouchableOpacity>
+  </View>
 }

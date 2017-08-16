@@ -3,6 +3,8 @@ import getMe from '../../store/selectors/getMe'
 import getCommunity from '../../store/selectors/getCommunity'
 
 export function mapStateToProps (state, props) {
+  // TODO: remove this line before merging
+
   const community = getCommunity(state, {id: props.communityId})
   const currentUser = getMe(state)
   return {

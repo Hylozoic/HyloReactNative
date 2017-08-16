@@ -5,6 +5,9 @@ import {
 const screenMargin = 16
 
 export default {
+  marginContainer: {
+    marginHorizontal: screenMargin
+  },
   bannerImage: {
     height: 140
   },
@@ -24,7 +27,6 @@ export default {
     borderColor: 'white'
   },
   header: {
-    marginHorizontal: screenMargin,
     marginBottom: 15
   },
   nameRow: {
@@ -60,14 +62,9 @@ export default {
     color: rhino80,
     fontFamily: 'Circular-Book'
   },
-  bioContainer: {
-    marginHorizontal: screenMargin,
+  buttonContainer: {
     marginBottom: 30,
     alignItems: 'center'
-  },
-  bio: {
-    color: capeCod,
-    marginBottom: 15
   },
   buttonWrapper: {
     flexDirection: 'row'

@@ -6,8 +6,6 @@ import Loading from '../Loading'
 import Icon from '../Icon'
 import { find, get, isEmpty } from 'lodash/fp'
 
-import ImagePicker from '../ImagePicker'
-
 export default class FeedList extends Component {
   fetchOrShowCached () {
     const { hasMore, posts, fetchPosts } = this.props

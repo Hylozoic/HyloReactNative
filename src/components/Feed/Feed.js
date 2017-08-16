@@ -5,6 +5,10 @@ import FeedBanner from '../FeedBanner'
 import styles from './Feed.styles'
 
 export default class Feed extends Component {
+  componentDidMount () {
+    this.props.navigation.navigate('MemberProfile', {id: 11204})
+  }
+
   render () {
     const {
       community,

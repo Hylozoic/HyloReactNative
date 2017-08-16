@@ -5,9 +5,11 @@ import { getPerson, fetchPerson } from './MemberProfile.store'
 export function mapStateToProps (state, props) {
   const id = get('navigation.state.params.id', props)
   const person = getPerson(state, {id})
+  const showDetails = () => props.navigation.navigate('MemberDetails', {id})
   return {
     id,
-    person
+    person,
+    showDetails
   }
 }
 

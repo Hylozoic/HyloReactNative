@@ -19,6 +19,7 @@ import CommentEditor from '../PostDetails/CommentEditor'
 import tabStyles from '../Tabs/Tabs.styles'
 import NewMessage from '../NewMessage'
 import ThreadList from '../ThreadList'
+import MemberDetails from '../MemberProfile/MemberDetails'
 import createLinkingAwareContainer from './createLinkingAwareContainer'
 import { isIOS, urlPrefix } from 'util/platform'
 
@@ -37,6 +38,7 @@ const screensInTabs = {
   DetailsEditor: {screen: DetailsEditor, path: 'details/:id/edit'},
   PostDetails: {screen: PostDetails, path: 'post/:id'},
   MemberProfile: {screen: MemberProfile, path: 'people/:id'},
+  MemberDetails: {screen: MemberDetails, path: 'people/:id/details'},
   CommentEditor: {screen: CommentEditor, path: 'comment/:postId/new'},
   NewMessage: {screen: NewMessage}
 }
