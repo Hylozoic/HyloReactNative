@@ -6,7 +6,7 @@ import PopupMenuButton from '../../PopupMenuButton'
 import Icon from '../../Icon'
 import { DEFAULT_BANNER } from '../../../store/models/Community'
 import styles from './Members.styles'
-import { some, values, keys, isUndefined, isEmpty, debounce } from 'lodash/fp'
+import { some, values, keys, isUndefined, isEmpty, debounce, size } from 'lodash/fp'
 import { focus } from '../../../util/textInput'
 const title = 'Members'
 
@@ -52,8 +52,8 @@ export default class Members extends React.Component {
 
     let { members } = this.props
 
-    // Members need to be even since it's rows of 2
-    if (members.length % 2 > 0) {
+    // sort of a hack since members need to be even since it's rows of 2.  fixes flexbox
+    if (size(members) % 2 > 0) {
       members.push({id: -1})
     }
 
