@@ -163,7 +163,7 @@ export const getMembers = ormCreateSelector(
   (session, results, community) => {
     if (isEmpty(results) || isEmpty(results.ids)) return []
 
-    return session.Community.withId(community.id).members
+    return community.members
     .filter(x => includes(x.id, results.ids))
     .orderBy(x => results.ids.indexOf(x.id))
     .toModelArray()
