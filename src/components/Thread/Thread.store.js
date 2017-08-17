@@ -7,6 +7,7 @@ import orm from '../../store/models'
 import { makeGetQueryResults } from '../../store/reducers/queryResults'
 
 export const CREATE_MESSAGE = 'Thread/CREATE_MESSAGE'
+export const CREATE_MESSAGE_PENDING = `${CREATE_MESSAGE}_PENDING`
 export const FETCH_MESSAGES = 'Thread/FETCH_MESSAGES'
 export const UPDATE_THREAD_READ_TIME = 'Thread/UPDATE_THREAD_READ_TIME'
 
@@ -56,7 +57,7 @@ export function fetchMessages (id, opts = {}) {
   }
 }
 
-export function createMessage (messageThreadId, text, forNewThread) {
+export function createMessage (messageThreadId, text) {
   return {
     type: CREATE_MESSAGE,
     graphql: {
@@ -75,16 +76,16 @@ export function createMessage (messageThreadId, text, forNewThread) {
       }`,
       variables: {
         messageThreadId,
+        optimistic: true,
         text
       }
     },
     meta: {
-      optimistic: true,
       extractModel: 'Message',
-      tempId: uniqueId(`messageThread${messageThreadId}_`),
       messageThreadId,
-      text,
-      forNewThread
+      optimistic: true,
+      tempId: uniqueId(`messageThread${messageThreadId}_`),
+      text
     }
   }
 }
