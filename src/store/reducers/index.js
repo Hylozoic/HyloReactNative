@@ -6,6 +6,7 @@ import pending from './pending'
 import currentCommunity from './currentCommunity'
 import queryResults from './queryResults'
 import FeedList from '../../components/FeedList/FeedList.store'
+import Members from '../../components/Tabs/Members/Members.store'
 import PostEditor from '../../components/PostEditor/PostEditor.store'
 import CommentEditor from '../../components/PostDetails/CommentEditor/CommentEditor.store'
 import Search from '../../components/Editor/Search/Search.store'
@@ -21,6 +22,7 @@ const combinedReducers = combineReducers({
   currentCommunity,
   FeedList,
   PostEditor,
+  Members,
   CommentEditor,
   Search,
   NewMessage,

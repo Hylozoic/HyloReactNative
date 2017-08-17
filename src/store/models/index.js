@@ -16,6 +16,7 @@ import Message from './Message'
 import MessageThread from './MessageThread'
 import Notification from './Notification'
 import Post, { PostFollower, PostCommenter } from './Post'
+import Skill from './Skill'
 import Topic from './Topic'
 import Vote from './Vote'
 
@@ -36,6 +37,7 @@ orm.register(
   Post,
   PostFollower,
   PostCommenter,
+  Skill,
   Topic,
   Vote
 )

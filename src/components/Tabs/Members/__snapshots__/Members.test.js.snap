@@ -1,7 +1,66 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly with all=true, and no community or user 1`] = `
-<Connect(WelcomeScene)
-  navigation={undefined}
-/>
+<View>
+  <FlatList
+    ListHeaderComponent={
+      <View>
+        <Banner
+          all={true}
+          community={undefined}
+        />
+        <View>
+          <View>
+            <Icon
+              name="Search"
+              onPress={[Function]}
+              size={30}
+            />
+            <TextInput
+              onChangeText={[Function]}
+              placeholder="Search Members"
+              underlineColorAndroid="transparent"
+            />
+          </View>
+          <PopupMenuButton
+            actions={
+              Array [
+                "Name",
+                "Location",
+                "Newest",
+              ]
+            }
+            onSelect={[Function]}
+          >
+            <View>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                disabled={false}
+                ellipsizeMode="tail"
+              />
+              <Icon
+                name="ArrowDown"
+              />
+            </View>
+          </PopupMenuButton>
+        </View>
+      </View>
+    }
+    data={undefined}
+    disableVirtualization={false}
+    horizontal={false}
+    initialNumToRender={10}
+    keyExtractor={[Function]}
+    maxToRenderPerBatch={10}
+    numColumns="2"
+    onEndReached={undefined}
+    onEndReachedThreshold={2}
+    renderItem={[Function]}
+    renderScrollComponent={[Function]}
+    scrollEventThrottle={50}
+    updateCellsBatchingPeriod={50}
+    windowSize={21}
+  />
+</View>
 `;
