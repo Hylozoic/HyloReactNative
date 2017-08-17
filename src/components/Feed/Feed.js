@@ -6,7 +6,7 @@ import styles from './Feed.styles'
 
 export default class Feed extends Component {
   componentDidMount () {
-    this.props.navigation.navigate('MemberProfile', {id: 11204})
+    this.props.navigation.navigate('MemberDetails', {id: 11204})
   }
 
   render () {

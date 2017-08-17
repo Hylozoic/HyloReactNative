@@ -18,7 +18,7 @@ export default class MemberProfile extends React.Component {
   }
 
   render () {
-    const { person, id, showDetails } = this.props
+    const { person, id, goToDetails } = this.props
 
     if (!person) return <Loading />
 
@@ -26,7 +26,7 @@ export default class MemberProfile extends React.Component {
       <MemberBanner person={person} />
       <View style={styles.marginContainer}>
         <MemberHeader person={person} />
-        <ReadMoreButton showDetails={showDetails} />
+        <ReadMoreButton goToDetails={goToDetails} />
       </View>
     </View>
 
@@ -60,9 +60,9 @@ export function MemberHeader ({ person }) {
   </View>
 }
 
-export function ReadMoreButton ({ showDetails }) {
+export function ReadMoreButton ({ goToDetails }) {
   return <View style={styles.buttonContainer}>
-    <TouchableOpacity onPress={showDetails} style={styles.buttonWrapper}>
+    <TouchableOpacity onPress={goToDetails} style={styles.buttonWrapper}>
       <View style={styles.button}>
         <Text style={styles.buttonText}>Read More</Text>
       </View>
