@@ -18,6 +18,7 @@ import MemberProfile from '../MemberProfile'
 import CommentEditor from '../PostDetails/CommentEditor'
 import tabStyles from '../Tabs/Tabs.styles'
 import NewMessage from '../NewMessage'
+import Thread from '../Thread'
 import ThreadList from '../ThreadList'
 import MemberDetails from '../MemberProfile/MemberDetails'
 import createLinkingAwareContainer from './createLinkingAwareContainer'
@@ -46,6 +47,7 @@ const screensInTabs = {
 // Screens that work outside of tabs, Settings, Messages, etc.
 const screensInStack = {
   Settings: {screen: Settings, path: 'settings'},
+  Thread: {screen: Thread, path: 'thread/:id'},
   ThreadList: {screen: ThreadList, path: 'messages'}
 }
 

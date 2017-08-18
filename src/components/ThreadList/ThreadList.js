@@ -21,7 +21,7 @@ export default class ThreadList extends Component {
   _keyExtractor = (item, index) => item.id;
 
   render () {
-    const { threads, pending, currentUser, fetchMoreThreads } = this.props
+    const { threads, pending, currentUser, fetchMoreThreads, showThread } = this.props
 
     if (pending && threads.length === 0) return <Loading />
     if (!pending && threads.length === 0) {
@@ -38,6 +38,7 @@ export default class ThreadList extends Component {
             participants={item.participants}
             message={item.messages[0]}
             currentUser={currentUser}
+            showThread={showThread}
          />}
         />
       {!pending && threads.length === 0 &&
@@ -47,9 +48,9 @@ export default class ThreadList extends Component {
   }
 }
 
-export function MessageRow ({message, participants, currentUser}) {
+export function MessageRow ({message, participants, currentUser, showThread}) {
   return <View>
-    <TouchableOpacity onPress={() => console.log('showMessage')}>
+    <TouchableOpacity onPress={() => showThread(message.messageThread)}>
       <ThreadCard
         message={message}
         participants={participants}

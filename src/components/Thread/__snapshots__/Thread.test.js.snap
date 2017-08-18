@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches the last snapshot 1`] = `
+<KeyboardAvoidingView
+  behavior="padding"
+  keyboardVerticalOffset={64}
+>
+  <View>
+    <FlatList
+      data={
+        Array [
+          Object {
+            "createdAt": "Mon Aug 14 2017 18:58:37 GMT+1200 (NZST)",
+            "creator": Object {
+              "id": "86894",
+            },
+            "id": "56025",
+            "text": "Flargle argle",
+          },
+          Object {
+            "createdAt": "Mon Aug 14 2017 17:27:42 GMT+1200 (NZST)",
+            "creator": Object {
+              "id": "86895",
+            },
+            "id": "56024",
+            "text": "Argle bargle",
+          },
+          Object {
+            "createdAt": "Mon Aug 14 2017 15:24:36 GMT+1200 (NZST)",
+            "creator": Object {
+              "id": "86895",
+            },
+            "id": "56023",
+            "text": "Bargle wargle",
+          },
+        ]
+      }
+      disableVirtualization={false}
+      horizontal={false}
+      initialNumToRender={10}
+      keyExtractor={[Function]}
+      maxToRenderPerBatch={10}
+      numColumns={1}
+      onEndReached={[Function]}
+      onEndReachedThreshold={0.3}
+      onScroll={[Function]}
+      refreshing={false}
+      renderItem={[Function]}
+      renderScrollComponent={[Function]}
+      scrollEventThrottle={50}
+      updateCellsBatchingPeriod={50}
+      windowSize={21}
+    />
+    <_class
+      avatarUrl="https://wombat.org"
+      blurOnSubmit={true}
+      multiline={true}
+      onSubmitEditing={[Function]}
+      placeholder="Write something..."
+      scrollParentToEnd={undefined}
+    />
+  </View>
+</KeyboardAvoidingView>
+`;
