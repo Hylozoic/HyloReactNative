@@ -84,7 +84,7 @@ function TextButton ({ text, onPress }) {
   </TouchableOpacity>
 }
 
-function CommunityRow ({ community, onPress }) {
+export function CommunityRow ({ community, onPress }) {
   const all = community.id === 'all'
   return <View style={styles.communityRow}>
     <TouchableOpacity onPress={onPress} style={styles.communityRowTouchable}>

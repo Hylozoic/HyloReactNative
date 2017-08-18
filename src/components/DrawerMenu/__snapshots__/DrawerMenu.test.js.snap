@@ -1,0 +1,111 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CommunityRow matches the last snapshot 1`] = `
+<View>
+  <TouchableOpacity
+    activeOpacity={0.2}
+    focusedOpacity={0.7}
+    onPress={[Function]}
+  >
+    <Image
+      source={
+        Object {
+          "uri": "foo.png",
+        }
+      }
+    />
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+      numberOfLines={1}
+    >
+      Foom
+    </Text>
+  </TouchableOpacity>
+</View>
+`;
+
+exports[`CommunityRow shows all community link 1`] = `
+<View>
+  <TouchableOpacity
+    activeOpacity={0.2}
+    focusedOpacity={0.7}
+    onPress={[Function]}
+  >
+    <AllFeedsIcon />
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+      numberOfLines={1}
+    >
+      All Communities
+    </Text>
+  </TouchableOpacity>
+</View>
+`;
+
+exports[`DrawerMenu matches the last snapshot 1`] = `
+<View>
+  <View>
+    <View>
+      <Icon
+        name="Search"
+      />
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        disabled={false}
+        ellipsizeMode="tail"
+      >
+        Search your communities
+      </Text>
+    </View>
+  </View>
+  <ListViewMock
+    dataSource={
+      ListViewDataSource {
+        "items": 0,
+      }
+    }
+    enableEmptySections={true}
+    renderRow={[Function]}
+    renderScrollComponent={[Function]}
+  />
+  <View>
+    <Image
+      source={
+        Object {
+          "uri": undefined,
+        }
+      }
+    />
+    <View>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        disabled={false}
+        ellipsizeMode="tail"
+        numberOfLines={1}
+      >
+        Hello, 
+        Roy Rogers
+        !
+      </Text>
+      <View>
+        <TextButton
+          onPress={[Function]}
+          text="View Profile"
+        />
+        <TextButton
+          onPress={[Function]}
+          text="Settings"
+        />
+      </View>
+    </View>
+  </View>
+</View>
+`;
