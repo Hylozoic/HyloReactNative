@@ -1,6 +1,7 @@
 import React from 'react'
 import { Text, View, TouchableOpacity, ScrollView } from 'react-native'
 import Icon from '../../Icon'
+import StarIcon from '../../StarIcon'
 import Loading from '../../Loading'
 import { MemberHeader } from '../MemberProfile'
 import styles from './MemberDetails.styles'
@@ -57,6 +58,7 @@ export function CommunityRow ({ membership, goToCommunity }) {
   const { community, hasModeratorRole } = membership
   const memberCount = '2.4k'
   return <View style={styles.communityRow}>
+    {hasModeratorRole && <StarIcon style={styles.starIcon} />}
     <TouchableOpacity onPress={() => goToCommunity(community.id)}>
       <Text style={styles.communityName}>{community.name}</Text>
     </TouchableOpacity>

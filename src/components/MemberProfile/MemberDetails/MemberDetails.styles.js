@@ -1,5 +1,5 @@
 import {
-  capeCod, nevada, ghost, rhino, rhino80, rhino60, rhino50, rhino30, caribbeanGreen, alabaster
+  nevada, ghost, rhino, rhino50, rhino30, caribbeanGreen
 } from 'style/colors'
 
 const screenMargin = 16
@@ -45,7 +45,11 @@ export default {
     textAlign: 'center'
   },
   communityRow: {
-    flexDirection: 'row'
+    flexDirection: 'row',
+    marginBottom: 7
+  },
+  starIcon: {
+    marginRight: 5
   },
   communityName: {
     color: caribbeanGreen,

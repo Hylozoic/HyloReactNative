@@ -8,6 +8,7 @@ export function mapStateToProps (state, props) {
   const person = getPerson(state, {id})
   const goToDetails = () => props.navigation.navigate('MemberDetails', {id})
   const goToCommunity = id => props.navigation.navigate('Feed', {communityId: id})
+
   return {
     id,
     person,

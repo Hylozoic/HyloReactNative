@@ -22,6 +22,7 @@ export const westSide = '#FF9712'
 export const caribbeanGreen = '#0DC39F'
 export const black = 'black'
 export const alabaster = '#F8F8F8'
+export const linkWater = '#D9ECF8'
 
 // these colors are the equivalent of reducing the opacity of the colors named
 // above, on a white background. use these where possible, to avoid any impact
