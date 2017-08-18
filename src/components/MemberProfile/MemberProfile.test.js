@@ -1,7 +1,7 @@
 import 'react-native'
 import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
-import MemberProfile, { MemberBanner, MemberHeader, MemberBio } from './MemberProfile'
+import MemberProfile, { MemberBanner, MemberHeader, ReadMoreButton } from './MemberProfile'
 
 describe('MemberProfile', () => {
   it('matches the last snapshot', () => {
@@ -48,15 +48,11 @@ describe('MemberHeader', () => {
   })
 })
 
-describe('MemberBio', () => {
+describe('ReadMoreButton', () => {
   it('matches the last snapshot', () => {
-    const person = {
-      bio: 'I was born etc'
-    }
-
     const renderer = new ReactShallowRenderer()
-    renderer.render(<MemberBio
-      person={person} />)
+    renderer.render(<ReadMoreButton
+      goToDetails={() => {}} />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()

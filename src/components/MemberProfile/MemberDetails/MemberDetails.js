@@ -5,8 +5,9 @@ import StarIcon from '../../StarIcon'
 import Loading from '../../Loading'
 import { MemberHeader } from '../MemberProfile'
 import styles from './MemberDetails.styles'
+import { isEmpty } from 'lodash/fp'
 
-export default class MemberDetail extends React.Component {
+export default class MemberDetails extends React.Component {
   componentDidMount () {
     this.props.fetchPerson()
   }
@@ -32,6 +33,8 @@ export default class MemberDetail extends React.Component {
 }
 
 export function MemberBio ({ person: { bio } }) {
+  if (isEmpty(bio)) return null
+
   return <View style={styles.bioContainer}>
     <Text style={styles.sectionLabel}>About Me</Text>
     <Text style={styles.bio}>{bio}</Text>
@@ -39,6 +42,8 @@ export function MemberBio ({ person: { bio } }) {
 }
 
 export function MemberSkills ({ person: { skills } }) {
+  if (isEmpty(skills)) return null
+
   return <View style={styles.skillsContainer}>
     <Text style={styles.sectionLabel}>My Skills</Text>
     <View style={styles.skills}>{skills.map(skill =>
@@ -47,6 +52,8 @@ export function MemberSkills ({ person: { skills } }) {
 }
 
 export function MemberCommunities ({ person: { memberships }, goToCommunity }) {
+  if (isEmpty(memberships)) return null
+
   return <View style={styles.communitiesContainer}>
     <Text style={styles.sectionLabel}>My Hylo Communities</Text>
     {memberships.map(membership =>
@@ -56,7 +63,11 @@ export function MemberCommunities ({ person: { memberships }, goToCommunity }) {
 
 export function CommunityRow ({ membership, goToCommunity }) {
   const { community, hasModeratorRole } = membership
-  const memberCount = '2.4k'
+  const formatCount = count => {
+    if (count < 1000) return `${count}`
+    return `${Number(count / 1000).toFixed(1)}k`
+  }
+  const memberCount = formatCount(community.memberCount)
   return <View style={styles.communityRow}>
     {hasModeratorRole && <StarIcon style={styles.starIcon} />}
     <TouchableOpacity onPress={() => goToCommunity(community.id)}>

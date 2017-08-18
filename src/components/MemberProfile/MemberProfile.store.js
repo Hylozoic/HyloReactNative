@@ -30,6 +30,7 @@ export function fetchPerson (id) {
               id
               name
               slug
+              memberCount
             }
           }
           skills (first: 100) {

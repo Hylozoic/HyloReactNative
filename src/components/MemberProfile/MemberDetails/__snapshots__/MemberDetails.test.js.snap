@@ -1,0 +1,201 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CommunityRow handles high member count and moderator role 1`] = `
+<View>
+  <StarIcon />
+  <TouchableOpacity
+    activeOpacity={0.2}
+    focusedOpacity={0.7}
+    onPress={[Function]}
+  >
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+    >
+      Greater Place
+    </Text>
+  </TouchableOpacity>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    disabled={false}
+    ellipsizeMode="tail"
+  >
+    24.5k
+  </Text>
+  <Icon
+    name="Members"
+  />
+</View>
+`;
+
+exports[`CommunityRow matches the last snapshot 1`] = `
+<View>
+  <TouchableOpacity
+    activeOpacity={0.2}
+    focusedOpacity={0.7}
+    onPress={[Function]}
+  >
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+    >
+      Great Place
+    </Text>
+  </TouchableOpacity>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    disabled={false}
+    ellipsizeMode="tail"
+  >
+    432
+  </Text>
+  <Icon
+    name="Members"
+  />
+</View>
+`;
+
+exports[`MemberBio matches the last snapshot 1`] = `
+<View>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    disabled={false}
+    ellipsizeMode="tail"
+  >
+    About Me
+  </Text>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    disabled={false}
+    ellipsizeMode="tail"
+  >
+    I live I die!
+  </Text>
+</View>
+`;
+
+exports[`MemberCommunities matches the last snapshot 1`] = `
+<View>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    disabled={false}
+    ellipsizeMode="tail"
+  >
+    My Hylo Communities
+  </Text>
+  <CommunityRow
+    goToCommunity={undefined}
+    membership={
+      Object {
+        "id": 1,
+      }
+    }
+  />
+  <CommunityRow
+    goToCommunity={undefined}
+    membership={
+      Object {
+        "id": 2,
+      }
+    }
+  />
+  <CommunityRow
+    goToCommunity={undefined}
+    membership={
+      Object {
+        "id": 3,
+      }
+    }
+  />
+</View>
+`;
+
+exports[`MemberDetails matches the last snapshot 1`] = `
+<ScrollViewMock
+  contentContainerStyle={
+    Object {
+      "backgroundColor": "white",
+      "paddingHorizontal": 16,
+      "paddingTop": 12,
+    }
+  }
+>
+  <MemberHeader
+    person={
+      Object {
+        "id": 1,
+      }
+    }
+  />
+  <MemberBio
+    person={
+      Object {
+        "id": 1,
+      }
+    }
+  />
+  <MemberSkills
+    person={
+      Object {
+        "id": 1,
+      }
+    }
+  />
+  <MemberCommunities
+    goToCommunity={[Function]}
+    person={
+      Object {
+        "id": 1,
+      }
+    }
+  />
+</ScrollViewMock>
+`;
+
+exports[`MemberSkills matches the last snapshot 1`] = `
+<View>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    disabled={false}
+    ellipsizeMode="tail"
+  >
+    My Skills
+  </Text>
+  <View>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+    >
+      RUN
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+    >
+      ALL
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+    >
+      DAY
+    </Text>
+  </View>
+</View>
+`;
