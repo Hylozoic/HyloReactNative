@@ -16,3 +16,28 @@ it('renders correctly with all=true, and no community or user', () => {
 
   expect(actual).toMatchSnapshot()
 })
+
+it('renders correctly when showCommunity is true', () => {
+  const creator = {
+    name: 'Zeus',
+    tagline: 'Go!',
+    avatarUrl: 'foo.png'
+  }
+  const communities = [
+    {
+      id: 1,
+      name: 'Olympus'
+    }
+  ]
+  const renderer = new ReactShallowRenderer()
+  renderer.render(<PostHeader
+    creator={creator}
+    communities={communities}
+    showCommunity
+    deletePost={() => {}}
+    editPost={() => {}}
+    date={new Date(new Date().getTime() - 60000 * 10)} />)
+  const actual = renderer.getRenderOutput()
+
+  expect(actual).toMatchSnapshot()
+})
