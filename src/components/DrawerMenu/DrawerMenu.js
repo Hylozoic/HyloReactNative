@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { Image, ListView, Text, TouchableOpacity, View } from 'react-native'
 import { get, isEmpty } from 'lodash/fp'
 import Icon from '../Icon'
+import AllFeedsIcon from '../AllFeedsIcon'
 import styles from './DrawerMenu.styles'
 
 export default class DrawerMenu extends Component {
@@ -19,7 +20,9 @@ export default class DrawerMenu extends Component {
   componentDidUpdate (prevProps) {
     if (isEmpty(prevProps.memberships) && !isEmpty(this.props.memberships)) {
       this.setState({
-        memberships: this.dataSource.cloneWithRows(this.props.memberships)
+        memberships: this.dataSource.cloneWithRows(
+          [{community: {id: 'all', name: 'All Communities'}}]
+          .concat(this.props.memberships))
       })
     }
   }
@@ -82,9 +85,12 @@ function TextButton ({ text, onPress }) {
 }
 
 function CommunityRow ({ community, onPress }) {
+  const all = community.id === 'all'
   return <View style={styles.communityRow}>
     <TouchableOpacity onPress={onPress} style={styles.communityRowTouchable}>
-      <Image source={{uri: community.avatarUrl}} style={styles.communityAvatar} />
+      {all
+        ? <AllFeedsIcon style={styles.allFeedsIcon} />
+        : <Image source={{uri: community.avatarUrl}} style={styles.communityAvatar} />}
       <Text style={[styles.text, styles.communityRowText]} ellipsizeMode='tail'
         numberOfLines={1}>
         {community.name}
