@@ -1,0 +1,115 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ContentRow shows a Comment when itemType is comment 1`] = `
+<View>
+  <Comment
+    comment={
+      Object {
+        "id": 2,
+      }
+    }
+    displayPostTitle={true}
+  />
+</View>
+`;
+
+exports[`ContentRow shows a PostCard when itemType is post 1`] = `
+<View>
+  <PostCard
+    post={
+      Object {
+        "id": 2,
+      }
+    }
+  />
+</View>
+`;
+
+exports[`FeedTab matches the last snapshot 1`] = `
+<TouchableOpacity
+  activeOpacity={0.2}
+  focusedOpacity={0.7}
+  onPress={[Function]}
+>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    disabled={false}
+    ellipsizeMode="tail"
+  >
+    Posts
+  </Text>
+</TouchableOpacity>
+`;
+
+exports[`MemberProfile matches the last snapshot 1`] = `
+<View>
+  <FlatList
+    ListFooterComponent={
+      <View>
+        <Loading />
+      </View>
+    }
+    ListHeaderComponent={
+      <View>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          disabled={false}
+          ellipsizeMode="tail"
+        >
+          header
+        </Text>
+        <View>
+          <FeedTab
+            chosen={false}
+            onPress={[Function]}
+            option="Posts"
+          />
+          <FeedTab
+            chosen={true}
+            onPress={[Function]}
+            option="Comments"
+          />
+          <FeedTab
+            chosen={false}
+            onPress={[Function]}
+            option="Upvotes"
+          />
+        </View>
+      </View>
+    }
+    contentContainerStyle={
+      Object {
+        "backgroundColor": "white",
+      }
+    }
+    data={
+      Array [
+        Object {
+          "id": 1,
+        },
+        Object {
+          "id": 2,
+        },
+        Object {
+          "id": 3,
+        },
+      ]
+    }
+    disableVirtualization={false}
+    horizontal={false}
+    initialNumToRender={10}
+    keyExtractor={[Function]}
+    maxToRenderPerBatch={10}
+    numColumns={1}
+    onEndReached={[Function]}
+    onEndReachedThreshold={2}
+    renderItem={[Function]}
+    renderScrollComponent={[Function]}
+    scrollEventThrottle={50}
+    updateCellsBatchingPeriod={50}
+    windowSize={21}
+  />
+</View>
+`;

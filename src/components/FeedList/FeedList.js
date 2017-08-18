@@ -6,6 +6,8 @@ import Loading from '../Loading'
 import Icon from '../Icon'
 import { find, get, isEmpty } from 'lodash/fp'
 
+import ImagePicker from '../ImagePicker'
+
 export default class FeedList extends Component {
   fetchOrShowCached () {
     const { hasMore, posts, fetchPosts } = this.props
@@ -49,8 +51,11 @@ export default class FeedList extends Component {
         setSort={setSort}
         pending={pending}
         />
-      {pending && <Loading />}
     </View>
+
+    const listFooterComponent = pending
+      ? <Loading style={styles.loading} />
+      : null
 
     return <View style={styles.container}>
       <FlatList
@@ -65,7 +70,7 @@ export default class FeedList extends Component {
         keyExtractor={(item, index) => item.id}
         onEndReached={fetchMorePosts}
         ListHeaderComponent={listHeaderComponent}
-        />
+        ListFooterComponent={listFooterComponent} />
     </View>
   }
 }

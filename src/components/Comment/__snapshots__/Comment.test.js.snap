@@ -6,22 +6,81 @@ exports[`renders correctly 1`] = `
     avatarUrl="foo.png"
   />
   <View>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      disabled={false}
-      ellipsizeMode="tail"
-    >
-      Ishamel
-    </Text>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      disabled={false}
-      ellipsizeMode="tail"
-    >
-      3 hours ago
-    </Text>
+    <View>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        disabled={false}
+        ellipsizeMode="tail"
+      >
+        Ishamel
+      </Text>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        disabled={false}
+        ellipsizeMode="tail"
+      />
+    </View>
+    <HtmlView
+      RootComponent={[Function]}
+      addLineBreaks={true}
+      onError={[Function]}
+      onLinkPress={[Function]}
+      stylesheet={
+        Object {
+          "a": Object {
+            "color": "#0DC39F",
+          },
+        }
+      }
+      textComponentProps={
+        Object {
+          "style": Object {
+            "color": "#5D757A",
+            "fontFamily": "Circular-Book",
+            "fontSize": 14,
+          },
+        }
+      }
+      value="<p>tick followed tock followed tick followed tock</p>"
+    />
+  </View>
+</View>
+`;
+
+exports[`shows the post title when displayPostTitle is true 1`] = `
+<View>
+  <Avatar
+    avatarUrl="foo.png"
+  />
+  <View>
+    <View>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        disabled={false}
+        ellipsizeMode="tail"
+      >
+        Ishamel
+      </Text>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        disabled={false}
+        ellipsizeMode="tail"
+      />
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        disabled={false}
+        ellipsizeMode="tail"
+      >
+        on "
+        What's good? A long enough post title to...
+        "
+      </Text>
+    </View>
     <HtmlView
       RootComponent={[Function]}
       addLineBreaks={true}

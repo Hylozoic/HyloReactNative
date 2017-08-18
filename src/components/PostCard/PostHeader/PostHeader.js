@@ -1,14 +1,14 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, TouchableOpacity } from 'react-native'
 import Avatar from '../../Avatar'
 import Icon from '../../Icon'
 import { rhino30, rhino50 } from '../../../style/colors'
 import { humanDate } from 'hylo-utils/text'
 import PopupMenuButton from '../../PopupMenuButton'
-import { filter } from 'lodash/fp'
+import { filter, isEmpty } from 'lodash/fp'
 
 export default function PostHeader ({
-  creator: { avatarUrl, name, tagline },
+  creator: { avatarUrl, name, tagline, id },
   date,
   type,
   communities,
@@ -16,17 +16,22 @@ export default function PostHeader ({
   slug,
   showCommunity,
   editPost,
-  deletePost
+  deletePost,
+  showMember
 }) {
   // TODO: person name and avatar should link to={personUrl(creator.id, slug)}
 
   return <View style={styles.container}>
     <View style={styles.avatarSpacing}>
-      <Avatar avatarUrl={avatarUrl} />
+      <TouchableOpacity onPress={() => showMember(id)}>
+        <Avatar avatarUrl={avatarUrl} />
+      </TouchableOpacity>
     </View>
     <View style={styles.meta}>
-      <Text style={styles.username}>{name}</Text>
-      {!!tagline && <Text style={styles.metaText}>{tagline}</Text>}
+      <TouchableOpacity onPress={() => showMember(id)}>
+        <Text style={styles.username}>{name}</Text>
+        {!!tagline && <Text style={styles.metaText}>{tagline}</Text>}
+      </TouchableOpacity>
       <Text style={styles.metaText}>{humanDate(date)}</Text>
     </View>
     <View style={styles.upperRight}>
@@ -41,6 +46,9 @@ function PostMenu ({ deletePost, editPost }) {
     ['Delete this post', deletePost],
     ['Edit this post', editPost]
   ])
+
+  if (isEmpty(actions)) return null
+
   const onSelect = index => actions[index][1]()
   const destructiveButtonIndex = actions[0][0] === 'Delete this post' ? 0 : -1
 

@@ -154,6 +154,7 @@ dependencies {
     compile "com.facebook.react:react-native:+"
     // compile 'com.facebook.android:facebook-android-sdk:[4.+)'
     compile 'com.facebook.android:facebook-android-sdk:[4.22.1)'
+    compile project(':react-native-image-picker')
 }
 
 // Run this once to be able to run the application with BUCK
