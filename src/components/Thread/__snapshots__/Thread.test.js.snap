@@ -52,12 +52,10 @@ exports[`matches the last snapshot 1`] = `
       windowSize={21}
     />
     <_class
-      avatarUrl="https://wombat.org"
-      blurOnSubmit={true}
+      blurOnSubmit={false}
       multiline={true}
-      onSubmitEditing={[Function]}
+      onSubmit={[Function]}
       placeholder="Write something..."
-      scrollParentToEnd={undefined}
     />
   </View>
 </KeyboardAvoidingView>
