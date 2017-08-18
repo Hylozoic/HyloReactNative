@@ -9,16 +9,16 @@ export const HOST = __DEV__
   : API_HOST
 
 export default function fetchJSON (path, params, options = {}) {
-  const { host, method, cookie } = options
+  const { host, method } = options
   const url = (host || HOST) + path
   return fetch(url, {
     method: method || 'get',
     headers: {
       'Accept': 'application/json',
-      'Content-Type': 'application/json',
-      'Cookie': cookie
+      'Content-Type': 'application/json'
     },
-    body: JSON.stringify(params)
+    body: JSON.stringify(params),
+    withCredentials: true
   })
   .then(resp => {
     let { status, statusText, url } = resp
