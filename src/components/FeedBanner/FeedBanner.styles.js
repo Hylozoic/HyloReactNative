@@ -1,4 +1,4 @@
-import { capeCod40, capeCod10 } from '../../style/colors'
+import { capeCod40, capeCod10, rhino } from '../../style/colors'
 import { isIOS } from 'util/platform'
 
 const postPromptShape = {
@@ -28,6 +28,16 @@ export default {
     marginLeft: 16,
     marginRight: 16,
     top: 75
+  },
+  allLogo: {
+    width: 40,
+    height: 40,
+    marginRight: 20,
+    position: 'relative',
+    top: -5
+  },
+  allName: {
+    color: rhino
   },
   name: {
     fontSize: 24,
