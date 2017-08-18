@@ -44,6 +44,9 @@ export default {
     lineHeight: 24,
     textAlign: 'center'
   },
+  communitiesContainer: {
+    paddingBottom: 15
+  },
   communityRow: {
     flexDirection: 'row',
     marginBottom: 7
