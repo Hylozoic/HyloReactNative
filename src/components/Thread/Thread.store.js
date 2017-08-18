@@ -81,7 +81,6 @@ export function createMessage (messageThreadId, text) {
       }
     },
     meta: {
-      extractModel: 'Message',
       messageThreadId,
       optimistic: true,
       tempId: uniqueId(`messageThread${messageThreadId}_`),
