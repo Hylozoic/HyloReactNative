@@ -6,6 +6,9 @@ import styles from './MemberProfile.styles'
 import MemberFeed from './MemberFeed'
 
 export default class MemberProfile extends React.Component {
+  static navigationOptions = () => ({
+    headerTitle: 'Member'
+  })
 
   componentDidMount () {
     this.props.fetchPerson()

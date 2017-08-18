@@ -8,6 +8,10 @@ import styles from './MemberDetails.styles'
 import { isEmpty } from 'lodash/fp'
 
 export default class MemberDetails extends React.Component {
+  static navigationOptions = () => ({
+    headerTitle: 'About This Member'
+  })
+
   componentDidMount () {
     this.props.fetchPerson()
   }
@@ -63,6 +67,7 @@ export function MemberCommunities ({ person: { memberships }, goToCommunity }) {
 
 export function CommunityRow ({ membership, goToCommunity }) {
   const { community, hasModeratorRole } = membership
+
   const formatCount = count => {
     if (count < 1000) return `${count}`
     return `${Number(count / 1000).toFixed(1)}k`
