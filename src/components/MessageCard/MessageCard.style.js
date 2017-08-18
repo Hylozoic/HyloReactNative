@@ -10,7 +10,8 @@ export default StyleSheet.create({
   },
   container: {
     flexDirection: 'row',
-    padding: 10,
+    paddingVertical: 5,
+    paddingHorizontal: 10,
     backgroundColor: 'white',
 
     // Prevents the card from appearing upside down in the inverted FlatList

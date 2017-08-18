@@ -27,7 +27,6 @@ export default {
     marginLeft: 5
   },
   sendButton: {
-    fontSize: 36,
-    marginRight: 10
+    fontSize: 36
   }
 }

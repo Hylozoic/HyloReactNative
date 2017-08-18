@@ -4,14 +4,13 @@ import { bool, func, string } from 'prop-types'
 
 import Icon from '../Icon'
 import { jade, rhino30 } from '../../style/colors'
-import styles from './AvatarInput.style'
+import styles from './MessageInput.style'
 
 const MIN_INPUT_HEIGHT = 22
 const MAX_INPUT_HEIGHT = 100
 
 export default class extends React.PureComponent {
   static propTypes = {
-    avatarUrl: string,
     blurOnSubmit: bool,
     multiline: bool,
     onSubmit: func,
@@ -28,11 +27,11 @@ export default class extends React.PureComponent {
   }
 
   clear = () => {
-    this.textInput.clear()
     this.setState({
       text: '',
       submittable: false
     })
+    this.textInput.clear()
   }
 
   handleChange = ({ nativeEvent: { text } }) => {
@@ -61,7 +60,6 @@ export default class extends React.PureComponent {
     const inputProps = {
       // Can be overridden by setting on component
       placeholderTextColor: rhino30,
-      returnKeyLabel: 'send',
 
       ...this.props,
 

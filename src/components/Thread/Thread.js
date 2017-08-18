@@ -4,7 +4,7 @@ import { any, arrayOf, func, shape, string } from 'prop-types'
 import { throttle, debounce } from 'lodash'
 import { get } from 'lodash/fp'
 import { isIOS } from 'util/platform'
-import AvatarInput from '../AvatarInput'
+import MessageInput from '../MessageInput'
 import Header from './Header'
 import Loading from '../Loading'
 import MessageCard from '../MessageCard'
@@ -147,8 +147,7 @@ export default class Thread extends React.Component {
         ref={flatList => this.messageList = flatList}
         refreshing={!!pending}
         renderItem={this.renderItem} />
-      <AvatarInput
-        avatarUrl={currentUser.avatarUrl}
+      <MessageInput
         blurOnSubmit={false}
         multiline
         onSubmit={this.createMessage}
