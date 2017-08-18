@@ -30,6 +30,7 @@ export function fetchPerson (id) {
               id
               name
               slug
+              memberCount
             }
           }
           skills (first: 100) {
@@ -52,5 +53,13 @@ export const getPerson = ormCreateSelector(
   orm,
   state => state.orm,
   (_, { id }) => id,
-  (session, id) => session.Person.safeGet({id})
+  (session, id) => {
+    const person = session.Person.safeGet({id})
+    if (!person) return null
+    return {
+      ...person.ref,
+      skills: person.skills.toModelArray(),
+      memberships: person.memberships.toModelArray()
+    }
+  }
 )
