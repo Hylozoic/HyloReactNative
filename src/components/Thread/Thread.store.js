@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect'
 import { createSelector as ormCreateSelector } from 'redux-orm'
 import { get, pick, uniqueId } from 'lodash/fp'
-import { humanDate, sanitize } from 'hylo-utils/text'
+import { humanDate, sanitize, threadNames } from 'hylo-utils/text'
 
 import orm from '../../store/models'
 import { makeGetQueryResults } from '../../store/reducers/queryResults'
@@ -125,12 +125,6 @@ function refineThread (session, id) {
   return null
 }
 
-// TODO: replace with hylo-utils/text/threadNames
-function threadNames (names) {
-  if (names.length < 3) return names.join(' & ')
-  return `${names[0]} & ${names.length - 1} others`
-}
-
 const firstName = person => person.name.split(' ')[0]
 
 export const getThread = ormCreateSelector(
@@ -138,12 +132,6 @@ export const getThread = ormCreateSelector(
   state => state.orm,
   (_, { navigation }) => navigation.state.params.id,
   refineThread
-)
-
-export const getMeForThread = ormCreateSelector(
-  orm,
-  state => state.orm,
-  session => pick(['id', 'avatarUrl'], session.Me.first().ref)
 )
 
 const getMessageResults = makeGetQueryResults(FETCH_MESSAGES)
