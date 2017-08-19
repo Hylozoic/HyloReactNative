@@ -19,7 +19,6 @@ describe('getThread', () => {
 
   beforeEach(() => {
     session = orm.mutableSession(orm.getEmptyState())
-    session.Me.create({ id: '55' })
     session.MessageThread.create({ id: '1' })
     session.Message.create({ id: '4', messageThread: '1', creator: '8' })
     session.Message.create({ id: '10', messageThread: '1', creator: '8' })
