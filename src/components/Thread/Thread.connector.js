@@ -9,7 +9,7 @@ import {
   getThread,
   updateThreadReadTime
 } from './Thread.store'
-import getCurrentUserId from '../store/selectors/getCurrentUserId'
+import getCurrentUserId from '../../store/selectors/getCurrentUserId'
 
 function mapStateToProps (state, props) {
   const { id, messages, title } = getThread(state, props) || {}
