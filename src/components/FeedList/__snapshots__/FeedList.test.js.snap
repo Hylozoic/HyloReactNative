@@ -112,11 +112,13 @@ exports[`PostRow renders correctly 1`] = `
     <View>
       <PostCard
         editPost={[Function]}
+        goToCommunity={[Function]}
         post={
           Object {
             "id": 1,
           }
         }
+        showCommunity={undefined}
         showMember={undefined}
         showTopic={undefined}
       />

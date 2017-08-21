@@ -50,7 +50,8 @@ export default class PostDetails extends React.Component {
       showMember,
       showTopic,
       newComment,
-      commentEdit
+      commentEdit,
+      goToCommunity
     } = this.props
 
     if (!post) return <Loading />
@@ -67,7 +68,8 @@ export default class PostDetails extends React.Component {
         communities={post.communities}
         slug={slug}
         id={post.id}
-        showMember={showMember} />
+        showMember={showMember}
+        goToCommunity={goToCommunity} />
       <View style={post.imageUrl ? styles.imageMargin : {}}>
         <SpaceFillingImage imageUrl={post.imageUrl} />
       </View>

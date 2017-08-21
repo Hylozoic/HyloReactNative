@@ -2,14 +2,13 @@ import React from 'react'
 import { Image, View, Text, TouchableOpacity } from 'react-native'
 import styles from './FeedBanner.styles'
 import Avatar from '../Avatar'
-import { DEFAULT_BANNER } from '../../store/models/Community'
+const allCommunitiesLogo = require('../../assets/All_Communities.png')
 
 export default function FeedBanner ({ all, community, newPost, currentUser }) {
   let bannerUrl, name
 
   if (all) {
     name = 'All Communities'
-    bannerUrl = DEFAULT_BANNER
   } else if (!community) {
     return null
   } else {
@@ -19,7 +18,8 @@ export default function FeedBanner ({ all, community, newPost, currentUser }) {
   return <View style={styles.container}>
     <Image source={{uri: bannerUrl}} style={styles.image} />
     <View style={styles.titleRow}>
-      <Text style={styles.name}>{name}</Text>
+      {all && <Image source={allCommunitiesLogo} style={styles.allLogo} />}
+      <Text style={[styles.name, all && styles.allName]}>{name}</Text>
     </View>
     <PostPrompt currentUser={currentUser} newPost={newPost} />
     {!!currentUser && <View style={styles.promptShadow} />}

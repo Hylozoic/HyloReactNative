@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 import getMe from '../../store/selectors/getMe'
 import getCommunity from '../../store/selectors/getCommunity'
+import makeGoToCommunity from '../../store/actions/makeGoToCommunity'
 import { get } from 'lodash/fp'
 
 export function mapStateToProps (state, props) {
@@ -19,7 +20,8 @@ export function mapDispatchToProps (dispatch, { navigation }) {
     showPost: id => navigation.navigate('PostDetails', {id}),
     editPost: id => navigation.navigate('PostEditor', {id}),
     showMember: id => navigation.navigate('MemberProfile', {id}),
-    showTopic: topicName => navigation.navigate('Feed', {topicName})
+    showTopic: topicName => navigation.navigate('Feed', {topicName}),
+    goToCommunity: makeGoToCommunity(dispatch, navigation)
   }
 }
 

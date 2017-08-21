@@ -9,6 +9,7 @@ import {
 } from './FeedList.store'
 import { ALL_COMMUNITIES_ID } from '../../store/models/Community'
 import { fetchPosts, FETCH_POSTS } from '../../store/actions/fetchPosts'
+import makeGoToCommunity from '../../store/actions/makeGoToCommunity'
 import { get, omit } from 'lodash/fp'
 
 function makeFetchOpts (props) {

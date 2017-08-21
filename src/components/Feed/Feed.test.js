@@ -18,7 +18,8 @@ it('renders correctly', () => {
     currentUser={currentUser}
     newPost={newPost}
     showPost={() => {}}
-    editPost={() => {}} />)
+    editPost={() => {}}
+    goToCommunity={() => {}} />)
   const actual = renderer.getRenderOutput()
 
   expect(actual).toMatchSnapshot()

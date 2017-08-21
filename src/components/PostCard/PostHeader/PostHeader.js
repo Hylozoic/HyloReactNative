@@ -2,7 +2,7 @@ import React from 'react'
 import { View, Text, TouchableOpacity } from 'react-native'
 import Avatar from '../../Avatar'
 import Icon from '../../Icon'
-import { rhino30, rhino50 } from '../../../style/colors'
+import { rhino30, rhino50, caribbeanGreen } from 'style/colors'
 import { humanDate } from 'hylo-utils/text'
 import PopupMenuButton from '../../PopupMenuButton'
 import { filter, isEmpty } from 'lodash/fp'
@@ -17,9 +17,18 @@ export default function PostHeader ({
   showCommunity,
   editPost,
   deletePost,
-  showMember
+  showMember,
+  goToCommunity
 }) {
-  // TODO: person name and avatar should link to={personUrl(creator.id, slug)}
+  let context
+
+  if (showCommunity) {
+    const community = communities[0]
+    context = {
+      label: community.name,
+      onPress: () => goToCommunity(community.id)
+    }
+  }
 
   return <View style={styles.container}>
     <View style={styles.avatarSpacing}>
@@ -32,7 +41,14 @@ export default function PostHeader ({
         <Text style={styles.username}>{name}</Text>
         {!!tagline && <Text style={styles.metaText}>{tagline}</Text>}
       </TouchableOpacity>
-      <Text style={styles.metaText}>{humanDate(date)}</Text>
+      <View style={styles.dateRow}>
+        <Text style={styles.metaText}>{humanDate(date)}</Text>
+        {!!context && <Text style={styles.spacer}>•</Text>}
+        {!!context && <TouchableOpacity onPress={context.onPress}>
+          <Text style={styles.contextLabel}>{context.label}</Text>
+        </TouchableOpacity>}
+      </View>
+
     </View>
     <View style={styles.upperRight}>
       {type && <PostLabel type={type} />}
@@ -88,10 +104,24 @@ const styles = {
     color: '#363D3C',
     fontFamily: 'Circular-Bold'
   },
+  dateRow: {
+    flexDirection: 'row'
+  },
   metaText: {
     fontSize: 12,
     color: rhino30,
     fontFamily: 'Circular-Book'
+  },
+  spacer: {
+    fontSize: 12,
+    color: rhino30,
+    fontFamily: 'Circular-Book',
+    marginHorizontal: 5
+  },
+  contextLabel: {
+    fontSize: 12,
+    fontFamily: 'Circular-Book',
+    color: caribbeanGreen
   },
   upperRight: {
     paddingTop: 19,

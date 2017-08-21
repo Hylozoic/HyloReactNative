@@ -9,6 +9,7 @@ exports[`renders correctly 1`] = `
       }
     }
     editPost={[Function]}
+    goToCommunity={[Function]}
     header={
       <FeedBanner
         all={false}
@@ -25,6 +26,7 @@ exports[`renders correctly 1`] = `
         newPost={[Function]}
       />
     }
+    showCommunities={false}
     showMember={undefined}
     showPost={[Function]}
     showTopic={undefined}

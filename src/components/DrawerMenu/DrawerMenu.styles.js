@@ -84,6 +84,10 @@ export default {
     flexDirection: 'row',
     alignItems: 'center'
   },
+  allFeedsIcon: {
+    marginLeft: 5,
+    marginRight: 11
+  },
   communityAvatar: {
     height: 30,
     width: 30,

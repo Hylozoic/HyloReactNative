@@ -55,7 +55,8 @@ describe('PostRow', () => {
     const renderer = new ReactShallowRenderer()
     renderer.render(<PostRow
       post={post}
-      navigate={() => {}} />)
+      navigate={() => {}}
+      goToCommunity={() => {}} />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
