@@ -1,12 +1,16 @@
 import React from 'react'
-import { View, FlatList, Text, TouchableOpacity, TextInput, Image } from 'react-native';
+import {
+  View, FlatList, Text, TouchableOpacity, TextInput, Image
+} from 'react-native'
 import Header from '../Header'
 import Avatar from '../../Avatar'
 import PopupMenuButton from '../../PopupMenuButton'
 import Icon from '../../Icon'
 import { DEFAULT_BANNER } from '../../../store/models/Community'
 import styles from './Members.styles'
-import { some, values, keys, isUndefined, isEmpty, debounce, size } from 'lodash/fp'
+import {
+  some, values, keys, isUndefined, isEmpty, debounce, size
+} from 'lodash/fp'
 import { focus } from '../../../util/textInput'
 const title = 'Members'
 
@@ -26,11 +30,11 @@ export default class Members extends React.Component {
     if (!prevProps) return
 
     if (some(key => this.props[key] !== prevProps[key], [
-        'slug',
-        'networkSlug',
-        'sortBy',
-        'search',
-      ])) {
+      'slug',
+      'networkSlug',
+      'sortBy',
+      'search'
+    ])) {
       this.fetchOrShowCached()
     }
   }
@@ -61,11 +65,12 @@ export default class Members extends React.Component {
       <Banner community={community} all={!community} />
       <View style={styles.listControls}>
         <View style={styles.searchWrapper}>
-          <Icon style={styles.searchIcon} name='Search' size={30} onPress={() => focus(this.searchRef)}/>
+          <Icon style={styles.searchIcon} name='Search' size={30}
+            onPress={() => focus(this.searchRef)} />
           <TextInput placeholder='Search Members'
-                     ref={ref => this.searchRef = ref}
-                     onChangeText={onSearch}
-                     underlineColorAndroid='transparent' style={styles.searchInput} />
+            ref={ref => { this.searchRef = ref }}
+            onChangeText={onSearch}
+            underlineColorAndroid='transparent' style={styles.searchInput} />
         </View>
 
         <PopupMenuButton actions={values(sortKeys)} onSelect={onSelect}>
@@ -83,7 +88,7 @@ export default class Members extends React.Component {
         numColumns='2'
         renderItem={({item}) => {
           if (item.name) {
-            return <Member member={item} showMember={this.props.showMember}/>
+            return <Member member={item} showMember={this.props.showMember} />
           } else {
             return <View style={styles.cell} />
           }
@@ -98,12 +103,13 @@ export default class Members extends React.Component {
 
 function Member ({ member, showMember }) {
   return <TouchableOpacity onPress={() => showMember(member.id)}
-                           style={[styles.cell, styles.memberCell]} >
+    style={[styles.cell, styles.memberCell]} >
     <View style={styles.avatarSpacing}>
       <Avatar avatarUrl={member.avatarUrl} dimension={72} />
     </View>
     <Text style={styles.memberName}>{member.name}</Text>
-    {member.location && <Text style={styles.memberLocation}>{member.location}</Text>}
+    {!!member.location &&
+      <Text style={styles.memberLocation}>{member.location}</Text>}
     <Text style={styles.memberBio}>{member.bio}</Text>
   </TouchableOpacity>
 }
