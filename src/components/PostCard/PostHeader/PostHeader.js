@@ -17,7 +17,8 @@ export default function PostHeader ({
   showCommunity,
   editPost,
   deletePost,
-  showMember
+  showMember,
+  goToCommunity
 }) {
   let context
 
@@ -25,7 +26,7 @@ export default function PostHeader ({
     const community = communities[0]
     context = {
       label: community.name,
-      onPress: () => console.log('go to community', community.id)
+      onPress: () => goToCommunity(community.id)
     }
   }
 

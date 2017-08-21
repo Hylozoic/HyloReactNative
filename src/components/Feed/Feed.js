@@ -13,7 +13,8 @@ export default class Feed extends Component {
       showPost,
       editPost,
       showMember,
-      showTopic
+      showTopic,
+      goToCommunity
     } = this.props
 
     return <View style={styles.container}>
@@ -24,6 +25,7 @@ export default class Feed extends Component {
         showMember={showMember}
         showTopic={showTopic}
         showCommunities={!community}
+        goToCommunity={goToCommunity}
         header={
           <FeedBanner community={community} currentUser={currentUser}
             all={!community} newPost={newPost} />

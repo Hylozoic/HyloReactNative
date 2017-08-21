@@ -38,7 +38,8 @@ export default class FeedList extends Component {
       editPost,
       showMember,
       showTopic,
-      showCommunities
+      showCommunities,
+      goToCommunity
     } = this.props
 
     const listHeaderComponent = <View>
@@ -66,7 +67,8 @@ export default class FeedList extends Component {
             editPost={editPost}
             showMember={showMember}
             showTopic={showTopic}
-            showCommunity={showCommunities} />}
+            showCommunity={showCommunities}
+            goToCommunity={goToCommunity} />}
         keyExtractor={(item, index) => item.id}
         onEndReached={fetchMorePosts}
         ListHeaderComponent={listHeaderComponent}
@@ -108,7 +110,9 @@ export function ListControl ({ selected, options, onChange }) {
   </TouchableOpacity>
 }
 
-export function PostRow ({ post, showPost, editPost, showMember, showTopic, showCommunity }) {
+export function PostRow ({
+  post, showPost, editPost, showMember, showTopic, showCommunity, goToCommunity
+}) {
   return <View style={styles.postRow}>
     <TouchableWithoutFeedback onPress={() => showPost(post.id)}>
       <View>
@@ -117,7 +121,8 @@ export function PostRow ({ post, showPost, editPost, showMember, showTopic, show
           editPost={() => editPost(post.id)}
           showMember={showMember}
           showTopic={showTopic}
-          showCommunity={showCommunity} />
+          showCommunity={showCommunity}
+          goToCommunity={goToCommunity} />
       </View>
     </TouchableWithoutFeedback>
   </View>

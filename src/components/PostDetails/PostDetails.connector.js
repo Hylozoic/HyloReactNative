@@ -4,6 +4,7 @@ import getMe from '../../store/selectors/getMe'
 import { getCommentEdits } from './CommentEditor/CommentEditor.store'
 import getPost from '../../store/selectors/getPost'
 import { get } from 'lodash/fp'
+import makeGoToCommunity from '../../store/actions/makeGoToCommunity'
 
 function getPostId (state, props) {
   return props.navigation.state.params.id
@@ -37,7 +38,8 @@ function mapDispatchToProps (dispatch, props) {
         postId: id,
         communityId
       })
-    }
+    },
+    goToCommunity: makeGoToCommunity(dispatch, props.navigate)
   }
 }
 

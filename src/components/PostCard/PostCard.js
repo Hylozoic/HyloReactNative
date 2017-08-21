@@ -43,7 +43,7 @@ export default class PostCard extends React.Component {
 
   render () {
     const {
-      post, editPost, showCommunity, currentUser, showMember, showTopic
+      post, editPost, showCommunity, currentUser, showMember, showTopic, goToCommunity
     } = this.props
     const slug = get('0.slug', post.communities)
 
@@ -56,7 +56,8 @@ export default class PostCard extends React.Component {
         communities={post.communities}
         slug={slug}
         id={post.id}
-        showMember={showMember} />
+        showMember={showMember}
+        goToCommunity={goToCommunity} />
       <View style={post.imageUrl ? styles.imageMargin : {}}>
         <SpaceFillingImage imageUrl={post.imageUrl} />
       </View>
