@@ -1,21 +1,20 @@
 import { connect } from 'react-redux'
 import { sanitize } from 'hylo-utils/text'
-import { pick } from 'lodash/fp'
 
 import {
   createMessage,
   fetchMessages,
   FETCH_MESSAGES,
   getHasMoreMessages,
-  getMeForThread,
   getThread,
   updateThreadReadTime
 } from './Thread.store'
+import getCurrentUserId from '../store/selectors/getCurrentUserId'
 
 function mapStateToProps (state, props) {
   const { id, messages, title } = getThread(state, props) || {}
   return {
-    currentUser: getMeForThread(state),
+    currentUser: getCurrentUserId(state),
     hasMore: getHasMoreMessages(state, { id }),
     messages,
     pending: state.pending[FETCH_MESSAGES],
