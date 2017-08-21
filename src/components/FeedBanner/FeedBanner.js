@@ -2,7 +2,7 @@ import React from 'react'
 import { Image, View, Text, TouchableOpacity } from 'react-native'
 import styles from './FeedBanner.styles'
 import Avatar from '../Avatar'
-const hyloMerkaba = require('../../assets/hylo-merkaba.png')
+const allCommunitiesLogo = require('../../assets/All_Communities.png')
 
 export default function FeedBanner ({ all, community, newPost, currentUser }) {
   let bannerUrl, name
@@ -18,7 +18,7 @@ export default function FeedBanner ({ all, community, newPost, currentUser }) {
   return <View style={styles.container}>
     <Image source={{uri: bannerUrl}} style={styles.image} />
     <View style={styles.titleRow}>
-      {all && <Image source={hyloMerkaba} style={styles.allLogo} />}
+      {all && <Image source={allCommunitiesLogo} style={styles.allLogo} />}
       <Text style={[styles.name, all && styles.allName]}>{name}</Text>
     </View>
     <PostPrompt currentUser={currentUser} newPost={newPost} />
