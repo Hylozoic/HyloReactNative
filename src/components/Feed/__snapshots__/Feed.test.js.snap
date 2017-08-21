@@ -9,6 +9,7 @@ exports[`renders correctly 1`] = `
       }
     }
     editPost={[Function]}
+    goToCommunity={[Function]}
     header={
       <FeedBanner
         all={false}
