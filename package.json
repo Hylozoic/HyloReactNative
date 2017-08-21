@@ -58,7 +58,11 @@
       "react-native"
     ],
     "plugins": [
-      "inline-dotenv",
+      [
+        "inline-dotenv", {
+          "silent": true
+        }
+      ],
       "transform-inline-environment-variables"
     ],
     "env": {
