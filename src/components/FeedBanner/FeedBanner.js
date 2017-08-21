@@ -16,7 +16,7 @@ export default function FeedBanner ({ all, community, newPost, currentUser }) {
   }
 
   return <View style={styles.container}>
-    <Image source={{uri: bannerUrl}} style={[styles.image, all && styles.allBanner]} />
+    <Image source={{uri: bannerUrl}} style={styles.image} />
     <View style={styles.titleRow}>
       {all && <Image source={hyloMerkaba} style={styles.allLogo} />}
       <Text style={[styles.name, all && styles.allName]}>{name}</Text>
