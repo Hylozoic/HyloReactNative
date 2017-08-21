@@ -2,9 +2,6 @@ import React, { Component } from 'react'
 import { TouchableOpacity, View } from 'react-native'
 import Icon from '../Icon'
 import RNImagePicker from 'react-native-image-picker'
-import {
-  AWS_S3_BUCKET, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_S3_REGION
-} from 'react-native-dotenv'
 import { RNS3 } from 'react-native-aws3'
 import { get } from 'lodash/fp'
 
@@ -65,10 +62,10 @@ export default class ImagePicker extends Component {
 
         const awsOptions = {
           keyPrefix: path,
-          bucket: AWS_S3_BUCKET,
-          region: AWS_S3_REGION,
-          accessKey: AWS_ACCESS_KEY_ID,
-          secretKey: AWS_SECRET_ACCESS_KEY,
+          bucket: process.env.AWS_S3_BUCKET,
+          region: process.env.AWS_S3_REGION,
+          accessKey: process.env.AWS_ACCESS_KEY_ID,
+          secretKey: process.env.AWS_SECRET_ACCESS_KEY,
           successActionStatus: 201
         }
 
@@ -92,7 +89,7 @@ export default class ImagePicker extends Component {
 
     if (!children) {
       children = pending
-        ? <Icon name='Clock' style={styles.icon}/>
+        ? <Icon name='Clock' style={styles.icon} />
         : <Icon name='AddImage' style={styles.icon} />
     }
 

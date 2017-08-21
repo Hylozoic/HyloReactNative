@@ -1,12 +1,9 @@
-import {
-  API_HOST, IOS_EMULATOR_API_HOST, ANDROID_EMULATOR_API_HOST
-} from 'react-native-dotenv'
 import { setSessionCookie } from './session'
 import { isIOS } from 'util/platform'
 
 export const HOST = __DEV__
-  ? isIOS ? IOS_EMULATOR_API_HOST : ANDROID_EMULATOR_API_HOST
-  : API_HOST
+  ? isIOS ? process.env.IOS_EMULATOR_API_HOST : process.env.ANDROID_EMULATOR_API_HOST
+  : process.env.API_HOST
 
 export default function fetchJSON (path, params, options = {}) {
   const { host, method } = options

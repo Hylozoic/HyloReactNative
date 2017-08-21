@@ -1,5 +1,4 @@
 import React from 'react'
-import { IOS_GOOGLE_CLIENT_ID, WEB_GOOGLE_CLIENT_ID } from 'react-native-dotenv'
 import {
   View,
   TouchableOpacity,
@@ -13,8 +12,8 @@ import styles from './Login.styles'
 export default class GoogleLoginButton extends React.Component {
   componentDidMount () {
     GoogleSignin.configure({
-      iosClientId: IOS_GOOGLE_CLIENT_ID,
-      webClientId: WEB_GOOGLE_CLIENT_ID
+      iosClientId: process.env.IOS_GOOGLE_CLIENT_ID,
+      webClientId: process.env.WEB_GOOGLE_CLIENT_ID
     })
   }
 
