@@ -15,19 +15,21 @@ import { focus } from '../../../util/textInput'
 const title = 'Members'
 
 export default class Members extends React.Component {
-  static navigationOptions = ({navigation}) => (Header(navigation, title))
+  static navigationOptions = ({ navigation }) => Header(navigation, title)
 
   fetchOrShowCached () {
     const { hasMore, members, fetchMembers } = this.props
     if (isEmpty(members) && hasMore !== false) fetchMembers()
   }
 
-  componentDidMount () {
-    this.fetchOrShowCached()
-  }
-
   componentDidUpdate (prevProps) {
-    if (!prevProps) return
+    if (this.props.screenProps.currentTabName !== 'Members') {
+      return
+    }
+
+    if (!prevProps || prevProps.screenProps.currentTabName !== 'Members') {
+      return this.fetchOrShowCached()
+    }
 
     if (some(key => this.props[key] !== prevProps[key], [
       'slug',

@@ -22,9 +22,11 @@ import Thread from '../Thread'
 import ThreadList from '../ThreadList'
 import MemberDetails from '../MemberProfile/MemberDetails'
 import createLinkingAwareContainer from './createLinkingAwareContainer'
+import trackCurrentTab from './trackCurrentTab'
 import { isIOS, urlPrefix } from 'util/platform'
 
 // Tab Home Screens
+// If you change or add tabs you have to edit trackCurrentTab.js
 const tabs = {
   Home: {screen: Home, path: ''},
   Members: {screen: Members, path: 'people'},
@@ -74,7 +76,9 @@ const TabNavigatorWithBar = TabNavigator(
 )
 
 const drawerNavigatorRoutes = {
-  Home: { screen: createLinkingAwareContainer(TabNavigatorWithBar, urlPrefix) }
+  Home: {
+    screen: createLinkingAwareContainer(TabNavigatorWithBar, urlPrefix)
+  }
 }
 
 const drawerNavigatorConfig = {
@@ -105,4 +109,7 @@ const RootNavigator = StackNavigator(
   }
 )
 
-export default RootNavigator
+// trackCurrentTab must be on the top-level navigator, because it uses a prop
+// for listening to navigation change events that can only be assigned to a
+// top-level navigator
+export default trackCurrentTab(RootNavigator)

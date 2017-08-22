@@ -4,7 +4,7 @@ import { Linking } from 'react-native'
 export default function createLinkingAwareContainer (Comp, uriPrefix) {
   const router = Comp.router
   return class extends Component {
-    static router = router;
+    static router = router
 
     _urlToPathAndParams (url: string) {
       const params = {}
