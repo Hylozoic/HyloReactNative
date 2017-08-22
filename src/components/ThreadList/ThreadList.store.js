@@ -13,7 +13,7 @@ export const getThreads = makeQueryResultsModelSelector(
   thread => ({
     ...thread.ref,
     participants: thread.participants.toRefArray(),
-    messages: thread.messages.toRefArray()
+    messages: thread.messages.orderBy(m => -new Date(m.createdAt)).toRefArray()
   })
 )
 
