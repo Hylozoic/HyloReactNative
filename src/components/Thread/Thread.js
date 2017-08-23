@@ -18,10 +18,7 @@ const BOTTOM_THRESHOLD = 10
 export default class Thread extends React.Component {
   static propTypes = {
     createMessage: func.isRequired,
-    currentUser: shape({
-      id: any,
-      avatarUrl: string
-    }).isRequired,
+    currentUser: string.isRequired,
     fetchMessages: func.isRequired,
     messages: arrayOf(shape({
       id: any,
@@ -80,8 +77,9 @@ export default class Thread extends React.Component {
       if (deltaLength === 1
         && !this.atBottom()
         && get('creator.id', latest) !== currentUser.id) {
+        console.log('NEW MESSAGE')
         this.setState({
-          newMessages: this.state.newMesages + 1,
+          newMessages: this.state.newMessages + 1,
           notify: true
         })
         return
