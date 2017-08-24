@@ -21,6 +21,8 @@ import NewMessage from '../NewMessage'
 import Thread from '../Thread'
 import ThreadList from '../ThreadList'
 import MemberDetails from '../MemberProfile/MemberDetails'
+import Signup from '../Signup'
+import SignupFlow1 from '../SignupFlow1'
 import createLinkingAwareContainer from './createLinkingAwareContainer'
 import trackCurrentTab from './trackCurrentTab'
 import { isIOS, urlPrefix } from 'util/platform'
@@ -43,7 +45,9 @@ const screensInTabs = {
   MemberProfile: {screen: MemberProfile, path: 'people/:id'},
   MemberDetails: {screen: MemberDetails, path: 'people/:id/details'},
   CommentEditor: {screen: CommentEditor, path: 'comment/:postId/new'},
-  NewMessage: {screen: NewMessage}
+  NewMessage: {screen: NewMessage},
+  Signup: {screen: Signup, path: 'signup'},
+  SignupFlow1: {screen: SignupFlow1, path: 'signup/1'}
 }
 
 // Screens that work outside of tabs, Settings, Messages, etc.
