@@ -9,7 +9,7 @@ export default class Home extends React.Component {
   static navigationOptions = ({navigation}) => (Header(navigation, title))
 
   componentDidMount () {
-    // this.props.navigation.navigate('Signup')
+    this.props.navigation.navigate('SignupFlow1')
   }
 
   render () {
