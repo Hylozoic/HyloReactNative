@@ -9,29 +9,35 @@ import { AccessToken, LoginManager } from 'react-native-fbsdk'
 import Icon from '../Icon'
 import styles from './Login.styles'
 
+const permissions = ['public_profile', 'user_friends', 'email']
+
 export default class FbLoginButton extends React.Component {
+  constructor (props) {
+    super(props)
+    if (props.mocks) {
+      this.LoginManager = props.mocks.LoginManager
+      this.AccessToken = props.mocks.AccessToken
+    } else {
+      this.LoginManager = LoginManager
+      this.AccessToken = AccessToken
+    }
+  }
+
   handleResult = (error, result) => {
     const { onLoginFinished } = this.props
     if (error) {
       alert('Login failed with error: ' + result.error)
     } else {
-      AccessToken.getCurrentAccessToken()
+      return this.AccessToken.getCurrentAccessToken()
       .then(data => onLoginFinished(data.accessToken.toString()))
     }
   }
 
   signIn = () => {
-    LoginManager.logInWithReadPermissions(['public_profile', 'user_friends', 'email']).then(
-      function (result) {
-        if (result.isCancelled) {
-          alert('Login was cancelled')
-        } else {
-          this.handleResult()
-        }
-      },
-      function (error) {
-        alert('Login failed with error: ' + error)
-      }
+    return this.LoginManager.logInWithReadPermissions(permissions)
+    .then(
+      result => result.isCancelled || this.handleResult(null, result),
+      error => alert('Login failed with error: ' + error)
     )
   }
 
