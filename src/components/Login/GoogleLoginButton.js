@@ -21,8 +21,8 @@ export default class GoogleLoginButton extends React.Component {
     const { onLoginFinished } = this.props
     GoogleSignin.signIn()
     .then(user => onLoginFinished(user.accessToken))
-    .catch((err) => {
-      console.log('WRONG SIGNIN', err)
+    .catch(err => {
+      console.log('Google signin error:', err)
     })
   }
 
