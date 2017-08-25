@@ -5,7 +5,6 @@ exports[`renders FB login correctly 1`] = `
   contentContainerStyle={
     Object {
       "alignItems": "center",
-      "flex": 1,
       "justifyContent": "center",
     }
   }
@@ -22,16 +21,14 @@ exports[`renders FB login correctly 1`] = `
     Log in to Hylo
   </Text>
   <View>
-    <View>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        disabled={false}
-        ellipsizeMode="tail"
-      >
-        Your email address
-      </Text>
-    </View>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+    >
+      Your email address
+    </Text>
   </View>
   <View>
     <View>
@@ -49,16 +46,14 @@ exports[`renders FB login correctly 1`] = `
     </View>
   </View>
   <View>
-    <View>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        disabled={false}
-        ellipsizeMode="tail"
-      >
-        Password
-      </Text>
-    </View>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+    >
+      Password
+    </Text>
   </View>
   <View>
     <View>
@@ -127,7 +122,7 @@ exports[`renders FB login correctly 1`] = `
       disabled={false}
       ellipsizeMode="tail"
     >
-      Dont have an account? 
+      Don't have an account? 
     </Text>
     <TouchableOpacity
       activeOpacity={0.2}
@@ -147,47 +142,43 @@ exports[`renders FB login correctly 1`] = `
 `;
 
 exports[`renders FB login correctly 2`] = `
-<View>
-  <TouchableOpacity
-    activeOpacity={0.2}
-    focusedOpacity={0.7}
-    onPress={[Function]}
+<TouchableOpacity
+  activeOpacity={0.2}
+  focusedOpacity={0.7}
+  onPress={[Function]}
+>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    disabled={false}
+    ellipsizeMode="tail"
   >
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      disabled={false}
-      ellipsizeMode="tail"
-    >
-      <Icon
-        name="Facebook"
-        size={12}
-      />
-        Facebook
-    </Text>
-  </TouchableOpacity>
-</View>
+    <Icon
+      name="Facebook"
+      size={12}
+    />
+      Facebook
+  </Text>
+</TouchableOpacity>
 `;
 
 exports[`renders Google login correctly 1`] = `
-<View>
-  <TouchableOpacity
-    activeOpacity={0.2}
-    focusedOpacity={0.7}
-    onPress={[Function]}
+<TouchableOpacity
+  activeOpacity={0.2}
+  focusedOpacity={0.7}
+  onPress={[Function]}
+>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    disabled={false}
+    ellipsizeMode="tail"
   >
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      disabled={false}
-      ellipsizeMode="tail"
-    >
-      <Icon
-        name="Google"
-        size={12}
-      />
-        Google
-    </Text>
-  </TouchableOpacity>
-</View>
+    <Icon
+      name="Google"
+      size={12}
+    />
+      Google
+  </Text>
+</TouchableOpacity>
 `;
