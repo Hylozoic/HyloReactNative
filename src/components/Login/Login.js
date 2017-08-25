@@ -50,13 +50,12 @@ export default class Login extends React.Component {
     const emailIsValid = this.state.emailIsValid
 
     return <ScrollView contentContainerStyle={styles.login}>
-      <Image style={styles.logo} source={require('../../assets/Hylo_Logotype_Circle.png')} />
+      <Image style={styles.logo}
+        source={require('../../assets/merkaba-green-on-white.png')} />
       <Text style={styles.title}>Log in to Hylo</Text>
       {error && <Text style={styles.error}>{error}</Text>}
-      <View style={styles.paddedRowLabel}>
-        <View style={styles.label}>
-          <Text>Your email address</Text>
-        </View>
+      <View style={styles.labelRow}>
+        <Text style={styles.labelText}>Your email address</Text>
       </View>
       <View style={styles.paddedRow}>
         <View style={emailIsValid ? styles.paddedBorderValid : styles.paddedBorder}>
@@ -78,10 +77,8 @@ export default class Login extends React.Component {
         </View>
       </View>
 
-      <View style={styles.paddedRowLabel}>
-        <View style={styles.label}>
-          <Text>Password</Text>
-        </View>
+      <View style={styles.labelRow}>
+        <Text style={styles.labelText}>Password</Text>
       </View>
       <View style={styles.paddedRow}>
         <View style={styles.paddedBorder}>
@@ -104,7 +101,7 @@ export default class Login extends React.Component {
         </View>
       </View>
 
-      <View style={styles.paddedRowExtraMarginBottom}>
+      <View style={styles.paddedRow}>
         <View style={styles.paddedButton}>
           <TouchableOpacity onPress={() => this.login()}>
             <View style={styles.loginButton}>
@@ -122,7 +119,7 @@ export default class Login extends React.Component {
         <GoogleLoginButton onLoginFinished={loginWithGoogle} />
       </View>
       <View style={styles.signup}>
-        <Text style={styles.accountText}>Dont have an account? </Text>
+        <Text style={styles.accountText}>Don't have an account? </Text>
         <TouchableOpacity>
           <Text style={styles.signupText}>Sign up now</Text>
         </TouchableOpacity>

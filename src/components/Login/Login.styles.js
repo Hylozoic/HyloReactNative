@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native'
+import { Dimensions, StyleSheet } from 'react-native'
 import { caribbeanGreen } from 'style/colors'
 
 const mixins = {
@@ -15,7 +15,6 @@ const mixins = {
     marginTop: 10
   },
   paddedRow: {
-    maxHeight: 40,
     paddingRight: 15,
     paddingLeft: 15,
     marginBottom: 10,
@@ -25,20 +24,17 @@ const mixins = {
 }
 
 export default {
-  textInput: {
-    height: 40,
-    marginBottom: 10
-  },
   logo: {
     height: 80,
     width: 80,
-    marginBottom: 24
+    marginTop: Math.pow(Dimensions.get('window').height, 1.01) / 8,
+    marginBottom: 12
   },
   title: {
     fontSize: 24,
     color: caribbeanGreen,
     marginBottom: 24,
-    fontWeight: '600'
+    fontFamily: 'Circular-Bold'
   },
   iconOpaque: {
     ...mixins.icon,
@@ -49,7 +45,6 @@ export default {
     color: caribbeanGreen
   },
   login: {
-    flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
   },
@@ -70,12 +65,13 @@ export default {
     marginBottom: 10
   },
   signup: {
-    marginTop: 24,
+    marginTop: 12,
+    marginBottom: 30,
     flexDirection: 'row'
   },
   signupText: {
     color: caribbeanGreen,
-    fontWeight: '600'
+    fontFamily: 'Circular-Bold'
   },
   loginButton: {
     marginTop: 7
@@ -84,34 +80,30 @@ export default {
     color: 'white',
     backgroundColor: 'transparent',
     textAlign: 'center',
-    fontWeight: '500'
+    fontFamily: 'Circular-Book',
+    fontSize: 18
   },
   connectWith: {
-    marginTop: 12,
-    marginBottom: 12,
+    marginTop: 2,
+    paddingBottom: 10,
     opacity: 0.5
   },
   heavyText: {
-    fontWeight: '500'
+    fontFamily: 'Circular-Book'
   },
   accountText: {
-    fontWeight: '500',
+    fontFamily: 'Circular-Book',
     opacity: 0.7
   },
-  paddedRow: {
-    ...mixins.paddedRow
-  },
+  paddedRow: mixins.paddedRow,
   paddedRowWithOpacity: {
     ...mixins.paddedRow,
     opacity: 0.7
   },
-  paddedRowExtraMarginBottom: {
+  labelRow: {
     ...mixins.paddedRow,
-    marginBottom: 30
-  },
-  paddedRowLabel: {
-    ...mixins.paddedRow,
-    marginBottom: -8
+    marginBottom: 4,
+    justifyContent: 'flex-start'
   },
   paddedBorder: {
     flex: 1,
@@ -128,8 +120,7 @@ export default {
     height: 36,
     borderRadius: 50,
     justifyContent: 'center',
-    marginTop: 36,
-    marginBottom: 36
+    marginTop: 24
   },
   paddedBorderValid: {
     flex: 1,
@@ -142,11 +133,17 @@ export default {
   leftInputView: {
     height: 40,
     flex: 0.9,
-    borderRadius: 5
+    borderRadius: 5,
+    paddingLeft: 10
   },
-  label: {
-    flex: 0.9,
-    borderRadius: 5
+  textInput: {
+    height: 38,
+    marginTop: 2
+  },
+  labelText: {
+    fontFamily: 'Circular-Book',
+    textAlign: 'left',
+    flex: 1
   },
   rightIconView: {
     height: 40,
