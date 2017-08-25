@@ -1,9 +1,5 @@
 import React from 'react'
-import {
-  View,
-  TouchableOpacity,
-  Text
-} from 'react-native'
+import { TouchableOpacity, Text } from 'react-native'
 import { GoogleSignin } from 'react-native-google-signin'
 
 import Icon from '../Icon'
@@ -27,10 +23,11 @@ export default class GoogleLoginButton extends React.Component {
   }
 
   render () {
-    return <View style={styles.googleLoginContainer}>
-      <TouchableOpacity onPress={this.signIn}>
-        <Text style={styles.heavyText}><Icon name='Google' size={12} />  Google</Text>
-      </TouchableOpacity>
-    </View>
+    return <TouchableOpacity style={styles.googleLoginContainer}
+      onPress={this.signIn}>
+      <Text style={styles.heavyText}>
+        <Icon name='Google' size={12} />  Google
+      </Text>
+    </TouchableOpacity>
   }
 }
