@@ -14,6 +14,7 @@ import getCurrentUserId from '../../store/selectors/getCurrentUserId'
 function mapStateToProps (state, props) {
   const { id, messages, title } = getThread(state, props) || {}
   return {
+    id,
     currentUser: getCurrentUserId(state),
     hasMore: getHasMoreMessages(state, { id }),
     messages,

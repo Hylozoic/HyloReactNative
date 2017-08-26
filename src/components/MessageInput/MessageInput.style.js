@@ -8,7 +8,6 @@ export default {
     backgroundColor: 'white',
     borderRadius: 4,
     marginHorizontal: 8,
-    marginBottom: 20,
     paddingHorizontal: 8,
     paddingVertical: 5,
     shadowColor: mercury,

@@ -1,22 +1,27 @@
 import React from 'react'
 import { FlatList, KeyboardAvoidingView, View } from 'react-native'
-import { any, arrayOf, func, shape, string } from 'prop-types'
+import { any, arrayOf, func, object, shape, string } from 'prop-types'
 import { throttle, debounce } from 'lodash'
 import { get } from 'lodash/fp'
-import { isIOS } from 'util/platform'
-import MessageInput from '../MessageInput'
+
 import Header from './Header'
 import Loading from '../Loading'
 import MessageCard from '../MessageCard'
+import MessageInput from '../MessageInput'
 import NotificationOverlay from '../NotificationOverlay'
+import PeopleTyping from '../PeopleTyping'
+import SocketSubscriber from '../SocketSubscriber'
+import { isIOS } from 'util/platform'
+import { getSocket } from 'util/websockets'
 import { keyboardAvoidingViewProps as kavProps } from 'util/viewHelpers'
 
-import styles from './Thread.styles.js'
+import styles from './Thread.styles'
 
 const BOTTOM_THRESHOLD = 10
 
 export default class Thread extends React.Component {
   static propTypes = {
+    id: any,
     createMessage: func.isRequired,
     currentUser: string.isRequired,
     fetchMessages: func.isRequired,
@@ -31,6 +36,7 @@ export default class Thread extends React.Component {
       })
     })),
     pending: any,
+    reconnectFetchMessages: func,
     setTitle: func.isRequired,
     updateThreadReadTime: func.isRequired,
     title: string
@@ -52,8 +58,16 @@ export default class Thread extends React.Component {
   }
 
   componentDidMount () {
-    const { fetchMessages, setTitle, title } = this.props
-    fetchMessages()
+    const { fetchMessages, reconnectFetchMessages, setTitle, socket, title } = this.props
+    this.scrollToBottom()
+    // this.reconnectHandler = () => {
+    //   reconnectFetchMessages()
+    // }
+    // getSocket().then(socket => {
+    //   socket.on('reconnect', this.reconnectHandler)
+    //   this.socket = socket
+    // })
+    // fetchMessages()
     if (title) setTitle(title)
   }
 
@@ -70,14 +84,17 @@ export default class Thread extends React.Component {
       const oldLatest = oldMessages[0]
 
       // Are additional messages old (at the beginning of the sorted array)?
-      if (get('id', latest) === get('id', oldLatest)) return
+      if (get('id', latest) === get('id', oldLatest)) {
+        // Stops NotificationOverlay showing on infinite scroll
+        if (this.state.notify) this.setState({ notify: false })
+        return 
+      }
 
       // If there's one new message, it's not from currentUser,
       // and we're not already at the bottom, don't scroll
       if (deltaLength === 1
         && !this.atBottom()
         && get('creator.id', latest) !== currentUser.id) {
-        console.log('NEW MESSAGE')
         this.setState({
           newMessages: this.state.newMessages + 1,
           notify: true
@@ -94,6 +111,10 @@ export default class Thread extends React.Component {
     if (prevProps.title !== title) setTitle(title)
     if (this.atBottom()) this.markAsRead()
     if (this.shouldScroll) this.scrollToBottom()
+  }
+
+  componentWillUnmount () {
+    // this.socket.off('reconnect', this.reconnectHandler)
   }
 
   atBottom = () => this.yOffset < BOTTOM_THRESHOLD
@@ -128,6 +149,7 @@ export default class Thread extends React.Component {
 
   messageView = () => {
     const {
+      id,
       createMessage,
       currentUser,
       messages,
@@ -150,9 +172,11 @@ export default class Thread extends React.Component {
         multiline
         onSubmit={this.createMessage}
         placeholder='Write something...' />
+      <PeopleTyping />
       {notify && <NotificationOverlay
         message={`${newMessages} NEW MESSAGE${newMessages > 1 ? 'S' : ''}`}
         onPress={this.scrollToBottom} />}
+      <SocketSubscriber type='post' id={id} />
     </View>
   }
 
