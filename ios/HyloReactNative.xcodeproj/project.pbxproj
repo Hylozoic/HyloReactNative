@@ -32,8 +32,8 @@
 		210371FD1EF8A77F00A4D12C /* lineto-circular-medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 210371F51EF8A77F00A4D12C /* lineto-circular-medium.ttf */; };
 		210371FE1EF8A77F00A4D12C /* lineto-circular-mediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 210371F61EF8A77F00A4D12C /* lineto-circular-mediumItalic.ttf */; };
 		217A25F51EF2287900F95ED4 /* hylo-evo-icons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 217A25F41EF2287900F95ED4 /* hylo-evo-icons.ttf */; };
-		21B39E5D1F51229300B8B1BA /* development.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 21B39E5C1F51229300B8B1BA /* development.xcconfig */; };
-		21B39E811F5122F600B8B1BA /* production.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 21B39E801F5122F600B8B1BA /* production.xcconfig */; };
+		21B39E5D1F51229300B8B1BA /* debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 21B39E5C1F51229300B8B1BA /* debug.xcconfig */; };
+		21B39E811F5122F600B8B1BA /* release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 21B39E801F5122F600B8B1BA /* release.xcconfig */; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
@@ -366,8 +366,8 @@
 		210371F51EF8A77F00A4D12C /* lineto-circular-medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "lineto-circular-medium.ttf"; path = "../src/assets/lineto-circular-medium.ttf"; sourceTree = "<group>"; };
 		210371F61EF8A77F00A4D12C /* lineto-circular-mediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "lineto-circular-mediumItalic.ttf"; path = "../src/assets/lineto-circular-mediumItalic.ttf"; sourceTree = "<group>"; };
 		217A25F41EF2287900F95ED4 /* hylo-evo-icons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "hylo-evo-icons.ttf"; path = "../src/assets/hylo-evo-icons.ttf"; sourceTree = "<group>"; };
-		21B39E5C1F51229300B8B1BA /* development.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = development.xcconfig; sourceTree = "<group>"; };
-		21B39E801F5122F600B8B1BA /* production.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = production.xcconfig; sourceTree = "<group>"; };
+		21B39E5C1F51229300B8B1BA /* debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = debug.xcconfig; sourceTree = "<group>"; };
+		21B39E801F5122F600B8B1BA /* release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = release.xcconfig; sourceTree = "<group>"; };
 		23891DFFC00D4139B0A02519 /* RNDeviceInfo.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNDeviceInfo.xcodeproj; path = "../node_modules/react-native-device-info/RNDeviceInfo.xcodeproj"; sourceTree = "<group>"; };
 		25420C5D521C4F19A773CA3C /* libz.tbd */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		277CC724C19944EC9C127E8B /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
@@ -553,8 +553,8 @@
 		13B07FAE1A68108700A75B9A /* HyloReactNative */ = {
 			isa = PBXGroup;
 			children = (
-				21B39E5C1F51229300B8B1BA /* development.xcconfig */,
-				21B39E801F5122F600B8B1BA /* production.xcconfig */,
+				21B39E5C1F51229300B8B1BA /* debug.xcconfig */,
+				21B39E801F5122F600B8B1BA /* release.xcconfig */,
 				5CF26E721F415BCA00CC02E1 /* HyloReactNative.entitlements */,
 				B337FC1A1E8AD5FA006F9336 /* GoogleService-Info.plist */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
@@ -1228,7 +1228,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				217A25F51EF2287900F95ED4 /* hylo-evo-icons.ttf in Resources */,
-				21B39E811F5122F600B8B1BA /* production.xcconfig in Resources */,
+				21B39E811F5122F600B8B1BA /* release.xcconfig in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				210371F81EF8A77F00A4D12C /* lineto-circular-blackItalic.ttf in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
@@ -1242,7 +1242,7 @@
 				210371FE1EF8A77F00A4D12C /* lineto-circular-mediumItalic.ttf in Resources */,
 				59582AB5127847F4B8351B2D /* MaterialCommunityIcons.ttf in Resources */,
 				55C60443711945879410FC1B /* MaterialIcons.ttf in Resources */,
-				21B39E5D1F51229300B8B1BA /* development.xcconfig in Resources */,
+				21B39E5D1F51229300B8B1BA /* debug.xcconfig in Resources */,
 				AB36E1E180274C84B9E4B8E2 /* Octicons.ttf in Resources */,
 				A2AAFB7D959040F8B29F5BE3 /* SimpleLineIcons.ttf in Resources */,
 				210371F71EF8A77F00A4D12C /* lineto-circular-black.ttf in Resources */,
@@ -1504,7 +1504,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 21B39E5C1F51229300B8B1BA /* development.xcconfig */;
+			baseConfigurationReference = 21B39E5C1F51229300B8B1BA /* debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -1537,7 +1537,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 21B39E801F5122F600B8B1BA /* production.xcconfig */;
+			baseConfigurationReference = 21B39E801F5122F600B8B1BA /* release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
