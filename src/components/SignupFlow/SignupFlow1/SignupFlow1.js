@@ -8,6 +8,12 @@ import Button from '../../Button'
 import styles from './SignupFlow1.styles'
 
 export default class SignupFlow1 extends React.Component {
+  static navigationOptions = () => ({
+    headerTitle: 'STEP 1/5',
+    headerStyle: styles.headerStyle,
+    headerTitleStyle: styles.headerTitleStyle,
+    headerTintColor: styles.headerTintColor
+  })
 
   render () {
     const { changeSetting, name, email, password } = this.props

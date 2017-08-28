@@ -1,4 +1,4 @@
-import { caribbeanGreen, white80onCaribbeanGreen } from 'style/colors'
+import { caribbeanGreen, white80onCaribbeanGreen, white60onCaribbeanGreen } from 'style/colors'
 
 export default {
   container: {
@@ -27,5 +27,15 @@ export default {
     fontSize: 16,
     marginTop: 28,
     marginLeft: 'auto'
-  }
+  },
+  headerStyle: {
+    backgroundColor: caribbeanGreen,
+    shadowColor: 'transparent'
+  },
+  headerTitleStyle: {
+    color: 'white',
+    fontFamily: 'Circular-Bold',
+    fontSize: 12
+  },
+  headerTintColor: white60onCaribbeanGreen
 }
