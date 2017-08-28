@@ -29,6 +29,7 @@ function mapDispatchToProps (dispatch, { navigation }) {
   return {
     createMessage: text => dispatch(createMessage(threadId, sanitize(text))),
     fetchMessages: cursor => dispatch(fetchMessages(threadId, { cursor })),
+    reconnectFetchMessages: () => dispatch(fetchMessages(threadId, {reset: true})),
     setTitle: title => navigation.setParams({ title }),
     sendIsTyping: () => sendIsTyping(threadId, true),
     updateThreadReadTime: () => dispatch(updateThreadReadTime(threadId))

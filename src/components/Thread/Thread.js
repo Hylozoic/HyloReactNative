@@ -38,8 +38,8 @@ export default class Thread extends React.Component {
     pending: any,
     reconnectFetchMessages: func,
     setTitle: func.isRequired,
-    updateThreadReadTime: func.isRequired,
-    title: string
+    title: string,
+    updateThreadReadTime: func.isRequired
   }
 
   static navigationOptions = ({ navigation }) => Header(navigation)
@@ -58,7 +58,8 @@ export default class Thread extends React.Component {
   }
 
   componentDidMount () {
-    const { fetchMessages, reconnectFetchMessages, setTitle, socket, title } = this.props
+    const { fetchMessages, reconnectFetchMessages, setTitle, title } = this.props
+    getSocket().then(socket => socket.on('reconnect', reconnectFetchMessages))
     this.scrollToBottom()
     fetchMessages()
     if (title) setTitle(title)
@@ -104,6 +105,11 @@ export default class Thread extends React.Component {
     if (prevProps.title !== title) setTitle(title)
     if (this.atBottom()) this.markAsRead()
     if (this.shouldScroll) this.scrollToBottom()
+  }
+
+  componentWillUnmount () {
+    const { reconnectFetchMessages } = this.props
+    getSocket().then(socket => socket.off('reconnect', reconnectFetchMessages))
   }
 
   atBottom = () => this.yOffset < BOTTOM_THRESHOLD
