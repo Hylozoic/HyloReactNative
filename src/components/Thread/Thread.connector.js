@@ -10,6 +10,7 @@ import {
   updateThreadReadTime
 } from './Thread.store'
 import getCurrentUserId from '../../store/selectors/getCurrentUserId'
+import { sendIsTyping } from 'util/websockets'
 
 function mapStateToProps (state, props) {
   const { id, messages, title } = getThread(state, props) || {}
@@ -29,6 +30,7 @@ function mapDispatchToProps (dispatch, { navigation }) {
     createMessage: text => dispatch(createMessage(threadId, sanitize(text))),
     fetchMessages: cursor => dispatch(fetchMessages(threadId, { cursor })),
     setTitle: title => navigation.setParams({ title }),
+    sendIsTyping: () => sendIsTyping(threadId, true),
     updateThreadReadTime: () => dispatch(updateThreadReadTime(threadId))
   }
 }

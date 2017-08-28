@@ -6,6 +6,7 @@ import socketIo from 'socket.io-client'
 import sailsIo from 'sails.io.js'
 import { HOST } from '../fetchJSON'
 import { getSessionCookie } from '../session'
+import { curry } from 'lodash/fp'
 
 // socket host is same as API host in development, different in production
 const socketHost = process.env.SOCKET_HOST || HOST
@@ -48,3 +49,8 @@ export function getSocket () {
 export function socketUrl (path) {
   return `${socketHost}/${path.replace(/^\//, '')}`
 }
+
+export const sendIsTyping = curry((postId, isTyping) => {
+  const url = socketUrl(`/noo/post/${postId}/typing`)
+  getSocket().then(socket => socket.post(url, {isTyping}))
+})

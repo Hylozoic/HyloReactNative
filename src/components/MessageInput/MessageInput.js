@@ -1,11 +1,13 @@
 import React from 'react'
 import { Image, TextInput, TouchableOpacity, View } from 'react-native'
 import { bool, func, string } from 'prop-types'
+import { throttle } from 'lodash'
 
 import Icon from '../Icon'
 import { jade, rhino30 } from '../../style/colors'
 import styles from './MessageInput.style'
 
+const IS_TYPING_THROTTLE = 3000
 const MIN_INPUT_HEIGHT = 22
 const MAX_INPUT_HEIGHT = 100
 
@@ -14,7 +16,8 @@ export default class extends React.PureComponent {
     blurOnSubmit: bool,
     multiline: bool,
     onSubmit: func,
-    placeholder: string
+    placeholder: string,
+    sendIsTyping: func
   }
 
   constructor () {
@@ -35,6 +38,7 @@ export default class extends React.PureComponent {
   }
 
   handleChange = ({ nativeEvent: { text } }) => {
+    this.startTyping()
     this.setState({
       submittable: text.trim().length > 0,
       text
@@ -55,6 +59,8 @@ export default class extends React.PureComponent {
     MAX_INPUT_HEIGHT,
     Math.max(MIN_INPUT_HEIGHT, this.state.inputHeight)
   )
+
+  startTyping = throttle(() => this.props.sendIsTyping(), IS_TYPING_THROTTLE)
 
   render () {
     const inputProps = {

@@ -60,14 +60,7 @@ export default class Thread extends React.Component {
   componentDidMount () {
     const { fetchMessages, reconnectFetchMessages, setTitle, socket, title } = this.props
     this.scrollToBottom()
-    // this.reconnectHandler = () => {
-    //   reconnectFetchMessages()
-    // }
-    // getSocket().then(socket => {
-    //   socket.on('reconnect', this.reconnectHandler)
-    //   this.socket = socket
-    // })
-    // fetchMessages()
+    fetchMessages()
     if (title) setTitle(title)
   }
 
@@ -113,10 +106,6 @@ export default class Thread extends React.Component {
     if (this.shouldScroll) this.scrollToBottom()
   }
 
-  componentWillUnmount () {
-    // this.socket.off('reconnect', this.reconnectHandler)
-  }
-
   atBottom = () => this.yOffset < BOTTOM_THRESHOLD
 
   createMessage = text => this.props.createMessage(text)
@@ -153,7 +142,8 @@ export default class Thread extends React.Component {
       createMessage,
       currentUser,
       messages,
-      pending
+      pending,
+      sendIsTyping
     } = this.props
     const { newMessages, notify } = this.state
     return <View style={styles.container}>
@@ -171,6 +161,7 @@ export default class Thread extends React.Component {
         blurOnSubmit={false}
         multiline
         onSubmit={this.createMessage}
+        sendIsTyping={sendIsTyping}
         placeholder='Write something...' />
       <PeopleTyping />
       {notify && <NotificationOverlay

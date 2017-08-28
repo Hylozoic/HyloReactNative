@@ -29,9 +29,7 @@ export default class PeopleTyping extends React.Component {
   }
 
   render () {
-    const { peopleTyping } = this.props
-    const names = values(peopleTyping).map(v => v.name)
-    console.log('TYPING', peopleTyping)
+    const names = values(this.props.peopleTyping).map(v => v.name)
     let message = ''
     if (names.length === 1) message = `${names[0]} is typing...`
     if (names.length > 1) message = 'Multiple people are typing...'

@@ -15,21 +15,19 @@ function mapDispatchToProps (dispatch, props) {
   }
 
   return {
-    subscribe: oldHandler => {
-      return getSocket().then(socket => {
-        if (oldHandler) socket.off('reconnect', oldHandler)
+    subscribe: oldHandler => getSocket().then(socket => {
+      if (oldHandler) socket.off('reconnect', oldHandler)
 
-        const newHandler = () =>
-          socket.post(socketUrl(`/noo/${type}/${id}/subscribe`))
+      const newHandler = () =>
+        socket.post(socketUrl(`/noo/${type}/${id}/subscribe`))
 
-        socket.on('reconnect', newHandler)
-        newHandler()
+      socket.on('reconnect', newHandler)
+      newHandler()
 
-        // return the handler so it can be assigned to a component-local variable
-        // and passed as an argument for a later call to unsubscribe
-        return newHandler
-      })
-    },
+      // return the handler so it can be assigned to a component-local variable
+      // and passed as an argument for a later call to unsubscribe
+      return newHandler
+    }),
 
     unsubscribe: oldHandler => getSocket().then(socket => {
       socket.off('reconnect', oldHandler)
