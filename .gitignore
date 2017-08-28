@@ -23,6 +23,8 @@ DerivedData
 project.xcworkspace
 ios/*.app.dSYM.zip
 ios/fastlane/report.xml
+ios/development.xcconfig
+ios/production.xcconfig
 
 # Android/IntelliJ
 #
