@@ -1,5 +1,5 @@
 import React from 'react'
-import { FlatList, KeyboardAvoidingView, View } from 'react-native'
+import { FlatList, KeyboardAvoidingView, NetInfo, View } from 'react-native'
 import { any, arrayOf, func, object, shape, string } from 'prop-types'
 import { throttle, debounce } from 'lodash'
 import { get } from 'lodash/fp'
@@ -18,6 +18,7 @@ import { keyboardAvoidingViewProps as kavProps } from 'util/viewHelpers'
 import styles from './Thread.styles'
 
 const BOTTOM_THRESHOLD = 10
+const NETINFO_INTERVAL = 10000
 
 export default class Thread extends React.Component {
   static propTypes = {
@@ -47,6 +48,7 @@ export default class Thread extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
+      isConnected: true,
       newMessages: 0,
       notify: false
     }
@@ -63,6 +65,7 @@ export default class Thread extends React.Component {
     this.scrollToBottom()
     fetchMessages()
     if (title) setTitle(title)
+    this.checkConnectionInterval = setInterval(this.checkConnection, NETINFO_INTERVAL)
   }
 
   componentWillUpdate (nextProps) {
@@ -110,9 +113,16 @@ export default class Thread extends React.Component {
   componentWillUnmount () {
     const { reconnectFetchMessages } = this.props
     getSocket().then(socket => socket.off('reconnect', reconnectFetchMessages))
+    clearInterval(this.checkConnectionInterval)
   }
 
   atBottom = () => this.yOffset < BOTTOM_THRESHOLD
+
+  checkConnection = () => { 
+    NetInfo.isConnected.fetch()
+      .then(isConnected => isConnected !== this.state.isConnected
+        ? this.setState({ isConnected }) : null)
+  }
 
   createMessage = text => this.props.createMessage(text)
 
@@ -151,7 +161,12 @@ export default class Thread extends React.Component {
       pending,
       sendIsTyping
     } = this.props
-    const { newMessages, notify } = this.state
+    const { isConnected, newMessages, notify } = this.state
+    const showNotificationOverlay = notify || !isConnected
+    const overlayMessage = !isConnected
+      ? 'Connection issues. Trying to reconnect...'
+      : `${newMessages} NEW MESSAGE${newMessages > 1 ? 'S' : ''}`
+
     return <View style={styles.container}>
       {pending && <Loading />}
       <FlatList style={styles.messageList}
@@ -170,8 +185,8 @@ export default class Thread extends React.Component {
         sendIsTyping={sendIsTyping}
         placeholder='Write something...' />
       <PeopleTyping />
-      {notify && <NotificationOverlay
-        message={`${newMessages} NEW MESSAGE${newMessages > 1 ? 'S' : ''}`}
+      {showNotificationOverlay && <NotificationOverlay
+        message={overlayMessage}
         onPress={this.scrollToBottom} />}
       <SocketSubscriber type='post' id={id} />
     </View>
