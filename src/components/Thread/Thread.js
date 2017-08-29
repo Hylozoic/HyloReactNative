@@ -166,7 +166,7 @@ export default class Thread extends React.Component {
     const { isConnected, newMessages, notify } = this.state
     const showNotificationOverlay = notify || !isConnected
     const overlayMessage = !isConnected
-      ? 'CONNECTION ISSUES. TRYING TO RECONNECT...'
+      ? 'DISCONNECTED. TRYING TO RECONNECT...'
       : `${newMessages} NEW MESSAGE${newMessages > 1 ? 'S' : ''}`
 
     return <View style={styles.container}>
