@@ -1,6 +1,6 @@
 import React from 'react'
 import { FlatList, KeyboardAvoidingView, NetInfo, View } from 'react-native'
-import { any, arrayOf, func, object, shape, string } from 'prop-types'
+import { any, arrayOf, bool, func, object, shape, string } from 'prop-types'
 import { throttle, debounce } from 'lodash'
 import { get } from 'lodash/fp'
 
@@ -29,15 +29,17 @@ export default class Thread extends React.Component {
     messages: arrayOf(shape({
       id: any,
       createdAt: string,
-      text: string,
       creator: shape({
         id: any,
         name: string,
         avatarUrl: string
-      })
+      }),
+      text: string,
+      suppressCreator: bool,
+      suppressDate: bool
     })),
     pending: any,
-    reconnectFetchMessages: func,
+    reconnectFetchMessages: func.isRequired,
     setTitle: func.isRequired,
     title: string,
     updateThreadReadTime: func.isRequired
@@ -48,7 +50,7 @@ export default class Thread extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      isConnected: true,
+      isConnected: false,
       newMessages: 0,
       notify: false
     }
@@ -164,7 +166,7 @@ export default class Thread extends React.Component {
     const { isConnected, newMessages, notify } = this.state
     const showNotificationOverlay = notify || !isConnected
     const overlayMessage = !isConnected
-      ? 'Connection issues. Trying to reconnect...'
+      ? 'CONNECTION ISSUES. TRYING TO RECONNECT...'
       : `${newMessages} NEW MESSAGE${newMessages > 1 ? 'S' : ''}`
 
     return <View style={styles.container}>

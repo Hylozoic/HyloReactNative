@@ -97,13 +97,25 @@ export function updateThreadReadTime (id) {
   }
 }
 
-function refineMessages ({ id, createdAt, text, creator }) {
+function refineMessages ({ id, createdAt, text, creator }, i, messages) {
   const creatorFields = pick([ 'id', 'name', 'avatarUrl' ], creator.ref)
+
+  // This might seem counter-intuitive: it's because the list is reversed!
+  // These two values handle compact display of consecutive messages
+  // by the same creator when received in MessageCard.
+  const suppressCreator = i < messages.length - 1
+    && creator.id === messages[i + 1].creator.id
+  const suppressDate = i > 0 && i < messages.length 
+    ? creator.id === messages[i - 1].creator.id
+    : false
+
   return {
     id,
     createdAt: humanDate(createdAt),
+    creator: creatorFields,
     text: sanitize(text),
-    creator: creatorFields
+    suppressCreator,
+    suppressDate
   }
 }
 
