@@ -19,8 +19,10 @@ const Me = Model.createClass({
     return get('hasModeratorRole', membership)
   },
 
+  // TODO this is a hack for when a user has no memberships. Make it better.
   lastViewedMembership () {
-    return maxBy(m => new Date(m.lastViewedAt), this.memberships.toModelArray())
+    return maxBy(m => new Date(m.lastViewedAt), this.memberships.toModelArray()) ||
+    {community: {id: null}}
   },
 
   lastViewedCommunity () {

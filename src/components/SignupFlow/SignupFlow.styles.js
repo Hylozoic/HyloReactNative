@@ -25,7 +25,6 @@ export default {
     height: 38,
     width: 142,
     fontSize: 16,
-    marginTop: 28,
     marginLeft: 'auto'
   },
   headerStyle: {

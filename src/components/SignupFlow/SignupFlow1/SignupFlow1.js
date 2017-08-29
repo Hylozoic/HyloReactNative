@@ -8,6 +8,7 @@ import Button from '../../Button'
 import styles from './SignupFlow1.styles'
 
 export default class SignupFlow1 extends React.Component {
+  
   static navigationOptions = () => ({
     headerTitle: 'STEP 1/5',
     headerStyle: styles.headerStyle,
@@ -16,7 +17,7 @@ export default class SignupFlow1 extends React.Component {
   })
 
   render () {
-    const { changeSetting, name, email, password } = this.props
+    const { changeSetting, name, email, password, signup } = this.props
 
     return <View style={styles.container}>
       <Text style={styles.title}>Howdie stranger!</Text>
@@ -30,17 +31,19 @@ export default class SignupFlow1 extends React.Component {
       <SignupControl
         label='Email Address'
         value={email}
+        keyboardType={'email-address'}
+        autoCapitalize='none'
+        autoCorrect={false}
         onChange={changeSetting('email')} />
       <SignupControl
         label='Password'
         value={password}
         onChange={changeSetting('password')}
-        isPassword />
+        secureTextEntry />
       <Button
         style={styles.continueButton}
         text='Continue'
-        onPress={() => console.log('continue')} />
-
+        onPress={signup} />
     </View>
   }
 }

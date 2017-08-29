@@ -13,6 +13,7 @@ import Search from '../../components/Editor/Search/Search.store'
 import NewMessage from '../../components/NewMessage/NewMessage.store'
 import SocketListener from '../../components/SocketListener/SocketListener.store'
 import MemberFeed from '../../components/MemberProfile/MemberFeed/MemberFeed.store'
+import SignupFlow from '../../components/SignupFlow/SignupFlow.store'
 
 const combinedReducers = combineReducers({
   orm: ormReducer,
@@ -27,7 +28,8 @@ const combinedReducers = combineReducers({
   Search,
   NewMessage,
   SocketListener,
-  MemberFeed
+  MemberFeed,
+  SignupFlow
 })
 
 export default persist(combinedReducers)

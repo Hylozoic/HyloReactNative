@@ -44,6 +44,7 @@ export default {
     color: caribbeanGreen
   },
   login: {
+    backgroundColor: 'white',
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center'

@@ -3,7 +3,7 @@ import RootNavigator from './RootNavigator'
 import SocketListener from './SocketListener'
 import fetchCurrentUser from '../store/actions/fetchCurrentUser'
 import { connect } from 'react-redux'
-import { Platform, View } from 'react-native'
+import { View } from 'react-native'
 import { isIOS, urlPrefix } from 'util/platform'
 
 // this component just sets up a navigator so that views can open full-screen,

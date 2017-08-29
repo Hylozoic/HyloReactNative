@@ -15,6 +15,10 @@ import { focus } from '../../util/textInput'
 import styles from './Login.styles'
 
 export default class Login extends React.Component {
+  static navigationOptions = {
+    header: null
+  }
+
   constructor (props) {
     super(props)
     this.state = {
@@ -43,6 +47,10 @@ export default class Login extends React.Component {
       email,
       emailIsValid: this.validateEmail(email)
     })
+  }
+
+  componentDidMount () {
+    this.props.navigation.navigate('SignupFlow2')
   }
 
   render () {

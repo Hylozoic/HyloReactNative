@@ -1,5 +1,6 @@
 import { EXTRACT_MODEL } from '../constants'
 import { LOGOUT } from '../../components/Login/actions'
+import { SIGNUP } from '../../components/SignupFlow/SignupFlow.store'
 import {
   CREATE_COMMENT
 } from '../../components/PostDetails/CommentEditor/CommentEditor.store'
@@ -12,9 +13,10 @@ export default function ormReducer (state = {}, action) {
   const { payload, type, meta, error } = action
   if (error) return state
 
+  var me
   switch (type) {
     case LOGOUT:
-      const me = session.Me.first()
+      me = session.Me.first()
       me.memberships.delete()
       me.delete()
       break
@@ -56,6 +58,19 @@ export default function ormReducer (state = {}, action) {
         modelName: 'Message'
       })
       break
+
+    case SIGNUP:
+      me = session.Me.first()
+      if (me) {
+        me.delete()
+      }
+      session.Me.create({
+        name: payload.name,
+        email: payload.email,
+        settings: {
+          signupInProgress: true
+        }
+      })
   }
 
   return session.state

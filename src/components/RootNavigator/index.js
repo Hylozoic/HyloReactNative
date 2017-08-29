@@ -23,6 +23,7 @@ import ThreadList from '../ThreadList'
 import MemberDetails from '../MemberProfile/MemberDetails'
 import Signup from '../Signup'
 import SignupFlow1 from '../SignupFlow/SignupFlow1'
+import Login from '../Login'
 import createLinkingAwareContainer from './createLinkingAwareContainer'
 import trackCurrentTab from './trackCurrentTab'
 import { isIOS, urlPrefix } from 'util/platform'
@@ -45,22 +46,24 @@ const screensInTabs = {
   MemberProfile: {screen: MemberProfile, path: 'people/:id'},
   MemberDetails: {screen: MemberDetails, path: 'people/:id/details'},
   CommentEditor: {screen: CommentEditor, path: 'comment/:postId/new'},
-  NewMessage: {screen: NewMessage},
-  Signup: {screen: Signup, path: 'signup'},
-  SignupFlow1: {screen: SignupFlow1, path: 'signup/1'}
+  NewMessage: {screen: NewMessage}
 }
 
 // Screens that work outside of tabs, Settings, Messages, etc.
 const screensInStack = {
   Settings: {screen: Settings, path: 'settings'},
   Thread: {screen: Thread, path: 'thread/:id'},
-  ThreadList: {screen: ThreadList, path: 'messages'}
+  ThreadList: {screen: ThreadList, path: 'messages'},
+  Login: {screen: Login, path: 'login'},
+  Signup: {screen: Signup, path: 'signup'},
+  SignupFlow1: {screen: SignupFlow1, path: 'signup/1'}
 }
 
 Object.freeze(tabs)
 Object.freeze(screensInTabs)
 
 const tabNavigatorConfig = {
+  initialRouteName: 'Members',
   tabBarPosition: 'bottom',
   animationEnabled: false,
   swipeEnabled: false,
