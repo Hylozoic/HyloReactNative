@@ -11,6 +11,7 @@ export const CREATE_MESSAGE_PENDING = `${CREATE_MESSAGE}_PENDING`
 export const FETCH_MESSAGES = 'Thread/FETCH_MESSAGES'
 export const UPDATE_THREAD_READ_TIME = 'Thread/UPDATE_THREAD_READ_TIME'
 
+const BATCH_MINUTES = 5
 const MESSAGE_PAGE_SIZE = 20
 
 export function fetchMessages (id, opts = {}) {
@@ -97,17 +98,25 @@ export function updateThreadReadTime (id) {
   }
 }
 
+function isWithinBatchLimit (d1, d2) {
+  const elapsed = (new Date(d1) - new Date(d2)) / 60000
+  return elapsed <= BATCH_MINUTES
+}
+
 function refineMessages ({ id, createdAt, text, creator }, i, messages) {
   const creatorFields = pick([ 'id', 'name', 'avatarUrl' ], creator.ref)
 
-  // This might seem counter-intuitive: it's because the list is reversed!
-  // These two values handle compact display of consecutive messages
-  // by the same creator when received in MessageCard.
-  const suppressCreator = i < messages.length - 1
-    && creator.id === messages[i + 1].creator.id
-  const suppressDate = i > 0 && i < messages.length 
-    ? creator.id === messages[i - 1].creator.id
-    : false
+  // This might seem counter-intuitive, because the list is reversed. These
+  // values handle compact display of consecutive messages by the same creator
+  // when received in MessageCard.
+  const next = i > 0 && i < messages.length ? messages[i - 1] : null
+  const prev = i > 0 && i < messages.length - 1 ? messages[i + 1] : null
+  const suppressCreator = prev
+    && creator.id === prev.creator.id
+    && isWithinBatchLimit(createdAt, prev.createdAt)
+  const suppressDate = next
+    && creator.id === next.creator.id
+    && isWithinBatchLimit(next.createdAt, createdAt)
 
   return {
     id,
