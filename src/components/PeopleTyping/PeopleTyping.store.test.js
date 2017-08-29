@@ -1,5 +1,9 @@
-import reducer from './PeopleTyping.store'
-import { ADD_USER_TYPING, CLEAR_USER_TYPING } from 'store/constants'
+import reducer, {
+  ADD_USER_TYPING,
+  CLEAR_USER_TYPING,
+  addUserTyping,
+  clearUserTyping
+} from './PeopleTyping.store'
 import { omit } from 'lodash'
 
 describe('reducer', () => {
@@ -36,5 +40,15 @@ describe('reducer', () => {
     }
 
     expect(reducer(state, action)).toEqual(omit(state, '5'))
+  })
+})
+
+describe('action creators', () => {
+  it('matches the last snapshot for addUserTyping', () => {
+    expect(addUserTyping('1', 'Proteus')).toMatchSnapshot()
+  })
+
+  it('matches the last snapshot for clearUserTyping', () => {
+    expect(clearUserTyping('1')).toMatchSnapshot()
   })
 })
