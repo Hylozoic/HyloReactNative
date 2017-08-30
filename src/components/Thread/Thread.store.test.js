@@ -72,43 +72,46 @@ describe('isWithinBatchLimit', () => {
 })
 
 describe('refineMessage', () => {
+  const referenceDate = new Date()
+  const batchSeconds = store.BATCH_MINUTES * 60000
+  const elapsedShort = new Date(batchSeconds / 2)
+  const elapsedLong = new Date(batchSeconds * 2)
+
+  const short1 = new Date(referenceDate - elapsedShort)
+  const short2 = new Date(short1 - elapsedShort)
+  const short3 = new Date(short2 - elapsedShort)
+
   // Message list is ordered by date (desc)
   const messages = [
     {
       id: '6',
-      creator: { id: '333' },
-      createdAt: 'Mon Aug 28 2017 17:00:01 GMT+1200 (NZST)',
+      creator: { id: '111' },
+      createdAt: referenceDate.toUTCString(),
       text: 'Wombat'
     },
     {
       id: '5',
       creator: { id: '222' },
-      createdAt: 'Mon Aug 28 2017 16:59:01 GMT+1200 (NZST)',
+      createdAt: short1.toUTCString(),
       text: 'Wombat'
     },
     {
       id: '4',
       creator: { id: '222' },
-      createdAt: 'Mon Aug 28 2017 16:58:01 GMT+1200 (NZST)',
+      createdAt: short2.toUTCString(),
       text: 'Wombat'
     },
     {
       id: '3',
       creator: { id: '222' },
-      createdAt: 'Mon Aug 28 2017 16:57:01 GMT+1200 (NZST)',
+      createdAt: short3.toUTCString(),
       text: 'Bar'
     },
     {
       id: '2',
       creator: { id: '222' },
-      createdAt: 'Mon Aug 28 2017 16:50:01 GMT+1200 (NZST)',
+      createdAt: new Date(short3 - elapsedLong).toUTCString(),
       text: 'Bar'
-    },
-    {
-      id: '1',
-      creator: { id: '111' },
-      createdAt: 'Mon Aug 28 2017 16:49:01 GMT+1200 (NZST)',
-      text: 'Foo'
     }
   ]
 
