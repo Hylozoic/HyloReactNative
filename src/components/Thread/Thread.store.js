@@ -6,12 +6,12 @@ import { humanDate, sanitize, threadNames } from 'hylo-utils/text'
 import orm from '../../store/models'
 import { makeGetQueryResults } from '../../store/reducers/queryResults'
 
+export const BATCH_MINUTES = 5
 export const CREATE_MESSAGE = 'Thread/CREATE_MESSAGE'
 export const CREATE_MESSAGE_PENDING = `${CREATE_MESSAGE}_PENDING`
 export const FETCH_MESSAGES = 'Thread/FETCH_MESSAGES'
 export const UPDATE_THREAD_READ_TIME = 'Thread/UPDATE_THREAD_READ_TIME'
 
-const BATCH_MINUTES = 5
 const MESSAGE_PAGE_SIZE = 20
 
 export function fetchMessages (id, opts = {}) {
@@ -98,12 +98,12 @@ export function updateThreadReadTime (id) {
   }
 }
 
-function isWithinBatchLimit (d1, d2) {
+export function isWithinBatchLimit (d1, d2) {
   const elapsed = (new Date(d1) - new Date(d2)) / 60000
   return elapsed <= BATCH_MINUTES
 }
 
-function refineMessages ({ id, createdAt, text, creator }, i, messages) {
+export function refineMessage ({ id, createdAt, creator, text }, i, messages) {
   const creatorFields = pick([ 'id', 'name', 'avatarUrl' ], creator.ref)
 
   // This might seem counter-intuitive, because the list is reversed. These
@@ -135,7 +135,7 @@ function refineThread (session, id) {
     const messages = thread.messages
       .orderBy(m => Number(m.id), 'desc')
       .toModelArray()
-      .map(refineMessages)
+      .map(refineMessage)
     const title = threadNames(thread.participants.toRefArray().map(firstName))
     return {
       id: thread.id,
