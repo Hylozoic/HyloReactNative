@@ -8,7 +8,7 @@ it('matches the last snapshot', () => {
   const renderer = new ReactShallowRenderer()
   const props = {
     createMessage: () => {},
-    currentUser: { id: '1', avatarUrl: 'https://wombat.org' },
+    currentUser: '1',
     fetchMessages: () => {},
     messages: [
       {
@@ -30,6 +30,7 @@ it('matches the last snapshot', () => {
         creator: { id: "86895" }
       }
     ],
+    reconnectFetchMessages: () => {},
     setTitle: () => {},
     updateThreadReadTime: () => {}
   }
