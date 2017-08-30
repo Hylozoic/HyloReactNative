@@ -5,7 +5,6 @@ exports[`renders FB login correctly 1`] = `
   contentContainerStyle={
     Object {
       "alignItems": "center",
-      "flex": 1,
       "justifyContent": "center",
     }
   }
@@ -30,15 +29,20 @@ exports[`renders FB login correctly 1`] = `
     >
       Your email address
     </Text>
+  </View>
+  <View>
     <View>
-      <TextInput
-        autoCapitalize="none"
-        keyboardType="email-address"
-        onChangeText={[Function]}
-        onSubmitEditing={[Function]}
-        returnKeyType="next"
-        underlineColorAndroid="rgba(0,0,0,0)"
-      />
+      <View>
+        <TextInput
+          autoCapitalize="none"
+          keyboardType="email-address"
+          onChangeText={[Function]}
+          onSubmitEditing={[Function]}
+          returnKeyType="next"
+          underlineColorAndroid="rgba(0,0,0,0)"
+        />
+      </View>
+      <View />
     </View>
   </View>
   <View>
@@ -50,39 +54,49 @@ exports[`renders FB login correctly 1`] = `
     >
       Password
     </Text>
+  </View>
+  <View>
     <View>
-      <TextInput
-        onChangeText={[Function]}
-        onSubmitEditing={[Function]}
-        returnKeyType="go"
-        secureTextEntry={true}
-        selectTextOnFocus={true}
-        underlineColorAndroid="rgba(0,0,0,0)"
-      />
-      <Icon
-        allowFontScaling={false}
-        name="eye"
-        onPress={[Function]}
-        size={12}
-      />
+      <View>
+        <TextInput
+          onChangeText={[Function]}
+          onSubmitEditing={[Function]}
+          returnKeyType="go"
+          secureTextEntry={true}
+          selectTextOnFocus={true}
+          underlineColorAndroid="rgba(0,0,0,0)"
+        />
+      </View>
+      <View>
+        <Icon
+          allowFontScaling={false}
+          name="eye"
+          onPress={[Function]}
+          size={12}
+        />
+      </View>
     </View>
   </View>
-  <TouchableOpacity
-    activeOpacity={0.2}
-    focusedOpacity={0.7}
-    onPress={[Function]}
-  >
+  <View>
     <View>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        disabled={false}
-        ellipsizeMode="tail"
+      <TouchableOpacity
+        activeOpacity={0.2}
+        focusedOpacity={0.7}
+        onPress={[Function]}
       >
-        Log In
-      </Text>
+        <View>
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            disabled={false}
+            ellipsizeMode="tail"
+          >
+            Log In
+          </Text>
+        </View>
+      </TouchableOpacity>
     </View>
-  </TouchableOpacity>
+  </View>
   <View>
     <Text
       accessible={true}
@@ -108,7 +122,7 @@ exports[`renders FB login correctly 1`] = `
       disabled={false}
       ellipsizeMode="tail"
     >
-      Dont have an account? 
+      Don't have an account? 
     </Text>
     <TouchableOpacity
       activeOpacity={0.2}
@@ -128,47 +142,43 @@ exports[`renders FB login correctly 1`] = `
 `;
 
 exports[`renders FB login correctly 2`] = `
-<View>
-  <TouchableOpacity
-    activeOpacity={0.2}
-    focusedOpacity={0.7}
-    onPress={[Function]}
+<TouchableOpacity
+  activeOpacity={0.2}
+  focusedOpacity={0.7}
+  onPress={[Function]}
+>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    disabled={false}
+    ellipsizeMode="tail"
   >
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      disabled={false}
-      ellipsizeMode="tail"
-    >
-      <Icon
-        name="Facebook"
-        size={12}
-      />
-        Facebook
-    </Text>
-  </TouchableOpacity>
-</View>
+    <Icon
+      name="Facebook"
+      size={12}
+    />
+      Facebook
+  </Text>
+</TouchableOpacity>
 `;
 
 exports[`renders Google login correctly 1`] = `
-<View>
-  <TouchableOpacity
-    activeOpacity={0.2}
-    focusedOpacity={0.7}
-    onPress={[Function]}
+<TouchableOpacity
+  activeOpacity={0.2}
+  focusedOpacity={0.7}
+  onPress={[Function]}
+>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    disabled={false}
+    ellipsizeMode="tail"
   >
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      disabled={false}
-      ellipsizeMode="tail"
-    >
-      <Icon
-        name="Google"
-        size={12}
-      />
-        Google
-    </Text>
-  </TouchableOpacity>
-</View>
+    <Icon
+      name="Google"
+      size={12}
+    />
+      Google
+  </Text>
+</TouchableOpacity>
 `;
