@@ -1,4 +1,4 @@
-import { mercury } from '../../style/colors'
+import { mercury } from 'style/colors'
 
 // Deliberately not a StyleSheet, too many calls to `flatten` required!
 export default {
@@ -12,7 +12,7 @@ export default {
     paddingVertical: 5,
     shadowColor: mercury,
     shadowOffset: {width: 0, height: 5},
-    shadowRadius: 15,
+    shadowRadius: 10,
     shadowOpacity: 0.1,
 
     // Android-only
