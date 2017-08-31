@@ -50,7 +50,7 @@ export default class Thread extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      isConnected: false,
+      isConnected: true,
       newMessages: 0,
       notify: false
     }
@@ -67,7 +67,7 @@ export default class Thread extends React.Component {
     this.scrollToBottom()
     fetchMessages()
     if (title) setTitle(title)
-    this.checkConnectionInterval = setInterval(this.checkConnection, NETINFO_INTERVAL)
+    NetInfo.isConnected.addEventListener('change', this.handleConnectivityChange)
   }
 
   componentWillUpdate (nextProps) {
@@ -115,16 +115,10 @@ export default class Thread extends React.Component {
   componentWillUnmount () {
     const { reconnectFetchMessages } = this.props
     getSocket().then(socket => socket.off('reconnect', reconnectFetchMessages))
-    clearInterval(this.checkConnectionInterval)
+    NetInfo.isConnected.removeEventListener('change', this.handleConnectivityChange)
   }
 
   atBottom = () => this.yOffset < BOTTOM_THRESHOLD
-
-  checkConnection = () => { 
-    NetInfo.isConnected.fetch()
-      .then(isConnected => isConnected !== this.state.isConnected
-        ? this.setState({ isConnected }) : null)
-  }
 
   createMessage = text => this.props.createMessage(text)
 
@@ -133,6 +127,10 @@ export default class Thread extends React.Component {
     if (pending || !hasMore) return
     fetchMessages(messages[messages.length - 1].id)
   }, 2000)
+
+  handleConnectivityChange = isConnected => { 
+    if (isConnected !== this.state.isConnected) this.setState({ isConnected })
+  }
 
   markAsRead = debounce(() => this.props.updateThreadReadTime(), 2000)
 
