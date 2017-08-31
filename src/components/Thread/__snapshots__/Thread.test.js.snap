@@ -59,10 +59,6 @@ exports[`matches the last snapshot 1`] = `
       sendIsTyping={undefined}
     />
     <Connect(PeopleTyping) />
-    <Thread
-      message="DISCONNECTED. TRYING TO RECONNECT..."
-      onPress={[Function]}
-    />
     <Connect(SocketSubscriber)
       id={undefined}
       type="post"
