@@ -8,27 +8,12 @@ import styles from './MessageCard.style'
 
 export default function MessageCard ({ message }) {
   const { createdAt, creator, suppressCreator, suppressDate, text } = message
-  const bodyStyle = {
-    flexDirection: 'column',
-    flex: 0.9,
-    paddingLeft: suppressCreator ? 44 : 10
-  }
-  const containerStyle = {
-    flexDirection: 'row',
-    paddingBottom: 5,
-    paddingHorizontal: 10,
-    paddingTop: suppressCreator ? 0 : 5,
-    backgroundColor: 'white',
 
-    // Prevents the card from appearing upside down in the inverted FlatList
-    transform: [{ scaleY: -1 }]
-  }
-
-  return <View style={containerStyle}>
+  return <View style={[ styles.container, suppressCreator && styles.padLeftNoAvatar ]}>
     {!suppressCreator && <Avatar avatarUrl={creator.avatarUrl} />}
-    <View style={bodyStyle}>
+    <View style={[ styles.body, suppressCreator && styles.padTopNoCreator ]}>
       {!suppressCreator && <Text style={styles.name}>{creator.name}</Text>}
-      <Text style={styles.text}>{text}</Text>
+      <Text style={[ styles.text, suppressCreator && styles.marginTopNoCreator ]}>{text}</Text>
       {!suppressDate && <Text style={styles.date}>{createdAt}</Text>}
     </View>
   </View>
