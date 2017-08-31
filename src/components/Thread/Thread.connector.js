@@ -16,7 +16,7 @@ function mapStateToProps (state, props) {
   const { id, messages, title } = getThread(state, props) || {}
   return {
     id,
-    currentUser: getCurrentUserId(state),
+    currentUserId: getCurrentUserId(state),
     hasMore: getHasMoreMessages(state, { id }),
     messages,
     pending: state.pending[FETCH_MESSAGES],

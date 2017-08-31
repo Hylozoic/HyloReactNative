@@ -24,7 +24,7 @@ export default class Thread extends React.Component {
   static propTypes = {
     id: any,
     createMessage: func.isRequired,
-    currentUser: string.isRequired,
+    currentUserId: string.isRequired,
     fetchMessages: func.isRequired,
     messages: arrayOf(shape({
       id: any,
@@ -71,7 +71,7 @@ export default class Thread extends React.Component {
   }
 
   componentWillUpdate (nextProps) {
-    const { currentUser, messages, pending } = nextProps
+    const { currentUserId, messages, pending } = nextProps
 
     const oldMessages = this.props.messages
     const deltaLength = Math.abs(messages.length - oldMessages.length)
@@ -93,7 +93,7 @@ export default class Thread extends React.Component {
       // and we're not already at the bottom, don't scroll
       if (deltaLength === 1
         && !this.atBottom()
-        && get('creator.id', latest) !== currentUser.id) {
+        && get('creator.id', latest) !== currentUserId) {
         this.setState({
           newMessages: this.state.newMessages + 1,
           notify: true
@@ -156,7 +156,6 @@ export default class Thread extends React.Component {
     const {
       id,
       createMessage,
-      currentUser,
       messages,
       pending,
       sendIsTyping
