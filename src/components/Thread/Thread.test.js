@@ -8,7 +8,7 @@ it('matches the last snapshot', () => {
   const renderer = new ReactShallowRenderer()
   const props = {
     createMessage: () => {},
-    currentUser: '1',
+    currentUserId: '1',
     fetchMessages: () => {},
     messages: [
       {
