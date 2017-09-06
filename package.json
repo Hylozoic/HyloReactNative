@@ -28,7 +28,6 @@
     "react-native-google-signin": "^0.10.0",
     "react-native-htmlview": "^0.11.1",
     "react-native-image-picker": "^0.26.3",
-    "react-native-mock": "^0.3.1",
     "react-native-tab-navigator": "^0.3.3",
     "react-native-vector-icons": "^4.2.0",
     "react-native-webview-bridge-updated": "^1.0.8",
@@ -49,7 +48,7 @@
     "babel-plugin-remove-style": "^0.1.0",
     "babel-preset-react-native": "^1.9.2",
     "jest": "^20.0.4",
-    "react-test-renderer": "16.0.0-alpha.12",
+    "react-test-renderer": "next",
     "remote-redux-devtools": "^0.5.11",
     "validator": "^8.0.0"
   },
@@ -59,7 +58,8 @@
     ],
     "plugins": [
       [
-        "inline-dotenv", {
+        "inline-dotenv",
+        {
           "silent": true
         }
       ],
@@ -85,7 +85,8 @@
     "coverageReporters": [
       "json",
       "lcov"
-    ]
+    ],
+    "timers": "fake"
   },
   "standard": {
     "parser": "babel-eslint",

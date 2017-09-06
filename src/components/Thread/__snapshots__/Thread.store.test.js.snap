@@ -88,6 +88,8 @@ Object {
         "id": "8",
       },
       "id": "200",
+      "suppressCreator": null,
+      "suppressDate": null,
       "text": "",
     },
     Object {
@@ -97,6 +99,8 @@ Object {
         "id": "8",
       },
       "id": "10",
+      "suppressCreator": false,
+      "suppressDate": false,
       "text": "",
     },
     Object {
@@ -106,6 +110,8 @@ Object {
         "id": "8",
       },
       "id": "4",
+      "suppressCreator": false,
+      "suppressDate": false,
       "text": "",
     },
     Object {
@@ -115,6 +121,8 @@ Object {
         "id": "9",
       },
       "id": "1",
+      "suppressCreator": null,
+      "suppressDate": false,
       "text": "",
     },
   ],
