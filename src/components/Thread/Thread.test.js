@@ -2,74 +2,116 @@ import 'react-native'
 import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import ReactTestRenderer from 'react-test-renderer'
+
 import Thread from './Thread'
 
-it('matches the last snapshot', () => {
-  const renderer = new ReactShallowRenderer()
-  const props = {
-    createMessage: () => {},
-    currentUserId: '1',
-    fetchMessages: () => {},
-    messages: [
-      {
-        id: '56025',
-        createdAt: 'Mon Aug 14 2017 18:58:37 GMT+1200 (NZST)',
-        text: 'Flargle argle',
-        creator: { id: '86894', name: 'Yup', avatarUrl: 'http://yup.com' }
-      },
-      {
-        id: '56024',
-        createdAt: 'Mon Aug 14 2017 17:27:42 GMT+1200 (NZST)',
-        text: 'Argle bargle',
-        creator: { id: '86895', name: 'Nope', avatarUrl: 'http://nope.com' }
-      },
-      {
-        id: '56023',
-        createdAt: 'Mon Aug 14 2017 15:24:36 GMT+1200 (NZST)',
-        text: 'Bargle wargle',
-        creator: { id: '86896', name: 'Maybe', avatarUrl: 'http://maybe.com' }
-      }
-    ],
-    reconnectFetchMessages: () => {},
-    setTitle: () => {},
-    updateThreadReadTime: () => {}
-  }
+describe('Thread', () => {
+  let props
 
-  renderer.render(<Thread { ...props } />)
-  expect(renderer.getRenderOutput()).toMatchSnapshot()
-})
+  beforeEach(() => {
+    props = {
+      createMessage: () => {},
+      currentUserId: '1',
+      fetchMessages: () => {},
 
-it('uses the new API', () => {
-  const props = {
-    createMessage: () => {},
-    currentUserId: '1',
-    fetchMessages: () => {},
-    messages: [
-      {
-        id: '56025',
-        createdAt: 'Mon Aug 14 2017 18:58:37 GMT+1200 (NZST)',
-        text: 'Flargle argle',
-        creator: { id: '86894', name: 'Yup', avatarUrl: 'http://yup.com' }
-      },
-      {
-        id: '56024',
-        createdAt: 'Mon Aug 14 2017 17:27:42 GMT+1200 (NZST)',
-        text: 'Argle bargle',
-        creator: { id: '86895', name: 'Nope', avatarUrl: 'http://nope.com' }
-      },
-      {
-        id: '56023',
-        createdAt: 'Mon Aug 14 2017 15:24:36 GMT+1200 (NZST)',
-        text: 'Bargle wargle',
-        creator: { id: '86896', name: 'Maybe', avatarUrl: 'http://maybe.com' }
-      }
-    ],
-    reconnectFetchMessages: () => {},
-    setTitle: () => {},
-    updateThreadReadTime: () => {}
-  }
+      // Remember: _descending_ order, new to old...
+      messages: [
+        {
+          id: '56025',
+          createdAt: 'Mon Aug 14 2017 18:58:37 GMT+1200 (NZST)',
+          text: 'Flargle argle',
+          creator: { id: '86894', name: 'Yup', avatarUrl: 'http://yup.com' }
+        },
+        {
+          id: '56024',
+          createdAt: 'Mon Aug 14 2017 17:27:42 GMT+1200 (NZST)',
+          text: 'Argle bargle',
+          creator: { id: '86895', name: 'Nope', avatarUrl: 'http://nope.com' }
+        },
+        {
+          id: '56023',
+          createdAt: 'Mon Aug 14 2017 15:24:36 GMT+1200 (NZST)',
+          text: 'Bargle wargle',
+          creator: { id: '86896', name: 'Maybe', avatarUrl: 'http://maybe.com' }
+        }
+      ],
+      reconnectFetchMessages: () => {},
+      setTitle: () => {},
+      updateThreadReadTime: () => {}
+    }
+  })
 
-  const { root } = ReactTestRenderer.create(<Thread { ...props } />)
+  it('matches the last snapshot', () => {
+    const renderer = new ReactShallowRenderer()
+    renderer.render(<Thread { ...props } />)
+    expect(renderer.getRenderOutput()).toMatchSnapshot()
+  })
+
+  it('does not scroll if not at bottom and single new message from another user', () => {
+    const { root } = ReactTestRenderer.create(<Thread { ...props } />)
+    const nextProps = {
+      ...props,
+      messages: [
+        {
+          id: '56026',
+          creator: { id: '86897', name: 'NotMe' }
+        },
+        ...props.messages
+      ]
+    }
+    root.instance.atBottom = () => false
+    root.instance.componentWillUpdate(nextProps)
+    expect(root.instance.shouldScroll).toBe(false)
+  })
+
+  it('does not scroll if additional messages are old (infinite scroll)', () => {
+    const { root } = ReactTestRenderer.create(<Thread { ...props } />)
+    const nextProps = {
+      ...props,
+      messages: [
+        ...props.messages,
+        {
+          id: '56022',
+          creator: { id: '1', name: 'Me' }
+        }
+      ]
+    }
+    root.instance.componentWillUpdate(nextProps)
+    expect(root.instance.shouldScroll).toBe(false)
+  })
+
+  it('scrolls if not at bottom and single new message from current user', () => {
+    const { root } = ReactTestRenderer.create(<Thread { ...props } />)
+    const nextProps = {
+      ...props,
+      messages: [
+        {
+          id: '56022',
+          creator: { id: '1', name: 'Me' }
+        },
+        ...props.messages
+      ]
+    }
+    root.instance.atBottom = () => false
+    root.instance.componentWillUpdate(nextProps)
+    expect(root.instance.shouldScroll).toBe(true)
+  })
+
+  it('scrolls if already at bottom and new message from anyone', () => {
+    const { root } = ReactTestRenderer.create(<Thread { ...props } />)
+    const nextProps = {
+      ...props,
+      messages: [
+        {
+          id: '56022',
+          creator: { id: '86897', name: 'NotMe' }
+        },
+        ...props.messages
+      ]
+    }
+    root.instance.componentWillUpdate(nextProps)
+    expect(root.instance.shouldScroll).toBe(true)
+  })
 })
 
 // Mocks get hoisted. Currently cannot get this to work with manual __mocks__
@@ -118,3 +160,7 @@ jest.mock('../PeopleTyping', () => {
   }
   return PeopleTyping
 })
+
+jest.mock('util/websockets', () => ({
+  getSocket: Promise.resolve
+}))

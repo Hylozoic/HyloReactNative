@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`matches the last snapshot 1`] = `
+exports[`Thread matches the last snapshot 1`] = `
 <KeyboardAvoidingView
   behavior="padding"
   keyboardVerticalOffset={64}

@@ -85,7 +85,8 @@
     "coverageReporters": [
       "json",
       "lcov"
-    ]
+    ],
+    "timers": "fake"
   },
   "standard": {
     "parser": "babel-eslint",
