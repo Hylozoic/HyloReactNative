@@ -12,7 +12,9 @@ exports[`matches the last snapshot 1`] = `
           Object {
             "createdAt": "Mon Aug 14 2017 18:58:37 GMT+1200 (NZST)",
             "creator": Object {
+              "avatarUrl": "http://yup.com",
               "id": "86894",
+              "name": "Yup",
             },
             "id": "56025",
             "text": "Flargle argle",
@@ -20,7 +22,9 @@ exports[`matches the last snapshot 1`] = `
           Object {
             "createdAt": "Mon Aug 14 2017 17:27:42 GMT+1200 (NZST)",
             "creator": Object {
+              "avatarUrl": "http://nope.com",
               "id": "86895",
+              "name": "Nope",
             },
             "id": "56024",
             "text": "Argle bargle",
@@ -28,28 +32,21 @@ exports[`matches the last snapshot 1`] = `
           Object {
             "createdAt": "Mon Aug 14 2017 15:24:36 GMT+1200 (NZST)",
             "creator": Object {
-              "id": "86895",
+              "avatarUrl": "http://maybe.com",
+              "id": "86896",
+              "name": "Maybe",
             },
             "id": "56023",
             "text": "Bargle wargle",
           },
         ]
       }
-      disableVirtualization={false}
-      horizontal={false}
-      initialNumToRender={10}
       keyExtractor={[Function]}
-      maxToRenderPerBatch={10}
-      numColumns={1}
       onEndReached={[Function]}
       onEndReachedThreshold={0.3}
       onScroll={[Function]}
       refreshing={false}
       renderItem={[Function]}
-      renderScrollComponent={[Function]}
-      scrollEventThrottle={50}
-      updateCellsBatchingPeriod={50}
-      windowSize={21}
     />
     <_class
       blurOnSubmit={false}
@@ -58,8 +55,8 @@ exports[`matches the last snapshot 1`] = `
       placeholder="Write something..."
       sendIsTyping={undefined}
     />
-    <Connect(PeopleTyping) />
-    <Connect(SocketSubscriber)
+    <PeopleTyping />
+    <SocketSubscriber
       id={undefined}
       type="post"
     />
