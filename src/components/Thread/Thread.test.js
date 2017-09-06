@@ -47,70 +47,81 @@ describe('Thread', () => {
     expect(renderer.getRenderOutput()).toMatchSnapshot()
   })
 
-  it('does not scroll if not at bottom and single new message from another user', () => {
-    const { root } = ReactTestRenderer.create(<Thread { ...props } />)
-    const nextProps = {
-      ...props,
-      messages: [
-        {
-          id: '56026',
-          creator: { id: '86897', name: 'NotMe' }
-        },
-        ...props.messages
-      ]
-    }
-    root.instance.atBottom = () => false
-    root.instance.componentWillUpdate(nextProps)
-    expect(root.instance.shouldScroll).toBe(false)
+  describe('when at bottom', () => {
+    let root
+
+    beforeEach(() => {
+      root = ReactTestRenderer.create(<Thread { ...props } />).root
+    })
+
+    it('scrolls on new message from anyone', () => {
+      const nextProps = {
+        ...props,
+        messages: [
+          {
+            id: '56022',
+            creator: { id: '86897', name: 'NotMe' }
+          },
+          ...props.messages
+        ]
+      }
+      root.instance.componentWillUpdate(nextProps)
+      expect(root.instance.shouldScroll).toBe(true)
+    })
   })
 
-  it('does not scroll if additional messages are old (infinite scroll)', () => {
-    const { root } = ReactTestRenderer.create(<Thread { ...props } />)
-    const nextProps = {
-      ...props,
-      messages: [
-        ...props.messages,
-        {
-          id: '56022',
-          creator: { id: '1', name: 'Me' }
-        }
-      ]
-    }
-    root.instance.componentWillUpdate(nextProps)
-    expect(root.instance.shouldScroll).toBe(false)
-  })
+  describe('when not at bottom', () => {
+    let root
 
-  it('scrolls if not at bottom and single new message from current user', () => {
-    const { root } = ReactTestRenderer.create(<Thread { ...props } />)
-    const nextProps = {
-      ...props,
-      messages: [
-        {
-          id: '56022',
-          creator: { id: '1', name: 'Me' }
-        },
-        ...props.messages
-      ]
-    }
-    root.instance.atBottom = () => false
-    root.instance.componentWillUpdate(nextProps)
-    expect(root.instance.shouldScroll).toBe(true)
-  })
+    beforeEach(() => {
+      root = ReactTestRenderer.create(<Thread { ...props } />).root
+      root.instance.atBottom = () => false
+    })
 
-  it('scrolls if already at bottom and new message from anyone', () => {
-    const { root } = ReactTestRenderer.create(<Thread { ...props } />)
-    const nextProps = {
-      ...props,
-      messages: [
-        {
-          id: '56022',
-          creator: { id: '86897', name: 'NotMe' }
-        },
-        ...props.messages
-      ]
-    }
-    root.instance.componentWillUpdate(nextProps)
-    expect(root.instance.shouldScroll).toBe(true)
+    it('does not scroll if additional messages are old (infinite scroll)', () => {
+      const nextProps = {
+        ...props,
+        messages: [
+          ...props.messages,
+          {
+            id: '56022',
+            creator: { id: '1', name: 'Me' }
+          }
+        ]
+      }
+      root.instance.componentWillUpdate(nextProps)
+      expect(root.instance.shouldScroll).toBe(false)
+    })
+
+    it('does not scroll on single new message from another user', () => {
+      const nextProps = {
+        ...props,
+        messages: [
+          {
+            id: '56026',
+            creator: { id: '86897', name: 'NotMe' }
+          },
+          ...props.messages
+        ]
+      }
+      root.instance.componentWillUpdate(nextProps)
+      expect(root.instance.shouldScroll).toBe(false)
+    })
+
+    it('scrolls on single new message from current user', () => {
+      const nextProps = {
+        ...props,
+        messages: [
+          {
+            id: '56022',
+            creator: { id: '1', name: 'Me' }
+          },
+          ...props.messages
+        ]
+      }
+      root.instance.componentWillUpdate(nextProps)
+      expect(root.instance.shouldScroll).toBe(true)
+    })
   })
 })
 
