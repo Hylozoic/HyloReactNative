@@ -1,11 +1,13 @@
 import React from 'react'
 import {
   View,
-  Text
+  Text,
+  KeyboardAvoidingView
 } from 'react-native'
 import Button from '../../Button'
 import SignupControl from '../SignupControl'
 import styles from './SignupFlow3.styles'
+import { keyboardAvoidingViewProps as kavProps } from 'util/viewHelpers'
 
 export default class SignupFlow3 extends React.Component {
   static navigationOptions = () => ({
@@ -18,7 +20,7 @@ export default class SignupFlow3 extends React.Component {
   render () {
     const { location, changeSetting, saveAndNext } = this.props
 
-    return <View style={styles.container}>
+    return <KeyboardAvoidingView style={styles.container} {...kavProps}>
       <View>
         <Text style={styles.title}>Add your location</Text>
         <Text style={styles.subTitle}>
@@ -33,6 +35,6 @@ export default class SignupFlow3 extends React.Component {
         style={styles.continueButton}
         text='Continue'
         onPress={saveAndNext} />
-    </View>
+    </KeyboardAvoidingView>
   }
 }
