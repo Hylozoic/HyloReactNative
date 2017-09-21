@@ -1,13 +1,10 @@
 import { connect } from 'react-redux'
 import { getUserSettings, updateLocalUserSettings, updateUserSettings } from '../SignupFlow.store.js'
-import getMe from '../../../store/selectors/getMe'
 
 export function mapStateToProps (state, props) {
-  const currentUser = getMe(state, props)
-  console.log('USER ID *** ', currentUser.id)
-  const { avatarUrl } = getUserSettings(state)
+  const { location } = getUserSettings(state)
   return {
-    avatarUrl
+    location
   }
 }
 
@@ -19,7 +16,7 @@ export function mapDispatchToProps (dispatch, props) {
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
-  const goToNext = () => ownProps.navigation.navigate('SignupFlow3')
+  const goToNext = () => ownProps.navigation.navigate('SignupFlow4')
   const { avatarUrl } = stateProps
   const saveAndNext = () => {
     dispatchProps.updateUserSettings({avatarUrl})

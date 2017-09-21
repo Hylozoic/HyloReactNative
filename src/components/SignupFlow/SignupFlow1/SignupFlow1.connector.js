@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { signup, getUserSettings, updateUserSettings } from '../SignupFlow.store.js'
+import { signup, getUserSettings, updateLocalUserSettings } from '../SignupFlow.store.js'
 
 export function mapStateToProps (state, props) {
   const { name, email, password } = getUserSettings(state)
@@ -13,7 +13,7 @@ export function mapStateToProps (state, props) {
 export function mapDispatchToProps (dispatch, props) {
   return {
     signup: params => dispatch(signup(params)),
-    changeSetting: setting => value => dispatch(updateUserSettings({[setting]: value}))
+    changeSetting: setting => value => dispatch(updateLocalUserSettings({[setting]: value}))
   }
 }
 

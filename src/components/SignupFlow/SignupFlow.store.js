@@ -4,7 +4,7 @@ export const defaultState = {
 
 export const MODULE_NAME = 'SignupFlow'
 export const UPDATE_USER_SETTINGS = `${MODULE_NAME}/UPDATE_USER_SETTINGS`
-export const SAVE_USER_SETTINGS = `${MODULE_NAME}/SAVE_USER_SETTINGS`
+export const UPDATE_LOCAL_USER_SETTINGS = `${MODULE_NAME}/UPDATE_LOCAL_USER_SETTINGS`
 export const SIGNUP = `${MODULE_NAME}/SIGNUP`
 
 export default function reducer (state = defaultState, action) {
@@ -12,7 +12,7 @@ export default function reducer (state = defaultState, action) {
   if (error) return state
 
   switch (type) {
-    case UPDATE_USER_SETTINGS:
+    case UPDATE_LOCAL_USER_SETTINGS:
       return {
         ...state,
         userSettings: {
@@ -35,17 +35,30 @@ export function signup ({ name, email, password }) {
   }
 }
 
-export function updateUserSettings (settings) {
+export function updateLocalUserSettings (settings) {
   return {
-    type: UPDATE_USER_SETTINGS,
+    type: UPDATE_LOCAL_USER_SETTINGS,
     payload: settings
   }
 }
 
-export function saveUserSettings (settings) {
+export function updateUserSettings (changes) {
   return {
-    type: SAVE_USER_SETTINGS,
-    payload: settings
+    type: UPDATE_USER_SETTINGS,
+    graphql: {
+      query: `mutation ($changes: MeInput) {
+        updateMe(changes: $changes) {
+          id
+        }
+      }`,
+      variables: {
+        changes
+      }
+    },
+    meta: {
+      optimistic: true,
+      changes
+    }
   }
 }
 
