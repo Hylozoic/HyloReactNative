@@ -5,6 +5,7 @@ exports[`renders FB login correctly 1`] = `
   contentContainerStyle={
     Object {
       "alignItems": "center",
+      "backgroundColor": "white",
       "flex": 1,
       "justifyContent": "center",
     }

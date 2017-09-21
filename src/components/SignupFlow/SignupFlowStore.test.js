@@ -1,16 +1,19 @@
 import reducer, {
   MODULE_NAME,
-  addUserSkill,
-  removeUserSkill,
+  ADD_SKILL_PENDING,
+  REMOVE_SKILL_PENDING,
   getUserSkills
 } from './SignupFlow.Store'
 
 describe('reducer', () => {
-  describe('on ADD_USER_SKILL', () => {
+  describe('on ADD_SKILL_PENDING', () => {
     const state = {
       userSkills: ['oneing', 'twoing']
     }
-    const action = addUserSkill('threeing')
+    const action = {
+      type: ADD_SKILL_PENDING,
+      meta: {name: 'threeing'}
+    }
 
     it('adds a skill', () => {
       expect(reducer(state, action))
@@ -18,11 +21,14 @@ describe('reducer', () => {
     })
   })
 
-  describe('on REMOVE_USER_SKILL', () => {
+  describe('on REMOVE_SKILL_PENDING', () => {
     const state = {
       userSkills: ['oneing', 'twoing', 'threeing']
     }
-    const action = removeUserSkill('twoing')
+    const action = {
+      type: REMOVE_SKILL_PENDING,
+      meta: {name: 'twoing'}
+    }
 
     it('removes a skill', () => {
       expect(reducer(state, action))

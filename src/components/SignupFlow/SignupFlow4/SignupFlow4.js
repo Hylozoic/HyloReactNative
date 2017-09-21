@@ -20,7 +20,9 @@ export default class SignupFlow4 extends React.Component {
   })
 
   render () {
-    const { saveAndNext, skill, setSkill, userSkills, remainingSkills, addUserSkill, removeUserSkill } = this.props
+    const { saveAndNext, skill, setSkill, userSkills, remainingSkills, addSkill, removeSkill } = this.props
+
+    const editingSkill = !isEmpty(skill)
 
     return <KeyboardAvoidingView style={styles.container} {...kavProps}>
       <View style={styles.containerPadding}>
@@ -34,15 +36,15 @@ export default class SignupFlow4 extends React.Component {
         label='How can you help?'
         value={skill}
         onChange={setSkill} />
-      <SkillCloud skills={remainingSkills} onPress={addUserSkill} />
+      <SkillCloud skills={remainingSkills} onPress={addSkill} />
       {!isEmpty(userSkills) && <View style={styles.userSkills}>
         <Text style={styles.yourSkillsLabel}>Your Skills</Text>
-        <SkillCloud skills={userSkills} onPress={removeUserSkill} />
+        <SkillCloud skills={userSkills} onPress={removeSkill} />
       </View>}
       <Button
         style={styles.continueButton}
-        text='Continue'
-        onPress={saveAndNext} />
+        text={editingSkill ? 'Add Skill' : 'Continue'}
+        onPress={editingSkill ? () => addSkill(skill) : saveAndNext} />
     </KeyboardAvoidingView>
   }
 }

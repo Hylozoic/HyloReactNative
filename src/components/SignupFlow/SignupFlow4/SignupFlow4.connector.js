@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import {
-  setSkill, getSkill, getUserSkills, addUserSkill, removeUserSkill
+  setSkill, getSkill, getUserSkills, addSkill, removeSkill
 } from '../SignupFlow.store.js'
 import { isEmpty, includes } from 'lodash/fp'
 
@@ -40,7 +40,7 @@ export function mapStateToProps (state, props) {
 }
 
 export const mapDispatchToProps = {
-  setSkill, addUserSkill, removeUserSkill
+  setSkill, addSkill, removeSkill
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {

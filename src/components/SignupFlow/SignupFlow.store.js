@@ -9,12 +9,14 @@ export const UPDATE_USER_SETTINGS = `${MODULE_NAME}/UPDATE_USER_SETTINGS`
 export const UPDATE_LOCAL_USER_SETTINGS = `${MODULE_NAME}/UPDATE_LOCAL_USER_SETTINGS`
 export const SIGNUP = `${MODULE_NAME}/SIGNUP`
 export const SET_SKILL = `${MODULE_NAME}/SET_SKILL`
-export const ADD_USER_SKILL = `${MODULE_NAME}/ADD_USER_SKILL`
-export const REMOVE_USER_SKILL = `${MODULE_NAME}/REMOVE_USER_SKILL`
+export const ADD_SKILL = `${MODULE_NAME}/ADD_SKILL`
+export const ADD_SKILL_PENDING = `${ADD_SKILL}_PENDING`
+export const REMOVE_SKILL = `${MODULE_NAME}/REMOVE_SKILL`
+export const REMOVE_SKILL_PENDING = `${REMOVE_SKILL}_PENDING`
 export const SET_USER_SKILLS = `${MODULE_NAME}/SET_USER_SKILLS`
 
 export default function reducer (state = defaultState, action) {
-  const { error, type, payload } = action
+  const { error, type, payload, meta } = action
   if (error) return state
 
   switch (type) {
@@ -31,15 +33,16 @@ export default function reducer (state = defaultState, action) {
         ...state,
         skill: payload
       }
-    case ADD_USER_SKILL:
+    case ADD_SKILL_PENDING:
       return {
         ...state,
-        userSkills: state.userSkills.concat([payload])
+        skill: '',
+        userSkills: state.userSkills.concat([meta.name])
       }
-    case REMOVE_USER_SKILL:
+    case REMOVE_SKILL_PENDING:
       return {
         ...state,
-        userSkills: state.userSkills.filter(s => s !== payload)
+        userSkills: state.userSkills.filter(s => s !== meta.name)
       }
     case SET_USER_SKILLS:
       return {
@@ -95,17 +98,44 @@ export function setSkill (skill) {
   }
 }
 
-export function addUserSkill (skill) {
+export function addSkill (name) {
   return {
-    type: ADD_USER_SKILL,
-    payload: skill
+    type: ADD_SKILL,
+    graphql: {
+      query: `mutation ($name: String) {
+        addSkill(name: $name) {
+          id,
+          name
+        }
+      }`,
+      variables: {
+        name
+      }
+    },
+    meta: {
+      optimistic: true,
+      name
+    }
   }
 }
 
-export function removeUserSkill (skill) {
+export function removeSkill (name) {
   return {
-    type: REMOVE_USER_SKILL,
-    payload: skill
+    type: REMOVE_SKILL,
+    graphql: {
+      query: `mutation ($name: String) {
+        removeSkill(name: $name) {
+          success
+        }
+      }`,
+      variables: {
+        name
+      }
+    },
+    meta: {
+      optimistic: true,
+      name
+    }
   }
 }
 

@@ -8,8 +8,9 @@ Array [
 ]
 `;
 
-exports[`reducer on ADD_USER_SKILL adds a skill 1`] = `
+exports[`reducer on ADD_SKILL_PENDING adds a skill 1`] = `
 Object {
+  "skill": "",
   "userSkills": Array [
     "oneing",
     "twoing",
@@ -18,7 +19,7 @@ Object {
 }
 `;
 
-exports[`reducer on REMOVE_USER_SKILL removes a skill 1`] = `
+exports[`reducer on REMOVE_SKILL_PENDING removes a skill 1`] = `
 Object {
   "userSkills": Array [
     "oneing",
