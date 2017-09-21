@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getUserSkills returns the userSkills 1`] = `
+Array [
+  "snap",
+  "crackle",
+  "pop",
+]
+`;
+
+exports[`reducer on ADD_USER_SKILL adds a skill 1`] = `
+Object {
+  "userSkills": Array [
+    "oneing",
+    "twoing",
+    "threeing",
+  ],
+}
+`;
+
+exports[`reducer on REMOVE_USER_SKILL removes a skill 1`] = `
+Object {
+  "userSkills": Array [
+    "oneing",
+    "threeing",
+  ],
+}
+`;

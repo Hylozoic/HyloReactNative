@@ -43,6 +43,7 @@ export const slateGrey80 = '#8490a1'
 export const white80onCaribbeanGreen = fakeAlpha('#FFFFFF', 0.8, caribbeanGreen)
 export const white60onCaribbeanGreen = fakeAlpha('#FFFFFF', 0.6, caribbeanGreen)
 export const white40onCaribbeanGreen = fakeAlpha('#FFFFFF', 0.4, caribbeanGreen)
+export const black10OnCaribbeanGreen = fakeAlpha('#000000', 0.1, caribbeanGreen)
 
 export function fakeAlpha (color, alpha, background = '#ffffff') {
   const fg = tinycolor(color).toRgb()

@@ -3,9 +3,9 @@ import { View, Text, TextInput } from 'react-native'
 import styles from './SignupControl.styles.js'
 
 export default function SignupControl ({
-  label, value, onChange, secureTextEntry, keyboardType, autoCapitalize, autoCorrect
+  label, value, onChange, secureTextEntry, keyboardType, autoCapitalize, autoCorrect, style
 }) {
-  return <View style={styles.control}>
+  return <View style={[styles.control, style]}>
     <Text style={styles.label}>{label}</Text>
     <TextInput
       style={styles.textInput}

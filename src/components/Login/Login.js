@@ -50,7 +50,7 @@ export default class Login extends React.Component {
   }
 
   componentDidMount () {
-    this.props.navigation.navigate('SignupFlow3')
+    this.props.navigation.navigate('SignupFlow4')
   }
 
   render () {

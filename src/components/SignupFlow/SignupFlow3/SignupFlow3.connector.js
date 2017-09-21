@@ -17,9 +17,9 @@ export function mapDispatchToProps (dispatch, props) {
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
   const goToNext = () => ownProps.navigation.navigate('SignupFlow4')
-  const { avatarUrl } = stateProps
+  const { location } = stateProps
   const saveAndNext = () => {
-    dispatchProps.updateUserSettings({avatarUrl})
+    dispatchProps.updateUserSettings({location})
     .then(({ error }) => {
       if (error) return
       return goToNext()
