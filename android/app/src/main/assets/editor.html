@@ -873,7 +873,7 @@
 				});
 			}
 
-			zss_editor.init = function(options) {
+			zss_editor.init = function() {
 
 				disableLineBreakIfNecessary('zss_editor_title');
 				disableLineBreakIfNecessary('zss_editor_content');
@@ -917,20 +917,11 @@
 				whenPastingInsertAsPlainText('zss_editor_title');
 				whenPastingInsertAsPlainText('zss_editor_content');
 
-				if (options.hiddenTitle) {
-					zss_editor.hideTitle();
-					zss_editor.focusContent();
-				} else {
-					zss_editor.focusTitle();
-				}
+				zss_editor.focusTitle();
 
 				setTimeout(function() {
 					WebViewBridge.send(JSON.stringify({type: 'ZSS_INITIALIZED'}))
 				}, 20);
-
-				window.onerror = function (message, source, line, col, err) {
-					zss_editor.debug('Error: ' + message + '\n' + err.stack)
-				}
 
 			}//end
 
@@ -1266,15 +1257,6 @@
 				var sel = document.getSelection();
 				sel.deleteFromDocument();
 				document.execCommand('insertHTML',false,'<a href="'+encodeHtmlEntities(url)+'">'+encodeHtmlEntities(title)+'</a>');
-
-				zss_editor.enabledEditingItems();
-			}
-
-			zss_editor.insertCustomHTML = function(data) {
-				zss_editor.restorerange();
-				var sel = document.getSelection();
-				sel.deleteFromDocument();
-				document.execCommand('insertHTML', false, data);
 
 				zss_editor.enabledEditingItems();
 			}
