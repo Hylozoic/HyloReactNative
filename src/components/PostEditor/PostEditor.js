@@ -37,7 +37,6 @@ export default class PostEditor extends React.Component {
   }
 
   componentDidMount () {
-    console.log('componentDidMount')
     const { post, navigation, setDetails } = this.props
     setDetails(get('details', post))
 
