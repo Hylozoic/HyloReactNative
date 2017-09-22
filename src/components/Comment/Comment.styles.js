@@ -7,6 +7,9 @@ export default {
     marginRight: 12,
     marginBottom: 30
   },
+  details: {
+    flex: 1
+  },
   avatar: {
     marginRight: 10
   },

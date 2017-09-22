@@ -7,9 +7,9 @@ import Login from './Login'
 
 jest.mock('react-native-google-signin', () => {})
 
-it('renders FB login correctly', () => {
+it('renders Login correctly', () => {
   const renderer = new ReactShallowRenderer()
-  renderer.render(<Login />)
+  renderer.render(<Login goToSignup={() => {}} />)
   const actual = renderer.getRenderOutput()
   expect(actual).toMatchSnapshot()
 })

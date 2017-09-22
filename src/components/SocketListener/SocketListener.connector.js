@@ -9,10 +9,10 @@ import {
   receiveThread,
   handleEvent
 } from './SocketListener.store'
-// import {
-//   addUserTyping,
-//   clearUserTyping
-// } from 'components/PeopleTyping/PeopleTyping.store'
+import {
+  addUserTyping,
+  clearUserTyping
+} from '../PeopleTyping/PeopleTyping.store'
 import getMe from '../../store/selectors/getMe'
 import getCommunity from '../../store/selectors/getCommunity'
 
@@ -45,8 +45,8 @@ export function mapDispatchToProps (dispatch, props) {
     setupCoreEventHandlers: setupCoreEventHandlers(dispatch),
 
     ...bindActionCreators({
-      // addUserTyping,
-      // clearUserTyping,
+      addUserTyping,
+      clearUserTyping,
       receivePost
     }, dispatch)
   }

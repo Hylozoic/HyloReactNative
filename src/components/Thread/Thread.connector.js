@@ -10,11 +10,13 @@ import {
   updateThreadReadTime
 } from './Thread.store'
 import getCurrentUserId from '../../store/selectors/getCurrentUserId'
+import { sendIsTyping } from 'util/websockets'
 
 function mapStateToProps (state, props) {
   const { id, messages, title } = getThread(state, props) || {}
   return {
-    currentUser: getCurrentUserId(state),
+    id,
+    currentUserId: getCurrentUserId(state),
     hasMore: getHasMoreMessages(state, { id }),
     messages,
     pending: state.pending[FETCH_MESSAGES],
@@ -27,7 +29,9 @@ function mapDispatchToProps (dispatch, { navigation }) {
   return {
     createMessage: text => dispatch(createMessage(threadId, sanitize(text))),
     fetchMessages: cursor => dispatch(fetchMessages(threadId, { cursor })),
+    reconnectFetchMessages: () => dispatch(fetchMessages(threadId, {reset: true})),
     setTitle: title => navigation.setParams({ title }),
+    sendIsTyping: () => sendIsTyping(threadId, true),
     updateThreadReadTime: () => dispatch(updateThreadReadTime(threadId))
   }
 }

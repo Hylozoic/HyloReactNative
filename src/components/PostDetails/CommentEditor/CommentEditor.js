@@ -3,6 +3,7 @@ import { Button, KeyboardAvoidingView } from 'react-native'
 import Editor from '../../Editor'
 import { get } from 'lodash/fp'
 import { keyboardAvoidingViewProps as kavProps } from 'util/viewHelpers'
+import { isIOS } from 'util/platform'
 
 export default class CommentEditor extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -33,14 +34,20 @@ export default class CommentEditor extends React.Component {
     if (this.interval) clearInterval(this.interval)
   }
 
-  render () {
+  editorView = () => {
     const { content, navigation } = this.props
-    return <KeyboardAvoidingView style={styles.container} {...kavProps}>
-      <Editor ref={ref => { this.editor = ref }}
-        initialContent={content}
-        navigation={navigation}
-        communityId={navigation.state.params.communityId} />
-    </KeyboardAvoidingView>
+    return <Editor ref={ref => { this.editor = ref }}
+      initialContent={content}
+      navigation={navigation}
+      communityId={navigation.state.params.communityId} />
+  }
+
+  render () {
+    return isIOS
+      ? <KeyboardAvoidingView style={styles.container} {...kavProps}>
+        {this.editorView()}
+      </KeyboardAvoidingView>
+      : this.editorView()
   }
 }
 

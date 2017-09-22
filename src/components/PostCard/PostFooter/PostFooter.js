@@ -17,6 +17,9 @@ export default function PostFooter ({
   showActivityLabel
 }) {
   const voteStyle = myVote ? styles.votes.active : styles.votes.inactive
+  const commentsText = commentsTotal
+    ? `${commentsTotal} comment${commentsTotal === 1 ? '' : 's'}`
+    : 'No comments'
 
   return <View style={styles.container}>
     {showActivityLabel && <Text style={styles.activityLabel}>Activity</Text>}
@@ -29,9 +32,7 @@ export default function PostFooter ({
           hasOverlap={index > 0}
           zIndex={3 - index} />
       })}
-      <Text style={styles.commentsText}>
-        {`${commentsTotal} comment`}{commentsTotal === 1 ? '' : 's'}
-      </Text>
+      <Text style={styles.commentsText}>{commentsText}</Text>
     </View>
     <TouchableOpacity style={styles.votes.container}>
       <Icon name='ArrowUp' style={[styles.votes.icon, voteStyle]} />

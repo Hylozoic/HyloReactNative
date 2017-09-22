@@ -111,12 +111,21 @@ android {
             keyAlias HYLO_DEBUG_KEY_ALIAS
             keyPassword HYLO_DEBUG_KEY_PASSWORD
         }
+        release {
+            if (project.hasProperty('HYLO_RELEASE_STORE_FILE')) {
+                storeFile file(HYLO_RELEASE_STORE_FILE)
+                storePassword HYLO_RELEASE_STORE_PASSWORD
+                keyAlias HYLO_RELEASE_KEY_ALIAS
+                keyPassword HYLO_RELEASE_KEY_PASSWORD
+            }
+        }
     }
     buildTypes {
         debug {
             signingConfig signingConfigs.debug
         }
         release {
+            signingConfig signingConfigs.release
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }

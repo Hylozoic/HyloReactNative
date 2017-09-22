@@ -1,6 +1,7 @@
 import { clearSessionCookie } from '../../util/session'
 import { LoginManager } from 'react-native-fbsdk'
 import { GoogleSignin } from 'react-native-google-signin'
+import { isEmpty } from 'lodash'
 
 export const LOGIN = 'LOGIN'
 export const LOGIN_WITH_FACEBOOK = 'LOGIN_WITH_FACEBOOK'
@@ -45,7 +46,11 @@ export function logout () {
         transform: () =>
           clearSessionCookie()
           .then(() => LoginManager.logOut())
-          .then(() => GoogleSignin.currentUser() && GoogleSignin.signOut())
+          .then(() => {
+            if (!isEmpty(GoogleSignin.currentUser())) {
+              return GoogleSignin.signOut()
+            }
+          })
       }
     }
   }

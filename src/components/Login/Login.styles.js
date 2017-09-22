@@ -1,25 +1,25 @@
-import { StyleSheet } from 'react-native'
+import { Dimensions, StyleSheet } from 'react-native'
 import { caribbeanGreen } from 'style/colors'
 
 const mixins = {
-  textInput: {
-    width: 288,
-    height: 40,
-    marginBottom: 10
-  },
   loginContainer: {
-    width: 162,
     height: 36,
     backgroundColor: 'lightgray',
-    marginLeft: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    opacity: 0.5
+    opacity: 0.5,
+    marginLeft: 1
   },
   icon: {
-    marginRight: 24,
     fontSize: 20,
     marginTop: 10
+  },
+  paddedRow: {
+    paddingRight: 15,
+    paddingLeft: 15,
+    marginBottom: 10,
+    flex: 1,
+    flexDirection: 'row'
   }
 }
 
@@ -27,13 +27,14 @@ export default {
   logo: {
     height: 80,
     width: 80,
-    marginBottom: 24
+    marginTop: Math.pow(Dimensions.get('window').height, 1.01) / 8,
+    marginBottom: 12
   },
   title: {
     fontSize: 24,
     color: caribbeanGreen,
     marginBottom: 24,
-    fontWeight: '600'
+    fontFamily: 'Circular-Bold'
   },
   iconOpaque: {
     ...mixins.icon,
@@ -52,83 +53,104 @@ export default {
   facebookLoginContainer: {
     ...mixins.loginContainer,
     borderTopLeftRadius: 50,
-    borderBottomLeftRadius: 50
+    borderBottomLeftRadius: 50,
+    flex: 0.5
   },
   googleLoginContainer: {
     ...mixins.loginContainer,
     borderTopRightRadius: 50,
-    borderBottomRightRadius: 50
-  },
-  emailInput: {
-    ...mixins.textInput
-  },
-  emailInputWithoutIcon: {
-    ...mixins.textInput,
-    width: 332
-  },
-  passwordInput: {
-    ...mixins.textInput
-  },
-  passwordView: {
-    marginTop: 12
+    borderBottomRightRadius: 50,
+    flex: 0.5
   },
   error: {
     color: 'red',
     marginBottom: 10
   },
   signup: {
-    marginTop: 24,
+    marginTop: 12,
+    marginBottom: 30,
     flexDirection: 'row'
   },
   signupText: {
     color: caribbeanGreen,
-    fontWeight: '600'
+    fontFamily: 'Circular-Bold'
   },
   loginButton: {
-    backgroundColor: caribbeanGreen,
-    height: 36,
-    borderRadius: 50,
-    width: 324,
-    justifyContent: 'center',
-    marginTop: 48
+    marginTop: 7
   },
   loginText: {
     color: 'white',
     backgroundColor: 'transparent',
     textAlign: 'center',
-    fontWeight: '500'
+    fontFamily: 'Circular-Book',
+    fontSize: 18
   },
   connectWith: {
-    marginTop: 12,
-    marginBottom: 12,
+    marginTop: 2,
+    paddingBottom: 10,
     opacity: 0.5
   },
-  loginButtons: {
-    flexDirection: 'row',
-    opacity: 0.7
-  },
-  label: {
-    marginBottom: 12
-  },
-  inputWithIcon: {
-    flexDirection: 'row',
-    borderWidth: StyleSheet.hairlineWidth,
-    borderRadius: 5,
-    height: 40
-  },
-  inputWithIconValid: {
-    flexDirection: 'row',
-    borderWidth: StyleSheet.hairlineWidth,
-    borderRadius: 5,
-    height: 40,
-    borderColor: caribbeanGreen
-  },
   heavyText: {
-    fontWeight: '500'
+    fontFamily: 'Circular-Book'
   },
   accountText: {
-    fontWeight: '500',
+    fontFamily: 'Circular-Book',
     opacity: 0.7
+  },
+  paddedRow: mixins.paddedRow,
+  paddedRowWithOpacity: {
+    ...mixins.paddedRow,
+    opacity: 0.7
+  },
+  labelRow: {
+    ...mixins.paddedRow,
+    marginBottom: 4,
+    justifyContent: 'flex-start'
+  },
+  paddedBorder: {
+    flex: 1,
+    flexDirection: 'row',
+    borderWidth: StyleSheet.hairlineWidth,
+    borderRadius: 5,
+    minHeight: 40
+  },
+  paddedButton: {
+    flex: 1,
+    flexDirection: 'row',
+    minHeight: 30,
+    backgroundColor: caribbeanGreen,
+    height: 36,
+    borderRadius: 50,
+    justifyContent: 'center',
+    marginTop: 24
+  },
+  paddedBorderValid: {
+    flex: 1,
+    flexDirection: 'row',
+    borderWidth: StyleSheet.hairlineWidth,
+    borderRadius: 5,
+    minHeight: 40,
+    borderColor: caribbeanGreen
+  },
+  leftInputView: {
+    height: 40,
+    flex: 0.9,
+    borderRadius: 5,
+    paddingLeft: 10
+  },
+  textInput: {
+    height: 38,
+    marginTop: 2
+  },
+  labelText: {
+    fontFamily: 'Circular-Book',
+    textAlign: 'left',
+    flex: 1
+  },
+  rightIconView: {
+    height: 40,
+    flex: 0.1,
+    borderRadius: 5
   },
   androidInvisibleUnderline: 'rgba(0,0,0,0)'
 }

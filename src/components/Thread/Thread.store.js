@@ -6,6 +6,7 @@ import { humanDate, sanitize, threadNames } from 'hylo-utils/text'
 import orm from '../../store/models'
 import { makeGetQueryResults } from '../../store/reducers/queryResults'
 
+export const BATCH_MINUTES = 5
 export const CREATE_MESSAGE = 'Thread/CREATE_MESSAGE'
 export const CREATE_MESSAGE_PENDING = `${CREATE_MESSAGE}_PENDING`
 export const FETCH_MESSAGES = 'Thread/FETCH_MESSAGES'
@@ -97,13 +98,33 @@ export function updateThreadReadTime (id) {
   }
 }
 
-function refineMessages ({ id, createdAt, text, creator }) {
+export function isWithinBatchLimit (d1, d2) {
+  const elapsed = (new Date(d1) - new Date(d2)) / 60000
+  return elapsed <= BATCH_MINUTES
+}
+
+export function refineMessage ({ id, createdAt, creator, text }, i, messages) {
   const creatorFields = pick([ 'id', 'name', 'avatarUrl' ], creator.ref)
+
+  // This might seem counter-intuitive, because the list is reversed. These
+  // values handle compact display of consecutive messages by the same creator
+  // when received in MessageCard.
+  const next = i > 0 && i < messages.length ? messages[i - 1] : null
+  const prev = i > 0 && i < messages.length - 1 ? messages[i + 1] : null
+  const suppressCreator = prev
+    && creator.id === prev.creator.id
+    && isWithinBatchLimit(createdAt, prev.createdAt)
+  const suppressDate = next
+    && creator.id === next.creator.id
+    && isWithinBatchLimit(next.createdAt, createdAt)
+
   return {
     id,
     createdAt: humanDate(createdAt),
+    creator: creatorFields,
     text: sanitize(text),
-    creator: creatorFields
+    suppressCreator,
+    suppressDate
   }
 }
 
@@ -114,7 +135,7 @@ function refineThread (session, id) {
     const messages = thread.messages
       .orderBy(m => Number(m.id), 'desc')
       .toModelArray()
-      .map(refineMessages)
+      .map(refineMessage)
     const title = threadNames(thread.participants.toRefArray().map(firstName))
     return {
       id: thread.id,

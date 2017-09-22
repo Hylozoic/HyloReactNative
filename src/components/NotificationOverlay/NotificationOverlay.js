@@ -19,6 +19,14 @@ export default class Thread extends React.Component {
   }
 
   componentDidMount() {
+    this.animate()
+  }
+
+  componentDidUpdate() {
+    this.animate()
+  }
+
+  animate () {
     const height = lineHeight + padding * 2
     Animated.sequence([
       Animated.timing(
