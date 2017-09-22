@@ -57,10 +57,10 @@ export default class PostEditor extends React.Component {
   }
 
   render () {
-    const { details, editDetails } = this.props
+    const { details, editDetails, postId } = this.props
     const { title, type } = this.state
 
-    if (!details) return <Loading />
+    if (postId && !details) return <Loading />
 
     return <KeyboardAvoidingView style={styles.container} {...kavProps}>
       <ScrollView style={styles.scrollContainer}>
