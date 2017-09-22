@@ -4,6 +4,7 @@ import android.app.Application;
 import android.util.Log;
 
 import com.facebook.react.ReactApplication;
+import com.geektime.rnonesignalandroid.ReactNativeOneSignalPackage;
 import co.apptailor.googlesignin.RNGoogleSigninPackage;
 import com.github.alinz.reactnativewebviewbridge.WebViewBridgePackage;
 import com.facebook.reactnative.androidsdk.FBSDKPackage;
@@ -39,6 +40,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new ReactNativeOneSignalPackage(),
           new ImagePickerPackage(),
           new RNGoogleSigninPackage(),
           new FBSDKPackage(mCallbackManager),
