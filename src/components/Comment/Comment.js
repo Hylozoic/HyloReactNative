@@ -26,7 +26,7 @@ export default class Comment extends React.Component {
     } = this.props
 
     const { creator, text, createdAt, post } = comment
-    const presentedText = present(sanitize(text), {slug})
+    const presentedText = present(sanitize(text), { noP: true, slug })
 
     var postTitle = get('title', post)
     if (displayPostTitle && postTitle) {
