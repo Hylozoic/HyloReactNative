@@ -13,7 +13,7 @@ import { isEmpty } from 'lodash/fp'
 
 export default class SignupFlow4 extends React.Component {
   static navigationOptions = () => ({
-    headerTitle: 'STEP 3/5',
+    headerTitle: 'STEP 4/5',
     headerStyle: styles.headerStyle,
     headerTitleStyle: styles.headerTitleStyle,
     headerTintColor: styles.headerTintColor
@@ -61,8 +61,8 @@ export default class SignupFlow4 extends React.Component {
   }
 }
 
-export function SkillCloud ({ skills, onPress }) {
-  return <View style={styles.skillCloud}>
+export function SkillCloud ({ skills, onPress, style }) {
+  return <View style={[styles.skillCloud, style]}>
     {skills.map((skill, i) => <SkillPill skill={skill} onPress={onPress} key={i} />)}
   </View>
 }

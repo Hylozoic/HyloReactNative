@@ -8,6 +8,8 @@ export default function fetchCurrentUser () {
         me {
           id
           name
+          email
+          location
           avatarUrl
           newNotificationCount
           unseenThreadCount

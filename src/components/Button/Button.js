@@ -10,6 +10,7 @@ export default function Button ({
  }) {
   const {
     color = 'white',
+    borderColor = 'white',
     backgroundColor = caribbeanGreen,
     fontSize = 13,
     height = 30
@@ -21,7 +22,7 @@ export default function Button ({
       'color', 'backgroundColor', 'fontSize', 'height'
     ], style)}
 
-  const buttonStyle = {...styles.button, backgroundColor, height}
+  const buttonStyle = {...styles.button, backgroundColor, height, borderColor}
   const textStyle = {...styles.text, color, fontSize}
 
   return <View style={containerStyle}>
@@ -44,7 +45,8 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center',
     flex: 1,
-    borderRadius: 100
+    borderRadius: 100,
+    borderWidth: 1
   },
   text: {
     fontFamily: 'Circular-Bold'

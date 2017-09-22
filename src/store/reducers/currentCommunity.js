@@ -10,7 +10,11 @@ export default function currentCommunity (state = null, action) {
   if (type === FETCH_CURRENT_USER && !error) {
     const lastViewedMembership = maxBy(payload.data.me.memberships,
       ms => new Date(ms.lastViewedAt))
-    return lastViewedMembership.community.id
+    if (lastViewedMembership) {
+      return lastViewedMembership.community.id
+    } else {
+      return payload
+    }
   }
 
   return state

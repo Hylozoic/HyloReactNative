@@ -38,7 +38,7 @@ export default class SignupFlow1 extends React.Component {
         label='Password'
         value={password}
         onChange={changeSetting('password')}
-        secureTextEntry />
+        togglableSecureTextEntry />
       <Button
         style={styles.continueButton}
         text='Continue'

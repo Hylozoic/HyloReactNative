@@ -6,7 +6,7 @@ import {
 
 export default {
   control: {
-
+    position: 'relative'
   },
   label: {
     fontFamily: 'Circular-Bold',
@@ -22,6 +22,7 @@ export default {
     paddingBottom: 6,
     marginBottom: 15
   },
+  // TODO: is this supposed to be here?
   continueButton: {
     height: 38,
     width: 200,
@@ -32,5 +33,12 @@ export default {
     fontFamily: 'Circular-Medium',
     fontSize: 16,
     color: caribbeanGreen
+  },
+  icon: {
+    fontSize: 20,
+    opacity: 0.5,
+    top: 20,
+    right: 20,
+    position: 'absolute'
   }
 }
