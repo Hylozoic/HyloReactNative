@@ -10,6 +10,7 @@ import {
 } from 'react-native'
 import PropTypes from 'prop-types'
 import styles from './PostEditor.styles'
+import Loading from '../Loading'
 import { get } from 'lodash/fp'
 import striptags from 'striptags'
 import { keyboardAvoidingViewProps as kavProps } from 'util/viewHelpers'
@@ -56,8 +57,10 @@ export default class PostEditor extends React.Component {
   }
 
   render () {
-    const { details, editDetails } = this.props
+    const { details, editDetails, postId } = this.props
     const { title, type } = this.state
+
+    if (postId && !details) return <Loading />
 
     return <KeyboardAvoidingView style={styles.container} {...kavProps}>
       <ScrollView style={styles.scrollContainer}>
