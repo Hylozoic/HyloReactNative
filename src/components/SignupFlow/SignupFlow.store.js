@@ -1,8 +1,5 @@
-export const defaultState = {
-  userSettings: {},
-  skill: '',
-  userSkills: []
-}
+import { createSelector as ormCreateSelector } from 'redux-orm'
+import orm from 'store/models'
 
 export const MODULE_NAME = 'SignupFlow'
 export const UPDATE_USER_SETTINGS = `${MODULE_NAME}/UPDATE_USER_SETTINGS`
@@ -14,6 +11,12 @@ export const ADD_SKILL_PENDING = `${ADD_SKILL}_PENDING`
 export const REMOVE_SKILL = `${MODULE_NAME}/REMOVE_SKILL`
 export const REMOVE_SKILL_PENDING = `${REMOVE_SKILL}_PENDING`
 export const SET_USER_SKILLS = `${MODULE_NAME}/SET_USER_SKILLS`
+
+export const defaultState = {
+  userSettings: {},
+  skill: '',
+  userSkills: []
+}
 
 export default function reducer (state = defaultState, action) {
   const { error, type, payload, meta } = action
@@ -145,6 +148,15 @@ export function setUserSkills (userSkills) {
     payload: userSkills
   }
 }
+
+export const getSkillsFromOrm = ormCreateSelector(
+  orm,
+  state => state.orm,
+  ({ Me }) => {
+    const me = Me.first()
+    me && console.log('me.skills', me.skills)
+    return me ? me.skills.toModelArray() : []
+  })
 
 export function getUserSettings (state) {
   return state[MODULE_NAME].userSettings

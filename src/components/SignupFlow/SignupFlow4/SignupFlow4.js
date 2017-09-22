@@ -19,6 +19,18 @@ export default class SignupFlow4 extends React.Component {
     headerTintColor: styles.headerTintColor
   })
 
+  componentDidMount () {
+    const { fetchCurrentUser, loadSkills } = this.props
+    fetchCurrentUser()
+    .then(() => loadSkills())
+  }
+
+  componentDidUpdate (prevProps) {
+    if (this.props.storedSkills.length !== prevProps.storedSkills.length) {
+      this.props.loadSkills()
+    }
+  }
+
   render () {
     const { saveAndNext, skill, setSkill, userSkills, remainingSkills, addSkill, removeSkill } = this.props
 

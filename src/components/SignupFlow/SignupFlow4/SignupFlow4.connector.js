@@ -1,7 +1,8 @@
 import { connect } from 'react-redux'
 import {
-  setSkill, getSkill, getUserSkills, addSkill, removeSkill
+  setSkill, getSkill, getUserSkills, getSkillsFromOrm, addSkill, removeSkill, setUserSkills
 } from '../SignupFlow.store.js'
+import fetchCurrentUser from '../../../store/actions/fetchCurrentUser'
 import { isEmpty, includes } from 'lodash/fp'
 
 const defaultSkills = [
@@ -32,29 +33,35 @@ export function remainingSkills (skillFilter, userSkills, allSkills = defaultSki
 export function mapStateToProps (state, props) {
   const skill = getSkill(state)
   const userSkills = getUserSkills(state)
+  const storedSkills = getSkillsFromOrm(state)
   return {
     skill,
     userSkills,
-    remainingSkills: remainingSkills(skill, userSkills)
+    remainingSkills: remainingSkills(skill, userSkills),
+    storedSkills
   }
 }
 
 export const mapDispatchToProps = {
-  setSkill, addSkill, removeSkill
+  setSkill, addSkill, removeSkill, fetchCurrentUser, setUserSkills
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
   const goToNext = () => ownProps.navigation.navigate('SignupFlow5')
   const saveAndNext = () => {
     goToNext()
-    console.log('something good happens here')
+  }
+
+  const loadSkills = () => {
+    dispatchProps.setUserSkills(stateProps.storedSkills.map(s => s.name))
   }
 
   return {
     ...stateProps,
     ...dispatchProps,
     ...ownProps,
-    saveAndNext
+    saveAndNext,
+    loadSkills
   }
 }
 
