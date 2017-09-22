@@ -1,2 +1,3 @@
 import component from './Signup.js'
-export default component
+import connector from './Signup.connector.js'
+export default connector(component)

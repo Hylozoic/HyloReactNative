@@ -1,10 +1,12 @@
 import { connect } from 'react-redux'
 import { login, loginWithFacebook, loginWithGoogle } from './actions'
 
-function mapStateToProps (state) {
+function mapStateToProps (state, props) {
+  const goToSignup = () => props.navigation.navigate('Signup')
   return {
     error: state.session.loginError,
-    defaultEmail: state.session.defaultLoginEmail
+    defaultEmail: state.session.defaultLoginEmail,
+    goToSignup
   }
 }
 

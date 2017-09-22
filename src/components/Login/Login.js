@@ -50,11 +50,11 @@ export default class Login extends React.Component {
   }
 
   componentDidMount () {
-    this.props.navigation.navigate('SignupFlow5')
+    this.props.goToSignup()
   }
 
   render () {
-    const { error, loginWithGoogle, loginWithFacebook } = this.props
+    const { error, loginWithGoogle, loginWithFacebook, goToSignup } = this.props
     const emailIsValid = this.state.emailIsValid
 
     return <ScrollView contentContainerStyle={styles.login}>
@@ -107,7 +107,7 @@ export default class Login extends React.Component {
       </View>
       <View style={styles.signup}>
         <Text style={styles.accountText}>Dont have an account? </Text>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={goToSignup}>
           <Text style={styles.signupText}>Sign up now</Text>
         </TouchableOpacity>
       </View>

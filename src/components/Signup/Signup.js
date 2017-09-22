@@ -8,12 +8,9 @@ import {
 export default class Signup extends React.Component {
 
   render () {
-    const goToSignupFlow1 = () => {
-      this.props.navigation.navigate('SignupFlow1')
-    }
-
+    const { goToSignupFlow } = this.props
     return <View>
-      <TouchableOpacity onPress={goToSignupFlow1}>
+      <TouchableOpacity onPress={goToSignupFlow}>
         <Text>SIGNUP</Text>
       </TouchableOpacity>
     </View>
