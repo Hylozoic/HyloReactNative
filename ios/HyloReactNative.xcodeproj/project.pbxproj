@@ -611,6 +611,20 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		21F0415F1F7443AA00777CF1 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				3118DE6A34B8432F8E880642 /* FBSDKCoreKit.framework */,
+				065E1A64F841408C9EA9ABC2 /* FBSDKShareKit.framework */,
+				A124C005CCE847248DAC720F /* FBSDKLoginKit.framework */,
+				8095D639078647CDB52B6F92 /* libRCTFBSDK.a */,
+				F3B441C7C1D5498C98877B6D /* libRNGoogleSignin.a */,
+				B5D4613FF5E54E88BAEB1223 /* libRNVectorIcons.a */,
+				E3C95781B65442499C1D08BF /* libReact-Native-Webview-Bridge.a */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
 		21F87B5A1F05AB5E0023088F /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -689,6 +703,7 @@
 				4396F745ED0E3DE8C768E2FA /* Pods */,
 				FEA88A75C2295C1DB7CFFD96 /* Frameworks */,
 				E55698735DF3479E8A064D2A /* Resources */,
+				21F0415F1F7443AA00777CF1 /* Recovered References */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -1508,7 +1523,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 13;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = L4KZBPS2F3;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)/**";
@@ -1541,7 +1556,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_TEAM = L4KZBPS2F3;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)/**";
 				HEADER_SEARCH_PATHS = (
