@@ -3,7 +3,7 @@ import reducer, {
   ADD_SKILL_PENDING,
   REMOVE_SKILL_PENDING,
   getUserSkills
-} from './SignupFlow.Store'
+} from './SignupFlow.store'
 
 describe('reducer', () => {
   describe('on ADD_SKILL_PENDING', () => {
