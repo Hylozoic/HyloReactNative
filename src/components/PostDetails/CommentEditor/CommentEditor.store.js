@@ -46,7 +46,7 @@ export function createComment (postId, text) {
       }`,
       variables: {
         postId,
-        text
+        text: divToP(text)
       }
     },
     meta: {
