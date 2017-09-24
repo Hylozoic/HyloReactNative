@@ -48,7 +48,7 @@ exports[`renders correctly 1`] = `
           },
         }
       }
-      value="<p>tick followed tock followed tick followed tock</p>"
+      value="tick followed tock followed tick followed tock"
     />
   </View>
 </View>
@@ -112,7 +112,7 @@ exports[`shows the post title when displayPostTitle is true 1`] = `
           },
         }
       }
-      value="<p>tick followed tock followed tick followed tock</p>"
+      value="tick followed tock followed tick followed tock"
     />
   </View>
 </View>
