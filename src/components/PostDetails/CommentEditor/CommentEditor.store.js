@@ -1,5 +1,5 @@
 import { uniqueId } from 'lodash/fp'
-import { divToP } from 'hylo-utils'
+import { divToP } from 'hylo-utils/text'
 
 export const MODULE_NAME = 'CommentEditor'
 export const SET_COMMENT_EDITS = `${MODULE_NAME}/SET_DETAILS`
@@ -28,6 +28,7 @@ export function getCommentEdits (state, { postId }) {
 }
 
 export function createComment (postId, text) {
+  const preprocessedText = divToP(text)
   return {
     type: CREATE_COMMENT,
     graphql: {
@@ -46,7 +47,7 @@ export function createComment (postId, text) {
       }`,
       variables: {
         postId,
-        text: divToP(text)
+        text: preprocessedText
       }
     },
     meta: {
@@ -54,7 +55,7 @@ export function createComment (postId, text) {
       extractModel: 'Comment',
       tempId: uniqueId(`post${postId}_`),
       postId,
-      text: divToP(text)
+      text: preprocessedText
     }
   }
 }
