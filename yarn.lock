@@ -2246,9 +2246,9 @@ http-signature@~1.1.0:
     jsprim "^1.2.2"
     sshpk "^1.7.0"
 
-hylo-utils@Hylozoic/hylo-utils#300538a:
-  version "1.1.1"
-  resolved "https://codeload.github.com/Hylozoic/hylo-utils/tar.gz/300538ae6e442b163862bb0ee07734a5a131c1b5"
+hylo-utils@Hylozoic/hylo-utils#716622b:
+  version "1.2.1"
+  resolved "https://codeload.github.com/Hylozoic/hylo-utils/tar.gz/716622b5a57b2702612b4e93864888cac2c4e363"
   dependencies:
     buffer "^5.0.6"
     cheerio "^0.22.0"
@@ -3777,9 +3777,9 @@ react-native-google-signin@^0.10.0:
   version "0.10.0"
   resolved "https://registry.yarnpkg.com/react-native-google-signin/-/react-native-google-signin-0.10.0.tgz#cc47d3726165735ee61e3a4a589c2ced888f1a98"
 
-react-native-htmlview@^0.11.1:
-  version "0.11.1"
-  resolved "https://registry.yarnpkg.com/react-native-htmlview/-/react-native-htmlview-0.11.1.tgz#cc8cf18b7076a476e39974ed95270d4850725226"
+react-native-htmlview@^0.12.0:
+  version "0.12.0"
+  resolved "https://registry.yarnpkg.com/react-native-htmlview/-/react-native-htmlview-0.12.0.tgz#9b19a7dccd38586c0aebf975e6083184685013a6"
   dependencies:
     entities "^1.1.1"
     htmlparser2-without-node-native "^3.9.0"
