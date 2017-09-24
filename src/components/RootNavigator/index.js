@@ -15,6 +15,7 @@ import PostEditor from '../PostEditor'
 import DetailsEditor from '../PostEditor/DetailsEditor'
 import PostDetails from '../PostDetails'
 import MemberProfile from '../MemberProfile'
+import NotificationsList from '../NotificationsList'
 import CommentEditor from '../PostDetails/CommentEditor'
 import tabStyles from '../Tabs/Tabs.styles'
 import NewMessage from '../NewMessage'
@@ -48,6 +49,7 @@ const screensInTabs = {
 
 // Screens that work outside of tabs, Settings, Messages, etc.
 const screensInStack = {
+  NotificationsList: {screen: NotificationsList, parth: 'notifications'},
   Settings: {screen: Settings, path: 'settings'},
   Thread: {screen: Thread, path: 'thread/:id'},
   ThreadList: {screen: ThreadList, path: 'messages'}
