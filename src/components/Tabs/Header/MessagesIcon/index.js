@@ -7,7 +7,7 @@ export default function MessagesIcon (props) {
   const { showMessages } = props
   return <Icon
     name='Messages'
-    style={styles.messagesIcon}
+    style={styles.icon}
     onPress={showMessages}
   />
 }
