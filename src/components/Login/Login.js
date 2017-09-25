@@ -50,7 +50,7 @@ export default class Login extends React.Component {
   }
 
   componentDidMount () {
-    this.props.goToSignup()
+    // this.props.goToSignup()
   }
 
   render () {
@@ -120,14 +120,14 @@ export default class Login extends React.Component {
       </View>
 
       <View style={styles.connectWith}>
-        <Text style={styles.heavyText}>Or connect with:</Text>
+        <Text style={styles.helpText}>Or connect with:</Text>
       </View>
       <View style={styles.paddedRowWithOpacity}>
         <FbLoginButton onLoginFinished={loginWithFacebook} />
         <GoogleLoginButton onLoginFinished={loginWithGoogle} />
       </View>
       <View style={styles.signup}>
-        <Text style={styles.accountText}>Don't have an account? </Text>
+        <Text style={styles.helpText}>Don't have an account? </Text>
         <TouchableOpacity onPress={goToSignup}>
           <Text style={styles.signupText}>Sign up now</Text>
         </TouchableOpacity>

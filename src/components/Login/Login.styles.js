@@ -1,5 +1,5 @@
 import { Dimensions, StyleSheet } from 'react-native'
-import { caribbeanGreen } from 'style/colors'
+import { caribbeanGreen, rhino60 } from 'style/colors'
 
 const mixins = {
   loginContainer: {
@@ -76,7 +76,8 @@ export default {
     fontFamily: 'Circular-Bold'
   },
   loginButton: {
-    marginTop: 7
+    marginTop: 7,
+    marginBottom: 16
   },
   loginText: {
     color: 'white',
@@ -86,16 +87,12 @@ export default {
     fontSize: 18
   },
   connectWith: {
-    marginTop: 2,
-    paddingBottom: 10,
-    opacity: 0.5
+    marginBottom: 16
   },
-  heavyText: {
-    fontFamily: 'Circular-Book'
-  },
-  accountText: {
+  helpText: {
     fontFamily: 'Circular-Book',
-    opacity: 0.7
+    fontSize: 14,
+    color: rhino60
   },
   paddedRow: mixins.paddedRow,
   paddedRowWithOpacity: {
