@@ -2,6 +2,7 @@ import React from 'react'
 import RootNavigator from './RootNavigator'
 import SocketListener from './SocketListener'
 import fetchCurrentUser from '../store/actions/fetchCurrentUser'
+import registerDevice from '../store/actions/registerDevice'
 import { connect } from 'react-redux'
 import { View } from 'react-native'
 import { isIOS, urlPrefix } from 'util/platform'
@@ -12,9 +13,11 @@ import OneSignal from 'react-native-onesignal'
 class LoggedInRoot extends React.Component {
   componentDidMount () {
     this.props.fetchCurrentUser()
-    if (isIOS) {
-      OneSignal.registerForPushNotifications()
-    }
+
+    OneSignal.getPermissionSubscriptionState(({ userId, hasPrompted }) => {
+      this.props.registerDevice(userId)
+      if (isIOS && !hasPrompted) OneSignal.registerForPushNotifications()
+    })
   }
 
   render () {
@@ -25,4 +28,5 @@ class LoggedInRoot extends React.Component {
   }
 }
 
-export default connect(null, {fetchCurrentUser})(LoggedInRoot)
+const mapDispatchToProps = {fetchCurrentUser, registerDevice}
+export default connect(null, mapDispatchToProps)(LoggedInRoot)
