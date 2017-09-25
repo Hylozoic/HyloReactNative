@@ -84,7 +84,7 @@ def enableProguardInReleaseBuilds = false
 
 android {
     compileSdkVersion 23
-    buildToolsVersion '25.0.0'
+    buildToolsVersion '25.0.2'
 
     defaultConfig {
         applicationId "com.hyloreactnative"
@@ -95,6 +95,10 @@ android {
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
+        manifestPlaceholders = [
+            onesignal_app_id: ONESIGNAL_APP_ID,
+            onesignal_google_project_number: GOOGLE_PROJECT_NUMBER
+        ]
     }
     splits {
         abi {
@@ -160,9 +164,8 @@ dependencies {
     compile project(':react-native-webview-bridge')
 
     compile "com.android.support:appcompat-v7:23.0.1"
-    compile 'com.google.android.gms:play-services-auth:10.2.0'
+    compile 'com.google.android.gms:play-services-auth:10.2.1'
     compile "com.facebook.react:react-native:+"
-    // compile 'com.facebook.android:facebook-android-sdk:[4.+)'
     compile 'com.facebook.android:facebook-android-sdk:[4.22.1)'
     compile project(':react-native-image-picker')
 }
