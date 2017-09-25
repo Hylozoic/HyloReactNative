@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders FB login correctly 1`] = `
+exports[`Login renders correctly 1`] = `
 <ScrollViewMock
   contentContainerStyle={
     Object {
@@ -109,9 +109,11 @@ exports[`renders FB login correctly 1`] = `
   </View>
   <View>
     <FbLoginButton
+      createErrorNotification={[Function]}
       onLoginFinished={undefined}
     />
     <GoogleLoginButton
+      createErrorNotification={[Function]}
       onLoginFinished={undefined}
     />
   </View>
@@ -141,32 +143,455 @@ exports[`renders FB login correctly 1`] = `
 </ScrollViewMock>
 `;
 
-exports[`renders FB login correctly 2`] = `
-<TouchableOpacity
-  activeOpacity={0.2}
-  focusedOpacity={0.7}
-  onPress={[Function]}
+exports[`Login renders with email error 1`] = `
+<ScrollViewMock
+  contentContainerStyle={
+    Object {
+      "alignItems": "center",
+      "justifyContent": "center",
+    }
+  }
 >
+  <Image
+    source={1}
+  />
   <Text
     accessible={true}
     allowFontScaling={true}
     disabled={false}
     ellipsizeMode="tail"
   >
-    <Icon
-      name="Facebook"
-      size={12}
-    />
-      Facebook
+    Log in to Hylo
   </Text>
-</TouchableOpacity>
+  <View>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+    >
+      email error
+    </Text>
+  </View>
+  <View />
+  <View>
+    <View>
+      <View>
+        <TextInput
+          autoCapitalize="none"
+          keyboardType="email-address"
+          onChangeText={[Function]}
+          onSubmitEditing={[Function]}
+          returnKeyType="next"
+          underlineColorAndroid="rgba(0,0,0,0)"
+        />
+      </View>
+      <View />
+    </View>
+  </View>
+  <View>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+    >
+      Password
+    </Text>
+  </View>
+  <View>
+    <View>
+      <View>
+        <TextInput
+          onChangeText={[Function]}
+          onSubmitEditing={[Function]}
+          returnKeyType="go"
+          secureTextEntry={true}
+          selectTextOnFocus={true}
+          underlineColorAndroid="rgba(0,0,0,0)"
+        />
+      </View>
+      <View>
+        <Icon
+          allowFontScaling={false}
+          name="eye"
+          onPress={[Function]}
+          size={12}
+        />
+      </View>
+    </View>
+  </View>
+  <View>
+    <View>
+      <TouchableOpacity
+        activeOpacity={0.2}
+        focusedOpacity={0.7}
+        onPress={[Function]}
+      >
+        <View>
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            disabled={false}
+            ellipsizeMode="tail"
+          >
+            Log In
+          </Text>
+        </View>
+      </TouchableOpacity>
+    </View>
+  </View>
+  <View>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+    >
+      Or connect with:
+    </Text>
+  </View>
+  <View>
+    <FbLoginButton
+      createErrorNotification={[Function]}
+      onLoginFinished={undefined}
+    />
+    <GoogleLoginButton
+      createErrorNotification={[Function]}
+      onLoginFinished={undefined}
+    />
+  </View>
+  <View>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+    >
+      Don't have an account? 
+    </Text>
+    <TouchableOpacity
+      activeOpacity={0.2}
+      focusedOpacity={0.7}
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        disabled={false}
+        ellipsizeMode="tail"
+      >
+        Sign up now
+      </Text>
+    </TouchableOpacity>
+  </View>
+</ScrollViewMock>
 `;
 
-exports[`renders Google login correctly 1`] = `
-<TouchableOpacity
-  activeOpacity={0.2}
-  focusedOpacity={0.7}
-  onPress={[Function]}
+exports[`Login renders with no network connection error 1`] = `
+<ScrollViewMock
+  contentContainerStyle={
+    Object {
+      "alignItems": "center",
+      "justifyContent": "center",
+    }
+  }
+>
+  <Image
+    source={1}
+  />
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    disabled={false}
+    ellipsizeMode="tail"
+  >
+    Log in to Hylo
+  </Text>
+  <View>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+    >
+      Your email address
+    </Text>
+  </View>
+  <View>
+    <View>
+      <View>
+        <TextInput
+          autoCapitalize="none"
+          keyboardType="email-address"
+          onChangeText={[Function]}
+          onSubmitEditing={[Function]}
+          returnKeyType="next"
+          underlineColorAndroid="rgba(0,0,0,0)"
+        />
+      </View>
+      <View />
+    </View>
+  </View>
+  <View>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+    >
+      Password
+    </Text>
+  </View>
+  <View>
+    <View>
+      <View>
+        <TextInput
+          onChangeText={[Function]}
+          onSubmitEditing={[Function]}
+          returnKeyType="go"
+          secureTextEntry={true}
+          selectTextOnFocus={true}
+          underlineColorAndroid="rgba(0,0,0,0)"
+        />
+      </View>
+      <View>
+        <Icon
+          allowFontScaling={false}
+          name="eye"
+          onPress={[Function]}
+          size={12}
+        />
+      </View>
+    </View>
+  </View>
+  <View>
+    <View>
+      <TouchableOpacity
+        activeOpacity={0.2}
+        focusedOpacity={0.7}
+        onPress={[Function]}
+      >
+        <View>
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            disabled={false}
+            ellipsizeMode="tail"
+          >
+            Log In
+          </Text>
+        </View>
+      </TouchableOpacity>
+    </View>
+  </View>
+  <View>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+    >
+      Or connect with:
+    </Text>
+  </View>
+  <View>
+    <FbLoginButton
+      createErrorNotification={[Function]}
+      onLoginFinished={undefined}
+    />
+    <GoogleLoginButton
+      createErrorNotification={[Function]}
+      onLoginFinished={undefined}
+    />
+  </View>
+  <View>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+    >
+      Don't have an account? 
+    </Text>
+    <TouchableOpacity
+      activeOpacity={0.2}
+      focusedOpacity={0.7}
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        disabled={false}
+        ellipsizeMode="tail"
+      >
+        Sign up now
+      </Text>
+    </TouchableOpacity>
+  </View>
+</ScrollViewMock>
+`;
+
+exports[`Login renders with password error 1`] = `
+<ScrollViewMock
+  contentContainerStyle={
+    Object {
+      "alignItems": "center",
+      "justifyContent": "center",
+    }
+  }
+>
+  <Image
+    source={1}
+  />
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    disabled={false}
+    ellipsizeMode="tail"
+  >
+    Log in to Hylo
+  </Text>
+  <View>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+    >
+      Your email address
+    </Text>
+  </View>
+  <View>
+    <View>
+      <View>
+        <TextInput
+          autoCapitalize="none"
+          keyboardType="email-address"
+          onChangeText={[Function]}
+          onSubmitEditing={[Function]}
+          returnKeyType="next"
+          underlineColorAndroid="rgba(0,0,0,0)"
+        />
+      </View>
+      <View />
+    </View>
+  </View>
+  <View>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+    >
+      Password
+    </Text>
+  </View>
+  <View>
+    <View>
+      <View>
+        <TextInput
+          onChangeText={[Function]}
+          onSubmitEditing={[Function]}
+          returnKeyType="go"
+          secureTextEntry={true}
+          selectTextOnFocus={true}
+          underlineColorAndroid="rgba(0,0,0,0)"
+        />
+      </View>
+      <View>
+        <Icon
+          allowFontScaling={false}
+          name="eye"
+          onPress={[Function]}
+          size={12}
+        />
+      </View>
+    </View>
+  </View>
+  <View>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+    >
+      password error
+    </Text>
+  </View>
+  <View />
+  <View>
+    <View>
+      <TouchableOpacity
+        activeOpacity={0.2}
+        focusedOpacity={0.7}
+        onPress={[Function]}
+      >
+        <View>
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            disabled={false}
+            ellipsizeMode="tail"
+          >
+            Log In
+          </Text>
+        </View>
+      </TouchableOpacity>
+    </View>
+  </View>
+  <View>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+    >
+      Or connect with:
+    </Text>
+  </View>
+  <View>
+    <FbLoginButton
+      createErrorNotification={[Function]}
+      onLoginFinished={undefined}
+    />
+    <GoogleLoginButton
+      createErrorNotification={[Function]}
+      onLoginFinished={undefined}
+    />
+  </View>
+  <View>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+    >
+      Don't have an account? 
+    </Text>
+    <TouchableOpacity
+      activeOpacity={0.2}
+      focusedOpacity={0.7}
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        disabled={false}
+        ellipsizeMode="tail"
+      >
+        Sign up now
+      </Text>
+    </TouchableOpacity>
+  </View>
+</ScrollViewMock>
+`;
+
+exports[`Login renders with pending banner 1`] = `
+<ScrollViewMock
+  contentContainerStyle={
+    Object {
+      "alignItems": "center",
+      "justifyContent": "center",
+    }
+  }
 >
   <Text
     accessible={true}
@@ -174,11 +599,138 @@ exports[`renders Google login correctly 1`] = `
     disabled={false}
     ellipsizeMode="tail"
   >
-    <Icon
-      name="Google"
-      size={12}
-    />
-      Google
+    Logging in ...
   </Text>
-</TouchableOpacity>
+  <Image
+    source={1}
+  />
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    disabled={false}
+    ellipsizeMode="tail"
+  >
+    Log in to Hylo
+  </Text>
+  <View>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+    >
+      Your email address
+    </Text>
+  </View>
+  <View>
+    <View>
+      <View>
+        <TextInput
+          autoCapitalize="none"
+          keyboardType="email-address"
+          onChangeText={[Function]}
+          onSubmitEditing={[Function]}
+          returnKeyType="next"
+          underlineColorAndroid="rgba(0,0,0,0)"
+        />
+      </View>
+      <View />
+    </View>
+  </View>
+  <View>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+    >
+      Password
+    </Text>
+  </View>
+  <View>
+    <View>
+      <View>
+        <TextInput
+          onChangeText={[Function]}
+          onSubmitEditing={[Function]}
+          returnKeyType="go"
+          secureTextEntry={true}
+          selectTextOnFocus={true}
+          underlineColorAndroid="rgba(0,0,0,0)"
+        />
+      </View>
+      <View>
+        <Icon
+          allowFontScaling={false}
+          name="eye"
+          onPress={[Function]}
+          size={12}
+        />
+      </View>
+    </View>
+  </View>
+  <View>
+    <View>
+      <TouchableOpacity
+        activeOpacity={0.2}
+        focusedOpacity={0.7}
+        onPress={[Function]}
+      >
+        <View>
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            disabled={false}
+            ellipsizeMode="tail"
+          >
+            Log In
+          </Text>
+        </View>
+      </TouchableOpacity>
+    </View>
+  </View>
+  <View>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+    >
+      Or connect with:
+    </Text>
+  </View>
+  <View>
+    <FbLoginButton
+      createErrorNotification={[Function]}
+      onLoginFinished={undefined}
+    />
+    <GoogleLoginButton
+      createErrorNotification={[Function]}
+      onLoginFinished={undefined}
+    />
+  </View>
+  <View>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+    >
+      Don't have an account? 
+    </Text>
+    <TouchableOpacity
+      activeOpacity={0.2}
+      focusedOpacity={0.7}
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        disabled={false}
+        ellipsizeMode="tail"
+      >
+        Sign up now
+      </Text>
+    </TouchableOpacity>
+  </View>
+</ScrollViewMock>
 `;

@@ -28,6 +28,10 @@ export default class Login extends React.Component {
     this.props.login(this.state.email, this.state.password)
   }
 
+  createErrorNotification = (error) => {
+    this.setState({ssoError: error})
+  }
+
   togglePassword () {
     this.setState({
       securePassword: !this.state.securePassword
@@ -45,18 +49,28 @@ export default class Login extends React.Component {
     })
   }
 
-  render () {
-    const { error, loginWithGoogle, loginWithFacebook } = this.props
-    const emailIsValid = this.state.emailIsValid
+  componentWillReceiveProps = (nextProps) => {
+    nextProps.error && this.setState({ssoError: null})
+  }
 
+  render () {
+    const { loginWithGoogle, loginWithFacebook, error, emailError, passwordError, pending } = this.props
+    const { ssoError } = this.state
+    const emailIsValid = this.state.emailIsValid
     return <ScrollView contentContainerStyle={styles.login}>
+      {ssoError && <Text style={styles.errorBanner}>{ssoError}</Text>}
+      {pending && <Text style={styles.banner}>Logging in ...</Text>}
+
       <Image style={styles.logo}
         source={require('../../assets/merkaba-green-on-white.png')} />
       <Text style={styles.title}>Log in to Hylo</Text>
-      {error && <Text style={styles.error}>{error}</Text>}
-      <View style={styles.labelRow}>
+      {emailError && <View style={styles.emailErrorRow}>
+        <Text style={styles.errorMessage}>{error}</Text>
+      </View>}
+      {emailError && <View style={styles.emailTriangle} />}
+      {!emailError && <View style={styles.labelRow}>
         <Text style={styles.labelText}>Your email address</Text>
-      </View>
+      </View>}
       <View style={styles.paddedRow}>
         <View style={emailIsValid ? styles.paddedBorderValid : styles.paddedBorder}>
           <View style={styles.leftInputView}>
@@ -100,7 +114,10 @@ export default class Login extends React.Component {
           </View>
         </View>
       </View>
-
+      {passwordError && <View style={styles.passwordErrorRow}>
+        <Text style={styles.errorMessage}>{error}</Text>
+      </View>}
+      {passwordError && <View style={styles.passwordTriangle} />}
       <View style={styles.paddedRow}>
         <View style={styles.paddedButton}>
           <TouchableOpacity onPress={() => this.login()}>
@@ -115,8 +132,14 @@ export default class Login extends React.Component {
         <Text style={styles.heavyText}>Or connect with:</Text>
       </View>
       <View style={styles.paddedRowWithOpacity}>
-        <FbLoginButton onLoginFinished={loginWithFacebook} />
-        <GoogleLoginButton onLoginFinished={loginWithGoogle} />
+        <FbLoginButton
+          onLoginFinished={loginWithFacebook}
+          createErrorNotification={this.createErrorNotification}
+        />
+        <GoogleLoginButton
+          onLoginFinished={loginWithGoogle}
+          createErrorNotification={this.createErrorNotification}
+          />
       </View>
       <View style={styles.signup}>
         <Text style={styles.accountText}>Don't have an account? </Text>

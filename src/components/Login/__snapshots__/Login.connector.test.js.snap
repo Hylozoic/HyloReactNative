@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Login dispatchProps login should match the latest snapshot 1`] = `
+Object {
+  "meta": Object {
+    "email": "name",
+  },
+  "payload": Object {
+    "api": Object {
+      "method": "post",
+      "params": Object {
+        "email": "name",
+        "password": "pass",
+      },
+      "path": "/noo/login",
+    },
+  },
+  "type": "LOGIN",
+}
+`;
+
+exports[`Login dispatchProps loginWithFacebook should match the latest snapshot 1`] = `
+Object {
+  "payload": Object {
+    "api": Object {
+      "method": "post",
+      "path": "/noo/login/facebook-token/oauth?access_token=SOME_TOKEN",
+    },
+  },
+  "type": "LOGIN_WITH_FACEBOOK",
+}
+`;
+
+exports[`Login dispatchProps loginWithGoogle should match the latest snapshot 1`] = `
+Object {
+  "payload": Object {
+    "api": Object {
+      "method": "post",
+      "path": "/noo/login/google-token/oauth?access_token=SOME_TOKEN",
+    },
+  },
+  "type": "LOGIN_WITH_GOOGLE",
+}
+`;

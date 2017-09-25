@@ -1,14 +1,21 @@
 import { connect } from 'react-redux'
-import { login, loginWithFacebook, loginWithGoogle } from './actions'
+import { LOGIN, login, loginWithFacebook, loginWithGoogle } from './actions'
 
-function mapStateToProps (state) {
+export function mapStateToProps (state) {
+  const error = state.session.loginError
+  const emailError = error && error.includes('email')
+  const passwordError = error && error.includes('password')
+  const pending = state.pending[LOGIN]
   return {
-    error: state.session.loginError,
+    error,
+    emailError,
+    passwordError,
+    pending,
     defaultEmail: state.session.defaultLoginEmail
   }
 }
 
-function mapDispatchToProps (dispatch) {
+export function mapDispatchToProps (dispatch) {
   return {
     loginWithFacebook: (token) => dispatch(loginWithFacebook(token)),
     loginWithGoogle: (token) => dispatch(loginWithGoogle(token)),
