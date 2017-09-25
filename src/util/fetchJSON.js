@@ -5,6 +5,8 @@ export const HOST = __DEV__
   ? isIOS ? process.env.IOS_EMULATOR_API_HOST : process.env.ANDROID_EMULATOR_API_HOST
   : process.env.API_HOST
 
+console.log(`API host: ${HOST}`)
+
 export default function fetchJSON (path, params, options = {}) {
   const { host, method } = options
   const url = (host || HOST) + path
