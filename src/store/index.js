@@ -20,7 +20,9 @@ const middleware = compact([
   optimisticMiddleware,
   pendingMiddleware,
   promiseMiddleware,
-  __DEV__ && createLogger({collapsed: true})
+  __DEV__ && createLogger({
+    collapsed: (getState, action, logEntry) => !logEntry.error
+  })
 ])
 
 export default function getStore () {
