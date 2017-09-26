@@ -18,12 +18,12 @@ export const getNotifications = makeQueryResultsModelSelector(
 export const getNotificationsHasMore = createSelector(getNotificationsResults, get('hasMore'))
 
 
-export function fetchNotifications (first = 10, offset = 0) {
+export function fetchNotifications (first = 20) {
   return {
     type: FETCH_NOTIFICATIONS,
     graphql: {
-      query: `{
-        notifications (first: 20, order: "desc", resetCount: true) {
+      query: `query ($first: Int) {
+        notifications (first: $first, order: "desc", resetCount: true) {
           total
           hasMore
           items {
@@ -57,7 +57,10 @@ export function fetchNotifications (first = 10, offset = 0) {
             }
           }
         }
-      }`
+      }`,
+      variables: {
+        first
+      }
     },
     meta: {
       extractModel: 'Notification',

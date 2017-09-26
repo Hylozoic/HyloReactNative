@@ -21,28 +21,9 @@ export function mapStateToProps (state, props) {
 
 export function mapDispatchToProps (dispatch, { navigation }) {
   return {
-    fetchNotifications: (first, offset) => dispatch(fetchNotifications(first, offset)),
+    fetchNotifications: first => dispatch(fetchNotifications(first)),
     showNotification: () => navigation.navigate('')
   }
 }
 
-export function mergeProps (stateProps, dispatchProps, ownProps) {
-  const { notifications, hasMore } = stateProps
-
-  const fetchNotifications = () => dispatchProps.fetchNotifications(10)
-
-  const fetchMoreNotifications =
-    hasMore
-      ? () => dispatchProps.fetchNotifications(10, notifications.length)
-      : () => {}
-
-  return {
-    ...stateProps,
-    ...dispatchProps,
-    ...ownProps,
-    fetchNotifications,
-    fetchMoreNotifications
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps, mergeProps)
+export default connect(mapStateToProps, mapDispatchToProps)

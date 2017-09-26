@@ -10,20 +10,16 @@ import styles from './NotificationsList.styles'
 export default class NotificationsList extends Component {
   static navigationOptions = ({navigation}) => (Header(navigation))
 
-  fetchOrShowCached () {
-    const { hasMore, notifications, fetchNotifications } = this.props
-    if (isEmpty(notifications) && hasMore !== false) fetchNotifications()
-  }
-
   componentDidMount () {
-    this.fetchOrShowCached()
+    this.props.fetchNotifications()
   }
 
   keyExtractor = item => item.id
 
   render () {
-    const { notifications, pending, currentUser, fetchMoreNotifications, showNotification } = this.props
+    const { notifications, pending, showNotification } = this.props
 
+    console.log(notifications)
     if (pending && notifications.length === 0) return <Loading />
     if (!pending && notifications.length === 0) {
       return <Text style={styles.center}>Nothing new for you!</Text>
@@ -37,7 +33,6 @@ export default class NotificationsList extends Component {
         renderItem={({ item }) =>
           <MessageRow
             notifcation={item.notification}
-            currentUser={currentUser}
             showNotification={showNotification}
          />}
         />
