@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders as expected 1`] = `
+<LoggedInRoot
+  fetchCurrentUser={[Function]}
+  registerDevice={[Function]}
+  store={
+    Object {
+      "getState": [Function],
+      "subscribe": [Function],
+    }
+  }
+/>
+`;

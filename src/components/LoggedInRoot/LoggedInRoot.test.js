@@ -3,15 +3,7 @@ import LoggedInRoot from './LoggedInRoot'
 import React from 'react'
 
 jest.mock('react-native-google-signin', () => {})
-jest.mock('react-native-zss-rich-text-editor', () => ({
-  RichTextEditor: function () {
-    return <div>mock RichTextEditor</div>
-  },
-  RichTextToolbar: function () {
-    return <div>mock RichTextToolbar</div>
-  },
-  actions: []
-}))
+jest.mock('react-native-zss-rich-text-editor')
 jest.mock('react-native-onesignal', () => ({
   getPermissionSubscriptionState: jest.fn(() => Promise.resolve({userId: 5}))
 }))
