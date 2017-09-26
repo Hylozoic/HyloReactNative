@@ -29,6 +29,7 @@ export default class Login extends React.Component {
   }
 
   login () {
+    console.log('login pressed')
     this.props.login(this.state.email, this.state.password)
   }
 
@@ -73,6 +74,7 @@ export default class Login extends React.Component {
               onChangeText={email => this.setAndValidateEmail(email)}
               returnKeyType='next'
               autoCapitalize='none'
+              autoCorrect={false}
               keyboardType='email-address'
               onSubmitEditing={() => focus(this.passwordInput)}
               underlineColorAndroid={styles.androidInvisibleUnderline} />

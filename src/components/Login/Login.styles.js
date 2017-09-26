@@ -87,6 +87,7 @@ export default {
     fontSize: 18
   },
   connectWith: {
+    marginTop: 10,
     marginBottom: 16
   },
   helpText: {

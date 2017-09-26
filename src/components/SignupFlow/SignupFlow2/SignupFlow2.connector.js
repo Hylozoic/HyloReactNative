@@ -4,7 +4,6 @@ import getMe from '../../../store/selectors/getMe'
 
 export function mapStateToProps (state, props) {
   const currentUser = getMe(state, props)
-  console.log('USER ID *** ', currentUser.id)
   const { avatarUrl } = getUserSettings(state)
   return {
     avatarUrl

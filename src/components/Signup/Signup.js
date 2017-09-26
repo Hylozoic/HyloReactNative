@@ -12,8 +12,12 @@ const backgroundImage = require('../../assets/Sign_Up_Background.png')
 import styles from './Signup.styles'
 
 export default class Signup extends React.Component {
+  static navigationOptions = {
+    header: null
+  }
+
   render () {
-    const { goToSignupFlow } = this.props
+    const { goToSignupFlow, goToLogin } = this.props
     return <ScrollView contentContainerStyle={styles.container}>
       <Image source={backgroundImage} resizeMode='stretch' style={styles.backgroundImage} />
       <View style={styles.paddedContainer}>
@@ -23,7 +27,7 @@ export default class Signup extends React.Component {
         <Text style={styles.connectWith}>Or connect with:</Text>
         <View style={styles.login}>
           <Text style={styles.haveAccount}>Already have an account? </Text>
-          <TouchableOpacity><Text style={styles.loginButton}>Log in now</Text></TouchableOpacity>
+          <TouchableOpacity onPress={goToLogin}><Text style={styles.loginButton}>Log in now</Text></TouchableOpacity>
         </View>
       </View>
     </ScrollView>

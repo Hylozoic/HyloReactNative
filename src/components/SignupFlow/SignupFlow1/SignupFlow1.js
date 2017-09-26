@@ -16,7 +16,7 @@ export default class SignupFlow1 extends React.Component {
   })
 
   render () {
-    const { changeSetting, name, email, password, signup } = this.props
+    const { changeSetting, name, email, password, signupOrUpdate } = this.props
 
     return <View style={styles.container}>
       <Text style={styles.title}>Howdie stranger!</Text>
@@ -42,7 +42,7 @@ export default class SignupFlow1 extends React.Component {
       <Button
         style={styles.continueButton}
         text='Continue'
-        onPress={signup} />
+        onPress={signupOrUpdate} />
     </View>
   }
 }

@@ -18,7 +18,7 @@ export default class SessionCheck extends React.Component {
   }
 
   render () {
-    switch (false /*this.props.loggedIn*/) {
+    switch (this.props.loggedIn) {
       case true:
         return <LoggedInRoot />
       case false:

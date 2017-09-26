@@ -17,11 +17,6 @@ export default class SignupFlow5 extends React.Component {
     headerTintColor: styles.headerTintColor
   })
 
-  constructor (props) {
-    super(props)
-    this.state = {showPassword: false}
-  }
-
   componentDidMount () {
     const { fetchCurrentUser, loadUserSettings } = this.props
     fetchCurrentUser()
@@ -35,10 +30,7 @@ export default class SignupFlow5 extends React.Component {
   }
 
   render () {
-    const { name, email, login, makeChanges, location, avatarUrl, skills } = this.props
-    const { showPassword } = this.state
-
-    const password = 'paswoskkaok'
+    const { name, email, password, location, avatarUrl, skills, login, makeChanges } = this.props
 
     return <View style={styles.container}>
       <Text style={styles.title}>Everything looking fine and dandy?</Text>

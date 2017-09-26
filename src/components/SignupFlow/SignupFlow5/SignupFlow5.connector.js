@@ -1,14 +1,14 @@
 import { connect } from 'react-redux'
 import fetchCurrentUser from '../../../store/actions/fetchCurrentUser'
 import getMe from '../../../store/selectors/getMe'
-import { signup, getUserSettings, updateLocalUserSettings } from '../SignupFlow.store.js'
+import { signup, getUserSettings, getUserSkills, updateLocalUserSettings } from '../SignupFlow.store.js'
 import { login } from '../../Login/actions'
 import { pick } from 'lodash/fp'
 
 export function mapStateToProps (state, props) {
   const { name, email, password, location, avatarUrl } = getUserSettings(state)
+  const skills = getUserSkills(state)
   const currentUser = getMe(state)
-  const skills = ['Writing', 'Running', 'Adventure']
 
   return {
     name,
@@ -27,7 +27,10 @@ export const mapDispatchToProps = {
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
   const { email, password, currentUser } = stateProps
-  const login = () => login(email, password)
+  const login = () => {
+    console.log('calling login with', email, password)
+    login(email, password)
+  }
   const makeChanges = () => ownProps.navigation.navigate('SignupFlow1')
 
   const loadUserSettings = () => currentUser
