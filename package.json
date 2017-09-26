@@ -87,7 +87,10 @@
       "json",
       "lcov"
     ],
-    "timers": "fake"
+    "timers": "fake",
+    "transformIgnorePatterns": [
+      "/!node_modules\\/react-navigation"
+    ]
   },
   "standard": {
     "parser": "babel-eslint",
