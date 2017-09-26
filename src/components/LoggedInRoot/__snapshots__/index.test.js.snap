@@ -6,6 +6,7 @@ exports[`renders as expected 1`] = `
   registerDevice={[Function]}
   store={
     Object {
+      "dispatch": [Function],
       "getState": [Function],
       "subscribe": [Function],
     }

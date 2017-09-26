@@ -12,7 +12,8 @@ it('renders as expected', () => {
   const renderer = new ReactShallowRenderer()
   const mockStore = {
     subscribe: jest.fn(),
-    getState: jest.fn()
+    getState: jest.fn(),
+    dispatch: jest.fn()
   }
   renderer.render(<Component store={mockStore} />)
   expect(renderer.getRenderOutput()).toMatchSnapshot()
