@@ -1,7 +1,8 @@
 import {
   caribbeanGreen,
   white60onCaribbeanGreen,
-  white40onCaribbeanGreen
+  white40onCaribbeanGreen,
+  amaranth
 } from 'style/colors'
 
 export default {
@@ -40,5 +41,22 @@ export default {
     top: 20,
     right: 20,
     position: 'absolute'
+  },
+  errorWrapper: {
+    alignItems: 'center',
+    marginBottom: 10
+  },
+  error: {
+    paddingHorizontal: 10,
+    paddingVertical: 17,
+    backgroundColor: 'white',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flex: 1,
+    borderRadius: 100,
+  },
+  errorText: {
+    color: amaranth,
+    fontSize: 12
   }
 }

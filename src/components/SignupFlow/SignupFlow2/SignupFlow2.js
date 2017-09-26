@@ -23,7 +23,8 @@ export default class SignupFlow2 extends React.Component {
     headerTitle: 'STEP 2/5',
     headerStyle: styles.headerStyle,
     headerTitleStyle: styles.headerTitleStyle,
-    headerTintColor: styles.headerTintColor
+    headerTintColor: styles.headerTintColor,
+    backTitle: null
   })
 
   render () {

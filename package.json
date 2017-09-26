@@ -29,6 +29,7 @@
     "react-native-htmlview": "^0.11.1",
     "react-native-image-picker": "^0.26.3",
     "react-native-tab-navigator": "^0.3.3",
+    "react-native-triangle": "^0.0.9",
     "react-native-vector-icons": "^4.2.0",
     "react-native-webview-bridge-updated": "^1.0.8",
     "react-native-zss-rich-text-editor": "Hylozoic/react-native-zss-rich-text-editor#bee3cf5",

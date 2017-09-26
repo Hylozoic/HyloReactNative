@@ -2,6 +2,7 @@ import React from 'react'
 import { View, Text, TextInput } from 'react-native'
 import styles from './SignupControl.styles.js'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
+import Triangle from 'react-native-triangle'
 
 export default class SignupControl extends React.Component {
   constructor (props) {
@@ -15,7 +16,7 @@ export default class SignupControl extends React.Component {
 
   render () {
     const {
-      label, value, onChange, togglableSecureTextEntry, keyboardType, autoCapitalize, autoCorrect, style
+      label, value, onChange, togglableSecureTextEntry, keyboardType, autoCapitalize, autoCorrect, style, error
     } = this.props
 
     const { securePassword } = this.state
@@ -33,6 +34,16 @@ export default class SignupControl extends React.Component {
       {togglableSecureTextEntry && <EntypoIcon name={this.state.securePassword ? 'eye' : 'eye-with-line'}
         style={styles.icon}
         onPress={() => this.togglePassword()} />}
+      {!!error && <View style={styles.errorWrapper}>
+        <Triangle
+          width={10}
+          height={5}
+          color='white'
+          direction='up' />
+        <View style={styles.error}>
+          <Text style={styles.errorText}>{error}</Text>
+        </View>
+      </View>}
     </View>
   }
 }

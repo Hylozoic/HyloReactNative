@@ -29,7 +29,6 @@ export default class Login extends React.Component {
   }
 
   login () {
-    console.log('login pressed')
     this.props.login(this.state.email, this.state.password)
   }
 
@@ -51,7 +50,7 @@ export default class Login extends React.Component {
   }
 
   componentDidMount () {
-    // this.props.goToSignup()
+    this.props.navigation.navigate('SignupFlow1')
   }
 
   render () {

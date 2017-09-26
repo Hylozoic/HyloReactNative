@@ -28,7 +28,6 @@ export const mapDispatchToProps = {
 export function mergeProps (stateProps, dispatchProps, ownProps) {
   const { email, password, currentUser } = stateProps
   const login = () => {
-    console.log('calling login with', email, password)
     login(email, password)
   }
   const makeChanges = () => ownProps.navigation.navigate('SignupFlow1')

@@ -13,7 +13,13 @@ export const REMOVE_SKILL_PENDING = `${REMOVE_SKILL}_PENDING`
 export const SET_USER_SKILLS = `${MODULE_NAME}/SET_USER_SKILLS`
 
 export const defaultState = {
-  userSettings: {},
+  userSettings: {
+    name: '',
+    email: '',
+    password: '',
+    location: '',
+    avatarUrl: ''
+  },
   skill: '',
   userSkills: []
 }
