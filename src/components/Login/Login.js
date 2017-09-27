@@ -50,7 +50,9 @@ export default class Login extends React.Component {
   }
 
   componentDidMount () {
-    this.props.navigation.navigate('SignupFlow1')
+    if (this.props.signupInProgress) {
+      this.props.navigation.navigate('SignupFlow1')
+    }
   }
 
   render () {

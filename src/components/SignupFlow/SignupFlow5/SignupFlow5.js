@@ -8,6 +8,7 @@ import SignupControl from '../SignupControl'
 import Button from '../../Button'
 import styles from './SignupFlow5.styles'
 import { SkillCloud } from '../SignupFlow4/SignupFlow4'
+import { isEmpty } from 'lodash/fp'
 
 export default class SignupFlow5 extends React.Component {
   static navigationOptions = () => ({
@@ -17,29 +18,17 @@ export default class SignupFlow5 extends React.Component {
     headerTintColor: styles.headerTintColor
   })
 
-  componentDidMount () {
-    const { fetchCurrentUser, loadUserSettings } = this.props
-    fetchCurrentUser()
-    .then(() => loadUserSettings())
-  }
-
-  componentDidUpdate (prevProps) {
-    if (this.props.currentUser !== prevProps.currentUser) {
-      this.props.loadUserSettings()
-    }
-  }
-
   render () {
-    const { name, email, password, location, avatarUrl, skills, login, makeChanges } = this.props
+    const { name, email, password, location, avatarUrl, skills, finishSignup, makeChanges } = this.props
 
     return <View style={styles.container}>
-      <Text style={styles.title}>Everything looking fine and dandy?</Text>
+      <Text style={styles.title}>Everything looking good?</Text>
       <Text style={styles.subTitle}>
         You can always come back and change your details at any time.
       </Text>
-      <View style={styles.imageWrapper}>
+      {!isEmpty(avatarUrl) && <View style={styles.imageWrapper}>
         <Image style={styles.image} source={{uri: avatarUrl}} />
-      </View>
+      </View>}
       <SignupControl
         label='Your Full Name'
         value={name} />
@@ -49,10 +38,10 @@ export default class SignupFlow5 extends React.Component {
         keyboardType={'email-address'}
         autoCapitalize='none'
         autoCorrect={false} />
-      <SignupControl
+      {!isEmpty(password) && <SignupControl
         label='Password'
         value={password}
-        togglableSecureTextEntry />
+        togglableSecureTextEntry />}
       <SignupControl
         label='Location'
         value={location} />
@@ -68,7 +57,7 @@ export default class SignupFlow5 extends React.Component {
         <Button
           style={styles.continueButton}
           text='Finish'
-          onPress={login} />
+          onPress={finishSignup} />
       </View>
     </View>
   }

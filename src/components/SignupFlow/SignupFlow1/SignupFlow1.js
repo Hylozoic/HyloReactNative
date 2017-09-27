@@ -16,8 +16,24 @@ export default class SignupFlow1 extends React.Component {
     headerStyle: styles.headerStyle,
     headerTitleStyle: styles.headerTitleStyle,
     headerTintColor: styles.headerTintColor,
-    backTitle: null
+    headerBackTitle: null
   })
+
+  componentDidMount () {
+    const { currentUser, fetchCurrentUser, loadUserSettings } = this.props
+    fetchCurrentUser()
+
+    // this is for the case where they logged in but hadn't finished sign up
+    if (currentUser) {
+      loadUserSettings()
+    }
+  }
+
+  componentDidUpdate (prevProps) {
+    if (prevProps.currentUser !== this.props.currentUser) {
+      this.props.loadUserSettings()
+    }
+  }
 
   constructor (props) {
     super(props)
@@ -31,10 +47,10 @@ export default class SignupFlow1 extends React.Component {
   }
 
   validate () {
-    const { name, email, password } = this.props
+    const { name, email, password, showPasswordField } = this.props
     const errors = {
       name: validateUser.name(name),
-      password: validateUser.password(password),
+      password: showPasswordField && validateUser.password(password),
       email: !validator.isEmail(email) && 'Must be a valid email'
     }
     this.setState({errors})
@@ -48,7 +64,7 @@ export default class SignupFlow1 extends React.Component {
   }
 
   render () {
-    const { changeSetting, name, email, password } = this.props
+    const { changeSetting, name, email, password, pending, showPasswordField } = this.props
     const { errors } = this.state
 
     return <View style={styles.container}>
@@ -69,16 +85,17 @@ export default class SignupFlow1 extends React.Component {
         autoCorrect={false}
         onChange={changeSetting('email')}
         error={errors.email} />
-      <SignupControl
+      {showPasswordField && <SignupControl
         label='Password'
         value={password}
         onChange={changeSetting('password')}
         togglableSecureTextEntry
-        error={errors.password} />
+        error={errors.password} />}
       <Button
         style={styles.continueButton}
-        text='Continue'
-        onPress={() => this.submit()} />
+        text={pending ? 'Saving...' : 'Continue'}
+        onPress={() => this.submit()}
+        disabled={!!pending} />
     </View>
   }
 }

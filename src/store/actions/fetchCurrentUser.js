@@ -34,6 +34,9 @@ export default function fetchCurrentUser () {
               name
             }
           }
+          settings {
+            signupInProgress
+          }
         }
       }`
     },

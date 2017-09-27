@@ -6,12 +6,12 @@ import { omit } from 'lodash/fp'
 export default function Button ({
   style,
   text,
-  onPress
+  onPress,
+  disabled
  }) {
   const {
     color = 'white',
     borderColor = 'white',
-    backgroundColor = caribbeanGreen,
     fontSize = 13,
     height = 30
   } = style
@@ -19,14 +19,18 @@ export default function Button ({
   const containerStyle = {
     ...styles.container,
     ...omit([
-      'color', 'backgroundColor', 'fontSize', 'height'
+      'color', 'backgroundColor', 'disabledBackgroundColor', 'fontSize', 'height'
     ], style)}
+
+  const backgroundColor = (disabled
+    ? style.disabledBackgroundColor
+    : style.backgroundColor) || caribbeanGreen
 
   const buttonStyle = {...styles.button, backgroundColor, height, borderColor}
   const textStyle = {...styles.text, color, fontSize}
 
   return <View style={containerStyle}>
-    <TouchableOpacity onPress={onPress} style={styles.wrapper}>
+    <TouchableOpacity disabled={disabled} onPress={disabled ? () => {} : onPress} style={styles.wrapper}>
       <View style={buttonStyle}>
         <Text style={textStyle}>{text}</Text>
       </View>

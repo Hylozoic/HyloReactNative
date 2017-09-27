@@ -3,6 +3,7 @@ import orm from 'store/models'
 
 export const MODULE_NAME = 'SignupFlow'
 export const UPDATE_USER_SETTINGS = `${MODULE_NAME}/UPDATE_USER_SETTINGS`
+export const UPDATE_USER_SETTINGS_PENDING = `${UPDATE_USER_SETTINGS}_PENDING`
 export const UPDATE_LOCAL_USER_SETTINGS = `${MODULE_NAME}/UPDATE_LOCAL_USER_SETTINGS`
 export const SIGNUP = `${MODULE_NAME}/SIGNUP`
 export const SET_SKILL = `${MODULE_NAME}/SET_SKILL`
@@ -12,14 +13,17 @@ export const REMOVE_SKILL = `${MODULE_NAME}/REMOVE_SKILL`
 export const REMOVE_SKILL_PENDING = `${REMOVE_SKILL}_PENDING`
 export const SET_USER_SKILLS = `${MODULE_NAME}/SET_USER_SKILLS`
 
+export const defaultUserSettings = {
+  name: '',
+  email: '',
+  password: '',
+  location: '',
+  avatarUrl: '',
+  settings: {}
+}
+
 export const defaultState = {
-  userSettings: {
-    name: '',
-    email: '',
-    password: '',
-    location: '',
-    avatarUrl: ''
-  },
+  userSettings: defaultUserSettings,
   skill: '',
   userSkills: []
 }

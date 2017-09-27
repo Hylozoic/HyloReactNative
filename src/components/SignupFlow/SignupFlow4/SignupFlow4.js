@@ -16,19 +16,12 @@ export default class SignupFlow4 extends React.Component {
     headerTitle: 'STEP 4/5',
     headerStyle: styles.headerStyle,
     headerTitleStyle: styles.headerTitleStyle,
-    headerTintColor: styles.headerTintColor
+    headerTintColor: styles.headerTintColor,
+    headerBackTitle: null
   })
 
   componentDidMount () {
-    const { fetchCurrentUser, loadSkills } = this.props
-    fetchCurrentUser()
-    .then(() => loadSkills())
-  }
-
-  componentDidUpdate (prevProps) {
-    if (this.props.storedSkills.length !== prevProps.storedSkills.length) {
-      this.props.loadSkills()
-    }
+    this.props.loadSkills()
   }
 
   render () {

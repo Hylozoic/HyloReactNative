@@ -13,7 +13,8 @@ import styles from './Signup.styles'
 
 export default class Signup extends React.Component {
   static navigationOptions = {
-    header: null
+    header: null,
+    headerBackTitle: null
   }
 
   render () {

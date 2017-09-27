@@ -2,7 +2,6 @@ import { connect } from 'react-redux'
 import {
   setSkill, getSkill, getUserSkills, getSkillsFromOrm, addSkill, removeSkill, setUserSkills
 } from '../SignupFlow.store.js'
-import fetchCurrentUser from '../../../store/actions/fetchCurrentUser'
 import { isEmpty, includes } from 'lodash/fp'
 
 const defaultSkills = [
@@ -43,7 +42,7 @@ export function mapStateToProps (state, props) {
 }
 
 export const mapDispatchToProps = {
-  setSkill, addSkill, removeSkill, fetchCurrentUser, setUserSkills
+  setSkill, addSkill, removeSkill, setUserSkills
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {

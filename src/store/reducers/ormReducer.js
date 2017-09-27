@@ -1,6 +1,6 @@
 import { EXTRACT_MODEL } from '../constants'
 import { LOGOUT } from '../../components/Login/actions'
-import { SIGNUP } from '../../components/SignupFlow/SignupFlow.store'
+import { SIGNUP, ADD_SKILL, REMOVE_SKILL, UPDATE_USER_SETTINGS_PENDING } from '../../components/SignupFlow/SignupFlow.store'
 import {
   CREATE_COMMENT
 } from '../../components/PostDetails/CommentEditor/CommentEditor.store'
@@ -13,7 +13,7 @@ export default function ormReducer (state = {}, action) {
   const { payload, type, meta, error } = action
   if (error) return state
 
-  var me
+  var me, skill
   switch (type) {
     case LOGOUT:
       me = session.Me.first()
@@ -71,6 +71,33 @@ export default function ormReducer (state = {}, action) {
           signupInProgress: true
         }
       })
+      break
+
+    case ADD_SKILL:
+      me = session.Me.first()
+      skill = session.Skill.create(payload.data.addSkill)
+      me.updateAppending({skills: [skill]})
+      break
+
+    case REMOVE_SKILL:
+      me = session.Me.first()
+      skill = session.Skill.safeGet({name: meta.name})
+      if (skill) {
+        me.skills.remove(skill.id)
+      }
+      break
+
+    case UPDATE_USER_SETTINGS_PENDING:
+      me = session.Me.first()
+      const changes = {
+        ...meta.changes,
+        settings: {
+          ...me.settings,
+          ...meta.changes.settings
+        }
+      }
+      me.update(changes)
+      break
   }
 
   return session.state

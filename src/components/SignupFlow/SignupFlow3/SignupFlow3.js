@@ -14,7 +14,8 @@ export default class SignupFlow3 extends React.Component {
     headerTitle: 'STEP 3/5',
     headerStyle: styles.headerStyle,
     headerTitleStyle: styles.headerTitleStyle,
-    headerTintColor: styles.headerTintColor
+    headerTintColor: styles.headerTintColor,
+    headerBackTitle: null
   })
 
   render () {
@@ -28,7 +29,7 @@ export default class SignupFlow3 extends React.Component {
         </Text>
       </View>
       <SignupControl
-        label='Where do you lay your head'
+        label='Where do you call home'
         value={location}
         onChange={changeSetting('location')} />
       <Button

@@ -22,6 +22,7 @@ export default {
   continueButton: {
     color: caribbeanGreen,
     backgroundColor: 'white',
+    disabledBackgroundColor: white60onCaribbeanGreen,
     height: 38,
     width: 142,
     fontSize: 16,

@@ -53,7 +53,7 @@ export default {
     justifyContent: 'center',
     alignItems: 'center',
     flex: 1,
-    borderRadius: 100,
+    borderRadius: 100
   },
   errorText: {
     color: amaranth,

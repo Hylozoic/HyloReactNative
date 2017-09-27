@@ -6,6 +6,7 @@ import { get } from 'lodash/fp'
 
 function mapStateToProps (state) {
   const signupInProgress = get('settings.signupInProgress', getMe(state))
+
   return {
     loggedIn: state.session.loggedIn && !signupInProgress
   }
