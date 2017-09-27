@@ -97,7 +97,7 @@ android {
         }
         manifestPlaceholders = [
             onesignal_app_id: ONESIGNAL_APP_ID,
-            onesignal_google_project_number: GOOGLE_PROJECT_NUMBER
+            onesignal_google_project_number: "REMOTE"
         ]
     }
     splits {
