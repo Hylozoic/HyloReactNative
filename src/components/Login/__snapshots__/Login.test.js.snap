@@ -79,6 +79,7 @@ exports[`renders Login correctly 1`] = `
       <View>
         <TextInput
           autoCapitalize="none"
+          autoCorrect={false}
           keyboardType="email-address"
           onChangeText={[Function]}
           onSubmitEditing={[Function]}
