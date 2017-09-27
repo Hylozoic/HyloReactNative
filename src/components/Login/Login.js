@@ -49,12 +49,6 @@ export default class Login extends React.Component {
     })
   }
 
-  componentDidMount () {
-    if (this.props.signupInProgress) {
-      this.props.navigation.navigate('SignupFlow1')
-    }
-  }
-
   render () {
     const { error, loginWithGoogle, loginWithFacebook, goToSignup } = this.props
     const emailIsValid = this.state.emailIsValid

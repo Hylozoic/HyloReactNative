@@ -22,7 +22,6 @@ import Thread from '../Thread'
 import ThreadList from '../ThreadList'
 import MemberDetails from '../MemberProfile/MemberDetails'
 import Signup from '../Signup'
-import SignupFlow1 from '../SignupFlow/SignupFlow1'
 import Login from '../Login'
 import createLinkingAwareContainer from './createLinkingAwareContainer'
 import trackCurrentTab from './trackCurrentTab'
@@ -55,8 +54,7 @@ const screensInStack = {
   Thread: {screen: Thread, path: 'thread/:id'},
   ThreadList: {screen: ThreadList, path: 'messages'},
   Login: {screen: Login, path: 'login'},
-  Signup: {screen: Signup, path: 'signup'},
-  SignupFlow1: {screen: SignupFlow1, path: 'signup/1'}
+  Signup: {screen: Signup, path: 'signup'}
 }
 
 Object.freeze(tabs)

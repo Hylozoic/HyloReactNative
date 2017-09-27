@@ -1,10 +1,11 @@
 import { connect } from 'react-redux'
 import getMe from '../../../store/selectors/getMe'
+import { get } from 'lodash/fp'
 
 function mapStateToProps (state, props) {
   const currentUser = getMe(state, props)
   const communityId = state.currentCommunity ||
-    currentUser && currentUser.lastViewedCommunity().id
+    currentUser && get('id', currentUser.lastViewedCommunity())
   return {currentUser, communityId}
 }
 

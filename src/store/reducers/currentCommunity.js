@@ -13,7 +13,7 @@ export default function currentCommunity (state = null, action) {
     if (lastViewedMembership) {
       return lastViewedMembership.community.id
     } else {
-      return payload
+      return state
     }
   }
 

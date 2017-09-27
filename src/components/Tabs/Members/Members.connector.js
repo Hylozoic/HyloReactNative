@@ -17,7 +17,7 @@ function makeFetchOpts (props) {
 function mapStateToProps (state, props) {
   const currentUser = getMe(state, props)
   const communityId = state.currentCommunity ||
-    (currentUser && currentUser.lastViewedCommunity().id)
+    (currentUser && get('id', currentUser.lastViewedCommunity()))
   const community = getCommunity(state, {id: communityId})
   const slug = community && community.slug
 
