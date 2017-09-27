@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches last snapshot 1`] = `
+<KeyboardAvoidingView
+  behavior="padding"
+  keyboardVerticalOffset={64}
+>
+  <View>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+    >
+      Add your location
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+    >
+      Add your location to see more relevant content and find people and projects near you.
+    </Text>
+  </View>
+  <SignupControl
+    label="Where do you call home"
+    onChange={undefined}
+    value="Hull"
+  />
+  <Button
+    onPress={[Function]}
+    text="Continue"
+  />
+</KeyboardAvoidingView>
+`;

@@ -4,7 +4,7 @@ import { caribbeanGreen } from 'style/colors'
 import { omit } from 'lodash/fp'
 
 export default function Button ({
-  style,
+  style = {},
   text,
   onPress,
   disabled

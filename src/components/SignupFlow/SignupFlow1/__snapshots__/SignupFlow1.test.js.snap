@@ -1,0 +1,90 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`hides password, and changes button when pending  1`] = `
+<View>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    disabled={false}
+    ellipsizeMode="tail"
+  >
+    Howdie stranger!
+  </Text>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    disabled={false}
+    ellipsizeMode="tail"
+  >
+    To kick things off, tell us a bit more about yourself and get your account off the ground.
+  </Text>
+  <SignupControl
+    error={null}
+    label="Your Full Name"
+    onChange={[Function]}
+    value="Ra"
+  />
+  <SignupControl
+    autoCapitalize="none"
+    autoCorrect={false}
+    error={null}
+    keyboardType="email-address"
+    label="Email Address"
+    onChange={[Function]}
+    value="ra@ra.com"
+  />
+  <Button
+    disabled={true}
+    onPress={[Function]}
+    text="Saving..."
+  />
+</View>
+`;
+
+exports[`matches last snapshot 1`] = `
+<View>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    disabled={false}
+    ellipsizeMode="tail"
+  >
+    Howdie stranger!
+  </Text>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    disabled={false}
+    ellipsizeMode="tail"
+  >
+    To kick things off, tell us a bit more about yourself and get your account off the ground.
+  </Text>
+  <SignupControl
+    error={null}
+    label="Your Full Name"
+    onChange={[Function]}
+    value="Ra"
+  />
+  <SignupControl
+    autoCapitalize="none"
+    autoCorrect={false}
+    error={null}
+    keyboardType="email-address"
+    label="Email Address"
+    onChange={[Function]}
+    value="ra@ra.com"
+  />
+  <SignupControl
+    error={null}
+    label="Password"
+    onChange={[Function]}
+    togglableSecureTextEntry={true}
+    value="rarara"
+  />
+  <Button
+    disabled={false}
+    onPress={[Function]}
+    text="Continue"
+  />
+</View>
+`;

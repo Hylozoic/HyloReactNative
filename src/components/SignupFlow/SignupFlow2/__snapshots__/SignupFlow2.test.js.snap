@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches last snapshot 1`] = `
+<View>
+  <View>
+    <ImagePicker
+      onChoice={[Function]}
+      onPendingChange={[Function]}
+      path="testpath/avatar/"
+      title="Upload a Photo"
+    >
+      <Image
+        source={
+          Object {
+            "uri": "foo.png",
+          }
+        }
+      />
+    </ImagePicker>
+    <View>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        disabled={false}
+        ellipsizeMode="tail"
+      >
+        Upload a Photo
+      </Text>
+    </View>
+  </View>
+  <Button
+    onPress={[Function]}
+    text="Continue"
+  />
+</View>
+`;

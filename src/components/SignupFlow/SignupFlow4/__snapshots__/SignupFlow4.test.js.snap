@@ -1,0 +1,94 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SignupFlow4 matches last snapshot 1`] = `
+<KeyboardAvoidingView
+  behavior="padding"
+  keyboardVerticalOffset={64}
+>
+  <View>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+    >
+      Share your unique super powers!
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+    >
+      What skills are you known for? The more skills you add, the more relevant the content. Its like magic.
+    </Text>
+  </View>
+  <SignupControl
+    label="How can you help?"
+    onChange={[Function]}
+    value="Pop"
+  />
+  <SkillCloud
+    onPress={undefined}
+    skills={
+      Array [
+        "One",
+        "Two",
+      ]
+    }
+  />
+  <View>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+    >
+      Your Skills
+    </Text>
+    <SkillCloud
+      onPress={[Function]}
+      skills={
+        Array [
+          "Snap",
+          "Crackle",
+        ]
+      }
+    />
+  </View>
+  <Button
+    onPress={[Function]}
+    text="Add Skill"
+  />
+</KeyboardAvoidingView>
+`;
+
+exports[`SkillCloud matches last snapshot 1`] = `
+<View>
+  <SkillPill
+    onPress={[Function]}
+    skill="Snap"
+  />
+  <SkillPill
+    onPress={[Function]}
+    skill="Crackle"
+  />
+</View>
+`;
+
+exports[`SkillPill matches last snapshot 1`] = `
+<TouchableOpacity
+  activeOpacity={0.2}
+  focusedOpacity={0.7}
+  onPress={[Function]}
+>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    disabled={false}
+    ellipsizeMode="tail"
+  >
+    SNAP
+  </Text>
+</TouchableOpacity>
+`;
