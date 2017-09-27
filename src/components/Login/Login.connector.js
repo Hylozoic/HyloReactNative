@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
-import { login, loginWithFacebook, loginWithGoogle } from './actions'
+import { login, loginWithFacebook, loginWithGoogle, clearCurrentUser } from './actions'
 import getMe from '../../store/selectors/getMe'
+import fetchCurrentUser from '../../store/actions/fetchCurrentUser'
 import { get } from 'lodash/fp'
 
 function mapStateToProps (state, props) {
@@ -19,7 +20,12 @@ function mapDispatchToProps (dispatch) {
   return {
     loginWithFacebook: (token) => dispatch(loginWithFacebook(token)),
     loginWithGoogle: (token) => dispatch(loginWithGoogle(token)),
-    login: (email, password) => dispatch(login(email, password))
+    login: (email, password) =>
+      dispatch(login(email, password))
+      .then(({ error }) => {
+        if (error) return
+        return dispatch(clearCurrentUser()) && dispatch(fetchCurrentUser())
+      })
   }
 }
 

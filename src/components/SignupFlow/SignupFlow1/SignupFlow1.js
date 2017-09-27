@@ -33,6 +33,14 @@ export default class SignupFlow1 extends React.Component {
     if (prevProps.currentUser !== this.props.currentUser) {
       this.props.loadUserSettings()
     }
+    if (prevProps.errors !== this.props.errors) {
+      this.setState({
+        errors: {
+          ...this.state.errors,
+          ...this.props.errors
+        }
+      })
+    }
   }
 
   constructor (props) {
@@ -63,8 +71,18 @@ export default class SignupFlow1 extends React.Component {
     }
   }
 
+  updateField (field, value) {
+    this.setState({
+      errors: {
+        ...this.state.errors,
+        [field]: null
+      }
+    })
+    this.props.changeSetting(field, value)
+  }
+
   render () {
-    const { changeSetting, name, email, password, pending, showPasswordField } = this.props
+    const { name, email, password, pending, showPasswordField } = this.props
     const { errors } = this.state
 
     return <View style={styles.container}>
@@ -75,7 +93,7 @@ export default class SignupFlow1 extends React.Component {
       <SignupControl
         label='Your Full Name'
         value={name}
-        onChange={changeSetting('name')}
+        onChange={value => this.updateField('name', value)}
         error={errors.name} />
       <SignupControl
         label='Email Address'
@@ -83,12 +101,12 @@ export default class SignupFlow1 extends React.Component {
         keyboardType={'email-address'}
         autoCapitalize='none'
         autoCorrect={false}
-        onChange={changeSetting('email')}
+        onChange={value => this.updateField('email', value)}
         error={errors.email} />
       {showPasswordField && <SignupControl
         label='Password'
         value={password}
-        onChange={changeSetting('password')}
+        onChange={value => this.updateField('password', value)}
         togglableSecureTextEntry
         error={errors.password} />}
       <Button

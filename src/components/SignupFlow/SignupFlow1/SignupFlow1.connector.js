@@ -2,6 +2,7 @@ import { connect } from 'react-redux'
 import {
   signup,
   getUserSettings,
+  getSignupErrors,
   updateUserSettings,
   updateLocalUserSettings,
   SIGNUP,
@@ -15,6 +16,7 @@ export function mapStateToProps (state, props) {
   const currentUser = getMe(state, props)
   const { name, email, password } = getUserSettings(state)
   const pending = state.pending[SIGNUP] || state.pending[UPDATE_USER_SETTINGS]
+  const errors = getSignupErrors(state)
 
   return {
     name,
@@ -22,14 +24,15 @@ export function mapStateToProps (state, props) {
     password,
     currentUser,
     pending,
-    showPasswordField: !currentUser
+    showPasswordField: !currentUser,
+    errors
   }
 }
 
 export function mapDispatchToProps (dispatch, props) {
   return {
     signup: params => dispatch(signup(params)),
-    changeSetting: setting => value => dispatch(updateLocalUserSettings({[setting]: value})),
+    changeSetting: (setting, value) => dispatch(updateLocalUserSettings({[setting]: value})),
     updateLocalUserSettings: settings => dispatch(updateLocalUserSettings(settings)),
     updateUserSettings: settings => dispatch(updateUserSettings(settings)),
     fetchCurrentUser: () => dispatch(fetchCurrentUser())

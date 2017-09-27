@@ -25,14 +25,38 @@ export const defaultUserSettings = {
 export const defaultState = {
   userSettings: defaultUserSettings,
   skill: '',
-  userSkills: []
+  userSkills: [],
+  errors: {}
+}
+
+export function getErrors (payload) {
+  if (payload.response.body.startsWith('That email address is already in use')) {
+    return {
+      email: 'That address is already in use. Try logging in instead.'
+    }
+  }
 }
 
 export default function reducer (state = defaultState, action) {
   const { error, type, payload, meta } = action
-  if (error) return state
+  if (error) {
+    switch (type) {
+      case SIGNUP:
+        return {
+          ...state,
+          errors: getErrors(payload)
+        }
+      default:
+        return state
+    }
+  }
 
   switch (type) {
+    case SIGNUP:
+      return {
+        ...state,
+        errors: {}
+      }
     case UPDATE_LOCAL_USER_SETTINGS:
       return {
         ...state,
@@ -178,4 +202,8 @@ export function getSkill (state) {
 
 export function getUserSkills (state) {
   return state[MODULE_NAME].userSkills
+}
+
+export function getSignupErrors (state) {
+  return state[MODULE_NAME].errors
 }
