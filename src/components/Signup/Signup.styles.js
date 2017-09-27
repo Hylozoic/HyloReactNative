@@ -1,21 +1,31 @@
 import Dimensions from 'Dimensions'
 const bgImageWidth = Dimensions.get('window').width
-const bgImageHeight = bgImageWidth * (1191 / 1498) // 1498 and 1191 are the width and height of the image asset
+const bgImageHeight = bgImageWidth * (598 / 748) // 1498 and 1191 are the width and height of the image asset
 import loginStyles from '../Login/Login.styles'
 import { caribbeanGreen } from 'style/colors'
 
 export default {
   container: {
     backgroundColor: 'white',
-    flex: 1
+    flex: 1,
+    position: 'relative'
   },
   backgroundImage: {
     width: bgImageWidth,
     height: bgImageHeight,
     marginBottom: 35
   },
+  merkabaWrapper: {
+    position: 'absolute',
+    width: bgImageWidth,
+    height: bgImageHeight,
+    alignItems: 'center',
+    justifyContent: 'center',
+    zIndex: 10
+  },
   merkabaImage: {
-
+    height: 97,
+    width: 97
   },
   paddedContainer: {
     paddingHorizontal: 16

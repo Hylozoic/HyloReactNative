@@ -7,8 +7,8 @@ import {
   ScrollView
 } from 'react-native'
 import Button from '../Button'
-const backgroundImage = require('../../assets/Sign_Up_Background.png')
-// const merkabaImage = require('../../assets/merkaba_white.svg')
+const backgroundImage = require('../../assets/signin_background.png')
+const merkabaImage = require('../../assets/merkaba_white.png')
 import styles from './Signup.styles'
 
 export default class Signup extends React.Component {
@@ -20,6 +20,7 @@ export default class Signup extends React.Component {
   render () {
     const { goToSignupFlow, goToLogin } = this.props
     return <ScrollView contentContainerStyle={styles.container}>
+      <View style={styles.merkabaWrapper}><Image source={merkabaImage} style={styles.merkabaImage} /></View>
       <Image source={backgroundImage} resizeMode='stretch' style={styles.backgroundImage} />
       <View style={styles.paddedContainer}>
         <Text style={styles.title}>Sign up to get started with Hylo</Text>
