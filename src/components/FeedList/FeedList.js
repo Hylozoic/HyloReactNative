@@ -23,9 +23,6 @@ export default class FeedList extends Component {
       this.fetchOrShowCached()
     }
   }
-  handleRefresh = () => {
-    console.log('handleRefresh')
-  }
 
   render () {
     const {
@@ -57,7 +54,7 @@ export default class FeedList extends Component {
         />
     </View>
 
-    const listFooterComponent = pending && posts.length > 0
+    const listFooterComponent = pending && posts.length > 1
       ? <Loading style={styles.loading} />
       : null
 
