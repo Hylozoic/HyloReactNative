@@ -10,12 +10,12 @@ import {
 export function mapStateToProps (state, props) {
   const notifications = getNotifications(state, props)
   const currentUser = getMe(state)
-  const hasMore = getNotificationsHasMore(state, props)
+  // const hasMore = getNotificationsHasMore(state, props)
   return {
     pending: state.pending[FETCH_NOTIFICATIONS],
     currentUser,
-    notifications,
-    hasMore
+    notifications
+    // hasMore
   }
 }
 

@@ -13,9 +13,6 @@ export default StyleSheet.create({
     paddingVertical: 5,
     paddingHorizontal: 10,
     backgroundColor: 'white',
-
-    // Prevents the card from appearing upside down in the inverted FlatList
-    transform: [{ scaleY: -1 }]
   },
   date: {
     fontSize: 12,

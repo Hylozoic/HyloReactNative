@@ -1,22 +1,15 @@
-import { makeGetQueryResults, makeQueryResultsModelSelector } from '../../store/reducers/queryResults'
-import { createSelector } from 'reselect'
-import { get, includes, isEmpty } from 'lodash/fp'
+import { createSelector } from 'redux-orm'
 import orm from '../../store/models'
 
 export const FETCH_NOTIFICATIONS = 'NotificationsList/FETCH_NOTIFICATIONS'
 
-const getNotificationsResults = makeGetQueryResults(FETCH_NOTIFICATIONS)
-
-export const getNotifications = makeQueryResultsModelSelector(
-  getNotificationsResults,
-  'Notification',
-  notification => ({
-    ...notification.ref
-  })
+export const getNotifications = createSelector(
+  orm,
+  state => state.orm,
+  session => {
+    return session.Notification.all().toRefArray()
+  }
 )
-
-export const getNotificationsHasMore = createSelector(getNotificationsResults, get('hasMore'))
-
 
 export function fetchNotifications (first = 20) {
   return {

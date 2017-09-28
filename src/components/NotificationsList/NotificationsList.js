@@ -19,7 +19,6 @@ export default class NotificationsList extends Component {
   render () {
     const { notifications, pending, showNotification } = this.props
 
-    console.log(notifications)
     if (pending && notifications.length === 0) return <Loading />
     if (!pending && notifications.length === 0) {
       return <Text style={styles.center}>Nothing new for you!</Text>
@@ -29,9 +28,9 @@ export default class NotificationsList extends Component {
       <FlatList
         data={notifications}
         keyExtractor={this.keyExtractor}
-        onEndReached={fetchMoreNotifications}
+        // onEndReached={fetchMoreNotifications}
         renderItem={({ item }) =>
-          <MessageRow
+          <NotificationRow
             notifcation={item.notification}
             showNotification={showNotification}
          />}
@@ -40,7 +39,7 @@ export default class NotificationsList extends Component {
   }
 }
 
-export function NotifcationRow ({ notification }) {
+export function NotificationRow ({ notification }) {
   return <View>
     <TouchableOpacity onPress={() => {}}>
       <NotificationCard notification={notification} />
