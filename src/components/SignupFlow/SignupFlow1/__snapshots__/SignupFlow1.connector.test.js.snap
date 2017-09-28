@@ -1,0 +1,84 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mapDispatchToProps maps the action generators 1`] = `
+Array [
+  Array [
+    Object {
+      "payload": Object {
+        "api": Object {
+          "method": "post",
+          "params": Object {
+            "email": "jo@jo",
+            "login": true,
+            "name": "jo",
+            "password": "Joe Pass",
+            "resp": "user",
+          },
+          "path": "/noo/user",
+        },
+      },
+      "type": "SignupFlow/SIGNUP",
+    },
+  ],
+]
+`;
+
+exports[`mapStateToProps returns the right keys 1`] = `
+Object {
+  "currentUser": undefined,
+  "email": undefined,
+  "errors": undefined,
+  "name": undefined,
+  "password": undefined,
+  "pending": true,
+  "showPasswordField": true,
+}
+`;
+
+exports[`mergeProps merges the props 1`] = `
+Object {
+  "currentUser": Object {
+    "ref": Object {
+      "email": "bb",
+      "name": "aa",
+      "unused": "cc",
+    },
+  },
+  "email": "b",
+  "fetchCurrentUser": [Function],
+  "loadUserSettings": [Function],
+  "name": "a",
+  "navigation": Object {
+    "navigate": [Function],
+  },
+  "password": "c",
+  "showPasswordField": true,
+  "signup": [Function],
+  "signupOrUpdate": [Function],
+  "updateLocalUserSettings": [Function],
+  "updateUserSettings": [Function],
+}
+`;
+
+exports[`mergeProps merges the props 2`] = `
+Array [
+  Array [
+    Object {
+      "email": "b",
+      "name": "a",
+      "password": "c",
+    },
+  ],
+]
+`;
+
+exports[`mergeProps merges the props 3`] = `
+Array [
+  Array [
+    Object {
+      "email": "bb",
+      "name": "aa",
+    },
+  ],
+]
+`;
