@@ -18,3 +18,6 @@ it('matches last snapshot', () => {
 
   expect(actual).toMatchSnapshot()
 })
+
+it('has navigationOptions', () =>
+  expect(SignupFlow3.navigationOptions()).toMatchSnapshot())

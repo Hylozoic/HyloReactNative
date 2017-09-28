@@ -112,3 +112,6 @@ it('clears errors when updating fields', () => {
     name: 'yes'
   })
 })
+
+it('has navigationOptions', () =>
+  expect(SignupFlow1.navigationOptions()).toMatchSnapshot())

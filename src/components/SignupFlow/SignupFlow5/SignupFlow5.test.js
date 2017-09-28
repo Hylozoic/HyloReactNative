@@ -40,3 +40,6 @@ it('hides image when no url', () => {
 
   expect(actual).toMatchSnapshot()
 })
+
+it('has navigationOptions', () =>
+  expect(SignupFlow5.navigationOptions()).toMatchSnapshot())

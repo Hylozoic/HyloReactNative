@@ -1,5 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`SignupFlow4 has navigationOptions 1`] = `
+Object {
+  "headerBackTitle": null,
+  "headerStyle": Object {
+    "backgroundColor": "#0DC39F",
+    "shadowColor": "transparent",
+  },
+  "headerTintColor": "#9ee7d9",
+  "headerTitle": "STEP 4/5",
+  "headerTitleStyle": Object {
+    "color": "white",
+    "fontFamily": "Circular-Bold",
+    "fontSize": 12,
+  },
+}
+`;
+
 exports[`SignupFlow4 matches last snapshot 1`] = `
 <KeyboardFriendlyView
   behavior="padding"
