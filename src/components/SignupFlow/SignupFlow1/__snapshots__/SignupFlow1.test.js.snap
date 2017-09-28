@@ -44,6 +44,22 @@ exports[`hides password, and changes button when pending  1`] = `
 </KeyboardFriendlyView>
 `;
 
+exports[`loads user settings and updates errors on update when appropriate 1`] = `
+Object {
+  "email": null,
+  "name": null,
+  "password": null,
+}
+`;
+
+exports[`loads user settings and updates errors on update when appropriate 2`] = `
+Object {
+  "email": "one error",
+  "name": null,
+  "password": null,
+}
+`;
+
 exports[`matches last snapshot 1`] = `
 <KeyboardFriendlyView
   behavior="padding"
@@ -93,4 +109,14 @@ exports[`matches last snapshot 1`] = `
     text="Continue"
   />
 </KeyboardFriendlyView>
+`;
+
+exports[`validates its fields 1`] = `
+Object {
+  "errors": Object {
+    "email": "Must be a valid email",
+    "name": "Name must not consist solely of whitespace.",
+    "password": "Password must be at least 9 characters.",
+  },
+}
 `;
