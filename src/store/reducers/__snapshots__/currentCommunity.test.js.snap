@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`on FETCH_CURRENT_USER handles a user with no memberships 1`] = `
+Object {
+  "id": 1,
+}
+`;
