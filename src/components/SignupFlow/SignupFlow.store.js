@@ -188,7 +188,6 @@ export const getSkillsFromOrm = ormCreateSelector(
   state => state.orm,
   ({ Me }) => {
     const me = Me.first()
-    me && console.log('me.skills', me.skills)
     return me ? me.skills.toModelArray() : []
   })
 
