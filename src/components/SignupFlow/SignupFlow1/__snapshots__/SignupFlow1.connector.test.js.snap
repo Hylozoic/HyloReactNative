@@ -1,6 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`mapDispatchToProps maps the action generators 1`] = `
+Object {
+  "changeSetting": [Function],
+  "fetchCurrentUser": [Function],
+  "signup": [Function],
+  "updateLocalUserSettings": [Function],
+  "updateUserSettings": [Function],
+}
+`;
+
+exports[`mapDispatchToProps maps the action generators 2`] = `
 Array [
   Array [
     Object {

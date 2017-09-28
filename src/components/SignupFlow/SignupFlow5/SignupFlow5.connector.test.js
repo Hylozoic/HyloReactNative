@@ -1,24 +1,5 @@
-import { remainingSkills, mapStateToProps, mapDispatchToProps, mergeProps } from './SignupFlow4.connector'
+import { mapStateToProps, mapDispatchToProps, mergeProps } from './SignupFlow5.connector'
 import { MODULE_NAME } from '../SignupFlow.store'
-
-describe('remainingSkills', () => {
-  const defaultSkills = [
-    'singing', 'slinging', 'dancing', 'dashing', 'daring'
-  ]
-
-  it('filters chosen skills', () => {
-    const userSkills = ['singing', 'dancing']
-    expect(remainingSkills('', userSkills, defaultSkills))
-    .toEqual(['slinging', 'dashing', 'daring'])
-  })
-
-  it('filters chosen skills and prefix', () => {
-    const skillFilter = ['da']
-    const userSkills = ['singing', 'dancing']
-    expect(remainingSkills(skillFilter, userSkills, defaultSkills))
-    .toEqual(['dashing', 'daring'])
-  })
-})
 
 describe('mapStateToProps', () => {
   it('returns the right keys', () => {
@@ -43,7 +24,8 @@ describe('mergeProps', () => {
       storedSkills: ['a', 'b', 'c']
     }
     const dispatchProps = {
-      setUserSkills: jest.fn()
+      updateUserSettings: jest.fn(),
+      updateLocalUserSettings: jest.fn()
     }
     const ownProps = {
       navigation: {
@@ -52,7 +34,14 @@ describe('mergeProps', () => {
     }
     const mergedProps = mergeProps(stateProps, dispatchProps, ownProps)
     expect(mergedProps).toMatchSnapshot()
-    mergedProps.saveAndNext()
+    mergedProps.finishSignup()
+    expect(dispatchProps.updateUserSettings).toHaveBeenCalled()
+    expect(dispatchProps.updateUserSettings.mock.calls)
+    .toMatchSnapshot()
+    expect(dispatchProps.updateLocalUserSettings).toHaveBeenCalled()
+    expect(dispatchProps.updateLocalUserSettings.mock.calls)
+    .toMatchSnapshot()
+    mergedProps.makeChanges()
     expect(ownProps.navigation.navigate).toHaveBeenCalled()
     expect(ownProps.navigation.navigate.mock.calls)
     .toMatchSnapshot()

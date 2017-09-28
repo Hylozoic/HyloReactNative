@@ -1,12 +1,9 @@
-import { mapStateToProps, mapDispatchToProps, mergeProps } from './SignupFlow1.connector'
-import { SIGNUP, MODULE_NAME } from '../SignupFlow.store'
+import { mapStateToProps, mapDispatchToProps, mergeProps } from './SignupFlow3.connector'
+import { MODULE_NAME } from '../SignupFlow.store'
 
 describe('mapStateToProps', () => {
   it('returns the right keys', () => {
     const state = {
-      pending: {
-        [SIGNUP]: true
-      },
       [MODULE_NAME]: {
         userSettings: {}
       }
@@ -20,7 +17,8 @@ describe('mapDispatchToProps', () => {
     const dispatch = jest.fn(val => val)
     const dispatchProps = mapDispatchToProps(dispatch)
     expect(dispatchProps).toMatchSnapshot()
-    dispatchProps.signup({name: 'jo', email: 'jo@jo', password: 'Joe Pass'})
+    dispatchProps.changeSetting('name')('dan')
+    dispatchProps.updateUserSettings({name: 'jan'})
     expect(dispatch).toHaveBeenCalled()
     expect(dispatch.mock.calls).toMatchSnapshot()
   })
@@ -29,23 +27,10 @@ describe('mapDispatchToProps', () => {
 describe('mergeProps', () => {
   it('merges the props', () => {
     const stateProps = {
-      name: 'a',
-      email: 'b',
-      password: 'c',
-      currentUser: {
-        ref: {
-          name: 'aa',
-          email: 'bb',
-          unused: 'cc'
-        }
-      },
-      showPasswordField: true
+      location: 'a'
     }
     const dispatchProps = {
-      signup: jest.fn(() => Promise.resolve()),
-      updateUserSettings: jest.fn(() => Promise.resolve()),
-      updateLocalUserSettings: jest.fn(),
-      fetchCurrentUser: jest.fn()
+      updateUserSettings: jest.fn(() => Promise.resolve())
     }
     const ownProps = {
       navigation: {
@@ -54,13 +39,9 @@ describe('mergeProps', () => {
     }
     const mergedProps = mergeProps(stateProps, dispatchProps, ownProps)
     expect(mergedProps).toMatchSnapshot()
-    mergedProps.signupOrUpdate()
+    mergedProps.saveAndNext()
     expect(dispatchProps.updateUserSettings).toHaveBeenCalled()
     expect(dispatchProps.updateUserSettings.mock.calls)
-    .toMatchSnapshot()
-    mergedProps.loadUserSettings()
-    expect(dispatchProps.updateLocalUserSettings).toHaveBeenCalled()
-    expect(dispatchProps.updateLocalUserSettings.mock.calls)
     .toMatchSnapshot()
   })
 })
