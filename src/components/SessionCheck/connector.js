@@ -12,7 +12,7 @@ export function mapStateToProps (state) {
   }
 }
 
-function mapDispatchToProps (dispatch) {
+export function mapDispatchToProps (dispatch) {
   return {
     actions: bindActionCreators({
       checkSession
