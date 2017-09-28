@@ -24,6 +24,7 @@
     "react": "16.0.0-alpha.12",
     "react-native": "^0.46.4",
     "react-native-aws3": "^0.0.8",
+    "react-native-background-timer": "^1.2.0",
     "react-native-fbsdk": "^0.6.0",
     "react-native-google-signin": "^0.10.0",
     "react-native-htmlview": "^0.11.1",
@@ -40,7 +41,6 @@
     "redux-orm": "Hylozoic/redux-orm#model-createClass-dist",
     "redux-promise": "^0.5.3",
     "sails.io.js": "1.1.10",
-    "socket.io-client": "^2.0.3",
     "striptags": "~2",
     "tinycolor2": "^1.4.1",
     "url": "^0.11.0"

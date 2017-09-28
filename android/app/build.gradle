@@ -153,6 +153,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-background-timer')
     compile project(':react-native-onesignal')
     compile fileTree(dir: "libs", include: ["*.jar"])
 
