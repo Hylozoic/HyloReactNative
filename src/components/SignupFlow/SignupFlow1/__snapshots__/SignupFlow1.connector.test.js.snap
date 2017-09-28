@@ -30,6 +30,90 @@ Array [
       "type": "SignupFlow/SIGNUP",
     },
   ],
+  Array [
+    Object {
+      "payload": Object {
+        "name": "yo",
+      },
+      "type": "SignupFlow/UPDATE_LOCAL_USER_SETTINGS",
+    },
+  ],
+  Array [
+    Object {
+      "payload": Object {
+        "la": "la",
+      },
+      "type": "SignupFlow/UPDATE_LOCAL_USER_SETTINGS",
+    },
+  ],
+  Array [
+    Object {
+      "graphql": Object {
+        "query": "mutation ($changes: MeInput) {
+        updateMe(changes: $changes) {
+          id
+        }
+      }",
+        "variables": Object {
+          "changes": Object {
+            "ra": "ra",
+          },
+        },
+      },
+      "meta": Object {
+        "changes": Object {
+          "ra": "ra",
+        },
+        "optimistic": true,
+      },
+      "type": "SignupFlow/UPDATE_USER_SETTINGS",
+    },
+  ],
+  Array [
+    Object {
+      "graphql": Object {
+        "query": "{
+        me {
+          id
+          name
+          email
+          location
+          avatarUrl
+          newNotificationCount
+          unseenThreadCount
+          memberships {
+            id
+            lastViewedAt
+            newPostCount
+            hasModeratorRole
+            community {
+              id
+              name
+              slug
+              avatarUrl
+              bannerUrl
+            }
+          }
+          skills (first: 100) {
+            total
+            hasMore
+            items {
+              id
+              name
+            }
+          }
+          settings {
+            signupInProgress
+          }
+        }
+      }",
+      },
+      "meta": Object {
+        "extractModel": "Me",
+      },
+      "type": "FETCH_CURRENT_USER",
+    },
+  ],
 ]
 `;
 

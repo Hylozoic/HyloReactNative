@@ -1,6 +1,7 @@
 import 'react-native'
 import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
+import ReactTestRenderer from 'react-test-renderer'
 import SignupFlow4, { SkillCloud, SkillPill } from './SignupFlow4'
 
 jest.mock('../../KeyboardFriendlyView', () => 'KeyboardFriendlyView')
@@ -22,6 +23,17 @@ describe('SignupFlow4', () => {
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
+  })
+
+  it('calls loadSkills on mount', () => {
+    const props = {
+      loadSkills: jest.fn(),
+      skill: 'Pop',
+      userSkills: ['Snap', 'Crackle'],
+      remainingSkills: ['One', 'Two']
+    }
+    ReactTestRenderer.create(<SignupFlow4 {...props} />)
+    expect(props.loadSkills).toHaveBeenCalled()
   })
 
   it('has navigationOptions', () =>

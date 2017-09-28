@@ -1,6 +1,7 @@
 import 'react-native'
 import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
+import ReactTestRenderer from 'react-test-renderer'
 import SignupControl from './SignupControl'
 
 it('matches last snapshot', () => {
@@ -21,4 +22,11 @@ it('matches last snapshot', () => {
   const actual = renderer.getRenderOutput()
 
   expect(actual).toMatchSnapshot()
+})
+
+it('toggles the password', () => {
+  const instance = ReactTestRenderer.create(<SignupControl />).root.instance
+  expect(instance.state.securePassword).toEqual(true)
+  instance.togglePassword()
+  expect(instance.state.securePassword).toEqual(false)
 })

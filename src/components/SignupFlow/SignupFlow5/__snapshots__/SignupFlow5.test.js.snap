@@ -16,7 +16,7 @@ Object {
 }
 `;
 
-exports[`hides image when no url 1`] = `
+exports[`hides image when no url and password when no password 1`] = `
 <View>
   <Text
     accessible={true}
@@ -44,11 +44,6 @@ exports[`hides image when no url 1`] = `
     keyboardType="email-address"
     label="Email Address"
     value="jill@hill.com"
-  />
-  <SignupControl
-    label="Password"
-    togglableSecureTextEntry={true}
-    value="fill"
   />
   <SignupControl
     label="Location"

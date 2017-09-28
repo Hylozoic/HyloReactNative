@@ -22,12 +22,12 @@ it('matches last snapshot', () => {
   expect(actual).toMatchSnapshot()
 })
 
-it('hides image when no url', () => {
+it('hides image when no url and password when no password', () => {
   const renderer = new ReactShallowRenderer()
   const props = {
     name: 'Hill',
     email: 'jill@hill.com',
-    password: 'fill',
+    password: '',
     location: 'hill',
     avatarUrl: '',
     skills: ['One', 'Two'],

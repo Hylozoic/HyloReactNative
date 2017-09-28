@@ -92,6 +92,22 @@ it('validates its fields', () => {
   expect(instance.state).toMatchSnapshot()
 })
 
+it('submits', () => {
+  const props = {
+    name: 'name',
+    email: 'ra@ra.com',
+    password: 'rarararararara',
+    showPasswordField: true,
+    signupOrUpdate: jest.fn(),
+    fetchCurrentUser: () => {},
+    loadUserSettings: () => {}
+  }
+
+  const instance = ReactTestRenderer.create(<SignupFlow1 {...props} />).root.instance
+  instance.submit()
+  expect(props.signupOrUpdate).toHaveBeenCalled()
+})
+
 it('clears errors when updating fields', () => {
   const props = {
     changeSetting: jest.fn(),
