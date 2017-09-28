@@ -23,6 +23,9 @@ export default class FeedList extends Component {
       this.fetchOrShowCached()
     }
   }
+  handleRefresh = () => {
+    console.log('handleRefresh')
+  }
 
   render () {
     const {
@@ -39,7 +42,8 @@ export default class FeedList extends Component {
       showMember,
       showTopic,
       showCommunities,
-      goToCommunity
+      goToCommunity,
+      refreshing
     } = this.props
 
     const listHeaderComponent = <View>
@@ -69,6 +73,8 @@ export default class FeedList extends Component {
             showTopic={showTopic}
             showCommunity={showCommunities}
             goToCommunity={goToCommunity} />}
+        onRefresh={fetchMorePosts}
+        refreshing={refreshing}
         keyExtractor={(item, index) => item.id}
         onEndReached={fetchMorePosts}
         ListHeaderComponent={listHeaderComponent}

@@ -34,7 +34,8 @@ describe('mapStateToProps', () => {
       hasMore: undefined,
       pending: undefined,
       filter: defaultState.filter,
-      sortBy: defaultState.sortBy
+      sortBy: defaultState.sortBy,
+      refreshing: false
     })
   })
 
@@ -48,7 +49,8 @@ describe('mapStateToProps', () => {
       hasMore: true,
       pending: undefined,
       filter: defaultState.filter,
-      sortBy: defaultState.sortBy
+      sortBy: defaultState.sortBy,
+      refreshing: false
     })
   })
 
