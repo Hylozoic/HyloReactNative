@@ -36,7 +36,12 @@ export default function createLinkingAwareContainer (Comp, uriPrefix) {
       })
 
       Linking.getInitialURL().then(
-        (url: string) => url && this._handleOpenURL(url)
+        (url: string) => {
+          if (url) {
+            console.log('GET INIT URL', 'initial url  ' + url)
+            return url && this._handleOpenURL(url)
+          }
+        }
       )
     }
 
