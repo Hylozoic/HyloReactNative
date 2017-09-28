@@ -1,7 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`hides password, and changes button when pending  1`] = `
-<View>
+<KeyboardFriendlyView
+  behavior="padding"
+  keyboardVerticalOffset={64}
+>
   <Text
     accessible={true}
     allowFontScaling={true}
@@ -38,11 +41,14 @@ exports[`hides password, and changes button when pending  1`] = `
     onPress={[Function]}
     text="Saving..."
   />
-</View>
+</KeyboardFriendlyView>
 `;
 
 exports[`matches last snapshot 1`] = `
-<View>
+<KeyboardFriendlyView
+  behavior="padding"
+  keyboardVerticalOffset={64}
+>
   <Text
     accessible={true}
     allowFontScaling={true}
@@ -86,5 +92,5 @@ exports[`matches last snapshot 1`] = `
     onPress={[Function]}
     text="Continue"
   />
-</View>
+</KeyboardFriendlyView>
 `;

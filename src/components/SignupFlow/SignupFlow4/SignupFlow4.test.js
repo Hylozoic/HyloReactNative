@@ -3,6 +3,8 @@ import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import SignupFlow4, { SkillCloud, SkillPill } from './SignupFlow4'
 
+jest.mock('../../KeyboardFriendlyView', () => 'KeyboardFriendlyView')
+
 describe('SignupFlow4', () => {
   it('matches last snapshot', () => {
     const renderer = new ReactShallowRenderer()

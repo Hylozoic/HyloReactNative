@@ -2,10 +2,10 @@ import React from 'react'
 import {
   View,
   Text,
-  KeyboardAvoidingView,
   TouchableOpacity
 } from 'react-native'
 import Button from '../../Button'
+import KeyboardFriendlyView from '../../KeyboardFriendlyView'
 import SignupControl from '../SignupControl'
 import styles from './SignupFlow4.styles'
 import { keyboardAvoidingViewProps as kavProps } from 'util/viewHelpers'
@@ -29,7 +29,7 @@ export default class SignupFlow4 extends React.Component {
 
     const editingSkill = !isEmpty(skill)
 
-    return <KeyboardAvoidingView style={styles.container} {...kavProps}>
+    return <KeyboardFriendlyView style={styles.container} {...kavProps}>
       <View style={styles.containerPadding}>
         <Text style={styles.title}>Share your unique super powers!</Text>
         <Text style={styles.subTitle}>
@@ -50,7 +50,7 @@ export default class SignupFlow4 extends React.Component {
         style={styles.continueButton}
         text={editingSkill ? 'Add Skill' : 'Continue'}
         onPress={editingSkill ? () => addSkill(skill) : saveAndNext} />
-    </KeyboardAvoidingView>
+    </KeyboardFriendlyView>
   }
 }
 

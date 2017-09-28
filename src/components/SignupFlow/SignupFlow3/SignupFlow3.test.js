@@ -3,6 +3,8 @@ import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import SignupFlow3 from './SignupFlow3'
 
+jest.mock('../../KeyboardFriendlyView', () => 'KeyboardFriendlyView')
+
 it('matches last snapshot', () => {
   const renderer = new ReactShallowRenderer()
   const props = {

@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`matches last snapshot 1`] = `
-<KeyboardAvoidingView
+<KeyboardFriendlyView
   behavior="padding"
   keyboardVerticalOffset={64}
 >
@@ -32,5 +32,5 @@ exports[`matches last snapshot 1`] = `
     onPress={[Function]}
     text="Continue"
   />
-</KeyboardAvoidingView>
+</KeyboardFriendlyView>
 `;

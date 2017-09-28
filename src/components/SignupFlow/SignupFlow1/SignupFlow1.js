@@ -1,14 +1,15 @@
 import React from 'react'
 import {
-  View,
   Text
 } from 'react-native'
 import SignupControl from '../SignupControl'
 import Button from '../../Button'
+import KeyboardFriendlyView from '../../KeyboardFriendlyView'
 import styles from './SignupFlow1.styles'
 import { validateUser } from 'hylo-utils/validators'
 import validator from 'validator'
 import { any, values } from 'lodash/fp'
+import { keyboardAvoidingViewProps as kavProps } from 'util/viewHelpers'
 
 export default class SignupFlow1 extends React.Component {
   static navigationOptions = () => ({
@@ -85,7 +86,7 @@ export default class SignupFlow1 extends React.Component {
     const { name, email, password, pending, showPasswordField } = this.props
     const { errors } = this.state
 
-    return <View style={styles.container}>
+    return <KeyboardFriendlyView style={styles.container} {...kavProps}>
       <Text style={styles.title}>Howdie stranger!</Text>
       <Text style={styles.subTitle}>
         To kick things off, tell us a bit more about yourself and get your account off the ground.
@@ -114,6 +115,6 @@ export default class SignupFlow1 extends React.Component {
         text={pending ? 'Saving...' : 'Continue'}
         onPress={() => this.submit()}
         disabled={!!pending} />
-    </View>
+    </KeyboardFriendlyView>
   }
 }
