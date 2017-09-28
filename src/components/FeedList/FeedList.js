@@ -57,7 +57,7 @@ export default class FeedList extends Component {
         />
     </View>
 
-    const listFooterComponent = pending
+    const listFooterComponent = pending && posts.length > 0
       ? <Loading style={styles.loading} />
       : null
 
