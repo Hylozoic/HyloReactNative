@@ -29,14 +29,14 @@ import { isIOS, urlPrefix } from 'util/platform'
 
 // Tab Home Screens
 // If you change or add tabs you have to edit trackCurrentTab.js
-const tabs = {
+export const tabs = {
   Home: {screen: Home, path: ''},
   Members: {screen: Members, path: 'people'},
   Topics: {screen: Topics, path: 'topics'}
 }
 
 // Screens that work within Tabs (the same tab icon stays highlighted)
-const screensInTabs = {
+export const screensInTabs = {
   Feed: {screen: Feed, path: 'feed'},
   WelcomeScene: {screen: WelcomeScene, path: 'welcome'},
   PostEditor: {screen: PostEditor, path: 'post/:id/edit'},
@@ -49,7 +49,7 @@ const screensInTabs = {
 }
 
 // Screens that work outside of tabs, Settings, Messages, etc.
-const screensInStack = {
+export const screensInStack = {
   Settings: {screen: Settings, path: 'settings'},
   Thread: {screen: Thread, path: 'thread/:id'},
   ThreadList: {screen: ThreadList, path: 'messages'},

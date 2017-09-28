@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import { login, loginWithFacebook, loginWithGoogle, clearCurrentUser } from './actions'
 import fetchCurrentUser from '../../store/actions/fetchCurrentUser'
 
-function mapStateToProps (state, props) {
+export function mapStateToProps (state, props) {
   const goToSignup = () => props.navigation.navigate('Signup')
 
   return {
@@ -12,7 +12,7 @@ function mapStateToProps (state, props) {
   }
 }
 
-function mapDispatchToProps (dispatch) {
+export function mapDispatchToProps (dispatch) {
   return {
     loginWithFacebook: (token) => dispatch(loginWithFacebook(token)),
     loginWithGoogle: (token) => dispatch(loginWithGoogle(token)),
