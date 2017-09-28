@@ -27,18 +27,18 @@ export default class SignupFlow2 extends React.Component {
     headerBackTitle: null
   })
 
+  onChoice ({ localUri, webUrl }) {
+    this.props.changeSetting('avatarUrl')(webUrl)
+    this.setState({localUri})
+  }
+
   render () {
-    const { changeSetting, saveAndNext, avatarUrl } = this.props
+    const { saveAndNext, avatarUrl } = this.props
     const { localUri, imagePickerPending } = this.state
 
     const imageSource = localUri
       ? {uri: localUri}
       : avatarUrl && {uri: avatarUrl}
-
-    const onChoice = ({ localUri, webUrl }) => {
-      changeSetting('avatarUrl')(webUrl)
-      this.setState({localUri})
-    }
 
     const imagePickerChildren = imageSource
       ? <Image style={styles.image} source={imageSource} />
@@ -50,7 +50,7 @@ export default class SignupFlow2 extends React.Component {
       <View style={styles.pickerContainer}>
         <ImagePicker title='Upload a Photo'
           path='testpath/avatar/'
-          onChoice={onChoice}
+          onChoice={choice => this.onChoice(choice)}
           onPendingChange={pending => this.setState({imagePickerPending: pending})}>
           {imagePickerChildren}
         </ImagePicker>
