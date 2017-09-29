@@ -1,5 +1,8 @@
 import orm from 'store/models'
 import ormReducer from './ormReducer'
+import {
+  RECEIVE_MESSAGE
+} from '../../components/SocketListener/SocketListener.store'
 
 it('responds to an action with meta.extractModel', () => {
   const state = orm.getEmptyState()
@@ -64,4 +67,30 @@ it('ignores an action with meta.extractModel that is a promise', () => {
 
   const newState = ormReducer(state, action)
   expect(newState).toEqual(state)
+})
+
+it('handles RECEIVE_MESSAGE', () => {
+  const session = orm.session(orm.getEmptyState())
+  session.MessageThread.create({
+    id: '5'
+  })
+
+  const timestamp = new Date()
+
+  const action = {
+    type: RECEIVE_MESSAGE,
+    payload: {
+      data: {
+        message: {
+          messageThread: '5',
+          text: 'hi',
+          createdAt: timestamp
+        }
+      }
+    }
+  }
+
+  const newState = ormReducer(session.state, action)
+  const newSession = orm.session(newState)
+  expect(newSession.MessageThread.withId('5').updatedAt).toEqual(timestamp)
 })
