@@ -2251,20 +2251,21 @@ http-signature@~1.1.0:
     jsprim "^1.2.2"
     sshpk "^1.7.0"
 
-hylo-utils@Hylozoic/hylo-utils#4a21504b:
-  version "1.0.8"
-  resolved "https://codeload.github.com/Hylozoic/hylo-utils/tar.gz/4a21504b"
+hylo-utils@Hylozoic/hylo-utils#716622b:
+  version "1.2.1"
+  resolved "https://codeload.github.com/Hylozoic/hylo-utils/tar.gz/716622b5a57b2702612b4e93864888cac2c4e363"
   dependencies:
     buffer "^5.0.6"
     cheerio "^0.22.0"
     events "^1.1.1"
     insane "^2.6.1"
     jest "^20.0.4"
-    linkifyjs "^2.1.4"
+    linkifyjs Hylozoic/linkifyjs#allow-underscores
     marked "^0.3.5"
     pretty-date "^0.2.0"
     stream "^0.0.2"
     trunc-html "^1.1.2"
+    validator "^8.2.0"
 
 iconv-lite@0.4.11:
   version "0.4.11"
@@ -2922,9 +2923,9 @@ linked-list@0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/linked-list/-/linked-list-0.1.0.tgz#798b0ff97d1b92a4fd08480f55aea4e9d49d37bf"
 
-linkifyjs@^2.1.4:
+linkifyjs@Hylozoic/linkifyjs#allow-underscores:
   version "2.1.4"
-  resolved "https://registry.yarnpkg.com/linkifyjs/-/linkifyjs-2.1.4.tgz#b04aac3f327afc871deb205546f612d80bd784b5"
+  resolved "https://codeload.github.com/Hylozoic/linkifyjs/tar.gz/d7de1aaa8012fae035a995051cf062ff78ea878e"
   optionalDependencies:
     jquery ">=1.9.0"
     react ">=0.14.0"
@@ -3785,9 +3786,9 @@ react-native-google-signin@^0.10.0:
   version "0.10.0"
   resolved "https://registry.yarnpkg.com/react-native-google-signin/-/react-native-google-signin-0.10.0.tgz#cc47d3726165735ee61e3a4a589c2ced888f1a98"
 
-react-native-htmlview@^0.11.1:
-  version "0.11.1"
-  resolved "https://registry.yarnpkg.com/react-native-htmlview/-/react-native-htmlview-0.11.1.tgz#cc8cf18b7076a476e39974ed95270d4850725226"
+react-native-htmlview@^0.12.0:
+  version "0.12.0"
+  resolved "https://registry.yarnpkg.com/react-native-htmlview/-/react-native-htmlview-0.12.0.tgz#9b19a7dccd38586c0aebf975e6083184685013a6"
   dependencies:
     entities "^1.1.1"
     htmlparser2-without-node-native "^3.9.0"
@@ -4859,6 +4860,10 @@ validate-npm-package-license@^3.0.1:
 validator@^8.0.0:
   version "8.0.0"
   resolved "https://registry.yarnpkg.com/validator/-/validator-8.0.0.tgz#00d6ec230ab5d3353ab1174162a96462b947bdbd"
+
+validator@^8.2.0:
+  version "8.2.0"
+  resolved "https://registry.yarnpkg.com/validator/-/validator-8.2.0.tgz#3c1237290e37092355344fef78c231249dab77b9"
 
 vary@~1.0.1:
   version "1.0.1"

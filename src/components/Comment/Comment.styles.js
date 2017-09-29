@@ -5,7 +5,7 @@ export default {
     flexDirection: 'row',
     marginLeft: 12,
     marginRight: 12,
-    marginBottom: 30
+    marginBottom: 20
   },
   details: {
     flex: 1
