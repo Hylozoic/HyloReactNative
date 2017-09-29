@@ -2,13 +2,14 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import HTMLView from 'react-native-htmlview'
-import Avatar from '../Avatar'
 import { object } from 'prop-types'
-import styles from './Comment.styles'
 import { present, sanitize, humanDate } from 'hylo-utils/text'
 import { get } from 'lodash/fp'
 
+import Avatar from '../Avatar'
 import urlHandler from '../../util/urlHandler'
+import styles from './Comment.styles'
+import { caribbeanGreen } from 'style/colors'
 
 export default class Comment extends React.Component {
   static propTypes = {
@@ -26,7 +27,7 @@ export default class Comment extends React.Component {
     } = this.props
 
     const { creator, text, createdAt, post } = comment
-    const presentedText = present(sanitize(text), {slug})
+    const presentedText = present(sanitize(text), {noP: true, slug})
 
     var postTitle = get('title', post)
     if (displayPostTitle && postTitle) {
@@ -44,6 +45,7 @@ export default class Comment extends React.Component {
           {displayPostTitle && <Text style={styles.date}>on "{postTitle}"</Text>}
         </View>
         <HTMLView
+          addLineBreaks={false}
           onLinkPress={url => urlHandler(url, showMember, showTopic, slug)}
           stylesheet={richTextStyles}
           textComponentProps={{ style: styles.text }}
@@ -55,6 +57,10 @@ export default class Comment extends React.Component {
 
 const richTextStyles = StyleSheet.create({
   a: {
-    color: '#0DC39F'
+    color: caribbeanGreen
+  },
+  p: {
+    marginTop: 3,
+    marginBottom: 3
   }
 })

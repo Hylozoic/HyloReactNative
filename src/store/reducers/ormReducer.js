@@ -4,31 +4,32 @@ import { SIGNUP, ADD_SKILL, REMOVE_SKILL, UPDATE_USER_SETTINGS_PENDING } from '.
 import {
   CREATE_COMMENT
 } from '../../components/PostDetails/CommentEditor/CommentEditor.store'
+import {
+  RECEIVE_MESSAGE
+} from '../../components/SocketListener/SocketListener.store'
 import { CREATE_MESSAGE, CREATE_MESSAGE_PENDING } from '../../components/Thread/Thread.store'
 import orm from '../models'
 import ModelExtractor from './ModelExtractor'
+import extractModelsFromAction from './ModelExtractor/extractModelsFromAction'
+import { isPromise } from 'util/index'
 
 export default function ormReducer (state = {}, action) {
   const session = orm.session(state)
   const { payload, type, meta, error } = action
   if (error) return state
 
+  if (payload && !isPromise(payload) && meta && meta.extractModel) {
+    extractModelsFromAction(action, session)
+  }
+
   var me, skill
+
   switch (type) {
     case LOGOUT:
     case CLEAR_CURRENT_USER:
       me = session.Me.first()
       me.memberships.delete()
       me.delete()
-      break
-
-    case EXTRACT_MODEL:
-      ModelExtractor.addAll({
-        session,
-        root: payload,
-        modelName: meta.modelName,
-        append: meta.append
-      })
       break
 
     case CREATE_COMMENT:
@@ -98,6 +99,12 @@ export default function ormReducer (state = {}, action) {
         }
       }
       me.update(changes)
+      break
+
+    case RECEIVE_MESSAGE:
+      const { message } = payload.data
+      session.MessageThread.withId(message.messageThread)
+      .update({updatedAt: message.createdAt})
       break
   }
 

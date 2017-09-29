@@ -4,12 +4,12 @@
 
 import socketIo from 'socket.io-client'
 import sailsIo from 'sails.io.js'
-import { HOST } from '../fetchJSON'
+import apiHost from '../apiHost'
 import { getSessionCookie } from '../session'
 import { curry } from 'lodash/fp'
 
 // socket host is same as API host in development, different in production
-const socketHost = process.env.SOCKET_HOST || HOST
+const socketHost = process.env.SOCKET_HOST || apiHost
 
 let socket
 

@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`sets up the expected reducers 1`] = `
+Object {
+  "CommentEditor": Object {},
+  "FeedList": Object {
+    "filter": null,
+    "sortBy": "updated",
+  },
+  "MemberFeed": Object {
+    "choice": "Posts",
+  },
+  "Members": Object {
+    "search": "",
+    "sortBy": "join",
+  },
+  "NewMessage": Object {
+    "input": "",
+    "message": "",
+    "participants": Array [],
+  },
+  "PeopleTyping": Object {},
+  "PostEditor": Object {},
+  "Search": Object {},
+  "SignupFlow": Object {
+    "errors": Object {},
+    "skill": "",
+    "userSettings": Object {
+      "avatarUrl": "",
+      "email": "",
+      "location": "",
+      "name": "",
+      "password": "",
+      "settings": Object {},
+    },
+    "userSkills": Array [],
+  },
+  "SocketListener": Object {},
+  "currentCommunity": null,
+  "orm": Object {},
+  "pending": Object {},
+  "queryResults": Object {},
+  "session": Object {},
+}
+`;

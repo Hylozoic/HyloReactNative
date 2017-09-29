@@ -1536,9 +1536,15 @@ debug@2.3.3:
   dependencies:
     ms "0.7.2"
 
-debug@2.6.8, debug@^2.1.1, debug@^2.2.0, debug@^2.6.3, debug@~2.6.4:
+debug@2.6.8, debug@^2.1.1, debug@^2.2.0, debug@^2.6.3:
   version "2.6.8"
   resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.8.tgz#e731531ca2ede27d188222427da17821d68ff4fc"
+  dependencies:
+    ms "2.0.0"
+
+debug@~2.6.4:
+  version "2.6.9"
+  resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.9.tgz#5d128515df134ff327e90a4c93f4e077a536341f"
   dependencies:
     ms "2.0.0"
 
@@ -1681,8 +1687,8 @@ engine.io-client@1.8.3:
     yeast "0.1.2"
 
 engine.io-client@~3.1.0:
-  version "3.1.1"
-  resolved "https://registry.yarnpkg.com/engine.io-client/-/engine.io-client-3.1.1.tgz#415a9852badb14fa008fa3ef1e31608db6761325"
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/engine.io-client/-/engine.io-client-3.1.2.tgz#62a0ef08ec83d16a06668ccc3a4f37916768a6b9"
   dependencies:
     component-emitter "1.2.1"
     component-inherit "0.0.3"
@@ -1690,7 +1696,6 @@ engine.io-client@~3.1.0:
     engine.io-parser "~2.1.1"
     has-cors "1.1.0"
     indexof "0.0.1"
-    parsejson "0.0.3"
     parseqs "0.0.5"
     parseuri "0.0.5"
     ws "~2.3.1"
@@ -2350,7 +2355,7 @@ invariant@2.2.0:
   dependencies:
     loose-envify "^1.0.0"
 
-invariant@^2.0.0, invariant@^2.2.0:
+invariant@^2.0.0, invariant@^2.2.0, invariant@^2.2.2:
   version "2.2.2"
   resolved "https://registry.yarnpkg.com/invariant/-/invariant-2.2.2.tgz#9e1f56ac0acdb6bf303306f338be3b204ae60360"
   dependencies:
@@ -3753,6 +3758,10 @@ react-native-aws3@^0.0.8:
     buffer "^4.5.1"
     crypto-js "^3.1.6"
 
+react-native-background-timer@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/react-native-background-timer/-/react-native-background-timer-1.2.0.tgz#fd951f93e5c70ec899a5fb4285e1270d0e8b9fb2"
+
 react-native-dismiss-keyboard@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/react-native-dismiss-keyboard/-/react-native-dismiss-keyboard-1.0.0.tgz#32886242b3f2317e121f3aeb9b0a585e2b879b49"
@@ -3777,9 +3786,9 @@ react-native-google-signin@^0.10.0:
   version "0.10.0"
   resolved "https://registry.yarnpkg.com/react-native-google-signin/-/react-native-google-signin-0.10.0.tgz#cc47d3726165735ee61e3a4a589c2ced888f1a98"
 
-react-native-htmlview@^0.11.1:
-  version "0.11.1"
-  resolved "https://registry.yarnpkg.com/react-native-htmlview/-/react-native-htmlview-0.11.1.tgz#cc8cf18b7076a476e39974ed95270d4850725226"
+react-native-htmlview@^0.12.0:
+  version "0.12.0"
+  resolved "https://registry.yarnpkg.com/react-native-htmlview/-/react-native-htmlview-0.12.0.tgz#9b19a7dccd38586c0aebf975e6083184685013a6"
   dependencies:
     entities "^1.1.1"
     htmlparser2-without-node-native "^3.9.0"
@@ -3787,6 +3796,12 @@ react-native-htmlview@^0.11.1:
 react-native-image-picker@^0.26.3:
   version "0.26.3"
   resolved "https://registry.yarnpkg.com/react-native-image-picker/-/react-native-image-picker-0.26.3.tgz#0ad2eede49501a7046d8046a73813696539c3dcd"
+
+react-native-onesignal@^3.0.5:
+  version "3.0.5"
+  resolved "https://registry.yarnpkg.com/react-native-onesignal/-/react-native-onesignal-3.0.5.tgz#b048f4f77aa1f4166e0c9a88608cf2a8aa8c00da"
+  dependencies:
+    invariant "^2.2.2"
 
 react-native-tab-navigator@^0.3.3:
   version "0.3.3"

@@ -16,6 +16,7 @@
 #import <React/RCTLinkingManager.h>
 
 @implementation AppDelegate
+@synthesize oneSignal = _oneSignal;
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
   [FBSDKAppEvents activateApp];
@@ -28,12 +29,11 @@
   return [[FBSDKApplicationDelegate sharedInstance] application:application
                                                         openURL:url
                                               sourceApplication:sourceApplication
-                                                     annotation:annotation]
-          || [RNGoogleSignin application:application
-                         openURL:url
-               sourceApplication:sourceApplication
-                      annotation:annotation
-              ];
+                                                     annotation:annotation] ||
+          [RNGoogleSignin application:application
+                              openURL:url
+                    sourceApplication:sourceApplication
+                           annotation:annotation];
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -48,6 +48,7 @@
                                                       moduleName:@"HyloReactNative"
                                                initialProperties:nil
                                                    launchOptions:launchOptions];
+  
   rootView.backgroundColor = [[UIColor alloc] initWithRed:1.0f green:1.0f blue:1.0f alpha:1];
 
   self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
@@ -55,6 +56,12 @@
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
+  
+  NSString *oneSignalAppID = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"OneSignalAppID"];
+  self.oneSignal = [[RCTOneSignal alloc] initWithLaunchOptions:launchOptions
+                                                         appId:oneSignalAppID
+                                                      settings:@{kOSSettingsKeyAutoPrompt: @false}];
+
   return YES;
 }
 
