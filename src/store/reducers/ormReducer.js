@@ -1,4 +1,3 @@
-import { LOGOUT } from '../../components/Login/actions'
 import { SIGNUP, ADD_SKILL, REMOVE_SKILL, UPDATE_USER_SETTINGS_PENDING } from '../../components/SignupFlow/SignupFlow.store'
 import {
   CREATE_COMMENT
@@ -24,14 +23,6 @@ export default function ormReducer (state = {}, action) {
   var me, skill
 
   switch (type) {
-    case LOGOUT:
-      me = session.Me.first()
-      if (me) {
-        me.memberships.delete()
-        me.delete()
-      }
-      break
-
     case CREATE_COMMENT:
       const post = session.Post.safeGet({id: meta.postId})
       if (!post) break
