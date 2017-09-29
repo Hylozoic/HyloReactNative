@@ -7,6 +7,7 @@ export const LOGIN = 'LOGIN'
 export const LOGIN_WITH_FACEBOOK = 'LOGIN_WITH_FACEBOOK'
 export const LOGIN_WITH_GOOGLE = 'LOGIN_WITH_GOOGLE'
 export const LOGOUT = 'LOGOUT'
+export const CLEAR_CURRENT_USER = 'CLEAR_CURRENT_USER'
 
 export function login (email, password) {
   return {
@@ -53,5 +54,11 @@ export function logout () {
           })
       }
     }
+  }
+}
+
+export function clearCurrentUser () {
+  return {
+    type: CLEAR_CURRENT_USER
   }
 }

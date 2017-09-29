@@ -1,0 +1,171 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`handles choice 1`] = `
+Object {
+  "imagePickerPending": false,
+  "localUri": "foo.png",
+}
+`;
+
+exports[`handles localUri 1`] = `
+<View>
+  <View>
+    <View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Image
+          source={
+            Object {
+              "uri": "foo.png",
+            }
+          }
+        />
+      </View>
+    </View>
+    <View>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        disabled={false}
+        ellipsizeMode="tail"
+      >
+        Upload a Photo
+      </Text>
+    </View>
+  </View>
+  <View>
+    <View
+      accessibilityComponentType={undefined}
+      accessibilityLabel={undefined}
+      accessibilityTraits={undefined}
+      accessible={true}
+      collapsable={undefined}
+      hitSlop={undefined}
+      isTVSelectable={true}
+      nativeID={undefined}
+      onLayout={undefined}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      testID={undefined}
+      tvParallaxProperties={undefined}
+    >
+      <View>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          disabled={false}
+          ellipsizeMode="tail"
+        >
+          Continue
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`handles no image 1`] = `
+<View>
+  <View>
+    <ImagePicker
+      onChoice={[Function]}
+      onPendingChange={[Function]}
+      path="testpath/avatar/"
+      title="Upload a Photo"
+    >
+      <View>
+        <Icon
+          name="AddImage"
+        />
+      </View>
+    </ImagePicker>
+    <View>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        disabled={false}
+        ellipsizeMode="tail"
+      >
+        Upload a Photo
+      </Text>
+    </View>
+  </View>
+  <Button
+    onPress={[Function]}
+    text="Continue"
+  />
+</View>
+`;
+
+exports[`has navigationOptions 1`] = `
+Object {
+  "headerBackTitle": null,
+  "headerStyle": Object {
+    "backgroundColor": "#0DC39F",
+    "shadowColor": "transparent",
+  },
+  "headerTintColor": "#9ee7d9",
+  "headerTitle": "STEP 2/5",
+  "headerTitleStyle": Object {
+    "color": "white",
+    "fontFamily": "Circular-Bold",
+    "fontSize": 12,
+  },
+}
+`;
+
+exports[`matches last snapshot 1`] = `
+<View>
+  <View>
+    <ImagePicker
+      onChoice={[Function]}
+      onPendingChange={[Function]}
+      path="testpath/avatar/"
+      title="Upload a Photo"
+    >
+      <Image
+        source={
+          Object {
+            "uri": "foo.png",
+          }
+        }
+      />
+    </ImagePicker>
+    <View>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        disabled={false}
+        ellipsizeMode="tail"
+      >
+        Upload a Photo
+      </Text>
+    </View>
+  </View>
+  <Button
+    onPress={[Function]}
+    text="Continue"
+  />
+</View>
+`;

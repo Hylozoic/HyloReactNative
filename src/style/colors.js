@@ -26,7 +26,7 @@ export const alabaster = '#F8F8F8'
 export const linkWater = '#D9ECF8'
 export const fuchsiaPink = '#BB60A8'
 export const pictonBlue = '#40A1DD'
-export const softRed = '#d9534f'
+export const amaranth = '#EE4266'
 
 // these colors are the equivalent of reducing the opacity of the colors named
 // above, on a white background. use these where possible, to avoid any impact
@@ -41,6 +41,10 @@ export const rhino50 = '#8994A3'
 export const rhino60 = fakeAlpha(rhino, 0.6)
 export const rhino80 = '#56667a'
 export const slateGrey80 = '#8490a1'
+export const white80onCaribbeanGreen = fakeAlpha('#FFFFFF', 0.8, caribbeanGreen)
+export const white60onCaribbeanGreen = fakeAlpha('#FFFFFF', 0.6, caribbeanGreen)
+export const white40onCaribbeanGreen = fakeAlpha('#FFFFFF', 0.4, caribbeanGreen)
+export const black10OnCaribbeanGreen = fakeAlpha('#000000', 0.1, caribbeanGreen)
 
 export function fakeAlpha (color, alpha, background = '#ffffff') {
   const fg = tinycolor(color).toRgb()

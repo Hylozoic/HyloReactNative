@@ -11,10 +11,6 @@ export const FETCH_MEMBER_POSTS = `${MODULE_NAME}/FETCH_MEMBER_POSTS`
 export const FETCH_MEMBER_COMMENTS = `${MODULE_NAME}/FETCH_MEMBER_COMMENTS`
 export const FETCH_MEMBER_UPVOTES = `${MODULE_NAME}/FETCH_MEMBER_UPVOTES`
 
-export const defaultState = {
-  choice: 'Posts'
-}
-
 export function fetchMemberPosts ({id, first = 10, offset}) {
   return {
     type: FETCH_MEMBER_POSTS,
@@ -129,6 +125,10 @@ export function fetchMemberUpvotes ({id, first = 20, offset}) {
       }
     }
   }
+}
+
+export const defaultState = {
+  choice: 'Posts'
 }
 
 export default function reducer (state = defaultState, action) {

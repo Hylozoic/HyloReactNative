@@ -1,5 +1,5 @@
 import { Dimensions, StyleSheet } from 'react-native'
-import { caribbeanGreen } from 'style/colors'
+import { caribbeanGreen, rhino60 } from 'style/colors'
 
 const mixins = {
   loginContainer: {
@@ -24,10 +24,13 @@ const mixins = {
 }
 
 export default {
+  container: {
+    backgroundColor: 'white'
+  },
   logo: {
     height: 80,
     width: 80,
-    marginTop: Math.pow(Dimensions.get('window').height, 1.01) / 8,
+    marginTop: Math.pow(Dimensions.get('window').height, 1.01) / 7,
     marginBottom: 12
   },
   title: {
@@ -45,6 +48,7 @@ export default {
     color: caribbeanGreen
   },
   login: {
+    backgroundColor: 'white',
     justifyContent: 'center',
     alignItems: 'center'
   },
@@ -74,7 +78,8 @@ export default {
     fontFamily: 'Circular-Bold'
   },
   loginButton: {
-    marginTop: 7
+    marginTop: 7,
+    marginBottom: 16
   },
   loginText: {
     color: 'white',
@@ -84,16 +89,13 @@ export default {
     fontSize: 18
   },
   connectWith: {
-    marginTop: 2,
-    paddingBottom: 10,
-    opacity: 0.5
+    marginTop: 10,
+    marginBottom: 16
   },
-  heavyText: {
-    fontFamily: 'Circular-Book'
-  },
-  accountText: {
+  helpText: {
     fontFamily: 'Circular-Book',
-    opacity: 0.7
+    fontSize: 14,
+    color: rhino60
   },
   paddedRow: mixins.paddedRow,
   paddedRowWithOpacity: {
@@ -150,5 +152,8 @@ export default {
     flex: 0.1,
     borderRadius: 5
   },
-  androidInvisibleUnderline: 'rgba(0,0,0,0)'
+  androidInvisibleUnderline: 'rgba(0,0,0,0)',
+  bottomPad: {
+    flex: 1
+  }
 }

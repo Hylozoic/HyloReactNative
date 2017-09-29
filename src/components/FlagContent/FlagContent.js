@@ -49,7 +49,7 @@ export default class FlagContent extends Component {
     const optionalExplanation = selectedCategory === 'other' ? false : true
 
     let inputProps = {
-      placeholderTextColor: highlightRequired && !optionalExplanation ? '#d9534f' : '#8994A3'
+      placeholderTextColor: highlightRequired && !optionalExplanation ? '#EE4266' : '#8994A3'
     }
 
     return (

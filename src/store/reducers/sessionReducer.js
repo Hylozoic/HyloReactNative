@@ -1,4 +1,5 @@
 import { LOGIN, LOGIN_WITH_FACEBOOK, LOGIN_WITH_GOOGLE, LOGOUT } from '../../components/Login/actions'
+import { SIGNUP } from '../../components/SignupFlow/SignupFlow.store'
 import { CHECK_SESSION } from '../../components/SessionCheck/actions'
 import { omit } from 'lodash/fp'
 
@@ -40,6 +41,11 @@ export default function sessionReducer (state = {}, action) {
       return {
         ...state,
         loggedIn: false
+      }
+    case SIGNUP:
+      return {
+        ...state,
+        loggedIn: true
       }
   }
 

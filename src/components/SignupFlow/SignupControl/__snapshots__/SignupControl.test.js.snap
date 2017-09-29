@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches last snapshot 1`] = `
+<View>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    disabled={false}
+    ellipsizeMode="tail"
+  >
+    Name
+  </Text>
+  <TextInput
+    autoCapitalize="words"
+    autoCorrect={true}
+    keyboardType="email-address"
+    onChangeText={[Function]}
+    secureTextEntry={true}
+    value="Joe Bloggs"
+  />
+  <Icon
+    allowFontScaling={false}
+    name="eye"
+    onPress={[Function]}
+    size={12}
+  />
+  <View>
+    <Triangle
+      color="white"
+      direction="up"
+      height={5}
+      width={10}
+    />
+    <View>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        disabled={false}
+        ellipsizeMode="tail"
+      >
+        This is not a real name
+      </Text>
+    </View>
+  </View>
+</View>
+`;

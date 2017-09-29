@@ -1,3 +1,56 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`gets threads and denormalizes messages and participants 1`] = `Array []`;
+exports[`gets threads and denormalizes messages and participants 1`] = `
+Array [
+  Object {
+    "id": 2,
+    "latestMessage": SessionBoundModel {
+      "_fields": Object {
+        "id": 3,
+        "messageThread": 2,
+        "text": "Third message",
+      },
+    },
+    "participants": Array [
+      Object {
+        "id": 2,
+        "memberships": undefined,
+        "name": "Second Person",
+        "skills": undefined,
+      },
+      Object {
+        "id": 3,
+        "memberships": undefined,
+        "name": "Third Person",
+        "skills": undefined,
+      },
+    ],
+    "unreadCount": 1,
+  },
+  Object {
+    "id": 1,
+    "latestMessage": SessionBoundModel {
+      "_fields": Object {
+        "id": 2,
+        "messageThread": 1,
+        "text": "Second message",
+      },
+    },
+    "participants": Array [
+      Object {
+        "id": 1,
+        "memberships": undefined,
+        "name": "First Person",
+        "skills": undefined,
+      },
+      Object {
+        "id": 2,
+        "memberships": undefined,
+        "name": "Second Person",
+        "skills": undefined,
+      },
+    ],
+    "unreadCount": 1,
+  },
+]
+`;
