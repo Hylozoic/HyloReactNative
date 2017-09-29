@@ -1,11 +1,13 @@
 import { AsyncStorage } from 'react-native'
-export const PERSISTED_STATE_KEY = 'persisted-app-state-v2'
 import { debounce } from 'lodash'
+import { LOGOUT } from '../../components/Login/actions'
+
+export const PERSISTED_STATE_KEY = 'persisted-app-state-v2'
 
 export function persist (reducer) {
   return (state, action) => {
     const nextState = reducer(state, action)
-    if (nextState !== state) save(nextState)
+    if (nextState !== state && action.type !== LOGOUT) save(nextState)
     return nextState
   }
 }
@@ -17,3 +19,7 @@ const save = debounce(state => {
     console.log(`persisted state in ${Date.now() - startTime}ms`)
   })
 }, 2000)
+
+export function reset () {
+  return AsyncStorage.removeItem(PERSISTED_STATE_KEY)
+}

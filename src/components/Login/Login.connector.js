@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { login, loginWithFacebook, loginWithGoogle, clearCurrentUser } from './actions'
+import { login, loginWithFacebook, loginWithGoogle } from './actions'
 import fetchCurrentUser from '../../store/actions/fetchCurrentUser'
 
 export function mapStateToProps (state, props) {
@@ -18,10 +18,7 @@ export function mapDispatchToProps (dispatch) {
     loginWithGoogle: (token) => dispatch(loginWithGoogle(token)),
     login: (email, password) =>
       dispatch(login(email, password))
-      .then(({ error }) => {
-        if (error) return
-        return dispatch(clearCurrentUser()) && dispatch(fetchCurrentUser())
-      })
+      .then(({ error }) => !error && dispatch(fetchCurrentUser()))
   }
 }
 
