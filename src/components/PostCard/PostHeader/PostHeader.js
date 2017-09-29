@@ -46,7 +46,7 @@ export default class PostHeader extends Component {
     // Used to generate a link to this post from the backend.
     const linkData = {
       slug,
-      postId,
+      id: postId,
       type: 'post'
     }
 
