@@ -1,6 +1,6 @@
 import { AsyncStorage } from 'react-native'
-export const PERSISTED_STATE_KEY = 'persisted-app-state-v2'
 import { debounce } from 'lodash'
+export const PERSISTED_STATE_KEY = 'persisted-app-state-v2'
 
 export function persist (reducer) {
   return (state, action) => {

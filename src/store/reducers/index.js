@@ -6,6 +6,7 @@ import pending from './pending'
 import { persist } from './persistence'
 import queryResults from './queryResults'
 import sessionReducer from './sessionReducer'
+import handleLogout from './handleLogout'
 
 import CommentEditor from '../../components/PostDetails/CommentEditor/CommentEditor.store'
 import FeedList from '../../components/FeedList/FeedList.store'
@@ -36,4 +37,10 @@ const combinedReducers = combineReducers({
   PeopleTyping
 })
 
-export default persist(combinedReducers)
+const composeReducers = (...reducers) => (state, action) =>
+  reducers.reduce((newState, reducer) => reducer(newState, action), state)
+
+export default persist(composeReducers(
+  combinedReducers,
+  handleLogout
+))
