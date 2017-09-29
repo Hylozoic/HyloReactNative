@@ -36,7 +36,7 @@ export default class ThreadList extends Component {
         renderItem={({ item }) =>
           <MessageRow
             participants={item.participants}
-            message={item.messages[0]}
+            message={item.latestMessage}
             currentUser={currentUser}
             showThread={showThread}
          />}
