@@ -7,13 +7,19 @@ export default class PopupMenuButton extends Component {
     console.error("Error opening popupMenu", e)
   }
 
+  onSelect = (action, index) => {
+    if (action === 'itemSelected') {
+      this.props.onSelect(index)
+    }
+  }
+
   onPress = () => {
     if (this.button) {
       UIManager.showPopupMenu(
         findNodeHandle(this.button),
         this.props.actions,
         this.onError,
-        this.props.onSelect
+        this.onSelect
       )
     }
   }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { View, Text, TouchableOpacity } from 'react-native'
 import Avatar from '../../Avatar'
 import Icon from '../../Icon'
@@ -6,66 +6,103 @@ import { rhino30, rhino50, caribbeanGreen } from 'style/colors'
 import { humanDate } from 'hylo-utils/text'
 import PopupMenuButton from '../../PopupMenuButton'
 import { filter, isEmpty } from 'lodash/fp'
+import FlagContent from '../../FlagContent'
 
-export default function PostHeader ({
-  creator: { avatarUrl, name, tagline, id },
-  date,
-  type,
-  communities,
-  close,
-  slug,
-  showCommunity,
-  editPost,
-  deletePost,
-  showMember,
-  goToCommunity
-}) {
-  let context
-
-  if (showCommunity) {
-    const community = communities[0]
-    context = {
-      label: community.name,
-      onPress: () => goToCommunity(community.id)
-    }
+export default class PostHeader extends Component {
+  state = {
+    flaggingVisible: false
   }
 
-  return <View style={styles.container}>
-    <View style={styles.avatarSpacing}>
-      <TouchableOpacity onPress={() => showMember(id)}>
-        <Avatar avatarUrl={avatarUrl} />
-      </TouchableOpacity>
-    </View>
-    <View style={styles.meta}>
-      <TouchableOpacity onPress={() => showMember(id)}>
-        <Text style={styles.username}>{name}</Text>
-        {!!tagline && <Text style={styles.metaText}>{tagline}</Text>}
-      </TouchableOpacity>
-      <View style={styles.dateRow}>
-        <Text style={styles.metaText}>{humanDate(date)}</Text>
-        {!!context && <Text style={styles.spacer}>•</Text>}
-        {!!context && <TouchableOpacity onPress={context.onPress}>
-          <Text style={styles.contextLabel}>{context.label}</Text>
-        </TouchableOpacity>}
-      </View>
+  static defaultProps = {
+    flaggingVisible: false
+  }
 
+  render () {
+    let {
+      creator: {avatarUrl, name, tagline, id},
+      date,
+      type,
+      communities,
+      postId,
+      close,
+      slug,
+      showCommunity,
+      editPost,
+      deletePost,
+      showMember,
+      canFlag,
+      goToCommunity
+    } = this.props
+
+    let context
+
+    if (showCommunity) {
+      const community = communities[0]
+      context = {
+        label: community.name,
+        onPress: () => goToCommunity(community.id)
+      }
+    }
+
+    // Used to generate a link to this post from the backend.
+    const linkData = {
+      slug,
+      id,
+      type: 'post'
+    }
+
+    let flagPost
+    if (canFlag) {
+      flagPost = () => {
+        console.log('flagging')
+        this.setState({flaggingVisible: true})
+      }
+    }
+
+    return <View style={styles.container}>
+      <View style={styles.avatarSpacing}>
+        <TouchableOpacity onPress={() => showMember(id)}>
+          <Avatar avatarUrl={avatarUrl} />
+        </TouchableOpacity>
+      </View>
+      <View style={styles.meta}>
+        <TouchableOpacity onPress={() => showMember(id)}>
+          <Text style={styles.username}>{name}</Text>
+          {!!tagline && <Text style={styles.metaText}>{tagline}</Text>}
+        </TouchableOpacity>
+        <View style={styles.dateRow}>
+          <Text style={styles.metaText}>{humanDate(date)}</Text>
+          {!!context && <Text style={styles.spacer}>•</Text>}
+          {!!context && <TouchableOpacity onPress={context.onPress}>
+            <Text style={styles.contextLabel}>{context.label}</Text>
+          </TouchableOpacity>}
+        </View>
+
+      </View>
+      <View style={styles.upperRight}>
+        {type && <PostLabel type={type} />}
+        <PostMenu {...{editPost, deletePost, flagPost}} />
+        <FlagContent visible={this.state.flaggingVisible}
+          type='post'
+          linkData={linkData}
+          onClose={() => this.setState({flaggingVisible: false})} />
+      </View>
     </View>
-    <View style={styles.upperRight}>
-      {type && <PostLabel type={type} />}
-      <PostMenu {...{editPost, deletePost}} />
-    </View>
-  </View>
+  }
 }
 
-function PostMenu ({ deletePost, editPost }) {
+function PostMenu ({deletePost, editPost, flagPost}) {
+  // If the function is defined, than it's a valid action
   const actions = filter(x => x[1], [
-    ['Delete this post', deletePost],
-    ['Edit this post', editPost]
+    ['Delete This Post', deletePost],
+    ['Edit This Post', editPost],
+    ['Flag This Post', flagPost]
   ])
 
   if (isEmpty(actions)) return null
 
   const onSelect = index => actions[index][1]()
+
   const destructiveButtonIndex = actions[0][0] === 'Delete this post' ? 0 : -1
 
   return <PopupMenuButton actions={actions.map(x => x[0])} onSelect={onSelect}
