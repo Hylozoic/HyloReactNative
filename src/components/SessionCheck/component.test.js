@@ -3,8 +3,9 @@ import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import SessionCheck from './component'
 
-jest.mock('react-native-google-signin', () => {})
-jest.mock('react-native-zss-rich-text-editor', () => {})
+jest.mock('react-native-onesignal', () => {})
+jest.mock('react-native-google-signin')
+jest.mock('react-native-zss-rich-text-editor')
 jest.mock('react-navigation', () => {})
 jest.mock('../RootNavigator', () => 'RootNavigator')
 jest.mock('../LoginNavigator', () => 'LoginNavigator')
