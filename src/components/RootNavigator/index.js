@@ -61,7 +61,7 @@ Object.freeze(tabs)
 Object.freeze(screensInTabs)
 
 const tabNavigatorConfig = {
-  initialRouteName: 'Members',
+  initialRouteName: 'Home',
   tabBarPosition: 'bottom',
   animationEnabled: false,
   swipeEnabled: false,

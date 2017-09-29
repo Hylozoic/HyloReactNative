@@ -107,11 +107,9 @@ export default class Login extends React.Component {
       </View>
 
       <View style={styles.paddedRow}>
-        <View style={styles.paddedButton}>
+        <View style={styles.loginButton}>
           <TouchableOpacity onPress={() => this.login()}>
-            <View style={styles.loginButton}>
-              <Text style={styles.loginText}>Log In</Text>
-            </View>
+            <Text style={styles.loginText}>Log In</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -129,7 +127,6 @@ export default class Login extends React.Component {
           <Text style={styles.signupText}>Sign up now</Text>
         </TouchableOpacity>
       </View>
-      <View style={styles.bottomPad} />
     </ScrollView>
   }
 }

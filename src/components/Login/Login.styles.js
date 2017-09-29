@@ -1,5 +1,9 @@
 import { Dimensions, StyleSheet } from 'react-native'
 import { caribbeanGreen, rhino60 } from 'style/colors'
+import { isIOS } from 'util/platform'
+
+const screenHeight = Dimensions.get('window').height
+const smallScreenFudge = screenHeight < 550 ? 0.6 : 1
 
 const mixins = {
   loginContainer: {
@@ -30,13 +34,13 @@ export default {
   logo: {
     height: 80,
     width: 80,
-    marginTop: Math.pow(Dimensions.get('window').height, 1.01) / 7,
-    marginBottom: 12
+    marginTop: (screenHeight - 480) * 0.6,
+    marginBottom: 10
   },
   title: {
     fontSize: 24,
     color: caribbeanGreen,
-    marginBottom: 24,
+    marginBottom: 20 * smallScreenFudge,
     fontFamily: 'Circular-Bold'
   },
   iconOpaque: {
@@ -69,28 +73,25 @@ export default {
     marginBottom: 10
   },
   signup: {
-    marginTop: 12,
-    marginBottom: 30,
+    marginTop: 10,
+    marginBottom: 20,
     flexDirection: 'row'
   },
   signupText: {
     color: caribbeanGreen,
     fontFamily: 'Circular-Bold'
   },
-  loginButton: {
-    marginTop: 7,
-    marginBottom: 16
-  },
   loginText: {
     color: 'white',
     backgroundColor: 'transparent',
     textAlign: 'center',
     fontFamily: 'Circular-Book',
-    fontSize: 18
+    fontSize: 18,
+    lineHeight: isIOS ? 32 : 28
   },
   connectWith: {
-    marginTop: 10,
-    marginBottom: 16
+    marginTop: 4 * smallScreenFudge,
+    marginBottom: 14 * smallScreenFudge
   },
   helpText: {
     fontFamily: 'Circular-Book',
@@ -114,15 +115,14 @@ export default {
     borderRadius: 5,
     minHeight: 40
   },
-  paddedButton: {
+  loginButton: {
     flex: 1,
     flexDirection: 'row',
-    minHeight: 30,
     backgroundColor: caribbeanGreen,
     height: 36,
     borderRadius: 50,
     justifyContent: 'center',
-    marginTop: 24
+    marginTop: 22
   },
   paddedBorderValid: {
     flex: 1,
@@ -152,8 +152,5 @@ export default {
     flex: 0.1,
     borderRadius: 5
   },
-  androidInvisibleUnderline: 'rgba(0,0,0,0)',
-  bottomPad: {
-    flex: 1
-  }
+  androidInvisibleUnderline: 'rgba(0,0,0,0)'
 }

@@ -8,4 +8,4 @@ const iosHost = __DEV__ && isIOS &&
 const HOST = androidHost || iosHost || process.env.API_HOST
 export default HOST
 
-if (process.env.NODE_ENV === 'development') console.log(`API host: ${HOST}`)
+if (__DEV__) console.log(`API host: ${HOST}`)

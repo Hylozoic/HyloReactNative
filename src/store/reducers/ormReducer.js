@@ -1,4 +1,3 @@
-import { EXTRACT_MODEL } from '../constants'
 import { LOGOUT, CLEAR_CURRENT_USER } from '../../components/Login/actions'
 import { SIGNUP, ADD_SKILL, REMOVE_SKILL, UPDATE_USER_SETTINGS_PENDING } from '../../components/SignupFlow/SignupFlow.store'
 import {
