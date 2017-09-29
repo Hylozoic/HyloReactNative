@@ -24,10 +24,13 @@ const mixins = {
 }
 
 export default {
+  container: {
+    backgroundColor: 'white'
+  },
   logo: {
     height: 80,
     width: 80,
-    marginTop: Math.pow(Dimensions.get('window').height, 1.01) / 8,
+    marginTop: Math.pow(Dimensions.get('window').height, 1.01) / 7,
     marginBottom: 12
   },
   title: {
@@ -46,7 +49,6 @@ export default {
   },
   login: {
     backgroundColor: 'white',
-    flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
   },
@@ -150,5 +152,8 @@ export default {
     flex: 0.1,
     borderRadius: 5
   },
-  androidInvisibleUnderline: 'rgba(0,0,0,0)'
+  androidInvisibleUnderline: 'rgba(0,0,0,0)',
+  bottomPad: {
+    flex: 1
+  }
 }

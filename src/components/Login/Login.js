@@ -53,7 +53,7 @@ export default class Login extends React.Component {
     const { error, loginWithGoogle, loginWithFacebook, goToSignup } = this.props
     const emailIsValid = this.state.emailIsValid
 
-    return <ScrollView contentContainerStyle={styles.login}>
+    return <ScrollView contentContainerStyle={styles.login} style={styles.container}>
       <Image style={styles.logo}
         source={require('../../assets/merkaba-green-on-white.png')} />
       <Text style={styles.title}>Log in to Hylo</Text>
@@ -129,6 +129,7 @@ export default class Login extends React.Component {
           <Text style={styles.signupText}>Sign up now</Text>
         </TouchableOpacity>
       </View>
+      <View style={styles.bottomPad} />
     </ScrollView>
   }
 }
