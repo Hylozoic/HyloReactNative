@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Text, View } from 'react-native'
 import LoggedInRoot from '../LoggedInRoot'
-import Login from '../Login'
+import LoginNavigator from '../LoginNavigator'
 import mixins from '../../style/mixins'
 
 export default class SessionCheck extends React.Component {
@@ -22,7 +22,7 @@ export default class SessionCheck extends React.Component {
       case true:
         return <LoggedInRoot />
       case false:
-        return <Login />
+        return <LoginNavigator />
       default:
         return <View style={mixins.allCentered}>
           <Text>Loading...</Text>

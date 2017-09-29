@@ -1,0 +1,71 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mapDispatchToProps maps the action generators 1`] = `
+Object {
+  "changeSetting": [Function],
+  "updateUserSettings": [Function],
+}
+`;
+
+exports[`mapDispatchToProps maps the action generators 2`] = `
+Array [
+  Array [
+    Object {
+      "payload": Object {
+        "name": "dan",
+      },
+      "type": "SignupFlow/UPDATE_LOCAL_USER_SETTINGS",
+    },
+  ],
+  Array [
+    Object {
+      "graphql": Object {
+        "query": "mutation ($changes: MeInput) {
+        updateMe(changes: $changes) {
+          id
+        }
+      }",
+        "variables": Object {
+          "changes": Object {
+            "name": "jan",
+          },
+        },
+      },
+      "meta": Object {
+        "changes": Object {
+          "name": "jan",
+        },
+        "optimistic": true,
+      },
+      "type": "SignupFlow/UPDATE_USER_SETTINGS",
+    },
+  ],
+]
+`;
+
+exports[`mapStateToProps returns the right keys 1`] = `
+Object {
+  "avatarUrl": undefined,
+}
+`;
+
+exports[`mergeProps merges the props 1`] = `
+Object {
+  "avatarUrl": "a",
+  "navigation": Object {
+    "navigate": [Function],
+  },
+  "saveAndNext": [Function],
+  "updateUserSettings": [Function],
+}
+`;
+
+exports[`mergeProps merges the props 2`] = `
+Array [
+  Array [
+    Object {
+      "avatarUrl": "a",
+    },
+  ],
+]
+`;

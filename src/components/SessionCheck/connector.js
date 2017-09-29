@@ -1,14 +1,18 @@
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { checkSession } from './actions'
+import getMe from '../../store/selectors/getMe'
+import { get } from 'lodash/fp'
 
-function mapStateToProps (state) {
+export function mapStateToProps (state) {
+  const signupInProgress = get('settings.signupInProgress', getMe(state))
+
   return {
-    loggedIn: state.session.loggedIn
+    loggedIn: state.session.loggedIn && !signupInProgress
   }
 }
 
-function mapDispatchToProps (dispatch) {
+export function mapDispatchToProps (dispatch) {
   return {
     actions: bindActionCreators({
       checkSession

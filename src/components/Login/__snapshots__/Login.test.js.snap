@@ -1,10 +1,54 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders FB login correctly 1`] = `
+<TouchableOpacity
+  activeOpacity={0.2}
+  focusedOpacity={0.7}
+  onPress={[Function]}
+>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    disabled={false}
+    ellipsizeMode="tail"
+  >
+    <Icon
+      name="Facebook"
+      size={12}
+    />
+      Facebook
+  </Text>
+</TouchableOpacity>
+`;
+
+exports[`renders Google login correctly 1`] = `
+<TouchableOpacity
+  activeOpacity={0.2}
+  focusedOpacity={0.7}
+  onPress={[Function]}
+>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    disabled={false}
+    ellipsizeMode="tail"
+  >
+    <Icon
+      name="Google"
+      size={12}
+    />
+      Google
+  </Text>
+</TouchableOpacity>
+`;
+
+exports[`renders Login correctly 1`] = `
 <ScrollViewMock
   contentContainerStyle={
     Object {
       "alignItems": "center",
+      "backgroundColor": "white",
+      "flex": 1,
       "justifyContent": "center",
     }
   }
@@ -35,6 +79,7 @@ exports[`renders FB login correctly 1`] = `
       <View>
         <TextInput
           autoCapitalize="none"
+          autoCorrect={false}
           keyboardType="email-address"
           onChangeText={[Function]}
           onSubmitEditing={[Function]}
@@ -127,6 +172,7 @@ exports[`renders FB login correctly 1`] = `
     <TouchableOpacity
       activeOpacity={0.2}
       focusedOpacity={0.7}
+      onPress={[Function]}
     >
       <Text
         accessible={true}
@@ -139,46 +185,4 @@ exports[`renders FB login correctly 1`] = `
     </TouchableOpacity>
   </View>
 </ScrollViewMock>
-`;
-
-exports[`renders FB login correctly 2`] = `
-<TouchableOpacity
-  activeOpacity={0.2}
-  focusedOpacity={0.7}
-  onPress={[Function]}
->
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    disabled={false}
-    ellipsizeMode="tail"
-  >
-    <Icon
-      name="Facebook"
-      size={12}
-    />
-      Facebook
-  </Text>
-</TouchableOpacity>
-`;
-
-exports[`renders Google login correctly 1`] = `
-<TouchableOpacity
-  activeOpacity={0.2}
-  focusedOpacity={0.7}
-  onPress={[Function]}
->
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    disabled={false}
-    ellipsizeMode="tail"
-  >
-    <Icon
-      name="Google"
-      size={12}
-    />
-      Google
-  </Text>
-</TouchableOpacity>
 `;

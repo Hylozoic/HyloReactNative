@@ -2251,9 +2251,9 @@ http-signature@~1.1.0:
     jsprim "^1.2.2"
     sshpk "^1.7.0"
 
-hylo-utils@Hylozoic/hylo-utils#716622b:
+hylo-utils@Hylozoic/hylo-utils#716622b5:
   version "1.2.1"
-  resolved "https://codeload.github.com/Hylozoic/hylo-utils/tar.gz/716622b5a57b2702612b4e93864888cac2c4e363"
+  resolved "https://codeload.github.com/Hylozoic/hylo-utils/tar.gz/716622b5"
   dependencies:
     buffer "^5.0.6"
     cheerio "^0.22.0"
@@ -3814,6 +3814,13 @@ react-native-tab-view@^0.0.65:
   resolved "https://registry.yarnpkg.com/react-native-tab-view/-/react-native-tab-view-0.0.65.tgz#b685ea3081ff7c96486cd997361026c407302c59"
   dependencies:
     prop-types "^15.5.8"
+
+react-native-triangle@^0.0.9:
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/react-native-triangle/-/react-native-triangle-0.0.9.tgz#53e804019477f757208da6c5977fc8695f49d4c8"
+  dependencies:
+    create-react-class "^15.6.0"
+    prop-types "^15.5.10"
 
 react-native-vector-icons@^4.2.0:
   version "4.2.0"

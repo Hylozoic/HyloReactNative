@@ -24,7 +24,7 @@ const Me = Model.createClass({
   },
 
   lastViewedCommunity () {
-    return this.lastViewedMembership().community
+    return get('community', this.lastViewedMembership())
   }
 })
 
@@ -37,5 +37,6 @@ Me.fields = {
   posts: many('Post'),
   memberships: many('Membership'),
   messageThreads: many('MessageThread'),
-  notifications: many('Notification')
+  notifications: many('Notification'),
+  skills: many('Skill')
 }

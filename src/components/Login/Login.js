@@ -15,6 +15,10 @@ import { focus } from '../../util/textInput'
 import styles from './Login.styles'
 
 export default class Login extends React.Component {
+  static navigationOptions = {
+    header: null
+  }
+
   constructor (props) {
     super(props)
     this.state = {
@@ -46,7 +50,7 @@ export default class Login extends React.Component {
   }
 
   render () {
-    const { error, loginWithGoogle, loginWithFacebook } = this.props
+    const { error, loginWithGoogle, loginWithFacebook, goToSignup } = this.props
     const emailIsValid = this.state.emailIsValid
 
     return <ScrollView contentContainerStyle={styles.login}>
@@ -65,6 +69,7 @@ export default class Login extends React.Component {
               onChangeText={email => this.setAndValidateEmail(email)}
               returnKeyType='next'
               autoCapitalize='none'
+              autoCorrect={false}
               keyboardType='email-address'
               onSubmitEditing={() => focus(this.passwordInput)}
               underlineColorAndroid={styles.androidInvisibleUnderline} />
@@ -112,15 +117,15 @@ export default class Login extends React.Component {
       </View>
 
       <View style={styles.connectWith}>
-        <Text style={styles.heavyText}>Or connect with:</Text>
+        <Text style={styles.helpText}>Or connect with:</Text>
       </View>
       <View style={styles.paddedRowWithOpacity}>
         <FbLoginButton onLoginFinished={loginWithFacebook} />
         <GoogleLoginButton onLoginFinished={loginWithGoogle} />
       </View>
       <View style={styles.signup}>
-        <Text style={styles.accountText}>Don't have an account? </Text>
-        <TouchableOpacity>
+        <Text style={styles.helpText}>Don't have an account? </Text>
+        <TouchableOpacity onPress={goToSignup}>
           <Text style={styles.signupText}>Sign up now</Text>
         </TouchableOpacity>
       </View>

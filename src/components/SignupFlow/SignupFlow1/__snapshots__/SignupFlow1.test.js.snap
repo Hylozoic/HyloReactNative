@@ -1,0 +1,139 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`has navigationOptions 1`] = `
+Object {
+  "headerBackTitle": null,
+  "headerStyle": Object {
+    "backgroundColor": "#0DC39F",
+    "shadowColor": "transparent",
+  },
+  "headerTintColor": "#9ee7d9",
+  "headerTitle": "STEP 1/5",
+  "headerTitleStyle": Object {
+    "color": "white",
+    "fontFamily": "Circular-Bold",
+    "fontSize": 12,
+  },
+}
+`;
+
+exports[`hides password, and changes button when pending  1`] = `
+<KeyboardFriendlyView
+  behavior="padding"
+  keyboardVerticalOffset={64}
+>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    disabled={false}
+    ellipsizeMode="tail"
+  >
+    Howdie stranger!
+  </Text>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    disabled={false}
+    ellipsizeMode="tail"
+  >
+    To kick things off, tell us a bit more about yourself and get your account off the ground.
+  </Text>
+  <SignupControl
+    error={null}
+    label="Your Full Name"
+    onChange={[Function]}
+    value="Ra"
+  />
+  <SignupControl
+    autoCapitalize="none"
+    autoCorrect={false}
+    error={null}
+    keyboardType="email-address"
+    label="Email Address"
+    onChange={[Function]}
+    value="ra@ra.com"
+  />
+  <Button
+    disabled={true}
+    onPress={[Function]}
+    text="Saving..."
+  />
+</KeyboardFriendlyView>
+`;
+
+exports[`loads user settings and updates errors on update when appropriate 1`] = `
+Object {
+  "email": null,
+  "name": null,
+  "password": null,
+}
+`;
+
+exports[`loads user settings and updates errors on update when appropriate 2`] = `
+Object {
+  "email": "one error",
+  "name": null,
+  "password": null,
+}
+`;
+
+exports[`matches last snapshot 1`] = `
+<KeyboardFriendlyView
+  behavior="padding"
+  keyboardVerticalOffset={64}
+>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    disabled={false}
+    ellipsizeMode="tail"
+  >
+    Howdie stranger!
+  </Text>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    disabled={false}
+    ellipsizeMode="tail"
+  >
+    To kick things off, tell us a bit more about yourself and get your account off the ground.
+  </Text>
+  <SignupControl
+    error={null}
+    label="Your Full Name"
+    onChange={[Function]}
+    value="Ra"
+  />
+  <SignupControl
+    autoCapitalize="none"
+    autoCorrect={false}
+    error={null}
+    keyboardType="email-address"
+    label="Email Address"
+    onChange={[Function]}
+    value="ra@ra.com"
+  />
+  <SignupControl
+    error={null}
+    label="Password"
+    onChange={[Function]}
+    togglableSecureTextEntry={true}
+    value="rarara"
+  />
+  <Button
+    disabled={false}
+    onPress={[Function]}
+    text="Continue"
+  />
+</KeyboardFriendlyView>
+`;
+
+exports[`validates its fields 1`] = `
+Object {
+  "errors": Object {
+    "email": "Must be a valid email",
+    "name": "Name must not consist solely of whitespace.",
+    "password": "Password must be at least 9 characters.",
+  },
+}
+`;
