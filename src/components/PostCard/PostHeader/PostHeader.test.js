@@ -5,6 +5,7 @@ import PostHeader from './PostHeader'
 
 it('renders correctly with all=true, and no community or user', () => {
   const creator = {
+    id: 24,
     name: 'Zeus',
     tagline: 'Go!',
     avatarUrl: 'foo.png'
@@ -12,7 +13,7 @@ it('renders correctly with all=true, and no community or user', () => {
   const renderer = new ReactShallowRenderer()
   renderer.render(<PostHeader creator={creator}
     deletePost={() => {}}
-    postId
+    postId={22}
     canFlag={true}
     editPost={() => {}} date={new Date(new Date().getTime() - 60000 * 10)} />)
   const actual = renderer.getRenderOutput()

@@ -1,5 +1,107 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`FlagContent changes title based on type 1`] = `
+<View>
+  <Prompt
+    borderColor="#ccc"
+    buttonStyle={Object {}}
+    buttonTextStyle={Object {}}
+    cancelButtonStyle={Object {}}
+    cancelButtonTextStyle={Object {}}
+    cancelText="Cancel"
+    defaultValue=""
+    inputStyle={Object {}}
+    onCancel={[Function]}
+    onChangeText={[Function]}
+    onSubmit={[Function]}
+    placeholder="Explanation "
+    promptStyle={Object {}}
+    submitButtonStyle={Object {}}
+    submitButtonTextStyle={Object {}}
+    submitText="Submit"
+    textInputProps={
+      Object {
+        "placeholderTextColor": "#8994A3",
+      }
+    }
+    title="Why was this post 'undefined'"
+    titleStyle={Object {}}
+    visible={false}
+  />
+  <Component
+    hardwareAccelerated={false}
+    onRequestClose={[Function]}
+    transparent={true}
+    visible={true}
+  >
+    <View>
+      <View />
+      <View />
+      <View>
+        <View>
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            disabled={false}
+            ellipsizeMode="tail"
+          >
+            FLAG THIS 
+            POST
+          </Text>
+          <TouchableOpacity
+            activeOpacity={0.2}
+            focusedOpacity={0.7}
+            onPress={[Function]}
+          >
+            <Icon
+              name="Ex"
+            />
+          </TouchableOpacity>
+        </View>
+        <FlatList
+          data={
+            Array [
+              Object {
+                "id": "inappropriate",
+                "title": "Inappropriate Content",
+              },
+              Object {
+                "id": "spam",
+                "title": "Spam",
+              },
+              Object {
+                "id": "offensive",
+                "title": "Offensive",
+              },
+              Object {
+                "id": "illegal",
+                "title": "Illegal",
+              },
+              Object {
+                "id": "other",
+                "title": "Other",
+              },
+            ]
+          }
+          disableVirtualization={false}
+          horizontal={false}
+          initialNumToRender={10}
+          keyExtractor={[Function]}
+          maxToRenderPerBatch={10}
+          numColumns={1}
+          onEndReachedThreshold={2}
+          renderItem={[Function]}
+          renderScrollComponent={[Function]}
+          scrollEventThrottle={50}
+          updateCellsBatchingPeriod={50}
+          windowSize={21}
+        />
+      </View>
+    </View>
+  </Component>
+</View>
+`;
+
 exports[`FlagContent matches the last snapshot 1`] = `
 <View>
   <Prompt
@@ -32,7 +134,7 @@ exports[`FlagContent matches the last snapshot 1`] = `
     hardwareAccelerated={false}
     onRequestClose={[Function]}
     transparent={true}
-    visible={false}
+    visible={true}
   >
     <View>
       <View />

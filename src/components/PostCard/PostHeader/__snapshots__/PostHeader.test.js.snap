@@ -78,7 +78,7 @@ exports[`renders correctly when showCommunity is true 1`] = `
     <Connect(FlagContent)
       linkData={
         Object {
-          "postId": 20,
+          "id": 20,
           "slug": "olympus",
           "type": "post",
         }
@@ -147,7 +147,7 @@ exports[`renders correctly with all=true, and no community or user 1`] = `
     <Connect(FlagContent)
       linkData={
         Object {
-          "postId": true,
+          "id": 22,
           "slug": undefined,
           "type": "post",
         }
