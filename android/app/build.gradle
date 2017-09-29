@@ -95,10 +95,6 @@ android {
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
-        manifestPlaceholders = [
-            onesignal_app_id: ONESIGNAL_APP_ID,
-            onesignal_google_project_number: "REMOTE"
-        ]
     }
     splits {
         abi {
@@ -127,11 +123,19 @@ android {
     buildTypes {
         debug {
             signingConfig signingConfigs.debug
+            manifestPlaceholders = [
+                onesignal_app_id: DEBUG_ONESIGNAL_APP_ID,
+                onesignal_google_project_number: "REMOTE"
+            ]
         }
         release {
             signingConfig signingConfigs.release
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+            manifestPlaceholders = [
+                onesignal_app_id: RELEASE_ONESIGNAL_APP_ID,
+                onesignal_google_project_number: "REMOTE"
+            ]
         }
     }
     // applicationVariants are e.g. debug, release
