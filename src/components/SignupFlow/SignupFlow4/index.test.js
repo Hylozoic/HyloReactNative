@@ -1,6 +1,6 @@
 import 'react-native'
 import ConnectedComponent from './index'
 
-it('matches last snapshot', () => {
+it('is a function', () => {
   expect(ConnectedComponent).toBeInstanceOf(Function)
 })
