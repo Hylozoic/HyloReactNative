@@ -98,7 +98,7 @@ export function ReadMoreButton ({ goToDetails }) {
   </View>
 }
 
-function MemberMenu ({flagMember}) {
+export function MemberMenu ({flagMember}) {
   // If the function is defined, than it's a valid action
   const actions = filter(x => x[1], [
     ['Flag This Member', flagMember]

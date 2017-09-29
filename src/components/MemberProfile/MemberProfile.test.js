@@ -1,7 +1,7 @@
 import 'react-native'
 import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
-import MemberProfile, { MemberBanner, MemberHeader, ReadMoreButton } from './MemberProfile'
+import MemberProfile, { MemberBanner, MemberHeader, ReadMoreButton, MemberMenu } from './MemberProfile'
 
 describe('MemberProfile', () => {
   it('matches the last snapshot', () => {
@@ -37,6 +37,24 @@ describe('MemberBanner', () => {
     const renderer = new ReactShallowRenderer()
     renderer.render(<MemberBanner
       person={person} />)
+    const actual = renderer.getRenderOutput()
+
+    expect(actual).toMatchSnapshot()
+  })
+})
+
+describe('MemberMenu', () => {
+  it('returns null when flagging not allowed', () => {
+    const renderer = new ReactShallowRenderer()
+    renderer.render(<MemberMenu/>)
+    const actual = renderer.getRenderOutput()
+
+    expect(actual).toMatchSnapshot()
+  })
+
+  it('returns a popupmenu when flagging allowed', () => {
+    const renderer = new ReactShallowRenderer()
+    renderer.render(<MemberMenu flagMember={() => { }}/>)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
