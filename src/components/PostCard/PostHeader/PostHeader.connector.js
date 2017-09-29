@@ -10,11 +10,6 @@ export function mapStateToProps (state, props) {
   }
 }
 
-export function mapDispatchToProps (dispatch, props) {
-  return {
-  }
-}
-
 export function mergeProps (stateProps, dispatchProps, ownProps) {
   const { currentUser, community } = stateProps
   const { creator, editPost } = ownProps
@@ -31,4 +26,4 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps, mergeProps)
+export default connect(mapStateToProps, null, mergeProps)
