@@ -2,6 +2,9 @@ import { LOGOUT } from '../../components/Login/actions'
 import {
   CREATE_COMMENT
 } from '../../components/PostDetails/CommentEditor/CommentEditor.store'
+import {
+  RECEIVE_MESSAGE
+} from '../../components/SocketListener/SocketListener.store'
 import { CREATE_MESSAGE, CREATE_MESSAGE_PENDING } from '../../components/Thread/Thread.store'
 import orm from '../models'
 import ModelExtractor from './ModelExtractor'
@@ -51,6 +54,12 @@ export default function ormReducer (state = {}, action) {
         root: payload.data.createMessage,
         modelName: 'Message'
       })
+      break
+
+    case RECEIVE_MESSAGE:
+      const { message } = payload.data
+      session.MessageThread.withId(message.messageThread)
+      .update({updatedAt: message.createdAt})
       break
   }
 
