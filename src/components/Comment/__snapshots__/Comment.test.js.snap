@@ -24,13 +24,18 @@ exports[`renders correctly 1`] = `
     </View>
     <HtmlView
       RootComponent={[Function]}
-      addLineBreaks={true}
+      addLineBreaks={false}
       onError={[Function]}
+      onLinkLongPress={null}
       onLinkPress={[Function]}
       stylesheet={
         Object {
           "a": Object {
             "color": "#0DC39F",
+          },
+          "p": Object {
+            "marginBottom": 3,
+            "marginTop": 3,
           },
         }
       }
@@ -43,7 +48,7 @@ exports[`renders correctly 1`] = `
           },
         }
       }
-      value="<p>tick followed tock followed tick followed tock</p>"
+      value="tick followed tock followed tick followed tock"
     />
   </View>
 </View>
@@ -83,13 +88,18 @@ exports[`shows the post title when displayPostTitle is true 1`] = `
     </View>
     <HtmlView
       RootComponent={[Function]}
-      addLineBreaks={true}
+      addLineBreaks={false}
       onError={[Function]}
+      onLinkLongPress={null}
       onLinkPress={[Function]}
       stylesheet={
         Object {
           "a": Object {
             "color": "#0DC39F",
+          },
+          "p": Object {
+            "marginBottom": 3,
+            "marginTop": 3,
           },
         }
       }
@@ -102,7 +112,7 @@ exports[`shows the post title when displayPostTitle is true 1`] = `
           },
         }
       }
-      value="<p>tick followed tock followed tick followed tock</p>"
+      value="tick followed tock followed tick followed tock"
     />
   </View>
 </View>

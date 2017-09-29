@@ -2,8 +2,7 @@ import { capeCod, rhino, rhino50, ghost } from '../../../style/colors'
 
 export default {
   container: {
-    backgroundColor: '#FFF',
-    height: 900
+    backgroundColor: '#FFF'
   },
   bannerContainer: {
     zIndex: 10
@@ -39,7 +38,7 @@ export default {
     borderRadius: 4
   },
   avatarSpacing: {
-    marginTop: 16,
+    marginTop: 16
   },
   avatar: {
     width: 50,
@@ -49,7 +48,8 @@ export default {
     fontSize: 22,
     marginTop: 14,
     color: rhino,
-    fontFamily: 'Circular-Black'
+    fontFamily: 'Circular-Black',
+    textAlign: 'center'
   },
   memberLocation: {
     fontFamily: 'Circular-Book',
@@ -65,7 +65,7 @@ export default {
   },
   listControls: {
     flex: 1,
-    flexDirection: 'row',
+    flexDirection: 'row'
   },
   searchWrapper: {
     marginTop: 10,
@@ -76,7 +76,7 @@ export default {
     borderWidth: 1,
     height: 38,
     borderColor: ghost,
-    borderRadius: 32,
+    borderRadius: 32
   },
   searchIcon: {
     top: 4,
@@ -87,7 +87,7 @@ export default {
     top: 1,
     fontSize: 14,
     fontFamily: 'Circular-Book',
-    flex: 1,
+    flex: 1
   },
   sortBy: {
     flexDirection: 'row',
@@ -99,12 +99,12 @@ export default {
   },
   sortByText: {
     color: rhino,
-    fontFamily: 'Circular-Book',
+    fontFamily: 'Circular-Book'
   },
   downArrow: {
     top: 4,
     marginLeft: 4,
     fontSize: 12,
-    color: capeCod,
-  },
+    color: capeCod
+  }
 }
