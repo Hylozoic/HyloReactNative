@@ -24,7 +24,6 @@ export default class PostHeader extends Component {
       type,
       communities,
       postId,
-      close,
       slug,
       showCommunity,
       editPost,
@@ -47,7 +46,7 @@ export default class PostHeader extends Component {
     // Used to generate a link to this post from the backend.
     const linkData = {
       slug,
-      id,
+      postId,
       type: 'post'
     }
 
@@ -81,10 +80,11 @@ export default class PostHeader extends Component {
       <View style={styles.upperRight}>
         {type && <PostLabel type={type} />}
         <PostMenu {...{editPost, deletePost, flagPost}} />
-        <FlagContent visible={this.state.flaggingVisible}
+        {canFlag && <FlagContent visible={this.state.flaggingVisible}
           type='post'
           linkData={linkData}
           onClose={() => this.setState({flaggingVisible: false})} />
+        }
       </View>
     </View>
   }

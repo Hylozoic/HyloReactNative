@@ -73,6 +73,19 @@ exports[`renders correctly when showCommunity is true 1`] = `
     <PostMenu
       deletePost={[Function]}
       editPost={[Function]}
+      flagPost={[Function]}
+    />
+    <Connect(FlagContent)
+      linkData={
+        Object {
+          "postId": 20,
+          "slug": "olympus",
+          "type": "post",
+        }
+      }
+      onClose={[Function]}
+      type="post"
+      visible={false}
     />
   </View>
 </View>
@@ -129,6 +142,98 @@ exports[`renders correctly with all=true, and no community or user 1`] = `
     <PostMenu
       deletePost={[Function]}
       editPost={[Function]}
+      flagPost={[Function]}
+    />
+    <Connect(FlagContent)
+      linkData={
+        Object {
+          "postId": true,
+          "slug": undefined,
+          "type": "post",
+        }
+      }
+      onClose={[Function]}
+      type="post"
+      visible={false}
+    />
+  </View>
+</View>
+`;
+
+exports[`renders correctly with no flagging 1`] = `
+<View>
+  <View>
+    <TouchableOpacity
+      activeOpacity={0.2}
+      focusedOpacity={0.7}
+      onPress={[Function]}
+    >
+      <Avatar
+        avatarUrl="foo.png"
+      />
+    </TouchableOpacity>
+  </View>
+  <View>
+    <TouchableOpacity
+      activeOpacity={0.2}
+      focusedOpacity={0.7}
+      onPress={[Function]}
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        disabled={false}
+        ellipsizeMode="tail"
+      >
+        Zeus
+      </Text>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        disabled={false}
+        ellipsizeMode="tail"
+      >
+        Go!
+      </Text>
+    </TouchableOpacity>
+    <View>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        disabled={false}
+        ellipsizeMode="tail"
+      >
+        10m ago
+      </Text>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        disabled={false}
+        ellipsizeMode="tail"
+      >
+        •
+      </Text>
+      <TouchableOpacity
+        activeOpacity={0.2}
+        focusedOpacity={0.7}
+        onPress={[Function]}
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          disabled={false}
+          ellipsizeMode="tail"
+        >
+          Olympus
+        </Text>
+      </TouchableOpacity>
+    </View>
+  </View>
+  <View>
+    <PostMenu
+      deletePost={[Function]}
+      editPost={[Function]}
+      flagPost={undefined}
     />
   </View>
 </View>

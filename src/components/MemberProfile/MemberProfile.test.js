@@ -8,7 +8,19 @@ describe('MemberProfile', () => {
     const renderer = new ReactShallowRenderer()
     renderer.render(<MemberProfile
       person={{id: 1}}
+      canFlag={true}
       id={1} />)
+    const actual = renderer.getRenderOutput()
+
+    expect(actual).toMatchSnapshot()
+  })
+
+  it('doesnt have the flag content option', () => {
+    const renderer = new ReactShallowRenderer()
+    renderer.render(<MemberProfile
+    person={{id: 1}}
+    canFlag={false}
+    id={1} />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
@@ -41,6 +53,7 @@ describe('MemberHeader', () => {
 
     const renderer = new ReactShallowRenderer()
     renderer.render(<MemberHeader
+      flagMember={() => {}}
       person={person} />)
     const actual = renderer.getRenderOutput()
 

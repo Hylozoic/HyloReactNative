@@ -145,11 +145,13 @@ const styles = {
   },
   titleText: {
     fontFamily: 'Circular-Bold',
+    color: '#959FAC',
     fontSize: 12,
     flex: 1
   },
   icon: {
     width: 20,
+    color: '#959FAC',
     fontSize: 22,
     marginRight: 4
   },

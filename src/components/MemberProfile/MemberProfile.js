@@ -51,10 +51,11 @@ export default class MemberProfile extends React.Component {
         <MemberHeader person={person} flagMember={flagMember}/>
         <ReadMoreButton goToDetails={goToDetails} />
       </View>
-      <FlagContent visible={this.state.flaggingVisible}
-                   type='member'
-                   linkData={linkData}
-                   onClose={() => this.setState({flaggingVisible: false})} />
+      {canFlag && <FlagContent visible={this.state.flaggingVisible}
+        type='member'
+        linkData={linkData}
+        onClose={() => this.setState({flaggingVisible: false})} />
+      }
     </View>
 
     return <MemberFeed id={id} header={header} />
