@@ -14,7 +14,6 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <RNGoogleSignin/RNGoogleSignin.h>
 #import <React/RCTLinkingManager.h>
-#import <"RCTLinkingManager.h">
 
 @implementation AppDelegate
 
