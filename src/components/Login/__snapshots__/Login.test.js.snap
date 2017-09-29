@@ -128,16 +128,14 @@ exports[`renders Login correctly 1`] = `
         focusedOpacity={0.7}
         onPress={[Function]}
       >
-        <View>
-          <Text
-            accessible={true}
-            allowFontScaling={true}
-            disabled={false}
-            ellipsizeMode="tail"
-          >
-            Log In
-          </Text>
-        </View>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          disabled={false}
+          ellipsizeMode="tail"
+        >
+          Log In
+        </Text>
       </TouchableOpacity>
     </View>
   </View>
@@ -183,6 +181,5 @@ exports[`renders Login correctly 1`] = `
       </Text>
     </TouchableOpacity>
   </View>
-  <View />
 </ScrollViewMock>
 `;
