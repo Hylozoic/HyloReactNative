@@ -61,7 +61,6 @@ export default function ormReducer (state = {}, action) {
       })
       break
 
-<<<<<<< HEAD
     case SIGNUP:
       me = session.Me.first()
       if (me) {
@@ -100,12 +99,12 @@ export default function ormReducer (state = {}, action) {
         }
       }
       me.update(changes)
-=======
+      break
+
     case RECEIVE_MESSAGE:
       const { message } = payload.data
       session.MessageThread.withId(message.messageThread)
       .update({updatedAt: message.createdAt})
->>>>>>> master
       break
   }
 
