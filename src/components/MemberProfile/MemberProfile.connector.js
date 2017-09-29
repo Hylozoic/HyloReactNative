@@ -3,6 +3,7 @@ import { get } from 'lodash/fp'
 import { getPerson, fetchPerson } from './MemberProfile.store'
 import changeCommunity from '../../store/actions/changeCommunity'
 import makeGoToCommunity from '../../store/actions/makeGoToCommunity'
+import getMe from '../../store/selectors/getMe'
 
 export function mapStateToProps (state, props) {
   const id = get('navigation.state.params.id', props)
@@ -12,6 +13,7 @@ export function mapStateToProps (state, props) {
   return {
     id,
     person,
+    currentUser: getMe(state, props),
     goToDetails
   }
 }
@@ -25,11 +27,17 @@ export function mapDispatchToProps (dispatch, props) {
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
-  const fetchPerson = () => dispatchProps.fetchPerson(stateProps.id)
+  const { id, currentUser } = stateProps
+
+  const fetchPerson = () => dispatchProps.fetchPerson(id)
+
+  const canFlag = currentUser && id && currentUser.id !== id
+
   return {
     ...stateProps,
     ...dispatchProps,
     ...ownProps,
+    canFlag,
     fetchPerson
   }
 }

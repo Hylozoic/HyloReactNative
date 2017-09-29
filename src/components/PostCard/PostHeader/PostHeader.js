@@ -54,7 +54,6 @@ export default class PostHeader extends Component {
     let flagPost
     if (canFlag) {
       flagPost = () => {
-        console.log('flagging')
         this.setState({flaggingVisible: true})
       }
     }
