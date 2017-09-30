@@ -49,7 +49,7 @@ const screensInTabs = {
 
 // Screens that work outside of tabs, Settings, Messages, etc.
 const screensInStack = {
-  NotificationsList: {screen: NotificationsList, parth: 'notifications'},
+  NotificationsList: {screen: NotificationsList, path: 'notifications'},
   Settings: {screen: Settings, path: 'settings'},
   Thread: {screen: Thread, path: 'thread/:id'},
   ThreadList: {screen: ThreadList, path: 'messages'}

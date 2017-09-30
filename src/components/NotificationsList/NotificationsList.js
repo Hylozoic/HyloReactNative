@@ -2,18 +2,20 @@ import React, { Component } from 'react'
 import { FlatList, TouchableOpacity, View, Text } from 'react-native'
 import { isEmpty } from 'lodash/fp'
 
+import header from 'util/header'
 import Loading from '../Loading'
 import NotificationCard from '../NotificationCard'
-import Header from './Header'
 import styles from './NotificationsList.styles'
 
 export default class NotificationsList extends Component {
-  static navigationOptions = ({navigation}) => (Header(navigation))
+  static navigationOptions = ({ navigation }) => header(navigation, { left: 'close' })
 
   componentDidMount () {
-    this.props.fetchNotifications()
+    const { fetchNotifications, setRightButton } = this.props
+    fetchNotifications()
+    setRightButton()
   }
-
+  
   keyExtractor = item => item.id
 
   render () {
@@ -46,3 +48,5 @@ export function NotificationRow ({ notification, showNotification }) {
     </TouchableOpacity>
   </View>
 }
+
+// setTitle: func.isRequired,
