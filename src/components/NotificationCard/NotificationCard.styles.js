@@ -3,6 +3,11 @@ import { StyleSheet } from 'react-native'
 import { capeCod, nevada, rhino30 } from 'style/colors'
 
 export default StyleSheet.create({
+  avatar: {
+    marginLeft: 10,
+    marginTop: 10,
+    marginRight: 8
+  },
   body: {
     flexDirection: 'column',
     flex: 0.9,
@@ -14,24 +19,25 @@ export default StyleSheet.create({
     paddingHorizontal: 10,
     backgroundColor: 'white',
   },
+  content: {
+    flex: 1,
+    flexDirection: 'column'
+  },
   date: {
     fontSize: 12,
     color: rhino30,
     fontFamily: 'Circular-Book',
     marginTop: 3
   },
-  marginTopNoCreator: {
-    marginTop: 0
+  header: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start'
   },
   name: {
     color: capeCod,
     fontFamily: 'Circular-Bold'
-  },
-  padTopNoCreator: {
-    paddingTop: 0
-  },
-  padLeftNoAvatar: {
-    paddingLeft: 44
   },
   text: {
     fontFamily: 'Circular-Book',
