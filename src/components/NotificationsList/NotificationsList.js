@@ -31,7 +31,7 @@ export default class NotificationsList extends Component {
         // onEndReached={fetchMoreNotifications}
         renderItem={({ item }) =>
           <NotificationRow
-            notifcation={item.notification}
+            notification={item}
             showNotification={showNotification}
          />}
         />
@@ -39,7 +39,7 @@ export default class NotificationsList extends Component {
   }
 }
 
-export function NotificationRow ({ notification }) {
+export function NotificationRow ({ notification, showNotification }) {
   return <View>
     <TouchableOpacity onPress={() => {}}>
       <NotificationCard notification={notification} />
