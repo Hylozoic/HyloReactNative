@@ -18,9 +18,9 @@ describe('MemberProfile', () => {
   it('doesnt have the flag content option', () => {
     const renderer = new ReactShallowRenderer()
     renderer.render(<MemberProfile
-    person={{id: 1}}
-    canFlag={false}
-    id={1} />)
+      person={{id: 1}}
+      canFlag={false}
+      id={1} />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()

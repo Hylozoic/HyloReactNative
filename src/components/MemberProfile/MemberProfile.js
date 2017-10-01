@@ -30,6 +30,8 @@ export default class MemberProfile extends React.Component {
   render () {
     const { person, id, goToDetails, canFlag } = this.props
 
+    const { flaggingVisible } = this.state
+
     if (!person) return <Loading />
 
     let flagMember
@@ -51,8 +53,7 @@ export default class MemberProfile extends React.Component {
         <MemberHeader person={person} flagMember={flagMember}/>
         <ReadMoreButton goToDetails={goToDetails} />
       </View>
-      {canFlag && <FlagContent visible={this.state.flaggingVisible}
-        type='member'
+      {flaggingVisible && <FlagContent type='member'
         linkData={linkData}
         onClose={() => this.setState({flaggingVisible: false})} />
       }
@@ -108,7 +109,7 @@ export function MemberMenu ({flagMember}) {
 
   const onSelect = index => actions[index][1]()
 
-  const destructiveButtonIndex = actions[0][0] === 'Flag This User' ? 0 : -1
+  const destructiveButtonIndex = actions[0][0] === 'Flag This Member' ? 0 : -1
 
   return <PopupMenuButton actions={actions.map(x => x[0])} onSelect={onSelect}
                           destructiveButtonIndex={destructiveButtonIndex}>

@@ -33,6 +33,8 @@ export default class PostHeader extends Component {
       goToCommunity
     } = this.props
 
+    const { flaggingVisible } = this.state
+
     let context
 
     if (showCommunity) {
@@ -80,8 +82,7 @@ export default class PostHeader extends Component {
       <View style={styles.upperRight}>
         {type && <PostLabel type={type} />}
         <PostMenu {...{editPost, deletePost, flagPost}} />
-        {canFlag && <FlagContent visible={this.state.flaggingVisible}
-          type='post'
+        {flaggingVisible && <FlagContent type='post'
           linkData={linkData}
           onClose={() => this.setState({flaggingVisible: false})} />
         }

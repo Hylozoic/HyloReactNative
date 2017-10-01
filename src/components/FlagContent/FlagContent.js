@@ -6,24 +6,17 @@ import Prompt from 'react-native-prompt';
 
 export default class FlagContent extends Component {
   state = {
-    visible: false,
     promptVisible: false,
     highlightRequired: false
   }
 
   static defaultProps = {
-    visible: false,
     promptVisible: false,
     highlightRequired: false
   }
 
-  componentWillReceiveProps(nextProps) {
-    const { visible } = nextProps;
-    this.setState({ visible });
-  }
-
   closeModal = () => {
-    this.setState({visible: false, promptVisible: false, highlightRequired: false});
+    this.setState({promptVisible: false, highlightRequired: false});
     if (this.props.onClose) {
       this.props.onClose()
     }
@@ -31,19 +24,14 @@ export default class FlagContent extends Component {
 
   render () {
     const options = [
-      {title: 'Inappropriate Content',
-       id: 'inappropriate'},
-      {title: 'Spam',
-       id: 'spam'},
-      {title: 'Offensive',
-       id: 'offensive'},
-      {title: 'Illegal',
-       id: 'illegal'},
-      {title: 'Other',
-       id: 'other'}
+      {title: 'Inappropriate Content', id: 'inappropriate'},
+      {title: 'Spam', id: 'spam'},
+      {title: 'Offensive', id: 'offensive'},
+      {title: 'Illegal', id: 'illegal'},
+      {title: 'Other', id: 'other'}
     ]
 
-    const { visible, type = "content", submitFlagContent, linkData } = this.props
+    const { type = "content", submitFlagContent, linkData } = this.props
     const { selectedCategory, highlightRequired } = this.state
 
     const optionalExplanation = selectedCategory === 'other' ? false : true
@@ -74,7 +62,7 @@ export default class FlagContent extends Component {
           } }/>
         <Modal
           transparent={true}
-          visible={visible}
+          visible={true}
           onRequestClose={() => this.closeModal()} >
           <View style={styles.dialog}>
             <View style={styles.dialogOverlay}/>
