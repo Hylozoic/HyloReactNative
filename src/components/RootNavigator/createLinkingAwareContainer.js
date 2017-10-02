@@ -33,20 +33,20 @@ export default function createLinkingAwareContainer (Comp, uriPrefix) {
     }
 
     componentDidMount () {
-      // this handles the case where the app is closed and is launched via Universal Linking.
-      Linking.getInitialURL()
-      .then((url) => {
-        if (url) {
-          this._handleOpenURL(url)
-        }
-      })
-      .catch((e) => {})
-      // This listener handles the case where the app is woken up from the Universal Linking
-      Linking.addEventListener('url', ({ url }) => this._handleOpenURL(url))
+      // // this handles the case where the app is closed and is launched via Universal Linking.
+      // Linking.getInitialURL()
+      // .then((url) => {
+      //   if (url) {
+      //     this._handleOpenURL(url)
+      //   }
+      // })
+      // .catch((e) => {})
+      // // This listener handles the case where the app is woken up from the Universal Linking
+      // Linking.addEventListener('url', ({ url }) => this._handleOpenURL(url))
     }
 
     componentWillUnmount () {
-      Linking.removeEventListener('url', this._handleOpenURL)
+      // Linking.removeEventListener('url', this._handleOpenURL)
     }
 
     render () {
