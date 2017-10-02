@@ -1,16 +1,17 @@
 import React from 'react'
-import RootNavigator from './RootNavigator'
-import SocketListener from './SocketListener'
-import fetchCurrentUser from '../store/actions/fetchCurrentUser'
-import { connect } from 'react-redux'
+import RootNavigator from '../RootNavigator'
+import SocketListener from '../SocketListener'
 import { View } from 'react-native'
 import { urlPrefix } from 'util/platform'
+import { init as initOneSignal } from 'util/onesignal'
 
 // this component just sets up a navigator so that views can open full-screen,
 // above the tab bar
-class LoggedInRoot extends React.Component {
+export default class LoggedInRoot extends React.Component {
   componentDidMount () {
-    this.props.fetchCurrentUser()
+    const { fetchCurrentUser, registerDevice } = this.props
+    fetchCurrentUser()
+    initOneSignal({registerDevice})
   }
 
   render () {
@@ -20,5 +21,3 @@ class LoggedInRoot extends React.Component {
     </View>
   }
 }
-
-export default connect(null, {fetchCurrentUser})(LoggedInRoot)

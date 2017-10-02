@@ -7,5 +7,7 @@
 		<string>applinks:hylo.com</string>
 		<string>applinks:www.hylo.com</string>
 	</array>
+	<key>aps-environment</key>
+	<string>development</string>
 </dict>
 </plist>

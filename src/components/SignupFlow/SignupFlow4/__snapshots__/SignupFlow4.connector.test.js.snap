@@ -1,0 +1,56 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mapDispatchToProps maps the action generators 1`] = `
+Object {
+  "addSkill": [Function],
+  "removeSkill": [Function],
+  "setSkill": [Function],
+  "setUserSkills": [Function],
+}
+`;
+
+exports[`mapStateToProps returns the right keys 1`] = `
+Object {
+  "remainingSkills": Array [
+    "Writing",
+    "Design",
+    "Project Management",
+    "Photography",
+    "Facilitation",
+    "Media",
+    "Community Organizing",
+    "Technology",
+    "Social Media",
+    "Event Planning",
+    "Education",
+    "Communications",
+  ],
+  "skill": undefined,
+  "storedSkills": Array [],
+  "userSkills": undefined,
+}
+`;
+
+exports[`mergeProps merges the props 1`] = `
+Object {
+  "loadSkills": [Function],
+  "navigation": Object {
+    "navigate": [Function],
+  },
+  "saveAndNext": [Function],
+  "setUserSkills": [Function],
+  "storedSkills": Array [
+    "a",
+    "b",
+    "c",
+  ],
+}
+`;
+
+exports[`mergeProps merges the props 2`] = `
+Array [
+  Array [
+    "SignupFlow5",
+  ],
+]
+`;
