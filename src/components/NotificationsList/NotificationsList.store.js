@@ -149,12 +149,18 @@ function refineActivity ({ action, comment, community, post, reasons }, actor) {
   }
 }
 
-function refineNotification ({ activity, createdAt, id }) {
+function refineNotification ({ activity, createdAt, id }, i, notifications) {
   const { action, actor, meta, unread } = activity
+  // Only show separator between read and unread notifications
+  const avatarSeparator = i !== notifications.length - 1
+    ? unread !== notifications[i + 1].activity.unread
+    : false
+
   return {
     id,
     activityId: activity.id,
     actor: pick([ 'avatarUrl', 'name' ], actor),
+    avatarSeparator,
     createdAt: humanDate(createdAt),
     ...refineActivity(activity, actor),
     unread

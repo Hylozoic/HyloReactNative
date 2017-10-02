@@ -1,27 +1,25 @@
 import { StyleSheet } from 'react-native'
 
-import { capeCod, nevada, rhino30 } from 'style/colors'
+import { capeCod, nevada, rhino10, rhino30 } from 'style/colors'
 
 export default StyleSheet.create({
   avatar: {
-    marginLeft: 10,
-    marginTop: 10,
-    marginRight: 8
-  },
-  body: {
-    flexDirection: 'column',
-    flex: 0.9,
-    paddingLeft: 10
+    marginLeft: 15,
+    marginTop: 5,
+    marginRight: 5
   },
   container: {
     flexDirection: 'row',
-    paddingVertical: 5,
-    paddingHorizontal: 10,
+    paddingTop: 15,
     backgroundColor: 'white',
   },
   content: {
     flex: 1,
-    flexDirection: 'column'
+    flexDirection: 'column',
+    paddingHorizontal: 10,
+    paddingBottom: 15,
+    borderBottomColor: rhino30,
+    borderBottomWidth: StyleSheet.hairlineWidth
   },
   date: {
     fontSize: 12,
@@ -29,18 +27,35 @@ export default StyleSheet.create({
     fontFamily: 'Circular-Book',
     marginTop: 3
   },
+  emphasize: {
+    color: capeCod
+  },
   header: {
     flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'flex-start'
+    flexDirection: 'row'
+  },
+  highlight: {
+    backgroundColor: rhino10
   },
   name: {
+    color: nevada,
+    fontFamily: 'Circular-Bold',
+    fontSize: 14,
+    marginTop: 3
+  },
+  separator: {
+    borderBottomColor: rhino30,
+    borderBottomWidth: StyleSheet.hairlineWidth
+  },
+  title: {
+    fontFamily: 'Circular-Bold',
+    fontSize: 14,
     color: capeCod,
-    fontFamily: 'Circular-Bold'
+    marginTop: 3
   },
   text: {
     fontFamily: 'Circular-Book',
+    fontSize: 14,
     color: nevada,
     marginTop: 3
   }
