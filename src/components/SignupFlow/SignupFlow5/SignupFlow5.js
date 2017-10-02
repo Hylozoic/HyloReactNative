@@ -2,7 +2,8 @@ import React from 'react'
 import {
   View,
   Text,
-  Image
+  Image,
+  ScrollView
 } from 'react-native'
 import SignupControl from '../SignupControl'
 import Button from '../../Button'
@@ -21,7 +22,7 @@ export default class SignupFlow5 extends React.Component {
   render () {
     const { name, email, password, location, avatarUrl, skills, finishSignup, makeChanges } = this.props
 
-    return <View style={styles.container}>
+    return <ScrollView style={styles.container}>
       <Text style={styles.title}>Everything looking good?</Text>
       <Text style={styles.subTitle}>
         You can always come back and change your details at any time.
@@ -59,6 +60,6 @@ export default class SignupFlow5 extends React.Component {
           text='Finish'
           onPress={finishSignup} />
       </View>
-    </View>
+    </ScrollView>
   }
 }

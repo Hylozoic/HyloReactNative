@@ -17,7 +17,7 @@ Object {
 `;
 
 exports[`hides image when no url and password when no password 1`] = `
-<View>
+<ScrollViewMock>
   <Text
     accessible={true}
     allowFontScaling={true}
@@ -77,11 +77,11 @@ exports[`hides image when no url and password when no password 1`] = `
       text="Finish"
     />
   </View>
-</View>
+</ScrollViewMock>
 `;
 
 exports[`matches last snapshot 1`] = `
-<View>
+<ScrollViewMock>
   <Text
     accessible={true}
     allowFontScaling={true}
@@ -155,5 +155,5 @@ exports[`matches last snapshot 1`] = `
       text="Finish"
     />
   </View>
-</View>
+</ScrollViewMock>
 `;
