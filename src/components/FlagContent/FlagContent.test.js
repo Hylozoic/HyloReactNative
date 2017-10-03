@@ -37,4 +37,58 @@ describe('FlagContent', () => {
 
     expect(onClose).toHaveBeenCalled()
   })
+
+  it('calls submit successfully with category:inappropriate', () => {
+    const onClose = jest.fn()
+    const submitFlagContent = jest.fn()
+
+    const linkData = {id: 33, type: 'post'}
+    const instance = TestRenderer.create(<FlagContent visible={true}
+    type='post'
+    linkData={linkData}
+    submitFlagContent={submitFlagContent}
+    onClose={onClose} />
+    ).root.instance
+
+    instance.setState({selectedCategory: 'inappropriate'})
+
+    instance.submit('  my reason  ')
+
+    expect(instance.isOptionalExplanation()).toBeTruthy()
+
+    expect(submitFlagContent).toHaveBeenCalledWith('inappropriate', 'my reason', linkData)
+    expect(onClose).toHaveBeenCalled()
+  })
+
+  it('calls submit successfully with category:other', () => {
+    const onClose = jest.fn()
+    const submitFlagContent = jest.fn()
+
+    const linkData = {id: 33, type: 'post'}
+    const renderer = TestRenderer.create(<FlagContent visible={true}
+    type='post'
+    linkData={linkData}
+    submitFlagContent={submitFlagContent}
+    onClose={onClose} />
+    )
+
+    expect(renderer.toJSON()).toMatchSnapshot()
+
+    const instance = renderer.getInstance()
+
+    instance.setState({selectedCategory: 'other'})
+
+    expect(instance.isOptionalExplanation()).toBeFalsy()
+    expect(instance.state.highlightRequired).toBeFalsy()
+
+    instance.submit('  ')
+
+    expect(submitFlagContent).not.toHaveBeenCalled()
+    expect(instance.state.highlightRequired).toBeTruthy()
+
+    instance.submit('  my reason  ')
+
+    expect(submitFlagContent).toHaveBeenCalledWith('other', 'my reason', linkData)
+    expect(onClose).toHaveBeenCalled()
+  })
 })

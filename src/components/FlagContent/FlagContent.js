@@ -22,6 +22,20 @@ export default class FlagContent extends Component {
     }
   }
 
+  isOptionalExplanation = () => this.state.selectedCategory === 'other' ? false : true
+
+  submit = (value) => {
+    const { submitFlagContent, linkData } = this.props
+    const { selectedCategory } = this.state
+
+    if (!this.isOptionalExplanation() && isEmpty(trim(value))) {
+      this.setState({highlightRequired: true})
+    } else {
+      submitFlagContent(selectedCategory, trim(value), linkData)
+      this.closeModal()
+    }
+  }
+
   render () {
     const options = [
       {title: 'Inappropriate Content', id: 'inappropriate'},
@@ -31,20 +45,18 @@ export default class FlagContent extends Component {
       {title: 'Other', id: 'other'}
     ]
 
-    const { type = "content", submitFlagContent, linkData } = this.props
+    const { type = "content" } = this.props
     const { selectedCategory, highlightRequired } = this.state
 
-    const optionalExplanation = selectedCategory === 'other' ? false : true
-
     let inputProps = {
-      placeholderTextColor: highlightRequired && !optionalExplanation ? '#EE4266' : '#8994A3'
+      placeholderTextColor: highlightRequired && !this.isOptionalExplanation() ? '#EE4266' : '#8994A3'
     }
 
     return (
       <View>
         <Prompt
           title={`Why was this ${type} '${selectedCategory}'`}
-          placeholder={`Explanation ${optionalExplanation ? '' :  highlightRequired ? '(Required)' : ''}`}
+          placeholder={`Explanation ${this.isOptionalExplanation() ? '' :  highlightRequired ? '(Required)' : ''}`}
           textInputProps={inputProps}
           visible={ this.state.promptVisible }
           onCancel={ () => this.setState({
@@ -52,14 +64,7 @@ export default class FlagContent extends Component {
             highlightRequired: false,
           }) }
           submitText='Submit'
-          onSubmit={ (value) => {
-            if (!optionalExplanation && isEmpty(trim(value))) {
-              this.setState({highlightRequired: true})
-            } else {
-              submitFlagContent(selectedCategory, trim(value), linkData)
-              this.closeModal()
-            }
-          } }/>
+          onSubmit={this.submit}/>
         <Modal
           transparent={true}
           visible={true}
