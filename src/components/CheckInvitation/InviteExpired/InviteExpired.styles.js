@@ -1,6 +1,6 @@
 import {
   rhino60
-} from '../../style/colors'
+} from '../../../style/colors'
 
 export default {
   container: {

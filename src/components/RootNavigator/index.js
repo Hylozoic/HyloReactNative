@@ -5,7 +5,6 @@ import {
 } from 'react-navigation'
 import { Dimensions } from 'react-native'
 
-import CheckInvitation from '../CheckInvitation'
 import WelcomeScene from '../WelcomeScene'
 import Feed from '../Feed'
 import Settings from '../Settings'
@@ -118,4 +117,4 @@ const RootNavigator = StackNavigator(
 // trackCurrentTab must be on the top-level navigator, because it uses a prop
 // for listening to navigation change events that can only be assigned to a
 // top-level navigator
-export default CheckInvitation(trackCurrentTab(RootNavigator))
+export default trackCurrentTab(RootNavigator)

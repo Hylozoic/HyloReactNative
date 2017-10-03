@@ -1,12 +1,21 @@
 import { get } from 'lodash/fp'
 
 export const MODULE_NAME = 'JoinCommunity'
+
+export const SET_INVITATION_CODES = `${MODULE_NAME}/SET_INVITATION_CODES`
 export const USE_INVITATION = `${MODULE_NAME}/USE_INVITATION`
 
 export const defaultState = {}
 
-export function useInvitation (userId, inviteCodes = {}) {
-  const { invitationToken, accessCode } = inviteCodes
+export function setInvitationCodes (invitationCodes) {
+  return {
+    type: SET_INVITATION_CODES,
+    payload: {invitationCodes}
+  }
+}
+
+export function useInvitation (userId, invitationCodes = {}) {
+  const { invitationToken, accessCode } = invitationCodes
   return {
     type: USE_INVITATION,
     graphql: {
@@ -45,11 +54,17 @@ export function getNewMembership (state) {
   return get(`${MODULE_NAME}.membership`, state)
 }
 
+export function getinvitationCodes (state) {
+  return get(`${MODULE_NAME}.membership`, state)
+}
+
 export default function reducer (state = defaultState, action) {
   const { type, payload } = action
   switch (type) {
+    case SET_INVITATION_CODES:
+      return {...state, invitationCodes: payload.invitationCodes}
     case USE_INVITATION:
-      return {...state, ...payload.data.useInvitation}
+      return {...state, ...payload.data.useInvitation, invitationCodes: null}
   }
   return state
 }

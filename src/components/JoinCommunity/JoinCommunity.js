@@ -4,13 +4,14 @@ import Loading from '../Loading'
 
 export default class JoinCommunity extends Component {
   componentWillMount () {
-    const { useInvitation, currentUser } = this.props
-    useInvitation(currentUser.id)
+    const { useInvitation, currentUser, invitationCodes } = this.props
+    console.log('this.props:', this.props)
+    useInvitation(1, invitationCodes)
   }
 
   componentWillReceiveProps (nextProps) {
     if (!this.props.currentUser && nextProps.currentUser) {
-      this.props.useInvitation(nextProps.currentUser.id)
+      this.props.useInvitation(nextProps.currentUser.id, nextProps.invitationCodes)
     }
   }
 

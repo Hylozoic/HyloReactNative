@@ -3,11 +3,11 @@ import { isNil } from 'lodash'
 import {
    getValidInvite, checkInvitation, CHECK_INVITATION
 } from './CheckInvitation.store'
+import { setInvitationCodes } from '../JoinCommunity/JoinCommunity.store'
 
 export function mapStateToProps (state, props) {
   const isValidInvite = getValidInvite(state)
   const invitationCheckPending = props.invitationCheckPending || state.pending[CHECK_INVITATION]
-
   return {
     invitationCheckPending,
     hasCheckedValidInvite: !isNil(isValidInvite),
@@ -16,7 +16,8 @@ export function mapStateToProps (state, props) {
 }
 
 export const mapDispatchToProps = {
-  checkInvitation
+  checkInvitation,
+  setInvitationCodes
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)

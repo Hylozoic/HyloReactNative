@@ -16,6 +16,7 @@ import PostEditor from '../../components/PostEditor/PostEditor.store'
 import Search from '../../components/Editor/Search/Search.store'
 import SocketListener from '../../components/SocketListener/SocketListener.store'
 import CheckInvitation from '../../components/CheckInvitation/CheckInvitation.store'
+import JoinCommunity from '../../components/JoinCommunity/JoinCommunity.store'
 import SignupFlow from '../../components/SignupFlow/SignupFlow.store'
 
 const combinedReducers = combineReducers({
@@ -33,6 +34,7 @@ const combinedReducers = combineReducers({
   SocketListener,
   MemberFeed,
   CheckInvitation,
+  JoinCommunity,
   SignupFlow,
   PeopleTyping
 })
