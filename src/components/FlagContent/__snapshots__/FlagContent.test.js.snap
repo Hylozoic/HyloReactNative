@@ -470,6 +470,8 @@ exports[`FlagContent changes title based on type 1`] = `
 </View>
 `;
 
+exports[`FlagContent doesnt blow up 1`] = `<Connect(FlagContent) />`;
+
 exports[`FlagContent matches the last snapshot 1`] = `
 <View>
   <Prompt

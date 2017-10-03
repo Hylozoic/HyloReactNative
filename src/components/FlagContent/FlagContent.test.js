@@ -3,8 +3,23 @@ import React from 'react'
 import TestRenderer from 'react-test-renderer'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import FlagContent from './FlagContent'
+import ConnectedFlagContent from './index'
+import { Provider } from 'react-redux';
+
+const storeFake = (state) => ({
+  default: () => {},
+  subscribe: () => {},
+  dispatch: () => {},
+  getState: () => ({ ...state })
+});
 
 describe('FlagContent', () => {
+  it('doesnt blow up', () => {
+    const renderer = new ReactShallowRenderer()
+    renderer.render(<Provider store={storeFake}><ConnectedFlagContent /></Provider>)
+    expect(renderer.getRenderOutput()).toMatchSnapshot()
+  })
+
   it('matches the last snapshot', () => {
     const renderer = new ReactShallowRenderer()
     renderer.render(<FlagContent visible={true}
