@@ -19,8 +19,7 @@ export default class NotificationsList extends Component {
   keyExtractor = item => item.id
 
   render () {
-    const { notifications, pending, showNotification } = this.props
-
+    const { fetchMore, notifications, pending, showNotification } = this.props
     if (pending && notifications.length === 0) return <Loading />
     if (!pending && notifications.length === 0) {
       return <Text style={styles.center}>Nothing new for you!</Text>
@@ -30,7 +29,7 @@ export default class NotificationsList extends Component {
       <FlatList
         data={notifications}
         keyExtractor={this.keyExtractor}
-        // onEndReached={fetchMoreNotifications}
+        onEndReached={fetchMore}
         renderItem={({ item }) =>
           <NotificationRow
             notification={item}

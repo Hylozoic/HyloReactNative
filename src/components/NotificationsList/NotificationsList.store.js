@@ -1,11 +1,13 @@
 import { humanDate } from 'hylo-utils/text'
-import { createSelector } from 'redux-orm'
-import { find, pick } from 'lodash/fp'
+import { createSelector } from 'reselect'
+import { createSelector as ormCreateSelector } from 'redux-orm'
+import { get, find, pick } from 'lodash/fp'
 import { present, sanitize } from 'hylo-utils/text'
 import { decode } from 'ent'
 import striptags from 'striptags'
 
 import orm from '../../store/models'
+import { makeGetQueryResults } from '../../store/reducers/queryResults'
 import {
   ACTION_NEW_COMMENT,
   ACTION_TAG,
@@ -21,12 +23,12 @@ export const MARK_ALL_ACTIVITIES_READ = 'NotificationsList/MARK_ALL_ACTIVITIES_R
 
 const NOTIFICATION_TEXT_MAX = 100
 
-export function fetchNotifications () {
+export function fetchNotifications (first = 20, offset = 0) {
   return {
     type: FETCH_NOTIFICATIONS,
     graphql: {
-      query: `{
-        notifications (first: 20, order: "desc", resetCount: true) {
+      query: `query ($first: Int, $offset: Int) {
+        notifications (first: $first, offset: $offset, order: "desc") {
           total
           hasMore
           items {
@@ -60,10 +62,14 @@ export function fetchNotifications () {
             }
           }
         }
-      }`
+      }`,
+      variables: { first, offset }
     },
     meta: {
       extractModel: 'Notification',
+      extractQueryResults: {
+        getItems: get('payload.data.notifications')
+      },
       resetCount: true
     }
   }
@@ -189,7 +195,14 @@ function refineNotification (navigation) {
   }
 }
 
-export const getNotifications = createSelector(
+const getNotificationsResults = makeGetQueryResults(FETCH_NOTIFICATIONS)
+
+export const getHasMoreNotifications = createSelector(
+  getNotificationsResults,
+  get('hasMore')
+)
+
+export const getNotifications = ormCreateSelector(
   orm,
   state => state.orm,
   (_, { navigation }) => navigation,
