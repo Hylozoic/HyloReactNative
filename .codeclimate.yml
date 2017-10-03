@@ -10,6 +10,5 @@ ratings:
   paths:
   - src/**
 exclude_paths:
-- "**/index.js"
 - "**/*.test.js"
 - "**/*.styles.js"
