@@ -54,7 +54,7 @@ export default class PostDetails extends React.Component {
       goToCommunity
     } = this.props
 
-    if (!post) return <Loading />
+    if (!post || pending) return <Loading />
 
     const slug = get('0.slug', post.communities)
 
