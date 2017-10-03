@@ -1,5 +1,55 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`PostMenu returns a popupmenu when deleting allowed 1`] = `
+<PopupMenuButton
+  actions={
+    Array [
+      "Delete This Post",
+    ]
+  }
+  destructiveButtonIndex={0}
+  onSelect={[Function]}
+>
+  <Icon
+    name="More"
+  />
+</PopupMenuButton>
+`;
+
+exports[`PostMenu returns a popupmenu when editing allowed 1`] = `
+<PopupMenuButton
+  actions={
+    Array [
+      "Edit This Post",
+    ]
+  }
+  destructiveButtonIndex={-1}
+  onSelect={[Function]}
+>
+  <Icon
+    name="More"
+  />
+</PopupMenuButton>
+`;
+
+exports[`PostMenu returns a popupmenu when flagging allowed 1`] = `
+<PopupMenuButton
+  actions={
+    Array [
+      "Flag This Post",
+    ]
+  }
+  destructiveButtonIndex={0}
+  onSelect={[Function]}
+>
+  <Icon
+    name="More"
+  />
+</PopupMenuButton>
+`;
+
+exports[`PostMenu returns null when no actions 1`] = `null`;
+
 exports[`renders correctly when showCommunity is true 1`] = `
 <View>
   <View>

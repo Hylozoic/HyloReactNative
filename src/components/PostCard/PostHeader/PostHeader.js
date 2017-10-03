@@ -91,19 +91,22 @@ export default class PostHeader extends Component {
   }
 }
 
-function PostMenu ({deletePost, editPost, flagPost}) {
+export function PostMenu ({deletePost, editPost, flagPost}) {
   // If the function is defined, than it's a valid action
+  const flagLabel = 'Flag This Post'
+  const deleteLabel = 'Delete This Post'
+
   const actions = filter(x => x[1], [
-    ['Delete This Post', deletePost],
-    ['Edit This Post', editPost],
-    ['Flag This Post', flagPost]
+    [deleteLabel, deletePost],
+    [flagLabel, flagPost],
+    ['Edit This Post', editPost]
   ])
 
   if (isEmpty(actions)) return null
 
   const onSelect = index => actions[index][1]()
 
-  const destructiveButtonIndex = actions[0][0] === 'Delete this post' ? 0 : -1
+  const destructiveButtonIndex = (actions[0][0] === deleteLabel || actions[0][0] === flagLabel) ? 0 : -1
 
   return <PopupMenuButton actions={actions.map(x => x[0])} onSelect={onSelect}
     destructiveButtonIndex={destructiveButtonIndex}>

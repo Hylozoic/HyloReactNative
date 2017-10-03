@@ -8,7 +8,7 @@ describe('MemberProfile', () => {
     const renderer = new ReactShallowRenderer()
     renderer.render(<MemberProfile
       person={{id: 1}}
-      canFlag={true}
+      canFlag
       id={1} />)
     const actual = renderer.getRenderOutput()
 
@@ -46,7 +46,7 @@ describe('MemberBanner', () => {
 describe('MemberMenu', () => {
   it('returns null when flagging not allowed', () => {
     const renderer = new ReactShallowRenderer()
-    renderer.render(<MemberMenu/>)
+    renderer.render(<MemberMenu />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
@@ -54,7 +54,7 @@ describe('MemberMenu', () => {
 
   it('returns a popupmenu when flagging allowed', () => {
     const renderer = new ReactShallowRenderer()
-    renderer.render(<MemberMenu flagMember={() => { }}/>)
+    renderer.render(<MemberMenu flagMember={() => { }} />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
