@@ -1,6 +1,9 @@
 import { humanDate } from 'hylo-utils/text'
 import { createSelector } from 'redux-orm'
 import { find, pick } from 'lodash/fp'
+import { present, sanitize } from 'hylo-utils/text'
+import { decode } from 'ent'
+import striptags from 'striptags'
 
 import orm from '../../store/models'
 import {
@@ -15,6 +18,8 @@ import {
 export const FETCH_NOTIFICATIONS = 'NotificationsList/FETCH_NOTIFICATIONS'
 export const MARK_ACTIVITY_READ = 'NotificationsList/MARK_ACTIVITY_READ'
 export const MARK_ALL_ACTIVITIES_READ = 'NotificationsList/MARK_ALL_ACTIVITIES_READ'
+
+const NOTIFICATION_TEXT_MAX = 100
 
 export function fetchNotifications () {
   return {
@@ -102,11 +107,17 @@ export function goToNotification (notification) {
   return 
 }
 
+function presentedText (text) {
+  return decode(striptags(text, [], ' '))
+  .replace(/\s+/g, ' ')
+  .substring(0, NOTIFICATION_TEXT_MAX)
+}
+
 function refineActivity ({ action, comment, community, post, reasons }, actor) {
   switch (action) {
     case ACTION_COMMENT_MENTION:
       return {
-        body: `wrote: ${comment.text}`,
+        body: `wrote: ${presentedText(comment.text)}`,
         header: `mentioned you in a comment on`,
         nameInHeader: true,
         title: post.title
@@ -114,14 +125,14 @@ function refineActivity ({ action, comment, community, post, reasons }, actor) {
 
     case ACTION_NEW_COMMENT:
       return {
-        body: `wrote: ${comment.text}`,
+        body: `wrote: ${presentedText(comment.text)}`,
         header: `New Comment on`,
         title: post.title
       }
 
     case ACTION_MENTION:
       return {
-        body: `wrote: ${post.details}`,
+        body: `wrote: ${presentedText(post.details)}`,
         header: `mentioned you`,
         nameInHeader: true
       }
@@ -130,7 +141,7 @@ function refineActivity ({ action, comment, community, post, reasons }, actor) {
       const tagReason = find(r => r.startsWith('tag: '), reasons)
       const tag = tagReason.split(': ')[1]
       return {
-        body: `wrote: ${post.details}`,
+        body: `wrote: ${presentedText(post.details)}`,
         header: `New Post in`,
       }
 

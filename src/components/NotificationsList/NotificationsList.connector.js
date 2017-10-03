@@ -16,7 +16,7 @@ export function mapStateToProps (state, props) {
   return {
     pending: state.pending[FETCH_NOTIFICATIONS],
     currentUser,
-    notifications: notifications.slice(notifications.length -2)
+    notifications
     // hasMore
   }
 }

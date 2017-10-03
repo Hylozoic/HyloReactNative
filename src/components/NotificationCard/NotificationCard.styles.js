@@ -5,8 +5,8 @@ import { capeCod, nevada, rhino10, rhino30 } from 'style/colors'
 export default StyleSheet.create({
   avatar: {
     marginLeft: 15,
-    marginTop: 5,
-    marginRight: 5
+    marginRight: 15,
+    marginTop: 5
   },
   container: {
     flexDirection: 'row',
@@ -16,7 +16,7 @@ export default StyleSheet.create({
   content: {
     flex: 1,
     flexDirection: 'column',
-    paddingHorizontal: 10,
+    paddingRight: 15,
     paddingBottom: 15,
     borderBottomColor: rhino30,
     borderBottomWidth: StyleSheet.hairlineWidth
