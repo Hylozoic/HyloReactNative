@@ -3,8 +3,8 @@ import getMe from '../../../store/selectors/getMe'
 import getCommunity from '../../../store/selectors/getCommunity'
 
 export function mapStateToProps (state, props) {
-  const community = getCommunity(state, props)
-  const currentUser = getMe(state, props)
+  const community = getCommunity(state, {slug: props.slug})
+  const currentUser = getMe(state)
   const { creator, editPost } = props
 
   const canEdit = currentUser && creator && currentUser.id === creator.id
