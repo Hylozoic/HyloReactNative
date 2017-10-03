@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`has the expected shape 1`] = `
+<Navigator
+  navigation={
+    Object {
+      "dispatch": [Function],
+      "goBack": [Function],
+      "navigate": [Function],
+      "setParams": [Function],
+      "state": Object {
+        "index": 0,
+        "routes": Array [
+          Object {
+            "key": "foo",
+            "routeName": "Login",
+          },
+        ],
+      },
+    }
+  }
+/>
+`;

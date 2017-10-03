@@ -1,0 +1,159 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`has navigationOptions 1`] = `
+Object {
+  "headerStyle": Object {
+    "backgroundColor": "#0DC39F",
+    "shadowColor": "transparent",
+  },
+  "headerTintColor": "#9ee7d9",
+  "headerTitle": "STEP 5/5",
+  "headerTitleStyle": Object {
+    "color": "white",
+    "fontFamily": "Circular-Bold",
+    "fontSize": 12,
+  },
+}
+`;
+
+exports[`hides image when no url and password when no password 1`] = `
+<ScrollViewMock>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    disabled={false}
+    ellipsizeMode="tail"
+  >
+    Everything looking good?
+  </Text>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    disabled={false}
+    ellipsizeMode="tail"
+  >
+    You can always come back and change your details at any time.
+  </Text>
+  <SignupControl
+    label="Your Full Name"
+    value="Hill"
+  />
+  <SignupControl
+    autoCapitalize="none"
+    autoCorrect={false}
+    keyboardType="email-address"
+    label="Email Address"
+    value="jill@hill.com"
+  />
+  <SignupControl
+    label="Location"
+    value="hill"
+  />
+  <View>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+    >
+      Skills
+    </Text>
+    <SkillCloud
+      skills={
+        Array [
+          "One",
+          "Two",
+        ]
+      }
+    />
+  </View>
+  <View>
+    <Button
+      onPress={[Function]}
+      text="Make Changes"
+    />
+    <Button
+      onPress={[Function]}
+      text="Finish"
+    />
+  </View>
+</ScrollViewMock>
+`;
+
+exports[`matches last snapshot 1`] = `
+<ScrollViewMock>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    disabled={false}
+    ellipsizeMode="tail"
+  >
+    Everything looking good?
+  </Text>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    disabled={false}
+    ellipsizeMode="tail"
+  >
+    You can always come back and change your details at any time.
+  </Text>
+  <View>
+    <Image
+      source={
+        Object {
+          "uri": "mill.png",
+        }
+      }
+    />
+  </View>
+  <SignupControl
+    label="Your Full Name"
+    value="Hill"
+  />
+  <SignupControl
+    autoCapitalize="none"
+    autoCorrect={false}
+    keyboardType="email-address"
+    label="Email Address"
+    value="jill@hill.com"
+  />
+  <SignupControl
+    label="Password"
+    togglableSecureTextEntry={true}
+    value="fill"
+  />
+  <SignupControl
+    label="Location"
+    value="hill"
+  />
+  <View>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+    >
+      Skills
+    </Text>
+    <SkillCloud
+      skills={
+        Array [
+          "One",
+          "Two",
+        ]
+      }
+    />
+  </View>
+  <View>
+    <Button
+      onPress={[Function]}
+      text="Make Changes"
+    />
+    <Button
+      onPress={[Function]}
+      text="Finish"
+    />
+  </View>
+</ScrollViewMock>
+`;

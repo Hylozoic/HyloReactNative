@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`has navigationOptions 1`] = `
+Object {
+  "headerBackTitle": null,
+  "headerStyle": Object {
+    "backgroundColor": "#0DC39F",
+    "shadowColor": "transparent",
+  },
+  "headerTintColor": "#9ee7d9",
+  "headerTitle": "STEP 3/5",
+  "headerTitleStyle": Object {
+    "color": "white",
+    "fontFamily": "Circular-Bold",
+    "fontSize": 12,
+  },
+}
+`;
+
+exports[`matches last snapshot 1`] = `
+<KeyboardFriendlyView
+  behavior="padding"
+  keyboardVerticalOffset={64}
+>
+  <View>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+    >
+      Add your location
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+    >
+      Add your location to see more relevant content and find people and projects near you.
+    </Text>
+  </View>
+  <SignupControl
+    label="Where do you call home"
+    onChange={undefined}
+    value="Hull"
+  />
+  <Button
+    onPress={[Function]}
+    text="Continue"
+  />
+</KeyboardFriendlyView>
+`;

@@ -1,10 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Login renders correctly 1`] = `
+exports[`Login renders Login correctly 1`] = `
 <ScrollViewMock
   contentContainerStyle={
     Object {
       "alignItems": "center",
+      "backgroundColor": "white",
       "justifyContent": "center",
     }
   }
@@ -35,6 +36,7 @@ exports[`Login renders correctly 1`] = `
       <View>
         <TextInput
           autoCapitalize="none"
+          autoCorrect={false}
           keyboardType="email-address"
           onChangeText={[Function]}
           onSubmitEditing={[Function]}
@@ -84,16 +86,14 @@ exports[`Login renders correctly 1`] = `
         focusedOpacity={0.7}
         onPress={[Function]}
       >
-        <View>
-          <Text
-            accessible={true}
-            allowFontScaling={true}
-            disabled={false}
-            ellipsizeMode="tail"
-          >
-            Log In
-          </Text>
-        </View>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          disabled={false}
+          ellipsizeMode="tail"
+        >
+          Log In
+        </Text>
       </TouchableOpacity>
     </View>
   </View>
@@ -129,6 +129,7 @@ exports[`Login renders correctly 1`] = `
     <TouchableOpacity
       activeOpacity={0.2}
       focusedOpacity={0.7}
+      onPress={[Function]}
     >
       <Text
         accessible={true}
@@ -148,6 +149,7 @@ exports[`Login renders with email error 1`] = `
   contentContainerStyle={
     Object {
       "alignItems": "center",
+      "backgroundColor": "white",
       "justifyContent": "center",
     }
   }
@@ -179,6 +181,7 @@ exports[`Login renders with email error 1`] = `
       <View>
         <TextInput
           autoCapitalize="none"
+          autoCorrect={false}
           keyboardType="email-address"
           onChangeText={[Function]}
           onSubmitEditing={[Function]}
@@ -228,16 +231,14 @@ exports[`Login renders with email error 1`] = `
         focusedOpacity={0.7}
         onPress={[Function]}
       >
-        <View>
-          <Text
-            accessible={true}
-            allowFontScaling={true}
-            disabled={false}
-            ellipsizeMode="tail"
-          >
-            Log In
-          </Text>
-        </View>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          disabled={false}
+          ellipsizeMode="tail"
+        >
+          Log In
+        </Text>
       </TouchableOpacity>
     </View>
   </View>
@@ -273,6 +274,7 @@ exports[`Login renders with email error 1`] = `
     <TouchableOpacity
       activeOpacity={0.2}
       focusedOpacity={0.7}
+      onPress={undefined}
     >
       <Text
         accessible={true}
@@ -292,6 +294,7 @@ exports[`Login renders with no network connection error 1`] = `
   contentContainerStyle={
     Object {
       "alignItems": "center",
+      "backgroundColor": "white",
       "justifyContent": "center",
     }
   }
@@ -322,6 +325,7 @@ exports[`Login renders with no network connection error 1`] = `
       <View>
         <TextInput
           autoCapitalize="none"
+          autoCorrect={false}
           keyboardType="email-address"
           onChangeText={[Function]}
           onSubmitEditing={[Function]}
@@ -371,16 +375,14 @@ exports[`Login renders with no network connection error 1`] = `
         focusedOpacity={0.7}
         onPress={[Function]}
       >
-        <View>
-          <Text
-            accessible={true}
-            allowFontScaling={true}
-            disabled={false}
-            ellipsizeMode="tail"
-          >
-            Log In
-          </Text>
-        </View>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          disabled={false}
+          ellipsizeMode="tail"
+        >
+          Log In
+        </Text>
       </TouchableOpacity>
     </View>
   </View>
@@ -416,6 +418,7 @@ exports[`Login renders with no network connection error 1`] = `
     <TouchableOpacity
       activeOpacity={0.2}
       focusedOpacity={0.7}
+      onPress={undefined}
     >
       <Text
         accessible={true}
@@ -435,6 +438,7 @@ exports[`Login renders with password error 1`] = `
   contentContainerStyle={
     Object {
       "alignItems": "center",
+      "backgroundColor": "white",
       "justifyContent": "center",
     }
   }
@@ -465,6 +469,7 @@ exports[`Login renders with password error 1`] = `
       <View>
         <TextInput
           autoCapitalize="none"
+          autoCorrect={false}
           keyboardType="email-address"
           onChangeText={[Function]}
           onSubmitEditing={[Function]}
@@ -525,16 +530,14 @@ exports[`Login renders with password error 1`] = `
         focusedOpacity={0.7}
         onPress={[Function]}
       >
-        <View>
-          <Text
-            accessible={true}
-            allowFontScaling={true}
-            disabled={false}
-            ellipsizeMode="tail"
-          >
-            Log In
-          </Text>
-        </View>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          disabled={false}
+          ellipsizeMode="tail"
+        >
+          Log In
+        </Text>
       </TouchableOpacity>
     </View>
   </View>
@@ -570,6 +573,7 @@ exports[`Login renders with password error 1`] = `
     <TouchableOpacity
       activeOpacity={0.2}
       focusedOpacity={0.7}
+      onPress={undefined}
     >
       <Text
         accessible={true}
@@ -589,6 +593,7 @@ exports[`Login renders with pending banner 1`] = `
   contentContainerStyle={
     Object {
       "alignItems": "center",
+      "backgroundColor": "white",
       "justifyContent": "center",
     }
   }
@@ -627,6 +632,7 @@ exports[`Login renders with pending banner 1`] = `
       <View>
         <TextInput
           autoCapitalize="none"
+          autoCorrect={false}
           keyboardType="email-address"
           onChangeText={[Function]}
           onSubmitEditing={[Function]}
@@ -676,16 +682,14 @@ exports[`Login renders with pending banner 1`] = `
         focusedOpacity={0.7}
         onPress={[Function]}
       >
-        <View>
-          <Text
-            accessible={true}
-            allowFontScaling={true}
-            disabled={false}
-            ellipsizeMode="tail"
-          >
-            Log In
-          </Text>
-        </View>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          disabled={false}
+          ellipsizeMode="tail"
+        >
+          Log In
+        </Text>
       </TouchableOpacity>
     </View>
   </View>
@@ -721,6 +725,7 @@ exports[`Login renders with pending banner 1`] = `
     <TouchableOpacity
       activeOpacity={0.2}
       focusedOpacity={0.7}
+      onPress={undefined}
     >
       <Text
         accessible={true}

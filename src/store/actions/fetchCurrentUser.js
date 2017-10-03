@@ -8,6 +8,8 @@ export default function fetchCurrentUser () {
         me {
           id
           name
+          email
+          location
           avatarUrl
           newNotificationCount
           unseenThreadCount
@@ -23,6 +25,17 @@ export default function fetchCurrentUser () {
               avatarUrl
               bannerUrl
             }
+          }
+          skills (first: 100) {
+            total
+            hasMore
+            items {
+              id
+              name
+            }
+          }
+          settings {
+            signupInProgress
           }
         }
       }`

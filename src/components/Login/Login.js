@@ -15,6 +15,10 @@ import { focus } from '../../util/textInput'
 import styles from './Login.styles'
 
 export default class Login extends React.Component {
+  static navigationOptions = {
+    header: null
+  }
+
   constructor (props) {
     super(props)
     this.state = {
@@ -54,10 +58,10 @@ export default class Login extends React.Component {
   }
 
   render () {
-    const { loginWithGoogle, loginWithFacebook, error, emailError, passwordError, pending } = this.props
+    const { loginWithGoogle, loginWithFacebook, error, emailError, passwordError, pending, goToSignup } = this.props
     const { ssoError } = this.state
     const emailIsValid = this.state.emailIsValid
-    return <ScrollView contentContainerStyle={styles.login}>
+    return <ScrollView contentContainerStyle={styles.login} style={styles.container}>
       {ssoError && <Text style={styles.errorBanner}>{ssoError}</Text>}
       {pending && <Text style={styles.banner}>Logging in ...</Text>}
 
@@ -79,6 +83,7 @@ export default class Login extends React.Component {
               onChangeText={email => this.setAndValidateEmail(email)}
               returnKeyType='next'
               autoCapitalize='none'
+              autoCorrect={false}
               keyboardType='email-address'
               onSubmitEditing={() => focus(this.passwordInput)}
               underlineColorAndroid={styles.androidInvisibleUnderline} />
@@ -119,17 +124,15 @@ export default class Login extends React.Component {
       </View>}
       {passwordError && <View style={styles.passwordTriangle} />}
       <View style={styles.paddedRow}>
-        <View style={styles.paddedButton}>
+        <View style={styles.loginButton}>
           <TouchableOpacity onPress={() => this.login()}>
-            <View style={styles.loginButton}>
-              <Text style={styles.loginText}>Log In</Text>
-            </View>
+            <Text style={styles.loginText}>Log In</Text>
           </TouchableOpacity>
         </View>
       </View>
 
       <View style={styles.connectWith}>
-        <Text style={styles.heavyText}>Or connect with:</Text>
+        <Text style={styles.helpText}>Or connect with:</Text>
       </View>
       <View style={styles.paddedRowWithOpacity}>
         <FbLoginButton
@@ -142,8 +145,8 @@ export default class Login extends React.Component {
           />
       </View>
       <View style={styles.signup}>
-        <Text style={styles.accountText}>Don't have an account? </Text>
-        <TouchableOpacity>
+        <Text style={styles.helpText}>Don't have an account? </Text>
+        <TouchableOpacity onPress={goToSignup}>
           <Text style={styles.signupText}>Sign up now</Text>
         </TouchableOpacity>
       </View>

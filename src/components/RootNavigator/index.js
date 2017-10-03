@@ -21,20 +21,22 @@ import NewMessage from '../NewMessage'
 import Thread from '../Thread'
 import ThreadList from '../ThreadList'
 import MemberDetails from '../MemberProfile/MemberDetails'
+import Signup from '../Signup'
+import Login from '../Login'
 import createLinkingAwareContainer from './createLinkingAwareContainer'
 import trackCurrentTab from './trackCurrentTab'
 import { isIOS, urlPrefix } from 'util/platform'
 
 // Tab Home Screens
 // If you change or add tabs you have to edit trackCurrentTab.js
-const tabs = {
+export const tabs = {
   Home: {screen: Home, path: ''},
   Members: {screen: Members, path: 'people'},
   Topics: {screen: Topics, path: 'topics'}
 }
 
 // Screens that work within Tabs (the same tab icon stays highlighted)
-const screensInTabs = {
+export const screensInTabs = {
   Feed: {screen: Feed, path: 'feed'},
   WelcomeScene: {screen: WelcomeScene, path: 'welcome'},
   PostEditor: {screen: PostEditor, path: 'post/:id/edit'},
@@ -47,16 +49,19 @@ const screensInTabs = {
 }
 
 // Screens that work outside of tabs, Settings, Messages, etc.
-const screensInStack = {
+export const screensInStack = {
   Settings: {screen: Settings, path: 'settings'},
   Thread: {screen: Thread, path: 'thread/:id'},
-  ThreadList: {screen: ThreadList, path: 'messages'}
+  ThreadList: {screen: ThreadList, path: 'messages'},
+  Login: {screen: Login, path: 'login'},
+  Signup: {screen: Signup, path: 'signup'}
 }
 
 Object.freeze(tabs)
 Object.freeze(screensInTabs)
 
 const tabNavigatorConfig = {
+  initialRouteName: 'Home',
   tabBarPosition: 'bottom',
   animationEnabled: false,
   swipeEnabled: false,

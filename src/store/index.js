@@ -5,7 +5,6 @@ import promiseMiddleware from 'redux-promise'
 import apiMiddleware from './middleware/api'
 import graphQLMiddleware from './middleware/graphQL'
 import { createLogger } from 'redux-logger'
-import extractModelMiddleware from './middleware/extractModel'
 import optimisticMiddleware from './middleware/optimistic'
 import pendingMiddleware from './middleware/pending'
 import { AsyncStorage } from 'react-native'
@@ -16,7 +15,6 @@ import { composeWithDevTools } from 'remote-redux-devtools'
 const middleware = compact([
   graphQLMiddleware,
   apiMiddleware,
-  extractModelMiddleware,
   optimisticMiddleware,
   pendingMiddleware,
   promiseMiddleware,
@@ -42,7 +40,7 @@ export default function getStore () {
   })
 }
 
-function getInitialState () {
+export function getInitialState () {
   return Promise.resolve(getEmptyState())
   // for dev
   // eslint-disable-next-line no-unreachable
@@ -50,7 +48,7 @@ function getInitialState () {
   .then(state => state ? JSON.parse(state) : getEmptyState())
 }
 
-function getEmptyState () {
+export function getEmptyState () {
   return {
     orm: orm.getEmptyState()
   }

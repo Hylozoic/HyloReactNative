@@ -42,3 +42,27 @@ Object {
   "type": "LOGIN_WITH_GOOGLE",
 }
 `;
+
+exports[`Login mapStateToProps maps the action generators 1`] = `
+Object {
+  "login": [Function],
+  "loginWithFacebook": [Function],
+  "loginWithGoogle": [Function],
+}
+`;
+
+exports[`Login mapStateToProps maps the action generators 2`] = `
+Array [
+  Array [
+    Object {
+      "payload": Object {
+        "api": Object {
+          "method": "post",
+          "path": "/noo/login/facebook-token/oauth?access_token=token",
+        },
+      },
+      "type": "LOGIN_WITH_FACEBOOK",
+    },
+  ],
+]
+`;

@@ -1,5 +1,9 @@
 import { Dimensions, StyleSheet } from 'react-native'
-import { caribbeanGreen } from 'style/colors'
+import { caribbeanGreen, rhino60 } from 'style/colors'
+import { isIOS } from 'util/platform'
+
+const screenHeight = Dimensions.get('window').height
+const smallScreenFudge = screenHeight < 550 ? 0.6 : 1
 
 const mixins = {
   loginContainer: {
@@ -49,16 +53,19 @@ const mixins = {
 }
 
 export default {
+  container: {
+    backgroundColor: 'white'
+  },
   logo: {
     height: 80,
     width: 80,
-    marginTop: Math.pow(Dimensions.get('window').height, 1.01) / 8,
-    marginBottom: 12
+    marginTop: (screenHeight - 480) * 0.6,
+    marginBottom: 10
   },
   title: {
     fontSize: 24,
     color: caribbeanGreen,
-    marginBottom: 24,
+    marginBottom: 20 * smallScreenFudge,
     fontFamily: 'Circular-Bold'
   },
   iconOpaque: {
@@ -70,6 +77,7 @@ export default {
     color: caribbeanGreen
   },
   login: {
+    backgroundColor: 'white',
     justifyContent: 'center',
     alignItems: 'center'
   },
@@ -86,35 +94,30 @@ export default {
     flex: 0.5
   },
   signup: {
-    marginTop: 12,
-    marginBottom: 30,
+    marginTop: 10,
+    marginBottom: 20,
     flexDirection: 'row'
   },
   signupText: {
     color: caribbeanGreen,
     fontFamily: 'Circular-Bold'
   },
-  loginButton: {
-    marginTop: 7
-  },
   loginText: {
     color: 'white',
     backgroundColor: 'transparent',
     textAlign: 'center',
     fontFamily: 'Circular-Book',
-    fontSize: 18
+    fontSize: 18,
+    lineHeight: isIOS ? 32 : 28
   },
   connectWith: {
-    marginTop: 2,
-    paddingBottom: 10,
-    opacity: 0.5
+    marginTop: 4 * smallScreenFudge,
+    marginBottom: 14 * smallScreenFudge
   },
-  heavyText: {
-    fontFamily: 'Circular-Book'
-  },
-  accountText: {
+  helpText: {
     fontFamily: 'Circular-Book',
-    opacity: 0.7
+    fontSize: 14,
+    color: rhino60
   },
   paddedRow: mixins.paddedRow,
   paddedRowWithOpacity: {
@@ -133,15 +136,14 @@ export default {
     borderRadius: 5,
     minHeight: 40
   },
-  paddedButton: {
+  loginButton: {
     flex: 1,
     flexDirection: 'row',
-    minHeight: 30,
     backgroundColor: caribbeanGreen,
     height: 36,
     borderRadius: 50,
     justifyContent: 'center',
-    marginTop: 24
+    marginTop: 22
   },
   paddedBorderValid: {
     flex: 1,

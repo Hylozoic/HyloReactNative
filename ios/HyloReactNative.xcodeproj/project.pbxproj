@@ -42,6 +42,7 @@
 		57859702B413478A8B272853 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C5672ACA397455C9B9FA940 /* SystemConfiguration.framework */; };
 		59582AB5127847F4B8351B2D /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0CB25F82AC1949C7AC5AA8C3 /* MaterialCommunityIcons.ttf */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
+		7636F1FA120D4E05A3524BE6 /* libRNBackgroundTimer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B9500B5880E94352BF665415 /* libRNBackgroundTimer.a */; };
 		7768133609C648E3B87571D9 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 434BBF3F5A7F4A0E93FA252D /* Zocial.ttf */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		85DC696FF9A94E13B2D0E5AD /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4B384F5F186D47098722A867 /* Foundation.ttf */; };
@@ -132,6 +133,20 @@
 			proxyType = 2;
 			remoteGlobalIDString = DA5891D81BA9A9FC002B4DB2;
 			remoteInfo = RNDeviceInfo;
+		};
+		2150DC7C1F7C7EE600D0D60C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4B4CA522E309474680BE9FF4 /* RNBackgroundTimer.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RNBackgroundTimer;
+		};
+		2150DC7E1F7C7EE600D0D60C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4B4CA522E309474680BE9FF4 /* RNBackgroundTimer.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 641926921ECB4257009CF731;
+			remoteInfo = "RNBackgroundTimer-tvOS";
 		};
 		215674581EF4B50300E04217 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -381,6 +396,7 @@
 		434BBF3F5A7F4A0E93FA252D /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
 		49680F41A48E4462BD6A3D4A /* RCTOneSignal.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTOneSignal.xcodeproj; path = "../node_modules/react-native-onesignal/ios/RCTOneSignal.xcodeproj"; sourceTree = "<group>"; };
 		4B384F5F186D47098722A867 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
+		4B4CA522E309474680BE9FF4 /* RNBackgroundTimer.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNBackgroundTimer.xcodeproj; path = "../node_modules/react-native-background-timer/ios/RNBackgroundTimer.xcodeproj"; sourceTree = "<group>"; };
 		4BA1D430DD6C46F781C67BCF /* AddressBook.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		4D3FA7F0E1504BFAA5795C32 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
 		5AF97D1AA7A06ED99997C525 /* Pods-HyloReactNative.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HyloReactNative.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HyloReactNative/Pods-HyloReactNative.debug.xcconfig"; sourceTree = "<group>"; };
@@ -404,6 +420,7 @@
 		B337FC1A1E8AD5FA006F9336 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B5D4613FF5E54E88BAEB1223 /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
 		B726CF8E1F34ECE100CA78B5 /* RNImagePicker.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNImagePicker.xcodeproj; path = "../node_modules/react-native-image-picker/ios/RNImagePicker.xcodeproj"; sourceTree = "<group>"; };
+		B9500B5880E94352BF665415 /* libRNBackgroundTimer.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNBackgroundTimer.a; sourceTree = "<group>"; };
 		C399AB4A83A944CC9B2E2DBF /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
 		D522416CACFEA85FA9591F6F /* Pods_HyloReactNative.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HyloReactNative.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7FA3503889940E79431AEA6 /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
@@ -453,6 +470,7 @@
 				98297CCB34594198A3B31CAB /* libRNVectorIcons.a in Frameworks */,
 				31F223B2D6D44A11ABE335C2 /* libReact-Native-Webview-Bridge.a in Frameworks */,
 				D5FDCD6B684B4978913EF43B /* libRCTOneSignal.a in Frameworks */,
+				7636F1FA120D4E05A3524BE6 /* libRNBackgroundTimer.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -581,6 +599,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		2150DC781F7C7EE600D0D60C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2150DC7D1F7C7EE600D0D60C /* libRNBackgroundTimer.a */,
+				2150DC7F1F7C7EE600D0D60C /* libRNBackgroundTimer.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		215674381EF4B50300E04217 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -608,6 +635,7 @@
 				B5D4613FF5E54E88BAEB1223 /* libRNVectorIcons.a */,
 				E3C95781B65442499C1D08BF /* libReact-Native-Webview-Bridge.a */,
 				92ABB3FBD36F4FD98AED2116 /* libRCTOneSignal.a */,
+				B9500B5880E94352BF665415 /* libRNBackgroundTimer.a */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -687,6 +715,7 @@
 				C399AB4A83A944CC9B2E2DBF /* RNVectorIcons.xcodeproj */,
 				796A05B8361E44E0877BCF74 /* React-Native-Webview-Bridge.xcodeproj */,
 				49680F41A48E4462BD6A3D4A /* RCTOneSignal.xcodeproj */,
+				4B4CA522E309474680BE9FF4 /* RNBackgroundTimer.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -928,6 +957,10 @@
 					ProjectRef = 146833FF1AC3E56700842450 /* React.xcodeproj */;
 				},
 				{
+					ProductGroup = 2150DC781F7C7EE600D0D60C /* Products */;
+					ProjectRef = 4B4CA522E309474680BE9FF4 /* RNBackgroundTimer.xcodeproj */;
+				},
+				{
 					ProductGroup = 21398DED1E7351A9003139E1 /* Products */;
 					ProjectRef = 23891DFFC00D4139B0A02519 /* RNDeviceInfo.xcodeproj */;
 				},
@@ -1014,6 +1047,20 @@
 			fileType = archive.ar;
 			path = libRNDeviceInfo.a;
 			remoteRef = 21398E091E7351A9003139E1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2150DC7D1F7C7EE600D0D60C /* libRNBackgroundTimer.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNBackgroundTimer.a;
+			remoteRef = 2150DC7C1F7C7EE600D0D60C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2150DC7F1F7C7EE600D0D60C /* libRNBackgroundTimer.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNBackgroundTimer.a;
+			remoteRef = 2150DC7E1F7C7EE600D0D60C /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		215674591EF4B50300E04217 /* libRNGoogleSignin.a */ = {
@@ -1390,12 +1437,14 @@
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-webview-bridge-updated/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-onesignal/ios/RCTOneSignal/**",
+					"$(SRCROOT)/../node_modules/react-native-background-timer/ios",
 				);
 				INFOPLIST_FILE = HyloReactNativeTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1426,12 +1475,14 @@
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-webview-bridge-updated/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-onesignal/ios/RCTOneSignal/**",
+					"$(SRCROOT)/../node_modules/react-native-background-timer/ios",
 				);
 				INFOPLIST_FILE = HyloReactNativeTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1457,7 +1508,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 15;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = L4KZBPS2F3;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)/**";
@@ -1469,6 +1520,7 @@
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-webview-bridge-updated/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-onesignal/ios/RCTOneSignal/**",
+					"$(SRCROOT)/../node_modules/react-native-background-timer/ios",
 				);
 				INFOPLIST_FILE = HyloReactNative/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1496,7 +1548,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_TEAM = L4KZBPS2F3;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)/**";
 				HEADER_SEARCH_PATHS = (
@@ -1507,6 +1559,7 @@
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-webview-bridge-updated/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-onesignal/ios/RCTOneSignal/**",
+					"$(SRCROOT)/../node_modules/react-native-background-timer/ios",
 				);
 				INFOPLIST_FILE = HyloReactNative/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;

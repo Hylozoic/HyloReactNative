@@ -1,0 +1,137 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`action generators addSkill matches snapshot 1`] = `
+Object {
+  "graphql": Object {
+    "query": "mutation ($name: String) {
+        addSkill(name: $name) {
+          id,
+          name
+        }
+      }",
+    "variables": Object {
+      "name": "Singing",
+    },
+  },
+  "meta": Object {
+    "name": "Singing",
+    "optimistic": true,
+  },
+  "type": "SignupFlow/ADD_SKILL",
+}
+`;
+
+exports[`action generators removeSkill matches snapshot 1`] = `
+Object {
+  "graphql": Object {
+    "query": "mutation ($name: String) {
+        removeSkill(name: $name) {
+          success
+        }
+      }",
+    "variables": Object {
+      "name": "Singing",
+    },
+  },
+  "meta": Object {
+    "name": "Singing",
+    "optimistic": true,
+  },
+  "type": "SignupFlow/REMOVE_SKILL",
+}
+`;
+
+exports[`action generators setSkill matches snapshot 1`] = `
+Object {
+  "payload": "Singing",
+  "type": "SignupFlow/SET_SKILL",
+}
+`;
+
+exports[`action generators setUserSkills matches snapshot 1`] = `
+Object {
+  "payload": Array [
+    "one",
+    "two",
+  ],
+  "type": "SignupFlow/SET_USER_SKILLS",
+}
+`;
+
+exports[`action generators signup matches snapshot 1`] = `
+Object {
+  "payload": Object {
+    "api": Object {
+      "method": "post",
+      "params": Object {
+        "email": "b",
+        "login": true,
+        "name": "a",
+        "password": "c",
+        "resp": "user",
+      },
+      "path": "/noo/user",
+    },
+  },
+  "type": "SignupFlow/SIGNUP",
+}
+`;
+
+exports[`action generators updateLocalUserSettings matches snapshot 1`] = `
+Object {
+  "payload": Object {
+    "email": "b",
+    "name": "a",
+    "password": "c",
+  },
+  "type": "SignupFlow/UPDATE_LOCAL_USER_SETTINGS",
+}
+`;
+
+exports[`action generators updateUserSettings matches snapshot 1`] = `
+Object {
+  "graphql": Object {
+    "query": "mutation ($changes: MeInput) {
+        updateMe(changes: $changes) {
+          id
+        }
+      }",
+    "variables": Object {
+      "changes": Object {
+        "email": "b",
+        "name": "a",
+        "password": "c",
+      },
+    },
+  },
+  "meta": Object {
+    "changes": Object {
+      "email": "b",
+      "name": "a",
+      "password": "c",
+    },
+    "optimistic": true,
+  },
+  "type": "SignupFlow/UPDATE_USER_SETTINGS",
+}
+`;
+
+exports[`reducer on ADD_SKILL_PENDING adds a skill 1`] = `
+Object {
+  "skill": "",
+  "userSkills": Array [
+    "oneing",
+    "twoing",
+    "threeing",
+  ],
+}
+`;
+
+exports[`reducer on REMOVE_SKILL_PENDING removes a skill 1`] = `
+Object {
+  "userSkills": Array [
+    "oneing",
+    "threeing",
+  ],
+}
+`;
