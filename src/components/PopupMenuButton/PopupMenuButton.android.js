@@ -3,7 +3,7 @@ import { View, UIManager, findNodeHandle, TouchableOpacity } from 'react-native'
 
 export default class PopupMenuButton extends Component {
   onError (e) {
-    console.error('Error opening popupMenu', e)
+    throw new Error('Error opening popup')
   }
 
   onSelect = (action, index) => {
