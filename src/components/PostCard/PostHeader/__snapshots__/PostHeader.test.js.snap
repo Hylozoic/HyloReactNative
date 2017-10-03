@@ -1,5 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`PostLabel renders 1`] = `
+<View>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    disabled={false}
+    ellipsizeMode="tail"
+  >
+    REQUEST
+  </Text>
+</View>
+`;
+
 exports[`PostMenu returns a popupmenu when deleting allowed 1`] = `
 <PopupMenuButton
   actions={
