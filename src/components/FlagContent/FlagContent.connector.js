@@ -1,6 +1,5 @@
 import { connect } from 'react-redux'
 import { flagContent } from './FlagContent.store'
-import { get } from 'lodash/fp'
 
 export function mapDispatchToProps (dispatch) {
   return {

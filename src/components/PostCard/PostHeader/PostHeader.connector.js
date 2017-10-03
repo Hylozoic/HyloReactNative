@@ -9,7 +9,6 @@ export function mapStateToProps (state, props) {
 
   const canEdit = currentUser && creator && currentUser.id === creator.id
   const canFlag = currentUser && creator && currentUser.id !== creator.id
-  const canModerate = currentUser && currentUser.canModerate(community)
 
   return {
     currentUser,

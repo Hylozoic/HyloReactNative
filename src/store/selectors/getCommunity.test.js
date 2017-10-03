@@ -5,7 +5,7 @@ describe('getCommunity', () => {
   let session
   beforeAll(() => {
     session = orm.mutableSession(orm.getEmptyState())
-    session.Community.create({ id: '55',  slug: 'myslug' })
+    session.Community.create({ id: '55', slug: 'myslug' })
   })
 
   it('gets by id correctly', () => {

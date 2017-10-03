@@ -2,7 +2,6 @@ import 'react-native'
 import React from 'react'
 import PopupMenuButton from './PopupMenuButton.android'
 import TestRenderer from 'react-test-renderer'
-import { TouchableOpacity } from 'react-native'
 
 it('matches the last snapshot', () => {
   const action1 = jest.fn()
@@ -57,5 +56,4 @@ it('doesnt call onSelect if clicked away', () => {
 
   instance.onSelect('dismissed', 1)
   expect(props.onSelect).not.toHaveBeenCalled()
-
 })

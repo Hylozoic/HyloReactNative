@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import { Modal, Text, TouchableOpacity, View, FlatList, List} from 'react-native'
+import { Modal, Text, TouchableOpacity, View, FlatList } from 'react-native'
 import Icon from '../Icon'
 import { toUpper, isEmpty, trim } from 'lodash'
-import Prompt from 'react-native-prompt';
+import Prompt from 'react-native-prompt'
 
 export default class FlagContent extends Component {
   state = {
@@ -16,13 +16,13 @@ export default class FlagContent extends Component {
   }
 
   closeModal = () => {
-    this.setState({promptVisible: false, highlightRequired: false});
+    this.setState({promptVisible: false, highlightRequired: false})
     if (this.props.onClose) {
       this.props.onClose()
     }
   }
 
-  isOptionalExplanation = () => this.state.selectedCategory === 'other' ? false : true
+  isOptionalExplanation = () => this.state.selectedCategory !== 'other'
 
   submit = (value) => {
     const { submitFlagContent, linkData } = this.props
@@ -45,7 +45,7 @@ export default class FlagContent extends Component {
       {title: 'Other', id: 'other'}
     ]
 
-    const { type = "content" } = this.props
+    const { type = 'content' } = this.props
     const { selectedCategory, highlightRequired } = this.state
 
     let inputProps = {
@@ -56,22 +56,22 @@ export default class FlagContent extends Component {
       <View>
         <Prompt
           title={`Why was this ${type} '${selectedCategory}'`}
-          placeholder={`Explanation ${this.isOptionalExplanation() ? '' :  highlightRequired ? '(Required)' : ''}`}
+          placeholder={`Explanation ${this.isOptionalExplanation() ? '' : highlightRequired ? '(Required)' : ''}`}
           textInputProps={inputProps}
-          visible={ this.state.promptVisible }
-          onCancel={ () => this.setState({
+          visible={this.state.promptVisible}
+          onCancel={() => this.setState({
             promptVisible: false,
-            highlightRequired: false,
-          }) }
+            highlightRequired: false
+          })}
           submitText='Submit'
-          onSubmit={this.submit}/>
+          onSubmit={this.submit} />
         <Modal
-          transparent={true}
-          visible={true}
+          transparent
+          visible
           onRequestClose={() => this.closeModal()} >
           <View style={styles.dialog}>
-            <View style={styles.dialogOverlay}/>
-            <View style={styles.spacer}/>
+            <View style={styles.dialogOverlay} />
+            <View style={styles.spacer} />
             <View style={styles.dialogContent}>
               <View style={styles.title}>
                 <Text style={styles.titleText}>
@@ -98,12 +98,11 @@ export function FlagOption ({id, title, onPress}) {
   return <TouchableOpacity style={styles.actionButton} onPress={onPress}>
     <Text style={styles.actionText}>{title}</Text>
   </TouchableOpacity>
-
 }
 
 const styles = {
   dialog: {
-    flex: 1,
+    flex: 1
   },
   dialogOverlay: {
     backgroundColor: 'rgba(44, 64, 90, 0.7)',
@@ -154,7 +153,7 @@ const styles = {
     paddingHorizontal: 20,
     borderTopWidth: 0.5,
     borderBottomWidth: 0.5,
-    borderColor: '#CCD1D7',
+    borderColor: '#CCD1D7'
   },
   actionText: {
     fontFamily: 'Circular-Book',

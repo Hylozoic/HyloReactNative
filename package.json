@@ -10,6 +10,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "babel-eslint": "^8.0.1",
     "babel-plugin-inline-dotenv": "^1.1.1",
     "babel-plugin-transform-inline-environment-variables": "^0.2.0",
     "babel-plugin-transform-runtime": "^6.23.0",
@@ -44,6 +45,7 @@
     "redux-promise": "^0.5.3",
     "sails.io.js": "1.1.10",
     "socket.io-client": "^2.0.3",
+    "standard": "^10.0.3",
     "striptags": "~2",
     "tinycolor2": "^1.4.1",
     "url": "^0.11.0"

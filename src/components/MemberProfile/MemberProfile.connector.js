@@ -19,7 +19,6 @@ export function mapStateToProps (state, props) {
 }
 
 export function mapDispatchToProps (dispatch, props) {
-  const goToCommunity = id => props.navigation.navigate('Feed', {communityId: id})
   return {
     fetchPerson: id => dispatch(fetchPerson(id)),
     goToCommunity: makeGoToCommunity(dispatch, props.navigation)

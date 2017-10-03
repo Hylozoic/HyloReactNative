@@ -50,7 +50,7 @@ export default class MemberProfile extends React.Component {
     const header = <View>
       <MemberBanner person={person} />
       <View style={styles.marginContainer}>
-        <MemberHeader person={person} flagMember={flagMember}/>
+        <MemberHeader person={person} flagMember={flagMember} />
         <ReadMoreButton goToDetails={goToDetails} />
       </View>
       {flaggingVisible && <FlagContent type='member'
@@ -81,7 +81,7 @@ export function MemberHeader ({ person, flagMember }) {
       <Text style={styles.name}>{name}</Text>
       <View style={styles.icons}>
         <Icon name='Messages' style={styles.icon} />
-        <MemberMenu { ... {flagMember}}/>
+        <MemberMenu {... {flagMember}} />
       </View>
     </View>
     <Text style={styles.location}>{location}</Text>
@@ -112,7 +112,7 @@ export function MemberMenu ({flagMember}) {
   const destructiveButtonIndex = actions[0][0] === 'Flag This Member' ? 0 : -1
 
   return <PopupMenuButton actions={actions.map(x => x[0])} onSelect={onSelect}
-                          destructiveButtonIndex={destructiveButtonIndex}>
+    destructiveButtonIndex={destructiveButtonIndex}>
     <Icon name='More' style={styles.lastIcon} />
   </PopupMenuButton>
 }

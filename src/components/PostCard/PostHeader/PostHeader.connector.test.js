@@ -26,7 +26,7 @@ describe('mapStateToProps', () => {
     }
 
     const ownProps = {creator: {id: 20}}
-    const { canFlag, community, currentUser } = mapStateToProps(state, ownProps)
+    const { canFlag } = mapStateToProps(state, ownProps)
 
     expect(canFlag).toBeFalsy()
   })
@@ -44,7 +44,7 @@ describe('mapStateToProps', () => {
 
     expect(canFlag).toBeTruthy()
   })
-  
+
   it('can edit post when user is creator', () => {
     const session = orm.session(orm.getEmptyState())
     session.Me.create({id: 20})
