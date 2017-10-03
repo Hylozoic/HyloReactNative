@@ -1,6 +1,6 @@
 import Dimensions from 'Dimensions'
 const bgImageWidth = Dimensions.get('window').width
-const bgImageHeight = bgImageWidth * (598 / 748) // 1498 and 1191 are the width and height of the image asset
+const bgImageHeight = bgImageWidth * (598 / 748) // 748 and 598 are the width and height of the image asset
 import loginStyles from '../Login/Login.styles'
 import { caribbeanGreen } from 'style/colors'
 
