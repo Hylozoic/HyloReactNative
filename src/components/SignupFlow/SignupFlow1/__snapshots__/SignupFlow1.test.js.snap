@@ -28,7 +28,7 @@ exports[`hides password, and changes button when pending  1`] = `
     disabled={false}
     ellipsizeMode="tail"
   >
-    Howdie stranger!
+    Hi there stranger!
   </Text>
   <Text
     accessible={true}
@@ -88,7 +88,7 @@ exports[`matches last snapshot 1`] = `
     disabled={false}
     ellipsizeMode="tail"
   >
-    Howdie stranger!
+    Hi there stranger!
   </Text>
   <Text
     accessible={true}

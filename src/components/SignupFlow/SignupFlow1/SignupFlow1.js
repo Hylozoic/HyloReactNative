@@ -87,7 +87,7 @@ export default class SignupFlow1 extends React.Component {
     const { errors } = this.state
 
     return <KeyboardFriendlyView style={styles.container} {...kavProps}>
-      <Text style={styles.title}>Howdie stranger!</Text>
+      <Text style={styles.title}>Hi there stranger!</Text>
       <Text style={styles.subTitle}>
         To kick things off, tell us a bit more about yourself and get your account off the ground.
       </Text>

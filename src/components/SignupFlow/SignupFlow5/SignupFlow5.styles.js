@@ -28,7 +28,8 @@ export default {
   buttonRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 10
+    marginTop: 10,
+    paddingBottom: 20
   },
   changesButton: {
     ...styles.continueButton,
