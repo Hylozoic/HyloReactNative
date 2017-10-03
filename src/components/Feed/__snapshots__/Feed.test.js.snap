@@ -24,12 +24,14 @@ exports[`renders correctly 1`] = `
           }
         }
         newPost={[Function]}
+        topicName="amazing"
       />
     }
     showCommunities={false}
     showMember={undefined}
     showPost={[Function]}
     showTopic={undefined}
+    topicName="amazing"
   />
 </View>
 `;

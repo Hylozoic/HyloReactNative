@@ -19,7 +19,8 @@ it('renders correctly', () => {
     newPost={newPost}
     showPost={() => {}}
     editPost={() => {}}
-    goToCommunity={() => {}} />)
+    goToCommunity={() => {}}
+    topicName={'amazing'} />)
   const actual = renderer.getRenderOutput()
 
   expect(actual).toMatchSnapshot()

@@ -3,8 +3,16 @@ import { View } from 'react-native'
 import FeedList from '../FeedList'
 import FeedBanner from '../FeedBanner'
 import styles from './Feed.styles'
+import { get } from 'lodash/fp'
 
 export default class Feed extends Component {
+  static navigationOptions = ({ navigation }) => {
+    const topicName = get('state.params.topicName', navigation)
+    return {
+      headerTitle: topicName ? '#' + topicName : 'Home'
+    }
+  }
+
   render () {
     const {
       community,
@@ -14,7 +22,8 @@ export default class Feed extends Component {
       editPost,
       showMember,
       showTopic,
-      goToCommunity
+      goToCommunity,
+      topicName
     } = this.props
 
     return <View style={styles.container}>
@@ -26,9 +35,14 @@ export default class Feed extends Component {
         showTopic={showTopic}
         showCommunities={!community}
         goToCommunity={goToCommunity}
+        topicName={topicName}
         header={
-          <FeedBanner community={community} currentUser={currentUser}
-            all={!community} newPost={newPost} />
+          <FeedBanner
+            community={community}
+            currentUser={currentUser}
+            all={!community}
+            newPost={newPost}
+            topicName={topicName} />
         } />
     </View>
   }

@@ -5,12 +5,15 @@ import makeGoToCommunity from '../../store/actions/makeGoToCommunity'
 import { get } from 'lodash/fp'
 
 export function mapStateToProps (state, props) {
-  const communityId = props.communityId || props.navigation.state.params.communityId
+  const params = get('state.params', props.navigation) || {}
+  const communityId = props.communityId || params.communityId
+  const topicName = props.topicName || params.topicName
   const community = getCommunity(state, {id: communityId})
   const currentUser = getMe(state)
   return {
     currentUser,
-    community
+    community,
+    topicName
   }
 }
 
@@ -20,19 +23,20 @@ export function mapDispatchToProps (dispatch, { navigation }) {
     showPost: id => navigation.navigate('PostDetails', {id}),
     editPost: id => navigation.navigate('PostEditor', {id}),
     showMember: id => navigation.navigate('MemberProfile', {id}),
-    showTopic: topicName => navigation.navigate('Feed', {topicName}),
+    showTopic: communityId => topicName =>
+      navigation.navigate('Feed', {communityId, topicName}),
     goToCommunity: makeGoToCommunity(dispatch, navigation)
   }
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
-  const { community } = stateProps
-  const { newPost } = dispatchProps
+  const communityId = get('community.id', stateProps)
   return {
     ...stateProps,
     ...dispatchProps,
     ...ownProps,
-    newPost: () => newPost(get('id', community))
+    newPost: () => dispatchProps.newPost(communityId),
+    showTopic: dispatchProps.showTopic(communityId)
   }
 }
 
