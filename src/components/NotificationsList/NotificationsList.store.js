@@ -103,23 +103,26 @@ export function markAllActivitiesRead () {
   }
 }
 
-export function goToNotification (notification) {
-  return 
+export function getOnPress (notification, { navigate }) {
+
+  return () => {
+  }
 }
 
 function presentedText (text) {
   return decode(striptags(text, [], ' '))
-  .replace(/\s+/g, ' ')
-  .substring(0, NOTIFICATION_TEXT_MAX)
+    .replace(/\s+/g, ' ')
+    .substring(0, NOTIFICATION_TEXT_MAX)
 }
 
-function refineActivity ({ action, comment, community, post, reasons }, actor) {
+function refineActivity ({ action, comment, community, post, reasons }, actor, { navigate }) {
   switch (action) {
     case ACTION_COMMENT_MENTION:
       return {
         body: `wrote: ${presentedText(comment.text)}`,
         header: `mentioned you in a comment on`,
         nameInHeader: true,
+        onPress: () => navigate('PostDetails', { id: post.id }),
         title: post.title
       }
 
@@ -127,6 +130,7 @@ function refineActivity ({ action, comment, community, post, reasons }, actor) {
       return {
         body: `wrote: ${presentedText(comment.text)}`,
         header: `New Comment on`,
+        onPress: () => navigate('PostDetails', { id: post.id }),
         title: post.title
       }
 
@@ -134,6 +138,7 @@ function refineActivity ({ action, comment, community, post, reasons }, actor) {
       return {
         body: `wrote: ${presentedText(post.details)}`,
         header: `mentioned you`,
+        onPress: () => navigate('PostDetails', { id: post.id }),
         nameInHeader: true
       }
 
@@ -143,6 +148,7 @@ function refineActivity ({ action, comment, community, post, reasons }, actor) {
       return {
         body: `wrote: ${presentedText(post.details)}`,
         header: `New Post in`,
+        onPress: () => navigate('PostDetails', { id: post.id })
       }
 
     case ACTION_JOIN_REQUEST:
@@ -150,36 +156,45 @@ function refineActivity ({ action, comment, community, post, reasons }, actor) {
         body: `asked to join`,
         community: community.name,
         header: `New join request`,
+        onPress: () => navigate('Settings')
       }
 
     case ACTION_APPROVED_JOIN_REQUEST:
       return {
         body: `approved your request to join`,
+        community: community.name,
         header: `Join Request Approved`,
+        onPress: () => navigate('Feed', { communityId: community.id })
       }
   }
 }
 
-function refineNotification ({ activity, createdAt, id }, i, notifications) {
-  const { action, actor, meta, unread } = activity
-  // Only show separator between read and unread notifications
-  const avatarSeparator = i !== notifications.length - 1
-    ? unread !== notifications[i + 1].activity.unread
-    : false
+function refineNotification (navigation) {
+  return ({ activity, createdAt, id }, i, notifications) => {
+    const { action, actor, meta, unread } = activity
+    // Only show separator between read and unread notifications
+    const avatarSeparator = i !== notifications.length - 1
+      ? unread !== notifications[i + 1].activity.unread
+      : false
 
-  return {
-    id,
-    activityId: activity.id,
-    actor: pick([ 'avatarUrl', 'name' ], actor),
-    avatarSeparator,
-    createdAt: humanDate(createdAt),
-    ...refineActivity(activity, actor),
-    unread
+    return {
+      id,
+      activityId: activity.id,
+      actor: pick([ 'avatarUrl', 'name' ], actor),
+      avatarSeparator,
+      createdAt: humanDate(createdAt),
+      ...refineActivity(activity, actor, navigation),
+      unread
+    }
   }
 }
 
 export const getNotifications = createSelector(
   orm,
   state => state.orm,
-  session => session.Notification.all().toModelArray().map(refineNotification)
+  (_, { navigation }) => navigation,
+  (session, navigation) => session.Notification
+    .all()
+    .toModelArray()
+    .map(refineNotification(navigation))
 )

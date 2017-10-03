@@ -1,22 +1,41 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
-import { any, bool, shape, string } from 'prop-types'
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { any, bool, func, shape, string } from 'prop-types'
 
 import Avatar from '../Avatar'
 
 import styles from './NotificationCard.styles'
 
-const renderName = ({ actor, nameInHeader }) =>
-  nameInHeader ? <Text style={styles.name}>{`${actor.name} `}</Text> : null
+const renderCommunity = community => community
+  ? <Text style={styles.community}>${` community`}</Text>
+  : null
+
+const renderFirstName = ({ name }) =>
+  <Text style={styles.name}>{`${name.split(' ')[0]} `}</Text>
+
+const renderName = ({ actor, nameInHeader }) => nameInHeader
+  ? <Text style={styles.name}>{`${actor.name} `}</Text>
+  : null
 
 const renderTitle = title => title
   ? <Text numberOfLines={2} style={styles.title}>{` ${title}`}</Text>
   : null
 
 export default function NotificationCard ({ notification }) {
-  const { actor, avatarSeparator, body, createdAt, header, title, unread } = notification
+  const {
+    actor,
+    avatarSeparator,
+    body,
+    community,
+    createdAt,
+    header,
+    onPress,
+    title,
+    unread
+  } = notification
+  const highlight = unread ? styles.highlight : null
 
-  return <View style={[ styles.container, unread ? styles.highlight : null ]}>
+  return <TouchableOpacity onPress={onPress} style={[ styles.container, highlight ]}>
     <View style={avatarSeparator ? styles.separator : null}>
       <Avatar avatarUrl={actor.avatarUrl} style={styles.avatar} />
     </View>
@@ -27,12 +46,13 @@ export default function NotificationCard ({ notification }) {
         {renderTitle(title)}
       </Text>
       <Text style={styles.text} numberOfLines={2}>
-        <Text style={styles.name}>{`${actor.name} `}</Text>
+        {renderFirstName(actor)}
         {body}
+        {renderCommunity(community)}
       </Text>
       <Text style={styles.date}>{createdAt}</Text>
     </View>
-  </View>
+  </TouchableOpacity>
 }
 
 NotificationCard.propTypes = {
@@ -47,6 +67,7 @@ NotificationCard.propTypes = {
     body: string,
     header: string,
     nameInHeader: bool,
+    onPress: func,
     title: string,
     unread: bool
   })
