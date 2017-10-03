@@ -2,9 +2,14 @@ import React, { Component } from 'react'
 import { View, UIManager, findNodeHandle, TouchableOpacity } from 'react-native'
 
 export default class PopupMenuButton extends Component {
-
   onError (e) {
-    console.error("Error opening popupMenu", e)
+    throw new Error('Error opening popup')
+  }
+
+  onSelect = (action, index) => {
+    if (action === 'itemSelected') {
+      this.props.onSelect(index)
+    }
   }
 
   onPress = () => {
@@ -13,7 +18,7 @@ export default class PopupMenuButton extends Component {
         findNodeHandle(this.button),
         this.props.actions,
         this.onError,
-        this.props.onSelect
+        this.onSelect
       )
     }
   }

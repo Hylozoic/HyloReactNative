@@ -62,7 +62,7 @@ exports[`PostDetails renders correctly 1`] = `
     }
     header={
       <View>
-        <PostHeader
+        <Connect(PostHeader)
           communities={
             Array [
               Object {

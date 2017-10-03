@@ -1,2 +1,4 @@
 import PostHeader from './PostHeader'
-export default PostHeader
+import connector from './PostHeader.connector'
+
+export default connector(PostHeader)
