@@ -63,15 +63,15 @@ it('renders correctly with no flagging', () => {
   ]
   const renderer = new ReactShallowRenderer()
   renderer.render(<PostHeader
-  creator={creator}
-  communities={communities}
-  showCommunity
-  postId={20}
-  slug='olympus'
-  canFlag={false}
-  deletePost={() => {}}
-  editPost={() => {}}
-  date={new Date(new Date().getTime() - 60000 * 10)} />)
+    creator={creator}
+    communities={communities}
+    showCommunity
+    postId={20}
+    slug='olympus'
+    canFlag={false}
+    deletePost={() => {}}
+    editPost={() => {}}
+    date={new Date(new Date().getTime() - 60000 * 10)} />)
   const actual = renderer.getRenderOutput()
 
   expect(actual).toMatchSnapshot()
