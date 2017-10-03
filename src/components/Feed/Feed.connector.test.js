@@ -1,19 +1,25 @@
 import { mapStateToProps } from './Feed.connector'
 import orm from 'store/models'
 
+let session, state
+
+beforeEach(() => {
+  session = orm.mutableSession(orm.getEmptyState())
+  state = {orm: session.state}
+})
+
 it('handles a null navigation object', () => {
-  const state = {}
   const props = {}
   expect(mapStateToProps(state, props)).toEqual({
-
+    community: null,
+    currentUser: undefined,
+    topicName: undefined
   })
 })
 
 it('gets props from navigation object', () => {
-  const session = orm.session(orm.getEmptyState())
   session.Community.create({id: '7', slug: 'world'})
   session.Me.create({name: 'me'})
-  const state = {orm: session.state}
   const props = {
     navigation: {
       state: {
@@ -24,9 +30,10 @@ it('gets props from navigation object', () => {
       }
     }
   }
+
   expect(mapStateToProps(state, props)).toEqual({
-    community: {id: '7', slug: 'world'},
-    currentUser: undefined,
+    community: expect.objectContaining({id: '7', slug: 'world'}),
+    currentUser: expect.objectContaining({name: 'me'}),
     topicName: 'logistics'
   })
 })
