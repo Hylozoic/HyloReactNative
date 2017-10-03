@@ -48,6 +48,7 @@ export function fetchNotifications (first = 20, offset = 0) {
               post {
                 id
                 title
+                details
               }
               community {
                 id

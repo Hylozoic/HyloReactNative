@@ -16,10 +16,12 @@ export default class NotificationsList extends Component {
     setRightButton()
   }
   
+  fetchMore = offset => this.props.fetchMore(offset)
+
   keyExtractor = item => item.id
 
   render () {
-    const { fetchMore, notifications, pending, showNotification } = this.props
+    const { hasMore, markActivityRead, notifications, pending } = this.props
     if (pending && notifications.length === 0) return <Loading />
     if (!pending && notifications.length === 0) {
       return <Text style={styles.center}>Nothing new for you!</Text>
@@ -29,23 +31,22 @@ export default class NotificationsList extends Component {
       <FlatList
         data={notifications}
         keyExtractor={this.keyExtractor}
-        onEndReached={fetchMore}
+        onEndReached={hasMore ? () => this.fetchMore(notifications.length) : null}
         renderItem={({ item }) =>
           <NotificationRow
-            notification={item}
-            showNotification={showNotification}
-         />}
-        />
+            markActivityRead={markActivityRead}
+            notification={item} />} />
     </View>
   }
 }
 
-export function NotificationRow ({ notification, showNotification }) {
+export function NotificationRow ({ markActivityRead, notification }) {
   return <View>
-    <TouchableOpacity onPress={() => {}}>
+    <TouchableOpacity onPress={() => {
+      if (notification.unread) markActivityRead(notification.activityId)
+      notification.onPress()
+    }}>
       <NotificationCard notification={notification} />
     </TouchableOpacity>
   </View>
 }
-
-// setTitle: func.isRequired,

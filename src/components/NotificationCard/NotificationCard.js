@@ -35,7 +35,7 @@ export default function NotificationCard ({ notification }) {
   } = notification
   const highlight = unread ? styles.highlight : null
 
-  return <TouchableOpacity onPress={onPress} style={[ styles.container, highlight ]}>
+  return <View style={[ styles.container, highlight ]}>
     <View style={avatarSeparator ? styles.separator : null}>
       <Avatar avatarUrl={actor.avatarUrl} style={styles.avatar} />
     </View>
@@ -52,7 +52,7 @@ export default function NotificationCard ({ notification }) {
       </Text>
       <Text style={styles.date}>{createdAt}</Text>
     </View>
-  </TouchableOpacity>
+  </View>
 }
 
 NotificationCard.propTypes = {

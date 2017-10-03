@@ -3,7 +3,7 @@ import {
   FETCH_NOTIFICATIONS,
   fetchNotifications,
   getNotifications,
-  getNotificationsHasMore,
+  getHasMoreNotifications,
   markActivityRead,
   markAllActivitiesRead
 } from './NotificationsList.store'
@@ -13,9 +13,9 @@ const NOTIFICATIONS_PAGE_SIZE = 20
 
 export function mapStateToProps (state, props) {
   return {
-    hasMore: getNotificationsHasMore(state),
+    hasMore: getHasMoreNotifications(state),
     pending: state.pending[FETCH_NOTIFICATIONS],
-    notifications: getNotifications(state)
+    notifications: getNotifications(state, props)
   }
 }
 
@@ -26,8 +26,8 @@ export function mapDispatchToProps (dispatch, { navigation }) {
   }
   return {
     fetchNotifications: () => dispatch(fetchNotifications(NOTIFICATIONS_PAGE_SIZE)),
-    // TODO: notifications needs a cursor on backend
-    fetchMore: offset => dispatch(fetchNotifications(NOTIFICATIONS_PAGE_SIZE, NOTIFICATIONS_PAGE_SIZE)),
+    fetchMore: offset => dispatch(fetchNotifications(NOTIFICATIONS_PAGE_SIZE, offset)),
+    markActivityRead: id => dispatch(markActivityRead(id)),
     setRightButton: () => navigation.setParams({ headerRight: headerButton(right) })
   }
 }
