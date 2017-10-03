@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mapStateToProps maps the state... to the props 1`] = `
+Array [
+  Array [
+    "SignupFlow1",
+  ],
+  Array [
+    "Login",
+  ],
+]
+`;

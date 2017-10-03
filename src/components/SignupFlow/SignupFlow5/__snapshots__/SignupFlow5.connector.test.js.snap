@@ -1,0 +1,72 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mapDispatchToProps maps the action generators 1`] = `
+Object {
+  "signup": [Function],
+  "updateLocalUserSettings": [Function],
+  "updateUserSettings": [Function],
+}
+`;
+
+exports[`mapStateToProps returns the right keys 1`] = `
+Object {
+  "avatarUrl": undefined,
+  "email": undefined,
+  "location": undefined,
+  "name": undefined,
+  "password": undefined,
+  "skills": undefined,
+}
+`;
+
+exports[`mergeProps merges the props 1`] = `
+Object {
+  "finishSignup": [Function],
+  "makeChanges": [Function],
+  "navigation": Object {
+    "navigate": [Function],
+  },
+  "storedSkills": Array [
+    "a",
+    "b",
+    "c",
+  ],
+  "updateLocalUserSettings": [Function],
+  "updateUserSettings": [Function],
+}
+`;
+
+exports[`mergeProps merges the props 2`] = `
+Array [
+  Array [
+    Object {
+      "settings": Object {
+        "signupInProgress": false,
+      },
+    },
+  ],
+]
+`;
+
+exports[`mergeProps merges the props 3`] = `
+Array [
+  Array [
+    Object {
+      "avatarUrl": "",
+      "email": "",
+      "location": "",
+      "name": "",
+      "password": "",
+      "settings": Object {},
+    },
+  ],
+]
+`;
+
+exports[`mergeProps merges the props 4`] = `
+Array [
+  Array [
+    "SignupFlow1",
+  ],
+]
+`;

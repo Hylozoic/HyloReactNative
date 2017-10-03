@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`on CHANGE_COMMUNITY returns the payload 1`] = `
+Object {
+  "id": 1,
+  "name": "moon",
+}
+`;
+
+exports[`on FETCH_CURRENT_USER handles a user with a membership 1`] = `34`;
+
+exports[`on FETCH_CURRENT_USER handles a user with no memberships 1`] = `
+Object {
+  "id": 1,
+}
+`;

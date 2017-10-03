@@ -16,6 +16,7 @@ exports[`matches the last snapshot 1`] = `
       allowFontScaling={true}
       disabled={false}
       ellipsizeMode="tail"
+      onLongPress={null}
       onPress={null}
     >
       <Text
@@ -40,6 +41,7 @@ exports[`matches the last snapshot 1`] = `
         allowFontScaling={true}
         disabled={false}
         ellipsizeMode="tail"
+        onLongPress={null}
         onPress={[Function]}
       >
         <Text
@@ -86,6 +88,7 @@ exports[`matches the last snapshot 1`] = `
       allowFontScaling={true}
       disabled={false}
       ellipsizeMode="tail"
+      onLongPress={null}
       onPress={null}
     >
       <Text
@@ -114,6 +117,7 @@ exports[`matches the last snapshot 1`] = `
       allowFontScaling={true}
       disabled={false}
       ellipsizeMode="tail"
+      onLongPress={null}
       onPress={null}
     >
       <Text
@@ -138,6 +142,7 @@ exports[`matches the last snapshot 1`] = `
         allowFontScaling={true}
         disabled={false}
         ellipsizeMode="tail"
+        onLongPress={null}
         onPress={[Function]}
       >
         <Text
@@ -184,6 +189,7 @@ exports[`matches the last snapshot 1`] = `
       allowFontScaling={true}
       disabled={false}
       ellipsizeMode="tail"
+      onLongPress={null}
       onPress={null}
     >
       <Text
@@ -191,6 +197,7 @@ exports[`matches the last snapshot 1`] = `
         allowFontScaling={true}
         disabled={false}
         ellipsizeMode="tail"
+        onLongPress={null}
         onPress={[Function]}
       >
         <Text
@@ -237,6 +244,7 @@ exports[`matches the last snapshot 1`] = `
       allowFontScaling={true}
       disabled={false}
       ellipsizeMode="tail"
+      onLongPress={null}
       onPress={null}
     >
       <Text

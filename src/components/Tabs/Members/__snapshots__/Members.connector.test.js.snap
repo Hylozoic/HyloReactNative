@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mapStateToProps handles null value for lastViewedCommunity 1`] = `
+Object {
+  "community": null,
+  "communityId": undefined,
+  "currentUser": SessionBoundModel {
+    "_fields": Object {
+      "id": 123,
+      "memberships": undefined,
+      "messageThreads": undefined,
+      "notifications": undefined,
+      "posts": undefined,
+      "skills": undefined,
+    },
+    "id": 123,
+  },
+  "hasMore": undefined,
+  "members": Array [],
+  "pending": undefined,
+  "search": undefined,
+  "slug": null,
+  "sortBy": undefined,
+}
+`;
