@@ -9,7 +9,7 @@ import WelcomeScene from '../WelcomeScene'
 import Feed from '../Feed'
 import Settings from '../Settings'
 import DrawerMenu from '../DrawerMenu'
-import { Home, Members, Topics } from '../Tabs'
+import { Home, Members, Topics } from '../Tabs' // eslint-disable-line no-unused-vars
 import stacksInTabsFactory from './stacksInTabsFactory'
 import PostEditor from '../PostEditor'
 import DetailsEditor from '../PostEditor/DetailsEditor'
@@ -31,8 +31,8 @@ import { isIOS, urlPrefix } from 'util/platform'
 // If you change or add tabs you have to edit trackCurrentTab.js
 export const tabs = {
   Home: {screen: Home, path: ''},
-  Members: {screen: Members, path: 'people'},
-  Topics: {screen: Topics, path: 'topics'}
+  Members: {screen: Members, path: 'people'}
+  // Topics: {screen: Topics, path: 'topics'} // TODO
 }
 
 // Screens that work within Tabs (the same tab icon stays highlighted)
