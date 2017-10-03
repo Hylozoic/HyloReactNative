@@ -1,10 +1,10 @@
 import React from 'react'
 import { Animated, StyleSheet, Text, TouchableOpacity } from 'react-native'
-import { bool, func, string } from 'prop-types'
+import { func, string } from 'prop-types'
 
 import { persimmon } from '../../style/colors'
 
-export default class Thread extends React.Component {
+export default class NotificationOverlay extends React.Component {
   static propTypes = {
     message: string.isRequired,
     onPress: func
@@ -18,11 +18,11 @@ export default class Thread extends React.Component {
     }
   }
 
-  componentDidMount() {
+  componentDidMount () {
     this.animate()
   }
 
-  componentDidUpdate() {
+  componentDidUpdate () {
     this.animate()
   }
 

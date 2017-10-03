@@ -9,7 +9,7 @@ function mapDispatchToProps (dispatch, props) {
 
   if (!id) {
     return {
-      subscribe: () => {},
+      subscribe: () => Promise.resolve(),
       unsubscribe: () => {}
     }
   }
