@@ -17,6 +17,7 @@ export const defaultUserSettings = {
   name: '',
   email: '',
   password: '',
+  confirmPassword: '',
   location: '',
   avatarUrl: '',
   settings: {}

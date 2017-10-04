@@ -14,9 +14,23 @@ export default class SignupControl extends React.Component {
     this.setState({securePassword: !this.state.securePassword})
   }
 
+  focus () {
+    this.input.focus()
+  }
+
   render () {
     const {
-      label, value, onChange, togglableSecureTextEntry, keyboardType, autoCapitalize, autoCorrect, style, error
+      label,
+      value,
+      onChange,
+      togglableSecureTextEntry,
+      keyboardType,
+      returnKeyType,
+      onSubmitEditing,
+      autoCapitalize,
+      autoCorrect,
+      style,
+      error
     } = this.props
 
     const { securePassword } = this.state
@@ -24,13 +38,16 @@ export default class SignupControl extends React.Component {
     return <View style={[styles.control, style]}>
       <Text style={styles.label}>{label}</Text>
       <TextInput
+        ref={c => { this.input = c }}
         style={styles.textInput}
         onChangeText={onChange}
         value={value}
         secureTextEntry={togglableSecureTextEntry && securePassword}
         autoCapitalize={autoCapitalize}
         autoCorrect={autoCorrect}
-        keyboardType={keyboardType} />
+        keyboardType={keyboardType}
+        returnKeyType={returnKeyType}
+        onSubmitEditing={onSubmitEditing} />
       {togglableSecureTextEntry && <EntypoIcon name={this.state.securePassword ? 'eye' : 'eye-with-line'}
         style={styles.icon}
         onPress={() => this.togglePassword()} />}
