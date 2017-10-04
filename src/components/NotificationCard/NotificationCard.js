@@ -17,6 +17,11 @@ const renderName = ({ actor, nameInHeader }) => nameInHeader
   ? <Text style={styles.name}>{`${actor.name} `}</Text>
   : null
 
+// TODO: render tags as, well, tags
+const renderTag = tag => tag
+  ? <Text style={styles.name}>{` ${tag}`}</Text>
+  : null
+
 const renderTitle = title => title
   ? <Text numberOfLines={2} style={styles.title}>{` ${title}`}</Text>
   : null
@@ -30,6 +35,7 @@ export default function NotificationCard ({ notification }) {
     createdAt,
     header,
     onPress,
+    tag,
     title,
     unread
   } = notification
@@ -44,6 +50,7 @@ export default function NotificationCard ({ notification }) {
         {renderName(notification)}
         <Text style={[styles.text, styles.emphasize]}>{header}</Text>
         {renderTitle(title)}
+        {renderTag(tag)}
       </Text>
       <Text style={styles.text} numberOfLines={2}>
         {renderFirstName(actor)}

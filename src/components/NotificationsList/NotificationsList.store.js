@@ -110,12 +110,6 @@ export function markAllActivitiesRead () {
   }
 }
 
-export function getOnPress (notification, { navigate }) {
-
-  return () => {
-  }
-}
-
 function presentedText (text) {
   return decode(striptags(text, [], ' '))
     .replace(/\s+/g, ' ')
@@ -155,7 +149,8 @@ function refineActivity ({ action, comment, community, post, reasons }, actor, {
       return {
         body: `wrote: ${presentedText(post.details)}`,
         header: `New Post in`,
-        onPress: () => navigate('PostDetails', { id: post.id })
+        onPress: () => navigate('PostDetails', { id: post.id }),
+        tag
       }
 
     case ACTION_JOIN_REQUEST:
@@ -163,6 +158,7 @@ function refineActivity ({ action, comment, community, post, reasons }, actor, {
         body: `asked to join`,
         community: community.name,
         header: `New join request`,
+        nameInHeader: true,
         onPress: () => navigate('Settings')
       }
 
