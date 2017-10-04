@@ -1,6 +1,6 @@
 import orm from '../models'
 import { createSelector as ormCreateSelector } from 'redux-orm'
-import { pick, identity } from 'lodash'
+import { isNull, isUndefined, omitBy, pick } from 'lodash/fp'
 
 /**
  * gets community from slug OR id
@@ -8,9 +8,9 @@ import { pick, identity } from 'lodash'
 const getCommunity = ormCreateSelector(
   orm,
   state => state.orm,
-  (state, props) => props.id,
-  (state, props) => props.slug,
-  (session, id, slug) => session.Community.safeGet(pick({id, slug}, identity))
+  (state, props) => omitBy(x => isNull(x) || isUndefined(x),
+    pick(['id', 'slug'], props)),
+  ({ Community }, match) => Community.safeGet(match)
 )
 
 export default getCommunity
