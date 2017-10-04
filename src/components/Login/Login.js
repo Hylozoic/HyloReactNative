@@ -49,17 +49,37 @@ export default class Login extends React.Component {
   setAndValidateEmail (email) {
     this.setState({
       email,
-      emailIsValid: this.validateEmail(email)
+      emailIsValid: this.validateEmail(email),
+      ssoError: null,
+      emailError: false,
+      passwordError: null
     })
   }
 
-  componentWillReceiveProps = (nextProps) => {
-    nextProps.error && this.setState({ssoError: null})
+  setPassword (password) {
+    this.setState({
+      password,
+      ssoError: null,
+      emailError: null,
+      passwordError: null
+    })
+  }
+
+  componentWillReceiveProps (nextProps) {
+    const { error, emailError, passwordError } = nextProps
+    console.log('error', error)
+    console.log('emailError', emailError)
+    console.log('passwordError', passwordError)
+    this.setState({
+      error,
+      emailError,
+      passwordError
+    })
   }
 
   render () {
-    const { loginWithGoogle, loginWithFacebook, error, emailError, passwordError, pending, goToSignup } = this.props
-    const { ssoError } = this.state
+    const { loginWithGoogle, loginWithFacebook, pending, goToSignup } = this.props
+    const { ssoError, error, emailError, passwordError } = this.state
     const emailIsValid = this.state.emailIsValid
     return <ScrollView contentContainerStyle={styles.login} style={styles.container}>
       {ssoError && <Text style={styles.errorBanner}>{ssoError}</Text>}
@@ -102,7 +122,7 @@ export default class Login extends React.Component {
             <TextInput style={styles.textInput}
               secureTextEntry={this.state.securePassword}
               ref={ref => { this.passwordInput = ref }}
-              onChangeText={password => this.setState({password})}
+              onChangeText={password => this.setPassword(password)}
               returnKeyType='go'
               selectTextOnFocus
               onSubmitEditing={() => this.login()}
