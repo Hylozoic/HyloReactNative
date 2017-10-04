@@ -4,14 +4,6 @@ import ReactShallowRenderer from 'react-test-renderer/shallow'
 import NotificationCard from './NotificationCard'
 import index from './'
 
-it('has a connector', () => {
-  expect(typeof index).toBe('function')
-})
-
-it('has a silly connector test', () => {
-  expect(index).toMatchSnapshot()
-})
-
 describe('NotificationCard', () => {
   let notificationBase
 

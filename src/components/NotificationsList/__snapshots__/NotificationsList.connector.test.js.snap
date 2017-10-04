@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches the last snapshot for mapDispatchToProps 1`] = `
+Object {
+  "fetchMore": [Function],
+  "fetchNotifications": [Function],
+  "markActivityRead": [Function],
+  "setRightButton": [Function],
+}
+`;
