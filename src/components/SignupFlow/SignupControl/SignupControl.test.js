@@ -14,6 +14,8 @@ it('matches last snapshot', () => {
     keyboardType: 'email-address',
     autoCapitalize: 'words',
     autoCorrect: true,
+    onSubmitEditing: () => {},
+    returnKeyType: 'next',
     style: {color: 'red'},
     error: 'This is not a real name'
   }

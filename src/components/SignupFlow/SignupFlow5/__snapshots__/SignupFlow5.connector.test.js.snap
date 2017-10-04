@@ -53,6 +53,7 @@ Array [
   Array [
     Object {
       "avatarUrl": "",
+      "confirmPassword": "",
       "email": "",
       "location": "",
       "name": "",

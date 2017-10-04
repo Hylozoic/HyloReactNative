@@ -97,6 +97,7 @@ it('submits', () => {
     name: 'name',
     email: 'ra@ra.com',
     password: 'rarararararara',
+    confirmPassword: 'rarararararara',
     showPasswordField: true,
     signupOrUpdate: jest.fn(),
     fetchCurrentUser: () => {},

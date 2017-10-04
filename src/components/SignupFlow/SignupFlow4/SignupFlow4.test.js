@@ -15,7 +15,7 @@ describe('SignupFlow4', () => {
       setSkill: () => {},
       userSkills: ['Snap', 'Crackle'],
       remainingSkills: ['One', 'Two'],
-      addSKill: () => {},
+      addSkill: () => {},
       removeSkill: () => {}
     }
 

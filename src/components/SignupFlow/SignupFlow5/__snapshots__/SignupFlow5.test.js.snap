@@ -17,143 +17,153 @@ Object {
 `;
 
 exports[`hides image when no url and password when no password 1`] = `
-<ScrollViewMock>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    disabled={false}
-    ellipsizeMode="tail"
-  >
-    Everything looking good?
-  </Text>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    disabled={false}
-    ellipsizeMode="tail"
-  >
-    You can always come back and change your details at any time.
-  </Text>
-  <SignupControl
-    label="Your Full Name"
-    value="Hill"
-  />
-  <SignupControl
-    autoCapitalize="none"
-    autoCorrect={false}
-    keyboardType="email-address"
-    label="Email Address"
-    value="jill@hill.com"
-  />
-  <SignupControl
-    label="Location"
-    value="hill"
-  />
-  <View>
+<Unknown
+  behavior="padding"
+  keyboardVerticalOffset={64}
+>
+  <ScrollViewMock>
     <Text
       accessible={true}
       allowFontScaling={true}
       disabled={false}
       ellipsizeMode="tail"
     >
-      Skills
+      Everything looking good?
     </Text>
-    <SkillCloud
-      skills={
-        Array [
-          "One",
-          "Two",
-        ]
-      }
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+    >
+      You can always come back and change your details at any time.
+    </Text>
+    <SignupControl
+      label="Your Full Name"
+      value="Hill"
     />
-  </View>
-  <View>
-    <Button
-      onPress={[Function]}
-      text="Make Changes"
+    <SignupControl
+      autoCapitalize="none"
+      autoCorrect={false}
+      keyboardType="email-address"
+      label="Email Address"
+      value="jill@hill.com"
     />
-    <Button
-      onPress={[Function]}
-      text="Finish"
+    <SignupControl
+      label="Location"
+      value="hill"
     />
-  </View>
-</ScrollViewMock>
+    <View>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        disabled={false}
+        ellipsizeMode="tail"
+      >
+        Skills
+      </Text>
+      <SkillCloud
+        skills={
+          Array [
+            "One",
+            "Two",
+          ]
+        }
+      />
+    </View>
+    <View>
+      <Button
+        onPress={[Function]}
+        text="Make Changes"
+      />
+      <Button
+        onPress={[Function]}
+        text="Finish"
+      />
+    </View>
+  </ScrollViewMock>
+</Unknown>
 `;
 
 exports[`matches last snapshot 1`] = `
-<ScrollViewMock>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    disabled={false}
-    ellipsizeMode="tail"
-  >
-    Everything looking good?
-  </Text>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    disabled={false}
-    ellipsizeMode="tail"
-  >
-    You can always come back and change your details at any time.
-  </Text>
-  <View>
-    <Image
-      source={
-        Object {
-          "uri": "mill.png",
-        }
-      }
-    />
-  </View>
-  <SignupControl
-    label="Your Full Name"
-    value="Hill"
-  />
-  <SignupControl
-    autoCapitalize="none"
-    autoCorrect={false}
-    keyboardType="email-address"
-    label="Email Address"
-    value="jill@hill.com"
-  />
-  <SignupControl
-    label="Password"
-    togglableSecureTextEntry={true}
-    value="fill"
-  />
-  <SignupControl
-    label="Location"
-    value="hill"
-  />
-  <View>
+<Unknown
+  behavior="padding"
+  keyboardVerticalOffset={64}
+>
+  <ScrollViewMock>
     <Text
       accessible={true}
       allowFontScaling={true}
       disabled={false}
       ellipsizeMode="tail"
     >
-      Skills
+      Everything looking good?
     </Text>
-    <SkillCloud
-      skills={
-        Array [
-          "One",
-          "Two",
-        ]
-      }
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+    >
+      You can always come back and change your details at any time.
+    </Text>
+    <View>
+      <Image
+        source={
+          Object {
+            "uri": "mill.png",
+          }
+        }
+      />
+    </View>
+    <SignupControl
+      label="Your Full Name"
+      value="Hill"
     />
-  </View>
-  <View>
-    <Button
-      onPress={[Function]}
-      text="Make Changes"
+    <SignupControl
+      autoCapitalize="none"
+      autoCorrect={false}
+      keyboardType="email-address"
+      label="Email Address"
+      value="jill@hill.com"
     />
-    <Button
-      onPress={[Function]}
-      text="Finish"
+    <SignupControl
+      label="Password"
+      togglableSecureTextEntry={true}
+      value="fill"
     />
-  </View>
-</ScrollViewMock>
+    <SignupControl
+      label="Location"
+      value="hill"
+    />
+    <View>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        disabled={false}
+        ellipsizeMode="tail"
+      >
+        Skills
+      </Text>
+      <SkillCloud
+        skills={
+          Array [
+            "One",
+            "Two",
+          ]
+        }
+      />
+    </View>
+    <View>
+      <Button
+        onPress={[Function]}
+        text="Make Changes"
+      />
+      <Button
+        onPress={[Function]}
+        text="Finish"
+      />
+    </View>
+  </ScrollViewMock>
+</Unknown>
 `;
