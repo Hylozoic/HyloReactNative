@@ -7,11 +7,7 @@ import styles from './Login.styles'
 export default class GoogleLoginButton extends React.Component {
   constructor (props) {
     super(props)
-    if (props.mocks) {
-      this.GoogleSignin = props.mocks.GoogleSignin
-    } else {
-      this.GoogleSignin = GoogleSignin
-    }
+    this.GoogleSignin = props.mocks ? props.mocks.GoogleSignin : GoogleSignin
   }
   componentDidMount () {
     this.GoogleSignin.configure({
@@ -30,8 +26,7 @@ export default class GoogleLoginButton extends React.Component {
   }
 
   render () {
-    return <TouchableOpacity style={styles.googleLoginContainer}
-      onPress={this.signIn}>
+    return <TouchableOpacity style={styles.googleLoginContainer} onPress={this.signIn}>
       <Text style={styles.heavyText}>
         <Icon name='Google' size={12} />  Google
       </Text>

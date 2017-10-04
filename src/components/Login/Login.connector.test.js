@@ -5,52 +5,6 @@ const props = {}
 const dispatchProps = mapDispatchToProps(dispatch, props)
 const token = 'SOME_TOKEN'
 
-describe('Login dispatchProps', () => {
-  it('loginWithFacebook should match the latest snapshot', () => {
-    expect(dispatchProps.loginWithFacebook(token)).toMatchSnapshot()
-  })
-
-  it('loginWithGoogle should match the latest snapshot', () => {
-    expect(dispatchProps.loginWithGoogle(token)).toMatchSnapshot()
-  })
-
-  it('login should match the latest snapshot', () => {
-    const username = 'name'
-    const password = 'pass'
-    expect(dispatchProps.login(username, password)).toMatchSnapshot()
-  })
-
-  it('maps the action generators', () => {
-    const dispatch = jest.fn(val => val)
-    const dispatchProps = mapDispatchToProps(dispatch)
-    expect(dispatchProps).toMatchSnapshot()
-    dispatchProps.loginWithFacebook('token')
-    expect(dispatch).toHaveBeenCalled()
-    expect(dispatch.mock.calls).toMatchSnapshot()
-  })
-
-  it('returns the right keys', () => {
-    const state = {
-      session: {
-        loginError: 'blah',
-        defaultLoginEmail: 'lah@lah.com'
-      },
-      pending: {}
-    }
-    const props = {
-      navigation: {
-        navigate: jest.fn()
-      }
-    }
-    const newProps = mapStateToProps(state, props)
-    expect(newProps).toMatchSnapshot()
-    newProps.goToSignup()
-    expect(props.navigation.navigate).toHaveBeenCalled()
-    expect(props.navigation.navigate.mock.calls)
-    .toMatchSnapshot()
-  })
-})
-
 describe('Login mapStateToProps', () => {
   it('returns a default email from the session', () => {
     const email = 'email@hylo.com'
@@ -107,5 +61,51 @@ describe('Login mapStateToProps', () => {
       }
       expect(mapStateToProps(state, props).pending).toBeFalsy()
     })
+  })
+})
+
+describe('Login dispatchProps', () => {
+  it('loginWithFacebook should match the latest snapshot', () => {
+    expect(dispatchProps.loginWithFacebook(token)).toMatchSnapshot()
+  })
+
+  it('loginWithGoogle should match the latest snapshot', () => {
+    expect(dispatchProps.loginWithGoogle(token)).toMatchSnapshot()
+  })
+
+  it('login should match the latest snapshot', () => {
+    const username = 'name'
+    const password = 'pass'
+    expect(dispatchProps.login(username, password)).toMatchSnapshot()
+  })
+
+  it('maps the action generators', () => {
+    const dispatch = jest.fn(val => val)
+    const dispatchProps = mapDispatchToProps(dispatch)
+    expect(dispatchProps).toMatchSnapshot()
+    dispatchProps.loginWithFacebook('token')
+    expect(dispatch).toHaveBeenCalled()
+    expect(dispatch.mock.calls).toMatchSnapshot()
+  })
+
+  it('returns the right keys', () => {
+    const state = {
+      session: {
+        loginError: 'blah',
+        defaultLoginEmail: 'lah@lah.com'
+      },
+      pending: {}
+    }
+    const props = {
+      navigation: {
+        navigate: jest.fn()
+      }
+    }
+    const newProps = mapStateToProps(state, props)
+    expect(newProps).toMatchSnapshot()
+    newProps.goToSignup()
+    expect(props.navigation.navigate).toHaveBeenCalled()
+    expect(props.navigation.navigate.mock.calls)
+    .toMatchSnapshot()
   })
 })
