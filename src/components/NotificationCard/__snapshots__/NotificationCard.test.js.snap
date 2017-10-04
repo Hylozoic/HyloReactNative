@@ -394,3 +394,5 @@ exports[`NotificationCard matches the last snapshot for a post in tag/topic 1`] 
   </View>
 </View>
 `;
+
+exports[`has a silly connector test 1`] = `[Function]`;
