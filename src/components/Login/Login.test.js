@@ -1,12 +1,12 @@
 import 'react-native'
 import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
-import Login from './Login'
+import Login, { FormError } from './Login'
 
 jest.mock('react-native-google-signin', () => {})
 
 describe('Login', () => {
-  it('renders Login correctly', () => {
+  it('renders correctly', () => {
     const renderer = new ReactShallowRenderer()
     renderer.render(<Login goToSignup={() => {}} />)
     const actual = renderer.getRenderOutput()
@@ -49,6 +49,17 @@ describe('Login', () => {
     renderer.render(<Login
       isConnected={false}
     />)
+    const actual = renderer.getRenderOutput()
+    expect(actual).toMatchSnapshot()
+  })
+})
+
+describe('FormError', () => {
+  it('renders correctly', () => {
+    const message = 'email error'
+    const position = 'top'
+    const renderer = new ReactShallowRenderer()
+    renderer.render(<FormError message={message} position={position} />)
     const actual = renderer.getRenderOutput()
     expect(actual).toMatchSnapshot()
   })

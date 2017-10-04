@@ -1,6 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Login renders Login correctly 1`] = `
+exports[`FormError renders correctly 1`] = `
+<View>
+  <View>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+    >
+      email error
+    </Text>
+  </View>
+  <View />
+</View>
+`;
+
+exports[`Login renders correctly 1`] = `
 <ScrollViewMock
   contentContainerStyle={
     Object {
