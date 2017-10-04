@@ -38,8 +38,7 @@ export function mapStateToProps (state, props) {
     sortBy,
     filter,
     hasMore: getHasMorePosts(state, queryProps),
-    pending: state.pending[FETCH_POSTS],
-    refreshing: state.pending[FETCH_POSTS] ? true : false
+    pending: state.pending[FETCH_POSTS]
   }
 }
 

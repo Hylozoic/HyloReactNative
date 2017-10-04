@@ -39,8 +39,7 @@ export default class FeedList extends Component {
       showMember,
       showTopic,
       showCommunities,
-      goToCommunity,
-      refreshing
+      goToCommunity
     } = this.props
 
     const listHeaderComponent = <View>
@@ -71,7 +70,7 @@ export default class FeedList extends Component {
             showCommunity={showCommunities}
             goToCommunity={goToCommunity} />}
         onRefresh={fetchMorePosts}
-        refreshing={refreshing}
+        refreshing={!!pending}
         keyExtractor={(item, index) => item.id}
         onEndReached={fetchMorePosts}
         ListHeaderComponent={listHeaderComponent}
