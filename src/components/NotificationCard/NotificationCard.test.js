@@ -2,6 +2,11 @@ import 'react-native'
 import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import NotificationCard from './NotificationCard'
+import index from './'
+
+it('has a connector', () => {
+  expect(typeof index).toBe('function')
+})
 
 describe('NotificationCard', () => {
   let notificationBase
