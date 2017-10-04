@@ -66,3 +66,22 @@ Array [
   ],
 ]
 `;
+
+exports[`Login dispatchProps returns the right keys 1`] = `
+Object {
+  "defaultEmail": "lah@lah.com",
+  "emailError": false,
+  "error": "blah",
+  "goToSignup": [Function],
+  "passwordError": false,
+  "pending": undefined,
+}
+`;
+
+exports[`Login dispatchProps returns the right keys 2`] = `
+Array [
+  Array [
+    "Signup",
+  ],
+]
+`;

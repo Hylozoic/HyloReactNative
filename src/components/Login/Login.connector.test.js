@@ -34,7 +34,8 @@ describe('Login dispatchProps', () => {
       session: {
         loginError: 'blah',
         defaultLoginEmail: 'lah@lah.com'
-      }
+      },
+      pending: {}
     }
     const props = {
       navigation: {
