@@ -39,8 +39,9 @@ const mixins = {
     borderBottomColor: '#EE4266',
     borderLeftColor: 'transparent',
     paddingBottom: -10,
-    marginTop: -10,
-    marginRight: 200
+    marginTop: 12,
+    marginLeft: 55,
+    position: 'absolute'
   },
   banner: {
     color: 'white',
@@ -159,6 +160,9 @@ export default {
     borderRadius: 5,
     paddingLeft: 10
   },
+  errorView: {
+    alignSelf: 'stretch'
+  },
   emailErrorRow: {
     alignSelf: 'stretch',
     marginLeft: 15,
@@ -214,7 +218,8 @@ export default {
   passwordTriangle: {
     ...mixins.triangle,
     borderTopWidth: 0,
-    borderBottomWidth: 10
+    borderBottomWidth: 10,
+    marginTop: -12
   },
   androidInvisibleUnderline: 'rgba(0,0,0,0)'
 }

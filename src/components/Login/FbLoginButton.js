@@ -35,7 +35,7 @@ export default class FbLoginButton extends React.Component {
       result => result.isCancelled || this.handleResult(null, result)
     )
     .catch(() => {
-      this.props.createErrorNotification('COULD NOT SIGN IN WITH YOUR GOOGLE ACCOUNT')
+      this.props.createErrorNotification('COULD NOT SIGN IN WITH YOUR FACEBOOK ACCOUNT')
     })
   }
 

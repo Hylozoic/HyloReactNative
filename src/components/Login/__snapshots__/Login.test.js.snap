@@ -124,7 +124,7 @@ exports[`Login renders Login correctly 1`] = `
       disabled={false}
       ellipsizeMode="tail"
     >
-      Don't have an account? 
+      Dont have an account? 
     </Text>
     <TouchableOpacity
       activeOpacity={0.2}
@@ -165,17 +165,9 @@ exports[`Login renders with email error 1`] = `
   >
     Log in to Hylo
   </Text>
-  <View>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      disabled={false}
-      ellipsizeMode="tail"
-    >
-      email error
-    </Text>
-  </View>
-  <View />
+  <EmailError
+    message="email error"
+  />
   <View>
     <View>
       <View>
@@ -269,7 +261,7 @@ exports[`Login renders with email error 1`] = `
       disabled={false}
       ellipsizeMode="tail"
     >
-      Don't have an account? 
+      Dont have an account? 
     </Text>
     <TouchableOpacity
       activeOpacity={0.2}
@@ -413,7 +405,7 @@ exports[`Login renders with no network connection error 1`] = `
       disabled={false}
       ellipsizeMode="tail"
     >
-      Don't have an account? 
+      Dont have an account? 
     </Text>
     <TouchableOpacity
       activeOpacity={0.2}
@@ -512,17 +504,9 @@ exports[`Login renders with password error 1`] = `
       </View>
     </View>
   </View>
-  <View>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      disabled={false}
-      ellipsizeMode="tail"
-    >
-      password error
-    </Text>
-  </View>
-  <View />
+  <PasswordError
+    message="password error"
+  />
   <View>
     <View>
       <TouchableOpacity
@@ -568,7 +552,7 @@ exports[`Login renders with password error 1`] = `
       disabled={false}
       ellipsizeMode="tail"
     >
-      Don't have an account? 
+      Dont have an account? 
     </Text>
     <TouchableOpacity
       activeOpacity={0.2}
@@ -720,7 +704,7 @@ exports[`Login renders with pending banner 1`] = `
       disabled={false}
       ellipsizeMode="tail"
     >
-      Don't have an account? 
+      Dont have an account? 
     </Text>
     <TouchableOpacity
       activeOpacity={0.2}

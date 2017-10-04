@@ -20,6 +20,15 @@ describe('Login dispatchProps', () => {
     expect(dispatchProps.login(username, password)).toMatchSnapshot()
   })
 
+  it('maps the action generators', () => {
+    const dispatch = jest.fn(val => val)
+    const dispatchProps = mapDispatchToProps(dispatch)
+    expect(dispatchProps).toMatchSnapshot()
+    dispatchProps.loginWithFacebook('token')
+    expect(dispatch).toHaveBeenCalled()
+    expect(dispatch.mock.calls).toMatchSnapshot()
+  })
+
   // it('returns the right keys', () => {
   //   const state = {
   //     session: {
@@ -97,13 +106,5 @@ describe('Login mapStateToProps', () => {
       }
       expect(mapStateToProps(state, props).pending).toBeFalsy()
     })
-  })
-  it('maps the action generators', () => {
-    const dispatch = jest.fn(val => val)
-    const dispatchProps = mapDispatchToProps(dispatch)
-    expect(dispatchProps).toMatchSnapshot()
-    dispatchProps.loginWithFacebook('token')
-    expect(dispatch).toHaveBeenCalled()
-    expect(dispatch.mock.calls).toMatchSnapshot()
   })
 })

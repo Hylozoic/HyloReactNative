@@ -68,10 +68,7 @@ export default class Login extends React.Component {
       <Image style={styles.logo}
         source={require('../../assets/merkaba-green-on-white.png')} />
       <Text style={styles.title}>Log in to Hylo</Text>
-      {emailError && <View style={styles.emailErrorRow}>
-        <Text style={styles.errorMessage}>{error}</Text>
-      </View>}
-      {emailError && <View style={styles.emailTriangle} />}
+      {emailError && <EmailError message={error} />}
       {!emailError && <View style={styles.labelRow}>
         <Text style={styles.labelText}>Your email address</Text>
       </View>}
@@ -119,10 +116,7 @@ export default class Login extends React.Component {
           </View>
         </View>
       </View>
-      {passwordError && <View style={styles.passwordErrorRow}>
-        <Text style={styles.errorMessage}>{error}</Text>
-      </View>}
-      {passwordError && <View style={styles.passwordTriangle} />}
+      {passwordError && <PasswordError message={error} />}
       <View style={styles.paddedRow}>
         <View style={styles.loginButton}>
           <TouchableOpacity onPress={() => this.login()}>
@@ -145,11 +139,29 @@ export default class Login extends React.Component {
           />
       </View>
       <View style={styles.signup}>
-        <Text style={styles.helpText}>Don't have an account? </Text>
+        <Text style={styles.helpText}>Dont have an account? </Text>
         <TouchableOpacity onPress={goToSignup}>
           <Text style={styles.signupText}>Sign up now</Text>
         </TouchableOpacity>
       </View>
     </ScrollView>
   }
+}
+
+export function EmailError ({message}) {
+  return <View style={styles.errorView}>
+    <View style={styles.emailErrorRow}>
+      <Text style={styles.errorMessage}>{message}</Text>
+    </View>
+    <View style={styles.emailTriangle} />
+  </View>
+}
+
+export function PasswordError ({message}) {
+  return <View style={styles.errorView}>
+    <View style={styles.passwordErrorRow}>
+      <Text style={styles.errorMessage}>{message}</Text>
+    </View>
+    <View style={styles.passwordTriangle} />
+  </View>
 }

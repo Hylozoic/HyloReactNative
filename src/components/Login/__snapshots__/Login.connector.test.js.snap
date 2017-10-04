@@ -43,7 +43,7 @@ Object {
 }
 `;
 
-exports[`Login mapStateToProps maps the action generators 1`] = `
+exports[`Login dispatchProps maps the action generators 1`] = `
 Object {
   "login": [Function],
   "loginWithFacebook": [Function],
@@ -51,7 +51,7 @@ Object {
 }
 `;
 
-exports[`Login mapStateToProps maps the action generators 2`] = `
+exports[`Login dispatchProps maps the action generators 2`] = `
 Array [
   Array [
     Object {

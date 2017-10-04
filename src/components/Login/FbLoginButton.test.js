@@ -52,6 +52,6 @@ it('calls createErrorNotification on error', () => {
   const instance = node.getInstance()
 
   return instance.signIn().then(() => {
-    expect(createErrorNotification).toBeCalledWith('COULD NOT SIGN IN WITH YOUR GOOGLE ACCOUNT')
+    expect(createErrorNotification).toBeCalledWith('COULD NOT SIGN IN WITH YOUR FACEBOOK ACCOUNT')
   })
 })
