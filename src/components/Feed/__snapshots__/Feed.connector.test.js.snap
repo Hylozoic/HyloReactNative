@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mergeProps binds communityId to functions from dispatchProps 1`] = `
+Object {
+  "community": Object {
+    "id": "12",
+  },
+  "editPost": [Function],
+  "goToCommunity": [Function],
+  "newPost": [Function],
+  "otherProp1": "foo1",
+  "otherProp2": "foo2",
+  "showMember": [Function],
+  "showPost": [Function],
+  "showTopic": [Function],
+}
+`;

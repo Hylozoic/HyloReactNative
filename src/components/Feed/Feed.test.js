@@ -25,3 +25,17 @@ it('renders correctly', () => {
 
   expect(actual).toMatchSnapshot()
 })
+
+it('sets the title if there is a topic', () => {
+  const navigation = {
+    state: {
+      params: {
+        topicName: 'math'
+      }
+    }
+  }
+
+  expect(Feed.navigationOptions({ navigation })).toEqual({
+    headerTitle: '#math'
+  })
+})
