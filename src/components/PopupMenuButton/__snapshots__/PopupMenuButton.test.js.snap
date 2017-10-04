@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PopupMenuButton matches the last snapshot 1`] = `
+<View>
+  <View
+    accessibilityComponentType={undefined}
+    accessibilityLabel="A View Props Label"
+    accessibilityTraits={undefined}
+    accessible={true}
+    collapsable={undefined}
+    hitSlop={
+      Object {
+        "top": 10,
+      }
+    }
+    isTVSelectable={true}
+    nativeID={undefined}
+    onLayout={undefined}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    testID={undefined}
+    tvParallaxProperties={undefined}
+  >
+    Hello World
+  </View>
+</View>
+`;
+
+exports[`PopupMenuButton matches the last snapshot 2`] = `
+<View
+  accessibilityComponentType={undefined}
+  accessibilityLabel="A View Props Label"
+  accessibilityTraits={undefined}
+  accessible={true}
+  collapsable={undefined}
+  hitSlop={
+    Object {
+      "top": 10,
+    }
+  }
+  isTVSelectable={true}
+  nativeID={undefined}
+  onLayout={undefined}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  testID={undefined}
+  tvParallaxProperties={undefined}
+>
+  Hello World
+</View>
+`;

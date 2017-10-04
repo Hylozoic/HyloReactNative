@@ -21,6 +21,14 @@ exports[`PostMenu returns a popupmenu when deleting allowed 1`] = `
     ]
   }
   destructiveButtonIndex={0}
+  hitSlop={
+    Object {
+      "bottom": 10,
+      "left": 10,
+      "right": 15,
+      "top": 20,
+    }
+  }
   onSelect={[Function]}
 >
   <Icon
@@ -37,6 +45,14 @@ exports[`PostMenu returns a popupmenu when editing allowed 1`] = `
     ]
   }
   destructiveButtonIndex={-1}
+  hitSlop={
+    Object {
+      "bottom": 10,
+      "left": 10,
+      "right": 15,
+      "top": 20,
+    }
+  }
   onSelect={[Function]}
 >
   <Icon
@@ -53,6 +69,14 @@ exports[`PostMenu returns a popupmenu when flagging allowed 1`] = `
     ]
   }
   destructiveButtonIndex={0}
+  hitSlop={
+    Object {
+      "bottom": 10,
+      "left": 10,
+      "right": 15,
+      "top": 20,
+    }
+  }
   onSelect={[Function]}
 >
   <Icon
