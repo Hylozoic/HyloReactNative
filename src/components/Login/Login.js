@@ -68,10 +68,6 @@ export default class Login extends React.Component {
     })
   }
 
-  componentWillMount () {
-    this.setState({ isConnected: true })
-  }
-
   componentDidMount () {
     NetInfo.isConnected.addEventListener('change', this.handleConnectivityChange)
   }
