@@ -4,13 +4,21 @@ import FeedList from '../FeedList'
 import FeedBanner from '../FeedBanner'
 import styles from './Feed.styles'
 import { get } from 'lodash/fp'
+import NotificationOverlay from '../NotificationOverlay'
 
 export default class Feed extends Component {
+  state = {showNotification: false}
+
   static navigationOptions = ({ navigation }) => {
     const topicName = get('state.params.topicName', navigation)
     return {
       headerTitle: topicName ? '#' + topicName : 'Home'
     }
+  }
+
+  componentDidMount () {
+    const { fetchTopic } = this.props
+    if (fetchTopic) fetchTopic()
   }
 
   render () {
@@ -23,7 +31,9 @@ export default class Feed extends Component {
       showMember,
       showTopic,
       goToCommunity,
-      topicName
+      topicName,
+      topicSubscribed,
+      toggleTopicSubscribe
     } = this.props
 
     return <View style={styles.container}>
@@ -42,8 +52,12 @@ export default class Feed extends Component {
             currentUser={currentUser}
             all={!community}
             newPost={newPost}
-            topicName={topicName} />
+            topicName={topicName}
+            topicSubscribed={topicSubscribed}
+            toggleTopicSubscribe={toggleTopicSubscribe} />
         } />
+      {!!this.state.showNotification &&
+        <NotificationOverlay message='hello topic' />}
     </View>
   }
 }

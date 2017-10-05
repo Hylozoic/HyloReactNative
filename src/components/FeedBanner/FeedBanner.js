@@ -2,9 +2,11 @@ import React from 'react'
 import { Image, View, Text, TouchableOpacity } from 'react-native'
 import styles from './FeedBanner.styles'
 import Avatar from '../Avatar'
-const allCommunitiesLogo = require('../../assets/All_Communities.png')
+import Icon from '../Icon'
 
-export default function FeedBanner ({ all, community, newPost, currentUser }) {
+export default function FeedBanner ({
+  all, community, newPost, currentUser, topicName, topicSubscribed
+}) {
   let bannerUrl, name
 
   if (all) {
@@ -18,8 +20,13 @@ export default function FeedBanner ({ all, community, newPost, currentUser }) {
   return <View style={styles.container}>
     <Image source={{uri: bannerUrl}} style={styles.image} />
     <View style={styles.titleRow}>
-      {all && <Image source={allCommunitiesLogo} style={styles.allLogo} />}
       <Text style={[styles.name, all && styles.allName]}>{name}</Text>
+      {!!topicName && <TouchableOpacity style={styles.subscribeButton}>
+        <Icon name='Star' style={[
+          styles.subscribeButtonIcon,
+          topicSubscribed && styles.subscribeButtonIconActive
+        ]} />
+      </TouchableOpacity>}
     </View>
     <PostPrompt currentUser={currentUser} newPost={newPost} />
     {!!currentUser && <View style={styles.promptShadow} />}

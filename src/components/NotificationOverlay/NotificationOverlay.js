@@ -13,7 +13,6 @@ export default class NotificationOverlay extends React.Component {
   constructor () {
     super()
     this.state = {
-      opacityAnim: new Animated.Value(0),
       heightAnim: new Animated.Value(0)
     }
   }
@@ -22,8 +21,10 @@ export default class NotificationOverlay extends React.Component {
     this.animate()
   }
 
-  componentDidUpdate () {
-    this.animate()
+  componentDidUpdate (prevProps) {
+    if (prevProps.message !== this.props.message) {
+      this.animate()
+    }
   }
 
   animate () {

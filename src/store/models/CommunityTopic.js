@@ -15,5 +15,6 @@ CommunityTopic.fields = {
   topic: fk('Topic', 'communityTopics'),
   community: fk('Community', 'communityTopics'),
   postsTotal: attr(),
-  followersTotal: attr()
+  followersTotal: attr(),
+  isSubscribed: attr()
 }

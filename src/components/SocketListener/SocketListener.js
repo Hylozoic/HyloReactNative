@@ -36,6 +36,7 @@ export default class SocketListener extends React.Component {
   }
 
   reconnect = () => {
+    console.log('connecting SocketListener...')
     this.socket.post(socketUrl('/noo/threads/subscribe'), (body, jwr) => {
       if (!isEqual(body, {})) {
         console.error(`Failed to connect SocketListener: ${body}`)

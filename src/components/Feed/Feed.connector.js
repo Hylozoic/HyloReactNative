@@ -2,6 +2,7 @@ import { connect } from 'react-redux'
 import getMe from '../../store/selectors/getMe'
 import getCommunity from '../../store/selectors/getCommunity'
 import makeGoToCommunity from '../../store/actions/makeGoToCommunity'
+import { fetchCommunityTopic, getTopicSubscriptionStatus } from './Feed.store'
 import { get } from 'lodash/fp'
 
 export function mapStateToProps (state, props) {
@@ -10,10 +11,13 @@ export function mapStateToProps (state, props) {
   const topicName = props.topicName || params.topicName
   const community = getCommunity(state, {id: communityId})
   const currentUser = getMe(state)
+  const topicSubscribed = topicName && community &&
+    getTopicSubscriptionStatus(state, {topicName, slug: community.slug})
   return {
     currentUser,
     community,
-    topicName
+    topicName,
+    topicSubscribed
   }
 }
 
@@ -25,18 +29,24 @@ export function mapDispatchToProps (dispatch, { navigation }) {
     showMember: id => navigation.navigate('MemberProfile', {id}),
     showTopic: communityId => topicName =>
       navigation.navigate('Feed', {communityId, topicName}),
-    goToCommunity: makeGoToCommunity(dispatch, navigation)
+    goToCommunity: makeGoToCommunity(dispatch, navigation),
+    fetchTopic: (name, slug) => dispatch(fetchCommunityTopic(name, slug))
   }
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
-  const communityId = get('community.id', stateProps)
+  const { community, topicName } = stateProps
+  const communityId = get('id', community)
+  const slug = get('slug', community)
   return {
     ...stateProps,
     ...dispatchProps,
     ...ownProps,
     newPost: () => dispatchProps.newPost(communityId),
-    showTopic: dispatchProps.showTopic(communityId)
+    showTopic: dispatchProps.showTopic(communityId),
+    fetchTopic: topicName && slug
+      ? () => dispatchProps.fetchTopic(topicName, slug)
+      : null
   }
 }
 
