@@ -1,6 +1,6 @@
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { checkSession } from './actions'
+import { checkSession, setEntryURL } from './SessionCheck.store'
 import getMe from '../../store/selectors/getMe'
 import { get } from 'lodash/fp'
 
@@ -15,7 +15,8 @@ export function mapStateToProps (state) {
 export function mapDispatchToProps (dispatch) {
   return {
     actions: bindActionCreators({
-      checkSession
+      checkSession,
+      setEntryURL
     }, dispatch)
   }
 }

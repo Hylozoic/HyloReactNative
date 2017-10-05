@@ -20,33 +20,28 @@ export default function createLinkingAwareContainer (Comp, uriPrefix) {
     }
 
     _handleOpenURL = (url) => {
-      console.log('!!!!', url)
       const parsedUrl = this._urlToPathAndParams(url)
       if (parsedUrl) {
         const { path, params } = parsedUrl
-        console.log('!!! parsedUrl: ', parsedUrl)
         const action = router.getActionForPathAndParams(path, params)
         if (action) {
           this.props.navigation.dispatch(action)
         }
       }
-    }
+    };
 
     componentDidMount () {
-      // // this handles the case where the app is closed and is launched via Universal Linking.
-      // Linking.getInitialURL()
-      // .then((url) => {
-      //   if (url) {
-      //     this._handleOpenURL(url)
-      //   }
-      // })
-      // .catch((e) => {})
-      // // This listener handles the case where the app is woken up from the Universal Linking
-      // Linking.addEventListener('url', ({ url }) => this._handleOpenURL(url))
+      Linking.addEventListener('url', ({ url }: { url: string }) => {
+        this._handleOpenURL(url)
+      })
+
+      Linking.getInitialURL().then(
+        (url: string) => url && this._handleOpenURL(url)
+      )
     }
 
     componentWillUnmount () {
-      // Linking.removeEventListener('url', this._handleOpenURL)
+      Linking.removeEventListener('url', this._handleOpenURL)
     }
 
     render () {

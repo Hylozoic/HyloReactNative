@@ -7,6 +7,7 @@ import { Dimensions } from 'react-native'
 
 import WelcomeScene from '../WelcomeScene'
 import Feed from '../Feed'
+import JoinCommunity from '../JoinCommunity'
 import Settings from '../Settings'
 import DrawerMenu from '../DrawerMenu'
 import { Home, Members, Topics } from '../Tabs'
@@ -51,6 +52,7 @@ export const screensInTabs = {
 // Screens that work outside of tabs, Settings, Messages, etc.
 export const screensInStack = {
   Settings: {screen: Settings, path: 'settings'},
+  JoinCommunity: {screen: JoinCommunity, path: '/h/use-invitation'},
   Thread: {screen: Thread, path: 'thread/:id'},
   ThreadList: {screen: ThreadList, path: 'messages'},
   Login: {screen: Login, path: 'login'},

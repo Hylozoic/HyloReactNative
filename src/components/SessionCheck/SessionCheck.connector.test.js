@@ -1,4 +1,4 @@
-import { mapStateToProps, mapDispatchToProps } from './connector.js'
+import { mapStateToProps, mapDispatchToProps } from './SessionCheck.connector.js'
 
 describe('mapStateToProps', () => {
   it('returns the right keys', () =>

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Image, View, Text } from 'react-native'
 import styles from './InviteExpired.styles'
-const axolotlImage = require('../../../assets/Axel_Fretting.png')
+const axolotlImage = require('../../assets/Axel_Fretting.png')
 
 export default class InviteExpired extends React.Component {
   static navigationOptions = {

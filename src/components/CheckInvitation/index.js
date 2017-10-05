@@ -1,3 +1,4 @@
-import CheckInvitation from './CheckInvitation'
+import component from './CheckInvitation'
+import connector from './CheckInvitation.connector'
 
-export default CheckInvitation
+export default connector(component)
