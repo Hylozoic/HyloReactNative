@@ -25,7 +25,9 @@ Array [
           "reason": "A Reason",
         },
       },
-      "meta": Object {},
+      "meta": Object {
+        "optimistic": true,
+      },
       "type": "FlagContent/FLAG_CONTENT",
     },
   ],
