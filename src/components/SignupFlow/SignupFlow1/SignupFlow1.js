@@ -121,7 +121,7 @@ export default class SignupFlow1 extends React.Component {
           label='Password'
           value={password}
           onChange={value => this.updateField('password', value)}
-          togglableSecureTextEntry
+          toggleSecureTextEntry
           error={errors.password}
           returnKeyType='next'
           onSubmitEditing={() => this.confirmPasswordControl.focus()} />}
@@ -130,7 +130,7 @@ export default class SignupFlow1 extends React.Component {
           label='Confirm'
           value={confirmPassword}
           onChange={value => this.updateField('confirmPassword', value)}
-          togglableSecureTextEntry
+          toggleSecureTextEntry
           error={errors.confirmPassword}
           returnKeyType='go'
           onSubmitEditing={submitUnlessPending} />}
