@@ -36,6 +36,10 @@ export default class SignupControl extends React.Component {
     this.input.focus()
   }
 
+  blur () {
+    this.input.blur()
+  }
+
   makeEditable () {
     this.setState({editable: true})
   }
