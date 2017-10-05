@@ -7,9 +7,6 @@ export default class CheckInvitation extends Component {
     const { navigation, checkInvitation, setInvitationCodes } = this.props
     checkInvitation().then(result => {
       const validToken = get('payload.data.checkInvitation.valid', result)
-      // console.log('result.payload.data.checkInvitation: ', result.payload.data.checkInvitation)
-      // console.log("get('payload.data.checkInvitation', result): ", get('payload.data.checkInvitation', result))
-      console.log('!!! validToken: ', validToken)
       if (validToken) {
         setInvitationCodes()
         navigation.navigate('Login')
@@ -21,7 +18,8 @@ export default class CheckInvitation extends Component {
   }
 
   render () {
-    console.log('!!!in CheckInvitation render !!!')
+    console.log('!! in checkInvitation props: ', this.props)
+    // TODO: Full screen Loading page
     return <Loading />
   }
 }
