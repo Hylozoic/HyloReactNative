@@ -4,8 +4,10 @@ exports[`mergeProps binds communityId to functions from dispatchProps 1`] = `
 Object {
   "community": Object {
     "id": "12",
+    "slug": "life",
   },
   "editPost": [Function],
+  "fetchTopic": null,
   "goToCommunity": [Function],
   "newPost": [Function],
   "otherProp1": "foo1",
@@ -13,5 +15,33 @@ Object {
   "showMember": [Function],
   "showPost": [Function],
   "showTopic": [Function],
+}
+`;
+
+exports[`mergeProps sets up fetchTopic 1`] = `
+Object {
+  "graphql": Object {
+    "query": "query ($topicName: String, $communitySlug: String) {
+        communityTopic(topicName: $topicName, communitySlug: $communitySlug) {
+          id
+          isSubscribed
+          topic {
+            id
+            name
+          }
+          community {
+            id
+          }
+        }
+      }",
+    "variables": Object {
+      "communitySlug": "life",
+      "topicName": "inquiry",
+    },
+  },
+  "meta": Object {
+    "extractModel": "CommunityTopic",
+  },
+  "type": "Feed/FETCH_COMMUNITY_TOPIC",
 }
 `;

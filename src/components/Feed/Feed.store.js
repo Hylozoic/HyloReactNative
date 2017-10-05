@@ -3,7 +3,7 @@ import { get } from 'lodash/fp'
 import orm from 'store/models'
 
 const MODULE_NAME = 'Feed'
-const FETCH_COMMUNITY_TOPIC = `${MODULE_NAME}/FETCH_COMMUNITY_TOPIC`
+export const FETCH_COMMUNITY_TOPIC = `${MODULE_NAME}/FETCH_COMMUNITY_TOPIC`
 
 export function fetchCommunityTopic (topicName, communitySlug) {
   return {

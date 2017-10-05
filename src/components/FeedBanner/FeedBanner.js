@@ -3,12 +3,12 @@ import { Image, View, Text, TouchableOpacity } from 'react-native'
 import styles from './FeedBanner.styles'
 import Avatar from '../Avatar'
 import Icon from '../Icon'
+import { isUndefined } from 'lodash'
 
 export default function FeedBanner ({
-  all, community, newPost, currentUser, topicName, topicSubscribed
+  all, community, newPost, currentUser, topicSubscribed
 }) {
   let bannerUrl, name
-
   if (all) {
     name = 'All Communities'
   } else if (!community) {
@@ -21,12 +21,13 @@ export default function FeedBanner ({
     <Image source={{uri: bannerUrl}} style={styles.image} />
     <View style={styles.titleRow}>
       <Text style={[styles.name, all && styles.allName]}>{name}</Text>
-      {!!topicName && <TouchableOpacity style={styles.subscribeButton}>
-        <Icon name='Star' style={[
-          styles.subscribeButtonIcon,
-          topicSubscribed && styles.subscribeButtonIconActive
-        ]} />
-      </TouchableOpacity>}
+      {!isUndefined(topicSubscribed) &&
+        <TouchableOpacity style={styles.subscribeButton}>
+          <Icon name='Star' style={[
+            styles.subscribeButtonIcon,
+            topicSubscribed && styles.subscribeButtonIconActive
+          ]} />
+        </TouchableOpacity>}
     </View>
     <PostPrompt currentUser={currentUser} newPost={newPost} />
     {!!currentUser && <View style={styles.promptShadow} />}

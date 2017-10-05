@@ -2,7 +2,11 @@ import { connect } from 'react-redux'
 import getMe from '../../store/selectors/getMe'
 import getCommunity from '../../store/selectors/getCommunity'
 import makeGoToCommunity from '../../store/actions/makeGoToCommunity'
-import { fetchCommunityTopic, getTopicSubscriptionStatus } from './Feed.store'
+import {
+  fetchCommunityTopic,
+  getTopicSubscriptionStatus,
+  FETCH_COMMUNITY_TOPIC
+} from './Feed.store'
 import { get } from 'lodash/fp'
 
 export function mapStateToProps (state, props) {
@@ -11,8 +15,12 @@ export function mapStateToProps (state, props) {
   const topicName = props.topicName || params.topicName
   const community = getCommunity(state, {id: communityId})
   const currentUser = getMe(state)
+
+  // when this is undefined, the subscribe button is not shown at all
   const topicSubscribed = topicName && community &&
+    (get(FETCH_COMMUNITY_TOPIC, state.pending) ? undefined : true) &&
     getTopicSubscriptionStatus(state, {topicName, slug: community.slug})
+
   return {
     currentUser,
     community,
