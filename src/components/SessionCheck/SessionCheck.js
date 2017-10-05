@@ -22,9 +22,9 @@ export default class SessionCheck extends React.Component {
   }
 
   componentDidMount (nextProps) {
-    // // this handles the case where the app is closed and is launched via Universal Linking.
+    // this handles the case where the app is closed and is launched via Universal Linking.
     Linking.getInitialURL().then(url => this._captureEntryURL(url))
-    // // This listener handles the case where the app is woken up from the Universal Linking
+    // This listener handles the case where the app is woken up from the Universal Linking
     Linking.addEventListener('url', ({ url }) => this._captureEntryURL(url))
     this.props.actions.checkSession()
   }

@@ -30,7 +30,4 @@ export function resetEntryURL (url) {
   return {type: RESET_ENTRY_URL}
 }
 
-export const getEntryURL = createSelector(
-  get('session'),
-  get('entryURL')
-)
+export const getEntryURL = get('session.entryURL')

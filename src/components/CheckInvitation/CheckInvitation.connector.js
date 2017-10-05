@@ -8,7 +8,7 @@ import getNavigationParam from '../../store/selectors/getNavigationParam'
 
 export function mapStateToProps (state, props) {
   const isValidInvite = getValidInvite(state)
-  const invitationCheckPending = props.invitationCheckPending || state.pending[CHECK_INVITATION]
+  const invitationCheckPending = state.pending && state.pending[CHECK_INVITATION]
   const invitationCodes = {
     invitationToken: getNavigationParam('token', state, props) ||
       getNavigationParam('invitationToken', state, props),

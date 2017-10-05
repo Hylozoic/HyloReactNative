@@ -52,7 +52,8 @@ export const screensInTabs = {
 // Screens that work outside of tabs, Settings, Messages, etc.
 export const screensInStack = {
   Settings: {screen: Settings, path: 'settings'},
-  JoinCommunity: {screen: JoinCommunity, path: '/h/use-invitation'},
+  JoinCommunity: {screen: JoinCommunity, path: 'h/use-invitation'},
+  JoinCommunityOpen: {screen: JoinCommunity, path: 'c/:slug/join/:accessCode'},
   Thread: {screen: Thread, path: 'thread/:id'},
   ThreadList: {screen: ThreadList, path: 'messages'},
   Login: {screen: Login, path: 'login'},
