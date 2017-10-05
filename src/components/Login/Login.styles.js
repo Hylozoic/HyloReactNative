@@ -45,11 +45,14 @@ const mixins = {
   },
   banner: {
     color: 'white',
-    padding: 10,
-    width: 500,
+    paddingLeft: 250,
+    paddingRight: 250,
+    paddingTop: 10,
+    paddingBottom: 10,
     textAlign: 'center',
     position: 'absolute',
-    top: 0
+    top: 0,
+    marginTop: isIOS ? 20 : 0
   }
 }
 
@@ -165,8 +168,8 @@ export default {
   },
   emailErrorRow: {
     alignSelf: 'stretch',
-    marginLeft: 15,
-    marginRight: 15,
+    marginLeft: 5,
+    marginRight: 5,
     backgroundColor: '#EE4266',
     padding: 10,
     marginBottom: 3,
@@ -175,8 +178,8 @@ export default {
   },
   passwordErrorRow: {
     alignSelf: 'stretch',
-    marginLeft: 15,
-    marginRight: 15,
+    marginLeft: 5,
+    marginRight: 5,
     backgroundColor: '#EE4266',
     padding: 10,
     marginBottom: -32,
