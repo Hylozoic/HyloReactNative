@@ -43,33 +43,23 @@ export default class Login extends React.Component {
   }
 
   validateEmail (email) {
-    return validator.isEmail(email)
-  }
-
-  setAndValidateEmail (email) {
     this.setState({
-      email,
-      emailIsValid: this.validateEmail(email),
-      ssoError: null,
-      emailError: false,
-      passwordError: null
+      emailIsValid: validator.isEmail(email)
     })
   }
 
-  setPassword (password) {
+  setInput (key, value) {
     this.setState({
-      password,
-      ssoError: null,
-      emailError: null,
-      passwordError: null
+      ...this.state,
+      [key]: value
     })
+    if (key === 'email') {
+      this.validateEmail(value)
+    }
   }
 
   componentWillReceiveProps (nextProps) {
     const { error, emailError, passwordError } = nextProps
-    console.log('error', error)
-    console.log('emailError', emailError)
-    console.log('passwordError', passwordError)
     this.setState({
       error,
       emailError,
@@ -79,8 +69,8 @@ export default class Login extends React.Component {
 
   render () {
     const { loginWithGoogle, loginWithFacebook, pending, goToSignup } = this.props
-    const { ssoError, error, emailError, passwordError } = this.state
-    const emailIsValid = this.state.emailIsValid
+    const { ssoError, error, emailError, passwordError, emailIsValid } = this.state
+    console.log('render emailIsValid', emailIsValid)
     return <ScrollView contentContainerStyle={styles.login} style={styles.container}>
       {ssoError && <Text style={styles.errorBanner}>{ssoError}</Text>}
       {pending && <Text style={styles.banner}>Logging in ...</Text>}
@@ -97,7 +87,7 @@ export default class Login extends React.Component {
           <View style={styles.leftInputView}>
             <TextInput
               style={styles.textInput}
-              onChangeText={email => this.setAndValidateEmail(email)}
+              onChangeText={email => this.setInput('email', email)}
               returnKeyType='next'
               autoCapitalize='none'
               autoCorrect={false}
@@ -122,7 +112,7 @@ export default class Login extends React.Component {
             <TextInput style={styles.textInput}
               secureTextEntry={this.state.securePassword}
               ref={ref => { this.passwordInput = ref }}
-              onChangeText={password => this.setPassword(password)}
+              onChangeText={password => this.setInput('password', password)}
               returnKeyType='go'
               selectTextOnFocus
               onSubmitEditing={() => this.login()}
