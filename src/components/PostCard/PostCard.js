@@ -55,7 +55,7 @@ export default class PostCard extends React.Component {
         editPost={editPost}
         communities={post.communities}
         slug={slug}
-        id={post.id}
+        postId={post.id}
         showMember={showMember}
         goToCommunity={goToCommunity} />
       <View style={post.imageUrl ? styles.imageMargin : {}}>
