@@ -4,11 +4,13 @@ import PopupMenuButtonAndroid from './PopupMenuButton.android'
 import PopupMenuButtonIos from './PopupMenuButton.ios'
 import TestRenderer from 'react-test-renderer'
 
-const components = [PopupMenuButtonAndroid, PopupMenuButtonIos]
-
 describe('PopupMenuButton', () => {
-  components.forEach((PopupMenuButton) => {
-    it(`matches the last snapshot`, () => {
+  const platforms = [['android', PopupMenuButtonAndroid], ['ios', PopupMenuButtonIos]]
+
+  platforms.forEach((platform) => {
+    it(`${platform[0]} matches the last snapshot`, () => {
+      const PopupMenuButton = platform[1]
+
       const action1 = jest.fn()
       const action2 = jest.fn()
       const actions = [['Action 1', action1], ['Action 2', action2]]
@@ -34,7 +36,7 @@ describe('PopupMenuButton', () => {
     })
   })
 
-  describe('androidOnly', () => {
+  describe('android only', () => {
     it('calls our onSelect with the right index', () => {
       const action1 = jest.fn()
       const action2 = jest.fn()
