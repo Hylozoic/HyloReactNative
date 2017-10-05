@@ -130,7 +130,7 @@ exports[`matches last snapshot 1`] = `
       onChange={[Function]}
       onSubmitEditing={[Function]}
       returnKeyType="next"
-      togglableSecureTextEntry={true}
+      toggleSecureTextEntry={true}
       value="rarara"
     />
     <SignupControl
@@ -139,7 +139,7 @@ exports[`matches last snapshot 1`] = `
       onChange={[Function]}
       onSubmitEditing={[Function]}
       returnKeyType="go"
-      togglableSecureTextEntry={true}
+      toggleSecureTextEntry={true}
       value={undefined}
     />
     <Button

@@ -10,7 +10,7 @@ it('matches last snapshot', () => {
     label: 'Name',
     value: 'Joe Bloggs',
     onChange: () => {},
-    togglableSecureTextEntry: true,
+    toggleSecureTextEntry: true,
     keyboardType: 'email-address',
     autoCapitalize: 'words',
     autoCorrect: true,

@@ -13,6 +13,7 @@ exports[`matches last snapshot 1`] = `
   <TextInput
     autoCapitalize="words"
     autoCorrect={true}
+    editable={true}
     keyboardType="email-address"
     onChangeText={[Function]}
     onSubmitEditing={[Function]}
@@ -20,12 +21,14 @@ exports[`matches last snapshot 1`] = `
     secureTextEntry={true}
     value="Joe Bloggs"
   />
-  <Icon
-    allowFontScaling={false}
-    name="eye"
-    onPress={[Function]}
-    size={12}
-  />
+  <View>
+    <Icon
+      allowFontScaling={false}
+      name="eye"
+      onPress={[Function]}
+      size={12}
+    />
+  </View>
   <View>
     <Triangle
       color="white"

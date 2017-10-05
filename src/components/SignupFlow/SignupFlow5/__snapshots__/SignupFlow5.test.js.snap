@@ -2,6 +2,7 @@
 
 exports[`has navigationOptions 1`] = `
 Object {
+  "headerBackTitle": null,
   "headerStyle": Object {
     "backgroundColor": "#0DC39F",
     "shadowColor": "transparent",
@@ -39,21 +40,36 @@ exports[`hides image when no url and password when no password 1`] = `
       You can always come back and change your details at any time.
     </Text>
     <SignupControl
+      error={undefined}
       label="Your Full Name"
+      onChange={[Function]}
+      onSubmitEditing={[Function]}
+      toggleEditable={true}
       value="Hill"
     />
     <SignupControl
       autoCapitalize="none"
       autoCorrect={false}
+      error={undefined}
       keyboardType="email-address"
       label="Email Address"
+      onChange={[Function]}
+      onSubmitEditing={[Function]}
+      toggleEditable={true}
       value="jill@hill.com"
     />
     <SignupControl
       label="Location"
+      onChange={[Function]}
+      onSubmitEditing={[Function]}
+      toggleEditable={true}
       value="hill"
     />
-    <View>
+    <TouchableOpacity
+      activeOpacity={0.2}
+      focusedOpacity={0.7}
+      onPress={undefined}
+    >
       <Text
         accessible={true}
         allowFontScaling={true}
@@ -63,6 +79,7 @@ exports[`hides image when no url and password when no password 1`] = `
         Skills
       </Text>
       <SkillCloud
+        onPress={undefined}
         skills={
           Array [
             "One",
@@ -70,7 +87,7 @@ exports[`hides image when no url and password when no password 1`] = `
           ]
         }
       />
-    </View>
+    </TouchableOpacity>
     <View>
       <Button
         onPress={[Function]}
@@ -108,35 +125,51 @@ exports[`matches last snapshot 1`] = `
       You can always come back and change your details at any time.
     </Text>
     <View>
-      <Image
-        source={
-          Object {
-            "uri": "mill.png",
+      <TouchableOpacity
+        activeOpacity={0.2}
+        focusedOpacity={0.7}
+        onPress={undefined}
+      >
+        <Image
+          source={
+            Object {
+              "uri": "mill.png",
+            }
           }
-        }
-      />
+        />
+      </TouchableOpacity>
     </View>
     <SignupControl
+      error={undefined}
       label="Your Full Name"
+      onChange={[Function]}
+      onSubmitEditing={[Function]}
+      toggleEditable={true}
       value="Hill"
     />
     <SignupControl
       autoCapitalize="none"
       autoCorrect={false}
+      error={undefined}
       keyboardType="email-address"
       label="Email Address"
+      onChange={[Function]}
+      onSubmitEditing={[Function]}
+      toggleEditable={true}
       value="jill@hill.com"
     />
     <SignupControl
-      label="Password"
-      togglableSecureTextEntry={true}
-      value="fill"
-    />
-    <SignupControl
       label="Location"
+      onChange={[Function]}
+      onSubmitEditing={[Function]}
+      toggleEditable={true}
       value="hill"
     />
-    <View>
+    <TouchableOpacity
+      activeOpacity={0.2}
+      focusedOpacity={0.7}
+      onPress={undefined}
+    >
       <Text
         accessible={true}
         allowFontScaling={true}
@@ -146,6 +179,7 @@ exports[`matches last snapshot 1`] = `
         Skills
       </Text>
       <SkillCloud
+        onPress={undefined}
         skills={
           Array [
             "One",
@@ -153,7 +187,7 @@ exports[`matches last snapshot 1`] = `
           ]
         }
       />
-    </View>
+    </TouchableOpacity>
     <View>
       <Button
         onPress={[Function]}
