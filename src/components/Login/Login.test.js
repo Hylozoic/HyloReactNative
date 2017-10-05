@@ -1,4 +1,3 @@
-import 'react-native'
 import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import TestRenderer from 'react-test-renderer'
@@ -99,6 +98,23 @@ describe('Login', () => {
 
     instance.setInput(passwordKey, password)
     expect(instance.state.password).toEqual(password)
+  })
+
+  it('should update state when it receives props', function () {
+    const error = 'email'
+    const emailError = true
+    const passwordError = null
+    const nextProps = {
+      error,
+      emailError,
+      passwordError
+    }
+    const instance = TestRenderer.create(<Login />
+    ).root.instance
+    instance.componentWillReceiveProps(nextProps)
+    expect(instance.state.error).toEqual(error)
+    expect(instance.state.emailError).toEqual(emailError)
+    expect(instance.state.passwordError).toEqual(passwordError)
   })
 })
 
