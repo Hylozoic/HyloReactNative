@@ -87,9 +87,15 @@ describe('mergeProps', () => {
     .toBeCalledWith('Feed', {communityId: '12', topicName: 'disarmament'})
   })
 
-  it('sets up fetchTopic', () => {
+  it('sets up fetchCommunityTopic', () => {
     stateProps.topicName = 'inquiry'
     const props = mergeProps(stateProps, dispatchProps, ownProps)
-    expect(props.fetchTopic()).toMatchSnapshot()
+    expect(props.fetchCommunityTopic()).toMatchSnapshot()
+  })
+
+  it('sets up toggleTopicSubscribe', () => {
+    stateProps.topic = {id: '5', name: 'inquiry'}
+    const props = mergeProps(stateProps, dispatchProps, ownProps)
+    expect(props.toggleTopicSubscribe()).toMatchSnapshot()
   })
 })

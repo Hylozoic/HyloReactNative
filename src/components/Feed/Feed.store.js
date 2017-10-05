@@ -4,6 +4,8 @@ import orm from 'store/models'
 
 const MODULE_NAME = 'Feed'
 export const FETCH_COMMUNITY_TOPIC = `${MODULE_NAME}/FETCH_COMMUNITY_TOPIC`
+export const TOGGLE_TOPIC_SUBSCRIBE = `${MODULE_NAME}/TOGGLE_TOPIC_SUBSCRIBE`
+export const TOGGLE_TOPIC_SUBSCRIBE_PENDING = TOGGLE_TOPIC_SUBSCRIBE + '_PENDING'
 
 export function fetchCommunityTopic (topicName, communitySlug) {
   return {
@@ -13,6 +15,7 @@ export function fetchCommunityTopic (topicName, communitySlug) {
         communityTopic(topicName: $topicName, communitySlug: $communitySlug) {
           id
           isSubscribed
+          followersTotal
           topic {
             id
             name
@@ -30,7 +33,31 @@ export function fetchCommunityTopic (topicName, communitySlug) {
   }
 }
 
-export const getTopicSubscriptionStatus = ormCreateSelector(
+export function toggleTopicSubscribe (topicId, communityId, isSubscribing) {
+  return {
+    type: TOGGLE_TOPIC_SUBSCRIBE,
+    graphql: {
+      query: `mutation($topicId: ID, $communityId: ID, $isSubscribing: Boolean) {
+        subscribe(topicId: $topicId, communityId: $communityId, isSubscribing: $isSubscribing) {
+          success
+        }
+      }`,
+      variables: {
+        topicId,
+        communityId,
+        isSubscribing
+      }
+    },
+    meta: {
+      optimistic: true,
+      isSubscribing,
+      topicId,
+      communityId
+    }
+  }
+}
+
+export const getCommunityTopic = ormCreateSelector(
   orm,
   get('orm'),
   (state, props) => props,
@@ -39,10 +66,8 @@ export const getTopicSubscriptionStatus = ormCreateSelector(
     const community = session.Community.filter({slug}).first()
     if (!topic || !community) return false
 
-    const ct = session.CommunityTopic.filter({
+    return session.CommunityTopic.filter({
       topic: topic.id, community: community.id
     }).first()
-
-    return !!get('isSubscribed', ct)
   }
 )

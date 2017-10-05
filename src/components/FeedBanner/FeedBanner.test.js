@@ -1,4 +1,3 @@
-import 'react-native'
 import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import FeedBanner, { PostPrompt } from './FeedBanner'

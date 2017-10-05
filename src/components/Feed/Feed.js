@@ -17,8 +17,8 @@ export default class Feed extends Component {
   }
 
   componentDidMount () {
-    const { fetchTopic } = this.props
-    if (fetchTopic) fetchTopic()
+    const { fetchCommunityTopic } = this.props
+    if (fetchCommunityTopic) fetchCommunityTopic()
   }
 
   render () {

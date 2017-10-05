@@ -2,9 +2,11 @@ import { connect } from 'react-redux'
 import getMe from '../../store/selectors/getMe'
 import getCommunity from '../../store/selectors/getCommunity'
 import makeGoToCommunity from '../../store/actions/makeGoToCommunity'
+import { bindActionCreators } from 'redux'
 import {
   fetchCommunityTopic,
-  getTopicSubscriptionStatus,
+  getCommunityTopic,
+  toggleTopicSubscribe,
   FETCH_COMMUNITY_TOPIC
 } from './Feed.store'
 import { get } from 'lodash/fp'
@@ -16,14 +18,17 @@ export function mapStateToProps (state, props) {
   const community = getCommunity(state, {id: communityId})
   const currentUser = getMe(state)
 
-  // when this is undefined, the subscribe button is not shown at all
-  const topicSubscribed = topicName && community &&
+  const communityTopic = topicName && community &&
     (get(FETCH_COMMUNITY_TOPIC, state.pending) ? undefined : true) &&
-    getTopicSubscriptionStatus(state, {topicName, slug: community.slug})
+    getCommunityTopic(state, {topicName, slug: community.slug})
+
+  // when this is undefined, the subscribe button is not shown at all
+  const topicSubscribed = communityTopic && communityTopic.isSubscribed
 
   return {
     currentUser,
     community,
+    topic: get('topic', communityTopic),
     topicName,
     topicSubscribed
   }
@@ -38,12 +43,15 @@ export function mapDispatchToProps (dispatch, { navigation }) {
     showTopic: communityId => topicName =>
       navigation.navigate('Feed', {communityId, topicName}),
     goToCommunity: makeGoToCommunity(dispatch, navigation),
-    fetchTopic: (name, slug) => dispatch(fetchCommunityTopic(name, slug))
+    ...bindActionCreators({
+      fetchCommunityTopic,
+      toggleTopicSubscribe
+    }, dispatch)
   }
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
-  const { community, topicName } = stateProps
+  const { community, topic, topicName, topicSubscribed } = stateProps
   const communityId = get('id', community)
   const slug = get('slug', community)
   return {
@@ -52,8 +60,11 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     ...ownProps,
     newPost: () => dispatchProps.newPost(communityId),
     showTopic: dispatchProps.showTopic(communityId),
-    fetchTopic: topicName && slug
-      ? () => dispatchProps.fetchTopic(topicName, slug)
+    fetchCommunityTopic: topicName && slug
+      ? () => dispatchProps.fetchCommunityTopic(topicName, slug)
+      : null,
+    toggleTopicSubscribe: topic && communityId
+      ? () => dispatchProps.toggleTopicSubscribe(topic.id, communityId, !topicSubscribed)
       : null
   }
 }

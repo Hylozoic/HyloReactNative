@@ -6,7 +6,7 @@ import Icon from '../Icon'
 import { isUndefined } from 'lodash'
 
 export default function FeedBanner ({
-  all, community, newPost, currentUser, topicSubscribed
+  all, community, newPost, currentUser, topicSubscribed, toggleTopicSubscribe
 }) {
   let bannerUrl, name
   if (all) {
@@ -22,7 +22,8 @@ export default function FeedBanner ({
     <View style={styles.titleRow}>
       <Text style={[styles.name, all && styles.allName]}>{name}</Text>
       {!isUndefined(topicSubscribed) &&
-        <TouchableOpacity style={styles.subscribeButton}>
+        <TouchableOpacity style={styles.subscribeButton}
+          onPress={toggleTopicSubscribe}>
           <Icon name='Star' style={[
             styles.subscribeButtonIcon,
             topicSubscribed && styles.subscribeButtonIconActive
