@@ -28,6 +28,14 @@ exports[`matches last snapshot 1`] = `
       onPress={[Function]}
       size={12}
     />
+    <View>
+      <Icon
+        allowFontScaling={false}
+        name="check"
+        onPress={[Function]}
+        size={12}
+      />
+    </View>
   </View>
   <View>
     <Triangle
