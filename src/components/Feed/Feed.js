@@ -4,7 +4,6 @@ import FeedList from '../FeedList'
 import FeedBanner from '../FeedBanner'
 import styles from './Feed.styles'
 import { get } from 'lodash/fp'
-import NotificationOverlay from '../NotificationOverlay'
 
 export default class Feed extends Component {
   state = {showNotification: false}
@@ -56,8 +55,6 @@ export default class Feed extends Component {
             topicSubscribed={topicSubscribed}
             toggleTopicSubscribe={toggleTopicSubscribe} />
         } />
-      {!!this.state.showNotification &&
-        <NotificationOverlay message='hello topic' />}
     </View>
   }
 }

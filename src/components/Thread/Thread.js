@@ -177,6 +177,8 @@ export default class Thread extends React.Component {
         placeholder='Write something...' />
       <PeopleTyping />
       {showNotificationOverlay && <NotificationOverlay
+        position='bottom'
+        type={isConnected ? 'info' : 'error'}
         message={overlayMessage}
         onPress={this.scrollToBottom} />}
       <SocketSubscriber type='post' id={id} />
