@@ -5,7 +5,8 @@ import {
   TextInput,
   View,
   TouchableOpacity,
-  Image
+  Image,
+  NetInfo
 } from 'react-native'
 import validator from 'validator'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
@@ -67,12 +68,28 @@ export default class Login extends React.Component {
     })
   }
 
+  componentWillMount () {
+    this.setState({ isConnected: true })
+  }
+
+  componentDidMount () {
+    NetInfo.isConnected.addEventListener('change', this.handleConnectivityChange)
+  }
+
+  componentWillUnmount () {
+    NetInfo.isConnected.removeEventListener('change', this.handleConnectivityChange)
+  }
+
+  handleConnectivityChange = isConnected => {
+    if (isConnected !== this.state.isConnected) this.setState({ isConnected })
+  }
+
   render () {
     const { loginWithGoogle, loginWithFacebook, pending, goToSignup } = this.props
-    const { ssoError, error, emailError, passwordError, emailIsValid } = this.state
-    console.log('render emailIsValid', emailIsValid)
+    const { ssoError, error, emailError, passwordError, emailIsValid, isConnected } = this.state
     return <ScrollView contentContainerStyle={styles.login} style={styles.container}>
       {ssoError && <Text style={styles.errorBanner}>{ssoError}</Text>}
+      {!isConnected && <Text style={styles.errorBanner}>YOU ARE OFFLINE. TRYING TO RECONNECT...</Text>}
       {pending && <Text style={styles.banner}>Logging in ...</Text>}
 
       <Image style={styles.logo}
