@@ -85,3 +85,5 @@ Array [
   ],
 ]
 `;
+
+exports[`Login mapStateToProps return object matches snapshot 1`] = `undefined`;

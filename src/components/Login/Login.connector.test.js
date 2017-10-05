@@ -62,6 +62,22 @@ describe('Login mapStateToProps', () => {
       expect(mapStateToProps(state, props).pending).toBeFalsy()
     })
   })
+  describe('return object', () => {
+    it('matches snapshot', () => {
+      const state = {
+        session: {
+          loginError: false
+        },
+        pending: {}
+      }
+      const props = {
+        navigation: {
+          navigate: jest.fn()
+        }
+      }
+      expect(mapStateToProps(state, props).pending).toMatchSnapshot()
+    })
+  })
 })
 
 describe('Login dispatchProps', () => {
