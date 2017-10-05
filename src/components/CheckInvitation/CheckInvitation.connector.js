@@ -10,10 +10,9 @@ export function mapStateToProps (state, props) {
   const isValidInvite = getValidInvite(state)
   const invitationCheckPending = props.invitationCheckPending || state.pending[CHECK_INVITATION]
   const invitationCodes = {
-    invitationToken: getNavigationParam('invitationToken', props),
-    accessCode: getNavigationParam('accessCode', props)
+    invitationToken: getNavigationParam('invitationToken', state, props),
+    accessCode: getNavigationParam('accessCode', state, props)
   }
-  console.log('!!! CheckInvitation props:', props)
   return {
     invitationCodes,
     invitationCheckPending,

@@ -1,6 +1,5 @@
-import { get } from 'lodash/fp'
+import { get, curry } from 'lodash/fp'
 
-export default function (param, props) {
-  const params = get('navigation.state.params', props)
-  return get(param, params)
-}
+export default curry((key, state, props) => {
+  return get(['navigation', 'state', 'params', key], props)
+})
