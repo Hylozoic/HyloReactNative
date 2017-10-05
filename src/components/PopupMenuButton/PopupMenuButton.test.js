@@ -8,7 +8,7 @@ describe('PopupMenuButton', () => {
   const platforms = [['android', PopupMenuButtonAndroid], ['ios', PopupMenuButtonIos]]
 
   platforms.forEach((platform) => {
-    it(`${platform[0]} matches the last snapshot`, () => {
+    it(`matches the last snapshot on ${platform[0]}`, () => {
       const PopupMenuButton = platform[1]
 
       const action1 = jest.fn()

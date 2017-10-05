@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`PopupMenuButton android matches the last snapshot 1`] = `
+exports[`PopupMenuButton matches the last snapshot on android 1`] = `
 <View>
   <View
     accessibilityComponentType={undefined}
@@ -30,7 +30,7 @@ exports[`PopupMenuButton android matches the last snapshot 1`] = `
 </View>
 `;
 
-exports[`PopupMenuButton ios matches the last snapshot 1`] = `
+exports[`PopupMenuButton matches the last snapshot on ios 1`] = `
 <View
   accessibilityComponentType={undefined}
   accessibilityLabel="A View Props Label"
