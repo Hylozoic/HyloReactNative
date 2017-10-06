@@ -15,6 +15,13 @@ const mocks = {
   }
 }
 
+const errorMocks = {
+  ...mocks,
+  LoginManager: {
+    logInWithReadPermissions: jest.fn(() => Promise.reject())
+  }
+}
+
 it('handles a tap', () => {
   const onLoginFinished = jest.fn()
 
@@ -28,5 +35,23 @@ it('handles a tap', () => {
     expect(instance.handleResult).toBeCalledWith(null, {foo: 'bar'})
     expect(mocks.AccessToken.getCurrentAccessToken).toBeCalled()
     expect(onLoginFinished).toBeCalledWith('token')
+  })
+})
+
+
+it('calls createErrorNotification on error', () => {
+  const onLoginFinished = jest.fn()
+  const createErrorNotification = jest.fn()
+  const node = ReactTestRenderer.create(
+    <FbLoginButton
+      mocks={errorMocks}
+      onLoginFinished={onLoginFinished}
+      createErrorNotification={createErrorNotification}
+    />)
+
+  const instance = node.getInstance()
+
+  return instance.signIn().then(() => {
+    expect(createErrorNotification).toBeCalledWith('COULD NOT SIGN IN WITH YOUR FACEBOOK ACCOUNT')
   })
 })

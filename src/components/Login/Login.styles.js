@@ -23,7 +23,36 @@ const mixins = {
     paddingLeft: 15,
     marginBottom: 10,
     flex: 1,
-    flexDirection: 'row'
+    flexDirection: 'row',
+    zIndex: 0
+  },
+  triangle: {
+    top: 0,
+    width: 0,
+    height: 0,
+    backgroundColor: 'transparent',
+    borderStyle: 'solid',
+    borderRightWidth: 15,
+    borderLeftWidth: 15,
+    borderTopColor: '#EE4266',
+    borderRightColor: 'transparent',
+    borderBottomColor: '#EE4266',
+    borderLeftColor: 'transparent',
+    paddingBottom: -10,
+    marginTop: 12,
+    marginLeft: 55,
+    position: 'absolute'
+  },
+  banner: {
+    color: 'white',
+    paddingLeft: 250,
+    paddingRight: 250,
+    paddingTop: 10,
+    paddingBottom: 10,
+    textAlign: 'center',
+    position: 'absolute',
+    top: 0,
+    marginTop: isIOS ? 20 : 0
   }
 }
 
@@ -67,10 +96,6 @@ export default {
     borderTopRightRadius: 50,
     borderBottomRightRadius: 50,
     flex: 0.5
-  },
-  error: {
-    color: 'red',
-    marginBottom: 10
   },
   signup: {
     marginTop: 10,
@@ -138,6 +163,42 @@ export default {
     borderRadius: 5,
     paddingLeft: 10
   },
+  errorView: {
+    alignSelf: 'stretch'
+  },
+  emailErrorRow: {
+    alignSelf: 'stretch',
+    marginLeft: 5,
+    marginRight: 5,
+    backgroundColor: '#EE4266',
+    padding: 10,
+    marginBottom: 3,
+    marginTop: -21,
+    borderRadius: 30
+  },
+  passwordErrorRow: {
+    alignSelf: 'stretch',
+    marginLeft: 5,
+    marginRight: 5,
+    backgroundColor: '#EE4266',
+    padding: 10,
+    marginBottom: -32,
+    borderRadius: 30,
+    marginTop: -7,
+    zIndex: 1
+  },
+  errorMessage: {
+    color: 'white',
+    textAlign: 'center'
+  },
+  errorBanner: {
+    ...mixins.banner,
+    backgroundColor: '#EE4266'
+  },
+  banner: {
+    ...mixins.banner,
+    backgroundColor: '#33D089'
+  },
   textInput: {
     height: 38,
     marginTop: 2
@@ -151,6 +212,17 @@ export default {
     height: 40,
     flex: 0.1,
     borderRadius: 5
+  },
+  emailTriangle: {
+    ...mixins.triangle,
+    borderTopWidth: 10,
+    borderBottomWidth: 0
+  },
+  passwordTriangle: {
+    ...mixins.triangle,
+    borderTopWidth: 0,
+    borderBottomWidth: 10,
+    marginTop: -12
   },
   androidInvisibleUnderline: 'rgba(0,0,0,0)'
 }

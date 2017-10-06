@@ -20,7 +20,8 @@ function mapStateToProps (state, props) {
     hasMore: getHasMoreMessages(state, { id }),
     messages,
     pending: state.pending[FETCH_MESSAGES],
-    title
+    title,
+    isConnected: state.SocketListener.connected
   }
 }
 

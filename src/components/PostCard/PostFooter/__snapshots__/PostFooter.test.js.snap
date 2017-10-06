@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders as expected 1`] = `
+<View>
+  <View>
+    <Avatar
+      avatarUrl="a.png"
+      hasBorder={true}
+      hasOverlap={false}
+      size="small"
+      zIndex={3}
+    />
+    <Avatar
+      avatarUrl="b.png"
+      hasBorder={true}
+      hasOverlap={true}
+      size="small"
+      zIndex={2}
+    />
+    <Avatar
+      avatarUrl="c.png"
+      hasBorder={true}
+      hasOverlap={true}
+      size="small"
+      zIndex={1}
+    />
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+    >
+      36 comments
+    </Text>
+  </View>
+  <TouchableOpacity
+    activeOpacity={0.2}
+    focusedOpacity={0.7}
+  >
+    <Icon
+      name="ArrowUp"
+    />
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+    >
+      71
+    </Text>
+  </TouchableOpacity>
+</View>
+`;
