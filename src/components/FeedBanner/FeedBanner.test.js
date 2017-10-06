@@ -1,6 +1,6 @@
-import 'react-native'
 import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
+import TestRenderer from 'react-test-renderer'
 import FeedBanner, { PostPrompt } from './FeedBanner'
 
 const community = {
@@ -35,6 +35,17 @@ describe('FeedBanner', () => {
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
+  })
+
+  it('shows an overlay message when toggleSubscribe is called', () => {
+    const toggleTopicSubscribe = jest.fn()
+    const renderer = TestRenderer.create(
+      <FeedBanner toggleTopicSubscribe={toggleTopicSubscribe} />
+    )
+    const node = renderer.root.instance
+    node.toggleSubscribe()
+    expect(node.state.overlayMessage).toEqual('SUBSCRIBED TO TOPIC')
+    expect(toggleTopicSubscribe).toBeCalled()
   })
 })
 
