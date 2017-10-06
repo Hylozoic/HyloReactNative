@@ -104,8 +104,7 @@ Object {
 exports[`selectors/refiners refineActivity matches the previous ACTION_COMMENT snapshot 1`] = `
 Object {
   "body": "wrote: Rich Churcher",
-  "header": "mentioned you in a comment on",
-  "nameInHeader": true,
+  "header": "New Comment on",
   "onPress": [Function],
   "title": "This post should have a really long title. It should not even come close to fitting on a notification header. It should be truncated.",
 }

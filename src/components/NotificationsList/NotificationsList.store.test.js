@@ -89,26 +89,28 @@ describe('selectors/refiners', () => {
 
   describe('refineActivity', () => {
     it('matches the previous ACTION_COMMENT snapshot', () => {
-      const notification = session.Notification.all().toModelArray()[0]
+      session.Activity.withId('1').update({ action: 'newComment' })
+      const notification = session.Notification.withId('1')
       const actual = store.refineActivity(notification.activity, navigation)
       expect(actual).toMatchSnapshot()
     })
 
     it('navigates to PostDetails for ACTION_COMMENT', () => {
-      const notification = session.Notification.all().toModelArray()[0]
+      session.Activity.withId('1').update({ action: 'newComment' })
+      const notification = session.Notification.withId('1')
       const actual = store.refineActivity(notification.activity, navigation)
       actual.onPress()
       expect(navigation.navigate).toHaveBeenCalledWith('PostDetails', { id: '333' })
     })
 
     it('matches the previous ACTION_COMMENT_MENTION snapshot', () => {
-      const notification = session.Notification.all().toModelArray()[0]
+      const notification = session.Notification.withId('1')
       const actual = store.refineActivity(notification.activity, navigation)
       expect(actual).toMatchSnapshot()
     })
 
     it('navigates to PostDetails for ACTION_COMMENT_MENTION', () => {
-      const notification = session.Notification.all().toModelArray()[0]
+      const notification = session.Notification.withId('1')
       const actual = store.refineActivity(notification.activity, navigation)
       actual.onPress()
       expect(navigation.navigate).toHaveBeenCalledWith('PostDetails', { id: '333' })
@@ -116,14 +118,14 @@ describe('selectors/refiners', () => {
 
     it('matches the previous ACTION_MENTION snapshot', () => {
       session.Activity.withId('1').update({ action: 'mention' })
-      const notification = session.Notification.all().toModelArray()[0]
+      const notification = session.Notification.withId('1')
       const actual = store.refineActivity(notification.activity, navigation)
       expect(actual).toMatchSnapshot()
     })
 
     it('navigates to PostDetails for ACTION_MENTION', () => {
       session.Activity.withId('1').update({ action: 'mention' })
-      const notification = session.Notification.all().toModelArray()[0]
+      const notification = session.Notification.withId('1')
       const actual = store.refineActivity(notification.activity, navigation)
       actual.onPress()
       expect(navigation.navigate).toHaveBeenCalledWith('PostDetails', { id: '333' })
@@ -131,14 +133,14 @@ describe('selectors/refiners', () => {
 
     it('matches the previous ACTION_TOPIC snapshot', () => {
       session.Activity.withId('1').update({ action: 'tag', meta: { reasons: [ 'tag: aardvark' ] } })
-      const notification = session.Notification.all().toModelArray()[0]
+      const notification = session.Notification.withId('1')
       const actual = store.refineActivity(notification.activity, navigation)
       expect(actual).toMatchSnapshot()
     })
 
     it('navigates to Feed (topic) for ACTION_TOPIC', () => {
       session.Activity.withId('1').update({ action: 'tag', meta: { reasons: [ 'tag: aardvark' ] } })
-      const notification = session.Notification.all().toModelArray()[0]
+      const notification = session.Notification.withId('1')
       const actual = store.refineActivity(notification.activity, navigation)
       actual.onPress()
       expect(navigation.navigate).toHaveBeenCalledWith('Feed', { topicName: 'aardvark' })
@@ -146,14 +148,14 @@ describe('selectors/refiners', () => {
 
     it('matches the previous ACTION_JOIN_REQUEST snapshot', () => {
       session.Activity.withId('1').update({ action: 'joinRequest', community: '222' })
-      const notification = session.Notification.all().toModelArray()[0]
+      const notification = session.Notification.withId('1')
       const actual = store.refineActivity(notification.activity, navigation)
       expect(actual).toMatchSnapshot()
     })
 
     it('navigates to Settings for ACTION_JOIN_REQUEST', () => {
       session.Activity.withId('1').update({ action: 'joinRequest', community: '222' })
-      const notification = session.Notification.all().toModelArray()[0]
+      const notification = session.Notification.withId('1')
       const actual = store.refineActivity(notification.activity, navigation)
       actual.onPress()
       expect(navigation.navigate).toHaveBeenCalledWith('Settings')
@@ -161,14 +163,14 @@ describe('selectors/refiners', () => {
 
     it('matches the previous ACTION_APPROVED_JOIN_REQUEST snapshot', () => {
       session.Activity.withId('1').update({ action: 'approvedJoinRequest', community: '222' })
-      const notification = session.Notification.all().toModelArray()[0]
+      const notification = session.Notification.withId('1')
       const actual = store.refineActivity(notification.activity, navigation)
       expect(actual).toMatchSnapshot()
     })
 
     it('navigates to Feed (community) for ACTION_APPROVED_JOIN_REQUEST', () => {
       session.Activity.withId('1').update({ action: 'approvedJoinRequest', community: '222' })
-      const notification = session.Notification.all().toModelArray()[0]
+      const notification = session.Notification.withId('1')
       const actual = store.refineActivity(notification.activity, navigation)
       actual.onPress()
       expect(navigation.navigate).toHaveBeenCalledWith('Feed', { communityId: '222' })
