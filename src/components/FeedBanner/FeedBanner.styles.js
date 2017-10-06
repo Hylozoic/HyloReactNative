@@ -3,49 +3,57 @@ import { isIOS } from 'util/platform'
 
 const postPromptShape = {
   position: 'absolute',
-  top: 122,
   height: 52,
   borderRadius: 4,
   left: 0,
   right: 0,
+  bottom: 0,
   marginLeft: 16,
   marginRight: 16
 }
 
+const hasTextShadow = {
+  textShadowColor: 'rgba(0, 0, 0, 0.25)',
+  textShadowOffset: {width: 0, height: 2},
+  textShadowRadius: 7
+}
+
 export default {
   container: {
-    zIndex: 10
+    zIndex: 10,
+    height: 173,
+    marginBottom: 24
   },
   image: {
     height: 152,
-    marginBottom: 54
+    width: '100%',
+    position: 'absolute'
+  },
+  gradient: {
+    height: 152,
+    width: '100%',
+    position: 'absolute'
   },
   titleRow: {
     position: 'absolute',
     left: 0,
     right: 0,
+    bottom: 66,
     flexDirection: 'row',
     marginLeft: 16,
     marginRight: 16,
-    top: 75
-  },
-  allLogo: {
-    width: 40,
-    height: 40,
-    marginRight: 20,
-    position: 'relative',
-    top: -5
+    alignItems: 'flex-end'
   },
   allName: {
     color: rhino
   },
   name: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontFamily: 'Circular-Black',
     color: 'white',
     backgroundColor: 'transparent',
     flex: 1,
-    alignItems: 'flex-end'
+    ...hasTextShadow
   },
   postPrompt: {
     ...postPromptShape,
@@ -77,13 +85,13 @@ export default {
     fontStyle: 'italic'
   },
   subscribeButton: {
-
   },
   subscribeButtonIcon: {
     fontSize: 30,
     backgroundColor: 'transparent',
     color: 'white',
-    opacity: 0.8
+    opacity: 0.8,
+    ...hasTextShadow
   },
   subscribeButtonIconActive: {
     opacity: 1
