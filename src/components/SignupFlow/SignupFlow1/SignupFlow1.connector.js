@@ -14,7 +14,7 @@ import { pick, omitBy, isNil } from 'lodash/fp'
 
 export function mapStateToProps (state, props) {
   const currentUser = getMe(state, props)
-  const { name, email, password } = getUserSettings(state)
+  const { name, email, password, confirmPassword } = getUserSettings(state)
   const pending = state.pending[SIGNUP] || state.pending[UPDATE_USER_SETTINGS]
   const errors = getSignupErrors(state)
 
@@ -22,6 +22,7 @@ export function mapStateToProps (state, props) {
     name,
     email,
     password,
+    confirmPassword,
     currentUser,
     pending,
     showPasswordField: !currentUser,

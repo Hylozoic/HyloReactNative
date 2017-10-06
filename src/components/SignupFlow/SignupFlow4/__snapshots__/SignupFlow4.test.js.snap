@@ -22,61 +22,64 @@ exports[`SignupFlow4 matches last snapshot 1`] = `
   behavior="padding"
   keyboardVerticalOffset={64}
 >
-  <View>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      disabled={false}
-      ellipsizeMode="tail"
-    >
-      Share your unique super powers!
-    </Text>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      disabled={false}
-      ellipsizeMode="tail"
-    >
-      What skills are you known for? The more skills you add, the more relevant the content. Its like magic.
-    </Text>
-  </View>
-  <SignupControl
-    label="How can you help?"
-    onChange={[Function]}
-    value="Pop"
-  />
-  <SkillCloud
-    onPress={undefined}
-    skills={
-      Array [
-        "One",
-        "Two",
-      ]
-    }
-  />
-  <View>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      disabled={false}
-      ellipsizeMode="tail"
-    >
-      Your Skills
-    </Text>
+  <ScrollViewMock>
+    <View>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        disabled={false}
+        ellipsizeMode="tail"
+      >
+        Share your unique super powers!
+      </Text>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        disabled={false}
+        ellipsizeMode="tail"
+      >
+        What skills are you known for? The more skills you add, the more relevant the content. Its like magic.
+      </Text>
+    </View>
+    <SignupControl
+      label="How can you help?"
+      onChange={[Function]}
+      value="Pop"
+    />
     <SkillCloud
       onPress={[Function]}
+      onPressOther={[Function]}
       skills={
         Array [
-          "Snap",
-          "Crackle",
+          "One",
+          "Two",
         ]
       }
     />
-  </View>
-  <Button
-    onPress={[Function]}
-    text="Add Skill"
-  />
+    <View>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        disabled={false}
+        ellipsizeMode="tail"
+      >
+        Your Skills
+      </Text>
+      <SkillCloud
+        onPress={[Function]}
+        skills={
+          Array [
+            "Snap",
+            "Crackle",
+          ]
+        }
+      />
+    </View>
+    <Button
+      onPress={[Function]}
+      text="Add Skill"
+    />
+  </ScrollViewMock>
 </KeyboardFriendlyView>
 `;
 

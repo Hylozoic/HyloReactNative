@@ -2,7 +2,8 @@ import React from 'react'
 import {
   View,
   Text,
-  TouchableOpacity
+  TouchableOpacity,
+  ScrollView
 } from 'react-native'
 import Button from '../../Button'
 import KeyboardFriendlyView from '../../KeyboardFriendlyView'
@@ -20,43 +21,69 @@ export default class SignupFlow4 extends React.Component {
     headerBackTitle: null
   })
 
+  state = {
+    showOther: true
+  }
+
   componentDidMount () {
     this.props.loadSkills()
   }
 
+  addSkill = skill => {
+    this.props.addSkill(skill)
+    this.setState({showOther: true})
+  }
+
+  removeSkill = skill => {
+    this.props.removeSkill(skill)
+    this.setState({showOther: true})
+  }
+
+  onPressOther = () => {
+    this.setState({showOther: false})
+    this.control && this.control.focus()
+  }
+
   render () {
-    const { saveAndNext, skill, setSkill, userSkills, remainingSkills, addSkill, removeSkill } = this.props
+    const { saveAndNext, skill, setSkill, userSkills, remainingSkills } = this.props
 
     const editingSkill = !isEmpty(skill)
+    const { showOther } = this.state
 
     return <KeyboardFriendlyView style={styles.container} {...kavProps}>
-      <View style={styles.containerPadding}>
-        <Text style={styles.title}>Share your unique super powers!</Text>
-        <Text style={styles.subTitle}>
-          What skills are you known for? The more skills you add, the more relevant the content. Its like magic.
-        </Text>
-      </View>
-      <SignupControl
-        style={styles.containerPadding}
-        label='How can you help?'
-        value={skill}
-        onChange={setSkill} />
-      <SkillCloud skills={remainingSkills} onPress={addSkill} />
-      {!isEmpty(userSkills) && <View style={styles.userSkills}>
-        <Text style={styles.yourSkillsLabel}>Your Skills</Text>
-        <SkillCloud skills={userSkills} onPress={removeSkill} />
-      </View>}
-      <Button
-        style={styles.continueButton}
-        text={editingSkill ? 'Add Skill' : 'Continue'}
-        onPress={editingSkill ? () => addSkill(skill) : saveAndNext} />
+      <ScrollView>
+        <View style={styles.containerPadding}>
+          <Text style={styles.title}>Share your unique super powers!</Text>
+          <Text style={styles.subTitle}>
+            What skills are you known for? The more skills you add, the more relevant the content. Its like magic.
+          </Text>
+        </View>
+        <SignupControl
+          ref={c => { this.control = c }}
+          style={styles.containerPadding}
+          label='How can you help?'
+          value={skill}
+          onChange={setSkill} />
+        <SkillCloud skills={remainingSkills}
+          onPress={this.addSkill}
+          onPressOther={showOther && this.onPressOther} />
+        {!isEmpty(userSkills) && <View style={styles.userSkills}>
+          <Text style={styles.yourSkillsLabel}>Your Skills</Text>
+          <SkillCloud skills={userSkills} onPress={this.removeSkill} />
+        </View>}
+        <Button
+          style={styles.continueButton}
+          text={editingSkill ? 'Add Skill' : 'Continue'}
+          onPress={editingSkill ? () => this.addSkill(skill) : saveAndNext} />
+      </ScrollView>
     </KeyboardFriendlyView>
   }
 }
 
-export function SkillCloud ({ skills, onPress, style }) {
+export function SkillCloud ({ skills, onPress, style, onPressOther }) {
   return <View style={[styles.skillCloud, style]}>
     {skills.map((skill, i) => <SkillPill skill={skill} onPress={onPress} key={i} />)}
+    {!!onPressOther && <SkillPill skill='+ Other' onPress={onPressOther} />}
   </View>
 }
 
