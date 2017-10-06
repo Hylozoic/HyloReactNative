@@ -26,7 +26,7 @@ describe('NotificationsList', () => {
           avatarSeparator: false,
           createdAt: "2 min ago",
           id: "1",
-          onPress: () => {},
+          onPress: jest.fn(),
           unread: false
         }
       ],
@@ -51,10 +51,18 @@ describe('NotificationsList', () => {
   })
 
   it('marks the notification read on touch', () => {
-    props.notifications[0].unread = true
+    const notification = props.notifications[0]
+    notification.unread = true
     const root = TestRenderer.create(<NotificationsList { ...props } />).root
     simulate(root.findAllByType(TouchableOpacity)[0], 'press')
-    expect(props.markActivityRead).toHaveBeenCalledWith('1')
+    expect(props.markActivityRead).toHaveBeenCalledWith(notification.activityId)
+  })
+
+  it('calls notification.onPress on touch', () => {
+    const notification = props.notifications[0]
+    const root = TestRenderer.create(<NotificationsList { ...props } />).root
+    simulate(root.findAllByType(TouchableOpacity)[0], 'press')
+    expect(notification.onPress).toHaveBeenCalled()
   })
 
   it('matches the last snapshot for NotificationRow', () => {
