@@ -68,7 +68,7 @@ export default class SignupFlow1 extends React.Component {
     return !any(i => i, values(errors))
   }
 
-  submit () {
+  submit = () => {
     if (this.validate()) {
       this.props.signupOrUpdate()
     }
@@ -90,7 +90,7 @@ export default class SignupFlow1 extends React.Component {
 
     const submitUnlessPending = pending
       ? () => {}
-      : () => this.submit()
+      : this.submit
 
     return <KeyboardFriendlyView style={styles.container} {...kavProps}>
       <ScrollView>

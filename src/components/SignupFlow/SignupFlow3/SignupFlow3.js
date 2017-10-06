@@ -18,7 +18,7 @@ export default class SignupFlow3 extends React.Component {
     headerBackTitle: null
   })
 
-  saveAndNext () {
+  saveAndNext = () => {
     this.control && this.control.blur()
     this.props.saveAndNext()
   }
@@ -41,7 +41,7 @@ export default class SignupFlow3 extends React.Component {
       <Button
         style={styles.continueButton}
         text='Continue'
-        onPress={() => this.saveAndNext()} />
+        onPress={this.saveAndNext} />
     </KeyboardFriendlyView>
   }
 }
