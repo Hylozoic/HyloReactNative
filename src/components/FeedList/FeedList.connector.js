@@ -47,7 +47,6 @@ const mapDispatchToProps = {setFilter, setSort, fetchPosts}
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
   const { hasMore, pending, posts, queryProps } = stateProps
-  const fetchPosts = () => dispatchProps.fetchPosts(queryProps)
 
   const fetchMorePosts = hasMore && !pending
     ? () => dispatchProps.fetchPosts({...queryProps, offset: posts.length})
@@ -57,7 +56,8 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     ...omit(['queryProps'], stateProps),
     ...dispatchProps,
     ...ownProps,
-    fetchPosts,
+    fetchPosts: () => dispatchProps.fetchPosts(queryProps),
+    refreshPosts: () => dispatchProps.fetchPosts(queryProps, {reset: true}),
     fetchMorePosts
   }
 }

@@ -27,7 +27,6 @@ export default class FeedList extends Component {
   render () {
     const {
       posts,
-      fetchMorePosts,
       filter,
       sortBy,
       setFilter,
@@ -69,10 +68,10 @@ export default class FeedList extends Component {
             showTopic={showTopic}
             showCommunity={showCommunities}
             goToCommunity={goToCommunity} />}
-        onRefresh={fetchMorePosts}
+        onRefresh={this.props.refreshPosts}
         refreshing={!!pending}
         keyExtractor={(item, index) => item.id}
-        onEndReached={fetchMorePosts}
+        onEndReached={this.props.fetchMorePosts}
         ListHeaderComponent={listHeaderComponent}
         ListFooterComponent={listFooterComponent} />
     </View>
