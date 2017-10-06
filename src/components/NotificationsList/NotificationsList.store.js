@@ -21,7 +21,7 @@ export const FETCH_NOTIFICATIONS = 'NotificationsList/FETCH_NOTIFICATIONS'
 export const MARK_ACTIVITY_READ = 'NotificationsList/MARK_ACTIVITY_READ'
 export const MARK_ALL_ACTIVITIES_READ = 'NotificationsList/MARK_ALL_ACTIVITIES_READ'
 
-const NOTIFICATION_TEXT_MAX = 100
+export const NOTIFICATION_TEXT_MAX = 100
 
 export function fetchNotifications (first = 20, offset = 0) {
   return {
@@ -110,10 +110,9 @@ export function markAllActivitiesRead () {
   }
 }
 
-function presentedText (text) {
-  return decode(striptags(text, [], ' '))
-    .replace(/\s+/g, ' ')
-    .substring(0, NOTIFICATION_TEXT_MAX)
+export function presentedText (text) {
+  const stripped = striptags(text)
+  return decode(stripped.substring(0, NOTIFICATION_TEXT_MAX))
 }
 
 function refineActivity ({ action, comment, community, post, reasons }, actor, { navigate }) {

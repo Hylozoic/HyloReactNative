@@ -6,7 +6,15 @@ exports[`NotificationsList matches the last snapshot 1`] = `
     data={
       Array [
         Object {
-          "id": 1,
+          "activityId": "1",
+          "actor": Object {
+            "avatarUrl": "https://wombat.com",
+            "name": "Wombat McAardvark",
+          },
+          "avatarSeparator": false,
+          "createdAt": "2 min ago",
+          "id": "1",
+          "unread": false,
         },
       ]
     }

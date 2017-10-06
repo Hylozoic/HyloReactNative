@@ -7,39 +7,19 @@ import NotificationsList from './NotificationsList'
 describe('NotificationsList', () => {
   it('matches the last snapshot', () => {
     const renderer = new ReactShallowRenderer()
-    const notifications = [{id: 1}]
+    const notifications = [
+      {
+        activityId: "1",
+        actor: { avatarUrl: "https://wombat.com", name: "Wombat McAardvark" },
+        avatarSeparator: false,
+        createdAt: "2 min ago",
+        id: "1",
+        unread: false
+      }
+    ]
     renderer.render(<NotificationsList notifications={notifications} />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
   })
-
-  // it('handles pending correctly without notifications', () => {
-  //   const renderer = new ReactShallowRenderer()
-  //   const notifications = []
-  //   const pending = true
-  //   renderer.render(<NotificationsList notifications={notifications} pending={pending} />)
-  //   const actual = renderer.getRenderOutput()
-  //
-  //   expect(actual).toMatchSnapshot()
-  // })
-  //
-  // it('handles pending correctly with notifications', () => {
-  //   const renderer = new ReactShallowRenderer()
-  //   const notifications = {id: 1}
-  //   const pending = true
-  //   renderer.render(<NotificationsList notifications={notifications} pending={pending} />)
-  //   const actual = renderer.getRenderOutput()
-  //
-  //   expect(actual).toMatchSnapshot()
-  // })
-  // it('handles when there are no notifications correctly', () => {
-  //   const renderer = new ReactShallowRenderer()
-  //   const notifications = []
-  //   const pending = false
-  //   renderer.render(<NotificationsList notifications={notifications} pending={pending} />)
-  //   const actual = renderer.getRenderOutput()
-  //
-  //   expect(actual).toMatchSnapshot()
-  // })
 })

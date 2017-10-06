@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`NotificationsList.store action creators matches the last snapshot from fetchNotifications 1`] = `
+exports[`action creators matches the last snapshot from fetchNotifications 1`] = `
 Object {
   "graphql": Object {
     "query": "query ($first: Int, $offset: Int) {
@@ -56,7 +56,7 @@ Object {
 }
 `;
 
-exports[`NotificationsList.store action creators matches the last snapshot from markActivityRead 1`] = `
+exports[`action creators matches the last snapshot from markActivityRead 1`] = `
 Object {
   "graphql": Object {
     "query": "mutation ($id: ID) {
@@ -76,7 +76,7 @@ Object {
 }
 `;
 
-exports[`NotificationsList.store action creators matches the last snapshot from markAllActivitiesRead 1`] = `
+exports[`action creators matches the last snapshot from markAllActivitiesRead 1`] = `
 Object {
   "graphql": Object {
     "query": "mutation {
