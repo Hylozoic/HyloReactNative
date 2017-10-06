@@ -48,6 +48,7 @@ exports[`SignupFlow4 matches last snapshot 1`] = `
     />
     <SkillCloud
       onPress={[Function]}
+      onPressOther={[Function]}
       skills={
         Array [
           "One",

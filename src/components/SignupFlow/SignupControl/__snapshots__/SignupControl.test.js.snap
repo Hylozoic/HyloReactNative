@@ -22,19 +22,45 @@ exports[`matches last snapshot 1`] = `
     value="Joe Bloggs"
   />
   <View>
-    <Icon
-      allowFontScaling={false}
-      name="eye"
+    <TouchableOpacity
+      activeOpacity={0.2}
+      focusedOpacity={0.7}
+      hitSlop={
+        Object {
+          "bottom": 10,
+          "left": 10,
+          "right": 10,
+          "top": 10,
+        }
+      }
       onPress={[Function]}
-      size={12}
-    />
-    <View>
+    >
       <Icon
         allowFontScaling={false}
-        name="check"
-        onPress={[Function]}
+        name="eye"
         size={12}
       />
+    </TouchableOpacity>
+    <View>
+      <TouchableOpacity
+        activeOpacity={0.2}
+        focusedOpacity={0.7}
+        hitSlop={
+          Object {
+            "bottom": 10,
+            "left": 10,
+            "right": 10,
+            "top": 10,
+          }
+        }
+        onPress={[Function]}
+      >
+        <Icon
+          allowFontScaling={false}
+          name="check"
+          size={12}
+        />
+      </TouchableOpacity>
     </View>
   </View>
   <View>

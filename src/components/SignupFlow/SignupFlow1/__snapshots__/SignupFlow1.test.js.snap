@@ -135,7 +135,7 @@ exports[`matches last snapshot 1`] = `
     />
     <SignupControl
       error={undefined}
-      label="Confirm"
+      label="Confirm Password"
       onChange={[Function]}
       onSubmitEditing={[Function]}
       returnKeyType="go"
