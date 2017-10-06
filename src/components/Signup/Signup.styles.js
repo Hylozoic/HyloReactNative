@@ -1,8 +1,8 @@
 import Dimensions from 'Dimensions'
-const bgImageWidth = Dimensions.get('window').width
-const bgImageHeight = bgImageWidth * (598 / 748) // 1498 and 1191 are the width and height of the image asset
 import loginStyles from '../Login/Login.styles'
 import { caribbeanGreen } from 'style/colors'
+const bgImageWidth = Dimensions.get('window').width
+const bgImageHeight = bgImageWidth * (598 / 748) // 1498 and 1191 are the width and height of the image asset
 
 export default {
   container: {
@@ -36,6 +36,10 @@ export default {
     paddingHorizontal: 40,
     marginBottom: 12
   },
+  errorWrapper: {
+    alignItems: 'center'
+  },
+  error: loginStyles.error,
   subTitle: {
     ...loginStyles.helpText,
     textAlign: 'center',
@@ -51,6 +55,12 @@ export default {
     ...loginStyles.helpText,
     textAlign: 'center',
     marginBottom: 16
+  },
+  socialButtons: {
+    flex: 1,
+    flexDirection: 'row',
+    opacity: 0.7,
+    marginBottom: 50
   },
   login: {
     flexDirection: 'row',
