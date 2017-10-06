@@ -24,12 +24,16 @@ exports[`renders correctly 1`] = `
           }
         }
         newPost={[Function]}
+        toggleTopicSubscribe={undefined}
+        topicName="amazing"
+        topicSubscribed={undefined}
       />
     }
     showCommunities={false}
     showMember={undefined}
     showPost={[Function]}
     showTopic={undefined}
+    topicName="amazing"
   />
 </View>
 `;

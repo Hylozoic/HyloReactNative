@@ -4,7 +4,8 @@ const feedMargin = 16
 
 export default {
   container: {
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+    minHeight: 100
   },
   listControls: {
     flexDirection: 'row',

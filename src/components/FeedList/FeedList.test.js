@@ -13,7 +13,10 @@ describe('FeedList', () => {
       setFilter={() => {}}
       setSort={() => {}}
       fetchMorePosts={() => {}}
-      pending />)
+      pending
+      refreshing
+      onRefresh={() => {}}
+      />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()

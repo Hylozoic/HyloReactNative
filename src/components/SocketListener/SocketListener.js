@@ -1,5 +1,6 @@
 import React from 'react'
 import { getSocket, socketUrl } from 'util/websockets'
+import { isEqual } from 'lodash'
 
 export default class SocketListener extends React.Component {
   constructor (props) {
@@ -35,8 +36,11 @@ export default class SocketListener extends React.Component {
   }
 
   reconnect = () => {
+    console.log('connecting SocketListener...')
     this.socket.post(socketUrl('/noo/threads/subscribe'), (body, jwr) => {
-      console.log('got response from subscribe:', body)
+      if (!isEqual(body, {})) {
+        console.error(`Failed to connect SocketListener: ${body}`)
+      }
     })
   }
 

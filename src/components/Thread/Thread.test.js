@@ -13,6 +13,7 @@ describe('Thread', () => {
       createMessage: () => {},
       currentUserId: '1',
       fetchMessages: () => {},
+      isConnected: true,
 
       // Remember: _descending_ order, new to old...
       messages: [
@@ -143,12 +144,6 @@ jest.mock('FlatList', () => {
   }
   return FlatList
 })
-
-jest.mock('NetInfo', () => ({
-  isConnected: {
-    addEventListener: jest.fn()
-  }
-}))
 
 // Can actually get away with `jest.mock('../SocketSubscriber')` here, but it
 // generates warnings because `undefined` isn't exactly a React component...

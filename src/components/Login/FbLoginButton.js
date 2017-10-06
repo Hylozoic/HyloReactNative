@@ -32,9 +32,11 @@ export default class FbLoginButton extends React.Component {
   signIn = () => {
     return this.LoginManager.logInWithReadPermissions(permissions)
     .then(
-      result => result.isCancelled || this.handleResult(null, result),
-      error => alert('Login failed with error: ' + error)
+      result => result.isCancelled || this.handleResult(null, result)
     )
+    .catch(() => {
+      this.props.createErrorNotification('COULD NOT SIGN IN WITH YOUR FACEBOOK ACCOUNT')
+    })
   }
 
   render () {
