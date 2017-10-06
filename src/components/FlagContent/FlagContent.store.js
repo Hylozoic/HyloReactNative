@@ -20,6 +20,7 @@ export function flagContent (category, reason, linkData) {
       }
     },
     meta: {
+      optimistic: true
     }
   }
 }

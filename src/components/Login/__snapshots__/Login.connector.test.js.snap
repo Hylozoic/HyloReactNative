@@ -1,6 +1,49 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`mapDispatchToProps maps the action generators 1`] = `
+exports[`Login dispatchProps login should match the latest snapshot 1`] = `
+Object {
+  "meta": Object {
+    "email": "name",
+  },
+  "payload": Object {
+    "api": Object {
+      "method": "post",
+      "params": Object {
+        "email": "name",
+        "password": "pass",
+      },
+      "path": "/noo/login",
+    },
+  },
+  "type": "LOGIN",
+}
+`;
+
+exports[`Login dispatchProps loginWithFacebook should match the latest snapshot 1`] = `
+Object {
+  "payload": Object {
+    "api": Object {
+      "method": "post",
+      "path": "/noo/login/facebook-token/oauth?access_token=SOME_TOKEN",
+    },
+  },
+  "type": "LOGIN_WITH_FACEBOOK",
+}
+`;
+
+exports[`Login dispatchProps loginWithGoogle should match the latest snapshot 1`] = `
+Object {
+  "payload": Object {
+    "api": Object {
+      "method": "post",
+      "path": "/noo/login/google-token/oauth?access_token=SOME_TOKEN",
+    },
+  },
+  "type": "LOGIN_WITH_GOOGLE",
+}
+`;
+
+exports[`Login dispatchProps maps the action generators 1`] = `
 Object {
   "login": [Function],
   "loginWithFacebook": [Function],
@@ -8,7 +51,7 @@ Object {
 }
 `;
 
-exports[`mapDispatchToProps maps the action generators 2`] = `
+exports[`Login dispatchProps maps the action generators 2`] = `
 Array [
   Array [
     Object {
@@ -24,18 +67,23 @@ Array [
 ]
 `;
 
-exports[`mapStateToProps returns the right keys 1`] = `
+exports[`Login dispatchProps returns the right keys 1`] = `
 Object {
   "defaultEmail": "lah@lah.com",
+  "emailError": false,
   "error": "blah",
   "goToSignup": [Function],
+  "passwordError": false,
+  "pending": undefined,
 }
 `;
 
-exports[`mapStateToProps returns the right keys 2`] = `
+exports[`Login dispatchProps returns the right keys 2`] = `
 Array [
   Array [
     "Signup",
   ],
 ]
 `;
+
+exports[`Login mapStateToProps return object matches snapshot 1`] = `undefined`;
