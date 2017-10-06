@@ -334,7 +334,7 @@ exports[`NotificationCard matches the last snapshot for a mention 1`] = `
 </View>
 `;
 
-exports[`NotificationCard matches the last snapshot for a post in tag/topic 1`] = `
+exports[`NotificationCard matches the last snapshot for a post in topic 1`] = `
 <View>
   <View>
     <Avatar

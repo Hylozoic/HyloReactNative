@@ -17,9 +17,9 @@ const renderName = ({ actor, nameInHeader }) => nameInHeader
   ? <Text style={styles.name}>{`${actor.name} `}</Text>
   : null
 
-// TODO: render tags as, well, tags
-const renderTag = tag => tag
-  ? <Text style={styles.name}>{` ${tag}`}</Text>
+// TODO: render topics as, well, topics
+const renderTopic = topic => topic
+  ? <Text style={styles.name}>{` ${topic}`}</Text>
   : null
 
 const renderTitle = title => title
@@ -35,7 +35,7 @@ export default function NotificationCard ({ notification }) {
     createdAt,
     header,
     onPress,
-    tag,
+    topic,
     title,
     unread
   } = notification
@@ -50,7 +50,7 @@ export default function NotificationCard ({ notification }) {
         {renderName(notification)}
         <Text style={[styles.text, styles.emphasize]}>{header}</Text>
         {renderTitle(title)}
-        {renderTag(tag)}
+        {renderTopic(topic)}
       </Text>
       <Text style={styles.text} numberOfLines={2}>
         {renderFirstName(actor)}
@@ -70,12 +70,14 @@ NotificationCard.propTypes = {
       name: string,
       avatarUrl: string
     }),
+    community: string,
     createdAt: string,
     body: string,
     header: string,
     nameInHeader: bool,
     onPress: func,
     title: string,
+    topic: string,
     unread: bool
   })
 }

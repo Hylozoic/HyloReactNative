@@ -1,21 +1,23 @@
-import 'react-native'
+import { TouchableOpacity } from 'react-native'
 import React from 'react'
-import ReactShallowRenderer from 'react-test-renderer/shallow'
+import ShallowRenderer from 'react-test-renderer/shallow'
+import TestRenderer from 'react-test-renderer'
+import { simulate } from 'util/testing'
 
 import Loading from '../Loading'
-import NotificationsList from './NotificationsList'
+import NotificationsList, { NotificationRow } from './NotificationsList'
 
 describe('NotificationsList', () => {
   let props = null
-  let renderer = null
+  let shallowRenderer = null
 
   beforeEach(() => {
-    renderer = new ReactShallowRenderer()
+    shallowRenderer = new ShallowRenderer()
     props = {
       fetchMore: () => {},
       fetchNotifications: () => {},
       hasMore: true,
-      markActivityRead: () => {},
+      markActivityRead: jest.fn(),
       pending: false,
       notifications: [
         {
@@ -24,6 +26,7 @@ describe('NotificationsList', () => {
           avatarSeparator: false,
           createdAt: "2 min ago",
           id: "1",
+          onPress: () => {},
           unread: false
         }
       ],
@@ -32,8 +35,8 @@ describe('NotificationsList', () => {
   })
 
   it('matches the last snapshot', () => {
-    renderer.render(<NotificationsList { ...props } />)
-    const actual = renderer.getRenderOutput()
+    shallowRenderer.render(<NotificationsList { ...props } />)
+    const actual = shallowRenderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
   })
@@ -41,9 +44,23 @@ describe('NotificationsList', () => {
   it('returns Loading with no notifications when pending is true', () => {
     props.pending = true
     props.notifications = []
-    renderer.render(<NotificationsList { ...props } />)
-    const actual = renderer.getRenderOutput()
+    shallowRenderer.render(<NotificationsList { ...props } />)
+    const actual = shallowRenderer.getRenderOutput()
 
     expect(actual).toEqual(<Loading />)
+  })
+
+  it('marks the notification read on touch', () => {
+    props.notifications[0].unread = true
+    const root = TestRenderer.create(<NotificationsList { ...props } />).root
+    simulate(root.findAllByType(TouchableOpacity)[0], 'press')
+    expect(props.markActivityRead).toHaveBeenCalledWith('1')
+  })
+
+  it('matches the last snapshot for NotificationRow', () => {
+    shallowRenderer.render(<NotificationRow
+      markActivityRead={props.markActivityRead}
+      notification={props.notifications[0]} />)
+    expect(shallowRenderer.getRenderOutput()).toMatchSnapshot()
   })
 })

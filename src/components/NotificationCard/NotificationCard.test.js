@@ -58,12 +58,12 @@ describe('NotificationCard', () => {
     expect(renderer.getRenderOutput()).toMatchSnapshot()
   })
 
-  it('matches the last snapshot for a post in tag/topic', () => {
+  it('matches the last snapshot for a post in topic', () => {
     const notification = {
       ...notificationBase,
       body: 'wrote: a fairly long comment that in theory should get truncated by the line limit, and end in elipsis',
       header: 'New post in',
-      tag: 'hydroponics'
+      topic: 'hydroponics'
     }
     const renderer = new ReactShallowRenderer()
     renderer.render(<NotificationCard notification={notification} />)
