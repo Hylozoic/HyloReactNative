@@ -9,7 +9,7 @@ import styles from './Header.styles'
 export default function Header (navigation, title) {
   const openDrawer = () => navigation.navigate('DrawerOpen')
   const showMessages = () => navigation.navigate('ThreadList')
-  const showNotifications = () => navigation.navigate('NotificationsList', { title: 'Notifications' })
+  const showNotifications = () => navigation.navigate('NotificationsList')
 
   return {
     headerTitle: <Text style={styles.headerTitle}>{title}</Text>,

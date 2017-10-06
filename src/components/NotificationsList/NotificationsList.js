@@ -8,7 +8,8 @@ import NotificationCard from '../NotificationCard'
 import styles from './NotificationsList.styles'
 
 export default class NotificationsList extends Component {
-  static navigationOptions = ({ navigation }) => header(navigation, { left: 'close' })
+  static navigationOptions = ({ navigation }) =>
+    header(navigation, { left: 'close', title: 'Notifications' })
 
   componentDidMount () {
     const { fetchNotifications, setRightButton } = this.props
