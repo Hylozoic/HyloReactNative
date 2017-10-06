@@ -20,11 +20,11 @@ export default class SignupControl extends React.Component {
     }
   }
 
-  togglePassword () {
+  togglePassword = () => {
     this.setState({securePassword: !this.state.securePassword})
   }
 
-  toggleEditable () {
+  toggleEditable = () => {
     if (this.state.editable) {
       this.onSubmitEditing()
     } else {
@@ -48,7 +48,7 @@ export default class SignupControl extends React.Component {
     return this.state.editable
   }
 
-  onSubmitEditing () {
+  onSubmitEditing = () => {
     if (this.props.toggleEditable) this.setState({editable: false})
     if (this.props.onSubmitEditing) this.props.onSubmitEditing()
     if (this.state.highlight) this.setState({highlight: false})
@@ -87,11 +87,11 @@ export default class SignupControl extends React.Component {
         autoCorrect={autoCorrect}
         keyboardType={keyboardType}
         returnKeyType={returnKeyType}
-        onSubmitEditing={() => this.onSubmitEditing()}
+        onSubmitEditing={this.onSubmitEditing}
         editable={editable} />
       {(toggleSecureTextEntry || toggleEditable) && <View style={styles.toggles}>
         {toggleSecureTextEntry && <TouchableOpacity
-          onPress={() => this.togglePassword()}
+          onPress={this.togglePassword}
           hitSlop={{top: 10, bottom: 10, left: 10, right: 10}}>
           <EntypoIcon name={securePassword ? 'eye' : 'eye-with-line'}
             style={styles.eyeIcon} />
@@ -99,7 +99,7 @@ export default class SignupControl extends React.Component {
         {toggleEditable && <View
           style={highlight && styles.highlight}>
           <TouchableOpacity
-            onPress={() => this.toggleEditable()}
+            onPress={this.toggleEditable}
             hitSlop={{top: 10, bottom: 10, left: 10, right: 10}}>
             <EntypoIcon name={editable ? 'check' : 'edit'}
               style={styles.editIcon} />
