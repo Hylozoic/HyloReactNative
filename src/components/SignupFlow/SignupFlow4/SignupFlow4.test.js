@@ -38,6 +38,52 @@ describe('SignupFlow4', () => {
 
   it('has navigationOptions', () =>
     expect(SignupFlow4.navigationOptions()).toMatchSnapshot())
+
+  const defaultProps = {
+    loadSkills: () => {},
+    remainingSkills: []
+  }
+
+  describe('addSkill', () => {
+    it('calls the prop and sets state', () => {
+      const props = {
+        ...defaultProps,
+        addSkill: jest.fn()
+      }
+      const skill = 'jump'
+      const instance = ReactTestRenderer.create(<SignupFlow4 {...props} />).getInstance()
+      instance.setState({showOther: false})
+      instance.addSkill(skill)
+      expect(instance.state.showOther).toEqual(true)
+      expect(props.addSkill).toHaveBeenCalledWith(skill)
+    })
+  })
+
+  describe('removeSkill', () => {
+    it('calls the prop and sets state', () => {
+      const props = {
+        ...defaultProps,
+        removeSkill: jest.fn()
+      }
+      const skill = 'jump'
+      const instance = ReactTestRenderer.create(<SignupFlow4 {...props} />).getInstance()
+      instance.setState({showOther: false})
+      instance.removeSkill(skill)
+      expect(instance.state.showOther).toEqual(true)
+      expect(props.removeSkill).toHaveBeenCalledWith(skill)
+    })
+  })
+
+  describe('onPressOther', () => {
+    it('calls the prop and sets state', () => {
+      const instance = ReactTestRenderer.create(<SignupFlow4 {...defaultProps} />).getInstance()
+      instance.setState({showOther: true})
+      instance.control.focus = jest.fn()
+      instance.onPressOther()
+      expect(instance.state.showOther).toEqual(false)
+      expect(instance.control.focus).toHaveBeenCalled()
+    })
+  })
 })
 
 describe('SkillCloud', () => {
