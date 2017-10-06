@@ -17,7 +17,7 @@ Notification.fields = {
 }
 
 export const ACTION_NEW_COMMENT = 'newComment'
-export const ACTION_TAG = 'tag'
+export const ACTION_TOPIC = 'tag'
 export const ACTION_JOIN_REQUEST = 'joinRequest'
 export const ACTION_APPROVED_JOIN_REQUEST = 'approvedJoinRequest'
 export const ACTION_MENTION = 'mention'

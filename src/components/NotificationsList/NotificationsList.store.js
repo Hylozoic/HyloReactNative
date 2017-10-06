@@ -10,7 +10,7 @@ import orm from '../../store/models'
 import { makeGetQueryResults } from '../../store/reducers/queryResults'
 import {
   ACTION_NEW_COMMENT,
-  ACTION_TAG,
+  ACTION_TOPIC,
   ACTION_JOIN_REQUEST,
   ACTION_APPROVED_JOIN_REQUEST,
   ACTION_MENTION,
@@ -142,14 +142,14 @@ function refineActivity ({ action, comment, community, post, reasons }, actor, {
         nameInHeader: true
       }
 
-    case ACTION_TAG:
-      const tagReason = find(r => r.startsWith('tag: '), reasons)
-      const tag = tagReason.split(': ')[1]
+    case ACTION_TOPIC:
+      const topicReason = find(r => r.startsWith('tag: '), reasons)
+      const topic = topicReason.split(': ')[1]
       return {
         body: `wrote: ${presentedText(post.details)}`,
         header: `New Post in`,
         onPress: () => navigate('PostDetails', { id: post.id }),
-        tag
+        topic
       }
 
     case ACTION_JOIN_REQUEST:
