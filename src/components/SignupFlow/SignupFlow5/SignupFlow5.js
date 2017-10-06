@@ -63,7 +63,9 @@ export default class SignupFlow5 extends React.Component {
         confirmError = showPasswordField && password !== confirmPassword && 'Passwords must match'
         this.setError('password', passwordError)
         this.setError('confirmPassword', confirmError)
-        return !error
+        console.log('passwordError', passwordError)
+        console.log('confirmError', confirmError)        
+        return !(passwordError || confirmError)
     }
   }
 

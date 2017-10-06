@@ -82,6 +82,7 @@ it('validates its fields', () => {
     name: '',
     email: 'ra',
     password: 'rarara',
+    confirmPassword: 'lalala',    
     showPasswordField: true,
     fetchCurrentUser: () => {},
     loadUserSettings: () => {}

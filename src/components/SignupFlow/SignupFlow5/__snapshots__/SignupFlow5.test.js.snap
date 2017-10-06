@@ -201,3 +201,21 @@ exports[`matches last snapshot 1`] = `
   </ScrollViewMock>
 </Unknown>
 `;
+
+exports[`validate returns false and populates state when the props are bad 1`] = `
+Object {
+  "confirmPassword": "Passwords must match",
+  "email": "Must be a valid email",
+  "name": "Name must not consist solely of whitespace.",
+  "password": "Password must be at least 9 characters.",
+}
+`;
+
+exports[`validate returns true when the props are good 1`] = `
+Object {
+  "confirmPassword": false,
+  "email": false,
+  "name": null,
+  "password": null,
+}
+`;
