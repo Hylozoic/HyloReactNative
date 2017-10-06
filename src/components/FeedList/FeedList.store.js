@@ -1,9 +1,7 @@
 import { makeGetQueryResults, makeQueryResultsModelSelector } from '../../store/reducers/queryResults'
 import { FETCH_POSTS } from '../../store/actions/fetchPosts'
 import { createSelector } from 'reselect'
-import { createSelector as ormCreateSelector } from 'redux-orm'
-import { get, includes, isEmpty } from 'lodash/fp'
-import orm from '../../store/models'
+import { get } from 'lodash/fp'
 
 export const MODULE_NAME = 'FeedList'
 

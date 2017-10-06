@@ -1,0 +1,73 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mergeProps binds communityId to functions from dispatchProps 1`] = `
+Object {
+  "community": Object {
+    "id": "12",
+    "slug": "life",
+  },
+  "editPost": [Function],
+  "fetchCommunityTopic": null,
+  "goToCommunity": [Function],
+  "newPost": [Function],
+  "otherProp1": "foo1",
+  "otherProp2": "foo2",
+  "showMember": [Function],
+  "showPost": [Function],
+  "showTopic": [Function],
+  "toggleTopicSubscribe": null,
+}
+`;
+
+exports[`mergeProps sets up fetchCommunityTopic 1`] = `
+Object {
+  "graphql": Object {
+    "query": "query ($topicName: String, $communitySlug: String) {
+        communityTopic(topicName: $topicName, communitySlug: $communitySlug) {
+          id
+          isSubscribed
+          followersTotal
+          topic {
+            id
+            name
+          }
+          community {
+            id
+          }
+        }
+      }",
+    "variables": Object {
+      "communitySlug": "life",
+      "topicName": "inquiry",
+    },
+  },
+  "meta": Object {
+    "extractModel": "CommunityTopic",
+  },
+  "type": "Feed/FETCH_COMMUNITY_TOPIC",
+}
+`;
+
+exports[`mergeProps sets up toggleTopicSubscribe 1`] = `
+Object {
+  "graphql": Object {
+    "query": "mutation($topicId: ID, $communityId: ID, $isSubscribing: Boolean) {
+        subscribe(topicId: $topicId, communityId: $communityId, isSubscribing: $isSubscribing) {
+          success
+        }
+      }",
+    "variables": Object {
+      "communityId": "12",
+      "isSubscribing": true,
+      "topicId": "5",
+    },
+  },
+  "meta": Object {
+    "communityId": "12",
+    "isSubscribing": true,
+    "optimistic": true,
+    "topicId": "5",
+  },
+  "type": "Feed/TOGGLE_TOPIC_SUBSCRIBE",
+}
+`;

@@ -1,5 +1,5 @@
 import React from 'react'
-import { FlatList, KeyboardAvoidingView, NetInfo, View } from 'react-native'
+import { FlatList, KeyboardAvoidingView, View } from 'react-native'
 import { any, arrayOf, bool, func, shape, string } from 'prop-types'
 import { throttle, debounce } from 'lodash'
 import { get } from 'lodash/fp'
@@ -49,7 +49,6 @@ export default class Thread extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      isConnected: true,
       newMessages: 0,
       notify: false
     }
@@ -66,7 +65,6 @@ export default class Thread extends React.Component {
     this.scrollToBottom()
     fetchMessages()
     if (title) setTitle(title)
-    NetInfo.isConnected.addEventListener('change', this.handleConnectivityChange)
   }
 
   componentWillUpdate (nextProps) {
@@ -114,7 +112,6 @@ export default class Thread extends React.Component {
   componentWillUnmount () {
     const { reconnectFetchMessages } = this.props
     getSocket().then(socket => socket.off('reconnect', reconnectFetchMessages))
-    NetInfo.isConnected.removeEventListener('change', this.handleConnectivityChange)
   }
 
   atBottom = () => this.yOffset < BOTTOM_THRESHOLD
@@ -126,10 +123,6 @@ export default class Thread extends React.Component {
     if (pending || !hasMore) return
     fetchMessages(messages[messages.length - 1].id)
   }, 2000)
-
-  handleConnectivityChange = isConnected => {
-    if (isConnected !== this.state.isConnected) this.setState({ isConnected })
-  }
 
   markAsRead = debounce(() => this.props.updateThreadReadTime(), 2000)
 
@@ -156,9 +149,10 @@ export default class Thread extends React.Component {
       id,
       messages,
       pending,
-      sendIsTyping
+      sendIsTyping,
+      isConnected
     } = this.props
-    const { isConnected, newMessages, notify } = this.state
+    const { newMessages, notify } = this.state
     const showNotificationOverlay = notify || !isConnected
     const overlayMessage = !isConnected
       ? 'DISCONNECTED. TRYING TO RECONNECT...'
@@ -183,6 +177,8 @@ export default class Thread extends React.Component {
         placeholder='Write something...' />
       <PeopleTyping />
       {showNotificationOverlay && <NotificationOverlay
+        position='bottom'
+        type={isConnected ? 'info' : 'error'}
         message={overlayMessage}
         onPress={this.scrollToBottom} />}
       <SocketSubscriber type='post' id={id} />

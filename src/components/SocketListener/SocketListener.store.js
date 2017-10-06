@@ -1,3 +1,5 @@
+import { has } from 'lodash/fp'
+
 const MODULE_NAME = 'SocketListener'
 export const RECEIVE_MESSAGE = `${MODULE_NAME}/RECEIVE_MESSAGE`
 export const RECEIVE_COMMENT = `${MODULE_NAME}/RECEIVE_COMMENT`
@@ -75,6 +77,10 @@ export function receiveNotification (notification) {
 }
 
 export function handleEvent (name, value) {
+  if (has('description.target', value)) {
+    value.description.target = null
+    value.description.currentTarget = null
+  }
   return {
     type: HANDLE_EVENT,
     payload: {name, value}

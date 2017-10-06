@@ -3,7 +3,9 @@ import { View, Text, TouchableOpacity } from 'react-native'
 import { slice } from 'lodash/fp'
 import Avatar from '../../Avatar'
 import Icon from '../../Icon'
-import { rhino30, rhino80 } from '../../../style/colors'
+import {
+  caribbeanGreen, rhino30, rhino80, slateGrey80
+} from '../../../style/colors'
 import { string, array, number, func, object } from 'prop-types'
 
 export default function PostFooter ({
@@ -89,11 +91,11 @@ const styles = {
       fontSize: 14
     },
     active: {
-      color: '#0DC3A0',
+      color: caribbeanGreen,
       fontFamily: 'Circular-Bold'
     },
     inactive: {
-      color: '#8A94A3',
+      color: slateGrey80,
       fontFamily: 'Circular-Book'
     }
   }
