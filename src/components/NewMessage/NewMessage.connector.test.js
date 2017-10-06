@@ -26,21 +26,32 @@ describe('mapDispatchToProps', () => {
 
 describe('mergeProps', () => {
   it('sets up the createMessage function', () => {
+    const id = 122
     const findOrCreateThreadResp = {
       payload: {
         data: {
           findOrCreateThread: {
-            id: 122
+            id
           }
         }
       }
     }
     const stateProps = {
-      findOrCreateThread: jest.fn(() => Promise.resolve(findOrCreateThreadResp))
-      
+      message: 'not empty'
     }
     const dispatchProps = {
-
+      findOrCreateThread: jest.fn(() => Promise.resolve(findOrCreateThreadResp)),
+      createMessage: jest.fn(() => Promise.resolve({}))
     }
+    const ownProps = {
+      navigation: {
+        navigate: jest.fn()
+      }
+    }
+    const mergedProps = mergeProps(stateProps, dispatchProps, ownProps)
+    return mergedProps.createMessage()
+    .then(() => {
+      expect(ownProps.navigation.navigate).toHaveBeenCalledWith('Thread', {id})
+    })
   })
 })
