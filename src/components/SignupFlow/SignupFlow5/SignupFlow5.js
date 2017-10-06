@@ -78,7 +78,7 @@ export default class SignupFlow5 extends React.Component {
     })
   }
 
-  finishSignup () {
+  finishSignup = () => {
     const { finishSignup } = this.props
     const unsavedControls = flow(values,
       filter(c => c.isEditable()),
@@ -159,7 +159,7 @@ export default class SignupFlow5 extends React.Component {
           <Button
             style={styles.continueButton}
             text='Finish'
-            onPress={() => this.finishSignup()} />
+            onPress={this.finishSignup} />
         </View>
       </ScrollView>
     </KeyboardFriendlyView>

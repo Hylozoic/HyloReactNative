@@ -90,6 +90,7 @@ describe('validate', () => {
     expect(instance.validate('name')).toEqual(true)
     expect(instance.validate('email')).toEqual(true)
     expect(instance.validate('password')).toEqual(true)
+    expect(instance.validate('other')).toEqual(true)
     expect(instance.state.errors).toMatchSnapshot()
   })
 
