@@ -25,6 +25,19 @@ describe('mapDispatchToProps', () => {
 })
 
 describe('mergeProps', () => {
+  it('sets up fetchSuggestions', () => {
+    const stateProps = {
+      participantInputText: 'not empty',
+      suggestions: []
+    }
+    const dispatchProps = {
+      fetchSuggestions: jest.fn()
+    }
+    const mergedProps = mergeProps(stateProps, dispatchProps, {})
+    mergedProps.fetchSuggestions()
+    expect(dispatchProps.fetchSuggestions).toHaveBeenCalled()
+  })
+
   it('sets up the createMessage function', () => {
     const id = 122
     const findOrCreateThreadResp = {
