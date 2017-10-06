@@ -43,7 +43,9 @@ export default {
     fontSize: 24,
     fontWeight: 'bold',
     color: 'white',
-    backgroundColor: 'transparent'
+    backgroundColor: 'transparent',
+    flex: 1,
+    alignItems: 'flex-end'
   },
   postPrompt: {
     ...postPromptShape,
@@ -73,5 +75,17 @@ export default {
     color: capeCod40,
     fontSize: 14,
     fontStyle: 'italic'
+  },
+  subscribeButton: {
+
+  },
+  subscribeButtonIcon: {
+    fontSize: 30,
+    backgroundColor: 'transparent',
+    color: 'white',
+    opacity: 0.8
+  },
+  subscribeButtonIconActive: {
+    opacity: 1
   }
 }

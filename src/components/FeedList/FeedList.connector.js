@@ -9,28 +9,28 @@ import {
 } from './FeedList.store'
 import { ALL_COMMUNITIES_ID } from '../../store/models/Community'
 import { fetchPosts, FETCH_POSTS } from '../../store/actions/fetchPosts'
-import makeGoToCommunity from '../../store/actions/makeGoToCommunity'
-import { get, omit } from 'lodash/fp'
+import { get, isNull, isUndefined, omit, omitBy } from 'lodash/fp'
 
 function makeFetchOpts (props) {
-  const { community } = props
-  return {
-    ...omit('community', props),
+  const { community, topicName } = props
+  return omitBy(x => isNull(x) || isUndefined(x), {
+    ...omit(['community', 'topicName'], props),
     subject: community ? 'community' : 'all-communities',
-    slug: get('slug', community) || ALL_COMMUNITIES_ID
-  }
+    slug: get('slug', community) || ALL_COMMUNITIES_ID,
+    topic: topicName
+  })
 }
 
 export function mapStateToProps (state, props) {
-
   const sortBy = getSort(state, props)
   const filter = getFilter(state, props)
-  const { community } = props
+  const { community, topicName } = props
 
   const queryProps = makeFetchOpts({
     community,
     sortBy,
-    filter
+    filter,
+    topicName
   })
 
   return {
@@ -38,36 +38,23 @@ export function mapStateToProps (state, props) {
     sortBy,
     filter,
     hasMore: getHasMorePosts(state, queryProps),
-    pending: state.pending[FETCH_POSTS]
+    pending: state.pending[FETCH_POSTS],
+    queryProps // this is just here so mergeProps can use it
   }
 }
 
-export function mapDispatchToProps (dispatch, props) {
-  return {
-    setFilter: filter => dispatch(setFilter(filter)),
-    setSort: sort => dispatch(setSort(sort)),
-    fetchPostsRaw: opts => dispatch(fetchPosts(opts))
-  }
-}
+const mapDispatchToProps = {setFilter, setSort, fetchPosts}
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
-  const { sortBy, filter, hasMore, pending, posts } = stateProps
-  const { fetchPostsRaw } = dispatchProps
-  const { community } = ownProps
-
-  const fetchOpts = makeFetchOpts({community, sortBy, filter})
-
-  const fetchPosts = () =>
-    fetchPostsRaw(fetchOpts)
-
-  const offset = posts.length
+  const { hasMore, pending, posts, queryProps } = stateProps
+  const fetchPosts = () => dispatchProps.fetchPosts(queryProps)
 
   const fetchMorePosts = hasMore && !pending
-    ? () => fetchPostsRaw({...fetchOpts, offset})
+    ? () => dispatchProps.fetchPosts({...queryProps, offset: posts.length})
     : () => {}
 
   return {
-    ...stateProps,
+    ...omit(['queryProps'], stateProps),
     ...dispatchProps,
     ...ownProps,
     fetchPosts,

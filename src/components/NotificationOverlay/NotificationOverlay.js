@@ -1,8 +1,7 @@
 import React from 'react'
 import { Animated, StyleSheet, Text, TouchableOpacity } from 'react-native'
 import { func, string } from 'prop-types'
-
-import { persimmon } from '../../style/colors'
+import { amaranth, persimmon } from '../../style/colors'
 
 export default class NotificationOverlay extends React.Component {
   static propTypes = {
@@ -13,7 +12,6 @@ export default class NotificationOverlay extends React.Component {
   constructor () {
     super()
     this.state = {
-      opacityAnim: new Animated.Value(0),
       heightAnim: new Animated.Value(0)
     }
   }
@@ -22,8 +20,10 @@ export default class NotificationOverlay extends React.Component {
     this.animate()
   }
 
-  componentDidUpdate () {
-    this.animate()
+  componentDidUpdate (prevProps) {
+    if (prevProps.message !== this.props.message) {
+      this.animate()
+    }
   }
 
   animate () {
@@ -38,20 +38,23 @@ export default class NotificationOverlay extends React.Component {
         this.state.heightAnim,
         { toValue: 0, duration: 800 }
       )
-    ]).start()
+    ]).start(({ finished }) => {
+      if (finished && this.props.onComplete) this.props.onComplete()
+    })
   }
 
   render () {
-    return <Animated.View style={{
-      position: 'absolute',
-      bottom: 0,
-      right: 0,
-      left: 0,
-      elevation: 3, // Android only
-      height: this.state.heightAnim
-    }}>
-      <TouchableOpacity onPress={this.props.onPress}>
-        <Text style={styles.message}>{this.props.message}</Text>
+    const { position = 'top', type = 'error', onPress, message } = this.props
+
+    return <Animated.View style={[
+      styles.container,
+      styles[position + 'Position'],
+      {height: this.state.heightAnim}
+    ]}>
+      <TouchableOpacity onPress={onPress}>
+        <Text style={[styles.message, styles[type]]}>
+          {message}
+        </Text>
       </TouchableOpacity>
     </Animated.View>
   }
@@ -72,5 +75,23 @@ const styles = StyleSheet.create({
     lineHeight,
     padding,
     textAlign: 'center'
+  },
+  error: {
+    backgroundColor: amaranth
+  },
+  info: {
+    backgroundColor: persimmon
+  },
+  container: {
+    position: 'absolute',
+    right: 0,
+    left: 0,
+    elevation: 3 // Android only
+  },
+  topPosition: {
+    top: 0
+  },
+  bottomPosition: {
+    bottom: 0
   }
 })
