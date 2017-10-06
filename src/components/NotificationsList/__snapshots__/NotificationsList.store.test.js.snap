@@ -91,3 +91,50 @@ Object {
   "type": "NotificationsList/MARK_ALL_ACTIVITIES_READ",
 }
 `;
+
+exports[`refineActivity matches the previous ACTION_APPROVED_JOIN_REQUEST snapshot 1`] = `
+Object {
+  "body": "approved your request to join",
+  "community": "Aardvarks Alert",
+  "header": "Join Request Approved",
+  "onPress": [Function],
+}
+`;
+
+exports[`refineActivity matches the previous ACTION_COMMENT_MENTION snapshot 1`] = `
+Object {
+  "body": "wrote: Rich Churcher",
+  "header": "mentioned you in a comment on",
+  "nameInHeader": true,
+  "onPress": [Function],
+  "title": "This post should have a really long title. It should not even come close to fitting on a notification header. It should be truncated.",
+}
+`;
+
+exports[`refineActivity matches the previous ACTION_JOIN_REQUEST snapshot 1`] = `
+Object {
+  "body": "asked to join",
+  "community": "Aardvarks Alert",
+  "header": "New join request",
+  "nameInHeader": true,
+  "onPress": [Function],
+}
+`;
+
+exports[`refineActivity matches the previous ACTION_MENTION snapshot 1`] = `
+Object {
+  "body": "wrote: So detailed.",
+  "header": "mentioned you",
+  "nameInHeader": true,
+  "onPress": [Function],
+}
+`;
+
+exports[`refineActivity matches the previous ACTION_TOPIC snapshot 1`] = `
+Object {
+  "body": "wrote: So detailed.",
+  "header": "New Post in",
+  "onPress": [Function],
+  "topic": "aardvark",
+}
+`;

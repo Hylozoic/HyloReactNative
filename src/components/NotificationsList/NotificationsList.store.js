@@ -115,7 +115,7 @@ export function presentedText (text) {
   return decode(stripped.substring(0, NOTIFICATION_TEXT_MAX))
 }
 
-function refineActivity ({ action, comment, community, post, reasons }, actor, { navigate }) {
+export function refineActivity ({ action, actor, comment, community, post, meta }, { navigate }) {
   switch (action) {
     case ACTION_COMMENT_MENTION:
       return {
@@ -143,12 +143,12 @@ function refineActivity ({ action, comment, community, post, reasons }, actor, {
       }
 
     case ACTION_TOPIC:
-      const topicReason = find(r => r.startsWith('tag: '), reasons)
+      const topicReason = find(r => r.startsWith('tag: '), meta.reasons)
       const topic = topicReason.split(': ')[1]
       return {
         body: `wrote: ${presentedText(post.details)}`,
         header: `New Post in`,
-        onPress: () => navigate('PostDetails', { id: post.id }),
+        onPress: () => navigate('Feed', { topicName: topic }),
         topic
       }
 
@@ -171,7 +171,7 @@ function refineActivity ({ action, comment, community, post, reasons }, actor, {
   }
 }
 
-function refineNotification (navigation) {
+export function refineNotification (navigation) {
   return ({ activity, createdAt, id }, i, notifications) => {
     const { action, actor, meta, unread } = activity
     // Only show separator between read and unread notifications
@@ -185,7 +185,7 @@ function refineNotification (navigation) {
       actor: pick([ 'avatarUrl', 'name' ], actor),
       avatarSeparator,
       createdAt: humanDate(createdAt),
-      ...refineActivity(activity, actor, navigation),
+      ...refineActivity(activity, navigation),
       unread
     }
   }
