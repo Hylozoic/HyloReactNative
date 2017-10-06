@@ -92,7 +92,7 @@ Object {
 }
 `;
 
-exports[`refineActivity matches the previous ACTION_APPROVED_JOIN_REQUEST snapshot 1`] = `
+exports[`selectors/refiners refineActivity matches the previous ACTION_APPROVED_JOIN_REQUEST snapshot 1`] = `
 Object {
   "body": "approved your request to join",
   "community": "Aardvarks Alert",
@@ -101,7 +101,7 @@ Object {
 }
 `;
 
-exports[`refineActivity matches the previous ACTION_COMMENT_MENTION snapshot 1`] = `
+exports[`selectors/refiners refineActivity matches the previous ACTION_COMMENT snapshot 1`] = `
 Object {
   "body": "wrote: Rich Churcher",
   "header": "mentioned you in a comment on",
@@ -111,7 +111,17 @@ Object {
 }
 `;
 
-exports[`refineActivity matches the previous ACTION_JOIN_REQUEST snapshot 1`] = `
+exports[`selectors/refiners refineActivity matches the previous ACTION_COMMENT_MENTION snapshot 1`] = `
+Object {
+  "body": "wrote: Rich Churcher",
+  "header": "mentioned you in a comment on",
+  "nameInHeader": true,
+  "onPress": [Function],
+  "title": "This post should have a really long title. It should not even come close to fitting on a notification header. It should be truncated.",
+}
+`;
+
+exports[`selectors/refiners refineActivity matches the previous ACTION_JOIN_REQUEST snapshot 1`] = `
 Object {
   "body": "asked to join",
   "community": "Aardvarks Alert",
@@ -121,7 +131,7 @@ Object {
 }
 `;
 
-exports[`refineActivity matches the previous ACTION_MENTION snapshot 1`] = `
+exports[`selectors/refiners refineActivity matches the previous ACTION_MENTION snapshot 1`] = `
 Object {
   "body": "wrote: So detailed.",
   "header": "mentioned you",
@@ -130,7 +140,7 @@ Object {
 }
 `;
 
-exports[`refineActivity matches the previous ACTION_TOPIC snapshot 1`] = `
+exports[`selectors/refiners refineActivity matches the previous ACTION_TOPIC snapshot 1`] = `
 Object {
   "body": "wrote: So detailed.",
   "header": "New Post in",
@@ -138,3 +148,5 @@ Object {
   "topic": "aardvark",
 }
 `;
+
+exports[`selectors/refiners refineNotification matches the last snapshot 1`] = `true`;

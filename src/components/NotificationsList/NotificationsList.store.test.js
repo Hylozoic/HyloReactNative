@@ -45,7 +45,7 @@ describe('presentedText', () => {
   })
 })
 
-describe('refineActivity', () => {
+describe('selectors/refiners', () => {
   const navigation = {}
   let session = null
 
@@ -63,12 +63,18 @@ describe('refineActivity', () => {
       post: '333',
       unread: false
     })
+    session.Activity.create({
+      action: 'tag',
+      id: '2',
+      unread: true
+    })
     session.Comment.create({
       id: '1',
       text: '<a href=\"#\" data-entity-type=\"mention\" data-user-id=\"86895\">Rich Churcher</a>'
     })
     session.Community.create({ id: '222', name: 'Aardvarks Alert' })
     session.Notification.create({ id: '1', activity: '1' })
+    session.Notification.create({ id: '2', activity: '2' })
     session.Person.create({
       id: '1',
       avatarUrl: 'https://wombat.com',
@@ -81,76 +87,119 @@ describe('refineActivity', () => {
     })
   })
 
-  it('matches the previous ACTION_COMMENT_MENTION snapshot', () => {
-    const notification = session.Notification.all().toModelArray()[0]
-    const actual = store.refineActivity(notification.activity, navigation)
-    expect(actual).toMatchSnapshot()
+  describe('refineActivity', () => {
+    it('matches the previous ACTION_COMMENT snapshot', () => {
+      const notification = session.Notification.all().toModelArray()[0]
+      const actual = store.refineActivity(notification.activity, navigation)
+      expect(actual).toMatchSnapshot()
+    })
+
+    it('navigates to PostDetails for ACTION_COMMENT', () => {
+      const notification = session.Notification.all().toModelArray()[0]
+      const actual = store.refineActivity(notification.activity, navigation)
+      actual.onPress()
+      expect(navigation.navigate).toHaveBeenCalledWith('PostDetails', { id: '333' })
+    })
+
+    it('matches the previous ACTION_COMMENT_MENTION snapshot', () => {
+      const notification = session.Notification.all().toModelArray()[0]
+      const actual = store.refineActivity(notification.activity, navigation)
+      expect(actual).toMatchSnapshot()
+    })
+
+    it('navigates to PostDetails for ACTION_COMMENT_MENTION', () => {
+      const notification = session.Notification.all().toModelArray()[0]
+      const actual = store.refineActivity(notification.activity, navigation)
+      actual.onPress()
+      expect(navigation.navigate).toHaveBeenCalledWith('PostDetails', { id: '333' })
+    })
+
+    it('matches the previous ACTION_MENTION snapshot', () => {
+      session.Activity.withId('1').update({ action: 'mention' })
+      const notification = session.Notification.all().toModelArray()[0]
+      const actual = store.refineActivity(notification.activity, navigation)
+      expect(actual).toMatchSnapshot()
+    })
+
+    it('navigates to PostDetails for ACTION_MENTION', () => {
+      session.Activity.withId('1').update({ action: 'mention' })
+      const notification = session.Notification.all().toModelArray()[0]
+      const actual = store.refineActivity(notification.activity, navigation)
+      actual.onPress()
+      expect(navigation.navigate).toHaveBeenCalledWith('PostDetails', { id: '333' })
+    })
+
+    it('matches the previous ACTION_TOPIC snapshot', () => {
+      session.Activity.withId('1').update({ action: 'tag', meta: { reasons: [ 'tag: aardvark' ] } })
+      const notification = session.Notification.all().toModelArray()[0]
+      const actual = store.refineActivity(notification.activity, navigation)
+      expect(actual).toMatchSnapshot()
+    })
+
+    it('navigates to Feed (topic) for ACTION_TOPIC', () => {
+      session.Activity.withId('1').update({ action: 'tag', meta: { reasons: [ 'tag: aardvark' ] } })
+      const notification = session.Notification.all().toModelArray()[0]
+      const actual = store.refineActivity(notification.activity, navigation)
+      actual.onPress()
+      expect(navigation.navigate).toHaveBeenCalledWith('Feed', { topicName: 'aardvark' })
+    })
+
+    it('matches the previous ACTION_JOIN_REQUEST snapshot', () => {
+      session.Activity.withId('1').update({ action: 'joinRequest', community: '222' })
+      const notification = session.Notification.all().toModelArray()[0]
+      const actual = store.refineActivity(notification.activity, navigation)
+      expect(actual).toMatchSnapshot()
+    })
+
+    it('navigates to Settings for ACTION_JOIN_REQUEST', () => {
+      session.Activity.withId('1').update({ action: 'joinRequest', community: '222' })
+      const notification = session.Notification.all().toModelArray()[0]
+      const actual = store.refineActivity(notification.activity, navigation)
+      actual.onPress()
+      expect(navigation.navigate).toHaveBeenCalledWith('Settings')
+    })
+
+    it('matches the previous ACTION_APPROVED_JOIN_REQUEST snapshot', () => {
+      session.Activity.withId('1').update({ action: 'approvedJoinRequest', community: '222' })
+      const notification = session.Notification.all().toModelArray()[0]
+      const actual = store.refineActivity(notification.activity, navigation)
+      expect(actual).toMatchSnapshot()
+    })
+
+    it('navigates to Feed (community) for ACTION_APPROVED_JOIN_REQUEST', () => {
+      session.Activity.withId('1').update({ action: 'approvedJoinRequest', community: '222' })
+      const notification = session.Notification.all().toModelArray()[0]
+      const actual = store.refineActivity(notification.activity, navigation)
+      actual.onPress()
+      expect(navigation.navigate).toHaveBeenCalledWith('Feed', { communityId: '222' })
+    })
   })
 
-  it('navigates to PostDetails for ACTION_COMMENT_MENTION', () => {
-    const notification = session.Notification.all().toModelArray()[0]
-    const actual = store.refineActivity(notification.activity, navigation)
-    actual.onPress()
-    expect(navigation.navigate).toHaveBeenCalledWith('PostDetails', { id: '333' })
-  })
+  describe('refineNotification', () => {
+    it('sets avatarSeparator between read and unread', () => {
+      const notifications = session.Notification.all().toModelArray()
+      const actual = store.refineNotification(navigation)(notifications[0], 0, notifications)       
+      expect(actual.avatarSeparator).toBe(true)
+    })
 
-  it('matches the previous ACTION_MENTION snapshot', () => {
-    session.Activity.withId('1').update({ action: 'mention' })
-    const notification = session.Notification.all().toModelArray()[0]
-    const actual = store.refineActivity(notification.activity, navigation)
-    expect(actual).toMatchSnapshot()
-  })
+    it('does not set avatarSeparator between read and read', () => {
+      session.Activity.all().update({ unread: false })
+      const notifications = session.Notification.all().toModelArray()
+      const actual = store.refineNotification(navigation)(notifications[0], 0, notifications)       
+      expect(actual.avatarSeparator).toBe(false)
+    })
 
-  it('navigates to PostDetails for ACTION_MENTION', () => {
-    session.Activity.withId('1').update({ action: 'mention' })
-    const notification = session.Notification.all().toModelArray()[0]
-    const actual = store.refineActivity(notification.activity, navigation)
-    actual.onPress()
-    expect(navigation.navigate).toHaveBeenCalledWith('PostDetails', { id: '333' })
-  })
+    it('does not set avatarSeparator between unread and unread', () => {
+      session.Activity.all().update({ unread: true })
+      const notifications = session.Notification.all().toModelArray()
+      const actual = store.refineNotification(navigation)(notifications[0], 0, notifications)       
+      expect(actual.avatarSeparator).toBe(false)
+    })
 
-  it('matches the previous ACTION_TOPIC snapshot', () => {
-    session.Activity.withId('1').update({ action: 'tag', meta: { reasons: [ 'tag: aardvark' ] } })
-    const notification = session.Notification.all().toModelArray()[0]
-    const actual = store.refineActivity(notification.activity, navigation)
-    expect(actual).toMatchSnapshot()
-  })
-
-  it('navigates to Feed (topic) for ACTION_TOPIC', () => {
-    session.Activity.withId('1').update({ action: 'tag', meta: { reasons: [ 'tag: aardvark' ] } })
-    const notification = session.Notification.all().toModelArray()[0]
-    const actual = store.refineActivity(notification.activity, navigation)
-    actual.onPress()
-    expect(navigation.navigate).toHaveBeenCalledWith('Feed', { topicName: 'aardvark' })
-  })
-
-  it('matches the previous ACTION_JOIN_REQUEST snapshot', () => {
-    session.Activity.withId('1').update({ action: 'joinRequest', community: '222' })
-    const notification = session.Notification.all().toModelArray()[0]
-    const actual = store.refineActivity(notification.activity, navigation)
-    expect(actual).toMatchSnapshot()
-  })
-
-  it('navigates to Settings for ACTION_JOIN_REQUEST', () => {
-    session.Activity.withId('1').update({ action: 'joinRequest', community: '222' })
-    const notification = session.Notification.all().toModelArray()[0]
-    const actual = store.refineActivity(notification.activity, navigation)
-    actual.onPress()
-    expect(navigation.navigate).toHaveBeenCalledWith('Settings')
-  })
-
-  it('matches the previous ACTION_APPROVED_JOIN_REQUEST snapshot', () => {
-    session.Activity.withId('1').update({ action: 'approvedJoinRequest', community: '222' })
-    const notification = session.Notification.all().toModelArray()[0]
-    const actual = store.refineActivity(notification.activity, navigation)
-    expect(actual).toMatchSnapshot()
-  })
-
-  it('navigates to Feed (community) for ACTION_APPROVED_JOIN_REQUEST', () => {
-    session.Activity.withId('1').update({ action: 'approvedJoinRequest', community: '222' })
-    const notification = session.Notification.all().toModelArray()[0]
-    const actual = store.refineActivity(notification.activity, navigation)
-    actual.onPress()
-    expect(navigation.navigate).toHaveBeenCalledWith('Feed', { communityId: '222' })
+    it('matches the last snapshot', () => {
+      const notifications = session.Notification.all().toModelArray()
+      const actual = store.refineNotification(navigation)(notifications[0], 0, notifications)       
+      expect(actual.avatarSeparator).toMatchSnapshot()
+    })
   })
 })
