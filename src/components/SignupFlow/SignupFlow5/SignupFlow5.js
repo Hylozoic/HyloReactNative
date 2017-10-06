@@ -64,6 +64,8 @@ export default class SignupFlow5 extends React.Component {
         this.setError('password', passwordError)
         this.setError('confirmPassword', confirmError)
         return !(passwordError || confirmError)
+      default:
+        return true
     }
   }
 

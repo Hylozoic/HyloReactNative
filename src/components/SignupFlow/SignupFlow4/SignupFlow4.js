@@ -21,14 +21,34 @@ export default class SignupFlow4 extends React.Component {
     headerBackTitle: null
   })
 
+  state = {
+    showOther: true
+  }
+
   componentDidMount () {
     this.props.loadSkills()
   }
 
+  addSkill = skill => {
+    this.props.addSkill(skill)
+    this.setState({showOther: true})
+  }
+
+  removeSkill = skill => {
+    this.props.removeSkill(skill)
+    this.setState({showOther: true})
+  }
+
+  onPressOther = () => {
+    this.setState({showOther: false})
+    this.control && this.control.focus()
+  }
+
   render () {
-    const { saveAndNext, skill, setSkill, userSkills, remainingSkills, addSkill, removeSkill } = this.props
+    const { saveAndNext, skill, setSkill, userSkills, remainingSkills } = this.props
 
     const editingSkill = !isEmpty(skill)
+    const { showOther } = this.state
 
     return <KeyboardFriendlyView style={styles.container} {...kavProps}>
       <ScrollView>
@@ -45,16 +65,16 @@ export default class SignupFlow4 extends React.Component {
           value={skill}
           onChange={setSkill} />
         <SkillCloud skills={remainingSkills}
-          onPress={addSkill}
-          onPressOther={() => this.control.focus()} />
+          onPress={this.addSkill}
+          onPressOther={showOther && this.onPressOther} />
         {!isEmpty(userSkills) && <View style={styles.userSkills}>
           <Text style={styles.yourSkillsLabel}>Your Skills</Text>
-          <SkillCloud skills={userSkills} onPress={removeSkill} />
+          <SkillCloud skills={userSkills} onPress={this.removeSkill} />
         </View>}
         <Button
           style={styles.continueButton}
           text={editingSkill ? 'Add Skill' : 'Continue'}
-          onPress={editingSkill ? () => addSkill(skill) : saveAndNext} />
+          onPress={editingSkill ? () => this.addSkill(skill) : saveAndNext} />
       </ScrollView>
     </KeyboardFriendlyView>
   }
