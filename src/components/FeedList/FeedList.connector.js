@@ -33,12 +33,15 @@ export function mapStateToProps (state, props) {
     topicName
   })
 
+  const pending = state.pending[FETCH_POSTS]
+
   return {
     posts: getPosts(state, queryProps),
     sortBy,
     filter,
     hasMore: getHasMorePosts(state, queryProps),
-    pending: state.pending[FETCH_POSTS],
+    pending: !!pending,
+    pendingRefresh: !!(pending && pending.extractQueryResults.reset),
     queryProps // this is just here so mergeProps can use it
   }
 }

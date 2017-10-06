@@ -32,7 +32,8 @@ describe('mapStateToProps', () => {
     expect(mapStateToProps(state, {id: 'bar'})).toEqual({
       posts: [],
       hasMore: undefined,
-      pending: undefined,
+      pending: false,
+      pendingRefresh: false,
       filter: defaultState.filter,
       sortBy: defaultState.sortBy,
       queryProps: {
@@ -51,7 +52,8 @@ describe('mapStateToProps', () => {
         expect.objectContaining({id: '2'})
       ],
       hasMore: true,
-      pending: undefined,
+      pending: false,
+      pendingRefresh: false,
       filter: defaultState.filter,
       sortBy: defaultState.sortBy,
       queryProps: {
@@ -65,7 +67,7 @@ describe('mapStateToProps', () => {
   it('checks if FETCH_POSTS is pending', () => {
     state = {
       ...state,
-      pending: {[FETCH_POSTS]: true}
+      pending: {[FETCH_POSTS]: {extractQueryResults: {}}}
     }
     const result = mapStateToProps(state, {id: 'foo'})
     expect(result).toMatchObject({pending: true})

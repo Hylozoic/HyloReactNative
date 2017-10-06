@@ -52,7 +52,7 @@ export default class FeedList extends Component {
         />
     </View>
 
-    const listFooterComponent = pending && posts.length > 1
+    const listFooterComponent = pending
       ? <Loading style={styles.loading} />
       : null
 
@@ -69,7 +69,7 @@ export default class FeedList extends Component {
             showCommunity={showCommunities}
             goToCommunity={goToCommunity} />}
         onRefresh={this.props.refreshPosts}
-        refreshing={!!pending}
+        refreshing={!!this.props.pendingRefresh}
         keyExtractor={(item, index) => item.id}
         onEndReached={this.props.fetchMorePosts}
         ListHeaderComponent={listHeaderComponent}
