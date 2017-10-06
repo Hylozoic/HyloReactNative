@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mapDispatchToProps matches the last snapshot 1`] = `
+Object {
+  "addParticipant": [Function],
+  "createMessage": [Function],
+  "fetchContacts": [Function],
+  "fetchRecentContacts": [Function],
+  "fetchSuggestions": [Function],
+  "findOrCreateThread": [Function],
+  "removeParticipant": [Function],
+  "setMessage": [Function],
+  "setParticipantInput": [Function],
+}
+`;
+
+exports[`mapStateToProps returns the right keys and gets the pending values 1`] = `
+Object {
+  "allContacts": Array [],
+  "currentUser": undefined,
+  "message": "",
+  "participantIds": Array [],
+  "participantInputText": "",
+  "participants": Array [],
+  "pending": Object {
+    "all": "contacts",
+    "recent": "recent",
+    "suggestions": "suggestions",
+  },
+  "recentContacts": Array [],
+  "suggestions": Array [],
+}
+`;
