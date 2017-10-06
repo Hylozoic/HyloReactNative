@@ -4,6 +4,7 @@ import styles from './FeedBanner.styles'
 import Avatar from '../Avatar'
 import Icon from '../Icon'
 import NotificationOverlay from '../NotificationOverlay'
+import LinearGradient from 'react-native-linear-gradient'
 import { isUndefined } from 'lodash'
 
 export default class FeedBanner extends React.Component {
@@ -38,17 +39,20 @@ export default class FeedBanner extends React.Component {
 
     return <View style={styles.container}>
       <Image source={{uri: bannerUrl}} style={styles.image} />
+      <LinearGradient style={styles.gradient}
+        colors={[
+          'rgba(0, 0, 0, 0)',
+          'rgba(0, 0, 0, 0.1)',
+          'rgba(0, 0, 0, 0.3)',
+          'rgba(0, 0, 0, 0.6)'
+        ]} />
       <View style={styles.titleRow}>
-        <Text style={[styles.name, all && styles.allName]}>{name}</Text>
-        {!isUndefined(topicSubscribed) &&
-          <TouchableOpacity style={styles.subscribeButton}
-            onPress={this.toggleSubscribe}
-            hitSlop={{top: 10, bottom: 10, left: 10, right: 10}}>
-            <Icon name='Star' style={[
-              styles.subscribeButtonIcon,
-              topicSubscribed && styles.subscribeButtonIconActive
-            ]} />
-          </TouchableOpacity>}
+        <Text style={[styles.name, all && styles.allName]}
+          numberOfLines={3}>
+          {name}
+        </Text>
+        {!isUndefined(topicSubscribed) && <SubscribeButton
+          active={topicSubscribed} onPress={this.toggleSubscribe} />}
       </View>
       <PostPrompt currentUser={currentUser} newPost={newPost} />
       {!!currentUser && <View style={styles.promptShadow} />}
@@ -69,4 +73,15 @@ export function PostPrompt ({ currentUser, newPost }) {
       <Text style={styles.promptText}>{currentUser.firstName()}, what's on your mind?</Text>
     </TouchableOpacity>
   </View>
+}
+
+function SubscribeButton ({ active, onPress }) {
+  return <TouchableOpacity style={styles.subscribeButton}
+    onPress={onPress}
+    hitSlop={{top: 10, bottom: 10, left: 10, right: 10}}>
+    <Icon name='Star' style={[
+      styles.subscribeButtonIcon,
+      active && styles.subscribeButtonIconActive
+    ]} />
+  </TouchableOpacity>
 }
