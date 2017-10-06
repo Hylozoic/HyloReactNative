@@ -127,7 +127,7 @@ export default class SignupFlow1 extends React.Component {
           onSubmitEditing={() => this.confirmPasswordControl.focus()} />}
         {showPasswordField && <SignupControl
           ref={c => { this.confirmPasswordControl = c }}
-          label='Confirm'
+          label='Confirm Password'
           value={confirmPassword}
           onChange={value => this.updateField('confirmPassword', value)}
           toggleSecureTextEntry

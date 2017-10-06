@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, TextInput } from 'react-native'
+import { View, Text, TextInput, TouchableOpacity } from 'react-native'
 import styles from './SignupControl.styles.js'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
 import Triangle from 'react-native-triangle'
@@ -90,14 +90,20 @@ export default class SignupControl extends React.Component {
         onSubmitEditing={() => this.onSubmitEditing()}
         editable={editable} />
       {(toggleSecureTextEntry || toggleEditable) && <View style={styles.toggles}>
-        {toggleSecureTextEntry && <EntypoIcon name={securePassword ? 'eye' : 'eye-with-line'}
-          style={styles.eyeIcon}
-          onPress={() => this.togglePassword()} />}
+        {toggleSecureTextEntry && <TouchableOpacity
+          onPress={() => this.togglePassword()}
+          hitSlop={{top: 10, bottom: 10, left: 10, right: 10}}>
+          <EntypoIcon name={securePassword ? 'eye' : 'eye-with-line'}
+            style={styles.eyeIcon} />
+        </TouchableOpacity>}
         {toggleEditable && <View
           style={highlight && styles.highlight}>
-          <EntypoIcon name={editable ? 'check' : 'edit'}
-            style={styles.editIcon}
-            onPress={() => this.toggleEditable()} />
+          <TouchableOpacity
+            onPress={() => this.toggleEditable()}
+            hitSlop={{top: 10, bottom: 10, left: 10, right: 10}}>
+            <EntypoIcon name={editable ? 'check' : 'edit'}
+              style={styles.editIcon} />
+          </TouchableOpacity>
         </View>}
       </View>}
       {!!error && <View style={styles.errorWrapper}>

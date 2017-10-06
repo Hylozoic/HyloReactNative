@@ -1,6 +1,197 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`works 1`] = `
+exports[`getEmptyState matches last snapshot 1`] = `
+Object {
+  "CommentEditor": Object {},
+  "FeedList": Object {
+    "filter": null,
+    "sortBy": "updated",
+  },
+  "MemberFeed": Object {
+    "choice": "Posts",
+  },
+  "Members": Object {
+    "search": "",
+    "sortBy": "join",
+  },
+  "NewMessage": Object {
+    "input": "",
+    "message": "",
+    "participants": Array [],
+  },
+  "PeopleTyping": Object {},
+  "PostEditor": Object {},
+  "Search": Object {},
+  "SignupFlow": Object {
+    "errors": Object {},
+    "skill": "",
+    "userSettings": Object {
+      "avatarUrl": "",
+      "confirmPassword": "",
+      "email": "",
+      "location": "",
+      "name": "",
+      "password": "",
+      "settings": Object {},
+    },
+    "userSkills": Array [],
+  },
+  "SocketListener": Object {},
+  "currentCommunity": null,
+  "orm": Object {
+    "Activity": Object {
+      "items": Array [],
+      "itemsById": Object {},
+      "meta": Object {},
+    },
+    "Comment": Object {
+      "items": Array [],
+      "itemsById": Object {},
+      "meta": Object {},
+    },
+    "Community": Object {
+      "items": Array [],
+      "itemsById": Object {},
+      "meta": Object {},
+    },
+    "CommunityMembers": Object {
+      "items": Array [],
+      "itemsById": Object {},
+      "meta": Object {},
+    },
+    "CommunityModerator": Object {
+      "items": Array [],
+      "itemsById": Object {},
+      "meta": Object {},
+    },
+    "CommunityPosts": Object {
+      "items": Array [],
+      "itemsById": Object {},
+      "meta": Object {},
+    },
+    "CommunityTopic": Object {
+      "items": Array [],
+      "itemsById": Object {},
+      "meta": Object {},
+    },
+    "Me": Object {
+      "items": Array [],
+      "itemsById": Object {},
+      "meta": Object {},
+    },
+    "MeMemberships": Object {
+      "items": Array [],
+      "itemsById": Object {},
+      "meta": Object {},
+    },
+    "MeMessageThreads": Object {
+      "items": Array [],
+      "itemsById": Object {},
+      "meta": Object {},
+    },
+    "MeNotifications": Object {
+      "items": Array [],
+      "itemsById": Object {},
+      "meta": Object {},
+    },
+    "MePosts": Object {
+      "items": Array [],
+      "itemsById": Object {},
+      "meta": Object {},
+    },
+    "MeSkills": Object {
+      "items": Array [],
+      "itemsById": Object {},
+      "meta": Object {},
+    },
+    "Membership": Object {
+      "items": Array [],
+      "itemsById": Object {},
+      "meta": Object {},
+    },
+    "Message": Object {
+      "items": Array [],
+      "itemsById": Object {},
+      "meta": Object {},
+    },
+    "MessageThread": Object {
+      "items": Array [],
+      "itemsById": Object {},
+      "meta": Object {},
+    },
+    "MessageThreadParticipants": Object {
+      "items": Array [],
+      "itemsById": Object {},
+      "meta": Object {},
+    },
+    "Notification": Object {
+      "items": Array [],
+      "itemsById": Object {},
+      "meta": Object {},
+    },
+    "Person": Object {
+      "items": Array [],
+      "itemsById": Object {},
+      "meta": Object {},
+    },
+    "PersonConnection": Object {
+      "items": Array [],
+      "itemsById": Object {},
+      "meta": Object {},
+    },
+    "PersonMemberships": Object {
+      "items": Array [],
+      "itemsById": Object {},
+      "meta": Object {},
+    },
+    "PersonSkills": Object {
+      "items": Array [],
+      "itemsById": Object {},
+      "meta": Object {},
+    },
+    "Post": Object {
+      "items": Array [],
+      "itemsById": Object {},
+      "meta": Object {},
+    },
+    "PostCommenter": Object {
+      "items": Array [],
+      "itemsById": Object {},
+      "meta": Object {},
+    },
+    "PostCommunities": Object {
+      "items": Array [],
+      "itemsById": Object {},
+      "meta": Object {},
+    },
+    "PostFollower": Object {
+      "items": Array [],
+      "itemsById": Object {},
+      "meta": Object {},
+    },
+    "Skill": Object {
+      "items": Array [],
+      "itemsById": Object {},
+      "meta": Object {},
+    },
+    "Topic": Object {
+      "items": Array [],
+      "itemsById": Object {},
+      "meta": Object {},
+    },
+    "Vote": Object {
+      "items": Array [],
+      "itemsById": Object {},
+      "meta": Object {},
+    },
+  },
+  "pending": Object {},
+  "queryResults": Object {},
+  "session": Object {},
+}
+`;
+
+exports[`getStore works 1`] = `
 Object {
   "dispatch": [Function],
   "getState": [Function],

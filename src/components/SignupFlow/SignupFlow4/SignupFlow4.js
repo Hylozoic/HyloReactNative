@@ -39,11 +39,14 @@ export default class SignupFlow4 extends React.Component {
           </Text>
         </View>
         <SignupControl
+          ref={c => { this.control = c }}
           style={styles.containerPadding}
           label='How can you help?'
           value={skill}
           onChange={setSkill} />
-        <SkillCloud skills={remainingSkills} onPress={addSkill} />
+        <SkillCloud skills={remainingSkills}
+          onPress={addSkill}
+          onPressOther={() => this.control.focus()} />
         {!isEmpty(userSkills) && <View style={styles.userSkills}>
           <Text style={styles.yourSkillsLabel}>Your Skills</Text>
           <SkillCloud skills={userSkills} onPress={removeSkill} />
@@ -57,9 +60,10 @@ export default class SignupFlow4 extends React.Component {
   }
 }
 
-export function SkillCloud ({ skills, onPress, style }) {
+export function SkillCloud ({ skills, onPress, style, onPressOther }) {
   return <View style={[styles.skillCloud, style]}>
     {skills.map((skill, i) => <SkillPill skill={skill} onPress={onPress} key={i} />)}
+    {!!onPressOther && <SkillPill skill='+ Other' onPress={onPressOther} />}
   </View>
 }
 

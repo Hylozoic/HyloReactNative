@@ -63,8 +63,6 @@ export default class SignupFlow5 extends React.Component {
         confirmError = showPasswordField && password !== confirmPassword && 'Passwords must match'
         this.setError('password', passwordError)
         this.setError('confirmPassword', confirmError)
-        console.log('passwordError', passwordError)
-        console.log('confirmError', confirmError)        
         return !(passwordError || confirmError)
     }
   }
@@ -133,7 +131,7 @@ export default class SignupFlow5 extends React.Component {
           onSubmitEditing={() => this.updateSetting('password', password)} />}
         {showPasswordField && <SignupControl
           ref={c => { this.controls.confirmPassword = c }}
-          label='Confirm'
+          label='Confirm Password'
           value={confirmPassword}
           toggleSecureTextEntry
           toggleEditable

@@ -19,7 +19,7 @@ import Search from '../../components/Editor/Search/Search.store'
 import SocketListener from '../../components/SocketListener/SocketListener.store'
 import SignupFlow from '../../components/SignupFlow/SignupFlow.store'
 
-const combinedReducers = combineReducers({
+export const combinedReducers = combineReducers({
   orm: ormReducer,
   session: sessionReducer,
   pending,
