@@ -44,6 +44,11 @@ Object {
       "itemsById": Object {},
       "meta": Object {},
     },
+    "Attachment": Object {
+      "items": Array [],
+      "itemsById": Object {},
+      "meta": Object {},
+    },
     "Comment": Object {
       "items": Array [],
       "itemsById": Object {},
