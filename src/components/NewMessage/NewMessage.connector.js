@@ -27,6 +27,8 @@ import { isEmpty, get, debounce } from 'lodash/fp'
 export function mapStateToProps (state, props) {
   const participantInputText = getInputText(state, props)
 
+  console.log('nav.state', props.navigation.state)
+
   const pending = {
     suggestions: state.pending[FETCH_SUGGESTIONS],
     recent: state.pending[FETCH_RECENT_CONTACTS],
