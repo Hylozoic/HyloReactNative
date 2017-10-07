@@ -7,14 +7,15 @@ export default class CheckInvitation extends Component {
     const { navigation, checkInvitation, setInvitationCodes } = this.props
     checkInvitation().then(result => {
       const validToken = get('payload.data.checkInvitation.valid', result)
+      console.log('!!! validToken: ', validToken)
       if (validToken) {
-        setInvitationCodes()
+        // setInvitationCodes()
         navigation.navigate('Login')
       } else {
         navigation.navigate('InviteExpired')
       }
     })
-    .catch(err => navigation.navigate('InviteExpired'))
+    .catch(err => navigation.navigate('Login'))
   }
 
   render () {
