@@ -11,12 +11,25 @@ export default class LoggedInRoot extends React.Component {
   componentDidMount () {
     const { fetchCurrentUser, registerDevice } = this.props
     fetchCurrentUser()
+    // TODO: navigate to URL here
+    //  ... this.navigator()
+    console.log('entryURL from LoggedInRoot: ', this, this.props.entryURL)
     initOneSignal({registerDevice})
+    // this.props.navigator.navigate('JoinCommunity')
+  }
+
+  componentWillUpdate (nextProps) {
+    console.log('entryURL from LoggedInRoot: ', this.props.entryURL)
+    // if (this.props.entryURL && !nextProps.entryURL) {
+    //   console.log('entryURL from SessionCheck: ', this.props.entryURL)
+    //   this.props.resetEntryURL()
+    //   // this.props.entryURL && Linking.openURL(this.props.entryURL)
+    // }
   }
 
   render () {
     return <View style={{flex: 1}}>
-      <RootNavigator uriPrefix={urlPrefix} />
+      <RootNavigator uriPrefix={urlPrefix} ref={nav => { this.navigator = nav }} />
       <SocketListener />
     </View>
   }
