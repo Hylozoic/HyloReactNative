@@ -14,9 +14,7 @@ describe('FeedList', () => {
       setSort={() => {}}
       fetchMorePosts={() => {}}
       pending
-      refreshing
-      onRefresh={() => {}}
-      />)
+      refreshPosts={() => {}} />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
