@@ -80,6 +80,45 @@ it('appends to existing data, ignoring duplicates', () => {
     }
   })
 })
+it('replaces existing data when the "reset" option is set', () => {
+  const state = {
+    [key]: {
+      ids: [4, 7, 5, 6],
+      total: 21,
+      hasMore: true
+    }
+  }
+
+  const action = {
+    type: FETCH_POSTS,
+    payload: {
+      data: {
+        community: {
+          posts: {
+            total: 22,
+            items: [{id: 7}, {id: 8}, {id: 9}],
+            hasMore: false
+          }
+        }
+      }
+    },
+    meta: {
+      graphql: {variables},
+      extractQueryResults: {
+        getItems: get('payload.data.community.posts'),
+        reset: true
+      }
+    }
+  }
+
+  expect(queryResults(state, action)).toEqual({
+    [key]: {
+      ids: [7, 8, 9],
+      total: 22,
+      hasMore: false
+    }
+  })
+})
 
 it('uses getType and getParams from extractQueryResults', () => {
   const state = {}

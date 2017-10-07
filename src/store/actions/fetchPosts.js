@@ -3,7 +3,7 @@ import { get } from 'lodash/fp'
 
 export const FETCH_POSTS = `FETCH_POSTS`
 
-export function fetchPosts ({ subject, slug, sortBy, offset, search, filter, topic }) {
+export function fetchPosts ({ subject, slug, sortBy, offset, search, filter, topic }, { reset } = {}) {
   var query, extractModel, getItems
 
   if (subject === 'community') {
@@ -36,11 +36,14 @@ export function fetchPosts ({ subject, slug, sortBy, offset, search, filter, top
     meta: {
       extractModel,
       extractQueryResults: {
-        getItems
+        getItems,
+        reset
       }
     }
   }
 }
+
+export default fetchPosts
 
 export const postsQueryFragment = `
 posts(
@@ -85,6 +88,12 @@ posts(
       id
       name
       slug
+    }
+    attachments {
+      id
+      position
+      type
+      url
     }
   }
 }`
