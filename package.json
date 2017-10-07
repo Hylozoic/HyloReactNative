@@ -21,6 +21,7 @@
     "hylo-utils": "Hylozoic/hylo-utils#716622b5",
     "lodash": "^4.17.4",
     "parse": "^1.9.2",
+    "path-to-regexp": "^2.0.0",
     "prop-types": "^15.5.10",
     "react": "16.0.0-alpha.12",
     "react-native": "^0.46.4",
@@ -49,7 +50,8 @@
     "standard": "^10.0.3",
     "striptags": "~2",
     "tinycolor2": "^1.4.1",
-    "url": "^0.11.0"
+    "url": "^0.11.0",
+    "url-parse": "^1.1.9"
   },
   "devDependencies": {
     "babel-plugin-remove-style": "^0.1.0",
