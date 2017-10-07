@@ -3,7 +3,7 @@ import React from 'react'
 import { View } from 'react-native'
 import PostHeader from './PostHeader'
 import PostBody from './PostBody'
-import SpaceFillingImage from '../SpaceFillingImage'
+import PostImage from './PostImage'
 import PostFooter from './PostFooter'
 import samplePost from './samplePost'
 import { get } from 'lodash/fp'
@@ -58,9 +58,7 @@ export default class PostCard extends React.Component {
         postId={post.id}
         showMember={showMember}
         goToCommunity={goToCommunity} />
-      <View style={post.imageUrl ? styles.imageMargin : {}}>
-        <SpaceFillingImage imageUrl={post.imageUrl} />
-      </View>
+      <PostImage postId={post.id} />
       <PostBody
         title={post.title}
         details={post.details}

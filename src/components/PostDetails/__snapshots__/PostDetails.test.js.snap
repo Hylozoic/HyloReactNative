@@ -84,11 +84,9 @@ exports[`PostDetails renders correctly 1`] = `
           slug="foom"
           type="request"
         />
-        <View>
-          <SpaceFillingImage
-            imageUrl="foom.png"
-          />
-        </View>
+        <Connect(PostImage)
+          postId="91"
+        />
         <PostBody
           details="Lo"
           linkPreview={
