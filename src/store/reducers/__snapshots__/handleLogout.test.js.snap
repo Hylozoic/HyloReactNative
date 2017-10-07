@@ -2,6 +2,7 @@
 
 exports[`resets the whole app state 1`] = `
 Object {
+  "CheckInvitation": Object {},
   "CommentEditor": Object {},
   "FeedList": Object {
     "filter": null,

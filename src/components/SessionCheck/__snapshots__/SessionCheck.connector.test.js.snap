@@ -4,6 +4,8 @@ exports[`mapDispatchToProps maps the action generators 1`] = `
 Object {
   "actions": Object {
     "checkSession": [Function],
+    "resetEntryURL": [Function],
+    "setEntryURL": [Function],
   },
 }
 `;
@@ -26,6 +28,7 @@ Array [
 
 exports[`mapStateToProps returns the right keys 1`] = `
 Object {
+  "entryURL": undefined,
   "loggedIn": true,
 }
 `;
