@@ -1,7 +1,7 @@
 import 'react-native'
 import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
-import SessionCheck from './component'
+import SessionCheck from './SessionCheck'
 
 jest.mock('react-native-onesignal', () => {})
 jest.mock('react-native-google-signin')

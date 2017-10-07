@@ -1,4 +1,4 @@
-import { checkSession } from './actions'
+import { checkSession } from './SessionCheck.store'
 
 it('works with a cookie', () => {
   jest.mock('../../util/session', () => ({

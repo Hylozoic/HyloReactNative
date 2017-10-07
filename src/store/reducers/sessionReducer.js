@@ -1,6 +1,14 @@
-import { LOGIN, LOGIN_WITH_FACEBOOK, LOGIN_WITH_GOOGLE } from '../../components/Login/actions'
+import {
+  LOGIN,
+  LOGIN_WITH_FACEBOOK,
+  LOGIN_WITH_GOOGLE
+} from '../../components/Login/actions'
 import { SIGNUP } from '../../components/SignupFlow/SignupFlow.store'
-import { CHECK_SESSION } from '../../components/SessionCheck/actions'
+import {
+  CHECK_SESSION,
+  SET_ENTRY_URL,
+  RESET_ENTRY_URL
+} from '../../components/SessionCheck/SessionCheck.store'
 import { omit } from 'lodash/fp'
 
 export default function sessionReducer (state = {}, action) {
@@ -37,11 +45,12 @@ export default function sessionReducer (state = {}, action) {
         return {...state, loggedIn: payload}
       }
       return state
+    case SET_ENTRY_URL:
+      return {...state, entryURL: payload}
+    case RESET_ENTRY_URL:
+      return {...state, entryURL: null}
     case SIGNUP:
-      return {
-        ...state,
-        loggedIn: true
-      }
+      return {...state, loggedIn: true}
   }
 
   return state

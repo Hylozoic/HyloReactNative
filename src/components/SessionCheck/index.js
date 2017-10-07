@@ -1,3 +1,4 @@
-import component from './component'
-import connector from './connector'
+import component from './SessionCheck'
+import connector from './SessionCheck.connector'
+
 export default connector(component)
