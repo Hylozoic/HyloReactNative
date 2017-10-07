@@ -5,6 +5,7 @@ import {
   setParticipantInput,
   addParticipant,
   removeParticipant,
+  setParticipants,
   getParticipants,
   getParticipantIds,
   fetchSuggestions,
@@ -26,8 +27,6 @@ import { isEmpty, get, debounce } from 'lodash/fp'
 
 export function mapStateToProps (state, props) {
   const participantInputText = getInputText(state, props)
-
-  console.log('nav.state', props.navigation.state)
 
   const pending = {
     suggestions: state.pending[FETCH_SUGGESTIONS],
@@ -54,6 +53,7 @@ export function mapDispatchToProps (dispatch, props) {
       dispatch(fetchSuggestions(autocomplete))),
     ...bindActionCreators({
       setParticipantInput,
+      setParticipants,
       addParticipant,
       removeParticipant,
       fetchContacts,
@@ -82,12 +82,18 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
         // TODO: redirect to thread page
       })
 
+  const participantsFromParams = get('state.params.participants', ownProps.navigation)
+  const loadParticipantsFromParams = participantsFromParams
+    ? () => dispatchProps.setParticipants(participantsFromParams)
+    : () => {}
+
   return {
     ...stateProps,
     ...dispatchProps,
     ...ownProps,
     fetchSuggestions,
-    createMessage
+    createMessage,
+    loadParticipantsFromParams
   }
 }
 
