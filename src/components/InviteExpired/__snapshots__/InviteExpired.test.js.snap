@@ -20,6 +20,24 @@ exports[`InviteExpired matches the last snapshot 1`] = `
       Contact your moderator for another one.
     </Text>
   </View>
+  <View>
+    <View>
+      <TouchableOpacity
+        activeOpacity={0.2}
+        focusedOpacity={0.7}
+        onPress={[Function]}
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          disabled={false}
+          ellipsizeMode="tail"
+        >
+          Log In
+        </Text>
+      </TouchableOpacity>
+    </View>
+  </View>
   <Image
     resizeMode="stretch"
     source={1}

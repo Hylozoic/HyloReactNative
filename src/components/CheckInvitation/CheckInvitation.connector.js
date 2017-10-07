@@ -3,7 +3,7 @@ import { isNil } from 'lodash'
 import {
    getValidInvite, checkInvitation, CHECK_INVITATION
 } from './CheckInvitation.store'
-import { setInvitationCodes } from '../JoinCommunity/JoinCommunity.store'
+// import { setInvitationCodes } from '../JoinCommunity/JoinCommunity.store'
 import getNavigationParam from '../../store/selectors/getNavigationParam'
 
 export function mapStateToProps (state, props) {
@@ -23,8 +23,8 @@ export function mapStateToProps (state, props) {
 }
 
 export const mapDispatchToProps = {
-  checkInvitation,
-  setInvitationCodes
+  checkInvitation
+  // setInvitationCodes
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {

@@ -2,6 +2,7 @@
 
 exports[`getEmptyState matches last snapshot 1`] = `
 Object {
+  "CheckInvitation": Object {},
   "CommentEditor": Object {},
   "FeedList": Object {
     "filter": null,

@@ -12,7 +12,8 @@ jest.mock('../LoginNavigator', () => 'LoginNavigator')
 jest.mock('react-native-aws3')
 
 const actions = {
-  checkSession: () => {}
+  checkSession: () => {},
+  setEntryURL: () => {}
 }
 
 it('matches last snapshot loading', () => {

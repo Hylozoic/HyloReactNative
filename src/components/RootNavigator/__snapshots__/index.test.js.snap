@@ -8,5 +8,6 @@ exports[`matches snapshot 1`] = `
       "currentTabName": "Home",
     }
   }
+  uriPrefix="lala"
 />
 `;
