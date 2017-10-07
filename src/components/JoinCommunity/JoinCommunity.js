@@ -4,21 +4,19 @@ import Loading from '../Loading'
 
 export default class JoinCommunity extends Component {
   componentWillMount () {
-    const { useInvitation, currentUser, invitationCodes } = this.props
-    console.log('this.props:', this.props)
-    useInvitation(1, invitationCodes)
+    this.props.useInvitation().then(result => this.props.goToCommunity())
   }
 
-  componentWillReceiveProps (nextProps) {
-    if (!this.props.currentUser && nextProps.currentUser) {
-      this.props.useInvitation(nextProps.currentUser.id, nextProps.invitationCodes)
-    }
-  }
+  // TODO: This is in alternative to using the promise above in cWillMount
+  //       Test this more idiomatic option to see if it provides any
+  //       advantages or works the same.
+  // componentWillReceiveProps (nextProps) {
+  //   if (!this.props.communityId && nextProps.communityId) {
+  //     this.props.goToCommunity()
+  //   }
+  // }
 
   render () {
-    const { communitySlug } = this.props
-    console.log('!!! In Join Community')
-    if (!communitySlug) return <Loading />
-    //   navigate to joined community
+    return <Loading />
   }
 }

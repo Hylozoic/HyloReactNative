@@ -13,8 +13,9 @@ export default class LoggedInRoot extends React.Component {
     fetchCurrentUser()
     // TODO: navigate to URL here
     //  ... this.navigator()
-    console.log('entryURL from LoggedInRoot: ', this.props.entryURL)
+    console.log('entryURL from LoggedInRoot: ', this, this.props.entryURL)
     initOneSignal({registerDevice})
+    // this.props.navigator.navigate('JoinCommunity')
   }
 
   componentWillUpdate (nextProps) {

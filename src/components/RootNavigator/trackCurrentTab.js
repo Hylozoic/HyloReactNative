@@ -39,7 +39,7 @@ export default function trackCurrentTab (Component) {
     }
 
     render () {
-      return <Component
+      return <Component {...this.props}
         onNavigationStateChange={this.handleChange}
         screenProps={this.state} />
     }
