@@ -1,6 +1,8 @@
 import {
-  rhino60
+  rhino60,
+  caribbeanGreen
 } from '../../style/colors'
+import { isIOS } from 'util/platform'
 
 export default {
   container: {
@@ -24,5 +26,22 @@ export default {
     width: 288,
     height: 309,
     marginBottom: 25
+  },
+  goToLoginButton: {
+    // flex: 1,
+    // flexDirection: 'row',
+    backgroundColor: caribbeanGreen,
+    height: 36,
+    borderRadius: 50,
+    justifyContent: 'center',
+    marginTop: 22
+  },
+  goToLoginButtonText: {
+    color: 'white',
+    backgroundColor: 'transparent',
+    textAlign: 'center',
+    fontFamily: 'Circular-Book',
+    fontSize: 18,
+    lineHeight: isIOS ? 32 : 28
   }
 }

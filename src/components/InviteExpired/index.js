@@ -1,2 +1,3 @@
-import InviteExpired from './InviteExpired'
-export default InviteExpired
+import component from './InviteExpired'
+
+export default component
