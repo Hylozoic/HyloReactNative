@@ -13,17 +13,56 @@ exports[`matches last snapshot 1`] = `
   <TextInput
     autoCapitalize="words"
     autoCorrect={true}
+    editable={true}
     keyboardType="email-address"
     onChangeText={[Function]}
+    onSubmitEditing={[Function]}
+    returnKeyType="next"
     secureTextEntry={true}
     value="Joe Bloggs"
   />
-  <Icon
-    allowFontScaling={false}
-    name="eye"
-    onPress={[Function]}
-    size={12}
-  />
+  <View>
+    <TouchableOpacity
+      activeOpacity={0.2}
+      focusedOpacity={0.7}
+      hitSlop={
+        Object {
+          "bottom": 10,
+          "left": 10,
+          "right": 10,
+          "top": 10,
+        }
+      }
+      onPress={[Function]}
+    >
+      <Icon
+        allowFontScaling={false}
+        name="eye"
+        size={12}
+      />
+    </TouchableOpacity>
+    <View>
+      <TouchableOpacity
+        activeOpacity={0.2}
+        focusedOpacity={0.7}
+        hitSlop={
+          Object {
+            "bottom": 10,
+            "left": 10,
+            "right": 10,
+            "top": 10,
+          }
+        }
+        onPress={[Function]}
+      >
+        <Icon
+          allowFontScaling={false}
+          name="check"
+          size={12}
+        />
+      </TouchableOpacity>
+    </View>
+  </View>
   <View>
     <Triangle
       color="white"

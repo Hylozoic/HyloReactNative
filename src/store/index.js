@@ -1,6 +1,6 @@
 import { applyMiddleware, createStore } from 'redux'
 import { compact } from 'lodash'
-import rootReducer from './reducers'
+import rootReducer, { combinedReducers } from './reducers'
 import promiseMiddleware from 'redux-promise'
 import apiMiddleware from './middleware/api'
 import graphQLMiddleware from './middleware/graphQL'
@@ -49,7 +49,5 @@ export function getInitialState () {
 }
 
 export function getEmptyState () {
-  return {
-    orm: orm.getEmptyState()
-  }
+  return combinedReducers({orm: orm.getEmptyState()}, {type: ''})
 }

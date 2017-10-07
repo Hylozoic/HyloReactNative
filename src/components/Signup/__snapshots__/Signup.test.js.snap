@@ -49,6 +49,14 @@ exports[`matches last snapshot 1`] = `
       Or connect with:
     </Text>
     <View>
+      <FbLoginButton
+        onLoginFinished={undefined}
+      />
+      <GoogleLoginButton
+        onLoginFinished={undefined}
+      />
+    </View>
+    <View>
       <Text
         accessible={true}
         allowFontScaling={true}

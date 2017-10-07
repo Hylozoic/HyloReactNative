@@ -3,6 +3,9 @@ import ormReducer from './ormReducer'
 import {
   RECEIVE_MESSAGE
 } from '../../components/SocketListener/SocketListener.store'
+import {
+  TOGGLE_TOPIC_SUBSCRIBE_PENDING
+} from '../../components/Feed/Feed.store'
 
 it('responds to an action with meta.extractModel', () => {
   const state = orm.getEmptyState()
@@ -93,4 +96,24 @@ it('handles RECEIVE_MESSAGE', () => {
   const newState = ormReducer(session.state, action)
   const newSession = orm.session(newState)
   expect(newSession.MessageThread.withId('5').updatedAt).toEqual(timestamp)
+})
+
+it('handles TOGGLE_TOPIC_SUBSCRIBE_PENDING', () => {
+  const session = orm.session(orm.getEmptyState())
+  session.CommunityTopic.create({
+    topic: '1', community: '1', isSubscribed: false, followersTotal: 3
+  })
+  const action = {
+    type: TOGGLE_TOPIC_SUBSCRIBE_PENDING,
+    meta: {
+      topicId: '1',
+      communityId: '1',
+      isSubscribing: true
+    }
+  }
+
+  const newState = ormReducer(session.state, action)
+  const newSession = orm.session(newState)
+  expect(newSession.CommunityTopic.first().followersTotal).toBe(4)
+  expect(newSession.CommunityTopic.first().isSubscribed).toBeTruthy()
 })

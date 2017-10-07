@@ -28,13 +28,18 @@ describe('mapStateToProps', () => {
     }
   })
 
-  it('returns empty posts if no results exist', () => {
+  it('returns empty posts and default query props if no results exist', () => {
     expect(mapStateToProps(state, {id: 'bar'})).toEqual({
       posts: [],
       hasMore: undefined,
       pending: undefined,
       filter: defaultState.filter,
-      sortBy: defaultState.sortBy
+      sortBy: defaultState.sortBy,
+      queryProps: {
+        slug: 'all-communities',
+        sortBy: 'updated',
+        subject: 'all-communities'
+      }
     })
   })
 
@@ -48,7 +53,12 @@ describe('mapStateToProps', () => {
       hasMore: true,
       pending: undefined,
       filter: defaultState.filter,
-      sortBy: defaultState.sortBy
+      sortBy: defaultState.sortBy,
+      queryProps: {
+        subject: 'community',
+        slug: 'foo',
+        sortBy: 'updated'
+      }
     })
   })
 
@@ -63,60 +73,69 @@ describe('mapStateToProps', () => {
 })
 
 describe('mergeProps', () => {
-  it('binds the correct values to fetchPostsRaw', () => {
-    const fetchPostsRaw = jest.fn()
+  it('binds the correct values to fetchPosts', () => {
     const stateProps = {
       sortBy: 'latest',
       filter: 'request',
       hasMore: true,
-      posts: [1, 2, 3, 4]
-    }
-    const dispatchProps = {
-      fetchPostsRaw
-    }
-    const ownProps = {
-      community: {
-        slug: 'food'
+      posts: [1, 2, 3, 4],
+      queryProps: {
+        subject: 'community',
+        slug: 'food',
+        sortBy: 'latest',
+        filter: 'request',
+        topic: 'eggs'
       }
     }
-
-    const merged = mergeProps(stateProps, dispatchProps, ownProps)
+    const fetchPosts = jest.fn()
+    const dispatchProps = {fetchPosts}
+    const merged = mergeProps(stateProps, dispatchProps)
 
     merged.fetchPosts()
-    expect(fetchPostsRaw).toHaveBeenCalledWith({
+    expect(fetchPosts).toHaveBeenCalledWith({
       filter: stateProps.filter,
       sortBy: stateProps.sortBy,
-      slug: ownProps.community.slug,
-      subject: 'community'
+      slug: 'food',
+      subject: 'community',
+      topic: 'eggs'
     })
-    fetchPostsRaw.mockClear()
+    fetchPosts.mockClear()
 
     merged.fetchMorePosts()
-    expect(fetchPostsRaw).toHaveBeenCalledWith({
+    expect(fetchPosts).toHaveBeenCalledWith({
       filter: stateProps.filter,
       sortBy: stateProps.sortBy,
-      slug: ownProps.community.slug,
+      slug: 'food',
       subject: 'community',
-      offset: 4
+      offset: 4,
+      topic: 'eggs'
     })
-    fetchPostsRaw.mockClear()
+    fetchPosts.mockClear()
 
     const merged2 = mergeProps(
-      {...stateProps, hasMore: false},
-      dispatchProps,
-      {}
+      {
+        ...stateProps,
+        hasMore: false,
+        queryProps: {
+          filter: 'foo',
+          sortBy: 'bar',
+          slug: 'all-communities',
+          subject: 'all-communities'
+        }
+      },
+      dispatchProps
     )
 
     merged2.fetchPosts()
-    expect(fetchPostsRaw).toHaveBeenCalledWith({
-      filter: stateProps.filter,
-      sortBy: stateProps.sortBy,
+    expect(fetchPosts).toHaveBeenCalledWith({
+      filter: 'foo',
+      sortBy: 'bar',
       slug: 'all-communities',
       subject: 'all-communities'
     })
-    fetchPostsRaw.mockClear()
+    fetchPosts.mockClear()
 
     merged2.fetchMorePosts()
-    expect(fetchPostsRaw).not.toHaveBeenCalled()
+    expect(fetchPosts).not.toHaveBeenCalled()
   })
 })

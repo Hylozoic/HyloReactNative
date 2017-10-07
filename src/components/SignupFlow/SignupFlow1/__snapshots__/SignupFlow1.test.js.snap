@@ -22,42 +22,48 @@ exports[`hides password, and changes button when pending  1`] = `
   behavior="padding"
   keyboardVerticalOffset={64}
 >
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    disabled={false}
-    ellipsizeMode="tail"
-  >
-    Howdie stranger!
-  </Text>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    disabled={false}
-    ellipsizeMode="tail"
-  >
-    To kick things off, tell us a bit more about yourself and get your account off the ground.
-  </Text>
-  <SignupControl
-    error={null}
-    label="Your Full Name"
-    onChange={[Function]}
-    value="Ra"
-  />
-  <SignupControl
-    autoCapitalize="none"
-    autoCorrect={false}
-    error={null}
-    keyboardType="email-address"
-    label="Email Address"
-    onChange={[Function]}
-    value="ra@ra.com"
-  />
-  <Button
-    disabled={true}
-    onPress={[Function]}
-    text="Saving..."
-  />
+  <ScrollViewMock>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+    >
+      Hi there stranger!
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+    >
+      To kick things off, tell us a bit more about yourself and get your account off the ground.
+    </Text>
+    <SignupControl
+      error={null}
+      label="Your Full Name"
+      onChange={[Function]}
+      onSubmitEditing={[Function]}
+      returnKeyType="next"
+      value="Ra"
+    />
+    <SignupControl
+      autoCapitalize="none"
+      autoCorrect={false}
+      error={null}
+      keyboardType="email-address"
+      label="Email Address"
+      onChange={[Function]}
+      onSubmitEditing={[Function]}
+      returnKeyType="next"
+      value="ra@ra.com"
+    />
+    <Button
+      disabled={true}
+      onPress={[Function]}
+      text="Saving..."
+    />
+  </ScrollViewMock>
 </KeyboardFriendlyView>
 `;
 
@@ -82,55 +88,73 @@ exports[`matches last snapshot 1`] = `
   behavior="padding"
   keyboardVerticalOffset={64}
 >
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    disabled={false}
-    ellipsizeMode="tail"
-  >
-    Howdie stranger!
-  </Text>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    disabled={false}
-    ellipsizeMode="tail"
-  >
-    To kick things off, tell us a bit more about yourself and get your account off the ground.
-  </Text>
-  <SignupControl
-    error={null}
-    label="Your Full Name"
-    onChange={[Function]}
-    value="Ra"
-  />
-  <SignupControl
-    autoCapitalize="none"
-    autoCorrect={false}
-    error={null}
-    keyboardType="email-address"
-    label="Email Address"
-    onChange={[Function]}
-    value="ra@ra.com"
-  />
-  <SignupControl
-    error={null}
-    label="Password"
-    onChange={[Function]}
-    togglableSecureTextEntry={true}
-    value="rarara"
-  />
-  <Button
-    disabled={false}
-    onPress={[Function]}
-    text="Continue"
-  />
+  <ScrollViewMock>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+    >
+      Hi there stranger!
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+    >
+      To kick things off, tell us a bit more about yourself and get your account off the ground.
+    </Text>
+    <SignupControl
+      error={null}
+      label="Your Full Name"
+      onChange={[Function]}
+      onSubmitEditing={[Function]}
+      returnKeyType="next"
+      value="Ra"
+    />
+    <SignupControl
+      autoCapitalize="none"
+      autoCorrect={false}
+      error={null}
+      keyboardType="email-address"
+      label="Email Address"
+      onChange={[Function]}
+      onSubmitEditing={[Function]}
+      returnKeyType="next"
+      value="ra@ra.com"
+    />
+    <SignupControl
+      error={null}
+      label="Password"
+      onChange={[Function]}
+      onSubmitEditing={[Function]}
+      returnKeyType="next"
+      toggleSecureTextEntry={true}
+      value="rarara"
+    />
+    <SignupControl
+      error={undefined}
+      label="Confirm Password"
+      onChange={[Function]}
+      onSubmitEditing={[Function]}
+      returnKeyType="go"
+      toggleSecureTextEntry={true}
+      value={undefined}
+    />
+    <Button
+      disabled={false}
+      onPress={[Function]}
+      text="Continue"
+    />
+  </ScrollViewMock>
 </KeyboardFriendlyView>
 `;
 
 exports[`validates its fields 1`] = `
 Object {
   "errors": Object {
+    "confirmPassword": "Passwords must match",
     "email": "Must be a valid email",
     "name": "Name must not consist solely of whitespace.",
     "password": "Password must be at least 9 characters.",

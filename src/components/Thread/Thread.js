@@ -1,6 +1,6 @@
 import React from 'react'
-import { FlatList, KeyboardAvoidingView, NetInfo, View } from 'react-native'
-import { any, arrayOf, bool, func, object, shape, string } from 'prop-types'
+import { FlatList, KeyboardAvoidingView, View } from 'react-native'
+import { any, arrayOf, bool, func, shape, string } from 'prop-types'
 import { throttle, debounce } from 'lodash'
 import { get } from 'lodash/fp'
 
@@ -18,7 +18,6 @@ import { keyboardAvoidingViewProps as kavProps } from 'util/viewHelpers'
 import styles from './Thread.styles'
 
 const BOTTOM_THRESHOLD = 10
-const NETINFO_INTERVAL = 10000
 
 export default class Thread extends React.Component {
   static propTypes = {
@@ -50,7 +49,6 @@ export default class Thread extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      isConnected: true,
       newMessages: 0,
       notify: false
     }
@@ -67,11 +65,10 @@ export default class Thread extends React.Component {
     this.scrollToBottom()
     fetchMessages()
     if (title) setTitle(title)
-    NetInfo.isConnected.addEventListener('change', this.handleConnectivityChange)
   }
 
   componentWillUpdate (nextProps) {
-    const { currentUserId, messages, pending } = nextProps
+    const { currentUserId, messages } = nextProps
 
     const oldMessages = this.props.messages
     const deltaLength = Math.abs(messages.length - oldMessages.length)
@@ -86,14 +83,14 @@ export default class Thread extends React.Component {
       if (get('id', latest) === get('id', oldLatest)) {
         // Stops NotificationOverlay showing on infinite scroll
         if (this.state.notify) this.setState({ notify: false })
-        return 
+        return
       }
 
       // If there's one new message, it's not from currentUser,
       // and we're not already at the bottom, don't scroll
-      if (deltaLength === 1
-        && !this.atBottom()
-        && get('creator.id', latest) !== currentUserId) {
+      if (deltaLength === 1 &&
+        !this.atBottom() &&
+        get('creator.id', latest) !== currentUserId) {
         this.setState({
           newMessages: this.state.newMessages + 1,
           notify: true
@@ -106,7 +103,7 @@ export default class Thread extends React.Component {
   }
 
   componentDidUpdate (prevProps) {
-    const { messages, setTitle, title } = this.props
+    const { setTitle, title } = this.props
     if (prevProps.title !== title) setTitle(title)
     if (this.atBottom()) this.markAsRead()
     if (this.shouldScroll) this.scrollToBottom()
@@ -115,7 +112,6 @@ export default class Thread extends React.Component {
   componentWillUnmount () {
     const { reconnectFetchMessages } = this.props
     getSocket().then(socket => socket.off('reconnect', reconnectFetchMessages))
-    NetInfo.isConnected.removeEventListener('change', this.handleConnectivityChange)
   }
 
   atBottom = () => this.yOffset < BOTTOM_THRESHOLD
@@ -127,10 +123,6 @@ export default class Thread extends React.Component {
     if (pending || !hasMore) return
     fetchMessages(messages[messages.length - 1].id)
   }, 2000)
-
-  handleConnectivityChange = isConnected => { 
-    if (isConnected !== this.state.isConnected) this.setState({ isConnected })
-  }
 
   markAsRead = debounce(() => this.props.updateThreadReadTime(), 2000)
 
@@ -155,12 +147,12 @@ export default class Thread extends React.Component {
   messageView = () => {
     const {
       id,
-      createMessage,
       messages,
       pending,
-      sendIsTyping
+      sendIsTyping,
+      isConnected
     } = this.props
-    const { isConnected, newMessages, notify } = this.state
+    const { newMessages, notify } = this.state
     const showNotificationOverlay = notify || !isConnected
     const overlayMessage = !isConnected
       ? 'DISCONNECTED. TRYING TO RECONNECT...'
@@ -174,7 +166,7 @@ export default class Thread extends React.Component {
         onEndReached={() => this.fetchMore()}
         onEndReachedThreshold={0.3}
         onScroll={this.scrollHandler}
-        ref={flatList => this.messageList = flatList}
+        ref={flatList => { this.messageList = flatList }}
         refreshing={!!pending}
         renderItem={this.renderItem} />
       <MessageInput
@@ -185,6 +177,8 @@ export default class Thread extends React.Component {
         placeholder='Write something...' />
       <PeopleTyping />
       {showNotificationOverlay && <NotificationOverlay
+        position='bottom'
+        type={isConnected ? 'info' : 'error'}
         message={overlayMessage}
         onPress={this.scrollToBottom} />}
       <SocketSubscriber type='post' id={id} />

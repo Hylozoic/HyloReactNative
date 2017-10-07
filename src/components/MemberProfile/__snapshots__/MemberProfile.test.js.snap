@@ -36,8 +36,8 @@ exports[`MemberHeader matches the last snapshot 1`] = `
       <Icon
         name="Messages"
       />
-      <Icon
-        name="More"
+      <MemberMenu
+        flagMember={[Function]}
       />
     </View>
   </View>
@@ -60,6 +60,54 @@ exports[`MemberHeader matches the last snapshot 1`] = `
 </View>
 `;
 
+exports[`MemberMenu returns a popupmenu when flagging allowed 1`] = `
+<PopupMenuButton
+  actions={
+    Array [
+      "Flag This Member",
+    ]
+  }
+  destructiveButtonIndex={0}
+  onSelect={[Function]}
+>
+  <Icon
+    name="More"
+  />
+</PopupMenuButton>
+`;
+
+exports[`MemberMenu returns null when flagging not allowed 1`] = `null`;
+
+exports[`MemberProfile doesnt have the flag content option 1`] = `
+<Connect(MemberFeed)
+  header={
+    <View>
+      <MemberBanner
+        person={
+          Object {
+            "id": 1,
+          }
+        }
+      />
+      <View>
+        <MemberHeader
+          flagMember={undefined}
+          person={
+            Object {
+              "id": 1,
+            }
+          }
+        />
+        <ReadMoreButton
+          goToDetails={undefined}
+        />
+      </View>
+    </View>
+  }
+  id={1}
+/>
+`;
+
 exports[`MemberProfile matches the last snapshot 1`] = `
 <Connect(MemberFeed)
   header={
@@ -73,6 +121,7 @@ exports[`MemberProfile matches the last snapshot 1`] = `
       />
       <View>
         <MemberHeader
+          flagMember={[Function]}
           person={
             Object {
               "id": 1,

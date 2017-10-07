@@ -3,6 +3,6 @@
 exports[`renders correctly with all=true, and no community or user 1`] = `
 <Icon
   name="Home"
-  size={25}
+  size={28}
 />
 `;

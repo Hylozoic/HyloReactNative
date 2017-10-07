@@ -18,8 +18,13 @@ export default class SignupFlow3 extends React.Component {
     headerBackTitle: null
   })
 
+  saveAndNext = () => {
+    this.control && this.control.blur()
+    this.props.saveAndNext()
+  }
+
   render () {
-    const { location, changeSetting, saveAndNext } = this.props
+    const { location, changeSetting } = this.props
 
     return <KeyboardFriendlyView style={styles.container} {...kavProps}>
       <View>
@@ -29,13 +34,14 @@ export default class SignupFlow3 extends React.Component {
         </Text>
       </View>
       <SignupControl
+        ref={c => { this.control = c }}
         label='Where do you call home'
         value={location}
         onChange={changeSetting('location')} />
       <Button
         style={styles.continueButton}
         text='Continue'
-        onPress={saveAndNext} />
+        onPress={this.saveAndNext} />
     </KeyboardFriendlyView>
   }
 }

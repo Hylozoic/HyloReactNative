@@ -19,7 +19,7 @@ import CheckInvitation from '../../components/CheckInvitation/CheckInvitation.st
 import JoinCommunity from '../../components/JoinCommunity/JoinCommunity.store'
 import SignupFlow from '../../components/SignupFlow/SignupFlow.store'
 
-const combinedReducers = combineReducers({
+export const combinedReducers = combineReducers({
   orm: ormReducer,
   session: sessionReducer,
   pending,
