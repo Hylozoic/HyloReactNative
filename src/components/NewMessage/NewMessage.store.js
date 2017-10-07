@@ -180,7 +180,7 @@ export function createMessage (messageThreadId, text, forNewThread) {
   }
 }
 
-const defaultState = {
+export const defaultState = {
   input: '',
   message: '',
   participants: []

@@ -66,6 +66,7 @@ export function mapDispatchToProps (dispatch, props) {
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
+  const { navigation } = ownProps
   const { participantInputText, message, participantIds, suggestions } = stateProps
 
   // don't fetch suggestions if we already have some that match the search
@@ -79,7 +80,9 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
       .then(resp => {
         const messageThreadId = get('payload.data.findOrCreateThread.id', resp)
         dispatchProps.createMessage(messageThreadId, message, true)
-        // TODO: redirect to thread page
+        .then(({ error }) => {
+          if (!error) navigation.navigate('Thread', {id: messageThreadId})
+        })
       })
 
   const participantsFromParams = get('state.params.participants', ownProps.navigation)

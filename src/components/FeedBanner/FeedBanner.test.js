@@ -2,6 +2,9 @@ import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import TestRenderer from 'react-test-renderer'
 import FeedBanner, { PostPrompt } from './FeedBanner'
+import { TouchableOpacity } from 'react-native'
+
+jest.mock('react-native-linear-gradient')
 
 const community = {
   id: '1',
@@ -37,14 +40,18 @@ describe('FeedBanner', () => {
     expect(actual).toMatchSnapshot()
   })
 
-  it('shows an overlay message when toggleSubscribe is called', () => {
+  it('has a topic subscribe toggle button', () => {
     const toggleTopicSubscribe = jest.fn()
     const renderer = TestRenderer.create(
-      <FeedBanner toggleTopicSubscribe={toggleTopicSubscribe} />
+      <FeedBanner community={{name: 'Earth'}}
+        topicSubscribed={false}
+        toggleTopicSubscribe={toggleTopicSubscribe} />
     )
-    const node = renderer.root.instance
-    node.toggleSubscribe()
-    expect(node.state.overlayMessage).toEqual('SUBSCRIBED TO TOPIC')
+
+    expect(renderer.toJSON()).toMatchSnapshot()
+    const { root } = renderer
+    root.findByType(TouchableOpacity).props.onPress()
+    expect(root.instance.state.overlayMessage).toEqual('SUBSCRIBED TO TOPIC')
     expect(toggleTopicSubscribe).toBeCalled()
   })
 })

@@ -10,10 +10,6 @@ it('resets the whole app state', () => {
   const action = {
     type: LOGOUT
   }
-  expect(handleLogout(state, action)).toEqual({
-    orm: expect.anything(),
-    session: {
-      loggedIn: false
-    }
-  })
+  expect(handleLogout(state, action))
+  .toMatchSnapshot()
 })

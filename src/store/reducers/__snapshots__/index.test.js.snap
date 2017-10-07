@@ -27,6 +27,7 @@ Object {
     "skill": "",
     "userSettings": Object {
       "avatarUrl": "",
+      "confirmPassword": "",
       "email": "",
       "location": "",
       "name": "",

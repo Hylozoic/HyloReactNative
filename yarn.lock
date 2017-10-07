@@ -4451,6 +4451,12 @@ react-native-image-picker@^0.26.3:
   version "0.26.3"
   resolved "https://registry.yarnpkg.com/react-native-image-picker/-/react-native-image-picker-0.26.3.tgz#0ad2eede49501a7046d8046a73813696539c3dcd"
 
+react-native-linear-gradient@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/react-native-linear-gradient/-/react-native-linear-gradient-2.3.0.tgz#757997197e35edf52e290891a11566e462845da1"
+  dependencies:
+    prop-types "^15.5.10"
+
 react-native-onesignal@^3.0.5:
   version "3.0.5"
   resolved "https://registry.yarnpkg.com/react-native-onesignal/-/react-native-onesignal-3.0.5.tgz#b048f4f77aa1f4166e0c9a88608cf2a8aa8c00da"

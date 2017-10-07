@@ -119,6 +119,7 @@ Array [
 
 exports[`mapStateToProps returns the right keys 1`] = `
 Object {
+  "confirmPassword": undefined,
   "currentUser": undefined,
   "email": undefined,
   "errors": undefined,

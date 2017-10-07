@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`getEmptyState matches last snapshot 1`] = `
+exports[`resets the whole app state 1`] = `
 Object {
   "CommentEditor": Object {},
   "FeedList": Object {
@@ -187,16 +187,8 @@ Object {
   },
   "pending": Object {},
   "queryResults": Object {},
-  "session": Object {},
-}
-`;
-
-exports[`getStore works 1`] = `
-Object {
-  "dispatch": [Function],
-  "getState": [Function],
-  "replaceReducer": [Function],
-  "subscribe": [Function],
-  Symbol(observable): [Function],
+  "session": Object {
+    "loggedIn": false,
+  },
 }
 `;
