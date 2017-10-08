@@ -15,16 +15,12 @@ export default class SessionCheck extends React.Component {
     }).isRequired
   }
 
-  _captureEntryURL = (url) => {
-    this.props.actions.setEntryURL(url)
-  }
-
   componentDidMount (nextProps) {
     this.props.actions.checkSession()
     // this handles the case where the app is closed and is launched via Universal Linking.
-    Linking.getInitialURL().then(url => this._captureEntryURL(url))
+    Linking.getInitialURL().then(url => this.props.actions.setEntryURL(url))
     // This listener handles the case where the app is woken up from the Universal Linking
-    Linking.addEventListener('url', ({ url }) => this._captureEntryURL(url))
+    Linking.addEventListener('url', ({ url }) => this.props.actions.setEntryURL(url))
   }
 
   componentWillUnmount () {
@@ -36,7 +32,7 @@ export default class SessionCheck extends React.Component {
       case true:
         return <LoggedInRoot />
       case false:
-        return <LoginNavigator uriPrefix={urlPrefix} />
+        return <LoginNavigator />
       default:
         return <View style={mixins.allCentered}>
           <Text>Loading...</Text>

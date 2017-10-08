@@ -18,6 +18,12 @@ export default function trackCurrentTab (Component) {
       this.state = {currentTabName: 'Home'}
     }
 
+    componentDidMount () {
+      console.log('&&&&&&& navigator in trackCurrentTab#componentDidMount:', this.navigator)
+      // TODO: This MIGHT work for handling the pass through returnToURL
+      // this.navigator._handleOpenURL('http://hylo.com/h/use-invitation')
+    }
+
     // this method is very coupled to the nesting structure for navigators in
     // RootNavigator/index.js
     handleChange = (prevState, newState) => {
@@ -40,6 +46,7 @@ export default function trackCurrentTab (Component) {
 
     render () {
       return <Component {...this.props}
+        ref={nav => { this.navigator = nav }}
         onNavigationStateChange={this.handleChange}
         screenProps={this.state} />
     }

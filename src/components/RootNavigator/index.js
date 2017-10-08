@@ -54,7 +54,8 @@ export const screensInStack = {
   Thread: {screen: Thread, path: 'thread/:id'},
   ThreadList: {screen: ThreadList, path: 'messages'},
   Login: {screen: Login, path: 'login'},
-  Signup: {screen: Signup, path: 'signup'}
+  Signup: {screen: Signup, path: 'signup'},
+  JoinCommunity: {screen: WelcomeScene, path: 'h/use-invitation'}
 }
 
 Object.freeze(tabs)
