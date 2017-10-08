@@ -81,7 +81,7 @@ export default class PostEditor extends React.Component {
           </View>
 
           <SectionLabel>Details</SectionLabel>
-          <TouchableOpacity style={[styles.textInputWrapper, styles.section, styles.extendSection]}
+          <TouchableOpacity style={[styles.textInputWrapper, styles.section]}
             onPress={editDetails}>
             <Details details={details} placeholder={detailsPlaceholder} />
           </TouchableOpacity>
@@ -105,7 +105,7 @@ function SectionLabel ({ children }) {
   </Text>
 }
 
-function Details ({details, placeholder}) {
+export function Details ({details, placeholder}) {
   const style = details ? styles.textInput : styles.textInputPlaceholder
   const body = excerptDetails(details) || placeholder
   return <Text style={style}>{body}</Text>
