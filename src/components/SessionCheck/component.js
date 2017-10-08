@@ -4,6 +4,7 @@ import { Text, View } from 'react-native'
 import LoggedInRoot from '../LoggedInRoot'
 import LoginNavigator from '../LoginNavigator'
 import mixins from '../../style/mixins'
+import fetchVersion from 'util/fetchVersion'
 
 export default class SessionCheck extends React.Component {
   static propTypes = {
@@ -15,6 +16,7 @@ export default class SessionCheck extends React.Component {
 
   componentDidMount () {
     this.props.actions.checkSession()
+    fetchVersion()
   }
 
   render () {
