@@ -81,12 +81,9 @@ export default class PostEditor extends React.Component {
           </View>
 
           <SectionLabel>Details</SectionLabel>
-          <TouchableOpacity style={[styles.textInputWrapper, styles.section]}
+          <TouchableOpacity style={[styles.textInputWrapper, styles.section, styles.extendSection]}
             onPress={editDetails}>
-            <TextInput value={excerptDetails(details)} style={styles.textInput}
-              placeholder={detailsPlaceholder}
-              editable={false}
-              underlineColorAndroid='transparent' />
+            <Details details={details} placeholder={detailsPlaceholder} />
           </TouchableOpacity>
         </View>
       </ScrollView>
@@ -106,6 +103,12 @@ function SectionLabel ({ children }) {
   return <Text style={styles.sectionLabel}>
     {children}
   </Text>
+}
+
+function Details ({details, placeholder}) {
+  const style = details ? styles.textInput : styles.textInputPlaceholder
+  const body = excerptDetails(details) || placeholder
+  return <Text style={style}>{body}</Text>
 }
 
 function TypeButton ({ type, selected, onPress }) {
