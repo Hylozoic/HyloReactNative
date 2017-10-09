@@ -11,6 +11,6 @@ export default function fetchVersion () {
   const queryParams = `${platform}-version=${version}`
   fetchJSON('/noo/mobile/auto-update-info?' + queryParams)
   .then(result => {
-    console.log('result', result)
+    console.log('fetchVersion result', result)
   })
 }

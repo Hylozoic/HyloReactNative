@@ -3,12 +3,14 @@ import { connect } from 'react-redux'
 import { checkSession } from './actions'
 import getMe from '../../store/selectors/getMe'
 import { get } from 'lodash/fp'
+import fetchVersion from 'util/fetchVersion'
 
 export function mapStateToProps (state) {
   const signupInProgress = get('settings.signupInProgress', getMe(state))
-
+  const result = fetchVersion()
   return {
-    loggedIn: state.session.loggedIn && !signupInProgress
+    loggedIn: state.session.loggedIn && !signupInProgress,
+    result
   }
 }
 
