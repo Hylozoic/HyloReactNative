@@ -26,14 +26,6 @@ exports[`Login renders correctly 1`] = `
     }
   }
 >
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    disabled={false}
-    ellipsizeMode="tail"
-  >
-    YOU ARE OFFLINE. TRYING TO RECONNECT...
-  </Text>
   <Image
     source={1}
   />
@@ -178,14 +170,6 @@ exports[`Login renders with email error 1`] = `
     }
   }
 >
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    disabled={false}
-    ellipsizeMode="tail"
-  >
-    YOU ARE OFFLINE. TRYING TO RECONNECT...
-  </Text>
   <Image
     source={1}
   />
@@ -330,14 +314,6 @@ exports[`Login renders with no network connection error 1`] = `
     }
   }
 >
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    disabled={false}
-    ellipsizeMode="tail"
-  >
-    YOU ARE OFFLINE. TRYING TO RECONNECT...
-  </Text>
   <Image
     source={1}
   />
@@ -482,14 +458,6 @@ exports[`Login renders with password error 1`] = `
     }
   }
 >
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    disabled={false}
-    ellipsizeMode="tail"
-  >
-    YOU ARE OFFLINE. TRYING TO RECONNECT...
-  </Text>
   <Image
     source={1}
   />
@@ -634,14 +602,6 @@ exports[`Login renders with pending banner 1`] = `
     }
   }
 >
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    disabled={false}
-    ellipsizeMode="tail"
-  >
-    YOU ARE OFFLINE. TRYING TO RECONNECT...
-  </Text>
   <Text
     accessible={true}
     allowFontScaling={true}
