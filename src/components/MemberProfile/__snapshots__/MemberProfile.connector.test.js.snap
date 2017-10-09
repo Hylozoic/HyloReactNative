@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mergeProps returns the right keys 1`] = `
+Object {
+  "canFlag": true,
+  "currentUser": Object {
+    "id": 1,
+  },
+  "fetchPerson": [Function],
+  "id": 78,
+  "navigation": Object {
+    "navigate": [Function],
+  },
+  "onPressMessages": [Function],
+  "person": Object {
+    "id": 78,
+  },
+}
+`;

@@ -85,7 +85,7 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
         })
       })
 
-  const participantsFromParams = get('state.params.participants', ownProps.navigation)
+  const participantsFromParams = get('state.params.participants', navigation)
   const loadParticipantsFromParams = participantsFromParams
     ? () => dispatchProps.setParticipants(participantsFromParams)
     : () => {}

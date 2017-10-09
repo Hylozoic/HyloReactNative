@@ -1,7 +1,6 @@
 import { connect } from 'react-redux'
 import { get } from 'lodash/fp'
 import { getPerson, fetchPerson } from './MemberProfile.store'
-import changeCommunity from '../../store/actions/changeCommunity'
 import makeGoToCommunity from '../../store/actions/makeGoToCommunity'
 import getMe from '../../store/selectors/getMe'
 
