@@ -23,6 +23,7 @@ import ThreadList from '../ThreadList'
 import MemberDetails from '../MemberProfile/MemberDetails'
 import Signup from '../Signup'
 import Login from '../Login'
+import UserSettings from '../UserSettings'
 import createLinkingAwareContainer from './createLinkingAwareContainer'
 import trackCurrentTab from './trackCurrentTab'
 import { isIOS, urlPrefix } from 'util/platform'
@@ -50,7 +51,8 @@ export const screensInTabs = {
 
 // Screens that work outside of tabs, Settings, Messages, etc.
 export const screensInStack = {
-  Settings: {screen: Settings, path: 'settings'},
+  Settings: {screen: Settings, path: 'oldsettings'},
+  UserSettings: {screen: UserSettings, path: 'settings'},
   Thread: {screen: Thread, path: 'thread/:id'},
   ThreadList: {screen: ThreadList, path: 'messages'},
   Login: {screen: Login, path: 'login'},

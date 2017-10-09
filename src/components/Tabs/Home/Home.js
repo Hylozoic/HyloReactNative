@@ -8,6 +8,11 @@ const title = 'Home'
 export default class Home extends React.Component {
   static navigationOptions = ({navigation}) => (Header(navigation, title))
 
+  componentDidMount () {
+    console.log('Nagivate?')
+    this.props.navigation.navigate('UserSettings')
+  }
+
   render () {
     const { navigation, communityId, currentUser } = this.props
     if (!currentUser) return <Loading style={{flex: 1}} />
