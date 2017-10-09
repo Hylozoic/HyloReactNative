@@ -102,13 +102,13 @@ const titlePlaceholders = {
 
 const detailsPlaceholder = 'What else should we know?'
 
-function SectionLabel ({ children }) {
+export function SectionLabel ({ children }) {
   return <Text style={styles.sectionLabel}>
     {children}
   </Text>
 }
 
-function TypeButton ({ type, selected, onPress }) {
+export function TypeButton ({ type, selected, onPress }) {
   const s = styles.typeButton
   return <TouchableOpacity onPress={onPress}
     style={[s.box, selected && s[type].box]}>
