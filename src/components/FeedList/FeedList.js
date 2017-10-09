@@ -114,7 +114,7 @@ export function ListControl ({ selected, options, onChange }) {
   return <PopupMenuButton
     onSelect={onSelect}
     actions={actions.map(a => a[0])}
-    style={styles.listControl} >
+    style={styles.listControl}>
     <Text style={styles.optionText}>{optionText(selected, options)}</Text>
     <Icon name='ArrowDown' style={[styles.optionText, styles.downArrow]} />
   </PopupMenuButton>
