@@ -42,10 +42,16 @@ exports[`FeedList renders correctly 1`] = `
 `;
 
 exports[`ListControl renders correctly 1`] = `
-<TouchableOpacity
-  activeOpacity={0.2}
-  focusedOpacity={0.7}
-  onPress={[Function]}
+<PopupMenuButton
+  actions={
+    Array [
+      "All Posts",
+      "Discussions",
+      "Requests",
+      "Offers",
+    ]
+  }
+  onSelect={[Function]}
 >
   <Text
     accessible={true}
@@ -58,7 +64,7 @@ exports[`ListControl renders correctly 1`] = `
   <Icon
     name="ArrowDown"
   />
-</TouchableOpacity>
+</PopupMenuButton>
 `;
 
 exports[`ListControls renders correctly 1`] = `
