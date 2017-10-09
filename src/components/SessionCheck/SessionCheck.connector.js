@@ -1,6 +1,7 @@
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { init as initOneSignal } from 'util/onesignal'
+import { get } from 'lodash/fp'
 import fetchCurrentUser, { FETCH_CURRENT_USER } from '../../store/actions/fetchCurrentUser'
 import registerDevice from '../../store/actions/registerDevice'
 import {
@@ -11,14 +12,18 @@ import {
   resetEntryURL
 } from './SessionCheck.store'
 import getMe from '../../store/selectors/getMe'
-import { get } from 'lodash/fp'
 
 export function mapStateToProps (state) {
-  const pending = state.pending[CHECK_SESSION] || state.pending[FETCH_CURRENT_USER]
+  const pending = !!(state.pending[CHECK_SESSION] || state.pending[FETCH_CURRENT_USER])
   const signupInProgress = get('settings.signupInProgress', getMe(state))
+  const loggedIn = state.session.loggedIn && !signupInProgress
   return {
+    // NOTE: loading is necessary so that the LoginNavigator
+    // doesn't render unncessarily on first render when already logged in
+    // but the sessionCheck or fetchCurrentUser have been kicked-off.
+    loading: pending || loggedIn === undefined,
     pending,
-    loggedIn: state.session.loggedIn && !signupInProgress,
+    loggedIn,
     currentUser: getMe(state),
     entryURL: getEntryURL(state)
   }

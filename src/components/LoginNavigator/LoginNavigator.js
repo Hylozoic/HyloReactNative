@@ -11,7 +11,7 @@ import SignupFlow3 from '../SignupFlow/SignupFlow3'
 import SignupFlow4 from '../SignupFlow/SignupFlow4'
 import SignupFlow5 from '../SignupFlow/SignupFlow5'
 
-export const LoginNavigator = StackNavigator({
+export default StackNavigator({
   Login: {
     screen: Login,
     path: 'login'
@@ -53,7 +53,3 @@ export const LoginNavigator = StackNavigator({
     path: 'signup/5'
   }
 })
-
-export default function (props) {
-  return <LoginNavigator {...props} uriPrefix={urlPrefix} />
-}

@@ -52,8 +52,6 @@ export const screensInStack = {
   Settings: {screen: Settings, path: 'settings'},
   Thread: {screen: Thread, path: 'thread/:id'},
   ThreadList: {screen: ThreadList, path: 'messages'},
-  Login: {screen: Login, path: 'login'},
-  Signup: {screen: Signup, path: 'signup'},
   JoinCommunity: {screen: WelcomeScene, path: 'h/use-invitation'}
 }
 
