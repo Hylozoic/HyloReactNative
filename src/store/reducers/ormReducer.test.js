@@ -6,6 +6,12 @@ import {
 import {
   TOGGLE_TOPIC_SUBSCRIBE_PENDING
 } from '../../components/Feed/Feed.store'
+import {
+  VOTE_ON_POST_PENDING
+} from '../../components/PostCard/PostFooter/PostFooter.store'
+import {
+  CREATE_COMMENT
+} from '../../components/PostDetails/CommentEditor/CommentEditor.store'
 
 it('responds to an action with meta.extractModel', () => {
   const state = orm.getEmptyState()
@@ -98,6 +104,24 @@ it('handles RECEIVE_MESSAGE', () => {
   expect(newSession.MessageThread.withId('5').updatedAt).toEqual(timestamp)
 })
 
+it('handles CREATE_COMMENT', () => {
+  const session = orm.session(orm.getEmptyState())
+  session.Post.create({
+    id: '10'
+  })
+
+  const action = {
+    type: CREATE_COMMENT,
+    meta: {
+      postId: '10'
+    }
+  }
+
+  const newState = ormReducer(session.state, action)
+  const newSession = orm.session(newState)
+  expect(newSession.Post.withId('10').commentsTotal).toEqual(1)
+})
+
 it('handles TOGGLE_TOPIC_SUBSCRIBE_PENDING', () => {
   const session = orm.session(orm.getEmptyState())
   session.CommunityTopic.create({
@@ -116,4 +140,36 @@ it('handles TOGGLE_TOPIC_SUBSCRIBE_PENDING', () => {
   const newSession = orm.session(newState)
   expect(newSession.CommunityTopic.first().followersTotal).toBe(4)
   expect(newSession.CommunityTopic.first().isSubscribed).toBeTruthy()
+})
+
+it('handles VOTE_ON_POST_PENDING', () => {
+  const session = orm.session(orm.getEmptyState())
+  session.Post.create({
+    id: '10',
+    myVote: false
+  })
+  const upVoteAction = {
+    type: VOTE_ON_POST_PENDING,
+    meta: {
+      postId: '10',
+      isUpvote: true
+    }
+  }
+
+  const newState = ormReducer(session.state, upVoteAction)
+  const newSession = orm.session(newState)
+  expect(newSession.Post.first().myVote).toBeTruthy()
+
+  const downVoteAction = {
+    type: VOTE_ON_POST_PENDING,
+    meta: {
+      postId: '10',
+      isUpvote: false
+    }
+  }
+
+  const newState2 = ormReducer(session.state, downVoteAction)
+  const newSession2 = orm.session(newState2)
+  expect(newSession2.Post.first().myVote).toBeFalsy()
+
 })
