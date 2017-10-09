@@ -1,24 +1,31 @@
 import { makeOnPressMessages, mergeProps } from './MemberProfile.connector'
 
 describe('makeOnPressMessages', () => {
-  it('navigates to the right place', () => {
-    const navigation = {
+  var navigation
+
+  beforeEach(() => {
+    navigation = {
       navigate: jest.fn()
     }
-    const otherPersonId = 2
-    const pmSamePerson = makeOnPressMessages({id: 1}, {id: 1}, navigation)
-    pmSamePerson()
+  })
+
+  it("navigates to thread list when it's your profile", () => {
+    const onPressMessages = makeOnPressMessages({id: 1}, {id: 1}, navigation)
+    onPressMessages()
     expect(navigation.navigate).toHaveBeenCalledWith('ThreadList')
-    navigation.navigate.mockClear()
+  })
 
+  it('navigates to existing thread when there is one', () => {
     const messageThreadId = 99
-    const pmHasMessageThread = makeOnPressMessages({id: 1}, {id: otherPersonId, messageThreadId}, navigation)
-    pmHasMessageThread()
+    const onPressMessages = makeOnPressMessages({id: 1}, {id: 2, messageThreadId}, navigation)
+    onPressMessages()
     expect(navigation.navigate).toHaveBeenCalledWith('Thread', {id: messageThreadId})
-    navigation.navigate.mockClear()
+  })
 
-    const pmNoMessageThread = makeOnPressMessages({id: 1}, {id: otherPersonId}, navigation)
-    pmNoMessageThread()
+  it('navigates to new message page when there is no existing thread', () => {
+    const otherPersonId = 2
+    const onPressMessages = makeOnPressMessages({id: 1}, {id: otherPersonId}, navigation)
+    onPressMessages()
     expect(navigation.navigate).toHaveBeenCalledWith('NewMessage', {participants: [otherPersonId]})
   })
 })
