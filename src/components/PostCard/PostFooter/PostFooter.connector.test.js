@@ -12,5 +12,6 @@ describe('mapDispatchToProps', () => {
     dispatchProps.vote()
     expect(dispatch).toHaveBeenCalled()
     expect(dispatch.mock.calls).toMatchSnapshot()
+    expect(dispatch.mock.calls[0][0]).toHaveProperty('graphql.variables.isUpvote', false)
   })
 })
