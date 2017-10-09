@@ -36,7 +36,7 @@ export default function PostFooter ({
       })}
       <Text style={styles.commentsText}>{commentsText}</Text>
     </View>
-    <TouchableOpacity style={styles.votes.container}>
+    <TouchableOpacity style={styles.votes.container} onPress={vote}>
       <Icon name='ArrowUp' style={[styles.votes.icon, voteStyle]} />
       <Text style={[styles.votes.text, voteStyle]}>{votesTotal}</Text>
     </TouchableOpacity>

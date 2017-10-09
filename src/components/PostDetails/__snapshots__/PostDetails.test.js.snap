@@ -99,7 +99,7 @@ exports[`PostDetails renders correctly 1`] = `
           slug="foom"
           title="Hi"
         />
-        <PostFooter
+        <Connect(PostFooter)
           commenters={
             Array [
               Object {
