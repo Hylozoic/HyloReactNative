@@ -3,15 +3,26 @@ import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import SessionCheck from './SessionCheck'
 
-jest.mock('react-navigation', () => {})
-jest.mock('../RootNavigator', () => 'RootNavigator')
-jest.mock('../LoginNavigator', () => 'LoginNavigator')
-jest.mock('react-native-aws3')
-jest.mock('react-native-onesignal', () => ({
-  getPermissionSubscriptionState: jest.fn(() => Promise.resolve({userId: 5}))
-}))
-jest.mock('react-native-google-signin')
-jest.mock('react-native-zss-rich-text-editor')
+// import React from 'react'
+// import PropTypes from 'prop-types'
+// import { View, Linking } from 'react-native'
+// import { has } from 'lodash/fp'
+// import { urlPrefix } from 'util/platform'
+// import mixins from '../../style/mixins'
+// import Loading from '../Loading'
+// import LoginNavigator from '../LoginNavigator'
+// import SocketListener from '../SocketListener'
+// import RootNavigator from '../RootNavigator'
+
+// jest.mock('react-navigation', () => {})
+// jest.mock('../RootNavigator', () => 'RootNavigator')
+// jest.mock('../LoginNavigator', () => 'LoginNavigator')
+// jest.mock('react-native-aws3')
+// jest.mock('react-native-onesignal', () => ({
+//   getPermissionSubscriptionState: jest.fn(() => Promise.resolve({userId: 5}))
+// }))
+// jest.mock('react-native-google-signin')
+// jest.mock('react-native-zss-rich-text-editor')
 
 const requiredProps = {
   checkSession: () => {},
