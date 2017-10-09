@@ -72,9 +72,7 @@ export default class SessionCheck extends React.Component {
 
   componentWillUpdate (nextProps) {
     const { pending, loggedIn, currentUser, fetchCurrentUser } = nextProps
-    if (!pending && loggedIn && !currentUser) {
-      fetchCurrentUser()
-    }
+    if (!pending && loggedIn && !currentUser) fetchCurrentUser()
   }
 
   componentDidUpdate (prevProps) {
