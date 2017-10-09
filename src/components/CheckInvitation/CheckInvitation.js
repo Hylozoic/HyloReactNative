@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { get } from 'lodash/fp'
+import mixins from '../../style/mixins'
 import Loading from '../Loading'
 
 export default class CheckInvitation extends Component {
   componentDidMount () {
-    const { navigation, checkInvitation, setInvitationCodes } = this.props
+    const { navigation, checkInvitation } = this.props
     checkInvitation().then(result => {
       const validToken = get('payload.data.checkInvitation.valid', result)
       if (validToken) {
@@ -26,7 +27,6 @@ export default class CheckInvitation extends Component {
   }
 
   render () {
-    // TODO: Full screen Loading styles, see ../RootView.js styles
-    return <Loading />
+    return <Loading style={mixins.allCentered} />
   }
 }

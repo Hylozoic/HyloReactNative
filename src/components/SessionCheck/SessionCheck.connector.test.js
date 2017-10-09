@@ -10,7 +10,7 @@ describe('mapDispatchToProps', () => {
     const dispatch = jest.fn(val => val)
     const dispatchProps = mapDispatchToProps(dispatch)
     expect(dispatchProps).toMatchSnapshot()
-    dispatchProps.actions.checkSession()
+    dispatchProps.checkSession()
     expect(dispatch).toHaveBeenCalled()
     expect(dispatch.mock.calls).toMatchSnapshot()
   })

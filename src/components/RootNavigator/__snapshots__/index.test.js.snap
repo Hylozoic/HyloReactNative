@@ -1,11 +1,65 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`matches snapshot 1`] = `
-<NavigationContainer
-  onNavigationStateChange={[Function]}
-  screenProps={
+<Navigator
+  navigation={
     Object {
-      "currentTabName": "Home",
+      "dispatch": [Function],
+      "goBack": [Function],
+      "navigate": [Function],
+      "setParams": [Function],
+      "state": Object {
+        "index": 0,
+        "routes": Array [
+          Object {
+            "index": 0,
+            "key": "Init-id-1507521402624-2",
+            "routeName": "Main",
+            "routes": Array [
+              Object {
+                "index": 0,
+                "key": "DrawerClose",
+                "routeName": "DrawerClose",
+                "routes": Array [
+                  Object {
+                    "index": 0,
+                    "key": "Home",
+                    "routeName": "Home",
+                    "routes": Array [
+                      Object {
+                        "index": 0,
+                        "key": "Home",
+                        "routeName": "Home",
+                        "routes": Array [
+                          Object {
+                            "key": "Init-id-1507521402624-0",
+                            "routeName": "Home",
+                          },
+                        ],
+                      },
+                      Object {
+                        "index": 0,
+                        "key": "Members",
+                        "routeName": "Members",
+                        "routes": Array [
+                          Object {
+                            "key": "Init-id-1507521402624-1",
+                            "routeName": "Members",
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                ],
+              },
+              Object {
+                "key": "DrawerOpen",
+                "routeName": "DrawerOpen",
+              },
+            ],
+          },
+        ],
+      },
     }
   }
   uriPrefix="lala"

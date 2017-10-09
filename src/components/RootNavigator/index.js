@@ -24,7 +24,6 @@ import MemberDetails from '../MemberProfile/MemberDetails'
 import Signup from '../Signup'
 import Login from '../Login'
 import createLinkingAwareContainer from './createLinkingAwareContainer'
-import trackCurrentTab from './trackCurrentTab'
 import { isIOS, urlPrefix } from 'util/platform'
 
 // Tab Home Screens
@@ -108,14 +107,10 @@ const mainStackRoute = {
 }
 
 const rootNavigatorRoutes = Object.assign({}, mainStackRoute, screensInStack)
-const RootNavigator = StackNavigator(
+
+export default StackNavigator(
   rootNavigatorRoutes,
   {
     mode: 'modal'
   }
 )
-
-// trackCurrentTab must be on the top-level navigator, because it uses a prop
-// for listening to navigation change events that can only be assigned to a
-// top-level navigator
-export default trackCurrentTab(RootNavigator)
