@@ -32,8 +32,6 @@ export default function reducer (state = defaultState, action) {
   switch (type) {
     case CHECK_INVITATION:
       return {...state, ...payload.data.checkInvitation}
-    // case USE_INVITATION:
-    //   return {...state, ...payload.data.useInvitation}
   }
   return state
 }

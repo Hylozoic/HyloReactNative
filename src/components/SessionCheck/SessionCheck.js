@@ -29,6 +29,35 @@ export default class SessionCheck extends React.Component {
     this.state = {currentTabName: 'Home'}
   }
 
+  componentDidMount (nextProps) {
+    const { initOneSignal, checkSession, setEntryURL } = this.props
+    checkSession()
+    initOneSignal()
+    // Universal Linking - set entryURL when app is closed (initial) or woken up
+    Linking.getInitialURL().then(setEntryURL)
+    Linking.addEventListener('url', ({ url }) => setEntryURL(url))
+  }
+
+  componentWillUpdate (nextProps) {
+    const { pending, loggedIn, currentUser, fetchCurrentUser } = nextProps
+    if (!pending && loggedIn && !currentUser) fetchCurrentUser()
+  }
+
+  componentDidUpdate (prevProps) {
+    const { entryURL, resetEntryURL, currentUser, loggedIn } = this.props
+    if (loggedIn && (currentUser !== prevProps.currentUser)) {
+      if (entryURL) {
+        this.loggedInNavigator._handleOpenURL(entryURL)
+        resetEntryURL()
+      }
+    }
+  }
+
+  componentWillUnmount () {
+    // Universal Linking - remove url listener
+    Linking.removeEventListener('url', this._handleOpenURL)
+  }
+
   // This method is very coupled to the nesting structure for navigators in
   // RootNavigator/index.js
   // it wraps the root navigator so that its screens get a currentTabName
@@ -59,35 +88,6 @@ export default class SessionCheck extends React.Component {
     if (route.routeName !== this.state.currentTabName) {
       this.setState({currentTabName: route.routeName})
     }
-  }
-
-  componentDidMount (nextProps) {
-    const { initOneSignal, checkSession, setEntryURL } = this.props
-    checkSession()
-    initOneSignal()
-    // Universal Linking - set entryURL when app is closed (initial) or woken up
-    Linking.getInitialURL().then(setEntryURL)
-    Linking.addEventListener('url', ({ url }) => setEntryURL(url))
-  }
-
-  componentWillUpdate (nextProps) {
-    const { pending, loggedIn, currentUser, fetchCurrentUser } = nextProps
-    if (!pending && loggedIn && !currentUser) fetchCurrentUser()
-  }
-
-  componentDidUpdate (prevProps) {
-    const { entryURL, resetEntryURL, currentUser, loggedIn } = this.props
-    if (loggedIn && (prevProps.currentUser !== currentUser)) {
-      if (entryURL) {
-        this.loggedInNavigator._handleOpenURL(entryURL)
-        resetEntryURL()
-      }
-    }
-  }
-
-  componentWillUnmount () {
-    // Universal Linking - remove url listener
-    Linking.removeEventListener('url', this._handleOpenURL)
   }
 
   render () {
