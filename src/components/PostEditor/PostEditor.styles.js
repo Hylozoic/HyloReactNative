@@ -32,6 +32,13 @@ export default {
     fontFamily: 'Circular-Book',
     paddingBottom: 4
   },
+  textInputPlaceholder: {
+    height: isIOS ? 22 : null,
+    fontSize: 14,
+    fontFamily: 'Circular-Book',
+    paddingBottom: 4,
+    opacity: 0.45
+  },
   details: {
     height: 300
   },
