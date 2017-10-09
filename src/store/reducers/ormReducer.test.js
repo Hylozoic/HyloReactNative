@@ -142,34 +142,44 @@ it('handles TOGGLE_TOPIC_SUBSCRIBE_PENDING', () => {
   expect(newSession.CommunityTopic.first().isSubscribed).toBeTruthy()
 })
 
-it('handles VOTE_ON_POST_PENDING', () => {
-  const session = orm.session(orm.getEmptyState())
-  session.Post.create({
-    id: '10',
-    myVote: false
+describe('handles VOTE_ON_POST_PENDING', () => {
+  it('up vote', () => {
+    const session = orm.session(orm.getEmptyState())
+    session.Post.create({
+      id: '10',
+      myVote: false
+    })
+    const upVoteAction = {
+      type: VOTE_ON_POST_PENDING,
+      meta: {
+        postId: '10',
+        isUpvote: true
+      }
+    }
+
+    const newState = ormReducer(session.state, upVoteAction)
+    const newSession = orm.session(newState)
+    expect(newSession.Post.first().myVote).toBeTruthy()
   })
-  const upVoteAction = {
-    type: VOTE_ON_POST_PENDING,
-    meta: {
-      postId: '10',
-      isUpvote: true
+
+  it('down vote', () => {
+    const session = orm.session(orm.getEmptyState())
+    session.Post.create({
+      id: '22',
+      myVote: true
+    })
+
+    const downVoteAction = {
+      type: VOTE_ON_POST_PENDING,
+      meta: {
+        postId: '22',
+        isUpvote: false
+      }
     }
-  }
 
-  const newState = ormReducer(session.state, upVoteAction)
-  const newSession = orm.session(newState)
-  expect(newSession.Post.first().myVote).toBeTruthy()
+    const newState = ormReducer(session.state, downVoteAction)
+    const newSession = orm.session(newState)
+    expect(newSession.Post.first().myVote).toBeFalsy()
 
-  const downVoteAction = {
-    type: VOTE_ON_POST_PENDING,
-    meta: {
-      postId: '10',
-      isUpvote: false
-    }
-  }
-
-  const newState2 = ormReducer(session.state, downVoteAction)
-  const newSession2 = orm.session(newState2)
-  expect(newSession2.Post.first().myVote).toBeFalsy()
-
+  })
 })
