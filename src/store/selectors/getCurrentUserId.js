@@ -5,7 +5,10 @@ import orm from '../models'
 const getCurrentUserId = createSelector(
   orm,
   state => state.orm,
-  session => session.Me.first().id
+  session => {
+    const me = session.Me.first()
+    return me && me.id
+  }
 )
 
 export default getCurrentUserId

@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mapStateToProps returns the right keys 1`] = `
+Object {
+  "currentUserId": undefined,
+  "hasMore": undefined,
+  "id": undefined,
+  "isConnected": undefined,
+  "messages": Array [],
+  "pending": undefined,
+  "title": undefined,
+}
+`;

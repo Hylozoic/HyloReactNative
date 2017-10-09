@@ -1,7 +1,6 @@
 import { connect } from 'react-redux'
 import { get } from 'lodash/fp'
 import { getPerson, fetchPerson } from './MemberProfile.store'
-import changeCommunity from '../../store/actions/changeCommunity'
 import makeGoToCommunity from '../../store/actions/makeGoToCommunity'
 import getMe from '../../store/selectors/getMe'
 
@@ -25,19 +24,30 @@ export function mapDispatchToProps (dispatch, props) {
   }
 }
 
+export function makeOnPressMessages (currentUser, person, navigation) {
+  if (currentUser.id === person.id) return () => navigation.navigate('ThreadList')
+  const { messageThreadId } = person
+  if (messageThreadId) return () => navigation.navigate('Thread', {id: messageThreadId})
+  return () => navigation.navigate('NewMessage', {participants: [person.id]})
+}
+
 export function mergeProps (stateProps, dispatchProps, ownProps) {
-  const { id, currentUser } = stateProps
+  const { id, currentUser, person } = stateProps
+  const { navigation } = ownProps
 
   const fetchPerson = () => dispatchProps.fetchPerson(id)
 
   const canFlag = currentUser && id && currentUser.id !== id
+
+  const onPressMessages = makeOnPressMessages(currentUser, person, navigation)
 
   return {
     ...stateProps,
     ...dispatchProps,
     ...ownProps,
     canFlag,
-    fetchPerson
+    fetchPerson,
+    onPressMessages
   }
 }
 
