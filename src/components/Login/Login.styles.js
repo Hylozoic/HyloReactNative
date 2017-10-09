@@ -45,13 +45,13 @@ const mixins = {
   },
   banner: {
     color: 'white',
-    paddingLeft: 250,
-    paddingRight: 250,
     paddingTop: 10,
     paddingBottom: 10,
     textAlign: 'center',
     position: 'absolute',
     top: 0,
+    left: 0,
+    right: 0,
     marginTop: isIOS ? 20 : 0
   }
 }

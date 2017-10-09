@@ -46,11 +46,9 @@ exports[`PostEditor renders a new editor correctly 1`] = `
         focusedOpacity={0.7}
         onPress={[Function]}
       >
-        <TextInput
-          editable={false}
+        <Details
+          details={undefined}
           placeholder="What else should we know?"
-          underlineColorAndroid="transparent"
-          value=""
         />
       </TouchableOpacity>
     </View>
