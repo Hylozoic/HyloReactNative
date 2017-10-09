@@ -12,8 +12,8 @@ import {
 import getCurrentUserId from '../../store/selectors/getCurrentUserId'
 import { sendIsTyping } from 'util/websockets'
 
-function mapStateToProps (state, props) {
-  const { id, messages, title } = getThread(state, props) || {}
+export function mapStateToProps (state, props) {
+  const { id, messages, title } = getThread(state, props) || {messages: []}
   return {
     id,
     currentUserId: getCurrentUserId(state),

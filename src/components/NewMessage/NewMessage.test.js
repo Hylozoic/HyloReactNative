@@ -1,6 +1,7 @@
 import 'react-native'
 import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
+import ReactTestRenderer from 'react-test-renderer'
 import
   NewMessage, { ParticipantInput, Participant, ContactList, ContactRow, MessagePrompt }
 from './NewMessage'
@@ -61,6 +62,23 @@ describe('NewMessage', () => {
     const actual2 = renderer.getRenderOutput()
 
     expect(actual2).toMatchSnapshot()
+  })
+
+  it('calls the right functions on mount', () => {
+    const props = {
+      fetchContacts: jest.fn(),
+      fetchRecentContacts: jest.fn(),
+      loadParticipantsFromParams: jest.fn(),
+      pending: {},
+      participants: [],
+      recentContacts: [],
+      allContacts: [],
+      suggestions: []
+    }
+    ReactTestRenderer.create(<NewMessage {...props} />).getInstance()
+    expect(props.fetchContacts).toHaveBeenCalled()
+    expect(props.fetchRecentContacts).toHaveBeenCalled()
+    expect(props.loadParticipantsFromParams).toHaveBeenCalled()
   })
 })
 
