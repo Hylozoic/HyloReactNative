@@ -14,8 +14,31 @@ export default class Signup extends React.Component {
       headerTitleStyle: styles.headerTitleStyle
     }
   }
+
+  state = {
+    editingPassword: false,
+    changed: false,
+    edits: {
+      email: '',
+      password: ''
+    }
+  }
+
+  componentDidMount () {
+    this.setEditState()
+  }
+
+  setEditState () {
+    // constthis.props
+  }
+
+  editPassword = () => {
+    this.setState({editingPassword: true})
+  }
+
   render () {
-    const { currentUser, saveChanges, cancel, facebookUrl, twitterName } = this.props
+    const { currentUser, saveChanges, cancel, logout, facebookUrl, twitterName } = this.props
+    const { editingPassword } = this.state
     if (!currentUser) return <Loading />
     return <KeyboardFriendlyView style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
@@ -23,14 +46,20 @@ export default class Signup extends React.Component {
           <Text style={styles.settingLabel}>EMAIL</Text>
           <Text style={styles.settingText}>{currentUser.email}</Text>
         </View>
-        <View style={styles.setting}>
+        {!editingPassword && <View style={styles.setting}>
+          <Text style={styles.settingLabel}>PASSWORD</Text>
+          <TouchableOpacity onPress={this.editPassword}>
+            <Text style={styles.linkText}>Change Password</Text>
+          </TouchableOpacity>
+        </View>}
+        {editingPassword && <View style={styles.setting}>
           <Text style={styles.settingLabel}>PASSWORD</Text>
           <Text style={styles.settingText}>{currentUser.email}</Text>
-        </View>
+        </View>}
         <SocialAccounts
           facebookUrl={facebookUrl}
           twitterName={twitterName} />
-        <Footer saveChanges={saveChanges} cancel={cancel} />
+        <Footer saveChanges={saveChanges} cancel={cancel} logout={logout} />
       </ScrollView>
     </KeyboardFriendlyView>
   }
@@ -90,17 +119,20 @@ export class SocialControl extends React.Component {
     return <View style={[styles.socialControl, linked && styles.linked]}>
       <Text style={styles.settingText}>{label}</Text>
       <TouchableOpacity onPress={linked ? () => this.unlinkClicked() : () => this.linkClicked()}>
-        <Text style={styles.socialLink}>{linked ? 'Unlink' : 'Link'}</Text>
+        <Text style={styles.linkText}>{linked ? 'Unlink' : 'Link'}</Text>
       </TouchableOpacity>
     </View>
   }
 }
 
-export function Footer ({ saveChanges, cancel }) {
+export function Footer ({ saveChanges, cancel, logout }) {
   return <View style={styles.footer}>
     <Button text='Save Changes' onPress={saveChanges} style={styles.save} />
     <TouchableOpacity onPress={cancel}>
       <Text style={styles.cancel}>Cancel</Text>
+    </TouchableOpacity>
+    <TouchableOpacity onPress={logout}>
+      <Text style={styles.cancel}>Logout</Text>
     </TouchableOpacity>
   </View>
 }

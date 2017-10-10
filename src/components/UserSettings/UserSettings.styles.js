@@ -32,6 +32,10 @@ export default {
     color: rhino80,
     fontFamily: 'Circular-Book'
   },
+  linkText: {
+    color: caribbeanGreen,
+    fontFamily: 'Circular-Book'
+  },
   socialAccountsLabel: {
     marginBottom: 3
   },
@@ -45,10 +49,6 @@ export default {
   },
   linked: {
     borderColor: caribbeanGreen
-  },
-  socialLink: {
-    color: caribbeanGreen,
-    fontFamily: 'Circular-Book'
   },
   footer: {
     marginTop: 'auto',
