@@ -4,7 +4,8 @@ import getMe from '../../store/selectors/getMe'
 
 function mapStateToProps (state, props) {
   return {
-    currentUser: getMe(state, props)
+    currentUser: getMe(state, props),
+    facebookUrl: 'facb'    
   }
 }
 
