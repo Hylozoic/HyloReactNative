@@ -50,21 +50,6 @@ exports[`CommunityRow shows all community link 1`] = `
 
 exports[`DrawerMenu matches the last snapshot 1`] = `
 <View>
-  <View>
-    <View>
-      <Icon
-        name="Search"
-      />
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        disabled={false}
-        ellipsizeMode="tail"
-      >
-        Search your communities
-      </Text>
-    </View>
-  </View>
   <ListViewMock
     dataSource={
       ListViewDataSource {

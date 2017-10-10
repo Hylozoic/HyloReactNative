@@ -44,12 +44,6 @@ export default class DrawerMenu extends Component {
     }
 
     return <View style={styles.parent}>
-      <View style={styles.header}>
-        <View style={styles.search}>
-          <Icon name='Search' style={styles.searchIcon} />
-          <Text style={styles.searchText}>Search your communities</Text>
-        </View>
-      </View>
       <ListView style={styles.menu}
         ref={ref => { this.listView = ref }}
         dataSource={this.state.memberships}
