@@ -83,9 +83,6 @@ test('componentDidMount', () => {
     checkSession: jest.fn(),
     initOneSignal: jest.fn()
   })
-  SessionCheck.navigator = {
-    _handleOpenURL: jest.fn()
-  }
   ReactTestRenderer.create(<SessionCheck {...testProps} />)
   expect(testProps.checkSession).toHaveBeenCalled()
   expect(testProps.initOneSignal).toHaveBeenCalled()
@@ -99,7 +96,7 @@ describe('componentWillUpdate', () => {
       currentUser: null,
       fetchCurrentUser: jest.fn()
     })
-    const instance = ReactTestRenderer.create(<SessionCheck {...testProps} />).getInstance()
+    const instance = ReactTestRenderer.create(<SessionCheck {...testPropsSetup()} />).getInstance()
     instance.componentWillUpdate(testProps)
     expect(testProps.fetchCurrentUser).toHaveBeenCalled()
   })

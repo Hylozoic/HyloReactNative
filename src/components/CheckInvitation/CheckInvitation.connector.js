@@ -1,11 +1,23 @@
 import { connect } from 'react-redux'
+import { NavigationActions } from 'react-navigation'
 import {
    getValidInvite, checkInvitation, CHECK_INVITATION
 } from './CheckInvitation.store'
 import { resetEntryURL } from '../SessionCheck/SessionCheck.store'
 import getNavigationParam from '../../store/selectors/getNavigationParam'
 
+export function createResetGoToNavAction (routeName) {
+  return NavigationActions.reset({
+    key: null,
+    index: 0,
+    actions: [
+      NavigationActions.navigate({routeName})
+    ]
+  })
+}
+
 export function mapStateToProps (state, props) {
+  const { navigation } = props
   return {
     pending: state.pending && state.pending[CHECK_INVITATION],
     invitationCodes: {
@@ -13,7 +25,9 @@ export function mapStateToProps (state, props) {
         getNavigationParam('invitationToken', state, props),
       accessCode: getNavigationParam('accessCode', state, props)
     },
-    isValidInvite: getValidInvite(state)
+    isValidInvite: getValidInvite(state),
+    navToSignup: () => navigation.dispatch(createResetGoToNavAction('Signup')),
+    navToInviteExpired: () => navigation.navigate('InviteExpire')
   }
 }
 

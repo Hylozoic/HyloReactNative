@@ -13,7 +13,9 @@ jest.mock('react-navigation', () => ({
 const defaultRequiredProps = {
   pending: null,
   isValidInvite: null,
-  checkInvitation: () => {}
+  checkInvitation: () => Promise.resolve(),
+  navToSignup: () => {},
+  navToInviteExpired: () => {}
 }
 
 function testPropsSetup (props = {}, required = defaultRequiredProps) {
@@ -35,74 +37,35 @@ it('matches last snapshot - default', () => {
 
 test('componentDidMount', () => {
   const testProps = testPropsSetup({
-    navigation: {
-      navigate: jest.fn()
-    },
-    checkInvitation: jest.fn(() => Promise.reject(new Error('erroranything')))
+    checkInvitation: jest.fn(() => Promise.reject(new Error('erroranything'))),
+    navToSignup: jest.fn()
   })
   // const instance = ReactTestRenderer.create(<CheckInvitation {...testProps} />).getInstance()
   return shallowRender(testProps)._instance.componentDidMount()
   .then(() => {
     expect(testProps.checkInvitation).toHaveBeenCalled()
-    return expect(testProps.navigation.navigate).toHaveBeenCalled()
+    return expect(testProps.navToSignup).toHaveBeenCalled()
   })
 })
 
-// describe('componentWillUpdate', () => {
-//   it('should fetchCurrentUser if loggedIn without a currentUser', () => {
-//     const testProps = testPropsSetup({
-//       pending: false,
-//       loggedIn: true,
-//       currentUser: null,
-//       fetchCurrentUser: jest.fn()
-//     })
-//     const instance = ReactTestRenderer.create(<SessionCheck {...testProps} />).getInstance()
-//     instance.componentWillUpdate(testProps)
-//     expect(testProps.fetchCurrentUser).toHaveBeenCalled()
-//   })
-//
-//   it('shouldn\'t fetchCurrentUser if loggedIn and there is a currentUser', () => {
-//     const testProps = testPropsSetup({
-//       pending: false,
-//       loggedIn: true,
-//       currentUser: {},
-//       fetchCurrentUser: jest.fn()
-//     })
-//     const instance = ReactTestRenderer.create(<SessionCheck {...testProps} />).getInstance()
-//     instance.componentWillUpdate(testProps)
-//     expect(testProps.fetchCurrentUser).not.toHaveBeenCalled()
-//   })
-// })
-//
-// test('componentDidUpdate responds as expected', () => {
-//   const testProps = testPropsSetup({
-//     entryURL: 'anything',
-//     loggedIn: true,
-//     currentUser: {},
-//     resetEntryURL: jest.fn()
-//   })
-//   const prevProps = testPropsSetup()
-//   const instance = ReactTestRenderer.create(<SessionCheck {...testProps} />).getInstance()
-//   const navigator = {
-//     _handleOpenURL: jest.fn()
-//   }
-//   instance.navigator = navigator
-//   instance.componentDidUpdate(prevProps)
-//   expect(navigator._handleOpenURL).toHaveBeenCalledWith(testProps.entryURL)
-//   expect(testProps.resetEntryURL).toHaveBeenCalled()
-// })
-//
-// test('_handleOpenURL', () => {
-//   const testProps = testPropsSetup({
-//     setEntryURL: jest.fn()
-//   })
-//   const instance = ReactTestRenderer.create(<SessionCheck {...testProps} />).getInstance()
-//   const url = '/any/path'
-//   const navigator = {
-//     _handleOpenURL: jest.fn()
-//   }
-//   instance.navigator = navigator
-//   instance._handleOpenURL(url)
-//   expect(testProps.setEntryURL).toHaveBeenCalledWith(url)
-//   expect(navigator._handleOpenURL).toHaveBeenCalled()
-// })
+test('componentWillUpdate', () => {
+  const testProps = testPropsSetup({
+    pending: false,
+    isValidInvite: true
+  })
+  const instance = ReactTestRenderer.create(<CheckInvitation {...testPropsSetup()} />).getInstance()
+  instance._handleResult = jest.fn()
+  instance.componentWillUpdate(testProps)
+  expect(instance._handleResult).toHaveBeenCalledWith(testProps)
+})
+
+test('_handleResult', () => {
+  const testProps = testPropsSetup({
+    isValidInvite: true,
+    navToSignup: jest.fn(),
+    navToInviteExpired: jest.fn()
+  })
+  const instance = ReactTestRenderer.create(<CheckInvitation {...testPropsSetup()} />).getInstance()
+  instance._handleResult(testProps)
+  expect(testProps.navToSignup).toHaveBeenCalled()
+})

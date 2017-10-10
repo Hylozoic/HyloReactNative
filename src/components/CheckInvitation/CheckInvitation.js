@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { NavigationActions } from 'react-navigation'
 import PropTypes from 'prop-types'
 import mixins from '../../style/mixins'
 import Loading from '../Loading'
@@ -8,12 +7,13 @@ export default class CheckInvitation extends Component {
   static propTypes = {
     pending: PropTypes.any,
     isValidInvite: PropTypes.any,
-    checkInvitation: PropTypes.func.isRequired
-    // resetEntryURL: PropTypes.func.isRequired
+    checkInvitation: PropTypes.func.isRequired,
+    navToSignup: PropTypes.func.isRequired,
+    navToInviteExpired: PropTypes.func.isRequired
   }
 
   componentDidMount () {
-    const { navigation, checkInvitation } = this.props
+    const { checkInvitation, navToSignup } = this.props
     return checkInvitation()
     // NOTE: if something fails in the process of checking the
     // invitation the user will be forwarded on to the Signup
@@ -22,7 +22,7 @@ export default class CheckInvitation extends Component {
     // SO in this case the user will still be prompted to
     // continue to signup (or login) and JoinCommunity will
     // be tried again upon signing in.
-    .catch(err => err && navigation.navigate('Signup'))
+    .catch(err => err && navToSignup())
   }
 
   componentWillUpdate (nextProps) {
@@ -30,24 +30,15 @@ export default class CheckInvitation extends Component {
   }
 
   _handleResult (props) {
-    const { isValidInvite, navigation } = props
+    const { isValidInvite, navToSignup, navToInviteExpired } = props
     if (isValidInvite) {
-      const action = NavigationActions.reset({
-        key: null,
-        index: 0,
-        actions: [
-          NavigationActions.navigate({routeName: 'Signup'})
-        ]
-      })
-      navigation.dispatch(action)
+      navToSignup()
     } else {
-      // NOTE: Not clearing the entryURL on a failed check so that join will
-      // still be tried upon login. If the invite code is invalid (not just
-      // already used) then the user will be forwarded to the community
-      // associated with the already claimed invite.
-      //
-      // resetEntryURL()
-      navigation.navigate('InviteExpired')
+      // NOTE: Not clearing the entryURL (resetEntryURL) on a failed check
+      // such that join will still be tried upon login. If the invite code
+      // is invalid (not just already used) then the user will be forwarded
+      // to the community associated with the already claimed invite.
+      navToInviteExpired()
     }
   }
 
