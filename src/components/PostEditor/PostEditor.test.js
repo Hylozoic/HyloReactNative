@@ -1,20 +1,38 @@
-import 'react-native'
 import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
-import { Details } from './PostEditor'
+// import TestRenderer from 'react-test-renderer'
+import PostEditor, { SectionLabel, TypeButton } from './PostEditor'
 
-describe('Details', () => {
-  it('matches the last snapshot with details', () => {
+describe('PostEditor', () => {
+  it('renders a new editor correctly', () => {
     const renderer = new ReactShallowRenderer()
-    const details = 'interesting info'
-    renderer.render(<Details details={details} />)
-    expect(renderer.getRenderOutput()).toMatchSnapshot()
+    renderer.render(<PostEditor
+      editDetails={jest.fn()}
+    />)
+    const actual = renderer.getRenderOutput()
+    expect(actual).toMatchSnapshot()
   })
-  it('matches the last snapshot without details', () => {
+})
+
+describe('SectionLabel', () => {
+  it('renders correctly', () => {
     const renderer = new ReactShallowRenderer()
-    const details = null
-    const placeholder = 'placeholder'
-    renderer.render(<Details details={details} detailsPlaceholder={placeholder} />)
-    expect(renderer.getRenderOutput()).toMatchSnapshot()
+    renderer.render(<SectionLabel>Label</SectionLabel>)
+    const actual = renderer.getRenderOutput()
+    expect(actual).toMatchSnapshot()
+  })
+})
+
+describe('TypeButton', () => {
+  it('renders correctly', () => {
+    const renderer = new ReactShallowRenderer()
+    const type = 'discussion'
+    renderer.render(<TypeButton
+      type={type}
+      key={type}
+      onPress={jest.fn()}
+    />)
+    const actual = renderer.getRenderOutput()
+    expect(actual).toMatchSnapshot()
   })
 })

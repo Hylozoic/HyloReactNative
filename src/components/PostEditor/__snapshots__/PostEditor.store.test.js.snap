@@ -1,0 +1,81 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`createPost should match the last snapshot 1`] = `
+Object {
+  "graphql": Object {
+    "query": "mutation ($type: String, $title: String, $details: String, $communityIds: [String]) {
+        createPost(data: {type: $type, title: $title, details: $details, communityIds: $communityIds}) {
+          id
+          type
+          title
+          details
+          commentersTotal
+          communities {
+            id
+            name
+            slug
+          }
+          creator {
+            id
+          }
+        }
+      }",
+    "variables": Object {
+      "communityIds": Array [
+        undefined,
+      ],
+      "details": "details",
+      "title": "title",
+      "type": "post",
+    },
+  },
+  "meta": Object {
+    "extractModel": "Post",
+  },
+  "type": "PostEditor/CREATE_POST",
+}
+`;
+
+exports[`setDetails should match the last snapshot 1`] = `
+Object {
+  "payload": "details",
+  "type": "PostEditor/SET_DETAILS",
+}
+`;
+
+exports[`updatePost should match the last snapshot 1`] = `
+Object {
+  "graphql": Object {
+    "query": "mutation ($id: ID, $type: String, $title: String, $details: String, $communityIds: [String]) {
+        updatePost(id: $id, data: {type: $type, title: $title, details: $details, communityIds: $communityIds}) {
+          id
+          type
+          title
+          details
+          communities {
+            id
+            name
+            slug
+          }
+        }
+      }",
+    "variables": Object {
+      "communityIds": Array [
+        undefined,
+      ],
+      "details": "details",
+      "id": 1,
+      "title": "title",
+      "type": "post",
+    },
+  },
+  "meta": Object {
+    "extractModel": Object {
+      "append": false,
+      "getRoot": [Function],
+      "modelName": "Post",
+    },
+  },
+  "type": "PostEditor/UPDATE_POST",
+}
+`;
