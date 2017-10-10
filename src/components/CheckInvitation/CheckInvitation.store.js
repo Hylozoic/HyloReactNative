@@ -1,3 +1,4 @@
+import { NavigationActions } from 'react-navigation'
 import { get } from 'lodash/fp'
 
 export const MODULE_NAME = 'CheckInvitation'
@@ -19,6 +20,16 @@ export function checkInvitation (invitationCodes) {
       }
     }
   }
+}
+
+export function createResetGoToNavAction (routeName) {
+  return NavigationActions.reset({
+    key: null,
+    index: 0,
+    actions: [
+      NavigationActions.navigate({routeName})
+    ]
+  })
 }
 
 export function getValidInvite (state) {

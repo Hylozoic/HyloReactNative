@@ -1,9 +1,17 @@
 import reducer, {
   MODULE_NAME,
   checkInvitation,
+  createResetGoToNavAction,
   getValidInvite,
   CHECK_INVITATION
 } from './CheckInvitation.store'
+
+jest.mock('react-navigation', () => ({
+  NavigationActions: {
+    reset: (attribs) => attribs,
+    navigate: (attribs) => attribs
+  }
+}))
 
 test('checkInvitation', () => {
   const invitationCodes = {
@@ -11,6 +19,10 @@ test('checkInvitation', () => {
     accessCode: 'accesstoken'
   }
   expect(checkInvitation(invitationCodes)).toMatchSnapshot()
+})
+
+test('createResetGoToNavAction', () => {
+  expect(createResetGoToNavAction('anyroutename')).toMatchSnapshot()
 })
 
 test('getValidInvite', () => {

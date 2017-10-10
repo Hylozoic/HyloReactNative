@@ -1,20 +1,12 @@
 import { connect } from 'react-redux'
-import { NavigationActions } from 'react-navigation'
 import {
-   getValidInvite, checkInvitation, CHECK_INVITATION
+   getValidInvite,
+   createResetGoToNavAction,
+   checkInvitation,
+   CHECK_INVITATION
 } from './CheckInvitation.store'
 import { resetEntryURL } from '../SessionCheck/SessionCheck.store'
 import getNavigationParam from '../../store/selectors/getNavigationParam'
-
-export function createResetGoToNavAction (routeName) {
-  return NavigationActions.reset({
-    key: null,
-    index: 0,
-    actions: [
-      NavigationActions.navigate({routeName})
-    ]
-  })
-}
 
 export function mapStateToProps (state, props) {
   const { navigation } = props
