@@ -17,7 +17,7 @@ jest.mock('react-native', () => ({
   Platform: {OS: 'ios'}
 }))
 
-const requiredProps = {
+const defaultRequiredProps = {
   loading: false,
   loggedIn: false,
   currentUser: null,
@@ -28,7 +28,7 @@ const requiredProps = {
   fetchCurrentUser: () => {}
 }
 
-function testPropsSetup (props = {}, required = requiredProps) {
+function testPropsSetup (props = {}, required = defaultRequiredProps) {
   return {...required, ...props}
 }
 
@@ -38,7 +38,12 @@ function shallowRender (props) {
   return renderer
 }
 
-it('matches last snapshot loading', () => {
+it('matches last snapshot - default', () => {
+  const actual = shallowRender().getRenderOutput()
+  expect(actual).toMatchSnapshot()
+})
+
+it('matches last snapshot - loading', () => {
   const testProps = {
     loading: true
   }
@@ -46,7 +51,7 @@ it('matches last snapshot loading', () => {
   expect(actual).toMatchSnapshot()
 })
 
-it('matches last snapshot not loggedIn', () => {
+it('matches last snapshot - not loggedIn', () => {
   const testProps = {
     loggedIn: false
   }
@@ -54,7 +59,7 @@ it('matches last snapshot not loggedIn', () => {
   expect(actual).toMatchSnapshot()
 })
 
-it('matches last snapshot loggedIn but no currentUser', () => {
+it('matches last snapshot - loggedIn without a currentUser', () => {
   const testProps = {
     loggedIn: true
   }
@@ -62,7 +67,7 @@ it('matches last snapshot loggedIn but no currentUser', () => {
   expect(actual).toMatchSnapshot()
 })
 
-it('matches last snapshot loggedIn with currentUser', () => {
+it('matches last snapshot - loggedIn with a currentUser', () => {
   const testProps = {
     loggedIn: true,
     currentUser: {}
@@ -112,7 +117,7 @@ describe('componentWillUpdate', () => {
   })
 })
 
-test('componentDidUpdate responds as expected', () => {
+test('componentDidUpdate', () => {
   const testProps = testPropsSetup({
     entryURL: 'anything',
     loggedIn: true,

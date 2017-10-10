@@ -14,6 +14,7 @@ export default class CheckInvitation extends Component {
 
   componentDidMount () {
     const { navigation, checkInvitation } = this.props
+    return checkInvitation()
     // NOTE: if something fails in the process of checking the
     // invitation the user will be forwarded on to the Signup
     // page given that we don't know if their is an issue (expired)
@@ -21,7 +22,7 @@ export default class CheckInvitation extends Component {
     // SO in this case the user will still be prompted to
     // continue to signup (or login) and JoinCommunity will
     // be tried again upon signing in.
-    checkInvitation().catch(err => err && navigation.navigate('Signup'))
+    .catch(err => err && navigation.navigate('Signup'))
   }
 
   componentWillUpdate (nextProps) {

@@ -15,16 +15,18 @@ import getMe from '../../store/selectors/getMe'
 
 export function mapStateToProps (state) {
   const pending = !!(state.pending[CHECK_SESSION] || state.pending[FETCH_CURRENT_USER])
-  const signupInProgress = get('settings.signupInProgress', getMe(state))
+  const currentUser = getMe(state)
+  const signupInProgress = get('settings.signupInProgress', currentUser)
   const loggedIn = state.session.loggedIn && !signupInProgress
+  const loading = pending || loggedIn === undefined
   return {
     // NOTE: loading is necessary so that the LoginNavigator
     // doesn't render unncessarily on first render when already logged in
     // but the sessionCheck or fetchCurrentUser have been kicked-off.
-    loading: pending || loggedIn === undefined,
+    loading,
     pending,
     loggedIn,
-    currentUser: getMe(state),
+    currentUser,
     entryURL: getEntryURL(state)
   }
 }
@@ -38,9 +40,8 @@ export function mapDispatchToProps (dispatch) {
   }
   return {
     ...bindActionCreators(actions, dispatch),
-    initOneSignal: () => {
-      return initOneSignal({registerDevice: () => dispatch(registerDevice())})
-    }
+    initOneSignal: () =>
+      initOneSignal({registerDevice: () => dispatch(registerDevice())})
   }
 }
 

@@ -1,6 +1,4 @@
-import React from 'react'
 import { StackNavigator } from 'react-navigation'
-import { urlPrefix } from 'util/platform'
 import Login from '../Login'
 import CheckInvitation from '../CheckInvitation'
 import InviteExpired from '../InviteExpired'

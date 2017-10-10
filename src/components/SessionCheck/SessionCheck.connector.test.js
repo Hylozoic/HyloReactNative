@@ -4,16 +4,17 @@ jest.mock('react-native-onesignal', () => ({
   getPermissionSubscriptionState: jest.fn(() => Promise.resolve({userId: 5}))
 }))
 
-const defaultState = {
-  session: {
-    loggedIn: true
-  },
-  pending: {}
-}
-
 describe('mapStateToProps', () => {
-  it('returns the right keys', () =>
-    expect(mapStateToProps(defaultState)).toMatchSnapshot())
+  it('returns the right keys', () => {
+    const defaultState = {
+      session: {
+        loggedIn: true,
+        entryURL: 'http://www.hylo.com/a/path'
+      },
+      pending: {}
+    }
+    expect(mapStateToProps(defaultState)).toMatchSnapshot()
+  })
 })
 
 describe('mapDispatchToProps', () => {

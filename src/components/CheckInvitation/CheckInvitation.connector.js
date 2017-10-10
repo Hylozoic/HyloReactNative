@@ -6,17 +6,14 @@ import { resetEntryURL } from '../SessionCheck/SessionCheck.store'
 import getNavigationParam from '../../store/selectors/getNavigationParam'
 
 export function mapStateToProps (state, props) {
-  const invitationCodes = {
-    invitationToken: getNavigationParam('token', state, props) ||
-      getNavigationParam('invitationToken', state, props),
-    accessCode: getNavigationParam('accessCode', state, props)
-  }
-  const pending = state.pending && state.pending[CHECK_INVITATION]
-  const isValidInvite = getValidInvite(state)
   return {
-    invitationCodes,
-    pending,
-    isValidInvite
+    pending: state.pending && state.pending[CHECK_INVITATION],
+    invitationCodes: {
+      invitationToken: getNavigationParam('token', state, props) ||
+        getNavigationParam('invitationToken', state, props),
+      accessCode: getNavigationParam('accessCode', state, props)
+    },
+    isValidInvite: getValidInvite(state)
   }
 }
 
