@@ -8,7 +8,7 @@ jest.mock('../RootNavigator', () => 'RootNavigator')
 jest.mock('../LoginNavigator', () => 'LoginNavigator')
 jest.mock('../Loading', () => 'Loading')
 jest.mock('react-native', () => ({
-  View: () => () => <div />,
+  View: () => Comp => <Comp />,
   Linking: {
     getInitialURL: () => Promise.resolve(),
     addEventListener: () => {},
@@ -147,6 +147,33 @@ test('_handleOpenURL', () => {
   expect(navigator._handleOpenURL).toHaveBeenCalled()
 })
 
-it('matches last snapshot for _handleChange')
-
-test('componentWillUnmount removes event listener')
+test('that _handleChange changes state value for currentTab when changed', () => {
+  const newCurrentTabRouteName = 'Members'
+  const newState = {
+    index: 0,
+    routes: [ // stackNav
+      {
+        index: 0,
+        routes: [ // drawerNav
+          {
+            index: 0,
+            routes: [ // tabNav
+              {
+                index: 0,
+                routes: [
+                  {
+                    routeName: newCurrentTabRouteName
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+  const instance = ReactTestRenderer.create(<SessionCheck {...testPropsSetup()} />).getInstance()
+  instance.setState = jest.fn()
+  instance._handleChange(null, newState)
+  expect(instance.setState).toHaveBeenCalledWith({currentTabName: newCurrentTabRouteName})
+})

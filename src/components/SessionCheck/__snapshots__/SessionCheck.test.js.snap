@@ -1,7 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`componentWillUnmount removes event listener 1`] = `undefined`;
-
 exports[`matches last snapshot - default 1`] = `
 <LoginNavigator
   uriPrefix="internalRouting://"
