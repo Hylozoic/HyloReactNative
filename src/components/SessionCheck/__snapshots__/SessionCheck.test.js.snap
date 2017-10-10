@@ -2,11 +2,15 @@
 
 exports[`componentWillUnmount removes event listener 1`] = `undefined`;
 
-exports[`matches last snapshot loading 1`] = `<Loading />`;
+exports[`matches last snapshot - default 1`] = `
+<LoginNavigator
+  uriPrefix="internalRouting://"
+/>
+`;
 
-exports[`matches last snapshot loggedIn but no currentUser 1`] = `<Loading />`;
+exports[`matches last snapshot - loading 1`] = `<Loading />`;
 
-exports[`matches last snapshot loggedIn with currentUser 1`] = `
+exports[`matches last snapshot - loggedIn with a currentUser 1`] = `
 <View>
   <RootNavigator
     onNavigationStateChange={[Function]}
@@ -22,7 +26,9 @@ exports[`matches last snapshot loggedIn with currentUser 1`] = `
 </View>
 `;
 
-exports[`matches last snapshot not loggedIn 1`] = `
+exports[`matches last snapshot - loggedIn without a currentUser 1`] = `<Loading />`;
+
+exports[`matches last snapshot - not loggedIn 1`] = `
 <LoginNavigator
   uriPrefix="internalRouting://"
 />

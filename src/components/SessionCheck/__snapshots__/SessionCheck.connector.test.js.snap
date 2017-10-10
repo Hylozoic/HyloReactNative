@@ -29,7 +29,7 @@ Array [
 exports[`mapStateToProps returns the right keys 1`] = `
 Object {
   "currentUser": undefined,
-  "entryURL": undefined,
+  "entryURL": "http://www.hylo.com/a/path",
   "loading": false,
   "loggedIn": true,
   "pending": false,
