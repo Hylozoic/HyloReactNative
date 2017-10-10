@@ -10,7 +10,6 @@ it('has the expected shape', () => {
 
   const output = renderer.getRenderOutput()
   // there's a little bit of randomness in the output that we have to mask
-  console.log('!!! LoginNavigator test output.props:', output.props)
   output.props.navigation.state.routes[0].key = 'foo'
   expect(output).toMatchSnapshot()
 })

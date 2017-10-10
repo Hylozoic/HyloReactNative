@@ -1,8 +1,19 @@
 import { mapStateToProps, mapDispatchToProps } from './SessionCheck.connector.js'
 
+jest.mock('react-native-onesignal', () => ({
+  getPermissionSubscriptionState: jest.fn(() => Promise.resolve({userId: 5}))
+}))
+
+const defaultState = {
+  session: {
+    loggedIn: true
+  },
+  pending: {}
+}
+
 describe('mapStateToProps', () => {
   it('returns the right keys', () =>
-    expect(mapStateToProps({session: {loggedIn: true}})).toMatchSnapshot())
+    expect(mapStateToProps(defaultState)).toMatchSnapshot())
 })
 
 describe('mapDispatchToProps', () => {

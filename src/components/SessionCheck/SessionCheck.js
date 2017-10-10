@@ -33,7 +33,7 @@ export default class SessionCheck extends React.Component {
     }
   }
 
-  componentDidMount (nextProps) {
+  componentDidMount () {
     const { initOneSignal, checkSession } = this.props
     checkSession()
     initOneSignal()
@@ -59,7 +59,7 @@ export default class SessionCheck extends React.Component {
 
   componentWillUnmount () {
     // Universal Linking - remove url listener
-    Linking.removeEventListener('url', this.props._handleOpenURL)
+    Linking.removeEventListener('url', this._handleOpenURL)
   }
 
   // NOTE: The combination of the obscuring URI_PREFIX_OVERRIDE constant
@@ -111,7 +111,9 @@ export default class SessionCheck extends React.Component {
   render () {
     const { loading, loggedIn, currentUser } = this.props
     if (!loading) {
-      if (!loggedIn) return <LoginNavigator uriPrefix={URI_PREFIX_OVERRIDE} ref={nav => { this.navigator = nav }} />
+      if (!loggedIn) {
+        return <LoginNavigator uriPrefix={URI_PREFIX_OVERRIDE} ref={nav => { this.navigator = nav }} />
+      }
       if (currentUser) {
         return <View style={{flex: 1}}>
           <RootNavigator

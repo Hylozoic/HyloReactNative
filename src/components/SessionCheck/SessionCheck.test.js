@@ -1,30 +1,26 @@
 import 'react-native'
 import React from 'react'
+import ReactTestRenderer from 'react-test-renderer'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import SessionCheck from './SessionCheck'
 
-// import React from 'react'
-// import PropTypes from 'prop-types'
-// import { View, Linking } from 'react-native'
-// import { has } from 'lodash/fp'
-// import { urlPrefix } from 'util/platform'
-// import mixins from '../../style/mixins'
-// import Loading from '../Loading'
-// import LoginNavigator from '../LoginNavigator'
-// import SocketListener from '../SocketListener'
-// import RootNavigator from '../RootNavigator'
-
-// jest.mock('react-navigation', () => {})
-// jest.mock('../RootNavigator', () => 'RootNavigator')
-// jest.mock('../LoginNavigator', () => 'LoginNavigator')
-// jest.mock('react-native-aws3')
-// jest.mock('react-native-onesignal', () => ({
-//   getPermissionSubscriptionState: jest.fn(() => Promise.resolve({userId: 5}))
-// }))
-// jest.mock('react-native-google-signin')
-// jest.mock('react-native-zss-rich-text-editor')
+jest.mock('../RootNavigator', () => 'RootNavigator')
+jest.mock('../LoginNavigator', () => 'LoginNavigator')
+jest.mock('../Loading', () => 'Loading')
+jest.mock('react-native', () => ({
+  View: () => () => <div />,
+  Linking: {
+    getInitialURL: () => Promise.resolve(),
+    addEventListener: () => {},
+    removeEventListener: jest.fn()
+  },
+  Platform: {OS: 'ios'}
+}))
 
 const requiredProps = {
+  loading: false,
+  loggedIn: false,
+  currentUser: null,
   checkSession: () => {},
   initOneSignal: () => {},
   setEntryURL: () => {},
@@ -32,71 +28,123 @@ const requiredProps = {
   fetchCurrentUser: () => {}
 }
 
-it('matches last snapshot loading', () => {
-  const renderer = new ReactShallowRenderer()
-  renderer.render(<SessionCheck {...requiredProps} />)
-  const actual = renderer.getRenderOutput()
+function testPropsSetup (props = {}, required = requiredProps) {
+  return {...required, ...props}
+}
 
+function shallowRender (props) {
+  const renderer = new ReactShallowRenderer()
+  renderer.render(<SessionCheck {...testPropsSetup(props)} />)
+  return renderer
+}
+
+it('matches last snapshot loading', () => {
+  const testProps = {
+    loading: true
+  }
+  const actual = shallowRender(testProps).getRenderOutput()
   expect(actual).toMatchSnapshot()
 })
 
 it('matches last snapshot not loggedIn', () => {
-  const renderer = new ReactShallowRenderer()
-  renderer.render(<SessionCheck {...requiredProps} loggedIn={false} />)
-  const actual = renderer.getRenderOutput()
-
+  const testProps = {
+    loggedIn: false
+  }
+  const actual = shallowRender(testProps).getRenderOutput()
   expect(actual).toMatchSnapshot()
 })
 
-it('matches last snapshot loggedIn', () => {
-  const renderer = new ReactShallowRenderer()
-  renderer.render(<SessionCheck {...requiredProps} loggedIn />)
-  const actual = renderer.getRenderOutput()
-
+it('matches last snapshot loggedIn but no currentUser', () => {
+  const testProps = {
+    loggedIn: true
+  }
+  const actual = shallowRender(testProps).getRenderOutput()
   expect(actual).toMatchSnapshot()
 })
 
-// From LoggedInRoot -- tests fetchCurrentUser and such
-// import ReactShallowRenderer from 'react-test-renderer/shallow'
-// import LoggedInRoot from './LoggedInRoot'
-// import React from 'react'
-//
-// jest.mock('react-native-google-signin')
-// jest.mock('react-native-zss-rich-text-editor')
-// jest.mock('react-native-onesignal', () => ({
-//   getPermissionSubscriptionState: jest.fn(() => Promise.resolve({userId: 5}))
-// }))
-//
-// it('renders as expected', () => {
-//   const renderer = new ReactShallowRenderer()
-//   const fetchCurrentUser = jest.fn()
-//   const registerDevice = jest.fn()
-//   renderer.render(<LoggedInRoot {...{fetchCurrentUser, registerDevice}} />)
-//   const actual = renderer.getRenderOutput()
-//   expect(actual).toMatchSnapshot()
-//
-//   // TODO: call componentDidMount and check that the mock functions were called
-// })
-//
+it('matches last snapshot loggedIn with currentUser', () => {
+  const testProps = {
+    loggedIn: true,
+    currentUser: {}
+  }
+  const actual = shallowRender(testProps).getRenderOutput()
+  expect(actual).toMatchSnapshot()
+})
 
-// From LoggedInRoot -- connector tests?
-// import Component from './index'
-// import React from 'react'
-// import ReactShallowRenderer from 'react-test-renderer/shallow'
-//
-// jest.mock('react-native-google-signin')
-// jest.mock('react-native-zss-rich-text-editor')
-// jest.mock('react-native-onesignal', () => ({
-//   getPermissionSubscriptionState: jest.fn(() => Promise.resolve({userId: 5}))
-// }))
-//
-// it('renders as expected', () => {
-//   const renderer = new ReactShallowRenderer()
-//   const mockStore = {
-//     subscribe: jest.fn(),
-//     getState: jest.fn(),
-//     dispatch: jest.fn()
-//   }
-//   renderer.render(<Component store={mockStore} />)
-//   expect(renderer.getRenderOutput()).toMatchSnapshot()
-// })
+// Lifecycle Methods
+
+test('componentDidMount', () => {
+  const testProps = testPropsSetup({
+    checkSession: jest.fn(),
+    initOneSignal: jest.fn()
+  })
+  SessionCheck.navigator = {
+    _handleOpenURL: jest.fn()
+  }
+  ReactTestRenderer.create(<SessionCheck {...testProps} />)
+  expect(testProps.checkSession).toHaveBeenCalled()
+  expect(testProps.initOneSignal).toHaveBeenCalled()
+})
+
+describe('componentWillUpdate', () => {
+  it('should fetchCurrentUser if loggedIn without a currentUser', () => {
+    const testProps = testPropsSetup({
+      pending: false,
+      loggedIn: true,
+      currentUser: null,
+      fetchCurrentUser: jest.fn()
+    })
+    const instance = ReactTestRenderer.create(<SessionCheck {...testProps} />).getInstance()
+    instance.componentWillUpdate(testProps)
+    expect(testProps.fetchCurrentUser).toHaveBeenCalled()
+  })
+
+  it('shouldn\'t fetchCurrentUser if loggedIn and there is a currentUser', () => {
+    const testProps = testPropsSetup({
+      pending: false,
+      loggedIn: true,
+      currentUser: {},
+      fetchCurrentUser: jest.fn()
+    })
+    const instance = ReactTestRenderer.create(<SessionCheck {...testProps} />).getInstance()
+    instance.componentWillUpdate(testProps)
+    expect(testProps.fetchCurrentUser).not.toHaveBeenCalled()
+  })
+})
+
+test('componentDidUpdate responds as expected', () => {
+  const testProps = testPropsSetup({
+    entryURL: 'anything',
+    loggedIn: true,
+    currentUser: {},
+    resetEntryURL: jest.fn()
+  })
+  const prevProps = testPropsSetup()
+  const instance = ReactTestRenderer.create(<SessionCheck {...testProps} />).getInstance()
+  const navigator = {
+    _handleOpenURL: jest.fn()
+  }
+  instance.navigator = navigator
+  instance.componentDidUpdate(prevProps)
+  expect(navigator._handleOpenURL).toHaveBeenCalledWith(testProps.entryURL)
+  expect(testProps.resetEntryURL).toHaveBeenCalled()
+})
+
+test('_handleOpenURL', () => {
+  const testProps = testPropsSetup({
+    setEntryURL: jest.fn()
+  })
+  const instance = ReactTestRenderer.create(<SessionCheck {...testProps} />).getInstance()
+  const url = '/any/path'
+  const navigator = {
+    _handleOpenURL: jest.fn()
+  }
+  instance.navigator = navigator
+  instance._handleOpenURL(url)
+  expect(testProps.setEntryURL).toHaveBeenCalledWith(url)
+  expect(navigator._handleOpenURL).toHaveBeenCalled()
+})
+
+it('matches last snapshot for _handleChange')
+
+test('componentWillUnmount removes event listener')

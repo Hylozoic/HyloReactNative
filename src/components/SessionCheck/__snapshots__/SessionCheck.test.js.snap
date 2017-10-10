@@ -1,15 +1,29 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`matches last snapshot loading 1`] = `
-<NavigationContainer
-  uriPrefix="internalRouting://"
-/>
+exports[`componentWillUnmount removes event listener 1`] = `undefined`;
+
+exports[`matches last snapshot loading 1`] = `<Loading />`;
+
+exports[`matches last snapshot loggedIn but no currentUser 1`] = `<Loading />`;
+
+exports[`matches last snapshot loggedIn with currentUser 1`] = `
+<View>
+  <RootNavigator
+    onNavigationStateChange={[Function]}
+    screenProps={
+      Object {
+        "currentTabName": "Home",
+        "initialLoad": true,
+      }
+    }
+    uriPrefix="internalRouting://"
+  />
+  <Connect(SocketListener) />
+</View>
 `;
 
-exports[`matches last snapshot loggedIn 1`] = `<Loading />`;
-
 exports[`matches last snapshot not loggedIn 1`] = `
-<NavigationContainer
+<LoginNavigator
   uriPrefix="internalRouting://"
 />
 `;
