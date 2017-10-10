@@ -19,7 +19,7 @@ export function mapStateToProps (state, props) {
     },
     isValidInvite: getValidInvite(state),
     navToSignup: () => navigation.dispatch(createResetGoToNavAction('Signup')),
-    navToInviteExpired: () => navigation.navigate('InviteExpire')
+    navToInviteExpired: () => navigation.dispatch(createResetGoToNavAction('InviteExpired'))
   }
 }
 
