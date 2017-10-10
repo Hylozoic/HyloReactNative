@@ -43,6 +43,9 @@ export default class DrawerMenu extends Component {
       navigation.navigate('DrawerClose')
     }
 
+    const goToMyProfile = () =>
+      navigation.navigate('MemberProfile', {id: currentUser.id})
+
     return <View style={styles.parent}>
       <ListView style={styles.menu}
         ref={ref => { this.listView = ref }}
@@ -52,13 +55,15 @@ export default class DrawerMenu extends Component {
             onPress={() => selectCommunity(community)} />}
         enableEmptySections />
       <View style={styles.footer}>
-        <Image source={{uri: get('avatarUrl', currentUser)}} style={styles.avatar} />
+        <TouchableOpacity onPress={goToMyProfile} style={styles.avatar}>
+          <Image source={{uri: get('avatarUrl', currentUser)}}
+            style={styles.avatar} />
+        </TouchableOpacity>
         <View style={styles.footerContent}>
           <Text style={styles.footerTopText} numberOfLines={1}>
             Hello, {name}!
           </Text>
           <View style={styles.footerButtons}>
-            <TextButton text='View Profile' onPress={() => {}} />
             <TextButton text='Settings' onPress={showSettings} />
           </View>
         </View>
