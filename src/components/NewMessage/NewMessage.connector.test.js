@@ -67,4 +67,19 @@ describe('mergeProps', () => {
       expect(ownProps.navigation.navigate).toHaveBeenCalledWith('Thread', {id})
     })
   })
+
+  it('sets up loadParticipantsFromParams', () => {
+    const dispatchProps = {
+      setParticipants: jest.fn()
+    }
+    const participants = [3, 1, 2]
+    const ownProps = {
+      navigation: {
+        state: {params: {participants}}
+      }
+    }
+    const mergedProps = mergeProps({}, dispatchProps, ownProps)
+    mergedProps.loadParticipantsFromParams()
+    expect(dispatchProps.setParticipants).toHaveBeenCalledWith(participants)
+  })
 })

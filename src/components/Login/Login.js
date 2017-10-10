@@ -25,7 +25,8 @@ export default class Login extends React.Component {
     this.state = {
       email: this.props.defaultEmail,
       securePassword: true,
-      emailIsValid: false
+      emailIsValid: false,
+      isConnected: true
     }
   }
 

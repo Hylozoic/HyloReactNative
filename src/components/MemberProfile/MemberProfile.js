@@ -28,7 +28,7 @@ export default class MemberProfile extends React.Component {
   }
 
   render () {
-    const { person, id, goToDetails, canFlag } = this.props
+    const { person, id, goToDetails, canFlag, onPressMessages } = this.props
 
     const { flaggingVisible } = this.state
 
@@ -50,7 +50,10 @@ export default class MemberProfile extends React.Component {
     const header = <View>
       <MemberBanner person={person} />
       <View style={styles.marginContainer}>
-        <MemberHeader person={person} flagMember={flagMember} />
+        <MemberHeader
+          person={person}
+          flagMember={flagMember}
+          onPressMessages={onPressMessages} />
         <ReadMoreButton goToDetails={goToDetails} />
       </View>
       {flaggingVisible && <FlagContent type='member'
@@ -73,14 +76,16 @@ export function MemberBanner ({ person }) {
   </View>
 }
 
-export function MemberHeader ({ person, flagMember }) {
+export function MemberHeader ({ person, flagMember, onPressMessages }) {
   if (!person) return null
   const { name, location, tagline } = person
   return <View style={styles.header}>
     <View style={styles.nameRow}>
       <Text style={styles.name}>{name}</Text>
       <View style={styles.icons}>
-        <Icon name='Messages' style={styles.icon} />
+        <TouchableOpacity onPress={onPressMessages}>
+          <Icon name='Messages' style={styles.icon} />
+        </TouchableOpacity>
         <MemberMenu {... {flagMember}} />
       </View>
     </View>
