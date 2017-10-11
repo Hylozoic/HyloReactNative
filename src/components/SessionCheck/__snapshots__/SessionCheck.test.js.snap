@@ -1,14 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`matches last snapshot - default 1`] = `
+exports[`SessionCheck component matches last snapshot - default 1`] = `
 <LoginNavigator
   uriPrefix="internalRouting://"
 />
 `;
 
-exports[`matches last snapshot - loading 1`] = `<Loading />`;
+exports[`SessionCheck component matches last snapshot - loading 1`] = `<Loading />`;
 
-exports[`matches last snapshot - loggedIn with a currentUser 1`] = `
+exports[`SessionCheck component matches last snapshot - loggedIn with a currentUser 1`] = `
 <View>
   <RootNavigator
     onNavigationStateChange={[Function]}
@@ -23,9 +23,9 @@ exports[`matches last snapshot - loggedIn with a currentUser 1`] = `
 </View>
 `;
 
-exports[`matches last snapshot - loggedIn without a currentUser 1`] = `<Loading />`;
+exports[`SessionCheck component matches last snapshot - loggedIn without a currentUser 1`] = `<Loading />`;
 
-exports[`matches last snapshot - not loggedIn 1`] = `
+exports[`SessionCheck component matches last snapshot - not loggedIn 1`] = `
 <LoginNavigator
   uriPrefix="internalRouting://"
 />
