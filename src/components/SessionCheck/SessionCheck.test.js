@@ -41,22 +41,7 @@ function shallowRender (props) {
   return renderer
 }
 
-
 describe('SessionCheck component', () => {
-  // const RealDate = Date
-  //
-  // function mockDate (isoDate) {
-  //   global.Date = class extends RealDate {
-  //     constructor () {
-  //       return new RealDate(isoDate)
-  //     }
-  //   }
-  // }
-  //
-  // afterEach(() => {
-  //   global.Date = RealDate
-  // })
-
   it('matches last snapshot - default', () => {
     const actual = shallowRender().getRenderOutput()
     expect(actual).toMatchSnapshot()
