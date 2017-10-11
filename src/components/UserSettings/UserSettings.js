@@ -3,10 +3,12 @@ import { View, Text, ScrollView, TouchableOpacity, Alert } from 'react-native'
 import { validateUser } from 'hylo-utils/validators'
 import validator from 'validator'
 import prompt from 'react-native-prompt-android'
+import { LoginManager } from 'react-native-fbsdk'
 import KeyboardFriendlyView from '../KeyboardFriendlyView'
 import Loading from '../Loading'
 import Button from '../Button'
 import SettingControl from '../SettingControl'
+import { permissions } from '../Login/FbLoginButton'
 import styles from './UserSettings.styles'
 import { any, values, isNil } from 'lodash/fp'
 
@@ -41,8 +43,7 @@ export default class Signup extends React.Component {
 
   setEditState () {
     if (!this.props.currentUser) return
-    const { email } = this.props.currentUser
-    const { facebookUrl, twitterName } = this.props
+    const { email, facebookUrl, twitterName } = this.props.currentUser
     this.setState({
       edits: {
         email,
@@ -74,7 +75,6 @@ export default class Signup extends React.Component {
 
   updateField = (key, value, setChanged = true) => {
     const { changed, edits, errors } = this.state
-    console.log('updateField, key', key, 'value', value)
     this.setState({
       changed: setChanged ? true : changed,
       edits: {
@@ -147,6 +147,10 @@ export default class Signup extends React.Component {
       })
   }
 
+  loginWithFacebook = () => {
+    return LoginManager.logInWithReadPermissions(permissions)
+  }
+
   render () {
     const { currentUser, updateUserSettings, unlinkAccount } = this.props
     const { editingPassword, edits: { email, password, confirmPassword, facebookUrl, twitterName }, errors, changed } = this.state
@@ -193,6 +197,7 @@ export default class Signup extends React.Component {
           facebookUrl={facebookUrl}
           twitterName={twitterName}
           twitterPrompt={this.twitterPrompt}
+          loginWithFacebook={this.loginWithFacebook}
           updateUserSettings={updateUserSettings}
           updateField={this.updateField}
           unlinkAccount={unlinkAccount} />
@@ -203,13 +208,13 @@ export default class Signup extends React.Component {
 }
 
 export function SocialAccounts ({
-  loginWithService, twitterPrompt, facebookUrl, twitterName, updateUserSettings, unlinkAccount, updateField
+  loginWithService, twitterPrompt, facebookUrl, twitterName, loginWithFacebook, updateUserSettings, unlinkAccount, updateField
 }) {
   return <View style={styles.socialAccounts}>
     <Text style={[styles.settingLabel, styles.socialAccountsLabel]}>SOCIAL ACCOUNTS</Text>
     <SocialControl
       label='Facebook'
-      onLink={() => loginWithService('facebook')}
+      onLink={loginWithFacebook}
       onChange={value => updateField('facebookUrl', value, false)}
       unlinkAccount={unlinkAccount}
       provider='facebook'
@@ -237,9 +242,10 @@ export class SocialControl extends React.Component {
       })
     } else {
       return onLink()
-      .then(({ error }) => {
-        if (error) return onChange(false)
-        return onChange(true)
+      .then((result) => {
+        console.log('result', result)
+        // if (error) return onChange(false)
+        // return onChange(true)
       })
     }
   }

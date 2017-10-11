@@ -9,7 +9,6 @@ function mapStateToProps (state, props) {
 
   return {
     currentUser: getMe(state, props),
-    facebookUrl: 'facb',
     cancel
   }
 }

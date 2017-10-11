@@ -5,7 +5,7 @@ import { AccessToken, LoginManager } from 'react-native-fbsdk'
 import Icon from '../Icon'
 import styles from './Login.styles'
 
-const permissions = ['public_profile', 'user_friends', 'email']
+export const permissions = ['public_profile', 'user_friends', 'email']
 
 export default class FbLoginButton extends React.Component {
   constructor (props) {
