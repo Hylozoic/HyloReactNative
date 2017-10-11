@@ -3,6 +3,7 @@ import updateUserSettings from '../../store/actions/updateUserSettings'
 import { unlinkAccount } from './UserSettings.store'
 import { connect } from 'react-redux'
 import getMe from '../../store/selectors/getMe'
+import { loginWithFacebook } from '../Login/actions'
 
 function mapStateToProps (state, props) {
   const cancel = () => props.navigation.goBack()
@@ -14,7 +15,7 @@ function mapStateToProps (state, props) {
 }
 
 export const mapDispatchToProps = {
-  logout, updateUserSettings, unlinkAccount
+  logout, updateUserSettings, unlinkAccount, loginWithFacebook
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)

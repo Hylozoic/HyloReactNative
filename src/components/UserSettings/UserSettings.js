@@ -3,7 +3,7 @@ import { View, Text, ScrollView, TouchableOpacity, Alert } from 'react-native'
 import { validateUser } from 'hylo-utils/validators'
 import validator from 'validator'
 import prompt from 'react-native-prompt-android'
-import { LoginManager } from 'react-native-fbsdk'
+import { LoginManager, AccessToken } from 'react-native-fbsdk'
 import KeyboardFriendlyView from '../KeyboardFriendlyView'
 import Loading from '../Loading'
 import Button from '../Button'
@@ -147,8 +147,16 @@ export default class Signup extends React.Component {
       })
   }
 
-  loginWithFacebook = () => {
+  loginWithFacebook = onLogin => {
+    const { loginWithFacebook } = this.props
     return LoginManager.logInWithReadPermissions(permissions)
+    .then(result => {
+      if (result.isCancelled) return onLogin(false)
+      return AccessToken.getCurrentAccessToken()
+      .then(data => loginWithFacebook(data.accessToken.toString()))
+      .then(() => onLogin(true))
+    })
+    .catch(() => onLogin(false))
   }
 
   render () {
@@ -231,6 +239,9 @@ export function SocialAccounts ({
 }
 
 export class SocialControl extends React.Component {
+  state = {
+    loading: false
+  }
   linkClicked () {
     const { provider, onLink, updateUserSettings, onChange } = this.props
 
@@ -241,12 +252,9 @@ export class SocialControl extends React.Component {
         return onChange(true)
       })
     } else {
-      return onLink()
-      .then((result) => {
-        console.log('result', result)
-        // if (error) return onChange(false)
-        // return onChange(true)
-      })
+      this.setState({loading: true})
+      return onLink(onChange)
+      .then(() => this.setState({loading: false}))
     }
   }
 
@@ -258,13 +266,15 @@ export class SocialControl extends React.Component {
 
   render () {
     const { label, value = '' } = this.props
+    const { loading } = this.state
     const linked = !!value
 
     return <View style={[styles.socialControl, linked && styles.linked]}>
       <Text style={styles.settingText}>{label}</Text>
-      <TouchableOpacity onPress={linked ? () => this.unlinkClicked() : () => this.linkClicked()}>
+      {loading && <Text style={styles.loadingText}>Loading</Text>}
+      {!loading && <TouchableOpacity onPress={linked ? () => this.unlinkClicked() : () => this.linkClicked()}>
         <Text style={styles.linkText}>{linked ? 'Unlink' : 'Link'}</Text>
-      </TouchableOpacity>
+      </TouchableOpacity>}
     </View>
   }
 }

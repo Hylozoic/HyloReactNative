@@ -32,6 +32,10 @@ export default {
     color: rhino80,
     fontFamily: 'Circular-Book'
   },
+  loadingText: {
+    color: white60onCaribbeanGreen,
+    fontFamily: 'Circular-Book'
+  },
   linkText: {
     color: caribbeanGreen,
     fontFamily: 'Circular-Book'
