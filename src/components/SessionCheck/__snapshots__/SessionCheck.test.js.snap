@@ -19,7 +19,7 @@ exports[`matches last snapshot - loggedIn with a currentUser 1`] = `
     }
     uriPrefix="internalRouting://"
   />
-  <Connect(SocketListener) />
+  <SocketListener />
 </View>
 `;
 

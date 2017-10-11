@@ -38,7 +38,9 @@ export default class SessionCheck extends React.Component {
     checkSession()
     initOneSignal()
     // Universal Linking - set entryURL when app is closed (initial) or woken up
-    Linking.getInitialURL().then(this._handleOpenURL)
+    Linking.getInitialURL().then(url => {
+      return this._handleOpenURL(url)
+    })
     Linking.addEventListener('url', ({ url }) => this._handleOpenURL(url))
   }
 

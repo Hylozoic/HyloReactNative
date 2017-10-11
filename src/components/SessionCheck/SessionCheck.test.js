@@ -7,15 +7,16 @@ import SessionCheck, { INTERAL_ROUTE_URI_PREFIX } from './SessionCheck'
 jest.mock('../RootNavigator', () => 'RootNavigator')
 jest.mock('../LoginNavigator', () => 'LoginNavigator')
 jest.mock('../Loading', () => 'Loading')
-jest.mock('react-native', () => ({
-  View: () => Comp => <Comp />,
-  Linking: {
+jest.mock('../SocketListener', () => 'SocketListener')
+jest.mock('Linking', () => {
+  return {
+    addEventListener: () => Promise.resolve(),
+    removeEventListener: jest.fn(),
     getInitialURL: () => Promise.resolve(),
-    addEventListener: () => {},
-    removeEventListener: jest.fn()
-  },
-  Platform: {OS: 'ios'}
-}))
+    openURL: jest.fn(),
+    canOpenURL: jest.fn()
+  }
+})
 
 const defaultRequiredProps = {
   loading: false,
