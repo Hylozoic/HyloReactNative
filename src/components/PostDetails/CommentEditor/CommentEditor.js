@@ -39,6 +39,7 @@ export default class CommentEditor extends React.Component {
     return <Editor ref={ref => { this.editor = ref }}
       initialContent={content}
       navigation={navigation}
+      placeholder='Whats your comment?'
       communityId={navigation.state.params.communityId} />
   }
 
