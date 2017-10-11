@@ -39,7 +39,7 @@ exports[`hides image when no url and password when no password 1`] = `
     >
       You can always come back and change your details at any time.
     </Text>
-    <SignupControl
+    <SettingControl
       error={undefined}
       label="Your Full Name"
       onChange={[Function]}
@@ -47,7 +47,7 @@ exports[`hides image when no url and password when no password 1`] = `
       toggleEditable={true}
       value="Hill"
     />
-    <SignupControl
+    <SettingControl
       autoCapitalize="none"
       autoCorrect={false}
       error={undefined}
@@ -58,7 +58,7 @@ exports[`hides image when no url and password when no password 1`] = `
       toggleEditable={true}
       value="jill@hill.com"
     />
-    <SignupControl
+    <SettingControl
       label="Location"
       onChange={[Function]}
       onSubmitEditing={[Function]}
@@ -139,7 +139,7 @@ exports[`matches last snapshot 1`] = `
         />
       </TouchableOpacity>
     </View>
-    <SignupControl
+    <SettingControl
       error={undefined}
       label="Your Full Name"
       onChange={[Function]}
@@ -147,7 +147,7 @@ exports[`matches last snapshot 1`] = `
       toggleEditable={true}
       value="Hill"
     />
-    <SignupControl
+    <SettingControl
       autoCapitalize="none"
       autoCorrect={false}
       error={undefined}
@@ -158,7 +158,7 @@ exports[`matches last snapshot 1`] = `
       toggleEditable={true}
       value="jill@hill.com"
     />
-    <SignupControl
+    <SettingControl
       label="Location"
       onChange={[Function]}
       onSubmitEditing={[Function]}
