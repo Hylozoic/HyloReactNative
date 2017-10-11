@@ -7,7 +7,7 @@ function getPostId (state, props) {
   return props.navigation.state.params.id
 }
 
-function mapStateToProps (state, props) {
+export function mapStateToProps (state, props) {
   return {
     communityId: get('navigation.state.params.communityId', props),
     details: state.PostEditor.details,
@@ -15,7 +15,7 @@ function mapStateToProps (state, props) {
   }
 }
 
-function mapDispatchToProps (dispatch, props) {
+export function mapDispatchToProps (dispatch, props) {
   const { navigation } = props
   const postId = getPostId(null, props)
   const saveAction = postId ? updatePost : createPost

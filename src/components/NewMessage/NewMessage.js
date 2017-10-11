@@ -25,6 +25,7 @@ export default class NewMessage extends React.Component {
   componentDidMount () {
     this.props.fetchContacts()
     this.props.fetchRecentContacts()
+    this.props.loadParticipantsFromParams()
   }
 
   componentDidUpdate (prevProps) {

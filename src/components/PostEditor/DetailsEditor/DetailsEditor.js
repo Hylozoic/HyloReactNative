@@ -1,5 +1,5 @@
 import React from 'react'
-import { KeyboardAvoidingView } from 'react-native'
+import KeyboardFriendlyView from '../../KeyboardFriendlyView'
 import Editor from '../../Editor'
 import { keyboardAvoidingViewProps as kavProps } from 'util/viewHelpers'
 
@@ -23,13 +23,13 @@ export default class DetailsEditor extends React.Component {
 
   render () {
     const { initialContent, navigation } = this.props
-    return <KeyboardAvoidingView style={styles.container} {...kavProps}>
+    return <KeyboardFriendlyView style={styles.container} {...kavProps}>
       <Editor ref={ref => { this.editor = ref }}
         initialContent={initialContent}
         navigation={navigation}
         onChange={content => this.setState({content})}
         communityId={navigation.state.params.communityId} />
-    </KeyboardAvoidingView>
+    </KeyboardFriendlyView>
   }
 }
 

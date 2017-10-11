@@ -36,6 +36,7 @@ exports[`renders as expected 1`] = `
   <TouchableOpacity
     activeOpacity={0.2}
     focusedOpacity={0.7}
+    onPress={[Function]}
   >
     <Icon
       name="ArrowUp"
