@@ -1,5 +1,6 @@
 import { logout } from '../Login/actions'
 import updateUserSettings from '../../store/actions/updateUserSettings'
+import { unlinkAccount } from './UserSettings.store'
 import { connect } from 'react-redux'
 import getMe from '../../store/selectors/getMe'
 
@@ -14,7 +15,7 @@ function mapStateToProps (state, props) {
 }
 
 export const mapDispatchToProps = {
-  logout, updateUserSettings
+  logout, updateUserSettings, unlinkAccount
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)

@@ -4463,6 +4463,10 @@ react-native-onesignal@^3.0.5:
   dependencies:
     invariant "^2.2.2"
 
+react-native-prompt-android@^0.3.1:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/react-native-prompt-android/-/react-native-prompt-android-0.3.1.tgz#6d10ff80a5b48f0204e40bf8bc78295dfe29df38"
+
 react-native-prompt@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/react-native-prompt/-/react-native-prompt-1.0.0.tgz#41e0ec2aa7dd8f12f3a3ee83af9d63c4b670f8a1"

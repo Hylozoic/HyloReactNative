@@ -2,6 +2,7 @@ import React from 'react'
 import { View, Text, ScrollView, TouchableOpacity, Alert } from 'react-native'
 import { validateUser } from 'hylo-utils/validators'
 import validator from 'validator'
+import prompt from 'react-native-prompt-android'
 import KeyboardFriendlyView from '../KeyboardFriendlyView'
 import Loading from '../Loading'
 import Button from '../Button'
@@ -41,9 +42,12 @@ export default class Signup extends React.Component {
   setEditState () {
     if (!this.props.currentUser) return
     const { email } = this.props.currentUser
+    const { facebookUrl, twitterName } = this.props
     this.setState({
       edits: {
-        email
+        email,
+        facebookUrl,
+        twitterName
       }
     })
   }
@@ -68,15 +72,17 @@ export default class Signup extends React.Component {
     })
   }
 
-  updateField = (key, value) => {
+  updateField = (key, value, setChanged = true) => {
+    const { changed, edits, errors } = this.state
+    console.log('updateField, key', key, 'value', value)
     this.setState({
-      changed: true,
+      changed: setChanged ? true : changed,
       edits: {
-        ...this.state.edits,
+        ...edits,
         [key]: value
       },
       errors: {
-        ...this.state.errors,
+        ...errors,
         [key]: null
       }
     })
@@ -128,9 +134,22 @@ export default class Signup extends React.Component {
     this.confirmLeave(this.props.logout)
   }
 
+  twitterPrompt = onPress => {
+    prompt(
+      'Enter Twitter Name',
+      'Please enter your twitter name to link your account.',
+      [
+        {text: 'Cancel', onPress: () => onPress(false), style: 'cancel'},
+        {text: 'OK', onPress: twitterName => onPress(twitterName)}
+      ],
+      {
+        cancelable: false
+      })
+  }
+
   render () {
-    const { currentUser, facebookUrl, twitterName } = this.props
-    const { editingPassword, edits: { email, password, confirmPassword }, errors, changed } = this.state
+    const { currentUser, updateUserSettings, unlinkAccount } = this.props
+    const { editingPassword, edits: { email, password, confirmPassword, facebookUrl, twitterName }, errors, changed } = this.state
     if (!currentUser) return <Loading />
     return <KeyboardFriendlyView style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
@@ -172,7 +191,11 @@ export default class Signup extends React.Component {
         </TouchableOpacity>}
         <SocialAccounts
           facebookUrl={facebookUrl}
-          twitterName={twitterName} />
+          twitterName={twitterName}
+          twitterPrompt={this.twitterPrompt}
+          updateUserSettings={updateUserSettings}
+          updateField={this.updateField}
+          unlinkAccount={unlinkAccount} />
         <Footer saveChanges={changed && this.saveChanges} cancel={this.cancel} logout={this.logout} />
       </ScrollView>
     </KeyboardFriendlyView>
@@ -180,21 +203,21 @@ export default class Signup extends React.Component {
 }
 
 export function SocialAccounts ({
-  loginWithService, twitterPrompt, facebookUrl, twitterName, updateUserSettings, unlinkAccount
+  loginWithService, twitterPrompt, facebookUrl, twitterName, updateUserSettings, unlinkAccount, updateField
 }) {
   return <View style={styles.socialAccounts}>
     <Text style={[styles.settingLabel, styles.socialAccountsLabel]}>SOCIAL ACCOUNTS</Text>
     <SocialControl
       label='Facebook'
       onLink={() => loginWithService('facebook')}
-      onChange={value => updateUserSettings({facebookUrl: value})}
+      onChange={value => updateField('facebookUrl', value, false)}
       unlinkAccount={unlinkAccount}
       provider='facebook'
       value={facebookUrl} />
     <SocialControl
       label='Twitter'
-      onLink={() => twitterPrompt()}
-      onChange={value => updateUserSettings({twitterName: value})}
+      onLink={twitterPrompt}
+      onChange={value => updateField('twitterName', value, false)}
       unlinkAccount={unlinkAccount}
       provider='twitter'
       value={twitterName}
@@ -207,10 +230,11 @@ export class SocialControl extends React.Component {
     const { provider, onLink, updateUserSettings, onChange } = this.props
 
     if (provider === 'twitter') {
-      const twitterName = onLink()
-      if (twitterName === null) return onChange(false)
-      updateUserSettings({twitterName})
-      return onChange(true)
+      onLink(twitterName => {
+        if (!twitterName) return onChange(false)
+        updateUserSettings({twitterName})
+        return onChange(true)
+      })
     } else {
       return onLink()
       .then(({ error }) => {
