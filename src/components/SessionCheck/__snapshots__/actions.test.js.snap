@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`works with a cookie 1`] = `
+exports[`checkSession works with a cookie 1`] = `
 Object {
   "payload": Promise {
     "_40": 0,
@@ -12,7 +12,7 @@ Object {
 }
 `;
 
-exports[`works without a cookie 1`] = `
+exports[`checkSession works without a cookie 1`] = `
 Object {
   "payload": Promise {
     "_40": 0,
@@ -21,5 +21,17 @@ Object {
     "_72": null,
   },
   "type": "CHECK_SESSION",
+}
+`;
+
+exports[`checkVersion matches the existing snapshot 1`] = `
+Object {
+  "payload": Object {
+    "api": Object {
+      "method": "get",
+      "path": "/noo/mobile/auto-update-info?undefined-version=undefined",
+    },
+  },
+  "type": "CHECK_VERSION",
 }
 `;

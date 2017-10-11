@@ -1,24 +1,23 @@
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { checkSession } from './actions'
+import { checkSession, checkVersion, CHECK_VERSION } from './actions'
 import getMe from '../../store/selectors/getMe'
 import { get } from 'lodash/fp'
-import fetchVersion from 'util/fetchVersion'
+import { platformName, appVersion } from 'util/platform'
 
 export function mapStateToProps (state) {
   const signupInProgress = get('settings.signupInProgress', getMe(state))
-  const result = fetchVersion()
+  const pending = state.pending[CHECK_VERSION]
   return {
     loggedIn: state.session.loggedIn && !signupInProgress,
-    result
+    showUpdateModal: state.session.checkVersion,
+    pending
   }
 }
 
 export function mapDispatchToProps (dispatch) {
   return {
-    actions: bindActionCreators({
-      checkSession
-    }, dispatch)
+    checkSession: () => dispatch(checkSession()),
+    checkVersion: () => dispatch(checkVersion(platformName, appVersion))
   }
 }
 
