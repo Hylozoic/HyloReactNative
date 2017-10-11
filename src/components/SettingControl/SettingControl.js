@@ -71,7 +71,7 @@ export default class SettingControl extends React.Component {
       autoCorrect,
       style,
       error,
-      theme
+      theme = {}
     } = this.props
 
     const { securePassword, editable, highlight } = this.state

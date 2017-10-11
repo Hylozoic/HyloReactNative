@@ -19,7 +19,7 @@ exports[`KeyboardFriendlyViewAndroid matches last snapshot 1`] = `
 exports[`KeyboardFriendlyViewiOS matches last snapshot 1`] = `
 <KeyboardAvoidingView
   behavior="padding"
-  keyboardVerticalOffset={0}
+  keyboardVerticalOffset={64}
   testID="123"
 >
   <Text
