@@ -1,17 +1,20 @@
 /* eslint-disable camelcase */
 import React from 'react'
 import { View, Text, TouchableOpacity } from 'react-native'
-import Avatar from '../Avatar'
-import PostHeader from '../PostCard/PostHeader'
-import PostBody from '../PostCard/PostBody'
-import SpaceFillingImage from '../SpaceFillingImage'
-import PostFooter from '../PostCard/PostFooter'
-import Comments from '../Comments'
-import Loading from '../Loading'
 import { get } from 'lodash/fp'
 import { shape, any, object, string, func, array, bool } from 'prop-types'
-import styles from './PostDetails.styles'
 import striptags from 'striptags'
+
+import Avatar from '../Avatar'
+import Comments from '../Comments'
+import PostBody from '../PostCard/PostBody'
+import PostFooter from '../PostCard/PostFooter'
+import PostHeader from '../PostCard/PostHeader'
+import Loading from '../Loading'
+import SocketSubscriber from '../SocketSubscriber'
+import SpaceFillingImage from '../SpaceFillingImage'
+
+import styles from './PostDetails.styles'
 
 export default class PostDetails extends React.Component {
   static propTypes = {
@@ -101,8 +104,10 @@ export default class PostDetails extends React.Component {
         showMember={showMember}
         showTopic={showTopic}
         slug={slug} />
+      <SocketSubscriber type='post' id={post.id} />
     </View>
   }
+
 }
 
 export function CommentPrompt ({ currentUser, newComment, commentEdit }) {

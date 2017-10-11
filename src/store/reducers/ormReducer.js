@@ -11,7 +11,7 @@ import {
   SIGNUP, ADD_SKILL, REMOVE_SKILL, UPDATE_USER_SETTINGS_PENDING
 } from '../../components/SignupFlow/SignupFlow.store'
 import {
-  RECEIVE_MESSAGE, RECEIVE_NOTIFICATION 
+  RECEIVE_COMMENT, RECEIVE_MESSAGE, RECEIVE_NOTIFICATION 
 } from '../../components/SocketListener/SocketListener.store'
 import {
   CREATE_MESSAGE, CREATE_MESSAGE_PENDING
@@ -113,6 +113,17 @@ export default function ormReducer (state = {}, action) {
       me.update(changes)
       break
 
+    case RECEIVE_COMMENT:
+      const { comment } = payload.data
+      if (session.Post.hasId(comment.postId)) {
+        ModelExtractor.addAll({
+          session,
+          root: comment,
+          modelName: 'Comment'
+        })
+      }
+      break
+
     case RECEIVE_MESSAGE:
       const { message } = payload.data
       if (session.MessageThread.hasId(message.messageThread)) {
@@ -128,6 +139,8 @@ export default function ormReducer (state = {}, action) {
         root: payload.data.notification,
         modelName: 'Notification'
       })
+      const newNotificationCount = session.Me.first().newNotificationCount + 1
+      session.Me.first().update({ newNotificationCount })
       break
 
     case TOGGLE_TOPIC_SUBSCRIBE_PENDING:
