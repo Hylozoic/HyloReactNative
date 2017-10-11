@@ -15,7 +15,6 @@ exports[`matches last snapshot - loggedIn with a currentUser 1`] = `
     screenProps={
       Object {
         "currentTabName": "Home",
-        "initialLoad": true,
       }
     }
     uriPrefix="internalRouting://"

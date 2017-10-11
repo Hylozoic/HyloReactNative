@@ -1,16 +1,17 @@
+import URL from 'url'
 import React from 'react'
 import PropTypes from 'prop-types'
 import { View, Linking } from 'react-native'
 import { has } from 'lodash/fp'
-import { urlPrefix } from 'util/platform'
 import mixins from '../../style/mixins'
 import Loading from '../Loading'
 import LoginNavigator from '../LoginNavigator'
 import SocketListener from '../SocketListener'
 import RootNavigator from '../RootNavigator'
 
+export const INTERAL_ROUTE_URI_PREFIX = 'internalRouting://'
+
 const tabNames = ['Home', 'Members', 'Topics']
-const URI_PREFIX_OVERRIDE = 'internalRouting://'
 
 export default class SessionCheck extends React.Component {
   static propTypes = {
@@ -28,7 +29,6 @@ export default class SessionCheck extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      initialLoad: true,
       currentTabName: 'Home'
     }
   }
@@ -50,6 +50,11 @@ export default class SessionCheck extends React.Component {
   componentDidUpdate (prevProps) {
     const { entryURL, resetEntryURL, currentUser, loggedIn } = this.props
     if (loggedIn && (currentUser !== prevProps.currentUser)) {
+      // NOTE: For now this is going to try and route for ALL entry URLs
+      // it the case of CheckInvitation / JoinCommunity this will be fine
+      // if there are other overlapping routes between LoginNavigator
+      // and RootNavigator in which the LoginNavigator route was the final
+      // destination this could cause an unexpected behaviour.
       if (entryURL) {
         resetEntryURL()
         this.navigator._handleOpenURL(entryURL)
@@ -62,18 +67,19 @@ export default class SessionCheck extends React.Component {
     Linking.removeEventListener('url', this._handleOpenURL)
   }
 
-  // NOTE: The combination of the obscuring URI_PREFIX_OVERRIDE constant
+  // NOTE: The combination of the obscuring INTERAL_ROUTE_URI_PREFIX constant
   // and the event handler here is a work around for issues in the
   // StackNavigator/StackRouter handling of these same events, especially
   // when not using a single root StackNavigator but a switching double rooted
   // one as we've done below. This system gives us a place to do our
   // own handling of URLs and most importantly to stop them from being handled
   // entirely in some cases.
-  _handleOpenURL = (url) => {
-    if (url) {
-      const parsedURL = URI_PREFIX_OVERRIDE + url.split(urlPrefix)[1]
-      this.props.setEntryURL(url)
-      this.navigator && this.navigator._handleOpenURL(parsedURL)
+  _handleOpenURL = (appURL) => {
+    const { path } = URL.parse(appURL)
+    if (path) {
+      const interalRoutingURL = INTERAL_ROUTE_URI_PREFIX + path.slice(1)
+      this.props.setEntryURL(interalRoutingURL)
+      this.navigator && this.navigator._handleOpenURL(interalRoutingURL)
     }
   }
 
@@ -112,12 +118,13 @@ export default class SessionCheck extends React.Component {
     const { loading, loggedIn, currentUser } = this.props
     if (!loading) {
       if (!loggedIn) {
-        return <LoginNavigator uriPrefix={URI_PREFIX_OVERRIDE} ref={nav => { this.navigator = nav }} />
+        return <LoginNavigator uriPrefix={INTERAL_ROUTE_URI_PREFIX}
+          ref={nav => { this.navigator = nav }} />
       }
       if (currentUser) {
         return <View style={{flex: 1}}>
           <RootNavigator
-            uriPrefix={URI_PREFIX_OVERRIDE}
+            uriPrefix={INTERAL_ROUTE_URI_PREFIX}
             onNavigationStateChange={this._handleChange}
             screenProps={this.state}
             ref={nav => { this.navigator = nav }} />

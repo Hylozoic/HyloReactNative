@@ -2,7 +2,7 @@ import 'react-native'
 import React from 'react'
 import ReactTestRenderer from 'react-test-renderer'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
-import SessionCheck from './SessionCheck'
+import SessionCheck, { INTERAL_ROUTE_URI_PREFIX } from './SessionCheck'
 
 jest.mock('../RootNavigator', () => 'RootNavigator')
 jest.mock('../LoginNavigator', () => 'LoginNavigator')
@@ -137,14 +137,16 @@ test('_handleOpenURL', () => {
     setEntryURL: jest.fn()
   })
   const instance = ReactTestRenderer.create(<SessionCheck {...testProps} />).getInstance()
-  const url = '/any/path'
+  const path = 'any/path'
+  const linkingURL = `anything://ANYTHING.AT.ALL/${path}`
+  const internalURL = `${INTERAL_ROUTE_URI_PREFIX}${path}`
   const navigator = {
     _handleOpenURL: jest.fn()
   }
   instance.navigator = navigator
-  instance._handleOpenURL(url)
-  expect(testProps.setEntryURL).toHaveBeenCalledWith(url)
-  expect(navigator._handleOpenURL).toHaveBeenCalled()
+  instance._handleOpenURL(linkingURL)
+  expect(testProps.setEntryURL).toHaveBeenCalledWith(internalURL)
+  expect(navigator._handleOpenURL).toHaveBeenCalledWith(internalURL)
 })
 
 test('that _handleChange changes state value for currentTab when changed', () => {
