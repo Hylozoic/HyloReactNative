@@ -14,7 +14,7 @@
 // where `someFunction` is a `jest.fn()`. The event object can be passed as the
 // third argument, otherwise it will receive a default value.
 export function simulate (instance, eventName, evt = {}) {
-  const titleCase = `${eventName[0].toUpperCase()}${eventName.substring(1).toLowerCase()}`
+  const titleCase = `${eventName[0].toUpperCase()}${eventName.substring(1)}`
   const handlerName = `on${titleCase}`
   const handler = instance.props[handlerName]
 

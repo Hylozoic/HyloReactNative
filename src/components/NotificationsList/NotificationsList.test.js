@@ -1,4 +1,4 @@
-import { TouchableOpacity } from 'react-native'
+import { FlatList, TouchableOpacity } from 'react-native'
 import React from 'react'
 import ShallowRenderer from 'react-test-renderer/shallow'
 import TestRenderer from 'react-test-renderer'
@@ -14,10 +14,11 @@ describe('NotificationsList', () => {
   beforeEach(() => {
     shallowRenderer = new ShallowRenderer()
     props = {
-      fetchMore: () => {},
+      fetchMore: jest.fn(),
       fetchNotifications: () => {},
       hasMore: true,
       markActivityRead: jest.fn(),
+      markAllRead: jest.fn(),
       pending: false,
       notifications: [
         {
@@ -50,7 +51,14 @@ describe('NotificationsList', () => {
     expect(actual).toEqual(<Loading />)
   })
 
-  it('marks the notification read on touch', () => {
+  it('returns a message when no notifications are available', () => {
+    props.notifications = []
+    shallowRenderer.render(<NotificationsList { ...props } />)
+    const actual = shallowRenderer.getRenderOutput()
+    expect(actual.props.children.includes('Nothing')).toBe(true)
+  })
+
+  it('marks the notification read on notification touch', () => {
     const notification = props.notifications[0]
     notification.unread = true
     const root = TestRenderer.create(<NotificationsList { ...props } />).root
@@ -58,11 +66,17 @@ describe('NotificationsList', () => {
     expect(props.markActivityRead).toHaveBeenCalledWith(notification.activityId)
   })
 
-  it('calls notification.onPress on touch', () => {
-    const notification = props.notifications[0]
+  it('calls notification.onPress on notification touch', () => {
     const root = TestRenderer.create(<NotificationsList { ...props } />).root
+    const notification = root.props.notifications[0]
     simulate(root.findAllByType(TouchableOpacity)[0], 'press')
     expect(notification.onPress).toHaveBeenCalled()
+  })
+
+  it('calls fetchMore when scrolled to end of list', () => {
+    const root = TestRenderer.create(<NotificationsList { ...props } />).root
+    simulate(root.findByType(FlatList), 'endReached')
+    expect(props.fetchMore).toHaveBeenCalledWith(props.notifications.length)
   })
 
   it('matches the last snapshot for NotificationRow', () => {

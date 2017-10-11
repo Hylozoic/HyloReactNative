@@ -204,6 +204,7 @@ export const getNotifications = ormCreateSelector(
   (_, { navigation }) => navigation,
   (session, navigation) => session.Notification
     .all()
+    .orderBy(m => Number(m.id), 'desc')
     .toModelArray()
     .map(refineNotification(navigation))
 )

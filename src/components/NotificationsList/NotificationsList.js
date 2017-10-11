@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { FlatList, TouchableOpacity, View, Text } from 'react-native'
-import { isEmpty } from 'lodash/fp'
 
 import header from 'util/header'
 import Loading from '../Loading'

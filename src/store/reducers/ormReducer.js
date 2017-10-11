@@ -1,19 +1,21 @@
 import {
-  SIGNUP, ADD_SKILL, REMOVE_SKILL, UPDATE_USER_SETTINGS_PENDING
-} from '../../components/SignupFlow/SignupFlow.store'
-import {
   CREATE_COMMENT
 } from '../../components/PostDetails/CommentEditor/CommentEditor.store'
 import {
-  RECEIVE_MESSAGE
+  TOGGLE_TOPIC_SUBSCRIBE_PENDING
+} from '../../components/Feed/Feed.store'
+import {
+  MARK_ACTIVITY_READ, MARK_ALL_ACTIVITIES_READ
+} from '../../components/NotificationsList/NotificationsList.store'
+import {
+  SIGNUP, ADD_SKILL, REMOVE_SKILL, UPDATE_USER_SETTINGS_PENDING
+} from '../../components/SignupFlow/SignupFlow.store'
+import {
+  RECEIVE_MESSAGE, RECEIVE_NOTIFICATION 
 } from '../../components/SocketListener/SocketListener.store'
-import { MARK_ACTIVITY_READ, MARK_ALL_ACTIVITIES_READ } from '../../components/NotificationsList/NotificationsList.store'
 import {
   CREATE_MESSAGE, CREATE_MESSAGE_PENDING
 } from '../../components/Thread/Thread.store'
-import {
-  TOGGLE_TOPIC_SUBSCRIBE_PENDING
-} from '../../components/Feed/Feed.store'
 
 import orm from '../models'
 import ModelExtractor from './ModelExtractor'
@@ -113,8 +115,19 @@ export default function ormReducer (state = {}, action) {
 
     case RECEIVE_MESSAGE:
       const { message } = payload.data
-      session.MessageThread.withId(message.messageThread)
-      .update({updatedAt: message.createdAt})
+      if (session.MessageThread.hasId(message.messageThread)) {
+        session.MessageThread
+          .withId(message.messageThread)
+          .update({updatedAt: message.createdAt})
+      }
+      break
+
+    case RECEIVE_NOTIFICATION:
+      ModelExtractor.addAll({
+        session,
+        root: payload.data.notification,
+        modelName: 'Notification'
+      })
       break
 
     case TOGGLE_TOPIC_SUBSCRIBE_PENDING:
