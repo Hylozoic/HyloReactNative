@@ -14,8 +14,8 @@ export default class SessionCheck extends React.Component {
 
   showAlert = (updateType) => {
     const storeName = isIOS ? 'App Store' : 'Play Store'
-    const APP_STORE_LINK = 'itms://itunes.apple.com/us/app/apple-store/myiosappid?mt=8'
-    const PLAY_STORE_LINK = 'http://play.google.com/store/'
+    const APP_STORE_LINK = 'https://itunes.apple.com/app/com.hylo.HyloA'
+    const PLAY_STORE_LINK = 'https://play.google.com/store/apps/details?id=com.hylo.reactnative'
     const buttons = [
       {
         text: 'Update Now',
