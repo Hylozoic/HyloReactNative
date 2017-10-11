@@ -9,7 +9,6 @@ export default class Home extends React.Component {
   static navigationOptions = ({navigation}) => (Header(navigation, title))
 
   componentDidMount () {
-    console.log('Nagivate?')
     this.props.navigation.navigate('UserSettings')
   }
 

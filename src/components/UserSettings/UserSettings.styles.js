@@ -1,4 +1,4 @@
-import { gunsmoke, rhino30, rhino80, caribbeanGreen } from 'style/colors'
+import { gunsmoke, rhino30, rhino80, caribbeanGreen, white60onCaribbeanGreen } from 'style/colors'
 
 export default {
   header: {
@@ -36,6 +36,9 @@ export default {
     color: caribbeanGreen,
     fontFamily: 'Circular-Book'
   },
+  cancelPassword: {
+    marginBottom: 15
+  },
   socialAccountsLabel: {
     marginBottom: 3
   },
@@ -59,11 +62,34 @@ export default {
     width: 170,
     height: 43,
     fontSize: 16,
-    marginBottom: 5
+    marginBottom: 5,
+    disabledBackgroundColor: white60onCaribbeanGreen
   },
   cancel: {
     fontSize: 16,
     color: rhino30,
     fontFamily: 'Circular-Book'
+  },
+  settingControl: {
+    control: {
+      marginBottom: 3
+    },
+    label: {
+      fontSize: 10,
+      color: rhino30,
+      fontFamily: 'Circular-Bold',
+      marginBottom: 10
+    },
+    textInput: {
+      fontSize: 16,
+      color: rhino80,
+      fontFamily: 'Circular-Book',
+      borderBottomWidth: 0
+    },
+    error: {
+      paddingVertical: 0,
+      paddingBottom: 10
+    },
+    hideErrorTriangle: true
   }
 }
