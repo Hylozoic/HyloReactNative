@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mapDispatchToProps has the right keys 1`] = `
+Object {
+  "loginWithFacebook": [Function],
+  "logout": [Function],
+  "unlinkAccount": [Function],
+  "updateUserSettings": [Function],
+}
+`;
+
+exports[`mapStateToProps sets up cancel 1`] = `
+Object {
+  "cancel": [Function],
+  "currentUser": undefined,
+}
+`;
