@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`useInvitation 1`] = `
+Object {
+  "graphql": Object {
+    "query": "mutation ($userId: ID, $invitationToken: String, $accessCode: String) {
+        useInvitation (userId: $userId, invitationToken: $invitationToken, accessCode: $accessCode) {
+          membership {
+            id
+            role
+            community {
+              id
+              name
+              slug
+            }
+          }
+          error
+        }
+      }",
+    "variables": Object {
+      "accessCode": undefined,
+      "invitationToken": undefined,
+      "userId": Object {
+        "accessCode": "accesstoken",
+        "invitationToken": "invitationtoken",
+      },
+    },
+  },
+  "meta": Object {
+    "extractModel": Array [
+      Object {
+        "getRoot": [Function],
+        "modelName": "Membership",
+      },
+    ],
+  },
+  "type": "JoinCommunity/USE_INVITATION",
+}
+`;

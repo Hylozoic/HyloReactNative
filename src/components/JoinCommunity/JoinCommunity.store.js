@@ -1,9 +1,10 @@
-import { get } from 'lodash/fp'
+import { get, omit } from 'lodash/fp'
 
 export const MODULE_NAME = 'JoinCommunity'
 
 export const SET_INVITATION_CODES = `${MODULE_NAME}/SET_INVITATION_CODES`
 export const USE_INVITATION = `${MODULE_NAME}/USE_INVITATION`
+export const RESET_INVITATION = `${MODULE_NAME}/RESET_INVITATION`
 
 export const defaultState = {}
 

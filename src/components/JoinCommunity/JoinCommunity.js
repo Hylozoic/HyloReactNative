@@ -1,20 +1,19 @@
 // dispatchProps.useInvitation(userId, {invitationToken, accessCode})
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import Loading from '../Loading'
 
 export default class JoinCommunity extends Component {
-  componentWillMount () {
-    this.props.useInvitation().then(result => this.props.goToCommunity())
+  static propTypes = {
+    useInvitation: PropTypes.func.isRequired,
+    goToCommunity: PropTypes.func.isRequired,
+    navigation: PropTypes.object.isRequired
   }
 
-  // TODO: This is in alternative to using the promise above in cWillMount
-  //       Test this more idiomatic option to see if it provides any
-  //       advantages or works the same.
-  // componentWillReceiveProps (nextProps) {
-  //   if (!this.props.communityId && nextProps.communityId) {
-  //     this.props.goToCommunity()
-  //   }
-  // }
+  componentWillMount () {
+    return this.props.useInvitation()
+    .then(this.props.goToCommunity)
+  }
 
   render () {
     return <Loading />
