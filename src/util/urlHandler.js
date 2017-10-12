@@ -1,5 +1,4 @@
 import { Linking } from 'react-native'
-
 export default function urlHandler (url, showMember, showTopic, slug) {
   const communityRoute = `/c/${slug}/`
   const variableRoute = url.substring(communityRoute.length)
