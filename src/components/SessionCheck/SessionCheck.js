@@ -33,15 +33,16 @@ export default class SessionCheck extends React.Component {
     }
   }
 
+  componentWillMount () {
+    // Universal Linking - set entryURL when app is closed (initial) or woken up
+    Linking.getInitialURL().then(url => this._handleSetEntryURL(url))
+    Linking.addEventListener('url', ({ url }) => this._handleSetEntryURL(url))
+  }
+
   componentDidMount () {
     const { initOneSignal, checkSession } = this.props
     checkSession()
     initOneSignal()
-    // Universal Linking - set entryURL when app is closed (initial) or woken up
-    Linking.getInitialURL().then(url => {
-      return this._handleOpenURL(url)
-    })
-    Linking.addEventListener('url', ({ url }) => this._handleOpenURL(url))
   }
 
   componentWillUpdate (nextProps) {
@@ -50,23 +51,28 @@ export default class SessionCheck extends React.Component {
   }
 
   componentDidUpdate (prevProps) {
-    const { entryURL, resetEntryURL, currentUser, loggedIn } = this.props
-    if (loggedIn && (currentUser !== prevProps.currentUser)) {
+    const { loading, entryURL, resetEntryURL, currentUser, loggedIn } = this.props
+    const loadingCompleteEvent = !loading && loading !== prevProps.loading
+    const newEntryURLEvent = entryURL && entryURL !== prevProps.entryURL
+    const currentUserLoadedEvent = loggedIn && (currentUser !== prevProps.currentUser)
+    if (loadingCompleteEvent && !loggedIn && entryURL) {
+      this.navigator._handleOpenURL(entryURL)
+    } else if (newEntryURLEvent && !loading) {
+      this.navigator._handleOpenURL(entryURL)
+    } else if (currentUserLoadedEvent && entryURL) {
       // NOTE: For now this is going to try and route for ALL entry URLs
       // it the case of CheckInvitation / JoinCommunity this will be fine
       // if there are other overlapping routes between LoginNavigator
       // and RootNavigator in which the LoginNavigator route was the final
       // destination this could cause an unexpected behaviour.
-      if (entryURL) {
-        resetEntryURL()
-        this.navigator._handleOpenURL(entryURL)
-      }
+      resetEntryURL()
+      this.navigator._handleOpenURL(entryURL)
     }
   }
 
   componentWillUnmount () {
     // Universal Linking - remove url listener
-    Linking.removeEventListener('url', this._handleOpenURL)
+    Linking.removeEventListener('url', this._setEntryURL)
   }
 
   // NOTE: The combination of the obscuring INTERAL_ROUTE_URI_PREFIX constant
@@ -76,12 +82,11 @@ export default class SessionCheck extends React.Component {
   // one as we've done below. This system gives us a place to do our
   // own handling of URLs and most importantly to stop them from being handled
   // entirely in some cases.
-  _handleOpenURL = (appURL) => {
+  _handleSetEntryURL = (appURL) => {
     const { path } = URL.parse(appURL)
     if (path) {
       const interalRoutingURL = INTERAL_ROUTE_URI_PREFIX + path.slice(1)
       this.props.setEntryURL(interalRoutingURL)
-      this.navigator && this.navigator._handleOpenURL(interalRoutingURL)
     }
   }
 

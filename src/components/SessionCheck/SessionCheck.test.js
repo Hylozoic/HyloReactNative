@@ -22,7 +22,7 @@ jest.mock('Linking', () => ({
 
 const defaultRequiredProps = {
   loading: false,
-  loggedIn: false,
+  loggedIn: undefined,
   currentUser: null,
   checkSession: () => {},
   initOneSignal: () => {},
@@ -118,25 +118,81 @@ describe('SessionCheck component', () => {
     })
   })
 
-  test('componentDidUpdate', () => {
-    const testProps = testPropsSetup({
-      entryURL: 'anything',
-      loggedIn: true,
-      currentUser: {},
-      resetEntryURL: jest.fn()
+  // componentDidUpdate (prevProps) {
+  //   const { loading, entryURL, resetEntryURL, currentUser, loggedIn } = this.props
+  //   const loadingCompleteEvent = !loading && loading !== prevProps.loading
+  //   const newEntryURLEvent = entryURL && entryURL !== prevProps.entryURL
+  //   const currentUserLoadedEvent = loggedIn && (currentUser !== prevProps.currentUser)
+  //   if (loadingCompleteEvent && !loggedIn && entryURL) {
+  //     this.navigator._handleOpenURL(entryURL)
+  //   }
+  //   if (newEntryURLEvent && !loading) {
+  //     this.navigator._handleOpenURL(entryURL)
+  //   }
+  //   if (currentUserLoadedEvent && entryURL) {
+  //     // NOTE: For now this is going to try and route for ALL entry URLs
+  //     // it the case of CheckInvitation / JoinCommunity this will be fine
+  //     // if there are other overlapping routes between LoginNavigator
+  //     // and RootNavigator in which the LoginNavigator route was the final
+  //     // destination this could cause an unexpected behaviour.
+  //     resetEntryURL()
+  //     this.navigator._handleOpenURL(entryURL)
+  //   }
+  // }
+  describe('componentDidUpdate', () => {
+    it('should route to an initial entryURL exactly when loading is complete and logged-out', () => {
+      const prevProps = testPropsSetup()
+      const testProps = testPropsSetup({
+        loading: false,
+        loggedIn: false,
+        entryURL: 'http://anything.com/any/path'
+      })
+      const instance = ReactTestRenderer.create(<SessionCheck {...testProps} />).getInstance()
+      instance.navigator = {
+        _handleOpenURL: jest.fn()
+      }
+      instance.componentDidUpdate(prevProps)
+      expect(instance.navigator._handleOpenURL).toHaveBeenCalledWith(testProps.entryURL)
     })
-    const prevProps = testPropsSetup()
-    const instance = ReactTestRenderer.create(<SessionCheck {...testProps} />).getInstance()
-    const navigator = {
-      _handleOpenURL: jest.fn()
-    }
-    instance.navigator = navigator
-    instance.componentDidUpdate(prevProps)
-    expect(navigator._handleOpenURL).toHaveBeenCalledWith(testProps.entryURL)
-    expect(testProps.resetEntryURL).toHaveBeenCalled()
+
+    it('should route to a new entryURL if not loading and the user is logged-out', () => {
+      const prevProps = testPropsSetup({
+        loading: true
+      })
+      const testProps = testPropsSetup({
+        loading: false,
+        loggedIn: false,
+        entryURL: 'http://anything.com/any/path'
+      })
+      const instance = ReactTestRenderer.create(<SessionCheck {...testProps} />).getInstance()
+      instance.navigator = {
+        _handleOpenURL: jest.fn()
+      }
+      instance.componentDidUpdate(prevProps)
+      expect(instance.navigator._handleOpenURL).toHaveBeenCalledWith(testProps.entryURL)
+    })
+
+    it('should route to the entryURL and then reset it when the currentUser has completed loading', () => {
+      const prevProps = testPropsSetup({
+        entryURL: 'http://anything.com/any/path'
+      })
+      const testProps = testPropsSetup({
+        loggedIn: true,
+        currentUser: {id: 1},
+        entryURL: 'http://anything.com/any/path',
+        resetEntryURL: jest.fn()
+      })
+      const instance = ReactTestRenderer.create(<SessionCheck {...testProps} />).getInstance()
+      instance.navigator = {
+        _handleOpenURL: jest.fn()
+      }
+      instance.componentDidUpdate(prevProps)
+      expect(testProps.resetEntryURL).toHaveBeenCalled()
+      expect(instance.navigator._handleOpenURL).toHaveBeenCalledWith(testProps.entryURL)
+    })
   })
 
-  test('_handleOpenURL', () => {
+  test('_handleSetEntryURL', () => {
     const testProps = testPropsSetup({
       setEntryURL: jest.fn()
     })
@@ -144,13 +200,8 @@ describe('SessionCheck component', () => {
     const path = 'any/path'
     const linkingURL = `anything://ANYTHING.AT.ALL/${path}`
     const internalURL = `${INTERAL_ROUTE_URI_PREFIX}${path}`
-    const navigator = {
-      _handleOpenURL: jest.fn()
-    }
-    instance.navigator = navigator
-    instance._handleOpenURL(linkingURL)
+    instance._handleSetEntryURL(linkingURL)
     expect(testProps.setEntryURL).toHaveBeenCalledWith(internalURL)
-    expect(navigator._handleOpenURL).toHaveBeenCalledWith(internalURL)
   })
 
   test('that _handleChange changes state value for currentTab when changed', () => {
