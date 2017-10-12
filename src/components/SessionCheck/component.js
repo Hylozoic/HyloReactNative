@@ -1,9 +1,8 @@
 import React from 'react'
-import { Text, View, Alert, Linking } from 'react-native'
+import { Alert, Linking } from 'react-native'
 import LoggedInRoot from '../LoggedInRoot'
 import LoginNavigator from '../LoginNavigator'
 import Loading from '../Loading'
-import mixins from '../../style/mixins'
 import { get } from 'lodash/fp'
 import { isIOS } from 'util/platform'
 
