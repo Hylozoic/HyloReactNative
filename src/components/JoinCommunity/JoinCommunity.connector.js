@@ -4,8 +4,7 @@ import getMe from '../../store/selectors/getMe'
 import { NavigationActions } from 'react-navigation'
 import {
   getNewMembership,
-  useInvitation,
-  resetInvitationCodes
+  useInvitation
 } from './JoinCommunity.store'
 import getNavigationParam from '../../store/selectors/getNavigationParam'
 
@@ -24,8 +23,7 @@ export function mapStateToProps (state, props) {
 
 export function mapDispatchToProps (dispatch, props) {
   return {
-    useInvitation: (user, invitationCodes) => dispatch(useInvitation(user, invitationCodes)),
-    resetInvitationCodes: () => dispatch(resetInvitationCodes())
+    useInvitation: (user, invitationCodes) => dispatch(useInvitation(user, invitationCodes))
   }
 }
 

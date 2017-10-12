@@ -51,7 +51,7 @@ export default function reducer (state = defaultState, action) {
   const { type, payload } = action
   switch (type) {
     case USE_INVITATION:
-      return {...state, ...payload.data.useInvitation, invitationCodes: null}
+      return {...state, ...payload.data.useInvitation}
   }
   return state
 }
