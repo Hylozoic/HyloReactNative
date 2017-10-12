@@ -10,6 +10,7 @@ jest.mock('react-navigation', () => {})
 jest.mock('../RootNavigator', () => 'RootNavigator')
 jest.mock('../LoginNavigator', () => 'LoginNavigator')
 jest.mock('react-native-aws3')
+jest.mock('react-native-device-info')
 
 const actions = {
   checkSession: () => {}

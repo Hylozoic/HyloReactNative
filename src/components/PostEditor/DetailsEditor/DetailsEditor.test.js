@@ -2,6 +2,8 @@ import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import DetailsEditor from './DetailsEditor'
 
+jest.mock('react-native-device-info')
+
 const navigation = {
   state: {
     params: {

@@ -3,6 +3,8 @@ import ReactShallowRenderer from 'react-test-renderer/shallow'
 // import TestRenderer from 'react-test-renderer'
 import PostEditor, { SectionLabel, TypeButton } from './PostEditor'
 
+jest.mock('react-native-device-info')
+
 describe('PostEditor', () => {
   it('renders a new editor correctly', () => {
     const renderer = new ReactShallowRenderer()

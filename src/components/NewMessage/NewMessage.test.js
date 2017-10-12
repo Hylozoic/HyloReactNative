@@ -6,6 +6,8 @@ import
   NewMessage, { ParticipantInput, Participant, ContactList, ContactRow, MessagePrompt }
 from './NewMessage'
 
+jest.mock('react-native-device-info')
+
 describe('NewMessage', () => {
   it('renders correctly', () => {
     const renderer = new ReactShallowRenderer()

@@ -1,5 +1,7 @@
 import { mapStateToProps, mapDispatchToProps } from './connector.js'
 
+jest.mock('react-native-device-info')
+
 describe('mapStateToProps', () => {
   it('returns the right keys', () => {
     const state = {

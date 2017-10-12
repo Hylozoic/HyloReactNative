@@ -5,6 +5,8 @@ import ReactTestRenderer from 'react-test-renderer'
 
 import Thread from './Thread'
 
+jest.mock('react-native-device-info')
+
 describe('Thread', () => {
   let props
 

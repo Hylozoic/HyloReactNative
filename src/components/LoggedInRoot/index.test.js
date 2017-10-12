@@ -7,6 +7,8 @@ jest.mock('react-native-zss-rich-text-editor')
 jest.mock('react-native-onesignal', () => ({
   getPermissionSubscriptionState: jest.fn(() => Promise.resolve({userId: 5}))
 }))
+jest.mock('react-native-device-info')
+
 
 it('renders as expected', () => {
   const renderer = new ReactShallowRenderer()
