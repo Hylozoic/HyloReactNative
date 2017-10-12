@@ -13,6 +13,9 @@ export default class SessionCheck extends React.Component {
   }
 
   showAlert = (updateType) => {
+    this.setState({
+      alertActivated: true
+    })
     const storeName = isIOS ? 'App Store' : 'Play Store'
     const APP_STORE_LINK = 'https://itunes.apple.com/app/com.hylo.HyloA'
     const PLAY_STORE_LINK = 'https://play.google.com/store/apps/details?id=com.hylo.reactnative'
@@ -36,19 +39,21 @@ export default class SessionCheck extends React.Component {
     return Alert.alert(
       "There's a new version of Hylo",
       `Update Hylo on the ${storeName} and discover what is new.`,
-      buttons
+      buttons,
+      { cancelable: false }
     )
   }
 
   render () {
     const updateType = get('type', this.props.showUpdateModal)
+    const alertActivated = get('alertActivated', this.state)
     if (this.props.pending) {
       return <View style={mixins.allCentered}>
         <Text>Loading...</Text>
       </View>
     }
 
-    updateType && this.showAlert(updateType)
+    updateType && !alertActivated && this.showAlert(updateType)
 
     switch (this.props.loggedIn) {
       case true:
