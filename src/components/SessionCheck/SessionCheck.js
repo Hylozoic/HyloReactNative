@@ -53,20 +53,23 @@ export default class SessionCheck extends React.Component {
   componentDidUpdate (prevProps) {
     const { loading, entryURL, resetEntryURL, currentUser, loggedIn } = this.props
     const loadingCompleteEvent = !loading && loading !== prevProps.loading
-    const newEntryURLEvent = entryURL && entryURL !== prevProps.entryURL
+    const entryURLChangeEvent = entryURL !== prevProps.entryURL
     const currentUserLoadedEvent = loggedIn && (currentUser !== prevProps.currentUser)
-    if (loadingCompleteEvent && !loggedIn && entryURL) {
+    const shouldForwardToEntryURL = (
+      (loadingCompleteEvent && !loggedIn) ||
+      (entryURLChangeEvent && !loading) ||
+      currentUserLoadedEvent
+    )
+    if (entryURL && shouldForwardToEntryURL) {
       this.navigator._handleOpenURL(entryURL)
-    } else if (newEntryURLEvent && !loading) {
-      this.navigator._handleOpenURL(entryURL)
-    } else if (currentUserLoadedEvent && entryURL) {
+    }
+    if (entryURL && currentUserLoadedEvent) {
       // NOTE: For now this is going to try and route for ALL entry URLs
       // it the case of CheckInvitation / JoinCommunity this will be fine
       // if there are other overlapping routes between LoginNavigator
       // and RootNavigator in which the LoginNavigator route was the final
       // destination this could cause an unexpected behaviour.
       resetEntryURL()
-      this.navigator._handleOpenURL(entryURL)
     }
   }
 
