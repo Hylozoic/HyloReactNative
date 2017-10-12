@@ -35,6 +35,7 @@ export default class DetailsEditor extends React.Component {
 
 const styles = {
   container: {
+    backgroundColor: 'white',
     flex: 1
   }
 }
