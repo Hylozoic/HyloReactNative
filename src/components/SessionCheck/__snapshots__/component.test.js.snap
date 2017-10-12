@@ -17,4 +17,6 @@ exports[`matches last snapshot loggedIn 1`] = `<Connect(LoggedInRoot) />`;
 
 exports[`matches last snapshot not loggedIn 1`] = `<LoginNavigator />`;
 
-exports[`matches last snapshot with a version update 1`] = `<LoginNavigator />`;
+exports[`updateModal matches last snapshot with a forced version update 1`] = `<LoginNavigator />`;
+
+exports[`updateModal matches last snapshot with a suggested version update 1`] = `<LoginNavigator />`;
