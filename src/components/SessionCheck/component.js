@@ -2,6 +2,7 @@ import React from 'react'
 import { Text, View, Alert, Linking } from 'react-native'
 import LoggedInRoot from '../LoggedInRoot'
 import LoginNavigator from '../LoginNavigator'
+import Loading from '../Loading'
 import mixins from '../../style/mixins'
 import { get } from 'lodash/fp'
 import { isIOS } from 'util/platform'
@@ -61,9 +62,7 @@ export default class SessionCheck extends React.Component {
     const updateType = get('type', this.props.showUpdateModal)
     const allowShowAlert = get('allowShowAlert', this.state)
     if (this.props.pending) {
-      return <View style={mixins.allCentered}>
-        <Text>Loading...</Text>
-      </View>
+      return <Loading />
     }
 
     updateType && allowShowAlert && this.showAlert(updateType)
@@ -74,9 +73,7 @@ export default class SessionCheck extends React.Component {
       case false:
         return <LoginNavigator />
       default:
-        return <View style={mixins.allCentered}>
-          <Text>Loading...</Text>
-        </View>
+        return <Loading />
     }
   }
 }
