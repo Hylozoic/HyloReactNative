@@ -105,7 +105,7 @@ describe('SessionCheck component', () => {
       expect(testProps.fetchCurrentUser).toHaveBeenCalled()
     })
 
-    it('shouldn\'t fetchCurrentUser if loggedIn and there is a currentUser', () => {
+    it("shouldn't fetchCurrentUser if loggedIn and there is a currentUser", () => {
       const testProps = testPropsSetup({
         pending: false,
         loggedIn: true,
