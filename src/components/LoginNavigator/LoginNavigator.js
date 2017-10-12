@@ -18,7 +18,7 @@ export default StackNavigator({
     screen: CheckInvitation,
     path: 'h/use-invitation'
   },
-  CheckInvitationOpen: {
+  CheckInvitationAccessCode: {
     screen: CheckInvitation,
     path: 'c/:slug/join/:accessCode'
   },

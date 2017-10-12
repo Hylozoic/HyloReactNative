@@ -1,13 +1,11 @@
 import getIsLoggedIn from './getIsLoggedIn'
 
-describe('getIsLoggedIn', () => {
-  it('is being explored', () => {
-    const isLoggedIn = 'anything'
-    const testProps = {
-      session: {
-        isLoggedIn
-      }
+it('gets current logged in status', () => {
+  const isLoggedIn = 'anything'
+  const testProps = {
+    session: {
+      isLoggedIn
     }
-    expect(getIsLoggedIn(testProps)).toEqual(isLoggedIn)
-  })
+  }
+  expect(getIsLoggedIn(testProps)).toEqual(isLoggedIn)
 })

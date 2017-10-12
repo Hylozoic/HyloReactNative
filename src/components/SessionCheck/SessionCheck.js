@@ -9,7 +9,7 @@ import LoginNavigator from '../LoginNavigator'
 import SocketListener from '../SocketListener'
 import RootNavigator from '../RootNavigator'
 
-export const INTERAL_ROUTE_URI_PREFIX = 'internalRouting://'
+export const INTERNAL_ROUTE_URI_PREFIX = 'internalRouting://'
 
 const tabNames = ['Home', 'Members', 'Topics']
 
@@ -78,7 +78,7 @@ export default class SessionCheck extends React.Component {
     Linking.removeEventListener('url', this._setEntryURL)
   }
 
-  // NOTE: The combination of the obscuring INTERAL_ROUTE_URI_PREFIX constant
+  // NOTE: The combination of the obscuring INTERNAL_ROUTE_URI_PREFIX constant
   // and the event handler here is a work around for issues in the
   // StackNavigator/StackRouter handling of these same events, especially
   // when not using a single root StackNavigator but a switching double rooted
@@ -88,7 +88,7 @@ export default class SessionCheck extends React.Component {
   _handleSetEntryURL = (appURL) => {
     const { path } = URL.parse(appURL)
     if (path) {
-      const interalRoutingURL = INTERAL_ROUTE_URI_PREFIX + path.slice(1)
+      const interalRoutingURL = INTERNAL_ROUTE_URI_PREFIX + path.slice(1)
       this.props.setEntryURL(interalRoutingURL)
     }
   }
@@ -128,13 +128,13 @@ export default class SessionCheck extends React.Component {
     const { loading, loggedIn, currentUser } = this.props
     if (!loading) {
       if (!loggedIn) {
-        return <LoginNavigator uriPrefix={INTERAL_ROUTE_URI_PREFIX}
+        return <LoginNavigator uriPrefix={INTERNAL_ROUTE_URI_PREFIX}
           ref={nav => { this.navigator = nav }} />
       }
       if (currentUser) {
         return <View style={{flex: 1}}>
           <RootNavigator
-            uriPrefix={INTERAL_ROUTE_URI_PREFIX}
+            uriPrefix={INTERNAL_ROUTE_URI_PREFIX}
             onNavigationStateChange={this._handleChange}
             screenProps={this.state}
             ref={nav => { this.navigator = nav }} />

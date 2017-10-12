@@ -17,7 +17,7 @@ export default class CheckInvitation extends Component {
     return checkInvitation()
     // NOTE: if something fails in the process of checking the
     // invitation the user will be forwarded on to the Signup
-    // page given that we don't know if their is an issue (expired)
+    // page given that we don't know if there is an issue (expired)
     // with the invite or if there was just some other issue.
     // SO in this case the user will still be prompted to
     // continue to signup (or login) and JoinCommunity will

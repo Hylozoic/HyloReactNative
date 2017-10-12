@@ -2,7 +2,7 @@ import 'react-native'
 import React from 'react'
 import ReactTestRenderer from 'react-test-renderer'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
-import SessionCheck, { INTERAL_ROUTE_URI_PREFIX } from './SessionCheck'
+import SessionCheck, { INTERNAL_ROUTE_URI_PREFIX } from './SessionCheck'
 
 jest.mock('../RootNavigator', () => 'RootNavigator')
 jest.mock('../LoginNavigator', () => 'LoginNavigator')
@@ -118,27 +118,6 @@ describe('SessionCheck component', () => {
     })
   })
 
-  // componentDidUpdate (prevProps) {
-  //   const { loading, entryURL, resetEntryURL, currentUser, loggedIn } = this.props
-  //   const loadingCompleteEvent = !loading && loading !== prevProps.loading
-  //   const newEntryURLEvent = entryURL && entryURL !== prevProps.entryURL
-  //   const currentUserLoadedEvent = loggedIn && (currentUser !== prevProps.currentUser)
-  //   if (loadingCompleteEvent && !loggedIn && entryURL) {
-  //     this.navigator._handleOpenURL(entryURL)
-  //   }
-  //   if (newEntryURLEvent && !loading) {
-  //     this.navigator._handleOpenURL(entryURL)
-  //   }
-  //   if (currentUserLoadedEvent && entryURL) {
-  //     // NOTE: For now this is going to try and route for ALL entry URLs
-  //     // it the case of CheckInvitation / JoinCommunity this will be fine
-  //     // if there are other overlapping routes between LoginNavigator
-  //     // and RootNavigator in which the LoginNavigator route was the final
-  //     // destination this could cause an unexpected behaviour.
-  //     resetEntryURL()
-  //     this.navigator._handleOpenURL(entryURL)
-  //   }
-  // }
   describe('componentDidUpdate', () => {
     it('should route to an initial entryURL exactly when loading is complete and logged-out', () => {
       const prevProps = testPropsSetup()
@@ -199,7 +178,7 @@ describe('SessionCheck component', () => {
     const instance = ReactTestRenderer.create(<SessionCheck {...testProps} />).getInstance()
     const path = 'any/path'
     const linkingURL = `anything://ANYTHING.AT.ALL/${path}`
-    const internalURL = `${INTERAL_ROUTE_URI_PREFIX}${path}`
+    const internalURL = `${INTERNAL_ROUTE_URI_PREFIX}${path}`
     instance._handleSetEntryURL(linkingURL)
     expect(testProps.setEntryURL).toHaveBeenCalledWith(internalURL)
   })
