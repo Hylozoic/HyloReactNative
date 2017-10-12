@@ -11,6 +11,7 @@ Object {
   "removeParticipant": [Function],
   "setMessage": [Function],
   "setParticipantInput": [Function],
+  "setParticipants": [Function],
 }
 `;
 

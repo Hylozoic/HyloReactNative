@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PostEditor mapDispatchToProps maps the action generators 1`] = `
+Object {
+  "editDetails": [Function],
+  "save": [Function],
+  "setDetails": [Function],
+}
+`;
+
+exports[`PostEditor mapDispatchToProps maps the action generators 2`] = `
+Array [
+  Array [
+    Object {
+      "payload": "details",
+      "type": "PostEditor/SET_DETAILS",
+    },
+  ],
+]
+`;

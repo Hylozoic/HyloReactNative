@@ -2,11 +2,11 @@
 
 exports[`mapDispatchToProps maps the action generators 1`] = `
 Object {
-  "actions": Object {
-    "checkSession": [Function],
-    "resetEntryURL": [Function],
-    "setEntryURL": [Function],
-  },
+  "checkSession": [Function],
+  "fetchCurrentUser": [Function],
+  "initOneSignal": [Function],
+  "resetEntryURL": [Function],
+  "setEntryURL": [Function],
 }
 `;
 
@@ -28,7 +28,10 @@ Array [
 
 exports[`mapStateToProps returns the right keys 1`] = `
 Object {
-  "entryURL": undefined,
+  "currentUser": undefined,
+  "entryURL": "http://www.hylo.com/a/path",
+  "loading": false,
   "loggedIn": true,
+  "pending": false,
 }
 `;

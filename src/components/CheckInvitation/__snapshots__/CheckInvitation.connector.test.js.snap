@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mapDispatchToProps matches the last snapshot 1`] = `
+Object {
+  "checkInvitation": [Function],
+  "resetEntryURL": [Function],
+}
+`;
+
+exports[`mapStateToProps maps the state... to the props 1`] = `
+Object {
+  "invitationCodes": Object {
+    "accessCode": "anyaccesscode",
+    "invitationToken": "anytoken",
+  },
+  "isValidInvite": true,
+  "navToInviteExpired": [Function],
+  "navToSignup": [Function],
+  "pending": undefined,
+}
+`;

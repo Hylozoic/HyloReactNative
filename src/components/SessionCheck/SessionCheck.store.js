@@ -1,5 +1,4 @@
 import { getSessionCookie } from '../../util/session'
-import { createSelector } from 'reselect'
 import { get } from 'lodash/fp'
 
 export const CHECK_SESSION = 'CHECK_SESSION'

@@ -5,6 +5,7 @@ import {
   setParticipantInput,
   addParticipant,
   removeParticipant,
+  setParticipants,
   getParticipants,
   getParticipantIds,
   fetchSuggestions,
@@ -52,6 +53,7 @@ export function mapDispatchToProps (dispatch, props) {
       dispatch(fetchSuggestions(autocomplete))),
     ...bindActionCreators({
       setParticipantInput,
+      setParticipants,
       addParticipant,
       removeParticipant,
       fetchContacts,
@@ -83,12 +85,18 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
         })
       })
 
+  const participantsFromParams = get('state.params.participants', navigation)
+  const loadParticipantsFromParams = participantsFromParams
+    ? () => dispatchProps.setParticipants(participantsFromParams)
+    : () => {}
+
   return {
     ...stateProps,
     ...dispatchProps,
     ...ownProps,
     fetchSuggestions,
-    createMessage
+    createMessage,
+    loadParticipantsFromParams
   }
 }
 

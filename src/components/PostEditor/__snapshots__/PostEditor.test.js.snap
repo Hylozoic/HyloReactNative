@@ -1,0 +1,85 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PostEditor renders a new editor correctly 1`] = `
+<Unknown
+  behavior="padding"
+  keyboardVerticalOffset={64}
+>
+  <ScrollViewMock>
+    <View>
+      <SectionLabel>
+        What are you posting today?
+      </SectionLabel>
+      <View>
+        <TypeButton
+          onPress={[Function]}
+          selected={true}
+          type="discussion"
+        />
+        <TypeButton
+          onPress={[Function]}
+          selected={false}
+          type="request"
+        />
+        <TypeButton
+          onPress={[Function]}
+          selected={false}
+          type="offer"
+        />
+      </View>
+      <SectionLabel>
+        Title
+      </SectionLabel>
+      <View>
+        <TextInput
+          onChangeText={[Function]}
+          placeholder="What do you want to discuss?"
+          underlineColorAndroid="transparent"
+          value=""
+        />
+      </View>
+      <SectionLabel>
+        Details
+      </SectionLabel>
+      <TouchableOpacity
+        activeOpacity={0.2}
+        focusedOpacity={0.7}
+        onPress={[Function]}
+      >
+        <Details
+          details={undefined}
+          placeholder="What else should we know?"
+        />
+      </TouchableOpacity>
+    </View>
+  </ScrollViewMock>
+</Unknown>
+`;
+
+exports[`SectionLabel renders correctly 1`] = `
+<Text
+  accessible={true}
+  allowFontScaling={true}
+  disabled={false}
+  ellipsizeMode="tail"
+>
+  Label
+</Text>
+`;
+
+exports[`TypeButton renders correctly 1`] = `
+<TouchableOpacity
+  activeOpacity={0.2}
+  focusedOpacity={0.7}
+  onPress={[Function]}
+>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    disabled={false}
+    ellipsizeMode="tail"
+  >
+    DISCUSSION
+  </Text>
+</TouchableOpacity>
+`;

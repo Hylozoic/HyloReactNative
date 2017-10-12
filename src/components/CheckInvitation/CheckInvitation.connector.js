@@ -1,30 +1,31 @@
 import { connect } from 'react-redux'
-import { isNil } from 'lodash'
 import {
-   getValidInvite, checkInvitation, CHECK_INVITATION
+   getValidInvite,
+   createResetGoToNavAction,
+   checkInvitation,
+   CHECK_INVITATION
 } from './CheckInvitation.store'
-// import { setInvitationCodes } from '../JoinCommunity/JoinCommunity.store'
+import { resetEntryURL } from '../SessionCheck/SessionCheck.store'
 import getNavigationParam from '../../store/selectors/getNavigationParam'
 
 export function mapStateToProps (state, props) {
-  const isValidInvite = getValidInvite(state)
-  const invitationCheckPending = state.pending && state.pending[CHECK_INVITATION]
-  const invitationCodes = {
-    invitationToken: getNavigationParam('token', state, props) ||
-      getNavigationParam('invitationToken', state, props),
-    accessCode: getNavigationParam('accessCode', state, props)
-  }
+  const { navigation } = props
   return {
-    invitationCodes,
-    invitationCheckPending,
-    hasCheckedValidInvite: !isNil(isValidInvite),
-    isValidInvite
+    pending: state.pending && state.pending[CHECK_INVITATION],
+    invitationCodes: {
+      invitationToken: getNavigationParam('token', state, props) ||
+        getNavigationParam('invitationToken', state, props),
+      accessCode: getNavigationParam('accessCode', state, props)
+    },
+    isValidInvite: getValidInvite(state),
+    navToSignup: () => navigation.dispatch(createResetGoToNavAction('Signup')),
+    navToInviteExpired: () => navigation.dispatch(createResetGoToNavAction('InviteExpired'))
   }
 }
 
 export const mapDispatchToProps = {
-  checkInvitation
-  // setInvitationCodes
+  checkInvitation,
+  resetEntryURL
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
@@ -32,8 +33,7 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     ...stateProps,
     ...dispatchProps,
     ...ownProps,
-    checkInvitation: () => dispatchProps.checkInvitation(stateProps.invitationCodes),
-    setInvitationCodes: () => dispatchProps.setInvitationCodes(stateProps.invitationCodes)
+    checkInvitation: () => dispatchProps.checkInvitation(stateProps.invitationCodes)
   }
 }
 

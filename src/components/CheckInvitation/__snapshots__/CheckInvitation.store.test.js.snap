@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`checkInvitation 1`] = `
+Object {
+  "graphql": Object {
+    "query": "query ($invitationToken: String, $accessCode: String) {
+        checkInvitation (invitationToken: $invitationToken, accessCode: $accessCode) {
+          valid
+        }
+      }",
+    "variables": Object {
+      "accessCode": "accesstoken",
+      "invitationToken": "invitationtoken",
+    },
+  },
+  "type": "CheckInvitation/CHECK_INVITATION",
+}
+`;
+
+exports[`createResetGoToNavAction 1`] = `
+Object {
+  "actions": Array [
+    Object {
+      "routeName": "anyroutename",
+    },
+  ],
+  "index": 0,
+  "key": null,
+}
+`;

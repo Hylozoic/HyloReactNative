@@ -1,11 +1,57 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`matches snapshot 1`] = `
-<NavigationContainer
-  onNavigationStateChange={[Function]}
-  screenProps={
+<Navigator
+  navigation={
     Object {
-      "currentTabName": "Home",
+      "dispatch": [Function],
+      "goBack": [Function],
+      "navigate": [Function],
+      "setParams": [Function],
+      "state": Object {
+        "index": 0,
+        "routes": Array [
+          Object {
+            "index": 0,
+            "routeName": "Main",
+            "routes": Array [
+              Object {
+                "index": 0,
+                "routeName": "DrawerClose",
+                "routes": Array [
+                  Object {
+                    "index": 0,
+                    "routeName": "Home",
+                    "routes": Array [
+                      Object {
+                        "index": 0,
+                        "routeName": "Home",
+                        "routes": Array [
+                          Object {
+                            "routeName": "Home",
+                          },
+                        ],
+                      },
+                      Object {
+                        "index": 0,
+                        "routeName": "Members",
+                        "routes": Array [
+                          Object {
+                            "routeName": "Members",
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                ],
+              },
+              Object {
+                "routeName": "DrawerOpen",
+              },
+            ],
+          },
+        ],
+      },
     }
   }
   uriPrefix="lala"

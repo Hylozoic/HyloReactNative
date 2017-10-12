@@ -1,3 +1,4 @@
+import { NavigationActions } from 'react-navigation'
 import { get } from 'lodash/fp'
 
 export const MODULE_NAME = 'CheckInvitation'
@@ -21,6 +22,16 @@ export function checkInvitation (invitationCodes) {
   }
 }
 
+export function createResetGoToNavAction (routeName) {
+  return NavigationActions.reset({
+    key: null,
+    index: 0,
+    actions: [
+      NavigationActions.navigate({routeName})
+    ]
+  })
+}
+
 export function getValidInvite (state) {
   return get(`${MODULE_NAME}.valid`, state)
 }
@@ -32,8 +43,6 @@ export default function reducer (state = defaultState, action) {
   switch (type) {
     case CHECK_INVITATION:
       return {...state, ...payload.data.checkInvitation}
-    // case USE_INVITATION:
-    //   return {...state, ...payload.data.useInvitation}
   }
   return state
 }
