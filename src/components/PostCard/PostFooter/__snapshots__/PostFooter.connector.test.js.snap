@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mapDispatchToProps maps the action generators 1`] = `
+Object {
+  "vote": [Function],
+}
+`;
+
+exports[`mapDispatchToProps maps the action generators 2`] = `
+Array [
+  Array [
+    Object {
+      "graphql": Object {
+        "query": "mutation($postId: ID, $isUpvote: Boolean) {
+        vote(postId: $postId, isUpvote: $isUpvote) {
+          id
+          votesTotal
+        }
+      }",
+        "variables": Object {
+          "isUpvote": false,
+          "postId": 10,
+        },
+      },
+      "meta": Object {
+        "isUpvote": false,
+        "optimistic": true,
+        "postId": 10,
+      },
+      "type": "POST_FOOTER_VOTE_ON_POST",
+    },
+  ],
+]
+`;

@@ -1,7 +1,6 @@
 import React from 'react'
 import {
   Button,
-  KeyboardAvoidingView,
   ScrollView,
   Text,
   TextInput,
@@ -15,6 +14,7 @@ import { get } from 'lodash/fp'
 import striptags from 'striptags'
 import { keyboardAvoidingViewProps as kavProps } from 'util/viewHelpers'
 import { decode } from 'ent'
+import KeyboardFriendlyView from '../KeyboardFriendlyView'
 
 export default class PostEditor extends React.Component {
   static contextTypes = {navigate: PropTypes.func}
@@ -62,7 +62,7 @@ export default class PostEditor extends React.Component {
 
     if (postId && !details) return <Loading />
 
-    return <KeyboardAvoidingView style={styles.container} {...kavProps}>
+    return <KeyboardFriendlyView style={styles.container} {...kavProps}>
       <ScrollView style={styles.scrollContainer}>
         <View style={styles.scrollContent}>
           <SectionLabel>What are you posting today?</SectionLabel>
@@ -87,7 +87,7 @@ export default class PostEditor extends React.Component {
           </TouchableOpacity>
         </View>
       </ScrollView>
-    </KeyboardAvoidingView>
+    </KeyboardFriendlyView>
   }
 }
 
@@ -99,7 +99,7 @@ const titlePlaceholders = {
 
 const detailsPlaceholder = 'What else should we know?'
 
-function SectionLabel ({ children }) {
+export function SectionLabel ({ children }) {
   return <Text style={styles.sectionLabel}>
     {children}
   </Text>
@@ -111,7 +111,7 @@ export function Details ({details, placeholder}) {
   return <Text style={style}>{body}</Text>
 }
 
-function TypeButton ({ type, selected, onPress }) {
+export function TypeButton ({ type, selected, onPress }) {
   const s = styles.typeButton
   return <TouchableOpacity onPress={onPress}
     style={[s.box, selected && s[type].box]}>

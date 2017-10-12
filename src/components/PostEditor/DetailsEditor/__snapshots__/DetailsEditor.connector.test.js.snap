@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DetailsEditor dispatchProps saveChanges should match the latest snapshot 1`] = `
+Object {
+  "payload": Object {
+    "some": "changes",
+  },
+  "type": "PostEditor/SET_DETAILS",
+}
+`;
