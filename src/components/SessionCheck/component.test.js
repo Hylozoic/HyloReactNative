@@ -40,6 +40,14 @@ it('matches last snapshot loggedIn', () => {
   expect(actual).toMatchSnapshot()
 })
 
+it('matches last snapshot pending', () => {
+  const renderer = new ReactShallowRenderer()
+  renderer.render(<SessionCheck pending />)
+  const actual = renderer.getRenderOutput()
+
+  expect(actual).toMatchSnapshot()
+})
+
 describe('updateModal', () => {
   it('matches last snapshot with a forced version update', () => {
     const showUpdateModal = {
