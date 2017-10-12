@@ -157,6 +157,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-device-info')
     compile project(':react-native-linear-gradient')
     compile project(':react-native-background-timer')
     compile project(':react-native-fbsdk')
@@ -180,9 +181,15 @@ dependencies {
 
     // then we re-require the libraries that are needed, but with a precise
     // version requirement
-    compile 'com.google.android.gms:play-services-auth:10.2.1'
-    compile 'com.google.android.gms:play-services-gcm:10.2.1'
-    compile 'com.google.android.gms:play-services-location:10.2.1'
+    compile ('com.google.android.gms:play-services-auth:10.2.1'){
+      force=true
+    }
+    compile ('com.google.android.gms:play-services-gcm:10.2.1'){
+      force=true
+    }
+    compile ('com.google.android.gms:play-services-location:10.2.1'){
+      force=true
+    }
 }
 
 // Run this once to be able to run the application with BUCK
