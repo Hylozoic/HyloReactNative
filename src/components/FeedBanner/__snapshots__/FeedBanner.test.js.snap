@@ -1,5 +1,89 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`FeedBanner has a topic subscribe toggle button 1`] = `
+<View>
+  <Image
+    source={
+      Object {
+        "uri": undefined,
+      }
+    }
+  />
+  <div
+    colors={
+      Array [
+        "rgba(0, 0, 0, 0)",
+        "rgba(0, 0, 0, 0.1)",
+        "rgba(0, 0, 0, 0.3)",
+        "rgba(0, 0, 0, 0.6)",
+      ]
+    }
+  >
+    MockLinearGradient
+  </div>
+  <View>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+      numberOfLines={3}
+    >
+      Earth
+    </Text>
+    <View
+      accessibilityComponentType={undefined}
+      accessibilityLabel={undefined}
+      accessibilityTraits={undefined}
+      accessible={true}
+      collapsable={undefined}
+      hitSlop={
+        Object {
+          "bottom": 10,
+          "left": 10,
+          "right": 10,
+          "top": 10,
+        }
+      }
+      isTVSelectable={true}
+      nativeID={undefined}
+      onLayout={undefined}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      testID={undefined}
+      tvParallaxProperties={undefined}
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={false}
+        disabled={false}
+        ellipsizeMode="tail"
+        style={
+          Array [
+            Object {
+              "color": undefined,
+              "fontSize": 12,
+            },
+            undefined,
+            Object {
+              "fontFamily": "hylo-evo-icons",
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+            },
+          ]
+        }
+      >
+        
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
 exports[`FeedBanner renders correctly with a community and user 1`] = `
 <View>
   <Image
@@ -9,12 +93,23 @@ exports[`FeedBanner renders correctly with a community and user 1`] = `
       }
     }
   />
+  <MockLinearGradient
+    colors={
+      Array [
+        "rgba(0, 0, 0, 0)",
+        "rgba(0, 0, 0, 0.1)",
+        "rgba(0, 0, 0, 0.3)",
+        "rgba(0, 0, 0, 0.6)",
+      ]
+    }
+  />
   <View>
     <Text
       accessible={true}
       allowFontScaling={true}
       disabled={false}
       ellipsizeMode="tail"
+      numberOfLines={3}
     />
   </View>
   <PostPrompt
@@ -41,12 +136,23 @@ exports[`FeedBanner renders correctly with all=true, and no community or user 1`
       }
     }
   />
+  <MockLinearGradient
+    colors={
+      Array [
+        "rgba(0, 0, 0, 0)",
+        "rgba(0, 0, 0, 0.1)",
+        "rgba(0, 0, 0, 0.3)",
+        "rgba(0, 0, 0, 0.6)",
+      ]
+    }
+  />
   <View>
     <Text
       accessible={true}
       allowFontScaling={true}
       disabled={false}
       ellipsizeMode="tail"
+      numberOfLines={3}
     >
       All Communities
     </Text>

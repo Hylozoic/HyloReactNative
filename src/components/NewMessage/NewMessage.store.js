@@ -6,6 +6,7 @@ import { makeGetQueryResults } from 'store/reducers/queryResults'
 export const MODULE_NAME = 'NewMessage'
 export const SET_CONTACT_INPUT = `${MODULE_NAME}/SET_CONTACT_INPUT`
 export const SET_MESSAGE = `${MODULE_NAME}/SET_MESSAGE`
+export const SET_PARTICIPANTS = `${MODULE_NAME}/SET_PARTICIPANTS`
 export const ADD_PARTICIPANT = `${MODULE_NAME}/ADD_PARTICIPANT`
 export const REMOVE_PARTICIPANT = `${MODULE_NAME}/REMOVE_PARTICIPANT`
 export const FETCH_SUGGESTIONS = `${MODULE_NAME}/FETCH_SUGGESTIONS`
@@ -179,7 +180,7 @@ export function createMessage (messageThreadId, text, forNewThread) {
   }
 }
 
-const defaultState = {
+export const defaultState = {
   input: '',
   message: '',
   participants: []
@@ -198,13 +199,17 @@ export default function reducer (state = defaultState, action) {
         ...state,
         message: payload
       }
+    case SET_PARTICIPANTS:
+      return {
+        ...state,
+        participants: payload
+      }
     case ADD_PARTICIPANT:
       return {
         ...state,
         input: '',
         participants: [ ...state.participants, payload ]
       }
-
     case REMOVE_PARTICIPANT:
       if (payload) {
         return {
@@ -227,6 +232,13 @@ export function setMessage (input) {
   return {
     type: SET_MESSAGE,
     payload: input
+  }
+}
+
+export function setParticipants (participantIds) {
+  return {
+    type: SET_PARTICIPANTS,
+    payload: participantIds
   }
 }
 

@@ -33,9 +33,15 @@ exports[`MemberHeader matches the last snapshot 1`] = `
       Jonas
     </Text>
     <View>
-      <Icon
-        name="Messages"
-      />
+      <TouchableOpacity
+        activeOpacity={0.2}
+        focusedOpacity={0.7}
+        onPress={undefined}
+      >
+        <Icon
+          name="Messages"
+        />
+      </TouchableOpacity>
       <MemberMenu
         flagMember={[Function]}
       />
@@ -92,6 +98,7 @@ exports[`MemberProfile doesnt have the flag content option 1`] = `
       <View>
         <MemberHeader
           flagMember={undefined}
+          onPressMessages={undefined}
           person={
             Object {
               "id": 1,
@@ -122,6 +129,7 @@ exports[`MemberProfile matches the last snapshot 1`] = `
       <View>
         <MemberHeader
           flagMember={[Function]}
+          onPressMessages={undefined}
           person={
             Object {
               "id": 1,

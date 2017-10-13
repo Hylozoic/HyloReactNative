@@ -16,6 +16,12 @@ import {
 import {
   CREATE_MESSAGE, CREATE_MESSAGE_PENDING
 } from '../../components/Thread/Thread.store'
+import {
+  TOGGLE_TOPIC_SUBSCRIBE_PENDING
+} from '../../components/Feed/Feed.store'
+import {
+  VOTE_ON_POST_PENDING
+} from '../../components/PostCard/PostFooter/PostFooter.store'
 
 import orm from '../models'
 import ModelExtractor from './ModelExtractor'
@@ -31,11 +37,11 @@ export default function ormReducer (state = {}, action) {
     extractModelsFromAction(action, session)
   }
 
-  var me, skill
+  var me, skill, post
 
   switch (type) {
     case CREATE_COMMENT:
-      const post = session.Post.safeGet({id: meta.postId})
+      post = session.Post.safeGet({id: meta.postId})
       if (!post) break
       post.update({commentsTotal: (post.commentsTotal || 0) + 1})
       break
@@ -98,6 +104,15 @@ export default function ormReducer (state = {}, action) {
       skill = session.Skill.safeGet({name: meta.name})
       if (skill) {
         me.skills.remove(skill.id)
+      }
+      break
+
+    case VOTE_ON_POST_PENDING:
+      post = session.Post.withId(meta.postId)
+      if (post.myVote) {
+        !meta.isUpvote && post.update({myVote: false, votesTotal: (post.votesTotal || 1) - 1})
+      } else {
+        meta.isUpvote && post.update({myVote: true, votesTotal: (post.votesTotal || 0) + 1})
       }
       break
 

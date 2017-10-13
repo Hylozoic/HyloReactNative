@@ -50,10 +50,10 @@ export default {
     alignItems: 'stretch'
   },
   footerContent: {
-    flex: 1
+    flex: 1,
+    marginLeft: 10
   },
   avatar: {
-    marginRight: 10,
     width: 40,
     height: 40,
     borderRadius: 20

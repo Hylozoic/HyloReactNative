@@ -18,7 +18,8 @@ export default {
     minHeight: 100,
     ...containerPadding,
     paddingVertical: 10,
-    alignItems: 'center'
+    alignItems: 'center',
+    marginBottom: 20
   },
   yourSkillsLabel: {
     ...styles.subTitle,

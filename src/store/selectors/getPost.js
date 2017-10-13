@@ -5,9 +5,11 @@ const getPost = ormCreateSelector(
   state => state,
   state => orm.session(state.orm),
   (state, props) => props.id,
-  (state, session, id) => {
+  (state, props) => props.unfiltered,
+  (state, session, id, unfiltered) => {
     try {
       const post = session.Post.get({id})
+      if (unfiltered) return post
       return {
         ...post.ref,
         creator: post.creator,

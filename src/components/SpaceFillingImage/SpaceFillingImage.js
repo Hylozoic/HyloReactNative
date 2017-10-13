@@ -42,7 +42,7 @@ export default class SpaceFillingImage extends React.Component {
   }
 
   render () {
-    const { imageUrl } = this.props
+    const { imageUrl, style } = this.props
     if (!imageUrl) return null
     const { imageWidth, imageHeight, containerWidth } = this.state
     const imageStyle = {
@@ -56,7 +56,7 @@ export default class SpaceFillingImage extends React.Component {
         height: imageHeight * (containerWidth / imageWidth)
       }
     }
-    return <View onLayout={this.setContainerWidth} style={styles.container}>
+    return <View onLayout={this.setContainerWidth} style={[style, styles.container]}>
       {imageWidth < containerWidth && <Image style={blurredImageStyle}
         blurRadius={2}
         source={{uri: imageUrl}} />}

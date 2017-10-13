@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`returns SpaceFillingImage 1`] = `
+<View
+  onLayout={[Function]}
+>
+  <Image
+    source={
+      Object {
+        "uri": "http://foo.com/bar.png",
+      }
+    }
+  />
+</View>
+`;

@@ -1,5 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`mapDispatchToProps matches the last snapshot 1`] = `
+Object {
+  "loginWithFacebook": [Function],
+  "loginWithGoogle": [Function],
+}
+`;
+
 exports[`mapStateToProps maps the state... to the props 1`] = `
 Array [
   Array [
