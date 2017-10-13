@@ -102,7 +102,7 @@ export default class SessionCheck extends React.Component {
           <RootNavigator
             uriPrefix={INTERNAL_ROUTE_URI_PREFIX}
             screenProps={this.state}
-            ref={nav => { this.navigator = nav && nav._wrappedComponent }} />
+            ref={nav => { this.navigator = nav && nav.getWrappedInstance() }} />
           <SocketListener />
         </View>
       }

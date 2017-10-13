@@ -18,6 +18,10 @@ export default function trackCurrentTab (Component) {
       this.state = {currentTabName: 'Home'}
     }
 
+    getWrappedInstance () {
+      return this.wrappedInstance
+    }
+
     // this method is very coupled to the nesting structure for navigators in
     // RootNavigator/index.js
     handleChange = (prevState, newState) => {
@@ -40,7 +44,7 @@ export default function trackCurrentTab (Component) {
 
     render () {
       return <Component
-        ref={wrappedComp => { this._wrappedComponent = wrappedComp }}
+        ref={wrappedInst => { this.wrappedInstance = wrappedInst }}
         {...this.props}
         onNavigationStateChange={this.handleChange}
         screenProps={this.state}
