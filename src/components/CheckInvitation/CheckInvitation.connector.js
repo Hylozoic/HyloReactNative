@@ -36,10 +36,11 @@ export function createResetGoToNavAction (routeName) {
 export function handleCheckInvitation (stateProps, dispatchProps) {
   const { invitationCodes, navToSignup, navToInviteExpired } = stateProps
   const { checkInvitation } = dispatchProps
+  const getInviteValid = get('payload.data.checkInvitation.valid')
 
   return checkInvitation(invitationCodes)
   .then(result => {
-    const isValidInvite = get('payload.data.checkInvitation.valid', result)
+    const isValidInvite = getInviteValid(result)
     // NOTE: Not currently clearing the entryURL on a failed check
     // such that join will still be tried upon login. If the invite code
     // is invalid (not just already used) then the user will be forwarded

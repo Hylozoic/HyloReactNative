@@ -8,6 +8,7 @@ Object {
     "filter": null,
     "sortBy": "updated",
   },
+  "JoinCommunity": Object {},
   "MemberFeed": Object {
     "choice": "Posts",
   },
