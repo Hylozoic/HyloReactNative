@@ -77,6 +77,7 @@ it('mergeProps', () => {
   const stateProps = {
     communityId: 'anything',
     currentUser: currentUserPOJO,
+    currentCommunityId: 'default',
     invitationCodes: {}
   }
   const dispatchProps = {

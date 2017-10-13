@@ -7,8 +7,7 @@ import getCurrentCommunityId from '../../store/selectors/getCurrentCommunityId'
 import getNavigationParam from '../../store/selectors/getNavigationParam'
 import { useInvitation } from './JoinCommunity.store'
 
-export function goToCommunityFromRoot (communityIdParam, defaultCommunityId, navigation) {
-  const communityId = communityIdParam || defaultCommunityId
+export function goToCommunityFromRoot (communityId, navigation) {
   const action = NavigationActions.navigate({
     routeName: 'Main',
     action: {
@@ -29,9 +28,7 @@ export function mapStateToProps (state, props) {
       invitationToken: getNavigationParam('token', state, props) ||
         getNavigationParam('invitationToken', state, props),
       accessCode: getNavigationParam('accessCode', state, props)
-    },
-    goToCommunity: communityId =>
-      goToCommunityFromRoot(communityId, currentCommunityId, props.navigation)
+    }
   }
 }
 
@@ -40,32 +37,29 @@ export function mapDispatchToProps (dispatch, { navigation }) {
     dispatch,
     useInvitation: (user, invitationCodes) =>
       dispatch(useInvitation(user, invitationCodes)),
-    goToCommunity: (communityId, defaultCommunityId) =>
-      dispatch(goToCommunityFromRoot(communityId, defaultCommunityId, navigation))
+    goToCommunity: (communityId) =>
+      dispatch(goToCommunityFromRoot(communityId, navigation))
   }
 }
 
 export function handleJoinCommunity (stateProps, dispatchProps) {
-  const { currentUser, invitationCodes } = stateProps
+  const { currentUser, currentCommunityId, invitationCodes } = stateProps
   const { useInvitation, goToCommunity } = dispatchProps
   const getCommunityId = get('payload.data.useInvitation.membership.community.id')
 
   return useInvitation(currentUser, invitationCodes)
   .then(result => {
     const communityId = getCommunityId(result)
-    communityId && goToCommunity(communityId)
+    goToCommunity(communityId || currentCommunityId)
   })
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
-  const { goToCommunity } = dispatchProps
-  const { currentCommunityId } = stateProps
   return {
     ...stateProps,
     ...dispatchProps,
     ...ownProps,
-    useInvitation: () => handleJoinCommunity(stateProps, dispatchProps),
-    goToCommunity: communityId => goToCommunity(communityId, currentCommunityId)
+    useInvitation: () => handleJoinCommunity(stateProps, dispatchProps)
   }
 }
 
