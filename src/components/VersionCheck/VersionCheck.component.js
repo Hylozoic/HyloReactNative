@@ -10,18 +10,12 @@ export default class VersionCheck extends React.Component {
   showAlert = (updateType) => {
     const type = updateType.type
     const storeName = isIOS ? 'App Store' : 'Play Store'
-    const APP_STORE_LINK = 'https://itunes.apple.com/app/com.hylo.HyloA'
-    const PLAY_STORE_LINK = 'https://play.google.com/store/apps/details?id=com.hylo.reactnative'
     const buttons = [
       {
         text: 'Update Now',
         onPress: () => {
           if (type === 'force') this.showAlert(updateType)
-          if (isIOS) {
-            Linking.openURL(APP_STORE_LINK)
-          } else {
-            Linking.openURL(PLAY_STORE_LINK)
-          }
+          Linking.openURL(updateType.link)
         }
       }
     ]
