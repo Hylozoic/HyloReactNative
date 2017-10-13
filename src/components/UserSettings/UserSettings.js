@@ -12,7 +12,7 @@ import { permissions } from '../Login/FbLoginButton'
 import styles from './UserSettings.styles'
 import { any, values, isNil } from 'lodash/fp'
 
-export default class Signup extends React.Component {
+export default class UserSettings extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
       title: 'Edit Account Info',
@@ -285,8 +285,6 @@ export function Footer ({ saveChanges, cancel, logout }) {
     <TouchableOpacity onPress={cancel}>
       <Text style={styles.cancel}>Cancel</Text>
     </TouchableOpacity>
-    <TouchableOpacity onPress={logout}>
-      <Text style={styles.cancel}>Logout</Text>
-    </TouchableOpacity>
+    <Button text='Logout' onPress={logout} style={styles.logoutButton} />
   </View>
 }

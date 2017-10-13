@@ -1,4 +1,4 @@
-import { gunsmoke, rhino30, rhino80, caribbeanGreen, white60onCaribbeanGreen } from 'style/colors'
+import { gunsmoke, rhino30, rhino80, caribbeanGreen, white60onCaribbeanGreen, amaranth } from 'style/colors'
 
 export default {
   header: {
@@ -72,7 +72,15 @@ export default {
   cancel: {
     fontSize: 16,
     color: rhino30,
-    fontFamily: 'Circular-Book'
+    fontFamily: 'Circular-Book',
+    marginBottom: 20
+  },
+  logoutButton: {
+    width: 134,
+    height: 30,
+    backgroundColor: 'white',
+    borderColor: amaranth,
+    color: amaranth
   },
   settingControl: {
     control: {
