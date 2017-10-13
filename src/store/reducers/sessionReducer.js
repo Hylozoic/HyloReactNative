@@ -1,6 +1,7 @@
 import { LOGIN, LOGIN_WITH_FACEBOOK, LOGIN_WITH_GOOGLE } from '../../components/Login/actions'
 import { SIGNUP } from '../../components/SignupFlow/SignupFlow.store'
-import { CHECK_SESSION, CHECK_VERSION } from '../../components/SessionCheck/actions'
+import { CHECK_SESSION } from '../../components/SessionCheck/actions'
+import { CHECK_VERSION } from '../../components/VersionCheck/actions'
 import { omit } from 'lodash/fp'
 
 export default function sessionReducer (state = {}, action) {

@@ -1,5 +1,6 @@
 import { connect } from 'react-redux'
-import { checkSession, checkVersion, CHECK_VERSION } from './actions'
+import { checkSession } from './actions'
+import { checkVersion, CHECK_VERSION } from '../VersionCheck/actions'
 import getMe from '../../store/selectors/getMe'
 import { get } from 'lodash/fp'
 import { platformName, appVersion } from 'util/platform'

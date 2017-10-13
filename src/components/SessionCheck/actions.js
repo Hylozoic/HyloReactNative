@@ -1,6 +1,5 @@
 import { getSessionCookie } from '../../util/session'
 export const CHECK_SESSION = 'CHECK_SESSION'
-export const CHECK_VERSION = 'CHECK_VERSION'
 
 export function checkSession () {
   return {
@@ -15,15 +14,5 @@ export function checkSession () {
         }
       }
     })
-  }
-}
-
-export function checkVersion (platform, version) {
-  const queryParams = `${platform}-version=${version}`
-  return {
-    type: CHECK_VERSION,
-    payload: {
-      api: {method: 'get', path: `/noo/mobile/auto-update-info?${queryParams}`}
-    }
   }
 }
