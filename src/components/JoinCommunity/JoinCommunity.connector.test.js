@@ -4,6 +4,7 @@ import {
   mapStateToProps,
   mapDispatchToProps,
   goToCommunityFromRoot,
+  handleJoinCommunity,
   mergeProps
 } from './JoinCommunity.connector'
 
@@ -42,17 +43,18 @@ describe('mapStateToProps', () => {
     const membership = {community}
     const testState = {
       ...defaultState,
+      currentCommunity: 'currentcommunityid',
       [MODULE_NAME]: {
         membership
       }
     }
     expect(mapStateToProps(testState, testProps)).toEqual({
       currentUser: expect.objectContaining(currentUserPOJO),
+      currentCommunityId: testState.currentCommunity,
       invitationCodes: {
         invitationToken: testProps.navigation.state.params.token,
         accessCode: testProps.navigation.state.params.accessCode
-      },
-      communityId: community.id
+      }
     })
   })
 })
@@ -66,10 +68,54 @@ test('mapDispatchToProps', () => {
 })
 
 describe('handleJoinCommunity', () => {
-  // TODO
-  // const { goToCommunity, currentUser, invitationCodes } = stateProps
-  // const { useInvitation } = dispatchProps
-  // it should goToCommunity if communityId is resolved from useInvitation
+  const currentCommunityId = 'defaultcommunityid'
+  const stateProps = {
+    currentUser: {id: 'currentuser'},
+    currentCommunityId,
+    invitationCodes: {
+      invitationToken: 'invitationtoken',
+      accessCode: 'accesscode'
+    }
+  }
+
+  it('should forward to the joined community when one is returned', () => {
+    const joinedCommunityId = 'joinedcommunity'
+    const result = {
+      payload: {
+        data: {
+          useInvitation: {
+            membership: {
+              community: {
+                id: joinedCommunityId
+              }
+            }
+          }
+        }
+      }
+    }
+    const dispatchProps = {
+      useInvitation: jest.fn(() => Promise.resolve(result)),
+      goToCommunity: jest.fn()
+    }
+    return handleJoinCommunity(stateProps, dispatchProps)
+    .then(result => {
+      expect(dispatchProps.goToCommunity).toHaveBeenCalledWith(joinedCommunityId)
+      return expect(dispatchProps.useInvitation).toHaveBeenCalled(result)
+    })
+  })
+
+  it('should forward to the current community when a joined community is not returned', () => {
+    const result = {}
+    const dispatchProps = {
+      useInvitation: jest.fn(() => Promise.resolve(result)),
+      goToCommunity: jest.fn()
+    }
+    return handleJoinCommunity(stateProps, dispatchProps)
+    .then(result => {
+      expect(dispatchProps.goToCommunity).toHaveBeenCalledWith(currentCommunityId)
+      return expect(dispatchProps.useInvitation).toHaveBeenCalled(result)
+    })
+  })
 })
 
 it('mergeProps', () => {

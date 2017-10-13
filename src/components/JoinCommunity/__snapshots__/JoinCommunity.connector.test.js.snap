@@ -2,19 +2,15 @@
 
 exports[`goToCommunityFromRoot 1`] = `
 Object {
-  "action": Object {
-    "params": Object {
-      "communityId": "anycommunityid",
-    },
-    "routeName": "Feed",
-  },
-  "routeName": "Main",
-  "type": "Navigation/NAVIGATE",
+  "payload": "anycommunityid",
+  "type": "CHANGE_COMMUNITY",
 }
 `;
 
 exports[`mapDispatchToProps 1`] = `
 Object {
+  "dispatch": [Function],
+  "goToCommunity": [Function],
   "useInvitation": [Function],
 }
 `;
@@ -22,10 +18,10 @@ Object {
 exports[`mergeProps 1`] = `
 Object {
   "communityId": "anything",
+  "currentCommunityId": "default",
   "currentUser": Object {
     "name": "me",
   },
-  "goToCommunity": [Function],
   "invitationCodes": Object {},
   "navigation": Object {
     "state": Object {
