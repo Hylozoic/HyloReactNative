@@ -11,7 +11,10 @@ jest.mock('react-native', () => ({
     },
     getItem: key => Promise.resolve(mockStorage[key])
   },
-  Platform: {OS: 'ios'}
+  Platform: {OS: 'ios'},
+  NativeModules: {
+    RNDeviceInfo: {}
+  }
 }))
 
 jest.mock('sails.io.js', () => {
@@ -21,6 +24,8 @@ jest.mock('sails.io.js', () => {
     }
   })
 })
+
+jest.mock('react-native-device-info')
 
 const mockHeaders = {
   'set-cookie': 'foo=bar'

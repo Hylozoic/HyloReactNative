@@ -5,6 +5,7 @@ import ReactTestRenderer from 'react-test-renderer'
 import SignupFlow4, { SkillCloud, SkillPill } from './SignupFlow4'
 
 jest.mock('../../KeyboardFriendlyView', () => 'KeyboardFriendlyView')
+jest.mock('react-native-device-info')
 
 describe('SignupFlow4', () => {
   it('matches last snapshot', () => {

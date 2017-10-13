@@ -1,4 +1,4 @@
-import { mapStateToProps, mapDispatchToProps } from './connector.js'
+import { mapStateToProps, mapDispatchToProps } from './VersionCheck.connector.js'
 
 jest.mock('react-native-device-info')
 
@@ -6,7 +6,7 @@ describe('mapStateToProps', () => {
   it('returns the right keys', () => {
     const state = {
       session: {
-        checkVersion: {type: 'suggest'}
+        loggedIn: true
       },
       pending: {
         CHECK_VERSION: true
@@ -21,7 +21,7 @@ describe('mapDispatchToProps', () => {
     const dispatch = jest.fn(val => val)
     const dispatchProps = mapDispatchToProps(dispatch)
     expect(dispatchProps).toMatchSnapshot()
-    dispatchProps.checkSession()
+    dispatchProps.checkVersion()
     expect(dispatch).toHaveBeenCalled()
     expect(dispatch.mock.calls).toMatchSnapshot()
   })

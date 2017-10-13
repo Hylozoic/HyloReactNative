@@ -1,18 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`matches last snapshot loading 1`] = `
-<View>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    disabled={false}
-    ellipsizeMode="tail"
-  >
-    Loading...
-  </Text>
-</View>
+exports[`matches last snapshot loading 1`] = `<Loading />`;
+
+exports[`matches last snapshot loggedIn 1`] = `
+<Connect(VersionCheck)>
+  <Connect(LoggedInRoot) />
+</Connect(VersionCheck)>
 `;
 
-exports[`matches last snapshot loggedIn 1`] = `<Connect(LoggedInRoot) />`;
+exports[`matches last snapshot not loggedIn 1`] = `
+<Connect(VersionCheck)>
+  <LoginNavigator />
+</Connect(VersionCheck)>
+`;
 
-exports[`matches last snapshot not loggedIn 1`] = `<LoginNavigator />`;
+exports[`matches last snapshot pending 1`] = `<Loading />`;

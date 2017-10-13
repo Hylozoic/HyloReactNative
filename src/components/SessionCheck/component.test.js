@@ -10,6 +10,7 @@ jest.mock('react-navigation', () => {})
 jest.mock('../RootNavigator', () => 'RootNavigator')
 jest.mock('../LoginNavigator', () => 'LoginNavigator')
 jest.mock('react-native-aws3')
+jest.mock('react-native-device-info')
 
 const actions = {
   checkSession: () => {}
@@ -34,6 +35,14 @@ it('matches last snapshot not loggedIn', () => {
 it('matches last snapshot loggedIn', () => {
   const renderer = new ReactShallowRenderer()
   renderer.render(<SessionCheck loggedIn actions={actions} />)
+  const actual = renderer.getRenderOutput()
+
+  expect(actual).toMatchSnapshot()
+})
+
+it('matches last snapshot pending', () => {
+  const renderer = new ReactShallowRenderer()
+  renderer.render(<SessionCheck pending />)
   const actual = renderer.getRenderOutput()
 
   expect(actual).toMatchSnapshot()

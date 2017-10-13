@@ -1,5 +1,5 @@
-export const CHECK_SESSION = 'CHECK_SESSION'
 import { getSessionCookie } from '../../util/session'
+export const CHECK_SESSION = 'CHECK_SESSION'
 
 export function checkSession () {
   return {
