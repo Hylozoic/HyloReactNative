@@ -8,7 +8,7 @@ export default class JoinCommunity extends Component {
     useInvitation: PropTypes.func.isRequired
   }
 
-  componentWillMount () {
+  componentDidMount () {
     return this.props.useInvitation()
   }
 
