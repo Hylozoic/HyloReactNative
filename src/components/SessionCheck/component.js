@@ -10,10 +10,6 @@ export default class SessionCheck extends React.Component {
   }
 
   render () {
-    if (this.props.pending) {
-      return <Loading />
-    }
-
     switch (this.props.loggedIn) {
       case true:
         return <VersionCheck><LoggedInRoot /></VersionCheck>

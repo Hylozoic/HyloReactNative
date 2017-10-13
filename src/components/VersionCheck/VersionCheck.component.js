@@ -1,6 +1,7 @@
 import React from 'react'
 import { Alert, Linking } from 'react-native'
 import { isIOS } from 'util/platform'
+import Loading from '../Loading'
 
 export default class VersionCheck extends React.Component {
   componentWillMount = () => {
@@ -22,7 +23,7 @@ export default class VersionCheck extends React.Component {
         }
       }
     ]
-    if (updateType === 'suggest') {
+    if (updateType.type === 'suggest') {
       buttons.push({
         text: 'Cancel'
       })
@@ -37,6 +38,7 @@ export default class VersionCheck extends React.Component {
 
   render () {
     const { updateType, pending } = this.props
+    if (pending) return <Loading />
     updateType && this.showAlert(updateType)
     return this.props.children
   }
