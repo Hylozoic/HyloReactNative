@@ -1,5 +1,41 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`UserSettings cancelPassword sets the state 1`] = `
+Object {
+  "changed": false,
+  "editingPassword": false,
+  "edits": Object {
+    "confirmPassword": null,
+    "email": "moo",
+    "password": null,
+  },
+  "errors": Object {
+    "confirmPassword": null,
+    "email": "bad email",
+    "password": null,
+  },
+}
+`;
+
+exports[`UserSettings confirmLeave calls Alert.alert when changed is true 1`] = `
+Array [
+  Array [
+    "You have unsaved changes",
+    "Are you sure you want to leave?",
+    Array [
+      Object {
+        "onPress": [Function],
+        "text": "Leave",
+      },
+      Object {
+        "style": "cancel",
+        "text": "Cancel",
+      },
+    ],
+  ],
+]
+`;
+
 exports[`UserSettings matches snapshot with state set 1`] = `
 <View
   keyboardVerticalOffset={64}
@@ -509,4 +545,36 @@ exports[`UserSettings matches the last snapshot 1`] = `
     />
   </ScrollViewMock>
 </Unknown>
+`;
+
+exports[`UserSettings updateField sets the state 1`] = `
+Object {
+  "changed": true,
+  "editingPassword": false,
+  "edits": Object {
+    "email": "newemail",
+    "password": "ldlkd",
+  },
+  "errors": Object {
+    "email": null,
+    "password": "too short",
+  },
+}
+`;
+
+exports[`UserSettings validate validates its fields 1`] = `
+Object {
+  "changed": false,
+  "editingPassword": false,
+  "edits": Object {
+    "confirmPassword": "lalala",
+    "email": "ra",
+    "password": "rarara",
+  },
+  "errors": Object {
+    "confirmPassword": "Passwords must match",
+    "email": "Must be a valid email",
+    "password": "Password must be at least 9 characters.",
+  },
+}
 `;
