@@ -47,24 +47,3 @@ it('matches last snapshot pending', () => {
 
   expect(actual).toMatchSnapshot()
 })
-
-describe('updateModal', () => {
-  it('matches last snapshot with a forced version update', () => {
-    const showUpdateModal = {
-      type: 'force'
-    }
-    const renderer = new ReactShallowRenderer()
-    renderer.render(<SessionCheck loggedIn={false} actions={actions} showUpdateModal={showUpdateModal} />)
-    const actual = renderer.getRenderOutput()
-    expect(actual).toMatchSnapshot()
-  })
-  it('matches last snapshot with a suggested version update', () => {
-    const showUpdateModal = {
-      type: 'suggest'
-    }
-    const renderer = new ReactShallowRenderer()
-    renderer.render(<SessionCheck loggedIn={false} actions={actions} showUpdateModal={showUpdateModal} />)
-    const actual = renderer.getRenderOutput()
-    expect(actual).toMatchSnapshot()
-  })
-})

@@ -19,19 +19,3 @@ exports[`matches last snapshot not loggedIn 1`] = `
 `;
 
 exports[`matches last snapshot pending 1`] = `<Loading />`;
-
-exports[`updateModal matches last snapshot with a forced version update 1`] = `
-<VersionCheck
-  updateType="force"
->
-  <LoginNavigator />
-</VersionCheck>
-`;
-
-exports[`updateModal matches last snapshot with a suggested version update 1`] = `
-<VersionCheck
-  updateType="suggest"
->
-  <LoginNavigator />
-</VersionCheck>
-`;

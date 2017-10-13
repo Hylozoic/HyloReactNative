@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`updateModal matches last snapshot with a forced version update 1`] = `<View />`;
+
+exports[`updateModal matches last snapshot with a suggested version update 1`] = `<View />`;
+
+exports[`updateModal matches last snapshot without a version update 1`] = `<View />`;
