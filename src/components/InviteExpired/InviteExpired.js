@@ -24,11 +24,11 @@ export default class InviteExpired extends React.Component {
         <Text style={styles.headerText}>Contact your moderator for another one.</Text>
       </View>
       <Image style={styles.image} resizeMode='stretch' source={axolotlImage} />
-      <TouchableOpacity style={styles.paddedRow} onPress={this.goToLogin}>
-        <View style={styles.goToLoginButton}>
+      <View style={styles.paddedRow}>
+        <TouchableOpacity onPress={this.goToLogin} style={styles.goToLoginButton}>
           <Text style={styles.goToLoginButtonText}>Log In</Text>
-        </View>
-      </TouchableOpacity>
+        </TouchableOpacity>
+      </View>
     </View>
   }
 }
