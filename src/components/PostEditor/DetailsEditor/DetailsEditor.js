@@ -1,12 +1,15 @@
 import React from 'react'
+import { Button, View } from 'react-native'
 import KeyboardFriendlyView from '../../KeyboardFriendlyView'
 import Editor from '../../Editor'
 import { keyboardAvoidingViewProps as kavProps } from 'util/viewHelpers'
+import { get } from 'lodash/fp'
 
 export default class DetailsEditor extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
-      headerTitle: 'Details'
+      headerTitle: 'Details',
+      headerRight: <View style={styles.saveButton}><Button title={'OK'} onPress={() => navigation.goBack()} /></View>
     }
   }
 
@@ -34,6 +37,9 @@ export default class DetailsEditor extends React.Component {
 }
 
 const styles = {
+  saveButton: {
+    marginRight: 10
+  },
   container: {
     backgroundColor: 'white',
     flex: 1
