@@ -23,6 +23,7 @@ export default class InviteExpired extends React.Component {
         <Text style={styles.headerText}>Your invite has expired!</Text>
         <Text style={styles.headerText}>Contact your moderator for another one.</Text>
       </View>
+      <Image style={styles.image} resizeMode='stretch' source={axolotlImage} />
       <View style={styles.paddedRow}>
         <View style={styles.goToLoginButton}>
           <TouchableOpacity onPress={this.goToLogin}>
@@ -30,7 +31,6 @@ export default class InviteExpired extends React.Component {
           </TouchableOpacity>
         </View>
       </View>
-      <Image style={styles.image} resizeMode='stretch' source={axolotlImage} />
     </View>
   }
 }

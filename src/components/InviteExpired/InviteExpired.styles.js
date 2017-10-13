@@ -4,13 +4,24 @@ import {
 } from '../../style/colors'
 import { isIOS } from 'util/platform'
 
+const mixins = {
+  paddedRow: {
+    paddingRight: 15,
+    paddingLeft: 15,
+    marginBottom: 10,
+    flex: 1,
+    flexDirection: 'row',
+    zIndex: 0
+  }
+}
+
 export default {
   container: {
     backgroundColor: 'white',
     flex: 1,
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingTop: 170
+    paddingTop: 100
   },
   header: {
     alignItems: 'center',
@@ -25,11 +36,12 @@ export default {
   image: {
     width: 288,
     height: 309,
-    marginBottom: 25
+    marginBottom: 25,
+    marginTop: 25
   },
   goToLoginButton: {
-    // flex: 1,
-    // flexDirection: 'row',
+    flex: 1,
+    flexDirection: 'row',
     backgroundColor: caribbeanGreen,
     height: 36,
     borderRadius: 50,
@@ -43,5 +55,10 @@ export default {
     fontFamily: 'Circular-Book',
     fontSize: 18,
     lineHeight: isIOS ? 32 : 28
+  },
+  paddedRow: mixins.paddedRow,
+  paddedRowWithOpacity: {
+    ...mixins.paddedRow,
+    opacity: 0.7
   }
 }
