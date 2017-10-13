@@ -182,35 +182,4 @@ describe('SessionCheck component', () => {
     instance._handleSetEntryURL(linkingURL)
     expect(testProps.setEntryURL).toHaveBeenCalledWith(internalURL)
   })
-
-  test('that _handleChange changes state value for currentTab when changed', () => {
-    const newCurrentTabRouteName = 'Members'
-    const newState = {
-      index: 0,
-      routes: [ // stackNav
-        {
-          index: 0,
-          routes: [ // drawerNav
-            {
-              index: 0,
-              routes: [ // tabNav
-                {
-                  index: 0,
-                  routes: [
-                    {
-                      routeName: newCurrentTabRouteName
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    }
-    const instance = ReactTestRenderer.create(<SessionCheck {...testPropsSetup()} />).getInstance()
-    instance.setState = jest.fn()
-    instance._handleChange(null, newState)
-    expect(instance.setState).toHaveBeenCalledWith({currentTabName: newCurrentTabRouteName})
-  })
 })

@@ -2,7 +2,6 @@ import URL from 'url'
 import React from 'react'
 import PropTypes from 'prop-types'
 import { View, Linking } from 'react-native'
-import { has } from 'lodash/fp'
 import mixins from '../../style/mixins'
 import Loading from '../Loading'
 import LoginNavigator from '../LoginNavigator'
@@ -10,8 +9,6 @@ import SocketListener from '../SocketListener'
 import RootNavigator from '../RootNavigator'
 
 export const INTERNAL_ROUTE_URI_PREFIX = 'internalRouting://'
-
-const tabNames = ['Home', 'Members', 'Topics']
 
 export default class SessionCheck extends React.Component {
   static propTypes = {
@@ -93,37 +90,6 @@ export default class SessionCheck extends React.Component {
     }
   }
 
-  // NOTE: This method is very coupled to the nesting structure for navigators
-  // in RootNavigator/index.js it wraps the root navigator so that its screens
-  // get a currentTabName value in their screenProps, which they can use to
-  // determine which tab is visible.
-  //
-  // Even though this only pertains to the tab navigator, it must wrap the top-
-  // level navigator, because you can't set onNavigationStateChange on non-top-
-  // level navigators.
-  //
-  // It is placed onNavigationStateChange on the top-level navigator,
-  // because it uses a prop for listening to navigation change events
-  // that can only be assigned to a top-level navigator
-  //
-  _handleChange = (prevState, newState) => {
-    const stackNav = newState.routes[newState.index]
-    if (!has('index', stackNav)) return
-
-    const drawerNav = stackNav.routes[stackNav.index]
-    if (!has('index', drawerNav)) return
-
-    const tabNav = drawerNav.routes[drawerNav.index]
-    if (!has('index', tabNav)) return
-
-    const route = tabNav.routes[tabNav.index]
-    if (!route || !tabNames.includes(route.routeName)) return
-
-    if (route.routeName !== this.state.currentTabName) {
-      this.setState({currentTabName: route.routeName})
-    }
-  }
-
   render () {
     const { loading, loggedIn, currentUser } = this.props
     if (!loading) {
@@ -135,9 +101,8 @@ export default class SessionCheck extends React.Component {
         return <View style={{flex: 1}}>
           <RootNavigator
             uriPrefix={INTERNAL_ROUTE_URI_PREFIX}
-            onNavigationStateChange={this._handleChange}
             screenProps={this.state}
-            ref={nav => { this.navigator = nav }} />
+            ref={nav => { this.navigator = nav && nav._wrappedComponent }} />
           <SocketListener />
         </View>
       }

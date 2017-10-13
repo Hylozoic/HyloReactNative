@@ -23,6 +23,7 @@ import Thread from '../Thread'
 import ThreadList from '../ThreadList'
 import MemberDetails from '../MemberProfile/MemberDetails'
 import createLinkingAwareContainer from './createLinkingAwareContainer'
+import trackCurrentTab from './trackCurrentTab'
 import { isIOS } from 'util/platform'
 
 export const urlPrefix = 'http://hylo.com/'
@@ -108,9 +109,14 @@ const mainStackRoute = {
 
 const rootNavigatorRoutes = Object.assign({}, mainStackRoute, screensInStack)
 
-export default StackNavigator(
+const RootNavigator = StackNavigator(
   rootNavigatorRoutes,
   {
     mode: 'modal'
   }
 )
+
+// trackCurrentTab must be on the top-level navigator, because it uses a prop
+// for listening to navigation change events that can only be assigned to a
+// top-level navigator
+export default trackCurrentTab(RootNavigator)
