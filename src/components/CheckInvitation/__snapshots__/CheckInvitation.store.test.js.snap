@@ -16,15 +16,3 @@ Object {
   "type": "CheckInvitation/CHECK_INVITATION",
 }
 `;
-
-exports[`createResetGoToNavAction 1`] = `
-Object {
-  "actions": Array [
-    Object {
-      "routeName": "anyroutename",
-    },
-  ],
-  "index": 0,
-  "key": null,
-}
-`;

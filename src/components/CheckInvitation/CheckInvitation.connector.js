@@ -1,31 +1,59 @@
 import { connect } from 'react-redux'
-import {
-   getValidInvite,
-   createResetGoToNavAction,
-   checkInvitation,
-   CHECK_INVITATION
-} from './CheckInvitation.store'
-import { resetEntryURL } from '../SessionCheck/SessionCheck.store'
+import { get } from 'lodash/fp'
+import { NavigationActions } from 'react-navigation'
+import { checkInvitation } from './CheckInvitation.store'
 import getNavigationParam from '../../store/selectors/getNavigationParam'
 
 export function mapStateToProps (state, props) {
   const { navigation } = props
   return {
-    pending: state.pending && state.pending[CHECK_INVITATION],
     invitationCodes: {
       invitationToken: getNavigationParam('token', state, props) ||
         getNavigationParam('invitationToken', state, props),
       accessCode: getNavigationParam('accessCode', state, props)
     },
-    isValidInvite: getValidInvite(state),
-    navToSignup: () => navigation.dispatch(createResetGoToNavAction('Signup')),
-    navToInviteExpired: () => navigation.dispatch(createResetGoToNavAction('InviteExpired'))
+    navToSignup: () =>
+      navigation.dispatch(createResetGoToNavAction('Signup')),
+    navToInviteExpired: () =>
+      navigation.dispatch(createResetGoToNavAction('InviteExpired'))
   }
 }
 
 export const mapDispatchToProps = {
-  checkInvitation,
-  resetEntryURL
+  checkInvitation
+}
+
+export function createResetGoToNavAction (routeName) {
+  return NavigationActions.reset({
+    key: null,
+    index: 0,
+    actions: [
+      NavigationActions.navigate({routeName})
+    ]
+  })
+}
+
+export function handleCheckInvitation (stateProps, dispatchProps) {
+  const { invitationCodes, navToSignup, navToInviteExpired } = stateProps
+  const { checkInvitation } = dispatchProps
+
+  return checkInvitation(invitationCodes)
+  .then(result => {
+    const isValidInvite = get('payload.data.checkInvitation.valid', result)
+    // NOTE: Not currently clearing the entryURL on a failed check
+    // such that join will still be tried upon login. If the invite code
+    // is invalid (not just already used) then the user will be forwarded
+    // to the community associated with the already claimed invite.
+    isValidInvite ? navToSignup() : navToInviteExpired()
+  })
+  // NOTE: if something fails in the process of checking the
+  // invitation the user will be forwarded on to the Signup
+  // page given that we don't know if there is an issue (expired)
+  // with the invite or if there was just some other issue.
+  // SO in this case the user will still be prompted to
+  // continue to signup (or login) and JoinCommunity will
+  // be tried again upon signing in.
+  .catch(err => err && navToSignup())
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
@@ -33,7 +61,8 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     ...stateProps,
     ...dispatchProps,
     ...ownProps,
-    checkInvitation: () => dispatchProps.checkInvitation(stateProps.invitationCodes)
+    checkInvitation: () =>
+      handleCheckInvitation(stateProps, dispatchProps)
   }
 }
 

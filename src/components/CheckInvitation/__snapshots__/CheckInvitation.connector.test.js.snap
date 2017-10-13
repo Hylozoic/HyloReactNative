@@ -1,21 +1,41 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`mapDispatchToProps matches the last snapshot 1`] = `
+exports[`createResetGoToNavAction matches the last snapshot 1`] = `
 Object {
-  "checkInvitation": [Function],
-  "resetEntryURL": [Function],
+  "actions": Array [
+    Object {
+      "routeName": "anyroute",
+      "type": "Navigation/NAVIGATE",
+    },
+  ],
+  "index": 0,
+  "key": null,
+  "type": "Navigation/RESET",
 }
 `;
 
-exports[`mapStateToProps maps the state... to the props 1`] = `
+exports[`mapDispatchToProps matches the last snapshot 1`] = `
+Object {
+  "checkInvitation": [Function],
+}
+`;
+
+exports[`mapStateToProps matches the latest snapshot 1`] = `
 Object {
   "invitationCodes": Object {
     "accessCode": "anyaccesscode",
     "invitationToken": "anytoken",
   },
-  "isValidInvite": true,
   "navToInviteExpired": [Function],
   "navToSignup": [Function],
-  "pending": undefined,
+}
+`;
+
+exports[`mergeProps matches the last snapshot 1`] = `
+Object {
+  "checkInvitation": [Function],
+  "dispatchProp1": "dispatchProp1",
+  "ownProp1": "ownProp1",
+  "stateProp1": "stateProp1",
 }
 `;

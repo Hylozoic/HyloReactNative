@@ -11,11 +11,7 @@ jest.mock('react-navigation', () => ({
 }))
 
 const defaultRequiredProps = {
-  pending: null,
-  isValidInvite: null,
-  checkInvitation: () => Promise.resolve(),
-  navToSignup: () => {},
-  navToInviteExpired: () => {}
+  checkInvitation: () => Promise.resolve()
 }
 
 function testPropsSetup (props = {}, required = defaultRequiredProps) {
@@ -37,35 +33,8 @@ it('matches last snapshot - default', () => {
 
 test('componentDidMount', () => {
   const testProps = testPropsSetup({
-    checkInvitation: jest.fn(() => Promise.reject(new Error('erroranything'))),
-    navToSignup: jest.fn()
+    checkInvitation: jest.fn()
   })
-  // const instance = ReactTestRenderer.create(<CheckInvitation {...testProps} />).getInstance()
-  return shallowRender(testProps)._instance.componentDidMount()
-  .then(() => {
-    expect(testProps.checkInvitation).toHaveBeenCalled()
-    return expect(testProps.navToSignup).toHaveBeenCalled()
-  })
-})
-
-test('componentWillUpdate', () => {
-  const testProps = testPropsSetup({
-    pending: false,
-    isValidInvite: true
-  })
-  const instance = ReactTestRenderer.create(<CheckInvitation {...testPropsSetup()} />).getInstance()
-  instance._handleResult = jest.fn()
-  instance.componentWillUpdate(testProps)
-  expect(instance._handleResult).toHaveBeenCalledWith(testProps)
-})
-
-test('_handleResult', () => {
-  const testProps = testPropsSetup({
-    isValidInvite: true,
-    navToSignup: jest.fn(),
-    navToInviteExpired: jest.fn()
-  })
-  const instance = ReactTestRenderer.create(<CheckInvitation {...testPropsSetup()} />).getInstance()
-  instance._handleResult(testProps)
-  expect(testProps.navToSignup).toHaveBeenCalled()
+  shallowRender(testProps)._instance.componentDidMount()
+  expect(testProps.checkInvitation).toHaveBeenCalled()
 })
