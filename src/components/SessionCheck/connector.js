@@ -1,24 +1,18 @@
 import { connect } from 'react-redux'
 import { checkSession } from './actions'
-import { checkVersion, CHECK_VERSION } from '../VersionCheck/actions'
 import getMe from '../../store/selectors/getMe'
 import { get } from 'lodash/fp'
-import { platformName, appVersion } from 'util/platform'
 
 export function mapStateToProps (state) {
   const signupInProgress = get('settings.signupInProgress', getMe(state))
-  const pending = state.pending[CHECK_VERSION]
   return {
-    loggedIn: state.session.loggedIn && !signupInProgress,
-    showUpdateModal: state.session.checkVersion,
-    pending
+    loggedIn: state.session.loggedIn && !signupInProgress
   }
 }
 
 export function mapDispatchToProps (dispatch) {
   return {
-    checkSession: () => dispatch(checkSession()),
-    checkVersion: () => dispatch(checkVersion(platformName, appVersion))
+    checkSession: () => dispatch(checkSession())
   }
 }
 

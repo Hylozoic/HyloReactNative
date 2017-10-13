@@ -1,2 +1,3 @@
-import VersionCheck from './component'
-export default VersionCheck
+import component from './VersionCheck.component'
+import connector from './VersionCheck.connector'
+export default connector(component)

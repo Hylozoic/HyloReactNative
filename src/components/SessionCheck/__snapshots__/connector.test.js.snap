@@ -3,7 +3,6 @@
 exports[`mapDispatchToProps maps the action generators 1`] = `
 Object {
   "checkSession": [Function],
-  "checkVersion": [Function],
 }
 `;
 
@@ -26,7 +25,5 @@ Array [
 exports[`mapStateToProps returns the right keys 1`] = `
 Object {
   "loggedIn": true,
-  "pending": true,
-  "showUpdateModal": undefined,
 }
 `;

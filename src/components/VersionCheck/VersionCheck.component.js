@@ -3,6 +3,9 @@ import { Alert, Linking } from 'react-native'
 import { isIOS } from 'util/platform'
 
 export default class VersionCheck extends React.Component {
+  componentWillMount = () => {
+    this.props.checkVersion()
+  }
   showAlert = (updateType) => {
     const storeName = isIOS ? 'App Store' : 'Play Store'
     const APP_STORE_LINK = 'https://itunes.apple.com/app/com.hylo.HyloA'
@@ -33,7 +36,7 @@ export default class VersionCheck extends React.Component {
   }
 
   render () {
-    const { updateType } = this.props
+    const { updateType, pending } = this.props
     updateType && this.showAlert(updateType)
     return this.props.children
   }

@@ -3,19 +3,15 @@
 exports[`matches last snapshot loading 1`] = `<Loading />`;
 
 exports[`matches last snapshot loggedIn 1`] = `
-<VersionCheck
-  updateType={undefined}
->
+<Connect(VersionCheck)>
   <Connect(LoggedInRoot) />
-</VersionCheck>
+</Connect(VersionCheck)>
 `;
 
 exports[`matches last snapshot not loggedIn 1`] = `
-<VersionCheck
-  updateType={undefined}
->
+<Connect(VersionCheck)>
   <LoginNavigator />
-</VersionCheck>
+</Connect(VersionCheck)>
 `;
 
 exports[`matches last snapshot pending 1`] = `<Loading />`;
