@@ -11,14 +11,11 @@ import {
   SIGNUP, ADD_SKILL, REMOVE_SKILL, UPDATE_USER_SETTINGS_PENDING
 } from '../../components/SignupFlow/SignupFlow.store'
 import {
-  RECEIVE_COMMENT, RECEIVE_MESSAGE, RECEIVE_NOTIFICATION 
+  RECEIVE_COMMENT, RECEIVE_MESSAGE, RECEIVE_NOTIFICATION
 } from '../../components/SocketListener/SocketListener.store'
 import {
   CREATE_MESSAGE, CREATE_MESSAGE_PENDING
 } from '../../components/Thread/Thread.store'
-import {
-  TOGGLE_TOPIC_SUBSCRIBE_PENDING
-} from '../../components/Feed/Feed.store'
 import {
   VOTE_ON_POST_PENDING
 } from '../../components/PostCard/PostFooter/PostFooter.store'
