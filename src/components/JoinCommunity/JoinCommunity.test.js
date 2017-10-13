@@ -31,18 +31,10 @@ it('matches last snapshot - default', () => {
 
 // Lifecycle Methods
 
-test('componentWillMount', () => {
-  const useInvitationResult = {
-
-  }
+test('componentDidMount', () => {
   const testProps = testPropsSetup({
-    useInvitation: jest.fn(() => Promise.resolve(useInvitationResult)),
-    goToCommunity: jest.fn()
+    useInvitation: jest.fn()
   })
-  // const instance = ReactTestRenderer.create(<JoinCommunity {...testProps} />).getInstance()
-  return shallowRender(testProps)._instance.componentWillMount()
-  .then(() => {
-    expect(testProps.useInvitation).toHaveBeenCalled()
-    return expect(testProps.goToCommunity).toHaveBeenCalled()
-  })
+  shallowRender(testProps)._instance.componentDidMount()
+  expect(testProps.useInvitation).toHaveBeenCalled()
 })

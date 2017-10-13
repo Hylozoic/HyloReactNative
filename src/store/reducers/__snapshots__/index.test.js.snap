@@ -2,13 +2,11 @@
 
 exports[`sets up the expected reducers 1`] = `
 Object {
-  "CheckInvitation": Object {},
   "CommentEditor": Object {},
   "FeedList": Object {
     "filter": null,
     "sortBy": "updated",
   },
-  "JoinCommunity": Object {},
   "MemberFeed": Object {
     "choice": "Posts",
   },
