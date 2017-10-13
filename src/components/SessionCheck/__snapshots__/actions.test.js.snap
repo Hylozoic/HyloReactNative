@@ -23,15 +23,3 @@ Object {
   "type": "CHECK_SESSION",
 }
 `;
-
-exports[`checkVersion matches the existing snapshot 1`] = `
-Object {
-  "payload": Object {
-    "api": Object {
-      "method": "get",
-      "path": "/noo/mobile/auto-update-info?undefined-version=undefined",
-    },
-  },
-  "type": "CHECK_VERSION",
-}
-`;

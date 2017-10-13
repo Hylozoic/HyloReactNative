@@ -1,4 +1,4 @@
-import { checkSession, checkVersion } from './actions'
+import { checkSession } from './actions'
 
 describe('checkSession', () => {
   it('works with a cookie', () => {
@@ -13,13 +13,5 @@ describe('checkSession', () => {
       getSessionCookie: () => Promise.resolve(false)
     }))
     expect(checkSession()).toMatchSnapshot()
-  })
-})
-
-describe('checkVersion', () => {
-  it('matches the existing snapshot', () => {
-    const platform = 'ios'
-    const version = '1.0'
-    expect(checkVersion()).toMatchSnapshot()
   })
 })
