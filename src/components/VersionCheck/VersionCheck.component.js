@@ -16,9 +16,9 @@ export default class VersionCheck extends React.Component {
         text: 'Update Now',
         onPress: () => {
           if (isIOS) {
-            Linking.openURL(APP_STORE_LINK).catch(err => console.error('An error occurred', err))
+            Linking.openURL(APP_STORE_LINK)
           } else {
-            Linking.openURL(PLAY_STORE_LINK).catch(err => console.error('An error occurred', err))
+            Linking.openURL(PLAY_STORE_LINK)
           }
         }
       }
