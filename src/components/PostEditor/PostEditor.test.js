@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
-// import TestRenderer from 'react-test-renderer'
+import TestRenderer from 'react-test-renderer'
 import PostEditor, { SectionLabel, TypeButton } from './PostEditor'
 
 describe('PostEditor', () => {
@@ -11,6 +11,31 @@ describe('PostEditor', () => {
     />)
     const actual = renderer.getRenderOutput()
     expect(actual).toMatchSnapshot()
+  })
+
+  it('renders correctly while saving', () => {
+    const navigation = {setParams: jest.fn()}
+    const save = jest.fn(() => Promise.resolve())
+    const renderer = TestRenderer.create(<PostEditor
+      editDetails={jest.fn()}
+      setDetails={jest.fn()}
+      save={save}
+      navigation={navigation}
+      post={{details: 'myDetails', communities: [{id: 1}]}}
+    />)
+
+    expect(renderer.toJSON()).toMatchSnapshot()
+
+    const instance = renderer.getInstance()
+
+    instance.setState({type: 'request'})
+    instance.save()
+
+    expect(navigation.setParams).toHaveBeenCalledWith({isSaving: true})
+    expect(save).toHaveBeenCalled()
+    expect(instance.state.isSaving).toBeTruthy()
+
+    expect(renderer.toJSON()).toMatchSnapshot()
   })
 })
 

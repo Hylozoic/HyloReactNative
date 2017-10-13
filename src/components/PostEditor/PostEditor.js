@@ -8,7 +8,6 @@ import {
   View
 } from 'react-native'
 import PropTypes from 'prop-types'
-import Icon from '../Icon'
 import styles from './PostEditor.styles'
 import Loading from '../Loading'
 import { get } from 'lodash/fp'
@@ -39,32 +38,35 @@ export default class PostEditor extends React.Component {
     }
   }
 
+  save = () => {
+    const { navigation, save, details } = this.props
+    const { title, type, communityIds } = this.state
+    const postData = {
+      title,
+      type,
+      details: details,
+      communities: communityIds.map(id => ({id}))
+    }
+
+    let result = save(postData)
+
+    if (result) {
+      this.setState({isSaving: true})
+      navigation.setParams({isSaving: true})
+      return result.catch(() => {
+        this.setState({isSaving: false})
+        navigation.setParams({isSaving: false})
+      })
+    }
+  }
+
   componentDidMount () {
     const { post, navigation, setDetails } = this.props
     setDetails(get('details', post))
 
     navigation.setParams({
       headerTitle: post ? 'Edit Post' : 'New Post',
-      save: () => {
-        const { title, type, communityIds } = this.state
-        const postData = {
-          title,
-          type,
-          details: this.props.details,
-          communities: communityIds.map(id => ({id}))
-        }
-
-        let result = this.props.save(postData)
-
-        if (result) {
-          this.setState({isSaving: true})
-          navigation.setParams({isSaving: true})
-          return result.catch(() => {
-            this.setState({isSaving: false})
-            navigation.setParams({isSaving: false})
-          })
-        }
-      }
+      save: this.save
     })
   }
 
