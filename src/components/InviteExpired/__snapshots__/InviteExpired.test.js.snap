@@ -20,6 +20,10 @@ exports[`InviteExpired matches the last snapshot 1`] = `
       Contact your moderator for another one.
     </Text>
   </View>
+  <Image
+    resizeMode="stretch"
+    source={1}
+  />
   <View>
     <View>
       <TouchableOpacity
@@ -38,9 +42,5 @@ exports[`InviteExpired matches the last snapshot 1`] = `
       </TouchableOpacity>
     </View>
   </View>
-  <Image
-    resizeMode="stretch"
-    source={1}
-  />
 </View>
 `;
