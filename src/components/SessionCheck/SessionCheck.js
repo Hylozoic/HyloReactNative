@@ -65,7 +65,7 @@ export default class SessionCheck extends React.Component {
 
   componentWillUnmount () {
     // Universal Linking - remove url listener
-    Linking.removeEventListener('url', this._setEntryURL)
+    Linking.removeEventListener('url', this._handleSetEntryURL)
   }
 
   // NOTE: The combination of the obscuring INTERNAL_ROUTE_URI_PREFIX constant
