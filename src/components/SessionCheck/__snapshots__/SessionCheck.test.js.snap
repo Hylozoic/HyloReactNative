@@ -11,11 +11,6 @@ exports[`SessionCheck component matches last snapshot - loading 1`] = `<Loading 
 exports[`SessionCheck component matches last snapshot - loggedIn with a currentUser 1`] = `
 <View>
   <RootNavigator
-    screenProps={
-      Object {
-        "currentTabName": "Home",
-      }
-    }
     uriPrefix="internalRouting://"
   />
   <SocketListener />

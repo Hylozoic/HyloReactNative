@@ -23,13 +23,6 @@ export default class SessionCheck extends React.Component {
     fetchCurrentUser: PropTypes.func.isRequired
   }
 
-  constructor (props) {
-    super(props)
-    this.state = {
-      currentTabName: 'Home'
-    }
-  }
-
   componentWillMount () {
     // Universal Linking - set entryURL when app is closed (initial) or woken up
     Linking.getInitialURL().then(url => this._handleSetEntryURL(url))
@@ -94,14 +87,14 @@ export default class SessionCheck extends React.Component {
     const { loading, loggedIn, currentUser } = this.props
     if (!loading) {
       if (!loggedIn) {
-        return <LoginNavigator uriPrefix={INTERNAL_ROUTE_URI_PREFIX}
+        return <LoginNavigator
+          uriPrefix={INTERNAL_ROUTE_URI_PREFIX}
           ref={nav => { this.navigator = nav }} />
       }
       if (currentUser) {
         return <View style={{flex: 1}}>
           <RootNavigator
             uriPrefix={INTERNAL_ROUTE_URI_PREFIX}
-            screenProps={this.state}
             ref={nav => { this.navigator = nav && nav.getWrappedInstance() }} />
           <SocketListener />
         </View>
