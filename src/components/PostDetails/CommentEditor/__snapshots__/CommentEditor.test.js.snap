@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<KeyboardAvoidingView
+  behavior="padding"
+  keyboardVerticalOffset={64}
+>
+  <Editor
+    communityId={1}
+    initialContent="lalala"
+    navigation={
+      Object {
+        "state": Object {
+          "params": Object {
+            "communityId": 1,
+          },
+        },
+      }
+    }
+    placeholder="Whats your comment?"
+  />
+</KeyboardAvoidingView>
+`;

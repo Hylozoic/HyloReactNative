@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders as expected 1`] = `
+<View>
+  <RichTextEditor
+    contentPlaceholder="Details"
+    customCSS="
+  [data-entity-type=\\"mention\\"] {
+    text-decoration: none;
+    color: #0DC39F;
+  }
+  
+  [data-entity-type=\\"#mention\\"] {
+    text-decoration: none;
+    color: #0DC39F;
+  }
+  "
+    enableOnChange={true}
+    hiddenTitle={true}
+    initialContentHTML={undefined}
+  />
+  <RichTextToolbar
+    actions={
+      Array [
+        undefined,
+        undefined,
+        undefined,
+        "Hylo/INSERT_MENTION",
+        "Hylo/INSERT_TOPIC",
+      ]
+    }
+    getEditor={[Function]}
+    onPressCustomAction={[Function]}
+    renderIcon={[Function]}
+  />
+</View>
+`;
