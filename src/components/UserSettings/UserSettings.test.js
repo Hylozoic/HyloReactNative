@@ -230,6 +230,55 @@ describe('UserSettings', () => {
       expect(confirmLeave).toHaveBeenCalledWith(logout)
     })
   })
+
+  describe('loginWithFacebook', () => {
+    describe('when cancelled', () => {
+      jest.mock('react-native-fbsdk', () => ({
+        LoginManager: {
+          logInWithReadPermissions: () => Promise.resolve({isCancelled: true})
+        }
+      }))
+      it('calls onLogin with false', () => {
+        const onLogin = jest.fn()
+        const loginWithFacebook = jest.fn()
+        const instance = ReactTestRenderer.create(
+          <UserSettings loginWithFacebook={loginWithFacebook} />).getInstance()
+        instance.loginWithFacebook(onLogin)
+        .then(() => {
+          expect(onLogin).toHaveBeenCalledWith(false)
+        })
+      })
+    })
+
+    describe('on success', () => {
+      jest.mock('react-native-fbsdk', () => ({
+        LoginManager: {
+          logInWithReadPermissions: () => Promise.resolve({})
+        },
+        AccessToken: {
+          getCurrentAccessToken: () => Promise.resolve({
+            data: {
+              accessToken: 'atoken'
+            }
+          })
+        }
+      }))
+      it('calls the prop with token, onLogin with true', () => {
+        const onLogin = jest.fn()
+        const loginWithFacebook = jest.fn()
+        const instance = ReactTestRenderer.create(
+          <UserSettings loginWithFacebook={loginWithFacebook} />).getInstance()
+        instance.loginWithFacebook(onLogin)
+        .then(() => {
+          expect(loginWithFacebook).toHaveBeenCalledWith('atoken')
+          expect(onLogin).toHaveBeenCalledWith(true)
+        })
+      })
+    })
+  })
+
+  it('has navigationOptions', () =>
+    expect(UserSettings.navigationOptions()).toMatchSnapshot())
 })
 
 describe('SocialAccounts', () => {

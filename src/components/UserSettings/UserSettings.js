@@ -13,7 +13,7 @@ import styles from './UserSettings.styles'
 import { any, values, isNil } from 'lodash/fp'
 
 export default class UserSettings extends React.Component {
-  static navigationOptions = ({ navigation }) => {
+  static navigationOptions = () => {
     return {
       title: 'Edit Account Info',
       headerStyle: styles.header,

@@ -191,6 +191,21 @@ Array [
 ]
 `;
 
+exports[`UserSettings has navigationOptions 1`] = `
+Object {
+  "headerStyle": Object {
+    "backgroundColor": "white",
+  },
+  "headerTintColor": "#818A88",
+  "headerTitleStyle": Object {
+    "color": "black",
+    "fontFamily": "Circular-Bold",
+    "fontSize": 17,
+  },
+  "title": "Edit Account Info",
+}
+`;
+
 exports[`UserSettings matches snapshot with state set 1`] = `
 <View
   keyboardVerticalOffset={64}
