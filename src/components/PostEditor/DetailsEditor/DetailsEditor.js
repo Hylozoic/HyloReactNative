@@ -9,7 +9,7 @@ export default class DetailsEditor extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
       headerTitle: 'Details',
-      headerRight: <View style={styles.saveButton}><Button title={'OK'} onPress={() => navigation.goBack()} /></View>
+      headerRight: <View style={styles.saveButton}><Button title={'Save'} onPress={() => navigation.goBack()} /></View>
     }
   }
 

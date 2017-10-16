@@ -48,16 +48,15 @@ export default class PostEditor extends React.Component {
       communities: communityIds.map(id => ({id}))
     }
 
-    let result = save(postData)
+    this.setState({isSaving: true})
+    navigation.setParams({isSaving: true})
 
-    if (result) {
-      this.setState({isSaving: true})
-      navigation.setParams({isSaving: true})
-      return result.catch(() => {
-        this.setState({isSaving: false})
-        navigation.setParams({isSaving: false})
-      })
-    }
+    return save(postData)
+    .catch(e => {
+      alert(e.message)
+      this.setState({isSaving: false})
+      navigation.setParams({isSaving: false})
+    })
   }
 
   componentDidMount () {

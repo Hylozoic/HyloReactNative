@@ -24,11 +24,11 @@ export function mapDispatchToProps (dispatch, props) {
   return {
     save: postData => {
       if (!postData.title) {
-        return alert('Title cannot be blank')
+        return Promise.reject(new Error('Title cannot be blank'))
       }
 
       if (isEmpty(postData.communities)) {
-        return alert('You must select a community')
+        return Promise.reject(new Error('You must select a community'))
       }
 
       if (postId) postData.id = postId
