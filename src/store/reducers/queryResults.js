@@ -45,11 +45,9 @@ export default function (state = {}, action) {
     case CREATE_POST:
       root = payload.data.createPost
       return matchNewPostIntoQueryResults(state, root)
-      break
 
     case RECEIVE_POST:
       return matchNewPostIntoQueryResults(state, payload.data.post)
-      break
   }
   return state
 }
