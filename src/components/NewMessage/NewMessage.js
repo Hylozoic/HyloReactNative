@@ -100,6 +100,7 @@ export function ParticipantInput ({ participants, onChangeText, removeParticipan
       <TextInput
         value={text}
         onChangeText={onChangeText}
+        underlineColorAndroid='transparent'
         style={[styles.participantTextInput, inputStyle]} />
     </ScrollView>
   </View>
@@ -145,7 +146,8 @@ export function MessagePrompt ({ currentUser, createMessage, setMessage, message
         onChangeText={setMessage}
         onBlur={onBlur}
         placeholder='Type your message here'
-        placeholderTextColor={capeCod40} />
+        placeholderTextColor={capeCod40}
+        underlineColorAndroid='transparent' />
       <TouchableOpacity onPress={() => createMessage()}>
         <Text style={[styles.sendButton, gray && styles.grayButton]}>Send</Text>
       </TouchableOpacity>
