@@ -3,7 +3,7 @@ import {
   Text,
   ScrollView
 } from 'react-native'
-import SignupControl from '../SignupControl'
+import SettingControl from '../../SettingControl'
 import Button from '../../Button'
 import KeyboardFriendlyView from '../../KeyboardFriendlyView'
 import styles from './SignupFlow1.styles'
@@ -98,14 +98,14 @@ export default class SignupFlow1 extends React.Component {
         <Text style={styles.subTitle}>
           To kick things off, tell us a bit more about yourself and get your account off the ground.
         </Text>
-        <SignupControl
+        <SettingControl
           label='Your Full Name'
           value={name}
           onChange={value => this.updateField('name', value)}
           error={errors.name}
           returnKeyType='next'
           onSubmitEditing={() => this.emailControl.focus()} />
-        <SignupControl
+        <SettingControl
           ref={c => { this.emailControl = c }}
           label='Email Address'
           value={email}
@@ -116,7 +116,7 @@ export default class SignupFlow1 extends React.Component {
           error={errors.email}
           returnKeyType='next'
           onSubmitEditing={() => this.passwordControl.focus()} />
-        {showPasswordField && <SignupControl
+        {showPasswordField && <SettingControl
           ref={c => { this.passwordControl = c }}
           label='Password'
           value={password}
@@ -125,7 +125,7 @@ export default class SignupFlow1 extends React.Component {
           error={errors.password}
           returnKeyType='next'
           onSubmitEditing={() => this.confirmPasswordControl.focus()} />}
-        {showPasswordField && <SignupControl
+        {showPasswordField && <SettingControl
           ref={c => { this.confirmPasswordControl = c }}
           label='Confirm Password'
           value={confirmPassword}

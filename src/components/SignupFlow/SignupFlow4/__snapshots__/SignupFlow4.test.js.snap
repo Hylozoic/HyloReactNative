@@ -41,7 +41,7 @@ exports[`SignupFlow4 matches last snapshot 1`] = `
         What skills are you known for? The more skills you add, the more relevant the content. Its like magic.
       </Text>
     </View>
-    <SignupControl
+    <SettingControl
       label="How can you help?"
       onChange={[Function]}
       value="Pop"

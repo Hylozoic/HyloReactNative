@@ -1,10 +1,10 @@
 import React from 'react'
 import { View, Text, TextInput, TouchableOpacity } from 'react-native'
-import styles from './SignupControl.styles.js'
+import styles from './SettingControl.styles.js'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
 import Triangle from 'react-native-triangle'
 
-export default class SignupControl extends React.Component {
+export default class SettingControl extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -70,16 +70,17 @@ export default class SignupControl extends React.Component {
       autoCapitalize,
       autoCorrect,
       style,
-      error
+      error,
+      theme = {}
     } = this.props
 
     const { securePassword, editable, highlight } = this.state
 
-    return <View style={[styles.control, style]}>
-      <Text style={styles.label}>{label}</Text>
+    return <View style={[styles.control, style, theme.control]}>
+      <Text style={[styles.label, theme.label]}>{label}</Text>
       <TextInput
         ref={c => { this.input = c }}
-        style={styles.textInput}
+        style={[styles.textInput, theme.textInput]}
         onChangeText={onChange}
         value={value}
         secureTextEntry={toggleSecureTextEntry && securePassword}
@@ -106,13 +107,13 @@ export default class SignupControl extends React.Component {
           </TouchableOpacity>
         </View>}
       </View>}
-      {!!error && <View style={styles.errorWrapper}>
-        <Triangle
+      {!!error && <View style={[styles.errorWrapper, theme.errorWrapper]}>
+        {!theme.hideErrorTriangle && <Triangle
           width={10}
           height={5}
           color='white'
-          direction='up' />
-        <View style={styles.error}>
+          direction='up' />}
+        <View style={[styles.error, theme.error]}>
           <Text style={styles.errorText}>{error}</Text>
         </View>
       </View>}

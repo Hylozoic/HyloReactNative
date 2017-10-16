@@ -8,7 +8,6 @@ import { Dimensions } from 'react-native'
 import WelcomeScene from '../WelcomeScene'
 import Feed from '../Feed'
 import JoinCommunity from '../JoinCommunity'
-import Settings from '../Settings'
 import DrawerMenu from '../DrawerMenu'
 import { Home, Members, Topics } from '../Tabs' // eslint-disable-line no-unused-vars
 import stacksInTabsFactory from './stacksInTabsFactory'
@@ -22,6 +21,7 @@ import NewMessage from '../NewMessage'
 import Thread from '../Thread'
 import ThreadList from '../ThreadList'
 import MemberDetails from '../MemberProfile/MemberDetails'
+import UserSettings from '../UserSettings'
 import createLinkingAwareContainer from './createLinkingAwareContainer'
 import trackCurrentTab from './trackCurrentTab'
 import { isIOS } from 'util/platform'
@@ -51,7 +51,7 @@ export const screensInTabs = {
 
 // Screens that work outside of tabs, Settings, Messages, etc.
 export const screensInStack = {
-  Settings: {screen: Settings, path: 'settings'},
+  UserSettings: {screen: UserSettings, path: 'settings'},
   JoinCommunity: {screen: JoinCommunity, path: 'h/use-invitation'},
   JoinCommunityAccessCode: {screen: JoinCommunity, path: 'c/:slug/join/:accessCode'},
   Thread: {screen: Thread, path: 'thread/:id'},

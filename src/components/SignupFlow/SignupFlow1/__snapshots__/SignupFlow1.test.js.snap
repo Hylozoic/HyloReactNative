@@ -39,7 +39,7 @@ exports[`hides password, and changes button when pending  1`] = `
     >
       To kick things off, tell us a bit more about yourself and get your account off the ground.
     </Text>
-    <SignupControl
+    <SettingControl
       error={null}
       label="Your Full Name"
       onChange={[Function]}
@@ -47,7 +47,7 @@ exports[`hides password, and changes button when pending  1`] = `
       returnKeyType="next"
       value="Ra"
     />
-    <SignupControl
+    <SettingControl
       autoCapitalize="none"
       autoCorrect={false}
       error={null}
@@ -105,7 +105,7 @@ exports[`matches last snapshot 1`] = `
     >
       To kick things off, tell us a bit more about yourself and get your account off the ground.
     </Text>
-    <SignupControl
+    <SettingControl
       error={null}
       label="Your Full Name"
       onChange={[Function]}
@@ -113,7 +113,7 @@ exports[`matches last snapshot 1`] = `
       returnKeyType="next"
       value="Ra"
     />
-    <SignupControl
+    <SettingControl
       autoCapitalize="none"
       autoCorrect={false}
       error={null}
@@ -124,7 +124,7 @@ exports[`matches last snapshot 1`] = `
       returnKeyType="next"
       value="ra@ra.com"
     />
-    <SignupControl
+    <SettingControl
       error={null}
       label="Password"
       onChange={[Function]}
@@ -133,7 +133,7 @@ exports[`matches last snapshot 1`] = `
       toggleSecureTextEntry={true}
       value="rarara"
     />
-    <SignupControl
+    <SettingControl
       error={undefined}
       label="Confirm Password"
       onChange={[Function]}

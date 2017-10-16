@@ -40,7 +40,7 @@ exports[`matches last snapshot 1`] = `
       Add your location to see more relevant content and find people and projects near you.
     </Text>
   </View>
-  <SignupControl
+  <SettingControl
     label="Where do you call home"
     onChange={undefined}
     value="Hull"

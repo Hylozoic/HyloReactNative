@@ -5,7 +5,7 @@ import {
 } from 'react-native'
 import Button from '../../Button'
 import KeyboardFriendlyView from '../../KeyboardFriendlyView'
-import SignupControl from '../SignupControl'
+import SettingControl from '../../SettingControl'
 import styles from './SignupFlow3.styles'
 import { keyboardAvoidingViewProps as kavProps } from 'util/viewHelpers'
 
@@ -33,7 +33,7 @@ export default class SignupFlow3 extends React.Component {
           Add your location to see more relevant content and find people and projects near you.
         </Text>
       </View>
-      <SignupControl
+      <SettingControl
         ref={c => { this.control = c }}
         label='Where do you call home'
         value={location}
