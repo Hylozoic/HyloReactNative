@@ -15,8 +15,7 @@ if (process.env.NODE_ENV === 'production') {
   clearInterval = Timer.clearInterval.bind(Timer)
 } else {
   console.ignoredYellowBox = [
-    'Setting a timer',
-    'Remote debugger'
+    'Setting a timer'
   ]
 }
 
