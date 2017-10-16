@@ -43,4 +43,28 @@ describe('PostEditor mapDispatchToProps', () => {
     expect(dispatch).toHaveBeenCalled()
     expect(dispatch.mock.calls).toMatchSnapshot()
   })
+
+  it('calls save correctly', async () => {
+    expect.assertions(5)
+
+    const dispatch = jest.fn(val => Promise.resolve(val))
+    const dispatchProps = mapDispatchToProps(dispatch, props)
+    expect(dispatchProps).toMatchSnapshot()
+
+    let postData = {
+      title: '',
+      communities: []
+    }
+
+    await expect(dispatchProps.save(postData)).rejects.toHaveProperty('message', 'Title cannot be blank')
+
+    postData.title = 'a title'
+    await expect(dispatchProps.save(postData)).rejects.toHaveProperty('message', 'You must select a community')
+
+    postData.communities = [{id: 1}]
+    await expect(dispatchProps.save(postData)).resolves
+
+    expect(dispatch).toHaveBeenCalled()
+    expect(dispatch.mock.calls).toMatchSnapshot()
+  })
 })

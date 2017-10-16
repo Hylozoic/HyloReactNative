@@ -1,5 +1,54 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`PostEditor mapDispatchToProps calls save correctly 1`] = `
+Object {
+  "editDetails": [Function],
+  "save": [Function],
+  "setDetails": [Function],
+}
+`;
+
+exports[`PostEditor mapDispatchToProps calls save correctly 2`] = `
+Array [
+  Array [
+    Object {
+      "graphql": Object {
+        "query": "mutation ($id: ID, $type: String, $title: String, $details: String, $communityIds: [String]) {
+        updatePost(id: $id, data: {type: $type, title: $title, details: $details, communityIds: $communityIds}) {
+          id
+          type
+          title
+          details
+          communities {
+            id
+            name
+            slug
+          }
+        }
+      }",
+        "variables": Object {
+          "communityIds": Array [
+            1,
+          ],
+          "details": undefined,
+          "id": 1,
+          "title": "a title",
+          "type": undefined,
+        },
+      },
+      "meta": Object {
+        "extractModel": Object {
+          "append": false,
+          "getRoot": [Function],
+          "modelName": "Post",
+        },
+      },
+      "type": "PostEditor/UPDATE_POST",
+    },
+  ],
+]
+`;
+
 exports[`PostEditor mapDispatchToProps maps the action generators 1`] = `
 Object {
   "editDetails": [Function],
