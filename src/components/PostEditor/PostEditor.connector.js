@@ -38,7 +38,8 @@ export function mapDispatchToProps (dispatch, props) {
         if (error) {
           return alert(payload.message)
         }
-        return navigation.goBack()
+        navigation.goBack()
+        return Promise.resolve({})
       })
     },
     editDetails: () => {

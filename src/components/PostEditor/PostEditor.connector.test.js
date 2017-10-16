@@ -45,7 +45,7 @@ describe('PostEditor mapDispatchToProps', () => {
   })
 
   it('calls save correctly', async () => {
-    expect.assertions(5)
+    expect.assertions(6)
 
     const dispatch = jest.fn(val => Promise.resolve(val))
     const dispatchProps = mapDispatchToProps(dispatch, props)
@@ -62,7 +62,7 @@ describe('PostEditor mapDispatchToProps', () => {
     await expect(dispatchProps.save(postData)).rejects.toHaveProperty('message', 'You must select a community')
 
     postData.communities = [{id: 1}]
-    await expect(dispatchProps.save(postData)).resolves
+    await expect(dispatchProps.save(postData)).resolves.toBeDefined()
 
     expect(dispatch).toHaveBeenCalled()
     expect(dispatch.mock.calls).toMatchSnapshot()

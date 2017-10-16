@@ -1,5 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`PostEditor has navigation options 1`] = `
+Object {
+  "headerRight": <View>
+    <Button
+        disabled={false}
+        onPress={[Function]}
+        title="Save"
+    />
+</View>,
+  "headerTitle": "a title",
+}
+`;
+
 exports[`PostEditor renders a new editor correctly 1`] = `
 <Unknown
   behavior="padding"
