@@ -1,5 +1,61 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Footer matches the last snapshot without saveChanges 1`] = `
+<View>
+  <Button
+    disabled={true}
+    onPress={undefined}
+    text="Save Changes"
+  />
+  <TouchableOpacity
+    activeOpacity={0.2}
+    focusedOpacity={0.7}
+    onPress={[Function]}
+  >
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+    >
+      Cancel
+    </Text>
+  </TouchableOpacity>
+  <Button
+    onPress={[Function]}
+    text="Logout"
+  />
+</View>
+`;
+
+exports[`Footer matches the last snapshot without saveChanges 2`] = `
+<View>
+  <Button
+    disabled={false}
+    onPress={[Function]}
+    text="Save Changes"
+  />
+  <TouchableOpacity
+    activeOpacity={0.2}
+    focusedOpacity={0.7}
+    onPress={[Function]}
+  >
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+    >
+      Cancel
+    </Text>
+  </TouchableOpacity>
+  <Button
+    onPress={[Function]}
+    text="Logout"
+  />
+</View>
+`;
+
 exports[`SocialAccounts matches the last snapshot 1`] = `
 <View>
   <Text
@@ -30,33 +86,72 @@ exports[`SocialAccounts matches the last snapshot 1`] = `
 </View>
 `;
 
-exports[`SocialControl matches the last snapshot 1`] = `
+exports[`SocialControl matches the last snapshot linked 1`] = `
 <View>
   <Text
     accessible={true}
     allowFontScaling={true}
     disabled={false}
     ellipsizeMode="tail"
+  />
+  <TouchableOpacity
+    activeOpacity={0.2}
+    focusedOpacity={0.7}
+    onPress={[Function]}
   >
-    SOCIAL ACCOUNTS
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+    >
+      Unlink
+    </Text>
+  </TouchableOpacity>
+</View>
+`;
+
+exports[`SocialControl matches the last snapshot loading 1`] = `
+<View>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    disabled={false}
+    ellipsizeMode="tail"
+  />
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    disabled={false}
+    ellipsizeMode="tail"
+  >
+    Loading
   </Text>
-  <SocialControl
-    label="Facebook"
-    onChange={[Function]}
-    onLink={[Function]}
-    provider="facebook"
-    unlinkAccount={[Function]}
-    value="foo.com"
+</View>
+`;
+
+exports[`SocialControl matches the last snapshot unlinked 1`] = `
+<View>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    disabled={false}
+    ellipsizeMode="tail"
   />
-  <SocialControl
-    label="Twitter"
-    onChange={[Function]}
-    onLink={[Function]}
-    provider="twitter"
-    unlinkAccount={[Function]}
-    updateUserSettings={[Function]}
-    value="rara"
-  />
+  <TouchableOpacity
+    activeOpacity={0.2}
+    focusedOpacity={0.7}
+    onPress={[Function]}
+  >
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+    >
+      Link
+    </Text>
+  </TouchableOpacity>
 </View>
 `;
 

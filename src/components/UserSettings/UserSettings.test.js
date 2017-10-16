@@ -253,19 +253,59 @@ describe('SocialAccounts', () => {
 })
 
 describe('SocialControl', () => {
-  it('matches the last snapshot', () => {
-    const renderer = new ReactShallowRenderer()
-    const props = {
-      twitterPrompt: () => {},
-      facebookUrl: 'foo.com',
-      twitterName: 'rara',
-      loginWithFacebook: () => {},
-      updateUserSettings: () => {},
-      unlinkAccount: () => {},
-      updateField: () => {}
-    }
+  const props = {
+    twitterPrompt: () => {},
+    facebookUrl: 'foo.com',
+    twitterName: 'rara',
+    loginWithFacebook: () => {},
+    updateUserSettings: () => {},
+    unlinkAccount: () => {},
+    updateField: () => {}
+  }
 
+  it('matches the last snapshot unlinked', () => {
+    const renderer = new ReactShallowRenderer()
     renderer.render(<SocialControl {...props} />)
+    const actual = renderer.getRenderOutput()
+
+    expect(actual).toMatchSnapshot()
+  })
+
+  it('matches the last snapshot linked', () => {
+    const renderer = new ReactShallowRenderer()
+    renderer.render(<SocialControl {...props} value='foo' />)
+    const actual = renderer.getRenderOutput()
+
+    expect(actual).toMatchSnapshot()
+  })
+
+  it('matches the last snapshot loading', () => {
+    const renderer = ReactTestRenderer.create(
+      <SocialControl {...props} />)
+    const instance = renderer.getInstance()
+    instance.setState({loading: true})
+
+    expect(renderer.toJSON()).toMatchSnapshot()
+  })
+})
+
+describe('Footer', () => {
+  const props = {
+    cancel: () => {},
+    logout: () => {}
+  }
+
+  it('matches the last snapshot without saveChanges', () => {
+    const renderer = new ReactShallowRenderer()
+    renderer.render(<Footer {...props} />)
+    const actual = renderer.getRenderOutput()
+
+    expect(actual).toMatchSnapshot()
+  })
+
+  it('matches the last snapshot without saveChanges', () => {
+    const renderer = new ReactShallowRenderer()
+    renderer.render(<Footer {...props} saveChanges={() => {}} />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
