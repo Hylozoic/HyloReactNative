@@ -242,6 +242,7 @@ export class SocialControl extends React.Component {
   state = {
     loading: false
   }
+
   linkClicked () {
     const { provider, onLink, updateUserSettings, onChange } = this.props
 

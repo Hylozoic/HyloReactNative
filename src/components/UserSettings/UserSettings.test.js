@@ -280,12 +280,85 @@ describe('SocialControl', () => {
   })
 
   it('matches the last snapshot loading', () => {
-    const renderer = ReactTestRenderer.create(
-      <SocialControl {...props} />)
+    const renderer = ReactTestRenderer.create(<SocialControl {...props} />)
     const instance = renderer.getInstance()
     instance.setState({loading: true})
 
     expect(renderer.toJSON()).toMatchSnapshot()
+  })
+
+  describe('linkClicked', () => {
+    describe('with twitter', () => {
+      const provider = 'twitter'
+
+      it('does the right thing with no twitterName', () => {
+        const props = {
+          onLink: jest.fn(fn => fn()),
+          updateUserSettings: jest.fn(),
+          onChange: jest.fn(),
+          provider
+        }
+        const instance = ReactTestRenderer.create(
+          <SocialControl {...props} />).getInstance()
+        instance.linkClicked()
+        expect(props.onLink).toHaveBeenCalled()
+        expect(props.onChange).toHaveBeenCalledWith(false)
+        expect(props.updateUserSettings).not.toHaveBeenCalled()
+      })
+
+      it('does the right thing with a twitterName', () => {
+        const twitterName = 'mrtweets'
+        const props = {
+          onLink: jest.fn(fn => fn(twitterName)),
+          updateUserSettings: jest.fn(),
+          onChange: jest.fn(),
+          provider
+        }
+        const instance = ReactTestRenderer.create(
+          <SocialControl {...props} />).getInstance()
+        instance.linkClicked()
+        expect(props.onLink).toHaveBeenCalled()
+        expect(props.updateUserSettings)
+        .toHaveBeenCalledWith({twitterName})
+        expect(props.onChange).toHaveBeenCalledWith(true)
+      })
+    })
+
+    describe('with facebook', () => {
+      const provider = 'facebook'
+
+      it('does the right thing with', () => {
+        const props = {
+          onLink: jest.fn(fn => Promise.resolve(fn(true))),
+          updateUserSettings: jest.fn(),
+          onChange: jest.fn(),
+          provider
+        }
+        const instance = ReactTestRenderer.create(
+          <SocialControl {...props} />).getInstance()
+        return instance.linkClicked()
+        .then(() => {
+          expect(props.onLink).toHaveBeenCalled()
+          expect(props.onChange).toHaveBeenCalledWith(true)
+          expect(instance.state.loading).toEqual(false)
+        })
+      })
+    })
+  })
+
+  describe('unlinkClicked', () => {
+    it('does the right thing', () => {
+      const props = {
+        unlinkAccount: jest.fn(),
+        onChange: jest.fn(),
+        provider: 'facebook'
+      }
+      const instance = ReactTestRenderer.create(
+        <SocialControl {...props} />).getInstance()
+      instance.unlinkClicked()
+      expect(props.unlinkAccount).toHaveBeenCalledWith(props.provider)
+      expect(props.onChange).toHaveBeenCalledWith(false)
+    })
   })
 })
 
