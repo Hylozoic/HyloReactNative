@@ -26,10 +26,9 @@ export default class SocketListener extends React.Component {
   }
 
   componentWillUnmount () {
-    console.log('----> UNMOUNTING SOCKETLISTENER <----')
-    // this.socket.post(socketUrl('/noo/threads/unsubscribe'))
-    // Object.keys(this.handlers).forEach(socketEvent =>
-    //   this.socket.off(socketEvent, this.handlers[socketEvent]))
+    this.socket.post(socketUrl('/noo/threads/unsubscribe'))
+    Object.keys(this.handlers).forEach(socketEvent =>
+      this.socket.off(socketEvent, this.handlers[socketEvent]))
   }
 
   render () {

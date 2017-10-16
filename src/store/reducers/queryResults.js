@@ -16,6 +16,9 @@ import {
 import {
   CREATE_POST
 } from '../../components/PostEditor/PostEditor.store'
+import {
+  RECEIVE_POST
+} from '../../components/SocketListener/SocketListener.store'
 import { get, isNull, omitBy, pick, reduce, uniq, isEmpty, includes } from 'lodash/fp'
 import { createSelector as ormCreateSelector } from 'redux-orm'
 import orm from 'store/models'
@@ -44,6 +47,11 @@ export default function (state = {}, action) {
     case CREATE_POST:
       root = payload.data.createPost
       return matchNewPostIntoQueryResults(state, root)
+      break
+
+    case RECEIVE_POST:
+      return matchNewPostIntoQueryResults(state, payload.data.post)
+      break
   }
   return state
 }
