@@ -216,7 +216,7 @@ export default class UserSettings extends React.Component {
 }
 
 export function SocialAccounts ({
-  loginWithService, twitterPrompt, facebookUrl, twitterName, loginWithFacebook, updateUserSettings, unlinkAccount, updateField
+  twitterPrompt, facebookUrl, twitterName, loginWithFacebook, updateUserSettings, unlinkAccount, updateField
 }) {
   return <View style={styles.socialAccounts}>
     <Text style={[styles.settingLabel, styles.socialAccountsLabel]}>SOCIAL ACCOUNTS</Text>

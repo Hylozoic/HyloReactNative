@@ -231,3 +231,43 @@ describe('UserSettings', () => {
     })
   })
 })
+
+describe('SocialAccounts', () => {
+  it('matches the last snapshot', () => {
+    const renderer = new ReactShallowRenderer()
+    const props = {
+      twitterPrompt: () => {},
+      facebookUrl: 'foo.com',
+      twitterName: 'rara',
+      loginWithFacebook: () => {},
+      updateUserSettings: () => {},
+      unlinkAccount: () => {},
+      updateField: () => {}
+    }
+
+    renderer.render(<SocialAccounts {...props} />)
+    const actual = renderer.getRenderOutput()
+
+    expect(actual).toMatchSnapshot()
+  })
+})
+
+describe('SocialControl', () => {
+  it('matches the last snapshot', () => {
+    const renderer = new ReactShallowRenderer()
+    const props = {
+      twitterPrompt: () => {},
+      facebookUrl: 'foo.com',
+      twitterName: 'rara',
+      loginWithFacebook: () => {},
+      updateUserSettings: () => {},
+      unlinkAccount: () => {},
+      updateField: () => {}
+    }
+
+    renderer.render(<SocialControl {...props} />)
+    const actual = renderer.getRenderOutput()
+
+    expect(actual).toMatchSnapshot()
+  })
+})

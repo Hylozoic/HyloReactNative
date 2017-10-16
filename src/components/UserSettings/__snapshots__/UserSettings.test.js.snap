@@ -1,5 +1,65 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`SocialAccounts matches the last snapshot 1`] = `
+<View>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    disabled={false}
+    ellipsizeMode="tail"
+  >
+    SOCIAL ACCOUNTS
+  </Text>
+  <SocialControl
+    label="Facebook"
+    onChange={[Function]}
+    onLink={[Function]}
+    provider="facebook"
+    unlinkAccount={[Function]}
+    value="foo.com"
+  />
+  <SocialControl
+    label="Twitter"
+    onChange={[Function]}
+    onLink={[Function]}
+    provider="twitter"
+    unlinkAccount={[Function]}
+    updateUserSettings={[Function]}
+    value="rara"
+  />
+</View>
+`;
+
+exports[`SocialControl matches the last snapshot 1`] = `
+<View>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    disabled={false}
+    ellipsizeMode="tail"
+  >
+    SOCIAL ACCOUNTS
+  </Text>
+  <SocialControl
+    label="Facebook"
+    onChange={[Function]}
+    onLink={[Function]}
+    provider="facebook"
+    unlinkAccount={[Function]}
+    value="foo.com"
+  />
+  <SocialControl
+    label="Twitter"
+    onChange={[Function]}
+    onLink={[Function]}
+    provider="twitter"
+    unlinkAccount={[Function]}
+    updateUserSettings={[Function]}
+    value="rara"
+  />
+</View>
+`;
+
 exports[`UserSettings cancelPassword sets the state 1`] = `
 Object {
   "changed": false,
