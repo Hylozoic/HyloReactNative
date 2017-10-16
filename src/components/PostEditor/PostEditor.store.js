@@ -1,4 +1,5 @@
 import { get } from 'lodash/fp'
+import { divToP } from 'hylo-utils/text'
 
 export const MODULE_NAME = 'PostEditor'
 export const CREATE_POST = `${MODULE_NAME}/CREATE_POST`
@@ -9,6 +10,7 @@ export const CLEAR_DETAILS = `${MODULE_NAME}/CLEAR_DETAILS`
 export function createPost (post) {
   const { type, title, details, communities } = post
   const communityIds = communities.map(c => c.id)
+  const preprocessedDetails = divToP(details)
   return {
     type: CREATE_POST,
     graphql: {
@@ -32,7 +34,7 @@ export function createPost (post) {
       variables: {
         type,
         title,
-        details,
+        details: preprocessedDetails,
         communityIds
       }
     },
@@ -43,6 +45,7 @@ export function createPost (post) {
 export function updatePost (post) {
   const { id, type, title, details, communities } = post
   const communityIds = communities.map(c => c.id)
+  const preprocessedDetails = divToP(details)
   return {
     type: UPDATE_POST,
     graphql: {
@@ -63,7 +66,7 @@ export function updatePost (post) {
         id,
         type,
         title,
-        details,
+        details: preprocessedDetails,
         communityIds
       }
     },
