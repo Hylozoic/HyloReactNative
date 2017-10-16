@@ -20,6 +20,7 @@ export default function PostBody ({ title, details, linkPreview, slug, showMembe
     <Text style={styles.title}>{decodedTitle}</Text>
     <HTMLView
       onLinkPress={url => urlHandler(url, showMember, showTopic, slug)}
+      addLineBreaks={false}
       stylesheet={richTextStyles}
       textComponentProps={{ style: styles.details }}
       value={presentedDetails} />
