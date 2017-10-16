@@ -38,7 +38,7 @@ export default class PostEditor extends React.Component {
     }
   }
 
-  save = () => {
+  saveEditor = () => {
     const { navigation, save, details } = this.props
     const { title, type, communityIds } = this.state
     const postData = {
@@ -65,7 +65,7 @@ export default class PostEditor extends React.Component {
 
     navigation.setParams({
       headerTitle: post ? 'Edit Post' : 'New Post',
-      save: this.save
+      save: this.saveEditor
     })
   }
 

@@ -2,6 +2,7 @@ import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import TestRenderer from 'react-test-renderer'
 import PostEditor, { SectionLabel, TypeButton } from './PostEditor'
+import { TouchableOpacity } from 'react-native'
 
 describe('PostEditor', () => {
   it('renders a new editor correctly', () => {
@@ -14,6 +15,38 @@ describe('PostEditor', () => {
     />)
     const actual = renderer.getRenderOutput()
     expect(actual).toMatchSnapshot()
+  })
+
+  it('presses buttons', () => {
+    const navigation = {setParams: jest.fn()}
+    const save = jest.fn(() => Promise.resolve())
+    const editDetails = jest.fn()
+    const renderer = TestRenderer.create(<PostEditor
+      editDetails={editDetails}
+      setDetails={jest.fn()}
+      save={save}
+      navigation={navigation}
+      post={{details: 'myDetails', communities: [{id: 1}]}}
+    />)
+
+    const root = renderer.root
+
+    // Discussion type button
+    root.findAllByType(TypeButton)[0].props.onPress()
+    expect(root.instance.state.type).toBe('discussion')
+
+    // request type button
+    root.findAllByType(TypeButton)[1].props.onPress()
+    expect(root.instance.state.type).toBe('request')
+
+    // Offer type button
+    root.findAllByType(TypeButton)[2].props.onPress()
+    expect(root.instance.state.type).toBe('offer')
+
+    // details section
+    expect(editDetails).not.toHaveBeenCalled()
+    root.findAllByType(TouchableOpacity)[3].props.onPress()
+    expect(editDetails).toHaveBeenCalled()
   })
 
   it('has navigation options', () => {
@@ -37,7 +70,7 @@ describe('PostEditor', () => {
     const instance = renderer.getInstance()
 
     instance.setState({type: 'request'})
-    instance.save()
+    instance.saveEditor()
 
     expect(navigation.setParams).toHaveBeenCalledWith({isSaving: true})
     expect(save).toHaveBeenCalled()
@@ -47,6 +80,7 @@ describe('PostEditor', () => {
   })
 
   it('handles save rejections properly', async () => {
+    expect.assertions(2)
     const navigation = {setParams: jest.fn()}
     const save = jest.fn(() => Promise.reject(new Error('invalid')))
     const renderer = TestRenderer.create(<PostEditor
@@ -59,7 +93,7 @@ describe('PostEditor', () => {
 
     const instance = renderer.getInstance()
 
-    expect(await instance.save()).rejects.toHaveProperty('message', 'invalid')
+    await instance.saveEditor()
     expect(navigation.setParams.mock.calls[1][0]).toHaveProperty('isSaving', true)
     expect(navigation.setParams.mock.calls[2][0]).toHaveProperty('isSaving', false)
   })
