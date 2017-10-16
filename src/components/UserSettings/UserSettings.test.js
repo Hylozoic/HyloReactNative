@@ -4,6 +4,16 @@ import ReactShallowRenderer from 'react-test-renderer/shallow'
 import ReactTestRenderer from 'react-test-renderer'
 import UserSettings, { SocialAccounts, SocialControl, Footer } from './UserSettings'
 import { omit } from 'lodash/fp'
+import { LoginManager, AccessToken } from 'react-native-fbsdk'
+
+jest.mock('react-native-fbsdk', () => ({
+  LoginManager: {
+    logInWithReadPermissions: jest.fn()
+  },
+  AccessToken: {
+    getCurrentAccessToken: jest.fn()
+  }
+}))
 
 describe('UserSettings', () => {
   it('matches the last snapshot', () => {
@@ -99,7 +109,7 @@ describe('UserSettings', () => {
   })
 
   describe('editPassword', () => {
-    it('sets the satte', () => {
+    it('sets the state', () => {
       const instance = ReactTestRenderer.create(<UserSettings />).getInstance()
       instance.editPassword()
       expect(instance.state.editingPassword).toEqual(true)
@@ -233,17 +243,18 @@ describe('UserSettings', () => {
 
   describe('loginWithFacebook', () => {
     describe('when cancelled', () => {
-      jest.mock('react-native-fbsdk', () => ({
-        LoginManager: {
-          logInWithReadPermissions: () => Promise.resolve({isCancelled: true})
-        }
-      }))
+      beforeEach(() => {
+
+      })
+
       it('calls onLogin with false', () => {
+        LoginManager.logInWithReadPermissions.mockImplementation(() => Promise.resolve({isCancelled: true}))
         const onLogin = jest.fn()
         const loginWithFacebook = jest.fn()
         const instance = ReactTestRenderer.create(
           <UserSettings loginWithFacebook={loginWithFacebook} />).getInstance()
-        instance.loginWithFacebook(onLogin)
+        expect.assertions(1)
+        return instance.loginWithFacebook(onLogin)
         .then(() => {
           expect(onLogin).toHaveBeenCalledWith(false)
         })
@@ -251,27 +262,20 @@ describe('UserSettings', () => {
     })
 
     describe('on success', () => {
-      jest.mock('react-native-fbsdk', () => ({
-        LoginManager: {
-          logInWithReadPermissions: () => Promise.resolve({})
-        },
-        AccessToken: {
-          getCurrentAccessToken: () => Promise.resolve({
-            data: {
-              accessToken: 'atoken'
-            }
-          })
-        }
-      }))
       it('calls the prop with token, onLogin with true', () => {
+        LoginManager.logInWithReadPermissions.mockImplementation(() => Promise.resolve({}))
+        AccessToken.getCurrentAccessToken.mockImplementation(() => Promise.resolve({
+          accessToken: 'atoken'
+        }))
         const onLogin = jest.fn()
         const loginWithFacebook = jest.fn()
         const instance = ReactTestRenderer.create(
           <UserSettings loginWithFacebook={loginWithFacebook} />).getInstance()
-        instance.loginWithFacebook(onLogin)
+        expect.assertions(2)
+        return instance.loginWithFacebook(onLogin)
         .then(() => {
-          expect(loginWithFacebook).toHaveBeenCalledWith('atoken')
           expect(onLogin).toHaveBeenCalledWith(true)
+          expect(loginWithFacebook).toHaveBeenCalledWith('atoken')
         })
       })
     })

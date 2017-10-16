@@ -156,7 +156,9 @@ export default class UserSettings extends React.Component {
       .then(data => loginWithFacebook(data.accessToken.toString()))
       .then(() => onLogin(true))
     })
-    .catch(() => onLogin(false))
+    .catch(() => {
+      onLogin(false)
+    })
   }
 
   render () {
