@@ -8,6 +8,7 @@ it('renders as expected', () => {
     myVote
     votesTotal={71}
     commentsTotal={36}
+    vote={() => {}}
     commenters={[
       {avatarUrl: 'a.png'},
       {avatarUrl: 'b.png'},

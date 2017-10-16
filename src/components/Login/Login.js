@@ -142,11 +142,9 @@ export default class Login extends React.Component {
       </View>
       {passwordError && <FormError message={error} position={'bottom'} />}
       <View style={styles.paddedRow}>
-        <View style={styles.loginButton}>
-          <TouchableOpacity onPress={() => this.login()}>
-            <Text style={styles.loginText}>Log In</Text>
-          </TouchableOpacity>
-        </View>
+        <TouchableOpacity onPress={() => this.login()} style={styles.loginButton}>
+          <Text style={styles.loginText}>Log In</Text>
+        </TouchableOpacity>
       </View>
 
       <View style={styles.connectWith}>

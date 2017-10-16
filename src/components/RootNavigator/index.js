@@ -7,7 +7,7 @@ import { Dimensions } from 'react-native'
 
 import WelcomeScene from '../WelcomeScene'
 import Feed from '../Feed'
-import Settings from '../Settings'
+import JoinCommunity from '../JoinCommunity'
 import DrawerMenu from '../DrawerMenu'
 import { Home, Members, Topics } from '../Tabs' // eslint-disable-line no-unused-vars
 import stacksInTabsFactory from './stacksInTabsFactory'
@@ -21,12 +21,12 @@ import NewMessage from '../NewMessage'
 import Thread from '../Thread'
 import ThreadList from '../ThreadList'
 import MemberDetails from '../MemberProfile/MemberDetails'
-import Signup from '../Signup'
-import Login from '../Login'
 import UserSettings from '../UserSettings'
 import createLinkingAwareContainer from './createLinkingAwareContainer'
 import trackCurrentTab from './trackCurrentTab'
-import { isIOS, urlPrefix } from 'util/platform'
+import { isIOS } from 'util/platform'
+
+export const urlPrefix = 'http://hylo.com/'
 
 // Tab Home Screens
 // If you change or add tabs you have to edit trackCurrentTab.js
@@ -51,12 +51,11 @@ export const screensInTabs = {
 
 // Screens that work outside of tabs, Settings, Messages, etc.
 export const screensInStack = {
-  Settings: {screen: Settings, path: 'oldsettings'},
   UserSettings: {screen: UserSettings, path: 'settings'},
+  JoinCommunity: {screen: JoinCommunity, path: 'h/use-invitation'},
+  JoinCommunityAccessCode: {screen: JoinCommunity, path: 'c/:slug/join/:accessCode'},
   Thread: {screen: Thread, path: 'thread/:id'},
-  ThreadList: {screen: ThreadList, path: 'messages'},
-  Login: {screen: Login, path: 'login'},
-  Signup: {screen: Signup, path: 'signup'}
+  ThreadList: {screen: ThreadList, path: 'messages'}
 }
 
 Object.freeze(tabs)
@@ -109,6 +108,7 @@ const mainStackRoute = {
 }
 
 const rootNavigatorRoutes = Object.assign({}, mainStackRoute, screensInStack)
+
 const RootNavigator = StackNavigator(
   rootNavigatorRoutes,
   {

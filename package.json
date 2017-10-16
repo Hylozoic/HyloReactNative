@@ -21,6 +21,7 @@
     "hylo-utils": "Hylozoic/hylo-utils#716622b5",
     "lodash": "^4.17.4",
     "parse": "^1.9.2",
+    "path-to-regexp": "^2.0.0",
     "prop-types": "^15.5.10",
     "react": "16.0.0-alpha.12",
     "react-native": "^0.46.4",

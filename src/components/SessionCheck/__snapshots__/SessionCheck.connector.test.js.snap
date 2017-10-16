@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mapDispatchToProps maps the action generators 1`] = `
+Object {
+  "checkSession": [Function],
+  "fetchCurrentUser": [Function],
+  "initOneSignal": [Function],
+  "resetEntryURL": [Function],
+  "setEntryURL": [Function],
+}
+`;
+
+exports[`mapDispatchToProps maps the action generators 2`] = `
+Array [
+  Array [
+    Object {
+      "payload": Promise {
+        "_40": 0,
+        "_55": null,
+        "_65": 0,
+        "_72": null,
+      },
+      "type": "CHECK_SESSION",
+    },
+  ],
+]
+`;
+
+exports[`mapStateToProps returns the right keys 1`] = `
+Object {
+  "currentUser": undefined,
+  "entryURL": "http://www.hylo.com/a/path",
+  "loading": false,
+  "loggedIn": true,
+  "pending": false,
+}
+`;

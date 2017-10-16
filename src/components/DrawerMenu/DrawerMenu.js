@@ -17,14 +17,12 @@ export default class DrawerMenu extends Component {
     }
   }
 
-  componentDidUpdate (prevProps) {
-    if (isEmpty(prevProps.memberships) && !isEmpty(this.props.memberships)) {
-      this.setState({
-        memberships: this.dataSource.cloneWithRows(
-          [{community: {id: 'all', name: 'All Communities'}}]
-          .concat(this.props.memberships))
-      })
-    }
+  componentDidMount () {
+    this.setState({
+      memberships: this.dataSource.cloneWithRows(
+        [{community: {id: 'all', name: 'All Communities'}}]
+        .concat(this.props.memberships))
+    })
   }
 
   resetToTop () {
@@ -43,13 +41,10 @@ export default class DrawerMenu extends Component {
       navigation.navigate('DrawerClose')
     }
 
+    const goToMyProfile = () =>
+      navigation.navigate('MemberProfile', {id: currentUser.id})
+
     return <View style={styles.parent}>
-      <View style={styles.header}>
-        <View style={styles.search}>
-          <Icon name='Search' style={styles.searchIcon} />
-          <Text style={styles.searchText}>Search your communities</Text>
-        </View>
-      </View>
       <ListView style={styles.menu}
         ref={ref => { this.listView = ref }}
         dataSource={this.state.memberships}
@@ -58,13 +53,15 @@ export default class DrawerMenu extends Component {
             onPress={() => selectCommunity(community)} />}
         enableEmptySections />
       <View style={styles.footer}>
-        <Image source={{uri: get('avatarUrl', currentUser)}} style={styles.avatar} />
+        <TouchableOpacity onPress={goToMyProfile} style={styles.avatar}>
+          <Image source={{uri: get('avatarUrl', currentUser)}}
+            style={styles.avatar} />
+        </TouchableOpacity>
         <View style={styles.footerContent}>
           <Text style={styles.footerTopText} numberOfLines={1}>
             Hello, {name}!
           </Text>
           <View style={styles.footerButtons}>
-            <TextButton text='View Profile' onPress={() => {}} />
             <TextButton text='Settings' onPress={showSettings} />
           </View>
         </View>
