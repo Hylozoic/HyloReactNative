@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`goToCommunityFromRoot 1`] = `
+Object {
+  "payload": "anycommunityid",
+  "type": "CHANGE_COMMUNITY",
+}
+`;
+
+exports[`mapDispatchToProps 1`] = `
+Object {
+  "dispatch": [Function],
+  "goToCommunity": [Function],
+  "useInvitation": [Function],
+}
+`;
+
+exports[`mergeProps 1`] = `
+Object {
+  "communityId": "anything",
+  "currentCommunityId": "default",
+  "currentUser": Object {
+    "name": "me",
+  },
+  "invitationCodes": Object {},
+  "navigation": Object {
+    "state": Object {
+      "params": Object {
+        "accessCode": "anyaccesscode",
+        "invitationToken": "anyinvitationtoken",
+        "token": "anytoken",
+      },
+    },
+  },
+  "useInvitation": [Function],
+}
+`;

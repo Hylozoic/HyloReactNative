@@ -7,7 +7,7 @@
 // level navigators.
 
 import React from 'react'
-import { has, omit } from 'lodash/fp'
+import { has } from 'lodash/fp'
 
 const tabNames = ['Home', 'Members', 'Topics']
 
@@ -16,6 +16,10 @@ export default function trackCurrentTab (Component) {
     constructor (props) {
       super(props)
       this.state = {currentTabName: 'Home'}
+    }
+
+    getWrappedInstance () {
+      return this.wrappedInstance
     }
 
     // this method is very coupled to the nesting structure for navigators in
@@ -40,8 +44,11 @@ export default function trackCurrentTab (Component) {
 
     render () {
       return <Component
+        ref={wrappedInst => { this.wrappedInstance = wrappedInst }}
+        {...this.props}
         onNavigationStateChange={this.handleChange}
-        screenProps={this.state} />
+        screenProps={this.state}
+      />
     }
   }
 }

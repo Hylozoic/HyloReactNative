@@ -17,14 +17,12 @@ export default class DrawerMenu extends Component {
     }
   }
 
-  componentDidUpdate (prevProps) {
-    if (isEmpty(prevProps.memberships) && !isEmpty(this.props.memberships)) {
-      this.setState({
-        memberships: this.dataSource.cloneWithRows(
-          [{community: {id: 'all', name: 'All Communities'}}]
-          .concat(this.props.memberships))
-      })
-    }
+  componentDidMount () {
+    this.setState({
+      memberships: this.dataSource.cloneWithRows(
+        [{community: {id: 'all', name: 'All Communities'}}]
+        .concat(this.props.memberships))
+    })
   }
 
   resetToTop () {
