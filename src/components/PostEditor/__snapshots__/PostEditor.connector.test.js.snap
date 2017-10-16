@@ -30,7 +30,7 @@ Array [
           "communityIds": Array [
             1,
           ],
-          "details": undefined,
+          "details": "",
           "id": 1,
           "title": "a title",
           "type": undefined,
