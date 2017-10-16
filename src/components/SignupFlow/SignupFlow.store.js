@@ -1,9 +1,10 @@
 import { createSelector as ormCreateSelector } from 'redux-orm'
 import orm from 'store/models'
+export
+  { default as updateUserSettings, UPDATE_USER_SETTINGS, UPDATE_USER_SETTINGS_PENDING }
+from '../../store/actions/updateUserSettings'
 
 export const MODULE_NAME = 'SignupFlow'
-export const UPDATE_USER_SETTINGS = `${MODULE_NAME}/UPDATE_USER_SETTINGS`
-export const UPDATE_USER_SETTINGS_PENDING = `${UPDATE_USER_SETTINGS}_PENDING`
 export const UPDATE_LOCAL_USER_SETTINGS = `${MODULE_NAME}/UPDATE_LOCAL_USER_SETTINGS`
 export const SIGNUP = `${MODULE_NAME}/SIGNUP`
 export const SET_SKILL = `${MODULE_NAME}/SET_SKILL`
@@ -106,26 +107,6 @@ export function updateLocalUserSettings (settings) {
   return {
     type: UPDATE_LOCAL_USER_SETTINGS,
     payload: settings
-  }
-}
-
-export function updateUserSettings (changes) {
-  return {
-    type: UPDATE_USER_SETTINGS,
-    graphql: {
-      query: `mutation ($changes: MeInput) {
-        updateMe(changes: $changes) {
-          id
-        }
-      }`,
-      variables: {
-        changes
-      }
-    },
-    meta: {
-      optimistic: true,
-      changes
-    }
   }
 }
 

@@ -27,6 +27,7 @@ export const linkWater = '#D9ECF8'
 export const fuchsiaPink = '#BB60A8'
 export const pictonBlue = '#40A1DD'
 export const amaranth = '#EE4266'
+export const gunsmoke = '#818A88'
 
 // these colors are the equivalent of reducing the opacity of the colors named
 // above, on a white background. use these where possible, to avoid any impact

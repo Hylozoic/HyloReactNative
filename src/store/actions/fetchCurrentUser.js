@@ -11,6 +11,8 @@ export default function fetchCurrentUser () {
           email
           location
           avatarUrl
+          facebookUrl
+          twitterName
           newNotificationCount
           unseenThreadCount
           memberships {

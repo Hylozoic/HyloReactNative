@@ -1,4 +1,10 @@
 import {
+  UPDATE_USER_SETTINGS_PENDING
+} from '../actions/updateUserSettings'
+import {
+  SIGNUP, ADD_SKILL, REMOVE_SKILL
+} from '../../components/SignupFlow/SignupFlow.store'
+import {
   CREATE_COMMENT
 } from '../../components/PostDetails/CommentEditor/CommentEditor.store'
 import {
@@ -7,9 +13,6 @@ import {
 import {
   MARK_ACTIVITY_READ, MARK_ALL_ACTIVITIES_READ
 } from '../../components/NotificationsList/NotificationsList.store'
-import {
-  SIGNUP, ADD_SKILL, REMOVE_SKILL, UPDATE_USER_SETTINGS_PENDING
-} from '../../components/SignupFlow/SignupFlow.store'
 import {
   RECEIVE_COMMENT, RECEIVE_MESSAGE, RECEIVE_NOTIFICATION, RECEIVE_POST, RECEIVE_THREAD
 } from '../../components/SocketListener/SocketListener.store'

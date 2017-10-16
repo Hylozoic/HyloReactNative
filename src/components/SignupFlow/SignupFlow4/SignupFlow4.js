@@ -7,7 +7,7 @@ import {
 } from 'react-native'
 import Button from '../../Button'
 import KeyboardFriendlyView from '../../KeyboardFriendlyView'
-import SignupControl from '../SignupControl'
+import SettingControl from '../../SettingControl'
 import styles from './SignupFlow4.styles'
 import { keyboardAvoidingViewProps as kavProps } from 'util/viewHelpers'
 import { isEmpty } from 'lodash/fp'
@@ -58,7 +58,7 @@ export default class SignupFlow4 extends React.Component {
             What skills are you known for? The more skills you add, the more relevant the content. Its like magic.
           </Text>
         </View>
-        <SignupControl
+        <SettingControl
           ref={c => { this.control = c }}
           style={styles.containerPadding}
           label='How can you help?'

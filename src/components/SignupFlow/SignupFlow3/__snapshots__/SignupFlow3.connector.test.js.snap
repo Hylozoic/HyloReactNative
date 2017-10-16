@@ -37,7 +37,7 @@ Array [
         },
         "optimistic": true,
       },
-      "type": "SignupFlow/UPDATE_USER_SETTINGS",
+      "type": "UPDATE_USER_SETTINGS",
     },
   ],
 ]

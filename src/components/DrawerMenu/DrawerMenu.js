@@ -34,7 +34,7 @@ export default class DrawerMenu extends Component {
   render () {
     const { currentUser, navigation, changeCommunity } = this.props
     const name = get('name', currentUser) || 'you'
-    const showSettings = () => navigation.navigate('Settings', {name})
+    const showSettings = () => navigation.navigate('UserSettings', {name})
 
     const selectCommunity = community => {
       changeCommunity(community.id)

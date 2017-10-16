@@ -9,7 +9,7 @@ import {
 import { validateUser } from 'hylo-utils/validators'
 import validator from 'validator'
 import KeyboardFriendlyView from '../../KeyboardFriendlyView'
-import SignupControl from '../SignupControl'
+import SettingControl from '../../SettingControl'
 import Button from '../../Button'
 import styles from './SignupFlow5.styles'
 import { SkillCloud } from '../SignupFlow4/SignupFlow4'
@@ -103,7 +103,7 @@ export default class SignupFlow5 extends React.Component {
             <Image style={styles.image} source={{uri: avatarUrl}} />
           </TouchableOpacity>
         </View>}
-        <SignupControl
+        <SettingControl
           ref={c => { this.controls.name = c }}
           label='Your Full Name'
           value={name}
@@ -111,7 +111,7 @@ export default class SignupFlow5 extends React.Component {
           error={errors.name}
           onChange={value => this.updateField('name', value)}
           onSubmitEditing={() => this.updateSetting('name', name)} />
-        <SignupControl
+        <SettingControl
           ref={c => { this.controls.email = c }}
           label='Email Address'
           value={email}
@@ -122,7 +122,7 @@ export default class SignupFlow5 extends React.Component {
           error={errors.email}
           onChange={value => this.updateField('email', value)}
           onSubmitEditing={() => this.updateSetting('email', email)} />
-        {showPasswordField && <SignupControl
+        {showPasswordField && <SettingControl
           ref={c => { this.controls.password = c }}
           label='Password'
           value={password}
@@ -131,7 +131,7 @@ export default class SignupFlow5 extends React.Component {
           error={errors.password}
           onChange={value => this.updateField('password', value)}
           onSubmitEditing={() => this.updateSetting('password', password)} />}
-        {showPasswordField && <SignupControl
+        {showPasswordField && <SettingControl
           ref={c => { this.controls.confirmPassword = c }}
           label='Confirm Password'
           value={confirmPassword}
@@ -140,7 +140,7 @@ export default class SignupFlow5 extends React.Component {
           error={errors.confirmPassword}
           onChange={value => this.updateField('confirmPassword', value)}
           onSubmitEditing={() => this.updateSetting('password', password, 'confirmPassword')} />}
-        <SignupControl
+        <SettingControl
           ref={c => { this.controls.location = c }}
           label='Location'
           value={location}
