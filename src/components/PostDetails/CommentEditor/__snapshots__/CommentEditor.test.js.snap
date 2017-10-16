@@ -17,7 +17,7 @@ exports[`renders correctly 1`] = `
         },
       }
     }
-    placeholder="Whats your comment?"
+    placeholder="Add a comment?"
   />
 </KeyboardAvoidingView>
 `;
