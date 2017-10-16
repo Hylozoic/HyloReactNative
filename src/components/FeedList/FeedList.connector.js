@@ -33,12 +33,15 @@ export function mapStateToProps (state, props) {
     topicName
   })
 
+  const pending = state.pending[FETCH_POSTS]
+
   return {
     posts: getPosts(state, queryProps),
     sortBy,
     filter,
     hasMore: getHasMorePosts(state, queryProps),
-    pending: state.pending[FETCH_POSTS],
+    pending: !!pending,
+    pendingRefresh: !!(pending && pending.extractQueryResults.reset),
     queryProps // this is just here so mergeProps can use it
   }
 }
@@ -47,7 +50,6 @@ const mapDispatchToProps = {setFilter, setSort, fetchPosts}
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
   const { hasMore, pending, posts, queryProps } = stateProps
-  const fetchPosts = () => dispatchProps.fetchPosts(queryProps)
 
   const fetchMorePosts = hasMore && !pending
     ? () => dispatchProps.fetchPosts({...queryProps, offset: posts.length})
@@ -57,7 +59,8 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     ...omit(['queryProps'], stateProps),
     ...dispatchProps,
     ...ownProps,
-    fetchPosts,
+    fetchPosts: () => dispatchProps.fetchPosts(queryProps),
+    refreshPosts: () => dispatchProps.fetchPosts(queryProps, {reset: true}),
     fetchMorePosts
   }
 }

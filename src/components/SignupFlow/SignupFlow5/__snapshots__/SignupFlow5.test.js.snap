@@ -2,6 +2,7 @@
 
 exports[`has navigationOptions 1`] = `
 Object {
+  "headerBackTitle": null,
   "headerStyle": Object {
     "backgroundColor": "#0DC39F",
     "shadowColor": "transparent",
@@ -17,143 +18,204 @@ Object {
 `;
 
 exports[`hides image when no url and password when no password 1`] = `
-<ScrollViewMock>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    disabled={false}
-    ellipsizeMode="tail"
-  >
-    Everything looking good?
-  </Text>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    disabled={false}
-    ellipsizeMode="tail"
-  >
-    You can always come back and change your details at any time.
-  </Text>
-  <SignupControl
-    label="Your Full Name"
-    value="Hill"
-  />
-  <SignupControl
-    autoCapitalize="none"
-    autoCorrect={false}
-    keyboardType="email-address"
-    label="Email Address"
-    value="jill@hill.com"
-  />
-  <SignupControl
-    label="Location"
-    value="hill"
-  />
-  <View>
+<Unknown
+  behavior="padding"
+  keyboardVerticalOffset={64}
+>
+  <ScrollViewMock>
     <Text
       accessible={true}
       allowFontScaling={true}
       disabled={false}
       ellipsizeMode="tail"
     >
-      Skills
+      Everything looking good?
     </Text>
-    <SkillCloud
-      skills={
-        Array [
-          "One",
-          "Two",
-        ]
-      }
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+    >
+      You can always come back and change your details at any time.
+    </Text>
+    <SignupControl
+      error={undefined}
+      label="Your Full Name"
+      onChange={[Function]}
+      onSubmitEditing={[Function]}
+      toggleEditable={true}
+      value="Hill"
     />
-  </View>
-  <View>
-    <Button
-      onPress={[Function]}
-      text="Make Changes"
+    <SignupControl
+      autoCapitalize="none"
+      autoCorrect={false}
+      error={undefined}
+      keyboardType="email-address"
+      label="Email Address"
+      onChange={[Function]}
+      onSubmitEditing={[Function]}
+      toggleEditable={true}
+      value="jill@hill.com"
     />
-    <Button
-      onPress={[Function]}
-      text="Finish"
+    <SignupControl
+      label="Location"
+      onChange={[Function]}
+      onSubmitEditing={[Function]}
+      toggleEditable={true}
+      value="hill"
     />
-  </View>
-</ScrollViewMock>
+    <TouchableOpacity
+      activeOpacity={0.2}
+      focusedOpacity={0.7}
+      onPress={undefined}
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        disabled={false}
+        ellipsizeMode="tail"
+      >
+        Skills
+      </Text>
+      <SkillCloud
+        onPress={undefined}
+        skills={
+          Array [
+            "One",
+            "Two",
+          ]
+        }
+      />
+    </TouchableOpacity>
+    <View>
+      <Button
+        onPress={[Function]}
+        text="Make Changes"
+      />
+      <Button
+        onPress={[Function]}
+        text="Finish"
+      />
+    </View>
+  </ScrollViewMock>
+</Unknown>
 `;
 
 exports[`matches last snapshot 1`] = `
-<ScrollViewMock>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    disabled={false}
-    ellipsizeMode="tail"
-  >
-    Everything looking good?
-  </Text>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    disabled={false}
-    ellipsizeMode="tail"
-  >
-    You can always come back and change your details at any time.
-  </Text>
-  <View>
-    <Image
-      source={
-        Object {
-          "uri": "mill.png",
-        }
-      }
-    />
-  </View>
-  <SignupControl
-    label="Your Full Name"
-    value="Hill"
-  />
-  <SignupControl
-    autoCapitalize="none"
-    autoCorrect={false}
-    keyboardType="email-address"
-    label="Email Address"
-    value="jill@hill.com"
-  />
-  <SignupControl
-    label="Password"
-    togglableSecureTextEntry={true}
-    value="fill"
-  />
-  <SignupControl
-    label="Location"
-    value="hill"
-  />
-  <View>
+<Unknown
+  behavior="padding"
+  keyboardVerticalOffset={64}
+>
+  <ScrollViewMock>
     <Text
       accessible={true}
       allowFontScaling={true}
       disabled={false}
       ellipsizeMode="tail"
     >
-      Skills
+      Everything looking good?
     </Text>
-    <SkillCloud
-      skills={
-        Array [
-          "One",
-          "Two",
-        ]
-      }
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+    >
+      You can always come back and change your details at any time.
+    </Text>
+    <View>
+      <TouchableOpacity
+        activeOpacity={0.2}
+        focusedOpacity={0.7}
+        onPress={undefined}
+      >
+        <Image
+          source={
+            Object {
+              "uri": "mill.png",
+            }
+          }
+        />
+      </TouchableOpacity>
+    </View>
+    <SignupControl
+      error={undefined}
+      label="Your Full Name"
+      onChange={[Function]}
+      onSubmitEditing={[Function]}
+      toggleEditable={true}
+      value="Hill"
     />
-  </View>
-  <View>
-    <Button
-      onPress={[Function]}
-      text="Make Changes"
+    <SignupControl
+      autoCapitalize="none"
+      autoCorrect={false}
+      error={undefined}
+      keyboardType="email-address"
+      label="Email Address"
+      onChange={[Function]}
+      onSubmitEditing={[Function]}
+      toggleEditable={true}
+      value="jill@hill.com"
     />
-    <Button
-      onPress={[Function]}
-      text="Finish"
+    <SignupControl
+      label="Location"
+      onChange={[Function]}
+      onSubmitEditing={[Function]}
+      toggleEditable={true}
+      value="hill"
     />
-  </View>
-</ScrollViewMock>
+    <TouchableOpacity
+      activeOpacity={0.2}
+      focusedOpacity={0.7}
+      onPress={undefined}
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        disabled={false}
+        ellipsizeMode="tail"
+      >
+        Skills
+      </Text>
+      <SkillCloud
+        onPress={undefined}
+        skills={
+          Array [
+            "One",
+            "Two",
+          ]
+        }
+      />
+    </TouchableOpacity>
+    <View>
+      <Button
+        onPress={[Function]}
+        text="Make Changes"
+      />
+      <Button
+        onPress={[Function]}
+        text="Finish"
+      />
+    </View>
+  </ScrollViewMock>
+</Unknown>
+`;
+
+exports[`validate returns false and populates state when the props are bad 1`] = `
+Object {
+  "confirmPassword": "Passwords must match",
+  "email": "Must be a valid email",
+  "name": "Name must not consist solely of whitespace.",
+  "password": "Password must be at least 9 characters.",
+}
+`;
+
+exports[`validate returns true when the props are good 1`] = `
+Object {
+  "confirmPassword": false,
+  "email": false,
+  "name": null,
+  "password": null,
+}
 `;

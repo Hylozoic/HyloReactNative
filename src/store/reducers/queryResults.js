@@ -31,16 +31,14 @@ export default function (state = {}, action) {
   let root
 
   const { extractQueryResults } = meta || {}
-  // parameters below into the action's metadata, write a piece of middleware to
   if (extractQueryResults && payload) {
-  // detect the metadata and produce a generic action, and have this reducer
-    const { getItems, getParams, getType } = extractQueryResults
-  // handle only that action.
-    return appendIds(state,
-      getType ? getType(action) : action.type,
-      getParams ? getParams(action) : meta.graphql.variables,
-      getItems(action)
-    )
+    const { getItems, getParams, getType, reset } = extractQueryResults
+    return addIds(state, {
+      type: getType ? getType(action) : action.type,
+      params: getParams ? getParams(action) : meta.graphql.variables,
+      data: getItems(action),
+      reset
+    })
   }
 
   switch (type) {
@@ -90,11 +88,11 @@ function prependIdForCreate (state, type, params, id) {
   }
 }
 
-function appendIds (state, type, params, data) {
+export function addIds (state, { type, params, data, reset }) {
   if (!data) return state
   const { items, total, hasMore } = data
   const key = buildKey(type, params)
-  const existingIds = get('ids', state[key]) || []
+  const existingIds = (!reset && get('ids', state[key])) || []
   return {
     ...state,
     [key]: {

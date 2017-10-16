@@ -50,21 +50,6 @@ exports[`CommunityRow shows all community link 1`] = `
 
 exports[`DrawerMenu matches the last snapshot 1`] = `
 <View>
-  <View>
-    <View>
-      <Icon
-        name="Search"
-      />
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        disabled={false}
-        ellipsizeMode="tail"
-      >
-        Search your communities
-      </Text>
-    </View>
-  </View>
   <ListViewMock
     dataSource={
       ListViewDataSource {
@@ -76,13 +61,19 @@ exports[`DrawerMenu matches the last snapshot 1`] = `
     renderScrollComponent={[Function]}
   />
   <View>
-    <Image
-      source={
-        Object {
-          "uri": undefined,
+    <TouchableOpacity
+      activeOpacity={0.2}
+      focusedOpacity={0.7}
+      onPress={[Function]}
+    >
+      <Image
+        source={
+          Object {
+            "uri": undefined,
+          }
         }
-      }
-    />
+      />
+    </TouchableOpacity>
     <View>
       <Text
         accessible={true}
@@ -96,10 +87,6 @@ exports[`DrawerMenu matches the last snapshot 1`] = `
         !
       </Text>
       <View>
-        <TextButton
-          onPress={[Function]}
-          text="View Profile"
-        />
         <TextButton
           onPress={[Function]}
           text="Settings"

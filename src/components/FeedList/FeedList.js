@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-import { FlatList, Text, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native'
+import { FlatList, Text, TouchableWithoutFeedback, View } from 'react-native'
 import styles from './FeedList.styles'
 import PostCard from '../PostCard'
 import Loading from '../Loading'
 import Icon from '../Icon'
+import PopupMenuButton from '../PopupMenuButton'
 import { find, get, isEmpty } from 'lodash/fp'
 
 export default class FeedList extends Component {
@@ -27,7 +28,6 @@ export default class FeedList extends Component {
   render () {
     const {
       posts,
-      fetchMorePosts,
       filter,
       sortBy,
       setFilter,
@@ -53,7 +53,7 @@ export default class FeedList extends Component {
         />
     </View>
 
-    const listFooterComponent = pending && posts.length > 1
+    const listFooterComponent = pending
       ? <Loading style={styles.loading} />
       : null
 
@@ -69,10 +69,10 @@ export default class FeedList extends Component {
             showTopic={showTopic}
             showCommunity={showCommunities}
             goToCommunity={goToCommunity} />}
-        onRefresh={fetchMorePosts}
-        refreshing={!!pending}
+        onRefresh={this.props.refreshPosts}
+        refreshing={!!this.props.pendingRefresh}
         keyExtractor={(item, index) => item.id}
-        onEndReached={fetchMorePosts}
+        onEndReached={this.props.fetchMorePosts}
         ListHeaderComponent={listHeaderComponent}
         ListFooterComponent={listFooterComponent} />
     </View>
@@ -98,18 +98,26 @@ const optionText = (id, options) => {
 
 export function ListControls ({ filter, sortBy, setFilter, setSort }) {
   return <View style={styles.listControls}>
-    <ListControl selected={filter} onChange={() => setFilter('request')} options={filterOptions} />
-    <ListControl selected={sortBy} onChange={() => setSort('votes')} options={sortOptions} />
+    <ListControl selected={filter} onChange={setFilter} options={filterOptions} />
+    <ListControl selected={sortBy} onChange={setSort} options={sortOptions} />
   </View>
 }
 
 export function ListControl ({ selected, options, onChange }) {
-  // TODO: onPress should open a platform specific dropdown/sheet, which
-  // calls onChange
-  return <TouchableOpacity style={styles.listControl} onPress={onChange}>
+  const actions = options.map(option => [
+    option.label,
+    () => onChange(option.id)
+  ])
+
+  const onSelect = index => actions[index][1]()
+
+  return <PopupMenuButton
+    onSelect={onSelect}
+    actions={actions.map(a => a[0])}
+    style={styles.listControl}>
     <Text style={styles.optionText}>{optionText(selected, options)}</Text>
     <Icon name='ArrowDown' style={[styles.optionText, styles.downArrow]} />
-  </TouchableOpacity>
+  </PopupMenuButton>
 }
 
 export function PostRow ({

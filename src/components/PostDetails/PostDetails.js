@@ -8,6 +8,7 @@ import striptags from 'striptags'
 import Avatar from '../Avatar'
 import Comments from '../Comments'
 import PostBody from '../PostCard/PostBody'
+import PostImage from '../PostCard/PostImage'
 import PostFooter from '../PostCard/PostFooter'
 import PostHeader from '../PostCard/PostHeader'
 import Loading from '../Loading'
@@ -73,9 +74,7 @@ export default class PostDetails extends React.Component {
         id={post.id}
         showMember={showMember}
         goToCommunity={goToCommunity} />
-      <View style={post.imageUrl ? styles.imageMargin : {}}>
-        <SpaceFillingImage imageUrl={post.imageUrl} />
-      </View>
+      <PostImage postId={post.id} />
       <PostBody title={post.title}
         details={post.details}
         linkPreview={post.linkPreview}

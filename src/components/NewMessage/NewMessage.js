@@ -17,7 +17,6 @@ import { isEmpty } from 'lodash/fp'
 import { keyboardAvoidingViewProps as kavProps } from 'util/viewHelpers'
 
 export default class NewMessage extends React.Component {
-
   constructor (props) {
     super(props)
     this.state = {viewKey: 0}
@@ -26,6 +25,7 @@ export default class NewMessage extends React.Component {
   componentDidMount () {
     this.props.fetchContacts()
     this.props.fetchRecentContacts()
+    this.props.loadParticipantsFromParams()
   }
 
   componentDidUpdate (prevProps) {

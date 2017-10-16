@@ -82,6 +82,7 @@ it('validates its fields', () => {
     name: '',
     email: 'ra',
     password: 'rarara',
+    confirmPassword: 'lalala',    
     showPasswordField: true,
     fetchCurrentUser: () => {},
     loadUserSettings: () => {}
@@ -97,6 +98,7 @@ it('submits', () => {
     name: 'name',
     email: 'ra@ra.com',
     password: 'rarararararara',
+    confirmPassword: 'rarararararara',
     showPasswordField: true,
     signupOrUpdate: jest.fn(),
     fetchCurrentUser: () => {},

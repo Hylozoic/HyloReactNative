@@ -35,12 +35,20 @@ export default {
     fontSize: 16,
     color: caribbeanGreen
   },
-  icon: {
-    fontSize: 20,
-    opacity: 0.5,
+  toggles: {
+    flexDirection: 'row',
     top: 20,
     right: 20,
     position: 'absolute'
+  },
+  eyeIcon: {
+    fontSize: 20,
+    opacity: 0.5,
+    marginRight: 10
+  },
+  editIcon: {
+    fontSize: 20,
+    opacity: 0.5
   },
   errorWrapper: {
     alignItems: 'center',
@@ -58,5 +66,9 @@ export default {
   errorText: {
     color: amaranth,
     fontSize: 12
+  },
+  highlight: {
+    backgroundColor: '#99EEFF',
+    borderRadius: 4
   }
 }

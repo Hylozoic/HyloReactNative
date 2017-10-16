@@ -33,7 +33,7 @@ export default class PopupMenuButton extends Component {
     const hitSlop = this.props.hitSlop || {top: 5, bottom: 5, left: 5, right: 5}
 
     return (
-      <View>
+      <View style={this.props.style}>
         <TouchableOpacity hitSlop={hitSlop} {...this.props.viewProps}
           onPress={this.onPress} ref={this.onRef}>
           { this.props.children }
