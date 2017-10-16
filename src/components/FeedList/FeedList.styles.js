@@ -1,4 +1,5 @@
 import { capeCod } from '../../style/colors'
+import { isIOS } from 'util/platform'
 
 const feedMargin = 16
 
@@ -22,7 +23,7 @@ export default {
     color: capeCod
   },
   downArrow: {
-    top: 2,
+    top: isIOS ? 2 : 4,
     marginLeft: 4
   },
   postRow: {

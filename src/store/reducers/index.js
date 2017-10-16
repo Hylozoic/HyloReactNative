@@ -1,5 +1,4 @@
 import { combineReducers } from 'redux'
-
 import currentCommunity from './currentCommunity'
 import ormReducer from './ormReducer'
 import pending from './pending'
@@ -7,7 +6,6 @@ import { persist } from './persistence'
 import queryResults from './queryResults'
 import sessionReducer from './sessionReducer'
 import handleLogout from './handleLogout'
-
 import CommentEditor from '../../components/PostDetails/CommentEditor/CommentEditor.store'
 import FeedList from '../../components/FeedList/FeedList.store'
 import MemberFeed from '../../components/MemberProfile/MemberFeed/MemberFeed.store'
