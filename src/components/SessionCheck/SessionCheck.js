@@ -76,6 +76,7 @@ export default class SessionCheck extends React.Component {
   // own handling of URLs and most importantly to stop them from being handled
   // entirely in some cases.
   _handleSetEntryURL = (appURL) => {
+    if (!appURL) return
     const { path } = URL.parse(appURL)
     if (path) {
       const interalRoutingURL = INTERNAL_ROUTE_URI_PREFIX + path.slice(1)
