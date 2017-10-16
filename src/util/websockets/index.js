@@ -11,25 +11,23 @@ import { curry } from 'lodash/fp'
 // socket host is same as API host in development, different in production
 const socketHost = process.env.SOCKET_HOST || apiHost
 
-let socket
+let socket, socketPromise
 
-export function getSocket () {
-  if (socket) return Promise.resolve(socket)
-
-  const io = sailsIo(socketIo)
-  io.sails.environment = process.env.NODE_ENV || 'development'
-  io.sails.reconnection = true
-  io.sails.autoConnect = false
-
-  // sails.io.js ordinarily uses JSONP to get the cookie, which won't work in a
-  // native environment. so we disable that and depend upon having the session
-  // cookie already stored from a previous HTTP request.
-  io.sails.useCORSRouteToGetCookie = false
-
-  return getSessionCookie().then(cookie => {
+function setupSocketPromise () {
+  socketPromise = getSessionCookie().then(cookie => {
     if (!cookie) {
       throw new Error('You must have a session cookie before creating a websocket.')
     }
+
+    const io = sailsIo(socketIo)
+    io.sails.environment = process.env.NODE_ENV || 'development'
+    io.sails.reconnection = true
+    io.sails.autoConnect = false
+
+    // sails.io.js ordinarily uses JSONP to get the cookie, which won't work in a
+    // native environment. so we disable that and depend upon having the session
+    // cookie already stored from a previous HTTP request.
+    io.sails.useCORSRouteToGetCookie = false
 
     io.sails.headers = {cookie}
     socket = io.sails.connect(socketHost)
@@ -46,6 +44,11 @@ export function getSocket () {
   })
 }
 
+export function getSocket () {
+  if (!socketPromise) setupSocketPromise()
+  return socketPromise
+}
+
 export function socketUrl (path) {
   return `${socketHost}/${path.replace(/^\//, '')}`
 }
@@ -54,3 +57,9 @@ export const sendIsTyping = curry((postId, isTyping) => {
   const url = socketUrl(`/noo/post/${postId}/typing`)
   getSocket().then(socket => socket.post(url, {isTyping}))
 })
+
+// for testing
+export function clearSingletons () {
+  socketPromise = null
+  socket = null
+}
