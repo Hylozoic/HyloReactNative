@@ -26,9 +26,9 @@ import UserSettings from '../UserSettings'
 import createLinkingAwareContainer from './createLinkingAwareContainer'
 import trackCurrentTab from './trackCurrentTab'
 import { isIOS } from 'util/platform'
+import TabBarComponent from './TabBarComponent'
 
 export const urlPrefix = 'http://hylo.com/'
-
 // Tab Home Screens
 // If you change or add tabs you have to edit trackCurrentTab.js
 export const tabs = {
@@ -75,7 +75,8 @@ const tabNavigatorConfig = {
       display: 'none'
     },
     style: isIOS ? tabStyles.tabNavigatorIOS : tabStyles.tabNavigatorAndroid
-  }
+  },
+  tabBarComponent: TabBarComponent // TODO remove this once https://github.com/react-community/react-navigation/pull/1764 is checked in and released
 }
 
 const TabNavigatorWithBar = TabNavigator(

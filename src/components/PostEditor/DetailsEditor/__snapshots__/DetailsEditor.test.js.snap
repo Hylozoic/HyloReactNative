@@ -1,5 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`DetailsEditor has navigation options 1`] = `
+Object {
+  "headerRight": <View>
+    <Button
+        onPress={[Function]}
+        title="Save"
+    />
+</View>,
+  "headerTitle": "Details",
+}
+`;
+
 exports[`DetailsEditor renders correctly 1`] = `
 <Unknown
   behavior="padding"

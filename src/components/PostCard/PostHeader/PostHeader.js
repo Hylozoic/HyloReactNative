@@ -166,7 +166,7 @@ const styles = {
     color: caribbeanGreen
   },
   upperRight: {
-    paddingTop: 19,
+    paddingTop: 14,
     paddingRight: 6,
     flexDirection: 'row',
     alignItems: 'flex-start'

@@ -6,7 +6,7 @@ export default {
   },
   inputWrapper: {
     height: 40,
-    padding: 8,
+    paddingLeft: 8,
     flexDirection: 'row',
     alignItems: 'center',
     borderBottomWidth: 0.5,
