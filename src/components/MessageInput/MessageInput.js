@@ -29,6 +29,14 @@ export default class extends React.PureComponent {
     }
   }
 
+  componentDidMount () {
+    const text = this.props.value || ''
+    this.setState({
+      submittable: text.trim().length > 0,
+      text
+    })
+  }
+
   clear = () => {
     this.setState({
       text: '',
