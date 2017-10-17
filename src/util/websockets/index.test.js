@@ -11,12 +11,12 @@ jest.mock('react-native', () => ({
       return Promise.resolve()
     },
     getItem: key => Promise.resolve(mockStorage[key]),
-    Platform: {OS: 'ios'},
-    NativeModules: {
-      RNDeviceInfo: {}
-    }
+    Platform: {OS: 'ios'}
   },
-  Platform: {OS: 'ios'}
+  Platform: {OS: 'ios'},
+  NativeModules: {
+    RNDeviceInfo: {}
+  }
 }))
 
 jest.mock('sails.io.js', () => {
