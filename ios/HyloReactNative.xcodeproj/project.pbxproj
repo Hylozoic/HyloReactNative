@@ -62,7 +62,6 @@
 		F282DBB2E92547DA84E65066 /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 148AA168ADB646B9AAA60414 /* libBVLinearGradient.a */; };
 		F2EC3BA09EC6472AA471493D /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D7FA3503889940E79431AEA6 /* Entypo.ttf */; };
 		2AB572DF429E4030AC874EFF /* libRNDeviceInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CDE6349FEA94B0283A6393B /* libRNDeviceInfo.a */; };
-		10437786885D4A60BA7D8970 /* libRNDeviceInfo-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A7F4AFA985714ACC954FDC2C /* libRNDeviceInfo-tvOS.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
