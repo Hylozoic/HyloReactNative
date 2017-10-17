@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
-import VersionCheck from './VersionCheck.component'
+import VersionCheck from './VersionCheck'
 import { View } from 'react-native'
 
 jest.mock('react-native-device-info')
