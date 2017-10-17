@@ -42,7 +42,8 @@ export function mapDispatchToProps (dispatch, { navigation }) {
     setSort: sort => dispatch(setSort(sort)),
     setSearch: search => dispatch(setSearch(search)),
     fetchMembers: opts => dispatch(fetchMembers(opts)),
-    showMember: id => navigation.navigate('MemberProfile', {id})
+    showMember: id => navigation.navigate('MemberProfile', {id}),
+    updateBadges: badgeFlags => navigation.setParams(badgeFlags)
   }
 }
 

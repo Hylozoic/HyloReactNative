@@ -8,8 +8,10 @@ export default StyleSheet.create({
   },
   headerTitle: {
     alignSelf: 'center',
+    color: 'black',
     fontFamily: 'Circular-Bold',
-    fontSize: 18
+    fontSize: 18,
+    fontWeight: '200'
   },
   icon: {
     opacity: 0.75,

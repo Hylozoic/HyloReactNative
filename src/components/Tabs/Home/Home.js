@@ -1,12 +1,28 @@
 import React from 'react'
+import { get } from 'lodash/fp'
+
 import Feed from '../../Feed'
 import Header from '../Header'
 import Loading from '../../Loading'
 
-const title = 'Home'
-
 export default class Home extends React.Component {
-  static navigationOptions = ({navigation}) => (Header(navigation, title))
+  static navigationOptions = ({ navigation, screenProps }) =>
+    Header(navigation, screenProps.currentTabName)
+
+  componentDidMount () {
+    const { currentUser, updateBadges } = this.props
+    if (currentUser) updateBadges({
+      hasUnreadMessages: !!currentUser.unseenThreadCount
+    })
+  }
+
+  componentDidUpdate (prevProps) {
+    const oldCount = get('unseenThreadCount', prevProps.currentUser)
+    const newCount = get('unseenThreadCount', this.props.currentUser)
+    if (oldCount !== newCount) this.props.updateBadges({
+      hasUnreadMessages: !!newCount
+    })
+  }
 
   render () {
     const { navigation, communityId, currentUser } = this.props

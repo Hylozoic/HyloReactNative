@@ -9,20 +9,33 @@ import Icon from '../../Icon'
 import { DEFAULT_BANNER } from '../../../store/models/Community'
 import styles from './Members.styles'
 import {
-  some, values, keys, isUndefined, isEmpty, debounce, size
+  get, some, values, keys, isUndefined, isEmpty, debounce, size
 } from 'lodash/fp'
 import { focus } from '../../../util/textInput'
-const title = 'Members'
 
 export default class Members extends React.Component {
-  static navigationOptions = ({ navigation }) => Header(navigation, title)
+  static navigationOptions = ({ navigation, screenProps }) =>
+    Header(navigation, screenProps.currentTabName)
 
   fetchOrShowCached () {
     const { hasMore, members, fetchMembers } = this.props
     if (isEmpty(members) && hasMore !== false) fetchMembers()
   }
 
+  componentDidMount () {
+    const { currentUser, updateBadges } = this.props
+    if (currentUser) updateBadges({
+      hasUnreadMessages: !!currentUser.unseenThreadCount
+    })
+  }
+
   componentDidUpdate (prevProps) {
+    const oldCount = get('unseenThreadCount', prevProps.currentUser)
+    const newCount = get('unseenThreadCount', this.props.currentUser)
+    if (oldCount !== newCount) this.props.updateBadges({
+      hasUnreadMessages: !!newCount
+    })
+
     if (this.props.screenProps.currentTabName !== 'Members') {
       return
     }

@@ -37,7 +37,7 @@ export default function ormReducer (state = {}, action) {
     extractModelsFromAction(action, session)
   }
 
-  var me, skill, post
+  let me, skill, post
 
   switch (type) {
     case CREATE_COMMENT:
@@ -126,15 +126,6 @@ export default function ormReducer (state = {}, action) {
         }
       }
       me.update(changes)
-      break
-
-    case RECEIVE_MESSAGE:
-      const { message } = payload.data
-      if (session.MessageThread.hasId(message.messageThread)) {
-        session.MessageThread
-          .withId(message.messageThread)
-          .update({updatedAt: message.createdAt})
-      }
       break
 
     case RECEIVE_NOTIFICATION:
