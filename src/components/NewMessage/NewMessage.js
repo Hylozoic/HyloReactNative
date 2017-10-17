@@ -5,13 +5,13 @@ import {
   Text,
   TouchableOpacity,
   TextInput,
-  View,
-  KeyboardAvoidingView
+  View
 } from 'react-native'
 import Avatar from '../Avatar'
 import Icon from '../Icon'
 import Loading from '../Loading'
 import MessageInput from '../MessageInput'
+import KeyboardFriendlyView from '../KeyboardFriendlyView'
 import styles from './NewMessage.styles'
 import { capeCod40 } from '../../style/colors'
 import { isEmpty } from 'lodash/fp'
@@ -56,7 +56,7 @@ export default class NewMessage extends React.Component {
 
     const showSuggestions = !isEmpty(participantInputText)
 
-    return <KeyboardAvoidingView style={styles.container} {...{...kavProps, behavior: 'height'}} key={viewKey}>
+    return <KeyboardFriendlyView style={styles.container} {...{...kavProps, behavior: 'height'}} key={viewKey}>
       <ParticipantInput
         participants={participants}
         removeParticipant={removeParticipant}
@@ -85,7 +85,7 @@ export default class NewMessage extends React.Component {
         onSubmit={createMessage}
         onBlur={() => this.setState({viewKey: viewKey + 1})}
         placeholder='Type your message here' />
-    </KeyboardAvoidingView>
+    </KeyboardFriendlyView>
   }
 }
 
