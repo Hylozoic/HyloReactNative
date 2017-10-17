@@ -11,6 +11,7 @@ import {
 import Avatar from '../Avatar'
 import Icon from '../Icon'
 import Loading from '../Loading'
+import MessageInput from '../MessageInput'
 import styles from './NewMessage.styles'
 import { capeCod40 } from '../../style/colors'
 import { isEmpty } from 'lodash/fp'
@@ -40,7 +41,6 @@ export default class NewMessage extends React.Component {
       recentContacts,
       allContacts,
       suggestions,
-      currentUser,
       participants,
       addParticipant,
       removeParticipant,
@@ -79,12 +79,12 @@ export default class NewMessage extends React.Component {
           addParticipant={addParticipant}
           loading={pending.all} />}
       </ScrollView>
-      <MessagePrompt
-        currentUser={currentUser}
-        setMessage={setMessage}
-        message={message}
-        createMessage={createMessage}
-        onBlur={() => this.setState({viewKey: viewKey + 1})} />
+      <MessageInput
+        onChange={setMessage}
+        value={message}
+        onSubmit={createMessage}
+        onBlur={() => this.setState({viewKey: viewKey + 1})}
+        placeholder='Type your message here' />
     </KeyboardAvoidingView>
   }
 }
