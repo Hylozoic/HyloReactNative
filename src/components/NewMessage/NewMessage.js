@@ -5,14 +5,14 @@ import {
   Text,
   TouchableOpacity,
   TextInput,
-  View,
-  KeyboardAvoidingView
+  View
 } from 'react-native'
 import Avatar from '../Avatar'
 import Icon from '../Icon'
 import Loading from '../Loading'
+import MessageInput from '../MessageInput'
+import KeyboardFriendlyView from '../KeyboardFriendlyView'
 import styles from './NewMessage.styles'
-import { capeCod40 } from '../../style/colors'
 import { isEmpty } from 'lodash/fp'
 import { keyboardAvoidingViewProps as kavProps } from 'util/viewHelpers'
 
@@ -35,12 +35,16 @@ export default class NewMessage extends React.Component {
     }
   }
 
+  onBlurMessageInput = () => {
+    const { viewKey } = this.state
+    this.setState({viewKey: viewKey + 1})
+  }
+
   render () {
     const {
       recentContacts,
       allContacts,
       suggestions,
-      currentUser,
       participants,
       addParticipant,
       removeParticipant,
@@ -49,14 +53,16 @@ export default class NewMessage extends React.Component {
       createMessage,
       setMessage,
       message,
-      pending
+      pending,
+      mockViewKey // just for testing
     } = this.props
-
-    const { viewKey } = this.state
 
     const showSuggestions = !isEmpty(participantInputText)
 
-    return <KeyboardAvoidingView style={styles.container} {...{...kavProps, behavior: 'height'}} key={viewKey}>
+    return <KeyboardFriendlyView
+      style={styles.container}
+      {...{...kavProps, behavior: 'height'}}
+      key={mockViewKey || this.state.viewKey}>
       <ParticipantInput
         participants={participants}
         removeParticipant={removeParticipant}
@@ -79,13 +85,13 @@ export default class NewMessage extends React.Component {
           addParticipant={addParticipant}
           loading={pending.all} />}
       </ScrollView>
-      <MessagePrompt
-        currentUser={currentUser}
-        setMessage={setMessage}
-        message={message}
-        createMessage={createMessage}
-        onBlur={() => this.setState({viewKey: viewKey + 1})} />
-    </KeyboardAvoidingView>
+      <MessageInput
+        onChange={setMessage}
+        value={message}
+        onSubmit={createMessage}
+        onBlur={this.onBlurMessageInput}
+        placeholder='Type your message here' />
+    </KeyboardFriendlyView>
   }
 }
 
@@ -100,6 +106,7 @@ export function ParticipantInput ({ participants, onChangeText, removeParticipan
       <TextInput
         value={text}
         onChangeText={onChangeText}
+        underlineColorAndroid='transparent'
         style={[styles.participantTextInput, inputStyle]} />
     </ScrollView>
   </View>
@@ -131,25 +138,4 @@ export function ContactRow ({ contact, grayed, add }) {
       <Text style={styles.contactName}>{contact.name}</Text>
     </View>
   </TouchableOpacity>
-}
-
-export function MessagePrompt ({ currentUser, createMessage, setMessage, message, onBlur }) {
-  if (!currentUser) return null
-  const { avatarUrl } = currentUser
-  const gray = isEmpty(message)
-  return <View style={styles.promptContainer}>
-    <View style={styles.messagePrompt}>
-      <Avatar avatarUrl={avatarUrl} style={styles.promptAvatar} dimension={30} />
-      <TextInput style={styles.promptTextInput}
-        value={message}
-        onChangeText={setMessage}
-        onBlur={onBlur}
-        placeholder='Type your message here'
-        placeholderTextColor={capeCod40} />
-      <TouchableOpacity onPress={() => createMessage()}>
-        <Text style={[styles.sendButton, gray && styles.grayButton]}>Send</Text>
-      </TouchableOpacity>
-    </View>
-    <View style={styles.promptShadow} />
-  </View>
 }

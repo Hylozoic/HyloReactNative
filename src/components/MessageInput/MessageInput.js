@@ -1,5 +1,5 @@
 import React from 'react'
-import { Image, TextInput, TouchableOpacity, View } from 'react-native'
+import { TextInput, TouchableOpacity, View } from 'react-native'
 import { bool, func, string } from 'prop-types'
 import { throttle } from 'lodash'
 
@@ -29,6 +29,14 @@ export default class extends React.PureComponent {
     }
   }
 
+  componentDidMount () {
+    const text = this.props.value || ''
+    this.setState({
+      submittable: text.trim().length > 0,
+      text
+    })
+  }
+
   clear = () => {
     this.setState({
       text: '',
@@ -38,14 +46,16 @@ export default class extends React.PureComponent {
   }
 
   handleChange = ({ nativeEvent: { text } }) => {
+    const { onChange } = this.props
     this.startTyping()
     this.setState({
       submittable: text.trim().length > 0,
       text
     })
+    onChange && onChange(text)
   }
 
-  handleContentSizeChange = ({ nativeEvent }) => 
+  handleContentSizeChange = ({ nativeEvent }) =>
     this.setState({ inputHeight: nativeEvent.contentSize.height })
 
   handleSubmit = () => {
@@ -60,29 +70,27 @@ export default class extends React.PureComponent {
     Math.max(MIN_INPUT_HEIGHT, this.state.inputHeight)
   )
 
-  startTyping = throttle(() => this.props.sendIsTyping(), IS_TYPING_THROTTLE)
+  startTyping = throttle(() => this.props.sendIsTyping && this.props.sendIsTyping(), IS_TYPING_THROTTLE)
 
   render () {
     const inputProps = {
       // Can be overridden by setting on component
       placeholderTextColor: rhino30,
-
+      value: this.state.text,
       ...this.props,
 
       // Cannot be overridden
       onChange: this.handleChange,
       onContentSizeChange: this.handleContentSizeChange,
       underlineColorAndroid: 'transparent',
-      ref: ti => this.textInput = ti,
-      style: { ...styles.input, height: this.restrictedHeight() },
-      value: this.state.text
+      ref: ti => { this.textInput = ti },
+      style: { ...styles.input, height: this.restrictedHeight() }
     }
-    const { onSubmit } = this.props
     const { submittable } = this.state
     const iconStyle = { ...styles.sendButton, color: submittable ? jade : rhino30 }
 
     return <View style={styles.container}>
-      <TextInput { ...inputProps } />
+      <TextInput {...inputProps} />
       <TouchableOpacity onPress={this.handleSubmit}>
         <Icon name='Send' style={iconStyle} />
       </TouchableOpacity>
