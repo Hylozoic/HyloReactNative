@@ -157,7 +157,6 @@ android {
 }
 
 dependencies {
-    compile project(':react-native-device-info')
     compile project(':react-native-linear-gradient')
     compile project(':react-native-background-timer')
     compile project(':react-native-fbsdk')
@@ -176,6 +175,9 @@ dependencies {
         exclude group: "com.google.android.gms"
     }
     compile(project(":react-native-google-signin")){
+        exclude group: "com.google.android.gms"
+    }
+    compile(project(':react-native-device-info')) {
         exclude group: "com.google.android.gms"
     }
 
