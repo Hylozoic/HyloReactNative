@@ -64,41 +64,8 @@ exports[`ContactRow renders correctly 1`] = `
 </TouchableOpacity>
 `;
 
-exports[`MessagePrompt renders correctly 1`] = `
-<View>
-  <View>
-    <Avatar
-      avatarUrl="cone.png"
-      dimension={30}
-    />
-    <TextInput
-      onBlur={[Function]}
-      onChangeText={[Function]}
-      placeholder="Type your message here"
-      placeholderTextColor="#A79A9A"
-      value="hi mom"
-    />
-    <TouchableOpacity
-      activeOpacity={0.2}
-      focusedOpacity={0.7}
-      onPress={[Function]}
-    >
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        disabled={false}
-        ellipsizeMode="tail"
-      >
-        Send
-      </Text>
-    </TouchableOpacity>
-  </View>
-  <View />
-</View>
-`;
-
 exports[`NewMessage renders correctly 1`] = `
-<KeyboardAvoidingView
+<Unknown
   behavior="height"
   keyboardVerticalOffset={64}
 >
@@ -165,22 +132,18 @@ exports[`NewMessage renders correctly 1`] = `
       loading={false}
     />
   </ScrollViewMock>
-  <MessagePrompt
-    createMessage={[Function]}
-    currentUser={
-      Object {
-        "id": 1,
-      }
-    }
-    message="hi mom"
+  <_class
     onBlur={[Function]}
-    setMessage={[Function]}
+    onChange={[Function]}
+    onSubmit={[Function]}
+    placeholder="Type your message here"
+    value="hi mom"
   />
-</KeyboardAvoidingView>
+</Unknown>
 `;
 
 exports[`NewMessage renders correctly 2`] = `
-<KeyboardAvoidingView
+<Unknown
   behavior="height"
   keyboardVerticalOffset={64}
 >
@@ -227,18 +190,14 @@ exports[`NewMessage renders correctly 2`] = `
       loading={true}
     />
   </ScrollViewMock>
-  <MessagePrompt
-    createMessage={[Function]}
-    currentUser={
-      Object {
-        "id": 1,
-      }
-    }
-    message="hi mom"
+  <_class
     onBlur={[Function]}
-    setMessage={[Function]}
+    onChange={[Function]}
+    onSubmit={[Function]}
+    placeholder="Type your message here"
+    value="hi mom"
   />
-</KeyboardAvoidingView>
+</Unknown>
 `;
 
 exports[`Participant renders correctly 1`] = `
@@ -308,6 +267,7 @@ exports[`ParticipantInput renders correctly 1`] = `
     />
     <TextInput
       onChangeText={[Function]}
+      underlineColorAndroid="transparent"
       value="Jon"
     />
   </ScrollViewMock>

@@ -13,7 +13,6 @@ import Loading from '../Loading'
 import MessageInput from '../MessageInput'
 import KeyboardFriendlyView from '../KeyboardFriendlyView'
 import styles from './NewMessage.styles'
-import { capeCod40 } from '../../style/colors'
 import { isEmpty } from 'lodash/fp'
 import { keyboardAvoidingViewProps as kavProps } from 'util/viewHelpers'
 
@@ -132,26 +131,4 @@ export function ContactRow ({ contact, grayed, add }) {
       <Text style={styles.contactName}>{contact.name}</Text>
     </View>
   </TouchableOpacity>
-}
-
-export function MessagePrompt ({ currentUser, createMessage, setMessage, message, onBlur }) {
-  if (!currentUser) return null
-  const { avatarUrl } = currentUser
-  const gray = isEmpty(message)
-  return <View style={styles.promptContainer}>
-    <View style={styles.messagePrompt}>
-      <Avatar avatarUrl={avatarUrl} style={styles.promptAvatar} dimension={30} />
-      <TextInput style={styles.promptTextInput}
-        value={message}
-        onChangeText={setMessage}
-        onBlur={onBlur}
-        placeholder='Type your message here'
-        placeholderTextColor={capeCod40}
-        underlineColorAndroid='transparent' />
-      <TouchableOpacity onPress={() => createMessage()}>
-        <Text style={[styles.sendButton, gray && styles.grayButton]}>Send</Text>
-      </TouchableOpacity>
-    </View>
-    <View style={styles.promptShadow} />
-  </View>
 }

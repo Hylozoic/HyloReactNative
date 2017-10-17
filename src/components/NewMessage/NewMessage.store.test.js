@@ -1,4 +1,4 @@
-import reducer, { setParticipants, SET_PARTICIPANTS } from './NewMessage.store'
+import reducer, { setParticipants, SET_PARTICIPANTS, CREATE_MESSAGE } from './NewMessage.store'
 
 describe('reducer', () => {
   describe('on SET_PARTICIPANTS', () => {
@@ -11,6 +11,23 @@ describe('reducer', () => {
     it('sets the participants', () => {
       const newState = reducer({}, action)
       expect(newState.participants).toEqual(participants)
+    })
+  })
+
+  describe('on CREATE_MESSAGE', () => {
+    const action = {
+      type: CREATE_MESSAGE
+    }
+    const state = {
+      message: 'hi',
+      otherKey: 'set'
+    }
+    it('clears the message state', () => {
+      const newState = reducer(state, action)
+      expect(newState).toEqual({
+        ...state,
+        message: null
+      })
     })
   })
 })

@@ -3,7 +3,7 @@ import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import ReactTestRenderer from 'react-test-renderer'
 import
-  NewMessage, { ParticipantInput, Participant, ContactList, ContactRow, MessagePrompt }
+  NewMessage, { ParticipantInput, Participant, ContactList, ContactRow }
 from './NewMessage'
 
 describe('NewMessage', () => {
@@ -148,28 +148,6 @@ describe('ContactRow', () => {
       contact={contact}
       grayed
       add={() => {}} />)
-    const actual = renderer.getRenderOutput()
-
-    expect(actual).toMatchSnapshot()
-  })
-})
-
-describe('MessagePrompt', () => {
-  it('renders correctly', () => {
-    const renderer = new ReactShallowRenderer()
-    const currentUser = {
-      id: 1,
-      name: 'Contact One',
-      avatarUrl: 'cone.png'
-    }
-    const message = 'hi mom'
-
-    renderer.render(<MessagePrompt
-      currentUser={currentUser}
-      message={message}
-      createMessage={() => {}}
-      setMessage={() => {}}
-      onBlur={() => {}} />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
