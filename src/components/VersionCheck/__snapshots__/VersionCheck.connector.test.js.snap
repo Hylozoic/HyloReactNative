@@ -13,7 +13,7 @@ Array [
       "payload": Object {
         "api": Object {
           "method": "get",
-          "path": "/noo/mobile/check-should-update?ios-version=undefined",
+          "path": "/noo/mobile/check-should-update?ios-version=2.0",
         },
       },
       "type": "CHECK_VERSION",
@@ -25,6 +25,8 @@ Array [
 exports[`mapStateToProps returns the right keys 1`] = `
 Object {
   "pending": true,
-  "updateType": undefined,
+  "updateType": Object {
+    "type": true,
+  },
 }
 `;
