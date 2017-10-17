@@ -1,13 +1,12 @@
 import React from 'react'
 
-import Icon from '../../../Icon'
+import BadgedIcon from '../../../BadgedIcon'
 import styles from '../Header.styles'
 
 export default function NotificationsIcon (props) {
-  const { showNotifications } = props
-  return <Icon
+  return <BadgedIcon
     name='Notifications'
     style={styles.icon}
-    onPress={showNotifications}
+    onPress={props.showNotifications}
   />
 }
