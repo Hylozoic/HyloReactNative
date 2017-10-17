@@ -3,6 +3,8 @@ import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import Home from './Home'
 
+jest.mock('react-native-device-info')
+
 it('shows Loading with no community or user', () => {
   const renderer = new ReactShallowRenderer()
   renderer.render(<Home />)

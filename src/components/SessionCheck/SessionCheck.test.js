@@ -8,6 +8,7 @@ jest.mock('../RootNavigator', () => 'RootNavigator')
 jest.mock('../LoginNavigator', () => 'LoginNavigator')
 jest.mock('../Loading', () => 'Loading')
 jest.mock('../SocketListener', () => 'SocketListener')
+jest.mock('react-native-device-info')
 
 // https://github.com/facebook/jest/issues/2208
 // https://github.com/react-community/react-navigation/blob/fc1472dc848ee52382f554d5b61ff36ee0b8f3e7/jest-setup.js

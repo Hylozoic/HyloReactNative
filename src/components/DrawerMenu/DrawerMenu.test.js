@@ -3,6 +3,8 @@ import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import DrawerMenu, { CommunityRow } from './DrawerMenu'
 
+jest.mock('react-native-device-info')
+
 describe('DrawerMenu', () => {
   it('matches the last snapshot', () => {
     const renderer = new ReactShallowRenderer()

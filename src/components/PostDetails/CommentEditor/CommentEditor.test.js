@@ -2,6 +2,7 @@ import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import CommentEditor from './CommentEditor'
 // This is currently broken because of an issue with react-native and jest
+jest.mock('react-native-device-info')
 
 it('renders correctly', () => {
   const renderer = new ReactShallowRenderer()

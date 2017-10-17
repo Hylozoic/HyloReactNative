@@ -1,20 +1,18 @@
-import { mapStateToProps, mapDispatchToProps } from './SessionCheck.connector.js'
+import { mapStateToProps, mapDispatchToProps } from './VersionCheck.connector.js'
 
-jest.mock('react-native-onesignal', () => ({
-  getPermissionSubscriptionState: jest.fn(() => Promise.resolve({userId: 5}))
-}))
 jest.mock('react-native-device-info')
 
 describe('mapStateToProps', () => {
   it('returns the right keys', () => {
-    const defaultState = {
+    const state = {
       session: {
-        loggedIn: true,
-        entryURL: 'http://www.hylo.com/a/path'
+        loggedIn: true
       },
-      pending: {}
+      pending: {
+        CHECK_VERSION: true
+      }
     }
-    expect(mapStateToProps(defaultState)).toMatchSnapshot()
+    expect(mapStateToProps(state)).toMatchSnapshot()
   })
 })
 
@@ -23,7 +21,7 @@ describe('mapDispatchToProps', () => {
     const dispatch = jest.fn(val => val)
     const dispatchProps = mapDispatchToProps(dispatch)
     expect(dispatchProps).toMatchSnapshot()
-    dispatchProps.checkSession()
+    dispatchProps.checkVersion()
     expect(dispatch).toHaveBeenCalled()
     expect(dispatch.mock.calls).toMatchSnapshot()
   })

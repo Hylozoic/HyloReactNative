@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mapDispatchToProps maps the action generators 1`] = `
+Object {
+  "checkVersion": [Function],
+}
+`;
+
+exports[`mapDispatchToProps maps the action generators 2`] = `
+Array [
+  Array [
+    Object {
+      "payload": Object {
+        "api": Object {
+          "method": "get",
+          "path": "/noo/mobile/check-should-update?ios-version=undefined",
+        },
+      },
+      "type": "CHECK_VERSION",
+    },
+  ],
+]
+`;
+
+exports[`mapStateToProps returns the right keys 1`] = `
+Object {
+  "pending": true,
+  "updateType": undefined,
+}
+`;
