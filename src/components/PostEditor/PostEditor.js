@@ -20,10 +20,11 @@ export default class PostEditor extends React.Component {
   static contextTypes = {navigate: PropTypes.func}
 
   static navigationOptions = ({ navigation }) => {
-    const { headerTitle, save } = get('state.params', navigation) || {}
+    const { headerTitle, save, isSaving } = get('state.params', navigation) || {}
+    const title = isSaving ? 'Saving...' : 'Save'
     return {
       headerTitle,
-      headerRight: save ? <Button title='Save' onPress={save} /> : null
+      headerRight: save ? <View style={styles.saveButton}><Button title={title} disabled={isSaving} onPress={save} /></View> : null
     }
   }
 
@@ -37,28 +38,40 @@ export default class PostEditor extends React.Component {
     }
   }
 
+  saveEditor = () => {
+    const { navigation, save, details } = this.props
+    const { title, type, communityIds } = this.state
+    const postData = {
+      title,
+      type,
+      details: details,
+      communities: communityIds.map(id => ({id}))
+    }
+
+    this.setState({isSaving: true})
+    navigation.setParams({isSaving: true})
+
+    return save(postData)
+    .catch(e => {
+      alert(e.message)
+      this.setState({isSaving: false})
+      navigation.setParams({isSaving: false})
+    })
+  }
+
   componentDidMount () {
     const { post, navigation, setDetails } = this.props
     setDetails(get('details', post))
 
     navigation.setParams({
       headerTitle: post ? 'Edit Post' : 'New Post',
-      save: () => {
-        const { title, type, communityIds } = this.state
-        const postData = {
-          title,
-          type,
-          details: this.props.details,
-          communities: communityIds.map(id => ({id}))
-        }
-        return this.props.save(postData)
-      }
+      save: this.saveEditor
     })
   }
 
   render () {
     const { details, editDetails, postId } = this.props
-    const { title, type } = this.state
+    const { title, type, isSaving } = this.state
 
     if (postId && !details) return <Loading />
 
@@ -69,20 +82,21 @@ export default class PostEditor extends React.Component {
           <View style={[styles.typeButtonRow, styles.section]}>
             {['discussion', 'request', 'offer'].map(t =>
               <TypeButton type={t} key={t} selected={t === type}
-                onPress={() => this.setState({type: t})} />)}
+                onPress={() => !isSaving && this.setState({type: t})} />)}
           </View>
 
           <SectionLabel>Title</SectionLabel>
           <View style={[styles.textInputWrapper, styles.section]}>
             <TextInput value={title} style={styles.textInput}
               onChangeText={title => this.setState({title})}
-              placeholder={titlePlaceholders[type]}
+              placeholder={titlePlaceholders[type]} editable={!isSaving}
               underlineColorAndroid='transparent' />
           </View>
 
           <SectionLabel>Details</SectionLabel>
           <TouchableOpacity style={[styles.textInputWrapper, styles.section]}
-            onPress={editDetails}>
+            hitSlop={{top: 10, bottom: 10}}
+            onPress={() => !isSaving && editDetails()}>
             <Details details={details} placeholder={detailsPlaceholder} />
           </TouchableOpacity>
         </View>

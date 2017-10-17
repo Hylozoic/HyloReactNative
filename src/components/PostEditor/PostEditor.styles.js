@@ -91,5 +91,8 @@ export default {
   sectionLabel: {
     marginBottom: 8,
     fontFamily: 'Circular-Medium'
+  },
+  saveButton: {
+    marginRight: 10
   }
 }
