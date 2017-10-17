@@ -7,7 +7,6 @@ import Loading from '../Loading'
 import LoginNavigator from '../LoginNavigator'
 import SocketListener from '../SocketListener'
 import RootNavigator from '../RootNavigator'
-import VersionCheck from '../VersionCheck'
 
 export const INTERNAL_ROUTE_URI_PREFIX = 'internalRouting://'
 
@@ -89,19 +88,15 @@ export default class SessionCheck extends React.Component {
     const { loading, loggedIn, currentUser } = this.props
     if (!loading) {
       if (!loggedIn) {
-        return <VersionCheck>
-          <LoginNavigator
-            uriPrefix={INTERNAL_ROUTE_URI_PREFIX}
-            ref={nav => { this.navigator = nav }} />
-        </VersionCheck>
+        return <LoginNavigator
+          uriPrefix={INTERNAL_ROUTE_URI_PREFIX}
+          ref={nav => { this.navigator = nav }} />
       }
       if (currentUser) {
         return <View style={{flex: 1}}>
-          <VersionCheck>
-            <RootNavigator
-              uriPrefix={INTERNAL_ROUTE_URI_PREFIX}
-              ref={nav => { this.navigator = nav && nav.getWrappedInstance() }} />
-          </VersionCheck>
+          <RootNavigator
+            uriPrefix={INTERNAL_ROUTE_URI_PREFIX}
+            ref={nav => { this.navigator = nav && nav.getWrappedInstance() }} />
           <SocketListener />
         </View>
       }
