@@ -14,7 +14,7 @@ import {
   MARK_ACTIVITY_READ, MARK_ALL_ACTIVITIES_READ
 } from '../../components/NotificationsList/NotificationsList.store'
 import {
-  RECEIVE_COMMENT, RECEIVE_MESSAGE, RECEIVE_NOTIFICATION, RECEIVE_POST, RECEIVE_THREAD
+  RECEIVE_MESSAGE, RECEIVE_NOTIFICATION, RECEIVE_THREAD
 } from '../../components/SocketListener/SocketListener.store'
 import {
   CREATE_MESSAGE, CREATE_MESSAGE_PENDING
@@ -128,17 +128,6 @@ export default function ormReducer (state = {}, action) {
       me.update(changes)
       break
 
-    case RECEIVE_COMMENT:
-      const { comment } = payload.data
-      if (session.Post.hasId(comment.postId)) {
-        ModelExtractor.addAll({
-          session,
-          root: comment,
-          modelName: 'Comment'
-        })
-      }
-      break
-
     case RECEIVE_MESSAGE:
       const { message } = payload.data
       if (session.MessageThread.hasId(message.messageThread)) {
@@ -149,30 +138,18 @@ export default function ormReducer (state = {}, action) {
       break
 
     case RECEIVE_NOTIFICATION:
-      const { notification } = payload.data
-      ModelExtractor.addAll({
-        session,
-        root: notification,
-        modelName: 'Notification'
-      })
-      const newNotificationCount = session.Me.first().newNotificationCount + 1
-      session.Me.first().update({ newNotificationCount })
       // TODO: eventually we might want to refactor this out into a more
       // structured activity.action handler for the various counts that need
       // bumping (or handle every single damn thing in ModelExtractor).
+      const { notification } = payload.data
+      const newNotificationCount = session.Me.first().newNotificationCount + 1
+      session.Me.first().update({ newNotificationCount })
+
       const { activity } = notification
       if (activity.action === 'newComment' && session.Post.hasId(activity.post.id)) {
         const post = session.Post.withId(activity.post.id)
         post.update({ commentsTotal: post.commentsTotal + 1 })
       }
-      break
-
-    case RECEIVE_POST:
-      ModelExtractor.addAll({
-        session,
-        root: payload.data.post,
-        modelName: 'Post'
-      })
       break
 
     case TOGGLE_TOPIC_SUBSCRIBE_PENDING:
