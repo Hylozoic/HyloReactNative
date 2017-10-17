@@ -6,6 +6,9 @@ import
   NewMessage, { ParticipantInput, Participant, ContactList, ContactRow }
 from './NewMessage'
 
+jest.mock('../MessageInput', () => 'MessageInput')
+jest.mock('../KeyboardFriendlyView', () => 'KeyboardFriendlyView')
+
 describe('NewMessage', () => {
   it('renders correctly', () => {
     const renderer = new ReactShallowRenderer()
@@ -79,6 +82,26 @@ describe('NewMessage', () => {
     expect(props.fetchContacts).toHaveBeenCalled()
     expect(props.fetchRecentContacts).toHaveBeenCalled()
     expect(props.loadParticipantsFromParams).toHaveBeenCalled()
+  })
+
+  describe('onBlurMessageInput', () => {
+    const props = {
+      fetchContacts: () => {},
+      fetchRecentContacts: () => {},
+      loadParticipantsFromParams: () => {},
+      pending: {},
+      participants: [],
+      recentContacts: [],
+      allContacts: [],
+      suggestions: [],
+      mockViewKey: 1
+    }
+    it('increments the view key', () => {
+      const instance = ReactTestRenderer.create(<NewMessage {...props} />).getInstance()
+      instance.setState({viewKey: 2})
+      instance.onBlurMessageInput()
+      expect(instance.state.viewKey).toEqual(3)
+    })
   })
 })
 

@@ -65,7 +65,7 @@ exports[`ContactRow renders correctly 1`] = `
 `;
 
 exports[`NewMessage renders correctly 1`] = `
-<Unknown
+<KeyboardFriendlyView
   behavior="height"
   keyboardVerticalOffset={64}
 >
@@ -132,18 +132,18 @@ exports[`NewMessage renders correctly 1`] = `
       loading={false}
     />
   </ScrollViewMock>
-  <_class
+  <MessageInput
     onBlur={[Function]}
     onChange={[Function]}
     onSubmit={[Function]}
     placeholder="Type your message here"
     value="hi mom"
   />
-</Unknown>
+</KeyboardFriendlyView>
 `;
 
 exports[`NewMessage renders correctly 2`] = `
-<Unknown
+<KeyboardFriendlyView
   behavior="height"
   keyboardVerticalOffset={64}
 >
@@ -190,14 +190,14 @@ exports[`NewMessage renders correctly 2`] = `
       loading={true}
     />
   </ScrollViewMock>
-  <_class
+  <MessageInput
     onBlur={[Function]}
     onChange={[Function]}
     onSubmit={[Function]}
     placeholder="Type your message here"
     value="hi mom"
   />
-</Unknown>
+</KeyboardFriendlyView>
 `;
 
 exports[`Participant renders correctly 1`] = `

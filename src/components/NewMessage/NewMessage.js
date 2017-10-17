@@ -35,6 +35,11 @@ export default class NewMessage extends React.Component {
     }
   }
 
+  onBlurMessageInput = () => {
+    const { viewKey } = this.state
+    this.setState({viewKey: viewKey + 1})
+  }
+
   render () {
     const {
       recentContacts,
@@ -48,14 +53,16 @@ export default class NewMessage extends React.Component {
       createMessage,
       setMessage,
       message,
-      pending
+      pending,
+      mockViewKey // just for testing
     } = this.props
-
-    const { viewKey } = this.state
 
     const showSuggestions = !isEmpty(participantInputText)
 
-    return <KeyboardFriendlyView style={styles.container} {...{...kavProps, behavior: 'height'}} key={viewKey}>
+    return <KeyboardFriendlyView
+      style={styles.container}
+      {...{...kavProps, behavior: 'height'}}
+      key={mockViewKey || this.state.viewKey}>
       <ParticipantInput
         participants={participants}
         removeParticipant={removeParticipant}
@@ -82,7 +89,7 @@ export default class NewMessage extends React.Component {
         onChange={setMessage}
         value={message}
         onSubmit={createMessage}
-        onBlur={() => this.setState({viewKey: viewKey + 1})}
+        onBlur={this.onBlurMessageInput}
         placeholder='Type your message here' />
     </KeyboardFriendlyView>
   }
