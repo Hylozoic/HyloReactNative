@@ -33,7 +33,6 @@ export default class VersionCheck extends React.Component {
   }
 
   render () {
-    console.log('updateType', this.props.updateType)
     const { updateType, pending } = this.props
     if (pending) return <Loading />
     updateType && this.showAlert(updateType)

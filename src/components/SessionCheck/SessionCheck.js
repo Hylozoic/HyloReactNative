@@ -96,14 +96,14 @@ export default class SessionCheck extends React.Component {
         </VersionCheck>
       }
       if (currentUser) {
-        return <VersionCheck>
-          <View style={{flex: 1}}>
+        return <View style={{flex: 1}}>
+          <VersionCheck>
             <RootNavigator
               uriPrefix={INTERNAL_ROUTE_URI_PREFIX}
               ref={nav => { this.navigator = nav && nav.getWrappedInstance() }} />
-            <SocketListener />
-          </View>
-        </VersionCheck>
+          </VersionCheck>
+          <SocketListener />
+        </View>
       }
     }
     return <Loading style={mixins.allCentered} />
