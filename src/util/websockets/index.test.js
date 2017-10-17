@@ -1,5 +1,6 @@
-import { getSocket } from './index'
+import { getSocket, clearSingletons } from './index'
 import { setSessionCookie } from '../session'
+import { times } from 'lodash'
 
 const mockStorage = {}
 
@@ -41,6 +42,7 @@ it('throws an error without a session cookie', () => {
 })
 
 it('uses the session cookie', () => {
+  clearSingletons()
   return setSessionCookie(mockResp)
   .then(() => getSocket())
   .then(socket => {
@@ -57,4 +59,17 @@ it('uses the session cookie', () => {
 it('returns the singleton', () => {
   return getSocket()
   .then(socket => expect(socket).toEqual(singletonSocket))
+})
+
+it('uses a singleton promise to avoid race conditions', () => {
+  clearSingletons()
+  expect.assertions(19)
+  return setSessionCookie(mockResp)
+  .then(() => Promise.all(times(20, () => getSocket())))
+  .then(sockets => {
+    const socket = sockets[0]
+    for (let i = 1; i < sockets.length; i++) {
+      expect(socket).toEqual(sockets[i])
+    }
+  })
 })

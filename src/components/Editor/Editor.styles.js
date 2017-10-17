@@ -2,6 +2,7 @@ export default {
   container: {
     flex: 1,
     backgroundColor: 'white',
+    paddingTop: 10,
     justifyContent: 'flex-start'
   },
   wrapper: {

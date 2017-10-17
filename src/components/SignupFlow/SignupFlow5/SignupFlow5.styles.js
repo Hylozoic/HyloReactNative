@@ -1,6 +1,6 @@
 import { white40onCaribbeanGreen } from 'style/colors'
 import styles from '../SignupFlow.styles'
-import controlStyles from '../SignupControl/SignupControl.styles'
+import controlStyles from '../../SettingControl/SettingControl.styles'
 
 export default {
   ...styles,

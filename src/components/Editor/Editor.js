@@ -58,13 +58,21 @@ export default class Editor extends React.Component {
   }
 
   render () {
+    const {
+      placeholder = 'Details',
+      style,
+      initialContent,
+      communityId
+    } = this.props
+
     const { showPicker } = this.state
-    return <View style={[styles.container, this.props.style]}>
-      <RichTextEditor initialContentHTML={this.props.initialContent}
+
+    return <View style={[styles.container, style]}>
+      <RichTextEditor initialContentHTML={initialContent}
         hiddenTitle
         enableOnChange
         ref={ref => this.setupEditor(ref)}
-        contentPlaceholder='details'
+        contentPlaceholder={placeholder}
         customCSS={customCSS} />
       <RichTextToolbar getEditor={() => this.editor}
         actions={[
@@ -84,7 +92,7 @@ export default class Editor extends React.Component {
         onPressCustomAction={this.startPicker} />
       {!!showPicker &&
         <Search style={styles.search} type={showPicker}
-          communityId={this.props.communityId}
+          communityId={communityId}
           onSelect={this.insertPicked}
           onCancel={this.cancelPicker} />}
     </View>
