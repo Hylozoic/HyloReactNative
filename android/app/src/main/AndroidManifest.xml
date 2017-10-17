@@ -30,10 +30,6 @@
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
             <category android:name="android.intent.category.LAUNCHER" />
-            <data android:scheme="http" android:host="hylo.com" />
-            <data android:scheme="https" android:host="hylo.com" />
-            <data android:scheme="http" android:host="www.hylo.com" />
-            <data android:scheme="https" android:host="www.hylo.com" />
         </intent-filter>
         <intent-filter>
             <action android:name="android.intent.action.VIEW" />
