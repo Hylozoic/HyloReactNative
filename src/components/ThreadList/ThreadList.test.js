@@ -1,18 +1,30 @@
-import 'react-native'
 import React from 'react'
+import { TouchableOpacity } from 'react-native'
+import TestRenderer from 'react-test-renderer'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 
 import ThreadList, { MessageRow } from './ThreadList'
 
 describe('ThreadList', () => {
   it('renders correctly', () => {
-    const renderer = new ReactShallowRenderer()
-    const threads = [{id: 1}]
-    renderer.render(<ThreadList threads={threads} />)
-    const actual = renderer.getRenderOutput()
+    const threads = [{id: 1, participants: [{id: 1, avatarUrl: 'blah'}], lastMessage: {id: 1}}]
+    const renderer = TestRenderer.create(<ThreadList threads={threads} />)
 
-    expect(actual).toMatchSnapshot()
+    expect(renderer.toJSON()).toMatchSnapshot()
   })
+
+  it('fetches threads initially when empty', () => {
+    const fetchThreads = jest.fn()
+    const threads = []
+    const renderer = TestRenderer.create(<ThreadList hasMore={true} threads={threads} fetchThreads={fetchThreads} />)
+
+    expect(renderer.toJSON()).toMatchSnapshot()
+
+    const { root } = renderer
+    root.instance.fetchOrShowCached()
+    expect(fetchThreads).toHaveBeenCalled()
+  })
+
   it('handles pending correctly without threads', () => {
     const renderer = new ReactShallowRenderer()
     const threads = []
@@ -52,5 +64,23 @@ describe('MessageRow', () => {
       participants={participants} />)
     const actual = renderer.getRenderOutput()
     expect(actual).toMatchSnapshot()
+  })
+
+  it('calls showThread', () => {
+    const showThread = jest.fn()
+    const message = [{id: 1}]
+    const participants = [{id: 2, avatarUrl: 'blah'}]
+
+    const renderer = TestRenderer.create(
+      <MessageRow
+        showThread={showThread}
+        message={message}
+        participants={participants} />
+    )
+
+    expect(renderer.toJSON()).toMatchSnapshot()
+    const { root } = renderer
+    root.findByType(TouchableOpacity).props.onPress()
+    expect(showThread).toBeCalled()
   })
 })

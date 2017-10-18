@@ -1,5 +1,68 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`MessageRow calls showThread 1`] = `
+<View>
+  <View
+    accessibilityComponentType={undefined}
+    accessibilityLabel={undefined}
+    accessibilityTraits={undefined}
+    accessible={true}
+    collapsable={undefined}
+    hitSlop={undefined}
+    isTVSelectable={true}
+    nativeID={undefined}
+    onLayout={undefined}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    testID={undefined}
+    tvParallaxProperties={undefined}
+  >
+    <View>
+      <View>
+        <View>
+          <Image
+            source={
+              Object {
+                "uri": "blah",
+              }
+            }
+          />
+        </View>
+      </View>
+      <View>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          disabled={false}
+          ellipsizeMode="tail"
+        >
+          
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          disabled={false}
+          ellipsizeMode="tail"
+          numberOfLines={2}
+        />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          disabled={false}
+          ellipsizeMode="tail"
+        >
+          
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
 exports[`MessageRow renders correctly 1`] = `
 <View>
   <TouchableOpacity
@@ -9,6 +72,7 @@ exports[`MessageRow renders correctly 1`] = `
   >
     <ThreadCard
       currentUser={undefined}
+      isLast={undefined}
       message={
         Array [
           Object {
@@ -26,6 +90,17 @@ exports[`MessageRow renders correctly 1`] = `
     />
   </TouchableOpacity>
 </View>
+`;
+
+exports[`ThreadList fetches threads initially when empty 1`] = `
+<Text
+  accessible={true}
+  allowFontScaling={true}
+  disabled={false}
+  ellipsizeMode="tail"
+>
+  No active conversations
+</Text>
 `;
 
 exports[`ThreadList handles pending correctly with threads 1`] = `
@@ -68,27 +143,74 @@ exports[`ThreadList handles when there are no threads correctly 1`] = `
 
 exports[`ThreadList renders correctly 1`] = `
 <View>
-  <FlatList
+  <RCTScrollView
     data={
       Array [
         Object {
           "id": 1,
+          "lastMessage": Object {
+            "id": 1,
+          },
+          "participants": Array [
+            Object {
+              "avatarUrl": "blah",
+              "id": 1,
+            },
+          ],
         },
       ]
     }
     disableVirtualization={false}
+    getItem={[Function]}
+    getItemCount={[Function]}
     horizontal={false}
     initialNumToRender={10}
     keyExtractor={[Function]}
     maxToRenderPerBatch={10}
     numColumns={1}
+    onContentSizeChange={[Function]}
     onEndReached={undefined}
     onEndReachedThreshold={2}
+    onLayout={[Function]}
+    onMomentumScrollEnd={[Function]}
+    onScroll={[Function]}
+    onScrollBeginDrag={[Function]}
+    onScrollEndDrag={[Function]}
+    onViewableItemsChanged={undefined}
     renderItem={[Function]}
     renderScrollComponent={[Function]}
     scrollEventThrottle={50}
+    stickyHeaderIndices={Array []}
     updateCellsBatchingPeriod={50}
     windowSize={21}
-  />
+  >
+    <View>
+      <View
+        onLayout={[Function]}
+      >
+        <View>
+          <View
+            accessibilityComponentType={undefined}
+            accessibilityLabel={undefined}
+            accessibilityTraits={undefined}
+            accessible={true}
+            collapsable={undefined}
+            hitSlop={undefined}
+            isTVSelectable={true}
+            nativeID={undefined}
+            onLayout={undefined}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            testID={undefined}
+            tvParallaxProperties={undefined}
+          />
+        </View>
+      </View>
+    </View>
+  </RCTScrollView>
 </View>
 `;

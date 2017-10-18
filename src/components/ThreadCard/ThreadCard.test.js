@@ -8,7 +8,7 @@ it('renders correctly', () => {
   }
   const currentUser = {id: 1}
   const renderer = new ReactShallowRenderer()
-  renderer.render(<ThreadCard message={message} currentUser={currentUser} />)
+  renderer.render(<ThreadCard message={message} isLast={true} currentUser={currentUser} />)
   const actual = renderer.getRenderOutput()
 
   expect(actual).toMatchSnapshot()
