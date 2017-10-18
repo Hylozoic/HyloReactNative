@@ -1,6 +1,5 @@
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import getMe from '../../store/selectors/getMe'
 import {
   setParticipantInput,
   addParticipant,
@@ -39,7 +38,6 @@ export function mapStateToProps (state, props) {
     allContacts: getContacts(state, props),
     participants: getParticipants(state, props),
     participantIds: getParticipantIds(state, props),
-    currentUser: getMe(state, props),
     suggestions: getSuggestions(state, {...props, autocomplete: participantInputText}),
     participantInputText,
     message: getMessage(state, props),

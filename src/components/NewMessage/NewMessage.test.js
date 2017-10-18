@@ -3,10 +3,12 @@ import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import ReactTestRenderer from 'react-test-renderer'
 import
-  NewMessage, { ParticipantInput, Participant, ContactList, ContactRow, MessagePrompt }
+  NewMessage, { ParticipantInput, Participant, ContactList, ContactRow }
 from './NewMessage'
 
 jest.mock('react-native-device-info')
+jest.mock('../MessageInput', () => 'MessageInput')
+jest.mock('../KeyboardFriendlyView', () => 'KeyboardFriendlyView')
 
 describe('NewMessage', () => {
   it('renders correctly', () => {
@@ -82,6 +84,26 @@ describe('NewMessage', () => {
     expect(props.fetchRecentContacts).toHaveBeenCalled()
     expect(props.loadParticipantsFromParams).toHaveBeenCalled()
   })
+
+  describe('onBlurMessageInput', () => {
+    const props = {
+      fetchContacts: () => {},
+      fetchRecentContacts: () => {},
+      loadParticipantsFromParams: () => {},
+      pending: {},
+      participants: [],
+      recentContacts: [],
+      allContacts: [],
+      suggestions: [],
+      mockViewKey: 1
+    }
+    it('increments the view key', () => {
+      const instance = ReactTestRenderer.create(<NewMessage {...props} />).getInstance()
+      instance.setState({viewKey: 2})
+      instance.onBlurMessageInput()
+      expect(instance.state.viewKey).toEqual(3)
+    })
+  })
 })
 
 describe('ParticipantInput', () => {
@@ -150,28 +172,6 @@ describe('ContactRow', () => {
       contact={contact}
       grayed
       add={() => {}} />)
-    const actual = renderer.getRenderOutput()
-
-    expect(actual).toMatchSnapshot()
-  })
-})
-
-describe('MessagePrompt', () => {
-  it('renders correctly', () => {
-    const renderer = new ReactShallowRenderer()
-    const currentUser = {
-      id: 1,
-      name: 'Contact One',
-      avatarUrl: 'cone.png'
-    }
-    const message = 'hi mom'
-
-    renderer.render(<MessagePrompt
-      currentUser={currentUser}
-      message={message}
-      createMessage={() => {}}
-      setMessage={() => {}}
-      onBlur={() => {}} />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
