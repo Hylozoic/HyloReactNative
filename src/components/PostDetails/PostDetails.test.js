@@ -2,6 +2,8 @@ import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import PostDetails, { CommentPrompt } from './PostDetails'
 
+jest.mock('react-native-device-info')
+
 const post = {
   id: '91',
   creator: {
