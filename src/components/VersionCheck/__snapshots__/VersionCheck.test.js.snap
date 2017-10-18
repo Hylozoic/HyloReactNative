@@ -1,5 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`VersionCheck VersionCheck renders correctly with an updateType 1`] = `<View />`;
+
 exports[`VersionCheck alert matches last snapshot with a forced version update 1`] = `
 Array [
   Array [
@@ -38,4 +40,4 @@ Array [
 
 exports[`VersionCheck alert matches last snapshot without a version update 1`] = `Array []`;
 
-exports[`VersionCheck renders correctly 1`] = `<View />`;
+exports[`VersionCheck renders correctly without an update 1`] = `<View />`;

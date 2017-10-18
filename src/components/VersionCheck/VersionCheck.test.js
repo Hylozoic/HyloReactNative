@@ -6,11 +6,24 @@ import { View, Alert } from 'react-native'
 
 jest.mock('react-native-device-info')
 describe('VersionCheck', () => {
-  it('renders correctly', () => {
+  it('renders correctly without an update', () => {
     const renderer = new ReactShallowRenderer()
     renderer.render(<VersionCheck updateType={null} checkVersion={jest.fn()}><View /></VersionCheck>)
     const actual = renderer.getRenderOutput()
     expect(actual).toMatchSnapshot()
+  })
+  describe('VersionCheck', () => {
+    it('renders correctly with an updateType', () => {
+      const updateType = {
+        type: 'force',
+        title: 'Force title',
+        message: 'Force message'
+      }
+      const renderer = new ReactShallowRenderer()
+      renderer.render(<VersionCheck updateType={updateType} checkVersion={jest.fn()}><View /></VersionCheck>)
+      const actual = renderer.getRenderOutput()
+      expect(actual).toMatchSnapshot()
+    })
   })
 })
 
