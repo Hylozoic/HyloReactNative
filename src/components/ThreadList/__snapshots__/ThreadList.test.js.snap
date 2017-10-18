@@ -92,3 +92,53 @@ exports[`ThreadList renders correctly 1`] = `
   />
 </View>
 `;
+
+exports[`ThreadList sets the navigationOptions 1`] = `
+Object {
+  "headerLeft": <TouchableOpacity
+    activeOpacity={0.2}
+    focusedOpacity={0.7}
+    onPress={[Function]}
+>
+    <Text
+        accessible={true}
+        allowFontScaling={true}
+        disabled={false}
+        ellipsizeMode="tail"
+    >
+        Close
+    </Text>
+</TouchableOpacity>,
+  "headerRight": <TouchableOpacity
+    activeOpacity={0.2}
+    focusedOpacity={0.7}
+    onPress={[Function]}
+>
+    <Text
+        accessible={true}
+        allowFontScaling={true}
+        disabled={false}
+        ellipsizeMode="tail"
+    >
+        New
+    </Text>
+</TouchableOpacity>,
+  "headerStyle": Object {
+    "backgroundColor": "white",
+    "paddingHorizontal": 10,
+  },
+  "headerTintColor": "#808c9b",
+  "headerTitle": "Messages",
+  "headerTitleStyle": Array [
+    Object {
+      "color": "black",
+      "fontFamily": "Circular-Bold",
+      "fontSize": 17,
+      "marginLeft": 15,
+    },
+    Object {
+      "alignSelf": "center",
+    },
+  ],
+}
+`;

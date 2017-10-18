@@ -19,9 +19,9 @@ export const updateBadges = ({ setParams }, currentUser, prevUser) => {
     throw new Error('updateBadges: setParams is not a function. Did you pass the navigation object?')
   }
   if (!currentUser) return
-  const shouldUpdateBadges = !prevUser ||
-    currentUser.unseenThreadCount !== prevUser.unseenThreadCount ||
-    currentUser.newNotificationCount !== prevUser.newNotificationCount
+  const shouldUpdateBadges = !prevUser
+    || currentUser.unseenThreadCount !== prevUser.unseenThreadCount
+    || currentUser.newNotificationCount !== prevUser.newNotificationCount
   if (shouldUpdateBadges) {
     setParams({
       hasUnreadMessages: !!currentUser.unseenThreadCount,
