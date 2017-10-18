@@ -1,5 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`VersionCheck VersionCheck matches last snapshot with a forced version update 1`] = `<View />`;
+
+exports[`VersionCheck VersionCheck matches last snapshot with a suggested version update 1`] = `<View />`;
+
+exports[`VersionCheck VersionCheck matches last snapshot without a version update 1`] = `<View />`;
+
 exports[`VersionCheck VersionCheck renders correctly while pending 1`] = `<Loading />`;
 
 exports[`VersionCheck VersionCheck renders correctly with an updateType 1`] = `<View />`;
