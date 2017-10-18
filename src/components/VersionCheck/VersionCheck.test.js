@@ -30,6 +30,21 @@ describe('VersionCheck', () => {
       const actual = renderer.getRenderOutput()
       expect(actual).toMatchSnapshot()
     })
+    it('matches last snapshot with a suggested version update', () => {
+      const updateType = {
+        type: 'suggest'
+      }
+      const renderer = new ReactShallowRenderer()
+      renderer.render(<VersionCheck updateType={updateType} checkVersion={jest.fn()}><View /></VersionCheck>)
+      const actual = renderer.getRenderOutput()
+      expect(actual).toMatchSnapshot()
+    })
+    it('matches last snapshot without a version update', () => {
+      const renderer = new ReactShallowRenderer()
+      renderer.render(<VersionCheck updateType={null} checkVersion={jest.fn()}><View /></VersionCheck>)
+      const actual = renderer.getRenderOutput()
+      expect(actual).toMatchSnapshot()
+    })
   })
   describe('VersionCheck', () => {
     it('renders correctly while pending', () => {
