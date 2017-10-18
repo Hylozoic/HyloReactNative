@@ -6,6 +6,8 @@ import Feed from './Feed'
 import { Provider } from 'react-redux'
 import orm from 'store/models'
 
+jest.mock('react-native-device-info')
+
 it('renders correctly', () => {
   const community = {
     id: '1'

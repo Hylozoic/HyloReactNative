@@ -9,6 +9,7 @@ jest.mock('NetInfo', () => ({
     addEventListener: jest.fn()
   }
 }))
+jest.mock('react-native-device-info')
 
 describe('Login', () => {
   it('renders correctly', () => {

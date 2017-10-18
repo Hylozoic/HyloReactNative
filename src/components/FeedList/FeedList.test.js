@@ -3,6 +3,8 @@ import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import FeedList, { ListControls, ListControl, PostRow, filterOptions } from './FeedList'
 
+jest.mock('react-native-device-info')
+
 describe('FeedList', () => {
   it('renders correctly', () => {
     const renderer = new ReactShallowRenderer()

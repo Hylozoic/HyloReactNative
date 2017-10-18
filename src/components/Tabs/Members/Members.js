@@ -3,6 +3,7 @@ import {
   View, FlatList, Text, TouchableOpacity, TextInput, Image
 } from 'react-native'
 import Header from '../Header'
+import { updateBadges } from 'util/header'
 import Avatar from '../../Avatar'
 import PopupMenuButton from '../../PopupMenuButton'
 import Icon from '../../Icon'
@@ -12,17 +13,29 @@ import {
   some, values, keys, isUndefined, isEmpty, debounce, size
 } from 'lodash/fp'
 import { focus } from '../../../util/textInput'
-const title = 'Members'
 
 export default class Members extends React.Component {
-  static navigationOptions = ({ navigation }) => Header(navigation, title)
+  static navigationOptions = ({ navigation, screenProps }) =>
+    Header(navigation, screenProps.currentTabName)
 
   fetchOrShowCached () {
     const { hasMore, members, fetchMembers } = this.props
     if (isEmpty(members) && hasMore !== false) fetchMembers()
   }
 
+  componentDidMount () {
+    const { currentUser, navigation, screenProps } = this.props
+    if (screenProps.currentTabName === 'Members') {
+      updateBadges(navigation, currentUser)
+    }
+  }
+
   componentDidUpdate (prevProps) {
+    const { currentUser, navigation, screenProps } = this.props
+    if (screenProps.currentTabName === 'Members') {
+      updateBadges(navigation, currentUser, prevProps.currentUser)
+    }
+
     if (this.props.screenProps.currentTabName !== 'Members') {
       return
     }

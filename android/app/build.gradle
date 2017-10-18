@@ -91,7 +91,7 @@ android {
         minSdkVersion 16
         targetSdkVersion 22
         versionCode 1
-        versionName "1.0"
+        versionName "2.0"
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
@@ -175,6 +175,9 @@ dependencies {
         exclude group: "com.google.android.gms"
     }
     compile(project(":react-native-google-signin")){
+        exclude group: "com.google.android.gms"
+    }
+    compile(project(':react-native-device-info')) {
         exclude group: "com.google.android.gms"
     }
 

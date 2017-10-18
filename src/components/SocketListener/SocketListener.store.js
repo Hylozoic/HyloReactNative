@@ -51,13 +51,16 @@ export function receiveThread (thread) {
   }
 }
 
-export function receivePost (data, communityId) {
+export function receivePost (post) {
   return {
     type: RECEIVE_POST,
     payload: {
-      topics: data.tags,
-      creatorId: data.creatorId,
-      communityId
+      data: {
+        post
+      }
+    },
+    meta: {
+      extractModel: 'Post'
     }
   }
 }

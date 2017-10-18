@@ -9,7 +9,7 @@ jest.mock('react-navigation', () => ({
   reset: () => {},
   navigate: () => {}
 }))
-
+jest.mock('react-native-device-info')
 const defaultRequiredProps = {
   checkInvitation: () => Promise.resolve()
 }

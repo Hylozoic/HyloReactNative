@@ -35,7 +35,7 @@ describe('PostDetails', () => {
       post={post}
       currentUser={currentUser}
       editPost={() => {}}
-      pending
+      pending={false}
       showMember={() => {}}
       showTopic={() => {}}
       goToCommunity={() => {}} />)
