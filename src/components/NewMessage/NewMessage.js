@@ -55,6 +55,7 @@ export default class NewMessage extends React.Component {
       setMessage,
       message,
       pending,
+      fetchMoreContacts,
       mockViewKey // just for testing
     } = this.props
 
@@ -72,6 +73,11 @@ export default class NewMessage extends React.Component {
       ]
     }
 
+    const onEndReached = () => {
+      console.log('onEndReached')
+      fetchMoreContacts()
+    }
+
     return <KeyboardFriendlyView
       style={styles.container}
       {...{...kavProps, behavior: 'height'}}
@@ -85,8 +91,9 @@ export default class NewMessage extends React.Component {
         contentContainerStyle={styles.sectionList}
         renderItem={renderContact(addParticipant)}
         renderSectionHeader={SectionHeader}
+        keyExtractor={item => item.id}
         sections={listSections}
-        onEndReached={() => console.log('end reached')}
+        onEndReached={onEndReached}
         stickySectionHeadersEnabled={false} />
       <MessageInput
         onChange={setMessage}
@@ -133,7 +140,7 @@ export function SectionHeader ({ section }) {
   const { label, loading } = section
   return <View style={styles.sectionHeader}>
     {label && <Text style={styles.listLabel}>{label}</Text>}
-    {loading && <Loading />}
+    {false && <Loading />}
   </View>
 }
 

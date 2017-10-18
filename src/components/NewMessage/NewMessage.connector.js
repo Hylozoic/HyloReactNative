@@ -23,6 +23,7 @@ import {
   FETCH_RECENT_CONTACTS
  } from './NewMessage.store.js'
 import { isEmpty, get, debounce } from 'lodash/fp'
+import { memoize } from 'lodash'
 
 export function mapStateToProps (state, props) {
   const participantInputText = getInputText(state, props)
@@ -65,7 +66,9 @@ export function mapDispatchToProps (dispatch, props) {
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
   const { navigation } = ownProps
-  const { participantInputText, message, participantIds, suggestions } = stateProps
+  const {
+    participantInputText, message, participantIds, suggestions, allContacts, pending
+  } = stateProps
 
   // don't fetch suggestions if we already have some that match the search
   const fetchSuggestions = isEmpty(participantInputText) || !isEmpty(suggestions)
@@ -88,13 +91,24 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     ? () => dispatchProps.setParticipants(participantsFromParams)
     : () => {}
 
+  const offset = allContacts.length
+
+  var memoizedFetchContacts = memoize(
+    dispatchProps.fetchContacts,
+    (first, offset) => offset)
+
+  const fetchMoreContacts = pending.all
+    ? () => {}
+    : () => memoizedFetchContacts(10, offset)
+
   return {
     ...stateProps,
     ...dispatchProps,
     ...ownProps,
     fetchSuggestions,
     createMessage,
-    loadParticipantsFromParams
+    loadParticipantsFromParams,
+    fetchMoreContacts
   }
 }
 
