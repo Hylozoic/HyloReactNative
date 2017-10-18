@@ -13,7 +13,7 @@ describe('VersionCheck', () => {
       message: 'Force message'
     }
     const renderer = new ReactShallowRenderer()
-    renderer.render(<VersionCheck updateType={null} checkVersion={jest.fn()}><View /></VersionCheck>)
+    renderer.render(<VersionCheck updateType={updateType} checkVersion={jest.fn()}><View /></VersionCheck>)
     renderer._instance.showAlert(updateType)
     // expect().toHaveBeenCalled()
     const actual = renderer.getRenderOutput()
