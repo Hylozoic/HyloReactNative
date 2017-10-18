@@ -19,8 +19,8 @@ export default {
     position: 'relative',
     flex: 1
   },
-  scrollView: {
-    paddingBottom: 72
+  sectionList: {
+    ...defaultPadding
   },
   scrollViewWrapper: {
     height: 60
@@ -54,8 +54,7 @@ export default {
     fontSize: 20,
     color: rhino50
   },
-  contactList: {
-    ...defaultPadding,
+  sectionHeader: {
     marginTop: 20
   },
   listLabel: {
