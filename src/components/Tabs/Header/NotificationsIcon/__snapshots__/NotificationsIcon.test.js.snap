@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MessagesIcon renders correctly 1`] = `
+exports[`matches the last snapshot 1`] = `
 <BadgedIcon
-  name="Messages"
+  name="Notifications"
   onPress={[Function]}
   showBadge={undefined}
 />

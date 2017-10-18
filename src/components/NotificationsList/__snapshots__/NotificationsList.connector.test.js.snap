@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches the last snapshot for mapDispatchToProps 1`] = `
+Object {
+  "fetchMore": [Function],
+  "fetchNotifications": [Function],
+  "markActivityRead": [Function],
+  "setRightButton": [Function],
+}
+`;
+
+exports[`matches the last snapshot for mapStateToProps 1`] = `
+Object {
+  "hasMore": false,
+  "notifications": Array [
+    Object {
+      "activityId": "1",
+      "actor": Object {
+        "avatarUrl": "https://wombat.com",
+        "name": "Wombat McAardvark",
+      },
+      "avatarSeparator": false,
+      "createdAt": "",
+      "id": "1",
+      "unread": false,
+    },
+  ],
+  "pending": false,
+}
+`;
