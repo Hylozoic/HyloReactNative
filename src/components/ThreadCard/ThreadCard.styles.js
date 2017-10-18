@@ -18,6 +18,9 @@ export default {
     marginTop: 5,
     backgroundColor: 'white'
   },
+  lastCard: {
+    borderColor: '#FFF'
+  },
   header: {
     marginTop: 7,
     fontWeight: 'bold'

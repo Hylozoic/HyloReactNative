@@ -33,11 +33,12 @@ export default class ThreadList extends Component {
         data={threads}
         keyExtractor={this._keyExtractor}
         onEndReached={fetchMoreThreads}
-        renderItem={({ item }) =>
+        renderItem={({ item, index }) =>
           <MessageRow
             participants={item.participants}
             message={item.latestMessage}
             currentUser={currentUser}
+            isLast={index === threads.length - 1}
             showThread={showThread}
          />}
         />
@@ -48,13 +49,14 @@ export default class ThreadList extends Component {
   }
 }
 
-export function MessageRow ({message, participants, currentUser, showThread}) {
+export function MessageRow ({message, participants, currentUser, showThread, isLast}) {
   return <View>
     <TouchableOpacity onPress={() => showThread(message.messageThread)}>
       <ThreadCard
         message={message}
         participants={participants}
         currentUser={currentUser}
+        isLast={isLast}
       />
     </TouchableOpacity>
   </View>

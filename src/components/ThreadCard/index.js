@@ -14,7 +14,7 @@ export default function ThreadCard (props) {
 
   return <View style={styles.threadCard}>
     <ThreadAvatars avatarUrls={avatarUrls} />
-    <View style={styles.messageContent}>
+    <View style={[styles.messageContent, props.isLast && styles.lastCard]}>
       <Text style={styles.header}>{names}</Text>
       <Text style={styles.body} numberOfLines={2}>{props.message.text}</Text>
       <Text>{humanDate(get('createdAt', props.message))}</Text>
