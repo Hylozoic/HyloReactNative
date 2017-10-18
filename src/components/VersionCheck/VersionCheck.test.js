@@ -8,19 +8,7 @@ jest.mock('react-native-device-info')
 jest.mock('Linking')
 
 describe('VersionCheck', () => {
-  it('renders correctly without an update', () => {
-    const updateType = {
-      type: 'force',
-      title: 'Force title',
-      message: 'Force message'
-    }
-    const renderer = new ReactShallowRenderer()
-    renderer.render(<VersionCheck updateType={updateType} checkVersion={jest.fn()}><View /></VersionCheck>)
-    renderer._instance.showAlert(updateType)
-    const actual = renderer.getRenderOutput()
-    expect(actual).toMatchSnapshot()
-  })
-  it('renders correctly with an updateType', () => {
+  it('matches last snapshot with a forced version update', () => {
     const updateType = {
       type: 'force',
       title: 'Force title',
@@ -34,19 +22,8 @@ describe('VersionCheck', () => {
   it('matches last snapshot with a suggested version update', () => {
     const updateType = {
       type: 'suggest',
-      title: 'Suggest title',
-      message: 'Suggest message'
-    }
-    const renderer = new ReactShallowRenderer()
-    renderer.render(<VersionCheck updateType={updateType} checkVersion={jest.fn()}><View /></VersionCheck>)
-    const actual = renderer.getRenderOutput()
-    expect(actual).toMatchSnapshot()
-  })
-  it('matches last snapshot with a forced version update', () => {
-    const updateType = {
-      type: 'force',
-      title: 'Force title',
-      message: 'Force message'
+      title: 'Suggested title',
+      message: 'Suggested message'
     }
     const renderer = new ReactShallowRenderer()
     renderer.render(<VersionCheck updateType={updateType} checkVersion={jest.fn()}><View /></VersionCheck>)
@@ -95,7 +72,7 @@ describe('VersionCheck alert', () => {
 
   it('matches last snapshot with a suggested version update', () => {
     const updateType = {
-      type: 'suggested',
+      type: 'suggest',
       title: 'Suggested update title',
       message: 'Suggested update message'
     }
