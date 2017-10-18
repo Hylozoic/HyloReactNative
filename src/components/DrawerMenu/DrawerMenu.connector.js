@@ -1,13 +1,13 @@
 import { connect } from 'react-redux'
 import getMe from '../../store/selectors/getMe'
+import getMemberships from '../../store/selectors/getMemberships'
 import { logout } from '../Login/actions'
 import changeCommunity from '../../store/actions/changeCommunity'
 
 function mapStateToProps (state) {
-  const currentUser = getMe(state)
   return {
-    currentUser,
-    memberships: currentUser ? currentUser.memberships.toModelArray() : []
+    currentUser: getMe(state),
+    memberships: getMemberships(state)
   }
 }
 
