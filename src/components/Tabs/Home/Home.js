@@ -12,7 +12,6 @@ export default class Home extends React.Component {
 
   componentDidMount () {
     const { currentUser, navigation, screenProps } = this.props
-    navigation.navigate('ThreadList')
     if (screenProps.currentTabName === 'Home') {
       updateBadges(navigation, currentUser)
     }
