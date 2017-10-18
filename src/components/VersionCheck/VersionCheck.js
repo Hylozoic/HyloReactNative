@@ -32,10 +32,14 @@ export default class VersionCheck extends React.Component {
     )
   }
 
-  render () {
-    const { updateType, pending } = this.props
-    if (pending) return <Loading />
+  componentDidMount = () => {
+    const { updateType } = this.props
     updateType && this.showAlert(updateType)
+  }
+
+  render () {
+    const { pending } = this.props
+    if (pending) return <Loading />
     return this.props.children
   }
 }

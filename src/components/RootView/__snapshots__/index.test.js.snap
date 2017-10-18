@@ -1,6 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`RootView matches last snapshot with a forced version update 1`] = `
+exports[`RootView matches last snapshot with a store 1`] = `
+<VersionCheck>
+  <SessionCheck />
+</VersionCheck>
+`;
+
+exports[`RootView matches last snapshot without a store 1`] = `
 <View>
   <Text
     accessible={true}
