@@ -8,7 +8,7 @@ jest.mock('react-native-device-info')
 describe('VersionCheck', () => {
   it('renders correctly', () => {
     const renderer = new ReactShallowRenderer()
-    renderer.render(<VersionCheck updateType={null} checkVersion={jest.fn()} />)
+    renderer.render(<VersionCheck updateType={null} checkVersion={jest.fn()}><View /></VersionCheck>)
     const actual = renderer.getRenderOutput()
     expect(actual).toMatchSnapshot()
   })
