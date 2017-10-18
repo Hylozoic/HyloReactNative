@@ -4,5 +4,6 @@ exports[`MessagesIcon renders correctly 1`] = `
 <BadgedIcon
   name="Messages"
   onPress={[Function]}
+  showBadge={undefined}
 />
 `;

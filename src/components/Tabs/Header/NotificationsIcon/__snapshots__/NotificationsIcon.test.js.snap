@@ -4,5 +4,6 @@ exports[`matches the last snapshot 1`] = `
 <BadgedIcon
   name="Notifications"
   onPress={[Function]}
+  showBadge={undefined}
 />
 `;
