@@ -31,7 +31,9 @@ describe('VersionCheck', () => {
   })
   it('matches last snapshot with a suggested version update', () => {
     const updateType = {
-      type: 'suggest'
+      type: 'suggest',
+      title: 'Suggest title',
+      message: 'Suggest message'
     }
     const renderer = new ReactShallowRenderer()
     renderer.render(<VersionCheck updateType={updateType} checkVersion={jest.fn()}><View /></VersionCheck>)
@@ -40,7 +42,9 @@ describe('VersionCheck', () => {
   })
   it('matches last snapshot with a forced version update', () => {
     const updateType = {
-      type: 'force'
+      type: 'force',
+      title: 'Force title',
+      message: 'Force message'
     }
     const renderer = new ReactShallowRenderer()
     renderer.render(<VersionCheck updateType={updateType} checkVersion={jest.fn()}><View /></VersionCheck>)
