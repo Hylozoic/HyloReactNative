@@ -15,7 +15,6 @@ describe('VersionCheck', () => {
     const renderer = new ReactShallowRenderer()
     renderer.render(<VersionCheck updateType={updateType} checkVersion={jest.fn()}><View /></VersionCheck>)
     renderer._instance.showAlert(updateType)
-    // expect().toHaveBeenCalled()
     const actual = renderer.getRenderOutput()
     expect(actual).toMatchSnapshot()
   })
