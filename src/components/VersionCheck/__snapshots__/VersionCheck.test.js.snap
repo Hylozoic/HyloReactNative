@@ -37,3 +37,5 @@ Array [
 `;
 
 exports[`VersionCheck alert matches last snapshot without a version update 1`] = `Array []`;
+
+exports[`VersionCheck renders correctly 1`] = `undefined`;

@@ -5,6 +5,14 @@ import VersionCheck from './VersionCheck'
 import { View, Alert } from 'react-native'
 
 jest.mock('react-native-device-info')
+describe('VersionCheck', () => {
+  it('renders correctly', () => {
+    const renderer = new ReactShallowRenderer()
+    renderer.render(<VersionCheck updateType={null} checkVersion={jest.fn()} />)
+    const actual = renderer.getRenderOutput()
+    expect(actual).toMatchSnapshot()
+  })
+})
 
 describe('VersionCheck alert', () => {
   it('matches last snapshot with a forced version update', () => {
@@ -15,7 +23,12 @@ describe('VersionCheck alert', () => {
     }
     const origAlert = Alert.alert
     Alert.alert = jest.fn()
-    const instance = ReactTestRenderer.create(<VersionCheck updateType={updateType} checkVersion={jest.fn()}><View /></VersionCheck>).getInstance()
+    const instance = ReactTestRenderer.create(<VersionCheck
+      updateType={updateType}
+      checkVersion={jest.fn()}
+    >
+      <View />
+    </VersionCheck>).getInstance()
 
     expect(Alert.alert).toHaveBeenCalled()
     expect(Alert.alert.mock.calls).toMatchSnapshot()
@@ -30,7 +43,12 @@ describe('VersionCheck alert', () => {
     }
     const origAlert = Alert.alert
     Alert.alert = jest.fn()
-    const instance = ReactTestRenderer.create(<VersionCheck updateType={updateType} checkVersion={jest.fn()}><View /></VersionCheck>).getInstance()
+    const instance = ReactTestRenderer.create(<VersionCheck
+      updateType={updateType}
+      checkVersion={jest.fn()}
+    >
+      <View />
+    </VersionCheck>).getInstance()
 
     expect(Alert.alert).toHaveBeenCalled()
     expect(Alert.alert.mock.calls).toMatchSnapshot()
@@ -41,7 +59,12 @@ describe('VersionCheck alert', () => {
     const updateType = null
     const origAlert = Alert.alert
     Alert.alert = jest.fn()
-    const instance = ReactTestRenderer.create(<VersionCheck updateType={updateType} checkVersion={jest.fn()}><View /></VersionCheck>).getInstance()
+    const instance = ReactTestRenderer.create(<VersionCheck
+      updateType={updateType}
+      checkVersion={jest.fn()}
+    >
+      <View />
+    </VersionCheck>).getInstance()
 
     expect(Alert.alert.mock.calls).toMatchSnapshot()
     Alert.alert = origAlert

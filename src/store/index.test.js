@@ -1,4 +1,4 @@
-import { getStore, getEmptyState } from './index'
+import getStore, {getEmptyState } from './index'
 
 jest.mock('react-native-google-signin', () => {})
 jest.mock('react-native-device-info')

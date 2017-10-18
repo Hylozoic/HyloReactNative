@@ -23,7 +23,7 @@ const middleware = compact([
   })
 ])
 
-export function getStore () {
+export default function getStore () {
   return getInitialState().then(initialState => {
     const composedMiddleware = composeWithDevTools(applyMiddleware(...middleware))
     const store = createStore(rootReducer, initialState, composedMiddleware)

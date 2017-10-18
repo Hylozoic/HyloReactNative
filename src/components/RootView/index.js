@@ -3,7 +3,7 @@ import { Text, View } from 'react-native'
 import SessionCheck from '../SessionCheck'
 import VersionCheck from '../VersionCheck'
 import { Provider } from 'react-redux'
-import { getStore } from '../../store'
+import getStore from '../../store'
 import mixins from '../../style/mixins'
 
 export default class RootView extends React.Component {
