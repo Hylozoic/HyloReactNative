@@ -31,6 +31,19 @@ describe('VersionCheck', () => {
       expect(actual).toMatchSnapshot()
     })
   })
+  describe('VersionCheck', () => {
+    it('renders correctly while pending', () => {
+      const updateType = {
+        type: 'force',
+        title: 'Force title',
+        message: 'Force message'
+      }
+      const renderer = new ReactShallowRenderer()
+      renderer.render(<VersionCheck updateType={updateType} checkVersion={jest.fn()} pending><View /></VersionCheck>)
+      const actual = renderer.getRenderOutput()
+      expect(actual).toMatchSnapshot()
+    })
+  })
 })
 
 describe('VersionCheck alert', () => {
