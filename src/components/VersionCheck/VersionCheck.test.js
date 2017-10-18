@@ -7,8 +7,15 @@ import { View, Alert } from 'react-native'
 jest.mock('react-native-device-info')
 describe('VersionCheck', () => {
   it('renders correctly without an update', () => {
+    const updateType = {
+      type: 'force',
+      title: 'Force title',
+      message: 'Force message'
+    }
     const renderer = new ReactShallowRenderer()
     renderer.render(<VersionCheck updateType={null} checkVersion={jest.fn()}><View /></VersionCheck>)
+    renderer._instance.showAlert(updateType)
+    // expect().toHaveBeenCalled()
     const actual = renderer.getRenderOutput()
     expect(actual).toMatchSnapshot()
   })
