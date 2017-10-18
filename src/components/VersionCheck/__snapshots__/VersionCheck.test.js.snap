@@ -28,6 +28,9 @@ Array [
         "onPress": [Function],
         "text": "Update Now",
       },
+      Object {
+        "text": "Cancel",
+      },
     ],
     Object {
       "cancelable": false,
@@ -45,7 +48,3 @@ exports[`VersionCheck matches last snapshot with a suggested version update 1`] 
 exports[`VersionCheck matches last snapshot without a version update 1`] = `<View />`;
 
 exports[`VersionCheck renders correctly while pending 1`] = `<Loading />`;
-
-exports[`VersionCheck renders correctly with an updateType 1`] = `<View />`;
-
-exports[`VersionCheck renders correctly without an update 1`] = `<View />`;
