@@ -5,6 +5,8 @@ import VersionCheck from './VersionCheck'
 import { View, Alert } from 'react-native'
 
 jest.mock('react-native-device-info')
+jest.mock('Linking')
+
 describe('VersionCheck', () => {
   it('renders correctly without an update', () => {
     const updateType = {
