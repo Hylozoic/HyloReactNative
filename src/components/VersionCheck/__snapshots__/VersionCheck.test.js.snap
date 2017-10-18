@@ -3,8 +3,8 @@
 exports[`VersionCheck alert matches last snapshot with a forced version update 1`] = `
 Array [
   Array [
-    "There's a new version of Hylo",
-    "Update Hylo on the App Store and discover what is new.",
+    "Force title",
+    "Force message",
     Array [
       Object {
         "onPress": [Function],
@@ -17,3 +17,23 @@ Array [
   ],
 ]
 `;
+
+exports[`VersionCheck alert matches last snapshot with a suggested version update 1`] = `
+Array [
+  Array [
+    "Suggested update title",
+    "Suggested update message",
+    Array [
+      Object {
+        "onPress": [Function],
+        "text": "Update Now",
+      },
+    ],
+    Object {
+      "cancelable": false,
+    },
+  ],
+]
+`;
+
+exports[`VersionCheck alert matches last snapshot without a version update 1`] = `Array []`;

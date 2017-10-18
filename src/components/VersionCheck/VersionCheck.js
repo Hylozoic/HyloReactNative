@@ -9,7 +9,6 @@ export default class VersionCheck extends React.Component {
   }
   showAlert = (updateType) => {
     const type = updateType.type
-    const storeName = isIOS ? 'App Store' : 'Play Store'
     const buttons = [
       {
         text: 'Update Now',
@@ -25,8 +24,8 @@ export default class VersionCheck extends React.Component {
       })
     }
     return Alert.alert(
-      "There's a new version of Hylo",
-      `Update Hylo on the ${storeName} and discover what is new.`,
+      updateType.title,
+      updateType.message,
       buttons,
       { cancelable: false }
     )
