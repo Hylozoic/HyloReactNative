@@ -3,13 +3,14 @@ import {
   View, FlatList, Text, TouchableOpacity, TextInput, Image
 } from 'react-native'
 import Header from '../Header'
+import { updateBadges } from 'util/header'
 import Avatar from '../../Avatar'
 import PopupMenuButton from '../../PopupMenuButton'
 import Icon from '../../Icon'
 import { DEFAULT_BANNER } from '../../../store/models/Community'
 import styles from './Members.styles'
 import {
-  get, some, values, keys, isUndefined, isEmpty, debounce, size
+  some, values, keys, isUndefined, isEmpty, debounce, size
 } from 'lodash/fp'
 import { focus } from '../../../util/textInput'
 
@@ -23,18 +24,17 @@ export default class Members extends React.Component {
   }
 
   componentDidMount () {
-    const { currentUser, updateBadges } = this.props
-    if (currentUser) updateBadges({
-      hasUnreadMessages: !!currentUser.unseenThreadCount
-    })
+    const { currentUser, navigation, screenProps } = this.props
+    if (screenProps.currentTabName === 'Members') {
+      updateBadges(navigation, currentUser)
+    }
   }
 
   componentDidUpdate (prevProps) {
-    const oldCount = get('unseenThreadCount', prevProps.currentUser)
-    const newCount = get('unseenThreadCount', this.props.currentUser)
-    if (oldCount !== newCount) this.props.updateBadges({
-      hasUnreadMessages: !!newCount
-    })
+    const { currentUser, navigation, screenProps } = this.props
+    if (screenProps.currentTabName === 'Members') {
+      updateBadges(navigation, currentUser, prevProps.currentUser)
+    }
 
     if (this.props.screenProps.currentTabName !== 'Members') {
       return

@@ -6,11 +6,7 @@ export function mapStateToProps (state, props) {
   const currentUser = getMe(state, props)
   const communityId = state.currentCommunity ||
     (currentUser && get('id', currentUser.lastViewedCommunity()))
-  return {
-    currentUser,
-    communityId,
-    updateBadges: badgeFlags => props.navigation.setParams(badgeFlags)
-  }
+  return {currentUser, communityId}
 }
 
 export default connect(mapStateToProps)
