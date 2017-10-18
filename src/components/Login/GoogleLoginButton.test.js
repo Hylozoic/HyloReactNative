@@ -2,6 +2,8 @@ import GoogleLoginButton from './GoogleLoginButton'
 import ReactTestRenderer from 'react-test-renderer'
 import React from 'react'
 
+jest.mock('react-native-device-info')
+
 const mocks = {
   GoogleSignin: {
     signIn: jest.fn(() => Promise.resolve({foo: 'bar'})),

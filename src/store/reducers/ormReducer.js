@@ -8,14 +8,17 @@ import {
   CREATE_COMMENT
 } from '../../components/PostDetails/CommentEditor/CommentEditor.store'
 import {
-  RECEIVE_MESSAGE
+  TOGGLE_TOPIC_SUBSCRIBE_PENDING
+} from '../../components/Feed/Feed.store'
+import {
+  MARK_ACTIVITY_READ, MARK_ALL_ACTIVITIES_READ
+} from '../../components/NotificationsList/NotificationsList.store'
+import {
+  RECEIVE_MESSAGE, RECEIVE_NOTIFICATION, RECEIVE_THREAD
 } from '../../components/SocketListener/SocketListener.store'
 import {
   CREATE_MESSAGE, CREATE_MESSAGE_PENDING
 } from '../../components/Thread/Thread.store'
-import {
-  TOGGLE_TOPIC_SUBSCRIBE_PENDING
-} from '../../components/Feed/Feed.store'
 import {
   VOTE_ON_POST_PENDING
 } from '../../components/PostCard/PostFooter/PostFooter.store'
@@ -34,7 +37,7 @@ export default function ormReducer (state = {}, action) {
     extractModelsFromAction(action, session)
   }
 
-  var me, skill, post
+  let me, skill, post
 
   switch (type) {
     case CREATE_COMMENT:
@@ -64,6 +67,16 @@ export default function ormReducer (state = {}, action) {
         root: payload.data.createMessage,
         modelName: 'Message'
       })
+      break
+
+    case MARK_ACTIVITY_READ:
+      if (session.Activity.hasId(meta.id)) {
+        session.Activity.withId(meta.id).update({ unread: false })
+      }
+      break
+
+    case MARK_ALL_ACTIVITIES_READ:
+      session.Activity.all().update({ unread: false })
       break
 
     case SIGNUP:
@@ -115,10 +128,19 @@ export default function ormReducer (state = {}, action) {
       me.update(changes)
       break
 
-    case RECEIVE_MESSAGE:
-      const { message } = payload.data
-      session.MessageThread.withId(message.messageThread)
-      .update({updatedAt: message.createdAt})
+    case RECEIVE_NOTIFICATION:
+      // TODO: eventually we might want to refactor this out into a more
+      // structured activity.action handler for the various counts that need
+      // bumping (or handle every single damn thing in ModelExtractor).
+      const { notification } = payload.data
+      const newNotificationCount = session.Me.first().newNotificationCount + 1
+      session.Me.first().update({ newNotificationCount })
+
+      const { activity } = notification
+      if (activity.action === 'newComment' && session.Post.hasId(activity.post.id)) {
+        const post = session.Post.withId(activity.post.id)
+        post.update({ commentsTotal: post.commentsTotal + 1 })
+      }
       break
 
     case TOGGLE_TOPIC_SUBSCRIBE_PENDING:

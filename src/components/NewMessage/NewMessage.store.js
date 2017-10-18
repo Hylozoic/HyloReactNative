@@ -217,6 +217,12 @@ export default function reducer (state = defaultState, action) {
           participants: state.participants.filter(p => p !== payload)
         }
       }
+      break
+    case CREATE_MESSAGE:
+      return {
+        ...state,
+        message: null
+      }
   }
   return state
 }

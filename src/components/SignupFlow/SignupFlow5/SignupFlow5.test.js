@@ -4,6 +4,8 @@ import ReactShallowRenderer from 'react-test-renderer/shallow'
 import ReactTestRenderer from 'react-test-renderer'
 import SignupFlow5 from './SignupFlow5'
 
+jest.mock('react-native-device-info')
+
 it('matches last snapshot', () => {
   const renderer = new ReactShallowRenderer()
   const props = {
