@@ -22,8 +22,7 @@ import {
   FETCH_CONTACTS,
   FETCH_RECENT_CONTACTS
  } from './NewMessage.store.js'
-import { isEmpty, get, debounce } from 'lodash/fp'
-import { memoize } from 'lodash'
+import { isEmpty, get, debounce, throttle } from 'lodash/fp'
 
 export function mapStateToProps (state, props) {
   const participantInputText = getInputText(state, props)
@@ -50,12 +49,13 @@ export function mapDispatchToProps (dispatch, props) {
   return {
     fetchSuggestions: debounce(400, autocomplete =>
       dispatch(fetchSuggestions(autocomplete))),
+    fetchContacts: throttle(1000, (first, offset) =>
+      dispatch(fetchContacts(first, offset))),
     ...bindActionCreators({
       setParticipantInput,
       setParticipants,
       addParticipant,
       removeParticipant,
-      fetchContacts,
       fetchRecentContacts,
       createMessage,
       setMessage,
@@ -93,13 +93,9 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
 
   const offset = allContacts.length
 
-  var memoizedFetchContacts = memoize(
-    dispatchProps.fetchContacts,
-    (first, offset) => offset)
-
   const fetchMoreContacts = pending.all
     ? () => {}
-    : () => memoizedFetchContacts(10, offset)
+    : () => dispatchProps.fetchContacts(10, offset)
 
   return {
     ...stateProps,

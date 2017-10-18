@@ -73,11 +73,6 @@ export default class NewMessage extends React.Component {
       ]
     }
 
-    const onEndReached = () => {
-      console.log('onEndReached')
-      fetchMoreContacts()
-    }
-
     return <KeyboardFriendlyView
       style={styles.container}
       {...{...kavProps, behavior: 'height'}}
@@ -93,7 +88,8 @@ export default class NewMessage extends React.Component {
         renderSectionHeader={SectionHeader}
         keyExtractor={item => item.id}
         sections={listSections}
-        onEndReached={onEndReached}
+        onEndReached={fetchMoreContacts}
+        onEndReachedThreshold={0.3}
         stickySectionHeadersEnabled={false} />
       <MessageInput
         onChange={setMessage}
@@ -140,7 +136,7 @@ export function SectionHeader ({ section }) {
   const { label, loading } = section
   return <View style={styles.sectionHeader}>
     {label && <Text style={styles.listLabel}>{label}</Text>}
-    {false && <Loading />}
+    {loading && <Loading />}
   </View>
 }
 
