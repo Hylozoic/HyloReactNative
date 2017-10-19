@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LinkPreview matches snapshot 1`] = `
+<TouchableOpacity
+  onPress={[Function]}
+>
+  <SpaceFillingImage
+    imageUrl="rarara.com/ra.png"
+  />
+  <Text>
+    Good Link
+  </Text>
+  <Text>
+    GOODLINK.COM
+  </Text>
+</TouchableOpacity>
+`;

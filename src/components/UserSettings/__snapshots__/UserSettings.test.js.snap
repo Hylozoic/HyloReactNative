@@ -666,7 +666,8 @@ exports[`UserSettings matches the last snapshot 1`] = `
             "marginBottom": 10,
           },
           "textInput": Object {
-            "borderBottomWidth": 0,
+            "borderBottomColor": "#AAACAC",
+            "borderBottomWidth": 0.5,
             "color": "#56667a",
             "fontFamily": "Circular-Book",
             "fontSize": 16,

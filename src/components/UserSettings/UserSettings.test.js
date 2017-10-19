@@ -16,7 +16,6 @@ jest.mock('react-native-fbsdk', () => ({
 }))
 jest.mock('react-native-device-info')
 
-
 describe('UserSettings', () => {
   it('matches the last snapshot', () => {
     const renderer = new ReactShallowRenderer()

@@ -1,3 +1,4 @@
+import { StyleSheet } from 'react-native'
 import { gunsmoke, rhino30, rhino80, caribbeanGreen, white60onCaribbeanGreen, amaranth } from 'style/colors'
 
 export default {
@@ -49,7 +50,7 @@ export default {
   socialControl: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    borderBottomWidth: 1,
+    borderBottomWidth: StyleSheet.hairlineWidth,
     borderColor: rhino30,
     paddingBottom: 8,
     marginBottom: 10
@@ -96,7 +97,8 @@ export default {
       fontSize: 16,
       color: rhino80,
       fontFamily: 'Circular-Book',
-      borderBottomWidth: 0
+      borderBottomWidth: StyleSheet.hairlineWidth,
+      borderBottomColor: rhino30
     },
     error: {
       paddingVertical: 0,
