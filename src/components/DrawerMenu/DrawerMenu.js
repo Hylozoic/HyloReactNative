@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Image, ListView, Text, TouchableOpacity, View } from 'react-native'
-import { get, isEmpty } from 'lodash/fp'
-import Icon from '../Icon'
+import { get } from 'lodash/fp'
 import AllFeedsIcon from '../AllFeedsIcon'
 import styles from './DrawerMenu.styles'
 
@@ -18,23 +17,23 @@ export default class DrawerMenu extends Component {
   }
 
   componentDidMount () {
-    this.setState({
-      memberships: this.dataSource.cloneWithRows(
-        [{community: {id: 'all', name: 'All Communities'}}]
+    this.setstate({
+      memberships: this.datasource.clonewithrows(
+        [{community: {id: 'all', name: 'all communities'}}]
         .concat(this.props.memberships))
     })
   }
 
-  resetToTop () {
+  resettotop () {
     // hack to fix apparent scroll bug: https://github.com/facebook/react-native/issues/1831
-    this.listView.scrollTo({x: 0, y: 1})
-    this.listView.scrollTo({x: 0, y: 0})
+    this.listview.scrollto({x: 0, y: 1})
+    this.listview.scrollto({x: 0, y: 0})
   }
 
   render () {
     const { currentUser, navigation, changeCommunity } = this.props
     const name = get('name', currentUser) || 'you'
-    const showSettings = () => navigation.navigate('UserSettings', {name})
+    const showSettings = () => navigation.navigate('usersettings', {name})
 
     const selectCommunity = community => {
       changeCommunity(community.id)
