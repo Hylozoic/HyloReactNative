@@ -16,7 +16,7 @@ export default {
     padding: 20
   },
   scrollContainer: {
-    flex: 1
+    flexGrow: 1
   },
   setting: {
     marginBottom: 23
