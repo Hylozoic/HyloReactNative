@@ -22,7 +22,9 @@ import {
 import {
   VOTE_ON_POST_PENDING
 } from '../../components/PostCard/PostFooter/PostFooter.store'
-
+import {
+  USE_INVITATION
+} from '../../components/JoinCommunity/JoinCommunity.store'
 import orm from '../models'
 import ModelExtractor from './ModelExtractor'
 import extractModelsFromAction from './ModelExtractor/extractModelsFromAction'
@@ -151,6 +153,11 @@ export default function ormReducer (state = {}, action) {
         followersTotal: ct.followersTotal + (meta.isSubscribing ? 1 : -1),
         isSubscribed: !!meta.isSubscribing
       })
+      break
+
+    case USE_INVITATION:
+      me = session.Me.first()
+      me.updateAppending({memberships: [payload.data.useInvitation.membership.id]})
       break
   }
 

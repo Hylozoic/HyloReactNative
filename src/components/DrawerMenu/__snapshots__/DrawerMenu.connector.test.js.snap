@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mapDispatchToProps matches the last snapshot 1`] = `
+Object {
+  "changeCommunity": [Function],
+  "logout": [Function],
+}
+`;
+
+exports[`mapStateToProps matches the latest snapshot 1`] = `
+Object {
+  "avatarUrl": undefined,
+  "currentUser": undefined,
+  "memberships": Array [],
+  "name": "you",
+}
+`;
+
+exports[`mergeProps matches the last snapshot and bound functions work as expected 1`] = `
+Object {
+  "changeCommunity": [Function],
+  "currentUser": Object {
+    "id": "anyid",
+  },
+  "goToMyProfile": [Function],
+  "name": "Roy Rogers",
+  "navigation": Object {
+    "navigate": [Function],
+  },
+  "selectCommunity": [Function],
+  "showSettings": [Function],
+}
+`;

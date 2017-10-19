@@ -9,6 +9,9 @@ import {
 import {
   CREATE_COMMENT
 } from '../../components/PostDetails/CommentEditor/CommentEditor.store'
+import {
+  USE_INVITATION
+} from '../../components/JoinCommunity/JoinCommunity.store'
 
 it('responds to an action with meta.extractModel', () => {
   const state = orm.getEmptyState()
@@ -151,6 +154,40 @@ describe('handles VOTE_ON_POST_PENDING', () => {
     const newState = ormReducer(session.state, downVoteAction)
     const newSession = orm.session(newState)
     expect(newSession.Post.first().myVote).toBeFalsy()
+  })
+})
 
+describe('handles USE_INVITATION', () => {
+  it('should link the new Membership to MeMemberships', () => {
+    const session = orm.mutableSession(orm.getEmptyState())
+    const meId = 'meId'
+    const community1Id = 'community1Id'
+    const community2Id = 'community2Id'
+    const membership1Id = 'membership1Id'
+    const membership2Id = 'membership2Id'
+
+    session.Me.create({id: meId})
+    session.Community.create({id: community1Id, name: 'community 1'})
+    session.Community.create({id: community2Id, name: 'community 2'})
+    session.Membership.create({id: membership1Id, community: community1Id, person: meId})
+    session.Membership.create({id: membership2Id, community: community2Id, person: meId})    // const me = session.Me.first()
+
+    const action = {
+      type: USE_INVITATION,
+      payload: {
+        data: {
+          useInvitation: {
+            membership: {
+              id: membership1Id
+            }
+          }
+        }
+      }
+    }
+    const memberships = session.Me.first().memberships
+    expect(memberships.count()).toEqual(0)
+    const newSession = orm.session(ormReducer(session.state, action))
+    const membershipsAfterAction = newSession.Me.first().memberships
+    expect(membershipsAfterAction.count()).toEqual(1)
   })
 })
