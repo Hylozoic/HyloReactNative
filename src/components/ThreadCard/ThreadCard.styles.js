@@ -13,7 +13,7 @@ export default {
     fontFamily: 'Circular-Bold',
     color: limedSpruce,
     fontSize: 14,
-    marginBottom: 7
+    marginBottom: 3
   },
   footer: {
     fontSize: 12
