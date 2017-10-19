@@ -3,7 +3,7 @@ import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import ReactTestRenderer from 'react-test-renderer'
 import
-  NewMessage, { ParticipantInput, Participant, ContactList, ContactRow }
+  NewMessage, { ParticipantInput, Participant, ContactRow }
 from './NewMessage'
 
 jest.mock('react-native-device-info')
@@ -136,24 +136,6 @@ describe('Participant', () => {
       participant={participant}
       remove={() => {}} />)
 
-    const actual = renderer.getRenderOutput()
-
-    expect(actual).toMatchSnapshot()
-  })
-})
-
-describe('ContactList', () => {
-  it('renders correctly', () => {
-    const renderer = new ReactShallowRenderer()
-    const label = 'Recent Contacts'
-    const contacts = [{id: 4}, {id: 5}, {id: 6}]
-
-    renderer.render(<ContactList
-      label={label}
-      contacts={contacts}
-      addParticipant={() => {}}
-      grayed
-      loading />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
