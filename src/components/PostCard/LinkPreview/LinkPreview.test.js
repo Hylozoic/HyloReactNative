@@ -1,8 +1,7 @@
 import { Linking } from 'react-native'
 import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
-import ReactTestRenderer from 'react-test-renderer'
-import LinkPreview from './LinkPreview'
+import LinkPreview, { openURL } from './LinkPreview'
 
 jest.mock('react-native', () => ({
   Linking: {
@@ -27,11 +26,12 @@ describe('LinkPreview', () => {
 
     expect(actual).toMatchSnapshot()
   })
+})
 
-  describe('openURL', () => {
+describe('openURL', () => {
+  it('calls Linking.openURL', () => {
     const url = 'http://www.goodlink.com'
-    const instance = ReactTestRenderer.create(<LinkPreview url={url} />).getInstance()
-    return instance.openURL()
+    openURL(url)
     .then(() => {
       expect(Linking.canOpenURL).toHaveBeenCalled()
       expect(Linking.openURL).toHaveBeenCalledWith(url)

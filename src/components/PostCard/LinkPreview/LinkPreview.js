@@ -3,22 +3,18 @@ import { TouchableOpacity, Text, Linking } from 'react-native'
 import { parse } from 'url'
 import SpaceFillingImage from '../../SpaceFillingImage'
 
-export default class LinkPreview extends React.Component {
-  openURL = () => {
-    const { url } = this.props
-    return Linking.canOpenURL(url).then(supported => supported && Linking.openURL(url))
-  }
+export function openURL (url) {
+  return Linking.canOpenURL(url).then(supported => supported && Linking.openURL(url))
+}
 
-  render () {
-    const { title, url, imageUrl } = this.props
-    const domain = parse(url).hostname.replace('www.', '')
-    return <TouchableOpacity style={styles.linkContainer}
-      onPress={this.openURL}>
-      <SpaceFillingImage imageUrl={imageUrl} />
-      <Text style={styles.linkTitle}>{title}</Text>
-      <Text style={styles.linkDomain}>{domain.toUpperCase()}</Text>
-    </TouchableOpacity>
-  }
+export default function LinkPreview ({ title, url, imageUrl }) {
+  const domain = parse(url).hostname.replace('www.', '')
+  return <TouchableOpacity style={styles.linkContainer}
+    onPress={() => openURL(url)}>
+    <SpaceFillingImage imageUrl={imageUrl} />
+    <Text style={styles.linkTitle}>{title}</Text>
+    <Text style={styles.linkDomain}>{domain.toUpperCase()}</Text>
+  </TouchableOpacity>
 }
 
 const styles = {
