@@ -38,22 +38,5 @@ test('mergeProps matches the last snapshot', () => {
     }
   }
   const result = mergeProps(stateProps, dispatchProps, ownProps)
-  result.selectCommunity('anything')
-  expect(result.selectCommunity('anything')).toEqual('')
-  expect(result.showSettings()).toEqual('')
-  expect(result.goToMyProfile()).toEqual('')
   expect(result).toMatchSnapshot()
 })
-
-
-// selectCommunity: community => {
-//   dispatchProps.changeCommunity(community.id)
-//   navigation.navigate('DrawerClose')
-// },
-// showSettings: () => {
-//   navigation.navigate('UserSettings', {name})
-// },
-// goToMyProfile: () => {
-//   navigation.navigate('MemberProfile', {id: currentUser.id})
-// }
-//
