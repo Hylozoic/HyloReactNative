@@ -22,6 +22,7 @@ import {
 import {
   VOTE_ON_POST_PENDING
 } from '../../components/PostCard/PostFooter/PostFooter.store'
+
 import orm from '../models'
 import ModelExtractor from './ModelExtractor'
 import extractModelsFromAction from './ModelExtractor/extractModelsFromAction'
