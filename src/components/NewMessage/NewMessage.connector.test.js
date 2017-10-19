@@ -25,8 +25,14 @@ describe('mapDispatchToProps', () => {
 })
 
 describe('mergeProps', () => {
+  const defaultStateProps = {
+    allContacts: [],
+    pending: {}
+  }
+
   it('sets up fetchSuggestions', () => {
     const stateProps = {
+      ...defaultStateProps,
       participantInputText: 'not empty',
       suggestions: []
     }
@@ -50,6 +56,7 @@ describe('mergeProps', () => {
       }
     }
     const stateProps = {
+      ...defaultStateProps,
       message: 'not empty'
     }
     const dispatchProps = {
@@ -78,8 +85,36 @@ describe('mergeProps', () => {
         state: {params: {participants}}
       }
     }
-    const mergedProps = mergeProps({}, dispatchProps, ownProps)
+    const mergedProps = mergeProps(defaultStateProps, dispatchProps, ownProps)
     mergedProps.loadParticipantsFromParams()
     expect(dispatchProps.setParticipants).toHaveBeenCalledWith(participants)
+  })
+
+  it('sets fetchMoreContacts to no op when pending', () => {
+    const stateProps = {
+      ...defaultStateProps,
+      pending: {
+        all: true
+      }
+    }
+    const dispatchProps = {
+      fetchContacts: jest.fn()
+    }
+    const mergedProps = mergeProps(stateProps, dispatchProps, {})
+    mergedProps.fetchMoreContacts()
+    expect(dispatchProps.fetchContacts).not.toHaveBeenCalled()
+  })
+
+  it('sets up fetchMoreContacts', () => {
+    const stateProps = {
+      ...defaultStateProps,
+      allContacts: [1, 2, 3, 4]
+    }
+    const dispatchProps = {
+      fetchContacts: jest.fn()
+    }
+    const mergedProps = mergeProps(stateProps, dispatchProps, {})
+    mergedProps.fetchMoreContacts()
+    expect(dispatchProps.fetchContacts).toHaveBeenCalledWith(10, stateProps.allContacts.length)
   })
 })
