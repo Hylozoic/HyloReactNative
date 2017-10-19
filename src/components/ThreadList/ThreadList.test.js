@@ -16,7 +16,7 @@ describe('ThreadList', () => {
   it('fetches threads initially when empty', () => {
     const fetchThreads = jest.fn()
     const threads = []
-    const renderer = TestRenderer.create(<ThreadList hasMore={true} threads={threads} fetchThreads={fetchThreads} />)
+    const renderer = TestRenderer.create(<ThreadList hasMore threads={threads} fetchThreads={fetchThreads} />)
 
     expect(renderer.toJSON()).toMatchSnapshot()
 
