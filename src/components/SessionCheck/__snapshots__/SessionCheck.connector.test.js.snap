@@ -23,6 +23,23 @@ Array [
       "type": "CHECK_SESSION",
     },
   ],
+  Array [
+    Object {
+      "graphql": Object {
+        "query": "mutation ($playerId: String, $platform: String, $version: String) {
+        registerDevice(playerId: $playerId, platform: $platform, version: $version) {
+          success
+        }
+      }",
+        "variables": Object {
+          "platform": "ios_dev",
+          "playerId": 5,
+          "version": "2",
+        },
+      },
+      "type": "REGISTER_DEVICE",
+    },
+  ],
 ]
 `;
 

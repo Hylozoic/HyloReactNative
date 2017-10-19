@@ -8,9 +8,6 @@ exports[`handles ThreadAvatars correctly handles when there are more than three 
   <Avatar
     avatarUrl="http://avatar.url"
   />
-  <Avatar
-    avatarUrl="http://avatar.url"
-  />
   <View>
     <Text
       accessible={true}
@@ -19,7 +16,7 @@ exports[`handles ThreadAvatars correctly handles when there are more than three 
       ellipsizeMode="tail"
     >
       +
-      1
+      2
     </Text>
   </View>
 </View>
@@ -27,9 +24,6 @@ exports[`handles ThreadAvatars correctly handles when there are more than three 
 
 exports[`handles ThreadAvatars correctly handles when there are three participants 1`] = `
 <View>
-  <Avatar
-    avatarUrl="http://avatar.url"
-  />
   <Avatar
     avatarUrl="http://avatar.url"
   />
