@@ -75,8 +75,8 @@ export function fetchSuggestions (autocomplete, first = 10) {
 }
 
 const fetchContactsQuery =
-`query PeopleContacts ($first: Int) {
-  people (first: $first) {
+`query ($first: Int, $offset: Int) {
+  people (first: $first, offset: $offset) {
     items {
       id
       name
@@ -92,12 +92,12 @@ const fetchContactsQuery =
   }
 }`
 
-export function fetchContacts (first = 10) {
+export function fetchContacts (first = 10, offset = 0) {
   return {
     type: FETCH_CONTACTS,
     graphql: {
       query: fetchContactsQuery,
-      variables: { first }
+      variables: { first, offset }
     },
     meta: {
       extractModel: 'Person',

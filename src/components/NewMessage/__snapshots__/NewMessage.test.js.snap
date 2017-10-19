@@ -1,46 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ContactList renders correctly 1`] = `
-<View>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    disabled={false}
-    ellipsizeMode="tail"
-  >
-    Recent Contacts
-  </Text>
-  <Loading />
-  <ContactRow
-    add={[Function]}
-    contact={
-      Object {
-        "id": 4,
-      }
-    }
-    grayed={true}
-  />
-  <ContactRow
-    add={[Function]}
-    contact={
-      Object {
-        "id": 5,
-      }
-    }
-    grayed={true}
-  />
-  <ContactRow
-    add={[Function]}
-    contact={
-      Object {
-        "id": 6,
-      }
-    }
-    grayed={true}
-  />
-</View>
-`;
-
 exports[`ContactRow renders correctly 1`] = `
 <TouchableOpacity
   activeOpacity={0.2}
@@ -87,51 +46,62 @@ exports[`NewMessage renders correctly 1`] = `
     removeParticipant={[Function]}
     text=""
   />
-  <ScrollViewMock
+  <SectionList
     contentContainerStyle={
       Object {
-        "paddingBottom": 72,
+        "paddingHorizontal": 12,
       }
     }
-  >
-    <ContactList
-      addParticipant={[Function]}
-      contacts={
-        Array [
-          Object {
-            "id": 1,
-          },
-          Object {
-            "id": 2,
-          },
-          Object {
-            "id": 3,
-          },
-        ]
-      }
-      label="Recent"
-      loading={true}
-    />
-    <ContactList
-      addParticipant={[Function]}
-      contacts={
-        Array [
-          Object {
-            "id": 4,
-          },
-          Object {
-            "id": 5,
-          },
-          Object {
-            "id": 6,
-          },
-        ]
-      }
-      grayed={true}
-      label="All Contacts"
-      loading={false}
-    />
-  </ScrollViewMock>
+    data={Array []}
+    disableVirtualization={false}
+    horizontal={false}
+    initialNumToRender={10}
+    keyExtractor={[Function]}
+    maxToRenderPerBatch={10}
+    onEndReached={undefined}
+    onEndReachedThreshold={0.3}
+    renderItem={[Function]}
+    renderScrollComponent={[Function]}
+    renderSectionHeader={[Function]}
+    scrollEventThrottle={50}
+    sections={
+      Array [
+        Object {
+          "data": Array [
+            Object {
+              "id": 1,
+            },
+            Object {
+              "id": 2,
+            },
+            Object {
+              "id": 3,
+            },
+          ],
+          "label": "Recent",
+          "loading": true,
+        },
+        Object {
+          "data": Array [
+            Object {
+              "id": 4,
+            },
+            Object {
+              "id": 5,
+            },
+            Object {
+              "id": 6,
+            },
+          ],
+          "label": "All Contacts",
+          "loading": false,
+        },
+      ]
+    }
+    stickySectionHeadersEnabled={false}
+    updateCellsBatchingPeriod={50}
+    windowSize={21}
+  />
   <MessageInput
     onBlur={[Function]}
     onChange={[Function]}
@@ -165,31 +135,46 @@ exports[`NewMessage renders correctly 2`] = `
     removeParticipant={[Function]}
     text="Jon"
   />
-  <ScrollViewMock
+  <SectionList
     contentContainerStyle={
       Object {
-        "paddingBottom": 72,
+        "paddingHorizontal": 12,
       }
     }
-  >
-    <ContactList
-      addParticipant={[Function]}
-      contacts={
-        Array [
-          Object {
-            "id": 7,
-          },
-          Object {
-            "id": 8,
-          },
-          Object {
-            "id": 9,
-          },
-        ]
-      }
-      loading={true}
-    />
-  </ScrollViewMock>
+    data={Array []}
+    disableVirtualization={false}
+    horizontal={false}
+    initialNumToRender={10}
+    keyExtractor={[Function]}
+    maxToRenderPerBatch={10}
+    onEndReached={undefined}
+    onEndReachedThreshold={0.3}
+    renderItem={[Function]}
+    renderScrollComponent={[Function]}
+    renderSectionHeader={[Function]}
+    scrollEventThrottle={50}
+    sections={
+      Array [
+        Object {
+          "data": Array [
+            Object {
+              "id": 7,
+            },
+            Object {
+              "id": 8,
+            },
+            Object {
+              "id": 9,
+            },
+          ],
+          "loading": true,
+        },
+      ]
+    }
+    stickySectionHeadersEnabled={false}
+    updateCellsBatchingPeriod={50}
+    windowSize={21}
+  />
   <MessageInput
     onBlur={[Function]}
     onChange={[Function]}

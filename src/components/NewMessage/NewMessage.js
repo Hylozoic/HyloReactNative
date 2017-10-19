@@ -2,6 +2,7 @@ import React from 'react'
 import {
   Dimensions,
   ScrollView,
+  SectionList,
   Text,
   TouchableOpacity,
   TextInput,
@@ -54,10 +55,23 @@ export default class NewMessage extends React.Component {
       setMessage,
       message,
       pending,
+      fetchMoreContacts,
       mockViewKey // just for testing
     } = this.props
 
     const showSuggestions = !isEmpty(participantInputText)
+
+    var listSections = []
+    if (showSuggestions) {
+      listSections = [
+        {data: suggestions, loading: pending.suggestions}
+      ]
+    } else {
+      listSections = [
+        {data: recentContacts, label: 'Recent', loading: pending.recent},
+        {data: allContacts, label: 'All Contacts', loading: pending.all}
+      ]
+    }
 
     return <KeyboardFriendlyView
       style={styles.container}
@@ -68,24 +82,17 @@ export default class NewMessage extends React.Component {
         removeParticipant={removeParticipant}
         onChangeText={setParticipantInput}
         text={participantInputText} />
-      <ScrollView contentContainerStyle={styles.scrollView}>
-        {showSuggestions && <ContactList
-          contacts={suggestions}
-          addParticipant={addParticipant}
-          loading={pending.suggestions} />}
-        {!showSuggestions && <ContactList
-          label='Recent'
-          contacts={recentContacts}
-          addParticipant={addParticipant}
-          loading={pending.recent} />}
-        {!showSuggestions && <ContactList
-          label='All Contacts'
-          contacts={allContacts}
-          grayed
-          addParticipant={addParticipant}
-          loading={pending.all} />}
-      </ScrollView>
+      <SectionList
+        contentContainerStyle={styles.sectionList}
+        renderItem={renderContact(addParticipant)}
+        renderSectionHeader={SectionHeader}
+        keyExtractor={item => item.id}
+        sections={listSections}
+        onEndReached={fetchMoreContacts}
+        onEndReachedThreshold={0.3}
+        stickySectionHeadersEnabled={false} />
       <MessageInput
+        style={styles.messageInput}
         onChange={setMessage}
         value={message}
         onSubmit={createMessage}
@@ -122,12 +129,15 @@ export function Participant ({ participant, remove }) {
   </View>
 }
 
-export function ContactList ({ contacts, label, grayed, addParticipant, loading }) {
-  return <View style={styles.contactList}>
+export function renderContact (addParticipant) {
+  return ({ item }) => <ContactRow contact={item} add={addParticipant} />
+}
+
+export function SectionHeader ({ section }) {
+  const { label, loading } = section
+  return <View style={styles.sectionHeader}>
     {label && <Text style={styles.listLabel}>{label}</Text>}
     {loading && <Loading />}
-    {contacts.map(c =>
-      <ContactRow contact={c} grayed={grayed} key={c.id} add={addParticipant} />)}
   </View>
 }
 
