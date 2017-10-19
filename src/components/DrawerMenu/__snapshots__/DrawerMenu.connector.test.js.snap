@@ -16,7 +16,7 @@ Object {
 }
 `;
 
-exports[`mergeProps matches the last snapshot 1`] = `
+exports[`mergeProps matches the last snapshot and bound functions work as expected 1`] = `
 Object {
   "changeCommunity": [Function],
   "currentUser": Object {

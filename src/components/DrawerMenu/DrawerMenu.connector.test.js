@@ -22,9 +22,7 @@ test('mapDispatchToProps matches the last snapshot', () =>
   expect(mapDispatchToProps).toMatchSnapshot()
 )
 
-test('mergeProps matches the last snapshot', () => {
-  // const { navigation, currentUser, name } = stateProps
-  // dispatchProps.changeCommunity
+test('mergeProps matches the last snapshot and bound functions work as expected', () => {
   const stateProps = {
     currentUser: {id: 'anyid'},
     name: 'Roy Rogers'
@@ -37,6 +35,14 @@ test('mergeProps matches the last snapshot', () => {
       navigate: jest.fn(x => x)
     }
   }
-  const result = mergeProps(stateProps, dispatchProps, ownProps)
-  expect(result).toMatchSnapshot()
+  const props = mergeProps(stateProps, dispatchProps, ownProps)
+  expect(props).toMatchSnapshot()
+  const community = {id: 'testcommunity'}
+  props.selectCommunity(community)
+  expect(dispatchProps.changeCommunity).toHaveBeenCalled()
+  expect(ownProps.navigation.navigate).toHaveBeenCalled()
+  props.showSettings()
+  expect(ownProps.navigation.navigate).toHaveBeenCalled()
+  props.goToMyProfile()
+  expect(ownProps.navigation.navigate).toHaveBeenCalled()
 })
