@@ -43,7 +43,6 @@ export function ThreadAvatars ({avatarUrls}) {
     {count === 2 && <Avatar avatarUrl={avatarUrls[1]} style={styles.restThreadAvatars} />}
     {count > 2 && <Avatar avatarUrl={avatarUrls[0]} style={styles.firstThreadAvatar} />}
     {count > 2 && <Avatar avatarUrl={avatarUrls[1]} style={styles.restThreadAvatars} />}
-    {count > 2 && <Avatar avatarUrl={avatarUrls[2]} style={styles.restThreadAvatars} />}
-    {count > 3 && <View style={styles.count}><Text style={styles.countText}>+{count - 3}</Text></View>}
+    {count > 3 && <View style={styles.count}><Text style={styles.countText}>+{count - 2}</Text></View>}
   </View>
 }
