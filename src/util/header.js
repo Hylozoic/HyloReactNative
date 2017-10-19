@@ -88,23 +88,25 @@ export default function header ({ goBack, state }, { left, right, title } = {}) 
 const styles = StyleSheet.create({
   button: {
     fontFamily: 'Circular-Book',
-    fontSize: 16
+    fontSize: 15,
+    color: rhino60
   },
   center: {
     alignSelf: 'center'
   },
   header: {
-    paddingHorizontal: 10
+    paddingHorizontal: 10,
+    backgroundColor: 'white'
   },
   title: {
     color: 'black',
     fontFamily: 'Circular-Bold',
-    fontSize: 18,
-    marginLeft: 15,
+    fontSize: 17,
+    marginLeft: 15
 
     // Required to avoid font-weight bug where RN goes looking for
     // CustomFontName_bold.ttf, which doesn't exist:
     // https://github.com/react-community/react-navigation/issues/542#issuecomment-283663786
-    fontWeight: '200'
+    // fontWeight: '200'
   }
 })
