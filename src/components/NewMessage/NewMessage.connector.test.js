@@ -89,4 +89,32 @@ describe('mergeProps', () => {
     mergedProps.loadParticipantsFromParams()
     expect(dispatchProps.setParticipants).toHaveBeenCalledWith(participants)
   })
+
+  it('sets fetchMoreContacts to no op when pending', () => {
+    const stateProps = {
+      ...defautStateProps,
+      pending: {
+        all: true
+      }
+    }
+    const dispatchProps = {
+      fetchContacts: jest.fn()
+    }
+    const mergedProps = mergeProps(stateProps, dispatchProps, {})
+    mergedProps.fetchMoreContacts()
+    expect(dispatchProps.fetchContacts).not.toHaveBeenCalled()
+  })
+
+  it('sets up fetchMoreContacts', () => {
+    const stateProps = {
+      ...defautStateProps,
+      allContacts: [1, 2, 3, 4]
+    }
+    const dispatchProps = {
+      fetchContacts: jest.fn()
+    }
+    const mergedProps = mergeProps(stateProps, dispatchProps, {})
+    mergedProps.fetchMoreContacts()
+    expect(dispatchProps.fetchContacts).toHaveBeenCalledWith(10, stateProps.allContacts.length)
+  })
 })
