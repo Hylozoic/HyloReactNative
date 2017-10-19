@@ -17,7 +17,7 @@ export default function ThreadCard (props) {
     <View style={[styles.messageContent, props.isLast && styles.lastCard]}>
       <Text style={styles.header}>{names}</Text>
       <Text style={styles.body} numberOfLines={2}>{props.message.text}</Text>
-      <Text>{humanDate(get('createdAt', props.message))}</Text>
+      <Text style={styles.date}>{humanDate(get('createdAt', props.message))}</Text>
     </View>
   </View>
 }
@@ -38,12 +38,11 @@ export function threadNames (names) {
 
 export function ThreadAvatars ({avatarUrls}) {
   const count = avatarUrls.length
-  return <View>
+  return <View style={styles.threadAvatars}>
     {(count <= 2) && <Avatar avatarUrl={avatarUrls[0]} style={styles.firstThreadAvatar} />}
-    {count === 2 && <Avatar avatarUrl={avatarUrls[1]} style={styles.threadAvatars} />}
+    {count === 2 && <Avatar avatarUrl={avatarUrls[1]} style={styles.restThreadAvatars} />}
     {count > 2 && <Avatar avatarUrl={avatarUrls[0]} style={styles.firstThreadAvatar} />}
-    {count > 2 && <Avatar avatarUrl={avatarUrls[1]} style={styles.threadAvatars} />}
-    {count > 2 && <Avatar avatarUrl={avatarUrls[2]} style={styles.threadAvatars} />}
-    {count > 3 && <View style={styles.count}><Text style={styles.countText}>+{count - 3}</Text></View>}
+    {count > 2 && <Avatar avatarUrl={avatarUrls[1]} style={styles.restThreadAvatars} />}
+    {count > 3 && <View style={styles.count}><Text style={styles.countText}>+{count - 2}</Text></View>}
   </View>
 }

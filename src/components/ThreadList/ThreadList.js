@@ -1,14 +1,18 @@
 import React, { Component } from 'react'
 import { FlatList, TouchableOpacity, View, Text } from 'react-native'
 import { isEmpty } from 'lodash/fp'
-
+import header from 'util/header'
 import Loading from '../Loading'
 import ThreadCard from '../ThreadCard'
-import Header from './Header'
 import styles from './ThreadList.styles'
 
 export default class ThreadList extends Component {
-  static navigationOptions = ({navigation}) => (Header(navigation))
+  static navigationOptions = ({ navigation }) =>
+    header(navigation, {
+      left: 'close',
+      title: 'Messages',
+      right: {text: 'New', onPress: () => navigation.navigate('NewMessage')}
+    })
 
   fetchOrShowCached () {
     const { hasMore, threads, fetchThreads } = this.props

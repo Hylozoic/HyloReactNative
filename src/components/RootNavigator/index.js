@@ -76,7 +76,9 @@ const tabNavigatorConfig = {
     },
     style: isIOS ? tabStyles.tabNavigatorIOS : tabStyles.tabNavigatorAndroid
   },
-  tabBarComponent: TabBarComponent // TODO remove this once https://github.com/react-community/react-navigation/pull/1764 is checked in and released
+  // TODO remove this line once this PR is merged and released:
+  // https://github.com/react-community/react-navigation/pull/1764
+  tabBarComponent: isIOS ? undefined : TabBarComponent
 }
 
 const TabNavigatorWithBar = TabNavigator(
