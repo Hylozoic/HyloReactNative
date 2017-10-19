@@ -41,7 +41,7 @@ export function mapDispatchToProps (dispatch) {
   return {
     ...bindActionCreators(actions, dispatch),
     initOneSignal: () =>
-      initOneSignal({registerDevice: () => dispatch(registerDevice())})
+      initOneSignal(bindActionCreators({registerDevice}, dispatch))
   }
 }
 
