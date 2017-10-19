@@ -154,11 +154,6 @@ export default function ormReducer (state = {}, action) {
         isSubscribed: !!meta.isSubscribing
       })
       break
-
-    case USE_INVITATION:
-      me = session.Me.first()
-      me.updateAppending({memberships: [payload.data.useInvitation.membership.id]})
-      break
   }
 
   return session.state

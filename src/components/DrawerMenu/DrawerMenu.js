@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Image, ListView, Text, TouchableOpacity, View } from 'react-native'
-import { get } from 'lodash/fp'
 import AllFeedsIcon from '../AllFeedsIcon'
 import styles from './DrawerMenu.styles'
 
