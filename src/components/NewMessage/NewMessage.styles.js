@@ -22,6 +22,9 @@ export default {
   sectionList: {
     ...defaultPadding
   },
+  messageInput: {
+    marginBottom: 20
+  },
   scrollViewWrapper: {
     height: 60
   },

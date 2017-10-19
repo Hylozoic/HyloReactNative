@@ -92,6 +92,7 @@ export default class NewMessage extends React.Component {
         onEndReachedThreshold={0.3}
         stickySectionHeadersEnabled={false} />
       <MessageInput
+        style={styles.messageInput}
         onChange={setMessage}
         value={message}
         onSubmit={createMessage}

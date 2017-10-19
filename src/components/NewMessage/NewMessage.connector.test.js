@@ -25,8 +25,14 @@ describe('mapDispatchToProps', () => {
 })
 
 describe('mergeProps', () => {
+  const defautStateProps = {
+    allContacts: [],
+    pending: {}
+  }
+
   it('sets up fetchSuggestions', () => {
     const stateProps = {
+      ...defautStateProps,
       participantInputText: 'not empty',
       suggestions: []
     }
@@ -50,6 +56,7 @@ describe('mergeProps', () => {
       }
     }
     const stateProps = {
+      ...defautStateProps,
       message: 'not empty'
     }
     const dispatchProps = {
@@ -78,7 +85,7 @@ describe('mergeProps', () => {
         state: {params: {participants}}
       }
     }
-    const mergedProps = mergeProps({}, dispatchProps, ownProps)
+    const mergedProps = mergeProps(defautStateProps, dispatchProps, ownProps)
     mergedProps.loadParticipantsFromParams()
     expect(dispatchProps.setParticipants).toHaveBeenCalledWith(participants)
   })
