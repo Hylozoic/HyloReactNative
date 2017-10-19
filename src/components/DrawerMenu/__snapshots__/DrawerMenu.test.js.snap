@@ -86,7 +86,7 @@ exports[`DrawerMenu matches the last snapshot 1`] = `
       <Image
         source={
           Object {
-            "uri": undefined,
+            "uri": "http://anyurl",
           }
         }
       />

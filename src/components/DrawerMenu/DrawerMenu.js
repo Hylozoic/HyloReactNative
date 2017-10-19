@@ -24,6 +24,7 @@ export default class DrawerMenu extends Component {
     })
   }
 
+  // FIXME: I don't think this function is used anywhere
   resetToTop () {
     // hack to fix apparent scroll bug: https://github.com/facebook/react-native/issues/1831
     this.listView.scrollTo({x: 0, y: 1})
@@ -31,17 +32,9 @@ export default class DrawerMenu extends Component {
   }
 
   render () {
-    const { currentUser, navigation, changeCommunity } = this.props
-    const name = get('name', currentUser) || 'you'
-    const showSettings = () => navigation.navigate('usersettings', {name})
-
-    const selectCommunity = community => {
-      changeCommunity(community.id)
-      navigation.navigate('DrawerClose')
-    }
-
-    const goToMyProfile = () =>
-      navigation.navigate('MemberProfile', {id: currentUser.id})
+    const {
+      name, avatarUrl, selectCommunity, goToMyProfile, showSettings
+    } = this.props
 
     return <View style={styles.parent}>
       <ListView style={styles.menu}
@@ -53,7 +46,7 @@ export default class DrawerMenu extends Component {
         enableEmptySections />
       <View style={styles.footer}>
         <TouchableOpacity onPress={goToMyProfile} style={styles.avatar}>
-          <Image source={{uri: get('avatarUrl', currentUser)}}
+          <Image source={{uri: avatarUrl}}
             style={styles.avatar} />
         </TouchableOpacity>
         <View style={styles.footerContent}>
@@ -69,9 +62,12 @@ export default class DrawerMenu extends Component {
   }
 }
 DrawerMenu.propTypes = {
-  close: PropTypes.func,
-  showPosts: PropTypes.func,
-  showSheet: PropTypes.func
+  name: PropTypes.string.isRequired,
+  avatarUrl: PropTypes.string,
+  memberships: PropTypes.array,
+  selectCommunity: PropTypes.func.isRequired,
+  goToMyProfile: PropTypes.func.isRequired,
+  showSettings: PropTypes.func.isRequired
 }
 
 export function TextButton ({ text, onPress }) {
