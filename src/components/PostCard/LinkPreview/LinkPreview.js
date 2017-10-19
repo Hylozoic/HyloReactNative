@@ -6,7 +6,6 @@ import SpaceFillingImage from '../../SpaceFillingImage'
 export default class LinkPreview extends React.Component {
   openLink = () => {
     const { url } = this.props
-    console.log('linking, ', url)
     Linking.canOpenURL(url).then(supported => supported && Linking.openURL(url))
   }
 
