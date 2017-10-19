@@ -86,10 +86,11 @@ export default class extends React.PureComponent {
       ref: ti => { this.textInput = ti },
       style: { ...styles.input, height: this.restrictedHeight() }
     }
+    const { style } = this.props
     const { submittable } = this.state
     const iconStyle = { ...styles.sendButton, color: submittable ? jade : rhino30 }
 
-    return <View style={styles.container}>
+    return <View style={[styles.container, style]}>
       <TextInput {...inputProps} />
       <TouchableOpacity onPress={this.handleSubmit}>
         <Icon name='Send' style={iconStyle} />
