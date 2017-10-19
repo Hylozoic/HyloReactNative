@@ -40,6 +40,17 @@ describe('ThreadList', () => {
 
     expect(actual).toMatchSnapshot()
   })
+
+  it('sets the navigationOptions', () => {
+    const navigation = {
+      navigate: jest.fn(),
+      state: {}
+    }
+    const navigationOptions = ThreadList.navigationOptions({navigation})
+    expect(navigationOptions).toMatchSnapshot()
+    navigationOptions.headerRight.props.onPress()
+    expect(navigation.navigate).toHaveBeenCalledWith('NewMessage')
+  })
 })
 
 describe('MessageRow', () => {
