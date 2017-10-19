@@ -1,7 +1,7 @@
 import 'react-native'
 import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
-import DrawerMenu, { CommunityRow } from './DrawerMenu'
+import DrawerMenu, { CommunityRow, TextButton } from './DrawerMenu'
 
 jest.mock('react-native-device-info')
 
@@ -17,6 +17,26 @@ describe('DrawerMenu', () => {
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
+  })
+
+  test('componentDidMount', () => {
+    const renderer = new ReactShallowRenderer()
+    renderer.render(<DrawerMenu />)
+    const instance = renderer._instance
+    instance.setState = jest.fn()
+    instance.componentDidMount()
+    expect(instance.setState).toHaveBeenCalledTimes(1)
+  })
+
+  test('resetToTop', () => {
+    const renderer = new ReactShallowRenderer()
+    renderer.render(<DrawerMenu />)
+    const instance = renderer._instance
+    instance.listView = {
+      scrollTo: jest.fn()
+    }
+    instance.resetToTop()
+    expect(instance.listView.scrollTo).toHaveBeenCalledTimes(2)
   })
 })
 
@@ -46,4 +66,12 @@ describe('CommunityRow', () => {
 
     expect(actual).toMatchSnapshot()
   })
+})
+
+describe('TextButton', () => {
+  const renderer = new ReactShallowRenderer()
+  renderer.render(<TextButton text='anything' onPress={() => {}} />)
+  const actual = renderer.getRenderOutput()
+
+  expect(actual).toMatchSnapshot()
 })

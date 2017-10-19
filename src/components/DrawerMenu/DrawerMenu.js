@@ -17,17 +17,17 @@ export default class DrawerMenu extends Component {
   }
 
   componentDidMount () {
-    this.setstate({
-      memberships: this.datasource.clonewithrows(
+    this.setState({
+      memberships: this.dataSource.cloneWithRows(
         [{community: {id: 'all', name: 'all communities'}}]
         .concat(this.props.memberships))
     })
   }
 
-  resettotop () {
+  resetToTop () {
     // hack to fix apparent scroll bug: https://github.com/facebook/react-native/issues/1831
-    this.listview.scrollto({x: 0, y: 1})
-    this.listview.scrollto({x: 0, y: 0})
+    this.listView.scrollTo({x: 0, y: 1})
+    this.listView.scrollTo({x: 0, y: 0})
   }
 
   render () {
@@ -74,7 +74,7 @@ DrawerMenu.propTypes = {
   showSheet: PropTypes.func
 }
 
-function TextButton ({ text, onPress }) {
+export function TextButton ({ text, onPress }) {
   return <TouchableOpacity onPress={onPress} style={styles.footerButton}>
     <Text style={{color: 'white', fontSize: 14}}>{text}</Text>
   </TouchableOpacity>
