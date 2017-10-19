@@ -14,6 +14,8 @@ jest.mock('react-native-fbsdk', () => ({
     getCurrentAccessToken: jest.fn()
   }
 }))
+jest.mock('react-native-device-info')
+
 
 describe('UserSettings', () => {
   it('matches the last snapshot', () => {

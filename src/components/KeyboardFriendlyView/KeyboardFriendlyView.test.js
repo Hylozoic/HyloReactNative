@@ -4,6 +4,8 @@ import ReactShallowRenderer from 'react-test-renderer/shallow'
 import KeyboardFriendlyViewiOS from './KeyboardFriendlyView.ios'
 import KeyboardFriendlyViewAndroid from './KeyboardFriendlyView.android'
 
+jest.mock('react-native-device-info')
+
 describe('KeyboardFriendlyViewiOS', () => {
   it('matches last snapshot', () => {
     const renderer = new ReactShallowRenderer()

@@ -15,6 +15,7 @@ import PostEditor from '../PostEditor'
 import DetailsEditor from '../PostEditor/DetailsEditor'
 import PostDetails from '../PostDetails'
 import MemberProfile from '../MemberProfile'
+import NotificationsList from '../NotificationsList'
 import CommentEditor from '../PostDetails/CommentEditor'
 import tabStyles from '../Tabs/Tabs.styles'
 import NewMessage from '../NewMessage'
@@ -55,6 +56,7 @@ export const screensInStack = {
   JoinCommunity: {screen: JoinCommunity, path: 'h/use-invitation'},
   JoinCommunityAccessCode: {screen: JoinCommunity, path: 'c/:slug/join/:accessCode'},
   Thread: {screen: Thread, path: 'thread/:id'},
+  NotificationsList: {screen: NotificationsList, path: 'notifications'},
   ThreadList: {screen: ThreadList, path: 'messages'}
 }
 

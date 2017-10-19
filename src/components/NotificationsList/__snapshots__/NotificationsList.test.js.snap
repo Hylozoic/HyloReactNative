@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NotificationsList matches the last snapshot 1`] = `
+<View>
+  <FlatList
+    data={
+      Array [
+        Object {
+          "activityId": "1",
+          "actor": Object {
+            "avatarUrl": "https://wombat.com",
+            "name": "Wombat McAardvark",
+          },
+          "avatarSeparator": false,
+          "createdAt": "2 min ago",
+          "id": "1",
+          "onPress": [Function],
+          "unread": false,
+        },
+      ]
+    }
+    disableVirtualization={false}
+    horizontal={false}
+    initialNumToRender={10}
+    keyExtractor={[Function]}
+    maxToRenderPerBatch={10}
+    numColumns={1}
+    onEndReached={[Function]}
+    onEndReachedThreshold={2}
+    renderItem={[Function]}
+    renderScrollComponent={[Function]}
+    scrollEventThrottle={50}
+    updateCellsBatchingPeriod={50}
+    windowSize={21}
+  />
+</View>
+`;
+
+exports[`NotificationsList matches the last snapshot for NotificationRow 1`] = `
+<View>
+  <TouchableOpacity
+    activeOpacity={0.2}
+    focusedOpacity={0.7}
+    onPress={[Function]}
+  >
+    <NotificationCard
+      notification={
+        Object {
+          "activityId": "1",
+          "actor": Object {
+            "avatarUrl": "https://wombat.com",
+            "name": "Wombat McAardvark",
+          },
+          "avatarSeparator": false,
+          "createdAt": "2 min ago",
+          "id": "1",
+          "onPress": [Function],
+          "unread": false,
+        }
+      }
+    />
+  </TouchableOpacity>
+</View>
+`;

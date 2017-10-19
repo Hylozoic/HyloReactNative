@@ -1,13 +1,13 @@
 import React from 'react'
 
-import Icon from '../../../Icon'
+import BadgedIcon from '../../../BadgedIcon'
 import styles from '../Header.styles'
 
-export default function MessagesIcon (props) {
-  const { showMessages } = props
-  return <Icon
+export default function MessagesIcon ({ hasUnreadMessages, showMessages }) {
+  return <BadgedIcon
     name='Messages'
-    style={styles.messagesIcon}
     onPress={showMessages}
+    showBadge={hasUnreadMessages}
+    style={styles.icon}
   />
 }

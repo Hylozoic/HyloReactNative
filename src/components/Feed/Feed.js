@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import { View } from 'react-native'
+import { get } from 'lodash/fp'
+
 import FeedList from '../FeedList'
 import FeedBanner from '../FeedBanner'
+import SocketSubscriber from '../SocketSubscriber'
 import styles from './Feed.styles'
-import { get } from 'lodash/fp'
 
 export default class Feed extends Component {
   state = {showNotification: false}
@@ -55,6 +57,7 @@ export default class Feed extends Component {
             topicSubscribed={topicSubscribed}
             toggleTopicSubscribe={toggleTopicSubscribe} />
         } />
+      {!topicName && community && <SocketSubscriber type='community' id={community.id} />}
     </View>
   }
 }

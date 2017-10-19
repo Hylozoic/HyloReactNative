@@ -1,17 +1,21 @@
 /* eslint-disable camelcase */
 import React from 'react'
 import { View, Text, TouchableOpacity } from 'react-native'
+import { get } from 'lodash/fp'
+import { shape, any, object, string, func, array, bool } from 'prop-types'
+import striptags from 'striptags'
+
 import Avatar from '../Avatar'
-import PostHeader from '../PostCard/PostHeader'
+import Comments from '../Comments'
 import PostBody from '../PostCard/PostBody'
 import PostImage from '../PostCard/PostImage'
 import PostFooter from '../PostCard/PostFooter'
-import Comments from '../Comments'
+import PostHeader from '../PostCard/PostHeader'
 import Loading from '../Loading'
-import { get } from 'lodash/fp'
-import { shape, any, object, string, func, array, bool } from 'prop-types'
+import SocketSubscriber from '../SocketSubscriber'
+import SpaceFillingImage from '../SpaceFillingImage'
+
 import styles from './PostDetails.styles'
-import striptags from 'striptags'
 
 export default class PostDetails extends React.Component {
   static propTypes = {
@@ -54,7 +58,7 @@ export default class PostDetails extends React.Component {
       goToCommunity
     } = this.props
 
-    if (!post) return <Loading />
+    if (!post || pending) return <Loading />
 
     const slug = get('0.slug', post.communities)
 
@@ -99,8 +103,10 @@ export default class PostDetails extends React.Component {
         showMember={showMember}
         showTopic={showTopic}
         slug={slug} />
+      <SocketSubscriber type='post' id={post.id} />
     </View>
   }
+
 }
 
 export function CommentPrompt ({ currentUser, newComment, commentEdit }) {

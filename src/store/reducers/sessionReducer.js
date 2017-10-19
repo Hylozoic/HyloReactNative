@@ -9,6 +9,7 @@ import {
   SET_ENTRY_URL,
   RESET_ENTRY_URL
 } from '../../components/SessionCheck/SessionCheck.store'
+import { CHECK_VERSION } from '../../components/VersionCheck/actions'
 import { omit } from 'lodash/fp'
 
 export default function sessionReducer (state = {}, action) {
@@ -51,6 +52,11 @@ export default function sessionReducer (state = {}, action) {
       return {...state, entryURL: null}
     case SIGNUP:
       return {...state, loggedIn: true}
+    case CHECK_VERSION:
+      return {
+        ...state,
+        checkVersion: payload
+      }
   }
 
   return state

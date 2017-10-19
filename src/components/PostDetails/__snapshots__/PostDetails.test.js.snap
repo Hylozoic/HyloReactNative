@@ -126,10 +126,14 @@ exports[`PostDetails renders correctly 1`] = `
       </View>
     }
     postId="91"
-    postPending={true}
+    postPending={false}
     showMember={[Function]}
     showTopic={[Function]}
     slug="foom"
+  />
+  <Connect(SocketSubscriber)
+    id="91"
+    type="post"
   />
 </View>
 `;

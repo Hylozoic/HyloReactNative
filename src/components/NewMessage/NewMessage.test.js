@@ -6,6 +6,7 @@ import
   NewMessage, { ParticipantInput, Participant, ContactList, ContactRow }
 from './NewMessage'
 
+jest.mock('react-native-device-info')
 jest.mock('../MessageInput', () => 'MessageInput')
 jest.mock('../KeyboardFriendlyView', () => 'KeyboardFriendlyView')
 

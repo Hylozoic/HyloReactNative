@@ -3,6 +3,7 @@ import { mapStateToProps, mapDispatchToProps } from './SessionCheck.connector.js
 jest.mock('react-native-onesignal', () => ({
   getPermissionSubscriptionState: jest.fn(() => Promise.resolve({userId: 5}))
 }))
+jest.mock('react-native-device-info')
 
 describe('mapStateToProps', () => {
   it('returns the right keys', () => {

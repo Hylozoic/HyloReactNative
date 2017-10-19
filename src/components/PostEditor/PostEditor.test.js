@@ -4,6 +4,8 @@ import TestRenderer from 'react-test-renderer'
 import PostEditor, { SectionLabel, TypeButton } from './PostEditor'
 import { TouchableOpacity } from 'react-native'
 
+jest.mock('react-native-device-info')
+
 describe('PostEditor', () => {
   it('renders a new editor correctly', () => {
     const save = jest.fn(() => Promise.resolve())
