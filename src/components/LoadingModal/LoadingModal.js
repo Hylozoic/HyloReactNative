@@ -12,17 +12,17 @@ export default class LoadingModal extends React.Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    const { display } = nextProps
-    if (display) {
+    const { shouldDisplay } = nextProps
+    if (shouldDisplay) {
       this.setState({ visible: true })
     }
 
     Animated.timing(this.state.opacityAnim,
       {
-        toValue: display ? 0.8 : 0,
+        toValue: shouldDisplay ? 0.8 : 0,
         duration: 700
       }).start(() => {
-        this.setState({visible: nextProps.display})
+        this.setState({visible: nextProps.shouldDisplay})
       })
   }
 

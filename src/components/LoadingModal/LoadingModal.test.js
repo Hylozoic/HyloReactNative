@@ -23,7 +23,7 @@ it('matches last snapshot when visible is true', () => {
 describe('componentWillReceiveProps', () => {
   it('sets visible to true when display is true', () => {
     const instance = ReactTestRenderer.create(<LoadingModal />).getInstance()
-    instance.componentWillReceiveProps({display: true})
+    instance.componentWillReceiveProps({shouldDisplay: true})
     expect(instance.state.visible).toEqual(true)
   })
 })

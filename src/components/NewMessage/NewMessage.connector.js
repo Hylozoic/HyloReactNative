@@ -22,7 +22,7 @@ import {
   FETCH_CONTACTS,
   FETCH_RECENT_CONTACTS
  } from './NewMessage.store.js'
-import { setLoadingModal } from '../LoadingModal/LoadingModal.store'
+import { showLoadingModal } from '../LoadingModal/LoadingModal.store'
 import { isEmpty, get, debounce, throttle } from 'lodash/fp'
 
 export function mapStateToProps (state, props) {
@@ -61,7 +61,7 @@ export function mapDispatchToProps (dispatch, props) {
       createMessage,
       setMessage,
       findOrCreateThread,
-      setLoadingModal
+      showLoadingModal
     }, dispatch)
   }
 }
@@ -71,7 +71,7 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     participantInputText, message, participantIds, suggestions, allContacts, pending
   } = stateProps
   const {
-    setLoadingModal, findOrCreateThread
+    showLoadingModal, findOrCreateThread
   } = dispatchProps
   const { navigation } = ownProps
 
@@ -83,14 +83,14 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
   const createMessage = isEmpty(message)
     ? () => {}
     : () => {
-      setLoadingModal(true)
+      showLoadingModal(true)
       return findOrCreateThread(participantIds)
       .then(resp => {
         const messageThreadId = get('payload.data.findOrCreateThread.id', resp)
         dispatchProps.createMessage(messageThreadId, message, true)
         .then(({ error }) => {
           if (!error) navigation.navigate('Thread', {id: messageThreadId})
-          setLoadingModal(false)
+          showLoadingModal(false)
         })
       })
     }

@@ -8,7 +8,7 @@ Object {
     "sortBy": "updated",
   },
   "LoadingModal": Object {
-    "display": false,
+    "shouldDisplay": false,
   },
   "MemberFeed": Object {
     "choice": "Posts",

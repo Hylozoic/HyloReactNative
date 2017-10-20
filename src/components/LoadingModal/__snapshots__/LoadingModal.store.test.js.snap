@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`setLoadingModal matches snapshot 1`] = `
+exports[`showLoadingModal matches snapshot 1`] = `
 Object {
   "payload": true,
-  "type": "LoadingModal/SET_LOADING_MODAL",
+  "type": "LoadingModal/SHOW_LOADING_MODAL",
 }
 `;

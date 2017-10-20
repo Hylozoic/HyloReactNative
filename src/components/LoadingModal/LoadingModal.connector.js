@@ -1,10 +1,10 @@
 import { connect } from 'react-redux'
-import { getDisplay } from './LoadingModal.store'
+import { getShouldDisplay } from './LoadingModal.store'
 
 export function mapStateToProps (state, props) {
-  const display = getDisplay(state)
+  const shouldDisplay = getShouldDisplay(state)
   return {
-    display
+    shouldDisplay
   }
 }
 

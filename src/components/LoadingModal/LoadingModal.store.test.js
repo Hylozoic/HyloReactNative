@@ -1,21 +1,21 @@
-import reducer, { SET_LOADING_MODAL, setLoadingModal } from './LoadingModal.store'
+import reducer, { SHOW_LOADING_MODAL, showLoadingModal } from './LoadingModal.store'
 
 describe('reducer', () => {
-  describe('on SET_LOADING_MODAL', () => {
+  describe('on SHOW_LOADING_MODAL', () => {
     const action = {
-      type: SET_LOADING_MODAL,
+      type: SHOW_LOADING_MODAL,
       payload: true
     }
     it('sets display', () => {
       const state = {
-        display: false
+        shouldDisplay: false
       }
       const newState = reducer(state, action)
-      expect(newState.display).toEqual(true)
+      expect(newState.shouldDisplay).toEqual(true)
     })
   })
 })
 
-describe('setLoadingModal', () => {
-  it('matches snapshot', () => expect(setLoadingModal(true)).toMatchSnapshot())
+describe('showLoadingModal', () => {
+  it('matches snapshot', () => expect(showLoadingModal(true)).toMatchSnapshot())
 })

@@ -9,10 +9,10 @@ Object {
   "fetchSuggestions": [Function],
   "findOrCreateThread": [Function],
   "removeParticipant": [Function],
-  "setLoadingModal": [Function],
   "setMessage": [Function],
   "setParticipantInput": [Function],
   "setParticipants": [Function],
+  "showLoadingModal": [Function],
 }
 `;
 

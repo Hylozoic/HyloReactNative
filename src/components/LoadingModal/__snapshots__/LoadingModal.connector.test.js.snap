@@ -2,6 +2,6 @@
 
 exports[`mapStateToProps returns the right stuff 1`] = `
 Object {
-  "display": true,
+  "shouldDisplay": undefined,
 }
 `;
