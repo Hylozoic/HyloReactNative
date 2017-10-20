@@ -16,6 +16,7 @@ import PostEditor from '../../components/PostEditor/PostEditor.store'
 import Search from '../../components/Editor/Search/Search.store'
 import SocketListener from '../../components/SocketListener/SocketListener.store'
 import SignupFlow from '../../components/SignupFlow/SignupFlow.store'
+import LoadingModal from '../../components/LoadingModal/LoadingModal.store'
 
 export const combinedReducers = combineReducers({
   orm: ormReducer,
@@ -32,7 +33,8 @@ export const combinedReducers = combineReducers({
   SocketListener,
   MemberFeed,
   SignupFlow,
-  PeopleTyping
+  PeopleTyping,
+  LoadingModal
 })
 
 const composeReducers = (...reducers) => (state, action) =>

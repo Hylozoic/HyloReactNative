@@ -1,0 +1,32 @@
+import { mapStateToProps, mapDispatchToProps } from './LoadingModal.connector'
+
+describe('mapStateToProps', () => {
+  it('maps the state... to the props', () => {
+    const state = {
+      session: {
+        loginError: 'oops'
+      }
+    }
+
+    const props = {
+      navigation: {
+        navigate: jest.fn()
+      }
+    }
+
+    const newProps = mapStateToProps(state, props)
+    expect(newProps.error).toEqual('oops')
+    newProps.goToLoadingModalFlow()
+    newProps.goToLogin()
+    expect(props.navigation.navigate).toHaveBeenCalled()
+    expect(props.navigation.navigate.mock.calls)
+    .toMatchSnapshot()
+  })
+})
+
+describe('mapDispatchToProps', () => {
+  it('matches the last snapshot', () => {
+    expect(mapDispatchToProps)
+    .toMatchSnapshot()
+  })
+})
