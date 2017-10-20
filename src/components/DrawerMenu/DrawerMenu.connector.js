@@ -7,11 +7,35 @@ import changeCommunity from '../../store/actions/changeCommunity'
 
 export function mapStateToProps (state, props) {
   const currentUser = getMe(state)
+
+  const allCommunities = getMemberships(state).map(m => m.community)
+
+  const networks = [
+    {
+      id: 1,
+      name: 'Good Network',
+      avatarUrl: allCommunities[4].avatarUrl,
+      slug: 'sluug',
+      communities: allCommunities.slice(0, 2)
+    },
+    {
+      id: 2,
+      name: 'Small Network',
+      avatarUrl: allCommunities[5].avatarUrl,
+      slug: 'slg',
+      communities: allCommunities.slice(2, 3)
+    }
+  ]
+
+  const communities = allCommunities.slice(3)
+
   return {
     currentUser,
     name: get('name', currentUser) || 'you',
     avatarUrl: get('avatarUrl', currentUser),
-    memberships: getMemberships(state)
+    cim: getMemberships(state),
+    networks,
+    communities
   }
 }
 
@@ -27,7 +51,7 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     ...stateProps,
     ...dispatchProps,
     ...ownProps,
-    selectCommunity: community => {
+    goToCommunity: community => {
       dispatchProps.changeCommunity(community.id)
       navigation.navigate('DrawerClose')
     },

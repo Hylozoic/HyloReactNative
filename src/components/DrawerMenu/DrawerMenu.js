@@ -1,28 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Image, ListView, Text, TouchableOpacity, View } from 'react-native'
+import { Image, Text, TouchableOpacity, View, SectionList } from 'react-native'
 import AllFeedsIcon from '../AllFeedsIcon'
 import styles from './DrawerMenu.styles'
 
 export default class DrawerMenu extends Component {
-  constructor (props) {
-    super(props)
-    this.dataSource = new ListView.DataSource({
-      rowHasChanged: (r1, r2) => r1 !== r2
-    })
-    this.state = {
-      memberships: this.dataSource.cloneWithRows([])
-    }
-  }
-
-  componentDidMount () {
-    this.setState({
-      memberships: this.dataSource.cloneWithRows(
-        [{community: {id: 'all', name: 'all communities'}}]
-        .concat(this.props.memberships))
-    })
-  }
-
   // FIXME: I don't think this function is used anywhere
   resetToTop () {
     // hack to fix apparent scroll bug: https://github.com/facebook/react-native/issues/1831
@@ -32,17 +14,30 @@ export default class DrawerMenu extends Component {
 
   render () {
     const {
-      name, avatarUrl, selectCommunity, goToMyProfile, showSettings
+      name, avatarUrl, goToCommunity, goToMyProfile, showSettings,
+      networks, communities
     } = this.props
 
+    const listSections = [
+      {
+        data: networks,
+        label: 'Networked Communities',
+        renderItem: ({ item }) => <NetworkRow network={item} goToCommunity={goToCommunity} />,
+        keyExtractor: item => 'n' + item.id
+      },
+      {
+        data: communities,
+        label: 'Independent Communities',
+        renderItem: ({ item }) => <CommunityRow community={item} goToCommunity={goToCommunity} />,
+        keyExtractor: item => 'c' + item.id
+      }
+    ]
+
     return <View style={styles.parent}>
-      <ListView style={styles.menu}
-        ref={ref => { this.listView = ref }}
-        dataSource={this.state.memberships}
-        renderRow={({ community }) =>
-          <CommunityRow community={community}
-            onPress={() => selectCommunity(community)} />}
-        enableEmptySections />
+      <SectionList contentContainerStyle={styles.menu}
+        renderSectionHeader={SectionHeader}
+        sections={listSections}
+        />
       <View style={styles.footer}>
         <TouchableOpacity onPress={goToMyProfile} style={styles.avatar}>
           <Image source={{uri: avatarUrl}}
@@ -63,8 +58,8 @@ export default class DrawerMenu extends Component {
 DrawerMenu.propTypes = {
   name: PropTypes.string.isRequired,
   avatarUrl: PropTypes.string,
-  memberships: PropTypes.array,
-  selectCommunity: PropTypes.func.isRequired,
+  networks: PropTypes.array,
+  communities: PropTypes.array,
   goToMyProfile: PropTypes.func.isRequired,
   showSettings: PropTypes.func.isRequired
 }
@@ -75,10 +70,28 @@ export function TextButton ({ text, onPress }) {
   </TouchableOpacity>
 }
 
-export function CommunityRow ({ community, onPress }) {
+export function SectionHeader ({ section }) {
+  const { label } = section
+  return <View style={styles.sectionHeader}>
+    <Text style={styles.sectionHeaderText}>{label.toUpperCase()}</Text>
+  </View>
+}
+
+export class NetworkRow extends React.Component {
+  state = {
+    expanded: false
+  }
+
+  render () {
+    const { network } = this.props
+    return <Text>{network.name}</Text>
+  }
+}
+
+export function CommunityRow ({ community, goToCommunity }) {
   const all = community.id === 'all'
   return <View style={styles.communityRow}>
-    <TouchableOpacity onPress={onPress} style={styles.communityRowTouchable}>
+    <TouchableOpacity onPress={() => goToCommunity(community)} style={styles.communityRowTouchable}>
       {all
         ? <AllFeedsIcon style={styles.allFeedsIcon} />
         : <Image source={{uri: community.avatarUrl}} style={styles.communityAvatar} />}

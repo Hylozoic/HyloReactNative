@@ -1,5 +1,5 @@
 import mixins from '../../style/mixins'
-import { bigStone, mirage, rhino } from '../../style/colors'
+import { bigStone, mirage, rhino, rhino50 } from '../../style/colors'
 
 export default {
   parent: {
@@ -8,7 +8,8 @@ export default {
     backgroundColor: rhino
   },
   menu: {
-    flex: 1
+    flex: 1,
+    paddingHorizontal: 20
   },
   header: {
     height: 40,
@@ -75,10 +76,16 @@ export default {
   footerButton: {
     marginRight: 30
   },
+  sectionHeader: {
+    marginBottom: 10
+  },
+  sectionHeaderText: {
+    color: rhino50,
+    fontFamily: 'Circular-Book',
+    fontSize: 12
+  },
   communityRow: {
-    padding: 10,
-    paddingLeft: 20,
-    paddingRight: 10
+    paddingVertical: 10
   },
   communityRowTouchable: {
     flexDirection: 'row',
@@ -89,8 +96,8 @@ export default {
     marginRight: 11
   },
   communityAvatar: {
-    height: 30,
-    width: 30,
+    height: 21,
+    width: 21,
     marginRight: 8,
     borderRadius: 4
   },
