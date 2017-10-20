@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { getDisplay, setLoadingModal } from './LoadingModal.store'
+import { getDisplay } from './LoadingModal.store'
 
 export function mapStateToProps (state, props) {
   const display = getDisplay(state)
@@ -8,4 +8,4 @@ export function mapStateToProps (state, props) {
   }
 }
 
-export default connect(mapStateToProps, {setLoadingModal})
+export default connect(mapStateToProps)

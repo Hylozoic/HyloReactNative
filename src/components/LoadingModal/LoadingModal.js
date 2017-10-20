@@ -1,6 +1,6 @@
 import React from 'react'
 import {
-  Text, TouchableOpacity, Animated
+  Animated
 } from 'react-native'
 import Loading from '../Loading'
 import styles from './LoadingModal.styles'
@@ -27,7 +27,6 @@ export default class LoadingModal extends React.Component {
   }
 
   render () {
-    const { setLoadingModal } = this.props
     const { opacityAnim, visible } = this.state
 
     if (!visible) return null
@@ -37,7 +36,6 @@ export default class LoadingModal extends React.Component {
       opacity: opacityAnim
     }}>
       <Loading />
-      <TouchableOpacity onPress={() => setLoadingModal(false)} ><Text>CLOSE</Text></TouchableOpacity>
     </Animated.View>
   }
 }
