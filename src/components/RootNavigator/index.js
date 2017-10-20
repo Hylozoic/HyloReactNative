@@ -117,6 +117,7 @@ const rootNavigatorRoutes = Object.assign({}, mainStackRoute, screensInStack)
 const RootNavigator = StackNavigator(
   rootNavigatorRoutes,
   {
+    cardStyle: {backgroundColor: '#FFF'},
     mode: 'modal'
   }
 )
