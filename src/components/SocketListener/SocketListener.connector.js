@@ -25,8 +25,10 @@ function mapStateToProps (state, props) {
 
 export function mapDispatchToProps (dispatch, props) {
   return {
-    receiveThread: data =>
-      dispatch(receiveThread(convertToThread(data))),
+    receiveThread: data => dispatch(receiveThread(convertToThread(data))),
+    receiveNotification: data => dispatch(receiveNotification(data)),
+    receiveComment: data => dispatch(receiveComment(data)),
+    setupCoreEventHandlers: setupCoreEventHandlers(dispatch),
 
     receiveMessage: data => {
       const message = convertToMessage(data.message, data.postId)
@@ -34,15 +36,6 @@ export function mapDispatchToProps (dispatch, props) {
         bumpUnreadCount: !isActiveThread(props, data) // TODO
       }))
     },
-
-    receiveNotification: data => dispatch(receiveNotification(data)),
-
-    receiveComment: data => {
-      const comment = convertToComment(data.comment, data.postId)
-      return dispatch(receiveComment(comment))
-    },
-
-    setupCoreEventHandlers: setupCoreEventHandlers(dispatch),
 
     ...bindActionCreators({
       addUserTyping,
@@ -91,16 +84,6 @@ function isActiveThread (location, data) {
   return false // TODO
   // const [ namespace, id ] = location.pathname.split('/').slice(1, 3)
   // return namespace === 't' && data.postId === id
-}
-
-function convertToComment ({ id, text, created_at, user_id }, postId) {
-  return {
-    id,
-    text,
-    createdAt: new Date(created_at).toString(),
-    creator: user_id,
-    post: postId
-  }
 }
 
 const setupCoreEventHandlers = dispatch => socket => {
