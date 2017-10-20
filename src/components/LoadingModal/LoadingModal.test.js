@@ -3,7 +3,7 @@ import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import LoadingModal from './LoadingModal'
 
-jest.mock('react-native-device-info')
+// TODO: these tests ain't right
 
 it('returns null when display is false', () => {
   const renderer = new ReactShallowRenderer()
