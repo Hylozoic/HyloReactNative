@@ -25,6 +25,7 @@ jest.mock('../SocketListener', () => 'SocketListener')
 jest.mock('../LoginNavigator', () => 'LoginNavigator')
 jest.mock('../SessionCheck', () => 'SessionCheck')
 jest.mock('../VersionCheck', () => 'VersionCheck')
+jest.mock('../LoadingModal', () => 'LoadingModal')
 
 describe('RootView', () => {
   it('matches last snapshot with a store', () => {

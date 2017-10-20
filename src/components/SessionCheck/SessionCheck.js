@@ -7,6 +7,7 @@ import Loading from '../Loading'
 import LoginNavigator from '../LoginNavigator'
 import SocketListener from '../SocketListener'
 import RootNavigator from '../RootNavigator'
+import LoadingModal from '../LoadingModal'
 
 export const INTERNAL_ROUTE_URI_PREFIX = 'internalRouting://'
 
