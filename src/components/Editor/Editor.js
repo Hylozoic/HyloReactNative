@@ -22,12 +22,24 @@ export default class Editor extends React.Component {
 
   startPicker = action => {
     this.editor.prepareInsert()
-    switch (action) {
-      case INSERT_MENTION:
-        return this.setState({showPicker: SearchType.MENTION})
-      case INSERT_TOPIC:
-        return this.setState({showPicker: SearchType.TOPIC})
-    }
+
+    // This timeout avoids a race condition. the `prepareInsert` call above
+    // calls `window.getSelection()` to store the current caret position so that
+    // any inserted content ends up at the right place. But if we show the
+    // picker too soon, `window.getSelection()` will be called after the editor
+    // has lost focus, returning a selection of type None, which no longer has
+    // the caret position. That will cause any inserted content to either not
+    // appear at all or to appear in the wrong place.
+    setTimeout(() => {
+      switch (action) {
+        case INSERT_MENTION:
+          this.setState({showPicker: SearchType.MENTION})
+          break
+        case INSERT_TOPIC:
+          this.setState({showPicker: SearchType.TOPIC})
+          break
+      }
+    }, 200)
   }
 
   cancelPicker = () => {
