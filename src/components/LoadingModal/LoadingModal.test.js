@@ -4,8 +4,6 @@ import ReactTestRenderer from 'react-test-renderer'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import LoadingModal from './LoadingModal'
 
-// TODO: these tests ain't right
-
 it('returns null when display is false', () => {
   const renderer = new ReactShallowRenderer()
 
