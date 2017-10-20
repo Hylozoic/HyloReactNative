@@ -11,6 +11,8 @@ import {
 } from './Feed.store'
 import { get } from 'lodash/fp'
 
+import { setLoadingModal } from '../LoadingModal/LoadingModal.store'
+
 export function mapStateToProps (state, props) {
   const params = get('state.params', props.navigation) || {}
   const communityId = props.communityId || params.communityId
@@ -45,7 +47,8 @@ export function mapDispatchToProps (dispatch, { navigation }) {
     goToCommunity: makeGoToCommunity(dispatch, navigation),
     ...bindActionCreators({
       fetchCommunityTopic,
-      toggleTopicSubscribe
+      toggleTopicSubscribe,
+      setLoadingModal
     }, dispatch)
   }
 }
@@ -54,10 +57,16 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
   const { community, topic, topicName, topicSubscribed } = stateProps
   const communityId = get('id', community)
   const slug = get('slug', community)
+
+  const makeitload = () => {
+    dispatchProps.setLoadingModal(true)
+  }
+
   return {
     ...stateProps,
     ...dispatchProps,
     ...ownProps,
+    makeitload,
     newPost: () => dispatchProps.newPost(communityId),
     showTopic: dispatchProps.showTopic(communityId),
     fetchCommunityTopic: topicName && slug

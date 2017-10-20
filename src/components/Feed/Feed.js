@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View } from 'react-native'
+import { View, TouchableOpacity, Text } from 'react-native'
 import { get } from 'lodash/fp'
 
 import FeedList from '../FeedList'
@@ -38,6 +38,7 @@ export default class Feed extends Component {
     } = this.props
 
     return <View style={styles.container}>
+      <TouchableOpacity onPress={this.props.makeitload}><Text>MAKE IT LOAD</Text></TouchableOpacity>
       <FeedList
         community={community}
         showPost={showPost}
