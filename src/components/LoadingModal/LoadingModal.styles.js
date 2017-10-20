@@ -7,7 +7,6 @@ export default {
     bottom: 0,
     zIndex: 10,
     backgroundColor: 'white',
-    opacity: 0.8,
     alignItems: 'center',
     justifyContent: 'center'
   }
