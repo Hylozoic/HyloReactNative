@@ -12,6 +12,7 @@ Object {
   "setMessage": [Function],
   "setParticipantInput": [Function],
   "setParticipants": [Function],
+  "showLoadingModal": [Function],
 }
 `;
 

@@ -22,6 +22,7 @@ import {
   FETCH_CONTACTS,
   FETCH_RECENT_CONTACTS
  } from './NewMessage.store.js'
+import { showLoadingModal } from '../LoadingModal/LoadingModal.store'
 import { isEmpty, get, debounce, throttle } from 'lodash/fp'
 
 export function mapStateToProps (state, props) {
@@ -59,16 +60,20 @@ export function mapDispatchToProps (dispatch, props) {
       fetchRecentContacts,
       createMessage,
       setMessage,
-      findOrCreateThread
+      findOrCreateThread,
+      showLoadingModal
     }, dispatch)
   }
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
-  const { navigation } = ownProps
   const {
     participantInputText, message, participantIds, suggestions, allContacts, pending
   } = stateProps
+  const {
+    showLoadingModal, findOrCreateThread
+  } = dispatchProps
+  const { navigation } = ownProps
 
   // don't fetch suggestions if we already have some that match the search
   const fetchSuggestions = isEmpty(participantInputText) || !isEmpty(suggestions)
@@ -77,14 +82,18 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
 
   const createMessage = isEmpty(message)
     ? () => {}
-    : () => dispatchProps.findOrCreateThread(participantIds)
+    : () => {
+      showLoadingModal(true)
+      return findOrCreateThread(participantIds)
       .then(resp => {
         const messageThreadId = get('payload.data.findOrCreateThread.id', resp)
         dispatchProps.createMessage(messageThreadId, message, true)
         .then(({ error }) => {
           if (!error) navigation.navigate('Thread', {id: messageThreadId})
+          showLoadingModal(false)
         })
       })
+    }
 
   const participantsFromParams = get('state.params.participants', navigation)
   const loadParticipantsFromParams = participantsFromParams
