@@ -25,6 +25,9 @@ import {
 import {
   USE_INVITATION
 } from '../../components/JoinCommunity/JoinCommunity.store'
+import {
+  DELETE_COMMENT_PENDING
+} from '../../components/Comment/Comment.store'
 import orm from '../models'
 import ModelExtractor from './ModelExtractor'
 import extractModelsFromAction from './ModelExtractor/extractModelsFromAction'
@@ -158,6 +161,11 @@ export default function ormReducer (state = {}, action) {
     case USE_INVITATION:
       me = session.Me.first()
       me.updateAppending({memberships: [payload.data.useInvitation.membership.id]})
+      break
+
+    case DELETE_COMMENT_PENDING:
+      const comment = session.Comment.withId(meta.id)
+      comment.delete()
       break
   }
 
