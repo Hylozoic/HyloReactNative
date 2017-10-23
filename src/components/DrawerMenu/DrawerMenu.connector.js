@@ -7,17 +7,14 @@ import { logout } from '../Login/actions'
 import changeCommunity from '../../store/actions/changeCommunity'
 import { ALL_COMMUNITIES_ID } from '../../store/models/Community'
 
-export function mapStateToProps (state, props) {
-  const currentUser = getMe(state)
-  const currentCommunityId = getCurrentCommunityId(state, props)
-
-  const allCommunities = getMemberships(state).map(m => ({
+export function partitionCommunities (memberships) {
+  const allCommunities = memberships.map(m => ({
     ...m.community.ref,
     network: get('network.ref', m.community),
     newPostCount: m.newPostCount
   }))
 
-  const paritionedCommunities = allCommunities.reduce((acc, community) => {
+  return allCommunities.reduce((acc, community) => {
     if (community.network) {
       if (acc[community.network.id]) {
         acc[community.network.id].communities = acc[community.network.id].communities.concat([community])
@@ -36,7 +33,13 @@ export function mapStateToProps (state, props) {
   }, {
     independent: []
   })
+}
 
+export function mapStateToProps (state, props) {
+  const currentUser = getMe(state)
+  const currentCommunityId = getCurrentCommunityId(state, props)
+  const paritionedCommunities =
+    partitionCommunities(getMemberships(state))
   const networks = [
     {
       id: ALL_COMMUNITIES_ID,
@@ -51,7 +54,6 @@ export function mapStateToProps (state, props) {
     currentUser,
     name: get('name', currentUser) || 'you',
     avatarUrl: get('avatarUrl', currentUser),
-    cim: getMemberships(state),
     networks,
     communities,
     currentCommunityId
