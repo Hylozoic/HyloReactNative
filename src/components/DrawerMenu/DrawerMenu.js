@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Image, Text, TouchableOpacity, View, SectionList } from 'react-native'
+import EntypoIcon from 'react-native-vector-icons/Entypo'
 import AllFeedsIcon from '../AllFeedsIcon'
 import styles from './DrawerMenu.styles'
+const allCommunitiesImage = require('../../assets/All_Communities2.png')
 
 export default class DrawerMenu extends Component {
   // FIXME: I don't think this function is used anywhere
@@ -15,20 +17,27 @@ export default class DrawerMenu extends Component {
   render () {
     const {
       name, avatarUrl, goToCommunity, goToMyProfile, showSettings,
-      networks, communities
+      networks, communities, currentCommunityId
     } = this.props
 
     const listSections = [
       {
         data: networks,
         label: 'Networked Communities',
-        renderItem: ({ item }) => <NetworkRow network={item} goToCommunity={goToCommunity} />,
+        renderItem: ({ item }) => <NetworkRow
+          network={item}
+          goToCommunity={goToCommunity}
+          currentCommunityId={currentCommunityId} />,
         keyExtractor: item => 'n' + item.id
       },
       {
         data: communities,
         label: 'Independent Communities',
-        renderItem: ({ item }) => <CommunityRow community={item} goToCommunity={goToCommunity} />,
+        renderItem: ({ item }) => <CommunityRow
+          community={item}
+          goToCommunity={goToCommunity}
+          currentCommunityId={currentCommunityId}
+          addPadding />,
         keyExtractor: item => 'c' + item.id
       }
     ]
@@ -78,27 +87,73 @@ export function SectionHeader ({ section }) {
 }
 
 export class NetworkRow extends React.Component {
-  state = {
-    expanded: false
+  constructor (props) {
+    super(props)
+    const expanded = props.network.communities.reduce((acc, community) =>
+      acc || !!community.newPostCount,
+      false)
+    this.state = {
+      expanded
+    }
+  }
+
+  toggleExpanded = () => {
+    this.setState({
+      expanded: !this.state.expanded
+    })
   }
 
   render () {
-    const { network } = this.props
-    return <Text>{network.name}</Text>
+    const { network, goToCommunity, currentCommunityId, goToAllCommunities } = this.props
+    const { id, avatarUrl, name, communities } = network
+    const isAll = id === 'all'
+    const imageSource = isAll
+      ? allCommunitiesImage
+      : {uri: avatarUrl}
+
+    const onPress = isAll
+      ? goToAllCommunities
+      : this.toggleExpanded
+
+    const expandable = communities && !!communities.length
+    const { expanded } = this.state
+    return <View style={[styles.networkRow, expanded && styles.networkRowExpanded]}>
+      <TouchableOpacity onPress={onPress} style={[styles.rowTouchable, styles.networkRowTouchable]}>
+        <Image source={imageSource} style={styles.networkAvatar} />
+        <Text style={styles.networkRowText} ellipsizeMode='tail'
+          numberOfLines={1}>
+          {name}
+        </Text>
+        {expandable && <EntypoIcon style={styles.networkOpenIcon} name={expanded ? 'chevron-down' : 'chevron-right'} />}
+      </TouchableOpacity>
+      {expanded && expandable && <View style={styles.networkCommunities}>
+        {communities.map(c => <CommunityRow
+          key={c.id}
+          community={c}
+          goToCommunity={goToCommunity}
+          currentCommunityId={currentCommunityId} />)}
+      </View>}
+    </View>
   }
 }
 
-export function CommunityRow ({ community, goToCommunity }) {
-  const all = community.id === 'all'
-  return <View style={styles.communityRow}>
-    <TouchableOpacity onPress={() => goToCommunity(community)} style={styles.communityRowTouchable}>
+export function CommunityRow ({ community, goToCommunity, currentCommunityId, addPadding }) {
+  const { id, avatarUrl, name } = community
+  const newPostCount = Math.min(99, community.newPostCount)
+  const all = id === 'all'
+  const highlight = id === currentCommunityId
+  return <View style={[styles.communityRow, addPadding && styles.defaultPadding]}>
+    <TouchableOpacity onPress={() => goToCommunity(community)} style={styles.rowTouchable}>
       {all
         ? <AllFeedsIcon style={styles.allFeedsIcon} />
-        : <Image source={{uri: community.avatarUrl}} style={styles.communityAvatar} />}
-      <Text style={[styles.text, styles.communityRowText]} ellipsizeMode='tail'
+        : <Image source={{uri: avatarUrl}} style={styles.communityAvatar} />}
+      <Text style={[styles.communityRowText, highlight && styles.highlight]} ellipsizeMode='tail'
         numberOfLines={1}>
-        {community.name}
+        {name}
       </Text>
+      {!!newPostCount && <View style={styles.badge}>
+        <Text style={styles.badgeText}>{newPostCount}</Text>
+      </View>}
     </TouchableOpacity>
   </View>
 }
