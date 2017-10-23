@@ -22,7 +22,7 @@ describe('DrawerMenu', () => {
     expect(actual).toMatchSnapshot()
   })
 
-  test('componentDidMount', () => {
+  describe('componentDidMount', () => {
     const renderer = new ReactShallowRenderer()
     renderer.render(<DrawerMenu {...minProps} />)
     const instance = renderer._instance
@@ -31,7 +31,7 @@ describe('DrawerMenu', () => {
     expect(instance.setState).toHaveBeenCalledTimes(1)
   })
 
-  test('resetToTop', () => {
+  describe('resetToTop', () => {
     const renderer = new ReactShallowRenderer()
     renderer.render(<DrawerMenu {...minProps} />)
     const instance = renderer._instance
@@ -51,17 +51,6 @@ describe('CommunityRow', () => {
       avatarUrl: 'foo.png',
       name: 'Foom'
     }
-    renderer.render(<CommunityRow
-      community={community}
-      onPress={() => {}} />)
-    const actual = renderer.getRenderOutput()
-
-    expect(actual).toMatchSnapshot()
-  })
-
-  it('shows all community link', () => {
-    const renderer = new ReactShallowRenderer()
-    const community = {id: 'all', name: 'All Communities'}
     renderer.render(<CommunityRow
       community={community}
       onPress={() => {}} />)

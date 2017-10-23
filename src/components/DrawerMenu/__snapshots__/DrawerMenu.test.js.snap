@@ -51,7 +51,13 @@ exports[`CommunityRow shows all community link 1`] = `
     focusedOpacity={0.7}
     onPress={[Function]}
   >
-    <AllFeedsIcon />
+    <Image
+      source={
+        Object {
+          "uri": undefined,
+        }
+      }
+    />
     <Text
       accessible={true}
       allowFontScaling={true}
@@ -67,15 +73,41 @@ exports[`CommunityRow shows all community link 1`] = `
 
 exports[`DrawerMenu matches the last snapshot 1`] = `
 <View>
-  <ListViewMock
-    dataSource={
-      ListViewDataSource {
-        "items": 0,
+  <SectionList
+    contentContainerStyle={
+      Object {
+        "flex": 1,
       }
     }
-    enableEmptySections={true}
-    renderRow={[Function]}
+    data={Array []}
+    disableVirtualization={false}
+    horizontal={false}
+    initialNumToRender={10}
+    keyExtractor={[Function]}
+    maxToRenderPerBatch={10}
+    onEndReachedThreshold={2}
     renderScrollComponent={[Function]}
+    renderSectionHeader={[Function]}
+    scrollEventThrottle={50}
+    sections={
+      Array [
+        Object {
+          "data": undefined,
+          "keyExtractor": [Function],
+          "label": "Networked Communities",
+          "renderItem": [Function],
+        },
+        Object {
+          "data": undefined,
+          "keyExtractor": [Function],
+          "label": "Independent Communities",
+          "renderItem": [Function],
+        },
+      ]
+    }
+    stickySectionHeadersEnabled={true}
+    updateCellsBatchingPeriod={50}
+    windowSize={21}
   />
   <View>
     <TouchableOpacity

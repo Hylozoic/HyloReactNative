@@ -10,9 +10,18 @@ Object {
 exports[`mapStateToProps matches the latest snapshot 1`] = `
 Object {
   "avatarUrl": undefined,
+  "cim": Array [],
+  "communities": Array [],
+  "currentCommunityId": undefined,
   "currentUser": undefined,
-  "memberships": Array [],
   "name": "you",
+  "networks": Array [
+    Object {
+      "communities": Array [],
+      "id": "all-communities",
+      "name": "All Communities",
+    },
+  ],
 }
 `;
 
@@ -22,12 +31,12 @@ Object {
   "currentUser": Object {
     "id": "anyid",
   },
+  "goToCommunity": [Function],
   "goToMyProfile": [Function],
   "name": "Roy Rogers",
   "navigation": Object {
     "navigate": [Function],
   },
-  "selectCommunity": [Function],
   "showSettings": [Function],
 }
 `;
