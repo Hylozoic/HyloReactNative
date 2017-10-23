@@ -4,6 +4,21 @@ exports[` 1`] = `
 <TouchableOpacity
   activeOpacity={0.2}
   focusedOpacity={0.7}
+  onPress={undefined}
+>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    disabled={false}
+    ellipsizeMode="tail"
+  />
+</TouchableOpacity>
+`;
+
+exports[` 2`] = `
+<TouchableOpacity
+  activeOpacity={0.2}
+  focusedOpacity={0.7}
   onPress={[Function]}
 >
   <Text
@@ -17,7 +32,7 @@ exports[` 1`] = `
 </TouchableOpacity>
 `;
 
-exports[`CommunityRow matches the last snapshot 1`] = `
+exports[`CommunityRow hides badge when no newPostCount 1`] = `
 <View>
   <TouchableOpacity
     activeOpacity={0.2}
@@ -44,7 +59,7 @@ exports[`CommunityRow matches the last snapshot 1`] = `
 </View>
 `;
 
-exports[`CommunityRow shows all community link 1`] = `
+exports[`CommunityRow highlights when matching currentCommunityId 1`] = `
 <View>
   <TouchableOpacity
     activeOpacity={0.2}
@@ -54,7 +69,7 @@ exports[`CommunityRow shows all community link 1`] = `
     <Image
       source={
         Object {
-          "uri": undefined,
+          "uri": "foo.png",
         }
       }
     />
@@ -65,8 +80,45 @@ exports[`CommunityRow shows all community link 1`] = `
       ellipsizeMode="tail"
       numberOfLines={1}
     >
-      All Communities
+      Foom
     </Text>
+  </TouchableOpacity>
+</View>
+`;
+
+exports[`CommunityRow matches the last snapshot 1`] = `
+<View>
+  <TouchableOpacity
+    activeOpacity={0.2}
+    focusedOpacity={0.7}
+    onPress={[Function]}
+  >
+    <Image
+      source={
+        Object {
+          "uri": "foo.png",
+        }
+      }
+    />
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+      numberOfLines={1}
+    >
+      Foom
+    </Text>
+    <View>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        disabled={false}
+        ellipsizeMode="tail"
+      >
+        7
+      </Text>
+    </View>
   </TouchableOpacity>
 </View>
 `;
@@ -92,13 +144,23 @@ exports[`DrawerMenu matches the last snapshot 1`] = `
     sections={
       Array [
         Object {
-          "data": undefined,
+          "data": Array [
+            Object {
+              "id": 1,
+              "name": "Network",
+            },
+          ],
           "keyExtractor": [Function],
           "label": "Networked Communities",
           "renderItem": [Function],
         },
         Object {
-          "data": undefined,
+          "data": Array [
+            Object {
+              "id": 2,
+              "name": "Community",
+            },
+          ],
           "keyExtractor": [Function],
           "label": "Independent Communities",
           "renderItem": [Function],
@@ -143,5 +205,74 @@ exports[`DrawerMenu matches the last snapshot 1`] = `
       </View>
     </View>
   </View>
+</View>
+`;
+
+exports[`NetworkRow matches the last snapshot 1`] = `
+<View>
+  <TouchableOpacity
+    activeOpacity={0.2}
+    focusedOpacity={0.7}
+    onPress={[Function]}
+  >
+    <Image
+      source={
+        Object {
+          "uri": "network.png",
+        }
+      }
+    />
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+      numberOfLines={1}
+    >
+      Network Name
+    </Text>
+    <Icon
+      allowFontScaling={false}
+      name="chevron-down"
+      size={12}
+    />
+  </TouchableOpacity>
+  <View>
+    <CommunityRow
+      community={
+        Object {
+          "avatarUrl": "foo.png",
+          "id": 1,
+          "name": "Foom",
+          "newPostCount": 1,
+        }
+      }
+      currentCommunityId={1}
+      goToCommunity={[Function]}
+    />
+  </View>
+</View>
+`;
+
+exports[`NetworkRow shows all communities link 1`] = `
+<View>
+  <TouchableOpacity
+    activeOpacity={0.2}
+    focusedOpacity={0.7}
+    onPress={[Function]}
+  >
+    <Image
+      source={1}
+    />
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+      numberOfLines={1}
+    >
+      All Communities
+    </Text>
+  </TouchableOpacity>
 </View>
 `;
