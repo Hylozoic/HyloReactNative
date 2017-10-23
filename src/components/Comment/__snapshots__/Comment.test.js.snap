@@ -7,20 +7,27 @@ exports[`renders correctly 1`] = `
   />
   <View>
     <View>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        disabled={false}
-        ellipsizeMode="tail"
-      >
-        Ishamel
-      </Text>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        disabled={false}
-        ellipsizeMode="tail"
-      />
+      <View>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          disabled={false}
+          ellipsizeMode="tail"
+        >
+          Ishamel
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          disabled={false}
+          ellipsizeMode="tail"
+        />
+      </View>
+      <View>
+        <CommentMenu
+          deleteComment={[Function]}
+        />
+      </View>
     </View>
     <HtmlView
       RootComponent={[Function]}
@@ -61,30 +68,37 @@ exports[`shows the post title when displayPostTitle is true 1`] = `
   />
   <View>
     <View>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        disabled={false}
-        ellipsizeMode="tail"
-      >
-        Ishamel
-      </Text>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        disabled={false}
-        ellipsizeMode="tail"
-      />
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        disabled={false}
-        ellipsizeMode="tail"
-      >
-        on "
-        What's good? A long enough post title to...
-        "
-      </Text>
+      <View>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          disabled={false}
+          ellipsizeMode="tail"
+        >
+          Ishamel
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          disabled={false}
+          ellipsizeMode="tail"
+        />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          disabled={false}
+          ellipsizeMode="tail"
+        >
+          on "
+          What's good? A long enough post title to...
+          "
+        </Text>
+      </View>
+      <View>
+        <CommentMenu
+          deleteComment={undefined}
+        />
+      </View>
     </View>
     <HtmlView
       RootComponent={[Function]}

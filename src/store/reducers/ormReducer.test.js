@@ -12,6 +12,9 @@ import {
 import {
   USE_INVITATION
 } from '../../components/JoinCommunity/JoinCommunity.store'
+import {
+  DELETE_COMMENT_PENDING
+} from '../../components/Comment/Comment.store'
 
 it('responds to an action with meta.extractModel', () => {
   const state = orm.getEmptyState()
@@ -190,4 +193,26 @@ describe('handles USE_INVITATION', () => {
     const membershipsAfterAction = newSession.Me.first().memberships
     expect(membershipsAfterAction.count()).toEqual(1)
   })
+})
+
+it('handles DELETE_COMMENT_PENDING', () => {
+  const session = orm.session(orm.getEmptyState())
+  session.Comment.create({
+    id: 3
+  })
+  session.Comment.create({
+    id: 10
+  })
+  const action = {
+    type: DELETE_COMMENT_PENDING,
+    meta: {
+      id: '3'
+    }
+  }
+
+  expect(session.Comment.count()).toBe(2)
+  const newState = ormReducer(session.state, action)
+  const newSession = orm.session(newState)
+  expect(newSession.Comment.count()).toBe(1)
+  expect(newSession.Comment.first().id).toBe(10)
 })

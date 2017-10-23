@@ -20,6 +20,7 @@ it('renders correctly', () => {
   const renderer = new ReactShallowRenderer()
   renderer.render(<Comment
     comment={comment}
+    deleteComment={jest.fn()}
     style={style} />)
   const actual = renderer.getRenderOutput()
 
