@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Image, Text, TouchableOpacity, View, SectionList } from 'react-native'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
-import AllFeedsIcon from '../AllFeedsIcon'
 import styles from './DrawerMenu.styles'
 const allCommunitiesImage = require('../../assets/All_Communities2.png')
 
@@ -104,7 +103,7 @@ export class NetworkRow extends React.Component {
   }
 
   render () {
-    const { network, goToCommunity, currentCommunityId, goToAllCommunities } = this.props
+    const { network, goToCommunity, currentCommunityId } = this.props
     const { id, avatarUrl, name, communities } = network
     const isAll = id === 'all'
     const imageSource = isAll
@@ -112,7 +111,8 @@ export class NetworkRow extends React.Component {
       : {uri: avatarUrl}
 
     const onPress = isAll
-      ? goToAllCommunities
+      // this works because the network has id 'all'
+      ? () => goToCommunity(network)
       : this.toggleExpanded
 
     const expandable = communities && !!communities.length
@@ -140,13 +140,10 @@ export class NetworkRow extends React.Component {
 export function CommunityRow ({ community, goToCommunity, currentCommunityId, addPadding }) {
   const { id, avatarUrl, name } = community
   const newPostCount = Math.min(99, community.newPostCount)
-  const all = id === 'all'
   const highlight = id === currentCommunityId
   return <View style={[styles.communityRow, addPadding && styles.defaultPadding]}>
     <TouchableOpacity onPress={() => goToCommunity(community)} style={styles.rowTouchable}>
-      {all
-        ? <AllFeedsIcon style={styles.allFeedsIcon} />
-        : <Image source={{uri: avatarUrl}} style={styles.communityAvatar} />}
+      <Image source={{uri: avatarUrl}} style={styles.communityAvatar} />
       <Text style={[styles.communityRowText, highlight && styles.highlight]} ellipsizeMode='tail'
         numberOfLines={1}>
         {name}
