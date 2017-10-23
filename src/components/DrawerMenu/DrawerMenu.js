@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { Image, Text, TouchableOpacity, View, SectionList } from 'react-native'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
 import styles from './DrawerMenu.styles'
+import { ALL_COMMUNITIES_ID } from '../../store/models/Community'
 const allCommunitiesImage = require('../../assets/All_Communities2.png')
 
 export default class DrawerMenu extends Component {
@@ -105,13 +106,13 @@ export class NetworkRow extends React.Component {
   render () {
     const { network, goToCommunity, currentCommunityId } = this.props
     const { id, avatarUrl, name, communities } = network
-    const isAll = id === 'all'
+    const isAll = id === ALL_COMMUNITIES_ID
     const imageSource = isAll
       ? allCommunitiesImage
       : {uri: avatarUrl}
 
     const onPress = isAll
-      // this works because the network has id 'all'
+      // this works because the network has id ALL_COMMUNITIES_ID
       ? () => goToCommunity(network)
       : this.toggleExpanded
 

@@ -1,10 +1,11 @@
 import { connect } from 'react-redux'
-import { get } from 'lodash/fp'
+import { get, omit, values } from 'lodash/fp'
 import getMe from '../../store/selectors/getMe'
 import getMemberships from '../../store/selectors/getMemberships'
 import getCurrentCommunityId from '../../store/selectors/getCurrentCommunityId'
 import { logout } from '../Login/actions'
 import changeCommunity from '../../store/actions/changeCommunity'
+import { ALL_COMMUNITIES_ID } from '../../store/models/Community'
 
 export function mapStateToProps (state, props) {
   const currentUser = getMe(state)
@@ -12,30 +13,39 @@ export function mapStateToProps (state, props) {
 
   const allCommunities = getMemberships(state).map(m => ({
     ...m.community.ref,
+    network: get('network.ref', m.community),
     newPostCount: m.newPostCount
   }))
 
+  const paritionedCommunities = allCommunities.reduce((acc, community) => {
+    if (community.network) {
+      if (acc[community.network.id]) {
+        acc[community.network.id].communities = acc[community.network.id].communities.concat([community])
+        return acc
+      } else {
+        acc[community.network.id] = {
+          ...community.network,
+          communities: [community]
+        }
+        return acc
+      }
+    } else {
+      acc['independent'] = acc['independent'].concat([community])
+      return acc
+    }
+  }, {
+    independent: []
+  })
+
   const networks = [
     {
-      id: 'all',
+      id: ALL_COMMUNITIES_ID,
       name: 'All Communities',
       communities: []
-    },
-    {
-      id: 1,
-      name: 'Good Network',
-      avatarUrl: allCommunities[5].avatarUrl,
-      communities: allCommunities.slice(0, 2)
-    },
-    {
-      id: 2,
-      name: 'Small Network',
-      avatarUrl: allCommunities[4].avatarUrl,
-      communities: allCommunities.slice(2, 3)
     }
-  ]
+  ].concat(values(omit('independent', paritionedCommunities)))
 
-  const communities = allCommunities.slice(3)
+  const communities = paritionedCommunities.independent
 
   return {
     currentUser,

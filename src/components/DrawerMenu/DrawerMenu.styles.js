@@ -84,6 +84,7 @@ export default {
   },
   sectionHeader: {
     ...defaultPadding,
+    marginTop: 10,
     marginBottom: 10
   },
   sectionHeaderText: {
