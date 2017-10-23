@@ -660,13 +660,13 @@ exports[`UserSettings matches the last snapshot 1`] = `
           },
           "hideErrorTriangle": true,
           "label": Object {
-            "color": "#AAACAC",
+            "color": "#c0c6cd",
             "fontFamily": "Circular-Bold",
             "fontSize": 10,
             "marginBottom": 10,
           },
           "textInput": Object {
-            "borderBottomColor": "#AAACAC",
+            "borderBottomColor": "#c0c6cd",
             "borderBottomWidth": 0.5,
             "color": "#56667a",
             "fontFamily": "Circular-Book",
