@@ -2,7 +2,7 @@ import 'react-native'
 import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import ReactTestRenderer from 'react-test-renderer'
-import DrawerMenu, { NetworkRow, CommunityRow, TextButton } from './DrawerMenu'
+import DrawerMenu, { SectionHeader, NetworkRow, CommunityRow, TextButton } from './DrawerMenu'
 import { ALL_COMMUNITIES_ID } from '../../store/models/Community'
 
 jest.mock('react-native-device-info')
@@ -50,11 +50,13 @@ describe('DrawerMenu', () => {
 })
 
 describe('SectionHeader', () => {
-  const renderer = new ReactShallowRenderer()
-  renderer.render(<TextButton section={{label: 'Networked Communities'}} />)
-  const actual = renderer.getRenderOutput()
+  it('matches the last snapshot', () => {
+    const renderer = new ReactShallowRenderer()
+    renderer.render(<SectionHeader section={{label: 'Networked Communities'}} />)
+    const actual = renderer.getRenderOutput()
 
-  expect(actual).toMatchSnapshot()
+    expect(actual).toMatchSnapshot()
+  })
 })
 
 describe('NetworkRow', () => {
