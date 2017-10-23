@@ -4,6 +4,10 @@ import TestRenderer from 'react-test-renderer'
 import TabBarComponent from './TabBarComponent'
 import { Keyboard } from 'react-native'
 
+jest.mock('util/platform', () => ({
+  isIOS: false
+}))
+
 it('renders correctly', () => {
   const renderer = new ReactShallowRenderer()
   renderer.render(<TabBarComponent />)
