@@ -221,7 +221,9 @@ export default function reducer (state = defaultState, action) {
     case CREATE_MESSAGE:
       return {
         ...state,
-        message: null
+        message: null,
+        input: '',
+        participants: []
       }
   }
   return state

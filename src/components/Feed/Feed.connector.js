@@ -54,6 +54,7 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
   const { community, topic, topicName, topicSubscribed } = stateProps
   const communityId = get('id', community)
   const slug = get('slug', community)
+
   return {
     ...stateProps,
     ...dispatchProps,

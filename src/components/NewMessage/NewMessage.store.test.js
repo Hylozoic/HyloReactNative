@@ -36,13 +36,17 @@ describe('reducer', () => {
     }
     const state = {
       message: 'hi',
-      otherKey: 'set'
+      otherKey: 'set',
+      input: 'yo',
+      participants: [1, 2, 3]
     }
     it('clears the message state', () => {
       const newState = reducer(state, action)
       expect(newState).toEqual({
         ...state,
-        message: null
+        message: null,
+        input: '',
+        participants: []
       })
     })
   })
