@@ -4,8 +4,6 @@ import ReactShallowRenderer from 'react-test-renderer/shallow'
 import ReactTestRenderer from 'react-test-renderer'
 import SignupFlow2 from './SignupFlow2'
 
-jest.mock('react-native-aws3')
-
 it('matches last snapshot', () => {
   const renderer = new ReactShallowRenderer()
   const props = {
