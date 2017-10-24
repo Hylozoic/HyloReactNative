@@ -50,7 +50,7 @@ export default {
     box: {
       borderRadius: 4,
       backgroundColor: rhino10,
-      padding: 10,
+      paddingVertical: 10,
       width: '31%'
     },
     text: {
