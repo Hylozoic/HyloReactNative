@@ -11,13 +11,14 @@ import {
   getEntryURL,
   resetEntryURL
 } from './SessionCheck.store'
+import { getSignupStep1Complete } from '../SignupFlow/SignupFlow.store'
 import getMe from '../../store/selectors/getMe'
 
 export function mapStateToProps (state) {
   const pending = !!(state.pending[CHECK_SESSION] || state.pending[FETCH_CURRENT_USER])
   const currentUser = getMe(state)
   const signupInProgress = get('settings.signupInProgress', currentUser)
-  const loggedIn = state.session.loggedIn && !signupInProgress
+  const loggedIn = state.session.loggedIn
   const loading = pending || loggedIn === undefined
   return {
     // NOTE: loading is necessary so that the LoginNavigator
@@ -26,6 +27,8 @@ export function mapStateToProps (state) {
     loading,
     pending,
     loggedIn,
+    signupInProgress,
+    signupStep1Complete: getSignupStep1Complete(state),
     currentUser,
     entryURL: getEntryURL(state)
   }
