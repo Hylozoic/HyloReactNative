@@ -42,11 +42,9 @@ it('hides password, and changes button when pending ', () => {
 it('calls functions on mount', () => {
   const props = {
     currentUser: {id: 1},
-    fetchCurrentUser: jest.fn(),
     loadUserSettings: jest.fn()
   }
   ReactTestRenderer.create(<SignupFlow1 {...props} />)
-  expect(props.fetchCurrentUser).toHaveBeenCalled()
   expect(props.loadUserSettings).toHaveBeenCalled()
 })
 
@@ -56,25 +54,20 @@ it('loads user settings and updates errors on update when appropriate', () => {
     errors: {
       email: 'one error'
     },
-    loadUserSettings: jest.fn(),
-    fetchCurrentUser: () => {}
+    loadUserSettings: () => {}
   }
   const instance = ReactTestRenderer.create(<SignupFlow1 {...props} />).root.instance
-  props.loadUserSettings.mockClear()
 
   instance.componentDidUpdate(props)
-  expect(props.loadUserSettings).not.toHaveBeenCalled()
   expect(instance.state.errors).toMatchSnapshot()
 
   const differentProps = {
-    currentUser: {id: 2},
     errors: {
       email: 'old error'
     }
   }
 
   instance.componentDidUpdate(differentProps)
-  expect(props.loadUserSettings).toHaveBeenCalled()
   expect(instance.state.errors).toMatchSnapshot()
 })
 
