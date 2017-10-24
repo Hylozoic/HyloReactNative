@@ -4,12 +4,16 @@ import ReactShallowRenderer from 'react-test-renderer/shallow'
 import ReactTestRenderer from 'react-test-renderer'
 import SignupFlow2 from './SignupFlow2'
 
+jest.mock('react-native-device-info')
+jest.mock('../../ImagePicker', () => 'ImagePicker')
+
 it('matches last snapshot', () => {
   const renderer = new ReactShallowRenderer()
   const props = {
     avatarUrl: 'foo.png',
     saveAndNext: () => {},
-    changeSetting: () => {}
+    changeSetting: () => {},
+    currentUser: {id: '1'}
   }
 
   renderer.render(<SignupFlow2 {...props} />)
@@ -22,7 +26,8 @@ it('handles no image', () => {
   const renderer = new ReactShallowRenderer()
   const props = {
     saveAndNext: () => {},
-    changeSetting: () => {}
+    changeSetting: () => {},
+    currentUser: {id: '1'}
   }
 
   renderer.render(<SignupFlow2 {...props} />)
@@ -34,7 +39,8 @@ it('handles no image', () => {
 it('handles localUri', () => {
   const props = {
     saveAndNext: () => {},
-    changeSetting: () => {}
+    changeSetting: () => {},
+    currentUser: {id: '1'}
   }
 
   const renderer = ReactTestRenderer.create(<SignupFlow2 {...props} />)
@@ -45,13 +51,14 @@ it('handles localUri', () => {
 it('handles choice', () => {
   const props = {
     saveAndNext: () => {},
-    changeSetting: jest.fn(() => () => {})
+    changeSetting: jest.fn(() => () => {}),
+    currentUser: {id: '1'}
   }
 
   const instance = ReactTestRenderer.create(<SignupFlow2 {...props} />).root.instance
   const choice = {
-    localUri: 'foo.png',
-    webUrl: 'www.foo.png'
+    local: 'foo.png',
+    remote: 'www.foo.png'
   }
   instance.onChoice(choice)
   expect(props.changeSetting).toHaveBeenCalled()

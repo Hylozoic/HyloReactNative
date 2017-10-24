@@ -29,7 +29,7 @@ export default class SignupFlow2 extends React.Component {
 
   onChoice ({ local, remote }) {
     this.props.changeSetting('avatarUrl')(remote)
-    this.setState({local})
+    this.setState({localUri: local})
   }
 
   render () {

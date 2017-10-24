@@ -71,6 +71,14 @@ exports[`PostEditor renders a new editor correctly 1`] = `
           placeholder="What else should we know?"
         />
       </TouchableOpacity>
+      <SectionLabel>
+        Image
+      </SectionLabel>
+      <ImageSelector
+        imageUrl={undefined}
+        onReset={[Function]}
+        onSelect={[Function]}
+      />
     </View>
   </ScrollViewMock>
 </Unknown>
@@ -235,6 +243,58 @@ exports[`PostEditor renders correctly while saving 1`] = `
           >
             What else should we know?
           </Text>
+        </View>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          disabled={false}
+          ellipsizeMode="tail"
+        >
+          Image
+        </Text>
+        <View>
+          <View
+            accessibilityComponentType={undefined}
+            accessibilityLabel={undefined}
+            accessibilityTraits={undefined}
+            accessible={true}
+            collapsable={undefined}
+            hitSlop={undefined}
+            isTVSelectable={true}
+            nativeID={undefined}
+            onLayout={undefined}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            testID={undefined}
+            tvParallaxProperties={undefined}
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={false}
+              disabled={false}
+              ellipsizeMode="tail"
+              style={
+                Array [
+                  Object {
+                    "color": undefined,
+                    "fontSize": 12,
+                  },
+                  undefined,
+                  Object {
+                    "fontFamily": "hylo-evo-icons",
+                    "fontStyle": "normal",
+                    "fontWeight": "normal",
+                  },
+                ]
+              }
+            >
+              
+            </Text>
+          </View>
         </View>
       </View>
     </View>
@@ -401,6 +461,58 @@ exports[`PostEditor renders correctly while saving 2`] = `
           >
             What else should we know?
           </Text>
+        </View>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          disabled={false}
+          ellipsizeMode="tail"
+        >
+          Image
+        </Text>
+        <View>
+          <View
+            accessibilityComponentType={undefined}
+            accessibilityLabel={undefined}
+            accessibilityTraits={undefined}
+            accessible={true}
+            collapsable={undefined}
+            hitSlop={undefined}
+            isTVSelectable={true}
+            nativeID={undefined}
+            onLayout={undefined}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            testID={undefined}
+            tvParallaxProperties={undefined}
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={false}
+              disabled={false}
+              ellipsizeMode="tail"
+              style={
+                Array [
+                  Object {
+                    "color": undefined,
+                    "fontSize": 12,
+                  },
+                  undefined,
+                  Object {
+                    "fontFamily": "hylo-evo-icons",
+                    "fontStyle": "normal",
+                    "fontWeight": "normal",
+                  },
+                ]
+              }
+            >
+              
+            </Text>
+          </View>
         </View>
       </View>
     </View>

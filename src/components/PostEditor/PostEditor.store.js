@@ -8,7 +8,7 @@ export const SET_DETAILS = `${MODULE_NAME}/SET_DETAILS`
 export const CLEAR_DETAILS = `${MODULE_NAME}/CLEAR_DETAILS`
 
 export function createPost (post) {
-  const { type, title, details, communities, imageUrls } = post
+  const { type, title, details, communities, imageUrls = [] } = post
   const communityIds = communities.map(c => c.id)
   const preprocessedDetails = divToP(details)
   return {
@@ -62,7 +62,7 @@ export function createPost (post) {
 }
 
 export function updatePost (post) {
-  const { id, type, title, details, communities, imageUrls } = post
+  const { id, type, title, details, communities, imageUrls = [] } = post
   const communityIds = communities.map(c => c.id)
   const preprocessedDetails = divToP(details)
   return {
