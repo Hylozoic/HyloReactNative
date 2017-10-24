@@ -7,7 +7,7 @@ exports[`matches the last snapshot 1`] = `
     onContentSizeChange={[Function]}
     onSubmit={[Function]}
     placeholder="Wombats..."
-    placeholderTextColor="#AAACAC"
+    placeholderTextColor="#c0c6cd"
     style={
       Object {
         "flex": 2,

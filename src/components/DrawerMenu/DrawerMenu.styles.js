@@ -1,7 +1,14 @@
 import mixins from '../../style/mixins'
-import { bigStone, mirage, rhino } from '../../style/colors'
+import {
+  bigStone, mirage, rhino, rhino50, persimmon, rhino40, black10onRhino
+} from '../../style/colors'
+
+const defaultPadding = {
+  paddingHorizontal: 15
+}
 
 export default {
+  defaultPadding,
   parent: {
     ...mixins.belowStatusBar,
     flex: 1,
@@ -75,29 +82,81 @@ export default {
   footerButton: {
     marginRight: 30
   },
-  communityRow: {
-    padding: 10,
-    paddingLeft: 20,
-    paddingRight: 10
+  sectionHeader: {
+    ...defaultPadding,
+    marginTop: 10,
+    marginBottom: 10
   },
-  communityRowTouchable: {
+  sectionHeaderText: {
+    color: rhino50,
+    fontFamily: 'Circular-Book',
+    fontSize: 12
+  },
+  networkRow: {
+    ...defaultPadding,
+    paddingVertical: 5
+  },
+  networkRowExpanded: {
+    backgroundColor: black10onRhino,
+    paddingTop: 10,
+    paddingBottom: 5
+  },
+  rowTouchable: {
     flexDirection: 'row',
     alignItems: 'center'
+  },
+  networkRowTouchable: {
+    marginBottom: 5
+  },
+  networkAvatar: {
+    height: 32,
+    width: 32,
+    marginRight: 8,
+    borderRadius: 4
+  },
+  networkRowText: {
+    fontFamily: 'Circular-Bold',
+    color: 'white',
+    flex: 1,
+    fontSize: 15
+  },
+  networkOpenIcon: {
+    color: 'white',
+    fontSize: 25
+  },
+  communityRow: {
+    marginLeft: 10,
+    paddingVertical: 10
   },
   allFeedsIcon: {
     marginLeft: 5,
     marginRight: 11
   },
   communityAvatar: {
-    height: 30,
-    width: 30,
+    height: 21,
+    width: 21,
     marginRight: 8,
     borderRadius: 4
   },
   communityRowText: {
-    flex: 1
+    fontFamily: 'Circular-Book',
+    color: rhino40,
+    flex: 1,
+    fontSize: 15
   },
-  text: {
+  highlight: {
     color: 'white'
+  },
+  badge: {
+    backgroundColor: persimmon,
+    height: 20,
+    width: 20,
+    borderRadius: 100,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  badgeText: {
+    color: 'white',
+    fontSize: 12
   }
 }
