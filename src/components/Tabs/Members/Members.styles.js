@@ -45,7 +45,7 @@ export default {
     height: 50
   },
   memberName: {
-    fontSize: 22,
+    fontSize: 18,
     marginTop: 14,
     color: rhino,
     fontFamily: 'Circular-Black',
