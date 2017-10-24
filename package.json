@@ -87,7 +87,7 @@
   "jest": {
     "preset": "react-native",
     "setupFiles": [
-      "<rootDir>/config/jest/mockFetch.js",
+      "<rootDir>/config/jest/mockGlobals.js",
       "<rootDir>/config/jest/mockError.js"
     ],
     "collectCoverageFrom": [

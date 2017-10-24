@@ -26,6 +26,11 @@ export default function fetchCurrentUser () {
               slug
               avatarUrl
               bannerUrl
+              network {
+                id
+                name
+                avatarUrl
+              }
             }
           }
           skills (first: 100) {

@@ -1,4 +1,5 @@
 import { has } from 'lodash/fp'
+import { noncircular } from 'util/index'
 
 const MODULE_NAME = 'SocketListener'
 export const RECEIVE_MESSAGE = `${MODULE_NAME}/RECEIVE_MESSAGE`
@@ -86,7 +87,7 @@ export function handleEvent (name, value) {
   }
   return {
     type: HANDLE_EVENT,
-    payload: {name, value}
+    payload: {name, value: noncircular(value)}
   }
 }
 
