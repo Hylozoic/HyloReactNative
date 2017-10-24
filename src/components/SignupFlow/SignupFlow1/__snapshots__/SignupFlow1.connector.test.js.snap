@@ -71,54 +71,8 @@ Array [
   ],
   Array [
     Object {
-      "graphql": Object {
-        "query": "{
-        me {
-          id
-          name
-          email
-          location
-          avatarUrl
-          facebookUrl
-          twitterName
-          newNotificationCount
-          unseenThreadCount
-          memberships {
-            id
-            lastViewedAt
-            newPostCount
-            hasModeratorRole
-            community {
-              id
-              name
-              slug
-              avatarUrl
-              bannerUrl
-              network {
-                id
-                name
-                avatarUrl
-              }
-            }
-          }
-          skills (first: 100) {
-            total
-            hasMore
-            items {
-              id
-              name
-            }
-          }
-          settings {
-            signupInProgress
-          }
-        }
-      }",
-      },
-      "meta": Object {
-        "extractModel": "Me",
-      },
-      "type": "FETCH_CURRENT_USER",
+      "payload": true,
+      "type": "SignupFlow/SET_SIGNUP_STEP1_COMPLETE",
     },
   ],
 ]
@@ -154,6 +108,7 @@ Object {
     "navigate": [Function],
   },
   "password": "c",
+  "setSignupStep1Complete": [Function],
   "showPasswordField": true,
   "signup": [Function],
   "signupOrUpdate": [Function],
@@ -166,9 +121,8 @@ exports[`mergeProps merges the props 2`] = `
 Array [
   Array [
     Object {
-      "email": "b",
-      "name": "a",
-      "password": "c",
+      "email": "bb",
+      "name": "aa",
     },
   ],
 ]
@@ -178,8 +132,9 @@ exports[`mergeProps merges the props 3`] = `
 Array [
   Array [
     Object {
-      "email": "bb",
-      "name": "aa",
+      "email": "b",
+      "name": "a",
+      "password": "c",
     },
   ],
 ]

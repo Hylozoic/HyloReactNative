@@ -31,6 +31,7 @@ Object {
   "navigation": Object {
     "navigate": [Function],
   },
+  "setSignupStep1Complete": [Function],
   "storedSkills": Array [
     "a",
     "b",
@@ -73,6 +74,9 @@ Array [
 
 exports[`mergeProps merges the props 4`] = `
 Array [
+  Array [
+    "Home",
+  ],
   Array [
     "SignupFlow1",
   ],

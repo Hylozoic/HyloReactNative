@@ -25,7 +25,8 @@ describe('mergeProps', () => {
     }
     const dispatchProps = {
       updateUserSettings: jest.fn(),
-      updateLocalUserSettings: jest.fn()
+      updateLocalUserSettings: jest.fn(),
+      setSignupStep1Complete: jest.fn()
     }
     const ownProps = {
       navigation: {
@@ -38,6 +39,7 @@ describe('mergeProps', () => {
     expect(dispatchProps.updateUserSettings).toHaveBeenCalled()
     expect(dispatchProps.updateUserSettings.mock.calls)
     .toMatchSnapshot()
+    expect(dispatchProps.setSignupStep1Complete).toHaveBeenCalledWith(false)
     expect(dispatchProps.updateLocalUserSettings).toHaveBeenCalled()
     expect(dispatchProps.updateLocalUserSettings.mock.calls)
     .toMatchSnapshot()
