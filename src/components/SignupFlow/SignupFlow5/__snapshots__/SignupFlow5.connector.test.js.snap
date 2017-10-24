@@ -2,6 +2,7 @@
 
 exports[`mapDispatchToProps maps the action generators 1`] = `
 Object {
+  "setSignupStep1Complete": [Function],
   "signup": [Function],
   "updateLocalUserSettings": [Function],
   "updateUserSettings": [Function],

@@ -6,6 +6,7 @@ import reducer, {
   UPDATE_LOCAL_USER_SETTINGS,
   SET_SKILL,
   SET_USER_SKILLS,
+  SET_SIGNUP_STEP1_COMPLETE,
   signup,
   updateLocalUserSettings,
   updateUserSettings,
@@ -13,11 +14,13 @@ import reducer, {
   addSkill,
   removeSkill,
   setUserSkills,
+  setSignupStep1Complete,
   getSkillsFromOrm,
   getUserSkills,
   getSkill,
   getUserSettings,
-  getSignupErrors
+  getSignupErrors,
+  getSignupStep1Complete
 } from './SignupFlow.store'
 import orm from 'store/models'
 
@@ -166,6 +169,23 @@ describe('reducer', () => {
       })
     })
   })
+
+  describe('on SET_SIGNUP_STEP1_COMPLETE', () => {
+    const state = {
+      signupStep1Complete: false
+    }
+    const action = {
+      type: SET_SIGNUP_STEP1_COMPLETE,
+      payload: true
+    }
+
+    it('sets the skills', () => {
+      expect(reducer(state, action))
+      .toEqual({
+        signupStep1Complete: true
+      })
+    })
+  })
 })
 
 describe('action generators', () => {
@@ -206,6 +226,10 @@ describe('action generators', () => {
     const skills = ['one', 'two']
     it('matches snapshot', () => expect(setUserSkills(skills)).toMatchSnapshot())
   })
+
+  describe('setSignupStep1Complete', () => {
+    it('matches snapshot', () => expect(setSignupStep1Complete(true)).toMatchSnapshot())
+  })
 })
 
 describe('getSkillsFromOrm', () => {
@@ -235,7 +259,8 @@ describe('pseudo selectors', () => {
       skill: 'swimming',
       errors: {
         email: 'Bad email'
-      }
+      },
+      signupStep1Complete: true
     }
   }
 
@@ -264,6 +289,13 @@ describe('pseudo selectors', () => {
     it('returns the errors', () => {
       expect(getSignupErrors(state))
       .toEqual(state[MODULE_NAME].errors)
+    })
+  })
+
+  describe('getSignupStep1Complete', () => {
+    it('returns the status', () => {
+      expect(getSignupStep1Complete(state))
+      .toEqual(state[MODULE_NAME].signupStep1Complete)
     })
   })
 })
