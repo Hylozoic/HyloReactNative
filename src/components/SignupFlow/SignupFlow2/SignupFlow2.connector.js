@@ -6,6 +6,7 @@ export function mapStateToProps (state, props) {
   const currentUser = getMe(state, props)
   const { avatarUrl } = getUserSettings(state)
   return {
+    currentUser,
     avatarUrl
   }
 }
