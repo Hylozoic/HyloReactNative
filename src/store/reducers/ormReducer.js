@@ -25,6 +25,9 @@ import {
 import {
   USE_INVITATION
 } from '../../components/JoinCommunity/JoinCommunity.store'
+import {
+  UPDATE_LAST_VIEWED_PENDING
+} from '../../components/ThreadList/ThreadList.store'
 import orm from '../models'
 import ModelExtractor from './ModelExtractor'
 import extractModelsFromAction from './ModelExtractor/extractModelsFromAction'
@@ -159,6 +162,15 @@ export default function ormReducer (state = {}, action) {
       me = session.Me.first()
       me.updateAppending({memberships: [payload.data.useInvitation.membership.id]})
       break
+
+    case UPDATE_LAST_VIEWED_PENDING:
+      me = session.Me.first()
+      me.update({
+        settings: {
+          ...me.settings,
+          unseenThreadCount: 0
+        }
+      })
   }
 
   return session.state
