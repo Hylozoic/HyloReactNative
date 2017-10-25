@@ -43,7 +43,7 @@ export default class DrawerMenu extends Component {
     ]
 
     return <View style={styles.parent}>
-      <SectionList contentContainerStyle={styles.menu}
+      <SectionList
         renderSectionHeader={SectionHeader}
         sections={listSections}
         stickySectionHeadersEnabled={false} />
