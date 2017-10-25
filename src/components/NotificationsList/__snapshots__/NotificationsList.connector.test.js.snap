@@ -10,6 +10,54 @@ Object {
 }
 `;
 
+exports[`matches the last snapshot for mapDispatchToProps 2`] = `
+Array [
+  Array [
+    Object {
+      "headerRight": <TouchableOpacity
+        activeOpacity={0.2}
+        focusedOpacity={0.7}
+        onPress={[Function]}
+>
+        <Text
+                accessible={true}
+                allowFontScaling={true}
+                disabled={false}
+                ellipsizeMode="tail"
+        >
+                Mark as read
+        </Text>
+</TouchableOpacity>,
+    },
+  ],
+]
+`;
+
+exports[`matches the last snapshot for mapDispatchToProps 3`] = `
+Array [
+  Array [
+    Object {
+      "graphql": Object {
+        "query": "mutation ($changes: MeInput) {
+        updateMe(changes: $changes) {
+          id
+        }
+      }",
+        "variables": Object {
+          "changes": Object {
+            "newNotificationCount": 0,
+          },
+        },
+      },
+      "meta": Object {
+        "optimistic": true,
+      },
+      "type": "NotificationsList/UPDATE_NEW_NOTIFICATION_COUNT",
+    },
+  ],
+]
+`;
+
 exports[`matches the last snapshot for mapStateToProps 1`] = `
 Object {
   "hasMore": false,

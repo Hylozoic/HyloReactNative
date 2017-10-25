@@ -92,6 +92,27 @@ Object {
 }
 `;
 
+exports[`action creators matches the last snapshot from updateNewNotificationCount 1`] = `
+Object {
+  "graphql": Object {
+    "query": "mutation ($changes: MeInput) {
+        updateMe(changes: $changes) {
+          id
+        }
+      }",
+    "variables": Object {
+      "changes": Object {
+        "newNotificationCount": 0,
+      },
+    },
+  },
+  "meta": Object {
+    "optimistic": true,
+  },
+  "type": "NotificationsList/UPDATE_NEW_NOTIFICATION_COUNT",
+}
+`;
+
 exports[`selectors/refiners refineActivity matches the previous ACTION_APPROVED_JOIN_REQUEST snapshot 1`] = `
 Object {
   "body": "approved your request to join",
