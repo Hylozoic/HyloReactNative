@@ -1,5 +1,6 @@
 import orm from 'store/models'
-import { getThreads } from './ThreadList.store'
+import { getThreads, updateLastViewed } from './ThreadList.store'
+import { omit } from 'lodash/fp'
 
 const session = orm.session(orm.getEmptyState())
 
@@ -76,4 +77,10 @@ it('gets threads and denormalizes messages and participants', () => {
   }
 
   expect(getThreads(state, null)).toMatchSnapshot()
+})
+
+describe('action creators', () => {
+  it('matches the last snapshot from updateLastViewed', () => {
+    expect(omit('graphql.variables.changes.settings.lastViewedMessagesAt', updateLastViewed())).toMatchSnapshot()
+  })
 })

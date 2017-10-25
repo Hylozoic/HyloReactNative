@@ -1,5 +1,27 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`action creators matches the last snapshot from updateLastViewed 1`] = `
+Object {
+  "graphql": Object {
+    "query": "mutation ($changes: MeInput) {
+        updateMe(changes: $changes) {
+          id,
+          name
+        }
+      }",
+    "variables": Object {
+      "changes": Object {
+        "settings": Object {},
+      },
+    },
+  },
+  "meta": Object {
+    "optimistic": true,
+  },
+  "type": "ThreadList/UPDATE_LAST_VIEWED",
+}
+`;
+
 exports[`gets threads and denormalizes messages and participants 1`] = `
 Array [
   Object {
