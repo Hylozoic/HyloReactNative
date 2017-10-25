@@ -1,6 +1,5 @@
 import { connect } from 'react-redux'
 import { deleteComment } from './Comment.store'
-import { Alert } from 'react-native'
 import getCommunity from '../../store/selectors/getCommunity'
 import getMe from '../../store/selectors/getMe'
 
@@ -24,20 +23,15 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
   const { canModerate } = stateProps
   const { comment } = ownProps
 
-  const deleteCommentWithConfirm = canModerate
-    ? () => Alert.alert(
-      'Confirm Delete',
-      'Are you sure you want to delete this comment?',
-      [
-        {text: 'Yes', onPress: () => dispatchProps.deleteComment(comment.id)},
-        {text: 'Cancel', style: 'cancel'}
-      ])
+  const deleteComment = canModerate
+    ? () => dispatchProps.deleteComment(comment.id)
     : null
+
   return {
     ...stateProps,
     ...dispatchProps,
     ...ownProps,
-    deleteComment: deleteCommentWithConfirm
+    deleteComment: deleteComment
   }
 }
 

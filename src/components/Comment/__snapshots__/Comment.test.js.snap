@@ -120,7 +120,7 @@ exports[`shows the post title when displayPostTitle is true 1`] = `
       </View>
       <View>
         <CommentMenu
-          deleteComment={undefined}
+          deleteComment={null}
         />
       </View>
     </View>
