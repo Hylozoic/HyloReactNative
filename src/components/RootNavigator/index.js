@@ -23,6 +23,11 @@ import Thread from '../Thread'
 import ThreadList from '../ThreadList'
 import MemberDetails from '../MemberProfile/MemberDetails'
 import UserSettings from '../UserSettings'
+import SignupFlow1 from '../SignupFlow/SignupFlow1'
+import SignupFlow2 from '../SignupFlow/SignupFlow2'
+import SignupFlow3 from '../SignupFlow/SignupFlow3'
+import SignupFlow4 from '../SignupFlow/SignupFlow4'
+import SignupFlow5 from '../SignupFlow/SignupFlow5'
 import createLinkingAwareContainer from './createLinkingAwareContainer'
 import trackCurrentTab from './trackCurrentTab'
 import { isIOS } from 'util/platform'
@@ -57,7 +62,12 @@ export const screensInStack = {
   JoinCommunityAccessCode: {screen: JoinCommunity, path: 'c/:slug/join/:accessCode'},
   Thread: {screen: Thread, path: 'thread/:id'},
   NotificationsList: {screen: NotificationsList, path: 'notifications'},
-  ThreadList: {screen: ThreadList, path: 'messages'}
+  ThreadList: {screen: ThreadList, path: 'messages'},
+  SignupFlow1: {screen: SignupFlow1, path: 'signup/1'},
+  SignupFlow2: {screen: SignupFlow2, path: 'signup/2'},
+  SignupFlow3: {screen: SignupFlow3, path: 'signup/3'},
+  SignupFlow4: {screen: SignupFlow4, path: 'signup/4'},
+  SignupFlow5: {screen: SignupFlow5, path: 'signup/5'}
 }
 
 Object.freeze(tabs)

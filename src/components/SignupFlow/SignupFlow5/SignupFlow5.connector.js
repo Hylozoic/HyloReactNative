@@ -1,6 +1,11 @@
 import { connect } from 'react-redux'
 import {
-  signup, getUserSettings, getUserSkills, updateUserSettings, updateLocalUserSettings, defaultUserSettings
+  signup,
+  getUserSettings,
+  getUserSkills,
+  updateUserSettings,
+  updateLocalUserSettings,
+  defaultUserSettings
 } from '../SignupFlow.store.js'
 import { isEmpty } from 'lodash/fp'
 
@@ -30,6 +35,7 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
   const finishSignup = () => {
     updateLocalUserSettings(defaultUserSettings)
     updateUserSettings({settings: {signupInProgress: false}})
+    ownProps.navigation.navigate('Home')
   }
   const updateSetting = (key, value) => updateUserSettings({[key]: value})
   const updateLocalSetting = (key, value) => updateLocalUserSettings({[key]: value})

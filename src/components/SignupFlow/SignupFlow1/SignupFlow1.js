@@ -22,19 +22,12 @@ export default class SignupFlow1 extends React.Component {
   })
 
   componentDidMount () {
-    const { currentUser, fetchCurrentUser, loadUserSettings } = this.props
-    fetchCurrentUser()
-
+    const { currentUser, loadUserSettings } = this.props
     // this is for the case where they logged in but hadn't finished sign up
-    if (currentUser) {
-      loadUserSettings()
-    }
+    if (currentUser) loadUserSettings()
   }
 
   componentDidUpdate (prevProps) {
-    if (prevProps.currentUser !== this.props.currentUser) {
-      this.props.loadUserSettings()
-    }
     if (prevProps.errors !== this.props.errors) {
       this.setState({
         errors: {
