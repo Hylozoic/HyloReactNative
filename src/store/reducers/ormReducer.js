@@ -166,10 +166,7 @@ export default function ormReducer (state = {}, action) {
     case UPDATE_LAST_VIEWED_PENDING:
       me = session.Me.first()
       me.update({
-        settings: {
-          ...me.settings,
-          unseenThreadCount: 0
-        }
+        unseenThreadCount: 0
       })
   }
 
