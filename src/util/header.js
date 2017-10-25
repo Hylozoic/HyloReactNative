@@ -13,23 +13,6 @@ export const headerButton = ({ onPress, text }) => {
   </TouchableOpacity>
 }
 
-// Called from one of the main tab screens to display or hide icon badges
-export const updateBadges = ({ setParams }, currentUser, prevUser) => {
-  if (typeof setParams !== 'function') {
-    throw new Error('updateBadges: setParams is not a function. Did you pass the navigation object?')
-  }
-  if (!currentUser) return
-  const shouldUpdateBadges = !prevUser ||
-    currentUser.unseenThreadCount !== prevUser.unseenThreadCount ||
-    currentUser.newNotificationCount !== prevUser.newNotificationCount
-  if (shouldUpdateBadges) {
-    setParams({
-      hasUnreadMessages: !!currentUser.unseenThreadCount,
-      hasUnreadNotifications: !!currentUser.newNotificationCount
-    })
-  }
-}
-
 const headerClose = goBack => headerButton({ onPress: () => goBack(), text: 'Close' })
 
 // Helps to standardise the appearance and behaviour of headers.
