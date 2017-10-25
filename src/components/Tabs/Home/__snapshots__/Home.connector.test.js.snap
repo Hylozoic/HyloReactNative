@@ -14,5 +14,6 @@ Object {
     },
     "id": 123,
   },
+  "unseenThreadCount": undefined,
 }
 `;
