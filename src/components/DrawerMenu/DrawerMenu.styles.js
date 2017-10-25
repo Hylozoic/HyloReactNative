@@ -14,9 +14,6 @@ export default {
     flex: 1,
     backgroundColor: rhino
   },
-  menu: {
-    flex: 1
-  },
   header: {
     height: 40,
     marginTop: 10
@@ -93,8 +90,10 @@ export default {
     fontSize: 12
   },
   networkRow: {
-    ...defaultPadding,
-    paddingVertical: 5
+    ...defaultPadding
+  },
+  networkRowCollapsed: {
+    paddingTop: 10
   },
   networkRowExpanded: {
     backgroundColor: black10onRhino,
