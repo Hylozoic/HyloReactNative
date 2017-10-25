@@ -93,8 +93,10 @@ export default {
     fontSize: 12
   },
   networkRow: {
-    ...defaultPadding,
-    paddingVertical: 5
+    ...defaultPadding
+  },
+  networkRowCollapsed: {
+    paddingTop: 10
   },
   networkRowExpanded: {
     backgroundColor: black10onRhino,

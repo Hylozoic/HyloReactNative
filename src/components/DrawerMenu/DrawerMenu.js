@@ -118,7 +118,7 @@ export class NetworkRow extends React.Component {
 
     const expandable = communities && !!communities.length
     const { expanded } = this.state
-    return <View style={[styles.networkRow, expanded && styles.networkRowExpanded]}>
+    return <View style={[ styles.networkRow, expanded ? styles.networkRowExpanded : styles.networkRowCollapsed ]}>
       <TouchableOpacity onPress={onPress} style={[styles.rowTouchable, styles.networkRowTouchable]}>
         <Image source={imageSource} style={styles.networkAvatar} />
         <Text style={styles.networkRowText} ellipsizeMode='tail'
