@@ -59,6 +59,8 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
   }))
   .then(({ error }) => {
     if (error) return
+    // this is a consequence of SignupFlow1 having two modes (already have a user or creating one),
+    // and SessionCheck needs to be able to distinguish between them
     setSignupStep1Complete(true)
     return goToNext()
   })

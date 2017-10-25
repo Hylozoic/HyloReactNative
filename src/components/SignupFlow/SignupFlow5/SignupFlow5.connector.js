@@ -3,7 +3,6 @@ import {
   signup,
   getUserSettings,
   getUserSkills,
-  setSignupStep1Complete,
   updateUserSettings,
   updateLocalUserSettings,
   defaultUserSettings
@@ -28,15 +27,14 @@ export function mapStateToProps (state, props) {
 }
 
 export const mapDispatchToProps = {
-  signup, updateUserSettings, updateLocalUserSettings, setSignupStep1Complete
+  signup, updateUserSettings, updateLocalUserSettings
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
-  const { updateUserSettings, updateLocalUserSettings, setSignupStep1Complete } = dispatchProps
+  const { updateUserSettings, updateLocalUserSettings } = dispatchProps
   const finishSignup = () => {
     updateLocalUserSettings(defaultUserSettings)
     updateUserSettings({settings: {signupInProgress: false}})
-    setSignupStep1Complete(false)
     ownProps.navigation.navigate('Home')
   }
   const updateSetting = (key, value) => updateUserSettings({[key]: value})

@@ -179,7 +179,7 @@ describe('reducer', () => {
       payload: true
     }
 
-    it('sets the skills', () => {
+    it('sets signupStep1Complete', () => {
       expect(reducer(state, action))
       .toEqual({
         signupStep1Complete: true
