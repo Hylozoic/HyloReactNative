@@ -1,2 +1,5 @@
-import Component from './ImagePicker'
-export default Component
+import component from './ImagePicker'
+import connector from './ImagePicker.connector'
+export default connector(component)
+
+export { showImagePicker } from './ImagePicker'

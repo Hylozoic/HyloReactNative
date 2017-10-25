@@ -3,6 +3,8 @@ import ReactShallowRenderer from 'react-test-renderer/shallow'
 import TestRenderer from 'react-test-renderer'
 import PostEditor, { SectionLabel, TypeButton } from './PostEditor'
 import { TouchableOpacity } from 'react-native'
+import { Provider } from 'react-redux'
+import { createMockStore } from 'util/testing'
 
 jest.mock('react-native-device-info')
 
@@ -23,15 +25,17 @@ describe('PostEditor', () => {
     const navigation = {setParams: jest.fn()}
     const save = jest.fn(() => Promise.resolve())
     const editDetails = jest.fn()
-    const renderer = TestRenderer.create(<PostEditor
-      editDetails={editDetails}
-      setDetails={jest.fn()}
-      save={save}
-      navigation={navigation}
-      post={{details: 'myDetails', communities: [{id: 1}]}}
-    />)
+    const renderer = TestRenderer.create(
+      <Provider store={createMockStore()}>
+        <PostEditor
+          editDetails={editDetails}
+          setDetails={jest.fn()}
+          save={save}
+          navigation={navigation}
+          post={{details: 'myDetails', communities: [{id: 1}]}} />
+      </Provider>)
 
-    const root = renderer.root
+    const root = renderer.root.findByType(PostEditor)
 
     // Discussion type button
     root.findAllByType(TypeButton)[0].props.onPress()
@@ -59,18 +63,19 @@ describe('PostEditor', () => {
   it('renders correctly while saving', () => {
     const navigation = {setParams: jest.fn()}
     const save = jest.fn(() => Promise.resolve())
-    const renderer = TestRenderer.create(<PostEditor
-      editDetails={jest.fn()}
-      setDetails={jest.fn()}
-      save={save}
-      navigation={navigation}
-      post={{details: 'myDetails', communities: [{id: 1}]}}
-    />)
+    const renderer = TestRenderer.create(
+      <Provider store={createMockStore()}>
+        <PostEditor
+          editDetails={jest.fn()}
+          setDetails={jest.fn()}
+          save={save}
+          navigation={navigation}
+          post={{details: 'myDetails', communities: [{id: 1}]}} />
+      </Provider>)
 
     expect(renderer.toJSON()).toMatchSnapshot()
 
-    const instance = renderer.getInstance()
-
+    const instance = renderer.root.findByType(PostEditor).instance
     instance.setState({type: 'request'})
     instance.saveEditor()
 
@@ -85,15 +90,17 @@ describe('PostEditor', () => {
     expect.assertions(2)
     const navigation = {setParams: jest.fn()}
     const save = jest.fn(() => Promise.reject(new Error('invalid')))
-    const renderer = TestRenderer.create(<PostEditor
-      editDetails={jest.fn()}
-      setDetails={jest.fn()}
-      save={save}
-      navigation={navigation}
-      post={{details: 'myDetails', communities: [{id: 1}]}}
-    />)
+    const renderer = TestRenderer.create(
+      <Provider store={createMockStore()}>
+        <PostEditor
+          editDetails={jest.fn()}
+          setDetails={jest.fn()}
+          save={save}
+          navigation={navigation}
+          post={{details: 'myDetails', communities: [{id: 1}]}} />
+      </Provider>)
 
-    const instance = renderer.getInstance()
+    const instance = renderer.root.findByType(PostEditor).instance
 
     await instance.saveEditor()
     expect(navigation.setParams.mock.calls[1][0]).toHaveProperty('isSaving', true)
