@@ -84,20 +84,6 @@ export default function ormReducer (state = {}, action) {
       session.Activity.all().update({ unread: false })
       break
 
-    case SIGNUP:
-      me = session.Me.first()
-      if (me) {
-        me.delete()
-      }
-      session.Me.create({
-        name: payload.name,
-        email: payload.email,
-        settings: {
-          signupInProgress: true
-        }
-      })
-      break
-
     case ADD_SKILL:
       me = session.Me.first()
       skill = session.Skill.create(payload.data.addSkill)

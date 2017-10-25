@@ -6,92 +6,6 @@ exports[`FlagContent calls submit successfully with category:other 1`] = `
     hardwareAccelerated={false}
     onRequestClose={[Function]}
     transparent={true}
-    visible={false}
-  >
-    <View>
-      <View />
-      <View>
-        <View>
-          <Text
-            accessible={true}
-            allowFontScaling={true}
-            disabled={false}
-            ellipsizeMode="tail"
-          >
-            Why was this post 'undefined'
-          </Text>
-        </View>
-        <View>
-          <TextInput
-            autoFocus={true}
-            defaultValue=""
-            onChangeText={[Function]}
-            placeholder="Explanation "
-            placeholderTextColor="#8994A3"
-            underlineColorAndroid="white"
-          />
-        </View>
-        <View>
-          <View
-            accessibilityComponentType={undefined}
-            accessibilityLabel={undefined}
-            accessibilityTraits={undefined}
-            accessible={true}
-            hitSlop={undefined}
-            nativeID={undefined}
-            onLayout={undefined}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
-            style={undefined}
-            testID={undefined}
-          >
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              disabled={false}
-              ellipsizeMode="tail"
-            >
-              Cancel
-            </Text>
-          </View>
-          <View
-            accessibilityComponentType={undefined}
-            accessibilityLabel={undefined}
-            accessibilityTraits={undefined}
-            accessible={true}
-            hitSlop={undefined}
-            nativeID={undefined}
-            onLayout={undefined}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
-            style={undefined}
-            testID={undefined}
-          >
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              disabled={false}
-              ellipsizeMode="tail"
-            >
-              Submit
-            </Text>
-          </View>
-        </View>
-      </View>
-    </View>
-  </Modal>
-  <Modal
-    hardwareAccelerated={false}
-    onRequestClose={[Function]}
-    transparent={true}
     visible={true}
   >
     <View>
@@ -370,32 +284,6 @@ exports[`FlagContent calls submit successfully with category:other 1`] = `
 
 exports[`FlagContent changes title based on type 1`] = `
 <View>
-  <Prompt
-    borderColor="#ccc"
-    buttonStyle={Object {}}
-    buttonTextStyle={Object {}}
-    cancelButtonStyle={Object {}}
-    cancelButtonTextStyle={Object {}}
-    cancelText="Cancel"
-    defaultValue=""
-    inputStyle={Object {}}
-    onCancel={[Function]}
-    onChangeText={[Function]}
-    onSubmit={[Function]}
-    placeholder="Explanation "
-    promptStyle={Object {}}
-    submitButtonStyle={Object {}}
-    submitButtonTextStyle={Object {}}
-    submitText="Submit"
-    textInputProps={
-      Object {
-        "placeholderTextColor": "#8994A3",
-      }
-    }
-    title="Why was this post 'undefined'"
-    titleStyle={Object {}}
-    visible={false}
-  />
   <Component
     hardwareAccelerated={false}
     onRequestClose={[Function]}
@@ -472,32 +360,6 @@ exports[`FlagContent changes title based on type 1`] = `
 
 exports[`FlagContent matches the last snapshot 1`] = `
 <View>
-  <Prompt
-    borderColor="#ccc"
-    buttonStyle={Object {}}
-    buttonTextStyle={Object {}}
-    cancelButtonStyle={Object {}}
-    cancelButtonTextStyle={Object {}}
-    cancelText="Cancel"
-    defaultValue=""
-    inputStyle={Object {}}
-    onCancel={[Function]}
-    onChangeText={[Function]}
-    onSubmit={[Function]}
-    placeholder="Explanation "
-    promptStyle={Object {}}
-    submitButtonStyle={Object {}}
-    submitButtonTextStyle={Object {}}
-    submitText="Submit"
-    textInputProps={
-      Object {
-        "placeholderTextColor": "#8994A3",
-      }
-    }
-    title="Why was this content 'undefined'"
-    titleStyle={Object {}}
-    visible={false}
-  />
   <Component
     hardwareAccelerated={false}
     onRequestClose={[Function]}
