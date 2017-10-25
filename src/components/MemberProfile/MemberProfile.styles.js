@@ -9,7 +9,8 @@ export default {
     marginHorizontal: screenMargin
   },
   bannerImage: {
-    height: 140
+    height: 140,
+    width: '100%'
   },
   avatarWrapper: {
     flexDirection: 'row',
