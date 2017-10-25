@@ -1,10 +1,11 @@
 import {
   mapStateToProps,
   mapDispatchToProps,
-  mergeProps
+  mergeProps,
+  partitionCommunities
 } from './DrawerMenu.connector'
 
-test('mapStateToProps matches the latest snapshot', () => {
+describe('mapStateToProps matches the latest snapshot', () => {
   const state = {
     session: {
       loggedIn: true,
@@ -18,11 +19,11 @@ test('mapStateToProps matches the latest snapshot', () => {
   expect(mapStateToProps(state, props)).toMatchSnapshot()
 })
 
-test('mapDispatchToProps matches the last snapshot', () =>
+describe('mapDispatchToProps matches the last snapshot', () =>
   expect(mapDispatchToProps).toMatchSnapshot()
 )
 
-test('mergeProps matches the last snapshot and bound functions work as expected', () => {
+describe('mergeProps matches the last snapshot and bound functions work as expected', () => {
   const stateProps = {
     currentUser: {id: 'anyid'},
     name: 'Roy Rogers'
@@ -38,11 +39,77 @@ test('mergeProps matches the last snapshot and bound functions work as expected'
   const props = mergeProps(stateProps, dispatchProps, ownProps)
   expect(props).toMatchSnapshot()
   const community = {id: 'testcommunity'}
-  props.selectCommunity(community)
+  props.goToCommunity(community)
   expect(dispatchProps.changeCommunity).toHaveBeenCalled()
   expect(ownProps.navigation.navigate).toHaveBeenCalled()
   props.showSettings()
   expect(ownProps.navigation.navigate).toHaveBeenCalled()
   props.goToMyProfile()
   expect(ownProps.navigation.navigate).toHaveBeenCalled()
+})
+
+describe('partitionCommunities', () => {
+  it('separates independent communities from networked communities', () => {
+    const memberships = [
+      {
+        community: {
+          ref: {
+            id: '1',
+            name: 'one'
+          },
+          network: {
+            ref: {
+              id: '1',
+              name: 'networkOne'
+            }
+          }
+        }
+      },
+      {
+        community: {
+          ref: {
+            id: '2',
+            name: 'two'
+          }
+        }
+      },
+      {
+        community: {
+          ref: {
+            id: '3',
+            name: 'three'
+          },
+          network: {
+            ref: {
+              id: '2',
+              name: 'networkTwo'
+            }
+          }
+        }
+      },
+      {
+        community: {
+          ref: {
+            id: '4',
+            name: 'four'
+          },
+          network: {
+            ref: {
+              id: '1',
+              name: 'networkOne'
+            }
+          }
+        }
+      },
+      {
+        community: {
+          ref: {
+            id: '5',
+            name: 'five'
+          }
+        }
+      }
+    ]
+    expect(partitionCommunities(memberships)).toMatchSnapshot()
+  })
 })

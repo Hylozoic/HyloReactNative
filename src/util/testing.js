@@ -23,3 +23,11 @@ export function simulate (instance, eventName, evt = {}) {
   // also introduce a dependency on react-dom.
   if (handler) handler(evt)
 }
+
+export function createMockStore (state = {}) {
+  return {
+    subscribe: jest.fn(),
+    getState: jest.fn(() => state),
+    dispatch: jest.fn()
+  }
+}

@@ -5,6 +5,7 @@ import TestRenderer from 'react-test-renderer'
 import Feed from './Feed'
 import { Provider } from 'react-redux'
 import orm from 'store/models'
+import { createMockStore } from 'util/testing'
 
 jest.mock('react-native-device-info')
 
@@ -53,14 +54,9 @@ it('calls fetchCommunityTopic on componentDidMount', () => {
     queryResults: {},
     pending: {}
   }
-  const mockStore = {
-    subscribe: jest.fn(),
-    getState: jest.fn(() => state),
-    dispatch: jest.fn()
-  }
 
   const renderer = TestRenderer.create(
-    <Provider store={mockStore}>
+    <Provider store={createMockStore(state)}>
       <Feed fetchCommunityTopic={fetchCommunityTopic} />
     </Provider>
   )

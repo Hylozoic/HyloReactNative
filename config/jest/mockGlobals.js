@@ -19,3 +19,9 @@ fetch.mockResponseFailure = error => {
     () => Promise.reject(error)
   )
 }
+
+global.FormData = jest.fn(() => {
+  return []
+})
+
+global.XMLHttpRequest = jest.fn()

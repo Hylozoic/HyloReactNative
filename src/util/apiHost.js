@@ -1,3 +1,7 @@
+/**
+ * @providesModule util/apiHost
+ */
+
 import { isIOS } from 'util/platform'
 
 const androidHost = __DEV__ && !isIOS &&

@@ -20,7 +20,7 @@ export default function fetchJSON (path, params, options = {}) {
       return setSessionCookie(resp).then(() => resp.json())
     }
     return resp.text().then(body => {
-      let error = new Error(body)
+      const error = new Error(body)
       error.response = {status, statusText, url, body}
       throw error
     })
