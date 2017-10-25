@@ -6,6 +6,7 @@ Object {
   "fetchNotifications": [Function],
   "markActivityRead": [Function],
   "setRightButton": [Function],
+  "updateNewNotificationCount": [Function],
 }
 `;
 
