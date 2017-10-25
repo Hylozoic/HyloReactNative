@@ -85,7 +85,6 @@ describe('PostEditor', () => {
     expect(renderer.toJSON()).toMatchSnapshot()
 
     const instance = renderer.root.findByType(PostEditor).instance
-
     instance.setState({type: 'request'})
     instance.saveEditor()
 
