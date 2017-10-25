@@ -10,35 +10,21 @@ Object {
 exports[`handles localUri 1`] = `
 <View>
   <View>
-    <View>
-      <View
-        accessibilityComponentType={undefined}
-        accessibilityLabel={undefined}
-        accessibilityTraits={undefined}
-        accessible={true}
-        collapsable={undefined}
-        hitSlop={undefined}
-        isTVSelectable={true}
-        nativeID={undefined}
-        onLayout={undefined}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
-        testID={undefined}
-        tvParallaxProperties={undefined}
-      >
-        <Image
-          source={
-            Object {
-              "uri": "foo.png",
-            }
+    <ImagePicker
+      id="1"
+      onChoice={[Function]}
+      onPendingChange={[Function]}
+      title="Upload a Photo"
+      type="userAvatar"
+    >
+      <Image
+        source={
+          Object {
+            "uri": "foo.png",
           }
-        />
-      </View>
-    </View>
+        }
+      />
+    </ImagePicker>
     <View>
       <Text
         accessible={true}
@@ -89,10 +75,11 @@ exports[`handles no image 1`] = `
 <View>
   <View>
     <ImagePicker
+      id="1"
       onChoice={[Function]}
       onPendingChange={[Function]}
-      path="testpath/avatar/"
       title="Upload a Photo"
+      type="userAvatar"
     >
       <View>
         <Icon
@@ -139,10 +126,11 @@ exports[`matches last snapshot 1`] = `
 <View>
   <View>
     <ImagePicker
+      id="1"
       onChoice={[Function]}
       onPendingChange={[Function]}
-      path="testpath/avatar/"
       title="Upload a Photo"
+      type="userAvatar"
     >
       <Image
         source={
