@@ -81,6 +81,8 @@ it('gets threads and denormalizes messages and participants', () => {
 
 describe('action creators', () => {
   it('matches the last snapshot from updateLastViewed', () => {
-    expect(omit('graphql.variables.changes.settings.lastViewedMessagesAt', updateLastViewed())).toMatchSnapshot()
+    const result = updateLastViewed()
+    result.graphql.variables.changes.settings.lastViewedMessagesAt = 'dummy time'
+    expect(result).toMatchSnapshot()
   })
 })

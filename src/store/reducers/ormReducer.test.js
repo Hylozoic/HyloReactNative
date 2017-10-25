@@ -226,7 +226,7 @@ describe('on UPDATE_NEW_NOTIFICATION_COUNT_PENDING', () => {
     type: UPDATE_NEW_NOTIFICATION_COUNT_PENDING
   }
 
-  it('sets Me.unseenThreadCount to 0', () => {
+  it('sets Me.newNotificationCount to 0', () => {
     const newSession = orm.session(ormReducer(session.state, action))
     expect(newSession.Me.first().newNotificationCount).toEqual(0)
   })

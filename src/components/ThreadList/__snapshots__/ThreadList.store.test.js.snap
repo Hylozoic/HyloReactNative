@@ -11,7 +11,9 @@ Object {
       }",
     "variables": Object {
       "changes": Object {
-        "settings": Object {},
+        "settings": Object {
+          "lastViewedMessagesAt": "dummy time",
+        },
       },
     },
   },
