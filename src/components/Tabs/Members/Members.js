@@ -125,7 +125,9 @@ function Member ({ member, showMember }) {
     <Text style={styles.memberName}>{member.name}</Text>
     {!!member.location &&
       <Text style={styles.memberLocation}>{member.location}</Text>}
-    <Text style={styles.memberBio}>{member.bio}</Text>
+    <Text style={styles.memberBio} numberOfLines={4}>
+      {member.bio}
+    </Text>
   </TouchableOpacity>
 }
 
