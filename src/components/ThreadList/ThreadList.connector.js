@@ -30,7 +30,7 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
   const { threads, hasMore } = stateProps
 
   const fetchThreads = () => {
-    // dispatchProps.fetchThreads(10)
+    dispatchProps.fetchThreads(10)
     dispatchProps.updateLastViewed()
   }
 

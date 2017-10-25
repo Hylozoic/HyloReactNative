@@ -9,7 +9,7 @@ export const MODULE_NAME = 'ThreadList'
 export const UPDATE_LAST_VIEWED = `${MODULE_NAME}/UPDATE_LAST_VIEWED`
 export const UPDATE_LAST_VIEWED_PENDING = `${UPDATE_LAST_VIEWED}_PENDING`
 
-export function updateLastViewed (name) {
+export function updateLastViewed () {
   return {
     type: UPDATE_LAST_VIEWED,
     graphql: {

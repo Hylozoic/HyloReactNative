@@ -11,7 +11,7 @@ import {
   TOGGLE_TOPIC_SUBSCRIBE_PENDING
 } from '../../components/Feed/Feed.store'
 import {
-  MARK_ACTIVITY_READ, MARK_ALL_ACTIVITIES_READ
+  MARK_ACTIVITY_READ, MARK_ALL_ACTIVITIES_READ, UPDATE_NEW_NOTIFICATION_COUNT_PENDING
 } from '../../components/NotificationsList/NotificationsList.store'
 import {
   RECEIVE_MESSAGE, RECEIVE_NOTIFICATION, RECEIVE_THREAD
@@ -168,6 +168,14 @@ export default function ormReducer (state = {}, action) {
       me.update({
         unseenThreadCount: 0
       })
+      break
+
+    case UPDATE_NEW_NOTIFICATION_COUNT_PENDING:
+      me = session.Me.first()
+      me.update({
+        newNotificationCount: 0
+      })
+      break
   }
 
   return session.state

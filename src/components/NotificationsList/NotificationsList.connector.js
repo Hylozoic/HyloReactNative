@@ -5,7 +5,8 @@ import {
   getNotifications,
   getHasMoreNotifications,
   markActivityRead,
-  markAllActivitiesRead
+  markAllActivitiesRead,
+  updateNewNotificationCount
 } from './NotificationsList.store'
 import { headerButton } from 'util/header'
 
@@ -28,7 +29,8 @@ export function mapDispatchToProps (dispatch, { navigation }) {
     fetchNotifications: () => dispatch(fetchNotifications(NOTIFICATIONS_PAGE_SIZE)),
     fetchMore: offset => dispatch(fetchNotifications(NOTIFICATIONS_PAGE_SIZE, offset)),
     markActivityRead: id => dispatch(markActivityRead(id)),
-    setRightButton: () => navigation.setParams({ headerRight: headerButton(right) })
+    setRightButton: () => navigation.setParams({ headerRight: headerButton(right) }),
+    updateNewNotificationCount: () => dispatch(updateNewNotificationCount())
   }
 }
 
