@@ -111,11 +111,6 @@ exports[`CommunityRow matches the last snapshot 1`] = `
 exports[`DrawerMenu matches the last snapshot 1`] = `
 <View>
   <SectionList
-    contentContainerStyle={
-      Object {
-        "flex": 1,
-      }
-    }
     data={Array []}
     disableVirtualization={false}
     horizontal={false}
@@ -152,7 +147,7 @@ exports[`DrawerMenu matches the last snapshot 1`] = `
         },
       ]
     }
-    stickySectionHeadersEnabled={true}
+    stickySectionHeadersEnabled={false}
     updateCellsBatchingPeriod={50}
     windowSize={21}
   />
