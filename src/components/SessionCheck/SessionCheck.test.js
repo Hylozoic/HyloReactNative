@@ -170,6 +170,38 @@ describe('SessionCheck component', () => {
       expect(testProps.resetEntryURL).toHaveBeenCalled()
       expect(instance.navigator._handleOpenURL).toHaveBeenCalledWith(testProps.entryURL)
     })
+
+    it('should route to the first signup step if logged in and signup is not complete', () => {
+      const prevProps = testPropsSetup()
+      const testProps = testPropsSetup({
+        loggedIn: true,
+        signupInProgress: true,
+        signupStep1Complete: false,
+        currentUser: {id: 1}
+      })
+      const instance = ReactTestRenderer.create(<SessionCheck {...testProps} />).getInstance()
+      instance.navigator = {dispatch: jest.fn()}
+      instance.componentDidUpdate(prevProps)
+      expect(instance.navigator.dispatch).toHaveBeenCalledWith(
+        expect.objectContaining({routeName: 'SignupFlow1'})
+      )
+    })
+
+    it('should route to the second signup step if just completed first step', () => {
+      const prevProps = testPropsSetup()
+      const testProps = testPropsSetup({
+        loggedIn: true,
+        signupInProgress: true,
+        signupStep1Complete: true,
+        currentUser: {id: 1}
+      })
+      const instance = ReactTestRenderer.create(<SessionCheck {...testProps} />).getInstance()
+      instance.navigator = {dispatch: jest.fn()}
+      instance.componentDidUpdate(prevProps)
+      expect(instance.navigator.dispatch).toHaveBeenCalledWith(
+        expect.objectContaining({routeName: 'SignupFlow2'})
+      )
+    })
   })
 
   test('_handleSetEntryURL', () => {

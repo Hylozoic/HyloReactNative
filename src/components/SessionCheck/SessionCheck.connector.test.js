@@ -1,5 +1,4 @@
 import { mapStateToProps, mapDispatchToProps } from './SessionCheck.connector.js'
-import registerDevice from '../../store/actions/registerDevice'
 import { addEventListener, registerForPushNotifications } from 'react-native-onesignal'
 import { MODULE_NAME as SignupFlowStoreKey } from '../SignupFlow/SignupFlow.store'
 
