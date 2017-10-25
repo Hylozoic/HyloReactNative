@@ -40,7 +40,8 @@ export default {
     opacity: 0.45
   },
   details: {
-    height: 300
+    paddingBottom: 5,
+    paddingTop: 15
   },
   typeButtonRow: {
     flexDirection: 'row',
