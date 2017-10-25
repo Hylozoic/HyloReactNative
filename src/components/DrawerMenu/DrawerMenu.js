@@ -46,7 +46,7 @@ export default class DrawerMenu extends Component {
       <SectionList contentContainerStyle={styles.menu}
         renderSectionHeader={SectionHeader}
         sections={listSections}
-        />
+        stickySectionHeadersEnabled={false} />
       <View style={styles.footer}>
         <TouchableOpacity onPress={goToMyProfile} style={styles.avatar}>
           <Image source={{uri: avatarUrl}}

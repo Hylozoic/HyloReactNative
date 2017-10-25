@@ -14,9 +14,6 @@ export default {
     flex: 1,
     backgroundColor: rhino
   },
-  menu: {
-    flex: 1
-  },
   header: {
     height: 40,
     marginTop: 10
