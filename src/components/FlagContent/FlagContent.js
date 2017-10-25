@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { Modal, Text, TouchableOpacity, View, FlatList } from 'react-native'
 import Icon from '../Icon'
 import { toUpper, isEmpty, trim } from 'lodash'
-// import Prompt from 'react-native-prompt'
 import prompt from 'react-native-prompt-android'
 
 export default class FlagContent extends Component {
