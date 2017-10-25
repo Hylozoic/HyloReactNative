@@ -7,6 +7,7 @@ import MemberFeed from './MemberFeed'
 import PopupMenuButton from '../../components/PopupMenuButton'
 import FlagContent from '../../components/FlagContent'
 import { filter, isEmpty } from 'lodash/fp'
+import defaultBanner from '../../assets/default-user-banner.jpg'
 
 export default class MemberProfile extends React.Component {
   static navigationOptions = () => ({
@@ -29,9 +30,7 @@ export default class MemberProfile extends React.Component {
 
   render () {
     const { person, id, goToDetails, canFlag, onPressMessages } = this.props
-
     const { flaggingVisible } = this.state
-
     if (!person) return <Loading />
 
     let flagMember
@@ -66,10 +65,10 @@ export default class MemberProfile extends React.Component {
   }
 }
 
-export function MemberBanner ({ person }) {
-  const { bannerUrl, avatarUrl } = person
+export function MemberBanner ({ person: { avatarUrl, bannerUrl } }) {
+  const banner = bannerUrl ? {uri: bannerUrl} : defaultBanner
   return <View>
-    <Image source={{uri: bannerUrl}} style={styles.bannerImage} />
+    <Image source={banner} style={styles.bannerImage} />
     <View style={styles.avatarWrapper}>
       <Image source={{uri: avatarUrl}} style={styles.avatarImage} />
     </View>
