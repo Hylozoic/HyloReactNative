@@ -8,8 +8,10 @@ export function mapStateToProps (state, props) {
   const threads = getThreads(state, props)
   const currentUser = getMe(state)
   const hasMore = getThreadsHasMore(state, props)
+  const pending = state.pending[FETCH_THREADS]
   return {
-    pending: state.pending[FETCH_THREADS],
+    pending,
+    pendingRefresh: !!(pending && pending.extractQueryResults.reset),
     currentUser,
     threads,
     hasMore
@@ -44,7 +46,8 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     ...dispatchProps,
     ...ownProps,
     fetchThreads,
-    fetchMoreThreads
+    fetchMoreThreads,
+    refreshThreads: () => dispatchProps.fetchThreads(10, 0, true)
   }
 }
 
