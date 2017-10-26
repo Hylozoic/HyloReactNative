@@ -76,6 +76,9 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
       dispatchProps.changeCommunity(community.id)
       navigation.navigate('DrawerClose')
     },
+    goToNetwork: network => {
+      navigation.navigate('Feed', {networkId: network.id})
+    },
     showSettings: () => {
       navigation.navigate('UserSettings', {name})
     },

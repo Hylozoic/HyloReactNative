@@ -17,14 +17,17 @@ export function mapStateToProps (state, props) {
   const networkId = props.networkId || params.networkId
   const communityId = props.communityId || params.communityId
   const topicName = props.topicName || params.topicName
-  const community = getCommunity(state, {id: communityId})
-  const network = getNetwork(state, {id: networkId})
+  // NOTE: Below is implicit logic to indicating whether a community or network
+  // feed is to be loaded.
+  const community = communityId && getCommunity(state, {id: communityId})
+  const network = networkId && getNetwork(state, {id: networkId})
   const currentUser = getMe(state)
   const communityTopic = topicName && community &&
     (get(FETCH_COMMUNITY_TOPIC, state.pending) ? undefined : true) &&
     getCommunityTopic(state, {topicName, slug: community.slug})
   // when this is undefined, the subscribe button is not shown at all
   const topicSubscribed = communityTopic && communityTopic.isSubscribed
+  console.log('!!! networkId, communityId: ', networkId, communityId)
   return {
     currentUser,
     community,

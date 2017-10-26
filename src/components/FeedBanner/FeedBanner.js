@@ -25,16 +25,18 @@ export default class FeedBanner extends React.Component {
 
   render () {
     const {
-      all, community, newPost, currentUser, topicSubscribed
+      all, community, network, newPost, currentUser, topicSubscribed
     } = this.props
 
     let bannerUrl, name
-    if (all) {
+    if (community && all) {
       name = 'All Communities'
-    } else if (!community) {
-      return null
-    } else {
+    } else if (network) {
+      ({ bannerUrl, name } = network)
+    } else if (community) {
       ({ bannerUrl, name } = community)
+    } else {
+      return null
     }
 
     return <View style={styles.container}>

@@ -18,9 +18,11 @@ export default class FeedList extends Component {
   }
 
   componentDidUpdate (prevProps) {
+    console.log('!!! FEEDLIST componentDidUpdate', get('id', this.props.network), get('id', prevProps.network))
     if (prevProps.sortBy !== this.props.sortBy ||
         prevProps.filter !== this.props.filter ||
-        get('id', prevProps.community) !== get('id', this.props.community)) {
+        get('id', prevProps.community) !== get('id', this.props.community) ||
+        get('id', prevProps.network) !== get('id', this.props.network)) {
       this.fetchOrShowCached()
     }
   }

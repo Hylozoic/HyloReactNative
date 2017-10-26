@@ -31,6 +31,7 @@ export function fetchPosts (
       query,
       variables: {
         slug,
+        networkSlug,
         sortBy,
         offset,
         search,

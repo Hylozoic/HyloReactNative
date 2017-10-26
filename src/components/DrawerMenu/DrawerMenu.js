@@ -16,8 +16,8 @@ export default class DrawerMenu extends Component {
 
   render () {
     const {
-      name, avatarUrl, goToCommunity, goToMyProfile, showSettings,
-      networks, communities, currentCommunityId
+      name, avatarUrl, goToCommunity, goToNetwork, goToMyProfile,
+      showSettings, networks, communities, currentCommunityId
     } = this.props
 
     const listSections = [
@@ -27,6 +27,7 @@ export default class DrawerMenu extends Component {
         renderItem: ({ item }) => <NetworkRow
           network={item}
           goToCommunity={goToCommunity}
+          goToNetwork={goToNetwork}
           currentCommunityId={currentCommunityId} />,
         keyExtractor: item => 'n' + item.id
       },
@@ -104,28 +105,24 @@ export class NetworkRow extends React.Component {
   }
 
   render () {
-    const { network, goToCommunity, currentCommunityId } = this.props
+    const { network, goToCommunity, goToNetwork, currentCommunityId } = this.props
     const { id, avatarUrl, name, communities } = network
     const isAll = id === ALL_COMMUNITIES_ID
     const imageSource = isAll
       ? allCommunitiesImage
       : {uri: avatarUrl}
-
-    const onPress = isAll
-      // this works because the network has id ALL_COMMUNITIES_ID
-      ? () => goToCommunity(network)
-      : this.toggleExpanded
-
+    const openNetwork = () => goToNetwork(network)
     const expandable = communities && !!communities.length
     const { expanded } = this.state
+
     return <View style={[styles.networkRow, expanded && styles.networkRowExpanded]}>
-      <TouchableOpacity onPress={onPress} style={[styles.rowTouchable, styles.networkRowTouchable]}>
+      <TouchableOpacity onPress={openNetwork} style={[styles.rowTouchable, styles.networkRowTouchable]}>
         <Image source={imageSource} style={styles.networkAvatar} />
         <Text style={styles.networkRowText} ellipsizeMode='tail'
           numberOfLines={1}>
           {name}
         </Text>
-        {expandable && <EntypoIcon style={styles.networkOpenIcon} name={expanded ? 'chevron-down' : 'chevron-right'} />}
+        {expandable && <EntypoIcon onPress={this.toggleExpanded} style={styles.networkOpenIcon} name={expanded ? 'chevron-down' : 'chevron-right'} />}
       </TouchableOpacity>
       {expanded && expandable && <View style={styles.networkCommunities}>
         {communities.map(c => <CommunityRow

@@ -12,11 +12,21 @@ import { fetchPosts, FETCH_POSTS } from '../../store/actions/fetchPosts'
 import { get, isNull, isUndefined, omit, omitBy } from 'lodash/fp'
 
 function makeFetchOpts (props) {
-  const { community, topicName } = props
+  const { community, network, topicName } = props
+  var subject
+
+  if (community) {
+    subject = 'community'
+  } else if (network) {
+    subject = 'network'
+  } else {
+    subject = 'all-communities'
+  }
   return omitBy(x => isNull(x) || isUndefined(x), {
-    ...omit(['community', 'topicName'], props),
-    subject: community ? 'community' : 'all-communities',
+    ...omit(['community', 'network', 'topicName'], props),
+    subject,
     slug: get('slug', community) || ALL_COMMUNITIES_ID,
+    networkSlug: get('slug', network),
     topic: topicName
   })
 }
@@ -24,10 +34,10 @@ function makeFetchOpts (props) {
 export function mapStateToProps (state, props) {
   const sortBy = getSort(state, props)
   const filter = getFilter(state, props)
-  const { community, topicName } = props
-
+  const { community, network, topicName } = props
   const queryProps = makeFetchOpts({
     community,
+    network,
     sortBy,
     filter,
     topicName
