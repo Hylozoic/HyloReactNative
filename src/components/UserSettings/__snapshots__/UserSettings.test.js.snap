@@ -155,13 +155,30 @@ exports[`SocialControl matches the last snapshot unlinked 1`] = `
 </View>
 `;
 
-exports[`UserSettings cancelPassword sets the state 1`] = `
+exports[`UserSettings cancelPassword sets the state, setting changed to false when email has not changed 1`] = `
 Object {
   "changed": false,
   "editingPassword": false,
   "edits": Object {
     "confirmPassword": null,
-    "email": "moo",
+    "email": "moo@moo.com",
+    "password": null,
+  },
+  "errors": Object {
+    "confirmPassword": null,
+    "email": "bad email",
+    "password": null,
+  },
+}
+`;
+
+exports[`UserSettings cancelPassword sets the state, setting changed to true when email has changed 1`] = `
+Object {
+  "changed": true,
+  "editingPassword": false,
+  "edits": Object {
+    "confirmPassword": null,
+    "email": "different@email.com",
     "password": null,
   },
   "errors": Object {
@@ -176,15 +193,15 @@ exports[`UserSettings confirmLeave calls Alert.alert when changed is true 1`] = 
 Array [
   Array [
     "You have unsaved changes",
-    "Are you sure you want to leave?",
+    "Are you sure you want to discard your changes?",
     Array [
       Object {
         "onPress": [Function],
-        "text": "Leave",
+        "text": "Discard",
       },
       Object {
         "style": "cancel",
-        "text": "Cancel",
+        "text": "Continue Editing",
       },
     ],
   ],
@@ -219,207 +236,108 @@ exports[`UserSettings matches snapshot with state set 1`] = `
     }
   >
     <View>
-      <View>
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          disabled={false}
-          ellipsizeMode="tail"
-        >
-          EMAIL
-        </Text>
-        <TextInput
-          autoCapitalize="none"
-          autoCorrect={false}
-          editable={true}
-          keyboardType="email-address"
-          onChangeText={[Function]}
-          onSubmitEditing={[Function]}
-          returnKeyType={undefined}
-          secureTextEntry={undefined}
-          value="aa@bbb.com"
-        />
-        <View>
-          <View>
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              disabled={false}
-              ellipsizeMode="tail"
-            >
-              bad email
-            </Text>
-          </View>
-        </View>
-      </View>
-      <View>
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          disabled={false}
-          ellipsizeMode="tail"
-        >
-          PASSWORD
-        </Text>
-        <TextInput
-          autoCapitalize="none"
-          autoCorrect={false}
-          editable={true}
-          keyboardType={undefined}
-          onChangeText={[Function]}
-          onSubmitEditing={[Function]}
-          returnKeyType={undefined}
-          secureTextEntry={true}
-          value="hunkjnkjn"
-        />
-        <View>
-          <View
-            accessibilityComponentType={undefined}
-            accessibilityLabel={undefined}
-            accessibilityTraits={undefined}
-            accessible={true}
-            collapsable={undefined}
-            hitSlop={
-              Object {
-                "bottom": 10,
-                "left": 10,
-                "right": 10,
-                "top": 10,
-              }
-            }
-            isTVSelectable={true}
-            nativeID={undefined}
-            onLayout={undefined}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
-            testID={undefined}
-            tvParallaxProperties={undefined}
-          >
-            <Text
-              accessible={true}
-              allowFontScaling={false}
-              disabled={false}
-              ellipsizeMode="tail"
-              style={
-                Array [
-                  Object {
-                    "color": undefined,
-                    "fontSize": 12,
-                  },
-                  undefined,
-                  Object {
-                    "fontFamily": "Entypo",
-                    "fontStyle": "normal",
-                    "fontWeight": "normal",
-                  },
-                ]
-              }
-            >
-              
-            </Text>
-          </View>
-        </View>
-        <View>
-          <View>
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              disabled={false}
-              ellipsizeMode="tail"
-            >
-              needs to be longer
-            </Text>
-          </View>
-        </View>
-      </View>
-      <View>
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          disabled={false}
-          ellipsizeMode="tail"
-        >
-          CONFIRM PASSWORD
-        </Text>
-        <TextInput
-          autoCapitalize="none"
-          autoCorrect={false}
-          editable={true}
-          keyboardType={undefined}
-          onChangeText={[Function]}
-          onSubmitEditing={[Function]}
-          returnKeyType={undefined}
-          secureTextEntry={true}
-          value="fkldsflkjdf"
-        />
-        <View>
-          <View
-            accessibilityComponentType={undefined}
-            accessibilityLabel={undefined}
-            accessibilityTraits={undefined}
-            accessible={true}
-            collapsable={undefined}
-            hitSlop={
-              Object {
-                "bottom": 10,
-                "left": 10,
-                "right": 10,
-                "top": 10,
-              }
-            }
-            isTVSelectable={true}
-            nativeID={undefined}
-            onLayout={undefined}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
-            testID={undefined}
-            tvParallaxProperties={undefined}
-          >
-            <Text
-              accessible={true}
-              allowFontScaling={false}
-              disabled={false}
-              ellipsizeMode="tail"
-              style={
-                Array [
-                  Object {
-                    "color": undefined,
-                    "fontSize": 12,
-                  },
-                  undefined,
-                  Object {
-                    "fontFamily": "Entypo",
-                    "fontStyle": "normal",
-                    "fontWeight": "normal",
-                  },
-                ]
-              }
-            >
-              
-            </Text>
-          </View>
-        </View>
-        <View>
-          <View>
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              disabled={false}
-              ellipsizeMode="tail"
-            >
-              needs to match
-            </Text>
-          </View>
-        </View>
-      </View>
+      <SettingControl
+        autoCapitalize="none"
+        autoCorrect={false}
+        error="bad email"
+        keyboardType="email-address"
+        label="EMAIL"
+        onChange={[Function]}
+        theme={
+          Object {
+            "control": Object {
+              "marginBottom": 3,
+            },
+            "error": Object {
+              "paddingBottom": 10,
+              "paddingVertical": 0,
+            },
+            "hideErrorTriangle": true,
+            "label": Object {
+              "color": "#c0c6cd",
+              "fontFamily": "Circular-Bold",
+              "fontSize": 10,
+              "marginBottom": 10,
+            },
+            "textInput": Object {
+              "borderBottomColor": "#c0c6cd",
+              "borderBottomWidth": 0.5,
+              "color": "#56667a",
+              "fontFamily": "Circular-Book",
+              "fontSize": 16,
+            },
+          }
+        }
+        value="aa@bbb.com"
+      />
+      <SettingControl
+        autoCapitalize="none"
+        autoCorrect={false}
+        error="needs to be longer"
+        label="PASSWORD"
+        onChange={[Function]}
+        theme={
+          Object {
+            "control": Object {
+              "marginBottom": 3,
+            },
+            "error": Object {
+              "paddingBottom": 10,
+              "paddingVertical": 0,
+            },
+            "hideErrorTriangle": true,
+            "label": Object {
+              "color": "#c0c6cd",
+              "fontFamily": "Circular-Bold",
+              "fontSize": 10,
+              "marginBottom": 10,
+            },
+            "textInput": Object {
+              "borderBottomColor": "#c0c6cd",
+              "borderBottomWidth": 0.5,
+              "color": "#56667a",
+              "fontFamily": "Circular-Book",
+              "fontSize": 16,
+            },
+          }
+        }
+        toggleSecureTextEntry={true}
+        value="hunkjnkjn"
+      />
+      <SettingControl
+        autoCapitalize="none"
+        autoCorrect={false}
+        error="needs to match"
+        label="CONFIRM PASSWORD"
+        onChange={[Function]}
+        theme={
+          Object {
+            "control": Object {
+              "marginBottom": 3,
+            },
+            "error": Object {
+              "paddingBottom": 10,
+              "paddingVertical": 0,
+            },
+            "hideErrorTriangle": true,
+            "label": Object {
+              "color": "#c0c6cd",
+              "fontFamily": "Circular-Bold",
+              "fontSize": 10,
+              "marginBottom": 10,
+            },
+            "textInput": Object {
+              "borderBottomColor": "#c0c6cd",
+              "borderBottomWidth": 0.5,
+              "color": "#56667a",
+              "fontFamily": "Circular-Book",
+              "fontSize": 16,
+            },
+          }
+        }
+        toggleSecureTextEntry={true}
+        value="fkldsflkjdf"
+      />
       <View
         accessibilityComponentType={undefined}
         accessibilityLabel={undefined}

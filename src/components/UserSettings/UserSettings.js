@@ -59,7 +59,6 @@ export default class UserSettings extends React.Component {
 
   cancelPassword = () => {
     const changed = this.state.edits.email !== this.props.currentUser.email
-    console.log('changed', changed)
     this.setState({
       editingPassword: false,
       edits: {
