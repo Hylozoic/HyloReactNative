@@ -58,6 +58,7 @@ export default class UserSettings extends React.Component {
   }
 
   cancelPassword = () => {
+    const changed = this.state.edits.email !== this.props.currentUser.email
     this.setState({
       editingPassword: false,
       edits: {
@@ -69,7 +70,8 @@ export default class UserSettings extends React.Component {
         ...this.state.errors,
         password: null,
         confirmPassword: null
-      }
+      },
+      changed
     })
   }
 
@@ -116,10 +118,10 @@ export default class UserSettings extends React.Component {
     if (this.state.changed) {
       Alert.alert(
         'You have unsaved changes',
-        'Are you sure you want to leave?',
+        'Are you sure you want to discard your changes?',
         [
-          {text: 'Leave', onPress: onLeave},
-          {text: 'Cancel', style: 'cancel'}
+          {text: 'Discard', onPress: onLeave},
+          {text: 'Continue Editing', style: 'cancel'}
         ])
     } else {
       onLeave()
