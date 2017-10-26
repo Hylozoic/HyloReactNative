@@ -3,12 +3,12 @@ import {
   signup,
   getUserSettings,
   getSignupErrors,
+  setSignupStep1Complete,
   updateUserSettings,
   updateLocalUserSettings,
   SIGNUP,
   UPDATE_USER_SETTINGS
 } from '../SignupFlow.store.js'
-import fetchCurrentUser from '../../../store/actions/fetchCurrentUser'
 import getMe from '../../../store/selectors/getMe'
 import { pick, omitBy, isNil } from 'lodash/fp'
 
@@ -36,14 +36,14 @@ export function mapDispatchToProps (dispatch, props) {
     changeSetting: (setting, value) => dispatch(updateLocalUserSettings({[setting]: value})),
     updateLocalUserSettings: settings => dispatch(updateLocalUserSettings(settings)),
     updateUserSettings: settings => dispatch(updateUserSettings(settings)),
-    fetchCurrentUser: () => dispatch(fetchCurrentUser())
+    setSignupStep1Complete: payload => dispatch(setSignupStep1Complete(payload))
   }
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
   const goToNext = () => ownProps.navigation.navigate('SignupFlow2')
   const { name, email, password, currentUser, showPasswordField } = stateProps
-  const { signup, updateUserSettings, updateLocalUserSettings } = dispatchProps
+  const { signup, updateUserSettings, updateLocalUserSettings, setSignupStep1Complete } = dispatchProps
   const saveFunc = currentUser ? updateUserSettings : signup
 
   const loadUserSettings = currentUser
@@ -59,6 +59,9 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
   }))
   .then(({ error }) => {
     if (error) return
+    // this is a consequence of SignupFlow1 having two modes (already have a user or creating one),
+    // and SessionCheck needs to be able to distinguish between them
+    setSignupStep1Complete(true)
     return goToNext()
   })
 

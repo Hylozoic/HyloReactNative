@@ -1,13 +1,4 @@
-import React from 'react'
+import component from './NotificationsIcon'
+import connector from './NotificationsIcon.connector'
 
-import BadgedIcon from '../../../BadgedIcon'
-import styles from '../Header.styles'
-
-export default function NotificationsIcon ({ hasUnreadNotifications, showNotifications }) {
-  return <BadgedIcon
-    name='Notifications'
-    onPress={showNotifications}
-    showBadge={hasUnreadNotifications}
-    style={styles.icon}
-  />
-}
+export default connector(component)
