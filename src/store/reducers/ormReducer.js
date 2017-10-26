@@ -2,7 +2,7 @@ import {
   UPDATE_USER_SETTINGS_PENDING
 } from '../actions/updateUserSettings'
 import {
-  SIGNUP, ADD_SKILL, REMOVE_SKILL
+  ADD_SKILL, REMOVE_SKILL
 } from '../../components/SignupFlow/SignupFlow.store'
 import {
   CREATE_COMMENT
@@ -14,7 +14,7 @@ import {
   MARK_ACTIVITY_READ, MARK_ALL_ACTIVITIES_READ, UPDATE_NEW_NOTIFICATION_COUNT_PENDING
 } from '../../components/NotificationsList/NotificationsList.store'
 import {
-  RECEIVE_MESSAGE, RECEIVE_NOTIFICATION, RECEIVE_THREAD
+  RECEIVE_NOTIFICATION
 } from '../../components/SocketListener/SocketListener.store'
 import {
   CREATE_MESSAGE, CREATE_MESSAGE_PENDING
@@ -25,6 +25,9 @@ import {
 import {
   USE_INVITATION
 } from '../../components/JoinCommunity/JoinCommunity.store'
+import {
+  DELETE_COMMENT_PENDING
+} from '../../components/Comment/Comment.store'
 import {
   UPDATE_LAST_VIEWED_PENDING
 } from '../../components/ThreadList/ThreadList.store'
@@ -147,6 +150,11 @@ export default function ormReducer (state = {}, action) {
     case USE_INVITATION:
       me = session.Me.first()
       me.updateAppending({memberships: [payload.data.useInvitation.membership.id]})
+      break
+
+    case DELETE_COMMENT_PENDING:
+      const comment = session.Comment.withId(meta.id)
+      comment.delete()
       break
 
     case UPDATE_LAST_VIEWED_PENDING:

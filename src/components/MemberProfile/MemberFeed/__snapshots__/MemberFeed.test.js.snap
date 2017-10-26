@@ -2,7 +2,7 @@
 
 exports[`ContentRow shows a Comment when itemType is comment 1`] = `
 <View>
-  <Comment
+  <Connect(Comment)
     comment={
       Object {
         "id": 2,
