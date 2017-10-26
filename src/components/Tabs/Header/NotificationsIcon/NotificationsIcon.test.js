@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
-import NotificationsIcon from './index'
+import NotificationsIcon from './NotificationsIcon'
 
 it('matches the last snapshot', () => {
   const renderer = new ReactShallowRenderer()

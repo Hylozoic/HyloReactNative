@@ -27,6 +27,7 @@ Object {
   "Search": Object {},
   "SignupFlow": Object {
     "errors": Object {},
+    "signupStep1Complete": false,
     "skill": "",
     "userSettings": Object {
       "avatarUrl": "",

@@ -50,5 +50,7 @@ Object {
   "loading": false,
   "loggedIn": true,
   "pending": false,
+  "signupInProgress": undefined,
+  "signupStep1Complete": undefined,
 }
 `;

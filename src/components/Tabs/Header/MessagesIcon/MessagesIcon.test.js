@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
-import MessagesIcon from './index'
+import MessagesIcon from './MessagesIcon'
 
 describe('MessagesIcon', () => {
   it('renders correctly', () => {

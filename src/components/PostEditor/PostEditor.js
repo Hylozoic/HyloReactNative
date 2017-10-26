@@ -94,8 +94,7 @@ export default class PostEditor extends React.Component {
           </View>
 
           <SectionLabel>Details</SectionLabel>
-          <TouchableOpacity style={[styles.textInputWrapper, styles.section]}
-            hitSlop={{top: 10, bottom: 10}}
+          <TouchableOpacity style={[styles.textInputWrapper, styles.section, styles.details]}
             onPress={() => !isSaving && editDetails()}>
             <Details details={details} placeholder={detailsPlaceholder} />
           </TouchableOpacity>

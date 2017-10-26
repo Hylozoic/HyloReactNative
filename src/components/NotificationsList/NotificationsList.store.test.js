@@ -13,6 +13,10 @@ describe('action creators', () => {
   it('matches the last snapshot from markAllActivitiesRead', () => {
     expect(store.markAllActivitiesRead()).toMatchSnapshot()
   })
+
+  it('matches the last snapshot from updateNewNotificationCount', () => {
+    expect(store.updateNewNotificationCount()).toMatchSnapshot()
+  })
 })
 
 describe('presentedText', () => {
@@ -180,27 +184,27 @@ describe('selectors/refiners', () => {
   describe('refineNotification', () => {
     it('sets avatarSeparator between read and unread', () => {
       const notifications = session.Notification.all().toModelArray()
-      const actual = store.refineNotification(navigation)(notifications[0], 0, notifications)       
+      const actual = store.refineNotification(navigation)(notifications[0], 0, notifications)
       expect(actual.avatarSeparator).toBe(true)
     })
 
     it('does not set avatarSeparator between read and read', () => {
       session.Activity.all().update({ unread: false })
       const notifications = session.Notification.all().toModelArray()
-      const actual = store.refineNotification(navigation)(notifications[0], 0, notifications)       
+      const actual = store.refineNotification(navigation)(notifications[0], 0, notifications)
       expect(actual.avatarSeparator).toBe(false)
     })
 
     it('does not set avatarSeparator between unread and unread', () => {
       session.Activity.all().update({ unread: true })
       const notifications = session.Notification.all().toModelArray()
-      const actual = store.refineNotification(navigation)(notifications[0], 0, notifications)       
+      const actual = store.refineNotification(navigation)(notifications[0], 0, notifications)
       expect(actual.avatarSeparator).toBe(false)
     })
 
     it('matches the last snapshot', () => {
       const notifications = session.Notification.all().toModelArray()
-      const actual = store.refineNotification(navigation)(notifications[0], 0, notifications)       
+      const actual = store.refineNotification(navigation)(notifications[0], 0, notifications)
       expect(actual.avatarSeparator).toMatchSnapshot()
     })
   })
