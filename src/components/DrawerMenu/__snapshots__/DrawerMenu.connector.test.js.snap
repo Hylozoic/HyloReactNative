@@ -19,14 +19,14 @@ Object {
 
 exports[` 2`] = `
 Object {
-  "changeCommunity": [Function],
+  "selectCommunity": [Function],
   "logout": [Function],
 }
 `;
 
 exports[` 3`] = `
 Object {
-  "changeCommunity": [Function],
+  "selectCommunity": [Function],
   "currentUser": Object {
     "id": "anyid",
   },

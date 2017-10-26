@@ -3,7 +3,7 @@
 exports[`goToCommunityFromRoot 1`] = `
 Object {
   "payload": "anycommunityid",
-  "type": "CHANGE_COMMUNITY",
+  "type": "SELECT_COMMUNITY",
 }
 `;
 

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`on CHANGE_COMMUNITY returns the payload 1`] = `
+exports[`on SELECT_COMMUNITY returns the payload 1`] = `
 Object {
   "id": 1,
   "name": "moon",

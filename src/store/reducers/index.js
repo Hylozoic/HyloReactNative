@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import currentCommunity from './currentCommunity'
+import currentNetworkAndCommunity from './currentNetworkAndCommunity'
 import ormReducer from './ormReducer'
 import pending from './pending'
 import { persist } from './persistence'
@@ -23,7 +23,7 @@ export const combinedReducers = combineReducers({
   session: sessionReducer,
   pending,
   queryResults,
-  currentCommunity,
+  currentNetworkAndCommunity,
   FeedList,
   PostEditor,
   Members,

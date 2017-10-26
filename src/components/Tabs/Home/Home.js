@@ -25,8 +25,8 @@ export default class Home extends React.Component {
   }
 
   render () {
-    const { navigation, communityId, currentUser } = this.props
+    const { navigation, communityId, networkId, currentUser } = this.props
     if (!currentUser) return <Loading style={{flex: 1}} />
-    return <Feed navigation={navigation} communityId={communityId} />
+    return <Feed navigation={navigation} communityId={communityId} networkId={networkId} />
   }
 }

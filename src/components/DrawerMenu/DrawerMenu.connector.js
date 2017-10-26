@@ -4,7 +4,8 @@ import getMe from '../../store/selectors/getMe'
 import getMemberships from '../../store/selectors/getMemberships'
 import getCurrentCommunityId from '../../store/selectors/getCurrentCommunityId'
 import { logout } from '../Login/actions'
-import changeCommunity from '../../store/actions/changeCommunity'
+import selectCommunity from '../../store/actions/selectCommunity'
+import selectNetwork from '../../store/actions/selectNetwork'
 import { ALL_COMMUNITIES_ID } from '../../store/models/Community'
 
 export function partitionCommunities (memberships) {
@@ -62,7 +63,8 @@ export function mapStateToProps (state, props) {
 
 export const mapDispatchToProps = {
   logout,
-  changeCommunity
+  selectCommunity,
+  selectNetwork
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
@@ -73,11 +75,12 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     ...dispatchProps,
     ...ownProps,
     goToCommunity: community => {
-      dispatchProps.changeCommunity(community.id)
+      dispatchProps.selectCommunity(community.id)
       navigation.navigate('DrawerClose')
     },
     goToNetwork: network => {
-      navigation.navigate('Feed', {networkId: network.id})
+      dispatchProps.selectNetwork(network.id)
+      navigation.navigate('DrawerClose')
     },
     showSettings: () => {
       navigation.navigate('UserSettings', {name})

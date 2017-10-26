@@ -37,7 +37,6 @@ export default class Feed extends Component {
       topicSubscribed,
       toggleTopicSubscribe
     } = this.props
-
     return <View style={styles.container}>
       <FeedList
         community={community}

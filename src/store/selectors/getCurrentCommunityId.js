@@ -3,6 +3,6 @@ import getMe from './getMe'
 
 export default function (state, props) {
   const currentUser = getMe(state)
-  return state.currentCommunity ||
+  return get('communityId', state.currentNetworkAndCommunity) ||
     (currentUser && get('id', currentUser.lastViewedCommunity()))
 }
