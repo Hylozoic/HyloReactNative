@@ -9,8 +9,8 @@ import { find, get, isEmpty } from 'lodash/fp'
 
 export default class FeedList extends Component {
   fetchOrShowCached () {
-    const { hasMore, posts, fetchPosts } = this.props
-    if (isEmpty(posts) && hasMore !== false) fetchPosts()
+    const { hasMore, posts, fetchPosts, pending } = this.props
+    if (isEmpty(posts) && hasMore !== false && !pending) fetchPosts()
   }
 
   componentDidMount () {

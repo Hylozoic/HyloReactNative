@@ -98,14 +98,14 @@ const TabNavigatorWithBar = TabNavigator(
 )
 
 const drawerNavigatorRoutes = {
-  Home: {
+  DrawerHome: {
     screen: createLinkingAwareContainer(TabNavigatorWithBar, urlPrefix)
   }
 }
 
 const drawerNavigatorConfig = {
   contentComponent: DrawerMenu,
-  initialRouteName: 'Home',
+  initialRouteName: 'DrawerHome',
   drawerWidth: Dimensions.get('window').width * 0.9
 }
 
