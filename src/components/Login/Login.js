@@ -82,7 +82,7 @@ export default class Login extends React.Component {
   }
 
   render () {
-    const { loginWithGoogle, loginWithFacebook, pending, goToSignup } = this.props
+    const { loginWithGoogle, loginWithFacebook, pending, goToSignup, hasSignupLink } = this.props
     const { ssoError, error, emailError, passwordError, emailIsValid, isConnected } = this.state
     return <ScrollView contentContainerStyle={styles.login} style={styles.container}>
       {ssoError && <Text style={styles.errorBanner}>{ssoError}</Text>}
@@ -160,16 +160,19 @@ export default class Login extends React.Component {
           createErrorNotification={this.createErrorNotification}
           />
       </View>
-      <View style={styles.signup}>
-        <Text style={styles.helpText}>Dont have an account? </Text>
-        <TouchableOpacity onPress={goToSignup}>
-          <Text style={styles.signupText}>Sign up now</Text>
-        </TouchableOpacity>
-      </View>
+      {hasSignupLink && <SignupLink goToSignup={goToSignup} /> }
     </ScrollView>
   }
 }
 
+export function SignupLink ({goToSignup}) {
+  return <View style={styles.signup}>
+    <Text style={styles.helpText}>Dont have an account? </Text>
+    <TouchableOpacity onPress={goToSignup}>
+      <Text style={styles.signupText}>Sign up now</Text>
+    </TouchableOpacity>
+  </View>
+}
 export function FormError ({message, position}) {
   const rowStyle = position === 'top' ? styles.emailErrorRow : styles.passwordErrorRow
   const triangleStyle = position === 'top' ? styles.emailTriangle : styles.passwordTriangle

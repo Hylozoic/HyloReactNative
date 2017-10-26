@@ -73,6 +73,7 @@ Object {
   "emailError": false,
   "error": "blah",
   "goToSignup": [Function],
+  "hasSignupLink": false,
   "passwordError": false,
   "pending": undefined,
 }

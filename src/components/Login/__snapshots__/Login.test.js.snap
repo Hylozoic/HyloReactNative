@@ -131,30 +131,6 @@ exports[`Login renders correctly 1`] = `
       onLoginFinished={undefined}
     />
   </View>
-  <View>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      disabled={false}
-      ellipsizeMode="tail"
-    >
-      Dont have an account? 
-    </Text>
-    <TouchableOpacity
-      activeOpacity={0.2}
-      focusedOpacity={0.7}
-      onPress={[Function]}
-    >
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        disabled={false}
-        ellipsizeMode="tail"
-      >
-        Sign up now
-      </Text>
-    </TouchableOpacity>
-  </View>
 </ScrollViewMock>
 `;
 
@@ -272,30 +248,6 @@ exports[`Login renders with email error 1`] = `
       createErrorNotification={[Function]}
       onLoginFinished={undefined}
     />
-  </View>
-  <View>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      disabled={false}
-      ellipsizeMode="tail"
-    >
-      Dont have an account? 
-    </Text>
-    <TouchableOpacity
-      activeOpacity={0.2}
-      focusedOpacity={0.7}
-      onPress={undefined}
-    >
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        disabled={false}
-        ellipsizeMode="tail"
-      >
-        Sign up now
-      </Text>
-    </TouchableOpacity>
   </View>
 </ScrollViewMock>
 `;
@@ -415,30 +367,6 @@ exports[`Login renders with no network connection error 1`] = `
       onLoginFinished={undefined}
     />
   </View>
-  <View>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      disabled={false}
-      ellipsizeMode="tail"
-    >
-      Dont have an account? 
-    </Text>
-    <TouchableOpacity
-      activeOpacity={0.2}
-      focusedOpacity={0.7}
-      onPress={undefined}
-    >
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        disabled={false}
-        ellipsizeMode="tail"
-      >
-        Sign up now
-      </Text>
-    </TouchableOpacity>
-  </View>
 </ScrollViewMock>
 `;
 
@@ -556,30 +484,6 @@ exports[`Login renders with password error 1`] = `
       createErrorNotification={[Function]}
       onLoginFinished={undefined}
     />
-  </View>
-  <View>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      disabled={false}
-      ellipsizeMode="tail"
-    >
-      Dont have an account? 
-    </Text>
-    <TouchableOpacity
-      activeOpacity={0.2}
-      focusedOpacity={0.7}
-      onPress={undefined}
-    >
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        disabled={false}
-        ellipsizeMode="tail"
-      >
-        Sign up now
-      </Text>
-    </TouchableOpacity>
   </View>
 </ScrollViewMock>
 `;
@@ -706,30 +610,6 @@ exports[`Login renders with pending banner 1`] = `
       createErrorNotification={[Function]}
       onLoginFinished={undefined}
     />
-  </View>
-  <View>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      disabled={false}
-      ellipsizeMode="tail"
-    >
-      Dont have an account? 
-    </Text>
-    <TouchableOpacity
-      activeOpacity={0.2}
-      focusedOpacity={0.7}
-      onPress={undefined}
-    >
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        disabled={false}
-        ellipsizeMode="tail"
-      >
-        Sign up now
-      </Text>
-    </TouchableOpacity>
   </View>
 </ScrollViewMock>
 `;

@@ -14,7 +14,8 @@ export function mapStateToProps (state, props) {
     passwordError,
     pending,
     defaultEmail: state.session.defaultLoginEmail,
-    goToSignup
+    goToSignup,
+    hasSignupLink: !!state.session.entryURL
   }
 }
 
