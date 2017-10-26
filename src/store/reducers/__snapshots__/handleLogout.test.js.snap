@@ -41,6 +41,9 @@ Object {
     "userSkills": Array [],
   },
   "SocketListener": Object {},
+  "TabBar": Object {
+    "isVisible": true,
+  },
   "currentCommunity": null,
   "orm": Object {
     "Activity": Object {
