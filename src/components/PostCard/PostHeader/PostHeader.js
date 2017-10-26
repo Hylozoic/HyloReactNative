@@ -18,8 +18,8 @@ export default class PostHeader extends Component {
   }
 
   render () {
-    let {
-      creator: {avatarUrl, name, tagline, id},
+    const {
+      creator,
       date,
       type,
       communities,
@@ -61,14 +61,14 @@ export default class PostHeader extends Component {
 
     return <View style={styles.container}>
       <View style={styles.avatarSpacing}>
-        <TouchableOpacity onPress={() => showMember(id)}>
-          <Avatar avatarUrl={avatarUrl} />
+        <TouchableOpacity onPress={() => showMember(creator.id)}>
+          {creator.avatarUrl && <Avatar avatarUrl={creator.avatarUrl} />}
         </TouchableOpacity>
       </View>
       <View style={styles.meta}>
-        <TouchableOpacity onPress={() => showMember(id)}>
-          <Text style={styles.username}>{name}</Text>
-          {!!tagline && <Text style={styles.metaText}>{tagline}</Text>}
+        <TouchableOpacity onPress={() => showMember(creator.id)}>
+          <Text style={styles.username}>{creator.name}</Text>
+          {!!creator.tagline && <Text style={styles.metaText}>{creator.tagline}</Text>}
         </TouchableOpacity>
         <View style={styles.dateRow}>
           <Text style={styles.metaText}>{humanDate(date)}</Text>
