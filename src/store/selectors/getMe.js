@@ -1,3 +1,7 @@
+/**
+ * @providesModule store/selectors/getMe
+ */
+
 import { createSelector as ormCreateSelector } from 'redux-orm'
 import orm from '../../store/models'
 
