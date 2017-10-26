@@ -2,7 +2,6 @@ import LoginNavigator from './index'
 import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 
-jest.mock('react-native-aws3')
 jest.mock('react-native-device-info')
 
 it('has the expected shape', () => {

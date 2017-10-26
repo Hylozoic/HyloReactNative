@@ -25,7 +25,6 @@
     "prop-types": "^15.5.10",
     "react": "16.0.0-alpha.12",
     "react-native": "^0.46.4",
-    "react-native-aws3": "^0.0.8",
     "react-native-background-timer": "^1.2.0",
     "react-native-device-info": "^0.12.1",
     "react-native-fbsdk": "^0.6.0",

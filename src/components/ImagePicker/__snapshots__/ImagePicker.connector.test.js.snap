@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`works as expected 1`] = `
+Object {
+  "payload": Request {
+    "_formData": mockFormData {
+      "append": [Function],
+    },
+    "_promise": Promise {
+      "_40": 0,
+      "_55": null,
+      "_65": 0,
+      "_72": null,
+    },
+    "_xhr": mockXMLHttpRequest {
+      "onerror": [Function],
+      "onload": [Function],
+      "open": [Function],
+      "responseText": "{\\"url\\": \\"https://images.hylo.com/bar.jpg\\"}",
+      "status": 200,
+    },
+  },
+  "type": "UPLOAD",
+}
+`;
