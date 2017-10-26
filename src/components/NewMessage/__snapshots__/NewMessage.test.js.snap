@@ -58,7 +58,6 @@ exports[`NewMessage renders correctly 1`] = `
     initialNumToRender={10}
     keyExtractor={[Function]}
     maxToRenderPerBatch={10}
-    onEndReached={undefined}
     onEndReachedThreshold={0.3}
     renderItem={[Function]}
     renderScrollComponent={[Function]}
@@ -80,21 +79,6 @@ exports[`NewMessage renders correctly 1`] = `
           ],
           "label": "Recent",
           "loading": true,
-        },
-        Object {
-          "data": Array [
-            Object {
-              "id": 4,
-            },
-            Object {
-              "id": 5,
-            },
-            Object {
-              "id": 6,
-            },
-          ],
-          "label": "All Contacts",
-          "loading": false,
         },
       ]
     }
@@ -147,7 +131,6 @@ exports[`NewMessage renders correctly 2`] = `
     initialNumToRender={10}
     keyExtractor={[Function]}
     maxToRenderPerBatch={10}
-    onEndReached={undefined}
     onEndReachedThreshold={0.3}
     renderItem={[Function]}
     renderScrollComponent={[Function]}

@@ -14,7 +14,6 @@ describe('NewMessage', () => {
   it('renders correctly', () => {
     const renderer = new ReactShallowRenderer()
     const recentContacts = [{id: 1}, {id: 2}, {id: 3}]
-    const allContacts = [{id: 4}, {id: 5}, {id: 6}]
     const suggestions = [{id: 7}, {id: 8}, {id: 9}]
     const participants = [{id: 10}, {id: 11}, {id: 12}]
     const currentUser = {id: 1}
@@ -28,7 +27,6 @@ describe('NewMessage', () => {
 
     renderer.render(<NewMessage
       recentContacts={recentContacts}
-      allContacts={allContacts}
       suggestions={suggestions}
       currentUser={currentUser}
       participants={participants}
@@ -49,7 +47,6 @@ describe('NewMessage', () => {
 
     renderer.render(<NewMessage
       recentContacts={recentContacts}
-      allContacts={allContacts}
       suggestions={suggestions}
       currentUser={currentUser}
       participants={participants}
@@ -70,30 +67,25 @@ describe('NewMessage', () => {
 
   it('calls the right functions on mount', () => {
     const props = {
-      fetchContacts: jest.fn(),
       fetchRecentContacts: jest.fn(),
       loadParticipantsFromParams: jest.fn(),
       pending: {},
       participants: [],
       recentContacts: [],
-      allContacts: [],
       suggestions: []
     }
     ReactTestRenderer.create(<NewMessage {...props} />).getInstance()
-    expect(props.fetchContacts).toHaveBeenCalled()
     expect(props.fetchRecentContacts).toHaveBeenCalled()
     expect(props.loadParticipantsFromParams).toHaveBeenCalled()
   })
 
   describe('onBlurMessageInput', () => {
     const props = {
-      fetchContacts: () => {},
       fetchRecentContacts: () => {},
       loadParticipantsFromParams: () => {},
       pending: {},
       participants: [],
       recentContacts: [],
-      allContacts: [],
       suggestions: [],
       mockViewKey: 1
     }

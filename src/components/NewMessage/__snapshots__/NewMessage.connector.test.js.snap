@@ -4,7 +4,6 @@ exports[`mapDispatchToProps matches the last snapshot 1`] = `
 Object {
   "addParticipant": [Function],
   "createMessage": [Function],
-  "fetchContacts": [Function],
   "fetchRecentContacts": [Function],
   "fetchSuggestions": [Function],
   "findOrCreateThread": [Function],
@@ -18,7 +17,6 @@ Object {
 
 exports[`mapStateToProps returns the right keys and gets the pending values 1`] = `
 Object {
-  "allContacts": Array [],
   "message": "",
   "participantIds": Array [],
   "participantInputText": "",
