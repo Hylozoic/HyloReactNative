@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import getMe from '../../store/selectors/getMe'
 import fetchThreads, { FETCH_THREADS } from '../../store/actions/fetchThreads'
-import { getThreads, getThreadsHasMore } from './ThreadList.store'
+import { getThreads, getThreadsHasMore, updateLastViewed } from './ThreadList.store'
 import { get } from 'lodash/fp'
 
 export function mapStateToProps (state, props) {
@@ -21,14 +21,18 @@ export function mapDispatchToProps (dispatch, { navigation }) {
     fetchThreads: (first, offset) => dispatch(fetchThreads(first, offset)),
     showThread: threadOrId => navigation.navigate('Thread', {
       id: get('id', threadOrId) || threadOrId
-    })
+    }),
+    updateLastViewed: () => dispatch(updateLastViewed())
   }
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
   const { threads, hasMore } = stateProps
 
-  const fetchThreads = () => dispatchProps.fetchThreads(10)
+  const fetchThreads = () => {
+    dispatchProps.fetchThreads(10)
+    dispatchProps.updateLastViewed()
+  }
 
   const fetchMoreThreads =
     hasMore

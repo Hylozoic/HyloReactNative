@@ -1,8 +1,7 @@
-import { humanDate } from 'hylo-utils/text'
 import { createSelector } from 'reselect'
 import { createSelector as ormCreateSelector } from 'redux-orm'
 import { get, find, pick } from 'lodash/fp'
-import { present, sanitize } from 'hylo-utils/text'
+import { present, sanitize, humanDate } from 'hylo-utils/text'
 import { decode } from 'ent'
 import striptags from 'striptags'
 
@@ -17,9 +16,12 @@ import {
   ACTION_COMMENT_MENTION
 } from '../../store/models/Notification'
 
-export const FETCH_NOTIFICATIONS = 'NotificationsList/FETCH_NOTIFICATIONS'
-export const MARK_ACTIVITY_READ = 'NotificationsList/MARK_ACTIVITY_READ'
-export const MARK_ALL_ACTIVITIES_READ = 'NotificationsList/MARK_ALL_ACTIVITIES_READ'
+export const MODULE_NAME = 'NotificationsList'
+export const FETCH_NOTIFICATIONS = `${MODULE_NAME}/FETCH_NOTIFICATIONS`
+export const MARK_ACTIVITY_READ = `${MODULE_NAME}/MARK_ACTIVITY_READ`
+export const MARK_ALL_ACTIVITIES_READ = `${MODULE_NAME}/MARK_ALL_ACTIVITIES_READ`
+export const UPDATE_NEW_NOTIFICATION_COUNT = `${MODULE_NAME}/UPDATE_NEW_NOTIFICATION_COUNT`
+export const UPDATE_NEW_NOTIFICATION_COUNT_PENDING = `${UPDATE_NEW_NOTIFICATION_COUNT}_PENDING`
 
 export const NOTIFICATION_TEXT_MAX = 100
 
@@ -103,6 +105,27 @@ export function markAllActivitiesRead () {
           success
         }
       }`
+    },
+    meta: {
+      optimistic: true
+    }
+  }
+}
+
+export function updateNewNotificationCount () {
+  return {
+    type: UPDATE_NEW_NOTIFICATION_COUNT,
+    graphql: {
+      query: `mutation ($changes: MeInput) {
+        updateMe(changes: $changes) {
+          id
+        }
+      }`,
+      variables: {
+        changes: {
+          newNotificationCount: 0
+        }
+      }
     },
     meta: {
       optimistic: true

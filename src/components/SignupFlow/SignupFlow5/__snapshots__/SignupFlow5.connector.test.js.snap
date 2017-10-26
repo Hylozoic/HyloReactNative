@@ -73,6 +73,9 @@ Array [
 exports[`mergeProps merges the props 4`] = `
 Array [
   Array [
+    "Home",
+  ],
+  Array [
     "SignupFlow1",
   ],
 ]

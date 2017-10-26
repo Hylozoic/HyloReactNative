@@ -1,6 +1,6 @@
 import { mapStateToProps, mapDispatchToProps } from './SessionCheck.connector.js'
-import registerDevice from '../../store/actions/registerDevice'
 import { addEventListener, registerForPushNotifications } from 'react-native-onesignal'
+import { MODULE_NAME as SignupFlowStoreKey } from '../SignupFlow/SignupFlow.store'
 
 jest.mock('react-native-device-info')
 jest.mock('react-native-onesignal', () => ({
@@ -17,7 +17,8 @@ describe('mapStateToProps', () => {
         loggedIn: true,
         entryURL: 'http://www.hylo.com/a/path'
       },
-      pending: {}
+      pending: {},
+      [SignupFlowStoreKey]: {}
     }
     expect(mapStateToProps(defaultState)).toMatchSnapshot()
   })

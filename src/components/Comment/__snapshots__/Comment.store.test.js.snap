@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`deleteComment 1`] = `
+Object {
+  "graphql": Object {
+    "query": "mutation ($id: ID) {
+        deleteComment(id: $id) {
+          success
+        }
+      }",
+    "variables": Object {
+      "id": 10,
+    },
+  },
+  "meta": Object {
+    "id": 10,
+    "optimistic": true,
+  },
+  "type": "Comment/DELETE_COMMENT",
+}
+`;

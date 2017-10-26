@@ -3,6 +3,7 @@ import {
   View,
   Text,
   Image,
+  ImageBackground,
   TouchableOpacity,
   ScrollView
 } from 'react-native'
@@ -22,8 +23,12 @@ export default class Signup extends React.Component {
   render () {
     const { goToSignupFlow, goToLogin, error, loginWithFacebook, loginWithGoogle } = this.props
     return <ScrollView contentContainerStyle={styles.container}>
-      <View style={styles.merkabaWrapper}><Image source={merkabaImage} style={styles.merkabaImage} /></View>
-      <Image source={backgroundImage} resizeMode='stretch' style={styles.backgroundImage} />
+      <ImageBackground
+        source={backgroundImage}
+        style={styles.background}
+        imageStyle={styles.backgroundImage}>
+        <Image source={merkabaImage} style={styles.merkabaImage} />
+      </ImageBackground>
       <View style={styles.paddedContainer}>
         <Text style={styles.title}>Sign up to get started with Hylo</Text>
         {error && <View style={styles.errorWrapper}><Text style={styles.error}>{error}</Text></View>}
