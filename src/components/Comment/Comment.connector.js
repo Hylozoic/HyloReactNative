@@ -31,7 +31,7 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     ...stateProps,
     ...dispatchProps,
     ...ownProps,
-    deleteComment: deleteComment
+    deleteComment
   }
 }
 
