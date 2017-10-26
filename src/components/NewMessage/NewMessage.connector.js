@@ -8,9 +8,7 @@ import {
   getParticipants,
   getParticipantIds,
   fetchSuggestions,
-  fetchContacts,
   fetchRecentContacts,
-  getContacts,
   getRecentContacts,
   getSuggestions,
   createMessage,
@@ -23,7 +21,7 @@ import {
   FETCH_RECENT_CONTACTS
  } from './NewMessage.store.js'
 import { showLoadingModal } from '../LoadingModal/LoadingModal.store'
-import { isEmpty, get, debounce, throttle } from 'lodash/fp'
+import { isEmpty, get, debounce } from 'lodash/fp'
 
 export function mapStateToProps (state, props) {
   const participantInputText = getInputText(state, props)
@@ -36,7 +34,6 @@ export function mapStateToProps (state, props) {
 
   return {
     recentContacts: getRecentContacts(state, props),
-    allContacts: getContacts(state, props),
     participants: getParticipants(state, props),
     participantIds: getParticipantIds(state, props),
     suggestions: getSuggestions(state, {...props, autocomplete: participantInputText}),
@@ -50,8 +47,6 @@ export function mapDispatchToProps (dispatch, props) {
   return {
     fetchSuggestions: debounce(400, autocomplete =>
       dispatch(fetchSuggestions(autocomplete))),
-    fetchContacts: throttle(1000, (first, offset) =>
-      dispatch(fetchContacts(first, offset))),
     ...bindActionCreators({
       setParticipantInput,
       setParticipants,
@@ -68,7 +63,7 @@ export function mapDispatchToProps (dispatch, props) {
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
   const {
-    participantInputText, message, participantIds, suggestions, allContacts, pending
+    participantInputText, message, participantIds, suggestions
   } = stateProps
   const {
     showLoadingModal, findOrCreateThread
@@ -100,20 +95,13 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     ? () => dispatchProps.setParticipants(participantsFromParams)
     : () => {}
 
-  const offset = allContacts.length
-
-  const fetchMoreContacts = pending.all
-    ? () => {}
-    : () => dispatchProps.fetchContacts(10, offset)
-
   return {
     ...stateProps,
     ...dispatchProps,
     ...ownProps,
     fetchSuggestions,
     createMessage,
-    loadParticipantsFromParams,
-    fetchMoreContacts
+    loadParticipantsFromParams
   }
 }
 
