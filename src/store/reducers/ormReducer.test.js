@@ -12,6 +12,12 @@ import {
 import {
   USE_INVITATION
 } from '../../components/JoinCommunity/JoinCommunity.store'
+import {
+  UPDATE_LAST_VIEWED_PENDING
+} from '../../components/ThreadList/ThreadList.store'
+import {
+  UPDATE_NEW_NOTIFICATION_COUNT_PENDING
+} from '../../components/NotificationsList/NotificationsList.store'
 
 it('responds to an action with meta.extractModel', () => {
   const state = orm.getEmptyState()
@@ -189,5 +195,39 @@ describe('handles USE_INVITATION', () => {
     const newSession = orm.session(ormReducer(session.state, action))
     const membershipsAfterAction = newSession.Me.first().memberships
     expect(membershipsAfterAction.count()).toEqual(1)
+  })
+})
+
+describe('on UPDATE_LAST_VIEWED_PENDING', () => {
+  const session = orm.session(orm.getEmptyState())
+  session.Me.create({
+    id: '1',
+    unseenThreadCount: 11
+  })
+
+  const action = {
+    type: UPDATE_LAST_VIEWED_PENDING
+  }
+
+  it('sets Me.unseenThreadCount to 0', () => {
+    const newSession = orm.session(ormReducer(session.state, action))
+    expect(newSession.Me.first().unseenThreadCount).toEqual(0)
+  })
+})
+
+describe('on UPDATE_NEW_NOTIFICATION_COUNT_PENDING', () => {
+  const session = orm.session(orm.getEmptyState())
+  session.Me.create({
+    id: '1',
+    newNotificationCount: 11
+  })
+
+  const action = {
+    type: UPDATE_NEW_NOTIFICATION_COUNT_PENDING
+  }
+
+  it('sets Me.newNotificationCount to 0', () => {
+    const newSession = orm.session(ormReducer(session.state, action))
+    expect(newSession.Me.first().newNotificationCount).toEqual(0)
   })
 })

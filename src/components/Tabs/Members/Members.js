@@ -3,7 +3,6 @@ import {
   View, FlatList, Text, TouchableOpacity, TextInput, Image
 } from 'react-native'
 import Header from '../Header'
-import { updateBadges } from 'util/header'
 import Avatar from '../../Avatar'
 import PopupMenuButton from '../../PopupMenuButton'
 import Icon from '../../Icon'
@@ -23,19 +22,7 @@ export default class Members extends React.Component {
     if (isEmpty(members) && hasMore !== false) fetchMembers()
   }
 
-  componentDidMount () {
-    const { currentUser, navigation, screenProps } = this.props
-    if (screenProps.currentTabName === 'Members') {
-      updateBadges(navigation, currentUser)
-    }
-  }
-
   componentDidUpdate (prevProps) {
-    const { currentUser, navigation, screenProps } = this.props
-    if (screenProps.currentTabName === 'Members') {
-      updateBadges(navigation, currentUser, prevProps.currentUser)
-    }
-
     if (this.props.screenProps.currentTabName !== 'Members') {
       return
     }

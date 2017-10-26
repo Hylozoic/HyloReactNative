@@ -18,7 +18,7 @@ it('matches the last snapshot for mapStateToProps', () => {
   session.Person.create({ id: '1', avatarUrl: 'https://wombat.com', name: 'Wombat McAardvark' })
   session.Post.create({ id: '1', creator: '1' })
   const key = buildKey(FETCH_NOTIFICATIONS)
-  state = {
+  const state = {
     orm: session.state,
     pending: { [ FETCH_NOTIFICATIONS ]: false },
     queryResults: { [ key ]: { hasMore: false } }
@@ -29,7 +29,12 @@ it('matches the last snapshot for mapStateToProps', () => {
 })
 
 it('matches the last snapshot for mapDispatchToProps', () => {
-  const dispatch = () => {}
-  const props = { navigation: { navigate: () => {} } }
-  expect(mapDispatchToProps(dispatch, props)).toMatchSnapshot()
+  const dispatch = jest.fn()
+  const props = { navigation: { setParams: jest.fn() } }
+  const dispatchProps = mapDispatchToProps(dispatch, props)
+  expect(dispatchProps).toMatchSnapshot()
+  dispatchProps.setRightButton()
+  expect(props.navigation.setParams.mock.calls).toMatchSnapshot()
+  dispatchProps.updateNewNotificationCount()
+  expect(dispatch.mock.calls).toMatchSnapshot()
 })
