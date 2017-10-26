@@ -11,11 +11,12 @@ export default class NotificationsList extends Component {
     header(navigation, { left: 'close', title: 'Notifications' })
 
   componentDidMount () {
-    const { fetchNotifications, setRightButton } = this.props
+    const { fetchNotifications, setRightButton, updateNewNotificationCount } = this.props
     fetchNotifications()
+    updateNewNotificationCount()
     setRightButton()
   }
-  
+
   fetchMore = offset => this.props.fetchMore(offset)
 
   keyExtractor = item => item.id

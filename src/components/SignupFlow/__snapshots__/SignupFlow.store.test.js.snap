@@ -41,6 +41,13 @@ Object {
 }
 `;
 
+exports[`action generators setSignupStep1Complete matches snapshot 1`] = `
+Object {
+  "payload": true,
+  "type": "SignupFlow/SET_SIGNUP_STEP1_COMPLETE",
+}
+`;
+
 exports[`action generators setSkill matches snapshot 1`] = `
 Object {
   "payload": "Singing",

@@ -91,4 +91,43 @@ describe('FlagContent', () => {
     expect(submitFlagContent).toHaveBeenCalledWith('other', 'my reason', linkData)
     expect(onClose).toHaveBeenCalled()
   })
+
+  describe('cancel', () => {
+    it('sets the state and calls closeModal', () => {
+      const instance = TestRenderer.create(
+        <FlagContent type='post' />).getInstance()
+      instance.closeModal = jest.fn()
+      instance.setState({
+        highlightRequired: true
+      })
+      instance.cancel()
+      expect(instance.state.highlightRequired).toEqual(false)
+      expect(instance.closeModal).toHaveBeenCalled()
+    })
+  })
+
+  describe('isOptionalExplanation', () => {
+    it('works from param', () => {
+      const instance = TestRenderer.create(
+        <FlagContent type='post' />).getInstance()
+      instance.setState({
+        selectedCategory: 'Not other'
+      })
+      expect(instance.isOptionalExplanation('other')).toEqual(false)
+      expect(instance.isOptionalExplanation('fine')).toEqual(true)
+    })
+
+    it('works from state', () => {
+      const instance = TestRenderer.create(
+        <FlagContent type='post' />).getInstance()
+      instance.setState({
+        selectedCategory: 'other'
+      })
+      expect(instance.isOptionalExplanation()).toEqual(false)
+      instance.setState({
+        selectedCategory: 'fine'
+      })
+      expect(instance.isOptionalExplanation()).toEqual(true)
+    })
+  })
 })
