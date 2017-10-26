@@ -40,7 +40,7 @@ export default class SignupFlow2 extends React.Component {
       ? {uri: localUri}
       : avatarUrl && {uri: avatarUrl}
 
-    const imagePickerChildren = imageSource
+    const imagePickerChildren = imageSource && !imagePickerPending
       ? <Image style={styles.image} source={imageSource} />
       : <View style={styles.imagePickerBackground}>
         {imagePickerPending ? <Loading /> : <Icon name='AddImage' style={styles.cameraIcon} />}

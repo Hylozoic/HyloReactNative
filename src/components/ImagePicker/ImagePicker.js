@@ -63,8 +63,7 @@ export default class ImagePicker extends Component {
       } else {
         const file = {
           uri: result.uri,
-          name: result.fileName,
-          type: 'image/png'
+          name: result.fileName
         }
 
         return upload(type, id, file)
@@ -72,7 +71,7 @@ export default class ImagePicker extends Component {
           this.setPending(false)
 
           if (error) {
-            onError && onError(error)
+            onError && onError(payload.message)
           } else {
             onChoice({local: result.uri, remote: payload.url})
           }
@@ -82,7 +81,7 @@ export default class ImagePicker extends Component {
   }
 
   render () {
-    var { children, style, iconStyle } = this.props
+    let { children, style, iconStyle } = this.props
     const { pending } = this.state
 
     if (!children) {

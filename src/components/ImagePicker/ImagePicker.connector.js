@@ -4,7 +4,7 @@ import Request from './Request'
 
 const UPLOAD = 'UPLOAD'
 
-function upload (type, id, file) {
+export function upload (type, id, file) {
   const url = apiHost + '/noo/upload'
 
   const request = Request.create(url, 'POST')
