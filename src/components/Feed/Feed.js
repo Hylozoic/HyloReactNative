@@ -32,6 +32,7 @@ export default class Feed extends Component {
       showMember,
       showTopic,
       goToCommunity,
+      screenProps,
       topicName,
       topicSubscribed,
       toggleTopicSubscribe
@@ -47,6 +48,7 @@ export default class Feed extends Component {
         showCommunities={!community}
         goToCommunity={goToCommunity}
         topicName={topicName}
+        screenProps={screenProps}
         header={
           <FeedBanner
             community={community}

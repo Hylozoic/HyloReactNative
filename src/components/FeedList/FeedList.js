@@ -18,11 +18,14 @@ export default class FeedList extends Component {
   }
 
   componentDidUpdate (prevProps) {
-    // The two checks below prevent data from being loaded until the Home tab
-    // is actually visible. This assumes that FeedList is not being used
-    // anywhere other than the Home tab. For example, if we were to reuse it
-    // for member profiles, or add the Topics tab, this code would have to be
-    // reworked.
+    // The first two checks below prevent data from being loaded until the Home
+    // tab is actually visible.
+    //
+    // This implementation causes a pretty strong coupling between FeedList and
+    // the Home tab, both by hard-coding the tab name and by using screenProps,
+    // which we had to pass down from the Home component through Feed. This will
+    // have to be reworked to allow opening topic feeds in the Topic tab, e.g.
+
     if (this.props.screenProps.currentTabName !== 'Home') {
       return
     }
