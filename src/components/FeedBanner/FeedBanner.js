@@ -55,7 +55,7 @@ export default class FeedBanner extends React.Component {
           active={topicSubscribed} onPress={this.toggleSubscribe} />}
       </View>
       {!all && <PostPrompt currentUser={currentUser} newPost={newPost} />}
-      {!!currentUser && <View style={styles.promptShadow} />}
+      {!!currentUser && !all && <View style={styles.promptShadow} />}
       {!!this.state.overlayMessage &&
         <NotificationOverlay message={this.state.overlayMessage}
           type='info'
