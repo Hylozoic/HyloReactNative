@@ -42,9 +42,7 @@ export function mapDispatchToProps (dispatch, props) {
         return Promise.resolve({})
       })
     },
-    editDetails: () => {
-      return navigation.navigate('DetailsEditor', {communityId})
-    },
+    editDetails: () => navigation.navigate('DetailsEditor', {communityId}),
     setDetails: content => dispatch(setDetails(content))
   }
 }

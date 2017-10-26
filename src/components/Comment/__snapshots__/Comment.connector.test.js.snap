@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mergeProps doesnt return deleteComment when moderator 1`] = `
+Object {
+  "canModerate": false,
+  "comment": Object {
+    "id": 34,
+  },
+  "deleteComment": null,
+}
+`;
+
+exports[`mergeProps returns deleteComment when moderator 1`] = `
+Object {
+  "canModerate": true,
+  "comment": Object {
+    "id": 34,
+  },
+  "deleteComment": [Function],
+}
+`;
