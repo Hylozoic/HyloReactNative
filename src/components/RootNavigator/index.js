@@ -31,7 +31,7 @@ import SignupFlow5 from '../SignupFlow/SignupFlow5'
 import createLinkingAwareContainer from './createLinkingAwareContainer'
 import trackCurrentTab from './trackCurrentTab'
 import { isIOS } from 'util/platform'
-import TabBarComponent from './TabBarComponent'
+import TabBar from './TabBar'
 
 export const urlPrefix = 'http://hylo.com/'
 // Tab Home Screens
@@ -78,6 +78,7 @@ const tabNavigatorConfig = {
   tabBarPosition: 'bottom',
   animationEnabled: false,
   swipeEnabled: false,
+  lazy: true,
   tabBarOptions: {
     showIcon: true,
     showLabel: true,
@@ -88,7 +89,7 @@ const tabNavigatorConfig = {
   },
   // TODO remove this line once this PR is merged and released:
   // https://github.com/react-community/react-navigation/pull/1764
-  tabBarComponent: TabBarComponent
+  tabBarComponent: TabBar
 }
 
 const TabNavigatorWithBar = TabNavigator(

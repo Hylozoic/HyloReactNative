@@ -6,7 +6,7 @@ import { isIOS } from 'util/platform'
 // This is a workaround for android to get the tabbar to hide when keyboard is shown.
 // TODO remove this once https://github.com/react-community/react-navigation/pull/1764 is checked in and released
 
-class TabBarComponent extends React.PureComponent {
+export default class TabBar extends React.PureComponent {
   constructor (props) {
     super(props)
 
@@ -43,9 +43,8 @@ class TabBarComponent extends React.PureComponent {
   }
 
   render () {
-    return this.state.isVisible ? <TabBarBottom {...this.props} />
+    return this.state.isVisible && this.props.isVisible
+      ? <TabBarBottom {...this.props} />
       : null
   }
 }
-
-export default TabBarComponent

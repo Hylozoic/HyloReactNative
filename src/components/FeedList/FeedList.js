@@ -18,6 +18,19 @@ export default class FeedList extends Component {
   }
 
   componentDidUpdate (prevProps) {
+    // The two checks below prevent data from being loaded until the Home tab
+    // is actually visible. This assumes that FeedList is not being used
+    // anywhere other than the Home tab. For example, if we were to reuse it
+    // for member profiles, or add the Topics tab, this code would have to be
+    // reworked.
+    if (this.props.screenProps.currentTabName !== 'Home') {
+      return
+    }
+
+    if (!prevProps || prevProps.screenProps.currentTabName !== 'Home') {
+      return this.fetchOrShowCached()
+    }
+
     if (prevProps.sortBy !== this.props.sortBy ||
         prevProps.filter !== this.props.filter ||
         get('id', prevProps.community) !== get('id', this.props.community)) {

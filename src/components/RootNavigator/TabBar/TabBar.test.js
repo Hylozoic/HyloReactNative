@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import TestRenderer from 'react-test-renderer'
-import TabBarComponent from './TabBarComponent'
+import TabBar from './TabBar'
 import { Keyboard } from 'react-native'
 
 jest.mock('util/platform', () => ({
@@ -10,7 +10,7 @@ jest.mock('util/platform', () => ({
 
 it('renders correctly', () => {
   const renderer = new ReactShallowRenderer()
-  renderer.render(<TabBarComponent />)
+  renderer.render(<TabBar />)
   const actual = renderer.getRenderOutput()
   expect(actual).toMatchSnapshot()
 })
@@ -24,7 +24,7 @@ it('manages keyboard correctly', () => {
   const navigation = {state: {
     routes: []
   }}
-  const renderer = TestRenderer.create(<TabBarComponent navigation={navigation} />)
+  const renderer = TestRenderer.create(<TabBar navigation={navigation} />)
 
   const instance = renderer.root.instance
 
