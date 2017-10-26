@@ -24,7 +24,6 @@ export default class NewMessage extends React.Component {
   }
 
   componentDidMount () {
-    this.props.fetchContacts()
     this.props.fetchRecentContacts()
     this.props.loadParticipantsFromParams()
   }
@@ -44,7 +43,6 @@ export default class NewMessage extends React.Component {
   render () {
     const {
       recentContacts,
-      allContacts,
       suggestions,
       participants,
       addParticipant,
@@ -55,7 +53,6 @@ export default class NewMessage extends React.Component {
       setMessage,
       message,
       pending,
-      fetchMoreContacts,
       mockViewKey // just for testing
     } = this.props
 
@@ -68,8 +65,7 @@ export default class NewMessage extends React.Component {
       ]
     } else {
       listSections = [
-        {data: recentContacts, label: 'Recent', loading: pending.recent},
-        {data: allContacts, label: 'All Contacts', loading: pending.all}
+        {data: recentContacts, label: 'Recent', loading: pending.recent}
       ]
     }
 
@@ -88,7 +84,6 @@ export default class NewMessage extends React.Component {
         renderSectionHeader={SectionHeader}
         keyExtractor={item => item.id}
         sections={listSections}
-        onEndReached={fetchMoreContacts}
         onEndReachedThreshold={0.3}
         stickySectionHeadersEnabled={false} />
       <MessageInput
