@@ -44,9 +44,9 @@ export default function fetchThreads (first = 10, offset = 0) {
       }
     },
     meta: {
-      extractModel: {
-        modelName: 'MessageThread',
-        getRoot: get('me.messageThreads')
+      extractModel: 'Me',
+      extractQueryResults: {
+        getItems: get('payload.data.me.messageThreads')
       }
     }
   }

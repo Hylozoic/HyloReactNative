@@ -22,7 +22,8 @@ export default class ThreadList extends Component {
   componentDidMount () {
     this.fetchOrShowCached()
   }
-  _keyExtractor = (item, index) => item.id;
+
+  _keyExtractor = (item, index) => item.id
 
   render () {
     const { threads, pending, currentUser, fetchMoreThreads, showThread } = this.props
