@@ -9,7 +9,7 @@ export default class SocketSubscriber extends React.PureComponent {
 
   setup () {
     // see the connector to understand why this is called "reconnectHandler"
-    this.props.subscribe().then(handler => this.reconnectHandler = handler)
+    this.props.subscribe().then(handler => { this.reconnectHandler = handler })
   }
 
   teardown () {
