@@ -1,0 +1,19 @@
+import reducer from './TabBar.store'
+import { CHANGE_COMMUNITY } from 'store/constants'
+import { ALL_COMMUNITIES_ID } from '../../../store/models/Community'
+
+it('sets isVisible to false if changing to All Communities', () => {
+  const action = {
+    type: CHANGE_COMMUNITY,
+    payload: ALL_COMMUNITIES_ID
+  }
+  expect(reducer({}, action)).toEqual({isVisible: false})
+})
+
+it('sets isVisible to true if changing to a community', () => {
+  const action = {
+    type: CHANGE_COMMUNITY,
+    payload: '1'
+  }
+  expect(reducer({}, action)).toEqual({isVisible: true})
+})
