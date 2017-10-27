@@ -10,7 +10,6 @@ export const SET_PARTICIPANTS = `${MODULE_NAME}/SET_PARTICIPANTS`
 export const ADD_PARTICIPANT = `${MODULE_NAME}/ADD_PARTICIPANT`
 export const REMOVE_PARTICIPANT = `${MODULE_NAME}/REMOVE_PARTICIPANT`
 export const FETCH_SUGGESTIONS = `${MODULE_NAME}/FETCH_SUGGESTIONS`
-export const FETCH_CONTACTS = `${MODULE_NAME}/FETCH_CONTACTS`
 export const FETCH_RECENT_CONTACTS = `${MODULE_NAME}/FETCH_RECENT_CONTACTS`
 export const CREATE_MESSAGE = `${MODULE_NAME}/CREATE_MESSAGE`
 export const FIND_OR_CREATE_THREAD = `${MODULE_NAME}/FIND_OR_CREATE_THREAD`
@@ -64,40 +63,6 @@ export function fetchSuggestions (autocomplete, first = 10) {
     graphql: {
       query: fetchPeopleQuery,
       variables: { autocomplete, first }
-    },
-    meta: {
-      extractModel: 'Person',
-      extractQueryResults: {
-        getItems: get('payload.data.people')
-      }
-    }
-  }
-}
-
-const fetchContactsQuery =
-`query ($first: Int, $offset: Int) {
-  people (first: $first, offset: $offset) {
-    items {
-      id
-      name
-      avatarUrl
-      memberships (first: 1) {
-        id
-        community {
-          id
-          name
-        }
-      }
-    }
-  }
-}`
-
-export function fetchContacts (first = 10, offset = 0) {
-  return {
-    type: FETCH_CONTACTS,
-    graphql: {
-      query: fetchContactsQuery,
-      variables: { first, offset }
     },
     meta: {
       extractModel: 'Person',
@@ -194,11 +159,6 @@ export default function reducer (state = defaultState, action) {
         ...state,
         input: payload
       }
-    case SET_MESSAGE:
-      return {
-        ...state,
-        message: payload
-      }
     case SET_PARTICIPANTS:
       return {
         ...state,
@@ -221,7 +181,6 @@ export default function reducer (state = defaultState, action) {
     case CREATE_MESSAGE:
       return {
         ...state,
-        message: null,
         input: '',
         participants: []
       }
@@ -232,13 +191,6 @@ export default function reducer (state = defaultState, action) {
 export function setParticipantInput (input) {
   return {
     type: SET_CONTACT_INPUT,
-    payload: input
-  }
-}
-
-export function setMessage (input) {
-  return {
-    type: SET_MESSAGE,
     payload: input
   }
 }
@@ -264,10 +216,6 @@ export function removeParticipant (id) {
   }
 }
 
-export function getMessage (state) {
-  return state[MODULE_NAME].message
-}
-
 export function getInputText (state) {
   return state[MODULE_NAME].input
 }
@@ -282,22 +230,6 @@ export const getParticipants = ormCreateSelector(
   getParticipantIds,
   (session, fromStore) => fromStore.map(id =>
     pick([ 'id', 'name', 'avatarUrl' ], session.Person.withId(id).ref))
-)
-
-const getContactsResults = makeGetQueryResults(FETCH_CONTACTS)
-
-export const getContacts = ormCreateSelector(
-  orm,
-  state => state.orm,
-  getParticipantIds,
-  getContactsResults,
-  (session, participantsIds, results) => {
-    if (isEmpty(results) || isEmpty(results.ids)) return []
-    return session.Person.all()
-    .filter(x => includes(x.id, results.ids) && !includes(x.id, participantsIds))
-    .orderBy(x => results.ids.indexOf(x.id))
-    .toModelArray()
-  }
 )
 
 const getRecentContactsResults = makeGetQueryResults(FETCH_RECENT_CONTACTS)

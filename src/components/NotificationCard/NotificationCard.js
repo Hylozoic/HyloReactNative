@@ -34,7 +34,6 @@ export default function NotificationCard ({ notification }) {
     community,
     createdAt,
     header,
-    onPress,
     topic,
     title,
     unread
@@ -47,6 +46,7 @@ export default function NotificationCard ({ notification }) {
     </View>
     <View style={styles.content}>
       <Text numberOfLines={2} style={styles.header}>
+        {unread && <Text style={styles.badge}>● </Text>}
         {renderName(notification)}
         <Text style={[styles.text, styles.emphasize]}>{header}</Text>
         {renderTitle(title)}

@@ -17,24 +17,27 @@ import Search from '../../components/Editor/Search/Search.store'
 import SocketListener from '../../components/SocketListener/SocketListener.store'
 import SignupFlow from '../../components/SignupFlow/SignupFlow.store'
 import LoadingModal from '../../components/LoadingModal/LoadingModal.store'
+import TabBar from '../../components/RootNavigator/TabBar/TabBar.store'
 
 export const combinedReducers = combineReducers({
+  currentCommunity,
   orm: ormReducer,
-  session: sessionReducer,
   pending,
   queryResults,
-  currentCommunity,
-  FeedList,
-  PostEditor,
-  Members,
+  session: sessionReducer,
+
   CommentEditor,
-  Search,
-  NewMessage,
-  SocketListener,
+  FeedList,
+  LoadingModal,
   MemberFeed,
-  SignupFlow,
+  Members,
+  NewMessage,
   PeopleTyping,
-  LoadingModal
+  PostEditor,
+  Search,
+  SignupFlow,
+  SocketListener,
+  TabBar
 })
 
 const composeReducers = (...reducers) => (state, action) =>

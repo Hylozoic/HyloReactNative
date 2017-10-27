@@ -8,9 +8,7 @@ import PopupMenuButton from '../../PopupMenuButton'
 import Icon from '../../Icon'
 import { DEFAULT_BANNER } from '../../../store/models/Community'
 import styles from './Members.styles'
-import {
-  some, values, keys, isUndefined, isEmpty, debounce, size
-} from 'lodash/fp'
+import { some, values, keys, isEmpty, debounce, size } from 'lodash/fp'
 import { focus } from '../../../util/textInput'
 
 export default class Members extends React.Component {
@@ -20,6 +18,10 @@ export default class Members extends React.Component {
   fetchOrShowCached () {
     const { hasMore, members, fetchMembers } = this.props
     if (isEmpty(members) && hasMore !== false) fetchMembers()
+  }
+
+  componentDidMount () {
+    this.fetchOrShowCached()
   }
 
   componentDidUpdate (prevProps) {
@@ -42,28 +44,17 @@ export default class Members extends React.Component {
   }
 
   render () {
-    const { community, subject, sortBy, setSort, fetchMoreMembers } = this.props
-
+    let {
+      community, members, subject, sortBy, setSort, fetchMoreMembers
+    } = this.props
     const sortKeys = sortKeysFactory(subject)
-
-    const onSearch = debounce(300, text => {
-      this.props.setSearch(text)
-    })
-
-    const onSelect = (action, index) => {
-      if (!isUndefined(index)) {
-        setSort(keys(sortKeys)[index])
-      }
-    }
-
-    let { members } = this.props
+    const onSearch = debounce(300, text => this.props.setSearch(text))
+    const onSelect = index => setSort(keys(sortKeys)[index])
 
     // sort of a hack since members need to be even since it's rows of 2.  fixes flexbox
-    if (size(members) % 2 > 0) {
-      members.push({id: -1})
-    }
+    if (size(members) % 2 > 0) members.push({id: -1})
 
-    const headerComponent = <View>
+    const header = <View>
       <Banner community={community} all={!community} />
       <View style={styles.listControls}>
         <View style={styles.searchWrapper}>
@@ -97,7 +88,7 @@ export default class Members extends React.Component {
         }}
         onEndReached={fetchMoreMembers}
         keyExtractor={(item, index) => item.id}
-        ListHeaderComponent={headerComponent}
+        ListHeaderComponent={header}
       />
     </View>
   }

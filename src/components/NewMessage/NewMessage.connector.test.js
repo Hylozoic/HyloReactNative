@@ -26,7 +26,6 @@ describe('mapDispatchToProps', () => {
 
 describe('mergeProps', () => {
   const defaultStateProps = {
-    allContacts: [],
     pending: {}
   }
 
@@ -70,8 +69,9 @@ describe('mergeProps', () => {
       }
     }
     const mergedProps = mergeProps(stateProps, dispatchProps, ownProps)
-    return mergedProps.createMessage()
+    return mergedProps.createMessage('hello')
     .then(() => {
+      expect(dispatchProps.createMessage).toHaveBeenCalledWith(122, 'hello', true)
       expect(ownProps.navigation.navigate).toHaveBeenCalledWith('Thread', {id})
     })
   })
@@ -89,33 +89,5 @@ describe('mergeProps', () => {
     const mergedProps = mergeProps(defaultStateProps, dispatchProps, ownProps)
     mergedProps.loadParticipantsFromParams()
     expect(dispatchProps.setParticipants).toHaveBeenCalledWith(participants)
-  })
-
-  it('sets fetchMoreContacts to no op when pending', () => {
-    const stateProps = {
-      ...defaultStateProps,
-      pending: {
-        all: true
-      }
-    }
-    const dispatchProps = {
-      fetchContacts: jest.fn()
-    }
-    const mergedProps = mergeProps(stateProps, dispatchProps, {})
-    mergedProps.fetchMoreContacts()
-    expect(dispatchProps.fetchContacts).not.toHaveBeenCalled()
-  })
-
-  it('sets up fetchMoreContacts', () => {
-    const stateProps = {
-      ...defaultStateProps,
-      allContacts: [1, 2, 3, 4]
-    }
-    const dispatchProps = {
-      fetchContacts: jest.fn()
-    }
-    const mergedProps = mergeProps(stateProps, dispatchProps, {})
-    mergedProps.fetchMoreContacts()
-    expect(dispatchProps.fetchContacts).toHaveBeenCalledWith(10, stateProps.allContacts.length)
   })
 })

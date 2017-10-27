@@ -6,6 +6,7 @@ exports[`renders correctly 1`] = `
   activeTintColor="#3478f6"
   inactiveBackgroundColor="transparent"
   inactiveTintColor="#929292"
+  isVisible={true}
   showIcon={true}
   showLabel={true}
 />

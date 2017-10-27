@@ -22,10 +22,19 @@ export default class ThreadList extends Component {
   componentDidMount () {
     this.fetchOrShowCached()
   }
-  _keyExtractor = (item, index) => item.id;
+
+  _keyExtractor = (item, index) => item.id
 
   render () {
-    const { threads, pending, currentUser, fetchMoreThreads, showThread } = this.props
+    const {
+      threads,
+      pending,
+      currentUser,
+      fetchMoreThreads,
+      showThread,
+      refreshThreads,
+      pendingRefresh
+    } = this.props
 
     if (pending && threads.length === 0) return <Loading />
     if (!pending && threads.length === 0) {
@@ -37,6 +46,8 @@ export default class ThreadList extends Component {
         data={threads}
         keyExtractor={this._keyExtractor}
         onEndReached={fetchMoreThreads}
+        onRefresh={refreshThreads}
+        refreshing={pendingRefresh}
         renderItem={({ item, index }) =>
           <MessageRow
             participants={item.participants}
