@@ -50,8 +50,6 @@ export default class NewMessage extends React.Component {
       setParticipantInput,
       participantInputText,
       createMessage,
-      setMessage,
-      message,
       pending,
       mockViewKey // just for testing
     } = this.props
@@ -88,8 +86,6 @@ export default class NewMessage extends React.Component {
         stickySectionHeadersEnabled={false} />
       <MessageInput
         style={styles.messageInput}
-        onChange={setMessage}
-        value={message}
         onSubmit={createMessage}
         onBlur={this.onBlurMessageInput}
         placeholder='Type your message here' />

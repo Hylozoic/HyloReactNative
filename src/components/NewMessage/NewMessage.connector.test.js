@@ -69,8 +69,9 @@ describe('mergeProps', () => {
       }
     }
     const mergedProps = mergeProps(stateProps, dispatchProps, ownProps)
-    return mergedProps.createMessage()
+    return mergedProps.createMessage('hello')
     .then(() => {
+      expect(dispatchProps.createMessage).toHaveBeenCalledWith(122, 'hello', true)
       expect(ownProps.navigation.navigate).toHaveBeenCalledWith('Thread', {id})
     })
   })

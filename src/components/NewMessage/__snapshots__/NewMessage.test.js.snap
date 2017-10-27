@@ -88,10 +88,8 @@ exports[`NewMessage renders correctly 1`] = `
   />
   <MessageInput
     onBlur={[Function]}
-    onChange={[Function]}
     onSubmit={[Function]}
     placeholder="Type your message here"
-    value="hi mom"
   />
 </KeyboardFriendlyView>
 `;
@@ -160,10 +158,8 @@ exports[`NewMessage renders correctly 2`] = `
   />
   <MessageInput
     onBlur={[Function]}
-    onChange={[Function]}
     onSubmit={[Function]}
     placeholder="Type your message here"
-    value="hi mom"
   />
 </KeyboardFriendlyView>
 `;
