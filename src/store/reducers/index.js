@@ -2,7 +2,6 @@ import { combineReducers } from 'redux'
 import currentCommunity from './currentCommunity'
 import ormReducer from './ormReducer'
 import pending from './pending'
-import { persist } from './persistence'
 import queryResults from './queryResults'
 import sessionReducer from './sessionReducer'
 import handleLogout from './handleLogout'
@@ -43,7 +42,7 @@ export const combinedReducers = combineReducers({
 const composeReducers = (...reducers) => (state, action) =>
   reducers.reduce((newState, reducer) => reducer(newState, action), state)
 
-export default persist(composeReducers(
+export default composeReducers(
   combinedReducers,
   handleLogout
-))
+)
