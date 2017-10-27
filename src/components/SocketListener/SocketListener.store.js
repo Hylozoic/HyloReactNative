@@ -119,7 +119,7 @@ export default function reducer (state = {}, action) {
   return state
 }
 
-export function ormSessionReducer ({ Me, Post }, action) {
+export function ormSessionReducer ({ Me, MessageThread, Post }, action) {
   const { type, payload } = action
 
   switch (type) {
@@ -139,5 +139,11 @@ export function ormSessionReducer ({ Me, Post }, action) {
 
     case RECEIVE_THREAD:
       Me.first().increment('unseenThreadCount')
+      break
+
+    case RECEIVE_MESSAGE:
+      const { message } = payload.data
+      MessageThread.withId(message.messageThread)
+      .update({updatedAt: message.createdAt})
   }
 }
