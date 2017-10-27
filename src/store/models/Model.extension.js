@@ -23,3 +23,7 @@ Model.prototype.updateAppending = function (attrs) {
     return uniq(existingIds.concat(val.map(normalizeEntity)))
   }))
 }
+
+Model.prototype.increment = function (attr, delta = 1) {
+  return this.update({[attr]: this[attr] + delta})
+}
