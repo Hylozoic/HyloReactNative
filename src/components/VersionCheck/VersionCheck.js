@@ -1,6 +1,5 @@
 import React from 'react'
 import { Alert, Linking } from 'react-native'
-import { isIOS } from 'util/platform'
 import Loading from '../Loading'
 
 export default class VersionCheck extends React.Component {
