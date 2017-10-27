@@ -9,8 +9,8 @@ import { find, get, isEmpty } from 'lodash/fp'
 
 export default class FeedList extends Component {
   fetchOrShowCached () {
-    const { hasMore, posts, fetchPosts } = this.props
-    if (isEmpty(posts) && hasMore !== false) fetchPosts()
+    const { hasMore, posts, fetchPosts, pending } = this.props
+    if (isEmpty(posts) && hasMore !== false && !pending) fetchPosts()
   }
 
   componentDidMount () {
@@ -18,6 +18,22 @@ export default class FeedList extends Component {
   }
 
   componentDidUpdate (prevProps) {
+    // The first two checks below prevent data from being loaded until the Home
+    // tab is actually visible.
+    //
+    // This implementation causes a pretty strong coupling between FeedList and
+    // the Home tab, both by hard-coding the tab name and by using screenProps,
+    // which we had to pass down from the Home component through Feed. This will
+    // have to be reworked to allow opening topic feeds in the Topic tab, e.g.
+
+    if (this.props.screenProps.currentTabName !== 'Home') {
+      return
+    }
+
+    if (!prevProps || prevProps.screenProps.currentTabName !== 'Home') {
+      return this.fetchOrShowCached()
+    }
+
     if (prevProps.sortBy !== this.props.sortBy ||
         prevProps.filter !== this.props.filter ||
         get('id', prevProps.community) !== get('id', this.props.community)) {

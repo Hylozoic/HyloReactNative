@@ -14,11 +14,12 @@ export default class PostHeader extends Component {
   }
 
   static defaultProps = {
+    creator: {},
     flaggingVisible: false
   }
 
   render () {
-    let {
+    const {
       creator: {avatarUrl, name, tagline, id},
       date,
       type,
@@ -62,12 +63,12 @@ export default class PostHeader extends Component {
     return <View style={styles.container}>
       <View style={styles.avatarSpacing}>
         <TouchableOpacity onPress={() => showMember(id)}>
-          <Avatar avatarUrl={avatarUrl} />
+          {avatarUrl && <Avatar avatarUrl={avatarUrl} />}
         </TouchableOpacity>
       </View>
       <View style={styles.meta}>
         <TouchableOpacity onPress={() => showMember(id)}>
-          <Text style={styles.username}>{name}</Text>
+          {name && <Text style={styles.username}>{name}</Text>}
           {!!tagline && <Text style={styles.metaText}>{tagline}</Text>}
         </TouchableOpacity>
         <View style={styles.dateRow}>

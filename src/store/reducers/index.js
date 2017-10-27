@@ -2,7 +2,6 @@ import { combineReducers } from 'redux'
 import currentCommunity from './currentCommunity'
 import ormReducer from './ormReducer'
 import pending from './pending'
-import { persist } from './persistence'
 import queryResults from './queryResults'
 import sessionReducer from './sessionReducer'
 import handleLogout from './handleLogout'
@@ -17,30 +16,33 @@ import Search from '../../components/Editor/Search/Search.store'
 import SocketListener from '../../components/SocketListener/SocketListener.store'
 import SignupFlow from '../../components/SignupFlow/SignupFlow.store'
 import LoadingModal from '../../components/LoadingModal/LoadingModal.store'
+import TabBar from '../../components/RootNavigator/TabBar/TabBar.store'
 
 export const combinedReducers = combineReducers({
+  currentCommunity,
   orm: ormReducer,
-  session: sessionReducer,
   pending,
   queryResults,
-  currentCommunity,
-  FeedList,
-  PostEditor,
-  Members,
+  session: sessionReducer,
+
   CommentEditor,
-  Search,
-  NewMessage,
-  SocketListener,
+  FeedList,
+  LoadingModal,
   MemberFeed,
-  SignupFlow,
+  Members,
+  NewMessage,
   PeopleTyping,
-  LoadingModal
+  PostEditor,
+  Search,
+  SignupFlow,
+  SocketListener,
+  TabBar
 })
 
 const composeReducers = (...reducers) => (state, action) =>
   reducers.reduce((newState, reducer) => reducer(newState, action), state)
 
-export default persist(composeReducers(
+export default composeReducers(
   combinedReducers,
   handleLogout
-))
+)

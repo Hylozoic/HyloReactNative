@@ -21,7 +21,6 @@ describe('reducer', () => {
       type: REMOVE_PARTICIPANT
     }
     const state = {
-      message: 'hi',
       otherKey: 'set'
     }
     it('does nothing with no payload', () => {
@@ -35,7 +34,6 @@ describe('reducer', () => {
       type: CREATE_MESSAGE
     }
     const state = {
-      message: 'hi',
       otherKey: 'set',
       input: 'yo',
       participants: [1, 2, 3]
@@ -44,7 +42,6 @@ describe('reducer', () => {
       const newState = reducer(state, action)
       expect(newState).toEqual({
         ...state,
-        message: null,
         input: '',
         participants: []
       })

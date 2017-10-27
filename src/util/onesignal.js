@@ -23,4 +23,6 @@ export function init ({ registerDevice }) {
     console.log('OneSignal event: opened')
     console.log(result)
   })
+
+  OneSignal.inFocusDisplaying(0)
 }

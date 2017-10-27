@@ -1,5 +1,5 @@
 import { mapStateToProps, mapDispatchToProps } from './SessionCheck.connector.js'
-import { addEventListener, registerForPushNotifications } from 'react-native-onesignal'
+import OneSignal from 'react-native-onesignal'
 import { MODULE_NAME as SignupFlowStoreKey } from '../SignupFlow/SignupFlow.store'
 
 jest.mock('react-native-device-info')
@@ -7,7 +7,8 @@ jest.mock('react-native-onesignal', () => ({
   // eslint-disable-next-line standard/no-callback-literal
   getPermissionSubscriptionState: jest.fn(callback => callback({userId: 5})),
   addEventListener: jest.fn(),
-  registerForPushNotifications: jest.fn()
+  registerForPushNotifications: jest.fn(),
+  inFocusDisplaying: jest.fn()
 }))
 
 describe('mapStateToProps', () => {
@@ -34,7 +35,8 @@ describe('mapDispatchToProps', () => {
 
     expect(dispatch).toHaveBeenCalled()
     expect(dispatch.mock.calls).toMatchSnapshot()
-    expect(addEventListener).toBeCalled()
-    expect(registerForPushNotifications).toBeCalled()
+    expect(OneSignal.addEventListener).toBeCalled()
+    expect(OneSignal.registerForPushNotifications).toBeCalled()
+    expect(OneSignal.inFocusDisplaying).toBeCalled()
   })
 })

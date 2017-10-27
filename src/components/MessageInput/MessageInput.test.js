@@ -11,18 +11,12 @@ it('matches the last snapshot', () => {
 
 describe('handleChange', () => {
   it('calls startTyping and onChange, and sets the state', () => {
-    const props = {
-      onChange: jest.fn()
-    }
-    const instance = ReactTestRenderer.create(<MessageInput {...props} />).getInstance()
+    const instance = ReactTestRenderer.create(<MessageInput />).getInstance()
     instance.startTyping = jest.fn()
     const text = 'hi there'
-    instance.handleChange({
-      nativeEvent: {text}
-    })
+    instance.handleChange(text)
     expect(instance.startTyping).toHaveBeenCalled()
     expect(instance.state.submittable).toEqual(true)
     expect(instance.state.text).toEqual(text)
-    expect(props.onChange).toHaveBeenCalledWith(text)
   })
 })
