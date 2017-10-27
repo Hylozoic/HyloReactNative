@@ -6,6 +6,7 @@ import Icon from '../Icon'
 import NotificationOverlay from '../NotificationOverlay'
 import LinearGradient from 'react-native-linear-gradient'
 import { isUndefined } from 'lodash'
+const bannerImage = require('../../assets/banner_default.png')
 
 export default class FeedBanner extends React.Component {
   state = {}
@@ -28,26 +29,28 @@ export default class FeedBanner extends React.Component {
       all, community, newPost, currentUser, topicSubscribed
     } = this.props
 
-    let bannerUrl, name
+    let bannerUrl, name, image
     if (all) {
       name = 'All Communities'
+      image = bannerImage
     } else if (!community) {
       return null
     } else {
       ({ bannerUrl, name } = community)
+      if (bannerUrl) image = {uri: bannerUrl}
     }
 
     return <View style={styles.container}>
-      <Image source={{uri: bannerUrl}} style={styles.image} />
-      <LinearGradient style={styles.gradient}
+      <Image source={image} style={styles.image} />
+      {!image && <LinearGradient style={styles.gradient}
         colors={[
           'rgba(0, 0, 0, 0)',
           'rgba(0, 0, 0, 0.1)',
           'rgba(0, 0, 0, 0.3)',
           'rgba(0, 0, 0, 0.6)'
-        ]} />
+        ]} />}
       <View style={styles.titleRow}>
-        <Text style={[styles.name, all && styles.allName]}
+        <Text style={styles.name}
           numberOfLines={3}>
           {name}
         </Text>
