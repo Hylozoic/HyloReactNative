@@ -8,6 +8,8 @@ export const RESET_ENTRY_URL = 'RESET_ENTRY_URL'
 export function checkSession () {
   return {
     type: CHECK_SESSION,
+    // there's a harmless but confusing bug due to this promise payload that
+    // returns an api payload: CHECK_SESSION_PENDING will get fired twice
     payload: getSessionCookie().then(cookie => {
       if (!cookie) return false
 

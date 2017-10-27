@@ -15,10 +15,15 @@ describe('VersionCheck', () => {
       message: 'Force message'
     }
     const renderer = new ReactShallowRenderer()
-    renderer.render(<VersionCheck updateType={updateType} checkVersion={jest.fn()}><View /></VersionCheck>)
+    renderer.render(<VersionCheck updateType={updateType}
+      checkVersion={jest.fn()}
+      pending={false}>
+      <View />
+    </VersionCheck>)
     const actual = renderer.getRenderOutput()
     expect(actual).toMatchSnapshot()
   })
+
   it('matches last snapshot with a suggested version update', () => {
     const updateType = {
       type: 'suggest',
@@ -26,48 +31,65 @@ describe('VersionCheck', () => {
       message: 'Suggested message'
     }
     const renderer = new ReactShallowRenderer()
-    renderer.render(<VersionCheck updateType={updateType} checkVersion={jest.fn()}><View /></VersionCheck>)
+    renderer.render(<VersionCheck updateType={updateType}
+      checkVersion={jest.fn()}
+      pending={false}>
+      <View />
+    </VersionCheck>)
     const actual = renderer.getRenderOutput()
     expect(actual).toMatchSnapshot()
   })
+
   it('matches last snapshot without a version update', () => {
     const renderer = new ReactShallowRenderer()
-    renderer.render(<VersionCheck updateType={null} checkVersion={jest.fn()}><View /></VersionCheck>)
+    renderer.render(<VersionCheck updateType={null}
+      checkVersion={jest.fn()}
+      pending={false}>
+      <View />
+    </VersionCheck>)
     const actual = renderer.getRenderOutput()
     expect(actual).toMatchSnapshot()
   })
-  it('renders correctly while pending', () => {
+
+  it('renders as pending by default', () => {
     const updateType = {
       type: 'force',
       title: 'Force title',
       message: 'Force message'
     }
     const renderer = new ReactShallowRenderer()
-    renderer.render(<VersionCheck updateType={updateType} checkVersion={jest.fn()} pending><View /></VersionCheck>)
+    renderer.render(<VersionCheck updateType={updateType} checkVersion={jest.fn()}>
+      <View />
+    </VersionCheck>)
     const actual = renderer.getRenderOutput()
     expect(actual).toMatchSnapshot()
   })
 })
 
 describe('VersionCheck alert', () => {
+  beforeEach(() => {
+    jest.spyOn(Alert, 'alert')
+  })
+
+  afterEach(() => {
+    Alert.alert.mockReset()
+  })
+
   it('matches last snapshot with a forced version update', () => {
     const updateType = {
       type: 'force',
       title: 'Force title',
       message: 'Force message'
     }
-    const origAlert = Alert.alert
-    Alert.alert = jest.fn()
-    const instance = ReactTestRenderer.create(<VersionCheck
+    ReactTestRenderer.create(<VersionCheck
       updateType={updateType}
       checkVersion={jest.fn()}
-    >
+      pending={false}>
       <View />
-    </VersionCheck>).getInstance()
+    </VersionCheck>)
 
     expect(Alert.alert).toHaveBeenCalled()
     expect(Alert.alert.mock.calls).toMatchSnapshot()
-    Alert.alert = origAlert
   })
 
   it('matches last snapshot with a suggested version update', () => {
@@ -76,32 +98,26 @@ describe('VersionCheck alert', () => {
       title: 'Suggested update title',
       message: 'Suggested update message'
     }
-    const origAlert = Alert.alert
-    Alert.alert = jest.fn()
-    const instance = ReactTestRenderer.create(<VersionCheck
+    ReactTestRenderer.create(<VersionCheck
       updateType={updateType}
       checkVersion={jest.fn()}
-    >
+      pending={false}>
       <View />
-    </VersionCheck>).getInstance()
+    </VersionCheck>)
 
     expect(Alert.alert).toHaveBeenCalled()
     expect(Alert.alert.mock.calls).toMatchSnapshot()
-    Alert.alert = origAlert
   })
 
   it('matches last snapshot without a version update', () => {
     const updateType = null
-    const origAlert = Alert.alert
-    Alert.alert = jest.fn()
-    const instance = ReactTestRenderer.create(<VersionCheck
+    ReactTestRenderer.create(<VersionCheck
       updateType={updateType}
       checkVersion={jest.fn()}
-    >
+      pending={false}>
       <View />
-    </VersionCheck>).getInstance()
+    </VersionCheck>)
 
     expect(Alert.alert.mock.calls).toMatchSnapshot()
-    Alert.alert = origAlert
   })
 })
