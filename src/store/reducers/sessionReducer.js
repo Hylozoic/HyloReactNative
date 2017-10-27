@@ -12,6 +12,13 @@ import {
 import { CHECK_VERSION } from '../../components/VersionCheck/actions'
 import { omit } from 'lodash/fp'
 
+export function isJoinCommunityUrl (url) {
+  const invitationRegex = /h\/use-invitation$/
+  const accessCodeRegex = /c\/.+\/join\/.+$/
+
+  return url.match(invitationRegex) && url.match(accessCodeRegex)
+}
+
 export default function sessionReducer (state = {}, action) {
   const { type, error, payload, meta } = action
 
@@ -47,9 +54,9 @@ export default function sessionReducer (state = {}, action) {
       }
       return state
     case SET_ENTRY_URL:
-      return {...state, entryURL: payload}
+      return {...state, entryURL: payload, hasSignupLink: isJoinCommunityUrl(payload)}
     case RESET_ENTRY_URL:
-      return {...state, entryURL: null}
+      return {...state, entryURL: null, hasSignupLink: false}
     case SIGNUP:
       return {...state, loggedIn: true}
     case CHECK_VERSION:
