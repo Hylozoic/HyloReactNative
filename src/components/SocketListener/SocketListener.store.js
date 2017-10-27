@@ -118,3 +118,23 @@ export default function reducer (state = {}, action) {
   }
   return state
 }
+
+export function ormSessionReducer (session, action) {
+  const { type, payload } = action
+  switch (type) {
+    case RECEIVE_NOTIFICATION:
+      // TODO: eventually we might want to refactor this out into a more
+      // structured activity.action handler for the various counts that need
+      // bumping (or handle every single damn thing in ModelExtractor).
+      const { notification } = payload.data
+      const newNotificationCount = session.Me.first().newNotificationCount + 1
+      session.Me.first().update({ newNotificationCount })
+
+      const { activity } = notification
+      if (activity.action === 'newComment' && session.Post.hasId(activity.post.id)) {
+        const post = session.Post.withId(activity.post.id)
+        post.update({ commentsTotal: post.commentsTotal + 1 })
+      }
+      break
+  }
+}

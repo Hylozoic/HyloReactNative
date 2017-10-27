@@ -1,26 +1,26 @@
 import orm from 'store/models'
-import ormReducer from './ormReducer'
+import ormReducer from './index'
 import {
   TOGGLE_TOPIC_SUBSCRIBE_PENDING
-} from '../../components/Feed/Feed.store'
+} from '../../../components/Feed/Feed.store'
 import {
   VOTE_ON_POST_PENDING
-} from '../../components/PostCard/PostFooter/PostFooter.store'
+} from '../../../components/PostCard/PostFooter/PostFooter.store'
 import {
   CREATE_COMMENT
-} from '../../components/PostDetails/CommentEditor/CommentEditor.store'
+} from '../../../components/PostDetails/CommentEditor/CommentEditor.store'
 import {
   USE_INVITATION
-} from '../../components/JoinCommunity/JoinCommunity.store'
+} from '../../../components/JoinCommunity/JoinCommunity.store'
 import {
   DELETE_COMMENT_PENDING
-} from '../../components/Comment/Comment.store'
+} from '../../../components/Comment/Comment.store'
 import {
   UPDATE_LAST_VIEWED_PENDING
-} from '../../components/ThreadList/ThreadList.store'
+} from '../../../components/ThreadList/ThreadList.store'
 import {
   UPDATE_NEW_NOTIFICATION_COUNT_PENDING
-} from '../../components/NotificationsList/NotificationsList.store'
+} from '../../../components/NotificationsList/NotificationsList.store'
 
 it('responds to an action with meta.extractModel', () => {
   const state = orm.getEmptyState()
