@@ -2,7 +2,7 @@ import { get } from 'lodash/fp'
 
 export const FETCH_THREADS = `FETCH_THREADS`
 
-export default function fetchThreads (first = 10, offset = 0) {
+export default function fetchThreads (first = 10, offset = 0, reset) {
   return {
     type: FETCH_THREADS,
     graphql: {
@@ -46,7 +46,8 @@ export default function fetchThreads (first = 10, offset = 0) {
     meta: {
       extractModel: 'Me',
       extractQueryResults: {
-        getItems: get('payload.data.me.messageThreads')
+        getItems: get('payload.data.me.messageThreads'),
+        reset
       }
     }
   }

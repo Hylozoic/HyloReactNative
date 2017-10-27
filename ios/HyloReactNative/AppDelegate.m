@@ -48,7 +48,7 @@
                                                       moduleName:@"HyloReactNative"
                                                initialProperties:nil
                                                    launchOptions:launchOptions];
-  
+
   rootView.backgroundColor = [[UIColor alloc] initWithRed:1.0f green:1.0f blue:1.0f alpha:1];
 
   self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
@@ -56,11 +56,14 @@
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
-  
+
   NSString *oneSignalAppID = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"OneSignalAppID"];
   self.oneSignal = [[RCTOneSignal alloc] initWithLaunchOptions:launchOptions
                                                          appId:oneSignalAppID
-                                                      settings:@{kOSSettingsKeyAutoPrompt: @false}];
+                                                      settings:@{
+                                                        kOSSettingsKeyInFocusDisplayOption : @(OSNotificationDisplayTypeNone),
+                                                        kOSSettingsKeyAutoPrompt: @false
+                                                      }];
 
   return YES;
 }

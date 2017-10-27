@@ -45,14 +45,12 @@ export default class extends React.PureComponent {
     this.textInput.clear()
   }
 
-  handleChange = ({ nativeEvent: { text } }) => {
-    const { onChange } = this.props
+  handleChange = text => {
     this.startTyping()
     this.setState({
       submittable: text.trim().length > 0,
       text
     })
-    onChange && onChange(text)
   }
 
   handleContentSizeChange = ({ nativeEvent }) =>
@@ -80,7 +78,7 @@ export default class extends React.PureComponent {
       ...this.props,
 
       // Cannot be overridden
-      onChange: this.handleChange,
+      onChangeText: this.handleChange,
       onContentSizeChange: this.handleContentSizeChange,
       underlineColorAndroid: 'transparent',
       ref: ti => { this.textInput = ti },
