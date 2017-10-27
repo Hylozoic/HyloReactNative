@@ -15,8 +15,10 @@ import { omit } from 'lodash/fp'
 export function isJoinCommunityUrl (url) {
   const invitationRegex = /h\/use-invitation$/
   const accessCodeRegex = /c\/.+\/join\/.+$/
-
-  return url.match(invitationRegex) && url.match(accessCodeRegex)
+  if (url.match(invitationRegex) || url.match(accessCodeRegex)) {
+    return true
+  }
+  return false
 }
 
 export default function sessionReducer (state = {}, action) {
