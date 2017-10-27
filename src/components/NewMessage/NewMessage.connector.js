@@ -13,8 +13,6 @@ import {
   getSuggestions,
   createMessage,
   getInputText,
-  getMessage,
-  setMessage,
   findOrCreateThread,
   FETCH_SUGGESTIONS,
   FETCH_CONTACTS,
@@ -38,7 +36,6 @@ export function mapStateToProps (state, props) {
     participantIds: getParticipantIds(state, props),
     suggestions: getSuggestions(state, {...props, autocomplete: participantInputText}),
     participantInputText,
-    message: getMessage(state, props),
     pending
   }
 }
@@ -54,7 +51,6 @@ export function mapDispatchToProps (dispatch, props) {
       removeParticipant,
       fetchRecentContacts,
       createMessage,
-      setMessage,
       findOrCreateThread,
       showLoadingModal
     }, dispatch)
@@ -62,12 +58,8 @@ export function mapDispatchToProps (dispatch, props) {
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
-  const {
-    participantInputText, message, participantIds, suggestions
-  } = stateProps
-  const {
-    showLoadingModal, findOrCreateThread
-  } = dispatchProps
+  const { participantInputText, participantIds, suggestions } = stateProps
+  const { showLoadingModal, findOrCreateThread } = dispatchProps
   const { navigation } = ownProps
 
   // don't fetch suggestions if we already have some that match the search
@@ -75,20 +67,18 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     ? () => {}
     : () => dispatchProps.fetchSuggestions(participantInputText)
 
-  const createMessage = isEmpty(message)
-    ? () => {}
-    : () => {
-      showLoadingModal(true)
-      return findOrCreateThread(participantIds)
-      .then(resp => {
-        const messageThreadId = get('payload.data.findOrCreateThread.id', resp)
-        dispatchProps.createMessage(messageThreadId, message, true)
-        .then(({ error }) => {
-          if (!error) navigation.navigate('Thread', {id: messageThreadId})
-          showLoadingModal(false)
-        })
+  const createMessage = text => {
+    showLoadingModal(true)
+    return findOrCreateThread(participantIds)
+    .then(resp => {
+      const messageThreadId = get('payload.data.findOrCreateThread.id', resp)
+      dispatchProps.createMessage(messageThreadId, text, true)
+      .then(({ error }) => {
+        if (!error) navigation.navigate('Thread', {id: messageThreadId})
+        showLoadingModal(false)
       })
-    }
+    })
+  }
 
   const participantsFromParams = get('state.params.participants', navigation)
   const loadParticipantsFromParams = participantsFromParams

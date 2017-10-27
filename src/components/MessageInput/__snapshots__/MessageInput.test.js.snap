@@ -3,7 +3,7 @@
 exports[`matches the last snapshot 1`] = `
 <View>
   <TextInput
-    onChange={[Function]}
+    onChangeText={[Function]}
     onContentSizeChange={[Function]}
     onSubmit={[Function]}
     placeholder="Wombats..."

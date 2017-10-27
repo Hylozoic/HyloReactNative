@@ -17,7 +17,6 @@ describe('NewMessage', () => {
     const suggestions = [{id: 7}, {id: 8}, {id: 9}]
     const participants = [{id: 10}, {id: 11}, {id: 12}]
     const currentUser = {id: 1}
-    const message = 'hi mom'
     const pending = {
       all: false,
       recent: true,
@@ -36,7 +35,6 @@ describe('NewMessage', () => {
       participantInputText={participantInputText}
       createMessage={() => {}}
       setMessage={() => {}}
-      message={message}
       pending={pending}
       />)
     const actual = renderer.getRenderOutput()
@@ -56,7 +54,6 @@ describe('NewMessage', () => {
       participantInputText={participantInputText2}
       createMessage={() => {}}
       setMessage={() => {}}
-      message={message}
       pending={pending}
       />)
 
