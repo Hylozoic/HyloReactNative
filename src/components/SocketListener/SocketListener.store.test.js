@@ -1,15 +1,35 @@
-import { ormSessionReducer, RECEIVE_MESSAGE } from './SocketListener.store'
+import {
+  ormSessionReducer,
+  receiveComment,
+  receiveMessage,
+  receiveNotification,
+  receivePost,
+  receiveThread,
+  RECEIVE_MESSAGE,
+  RECEIVE_NOTIFICATION,
+  RECEIVE_THREAD
+} from './SocketListener.store'
 import orm from 'store/models'
+
+describe('actions', () => {
+  it('have the expected shape', () => {
+    expect(receiveComment({id: '1', text: 'hi'})).toMatchSnapshot()
+    expect(receiveMessage({id: '1', text: 'hi'})).toMatchSnapshot()
+    expect(receiveNotification({id: '1', text: 'hi'})).toMatchSnapshot()
+    expect(receivePost({id: '1', title: 'hi'})).toMatchSnapshot()
+    expect(receiveThread({id: '1', messages: [{id: '1', text: 'hi'}]})).toMatchSnapshot()
+  })
+})
 
 describe('ormSessionReducer', () => {
   let session
   beforeEach(() => {
     session = orm.session(orm.getEmptyState())
+    session.Me.create({id: '1'})
   })
 
   it('handles RECEIVE_MESSAGE', () => {
     session.MessageThread.create({id: '1'})
-    session.Me.create({id: '1'})
 
     const date = new Date()
     const action = {
@@ -26,6 +46,38 @@ describe('ormSessionReducer', () => {
 
     ormSessionReducer(session, action)
     expect(session.MessageThread.withId('1').updatedAt).toEqual(date)
-    expect(session.Me.first().unseenThreadCount).toEqual(1)
+    expect(session.Me.first().unseenThreadCount).toBe(1)
+  })
+
+  it('handles RECEIVE_THREAD', () => {
+    const action = {
+      type: RECEIVE_THREAD
+    }
+    ormSessionReducer(session, action)
+    expect(session.Me.first().unseenThreadCount).toBe(1)
+  })
+
+  it('handles RECEIVE_NOTIFICATION', () => {
+    session.Post.create({id: '2'})
+
+    const action = {
+      type: RECEIVE_NOTIFICATION,
+      payload: {
+        data: {
+          notification: {
+            activity: {
+              action: 'newComment',
+              post: {
+                id: '2'
+              }
+            }
+          }
+        }
+      }
+    }
+
+    ormSessionReducer(session, action)
+    expect(session.Me.first().newNotificationCount).toBe(1)
+    expect(session.Post.first().commentsTotal).toBe(1)
   })
 })

@@ -24,7 +24,7 @@ export function receiveMessage (message, opts = {}) {
   }
 }
 
-export function receiveComment (comment, opts = {}) {
+export function receiveComment (comment) {
   return {
     type: RECEIVE_COMMENT,
     payload: {
@@ -127,13 +127,12 @@ export function ormSessionReducer ({ Me, MessageThread, Post }, action) {
       // TODO: eventually we might want to refactor this out into a more
       // structured activity.action handler for the various counts that need
       // bumping (or handle every single damn thing in ModelExtractor).
-      const { notification } = payload.data
+      const { notification: { activity } } = payload.data
       Me.first().increment('newNotificationCount')
 
-      const { activity } = notification
       if (activity.action === 'newComment' && Post.hasId(activity.post.id)) {
         const post = Post.withId(activity.post.id)
-        post.update({ commentsTotal: post.commentsTotal + 1 })
+        post.increment('commentsTotal')
       }
       break
 
