@@ -1,25 +1,10 @@
 import {
   ormSessionReducer,
-  receiveComment,
-  receiveMessage,
-  receiveNotification,
-  receivePost,
-  receiveThread,
   RECEIVE_MESSAGE,
   RECEIVE_NOTIFICATION,
   RECEIVE_THREAD
 } from './SocketListener.store'
 import orm from 'store/models'
-
-describe('actions', () => {
-  it('have the expected shape', () => {
-    expect(receiveComment({id: '1', text: 'hi'})).toMatchSnapshot()
-    expect(receiveMessage({id: '1', text: 'hi'})).toMatchSnapshot()
-    expect(receiveNotification({id: '1', text: 'hi'})).toMatchSnapshot()
-    expect(receivePost({id: '1', title: 'hi'})).toMatchSnapshot()
-    expect(receiveThread({id: '1', messages: [{id: '1', text: 'hi'}]})).toMatchSnapshot()
-  })
-})
 
 describe('ormSessionReducer', () => {
   let session
