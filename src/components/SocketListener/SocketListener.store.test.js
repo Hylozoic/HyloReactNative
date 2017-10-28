@@ -7,8 +7,10 @@ describe('ormSessionReducer', () => {
     session = orm.session(orm.getEmptyState())
   })
 
-  it('updates the thread timestamp on RECEIVE_MESSAGE', () => {
+  it('handles RECEIVE_MESSAGE', () => {
     session.MessageThread.create({id: '1'})
+    session.Me.create({id: '1'})
+
     const date = new Date()
     const action = {
       type: RECEIVE_MESSAGE,
@@ -24,5 +26,6 @@ describe('ormSessionReducer', () => {
 
     ormSessionReducer(session, action)
     expect(session.MessageThread.withId('1').updatedAt).toEqual(date)
+    expect(session.Me.first().unseenThreadCount).toEqual(1)
   })
 })

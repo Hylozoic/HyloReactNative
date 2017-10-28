@@ -145,5 +145,12 @@ export function ormSessionReducer ({ Me, MessageThread, Post }, action) {
       const { message } = payload.data
       MessageThread.withId(message.messageThread)
       .update({updatedAt: message.createdAt})
+
+      // this is not technically correct, because the message you're receiving
+      // could be in a thread that was already unseen. but since the UI doesn't
+      // show the count, just a badge, it just needs to know whether there are
+      // more than 0 unseen threads, and this takes care of that.
+      Me.first().increment('unseenThreadCount')
+      break
   }
 }
