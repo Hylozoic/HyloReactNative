@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { setCommentEdits, getCommentEdits, createComment } from './CommentEditor.store'
+import { setCommentEdits, getCommentEdits, createComment, CREATE_COMMENT } from './CommentEditor.store'
 
 function getPostId (state, props) {
   return props.navigation.state.params.postId
@@ -7,8 +7,10 @@ function getPostId (state, props) {
 
 function mapStateToProps (state, props) {
   const postId = getPostId(null, props)
+  const pending = state.pending[CREATE_COMMENT]
   return {
-    content: getCommentEdits(state, {postId})
+    content: getCommentEdits(state, {postId}),
+    pending
   }
 }
 
