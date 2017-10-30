@@ -4,6 +4,7 @@ import {
   LOGIN_WITH_GOOGLE
 } from '../../components/Login/actions'
 import { SIGNUP } from '../../components/SignupFlow/SignupFlow.store'
+import { CHECK_INVITATION } from '../../components/CheckInvitation/CheckInvitation.store'
 import {
   CHECK_SESSION,
   SET_ENTRY_URL,
@@ -11,15 +12,6 @@ import {
 } from '../../components/SessionCheck/SessionCheck.store'
 import { CHECK_VERSION } from '../../components/VersionCheck/actions'
 import { omit } from 'lodash/fp'
-
-export function isJoinCommunityUrl (url) {
-  const invitationRegex = /h\/use-invitation$/
-  const accessCodeRegex = /c\/.+\/join\/.+$/
-  if (url.match(invitationRegex) || url.match(accessCodeRegex)) {
-    return true
-  }
-  return false
-}
 
 export default function sessionReducer (state = {}, action) {
   const { type, error, payload, meta } = action
@@ -56,7 +48,7 @@ export default function sessionReducer (state = {}, action) {
       }
       return state
     case SET_ENTRY_URL:
-      return {...state, entryURL: payload, hasSignupLink: isJoinCommunityUrl(payload)}
+      return {...state, entryURL: payload}
     case RESET_ENTRY_URL:
       return {...state, entryURL: null, hasSignupLink: false}
     case SIGNUP:
@@ -65,6 +57,11 @@ export default function sessionReducer (state = {}, action) {
       return {
         ...state,
         checkVersion: payload
+      }
+    case CHECK_INVITATION:
+      return {
+        ...state,
+        hasSignupLink: true
       }
   }
 
