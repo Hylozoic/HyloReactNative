@@ -1,13 +1,14 @@
 import { connect } from 'react-redux'
 import { setCommentEdits, getCommentEdits, createComment, CREATE_COMMENT } from './CommentEditor.store'
+import { get } from 'lodash/fp'
 
 function getPostId (state, props) {
-  return props.navigation.state.params.postId
+  return get('navigation.state.params.postId', props)
 }
 
-function mapStateToProps (state, props) {
+export function mapStateToProps (state, props) {
   const postId = getPostId(null, props)
-  const pending = state.pending[CREATE_COMMENT]
+  const pending = !!state.pending[CREATE_COMMENT]
   return {
     content: getCommentEdits(state, {postId}),
     pending
