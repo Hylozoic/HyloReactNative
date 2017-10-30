@@ -86,8 +86,8 @@ export default class Login extends React.Component {
     const { ssoError, error, emailError, passwordError, emailIsValid, isConnected } = this.state
     return <ScrollView contentContainerStyle={styles.login} style={styles.container}>
       {ssoError && <Text style={styles.errorBanner}>{ssoError}</Text>}
-      {!isConnected && <Text style={styles.errorBanner}>YOU ARE OFFLINE. TRYING TO RECONNECT...</Text>}
-      {pending && <Text style={styles.banner}>Logging in ...</Text>}
+      {!isConnected && <Text style={styles.errorBanner}>OFFLINE; TRYING TO RECONNECT...</Text>}
+      {pending && <Text style={styles.banner}>LOGGING IN...</Text>}
 
       <Image style={styles.logo}
         source={require('../../assets/merkaba-green-on-white.png')} />
