@@ -73,7 +73,7 @@ Object {
   "emailError": false,
   "error": "blah",
   "goToSignup": [Function],
-  "hasSignupLink": undefined,
+  "hasSignupLink": false,
   "passwordError": false,
   "pending": undefined,
 }
@@ -87,4 +87,14 @@ Array [
 ]
 `;
 
-exports[`Login mapStateToProps return object matches snapshot 1`] = `undefined`;
+exports[`Login mapStateToProps return object matches snapshot 1`] = `
+Object {
+  "defaultEmail": undefined,
+  "emailError": false,
+  "error": false,
+  "goToSignup": [Function],
+  "hasSignupLink": false,
+  "passwordError": false,
+  "pending": undefined,
+}
+`;

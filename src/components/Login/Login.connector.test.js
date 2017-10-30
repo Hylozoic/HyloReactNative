@@ -75,7 +75,7 @@ describe('Login mapStateToProps', () => {
           navigate: jest.fn()
         }
       }
-      expect(mapStateToProps(state, props).pending).toMatchSnapshot()
+      expect(mapStateToProps(state, props)).toMatchSnapshot()
     })
   })
 })
