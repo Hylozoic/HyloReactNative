@@ -28,6 +28,7 @@ export function fetchCommunityTopic (topicName, communitySlug) {
       variables: {topicName, communitySlug}
     },
     meta: {
+      afterInteractions: true,
       extractModel: 'CommunityTopic'
     }
   }

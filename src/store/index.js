@@ -1,20 +1,23 @@
+import { AsyncStorage } from 'react-native'
+import { composeWithDevTools } from 'remote-redux-devtools'
 import { applyMiddleware, createStore } from 'redux'
+import { createLogger } from 'redux-logger'
 import { compact } from 'lodash'
-import rootReducer, { combinedReducers } from './reducers'
-import promiseMiddleware from 'redux-promise'
+
+import afterInteractionsMiddleware from './middleware/afterInteractions'
 import apiMiddleware from './middleware/api'
 import graphQLMiddleware from './middleware/graphQL'
-import { createLogger } from 'redux-logger'
 import optimisticMiddleware from './middleware/optimistic'
-import pendingMiddleware from './middleware/pending'
-import { AsyncStorage } from 'react-native'
-import { PERSISTED_STATE_KEY } from './reducers/persistence'
 import orm from './models'
-import { composeWithDevTools } from 'remote-redux-devtools'
+import pendingMiddleware from './middleware/pending'
+import { PERSISTED_STATE_KEY } from './reducers/persistence'
+import promiseMiddleware from 'redux-promise'
+import rootReducer, { combinedReducers } from './reducers'
 
 const middleware = compact([
   graphQLMiddleware,
   apiMiddleware,
+  afterInteractionsMiddleware,
   optimisticMiddleware,
   pendingMiddleware,
   promiseMiddleware,
