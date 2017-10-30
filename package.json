@@ -61,6 +61,7 @@
     "jest": "^20.0.4",
     "react-test-renderer": "next",
     "remote-redux-devtools": "^0.5.11",
+    "timezone-mock": "^0.0.6",
     "validator": "^8.0.0"
   },
   "babel": {
@@ -83,7 +84,9 @@
         ]
       },
       "production": {
-        "plugins": ["transform-remove-console"]
+        "plugins": [
+          "transform-remove-console"
+        ]
       }
     }
   },

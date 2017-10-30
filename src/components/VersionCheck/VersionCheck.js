@@ -1,12 +1,14 @@
 import React from 'react'
 import { Alert, Linking } from 'react-native'
-import { isIOS } from 'util/platform'
 import Loading from '../Loading'
 
-export default class VersionCheck extends React.Component {
-  componentWillMount = () => {
+export default class VersionCheck extends React.PureComponent {
+  static defaultProps = {pending: true}
+
+  componentDidMount () {
     this.props.checkVersion()
   }
+
   showAlert = (updateType) => {
     const type = updateType.type
     const buttons = [

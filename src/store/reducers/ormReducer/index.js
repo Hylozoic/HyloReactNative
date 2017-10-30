@@ -1,39 +1,38 @@
+import * as sessionReducers from './sessionReducers'
+import { values } from 'lodash'
 import {
   UPDATE_USER_SETTINGS_PENDING
-} from '../actions/updateUserSettings'
+} from '../../actions/updateUserSettings'
 import {
   ADD_SKILL, REMOVE_SKILL
-} from '../../components/SignupFlow/SignupFlow.store'
+} from '../../../components/SignupFlow/SignupFlow.store'
 import {
   CREATE_COMMENT
-} from '../../components/PostDetails/CommentEditor/CommentEditor.store'
+} from '../../../components/PostDetails/CommentEditor/CommentEditor.store'
 import {
   TOGGLE_TOPIC_SUBSCRIBE_PENDING
-} from '../../components/Feed/Feed.store'
+} from '../../../components/Feed/Feed.store'
 import {
   MARK_ACTIVITY_READ, MARK_ALL_ACTIVITIES_READ, UPDATE_NEW_NOTIFICATION_COUNT_PENDING
-} from '../../components/NotificationsList/NotificationsList.store'
-import {
-  RECEIVE_NOTIFICATION
-} from '../../components/SocketListener/SocketListener.store'
+} from '../../../components/NotificationsList/NotificationsList.store'
 import {
   CREATE_MESSAGE, CREATE_MESSAGE_PENDING
-} from '../../components/Thread/Thread.store'
+} from '../../../components/Thread/Thread.store'
 import {
   VOTE_ON_POST_PENDING
-} from '../../components/PostCard/PostFooter/PostFooter.store'
+} from '../../../components/PostCard/PostFooter/PostFooter.store'
 import {
   USE_INVITATION
-} from '../../components/JoinCommunity/JoinCommunity.store'
+} from '../../../components/JoinCommunity/JoinCommunity.store'
 import {
   DELETE_COMMENT_PENDING
-} from '../../components/Comment/Comment.store'
+} from '../../../components/Comment/Comment.store'
 import {
   UPDATE_LAST_VIEWED_PENDING
-} from '../../components/ThreadList/ThreadList.store'
-import orm from '../models'
-import ModelExtractor from './ModelExtractor'
-import extractModelsFromAction from './ModelExtractor/extractModelsFromAction'
+} from '../../../components/ThreadList/ThreadList.store'
+import orm from 'store/models'
+import ModelExtractor from '../ModelExtractor'
+import extractModelsFromAction from '../ModelExtractor/extractModelsFromAction'
 import { isPromise } from 'util/index'
 
 export default function ormReducer (state = {}, action) {
@@ -122,21 +121,6 @@ export default function ormReducer (state = {}, action) {
       me.update(changes)
       break
 
-    case RECEIVE_NOTIFICATION:
-      // TODO: eventually we might want to refactor this out into a more
-      // structured activity.action handler for the various counts that need
-      // bumping (or handle every single damn thing in ModelExtractor).
-      const { notification } = payload.data
-      const newNotificationCount = session.Me.first().newNotificationCount + 1
-      session.Me.first().update({ newNotificationCount })
-
-      const { activity } = notification
-      if (activity.action === 'newComment' && session.Post.hasId(activity.post.id)) {
-        const post = session.Post.withId(activity.post.id)
-        post.update({ commentsTotal: post.commentsTotal + 1 })
-      }
-      break
-
     case TOGGLE_TOPIC_SUBSCRIBE_PENDING:
       const ct = session.CommunityTopic.get({
         topic: meta.topicId, community: meta.communityId
@@ -172,5 +156,6 @@ export default function ormReducer (state = {}, action) {
       break
   }
 
+  values(sessionReducers).forEach(fn => fn(session, action))
   return session.state
 }

@@ -8,9 +8,9 @@ import getStore from '../../store'
 import mixins from '../../style/mixins'
 
 export default class RootView extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {}
+  state = {}
+
+  componentDidMount () {
     getStore().then(store => this.setState({store}))
   }
 

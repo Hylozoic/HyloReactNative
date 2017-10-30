@@ -22,6 +22,8 @@ export default class SocketListener extends React.Component {
       this.reconnect()
       Object.keys(this.handlers).forEach(socketEvent =>
         this.socket.on(socketEvent, this.handlers[socketEvent]))
+
+      this.socket.on('reconnect', this.reconnect)
     })
   }
 
