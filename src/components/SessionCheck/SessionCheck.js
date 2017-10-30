@@ -33,8 +33,7 @@ export default class SessionCheck extends React.Component {
 
   componentDidMount () {
     const { initOneSignal, checkSession } = this.props
-    checkSession()
-    initOneSignal()
+    return checkSession().then(signedIn => signedIn && initOneSignal())
   }
 
   componentWillUpdate (nextProps) {

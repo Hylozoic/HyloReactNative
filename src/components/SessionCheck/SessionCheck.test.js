@@ -25,7 +25,7 @@ const defaultRequiredProps = {
   loading: false,
   loggedIn: undefined,
   currentUser: null,
-  checkSession: () => {},
+  checkSession: () => Promise.resolve(),
   initOneSignal: () => {},
   setEntryURL: () => {},
   resetEntryURL: () => {},
@@ -83,12 +83,12 @@ describe('SessionCheck component', () => {
 
   // Lifecycle Methods
 
-  test('componentDidMount', () => {
+  test('componentDidMount', async () => {
     const testProps = testPropsSetup({
-      checkSession: jest.fn(),
+      checkSession: jest.fn(() => Promise.resolve(true)),
       initOneSignal: jest.fn()
     })
-    ReactTestRenderer.create(<SessionCheck {...testProps} />)
+    await ReactTestRenderer.create(<SessionCheck {...testProps} />)
     expect(testProps.checkSession).toHaveBeenCalled()
     expect(testProps.initOneSignal).toHaveBeenCalled()
   })

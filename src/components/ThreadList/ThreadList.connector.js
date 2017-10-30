@@ -1,4 +1,5 @@
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import getMe from '../../store/selectors/getMe'
 import fetchThreads, { FETCH_THREADS } from '../../store/actions/fetchThreads'
 import { getThreads, getThreadsHasMore, updateLastViewed } from './ThreadList.store'
@@ -20,11 +21,13 @@ export function mapStateToProps (state, props) {
 
 export function mapDispatchToProps (dispatch, { navigation }) {
   return {
-    fetchThreads: (first, offset) => dispatch(fetchThreads(first, offset)),
     showThread: threadOrId => navigation.navigate('Thread', {
       id: get('id', threadOrId) || threadOrId
     }),
-    updateLastViewed: () => dispatch(updateLastViewed())
+    ...bindActionCreators({
+      updateLastViewed,
+      fetchThreads
+    }, dispatch)
   }
 }
 

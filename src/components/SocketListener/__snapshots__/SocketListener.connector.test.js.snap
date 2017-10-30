@@ -1,0 +1,139 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`returns the expected value 1`] = `
+Object {
+  "addUserTyping": [Function],
+  "clearUserTyping": [Function],
+  "community": SessionBoundModel {
+    "_fields": Object {
+      "id": "7",
+      "members": undefined,
+      "moderators": undefined,
+      "posts": undefined,
+    },
+  },
+  "receiveComment": [Function],
+  "receiveMessage": [Function],
+  "receiveNotification": [Function],
+  "receivePost": [Function],
+  "receiveThread": [Function],
+  "setupCoreEventHandlers": [Function],
+}
+`;
+
+exports[`returns the expected value 2`] = `
+Object {
+  "payload": Object {
+    "id": "11",
+    "name": "Joe",
+  },
+  "type": "PeopleTyping/ADD_USER_TYPING",
+}
+`;
+
+exports[`returns the expected value 3`] = `
+Object {
+  "payload": Object {
+    "id": "11",
+  },
+  "type": "PeopleTyping/CLEAR_USER_TYPING",
+}
+`;
+
+exports[`returns the expected value 4`] = `
+Object {
+  "meta": Object {
+    "extractModel": "Comment",
+  },
+  "payload": Object {
+    "data": Object {
+      "comment": Object {
+        "id": "1",
+        "text": "hi",
+      },
+    },
+  },
+  "type": "SocketListener/RECEIVE_COMMENT",
+}
+`;
+
+exports[`returns the expected value 5`] = `
+Object {
+  "meta": Object {
+    "bumpUnreadCount": true,
+    "extractModel": "Message",
+  },
+  "payload": Object {
+    "data": Object {
+      "message": Object {
+        "createdAt": "Mockday 2017-10-11T00:00:00.000Z GMT-0700 (MockDate)",
+        "id": "1",
+        "text": "hi",
+      },
+    },
+  },
+  "type": "SocketListener/RECEIVE_MESSAGE",
+}
+`;
+
+exports[`returns the expected value 6`] = `
+Object {
+  "meta": Object {
+    "extractModel": "Notification",
+  },
+  "payload": Object {
+    "data": Object {
+      "notification": Object {
+        "id": "1",
+        "text": "hi",
+      },
+    },
+  },
+  "type": "SocketListener/RECEIVE_NOTIFICATION",
+}
+`;
+
+exports[`returns the expected value 7`] = `
+Object {
+  "meta": Object {
+    "extractModel": "Post",
+  },
+  "payload": Object {
+    "data": Object {
+      "post": Object {
+        "id": "1",
+        "title": "hi",
+      },
+    },
+  },
+  "type": "SocketListener/RECEIVE_POST",
+}
+`;
+
+exports[`returns the expected value 8`] = `
+Object {
+  "meta": Object {
+    "extractModel": "MessageThread",
+  },
+  "payload": Object {
+    "data": Object {
+      "thread": Object {
+        "createdAt": "Mockday 2017-10-11T00:00:00.000Z GMT-0700 (MockDate)",
+        "id": "1",
+        "messages": Array [
+          Object {
+            "createdAt": "Mockday 2017-10-11T00:00:00.000Z GMT-0700 (MockDate)",
+            "creator": undefined,
+            "id": "1",
+            "messageThread": "1",
+            "text": "hi",
+          },
+        ],
+        "unreadCount": 1,
+        "updatedAt": "Mockday 2017-10-11T00:00:00.000Z GMT-0700 (MockDate)",
+      },
+    },
+  },
+  "type": "SocketListener/RECEIVE_THREAD",
+}
+`;

@@ -24,7 +24,7 @@ export function receiveMessage (message, opts = {}) {
   }
 }
 
-export function receiveComment (comment, opts = {}) {
+export function receiveComment (comment) {
   return {
     type: RECEIVE_COMMENT,
     payload: {
@@ -117,4 +117,39 @@ export default function reducer (state = {}, action) {
     return newState
   }
   return state
+}
+
+export function ormSessionReducer ({ Me, MessageThread, Post }, action) {
+  const { type, payload } = action
+
+  switch (type) {
+    case RECEIVE_NOTIFICATION:
+      // TODO: eventually we might want to refactor this out into a more
+      // structured activity.action handler for the various counts that need
+      // bumping (or handle every single damn thing in ModelExtractor).
+      const { notification: { activity } } = payload.data
+      Me.first().increment('newNotificationCount')
+
+      if (activity.action === 'newComment' && Post.hasId(activity.post.id)) {
+        const post = Post.withId(activity.post.id)
+        post.increment('commentsTotal')
+      }
+      break
+
+    case RECEIVE_THREAD:
+      Me.first().increment('unseenThreadCount')
+      break
+
+    case RECEIVE_MESSAGE:
+      const { message } = payload.data
+      MessageThread.withId(message.messageThread)
+      .update({updatedAt: message.createdAt})
+
+      // this is not technically correct, because the message you're receiving
+      // could be in a thread that was already unseen. but since the UI doesn't
+      // show the count, just a badge, it just needs to know whether there are
+      // more than 0 unseen threads, and this takes care of that.
+      Me.first().increment('unseenThreadCount')
+      break
+  }
 }
