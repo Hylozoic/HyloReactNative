@@ -53,11 +53,16 @@ describe('mapStateToProps', () => {
       orm: session.state
     }
 
-    const ownProps = {creator: {id: 20}}
+    const propEditPost = jest.fn()
+
+    const ownProps = {creator: {id: 20}, editPost: propEditPost}
     const { canEdit, editPost } = mapStateToProps(state, ownProps)
 
     expect(canEdit).toBeTruthy()
     expect(editPost).toBeTruthy()
+
+    editPost()
+    expect(propEditPost).toHaveBeenCalled()
   })
 
   it('cannot edit post when user is not creator', () => {
@@ -115,6 +120,12 @@ describe('mergeProps', () => {
 
     expect(deletePost).toBeTruthy()
     expect(removePost).toBeTruthy()
+
+    removePost()
+    expect(dispatchProps.removePost).toHaveBeenCalledWith(20, 'mycommunity')
+
+    deletePost()
+    expect(dispatchProps.deletePost).toHaveBeenCalledWith(20)
   })
 
   it('cannot delete posts', () => {
