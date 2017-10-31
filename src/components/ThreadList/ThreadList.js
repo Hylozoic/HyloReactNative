@@ -5,6 +5,8 @@ import header from 'util/header'
 import Loading from '../Loading'
 import ThreadCard from '../ThreadCard'
 import styles from './ThreadList.styles'
+import NotificationOverlay from '../NotificationOverlay'
+import { getSocket } from 'util/websockets'
 
 export default class ThreadList extends Component {
   static navigationOptions = ({ navigation }) =>
@@ -21,6 +23,7 @@ export default class ThreadList extends Component {
 
   componentDidMount () {
     this.fetchOrShowCached()
+    getSocket().then(socket => socket.on('reconnect', this.props.refreshThreads))
   }
 
   _keyExtractor = (item, index) => item.id
@@ -33,7 +36,8 @@ export default class ThreadList extends Component {
       fetchMoreThreads,
       showThread,
       refreshThreads,
-      pendingRefresh
+      pendingRefresh,
+      isConnected
     } = this.props
 
     if (pending && threads.length === 0) return <Loading />
@@ -60,6 +64,12 @@ export default class ThreadList extends Component {
       {!pending && threads.length === 0 &&
         <Text style={styles.center}>No active conversations</Text>
       }
+      {!isConnected && <NotificationOverlay
+        position='bottom'
+        type='error'
+        permanent
+        message='RECONNECTING...'
+        onPress={this.scrollToBottom} />}
     </View>
   }
 }

@@ -6,12 +6,21 @@ import VersionCheck from '../VersionCheck'
 import LoadingModal from '../LoadingModal'
 import { Provider } from 'react-redux'
 import getStore from '../../store'
+import { init as initOneSignal } from 'util/onesignal'
+import receivePushNotification from '../../store/actions/receivePushNotification'
 
 export default class RootView extends React.Component {
   state = {}
 
   componentDidMount () {
-    getStore().then(store => this.setState({store}))
+    getStore().then(store => {
+      this.setState({store})
+
+      initOneSignal({
+        receivePushNotification: notification =>
+          store.dispatch(receivePushNotification(notification))
+      })
+    })
   }
 
   render () {
