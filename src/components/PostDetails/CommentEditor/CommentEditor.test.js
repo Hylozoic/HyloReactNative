@@ -29,6 +29,36 @@ it('has navigation options', () => {
   expect(CommentEditor.navigationOptions(props)).toMatchSnapshot()
 })
 
+describe('save', () => {
+  const navigation = {
+    setParams: jest.fn(),
+    state: {params: {}},
+    goBack: jest.fn()
+  }
+  const saveChanges = jest.fn()
+  const setCommentEdits = () => {}
+  const props = {
+    navigation,
+    saveChanges,
+    setCommentEdits
+  }
+  it('sets disabled to true and calls save changes with content', () => {
+    const theContent = 'the content'
+    const instance = ReactTestRenderer.create(<CommentEditor {...props} />).getInstance()
+    instance.editor = {
+      getContentAsync: () => Promise.resolve(theContent)
+    }
+    const { save } = navigation.setParams.mock.calls[0][0]
+    navigation.setParams.mockClear()
+    return save()
+    .then(() => {
+      expect(navigation.setParams).toHaveBeenCalledWith({disabled: true})
+      expect(saveChanges).toHaveBeenCalledWith(theContent)
+      expect(navigation.goBack).toHaveBeenCalled()
+    })
+  })
+})
+
 describe('componentDidUpdate', () => {
   const setParams = jest.fn()
   const notPendingProps = {
@@ -42,18 +72,11 @@ describe('componentDidUpdate', () => {
     ...notPendingProps,
     pending: true
   }
+
   it('sets disabled when pending changes to true', () => {
     const instance = ReactTestRenderer.create(<CommentEditor {...pendingProps} />).getInstance()
     setParams.mockClear()
     instance.componentDidUpdate(notPendingProps)
-    expect(setParams).toHaveBeenCalledWith({disabled: true})
-  })
-
-  it('sets disabled when saveDisabled changes to true', () => {
-    const instance = ReactTestRenderer.create(<CommentEditor {...notPendingProps} />).getInstance()
-    setParams.mockClear()
-    instance.setState({saveDisabled: true})
-    instance.componentDidUpdate(notPendingProps, {saveDisabled: false})
     expect(setParams).toHaveBeenCalledWith({disabled: true})
   })
 
