@@ -54,15 +54,9 @@ export default function sessionReducer (state = {}, action) {
     case SIGNUP:
       return {...state, loggedIn: true}
     case CHECK_VERSION:
-      return {
-        ...state,
-        checkVersion: payload
-      }
+      return {...state, checkVersion: payload}
     case CHECK_INVITATION:
-      return {
-        ...state,
-        hasSignupLink: true
-      }
+      return {...state, hasSignupLink: true}
   }
 
   return state
