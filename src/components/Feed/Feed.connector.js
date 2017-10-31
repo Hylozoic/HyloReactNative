@@ -14,13 +14,14 @@ import { get } from 'lodash/fp'
 
 export function mapStateToProps (state, props) {
   const params = get('state.params', props.navigation) || {}
-  // TODO: Can we do without navigation.params.communityId/networkId?
-  const networkId = props.networkId || params.networkId
-  const communityId = !networkId ? props.communityId || params.communityId : null
+  // NOTE: networkId is only received as a prop (currently via Home)
+  const networkId = props.networkId
+  // NOTE: communityId is is received either as a prop (via Home) or as a
+  // navigation parameter. In case of nav params the screen will load with a
+  // back button and be added to the stack.
+  const communityId = params.communityId || props.communityId
   const topicName = props.topicName || params.topicName
-  // NOTE: Below is implicit logic to indicating whether a community or network
-  // feed is to be loaded.
-  const community = getCommunity(state, {id: communityId})
+  const community = !networkId && getCommunity(state, {id: communityId})
   const network = getNetwork(state, {id: networkId})
   const currentUser = getMe(state)
   const communityTopic = topicName && community &&
