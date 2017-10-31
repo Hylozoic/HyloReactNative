@@ -37,6 +37,7 @@ export const capeCod10 = '#EBEBEB'
 export const capeCod20 = fakeAlpha(capeCod, 0.2)
 export const capeCod40 = '#A79A9A'
 export const rhino10 = fakeAlpha(rhino, 0.1)
+export const rhino20 = fakeAlpha(rhino, 0.2)
 export const rhino30 = fakeAlpha(rhino, 0.3)
 export const rhino40 = fakeAlpha(rhino, 0.4)
 export const rhino50 = fakeAlpha(rhino, 0.5)

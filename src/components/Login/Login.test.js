@@ -21,9 +21,7 @@ describe('Login', () => {
 
   it('renders with pending banner', () => {
     const renderer = new ReactShallowRenderer()
-    renderer.render(<Login
-      pending
-    />)
+    renderer.render(<Login pending />)
     const actual = renderer.getRenderOutput()
     expect(actual).toMatchSnapshot()
   })
@@ -117,23 +115,6 @@ describe('Login', () => {
 
     instance.setInput(passwordKey, password)
     expect(instance.state.password).toEqual(password)
-  })
-
-  it('should update state when it receives props', function () {
-    const error = 'email'
-    const emailError = true
-    const passwordError = null
-    const nextProps = {
-      error,
-      emailError,
-      passwordError
-    }
-    const instance = TestRenderer.create(<Login />
-    ).root.instance
-    instance.componentWillReceiveProps(nextProps)
-    expect(instance.state.error).toEqual(error)
-    expect(instance.state.emailError).toEqual(emailError)
-    expect(instance.state.passwordError).toEqual(passwordError)
   })
 })
 
