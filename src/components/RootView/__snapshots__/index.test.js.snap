@@ -1,14 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`RootView matches last snapshot with a store 1`] = `
-<View>
-  <LoadingModal />
-  <VersionCheck>
-    <SessionCheck />
-  </VersionCheck>
-</View>
-`;
-
 exports[`RootView matches last snapshot without a store 1`] = `
 <View>
   <Text
@@ -19,5 +10,14 @@ exports[`RootView matches last snapshot without a store 1`] = `
   >
     Loading...
   </Text>
+</View>
+`;
+
+exports[`RootView renders as expected when store is loaded 1`] = `
+<View>
+  <LoadingModal />
+  <VersionCheck>
+    <SessionCheck />
+  </VersionCheck>
 </View>
 `;

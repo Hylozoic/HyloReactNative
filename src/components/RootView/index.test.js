@@ -1,7 +1,13 @@
 import React from 'react'
-import ReactShallowRenderer from 'react-test-renderer/shallow'
-import ReactTestRenderer from 'react-test-renderer'
+import TestRenderer from 'react-test-renderer'
 import RootView from './index'
+import OneSignal from 'react-native-onesignal'
+
+jest.mock('../../store', () => () => Promise.resolve({
+  subscribe: jest.fn(),
+  getState: jest.fn(() => ({})),
+  dispatch: jest.fn()
+}))
 
 jest.mock('react-native-device-info')
 jest.mock('NetInfo', () => ({
@@ -11,34 +17,27 @@ jest.mock('NetInfo', () => ({
   },
   fetch: jest.fn()
 }))
+
 jest.mock('react-native-onesignal', () => ({
-  getPermissionSubscriptionState: jest.fn(() => Promise.resolve({userId: 5}))
+  addEventListener: jest.fn(),
+  inFocusDisplaying: jest.fn()
 }))
 
-jest.mock('react-redux', () => ({
-  Provider: ({ children }) => children
-}))
-
-jest.mock('../Login', () => 'Login')
-jest.mock('../CheckInvitation', () => 'CheckInvitation')
-jest.mock('../SocketListener', () => 'SocketListener')
-jest.mock('../LoginNavigator', () => 'LoginNavigator')
 jest.mock('../SessionCheck', () => 'SessionCheck')
 jest.mock('../VersionCheck', () => 'VersionCheck')
 jest.mock('../LoadingModal', () => 'LoadingModal')
 
 describe('RootView', () => {
-  it('matches last snapshot with a store', () => {
-    const renderer = ReactTestRenderer.create(<RootView />)
-    const instance = renderer.getInstance()
-    instance.setState({store: {}})
+  it('renders as expected when store is loaded', async () => {
+    const renderer = await TestRenderer.create(<RootView />)
     expect(renderer.toJSON()).toMatchSnapshot()
+    expect(OneSignal.addEventListener).toBeCalled()
+    expect(OneSignal.inFocusDisplaying).toBeCalled()
   })
 
   it('matches last snapshot without a store', () => {
-    const renderer = ReactTestRenderer.create(<RootView />)
-    const instance = renderer.getInstance()
-    instance.setState({store: null})
+    const renderer = TestRenderer.create(<RootView />)
+    renderer.getInstance().setState({store: null})
     expect(renderer.toJSON()).toMatchSnapshot()
   })
 })

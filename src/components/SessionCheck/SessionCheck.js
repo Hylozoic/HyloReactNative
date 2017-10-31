@@ -19,7 +19,6 @@ export default class SessionCheck extends React.Component {
     currentUser: PropTypes.object,
     entryURL: PropTypes.string,
     checkSession: PropTypes.func.isRequired,
-    initOneSignal: PropTypes.func.isRequired,
     setEntryURL: PropTypes.func.isRequired,
     resetEntryURL: PropTypes.func.isRequired,
     fetchCurrentUser: PropTypes.func.isRequired
@@ -32,8 +31,7 @@ export default class SessionCheck extends React.Component {
   }
 
   componentDidMount () {
-    const { initOneSignal, checkSession } = this.props
-    return checkSession().then(signedIn => signedIn && initOneSignal())
+    this.props.checkSession()
   }
 
   componentWillUpdate (nextProps) {

@@ -1,9 +1,6 @@
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { init as initOneSignal } from 'util/onesignal'
 import { get } from 'lodash/fp'
 import fetchCurrentUser, { FETCH_CURRENT_USER } from '../../store/actions/fetchCurrentUser'
-import registerDevice from '../../store/actions/registerDevice'
 import {
   checkSession,
   CHECK_SESSION,
@@ -34,18 +31,11 @@ export function mapStateToProps (state) {
   }
 }
 
-export function mapDispatchToProps (dispatch) {
-  const actions = {
-    checkSession,
-    setEntryURL,
-    resetEntryURL,
-    fetchCurrentUser
-  }
-  return {
-    ...bindActionCreators(actions, dispatch),
-    initOneSignal: () =>
-      initOneSignal(bindActionCreators({registerDevice}, dispatch))
-  }
+const mapDispatchToProps = {
+  checkSession,
+  setEntryURL,
+  resetEntryURL,
+  fetchCurrentUser
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)

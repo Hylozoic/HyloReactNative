@@ -85,12 +85,10 @@ describe('SessionCheck component', () => {
 
   test('componentDidMount', async () => {
     const testProps = testPropsSetup({
-      checkSession: jest.fn(() => Promise.resolve(true)),
-      initOneSignal: jest.fn()
+      checkSession: jest.fn(() => Promise.resolve(true))
     })
     await ReactTestRenderer.create(<SessionCheck {...testProps} />)
     expect(testProps.checkSession).toHaveBeenCalled()
-    expect(testProps.initOneSignal).toHaveBeenCalled()
   })
 
   describe('componentWillUpdate', () => {
