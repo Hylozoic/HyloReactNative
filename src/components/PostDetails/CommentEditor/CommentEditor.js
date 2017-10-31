@@ -1,33 +1,50 @@
 import React from 'react'
-import { Button, KeyboardAvoidingView } from 'react-native'
+import { KeyboardAvoidingView } from 'react-native'
 import Editor from '../../Editor'
 import { get } from 'lodash/fp'
 import { keyboardAvoidingViewProps as kavProps } from 'util/viewHelpers'
 import { isIOS } from 'util/platform'
+import header from 'util/header'
 
 export default class CommentEditor extends React.Component {
   static navigationOptions = ({ navigation }) => {
-    const { save } = get('state.params', navigation) || {}
-    return {
-      headerTitle: 'Comment',
-      headerRight: save ? <Button title='Save' onPress={save} /> : null
-    }
+    const { save, disabled } = get('state.params', navigation) || {}
+    return header(navigation, {
+      left: 'close',
+      title: 'Comment',
+      right: save && {text: 'Save', onPress: save, disabled}
+    })
+  }
+
+  state = {
+    saveDisabled: false
   }
 
   componentDidMount () {
     const { navigation, saveChanges, setCommentEdits } = this.props
     navigation.setParams({
-      save: () =>
-        this.editor.getContentAsync()
+      save: () => {
+        navigation.setParams({disabled: true})
+        return this.editor.getContentAsync()
         .then(content => saveChanges(content))
         .then(() => this.interval && clearInterval(this.interval))
         .then(() => navigation.goBack())
+      }
     })
 
     this.interval = setInterval(() => {
       this.editor.getContentAsync()
       .then(content => setCommentEdits(content))
     }, 1000)
+  }
+
+  componentDidUpdate (prevProps) {
+    const { pending, navigation } = this.props
+    if (pending && !prevProps.pending) {
+      navigation.setParams({disabled: true})
+    } else if (!pending && prevProps.pending) {
+      navigation.setParams({disabled: false})
+    }
   }
 
   componentWillUnmount () {

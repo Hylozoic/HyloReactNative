@@ -4,12 +4,12 @@
 import React from 'react'
 import { StyleSheet, Text, TouchableOpacity } from 'react-native'
 
-import { rhino60 } from 'style/colors'
+import { rhino60, rhino20 } from 'style/colors'
 
-export const headerButton = ({ onPress, text }) => {
+export const headerButton = ({ onPress, text, disabled }) => {
   if (typeof onPress !== 'function') throw new Error('headerButton: onPress is not a function.')
-  return <TouchableOpacity onPress={onPress}>
-    <Text style={styles.button}>{text}</Text>
+  return <TouchableOpacity onPress={onPress} disabled={disabled}>
+    <Text style={[styles.button, disabled && styles.disabled]}>{text}</Text>
   </TouchableOpacity>
 }
 
@@ -73,6 +73,9 @@ const styles = StyleSheet.create({
     fontFamily: 'Circular-Book',
     fontSize: 15,
     color: rhino60
+  },
+  disabled: {
+    color: rhino20
   },
   center: {
     alignSelf: 'center'
