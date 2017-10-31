@@ -1,11 +1,11 @@
 import React from 'react'
-import { Text, View } from 'react-native'
+import Loading from '../Loading'
+import { View } from 'react-native'
 import SessionCheck from '../SessionCheck'
 import VersionCheck from '../VersionCheck'
 import LoadingModal from '../LoadingModal'
 import { Provider } from 'react-redux'
 import getStore from '../../store'
-import mixins from '../../style/mixins'
 
 export default class RootView extends React.Component {
   state = {}
@@ -24,6 +24,6 @@ export default class RootView extends React.Component {
           </VersionCheck>
         </View>
       </Provider>
-      : <View style={mixins.allCentered}><Text>Loading...</Text></View>
+      : <Loading style={{flex: 1}} />
   }
 }
