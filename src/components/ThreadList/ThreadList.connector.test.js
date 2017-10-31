@@ -1,5 +1,21 @@
-import { mapDispatchToProps, mergeProps } from './ThreadList.connector'
+import { mapStateToProps, mapDispatchToProps, mergeProps } from './ThreadList.connector'
 import { UPDATE_LAST_VIEWED } from './ThreadList.store'
+
+describe('mapStateToProps', () => {
+  it('has the expected shape', () => {
+    const state = {
+      pending: {},
+      queryResults: {},
+      SocketListener: {
+        connected: true
+      }
+    }
+
+    const props = {}
+
+    expect(mapStateToProps(state, props)).toMatchSnapshot()
+  })
+})
 
 describe('mapDispatchToProps', () => {
   it('creates showThread and updateLastViewed functions', () => {

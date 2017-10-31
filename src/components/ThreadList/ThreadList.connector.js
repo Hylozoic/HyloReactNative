@@ -15,7 +15,8 @@ export function mapStateToProps (state, props) {
     pendingRefresh: !!(pending && pending.extractQueryResults.reset),
     currentUser,
     threads,
-    hasMore
+    hasMore,
+    isConnected: state.SocketListener.connected
   }
 }
 
