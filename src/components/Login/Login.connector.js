@@ -22,7 +22,7 @@ export function mapStateToProps (state, props) {
     pending,
     defaultEmail: state.session.defaultLoginEmail,
     goToSignup,
-    hasSignupLink: !!state.session.hasSignupLink || true
+    hasSignupLink: !!state.session.hasSignupLink
   }
 }
 
