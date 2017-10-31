@@ -21,3 +21,16 @@ exports[`RootView renders as expected when store is loaded 1`] = `
   </VersionCheck>
 </View>
 `;
+
+exports[`RootView renders as expected when store is loaded 2`] = `
+Object {
+  "payload": Object {
+    "payload": Object {
+      "additionalData": Object {
+        "path": "/c/sandbox",
+      },
+    },
+  },
+  "type": "RECEIVE_PUSH_NOTIFICATION",
+}
+`;
