@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`behaves as expected 1`] = `
+Object {
+  "graphql": Object {
+    "query": "mutation($id: ID, $data: MembershipInput) {
+    updateMembership(communityId: $id, data: $data) {
+      id
+    }
+  }",
+    "variables": Object {
+      "data": Object {
+        "newPostCount": 0,
+      },
+      "id": 1,
+    },
+  },
+  "meta": Object {
+    "id": 1,
+    "optimistic": true,
+    "type": "Membership",
+  },
+  "type": "RESET_NEW_POST_COUNT",
+}
+`;
