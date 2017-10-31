@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import { View, Text, TouchableOpacity } from 'react-native'
 import Avatar from '../../Avatar'
 import Icon from '../../Icon'
@@ -8,7 +8,7 @@ import PopupMenuButton from '../../PopupMenuButton'
 import { filter, isEmpty } from 'lodash/fp'
 import FlagContent from '../../FlagContent'
 
-export default class PostHeader extends Component {
+export default class PostHeader extends PureComponent {
   state = {
     flaggingVisible: false
   }
@@ -28,10 +28,11 @@ export default class PostHeader extends Component {
       slug,
       showCommunity,
       editPost,
-      deletePost,
       showMember,
       canFlag,
-      goToCommunity
+      goToCommunity,
+      removePost,
+      deletePost
     } = this.props
 
     const { flaggingVisible } = this.state
@@ -82,7 +83,7 @@ export default class PostHeader extends Component {
       </View>
       <View style={styles.upperRight}>
         {type && <PostLabel type={type} />}
-        <PostMenu {...{editPost, deletePost, flagPost}} />
+        <PostMenu {...{editPost, deletePost, flagPost, removePost}} />
         {flaggingVisible && <FlagContent type='post'
           linkData={linkData}
           onClose={() => this.setState({flaggingVisible: false})} />
@@ -92,14 +93,16 @@ export default class PostHeader extends Component {
   }
 }
 
-export function PostMenu ({deletePost, editPost, flagPost}) {
+export function PostMenu ({deletePost, editPost, flagPost, removePost}) {
   // If the function is defined, than it's a valid action
   const flagLabel = 'Flag This Post'
   const deleteLabel = 'Delete This Post'
+  const removeLabel = 'Remove Post From Community'
 
   const actions = filter(x => x[1], [
     [deleteLabel, deletePost],
     [flagLabel, flagPost],
+    [removeLabel, removePost],
     ['Edit This Post', editPost]
   ])
 
@@ -107,7 +110,7 @@ export function PostMenu ({deletePost, editPost, flagPost}) {
 
   const onSelect = index => actions[index][1]()
 
-  const destructiveButtonIndex = (actions[0][0] === deleteLabel || actions[0][0] === flagLabel) ? 0 : -1
+  const destructiveButtonIndex = (actions[0][0] === deleteLabel || actions[0][0] === flagLabel || actions[0][0] === removeLabel) ? 0 : -1
 
   return <PopupMenuButton actions={actions.map(x => x[0])}
     hitSlop={{top: 20, bottom: 10, left: 10, right: 15}}
