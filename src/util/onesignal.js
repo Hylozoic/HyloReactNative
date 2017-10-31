@@ -9,10 +9,7 @@ export function init ({ receivePushNotification }) {
   // from these event listeners, we can handle setting up and navigating to the
   // corresponding parts of the application
 
-  OneSignal.addEventListener('received', notification => {
-    console.log('OneSignal event: received')
-    receivePushNotification(notification)
-  })
+  OneSignal.addEventListener('received', receivePushNotification)
 
   OneSignal.addEventListener('opened', result => {
     console.log('OneSignal event: opened')
