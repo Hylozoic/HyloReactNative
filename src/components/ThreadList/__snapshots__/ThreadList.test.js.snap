@@ -262,6 +262,7 @@ exports[`ThreadList sets the navigationOptions 1`] = `
 Object {
   "headerLeft": <TouchableOpacity
     activeOpacity={0.2}
+    disabled={undefined}
     focusedOpacity={0.7}
     onPress={[Function]}
 >
@@ -276,6 +277,7 @@ Object {
 </TouchableOpacity>,
   "headerRight": <TouchableOpacity
     activeOpacity={0.2}
+    disabled={undefined}
     focusedOpacity={0.7}
     onPress={[Function]}
 >
