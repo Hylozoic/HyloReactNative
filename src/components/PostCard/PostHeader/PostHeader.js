@@ -70,7 +70,7 @@ export default class PostHeader extends PureComponent {
       ]) : null
 
     const removePostWithConfirm = removePost ? () => Alert.alert(
-      'Confirm Delete',
+      'Confirm Removal',
       'Are you sure you want to remove this post from this community?',
       [
         {text: 'Yes', onPress: () => removePost()},
