@@ -1,10 +1,5 @@
 import { connect } from 'react-redux'
-import {
-  login,
-  loginWithFacebook,
-  loginWithGoogle
-} from './actions'
-import { getPending } from './Login.store'
+import { LOGIN, login, loginWithFacebook, loginWithGoogle } from './actions'
 import { register as registerOneSignal } from 'util/onesignal'
 import registerDevice from '../../store/actions/registerDevice'
 
@@ -12,7 +7,7 @@ export function mapStateToProps (state, props) {
   const error = state.session.loginError
   const emailError = error && error.includes('email')
   const passwordError = error && error.includes('password')
-  const pending = getPending(state)
+  const pending = state.pending[LOGIN]
   const goToSignup = () => props.navigation.navigate('Signup')
 
   return {
@@ -22,7 +17,7 @@ export function mapStateToProps (state, props) {
     pending,
     defaultEmail: state.session.defaultLoginEmail,
     goToSignup,
-    hasSignupLink: !!state.session.hasSignupLink || true
+    hasSignupLink: !!state.session.hasSignupLink
   }
 }
 
