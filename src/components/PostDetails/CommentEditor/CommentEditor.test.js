@@ -49,6 +49,14 @@ describe('componentDidUpdate', () => {
     expect(setParams).toHaveBeenCalledWith({disabled: true})
   })
 
+  it('sets disabled when saveDisabled changes to true', () => {
+    const instance = ReactTestRenderer.create(<CommentEditor {...notPendingProps} />).getInstance()
+    setParams.mockClear()
+    instance.setState({saveDisabled: true})
+    instance.componentDidUpdate(notPendingProps, {saveDisabled: false})
+    expect(setParams).toHaveBeenCalledWith({disabled: true})
+  })
+
   it('sets disabled to false when pending changes to false', () => {
     const setParams = jest.fn()
     const notPendingProps = {

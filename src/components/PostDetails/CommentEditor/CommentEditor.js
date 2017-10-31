@@ -16,14 +16,20 @@ export default class CommentEditor extends React.Component {
     })
   }
 
+  state = {
+    saveDisabled: false
+  }
+
   componentDidMount () {
     const { navigation, saveChanges, setCommentEdits } = this.props
     navigation.setParams({
-      save: () =>
+      save: () => {
+        this.setState({saveDisabled: true})
         this.editor.getContentAsync()
         .then(content => saveChanges(content))
         .then(() => this.interval && clearInterval(this.interval))
         .then(() => navigation.goBack())
+      }
     })
 
     this.interval = setInterval(() => {
@@ -32,9 +38,10 @@ export default class CommentEditor extends React.Component {
     }, 1000)
   }
 
-  componentDidUpdate (prevProps) {
+  componentDidUpdate (prevProps, prevState) {
     const { pending, navigation } = this.props
-    if (pending && !prevProps.pending) {
+    const { saveDisabled } = this.state
+    if ((pending && !prevProps.pending) || (saveDisabled && !prevState.saveDisabled)) {
       navigation.setParams({disabled: true})
     } else if (!pending && prevProps.pending) {
       navigation.setParams({disabled: false})
