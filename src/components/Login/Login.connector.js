@@ -1,5 +1,7 @@
 import { connect } from 'react-redux'
 import { LOGIN, login, loginWithFacebook, loginWithGoogle } from './actions'
+import { register as registerOneSignal } from 'util/onesignal'
+import registerDevice from '../../store/actions/registerDevice'
 
 export function mapStateToProps (state, props) {
   const error = state.session.loginError
@@ -20,10 +22,18 @@ export function mapStateToProps (state, props) {
 }
 
 export function mapDispatchToProps (dispatch) {
+  function setupPushNotifications (action) {
+    if (action.error) return
+    registerOneSignal({registerDevice: id => dispatch(registerDevice(id))})
+  }
+
   return {
-    loginWithFacebook: (token) => dispatch(loginWithFacebook(token)),
-    loginWithGoogle: (token) => dispatch(loginWithGoogle(token)),
-    login: (email, password) => dispatch(login(email, password))
+    loginWithFacebook: (token) =>
+      dispatch(loginWithFacebook(token)).then(setupPushNotifications),
+    loginWithGoogle: (token) =>
+      dispatch(loginWithGoogle(token)).then(setupPushNotifications),
+    login: (email, password) =>
+      dispatch(login(email, password)).then(setupPushNotifications)
   }
 }
 

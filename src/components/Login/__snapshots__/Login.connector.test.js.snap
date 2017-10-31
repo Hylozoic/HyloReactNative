@@ -1,49 +1,33 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Login dispatchProps login should match the latest snapshot 1`] = `
-Object {
-  "meta": Object {
-    "email": "name",
-  },
-  "payload": Object {
-    "api": Object {
-      "method": "post",
-      "params": Object {
-        "email": "name",
-        "password": "pass",
-      },
-      "path": "/noo/login",
-    },
-  },
-  "type": "LOGIN",
+exports[`mapDispatchToProps has login 1`] = `
+Promise {
+  "_40": 0,
+  "_55": null,
+  "_65": 0,
+  "_72": null,
 }
 `;
 
-exports[`Login dispatchProps loginWithFacebook should match the latest snapshot 1`] = `
-Object {
-  "payload": Object {
-    "api": Object {
-      "method": "post",
-      "path": "/noo/login/facebook-token/oauth?access_token=SOME_TOKEN",
-    },
-  },
-  "type": "LOGIN_WITH_FACEBOOK",
+exports[`mapDispatchToProps has loginWithFacebook 1`] = `
+Promise {
+  "_40": 0,
+  "_55": null,
+  "_65": 0,
+  "_72": null,
 }
 `;
 
-exports[`Login dispatchProps loginWithGoogle should match the latest snapshot 1`] = `
-Object {
-  "payload": Object {
-    "api": Object {
-      "method": "post",
-      "path": "/noo/login/google-token/oauth?access_token=SOME_TOKEN",
-    },
-  },
-  "type": "LOGIN_WITH_GOOGLE",
+exports[`mapDispatchToProps has loginWithGoogle 1`] = `
+Promise {
+  "_40": 0,
+  "_55": null,
+  "_65": 0,
+  "_72": null,
 }
 `;
 
-exports[`Login dispatchProps maps the action generators 1`] = `
+exports[`mapDispatchToProps maps the action generators 1`] = `
 Object {
   "login": [Function],
   "loginWithFacebook": [Function],
@@ -51,7 +35,7 @@ Object {
 }
 `;
 
-exports[`Login dispatchProps maps the action generators 2`] = `
+exports[`mapDispatchToProps maps the action generators 2`] = `
 Array [
   Array [
     Object {
@@ -64,37 +48,22 @@ Array [
       "type": "LOGIN_WITH_FACEBOOK",
     },
   ],
-]
-`;
-
-exports[`Login dispatchProps returns the right keys 1`] = `
-Object {
-  "defaultEmail": "lah@lah.com",
-  "emailError": false,
-  "error": "blah",
-  "goToSignup": [Function],
-  "hasSignupLink": false,
-  "passwordError": false,
-  "pending": undefined,
-}
-`;
-
-exports[`Login dispatchProps returns the right keys 2`] = `
-Array [
   Array [
-    "Signup",
+    Object {
+      "graphql": Object {
+        "query": "mutation ($playerId: String, $platform: String, $version: String) {
+        registerDevice(playerId: $playerId, platform: $platform, version: $version) {
+          success
+        }
+      }",
+        "variables": Object {
+          "platform": "ios_dev",
+          "playerId": 5,
+          "version": "2",
+        },
+      },
+      "type": "REGISTER_DEVICE",
+    },
   ],
 ]
-`;
-
-exports[`Login mapStateToProps return object matches snapshot 1`] = `
-Object {
-  "defaultEmail": undefined,
-  "emailError": false,
-  "error": false,
-  "goToSignup": [Function],
-  "hasSignupLink": false,
-  "passwordError": false,
-  "pending": undefined,
-}
 `;
