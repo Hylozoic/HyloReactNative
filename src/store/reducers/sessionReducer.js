@@ -4,6 +4,7 @@ import {
   LOGIN_WITH_GOOGLE
 } from '../../components/Login/actions'
 import { SIGNUP } from '../../components/SignupFlow/SignupFlow.store'
+import { CHECK_INVITATION } from '../../components/CheckInvitation/CheckInvitation.store'
 import {
   CHECK_SESSION,
   SET_ENTRY_URL,
@@ -49,14 +50,13 @@ export default function sessionReducer (state = {}, action) {
     case SET_ENTRY_URL:
       return {...state, entryURL: payload}
     case RESET_ENTRY_URL:
-      return {...state, entryURL: null}
+      return {...state, entryURL: null, hasSignupLink: false}
     case SIGNUP:
       return {...state, loggedIn: true}
     case CHECK_VERSION:
-      return {
-        ...state,
-        checkVersion: payload
-      }
+      return {...state, checkVersion: payload}
+    case CHECK_INVITATION:
+      return {...state, hasSignupLink: true}
   }
 
   return state
