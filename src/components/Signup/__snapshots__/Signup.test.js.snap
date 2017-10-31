@@ -53,11 +53,9 @@ exports[`matches last snapshot 1`] = `
     </Text>
     <View>
       <FbLoginButton
-        createErrorNotification={[Function]}
         onLoginFinished={undefined}
       />
       <GoogleLoginButton
-        createErrorNotification={[Function]}
         onLoginFinished={undefined}
       />
     </View>

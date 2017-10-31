@@ -24,7 +24,7 @@ export default class Signup extends React.Component {
     ssoError: false
   }
 
-  createErrorNotification = error => {
+  createErrorNotification = (error) => {
     this.setState({ssoError: error})
   }
 
