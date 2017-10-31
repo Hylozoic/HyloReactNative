@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mapStateToProps has the expected shape 1`] = `
+Object {
+  "currentUser": undefined,
+  "hasMore": undefined,
+  "isConnected": undefined,
+  "pending": undefined,
+  "pendingRefresh": false,
+  "threads": Array [],
+}
+`;
