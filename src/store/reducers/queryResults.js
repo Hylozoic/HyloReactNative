@@ -19,9 +19,14 @@ import {
 import {
   RECEIVE_POST
 } from '../../components/SocketListener/SocketListener.store'
+import {
+  REMOVE_POST_PENDING
+} from '../../components/PostCard/PostHeader/PostHeader.store'
+
 import { get, isNull, omitBy, pick, reduce, uniq, isEmpty, includes } from 'lodash/fp'
 import { createSelector as ormCreateSelector } from 'redux-orm'
 import orm from 'store/models'
+import { mapValues } from 'lodash'
 
 // reducer
 
@@ -48,6 +53,15 @@ export default function (state = {}, action) {
 
     case RECEIVE_POST:
       return matchNewPostIntoQueryResults(state, payload.data.post)
+
+    case REMOVE_POST_PENDING:
+      return mapValues(state, (results, key) => {
+        if (get('params.slug', JSON.parse(key)) !== meta.slug) return results
+        return {
+          ...results,
+          ids: results.ids.filter(id => id !== meta.postId)
+        }
+      })
   }
   return state
 }
