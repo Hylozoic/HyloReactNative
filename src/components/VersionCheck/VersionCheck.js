@@ -3,8 +3,6 @@ import { Alert, Linking } from 'react-native'
 import Loading from '../Loading'
 
 export default class VersionCheck extends React.PureComponent {
-  static defaultProps = {pending: true}
-
   componentDidMount () {
     this.props.checkVersion()
   }

@@ -51,14 +51,10 @@ describe('VersionCheck', () => {
     expect(actual).toMatchSnapshot()
   })
 
-  it('renders as pending by default', () => {
-    const updateType = {
-      type: 'force',
-      title: 'Force title',
-      message: 'Force message'
-    }
+  it('returns Loading when pending is true', () => {
     const renderer = new ReactShallowRenderer()
-    renderer.render(<VersionCheck updateType={updateType} checkVersion={jest.fn()}>
+    renderer.render(<VersionCheck updateType={null}
+      pending>
       <View />
     </VersionCheck>)
     const actual = renderer.getRenderOutput()

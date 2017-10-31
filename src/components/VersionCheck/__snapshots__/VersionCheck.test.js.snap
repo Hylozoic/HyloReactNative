@@ -47,4 +47,4 @@ exports[`VersionCheck matches last snapshot with a suggested version update 1`] 
 
 exports[`VersionCheck matches last snapshot without a version update 1`] = `<View />`;
 
-exports[`VersionCheck renders as pending by default 1`] = `<Loading />`;
+exports[`VersionCheck returns Loading when pending is true 1`] = `<Loading />`;
