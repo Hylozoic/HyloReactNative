@@ -7,15 +7,16 @@ Object {
     "slug": "life",
   },
   "editPost": [Function],
-  "fetchCommunityTopic": null,
+  "fetchCommunityTopic": [Function],
   "goToCommunity": [Function],
   "newPost": [Function],
   "otherProp1": "foo1",
   "otherProp2": "foo2",
+  "resetNewPostCount": [Function],
   "showMember": [Function],
   "showPost": [Function],
   "showTopic": [Function],
-  "toggleTopicSubscribe": null,
+  "toggleTopicSubscribe": [Function],
 }
 `;
 

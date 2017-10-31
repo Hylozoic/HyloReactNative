@@ -20,7 +20,7 @@ export default class Feed extends Component {
   componentDidMount () {
     const { fetchCommunityTopic, resetNewPostCount } = this.props
     if (fetchCommunityTopic) fetchCommunityTopic()
-    resetNewPostCount()
+    if (resetNewPostCount) resetNewPostCount()
   }
 
   render () {
