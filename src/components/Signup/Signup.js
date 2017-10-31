@@ -20,9 +20,22 @@ export default class Signup extends React.Component {
     headerBackTitle: null
   }
 
+  state = {
+    ssoError: false
+  }
+
+  createErrorNotification = (error) => {
+    this.setState({ssoError: error})
+  }
+
   render () {
-    const { goToSignupFlow, goToLogin, error, loginWithFacebook, loginWithGoogle } = this.props
+    const {
+      goToSignupFlow, goToLogin, error, loginWithFacebook, loginWithGoogle, pending
+    } = this.props
+    const { ssoError } = this.state
     return <ScrollView contentContainerStyle={styles.container}>
+      {pending && <Text style={styles.banner}>SIGNING UP...</Text>}
+      {ssoError && <Text style={styles.errorBanner}>{ssoError}</Text>}
       <ImageBackground
         source={backgroundImage}
         style={styles.background}
@@ -36,8 +49,11 @@ export default class Signup extends React.Component {
         <Button text='Sign Up' style={styles.signupButton} onPress={goToSignupFlow} />
         <Text style={styles.connectWith}>Or connect with:</Text>
         <View style={styles.socialButtons}>
-          <FbLoginButton onLoginFinished={loginWithFacebook} />
-          <GoogleLoginButton onLoginFinished={loginWithGoogle} />
+          <FbLoginButton
+            onLoginFinished={loginWithFacebook}
+            createErrorNotification={this.createErrorNotification} />
+          <GoogleLoginButton onLoginFinished={loginWithGoogle}
+            createErrorNotification={this.createErrorNotification} />
         </View>
         <View style={styles.login}>
           <Text style={styles.haveAccount}>Already have an account? </Text>
