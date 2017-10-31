@@ -276,10 +276,16 @@ exports[`Login renders with email error 1`] = `
   >
     Log in to Hylo
   </Text>
-  <FormError
-    message="email error"
-    position="top"
-  />
+  <View>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+    >
+      Your email address
+    </Text>
+  </View>
   <View>
     <View>
       <View>
@@ -564,10 +570,6 @@ exports[`Login renders with password error 1`] = `
       </View>
     </View>
   </View>
-  <FormError
-    message="password error"
-    position="bottom"
-  />
   <View>
     <TouchableOpacity
       activeOpacity={0.2}
