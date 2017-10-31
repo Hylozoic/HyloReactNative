@@ -88,7 +88,6 @@ describe('mapDispatchToProps', () => {
   })
 })
 
-
 describe('mergeProps', () => {
   const dispatchProps = {
     removePost: jest.fn(),
