@@ -185,7 +185,7 @@ exports[`renders correctly when showCommunity is true 1`] = `
       deletePost={[Function]}
       editPost={[Function]}
       flagPost={[Function]}
-      removePost={undefined}
+      removePost={null}
     />
   </View>
 </View>
@@ -323,7 +323,7 @@ exports[`renders correctly with no flagging 1`] = `
       deletePost={[Function]}
       editPost={[Function]}
       flagPost={undefined}
-      removePost={undefined}
+      removePost={null}
     />
   </View>
 </View>

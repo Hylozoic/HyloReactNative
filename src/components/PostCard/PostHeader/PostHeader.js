@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { View, Text, TouchableOpacity } from 'react-native'
+import { View, Text, TouchableOpacity, Alert } from 'react-native'
 import Avatar from '../../Avatar'
 import Icon from '../../Icon'
 import { rhino30, rhino50, caribbeanGreen } from 'style/colors'
@@ -61,6 +61,22 @@ export default class PostHeader extends PureComponent {
       }
     }
 
+    const deletePostWithConfirm = deletePost ? () => Alert.alert(
+      'Confirm Delete',
+      'Are you sure you want to delete this post?',
+      [
+        {text: 'Yes', onPress: () => deletePost()},
+        {text: 'Cancel', style: 'cancel'}
+      ]) : null
+
+    const removePostWithConfirm = removePost ? () => Alert.alert(
+      'Confirm Delete',
+      'Are you sure you want to remove this post from this community?',
+      [
+        {text: 'Yes', onPress: () => removePost()},
+        {text: 'Cancel', style: 'cancel'}
+      ]) : null
+
     return <View style={styles.container}>
       <View style={styles.avatarSpacing}>
         <TouchableOpacity onPress={() => showMember(id)}>
@@ -83,7 +99,7 @@ export default class PostHeader extends PureComponent {
       </View>
       <View style={styles.upperRight}>
         {type && <PostLabel type={type} />}
-        <PostMenu {...{editPost, deletePost, flagPost, removePost}} />
+        <PostMenu removePost={removePostWithConfirm} deletePost={deletePostWithConfirm} {...{editPost, flagPost}} />
         {flaggingVisible && <FlagContent type='post'
           linkData={linkData}
           onClose={() => this.setState({flaggingVisible: false})} />
