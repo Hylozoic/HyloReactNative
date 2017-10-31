@@ -60,15 +60,6 @@ export default class Login extends React.Component {
     }
   }
 
-  componentWillReceiveProps (nextProps) {
-    const { error, emailError, passwordError } = nextProps
-    this.setState({
-      error,
-      emailError,
-      passwordError
-    })
-  }
-
   componentDidMount () {
     NetInfo.isConnected.addEventListener('change', this.handleConnectivityChange)
   }
@@ -82,12 +73,20 @@ export default class Login extends React.Component {
   }
 
   render () {
-    const { loginWithGoogle, loginWithFacebook, pending, goToSignup } = this.props
-    const { ssoError, error, emailError, passwordError, emailIsValid, isConnected } = this.state
+    const {
+      loginWithGoogle,
+      loginWithFacebook,
+      pending,
+      goToSignup,
+      error,
+      emailError,
+      passwordError
+    } = this.props
+    const { ssoError, emailIsValid, isConnected } = this.state
     return <ScrollView contentContainerStyle={styles.login} style={styles.container}>
       {ssoError && <Text style={styles.errorBanner}>{ssoError}</Text>}
-      {!isConnected && <Text style={styles.errorBanner}>YOU ARE OFFLINE. TRYING TO RECONNECT...</Text>}
-      {pending && <Text style={styles.banner}>Logging in ...</Text>}
+      {!isConnected && <Text style={styles.errorBanner}>OFFLINE; TRYING TO RECONNECT...</Text>}
+      {pending && <Text style={styles.banner}>LOGGING IN...</Text>}
 
       <Image style={styles.logo}
         source={require('../../assets/merkaba-green-on-white.png')} />
@@ -110,9 +109,8 @@ export default class Login extends React.Component {
               underlineColorAndroid={styles.androidInvisibleUnderline} />
           </View>
           <View style={styles.rightIconView}>
-            { emailIsValid && <EntypoIcon name='check'
-              style={styles.iconGreen}
-            /> }
+            {emailIsValid && <EntypoIcon name='check'
+              style={styles.iconGreen} />}
           </View>
         </View>
       </View>
