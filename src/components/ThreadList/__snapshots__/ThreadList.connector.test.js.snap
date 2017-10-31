@@ -4,7 +4,7 @@ exports[`mapStateToProps has the expected shape 1`] = `
 Object {
   "currentUser": undefined,
   "hasMore": undefined,
-  "isConnected": undefined,
+  "isConnected": true,
   "pending": undefined,
   "pendingRefresh": false,
   "threads": Array [],

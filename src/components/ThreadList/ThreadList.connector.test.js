@@ -7,7 +7,7 @@ describe('mapStateToProps', () => {
       pending: {},
       queryResults: {},
       SocketListener: {
-        isConnected: true
+        connected: true
       }
     }
 
