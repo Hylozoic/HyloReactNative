@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View } from 'react-native'
+import { View, Text, TouchableOpacity } from 'react-native'
 import { get } from 'lodash/fp'
 
 import FeedList from '../FeedList'
@@ -18,8 +18,9 @@ export default class Feed extends Component {
   }
 
   componentDidMount () {
-    const { fetchCommunityTopic } = this.props
+    const { fetchCommunityTopic, resetNewPostCount } = this.props
     if (fetchCommunityTopic) fetchCommunityTopic()
+    resetNewPostCount()
   }
 
   render () {
