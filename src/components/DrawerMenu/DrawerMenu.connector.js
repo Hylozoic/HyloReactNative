@@ -6,7 +6,6 @@ import getCurrentCommunityId from '../../store/selectors/getCurrentCommunityId'
 import { logout } from '../Login/actions'
 import changeCommunity from '../../store/actions/changeCommunity'
 import { ALL_COMMUNITIES_ID } from '../../store/models/Community'
-import { NavigationActions } from 'react-navigation'
 
 export function partitionCommunities (memberships) {
   const allCommunities = memberships.map(m => ({
