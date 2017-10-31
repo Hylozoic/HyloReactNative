@@ -1,5 +1,6 @@
 import { has } from 'lodash/fp'
 import { noncircular } from 'util/index'
+import { showMessagesBadge } from 'store/reducers/ormReducer/util'
 
 const MODULE_NAME = 'SocketListener'
 export const RECEIVE_MESSAGE = `${MODULE_NAME}/RECEIVE_MESSAGE`
@@ -119,7 +120,8 @@ export default function reducer (state = {}, action) {
   return state
 }
 
-export function ormSessionReducer ({ Me, MessageThread, Post }, action) {
+export function ormSessionReducer (session, action) {
+  const { Me, MessageThread, Post } = session
   const { type, payload } = action
 
   switch (type) {
@@ -141,15 +143,12 @@ export function ormSessionReducer ({ Me, MessageThread, Post }, action) {
       break
 
     case RECEIVE_MESSAGE:
-      const { message } = payload.data
-      MessageThread.withId(message.messageThread)
-      .update({updatedAt: message.createdAt})
+      const { message: { messageThread, createdAt } } = payload.data
+      if (MessageThread.hasId(messageThread)) {
+        MessageThread.withId(messageThread).update({updatedAt: createdAt})
+      }
 
-      // this is not technically correct, because the message you're receiving
-      // could be in a thread that was already unseen. but since the UI doesn't
-      // show the count, just a badge, it just needs to know whether there are
-      // more than 0 unseen threads, and this takes care of that.
-      Me.first().increment('unseenThreadCount')
+      showMessagesBadge(session)
       break
   }
 }

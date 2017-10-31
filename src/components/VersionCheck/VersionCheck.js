@@ -35,7 +35,7 @@ export default class VersionCheck extends React.PureComponent {
 
   render () {
     const { updateType, pending } = this.props
-    if (pending) return <Loading />
+    if (pending) return <Loading style={{flex: 1}} />
     updateType && this.showAlert(updateType)
 
     return this.props.children
