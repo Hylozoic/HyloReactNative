@@ -1,6 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`VersionCheck alert matches last snapshot with a forced version update 1`] = `
+exports[`VersionCheck alerts with a forced version update 1`] = `<View />`;
+
+exports[`VersionCheck alerts with a forced version update 2`] = `
 Array [
   Array [
     "Force title",
@@ -18,7 +20,9 @@ Array [
 ]
 `;
 
-exports[`VersionCheck alert matches last snapshot with a suggested version update 1`] = `
+exports[`VersionCheck alerts with a suggested version update 1`] = `<View />`;
+
+exports[`VersionCheck alerts with a suggested version update 2`] = `
 Array [
   Array [
     "Suggested update title",
@@ -39,12 +43,15 @@ Array [
 ]
 `;
 
-exports[`VersionCheck alert matches last snapshot without a version update 1`] = `Array []`;
-
-exports[`VersionCheck matches last snapshot with a forced version update 1`] = `<View />`;
-
-exports[`VersionCheck matches last snapshot with a suggested version update 1`] = `<View />`;
-
-exports[`VersionCheck matches last snapshot without a version update 1`] = `<View />`;
-
-exports[`VersionCheck renders as pending by default 1`] = `<Loading />`;
+exports[`VersionCheck renders as pending by default 1`] = `
+<View>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    disabled={false}
+    ellipsizeMode="tail"
+  >
+    Loading...
+  </Text>
+</View>
+`;
