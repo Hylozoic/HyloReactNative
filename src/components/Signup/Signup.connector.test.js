@@ -5,7 +5,8 @@ describe('mapStateToProps', () => {
     const state = {
       session: {
         loginError: 'oops'
-      }
+      },
+      pending: {}
     }
 
     const props = {
