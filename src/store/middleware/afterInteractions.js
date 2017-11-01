@@ -4,7 +4,11 @@ export default function afterInteractionsMiddleware (store) {
   return next => action => {
     const { meta } = action
     if (meta && meta.afterInteractions) {
-      return InteractionManager.runAfterInteractions(() => next(action))
+      return new Promise((resolve) => {
+        InteractionManager.runAfterInteractions(() => {
+          resolve(next(action))
+        })
+      })
     }
     return next(action)
   }

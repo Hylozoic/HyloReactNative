@@ -7,6 +7,8 @@ import optimisticMiddleware from './optimistic'
 import pendingMiddleware from './pending'
 import promiseMiddleware from 'redux-promise'
 
+const isDev = __DEV__ && process.env.NODE_ENV !== 'test'
+
 const middleware = compact([
   graphQLMiddleware,
   apiMiddleware,
@@ -14,7 +16,7 @@ const middleware = compact([
   optimisticMiddleware,
   pendingMiddleware,
   promiseMiddleware,
-  __DEV__ && createLogger({
+  isDev && createLogger({
     collapsed: (getState, action, logEntry) => !logEntry.error
   })
 ])
