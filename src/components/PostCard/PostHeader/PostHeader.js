@@ -126,7 +126,8 @@ export function PostMenu ({deletePost, editPost, flagPost, removePost}) {
 
   const onSelect = index => actions[index][1]()
 
-  const destructiveButtonIndex = (actions[0][0] === deleteLabel || actions[0][0] === flagLabel || actions[0][0] === removeLabel) ? 0 : -1
+  const destructiveLabels = [flagLabel, deleteLabel, removeLabel]
+  const destructiveButtonIndex = destructiveLabels.include(actions[0][0]) ? 0 : -1
 
   return <PopupMenuButton actions={actions.map(x => x[0])}
     hitSlop={{top: 20, bottom: 10, left: 10, right: 15}}
