@@ -4,8 +4,10 @@ import Icon from '../Icon'
 import Loading from '../Loading'
 import styles from './MemberProfile.styles'
 import MemberFeed from './MemberFeed'
-import PopupMenuButton from '../../components/PopupMenuButton'
-import FlagContent from '../../components/FlagContent'
+import ImagePicker from '../ImagePicker'
+import PopupMenuButton from '../PopupMenuButton'
+import FlagContent from '../FlagContent'
+import EntypoIcon from 'react-native-vector-icons/Entypo'
 import { filter, isEmpty } from 'lodash/fp'
 import defaultBanner from '../../assets/default-user-banner.jpg'
 
@@ -47,7 +49,7 @@ export default class MemberProfile extends React.Component {
     }
 
     const header = <View>
-      <MemberBanner person={person} />
+      <MemberBanner person={person} isMe={isMe} />
       <View style={styles.marginContainer}>
         <MemberHeader
           person={person}
@@ -67,13 +69,57 @@ export default class MemberProfile extends React.Component {
   }
 }
 
-export function MemberBanner ({ person: { avatarUrl, bannerUrl } }) {
-  const banner = bannerUrl ? {uri: bannerUrl} : defaultBanner
-  return <View>
-    <Image source={banner} style={styles.bannerImage} />
-    <View style={styles.avatarWrapper}>
-      <Image source={{uri: avatarUrl}} style={styles.avatarImage} />
+export class MemberBanner extends React.Component {
+  state = {
+    avatarPickerPending: false,
+    bannerPickerPending: false
+  }
+
+  onChoice ({ local, remote }, type) {
+    console.log('local', local, 'remote', remote, 'type', type)
+  }
+
+  render () {
+    const { person: { id, avatarUrl, bannerUrl }, isMe } = this.props
+    const banner = bannerUrl ? {uri: bannerUrl} : defaultBanner
+    const { avatarPickerPending, bannerPickerPending } = this.state
+
+    return <View>
+      <ImagePicker
+        style={styles.bannerWrapper}
+        title='Change Banner'
+        type='userBanner'
+        id={id}
+        onChoice={choice => this.onChoice(choice, 'userBanner')}
+        onPendingChange={pending => this.setState({bannerPickerPending: pending})}
+        disabled={!isMe}>
+        <Image source={banner} style={styles.bannerImage} />
+        {isMe && <EditButton isLoading={bannerPickerPending} style={styles.bannerEditButton} />}
+      </ImagePicker>
+      <ImagePicker
+        title='Change Avatar'
+        type='userAvatar'
+        id={id}
+        onChoice={choice => this.onChoice(choice, 'userAvatar')}
+        onPendingChange={pending => this.setState({avatarPickerPending: pending})}
+        disabled={!isMe}>
+        <View style={styles.avatarWrapper}>
+          <Image source={{uri: avatarUrl}} style={styles.avatarImage} />
+          {isMe && <EditButton isLoading={avatarPickerPending} style={styles.avatarEditButton} />}
+        </View>
+      </ImagePicker>
     </View>
+  }
+}
+
+export function EditButton ({ isLoading, style }) {
+  return <View style={[styles.editButton, style]}>
+    {isLoading
+      ? <Text style={styles.editButtonText}>loading</Text>
+      : <View style={{flexDirection: 'row'}}>
+        <EntypoIcon name='edit' style={styles.editIcon} />
+        <Text style={styles.editButtonText}>edit</Text>
+      </View>}
   </View>
 }
 
