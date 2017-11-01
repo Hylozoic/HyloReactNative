@@ -1,5 +1,8 @@
 import queryResults, { buildKey, makeQueryResultsModelSelector, makeGetQueryResults } from './queryResults'
 import { FETCH_POSTS } from '../actions/fetchPosts'
+import {
+  REMOVE_POST_PENDING
+} from '../../components/PostCard/PostHeader/PostHeader.store'
 import { get } from 'lodash/fp'
 import orm from 'store/models'
 
@@ -80,6 +83,43 @@ it('appends to existing data, ignoring duplicates', () => {
     }
   })
 })
+
+describe('queryResults reducer', () => {
+  const key1 = '{"type":"FETCH_POSTS","params":{"slug":"foo"}}'
+  const key2 = '{"type":"FETCH_POSTS","params":{"slug":"foo","filter":"request"}}'
+  const key3 = '{"type":"FETCH_POSTS","params":{"slug":"bar"}}'
+
+  const state = {
+    [key1]: {
+      hasMore: true,
+      ids: ['18', '11']
+    },
+    [key2]: {
+      hasMore: true,
+      ids: ['18', '11']
+    },
+    [key3]: {
+      hasMore: true,
+      ids: ['18', '11']
+    }
+  }
+
+  const action = {
+    type: REMOVE_POST_PENDING,
+    meta: {
+      postId: '18',
+      slug: 'foo'
+    }
+  }
+
+  it('removes the id from results on REMOVE_POST_PENDING', () => {
+    const newState = queryResults(state, action)
+    expect(newState[key1].ids).toEqual(['11'])
+    expect(newState[key2].ids).toEqual(['11'])
+    expect(newState[key3].ids).toEqual(['18', '11'])
+  })
+})
+
 it('replaces existing data when the "reset" option is set', () => {
   const state = {
     [key]: {

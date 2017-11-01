@@ -15,6 +15,7 @@ it('renders correctly with all=true, and no community or user', () => {
     deletePost={() => {}}
     postId={22}
     canFlag
+    removePost={() => {}}
     editPost={() => {}} date={new Date(new Date().getTime() - 60000 * 10)} />)
   const actual = renderer.getRenderOutput()
 
@@ -116,6 +117,14 @@ describe('PostMenu', () => {
   it('returns a popupmenu when editing allowed', () => {
     const renderer = new ReactShallowRenderer()
     renderer.render(<PostMenu editPost={() => { }} />)
+    const actual = renderer.getRenderOutput()
+
+    expect(actual).toMatchSnapshot()
+  })
+
+  it('returns a popupmenu when removePost', () => {
+    const renderer = new ReactShallowRenderer()
+    renderer.render(<PostMenu removePost={() => { }} />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
