@@ -2,7 +2,7 @@ import orm from '../../store/models'
 import { buildKey } from '../../store/reducers/queryResults'
 import { times } from 'lodash/fp'
 import { mapStateToProps, mergeProps } from './FeedList.connector'
-import { MODULE_NAME, defaultState } from './FeedList.store'
+import { MODULE_NAME, defaultState, defaultSortBy } from './FeedList.store'
 import { FETCH_POSTS } from '../../store/actions/fetchPosts'
 
 describe('mapStateToProps', () => {
@@ -75,6 +75,35 @@ describe('mapStateToProps', () => {
 })
 
 describe('mergeProps', () => {
+  it('sets up fetchPostsAndResetCount', () => {
+    const stateProps = {
+      queryProps: {
+        subject: 'community',
+        sortBy: defaultSortBy
+      }
+    }
+
+    const dispatchProps = {
+      resetNewPostCount: jest.fn(),
+      fetchPosts: jest.fn()
+    }
+
+    const ownProps = {
+      community: {
+        id: 1
+      }
+    }
+
+    const merged = mergeProps(stateProps, dispatchProps, ownProps)
+    return merged.fetchPosts()
+    .then(() => {
+      expect(dispatchProps.fetchPosts).toHaveBeenCalledWith({
+        sortBy: 'updated', subject: 'community'
+      }, undefined)
+      expect(dispatchProps.resetNewPostCount).toHaveBeenCalledWith(ownProps.community.id, 'Membership')
+    })
+  })
+
   it('binds the correct values to fetchPosts', () => {
     const stateProps = {
       sortBy: 'latest',
