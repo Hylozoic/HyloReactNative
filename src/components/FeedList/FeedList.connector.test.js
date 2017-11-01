@@ -89,9 +89,15 @@ describe('mergeProps', () => {
         topic: 'eggs'
       }
     }
+
+    const ownProps = {
+      community: {
+        id: 1
+      }
+    }
     const fetchPosts = jest.fn()
     const dispatchProps = {fetchPosts}
-    const merged = mergeProps(stateProps, dispatchProps)
+    const merged = mergeProps(stateProps, dispatchProps, ownProps)
 
     merged.fetchPosts()
     expect(fetchPosts).toHaveBeenCalledWith({
@@ -100,7 +106,7 @@ describe('mergeProps', () => {
       slug: 'food',
       subject: 'community',
       topic: 'eggs'
-    })
+    }, undefined)
     fetchPosts.mockClear()
 
     merged.fetchMorePosts()
@@ -125,7 +131,8 @@ describe('mergeProps', () => {
           subject: 'all-communities'
         }
       },
-      dispatchProps
+      dispatchProps,
+      ownProps
     )
 
     merged2.fetchPosts()
@@ -134,7 +141,7 @@ describe('mergeProps', () => {
       sortBy: 'bar',
       slug: 'all-communities',
       subject: 'all-communities'
-    })
+    }, undefined)
     fetchPosts.mockClear()
 
     merged2.fetchMorePosts()

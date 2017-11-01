@@ -9,7 +9,6 @@ import {
   toggleTopicSubscribe,
   FETCH_COMMUNITY_TOPIC
 } from './Feed.store'
-import resetNewPostCount from '../../store/actions/resetNewPostCount'
 import { get } from 'lodash/fp'
 
 export function mapStateToProps (state, props) {
@@ -46,8 +45,7 @@ export function mapDispatchToProps (dispatch, { navigation }) {
     goToCommunity: makeGoToCommunity(dispatch, navigation),
     ...bindActionCreators({
       fetchCommunityTopic,
-      toggleTopicSubscribe,
-      resetNewPostCount
+      toggleTopicSubscribe
     }, dispatch)
   }
 }
@@ -56,11 +54,7 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
   const { community, topic, topicName, topicSubscribed } = stateProps
   const communityId = get('id', community)
   const slug = get('slug', community)
-  const resetNewPostCount = topic
-    ? () => {}
-    : communityId
-      ? () => dispatchProps.resetNewPostCount(communityId, 'Membership')
-      : () => {}
+
   return {
     ...stateProps,
     ...dispatchProps,
@@ -72,8 +66,7 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
       : () => {},
     toggleTopicSubscribe: topic && communityId
       ? () => dispatchProps.toggleTopicSubscribe(topic.id, communityId, !topicSubscribed)
-      : () => {},
-    resetNewPostCount
+      : () => {}
   }
 }
 

@@ -12,7 +12,6 @@ Object {
   "newPost": [Function],
   "otherProp1": "foo1",
   "otherProp2": "foo2",
-  "resetNewPostCount": [Function],
   "showMember": [Function],
   "showPost": [Function],
   "showTopic": [Function],
