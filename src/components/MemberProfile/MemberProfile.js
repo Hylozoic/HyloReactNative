@@ -29,7 +29,7 @@ export default class MemberProfile extends React.Component {
   }
 
   render () {
-    const { person, id, goToDetails, canFlag, onPressMessages } = this.props
+    const { person, id, goToDetails, canFlag, onPressMessages, isMe, goToEdit } = this.props
     const { flaggingVisible } = this.state
     if (!person) return <Loading />
 
@@ -52,7 +52,9 @@ export default class MemberProfile extends React.Component {
         <MemberHeader
           person={person}
           flagMember={flagMember}
-          onPressMessages={onPressMessages} />
+          onPressMessages={onPressMessages}
+          isMe={isMe}
+          goToEdit={goToEdit} />
         <ReadMoreButton goToDetails={goToDetails} />
       </View>
       {flaggingVisible && <FlagContent type='member'
@@ -75,8 +77,9 @@ export function MemberBanner ({ person: { avatarUrl, bannerUrl } }) {
   </View>
 }
 
-export function MemberHeader ({ person, flagMember, onPressMessages }) {
+export function MemberHeader ({ person, flagMember, onPressMessages, isMe, goToEdit }) {
   if (!person) return null
+
   const { name, location, tagline } = person
   return <View style={styles.header}>
     <View style={styles.nameRow}>
@@ -85,7 +88,7 @@ export function MemberHeader ({ person, flagMember, onPressMessages }) {
         <TouchableOpacity onPress={onPressMessages}>
           <Icon name='Messages' style={styles.icon} />
         </TouchableOpacity>
-        <MemberMenu {... {flagMember}} />
+        <MemberMenu {... {flagMember, isMe, goToEdit}} />
       </View>
     </View>
     <Text style={styles.location}>{location}</Text>
@@ -103,10 +106,11 @@ export function ReadMoreButton ({ goToDetails }) {
   </View>
 }
 
-export function MemberMenu ({flagMember}) {
+export function MemberMenu ({flagMember, isMe, goToEdit}) {
   // If the function is defined, than it's a valid action
   const actions = filter(x => x[1], [
-    ['Flag This Member', flagMember]
+    ['Edit', isMe && goToEdit],
+    ['Flag This Member', !isMe && flagMember]
   ])
 
   if (isEmpty(actions)) return null
