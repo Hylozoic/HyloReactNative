@@ -7,7 +7,6 @@ const session = orm.session(orm.getEmptyState())
 const specs = [
   {
     modelName: 'Person',
-
     values: {
       id: 1,
       name: 'First Person'
