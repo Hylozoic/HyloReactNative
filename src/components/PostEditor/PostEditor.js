@@ -87,7 +87,7 @@ export default class PostEditor extends React.Component {
 
           <SectionLabel>Title</SectionLabel>
           <View style={[styles.textInputWrapper, styles.section]}>
-            <TextInput value={title} style={styles.textInput}
+            <TextInput autoFocus value={title} style={styles.textInput}
               onChangeText={title => this.setState({title})}
               placeholder={titlePlaceholders[type]} editable={!isSaving}
               underlineColorAndroid='transparent' />
