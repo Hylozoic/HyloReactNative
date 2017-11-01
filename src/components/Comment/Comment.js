@@ -19,7 +19,8 @@ export default function Comment ({
   slug,
   style,
   displayPostTitle,
-  deleteComment
+  deleteComment,
+  removeComment
 }) {
   const {creator, text, createdAt, post} = comment
   const presentedText = present(sanitize(text), {noP: true, slug})
@@ -29,6 +30,14 @@ export default function Comment ({
     'Are you sure you want to delete this comment?',
     [
       {text: 'Yes', onPress: () => deleteComment()},
+      {text: 'Cancel', style: 'cancel'}
+    ]) : null
+
+  const removeCommentWithConfirm = removeComment ? () => Alert.alert(
+    'Moderator: Confirm Delete',
+    'Are you sure you want to remove this comment?',
+    [
+      {text: 'Yes', onPress: () => removeComment()},
       {text: 'Cancel', style: 'cancel'}
     ]) : null
 
@@ -50,7 +59,7 @@ export default function Comment ({
           <Text style={styles.date}>on "{postTitle}"</Text>}
         </View>
         <View style={styles.headerRight}>
-          <CommentMenu deleteComment={deleteCommentWithConfirm} />
+          <CommentMenu deleteComment={deleteCommentWithConfirm} removeComment={removeCommentWithConfirm} />
         </View>
 
       </View>
@@ -64,19 +73,21 @@ export default function Comment ({
   </View>
 }
 
-export function CommentMenu ({deleteComment}) {
+export function CommentMenu ({deleteComment, removeComment}) {
   // If the function is defined, than it's a valid action
-  const deleteLabel = 'Remove this Comment'
+  const removeLabel = 'Remove this Comment'
+  const deleteLabel = 'Delete this Comment'
 
   const actions = filter(x => x[1], [
-    [deleteLabel, deleteComment]
+    [deleteLabel, deleteComment],
+    [removeLabel, removeComment]
   ])
 
   if (isEmpty(actions)) return null
 
   const onSelect = index => actions[index][1]()
 
-  const destructiveButtonIndex = (actions[0][0] === deleteLabel) ? 0 : -1
+  const destructiveButtonIndex = ((actions[0][0] === deleteLabel) || (actions[0][0] === removeLabel)) ? 0 : -1
 
   return <PopupMenuButton actions={actions.map(x => x[0])}
     hitSlop={{top: 20, bottom: 10, left: 10, right: 15}}
