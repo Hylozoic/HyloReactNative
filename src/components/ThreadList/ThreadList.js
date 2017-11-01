@@ -14,13 +14,25 @@ export default class ThreadList extends Component {
       right: {text: 'New', onPress: () => navigation.navigate('NewMessage')}
     })
 
-  fetchOrShowCached () {
-    const { hasMore, threads, fetchThreads } = this.props
-    if (isEmpty(threads) && hasMore !== false) fetchThreads()
+  constructor () {
+    super()
+    this.state = { ready: false }
   }
 
   componentDidMount () {
     this.fetchOrShowCached()
+  }
+
+  componentWillReceiveProps (nextProps) {
+    if (!this.props.pending && nextProps.pending) {
+      this.setState({ ready: true })
+    }
+  }
+
+  fetchOrShowCached () {
+    const { hasMore, threads, fetchThreads } = this.props
+    if (isEmpty(threads) && hasMore !== false) return fetchThreads()
+    if (!this.state.ready) this.setState({ ready: true })
   }
 
   _keyExtractor = (item, index) => item.id
@@ -35,9 +47,10 @@ export default class ThreadList extends Component {
       refreshThreads,
       pendingRefresh
     } = this.props
+    const { ready } = this.state
 
-    if (pending && threads.length === 0) return <Loading />
-    if (!pending && threads.length === 0) {
+    if (!ready || (pending && threads.length === 0)) return <Loading />
+    if (ready && !pending && threads.length === 0) {
       return <Text style={styles.center}>No active conversations</Text>
     }
 
