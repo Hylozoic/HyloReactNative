@@ -1,7 +1,7 @@
 import orm from '../../store/models'
 import { buildKey } from '../../store/reducers/queryResults'
 import { times } from 'lodash/fp'
-import { mapStateToProps, mergeProps } from './FeedList.connector'
+import { mapStateToProps, mergeProps, shouldResetNewPostCount } from './FeedList.connector'
 import { MODULE_NAME, defaultState, defaultSortBy } from './FeedList.store'
 import { FETCH_POSTS } from '../../store/actions/fetchPosts'
 
@@ -102,6 +102,35 @@ describe('mergeProps', () => {
       }, undefined)
       expect(dispatchProps.resetNewPostCount).toHaveBeenCalledWith(ownProps.community.id, 'Membership')
     })
+    it('sets up fetchPostsAndResetCount without calling resetNewPostCount', () => {
+      const stateProps = {
+        queryProps: {
+          subject: 'community',
+          sortBy: defaultSortBy,
+          filter: 'some filter'
+        }
+      }
+
+      const dispatchProps = {
+        resetNewPostCount: jest.fn(),
+        fetchPosts: jest.fn()
+      }
+
+      const ownProps = {
+        community: {
+          id: 1
+        }
+      }
+
+      const merged = mergeProps(stateProps, dispatchProps, ownProps)
+      return merged.fetchPosts()
+      .then(() => {
+        expect(dispatchProps.fetchPosts).toHaveBeenCalledWith({
+          sortBy: 'updated', subject: 'community', filter: 'some filter'
+        }, undefined)
+        expect(dispatchProps.resetNewPostCount).not.toHaveBeenCalled()
+      })
+    })
   })
 
   it('binds the correct values to fetchPosts', () => {
@@ -175,5 +204,45 @@ describe('mergeProps', () => {
 
     merged2.fetchMorePosts()
     expect(fetchPosts).not.toHaveBeenCalled()
+  })
+})
+
+describe('shouldResetNewPostCount', () => {
+  it('returns true appropriately', () => {
+    const props = {
+      subject: 'community',
+      sortBy: defaultSortBy
+    }
+    expect(shouldResetNewPostCount(props)).toEqual(true)
+  })
+  it('returns false with a subject that does not equal "community"', () => {
+    let props = {
+      subject: 'all communities',
+      sortBy: defaultSortBy
+    }
+    expect(shouldResetNewPostCount(props)).toEqual(false)
+  })
+  it('returns false with a non-default sortBy', () => {
+    let props = {
+      subject: 'community',
+      sortBy: 'non-default'
+    }
+    expect(shouldResetNewPostCount(props)).toEqual(false)
+  })
+  it('returns false with a filter', () => {
+    let props = {
+      subject: 'community',
+      sortBy: defaultSortBy,
+      filter: 'any filter'
+    }
+    expect(shouldResetNewPostCount(props)).toEqual(false)
+  })
+  it('returns false with a topic', () => {
+    let props = {
+      subject: 'community',
+      sortBy: defaultSortBy,
+      topic: 'any topic'
+    }
+    expect(shouldResetNewPostCount(props)).toEqual(false)
   })
 })
