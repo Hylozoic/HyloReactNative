@@ -102,6 +102,7 @@ export function ParticipantInput ({ participants, onChangeText, removeParticipan
       horizontal>
       {participants.map(p => <Participant participant={p} key={p.id} remove={removeParticipant} />)}
       <TextInput
+        autoFocus
         value={text}
         onChangeText={onChangeText}
         underlineColorAndroid='transparent'
