@@ -9,11 +9,14 @@ export default function apiMiddleware (store) {
 
     const { path, params, method, transform } = payload.api
 
-    InteractionManager.runAfterInteractions(() => {
-      const promise = fetchJSON(path, params, {method})
-        .then(json => transform ? transform(json) : json)
-
-      return next({...action, payload: promise})
+    const newPayload = new Promise((resolve, reject) => {
+      InteractionManager.runAfterInteractions(() => {
+        fetchJSON(path, params, {method})
+        .then(json => resolve(transform ? transform(json) : json))
+        .catch(reject)
+      })
     })
+
+    return next({...action, payload: newPayload})
   }
 }
