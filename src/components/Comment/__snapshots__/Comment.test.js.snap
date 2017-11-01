@@ -4,7 +4,7 @@ exports[`commentMenu renders correctly 1`] = `
 <PopupMenuButton
   actions={
     Array [
-      "Remove this Comment",
+      "Delete this Comment",
     ]
   }
   destructiveButtonIndex={0}
@@ -50,6 +50,7 @@ exports[`renders correctly 1`] = `
       <View>
         <CommentMenu
           deleteComment={[Function]}
+          removeComment={null}
         />
       </View>
     </View>
@@ -121,6 +122,7 @@ exports[`shows the post title when displayPostTitle is true 1`] = `
       <View>
         <CommentMenu
           deleteComment={null}
+          removeComment={null}
         />
       </View>
     </View>

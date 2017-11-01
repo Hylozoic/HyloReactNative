@@ -66,9 +66,17 @@ describe('commentMenu', () => {
     expect(actual).toMatchSnapshot()
   })
 
-  it('returns null when deleteComment isnt defined', () => {
+  it('returns null when deleteComment and removeComment isnt defined', () => {
     const renderer = new ReactShallowRenderer()
     renderer.render(<CommentMenu />)
+    const actual = renderer.getRenderOutput()
+
+    expect(actual).toBeNull()
+  })
+
+  it('returns removeComment', () => {
+    const renderer = new ReactShallowRenderer()
+    renderer.render(<CommentMenu remoeComment={jest.fn()} />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toBeNull()
