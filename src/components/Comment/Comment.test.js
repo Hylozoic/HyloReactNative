@@ -76,9 +76,9 @@ describe('commentMenu', () => {
 
   it('returns removeComment', () => {
     const renderer = new ReactShallowRenderer()
-    renderer.render(<CommentMenu remoeComment={jest.fn()} />)
+    renderer.render(<CommentMenu removeComment={jest.fn()} />)
     const actual = renderer.getRenderOutput()
 
-    expect(actual).toBeNull()
+    expect(actual).toMatchSnapshot()
   })
 })

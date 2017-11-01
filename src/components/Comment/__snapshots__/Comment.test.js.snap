@@ -24,6 +24,30 @@ exports[`commentMenu renders correctly 1`] = `
 </PopupMenuButton>
 `;
 
+exports[`commentMenu returns removeComment 1`] = `
+<PopupMenuButton
+  actions={
+    Array [
+      "Remove this Comment",
+    ]
+  }
+  destructiveButtonIndex={0}
+  hitSlop={
+    Object {
+      "bottom": 10,
+      "left": 10,
+      "right": 15,
+      "top": 20,
+    }
+  }
+  onSelect={[Function]}
+>
+  <Icon
+    name="More"
+  />
+</PopupMenuButton>
+`;
+
 exports[`renders correctly 1`] = `
 <View>
   <Avatar
