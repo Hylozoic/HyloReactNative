@@ -2,6 +2,7 @@ import React from 'react'
 import { Animated, StyleSheet, Text, TouchableOpacity } from 'react-native'
 import { func, string } from 'prop-types'
 import { amaranth, persimmon } from '../../style/colors'
+import { compact } from 'lodash'
 
 export default class NotificationOverlay extends React.Component {
   static propTypes = {
@@ -27,19 +28,20 @@ export default class NotificationOverlay extends React.Component {
   }
 
   animate () {
+    const { onComplete, permanent } = this.props
     const height = lineHeight + padding * 2
-    Animated.sequence([
+    Animated.sequence(compact([
       Animated.timing(
         this.state.heightAnim,
         { toValue: height, duration: 800 }
       ),
-      Animated.delay(4000),
-      Animated.timing(
+      !permanent && Animated.delay(4000),
+      !permanent && Animated.timing(
         this.state.heightAnim,
         { toValue: 0, duration: 800 }
       )
-    ]).start(({ finished }) => {
-      if (finished && this.props.onComplete) this.props.onComplete()
+    ])).start(({ finished }) => {
+      if (finished && onComplete) onComplete()
     })
   }
 
@@ -71,7 +73,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Circular-Bold',
     fontSize,
     // Note: letterSpacing not supported on Android
-    letterSpacing: 0.2,
+    // letterSpacing: 0.2,
     lineHeight,
     padding,
     textAlign: 'center'

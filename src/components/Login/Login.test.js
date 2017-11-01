@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import TestRenderer from 'react-test-renderer'
-import Login, { FormError } from './Login'
+import Login, { FormError, SignupLink } from './Login'
 
 jest.mock('react-native-google-signin')
 jest.mock('NetInfo', () => ({
@@ -21,9 +21,7 @@ describe('Login', () => {
 
   it('renders with pending banner', () => {
     const renderer = new ReactShallowRenderer()
-    renderer.render(<Login
-      pending
-    />)
+    renderer.render(<Login pending />)
     const actual = renderer.getRenderOutput()
     expect(actual).toMatchSnapshot()
   })
@@ -54,6 +52,24 @@ describe('Login', () => {
     const renderer = new ReactShallowRenderer()
     renderer.render(<Login
       isConnected={false}
+    />)
+    const actual = renderer.getRenderOutput()
+    expect(actual).toMatchSnapshot()
+  })
+
+  it('renders without a signup link', () => {
+    const renderer = new ReactShallowRenderer()
+    renderer.render(<Login
+      hasSignupLink={false}
+    />)
+    const actual = renderer.getRenderOutput()
+    expect(actual).toMatchSnapshot()
+  })
+
+  it('renders with a signup link', () => {
+    const renderer = new ReactShallowRenderer()
+    renderer.render(<Login
+      hasSignupLink
     />)
     const actual = renderer.getRenderOutput()
     expect(actual).toMatchSnapshot()
@@ -100,23 +116,6 @@ describe('Login', () => {
     instance.setInput(passwordKey, password)
     expect(instance.state.password).toEqual(password)
   })
-
-  it('should update state when it receives props', function () {
-    const error = 'email'
-    const emailError = true
-    const passwordError = null
-    const nextProps = {
-      error,
-      emailError,
-      passwordError
-    }
-    const instance = TestRenderer.create(<Login />
-    ).root.instance
-    instance.componentWillReceiveProps(nextProps)
-    expect(instance.state.error).toEqual(error)
-    expect(instance.state.emailError).toEqual(emailError)
-    expect(instance.state.passwordError).toEqual(passwordError)
-  })
 })
 
 describe('FormError', () => {
@@ -125,6 +124,15 @@ describe('FormError', () => {
     const position = 'top'
     const renderer = new ReactShallowRenderer()
     renderer.render(<FormError message={message} position={position} />)
+    const actual = renderer.getRenderOutput()
+    expect(actual).toMatchSnapshot()
+  })
+})
+
+describe('SignupLink', () => {
+  it('renders correctly', () => {
+    const renderer = new ReactShallowRenderer()
+    renderer.render(<SignupLink goToSignup={jest.fn()} />)
     const actual = renderer.getRenderOutput()
     expect(actual).toMatchSnapshot()
   })

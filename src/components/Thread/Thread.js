@@ -155,7 +155,7 @@ export default class Thread extends React.Component {
     const { newMessages, notify } = this.state
     const showNotificationOverlay = notify || !isConnected
     const overlayMessage = !isConnected
-      ? 'DISCONNECTED. TRYING TO RECONNECT...'
+      ? 'RECONNECTING...'
       : `${newMessages} NEW MESSAGE${newMessages > 1 ? 'S' : ''}`
 
     return <View style={styles.container}>
@@ -179,6 +179,7 @@ export default class Thread extends React.Component {
       {showNotificationOverlay && <NotificationOverlay
         position='bottom'
         type={isConnected ? 'info' : 'error'}
+        permanent={!isConnected}
         message={overlayMessage}
         onPress={this.scrollToBottom} />}
       <SocketSubscriber type='post' id={id} />

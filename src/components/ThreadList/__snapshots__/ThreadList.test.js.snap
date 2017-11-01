@@ -167,6 +167,38 @@ exports[`ThreadList handles pending correctly with threads 1`] = `
       </View>
     </View>
   </RCTScrollView>
+  <View
+    collapsable={undefined}
+  >
+    <View
+      accessibilityComponentType={undefined}
+      accessibilityLabel={undefined}
+      accessibilityTraits={undefined}
+      accessible={true}
+      collapsable={undefined}
+      hitSlop={undefined}
+      isTVSelectable={true}
+      nativeID={undefined}
+      onLayout={undefined}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      testID={undefined}
+      tvParallaxProperties={undefined}
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        disabled={false}
+        ellipsizeMode="tail"
+      >
+        RECONNECTING...
+      </Text>
+    </View>
+  </View>
 </View>
 `;
 
@@ -256,6 +288,38 @@ exports[`ThreadList renders correctly 1`] = `
       </View>
     </View>
   </RCTScrollView>
+  <View
+    collapsable={undefined}
+  >
+    <View
+      accessibilityComponentType={undefined}
+      accessibilityLabel={undefined}
+      accessibilityTraits={undefined}
+      accessible={true}
+      collapsable={undefined}
+      hitSlop={undefined}
+      isTVSelectable={true}
+      nativeID={undefined}
+      onLayout={undefined}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      testID={undefined}
+      tvParallaxProperties={undefined}
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        disabled={false}
+        ellipsizeMode="tail"
+      >
+        RECONNECTING...
+      </Text>
+    </View>
+  </View>
 </View>
 `;
 
@@ -263,6 +327,7 @@ exports[`ThreadList sets the navigationOptions 1`] = `
 Object {
   "headerLeft": <TouchableOpacity
     activeOpacity={0.2}
+    disabled={undefined}
     focusedOpacity={0.7}
     onPress={[Function]}
 >
@@ -277,6 +342,7 @@ Object {
 </TouchableOpacity>,
   "headerRight": <TouchableOpacity
     activeOpacity={0.2}
+    disabled={undefined}
     focusedOpacity={0.7}
     onPress={[Function]}
 >

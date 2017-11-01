@@ -6,7 +6,6 @@ import getCurrentCommunityId from '../../store/selectors/getCurrentCommunityId'
 import { logout } from '../Login/actions'
 import changeCommunity from '../../store/actions/changeCommunity'
 import { ALL_COMMUNITIES_ID } from '../../store/models/Community'
-import { NavigationActions } from 'react-navigation'
 
 export function partitionCommunities (memberships) {
   const allCommunities = memberships.map(m => ({
@@ -61,13 +60,6 @@ export function mapStateToProps (state, props) {
   }
 }
 
-const switchToHomeTab = NavigationActions.reset({
-  index: 0,
-  actions: [
-    NavigationActions.navigate({routeName: 'Home'})
-  ]
-})
-
 export const mapDispatchToProps = {
   logout,
   changeCommunity
@@ -81,10 +73,9 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     ...dispatchProps,
     ...ownProps,
     goToCommunity: community => {
-      if (community.id === ALL_COMMUNITIES_ID) {
-        // this setTimeout avoids a race condition in which FETCH_POSTS is
-        // dispatched twice
-        setTimeout(() => navigation.dispatch(switchToHomeTab), 10)
+      if (community.id === ALL_COMMUNITIES_ID &&
+        ownProps.screenProps.currentTabName !== 'Home') {
+        navigation.navigate('Home')
       } else {
         navigation.navigate('DrawerClose')
       }
