@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect'
 import { createSelector as ormCreateSelector } from 'redux-orm'
 import { get, find, pick } from 'lodash/fp'
-import { present, sanitize, humanDate } from 'hylo-utils/text'
+import { humanDate } from 'hylo-utils/text'
 import { decode } from 'ent'
 import striptags from 'striptags'
 
@@ -69,6 +69,7 @@ export function fetchNotifications (first = 20, offset = 0) {
       variables: { first, offset }
     },
     meta: {
+      afterInteractions: true,
       extractModel: 'Notification',
       extractQueryResults: {
         getItems: get('payload.data.notifications')

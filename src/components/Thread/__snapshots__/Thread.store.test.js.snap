@@ -66,6 +66,7 @@ Object {
     },
   },
   "meta": Object {
+    "afterInteractions": true,
     "extractModel": "MessageThread",
     "extractQueryResults": Object {
       "getItems": [Function],

@@ -44,6 +44,7 @@ export default function fetchThreads (first = 10, offset = 0, reset) {
       }
     },
     meta: {
+      afterInteractions: true,
       extractModel: 'Me',
       extractQueryResults: {
         getItems: get('payload.data.me.messageThreads'),

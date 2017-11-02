@@ -63,10 +63,10 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     showTopic: dispatchProps.showTopic(communityId),
     fetchCommunityTopic: topicName && slug
       ? () => dispatchProps.fetchCommunityTopic(topicName, slug)
-      : null,
+      : () => {},
     toggleTopicSubscribe: topic && communityId
       ? () => dispatchProps.toggleTopicSubscribe(topic.id, communityId, !topicSubscribed)
-      : null
+      : () => {}
   }
 }
 
