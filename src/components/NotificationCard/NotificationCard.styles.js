@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native'
 
-import { capeCod, nevada, persimmon, rhino10, rhino20, rhino30 } from 'style/colors'
+import { capeCod, nevada, persimmon, rhino05, rhino30 } from 'style/colors'
 
 export default StyleSheet.create({
   avatar: {
@@ -16,7 +16,7 @@ export default StyleSheet.create({
   container: {
     flexDirection: 'row',
     paddingTop: 15,
-    backgroundColor: 'white',
+    backgroundColor: 'white'
   },
   content: {
     flex: 1,
@@ -40,7 +40,7 @@ export default StyleSheet.create({
     flexDirection: 'row'
   },
   highlight: {
-    backgroundColor: rhino10
+    backgroundColor: rhino05
   },
   name: {
     color: nevada,
