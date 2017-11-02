@@ -31,7 +31,7 @@ export default class MemberProfile extends React.Component {
   }
 
   render () {
-    const { person, id, goToDetails, canFlag, onPressMessages, isMe, goToEdit } = this.props
+    const { person, id, goToDetails, canFlag, onPressMessages, isMe, goToEdit, updateUserSettings } = this.props
     const { flaggingVisible } = this.state
     if (!person) return <Loading />
 
@@ -49,7 +49,7 @@ export default class MemberProfile extends React.Component {
     }
 
     const header = <View>
-      <MemberBanner person={person} isMe={isMe} />
+      <MemberBanner person={person} isMe={isMe} updateUserSettings={updateUserSettings} />
       <View style={styles.marginContainer}>
         <MemberHeader
           person={person}
@@ -72,17 +72,31 @@ export default class MemberProfile extends React.Component {
 export class MemberBanner extends React.Component {
   state = {
     avatarPickerPending: false,
-    bannerPickerPending: false
+    bannerPickerPending: false,
+    avatarLocalUri: null,
+    bannerLocalUri: null
   }
 
-  onChoice ({ local, remote }, type) {
-    console.log('local', local, 'remote', remote, 'type', type)
+  onChoice ({ local, remote }, prefix) {
+    const localKey = `${prefix}LocalUri`
+    const remoteKey = `${prefix}Url`
+    this.setState({
+      [localKey]: local
+    })
+    this.props.updateUserSettings({[remoteKey]: remote})
   }
 
   render () {
     const { person: { id, avatarUrl, bannerUrl }, isMe } = this.props
-    const banner = bannerUrl ? {uri: bannerUrl} : defaultBanner
-    const { avatarPickerPending, bannerPickerPending } = this.state
+    const { avatarPickerPending, bannerPickerPending, avatarLocalUri, bannerLocalUri } = this.state
+
+    const avatarSource = avatarLocalUri
+      ? {uri: avatarLocalUri}
+      : avatarUrl && {uri: avatarUrl}
+
+    const bannerSource = bannerLocalUri
+      ? {uri: bannerLocalUri}
+      : bannerUrl ? {uri: bannerUrl} : defaultBanner
 
     return <View>
       <ImagePicker
@@ -90,21 +104,21 @@ export class MemberBanner extends React.Component {
         title='Change Banner'
         type='userBanner'
         id={id}
-        onChoice={choice => this.onChoice(choice, 'userBanner')}
+        onChoice={choice => this.onChoice(choice, 'banner')}
         onPendingChange={pending => this.setState({bannerPickerPending: pending})}
         disabled={!isMe}>
-        <Image source={banner} style={styles.bannerImage} />
+        <Image source={bannerSource} style={styles.bannerImage} />
         {isMe && <EditButton isLoading={bannerPickerPending} style={styles.bannerEditButton} />}
       </ImagePicker>
       <ImagePicker
         title='Change Avatar'
         type='userAvatar'
         id={id}
-        onChoice={choice => this.onChoice(choice, 'userAvatar')}
+        onChoice={choice => this.onChoice(choice, 'avatar')}
         onPendingChange={pending => this.setState({avatarPickerPending: pending})}
         disabled={!isMe}>
         <View style={styles.avatarWrapper}>
-          <Image source={{uri: avatarUrl}} style={styles.avatarImage} />
+          <Image source={avatarSource} style={styles.avatarImage} />
           {isMe && <EditButton isLoading={avatarPickerPending} style={styles.avatarEditButton} />}
         </View>
       </ImagePicker>

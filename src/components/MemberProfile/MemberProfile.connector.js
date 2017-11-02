@@ -1,8 +1,10 @@
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import { get } from 'lodash/fp'
 import { getPerson, fetchPerson } from './MemberProfile.store'
 import makeGoToCommunity from '../../store/actions/makeGoToCommunity'
 import getMe from '../../store/selectors/getMe'
+import { updateUserSettings } from '../../store/actions/updateUserSettings'
 
 export function mapStateToProps (state, props) {
   const id = get('navigation.state.params.id', props)
@@ -24,8 +26,11 @@ export function mapStateToProps (state, props) {
 
 export function mapDispatchToProps (dispatch, props) {
   return {
-    fetchPerson: id => dispatch(fetchPerson(id)),
-    goToCommunity: makeGoToCommunity(dispatch, props.navigation)
+    goToCommunity: makeGoToCommunity(dispatch, props.navigation),
+    ...bindActionCreators({
+      fetchPerson,
+      updateUserSettings
+    }, dispatch)
   }
 }
 
