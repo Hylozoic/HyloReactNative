@@ -1,8 +1,8 @@
 import orm from '../../store/models'
 import { buildKey } from '../../store/reducers/queryResults'
 import { times } from 'lodash/fp'
-import { mapStateToProps, mergeProps } from './FeedList.connector'
-import { MODULE_NAME, defaultState } from './FeedList.store'
+import { mapStateToProps, mergeProps, shouldResetNewPostCount } from './FeedList.connector'
+import { MODULE_NAME, defaultState, defaultSortBy } from './FeedList.store'
 import { FETCH_POSTS } from '../../store/actions/fetchPosts'
 
 describe('mapStateToProps', () => {
@@ -75,6 +75,64 @@ describe('mapStateToProps', () => {
 })
 
 describe('mergeProps', () => {
+  it('sets up fetchPostsAndResetCount', () => {
+    const stateProps = {
+      queryProps: {
+        subject: 'community',
+        sortBy: defaultSortBy
+      }
+    }
+
+    const dispatchProps = {
+      resetNewPostCount: jest.fn(),
+      fetchPosts: jest.fn()
+    }
+
+    const ownProps = {
+      community: {
+        id: 1
+      }
+    }
+
+    const merged = mergeProps(stateProps, dispatchProps, ownProps)
+    return merged.fetchPosts()
+    .then(() => {
+      expect(dispatchProps.fetchPosts).toHaveBeenCalledWith({
+        sortBy: 'updated', subject: 'community'
+      }, undefined)
+      expect(dispatchProps.resetNewPostCount).toHaveBeenCalledWith(ownProps.community.id, 'Membership')
+    })
+    it('sets up fetchPostsAndResetCount without calling resetNewPostCount', () => {
+      const stateProps = {
+        queryProps: {
+          subject: 'community',
+          sortBy: defaultSortBy,
+          filter: 'some filter'
+        }
+      }
+
+      const dispatchProps = {
+        resetNewPostCount: jest.fn(),
+        fetchPosts: jest.fn()
+      }
+
+      const ownProps = {
+        community: {
+          id: 1
+        }
+      }
+
+      const merged = mergeProps(stateProps, dispatchProps, ownProps)
+      return merged.fetchPosts()
+      .then(() => {
+        expect(dispatchProps.fetchPosts).toHaveBeenCalledWith({
+          sortBy: 'updated', subject: 'community', filter: 'some filter'
+        }, undefined)
+        expect(dispatchProps.resetNewPostCount).not.toHaveBeenCalled()
+      })
+    })
+  })
+
   it('binds the correct values to fetchPosts', () => {
     const stateProps = {
       sortBy: 'latest',
@@ -89,9 +147,15 @@ describe('mergeProps', () => {
         topic: 'eggs'
       }
     }
+
+    const ownProps = {
+      community: {
+        id: 1
+      }
+    }
     const fetchPosts = jest.fn()
     const dispatchProps = {fetchPosts}
-    const merged = mergeProps(stateProps, dispatchProps)
+    const merged = mergeProps(stateProps, dispatchProps, ownProps)
 
     merged.fetchPosts()
     expect(fetchPosts).toHaveBeenCalledWith({
@@ -100,7 +164,7 @@ describe('mergeProps', () => {
       slug: 'food',
       subject: 'community',
       topic: 'eggs'
-    })
+    }, undefined)
     fetchPosts.mockClear()
 
     merged.fetchMorePosts()
@@ -125,7 +189,8 @@ describe('mergeProps', () => {
           subject: 'all-communities'
         }
       },
-      dispatchProps
+      dispatchProps,
+      ownProps
     )
 
     merged2.fetchPosts()
@@ -134,10 +199,50 @@ describe('mergeProps', () => {
       sortBy: 'bar',
       slug: 'all-communities',
       subject: 'all-communities'
-    })
+    }, undefined)
     fetchPosts.mockClear()
 
     merged2.fetchMorePosts()
     expect(fetchPosts).not.toHaveBeenCalled()
+  })
+})
+
+describe('shouldResetNewPostCount', () => {
+  it('returns true appropriately', () => {
+    const props = {
+      subject: 'community',
+      sortBy: defaultSortBy
+    }
+    expect(shouldResetNewPostCount(props)).toEqual(true)
+  })
+  it('returns false with a subject that does not equal "community"', () => {
+    let props = {
+      subject: 'all communities',
+      sortBy: defaultSortBy
+    }
+    expect(shouldResetNewPostCount(props)).toEqual(false)
+  })
+  it('returns false with a non-default sortBy', () => {
+    let props = {
+      subject: 'community',
+      sortBy: 'non-default'
+    }
+    expect(shouldResetNewPostCount(props)).toEqual(false)
+  })
+  it('returns false with a filter', () => {
+    let props = {
+      subject: 'community',
+      sortBy: defaultSortBy,
+      filter: 'any filter'
+    }
+    expect(shouldResetNewPostCount(props)).toEqual(false)
+  })
+  it('returns false with a topic', () => {
+    let props = {
+      subject: 'community',
+      sortBy: defaultSortBy,
+      topic: 'any topic'
+    }
+    expect(shouldResetNewPostCount(props)).toEqual(false)
   })
 })
