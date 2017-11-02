@@ -1,4 +1,21 @@
-import { makeOnPressMessages, mergeProps } from './MemberProfile.connector'
+import { mapStateToProps, makeOnPressMessages, mergeProps } from './MemberProfile.connector'
+
+describe('mapStateToProps', () => {
+  it('maps the state to the props', () => {
+    const id = 123
+    const navigation = {
+      state: {params: {id}},
+      navigate: jest.fn()
+    }
+    const props = mapStateToProps({navigation}, {})
+    expect(props).toMatchSnapshot()
+    props.goToDetails()
+    expect(navigation.navigate).toHaveBeenCalledWith('MemberDetails', {id})
+    navigation.navigation.mockClear()
+    props.goToEdit()
+    expect(navigation.navigate).toHaveBeenCalledWith('MemberDetails', {id, edit: true})
+  })
+})
 
 describe('makeOnPressMessages', () => {
   var navigation

@@ -1,5 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`mapStateToProps maps the state to the props 1`] = `
+Object {
+  "currentUser": undefined,
+  "goToDetails": [Function],
+  "goToEdit": [Function],
+  "id": undefined,
+  "isMe": false,
+  "person": null,
+}
+`;
+
 exports[`mergeProps returns the right keys 1`] = `
 Object {
   "canFlag": true,
