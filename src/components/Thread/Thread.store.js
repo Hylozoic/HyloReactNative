@@ -48,6 +48,7 @@ export function fetchMessages (id, opts = {}) {
       variables
     },
     meta: {
+      afterInteractions: true,
       extractModel: 'MessageThread',
       extractQueryResults: {
         getItems: get('payload.data.messageThread.messages')

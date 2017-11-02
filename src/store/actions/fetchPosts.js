@@ -34,6 +34,7 @@ export function fetchPosts ({ subject, slug, sortBy, offset, search, filter, top
       }
     },
     meta: {
+      afterInteractions: true,
       extractModel,
       extractQueryResults: {
         getItems,
