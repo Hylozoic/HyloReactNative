@@ -21,6 +21,9 @@ import {
 import {
   UPDATE_NEW_NOTIFICATION_COUNT_PENDING
 } from '../../../components/NotificationsList/NotificationsList.store'
+import {
+  RESET_NEW_POST_COUNT_PENDING
+} from '../../actions/resetNewPostCount'
 
 it('responds to an action with meta.extractModel', () => {
   const state = orm.getEmptyState()
@@ -255,4 +258,25 @@ describe('on UPDATE_NEW_NOTIFICATION_COUNT_PENDING', () => {
     const newSession = orm.session(ormReducer(session.state, action))
     expect(newSession.Me.first().newNotificationCount).toEqual(0)
   })
+})
+
+describe('on RESET_NEW_POST_COUNT_PENDING', () => {
+  const action = {
+    type: RESET_NEW_POST_COUNT_PENDING,
+    meta: {
+      graphql: {
+        variables: {
+          id: 1
+        }
+      }
+    }
+  }
+
+  const session = orm.session(orm.getEmptyState())
+  session.Me.create({id: 1})
+  session.Community.create({id: 1, name: 'community 1'})
+  session.Membership.create({id: 1, community: 1, person: 1})
+  expect(session.Membership.first().newPostCount).toEqual(undefined)
+  const newSession = orm.session(ormReducer(session.state, action))
+  expect(newSession.Membership.first().newPostCount).toEqual(0)
 })

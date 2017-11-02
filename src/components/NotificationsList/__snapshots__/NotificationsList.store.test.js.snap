@@ -46,6 +46,7 @@ Object {
     },
   },
   "meta": Object {
+    "afterInteractions": true,
     "extractModel": "Notification",
     "extractQueryResults": Object {
       "getItems": [Function],

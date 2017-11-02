@@ -7,7 +7,7 @@ Object {
     "slug": "life",
   },
   "editPost": [Function],
-  "fetchCommunityTopic": null,
+  "fetchCommunityTopic": [Function],
   "goToCommunity": [Function],
   "newPost": [Function],
   "otherProp1": "foo1",
@@ -15,7 +15,7 @@ Object {
   "showMember": [Function],
   "showPost": [Function],
   "showTopic": [Function],
-  "toggleTopicSubscribe": null,
+  "toggleTopicSubscribe": [Function],
 }
 `;
 
@@ -42,6 +42,7 @@ Object {
     },
   },
   "meta": Object {
+    "afterInteractions": true,
     "extractModel": "CommunityTopic",
   },
   "type": "Feed/FETCH_COMMUNITY_TOPIC",
