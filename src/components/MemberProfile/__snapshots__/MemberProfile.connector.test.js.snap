@@ -1,5 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`mapDispatchToProps returns the right keys 1`] = `
+Object {
+  "fetchPerson": [Function],
+  "goToCommunity": [Function],
+  "updateUserSettings": [Function],
+}
+`;
+
 exports[`mapStateToProps maps the state to the props 1`] = `
 Object {
   "currentUser": undefined,

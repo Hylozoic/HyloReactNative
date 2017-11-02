@@ -1,4 +1,4 @@
-import { mapStateToProps, makeOnPressMessages, mergeProps } from './MemberProfile.connector'
+import { mapStateToProps, mapDispatchToProps, makeOnPressMessages, mergeProps } from './MemberProfile.connector'
 
 describe('mapStateToProps', () => {
   it('maps the state to the props', () => {
@@ -14,6 +14,15 @@ describe('mapStateToProps', () => {
     navigation.navigate.mockClear()
     props.goToEdit()
     expect(navigation.navigate).toHaveBeenCalledWith('MemberDetails', {id, edit: true})
+  })
+})
+
+describe('mapDispatchToProps', () => {
+  it('returns the right keys', () => {
+    const props = {
+      navigation: {navigate: jest.fn()}
+    }
+    expect(mapDispatchToProps({}, props)).toMatchSnapshot()
   })
 })
 

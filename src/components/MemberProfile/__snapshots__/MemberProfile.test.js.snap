@@ -1,5 +1,38 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`EditButton matches the last snapshot when isLoading is false 1`] = `
+<View>
+  <View>
+    <Icon
+      allowFontScaling={false}
+      name="edit"
+      size={12}
+    />
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+    >
+      edit
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`EditButton matches the last snapshot when isLoading is true 1`] = `
+<View>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    disabled={false}
+    ellipsizeMode="tail"
+  >
+    loading
+  </Text>
+</View>
+`;
+
 exports[`MemberBanner matches the last snapshot 1`] = `
 <View>
   <ImagePicker
