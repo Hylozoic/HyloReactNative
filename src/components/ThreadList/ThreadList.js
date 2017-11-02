@@ -9,17 +9,14 @@ import NotificationOverlay from '../NotificationOverlay'
 import { getSocket } from 'util/websockets'
 
 export default class ThreadList extends Component {
+  state = {ready: false}
+
   static navigationOptions = ({ navigation }) =>
     header(navigation, {
       left: 'close',
       title: 'Messages',
       right: {text: 'New', onPress: () => navigation.navigate('NewMessage')}
     })
-
-  constructor () {
-    super()
-    this.state = { ready: false }
-  }
 
   componentDidMount () {
     this.fetchOrShowCached()

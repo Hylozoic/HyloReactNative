@@ -7,16 +7,13 @@ import NotificationCard from '../NotificationCard'
 import styles from './NotificationsList.styles'
 
 export default class NotificationsList extends Component {
+  state = {ready: false}
+
   static navigationOptions = ({ navigation }) =>
     header(navigation, {
       left: 'close',
       title: 'Notifications'
     })
-
-  constructor () {
-    super()
-    this.state = { ready: false }
-  }
 
   componentDidMount () {
     const { fetchNotifications, setRightButton, updateNewNotificationCount } = this.props
