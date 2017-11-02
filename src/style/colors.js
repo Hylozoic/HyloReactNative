@@ -36,6 +36,7 @@ export const gunsmoke = '#818A88'
 export const capeCod10 = '#EBEBEB'
 export const capeCod20 = fakeAlpha(capeCod, 0.2)
 export const capeCod40 = '#A79A9A'
+export const rhino05 = fakeAlpha(rhino, 0.05)
 export const rhino10 = fakeAlpha(rhino, 0.1)
 export const rhino20 = fakeAlpha(rhino, 0.2)
 export const rhino30 = fakeAlpha(rhino, 0.3)
