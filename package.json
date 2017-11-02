@@ -6,6 +6,9 @@
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "android": "react-native run-android",
     "android:device": "adb reverse tcp:3001 tcp:3001 && react-native run-android",
+    "android:build": "yarn run android:prod && yarn run android:usb",
+    "android:prod": "cd android && ./gradlew assembleRelease",
+    "android:usb": "adb -d install -r android/app/build/outputs/apk/app-release.apk",
     "ios": "react-native run-ios",
     "test": "jest",
     "coverage:diff": "node ../jest-diff-coverage && open coverage/lcov-report/index.html"
