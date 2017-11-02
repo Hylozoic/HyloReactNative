@@ -30,6 +30,7 @@ import {
 import {
   UPDATE_LAST_VIEWED_PENDING
 } from '../../../components/ThreadList/ThreadList.store'
+import { RESET_NEW_POST_COUNT_PENDING } from '../../actions/resetNewPostCount'
 import orm from 'store/models'
 import ModelExtractor from '../ModelExtractor'
 import extractModelsFromAction from '../ModelExtractor/extractModelsFromAction'
@@ -153,6 +154,13 @@ export default function ormReducer (state = {}, action) {
       me.update({
         newNotificationCount: 0
       })
+      break
+
+    case RESET_NEW_POST_COUNT_PENDING:
+      const { id } = meta.graphql.variables
+      const membership = session.Membership.safeGet({community: id})
+      if (!membership) break
+      membership.update({newPostCount: 0})
       break
   }
 

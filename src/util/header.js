@@ -6,14 +6,38 @@ import { StyleSheet, Text, TouchableOpacity } from 'react-native'
 
 import { rhino60, rhino20 } from 'style/colors'
 
-export const headerButton = ({ onPress, text, disabled }) => {
-  if (typeof onPress !== 'function') throw new Error('headerButton: onPress is not a function.')
-  return <TouchableOpacity onPress={onPress} disabled={disabled}>
-    <Text style={[styles.button, disabled && styles.disabled]}>{text}</Text>
-  </TouchableOpacity>
+export class HeaderButton extends React.Component {
+  constructor (props) {
+    super(props)
+    const { disabled } = props
+    this.state = {
+      disabled
+    }
+  }
+
+  componentDidUpdate (prevProps) {
+    const { disabled } = this.props
+    if (disabled !== prevProps.disabled) {
+      this.setState({disabled})
+    }
+  }
+
+  onPress = () => {
+    this.setState({disabled: true})
+    this.props.onPress()
+  }
+
+  render () {
+    const { onPress, text } = this.props
+    const { disabled } = this.state
+    if (typeof onPress !== 'function') throw new Error('HeaderButton: onPress is not a function.')
+    return <TouchableOpacity onPress={this.onPress} disabled={disabled}>
+      <Text style={[styles.button, disabled && styles.disabled]}>{text}</Text>
+    </TouchableOpacity>
+  }
 }
 
-const headerClose = goBack => headerButton({ onPress: () => goBack(), text: 'Close' })
+const headerClose = goBack => <HeaderButton onPress={() => goBack()} text='Close' />
 
 // Helps to standardise the appearance and behaviour of headers.
 // Accepts an options argument and the navigation object from the component:
@@ -45,7 +69,7 @@ const headerClose = goBack => headerButton({ onPress: () => goBack(), text: 'Clo
 //       onPress: this.props.myDispatchedFunc,
 //       text: 'Dispatch me'
 //     }
-//     navigation.setParams({ headerRight: headerButton(right) })
+//     navigation.setParams({ headerRight: <HeaderButton {...right} /> })
 //   }
 //
 // This can all be placed in the connector and passed via mapDispatchToProps.
@@ -60,10 +84,10 @@ export default function header ({ goBack, state }, { left, right, title } = {}) 
     headerTitleStyle: styles.title
   }
   if (left) {
-    headerOptions.headerLeft = left === 'close' ? headerClose(goBack) : headerButton(left)
+    headerOptions.headerLeft = left === 'close' ? headerClose(goBack) : <HeaderButton {...left} />
     headerOptions.headerTitleStyle = [ styles.title, styles.center ]
   }
-  if (right) headerOptions.headerRight = headerButton(right)
+  if (right) headerOptions.headerRight = <HeaderButton {...right} />
 
   return headerOptions
 }

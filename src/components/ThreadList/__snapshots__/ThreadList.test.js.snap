@@ -325,36 +325,14 @@ exports[`ThreadList renders correctly 1`] = `
 
 exports[`ThreadList sets the navigationOptions 1`] = `
 Object {
-  "headerLeft": <TouchableOpacity
-    activeOpacity={0.2}
-    disabled={undefined}
-    focusedOpacity={0.7}
+  "headerLeft": <HeaderButton
     onPress={[Function]}
->
-    <Text
-        accessible={true}
-        allowFontScaling={true}
-        disabled={false}
-        ellipsizeMode="tail"
-    >
-        Close
-    </Text>
-</TouchableOpacity>,
-  "headerRight": <TouchableOpacity
-    activeOpacity={0.2}
-    disabled={undefined}
-    focusedOpacity={0.7}
+    text="Close"
+/>,
+  "headerRight": <HeaderButton
     onPress={[Function]}
->
-    <Text
-        accessible={true}
-        allowFontScaling={true}
-        disabled={false}
-        ellipsizeMode="tail"
-    >
-        New
-    </Text>
-</TouchableOpacity>,
+    text="New"
+/>,
   "headerStyle": Object {
     "backgroundColor": "white",
     "paddingHorizontal": 10,
