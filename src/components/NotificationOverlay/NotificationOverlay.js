@@ -62,9 +62,9 @@ export default class NotificationOverlay extends React.Component {
   }
 }
 
-const fontSize = 16
-const lineHeight = 20
-const padding = 10
+const fontSize = 13
+const lineHeight = 14
+const padding = 6
 
 const styles = StyleSheet.create({
   message: {
