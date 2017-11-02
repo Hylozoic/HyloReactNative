@@ -42,6 +42,7 @@ Object {
     },
   },
   "meta": Object {
+    "afterInteractions": true,
     "extractModel": "CommunityTopic",
   },
   "type": "Feed/FETCH_COMMUNITY_TOPIC",

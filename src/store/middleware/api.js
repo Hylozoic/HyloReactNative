@@ -1,3 +1,5 @@
+import { InteractionManager } from 'react-native'
+
 import fetchJSON from '../../util/fetchJSON'
 
 export default function apiMiddleware (store) {
@@ -7,9 +9,14 @@ export default function apiMiddleware (store) {
 
     const { path, params, method, transform } = payload.api
 
-    let promise = fetchJSON(path, params, {method})
-    .then(json => transform ? transform(json) : json)
+    const newPayload = new Promise((resolve, reject) => {
+      InteractionManager.runAfterInteractions(() => {
+        fetchJSON(path, params, {method})
+        .then(json => resolve(transform ? transform(json) : json))
+        .catch(reject)
+      })
+    })
 
-    return next({...action, payload: promise})
+    return next({...action, payload: newPayload})
   }
 }
