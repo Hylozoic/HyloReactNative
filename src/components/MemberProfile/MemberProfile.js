@@ -83,6 +83,7 @@ export class MemberBanner extends React.Component {
     this.setState({
       [localKey]: local
     })
+
     this.props.updateUserSettings({[remoteKey]: remote})
   }
 

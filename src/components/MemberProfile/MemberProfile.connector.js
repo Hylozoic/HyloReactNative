@@ -4,7 +4,7 @@ import { get } from 'lodash/fp'
 import { getPerson, fetchPerson } from './MemberProfile.store'
 import makeGoToCommunity from '../../store/actions/makeGoToCommunity'
 import getMe from '../../store/selectors/getMe'
-import { updateUserSettings } from '../../store/actions/updateUserSettings'
+import updateUserSettings from '../../store/actions/updateUserSettings'
 
 export function mapStateToProps (state, props) {
   const id = get('navigation.state.params.id', props)
