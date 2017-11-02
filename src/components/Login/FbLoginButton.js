@@ -22,7 +22,7 @@ export default class FbLoginButton extends React.Component {
   handleResult = (error, result) => {
     const { onLoginFinished } = this.props
     if (error) {
-      alert('Login failed with error: ' + result.error)
+      this.props.createErrorNotification('COULD NOT SIGN IN WITH YOUR FACEBOOK ACCOUNT')
     } else {
       return this.AccessToken.getCurrentAccessToken()
       .then(data => onLoginFinished(data.accessToken.toString()))
