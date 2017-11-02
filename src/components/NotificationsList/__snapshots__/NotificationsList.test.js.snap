@@ -2,7 +2,7 @@
 
 exports[`NotificationsList matches the last snapshot 1`] = `
 <View>
-  <FlatList
+  <RCTScrollView
     data={
       Array [
         Object {
@@ -20,19 +20,111 @@ exports[`NotificationsList matches the last snapshot 1`] = `
       ]
     }
     disableVirtualization={false}
+    getItem={[Function]}
+    getItemCount={[Function]}
     horizontal={false}
     initialNumToRender={10}
     keyExtractor={[Function]}
     maxToRenderPerBatch={10}
     numColumns={1}
+    onContentSizeChange={[Function]}
     onEndReached={[Function]}
     onEndReachedThreshold={2}
+    onLayout={[Function]}
+    onMomentumScrollEnd={[Function]}
+    onScroll={[Function]}
+    onScrollBeginDrag={[Function]}
+    onScrollEndDrag={[Function]}
+    onViewableItemsChanged={undefined}
     renderItem={[Function]}
     renderScrollComponent={[Function]}
     scrollEventThrottle={50}
+    stickyHeaderIndices={Array []}
     updateCellsBatchingPeriod={50}
     windowSize={21}
-  />
+  >
+    <View>
+      <View
+        onLayout={[Function]}
+      >
+        <View>
+          <View
+            accessibilityComponentType={undefined}
+            accessibilityLabel={undefined}
+            accessibilityTraits={undefined}
+            accessible={true}
+            collapsable={undefined}
+            hitSlop={undefined}
+            isTVSelectable={true}
+            nativeID={undefined}
+            onLayout={undefined}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            testID={undefined}
+            tvParallaxProperties={undefined}
+          >
+            <View>
+              <View>
+                <View>
+                  <Image
+                    source={
+                      Object {
+                        "uri": "https://wombat.com",
+                      }
+                    }
+                  />
+                </View>
+              </View>
+              <View>
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  disabled={false}
+                  ellipsizeMode="tail"
+                  numberOfLines={2}
+                >
+                  <Text
+                    accessible={true}
+                    allowFontScaling={true}
+                    disabled={false}
+                    ellipsizeMode="tail"
+                  />
+                </Text>
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  disabled={false}
+                  ellipsizeMode="tail"
+                  numberOfLines={2}
+                >
+                  <Text
+                    accessible={true}
+                    allowFontScaling={true}
+                    disabled={false}
+                    ellipsizeMode="tail"
+                  >
+                    Wombat 
+                  </Text>
+                </Text>
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  disabled={false}
+                  ellipsizeMode="tail"
+                >
+                  2 min ago
+                </Text>
+              </View>
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
+  </RCTScrollView>
 </View>
 `;
 

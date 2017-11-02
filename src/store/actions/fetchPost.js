@@ -69,6 +69,7 @@ export default function fetchPost (id, opts = {}) {
       }
     },
     meta: {
+      afterInteractions: true,
       extractModel: 'Post',
       extractQueryResults: {
         getItems: get('payload.data.post.comments'),

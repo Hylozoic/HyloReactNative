@@ -105,35 +105,100 @@ exports[`ThreadList fetches threads initially when empty 1`] = `
 
 exports[`ThreadList handles pending correctly with threads 1`] = `
 <View>
-  <FlatList
+  <RCTScrollView
     data={
-      Object {
-        "id": 1,
-      }
+      Array [
+        Object {
+          "id": 1,
+        },
+      ]
     }
     disableVirtualization={false}
+    getItem={[Function]}
+    getItemCount={[Function]}
     horizontal={false}
     initialNumToRender={10}
     keyExtractor={[Function]}
     maxToRenderPerBatch={10}
     numColumns={1}
+    onContentSizeChange={[Function]}
     onEndReached={undefined}
     onEndReachedThreshold={2}
+    onLayout={[Function]}
+    onMomentumScrollEnd={[Function]}
     onRefresh={undefined}
+    onScroll={[Function]}
+    onScrollBeginDrag={[Function]}
+    onScrollEndDrag={[Function]}
+    onViewableItemsChanged={undefined}
     refreshing={undefined}
     renderItem={[Function]}
     renderScrollComponent={[Function]}
     scrollEventThrottle={50}
+    stickyHeaderIndices={Array []}
     updateCellsBatchingPeriod={50}
     windowSize={21}
-  />
-  <NotificationOverlay
-    message="RECONNECTING..."
-    onPress={undefined}
-    permanent={true}
-    position="bottom"
-    type="error"
-  />
+  >
+    <View>
+      <View
+        onLayout={[Function]}
+      >
+        <View>
+          <View
+            accessibilityComponentType={undefined}
+            accessibilityLabel={undefined}
+            accessibilityTraits={undefined}
+            accessible={true}
+            collapsable={undefined}
+            hitSlop={undefined}
+            isTVSelectable={true}
+            nativeID={undefined}
+            onLayout={undefined}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            testID={undefined}
+            tvParallaxProperties={undefined}
+          />
+        </View>
+      </View>
+    </View>
+  </RCTScrollView>
+  <View
+    collapsable={undefined}
+  >
+    <View
+      accessibilityComponentType={undefined}
+      accessibilityLabel={undefined}
+      accessibilityTraits={undefined}
+      accessible={true}
+      collapsable={undefined}
+      hitSlop={undefined}
+      isTVSelectable={true}
+      nativeID={undefined}
+      onLayout={undefined}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      testID={undefined}
+      tvParallaxProperties={undefined}
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        disabled={false}
+        ellipsizeMode="tail"
+      >
+        RECONNECTING...
+      </Text>
+    </View>
+  </View>
 </View>
 `;
 
