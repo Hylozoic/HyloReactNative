@@ -9,10 +9,6 @@ export default class Home extends React.Component {
     return Header(navigation, screenProps.currentTabName)
   }
 
-  componentDidMount () {
-    this.props.navigation.navigate('MemberProfile', {id: 11204})
-  }
-
   render () {
     const { navigation, communityId, currentUser } = this.props
     if (!currentUser) return <Loading style={{flex: 1}} />
