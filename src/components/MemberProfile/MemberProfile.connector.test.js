@@ -7,11 +7,11 @@ describe('mapStateToProps', () => {
       state: {params: {id}},
       navigate: jest.fn()
     }
-    const props = mapStateToProps({navigation}, {})
+    const props = mapStateToProps({}, {navigation})
     expect(props).toMatchSnapshot()
     props.goToDetails()
     expect(navigation.navigate).toHaveBeenCalledWith('MemberDetails', {id})
-    navigation.navigation.mockClear()
+    navigation.navigate.mockClear()
     props.goToEdit()
     expect(navigation.navigate).toHaveBeenCalledWith('MemberDetails', {id, edit: true})
   })

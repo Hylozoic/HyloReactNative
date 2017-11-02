@@ -1,7 +1,9 @@
 import ImagePicker from './ImagePicker'
 import TestRenderer from 'react-test-renderer'
+import ReactShallowRenderer from 'react-test-renderer/shallow'
 import RNImagePicker from 'react-native-image-picker'
 import React from 'react'
+import { Text } from 'react-native'
 
 jest.mock('react-native-image-picker', () => {
   let callback
@@ -11,6 +13,18 @@ jest.mock('react-native-image-picker', () => {
       callback = cb
     })
   }
+})
+
+it('matches last snapshot', () => {
+  const renderer = new ReactShallowRenderer()
+  const props = {
+    disabled: true
+  }
+
+  renderer.render(<ImagePicker {...props}><Text>Children</Text></ImagePicker>)
+  const actual = renderer.getRenderOutput()
+
+  expect(actual).toMatchSnapshot()
 })
 
 it('uploads the picked image', async () => {

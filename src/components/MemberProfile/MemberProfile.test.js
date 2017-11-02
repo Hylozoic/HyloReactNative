@@ -1,9 +1,11 @@
 import 'react-native'
 import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
+import ReactTestRenderer from 'react-test-renderer'
 import MemberProfile, { MemberBanner, MemberHeader, ReadMoreButton, MemberMenu } from './MemberProfile'
 
 jest.mock('react-native-device-info')
+jest.mock('../ImagePicker', () => 'ImagePicker')
 
 describe('MemberProfile', () => {
   it('matches the last snapshot', () => {
@@ -32,6 +34,7 @@ describe('MemberProfile', () => {
 describe('MemberBanner', () => {
   it('matches the last snapshot', () => {
     const person = {
+      id: 1,
       bannerUrl: 'yay.png',
       avatarUrl: 'pong.png'
     }
@@ -42,6 +45,40 @@ describe('MemberBanner', () => {
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
+  })
+
+  it('shows local images if present', () => {
+    const person = {
+      id: 1,
+      bannerUrl: 'yay.png',
+      avatarUrl: 'pong.png'
+    }
+    const props = {
+      person
+    }
+
+    const instance = ReactTestRenderer.create(<MemberBanner {...props} />).getInstance()
+    instance.setState({
+      bannerLocalUri: 'bannerlocal.png',
+      avatarLocalUri: 'avatarlocal.jpg'
+    })
+
+    expect(instance.toJSON).toMatchSnapshot()
+  })
+
+  describe('onChoice', () => {
+    const props = {
+      person: {
+        id: 1
+      },
+      updateUserSettings: jest.fn()
+    }
+    const local = 'local.uri'
+    const remote = 'remote.uri'
+    const instance = ReactTestRenderer.create(<MemberBanner {...props} />).getInstance()
+    instance.onChoice({local, remote}, 'banner')
+    expect(instance.state.bannerLocalUri).toEqual(local)
+    expect(props.updateUserSettings).toHaveBeenCalledWith({bannerUrl: remote})
   })
 })
 

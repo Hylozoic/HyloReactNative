@@ -2,9 +2,9 @@
 
 exports[`MemberBanner matches the last snapshot 1`] = `
 <View>
-  <Connect(ImagePicker)
+  <ImagePicker
     disabled={true}
-    id={undefined}
+    id={1}
     onChoice={[Function]}
     onPendingChange={[Function]}
     title="Change Banner"
@@ -17,10 +17,10 @@ exports[`MemberBanner matches the last snapshot 1`] = `
         }
       }
     />
-  </Connect(ImagePicker)>
-  <Connect(ImagePicker)
+  </ImagePicker>
+  <ImagePicker
     disabled={true}
-    id={undefined}
+    id={1}
     onChoice={[Function]}
     onPendingChange={[Function]}
     title="Change Avatar"
@@ -35,9 +35,11 @@ exports[`MemberBanner matches the last snapshot 1`] = `
         }
       />
     </View>
-  </Connect(ImagePicker)>
+  </ImagePicker>
 </View>
 `;
+
+exports[`MemberBanner shows local images if present 1`] = `undefined`;
 
 exports[`MemberHeader matches the last snapshot 1`] = `
 <View>

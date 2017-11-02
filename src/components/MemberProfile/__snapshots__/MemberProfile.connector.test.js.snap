@@ -5,7 +5,7 @@ Object {
   "currentUser": undefined,
   "goToDetails": [Function],
   "goToEdit": [Function],
-  "id": undefined,
+  "id": 123,
   "isMe": false,
   "person": null,
 }
