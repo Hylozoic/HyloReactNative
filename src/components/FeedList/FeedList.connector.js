@@ -5,10 +5,12 @@ import {
   setSort,
   setFilter,
   getPosts,
-  getHasMorePosts
+  getHasMorePosts,
+  defaultSortBy
 } from './FeedList.store'
 import { ALL_COMMUNITIES_ID } from '../../store/models/Community'
 import { fetchPosts, FETCH_POSTS } from '../../store/actions/fetchPosts'
+import resetNewPostCount from '../../store/actions/resetNewPostCount'
 import { get, isNull, isUndefined, omit, omitBy } from 'lodash/fp'
 
 function makeFetchOpts (props) {
@@ -46,7 +48,11 @@ export function mapStateToProps (state, props) {
   }
 }
 
-const mapDispatchToProps = {setFilter, setSort, fetchPosts}
+const mapDispatchToProps = {setFilter, setSort, fetchPosts, resetNewPostCount}
+
+export function shouldResetNewPostCount ({subject, sortBy, filter, topic}) {
+  return subject === 'community' && !topic && sortBy === defaultSortBy && !filter
+}
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
   const { hasMore, pending, posts, queryProps } = stateProps
@@ -55,12 +61,21 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     ? () => dispatchProps.fetchPosts({...queryProps, offset: posts.length})
     : () => {}
 
+  const fetchPostsAndResetCount = (params, opts) => {
+    const promises = [dispatchProps.fetchPosts(params, opts)]
+    const communityID = get('id', ownProps.community)
+    if (shouldResetNewPostCount(queryProps)) {
+      promises.push(dispatchProps.resetNewPostCount(communityID, 'Membership'))
+    }
+    return Promise.all(promises)
+  }
+  // topic
   return {
     ...omit(['queryProps'], stateProps),
     ...dispatchProps,
     ...ownProps,
-    fetchPosts: () => dispatchProps.fetchPosts(queryProps),
-    refreshPosts: () => dispatchProps.fetchPosts(queryProps, {reset: true}),
+    fetchPosts: () => fetchPostsAndResetCount(queryProps),
+    refreshPosts: () => fetchPostsAndResetCount(queryProps, {reset: true}),
     fetchMorePosts
   }
 }

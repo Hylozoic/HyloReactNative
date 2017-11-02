@@ -7,11 +7,12 @@ export function mapStateToProps (state, props) {
   const { comment } = props
   const currentUser = getMe(state, props)
   const community = getCommunity(state, {slug: props.slug})
-  const canModerate = currentUser && (comment.creator.id === currentUser.id ||
-    currentUser.canModerate(community))
+  const isCreator = currentUser && comment.creator.id === currentUser.id
+  const canModerate = currentUser && currentUser.canModerate(community)
 
   return {
-    canModerate
+    canModerate,
+    isCreator
   }
 }
 
@@ -20,18 +21,18 @@ export const mapDispatchToProps = {
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
-  const { canModerate } = stateProps
+  const { canModerate, isCreator } = stateProps
   const { comment } = ownProps
 
-  const deleteComment = canModerate
-    ? () => dispatchProps.deleteComment(comment.id)
-    : null
+  const deleteComment = isCreator ? () => dispatchProps.deleteComment(comment.id) : null
+  const removeComment = !isCreator && canModerate ? () => dispatchProps.deleteComment(comment.id) : null
 
   return {
     ...stateProps,
     ...dispatchProps,
     ...ownProps,
-    deleteComment
+    deleteComment,
+    removeComment
   }
 }
 

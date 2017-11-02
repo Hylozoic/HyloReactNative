@@ -29,7 +29,8 @@ describe('mapStateToProps', () => {
     }
 
     expect(mapStateToProps(state, props)).toEqual({
-      canModerate: true
+      canModerate: true,
+      isCreator: true
     })
   })
 })
@@ -39,19 +40,44 @@ describe('mergeProps', () => {
     deleteComment: jest.fn()
   }
 
-  it('returns deleteComment when moderator', () => {
+  it('returns removeComment when moderator', () => {
     const stateProps = {
       canModerate: true
     }
     const ownProps = {comment: {id: 34}}
-    expect(mergeProps(stateProps, dispatchProps, ownProps)).toMatchSnapshot()
+
+    const mprops = mergeProps(stateProps, dispatchProps, ownProps)
+    expect(mprops).toMatchSnapshot()
+
+    expect(mprops.removeComment).toBeTruthy()
+    expect(mprops.deleteComment).toBeFalsy()
   })
 
-  it('doesnt return deleteComment when moderator', () => {
+  it('return deleteComment when creator', () => {
     const stateProps = {
-      canModerate: false
+      isCreator: true,
+      canModerate: true
     }
     const ownProps = {comment: {id: 34}}
-    expect(mergeProps(stateProps, dispatchProps, ownProps)).toMatchSnapshot()
+
+    const mprops = mergeProps(stateProps, dispatchProps, ownProps)
+    expect(mprops).toMatchSnapshot()
+
+    expect(mprops.removeComment).toBeFalsy()
+    expect(mprops.deleteComment).toBeTruthy()
+  })
+
+  it('returns nothing when neither creator nor moderator', () => {
+    const stateProps = {
+      canModerate: false,
+      isCreator: false
+    }
+    const ownProps = {comment: {id: 34}}
+
+    const mprops = mergeProps(stateProps, dispatchProps, ownProps)
+    expect(mprops).toMatchSnapshot()
+
+    expect(mprops.removeComment).toBeFalsy()
+    expect(mprops.deleteComment).toBeFalsy()
   })
 })
