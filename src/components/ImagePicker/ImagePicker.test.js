@@ -3,7 +3,7 @@ import TestRenderer from 'react-test-renderer'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import RNImagePicker from 'react-native-image-picker'
 import React from 'react'
-import { Text } from 'react-native'
+import { Text, TouchableOpacity } from 'react-native'
 
 jest.mock('react-native-image-picker', () => {
   let callback
@@ -25,6 +25,13 @@ it('matches last snapshot', () => {
   const actual = renderer.getRenderOutput()
 
   expect(actual).toMatchSnapshot()
+})
+
+it('calls this.showPicker onPress', () => {
+  const { root, root: { instance } } = TestRenderer.create(<ImagePicker />)
+  instance.showPicker = jest.fn()
+  root.findByType(TouchableOpacity).props.onPress()
+  expect(instance.showPicker).toHaveBeenCalled()
 })
 
 it('uploads the picked image', async () => {
