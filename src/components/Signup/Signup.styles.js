@@ -8,6 +8,8 @@ export default {
   container: {
     backgroundColor: 'white'
   },
+  banner: loginStyles.banner,
+  errorBanner: loginStyles.errorBanner,
   background: {
     width: bgImageWidth,
     height: bgImageHeight,
