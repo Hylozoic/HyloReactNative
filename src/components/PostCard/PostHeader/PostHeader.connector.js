@@ -8,15 +8,19 @@ export function mapStateToProps (state, props) {
   const currentUser = getMe(state)
   const { creator, editPost } = props
 
-  const canEdit = currentUser && creator && currentUser.id === creator.id
-  const canFlag = currentUser && creator && currentUser.id !== creator.id
+  const isCreator = currentUser && creator && currentUser.id === creator.id
+  const canEdit = isCreator
+  const canFlag = !isCreator
+  const canModerate = currentUser && currentUser.canModerate(community)
 
   return {
     currentUser,
     community,
     editPost: canEdit ? () => editPost() : null,
     canEdit,
-    canFlag
+    canFlag,
+    isCreator,
+    canModerate
   }
 }
 
@@ -28,16 +32,15 @@ export function mapDispatchToProps (dispatch) {
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
-  const { currentUser, community, canEdit } = stateProps
+  const { canEdit, isCreator, canModerate } = stateProps
   const { postId, slug } = ownProps
   const { deletePost, removePost } = dispatchProps
-  const canModerate = currentUser && currentUser.canModerate(community)
   return {
     ...stateProps,
     ...dispatchProps,
     ...ownProps,
     deletePost: canEdit ? () => deletePost(postId) : null,
-    removePost: canModerate ? () => removePost(postId, slug) : null
+    removePost: !isCreator && canModerate ? () => removePost(postId, slug) : null
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps, mergeProps)
