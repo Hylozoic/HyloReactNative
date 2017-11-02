@@ -7,10 +7,31 @@ import { StyleSheet, Text, TouchableOpacity } from 'react-native'
 import { rhino60, rhino20 } from 'style/colors'
 
 export class HeaderButton extends React.Component {
+  constructor (props) {
+    super(props)
+    const { disabled } = props
+    this.state = {
+      disabled
+    }
+  }
+
+  componentDidUpdate (prevProps) {
+    const { disabled } = this.props
+    if (disabled !== prevProps.disabled) {
+      this.setState({disabled})
+    }
+  }
+
+  onPress = () => {
+    this.setState({disabled: true})
+    this.props.onPress()
+  }
+
   render () {
-    const { onPress, text, disabled } = this.props
+    const { onPress, text } = this.props
+    const { disabled } = this.state
     if (typeof onPress !== 'function') throw new Error('HeaderButton: onPress is not a function.')
-    return <TouchableOpacity onPress={onPress} disabled={disabled}>
+    return <TouchableOpacity onPress={this.onPress} disabled={disabled}>
       <Text style={[styles.button, disabled && styles.disabled]}>{text}</Text>
     </TouchableOpacity>
   }
