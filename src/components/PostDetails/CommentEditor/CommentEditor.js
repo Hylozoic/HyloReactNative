@@ -29,7 +29,7 @@ export default class CommentEditor extends React.Component {
         .then(content => saveChanges(content))
         .then(({ error }) => {
           if (error) {
-            Alert.alert("Your comment couldn't be saved. Please try again.")
+            Alert.alert("Your comment couldn't be saved; please try again.")
           } else {
             return navigation.goBack()
           }
