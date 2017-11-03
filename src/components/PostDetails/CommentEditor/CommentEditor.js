@@ -27,7 +27,13 @@ export default class CommentEditor extends React.Component {
         navigation.setParams({disabled: true})
         return this.editor.getContentAsync()
         .then(content => saveChanges(content))
-        .then(() => navigation.goBack())
+        .then(({ error }) => {
+          if (error) {
+            Alert.alert("Your comment couldn't be saved. Please try again.")
+          } else {
+            return navigation.goBack()
+          }
+        })
         .catch(() => Alert.alert("Your comment couldn't be saved. Please try again."))
       }
     })
