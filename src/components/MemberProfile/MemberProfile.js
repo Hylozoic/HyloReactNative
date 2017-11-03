@@ -56,7 +56,7 @@ export default class MemberProfile extends React.Component {
           flagMember={flagMember}
           onPressMessages={onPressMessages}
           isMe={isMe}
-          goToEdit={goToEdit} />
+          editProfile={goToEdit} />
         <ReadMoreButton goToDetails={goToDetails} />
       </View>
       {flaggingVisible && <FlagContent type='member'
@@ -138,7 +138,7 @@ export function EditButton ({ isLoading, style }) {
   </View>
 }
 
-export function MemberHeader ({ person, flagMember, onPressMessages, isMe, goToEdit }) {
+export function MemberHeader ({ person, flagMember, onPressMessages, isMe, editProfile }) {
   if (!person) return null
 
   const { name, location, tagline } = person
@@ -149,7 +149,7 @@ export function MemberHeader ({ person, flagMember, onPressMessages, isMe, goToE
         <TouchableOpacity onPress={onPressMessages}>
           <Icon name='Messages' style={styles.icon} />
         </TouchableOpacity>
-        <MemberMenu {... {flagMember, isMe, goToEdit}} />
+        <MemberMenu {... {flagMember, isMe, editProfile}} />
       </View>
     </View>
     <Text style={styles.location}>{location}</Text>
@@ -167,10 +167,10 @@ export function ReadMoreButton ({ goToDetails }) {
   </View>
 }
 
-export function MemberMenu ({flagMember, isMe, goToEdit}) {
+export function MemberMenu ({flagMember, isMe, editProfile}) {
   // If the function is defined, than it's a valid action
   const actions = filter(x => x[1], [
-    ['Edit', isMe && goToEdit],
+    ['Edit', isMe && editProfile],
     ['Flag This Member', !isMe && flagMember]
   ])
 

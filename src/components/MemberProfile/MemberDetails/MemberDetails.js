@@ -1,16 +1,31 @@
 import React from 'react'
-import { Text, View, TouchableOpacity, ScrollView } from 'react-native'
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  ScrollView,
+  TextInput
+} from 'react-native'
 import Icon from '../../Icon'
 import StarIcon from '../../StarIcon'
 import Loading from '../../Loading'
 import { MemberHeader } from '../MemberProfile'
 import styles from './MemberDetails.styles'
+import EntypoIcon from 'react-native-vector-icons/Entypo'
 import { isEmpty } from 'lodash/fp'
 
 export default class MemberDetails extends React.Component {
   static navigationOptions = () => ({
     headerTitle: 'About This Member'
   })
+
+  constructor (props) {
+    super(props)
+    this.state = {
+      editing: false,
+      person: props.person
+    }
+  }
 
   componentDidMount () {
     this.props.fetchPerson()
@@ -20,15 +35,26 @@ export default class MemberDetails extends React.Component {
     if (prevProps.id !== this.props.id) {
       this.props.fetchPerson()
     }
+
+    if (prevProps.person !== this.props.person) {
+      this.setState({
+        person: this.props.person
+      })
+    }
+  }
+
+  editProfile = () => {
+    this.setState({editing: true})
   }
 
   render () {
-    const { person, goToCommunity } = this.props
+    const { goToCommunity, isMe } = this.props
+    const { person } = this.state
 
     if (!person) return <Loading />
 
     return <ScrollView contentContainerStyle={styles.container}>
-      <MemberHeader person={person} />
+      <MemberHeader person={person} isMe={isMe} editProfile={this.editProfile} />
       <MemberBio person={person} />
       <MemberSkills person={person} />
       <MemberCommunities person={person} goToCommunity={goToCommunity} />
@@ -80,5 +106,12 @@ export function CommunityRow ({ membership, goToCommunity }) {
     </TouchableOpacity>
     <Text style={styles.memberCount}>{memberCount}</Text>
     <Icon name='Members' style={styles.memberIcon} />
+  </View>
+}
+
+export function Control ({ value, onChange, editable }) {
+  return <View style={styles.control}>
+    <TextInput value={value} onChangeText={onChange} editable={editable} />
+    {editable && <EntypoIcon name='edit' style={styles.editIcon} />}
   </View>
 }
