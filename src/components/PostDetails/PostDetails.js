@@ -13,7 +13,6 @@ import PostFooter from '../PostCard/PostFooter'
 import PostHeader from '../PostCard/PostHeader'
 import Loading from '../Loading'
 import SocketSubscriber from '../SocketSubscriber'
-import SpaceFillingImage from '../SpaceFillingImage'
 
 import styles from './PostDetails.styles'
 
@@ -106,7 +105,6 @@ export default class PostDetails extends React.Component {
       <SocketSubscriber type='post' id={post.id} />
     </View>
   }
-
 }
 
 export function CommentPrompt ({ currentUser, newComment, commentEdit }) {
