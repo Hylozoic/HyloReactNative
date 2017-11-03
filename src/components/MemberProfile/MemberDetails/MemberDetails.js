@@ -6,9 +6,10 @@ import {
   ScrollView
 } from 'react-native'
 import Icon from '../../Icon'
+import Button from '../../Button'
 import StarIcon from '../../StarIcon'
 import Loading from '../../Loading'
-import MemberHeader from '../MemberHeader'
+import MemberHeader, { Control } from '../MemberHeader'
 import styles from './MemberDetails.styles'
 import { isEmpty } from 'lodash/fp'
 
@@ -54,27 +55,48 @@ export default class MemberDetails extends React.Component {
     })
   }
 
+  saveChanges = () => {
+    console.log('save changes')
+    this.props.updateUserSettings(this.state.person)
+  }
+
   render () {
     const { goToCommunity, isMe } = this.props
-    const { person } = this.state
+    const { person, editing } = this.state
 
     if (!person) return <Loading />
 
     return <ScrollView contentContainerStyle={styles.container}>
-      <MemberHeader person={person} isMe={isMe} editProfile={this.editProfile} />
-      <MemberBio person={person} />
+      <MemberHeader
+        person={person}
+        isMe={isMe}
+        editProfile={this.editProfile}
+        editable={editing}
+        updateSetting={this.updateSetting}
+        saveChanges={this.saveChanges} />
+      <MemberBio person={person}
+        editable={editing}
+        updateSetting={this.updateSetting}
+        saveChanges={this.saveChanges} />
+      <Button text={editing ? 'stop edit' : 'edit'} onPress={() => this.setState({editing: !editing})} />
       <MemberSkills person={person} />
       <MemberCommunities person={person} goToCommunity={goToCommunity} />
     </ScrollView>
   }
 }
 
-export function MemberBio ({ person: { bio } }) {
+export function MemberBio ({ person: { bio }, editable, updateSetting, saveChanges }) {
   if (isEmpty(bio)) return null
 
   return <View style={styles.bioContainer}>
     <Text style={styles.sectionLabel}>About Me</Text>
-    <Text style={styles.bio}>{bio}</Text>
+    <Control
+      style={styles.bio}
+      value={bio}
+      editable={editable}
+      onChangeText={updateSetting('bio')}
+      onBlur={saveChanges}
+      multiline />
   </View>
 }
 

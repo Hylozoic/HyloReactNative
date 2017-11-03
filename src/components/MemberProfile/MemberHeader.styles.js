@@ -41,6 +41,16 @@ export default {
   },
   control: {
     flexDirection: 'row',
+    flex: 1,
+    alignItems: 'center'
+  },
+  editableControl: {
+    marginBottom: 5
+  },
+  controlInput: {
     flex: 1
+  },
+  editIconWrapper: {
+    marginRight: 10
   }
 }

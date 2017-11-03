@@ -1,18 +1,25 @@
 import React from 'react'
-import { Text, View, TouchableOpacity, TextInput } from 'react-native'
+import { View, TouchableOpacity, TextInput } from 'react-native'
 import Icon from '../Icon'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
 import PopupMenuButton from '../PopupMenuButton'
 import { filter, isEmpty } from 'lodash/fp'
 import styles from './MemberHeader.styles'
 
-export default function MemberHeader ({ person, flagMember, onPressMessages, isMe, editProfile }) {
+export default function MemberHeader ({
+  person, flagMember, onPressMessages, isMe, editProfile, editable, updateSetting, saveChanges
+}) {
   if (!person) return null
 
   const { name, location, tagline } = person
   return <View style={styles.header}>
     <View style={styles.nameRow}>
-      <Text style={styles.name}>{name}</Text>
+      <Control
+        style={styles.name}
+        value={name}
+        editable={editable}
+        onChangeText={updateSetting('name')}
+        onBlur={saveChanges} />
       <View style={styles.icons}>
         <TouchableOpacity onPress={onPressMessages}>
           <Icon name='Messages' style={styles.icon} />
@@ -20,19 +27,42 @@ export default function MemberHeader ({ person, flagMember, onPressMessages, isM
         <MemberMenu {... {flagMember, isMe, editProfile}} />
       </View>
     </View>
-    <Control style={styles.location} value={location} editable />
-    <Text style={styles.location}>{location}</Text>
-    <Text style={styles.tagline}>{tagline}</Text>
+    <Control
+      style={styles.location}
+      value={location}
+      editable={editable}
+      onChangeText={updateSetting('location')}
+      onBlur={saveChanges} />
+    <Control
+      style={styles.tagline}
+      value={tagline}
+      editable={editable}
+      onChangeText={updateSetting('tagline')}
+      onBlur={saveChanges} />
   </View>
 }
 
-export function Control ({ value, onChange, editable, style }) {
-  console.log('value', value)
-  console.log('style', style)
-  return <View style={styles.control}>
-    <TextInput style={style} value={value} onChangeText={onChange} editable={editable} />
-    {editable && <EntypoIcon name='edit' style={styles.editIcon} />}
-  </View>
+export class Control extends React.Component {
+  focusInput = () => {
+    this.input && this.input.focus()
+  }
+
+  render () {
+    const { value, onChangeText, editable, style, onBlur, multiline } = this.props
+    return <View style={[styles.control, editable && styles.editableControl]}>
+      <TextInput
+        ref={i => { this.input = i }}
+        style={[styles.controlInput, style]}
+        value={value}
+        onChangeText={onChangeText}
+        editable={editable}
+        onBlur={onBlur}
+        multiline={multiline} />
+      {editable && <TouchableOpacity onPress={this.focusInput} style={styles.editIconWrapper}>
+        <EntypoIcon name='edit' style={styles.editIcon} />
+      </TouchableOpacity>}
+    </View>
+  }
 }
 
 export function MemberMenu ({flagMember, isMe, editProfile}) {
