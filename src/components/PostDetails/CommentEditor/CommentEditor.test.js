@@ -35,7 +35,7 @@ describe('save', () => {
     state: {params: {}},
     goBack: jest.fn()
   }
-  const saveChanges = jest.fn()
+  const saveChanges = jest.fn(() => Promise.resolve({}))
   const setCommentEdits = () => {}
   const props = {
     navigation,
