@@ -12,7 +12,7 @@ export default class CommentEditor extends React.Component {
     return header(navigation, {
       left: 'close',
       title: 'Comment',
-      right: save && {text: 'Save', onPress: save, disabled}
+      right: save && {text: disabled ? 'Saving' : 'Save', onPress: save, disabled}
     })
   }
 
