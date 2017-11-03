@@ -3,15 +3,13 @@ import {
   Text,
   View,
   TouchableOpacity,
-  ScrollView,
-  TextInput
+  ScrollView
 } from 'react-native'
 import Icon from '../../Icon'
 import StarIcon from '../../StarIcon'
 import Loading from '../../Loading'
-import { MemberHeader } from '../MemberProfile'
+import MemberHeader from '../MemberHeader'
 import styles from './MemberDetails.styles'
-import EntypoIcon from 'react-native-vector-icons/Entypo'
 import { isEmpty } from 'lodash/fp'
 
 export default class MemberDetails extends React.Component {
@@ -45,6 +43,15 @@ export default class MemberDetails extends React.Component {
 
   editProfile = () => {
     this.setState({editing: true})
+  }
+
+  updateSetting = setting => value => {
+    this.setState({
+      person: {
+        ...this.state.person,
+        [setting]: value
+      }
+    })
   }
 
   render () {
@@ -106,12 +113,5 @@ export function CommunityRow ({ membership, goToCommunity }) {
     </TouchableOpacity>
     <Text style={styles.memberCount}>{memberCount}</Text>
     <Icon name='Members' style={styles.memberIcon} />
-  </View>
-}
-
-export function Control ({ value, onChange, editable }) {
-  return <View style={styles.control}>
-    <TextInput value={value} onChangeText={onChange} editable={editable} />
-    {editable && <EntypoIcon name='edit' style={styles.editIcon} />}
   </View>
 }

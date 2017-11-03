@@ -68,8 +68,5 @@ export default {
   memberIcon: {
     fontSize: 16,
     color: rhino30
-  },
-  control: {
-    flexDirection: 'row'
   }
 }
