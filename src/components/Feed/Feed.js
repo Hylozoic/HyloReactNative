@@ -6,8 +6,9 @@ import FeedList from '../FeedList'
 import FeedBanner from '../FeedBanner'
 import SocketSubscriber from '../SocketSubscriber'
 import styles from './Feed.styles'
+import { withNavigationFocus } from 'react-navigation-is-focused-hoc'
 
-export default class Feed extends Component {
+export class Feed extends Component {
   state = {showNotification: false}
 
   static navigationOptions = ({ navigation }) => {
@@ -20,6 +21,23 @@ export default class Feed extends Component {
   componentDidMount () {
     const { fetchCommunityTopic } = this.props
     if (fetchCommunityTopic) fetchCommunityTopic()
+  }
+
+  shouldComponentUpdate (nextProps) {
+    console.log('feed', this.props.isFocused, nextProps.isFocused)
+
+    // Update only once after the screen disappears
+    if (this.props.isFocused && !nextProps.isFocused) {
+      return true
+    }
+
+    // Don't update if the screen is not focused
+    if (!this.props.isFocused && !nextProps.isFocused) {
+      return false
+    }
+
+    // Update the screen if its re-enter
+    return !this.props.isFocused && nextProps.isFocused
   }
 
   render () {
@@ -63,3 +81,5 @@ export default class Feed extends Component {
     </View>
   }
 }
+
+export default withNavigationFocus(Feed, 'Feed')

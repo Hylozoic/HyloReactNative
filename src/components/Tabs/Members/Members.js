@@ -10,26 +10,39 @@ import { DEFAULT_BANNER } from '../../../store/models/Community'
 import styles from './Members.styles'
 import { some, values, keys, isEmpty, debounce, size } from 'lodash/fp'
 import { focus } from '../../../util/textInput'
+import { withNavigationFocus } from 'react-navigation-is-focused-hoc'
 
-export default class Members extends React.Component {
+export class Members extends React.Component {
   static navigationOptions = ({ navigation, screenProps }) =>
     Header(navigation, screenProps.currentTabName)
 
   fetchOrShowCached () {
     const { hasMore, members, fetchMembers } = this.props
-    if (isEmpty(members) && hasMore !== false) fetchMembers()
+    if (isEmpty(members) && hasMore !== false) {
+      console.log('fetchMembers')
+      fetchMembers()
+    } else {
+      console.log('notFetchs')
+    }
   }
 
-  componentDidMount () {
-    this.fetchOrShowCached()
+  componentWillReceiveProps (nextProps) {
+    if (!this.props.isFocused && nextProps.isFocused) {
+      this.fetchOrShowCached()
+    }
+    if (this.props.isFocused && !nextProps.isFocused) {
+      // screen exit
+    }
   }
 
   componentDidUpdate (prevProps) {
     if (this.props.screenProps.currentTabName !== 'Members') {
+      console.log('returning')
       return
     }
 
     if (!prevProps || prevProps.screenProps.currentTabName !== 'Members') {
+      console.log('fetching')
       return this.fetchOrShowCached()
     }
 
@@ -39,8 +52,28 @@ export default class Members extends React.Component {
       'sortBy',
       'search'
     ])) {
+      console.log('fetching if key')
       this.fetchOrShowCached()
     }
+  }
+
+  shouldComponentUpdate (nextProps) {
+    console.log('members', this.props.isFocused, nextProps.isFocused)
+
+    // Update only once after the screen disappears
+    if (this.props.isFocused && !nextProps.isFocused) {
+      return true
+    }
+
+    // Don't update if the screen is not focused
+    if (!this.props.isFocused && !nextProps.isFocused) {
+      return false
+    }
+
+    // Update the screen if its re-enter
+    let ret = !this.props.isFocused && nextProps.isFocused
+    console.log('otherwise', ret)
+    return ret
   }
 
   render () {
@@ -138,3 +171,5 @@ function sortKeysFactory (subject) {
   if (subject !== 'network') sortKeys['join'] = 'Newest'
   return sortKeys
 }
+
+export default withNavigationFocus(Members, 'Members')
