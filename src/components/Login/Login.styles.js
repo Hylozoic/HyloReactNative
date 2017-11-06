@@ -21,7 +21,7 @@ const mixins = {
   paddedRow: {
     paddingRight: 15,
     paddingLeft: 15,
-    marginBottom: 10,
+    marginBottom: 11,
     flex: 1,
     flexDirection: 'row',
     zIndex: 0
