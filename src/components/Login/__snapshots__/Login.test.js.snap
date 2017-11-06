@@ -9,7 +9,7 @@ exports[`FormError renders correctly 1`] = `
       disabled={false}
       ellipsizeMode="tail"
     >
-      Email and password not found. Please try again.
+      Username or Password was incorrect
     </Text>
   </View>
   <View />
