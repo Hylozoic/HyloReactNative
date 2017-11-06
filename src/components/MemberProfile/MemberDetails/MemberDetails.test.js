@@ -16,12 +16,12 @@ describe('MemberDetails', () => {
     expect(actual).toMatchSnapshot()
   })
 
-  it("returns null when there's no person", () => {
+  it("returns Loading when there's no person", () => {
     const renderer = new ReactShallowRenderer()
     renderer.render(<MemberDetails />)
     const actual = renderer.getRenderOutput()
 
-    expect(actual).toBeNull
+    expect(actual).toMatchSnapshot()
   })
 })
 
@@ -33,7 +33,8 @@ describe('MemberBio', () => {
 
     const renderer = new ReactShallowRenderer()
     renderer.render(<MemberBio
-      person={person} />)
+      person={person}
+      updateSetting={() => () => {}} />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()

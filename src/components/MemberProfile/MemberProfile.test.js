@@ -2,9 +2,8 @@ import 'react-native'
 import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import ReactTestRenderer from 'react-test-renderer'
-import MemberProfile, { MemberBanner, EditButton, MemberHeader, ReadMoreButton, MemberMenu } from './MemberProfile'
+import MemberProfile, { MemberBanner, EditButton, ReadMoreButton } from './MemberProfile'
 
-jest.mock('react-native-device-info')
 jest.mock('../ImagePicker', () => 'ImagePicker')
 
 describe('MemberProfile', () => {
@@ -102,42 +101,6 @@ describe('EditButton', () => {
 
     const renderer = new ReactShallowRenderer()
     renderer.render(<EditButton {...props} />)
-    const actual = renderer.getRenderOutput()
-
-    expect(actual).toMatchSnapshot()
-  })
-})
-
-describe('MemberMenu', () => {
-  it('returns null when flagging not allowed', () => {
-    const renderer = new ReactShallowRenderer()
-    renderer.render(<MemberMenu />)
-    const actual = renderer.getRenderOutput()
-
-    expect(actual).toMatchSnapshot()
-  })
-
-  it('returns a popupmenu when flagging allowed', () => {
-    const renderer = new ReactShallowRenderer()
-    renderer.render(<MemberMenu flagMember={() => { }} />)
-    const actual = renderer.getRenderOutput()
-
-    expect(actual).toMatchSnapshot()
-  })
-})
-
-describe('MemberHeader', () => {
-  it('matches the last snapshot', () => {
-    const person = {
-      name: 'Jonas',
-      location: 'whale',
-      tagline: 'fingers crossed'
-    }
-
-    const renderer = new ReactShallowRenderer()
-    renderer.render(<MemberHeader
-      flagMember={() => {}}
-      person={person} />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
