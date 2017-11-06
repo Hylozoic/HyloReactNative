@@ -1,4 +1,4 @@
-import styles from '../SignupFlow.styles'
+import styles from '../SignupFlow/SignupFlow.styles'
 import { black10OnCaribbeanGreen } from 'style/colors'
 
 const containerPadding = {
