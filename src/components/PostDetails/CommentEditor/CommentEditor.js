@@ -12,7 +12,7 @@ export default class CommentEditor extends React.Component {
     return header(navigation, {
       left: 'close',
       title: 'Comment',
-      right: save && {text: 'Save', onPress: save, disabled}
+      right: save && {text: disabled ? 'Saving' : 'Save', onPress: save, disabled}
     })
   }
 
@@ -25,8 +25,7 @@ export default class CommentEditor extends React.Component {
     navigation.setParams({
       save: () => {
         navigation.setParams({disabled: true})
-        return this.editor.getContentAsync()
-        .then(content => saveChanges(content))
+        return saveChanges(this.state.content)
         .then(({ error }) => {
           if (error) {
             Alert.alert("Your comment couldn't be saved; please try again.")
@@ -54,6 +53,7 @@ export default class CommentEditor extends React.Component {
       initialContent={content}
       navigation={navigation}
       placeholder='Add a comment?'
+      onChange={content => this.setState({content})}
       communityId={navigation.state.params.communityId} />
   }
 
