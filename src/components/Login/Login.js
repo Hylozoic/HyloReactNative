@@ -165,7 +165,7 @@ export function SignupLink ({goToSignup}) {
 export function FormError () {
   const rowStyle = styles.emailErrorRow
   const triangleStyle = styles.emailTriangle
-  const message = 'Email and password not found. Please try again.'
+  const message = 'Username or Password was incorrect'
   return <View style={styles.errorView}>
     <View style={rowStyle}>
       <Text style={styles.errorMessage}>{message}</Text>
