@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import {
   setSkill, getSkill, getUserSkills, getSkillsFromOrm, addSkill, removeSkill, setUserSkills
-} from '../SignupFlow.store.js'
+} from './SkillEditor.store.js'
 import { isEmpty, includes } from 'lodash/fp'
 
 const defaultSkills = [

@@ -4,8 +4,9 @@ import {
   Text,
   TouchableOpacity
 } from 'react-native'
-import SettingControl from '../../SettingControl'
-import styles from './SignupFlow4.styles'
+import SettingControl from '../SettingControl'
+import Button from '../Button'
+import styles from './SkillEditor.styles'
 import { isEmpty } from 'lodash/fp'
 
 export default class SkillEditor extends React.Component {
@@ -33,9 +34,10 @@ export default class SkillEditor extends React.Component {
   }
 
   render () {
-    const { skill, setSkill, userSkills, remainingSkills } = this.props
+    const { skill, setSkill, userSkills, remainingSkills, done, doneLabel } = this.props
 
-    const { showOther } = this.state
+    const editingSkill = !isEmpty(skill)
+    const showOther = this.state.showOther && !editingSkill
 
     return <View>
       <View style={styles.containerPadding}>
@@ -44,19 +46,24 @@ export default class SkillEditor extends React.Component {
           What skills are you known for? The more skills you add, the more relevant the content. Its like magic.
         </Text>
       </View>
+      {!isEmpty(userSkills) && <View style={styles.userSkills}>
+        <Text style={styles.yourSkillsLabel}>Your Skills</Text>
+        <SkillCloud skills={userSkills} onPress={this.removeSkill} />
+      </View>}
       <SettingControl
         ref={c => { this.control = c }}
-        style={styles.containerPadding}
+        style={styles.skillControl}
         label='How can you help?'
         value={skill}
         onChange={setSkill} />
       <SkillCloud skills={remainingSkills}
         onPress={this.addSkill}
-        onPressOther={showOther && this.onPressOther} />
-      {!isEmpty(userSkills) && <View style={styles.userSkills}>
-        <Text style={styles.yourSkillsLabel}>Your Skills</Text>
-        <SkillCloud skills={userSkills} onPress={this.removeSkill} />
-      </View>}
+        onPressOther={showOther && this.onPressOther}
+        style={styles.remainingSkills} />
+      <Button
+        style={styles.continueButton}
+        text={editingSkill ? 'Add Skill' : doneLabel}
+        onPress={editingSkill ? () => this.addSkill(skill) : done} />
     </View>
   }
 }

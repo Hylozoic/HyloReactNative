@@ -7,9 +7,9 @@ const containerPadding = {
 
 export default {
   ...styles,
-  container: {
-    ...styles.container,
-    paddingHorizontal: 0
+  subTitle: {
+    ...styles.subTitle,
+    marginBottom: 20
   },
   containerPadding,
   userSkills: {
@@ -17,12 +17,18 @@ export default {
     minHeight: 100,
     ...containerPadding,
     paddingVertical: 10,
-    alignItems: 'center',
-    marginBottom: 20
+    alignItems: 'center'
   },
   yourSkillsLabel: {
     ...styles.subTitle,
     marginBottom: 10
+  },
+  skillControl: {
+    ...containerPadding,
+    marginTop: 18
+  },
+  remainingSkills: {
+    marginBottom: 30
   },
   skillCloud: {
     ...containerPadding,
