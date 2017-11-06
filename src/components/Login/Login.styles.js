@@ -52,7 +52,8 @@ const mixins = {
     top: 0,
     left: 0,
     right: 0,
-    marginTop: isIOS ? 20 : 0
+    marginTop: isIOS ? 20 : 0,
+    zIndex: 2
   }
 }
 

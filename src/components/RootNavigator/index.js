@@ -23,10 +23,15 @@ import Thread from '../Thread'
 import ThreadList from '../ThreadList'
 import MemberDetails from '../MemberProfile/MemberDetails'
 import UserSettings from '../UserSettings'
+import SignupFlow1 from '../SignupFlow/SignupFlow1'
+import SignupFlow2 from '../SignupFlow/SignupFlow2'
+import SignupFlow3 from '../SignupFlow/SignupFlow3'
+import SignupFlow4 from '../SignupFlow/SignupFlow4'
+import SignupFlow5 from '../SignupFlow/SignupFlow5'
 import createLinkingAwareContainer from './createLinkingAwareContainer'
 import trackCurrentTab from './trackCurrentTab'
 import { isIOS } from 'util/platform'
-import TabBarComponent from './TabBarComponent'
+import TabBar from './TabBar'
 
 export const urlPrefix = 'http://hylo.com/'
 // Tab Home Screens
@@ -57,7 +62,12 @@ export const screensInStack = {
   JoinCommunityAccessCode: {screen: JoinCommunity, path: 'c/:slug/join/:accessCode'},
   Thread: {screen: Thread, path: 'thread/:id'},
   NotificationsList: {screen: NotificationsList, path: 'notifications'},
-  ThreadList: {screen: ThreadList, path: 'messages'}
+  ThreadList: {screen: ThreadList, path: 'messages'},
+  SignupFlow1: {screen: SignupFlow1, path: 'signup/1'},
+  SignupFlow2: {screen: SignupFlow2, path: 'signup/2'},
+  SignupFlow3: {screen: SignupFlow3, path: 'signup/3'},
+  SignupFlow4: {screen: SignupFlow4, path: 'signup/4'},
+  SignupFlow5: {screen: SignupFlow5, path: 'signup/5'}
 }
 
 Object.freeze(tabs)
@@ -68,6 +78,7 @@ const tabNavigatorConfig = {
   tabBarPosition: 'bottom',
   animationEnabled: false,
   swipeEnabled: false,
+  lazy: true,
   tabBarOptions: {
     showIcon: true,
     showLabel: true,
@@ -78,7 +89,7 @@ const tabNavigatorConfig = {
   },
   // TODO remove this line once this PR is merged and released:
   // https://github.com/react-community/react-navigation/pull/1764
-  tabBarComponent: TabBarComponent
+  tabBarComponent: TabBar
 }
 
 const TabNavigatorWithBar = TabNavigator(
@@ -87,14 +98,14 @@ const TabNavigatorWithBar = TabNavigator(
 )
 
 const drawerNavigatorRoutes = {
-  Home: {
+  DrawerHome: {
     screen: createLinkingAwareContainer(TabNavigatorWithBar, urlPrefix)
   }
 }
 
 const drawerNavigatorConfig = {
   contentComponent: DrawerMenu,
-  initialRouteName: 'Home',
+  initialRouteName: 'DrawerHome',
   drawerWidth: Dimensions.get('window').width * 0.9
 }
 

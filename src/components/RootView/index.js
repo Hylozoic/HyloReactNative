@@ -1,17 +1,26 @@
 import React from 'react'
-import { Text, View } from 'react-native'
+import Loading from '../Loading'
+import { View } from 'react-native'
 import SessionCheck from '../SessionCheck'
 import VersionCheck from '../VersionCheck'
 import LoadingModal from '../LoadingModal'
 import { Provider } from 'react-redux'
 import getStore from '../../store'
-import mixins from '../../style/mixins'
+import { init as initOneSignal } from 'util/onesignal'
+import receivePushNotification from '../../store/actions/receivePushNotification'
 
 export default class RootView extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {}
-    getStore().then(store => this.setState({store}))
+  state = {}
+
+  componentDidMount () {
+    getStore().then(store => {
+      this.setState({store})
+
+      initOneSignal({
+        receivePushNotification: notification =>
+          store.dispatch(receivePushNotification(notification))
+      })
+    })
   }
 
   render () {
@@ -24,6 +33,6 @@ export default class RootView extends React.Component {
           </VersionCheck>
         </View>
       </Provider>
-      : <View style={mixins.allCentered}><Text>Loading...</Text></View>
+      : <Loading style={{flex: 1}} />
   }
 }

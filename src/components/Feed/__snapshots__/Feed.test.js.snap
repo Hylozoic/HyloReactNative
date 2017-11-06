@@ -29,6 +29,7 @@ exports[`renders correctly 1`] = `
         topicSubscribed={undefined}
       />
     }
+    screenProps={undefined}
     showCommunities={false}
     showMember={undefined}
     showPost={[Function]}

@@ -45,7 +45,7 @@ export default {
     height: 50
   },
   memberName: {
-    fontSize: 22,
+    fontSize: 18,
     marginTop: 14,
     color: rhino,
     fontFamily: 'Circular-Black',
@@ -81,7 +81,8 @@ export default {
   searchIcon: {
     top: 4,
     marginLeft: 5,
-    color: rhino50
+    color: rhino50,
+    backgroundColor: 'transparent'
   },
   searchInput: {
     top: 1,

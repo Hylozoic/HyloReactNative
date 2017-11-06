@@ -2,33 +2,33 @@ import Dimensions from 'Dimensions'
 import loginStyles from '../Login/Login.styles'
 import { caribbeanGreen } from 'style/colors'
 const bgImageWidth = Dimensions.get('window').width
-const bgImageHeight = bgImageWidth * (598 / 748) // 748 and 598 are the width and height of the image asset
+const bgImageHeight = bgImageWidth * 0.78
 
 export default {
   container: {
-    backgroundColor: 'white',
-    flex: 1,
-    position: 'relative'
+    backgroundColor: 'white'
+  },
+  banner: loginStyles.banner,
+  errorBanner: loginStyles.errorBanner,
+  background: {
+    width: bgImageWidth,
+    height: bgImageHeight,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   backgroundImage: {
     width: bgImageWidth,
     height: bgImageHeight,
-    marginBottom: 35
-  },
-  merkabaWrapper: {
-    position: 'absolute',
-    width: bgImageWidth,
-    height: bgImageHeight,
-    alignItems: 'center',
-    justifyContent: 'center',
-    zIndex: 10
+    resizeMode: 'cover'
   },
   merkabaImage: {
     height: 97,
     width: 97
   },
   paddedContainer: {
-    paddingHorizontal: 16
+    paddingVertical: 35,
+    paddingHorizontal: 16,
+    backgroundColor: 'white'
   },
   title: {
     ...loginStyles.title,
@@ -60,7 +60,7 @@ export default {
     flex: 1,
     flexDirection: 'row',
     opacity: 0.7,
-    marginBottom: 50
+    marginBottom: 30
   },
   login: {
     flexDirection: 'row',

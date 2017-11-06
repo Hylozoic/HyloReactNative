@@ -3,6 +3,7 @@ import {
   View,
   Text,
   Image,
+  ImageBackground,
   TouchableOpacity,
   ScrollView
 } from 'react-native'
@@ -19,11 +20,28 @@ export default class Signup extends React.Component {
     headerBackTitle: null
   }
 
+  state = {
+    ssoError: false
+  }
+
+  createErrorNotification = error => {
+    this.setState({ssoError: error})
+  }
+
   render () {
-    const { goToSignupFlow, goToLogin, error, loginWithFacebook, loginWithGoogle } = this.props
+    const {
+      goToSignupFlow, goToLogin, error, loginWithFacebook, loginWithGoogle, pending
+    } = this.props
+    const { ssoError } = this.state
     return <ScrollView contentContainerStyle={styles.container}>
-      <View style={styles.merkabaWrapper}><Image source={merkabaImage} style={styles.merkabaImage} /></View>
-      <Image source={backgroundImage} resizeMode='stretch' style={styles.backgroundImage} />
+      {pending && <Text style={styles.banner}>SIGNING UP...</Text>}
+      {ssoError && <Text style={styles.errorBanner}>{ssoError}</Text>}
+      <ImageBackground
+        source={backgroundImage}
+        style={styles.background}
+        imageStyle={styles.backgroundImage}>
+        <Image source={merkabaImage} style={styles.merkabaImage} />
+      </ImageBackground>
       <View style={styles.paddedContainer}>
         <Text style={styles.title}>Sign up to get started with Hylo</Text>
         {error && <View style={styles.errorWrapper}><Text style={styles.error}>{error}</Text></View>}
@@ -31,8 +49,11 @@ export default class Signup extends React.Component {
         <Button text='Sign Up' style={styles.signupButton} onPress={goToSignupFlow} />
         <Text style={styles.connectWith}>Or connect with:</Text>
         <View style={styles.socialButtons}>
-          <FbLoginButton onLoginFinished={loginWithFacebook} />
-          <GoogleLoginButton onLoginFinished={loginWithGoogle} />
+          <FbLoginButton
+            onLoginFinished={loginWithFacebook}
+            createErrorNotification={this.createErrorNotification} />
+          <GoogleLoginButton onLoginFinished={loginWithGoogle}
+            createErrorNotification={this.createErrorNotification} />
         </View>
         <View style={styles.login}>
           <Text style={styles.haveAccount}>Already have an account? </Text>

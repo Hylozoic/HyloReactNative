@@ -1,37 +1,50 @@
 import React from 'react'
-import { Button, KeyboardAvoidingView } from 'react-native'
+import { KeyboardAvoidingView, Alert } from 'react-native'
 import Editor from '../../Editor'
 import { get } from 'lodash/fp'
 import { keyboardAvoidingViewProps as kavProps } from 'util/viewHelpers'
 import { isIOS } from 'util/platform'
+import header from 'util/header'
 
 export default class CommentEditor extends React.Component {
   static navigationOptions = ({ navigation }) => {
-    const { save } = get('state.params', navigation) || {}
-    return {
-      headerTitle: 'Comment',
-      headerRight: save ? <Button title='Save' onPress={save} /> : null
-    }
+    const { save, disabled } = get('state.params', navigation) || {}
+    return header(navigation, {
+      left: 'close',
+      title: 'Comment',
+      right: save && {text: disabled ? 'Saving' : 'Save', onPress: save, disabled}
+    })
+  }
+
+  state = {
+    saveDisabled: false
   }
 
   componentDidMount () {
-    const { navigation, saveChanges, setCommentEdits } = this.props
+    const { navigation, saveChanges } = this.props
     navigation.setParams({
-      save: () =>
-        this.editor.getContentAsync()
-        .then(content => saveChanges(content))
-        .then(() => this.interval && clearInterval(this.interval))
-        .then(() => navigation.goBack())
+      save: () => {
+        navigation.setParams({disabled: true})
+        return saveChanges(this.state.content)
+        .then(({ error }) => {
+          if (error) {
+            Alert.alert("Your comment couldn't be saved; please try again.")
+          } else {
+            return navigation.goBack()
+          }
+        })
+        .catch(() => Alert.alert("Your comment couldn't be saved. Please try again."))
+      }
     })
-
-    this.interval = setInterval(() => {
-      this.editor.getContentAsync()
-      .then(content => setCommentEdits(content))
-    }, 1000)
   }
 
-  componentWillUnmount () {
-    if (this.interval) clearInterval(this.interval)
+  componentDidUpdate (prevProps) {
+    const { pending, navigation } = this.props
+    if (pending && !prevProps.pending) {
+      navigation.setParams({disabled: true})
+    } else if (!pending && prevProps.pending) {
+      navigation.setParams({disabled: false})
+    }
   }
 
   editorView = () => {
@@ -40,6 +53,7 @@ export default class CommentEditor extends React.Component {
       initialContent={content}
       navigation={navigation}
       placeholder='Add a comment?'
+      onChange={content => this.setState({content})}
       communityId={navigation.state.params.communityId} />
   }
 

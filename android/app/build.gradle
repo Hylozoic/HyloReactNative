@@ -87,10 +87,10 @@ android {
     buildToolsVersion '25.0.2'
 
     defaultConfig {
-        applicationId "com.hyloreactnative"
+        applicationId "com.hylo.hyloandroid"
         minSdkVersion 16
         targetSdkVersion 22
-        versionCode 1
+        versionCode 12
         versionName "2.0"
         ndk {
             abiFilters "armeabi-v7a", "x86"
@@ -157,6 +157,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-prompt-android')
     compile project(':react-native-linear-gradient')
     compile project(':react-native-background-timer')
     compile project(':react-native-fbsdk')

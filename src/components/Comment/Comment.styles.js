@@ -1,4 +1,4 @@
-import { limedSpruce, slateGrey80, nevada } from '../../style/colors'
+import { limedSpruce, slateGrey80, nevada, rhino50 } from '../../style/colors'
 
 export default {
   container: {
@@ -13,8 +13,23 @@ export default {
   avatar: {
     marginRight: 10
   },
+  meta: {
+    flex: 1
+  },
   header: {
+    flexDirection: 'row',
     marginBottom: 8
+  },
+  headerRight: {
+    paddingTop: 3,
+    flexDirection: 'row',
+    alignItems: 'flex-start'
+  },
+  menuIcon: {
+    fontSize: 20,
+    paddingLeft: 10,
+    paddingRight: 5,
+    color: rhino50
   },
   name: {
     color: limedSpruce,

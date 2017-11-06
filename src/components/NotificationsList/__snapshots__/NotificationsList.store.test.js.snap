@@ -46,6 +46,7 @@ Object {
     },
   },
   "meta": Object {
+    "afterInteractions": true,
     "extractModel": "Notification",
     "extractQueryResults": Object {
       "getItems": [Function],
@@ -89,6 +90,27 @@ Object {
     "optimistic": true,
   },
   "type": "NotificationsList/MARK_ALL_ACTIVITIES_READ",
+}
+`;
+
+exports[`action creators matches the last snapshot from updateNewNotificationCount 1`] = `
+Object {
+  "graphql": Object {
+    "query": "mutation ($changes: MeInput) {
+        updateMe(changes: $changes) {
+          id
+        }
+      }",
+    "variables": Object {
+      "changes": Object {
+        "newNotificationCount": 0,
+      },
+    },
+  },
+  "meta": Object {
+    "optimistic": true,
+  },
+  "type": "NotificationsList/UPDATE_NEW_NOTIFICATION_COUNT",
 }
 `;
 

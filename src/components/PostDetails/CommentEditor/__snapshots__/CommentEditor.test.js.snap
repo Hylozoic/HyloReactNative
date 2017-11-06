@@ -1,5 +1,31 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`has navigation options 1`] = `
+Object {
+  "headerLeft": <HeaderButton
+    onPress={[Function]}
+    text="Close"
+/>,
+  "headerStyle": Object {
+    "backgroundColor": "white",
+    "paddingHorizontal": 10,
+  },
+  "headerTintColor": "#808c9b",
+  "headerTitle": "Comment",
+  "headerTitleStyle": Array [
+    Object {
+      "color": "black",
+      "fontFamily": "Circular-Bold",
+      "fontSize": 17,
+      "marginLeft": 15,
+    },
+    Object {
+      "alignSelf": "center",
+    },
+  ],
+}
+`;
+
 exports[`renders correctly 1`] = `
 <KeyboardAvoidingView
   behavior="padding"
@@ -17,6 +43,7 @@ exports[`renders correctly 1`] = `
         },
       }
     }
+    onChange={[Function]}
     placeholder="Add a comment?"
   />
 </KeyboardAvoidingView>

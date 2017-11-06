@@ -50,7 +50,7 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
   const fetchOpts = makeFetchOpts({community, sortBy, search})
 
   const fetchMembers = () =>
-    dispatchProps.fetchMembers(fetchOpts)
+    !!community && dispatchProps.fetchMembers(fetchOpts)
 
   const offset = members.length
   const fetchMoreMembers = hasMore && !pending

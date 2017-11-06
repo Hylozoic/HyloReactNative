@@ -1,7 +1,7 @@
 import 'react-native'
 import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
-import Comment from './Comment'
+import Comment, {CommentMenu} from './Comment'
 
 it('renders correctly', () => {
   const comment = {
@@ -20,6 +20,7 @@ it('renders correctly', () => {
   const renderer = new ReactShallowRenderer()
   renderer.render(<Comment
     comment={comment}
+    deleteComment={jest.fn()}
     style={style} />)
   const actual = renderer.getRenderOutput()
 
@@ -52,4 +53,32 @@ it('shows the post title when displayPostTitle is true', () => {
   const actual = renderer.getRenderOutput()
 
   expect(actual).toMatchSnapshot()
+})
+
+describe('commentMenu', () => {
+  it('renders correctly', () => {
+    const deleteComment = jest.fn()
+    const renderer = new ReactShallowRenderer()
+    renderer.render(<CommentMenu
+      deleteComment={deleteComment} />)
+    const actual = renderer.getRenderOutput()
+
+    expect(actual).toMatchSnapshot()
+  })
+
+  it('returns null when deleteComment and removeComment isnt defined', () => {
+    const renderer = new ReactShallowRenderer()
+    renderer.render(<CommentMenu />)
+    const actual = renderer.getRenderOutput()
+
+    expect(actual).toBeNull()
+  })
+
+  it('returns removeComment', () => {
+    const renderer = new ReactShallowRenderer()
+    renderer.render(<CommentMenu removeComment={jest.fn()} />)
+    const actual = renderer.getRenderOutput()
+
+    expect(actual).toMatchSnapshot()
+  })
 })

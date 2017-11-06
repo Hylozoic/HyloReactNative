@@ -44,10 +44,10 @@ export default class DrawerMenu extends Component {
     ]
 
     return <View style={styles.parent}>
-      <SectionList contentContainerStyle={styles.menu}
+      <SectionList
         renderSectionHeader={SectionHeader}
         sections={listSections}
-        />
+        stickySectionHeadersEnabled={false} />
       <View style={styles.footer}>
         <TouchableOpacity onPress={goToMyProfile} style={styles.avatar}>
           <Image source={{uri: avatarUrl}}
@@ -114,8 +114,7 @@ export class NetworkRow extends React.Component {
     const openNetwork = () => goToNetwork(network)
     const expandable = communities && !!communities.length
     const { expanded } = this.state
-
-    return <View style={[styles.networkRow, expanded && styles.networkRowExpanded]}>
+    return <View style={[ styles.networkRow, expanded ? styles.networkRowExpanded : styles.networkRowCollapsed ]}>
       <TouchableOpacity onPress={openNetwork} style={[styles.rowTouchable, styles.networkRowTouchable]}>
         <Image source={imageSource} style={styles.networkAvatar} />
         <Text style={styles.networkRowText} ellipsizeMode='tail'

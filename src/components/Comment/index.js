@@ -1,2 +1,3 @@
 import component from './Comment'
-export default component
+import connector from './Comment.connector'
+export default connector(component)

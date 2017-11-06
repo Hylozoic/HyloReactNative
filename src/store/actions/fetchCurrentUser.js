@@ -49,6 +49,7 @@ export default function fetchCurrentUser () {
       }`
     },
     meta: {
+      afterInteractions: true,
       extractModel: 'Me'
     }
   }

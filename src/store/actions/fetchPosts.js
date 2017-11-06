@@ -41,6 +41,7 @@ export function fetchPosts (
       }
     },
     meta: {
+      afterInteractions: true,
       extractModel,
       extractQueryResults: {
         getItems,

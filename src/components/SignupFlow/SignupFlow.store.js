@@ -13,6 +13,7 @@ export const ADD_SKILL_PENDING = `${ADD_SKILL}_PENDING`
 export const REMOVE_SKILL = `${MODULE_NAME}/REMOVE_SKILL`
 export const REMOVE_SKILL_PENDING = `${REMOVE_SKILL}_PENDING`
 export const SET_USER_SKILLS = `${MODULE_NAME}/SET_USER_SKILLS`
+export const SET_SIGNUP_STEP1_COMPLETE = `${MODULE_NAME}/SET_SIGNUP_STEP1_COMPLETE`
 
 export const defaultUserSettings = {
   name: '',
@@ -28,7 +29,8 @@ export const defaultState = {
   userSettings: defaultUserSettings,
   skill: '',
   userSkills: [],
-  errors: {}
+  errors: {},
+  signupStep1Complete: false
 }
 
 export function getErrors (payload) {
@@ -87,6 +89,11 @@ export default function reducer (state = defaultState, action) {
       return {
         ...state,
         userSkills: payload
+      }
+    case SET_SIGNUP_STEP1_COMPLETE:
+      return {
+        ...state,
+        signupStep1Complete: payload
       }
     default:
       return state
@@ -165,6 +172,13 @@ export function setUserSkills (userSkills) {
   }
 }
 
+export function setSignupStep1Complete (payload) {
+  return {
+    type: SET_SIGNUP_STEP1_COMPLETE,
+    payload
+  }
+}
+
 export const getSkillsFromOrm = ormCreateSelector(
   orm,
   state => state.orm,
@@ -187,4 +201,8 @@ export function getUserSkills (state) {
 
 export function getSignupErrors (state) {
   return state[MODULE_NAME].errors
+}
+
+export function getSignupStep1Complete (state) {
+  return state[MODULE_NAME].signupStep1Complete
 }

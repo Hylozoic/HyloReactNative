@@ -1,13 +1,15 @@
 import { connect } from 'react-redux'
+import React from 'react'
 import {
   FETCH_NOTIFICATIONS,
   fetchNotifications,
   getNotifications,
   getHasMoreNotifications,
   markActivityRead,
-  markAllActivitiesRead
+  markAllActivitiesRead,
+  updateNewNotificationCount
 } from './NotificationsList.store'
-import { headerButton } from 'util/header'
+import { HeaderButton } from 'util/header'
 
 const NOTIFICATIONS_PAGE_SIZE = 20
 
@@ -28,7 +30,8 @@ export function mapDispatchToProps (dispatch, { navigation }) {
     fetchNotifications: () => dispatch(fetchNotifications(NOTIFICATIONS_PAGE_SIZE)),
     fetchMore: offset => dispatch(fetchNotifications(NOTIFICATIONS_PAGE_SIZE, offset)),
     markActivityRead: id => dispatch(markActivityRead(id)),
-    setRightButton: () => navigation.setParams({ headerRight: headerButton(right) })
+    setRightButton: () => navigation.setParams({ headerRight: <HeaderButton {...right} /> }),
+    updateNewNotificationCount: () => dispatch(updateNewNotificationCount())
   }
 }
 

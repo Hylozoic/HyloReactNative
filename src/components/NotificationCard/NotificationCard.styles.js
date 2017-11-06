@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native'
 
-import { capeCod, nevada, rhino10, rhino30 } from 'style/colors'
+import { capeCod, nevada, persimmon, rhino05, rhino30 } from 'style/colors'
 
 export default StyleSheet.create({
   avatar: {
@@ -8,10 +8,15 @@ export default StyleSheet.create({
     marginRight: 15,
     marginTop: 5
   },
+  badge: {
+    color: persimmon,
+    fontFamily: 'Circular-Bold',
+    fontSize: 12
+  },
   container: {
     flexDirection: 'row',
     paddingTop: 15,
-    backgroundColor: 'white',
+    backgroundColor: 'white'
   },
   content: {
     flex: 1,
@@ -35,7 +40,7 @@ export default StyleSheet.create({
     flexDirection: 'row'
   },
   highlight: {
-    backgroundColor: rhino10
+    backgroundColor: rhino05
   },
   name: {
     color: nevada,
@@ -47,16 +52,16 @@ export default StyleSheet.create({
     borderBottomColor: rhino30,
     borderBottomWidth: StyleSheet.hairlineWidth
   },
-  title: {
-    fontFamily: 'Circular-Bold',
-    fontSize: 14,
-    color: capeCod,
-    marginTop: 3
-  },
   text: {
     fontFamily: 'Circular-Book',
     fontSize: 14,
     color: nevada,
+    marginTop: 3
+  },
+  title: {
+    fontFamily: 'Circular-Bold',
+    fontSize: 14,
+    color: capeCod,
     marginTop: 3
   }
 })

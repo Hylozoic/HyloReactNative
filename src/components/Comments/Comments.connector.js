@@ -8,9 +8,12 @@ import {
   getComments,
   FETCH_COMMENTS
 } from './Comments.store'
+import { FETCH_POST } from '../../store/actions/fetchPost'
 
 export function mapStateToProps (state, props) {
-  const pending = props.postPending || state.pending[FETCH_COMMENTS]
+  const pending = props.postPending ||
+    state.pending[FETCH_COMMENTS] ||
+    state.pending[FETCH_POST]
 
   return {
     comments: getComments(state, props),

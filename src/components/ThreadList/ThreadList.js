@@ -5,8 +5,12 @@ import header from 'util/header'
 import Loading from '../Loading'
 import ThreadCard from '../ThreadCard'
 import styles from './ThreadList.styles'
+import NotificationOverlay from '../NotificationOverlay'
+import { getSocket } from 'util/websockets'
 
 export default class ThreadList extends Component {
+  state = {ready: false}
+
   static navigationOptions = ({ navigation }) =>
     header(navigation, {
       left: 'close',
@@ -14,21 +18,40 @@ export default class ThreadList extends Component {
       right: {text: 'New', onPress: () => navigation.navigate('NewMessage')}
     })
 
-  fetchOrShowCached () {
-    const { hasMore, threads, fetchThreads } = this.props
-    if (isEmpty(threads) && hasMore !== false) fetchThreads()
-  }
-
   componentDidMount () {
     this.fetchOrShowCached()
+    getSocket().then(socket => socket.on('reconnect', this.props.refreshThreads))
   }
-  _keyExtractor = (item, index) => item.id;
+
+  componentWillReceiveProps (nextProps) {
+    if (!this.props.pending && nextProps.pending) {
+      this.setState({ ready: true })
+    }
+  }
+
+  fetchOrShowCached () {
+    const { hasMore, threads, fetchThreads } = this.props
+    if (isEmpty(threads) && hasMore !== false) return fetchThreads()
+    if (!this.state.ready) this.setState({ ready: true })
+  }
+
+  _keyExtractor = (item, index) => item.id
 
   render () {
-    const { threads, pending, currentUser, fetchMoreThreads, showThread } = this.props
+    const {
+      threads,
+      pending,
+      currentUser,
+      fetchMoreThreads,
+      showThread,
+      refreshThreads,
+      pendingRefresh,
+      isConnected
+    } = this.props
+    const { ready } = this.state
 
-    if (pending && threads.length === 0) return <Loading />
-    if (!pending && threads.length === 0) {
+    if (!ready || (pending && threads.length === 0)) return <Loading />
+    if (ready && !pending && threads.length === 0) {
       return <Text style={styles.center}>No active conversations</Text>
     }
 
@@ -37,6 +60,8 @@ export default class ThreadList extends Component {
         data={threads}
         keyExtractor={this._keyExtractor}
         onEndReached={fetchMoreThreads}
+        onRefresh={refreshThreads}
+        refreshing={pendingRefresh}
         renderItem={({ item, index }) =>
           <MessageRow
             participants={item.participants}
@@ -49,6 +74,12 @@ export default class ThreadList extends Component {
       {!pending && threads.length === 0 &&
         <Text style={styles.center}>No active conversations</Text>
       }
+      {!isConnected && <NotificationOverlay
+        position='bottom'
+        type='error'
+        permanent
+        message='RECONNECTING...'
+        onPress={this.scrollToBottom} />}
     </View>
   }
 }

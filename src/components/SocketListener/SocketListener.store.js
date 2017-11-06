@@ -1,5 +1,6 @@
 import { has } from 'lodash/fp'
 import { noncircular } from 'util/index'
+import { showMessagesBadge } from 'store/reducers/ormReducer/util'
 
 const MODULE_NAME = 'SocketListener'
 export const RECEIVE_MESSAGE = `${MODULE_NAME}/RECEIVE_MESSAGE`
@@ -24,7 +25,7 @@ export function receiveMessage (message, opts = {}) {
   }
 }
 
-export function receiveComment (comment, opts = {}) {
+export function receiveComment (comment) {
   return {
     type: RECEIVE_COMMENT,
     payload: {
@@ -117,4 +118,37 @@ export default function reducer (state = {}, action) {
     return newState
   }
   return state
+}
+
+export function ormSessionReducer (session, action) {
+  const { Me, MessageThread, Post } = session
+  const { type, payload } = action
+
+  switch (type) {
+    case RECEIVE_NOTIFICATION:
+      // TODO: eventually we might want to refactor this out into a more
+      // structured activity.action handler for the various counts that need
+      // bumping (or handle every single damn thing in ModelExtractor).
+      const { notification: { activity } } = payload.data
+      Me.first().increment('newNotificationCount')
+
+      if (activity.action === 'newComment' && Post.hasId(activity.post.id)) {
+        const post = Post.withId(activity.post.id)
+        post.increment('commentsTotal')
+      }
+      break
+
+    case RECEIVE_THREAD:
+      Me.first().increment('unseenThreadCount')
+      break
+
+    case RECEIVE_MESSAGE:
+      const { message: { messageThread, createdAt } } = payload.data
+      if (MessageThread.hasId(messageThread)) {
+        MessageThread.withId(messageThread).update({updatedAt: createdAt})
+      }
+
+      showMessagesBadge(session)
+      break
+  }
 }

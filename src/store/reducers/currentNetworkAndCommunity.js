@@ -3,7 +3,12 @@ import {
   SELECT_NETWORK
 } from 'store/constants'
 
-export default function currentNetworkAndCommunity (state = {}, action) {
+export const defaultState = {
+  communityId: null,
+  netowrkId: null
+}
+
+export default function currentNetworkAndCommunity (state = defaultState, action) {
   const { error, type, payload } = action
 
   if (error) {

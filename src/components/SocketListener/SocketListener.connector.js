@@ -13,13 +13,11 @@ import {
   addUserTyping,
   clearUserTyping
 } from '../PeopleTyping/PeopleTyping.store'
-import getMe from '../../store/selectors/getMe'
 import getCurrentCommunity from '../../store/selectors/getCurrentCommunity'
 
-function mapStateToProps (state, props) {
+export function mapStateToProps (state, props) {
   return {
-    community: getCurrentCommunity(state, props),
-    currentUser: getMe(state)
+    community: getCurrentCommunity(state, props)
   }
 }
 
@@ -45,7 +43,7 @@ export function mapDispatchToProps (dispatch, props) {
   }
 }
 
-function mergeProps (stateProps, dispatchProps) {
+export function mergeProps (stateProps, dispatchProps) {
   const communityId = get('id', stateProps.community)
   return {
     ...stateProps,

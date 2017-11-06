@@ -1,27 +1,10 @@
-import { applyMiddleware, createStore } from 'redux'
-import { compact } from 'lodash'
-import rootReducer, { combinedReducers } from './reducers'
-import promiseMiddleware from 'redux-promise'
-import apiMiddleware from './middleware/api'
-import graphQLMiddleware from './middleware/graphQL'
-import { createLogger } from 'redux-logger'
-import optimisticMiddleware from './middleware/optimistic'
-import pendingMiddleware from './middleware/pending'
 import { AsyncStorage } from 'react-native'
-import { PERSISTED_STATE_KEY } from './reducers/persistence'
-import orm from './models'
 import { composeWithDevTools } from 'remote-redux-devtools'
-
-const middleware = compact([
-  graphQLMiddleware,
-  apiMiddleware,
-  optimisticMiddleware,
-  pendingMiddleware,
-  promiseMiddleware,
-  __DEV__ && createLogger({
-    collapsed: (getState, action, logEntry) => !logEntry.error
-  })
-])
+import { applyMiddleware, createStore } from 'redux'
+import orm from './models'
+import { PERSISTED_STATE_KEY } from './reducers/persistence'
+import rootReducer, { combinedReducers } from './reducers'
+import middleware from './middleware'
 
 export default function getStore () {
   return getInitialState().then(initialState => {
@@ -31,7 +14,7 @@ export default function getStore () {
     // Enable Webpack hot module replacement for reducers
     if (module.hot) {
       module.hot.accept(() => {
-        const nextRootReducer = require('./reducers')
+        const nextRootReducer = require('./reducers').default
         store.replaceReducer(nextRootReducer)
       })
     }

@@ -1,48 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`mapDispatchToProps maps the action generators 1`] = `
-Object {
-  "checkSession": [Function],
-  "fetchCurrentUser": [Function],
-  "initOneSignal": [Function],
-  "resetEntryURL": [Function],
-  "setEntryURL": [Function],
-}
-`;
-
-exports[`mapDispatchToProps maps the action generators 2`] = `
-Array [
-  Array [
-    Object {
-      "payload": Promise {
-        "_40": 0,
-        "_55": null,
-        "_65": 0,
-        "_72": null,
-      },
-      "type": "CHECK_SESSION",
-    },
-  ],
-  Array [
-    Object {
-      "graphql": Object {
-        "query": "mutation ($playerId: String, $platform: String, $version: String) {
-        registerDevice(playerId: $playerId, platform: $platform, version: $version) {
-          success
-        }
-      }",
-        "variables": Object {
-          "platform": "ios_dev",
-          "playerId": 5,
-          "version": "2",
-        },
-      },
-      "type": "REGISTER_DEVICE",
-    },
-  ],
-]
-`;
-
 exports[`mapStateToProps returns the right keys 1`] = `
 Object {
   "currentUser": undefined,
@@ -50,5 +7,7 @@ Object {
   "loading": false,
   "loggedIn": true,
   "pending": false,
+  "signupInProgress": undefined,
+  "signupStep1Complete": undefined,
 }
 `;

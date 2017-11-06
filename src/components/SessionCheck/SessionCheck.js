@@ -2,12 +2,13 @@ import URL from 'url'
 import React from 'react'
 import PropTypes from 'prop-types'
 import { View, Linking } from 'react-native'
+import { NavigationActions } from 'react-navigation'
+import { get } from 'lodash/fp'
 import mixins from '../../style/mixins'
 import Loading from '../Loading'
 import LoginNavigator from '../LoginNavigator'
 import SocketListener from '../SocketListener'
 import RootNavigator from '../RootNavigator'
-import LoadingModal from '../LoadingModal'
 
 export const INTERNAL_ROUTE_URI_PREFIX = 'internalRouting://'
 
@@ -18,7 +19,6 @@ export default class SessionCheck extends React.Component {
     currentUser: PropTypes.object,
     entryURL: PropTypes.string,
     checkSession: PropTypes.func.isRequired,
-    initOneSignal: PropTypes.func.isRequired,
     setEntryURL: PropTypes.func.isRequired,
     resetEntryURL: PropTypes.func.isRequired,
     fetchCurrentUser: PropTypes.func.isRequired
@@ -31,9 +31,7 @@ export default class SessionCheck extends React.Component {
   }
 
   componentDidMount () {
-    const { initOneSignal, checkSession } = this.props
-    checkSession()
-    initOneSignal()
+    this.props.checkSession()
   }
 
   componentWillUpdate (nextProps) {
@@ -42,15 +40,24 @@ export default class SessionCheck extends React.Component {
   }
 
   componentDidUpdate (prevProps) {
-    const { loading, entryURL, resetEntryURL, currentUser, loggedIn } = this.props
-    const loadingCompleteEvent = !loading && loading !== prevProps.loading
+    const {
+      loading, entryURL, resetEntryURL, currentUser, loggedIn, signupInProgress, signupStep1Complete
+    } = this.props
+    const loadingCompleteEvent = !loading && prevProps.loading
     const entryURLChangeEvent = entryURL !== prevProps.entryURL
-    const currentUserLoadedEvent = loggedIn && (currentUser !== prevProps.currentUser)
+    const currentUserLoadedEvent = get('id', currentUser) !== get('id', prevProps.currentUser)
+    const signUpCompleteEvent = !signupInProgress && prevProps.signupInProgress
     const shouldForwardToEntryURL = (
       (loadingCompleteEvent && !loggedIn) ||
       (entryURLChangeEvent && !loading) ||
-      currentUserLoadedEvent
+      currentUserLoadedEvent ||
+      signUpCompleteEvent
     )
+    if (currentUserLoadedEvent && signupInProgress) {
+      const routeName = signupStep1Complete ? 'SignupFlow2' : 'SignupFlow1'
+      const action = NavigationActions.navigate({routeName})
+      return this.navigator.dispatch(action)
+    }
     if (entryURL && shouldForwardToEntryURL) {
       this.navigator._handleOpenURL(entryURL)
     }

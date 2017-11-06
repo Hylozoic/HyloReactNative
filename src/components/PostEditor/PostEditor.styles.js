@@ -40,7 +40,7 @@ export default {
     opacity: 0.45
   },
   details: {
-    height: 300
+    paddingTop: isIOS ? null : 15
   },
   typeButtonRow: {
     flexDirection: 'row',
@@ -50,7 +50,7 @@ export default {
     box: {
       borderRadius: 4,
       backgroundColor: rhino10,
-      padding: 10,
+      paddingVertical: 10,
       width: '31%'
     },
     text: {

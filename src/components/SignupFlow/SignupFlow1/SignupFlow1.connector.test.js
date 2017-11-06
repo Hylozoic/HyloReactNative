@@ -24,7 +24,7 @@ describe('mapDispatchToProps', () => {
     dispatchProps.changeSetting('name', 'yo')
     dispatchProps.updateLocalUserSettings({la: 'la'})
     dispatchProps.updateUserSettings({ra: 'ra'})
-    dispatchProps.fetchCurrentUser()
+    dispatchProps.setSignupStep1Complete(true)
     expect(dispatch).toHaveBeenCalled()
     expect(dispatch.mock.calls).toMatchSnapshot()
   })
@@ -46,10 +46,11 @@ describe('mergeProps', () => {
       showPasswordField: true
     }
     const dispatchProps = {
-      signup: jest.fn(() => Promise.resolve()),
-      updateUserSettings: jest.fn(() => Promise.resolve()),
+      signup: jest.fn(() => Promise.resolve({})),
+      updateUserSettings: jest.fn(() => Promise.resolve({})),
       updateLocalUserSettings: jest.fn(),
-      fetchCurrentUser: jest.fn()
+      fetchCurrentUser: jest.fn(),
+      setSignupStep1Complete: jest.fn()
     }
     const ownProps = {
       navigation: {
@@ -58,13 +59,17 @@ describe('mergeProps', () => {
     }
     const mergedProps = mergeProps(stateProps, dispatchProps, ownProps)
     expect(mergedProps).toMatchSnapshot()
-    mergedProps.signupOrUpdate()
-    expect(dispatchProps.updateUserSettings).toHaveBeenCalled()
-    expect(dispatchProps.updateUserSettings.mock.calls)
-    .toMatchSnapshot()
     mergedProps.loadUserSettings()
     expect(dispatchProps.updateLocalUserSettings).toHaveBeenCalled()
     expect(dispatchProps.updateLocalUserSettings.mock.calls)
     .toMatchSnapshot()
+    return mergedProps.signupOrUpdate()
+    .then(() => {
+      expect(dispatchProps.updateUserSettings).toHaveBeenCalled()
+      expect(dispatchProps.updateUserSettings.mock.calls)
+      .toMatchSnapshot()
+      expect(dispatchProps.setSignupStep1Complete).toHaveBeenCalledWith(true)
+      expect(ownProps.navigation.navigate).toHaveBeenCalledWith('SignupFlow2')
+    })
   })
 })

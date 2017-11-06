@@ -7,23 +7,36 @@ import NotificationCard from '../NotificationCard'
 import styles from './NotificationsList.styles'
 
 export default class NotificationsList extends Component {
+  state = {ready: false}
+
   static navigationOptions = ({ navigation }) =>
-    header(navigation, { left: 'close', title: 'Notifications' })
+    header(navigation, {
+      left: 'close',
+      title: 'Notifications'
+    })
 
   componentDidMount () {
-    const { fetchNotifications, setRightButton } = this.props
-    fetchNotifications()
+    const { fetchNotifications, setRightButton, updateNewNotificationCount } = this.props
     setRightButton()
+    fetchNotifications()
+    updateNewNotificationCount()
   }
-  
+
+  componentWillReceiveProps (nextProps) {
+    if (!this.props.pending && nextProps.pending) {
+      this.setState({ ready: true })
+    }
+  }
+
   fetchMore = offset => this.props.fetchMore(offset)
 
   keyExtractor = item => item.id
 
   render () {
     const { hasMore, markActivityRead, notifications, pending } = this.props
-    if (pending && notifications.length === 0) return <Loading />
-    if (!pending && notifications.length === 0) {
+    const { ready } = this.state
+    if (!ready || (pending && notifications.length === 0)) return <Loading />
+    if (ready && !pending && notifications.length === 0) {
       return <Text style={styles.center}>Nothing new for you!</Text>
     }
 

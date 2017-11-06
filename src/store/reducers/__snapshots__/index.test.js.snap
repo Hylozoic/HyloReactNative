@@ -27,6 +27,7 @@ Object {
   "Search": Object {},
   "SignupFlow": Object {
     "errors": Object {},
+    "signupStep1Complete": false,
     "skill": "",
     "userSettings": Object {
       "avatarUrl": "",
@@ -40,6 +41,9 @@ Object {
     "userSkills": Array [],
   },
   "SocketListener": Object {},
+  "TabBar": Object {
+    "isVisible": true,
+  },
   "currentCommunity": null,
   "orm": Object {},
   "pending": Object {},

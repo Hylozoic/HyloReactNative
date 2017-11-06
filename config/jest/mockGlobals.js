@@ -8,6 +8,7 @@ global.fetch = jest.fn() // eslint-disable-line no-undef
 fetch.mockResponseSuccess = body => {
   fetch.mockImplementationOnce(
     () => Promise.resolve({
+      status: 200,
       json: () => Promise.resolve(body)
     })
   )

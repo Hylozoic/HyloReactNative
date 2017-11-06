@@ -1,4 +1,4 @@
-import { mapStateToProps } from './Members.connector'
+import { mapStateToProps, mergeProps } from './Members.connector'
 import { MODULE_NAME } from './Members.store'
 import orm from '../../../store/models'
 
@@ -13,5 +13,15 @@ describe('mapStateToProps', () => {
       queryResults: {}
     }
     expect(mapStateToProps(state)).toMatchSnapshot()
+  })
+})
+
+describe('mergeProps', () => {
+  it('makes fetchMembers a no-op when there is no community', () => {
+    const stateProps = {members: []}
+    const dispatchProps = {fetchMembers: jest.fn()}
+    const props = mergeProps(stateProps, dispatchProps)
+    expect(props.fetchMembers()).toEqual(false)
+    expect(dispatchProps.fetchMembers).not.toBeCalled()
   })
 })

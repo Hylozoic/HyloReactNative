@@ -16,6 +16,8 @@ jest.mock('react-native-fbsdk', () => ({
 }))
 jest.mock('react-native-device-info')
 
+jest.mock('../SettingControl', () => 'SettingControl')
+
 describe('UserSettings', () => {
   it('matches the last snapshot', () => {
     const renderer = new ReactShallowRenderer()
@@ -118,12 +120,35 @@ describe('UserSettings', () => {
   })
 
   describe('cancelPassword', () => {
-    it('sets the state', () => {
-      const instance = ReactTestRenderer.create(<UserSettings />).getInstance()
+    it('sets the state, setting changed to true when email has changed', () => {
+      const currentUser = {email: 'moo@moo.com'}
+      const instance = ReactTestRenderer.create(
+        <UserSettings currentUser={currentUser} />).getInstance()
       instance.setState({
         editingPassword: true,
         edits: {
-          email: 'moo',
+          email: 'different@email.com',
+          password: 'ldlkd',
+          confirmPassword: 'djsdlks'
+        },
+        errors: {
+          email: 'bad email',
+          password: 'too short',
+          confirmPassword: 'too different'
+        }
+      })
+      instance.cancelPassword()
+      expect(instance.state).toMatchSnapshot()
+    })
+
+    it('sets the state, setting changed to false when email has not changed', () => {
+      const currentUser = {email: 'moo@moo.com'}
+      const instance = ReactTestRenderer.create(
+        <UserSettings currentUser={currentUser} />).getInstance()
+      instance.setState({
+        editingPassword: true,
+        edits: {
+          email: currentUser.email,
           password: 'ldlkd',
           confirmPassword: 'djsdlks'
         },

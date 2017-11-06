@@ -1,6 +1,7 @@
 import 'react-native'
 import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
+import TestRenderer from 'react-test-renderer'
 import FeedList, { ListControls, ListControl, PostRow, filterOptions } from './FeedList'
 
 jest.mock('react-native-device-info')
@@ -20,6 +21,36 @@ describe('FeedList', () => {
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
+  })
+
+  it('fetches if the Home tab has just become visible', () => {
+    const fetchPosts = jest.fn()
+    const { root: { instance } } = TestRenderer.create(<FeedList
+      screenProps={{currentTabName: 'Home'}}
+      fetchPosts={fetchPosts} />)
+
+    instance.componentDidUpdate({screenProps: {currentTabName: 'Members'}})
+    expect(fetchPosts).toHaveBeenCalledTimes(2)
+  })
+
+  it('does not fetch if the Home tab is not visible', () => {
+    const fetchPosts = jest.fn()
+    const { root: { instance } } = TestRenderer.create(<FeedList
+      screenProps={{currentTabName: 'Members'}}
+      fetchPosts={fetchPosts} />)
+
+    instance.componentDidUpdate({screenProps: {}})
+    expect(fetchPosts).toHaveBeenCalledTimes(1)
+  })
+
+  it('does not fetch if the Home tab is and was visible', () => {
+    const fetchPosts = jest.fn()
+    const { root: { instance } } = TestRenderer.create(<FeedList
+      screenProps={{currentTabName: 'Home'}}
+      fetchPosts={fetchPosts} />)
+
+    instance.componentDidUpdate({screenProps: {currentTabName: 'Home'}})
+    expect(fetchPosts).toHaveBeenCalledTimes(1)
   })
 })
 

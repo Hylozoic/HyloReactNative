@@ -1,17 +1,29 @@
 import orm from 'store/models'
-import ormReducer from './ormReducer'
+import ormReducer from './index'
 import {
   TOGGLE_TOPIC_SUBSCRIBE_PENDING
-} from '../../components/Feed/Feed.store'
+} from '../../../components/Feed/Feed.store'
 import {
   VOTE_ON_POST_PENDING
-} from '../../components/PostCard/PostFooter/PostFooter.store'
+} from '../../../components/PostCard/PostFooter/PostFooter.store'
 import {
   CREATE_COMMENT
-} from '../../components/PostDetails/CommentEditor/CommentEditor.store'
+} from '../../../components/PostDetails/CommentEditor/CommentEditor.store'
 import {
   USE_INVITATION
-} from '../../components/JoinCommunity/JoinCommunity.store'
+} from '../../../components/JoinCommunity/JoinCommunity.store'
+import {
+  DELETE_COMMENT_PENDING
+} from '../../../components/Comment/Comment.store'
+import {
+  UPDATE_LAST_VIEWED_PENDING
+} from '../../../components/ThreadList/ThreadList.store'
+import {
+  UPDATE_NEW_NOTIFICATION_COUNT_PENDING
+} from '../../../components/NotificationsList/NotificationsList.store'
+import {
+  RESET_NEW_POST_COUNT_PENDING
+} from '../../actions/resetNewPostCount'
 
 it('responds to an action with meta.extractModel', () => {
   const state = orm.getEmptyState()
@@ -190,4 +202,81 @@ describe('handles USE_INVITATION', () => {
     const membershipsAfterAction = newSession.Me.first().memberships
     expect(membershipsAfterAction.count()).toEqual(1)
   })
+})
+
+it('handles DELETE_COMMENT_PENDING', () => {
+  const session = orm.session(orm.getEmptyState())
+  session.Comment.create({
+    id: 3
+  })
+  session.Comment.create({
+    id: 10
+  })
+  const action = {
+    type: DELETE_COMMENT_PENDING,
+    meta: {
+      id: '3'
+    }
+  }
+
+  expect(session.Comment.count()).toBe(2)
+  const newState = ormReducer(session.state, action)
+  const newSession = orm.session(newState)
+  expect(newSession.Comment.count()).toBe(1)
+  expect(newSession.Comment.first().id).toBe(10)
+})
+
+describe('on UPDATE_LAST_VIEWED_PENDING', () => {
+  const session = orm.session(orm.getEmptyState())
+  session.Me.create({
+    id: '1',
+    unseenThreadCount: 11
+  })
+
+  const action = {
+    type: UPDATE_LAST_VIEWED_PENDING
+  }
+
+  it('sets Me.unseenThreadCount to 0', () => {
+    const newSession = orm.session(ormReducer(session.state, action))
+    expect(newSession.Me.first().unseenThreadCount).toEqual(0)
+  })
+})
+
+describe('on UPDATE_NEW_NOTIFICATION_COUNT_PENDING', () => {
+  const session = orm.session(orm.getEmptyState())
+  session.Me.create({
+    id: '1',
+    newNotificationCount: 11
+  })
+
+  const action = {
+    type: UPDATE_NEW_NOTIFICATION_COUNT_PENDING
+  }
+
+  it('sets Me.newNotificationCount to 0', () => {
+    const newSession = orm.session(ormReducer(session.state, action))
+    expect(newSession.Me.first().newNotificationCount).toEqual(0)
+  })
+})
+
+describe('on RESET_NEW_POST_COUNT_PENDING', () => {
+  const action = {
+    type: RESET_NEW_POST_COUNT_PENDING,
+    meta: {
+      graphql: {
+        variables: {
+          id: 1
+        }
+      }
+    }
+  }
+
+  const session = orm.session(orm.getEmptyState())
+  session.Me.create({id: 1})
+  session.Community.create({id: 1, name: 'community 1'})
+  session.Membership.create({id: 1, community: 1, person: 1})
+  expect(session.Membership.first().newPostCount).toEqual(undefined)
+  const newSession = orm.session(ormReducer(session.state, action))
+  expect(newSession.Membership.first().newPostCount).toEqual(0)
 })

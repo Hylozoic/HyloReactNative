@@ -6,6 +6,7 @@ import Icon from '../Icon'
 import NotificationOverlay from '../NotificationOverlay'
 import LinearGradient from 'react-native-linear-gradient'
 import { isUndefined } from 'lodash'
+const bannerImage = require('../../assets/all-communities-banner.png')
 
 export default class FeedBanner extends React.Component {
   state = {}
@@ -28,19 +29,21 @@ export default class FeedBanner extends React.Component {
       all, community, network, newPost, currentUser, topicSubscribed
     } = this.props
 
-    let bannerUrl, name
+    let bannerUrl, name, image
     if (community && all) {
       name = 'All Communities'
+      image = bannerImage
     } else if (network) {
       ({ bannerUrl, name } = network)
     } else if (community) {
       ({ bannerUrl, name } = community)
+      if (bannerUrl) image = {uri: bannerUrl}
     } else {
       return null
     }
 
     return <View style={styles.container}>
-      <Image source={{uri: bannerUrl}} style={styles.image} />
+      <Image source={image} style={styles.image} />
       <LinearGradient style={styles.gradient}
         colors={[
           'rgba(0, 0, 0, 0)',
@@ -49,15 +52,15 @@ export default class FeedBanner extends React.Component {
           'rgba(0, 0, 0, 0.6)'
         ]} />
       <View style={styles.titleRow}>
-        <Text style={[styles.name, all && styles.allName]}
+        <Text style={styles.name}
           numberOfLines={3}>
           {name}
         </Text>
         {!isUndefined(topicSubscribed) && <SubscribeButton
           active={topicSubscribed} onPress={this.toggleSubscribe} />}
       </View>
-      <PostPrompt currentUser={currentUser} newPost={newPost} />
-      {!!currentUser && <View style={styles.promptShadow} />}
+      {!all && <PostPrompt currentUser={currentUser} newPost={newPost} />}
+      {!!currentUser && !all && <View style={styles.promptShadow} />}
       {!!this.state.overlayMessage &&
         <NotificationOverlay message={this.state.overlayMessage}
           type='info'

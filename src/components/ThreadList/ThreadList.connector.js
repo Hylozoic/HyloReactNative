@@ -1,34 +1,44 @@
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import getMe from '../../store/selectors/getMe'
 import fetchThreads, { FETCH_THREADS } from '../../store/actions/fetchThreads'
-import { getThreads, getThreadsHasMore } from './ThreadList.store'
+import { getThreads, getThreadsHasMore, updateLastViewed } from './ThreadList.store'
 import { get } from 'lodash/fp'
 
 export function mapStateToProps (state, props) {
   const threads = getThreads(state, props)
   const currentUser = getMe(state)
   const hasMore = getThreadsHasMore(state, props)
+  const pending = state.pending[FETCH_THREADS]
   return {
-    pending: state.pending[FETCH_THREADS],
+    pending,
+    pendingRefresh: !!(pending && pending.extractQueryResults.reset),
     currentUser,
     threads,
-    hasMore
+    hasMore,
+    isConnected: state.SocketListener.connected
   }
 }
 
 export function mapDispatchToProps (dispatch, { navigation }) {
   return {
-    fetchThreads: (first, offset) => dispatch(fetchThreads(first, offset)),
     showThread: threadOrId => navigation.navigate('Thread', {
       id: get('id', threadOrId) || threadOrId
-    })
+    }),
+    ...bindActionCreators({
+      updateLastViewed,
+      fetchThreads
+    }, dispatch)
   }
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
   const { threads, hasMore } = stateProps
 
-  const fetchThreads = () => dispatchProps.fetchThreads(10)
+  const fetchThreads = () => {
+    dispatchProps.fetchThreads(10)
+    dispatchProps.updateLastViewed()
+  }
 
   const fetchMoreThreads =
     hasMore
@@ -40,7 +50,8 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     ...dispatchProps,
     ...ownProps,
     fetchThreads,
-    fetchMoreThreads
+    fetchMoreThreads,
+    refreshThreads: () => dispatchProps.fetchThreads(10, 0, true)
   }
 }
 

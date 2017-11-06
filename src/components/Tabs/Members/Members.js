@@ -3,15 +3,12 @@ import {
   View, FlatList, Text, TouchableOpacity, TextInput, Image
 } from 'react-native'
 import Header from '../Header'
-import { updateBadges } from 'util/header'
 import Avatar from '../../Avatar'
 import PopupMenuButton from '../../PopupMenuButton'
 import Icon from '../../Icon'
 import { DEFAULT_BANNER } from '../../../store/models/Community'
 import styles from './Members.styles'
-import {
-  some, values, keys, isUndefined, isEmpty, debounce, size
-} from 'lodash/fp'
+import { some, values, keys, isEmpty, debounce, size } from 'lodash/fp'
 import { focus } from '../../../util/textInput'
 
 export default class Members extends React.Component {
@@ -24,18 +21,10 @@ export default class Members extends React.Component {
   }
 
   componentDidMount () {
-    const { currentUser, navigation, screenProps } = this.props
-    if (screenProps.currentTabName === 'Members') {
-      updateBadges(navigation, currentUser)
-    }
+    this.fetchOrShowCached()
   }
 
   componentDidUpdate (prevProps) {
-    const { currentUser, navigation, screenProps } = this.props
-    if (screenProps.currentTabName === 'Members') {
-      updateBadges(navigation, currentUser, prevProps.currentUser)
-    }
-
     if (this.props.screenProps.currentTabName !== 'Members') {
       return
     }
@@ -55,28 +44,17 @@ export default class Members extends React.Component {
   }
 
   render () {
-    const { community, subject, sortBy, setSort, fetchMoreMembers } = this.props
-
+    let {
+      community, members, subject, sortBy, setSort, fetchMoreMembers
+    } = this.props
     const sortKeys = sortKeysFactory(subject)
-
-    const onSearch = debounce(300, text => {
-      this.props.setSearch(text)
-    })
-
-    const onSelect = (action, index) => {
-      if (!isUndefined(index)) {
-        setSort(keys(sortKeys)[index])
-      }
-    }
-
-    let { members } = this.props
+    const onSearch = debounce(300, text => this.props.setSearch(text))
+    const onSelect = index => setSort(keys(sortKeys)[index])
 
     // sort of a hack since members need to be even since it's rows of 2.  fixes flexbox
-    if (size(members) % 2 > 0) {
-      members.push({id: -1})
-    }
+    if (size(members) % 2 > 0) members.push({id: -1})
 
-    const headerComponent = <View>
+    const header = <View>
       <Banner community={community} all={!community} />
       <View style={styles.listControls}>
         <View style={styles.searchWrapper}>
@@ -110,7 +88,7 @@ export default class Members extends React.Component {
         }}
         onEndReached={fetchMoreMembers}
         keyExtractor={(item, index) => item.id}
-        ListHeaderComponent={headerComponent}
+        ListHeaderComponent={header}
       />
     </View>
   }
@@ -125,7 +103,9 @@ function Member ({ member, showMember }) {
     <Text style={styles.memberName}>{member.name}</Text>
     {!!member.location &&
       <Text style={styles.memberLocation}>{member.location}</Text>}
-    <Text style={styles.memberBio}>{member.bio}</Text>
+    <Text style={styles.memberBio} numberOfLines={4}>
+      {member.bio}
+    </Text>
   </TouchableOpacity>
 }
 

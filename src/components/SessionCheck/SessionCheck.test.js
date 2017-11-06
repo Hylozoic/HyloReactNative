@@ -25,7 +25,7 @@ const defaultRequiredProps = {
   loading: false,
   loggedIn: undefined,
   currentUser: null,
-  checkSession: () => {},
+  checkSession: () => Promise.resolve(),
   initOneSignal: () => {},
   setEntryURL: () => {},
   resetEntryURL: () => {},
@@ -83,14 +83,12 @@ describe('SessionCheck component', () => {
 
   // Lifecycle Methods
 
-  test('componentDidMount', () => {
+  test('componentDidMount', async () => {
     const testProps = testPropsSetup({
-      checkSession: jest.fn(),
-      initOneSignal: jest.fn()
+      checkSession: jest.fn(() => Promise.resolve(true))
     })
-    ReactTestRenderer.create(<SessionCheck {...testProps} />)
+    await ReactTestRenderer.create(<SessionCheck {...testProps} />)
     expect(testProps.checkSession).toHaveBeenCalled()
-    expect(testProps.initOneSignal).toHaveBeenCalled()
   })
 
   describe('componentWillUpdate', () => {
@@ -169,6 +167,38 @@ describe('SessionCheck component', () => {
       instance.componentDidUpdate(prevProps)
       expect(testProps.resetEntryURL).toHaveBeenCalled()
       expect(instance.navigator._handleOpenURL).toHaveBeenCalledWith(testProps.entryURL)
+    })
+
+    it('should route to the first signup step if logged in and signup is not complete', () => {
+      const prevProps = testPropsSetup()
+      const testProps = testPropsSetup({
+        loggedIn: true,
+        signupInProgress: true,
+        signupStep1Complete: false,
+        currentUser: {id: 1}
+      })
+      const instance = ReactTestRenderer.create(<SessionCheck {...testProps} />).getInstance()
+      instance.navigator = {dispatch: jest.fn()}
+      instance.componentDidUpdate(prevProps)
+      expect(instance.navigator.dispatch).toHaveBeenCalledWith(
+        expect.objectContaining({routeName: 'SignupFlow1'})
+      )
+    })
+
+    it('should route to the second signup step if just completed first step', () => {
+      const prevProps = testPropsSetup()
+      const testProps = testPropsSetup({
+        loggedIn: true,
+        signupInProgress: true,
+        signupStep1Complete: true,
+        currentUser: {id: 1}
+      })
+      const instance = ReactTestRenderer.create(<SessionCheck {...testProps} />).getInstance()
+      instance.navigator = {dispatch: jest.fn()}
+      instance.componentDidUpdate(prevProps)
+      expect(instance.navigator.dispatch).toHaveBeenCalledWith(
+        expect.objectContaining({routeName: 'SignupFlow2'})
+      )
     })
   })
 

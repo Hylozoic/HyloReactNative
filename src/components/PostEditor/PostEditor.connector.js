@@ -36,15 +36,14 @@ export function mapDispatchToProps (dispatch, props) {
       return dispatch(saveAction(postData))
       .then(({ error, payload }) => {
         if (error) {
-          return alert(payload.message)
+          // TODO: handle API errors more appropriately
+          return Promise.reject('Error submitting post')
         }
         navigation.goBack()
         return Promise.resolve({})
       })
     },
-    editDetails: () => {
-      return navigation.navigate('DetailsEditor', {communityId})
-    },
+    editDetails: () => navigation.navigate('DetailsEditor', {communityId}),
     setDetails: content => dispatch(setDetails(content))
   }
 }

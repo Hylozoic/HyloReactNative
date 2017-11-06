@@ -60,15 +60,6 @@ export default class Login extends React.Component {
     }
   }
 
-  componentWillReceiveProps (nextProps) {
-    const { error, emailError, passwordError } = nextProps
-    this.setState({
-      error,
-      emailError,
-      passwordError
-    })
-  }
-
   componentDidMount () {
     NetInfo.isConnected.addEventListener('change', this.handleConnectivityChange)
   }
@@ -82,12 +73,13 @@ export default class Login extends React.Component {
   }
 
   render () {
-    const { loginWithGoogle, loginWithFacebook, pending, goToSignup } = this.props
+    const { loginWithGoogle, loginWithFacebook, pending, goToSignup, hasSignupLink } = this.props
     const { ssoError, error, emailError, passwordError, emailIsValid, isConnected } = this.state
+
     return <ScrollView contentContainerStyle={styles.login} style={styles.container}>
       {ssoError && <Text style={styles.errorBanner}>{ssoError}</Text>}
-      {!isConnected && <Text style={styles.errorBanner}>YOU ARE OFFLINE. TRYING TO RECONNECT...</Text>}
-      {pending && <Text style={styles.banner}>Logging in ...</Text>}
+      {!isConnected && <Text style={styles.errorBanner}>OFFLINE; TRYING TO RECONNECT...</Text>}
+      {pending && <Text style={styles.banner}>LOGGING IN...</Text>}
 
       <Image style={styles.logo}
         source={require('../../assets/merkaba-green-on-white.png')} />
@@ -110,9 +102,8 @@ export default class Login extends React.Component {
               underlineColorAndroid={styles.androidInvisibleUnderline} />
           </View>
           <View style={styles.rightIconView}>
-            { emailIsValid && <EntypoIcon name='check'
-              style={styles.iconGreen}
-            /> }
+            {emailIsValid && <EntypoIcon name='check'
+              style={styles.iconGreen} />}
           </View>
         </View>
       </View>
@@ -160,16 +151,19 @@ export default class Login extends React.Component {
           createErrorNotification={this.createErrorNotification}
           />
       </View>
-      <View style={styles.signup}>
-        <Text style={styles.helpText}>Dont have an account? </Text>
-        <TouchableOpacity onPress={goToSignup}>
-          <Text style={styles.signupText}>Sign up now</Text>
-        </TouchableOpacity>
-      </View>
+      {hasSignupLink && <SignupLink goToSignup={goToSignup} /> }
     </ScrollView>
   }
 }
 
+export function SignupLink ({goToSignup}) {
+  return <View style={styles.signup}>
+    <Text style={styles.helpText}>Dont have an account? </Text>
+    <TouchableOpacity onPress={goToSignup}>
+      <Text style={styles.signupText}>Sign up now</Text>
+    </TouchableOpacity>
+  </View>
+}
 export function FormError ({message, position}) {
   const rowStyle = position === 'top' ? styles.emailErrorRow : styles.passwordErrorRow
   const triangleStyle = position === 'top' ? styles.emailTriangle : styles.passwordTriangle
