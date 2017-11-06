@@ -73,9 +73,8 @@ export default class Login extends React.Component {
   }
 
   render () {
-    const { loginWithGoogle, loginWithFacebook, pending, goToSignup, hasSignupLink } = this.props
-    const { ssoError, error, emailError, passwordError, emailIsValid, isConnected } = this.state
-
+    const { loginWithGoogle, error, loginWithFacebook, pending, goToSignup, hasSignupLink } = this.props
+    const { ssoError, emailIsValid, isConnected } = this.state
     return <ScrollView contentContainerStyle={styles.login} style={styles.container}>
       {ssoError && <Text style={styles.errorBanner}>{ssoError}</Text>}
       {!isConnected && <Text style={styles.errorBanner}>OFFLINE; TRYING TO RECONNECT...</Text>}
@@ -84,8 +83,8 @@ export default class Login extends React.Component {
       <Image style={styles.logo}
         source={require('../../assets/merkaba-green-on-white.png')} />
       <Text style={styles.title}>Log in to Hylo</Text>
-      {emailError && <FormError message={error} position={'top'} />}
-      {!emailError && <View style={styles.labelRow}>
+      {error && <FormError />}
+      {!error && <View style={styles.labelRow}>
         <Text style={styles.labelText}>Your email address</Text>
       </View>}
       <View style={styles.paddedRow}>
@@ -131,7 +130,6 @@ export default class Login extends React.Component {
           </View>
         </View>
       </View>
-      {passwordError && <FormError message={error} position={'bottom'} />}
       <View style={styles.paddedRow}>
         <TouchableOpacity onPress={() => this.login()} style={styles.loginButton}>
           <Text style={styles.loginText}>Log In</Text>
@@ -164,9 +162,10 @@ export function SignupLink ({goToSignup}) {
     </TouchableOpacity>
   </View>
 }
-export function FormError ({message, position}) {
-  const rowStyle = position === 'top' ? styles.emailErrorRow : styles.passwordErrorRow
-  const triangleStyle = position === 'top' ? styles.emailTriangle : styles.passwordTriangle
+export function FormError () {
+  const rowStyle = styles.emailErrorRow
+  const triangleStyle = styles.emailTriangle
+  const message = 'Email and password not found. Please try again.'
   return <View style={styles.errorView}>
     <View style={rowStyle}>
       <Text style={styles.errorMessage}>{message}</Text>

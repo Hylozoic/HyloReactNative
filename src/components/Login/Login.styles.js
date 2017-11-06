@@ -177,17 +177,6 @@ export default {
     marginTop: -21,
     borderRadius: 30
   },
-  passwordErrorRow: {
-    alignSelf: 'stretch',
-    marginLeft: 5,
-    marginRight: 5,
-    backgroundColor: '#EE4266',
-    padding: 10,
-    marginBottom: -32,
-    borderRadius: 30,
-    marginTop: -7,
-    zIndex: 1
-  },
   errorMessage: {
     color: 'white',
     textAlign: 'center'
@@ -218,12 +207,6 @@ export default {
     ...mixins.triangle,
     borderTopWidth: 10,
     borderBottomWidth: 0
-  },
-  passwordTriangle: {
-    ...mixins.triangle,
-    borderTopWidth: 0,
-    borderBottomWidth: 10,
-    marginTop: -12
   },
   androidInvisibleUnderline: 'rgba(0,0,0,0)'
 }
