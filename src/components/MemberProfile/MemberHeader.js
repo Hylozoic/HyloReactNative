@@ -43,12 +43,12 @@ export default function MemberHeader ({
 }
 
 export class Control extends React.Component {
-  focusInput = () => {
+  focus = () => {
     this.input && this.input.focus()
   }
 
   render () {
-    const { value, onChangeText, editable, style, onBlur, multiline } = this.props
+    const { value, onChangeText, editable, style, onBlur, multiline, hideEditIcon } = this.props
     return <View style={[styles.control, editable && styles.editableControl]}>
       <TextInput
         ref={i => { this.input = i }}
@@ -58,7 +58,7 @@ export class Control extends React.Component {
         editable={editable}
         onBlur={onBlur}
         multiline={multiline} />
-      {editable && <TouchableOpacity onPress={this.focusInput} style={styles.editIconWrapper}>
+      {editable && !hideEditIcon && <TouchableOpacity onPress={this.focus} style={styles.editIconWrapper}>
         <EntypoIcon name='edit' style={styles.editIcon} />
       </TouchableOpacity>}
     </View>

@@ -52,5 +52,8 @@ export default {
   },
   editIconWrapper: {
     marginRight: 10
+  },
+  editIcon: {
+    color: rhino60
   }
 }
