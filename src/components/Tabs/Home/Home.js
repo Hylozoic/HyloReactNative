@@ -10,6 +10,7 @@ export default class Home extends React.Component {
   }
 
   componentDidMount () {
+    // this.props.navigation.navigate('MemberSkillEditor', {id: 11204})
     this.props.navigation.navigate('SignupFlow4')
   }
 

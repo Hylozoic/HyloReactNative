@@ -11,7 +11,7 @@ export function mapStateToProps (state, props) {
   const person = getPerson(state, {id})
   const goToDetails = () => props.navigation.navigate('MemberDetails', {id})
   const goToEdit = () => props.navigation.navigate('MemberDetails', {id, edit: true})
-  const goToSkills = () => console.log('go to skills')
+  const goToSkills = () => props.navigation.navigate('MemberSkillEditor', {id})
   const currentUser = getMe(state, props)
   const isMe = Number(get('id', currentUser)) === Number(id)
 

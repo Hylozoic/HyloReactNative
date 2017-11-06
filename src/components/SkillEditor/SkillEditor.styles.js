@@ -1,26 +1,21 @@
-import styles from '../SignupFlow/SignupFlow.styles'
-import { black10OnCaribbeanGreen } from 'style/colors'
+import { caribbeanGreen, white60onCaribbeanGreen } from 'style/colors'
 
 const containerPadding = {
   paddingHorizontal: 16
 }
 
 export default {
-  ...styles,
   subTitle: {
-    ...styles.subTitle,
     marginBottom: 20
   },
   containerPadding,
   userSkills: {
-    backgroundColor: black10OnCaribbeanGreen,
     minHeight: 100,
     ...containerPadding,
     paddingVertical: 10,
     alignItems: 'center'
   },
   yourSkillsLabel: {
-    ...styles.subTitle,
     marginBottom: 10
   },
   skillControl: {
@@ -52,7 +47,13 @@ export default {
     fontSize: 11
   },
   continueButton: {
-    ...styles.continueButton,
+    color: caribbeanGreen,
+    backgroundColor: 'white',
+    disabledBackgroundColor: white60onCaribbeanGreen,
+    height: 38,
+    width: 142,
+    fontSize: 16,
+    marginLeft: 'auto',
     marginTop: 'auto',
     marginRight: containerPadding.paddingHorizontal,
     marginBottom: 20
