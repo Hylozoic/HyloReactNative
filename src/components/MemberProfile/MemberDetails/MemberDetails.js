@@ -12,12 +12,16 @@ import MemberHeader, { Control } from '../MemberHeader'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
 import styles from './MemberDetails.styles'
 import { isEmpty, pick } from 'lodash/fp'
+import header from 'util/header'
 
 export default class MemberDetails extends React.Component {
-  static navigationOptions = () => ({
-    headerTitle: 'About This Member',
-    headerBackTitle: null
-  })
+  static navigationOptions = ({ navigation }) =>
+    header(navigation, {
+      title: 'About This Member',
+      options: {
+        headerBackTitle: null
+      }
+    })
 
   constructor (props) {
     super(props)
@@ -61,7 +65,7 @@ export default class MemberDetails extends React.Component {
   }
 
   render () {
-    const { goToCommunity, goToSkills, isMe, person } = this.props
+    const { goToCommunity, goToSkills, isMe, person, skills } = this.props
     const { editing } = this.state
     const personEdits = this.state.person
 
@@ -80,7 +84,7 @@ export default class MemberDetails extends React.Component {
         updateSetting={this.updateSetting}
         saveChanges={this.saveChanges} />
       <MemberSkills
-        person={person}
+        skills={skills}
         editable={editing}
         goToSkills={goToSkills} />
       <MemberCommunities person={person} goToCommunity={goToCommunity} />
@@ -116,7 +120,7 @@ export class MemberBio extends React.Component {
   }
 }
 
-export function MemberSkills ({ person: { skills }, editable, goToSkills }) {
+export function MemberSkills ({ skills, editable, goToSkills }) {
   if (isEmpty(skills)) return null
 
   return <View style={styles.skillsContainer}>

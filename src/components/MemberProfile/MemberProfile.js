@@ -8,11 +8,16 @@ import ImagePicker from '../ImagePicker'
 import FlagContent from '../FlagContent'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
 import defaultBanner from '../../assets/default-user-banner.jpg'
+import header from 'util/header'
 
 export default class MemberProfile extends React.Component {
-  static navigationOptions = () => ({
-    headerTitle: 'Member'
-  })
+  static navigationOptions = ({ navigation }) =>
+    header(navigation, {
+      title: 'Member',
+      options: {
+        headerBackTitle: null        
+      }
+    })
 
   state = {
     flaggingVisible: false

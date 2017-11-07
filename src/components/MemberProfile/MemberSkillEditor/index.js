@@ -9,11 +9,10 @@ import { keyboardAvoidingViewProps as kavProps } from 'util/viewHelpers'
 import header from 'util/header'
 
 export default class SignupFlow4 extends React.Component {
-  static navigationOptions = ({ navigation }) => {
-    return header(navigation, {
+  static navigationOptions = ({ navigation }) =>
+    header(navigation, {
       title: 'Edit Skills'
-    })
-  }
+    })  
 
   goBack = () => {
     this.props.navigation.goBack()

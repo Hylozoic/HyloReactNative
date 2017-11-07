@@ -156,10 +156,10 @@ exports[`MemberDetails matches the last snapshot 1`] = `
   <MemberSkills
     editable={undefined}
     goToSkills={undefined}
-    person={
-      Object {
-        "id": 1,
-      }
+    skills={
+      Array [
+        "One",
+      ]
     }
   />
   <MemberCommunities

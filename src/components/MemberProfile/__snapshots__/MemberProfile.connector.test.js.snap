@@ -18,6 +18,7 @@ Object {
   "id": 123,
   "isMe": false,
   "person": null,
+  "skills": Array [],
 }
 `;
 
