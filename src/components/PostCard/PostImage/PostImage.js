@@ -1,15 +1,44 @@
 import React from 'react'
-import { isEmpty } from 'lodash'
-import { Dimensions, Image, ImageBackground } from 'react-native'
+import { isEmpty, memoize } from 'lodash'
+import {
+  Dimensions,
+  Image,
+  ImageBackground,
+  Linking,
+  TouchableHighlight,
+  TouchableOpacity,
+  View
+} from 'react-native'
 
-export default function PostImage ({ imageUrls }) {
+// maybe this will help improve performance by avoiding creating new functions
+const makeOpenURL = memoize(url => () => Linking.openURL(url))
+
+export default function PostImage ({ imageUrls, linked }) {
   if (isEmpty(imageUrls)) return null
+
+  if (linked) {
+    return <View>
+      <TouchableOpacity onPress={makeOpenURL(imageUrls[0])}>
+        <ImageBackground
+          style={[styles.background, styles.container]}
+          imageStyle={styles.backgroundImage}
+          source={{uri: imageUrls[0]}}>
+          {imageUrls.length > 0 && imageUrls.slice(1).map(uri =>
+            <TouchableHighlight onPress={makeOpenURL(uri)} key={uri}
+              style={styles.thumbnailWrapper}>
+              <Image source={{uri}} style={styles.thumbnail} />
+            </TouchableHighlight>)}
+        </ImageBackground>
+      </TouchableOpacity>
+    </View>
+  }
+
   return <ImageBackground
     style={styles.background}
     imageStyle={styles.backgroundImage}
     source={{uri: imageUrls[0]}}>
     {imageUrls.length > 0 && imageUrls.slice(1).map(uri =>
-      <Image source={{uri}} key={uri + Math.random()} style={styles.thumbnail} />)}
+      <Image key={uri} source={{uri}} style={styles.thumbnail} />)}
   </ImageBackground>
 }
 
@@ -32,11 +61,13 @@ const styles = {
   backgroundImage: {
     resizeMode: 'cover'
   },
+  thumbnailWrapper: {
+    marginLeft: 8,
+    marginTop: 8
+  },
   thumbnail: {
     width: 48,
     height: 48,
-    marginLeft: 8,
-    marginTop: 8,
     borderWidth: 1,
     borderColor: 'white'
   }
