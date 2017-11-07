@@ -15,7 +15,7 @@ export default class MemberProfile extends React.Component {
     header(navigation, {
       title: 'Member',
       options: {
-        headerBackTitle: null        
+        headerBackTitle: null
       }
     })
 
