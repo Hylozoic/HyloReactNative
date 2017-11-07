@@ -10,15 +10,10 @@ import registerDevice from '../../store/actions/registerDevice'
 
 export function mapStateToProps (state, props) {
   const error = state.session.loginError
-  const emailError = error && error.includes('email')
-  const passwordError = error && error.includes('password')
   const pending = getPending(state)
   const goToSignup = () => props.navigation.navigate('Signup')
-
   return {
     error,
-    emailError,
-    passwordError,
     pending,
     defaultEmail: state.session.defaultLoginEmail,
     goToSignup,

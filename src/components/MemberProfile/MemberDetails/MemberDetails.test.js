@@ -1,9 +1,12 @@
 import 'react-native'
 import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
+import ReactTestRenderer from 'react-test-renderer'
 import MemberDetails, { MemberBio, MemberSkills, MemberCommunities, CommunityRow } from './MemberDetails'
+import { pick } from 'lodash/fp'
 
 jest.mock('react-native-device-info')
+jest.mock('TextInput', () => 'TextInput')
 
 describe('MemberDetails', () => {
   it('matches the last snapshot', () => {
@@ -23,6 +26,82 @@ describe('MemberDetails', () => {
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
+  })
+
+  it('has navigation options', () =>
+    expect(MemberDetails.navigationOptions({navigation: {state: {}}})).toMatchSnapshot())
+
+  describe('componentDidMount', () => {
+    it('sets the state when person changes', () => {
+      const prevProps = {
+        person: {
+          id: 2
+        }
+      }
+
+      const props = {
+        person: {
+          id: 1,
+          name: 'don',
+          location: 'here',
+          tagline: 'rock',
+          bio: 'stuff',
+          omitable: 'should be omitted'
+        },
+        fetchPerson: () => {}
+      }
+
+      const instance = ReactTestRenderer.create(<MemberDetails {...props} />).getInstance()
+      instance.setState({person: {}})
+      instance.componentDidUpdate(prevProps)
+      expect(instance.state.person).toEqual(pick(['name', 'location', 'tagline', 'bio'], props.person))
+    })
+  })
+
+  describe('editProfile', () => {
+    it('sets state.editing to true', () => {
+      const props = {
+        person: {},
+        fetchPerson: () => {}
+      }
+
+      const instance = ReactTestRenderer.create(<MemberDetails {...props} />).getInstance()
+      instance.editProfile()
+      expect(instance.state.editing).toEqual(true)
+    })
+  })
+
+  describe('updateSetting', () => {
+    it('updates state.person', () => {
+      const props = {
+        person: {},
+        fetchPerson: () => {}
+      }
+
+      const instance = ReactTestRenderer.create(<MemberDetails {...props} />).getInstance()
+      instance.updateSetting('name')('joe')
+      expect(instance.state.person.name).toEqual('joe')
+    })
+  })
+
+  describe('saveChanges', () => {
+    it('calls updateUserSettings', () => {
+      const props = {
+        person: {},
+        fetchPerson: () => {},
+        updateUserSettings: jest.fn()
+      }
+
+      const instance = ReactTestRenderer.create(<MemberDetails {...props} />).getInstance()
+      instance.setState({
+        person: {
+          name: 'joe',
+          location: 'oakland'
+        }
+      })
+      instance.saveChanges()
+      expect(props.updateUserSettings).toHaveBeenCalledWith(instance.state.person)
+    })
   })
 })
 
@@ -52,6 +131,17 @@ describe('MemberBio', () => {
     const actual = renderer.getRenderOutput()
 
     expect(actual).toBeNull()
+  })
+
+  describe('focus', () => {
+    it('calls control.focus', () => {
+      const instance = ReactTestRenderer.create(<MemberBio person={{}} />).getInstance()
+      instance.control = {
+        focus: jest.fn()
+      }
+      instance.focus()
+      expect(instance.control.focus).toHaveBeenCalled()
+    })
   })
 })
 

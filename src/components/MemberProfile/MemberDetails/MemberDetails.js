@@ -15,6 +15,10 @@ import styles from './MemberDetails.styles'
 import { isEmpty, pick } from 'lodash/fp'
 import header from 'util/header'
 
+export function editableFields (person) {
+  return pick(['name', 'location', 'tagline', 'bio'], person)
+}
+
 export default class MemberDetails extends React.Component {
   static navigationOptions = ({ navigation }) =>
     header(navigation, {
@@ -28,7 +32,7 @@ export default class MemberDetails extends React.Component {
     super(props)
     this.state = {
       editing: this.props.editing,
-      person: props.person
+      person: editableFields(props.person)
     }
   }
 
@@ -43,7 +47,7 @@ export default class MemberDetails extends React.Component {
 
     if (prevProps.person !== this.props.person) {
       this.setState({
-        person: pick(['name', 'location', 'tagline', 'bio'], this.props.person)
+        person: editableFields(this.props.person)
       })
     }
   }
