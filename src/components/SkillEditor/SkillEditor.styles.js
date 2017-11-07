@@ -1,32 +1,21 @@
 import { caribbeanGreen, white60onCaribbeanGreen } from 'style/colors'
 
-const containerPadding = {
-  paddingHorizontal: 16
-}
-
 export default {
   subTitle: {
     marginBottom: 20
   },
-  containerPadding,
   userSkills: {
     minHeight: 100,
-    ...containerPadding,
     paddingVertical: 10,
     alignItems: 'center'
   },
   yourSkillsLabel: {
     marginBottom: 10
   },
-  skillControl: {
-    ...containerPadding,
-    marginTop: 18
-  },
   remainingSkills: {
     marginBottom: 30
   },
   skillCloud: {
-    ...containerPadding,
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'center',
@@ -55,7 +44,6 @@ export default {
     fontSize: 16,
     marginLeft: 'auto',
     marginTop: 'auto',
-    marginRight: containerPadding.paddingHorizontal,
     marginBottom: 20
   }
 }

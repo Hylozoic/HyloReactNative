@@ -16,7 +16,8 @@ import { isEmpty, pick } from 'lodash/fp'
 
 export default class MemberDetails extends React.Component {
   static navigationOptions = () => ({
-    headerTitle: 'About This Member'
+    headerTitle: 'About This Member',
+    headerBackTitle: null
   })
 
   constructor (props) {
