@@ -6,6 +6,7 @@ import {
   ScrollView
 } from 'react-native'
 import Icon from '../../Icon'
+import { HeaderBackButton } from 'react-navigation'
 import StarIcon from '../../StarIcon'
 import Loading from '../../Loading'
 import MemberHeader, { Control } from '../MemberHeader'
@@ -68,6 +69,8 @@ export default class MemberDetails extends React.Component {
     const { goToCommunity, goToSkills, isMe, person, skills } = this.props
     const { editing } = this.state
     const personEdits = this.state.person
+
+    console.log('HeaderBackButton', HeaderBackButton)
 
     if (!personEdits) return <Loading />
 
