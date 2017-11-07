@@ -1,7 +1,6 @@
 import React from 'react'
 import {
   Button,
-  Image,
   ScrollView,
   Text,
   TextInput,
@@ -16,8 +15,7 @@ import striptags from 'striptags'
 import { keyboardAvoidingViewProps as kavProps } from 'util/viewHelpers'
 import { decode } from 'ent'
 import KeyboardFriendlyView from '../KeyboardFriendlyView'
-import ImagePicker from '../ImagePicker'
-import PopupMenuButton from '../PopupMenuButton'
+import ImageSelector from './ImageSelector'
 
 export default class PostEditor extends React.Component {
   static contextTypes = {navigate: PropTypes.func}
@@ -120,7 +118,7 @@ export default class PostEditor extends React.Component {
           <ImageSelector
             onSelect={this.selectImage}
             onReset={this.resetImage}
-            imageUrl={thumbnailUrl} />
+            imageUrls={[thumbnailUrl]} />
         </View>
       </ScrollView>
     </KeyboardFriendlyView>
@@ -161,43 +159,4 @@ function excerptDetails (details) {
   return decode(striptags(details, [], ' '))
   .replace(/\s+/g, ' ')
   .substring(0, 100)
-}
-
-class ImageSelector extends React.Component {
-  renderPickerButton (props) {
-    return <ImagePicker
-      {...props}
-      onError={err => console.log(err)}
-      onCancel={() => console.log('canceled')}
-      onChoice={this.props.onSelect}
-      type='post' />
-  }
-
-  render () {
-    const { onReset, imageUrl } = this.props
-
-    if (imageUrl) {
-      return <PopupMenuButton
-        style={styles.addImageButton}
-        actions={['Change image', 'Remove image']}
-        destructiveButtonIndex={1}
-        onSelect={index => {
-          if (index === 0) {
-            return this.picker.getWrappedInstance().showPicker()
-          }
-          if (index === 1) return onReset()
-        }}>
-        <Image style={styles.addImageButtonImage} source={{uri: imageUrl}} />
-        {this.renderPickerButton({
-          style: styles.hiddenImagePicker,
-          ref: x => { this.picker = x }
-        })}
-      </PopupMenuButton>
-    }
-
-    return this.renderPickerButton({
-      style: styles.addImageButton,
-      iconStyle: styles.addImageButtonIcon
-    })
-  }
 }
