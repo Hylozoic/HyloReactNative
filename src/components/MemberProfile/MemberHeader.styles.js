@@ -17,7 +17,8 @@ export default {
   },
   icons: {
     flexDirection: 'row',
-    marginLeft: 'auto'
+    marginLeft: 'auto',
+    paddingLeft: 10
   },
   icon: {
     fontSize: 30,
@@ -54,6 +55,7 @@ export default {
     marginRight: 10
   },
   editIcon: {
-    color: rhino60
+    color: rhino60,
+    fontSize: 16
   }
 }
