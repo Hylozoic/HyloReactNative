@@ -11,11 +11,14 @@ Object {
 exports[`mapStateToProps maps the state to the props 1`] = `
 Object {
   "currentUser": undefined,
+  "editing": undefined,
   "goToDetails": [Function],
   "goToEdit": [Function],
+  "goToSkills": [Function],
   "id": 123,
   "isMe": false,
   "person": null,
+  "skills": Array [],
 }
 `;
 

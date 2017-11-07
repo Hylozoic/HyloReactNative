@@ -13,7 +13,7 @@ describe('mapStateToProps', () => {
     expect(navigation.navigate).toHaveBeenCalledWith('MemberDetails', {id})
     navigation.navigate.mockClear()
     props.goToEdit()
-    expect(navigation.navigate).toHaveBeenCalledWith('MemberDetails', {id, edit: true})
+    expect(navigation.navigate).toHaveBeenCalledWith('MemberDetails', {id, editing: true})
   })
 })
 

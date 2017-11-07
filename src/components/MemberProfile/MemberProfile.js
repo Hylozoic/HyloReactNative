@@ -1,20 +1,23 @@
 import React from 'react'
 import { Text, View, Image, TouchableOpacity } from 'react-native'
-import Icon from '../Icon'
 import Loading from '../Loading'
 import styles from './MemberProfile.styles'
 import MemberFeed from './MemberFeed'
+import MemberHeader from './MemberHeader'
 import ImagePicker from '../ImagePicker'
-import PopupMenuButton from '../PopupMenuButton'
 import FlagContent from '../FlagContent'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
-import { filter, isEmpty } from 'lodash/fp'
 import defaultBanner from '../../assets/default-user-banner.jpg'
+import header from 'util/header'
 
 export default class MemberProfile extends React.Component {
-  static navigationOptions = () => ({
-    headerTitle: 'Member'
-  })
+  static navigationOptions = ({ navigation }) =>
+    header(navigation, {
+      title: 'Member',
+      options: {
+        headerBackTitle: null
+      }
+    })
 
   state = {
     flaggingVisible: false
@@ -56,7 +59,7 @@ export default class MemberProfile extends React.Component {
           flagMember={flagMember}
           onPressMessages={onPressMessages}
           isMe={isMe}
-          goToEdit={goToEdit} />
+          editProfile={goToEdit} />
         <ReadMoreButton goToDetails={goToDetails} />
       </View>
       {flaggingVisible && <FlagContent type='member'
@@ -138,25 +141,6 @@ export function EditButton ({ isLoading, style }) {
   </View>
 }
 
-export function MemberHeader ({ person, flagMember, onPressMessages, isMe, goToEdit }) {
-  if (!person) return null
-
-  const { name, location, tagline } = person
-  return <View style={styles.header}>
-    <View style={styles.nameRow}>
-      <Text style={styles.name}>{name}</Text>
-      <View style={styles.icons}>
-        <TouchableOpacity onPress={onPressMessages}>
-          <Icon name='Messages' style={styles.icon} />
-        </TouchableOpacity>
-        <MemberMenu {... {flagMember, isMe, goToEdit}} />
-      </View>
-    </View>
-    <Text style={styles.location}>{location}</Text>
-    <Text style={styles.tagline}>{tagline}</Text>
-  </View>
-}
-
 export function ReadMoreButton ({ goToDetails }) {
   return <View style={styles.buttonContainer}>
     <TouchableOpacity onPress={goToDetails} style={styles.buttonWrapper}>
@@ -165,23 +149,4 @@ export function ReadMoreButton ({ goToDetails }) {
       </View>
     </TouchableOpacity>
   </View>
-}
-
-export function MemberMenu ({flagMember, isMe, goToEdit}) {
-  // If the function is defined, than it's a valid action
-  const actions = filter(x => x[1], [
-    ['Edit', isMe && goToEdit],
-    ['Flag This Member', !isMe && flagMember]
-  ])
-
-  if (isEmpty(actions)) return null
-
-  const onSelect = index => actions[index][1]()
-
-  const destructiveButtonIndex = actions[0][0] === 'Flag This Member' ? 0 : -1
-
-  return <PopupMenuButton actions={actions.map(x => x[0])} onSelect={onSelect}
-    destructiveButtonIndex={destructiveButtonIndex}>
-    <Icon name='More' style={styles.lastIcon} />
-  </PopupMenuButton>
 }
