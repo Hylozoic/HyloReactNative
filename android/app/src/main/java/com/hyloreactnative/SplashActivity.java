@@ -1,5 +1,4 @@
-package com.hyloreactnative;
-
+package com.hylo.hyloandroid;
 /**
  * Created by robbiecarlton on 10/31/17.
  */
