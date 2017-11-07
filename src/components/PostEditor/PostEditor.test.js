@@ -86,7 +86,7 @@ describe('PostEditor', () => {
 
     const instance = renderer.root.findByType(PostEditor).instance
     instance.setState({type: 'request'})
-    instance.saveEditor()
+    instance.save()
 
     expect(navigation.setParams).toHaveBeenCalledWith({isSaving: true})
     expect(save).toHaveBeenCalled()
@@ -111,7 +111,7 @@ describe('PostEditor', () => {
 
     const instance = renderer.root.findByType(PostEditor).instance
 
-    await instance.saveEditor()
+    await instance.save()
     expect(navigation.setParams.mock.calls[1][0]).toHaveProperty('isSaving', true)
     expect(navigation.setParams.mock.calls[2][0]).toHaveProperty('isSaving', false)
   })

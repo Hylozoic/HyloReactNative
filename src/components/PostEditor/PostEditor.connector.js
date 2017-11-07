@@ -37,7 +37,7 @@ export function mapDispatchToProps (dispatch, props) {
       .then(({ error, payload }) => {
         if (error) {
           // TODO: handle API errors more appropriately
-          return Promise.reject('Error submitting post')
+          throw new Error('Error submitting post')
         }
         navigation.goBack()
         return Promise.resolve({})
