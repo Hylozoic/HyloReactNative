@@ -1,7 +1,8 @@
-import MemberHeader, { MemberMenu } from './MemberHeader'
+import MemberHeader, { MemberMenu, Control } from './MemberHeader'
 import 'react-native'
 import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
+import ReactTestRenderer from 'react-test-renderer'
 
 jest.mock('react-native-device-info')
 
@@ -39,5 +40,35 @@ describe('MemberMenu', () => {
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
+  })
+})
+
+describe('Control', () => {
+  it('matches the last snapshot', () => {
+    const props = {
+      value: 'a',
+      onChangeTest: () => {},
+      editable: true,
+      onBlur: () => {},
+      multiline: true,
+      hideEditIcon: false
+    }
+
+    const renderer = new ReactShallowRenderer()
+    renderer.render(<Control {...props} />)
+    const actual = renderer.getRenderOutput()
+
+    expect(actual).toMatchSnapshot()
+  })
+
+  describe('focus', () => {
+    it('calls input.focus', () => {
+      const instance = ReactTestRenderer.create(<Control />).getInstance()
+      instance.input = {
+        focus: jest.fn()
+      }
+      instance.focus()
+      expect(instance.input.focus).toHaveBeenCalled()
+    })
   })
 })

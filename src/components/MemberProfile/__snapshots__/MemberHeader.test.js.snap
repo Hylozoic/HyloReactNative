@@ -1,5 +1,28 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Control matches the last snapshot 1`] = `
+<View>
+  <TextInput
+    editable={true}
+    multiline={true}
+    onBlur={[Function]}
+    onChangeText={undefined}
+    value="a"
+  />
+  <TouchableOpacity
+    activeOpacity={0.2}
+    focusedOpacity={0.7}
+    onPress={[Function]}
+  >
+    <Icon
+      allowFontScaling={false}
+      name="edit"
+      size={12}
+    />
+  </TouchableOpacity>
+</View>
+`;
+
 exports[`MemberHeader matches the last snapshot 1`] = `
 <View>
   <View>
