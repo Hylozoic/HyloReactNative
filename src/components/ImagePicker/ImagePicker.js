@@ -81,7 +81,7 @@ export default class ImagePicker extends Component {
   }
 
   render () {
-    let { children, style, iconStyle } = this.props
+    let { children, style, iconStyle, disabled } = this.props
     const { pending } = this.state
 
     if (!children) {
@@ -91,7 +91,7 @@ export default class ImagePicker extends Component {
     }
 
     return <View style={style}>
-      <TouchableOpacity onPress={() => !pending && this.showPicker()}>
+      <TouchableOpacity onPress={() => !pending && this.showPicker()} disabled={disabled}>
         {children}
       </TouchableOpacity>
     </View>

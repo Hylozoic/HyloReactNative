@@ -1,25 +1,78 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MemberBanner matches the last snapshot 1`] = `
+exports[`EditButton matches the last snapshot when isLoading is false 1`] = `
 <View>
-  <Image
-    source={
-      Object {
-        "uri": "yay.png",
-      }
-    }
-  />
   <View>
-    <Image
-      source={
-        Object {
-          "uri": "pong.png",
-        }
-      }
+    <Icon
+      allowFontScaling={false}
+      name="edit"
+      size={12}
     />
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+    >
+      edit
+    </Text>
   </View>
 </View>
 `;
+
+exports[`EditButton matches the last snapshot when isLoading is true 1`] = `
+<View>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    disabled={false}
+    ellipsizeMode="tail"
+  >
+    loading
+  </Text>
+</View>
+`;
+
+exports[`MemberBanner matches the last snapshot 1`] = `
+<View>
+  <ImagePicker
+    disabled={true}
+    id={1}
+    onChoice={[Function]}
+    onPendingChange={[Function]}
+    title="Change Banner"
+    type="userBanner"
+  >
+    <Image
+      source={
+        Object {
+          "uri": "yay.png",
+        }
+      }
+    />
+  </ImagePicker>
+  <ImagePicker
+    disabled={true}
+    id={1}
+    onChoice={[Function]}
+    onPendingChange={[Function]}
+    title="Change Avatar"
+    type="userAvatar"
+  >
+    <View>
+      <Image
+        source={
+          Object {
+            "uri": "pong.png",
+          }
+        }
+      />
+    </View>
+  </ImagePicker>
+</View>
+`;
+
+exports[`MemberBanner shows local images if present 1`] = `undefined`;
 
 exports[`MemberHeader matches the last snapshot 1`] = `
 <View>
@@ -44,6 +97,8 @@ exports[`MemberHeader matches the last snapshot 1`] = `
       </TouchableOpacity>
       <MemberMenu
         flagMember={[Function]}
+        goToEdit={undefined}
+        isMe={undefined}
       />
     </View>
   </View>
@@ -89,15 +144,19 @@ exports[`MemberProfile doesnt have the flag content option 1`] = `
   header={
     <View>
       <MemberBanner
+        isMe={undefined}
         person={
           Object {
             "id": 1,
           }
         }
+        updateUserSettings={undefined}
       />
       <View>
         <MemberHeader
           flagMember={undefined}
+          goToEdit={undefined}
+          isMe={undefined}
           onPressMessages={undefined}
           person={
             Object {
@@ -120,15 +179,19 @@ exports[`MemberProfile matches the last snapshot 1`] = `
   header={
     <View>
       <MemberBanner
+        isMe={undefined}
         person={
           Object {
             "id": 1,
           }
         }
+        updateUserSettings={undefined}
       />
       <View>
         <MemberHeader
           flagMember={[Function]}
+          goToEdit={undefined}
+          isMe={undefined}
           onPressMessages={undefined}
           person={
             Object {
