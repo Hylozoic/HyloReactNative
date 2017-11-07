@@ -26,7 +26,6 @@ export default class ImageSelector extends React.Component {
     return <ImagePicker
       {...props}
       onError={err => console.log(err)}
-      onCancel={() => console.log('canceled')}
       onChoice={this.props.onAdd}
       type='post' />
   }

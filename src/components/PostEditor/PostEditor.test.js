@@ -8,15 +8,20 @@ import { createMockStore } from 'util/testing'
 
 jest.mock('react-native-device-info')
 
-const mockPost = {
-  details: 'myDetails',
-  images: () => [],
-  communities: {
-    toRefArray: () => [
-      {id: 1}
-    ]
+let mockPost, mockImages
+
+beforeEach(() => {
+  mockImages = []
+  mockPost = {
+    details: 'myDetails',
+    images: () => ({
+      toRefArray: () => mockImages
+    }),
+    communities: {
+      toRefArray: () => [{id: 1}]
+    }
   }
-}
+})
 
 describe('PostEditor', () => {
   it('renders a new editor correctly', () => {
@@ -27,6 +32,17 @@ describe('PostEditor', () => {
       save={save}
       editDetails={jest.fn()}
     />)
+    const actual = renderer.getRenderOutput()
+    expect(actual).toMatchSnapshot()
+  })
+
+  it('renders with a post', () => {
+    mockImages = [
+      {url: 'http://foo.com/foo.png'},
+      {url: 'http://baz.com/baz.png'}
+    ]
+    const renderer = new ReactShallowRenderer()
+    renderer.render(<PostEditor post={mockPost} />)
     const actual = renderer.getRenderOutput()
     expect(actual).toMatchSnapshot()
   })
@@ -115,6 +131,33 @@ describe('PostEditor', () => {
     await instance.save()
     expect(navigation.setParams.mock.calls[1][0]).toHaveProperty('isSaving', true)
     expect(navigation.setParams.mock.calls[2][0]).toHaveProperty('isSaving', false)
+  })
+
+  it('has image methods', () => {
+    mockImages = [
+      {url: 'http://foo.com/foo.png'}
+    ]
+    const navigation = {setParams: jest.fn()}
+    const renderer = TestRenderer.create(
+      <Provider store={createMockStore()}>
+        <PostEditor
+          editDetails={jest.fn()}
+          setDetails={jest.fn()}
+          navigation={navigation}
+          post={mockPost} />
+      </Provider>)
+
+    const instance = renderer.root.findByType(PostEditor).instance
+    instance.addImage({remote: 'http://bar.com/bar.png'})
+    expect(instance.state.imageUrls).toEqual([
+      'http://foo.com/foo.png',
+      'http://bar.com/bar.png'
+    ])
+
+    instance.removeImage('http://foo.com/foo.png')
+    expect(instance.state.imageUrls).toEqual([
+      'http://bar.com/bar.png'
+    ])
   })
 })
 

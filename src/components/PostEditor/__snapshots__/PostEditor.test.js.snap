@@ -261,28 +261,10 @@ exports[`PostEditor renders correctly while saving 1`] = `
             testID={undefined}
             tvParallaxProperties={undefined}
           >
-            <Text
-              accessible={true}
-              allowFontScaling={false}
-              disabled={false}
-              ellipsizeMode="tail"
-              style={
-                Array [
-                  Object {
-                    "color": undefined,
-                    "fontSize": 12,
-                  },
-                  undefined,
-                  Object {
-                    "fontFamily": "hylo-evo-icons",
-                    "fontStyle": "normal",
-                    "fontWeight": "normal",
-                  },
-                ]
-              }
-            >
-              
-            </Text>
+            <Icon
+              color={undefined}
+              name="AddImage"
+            />
           </View>
         </View>
       </View>
@@ -474,34 +456,86 @@ exports[`PostEditor renders correctly while saving 2`] = `
             testID={undefined}
             tvParallaxProperties={undefined}
           >
-            <Text
-              accessible={true}
-              allowFontScaling={false}
-              disabled={false}
-              ellipsizeMode="tail"
-              style={
-                Array [
-                  Object {
-                    "color": undefined,
-                    "fontSize": 12,
-                  },
-                  undefined,
-                  Object {
-                    "fontFamily": "hylo-evo-icons",
-                    "fontStyle": "normal",
-                    "fontWeight": "normal",
-                  },
-                ]
-              }
-            >
-              
-            </Text>
+            <Icon
+              color={undefined}
+              name="AddImage"
+            />
           </View>
         </View>
       </View>
     </View>
   </RCTScrollView>
 </View>
+`;
+
+exports[`PostEditor renders with a post 1`] = `
+<Unknown
+  behavior="padding"
+  keyboardVerticalOffset={64}
+>
+  <ScrollViewMock>
+    <View>
+      <SectionLabel>
+        What are you posting today?
+      </SectionLabel>
+      <View>
+        <TypeButton
+          onPress={[Function]}
+          selected={true}
+          type="discussion"
+        />
+        <TypeButton
+          onPress={[Function]}
+          selected={false}
+          type="request"
+        />
+        <TypeButton
+          onPress={[Function]}
+          selected={false}
+          type="offer"
+        />
+      </View>
+      <SectionLabel>
+        Title
+      </SectionLabel>
+      <View>
+        <TextInput
+          editable={true}
+          onChangeText={[Function]}
+          placeholder="What do you want to discuss?"
+          underlineColorAndroid="transparent"
+          value=""
+        />
+      </View>
+      <SectionLabel>
+        Details
+      </SectionLabel>
+      <TouchableOpacity
+        activeOpacity={0.2}
+        focusedOpacity={0.7}
+        onPress={[Function]}
+      >
+        <Details
+          details={undefined}
+          placeholder="What else should we know?"
+        />
+      </TouchableOpacity>
+      <SectionLabel>
+        Image
+      </SectionLabel>
+      <ImageSelector
+        imageUrls={
+          Array [
+            "http://foo.com/foo.png",
+            "http://baz.com/baz.png",
+          ]
+        }
+        onAdd={[Function]}
+        onRemove={[Function]}
+      />
+    </View>
+  </ScrollViewMock>
+</Unknown>
 `;
 
 exports[`SectionLabel renders correctly 1`] = `
