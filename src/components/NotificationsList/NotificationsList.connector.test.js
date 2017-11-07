@@ -3,6 +3,8 @@ import { mapStateToProps, mapDispatchToProps } from './NotificationsList.connect
 import { FETCH_NOTIFICATIONS } from './NotificationsList.store'
 import { buildKey } from '../../store/reducers/queryResults'
 
+jest.mock('util/platform', () => ({isIOS: true}))
+
 it('matches the last snapshot for mapStateToProps', () => {
   const session = orm.mutableSession(orm.getEmptyState())
   session.Activity.create({

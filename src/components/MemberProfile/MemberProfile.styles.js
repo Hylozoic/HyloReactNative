@@ -8,24 +8,56 @@ export default {
   marginContainer: {
     marginHorizontal: screenMargin
   },
+  bannerWrapper: {
+    position: 'relative'
+  },
   bannerImage: {
     height: 140,
     width: '100%'
+  },
+  bannerEditButton: {
+    position: 'absolute',
+    bottom: -2,
+    right: -10,
+    paddingRight: 15
   },
   avatarWrapper: {
     flexDirection: 'row',
     justifyContent: 'center',
     position: 'relative',
-    marginBottom: 40
+    marginBottom: 65
   },
   avatarImage: {
     position: 'absolute',
-    top: -38,
-    width: 76,
-    height: 76,
-    borderRadius: 38,
+    top: -56,
+    width: 112,
+    height: 112,
+    borderRadius: 56,
     borderWidth: 3,
     borderColor: 'white'
+  },
+  avatarEditButton: {
+    position: 'absolute',
+    top: 26
+  },
+  editButton: {
+    backgroundColor: 'white',
+    opacity: 0.9,
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    borderRadius: 100,
+    position: 'relative'
+  },
+  editIcon: {
+    top: 2,
+    fontSize: 12,
+    color: capeCod,
+    marginRight: 2
+  },
+  editButtonText: {
+    fontFamily: 'Circular-Book',
+    fontSize: 14,
+    color: capeCod
   },
   header: {
     marginBottom: 15
