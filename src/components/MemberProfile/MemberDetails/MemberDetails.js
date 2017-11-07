@@ -6,7 +6,6 @@ import {
   ScrollView
 } from 'react-native'
 import Icon from '../../Icon'
-import Button from '../../Button'
 import StarIcon from '../../StarIcon'
 import Loading from '../../Loading'
 import MemberHeader, { Control } from '../MemberHeader'
@@ -23,7 +22,7 @@ export default class MemberDetails extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      editing: false,
+      editing: this.props.editing,
       person: props.person
     }
   }
@@ -80,7 +79,6 @@ export default class MemberDetails extends React.Component {
         editable={editing}
         updateSetting={this.updateSetting}
         saveChanges={this.saveChanges} />
-      <Button text={editing ? 'stop edit' : 'edit'} onPress={() => this.setState({editing: !editing})} />
       <MemberSkills
         person={person}
         editable={editing}

@@ -7,7 +7,7 @@ import { filter, isEmpty } from 'lodash/fp'
 import styles from './MemberHeader.styles'
 
 export default function MemberHeader ({
-  person, flagMember, onPressMessages, isMe, editProfile, editable, updateSetting, saveChanges
+  person, flagMember, onPressMessages, isMe, editProfile, editable, updateSetting = () => {}, saveChanges
 }) {
   if (!person) return null
 

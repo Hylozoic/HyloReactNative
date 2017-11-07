@@ -8,15 +8,18 @@ import updateUserSettings from '../../store/actions/updateUserSettings'
 
 export function mapStateToProps (state, props) {
   const id = get('navigation.state.params.id', props)
+  const editing = get('navigation.state.params.editing', props)
+
   const person = getPerson(state, {id})
   const goToDetails = () => props.navigation.navigate('MemberDetails', {id})
-  const goToEdit = () => props.navigation.navigate('MemberDetails', {id, edit: true})
+  const goToEdit = () => props.navigation.navigate('MemberDetails', {id, editing: true})
   const goToSkills = () => props.navigation.navigate('MemberSkillEditor', {id})
   const currentUser = getMe(state, props)
   const isMe = Number(get('id', currentUser)) === Number(id)
 
   return {
     id,
+    editing,
     person,
     currentUser,
     goToDetails,

@@ -7,7 +7,6 @@ import SkillEditor from '../../SkillEditor'
 import styles from './MemberSkillEditor.styles'
 import { keyboardAvoidingViewProps as kavProps } from 'util/viewHelpers'
 import header from 'util/header'
-import { get } from 'lodash/fp'
 
 export default class SignupFlow4 extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -16,17 +15,14 @@ export default class SignupFlow4 extends React.Component {
     })
   }
 
-  render () {
-    const id = get('navigation.state.params.id', this.props)
-    const goBack = () => {
-      console.log('goin back')
-      this.props.navigation.goBack()
-      // this.props.navigation.navigate('MemberDetails', {id})
-    }
+  goBack = () => {
+    this.props.navigation.goBack()
+  }
 
+  render () {
     return <KeyboardFriendlyView style={styles.container} {...kavProps}>
       <ScrollView>
-        <SkillEditor done={goBack} doneLabel='Done' theme={styles.skillEditor} />
+        <SkillEditor done={this.goBack} doneLabel='Done' theme={styles.skillEditor} />
       </ScrollView>
     </KeyboardFriendlyView>
   }
