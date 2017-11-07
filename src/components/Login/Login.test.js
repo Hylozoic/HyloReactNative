@@ -26,23 +26,11 @@ describe('Login', () => {
     expect(actual).toMatchSnapshot()
   })
 
-  it('renders with email error', () => {
-    const errorMessage = 'email error'
-    const renderer = new ReactShallowRenderer()
-    renderer.render(<Login
-      error={errorMessage}
-      emailError
-    />)
-    const actual = renderer.getRenderOutput()
-    expect(actual).toMatchSnapshot()
-  })
-
-  it('renders with password error', () => {
+  it('renders error message', () => {
     const errorMessage = 'password error'
     const renderer = new ReactShallowRenderer()
     renderer.render(<Login
       error={errorMessage}
-      passwordError
     />)
     const actual = renderer.getRenderOutput()
     expect(actual).toMatchSnapshot()
