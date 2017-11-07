@@ -23,7 +23,7 @@ export default function Comment ({
   removeComment
 }) {
   const {creator, text, createdAt, post} = comment
-  const presentedText = present(sanitize(text), {noP: true, slug})
+  const presentedText = present(sanitize(text), {slug})
 
   const deleteCommentWithConfirm = deleteComment ? () => Alert.alert(
     'Confirm Delete',
