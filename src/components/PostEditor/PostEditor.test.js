@@ -10,6 +10,7 @@ jest.mock('react-native-device-info')
 
 const mockPost = {
   details: 'myDetails',
+  images: () => [],
   communities: {
     toRefArray: () => [
       {id: 1}

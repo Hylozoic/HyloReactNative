@@ -38,7 +38,9 @@ export default class PostEditor extends React.Component {
       communityIds: post
         ? post.communities.toRefArray().map(x => x.id)
         : [communityId],
-      imageUrls: []
+      imageUrls: post
+        ? post.images().toRefArray().map(x => x.url)
+        : []
     }
   }
 
