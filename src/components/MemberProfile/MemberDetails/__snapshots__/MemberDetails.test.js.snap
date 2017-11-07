@@ -121,6 +121,24 @@ exports[`MemberCommunities matches the last snapshot 1`] = `
 </View>
 `;
 
+exports[`MemberDetails has navigation options 1`] = `
+Object {
+  "headerBackTitle": null,
+  "headerStyle": Object {
+    "backgroundColor": "white",
+    "paddingHorizontal": 10,
+  },
+  "headerTintColor": "#808c9b",
+  "headerTitle": "About This Member",
+  "headerTitleStyle": Object {
+    "color": "black",
+    "fontFamily": "Circular-Bold",
+    "fontSize": 17,
+    "marginLeft": 15,
+  },
+}
+`;
+
 exports[`MemberDetails matches the last snapshot 1`] = `
 <ScrollViewMock
   contentContainerStyle={
