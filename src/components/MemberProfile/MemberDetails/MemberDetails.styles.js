@@ -1,6 +1,7 @@
 import {
   nevada, ghost, rhino, rhino50, rhino30, caribbeanGreen
 } from 'style/colors'
+import headerStyles from '../MemberHeader.styles.js'
 
 const screenMargin = 16
 
@@ -9,6 +10,10 @@ export default {
     backgroundColor: 'white',
     paddingTop: 12,
     paddingHorizontal: screenMargin
+  },
+  labelWrapper: {
+    flexDirection: 'row',
+    position: 'relative'
   },
   sectionLabel: {
     color: rhino,
@@ -21,6 +26,8 @@ export default {
   },
   bio: {
     color: nevada,
+    fontFamily: 'Circular-Book',
+    fontSize: 14,
     marginBottom: 15
   },
   skillsContainer: {
@@ -68,5 +75,10 @@ export default {
   memberIcon: {
     fontSize: 16,
     color: rhino30
+  },
+  editIcon: {
+    ...headerStyles.editIcon,
+    top: 5,
+    marginLeft: 10
   }
 }

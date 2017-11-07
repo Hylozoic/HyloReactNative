@@ -1,16 +1,35 @@
 import React from 'react'
-import { Text, View, TouchableOpacity, ScrollView } from 'react-native'
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  ScrollView
+} from 'react-native'
 import Icon from '../../Icon'
 import StarIcon from '../../StarIcon'
 import Loading from '../../Loading'
-import { MemberHeader } from '../MemberProfile'
+import MemberHeader, { Control } from '../MemberHeader'
+import EntypoIcon from 'react-native-vector-icons/Entypo'
 import styles from './MemberDetails.styles'
-import { isEmpty } from 'lodash/fp'
+import { isEmpty, pick } from 'lodash/fp'
+import header from 'util/header'
 
 export default class MemberDetails extends React.Component {
-  static navigationOptions = () => ({
-    headerTitle: 'About This Member'
-  })
+  static navigationOptions = ({ navigation }) =>
+    header(navigation, {
+      title: 'About This Member',
+      options: {
+        headerBackTitle: null
+      }
+    })
+
+  constructor (props) {
+    super(props)
+    this.state = {
+      editing: this.props.editing,
+      person: props.person
+    }
+  }
 
   componentDidMount () {
     this.props.fetchPerson()
@@ -20,38 +39,102 @@ export default class MemberDetails extends React.Component {
     if (prevProps.id !== this.props.id) {
       this.props.fetchPerson()
     }
+
+    if (prevProps.person !== this.props.person) {
+      this.setState({
+        person: pick(['name', 'location', 'tagline', 'bio'], this.props.person)
+      })
+    }
+  }
+
+  editProfile = () => {
+    this.setState({editing: true})
+  }
+
+  updateSetting = setting => value => {
+    this.setState({
+      person: {
+        ...this.state.person,
+        [setting]: value
+      }
+    })
+  }
+
+  saveChanges = () => {
+    this.props.updateUserSettings(this.state.person)
   }
 
   render () {
-    const { person, goToCommunity } = this.props
+    const { goToCommunity, goToSkills, isMe, person, skills } = this.props
+    const { editing } = this.state
+    const personEdits = this.state.person
 
-    if (!person) return <Loading />
+    if (!personEdits) return <Loading />
 
     return <ScrollView contentContainerStyle={styles.container}>
-      <MemberHeader person={person} />
-      <MemberBio person={person} />
-      <MemberSkills person={person} />
+      <MemberHeader
+        person={personEdits}
+        isMe={isMe}
+        editProfile={this.editProfile}
+        editable={editing}
+        updateSetting={this.updateSetting}
+        saveChanges={this.saveChanges} />
+      <MemberBio person={personEdits}
+        editable={editing}
+        updateSetting={this.updateSetting}
+        saveChanges={this.saveChanges} />
+      <MemberSkills
+        skills={skills}
+        editable={editing}
+        goToSkills={goToSkills} />
       <MemberCommunities person={person} goToCommunity={goToCommunity} />
     </ScrollView>
   }
 }
 
-export function MemberBio ({ person: { bio } }) {
-  if (isEmpty(bio)) return null
+export class MemberBio extends React.Component {
+  focus = () => {
+    this.control && this.control.focus()
+  }
 
-  return <View style={styles.bioContainer}>
-    <Text style={styles.sectionLabel}>About Me</Text>
-    <Text style={styles.bio}>{bio}</Text>
-  </View>
+  render () {
+    const { person: { bio }, editable, updateSetting, saveChanges } = this.props
+    if (isEmpty(bio)) return null
+    return <View style={styles.bioContainer}>
+      <View style={styles.labelWrapper}>
+        <Text style={styles.sectionLabel}>About Me</Text>
+        {editable && <TouchableOpacity onPress={this.focus}>
+          <EntypoIcon name='edit' style={styles.editIcon} />
+        </TouchableOpacity>}
+      </View>
+      <Control
+        ref={c => { this.control = c }}
+        style={styles.bio}
+        value={bio}
+        editable={editable}
+        onChangeText={updateSetting('bio')}
+        onBlur={saveChanges}
+        multiline
+        hideEditIcon />
+    </View>
+  }
 }
 
-export function MemberSkills ({ person: { skills } }) {
+export function MemberSkills ({ skills, editable, goToSkills }) {
   if (isEmpty(skills)) return null
 
   return <View style={styles.skillsContainer}>
-    <Text style={styles.sectionLabel}>My Skills</Text>
-    <View style={styles.skills}>{skills.map(skill =>
-      <Text style={styles.skill} key={skill.id}>{skill.name.toUpperCase()}</Text>)}</View>
+    <View style={styles.labelWrapper}>
+      <Text style={styles.sectionLabel}>My Skills</Text>
+      {editable && <TouchableOpacity onPress={goToSkills}>
+        <EntypoIcon name='edit' style={styles.editIcon} />
+      </TouchableOpacity>}
+    </View>
+    <TouchableOpacity onPress={goToSkills} disabled={!editable}>
+      <View style={styles.skills}>{skills.map(skill =>
+        <Text style={styles.skill} key={skill.id}>{skill.name.toUpperCase()}</Text>)}
+      </View>
+    </TouchableOpacity>
   </View>
 }
 

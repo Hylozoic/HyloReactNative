@@ -10,18 +10,19 @@ describe('MemberDetails', () => {
     const renderer = new ReactShallowRenderer()
     renderer.render(<MemberDetails
       person={{id: 1}}
-      goToCommunity={() => {}} />)
+      goToCommunity={() => {}}
+      skills={['One']} />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
   })
 
-  it("returns null when there's no person", () => {
+  it("returns Loading when there's no person", () => {
     const renderer = new ReactShallowRenderer()
     renderer.render(<MemberDetails />)
     const actual = renderer.getRenderOutput()
 
-    expect(actual).toBeNull
+    expect(actual).toMatchSnapshot()
   })
 })
 
@@ -33,7 +34,8 @@ describe('MemberBio', () => {
 
     const renderer = new ReactShallowRenderer()
     renderer.render(<MemberBio
-      person={person} />)
+      person={person}
+      updateSetting={() => () => {}} />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
@@ -55,17 +57,15 @@ describe('MemberBio', () => {
 
 describe('MemberSkills', () => {
   it('matches the last snapshot', () => {
-    const person = {
-      skills: [
-        {id: 1, name: 'run'},
-        {id: 2, name: 'all'},
-        {id: 3, name: 'day'}
-      ]
-    }
+    const skills = [
+      {id: 1, name: 'run'},
+      {id: 2, name: 'all'},
+      {id: 3, name: 'day'}
+    ]
 
     const renderer = new ReactShallowRenderer()
     renderer.render(<MemberSkills
-      person={person} />)
+      skills={skills} />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
