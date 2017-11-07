@@ -3,6 +3,8 @@ import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import MemberDetails, { MemberBio, MemberSkills, MemberCommunities, CommunityRow } from './MemberDetails'
 
+jest.mock('react-native-device-info')
+
 describe('MemberDetails', () => {
   it('matches the last snapshot', () => {
     const renderer = new ReactShallowRenderer()

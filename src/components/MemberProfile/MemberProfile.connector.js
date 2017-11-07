@@ -1,31 +1,41 @@
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import { get } from 'lodash/fp'
 import { getPerson, fetchPerson } from './MemberProfile.store'
 import makeGoToCommunity from '../../store/actions/makeGoToCommunity'
 import getMe from '../../store/selectors/getMe'
+import updateUserSettings from '../../store/actions/updateUserSettings'
 
 export function mapStateToProps (state, props) {
   const id = get('navigation.state.params.id', props)
   const person = getPerson(state, {id})
   const goToDetails = () => props.navigation.navigate('MemberDetails', {id})
+  const goToEdit = () => props.navigation.navigate('MemberDetails', {id, edit: true})
+  const currentUser = getMe(state, props)
+  const isMe = Number(get('id', currentUser)) === Number(id)
 
   return {
     id,
     person,
-    currentUser: getMe(state, props),
-    goToDetails
+    currentUser,
+    goToDetails,
+    goToEdit,
+    isMe
   }
 }
 
 export function mapDispatchToProps (dispatch, props) {
   return {
-    fetchPerson: id => dispatch(fetchPerson(id)),
-    goToCommunity: makeGoToCommunity(dispatch, props.navigation)
+    goToCommunity: makeGoToCommunity(dispatch, props.navigation),
+    ...bindActionCreators({
+      fetchPerson,
+      updateUserSettings
+    }, dispatch)
   }
 }
 
 export function makeOnPressMessages (currentUser, person, navigation) {
-  if (currentUser.id === person.id) return () => navigation.navigate('ThreadList')
+  if (!person || currentUser.id === person.id) return () => navigation.navigate('ThreadList')
   const { messageThreadId } = person
   if (messageThreadId) return () => navigation.navigate('Thread', {id: messageThreadId})
   return () => navigation.navigate('NewMessage', {participants: [person.id]})

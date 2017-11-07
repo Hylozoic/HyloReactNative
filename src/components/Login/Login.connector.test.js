@@ -24,32 +24,7 @@ describe('mapStateToProps', () => {
     }
     expect(mapStateToProps(state, props).defaultEmail).toBe(email)
   })
-  describe('with email error', () => {
-    it('has emailError', () => {
-      const error = 'email error'
 
-      const state = {
-        session: {
-          loginError: error
-        },
-        pending: {}
-      }
-      expect(mapStateToProps(state, props).emailError).toBe(true)
-    })
-  })
-  describe('with password error', () => {
-    it('has passwordError', () => {
-      const error = 'password error'
-
-      const state = {
-        session: {
-          loginError: error
-        },
-        pending: {}
-      }
-      expect(mapStateToProps(state, props).passwordError).toBe(true)
-    })
-  })
   describe('pending', () => {
     it('is truthy if pending', () => {
       const LOGIN = 'LOGIN'

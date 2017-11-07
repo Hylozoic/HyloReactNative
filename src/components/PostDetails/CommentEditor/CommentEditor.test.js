@@ -35,7 +35,7 @@ describe('save', () => {
     state: {params: {}},
     goBack: jest.fn()
   }
-  const saveChanges = jest.fn()
+  const saveChanges = jest.fn(() => Promise.resolve({}))
   const setCommentEdits = () => {}
   const props = {
     navigation,
@@ -43,17 +43,14 @@ describe('save', () => {
     setCommentEdits
   }
   it('sets disabled to true and calls save changes with content', () => {
-    const theContent = 'the content'
     const instance = ReactTestRenderer.create(<CommentEditor {...props} />).getInstance()
-    instance.editor = {
-      getContentAsync: () => Promise.resolve(theContent)
-    }
+    instance.setState({content: 'hello world'})
     const { save } = navigation.setParams.mock.calls[0][0]
     navigation.setParams.mockClear()
     return save()
     .then(() => {
       expect(navigation.setParams).toHaveBeenCalledWith({disabled: true})
-      expect(saveChanges).toHaveBeenCalledWith(theContent)
+      expect(saveChanges).toHaveBeenCalledWith('hello world')
       expect(navigation.goBack).toHaveBeenCalled()
     })
   })

@@ -1,5 +1,6 @@
 import { connect } from 'react-redux'
 import { loginWithFacebook, loginWithGoogle } from '../Login/actions'
+import { getPending } from '../Login/Login.store'
 
 export function mapStateToProps (state, props) {
   const goToSignupFlow = () => props.navigation.navigate('SignupFlow1')
@@ -7,7 +8,8 @@ export function mapStateToProps (state, props) {
   return {
     goToSignupFlow,
     goToLogin,
-    error: state.session.loginError
+    error: state.session.loginError,
+    pending: getPending(state)
   }
 }
 

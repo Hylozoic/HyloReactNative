@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import { View, Text, TouchableOpacity } from 'react-native'
+import React, { PureComponent } from 'react'
+import { View, Text, TouchableOpacity, Alert } from 'react-native'
 import Avatar from '../../Avatar'
 import Icon from '../../Icon'
 import { rhino30, rhino50, caribbeanGreen } from 'style/colors'
@@ -8,7 +8,7 @@ import PopupMenuButton from '../../PopupMenuButton'
 import { filter, isEmpty } from 'lodash/fp'
 import FlagContent from '../../FlagContent'
 
-export default class PostHeader extends Component {
+export default class PostHeader extends PureComponent {
   state = {
     flaggingVisible: false
   }
@@ -28,10 +28,11 @@ export default class PostHeader extends Component {
       slug,
       showCommunity,
       editPost,
-      deletePost,
       showMember,
       canFlag,
-      goToCommunity
+      goToCommunity,
+      removePost,
+      deletePost
     } = this.props
 
     const { flaggingVisible } = this.state
@@ -60,6 +61,22 @@ export default class PostHeader extends Component {
       }
     }
 
+    const deletePostWithConfirm = deletePost ? () => Alert.alert(
+      'Confirm Delete',
+      'Are you sure you want to delete this post?',
+      [
+        {text: 'Yes', onPress: () => deletePost()},
+        {text: 'Cancel', style: 'cancel'}
+      ]) : null
+
+    const removePostWithConfirm = removePost ? () => Alert.alert(
+      'Confirm Removal',
+      'Are you sure you want to remove this post from this community?',
+      [
+        {text: 'Yes', onPress: () => removePost()},
+        {text: 'Cancel', style: 'cancel'}
+      ]) : null
+
     return <View style={styles.container}>
       <View style={styles.avatarSpacing}>
         <TouchableOpacity onPress={() => showMember(id)}>
@@ -82,7 +99,7 @@ export default class PostHeader extends Component {
       </View>
       <View style={styles.upperRight}>
         {type && <PostLabel type={type} />}
-        <PostMenu {...{editPost, deletePost, flagPost}} />
+        <PostMenu removePost={removePostWithConfirm} deletePost={deletePostWithConfirm} {...{editPost, flagPost}} />
         {flaggingVisible && <FlagContent type='post'
           linkData={linkData}
           onClose={() => this.setState({flaggingVisible: false})} />
@@ -92,14 +109,16 @@ export default class PostHeader extends Component {
   }
 }
 
-export function PostMenu ({deletePost, editPost, flagPost}) {
+export function PostMenu ({deletePost, editPost, flagPost, removePost}) {
   // If the function is defined, than it's a valid action
   const flagLabel = 'Flag This Post'
   const deleteLabel = 'Delete This Post'
+  const removeLabel = 'Remove Post From Community'
 
   const actions = filter(x => x[1], [
     [deleteLabel, deletePost],
     [flagLabel, flagPost],
+    [removeLabel, removePost],
     ['Edit This Post', editPost]
   ])
 
@@ -107,7 +126,8 @@ export function PostMenu ({deletePost, editPost, flagPost}) {
 
   const onSelect = index => actions[index][1]()
 
-  const destructiveButtonIndex = (actions[0][0] === deleteLabel || actions[0][0] === flagLabel) ? 0 : -1
+  const destructiveLabels = [flagLabel, deleteLabel, removeLabel]
+  const destructiveButtonIndex = destructiveLabels.includes(actions[0][0]) ? 0 : -1
 
   return <PopupMenuButton actions={actions.map(x => x[0])}
     hitSlop={{top: 20, bottom: 10, left: 10, right: 15}}
@@ -187,6 +207,7 @@ const labelStyles = {
     paddingBottom: 3,
     paddingLeft: 6,
     paddingRight: 6,
+    marginRight: 4,
     marginTop: 1
   },
   text: {

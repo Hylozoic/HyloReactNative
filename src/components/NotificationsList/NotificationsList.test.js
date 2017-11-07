@@ -3,9 +3,10 @@ import React from 'react'
 import ShallowRenderer from 'react-test-renderer/shallow'
 import TestRenderer from 'react-test-renderer'
 import { simulate } from 'util/testing'
-
 import Loading from '../Loading'
 import NotificationsList, { NotificationRow } from './NotificationsList'
+
+jest.mock('util/platform', () => ({isIOS: true}))
 
 describe('NotificationsList', () => {
   let props = null
@@ -37,10 +38,9 @@ describe('NotificationsList', () => {
   })
 
   it('matches the last snapshot', () => {
-    shallowRenderer.render(<NotificationsList {...props} />)
-    const actual = shallowRenderer.getRenderOutput()
-
-    expect(actual).toMatchSnapshot()
+    const renderer = TestRenderer.create(<NotificationsList {...props} />)
+    renderer.getInstance().setState({ ready: true })
+    expect(renderer.toJSON()).toMatchSnapshot()
   })
 
   it('returns Loading with no notifications when pending is true', () => {
@@ -54,21 +54,24 @@ describe('NotificationsList', () => {
 
   it('returns a message when no notifications are available', () => {
     props.notifications = []
-    shallowRenderer.render(<NotificationsList {...props} />)
-    const actual = shallowRenderer.getRenderOutput()
-    expect(actual.props.children.includes('Nothing')).toBe(true)
+    const renderer = TestRenderer.create(<NotificationsList {...props} />)
+    renderer.getInstance().setState({ ready: true })
+    const hasMessage = renderer.toJSON().children.find(c => c.includes('Nothing new'))
+    expect(hasMessage).not.toBeFalsy()
   })
 
   it('marks the notification read on notification touch', () => {
     const notification = props.notifications[0]
     notification.unread = true
     const root = TestRenderer.create(<NotificationsList {...props} />).root
+    root.instance.setState({ ready: true })
     simulate(root.findAllByType(TouchableOpacity)[0], 'press')
     expect(props.markActivityRead).toHaveBeenCalledWith(notification.activityId)
   })
 
   it('calls notification.onPress on notification touch', () => {
     const root = TestRenderer.create(<NotificationsList {...props} />).root
+    root.instance.setState({ ready: true })
     const notification = root.props.notifications[0]
     simulate(root.findAllByType(TouchableOpacity)[0], 'press')
     expect(notification.onPress).toHaveBeenCalled()
@@ -76,6 +79,7 @@ describe('NotificationsList', () => {
 
   it('calls fetchMore when scrolled to end of list', () => {
     const root = TestRenderer.create(<NotificationsList {...props} />).root
+    root.instance.setState({ ready: true })
     simulate(root.findByType(FlatList), 'endReached')
     expect(props.fetchMore).toHaveBeenCalledWith(props.notifications.length)
   })

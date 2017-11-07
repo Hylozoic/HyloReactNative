@@ -8,9 +8,12 @@ export const MODULE_NAME = 'FeedList'
 export const SET_FILTER = `${MODULE_NAME}/SET_FILTER`
 export const SET_SORT = `${MODULE_NAME}/SET_SORT`
 
+export const defaultFilter = null
+export const defaultSortBy = 'updated'
+
 export const defaultState = {
-  filter: null,
-  sortBy: 'updated'
+  filter: defaultFilter,
+  sortBy: defaultSortBy
 }
 
 export default function reducer (state = defaultState, action) {

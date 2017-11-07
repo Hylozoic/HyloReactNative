@@ -1,4 +1,4 @@
-package com.hyloreactnative;
+package com.hylo.hyloandroid;
 
 import com.facebook.react.ReactActivity;
 import android.content.Intent;

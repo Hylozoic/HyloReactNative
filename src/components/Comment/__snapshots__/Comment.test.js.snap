@@ -4,6 +4,30 @@ exports[`commentMenu renders correctly 1`] = `
 <PopupMenuButton
   actions={
     Array [
+      "Delete this Comment",
+    ]
+  }
+  destructiveButtonIndex={0}
+  hitSlop={
+    Object {
+      "bottom": 10,
+      "left": 10,
+      "right": 15,
+      "top": 20,
+    }
+  }
+  onSelect={[Function]}
+>
+  <Icon
+    name="More"
+  />
+</PopupMenuButton>
+`;
+
+exports[`commentMenu returns removeComment 1`] = `
+<PopupMenuButton
+  actions={
+    Array [
       "Remove this Comment",
     ]
   }
@@ -50,6 +74,7 @@ exports[`renders correctly 1`] = `
       <View>
         <CommentMenu
           deleteComment={[Function]}
+          removeComment={null}
         />
       </View>
     </View>
@@ -79,7 +104,7 @@ exports[`renders correctly 1`] = `
           },
         }
       }
-      value="tick followed tock followed tick followed tock"
+      value="<p>tick followed tock followed tick followed tock</p>"
     />
   </View>
 </View>
@@ -121,6 +146,7 @@ exports[`shows the post title when displayPostTitle is true 1`] = `
       <View>
         <CommentMenu
           deleteComment={null}
+          removeComment={null}
         />
       </View>
     </View>
@@ -150,7 +176,7 @@ exports[`shows the post title when displayPostTitle is true 1`] = `
           },
         }
       }
-      value="tick followed tock followed tick followed tock"
+      value="<p>tick followed tock followed tick followed tock</p>"
     />
   </View>
 </View>

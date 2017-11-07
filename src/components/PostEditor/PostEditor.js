@@ -53,7 +53,6 @@ export default class PostEditor extends React.Component {
 
     return save(postData)
     .catch(e => {
-      alert(e.message)
       this.setState({isSaving: false})
       navigation.setParams({isSaving: false})
     })
