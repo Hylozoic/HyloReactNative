@@ -135,21 +135,13 @@ exports[`MemberDetails matches the last snapshot 1`] = `
     editProfile={[Function]}
     editable={undefined}
     isMe={undefined}
-    person={
-      Object {
-        "id": 1,
-      }
-    }
+    person={Object {}}
     saveChanges={[Function]}
     updateSetting={[Function]}
   />
   <MemberBio
     editable={undefined}
-    person={
-      Object {
-        "id": 1,
-      }
-    }
+    person={Object {}}
     saveChanges={[Function]}
     updateSetting={[Function]}
   />
@@ -173,7 +165,41 @@ exports[`MemberDetails matches the last snapshot 1`] = `
 </ScrollViewMock>
 `;
 
-exports[`MemberDetails returns Loading when there's no person 1`] = `<Loading />`;
+exports[`MemberDetails returns Loading when there's no person 1`] = `
+<ScrollViewMock
+  contentContainerStyle={
+    Object {
+      "backgroundColor": "white",
+      "paddingHorizontal": 16,
+      "paddingTop": 12,
+    }
+  }
+>
+  <MemberHeader
+    editProfile={[Function]}
+    editable={undefined}
+    isMe={undefined}
+    person={Object {}}
+    saveChanges={[Function]}
+    updateSetting={[Function]}
+  />
+  <MemberBio
+    editable={undefined}
+    person={Object {}}
+    saveChanges={[Function]}
+    updateSetting={[Function]}
+  />
+  <MemberSkills
+    editable={undefined}
+    goToSkills={undefined}
+    skills={undefined}
+  />
+  <MemberCommunities
+    goToCommunity={undefined}
+    person={undefined}
+  />
+</ScrollViewMock>
+`;
 
 exports[`MemberSkills matches the last snapshot 1`] = `
 <View>
