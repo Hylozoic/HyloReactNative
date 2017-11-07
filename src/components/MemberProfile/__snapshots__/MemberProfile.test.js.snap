@@ -8,6 +8,7 @@ exports[`EditButton matches the last snapshot when isLoading is false 1`] = `
       name="edit"
       size={12}
     />
+
     <Text
       accessible={true}
       allowFontScaling={true}
