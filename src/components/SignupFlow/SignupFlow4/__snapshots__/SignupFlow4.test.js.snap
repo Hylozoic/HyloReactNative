@@ -26,6 +26,59 @@ exports[`SignupFlow4 matches last snapshot 1`] = `
     <Connect(SkillEditor)
       done={undefined}
       doneLabel="Continue"
+      theme={
+        Object {
+          "containerPadding": Object {
+            "paddingHorizontal": 16,
+          },
+          "continueButton": Object {
+            "backgroundColor": "white",
+            "color": "#0DC39F",
+            "disabledBackgroundColor": "#9ee7d9",
+            "fontSize": 16,
+            "height": 38,
+            "marginLeft": "auto",
+            "width": 142,
+          },
+          "skillCloud": Object {
+            "flexDirection": "row",
+            "flexWrap": "wrap",
+            "justifyContent": "center",
+            "marginBottom": 10,
+            "paddingHorizontal": 16,
+          },
+          "skillControl": Object {
+            "control": Object {
+              "marginTop": 18,
+              "paddingHorizontal": 16,
+            },
+          },
+          "subTitle": Object {
+            "color": "#cff3ec",
+            "fontFamily": "Circular-Book",
+            "fontSize": 14,
+            "marginBottom": 20,
+            "paddingHorizontal": 16,
+          },
+          "title": Object {
+            "color": "white",
+            "fontFamily": "Circular-Bold",
+            "fontSize": 20,
+            "marginBottom": 8,
+            "paddingHorizontal": 16,
+          },
+          "userSkills": Object {
+            "backgroundColor": "#0cb08f",
+            "paddingHorizontal": 16,
+          },
+          "yourSkillsLabel": Object {
+            "color": "#cff3ec",
+            "fontFamily": "Circular-Book",
+            "fontSize": 14,
+            "marginBottom": 10,
+          },
+        }
+      }
     />
   </ScrollViewMock>
 </KeyboardFriendlyView>

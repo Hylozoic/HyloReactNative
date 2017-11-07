@@ -133,7 +133,7 @@ exports[`MemberDetails matches the last snapshot 1`] = `
 >
   <MemberHeader
     editProfile={[Function]}
-    editable={false}
+    editable={undefined}
     isMe={undefined}
     person={
       Object {
@@ -144,7 +144,7 @@ exports[`MemberDetails matches the last snapshot 1`] = `
     updateSetting={[Function]}
   />
   <MemberBio
-    editable={false}
+    editable={undefined}
     person={
       Object {
         "id": 1,
@@ -153,12 +153,8 @@ exports[`MemberDetails matches the last snapshot 1`] = `
     saveChanges={[Function]}
     updateSetting={[Function]}
   />
-  <Button
-    onPress={[Function]}
-    text="edit"
-  />
   <MemberSkills
-    editable={false}
+    editable={undefined}
     goToSkills={undefined}
     person={
       Object {
