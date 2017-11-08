@@ -9,12 +9,14 @@ jest.mock('react-native-device-info')
 jest.mock('TextInput', () => 'TextInput')
 
 describe('MemberDetails', () => {
+  const navigation = {setParams: () => {}}
   it('matches the last snapshot', () => {
     const renderer = new ReactShallowRenderer()
     renderer.render(<MemberDetails
       person={{id: 1}}
       goToCommunity={() => {}}
-      skills={['One']} />)
+      skills={['One']}
+      navigation={navigation} />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
@@ -22,14 +24,14 @@ describe('MemberDetails', () => {
 
   it("returns Loading when there's no person", () => {
     const renderer = new ReactShallowRenderer()
-    renderer.render(<MemberDetails />)
+    renderer.render(<MemberDetails navigation={navigation} />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
   })
 
   it('has navigation options', () =>
-    expect(MemberDetails.navigationOptions({navigation: {state: {}}})).toMatchSnapshot())
+    expect(MemberDetails.navigationOptions({navigation: {state: {params: {}}}})).toMatchSnapshot())
 
   describe('componentDidMount', () => {
     it('sets the state when person changes', () => {
@@ -48,7 +50,8 @@ describe('MemberDetails', () => {
           bio: 'stuff',
           omitable: 'should be omitted'
         },
-        fetchPerson: () => {}
+        fetchPerson: () => {},
+        navigation
       }
 
       const instance = ReactTestRenderer.create(<MemberDetails {...props} />).getInstance()
@@ -62,7 +65,8 @@ describe('MemberDetails', () => {
     it('sets state.editing to true', () => {
       const props = {
         person: {},
-        fetchPerson: () => {}
+        fetchPerson: () => {},
+        navigation
       }
 
       const instance = ReactTestRenderer.create(<MemberDetails {...props} />).getInstance()
@@ -75,7 +79,8 @@ describe('MemberDetails', () => {
     it('updates state.person', () => {
       const props = {
         person: {},
-        fetchPerson: () => {}
+        fetchPerson: () => {},
+        navigation
       }
 
       const instance = ReactTestRenderer.create(<MemberDetails {...props} />).getInstance()
@@ -89,7 +94,8 @@ describe('MemberDetails', () => {
       const props = {
         person: {},
         fetchPerson: () => {},
-        updateUserSettings: jest.fn()
+        updateUserSettings: jest.fn(),
+        navigation
       }
 
       const instance = ReactTestRenderer.create(<MemberDetails {...props} />).getInstance()
