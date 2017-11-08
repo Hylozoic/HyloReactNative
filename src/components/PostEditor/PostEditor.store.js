@@ -125,8 +125,7 @@ export function setDetails (details) {
   }
 }
 
-export default function reducer (state = {},
-  action) {
+export default function reducer (state = {}, action) {
   switch (action.type) {
     case SET_DETAILS:
       return {...state, details: action.payload}

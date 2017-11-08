@@ -8,10 +8,17 @@ function getPostId (state, props) {
 }
 
 export function mapStateToProps (state, props) {
+  const communityId = get('navigation.state.params.communityId', props)
+  const post = getPost(state, {id: getPostId(state, props)})
   return {
-    communityId: get('navigation.state.params.communityId', props),
     details: state.PostEditor.details,
-    post: getPost(state, {id: getPostId(state, props)})
+    post,
+    communityIds: post
+      ? post.communities.toRefArray().map(x => x.id)
+      : [communityId],
+    imageUrls: post
+      ? post.images().toRefArray().map(x => x.url)
+      : []
   }
 }
 

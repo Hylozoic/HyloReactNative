@@ -31,16 +31,12 @@ export default class PostEditor extends React.Component {
 
   constructor (props) {
     super(props)
-    const { post, communityId } = props
+    const { post, communityIds, imageUrls } = props
     this.state = {
       title: get('title', post) || '',
       type: 'discussion',
-      communityIds: post
-        ? post.communities.toRefArray().map(x => x.id)
-        : [communityId],
-      imageUrls: post
-        ? post.images().toRefArray().map(x => x.url)
-        : []
+      communityIds,
+      imageUrls
     }
   }
 

@@ -8,20 +8,9 @@ import { createMockStore } from 'util/testing'
 
 jest.mock('react-native-device-info')
 
-let mockPost, mockImages
-
-beforeEach(() => {
-  mockImages = []
-  mockPost = {
-    details: 'myDetails',
-    images: () => ({
-      toRefArray: () => mockImages
-    }),
-    communities: {
-      toRefArray: () => [{id: 1}]
-    }
-  }
-})
+const mockPost = {
+  details: 'myDetails'
+}
 
 describe('PostEditor', () => {
   it('renders a new editor correctly', () => {
@@ -37,12 +26,13 @@ describe('PostEditor', () => {
   })
 
   it('renders with a post', () => {
-    mockImages = [
-      {url: 'http://foo.com/foo.png'},
-      {url: 'http://baz.com/baz.png'}
-    ]
     const renderer = new ReactShallowRenderer()
-    renderer.render(<PostEditor post={mockPost} />)
+    renderer.render(<PostEditor
+      post={mockPost}
+      imageUrls={[
+        'http://foo.com/foo.png',
+        'http://baz.com/baz.png'
+      ]} />)
     const actual = renderer.getRenderOutput()
     expect(actual).toMatchSnapshot()
   })
@@ -95,6 +85,7 @@ describe('PostEditor', () => {
           editDetails={jest.fn()}
           setDetails={jest.fn()}
           save={save}
+          communityIds={[1]}
           navigation={navigation}
           post={mockPost} />
       </Provider>)
@@ -122,6 +113,7 @@ describe('PostEditor', () => {
           editDetails={jest.fn()}
           setDetails={jest.fn()}
           save={save}
+          communityIds={[1]}
           navigation={navigation}
           post={mockPost} />
       </Provider>)
@@ -134,9 +126,6 @@ describe('PostEditor', () => {
   })
 
   it('has image methods', () => {
-    mockImages = [
-      {url: 'http://foo.com/foo.png'}
-    ]
     const navigation = {setParams: jest.fn()}
     const renderer = TestRenderer.create(
       <Provider store={createMockStore()}>
@@ -144,6 +133,7 @@ describe('PostEditor', () => {
           editDetails={jest.fn()}
           setDetails={jest.fn()}
           navigation={navigation}
+          imageUrls={['http://foo.com/foo.png']}
           post={mockPost} />
       </Provider>)
 

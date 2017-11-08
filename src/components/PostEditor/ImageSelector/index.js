@@ -15,10 +15,6 @@ export default class ImageSelector extends React.Component {
       destructiveButtonIndex={0}
       onSelect={menuIndex => this.props.onRemove(imageUrl)}>
       <Image style={styles.addImageButtonImage} source={{uri: imageUrl}} />
-      {this.renderPickerButton({
-        style: styles.hiddenImagePicker,
-        ref: x => { this.picker = x }
-      })}
     </PopupMenuButton>
   }
 

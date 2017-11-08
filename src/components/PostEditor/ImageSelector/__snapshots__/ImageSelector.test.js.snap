@@ -18,30 +18,6 @@ exports[`renders with images 1`] = `
         }
       }
     />
-    <View
-      accessibilityComponentType={undefined}
-      accessibilityLabel={undefined}
-      accessibilityTraits={undefined}
-      accessible={true}
-      collapsable={undefined}
-      hitSlop={undefined}
-      isTVSelectable={true}
-      nativeID={undefined}
-      onLayout={undefined}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      testID={undefined}
-      tvParallaxProperties={undefined}
-    >
-      <Icon
-        color={undefined}
-        name="AddImage"
-      />
-    </View>
   </PopupMenuButtonMock>
   <PopupMenuButtonMock
     actions={
@@ -59,30 +35,6 @@ exports[`renders with images 1`] = `
         }
       }
     />
-    <View
-      accessibilityComponentType={undefined}
-      accessibilityLabel={undefined}
-      accessibilityTraits={undefined}
-      accessible={true}
-      collapsable={undefined}
-      hitSlop={undefined}
-      isTVSelectable={true}
-      nativeID={undefined}
-      onLayout={undefined}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      testID={undefined}
-      tvParallaxProperties={undefined}
-    >
-      <Icon
-        color={undefined}
-        name="AddImage"
-      />
-    </View>
   </PopupMenuButtonMock>
   <PopupMenuButtonMock
     actions={
@@ -100,30 +52,6 @@ exports[`renders with images 1`] = `
         }
       }
     />
-    <View
-      accessibilityComponentType={undefined}
-      accessibilityLabel={undefined}
-      accessibilityTraits={undefined}
-      accessible={true}
-      collapsable={undefined}
-      hitSlop={undefined}
-      isTVSelectable={true}
-      nativeID={undefined}
-      onLayout={undefined}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      testID={undefined}
-      tvParallaxProperties={undefined}
-    >
-      <Icon
-        color={undefined}
-        name="AddImage"
-      />
-    </View>
   </PopupMenuButtonMock>
   <View
     accessibilityComponentType={undefined}

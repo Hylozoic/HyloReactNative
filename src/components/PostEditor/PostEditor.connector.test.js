@@ -21,8 +21,8 @@ const state = {
 }
 
 describe('PostEditor mapStateToProps', () => {
-  it('returns communityId', () => {
-    expect(mapStateToProps(state, props).communityId).toBe(communityId)
+  it('returns communityIds', () => {
+    expect(mapStateToProps(state, props).communityIds).toEqual([communityId])
   })
 
   it('returns details', () => {
