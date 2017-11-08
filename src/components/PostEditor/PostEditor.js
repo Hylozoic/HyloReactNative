@@ -113,11 +113,12 @@ export default class PostEditor extends React.Component {
             <Details details={details} placeholder={detailsPlaceholder} />
           </TouchableOpacity>
 
-          <SectionLabel>Image</SectionLabel>
+          <SectionLabel>Images</SectionLabel>
           <ImageSelector
             onAdd={this.addImage}
             onRemove={this.removeImage}
             imageUrls={imageUrls} />
+
         </View>
       </ScrollView>
     </KeyboardFriendlyView>
