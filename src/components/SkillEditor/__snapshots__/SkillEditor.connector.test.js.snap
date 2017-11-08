@@ -34,10 +34,6 @@ Object {
 exports[`mergeProps merges the props 1`] = `
 Object {
   "loadSkills": [Function],
-  "navigation": Object {
-    "navigate": [Function],
-  },
-  "saveAndNext": [Function],
   "setUserSkills": [Function],
   "storedSkills": Array [
     "a",
@@ -45,12 +41,4 @@ Object {
     "c",
   ],
 }
-`;
-
-exports[`mergeProps merges the props 2`] = `
-Array [
-  Array [
-    "SignupFlow5",
-  ],
-]
 `;

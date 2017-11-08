@@ -5,7 +5,7 @@ import {
 } from '../../actions/updateUserSettings'
 import {
   ADD_SKILL, REMOVE_SKILL
-} from '../../../components/SignupFlow/SignupFlow.store'
+} from '../../../components/SkillEditor/SkillEditor.store'
 import {
   CREATE_COMMENT
 } from '../../../components/PostDetails/CommentEditor/CommentEditor.store'

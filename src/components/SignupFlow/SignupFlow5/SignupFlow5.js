@@ -12,7 +12,7 @@ import KeyboardFriendlyView from '../../KeyboardFriendlyView'
 import SettingControl from '../../SettingControl'
 import Button from '../../Button'
 import styles from './SignupFlow5.styles'
-import { SkillCloud } from '../SignupFlow4/SignupFlow4'
+import { SkillCloud } from '../../SkillEditor/SkillEditor'
 import { keyboardAvoidingViewProps as kavProps } from 'util/viewHelpers'
 import { isEmpty, flow, values, filter, map } from 'lodash/fp'
 

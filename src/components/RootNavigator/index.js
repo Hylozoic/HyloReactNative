@@ -22,6 +22,7 @@ import NewMessage from '../NewMessage'
 import Thread from '../Thread'
 import ThreadList from '../ThreadList'
 import MemberDetails from '../MemberProfile/MemberDetails'
+import MemberSkillEditor from '../MemberProfile/MemberSkillEditor'
 import UserSettings from '../UserSettings'
 import SignupFlow1 from '../SignupFlow/SignupFlow1'
 import SignupFlow2 from '../SignupFlow/SignupFlow2'
@@ -51,6 +52,7 @@ export const screensInTabs = {
   PostDetails: {screen: PostDetails, path: 'post/:id'},
   MemberProfile: {screen: MemberProfile, path: 'people/:id'},
   MemberDetails: {screen: MemberDetails, path: 'people/:id/details'},
+  MemberSkillEditor: {screen: MemberSkillEditor, path: 'people/:id/skills'},
   CommentEditor: {screen: CommentEditor, path: 'comment/:postId/new'},
   NewMessage: {screen: NewMessage}
 }
