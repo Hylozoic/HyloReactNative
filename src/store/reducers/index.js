@@ -14,6 +14,7 @@ import NewMessage from '../../components/NewMessage/NewMessage.store'
 import PeopleTyping from '../../components/PeopleTyping/PeopleTyping.store'
 import PostEditor from '../../components/PostEditor/PostEditor.store'
 import Search from '../../components/Editor/Search/Search.store'
+import SkillEditor from '../../components/SkillEditor/SkillEditor.store'
 import SignupFlow from '../../components/SignupFlow/SignupFlow.store'
 import SocketListener from '../../components/SocketListener/SocketListener.store'
 import TabBar from '../../components/RootNavigator/TabBar/TabBar.store'
@@ -34,6 +35,7 @@ export const combinedReducers = combineReducers({
   PostEditor,
   Search,
   SignupFlow,
+  SkillEditor,
   SocketListener,
   TabBar
 })

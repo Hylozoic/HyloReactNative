@@ -17,7 +17,7 @@ Object {
   "name": undefined,
   "password": undefined,
   "showPasswordField": false,
-  "skills": undefined,
+  "skills": Array [],
 }
 `;
 

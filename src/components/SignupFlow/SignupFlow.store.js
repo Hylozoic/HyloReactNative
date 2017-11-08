@@ -7,12 +7,6 @@ from '../../store/actions/updateUserSettings'
 export const MODULE_NAME = 'SignupFlow'
 export const UPDATE_LOCAL_USER_SETTINGS = `${MODULE_NAME}/UPDATE_LOCAL_USER_SETTINGS`
 export const SIGNUP = `${MODULE_NAME}/SIGNUP`
-export const SET_SKILL = `${MODULE_NAME}/SET_SKILL`
-export const ADD_SKILL = `${MODULE_NAME}/ADD_SKILL`
-export const ADD_SKILL_PENDING = `${ADD_SKILL}_PENDING`
-export const REMOVE_SKILL = `${MODULE_NAME}/REMOVE_SKILL`
-export const REMOVE_SKILL_PENDING = `${REMOVE_SKILL}_PENDING`
-export const SET_USER_SKILLS = `${MODULE_NAME}/SET_USER_SKILLS`
 export const SET_SIGNUP_STEP1_COMPLETE = `${MODULE_NAME}/SET_SIGNUP_STEP1_COMPLETE`
 
 export const defaultUserSettings = {
@@ -27,8 +21,6 @@ export const defaultUserSettings = {
 
 export const defaultState = {
   userSettings: defaultUserSettings,
-  skill: '',
-  userSkills: [],
   errors: {},
   signupStep1Complete: false
 }
@@ -69,27 +61,6 @@ export default function reducer (state = defaultState, action) {
           ...payload
         }
       }
-    case SET_SKILL:
-      return {
-        ...state,
-        skill: payload
-      }
-    case ADD_SKILL_PENDING:
-      return {
-        ...state,
-        skill: '',
-        userSkills: state.userSkills.concat([meta.name])
-      }
-    case REMOVE_SKILL_PENDING:
-      return {
-        ...state,
-        userSkills: state.userSkills.filter(s => s !== meta.name)
-      }
-    case SET_USER_SKILLS:
-      return {
-        ...state,
-        userSkills: payload
-      }
     case SET_SIGNUP_STEP1_COMPLETE:
       return {
         ...state,
@@ -117,61 +88,6 @@ export function updateLocalUserSettings (settings) {
   }
 }
 
-export function setSkill (skill) {
-  return {
-    type: SET_SKILL,
-    payload: skill
-  }
-}
-
-export function addSkill (name) {
-  return {
-    type: ADD_SKILL,
-    graphql: {
-      query: `mutation ($name: String) {
-        addSkill(name: $name) {
-          id,
-          name
-        }
-      }`,
-      variables: {
-        name
-      }
-    },
-    meta: {
-      optimistic: true,
-      name
-    }
-  }
-}
-
-export function removeSkill (name) {
-  return {
-    type: REMOVE_SKILL,
-    graphql: {
-      query: `mutation ($name: String) {
-        removeSkill(name: $name) {
-          success
-        }
-      }`,
-      variables: {
-        name
-      }
-    },
-    meta: {
-      optimistic: true,
-      name
-    }
-  }
-}
-
-export function setUserSkills (userSkills) {
-  return {
-    type: SET_USER_SKILLS,
-    payload: userSkills
-  }
-}
-
 export function setSignupStep1Complete (payload) {
   return {
     type: SET_SIGNUP_STEP1_COMPLETE,
@@ -179,24 +95,8 @@ export function setSignupStep1Complete (payload) {
   }
 }
 
-export const getSkillsFromOrm = ormCreateSelector(
-  orm,
-  state => state.orm,
-  ({ Me }) => {
-    const me = Me.first()
-    return me ? me.skills.toModelArray() : []
-  })
-
 export function getUserSettings (state) {
   return state[MODULE_NAME].userSettings
-}
-
-export function getSkill (state) {
-  return state[MODULE_NAME].skill
-}
-
-export function getUserSkills (state) {
-  return state[MODULE_NAME].userSkills
 }
 
 export function getSignupErrors (state) {

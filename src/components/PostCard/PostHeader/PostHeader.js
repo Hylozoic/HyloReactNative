@@ -207,6 +207,7 @@ const labelStyles = {
     paddingBottom: 3,
     paddingLeft: 6,
     paddingRight: 6,
+    marginRight: 4,
     marginTop: 1
   },
   text: {

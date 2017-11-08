@@ -3,7 +3,7 @@
  */
 import React from 'react'
 import { StyleSheet, Text, TouchableOpacity } from 'react-native'
-
+import { isIOS } from 'util/platform'
 import { rhino60, rhino20 } from 'style/colors'
 
 export class HeaderButton extends React.Component {
@@ -75,13 +75,14 @@ const headerClose = goBack => <HeaderButton onPress={() => goBack()} text='Close
 // This can all be placed in the connector and passed via mapDispatchToProps.
 // Of course, if you need even more customisation than this, don't use the
 // helper (or override parts of it using setParams in the component).
-export default function header ({ goBack, state }, { left, right, title } = {}) {
+export default function header ({ goBack, state }, { left, right, title, options } = {}) {
   const headerOptions = {
     ...state.params,
     headerStyle: styles.header,
     headerTintColor: rhino60,
     headerTitle: title || state.params.title,
-    headerTitleStyle: styles.title
+    headerTitleStyle: styles.title,
+    ...options
   }
   if (left) {
     headerOptions.headerLeft = left === 'close' ? headerClose(goBack) : <HeaderButton {...left} />
@@ -96,6 +97,7 @@ const styles = StyleSheet.create({
   button: {
     fontFamily: 'Circular-Book',
     fontSize: 15,
+    paddingTop: 1,
     color: rhino60
   },
   disabled: {

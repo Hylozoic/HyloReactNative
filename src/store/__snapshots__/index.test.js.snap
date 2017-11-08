@@ -28,7 +28,6 @@ Object {
   "SignupFlow": Object {
     "errors": Object {},
     "signupStep1Complete": false,
-    "skill": "",
     "userSettings": Object {
       "avatarUrl": "",
       "confirmPassword": "",
@@ -38,6 +37,9 @@ Object {
       "password": "",
       "settings": Object {},
     },
+  },
+  "SkillEditor": Object {
+    "skill": "",
     "userSkills": Array [],
   },
   "SocketListener": Object {},

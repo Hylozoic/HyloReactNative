@@ -23,92 +23,63 @@ exports[`SignupFlow4 matches last snapshot 1`] = `
   keyboardVerticalOffset={64}
 >
   <ScrollViewMock>
-    <View>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        disabled={false}
-        ellipsizeMode="tail"
-      >
-        Share your unique super powers!
-      </Text>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        disabled={false}
-        ellipsizeMode="tail"
-      >
-        What skills are you known for? The more skills you add, the more relevant the content. Its like magic.
-      </Text>
-    </View>
-    <SettingControl
-      label="How can you help?"
-      onChange={[Function]}
-      value="Pop"
-    />
-    <SkillCloud
-      onPress={[Function]}
-      onPressOther={[Function]}
-      skills={
-        Array [
-          "One",
-          "Two",
-        ]
-      }
-    />
-    <View>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        disabled={false}
-        ellipsizeMode="tail"
-      >
-        Your Skills
-      </Text>
-      <SkillCloud
-        onPress={[Function]}
-        skills={
-          Array [
-            "Snap",
-            "Crackle",
-          ]
+    <Connect(SkillEditor)
+      done={undefined}
+      doneLabel="Continue"
+      theme={
+        Object {
+          "containerPadding": Object {
+            "paddingHorizontal": 16,
+          },
+          "continueButton": Object {
+            "backgroundColor": "white",
+            "color": "#0DC39F",
+            "disabledBackgroundColor": "#9ee7d9",
+            "fontSize": 16,
+            "height": 38,
+            "marginLeft": "auto",
+            "width": 142,
+          },
+          "skillCloud": Object {
+            "flexDirection": "row",
+            "flexWrap": "wrap",
+            "justifyContent": "center",
+            "marginBottom": 10,
+            "paddingHorizontal": 16,
+          },
+          "skillControl": Object {
+            "control": Object {
+              "marginTop": 18,
+              "paddingHorizontal": 16,
+            },
+          },
+          "subTitle": Object {
+            "color": "#cff3ec",
+            "fontFamily": "Circular-Book",
+            "fontSize": 14,
+            "marginBottom": 20,
+            "paddingHorizontal": 16,
+          },
+          "title": Object {
+            "color": "white",
+            "fontFamily": "Circular-Bold",
+            "fontSize": 20,
+            "marginBottom": 8,
+            "paddingHorizontal": 16,
+          },
+          "userSkills": Object {
+            "backgroundColor": "#0cb08f",
+            "paddingHorizontal": 16,
+          },
+          "yourSkillsLabel": Object {
+            "color": "#cff3ec",
+            "fontFamily": "Circular-Book",
+            "fontSize": 14,
+            "marginBottom": 10,
+          },
         }
-      />
-    </View>
-    <Button
-      onPress={[Function]}
-      text="Add Skill"
+      }
     />
   </ScrollViewMock>
 </KeyboardFriendlyView>
-`;
-
-exports[`SkillCloud matches last snapshot 1`] = `
-<View>
-  <SkillPill
-    onPress={[Function]}
-    skill="Snap"
-  />
-  <SkillPill
-    onPress={[Function]}
-    skill="Crackle"
-  />
-</View>
-`;
-
-exports[`SkillPill matches last snapshot 1`] = `
-<TouchableOpacity
-  activeOpacity={0.2}
-  focusedOpacity={0.7}
-  onPress={[Function]}
->
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    disabled={false}
-    ellipsizeMode="tail"
-  >
-    SNAP
-  </Text>
-</TouchableOpacity>
 `;

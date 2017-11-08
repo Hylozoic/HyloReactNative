@@ -4,6 +4,8 @@ import ReactShallowRenderer from 'react-test-renderer/shallow'
 import ReactTestRenderer from 'react-test-renderer'
 import { HeaderButton } from './header'
 
+jest.mock('util/platform', () => ({isIOS: true}))
+
 describe('HeaderButton', () => {
   const defaultProps = {
     text: 'Press Me!',

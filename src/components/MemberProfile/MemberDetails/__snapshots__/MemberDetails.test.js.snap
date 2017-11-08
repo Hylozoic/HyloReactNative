@@ -63,22 +63,24 @@ exports[`CommunityRow matches the last snapshot 1`] = `
 
 exports[`MemberBio matches the last snapshot 1`] = `
 <View>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    disabled={false}
-    ellipsizeMode="tail"
-  >
-    About Me
-  </Text>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    disabled={false}
-    ellipsizeMode="tail"
-  >
-    I live I die!
-  </Text>
+  <View>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+    >
+      About Me
+    </Text>
+  </View>
+  <Control
+    editable={undefined}
+    hideEditIcon={true}
+    multiline={true}
+    onBlur={undefined}
+    onChangeText={[Function]}
+    value="I live I die!"
+  />
 </View>
 `;
 
@@ -119,6 +121,24 @@ exports[`MemberCommunities matches the last snapshot 1`] = `
 </View>
 `;
 
+exports[`MemberDetails has navigation options 1`] = `
+Object {
+  "headerBackTitle": null,
+  "headerStyle": Object {
+    "backgroundColor": "white",
+    "paddingHorizontal": 10,
+  },
+  "headerTintColor": "#808c9b",
+  "headerTitle": "About This Member",
+  "headerTitleStyle": Object {
+    "color": "black",
+    "fontFamily": "Circular-Bold",
+    "fontSize": 17,
+    "marginLeft": 15,
+  },
+}
+`;
+
 exports[`MemberDetails matches the last snapshot 1`] = `
 <ScrollViewMock
   contentContainerStyle={
@@ -130,24 +150,26 @@ exports[`MemberDetails matches the last snapshot 1`] = `
   }
 >
   <MemberHeader
-    person={
-      Object {
-        "id": 1,
-      }
-    }
+    editProfile={[Function]}
+    editable={undefined}
+    isMe={undefined}
+    person={Object {}}
+    saveChanges={[Function]}
+    updateSetting={[Function]}
   />
   <MemberBio
-    person={
-      Object {
-        "id": 1,
-      }
-    }
+    editable={undefined}
+    person={Object {}}
+    saveChanges={[Function]}
+    updateSetting={[Function]}
   />
   <MemberSkills
-    person={
-      Object {
-        "id": 1,
-      }
+    editable={undefined}
+    goToSkills={undefined}
+    skills={
+      Array [
+        "One",
+      ]
     }
   />
   <MemberCommunities
@@ -161,16 +183,44 @@ exports[`MemberDetails matches the last snapshot 1`] = `
 </ScrollViewMock>
 `;
 
+exports[`MemberDetails returns Loading when there's no person 1`] = `
+<ScrollViewMock
+  contentContainerStyle={
+    Object {
+      "backgroundColor": "white",
+      "paddingHorizontal": 16,
+      "paddingTop": 12,
+    }
+  }
+>
+  <MemberHeader
+    editProfile={[Function]}
+    editable={undefined}
+    isMe={undefined}
+    person={Object {}}
+    saveChanges={[Function]}
+    updateSetting={[Function]}
+  />
+  <MemberBio
+    editable={undefined}
+    person={Object {}}
+    saveChanges={[Function]}
+    updateSetting={[Function]}
+  />
+  <MemberSkills
+    editable={undefined}
+    goToSkills={undefined}
+    skills={undefined}
+  />
+  <MemberCommunities
+    goToCommunity={undefined}
+    person={undefined}
+  />
+</ScrollViewMock>
+`;
+
 exports[`MemberSkills matches the last snapshot 1`] = `
 <View>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    disabled={false}
-    ellipsizeMode="tail"
-  >
-    My Skills
-  </Text>
   <View>
     <Text
       accessible={true}
@@ -178,24 +228,41 @@ exports[`MemberSkills matches the last snapshot 1`] = `
       disabled={false}
       ellipsizeMode="tail"
     >
-      RUN
-    </Text>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      disabled={false}
-      ellipsizeMode="tail"
-    >
-      ALL
-    </Text>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      disabled={false}
-      ellipsizeMode="tail"
-    >
-      DAY
+      My Skills
     </Text>
   </View>
+  <TouchableOpacity
+    activeOpacity={0.2}
+    disabled={true}
+    focusedOpacity={0.7}
+    onPress={undefined}
+  >
+    <View>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        disabled={false}
+        ellipsizeMode="tail"
+      >
+        RUN
+      </Text>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        disabled={false}
+        ellipsizeMode="tail"
+      >
+        ALL
+      </Text>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        disabled={false}
+        ellipsizeMode="tail"
+      >
+        DAY
+      </Text>
+    </View>
+  </TouchableOpacity>
 </View>
 `;

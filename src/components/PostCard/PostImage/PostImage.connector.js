@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import getPost from '../../../store/selectors/getPost'
 
 export function mapStateToProps (state, props) {
-  const post = getPost(state, {id: props.postId, unfiltered: true})
+  const post = getPost(state, {id: props.postId})
   if (!post) return {}
 
   const image = post.attachments

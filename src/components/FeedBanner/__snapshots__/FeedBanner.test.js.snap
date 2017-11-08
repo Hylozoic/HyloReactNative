@@ -53,28 +53,10 @@ exports[`FeedBanner has a topic subscribe toggle button 1`] = `
       testID={undefined}
       tvParallaxProperties={undefined}
     >
-      <Text
-        accessible={true}
-        allowFontScaling={false}
-        disabled={false}
-        ellipsizeMode="tail"
-        style={
-          Array [
-            Object {
-              "color": undefined,
-              "fontSize": 12,
-            },
-            undefined,
-            Object {
-              "fontFamily": "hylo-evo-icons",
-              "fontStyle": "normal",
-              "fontWeight": "normal",
-            },
-          ]
-        }
-      >
-        
-      </Text>
+      <Icon
+        color={undefined}
+        name="Star"
+      />
     </View>
   </View>
 </View>
