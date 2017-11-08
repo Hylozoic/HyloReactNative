@@ -1,4 +1,4 @@
-package com.hyloreactnative;
+package com.hylo.hyloandroid;
 
 import android.app.Application;
 import android.util.Log;

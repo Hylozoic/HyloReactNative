@@ -1,0 +1,83 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Control matches the last snapshot 1`] = `
+<View>
+  <TextInput
+    editable={true}
+    multiline={true}
+    onBlur={[Function]}
+    onChangeText={undefined}
+    value="a"
+  />
+  <TouchableOpacity
+    activeOpacity={0.2}
+    focusedOpacity={0.7}
+    onPress={[Function]}
+  >
+    <Icon
+      allowFontScaling={false}
+      name="edit"
+      size={12}
+    />
+  </TouchableOpacity>
+</View>
+`;
+
+exports[`MemberHeader matches the last snapshot 1`] = `
+<View>
+  <View>
+    <Control
+      editable={undefined}
+      onBlur={undefined}
+      onChangeText={[Function]}
+      value="Jonas"
+    />
+    <View>
+      <TouchableOpacity
+        activeOpacity={0.2}
+        focusedOpacity={0.7}
+        onPress={undefined}
+      >
+        <Icon
+          name="Messages"
+        />
+      </TouchableOpacity>
+      <MemberMenu
+        editProfile={undefined}
+        flagMember={[Function]}
+        isMe={undefined}
+      />
+    </View>
+  </View>
+  <Control
+    editable={undefined}
+    onBlur={undefined}
+    onChangeText={[Function]}
+    value="whale"
+  />
+  <Control
+    editable={undefined}
+    onBlur={undefined}
+    onChangeText={[Function]}
+    value="fingers crossed"
+  />
+</View>
+`;
+
+exports[`MemberMenu returns a popupmenu when flagging allowed 1`] = `
+<PopupMenuButton
+  actions={
+    Array [
+      "Flag This Member",
+    ]
+  }
+  destructiveButtonIndex={0}
+  onSelect={[Function]}
+>
+  <Icon
+    name="More"
+  />
+</PopupMenuButton>
+`;
+
+exports[`MemberMenu returns null when flagging not allowed 1`] = `null`;

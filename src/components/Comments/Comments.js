@@ -28,7 +28,7 @@ export default class Comments extends React.Component {
 
     const listHeaderComponent = <View>
       {header}
-      {pending && <Loading />}
+      {pending && <Loading style={styles.loading} />}
       <ShowMore commentsLength={comments.length}
         total={total}
         hasMore={hasMore}

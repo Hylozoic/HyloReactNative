@@ -43,6 +43,7 @@ exports[`renders correctly 1`] = `
         },
       }
     }
+    onChange={[Function]}
     placeholder="Add a comment?"
   />
 </KeyboardAvoidingView>
