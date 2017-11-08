@@ -90,11 +90,12 @@ export default class ImagePicker extends Component {
         : <Icon name='AddImage' style={[styles.icon, iconStyle]} />
     }
 
-    return <View style={style}>
-      <TouchableOpacity onPress={() => !pending && this.showPicker()} disabled={disabled}>
-        {children}
-      </TouchableOpacity>
-    </View>
+    return <TouchableOpacity
+      style={style}
+      onPress={() => !pending && this.showPicker()}
+      disabled={disabled}>
+      {children}
+    </TouchableOpacity>
   }
 }
 

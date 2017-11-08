@@ -10,11 +10,12 @@ import {
 import PropTypes from 'prop-types'
 import styles from './PostEditor.styles'
 import Loading from '../Loading'
-import { get } from 'lodash/fp'
 import striptags from 'striptags'
+import { get, uniq } from 'lodash/fp'
 import { keyboardAvoidingViewProps as kavProps } from 'util/viewHelpers'
 import { decode } from 'ent'
 import KeyboardFriendlyView from '../KeyboardFriendlyView'
+import ImageSelector from './ImageSelector'
 
 export default class PostEditor extends React.Component {
   static contextTypes = {navigate: PropTypes.func}
@@ -30,25 +31,24 @@ export default class PostEditor extends React.Component {
 
   constructor (props) {
     super(props)
-    const { post, communityId } = props
+    const { post, communityIds, imageUrls } = props
     this.state = {
       title: get('title', post) || '',
       type: 'discussion',
-      communityIds: post
-        ? post.communities.toRefArray().map(x => x.id)
-        : [communityId],
-      imageUrls: []
+      communityIds,
+      imageUrls
     }
   }
 
-  saveEditor = () => {
+  save = () => {
     const { navigation, save, details } = this.props
-    const { title, type, communityIds } = this.state
+    const { title, type, communityIds, imageUrls } = this.state
     const postData = {
       title,
       type,
       details: details,
-      communities: communityIds.map(id => ({id}))
+      communities: communityIds.map(id => ({id})),
+      imageUrls
     }
 
     this.setState({isSaving: true})
@@ -67,13 +67,25 @@ export default class PostEditor extends React.Component {
 
     navigation.setParams({
       headerTitle: post ? 'Edit Post' : 'New Post',
-      save: this.saveEditor
+      save: this.save
+    })
+  }
+
+  addImage = ({ local, remote }) => {
+    this.setState({
+      imageUrls: uniq(this.state.imageUrls.concat(remote))
+    })
+  }
+
+  removeImage = url => {
+    this.setState({
+      imageUrls: this.state.imageUrls.filter(u => u !== url)
     })
   }
 
   render () {
     const { details, editDetails, postId } = this.props
-    const { title, type, isSaving } = this.state
+    const { title, type, imageUrls, isSaving } = this.state
 
     if (postId && !details) return <Loading />
 
@@ -100,6 +112,12 @@ export default class PostEditor extends React.Component {
             onPress={() => !isSaving && editDetails()}>
             <Details details={details} placeholder={detailsPlaceholder} />
           </TouchableOpacity>
+
+          <SectionLabel>Image</SectionLabel>
+          <ImageSelector
+            onAdd={this.addImage}
+            onRemove={this.removeImage}
+            imageUrls={imageUrls} />
         </View>
       </ScrollView>
     </KeyboardFriendlyView>

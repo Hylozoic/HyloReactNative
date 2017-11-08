@@ -1,0 +1,110 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders with images 1`] = `
+<View>
+  <PopupMenuButtonMock
+    actions={
+      Array [
+        "Remove image",
+      ]
+    }
+    destructiveButtonIndex={0}
+    onSelect={[Function]}
+  >
+    <Image
+      source={
+        Object {
+          "uri": "http://foo.com/foo.png",
+        }
+      }
+    />
+  </PopupMenuButtonMock>
+  <PopupMenuButtonMock
+    actions={
+      Array [
+        "Remove image",
+      ]
+    }
+    destructiveButtonIndex={0}
+    onSelect={[Function]}
+  >
+    <Image
+      source={
+        Object {
+          "uri": "http://bar.com/bar.png",
+        }
+      }
+    />
+  </PopupMenuButtonMock>
+  <PopupMenuButtonMock
+    actions={
+      Array [
+        "Remove image",
+      ]
+    }
+    destructiveButtonIndex={0}
+    onSelect={[Function]}
+  >
+    <Image
+      source={
+        Object {
+          "uri": "http://baz.com/baz.png",
+        }
+      }
+    />
+  </PopupMenuButtonMock>
+  <View
+    accessibilityComponentType={undefined}
+    accessibilityLabel={undefined}
+    accessibilityTraits={undefined}
+    accessible={true}
+    collapsable={undefined}
+    hitSlop={undefined}
+    isTVSelectable={true}
+    nativeID={undefined}
+    onLayout={undefined}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    testID={undefined}
+    tvParallaxProperties={undefined}
+  >
+    <Icon
+      color={undefined}
+      name="AddImage"
+    />
+  </View>
+</View>
+`;
+
+exports[`renders with no images 1`] = `
+<View>
+  <View
+    accessibilityComponentType={undefined}
+    accessibilityLabel={undefined}
+    accessibilityTraits={undefined}
+    accessible={true}
+    collapsable={undefined}
+    hitSlop={undefined}
+    isTVSelectable={true}
+    nativeID={undefined}
+    onLayout={undefined}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    testID={undefined}
+    tvParallaxProperties={undefined}
+  >
+    <Icon
+      color={undefined}
+      name="AddImage"
+    />
+  </View>
+</View>
+`;

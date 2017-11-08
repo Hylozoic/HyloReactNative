@@ -9,12 +9,7 @@ import { createMockStore } from 'util/testing'
 jest.mock('react-native-device-info')
 
 const mockPost = {
-  details: 'myDetails',
-  communities: {
-    toRefArray: () => [
-      {id: 1}
-    ]
-  }
+  details: 'myDetails'
 }
 
 describe('PostEditor', () => {
@@ -26,6 +21,18 @@ describe('PostEditor', () => {
       save={save}
       editDetails={jest.fn()}
     />)
+    const actual = renderer.getRenderOutput()
+    expect(actual).toMatchSnapshot()
+  })
+
+  it('renders with a post', () => {
+    const renderer = new ReactShallowRenderer()
+    renderer.render(<PostEditor
+      post={mockPost}
+      imageUrls={[
+        'http://foo.com/foo.png',
+        'http://baz.com/baz.png'
+      ]} />)
     const actual = renderer.getRenderOutput()
     expect(actual).toMatchSnapshot()
   })
@@ -78,6 +85,7 @@ describe('PostEditor', () => {
           editDetails={jest.fn()}
           setDetails={jest.fn()}
           save={save}
+          communityIds={[1]}
           navigation={navigation}
           post={mockPost} />
       </Provider>)
@@ -85,9 +93,8 @@ describe('PostEditor', () => {
     expect(renderer.toJSON()).toMatchSnapshot()
 
     const instance = renderer.root.findByType(PostEditor).instance
-
     instance.setState({type: 'request'})
-    instance.saveEditor()
+    instance.save()
 
     expect(navigation.setParams).toHaveBeenCalledWith({isSaving: true})
     expect(save).toHaveBeenCalled()
@@ -106,15 +113,41 @@ describe('PostEditor', () => {
           editDetails={jest.fn()}
           setDetails={jest.fn()}
           save={save}
+          communityIds={[1]}
           navigation={navigation}
           post={mockPost} />
       </Provider>)
 
     const instance = renderer.root.findByType(PostEditor).instance
 
-    await instance.saveEditor()
+    await instance.save()
     expect(navigation.setParams.mock.calls[1][0]).toHaveProperty('isSaving', true)
     expect(navigation.setParams.mock.calls[2][0]).toHaveProperty('isSaving', false)
+  })
+
+  it('has image methods', () => {
+    const navigation = {setParams: jest.fn()}
+    const renderer = TestRenderer.create(
+      <Provider store={createMockStore()}>
+        <PostEditor
+          editDetails={jest.fn()}
+          setDetails={jest.fn()}
+          navigation={navigation}
+          imageUrls={['http://foo.com/foo.png']}
+          post={mockPost} />
+      </Provider>)
+
+    const instance = renderer.root.findByType(PostEditor).instance
+    instance.addImage({remote: 'http://bar.com/bar.png'})
+    expect(instance.state.imageUrls).toEqual([
+      'http://foo.com/foo.png',
+      'http://bar.com/bar.png'
+    ])
+
+    instance.removeImage('http://foo.com/foo.png')
+    expect(instance.state.imageUrls).toEqual([
+      'http://bar.com/bar.png'
+    ])
   })
 })
 
