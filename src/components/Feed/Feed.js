@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import { View } from 'react-native'
 import { get } from 'lodash/fp'
+import { withNavigationFocus } from 'react-navigation-is-focused-hoc'
 
 import FeedList from '../FeedList'
 import FeedBanner from '../FeedBanner'
 import SocketSubscriber from '../SocketSubscriber'
 import styles from './Feed.styles'
-import { withNavigationFocus } from 'react-navigation-is-focused-hoc'
 
 export class Feed extends Component {
   state = {showNotification: false}
@@ -24,20 +24,7 @@ export class Feed extends Component {
   }
 
   shouldComponentUpdate (nextProps) {
-    console.log('feed', this.props.isFocused, nextProps.isFocused)
-
-    // Update only once after the screen disappears
-    if (this.props.isFocused && !nextProps.isFocused) {
-      return true
-    }
-
-    // Don't update if the screen is not focused
-    if (!this.props.isFocused && !nextProps.isFocused) {
-      return false
-    }
-
-    // Update the screen if its re-enter
-    return !this.props.isFocused && nextProps.isFocused
+    return nextProps.isFocused
   }
 
   render () {
@@ -82,4 +69,4 @@ export class Feed extends Component {
   }
 }
 
-export default withNavigationFocus(Feed, 'Feed')
+export default withNavigationFocus(Feed)

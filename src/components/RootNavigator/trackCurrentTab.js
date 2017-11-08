@@ -26,7 +26,6 @@ export default function trackCurrentTab (Component) {
     // this method is very coupled to the nesting structure for navigators in
     // RootNavigator/index.js
     handleChange = (prevState, newState) => {
-      console.log('onNavigationStateChange()')
       updateFocus(newState)
 
       const stackNav = newState.routes[newState.index]

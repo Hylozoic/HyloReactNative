@@ -2,15 +2,16 @@ import React from 'react'
 import {
   View, FlatList, Text, TouchableOpacity, TextInput, Image
 } from 'react-native'
-import Header from '../Header'
-import Avatar from '../../Avatar'
-import PopupMenuButton from '../../PopupMenuButton'
-import Icon from '../../Icon'
-import { DEFAULT_BANNER } from '../../../store/models/Community'
-import styles from './Members.styles'
 import { some, values, keys, isEmpty, debounce, size } from 'lodash/fp'
-import { focus } from '../../../util/textInput'
 import { withNavigationFocus } from 'react-navigation-is-focused-hoc'
+
+import Avatar from '../../Avatar'
+import { DEFAULT_BANNER } from '../../../store/models/Community'
+import { focus } from '../../../util/textInput'
+import Header from '../Header'
+import Icon from '../../Icon'
+import PopupMenuButton from '../../PopupMenuButton'
+import styles from './Members.styles'
 
 export class Members extends React.Component {
   static navigationOptions = ({ navigation, screenProps }) =>
@@ -18,31 +19,16 @@ export class Members extends React.Component {
 
   fetchOrShowCached () {
     const { hasMore, members, fetchMembers } = this.props
-    if (isEmpty(members) && hasMore !== false) {
-      console.log('fetchMembers')
-      fetchMembers()
-    } else {
-      console.log('notFetchs')
-    }
+    if (isEmpty(members) && hasMore !== false) fetchMembers()
   }
 
-  componentWillReceiveProps (nextProps) {
-    if (!this.props.isFocused && nextProps.isFocused) {
-      this.fetchOrShowCached()
-    }
-    if (this.props.isFocused && !nextProps.isFocused) {
-      // screen exit
-    }
+  componentDidMount () {
+    this.fetchOrShowCached()
   }
 
   componentDidUpdate (prevProps) {
-    if (this.props.screenProps.currentTabName !== 'Members') {
-      console.log('returning')
-      return
-    }
-
+    if (this.props.screenProps.currentTabName !== 'Members') return
     if (!prevProps || prevProps.screenProps.currentTabName !== 'Members') {
-      console.log('fetching')
       return this.fetchOrShowCached()
     }
 
@@ -52,28 +38,12 @@ export class Members extends React.Component {
       'sortBy',
       'search'
     ])) {
-      console.log('fetching if key')
       this.fetchOrShowCached()
     }
   }
 
   shouldComponentUpdate (nextProps) {
-    console.log('members', this.props.isFocused, nextProps.isFocused)
-
-    // Update only once after the screen disappears
-    if (this.props.isFocused && !nextProps.isFocused) {
-      return true
-    }
-
-    // Don't update if the screen is not focused
-    if (!this.props.isFocused && !nextProps.isFocused) {
-      return false
-    }
-
-    // Update the screen if its re-enter
-    let ret = !this.props.isFocused && nextProps.isFocused
-    console.log('otherwise', ret)
-    return ret
+    return nextProps.isFocused
   }
 
   render () {
@@ -172,4 +142,4 @@ function sortKeysFactory (subject) {
   return sortKeys
 }
 
-export default withNavigationFocus(Members, 'Members')
+export default withNavigationFocus(Members)

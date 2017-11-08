@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import { FlatList, TouchableOpacity, View, Text } from 'react-native'
+import { withNavigationFocus } from 'react-navigation-is-focused-hoc'
 
 import header from 'util/header'
 import Loading from '../Loading'
 import NotificationCard from '../NotificationCard'
 import styles from './NotificationsList.styles'
 
-export default class NotificationsList extends Component {
+export class NotificationsList extends Component {
   state = {ready: false}
 
   static navigationOptions = ({ navigation }) =>
@@ -26,6 +27,10 @@ export default class NotificationsList extends Component {
     if (!this.props.pending && nextProps.pending) {
       this.setState({ ready: true })
     }
+  }
+
+  shouldComponentUpdate (nextProps) {
+    return nextProps.isFocused
   }
 
   fetchMore = offset => this.props.fetchMore(offset)
@@ -63,3 +68,5 @@ export function NotificationRow ({ markActivityRead, notification }) {
     </TouchableOpacity>
   </View>
 }
+
+export default withNavigationFocus(NotificationsList)

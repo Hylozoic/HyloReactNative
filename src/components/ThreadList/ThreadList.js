@@ -1,14 +1,16 @@
 import React, { Component } from 'react'
 import { FlatList, TouchableOpacity, View, Text } from 'react-native'
 import { isEmpty } from 'lodash/fp'
-import header from 'util/header'
-import Loading from '../Loading'
-import ThreadCard from '../ThreadCard'
-import styles from './ThreadList.styles'
-import NotificationOverlay from '../NotificationOverlay'
-import { getSocket } from 'util/websockets'
+import { withNavigationFocus } from 'react-navigation-is-focused-hoc'
 
-export default class ThreadList extends Component {
+import { getSocket } from 'util/websockets'
+import header from 'util/header'
+import NotificationOverlay from '../NotificationOverlay'
+import Loading from '../Loading'
+import styles from './ThreadList.styles'
+import ThreadCard from '../ThreadCard'
+
+export class ThreadList extends Component {
   state = {ready: false}
 
   static navigationOptions = ({ navigation }) =>
@@ -27,6 +29,10 @@ export default class ThreadList extends Component {
     if (!this.props.pending && nextProps.pending) {
       this.setState({ ready: true })
     }
+  }
+
+  shouldComponentUpdate (nextProps) {
+    return nextProps.isFocused
   }
 
   fetchOrShowCached () {
@@ -96,3 +102,5 @@ export function MessageRow ({message, participants, currentUser, showThread, isL
     </TouchableOpacity>
   </View>
 }
+
+export default withNavigationFocus(ThreadList)
