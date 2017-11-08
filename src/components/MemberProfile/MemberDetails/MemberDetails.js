@@ -13,31 +13,38 @@ import MemberHeader, { Control } from '../MemberHeader'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
 import styles from './MemberDetails.styles'
 import { isEmpty, pick } from 'lodash/fp'
-import header from 'util/header'
+import header, { tintColor } from 'util/header'
 
 export function editableFields (person) {
   return pick(['name', 'location', 'tagline', 'bio'], person)
 }
 
 export default class MemberDetails extends React.Component {
-  static navigationOptions = ({ navigation }) =>
-    header(navigation, {
+  static navigationOptions = ({ navigation }) => {
+    const onPress = navigation.state.params.goBack || (() => {})
+    return header(navigation, {
       title: 'About This Member',
       options: {
+        headerLeft: <HeaderBackButton onPress={onPress} tintColor={tintColor} />,
         headerBackTitle: null
       }
     })
+  }
 
   constructor (props) {
     super(props)
     this.state = {
       editing: this.props.editing,
-      person: editableFields(props.person)
+      person: editableFields(props.person),
+      errors: {}
     }
   }
 
   componentDidMount () {
     this.props.fetchPerson()
+    this.props.navigation.setParams({
+      goBack: this.goBack
+    })
   }
 
   componentDidUpdate (prevProps) {
@@ -52,6 +59,23 @@ export default class MemberDetails extends React.Component {
     }
   }
 
+  goBack = () => {
+    if (this.saveChanges()) {
+      this.props.navigation.goBack()
+    }
+  }
+
+  validate = () => {
+    if (isEmpty(this.state.person.name)) {
+      this.setState({errors: {
+        ...this.state.errors,
+        name: 'Cannot be blank'
+      }})
+      return false
+    }
+    return true
+  }
+
   editProfile = () => {
     this.setState({editing: true})
   }
@@ -61,40 +85,50 @@ export default class MemberDetails extends React.Component {
       person: {
         ...this.state.person,
         [setting]: value
+      },
+      errors: {
+        ...this.state.errors,
+        [setting]: false
       }
     })
   }
 
   saveChanges = () => {
-    this.props.updateUserSettings(this.state.person)
+    if (this.validate()) {
+      this.props.updateUserSettings(this.state.person)
+      this.setState({editing: false})
+      return true
+    }
+    return false
   }
 
   render () {
     const { goToCommunity, goToSkills, isMe, person, skills } = this.props
-    const { editing } = this.state
+    const { editing, errors } = this.state
     const personEdits = this.state.person
 
-    console.log('HeaderBackButton', HeaderBackButton)
-
-    if (!personEdits) return <Loading />
+    if (isEmpty(personEdits)) return <Loading />
 
     return <ScrollView contentContainerStyle={styles.container}>
       <MemberHeader
         person={personEdits}
         isMe={isMe}
         editProfile={this.editProfile}
+        saveChanges={this.saveChanges}
         editable={editing}
         updateSetting={this.updateSetting}
-        saveChanges={this.saveChanges} />
+        errors={errors} />
       <MemberBio person={personEdits}
         editable={editing}
-        updateSetting={this.updateSetting}
-        saveChanges={this.saveChanges} />
+        updateSetting={this.updateSetting} />
       <MemberSkills
         skills={skills}
         editable={editing}
         goToSkills={goToSkills} />
-      <MemberCommunities person={person} goToCommunity={goToCommunity} />
+      <MemberCommunities
+        person={person}
+        goToCommunity={goToCommunity}
+        editing={editing} />
     </ScrollView>
   }
 }
@@ -105,7 +139,7 @@ export class MemberBio extends React.Component {
   }
 
   render () {
-    const { person: { bio }, editable, updateSetting, saveChanges } = this.props
+    const { person: { bio }, editable, updateSetting } = this.props
     if (isEmpty(bio)) return null
     return <View style={styles.bioContainer}>
       <View style={styles.labelWrapper}>
@@ -120,7 +154,6 @@ export class MemberBio extends React.Component {
         value={bio}
         editable={editable}
         onChangeText={updateSetting('bio')}
-        onBlur={saveChanges}
         multiline
         hideEditIcon />
     </View>
@@ -145,17 +178,17 @@ export function MemberSkills ({ skills, editable, goToSkills }) {
   </View>
 }
 
-export function MemberCommunities ({ person: { memberships }, goToCommunity }) {
+export function MemberCommunities ({ person: { memberships }, goToCommunity, editing }) {
   if (isEmpty(memberships)) return null
 
   return <View style={styles.communitiesContainer}>
     <Text style={styles.sectionLabel}>My Hylo Communities</Text>
     {memberships.map(membership =>
-      <CommunityRow membership={membership} key={membership.id} goToCommunity={goToCommunity} />)}
+      <CommunityRow membership={membership} key={membership.id} goToCommunity={goToCommunity} editing={editing} />)}
   </View>
 }
 
-export function CommunityRow ({ membership, goToCommunity }) {
+export function CommunityRow ({ membership, goToCommunity, editing }) {
   const { community, hasModeratorRole } = membership
 
   const formatCount = count => {
@@ -165,7 +198,7 @@ export function CommunityRow ({ membership, goToCommunity }) {
   const memberCount = formatCount(community.memberCount)
   return <View style={styles.communityRow}>
     {hasModeratorRole && <StarIcon style={styles.starIcon} />}
-    <TouchableOpacity onPress={() => goToCommunity(community.id)}>
+    <TouchableOpacity onPress={() => goToCommunity(community.id)} disabled={editing}>
       <Text style={styles.communityName}>{community.name}</Text>
     </TouchableOpacity>
     <Text style={styles.memberCount}>{memberCount}</Text>
