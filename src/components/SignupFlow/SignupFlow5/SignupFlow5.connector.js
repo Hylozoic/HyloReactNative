@@ -2,16 +2,18 @@ import { connect } from 'react-redux'
 import {
   signup,
   getUserSettings,
-  getUserSkills,
   updateUserSettings,
   updateLocalUserSettings,
   defaultUserSettings
 } from '../SignupFlow.store.js'
+import {
+  getSkillsFromOrm
+} from '../../SkillEditor/SkillEditor.store'
 import { isEmpty } from 'lodash/fp'
 
 export function mapStateToProps (state, props) {
   const { name, email, password, confirmPassword, location, avatarUrl } = getUserSettings(state)
-  const skills = getUserSkills(state)
+  const skills = getSkillsFromOrm(state).map(s => s.name)
   const showPasswordField = !isEmpty(password)
 
   return {
