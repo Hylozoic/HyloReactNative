@@ -12,7 +12,14 @@ function getPostId (state, props) {
 
 function mapStateToProps (state, props) {
   const id = getPostId(state, props)
-  const post = getPost(state, {id})
+  let post = getPost(state, {id})
+  post = {
+    ...post.ref,
+    creator: post.creator,
+    commenters: post.commenters.toModelArray(),
+    communities: post.communities.toModelArray()
+  }
+
   const currentUser = getMe(state, props)
   const commentEdit = getCommentEdits(state, {postId: id})
 

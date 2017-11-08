@@ -34,7 +34,10 @@ export default class PostEditor extends React.Component {
     this.state = {
       title: get('title', post) || '',
       type: 'discussion',
-      communityIds: post ? post.communities.map(x => x.id) : [communityId]
+      communityIds: post
+        ? post.communities.toRefArray().map(x => x.id)
+        : [communityId],
+      imageUrls: []
     }
   }
 
