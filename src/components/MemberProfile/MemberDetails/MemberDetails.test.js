@@ -61,6 +61,55 @@ describe('MemberDetails', () => {
     })
   })
 
+  describe('goBack', () => {
+    it('calls navigation.goBack when saveChanges succeeds', () => {
+      const props = {
+        person: {},
+        fetchPerson: () => {},
+        navigation: {
+          ...navigation,
+          goBack: jest.fn()
+        }
+      }
+
+      const instance = ReactTestRenderer.create(<MemberDetails {...props} />).getInstance()
+      instance.saveChanges = () => true
+      instance.goBack()
+      expect(props.navigation.goBack).toHaveBeenCalled()
+    })
+  })
+
+  describe('validate', () => {
+    it('returns true when name is present', () => {
+      const props = {
+        person: {},
+        fetchPerson: () => {},
+        navigation
+      }
+
+      const instance = ReactTestRenderer.create(<MemberDetails {...props} />).getInstance()
+      instance.setState({
+        person: {name: 'Sue'}
+      })
+      expect(instance.validate()).toEqual(true)
+    })
+
+    it('returns false and sets error when name is empty', () => {
+      const props = {
+        person: {},
+        fetchPerson: () => {},
+        navigation
+      }
+
+      const instance = ReactTestRenderer.create(<MemberDetails {...props} />).getInstance()
+      instance.setState({
+        person: {name: ''}
+      })
+      expect(instance.validate()).toEqual(false)
+      expect(instance.state.errors.name).toEqual('Cannot be blank')
+    })
+  })
+
   describe('editProfile', () => {
     it('sets state.editing to true', () => {
       const props = {
@@ -105,8 +154,22 @@ describe('MemberDetails', () => {
           location: 'oakland'
         }
       })
-      instance.saveChanges()
+      expect(instance.saveChanges()).toEqual(true)
       expect(props.updateUserSettings).toHaveBeenCalledWith(instance.state.person)
+    })
+
+    it("returns false and doesn't call updateUserSettingswhen validate is false", () => {
+      const props = {
+        person: {},
+        fetchPerson: () => {},
+        updateUserSettings: jest.fn(),
+        navigation
+      }
+
+      const instance = ReactTestRenderer.create(<MemberDetails {...props} />).getInstance()
+      instance.validate = () => false
+      expect(instance.saveChanges()).toEqual(false)
+      expect(props.updateUserSettings).not.toHaveBeenCalled()
     })
   })
 })
