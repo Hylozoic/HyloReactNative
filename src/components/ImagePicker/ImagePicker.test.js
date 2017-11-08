@@ -5,15 +5,7 @@ import RNImagePicker from 'react-native-image-picker'
 import React from 'react'
 import { Text, TouchableOpacity } from 'react-native'
 
-jest.mock('react-native-image-picker', () => {
-  let callback
-  return {
-    finishImagePicker: result => callback(result),
-    showImagePicker: jest.fn((options, cb) => {
-      callback = cb
-    })
-  }
-})
+jest.mock('react-native-image-picker')
 
 it('matches last snapshot', () => {
   const renderer = new ReactShallowRenderer()
