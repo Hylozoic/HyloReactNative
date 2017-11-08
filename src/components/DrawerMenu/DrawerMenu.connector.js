@@ -84,8 +84,8 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
       dispatchProps.selectCommunity(community.id)
     },
     goToNetwork: network => {
-      dispatchProps.selectNetwork(network.id)
       navigation.navigate('DrawerClose')
+      dispatchProps.selectNetwork(network.id)
     },
     showSettings: () => {
       navigation.navigate('UserSettings', {name})

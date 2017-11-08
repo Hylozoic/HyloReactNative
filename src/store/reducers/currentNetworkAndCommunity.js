@@ -5,7 +5,7 @@ import {
 
 export const defaultState = {
   communityId: null,
-  netowrkId: null
+  networkId: null
 }
 
 export default function currentNetworkAndCommunity (state = defaultState, action) {

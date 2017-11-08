@@ -5,10 +5,11 @@ import PostCard from '../PostCard'
 import Loading from '../Loading'
 import Icon from '../Icon'
 import PopupMenuButton from '../PopupMenuButton'
-import { find, get, isEmpty } from 'lodash/fp'
+import { find, get, isEmpty, map, filter } from 'lodash/fp'
 
 export default class FeedList extends Component {
   fetchOrShowCached () {
+    console.log('!! 4. fetchOrShowCached: ', this.props)
     const { hasMore, posts, fetchPosts, pending } = this.props
     if (isEmpty(posts) && hasMore !== false && !pending) fetchPosts()
   }
@@ -18,11 +19,11 @@ export default class FeedList extends Component {
   }
 
   componentDidUpdate (prevProps) {
-    // console.log(
-    //   '!!! FEEDLIST componentDidUpdate changed. community, network: ',
-    //   get('id', prevProps.community) !== get('id', this.props.community),
-    //   get('id', prevProps.network) !== get('id', this.props.network)
-    // )
+    console.log(
+      '!! 3. componentDidUpdate -- community changed, network changed: ',
+      get('id', prevProps.community) !== get('id', this.props.community),
+      get('id', prevProps.network) !== get('id', this.props.network)
+    )
 
     // The first two checks below prevent data from being loaded until the Home
     // tab is actually visible.
@@ -49,7 +50,8 @@ export default class FeedList extends Component {
   render () {
     const {
       posts,
-      filter,
+      networkId,
+      filter: feedFilter,
       sortBy,
       setFilter,
       setSort,
@@ -66,7 +68,7 @@ export default class FeedList extends Component {
     const listHeaderComponent = <View>
       {header}
       <ListControls
-        filter={filter}
+        filter={feedFilter}
         sortBy={sortBy}
         setFilter={setFilter}
         setSort={setSort}
@@ -78,9 +80,23 @@ export default class FeedList extends Component {
       ? <Loading style={styles.loading} />
       : null
 
+    // Move to ORM instance method....
+    var filteredPosts = posts
+    if (networkId) {
+      filteredPosts = map(post => {
+        return {
+          ...post,
+          communities: filter(
+            community => get('network.id', community) === networkId,
+            post.communities
+          )
+        }
+      }, posts)
+    }
+
     return <View style={styles.container}>
       <FlatList
-        data={posts}
+        data={filteredPosts}
         renderItem={({ item }) =>
           <PostRow
             post={item}
@@ -117,9 +133,9 @@ const optionText = (id, options) => {
   return option.label
 }
 
-export function ListControls ({ filter, sortBy, setFilter, setSort }) {
+export function ListControls ({ filter: listFilter, sortBy, setFilter, setSort }) {
   return <View style={styles.listControls}>
-    <ListControl selected={filter} onChange={setFilter} options={filterOptions} />
+    <ListControl selected={listFilter} onChange={setFilter} options={filterOptions} />
     <ListControl selected={sortBy} onChange={setSort} options={sortOptions} />
   </View>
 }
@@ -147,8 +163,7 @@ export function PostRow ({
   return <View style={styles.postRow}>
     <TouchableWithoutFeedback onPress={() => showPost(post.id)}>
       <View>
-        <PostCard
-          post={post}
+        <PostCard post={post}
           editPost={() => editPost(post.id)}
           showMember={showMember}
           showTopic={showTopic}

@@ -42,37 +42,55 @@ export default class PostCard extends React.Component {
   }
 
   render () {
+    const { showCommunity } = this.props
     const {
-      post, editPost, showCommunity, currentUser, showMember, showTopic, goToCommunity
-    } = this.props
-    const slug = get('0.slug', post.communities)
+      id: postId,
+      communities,
+      type,
+      updatedAt,
+      createdAt,
+      creator,
+      details,
+      title,
+      linkPreview,
+      commenters,
+      commentsTotal,
+      votesTotal,
+      myVote,
+      editPost,
+      currentUser,
+      showMember,
+      showTopic,
+      goToCommunity
+    } = this.props.post
 
+    const slug = get('0.slug', communities)
     return <View style={styles.container}>
-      <PostHeader creator={post.creator}
-        date={post.updatedAt || post.createdAt}
-        type={post.type}
+      <PostHeader creator={creator}
+        date={updatedAt || createdAt}
+        type={type}
         showCommunity={showCommunity}
         editPost={editPost}
-        communities={post.communities}
+        communities={communities}
         slug={slug}
-        postId={post.id}
+        postId={postId}
         showMember={showMember}
         goToCommunity={goToCommunity} />
-      <PostImage postId={post.id} />
+      <PostImage postId={postId} />
       <PostBody
-        title={post.title}
-        details={post.details}
-        linkPreview={post.linkPreview}
+        title={title}
+        details={details}
+        linkPreview={linkPreview}
         slug={slug}
         showMember={showMember}
         showTopic={showTopic}
         shouldTruncate />
-      <PostFooter id={post.id}
+      <PostFooter id={postId}
         currentUser={currentUser}
-        commenters={post.commenters}
-        commentsTotal={post.commentsTotal}
-        votesTotal={post.votesTotal}
-        myVote={post.myVote} />
+        commenters={commenters}
+        commentsTotal={commentsTotal}
+        votesTotal={votesTotal}
+        myVote={myVote} />
     </View>
   }
 }

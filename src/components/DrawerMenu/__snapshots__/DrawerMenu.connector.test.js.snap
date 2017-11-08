@@ -19,23 +19,25 @@ Object {
 
 exports[` 2`] = `
 Object {
-  "selectCommunity": [Function],
   "logout": [Function],
+  "selectCommunity": [Function],
+  "selectNetwork": [Function],
 }
 `;
 
 exports[` 3`] = `
 Object {
-  "selectCommunity": [Function],
   "currentUser": Object {
     "id": "anyid",
   },
   "goToCommunity": [Function],
   "goToMyProfile": [Function],
+  "goToNetwork": [Function],
   "name": "Roy Rogers",
   "navigation": Object {
     "navigate": [Function],
   },
+  "selectCommunity": [Function],
   "showSettings": [Function],
 }
 `;

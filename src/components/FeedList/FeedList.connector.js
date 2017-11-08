@@ -27,7 +27,7 @@ function makeFetchOpts (props) {
   return omitBy(x => isNull(x) || isUndefined(x), {
     ...omit(['community', 'network', 'topicName'], props),
     subject,
-    slug: get('slug', community) || ALL_COMMUNITIES_ID,
+    slug: get('slug', community) || (!network && ALL_COMMUNITIES_ID),
     networkSlug: get('slug', network),
     topic: topicName
   })
@@ -37,6 +37,7 @@ export function mapStateToProps (state, props) {
   const sortBy = getSort(state, props)
   const filter = getFilter(state, props)
   const { community, network, topicName } = props
+  console.log('!! 1. mapStateToProps network: ', network)
   const queryProps = makeFetchOpts({
     community,
     network,
@@ -47,12 +48,15 @@ export function mapStateToProps (state, props) {
 
   const pending = state.pending[FETCH_POSTS]
 
+  console.log('!! 2. mapStateToProps queryProps: ', queryProps)
+
   return {
     posts: getPosts(state, queryProps),
     sortBy,
     filter,
     hasMore: getHasMorePosts(state, queryProps),
     pending: !!pending,
+    networkId: get('id', network),
     pendingRefresh: !!(pending && pending.extractQueryResults.reset),
     queryProps // this is just here so mergeProps can use it
   }

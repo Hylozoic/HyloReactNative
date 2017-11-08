@@ -1,5 +1,6 @@
 import React from 'react'
 import { Text, View, TouchableOpacity, FlatList } from 'react-native'
+import { pick } from 'lodash/fp'
 import styles from './MemberFeed.styles'
 import PostCard from '../../PostCard'
 import Comment from '../../Comment'

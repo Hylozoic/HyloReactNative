@@ -7,6 +7,8 @@ export function fetchPosts (
   { subject, slug, networkSlug, sortBy, offset, search, filter, topic },
   { reset } = {}
 ) {
+  console.log('FETCH_POSTS -- subject, slug, networkSlug:', subject, slug, networkSlug)
+
   var query, extractModel, getItems
 
   if (subject === 'community') {

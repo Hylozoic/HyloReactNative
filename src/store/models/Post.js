@@ -18,6 +18,11 @@ const Post = Model.createClass({
   toString () {
     return `Post: ${this.name}`
   }
+
+  // static communitiesForNetworkId (postId, networkId) {
+  //   console.log('!!!! communitiesForNetworkId networkId, this: ', networkId, this)
+  //   return this.communities.toModelArray()
+  // }
 })
 
 export default Post

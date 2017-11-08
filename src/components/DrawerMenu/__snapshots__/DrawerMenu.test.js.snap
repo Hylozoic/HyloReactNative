@@ -214,6 +214,7 @@ exports[`NetworkRow matches the last snapshot 1`] = `
     <Icon
       allowFontScaling={false}
       name="chevron-down"
+      onPress={[Function]}
       size={12}
     />
   </TouchableOpacity>

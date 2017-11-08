@@ -1,5 +1,4 @@
 import { combineReducers } from 'redux'
-import currentCommunity from './currentCommunity'
 import handleLogout from './handleLogout'
 import ormReducer from './ormReducer'
 import pending from './pending'
@@ -20,7 +19,6 @@ import SocketListener from '../../components/SocketListener/SocketListener.store
 import TabBar from '../../components/RootNavigator/TabBar/TabBar.store'
 
 export const combinedReducers = combineReducers({
-  currentCommunity,
   orm: ormReducer,
   pending,
   queryResults,
