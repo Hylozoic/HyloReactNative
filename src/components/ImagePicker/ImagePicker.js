@@ -18,12 +18,7 @@ if you don't pass any children, icons of an image and a clock will be shown for
 non-pending and pending states respectively
 */
 export default class ImagePicker extends Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      pending: false
-    }
-  }
+  state = {pending: false}
 
   setPending (pending) {
     const { onPendingChange } = this.props
