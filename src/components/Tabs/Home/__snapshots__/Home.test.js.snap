@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`shows Feed with a community and user 1`] = `
-<Connect(Feed)
+<Connect(_class)
   communityId="1"
   navigation={undefined}
   screenProps={undefined}
