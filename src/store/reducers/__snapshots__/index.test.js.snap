@@ -48,7 +48,7 @@ Object {
   },
   "currentNetworkAndCommunity": Object {
     "communityId": null,
-    "netowrkId": null,
+    "networkId": null,
   },
   "orm": Object {},
   "pending": Object {},
