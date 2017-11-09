@@ -158,7 +158,7 @@ describe('MemberDetails', () => {
       expect(props.updateUserSettings).toHaveBeenCalledWith(instance.state.person)
     })
 
-    it("returns false and doesn't call updateUserSettingswhen validate is false", () => {
+    it("returns false and doesn't call updateUserSettings when validate is false", () => {
       const props = {
         person: {},
         fetchPerson: () => {},
