@@ -6,9 +6,7 @@ export default {
   },
   container: {
     flex: 1,
-    backgroundColor: 'white',
-    paddingLeft: 4,
-    paddingRight: 4
+    backgroundColor: 'white'
   },
   imageMargin: {
     marginBottom: 12

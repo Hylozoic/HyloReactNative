@@ -49,7 +49,7 @@ export default class PostCard extends React.Component {
 
     return <View style={styles.container}>
       <PostHeader creator={post.creator}
-        date={post.updatedAt || post.createdAt}
+        date={post.createdAt}
         type={post.type}
         showCommunity={showCommunity}
         editPost={editPost}
