@@ -17,7 +17,8 @@ export default {
     paddingRight: 16
   },
   fileLabelText: {
-    fontFamily: 'Circular-Book'
+    fontFamily: 'Circular-Book',
+    fontSize: 13
   },
   fileIcon: {
     fontSize: 18,

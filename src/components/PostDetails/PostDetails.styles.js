@@ -64,5 +64,8 @@ export default {
   placeholder: {
     fontStyle: 'italic',
     color: capeCod40
+  },
+  files: {
+    marginHorizontal: 12
   }
 }

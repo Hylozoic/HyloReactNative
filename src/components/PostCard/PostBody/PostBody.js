@@ -4,12 +4,19 @@ import HTMLView from 'react-native-htmlview'
 import { decode } from 'ent'
 import { present, sanitize } from 'hylo-utils/text'
 import urlHandler from '../../../util/urlHandler'
-
 import LinkPreview from '../LinkPreview'
 
 const MAX_DETAILS_LENGTH = 144
 
-export default function PostBody ({ title, details, linkPreview, slug, showMember, showTopic, shouldTruncate }) {
+export default function PostBody ({
+  title,
+  details,
+  linkPreview,
+  slug,
+  showMember,
+  showTopic,
+  shouldTruncate
+}) {
   const decodedTitle = decode(title)
   const presentedDetails = present(
     sanitize(details).replace(/\n/g, '').replace('<p>&nbsp;</p>', ''),
@@ -30,8 +37,7 @@ export default function PostBody ({ title, details, linkPreview, slug, showMembe
 
 const styles = StyleSheet.create({
   container: {
-    marginLeft: 12,
-    marginRight: 12,
+    marginHorizontal: 12,
     marginBottom: 20
   },
   title: {

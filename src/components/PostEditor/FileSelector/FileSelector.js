@@ -53,12 +53,16 @@ function renderFileButton (url, buttonIndex, onRemove) {
     actions={['Remove image']}
     destructiveButtonIndex={0}
     onSelect={menuIndex => onRemove(url)}>
-    <View style={styles.fileLabel}>
-      <Icon name='Document' style={styles.fileIcon} />
-      <Text style={styles.fileLabelText}
-        numberOfLines={2}>
-        {cleanName(url)}
-      </Text>
-    </View>
+    <FileLabel url={url} />
   </PopupMenuButton>
+}
+
+export function FileLabel ({ url }) {
+  return <View style={styles.fileLabel}>
+    <Icon name='Document' style={styles.fileIcon} />
+    <Text style={styles.fileLabelText}
+      numberOfLines={2}>
+      {cleanName(url)}
+    </Text>
+  </View>
 }

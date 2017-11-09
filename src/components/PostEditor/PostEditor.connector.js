@@ -16,12 +16,8 @@ export function mapStateToProps (state, props) {
     communityIds: post
       ? post.communities.toRefArray().map(x => x.id)
       : [communityId],
-    imageUrls: post
-      ? post.images().orderBy(get('position')).toRefArray().map(x => x.url)
-      : [],
-    fileUrls: post
-      ? post.files().orderBy(get('position')).toRefArray().map(x => x.url)
-      : []
+    imageUrls: post ? post.getImageUrls() : [],
+    fileUrls: post ? post.getFileUrls() : []
   }
 }
 

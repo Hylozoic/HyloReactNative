@@ -69,9 +69,21 @@ exports[`PostEditor renders a new editor correctly 1`] = `
         Images
       </SectionLabel>
       <ImageSelector
+        id={undefined}
         imageUrls={Array []}
         onAdd={[Function]}
         onRemove={[Function]}
+        type="post"
+      />
+      <SectionLabel>
+        Files
+      </SectionLabel>
+      <Connect(FileSelector)
+        fileUrls={undefined}
+        id={undefined}
+        onAdd={[Function]}
+        onRemove={[Function]}
+        type="post"
       />
     </View>
   </ScrollViewMock>
@@ -265,6 +277,48 @@ exports[`PostEditor renders correctly while saving 1`] = `
               color={undefined}
               name="AddImage"
             />
+          </View>
+        </View>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          disabled={false}
+          ellipsizeMode="tail"
+        >
+          Files
+        </Text>
+        <View>
+          <View
+            accessibilityComponentType={undefined}
+            accessibilityLabel={undefined}
+            accessibilityTraits={undefined}
+            accessible={true}
+            collapsable={undefined}
+            hitSlop={undefined}
+            isTVSelectable={true}
+            nativeID={undefined}
+            onLayout={undefined}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            testID={undefined}
+            tvParallaxProperties={undefined}
+          >
+            <Icon
+              color={undefined}
+              name="Paperclip"
+            />
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              disabled={false}
+              ellipsizeMode="tail"
+            >
+              Add file
+            </Text>
           </View>
         </View>
       </View>
@@ -462,6 +516,48 @@ exports[`PostEditor renders correctly while saving 2`] = `
             />
           </View>
         </View>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          disabled={false}
+          ellipsizeMode="tail"
+        >
+          Files
+        </Text>
+        <View>
+          <View
+            accessibilityComponentType={undefined}
+            accessibilityLabel={undefined}
+            accessibilityTraits={undefined}
+            accessible={true}
+            collapsable={undefined}
+            hitSlop={undefined}
+            isTVSelectable={true}
+            nativeID={undefined}
+            onLayout={undefined}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            testID={undefined}
+            tvParallaxProperties={undefined}
+          >
+            <Icon
+              color={undefined}
+              name="Paperclip"
+            />
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              disabled={false}
+              ellipsizeMode="tail"
+            >
+              Add file
+            </Text>
+          </View>
+        </View>
       </View>
     </View>
   </RCTScrollView>
@@ -524,6 +620,7 @@ exports[`PostEditor renders with a post 1`] = `
         Images
       </SectionLabel>
       <ImageSelector
+        id={undefined}
         imageUrls={
           Array [
             "http://foo.com/foo.png",
@@ -532,6 +629,17 @@ exports[`PostEditor renders with a post 1`] = `
         }
         onAdd={[Function]}
         onRemove={[Function]}
+        type="post"
+      />
+      <SectionLabel>
+        Files
+      </SectionLabel>
+      <Connect(FileSelector)
+        fileUrls={undefined}
+        id={undefined}
+        onAdd={[Function]}
+        onRemove={[Function]}
+        type="post"
       />
     </View>
   </ScrollViewMock>
