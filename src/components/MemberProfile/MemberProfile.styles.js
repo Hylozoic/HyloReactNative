@@ -8,9 +8,6 @@ export default {
   marginContainer: {
     marginHorizontal: screenMargin
   },
-  bannerWrapper: {
-    position: 'relative'
-  },
   bannerImage: {
     height: 140,
     width: '100%'
@@ -21,15 +18,16 @@ export default {
     right: -10,
     paddingRight: 15
   },
+  avatarWrapperWrapper: {
+    top: -56,
+    marginBottom: -40
+  },
   avatarWrapper: {
     flexDirection: 'row',
     justifyContent: 'center',
-    position: 'relative',
-    marginBottom: 65
+    position: 'relative'
   },
   avatarImage: {
-    position: 'absolute',
-    top: -56,
     width: 112,
     height: 112,
     borderRadius: 56,
@@ -38,7 +36,7 @@ export default {
   },
   avatarEditButton: {
     position: 'absolute',
-    top: 26
+    top: 83
   },
   editButton: {
     backgroundColor: 'white',

@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`on UPDATE_USER_SETTINGS_PENDING updates Me and the Person 1`] = `
+Object {
+  "id": 123,
+  "location": "Japan",
+  "memberships": undefined,
+  "messageThreads": undefined,
+  "notifications": undefined,
+  "posts": undefined,
+  "settings": Object {
+    "setting1": 1,
+    "setting2": 3,
+  },
+  "skills": undefined,
+  "tagline": "lalala",
+}
+`;
+
+exports[`on UPDATE_USER_SETTINGS_PENDING updates Me and the Person 2`] = `
+Object {
+  "id": 123,
+  "location": "Japan",
+  "memberships": undefined,
+  "settings": Object {
+    "setting1": 1,
+    "setting2": 3,
+  },
+  "skills": undefined,
+  "tagline": "lalala",
+}
+`;

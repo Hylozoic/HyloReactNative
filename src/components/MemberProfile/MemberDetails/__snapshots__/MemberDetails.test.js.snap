@@ -5,6 +5,7 @@ exports[`CommunityRow handles high member count and moderator role 1`] = `
   <StarIcon />
   <TouchableOpacity
     activeOpacity={0.2}
+    disabled={undefined}
     focusedOpacity={0.7}
     onPress={[Function]}
   >
@@ -35,6 +36,7 @@ exports[`CommunityRow matches the last snapshot 1`] = `
 <View>
   <TouchableOpacity
     activeOpacity={0.2}
+    disabled={undefined}
     focusedOpacity={0.7}
     onPress={[Function]}
   >
@@ -77,7 +79,6 @@ exports[`MemberBio matches the last snapshot 1`] = `
     editable={undefined}
     hideEditIcon={true}
     multiline={true}
-    onBlur={undefined}
     onChangeText={[Function]}
     value="I live I die!"
   />
@@ -95,6 +96,7 @@ exports[`MemberCommunities matches the last snapshot 1`] = `
     My Hylo Communities
   </Text>
   <CommunityRow
+    editing={undefined}
     goToCommunity={undefined}
     membership={
       Object {
@@ -103,6 +105,7 @@ exports[`MemberCommunities matches the last snapshot 1`] = `
     }
   />
   <CommunityRow
+    editing={undefined}
     goToCommunity={undefined}
     membership={
       Object {
@@ -111,6 +114,7 @@ exports[`MemberCommunities matches the last snapshot 1`] = `
     }
   />
   <CommunityRow
+    editing={undefined}
     goToCommunity={undefined}
     membership={
       Object {
@@ -124,6 +128,12 @@ exports[`MemberCommunities matches the last snapshot 1`] = `
 exports[`MemberDetails has navigation options 1`] = `
 Object {
   "headerBackTitle": null,
+  "headerLeft": <HeaderBackButton
+    onPress={[Function]}
+    pressColorAndroid="rgba(0, 0, 0, .32)"
+    tintColor="#808c9b"
+    truncatedTitle="Back"
+/>,
   "headerStyle": Object {
     "backgroundColor": "white",
     "paddingHorizontal": 10,
@@ -139,85 +149,9 @@ Object {
 }
 `;
 
-exports[`MemberDetails matches the last snapshot 1`] = `
-<ScrollViewMock
-  contentContainerStyle={
-    Object {
-      "backgroundColor": "white",
-      "paddingHorizontal": 16,
-      "paddingTop": 12,
-    }
-  }
->
-  <MemberHeader
-    editProfile={[Function]}
-    editable={undefined}
-    isMe={undefined}
-    person={Object {}}
-    saveChanges={[Function]}
-    updateSetting={[Function]}
-  />
-  <MemberBio
-    editable={undefined}
-    person={Object {}}
-    saveChanges={[Function]}
-    updateSetting={[Function]}
-  />
-  <MemberSkills
-    editable={undefined}
-    goToSkills={undefined}
-    skills={
-      Array [
-        "One",
-      ]
-    }
-  />
-  <MemberCommunities
-    goToCommunity={[Function]}
-    person={
-      Object {
-        "id": 1,
-      }
-    }
-  />
-</ScrollViewMock>
-`;
+exports[`MemberDetails matches the last snapshot 1`] = `<Loading />`;
 
-exports[`MemberDetails returns Loading when there's no person 1`] = `
-<ScrollViewMock
-  contentContainerStyle={
-    Object {
-      "backgroundColor": "white",
-      "paddingHorizontal": 16,
-      "paddingTop": 12,
-    }
-  }
->
-  <MemberHeader
-    editProfile={[Function]}
-    editable={undefined}
-    isMe={undefined}
-    person={Object {}}
-    saveChanges={[Function]}
-    updateSetting={[Function]}
-  />
-  <MemberBio
-    editable={undefined}
-    person={Object {}}
-    saveChanges={[Function]}
-    updateSetting={[Function]}
-  />
-  <MemberSkills
-    editable={undefined}
-    goToSkills={undefined}
-    skills={undefined}
-  />
-  <MemberCommunities
-    goToCommunity={undefined}
-    person={undefined}
-  />
-</ScrollViewMock>
-`;
+exports[`MemberDetails returns Loading when there's no person 1`] = `<Loading />`;
 
 exports[`MemberSkills matches the last snapshot 1`] = `
 <View>

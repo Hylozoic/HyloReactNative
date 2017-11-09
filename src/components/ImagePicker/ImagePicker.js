@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { TouchableOpacity, View } from 'react-native'
+import { TouchableOpacity } from 'react-native'
 import Icon from '../Icon'
 import RNImagePicker from 'react-native-image-picker'
 
