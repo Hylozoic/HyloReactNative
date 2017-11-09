@@ -157,6 +157,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-document-picker')
     compile project(':react-native-prompt-android')
     compile project(':react-native-linear-gradient')
     compile project(':react-native-background-timer')
