@@ -2,7 +2,7 @@ import { attr, fk, Model } from 'redux-orm'
 
 const Attachment = Model.createClass({
   toString () {
-    return `Attachment (${this.type}): ${this.name}`
+    return `Attachment (${this.type}): ${this.url}`
   }
 })
 
