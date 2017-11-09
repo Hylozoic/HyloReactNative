@@ -42,7 +42,14 @@ export default class PostCard extends React.Component {
   }
 
   render () {
-    const { showCommunity } = this.props
+    const {
+      showCommunity,
+      editPost,
+      currentUser,
+      showMember,
+      showTopic,
+      goToCommunity
+    } = this.props
     const {
       id: postId,
       communities,
@@ -56,12 +63,7 @@ export default class PostCard extends React.Component {
       commenters,
       commentsTotal,
       votesTotal,
-      myVote,
-      editPost,
-      currentUser,
-      showMember,
-      showTopic,
-      goToCommunity
+      myVote
     } = this.props.post
 
     const slug = get('0.slug', communities)

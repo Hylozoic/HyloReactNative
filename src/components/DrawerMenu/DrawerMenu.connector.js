@@ -3,6 +3,7 @@ import { get, omit, values } from 'lodash/fp'
 import getMe from '../../store/selectors/getMe'
 import getMemberships from '../../store/selectors/getMemberships'
 import getCurrentCommunityId from '../../store/selectors/getCurrentCommunityId'
+import getCurrentNetworkId from '../../store/selectors/getCurrentNetworkId'
 import { logout } from '../Login/actions'
 import selectCommunity from '../../store/actions/selectCommunity'
 import selectNetwork from '../../store/actions/selectNetwork'
@@ -39,6 +40,7 @@ export function partitionCommunities (memberships) {
 export function mapStateToProps (state, props) {
   const currentUser = getMe(state)
   const currentCommunityId = getCurrentCommunityId(state, props)
+  const currentNetworkId = getCurrentNetworkId(state, props)
   const paritionedCommunities =
     partitionCommunities(getMemberships(state))
   const networks = [
@@ -57,7 +59,8 @@ export function mapStateToProps (state, props) {
     avatarUrl: get('avatarUrl', currentUser),
     networks,
     communities,
-    currentCommunityId
+    currentCommunityId,
+    currentNetworkId
   }
 }
 

@@ -17,7 +17,8 @@ export default class DrawerMenu extends Component {
   render () {
     const {
       name, avatarUrl, goToCommunity, goToNetwork, goToMyProfile,
-      showSettings, networks, communities, currentCommunityId
+      showSettings, networks, communities,
+      currentNetworkId, currentCommunityId
     } = this.props
 
     const listSections = [
@@ -28,7 +29,8 @@ export default class DrawerMenu extends Component {
           network={item}
           goToCommunity={goToCommunity}
           goToNetwork={goToNetwork}
-          currentCommunityId={currentCommunityId} />,
+          currentNetworkId={currentNetworkId}
+          currentCommunityId={!currentNetworkId && currentCommunityId} />,
         keyExtractor: item => 'n' + item.id
       },
       {
@@ -37,7 +39,7 @@ export default class DrawerMenu extends Component {
         renderItem: ({ item }) => <CommunityRow
           community={item}
           goToCommunity={goToCommunity}
-          currentCommunityId={currentCommunityId}
+          currentCommunityId={!currentNetworkId && currentCommunityId}
           addPadding />,
         keyExtractor: item => 'c' + item.id
       }

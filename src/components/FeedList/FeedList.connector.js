@@ -37,7 +37,6 @@ export function mapStateToProps (state, props) {
   const sortBy = getSort(state, props)
   const filter = getFilter(state, props)
   const { community, network, topicName } = props
-  console.log('!! 1. mapStateToProps network: ', network)
   const queryProps = makeFetchOpts({
     community,
     network,
@@ -45,11 +44,7 @@ export function mapStateToProps (state, props) {
     filter,
     topicName
   })
-
   const pending = state.pending[FETCH_POSTS]
-
-  console.log('!! 2. mapStateToProps queryProps: ', queryProps)
-
   return {
     posts: getPosts(state, queryProps),
     sortBy,

@@ -9,7 +9,6 @@ import { find, get, isEmpty, map, filter } from 'lodash/fp'
 
 export default class FeedList extends Component {
   fetchOrShowCached () {
-    console.log('!! 4. fetchOrShowCached: ', this.props)
     const { hasMore, posts, fetchPosts, pending } = this.props
     if (isEmpty(posts) && hasMore !== false && !pending) fetchPosts()
   }
@@ -19,12 +18,6 @@ export default class FeedList extends Component {
   }
 
   componentDidUpdate (prevProps) {
-    console.log(
-      '!! 3. componentDidUpdate -- community changed, network changed: ',
-      get('id', prevProps.community) !== get('id', this.props.community),
-      get('id', prevProps.network) !== get('id', this.props.network)
-    )
-
     // The first two checks below prevent data from being loaded until the Home
     // tab is actually visible.
     //
@@ -64,7 +57,6 @@ export default class FeedList extends Component {
       showCommunities,
       goToCommunity
     } = this.props
-
     const listHeaderComponent = <View>
       {header}
       <ListControls
