@@ -4,15 +4,16 @@ import PopupMenuButton from '../../PopupMenuButton'
 import { Image, View } from 'react-native'
 import styles from './ImageSelector.styles'
 
-export default function ImageSelector ({ imageUrls, onAdd, onRemove }) {
-  return <View style={styles.container}>
+export default function ImageSelector ({ id, type, style, imageUrls, onAdd, onRemove }) {
+  return <View style={[styles.container, style]}>
     {imageUrls.map((url, index) => renderImageButton(url, index, onRemove))}
     <ImagePicker
       style={styles.addImageButton}
       iconStyle={styles.addImageButtonIcon}
       onError={err => console.log(err)}
       onChoice={onAdd}
-      type='post' />
+      type={type}
+      id={id} />
   </View>
 }
 ImageSelector.defaultProps = {imageUrls: []}

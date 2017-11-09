@@ -22,6 +22,10 @@ const Post = Model.createClass({
 
   images () {
     return this.attachments.filter(x => x.type === Attachment.Type.IMAGE)
+  },
+
+  files () {
+    return this.attachments.filter(x => x.type === Attachment.Type.FILE)
   }
 })
 
