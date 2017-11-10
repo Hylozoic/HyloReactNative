@@ -6,7 +6,7 @@ rm -rf $TMPDIR/npm-*
 rm -rf ios/Pods
 pod cache clean --all
 pod repo update && pod install
-npm install
+yarn install
 ./android/gradlew clean -p ./android/
 rm -rf ios/build
-npm start -- --reset-cache
+yarn start -- --reset-cache
