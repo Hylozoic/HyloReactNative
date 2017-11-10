@@ -33,7 +33,8 @@ const pick = ({ upload, type, id, onError, onChoice }) => () => {
 
     const file = {
       uri: result.uri,
-      name: result.fileName
+      name: result.fileName,
+      type: result.type
     }
 
     return upload(type, id, file)

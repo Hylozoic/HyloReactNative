@@ -128,13 +128,12 @@ export function CommentPrompt ({ currentUser, newComment, commentEdit }) {
 }
 
 function Files ({ urls }) {
-  console.log(`rendering files: ${urls.join(', ')}`)
   return <View style={styles.files}>
-    {urls.map(url => <TouchableOpacity
-      key={url}
-      onPress={() => Linking.canOpenURL(url).then(ok =>
-        ok && Linking.openURL(url))}>
+    {urls.map(url => <TouchableOpacity key={url} onPress={openUrlFn(url)}>
       <FileLabel url={url} />
     </TouchableOpacity>)}
   </View>
 }
+
+const openUrlFn = url => () =>
+  Linking.canOpenURL(url).then(ok => ok && Linking.openURL(url))

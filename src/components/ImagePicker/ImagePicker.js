@@ -58,7 +58,8 @@ export default class ImagePicker extends Component {
       } else {
         const file = {
           uri: result.uri,
-          name: result.fileName
+          name: result.fileName,
+          type: result.type
         }
 
         return upload(type, id, file)
