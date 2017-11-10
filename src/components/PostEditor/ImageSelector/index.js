@@ -5,35 +5,27 @@ import { Image, View } from 'react-native'
 import styles from './ImageSelector.styles'
 import { isDev } from 'util/testing'
 
-export default class ImageSelector extends React.Component {
-  static defaultProps = {imageUrls: []}
-
-  renderImageButton = (imageUrl, buttonIndex) => {
-    return <PopupMenuButton
-      key={imageUrl}
+export default function ImageSelector ({ id, type, style, imageUrls, onAdd, onRemove }) {
+  return <View style={[styles.container, style]}>
+    {imageUrls.map((url, index) => renderImageButton(url, index, onRemove))}
+    <ImagePicker
       style={styles.addImageButton}
-      actions={['Remove image']}
-      destructiveButtonIndex={0}
-      onSelect={menuIndex => this.props.onRemove(imageUrl)}>
-      <Image style={styles.addImageButtonImage} source={{uri: imageUrl}} />
-    </PopupMenuButton>
-  }
-
-  renderPickerButton (props) {
-    return <ImagePicker
-      {...props}
+      iconStyle={styles.addImageButtonIcon}
       onError={err => isDev && console.log(err)}
-      onChoice={this.props.onAdd}
-      type='post' />
-  }
+      onChoice={onAdd}
+      type={type}
+      id={id} />
+  </View>
+}
+ImageSelector.defaultProps = {imageUrls: []}
 
-  render () {
-    return <View style={styles.container}>
-      {this.props.imageUrls.map(this.renderImageButton)}
-      {this.renderPickerButton({
-        style: styles.addImageButton,
-        iconStyle: styles.addImageButtonIcon
-      })}
-    </View>
-  }
+function renderImageButton (imageUrl, buttonIndex, onRemove) {
+  return <PopupMenuButton
+    key={imageUrl}
+    style={styles.addImageButton}
+    actions={['Remove image']}
+    destructiveButtonIndex={0}
+    onSelect={menuIndex => onRemove(imageUrl)}>
+    <Image style={styles.addImageButtonImage} source={{uri: imageUrl}} />
+  </PopupMenuButton>
 }

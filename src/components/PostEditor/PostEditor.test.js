@@ -13,6 +13,12 @@ const mockPost = {
 }
 
 describe('PostEditor', () => {
+  let navigation
+
+  beforeEach(() => {
+    navigation = {setParams: jest.fn()}
+  })
+
   it('renders a new editor correctly', () => {
     const save = jest.fn(() => Promise.resolve())
 
@@ -38,7 +44,6 @@ describe('PostEditor', () => {
   })
 
   it('presses buttons', () => {
-    const navigation = {setParams: jest.fn()}
     const save = jest.fn(() => Promise.resolve())
     const editDetails = jest.fn()
     const renderer = TestRenderer.create(
@@ -72,12 +77,17 @@ describe('PostEditor', () => {
   })
 
   it('has navigation options', () => {
-    const props = {navigation: {state: {params: {headerTitle: 'a title', save: jest.fn(), isSaving: false}}}}
+    const props = {
+      navigation: {
+        state: {
+          params: {headerTitle: 'a title', save: jest.fn(), isSaving: false}
+        }
+      }
+    }
     expect(PostEditor.navigationOptions(props)).toMatchSnapshot()
   })
 
   it('renders correctly while saving', () => {
-    const navigation = {setParams: jest.fn()}
     const save = jest.fn(() => Promise.resolve())
     const renderer = TestRenderer.create(
       <Provider store={createMockStore()}>
@@ -105,7 +115,6 @@ describe('PostEditor', () => {
 
   it('handles save rejections properly', async () => {
     expect.assertions(2)
-    const navigation = {setParams: jest.fn()}
     const save = jest.fn(() => Promise.reject(new Error('invalid')))
     const renderer = TestRenderer.create(
       <Provider store={createMockStore()}>
@@ -126,7 +135,6 @@ describe('PostEditor', () => {
   })
 
   it('has image methods', () => {
-    const navigation = {setParams: jest.fn()}
     const renderer = TestRenderer.create(
       <Provider store={createMockStore()}>
         <PostEditor
@@ -147,6 +155,30 @@ describe('PostEditor', () => {
     instance.removeImage('http://foo.com/foo.png')
     expect(instance.state.imageUrls).toEqual([
       'http://bar.com/bar.png'
+    ])
+  })
+
+  it('has file methods', () => {
+    const renderer = TestRenderer.create(
+      <Provider store={createMockStore()}>
+        <PostEditor
+          editDetails={jest.fn()}
+          setDetails={jest.fn()}
+          navigation={navigation}
+          fileUrls={['http://foo.com/foo.pdf']}
+          post={mockPost} />
+      </Provider>)
+
+    const instance = renderer.root.findByType(PostEditor).instance
+    instance.addFile({remote: 'http://bar.com/bar.pdf'})
+    expect(instance.state.fileUrls).toEqual([
+      'http://foo.com/foo.pdf',
+      'http://bar.com/bar.pdf'
+    ])
+
+    instance.removeFile('http://foo.com/foo.pdf')
+    expect(instance.state.fileUrls).toEqual([
+      'http://bar.com/bar.pdf'
     ])
   })
 })

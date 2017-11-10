@@ -10,27 +10,26 @@ function getPostId (state, props) {
   return props.navigation.state.params.id
 }
 
-function mapStateToProps (state, props) {
+export function mapStateToProps (state, props) {
   const id = getPostId(state, props)
   let post = getPost(state, {id})
-  post = {
-    ...post.ref,
-    creator: post.creator,
-    commenters: post.commenters.toModelArray(),
-    communities: post.communities.toModelArray()
-  }
-
   const currentUser = getMe(state, props)
   const commentEdit = getCommentEdits(state, {postId: id})
 
   return {
-    post,
+    post: {
+      ...post.ref,
+      creator: post.creator,
+      commenters: post.commenters.toModelArray(),
+      communities: post.communities.toModelArray(),
+      fileUrls: post.getFileUrls()
+    },
     currentUser,
     commentEdit
   }
 }
 
-function mapDispatchToProps (dispatch, props) {
+export function mapDispatchToProps (dispatch, props) {
   const id = getPostId(null, props)
 
   return {
@@ -44,11 +43,11 @@ function mapDispatchToProps (dispatch, props) {
         communityId
       })
     },
-    goToCommunity: makeGoToCommunity(dispatch, props.navigate)
+    goToCommunity: makeGoToCommunity(dispatch, props.navigation)
   }
 }
 
-function mergeProps (stateProps, dispatchProps, ownProps) {
+export function mergeProps (stateProps, dispatchProps, ownProps) {
   // TODO: handle posts in multiple communities
   const communityId = get('communities.0.id', stateProps.post)
   return {
