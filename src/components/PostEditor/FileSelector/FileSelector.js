@@ -16,7 +16,7 @@ export default class FileSelector extends React.PureComponent {
     DocumentPicker.show({
       filetype: [DocumentPickerUtil.allFiles()]
     }, (err, result) => {
-      if (err) return alert(err.message)
+      if (err) return onError(err.message)
 
       const file = {
         uri: result.uri,

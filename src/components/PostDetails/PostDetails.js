@@ -127,7 +127,7 @@ export function CommentPrompt ({ currentUser, newComment, commentEdit }) {
   </View>
 }
 
-function Files ({ urls }) {
+export function Files ({ urls }) {
   return <View style={styles.files}>
     {urls.map(url => <TouchableOpacity key={url} onPress={openUrlFn(url)}>
       <FileLabel url={url} />
