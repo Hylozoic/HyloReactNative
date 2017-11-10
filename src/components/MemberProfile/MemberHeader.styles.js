@@ -1,5 +1,5 @@
 import {
-  capeCod, rhino80, rhino60, rhino50
+  capeCod, rhino80, rhino60, rhino50, amaranth
 } from '../../style/colors'
 
 export default {
@@ -41,12 +41,14 @@ export default {
     fontFamily: 'Circular-Book'
   },
   control: {
-    flexDirection: 'row',
-    flex: 1,
-    alignItems: 'center'
+    flex: 1
   },
   editableControl: {
     marginBottom: 5
+  },
+  controlInputRow: {
+    flexDirection: 'row',
+    alignItems: 'center'
   },
   controlInput: {
     flex: 1
@@ -57,5 +59,14 @@ export default {
   editIcon: {
     color: rhino60,
     fontSize: 16
+  },
+  controlError: {
+    paddingTop: 5,
+    paddingBottom: 3
+  },
+  controlErrorText: {
+    fontSize: 13,
+    fontFamily: 'Circular-Book',
+    color: amaranth
   }
 }

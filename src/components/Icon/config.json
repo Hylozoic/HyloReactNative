@@ -1,241 +1,198 @@
 {
   "selection": [
     {
+      "order": 29,
+      "ligatures": ""
+    },
+    {
+      "order": 30,
+      "ligatures": ""
+    },
+    {
+      "order": 31,
+      "ligatures": ""
+    },
+    {
+      "order": 32,
+      "ligatures": ""
+    },
+    {
+      "order": 33,
+      "ligatures": ""
+    },
+    {
+      "order": 34,
+      "ligatures": ""
+    },
+    {
+      "order": 35,
+      "ligatures": ""
+    },
+    {
+      "order": 36,
+      "ligatures": ""
+    },
+    {
+      "order": 37,
+      "ligatures": ""
+    },
+    {
+      "order": 38,
+      "ligatures": ""
+    },
+    {
+      "order": 39,
+      "ligatures": ""
+    },
+    {
+      "order": 40,
+      "ligatures": ""
+    },
+    {
+      "order": 41,
+      "ligatures": ""
+    },
+    {
       "order": 42,
-      "name": "Send",
-      "prevSize": 32
+      "ligatures": ""
     },
     {
       "order": 43,
-      "ligatures": "",
-      "prevSize": 32,
-      "name": "Checkmark"
-    },
-    {
-      "order": 50,
-      "ligatures": "",
-      "prevSize": 32,
-      "name": "Empty"
-    },
-    {
-      "order": 54,
-      "ligatures": "",
-      "prevSize": 32,
-      "name": "Back"
-    },
-    {
-      "order": 55,
-      "ligatures": "",
-      "prevSize": 32,
-      "name": "AddImage"
-    },
-    {
-      "order": 56,
-      "ligatures": "",
-      "prevSize": 32,
-      "name": "Clock"
-    },
-    {
-      "order": 57,
-      "ligatures": "",
-      "prevSize": 32,
-      "name": "Star"
-    },
-    {
-      "order": 58,
-      "ligatures": "",
-      "prevSize": 32,
-      "name": "ProfileUrl"
-    },
-    {
-      "order": 59,
-      "ligatures": "",
-      "prevSize": 32,
-      "name": "ProfileTwitter"
-    },
-    {
-      "order": 60,
-      "ligatures": "",
-      "prevSize": 32,
-      "name": "ProfileLinkedin"
-    },
-    {
-      "order": 61,
-      "ligatures": "",
-      "prevSize": 32,
-      "name": "ProfileFacebook"
+      "ligatures": ""
     },
     {
       "order": 44,
-      "ligatures": "",
-      "prevSize": 32,
-      "name": "Reply"
+      "ligatures": ""
     },
     {
       "order": 45,
-      "ligatures": "",
-      "prevSize": 32,
-      "name": "LinkedIn"
-    },
-    {
-      "order": 51,
-      "ligatures": "",
-      "prevSize": 32,
-      "name": "Google"
-    },
-    {
-      "order": 62,
-      "ligatures": "",
-      "prevSize": 32,
-      "name": "Facebook"
-    },
-    {
-      "order": 63,
-      "ligatures": "",
-      "prevSize": 32,
-      "name": "Ex"
-    },
-    {
-      "order": 64,
-      "ligatures": "",
-      "prevSize": 32,
-      "name": "NewCommunity"
-    },
-    {
-      "order": 65,
-      "ligatures": "",
-      "prevSize": 32,
-      "name": "Projects"
-    },
-    {
-      "order": 66,
-      "ligatures": "",
-      "prevSize": 32,
-      "name": "Events"
-    },
-    {
-      "order": 67,
-      "ligatures": "",
-      "prevSize": 32,
-      "name": "Home"
-    },
-    {
-      "order": 68,
-      "ligatures": "",
-      "prevSize": 32,
-      "name": "Topics"
-    },
-    {
-      "order": 69,
-      "ligatures": "",
-      "prevSize": 32,
-      "name": "Members"
+      "ligatures": ""
     },
     {
       "order": 46,
-      "ligatures": "",
-      "prevSize": 32,
-      "name": "Messages"
+      "ligatures": ""
     },
     {
       "order": 47,
-      "ligatures": "",
-      "prevSize": 32,
-      "name": "Notifications"
-    },
-    {
-      "order": 52,
-      "ligatures": "",
-      "prevSize": 32,
-      "name": "Search"
-    },
-    {
-      "order": 70,
-      "ligatures": "",
-      "prevSize": 32,
-      "name": "Share"
-    },
-    {
-      "order": 71,
-      "ligatures": "",
-      "prevSize": 32,
-      "name": "More"
-    },
-    {
-      "order": 72,
-      "ligatures": "",
-      "prevSize": 32,
-      "name": "ArrowUp"
-    },
-    {
-      "order": 73,
-      "ligatures": "",
-      "prevSize": 32,
-      "name": "ArrowDown"
-    },
-    {
-      "order": 74,
-      "ligatures": "",
-      "prevSize": 32,
-      "name": "Location"
-    },
-    {
-      "order": 75,
-      "ligatures": "",
-      "prevSize": 32,
-      "name": "Trash"
-    },
-    {
-      "order": 76,
-      "ligatures": "",
-      "prevSize": 32,
-      "name": "Pin"
-    },
-    {
-      "order": 77,
-      "ligatures": "",
-      "prevSize": 32,
-      "name": "Complete"
+      "ligatures": ""
     },
     {
       "order": 48,
-      "ligatures": "",
-      "prevSize": 32,
-      "name": "Flag"
+      "ligatures": ""
     },
     {
       "order": 49,
-      "ligatures": "",
-      "prevSize": 32,
-      "name": "Circle"
+      "ligatures": ""
+    },
+    {
+      "order": 50,
+      "ligatures": ""
+    },
+    {
+      "order": 51,
+      "ligatures": ""
+    },
+    {
+      "order": 52,
+      "ligatures": ""
     },
     {
       "order": 53,
-      "ligatures": "",
-      "prevSize": 32,
-      "name": "Edit"
+      "ligatures": ""
+    },
+    {
+      "order": 54,
+      "ligatures": ""
+    },
+    {
+      "order": 55,
+      "ligatures": ""
+    },
+    {
+      "order": 56,
+      "ligatures": ""
+    },
+    {
+      "order": 57,
+      "ligatures": ""
+    },
+    {
+      "order": 58,
+      "ligatures": ""
+    },
+    {
+      "order": 59,
+      "ligatures": ""
+    },
+    {
+      "order": 60,
+      "ligatures": ""
+    },
+    {
+      "order": 61,
+      "ligatures": ""
+    },
+    {
+      "order": 62,
+      "ligatures": ""
+    },
+    {
+      "order": 63,
+      "ligatures": ""
+    },
+    {
+      "order": 64,
+      "ligatures": ""
+    },
+    {
+      "order": 65,
+      "ligatures": ""
+    },
+    {
+      "order": 66,
+      "ligatures": ""
+    },
+    {
+      "order": 67,
+      "ligatures": ""
     }
   ],
   "metadata": {
     "name": "hylo-evo-icons",
-    "importSize": {
-      "width": 62,
-      "height": 62
-    },
-    "iconsHash": 1734784515
+    "iconsHash": 1693500346
   },
   "height": 1024,
   "prevSize": 32,
   "icons": [
     {
       "paths": [
+        "M608 32h-384c-52.8 0-95.52 43.2-95.52 96l-0.48 768c0 52.8 42.72 96 95.52 96h576.48c52.8 0 96-43.2 96-96v-576l-288-288zM704 800h-384v-96h384v96zM704 608h-384v-96h384v96zM560 368v-264l264 264h-264z"
+      ],
+      "tags": [
+        "Document"
+      ],
+      "defaultCode": 59648,
+      "grid": 0
+    },
+    {
+      "paths": [
+        "M937.102 175.004l-69.191-83.627c-13.44-16.924-33.849-27.378-57.244-27.378h-597.333c-23.396 0-43.804 10.453-57.742 27.378l-68.693 83.627c-14.436 16.924-22.898 39.324-22.898 63.218v622.222c0 54.756 44.8 99.556 99.556 99.556h696.889c54.756 0 99.556-44.8 99.556-99.556v-622.222c0-23.893-8.462-46.293-22.898-63.218v0zM512 785.773l-273.779-273.776h174.223v-99.555h199.112v99.555h174.223l-273.779 273.776zM169.53 163.558l40.32-49.779h597.331l46.791 49.779h-684.442z"
+      ],
+      "tags": [
+        "Download"
+      ],
+      "defaultCode": 59649,
+      "grid": 0
+    },
+    {
+      "paths": [
         "M689.542 540.146l-294.899 147.449c-16.317 8.159-36.159 1.545-44.317-14.772-4.345-8.689-4.644-18.85-0.818-27.78l52.412-122.344c3.573-8.341 3.558-17.784-0.042-26.113l-51.922-120.125c-7.238-16.746 0.469-36.189 17.215-43.427 8.952-3.869 19.156-3.585 27.878 0.776l294.493 147.247c16.317 8.159 22.931 28 14.772 44.317-3.196 6.393-8.38 11.576-14.772 14.772z"
       ],
-      "grid": 0,
       "tags": [
         "Send"
       ],
-      "defaultCode": 59648
+      "defaultCode": 59650,
+      "grid": 0
     },
     {
       "paths": [
@@ -244,7 +201,7 @@
       "tags": [
         "Checkmark"
       ],
-      "defaultCode": 59649,
+      "defaultCode": 59651,
       "grid": 0
     },
     {
@@ -254,7 +211,7 @@
       "tags": [
         "Empty"
       ],
-      "defaultCode": 59650,
+      "defaultCode": 59652,
       "grid": 0
     },
     {
@@ -265,7 +222,7 @@
       "tags": [
         "Back"
       ],
-      "defaultCode": 59651,
+      "defaultCode": 59653,
       "grid": 0
     },
     {
@@ -275,7 +232,7 @@
       "tags": [
         "AddImage"
       ],
-      "defaultCode": 59652,
+      "defaultCode": 59654,
       "grid": 0
     },
     {
@@ -285,7 +242,7 @@
       "tags": [
         "Clock"
       ],
-      "defaultCode": 59653,
+      "defaultCode": 59655,
       "grid": 0
     },
     {
@@ -295,7 +252,7 @@
       "tags": [
         "Star"
       ],
-      "defaultCode": 59654,
+      "defaultCode": 59656,
       "grid": 0
     },
     {
@@ -305,7 +262,7 @@
       "tags": [
         "ProfileUrl"
       ],
-      "defaultCode": 59655,
+      "defaultCode": 59657,
       "grid": 0
     },
     {
@@ -315,7 +272,7 @@
       "tags": [
         "ProfileTwitter"
       ],
-      "defaultCode": 59656,
+      "defaultCode": 59658,
       "grid": 0
     },
     {
@@ -325,7 +282,7 @@
       "tags": [
         "ProfileLinkedin"
       ],
-      "defaultCode": 59657,
+      "defaultCode": 59659,
       "grid": 0
     },
     {
@@ -335,7 +292,7 @@
       "tags": [
         "ProfileFacebook"
       ],
-      "defaultCode": 59658,
+      "defaultCode": 59660,
       "grid": 0
     },
     {
@@ -346,7 +303,7 @@
       "tags": [
         "Reply"
       ],
-      "defaultCode": 59659,
+      "defaultCode": 59661,
       "grid": 0
     },
     {
@@ -356,7 +313,7 @@
       "tags": [
         "LinkedIn"
       ],
-      "defaultCode": 59660,
+      "defaultCode": 59662,
       "grid": 0
     },
     {
@@ -366,7 +323,7 @@
       "tags": [
         "Google"
       ],
-      "defaultCode": 59661,
+      "defaultCode": 59663,
       "grid": 0
     },
     {
@@ -377,7 +334,7 @@
       "tags": [
         "Facebook"
       ],
-      "defaultCode": 59662,
+      "defaultCode": 59664,
       "grid": 0
     },
     {
@@ -387,7 +344,7 @@
       "tags": [
         "Ex"
       ],
-      "defaultCode": 59663,
+      "defaultCode": 59665,
       "grid": 0
     },
     {
@@ -397,7 +354,7 @@
       "tags": [
         "NewCommunity"
       ],
-      "defaultCode": 59664,
+      "defaultCode": 59666,
       "grid": 0
     },
     {
@@ -407,7 +364,7 @@
       "tags": [
         "Projects"
       ],
-      "defaultCode": 59665,
+      "defaultCode": 59667,
       "grid": 0
     },
     {
@@ -417,7 +374,7 @@
       "tags": [
         "Events"
       ],
-      "defaultCode": 59666,
+      "defaultCode": 59668,
       "grid": 0
     },
     {
@@ -427,7 +384,7 @@
       "tags": [
         "Home"
       ],
-      "defaultCode": 59667,
+      "defaultCode": 59669,
       "grid": 0
     },
     {
@@ -437,7 +394,7 @@
       "tags": [
         "Topics"
       ],
-      "defaultCode": 59668,
+      "defaultCode": 59670,
       "grid": 0
     },
     {
@@ -447,7 +404,7 @@
       "tags": [
         "Members"
       ],
-      "defaultCode": 59669,
+      "defaultCode": 59671,
       "grid": 0
     },
     {
@@ -457,7 +414,7 @@
       "tags": [
         "Messages"
       ],
-      "defaultCode": 59670,
+      "defaultCode": 59672,
       "grid": 0
     },
     {
@@ -467,7 +424,7 @@
       "tags": [
         "Notifications"
       ],
-      "defaultCode": 59671,
+      "defaultCode": 59673,
       "grid": 0
     },
     {
@@ -477,7 +434,7 @@
       "tags": [
         "Search"
       ],
-      "defaultCode": 59672,
+      "defaultCode": 59674,
       "grid": 0
     },
     {
@@ -487,7 +444,7 @@
       "tags": [
         "Share"
       ],
-      "defaultCode": 59673,
+      "defaultCode": 59675,
       "grid": 0
     },
     {
@@ -497,7 +454,7 @@
       "tags": [
         "More"
       ],
-      "defaultCode": 59674,
+      "defaultCode": 59676,
       "grid": 0
     },
     {
@@ -507,7 +464,7 @@
       "tags": [
         "ArrowUp"
       ],
-      "defaultCode": 59675,
+      "defaultCode": 59677,
       "grid": 0
     },
     {
@@ -517,7 +474,7 @@
       "tags": [
         "ArrowDown"
       ],
-      "defaultCode": 59676,
+      "defaultCode": 59678,
       "grid": 0
     },
     {
@@ -527,7 +484,7 @@
       "tags": [
         "Location"
       ],
-      "defaultCode": 59677,
+      "defaultCode": 59679,
       "grid": 0
     },
     {
@@ -537,7 +494,7 @@
       "tags": [
         "Trash"
       ],
-      "defaultCode": 59678,
+      "defaultCode": 59680,
       "grid": 0
     },
     {
@@ -547,7 +504,7 @@
       "tags": [
         "Pin"
       ],
-      "defaultCode": 59679,
+      "defaultCode": 59681,
       "grid": 0
     },
     {
@@ -557,7 +514,7 @@
       "tags": [
         "Complete"
       ],
-      "defaultCode": 59680,
+      "defaultCode": 59682,
       "grid": 0
     },
     {
@@ -567,7 +524,7 @@
       "tags": [
         "Flag"
       ],
-      "defaultCode": 59681,
+      "defaultCode": 59683,
       "grid": 0
     },
     {
@@ -577,7 +534,17 @@
       "tags": [
         "Circle"
       ],
-      "defaultCode": 59682,
+      "defaultCode": 59684,
+      "grid": 0
+    },
+    {
+      "paths": [
+        "M613.948 471.208l-219.417 219.417c-47.962 47.962-107.060 54.922-153.869 8.113s-39.849-105.906 8.113-153.869l271.045-271.045c68.489-68.489 166.039-73.384 234.906-4.517s63.971 166.417-4.517 234.906l-245.231 245.231c-9.089 9.089-23.824 9.089-32.913 0s-9.089-23.824 0-32.913l245.231-245.231c51.008-51.008 54.428-119.17 4.517-169.080s-118.073-46.49-169.080 4.517l-271.045 271.045c-31.266 31.266-34.809 61.348-8.113 88.044s56.777 23.153 88.044-8.113l219.417-219.417c9.089-9.089 23.824-9.089 32.913 0s9.089 23.824 0 32.913z"
+      ],
+      "tags": [
+        "Paperclip"
+      ],
+      "defaultCode": 59685,
       "grid": 0
     },
     {
@@ -592,7 +559,6 @@
       "grid": 0
     }
   ],
-  "colorThemes": [],
   "preferences": {
     "showGlyphs": true,
     "showQuickUse": true,

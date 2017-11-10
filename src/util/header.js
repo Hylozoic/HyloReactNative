@@ -3,8 +3,9 @@
  */
 import React from 'react'
 import { StyleSheet, Text, TouchableOpacity } from 'react-native'
-import { isIOS } from 'util/platform'
 import { rhino60, rhino20 } from 'style/colors'
+
+export const tintColor = rhino60
 
 export class HeaderButton extends React.Component {
   constructor (props) {
@@ -79,7 +80,7 @@ export default function header ({ goBack, state }, { left, right, title, options
   const headerOptions = {
     ...state.params,
     headerStyle: styles.header,
-    headerTintColor: rhino60,
+    headerTintColor: tintColor,
     headerTitle: title || state.params.title,
     headerTitleStyle: styles.title,
     ...options
@@ -98,7 +99,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Circular-Book',
     fontSize: 15,
     paddingTop: 1,
-    color: rhino60
+    color: tintColor
   },
   disabled: {
     color: rhino20

@@ -24,6 +24,9 @@ import {
 import {
   RESET_NEW_POST_COUNT_PENDING
 } from '../../actions/resetNewPostCount'
+import {
+  UPDATE_USER_SETTINGS_PENDING
+} from '../../actions/updateUserSettings'
 
 it('responds to an action with meta.extractModel', () => {
   const state = orm.getEmptyState()
@@ -279,4 +282,39 @@ describe('on RESET_NEW_POST_COUNT_PENDING', () => {
   expect(session.Membership.first().newPostCount).toEqual(undefined)
   const newSession = orm.session(ormReducer(session.state, action))
   expect(newSession.Membership.first().newPostCount).toEqual(0)
+})
+
+describe('on UPDATE_USER_SETTINGS_PENDING', () => {
+  const session = orm.session(orm.getEmptyState())
+  const id = 123
+  const userData = {
+    id,
+    location: 'Spain',
+    tagline: 'lalala',
+    settings: {
+      setting1: 1,
+      setting2: 2
+    }
+  }
+  session.Me.create(userData)
+
+  session.Person.create(userData)
+
+  const action = {
+    type: UPDATE_USER_SETTINGS_PENDING,
+    meta: {
+      changes: {
+        location: 'Japan',
+        settings: {
+          setting2: 3
+        }
+      }
+    }
+  }
+
+  it('updates Me and the Person', () => {
+    const newSession = orm.session(ormReducer(session.state, action))
+    expect(newSession.Me.first().ref).toMatchSnapshot()
+    expect(newSession.Person.withId(id).ref).toMatchSnapshot()
+  })
 })
