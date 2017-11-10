@@ -1,6 +1,6 @@
-import { upload } from './ImagePicker.connector'
+import upload from 'store/actions/upload'
 import apiHost from 'util/apiHost'
-import Request from './Request'
+import Request from 'util/Request'
 
 jest.mock('react-native-device-info')
 

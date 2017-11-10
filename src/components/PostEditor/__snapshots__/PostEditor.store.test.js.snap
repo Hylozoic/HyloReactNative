@@ -8,14 +8,16 @@ Object {
         $title: String,
         $details: String,
         $communityIds: [String],
-        $imageUrls: [String]
+        $imageUrls: [String],
+        $fileUrls: [String]
       ) {
         createPost(data: {
           type: $type,
           title: $title,
           details: $details,
           communityIds: $communityIds,
-          imageUrls: $imageUrls
+          imageUrls: $imageUrls,
+          fileUrls: $fileUrls
         }) {
           id
           type
@@ -43,6 +45,7 @@ Object {
         undefined,
       ],
       "details": "details",
+      "fileUrls": Array [],
       "imageUrls": Array [],
       "title": "title",
       "type": "post",
@@ -70,14 +73,16 @@ Object {
         $title: String,
         $details: String,
         $communityIds: [String],
-        $imageUrls: [String]
+        $imageUrls: [String],
+        $fileUrls: [String]
       ) {
         updatePost(id: $id, data: {
           type: $type,
           title: $title,
           details: $details,
           communityIds: $communityIds,
-          imageUrls: $imageUrls
+          imageUrls: $imageUrls,
+          fileUrls: $fileUrls
         }) {
           id
           type
@@ -101,6 +106,7 @@ Object {
         undefined,
       ],
       "details": "details",
+      "fileUrls": Array [],
       "id": 1,
       "imageUrls": Array [],
       "title": "title",

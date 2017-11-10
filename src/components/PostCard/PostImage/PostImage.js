@@ -38,7 +38,8 @@ export default function PostImage ({ imageUrls, linked }) {
     imageStyle={styles.backgroundImage}
     source={{uri: imageUrls[0]}}>
     {imageUrls.length > 0 && imageUrls.slice(1).map(uri =>
-      <Image key={uri} source={{uri}} style={styles.thumbnail} />)}
+      <Image key={uri} source={{uri}}
+        style={[styles.thumbnail, styles.thumbnailWrapper]} />)}
   </ImageBackground>
 }
 

@@ -44,6 +44,81 @@ exports[`CommentPrompt renders with comment text 1`] = `
 </View>
 `;
 
+exports[`Files renders correctly 1`] = `
+<View>
+  <View
+    accessibilityComponentType={undefined}
+    accessibilityLabel={undefined}
+    accessibilityTraits={undefined}
+    accessible={true}
+    collapsable={undefined}
+    hitSlop={undefined}
+    isTVSelectable={true}
+    nativeID={undefined}
+    onLayout={undefined}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    testID={undefined}
+    tvParallaxProperties={undefined}
+  >
+    <View>
+      <Icon
+        color={undefined}
+        name="Document"
+      />
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        disabled={false}
+        ellipsizeMode="tail"
+        numberOfLines={2}
+      >
+        foo.pdf
+      </Text>
+    </View>
+  </View>
+  <View
+    accessibilityComponentType={undefined}
+    accessibilityLabel={undefined}
+    accessibilityTraits={undefined}
+    accessible={true}
+    collapsable={undefined}
+    hitSlop={undefined}
+    isTVSelectable={true}
+    nativeID={undefined}
+    onLayout={undefined}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    testID={undefined}
+    tvParallaxProperties={undefined}
+  >
+    <View>
+      <Icon
+        color={undefined}
+        name="Document"
+      />
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        disabled={false}
+        ellipsizeMode="tail"
+        numberOfLines={2}
+      >
+        bar.zip
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
 exports[`PostDetails renders correctly 1`] = `
 <View>
   <Connect(Comments)
@@ -99,6 +174,14 @@ exports[`PostDetails renders correctly 1`] = `
           showTopic={[Function]}
           slug="foom"
           title="Hi"
+        />
+        <Files
+          urls={
+            Array [
+              "http://foo.com/foo.pdf",
+              "http://foo.com/bar.zip",
+            ]
+          }
         />
         <Connect(PostFooter)
           commenters={

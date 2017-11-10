@@ -94,5 +94,8 @@ export default {
   },
   saveButton: {
     marginRight: 10
+  },
+  imageSelector: {
+    marginBottom: 10
   }
 }
