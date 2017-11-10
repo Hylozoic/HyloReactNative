@@ -4816,10 +4816,6 @@ react-native-prompt-android@^0.3.1:
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/react-native-prompt-android/-/react-native-prompt-android-0.3.1.tgz#6d10ff80a5b48f0204e40bf8bc78295dfe29df38"
 
-react-native-prompt@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/react-native-prompt/-/react-native-prompt-1.0.0.tgz#41e0ec2aa7dd8f12f3a3ee83af9d63c4b670f8a1"
-
 react-native-tab-navigator@^0.3.3:
   version "0.3.3"
   resolved "https://registry.yarnpkg.com/react-native-tab-navigator/-/react-native-tab-navigator-0.3.3.tgz#b222bad21fbe773c8d28f9a0de30ce62b08724d3"
@@ -4854,10 +4850,11 @@ react-native-webview-bridge-updated@^1.0.0, react-native-webview-bridge-updated@
     invariant "2.2.0"
     keymirror "0.1.1"
 
-react-native-zss-rich-text-editor@Hylozoic/react-native-zss-rich-text-editor#19cf5e8b:
-  version "1.0.2"
-  resolved "https://codeload.github.com/Hylozoic/react-native-zss-rich-text-editor/tar.gz/19cf5e8ba74eabe5e541e3e412cc089b1e145b55"
+react-native-zss-rich-text-editor@Hylozoic/react-native-zss-rich-text-editor#6cb3038e:
+  version "1.0.3"
+  resolved "https://codeload.github.com/Hylozoic/react-native-zss-rich-text-editor/tar.gz/6cb3038e04161408b5b9b5adb4d55c0553daac2e"
   dependencies:
+    prop-types "^15.6.0"
     react-native-webview-bridge-updated "^1.0.0"
 
 react-native@^0.50.3:
