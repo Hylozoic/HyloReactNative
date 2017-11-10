@@ -45,12 +45,11 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new RNGoogleSigninPackage(),
-            new RNPromptPackage(),
-            new RNDeviceInfo(),
-            new LinearGradientPackage(),
-            new BackgroundTimerPackage(),
-            new ReactNativeOneSignalPackage(),
+          new RNPromptPackage(),
+          new RNDeviceInfo(),
+          new LinearGradientPackage(),
+          new BackgroundTimerPackage(),
+          new ReactNativeOneSignalPackage(),
           new ImagePickerPackage(),
           new RNGoogleSigninPackage(),
           new FBSDKPackage(mCallbackManager),
@@ -58,12 +57,12 @@ public class MainApplication extends Application implements ReactApplication {
           new WebViewBridgePackage()
       );
     }
-  };
 
-  @Override
-  protected String getJSMainModuleName() {
-    return "index";
-  }
+    @Override
+    protected String getJSMainModuleName() {
+      return "index";
+    }
+  };
 
   @Override
   public ReactNativeHost getReactNativeHost() {
@@ -74,7 +73,7 @@ public class MainApplication extends Application implements ReactApplication {
   public void onCreate() {
     super.onCreate();
     FacebookSdk.sdkInitialize(getApplicationContext());
-    // If you want to use AppEventsLogger to log events.
-    AppEventsLogger.activateApp(this);
+
+    SoLoader.init(this, /* native exopackage */ false);
   }
 }
