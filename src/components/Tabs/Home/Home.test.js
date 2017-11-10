@@ -1,7 +1,7 @@
 import 'react-native'
 import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
-import { Home } from './Home'
+import Home from './Home'
 
 jest.mock('react-native-device-info')
 

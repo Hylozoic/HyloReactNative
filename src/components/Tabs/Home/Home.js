@@ -1,11 +1,10 @@
 import React from 'react'
-import { withNavigationFocus } from 'react-navigation-is-focused-hoc'
 
 import Feed from '../../Feed'
 import Header from '../Header'
 import Loading from '../../Loading'
 
-export class Home extends React.Component {
+export default class Home extends React.Component {
   static navigationOptions = ({ navigation, screenProps }) => {
     return Header(navigation, screenProps.currentTabName)
   }
@@ -23,5 +22,3 @@ export class Home extends React.Component {
       screenProps={this.props.screenProps} />
   }
 }
-
-export default withNavigationFocus(Home)

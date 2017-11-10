@@ -10,7 +10,7 @@ import Loading from '../Loading'
 import styles from './ThreadList.styles'
 import ThreadCard from '../ThreadCard'
 
-export class ThreadList extends Component {
+export default class ThreadList extends Component {
   state = {ready: false}
 
   static navigationOptions = ({ navigation }) =>
@@ -102,5 +102,3 @@ export function MessageRow ({message, participants, currentUser, showThread, isL
     </TouchableOpacity>
   </View>
 }
-
-export default withNavigationFocus(ThreadList)

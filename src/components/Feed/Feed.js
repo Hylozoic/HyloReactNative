@@ -1,14 +1,13 @@
 import React, { Component } from 'react'
 import { View } from 'react-native'
 import { get } from 'lodash/fp'
-import { withNavigationFocus } from 'react-navigation-is-focused-hoc'
 
 import FeedList from '../FeedList'
 import FeedBanner from '../FeedBanner'
 import SocketSubscriber from '../SocketSubscriber'
 import styles from './Feed.styles'
 
-export class Feed extends Component {
+export default class Feed extends Component {
   state = {showNotification: false}
 
   static navigationOptions = ({ navigation }) => {
@@ -68,5 +67,3 @@ export class Feed extends Component {
     </View>
   }
 }
-
-export default withNavigationFocus(Feed)

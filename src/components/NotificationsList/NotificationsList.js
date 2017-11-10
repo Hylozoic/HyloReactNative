@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
 import { FlatList, TouchableOpacity, View, Text } from 'react-native'
-import { withNavigationFocus } from 'react-navigation-is-focused-hoc'
 
 import header from 'util/header'
 import Loading from '../Loading'
 import NotificationCard from '../NotificationCard'
 import styles from './NotificationsList.styles'
 
-export class NotificationsList extends Component {
+export default class NotificationsList extends Component {
   state = {ready: false}
 
   static navigationOptions = ({ navigation }) =>
@@ -68,5 +67,3 @@ export function NotificationRow ({ markActivityRead, notification }) {
     </TouchableOpacity>
   </View>
 }
-
-export default withNavigationFocus(NotificationsList)

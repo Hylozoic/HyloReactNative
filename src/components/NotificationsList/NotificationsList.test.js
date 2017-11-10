@@ -4,7 +4,7 @@ import ShallowRenderer from 'react-test-renderer/shallow'
 import TestRenderer from 'react-test-renderer'
 import { simulate } from 'util/testing'
 import Loading from '../Loading'
-import { NotificationsList, NotificationRow } from './NotificationsList'
+import NotificationsList, { NotificationRow } from './NotificationsList'
 
 jest.mock('util/platform', () => ({isIOS: true}))
 

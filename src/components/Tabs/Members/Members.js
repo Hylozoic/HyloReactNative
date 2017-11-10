@@ -13,7 +13,7 @@ import Icon from '../../Icon'
 import PopupMenuButton from '../../PopupMenuButton'
 import styles from './Members.styles'
 
-export class Members extends React.Component {
+export default class Members extends React.Component {
   static navigationOptions = ({ navigation, screenProps }) =>
     Header(navigation, screenProps.currentTabName)
 
@@ -141,5 +141,3 @@ function sortKeysFactory (subject) {
   if (subject !== 'network') sortKeys['join'] = 'Newest'
   return sortKeys
 }
-
-export default withNavigationFocus(Members)

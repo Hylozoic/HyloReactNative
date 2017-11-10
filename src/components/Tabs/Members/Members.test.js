@@ -1,7 +1,7 @@
 import 'react-native'
 import React from 'react'
 import TestRenderer from 'react-test-renderer'
-import { Members } from './Members'
+import Members from './Members'
 
 it('renders correctly with no community', () => {
   const members = [
