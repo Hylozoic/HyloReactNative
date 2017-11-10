@@ -3,6 +3,7 @@ import ImagePicker from '../../ImagePicker'
 import PopupMenuButton from '../../PopupMenuButton'
 import { Image, View } from 'react-native'
 import styles from './ImageSelector.styles'
+import { isDev } from 'util/testing'
 
 export default class ImageSelector extends React.Component {
   static defaultProps = {imageUrls: []}
@@ -21,7 +22,7 @@ export default class ImageSelector extends React.Component {
   renderPickerButton (props) {
     return <ImagePicker
       {...props}
-      onError={err => console.log(err)}
+      onError={err => isDev && console.log(err)}
       onChoice={this.props.onAdd}
       type='post' />
   }

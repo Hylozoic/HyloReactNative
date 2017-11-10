@@ -31,3 +31,5 @@ export function createMockStore (state = {}) {
     dispatch: jest.fn()
   }
 }
+
+export const isDev = __DEV__ && process.env.NODE_ENV !== 'test'

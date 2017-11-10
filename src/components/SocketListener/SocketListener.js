@@ -1,5 +1,6 @@
 import React from 'react'
 import { getSocket, socketUrl } from 'util/websockets'
+import { isDev } from 'util/testing'
 import { isEqual } from 'lodash'
 
 export default class SocketListener extends React.Component {
@@ -38,10 +39,10 @@ export default class SocketListener extends React.Component {
   }
 
   reconnect = () => {
-    if (__DEV__) console.log('connecting SocketListener...')
+    if (isDev) console.log('connecting SocketListener...')
     this.socket.post(socketUrl('/noo/threads/subscribe'), (body, jwr) => {
       if (!isEqual(body, {})) {
-        console.error(`Failed to connect SocketListener: ${body}`)
+        if (isDev) console.error(`Failed to connect SocketListener: ${body}`)
       }
     })
   }
