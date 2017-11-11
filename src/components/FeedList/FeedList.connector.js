@@ -1,4 +1,8 @@
 import { connect } from 'react-redux'
+import { get, isNull, isUndefined, omit, omitBy } from 'lodash/fp'
+
+import { ALL_COMMUNITIES_ID } from '../../store/models/Community'
+import { fetchPosts, FETCH_POSTS } from '../../store/actions/fetchPosts'
 import {
   getSort,
   getFilter,
@@ -8,10 +12,8 @@ import {
   getHasMorePosts,
   defaultSortBy
 } from './FeedList.store'
-import { ALL_COMMUNITIES_ID } from '../../store/models/Community'
-import { fetchPosts, FETCH_POSTS } from '../../store/actions/fetchPosts'
+import { mapWhenFocused, mergeWhenFocused } from 'util/connector'
 import resetNewPostCount from '../../store/actions/resetNewPostCount'
-import { get, isNull, isUndefined, omit, omitBy } from 'lodash/fp'
 
 function makeFetchOpts (props) {
   const { community, topicName } = props
@@ -24,12 +26,9 @@ function makeFetchOpts (props) {
 }
 
 export function mapStateToProps (state, props) {
-  const { community, isFocused, topicName } = props
-  if (!isFocused) return props
-
+  const { community, topicName } = props
   const sortBy = getSort(state, props)
   const filter = getFilter(state, props)
-
   const queryProps = makeFetchOpts({
     community,
     sortBy,
@@ -42,7 +41,6 @@ export function mapStateToProps (state, props) {
   return {
     filter,
     hasMore: getHasMorePosts(state, queryProps),
-    isFocused,
     pending: !!pending,
     pendingRefresh: !!(pending && pending.extractQueryResults.reset),
     posts: getPosts(state, queryProps),
@@ -58,14 +56,10 @@ export function shouldResetNewPostCount ({subject, sortBy, filter, topic}) {
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
-  if (!ownProps.isFocused) return ownProps
-
   const { hasMore, pending, posts, queryProps } = stateProps
-
   const fetchMorePosts = hasMore && !pending
     ? () => dispatchProps.fetchPosts({...queryProps, offset: posts.length})
     : () => {}
-
   const fetchPostsAndResetCount = (params, opts) => {
     const promises = [dispatchProps.fetchPosts(params, opts)]
     const communityID = get('id', ownProps.community)
@@ -85,4 +79,8 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps, mergeProps)
+export default connect(
+  mapWhenFocused(mapStateToProps),
+  mapDispatchToProps,
+  mergeWhenFocused(mergeProps)
+)

@@ -1,6 +1,8 @@
 import { connect } from 'react-redux'
-import getMe from '../../../store/selectors/getMe'
 import { get } from 'lodash/fp'
+
+import getMe from '../../../store/selectors/getMe'
+import { mapWhenFocused } from 'util/connector'
 
 export function mapStateToProps (state, props) {
   const { isFocused } = props
@@ -16,4 +18,4 @@ export function mapStateToProps (state, props) {
   }
 }
 
-export default connect(mapStateToProps)
+export default connect(mapWhenFocused(mapStateToProps))
