@@ -1,9 +1,20 @@
 import { connect } from 'react-redux'
-import getMe from '../../../store/selectors/getMe'
-import { FETCH_MEMBERS, getHasMoreMembers, fetchMembers, getSort, setSort, getSearch, setSearch, getMembers } from './Members.store'
-import getCommunity from '../../../store/selectors/getCommunity'
-import { ALL_COMMUNITIES_ID } from '../../../store/models/Community'
 import { omit, get } from 'lodash/fp'
+
+import { ALL_COMMUNITIES_ID } from '../../../store/models/Community'
+import {
+  FETCH_MEMBERS,
+  getHasMoreMembers,
+  fetchMembers,
+  getSort,
+  setSort,
+  getSearch,
+  setSearch,
+  getMembers
+} from './Members.store'
+import getMe from '../../../store/selectors/getMe'
+import getCommunity from '../../../store/selectors/getCommunity'
+import { mapWhenFocused, mergeWhenFocused } from 'util/testing'
 
 function makeFetchOpts (props) {
   const { community } = props
@@ -16,9 +27,6 @@ function makeFetchOpts (props) {
 }
 
 export function mapStateToProps (state, props) {
-  const { isFocused } = props
-  if (!isFocused) return props
-
   const currentUser = getMe(state, props)
   const communityId = state.currentCommunity ||
     (currentUser && get('id', currentUser.lastViewedCommunity()))
@@ -33,7 +41,6 @@ export function mapStateToProps (state, props) {
     communityId,
     community,
     hasMore: getHasMoreMembers(state, {slug, search, sortBy}),
-    isFocused,
     members: getMembers(state, {slug, search, sortBy}),
     pending: state.pending[FETCH_MEMBERS],
     search,
@@ -53,8 +60,6 @@ export function mapDispatchToProps (dispatch, { navigation }) {
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
-  if (!ownProps.isFocused) return ownProps
-
   const { sortBy, hasMore, pending, search, members, community } = stateProps
   const fetchOpts = makeFetchOpts({community, sortBy, search})
   const fetchMembers = () =>
@@ -73,4 +78,8 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps, mergeProps)
+export default connect(
+  mapWhenFocused(mapStateToProps),
+  mapDispatchToProps,
+  mergeWhenFocused(mergeProps)
+)
