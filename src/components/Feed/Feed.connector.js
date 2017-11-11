@@ -12,6 +12,9 @@ import {
 import { get } from 'lodash/fp'
 
 export function mapStateToProps (state, props) {
+  const { isFocused } = props
+  if (!isFocused) return props
+
   const params = get('state.params', props.navigation) || {}
   const communityId = props.communityId || params.communityId
   const topicName = props.topicName || params.topicName
@@ -28,13 +31,16 @@ export function mapStateToProps (state, props) {
   return {
     currentUser,
     community,
+    isFocused,
     topic: get('topic', communityTopic),
     topicName,
     topicSubscribed
   }
 }
 
-export function mapDispatchToProps (dispatch, { navigation }) {
+export function mapDispatchToProps (dispatch, { isFocused, navigation }) {
+  if (!isFocused) return {}
+
   return {
     newPost: communityId => navigation.navigate('PostEditor', {communityId}),
     showPost: id => navigation.navigate('PostDetails', {id}),
@@ -51,6 +57,8 @@ export function mapDispatchToProps (dispatch, { navigation }) {
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
+  if (!ownProps.isFocused) return ownProps
+
   const { community, topic, topicName, topicSubscribed } = stateProps
   const communityId = get('id', community)
   const slug = get('slug', community)
