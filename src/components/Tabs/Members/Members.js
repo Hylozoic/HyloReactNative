@@ -3,7 +3,6 @@ import {
   View, FlatList, Text, TouchableOpacity, TextInput, Image
 } from 'react-native'
 import { some, values, keys, isEmpty, debounce, size } from 'lodash/fp'
-import { withNavigationFocus } from 'react-navigation-is-focused-hoc'
 
 import Avatar from '../../Avatar'
 import { DEFAULT_BANNER } from '../../../store/models/Community'

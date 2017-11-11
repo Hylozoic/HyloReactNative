@@ -7,6 +7,7 @@ import { omit, get } from 'lodash/fp'
 
 function makeFetchOpts (props) {
   const { community } = props
+
   return {
     ...omit('community', props),
     subject: community ? 'community' : 'all-communities',
@@ -15,6 +16,9 @@ function makeFetchOpts (props) {
 }
 
 export function mapStateToProps (state, props) {
+  const { isFocused } = props
+  if (!isFocused) return props
+
   const currentUser = getMe(state, props)
   const communityId = state.currentCommunity ||
     (currentUser && get('id', currentUser.lastViewedCommunity()))
@@ -28,12 +32,13 @@ export function mapStateToProps (state, props) {
     currentUser,
     communityId,
     community,
-    slug,
-    search,
-    sortBy,
-    members: getMembers(state, {slug, search, sortBy}),
     hasMore: getHasMoreMembers(state, {slug, search, sortBy}),
-    pending: state.pending[FETCH_MEMBERS]
+    isFocused,
+    members: getMembers(state, {slug, search, sortBy}),
+    pending: state.pending[FETCH_MEMBERS],
+    search,
+    slug,
+    sortBy
   }
 }
 
@@ -48,13 +53,12 @@ export function mapDispatchToProps (dispatch, { navigation }) {
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
+  if (!ownProps.isFocused) return ownProps
+
   const { sortBy, hasMore, pending, search, members, community } = stateProps
-
   const fetchOpts = makeFetchOpts({community, sortBy, search})
-
   const fetchMembers = () =>
     !!community && dispatchProps.fetchMembers(fetchOpts)
-
   const offset = members.length
   const fetchMoreMembers = hasMore && !pending
     ? () => dispatchProps.fetchMembers({ ...fetchOpts, offset })
