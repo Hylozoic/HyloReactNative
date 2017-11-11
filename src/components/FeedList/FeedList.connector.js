@@ -24,9 +24,11 @@ function makeFetchOpts (props) {
 }
 
 export function mapStateToProps (state, props) {
+  const { community, isFocused, topicName } = props
+  if (!isFocused) return props
+
   const sortBy = getSort(state, props)
   const filter = getFilter(state, props)
-  const { community, topicName } = props
 
   const queryProps = makeFetchOpts({
     community,
@@ -38,12 +40,13 @@ export function mapStateToProps (state, props) {
   const pending = state.pending[FETCH_POSTS]
 
   return {
-    posts: getPosts(state, queryProps),
-    sortBy,
     filter,
     hasMore: getHasMorePosts(state, queryProps),
+    isFocused,
     pending: !!pending,
     pendingRefresh: !!(pending && pending.extractQueryResults.reset),
+    posts: getPosts(state, queryProps),
+    sortBy,
     queryProps // this is just here so mergeProps can use it
   }
 }
@@ -55,6 +58,8 @@ export function shouldResetNewPostCount ({subject, sortBy, filter, topic}) {
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
+  if (!ownProps.isFocused) return ownProps
+
   const { hasMore, pending, posts, queryProps } = stateProps
 
   const fetchMorePosts = hasMore && !pending

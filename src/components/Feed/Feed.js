@@ -31,8 +31,8 @@ export default class Feed extends Component {
       community,
       currentUser,
       editPost,
-      isFocused,
       goToCommunity,
+      navigation,
       newPost,
       showMember,
       showPost,
@@ -57,7 +57,7 @@ export default class Feed extends Component {
             topicName={topicName}
             topicSubscribed={topicSubscribed}
             toggleTopicSubscribe={toggleTopicSubscribe} />}
-        isFocused={isFocused}
+        navigation={navigation}
         screenProps={screenProps}
         showCommunities={!community}
         showMember={showMember}
