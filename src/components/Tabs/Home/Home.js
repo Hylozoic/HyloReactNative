@@ -14,11 +14,12 @@ export default class Home extends React.Component {
   }
 
   render () {
-    const { navigation, communityId, currentUser } = this.props
+    const { communityId, currentUser, isFocused, navigation } = this.props
     if (!currentUser) return <Loading style={{flex: 1}} />
     return <Feed
-      navigation={navigation}
       communityId={communityId}
+      isFocused={isFocused}
+      navigation={navigation}
       screenProps={this.props.screenProps} />
   }
 }

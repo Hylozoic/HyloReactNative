@@ -22,10 +22,6 @@ export default class Feed extends Component {
     if (fetchCommunityTopic) fetchCommunityTopic()
   }
 
-  shouldComponentUpdate (nextProps) {
-    return nextProps.isFocused
-  }
-
   render () {
     const {
       community,
