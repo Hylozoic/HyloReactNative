@@ -61,11 +61,11 @@ export default class Login extends React.Component {
   }
 
   componentDidMount () {
-    NetInfo.isConnected.addEventListener('change', this.handleConnectivityChange)
+    NetInfo.isConnected.addEventListener('connectionChange', this.handleConnectivityChange)
   }
 
   componentWillUnmount () {
-    NetInfo.isConnected.removeEventListener('change', this.handleConnectivityChange)
+    NetInfo.isConnected.removeEventListener('connectionChange', this.handleConnectivityChange)
   }
 
   handleConnectivityChange = isConnected => {
