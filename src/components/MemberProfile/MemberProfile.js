@@ -104,7 +104,6 @@ export class MemberBanner extends React.Component {
 
     return <View>
       <ImagePicker
-        style={styles.bannerWrapper}
         title='Change Banner'
         type='userBanner'
         id={id}
@@ -115,6 +114,7 @@ export class MemberBanner extends React.Component {
         {isMe && <EditButton isLoading={bannerPickerPending} style={styles.bannerEditButton} />}
       </ImagePicker>
       <ImagePicker
+        style={styles.avatarWrapperWrapper}
         title='Change Avatar'
         type='userAvatar'
         id={id}

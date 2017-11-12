@@ -1,5 +1,6 @@
 import { attr, fk, many, Model } from 'redux-orm'
 import Attachment from './Attachment'
+import { get } from 'lodash/fp'
 
 export const PostFollower = Model.createClass({})
 PostFollower.modelName = 'PostFollower'
@@ -22,6 +23,18 @@ const Post = Model.createClass({
 
   images () {
     return this.attachments.filter(x => x.type === Attachment.Type.IMAGE)
+  },
+
+  getImageUrls () {
+    return this.images().orderBy(get('position')).toRefArray().map(x => x.url)
+  },
+
+  files () {
+    return this.attachments.filter(x => x.type === Attachment.Type.FILE)
+  },
+
+  getFileUrls () {
+    return this.files().orderBy(get('position')).toRefArray().map(get('url'))
   }
 })
 

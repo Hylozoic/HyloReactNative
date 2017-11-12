@@ -1,6 +1,8 @@
 import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
-import PostDetails, { CommentPrompt } from './PostDetails'
+import TestRenderer from 'react-test-renderer'
+import PostDetails, { CommentPrompt, Files } from './PostDetails'
+import { Linking, TouchableOpacity } from 'react-native'
 
 jest.mock('react-native-device-info')
 
@@ -22,7 +24,11 @@ const post = {
   commentsTotal: 12,
   votesTotal: 8,
   myVote: true,
-  type: 'request'
+  type: 'request',
+  fileUrls: [
+    'http://foo.com/foo.pdf',
+    'http://foo.com/bar.zip'
+  ]
 }
 const currentUser = {
   id: 123,
@@ -67,5 +73,19 @@ describe('CommentPrompt', () => {
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
+  })
+})
+
+describe('Files', () => {
+  it('renders correctly', async () => {
+    const renderer = TestRenderer.create(<Files urls={[
+      'http://foo.com/foo.pdf',
+      'http://foo.com/bar.zip'
+    ]} />)
+    expect(renderer).toMatchSnapshot()
+
+    await renderer.root.findAllByType(TouchableOpacity)[0].props.onPress()
+    expect(Linking.canOpenURL).toHaveBeenCalledWith('http://foo.com/foo.pdf')
+    expect(Linking.openURL).toHaveBeenCalledWith('http://foo.com/foo.pdf')
   })
 })

@@ -2,6 +2,10 @@
 
 exports[`works as expected 1`] = `
 Object {
+  "meta": Object {
+    "id": "11",
+    "type": "userAvatar",
+  },
   "payload": Request {
     "_formData": mockFormData {
       "append": [Function],

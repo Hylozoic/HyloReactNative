@@ -16,6 +16,7 @@ import { keyboardAvoidingViewProps as kavProps } from 'util/viewHelpers'
 import { decode } from 'ent'
 import KeyboardFriendlyView from '../KeyboardFriendlyView'
 import ImageSelector from './ImageSelector'
+import FileSelector from './FileSelector'
 
 export default class PostEditor extends React.Component {
   static contextTypes = {navigate: PropTypes.func}
@@ -31,24 +32,26 @@ export default class PostEditor extends React.Component {
 
   constructor (props) {
     super(props)
-    const { post, communityIds, imageUrls } = props
+    const { post, communityIds, imageUrls, fileUrls } = props
     this.state = {
       title: get('title', post) || '',
       type: 'discussion',
       communityIds,
-      imageUrls
+      imageUrls,
+      fileUrls
     }
   }
 
   save = () => {
     const { navigation, save, details } = this.props
-    const { title, type, communityIds, imageUrls } = this.state
+    const { title, type, communityIds, imageUrls, fileUrls } = this.state
     const postData = {
       title,
       type,
       details: details,
       communities: communityIds.map(id => ({id})),
-      imageUrls
+      imageUrls,
+      fileUrls
     }
 
     this.setState({isSaving: true})
@@ -72,6 +75,7 @@ export default class PostEditor extends React.Component {
   }
 
   addImage = ({ local, remote }) => {
+    // TODO: use `local` to avoid unnecessary network activity
     this.setState({
       imageUrls: uniq(this.state.imageUrls.concat(remote))
     })
@@ -83,9 +87,21 @@ export default class PostEditor extends React.Component {
     })
   }
 
+  addFile = ({ local, remote }) => {
+    this.setState({
+      fileUrls: uniq(this.state.fileUrls.concat(remote))
+    })
+  }
+
+  removeFile = url => {
+    this.setState({
+      fileUrls: this.state.fileUrls.filter(u => u !== url)
+    })
+  }
+
   render () {
     const { details, editDetails, postId } = this.props
-    const { title, type, imageUrls, isSaving } = this.state
+    const { title, type, imageUrls, fileUrls, isSaving } = this.state
 
     if (postId && !details) return <Loading />
 
@@ -108,16 +124,32 @@ export default class PostEditor extends React.Component {
           </View>
 
           <SectionLabel>Details</SectionLabel>
-          <TouchableOpacity style={[styles.textInputWrapper, styles.section, styles.details]}
+          <TouchableOpacity
+            style={[
+              styles.textInputWrapper,
+              styles.section,
+              styles.details
+            ]}
             onPress={() => !isSaving && editDetails()}>
             <Details details={details} placeholder={detailsPlaceholder} />
           </TouchableOpacity>
 
-          <SectionLabel>Image</SectionLabel>
+          <SectionLabel>Images</SectionLabel>
           <ImageSelector
             onAdd={this.addImage}
             onRemove={this.removeImage}
-            imageUrls={imageUrls} />
+            imageUrls={imageUrls}
+            style={styles.imageSelector}
+            type='post'
+            id={postId} />
+
+          <SectionLabel>Files</SectionLabel>
+          <FileSelector
+            onAdd={this.addFile}
+            onRemove={this.removeFile}
+            fileUrls={fileUrls}
+            type='post'
+            id={postId} />
         </View>
       </ScrollView>
     </KeyboardFriendlyView>

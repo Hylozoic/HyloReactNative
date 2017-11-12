@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.facebook.react.ReactApplication;
 import co.apptailor.googlesignin.RNGoogleSigninPackage;
+import com.reactnativedocumentpicker.ReactNativeDocumentPicker;
 import im.shimo.react.prompt.RNPromptPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.BV.LinearGradient.LinearGradientPackage;
@@ -45,11 +46,12 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-          new RNPromptPackage(),
-          new RNDeviceInfo(),
-          new LinearGradientPackage(),
-          new BackgroundTimerPackage(),
-          new ReactNativeOneSignalPackage(),
+            new ReactNativeDocumentPicker(),
+            new RNPromptPackage(),
+            new RNDeviceInfo(),
+            new LinearGradientPackage(),
+            new BackgroundTimerPackage(),
+            new ReactNativeOneSignalPackage(),
           new ImagePickerPackage(),
           new RNGoogleSigninPackage(),
           new FBSDKPackage(mCallbackManager),
