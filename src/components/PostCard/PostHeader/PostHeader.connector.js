@@ -16,7 +16,7 @@ export function mapStateToProps (state, props) {
   return {
     currentUser,
     community,
-    editPost: canEdit ? () => editPost() : null,
+    editPostIfAllowed: canEdit ? () => editPost() : false,
     canEdit,
     canFlag,
     isCreator,

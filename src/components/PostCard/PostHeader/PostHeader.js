@@ -27,7 +27,7 @@ export default class PostHeader extends PureComponent {
       postId,
       slug,
       showCommunity,
-      editPost,
+      editPostIfAllowed,
       showMember,
       canFlag,
       goToCommunity,
@@ -99,7 +99,7 @@ export default class PostHeader extends PureComponent {
       </View>
       <View style={styles.upperRight}>
         {type && <PostLabel type={type} />}
-        <PostMenu removePost={removePostWithConfirm} deletePost={deletePostWithConfirm} {...{editPost, flagPost}} />
+        <PostMenu removePost={removePostWithConfirm} deletePost={deletePostWithConfirm} editPost={editPostIfAllowed} flagPost={flagPost} />
         {flaggingVisible && <FlagContent type='post'
           linkData={linkData}
           onClose={() => this.setState({flaggingVisible: false})} />

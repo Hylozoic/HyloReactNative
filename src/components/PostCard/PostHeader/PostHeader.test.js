@@ -16,7 +16,7 @@ it('renders correctly with all=true, and no community or user', () => {
     postId={22}
     canFlag
     removePost={() => {}}
-    editPost={() => {}} date={new Date(new Date().getTime() - 60000 * 10)} />)
+    editPostIfAllowed={() => {}} date={new Date(new Date().getTime() - 60000 * 10)} />)
   const actual = renderer.getRenderOutput()
 
   expect(actual).toMatchSnapshot()
@@ -43,7 +43,7 @@ it('renders correctly when showCommunity is true', () => {
     slug='olympus'
     canFlag
     deletePost={() => {}}
-    editPost={() => {}}
+    editPostIfAllowed={() => {}}
     date={new Date(new Date().getTime() - 60000 * 10)} />)
   const actual = renderer.getRenderOutput()
 
@@ -71,7 +71,7 @@ it('renders correctly with no flagging', () => {
     slug='olympus'
     canFlag={false}
     deletePost={() => {}}
-    editPost={() => {}}
+    editPostIfAllowed={() => {}}
     date={new Date(new Date().getTime() - 60000 * 10)} />)
   const actual = renderer.getRenderOutput()
 
