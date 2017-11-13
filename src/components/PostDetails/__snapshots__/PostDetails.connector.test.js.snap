@@ -1,0 +1,165 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`produces expected props 1`] = `
+Object {
+  "commentEdit": "draft comment text",
+  "currentUser": undefined,
+  "editPost": [Function],
+  "fetchPost": [Function],
+  "goToCommunity": [Function],
+  "newComment": [Function],
+  "post": Object {
+    "commenters": Array [],
+    "communities": Array [
+      SessionBoundModel {
+        "_fields": Object {
+          "id": "2",
+          "members": undefined,
+          "moderators": undefined,
+          "name": "Home",
+          "posts": undefined,
+        },
+      },
+    ],
+    "creator": undefined,
+    "fileUrls": Array [
+      "http://foo.com/foo.pdf",
+    ],
+    "followers": undefined,
+    "id": "1",
+  },
+  "showMember": [Function],
+  "showTopic": [Function],
+}
+`;
+
+exports[`sets up navigation and redux actions 1`] = `
+Object {
+  "commentEdit": undefined,
+  "currentUser": undefined,
+  "editPost": Array [
+    "navigate",
+    Array [
+      "PostEditor",
+      Object {
+        "id": "1",
+      },
+    ],
+  ],
+  "fetchPost": Array [
+    "dispatch",
+    Array [
+      Object {
+        "graphql": Object {
+          "query": "query ($id: ID) {
+        post(id: $id) {
+          
+  id
+  title
+  details
+  type
+  location
+  creator {
+    id
+    name
+    avatarUrl
+  }
+  createdAt
+  updatedAt
+  commenters(first: 3) {
+    id
+    name
+    avatarUrl
+  }
+  commentersTotal
+  commentsTotal
+  comments(first: 10, order: \\"desc\\") {
+    items {
+      id
+      text
+      creator {
+        id
+        name
+        avatarUrl
+      }
+      createdAt
+    }
+    total
+    hasMore
+  }
+  linkPreview {
+    title
+    url
+    imageUrl
+  }
+  votesTotal
+  myVote
+  communities {
+    id
+    name
+    slug
+  }
+  attachments {
+    id
+    position
+    type
+    url
+  }
+        }
+      }",
+          "variables": Object {
+            "id": "1",
+          },
+        },
+        "meta": Object {
+          "afterInteractions": true,
+          "extractModel": "Post",
+          "extractQueryResults": Object {
+            "getItems": [Function],
+            "getType": [Function],
+          },
+        },
+        "type": "FETCH_POST",
+      },
+    ],
+  ],
+  "goToCommunity": Array [
+    "dispatch",
+    Array [
+      Object {
+        "payload": undefined,
+        "type": "CHANGE_COMMUNITY",
+      },
+    ],
+  ],
+  "newComment": Array [
+    "navigate",
+    Array [
+      "CommentEditor",
+      Object {
+        "communityId": "2",
+        "postId": "1",
+      },
+    ],
+  ],
+  "post": undefined,
+  "showMember": Array [
+    "navigate",
+    Array [
+      "MemberProfile",
+      Object {
+        "id": undefined,
+      },
+    ],
+  ],
+  "showTopic": Array [
+    "navigate",
+    Array [
+      "Feed",
+      Object {
+        "topicName": undefined,
+      },
+    ],
+  ],
+}
+`;

@@ -65,6 +65,26 @@ exports[`PostEditor renders a new editor correctly 1`] = `
           placeholder="What else should we know?"
         />
       </TouchableOpacity>
+      <SectionLabel>
+        Images
+      </SectionLabel>
+      <ImageSelector
+        id={undefined}
+        imageUrls={Array []}
+        onAdd={[Function]}
+        onRemove={[Function]}
+        type="post"
+      />
+      <SectionLabel>
+        Files
+      </SectionLabel>
+      <Connect(FileSelector)
+        fileUrls={undefined}
+        id={undefined}
+        onAdd={[Function]}
+        onRemove={[Function]}
+        type="post"
+      />
     </View>
   </ScrollViewMock>
 </Unknown>
@@ -224,6 +244,82 @@ exports[`PostEditor renders correctly while saving 1`] = `
           >
             What else should we know?
           </Text>
+        </View>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          disabled={false}
+          ellipsizeMode="tail"
+        >
+          Images
+        </Text>
+        <View>
+          <View
+            accessibilityComponentType={undefined}
+            accessibilityLabel={undefined}
+            accessibilityTraits={undefined}
+            accessible={true}
+            collapsable={undefined}
+            hitSlop={undefined}
+            isTVSelectable={true}
+            nativeID={undefined}
+            onLayout={undefined}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            testID={undefined}
+            tvParallaxProperties={undefined}
+          >
+            <Icon
+              color={undefined}
+              name="AddImage"
+            />
+          </View>
+        </View>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          disabled={false}
+          ellipsizeMode="tail"
+        >
+          Files
+        </Text>
+        <View>
+          <View
+            accessibilityComponentType={undefined}
+            accessibilityLabel={undefined}
+            accessibilityTraits={undefined}
+            accessible={true}
+            collapsable={undefined}
+            hitSlop={undefined}
+            isTVSelectable={true}
+            nativeID={undefined}
+            onLayout={undefined}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            testID={undefined}
+            tvParallaxProperties={undefined}
+          >
+            <Icon
+              color={undefined}
+              name="Paperclip"
+            />
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              disabled={false}
+              ellipsizeMode="tail"
+            >
+              Add file
+            </Text>
+          </View>
         </View>
       </View>
     </View>
@@ -386,10 +482,168 @@ exports[`PostEditor renders correctly while saving 2`] = `
             What else should we know?
           </Text>
         </View>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          disabled={false}
+          ellipsizeMode="tail"
+        >
+          Images
+        </Text>
+        <View>
+          <View
+            accessibilityComponentType={undefined}
+            accessibilityLabel={undefined}
+            accessibilityTraits={undefined}
+            accessible={true}
+            collapsable={undefined}
+            hitSlop={undefined}
+            isTVSelectable={true}
+            nativeID={undefined}
+            onLayout={undefined}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            testID={undefined}
+            tvParallaxProperties={undefined}
+          >
+            <Icon
+              color={undefined}
+              name="AddImage"
+            />
+          </View>
+        </View>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          disabled={false}
+          ellipsizeMode="tail"
+        >
+          Files
+        </Text>
+        <View>
+          <View
+            accessibilityComponentType={undefined}
+            accessibilityLabel={undefined}
+            accessibilityTraits={undefined}
+            accessible={true}
+            collapsable={undefined}
+            hitSlop={undefined}
+            isTVSelectable={true}
+            nativeID={undefined}
+            onLayout={undefined}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            testID={undefined}
+            tvParallaxProperties={undefined}
+          >
+            <Icon
+              color={undefined}
+              name="Paperclip"
+            />
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              disabled={false}
+              ellipsizeMode="tail"
+            >
+              Add file
+            </Text>
+          </View>
+        </View>
       </View>
     </View>
   </RCTScrollView>
 </View>
+`;
+
+exports[`PostEditor renders with a post 1`] = `
+<Unknown
+  behavior="padding"
+  keyboardVerticalOffset={64}
+>
+  <ScrollViewMock>
+    <View>
+      <SectionLabel>
+        What are you posting today?
+      </SectionLabel>
+      <View>
+        <TypeButton
+          onPress={[Function]}
+          selected={true}
+          type="discussion"
+        />
+        <TypeButton
+          onPress={[Function]}
+          selected={false}
+          type="request"
+        />
+        <TypeButton
+          onPress={[Function]}
+          selected={false}
+          type="offer"
+        />
+      </View>
+      <SectionLabel>
+        Title
+      </SectionLabel>
+      <View>
+        <TextInput
+          editable={true}
+          onChangeText={[Function]}
+          placeholder="What do you want to discuss?"
+          underlineColorAndroid="transparent"
+          value=""
+        />
+      </View>
+      <SectionLabel>
+        Details
+      </SectionLabel>
+      <TouchableOpacity
+        activeOpacity={0.2}
+        focusedOpacity={0.7}
+        onPress={[Function]}
+      >
+        <Details
+          details={undefined}
+          placeholder="What else should we know?"
+        />
+      </TouchableOpacity>
+      <SectionLabel>
+        Images
+      </SectionLabel>
+      <ImageSelector
+        id={undefined}
+        imageUrls={
+          Array [
+            "http://foo.com/foo.png",
+            "http://baz.com/baz.png",
+          ]
+        }
+        onAdd={[Function]}
+        onRemove={[Function]}
+        type="post"
+      />
+      <SectionLabel>
+        Files
+      </SectionLabel>
+      <Connect(FileSelector)
+        fileUrls={undefined}
+        id={undefined}
+        onAdd={[Function]}
+        onRemove={[Function]}
+        type="post"
+      />
+    </View>
+  </ScrollViewMock>
+</Unknown>
 `;
 
 exports[`SectionLabel renders correctly 1`] = `

@@ -13,8 +13,22 @@ Array [
   Array [
     Object {
       "graphql": Object {
-        "query": "mutation ($id: ID, $type: String, $title: String, $details: String, $communityIds: [String]) {
-        updatePost(id: $id, data: {type: $type, title: $title, details: $details, communityIds: $communityIds}) {
+        "query": "mutation ($id: ID,
+        $type: String,
+        $title: String,
+        $details: String,
+        $communityIds: [String],
+        $imageUrls: [String],
+        $fileUrls: [String]
+      ) {
+        updatePost(id: $id, data: {
+          type: $type,
+          title: $title,
+          details: $details,
+          communityIds: $communityIds,
+          imageUrls: $imageUrls,
+          fileUrls: $fileUrls
+        }) {
           id
           type
           title
@@ -24,6 +38,12 @@ Array [
             name
             slug
           }
+          attachments {
+            id
+            position
+            type
+            url
+          }
         }
       }",
         "variables": Object {
@@ -31,7 +51,9 @@ Array [
             1,
           ],
           "details": "",
+          "fileUrls": Array [],
           "id": 1,
+          "imageUrls": Array [],
           "title": "a title",
           "type": undefined,
         },

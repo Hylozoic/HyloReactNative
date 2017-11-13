@@ -1,4 +1,6 @@
 import { attr, fk, many, Model } from 'redux-orm'
+import Attachment from './Attachment'
+import { get } from 'lodash/fp'
 
 export const PostFollower = Model.createClass({})
 PostFollower.modelName = 'PostFollower'
@@ -17,6 +19,22 @@ PostCommenter.fields = {
 const Post = Model.createClass({
   toString () {
     return `Post: ${this.name}`
+  },
+
+  images () {
+    return this.attachments.filter(x => x.type === Attachment.Type.IMAGE)
+  },
+
+  getImageUrls () {
+    return this.images().orderBy(get('position')).toRefArray().map(x => x.url)
+  },
+
+  files () {
+    return this.attachments.filter(x => x.type === Attachment.Type.FILE)
+  },
+
+  getFileUrls () {
+    return this.files().orderBy(get('position')).toRefArray().map(get('url'))
   }
 
   // static communitiesForNetworkId (postId, networkId) {

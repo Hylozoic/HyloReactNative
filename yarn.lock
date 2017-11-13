@@ -4388,6 +4388,10 @@ react-native-dismiss-keyboard@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/react-native-dismiss-keyboard/-/react-native-dismiss-keyboard-1.0.0.tgz#32886242b3f2317e121f3aeb9b0a585e2b879b49"
 
+react-native-document-picker@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/react-native-document-picker/-/react-native-document-picker-2.1.0.tgz#61bbe113435a9d7bf67ab77093a4092d76b52fe3"
+
 react-native-drawer-layout-polyfill@^1.3.0:
   version "1.3.2"
   resolved "https://registry.yarnpkg.com/react-native-drawer-layout-polyfill/-/react-native-drawer-layout-polyfill-1.3.2.tgz#192c84d7a5a6b8a6d2be2c7daa5e4164518d0cc7"
@@ -4473,9 +4477,9 @@ react-native-webview-bridge-updated@^1.0.0, react-native-webview-bridge-updated@
     invariant "2.2.0"
     keymirror "0.1.1"
 
-react-native-zss-rich-text-editor@Hylozoic/react-native-zss-rich-text-editor#19cf5e8b:
+react-native-zss-rich-text-editor@Hylozoic/react-native-zss-rich-text-editor#a3ff2ed5:
   version "1.0.2"
-  resolved "https://codeload.github.com/Hylozoic/react-native-zss-rich-text-editor/tar.gz/19cf5e8ba74eabe5e541e3e412cc089b1e145b55"
+  resolved "https://codeload.github.com/Hylozoic/react-native-zss-rich-text-editor/tar.gz/a3ff2ed56b67378b0cf4c0bab9d0672f60e0d822"
   dependencies:
     react-native-webview-bridge-updated "^1.0.0"
 

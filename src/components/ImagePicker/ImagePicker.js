@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { TouchableOpacity, View } from 'react-native'
+import { TouchableOpacity } from 'react-native'
 import Icon from '../Icon'
 import RNImagePicker from 'react-native-image-picker'
 
@@ -18,12 +18,7 @@ if you don't pass any children, icons of an image and a clock will be shown for
 non-pending and pending states respectively
 */
 export default class ImagePicker extends Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      pending: false
-    }
-  }
+  state = {pending: false}
 
   setPending (pending) {
     const { onPendingChange } = this.props
@@ -63,7 +58,8 @@ export default class ImagePicker extends Component {
       } else {
         const file = {
           uri: result.uri,
-          name: result.fileName
+          name: result.fileName,
+          type: result.type
         }
 
         return upload(type, id, file)
@@ -90,11 +86,12 @@ export default class ImagePicker extends Component {
         : <Icon name='AddImage' style={[styles.icon, iconStyle]} />
     }
 
-    return <View style={style}>
-      <TouchableOpacity onPress={() => !pending && this.showPicker()} disabled={disabled}>
-        {children}
-      </TouchableOpacity>
-    </View>
+    return <TouchableOpacity
+      style={style}
+      onPress={() => !pending && this.showPicker()}
+      disabled={disabled}>
+      {children}
+    </TouchableOpacity>
   }
 }
 

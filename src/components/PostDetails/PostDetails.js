@@ -1,10 +1,9 @@
 /* eslint-disable camelcase */
 import React from 'react'
-import { View, Text, TouchableOpacity } from 'react-native'
-import { get } from 'lodash/fp'
+import { Linking, View, Text, TouchableOpacity } from 'react-native'
+import { get, isEmpty } from 'lodash/fp'
 import { shape, any, object, string, func, array, bool } from 'prop-types'
 import striptags from 'striptags'
-
 import Avatar from '../Avatar'
 import Comments from '../Comments'
 import PostBody from '../PostCard/PostBody'
@@ -13,8 +12,8 @@ import PostFooter from '../PostCard/PostFooter'
 import PostHeader from '../PostCard/PostHeader'
 import Loading from '../Loading'
 import SocketSubscriber from '../SocketSubscriber'
-
 import styles from './PostDetails.styles'
+import { FileLabel } from '../PostEditor/FileSelector'
 
 export default class PostDetails extends React.Component {
   static propTypes = {
@@ -65,7 +64,7 @@ export default class PostDetails extends React.Component {
 
     const postCard = <View style={styles.postCard}>
       <PostHeader creator={post.creator}
-        date={post.updatedAt || post.createdAt}
+        date={post.createdAt}
         type={post.type}
         editPost={editPost}
         communities={post.communities}
@@ -73,7 +72,7 @@ export default class PostDetails extends React.Component {
         id={post.id}
         showMember={showMember}
         goToCommunity={goToCommunity} />
-      <PostImage postId={post.id} />
+      <PostImage postId={post.id} linked />
       <PostBody title={post.title}
         details={post.details}
         linkPreview={post.linkPreview}
@@ -84,6 +83,7 @@ export default class PostDetails extends React.Component {
         <Text style={styles.infoRowLabel}>Location:</Text>
         <Text style={styles.infoRowinfo}>{location}</Text>
       </View>}
+      {!isEmpty(post.fileUrls) && <Files urls={post.fileUrls} />}
       <PostFooter id={post.id}
         currentUser={currentUser}
         commenters={post.commenters}
@@ -126,3 +126,14 @@ export function CommentPrompt ({ currentUser, newComment, commentEdit }) {
     </TouchableOpacity>
   </View>
 }
+
+export function Files ({ urls }) {
+  return <View style={styles.files}>
+    {urls.map(url => <TouchableOpacity key={url} onPress={openUrlFn(url)}>
+      <FileLabel url={url} />
+    </TouchableOpacity>)}
+  </View>
+}
+
+const openUrlFn = url => () =>
+  Linking.canOpenURL(url).then(ok => ok && Linking.openURL(url))

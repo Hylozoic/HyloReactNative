@@ -120,6 +120,10 @@ export default function ormReducer (state = {}, action) {
         }
       }
       me.update(changes)
+      const person = session.Person.withId(me.id)
+      if (person) {
+        person.update(changes)
+      }
       break
 
     case TOGGLE_TOPIC_SUBSCRIBE_PENDING:

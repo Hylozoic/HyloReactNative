@@ -2,6 +2,8 @@
  * @providesModule util/index
  */
 
+import { last } from 'lodash'
+
 export function isPromise (value) {
   return value && typeof value.then === 'function'
 }
@@ -27,4 +29,8 @@ export function safeStringify (obj, space) {
 export function noncircular (obj) {
   if (typeof obj !== 'object') return obj
   return JSON.parse(safeStringify(obj))
+}
+
+export function basename (url) {
+  return last(url.split('/'))
 }

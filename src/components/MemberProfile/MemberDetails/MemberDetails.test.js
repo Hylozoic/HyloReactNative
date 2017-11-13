@@ -9,12 +9,14 @@ jest.mock('react-native-device-info')
 jest.mock('TextInput', () => 'TextInput')
 
 describe('MemberDetails', () => {
+  const navigation = {setParams: () => {}}
   it('matches the last snapshot', () => {
     const renderer = new ReactShallowRenderer()
     renderer.render(<MemberDetails
       person={{id: 1}}
       goToCommunity={() => {}}
-      skills={['One']} />)
+      skills={['One']}
+      navigation={navigation} />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
@@ -22,14 +24,14 @@ describe('MemberDetails', () => {
 
   it("returns Loading when there's no person", () => {
     const renderer = new ReactShallowRenderer()
-    renderer.render(<MemberDetails />)
+    renderer.render(<MemberDetails navigation={navigation} />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
   })
 
   it('has navigation options', () =>
-    expect(MemberDetails.navigationOptions({navigation: {state: {}}})).toMatchSnapshot())
+    expect(MemberDetails.navigationOptions({navigation: {state: {params: {}}}})).toMatchSnapshot())
 
   describe('componentDidMount', () => {
     it('sets the state when person changes', () => {
@@ -48,7 +50,8 @@ describe('MemberDetails', () => {
           bio: 'stuff',
           omitable: 'should be omitted'
         },
-        fetchPerson: () => {}
+        fetchPerson: () => {},
+        navigation
       }
 
       const instance = ReactTestRenderer.create(<MemberDetails {...props} />).getInstance()
@@ -58,11 +61,61 @@ describe('MemberDetails', () => {
     })
   })
 
+  describe('goBack', () => {
+    it('calls navigation.goBack when saveChanges succeeds', () => {
+      const props = {
+        person: {},
+        fetchPerson: () => {},
+        navigation: {
+          ...navigation,
+          goBack: jest.fn()
+        }
+      }
+
+      const instance = ReactTestRenderer.create(<MemberDetails {...props} />).getInstance()
+      instance.saveChanges = () => true
+      instance.goBack()
+      expect(props.navigation.goBack).toHaveBeenCalled()
+    })
+  })
+
+  describe('validate', () => {
+    it('returns true when name is present', () => {
+      const props = {
+        person: {},
+        fetchPerson: () => {},
+        navigation
+      }
+
+      const instance = ReactTestRenderer.create(<MemberDetails {...props} />).getInstance()
+      instance.setState({
+        person: {name: 'Sue'}
+      })
+      expect(instance.validate()).toEqual(true)
+    })
+
+    it('returns false and sets error when name is empty', () => {
+      const props = {
+        person: {},
+        fetchPerson: () => {},
+        navigation
+      }
+
+      const instance = ReactTestRenderer.create(<MemberDetails {...props} />).getInstance()
+      instance.setState({
+        person: {name: ''}
+      })
+      expect(instance.validate()).toEqual(false)
+      expect(instance.state.errors.name).toEqual('Cannot be blank')
+    })
+  })
+
   describe('editProfile', () => {
     it('sets state.editing to true', () => {
       const props = {
         person: {},
-        fetchPerson: () => {}
+        fetchPerson: () => {},
+        navigation
       }
 
       const instance = ReactTestRenderer.create(<MemberDetails {...props} />).getInstance()
@@ -75,7 +128,8 @@ describe('MemberDetails', () => {
     it('updates state.person', () => {
       const props = {
         person: {},
-        fetchPerson: () => {}
+        fetchPerson: () => {},
+        navigation
       }
 
       const instance = ReactTestRenderer.create(<MemberDetails {...props} />).getInstance()
@@ -89,7 +143,8 @@ describe('MemberDetails', () => {
       const props = {
         person: {},
         fetchPerson: () => {},
-        updateUserSettings: jest.fn()
+        updateUserSettings: jest.fn(),
+        navigation
       }
 
       const instance = ReactTestRenderer.create(<MemberDetails {...props} />).getInstance()
@@ -99,8 +154,22 @@ describe('MemberDetails', () => {
           location: 'oakland'
         }
       })
-      instance.saveChanges()
+      expect(instance.saveChanges()).toEqual(true)
       expect(props.updateUserSettings).toHaveBeenCalledWith(instance.state.person)
+    })
+
+    it("returns false and doesn't call updateUserSettings when validate is false", () => {
+      const props = {
+        person: {},
+        fetchPerson: () => {},
+        updateUserSettings: jest.fn(),
+        navigation
+      }
+
+      const instance = ReactTestRenderer.create(<MemberDetails {...props} />).getInstance()
+      instance.validate = () => false
+      expect(instance.saveChanges()).toEqual(false)
+      expect(props.updateUserSettings).not.toHaveBeenCalled()
     })
   })
 })

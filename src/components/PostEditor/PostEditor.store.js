@@ -4,18 +4,40 @@ import { divToP } from 'hylo-utils/text'
 export const MODULE_NAME = 'PostEditor'
 export const CREATE_POST = `${MODULE_NAME}/CREATE_POST`
 export const UPDATE_POST = `${MODULE_NAME}/UPDATE_POST`
+export const UPDATE_POST_PENDING = UPDATE_POST + '_PENDING'
 export const SET_DETAILS = `${MODULE_NAME}/SET_DETAILS`
 export const CLEAR_DETAILS = `${MODULE_NAME}/CLEAR_DETAILS`
 
 export function createPost (post) {
-  const { type, title, details, communities } = post
+  const {
+    type,
+    title,
+    details,
+    communities,
+    imageUrls = [],
+    fileUrls = []
+  } = post
   const communityIds = communities.map(c => c.id)
   const preprocessedDetails = divToP(details)
   return {
     type: CREATE_POST,
     graphql: {
-      query: `mutation ($type: String, $title: String, $details: String, $communityIds: [String]) {
-        createPost(data: {type: $type, title: $title, details: $details, communityIds: $communityIds}) {
+      query: `mutation (
+        $type: String,
+        $title: String,
+        $details: String,
+        $communityIds: [String],
+        $imageUrls: [String],
+        $fileUrls: [String]
+      ) {
+        createPost(data: {
+          type: $type,
+          title: $title,
+          details: $details,
+          communityIds: $communityIds,
+          imageUrls: $imageUrls,
+          fileUrls: $fileUrls
+        }) {
           id
           type
           title
@@ -29,13 +51,21 @@ export function createPost (post) {
           creator {
             id
           }
+          attachments {
+            id
+            position
+            type
+            url
+          }
         }
       }`,
       variables: {
         type,
         title,
         details: preprocessedDetails,
-        communityIds
+        communityIds,
+        imageUrls,
+        fileUrls
       }
     },
     meta: {extractModel: 'Post'}
@@ -43,14 +73,36 @@ export function createPost (post) {
 }
 
 export function updatePost (post) {
-  const { id, type, title, details, communities } = post
+  const {
+    id,
+    type,
+    title,
+    details,
+    communities,
+    imageUrls = [],
+    fileUrls = []
+  } = post
   const communityIds = communities.map(c => c.id)
   const preprocessedDetails = divToP(details)
   return {
     type: UPDATE_POST,
     graphql: {
-      query: `mutation ($id: ID, $type: String, $title: String, $details: String, $communityIds: [String]) {
-        updatePost(id: $id, data: {type: $type, title: $title, details: $details, communityIds: $communityIds}) {
+      query: `mutation ($id: ID,
+        $type: String,
+        $title: String,
+        $details: String,
+        $communityIds: [String],
+        $imageUrls: [String],
+        $fileUrls: [String]
+      ) {
+        updatePost(id: $id, data: {
+          type: $type,
+          title: $title,
+          details: $details,
+          communityIds: $communityIds,
+          imageUrls: $imageUrls,
+          fileUrls: $fileUrls
+        }) {
           id
           type
           title
@@ -60,6 +112,12 @@ export function updatePost (post) {
             name
             slug
           }
+          attachments {
+            id
+            position
+            type
+            url
+          }
         }
       }`,
       variables: {
@@ -67,7 +125,9 @@ export function updatePost (post) {
         type,
         title,
         details: preprocessedDetails,
-        communityIds
+        communityIds,
+        imageUrls,
+        fileUrls
       }
     },
     meta: {
@@ -93,4 +153,13 @@ export default function reducer (state = {}, action) {
       return {...state, details: action.payload}
   }
   return state
+}
+
+export function ormSessionReducer (session, action) {
+  const { type, meta } = action
+  if (type === UPDATE_POST_PENDING) {
+    // deleting all attachments here because we restore them from the result of the UPDATE_POST action
+    const post = session.Post.withId(meta.graphql.variables.id)
+    post.attachments.delete()
+  }
 }

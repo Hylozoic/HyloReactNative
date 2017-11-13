@@ -1,4 +1,5 @@
 import { mapStateToProps, mapDispatchToProps } from './PostEditor.connector'
+import orm from 'store/models'
 
 const communityId = 1
 const id = 1
@@ -21,8 +22,8 @@ const state = {
 }
 
 describe('PostEditor mapStateToProps', () => {
-  it('returns communityId', () => {
-    expect(mapStateToProps(state, props).communityId).toBe(communityId)
+  it('returns communityIds', () => {
+    expect(mapStateToProps(state, props).communityIds).toEqual([communityId])
   })
 
   it('returns details', () => {
@@ -31,6 +32,35 @@ describe('PostEditor mapStateToProps', () => {
 
   it('returns a post', () => {
     expect(mapStateToProps(state, props).post).toBeDefined()
+  })
+
+  it('sets communityIds and imageUrls from post', () => {
+    const session = orm.session(orm.getEmptyState())
+    session.Community.create({id: '7'})
+    session.Community.create({id: '8'})
+    session.Post.create({id: '1', communities: ['7', '8']})
+    session.Attachment.create({
+      id: '2', post: '1', type: 'image', url: 'foo.png', position: 1
+    })
+    session.Attachment.create({
+      id: '3', post: '1', type: 'image', url: 'bar.png', position: 0
+    })
+    const state = {
+      orm: session.state,
+      PostEditor: {
+        details: ''
+      }
+    }
+    const props = {
+      navigation: {
+        state: {
+          params: {id: '1'}
+        }
+      }
+    }
+    const stateProps = mapStateToProps(state, props)
+    expect(stateProps.communityIds).toEqual(['7', '8'])
+    expect(stateProps.imageUrls).toEqual(['bar.png', 'foo.png'])
   })
 })
 

@@ -54,7 +54,6 @@ export default class PostCard extends React.Component {
       id: postId,
       communities,
       type,
-      updatedAt,
       createdAt,
       creator,
       details,
@@ -69,7 +68,7 @@ export default class PostCard extends React.Component {
     const slug = get('0.slug', communities)
     return <View style={styles.container}>
       <PostHeader creator={creator}
-        date={updatedAt || createdAt}
+        date={createdAt}
         type={type}
         showCommunity={showCommunity}
         editPost={editPost}

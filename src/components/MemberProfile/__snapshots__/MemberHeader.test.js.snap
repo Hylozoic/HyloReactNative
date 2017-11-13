@@ -2,24 +2,26 @@
 
 exports[`Control matches the last snapshot 1`] = `
 <View>
-  <TextInput
-    editable={true}
-    multiline={true}
-    onBlur={[Function]}
-    onChangeText={undefined}
-    value="a"
-  />
-  <TouchableOpacity
-    activeOpacity={0.2}
-    focusedOpacity={0.7}
-    onPress={[Function]}
-  >
-    <Icon
-      allowFontScaling={false}
-      name="edit"
-      size={12}
+  <View>
+    <TextInput
+      editable={true}
+      multiline={true}
+      onBlur={[Function]}
+      onChangeText={undefined}
+      value="a"
     />
-  </TouchableOpacity>
+    <TouchableOpacity
+      activeOpacity={0.2}
+      focusedOpacity={0.7}
+      onPress={[Function]}
+    >
+      <Icon
+        allowFontScaling={false}
+        name="edit"
+        size={12}
+      />
+    </TouchableOpacity>
+  </View>
 </View>
 `;
 
@@ -28,7 +30,7 @@ exports[`MemberHeader matches the last snapshot 1`] = `
   <View>
     <Control
       editable={undefined}
-      onBlur={undefined}
+      error={undefined}
       onChangeText={[Function]}
       value="Jonas"
     />
@@ -44,20 +46,20 @@ exports[`MemberHeader matches the last snapshot 1`] = `
       </TouchableOpacity>
       <MemberMenu
         editProfile={undefined}
+        editable={undefined}
         flagMember={[Function]}
         isMe={undefined}
+        saveChanges={undefined}
       />
     </View>
   </View>
   <Control
     editable={undefined}
-    onBlur={undefined}
     onChangeText={[Function]}
     value="whale"
   />
   <Control
     editable={undefined}
-    onBlur={undefined}
     onChangeText={[Function]}
     value="fingers crossed"
   />
