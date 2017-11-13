@@ -1,15 +1,21 @@
 import React from 'react'
-import { Button, View } from 'react-native'
+import { Button, View, TouchableOpacity, Image } from 'react-native'
 import KeyboardFriendlyView from '../../KeyboardFriendlyView'
 import Editor from '../../Editor'
 import { keyboardAvoidingViewProps as kavProps } from 'util/viewHelpers'
-import { get } from 'lodash/fp'
+import { caribbeanGreen } from 'style/colors'
+const BackImage = require('../../../assets/Back.png')
 
 export default class DetailsEditor extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
       headerTitle: 'Details',
-      headerRight: <View style={styles.saveButton}><Button title={'Save'} onPress={() => navigation.goBack()} /></View>
+      headerTitleStyle: { color: 'black' },
+      headerTintColor: caribbeanGreen,
+      headerLeft: <TouchableOpacity onPress={() => navigation.goBack()}><Image style={styles.backIcon} source={BackImage} /></TouchableOpacity>,
+      headerRight: <View style={styles.saveButton}>
+        <Button color={caribbeanGreen} title={'Save'} onPress={() => navigation.goBack()} />
+      </View>
     }
   }
 
@@ -43,5 +49,10 @@ const styles = {
   container: {
     backgroundColor: 'white',
     flex: 1
+  },
+  backIcon: {
+    height: 25,
+    width: 15,
+    marginLeft: 10
   }
 }

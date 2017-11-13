@@ -5,7 +5,8 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  View
+  View,
+  Image
 } from 'react-native'
 import PropTypes from 'prop-types'
 import styles from './PostEditor.styles'
@@ -17,6 +18,8 @@ import { decode } from 'ent'
 import KeyboardFriendlyView from '../KeyboardFriendlyView'
 import ImageSelector from './ImageSelector'
 import FileSelector from './FileSelector'
+import { caribbeanGreen } from 'style/colors'
+const BackImage = require('../../assets/Back.png')
 
 export default class PostEditor extends React.Component {
   static contextTypes = {navigate: PropTypes.func}
@@ -26,7 +29,10 @@ export default class PostEditor extends React.Component {
     const title = isSaving ? 'Saving...' : 'Save'
     return {
       headerTitle,
-      headerRight: save ? <View style={styles.saveButton}><Button title={title} disabled={isSaving} onPress={save} /></View> : null
+      headerTitleStyle: { color: 'black' },
+      headerTintColor: caribbeanGreen,
+      headerLeft: <TouchableOpacity onPress={() => navigation.goBack()}><Image style={styles.backIcon} source={BackImage} /></TouchableOpacity>,
+      headerRight: save ? <View style={styles.saveButton}><Button color={caribbeanGreen} title={title} disabled={isSaving} onPress={save} /></View> : null
     }
   }
 

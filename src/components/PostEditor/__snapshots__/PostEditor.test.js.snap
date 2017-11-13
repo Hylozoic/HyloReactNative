@@ -2,14 +2,28 @@
 
 exports[`PostEditor has navigation options 1`] = `
 Object {
+  "headerLeft": <TouchableOpacity
+    activeOpacity={0.2}
+    focusedOpacity={0.7}
+    onPress={[Function]}
+>
+    <Image
+        source={1}
+    />
+</TouchableOpacity>,
   "headerRight": <View>
     <Button
+        color="#0DC39F"
         disabled={false}
         onPress={[Function]}
         title="Save"
     />
 </View>,
+  "headerTintColor": "#0DC39F",
   "headerTitle": "a title",
+  "headerTitleStyle": Object {
+    "color": "black",
+  },
 }
 `;
 
