@@ -14,9 +14,7 @@ export default class DetailsEditor extends React.Component {
       headerTitleStyle: { color: 'black' },
       headerTintColor: caribbeanGreen,
       headerLeft: <BackArrow navigation={navigation} />,
-      headerRight: <View style={styles.saveButton}>
-        <Button color={caribbeanGreen} title={'Save'} onPress={() => navigation.goBack()} />
-      </View>
+      headerRight: <View style={styles.saveButton}><Button color={caribbeanGreen} title={'Save'} onPress={() => navigation.goBack()} /></View>
     }
   }
 

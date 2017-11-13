@@ -5,8 +5,7 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  View,
-  Image
+  View
 } from 'react-native'
 import PropTypes from 'prop-types'
 import styles from './PostEditor.styles'
