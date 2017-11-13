@@ -64,7 +64,8 @@ export class Control extends React.Component {
           onChangeText={onChangeText}
           editable={editable}
           onBlur={onBlur}
-          multiline={multiline} />
+          multiline={multiline}
+          underlineColorAndroid='transparent' />
         {editable && !hideEditIcon && <TouchableOpacity onPress={this.focus} style={styles.editIconWrapper}>
           <EntypoIcon name='edit' style={styles.editIcon} />
         </TouchableOpacity>}
