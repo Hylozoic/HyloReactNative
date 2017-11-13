@@ -19,7 +19,7 @@ import KeyboardFriendlyView from '../KeyboardFriendlyView'
 import ImageSelector from './ImageSelector'
 import FileSelector from './FileSelector'
 import { caribbeanGreen } from 'style/colors'
-const BackImage = require('../../assets/Back.png')
+import BackArrow from '../BackArrow'
 
 export default class PostEditor extends React.Component {
   static contextTypes = {navigate: PropTypes.func}
@@ -31,7 +31,7 @@ export default class PostEditor extends React.Component {
       headerTitle,
       headerTitleStyle: { color: 'black' },
       headerTintColor: caribbeanGreen,
-      headerLeft: <TouchableOpacity onPress={() => navigation.goBack()}><Image style={styles.backIcon} source={BackImage} /></TouchableOpacity>,
+      headerLeft: <BackArrow navigation={navigation} />,
       headerRight: save ? <View style={styles.saveButton}><Button color={caribbeanGreen} title={title} disabled={isSaving} onPress={save} /></View> : null
     }
   }
