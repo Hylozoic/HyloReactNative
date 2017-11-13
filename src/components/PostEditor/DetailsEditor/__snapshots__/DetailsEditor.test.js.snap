@@ -5,13 +5,9 @@ Object {
   "headerLeft": <BackArrow
     navigation={Object {}}
 />,
-  "headerRight": <View>
-    <Button
-        color="#0DC39F"
-        onPress={[Function]}
-        title="Save"
-    />
-</View>,
+  "headerRight": <SaveButton
+    navigation={Object {}}
+/>,
   "headerTintColor": "#0DC39F",
   "headerTitle": "Details",
   "headerTitleStyle": Object {
@@ -40,4 +36,14 @@ exports[`DetailsEditor renders correctly 1`] = `
     onChange={[Function]}
   />
 </Unknown>
+`;
+
+exports[`SaveButton renders correctly 1`] = `
+<View>
+  <Button
+    color="#0DC39F"
+    onPress={[Function]}
+    title="Save"
+  />
+</View>
 `;
