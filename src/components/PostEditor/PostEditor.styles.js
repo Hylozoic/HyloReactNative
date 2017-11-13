@@ -97,10 +97,5 @@ export default {
   },
   imageSelector: {
     marginBottom: 10
-  },
-  backIcon: {
-    height: 25,
-    width: 15,
-    marginLeft: 10
   }
 }

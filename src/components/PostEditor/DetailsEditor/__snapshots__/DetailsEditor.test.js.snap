@@ -2,15 +2,9 @@
 
 exports[`DetailsEditor has navigation options 1`] = `
 Object {
-  "headerLeft": <TouchableOpacity
-    activeOpacity={0.2}
-    focusedOpacity={0.7}
-    onPress={[Function]}
->
-    <Image
-        source={1}
-    />
-</TouchableOpacity>,
+  "headerLeft": <BackArrow
+    navigation={Object {}}
+/>,
   "headerRight": <View>
     <Button
         color="#0DC39F"
