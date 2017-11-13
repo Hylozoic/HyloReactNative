@@ -5,8 +5,8 @@ import {
 } from 'react-native'
 import styles from './BackArrow.styles'
 
-const BackImage = require('../../assets/Back.png')
+const BackArrowImage = require('../../assets/Back.png')
 
 export default function BackArrow ({navigation}) {
-  return <TouchableOpacity onPress={() => navigation.goBack()}><Image style={styles.backIcon} source={BackImage} /></TouchableOpacity>
+  return <TouchableOpacity onPress={() => navigation.goBack()}><Image style={styles.backArrow} source={BackArrowImage} /></TouchableOpacity>
 }

@@ -1,5 +1,5 @@
 export default {
-  backIcon: {
+  backArrow: {
     height: 25,
     width: 15,
     marginLeft: 10
