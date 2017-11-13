@@ -6,8 +6,10 @@ exports[`Control matches the last snapshot 1`] = `
     <TextInput
       editable={true}
       multiline={true}
+      numberOfLines={8}
       onBlur={[Function]}
       onChangeText={undefined}
+      underlineColorAndroid="transparent"
       value="a"
     />
     <TouchableOpacity
