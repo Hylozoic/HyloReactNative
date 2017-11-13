@@ -4,6 +4,7 @@ import KeyboardFriendlyView from '../../KeyboardFriendlyView'
 import Editor from '../../Editor'
 import { keyboardAvoidingViewProps as kavProps } from 'util/viewHelpers'
 import { caribbeanGreen } from 'style/colors'
+import styles from './DetailsEditor.styles'
 const BackImage = require('../../../assets/Back.png')
 
 export default class DetailsEditor extends React.Component {
@@ -39,20 +40,5 @@ export default class DetailsEditor extends React.Component {
         onChange={content => this.setState({content})}
         communityId={navigation.state.params.communityId} />
     </KeyboardFriendlyView>
-  }
-}
-
-const styles = {
-  saveButton: {
-    marginRight: 10
-  },
-  container: {
-    backgroundColor: 'white',
-    flex: 1
-  },
-  backIcon: {
-    height: 25,
-    width: 15,
-    marginLeft: 10
   }
 }
