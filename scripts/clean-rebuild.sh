@@ -1,4 +1,9 @@
-cd ../ 
+#!/bin/bash
+
+# Force script to be called from root (which is 1 level up from the directory with this script)
+cd "$(dirname "$0")"
+cd ../
+
 watchman watch-del-all
 rm -rf node_modules
 rm -rf $TMPDIR/react-*

@@ -12,7 +12,8 @@
     "ios": "react-native run-ios",
     "ios:testflight": "cd ios && bundle exec fastlane beta",
     "test": "jest",
-    "coverage:diff": "node ../jest-diff-coverage && open coverage/lcov-report/index.html"
+    "coverage:diff": "node ../jest-diff-coverage && open coverage/lcov-report/index.html",
+    "clean-start": "./scripts/clean-rebuild.sh"
   },
   "dependencies": {
     "babel-eslint": "^8.0.1",
