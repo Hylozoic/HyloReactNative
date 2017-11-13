@@ -3,7 +3,7 @@ import { get } from 'lodash/fp'
 
 export const FETCH_POSTS = `FETCH_POSTS`
 
-export function fetchPosts (
+export default function fetchPosts (
   { subject, slug, networkSlug, sortBy, offset, search, filter, topic },
   { reset } = {}
 ) {

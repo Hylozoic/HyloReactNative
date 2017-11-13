@@ -9,7 +9,7 @@ import {
   defaultSortBy
 } from './FeedList.store'
 import { ALL_COMMUNITIES_ID } from '../../store/models/Community'
-import { fetchPosts, FETCH_POSTS } from '../../store/actions/fetchPosts'
+import fetchPosts, { FETCH_POSTS } from '../../store/actions/fetchPosts'
 import resetNewPostCount from '../../store/actions/resetNewPostCount'
 import { get, isNull, isUndefined, omit, omitBy } from 'lodash/fp'
 
@@ -78,6 +78,7 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     }
     return Promise.all(promises)
   }
+
   // topic
   return {
     ...omit(['queryProps'], stateProps),
