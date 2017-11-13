@@ -57,16 +57,18 @@ export class Control extends React.Component {
     const { value, onChangeText, editable = false, style, onBlur, multiline, hideEditIcon, error } = this.props
     return <View style={[styles.control, editable && styles.editableControl]}>
       <View style={styles.controlInputRow}>
-        <TextInput
-          ref={i => { this.input = i }}
-          style={[styles.controlInput, style]}
-          value={value}
-          onChangeText={onChangeText}
-          editable={editable}
-          onBlur={onBlur}
-          multiline={multiline}
-          numberOfLines={8}
-          underlineColorAndroid='transparent' />
+        {editable || !multiline
+          ? <TextInput
+            ref={i => { this.input = i }}
+            style={[styles.controlInput, style]}
+            value={value}
+            onChangeText={onChangeText}
+            editable={editable}
+            onBlur={onBlur}
+            multiline={multiline}
+            numberOfLines={multiline ? 8 : 1}
+            underlineColorAndroid='transparent' />
+          : <Text>{value}</Text>}
         {editable && !hideEditIcon && <TouchableOpacity onPress={this.focus} style={styles.editIconWrapper}>
           <EntypoIcon name='edit' style={styles.editIcon} />
         </TouchableOpacity>}
