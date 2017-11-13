@@ -10,8 +10,7 @@ export default class Home extends React.Component {
   }
 
   componentDidMount () {
-    // this.props.navigation.navigate('MemberDetails', {id: 11204, editing: true})
-    this.props.navigation.navigate('MemberProfile', {id: 11204})
+    this.props.navigation.navigate('MemberDetails', {id: 11204})
   }
 
   render () {
