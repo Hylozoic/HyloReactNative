@@ -1,8 +1,12 @@
-import 'react-native'
+import { TouchableOpacity, ActionSheetIOS } from 'react-native'
 import React from 'react'
 import PopupMenuButtonAndroid from './PopupMenuButton.android'
 import PopupMenuButtonIos from './PopupMenuButton.ios'
 import TestRenderer from 'react-test-renderer'
+
+jest.mock('ActionSheetIOS', () => ({
+  showActionSheetWithOptions: jest.fn()
+}))
 
 describe('PopupMenuButton', () => {
   const platforms = [['android', PopupMenuButtonAndroid], ['ios', PopupMenuButtonIos]]
@@ -33,6 +37,18 @@ describe('PopupMenuButton', () => {
       expect(theView).toBeTruthy()
 
       expect(renderer).toMatchSnapshot()
+    })
+  })
+
+  describe('ios only', () => {
+    it('calls showActionSheetWithOptions with the right params', () => {
+      const props = {
+        actions: [['Option 1', () => {}], ['Option 2', () => {}]]
+      }
+      const node = TestRenderer.create(<PopupMenuButtonIos {...props} />).root
+      node.findByType(TouchableOpacity).props.onPress()
+      expect(ActionSheetIOS.showActionSheetWithOptions).toHaveBeenCalled()
+      expect(ActionSheetIOS.showActionSheetWithOptions.mock.calls).toMatchSnapshot()
     })
   })
 
