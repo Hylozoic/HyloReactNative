@@ -45,13 +45,11 @@ Array [
 
 exports[`VersionCheck renders as pending by default 1`] = `
 <View>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    disabled={false}
-    ellipsizeMode="tail"
-  >
-    Loading...
-  </Text>
+  <ActivityIndicator
+    animating={true}
+    color="#999999"
+    hidesWhenStopped={true}
+    size="small"
+  />
 </View>
 `;

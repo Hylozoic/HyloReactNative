@@ -99,7 +99,7 @@ export default class PostHeader extends PureComponent {
       </View>
       <View style={styles.upperRight}>
         {type && <PostLabel type={type} />}
-        <PostMenu removePost={removePostWithConfirm} deletePost={deletePostWithConfirm} {...{editPost, flagPost}} />
+        <PostMenu removePost={removePostWithConfirm} deletePost={deletePostWithConfirm} editPost={editPost} flagPost={flagPost} />
         {flaggingVisible && <FlagContent type='post'
           linkData={linkData}
           onClose={() => this.setState({flaggingVisible: false})} />
