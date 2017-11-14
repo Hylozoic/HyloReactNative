@@ -22,6 +22,18 @@ describe('HeaderButton', () => {
     expect(actual).toMatchSnapshot()
   })
 
+  it('matches last Close icon snapshot', () => {
+    const renderer = new ReactShallowRenderer()
+    const closeProps = {
+      ...defaultProps,
+      text: 'Close'
+    }
+    renderer.render(<HeaderButton {...closeProps} />)
+    const actual = renderer.getRenderOutput()
+
+    expect(actual).toMatchSnapshot()
+  })
+
   it('sets state.disabled to match props', () => {
     const props = {
       ...defaultProps,
