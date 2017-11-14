@@ -1,5 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`PopupMenuButton ios only calls showActionSheetWithOptions with the right params 1`] = `
+Array [
+  Array [
+    Object {
+      "cancelButtonIndex": 2,
+      "destructiveButtonIndex": undefined,
+      "options": Array [
+        "Option 1",
+        "Option 2",
+        "Cancel",
+      ],
+    },
+    [Function],
+  ],
+]
+`;
+
 exports[`PopupMenuButton matches the last snapshot on android 1`] = `
 <View
   accessibilityComponentType={undefined}

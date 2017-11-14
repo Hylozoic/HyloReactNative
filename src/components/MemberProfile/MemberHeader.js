@@ -84,11 +84,9 @@ export function MemberMenu ({flagMember, isMe, editProfile, saveChanges, editabl
 
   if (isEmpty(actions)) return null
 
-  const onSelect = index => actions[index][1]()
-
   const destructiveButtonIndex = actions[0][0] === 'Flag This Member' ? 0 : -1
 
-  return <PopupMenuButton actions={actions.map(x => x[0])} onSelect={onSelect}
+  return <PopupMenuButton actions={actions}
     destructiveButtonIndex={destructiveButtonIndex}>
     <Icon name='More' style={styles.lastIcon} />
   </PopupMenuButton>

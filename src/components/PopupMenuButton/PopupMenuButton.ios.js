@@ -3,17 +3,18 @@ import React from 'react'
 
 export default function PopupMenuButton ({
   actions,
-  onSelect,
   destructiveButtonIndex,
   children,
   viewProps,
   style,
   hitSlop = {top: 5, bottom: 5, left: 5, right: 5}
 }) {
+  const onSelect = index => actions[index][1]()
+
   const onPress = () => {
     const cancelButtonIndex = actions.length
     ActionSheetIOS.showActionSheetWithOptions({
-      options: actions.concat(['Cancel']),
+      options: actions.map(a => a[0]).concat(['Cancel']),
       destructiveButtonIndex,
       cancelButtonIndex: actions.length
     }, index => index !== cancelButtonIndex && onSelect(index))
