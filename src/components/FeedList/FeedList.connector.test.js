@@ -102,34 +102,35 @@ describe('mergeProps', () => {
       }, undefined)
       expect(dispatchProps.resetNewPostCount).toHaveBeenCalledWith(ownProps.community.id, 'Membership')
     })
-    it('sets up fetchPostsAndResetCount without calling resetNewPostCount', () => {
-      const stateProps = {
-        queryProps: {
-          subject: 'community',
-          sortBy: defaultSortBy,
-          filter: 'some filter'
-        }
-      }
+  })
 
-      const dispatchProps = {
-        resetNewPostCount: jest.fn(),
-        fetchPosts: jest.fn()
+  it('sets up fetchPostsAndResetCount without calling resetNewPostCount', () => {
+    const stateProps = {
+      queryProps: {
+        subject: 'community',
+        sortBy: defaultSortBy,
+        filter: 'some filter'
       }
+    }
 
-      const ownProps = {
-        community: {
-          id: 1
-        }
+    const dispatchProps = {
+      resetNewPostCount: jest.fn(),
+      fetchPosts: jest.fn()
+    }
+
+    const ownProps = {
+      community: {
+        id: 1
       }
+    }
 
-      const merged = mergeProps(stateProps, dispatchProps, ownProps)
-      return merged.fetchPosts()
-      .then(() => {
-        expect(dispatchProps.fetchPosts).toHaveBeenCalledWith({
-          sortBy: 'updated', subject: 'community', filter: 'some filter'
-        }, undefined)
-        expect(dispatchProps.resetNewPostCount).not.toHaveBeenCalled()
-      })
+    const merged = mergeProps(stateProps, dispatchProps, ownProps)
+    return merged.fetchPosts()
+    .then(() => {
+      expect(dispatchProps.fetchPosts).toHaveBeenCalledWith({
+        sortBy: 'updated', subject: 'community', filter: 'some filter'
+      }, undefined)
+      expect(dispatchProps.resetNewPostCount).not.toHaveBeenCalled()
     })
   })
 
