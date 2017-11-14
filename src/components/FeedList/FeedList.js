@@ -72,23 +72,9 @@ export default class FeedList extends Component {
       ? <Loading style={styles.loading} />
       : null
 
-    // Move to ORM instance method....
-    var filteredPosts = posts
-    if (networkId) {
-      filteredPosts = map(post => {
-        return {
-          ...post,
-          communities: filter(
-            community => get('network.id', community) === networkId,
-            post.communities
-          )
-        }
-      }, posts)
-    }
-
     return <View style={styles.container}>
       <FlatList
-        data={filteredPosts}
+        data={posts}
         renderItem={({ item }) =>
           <PostRow
             post={item}
@@ -97,7 +83,8 @@ export default class FeedList extends Component {
             showMember={showMember}
             showTopic={showTopic}
             showCommunity={showCommunities}
-            goToCommunity={goToCommunity} />}
+            goToCommunity={goToCommunity}
+            selectedNetworkId={networkId} />}
         onRefresh={this.props.refreshPosts}
         refreshing={!!this.props.pendingRefresh}
         keyExtractor={(item, index) => item.id}
@@ -150,12 +137,26 @@ export function ListControl ({ selected, options, onChange }) {
 }
 
 export function PostRow ({
-  post, showPost, editPost, showMember, showTopic, showCommunity, goToCommunity
+  post, showPost, editPost, showMember, showTopic,
+  showCommunity, goToCommunity, selectedNetworkId
 }) {
+  // TODO: Move to Post model instance method...
+  // When a network is selected only show communities
+  // in the that network in the header
+  var filteredPost = post
+  if (selectedNetworkId) {
+    filteredPost = {
+      ...post,
+      communities: filter(
+        community => get('network.id', community) === selectedNetworkId,
+        post.communities
+      )
+    }
+  }
   return <View style={styles.postRow}>
     <TouchableWithoutFeedback onPress={() => showPost(post.id)}>
       <View>
-        <PostCard post={post}
+        <PostCard post={filteredPost}
           editPost={() => editPost(post.id)}
           showMember={showMember}
           showTopic={showTopic}
