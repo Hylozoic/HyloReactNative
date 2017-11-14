@@ -4,6 +4,7 @@
 import React from 'react'
 import { StyleSheet, Text, TouchableOpacity } from 'react-native'
 import { rhino60, rhino20 } from 'style/colors'
+import Icon from '../components/Icon'
 
 export const tintColor = rhino60
 
@@ -33,7 +34,9 @@ export class HeaderButton extends React.Component {
     const { disabled } = this.state
     if (typeof onPress !== 'function') throw new Error('HeaderButton: onPress is not a function.')
     return <TouchableOpacity onPress={this.onPress} disabled={disabled}>
-      <Text style={[styles.button, disabled && styles.disabled]}>{text}</Text>
+      {text === 'Close'
+                  ? <Icon name='Ex' style={styles.exIcon} />
+                  : <Text style={[styles.button, disabled && styles.disabled]}>{text}</Text>}
     </TouchableOpacity>
   }
 }
@@ -121,5 +124,8 @@ const styles = StyleSheet.create({
     // CustomFontName_bold.ttf, which doesn't exist:
     // https://github.com/react-community/react-navigation/issues/542#issuecomment-283663786
     // fontWeight: '200'
+  },
+  exIcon: {
+    fontSize: 20
   }
 })
