@@ -124,14 +124,11 @@ export function PostMenu ({deletePost, editPost, flagPost, removePost}) {
 
   if (isEmpty(actions)) return null
 
-  const onSelect = index => actions[index][1]()
-
   const destructiveLabels = [flagLabel, deleteLabel, removeLabel]
   const destructiveButtonIndex = destructiveLabels.includes(actions[0][0]) ? 0 : -1
 
-  return <PopupMenuButton actions={actions.map(x => x[0])}
+  return <PopupMenuButton actions={actions}
     hitSlop={{top: 20, bottom: 10, left: 10, right: 15}}
-    onSelect={onSelect}
     destructiveButtonIndex={destructiveButtonIndex}>
     <Icon name='More' style={styles.menuIcon} />
   </PopupMenuButton>

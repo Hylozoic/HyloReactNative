@@ -5,11 +5,13 @@ exports[`renders with images 1`] = `
   <PopupMenuButtonMock
     actions={
       Array [
-        "Remove image",
+        Array [
+          "Remove image",
+          [Function],
+        ],
       ]
     }
     destructiveButtonIndex={0}
-    onSelect={[Function]}
   >
     <Image
       source={
@@ -22,11 +24,13 @@ exports[`renders with images 1`] = `
   <PopupMenuButtonMock
     actions={
       Array [
-        "Remove image",
+        Array [
+          "Remove image",
+          [Function],
+        ],
       ]
     }
     destructiveButtonIndex={0}
-    onSelect={[Function]}
   >
     <Image
       source={
@@ -39,11 +43,13 @@ exports[`renders with images 1`] = `
   <PopupMenuButtonMock
     actions={
       Array [
-        "Remove image",
+        Array [
+          "Remove image",
+          [Function],
+        ],
       ]
     }
     destructiveButtonIndex={0}
-    onSelect={[Function]}
   >
     <Image
       source={

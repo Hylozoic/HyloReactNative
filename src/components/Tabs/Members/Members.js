@@ -49,7 +49,8 @@ export default class Members extends React.Component {
     } = this.props
     const sortKeys = sortKeysFactory(subject)
     const onSearch = debounce(300, text => this.props.setSearch(text))
-    const onSelect = index => setSort(keys(sortKeys)[index])
+
+    const actions = values(sortKeys).map((value, index) => [value, () => setSort(keys(sortKeys)[index])])
 
     // sort of a hack since members need to be even since it's rows of 2.  fixes flexbox
     if (size(members) % 2 > 0) members.push({id: -1})
@@ -66,7 +67,7 @@ export default class Members extends React.Component {
             underlineColorAndroid='transparent' style={styles.searchInput} />
         </View>
 
-        <PopupMenuButton actions={values(sortKeys)} onSelect={onSelect}>
+        <PopupMenuButton actions={actions}>
           <View style={styles.sortBy}>
             <Text style={styles.sortByText}>{sortKeys[sortBy]}</Text>
             <Icon name='ArrowDown' style={styles.downArrow} />
