@@ -2,9 +2,9 @@
  * @providesModule util/header
  */
 import React from 'react'
-import { StyleSheet, Text, TouchableOpacity, Image } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity } from 'react-native'
 import { rhino60, rhino20 } from 'style/colors'
-const allCommunitiesImage = require('../assets/Close.png')
+import Icon from '../components/Icon'
 
 export const tintColor = rhino60
 
@@ -35,7 +35,7 @@ export class HeaderButton extends React.Component {
     if (typeof onPress !== 'function') throw new Error('HeaderButton: onPress is not a function.')
     return <TouchableOpacity onPress={this.onPress} disabled={disabled}>
       {text === 'Close'
-                  ? <Image style={styles.iconEx} source={allCommunitiesImage} />
+                  ? <Icon name='Ex' style={styles.exIcon} />
                   : <Text style={[styles.button, disabled && styles.disabled]}>{text}</Text>}
     </TouchableOpacity>
   }
@@ -98,10 +98,6 @@ export default function header ({ goBack, state }, { left, right, title, options
 }
 
 const styles = StyleSheet.create({
-  iconEx: {
-    height: 25,
-    width: 25
-  },
   button: {
     fontFamily: 'Circular-Book',
     fontSize: 15,
@@ -128,5 +124,8 @@ const styles = StyleSheet.create({
     // CustomFontName_bold.ttf, which doesn't exist:
     // https://github.com/react-community/react-navigation/issues/542#issuecomment-283663786
     // fontWeight: '200'
+  },
+  exIcon: {
+    fontSize: 20
   }
 })

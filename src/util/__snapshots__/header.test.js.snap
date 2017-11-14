@@ -7,8 +7,8 @@ exports[`HeaderButton matches last Close icon snapshot 1`] = `
   focusedOpacity={0.7}
   onPress={[Function]}
 >
-  <Image
-    source={1}
+  <Icon
+    name="Ex"
   />
 </TouchableOpacity>
 `;
