@@ -52,7 +52,6 @@ export function handleJoinCommunity (stateProps, dispatchProps) {
   const { currentUser, invitationCodes } = stateProps
   const { useInvitation, goToCommunity, goToHome } = dispatchProps
   const getCommunityId = get('payload.data.useInvitation.membership.community.id')
-  console.log('!! here: ', dispatchProps)
   return useInvitation(currentUser, invitationCodes)
   .then(result => {
     const communityId = getCommunityId(result)

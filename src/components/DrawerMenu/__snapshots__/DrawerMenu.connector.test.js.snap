@@ -39,6 +39,7 @@ Object {
     "navigate": [Function],
   },
   "selectCommunity": [Function],
+  "selectNetwork": [Function],
   "showSettings": [Function],
 }
 `;

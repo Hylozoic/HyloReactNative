@@ -102,6 +102,7 @@ describe('PostRow', () => {
       {name: 'community2', network: {id: 2}},
       {name: 'community3', network: {id: 1}}
     ]
+    const selectedNetworkId = 1
     const post = {
       id: 1,
       communities
@@ -109,7 +110,7 @@ describe('PostRow', () => {
     const renderer = new ReactShallowRenderer()
     renderer.render(<PostRow
       post={post}
-      selectedNetworkId={1}
+      selectedNetworkId={selectedNetworkId}
       navigate={() => {}}
       goToCommunity={() => {}} />)
     const actual = renderer.getRenderOutput()

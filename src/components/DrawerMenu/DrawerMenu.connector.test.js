@@ -29,7 +29,8 @@ describe('mergeProps matches the last snapshot and bound functions work as expec
     name: 'Roy Rogers'
   }
   const dispatchProps = {
-    selectCommunity: jest.fn(x => x)
+    selectCommunity: jest.fn(x => x),
+    selectNetwork: jest.fn(x => x)
   }
   const ownProps = {
     navigation: {
@@ -41,6 +42,10 @@ describe('mergeProps matches the last snapshot and bound functions work as expec
   const community = {id: 'testcommunity'}
   props.goToCommunity(community)
   expect(dispatchProps.selectCommunity).toHaveBeenCalled()
+  expect(ownProps.navigation.navigate).toHaveBeenCalled()
+  const network = {id: 'testnetwork'}
+  props.goToNetwork(network)
+  expect(dispatchProps.selectNetwork).toHaveBeenCalled()
   expect(ownProps.navigation.navigate).toHaveBeenCalled()
   props.showSettings()
   expect(ownProps.navigation.navigate).toHaveBeenCalled()
