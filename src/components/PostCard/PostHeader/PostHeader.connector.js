@@ -16,7 +16,7 @@ export function mapStateToProps (state, props) {
   return {
     currentUser,
     community,
-    editPostIfAllowed: canEdit ? () => editPost() : false,
+    editPost: canEdit ? () => editPost() : false,
     canEdit,
     canFlag,
     isCreator,
@@ -36,9 +36,9 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
   const { postId, slug } = ownProps
   const { deletePost, removePost } = dispatchProps
   return {
+    ...ownProps,
     ...stateProps,
     ...dispatchProps,
-    ...ownProps,
     deletePost: canEdit ? () => deletePost(postId) : null,
     removePost: !isCreator && canModerate ? () => removePost(postId, slug) : null
   }

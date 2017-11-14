@@ -65,12 +65,12 @@ describe('mapStateToProps', () => {
     const propEditPost = jest.fn()
 
     const ownProps = {creator: {id: 20}, editPost: propEditPost}
-    const { canEdit, editPostIfAllowed } = mapStateToProps(state, ownProps)
+    const { canEdit, editPost } = mapStateToProps(state, ownProps)
 
     expect(canEdit).toBeTruthy()
-    expect(editPostIfAllowed).toBeTruthy()
+    expect(editPost).toBeTruthy()
 
-    editPostIfAllowed()
+    editPost()
     expect(propEditPost).toHaveBeenCalled()
   })
 
