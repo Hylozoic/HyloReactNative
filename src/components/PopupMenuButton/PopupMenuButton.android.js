@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, UIManager, findNodeHandle, TouchableOpacity } from 'react-native'
+import { UIManager, findNodeHandle, TouchableOpacity } from 'react-native'
 
 export default class PopupMenuButton extends Component {
   state = {
@@ -14,7 +14,7 @@ export default class PopupMenuButton extends Component {
   onSelect = (action, index) => {
     this.setState({open: false})
     if (action === 'itemSelected') {
-      this.props.onSelect(index)
+      this.props.actions[index][1]()
     }
   }
 
@@ -22,7 +22,7 @@ export default class PopupMenuButton extends Component {
     if (this.button && !this.state.open) {
       UIManager.showPopupMenu(
         findNodeHandle(this.button),
-        this.props.actions,
+        this.props.actions.map(a => a[0]),
         this.onError,
         this.onSelect
       )
