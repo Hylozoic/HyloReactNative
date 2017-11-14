@@ -55,9 +55,8 @@ export default class FileSelector extends React.PureComponent {
 function renderFileButton (url, buttonIndex, onRemove) {
   return <PopupMenuButton
     key={url}
-    actions={['Remove image']}
-    destructiveButtonIndex={0}
-    onSelect={menuIndex => onRemove(url)}>
+    actions={[['Remove image', () => onRemove(url)]]}
+    destructiveButtonIndex={0}>
     <FileLabel url={url} />
   </PopupMenuButton>
 }

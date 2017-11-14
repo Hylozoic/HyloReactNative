@@ -4,7 +4,10 @@ exports[`commentMenu renders correctly 1`] = `
 <PopupMenuButton
   actions={
     Array [
-      "Delete this Comment",
+      Array [
+        "Delete this Comment",
+        [Function],
+      ],
     ]
   }
   destructiveButtonIndex={0}
@@ -16,7 +19,6 @@ exports[`commentMenu renders correctly 1`] = `
       "top": 20,
     }
   }
-  onSelect={[Function]}
 >
   <Icon
     name="More"
@@ -28,7 +30,10 @@ exports[`commentMenu returns removeComment 1`] = `
 <PopupMenuButton
   actions={
     Array [
-      "Remove this Comment",
+      Array [
+        "Remove this Comment",
+        [Function],
+      ],
     ]
   }
   destructiveButtonIndex={0}
@@ -40,7 +45,6 @@ exports[`commentMenu returns removeComment 1`] = `
       "top": 20,
     }
   }
-  onSelect={[Function]}
 >
   <Icon
     name="More"
