@@ -15,13 +15,16 @@ describe('mapStateToProps', () => {
     expect(mapStateToProps(state, props)).toEqual({
       community: null,
       currentUser: undefined,
+      network: null,
+      topic: undefined,
+      topicSubscribed: undefined,
       topicName: undefined
     })
   })
 
   it('gets props from navigation object', () => {
-    session.Community.create({id: '7', slug: 'world'})
-    session.Me.create({name: 'me'})
+    const community = session.Community.create({id: '7', slug: 'world'})
+    const currentUser = session.Me.create({name: 'me'})
     const props = {
       navigation: {
         state: {
@@ -32,10 +35,10 @@ describe('mapStateToProps', () => {
         }
       }
     }
-
     expect(mapStateToProps(state, props)).toEqual({
-      community: expect.objectContaining({id: '7', slug: 'world'}),
-      currentUser: expect.objectContaining({name: 'me'}),
+      community,
+      currentUser,
+      network: null,
       topicName: 'logistics',
       topicSubscribed: false
     })

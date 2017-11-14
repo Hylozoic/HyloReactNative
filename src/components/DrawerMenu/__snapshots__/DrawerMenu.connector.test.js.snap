@@ -5,6 +5,7 @@ Object {
   "avatarUrl": undefined,
   "communities": Array [],
   "currentCommunityId": undefined,
+  "currentNetworkId": undefined,
   "currentUser": undefined,
   "name": "you",
   "networks": Array [

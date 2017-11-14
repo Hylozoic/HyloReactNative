@@ -2,7 +2,8 @@ import { get } from 'lodash/fp'
 import { FETCH_COMMENTS } from '../../components/Comments/Comments.store'
 export const FETCH_POST = `FETCH_POST`
 
-export const getPostFieldsFragment = (withComments = true) => `
+export function getPostFieldsFragment (withComments = true) {
+  return `
   id
   title
   details
@@ -55,6 +56,7 @@ export const getPostFieldsFragment = (withComments = true) => `
     type
     url
   }`
+}
 
 export default function fetchPost (id, opts = {}) {
   return {

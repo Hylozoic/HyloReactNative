@@ -63,6 +63,7 @@ Object {
     id
     name
     avatarUrl
+    tagline
   }
   createdAt
   updatedAt

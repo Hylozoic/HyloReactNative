@@ -11,6 +11,7 @@ exports[`mapDispatchToProps 1`] = `
 Object {
   "dispatch": [Function],
   "goToCommunity": [Function],
+  "goToHome": [Function],
   "useInvitation": [Function],
 }
 `;
