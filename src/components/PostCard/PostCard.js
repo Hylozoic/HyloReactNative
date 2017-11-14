@@ -43,6 +43,7 @@ export default class PostCard extends React.Component {
 
   render () {
     const {
+      post,
       showCommunity,
       editPost,
       currentUser,
@@ -50,48 +51,34 @@ export default class PostCard extends React.Component {
       showTopic,
       goToCommunity
     } = this.props
-    const {
-      id: postId,
-      communities,
-      type,
-      createdAt,
-      creator,
-      details,
-      title,
-      linkPreview,
-      commenters,
-      commentsTotal,
-      votesTotal,
-      myVote
-    } = this.props.post
 
-    const slug = get('0.slug', communities)
+    const slug = get('0.slug', post.communities)
     return <View style={styles.container}>
-      <PostHeader creator={creator}
-        date={createdAt}
-        type={type}
+      <PostHeader creator={post.creator}
+        date={post.createdAt}
+        type={post.type}
         showCommunity={showCommunity}
         editPost={editPost}
-        communities={communities}
+        communities={post.communities}
         slug={slug}
-        postId={postId}
+        postId={post.id}
         showMember={showMember}
         goToCommunity={goToCommunity} />
-      <PostImage postId={postId} />
+      <PostImage postId={post.id} />
       <PostBody
-        title={title}
-        details={details}
-        linkPreview={linkPreview}
+        title={post.title}
+        details={post.details}
+        linkPreview={post.linkPreview}
         slug={slug}
         showMember={showMember}
         showTopic={showTopic}
         shouldTruncate />
-      <PostFooter id={postId}
+      <PostFooter id={post.id}
         currentUser={currentUser}
-        commenters={commenters}
-        commentsTotal={commentsTotal}
-        votesTotal={votesTotal}
-        myVote={myVote} />
+        commenters={post.commenters}
+        commentsTotal={post.commentsTotal}
+        votesTotal={post.votesTotal}
+        myVote={post.myVote} />
     </View>
   }
 }
