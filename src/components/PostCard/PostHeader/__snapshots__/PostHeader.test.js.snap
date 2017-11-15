@@ -16,7 +16,10 @@ exports[`PostMenu returns a popupmenu when deleting allowed 1`] = `
 <PopupMenuButton
   actions={
     Array [
-      "Delete This Post",
+      Array [
+        "Delete This Post",
+        [Function],
+      ],
     ]
   }
   destructiveButtonIndex={0}
@@ -28,7 +31,6 @@ exports[`PostMenu returns a popupmenu when deleting allowed 1`] = `
       "top": 20,
     }
   }
-  onSelect={[Function]}
 >
   <Icon
     name="More"
@@ -40,7 +42,10 @@ exports[`PostMenu returns a popupmenu when editing allowed 1`] = `
 <PopupMenuButton
   actions={
     Array [
-      "Edit This Post",
+      Array [
+        "Edit This Post",
+        [Function],
+      ],
     ]
   }
   destructiveButtonIndex={-1}
@@ -52,7 +57,6 @@ exports[`PostMenu returns a popupmenu when editing allowed 1`] = `
       "top": 20,
     }
   }
-  onSelect={[Function]}
 >
   <Icon
     name="More"
@@ -64,7 +68,10 @@ exports[`PostMenu returns a popupmenu when flagging allowed 1`] = `
 <PopupMenuButton
   actions={
     Array [
-      "Flag This Post",
+      Array [
+        "Flag This Post",
+        [Function],
+      ],
     ]
   }
   destructiveButtonIndex={0}
@@ -76,7 +83,6 @@ exports[`PostMenu returns a popupmenu when flagging allowed 1`] = `
       "top": 20,
     }
   }
-  onSelect={[Function]}
 >
   <Icon
     name="More"
@@ -88,7 +94,10 @@ exports[`PostMenu returns a popupmenu when removePost 1`] = `
 <PopupMenuButton
   actions={
     Array [
-      "Remove Post From Community",
+      Array [
+        "Remove Post From Community",
+        [Function],
+      ],
     ]
   }
   destructiveButtonIndex={0}
@@ -100,7 +109,6 @@ exports[`PostMenu returns a popupmenu when removePost 1`] = `
       "top": 20,
     }
   }
-  onSelect={[Function]}
 >
   <Icon
     name="More"

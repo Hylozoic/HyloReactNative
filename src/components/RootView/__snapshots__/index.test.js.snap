@@ -2,13 +2,12 @@
 
 exports[`RootView matches last snapshot without a store 1`] = `
 <View>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-  >
-    Loading...
-  </Text>
+  <ActivityIndicator
+    animating={true}
+    color="#999999"
+    hidesWhenStopped={true}
+    size="small"
+  />
 </View>
 `;
 

@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches last snapshot 1`] = `
+<View>
+  <PopupMenuButton
+    actions={
+      Array [
+        Array [
+          "Remove image",
+          [Function],
+        ],
+      ]
+    }
+    destructiveButtonIndex={0}
+  >
+    <FileLabel
+      url="Ra.doc"
+    />
+  </PopupMenuButton>
+  <PopupMenuButton
+    actions={
+      Array [
+        Array [
+          "Remove image",
+          [Function],
+        ],
+      ]
+    }
+    destructiveButtonIndex={0}
+  >
+    <FileLabel
+      url="La.pdf"
+    />
+  </PopupMenuButton>
+  <TouchableOpacity
+    activeOpacity={0.2}
+    onPress={[Function]}
+  >
+    <Icon
+      name="Paperclip"
+    />
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+    >
+      Add file
+    </Text>
+  </TouchableOpacity>
+</View>
+`;

@@ -44,13 +44,24 @@ exports[`ListControl renders correctly 1`] = `
 <PopupMenuButton
   actions={
     Array [
-      "All Posts",
-      "Discussions",
-      "Requests",
-      "Offers",
+      Array [
+        "All Posts",
+        [Function],
+      ],
+      Array [
+        "Discussions",
+        [Function],
+      ],
+      Array [
+        "Requests",
+        [Function],
+      ],
+      Array [
+        "Offers",
+        [Function],
+      ],
     ]
   }
-  onSelect={[Function]}
 >
   <Text
     accessible={true}

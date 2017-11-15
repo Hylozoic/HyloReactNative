@@ -1,5 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`HeaderButton matches last Close icon snapshot 1`] = `
+<TouchableOpacity
+  activeOpacity={0.2}
+  disabled={false}
+  onPress={[Function]}
+>
+  <Icon
+    name="Ex"
+  />
+</TouchableOpacity>
+`;
+
 exports[`HeaderButton matches last snapshot 1`] = `
 <TouchableOpacity
   activeOpacity={0.2}

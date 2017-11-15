@@ -1,8 +1,12 @@
-import 'react-native'
+import { TouchableOpacity, ActionSheetIOS } from 'react-native'
 import React from 'react'
 import PopupMenuButtonAndroid from './PopupMenuButton.android'
 import PopupMenuButtonIos from './PopupMenuButton.ios'
 import TestRenderer from 'react-test-renderer'
+
+jest.mock('ActionSheetIOS', () => ({
+  showActionSheetWithOptions: jest.fn()
+}))
 
 describe('PopupMenuButton', () => {
   const platforms = [['android', PopupMenuButtonAndroid], ['ios', PopupMenuButtonIos]]
@@ -36,14 +40,26 @@ describe('PopupMenuButton', () => {
     })
   })
 
+  describe('ios only', () => {
+    it('calls showActionSheetWithOptions with the right params', () => {
+      const props = {
+        actions: [['Option 1', () => {}], ['Option 2', () => {}]]
+      }
+      const node = TestRenderer.create(<PopupMenuButtonIos {...props} />).root
+      node.findByType(TouchableOpacity).props.onPress()
+      expect(ActionSheetIOS.showActionSheetWithOptions).toHaveBeenCalled()
+      expect(ActionSheetIOS.showActionSheetWithOptions.mock.calls).toMatchSnapshot()
+    })
+  })
+
   describe('android only', () => {
-    it('calls our onSelect with the right index', () => {
+    it('calls the right function when selected', () => {
       const action1 = jest.fn()
       const action2 = jest.fn()
       const actions = [['Action 1', action1], ['Action 2', action2]]
 
       const props = {
-        actions: actions.map(x => x[0]),
+        actions: actions,
         onSelect: jest.fn(),
         destructiveButtonIndex: 0
       }
@@ -53,17 +69,16 @@ describe('PopupMenuButton', () => {
       </PopupMenuButtonAndroid>).root.instance
 
       instance.onSelect('itemSelected', 1)
-      expect(props.onSelect).toHaveBeenCalledWith(1)
+      expect(action2).toHaveBeenCalledWith()
     })
 
-    it('doesnt call onSelect if clicked away', () => {
+    it('doesnt call any of the functions if clicked away', () => {
       const action1 = jest.fn()
       const action2 = jest.fn()
       const actions = [['Action 1', action1], ['Action 2', action2]]
 
       const props = {
-        actions: actions.map(x => x[0]),
-        onSelect: jest.fn(),
+        actions: actions,
         destructiveButtonIndex: 0
       }
 
@@ -72,7 +87,8 @@ describe('PopupMenuButton', () => {
       </PopupMenuButtonAndroid>).root.instance
 
       instance.onSelect('dismissed', 1)
-      expect(props.onSelect).not.toHaveBeenCalled()
+      expect(action1).not.toHaveBeenCalled()
+      expect(action2).not.toHaveBeenCalled()
     })
 
     it('throws onError', () => {
@@ -81,8 +97,7 @@ describe('PopupMenuButton', () => {
       const actions = [['Action 1', action1], ['Action 2', action2]]
 
       const props = {
-        actions: actions.map(x => x[0]),
-        onSelect: jest.fn(),
+        actions: actions,
         destructiveButtonIndex: 0
       }
 

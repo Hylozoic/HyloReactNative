@@ -39,6 +39,6 @@ it('has an onRemove prop', () => {
       onRemove={onRemove} />
   </Provider>)
 
-  node.root.findByType(PopupMenuButton).props.onSelect()
+  node.root.findByType(PopupMenuButton).props.actions[0][1]()
   expect(onRemove).toHaveBeenCalledWith('http://foo.com/foo.png')
 })

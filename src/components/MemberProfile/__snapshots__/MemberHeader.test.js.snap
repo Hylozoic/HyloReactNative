@@ -69,11 +69,13 @@ exports[`MemberMenu returns a popupmenu when flagging allowed 1`] = `
 <PopupMenuButton
   actions={
     Array [
-      "Flag This Member",
+      Array [
+        "Flag This Member",
+        [Function],
+      ],
     ]
   }
   destructiveButtonIndex={0}
-  onSelect={[Function]}
 >
   <Icon
     name="More"

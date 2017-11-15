@@ -85,14 +85,11 @@ export function CommentMenu ({deleteComment, removeComment}) {
 
   if (isEmpty(actions)) return null
 
-  const onSelect = index => actions[index][1]()
-
   const destructiveLabels = [deleteLabel, removeLabel]
   const destructiveButtonIndex = destructiveLabels.includes(actions[0][0]) ? 0 : -1
 
-  return <PopupMenuButton actions={actions.map(x => x[0])}
+  return <PopupMenuButton actions={actions}
     hitSlop={{top: 20, bottom: 10, left: 10, right: 15}}
-    onSelect={onSelect}
     destructiveButtonIndex={destructiveButtonIndex}>
     <Icon name='More' style={styles.menuIcon} />
   </PopupMenuButton>
