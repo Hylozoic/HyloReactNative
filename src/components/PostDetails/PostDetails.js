@@ -73,7 +73,7 @@ export default class PostDetails extends React.Component {
         editPost={editPost}
         communities={post.communities}
         slug={slug}
-        id={post.id}
+        postId={post.id}
         showMember={showMember}
         goToCommunity={goToCommunity} />
       <PostImage postId={post.id} linked />

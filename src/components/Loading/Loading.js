@@ -1,9 +1,9 @@
 import React from 'react'
-import { Text, View } from 'react-native'
+import { View, ActivityIndicator } from 'react-native'
 
-export default function Loading ({ style, text = 'Loading...' }) {
+export default function Loading ({ style }) {
   return <View style={[style, styles.container]}>
-    <Text style={styles.text}>{text}</Text>
+    <ActivityIndicator />
   </View>
 }
 

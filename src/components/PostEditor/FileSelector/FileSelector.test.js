@@ -1,4 +1,5 @@
 import FileSelector from './FileSelector'
+import ReactShallowRenderer from 'react-test-renderer/shallow'
 import TestRenderer from 'react-test-renderer'
 import React from 'react'
 import { DocumentPicker, DocumentPickerUtil } from 'react-native-document-picker'
@@ -17,6 +18,19 @@ jest.mock('react-native-document-picker', () => {
       allFiles: jest.fn()
     }
   }
+})
+
+it('matches last snapshot', () => {
+  const renderer = new ReactShallowRenderer()
+  const props = {
+    fileUrls: ['Ra.doc', 'La.pdf'],
+    onRemove: () => {}
+  }
+
+  renderer.render(<FileSelector {...props} />)
+  const actual = renderer.getRenderOutput()
+
+  expect(actual).toMatchSnapshot()
 })
 
 it('uses react-native-document-picker', async () => {

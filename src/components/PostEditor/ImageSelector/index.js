@@ -23,9 +23,8 @@ function renderImageButton (imageUrl, buttonIndex, onRemove) {
   return <PopupMenuButton
     key={imageUrl}
     style={styles.addImageButton}
-    actions={['Remove image']}
-    destructiveButtonIndex={0}
-    onSelect={menuIndex => onRemove(imageUrl)}>
+    actions={[['Remove image', () => onRemove(imageUrl)]]}
+    destructiveButtonIndex={0}>
     <Image style={styles.addImageButtonImage} source={{uri: imageUrl}} />
   </PopupMenuButton>
 }

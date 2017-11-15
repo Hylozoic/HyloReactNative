@@ -25,12 +25,20 @@ exports[`renders correctly with no community 1`] = `
           <PopupMenuButton
             actions={
               Array [
-                "Name",
-                "Location",
-                "Newest",
+                Array [
+                  "Name",
+                  [Function],
+                ],
+                Array [
+                  "Location",
+                  [Function],
+                ],
+                Array [
+                  "Newest",
+                  [Function],
+                ],
               ]
             }
-            onSelect={[Function]}
           >
             <View>
               <Text
