@@ -69,32 +69,6 @@
     "timezone-mock": "^0.0.6",
     "validator": "^8.0.0"
   },
-  "babel": {
-    "presets": [
-      "react-native"
-    ],
-    "plugins": [
-      [
-        "inline-dotenv",
-        {
-          "silent": true
-        }
-      ],
-      "transform-inline-environment-variables"
-    ],
-    "env": {
-      "test": {
-        "plugins": [
-          "remove-style"
-        ]
-      },
-      "production": {
-        "plugins": [
-          "transform-remove-console"
-        ]
-      }
-    }
-  },
   "jest": {
     "preset": "react-native",
     "setupFiles": [

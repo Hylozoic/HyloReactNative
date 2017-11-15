@@ -1,0 +1,26 @@
+{
+  "presets": [
+    "react-native"
+  ],
+  "plugins": [
+    [
+      "inline-dotenv",
+      {
+        "silent": true
+      }
+    ],
+    "transform-inline-environment-variables"
+  ],
+  "env": {
+    "test": {
+      "plugins": [
+        "remove-style"
+      ]
+    },
+    "production": {
+      "plugins": [
+        "transform-remove-console"
+      ]
+    }
+  }
+}
