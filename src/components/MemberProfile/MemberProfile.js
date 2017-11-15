@@ -113,19 +113,21 @@ export class MemberBanner extends React.Component {
         <Image source={bannerSource} style={styles.bannerImage} />
         {isMe && <EditButton isLoading={bannerPickerPending} style={styles.bannerEditButton} />}
       </ImagePicker>
-      <ImagePicker
-        style={styles.avatarWrapperWrapper}
-        title='Change Avatar'
-        type='userAvatar'
-        id={id}
-        onChoice={choice => this.onChoice(choice, 'avatar')}
-        onPendingChange={pending => this.setState({avatarPickerPending: pending})}
-        disabled={!isMe}>
-        <View style={styles.avatarWrapper}>
-          <Image source={avatarSource} style={styles.avatarImage} />
-          {isMe && <EditButton isLoading={avatarPickerPending} style={styles.avatarEditButton} />}
-        </View>
-      </ImagePicker>
+      <View style={styles.avatarW3}>
+        <ImagePicker
+          style={styles.avatarWrapperWrapper}
+          title='Change Avatar'
+          type='userAvatar'
+          id={id}
+          onChoice={choice => this.onChoice(choice, 'avatar')}
+          onPendingChange={pending => this.setState({avatarPickerPending: pending})}
+          disabled={!isMe}>
+          <View style={styles.avatarWrapper}>
+            <Image source={avatarSource} style={styles.avatarImage} />
+            {isMe && <EditButton isLoading={avatarPickerPending} style={styles.avatarEditButton} />}
+          </View>
+        </ImagePicker>
+      </View>
     </View>
   }
 }

@@ -49,24 +49,26 @@ exports[`MemberBanner matches the last snapshot 1`] = `
       }
     />
   </ImagePicker>
-  <ImagePicker
-    disabled={true}
-    id={1}
-    onChoice={[Function]}
-    onPendingChange={[Function]}
-    title="Change Avatar"
-    type="userAvatar"
-  >
-    <View>
-      <Image
-        source={
-          Object {
-            "uri": "pong.png",
+  <View>
+    <ImagePicker
+      disabled={true}
+      id={1}
+      onChoice={[Function]}
+      onPendingChange={[Function]}
+      title="Change Avatar"
+      type="userAvatar"
+    >
+      <View>
+        <Image
+          source={
+            Object {
+              "uri": "pong.png",
+            }
           }
-        }
-      />
-    </View>
-  </ImagePicker>
+        />
+      </View>
+    </ImagePicker>
+  </View>
 </View>
 `;
 
