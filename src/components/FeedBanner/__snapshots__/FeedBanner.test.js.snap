@@ -21,7 +21,6 @@ exports[`FeedBanner has a topic subscribe toggle button 1`] = `
     <Text
       accessible={true}
       allowFontScaling={true}
-      disabled={false}
       ellipsizeMode="tail"
       numberOfLines={3}
     >
@@ -85,7 +84,6 @@ exports[`FeedBanner renders correctly with a community and user 1`] = `
     <Text
       accessible={true}
       allowFontScaling={true}
-      disabled={false}
       ellipsizeMode="tail"
       numberOfLines={3}
     />
@@ -108,7 +106,11 @@ exports[`FeedBanner renders correctly with a community and user 1`] = `
 exports[`FeedBanner renders correctly with all=true, and no community or user 1`] = `
 <View>
   <Image
-    source={1}
+    source={
+      Object {
+        "testUri": "../../../src/assets/all-communities-banner.png",
+      }
+    }
   />
   <MockLinearGradient
     colors={
@@ -124,7 +126,6 @@ exports[`FeedBanner renders correctly with all=true, and no community or user 1`
     <Text
       accessible={true}
       allowFontScaling={true}
-      disabled={false}
       ellipsizeMode="tail"
       numberOfLines={3}
     >
@@ -138,7 +139,6 @@ exports[`PostPrompt renders correctly with a user 1`] = `
 <View>
   <TouchableOpacity
     activeOpacity={0.2}
-    focusedOpacity={0.7}
     onPress={[Function]}
   >
     <Avatar
@@ -147,7 +147,6 @@ exports[`PostPrompt renders correctly with a user 1`] = `
     <Text
       accessible={true}
       allowFontScaling={true}
-      disabled={false}
       ellipsizeMode="tail"
     >
       John

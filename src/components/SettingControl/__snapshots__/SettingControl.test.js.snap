@@ -5,12 +5,12 @@ exports[`matches last snapshot 1`] = `
   <Text
     accessible={true}
     allowFontScaling={true}
-    disabled={false}
     ellipsizeMode="tail"
   >
     Name
   </Text>
   <TextInput
+    allowFontScaling={true}
     autoCapitalize="words"
     autoCorrect={true}
     editable={true}
@@ -24,7 +24,6 @@ exports[`matches last snapshot 1`] = `
   <View>
     <TouchableOpacity
       activeOpacity={0.2}
-      focusedOpacity={0.7}
       hitSlop={
         Object {
           "bottom": 10,
@@ -44,7 +43,6 @@ exports[`matches last snapshot 1`] = `
     <View>
       <TouchableOpacity
         activeOpacity={0.2}
-        focusedOpacity={0.7}
         hitSlop={
           Object {
             "bottom": 10,
@@ -74,7 +72,6 @@ exports[`matches last snapshot 1`] = `
       <Text
         accessible={true}
         allowFontScaling={true}
-        disabled={false}
         ellipsizeMode="tail"
       >
         This is not a real name

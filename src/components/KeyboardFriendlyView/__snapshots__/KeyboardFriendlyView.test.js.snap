@@ -8,7 +8,6 @@ exports[`KeyboardFriendlyViewAndroid matches last snapshot 1`] = `
   <Text
     accessible={true}
     allowFontScaling={true}
-    disabled={false}
     ellipsizeMode="tail"
   >
     Children
@@ -25,7 +24,6 @@ exports[`KeyboardFriendlyViewiOS matches last snapshot 1`] = `
   <Text
     accessible={true}
     allowFontScaling={true}
-    disabled={false}
     ellipsizeMode="tail"
   >
     Children

@@ -33,7 +33,6 @@ exports[`FeedList renders correctly 1`] = `
     onRefresh={[Function]}
     refreshing={false}
     renderItem={[Function]}
-    renderScrollComponent={[Function]}
     scrollEventThrottle={50}
     updateCellsBatchingPeriod={50}
     windowSize={21}
@@ -56,7 +55,6 @@ exports[`ListControl renders correctly 1`] = `
   <Text
     accessible={true}
     allowFontScaling={true}
-    disabled={false}
     ellipsizeMode="tail"
   >
     Discussions

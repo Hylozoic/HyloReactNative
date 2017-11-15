@@ -3,7 +3,6 @@
 exports[`ContactRow renders correctly 1`] = `
 <TouchableOpacity
   activeOpacity={0.2}
-  focusedOpacity={0.7}
   onPress={[Function]}
 >
   <View>
@@ -14,7 +13,6 @@ exports[`ContactRow renders correctly 1`] = `
     <Text
       accessible={true}
       allowFontScaling={true}
-      disabled={false}
       ellipsizeMode="tail"
     >
       Contact One
@@ -60,7 +58,6 @@ exports[`NewMessage renders correctly 1`] = `
     maxToRenderPerBatch={10}
     onEndReachedThreshold={0.3}
     renderItem={[Function]}
-    renderScrollComponent={[Function]}
     renderSectionHeader={[Function]}
     scrollEventThrottle={50}
     sections={
@@ -131,7 +128,6 @@ exports[`NewMessage renders correctly 2`] = `
     maxToRenderPerBatch={10}
     onEndReachedThreshold={0.3}
     renderItem={[Function]}
-    renderScrollComponent={[Function]}
     renderSectionHeader={[Function]}
     scrollEventThrottle={50}
     sections={
@@ -173,14 +169,12 @@ exports[`Participant renders correctly 1`] = `
   <Text
     accessible={true}
     allowFontScaling={true}
-    disabled={false}
     ellipsizeMode="tail"
   >
     Participant One
   </Text>
   <TouchableOpacity
     activeOpacity={0.2}
-    focusedOpacity={0.7}
     onPress={[Function]}
   >
     <Icon
@@ -230,6 +224,7 @@ exports[`ParticipantInput renders correctly 1`] = `
       remove={[Function]}
     />
     <TextInput
+      allowFontScaling={true}
       onChangeText={[Function]}
       underlineColorAndroid="transparent"
       value="Jon"

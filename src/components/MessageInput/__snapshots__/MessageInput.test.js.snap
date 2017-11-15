@@ -3,6 +3,7 @@
 exports[`matches the last snapshot 1`] = `
 <View>
   <TextInput
+    allowFontScaling={true}
     onChangeText={[Function]}
     onContentSizeChange={[Function]}
     onSubmit={[Function]}
@@ -23,7 +24,6 @@ exports[`matches the last snapshot 1`] = `
   />
   <TouchableOpacity
     activeOpacity={0.2}
-    focusedOpacity={0.7}
     onPress={[Function]}
   >
     <Icon

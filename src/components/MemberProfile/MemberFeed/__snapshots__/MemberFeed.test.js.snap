@@ -28,13 +28,11 @@ exports[`ContentRow shows a PostCard when itemType is post 1`] = `
 exports[`FeedTab matches the last snapshot 1`] = `
 <TouchableOpacity
   activeOpacity={0.2}
-  focusedOpacity={0.7}
   onPress={[Function]}
 >
   <Text
     accessible={true}
     allowFontScaling={true}
-    disabled={false}
     ellipsizeMode="tail"
   >
     Posts
@@ -55,7 +53,6 @@ exports[`MemberProfile matches the last snapshot 1`] = `
         <Text
           accessible={true}
           allowFontScaling={true}
-          disabled={false}
           ellipsizeMode="tail"
         >
           header
@@ -106,7 +103,6 @@ exports[`MemberProfile matches the last snapshot 1`] = `
     onEndReached={[Function]}
     onEndReachedThreshold={2}
     renderItem={[Function]}
-    renderScrollComponent={[Function]}
     scrollEventThrottle={50}
     updateCellsBatchingPeriod={50}
     windowSize={21}

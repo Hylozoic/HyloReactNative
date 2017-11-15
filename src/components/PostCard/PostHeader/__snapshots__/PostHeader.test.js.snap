@@ -5,7 +5,6 @@ exports[`PostLabel renders 1`] = `
   <Text
     accessible={true}
     allowFontScaling={true}
-    disabled={false}
     ellipsizeMode="tail"
   >
     REQUEST
@@ -116,7 +115,6 @@ exports[`renders correctly when showCommunity is true 1`] = `
   <View>
     <TouchableOpacity
       activeOpacity={0.2}
-      focusedOpacity={0.7}
       onPress={[Function]}
     >
       <Avatar
@@ -127,13 +125,11 @@ exports[`renders correctly when showCommunity is true 1`] = `
   <View>
     <TouchableOpacity
       activeOpacity={0.2}
-      focusedOpacity={0.7}
       onPress={[Function]}
     >
       <Text
         accessible={true}
         allowFontScaling={true}
-        disabled={false}
         ellipsizeMode="tail"
       >
         Zeus
@@ -141,7 +137,6 @@ exports[`renders correctly when showCommunity is true 1`] = `
       <Text
         accessible={true}
         allowFontScaling={true}
-        disabled={false}
         ellipsizeMode="tail"
       >
         Go!
@@ -151,7 +146,6 @@ exports[`renders correctly when showCommunity is true 1`] = `
       <Text
         accessible={true}
         allowFontScaling={true}
-        disabled={false}
         ellipsizeMode="tail"
       >
         10m ago
@@ -159,20 +153,17 @@ exports[`renders correctly when showCommunity is true 1`] = `
       <Text
         accessible={true}
         allowFontScaling={true}
-        disabled={false}
         ellipsizeMode="tail"
       >
         •
       </Text>
       <TouchableOpacity
         activeOpacity={0.2}
-        focusedOpacity={0.7}
         onPress={[Function]}
       >
         <Text
           accessible={true}
           allowFontScaling={true}
-          disabled={false}
           ellipsizeMode="tail"
         >
           Olympus
@@ -196,7 +187,6 @@ exports[`renders correctly with all=true, and no community or user 1`] = `
   <View>
     <TouchableOpacity
       activeOpacity={0.2}
-      focusedOpacity={0.7}
       onPress={[Function]}
     >
       <Avatar
@@ -207,13 +197,11 @@ exports[`renders correctly with all=true, and no community or user 1`] = `
   <View>
     <TouchableOpacity
       activeOpacity={0.2}
-      focusedOpacity={0.7}
       onPress={[Function]}
     >
       <Text
         accessible={true}
         allowFontScaling={true}
-        disabled={false}
         ellipsizeMode="tail"
       >
         Zeus
@@ -221,7 +209,6 @@ exports[`renders correctly with all=true, and no community or user 1`] = `
       <Text
         accessible={true}
         allowFontScaling={true}
-        disabled={false}
         ellipsizeMode="tail"
       >
         Go!
@@ -231,7 +218,6 @@ exports[`renders correctly with all=true, and no community or user 1`] = `
       <Text
         accessible={true}
         allowFontScaling={true}
-        disabled={false}
         ellipsizeMode="tail"
       >
         10m ago
@@ -254,7 +240,6 @@ exports[`renders correctly with no flagging 1`] = `
   <View>
     <TouchableOpacity
       activeOpacity={0.2}
-      focusedOpacity={0.7}
       onPress={[Function]}
     >
       <Avatar
@@ -265,13 +250,11 @@ exports[`renders correctly with no flagging 1`] = `
   <View>
     <TouchableOpacity
       activeOpacity={0.2}
-      focusedOpacity={0.7}
       onPress={[Function]}
     >
       <Text
         accessible={true}
         allowFontScaling={true}
-        disabled={false}
         ellipsizeMode="tail"
       >
         Zeus
@@ -279,7 +262,6 @@ exports[`renders correctly with no flagging 1`] = `
       <Text
         accessible={true}
         allowFontScaling={true}
-        disabled={false}
         ellipsizeMode="tail"
       >
         Go!
@@ -289,7 +271,6 @@ exports[`renders correctly with no flagging 1`] = `
       <Text
         accessible={true}
         allowFontScaling={true}
-        disabled={false}
         ellipsizeMode="tail"
       >
         10m ago
@@ -297,20 +278,17 @@ exports[`renders correctly with no flagging 1`] = `
       <Text
         accessible={true}
         allowFontScaling={true}
-        disabled={false}
         ellipsizeMode="tail"
       >
         •
       </Text>
       <TouchableOpacity
         activeOpacity={0.2}
-        focusedOpacity={0.7}
         onPress={[Function]}
       >
         <Text
           accessible={true}
           allowFontScaling={true}
-          disabled={false}
           ellipsizeMode="tail"
         >
           Olympus

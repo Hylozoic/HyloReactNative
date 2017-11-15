@@ -8,7 +8,6 @@ exports[`matches last snapshot when visible is true 1`] = `
     <Text
       accessible={true}
       allowFontScaling={true}
-      disabled={false}
       ellipsizeMode="tail"
     >
       Loading...

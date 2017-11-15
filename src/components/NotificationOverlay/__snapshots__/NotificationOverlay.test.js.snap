@@ -4,13 +4,11 @@ exports[`matches the last snapshot 1`] = `
 <AnimatedComponent>
   <TouchableOpacity
     activeOpacity={0.2}
-    focusedOpacity={0.7}
     onPress={undefined}
   >
     <Text
       accessible={true}
       allowFontScaling={true}
-      disabled={false}
       ellipsizeMode="tail"
     >
       Consider yourself notified.

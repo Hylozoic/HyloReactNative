@@ -26,7 +26,6 @@ exports[`hides password, and changes button when pending  1`] = `
     <Text
       accessible={true}
       allowFontScaling={true}
-      disabled={false}
       ellipsizeMode="tail"
     >
       Hi there stranger!
@@ -34,7 +33,6 @@ exports[`hides password, and changes button when pending  1`] = `
     <Text
       accessible={true}
       allowFontScaling={true}
-      disabled={false}
       ellipsizeMode="tail"
     >
       To kick things off, tell us a bit more about yourself and get your account off the ground.
@@ -92,7 +90,6 @@ exports[`matches last snapshot 1`] = `
     <Text
       accessible={true}
       allowFontScaling={true}
-      disabled={false}
       ellipsizeMode="tail"
     >
       Hi there stranger!
@@ -100,7 +97,6 @@ exports[`matches last snapshot 1`] = `
     <Text
       accessible={true}
       allowFontScaling={true}
-      disabled={false}
       ellipsizeMode="tail"
     >
       To kick things off, tell us a bit more about yourself and get your account off the ground.

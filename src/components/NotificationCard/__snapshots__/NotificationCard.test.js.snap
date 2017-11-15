@@ -11,14 +11,12 @@ exports[`NotificationCard matches the last snapshot for a comment 1`] = `
     <Text
       accessible={true}
       allowFontScaling={true}
-      disabled={false}
       ellipsizeMode="tail"
       numberOfLines={2}
     >
       <Text
         accessible={true}
         allowFontScaling={true}
-        disabled={false}
         ellipsizeMode="tail"
       >
         New comment on
@@ -26,7 +24,6 @@ exports[`NotificationCard matches the last snapshot for a comment 1`] = `
       <Text
         accessible={true}
         allowFontScaling={true}
-        disabled={false}
         ellipsizeMode="tail"
         numberOfLines={2}
       >
@@ -36,14 +33,12 @@ exports[`NotificationCard matches the last snapshot for a comment 1`] = `
     <Text
       accessible={true}
       allowFontScaling={true}
-      disabled={false}
       ellipsizeMode="tail"
       numberOfLines={2}
     >
       <Text
         accessible={true}
         allowFontScaling={true}
-        disabled={false}
         ellipsizeMode="tail"
       >
         Wombat 
@@ -53,7 +48,6 @@ exports[`NotificationCard matches the last snapshot for a comment 1`] = `
     <Text
       accessible={true}
       allowFontScaling={true}
-      disabled={false}
       ellipsizeMode="tail"
     >
       1 mo ago
@@ -73,14 +67,12 @@ exports[`NotificationCard matches the last snapshot for a comment mention 1`] = 
     <Text
       accessible={true}
       allowFontScaling={true}
-      disabled={false}
       ellipsizeMode="tail"
       numberOfLines={2}
     >
       <Text
         accessible={true}
         allowFontScaling={true}
-        disabled={false}
         ellipsizeMode="tail"
       >
         Wombat Aardvark 
@@ -88,7 +80,6 @@ exports[`NotificationCard matches the last snapshot for a comment mention 1`] = 
       <Text
         accessible={true}
         allowFontScaling={true}
-        disabled={false}
         ellipsizeMode="tail"
       >
         mentioned you in a comment on
@@ -96,7 +87,6 @@ exports[`NotificationCard matches the last snapshot for a comment mention 1`] = 
       <Text
         accessible={true}
         allowFontScaling={true}
-        disabled={false}
         ellipsizeMode="tail"
         numberOfLines={2}
       >
@@ -106,14 +96,12 @@ exports[`NotificationCard matches the last snapshot for a comment mention 1`] = 
     <Text
       accessible={true}
       allowFontScaling={true}
-      disabled={false}
       ellipsizeMode="tail"
       numberOfLines={2}
     >
       <Text
         accessible={true}
         allowFontScaling={true}
-        disabled={false}
         ellipsizeMode="tail"
       >
         Wombat 
@@ -123,7 +111,6 @@ exports[`NotificationCard matches the last snapshot for a comment mention 1`] = 
     <Text
       accessible={true}
       allowFontScaling={true}
-      disabled={false}
       ellipsizeMode="tail"
     >
       1 mo ago
@@ -143,14 +130,12 @@ exports[`NotificationCard matches the last snapshot for a join approved 1`] = `
     <Text
       accessible={true}
       allowFontScaling={true}
-      disabled={false}
       ellipsizeMode="tail"
       numberOfLines={2}
     >
       <Text
         accessible={true}
         allowFontScaling={true}
-        disabled={false}
         ellipsizeMode="tail"
       >
         Join Request Approved
@@ -159,14 +144,12 @@ exports[`NotificationCard matches the last snapshot for a join approved 1`] = `
     <Text
       accessible={true}
       allowFontScaling={true}
-      disabled={false}
       ellipsizeMode="tail"
       numberOfLines={2}
     >
       <Text
         accessible={true}
         allowFontScaling={true}
-        disabled={false}
         ellipsizeMode="tail"
       >
         Wombat 
@@ -175,7 +158,6 @@ exports[`NotificationCard matches the last snapshot for a join approved 1`] = `
       <Text
         accessible={true}
         allowFontScaling={true}
-        disabled={false}
         ellipsizeMode="tail"
       >
         $
@@ -185,7 +167,6 @@ exports[`NotificationCard matches the last snapshot for a join approved 1`] = `
     <Text
       accessible={true}
       allowFontScaling={true}
-      disabled={false}
       ellipsizeMode="tail"
     >
       1 mo ago
@@ -205,14 +186,12 @@ exports[`NotificationCard matches the last snapshot for a join request 1`] = `
     <Text
       accessible={true}
       allowFontScaling={true}
-      disabled={false}
       ellipsizeMode="tail"
       numberOfLines={2}
     >
       <Text
         accessible={true}
         allowFontScaling={true}
-        disabled={false}
         ellipsizeMode="tail"
       >
         Wombat Aardvark 
@@ -220,7 +199,6 @@ exports[`NotificationCard matches the last snapshot for a join request 1`] = `
       <Text
         accessible={true}
         allowFontScaling={true}
-        disabled={false}
         ellipsizeMode="tail"
       >
         New join request
@@ -229,14 +207,12 @@ exports[`NotificationCard matches the last snapshot for a join request 1`] = `
     <Text
       accessible={true}
       allowFontScaling={true}
-      disabled={false}
       ellipsizeMode="tail"
       numberOfLines={2}
     >
       <Text
         accessible={true}
         allowFontScaling={true}
-        disabled={false}
         ellipsizeMode="tail"
       >
         Wombat 
@@ -245,7 +221,6 @@ exports[`NotificationCard matches the last snapshot for a join request 1`] = `
       <Text
         accessible={true}
         allowFontScaling={true}
-        disabled={false}
         ellipsizeMode="tail"
       >
         $
@@ -255,7 +230,6 @@ exports[`NotificationCard matches the last snapshot for a join request 1`] = `
     <Text
       accessible={true}
       allowFontScaling={true}
-      disabled={false}
       ellipsizeMode="tail"
     >
       1 mo ago
@@ -275,14 +249,12 @@ exports[`NotificationCard matches the last snapshot for a mention 1`] = `
     <Text
       accessible={true}
       allowFontScaling={true}
-      disabled={false}
       ellipsizeMode="tail"
       numberOfLines={2}
     >
       <Text
         accessible={true}
         allowFontScaling={true}
-        disabled={false}
         ellipsizeMode="tail"
       >
         Wombat Aardvark 
@@ -290,7 +262,6 @@ exports[`NotificationCard matches the last snapshot for a mention 1`] = `
       <Text
         accessible={true}
         allowFontScaling={true}
-        disabled={false}
         ellipsizeMode="tail"
       >
         mentioned you
@@ -298,7 +269,6 @@ exports[`NotificationCard matches the last snapshot for a mention 1`] = `
       <Text
         accessible={true}
         allowFontScaling={true}
-        disabled={false}
         ellipsizeMode="tail"
         numberOfLines={2}
       >
@@ -308,14 +278,12 @@ exports[`NotificationCard matches the last snapshot for a mention 1`] = `
     <Text
       accessible={true}
       allowFontScaling={true}
-      disabled={false}
       ellipsizeMode="tail"
       numberOfLines={2}
     >
       <Text
         accessible={true}
         allowFontScaling={true}
-        disabled={false}
         ellipsizeMode="tail"
       >
         Wombat 
@@ -325,7 +293,6 @@ exports[`NotificationCard matches the last snapshot for a mention 1`] = `
     <Text
       accessible={true}
       allowFontScaling={true}
-      disabled={false}
       ellipsizeMode="tail"
     >
       1 mo ago
@@ -345,14 +312,12 @@ exports[`NotificationCard matches the last snapshot for a post in topic 1`] = `
     <Text
       accessible={true}
       allowFontScaling={true}
-      disabled={false}
       ellipsizeMode="tail"
       numberOfLines={2}
     >
       <Text
         accessible={true}
         allowFontScaling={true}
-        disabled={false}
         ellipsizeMode="tail"
       >
         New post in
@@ -360,7 +325,6 @@ exports[`NotificationCard matches the last snapshot for a post in topic 1`] = `
       <Text
         accessible={true}
         allowFontScaling={true}
-        disabled={false}
         ellipsizeMode="tail"
       >
          hydroponics
@@ -369,14 +333,12 @@ exports[`NotificationCard matches the last snapshot for a post in topic 1`] = `
     <Text
       accessible={true}
       allowFontScaling={true}
-      disabled={false}
       ellipsizeMode="tail"
       numberOfLines={2}
     >
       <Text
         accessible={true}
         allowFontScaling={true}
-        disabled={false}
         ellipsizeMode="tail"
       >
         Wombat 
@@ -386,7 +348,6 @@ exports[`NotificationCard matches the last snapshot for a post in topic 1`] = `
     <Text
       accessible={true}
       allowFontScaling={true}
-      disabled={false}
       ellipsizeMode="tail"
     >
       1 mo ago

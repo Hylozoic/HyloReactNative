@@ -1,13 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
-<TabBarBottom
-  activeBackgroundColor="transparent"
-  activeTintColor="#3478f6"
-  inactiveBackgroundColor="transparent"
-  inactiveTintColor="#929292"
+<withOrientation
   isVisible={true}
-  showIcon={true}
-  showLabel={true}
 />
 `;

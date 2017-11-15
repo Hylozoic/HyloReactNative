@@ -48,7 +48,6 @@ exports[`VersionCheck renders as pending by default 1`] = `
   <Text
     accessible={true}
     allowFontScaling={true}
-    disabled={false}
     ellipsizeMode="tail"
   >
     Loading...
