@@ -4479,7 +4479,7 @@ react-native-webview-bridge-updated@^1.0.0, react-native-webview-bridge-updated@
 
 react-native-zss-rich-text-editor@Hylozoic/react-native-zss-rich-text-editor#a3ff2ed5:
   version "1.0.2"
-  resolved "https://codeload.github.com/Hylozoic/react-native-zss-rich-text-editor/tar.gz/a3ff2ed56b67378b0cf4c0bab9d0672f60e0d822"
+  resolved "https://codeload.github.com/Hylozoic/react-native-zss-rich-text-editor/tar.gz/a3ff2ed5"
   dependencies:
     react-native-webview-bridge-updated "^1.0.0"
 
