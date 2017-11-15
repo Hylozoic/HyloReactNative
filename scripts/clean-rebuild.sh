@@ -4,6 +4,8 @@
 cd "$(dirname "$0")"
 cd ../
 
+echo "Root Directory $PWD"
+
 watchman watch-del-all
 rm -rf node_modules
 rm -rf $TMPDIR/react-*

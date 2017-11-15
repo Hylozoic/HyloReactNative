@@ -1,4 +1,12 @@
-source ../.env
+#!/bin/bash
+
+# Force script to be called from root (which is 1 level up from the directory with this script)
+cd "$(dirname "$0")"
+cd ../
+
+echo "Root Directory $PWD"
+
+source .env
 
 if [ -z ${FACEBOOK_APP_ID_DEBUG+x} ]; then echo "ERROR: Missing appropriate config in .env. eg: FACEBOOK_APP_ID_DEBUG"; exit 1; else echo "Configuring Project:"; fi
 
@@ -7,18 +15,18 @@ git clone -b android https://github.com/Hylozoic/code-signing.git $mytmpdir/andr
 git clone -b ios https://github.com/Hylozoic/code-signing.git $mytmpdir/ios
 
 echo "Applying android/app/google-services.json"
-cp $mytmpdir/android/google-services.json ../android/app/
+cp $mytmpdir/android/google-services.json android/app/
 echo "Applying android/app/debug.keystore"
-cp $mytmpdir/android/debug.keystore ../android/app/
+cp $mytmpdir/android/debug.keystore android/app/
 
 echo "Applying ios/debug.keystore"
-cp $mytmpdir/ios/GoogleService-Info.plist ../ios/
+cp $mytmpdir/ios/GoogleService-Info.plist ios/
 
-rm -rf $mytmpdir
+trap 'rm -rf "$mytmpdir"' EXIT
 
 echo "creating ios/debug.xcconfig"
 
-cat > ../ios/debug.xcconfig <<EOL
+cat > ios/debug.xcconfig <<EOL
 #include "./Pods/Target Support Files/Pods-HyloReactNative/Pods-HyloReactNative.debug.xcconfig"
 FACEBOOK_APP_ID = $FACEBOOK_APP_ID_DEBUG
 ONESIGNAL_APP_ID = $ONESIGNAL_APP_ID_DEBUG
@@ -27,7 +35,7 @@ EOL
 
 echo "creating ios/release.xcconfig"
 
-cat > ../ios/release.xcconfig <<EOL
+cat > ios/release.xcconfig <<EOL
 #include "./Pods/Target Support Files/Pods-HyloReactNative/Pods-HyloReactNative.release.xcconfig"
 FACEBOOK_APP_ID = $FACEBOOK_APP_ID_RELEASE
 ONESIGNAL_APP_ID = $ONESIGNAL_APP_ID_RELEASE
@@ -36,8 +44,8 @@ EOL
 
 echo "creating android/app/src/debug/res/values/strings.xml"
 
-mkdir -p ../android/app/src/debug/res/values
-cat > ../android/app/src/debug/res/values/strings.xml <<EOL
+mkdir -p android/app/src/debug/res/values
+cat > android/app/src/debug/res/values/strings.xml <<EOL
 <resources>
     <string name="facebook_app_id">$FACEBOOK_APP_ID_DEBUG</string>
 </resources>
@@ -46,8 +54,8 @@ EOL
 
 echo "creating android/app/src/release/res/values/strings.xml"
 
-mkdir -p ../android/app/src/release/res/values
-cat > ../android/app/src/release/res/values/strings.xml <<EOL
+mkdir -p android/app/src/release/res/values
+cat > android/app/src/release/res/values/strings.xml <<EOL
 <resources>
     <string name="facebook_app_id">$FACEBOOK_APP_ID_RELEASE</string>
 </resources>
