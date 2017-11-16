@@ -3,11 +3,14 @@
 exports[`MenuButton renders correctly 1`] = `
 <TouchableOpacity
   activeOpacity={0.2}
-  focusedOpacity={0.7}
   onPress={[Function]}
 >
   <Image
-    source={1}
+    source={
+      Object {
+        "testUri": "../../../src/assets/All_Communities.png",
+      }
+    }
   />
 </TouchableOpacity>
 `;

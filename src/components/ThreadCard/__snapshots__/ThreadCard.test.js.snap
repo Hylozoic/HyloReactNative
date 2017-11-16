@@ -12,7 +12,6 @@ exports[`handles ThreadAvatars correctly handles when there are more than three 
     <Text
       accessible={true}
       allowFontScaling={true}
-      disabled={false}
       ellipsizeMode="tail"
     >
       +
@@ -61,7 +60,6 @@ exports[`renders correctly 1`] = `
     <Text
       accessible={true}
       allowFontScaling={true}
-      disabled={false}
       ellipsizeMode="tail"
     >
        and -1 other
@@ -69,7 +67,6 @@ exports[`renders correctly 1`] = `
     <Text
       accessible={true}
       allowFontScaling={true}
-      disabled={false}
       ellipsizeMode="tail"
       numberOfLines={2}
     >
@@ -78,7 +75,6 @@ exports[`renders correctly 1`] = `
     <Text
       accessible={true}
       allowFontScaling={true}
-      disabled={false}
       ellipsizeMode="tail"
     />
   </View>

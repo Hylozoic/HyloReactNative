@@ -5,14 +5,12 @@ exports[`disables 1`] = `
   <TouchableOpacity
     activeOpacity={0.2}
     disabled={true}
-    focusedOpacity={0.7}
     onPress={[Function]}
   >
     <View>
       <Text
         accessible={true}
         allowFontScaling={true}
-        disabled={false}
         ellipsizeMode="tail"
       >
         Push Me
@@ -27,14 +25,12 @@ exports[`matches last snapshot 1`] = `
   <TouchableOpacity
     activeOpacity={0.2}
     disabled={false}
-    focusedOpacity={0.7}
     onPress={[Function]}
   >
     <View>
       <Text
         accessible={true}
         allowFontScaling={true}
-        disabled={false}
         ellipsizeMode="tail"
       >
         Push Me

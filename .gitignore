@@ -26,6 +26,10 @@ ios/fastlane/report.xml
 ios/debug.xcconfig
 ios/release.xcconfig
 
+*/fastlane/report.xml
+*/fastlane/Preview.html
+*/fastlane/screenshots
+
 # Android/IntelliJ
 #
 build/

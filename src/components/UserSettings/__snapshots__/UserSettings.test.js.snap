@@ -9,13 +9,11 @@ exports[`Footer matches the last snapshot without saveChanges 1`] = `
   />
   <TouchableOpacity
     activeOpacity={0.2}
-    focusedOpacity={0.7}
     onPress={[Function]}
   >
     <Text
       accessible={true}
       allowFontScaling={true}
-      disabled={false}
       ellipsizeMode="tail"
     >
       Cancel
@@ -37,13 +35,11 @@ exports[`Footer matches the last snapshot without saveChanges 2`] = `
   />
   <TouchableOpacity
     activeOpacity={0.2}
-    focusedOpacity={0.7}
     onPress={[Function]}
   >
     <Text
       accessible={true}
       allowFontScaling={true}
-      disabled={false}
       ellipsizeMode="tail"
     >
       Cancel
@@ -61,7 +57,6 @@ exports[`SocialAccounts matches the last snapshot 1`] = `
   <Text
     accessible={true}
     allowFontScaling={true}
-    disabled={false}
     ellipsizeMode="tail"
   >
     SOCIAL ACCOUNTS
@@ -91,18 +86,15 @@ exports[`SocialControl matches the last snapshot linked 1`] = `
   <Text
     accessible={true}
     allowFontScaling={true}
-    disabled={false}
     ellipsizeMode="tail"
   />
   <TouchableOpacity
     activeOpacity={0.2}
-    focusedOpacity={0.7}
     onPress={[Function]}
   >
     <Text
       accessible={true}
       allowFontScaling={true}
-      disabled={false}
       ellipsizeMode="tail"
     >
       Unlink
@@ -116,13 +108,11 @@ exports[`SocialControl matches the last snapshot loading 1`] = `
   <Text
     accessible={true}
     allowFontScaling={true}
-    disabled={false}
     ellipsizeMode="tail"
   />
   <Text
     accessible={true}
     allowFontScaling={true}
-    disabled={false}
     ellipsizeMode="tail"
   >
     Loading
@@ -135,18 +125,15 @@ exports[`SocialControl matches the last snapshot unlinked 1`] = `
   <Text
     accessible={true}
     allowFontScaling={true}
-    disabled={false}
     ellipsizeMode="tail"
   />
   <TouchableOpacity
     activeOpacity={0.2}
-    focusedOpacity={0.7}
     onPress={[Function]}
   >
     <Text
       accessible={true}
       allowFontScaling={true}
-      disabled={false}
       ellipsizeMode="tail"
     >
       Link
@@ -360,7 +347,6 @@ exports[`UserSettings matches snapshot with state set 1`] = `
         <Text
           accessible={true}
           allowFontScaling={true}
-          disabled={false}
           ellipsizeMode="tail"
         >
           Cancel Password Change
@@ -370,7 +356,6 @@ exports[`UserSettings matches snapshot with state set 1`] = `
         <Text
           accessible={true}
           allowFontScaling={true}
-          disabled={false}
           ellipsizeMode="tail"
         >
           SOCIAL ACCOUNTS
@@ -379,7 +364,6 @@ exports[`UserSettings matches snapshot with state set 1`] = `
           <Text
             accessible={true}
             allowFontScaling={true}
-            disabled={false}
             ellipsizeMode="tail"
           >
             Facebook
@@ -406,7 +390,6 @@ exports[`UserSettings matches snapshot with state set 1`] = `
             <Text
               accessible={true}
               allowFontScaling={true}
-              disabled={false}
               ellipsizeMode="tail"
             >
               Unlink
@@ -417,7 +400,6 @@ exports[`UserSettings matches snapshot with state set 1`] = `
           <Text
             accessible={true}
             allowFontScaling={true}
-            disabled={false}
             ellipsizeMode="tail"
           >
             Twitter
@@ -444,7 +426,6 @@ exports[`UserSettings matches snapshot with state set 1`] = `
             <Text
               accessible={true}
               allowFontScaling={true}
-              disabled={false}
               ellipsizeMode="tail"
             >
               Unlink
@@ -477,7 +458,6 @@ exports[`UserSettings matches snapshot with state set 1`] = `
               <Text
                 accessible={true}
                 allowFontScaling={true}
-                disabled={false}
                 ellipsizeMode="tail"
               >
                 Save Changes
@@ -507,7 +487,6 @@ exports[`UserSettings matches snapshot with state set 1`] = `
           <Text
             accessible={true}
             allowFontScaling={true}
-            disabled={false}
             ellipsizeMode="tail"
           >
             Cancel
@@ -537,7 +516,6 @@ exports[`UserSettings matches snapshot with state set 1`] = `
               <Text
                 accessible={true}
                 allowFontScaling={true}
-                disabled={false}
                 ellipsizeMode="tail"
               >
                 Logout
@@ -598,20 +576,17 @@ exports[`UserSettings matches the last snapshot 1`] = `
       <Text
         accessible={true}
         allowFontScaling={true}
-        disabled={false}
         ellipsizeMode="tail"
       >
         PASSWORD
       </Text>
       <TouchableOpacity
         activeOpacity={0.2}
-        focusedOpacity={0.7}
         onPress={[Function]}
       >
         <Text
           accessible={true}
           allowFontScaling={true}
-          disabled={false}
           ellipsizeMode="tail"
         >
           Change Password

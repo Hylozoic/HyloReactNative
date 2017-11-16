@@ -63,7 +63,6 @@ exports[`renders correctly 1`] = `
         <Text
           accessible={true}
           allowFontScaling={true}
-          disabled={false}
           ellipsizeMode="tail"
         >
           Ishamel
@@ -71,7 +70,6 @@ exports[`renders correctly 1`] = `
         <Text
           accessible={true}
           allowFontScaling={true}
-          disabled={false}
           ellipsizeMode="tail"
         />
       </View>
@@ -125,7 +123,6 @@ exports[`shows the post title when displayPostTitle is true 1`] = `
         <Text
           accessible={true}
           allowFontScaling={true}
-          disabled={false}
           ellipsizeMode="tail"
         >
           Ishamel
@@ -133,13 +130,11 @@ exports[`shows the post title when displayPostTitle is true 1`] = `
         <Text
           accessible={true}
           allowFontScaling={true}
-          disabled={false}
           ellipsizeMode="tail"
         />
         <Text
           accessible={true}
           allowFontScaling={true}
-          disabled={false}
           ellipsizeMode="tail"
         >
           on "

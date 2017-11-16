@@ -4,7 +4,6 @@ exports[`HeaderButton matches last Close icon snapshot 1`] = `
 <TouchableOpacity
   activeOpacity={0.2}
   disabled={false}
-  focusedOpacity={0.7}
   onPress={[Function]}
 >
   <Icon
@@ -17,13 +16,11 @@ exports[`HeaderButton matches last snapshot 1`] = `
 <TouchableOpacity
   activeOpacity={0.2}
   disabled={false}
-  focusedOpacity={0.7}
   onPress={[Function]}
 >
   <Text
     accessible={true}
     allowFontScaling={true}
-    disabled={false}
     ellipsizeMode="tail"
   >
     Press Me!

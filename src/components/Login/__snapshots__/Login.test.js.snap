@@ -6,7 +6,6 @@ exports[`FormError renders correctly 1`] = `
     <Text
       accessible={true}
       allowFontScaling={true}
-      disabled={false}
       ellipsizeMode="tail"
     >
       Username or Password was incorrect
@@ -27,12 +26,15 @@ exports[`Login renders correctly 1`] = `
   }
 >
   <Image
-    source={1}
+    source={
+      Object {
+        "testUri": "../../../src/assets/merkaba-green-on-white.png",
+      }
+    }
   />
   <Text
     accessible={true}
     allowFontScaling={true}
-    disabled={false}
     ellipsizeMode="tail"
   >
     Log in to Hylo
@@ -41,7 +43,6 @@ exports[`Login renders correctly 1`] = `
     <Text
       accessible={true}
       allowFontScaling={true}
-      disabled={false}
       ellipsizeMode="tail"
     >
       Your email address
@@ -51,6 +52,7 @@ exports[`Login renders correctly 1`] = `
     <View>
       <View>
         <TextInput
+          allowFontScaling={true}
           autoCapitalize="none"
           autoCorrect={false}
           keyboardType="email-address"
@@ -67,7 +69,6 @@ exports[`Login renders correctly 1`] = `
     <Text
       accessible={true}
       allowFontScaling={true}
-      disabled={false}
       ellipsizeMode="tail"
     >
       Password
@@ -77,6 +78,7 @@ exports[`Login renders correctly 1`] = `
     <View>
       <View>
         <TextInput
+          allowFontScaling={true}
           onChangeText={[Function]}
           onSubmitEditing={[Function]}
           returnKeyType="go"
@@ -98,13 +100,11 @@ exports[`Login renders correctly 1`] = `
   <View>
     <TouchableOpacity
       activeOpacity={0.2}
-      focusedOpacity={0.7}
       onPress={[Function]}
     >
       <Text
         accessible={true}
         allowFontScaling={true}
-        disabled={false}
         ellipsizeMode="tail"
       >
         Log In
@@ -115,7 +115,6 @@ exports[`Login renders correctly 1`] = `
     <Text
       accessible={true}
       allowFontScaling={true}
-      disabled={false}
       ellipsizeMode="tail"
     >
       Or connect with:
@@ -145,12 +144,15 @@ exports[`Login renders error message 1`] = `
   }
 >
   <Image
-    source={1}
+    source={
+      Object {
+        "testUri": "../../../src/assets/merkaba-green-on-white.png",
+      }
+    }
   />
   <Text
     accessible={true}
     allowFontScaling={true}
-    disabled={false}
     ellipsizeMode="tail"
   >
     Log in to Hylo
@@ -160,6 +162,7 @@ exports[`Login renders error message 1`] = `
     <View>
       <View>
         <TextInput
+          allowFontScaling={true}
           autoCapitalize="none"
           autoCorrect={false}
           keyboardType="email-address"
@@ -176,7 +179,6 @@ exports[`Login renders error message 1`] = `
     <Text
       accessible={true}
       allowFontScaling={true}
-      disabled={false}
       ellipsizeMode="tail"
     >
       Password
@@ -186,6 +188,7 @@ exports[`Login renders error message 1`] = `
     <View>
       <View>
         <TextInput
+          allowFontScaling={true}
           onChangeText={[Function]}
           onSubmitEditing={[Function]}
           returnKeyType="go"
@@ -207,13 +210,11 @@ exports[`Login renders error message 1`] = `
   <View>
     <TouchableOpacity
       activeOpacity={0.2}
-      focusedOpacity={0.7}
       onPress={[Function]}
     >
       <Text
         accessible={true}
         allowFontScaling={true}
-        disabled={false}
         ellipsizeMode="tail"
       >
         Log In
@@ -224,7 +225,6 @@ exports[`Login renders error message 1`] = `
     <Text
       accessible={true}
       allowFontScaling={true}
-      disabled={false}
       ellipsizeMode="tail"
     >
       Or connect with:
@@ -254,12 +254,15 @@ exports[`Login renders with a signup link 1`] = `
   }
 >
   <Image
-    source={1}
+    source={
+      Object {
+        "testUri": "../../../src/assets/merkaba-green-on-white.png",
+      }
+    }
   />
   <Text
     accessible={true}
     allowFontScaling={true}
-    disabled={false}
     ellipsizeMode="tail"
   >
     Log in to Hylo
@@ -268,7 +271,6 @@ exports[`Login renders with a signup link 1`] = `
     <Text
       accessible={true}
       allowFontScaling={true}
-      disabled={false}
       ellipsizeMode="tail"
     >
       Your email address
@@ -278,6 +280,7 @@ exports[`Login renders with a signup link 1`] = `
     <View>
       <View>
         <TextInput
+          allowFontScaling={true}
           autoCapitalize="none"
           autoCorrect={false}
           keyboardType="email-address"
@@ -294,7 +297,6 @@ exports[`Login renders with a signup link 1`] = `
     <Text
       accessible={true}
       allowFontScaling={true}
-      disabled={false}
       ellipsizeMode="tail"
     >
       Password
@@ -304,6 +306,7 @@ exports[`Login renders with a signup link 1`] = `
     <View>
       <View>
         <TextInput
+          allowFontScaling={true}
           onChangeText={[Function]}
           onSubmitEditing={[Function]}
           returnKeyType="go"
@@ -325,13 +328,11 @@ exports[`Login renders with a signup link 1`] = `
   <View>
     <TouchableOpacity
       activeOpacity={0.2}
-      focusedOpacity={0.7}
       onPress={[Function]}
     >
       <Text
         accessible={true}
         allowFontScaling={true}
-        disabled={false}
         ellipsizeMode="tail"
       >
         Log In
@@ -342,7 +343,6 @@ exports[`Login renders with a signup link 1`] = `
     <Text
       accessible={true}
       allowFontScaling={true}
-      disabled={false}
       ellipsizeMode="tail"
     >
       Or connect with:
@@ -375,12 +375,15 @@ exports[`Login renders with no network connection error 1`] = `
   }
 >
   <Image
-    source={1}
+    source={
+      Object {
+        "testUri": "../../../src/assets/merkaba-green-on-white.png",
+      }
+    }
   />
   <Text
     accessible={true}
     allowFontScaling={true}
-    disabled={false}
     ellipsizeMode="tail"
   >
     Log in to Hylo
@@ -389,7 +392,6 @@ exports[`Login renders with no network connection error 1`] = `
     <Text
       accessible={true}
       allowFontScaling={true}
-      disabled={false}
       ellipsizeMode="tail"
     >
       Your email address
@@ -399,6 +401,7 @@ exports[`Login renders with no network connection error 1`] = `
     <View>
       <View>
         <TextInput
+          allowFontScaling={true}
           autoCapitalize="none"
           autoCorrect={false}
           keyboardType="email-address"
@@ -415,7 +418,6 @@ exports[`Login renders with no network connection error 1`] = `
     <Text
       accessible={true}
       allowFontScaling={true}
-      disabled={false}
       ellipsizeMode="tail"
     >
       Password
@@ -425,6 +427,7 @@ exports[`Login renders with no network connection error 1`] = `
     <View>
       <View>
         <TextInput
+          allowFontScaling={true}
           onChangeText={[Function]}
           onSubmitEditing={[Function]}
           returnKeyType="go"
@@ -446,13 +449,11 @@ exports[`Login renders with no network connection error 1`] = `
   <View>
     <TouchableOpacity
       activeOpacity={0.2}
-      focusedOpacity={0.7}
       onPress={[Function]}
     >
       <Text
         accessible={true}
         allowFontScaling={true}
-        disabled={false}
         ellipsizeMode="tail"
       >
         Log In
@@ -463,7 +464,6 @@ exports[`Login renders with no network connection error 1`] = `
     <Text
       accessible={true}
       allowFontScaling={true}
-      disabled={false}
       ellipsizeMode="tail"
     >
       Or connect with:
@@ -495,18 +495,20 @@ exports[`Login renders with pending banner 1`] = `
   <Text
     accessible={true}
     allowFontScaling={true}
-    disabled={false}
     ellipsizeMode="tail"
   >
     LOGGING IN...
   </Text>
   <Image
-    source={1}
+    source={
+      Object {
+        "testUri": "../../../src/assets/merkaba-green-on-white.png",
+      }
+    }
   />
   <Text
     accessible={true}
     allowFontScaling={true}
-    disabled={false}
     ellipsizeMode="tail"
   >
     Log in to Hylo
@@ -515,7 +517,6 @@ exports[`Login renders with pending banner 1`] = `
     <Text
       accessible={true}
       allowFontScaling={true}
-      disabled={false}
       ellipsizeMode="tail"
     >
       Your email address
@@ -525,6 +526,7 @@ exports[`Login renders with pending banner 1`] = `
     <View>
       <View>
         <TextInput
+          allowFontScaling={true}
           autoCapitalize="none"
           autoCorrect={false}
           keyboardType="email-address"
@@ -541,7 +543,6 @@ exports[`Login renders with pending banner 1`] = `
     <Text
       accessible={true}
       allowFontScaling={true}
-      disabled={false}
       ellipsizeMode="tail"
     >
       Password
@@ -551,6 +552,7 @@ exports[`Login renders with pending banner 1`] = `
     <View>
       <View>
         <TextInput
+          allowFontScaling={true}
           onChangeText={[Function]}
           onSubmitEditing={[Function]}
           returnKeyType="go"
@@ -572,13 +574,11 @@ exports[`Login renders with pending banner 1`] = `
   <View>
     <TouchableOpacity
       activeOpacity={0.2}
-      focusedOpacity={0.7}
       onPress={[Function]}
     >
       <Text
         accessible={true}
         allowFontScaling={true}
-        disabled={false}
         ellipsizeMode="tail"
       >
         Log In
@@ -589,7 +589,6 @@ exports[`Login renders with pending banner 1`] = `
     <Text
       accessible={true}
       allowFontScaling={true}
-      disabled={false}
       ellipsizeMode="tail"
     >
       Or connect with:
@@ -619,12 +618,15 @@ exports[`Login renders without a signup link 1`] = `
   }
 >
   <Image
-    source={1}
+    source={
+      Object {
+        "testUri": "../../../src/assets/merkaba-green-on-white.png",
+      }
+    }
   />
   <Text
     accessible={true}
     allowFontScaling={true}
-    disabled={false}
     ellipsizeMode="tail"
   >
     Log in to Hylo
@@ -633,7 +635,6 @@ exports[`Login renders without a signup link 1`] = `
     <Text
       accessible={true}
       allowFontScaling={true}
-      disabled={false}
       ellipsizeMode="tail"
     >
       Your email address
@@ -643,6 +644,7 @@ exports[`Login renders without a signup link 1`] = `
     <View>
       <View>
         <TextInput
+          allowFontScaling={true}
           autoCapitalize="none"
           autoCorrect={false}
           keyboardType="email-address"
@@ -659,7 +661,6 @@ exports[`Login renders without a signup link 1`] = `
     <Text
       accessible={true}
       allowFontScaling={true}
-      disabled={false}
       ellipsizeMode="tail"
     >
       Password
@@ -669,6 +670,7 @@ exports[`Login renders without a signup link 1`] = `
     <View>
       <View>
         <TextInput
+          allowFontScaling={true}
           onChangeText={[Function]}
           onSubmitEditing={[Function]}
           returnKeyType="go"
@@ -690,13 +692,11 @@ exports[`Login renders without a signup link 1`] = `
   <View>
     <TouchableOpacity
       activeOpacity={0.2}
-      focusedOpacity={0.7}
       onPress={[Function]}
     >
       <Text
         accessible={true}
         allowFontScaling={true}
-        disabled={false}
         ellipsizeMode="tail"
       >
         Log In
@@ -707,7 +707,6 @@ exports[`Login renders without a signup link 1`] = `
     <Text
       accessible={true}
       allowFontScaling={true}
-      disabled={false}
       ellipsizeMode="tail"
     >
       Or connect with:
@@ -731,20 +730,17 @@ exports[`SignupLink renders correctly 1`] = `
   <Text
     accessible={true}
     allowFontScaling={true}
-    disabled={false}
     ellipsizeMode="tail"
   >
     Dont have an account? 
   </Text>
   <TouchableOpacity
     activeOpacity={0.2}
-    focusedOpacity={0.7}
     onPress={[Function]}
   >
     <Text
       accessible={true}
       allowFontScaling={true}
-      disabled={false}
       ellipsizeMode="tail"
     >
       Sign up now

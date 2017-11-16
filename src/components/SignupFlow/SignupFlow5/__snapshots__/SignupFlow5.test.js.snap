@@ -26,7 +26,6 @@ exports[`hides image when no url and password when no password 1`] = `
     <Text
       accessible={true}
       allowFontScaling={true}
-      disabled={false}
       ellipsizeMode="tail"
     >
       Everything looking good?
@@ -34,7 +33,6 @@ exports[`hides image when no url and password when no password 1`] = `
     <Text
       accessible={true}
       allowFontScaling={true}
-      disabled={false}
       ellipsizeMode="tail"
     >
       You can always come back and change your details at any time.
@@ -67,13 +65,11 @@ exports[`hides image when no url and password when no password 1`] = `
     />
     <TouchableOpacity
       activeOpacity={0.2}
-      focusedOpacity={0.7}
       onPress={undefined}
     >
       <Text
         accessible={true}
         allowFontScaling={true}
-        disabled={false}
         ellipsizeMode="tail"
       >
         Skills
@@ -111,7 +107,6 @@ exports[`matches last snapshot 1`] = `
     <Text
       accessible={true}
       allowFontScaling={true}
-      disabled={false}
       ellipsizeMode="tail"
     >
       Everything looking good?
@@ -119,7 +114,6 @@ exports[`matches last snapshot 1`] = `
     <Text
       accessible={true}
       allowFontScaling={true}
-      disabled={false}
       ellipsizeMode="tail"
     >
       You can always come back and change your details at any time.
@@ -127,7 +121,6 @@ exports[`matches last snapshot 1`] = `
     <View>
       <TouchableOpacity
         activeOpacity={0.2}
-        focusedOpacity={0.7}
         onPress={undefined}
       >
         <Image
@@ -167,13 +160,11 @@ exports[`matches last snapshot 1`] = `
     />
     <TouchableOpacity
       activeOpacity={0.2}
-      focusedOpacity={0.7}
       onPress={undefined}
     >
       <Text
         accessible={true}
         allowFontScaling={true}
-        disabled={false}
         ellipsizeMode="tail"
       >
         Skills
