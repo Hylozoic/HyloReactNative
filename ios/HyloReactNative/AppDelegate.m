@@ -61,7 +61,7 @@
   self.oneSignal = [[RCTOneSignal alloc] initWithLaunchOptions:launchOptions
                                                          appId:oneSignalAppID
                                                       settings:@{
-                                                        kOSSettingsKeyInFocusDisplayOption : @(OSNotificationDisplayTypeNone),
+                                                        kOSSettingsKeyInFocusDisplayOption: @(OSNotificationDisplayTypeNone),
                                                         kOSSettingsKeyAutoPrompt: @false
                                                       }];
 
