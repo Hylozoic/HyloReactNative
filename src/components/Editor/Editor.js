@@ -67,6 +67,9 @@ export default class Editor extends React.Component {
     if (ref && this.props.onChange) {
       this.editor.registerContentChangeListener(this.props.onChange)
     }
+    if (ref) {
+      this.editor.focusContent() 
+    }
   }
 
   render () {
