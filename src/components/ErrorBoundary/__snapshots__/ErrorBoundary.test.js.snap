@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`displays a custom error when a child component throws an error 1`] = `
+Array [
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+>
+    Happy Child
+</Text>,
+  <View>
+    <Image />
+    <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+    >
+        Custom Error Message
+    </Text>
+</View>,
+]
+`;
+
+exports[`displays an error when a child component throws an error 1`] = `
+<Text
+  accessible={true}
+  allowFontScaling={true}
+  ellipsizeMode="tail"
+>
+  Something went wrong
+</Text>
+`;
+
+exports[`matches last snapshot 1`] = `
+<Text
+  accessible={true}
+  allowFontScaling={true}
+  ellipsizeMode="tail"
+>
+  Happy Child
+</Text>
+`;
