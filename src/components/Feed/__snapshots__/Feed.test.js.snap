@@ -29,6 +29,7 @@ exports[`renders correctly 1`] = `
         topicSubscribed={undefined}
       />
     }
+    navigation={Object {}}
     screenProps={undefined}
     showCommunities={false}
     showMember={undefined}
