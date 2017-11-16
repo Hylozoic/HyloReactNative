@@ -29,7 +29,6 @@ exports[`handles localUri 1`] = `
       <Text
         accessible={true}
         allowFontScaling={true}
-        disabled={false}
         ellipsizeMode="tail"
       >
         Upload a Photo
@@ -60,7 +59,6 @@ exports[`handles localUri 1`] = `
         <Text
           accessible={true}
           allowFontScaling={true}
-          disabled={false}
           ellipsizeMode="tail"
         >
           Continue
@@ -91,7 +89,6 @@ exports[`handles no image 1`] = `
       <Text
         accessible={true}
         allowFontScaling={true}
-        disabled={false}
         ellipsizeMode="tail"
       >
         Upload a Photo
@@ -144,7 +141,6 @@ exports[`matches last snapshot 1`] = `
       <Text
         accessible={true}
         allowFontScaling={true}
-        disabled={false}
         ellipsizeMode="tail"
       >
         Upload a Photo

@@ -45,6 +45,7 @@ exports[`PostEditor renders a new editor correctly 1`] = `
       </SectionLabel>
       <View>
         <TextInput
+          allowFontScaling={true}
           editable={true}
           onChangeText={[Function]}
           placeholder="What do you want to discuss?"
@@ -57,7 +58,6 @@ exports[`PostEditor renders a new editor correctly 1`] = `
       </SectionLabel>
       <TouchableOpacity
         activeOpacity={0.2}
-        focusedOpacity={0.7}
         onPress={[Function]}
       >
         <Details
@@ -101,7 +101,6 @@ exports[`PostEditor renders correctly while saving 1`] = `
         <Text
           accessible={true}
           allowFontScaling={true}
-          disabled={false}
           ellipsizeMode="tail"
         >
           What are you posting today?
@@ -129,7 +128,6 @@ exports[`PostEditor renders correctly while saving 1`] = `
             <Text
               accessible={true}
               allowFontScaling={true}
-              disabled={false}
               ellipsizeMode="tail"
             >
               DISCUSSION
@@ -157,7 +155,6 @@ exports[`PostEditor renders correctly while saving 1`] = `
             <Text
               accessible={true}
               allowFontScaling={true}
-              disabled={false}
               ellipsizeMode="tail"
             >
               REQUEST
@@ -185,7 +182,6 @@ exports[`PostEditor renders correctly while saving 1`] = `
             <Text
               accessible={true}
               allowFontScaling={true}
-              disabled={false}
               ellipsizeMode="tail"
             >
               OFFER
@@ -195,13 +191,13 @@ exports[`PostEditor renders correctly while saving 1`] = `
         <Text
           accessible={true}
           allowFontScaling={true}
-          disabled={false}
           ellipsizeMode="tail"
         >
           Title
         </Text>
         <View>
           <TextInput
+            allowFontScaling={true}
             editable={true}
             onChangeText={[Function]}
             placeholder="What do you want to discuss?"
@@ -212,7 +208,6 @@ exports[`PostEditor renders correctly while saving 1`] = `
         <Text
           accessible={true}
           allowFontScaling={true}
-          disabled={false}
           ellipsizeMode="tail"
         >
           Details
@@ -239,7 +234,6 @@ exports[`PostEditor renders correctly while saving 1`] = `
           <Text
             accessible={true}
             allowFontScaling={true}
-            disabled={false}
             ellipsizeMode="tail"
           >
             What else should we know?
@@ -248,7 +242,6 @@ exports[`PostEditor renders correctly while saving 1`] = `
         <Text
           accessible={true}
           allowFontScaling={true}
-          disabled={false}
           ellipsizeMode="tail"
         >
           Images
@@ -282,7 +275,6 @@ exports[`PostEditor renders correctly while saving 1`] = `
         <Text
           accessible={true}
           allowFontScaling={true}
-          disabled={false}
           ellipsizeMode="tail"
         >
           Files
@@ -314,7 +306,6 @@ exports[`PostEditor renders correctly while saving 1`] = `
             <Text
               accessible={true}
               allowFontScaling={true}
-              disabled={false}
               ellipsizeMode="tail"
             >
               Add file
@@ -338,7 +329,6 @@ exports[`PostEditor renders correctly while saving 2`] = `
         <Text
           accessible={true}
           allowFontScaling={true}
-          disabled={false}
           ellipsizeMode="tail"
         >
           What are you posting today?
@@ -366,7 +356,6 @@ exports[`PostEditor renders correctly while saving 2`] = `
             <Text
               accessible={true}
               allowFontScaling={true}
-              disabled={false}
               ellipsizeMode="tail"
             >
               DISCUSSION
@@ -394,7 +383,6 @@ exports[`PostEditor renders correctly while saving 2`] = `
             <Text
               accessible={true}
               allowFontScaling={true}
-              disabled={false}
               ellipsizeMode="tail"
             >
               REQUEST
@@ -422,7 +410,6 @@ exports[`PostEditor renders correctly while saving 2`] = `
             <Text
               accessible={true}
               allowFontScaling={true}
-              disabled={false}
               ellipsizeMode="tail"
             >
               OFFER
@@ -432,13 +419,13 @@ exports[`PostEditor renders correctly while saving 2`] = `
         <Text
           accessible={true}
           allowFontScaling={true}
-          disabled={false}
           ellipsizeMode="tail"
         >
           Title
         </Text>
         <View>
           <TextInput
+            allowFontScaling={true}
             editable={false}
             onChangeText={[Function]}
             placeholder="What do you need help with?"
@@ -449,7 +436,6 @@ exports[`PostEditor renders correctly while saving 2`] = `
         <Text
           accessible={true}
           allowFontScaling={true}
-          disabled={false}
           ellipsizeMode="tail"
         >
           Details
@@ -476,7 +462,6 @@ exports[`PostEditor renders correctly while saving 2`] = `
           <Text
             accessible={true}
             allowFontScaling={true}
-            disabled={false}
             ellipsizeMode="tail"
           >
             What else should we know?
@@ -485,7 +470,6 @@ exports[`PostEditor renders correctly while saving 2`] = `
         <Text
           accessible={true}
           allowFontScaling={true}
-          disabled={false}
           ellipsizeMode="tail"
         >
           Images
@@ -519,7 +503,6 @@ exports[`PostEditor renders correctly while saving 2`] = `
         <Text
           accessible={true}
           allowFontScaling={true}
-          disabled={false}
           ellipsizeMode="tail"
         >
           Files
@@ -551,7 +534,6 @@ exports[`PostEditor renders correctly while saving 2`] = `
             <Text
               accessible={true}
               allowFontScaling={true}
-              disabled={false}
               ellipsizeMode="tail"
             >
               Add file
@@ -596,6 +578,7 @@ exports[`PostEditor renders with a post 1`] = `
       </SectionLabel>
       <View>
         <TextInput
+          allowFontScaling={true}
           editable={true}
           onChangeText={[Function]}
           placeholder="What do you want to discuss?"
@@ -608,7 +591,6 @@ exports[`PostEditor renders with a post 1`] = `
       </SectionLabel>
       <TouchableOpacity
         activeOpacity={0.2}
-        focusedOpacity={0.7}
         onPress={[Function]}
       >
         <Details
@@ -650,7 +632,6 @@ exports[`SectionLabel renders correctly 1`] = `
 <Text
   accessible={true}
   allowFontScaling={true}
-  disabled={false}
   ellipsizeMode="tail"
 >
   Label
@@ -660,13 +641,11 @@ exports[`SectionLabel renders correctly 1`] = `
 exports[`TypeButton renders correctly 1`] = `
 <TouchableOpacity
   activeOpacity={0.2}
-  focusedOpacity={0.7}
   onPress={[Function]}
 >
   <Text
     accessible={true}
     allowFontScaling={true}
-    disabled={false}
     ellipsizeMode="tail"
   >
     DISCUSSION

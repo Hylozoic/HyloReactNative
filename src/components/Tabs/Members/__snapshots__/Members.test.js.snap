@@ -17,6 +17,7 @@ exports[`renders correctly with no community 1`] = `
               size={30}
             />
             <TextInput
+              allowFontScaling={true}
               onChangeText={[Function]}
               placeholder="Search Members"
               underlineColorAndroid="transparent"
@@ -44,7 +45,6 @@ exports[`renders correctly with no community 1`] = `
               <Text
                 accessible={true}
                 allowFontScaling={true}
-                disabled={false}
                 ellipsizeMode="tail"
               />
               <Icon
@@ -100,12 +100,11 @@ exports[`renders correctly with no community 1`] = `
     onScroll={[Function]}
     onScrollBeginDrag={[Function]}
     onScrollEndDrag={[Function]}
-    onViewableItemsChanged={undefined}
     renderItem={[Function]}
-    renderScrollComponent={[Function]}
     scrollEventThrottle={50}
     stickyHeaderIndices={Array []}
     updateCellsBatchingPeriod={50}
+    viewabilityConfigCallbackPairs={Array []}
     windowSize={21}
   >
     <View>
@@ -125,7 +124,6 @@ exports[`renders correctly with no community 1`] = `
               <Text
                 accessible={true}
                 allowFontScaling={true}
-                disabled={false}
                 ellipsizeMode="tail"
               >
                 All Communities
@@ -141,6 +139,7 @@ exports[`renders correctly with no community 1`] = `
                 size={30}
               />
               <TextInput
+                allowFontScaling={true}
                 onChangeText={[Function]}
                 placeholder="Search Members"
                 underlineColorAndroid="transparent"
@@ -176,7 +175,6 @@ exports[`renders correctly with no community 1`] = `
                 <Text
                   accessible={true}
                   allowFontScaling={true}
-                  disabled={false}
                   ellipsizeMode="tail"
                 />
                 <Icon
@@ -225,7 +223,6 @@ exports[`renders correctly with no community 1`] = `
             <Text
               accessible={true}
               allowFontScaling={true}
-              disabled={false}
               ellipsizeMode="tail"
             >
               Foo Lane
@@ -233,7 +230,6 @@ exports[`renders correctly with no community 1`] = `
             <Text
               accessible={true}
               allowFontScaling={true}
-              disabled={false}
               ellipsizeMode="tail"
             >
               here
@@ -241,7 +237,6 @@ exports[`renders correctly with no community 1`] = `
             <Text
               accessible={true}
               allowFontScaling={true}
-              disabled={false}
               ellipsizeMode="tail"
               numberOfLines={4}
             >
@@ -281,7 +276,6 @@ exports[`renders correctly with no community 1`] = `
             <Text
               accessible={true}
               allowFontScaling={true}
-              disabled={false}
               ellipsizeMode="tail"
             >
               Bar Jones
@@ -289,7 +283,6 @@ exports[`renders correctly with no community 1`] = `
             <Text
               accessible={true}
               allowFontScaling={true}
-              disabled={false}
               ellipsizeMode="tail"
             >
               there
@@ -297,7 +290,6 @@ exports[`renders correctly with no community 1`] = `
             <Text
               accessible={true}
               allowFontScaling={true}
-              disabled={false}
               ellipsizeMode="tail"
               numberOfLines={4}
             >
@@ -343,7 +335,6 @@ exports[`renders correctly with no community 1`] = `
             <Text
               accessible={true}
               allowFontScaling={true}
-              disabled={false}
               ellipsizeMode="tail"
             >
               Baz Chu
@@ -351,7 +342,6 @@ exports[`renders correctly with no community 1`] = `
             <Text
               accessible={true}
               allowFontScaling={true}
-              disabled={false}
               ellipsizeMode="tail"
               numberOfLines={4}
             >
@@ -391,7 +381,6 @@ exports[`renders correctly with no community 1`] = `
             <Text
               accessible={true}
               allowFontScaling={true}
-              disabled={false}
               ellipsizeMode="tail"
             >
               Bonk Gundsdottir
@@ -399,7 +388,6 @@ exports[`renders correctly with no community 1`] = `
             <Text
               accessible={true}
               allowFontScaling={true}
-              disabled={false}
               ellipsizeMode="tail"
               numberOfLines={4}
             />

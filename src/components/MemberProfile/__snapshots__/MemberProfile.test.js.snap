@@ -11,7 +11,6 @@ exports[`EditButton matches the last snapshot when isLoading is false 1`] = `
     <Text
       accessible={true}
       allowFontScaling={true}
-      disabled={false}
       ellipsizeMode="tail"
     >
       edit
@@ -25,7 +24,6 @@ exports[`EditButton matches the last snapshot when isLoading is true 1`] = `
   <Text
     accessible={true}
     allowFontScaling={true}
-    disabled={false}
     ellipsizeMode="tail"
   >
     loading
@@ -150,14 +148,12 @@ exports[`ReadMoreButton matches the last snapshot 1`] = `
 <View>
   <TouchableOpacity
     activeOpacity={0.2}
-    focusedOpacity={0.7}
     onPress={[Function]}
   >
     <View>
       <Text
         accessible={true}
         allowFontScaling={true}
-        disabled={false}
         ellipsizeMode="tail"
       >
         Read More

@@ -27,7 +27,6 @@ exports[`renders as expected 1`] = `
     <Text
       accessible={true}
       allowFontScaling={true}
-      disabled={false}
       ellipsizeMode="tail"
     >
       36 comments
@@ -35,7 +34,6 @@ exports[`renders as expected 1`] = `
   </View>
   <TouchableOpacity
     activeOpacity={0.2}
-    focusedOpacity={0.7}
     onPress={[Function]}
   >
     <Icon
@@ -44,7 +42,6 @@ exports[`renders as expected 1`] = `
     <Text
       accessible={true}
       allowFontScaling={true}
-      disabled={false}
       ellipsizeMode="tail"
     >
       71

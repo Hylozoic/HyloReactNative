@@ -35,12 +35,11 @@ exports[`NotificationsList matches the last snapshot 1`] = `
     onScroll={[Function]}
     onScrollBeginDrag={[Function]}
     onScrollEndDrag={[Function]}
-    onViewableItemsChanged={undefined}
     renderItem={[Function]}
-    renderScrollComponent={[Function]}
     scrollEventThrottle={50}
     stickyHeaderIndices={Array []}
     updateCellsBatchingPeriod={50}
+    viewabilityConfigCallbackPairs={Array []}
     windowSize={21}
   >
     <View>
@@ -83,28 +82,24 @@ exports[`NotificationsList matches the last snapshot 1`] = `
                 <Text
                   accessible={true}
                   allowFontScaling={true}
-                  disabled={false}
                   ellipsizeMode="tail"
                   numberOfLines={2}
                 >
                   <Text
                     accessible={true}
                     allowFontScaling={true}
-                    disabled={false}
                     ellipsizeMode="tail"
                   />
                 </Text>
                 <Text
                   accessible={true}
                   allowFontScaling={true}
-                  disabled={false}
                   ellipsizeMode="tail"
                   numberOfLines={2}
                 >
                   <Text
                     accessible={true}
                     allowFontScaling={true}
-                    disabled={false}
                     ellipsizeMode="tail"
                   >
                     Wombat 
@@ -113,7 +108,6 @@ exports[`NotificationsList matches the last snapshot 1`] = `
                 <Text
                   accessible={true}
                   allowFontScaling={true}
-                  disabled={false}
                   ellipsizeMode="tail"
                 >
                   2 min ago
@@ -132,7 +126,6 @@ exports[`NotificationsList matches the last snapshot for NotificationRow 1`] = `
 <View>
   <TouchableOpacity
     activeOpacity={0.2}
-    focusedOpacity={0.7}
     onPress={[Function]}
   >
     <NotificationCard

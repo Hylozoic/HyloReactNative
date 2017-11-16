@@ -4,6 +4,7 @@ exports[`Control matches the last snapshot 1`] = `
 <View>
   <View>
     <TextInput
+      allowFontScaling={true}
       editable={true}
       multiline={true}
       numberOfLines={8}
@@ -14,7 +15,6 @@ exports[`Control matches the last snapshot 1`] = `
     />
     <TouchableOpacity
       activeOpacity={0.2}
-      focusedOpacity={0.7}
       onPress={[Function]}
     >
       <Icon
@@ -39,7 +39,6 @@ exports[`MemberHeader matches the last snapshot 1`] = `
     <View>
       <TouchableOpacity
         activeOpacity={0.2}
-        focusedOpacity={0.7}
         onPress={undefined}
       >
         <Icon

@@ -42,7 +42,7 @@
                            didFinishLaunchingWithOptions:launchOptions];
   NSURL *jsCodeLocation;
 
-  jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index.ios" fallbackResource:nil];
+  jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
 
   RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
                                                       moduleName:@"HyloReactNative"
@@ -61,7 +61,7 @@
   self.oneSignal = [[RCTOneSignal alloc] initWithLaunchOptions:launchOptions
                                                          appId:oneSignalAppID
                                                       settings:@{
-                                                        kOSSettingsKeyInFocusDisplayOption : @(OSNotificationDisplayTypeNone),
+                                                        kOSSettingsKeyInFocusDisplayOption: @(OSNotificationDisplayTypeNone),
                                                         kOSSettingsKeyAutoPrompt: @false
                                                       }];
 

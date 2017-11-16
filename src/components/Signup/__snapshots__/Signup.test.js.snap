@@ -16,17 +16,24 @@ exports[`matches last snapshot 1`] = `
         "width": 750,
       }
     }
-    source={1}
+    source={
+      Object {
+        "testUri": "../../../src/assets/signin_background.png",
+      }
+    }
   >
     <Image
-      source={1}
+      source={
+        Object {
+          "testUri": "../../../src/assets/merkaba_white.png",
+        }
+      }
     />
   </ImageBackground>
   <View>
     <Text
       accessible={true}
       allowFontScaling={true}
-      disabled={false}
       ellipsizeMode="tail"
     >
       Sign up to get started with Hylo
@@ -34,7 +41,6 @@ exports[`matches last snapshot 1`] = `
     <Text
       accessible={true}
       allowFontScaling={true}
-      disabled={false}
       ellipsizeMode="tail"
     >
       Stay connected, organized and engaged with your community.
@@ -46,7 +52,6 @@ exports[`matches last snapshot 1`] = `
     <Text
       accessible={true}
       allowFontScaling={true}
-      disabled={false}
       ellipsizeMode="tail"
     >
       Or connect with:
@@ -65,20 +70,17 @@ exports[`matches last snapshot 1`] = `
       <Text
         accessible={true}
         allowFontScaling={true}
-        disabled={false}
         ellipsizeMode="tail"
       >
         Already have an account? 
       </Text>
       <TouchableOpacity
         activeOpacity={0.2}
-        focusedOpacity={0.7}
         onPress={[Function]}
       >
         <Text
           accessible={true}
           allowFontScaling={true}
-          disabled={false}
           ellipsizeMode="tail"
         >
           Log in now
