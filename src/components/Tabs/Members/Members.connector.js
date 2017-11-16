@@ -14,7 +14,7 @@ import {
 } from './Members.store'
 import getMe from '../../../store/selectors/getMe'
 import getCommunity from '../../../store/selectors/getCommunity'
-import { mapWhenFocused, mergeWhenFocused } from 'util/testing'
+import { mapWhenFocused, mergeWhenFocused } from 'util/connector'
 
 function makeFetchOpts (props) {
   const { community } = props

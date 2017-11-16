@@ -2,8 +2,8 @@
  * @providesModule util/connector
  */
 
-export const mapWhenFocused = mapper => (state, props) => props.isFocused
-  ? mapper(state, props)
+export const mapWhenFocused = mapper => (stateOrDispatch, props) => props.isFocused
+  ? mapper(stateOrDispatch, props)
   : props
 
 export const mergeWhenFocused = merger => (stateProps, dispatchProps, ownProps) =>
