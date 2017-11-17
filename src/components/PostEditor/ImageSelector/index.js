@@ -1,8 +1,9 @@
 import React from 'react'
 import ImagePicker from '../../ImagePicker'
 import PopupMenuButton from '../../PopupMenuButton'
-import { Image, View } from 'react-native'
+import { Alert, Image, View } from 'react-native'
 import styles from './ImageSelector.styles'
+import { partial } from 'lodash'
 
 export default function ImageSelector ({ id, type, style, imageUrls, onAdd, onRemove }) {
   return <View style={[styles.container, style]}>
@@ -10,7 +11,7 @@ export default function ImageSelector ({ id, type, style, imageUrls, onAdd, onRe
     <ImagePicker
       style={styles.addImageButton}
       iconStyle={styles.addImageButtonIcon}
-      onError={err => console.log(err)}
+      onError={showAlert}
       onChoice={onAdd}
       type={type}
       id={id} />
@@ -27,3 +28,5 @@ function renderImageButton (imageUrl, buttonIndex, onRemove) {
     <Image style={styles.addImageButtonImage} source={{uri: imageUrl}} />
   </PopupMenuButton>
 }
+
+const showAlert = partial(Alert.alert, 'Could not add image')
