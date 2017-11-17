@@ -7,16 +7,18 @@ import {
   FETCH_MESSAGES,
   getHasMoreMessages,
   getThread,
+  presentThread,
   updateThreadReadTime
 } from './Thread.store'
 import getCurrentUserId from '../../store/selectors/getCurrentUserId'
 import { sendIsTyping } from 'util/websockets'
 
 export function mapStateToProps (state, props) {
-  const { id, messages, title } = getThread(state, props) || {messages: []}
+  const currentUserId = getCurrentUserId(state)
+  const { id, messages, title } = presentThread(getThread(state, props), currentUserId) || {messages: []}
   return {
     id,
-    currentUserId: getCurrentUserId(state),
+    currentUserId,
     hasMore: getHasMoreMessages(state, { id }),
     messages,
     pending: state.pending[FETCH_MESSAGES],
