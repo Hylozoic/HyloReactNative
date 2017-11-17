@@ -1,18 +1,16 @@
-import { mapStateToProps } from './Thread.connector'
-
-jest.mock('react-native-device-info')
+import { mapStateToProps } from './ThreadParticipants.connector'
 
 describe('mapStateToProps', () => {
   it('returns the right keys', () => {
-    const state = {
-      queryResults: [],
-      pending: [],
-      SocketListener: {}
-    }
     const props = {
-      navigation: {state: {params: {id: 1}}}
+      navigation: {
+        state: {params: {id: 1}},
+        navigate: jest.fn()
+      }
     }
-    const stateProps = mapStateToProps(state, props)
+    const stateProps = mapStateToProps({}, props)
     expect(stateProps).toMatchSnapshot()
+    stateProps.goToParticipant(1)
+    expect(props.navigation.navigate).toHaveBeenCalledWith('MemberProfile', {id: 1})
   })
 })
