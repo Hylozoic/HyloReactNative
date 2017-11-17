@@ -1,2 +1,4 @@
 import component from './ErrorBoundary'
-export default component
+import connector from './ErrorBoundary.connector'
+
+export default connector(component)
