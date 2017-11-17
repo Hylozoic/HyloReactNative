@@ -33,10 +33,26 @@ function mapDispatchToProps (dispatch, { navigation }) {
     createMessage: text => dispatch(createMessage(threadId, sanitize(text))),
     fetchMessages: cursor => dispatch(fetchMessages(threadId, { cursor })),
     reconnectFetchMessages: () => dispatch(fetchMessages(threadId, {reset: true})),
-    setTitle: title => navigation.setParams({ title }),
     sendIsTyping: () => sendIsTyping(threadId, true),
     updateThreadReadTime: () => dispatch(updateThreadReadTime(threadId))
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)
+function mergeProps (stateProps, dispatchProps, ownProps) {
+  const { navigation } = ownProps
+  const { id, title } = stateProps
+  const setNavParams = title
+    ? () => navigation.setParams({
+      title,
+      onPressTitle: () => navigation.navigate('ThreadParticipants', {id})
+    })
+    : () => {}
+  return {
+    ...ownProps,
+    ...dispatchProps,
+    ...stateProps,
+    setNavParams
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps)
