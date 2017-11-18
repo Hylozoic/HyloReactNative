@@ -7,7 +7,7 @@ import {
 import { getPending } from './Login.store'
 import { register as registerOneSignal } from 'util/onesignal'
 import registerDevice from '../../store/actions/registerDevice'
-import { NavigationActions } from 'react-navigation'
+import { resetToRoute } from 'util/navigation'
 
 export function mapStateToProps (state, props) {
   const error = state.session.loginError
@@ -37,13 +37,7 @@ export function mapDispatchToProps (dispatch, props) {
     login: (email, password) =>
       dispatch(login(email, password)).then(finishLogin),
     leaveLoginScreen: () =>
-      props.navigation.dispatch(NavigationActions.reset({
-        key: null,
-        index: 0,
-        actions: [
-          NavigationActions.navigate('Main')
-        ]
-      }))
+      resetToRoute(props.navigation, 'Main')
   }
 }
 

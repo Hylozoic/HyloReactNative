@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { get } from 'lodash/fp'
 import { LoadingScreen } from '../Loading'
-import { NavigationActions } from 'react-navigation'
+import { resetToRoute } from 'util/navigation'
 
 export default class SessionCheck extends React.Component {
   static propTypes = {
@@ -80,10 +80,11 @@ export default class SessionCheck extends React.Component {
     }
 
     if (!entryURL && currentUserLoadedEvent) {
-      navigation.dispatch(NavigationActions.reset({
-        index: 0,
-        actions: [NavigationActions.navigate({routeName: 'Main'})]
-      }))
+      resetToRoute(navigation, 'Main')
+    }
+
+    if (!entryURL && prevProps.loggedIn === undefined && loggedIn === false) {
+      navigation.navigate('Login')
     }
   }
 
