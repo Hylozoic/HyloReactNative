@@ -47,7 +47,7 @@ export default function trackCurrentTab (Component) {
 
     render () {
       return <Component
-        ref={wrappedInst => { this.wrappedInstance = wrappedInst }}
+        ref={x => { this.wrappedInstance = x }}
         {...this.props}
         onNavigationStateChange={this.handleChange}
         screenProps={this.state}

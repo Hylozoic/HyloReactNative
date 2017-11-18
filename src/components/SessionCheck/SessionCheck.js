@@ -1,16 +1,8 @@
-import URL from 'url'
 import React from 'react'
 import PropTypes from 'prop-types'
-import { View, Linking } from 'react-native'
-import { NavigationActions } from 'react-navigation'
 import { get } from 'lodash/fp'
-import mixins from '../../style/mixins'
-import Loading from '../Loading'
-import LoginNavigator from '../LoginNavigator'
-import SocketListener from '../SocketListener'
-import RootNavigator from '../RootNavigator'
-
-export const INTERNAL_ROUTE_URI_PREFIX = 'internalRouting://'
+import { LoadingScreen } from '../Loading'
+import { NavigationActions } from 'react-navigation'
 
 export default class SessionCheck extends React.Component {
   static propTypes = {
@@ -22,12 +14,6 @@ export default class SessionCheck extends React.Component {
     setEntryURL: PropTypes.func.isRequired,
     resetEntryURL: PropTypes.func.isRequired,
     fetchCurrentUser: PropTypes.func.isRequired
-  }
-
-  componentWillMount () {
-    // Universal Linking - set entryURL when app is closed (initial) or woken up
-    Linking.getInitialURL().then(url => this._handleSetEntryURL(url))
-    Linking.addEventListener('url', ({ url }) => this._handleSetEntryURL(url))
   }
 
   componentDidMount () {
@@ -43,8 +29,26 @@ export default class SessionCheck extends React.Component {
 
   componentDidUpdate (prevProps) {
     const {
-      loading, entryURL, resetEntryURL, currentUser, loggedIn, signupInProgress, signupStep1Complete
+      loading,
+      entryURL,
+      resetEntryURL,
+      currentUser,
+      loggedIn,
+      signupInProgress,
+      signupStep1Complete,
+      navigation
     } = this.props
+
+    // if (prevProps.loggedIn === undefined && loggedIn) {
+    //   navigation.navigate('Main')
+    // }
+    //
+    // if (prevProps.loggedIn === undefined && loggedIn === false) {
+    //   navigation.navigate('Login')
+    // }
+
+    // -------
+
     const loadingCompleteEvent = !loading && prevProps.loading
     const entryURLChangeEvent = entryURL !== prevProps.entryURL
     const currentUserLoadedEvent = get('id', currentUser) !== get('id', prevProps.currentUser)
@@ -55,14 +59,17 @@ export default class SessionCheck extends React.Component {
       currentUserLoadedEvent ||
       signUpCompleteEvent
     )
+
     if (currentUserLoadedEvent && signupInProgress) {
       const routeName = signupStep1Complete ? 'SignupFlow2' : 'SignupFlow1'
-      const action = NavigationActions.navigate({routeName})
-      return this.navigator.dispatch(action)
+      navigation.navigate(routeName)
     }
+
     if (entryURL && shouldForwardToEntryURL) {
-      this.navigator._handleOpenURL(entryURL)
+      console.log('should forward')
+      // this.navigator._handleOpenURL(entryURL)
     }
+
     if (entryURL && currentUserLoadedEvent) {
       // NOTE: For now this is going to try and route for ALL entry URLs
       // it the case of CheckInvitation / JoinCommunity this will be fine
@@ -71,46 +78,16 @@ export default class SessionCheck extends React.Component {
       // destination this could cause an unexpected behaviour.
       resetEntryURL()
     }
-  }
 
-  componentWillUnmount () {
-    // Universal Linking - remove url listener
-    Linking.removeEventListener('url', this._handleSetEntryURL)
-  }
-
-  // NOTE: The combination of the obscuring INTERNAL_ROUTE_URI_PREFIX constant
-  // and the event handler here is a work around for issues in the
-  // StackNavigator/StackRouter handling of these same events, especially
-  // when not using a single root StackNavigator but a switching double rooted
-  // one as we've done below. This system gives us a place to do our
-  // own handling of URLs and most importantly to stop them from being handled
-  // entirely in some cases.
-  _handleSetEntryURL = (appURL) => {
-    if (!appURL) return
-    const { path } = URL.parse(appURL)
-    if (path) {
-      const interalRoutingURL = INTERNAL_ROUTE_URI_PREFIX + path.slice(1)
-      this.props.setEntryURL(interalRoutingURL)
+    if (!entryURL && currentUserLoadedEvent) {
+      navigation.dispatch(NavigationActions.reset({
+        index: 0,
+        actions: [NavigationActions.navigate({routeName: 'Main'})]
+      }))
     }
   }
 
   render () {
-    const { loading, loggedIn, currentUser } = this.props
-    if (!loading) {
-      if (!loggedIn) {
-        return <LoginNavigator
-          uriPrefix={INTERNAL_ROUTE_URI_PREFIX}
-          ref={nav => { this.navigator = nav }} />
-      }
-      if (currentUser) {
-        return <View style={{flex: 1}}>
-          <RootNavigator
-            uriPrefix={INTERNAL_ROUTE_URI_PREFIX}
-            ref={nav => { this.navigator = nav && nav.getWrappedInstance() }} />
-          <SocketListener />
-        </View>
-      }
-    }
-    return <Loading style={mixins.allCentered} />
+    return <LoadingScreen />
   }
 }

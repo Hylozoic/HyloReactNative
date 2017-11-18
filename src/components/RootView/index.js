@@ -1,9 +1,10 @@
 import React from 'react'
 import Loading from '../Loading'
 import { View } from 'react-native'
-import SessionCheck from '../SessionCheck'
+import RootNavigator from '../RootNavigator'
 import VersionCheck from '../VersionCheck'
 import LoadingModal from '../LoadingModal'
+import EntryLinkHandler from '../EntryLinkHandler'
 import { Provider } from 'react-redux'
 import getStore from '../../store'
 import { init as initOneSignal } from 'util/onesignal'
@@ -29,8 +30,9 @@ export default class RootView extends React.Component {
         <View style={{flex: 1}}>
           <LoadingModal />
           <VersionCheck>
-            <SessionCheck />
+            <RootNavigator />
           </VersionCheck>
+          <EntryLinkHandler />
         </View>
       </Provider>
       : <Loading style={{flex: 1}} />

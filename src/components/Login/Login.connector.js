@@ -7,12 +7,14 @@ import {
 import { getPending } from './Login.store'
 import { register as registerOneSignal } from 'util/onesignal'
 import registerDevice from '../../store/actions/registerDevice'
+import { NavigationActions } from 'react-navigation'
 
 export function mapStateToProps (state, props) {
   const error = state.session.loginError
   const pending = getPending(state)
   const goToSignup = () => props.navigation.navigate('Signup')
   return {
+    loggedIn: state.session.loggedIn,
     error,
     pending,
     defaultEmail: state.session.defaultLoginEmail,
@@ -21,19 +23,27 @@ export function mapStateToProps (state, props) {
   }
 }
 
-export function mapDispatchToProps (dispatch) {
-  function setupPushNotifications (action) {
+export function mapDispatchToProps (dispatch, props) {
+  const finishLogin = action => {
     if (action.error) return
     registerOneSignal({registerDevice: id => dispatch(registerDevice(id))})
   }
 
   return {
     loginWithFacebook: (token) =>
-      dispatch(loginWithFacebook(token)).then(setupPushNotifications),
+      dispatch(loginWithFacebook(token)).then(finishLogin),
     loginWithGoogle: (token) =>
-      dispatch(loginWithGoogle(token)).then(setupPushNotifications),
+      dispatch(loginWithGoogle(token)).then(finishLogin),
     login: (email, password) =>
-      dispatch(login(email, password)).then(setupPushNotifications)
+      dispatch(login(email, password)).then(finishLogin),
+    leaveLoginScreen: () =>
+      props.navigation.dispatch(NavigationActions.reset({
+        key: null,
+        index: 0,
+        actions: [
+          NavigationActions.navigate('Main')
+        ]
+      }))
   }
 }
 

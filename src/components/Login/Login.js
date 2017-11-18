@@ -64,6 +64,12 @@ export default class Login extends React.Component {
     NetInfo.isConnected.addEventListener('connectionChange', this.handleConnectivityChange)
   }
 
+  componentDidUpdate (prevProps) {
+    if (!prevProps.loggedIn && this.props.loggedIn) {
+      this.props.leaveLoginScreen()
+    }
+  }
+
   componentWillUnmount () {
     NetInfo.isConnected.removeEventListener('connectionChange', this.handleConnectivityChange)
   }
