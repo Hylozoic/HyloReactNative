@@ -11,7 +11,6 @@ exports[`EditButton matches the last snapshot when isLoading is false 1`] = `
     <Text
       accessible={true}
       allowFontScaling={true}
-      disabled={false}
       ellipsizeMode="tail"
     >
       edit
@@ -25,7 +24,6 @@ exports[`EditButton matches the last snapshot when isLoading is true 1`] = `
   <Text
     accessible={true}
     allowFontScaling={true}
-    disabled={false}
     ellipsizeMode="tail"
   >
     loading
@@ -51,24 +49,26 @@ exports[`MemberBanner matches the last snapshot 1`] = `
       }
     />
   </ImagePicker>
-  <ImagePicker
-    disabled={true}
-    id={1}
-    onChoice={[Function]}
-    onPendingChange={[Function]}
-    title="Change Avatar"
-    type="userAvatar"
-  >
-    <View>
-      <Image
-        source={
-          Object {
-            "uri": "pong.png",
+  <View>
+    <ImagePicker
+      disabled={true}
+      id={1}
+      onChoice={[Function]}
+      onPendingChange={[Function]}
+      title="Change Avatar"
+      type="userAvatar"
+    >
+      <View>
+        <Image
+          source={
+            Object {
+              "uri": "pong.png",
+            }
           }
-        }
-      />
-    </View>
-  </ImagePicker>
+        />
+      </View>
+    </ImagePicker>
+  </View>
 </View>
 `;
 
@@ -148,14 +148,12 @@ exports[`ReadMoreButton matches the last snapshot 1`] = `
 <View>
   <TouchableOpacity
     activeOpacity={0.2}
-    focusedOpacity={0.7}
     onPress={[Function]}
   >
     <View>
       <Text
         accessible={true}
         allowFontScaling={true}
-        disabled={false}
         ellipsizeMode="tail"
       >
         Read More

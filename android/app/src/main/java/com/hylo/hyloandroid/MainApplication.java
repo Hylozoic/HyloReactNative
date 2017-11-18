@@ -4,6 +4,7 @@ import android.app.Application;
 import android.util.Log;
 
 import com.facebook.react.ReactApplication;
+import co.apptailor.googlesignin.RNGoogleSigninPackage;
 import com.reactnativedocumentpicker.ReactNativeDocumentPicker;
 import im.shimo.react.prompt.RNPromptPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
@@ -58,6 +59,11 @@ public class MainApplication extends Application implements ReactApplication {
           new WebViewBridgePackage()
       );
     }
+
+    @Override
+    protected String getJSMainModuleName() {
+      return "index";
+    }
   };
 
   @Override
@@ -68,6 +74,8 @@ public class MainApplication extends Application implements ReactApplication {
   @Override
   public void onCreate() {
     super.onCreate();
+    FacebookSdk.sdkInitialize(getApplicationContext());
+
     SoLoader.init(this, /* native exopackage */ false);
   }
 }

@@ -6,7 +6,6 @@ exports[`InviteExpired matches the last snapshot 1`] = `
     <Text
       accessible={true}
       allowFontScaling={true}
-      disabled={false}
       ellipsizeMode="tail"
     >
       Your invite has expired!
@@ -14,7 +13,6 @@ exports[`InviteExpired matches the last snapshot 1`] = `
     <Text
       accessible={true}
       allowFontScaling={true}
-      disabled={false}
       ellipsizeMode="tail"
     >
       Contact your moderator for another one.
@@ -22,18 +20,20 @@ exports[`InviteExpired matches the last snapshot 1`] = `
   </View>
   <Image
     resizeMode="stretch"
-    source={1}
+    source={
+      Object {
+        "testUri": "../../../src/assets/Axel_Fretting.png",
+      }
+    }
   />
   <View>
     <TouchableOpacity
       activeOpacity={0.2}
-      focusedOpacity={0.7}
       onPress={[Function]}
     >
       <Text
         accessible={true}
         allowFontScaling={true}
-        disabled={false}
         ellipsizeMode="tail"
       >
         Log In

@@ -24,6 +24,7 @@ describe('FeedBanner', () => {
     const renderer = new ReactShallowRenderer()
     renderer.render(<FeedBanner
       all
+      community={{id: 'anything'}}
       newPost={newPost} />)
     const actual = renderer.getRenderOutput()
 

@@ -4,15 +4,17 @@ exports[`Control matches the last snapshot 1`] = `
 <View>
   <View>
     <TextInput
+      allowFontScaling={true}
       editable={true}
       multiline={true}
+      numberOfLines={8}
       onBlur={[Function]}
       onChangeText={undefined}
+      underlineColorAndroid="transparent"
       value="a"
     />
     <TouchableOpacity
       activeOpacity={0.2}
-      focusedOpacity={0.7}
       onPress={[Function]}
     >
       <Icon
@@ -37,7 +39,6 @@ exports[`MemberHeader matches the last snapshot 1`] = `
     <View>
       <TouchableOpacity
         activeOpacity={0.2}
-        focusedOpacity={0.7}
         onPress={undefined}
       >
         <Icon

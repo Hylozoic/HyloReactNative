@@ -3,13 +3,11 @@
 exports[` 1`] = `
 <TouchableOpacity
   activeOpacity={0.2}
-  focusedOpacity={0.7}
   onPress={[Function]}
 >
   <Text
     accessible={true}
     allowFontScaling={true}
-    disabled={false}
     ellipsizeMode="tail"
   >
     anything
@@ -21,7 +19,6 @@ exports[`CommunityRow hides badge when no newPostCount 1`] = `
 <View>
   <TouchableOpacity
     activeOpacity={0.2}
-    focusedOpacity={0.7}
     onPress={[Function]}
   >
     <Image
@@ -34,7 +31,6 @@ exports[`CommunityRow hides badge when no newPostCount 1`] = `
     <Text
       accessible={true}
       allowFontScaling={true}
-      disabled={false}
       ellipsizeMode="tail"
       numberOfLines={1}
     >
@@ -48,7 +44,6 @@ exports[`CommunityRow highlights when matching currentCommunityId 1`] = `
 <View>
   <TouchableOpacity
     activeOpacity={0.2}
-    focusedOpacity={0.7}
     onPress={[Function]}
   >
     <Image
@@ -61,7 +56,6 @@ exports[`CommunityRow highlights when matching currentCommunityId 1`] = `
     <Text
       accessible={true}
       allowFontScaling={true}
-      disabled={false}
       ellipsizeMode="tail"
       numberOfLines={1}
     >
@@ -75,7 +69,6 @@ exports[`CommunityRow matches the last snapshot 1`] = `
 <View>
   <TouchableOpacity
     activeOpacity={0.2}
-    focusedOpacity={0.7}
     onPress={[Function]}
   >
     <Image
@@ -88,7 +81,6 @@ exports[`CommunityRow matches the last snapshot 1`] = `
     <Text
       accessible={true}
       allowFontScaling={true}
-      disabled={false}
       ellipsizeMode="tail"
       numberOfLines={1}
     >
@@ -98,7 +90,6 @@ exports[`CommunityRow matches the last snapshot 1`] = `
       <Text
         accessible={true}
         allowFontScaling={true}
-        disabled={false}
         ellipsizeMode="tail"
       >
         7
@@ -118,7 +109,6 @@ exports[`DrawerMenu matches the last snapshot 1`] = `
     keyExtractor={[Function]}
     maxToRenderPerBatch={10}
     onEndReachedThreshold={2}
-    renderScrollComponent={[Function]}
     renderSectionHeader={[Function]}
     scrollEventThrottle={50}
     sections={
@@ -154,7 +144,6 @@ exports[`DrawerMenu matches the last snapshot 1`] = `
   <View>
     <TouchableOpacity
       activeOpacity={0.2}
-      focusedOpacity={0.7}
       onPress={[Function]}
     >
       <Image
@@ -169,7 +158,6 @@ exports[`DrawerMenu matches the last snapshot 1`] = `
       <Text
         accessible={true}
         allowFontScaling={true}
-        disabled={false}
         ellipsizeMode="tail"
         numberOfLines={1}
       >
@@ -192,7 +180,6 @@ exports[`NetworkRow matches the last snapshot 1`] = `
 <View>
   <TouchableOpacity
     activeOpacity={0.2}
-    focusedOpacity={0.7}
     onPress={[Function]}
   >
     <Image
@@ -205,7 +192,6 @@ exports[`NetworkRow matches the last snapshot 1`] = `
     <Text
       accessible={true}
       allowFontScaling={true}
-      disabled={false}
       ellipsizeMode="tail"
       numberOfLines={1}
     >
@@ -239,16 +225,18 @@ exports[`NetworkRow shows all communities link 1`] = `
 <View>
   <TouchableOpacity
     activeOpacity={0.2}
-    focusedOpacity={0.7}
     onPress={[Function]}
   >
     <Image
-      source={1}
+      source={
+        Object {
+          "testUri": "../../../src/assets/All_Communities2.png",
+        }
+      }
     />
     <Text
       accessible={true}
       allowFontScaling={true}
-      disabled={false}
       ellipsizeMode="tail"
       numberOfLines={1}
     >
@@ -263,7 +251,6 @@ exports[`SectionHeader matches the last snapshot 1`] = `
   <Text
     accessible={true}
     allowFontScaling={true}
-    disabled={false}
     ellipsizeMode="tail"
   >
     NETWORKED COMMUNITIES

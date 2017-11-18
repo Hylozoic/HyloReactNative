@@ -7,7 +7,6 @@ exports[`Comments renders correctly 1`] = `
       <Text
         accessible={true}
         allowFontScaling={true}
-        disabled={false}
         ellipsizeMode="tail"
       >
         Some More Code
@@ -19,7 +18,6 @@ exports[`Comments renders correctly 1`] = `
       <Text
         accessible={true}
         allowFontScaling={true}
-        disabled={false}
         ellipsizeMode="tail"
       >
         Some React Code
@@ -54,7 +52,6 @@ exports[`Comments renders correctly 1`] = `
   numColumns={1}
   onEndReachedThreshold={2}
   renderItem={[Function]}
-  renderScrollComponent={[Function]}
   scrollEventThrottle={50}
   updateCellsBatchingPeriod={50}
   windowSize={21}
@@ -64,12 +61,10 @@ exports[`Comments renders correctly 1`] = `
 exports[`ShowMore renders correctly 1`] = `
 <TouchableOpacity
   activeOpacity={0.2}
-  focusedOpacity={0.7}
 >
   <Text
     accessible={true}
     allowFontScaling={true}
-    disabled={false}
     ellipsizeMode="tail"
     onPress={[Function]}
   >

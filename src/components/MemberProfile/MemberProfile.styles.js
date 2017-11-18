@@ -3,6 +3,7 @@ import {
 } from '../../style/colors'
 
 const screenMargin = 16
+const avatarSize = 112
 
 export default {
   marginContainer: {
@@ -18,9 +19,13 @@ export default {
     right: -10,
     paddingRight: 15
   },
+  avatarW3: {
+    alignItems: 'center'
+  },
   avatarWrapperWrapper: {
     top: -56,
-    marginBottom: -40
+    marginBottom: -40,
+    width: avatarSize
   },
   avatarWrapper: {
     flexDirection: 'row',
@@ -28,9 +33,9 @@ export default {
     position: 'relative'
   },
   avatarImage: {
-    width: 112,
-    height: 112,
-    borderRadius: 56,
+    width: avatarSize,
+    height: avatarSize,
+    borderRadius: avatarSize / 2,
     borderWidth: 3,
     borderColor: 'white'
   },

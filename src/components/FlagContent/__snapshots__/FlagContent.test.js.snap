@@ -16,7 +16,6 @@ exports[`FlagContent calls submit successfully with category:other 1`] = `
           <Text
             accessible={true}
             allowFontScaling={true}
-            disabled={false}
             ellipsizeMode="tail"
           >
             FLAG THIS 
@@ -87,12 +86,11 @@ exports[`FlagContent calls submit successfully with category:other 1`] = `
           onScroll={[Function]}
           onScrollBeginDrag={[Function]}
           onScrollEndDrag={[Function]}
-          onViewableItemsChanged={undefined}
           renderItem={[Function]}
-          renderScrollComponent={[Function]}
           scrollEventThrottle={50}
           stickyHeaderIndices={Array []}
           updateCellsBatchingPeriod={50}
+          viewabilityConfigCallbackPairs={Array []}
           windowSize={21}
         >
           <View>
@@ -121,7 +119,6 @@ exports[`FlagContent calls submit successfully with category:other 1`] = `
                 <Text
                   accessible={true}
                   allowFontScaling={true}
-                  disabled={false}
                   ellipsizeMode="tail"
                 >
                   Inappropriate Content
@@ -153,7 +150,6 @@ exports[`FlagContent calls submit successfully with category:other 1`] = `
                 <Text
                   accessible={true}
                   allowFontScaling={true}
-                  disabled={false}
                   ellipsizeMode="tail"
                 >
                   Spam
@@ -185,7 +181,6 @@ exports[`FlagContent calls submit successfully with category:other 1`] = `
                 <Text
                   accessible={true}
                   allowFontScaling={true}
-                  disabled={false}
                   ellipsizeMode="tail"
                 >
                   Offensive
@@ -217,7 +212,6 @@ exports[`FlagContent calls submit successfully with category:other 1`] = `
                 <Text
                   accessible={true}
                   allowFontScaling={true}
-                  disabled={false}
                   ellipsizeMode="tail"
                 >
                   Illegal
@@ -249,7 +243,6 @@ exports[`FlagContent calls submit successfully with category:other 1`] = `
                 <Text
                   accessible={true}
                   allowFontScaling={true}
-                  disabled={false}
                   ellipsizeMode="tail"
                 >
                   Other
@@ -280,7 +273,6 @@ exports[`FlagContent changes title based on type 1`] = `
           <Text
             accessible={true}
             allowFontScaling={true}
-            disabled={false}
             ellipsizeMode="tail"
           >
             FLAG THIS 
@@ -288,7 +280,6 @@ exports[`FlagContent changes title based on type 1`] = `
           </Text>
           <TouchableOpacity
             activeOpacity={0.2}
-            focusedOpacity={0.7}
             onPress={[Function]}
           >
             <Icon
@@ -329,7 +320,6 @@ exports[`FlagContent changes title based on type 1`] = `
           numColumns={1}
           onEndReachedThreshold={2}
           renderItem={[Function]}
-          renderScrollComponent={[Function]}
           scrollEventThrottle={50}
           updateCellsBatchingPeriod={50}
           windowSize={21}
@@ -356,7 +346,6 @@ exports[`FlagContent matches the last snapshot 1`] = `
           <Text
             accessible={true}
             allowFontScaling={true}
-            disabled={false}
             ellipsizeMode="tail"
           >
             FLAG THIS 
@@ -364,7 +353,6 @@ exports[`FlagContent matches the last snapshot 1`] = `
           </Text>
           <TouchableOpacity
             activeOpacity={0.2}
-            focusedOpacity={0.7}
             onPress={[Function]}
           >
             <Icon
@@ -405,7 +393,6 @@ exports[`FlagContent matches the last snapshot 1`] = `
           numColumns={1}
           onEndReachedThreshold={2}
           renderItem={[Function]}
-          renderScrollComponent={[Function]}
           scrollEventThrottle={50}
           updateCellsBatchingPeriod={50}
           windowSize={21}
