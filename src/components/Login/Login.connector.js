@@ -7,6 +7,7 @@ import {
 import { getPending } from './Login.store'
 import { register as registerOneSignal } from 'util/onesignal'
 import registerDevice from '../../store/actions/registerDevice'
+import fetchCurrentUser from '../../store/actions/fetchCurrentUser'
 import { resetToRoute } from 'util/navigation'
 
 export function mapStateToProps (state, props) {
@@ -27,6 +28,8 @@ export function mapDispatchToProps (dispatch, props) {
   const finishLogin = action => {
     if (action.error) return
     registerOneSignal({registerDevice: id => dispatch(registerDevice(id))})
+    return dispatch(fetchCurrentUser()).then(({ error }) =>
+      !error && resetToRoute(props.navigation, 'Main'))
   }
 
   return {
@@ -35,9 +38,7 @@ export function mapDispatchToProps (dispatch, props) {
     loginWithGoogle: (token) =>
       dispatch(loginWithGoogle(token)).then(finishLogin),
     login: (email, password) =>
-      dispatch(login(email, password)).then(finishLogin),
-    leaveLoginScreen: () =>
-      resetToRoute(props.navigation, 'Main')
+      dispatch(login(email, password)).then(finishLogin)
   }
 }
 

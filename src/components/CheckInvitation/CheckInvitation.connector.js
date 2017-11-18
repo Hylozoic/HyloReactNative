@@ -41,7 +41,7 @@ export function handleCheckInvitation (stateProps, dispatchProps) {
   return checkInvitation(invitationCodes)
   .then(result => {
     const isValidInvite = getInviteValid(result)
-    // NOTE: Not currently clearing the entryURL on a failed check
+    // NOTE: Not currently clearing the entryUrl on a failed check
     // such that join will still be tried upon login. If the invite code
     // is invalid (not just already used) then the user will be forwarded
     // to the community associated with the already claimed invite.

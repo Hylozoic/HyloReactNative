@@ -4,9 +4,9 @@ import fetchCurrentUser, { FETCH_CURRENT_USER } from '../../store/actions/fetchC
 import {
   checkSession,
   CHECK_SESSION,
-  setEntryURL,
-  getEntryURL,
-  resetEntryURL
+  setEntryUrl,
+  getEntryUrl,
+  resetEntryUrl
 } from './SessionCheck.store'
 import { getSignupStep1Complete } from '../SignupFlow/SignupFlow.store'
 import getMe from '../../store/selectors/getMe'
@@ -27,14 +27,14 @@ export function mapStateToProps (state) {
     signupInProgress,
     signupStep1Complete: getSignupStep1Complete(state),
     currentUser,
-    entryURL: getEntryURL(state)
+    entryUrl: getEntryUrl(state)
   }
 }
 
 const mapDispatchToProps = {
   checkSession,
-  setEntryURL,
-  resetEntryURL,
+  setEntryUrl,
+  resetEntryUrl,
   fetchCurrentUser
 }
 

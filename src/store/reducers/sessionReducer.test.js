@@ -36,7 +36,7 @@ describe('on RESET_ENTRY_URL', () => {
     const action = {
       type: RESET_ENTRY_URL
     }
-    expect(sessionReducer(state, action)).toEqual({entryURL: null, hasSignupLink: false})
+    expect(sessionReducer(state, action)).toEqual({entryUrl: null, hasSignupLink: false})
   })
 })
 

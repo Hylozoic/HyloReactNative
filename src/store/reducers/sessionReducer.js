@@ -48,9 +48,9 @@ export default function sessionReducer (state = {}, action) {
       }
       return state
     case SET_ENTRY_URL:
-      return {...state, entryURL: payload}
+      return {...state, entryUrl: payload}
     case RESET_ENTRY_URL:
-      return {...state, entryURL: null, hasSignupLink: false}
+      return {...state, entryUrl: null, hasSignupLink: false}
     case SIGNUP:
       return {...state, loggedIn: true}
     case CHECK_VERSION:

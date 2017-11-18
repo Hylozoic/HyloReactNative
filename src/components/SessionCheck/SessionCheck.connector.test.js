@@ -8,7 +8,7 @@ describe('mapStateToProps', () => {
     const defaultState = {
       session: {
         loggedIn: true,
-        entryURL: 'http://www.hylo.com/a/path'
+        entryUrl: 'http://www.hylo.com/a/path'
       },
       pending: {},
       [SignupFlowStoreKey]: {}

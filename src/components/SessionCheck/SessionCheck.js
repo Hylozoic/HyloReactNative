@@ -9,7 +9,7 @@ export default class SessionCheck extends React.Component {
     loggedIn: PropTypes.bool,
     pending: PropTypes.any,
     currentUser: PropTypes.object,
-    entryURL: PropTypes.string,
+    entryUrl: PropTypes.string,
     checkSession: PropTypes.func.isRequired,
     setEntryURL: PropTypes.func.isRequired,
     resetEntryURL: PropTypes.func.isRequired,
@@ -39,16 +39,6 @@ export default class SessionCheck extends React.Component {
       navigation
     } = this.props
 
-    // if (prevProps.loggedIn === undefined && loggedIn) {
-    //   navigation.navigate('Main')
-    // }
-    //
-    // if (prevProps.loggedIn === undefined && loggedIn === false) {
-    //   navigation.navigate('Login')
-    // }
-
-    // -------
-
     const loadingCompleteEvent = !loading && prevProps.loading
     const entryURLChangeEvent = entryURL !== prevProps.entryURL
     const currentUserLoadedEvent = get('id', currentUser) !== get('id', prevProps.currentUser)
@@ -66,7 +56,7 @@ export default class SessionCheck extends React.Component {
     }
 
     if (entryURL && shouldForwardToEntryURL) {
-      console.log('should forward')
+      console.log('should forward', navigation)
       // this.navigator._handleOpenURL(entryURL)
     }
 
@@ -84,7 +74,7 @@ export default class SessionCheck extends React.Component {
     }
 
     if (!entryURL && prevProps.loggedIn === undefined && loggedIn === false) {
-      navigation.navigate('Login')
+      resetToRoute(navigation, 'Login')
     }
   }
 

@@ -23,12 +23,12 @@ export function checkSession () {
   }
 }
 
-export function setEntryURL (url) {
+export function setEntryUrl (url) {
   return {type: SET_ENTRY_URL, payload: url}
 }
 
-export function resetEntryURL (url) {
+export function resetEntryUrl (url) {
   return {type: RESET_ENTRY_URL}
 }
 
-export const getEntryURL = get('session.entryURL')
+export const getEntryUrl = get('session.entryUrl')
