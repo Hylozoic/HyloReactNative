@@ -7,7 +7,6 @@
 // level navigators.
 
 import React from 'react'
-import PerfMonitor from 'react-native/Libraries/Performance/RCTRenderingPerf'
 import { has } from 'lodash/fp'
 
 const tabNames = ['Home', 'Members', 'Topics']
