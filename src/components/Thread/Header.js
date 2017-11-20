@@ -1,13 +1,13 @@
 import React from 'react'
-import { StyleSheet, Text } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity } from 'react-native'
 
 import { rhino60 } from 'style/colors'
 
 export default function Header (navigation) {
+  const { title, onPressTitle } = navigation.state.params
   return {
     headerTintColor: rhino60,
-    headerTitle: navigation.state.params.title,
-    headerTitleStyle: styles.title
+    headerTitle: <Title title={title} onPress={onPressTitle} />
   }
 }
 
@@ -24,3 +24,9 @@ const styles = StyleSheet.create({
     fontWeight: '200'
   }
 })
+
+export function Title ({ title, onPress }) {
+  return <TouchableOpacity onPress={onPress}>
+    <Text style={styles.title}>{title}</Text>
+  </TouchableOpacity>
+}

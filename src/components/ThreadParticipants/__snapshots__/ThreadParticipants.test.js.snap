@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ParticipantRow matches the last snapshot 1`] = `
+<TouchableOpacity
+  activeOpacity={0.2}
+  onPress={[Function]}
+>
+  <Avatar
+    avatarUrl="foo.png"
+  />
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+  >
+    Bob
+  </Text>
+</TouchableOpacity>
+`;
+
+exports[`ThreadParticipants matches the last snapshot 1`] = `
+<ScrollViewMock
+  contentContainerStyle={
+    Object {
+      "backgroundColor": "white",
+      "flex": 1,
+      "paddingHorizontal": 15,
+      "paddingTop": 12,
+    }
+  }
+>
+  <ParticipantRow
+    goToParticipant={[Function]}
+    participant={
+      Object {
+        "id": 1,
+      }
+    }
+  />
+  <ParticipantRow
+    goToParticipant={[Function]}
+    participant={
+      Object {
+        "id": 2,
+      }
+    }
+  />
+</ScrollViewMock>
+`;
+
+exports[`ThreadParticipants returns loading if no participants 1`] = `
+<View>
+  <Loading />
+</View>
+`;

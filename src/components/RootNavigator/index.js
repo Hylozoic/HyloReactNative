@@ -21,6 +21,7 @@ import tabStyles from '../Tabs/Tabs.styles'
 import NewMessage from '../NewMessage'
 import Thread from '../Thread'
 import ThreadList from '../ThreadList'
+import ThreadParticipants from '../ThreadParticipants'
 import MemberDetails from '../MemberProfile/MemberDetails'
 import MemberSkillEditor from '../MemberProfile/MemberSkillEditor'
 import UserSettings from '../UserSettings'
@@ -65,6 +66,7 @@ export const screensInStack = {
   Thread: {screen: Thread, path: 'thread/:id'},
   NotificationsList: {screen: NotificationsList, path: 'notifications'},
   ThreadList: {screen: ThreadList, path: 'messages'},
+  ThreadParticipants: {screen: ThreadParticipants, path: 'thread/:id/participants'},
   SignupFlow1: {screen: SignupFlow1, path: 'signup/1'},
   SignupFlow2: {screen: SignupFlow2, path: 'signup/2'},
   SignupFlow3: {screen: SignupFlow3, path: 'signup/3'},
