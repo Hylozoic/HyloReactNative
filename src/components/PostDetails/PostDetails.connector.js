@@ -2,7 +2,8 @@ import { connect } from 'react-redux'
 import fetchPost from '../../store/actions/fetchPost'
 import getMe from '../../store/selectors/getMe'
 import { getCommentEdits } from './CommentEditor/CommentEditor.store'
-import getPost from '../../store/selectors/getPost'
+import getPost, { presentPost } from '../../store/selectors/getPost'
+import getCurrentCommunityId from '../../store/selectors/getCurrentCommunityId'
 import { get } from 'lodash/fp'
 import makeGoToCommunity from '../../store/actions/makeGoToCommunity'
 
@@ -12,18 +13,13 @@ function getPostId (state, props) {
 
 export function mapStateToProps (state, props) {
   const id = getPostId(state, props)
-  let post = getPost(state, {id})
   const currentUser = getMe(state, props)
   const commentEdit = getCommentEdits(state, {postId: id})
+  const communityId = getCurrentCommunityId(state, props)
+  let post = presentPost(getPost(state, {id}), communityId)
 
   return {
-    post: {
-      ...post.ref,
-      creator: post.creator,
-      commenters: post.commenters.toModelArray(),
-      communities: post.communities.toModelArray(),
-      fileUrls: post.getFileUrls()
-    },
+    post,
     currentUser,
     commentEdit
   }

@@ -53,6 +53,13 @@ export const postFieldsFragment = `
     position
     type
     url
+  }
+  postMemberships {
+    id
+    pinned
+    community {
+      id
+    }
   }`
 
 export default function fetchPost (id, opts = {}) {

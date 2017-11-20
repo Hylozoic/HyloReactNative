@@ -62,13 +62,7 @@ const getPostResults = makeGetQueryResults(FETCH_POSTS)
 
 export const getPosts = makeQueryResultsModelSelector(
   getPostResults,
-  'Post',
-  post => ({
-    ...post.ref,
-    creator: post.creator,
-    commenters: post.commenters.toModelArray(),
-    communities: post.communities.toModelArray()
-  })
+  'Post'
 )
 
 export const getHasMorePosts = createSelector(getPostResults, get('hasMore'))

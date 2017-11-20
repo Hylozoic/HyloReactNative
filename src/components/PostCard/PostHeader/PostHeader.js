@@ -32,7 +32,8 @@ export default class PostHeader extends PureComponent {
       canFlag,
       goToCommunity,
       removePost,
-      deletePost
+      deletePost,
+      pinned
     } = this.props
 
     const { flaggingVisible } = this.state
@@ -98,6 +99,7 @@ export default class PostHeader extends PureComponent {
 
       </View>
       <View style={styles.upperRight}>
+        {pinned && <Icon name='Pin' style={styles.pinIcon} />}
         {type && <PostLabel type={type} />}
         <PostMenu removePost={removePostWithConfirm} deletePost={deletePostWithConfirm} editPost={editPost} flagPost={flagPost} />
         {flaggingVisible && <FlagContent type='post'
@@ -188,6 +190,11 @@ const styles = {
     paddingRight: 6,
     flexDirection: 'row',
     alignItems: 'flex-start'
+  },
+  pinIcon: {
+    fontSize: 20,
+    color: rhino50,
+    marginRight: 10
   },
   menuIcon: {
     fontSize: 20,

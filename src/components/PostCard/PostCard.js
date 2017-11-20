@@ -55,6 +55,7 @@ export default class PostCard extends React.Component {
         editPost={editPost}
         communities={post.communities}
         slug={slug}
+        pinned={post.pinned}
         postId={post.id}
         showMember={showMember}
         goToCommunity={goToCommunity} />

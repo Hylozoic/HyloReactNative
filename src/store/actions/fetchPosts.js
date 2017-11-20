@@ -96,6 +96,13 @@ posts(
       type
       url
     }
+    postMemberships {
+      id
+      pinned
+      community {
+        id
+      }
+    }
   }
 }`
 

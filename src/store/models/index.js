@@ -18,6 +18,7 @@ import MessageThread from './MessageThread'
 import Network from './Network'
 import Notification from './Notification'
 import Post, { PostFollower, PostCommenter } from './Post'
+import PostMembership from './PostMembership'
 import Skill from './Skill'
 import Topic from './Topic'
 import Vote from './Vote'
@@ -41,6 +42,7 @@ orm.register(
   Post,
   PostFollower,
   PostCommenter,
+  PostMembership,
   Skill,
   Topic,
   Vote

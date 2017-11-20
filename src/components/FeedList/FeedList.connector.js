@@ -10,6 +10,7 @@ import {
 } from './FeedList.store'
 import { ALL_COMMUNITIES_ID } from '../../store/models/Community'
 import { fetchPosts, FETCH_POSTS } from '../../store/actions/fetchPosts'
+import { presentPost } from '../../store/selectors/getPost'
 import resetNewPostCount from '../../store/actions/resetNewPostCount'
 import { get, isNull, isUndefined, omit, omitBy } from 'lodash/fp'
 
@@ -38,7 +39,7 @@ export function mapStateToProps (state, props) {
   const pending = state.pending[FETCH_POSTS]
 
   return {
-    posts: getPosts(state, queryProps),
+    posts: getPosts(state, queryProps).map(p => presentPost(p, get('id', community))),
     sortBy,
     filter,
     hasMore: getHasMorePosts(state, queryProps),
