@@ -27,7 +27,7 @@ export function mapStateToProps (state, props) {
   }
 }
 
-function mapDispatchToProps (dispatch, { navigation }) {
+export function mapDispatchToProps (dispatch, { navigation }) {
   const threadId = navigation.state.params.id
   return {
     createMessage: text => dispatch(createMessage(threadId, sanitize(text))),
@@ -38,7 +38,7 @@ function mapDispatchToProps (dispatch, { navigation }) {
   }
 }
 
-function mergeProps (stateProps, dispatchProps, ownProps) {
+export function mergeProps (stateProps, dispatchProps, ownProps) {
   const { navigation } = ownProps
   const { id, title } = stateProps
   const setNavParams = title

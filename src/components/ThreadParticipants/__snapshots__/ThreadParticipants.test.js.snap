@@ -18,7 +18,7 @@ exports[`ParticipantRow matches the last snapshot 1`] = `
 </TouchableOpacity>
 `;
 
-exports[`Thread matches the last snapshot 1`] = `
+exports[`ThreadParticipants matches the last snapshot 1`] = `
 <ScrollViewMock
   contentContainerStyle={
     Object {
@@ -46,4 +46,10 @@ exports[`Thread matches the last snapshot 1`] = `
     }
   />
 </ScrollViewMock>
+`;
+
+exports[`ThreadParticipants returns loading if no participants 1`] = `
+<View>
+  <Loading />
+</View>
 `;
