@@ -5,6 +5,8 @@ export const DELETE_POST = `${MODULE_NAME}/DELETE_POST`
 export const DELETE_POST_PENDING = DELETE_POST + '_PENDING'
 export const REMOVE_POST = `${MODULE_NAME}/REMOVE_POST`
 export const REMOVE_POST_PENDING = REMOVE_POST + '_PENDING'
+export const PIN_POST = `${MODULE_NAME}/PIN_POST`
+export const PIN_POST_PENDING = `${PIN_POST}_PENDING`
 
 // Action Creators
 export function deletePost (id) {
@@ -45,6 +47,28 @@ export function removePost (postId, slug) {
       optimistic: true,
       postId,
       slug
+    }
+  }
+}
+
+export function pinPost (postId, communityId) {
+  return {
+    type: PIN_POST,
+    graphql: {
+      query: `mutation ($postId: ID, $communityId: ID) {
+        pinPost(postId: $postId, communityId: $communityId) {
+          success
+        }
+      }`,
+      variables: {
+        postId,
+        communityId
+      }
+    },
+    meta: {
+      optimistic: true,
+      postId,
+      communityId
     }
   }
 }

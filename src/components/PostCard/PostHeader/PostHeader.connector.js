@@ -1,10 +1,10 @@
 import { connect } from 'react-redux'
 import getMe from '../../../store/selectors/getMe'
-import getCommunity from '../../../store/selectors/getCommunity'
-import { removePost, deletePost } from './PostHeader.store'
+import getCurrentCommunity from '../../../store/selectors/getCurrentCommunity'
+import { removePost, deletePost, pinPost } from './PostHeader.store'
 
 export function mapStateToProps (state, props) {
-  const community = getCommunity(state, {slug: props.slug})
+  const community = getCurrentCommunity(state, props)
   const currentUser = getMe(state)
   const { creator, editPost } = props
 
@@ -24,23 +24,21 @@ export function mapStateToProps (state, props) {
   }
 }
 
-export function mapDispatchToProps (dispatch) {
-  return {
-    deletePost: (id) => dispatch(deletePost(id)),
-    removePost: (id, slug) => dispatch(removePost(id, slug))
-  }
+export const mapDispatchToProps = {
+  deletePost, removePost, pinPost
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
-  const { canEdit, isCreator, canModerate } = stateProps
+  const { community, canEdit, isCreator, canModerate } = stateProps
   const { postId, slug } = ownProps
-  const { deletePost, removePost } = dispatchProps
+  const { deletePost, removePost, pinPost } = dispatchProps
   return {
     ...ownProps,
     ...stateProps,
     ...dispatchProps,
     deletePost: canEdit ? () => deletePost(postId) : null,
-    removePost: !isCreator && canModerate ? () => removePost(postId, slug) : null
+    removePost: !isCreator && canModerate ? () => removePost(postId, slug) : null,
+    pinPost: canModerate && community ? () => pinPost(postId, community.id) : null
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps, mergeProps)

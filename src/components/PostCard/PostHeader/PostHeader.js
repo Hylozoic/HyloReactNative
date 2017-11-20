@@ -33,7 +33,8 @@ export default class PostHeader extends PureComponent {
       goToCommunity,
       removePost,
       deletePost,
-      pinned
+      pinned,
+      pinPost
     } = this.props
 
     const { flaggingVisible } = this.state
@@ -101,7 +102,13 @@ export default class PostHeader extends PureComponent {
       <View style={styles.upperRight}>
         {pinned && <Icon name='Pin' style={styles.pinIcon} />}
         {type && <PostLabel type={type} />}
-        <PostMenu removePost={removePostWithConfirm} deletePost={deletePostWithConfirm} editPost={editPost} flagPost={flagPost} />
+        <PostMenu
+          removePost={removePostWithConfirm}
+          deletePost={deletePostWithConfirm}
+          editPost={editPost}
+          flagPost={flagPost}
+          pinPost={pinPost}
+          pinned={pinned} />
         {flaggingVisible && <FlagContent type='post'
           linkData={linkData}
           onClose={() => this.setState({flaggingVisible: false})} />
@@ -111,17 +118,19 @@ export default class PostHeader extends PureComponent {
   }
 }
 
-export function PostMenu ({deletePost, editPost, flagPost, removePost}) {
+export function PostMenu ({deletePost, editPost, flagPost, removePost, pinPost, pinned}) {
   // If the function is defined, than it's a valid action
   const flagLabel = 'Flag This Post'
   const deleteLabel = 'Delete This Post'
   const removeLabel = 'Remove Post From Community'
+  const pinLabel = pinned ? 'Unpin' : 'Pin'
 
   const actions = filter(x => x[1], [
     [deleteLabel, deletePost],
     [flagLabel, flagPost],
     [removeLabel, removePost],
-    ['Edit This Post', editPost]
+    ['Edit This Post', editPost],
+    [pinLabel, pinPost]
   ])
 
   if (isEmpty(actions)) return null
