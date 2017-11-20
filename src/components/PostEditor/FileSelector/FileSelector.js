@@ -1,10 +1,11 @@
 import React from 'react'
 import PopupMenuButton from '../../PopupMenuButton'
-import { Text, TouchableOpacity, View } from 'react-native'
+import { Alert, Text, TouchableOpacity, View } from 'react-native'
 import Icon from '../../Icon'
 import { DocumentPicker, DocumentPickerUtil } from 'react-native-document-picker'
 import styles from './FileSelector.styles'
 import { cleanName } from '../../../store/models/Attachment'
+import { partial } from 'lodash'
 
 export default class FileSelector extends React.PureComponent {
   static defaultProps = {fileUrls: []}
@@ -16,7 +17,14 @@ export default class FileSelector extends React.PureComponent {
     DocumentPicker.show({
       filetype: [DocumentPickerUtil.allFiles()]
     }, (err, result) => {
-      if (err) return onError(err.message)
+      if (err) {
+        if (onError) {
+          onError(err.message)
+        } else {
+          showAlert(err.message)
+        }
+        return
+      }
 
       const file = {
         uri: result.uri,
@@ -25,12 +33,16 @@ export default class FileSelector extends React.PureComponent {
       }
 
       return upload(type, id, file)
-      .then(({ payload, error }) => {
+      .then(({ payload: { url, message }, error }) => {
         this.setState({pending: false})
         if (error) {
-          onError && onError(payload.message)
+          if (onError) {
+            onError(message)
+          } else {
+            showAlert(message)
+          }
         } else {
-          this.props.onAdd({local: result.uri, remote: payload.url})
+          this.props.onAdd({local: result.uri, remote: url})
         }
       })
     })
@@ -51,6 +63,8 @@ export default class FileSelector extends React.PureComponent {
     </View>
   }
 }
+
+const showAlert = partial(Alert.alert, 'Could not add file')
 
 function renderFileButton (url, buttonIndex, onRemove) {
   return <PopupMenuButton
