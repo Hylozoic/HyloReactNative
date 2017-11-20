@@ -5,7 +5,7 @@ const getPost = ormCreateSelector(
   state => state,
   state => orm.session(state.orm),
   (state, props) => props.id,
-  (state, { Post }, id) => Post.hasId(id) && Post.withId(id)
+  (state, { Post }, id) => Post.safeGet({id})
 )
 
 export default getPost
@@ -22,8 +22,8 @@ export const presentPost = (post, communityId) => {
     commenters: post.commenters.toModelArray(),
     communities: post.communities.toModelArray(),
     fileAttachments: post.attachments.filter(a => a.type === 'file').toModelArray(),
-    fileUrls: post.getFileUrls,
-    imageUrls: post.getImageUrls,
+    fileUrls: post.getFileUrls(),
+    imageUrls: post.getImageUrls(),
     pinned
   }
 }
