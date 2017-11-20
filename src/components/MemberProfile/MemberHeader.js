@@ -25,6 +25,7 @@ export default function MemberHeader ({
       <Control
         style={styles.name}
         value={name}
+        placeholder='Name'
         editable={editable}
         onChangeText={updateSetting('name')}
         error={errors.name} />
@@ -38,11 +39,13 @@ export default function MemberHeader ({
     <Control
       style={styles.location}
       value={location}
+      placeholder='Location'
       editable={editable}
       onChangeText={updateSetting('location')} />
     <Control
       style={styles.tagline}
       value={tagline}
+      placeholder='Short Description'
       editable={editable}
       onChangeText={updateSetting('tagline')} />
   </View>
@@ -54,7 +57,7 @@ export class Control extends React.Component {
   }
 
   render () {
-    const { value, onChangeText, editable = false, style, onBlur, multiline, hideEditIcon, error } = this.props
+    const { value, onChangeText, editable = false, style, onBlur, multiline, hideEditIcon, error, placeholder } = this.props
     return <View style={[styles.control, editable && styles.editableControl]}>
       <View style={styles.controlInputRow}>
         {editable || !multiline
@@ -65,6 +68,7 @@ export class Control extends React.Component {
             onChangeText={onChangeText}
             editable={editable}
             onBlur={onBlur}
+            placeholder={placeholder}
             multiline={multiline}
             numberOfLines={multiline ? 8 : 1}
             underlineColorAndroid='transparent' />
