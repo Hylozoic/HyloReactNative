@@ -48,6 +48,27 @@ describe('handles lastMessageCreator correctly', () => {
     ]
     expect(lastMessageCreator(message, currentUser, participants)).toBe(name)
   })
+  it('handles when there are 2 participants and a different user created the message', () => {
+    const currentUser = {
+      id: 1
+    }
+    const message = {
+      '_fields': {
+        creator: 2
+      }
+    }
+    const participants = [
+      {
+        id: 2,
+        name: 'name1'
+      },
+      {
+        id: 2,
+        name: 'name2'
+      }
+    ]
+    expect(lastMessageCreator(message, currentUser, participants)).toBe('')
+  })
 })
 
 describe('handles ThreadAvatars correctly', () => {
