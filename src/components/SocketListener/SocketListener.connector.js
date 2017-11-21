@@ -13,11 +13,11 @@ import {
   addUserTyping,
   clearUserTyping
 } from '../PeopleTyping/PeopleTyping.store'
-import getCommunity from '../../store/selectors/getCommunity'
+import getCurrentCommunity from '../../store/selectors/getCurrentCommunity'
 
 export function mapStateToProps (state, props) {
   return {
-    community: getCommunity(state, {id: state.currentCommunity})
+    community: getCurrentCommunity(state, props)
   }
 }
 

@@ -27,7 +27,7 @@ test('goToCommunityFromRoot', () => {
 describe('mapStateToProps', () => {
   it('gets props from navigation object', () => {
     const currentUserPOJO = {name: 'me'}
-    session.Me.create(currentUserPOJO)
+    const currentUser = session.Me.create(currentUserPOJO)
     const testProps = {
       navigation: {
         state: {
@@ -49,8 +49,7 @@ describe('mapStateToProps', () => {
       }
     }
     expect(mapStateToProps(testState, testProps)).toEqual({
-      currentUser: expect.objectContaining(currentUserPOJO),
-      currentCommunityId: testState.currentCommunity,
+      currentUser,
       invitationCodes: {
         invitationToken: testProps.navigation.state.params.token,
         accessCode: testProps.navigation.state.params.accessCode
@@ -95,7 +94,8 @@ describe('handleJoinCommunity', () => {
     }
     const dispatchProps = {
       useInvitation: jest.fn(() => Promise.resolve(result)),
-      goToCommunity: jest.fn()
+      goToCommunity: jest.fn(),
+      dispatch: jest.fn()
     }
     return handleJoinCommunity(stateProps, dispatchProps)
     .then(result => {
@@ -108,11 +108,13 @@ describe('handleJoinCommunity', () => {
     const result = {}
     const dispatchProps = {
       useInvitation: jest.fn(() => Promise.resolve(result)),
-      goToCommunity: jest.fn()
+      goToCommunity: jest.fn(),
+      goToHome: jest.fn(),
+      dispatch: jest.fn()
     }
     return handleJoinCommunity(stateProps, dispatchProps)
     .then(result => {
-      expect(dispatchProps.goToCommunity).toHaveBeenCalledWith(currentCommunityId)
+      expect(dispatchProps.goToHome).toHaveBeenCalled()
       return expect(dispatchProps.useInvitation).toHaveBeenCalled(result)
     })
   })

@@ -1,12 +1,14 @@
 import { connect } from 'react-redux'
 import getMe from '../../../store/selectors/getMe'
-import { get } from 'lodash/fp'
+import getCurrentCommunityId from '../../../store/selectors/getCurrentCommunityId'
+import getCurrentNetworkId from '../../../store/selectors/getCurrentNetworkId'
 
 export function mapStateToProps (state, props) {
-  const currentUser = getMe(state, props)
-  const communityId = state.currentCommunity ||
-    (currentUser && get('id', currentUser.lastViewedCommunity()))
-  return {currentUser, communityId}
+  return {
+    currentUser: getMe(state, props),
+    communityId: getCurrentCommunityId(state, props),
+    networkId: getCurrentNetworkId(state, props)
+  }
 }
 
 export default connect(mapStateToProps)

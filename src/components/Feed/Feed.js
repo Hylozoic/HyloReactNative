@@ -25,6 +25,7 @@ export default class Feed extends Component {
   render () {
     const {
       community,
+      network,
       currentUser,
       newPost,
       showPost,
@@ -37,10 +38,10 @@ export default class Feed extends Component {
       topicSubscribed,
       toggleTopicSubscribe
     } = this.props
-
     return <View style={styles.container}>
       <FeedList
         community={community}
+        network={network}
         showPost={showPost}
         editPost={editPost}
         showMember={showMember}
@@ -52,6 +53,7 @@ export default class Feed extends Component {
         header={
           <FeedBanner
             community={community}
+            network={network}
             currentUser={currentUser}
             all={!community}
             newPost={newPost}

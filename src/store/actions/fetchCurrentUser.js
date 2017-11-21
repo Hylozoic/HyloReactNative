@@ -29,6 +29,7 @@ export default function fetchCurrentUser () {
               network {
                 id
                 name
+                slug
                 avatarUrl
               }
             }

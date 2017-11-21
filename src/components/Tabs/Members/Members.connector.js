@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import getMe from '../../../store/selectors/getMe'
 import { FETCH_MEMBERS, getHasMoreMembers, fetchMembers, getSort, setSort, getSearch, setSearch, getMembers } from './Members.store'
-import getCommunity from '../../../store/selectors/getCommunity'
+import getCurrentCommunity from '../../../store/selectors/getCurrentCommunity'
 import { ALL_COMMUNITIES_ID } from '../../../store/models/Community'
 import { omit, get } from 'lodash/fp'
 
@@ -16,9 +16,7 @@ function makeFetchOpts (props) {
 
 export function mapStateToProps (state, props) {
   const currentUser = getMe(state, props)
-  const communityId = state.currentCommunity ||
-    (currentUser && get('id', currentUser.lastViewedCommunity()))
-  const community = getCommunity(state, {id: communityId})
+  const community = getCurrentCommunity(state, props)
   const slug = community && community.slug
 
   const search = getSearch(state)
@@ -26,8 +24,7 @@ export function mapStateToProps (state, props) {
 
   return {
     currentUser,
-    communityId,
-    community,
+    community: getCurrentCommunity(state, props),
     slug,
     search,
     sortBy,

@@ -2,7 +2,8 @@ import { get } from 'lodash/fp'
 import { FETCH_COMMENTS } from '../../components/Comments/Comments.store'
 export const FETCH_POST = `FETCH_POST`
 
-export const postFieldsFragment = `
+export function getPostFieldsFragment (withComments = true) {
+  return `
   id
   title
   details
@@ -12,6 +13,7 @@ export const postFieldsFragment = `
     id
     name
     avatarUrl
+    tagline
   }
   createdAt
   updatedAt
@@ -22,7 +24,7 @@ export const postFieldsFragment = `
   }
   commentersTotal
   commentsTotal
-  comments(first: 10, order: "desc") {
+  ${withComments ? `comments(first: 10, order: "desc") {
     items {
       id
       text
@@ -35,7 +37,7 @@ export const postFieldsFragment = `
     }
     total
     hasMore
-  }
+  }` : ''}
   linkPreview {
     title
     url
@@ -54,6 +56,7 @@ export const postFieldsFragment = `
     type
     url
   }`
+}
 
 export default function fetchPost (id, opts = {}) {
   return {
@@ -61,7 +64,7 @@ export default function fetchPost (id, opts = {}) {
     graphql: {
       query: `query ($id: ID) {
         post(id: $id) {
-          ${postFieldsFragment}
+          ${getPostFieldsFragment(true)}
         }
       }`,
       variables: {
