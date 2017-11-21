@@ -64,6 +64,7 @@ Object {
     id
     name
     avatarUrl
+    tagline
   }
   createdAt
   updatedAt
@@ -129,7 +130,7 @@ Object {
     Array [
       Object {
         "payload": undefined,
-        "type": "CHANGE_COMMUNITY",
+        "type": "SELECT_COMMUNITY",
       },
     ],
   ],

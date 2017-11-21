@@ -4,17 +4,17 @@ import { omit, get } from 'lodash/fp'
 import { ALL_COMMUNITIES_ID } from '../../../store/models/Community'
 import {
   FETCH_MEMBERS,
-  getHasMoreMembers,
   fetchMembers,
-  getSort,
-  setSort,
+  getHasMoreMembers,
+  getMembers,
   getSearch,
+  getSort,
   setSearch,
-  getMembers
+  setSort
 } from './Members.store'
 import getMe from '../../../store/selectors/getMe'
-import getCommunity from '../../../store/selectors/getCommunity'
 import { mapWhenFocused, mergeWhenFocused } from 'util/connector'
+import getCurrentCommunity from '../../../store/selectors/getCurrentCommunity'
 
 function makeFetchOpts (props) {
   const { community } = props
@@ -28,9 +28,7 @@ function makeFetchOpts (props) {
 
 export function mapStateToProps (state, props) {
   const currentUser = getMe(state, props)
-  const communityId = state.currentCommunity ||
-    (currentUser && get('id', currentUser.lastViewedCommunity()))
-  const community = getCommunity(state, {id: communityId})
+  const community = getCurrentCommunity(state, props)
   const slug = community && community.slug
 
   const search = getSearch(state)
@@ -38,8 +36,7 @@ export function mapStateToProps (state, props) {
 
   return {
     currentUser,
-    communityId,
-    community,
+    community: getCurrentCommunity(state, props),
     hasMore: getHasMoreMembers(state, {slug, search, sortBy}),
     members: getMembers(state, {slug, search, sortBy}),
     pending: state.pending[FETCH_MEMBERS],

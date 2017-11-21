@@ -5,7 +5,7 @@ import PostCard from '../PostCard'
 import Loading from '../Loading'
 import Icon from '../Icon'
 import PopupMenuButton from '../PopupMenuButton'
-import { find, get, isEmpty } from 'lodash/fp'
+import { find, get, isEmpty, filter } from 'lodash/fp'
 
 export default class FeedList extends Component {
   fetchOrShowCached () {
@@ -29,14 +29,13 @@ export default class FeedList extends Component {
     if (this.props.screenProps.currentTabName !== 'Home') {
       return
     }
-
     if (!prevProps || prevProps.screenProps.currentTabName !== 'Home') {
       return this.fetchOrShowCached()
     }
-
     if (prevProps.sortBy !== this.props.sortBy ||
         prevProps.filter !== this.props.filter ||
-        get('id', prevProps.community) !== get('id', this.props.community)) {
+        get('id', prevProps.community) !== get('id', this.props.community) ||
+        get('id', prevProps.network) !== get('id', this.props.network)) {
       this.fetchOrShowCached()
     }
   }
@@ -48,7 +47,8 @@ export default class FeedList extends Component {
   render () {
     const {
       posts,
-      filter,
+      networkId,
+      filter: listFilter,
       sortBy,
       setFilter,
       setSort,
@@ -61,11 +61,10 @@ export default class FeedList extends Component {
       showCommunities,
       goToCommunity
     } = this.props
-
     const listHeaderComponent = <View>
       {header}
       <ListControls
-        filter={filter}
+        filter={listFilter}
         sortBy={sortBy}
         setFilter={setFilter}
         setSort={setSort}
@@ -88,7 +87,8 @@ export default class FeedList extends Component {
             showMember={showMember}
             showTopic={showTopic}
             showCommunity={showCommunities}
-            goToCommunity={goToCommunity} />}
+            goToCommunity={goToCommunity}
+            selectedNetworkId={networkId} />}
         onRefresh={this.props.refreshPosts}
         refreshing={!!this.props.pendingRefresh}
         keyExtractor={(item, index) => item.id}
@@ -116,9 +116,9 @@ const optionText = (id, options) => {
   return option.label
 }
 
-export function ListControls ({ filter, sortBy, setFilter, setSort }) {
+export function ListControls ({ filter: listFilter, sortBy, setFilter, setSort }) {
   return <View style={styles.listControls}>
-    <ListControl selected={filter} onChange={setFilter} options={filterOptions} />
+    <ListControl selected={listFilter} onChange={setFilter} options={filterOptions} />
     <ListControl selected={sortBy} onChange={setSort} options={sortOptions} />
   </View>
 }
@@ -138,13 +138,26 @@ export function ListControl ({ selected, options, onChange }) {
 }
 
 export function PostRow ({
-  post, showPost, editPost, showMember, showTopic, showCommunity, goToCommunity
+  post, showPost, editPost, showMember, showTopic,
+  showCommunity, goToCommunity, selectedNetworkId
 }) {
+  // TODO: Move to Post model instance method...
+  // When a network is selected only show communities
+  // in the that network in the header
+  var filteredPost = post
+  if (selectedNetworkId) {
+    filteredPost = {
+      ...post,
+      communities: filter(
+        community => get('network.id', community) === selectedNetworkId,
+        post.communities
+      )
+    }
+  }
   return <View style={styles.postRow}>
     <TouchableWithoutFeedback onPress={() => showPost(post.id)}>
       <View>
-        <PostCard
-          post={post}
+        <PostCard post={filteredPost}
           editPost={() => editPost(post.id)}
           showMember={showMember}
           showTopic={showTopic}

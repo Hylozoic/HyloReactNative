@@ -29,6 +29,7 @@ export default class Feed extends Component {
   render () {
     const {
       community,
+      network,
       currentUser,
       editPost,
       goToCommunity,
@@ -42,15 +43,17 @@ export default class Feed extends Component {
       topicName,
       topicSubscribed
     } = this.props
-
     return <View style={styles.container}>
       <FeedList
         community={community}
+        network={network}
+        showPost={showPost}
         editPost={editPost}
         goToCommunity={goToCommunity}
         header={
           <FeedBanner
             community={community}
+            network={network}
             currentUser={currentUser}
             all={!community}
             newPost={newPost}

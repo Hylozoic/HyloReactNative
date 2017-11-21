@@ -23,6 +23,7 @@ exports[`renders correctly 1`] = `
             "id": "2",
           }
         }
+        network={undefined}
         newPost={[Function]}
         toggleTopicSubscribe={undefined}
         topicName="amazing"
@@ -30,6 +31,7 @@ exports[`renders correctly 1`] = `
       />
     }
     navigation={Object {}}
+    network={undefined}
     screenProps={undefined}
     showCommunities={false}
     showMember={undefined}

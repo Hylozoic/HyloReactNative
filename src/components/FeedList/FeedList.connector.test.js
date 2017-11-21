@@ -64,6 +64,26 @@ describe('mapStateToProps', () => {
     })
   })
 
+  it('returns posts for a network ', () => {
+    expect(mapStateToProps(state, {community: {slug: 'foo'}})).toEqual({
+      posts: [
+        expect.objectContaining({id: '1'}),
+        expect.objectContaining({id: '3'}),
+        expect.objectContaining({id: '2'})
+      ],
+      hasMore: true,
+      pending: false,
+      pendingRefresh: false,
+      filter: defaultState.filter,
+      sortBy: defaultState.sortBy,
+      queryProps: {
+        subject: 'community',
+        slug: 'foo',
+        sortBy: 'updated'
+      }
+    })
+  })
+
   it('checks if FETCH_POSTS is pending', () => {
     state = {
       ...state,
@@ -102,34 +122,35 @@ describe('mergeProps', () => {
       }, undefined)
       expect(dispatchProps.resetNewPostCount).toHaveBeenCalledWith(ownProps.community.id, 'Membership')
     })
-    it('sets up fetchPostsAndResetCount without calling resetNewPostCount', () => {
-      const stateProps = {
-        queryProps: {
-          subject: 'community',
-          sortBy: defaultSortBy,
-          filter: 'some filter'
-        }
-      }
+  })
 
-      const dispatchProps = {
-        resetNewPostCount: jest.fn(),
-        fetchPosts: jest.fn()
+  it('sets up fetchPostsAndResetCount without calling resetNewPostCount', () => {
+    const stateProps = {
+      queryProps: {
+        subject: 'community',
+        sortBy: defaultSortBy,
+        filter: 'some filter'
       }
+    }
 
-      const ownProps = {
-        community: {
-          id: 1
-        }
+    const dispatchProps = {
+      resetNewPostCount: jest.fn(),
+      fetchPosts: jest.fn()
+    }
+
+    const ownProps = {
+      community: {
+        id: 1
       }
+    }
 
-      const merged = mergeProps(stateProps, dispatchProps, ownProps)
-      return merged.fetchPosts()
-      .then(() => {
-        expect(dispatchProps.fetchPosts).toHaveBeenCalledWith({
-          sortBy: 'updated', subject: 'community', filter: 'some filter'
-        }, undefined)
-        expect(dispatchProps.resetNewPostCount).not.toHaveBeenCalled()
-      })
+    const merged = mergeProps(stateProps, dispatchProps, ownProps)
+    return merged.fetchPosts()
+    .then(() => {
+      expect(dispatchProps.fetchPosts).toHaveBeenCalledWith({
+        sortBy: 'updated', subject: 'community', filter: 'some filter'
+      }, undefined)
+      expect(dispatchProps.resetNewPostCount).not.toHaveBeenCalled()
     })
   })
 
