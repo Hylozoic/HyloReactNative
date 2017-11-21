@@ -15,6 +15,7 @@ describe('Thread', () => {
       currentUserId: '1',
       fetchMessages: () => {},
       isConnected: true,
+      setNavParams: () => {},
 
       // Remember: _descending_ order, new to old...
       messages: [
