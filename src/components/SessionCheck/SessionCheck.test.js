@@ -2,7 +2,7 @@ import 'react-native'
 import React from 'react'
 import ReactTestRenderer from 'react-test-renderer'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
-import SessionCheck, { INTERNAL_ROUTE_URI_PREFIX } from './SessionCheck'
+import SessionCheck from './SessionCheck'
 
 jest.mock('../RootNavigator', () => 'RootNavigator')
 jest.mock('../LoginNavigator', () => 'LoginNavigator')
@@ -200,17 +200,5 @@ describe('SessionCheck component', () => {
         expect.objectContaining({routeName: 'SignupFlow2'})
       )
     })
-  })
-
-  test('_handleSetEntryURL', () => {
-    const testProps = testPropsSetup({
-      setEntryUrl: jest.fn()
-    })
-    const instance = ReactTestRenderer.create(<SessionCheck {...testProps} />).getInstance()
-    const path = 'any/path'
-    const linkingURL = `anything://ANYTHING.AT.ALL/${path}`
-    const internalURL = `${INTERNAL_ROUTE_URI_PREFIX}${path}`
-    instance._handleSetEntryURL(linkingURL)
-    expect(testProps.setEntryUrl).toHaveBeenCalledWith(internalURL)
   })
 })

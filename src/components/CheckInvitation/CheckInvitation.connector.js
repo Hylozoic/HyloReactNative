@@ -1,8 +1,8 @@
 import { connect } from 'react-redux'
 import { get } from 'lodash/fp'
-import { NavigationActions } from 'react-navigation'
 import { checkInvitation } from './CheckInvitation.store'
 import getNavigationParam from '../../store/selectors/getNavigationParam'
+import { resetToRoute } from 'util/navigation'
 
 export function mapStateToProps (state, props) {
   const { navigation } = props
@@ -12,26 +12,12 @@ export function mapStateToProps (state, props) {
         getNavigationParam('invitationToken', state, props),
       accessCode: getNavigationParam('accessCode', state, props)
     },
-    navToSignup: () =>
-      navigation.dispatch(createResetGoToNavAction('Signup')),
-    navToInviteExpired: () =>
-      navigation.dispatch(createResetGoToNavAction('InviteExpired'))
+    navToSignup: () => resetToRoute(navigation, 'Signup'),
+    navToInviteExpired: () => resetToRoute(navigation, 'InviteExpired')
   }
 }
 
-export const mapDispatchToProps = {
-  checkInvitation
-}
-
-export function createResetGoToNavAction (routeName) {
-  return NavigationActions.reset({
-    key: null,
-    index: 0,
-    actions: [
-      NavigationActions.navigate({routeName})
-    ]
-  })
-}
+export const mapDispatchToProps = {checkInvitation}
 
 export function handleCheckInvitation (stateProps, dispatchProps) {
   const { invitationCodes, navToSignup, navToInviteExpired } = stateProps
@@ -59,11 +45,9 @@ export function handleCheckInvitation (stateProps, dispatchProps) {
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
   return {
-    ...stateProps,
-    ...dispatchProps,
     ...ownProps,
-    checkInvitation: () =>
-      handleCheckInvitation(stateProps, dispatchProps)
+    ...stateProps,
+    checkInvitation: () => handleCheckInvitation(stateProps, dispatchProps)
   }
 }
 

@@ -1,3 +1,5 @@
 import component from './Login'
 import connector from './Login.connector'
-export default connector(component)
+import redirectsAfterLogin from '../redirectsAfterLogin'
+
+export default redirectsAfterLogin(connector(component))

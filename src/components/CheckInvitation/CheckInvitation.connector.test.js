@@ -1,7 +1,6 @@
 import {
   mapStateToProps,
   mapDispatchToProps,
-  createResetGoToNavAction,
   handleCheckInvitation,
   mergeProps
 } from './CheckInvitation.connector'
@@ -26,11 +25,6 @@ test('mapStateToProps matches the latest snapshot', () => {
 test('mapDispatchToProps matches the last snapshot', () =>
   expect(mapDispatchToProps).toMatchSnapshot()
 )
-
-test('createResetGoToNavAction matches the last snapshot', () => {
-  const result = createResetGoToNavAction('anyroute')
-  expect(result).toMatchSnapshot()
-})
 
 describe('handleCheckInvitation', () => {
   const checkInvitationResponse = (valid) => ({

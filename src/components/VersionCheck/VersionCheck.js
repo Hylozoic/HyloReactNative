@@ -1,6 +1,5 @@
 import React from 'react'
 import { Alert, Linking } from 'react-native'
-import Loading from '../Loading'
 
 export default class VersionCheck extends React.PureComponent {
   state = {}
@@ -34,10 +33,8 @@ export default class VersionCheck extends React.PureComponent {
   }
 
   render () {
-    const { updateType, pending } = this.props
-    if (pending || !this.state.checked) return <Loading style={{flex: 1}} />
-    updateType && this.showAlert(updateType)
-
-    return this.props.children
+    const { updateType } = this.props
+    if (updateType) this.showAlert(updateType)
+    return null
   }
 }

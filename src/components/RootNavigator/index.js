@@ -46,14 +46,14 @@ const tabs = {
 
 // Screens that can be shown in any tab (the same tab icon stays highlighted)
 const screensInTabs = {
-  Feed: {screen: Feed, path: 'feed'},
-  PostEditor: {screen: PostEditor, path: 'post/:id/edit'},
-  DetailsEditor: {screen: DetailsEditor, path: 'details/:id/edit'},
-  PostDetails: {screen: PostDetails, path: 'post/:id'},
-  MemberProfile: {screen: MemberProfile, path: 'people/:id'},
-  MemberDetails: {screen: MemberDetails, path: 'people/:id/details'},
-  MemberSkillEditor: {screen: MemberSkillEditor, path: 'people/:id/skills'},
-  CommentEditor: {screen: CommentEditor, path: 'comment/:postId/new'},
+  Feed: {screen: Feed},
+  PostEditor: {screen: PostEditor},
+  DetailsEditor: {screen: DetailsEditor},
+  PostDetails: {screen: PostDetails, path: '/post/:id'},
+  MemberProfile: {screen: MemberProfile, path: '/people/:id'},
+  MemberDetails: {screen: MemberDetails},
+  MemberSkillEditor: {screen: MemberSkillEditor},
+  CommentEditor: {screen: CommentEditor},
   NewMessage: {screen: NewMessage}
 }
 
@@ -97,47 +97,34 @@ const DrawerAndTabsNavigator = DrawerNavigator(
 
 // Screens that appear outside of tabs: Settings, Messages, etc.
 const screensInStack = {
-  UserSettings: {screen: UserSettings, path: 'settings'},
-  JoinCommunity: {screen: JoinCommunity, path: 'h/use-invitation'},
-  JoinCommunityAccessCode: {screen: JoinCommunity, path: 'c/:slug/join/:accessCode'},
-  Thread: {screen: Thread, path: 'thread/:id'},
-  NotificationsList: {screen: NotificationsList, path: 'notifications'},
-  ThreadList: {screen: ThreadList, path: 'messages'},
-  Login: {
-    screen: Login,
-    path: 'login'
-  },
-  CheckInvitation: {
-    screen: CheckInvitation,
-    path: 'h/use-invitation'
-  },
-  CheckInvitationAccessCode: {
-    screen: CheckInvitation,
-    path: 'c/:slug/join/:accessCode'
-  },
-  InviteExpired: {
-    screen: InviteExpired,
-    path: 'invite-expired'
-  },
-  Signup: {
-    screen: Signup,
-    path: 'signup'
-  },
-  SignupFlow1: {screen: SignupFlow1, path: 'signup/1'},
-  SignupFlow2: {screen: SignupFlow2, path: 'signup/2'},
-  SignupFlow3: {screen: SignupFlow3, path: 'signup/3'},
-  SignupFlow4: {screen: SignupFlow4, path: 'signup/4'},
-  SignupFlow5: {screen: SignupFlow5, path: 'signup/5'},
-  SessionCheck: {
-    screen: SessionCheck,
-    navigationOptions: {header: null}
-  }
+  UserSettings: {screen: UserSettings},
+  NotificationsList: {screen: NotificationsList},
+  ThreadList: {screen: ThreadList},
+  SessionCheck: {screen: SessionCheck},
+  InviteExpired: {screen: InviteExpired},
+  Signup: {screen: Signup},
+  SignupFlow1: {screen: SignupFlow1},
+  SignupFlow2: {screen: SignupFlow2},
+  SignupFlow3: {screen: SignupFlow3},
+  SignupFlow4: {screen: SignupFlow4},
+  SignupFlow5: {screen: SignupFlow5},
+  Login: {screen: Login, path: '/login'},
+  Thread: {screen: Thread, path: '/thread/:id'},
+
+  // these happen when you're not logged in yet
+  CheckInvitation: {screen: CheckInvitation, path: '/checkInvitation/:token'},
+  CheckAccessCode: {screen: CheckInvitation, path: '/checkAccessCode/:slug/:accessCode'},
+
+  // these happen when you're logged in
+  UseInvitation: {screen: JoinCommunity, path: '/useInvitation/:token'},
+  UseAccessCode: {screen: JoinCommunity, path: '/useAccessCode/:slug/:accessCode'}
 }
 
 const RootNavigator = StackNavigator(
   {
     Main: {
       screen: DrawerAndTabsNavigator,
+      path: '/main',
       navigationOptions: {header: null}
     },
     ...screensInStack

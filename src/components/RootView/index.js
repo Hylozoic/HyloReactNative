@@ -1,14 +1,13 @@
 import React from 'react'
-import Loading from '../Loading'
 import { View } from 'react-native'
-import RootNavigator from '../RootNavigator'
+import { LoadingScreen } from '../Loading'
 import VersionCheck from '../VersionCheck'
 import LoadingModal from '../LoadingModal'
-import EntryLinkHandler from '../EntryLinkHandler'
 import { Provider } from 'react-redux'
 import getStore from '../../store'
 import { init as initOneSignal } from 'util/onesignal'
 import receivePushNotification from '../../store/actions/receivePushNotification'
+import NavigationContext from '../redirectsAfterLogin/NavigationContext'
 
 export default class RootView extends React.Component {
   state = {}
@@ -28,13 +27,11 @@ export default class RootView extends React.Component {
     return this.state.store
       ? <Provider store={this.state.store}>
         <View style={{flex: 1}}>
+          <VersionCheck />
           <LoadingModal />
-          <VersionCheck>
-            <RootNavigator />
-          </VersionCheck>
-          <EntryLinkHandler />
+          <NavigationContext />
         </View>
       </Provider>
-      : <Loading style={{flex: 1}} />
+      : <LoadingScreen />
   }
 }

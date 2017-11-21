@@ -7,8 +7,6 @@ import {
 import { getPending } from './Login.store'
 import { register as registerOneSignal } from 'util/onesignal'
 import registerDevice from '../../store/actions/registerDevice'
-import fetchCurrentUser from '../../store/actions/fetchCurrentUser'
-import { resetToRoute } from 'util/navigation'
 
 export function mapStateToProps (state, props) {
   const error = state.session.loginError
@@ -24,22 +22,38 @@ export function mapStateToProps (state, props) {
   }
 }
 
-export function mapDispatchToProps (dispatch, props) {
+const mapDispatchToProps = {
+  registerDevice,
+  loginWithFacebook,
+  loginWithGoogle,
+  login
+}
+
+function mergeProps (stateProps, dispatchProps, ownProps) {
+  const {
+    registerDevice,
+    loginWithGoogle,
+    loginWithFacebook,
+    login
+  } = dispatchProps
+
   const finishLogin = action => {
     if (action.error) return
-    registerOneSignal({registerDevice: id => dispatch(registerDevice(id))})
-    return dispatch(fetchCurrentUser()).then(({ error }) =>
-      !error && resetToRoute(props.navigation, 'Main'))
+    registerOneSignal({registerDevice})
+
+    return ownProps.fetchCurrentUserAndRedirect()
   }
 
   return {
+    ...ownProps,
+    ...stateProps,
     loginWithFacebook: (token) =>
-      dispatch(loginWithFacebook(token)).then(finishLogin),
+      loginWithFacebook(token).then(finishLogin),
     loginWithGoogle: (token) =>
-      dispatch(loginWithGoogle(token)).then(finishLogin),
+      loginWithGoogle(token).then(finishLogin),
     login: (email, password) =>
-      dispatch(login(email, password)).then(finishLogin)
+      login(email, password).then(finishLogin)
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps)

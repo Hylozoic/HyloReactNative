@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import mixins from '../../style/mixins'
-import Loading from '../Loading'
+import { LoadingScreen } from '../Loading'
 
 export default class CheckInvitation extends Component {
+  static navigationOptions = {
+    header: null
+  }
+
   static propTypes = {
     checkInvitation: PropTypes.func.isRequired
   }
@@ -13,6 +16,6 @@ export default class CheckInvitation extends Component {
   }
 
   render () {
-    return <Loading style={mixins.allCentered} />
+    return <LoadingScreen />
   }
 }

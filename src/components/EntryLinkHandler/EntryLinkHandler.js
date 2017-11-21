@@ -1,12 +1,11 @@
 import React from 'react'
 import { Linking } from 'react-native'
-import OneSignal from 'react-native-onesignal'
 import { get } from 'lodash/fp'
-import URL from 'url'
+import { parse } from 'url'
+import { isInvitationLink } from 'util/navigation'
 
 export default class EntryLinkHandler extends React.Component {
   componentWillMount () {
-    console.log('EntryLinkHandler componentWillMount')
     Linking.getInitialURL().then(this.handleUrl)
     Linking.addEventListener('url', this.handleUrl)
   }
@@ -16,11 +15,28 @@ export default class EntryLinkHandler extends React.Component {
   }
 
   handleUrl = eventOrUrl => {
+    const { setEntryUrl, currentUser, navigator, redirectNow } = this.props
+
     const url = get('url', eventOrUrl) || eventOrUrl
     if (!url) return
 
-    const { path } = URL.parse(url)
-    if (path) this.props.setEntryUrl(path)
+    const { path } = parse(url)
+    if (path) setEntryUrl(path)
+
+    // if you're already logged in, redirect immediately.
+    if (currentUser) {
+      redirectNow({
+        currentUser,
+        navigation: navigator,
+        entryUrl: path
+      })
+    } else if (isInvitationLink(path)) {
+      redirectNow({
+        currentUser: null,
+        navigation: navigator,
+        entryUrl: path
+      })
+    }
   }
 
   render () {
