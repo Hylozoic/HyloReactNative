@@ -39,7 +39,7 @@ export default class Thread extends React.Component {
     })),
     pending: any,
     reconnectFetchMessages: func.isRequired,
-    setTitle: func.isRequired,
+    setNavParams: func.isRequired,
     title: string,
     updateThreadReadTime: func.isRequired
   }
@@ -60,11 +60,11 @@ export default class Thread extends React.Component {
   }
 
   componentDidMount () {
-    const { fetchMessages, reconnectFetchMessages, setTitle, title } = this.props
+    const { fetchMessages, reconnectFetchMessages, setNavParams } = this.props
     getSocket().then(socket => socket.on('reconnect', reconnectFetchMessages))
     this.scrollToBottom()
     fetchMessages()
-    if (title) setTitle(title)
+    setNavParams()
   }
 
   componentWillUpdate (nextProps) {
@@ -103,8 +103,8 @@ export default class Thread extends React.Component {
   }
 
   componentDidUpdate (prevProps) {
-    const { setTitle, title } = this.props
-    if (prevProps.title !== title) setTitle(title)
+    const { setNavParams, title } = this.props
+    if (prevProps.title !== title) setNavParams()
     if (this.atBottom()) this.markAsRead()
     if (this.shouldScroll) this.scrollToBottom()
   }

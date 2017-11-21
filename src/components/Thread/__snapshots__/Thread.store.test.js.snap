@@ -79,55 +79,11 @@ Object {
 `;
 
 exports[`getThread should match the last snapshot 1`] = `
-Object {
-  "id": "1",
-  "messages": Array [
-    Object {
-      "createdAt": "",
-      "creator": Object {
-        "avatarUrl": "https://wombat.com/test.jpg",
-        "id": "8",
-      },
-      "id": "200",
-      "suppressCreator": null,
-      "suppressDate": null,
-      "text": "",
-    },
-    Object {
-      "createdAt": "",
-      "creator": Object {
-        "avatarUrl": "https://wombat.com/test.jpg",
-        "id": "8",
-      },
-      "id": "10",
-      "suppressCreator": false,
-      "suppressDate": false,
-      "text": "",
-    },
-    Object {
-      "createdAt": "",
-      "creator": Object {
-        "avatarUrl": "https://wombat.com/test.jpg",
-        "id": "8",
-      },
-      "id": "4",
-      "suppressCreator": false,
-      "suppressDate": false,
-      "text": "",
-    },
-    Object {
-      "createdAt": "",
-      "creator": Object {
-        "avatarUrl": "https://aardvark.com/test.jpg",
-        "id": "9",
-      },
-      "id": "1",
-      "suppressCreator": null,
-      "suppressDate": false,
-      "text": "",
-    },
-  ],
-  "title": "",
+SessionBoundModel {
+  "_fields": Object {
+    "id": "1",
+    "participants": undefined,
+  },
 }
 `;
 
