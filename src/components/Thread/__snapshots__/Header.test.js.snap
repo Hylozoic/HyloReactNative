@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header matches the last snapshot 1`] = `
+Object {
+  "headerTintColor": "#808c9b",
+  "headerTitle": <Title
+    onPress={[Function]}
+    title="Header Title"
+/>,
+}
+`;
+
+exports[`Title matches the last snapshot 1`] = `
+<TouchableOpacity
+  activeOpacity={0.2}
+  onPress={[Function]}
+>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+  >
+    Header Title
+  </Text>
+</TouchableOpacity>
+`;
