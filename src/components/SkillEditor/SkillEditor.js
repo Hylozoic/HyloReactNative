@@ -70,7 +70,7 @@ export default class SkillEditor extends React.Component {
   }
 }
 
-export function SkillCloud ({ skills, onPress, style, onPressOther, theme }) {
+export function SkillCloud ({ skills, onPress, style, onPressOther, theme = {} }) {
   return <View style={[styles.skillCloud, theme.skillCloud, style]}>
     {skills.map((skill, i) => <SkillPill skill={skill} onPress={onPress} key={i} theme={theme} />)}
     {!!onPressOther && <SkillPill skill='+ Other' onPress={onPressOther} theme={theme} />}

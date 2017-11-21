@@ -1,3 +1,7 @@
+/**
+ * @providesModule store/actions/fetchCurrentUser
+ */
+
 export const FETCH_CURRENT_USER = 'FETCH_CURRENT_USER'
 
 export default function fetchCurrentUser () {

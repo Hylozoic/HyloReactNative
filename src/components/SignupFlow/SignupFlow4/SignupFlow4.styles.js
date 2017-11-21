@@ -44,7 +44,8 @@ export default {
       marginBottom: 10
     },
     continueButton: {
-      ...styles.continueButton
+      ...styles.continueButton,
+      marginRight: 16
     }
   }
 }
