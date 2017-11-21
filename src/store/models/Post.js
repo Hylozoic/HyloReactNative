@@ -36,11 +36,6 @@ const Post = Model.createClass({
   getFileUrls () {
     return this.files().orderBy(get('position')).toRefArray().map(get('url'))
   }
-
-  // static communitiesForNetworkId (postId, networkId) {
-  //   console.log('!!!! communitiesForNetworkId networkId, this: ', networkId, this)
-  //   return this.communities.toModelArray()
-  // }
 })
 
 export default Post

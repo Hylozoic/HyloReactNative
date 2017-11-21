@@ -5,7 +5,7 @@ import PostCard from '../PostCard'
 import Loading from '../Loading'
 import Icon from '../Icon'
 import PopupMenuButton from '../PopupMenuButton'
-import { find, get, isEmpty, map, filter } from 'lodash/fp'
+import { find, get, isEmpty, filter } from 'lodash/fp'
 
 export default class FeedList extends Component {
   fetchOrShowCached () {
@@ -44,7 +44,7 @@ export default class FeedList extends Component {
     const {
       posts,
       networkId,
-      filter: feedFilter,
+      filter: listFilter,
       sortBy,
       setFilter,
       setSort,
@@ -60,7 +60,7 @@ export default class FeedList extends Component {
     const listHeaderComponent = <View>
       {header}
       <ListControls
-        filter={feedFilter}
+        filter={listFilter}
         sortBy={sortBy}
         setFilter={setFilter}
         setSort={setSort}
