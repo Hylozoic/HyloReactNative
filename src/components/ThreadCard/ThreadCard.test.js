@@ -1,27 +1,52 @@
 import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
-import ThreadCard, { threadNames, ThreadAvatars } from './index'
+import ThreadCard, { lastMessageCreator, ThreadAvatars } from './index'
 
 it('renders correctly', () => {
   const message = {
-    text: 'Hey, just checking in. Test, test, test.'
+    text: 'Hey, just checking in. Test, test, test.',
+    '_fields': {
+      creator: 1
+    }
   }
   const currentUser = {id: 1}
+
   const renderer = new ReactShallowRenderer()
-  renderer.render(<ThreadCard message={message} isLast={true} currentUser={currentUser} />)
+  renderer.render(<ThreadCard message={message} isLast currentUser={currentUser} />)
   const actual = renderer.getRenderOutput()
 
   expect(actual).toMatchSnapshot()
 })
 
-describe('handles threadNames correctly', () => {
-  it('handles when 1 name is passed', () => {
-    const names = ['One name']
-    expect(threadNames(names)).toBe('One name')
+describe('handles lastMessageCreator correctly', () => {
+  it('handles when the current user created the message', () => {
+    const currentUser = {
+      id: 1
+    }
+    const message = {
+      '_fields': {
+        creator: 1
+      }
+    }
+    expect(lastMessageCreator(message, currentUser, [])).toBe('You:')
   })
-  it('handles when multiple names are passed', () => {
-    const names = ['One name', 'Second Name', 'Third Name']
-    expect(threadNames(names)).toBe('One name and 2 others')
+  it('handles when a different user created the message', () => {
+    const name = 'name'
+    const currentUser = {
+      id: 1
+    }
+    const message = {
+      '_fields': {
+        creator: 2
+      }
+    }
+    const participants = [
+      {
+        id: 2,
+        name: name
+      }
+    ]
+    expect(lastMessageCreator(message, currentUser, participants)).toBe(name)
   })
 })
 
