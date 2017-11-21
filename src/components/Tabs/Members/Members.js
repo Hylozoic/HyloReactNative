@@ -97,7 +97,7 @@ export default class Members extends React.Component {
   }
 }
 
-function Member ({ member, showMember }) {
+export function Member ({ member, showMember }) {
   return <TouchableOpacity onPress={() => showMember(member.id)}
     style={[styles.cell, styles.memberCell]} >
     <View style={styles.avatarSpacing}>
@@ -112,7 +112,7 @@ function Member ({ member, showMember }) {
   </TouchableOpacity>
 }
 
-function Banner ({ community, all }) {
+export function Banner ({ community, all }) {
   let bannerUrl, name
 
   if (all) {
