@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches the last snapshot for createComment 1`] = `
+Object {
+  "graphql": Object {
+    "query": "mutation ($postId: String, $text: String) {
+        createComment(data: {postId: $postId, text: $text}) {
+          id
+          text
+          post {
+            id
+          }
+          createdAt
+          creator {
+            id
+          }
+        }
+      }",
+    "variables": Object {
+      "postId": "1",
+      "text": "So much comment.",
+    },
+  },
+  "meta": Object {
+    "extractModel": "Comment",
+    "optimistic": true,
+    "postId": "1",
+    "tempId": "post1_1",
+    "text": "So much comment.",
+  },
+  "type": "CommentEditor/CREATE_COMMENT",
+}
+`;
+
+exports[`matches the last snapshot for setCommentEdits 1`] = `
+Object {
+  "payload": Object {
+    "postId": "1",
+    "text": "So much comment.",
+  },
+  "type": "CommentEditor/SET_DETAILS",
+}
+`;
+
+exports[`reducer matches the last snapshot for CREATE_COMMENT 1`] = `
+Object {
+  "1": null,
+}
+`;
+
+exports[`reducer matches the last snapshot for SET_COMMENT_EDITS 1`] = `
+Object {
+  "1": "Foo",
+}
+`;

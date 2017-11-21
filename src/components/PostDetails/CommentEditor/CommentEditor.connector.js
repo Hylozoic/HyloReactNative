@@ -23,7 +23,7 @@ function mapDispatchToProps (dispatch, props) {
   }
 }
 
-function mergeProps (stateProps, dispatchProps, ownProps) {
+export function mergeProps (stateProps, dispatchProps, ownProps) {
   const { setCommentEditsMaker, saveChangesMaker } = dispatchProps
   const postId = getPostId(null, ownProps)
   return {
