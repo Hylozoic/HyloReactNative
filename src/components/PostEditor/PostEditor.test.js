@@ -50,10 +50,11 @@ describe('PostEditor', () => {
       <Provider store={createMockStore()}>
         <PostEditor
           editDetails={editDetails}
-          setDetails={jest.fn()}
-          save={save}
+          isFocused
           navigation={navigation}
-          post={mockPost} />
+          post={mockPost} 
+          save={save}
+          setDetails={jest.fn()} />
       </Provider>)
 
     const root = renderer.root.findByType(PostEditor)
@@ -93,6 +94,7 @@ describe('PostEditor', () => {
       <Provider store={createMockStore()}>
         <PostEditor
           editDetails={jest.fn()}
+          isFocused
           setDetails={jest.fn()}
           save={save}
           communityIds={[1]}
@@ -120,6 +122,7 @@ describe('PostEditor', () => {
       <Provider store={createMockStore()}>
         <PostEditor
           editDetails={jest.fn()}
+          isFocused
           setDetails={jest.fn()}
           save={save}
           communityIds={[1]}
@@ -139,6 +142,7 @@ describe('PostEditor', () => {
       <Provider store={createMockStore()}>
         <PostEditor
           editDetails={jest.fn()}
+          isFocused
           setDetails={jest.fn()}
           navigation={navigation}
           imageUrls={['http://foo.com/foo.png']}
@@ -163,6 +167,7 @@ describe('PostEditor', () => {
       <Provider store={createMockStore()}>
         <PostEditor
           editDetails={jest.fn()}
+          isFocused
           setDetails={jest.fn()}
           navigation={navigation}
           fileUrls={['http://foo.com/foo.pdf']}

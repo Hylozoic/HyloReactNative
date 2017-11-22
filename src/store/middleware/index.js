@@ -6,8 +6,7 @@ import graphQLMiddleware from './graphQL'
 import optimisticMiddleware from './optimistic'
 import pendingMiddleware from './pending'
 import promiseMiddleware from 'redux-promise'
-
-const isDev = __DEV__ && process.env.NODE_ENV !== 'test'
+import { isDev } from 'util/testing'
 
 const middleware = compact([
   graphQLMiddleware,

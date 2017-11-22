@@ -1,39 +1,32 @@
 import React from 'react'
 import { View, Text } from 'react-native'
-import { filter, get, map } from 'lodash/fp'
+import { filter, get, map, find } from 'lodash/fp'
 
 import Avatar from '../Avatar'
 import styles from './ThreadCard.styles'
 import { humanDate } from 'hylo-utils/text'
 
 export default function ThreadCard (props) {
-  const otherParticipants = filter(p => p.id !== get('id', props.currentUser), props.participants)
-  const names = threadNames(map('name', otherParticipants))
-  const avatarUrls = map('avatarUrl', otherParticipants)
   if (!props.message) return null
+  const otherParticipants = filter(p => p.id !== get('id', props.currentUser), props.participants)
+  const name = lastMessageCreator(props.message, props.currentUser, props.participants)
+  const avatarUrls = map('avatarUrl', otherParticipants)
 
   return <View style={styles.threadCard}>
     <ThreadAvatars avatarUrls={avatarUrls} />
     <View style={[styles.messageContent, props.isLast && styles.lastCard]}>
-      <Text style={styles.header}>{names}</Text>
+      <Text style={styles.header}>{name}</Text>
       <Text style={styles.body} numberOfLines={2}>{props.message.text}</Text>
       <Text style={styles.date}>{humanDate(get('createdAt', props.message))}</Text>
     </View>
   </View>
 }
 
-export function threadNames (names) {
-  let nameString = ''
-  switch (names.length) {
-    case 1:
-    case 2:
-      nameString = names.join(', ')
-      break
-    default:
-      nameString = `${names.slice(0, 1).join(', ')} and ${names.length - 1} other${names.length > 2 ? 's' : ''}`
-      break
-  }
-  return nameString
+export function lastMessageCreator (message, currentUser, participants) {
+  console.log('message', message)
+  if (get('creator', message._fields) === currentUser.id) return 'You:'
+  if (participants.length === 2) return ''
+  return find(p => p.id === get('creator', message._fields), participants).name
 }
 
 export function ThreadAvatars ({avatarUrls}) {

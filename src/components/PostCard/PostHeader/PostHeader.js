@@ -5,7 +5,7 @@ import Icon from '../../Icon'
 import { rhino30, rhino50, caribbeanGreen } from 'style/colors'
 import { humanDate } from 'hylo-utils/text'
 import PopupMenuButton from '../../PopupMenuButton'
-import { filter, isEmpty } from 'lodash/fp'
+import { get, filter, isEmpty } from 'lodash/fp'
 import FlagContent from '../../FlagContent'
 
 export default class PostHeader extends PureComponent {
@@ -41,7 +41,7 @@ export default class PostHeader extends PureComponent {
 
     let context
 
-    if (showCommunity) {
+    if (showCommunity && get('0', communities)) {
       const community = communities[0]
       context = {
         label: community.name,

@@ -1,11 +1,13 @@
 import { connect } from 'react-redux'
+import { get } from 'lodash/fp'
+
 import fetchPost from '../../store/actions/fetchPost'
-import getMe from '../../store/selectors/getMe'
 import { getCommentEdits } from './CommentEditor/CommentEditor.store'
 import getPost, { presentPost } from '../../store/selectors/getPost'
 import getCurrentCommunityId from '../../store/selectors/getCurrentCommunityId'
-import { get } from 'lodash/fp'
+import getMe from '../../store/selectors/getMe'
 import makeGoToCommunity from '../../store/actions/makeGoToCommunity'
+import { mapWhenFocused, mergeWhenFocused } from 'util/connector'
 
 function getPostId (state, props) {
   return props.navigation.state.params.id
@@ -21,7 +23,8 @@ export function mapStateToProps (state, props) {
   return {
     post,
     currentUser,
-    commentEdit
+    commentEdit,
+    isFocused: props.isFocused
   }
 }
 
@@ -53,4 +56,8 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps, mergeProps)
+export default connect(
+  mapWhenFocused(mapStateToProps),
+  mapWhenFocused(mapDispatchToProps),
+  mergeWhenFocused(mergeProps)
+)

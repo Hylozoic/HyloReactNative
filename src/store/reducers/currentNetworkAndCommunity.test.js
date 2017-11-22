@@ -1,20 +1,20 @@
-import currentCommunity from './currentCommunity'
-import { FETCH_CURRENT_USER, CHANGE_COMMUNITY } from '../actions/fetchCurrentUser'
+import currentNetworkAndCommunity from './currentNetworkAndCommunity'
+import { FETCH_CURRENT_USER, SELECT_COMMUNITY } from '../actions/fetchCurrentUser'
 
-describe('on CHANGE_COMMUNITY', () => {
+describe('on SELECT_COMMUNITY', () => {
   it('returns the payload', () => {
     const state = {
       id: 1,
       name: 'moon'
     }
     const action = {
-      type: CHANGE_COMMUNITY,
+      type: SELECT_COMMUNITY,
       payload: {
         id: 123,
         name: 'foom'
       }
     }
-    expect(currentCommunity(state, action))
+    expect(currentNetworkAndCommunity(state, action))
     .toMatchSnapshot()
   })
 })
@@ -40,7 +40,7 @@ describe('on FETCH_CURRENT_USER', () => {
         }
       }
     }
-    expect(currentCommunity(state, action))
+    expect(currentNetworkAndCommunity(state, action))
     .toMatchSnapshot()
   })
 
@@ -58,7 +58,7 @@ describe('on FETCH_CURRENT_USER', () => {
         }
       }
     }
-    expect(currentCommunity(state, action))
+    expect(currentNetworkAndCommunity(state, action))
     .toMatchSnapshot()
   })
 })

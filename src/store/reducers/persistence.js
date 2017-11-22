@@ -1,5 +1,6 @@
 import { AsyncStorage } from 'react-native'
 import { debounce } from 'lodash'
+import { isDev } from 'util/testing'
 import { LOGOUT } from '../../components/Login/actions'
 
 export const PERSISTED_STATE_KEY = 'persisted-app-state-v2'
@@ -16,7 +17,7 @@ const save = debounce(state => {
   const serialized = JSON.stringify(state)
   const startTime = Date.now()
   AsyncStorage.setItem(PERSISTED_STATE_KEY, serialized, () => {
-    console.log(`persisted state in ${Date.now() - startTime}ms`)
+    if (isDev) console.log(`persisted state in ${Date.now() - startTime}ms`)
   })
 }, 2000)
 

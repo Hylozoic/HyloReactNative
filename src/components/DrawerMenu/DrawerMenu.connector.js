@@ -3,8 +3,10 @@ import { get, omit, values } from 'lodash/fp'
 import getMe from '../../store/selectors/getMe'
 import getMemberships from '../../store/selectors/getMemberships'
 import getCurrentCommunityId from '../../store/selectors/getCurrentCommunityId'
+import getCurrentNetworkId from '../../store/selectors/getCurrentNetworkId'
 import { logout } from '../Login/actions'
-import changeCommunity from '../../store/actions/changeCommunity'
+import selectCommunity from '../../store/actions/selectCommunity'
+import selectNetwork from '../../store/actions/selectNetwork'
 import { ALL_COMMUNITIES_ID } from '../../store/models/Community'
 
 export function partitionCommunities (memberships) {
@@ -38,6 +40,7 @@ export function partitionCommunities (memberships) {
 export function mapStateToProps (state, props) {
   const currentUser = getMe(state)
   const currentCommunityId = getCurrentCommunityId(state, props)
+  const currentNetworkId = getCurrentNetworkId(state, props)
   const paritionedCommunities =
     partitionCommunities(getMemberships(state))
   const networks = [
@@ -56,13 +59,15 @@ export function mapStateToProps (state, props) {
     avatarUrl: get('avatarUrl', currentUser),
     networks,
     communities,
-    currentCommunityId
+    currentCommunityId,
+    currentNetworkId
   }
 }
 
 export const mapDispatchToProps = {
   logout,
-  changeCommunity
+  selectCommunity,
+  selectNetwork
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
@@ -79,7 +84,11 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
       } else {
         navigation.navigate('DrawerClose')
       }
-      dispatchProps.changeCommunity(community.id)
+      dispatchProps.selectCommunity(community.id)
+    },
+    goToNetwork: network => {
+      navigation.navigate('DrawerClose')
+      dispatchProps.selectNetwork(network.id)
     },
     showSettings: () => {
       navigation.navigate('UserSettings', {name})

@@ -62,7 +62,7 @@ exports[`renders correctly 1`] = `
       allowFontScaling={true}
       ellipsizeMode="tail"
     >
-       and -1 other
+      You:
     </Text>
     <Text
       accessible={true}

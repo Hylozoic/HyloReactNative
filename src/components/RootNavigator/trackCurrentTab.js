@@ -8,6 +8,7 @@
 
 import React from 'react'
 import { has } from 'lodash/fp'
+import { updateFocus } from 'react-navigation-is-focused-hoc'
 
 const tabNames = ['Home', 'Members', 'Topics']
 
@@ -25,6 +26,8 @@ export default function trackCurrentTab (Component) {
     // this method is very coupled to the nesting structure for navigators in
     // RootNavigator/index.js
     handleChange = (prevState, newState) => {
+      updateFocus(newState)
+
       const stackNav = newState.routes[newState.index]
       if (!has('index', stackNav)) return
 

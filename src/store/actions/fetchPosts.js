@@ -1,18 +1,24 @@
-import { ALL_COMMUNITIES_ID } from '../models/Community'
+import { getPostFieldsFragment } from './fetchPost'
 import { get } from 'lodash/fp'
 
 export const FETCH_POSTS = `FETCH_POSTS`
 
-export function fetchPosts ({ subject, slug, sortBy, offset, search, filter, topic }, { reset } = {}) {
+export default function fetchPosts (
+  { subject, slug, networkSlug, sortBy, offset, search, filter, topic },
+  { reset } = {}
+) {
   var query, extractModel, getItems
 
   if (subject === 'community') {
     query = communityQuery
     extractModel = 'Community'
     getItems = get('payload.data.community.posts')
+  } else if (subject === 'network') {
+    query = networkQuery
+    extractModel = 'Network'
+    getItems = get('payload.data.network.posts')
   } else if (subject === 'all-communities') {
     query = allCommunitiesQuery
-    slug = ALL_COMMUNITIES_ID // this is just for queryResults, not the API
     extractModel = 'Post'
     getItems = get('payload.data.posts')
   } else {
@@ -25,6 +31,7 @@ export function fetchPosts ({ subject, slug, sortBy, offset, search, filter, top
       query,
       variables: {
         slug,
+        networkSlug,
         sortBy,
         offset,
         search,
@@ -44,8 +51,6 @@ export function fetchPosts ({ subject, slug, sortBy, offset, search, filter, top
   }
 }
 
-export default fetchPosts
-
 export const postsQueryFragment = `
 posts(
   first: $first,
@@ -58,51 +63,7 @@ posts(
 ) {
   hasMore
   items {
-    id
-    title
-    details
-    type
-    location
-    creator {
-      id
-      name
-      avatarUrl
-      tagline
-    }
-    createdAt
-    updatedAt
-    commenters(first: 3) {
-      id
-      name
-      avatarUrl
-    }
-    commentersTotal
-    commentsTotal
-    linkPreview {
-      title
-      url
-      imageUrl
-    }
-    votesTotal
-    myVote
-    communities {
-      id
-      name
-      slug
-    }
-    attachments {
-      id
-      position
-      type
-      url
-    }
-    postMemberships {
-      id
-      pinned
-      community {
-        id
-      }
-    }
+    ${getPostFieldsFragment(false)}
   }
 }`
 
@@ -122,6 +83,21 @@ const communityQuery = `query (
     avatarUrl
     bannerUrl
     postCount
+    ${postsQueryFragment}
+  }
+}`
+
+const networkQuery = `query (
+  $networkSlug: String,
+  $sortBy: String,
+  $offset: Int,
+  $search: String,
+  $filter: String,
+  $topic: ID,
+  $first: Int
+) {
+  network(slug: $networkSlug) {
+    id
     ${postsQueryFragment}
   }
 }`

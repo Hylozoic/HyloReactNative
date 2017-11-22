@@ -2,14 +2,15 @@ import React from 'react'
 import {
   View, FlatList, Text, TouchableOpacity, TextInput, Image
 } from 'react-native'
-import Header from '../Header'
-import Avatar from '../../Avatar'
-import PopupMenuButton from '../../PopupMenuButton'
-import Icon from '../../Icon'
-import { DEFAULT_BANNER } from '../../../store/models/Community'
-import styles from './Members.styles'
 import { some, values, keys, isEmpty, debounce, size } from 'lodash/fp'
+
+import Avatar from '../../Avatar'
+import { DEFAULT_BANNER } from '../../../store/models/Community'
 import { focus } from '../../../util/textInput'
+import Header from '../Header'
+import Icon from '../../Icon'
+import PopupMenuButton from '../../PopupMenuButton'
+import styles from './Members.styles'
 
 export default class Members extends React.Component {
   static navigationOptions = ({ navigation, screenProps }) =>
@@ -25,10 +26,7 @@ export default class Members extends React.Component {
   }
 
   componentDidUpdate (prevProps) {
-    if (this.props.screenProps.currentTabName !== 'Members') {
-      return
-    }
-
+    if (this.props.screenProps.currentTabName !== 'Members') return
     if (!prevProps || prevProps.screenProps.currentTabName !== 'Members') {
       return this.fetchOrShowCached()
     }
@@ -41,6 +39,10 @@ export default class Members extends React.Component {
     ])) {
       this.fetchOrShowCached()
     }
+  }
+
+  shouldComponentUpdate (nextProps) {
+    return nextProps.isFocused
   }
 
   render () {
@@ -95,7 +97,7 @@ export default class Members extends React.Component {
   }
 }
 
-function Member ({ member, showMember }) {
+export function Member ({ member, showMember }) {
   return <TouchableOpacity onPress={() => showMember(member.id)}
     style={[styles.cell, styles.memberCell]} >
     <View style={styles.avatarSpacing}>
@@ -110,7 +112,7 @@ function Member ({ member, showMember }) {
   </TouchableOpacity>
 }
 
-function Banner ({ community, all }) {
+export function Banner ({ community, all }) {
   let bannerUrl, name
 
   if (all) {

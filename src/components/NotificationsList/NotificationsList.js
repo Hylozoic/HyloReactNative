@@ -28,6 +28,10 @@ export default class NotificationsList extends Component {
     }
   }
 
+  shouldComponentUpdate (nextProps) {
+    return nextProps.isFocused
+  }
+
   fetchMore = offset => this.props.fetchMore(offset)
 
   keyExtractor = item => item.id

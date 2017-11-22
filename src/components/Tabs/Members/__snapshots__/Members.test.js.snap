@@ -1,5 +1,66 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Member matches the last snapshot 1`] = `
+<TouchableOpacity
+  activeOpacity={0.2}
+  onPress={[Function]}
+>
+  <View>
+    <Avatar
+      avatarUrl="bonk.jpg"
+      dimension={72}
+    />
+  </View>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+  >
+    Bonk Gundsdottir
+  </Text>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+  >
+    Reykjavik
+  </Text>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+    numberOfLines={4}
+  >
+    A sordid history.
+  </Text>
+</TouchableOpacity>
+`;
+
+exports[`matches the last header snapshot 1`] = `
+Object {
+  "headerLeft": <Connect(MenuButton)
+    openDrawer={[Function]}
+/>,
+  "headerRight": <View>
+    <Connect(MessagesIcon)
+        hasUnreadMessages={undefined}
+        showMessages={[Function]}
+    />
+    <Connect(NotificationsIcon)
+        hasUnreadNotifications={undefined}
+        showNotifications={[Function]}
+    />
+</View>,
+  "headerTitle": <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+>
+    Members
+</Text>,
+}
+`;
+
 exports[`renders correctly with no community 1`] = `
 <View>
   <RCTScrollView
@@ -81,6 +142,13 @@ exports[`renders correctly with no community 1`] = `
           "avatarUrl": "bonk.jpg",
           "id": "4",
           "name": "Bonk Gundsdottir",
+        },
+        Object {
+          "avatarUrl": "woof.png",
+          "id": "5",
+        },
+        Object {
+          "id": -1,
         },
       ]
     }
@@ -392,6 +460,14 @@ exports[`renders correctly with no community 1`] = `
               numberOfLines={4}
             />
           </View>
+        </View>
+      </View>
+      <View
+        onLayout={[Function]}
+      >
+        <View>
+          <View />
+          <View />
         </View>
       </View>
     </View>

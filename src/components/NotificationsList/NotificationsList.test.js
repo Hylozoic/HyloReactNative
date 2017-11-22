@@ -19,6 +19,7 @@ describe('NotificationsList', () => {
       fetchNotifications: () => {},
       updateNewNotificationCount: () => {},
       hasMore: true,
+      isFocused: true,
       markActivityRead: jest.fn(),
       markAllRead: jest.fn(),
       pending: false,

@@ -121,9 +121,8 @@ export default function ormReducer (state = {}, action) {
         }
       }
       me.update(changes)
-      const person = session.Person.withId(me.id)
-      if (person) {
-        person.update(changes)
+      if (session.Person.hasId(me.id)) {
+        session.Person.withId(me.id).update(changes)
       }
       break
 

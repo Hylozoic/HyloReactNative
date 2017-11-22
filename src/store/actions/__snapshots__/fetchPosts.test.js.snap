@@ -1,0 +1,101 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`constructs a network fetchPosts action 1`] = `
+Object {
+  "graphql": Object {
+    "query": "query (
+  $networkSlug: String,
+  $sortBy: String,
+  $offset: Int,
+  $search: String,
+  $filter: String,
+  $topic: ID,
+  $first: Int
+) {
+  network(slug: $networkSlug) {
+    id
+    
+posts(
+  first: $first,
+  offset: $offset,
+  sortBy: $sortBy,
+  search: $search,
+  filter: $filter,
+  topic: $topic,
+  order: \\"desc\\"
+) {
+  hasMore
+  items {
+    
+  id
+  title
+  details
+  type
+  location
+  creator {
+    id
+    name
+    avatarUrl
+    tagline
+  }
+  createdAt
+  updatedAt
+  commenters(first: 3) {
+    id
+    name
+    avatarUrl
+  }
+  commentersTotal
+  commentsTotal
+  
+  linkPreview {
+    title
+    url
+    imageUrl
+  }
+  votesTotal
+  myVote
+  communities {
+    id
+    name
+    slug
+  }
+  attachments {
+    id
+    position
+    type
+    url
+  }
+  postMemberships {
+    id
+    pinned
+    community {
+      id
+    }
+  }
+  }
+}
+  }
+}",
+    "variables": Object {
+      "filter": undefined,
+      "first": 20,
+      "networkSlug": undefined,
+      "offset": undefined,
+      "search": undefined,
+      "slug": undefined,
+      "sortBy": undefined,
+      "topic": undefined,
+    },
+  },
+  "meta": Object {
+    "afterInteractions": true,
+    "extractModel": "Network",
+    "extractQueryResults": Object {
+      "getItems": [Function],
+      "reset": undefined,
+    },
+  },
+  "type": "FETCH_POSTS",
+}
+`;

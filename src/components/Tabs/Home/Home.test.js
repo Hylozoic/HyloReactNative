@@ -15,7 +15,7 @@ it('shows Loading with no community or user', () => {
 
 it('shows Feed with a community and user', () => {
   const renderer = new ReactShallowRenderer()
-  renderer.render(<Home currentUser={{}} communityId='1' />)
+  renderer.render(<Home currentUser={{}} communityId='1' navigation={{ state: { params: {} } }} />)
   const actual = renderer.getRenderOutput()
 
   expect(actual).toMatchSnapshot()

@@ -1,9 +1,11 @@
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import getMe from '../../store/selectors/getMe'
-import fetchThreads, { FETCH_THREADS } from '../../store/actions/fetchThreads'
-import { getThreads, getThreadsHasMore, updateLastViewed } from './ThreadList.store'
 import { get } from 'lodash/fp'
+
+import fetchThreads, { FETCH_THREADS } from '../../store/actions/fetchThreads'
+import getMe from '../../store/selectors/getMe'
+import { getThreads, getThreadsHasMore, updateLastViewed } from './ThreadList.store'
+import { mapWhenFocused, mergeWhenFocused } from 'util/connector'
 
 export function mapStateToProps (state, props) {
   const threads = getThreads(state, props)
@@ -11,12 +13,12 @@ export function mapStateToProps (state, props) {
   const hasMore = getThreadsHasMore(state, props)
   const pending = state.pending[FETCH_THREADS]
   return {
+    currentUser,
+    hasMore,
+    isConnected: state.SocketListener.connected,
     pending,
     pendingRefresh: !!(pending && pending.extractQueryResults.reset),
-    currentUser,
-    threads,
-    hasMore,
-    isConnected: state.SocketListener.connected
+    threads
   }
 }
 
@@ -55,4 +57,8 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps, mergeProps)
+export default connect(
+  mapWhenFocused(mapStateToProps),
+  mapDispatchToProps,
+  mergeWhenFocused(mergeProps)
+)
