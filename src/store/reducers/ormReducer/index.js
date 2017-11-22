@@ -31,6 +31,7 @@ import {
   UPDATE_LAST_VIEWED_PENDING
 } from '../../../components/ThreadList/ThreadList.store'
 import { RESET_NEW_POST_COUNT_PENDING } from '../../actions/resetNewPostCount'
+import { PIN_POST_PENDING } from '../../../components/PostCard/PostHeader/PostHeader.store'
 import orm from 'store/models'
 import ModelExtractor from '../ModelExtractor'
 import extractModelsFromAction from '../ModelExtractor/extractModelsFromAction'
@@ -165,6 +166,14 @@ export default function ormReducer (state = {}, action) {
       if (!membership) break
       membership.update({newPostCount: 0})
       break
+
+    case PIN_POST_PENDING:
+      post = session.Post.withId(meta.postId)
+      // this line is to clear the selector memoization
+      post.update({_invalidate: (post._invalidate || 0) + 1})
+      let postMembership = post.postMemberships.filter(p =>
+        Number(p.community) === Number(meta.communityId)).toModelArray()[0]
+      postMembership && postMembership.update({pinned: !postMembership.pinned})
   }
 
   values(sessionReducers).forEach(fn => fn(session, action))

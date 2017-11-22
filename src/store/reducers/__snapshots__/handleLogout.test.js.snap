@@ -191,6 +191,16 @@ Object {
       "itemsById": Object {},
       "meta": Object {},
     },
+    "PostMembership": Object {
+      "items": Array [],
+      "itemsById": Object {},
+      "meta": Object {},
+    },
+    "PostPostMemberships": Object {
+      "items": Array [],
+      "itemsById": Object {},
+      "meta": Object {},
+    },
     "Skill": Object {
       "items": Array [],
       "itemsById": Object {},

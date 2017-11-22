@@ -55,6 +55,13 @@ export function getPostFieldsFragment (withComments = true) {
     position
     type
     url
+  }
+  postMemberships {
+    id
+    pinned
+    community {
+      id
+    }
   }`
 }
 

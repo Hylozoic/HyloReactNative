@@ -91,14 +91,8 @@ describe('mapStateToProps', () => {
 })
 
 describe('mapDispatchToProps', () => {
-  it('maps the action generators', () => {
-    const dispatch = jest.fn(val => val)
-    const dispatchProps = mapDispatchToProps(dispatch)
-    expect(dispatchProps).toMatchSnapshot()
-    dispatchProps.deletePost(1)
-    dispatchProps.removePost(10, 'mycommunity')
-    expect(dispatch).toHaveBeenCalledTimes(2)
-    expect(dispatch.mock.calls).toMatchSnapshot()
+  it('returns the right keys', () => {
+    expect(mapDispatchToProps).toMatchSnapshot()
   })
 })
 

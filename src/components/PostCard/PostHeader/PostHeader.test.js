@@ -15,8 +15,11 @@ it('renders correctly with all=true, and no community or user', () => {
     deletePost={() => {}}
     postId={22}
     canFlag
+    pinned
     removePost={() => {}}
-    editPost={() => {}} date={new Date(new Date().getTime() - 60000 * 10)} />)
+    editPost={() => {}}
+    pinPost={() => {}}
+    date={new Date(new Date().getTime() - 60000 * 10)} />)
   const actual = renderer.getRenderOutput()
 
   expect(actual).toMatchSnapshot()
@@ -39,11 +42,13 @@ it('renders correctly when showCommunity is true', () => {
     creator={creator}
     communities={communities}
     showCommunity
+    pinned={false}
     postId={20}
     slug='olympus'
     canFlag
     deletePost={() => {}}
     editPost={() => {}}
+    pinPost={() => {}}
     date={new Date(new Date().getTime() - 60000 * 10)} />)
   const actual = renderer.getRenderOutput()
 
@@ -70,8 +75,10 @@ it('renders correctly with no flagging', () => {
     postId={20}
     slug='olympus'
     canFlag={false}
+    pinned
     deletePost={() => {}}
     editPost={() => {}}
+    pinPost={() => {}}
     date={new Date(new Date().getTime() - 60000 * 10)} />)
   const actual = renderer.getRenderOutput()
 

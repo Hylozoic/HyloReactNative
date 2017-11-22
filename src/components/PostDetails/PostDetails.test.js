@@ -28,7 +28,8 @@ const post = {
   fileUrls: [
     'http://foo.com/foo.pdf',
     'http://foo.com/bar.zip'
-  ]
+  ],
+  pinned: true
 }
 const currentUser = {
   id: 123,
@@ -47,6 +48,7 @@ describe('PostDetails', () => {
       showMember={() => {}}
       showTopic={() => {}}
       goToCommunity={() => {}} />)
+
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()

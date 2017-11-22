@@ -23,11 +23,27 @@ Object {
       },
     ],
     "creator": undefined,
+    "fileAttachments": Array [
+      SessionBoundModel {
+        "_fields": Object {
+          "id": "1",
+          "post": "1",
+          "type": "file",
+          "url": "http://foo.com/foo.pdf",
+        },
+      },
+    ],
     "fileUrls": Array [
       "http://foo.com/foo.pdf",
     ],
     "followers": undefined,
     "id": "1",
+    "imageUrls": Array [
+      "http://foo.com/bar.png",
+    ],
+    "linkPreview": undefined,
+    "pinned": undefined,
+    "postMemberships": undefined,
   },
   "showMember": [Function],
   "showTopic": [Function],
@@ -106,6 +122,13 @@ Object {
     position
     type
     url
+  }
+  postMemberships {
+    id
+    pinned
+    community {
+      id
+    }
   }
         }
       }",
