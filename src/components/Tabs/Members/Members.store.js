@@ -3,7 +3,7 @@ import { createSelector } from 'reselect'
 import { createSelector as ormCreateSelector } from 'redux-orm'
 import { get, includes, isEmpty } from 'lodash/fp'
 import orm from '../../../store/models'
-import getCommunity from '../../../store/selectors/getCommunity'
+import getCurrentCommunity from '../../../store/selectors/getCurrentCommunity'
 
 export const MODULE_NAME = 'Members'
 
@@ -159,7 +159,7 @@ export const getMembers = ormCreateSelector(
   orm,
   state => state.orm,
   getMemberResults,
-  state => getCommunity(state, {id: state.currentCommunity}),
+  state => getCurrentCommunity(state),
   (session, results, community) => {
     if (isEmpty(results) || isEmpty(results.ids)) return []
 

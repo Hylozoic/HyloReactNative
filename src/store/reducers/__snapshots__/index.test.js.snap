@@ -46,7 +46,10 @@ Object {
   "TabBar": Object {
     "isVisible": true,
   },
-  "currentCommunity": null,
+  "currentNetworkAndCommunity": Object {
+    "communityId": null,
+    "networkId": null,
+  },
   "orm": Object {},
   "pending": Object {},
   "queryResults": Object {},

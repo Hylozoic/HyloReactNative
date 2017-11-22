@@ -23,12 +23,14 @@ exports[`renders correctly 1`] = `
             "id": "2",
           }
         }
+        network={undefined}
         newPost={[Function]}
         toggleTopicSubscribe={undefined}
         topicName="amazing"
         topicSubscribed={undefined}
       />
     }
+    network={undefined}
     screenProps={undefined}
     showCommunities={false}
     showMember={undefined}
