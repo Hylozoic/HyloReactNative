@@ -18,7 +18,6 @@ jest.mock('NetInfo', () => ({
   fetch: jest.fn()
 }))
 
-
 jest.mock('react-native-onesignal', () => {
   const eventListeners = {}
   return {
@@ -31,14 +30,14 @@ jest.mock('react-native-onesignal', () => {
   }
 })
 
-jest.mock('../SessionCheck', () => 'SessionCheck')
 jest.mock('../VersionCheck', () => 'VersionCheck')
 jest.mock('../LoadingModal', () => 'LoadingModal')
+jest.mock('../redirectsAfterLogin/NavigationContext', () => 'NavigationContext')
 
 describe('RootView', () => {
   it('renders as expected when store is loaded', async () => {
     const renderer = await TestRenderer.create(<RootView />)
-    expect(renderer.toJSON()).toMatchSnapshot()
+    expect(renderer).toMatchSnapshot()
     expect(OneSignal.inFocusDisplaying).toBeCalled()
     expect(OneSignal.addEventListener).toBeCalled()
     expect(OneSignal.eventListeners['received']).toHaveLength(1)

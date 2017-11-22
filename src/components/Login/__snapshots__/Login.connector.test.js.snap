@@ -3,8 +3,23 @@
 exports[`mapDispatchToProps has login 1`] = `
 Promise {
   "_40": 0,
-  "_55": null,
-  "_65": 0,
+  "_55": Object {
+    "meta": Object {
+      "email": "name",
+    },
+    "payload": Object {
+      "api": Object {
+        "method": "post",
+        "params": Object {
+          "email": "name",
+          "password": "pass",
+        },
+        "path": "/noo/login",
+      },
+    },
+    "type": "LOGIN",
+  },
+  "_65": 1,
   "_72": null,
 }
 `;
@@ -12,8 +27,16 @@ Promise {
 exports[`mapDispatchToProps has loginWithFacebook 1`] = `
 Promise {
   "_40": 0,
-  "_55": null,
-  "_65": 0,
+  "_55": Object {
+    "payload": Object {
+      "api": Object {
+        "method": "post",
+        "path": "/noo/login/facebook-token/oauth?access_token=token",
+      },
+    },
+    "type": "LOGIN_WITH_FACEBOOK",
+  },
+  "_65": 1,
   "_72": null,
 }
 `;
@@ -21,21 +44,21 @@ Promise {
 exports[`mapDispatchToProps has loginWithGoogle 1`] = `
 Promise {
   "_40": 0,
-  "_55": null,
-  "_65": 0,
+  "_55": Object {
+    "payload": Object {
+      "api": Object {
+        "method": "post",
+        "path": "/noo/login/google-token/oauth?access_token=token",
+      },
+    },
+    "type": "LOGIN_WITH_GOOGLE",
+  },
+  "_65": 1,
   "_72": null,
 }
 `;
 
-exports[`mapDispatchToProps maps the action generators 1`] = `
-Object {
-  "login": [Function],
-  "loginWithFacebook": [Function],
-  "loginWithGoogle": [Function],
-}
-`;
-
-exports[`mapDispatchToProps maps the action generators 2`] = `
+exports[`mergeProps adds finishLogin 1`] = `
 Array [
   Array [
     Object {

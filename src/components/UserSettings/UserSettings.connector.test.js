@@ -16,6 +16,7 @@ describe('mapStateToProps', () => {
 
 describe('mapDispatchToProps', () => {
   it('has the right keys', () => {
-    expect(mapDispatchToProps).toMatchSnapshot()
+    const dispatch = jest.fn()
+    expect(mapDispatchToProps(dispatch, {})).toMatchSnapshot()
   })
 })

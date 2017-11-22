@@ -5,7 +5,7 @@ import {
 } from './actions'
 import {
   FETCH_CURRENT_USER
-} from '../../store/actions/fetchCurrentUser'
+} from 'store/actions/fetchCurrentUser'
 
 export function getPending (state) {
   return state.pending[LOGIN] ||

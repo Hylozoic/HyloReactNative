@@ -20,7 +20,6 @@ Object {
 exports[`mergeProps matches the last snapshot 1`] = `
 Object {
   "checkInvitation": [Function],
-  "dispatchProp1": "dispatchProp1",
   "ownProp1": "ownProp1",
   "stateProp1": "stateProp1",
 }

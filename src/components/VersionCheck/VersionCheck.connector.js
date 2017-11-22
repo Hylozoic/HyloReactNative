@@ -1,19 +1,36 @@
 import { connect } from 'react-redux'
-import { checkVersion, CHECK_VERSION } from '../VersionCheck/actions'
+import { checkVersion } from './actions'
 import { platformName, appVersion } from 'util/platform'
+import { Alert, Linking } from 'react-native'
 
-export function mapStateToProps (state) {
-  const pending = state.pending[CHECK_VERSION]
-  return {
-    updateType: state.session.checkVersion,
-    pending
+function showAlert (updateType) {
+  if (!updateType || !updateType.type) return
+
+  const buttons = [
+    {
+      text: 'Update Now',
+      onPress: () => Linking.openURL(updateType.link)
+    }
+  ]
+  if (updateType.type === 'suggest') {
+    buttons.push({
+      text: 'Cancel'
+    })
   }
+  return Alert.alert(
+    updateType.title,
+    updateType.message,
+    buttons,
+    { cancelable: false }
+  )
 }
 
 export function mapDispatchToProps (dispatch) {
   return {
-    checkVersion: () => dispatch(checkVersion(platformName, appVersion))
+    checkVersion: () =>
+      dispatch(checkVersion(platformName, appVersion))
+      .then(({ error, payload }) => !error && showAlert(payload))
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)
+export default connect(null, mapDispatchToProps)

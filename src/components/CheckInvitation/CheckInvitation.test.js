@@ -1,40 +1,14 @@
 import 'react-native'
 import React from 'react'
-import ReactTestRenderer from 'react-test-renderer'
-import ReactShallowRenderer from 'react-test-renderer/shallow'
+import TestRenderer from 'react-test-renderer'
 import CheckInvitation from './CheckInvitation'
 
-jest.mock('../Loading', () => 'Loading')
-jest.mock('react-navigation', () => ({
-  reset: () => {},
-  navigate: () => {}
-}))
-jest.mock('react-native-device-info')
-const defaultRequiredProps = {
-  checkInvitation: () => Promise.resolve()
-}
+jest.mock('../Loading', () => ({LoadingScreen: 'LoadingScreen'}))
 
-function testPropsSetup (props = {}, required = defaultRequiredProps) {
-  return {...required, ...props}
-}
-
-function shallowRender (props) {
-  const renderer = new ReactShallowRenderer()
-  renderer.render(<CheckInvitation {...testPropsSetup(props)} />)
-  return renderer
-}
-
-it('matches last snapshot - default', () => {
-  const actual = shallowRender().getRenderOutput()
-  expect(actual).toMatchSnapshot()
-})
-
-// Lifecycle Methods
-
-test('componentDidMount', () => {
-  const testProps = testPropsSetup({
-    checkInvitation: jest.fn()
-  })
-  shallowRender(testProps)._instance.componentDidMount()
-  expect(testProps.checkInvitation).toHaveBeenCalled()
+it('calls checkInvitation', async () => {
+  const props = {
+    checkInvitation: jest.fn(() => Promise.resolve(true))
+  }
+  await TestRenderer.create(<CheckInvitation {...props} />)
+  expect(props.checkInvitation).toHaveBeenCalled()
 })

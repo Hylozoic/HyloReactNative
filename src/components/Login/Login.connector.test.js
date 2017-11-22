@@ -1,5 +1,6 @@
-import { mapDispatchToProps, mapStateToProps } from './Login.connector'
+import { mapDispatchToProps, mapStateToProps, mergeProps } from './Login.connector'
 import OneSignal from 'react-native-onesignal'
+import { bindActionCreators } from 'redux'
 
 jest.mock('react-native-onesignal', () => ({
   // eslint-disable-next-line standard/no-callback-literal
@@ -52,7 +53,7 @@ describe('mapDispatchToProps', () => {
 
   beforeEach(() => {
     dispatch = jest.fn(x => Promise.resolve(x))
-    dispatchProps = mapDispatchToProps(dispatch, props)
+    dispatchProps = bindActionCreators(mapDispatchToProps, dispatch)
   })
 
   it('has loginWithFacebook', () => {
@@ -68,15 +69,23 @@ describe('mapDispatchToProps', () => {
     const password = 'pass'
     expect(dispatchProps.login(username, password)).toMatchSnapshot()
   })
+})
 
-  it('maps the action generators', () => {
-    expect(dispatchProps).toMatchSnapshot()
-    return dispatchProps.loginWithFacebook('token')
+describe('mergeProps', () => {
+  it('adds finishLogin', () => {
+    const dispatch = jest.fn(x => Promise.resolve(x))
+    const dispatchProps = bindActionCreators(mapDispatchToProps, dispatch)
+    const ownProps = {
+      fetchCurrentUserAndRedirect: jest.fn()
+    }
+
+    const mergedProps = mergeProps(null, dispatchProps, ownProps)
+    return mergedProps.loginWithFacebook('token')
     .then(() => {
       expect(dispatch).toHaveBeenCalled()
       expect(dispatch.mock.calls).toMatchSnapshot()
-
       expect(OneSignal.registerForPushNotifications).toBeCalled()
+      expect(ownProps.fetchCurrentUserAndRedirect).toBeCalled()
     })
   })
 })

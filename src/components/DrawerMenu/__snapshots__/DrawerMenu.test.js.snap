@@ -173,6 +173,7 @@ exports[`DrawerMenu matches the last snapshot 1`] = `
       </View>
     </View>
   </View>
+  <Connect(SocketListener) />
 </View>
 `;
 

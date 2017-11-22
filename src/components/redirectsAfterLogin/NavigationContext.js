@@ -1,5 +1,9 @@
 // This component adds a method to the Redux context so that any descendant can
 // trigger deep-linking handling by calling `this.context.navigateToPath()`.
+//
+// Descendants can be wrapped in the HOC `redirectsAfterLogin` to get a function
+// in their props named `fetchCurrentUserAndRedirect`, which does what it sounds
+// like it does.
 
 import React from 'react'
 import { func } from 'prop-types'

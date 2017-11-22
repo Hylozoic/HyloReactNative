@@ -18,8 +18,7 @@ export const defaultUserSettings = {
 
 export const defaultState = {
   userSettings: defaultUserSettings,
-  errors: {},
-  signupStep1Complete: false
+  errors: {}
 }
 
 export function getErrors (payload) {

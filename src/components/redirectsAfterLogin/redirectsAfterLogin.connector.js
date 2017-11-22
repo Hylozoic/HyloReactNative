@@ -41,7 +41,6 @@ function mergeProps (stateProps, dispatchProps, ownProps) {
 function redirect ({ navigation, currentUser, entryUrl, navigateToPath }) {
   if (get('settings.signupInProgress', currentUser)) {
     resetToRoute(navigation, 'SignupFlow1')
-    // TODO: figure out what to do with signupStep1Complete logic
   } else if (entryUrl) {
     let internalPath = convertEntryUrl(entryUrl, !!currentUser)
     console.log(`convertEntryUrl: ${entryUrl} => ${internalPath}`)

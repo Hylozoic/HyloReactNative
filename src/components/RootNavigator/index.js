@@ -100,6 +100,7 @@ const screensInStack = {
   UserSettings: {screen: UserSettings},
   NotificationsList: {screen: NotificationsList},
   ThreadList: {screen: ThreadList},
+  ThreadParticipants: {screen: ThreadParticipants},
   SessionCheck: {screen: SessionCheck},
   InviteExpired: {screen: InviteExpired},
   Signup: {screen: Signup},

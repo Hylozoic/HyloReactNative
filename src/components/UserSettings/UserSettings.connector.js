@@ -15,7 +15,7 @@ export function mapStateToProps (state, props) {
   }
 }
 
-function mapDispatchToProps (dispatch, props) {
+export function mapDispatchToProps (dispatch, props) {
   return {
     logout: () => {
       resetToRoute(props.navigation, 'Login')

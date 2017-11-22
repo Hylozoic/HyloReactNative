@@ -22,14 +22,14 @@ export function mapStateToProps (state, props) {
   }
 }
 
-const mapDispatchToProps = {
+export const mapDispatchToProps = {
   registerDevice,
   loginWithFacebook,
   loginWithGoogle,
   login
 }
 
-function mergeProps (stateProps, dispatchProps, ownProps) {
+export function mergeProps (stateProps, dispatchProps, ownProps) {
   const {
     registerDevice,
     loginWithGoogle,
