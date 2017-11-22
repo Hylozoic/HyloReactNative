@@ -73,7 +73,14 @@ describe('ThreadList', () => {
 
 describe('MessageRow', () => {
   it('renders correctly', () => {
-    const message = [{id: 1}]
+    const message = [
+      {
+        id: 1,
+        '_fields': {
+          creator: 1
+        }
+      }
+    ]
     const participants = [{id: 2}]
     const renderer = new ReactShallowRenderer()
     renderer.render(<MessageRow
@@ -85,14 +92,25 @@ describe('MessageRow', () => {
 
   it('calls showThread', () => {
     const showThread = jest.fn()
-    const message = [{id: 1}]
+    const currentUser = {
+      id: 1
+    }
+    const message = {
+      id: 1,
+      '_fields': {
+        creator: 2
+      }
+    }
+
     const participants = [{id: 2, avatarUrl: 'blah'}]
 
     const renderer = TestRenderer.create(
       <MessageRow
         showThread={showThread}
         message={message}
-        participants={participants} />
+        participants={participants}
+        currentUser={currentUser}
+         />
     )
 
     expect(renderer.toJSON()).toMatchSnapshot()
