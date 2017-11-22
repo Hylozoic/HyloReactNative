@@ -40,6 +40,10 @@ export default class FeedList extends Component {
     }
   }
 
+  shouldComponentUpdate (nextProps) {
+    return nextProps.isFocused
+  }
+
   render () {
     const {
       posts,

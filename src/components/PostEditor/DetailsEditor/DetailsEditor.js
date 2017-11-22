@@ -24,6 +24,10 @@ export default class DetailsEditor extends React.Component {
     this.props.saveChanges(this.state.content)
   }
 
+  shouldComponentUpdate (nextProps) {
+    return nextProps.isFocused
+  }
+
   render () {
     const { initialContent, navigation } = this.props
     return <KeyboardFriendlyView style={styles.container} {...kavProps}>

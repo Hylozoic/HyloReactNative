@@ -1,7 +1,10 @@
 import { connect } from 'react-redux'
+import { get } from 'lodash/fp'
+
 import getMe from '../../../store/selectors/getMe'
 import getCurrentCommunityId from '../../../store/selectors/getCurrentCommunityId'
 import getCurrentNetworkId from '../../../store/selectors/getCurrentNetworkId'
+import { mapWhenFocused } from 'util/connector'
 
 export function mapStateToProps (state, props) {
   return {
@@ -11,4 +14,4 @@ export function mapStateToProps (state, props) {
   }
 }
 
-export default connect(mapStateToProps)
+export default connect(mapWhenFocused(mapStateToProps))

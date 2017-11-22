@@ -1,16 +1,18 @@
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { get } from 'lodash/fp'
+
 import getMe from '../../store/selectors/getMe'
 import getNetwork from '../../store/selectors/getNetwork'
 import getCommunity from '../../store/selectors/getCommunity'
 import makeGoToCommunity from '../../store/actions/makeGoToCommunity'
-import { bindActionCreators } from 'redux'
 import {
   fetchCommunityTopic,
   getCommunityTopic,
   toggleTopicSubscribe,
   FETCH_COMMUNITY_TOPIC
 } from './Feed.store'
-import { get } from 'lodash/fp'
+import { mapWhenFocused, mergeWhenFocused } from 'util/connector'
 
 export function mapStateToProps (state, props) {
   const params = get('state.params', props.navigation) || {}
@@ -74,4 +76,8 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps, mergeProps)
+export default connect(
+  mapWhenFocused(mapStateToProps),
+  mapWhenFocused(mapDispatchToProps),
+  mergeWhenFocused(mergeProps)
+)

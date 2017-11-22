@@ -3,7 +3,8 @@ import { setDetails } from '../PostEditor.store'
 
 export function mapStateToProps (state, props) {
   return {
-    initialContent: state.PostEditor.details
+    initialContent: state.PostEditor.details,
+    isFocused: props.isFocused
   }
 }
 

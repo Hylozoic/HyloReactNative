@@ -1,4 +1,6 @@
 import { connect } from 'react-redux'
+import { get, isNull, isUndefined, omit, omitBy } from 'lodash/fp'
+
 import {
   getSort,
   getFilter,
@@ -8,10 +10,10 @@ import {
   getHasMorePosts,
   defaultSortBy
 } from './FeedList.store'
+import { mapWhenFocused, mergeWhenFocused } from 'util/connector'
 import { ALL_COMMUNITIES_ID } from '../../store/models/Community'
 import fetchPosts, { FETCH_POSTS } from '../../store/actions/fetchPosts'
 import resetNewPostCount from '../../store/actions/resetNewPostCount'
-import { get, isNull, isUndefined, omit, omitBy } from 'lodash/fp'
 
 function makeFetchOpts (props) {
   const { community, network, topicName } = props
@@ -46,13 +48,13 @@ export function mapStateToProps (state, props) {
   })
   const pending = state.pending[FETCH_POSTS]
   return {
-    posts: getPosts(state, queryProps),
-    sortBy,
     filter,
     hasMore: getHasMorePosts(state, queryProps),
     pending: !!pending,
     networkId: get('id', network),
     pendingRefresh: !!(pending && pending.extractQueryResults.reset),
+    posts: getPosts(state, queryProps),
+    sortBy,
     queryProps // this is just here so mergeProps can use it
   }
 }
@@ -65,11 +67,9 @@ export function shouldResetNewPostCount ({subject, sortBy, filter, topic}) {
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
   const { hasMore, pending, posts, queryProps } = stateProps
-
   const fetchMorePosts = hasMore && !pending
     ? () => dispatchProps.fetchPosts({...queryProps, offset: posts.length})
     : () => {}
-
   const fetchPostsAndResetCount = (params, opts) => {
     const promises = [dispatchProps.fetchPosts(params, opts)]
     const communityID = get('id', ownProps.community)
@@ -90,4 +90,8 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps, mergeProps)
+export default connect(
+  mapWhenFocused(mapStateToProps),
+  mapDispatchToProps,
+  mergeWhenFocused(mergeProps)
+)

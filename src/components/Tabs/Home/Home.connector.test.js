@@ -8,6 +8,6 @@ describe('mapStateToProps', () => {
     const state = {
       orm: session.state
     }
-    expect(mapStateToProps(state)).toMatchSnapshot()
+    expect(mapStateToProps(state, { isFocused: true })).toMatchSnapshot()
   })
 })

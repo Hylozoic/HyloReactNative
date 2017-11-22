@@ -7,6 +7,7 @@ Object {
   "editPost": [Function],
   "fetchPost": [Function],
   "goToCommunity": [Function],
+  "isFocused": true,
   "newComment": [Function],
   "post": Object {
     "commenters": Array [],
@@ -133,6 +134,7 @@ Object {
       },
     ],
   ],
+  "isFocused": undefined,
   "newComment": Array [
     "navigate",
     Array [

@@ -2,6 +2,7 @@ import { connect } from 'react-redux'
 import { createPost, updatePost, setDetails } from './PostEditor.store'
 import { get, isEmpty } from 'lodash/fp'
 import getPost from '../../store/selectors/getPost'
+import { mapWhenFocused, mergeWhenFocused } from 'util/connector'
 
 function getPostId (state, props) {
   return props.navigation.state.params.id
@@ -54,4 +55,7 @@ export function mapDispatchToProps (dispatch, props) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)
+export default connect(
+  mapWhenFocused(mapStateToProps),
+  mapWhenFocused(mapDispatchToProps)
+)

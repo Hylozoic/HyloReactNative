@@ -10,6 +10,7 @@ import {
   updateNewNotificationCount
 } from './NotificationsList.store'
 import { HeaderButton } from 'util/header'
+import { mapWhenFocused } from 'util/connector'
 
 const NOTIFICATIONS_PAGE_SIZE = 20
 
@@ -35,4 +36,7 @@ export function mapDispatchToProps (dispatch, { navigation }) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)
+export default connect(
+  mapWhenFocused(mapStateToProps),
+  mapWhenFocused(mapDispatchToProps)
+)
