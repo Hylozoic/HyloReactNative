@@ -38,7 +38,8 @@ exports[`SignupFlow4 matches last snapshot 1`] = `
             "fontSize": 16,
             "height": 38,
             "marginLeft": "auto",
-            "width": 142,
+            "marginRight": 16,
+            "width": 132,
           },
           "skillCloud": Object {
             "flexDirection": "row",

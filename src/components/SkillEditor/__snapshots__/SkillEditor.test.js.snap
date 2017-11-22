@@ -5,12 +5,12 @@ exports[`SkillCloud matches last snapshot 1`] = `
   <SkillPill
     onPress={[Function]}
     skill="Snap"
-    theme={undefined}
+    theme={Object {}}
   />
   <SkillPill
     onPress={[Function]}
     skill="Crackle"
-    theme={undefined}
+    theme={Object {}}
   />
 </View>
 `;

@@ -5,7 +5,6 @@ import {
 } from 'react-navigation'
 import { Dimensions } from 'react-native'
 
-import WelcomeScene from '../WelcomeScene'
 import Feed from '../Feed'
 import JoinCommunity from '../JoinCommunity'
 import DrawerMenu from '../DrawerMenu'
@@ -47,7 +46,6 @@ export const tabs = {
 // Screens that work within Tabs (the same tab icon stays highlighted)
 export const screensInTabs = {
   Feed: {screen: Feed, path: 'feed'},
-  WelcomeScene: {screen: WelcomeScene, path: 'welcome'},
   PostEditor: {screen: PostEditor, path: 'post/:id/edit'},
   DetailsEditor: {screen: DetailsEditor, path: 'details/:id/edit'},
   PostDetails: {screen: PostDetails, path: 'post/:id'},
