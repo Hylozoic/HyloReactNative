@@ -22,43 +22,51 @@ export default class Feed extends Component {
     if (fetchCommunityTopic) fetchCommunityTopic()
   }
 
+  shouldComponentUpdate (nextProps) {
+    return nextProps.isFocused
+  }
+
   render () {
     const {
       community,
+      network,
       currentUser,
-      newPost,
-      showPost,
       editPost,
-      showMember,
-      showTopic,
       goToCommunity,
+      navigation,
+      newPost,
+      showMember,
+      showPost,
+      showTopic,
       screenProps,
+      toggleTopicSubscribe,
       topicName,
-      topicSubscribed,
-      toggleTopicSubscribe
+      topicSubscribed
     } = this.props
-
     return <View style={styles.container}>
       <FeedList
         community={community}
+        network={network}
         showPost={showPost}
         editPost={editPost}
-        showMember={showMember}
-        showTopic={showTopic}
-        showCommunities={!community}
         goToCommunity={goToCommunity}
-        topicName={topicName}
-        screenProps={screenProps}
         header={
           <FeedBanner
             community={community}
+            network={network}
             currentUser={currentUser}
             all={!community}
             newPost={newPost}
             topicName={topicName}
             topicSubscribed={topicSubscribed}
-            toggleTopicSubscribe={toggleTopicSubscribe} />
-        } />
+            toggleTopicSubscribe={toggleTopicSubscribe} />}
+        navigation={navigation}
+        screenProps={screenProps}
+        showCommunities={!community}
+        showMember={showMember}
+        showPost={showPost}
+        showTopic={showTopic}
+        topicName={topicName} />
       {!topicName && community && <SocketSubscriber type='community' id={community.id} />}
     </View>
   }

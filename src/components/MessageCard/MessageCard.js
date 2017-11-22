@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { Text, View } from 'react-native'
 import { any, bool, shape, string } from 'prop-types'
 
 import Avatar from '../Avatar'

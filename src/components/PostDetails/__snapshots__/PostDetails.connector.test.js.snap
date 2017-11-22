@@ -7,6 +7,7 @@ Object {
   "editPost": [Function],
   "fetchPost": [Function],
   "goToCommunity": [Function],
+  "isFocused": true,
   "newComment": [Function],
   "post": Object {
     "commenters": Array [],
@@ -22,11 +23,27 @@ Object {
       },
     ],
     "creator": undefined,
+    "fileAttachments": Array [
+      SessionBoundModel {
+        "_fields": Object {
+          "id": "1",
+          "post": "1",
+          "type": "file",
+          "url": "http://foo.com/foo.pdf",
+        },
+      },
+    ],
     "fileUrls": Array [
       "http://foo.com/foo.pdf",
     ],
     "followers": undefined,
     "id": "1",
+    "imageUrls": Array [
+      "http://foo.com/bar.png",
+    ],
+    "linkPreview": undefined,
+    "pinned": undefined,
+    "postMemberships": undefined,
   },
   "showMember": [Function],
   "showTopic": [Function],
@@ -63,6 +80,7 @@ Object {
     id
     name
     avatarUrl
+    tagline
   }
   createdAt
   updatedAt
@@ -105,6 +123,13 @@ Object {
     type
     url
   }
+  postMemberships {
+    id
+    pinned
+    community {
+      id
+    }
+  }
         }
       }",
           "variables": Object {
@@ -128,10 +153,11 @@ Object {
     Array [
       Object {
         "payload": undefined,
-        "type": "CHANGE_COMMUNITY",
+        "type": "SELECT_COMMUNITY",
       },
     ],
   ],
+  "isFocused": undefined,
   "newComment": Array [
     "navigate",
     Array [

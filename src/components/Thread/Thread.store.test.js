@@ -20,12 +20,6 @@ describe('getThread', () => {
   beforeEach(() => {
     session = orm.mutableSession(orm.getEmptyState())
     session.MessageThread.create({ id: '1' })
-    session.Message.create({ id: '4', messageThread: '1', creator: '8' })
-    session.Message.create({ id: '10', messageThread: '1', creator: '8' })
-    session.Message.create({ id: '1', messageThread: '1', creator: '9' })
-    session.Message.create({ id: '200', messageThread: '1', creator: '8' })
-    session.Person.create({ id: '8', avatarUrl: 'https://wombat.com/test.jpg' })
-    session.Person.create({ id: '9', avatarUrl: 'https://aardvark.com/test.jpg' })
   })
 
   it('should match the last snapshot', () => {
@@ -34,18 +28,42 @@ describe('getThread', () => {
     expect(store.getThread(state, props)).toMatchSnapshot()
   })
 
-  it('should order by id (descending) for the inverted list', () => {
-    const props = { navigation: { state: { params: { id: '1' } } } }
-    const state = { orm: session.state }
-    const actual = store.getThread(state, props).messages
-    expect(actual.map(m => m.id)).toEqual(['200', '10', '4', '1'])
-  })
-
   it('should return null if the messageThread is not found', () => {
     const props = { navigation: { state: { params: { id: '9999' } } } }
     const state = { orm: session.state }
     const actual = store.getThread(state, props)
     expect(actual).toBe(null)
+  })
+})
+
+describe('presentThread', () => {
+  let session
+
+  beforeEach(() => {
+    session = orm.mutableSession(orm.getEmptyState())
+    session.Message.create({ id: '4', messageThread: '1', creator: '8' })
+    session.Message.create({ id: '10', messageThread: '1', creator: '8' })
+    session.Message.create({ id: '1', messageThread: '1', creator: '9' })
+    session.Message.create({ id: '200', messageThread: '1', creator: '8' })
+    session.Person.create({ id: '8', name: 'Bob', avatarUrl: 'https://wombat.com/test.jpg' })
+    session.Person.create({ id: '9', name: 'Sue', avatarUrl: 'https://aardvark.com/test.jpg' })
+    session.MessageThread.create({ id: '1', participants: ['8', '9'] })
+  })
+
+  it('orders by id (descending) for the inverted list', () => {
+    const props = { navigation: { state: { params: { id: '1' } } } }
+    const state = { orm: session.state }
+    const thread = store.getThread(state, props)
+    const presented = store.presentThread(thread, '10')
+    expect(presented.messages.map(m => m.id)).toEqual(['200', '10', '4', '1'])
+  })
+
+  it('removes currentUser from title', () => {
+    const props = { navigation: { state: { params: { id: '1' } } } }
+    const state = { orm: session.state }
+    const thread = store.getThread(state, props)
+    const presented = store.presentThread(thread, '8')
+    expect(presented.title).toEqual('Sue')
   })
 })
 

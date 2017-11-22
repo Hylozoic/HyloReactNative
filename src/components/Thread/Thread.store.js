@@ -130,21 +130,19 @@ export function refineMessage ({ id, createdAt, creator, text }, i, messages) {
 }
 
 // NOTE: descending order to accommodate inverted FlatList
-function refineThread (session, id) {
-  if (session.MessageThread.hasId(id)) {
-    const thread = session.MessageThread.withId(id)
-    const messages = thread.messages
-      .orderBy(m => Number(m.id), 'desc')
-      .toModelArray()
-      .map(refineMessage)
-    const title = threadNames(thread.participants.toRefArray().map(firstName))
-    return {
-      id: thread.id,
-      messages,
-      title
-    }
+export function presentThread (thread, currentUserId) {
+  if (!thread) return null
+  const messages = thread.messages
+    .orderBy(m => Number(m.id), 'desc')
+    .toModelArray()
+    .map(refineMessage)
+  const title = threadNames(thread.participants.filter(p => p.id !== currentUserId)
+  .toRefArray().map(firstName))
+  return {
+    id: thread.id,
+    messages,
+    title
   }
-  return null
 }
 
 const firstName = person => person.name.split(' ')[0]
@@ -153,7 +151,7 @@ export const getThread = ormCreateSelector(
   orm,
   state => state.orm,
   (_, { navigation }) => navigation.state.params.id,
-  refineThread
+  ({ MessageThread }, id) => MessageThread.safeGet({id})
 )
 
 const getMessageResults = makeGetQueryResults(FETCH_MESSAGES)

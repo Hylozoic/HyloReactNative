@@ -74,6 +74,10 @@ export default class PostEditor extends React.Component {
     })
   }
 
+  shouldComponentUpdate (nextProps) {
+    return nextProps.isFocused
+  }
+
   addImage = ({ local, remote }) => {
     // TODO: use `local` to avoid unnecessary network activity
     this.setState({

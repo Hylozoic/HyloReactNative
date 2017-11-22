@@ -3,7 +3,7 @@
 exports[`goToCommunityFromRoot 1`] = `
 Object {
   "payload": "anycommunityid",
-  "type": "CHANGE_COMMUNITY",
+  "type": "SELECT_COMMUNITY",
 }
 `;
 
@@ -11,6 +11,7 @@ exports[`mapDispatchToProps 1`] = `
 Object {
   "dispatch": [Function],
   "goToCommunity": [Function],
+  "goToHome": [Function],
   "useInvitation": [Function],
 }
 `;

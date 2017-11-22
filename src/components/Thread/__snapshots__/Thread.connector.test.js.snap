@@ -1,5 +1,154 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`mapDispatchToProps creates actions 1`] = `
+Object {
+  "createMessage": [Function],
+  "fetchMessages": [Function],
+  "reconnectFetchMessages": [Function],
+  "sendIsTyping": [Function],
+  "updateThreadReadTime": [Function],
+}
+`;
+
+exports[`mapDispatchToProps creates actions 2`] = `
+Array [
+  Array [
+    Object {
+      "graphql": Object {
+        "query": "mutation ($messageThreadId: String, $text: String) {
+        createMessage(data: {messageThreadId: $messageThreadId, text: $text}) {
+          id
+          text
+          createdAt
+          creator {
+            id
+          }
+          messageThread {
+            id
+          }
+        }
+      }",
+        "variables": Object {
+          "messageThreadId": 77,
+          "optimistic": true,
+          "text": "some text",
+        },
+      },
+      "meta": Object {
+        "messageThreadId": 77,
+        "optimistic": true,
+        "tempId": "messageThread77_1",
+        "text": "some text",
+      },
+      "type": "Thread/CREATE_MESSAGE",
+    },
+  ],
+  Array [
+    Object {
+      "graphql": Object {
+        "query": "
+        query ($id: ID, $cursor: ID, $messagePageSize: Int) {
+          messageThread (id: $id) {
+            id
+            messages(first: $messagePageSize, cursor: $cursor, order: \\"desc\\") {
+              items {
+                id
+                createdAt
+                text
+                creator {
+                  id
+                }
+              }
+              total
+              hasMore
+            }
+            participants {
+              id
+              name
+              avatarUrl
+            }
+          }
+        }
+      ",
+        "variables": Object {
+          "cursor": 3,
+          "id": 77,
+          "messagePageSize": 20,
+        },
+      },
+      "meta": Object {
+        "afterInteractions": true,
+        "extractModel": "MessageThread",
+        "extractQueryResults": Object {
+          "getItems": [Function],
+        },
+        "id": 77,
+        "reset": undefined,
+      },
+      "type": "Thread/FETCH_MESSAGES",
+    },
+  ],
+  Array [
+    Object {
+      "graphql": Object {
+        "query": "
+        query ($id: ID, $cursor: ID, $messagePageSize: Int) {
+          messageThread (id: $id) {
+            id
+            messages(first: $messagePageSize, cursor: $cursor, order: \\"desc\\") {
+              items {
+                id
+                createdAt
+                text
+                creator {
+                  id
+                }
+              }
+              total
+              hasMore
+            }
+            participants {
+              id
+              name
+              avatarUrl
+            }
+          }
+        }
+      ",
+        "variables": Object {
+          "id": 77,
+          "messagePageSize": 20,
+        },
+      },
+      "meta": Object {
+        "afterInteractions": true,
+        "extractModel": "MessageThread",
+        "extractQueryResults": Object {
+          "getItems": [Function],
+        },
+        "id": 77,
+        "reset": true,
+      },
+      "type": "Thread/FETCH_MESSAGES",
+    },
+  ],
+  Array [
+    Object {
+      "meta": Object {
+        "id": 77,
+      },
+      "payload": Object {
+        "api": Object {
+          "method": "POST",
+          "path": "/noo/post/77/update-last-read",
+        },
+      },
+      "type": "Thread/UPDATE_THREAD_READ_TIME",
+    },
+  ],
+]
+`;
+
 exports[`mapStateToProps returns the right keys 1`] = `
 Object {
   "currentUserId": undefined,

@@ -1,9 +1,9 @@
 import { connect } from 'react-redux'
-import getCommunity from '../../../../store/selectors/getCommunity'
+import getCurrentCommunity from '../../../../store/selectors/getCurrentCommunity'
 
 export function mapStateToProps (state) {
   return {
-    currentCommunity: getCommunity(state, {id: state.currentCommunity})
+    currentCommunity: getCurrentCommunity(state)
   }
 }
 

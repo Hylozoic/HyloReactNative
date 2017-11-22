@@ -6,7 +6,7 @@ import {
 import orm from 'store/models'
 import { mapValues } from 'lodash'
 
-let props, dispatch, mergedProps, dispatchCalls, navigateCalls
+let props, dispatch, mergedProps
 
 beforeAll(() => {
   const session = orm.session(orm.getEmptyState())
@@ -32,10 +32,8 @@ beforeAll(() => {
     }
   }
 
-  dispatchCalls = []
-  navigateCalls = []
-
   props = {
+    isFocused: true,
     navigation: {
       state: {
         params: {id: '1'}

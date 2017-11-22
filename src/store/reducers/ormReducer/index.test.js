@@ -27,6 +27,9 @@ import {
 import {
   UPDATE_USER_SETTINGS_PENDING
 } from '../../actions/updateUserSettings'
+import {
+  PIN_POST_PENDING
+} from '../../../components/PostCard/PostHeader/PostHeader.store'
 
 it('responds to an action with meta.extractModel', () => {
   const state = orm.getEmptyState()
@@ -316,5 +319,37 @@ describe('on UPDATE_USER_SETTINGS_PENDING', () => {
     const newSession = orm.session(ormReducer(session.state, action))
     expect(newSession.Me.first().ref).toMatchSnapshot()
     expect(newSession.Person.withId(id).ref).toMatchSnapshot()
+  })
+})
+
+describe('on PIN_POST_PENDING', () => {
+  const session = orm.session(orm.getEmptyState())
+  const community = session.Community.create({id: '1', slug: 'foo'})
+  const postId = 123
+  const postMembership = session.PostMembership.create({
+    pinned: false,
+    community: community
+  })
+
+  session.Post.create({
+    id: postId,
+    communities: [community],
+    postMemberships: [postMembership]
+  })
+
+  const action = {
+    type: PIN_POST_PENDING,
+    meta: {
+      postId,
+      communityId: community.id
+    }
+  }
+
+  it('updates the postMembership', () => {
+    const newState = ormReducer(session.state, action)
+    const newSession = orm.session(newState)
+
+    const postMembership = newSession.Post.withId(postId).postMemberships.toModelArray()[0]
+    expect(postMembership.pinned).toEqual(true)
   })
 })

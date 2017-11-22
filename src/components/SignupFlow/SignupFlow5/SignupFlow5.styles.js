@@ -36,11 +36,10 @@ export default {
     backgroundColor: white40onCaribbeanGreen,
     borderColor: 'white',
     color: 'white',
-    height: 30,
-    fontSize: 14
+    fontSize: 14,
+    marginLeft: 0
   },
   continueButton: {
-    ...styles.continueButton,
-    marginLeft: 10
+    ...styles.continueButton
   }
 }

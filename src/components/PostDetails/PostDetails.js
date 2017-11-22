@@ -43,6 +43,10 @@ export default class PostDetails extends React.Component {
     this.props.fetchPost()
   }
 
+  shouldComponentUpdate (nextProps) {
+    return nextProps.isFocused
+  }
+
   render () {
     const {
       post,
@@ -69,6 +73,7 @@ export default class PostDetails extends React.Component {
         editPost={editPost}
         communities={post.communities}
         slug={slug}
+        pinned={post.pinned}
         postId={post.id}
         showMember={showMember}
         goToCommunity={goToCommunity} />
