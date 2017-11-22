@@ -48,7 +48,7 @@ describe('mergeProps', () => {
       signup: jest.fn(() => Promise.resolve({})),
       updateUserSettings: jest.fn(() => Promise.resolve({})),
       updateLocalUserSettings: jest.fn(),
-      fetchCurrentUser: jest.fn()
+      fetchCurrentUser: jest.fn(() => Promise.resolve())
     }
     const ownProps = {
       navigation: {

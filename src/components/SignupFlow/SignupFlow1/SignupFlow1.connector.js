@@ -1,4 +1,6 @@
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import fetchCurrentUser from 'store/actions/fetchCurrentUser'
 import {
   signup,
   getUserSettings,
@@ -33,15 +35,20 @@ export function mapDispatchToProps (dispatch, props) {
   return {
     signup: params => dispatch(signup(params)),
     changeSetting: (setting, value) => dispatch(updateLocalUserSettings({[setting]: value})),
-    updateLocalUserSettings: settings => dispatch(updateLocalUserSettings(settings)),
-    updateUserSettings: settings => dispatch(updateUserSettings(settings))
+    ...bindActionCreators({
+      updateLocalUserSettings,
+      updateUserSettings,
+      fetchCurrentUser
+    }, dispatch)
   }
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
   const goToNext = () => ownProps.navigation.navigate('SignupFlow2')
   const { name, email, password, currentUser, showPasswordField } = stateProps
-  const { signup, updateUserSettings, updateLocalUserSettings } = dispatchProps
+  const {
+    signup, updateUserSettings, updateLocalUserSettings, fetchCurrentUser
+  } = dispatchProps
   const saveFunc = currentUser ? updateUserSettings : signup
 
   const loadUserSettings = currentUser
@@ -55,7 +62,7 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     email,
     password: showPasswordField ? password : null
   }))
-  .then(({ error }) => !error && goToNext())
+  .then(({ error }) => !error && fetchCurrentUser().then(() => goToNext()))
 
   return {
     ...stateProps,
