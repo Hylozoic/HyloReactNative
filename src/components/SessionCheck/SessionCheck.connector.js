@@ -9,6 +9,8 @@ function mergeProps (stateProps, dispatchProps, ownProps) {
 
   const handleResult = ({ error, payload: loggedIn }) => {
     if (error) {
+      // automatically retry -- this prevents us from getting stuck with
+      // nothing to interact with if we open the app while temporarily offline
       setTimeout(checkSession, 1000)
     } else if (loggedIn) {
       return ownProps.fetchCurrentUserAndRedirect()

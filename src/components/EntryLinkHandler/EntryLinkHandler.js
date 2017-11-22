@@ -21,21 +21,24 @@ export default class EntryLinkHandler extends React.Component {
     if (!url) return
 
     const { path } = parse(url)
-    if (path) setEntryUrl(path)
 
-    // if you're already logged in, redirect immediately.
     if (currentUser) {
+      // if you're already logged in, redirect immediately.
       redirectNow({
         currentUser,
         navigation: navigator,
         entryUrl: path
       })
-    } else if (isInvitationLink(path)) {
-      redirectNow({
-        currentUser: null,
-        navigation: navigator,
-        entryUrl: path
-      })
+    } else {
+      setEntryUrl(path)
+
+      if (isInvitationLink(path)) {
+        redirectNow({
+          currentUser: null,
+          navigation: navigator,
+          entryUrl: path
+        })
+      }
     }
   }
 
