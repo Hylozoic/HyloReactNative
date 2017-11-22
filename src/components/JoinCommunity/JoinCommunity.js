@@ -8,11 +8,11 @@ export default class JoinCommunity extends Component {
   }
 
   static propTypes = {
-    useInvitation: PropTypes.func.isRequired
+    checkOrUseInvitation: PropTypes.func.isRequired
   }
 
   componentDidMount () {
-    return this.props.useInvitation()
+    this.props.checkOrUseInvitation()
   }
 
   render () {

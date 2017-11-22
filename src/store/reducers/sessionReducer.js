@@ -4,7 +4,7 @@ import {
   LOGIN_WITH_GOOGLE
 } from '../../components/Login/actions'
 import { SIGNUP } from '../../components/SignupFlow/SignupFlow.store'
-import { CHECK_INVITATION } from '../../components/CheckInvitation/CheckInvitation.store'
+import { CHECK_INVITATION } from '../../components/JoinCommunity/JoinCommunity.store'
 import {
   CHECK_SESSION,
   SET_ENTRY_URL,

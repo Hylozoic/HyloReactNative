@@ -1,23 +1,13 @@
 import convertEntryUrl from './convertEntryUrl'
 
 it('handles an invitation link when logged in', () => {
-  expect(convertEntryUrl('/h/use-invitation?token=foo', true))
+  expect(convertEntryUrl('/h/use-invitation?token=foo'))
   .toEqual('/useInvitation/foo')
 })
 
-it('handles an invitation link when logged out', () => {
-  expect(convertEntryUrl('/h/use-invitation?token=foo', false))
-  .toEqual('/checkInvitation/foo')
-})
-
 it('handles a community join link when logged in', () => {
-  expect(convertEntryUrl('/c/sandbox/join/foo', true))
+  expect(convertEntryUrl('/c/sandbox/join/foo'))
   .toEqual('/useAccessCode/sandbox/foo')
-})
-
-it('handles a community join link when logged out', () => {
-  expect(convertEntryUrl('/c/sandbox/join/foo', false))
-  .toEqual('/checkAccessCode/sandbox/foo')
 })
 
 it('handles a post link', () => {

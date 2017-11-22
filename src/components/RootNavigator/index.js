@@ -30,7 +30,6 @@ import SignupFlow3 from '../SignupFlow/SignupFlow3'
 import SignupFlow4 from '../SignupFlow/SignupFlow4'
 import SignupFlow5 from '../SignupFlow/SignupFlow5'
 import Login from '../Login'
-import CheckInvitation from '../CheckInvitation'
 import InviteExpired from '../InviteExpired'
 import Signup from '../Signup'
 import trackCurrentTab from './trackCurrentTab'
@@ -111,12 +110,6 @@ const screensInStack = {
   SignupFlow5: {screen: SignupFlow5},
   Login: {screen: Login, path: '/login'},
   Thread: {screen: Thread, path: '/thread/:id'},
-
-  // these happen when you're not logged in yet
-  CheckInvitation: {screen: CheckInvitation, path: '/checkInvitation/:token'},
-  CheckAccessCode: {screen: CheckInvitation, path: '/checkAccessCode/:slug/:accessCode'},
-
-  // these happen when you're logged in
   UseInvitation: {screen: JoinCommunity, path: '/useInvitation/:token'},
   UseAccessCode: {screen: JoinCommunity, path: '/useAccessCode/:slug/:accessCode'}
 }

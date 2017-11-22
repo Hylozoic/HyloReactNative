@@ -1,5 +1,5 @@
 import sessionReducer from './sessionReducer'
-import { CHECK_INVITATION } from '../../components/CheckInvitation/CheckInvitation.store'
+import { CHECK_INVITATION } from '../../components/JoinCommunity/JoinCommunity.store'
 import { RESET_ENTRY_URL } from '../../components/SessionCheck/SessionCheck.store'
 
 describe('on CHECK_INVITATION', () => {

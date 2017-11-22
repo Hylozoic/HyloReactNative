@@ -7,8 +7,8 @@ jest.mock('../Loading', () => ({LoadingScreen: 'LoadingScreen'}))
 
 it('calls useInvitation', async () => {
   const props = {
-    useInvitation: jest.fn()
+    checkOrUseInvitation: jest.fn()
   }
   await TestRenderer.create(<JoinCommunity {...props} />)
-  expect(props.useInvitation).toHaveBeenCalled()
+  expect(props.checkOrUseInvitation).toHaveBeenCalled()
 })

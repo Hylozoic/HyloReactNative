@@ -2,7 +2,7 @@ import url from 'url'
 import { routeMatchers } from 'util/navigation'
 import qs from 'querystring'
 
-export default function convertEntryUrl (path, isLoggedIn) {
+export default function convertEntryUrl (path) {
   let match
   const { query, pathname } = url.parse(path)
   const params = qs.parse(query)
@@ -14,16 +14,10 @@ export default function convertEntryUrl (path, isLoggedIn) {
   if (match) return '/thread/' + match.id
 
   match = routeMatchers.invitation(pathname)
-  if (match) {
-    const action = isLoggedIn ? 'use' : 'check'
-    return `/${action}Invitation/${params.token}`
-  }
+  if (match) return `/useInvitation/${params.token}`
 
   match = routeMatchers.accessLink(pathname)
-  if (match) {
-    const action = isLoggedIn ? 'use' : 'check'
-    return `/${action}AccessCode/${match.slug}/${match.accessCode}`
-  }
+  if (match) return `/useAccessCode/${match.slug}/${match.accessCode}`
 
   return path
 }

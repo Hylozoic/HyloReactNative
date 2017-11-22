@@ -103,7 +103,8 @@
       "fetch",
       "it",
       "describe",
-      "jest"
+      "jest",
+      "test"
     ]
   }
 }
