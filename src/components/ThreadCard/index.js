@@ -9,7 +9,7 @@ import { humanDate } from 'hylo-utils/text'
 export default function ThreadCard (props) {
   if (!props.message) return null
   const otherParticipants = filter(p => p.id !== get('id', props.currentUser), props.participants)
-  let name = lastMessageCreator(props.message, props.currentUser, props.participants)
+  const name = lastMessageCreator(props.message, props.currentUser, props.participants)
   const avatarUrls = map('avatarUrl', otherParticipants)
 
   return <View style={styles.threadCard}>
@@ -23,7 +23,8 @@ export default function ThreadCard (props) {
 }
 
 export function lastMessageCreator (message, currentUser, participants) {
-  if (message._fields.creator === currentUser.id) return 'You:'
+  console.log('message', message)
+  if (get('creator', message._fields) === currentUser.id) return 'You:'
   if (participants.length === 2) return ''
   return find(p => p.id === get('creator', message._fields), participants).name
 }
