@@ -1,7 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders correctly with all=true, and no community or user 1`] = `
-<Connect(WelcomeScene)
-  navigation={undefined}
-/>
-`;
+exports[`renders correctly with all=true, and no community or user 1`] = `null`;
