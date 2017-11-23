@@ -23,7 +23,6 @@ export default function ThreadCard (props) {
 }
 
 export function lastMessageCreator (message, currentUser, participants) {
-  console.log('message', message)
   if (get('creator', message._fields) === currentUser.id) return 'You:'
   if (participants.length === 2) return ''
   return find(p => p.id === get('creator', message._fields), participants).name
