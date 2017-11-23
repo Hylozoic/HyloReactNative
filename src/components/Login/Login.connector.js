@@ -7,6 +7,9 @@ import {
 import { getPending } from './Login.store'
 import { register as registerOneSignal } from 'util/onesignal'
 import registerDevice from '../../store/actions/registerDevice'
+import fetchCurrentUser from 'store/actions/fetchCurrentUser'
+import { redirectAfterLogin } from 'util/navigation'
+import { getDeepLink } from '../DeepLinkHandler/DeepLinkHandler.store'
 
 export function mapStateToProps (state, props) {
   const error = state.session.loginError
@@ -18,7 +21,8 @@ export function mapStateToProps (state, props) {
     pending,
     defaultEmail: state.session.defaultLoginEmail,
     goToSignup,
-    hasSignupLink: !!state.session.hasSignupLink
+    hasSignupLink: !!state.session.hasSignupLink,
+    deepLink: getDeepLink(state)
   }
 }
 
@@ -26,7 +30,8 @@ export const mapDispatchToProps = {
   registerDevice,
   loginWithFacebook,
   loginWithGoogle,
-  login
+  login,
+  fetchCurrentUser
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
@@ -34,14 +39,20 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     registerDevice,
     loginWithGoogle,
     loginWithFacebook,
-    login
+    login,
+    fetchCurrentUser
   } = dispatchProps
 
   const finishLogin = action => {
     if (action.error) return
     registerOneSignal({registerDevice})
 
-    return ownProps.fetchCurrentUserAndRedirect()
+    return fetchCurrentUser().then(({ error, payload }) =>
+      !error && redirectAfterLogin({
+        navigation: ownProps.navigation,
+        currentUser: payload.data.me,
+        deepLink: stateProps.deepLink
+      }))
   }
 
   return {

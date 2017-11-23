@@ -75,17 +75,30 @@ describe('mergeProps', () => {
   it('adds finishLogin', () => {
     const dispatch = jest.fn(x => Promise.resolve(x))
     const dispatchProps = bindActionCreators(mapDispatchToProps, dispatch)
-    const ownProps = {
-      fetchCurrentUserAndRedirect: jest.fn()
+    dispatchProps.fetchCurrentUser = jest.fn(() =>
+      Promise.resolve({
+        payload: {
+          data: {
+            me: {id: 1}
+          }
+        }
+      }))
+
+    const stateProps = {
+      deepLink: {type: 'foo', params: {id: 'bar'}}
     }
 
-    const mergedProps = mergeProps(null, dispatchProps, ownProps)
+    const ownProps = {
+      navigation: {dispatch: jest.fn()}
+    }
+
+    const mergedProps = mergeProps(stateProps, dispatchProps, ownProps)
     return mergedProps.loginWithFacebook('token')
     .then(() => {
       expect(dispatch).toHaveBeenCalled()
       expect(dispatch.mock.calls).toMatchSnapshot()
       expect(OneSignal.registerForPushNotifications).toBeCalled()
-      expect(ownProps.fetchCurrentUserAndRedirect).toBeCalled()
+      expect(ownProps.navigation.dispatch).toHaveBeenCalledWith(stateProps.deepLink)
     })
   })
 })
