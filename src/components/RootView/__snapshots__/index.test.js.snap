@@ -15,7 +15,7 @@ exports[`RootView renders as expected when store is loaded 1`] = `
 <View>
   <VersionCheck />
   <LoadingModal />
-  <NavigationContext />
+  <RootNavigator />
 </View>
 `;
 

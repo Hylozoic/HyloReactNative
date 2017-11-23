@@ -35,6 +35,7 @@ import Signup from '../Signup'
 import trackCurrentTab from './trackCurrentTab'
 import { isIOS } from 'util/platform'
 import TabBar from './TabBar'
+import extendRouter from './extendRouter'
 
 // If you change or add tabs you have to edit trackCurrentTab.js
 const tabs = {
@@ -130,13 +131,7 @@ const RootNavigator = StackNavigator(
   }
 )
 
-const defaultGetAction = RootNavigator.router.getActionForPathAndParams
-Object.assign(RootNavigator.router, {
-  getActionForPathAndParams (path, params) {
-    // can override default behavior here
-    return defaultGetAction(path, params)
-  }
-})
+extendRouter(RootNavigator.router)
 
 // trackCurrentTab must be on the top-level navigator, because it uses a prop
 // for listening to navigation change events that can only be assigned to a

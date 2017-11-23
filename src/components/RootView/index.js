@@ -7,7 +7,8 @@ import { Provider } from 'react-redux'
 import getStore from '../../store'
 import { init as initOneSignal } from 'util/onesignal'
 import receivePushNotification from '../../store/actions/receivePushNotification'
-import NavigationContext from '../redirectsAfterLogin/NavigationContext'
+import DeepLinkHandler from '../DeepLinkHandler'
+import RootNavigator from '../RootNavigator'
 
 export default class RootView extends React.Component {
   state = {}
@@ -23,15 +24,22 @@ export default class RootView extends React.Component {
     })
   }
 
+  setNavigator = ref => {
+    if (!ref) return
+    this.navigator = ref.getWrappedInstance()
+    this.forceUpdate() // so that DeepLinkHandler gets the navigator
+  }
+
   render () {
-    return this.state.store
-      ? <Provider store={this.state.store}>
-        <View style={{flex: 1}}>
-          <VersionCheck />
-          <LoadingModal />
-          <NavigationContext />
-        </View>
-      </Provider>
-      : <LoadingScreen />
+    if (!this.state.store) return <LoadingScreen />
+
+    return <Provider store={this.state.store}>
+      <View style={{flex: 1}}>
+        <VersionCheck />
+        <LoadingModal />
+        <RootNavigator ref={this.setNavigator} />
+        <DeepLinkHandler navigator={this.navigator} />
+      </View>
+    </Provider>
   }
 }

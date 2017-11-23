@@ -32,7 +32,7 @@ jest.mock('react-native-onesignal', () => {
 
 jest.mock('../VersionCheck', () => 'VersionCheck')
 jest.mock('../LoadingModal', () => 'LoadingModal')
-jest.mock('../redirectsAfterLogin/NavigationContext', () => 'NavigationContext')
+jest.mock('../RootNavigator', () => 'RootNavigator')
 
 describe('RootView', () => {
   it('renders as expected when store is loaded', async () => {

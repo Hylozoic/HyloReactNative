@@ -1,8 +1,13 @@
 import url from 'url'
 import { routeMatchers } from 'util/navigation'
 import qs from 'querystring'
+import RootNavigator from '../RootNavigator'
 
-export default function convertEntryUrl (path) {
+export default function convertDeepLinkToAction (path) {
+  return RootNavigator.router.getActionForPathAndParams(reformatPath(path))
+}
+
+export function reformatPath (path) {
   let match
   const { query, pathname } = url.parse(path)
   const params = qs.parse(query)
