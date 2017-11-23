@@ -130,6 +130,14 @@ const RootNavigator = StackNavigator(
   }
 )
 
+const defaultGetAction = RootNavigator.router.getActionForPathAndParams
+Object.assign(RootNavigator.router, {
+  getActionForPathAndParams (path, params) {
+    // can override default behavior here
+    return defaultGetAction(path, params)
+  }
+})
+
 // trackCurrentTab must be on the top-level navigator, because it uses a prop
 // for listening to navigation change events that can only be assigned to a
 // top-level navigator

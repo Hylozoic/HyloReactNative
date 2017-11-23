@@ -4,7 +4,7 @@ import { get } from 'lodash/fp'
 import { parse } from 'url'
 import { isInvitationLink } from 'util/navigation'
 
-export default class EntryLinkHandler extends React.Component {
+export default class DeepLinkHandler extends React.Component {
   componentWillMount () {
     Linking.getInitialURL().then(this.handleUrl)
     Linking.addEventListener('url', this.handleUrl)
@@ -15,7 +15,7 @@ export default class EntryLinkHandler extends React.Component {
   }
 
   handleUrl = eventOrUrl => {
-    const { setEntryUrl, currentUser, navigator, redirectNow } = this.props
+    const { storeDeepLink, currentUser, navigator, redirectNow } = this.props
 
     const url = get('url', eventOrUrl) || eventOrUrl
     if (!url) return
@@ -30,7 +30,7 @@ export default class EntryLinkHandler extends React.Component {
         entryUrl: path
       })
     } else {
-      setEntryUrl(path)
+      storeDeepLink(path)
 
       if (isInvitationLink(path)) {
         redirectNow({

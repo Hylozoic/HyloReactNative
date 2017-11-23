@@ -3,7 +3,7 @@ import TestRenderer from 'react-test-renderer'
 import React from 'react'
 import { Provider } from 'react-redux'
 import { createMockStore } from 'util/testing'
-import EntryLinkHandler from '../EntryLinkHandler'
+import DeepLinkHandler from '../DeepLinkHandler'
 
 jest.mock('react-native-device-info')
 jest.mock('../RootNavigator', () => 'RootNavigator')
@@ -27,7 +27,7 @@ it('adds a method to context', async () => {
   expect(navigateToPath).toBeTruthy()
   expect(instance.getChildContext()).toEqual({navigateToPath})
 
-  const handler = node.findByType(EntryLinkHandler).instance
+  const handler = node.findByType(DeepLinkHandler).instance
   expect(handler.props.navigator).toEqual(mockNavigator)
 
   navigateToPath('/foo')

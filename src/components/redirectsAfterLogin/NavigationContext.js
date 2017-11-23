@@ -8,7 +8,7 @@
 import React from 'react'
 import { func } from 'prop-types'
 import { View } from 'react-native'
-import EntryLinkHandler from '../EntryLinkHandler'
+import DeepLinkHandler from '../DeepLinkHandler'
 import RootNavigator from '../RootNavigator'
 
 const INTERNAL_ROUTE_URI_PREFIX = 'hylo://'
@@ -43,7 +43,7 @@ export default class NavigationContext extends React.Component {
   render () {
     return <View style={{flex: 1}}>
       <RootNavigator ref={this.setup} uriPrefix={INTERNAL_ROUTE_URI_PREFIX} />
-      <EntryLinkHandler navigator={this.navigator} />
+      <DeepLinkHandler navigator={this.navigator} />
     </View>
   }
 }

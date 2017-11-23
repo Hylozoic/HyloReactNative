@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { setEntryUrl } from '../SessionCheck/SessionCheck.store'
+import { storeDeepLink } from './DeepLinkHandler.store'
 import getMe from 'store/selectors/getMe'
 
 function mapStateToProps (state, props) {
@@ -8,6 +8,6 @@ function mapStateToProps (state, props) {
   }
 }
 
-const mapDispatchToProps = {setEntryUrl}
+const mapDispatchToProps = {storeDeepLink}
 
 export default connect(mapStateToProps, mapDispatchToProps)

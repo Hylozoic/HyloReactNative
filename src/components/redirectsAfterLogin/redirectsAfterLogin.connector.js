@@ -1,13 +1,13 @@
 import { connect } from 'react-redux'
 import fetchCurrentUser from 'store/actions/fetchCurrentUser'
-import { getEntryUrl } from '../SessionCheck/SessionCheck.store'
+import { getDeepLink } from '../DeepLinkHandler/DeepLinkHandler.store'
 import { resetToRoute } from 'util/navigation'
 import convertEntryUrl from './convertEntryUrl'
 import { get } from 'lodash/fp'
 
 function mapStateToProps (state, props) {
   return {
-    entryUrl: getEntryUrl(state)
+    entryUrl: getDeepLink(state)
   }
 }
 
@@ -27,7 +27,7 @@ function mergeProps (stateProps, dispatchProps, ownProps) {
           navigateToPath
         })),
 
-    // for use by EntryLinkHandler (has its own user data & different navigator)
+    // for use by DeepLinkHandler (has its own user data & different navigator)
     redirectNow: ({ currentUser, navigation, entryUrl }) =>
       redirect({
         navigation: navigation || ownProps.navigation,

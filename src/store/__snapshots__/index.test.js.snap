@@ -3,6 +3,7 @@
 exports[`getEmptyState matches last snapshot 1`] = `
 Object {
   "CommentEditor": Object {},
+  "DeepLinkHandler": Object {},
   "FeedList": Object {
     "filter": null,
     "sortBy": "updated",

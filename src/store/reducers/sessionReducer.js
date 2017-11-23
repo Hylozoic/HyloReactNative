@@ -6,9 +6,7 @@ import {
 import { SIGNUP } from '../../components/SignupFlow/SignupFlow.store'
 import { CHECK_INVITATION } from '../../components/JoinCommunity/JoinCommunity.store'
 import {
-  CHECK_SESSION,
-  SET_ENTRY_URL,
-  RESET_ENTRY_URL
+  CHECK_SESSION
 } from '../../components/SessionCheck/SessionCheck.store'
 import { omit } from 'lodash/fp'
 
@@ -46,10 +44,6 @@ export default function sessionReducer (state = {}, action) {
         return {...state, loggedIn: payload}
       }
       return state
-    case SET_ENTRY_URL:
-      return {...state, entryUrl: payload}
-    case RESET_ENTRY_URL:
-      return {...state, entryUrl: null, hasSignupLink: false}
     case SIGNUP:
       return {...state, loggedIn: true}
     case CHECK_INVITATION:
