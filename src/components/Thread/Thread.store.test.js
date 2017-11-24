@@ -65,6 +65,16 @@ describe('presentThread', () => {
     const presented = store.presentThread(thread, '8')
     expect(presented.title).toEqual('Sue')
   })
+
+  it('adds "You" as title if there are no other participants', () => {
+    session.MessageThread.create({ id: '2', participants: ['8'] })
+
+    const props = { navigation: { state: { params: { id: '2' } } } }
+    const state = { orm: session.state }
+    const thread = store.getThread(state, props)
+    const presented = store.presentThread(thread, '8')
+    expect(presented.title).toEqual('You')
+  })
 })
 
 describe('updateThreadReadTime', () => {
