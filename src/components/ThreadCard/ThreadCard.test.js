@@ -9,7 +9,7 @@ it('renders correctly', () => {
       creator: 1
     }
   }
-  const currentUser = {id: 1}
+  const currentUser = {id: 1, avatarUrl: 'fred.png'}
 
   const renderer = new ReactShallowRenderer()
   renderer.render(<ThreadCard message={message} isLast currentUser={currentUser} />)

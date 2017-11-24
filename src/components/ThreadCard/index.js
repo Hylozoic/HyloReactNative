@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, Text } from 'react-native'
-import { filter, get, map, find } from 'lodash/fp'
+import { filter, get, map, find, isEmpty } from 'lodash/fp'
 
 import Avatar from '../Avatar'
 import styles from './ThreadCard.styles'
@@ -10,7 +10,9 @@ export default function ThreadCard (props) {
   if (!props.message) return null
   const otherParticipants = filter(p => p.id !== get('id', props.currentUser), props.participants)
   const name = lastMessageCreator(props.message, props.currentUser, props.participants)
-  const avatarUrls = map('avatarUrl', otherParticipants)
+  const avatarUrls = isEmpty(otherParticipants)
+    ? [get('avatarUrl', props.currentUser)]
+    : map('avatarUrl', otherParticipants)
 
   return <View style={styles.threadCard}>
     <ThreadAvatars avatarUrls={avatarUrls} />
