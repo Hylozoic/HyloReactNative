@@ -1,14 +1,6 @@
 import { connect } from 'react-redux'
 import { checkSession } from './SessionCheck.store'
-import { getNavigationAction } from '../DeepLinkHandler/DeepLinkHandler.store'
 import fetchCurrentUser from 'store/actions/fetchCurrentUser'
-import { redirectAfterLogin, resetToRoute } from 'util/navigation'
-
-function mapStateToProps (state, props) {
-  return {
-    deepLinkAction: getNavigationAction(state)
-  }
-}
 
 const mapDispatchToProps = {checkSession, fetchCurrentUser}
 
@@ -16,17 +8,11 @@ function mergeProps (stateProps, dispatchProps, ownProps) {
   const handleResult = ({ error, payload: loggedIn }) => {
     if (error) {
       // automatically retry -- this prevents us from getting stuck with
-      // nothing to interact with if we open the app while temporarily offline
-      setTimeout(checkSession, 1000)
+      // nothing to interact with if we start the app while temporarily offline
+      return new Promise(resolve =>
+        setTimeout(() => resolve(checkSession()), 1000))
     } else if (loggedIn) {
-      return dispatchProps.fetchCurrentUser().then(({ error, payload }) =>
-        !error && redirectAfterLogin({
-          navigation: ownProps.navigation,
-          currentUser: payload.data.me,
-          action: stateProps.deepLinkAction
-        }))
-    } else {
-      resetToRoute(ownProps.navigation, 'Login')
+      return dispatchProps.fetchCurrentUser()
     }
   }
 
@@ -35,4 +21,4 @@ function mergeProps (stateProps, dispatchProps, ownProps) {
   return {...ownProps, checkSession}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps, mergeProps)
+export default connect(null, mapDispatchToProps, mergeProps)

@@ -4,6 +4,7 @@ import {
   StackNavigator
 } from 'react-navigation'
 import { Dimensions } from 'react-native'
+import { LoadingScreen } from '../Loading'
 import SessionCheck from '../SessionCheck'
 import Feed from '../Feed'
 import JoinCommunity from '../JoinCommunity'
@@ -112,7 +113,8 @@ const screensInStack = {
   Login: {screen: Login, path: '/login'},
   Thread: {screen: Thread, path: '/thread/:id'},
   UseInvitation: {screen: JoinCommunity, path: '/useInvitation/:token'},
-  UseAccessCode: {screen: JoinCommunity, path: '/useAccessCode/:slug/:accessCode'}
+  UseAccessCode: {screen: JoinCommunity, path: '/useAccessCode/:slug/:accessCode'},
+  Loading: {screen: LoadingScreen}
 }
 
 const RootNavigator = StackNavigator(
@@ -127,7 +129,7 @@ const RootNavigator = StackNavigator(
   {
     cardStyle: {backgroundColor: '#FFF'},
     mode: 'modal',
-    initialRouteName: 'SessionCheck'
+    initialRouteName: 'Loading'
   }
 )
 

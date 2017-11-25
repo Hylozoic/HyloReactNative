@@ -1,19 +1,33 @@
 import React from 'react'
 import { Linking } from 'react-native'
 import { parse } from 'url'
-import { isInvitationLink, redirectAfterLogin } from 'util/navigation'
+import { isInvitationLink, redirectAfterLogin, resetToRoute } from 'util/navigation'
 import convertDeepLinkToAction from './convertDeepLinkToAction'
 import OneSignal from 'react-native-onesignal'
 import { isDev } from 'util/testing'
 
 export default class DeepLinkHandler extends React.Component {
-  componentWillMount () {
-    Linking.getInitialURL().then(this.handleUrl)
+  async componentDidMount () {
+    const { currentUser, initialPushNotificationEvent, navigator } = this.props
+
+    // regardless of whether there is a deep link, we have to change the initial
+    // route to one of these -- otherwise we could open a screen for a deep link
+    // that has a back button that takes you back to an endless loading screen
+    if (currentUser) {
+      resetToRoute(navigator, 'Main')
+    } else {
+      resetToRoute(navigator, 'Login')
+    }
+
+    if (initialPushNotificationEvent) {
+      this.handlePushNotificationEvent(initialPushNotificationEvent)
+    } else {
+      const initialUrl = await Linking.getInitialURL()
+      if (initialUrl) this.handleUrl(initialUrl)
+    }
+
     Linking.addEventListener('url', this.handleLinkingEvent)
     OneSignal.addEventListener('opened', this.handlePushNotificationEvent)
-    if (this.props.initialPushNotificationEvent) {
-      this.handlePushNotificationEvent(this.props.initialPushNotificationEvent)
-    }
   }
 
   componentWillUnmount () {
@@ -22,7 +36,6 @@ export default class DeepLinkHandler extends React.Component {
   }
 
   handlePushNotificationEvent = ({ notification }) => {
-    if (isDev) console.log('opened push notification:', notification)
     return this.handleUrl(notification.payload.additionalData.path)
   }
 
@@ -33,19 +46,20 @@ export default class DeepLinkHandler extends React.Component {
     return redirectAfterLogin({currentUser, navigation: navigator, action})
   }
 
-  handleUrl = url => {
+  handleUrl (url) {
     if (!url) return
 
     const { storeNavigationAction, currentUser } = this.props
     const { path } = parse(url)
     const action = convertDeepLinkToAction(path)
-    console.log('handling deep link:', path, action)
+    if (isDev) console.log(`handling deep link "${path}" with action:`, action)
     if (!action) return
 
     if (currentUser) {
       // if you're already logged in, redirect immediately.
       this.redirectNow(action)
     } else {
+      // you should already be at the Login screen now
       storeNavigationAction(action)
       if (isInvitationLink(path)) this.redirectNow(action)
     }

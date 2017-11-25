@@ -9,6 +9,7 @@ import { init as initOneSignal } from 'util/onesignal'
 import receivePushNotification from '../../store/actions/receivePushNotification'
 import DeepLinkHandler from '../DeepLinkHandler'
 import RootNavigator from '../RootNavigator'
+import SessionCheck from '../SessionCheck'
 import OneSignal from 'react-native-onesignal'
 
 // if the user opens the app from a push notification and the app wasn't already
@@ -49,11 +50,13 @@ export default class RootView extends React.Component {
     return <Provider store={this.state.store}>
       <View style={{flex: 1}}>
         <VersionCheck />
+        <SessionCheck>
+          <DeepLinkHandler
+            navigator={this.navigator}
+            {...{initialPushNotificationEvent}} />
+        </SessionCheck>
         <LoadingModal />
         <RootNavigator ref={this.setNavigator} />
-        <DeepLinkHandler
-          navigator={this.navigator}
-          {...{initialPushNotificationEvent}} />
       </View>
     </Provider>
   }

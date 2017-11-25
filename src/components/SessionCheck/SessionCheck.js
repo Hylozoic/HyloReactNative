@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { LoadingScreen } from '../Loading'
 
 export default class SessionCheck extends React.Component {
   static navigationOptions = {
@@ -11,11 +10,13 @@ export default class SessionCheck extends React.Component {
     checkSession: PropTypes.func.isRequired
   }
 
+  state = {}
+
   componentDidMount () {
-    this.props.checkSession()
+    this.props.checkSession().then(() => this.setState({checked: true}))
   }
 
   render () {
-    return <LoadingScreen />
+    return this.state.checked ? this.props.children : null
   }
 }
