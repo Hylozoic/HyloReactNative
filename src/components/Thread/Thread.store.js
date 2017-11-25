@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect'
 import { createSelector as ormCreateSelector } from 'redux-orm'
-import { get, pick, uniqueId } from 'lodash/fp'
+import { get, pick, uniqueId, isEmpty } from 'lodash/fp'
 import { humanDate, sanitize, threadNames } from 'hylo-utils/text'
 
 import orm from '../../store/models'
@@ -136,8 +136,14 @@ export function presentThread (thread, currentUserId) {
     .orderBy(m => Number(m.id), 'desc')
     .toModelArray()
     .map(refineMessage)
-  const title = threadNames(thread.participants.filter(p => p.id !== currentUserId)
-  .toRefArray().map(firstName))
+  const otherParticipants = thread.participants.filter(p => p.id !== currentUserId)
+  .toRefArray().map(firstName)
+  var title
+  if (isEmpty(otherParticipants)) {
+    title = 'You'
+  } else {
+    title = threadNames(otherParticipants)
+  }
   return {
     id: thread.id,
     messages,
