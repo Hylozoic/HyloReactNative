@@ -1,13 +1,12 @@
 import { connect } from 'react-redux'
 import { checkSession } from './SessionCheck.store'
-import { resetToRoute } from 'util/navigation'
-import { getDeepLink } from '../DeepLinkHandler/DeepLinkHandler.store'
+import { getNavigationAction } from '../DeepLinkHandler/DeepLinkHandler.store'
 import fetchCurrentUser from 'store/actions/fetchCurrentUser'
-import { redirectAfterLogin } from 'util/navigation'
+import { redirectAfterLogin, resetToRoute } from 'util/navigation'
 
 function mapStateToProps (state, props) {
   return {
-    deepLink: getDeepLink(state)
+    deepLinkAction: getNavigationAction(state)
   }
 }
 
@@ -24,7 +23,7 @@ function mergeProps (stateProps, dispatchProps, ownProps) {
         !error && redirectAfterLogin({
           navigation: ownProps.navigation,
           currentUser: payload.data.me,
-          deepLink: stateProps.deepLink
+          action: stateProps.deepLinkAction
         }))
     } else {
       resetToRoute(ownProps.navigation, 'Login')

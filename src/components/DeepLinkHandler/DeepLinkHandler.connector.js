@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { storeDeepLink } from './DeepLinkHandler.store'
+import { storeNavigationAction } from './DeepLinkHandler.store'
 import getMe from 'store/selectors/getMe'
 
 function mapStateToProps (state, props) {
@@ -8,6 +8,6 @@ function mapStateToProps (state, props) {
   }
 }
 
-const mapDispatchToProps = {storeDeepLink}
+const mapDispatchToProps = {storeNavigationAction}
 
 export default connect(mapStateToProps, mapDispatchToProps)

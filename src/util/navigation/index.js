@@ -29,11 +29,11 @@ export const routeMatchers = {
   thread: route('/t/:id')
 }
 
-export function redirectAfterLogin ({ navigation, currentUser, deepLink }) {
+export function redirectAfterLogin ({ currentUser, navigation, action }) {
   if (get('settings.signupInProgress', currentUser)) {
     resetToRoute(navigation, 'SignupFlow1')
-  } else if (deepLink) {
-    navigation.dispatch(deepLink)
+  } else if (action) {
+    navigation.dispatch(action)
   } else {
     resetToRoute(navigation, 'Main')
   }

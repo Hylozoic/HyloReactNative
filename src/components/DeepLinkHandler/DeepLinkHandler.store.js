@@ -1,13 +1,10 @@
 import { get } from 'lodash/fp'
 
 const MODULE_NAME = 'DeepLinkHandler'
-const STORE_DEEP_LINK = `${MODULE_NAME}/STORE_DEEP_LINK`
+const STORE_NAVIGATION_ACTION = `${MODULE_NAME}/STORE_NAVIGATION_ACTION`
 
-export function storeDeepLink (navigationAction) {
-  return {
-    type: STORE_DEEP_LINK,
-    payload: navigationAction
-  }
+export function storeNavigationAction (payload) {
+  return {type: STORE_NAVIGATION_ACTION, payload}
 }
 
 export default function reducer (state = {}, action) {
@@ -15,13 +12,11 @@ export default function reducer (state = {}, action) {
   if (error) return state
 
   switch (type) {
-    case STORE_DEEP_LINK:
-      return {
-        deepLink: payload
-      }
+    case STORE_NAVIGATION_ACTION:
+      return {navigationAction: payload}
   }
 
   return state
 }
 
-export const getDeepLink = get('DeepLinkHandler.deepLink')
+export const getNavigationAction = get('DeepLinkHandler.navigationAction')

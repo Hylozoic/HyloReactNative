@@ -1,6 +1,5 @@
 import React from 'react'
 import { Linking } from 'react-native'
-import { get } from 'lodash/fp'
 import { parse } from 'url'
 import { isInvitationLink, redirectAfterLogin } from 'util/navigation'
 import convertDeepLinkToAction from './convertDeepLinkToAction'
@@ -8,31 +7,35 @@ import convertDeepLinkToAction from './convertDeepLinkToAction'
 export default class DeepLinkHandler extends React.Component {
   componentWillMount () {
     Linking.getInitialURL().then(this.handleUrl)
-    Linking.addEventListener('url', this.handleUrl)
+    Linking.addEventListener('url', this.handleLinkingEvent)
   }
 
   componentWillUnmount () {
-    Linking.removeEventListener('url', this.handleUrl)
+    Linking.removeEventListener('url', this.handleLinkingEvent)
   }
 
-  handleUrl = eventOrUrl => {
-    const url = get('url', eventOrUrl) || eventOrUrl
+  handleLinkingEvent = ({ url }) => this.handleUrl(url)
+
+  redirectNow (action) {
+    const { currentUser, navigator } = this.props
+    return redirectAfterLogin({currentUser, navigation: navigator, action})
+  }
+
+  handleUrl = url => {
     if (!url) return
 
-    const { storeDeepLink, currentUser, navigator } = this.props
+    const { storeNavigationAction, currentUser } = this.props
     const { path } = parse(url)
     const action = convertDeepLinkToAction(path)
-    console.log('convertEntryUrlToAction:', path, action)
-
-    const redirectNow = () =>
-      redirectAfterLogin({currentUser, navigation: navigator, deepLink: action})
+    console.log('handling deep link:', path, action)
+    if (!action) return
 
     if (currentUser) {
       // if you're already logged in, redirect immediately.
-      redirectNow()
+      this.redirectNow(action)
     } else {
-      storeDeepLink(action)
-      if (isInvitationLink(path)) redirectNow()
+      storeNavigationAction(action)
+      if (isInvitationLink(path)) this.redirectNow(action)
     }
   }
 

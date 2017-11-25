@@ -9,7 +9,7 @@ import { register as registerOneSignal } from 'util/onesignal'
 import registerDevice from '../../store/actions/registerDevice'
 import fetchCurrentUser from 'store/actions/fetchCurrentUser'
 import { redirectAfterLogin } from 'util/navigation'
-import { getDeepLink } from '../DeepLinkHandler/DeepLinkHandler.store'
+import { getNavigationAction } from '../DeepLinkHandler/DeepLinkHandler.store'
 
 export function mapStateToProps (state, props) {
   const error = state.session.loginError
@@ -22,7 +22,7 @@ export function mapStateToProps (state, props) {
     defaultEmail: state.session.defaultLoginEmail,
     goToSignup,
     hasSignupLink: !!state.session.hasSignupLink,
-    deepLink: getDeepLink(state)
+    deepLinkAction: getNavigationAction(state)
   }
 }
 
@@ -51,7 +51,7 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
       !error && redirectAfterLogin({
         navigation: ownProps.navigation,
         currentUser: payload.data.me,
-        deepLink: stateProps.deepLink
+        action: stateProps.deepLinkAction
       }))
   }
 
