@@ -3,12 +3,10 @@ import React from 'react'
 import TestRenderer from 'react-test-renderer'
 import SessionCheck from './SessionCheck'
 
-jest.mock('../Loading', () => ({LoadingScreen: 'LoadingScreen'}))
-
 it('calls checkSession', async () => {
   const props = {
     checkSession: jest.fn(() => Promise.resolve(true))
   }
-  await TestRenderer.create(<SessionCheck {...props} />)
+  await TestRenderer.create(<SessionCheck {...props}>hi</SessionCheck>)
   expect(props.checkSession).toHaveBeenCalled()
 })

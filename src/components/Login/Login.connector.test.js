@@ -85,7 +85,7 @@ describe('mergeProps', () => {
       }))
 
     const stateProps = {
-      deepLink: {type: 'foo', params: {id: 'bar'}}
+      deepLinkAction: {type: 'foo', params: {id: 'bar'}}
     }
 
     const ownProps = {
@@ -98,7 +98,7 @@ describe('mergeProps', () => {
       expect(dispatch).toHaveBeenCalled()
       expect(dispatch.mock.calls).toMatchSnapshot()
       expect(OneSignal.registerForPushNotifications).toBeCalled()
-      expect(ownProps.navigation.dispatch).toHaveBeenCalledWith(stateProps.deepLink)
+      expect(ownProps.navigation.dispatch).toHaveBeenCalledWith(stateProps.deepLinkAction)
     })
   })
 })

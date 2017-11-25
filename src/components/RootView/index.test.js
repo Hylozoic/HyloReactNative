@@ -34,6 +34,12 @@ jest.mock('../VersionCheck', () => 'VersionCheck')
 jest.mock('../LoadingModal', () => 'LoadingModal')
 jest.mock('../RootNavigator', () => 'RootNavigator')
 
+jest.mock('../SessionCheck/SessionCheck.store', () => ({
+  checkSession: jest.fn(() => Promise.resolve({
+    payload: true
+  }))
+}))
+
 describe('RootView', () => {
   it('renders as expected when store is loaded', async () => {
     const renderer = await TestRenderer.create(<RootView />)
