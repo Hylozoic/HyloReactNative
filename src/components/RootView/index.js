@@ -9,13 +9,25 @@ import { init as initOneSignal } from 'util/onesignal'
 import receivePushNotification from '../../store/actions/receivePushNotification'
 import DeepLinkHandler from '../DeepLinkHandler'
 import RootNavigator from '../RootNavigator'
+import OneSignal from 'react-native-onesignal'
+
+// if the user opens the app from a push notification and the app wasn't already
+// loaded, we need to register the OneSignal event listener early, otherwise we
+// miss the event
+let initialPushNotificationEvent
+OneSignal.addEventListener('opened', event => {
+  initialPushNotificationEvent = event
+})
 
 export default class RootView extends React.Component {
   state = {}
 
   componentDidMount () {
     getStore().then(store => {
-      this.setState({store})
+      this.setState({
+        store,
+        initialPushNotificationEvent
+      })
 
       initOneSignal({
         receivePushNotification: notification =>
@@ -31,14 +43,17 @@ export default class RootView extends React.Component {
   }
 
   render () {
-    if (!this.state.store) return <LoadingScreen />
+    const { store, initialPushNotificationEvent } = this.state
+    if (!store) return <LoadingScreen />
 
     return <Provider store={this.state.store}>
       <View style={{flex: 1}}>
         <VersionCheck />
         <LoadingModal />
         <RootNavigator ref={this.setNavigator} />
-        <DeepLinkHandler navigator={this.navigator} />
+        <DeepLinkHandler
+          navigator={this.navigator}
+          {...{initialPushNotificationEvent}} />
       </View>
     </Provider>
   }
