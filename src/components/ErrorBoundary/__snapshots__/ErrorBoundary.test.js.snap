@@ -23,13 +23,56 @@ Array [
 `;
 
 exports[`displays an error when a child component throws an error 1`] = `
-<Text
-  accessible={true}
-  allowFontScaling={true}
-  ellipsizeMode="tail"
->
-  Something went wrong
-</Text>
+<View>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+  >
+    Oops. Something Went Wrong
+  </Text>
+  <Image
+    source={
+      Object {
+        "testUri": "../../../src/assets/Axel_Fretting.png",
+      }
+    }
+  />
+  <View
+    accessibilityComponentType="button"
+    accessibilityLabel={undefined}
+    accessibilityTraits={
+      Array [
+        "button",
+      ]
+    }
+    accessible={true}
+    collapsable={undefined}
+    hitSlop={undefined}
+    isTVSelectable={true}
+    nativeID={undefined}
+    onLayout={undefined}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    testID={undefined}
+    tvParallaxProperties={undefined}
+  >
+    <View>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        disabled={undefined}
+        ellipsizeMode="tail"
+      >
+        Restart Hylo
+      </Text>
+    </View>
+  </View>
+</View>
 `;
 
 exports[`matches last snapshot 1`] = `

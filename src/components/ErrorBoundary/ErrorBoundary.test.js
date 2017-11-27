@@ -1,27 +1,29 @@
 import { Text, Image, View } from 'react-native'
 import React from 'react'
-import ReactShallowRenderer from 'react-test-renderer/shallow'
 import ReactTestRenderer from 'react-test-renderer'
 import ErrorBoundary from './ErrorBoundary'
 
 it('matches last snapshot', () => {
-  const renderer = ReactTestRenderer.create(<ErrorBoundary>
+  const logError = jest.fn()
+  const renderer = ReactTestRenderer.create(<ErrorBoundary logError={logError}>
     <Text>Happy Child</Text>
   </ErrorBoundary>)
   expect(renderer.toJSON()).toMatchSnapshot()
 })
 
 it('displays an error when a child component throws an error', () => {
-  const renderer = ReactTestRenderer.create(<ErrorBoundary>
+  const logError = jest.fn()
+  const renderer = ReactTestRenderer.create(<ErrorBoundary logError={logError}>
     <BuggyComponent />
   </ErrorBoundary>)
   expect(renderer.toJSON()).toMatchSnapshot()
 })
 
 it('displays a custom error when a child component throws an error', () => {
-  const renderer = ReactTestRenderer.create(<ErrorBoundary>
+  const logError = jest.fn()
+  const renderer = ReactTestRenderer.create(<ErrorBoundary logError={logError}>
     <Text>Happy Child</Text>
-    <ErrorBoundary customErrorUI={<CustomErrorComponent />}>
+    <ErrorBoundary customErrorUI={<CustomErrorComponent />} logError={logError}>
       <BuggyComponent />
     </ErrorBoundary>
   </ErrorBoundary>)
