@@ -38,13 +38,17 @@ exports[`MessageRow calls showThread 1`] = `
           accessible={true}
           allowFontScaling={true}
           ellipsizeMode="tail"
-        />
+        >
+          
+        </Text>
         <Text
           accessible={true}
           allowFontScaling={true}
           ellipsizeMode="tail"
           numberOfLines={2}
-        />
+        >
+          undefined: 
+        </Text>
         <Text
           accessible={true}
           allowFontScaling={true}
