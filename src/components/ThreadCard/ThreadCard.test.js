@@ -5,8 +5,8 @@ import ThreadCard, { lastMessageCreator, threadNames, ThreadAvatars } from './in
 it('renders correctly', () => {
   const message = {
     text: 'Hey, just checking in. Test, test, test.',
-    '_fields': {
-      creator: 1
+    creator: {
+      id: 1
     }
   }
   const currentUser = {id: 1, avatarUrl: 'fred.png'}
@@ -36,8 +36,8 @@ describe('handles lastMessageCreator correctly', () => {
       id: 1
     }
     const message = {
-      '_fields': {
-        creator: 1
+      creator: {
+        id: 1
       }
     }
     expect(lastMessageCreator(message, currentUser, [])).toBe(formattedName)
@@ -49,8 +49,8 @@ describe('handles lastMessageCreator correctly', () => {
       id: 1
     }
     const message = {
-      '_fields': {
-        creator: 2
+      creator: {
+        id: 2
       }
     }
     const participants = [
@@ -66,8 +66,8 @@ describe('handles lastMessageCreator correctly', () => {
       id: 1
     }
     const message = {
-      '_fields': {
-        creator: 2
+      creator: {
+        id: 2
       }
     }
     const participants = [

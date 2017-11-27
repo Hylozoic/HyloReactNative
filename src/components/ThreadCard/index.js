@@ -7,28 +7,29 @@ import styles from './ThreadCard.styles'
 import { humanDate } from 'hylo-utils/text'
 
 export default function ThreadCard (props) {
-  if (!props.message) return null
-  const otherParticipants = filter(p => p.id !== get('id', props.currentUser), props.participants)
+  const { message, currentUser, participants, isLast } = props
+  if (!message) return null
+  const otherParticipants = filter(p => p.id !== get('id', currentUser), participants)
   const names = threadNames(map('name', otherParticipants))
-  const messageCreatorPrepend = lastMessageCreator(props.message, props.currentUser, props.participants)
+  const messageCreatorPrepend = lastMessageCreator(message, currentUser, participants)
   const avatarUrls = isEmpty(otherParticipants)
-    ? [get('avatarUrl', props.currentUser)]
+    ? [get('avatarUrl', currentUser)]
     : map('avatarUrl', otherParticipants)
 
   return <View style={styles.threadCard}>
     <ThreadAvatars avatarUrls={avatarUrls} />
-    <View style={[styles.messageContent, props.isLast && styles.lastCard]}>
+    <View style={[styles.messageContent, isLast && styles.lastCard]}>
       <Text style={styles.header}>{names}</Text>
-      <Text style={styles.body} numberOfLines={2}>{messageCreatorPrepend}{props.message.text}</Text>
-      <Text style={styles.date}>{humanDate(get('createdAt', props.message))}</Text>
+      <Text style={styles.body} numberOfLines={2}>{messageCreatorPrepend}{message.text}</Text>
+      <Text style={styles.date}>{humanDate(get('createdAt', message))}</Text>
     </View>
   </View>
 }
 
 export function lastMessageCreator (message, currentUser, participants) {
-  if (get('creator', message._fields) === currentUser.id) return 'You: '
+  if (get('id', message.creator) === currentUser.id) return 'You: '
   if (participants.length === 2) return ''
-  return find(p => p.id === get('creator', message._fields), participants).name + ': '
+  return find(p => p.id === get('id', message.creator), participants).name + ': '
 }
 
 
