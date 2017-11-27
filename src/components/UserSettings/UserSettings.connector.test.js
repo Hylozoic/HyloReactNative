@@ -15,8 +15,24 @@ describe('mapStateToProps', () => {
 })
 
 describe('mapDispatchToProps', () => {
-  it('has the right keys', () => {
+  it('has the right keys and behavior', () => {
     const dispatch = jest.fn()
-    expect(mapDispatchToProps(dispatch, {})).toMatchSnapshot()
+    const props = {
+      navigation: {
+        dispatch: jest.fn()
+      }
+    }
+    const dispatchProps = mapDispatchToProps(dispatch, props)
+    expect(dispatchProps).toMatchSnapshot()
+
+    dispatchProps.logout()
+    expect(props.navigation.dispatch).toHaveBeenCalledWith({
+      type: 'Navigation/RESET',
+      index: 0,
+      actions: [
+        {routeName: 'Login', type: 'Navigation/NAVIGATE'}
+      ]
+    })
+    expect(dispatch).toBeCalled()
   })
 })

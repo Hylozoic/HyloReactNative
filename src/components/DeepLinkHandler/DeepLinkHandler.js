@@ -8,26 +8,23 @@ import { isDev } from 'util/testing'
 
 export default class DeepLinkHandler extends React.Component {
   async componentDidMount () {
-    const { currentUser, initialPushNotificationEvent, navigator } = this.props
-
-    // regardless of whether there is a deep link, we have to change the initial
-    // route to one of these -- otherwise we could open a screen for a deep link
-    // that has a back button that takes you back to an endless loading screen
-    if (currentUser) {
-      resetToRoute(navigator, 'Main')
-    } else {
-      resetToRoute(navigator, 'Login')
-    }
-
-    if (initialPushNotificationEvent) {
-      this.handlePushNotificationEvent(initialPushNotificationEvent)
-    } else {
-      const initialUrl = await Linking.getInitialURL()
-      if (initialUrl) this.handleUrl(initialUrl)
-    }
-
     Linking.addEventListener('url', this.handleLinkingEvent)
     OneSignal.addEventListener('opened', this.handlePushNotificationEvent)
+
+    // even if there is a deep link, we still have to change the initial route
+    // to one of these. otherwise, the back button on the deep-linked screen
+    // will just take you back to a permanent loading screen.
+    if (this.props.currentUser) {
+      resetToRoute(this.props.navigator, 'Main')
+    } else {
+      resetToRoute(this.props.navigator, 'Login')
+    }
+
+    const event = this.props.initialPushNotificationEvent
+    if (event) return this.handlePushNotificationEvent(event)
+
+    const initialUrl = this.props.initialUrl || await Linking.getInitialURL()
+    if (initialUrl) return this.handleUrl(initialUrl)
   }
 
   componentWillUnmount () {
@@ -35,9 +32,8 @@ export default class DeepLinkHandler extends React.Component {
     OneSignal.removeEventListener('opened', this.handlePushNotificationEvent)
   }
 
-  handlePushNotificationEvent = ({ notification }) => {
-    return this.handleUrl(notification.payload.additionalData.path)
-  }
+  handlePushNotificationEvent = ({ notification }) =>
+    this.handleUrl(notification.payload.additionalData.path)
 
   handleLinkingEvent = ({ url }) => this.handleUrl(url)
 

@@ -40,10 +40,7 @@ export default function sessionReducer (state = {}, action) {
         loggedIn: true
       }
     case CHECK_SESSION:
-      if (payload !== state.loggedIn) {
-        return {...state, loggedIn: payload}
-      }
-      return state
+      return {...state, loggedIn: payload}
     case SIGNUP:
       return {...state, loggedIn: true}
     case CHECK_INVITATION:
