@@ -1,10 +1,8 @@
 import React from 'react'
 import { Text, View, Button, Image } from 'react-native'
 import RNRestart from 'react-native-restart'
-import { Client } from 'rollbar-react-native'
 
 const axelFretting = require('../../assets/Axel_Fretting.png')
-const rollbar = new Client(process.env.ROLLBAR_CLIENT_TOKEN)
 
 export default class ErrorBoundary extends React.Component {
   constructor (props) {
