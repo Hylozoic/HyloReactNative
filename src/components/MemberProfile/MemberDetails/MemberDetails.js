@@ -3,7 +3,8 @@ import {
   Text,
   View,
   TouchableOpacity,
-  ScrollView
+  ScrollView,
+  BackHandler
 } from 'react-native'
 import Icon from '../../Icon'
 import { HeaderBackButton } from 'react-navigation'
@@ -45,6 +46,7 @@ export default class MemberDetails extends React.Component {
     this.props.navigation.setParams({
       goBack: this.goBack
     })
+    BackHandler.addEventListener('hardwareBackPress', this.goBack)
   }
 
   componentDidUpdate (prevProps) {
@@ -57,6 +59,10 @@ export default class MemberDetails extends React.Component {
         person: editableFields(this.props.person)
       })
     }
+  }
+
+  componentWillUnmount () {
+    BackHandler.removeEventListener('hardwareBackPress', this.goBack)
   }
 
   goBack = () => {
