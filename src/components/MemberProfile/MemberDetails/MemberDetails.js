@@ -140,7 +140,7 @@ export class MemberBio extends React.Component {
 
   render () {
     const { person: { bio }, editable, updateSetting } = this.props
-    if (isEmpty(bio)) return null
+    if (isEmpty(bio) && !editable) return null
     return <View style={styles.bioContainer}>
       <View style={styles.labelWrapper}>
         <Text style={styles.sectionLabel}>About Me</Text>
@@ -152,6 +152,7 @@ export class MemberBio extends React.Component {
         ref={c => { this.control = c }}
         style={styles.bio}
         value={bio}
+        placeholder='Description'
         editable={editable}
         onChangeText={updateSetting('bio')}
         multiline
