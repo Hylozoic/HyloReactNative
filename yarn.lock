@@ -4930,6 +4930,10 @@ react-native-prompt-android@^0.3.1:
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/react-native-prompt-android/-/react-native-prompt-android-0.3.1.tgz#6d10ff80a5b48f0204e40bf8bc78295dfe29df38"
 
+react-native-restart@^0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/react-native-restart/-/react-native-restart-0.0.4.tgz#e742c2f9833592214147bb39321d2cd5d172ad8c"
+
 react-native-tab-navigator@^0.3.4:
   version "0.3.4"
   resolved "https://registry.yarnpkg.com/react-native-tab-navigator/-/react-native-tab-navigator-0.3.4.tgz#54a18f1ad06a09d4a0de81ff00416bc1b760c960"
