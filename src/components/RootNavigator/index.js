@@ -35,6 +35,7 @@ import InviteExpired from '../InviteExpired'
 import Signup from '../Signup'
 import trackCurrentTab from './trackCurrentTab'
 import { isIOS } from 'util/platform'
+import { MAIN_ROUTE_NAME } from 'util/navigation'
 import TabBar from './TabBar'
 import extendRouter from './extendRouter'
 
@@ -119,7 +120,7 @@ const screensInStack = {
 
 const RootNavigator = StackNavigator(
   {
-    Main: {
+    [MAIN_ROUTE_NAME]: {
       screen: DrawerAndTabsNavigator,
       path: '/main',
       navigationOptions: {header: null}

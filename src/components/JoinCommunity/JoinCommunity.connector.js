@@ -6,7 +6,7 @@ import { NavigationActions } from 'react-navigation'
 import selectCommunity from '../../store/actions/selectCommunity'
 import getNavigationParam from '../../store/selectors/getNavigationParam'
 import { checkInvitation, useInvitation } from './JoinCommunity.store'
-import { resetToRoute } from 'util/navigation'
+import { resetToRoute, resetToMainRoute } from 'util/navigation'
 
 export function goToCommunity (communityId, navigation) {
   navigation.dispatch(NavigationActions.reset({
@@ -35,7 +35,7 @@ export function mapStateToProps (state, props) {
     },
     navToSignup: () => resetToRoute(navigation, 'Signup'),
     navToInviteExpired: () => resetToRoute(navigation, 'InviteExpired'),
-    goToHome: () => resetToRoute('Main')
+    goToHome: () => resetToMainRoute(navigation)
   }
 }
 

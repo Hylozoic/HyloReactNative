@@ -10,7 +10,7 @@ import {
   getSkillsFromOrm
 } from '../../SkillEditor/SkillEditor.store'
 import { isEmpty } from 'lodash/fp'
-import { redirectAfterLogin, resetToRoute } from 'util/navigation'
+import { redirectAfterLogin, resetToMainRoute } from 'util/navigation'
 import { getNavigationAction } from '../../DeepLinkHandler/DeepLinkHandler.store'
 
 export function mapStateToProps (state, props) {
@@ -46,7 +46,7 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     if (deepLinkAction) {
       redirectAfterLogin({navigation, action: deepLinkAction})
     } else {
-      resetToRoute(navigation, 'Main')
+      resetToMainRoute(navigation)
     }
   }
   const updateSetting = (key, value) => updateUserSettings({[key]: value})

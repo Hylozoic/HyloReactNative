@@ -14,6 +14,12 @@ export function resetToRoute (navigation, routeName) {
   }))
 }
 
+export const MAIN_ROUTE_NAME = 'Main'
+
+export function resetToMainRoute (navigation) {
+  return resetToRoute(navigation, MAIN_ROUTE_NAME)
+}
+
 export function isInvitationLink (path) {
   const { pathname } = url.parse(path)
   const { invitation, accessLink } = routeMatchers
@@ -35,6 +41,6 @@ export function redirectAfterLogin ({ currentUser, navigation, action }) {
   } else if (action) {
     navigation.dispatch(action)
   } else {
-    resetToRoute(navigation, 'Main')
+    resetToMainRoute(navigation)
   }
 }

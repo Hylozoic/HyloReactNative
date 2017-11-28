@@ -1,7 +1,9 @@
 import React from 'react'
 import { Linking } from 'react-native'
 import { parse } from 'url'
-import { isInvitationLink, redirectAfterLogin, resetToRoute } from 'util/navigation'
+import {
+  isInvitationLink, redirectAfterLogin, resetToRoute, resetToMainRoute
+} from 'util/navigation'
 import convertDeepLinkToAction from './convertDeepLinkToAction'
 import OneSignal from 'react-native-onesignal'
 import { isDev } from 'util/testing'
@@ -15,7 +17,7 @@ export default class DeepLinkHandler extends React.Component {
     // to one of these. otherwise, the back button on the deep-linked screen
     // will just take you back to a permanent loading screen.
     if (this.props.currentUser) {
-      resetToRoute(this.props.navigator, 'Main')
+      resetToMainRoute(this.props.navigator)
     } else {
       resetToRoute(this.props.navigator, 'Login')
     }
