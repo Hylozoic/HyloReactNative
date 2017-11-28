@@ -1,5 +1,5 @@
 import * as sessionReducers from './sessionReducers'
-import { values } from 'lodash'
+import { values, pick } from 'lodash/fp'
 import {
   UPDATE_USER_SETTINGS_PENDING
 } from '../../actions/updateUserSettings'
@@ -32,6 +32,7 @@ import {
 } from '../../../components/ThreadList/ThreadList.store'
 import { RESET_NEW_POST_COUNT_PENDING } from '../../actions/resetNewPostCount'
 import { PIN_POST_PENDING } from '../../../components/PostCard/PostHeader/PostHeader.store'
+import { FETCH_CURRENT_USER } from 'store/actions/fetchCurrentUser'
 import orm from 'store/models'
 import ModelExtractor from '../ModelExtractor'
 import extractModelsFromAction from '../ModelExtractor/extractModelsFromAction'
@@ -174,6 +175,12 @@ export default function ormReducer (state = {}, action) {
       let postMembership = post.postMemberships.filter(p =>
         Number(p.community) === Number(meta.communityId)).toModelArray()[0]
       postMembership && postMembership.update({pinned: !postMembership.pinned})
+      break
+
+    case FETCH_CURRENT_USER:
+      const attrs = pick(['id', 'avatarUrl', 'name', 'location'], payload.data.me)
+      session.Person.create(attrs)
+      break
   }
 
   values(sessionReducers).forEach(fn => fn(session, action))
