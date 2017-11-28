@@ -47,6 +47,10 @@ export default class CommentEditor extends React.Component {
     }
   }
 
+  shouldComponentUpdate (nextProps) {
+    return nextProps.isFocused
+  }
+
   editorView = () => {
     const { content, navigation } = this.props
     return <Editor ref={ref => { this.editor = ref }}

@@ -184,6 +184,8 @@ exports[`renders correctly when showCommunity is true 1`] = `
       deletePost={[Function]}
       editPost={[Function]}
       flagPost={[Function]}
+      pinPost={[Function]}
+      pinned={false}
       removePost={null}
     />
   </View>
@@ -233,10 +235,15 @@ exports[`renders correctly with all=true, and no community or user 1`] = `
     </View>
   </View>
   <View>
+    <Icon
+      name="Pin"
+    />
     <PostMenu
       deletePost={[Function]}
       editPost={[Function]}
       flagPost={[Function]}
+      pinPost={[Function]}
+      pinned={true}
       removePost={[Function]}
     />
   </View>
@@ -305,10 +312,15 @@ exports[`renders correctly with no flagging 1`] = `
     </View>
   </View>
   <View>
+    <Icon
+      name="Pin"
+    />
     <PostMenu
       deletePost={[Function]}
       editPost={[Function]}
       flagPost={undefined}
+      pinPost={[Function]}
+      pinned={true}
       removePost={null}
     />
   </View>

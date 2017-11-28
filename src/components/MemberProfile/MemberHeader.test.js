@@ -47,6 +47,7 @@ describe('Control', () => {
   it('matches the last snapshot', () => {
     const props = {
       value: 'a',
+      placeholder: 'b',
       onChangeTest: () => {},
       editable: true,
       onBlur: () => {},

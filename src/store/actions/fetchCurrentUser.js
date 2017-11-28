@@ -1,3 +1,7 @@
+/**
+ * @providesModule store/actions/fetchCurrentUser
+ */
+
 export const FETCH_CURRENT_USER = 'FETCH_CURRENT_USER'
 
 export default function fetchCurrentUser () {
@@ -29,6 +33,7 @@ export default function fetchCurrentUser () {
               network {
                 id
                 name
+                slug
                 avatarUrl
               }
             }

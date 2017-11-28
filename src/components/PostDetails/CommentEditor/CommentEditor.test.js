@@ -38,6 +38,7 @@ describe('save', () => {
   const saveChanges = jest.fn(() => Promise.resolve({}))
   const setCommentEdits = () => {}
   const props = {
+    isFocused: true,
     navigation,
     saveChanges,
     setCommentEdits
@@ -59,6 +60,7 @@ describe('save', () => {
 describe('componentDidUpdate', () => {
   const setParams = jest.fn()
   const notPendingProps = {
+    isFocused: true,
     pending: false,
     navigation: {
       setParams,
@@ -78,18 +80,6 @@ describe('componentDidUpdate', () => {
   })
 
   it('sets disabled to false when pending changes to false', () => {
-    const setParams = jest.fn()
-    const notPendingProps = {
-      pending: false,
-      navigation: {
-        setParams,
-        state: {params: {}}
-      }
-    }
-    const pendingProps = {
-      ...notPendingProps,
-      pending: true
-    }
     const instance = ReactTestRenderer.create(<CommentEditor {...notPendingProps} />).getInstance()
     setParams.mockClear()
     instance.componentDidUpdate(pendingProps)

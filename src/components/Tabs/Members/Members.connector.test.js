@@ -17,11 +17,30 @@ describe('mapStateToProps', () => {
 })
 
 describe('mergeProps', () => {
+  let dispatchProps, stateProps
+
+  beforeEach(() => {
+    dispatchProps = { fetchMembers: jest.fn() }
+    stateProps = { hasMore: true, members: [], pending: false }
+  })
+
   it('makes fetchMembers a no-op when there is no community', () => {
-    const stateProps = {members: []}
-    const dispatchProps = {fetchMembers: jest.fn()}
     const props = mergeProps(stateProps, dispatchProps)
     expect(props.fetchMembers()).toEqual(false)
     expect(dispatchProps.fetchMembers).not.toBeCalled()
+  })
+
+  it("makes fetchMoreMembers an empty function if there ain't no more", () => {
+    stateProps.hasMore = false
+    const actual = mergeProps(stateProps, dispatchProps)
+    actual.fetchMoreMembers()
+    expect(dispatchProps.fetchMembers).not.toHaveBeenCalled()
+  })
+
+  it('calls fetchMembers with the correct offset when fetchMoreMembers is called', () => {
+    stateProps.members = [ 'so', 'many', 'members' ]
+    const actual = mergeProps(stateProps, dispatchProps)
+    actual.fetchMoreMembers()
+    expect(dispatchProps.fetchMembers.mock.calls[0][0].offset).toBe(stateProps.members.length)
   })
 })

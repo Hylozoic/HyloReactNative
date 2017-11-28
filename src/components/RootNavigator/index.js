@@ -5,7 +5,6 @@ import {
 } from 'react-navigation'
 import { Dimensions } from 'react-native'
 
-import WelcomeScene from '../WelcomeScene'
 import Feed from '../Feed'
 import JoinCommunity from '../JoinCommunity'
 import DrawerMenu from '../DrawerMenu'
@@ -21,6 +20,7 @@ import tabStyles from '../Tabs/Tabs.styles'
 import NewMessage from '../NewMessage'
 import Thread from '../Thread'
 import ThreadList from '../ThreadList'
+import ThreadParticipants from '../ThreadParticipants'
 import MemberDetails from '../MemberProfile/MemberDetails'
 import MemberSkillEditor from '../MemberProfile/MemberSkillEditor'
 import UserSettings from '../UserSettings'
@@ -46,7 +46,6 @@ export const tabs = {
 // Screens that work within Tabs (the same tab icon stays highlighted)
 export const screensInTabs = {
   Feed: {screen: Feed, path: 'feed'},
-  WelcomeScene: {screen: WelcomeScene, path: 'welcome'},
   PostEditor: {screen: PostEditor, path: 'post/:id/edit'},
   DetailsEditor: {screen: DetailsEditor, path: 'details/:id/edit'},
   PostDetails: {screen: PostDetails, path: 'post/:id'},
@@ -65,6 +64,7 @@ export const screensInStack = {
   Thread: {screen: Thread, path: 'thread/:id'},
   NotificationsList: {screen: NotificationsList, path: 'notifications'},
   ThreadList: {screen: ThreadList, path: 'messages'},
+  ThreadParticipants: {screen: ThreadParticipants, path: 'thread/:id/participants'},
   SignupFlow1: {screen: SignupFlow1, path: 'signup/1'},
   SignupFlow2: {screen: SignupFlow2, path: 'signup/2'},
   SignupFlow3: {screen: SignupFlow3, path: 'signup/3'},

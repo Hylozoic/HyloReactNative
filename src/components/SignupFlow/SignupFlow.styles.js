@@ -24,7 +24,7 @@ export default {
     backgroundColor: 'white',
     disabledBackgroundColor: white60onCaribbeanGreen,
     height: 38,
-    width: 142,
+    width: 132,
     fontSize: 16,
     marginLeft: 'auto'
   },

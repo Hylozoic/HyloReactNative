@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux'
-import currentCommunity from './currentCommunity'
 import handleLogout from './handleLogout'
 import ormReducer from './ormReducer'
 import pending from './pending'
 import queryResults from './queryResults'
+import currentNetworkAndCommunity from './currentNetworkAndCommunity'
 import sessionReducer from './sessionReducer'
 import CommentEditor from '../../components/PostDetails/CommentEditor/CommentEditor.store'
 import FeedList from '../../components/FeedList/FeedList.store'
@@ -20,12 +20,11 @@ import SocketListener from '../../components/SocketListener/SocketListener.store
 import TabBar from '../../components/RootNavigator/TabBar/TabBar.store'
 
 export const combinedReducers = combineReducers({
-  currentCommunity,
   orm: ormReducer,
   pending,
   queryResults,
+  currentNetworkAndCommunity,
   session: sessionReducer,
-
   CommentEditor,
   FeedList,
   LoadingModal,

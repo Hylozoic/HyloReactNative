@@ -54,7 +54,11 @@ exports[`handles ThreadAvatars correctly handles when there is one participant 1
 exports[`renders correctly 1`] = `
 <View>
   <ThreadAvatars
-    avatarUrls={Array []}
+    avatarUrls={
+      Array [
+        "fred.png",
+      ]
+    }
   />
   <View>
     <Text
@@ -70,6 +74,7 @@ exports[`renders correctly 1`] = `
       ellipsizeMode="tail"
       numberOfLines={2}
     >
+      You: 
       Hey, just checking in. Test, test, test.
     </Text>
     <Text

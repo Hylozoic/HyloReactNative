@@ -32,7 +32,9 @@ export default class SessionCheck extends React.Component {
   }
 
   componentDidMount () {
-    this.props.checkSession()
+    const retry = ({ error }) => error && setTimeout(checkAndRetry, 1000)
+    const checkAndRetry = () => this.props.checkSession().then(retry)
+    checkAndRetry()
   }
 
   componentWillUpdate (nextProps) {

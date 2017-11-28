@@ -1,10 +1,13 @@
 import { connect } from 'react-redux'
-import fetchPost from '../../store/actions/fetchPost'
-import getMe from '../../store/selectors/getMe'
-import { getCommentEdits } from './CommentEditor/CommentEditor.store'
-import getPost from '../../store/selectors/getPost'
 import { get } from 'lodash/fp'
+
+import fetchPost from '../../store/actions/fetchPost'
+import { getCommentEdits } from './CommentEditor/CommentEditor.store'
+import getPost, { presentPost } from '../../store/selectors/getPost'
+import getCurrentCommunityId from '../../store/selectors/getCurrentCommunityId'
+import getMe from '../../store/selectors/getMe'
 import makeGoToCommunity from '../../store/actions/makeGoToCommunity'
+import { mapWhenFocused, mergeWhenFocused } from 'util/connector'
 
 function getPostId (state, props) {
   return props.navigation.state.params.id
@@ -12,20 +15,16 @@ function getPostId (state, props) {
 
 export function mapStateToProps (state, props) {
   const id = getPostId(state, props)
-  let post = getPost(state, {id})
   const currentUser = getMe(state, props)
   const commentEdit = getCommentEdits(state, {postId: id})
+  const communityId = getCurrentCommunityId(state, props)
+  let post = presentPost(getPost(state, {id}), communityId)
 
   return {
-    post: {
-      ...post.ref,
-      creator: post.creator,
-      commenters: post.commenters.toModelArray(),
-      communities: post.communities.toModelArray(),
-      fileUrls: post.getFileUrls()
-    },
+    post,
     currentUser,
-    commentEdit
+    commentEdit,
+    isFocused: props.isFocused
   }
 }
 
@@ -57,4 +56,8 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps, mergeProps)
+export default connect(
+  mapWhenFocused(mapStateToProps),
+  mapWhenFocused(mapDispatchToProps),
+  mergeWhenFocused(mergeProps)
+)

@@ -43,10 +43,16 @@ export default class PostCard extends React.Component {
 
   render () {
     const {
-      post, editPost, showCommunity, currentUser, showMember, showTopic, goToCommunity
+      post,
+      showCommunity,
+      editPost,
+      currentUser,
+      showMember,
+      showTopic,
+      goToCommunity
     } = this.props
-    const slug = get('0.slug', post.communities)
 
+    const slug = get('0.slug', post.communities)
     return <View style={styles.container}>
       <PostHeader creator={post.creator}
         date={post.createdAt}
@@ -55,6 +61,7 @@ export default class PostCard extends React.Component {
         editPost={editPost}
         communities={post.communities}
         slug={slug}
+        pinned={post.pinned}
         postId={post.id}
         showMember={showMember}
         goToCommunity={goToCommunity} />

@@ -5,6 +5,7 @@ Object {
   "avatarUrl": undefined,
   "communities": Array [],
   "currentCommunityId": undefined,
+  "currentNetworkId": undefined,
   "currentUser": undefined,
   "name": "you",
   "networks": Array [
@@ -19,23 +20,26 @@ Object {
 
 exports[` 2`] = `
 Object {
-  "changeCommunity": [Function],
   "logout": [Function],
+  "selectCommunity": [Function],
+  "selectNetwork": [Function],
 }
 `;
 
 exports[` 3`] = `
 Object {
-  "changeCommunity": [Function],
   "currentUser": Object {
     "id": "anyid",
   },
   "goToCommunity": [Function],
   "goToMyProfile": [Function],
+  "goToNetwork": [Function],
   "name": "Roy Rogers",
   "navigation": Object {
     "navigate": [Function],
   },
+  "selectCommunity": [Function],
+  "selectNetwork": [Function],
   "showSettings": [Function],
 }
 `;

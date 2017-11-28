@@ -3,7 +3,6 @@
 exports[`mapStateToProps handles null value for lastViewedCommunity 1`] = `
 Object {
   "community": null,
-  "communityId": undefined,
   "currentUser": SessionBoundModel {
     "_fields": Object {
       "id": 123,

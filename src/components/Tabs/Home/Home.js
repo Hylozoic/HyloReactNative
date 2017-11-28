@@ -9,12 +9,17 @@ export default class Home extends React.Component {
     return Header(navigation, screenProps.currentTabName)
   }
 
+  shouldComponentUpdate (nextProps) {
+    return nextProps.isFocused
+  }
+
   render () {
-    const { navigation, communityId, currentUser } = this.props
+    const { communityId, currentUser, navigation, networkId } = this.props
     if (!currentUser) return <Loading style={{flex: 1}} />
     return <Feed
-      navigation={navigation}
       communityId={communityId}
+      navigation={navigation}
+      networkId={networkId}
       screenProps={this.props.screenProps} />
   }
 }

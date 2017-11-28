@@ -22,6 +22,7 @@ it('renders correctly', () => {
   renderer.render(<Feed
     community={community}
     currentUser={currentUser}
+    navigation={{}}
     newPost={newPost}
     showPost={() => {}}
     editPost={() => {}}
@@ -57,7 +58,7 @@ it('calls fetchCommunityTopic on componentDidMount', () => {
 
   const renderer = TestRenderer.create(
     <Provider store={createMockStore(state)}>
-      <Feed fetchCommunityTopic={fetchCommunityTopic} />
+      <Feed fetchCommunityTopic={fetchCommunityTopic} navigation={{ state: { key: 1 } }} />
     </Provider>
   )
 

@@ -3,6 +3,7 @@ export default {
     textAlign: 'center'
   },
   threadList: {
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+    flex: 1
   }
 }

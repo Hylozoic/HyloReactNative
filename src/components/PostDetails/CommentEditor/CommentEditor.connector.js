@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 import { setCommentEdits, getCommentEdits, createComment, CREATE_COMMENT } from './CommentEditor.store'
 import { get } from 'lodash/fp'
+import { mapWhenFocused, mergeWhenFocused } from 'util/connector'
 
 function getPostId (state, props) {
   return get('navigation.state.params.postId', props)
@@ -22,7 +23,7 @@ function mapDispatchToProps (dispatch, props) {
   }
 }
 
-function mergeProps (stateProps, dispatchProps, ownProps) {
+export function mergeProps (stateProps, dispatchProps, ownProps) {
   const { setCommentEditsMaker, saveChangesMaker } = dispatchProps
   const postId = getPostId(null, ownProps)
   return {
@@ -34,4 +35,8 @@ function mergeProps (stateProps, dispatchProps, ownProps) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps, mergeProps)
+export default connect(
+  mapWhenFocused(mapStateToProps),
+  mapDispatchToProps,
+  mergeWhenFocused(mergeProps)
+)

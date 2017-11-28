@@ -9,7 +9,7 @@ jest.mock('react-native-device-info')
 describe('ThreadList', () => {
   it('renders correctly', () => {
     const threads = [{id: 1, participants: [{id: 1, avatarUrl: 'blah'}], lastMessage: {id: 1}}]
-    const renderer = TestRenderer.create(<ThreadList threads={threads} />)
+    const renderer = TestRenderer.create(<ThreadList isFocused threads={threads} />)
 
     expect(renderer.toJSON()).toMatchSnapshot()
   })
@@ -20,6 +20,7 @@ describe('ThreadList', () => {
       <ThreadList
         fetchThreads={fetchThreads}
         hasMore
+        isFocused
         pending={false}
         threads={[]} />
     )
@@ -31,8 +32,7 @@ describe('ThreadList', () => {
   it('handles pending correctly without threads', () => {
     const renderer = new ReactShallowRenderer()
     const threads = []
-    const pending = true
-    renderer.render(<ThreadList threads={threads} pending={pending} />)
+    renderer.render(<ThreadList threads={threads} isFocused pending />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
@@ -42,6 +42,7 @@ describe('ThreadList', () => {
     const renderer = TestRenderer.create(
       <ThreadList
         fetchThreads={() => {}}
+        isFocused
         pending
         threads={[{ id: 1 }]} />
     )
@@ -52,6 +53,7 @@ describe('ThreadList', () => {
     const renderer = TestRenderer.create(
       <ThreadList
         fetchThreads={() => {}}
+        isFocused
         pending={false}
         threads={[]} />
     )
@@ -73,7 +75,14 @@ describe('ThreadList', () => {
 
 describe('MessageRow', () => {
   it('renders correctly', () => {
-    const message = [{id: 1}]
+    const message = [
+      {
+        id: 1,
+        creator: {
+          id: 1
+        }
+      }
+    ]
     const participants = [{id: 2}]
     const renderer = new ReactShallowRenderer()
     renderer.render(<MessageRow
@@ -84,15 +93,29 @@ describe('MessageRow', () => {
   })
 
   it('calls showThread', () => {
+    const name = 'Test User'
+    const text = 'This is a message.'
     const showThread = jest.fn()
-    const message = [{id: 1}]
-    const participants = [{id: 2, avatarUrl: 'blah'}]
+    const currentUser = {
+      id: 1
+    }
+    const message = {
+      id: 1,
+      creator: {
+        id: 2
+      },
+      text
+    }
+
+    const participants = [{id: 2, avatarUrl: 'blah', name}]
 
     const renderer = TestRenderer.create(
       <MessageRow
         showThread={showThread}
         message={message}
-        participants={participants} />
+        participants={participants}
+        currentUser={currentUser}
+         />
     )
 
     expect(renderer.toJSON()).toMatchSnapshot()
