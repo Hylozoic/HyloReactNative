@@ -10,6 +10,8 @@ import {
   getSkillsFromOrm
 } from '../../SkillEditor/SkillEditor.store'
 import { isEmpty } from 'lodash/fp'
+import { redirectAfterLogin, resetToRoute } from 'util/navigation'
+import { getNavigationAction } from '../../DeepLinkHandler/DeepLinkHandler.store'
 
 export function mapStateToProps (state, props) {
   const { name, email, password, confirmPassword, location, avatarUrl } = getUserSettings(state)
@@ -24,7 +26,8 @@ export function mapStateToProps (state, props) {
     location,
     avatarUrl,
     skills,
-    showPasswordField
+    showPasswordField,
+    deepLinkAction: getNavigationAction(state)
   }
 }
 
@@ -34,16 +37,23 @@ export const mapDispatchToProps = {
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
   const { updateUserSettings, updateLocalUserSettings } = dispatchProps
+  const { navigation } = ownProps
+  const { deepLinkAction } = stateProps
+
   const finishSignup = () => {
     updateLocalUserSettings(defaultUserSettings)
     updateUserSettings({settings: {signupInProgress: false}})
-    ownProps.navigation.navigate('Home')
+    if (deepLinkAction) {
+      redirectAfterLogin({navigation, action: deepLinkAction})
+    } else {
+      resetToRoute(navigation, 'Main')
+    }
   }
   const updateSetting = (key, value) => updateUserSettings({[key]: value})
   const updateLocalSetting = (key, value) => updateLocalUserSettings({[key]: value})
-  const makeChanges = () => ownProps.navigation.navigate('SignupFlow1')
-  const goToImage = () => ownProps.navigation.navigate('SignupFlow2')
-  const goToSkills = () => ownProps.navigation.navigate('SignupFlow4')
+  const makeChanges = () => navigation.navigate('SignupFlow1')
+  const goToImage = () => navigation.navigate('SignupFlow2')
+  const goToSkills = () => navigation.navigate('SignupFlow4')
 
   return {
     ...stateProps,
