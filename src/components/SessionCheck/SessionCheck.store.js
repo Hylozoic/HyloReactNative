@@ -1,9 +1,6 @@
 import { getSessionCookie } from '../../util/session'
-import { get } from 'lodash/fp'
 
 export const CHECK_SESSION = 'CHECK_SESSION'
-export const SET_ENTRY_URL = 'SET_ENTRY_URL'
-export const RESET_ENTRY_URL = 'RESET_ENTRY_URL'
 
 export function checkSession () {
   return {
@@ -22,13 +19,3 @@ export function checkSession () {
     })
   }
 }
-
-export function setEntryURL (url) {
-  return {type: SET_ENTRY_URL, payload: url}
-}
-
-export function resetEntryURL (url) {
-  return {type: RESET_ENTRY_URL}
-}
-
-export const getEntryURL = get('session.entryURL')

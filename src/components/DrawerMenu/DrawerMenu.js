@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { Image, Text, TouchableOpacity, View, SectionList } from 'react-native'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
 import styles from './DrawerMenu.styles'
+import SocketListener from '../SocketListener'
 import { ALL_COMMUNITIES_ID } from '../../store/models/Community'
 const allCommunitiesImage = require('../../assets/All_Communities2.png')
 
@@ -64,6 +65,8 @@ export default class DrawerMenu extends Component {
           </View>
         </View>
       </View>
+      {/* putting SocketListener here so it's only rendered after login */}
+      <SocketListener />
     </View>
   }
 }

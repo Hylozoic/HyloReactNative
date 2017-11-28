@@ -4,7 +4,8 @@ import {
   StackNavigator
 } from 'react-navigation'
 import { Dimensions } from 'react-native'
-
+import { LoadingScreen } from '../Loading'
+import SessionCheck from '../SessionCheck'
 import Feed from '../Feed'
 import JoinCommunity from '../JoinCommunity'
 import DrawerMenu from '../DrawerMenu'
@@ -29,111 +30,111 @@ import SignupFlow2 from '../SignupFlow/SignupFlow2'
 import SignupFlow3 from '../SignupFlow/SignupFlow3'
 import SignupFlow4 from '../SignupFlow/SignupFlow4'
 import SignupFlow5 from '../SignupFlow/SignupFlow5'
-import createLinkingAwareContainer from './createLinkingAwareContainer'
+import Login from '../Login'
+import InviteExpired from '../InviteExpired'
+import Signup from '../Signup'
 import trackCurrentTab from './trackCurrentTab'
 import { isIOS } from 'util/platform'
+import { MAIN_ROUTE_NAME } from 'util/navigation'
 import TabBar from './TabBar'
+import extendRouter from './extendRouter'
 
-export const urlPrefix = 'http://hylo.com/'
-// Tab Home Screens
 // If you change or add tabs you have to edit trackCurrentTab.js
-export const tabs = {
+const tabs = {
   Home: {screen: Home, path: ''},
   Members: {screen: Members, path: 'people'}
   // Topics: {screen: Topics, path: 'topics'} // TODO
 }
 
-// Screens that work within Tabs (the same tab icon stays highlighted)
-export const screensInTabs = {
-  Feed: {screen: Feed, path: 'feed'},
-  PostEditor: {screen: PostEditor, path: 'post/:id/edit'},
-  DetailsEditor: {screen: DetailsEditor, path: 'details/:id/edit'},
-  PostDetails: {screen: PostDetails, path: 'post/:id'},
-  MemberProfile: {screen: MemberProfile, path: 'people/:id'},
-  MemberDetails: {screen: MemberDetails, path: 'people/:id/details'},
-  MemberSkillEditor: {screen: MemberSkillEditor, path: 'people/:id/skills'},
-  CommentEditor: {screen: CommentEditor, path: 'comment/:postId/new'},
+// Screens that can be shown in any tab (the same tab icon stays highlighted)
+const screensInTabs = {
+  Feed: {screen: Feed},
+  PostEditor: {screen: PostEditor},
+  DetailsEditor: {screen: DetailsEditor},
+  PostDetails: {screen: PostDetails, path: '/post/:id'},
+  MemberProfile: {screen: MemberProfile, path: '/people/:id'},
+  MemberDetails: {screen: MemberDetails},
+  MemberSkillEditor: {screen: MemberSkillEditor},
+  CommentEditor: {screen: CommentEditor},
   NewMessage: {screen: NewMessage}
-}
-
-// Screens that work outside of tabs, Settings, Messages, etc.
-export const screensInStack = {
-  UserSettings: {screen: UserSettings, path: 'settings'},
-  JoinCommunity: {screen: JoinCommunity, path: 'h/use-invitation'},
-  JoinCommunityAccessCode: {screen: JoinCommunity, path: 'c/:slug/join/:accessCode'},
-  Thread: {screen: Thread, path: 'thread/:id'},
-  NotificationsList: {screen: NotificationsList, path: 'notifications'},
-  ThreadList: {screen: ThreadList, path: 'messages'},
-  ThreadParticipants: {screen: ThreadParticipants, path: 'thread/:id/participants'},
-  SignupFlow1: {screen: SignupFlow1, path: 'signup/1'},
-  SignupFlow2: {screen: SignupFlow2, path: 'signup/2'},
-  SignupFlow3: {screen: SignupFlow3, path: 'signup/3'},
-  SignupFlow4: {screen: SignupFlow4, path: 'signup/4'},
-  SignupFlow5: {screen: SignupFlow5, path: 'signup/5'}
 }
 
 Object.freeze(tabs)
 Object.freeze(screensInTabs)
 
-const tabNavigatorConfig = {
-  initialRouteName: 'Home',
-  tabBarPosition: 'bottom',
-  animationEnabled: false,
-  swipeEnabled: false,
-  lazy: true,
-  tabBarOptions: {
-    showIcon: true,
-    showLabel: true,
-    indicatorStyle: {
-      display: 'none'
-    },
-    style: isIOS ? tabStyles.tabNavigatorIOS : tabStyles.tabNavigatorAndroid
-  },
-  // TODO remove this line once this PR is merged and released:
-  // https://github.com/react-community/react-navigation/pull/1764
-  tabBarComponent: TabBar
-}
-
 const TabNavigatorWithBar = TabNavigator(
   stacksInTabsFactory(tabs, screensInTabs),
-  tabNavigatorConfig
-)
-
-const drawerNavigatorRoutes = {
-  DrawerHome: {
-    screen: createLinkingAwareContainer(TabNavigatorWithBar, urlPrefix)
+  {
+    initialRouteName: 'Home',
+    tabBarPosition: 'bottom',
+    animationEnabled: false,
+    swipeEnabled: false,
+    lazy: true,
+    tabBarOptions: {
+      showIcon: true,
+      showLabel: true,
+      indicatorStyle: {
+        display: 'none'
+      },
+      style: isIOS ? tabStyles.tabNavigatorIOS : tabStyles.tabNavigatorAndroid
+    },
+    // TODO remove this line once this PR is merged and released:
+    // https://github.com/react-community/react-navigation/pull/1764
+    tabBarComponent: TabBar
   }
-}
-
-const drawerNavigatorConfig = {
-  contentComponent: DrawerMenu,
-  initialRouteName: 'DrawerHome',
-  drawerWidth: Dimensions.get('window').width * 0.9
-}
+)
 
 const DrawerAndTabsNavigator = DrawerNavigator(
-  drawerNavigatorRoutes,
-  drawerNavigatorConfig
+  {
+    DrawerHome: {
+      screen: TabNavigatorWithBar
+    }
+  },
+  {
+    contentComponent: DrawerMenu,
+    initialRouteName: 'DrawerHome',
+    drawerWidth: Dimensions.get('window').width * 0.9
+  }
 )
 
-const mainStackRoute = {
-  Main: {
-    screen: DrawerAndTabsNavigator,
-    navigationOptions: {
-      header: null
-    }
-  }
+// Screens that appear outside of tabs: Settings, Messages, etc.
+const screensInStack = {
+  UserSettings: {screen: UserSettings},
+  NotificationsList: {screen: NotificationsList},
+  ThreadList: {screen: ThreadList},
+  ThreadParticipants: {screen: ThreadParticipants},
+  SessionCheck: {screen: SessionCheck},
+  InviteExpired: {screen: InviteExpired},
+  Signup: {screen: Signup},
+  SignupFlow1: {screen: SignupFlow1},
+  SignupFlow2: {screen: SignupFlow2},
+  SignupFlow3: {screen: SignupFlow3},
+  SignupFlow4: {screen: SignupFlow4},
+  SignupFlow5: {screen: SignupFlow5},
+  Login: {screen: Login, path: '/login'},
+  Thread: {screen: Thread, path: '/thread/:id'},
+  UseInvitation: {screen: JoinCommunity, path: '/useInvitation/:token'},
+  UseAccessCode: {screen: JoinCommunity, path: '/useAccessCode/:slug/:accessCode'},
+  Loading: {screen: LoadingScreen}
 }
 
-const rootNavigatorRoutes = Object.assign({}, mainStackRoute, screensInStack)
-
 const RootNavigator = StackNavigator(
-  rootNavigatorRoutes,
+  {
+    [MAIN_ROUTE_NAME]: {
+      screen: DrawerAndTabsNavigator,
+      path: '/main',
+      navigationOptions: {header: null}
+    },
+    ...screensInStack
+  },
   {
     cardStyle: {backgroundColor: '#FFF'},
-    mode: 'modal'
+    mode: 'modal',
+    initialRouteName: 'Loading'
   }
 )
+
+extendRouter(RootNavigator.router)
 
 // trackCurrentTab must be on the top-level navigator, because it uses a prop
 // for listening to navigation change events that can only be assigned to a

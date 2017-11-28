@@ -9,7 +9,7 @@ describe('mapStateToProps matches the latest snapshot', () => {
   const state = {
     session: {
       loggedIn: true,
-      entryURL: 'http://www.hylo.com/a/path'
+      entryUrl: 'http://www.hylo.com/a/path'
     },
     pending: {}
   }

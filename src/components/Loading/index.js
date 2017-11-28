@@ -1,2 +1,1 @@
-import Loading from './Loading'
-export default Loading
+export { default, LoadingScreen } from './Loading'

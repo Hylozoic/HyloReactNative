@@ -9,11 +9,12 @@
 import React from 'react'
 import { has } from 'lodash/fp'
 import { updateFocus } from 'react-navigation-is-focused-hoc'
+import hoistStatics from 'hoist-non-react-statics'
 
 const tabNames = ['Home', 'Members', 'Topics']
 
 export default function trackCurrentTab (Component) {
-  return class extends React.Component {
+  class Wrapper extends React.Component {
     constructor (props) {
       super(props)
       this.state = {currentTabName: 'Home'}
@@ -47,11 +48,13 @@ export default function trackCurrentTab (Component) {
 
     render () {
       return <Component
-        ref={wrappedInst => { this.wrappedInstance = wrappedInst }}
+        ref={x => { this.wrappedInstance = x }}
         {...this.props}
         onNavigationStateChange={this.handleChange}
         screenProps={this.state}
       />
     }
   }
+
+  return hoistStatics(Wrapper, Component)
 }

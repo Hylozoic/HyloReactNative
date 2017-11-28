@@ -12,6 +12,7 @@ exports[`mapStateToProps returns the right keys 1`] = `
 Object {
   "avatarUrl": undefined,
   "confirmPassword": undefined,
+  "deepLinkAction": undefined,
   "email": undefined,
   "location": undefined,
   "name": undefined,
@@ -23,11 +24,20 @@ Object {
 
 exports[`mergeProps merges the props 1`] = `
 Object {
+  "deepLinkAction": Object {
+    "params": Object {
+      "accessCode": "foo",
+      "slug": "sandbox",
+    },
+    "routeName": "UseAccessCode",
+    "type": "Navigation/NAVIGATE",
+  },
   "finishSignup": [Function],
   "goToImage": [Function],
   "goToSkills": [Function],
   "makeChanges": [Function],
   "navigation": Object {
+    "dispatch": [Function],
     "navigate": [Function],
   },
   "storedSkills": Array [
@@ -66,17 +76,6 @@ Array [
       "password": "",
       "settings": Object {},
     },
-  ],
-]
-`;
-
-exports[`mergeProps merges the props 4`] = `
-Array [
-  Array [
-    "Home",
-  ],
-  Array [
-    "SignupFlow1",
   ],
 ]
 `;

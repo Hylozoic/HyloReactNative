@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`goToCommunityFromRoot 1`] = `
+exports[`goToCommunity 1`] = `
 Object {
   "payload": "anycommunityid",
   "type": "SELECT_COMMUNITY",
@@ -9,30 +9,14 @@ Object {
 
 exports[`mapDispatchToProps 1`] = `
 Object {
-  "dispatch": [Function],
+  "checkInvitation": [Function],
   "goToCommunity": [Function],
-  "goToHome": [Function],
   "useInvitation": [Function],
 }
 `;
 
 exports[`mergeProps 1`] = `
 Object {
-  "communityId": "anything",
-  "currentCommunityId": "default",
-  "currentUser": Object {
-    "name": "me",
-  },
-  "invitationCodes": Object {},
-  "navigation": Object {
-    "state": Object {
-      "params": Object {
-        "accessCode": "anyaccesscode",
-        "invitationToken": "anyinvitationtoken",
-        "token": "anytoken",
-      },
-    },
-  },
-  "useInvitation": [Function],
+  "checkOrUseInvitation": [Function],
 }
 `;
