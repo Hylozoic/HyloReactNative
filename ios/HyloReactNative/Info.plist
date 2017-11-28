@@ -58,7 +58,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>36</string>
+	<string>38</string>
 	<key>FacebookAppID</key>
 	<string>${FACEBOOK_APP_ID}</string>
 	<key>FacebookDisplayName</key>
@@ -95,7 +95,7 @@
 	<key>NSCameraUsageDescription</key>
 	<string>This app requires access to the camera.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string/>
+	<string></string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>This requires access to the microphone.</string>
 	<key>NSPhotoLibraryUsageDescription</key>

@@ -158,6 +158,20 @@
 			remoteGlobalIDString = 641926921ECB4257009CF731;
 			remoteInfo = "RNBackgroundTimer-tvOS";
 		};
+		215455D71FCE012400B73372 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9936F3131F5F2E4B0010BF04;
+			remoteInfo = privatedata;
+		};
+		215455D91FCE012400B73372 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9936F32F1F5F2E5B0010BF04;
+			remoteInfo = "privatedata-tvOS";
+		};
 		215674581EF4B50300E04217 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9EB73EBA157745BDA56C0650 /* RNGoogleSignin.xcodeproj */;
@@ -644,6 +658,7 @@
 			isa = PBXGroup;
 			children = (
 				146834041AC3E56700842450 /* libReact.a */,
+				3DAD3EA31DF850E9000B6D8A /* libReact.a */,
 				3DAD3EA51DF850E9000B6D8A /* libyoga.a */,
 				3DAD3EA71DF850E9000B6D8A /* libyoga.a */,
 				3DAD3EA91DF850E9000B6D8A /* libcxxreact.a */,
@@ -654,7 +669,8 @@
 				21BB172E1F478672004B6FB6 /* libthird-party.a */,
 				217A25C31EF2237100F95ED4 /* libdouble-conversion.a */,
 				21BB17301F478672004B6FB6 /* libdouble-conversion.a */,
-				3DAD3EA31DF850E9000B6D8A /* libReact-tvOS.a */,
+				215455D81FCE012400B73372 /* libprivatedata.a */,
+				215455DA1FCE012400B73372 /* libprivatedata-tvOS.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1177,6 +1193,20 @@
 			remoteRef = 2150DC7E1F7C7EE600D0D60C /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		215455D81FCE012400B73372 /* libprivatedata.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libprivatedata.a;
+			remoteRef = 215455D71FCE012400B73372 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		215455DA1FCE012400B73372 /* libprivatedata-tvOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libprivatedata-tvOS.a";
+			remoteRef = 215455D91FCE012400B73372 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		215674591EF4B50300E04217 /* libRNGoogleSignin.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1317,10 +1347,10 @@
 			remoteRef = 3DAD3E981DF850E9000B6D8A /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		3DAD3EA31DF850E9000B6D8A /* libReact-tvOS.a */ = {
+		3DAD3EA31DF850E9000B6D8A /* libReact.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = "libReact-tvOS.a";
+			path = libReact.a;
 			remoteRef = 3DAD3EA21DF850E9000B6D8A /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -1657,7 +1687,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 36;
+				CURRENT_PROJECT_VERSION = 38;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = L4KZBPS2F3;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)/**";
@@ -1701,7 +1731,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 36;
+				CURRENT_PROJECT_VERSION = 38;
 				DEVELOPMENT_TEAM = L4KZBPS2F3;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)/**";
 				HEADER_SEARCH_PATHS = (
@@ -1727,7 +1757,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hylo.HyloA;
 				PRODUCT_NAME = HyloReactNative;
-				PROVISIONING_PROFILE = "fb2a745c-ab3c-468f-b294-7a6b6da2a794";
+				PROVISIONING_PROFILE = "fa9ccd05-d02c-4ff5-8d7b-a9c07d6ee329";
 				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.hylo.HyloA";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
