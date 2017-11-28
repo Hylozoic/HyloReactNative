@@ -10,6 +10,7 @@ exports[`Control matches the last snapshot 1`] = `
       numberOfLines={8}
       onBlur={[Function]}
       onChangeText={undefined}
+      placeholder="b"
       underlineColorAndroid="transparent"
       value="a"
     />
@@ -34,6 +35,7 @@ exports[`MemberHeader matches the last snapshot 1`] = `
       editable={undefined}
       error={undefined}
       onChangeText={[Function]}
+      placeholder="Name"
       value="Jonas"
     />
     <View>
@@ -57,11 +59,13 @@ exports[`MemberHeader matches the last snapshot 1`] = `
   <Control
     editable={undefined}
     onChangeText={[Function]}
+    placeholder="Location"
     value="whale"
   />
   <Control
     editable={undefined}
     onChangeText={[Function]}
+    placeholder="Short Description"
     value="fingers crossed"
   />
 </View>

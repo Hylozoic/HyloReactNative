@@ -3,7 +3,8 @@ import {
   Text,
   View,
   TouchableOpacity,
-  ScrollView
+  ScrollView,
+  BackHandler
 } from 'react-native'
 import Icon from '../../Icon'
 import { HeaderBackButton } from 'react-navigation'
@@ -45,6 +46,7 @@ export default class MemberDetails extends React.Component {
     this.props.navigation.setParams({
       goBack: this.goBack
     })
+    BackHandler.addEventListener('hardwareBackPress', this.goBack)
   }
 
   componentDidUpdate (prevProps) {
@@ -57,6 +59,10 @@ export default class MemberDetails extends React.Component {
         person: editableFields(this.props.person)
       })
     }
+  }
+
+  componentWillUnmount () {
+    BackHandler.removeEventListener('hardwareBackPress', this.goBack)
   }
 
   goBack = () => {
@@ -140,7 +146,7 @@ export class MemberBio extends React.Component {
 
   render () {
     const { person: { bio }, editable, updateSetting } = this.props
-    if (isEmpty(bio)) return null
+    if (isEmpty(bio) && !editable) return null
     return <View style={styles.bioContainer}>
       <View style={styles.labelWrapper}>
         <Text style={styles.sectionLabel}>About Me</Text>
@@ -152,6 +158,7 @@ export class MemberBio extends React.Component {
         ref={c => { this.control = c }}
         style={styles.bio}
         value={bio}
+        placeholder='Description'
         editable={editable}
         onChangeText={updateSetting('bio')}
         multiline

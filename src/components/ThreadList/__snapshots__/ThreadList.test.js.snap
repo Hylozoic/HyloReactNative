@@ -38,13 +38,18 @@ exports[`MessageRow calls showThread 1`] = `
           accessible={true}
           allowFontScaling={true}
           ellipsizeMode="tail"
-        />
+        >
+          Test User
+        </Text>
         <Text
           accessible={true}
           allowFontScaling={true}
           ellipsizeMode="tail"
           numberOfLines={2}
-        />
+        >
+          Test User: 
+          This is a message.
+        </Text>
         <Text
           accessible={true}
           allowFontScaling={true}
@@ -70,8 +75,8 @@ exports[`MessageRow renders correctly 1`] = `
       message={
         Array [
           Object {
-            "_fields": Object {
-              "creator": 1,
+            "creator": Object {
+              "id": 1,
             },
             "id": 1,
           },

@@ -73,6 +73,7 @@ exports[`MemberBio matches the last snapshot 1`] = `
     hideEditIcon={true}
     multiline={true}
     onChangeText={[Function]}
+    placeholder="Description"
     value="I live I die!"
   />
 </View>
