@@ -104,14 +104,12 @@ export default class SessionCheck extends React.Component {
           ref={nav => { this.navigator = nav }} />
       }
       if (currentUser) {
-        return <ErrorBoundary>
-          <View style={{flex: 1}}>
-            <RootNavigator
-              uriPrefix={INTERNAL_ROUTE_URI_PREFIX}
-              ref={nav => { this.navigator = nav && nav.getWrappedInstance() }} />
-            <SocketListener />
-          </View>
-        </ErrorBoundary>
+        return <View style={{flex: 1}}>
+          <RootNavigator
+            uriPrefix={INTERNAL_ROUTE_URI_PREFIX}
+            ref={nav => { this.navigator = nav && nav.getWrappedInstance() }} />
+          <SocketListener />
+        </View>
       }
     }
     return <Loading style={mixins.allCentered} />

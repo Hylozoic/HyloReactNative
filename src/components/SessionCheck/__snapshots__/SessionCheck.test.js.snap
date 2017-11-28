@@ -9,14 +9,12 @@ exports[`SessionCheck component matches last snapshot - default 1`] = `
 exports[`SessionCheck component matches last snapshot - loading 1`] = `<Loading />`;
 
 exports[`SessionCheck component matches last snapshot - loggedIn with a currentUser 1`] = `
-<Connect(ErrorBoundary)>
-  <View>
-    <RootNavigator
-      uriPrefix="internalRouting://"
-    />
-    <SocketListener />
-  </View>
-</Connect(ErrorBoundary)>
+<View>
+  <RootNavigator
+    uriPrefix="internalRouting://"
+  />
+  <SocketListener />
+</View>
 `;
 
 exports[`SessionCheck component matches last snapshot - loggedIn without a currentUser 1`] = `<Loading />`;
