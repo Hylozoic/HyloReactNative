@@ -29,6 +29,7 @@ Object {
     "id": 1,
   },
   "fetchPerson": [Function],
+  "goToMemberProfile": [Function],
   "id": 78,
   "navigation": Object {
     "navigate": [Function],
