@@ -60,7 +60,8 @@ describe('makeJoinCommunity', () => {
     invitationCodes: {
       invitationToken: 'invitationtoken',
       accessCode: 'accesscode'
-    }
+    },
+    goToHome: jest.fn()
   }
 
   it('should forward to the joined community when one is returned', () => {
@@ -95,12 +96,11 @@ describe('makeJoinCommunity', () => {
     const dispatchProps = {
       useInvitation: jest.fn(() => Promise.resolve(result)),
       goToCommunity: jest.fn(),
-      goToHome: jest.fn(),
       dispatch: jest.fn()
     }
     return makeJoinCommunity(stateProps, dispatchProps)()
     .then(result => {
-      expect(dispatchProps.goToHome).toHaveBeenCalled()
+      expect(stateProps.goToHome).toHaveBeenCalled()
       return expect(dispatchProps.useInvitation).toHaveBeenCalled(result)
     })
   })
