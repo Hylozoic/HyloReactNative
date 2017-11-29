@@ -76,8 +76,8 @@ export function makeCheckInvitation (stateProps, dispatchProps) {
 }
 
 export function makeJoinCommunity (stateProps, dispatchProps) {
-  const { currentUser, invitationCodes } = stateProps
-  const { useInvitation, goToCommunity, goToHome } = dispatchProps
+  const { currentUser, invitationCodes, goToHome } = stateProps
+  const { useInvitation, goToCommunity } = dispatchProps
   const getCommunityId = get('payload.data.useInvitation.membership.community.id')
   return () =>
     useInvitation(currentUser, invitationCodes)

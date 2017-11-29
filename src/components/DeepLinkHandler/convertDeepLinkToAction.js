@@ -1,5 +1,5 @@
 import url from 'url'
-import { routeMatchers } from 'util/navigation'
+import { routeMatchers, MAIN_ROUTE_PATH } from 'util/navigation'
 import qs from 'querystring'
 import RootNavigator from '../RootNavigator'
 
@@ -13,16 +13,18 @@ export function reformatPath (path) {
   const params = qs.parse(query)
 
   match = routeMatchers.post(pathname)
-  if (match) return '/post/' + match.id
+  // we have to prepend the main route's path segment because PostDetails is
+  // in a nested navigator, not the top-level StackNavigator.
+  if (match) return `${MAIN_ROUTE_PATH}/post/${match.id}`
 
   match = routeMatchers.thread(pathname)
-  if (match) return '/thread/' + match.id
+  if (match) return 'thread/' + match.id
 
   match = routeMatchers.invitation(pathname)
-  if (match) return `/useInvitation/${params.token}`
+  if (match) return `useInvitation/${params.token}`
 
   match = routeMatchers.accessLink(pathname)
-  if (match) return `/useAccessCode/${match.slug}/${match.accessCode}`
+  if (match) return `useAccessCode/${match.slug}/${match.accessCode}`
 
   return path
 }
