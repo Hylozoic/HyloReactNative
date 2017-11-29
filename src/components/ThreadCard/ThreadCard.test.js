@@ -5,9 +5,7 @@ import ThreadCard, { lastMessageCreator, threadNames, ThreadAvatars } from './in
 it('renders correctly', () => {
   const message = {
     text: 'Hey, just checking in. Test, test, test.',
-    creator: {
-      id: 1
-    }
+    creator: {id: 1}
   }
   const currentUser = {id: 1, avatarUrl: 'fred.png'}
 
@@ -32,53 +30,34 @@ describe('handles threadNames correctly', () => {
 describe('handles lastMessageCreator correctly', () => {
   it('handles when the current user created the message', () => {
     const formattedName = 'You: '
-    const currentUser = {
-      id: 1
-    }
+    const currentUser = {id: 1}
     const message = {
-      creator: {
-        id: 1
-      }
+      creator: {id: 1}
     }
     expect(lastMessageCreator(message, currentUser, [])).toBe(formattedName)
   })
   it('handles when a different user created the message', () => {
     const name = 'name'
     const formattedName = 'name: '
-    const currentUser = {
-      id: 1
-    }
+    const currentUser = {id: 1}
     const message = {
-      creator: {
-        id: 2
-      }
+      creator: {id: 2}
     }
     const participants = [
-      {
-        id: 2,
-        name: name
-      }
+      {id: 2, name},
+      {id: 3, name: 'other'},
+      {id: 4, name: 'another'}
     ]
     expect(lastMessageCreator(message, currentUser, participants)).toBe(formattedName)
   })
   it('handles when there are 2 participants and a different user created the message', () => {
-    const currentUser = {
-      id: 1
-    }
+    const currentUser = {id: 1}
     const message = {
-      creator: {
-        id: 2
-      }
+      creator: {id: 2}
     }
     const participants = [
-      {
-        id: 2,
-        name: 'name1'
-      },
-      {
-        id: 2,
-        name: 'name2'
-      }
+      {id: 2, name: 'name1'},
+      {id: 2, name: 'name2'}
     ]
     expect(lastMessageCreator(message, currentUser, participants)).toBe('')
   })
