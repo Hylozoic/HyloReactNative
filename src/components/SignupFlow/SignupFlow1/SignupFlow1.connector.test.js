@@ -24,7 +24,6 @@ describe('mapDispatchToProps', () => {
     dispatchProps.changeSetting('name', 'yo')
     dispatchProps.updateLocalUserSettings({la: 'la'})
     dispatchProps.updateUserSettings({ra: 'ra'})
-    dispatchProps.setSignupStep1Complete(true)
     expect(dispatch).toHaveBeenCalled()
     expect(dispatch.mock.calls).toMatchSnapshot()
   })
@@ -49,8 +48,7 @@ describe('mergeProps', () => {
       signup: jest.fn(() => Promise.resolve({})),
       updateUserSettings: jest.fn(() => Promise.resolve({})),
       updateLocalUserSettings: jest.fn(),
-      fetchCurrentUser: jest.fn(),
-      setSignupStep1Complete: jest.fn()
+      fetchCurrentUser: jest.fn(() => Promise.resolve())
     }
     const ownProps = {
       navigation: {
@@ -68,7 +66,6 @@ describe('mergeProps', () => {
       expect(dispatchProps.updateUserSettings).toHaveBeenCalled()
       expect(dispatchProps.updateUserSettings.mock.calls)
       .toMatchSnapshot()
-      expect(dispatchProps.setSignupStep1Complete).toHaveBeenCalledWith(true)
       expect(ownProps.navigation.navigate).toHaveBeenCalledWith('SignupFlow2')
     })
   })

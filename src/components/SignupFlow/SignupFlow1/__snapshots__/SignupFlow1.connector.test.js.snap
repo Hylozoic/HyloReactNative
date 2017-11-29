@@ -3,7 +3,7 @@
 exports[`mapDispatchToProps maps the action generators 1`] = `
 Object {
   "changeSetting": [Function],
-  "setSignupStep1Complete": [Function],
+  "fetchCurrentUser": [Function],
   "signup": [Function],
   "updateLocalUserSettings": [Function],
   "updateUserSettings": [Function],
@@ -69,12 +69,6 @@ Array [
       "type": "UPDATE_USER_SETTINGS",
     },
   ],
-  Array [
-    Object {
-      "payload": true,
-      "type": "SignupFlow/SET_SIGNUP_STEP1_COMPLETE",
-    },
-  ],
 ]
 `;
 
@@ -108,7 +102,6 @@ Object {
     "navigate": [Function],
   },
   "password": "c",
-  "setSignupStep1Complete": [Function],
   "showPasswordField": true,
   "signup": [Function],
   "signupOrUpdate": [Function],

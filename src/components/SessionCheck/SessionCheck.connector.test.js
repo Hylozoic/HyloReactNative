@@ -1,18 +1,29 @@
-import { mapStateToProps } from './SessionCheck.connector.js'
-import { MODULE_NAME as SignupFlowStoreKey } from '../SignupFlow/SignupFlow.store'
+import { mergeProps } from './SessionCheck.connector'
 
-jest.mock('react-native-device-info')
+jest.useFakeTimers()
 
-describe('mapStateToProps', () => {
-  it('returns the right keys', () => {
-    const defaultState = {
-      session: {
-        loggedIn: true,
-        entryURL: 'http://www.hylo.com/a/path'
-      },
-      pending: {},
-      [SignupFlowStoreKey]: {}
+describe('checkSession', () => {
+  it('retries if there is an error', async () => {
+    const numFailures = 3
+    var failuresLeft = numFailures
+
+    const dispatchProps = {
+      fetchCurrentUser: jest.fn(),
+      checkSession: jest.fn(() => {
+        failuresLeft -= 1
+        return Promise.resolve(failuresLeft > 0 ? {error: true} : {payload: true})
+      })
     }
-    expect(mapStateToProps(defaultState)).toMatchSnapshot()
+
+    const mergedProps = mergeProps({}, dispatchProps)
+    const check = mergedProps.checkSession()
+    while (failuresLeft > 0) { // eslint-disable-line
+      await process.nextTick(() => {})
+      jest.runAllTimers()
+    }
+    await check
+
+    expect(dispatchProps.checkSession).toHaveBeenCalledTimes(numFailures)
+    expect(dispatchProps.fetchCurrentUser).toBeCalled()
   })
 })

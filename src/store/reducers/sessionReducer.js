@@ -4,13 +4,10 @@ import {
   LOGIN_WITH_GOOGLE
 } from '../../components/Login/actions'
 import { SIGNUP } from '../../components/SignupFlow/SignupFlow.store'
-import { CHECK_INVITATION } from '../../components/CheckInvitation/CheckInvitation.store'
+import { CHECK_INVITATION } from '../../components/JoinCommunity/JoinCommunity.store'
 import {
-  CHECK_SESSION,
-  SET_ENTRY_URL,
-  RESET_ENTRY_URL
+  CHECK_SESSION
 } from '../../components/SessionCheck/SessionCheck.store'
-import { CHECK_VERSION } from '../../components/VersionCheck/actions'
 import { omit } from 'lodash/fp'
 
 export default function sessionReducer (state = {}, action) {
@@ -43,18 +40,9 @@ export default function sessionReducer (state = {}, action) {
         loggedIn: true
       }
     case CHECK_SESSION:
-      if (payload !== state.loggedIn) {
-        return {...state, loggedIn: payload}
-      }
-      return state
-    case SET_ENTRY_URL:
-      return {...state, entryURL: payload}
-    case RESET_ENTRY_URL:
-      return {...state, entryURL: null, hasSignupLink: false}
+      return {...state, loggedIn: payload}
     case SIGNUP:
       return {...state, loggedIn: true}
-    case CHECK_VERSION:
-      return {...state, checkVersion: payload}
     case CHECK_INVITATION:
       return {...state, hasSignupLink: true}
   }

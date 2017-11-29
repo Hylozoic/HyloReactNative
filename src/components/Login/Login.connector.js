@@ -7,34 +7,64 @@ import {
 import { getPending } from './Login.store'
 import { register as registerOneSignal } from 'util/onesignal'
 import registerDevice from '../../store/actions/registerDevice'
+import fetchCurrentUser from 'store/actions/fetchCurrentUser'
+import { redirectAfterLogin } from 'util/navigation'
+import { getNavigationAction } from '../DeepLinkHandler/DeepLinkHandler.store'
 
 export function mapStateToProps (state, props) {
   const error = state.session.loginError
   const pending = getPending(state)
   const goToSignup = () => props.navigation.navigate('Signup')
   return {
+    loggedIn: state.session.loggedIn,
     error,
     pending,
     defaultEmail: state.session.defaultLoginEmail,
     goToSignup,
-    hasSignupLink: !!state.session.hasSignupLink
+    hasSignupLink: !!state.session.hasSignupLink,
+    deepLinkAction: getNavigationAction(state)
   }
 }
 
-export function mapDispatchToProps (dispatch) {
-  function setupPushNotifications (action) {
+export const mapDispatchToProps = {
+  registerDevice,
+  loginWithFacebook,
+  loginWithGoogle,
+  login,
+  fetchCurrentUser
+}
+
+export function mergeProps (stateProps, dispatchProps, ownProps) {
+  const {
+    registerDevice,
+    loginWithGoogle,
+    loginWithFacebook,
+    login,
+    fetchCurrentUser
+  } = dispatchProps
+
+  const finishLogin = action => {
     if (action.error) return
-    registerOneSignal({registerDevice: id => dispatch(registerDevice(id))})
+    registerOneSignal({registerDevice})
+
+    return fetchCurrentUser().then(({ error, payload }) =>
+      !error && redirectAfterLogin({
+        navigation: ownProps.navigation,
+        currentUser: payload.data.me,
+        action: stateProps.deepLinkAction
+      }))
   }
 
   return {
+    ...ownProps,
+    ...stateProps,
     loginWithFacebook: (token) =>
-      dispatch(loginWithFacebook(token)).then(setupPushNotifications),
+      loginWithFacebook(token).then(finishLogin),
     loginWithGoogle: (token) =>
-      dispatch(loginWithGoogle(token)).then(setupPushNotifications),
+      loginWithGoogle(token).then(finishLogin),
     login: (email, password) =>
-      dispatch(login(email, password)).then(setupPushNotifications)
+      login(email, password).then(finishLogin)
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps)

@@ -20,8 +20,14 @@ describe('mapDispatchToProps', () => {
 
 describe('mergeProps', () => {
   it('merges the props', () => {
+    const deepLinkAction = {
+      type: 'Navigation/NAVIGATE',
+      routeName: 'UseAccessCode',
+      params: {accessCode: 'foo', slug: 'sandbox'}
+    }
     const stateProps = {
-      storedSkills: ['a', 'b', 'c']
+      storedSkills: ['a', 'b', 'c'],
+      deepLinkAction
     }
     const dispatchProps = {
       updateUserSettings: jest.fn(),
@@ -29,7 +35,8 @@ describe('mergeProps', () => {
     }
     const ownProps = {
       navigation: {
-        navigate: jest.fn()
+        navigate: jest.fn(),
+        dispatch: jest.fn()
       }
     }
     const mergedProps = mergeProps(stateProps, dispatchProps, ownProps)
@@ -41,9 +48,6 @@ describe('mergeProps', () => {
     expect(dispatchProps.updateLocalUserSettings).toHaveBeenCalled()
     expect(dispatchProps.updateLocalUserSettings.mock.calls)
     .toMatchSnapshot()
-    mergedProps.makeChanges()
-    expect(ownProps.navigation.navigate).toHaveBeenCalled()
-    expect(ownProps.navigation.navigate.mock.calls)
-    .toMatchSnapshot()
+    expect(ownProps.navigation.dispatch).toHaveBeenCalledWith(deepLinkAction)
   })
 })

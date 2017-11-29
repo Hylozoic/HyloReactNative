@@ -8,5 +8,9 @@ export function showMessagesBadge (session) {
   // unseen. but since the UI doesn't show the count, just a badge, it just
   // needs to know whether there are more than 0 unseen threads, and this takes
   // care of that.
-  session.Me.first().increment('unseenThreadCount')
+  //
+  // we have to check that the current user exists, because this code could be
+  // run while they are logged out.
+  const me = session.Me.first()
+  if (me) me.increment('unseenThreadCount')
 }

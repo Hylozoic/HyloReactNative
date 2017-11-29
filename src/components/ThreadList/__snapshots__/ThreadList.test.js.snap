@@ -47,7 +47,7 @@ exports[`MessageRow calls showThread 1`] = `
           ellipsizeMode="tail"
           numberOfLines={2}
         >
-          Test User: 
+          
           This is a message.
         </Text>
         <Text

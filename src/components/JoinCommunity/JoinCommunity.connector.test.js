@@ -1,10 +1,10 @@
-import { MODULE_NAME } from './JoinCommunity.store'
 import orm from 'store/models'
 import {
   mapStateToProps,
   mapDispatchToProps,
-  goToCommunityFromRoot,
-  handleJoinCommunity,
+  goToCommunity,
+  makeJoinCommunity,
+  makeCheckInvitation,
   mergeProps
 } from './JoinCommunity.connector'
 
@@ -15,19 +15,17 @@ beforeEach(() => {
   defaultState = {orm: session.state}
 })
 
-test('goToCommunityFromRoot', () => {
+test('goToCommunity', () => {
   const communityId = 'anycommunityid'
   const navigation = {
     dispatch: testOutput => testOutput
   }
-  const result = goToCommunityFromRoot(communityId, navigation)
+  const result = goToCommunity(communityId, navigation)
   expect(result).toMatchSnapshot()
 })
 
 describe('mapStateToProps', () => {
   it('gets props from navigation object', () => {
-    const currentUserPOJO = {name: 'me'}
-    const currentUser = session.Me.create(currentUserPOJO)
     const testProps = {
       navigation: {
         state: {
@@ -39,21 +37,9 @@ describe('mapStateToProps', () => {
         }
       }
     }
-    const community = {id: 'anycommunityid'}
-    const membership = {community}
-    const testState = {
-      ...defaultState,
-      currentCommunity: 'currentcommunityid',
-      [MODULE_NAME]: {
-        membership
-      }
-    }
-    expect(mapStateToProps(testState, testProps)).toEqual({
-      currentUser,
-      invitationCodes: {
-        invitationToken: testProps.navigation.state.params.token,
-        accessCode: testProps.navigation.state.params.accessCode
-      }
+    expect(mapStateToProps(defaultState, testProps).invitationCodes).toEqual({
+      invitationToken: testProps.navigation.state.params.token,
+      accessCode: testProps.navigation.state.params.accessCode
     })
   })
 })
@@ -66,7 +52,7 @@ test('mapDispatchToProps', () => {
   expect(result).toMatchSnapshot()
 })
 
-describe('handleJoinCommunity', () => {
+describe('makeJoinCommunity', () => {
   const currentCommunityId = 'defaultcommunityid'
   const stateProps = {
     currentUser: {id: 'currentuser'},
@@ -97,7 +83,7 @@ describe('handleJoinCommunity', () => {
       goToCommunity: jest.fn(),
       dispatch: jest.fn()
     }
-    return handleJoinCommunity(stateProps, dispatchProps)
+    return makeJoinCommunity(stateProps, dispatchProps)()
     .then(result => {
       expect(dispatchProps.goToCommunity).toHaveBeenCalledWith(joinedCommunityId)
       return expect(dispatchProps.useInvitation).toHaveBeenCalled(result)
@@ -112,7 +98,7 @@ describe('handleJoinCommunity', () => {
       goToHome: jest.fn(),
       dispatch: jest.fn()
     }
-    return handleJoinCommunity(stateProps, dispatchProps)
+    return makeJoinCommunity(stateProps, dispatchProps)()
     .then(result => {
       expect(dispatchProps.goToHome).toHaveBeenCalled()
       return expect(dispatchProps.useInvitation).toHaveBeenCalled(result)
@@ -120,7 +106,7 @@ describe('handleJoinCommunity', () => {
   })
 })
 
-it('mergeProps', () => {
+test('mergeProps', () => {
   const currentUserPOJO = {name: 'me'}
   const stateProps = {
     communityId: 'anything',
@@ -144,4 +130,66 @@ it('mergeProps', () => {
   }
   const result = mergeProps(stateProps, dispatchProps, ownProps)
   expect(result).toMatchSnapshot()
+})
+
+describe('makeCheckInvitation', () => {
+  const checkInvitationResponse = (valid) => ({
+    payload: {
+      data: {
+        checkInvitation: {
+          valid
+        }
+      }
+    }
+  })
+
+  it('should forward to signup page if invite is valid', () => {
+    const stateProps = {
+      invitationCodes: {},
+      navToSignup: jest.fn(),
+      navToInviteExpired: jest.fn()
+    }
+    const dispatchProps = {
+      checkInvitation: () =>
+        Promise.resolve(checkInvitationResponse(true))
+    }
+    return makeCheckInvitation(stateProps, dispatchProps)()
+    .then(() => {
+      expect(stateProps.navToInviteExpired).not.toHaveBeenCalled()
+      return expect(stateProps.navToSignup).toHaveBeenCalled()
+    })
+  })
+
+  it('should forward to invite expired page if invite is invalid', () => {
+    const stateProps = {
+      invitationCodes: {},
+      navToSignup: jest.fn(),
+      navToInviteExpired: jest.fn()
+    }
+    const dispatchProps = {
+      checkInvitation: () =>
+        Promise.resolve(checkInvitationResponse(false))
+    }
+    return makeCheckInvitation(stateProps, dispatchProps)()
+    .then(() => {
+      expect(stateProps.navToSignup).not.toHaveBeenCalled()
+      return expect(stateProps.navToInviteExpired).toHaveBeenCalled()
+    })
+  })
+
+  it('should forward to signup page if an error occurs in checking the invite', () => {
+    const stateProps = {
+      invitationCodes: {},
+      navToSignup: jest.fn(),
+      navToInviteExpired: jest.fn()
+    }
+    const dispatchProps = {
+      checkInvitation: () => Promise.reject(new Error('anything'))
+    }
+    return makeCheckInvitation(stateProps, dispatchProps)()
+    .then(() => {
+      expect(stateProps.navToInviteExpired).not.toHaveBeenCalled()
+      return expect(stateProps.navToSignup).toHaveBeenCalled()
+    })
+  })
 })

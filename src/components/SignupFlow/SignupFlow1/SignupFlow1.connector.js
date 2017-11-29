@@ -1,9 +1,10 @@
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import fetchCurrentUser from 'store/actions/fetchCurrentUser'
 import {
   signup,
   getUserSettings,
   getSignupErrors,
-  setSignupStep1Complete,
   updateUserSettings,
   updateLocalUserSettings,
   SIGNUP,
@@ -34,16 +35,20 @@ export function mapDispatchToProps (dispatch, props) {
   return {
     signup: params => dispatch(signup(params)),
     changeSetting: (setting, value) => dispatch(updateLocalUserSettings({[setting]: value})),
-    updateLocalUserSettings: settings => dispatch(updateLocalUserSettings(settings)),
-    updateUserSettings: settings => dispatch(updateUserSettings(settings)),
-    setSignupStep1Complete: payload => dispatch(setSignupStep1Complete(payload))
+    ...bindActionCreators({
+      updateLocalUserSettings,
+      updateUserSettings,
+      fetchCurrentUser
+    }, dispatch)
   }
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
   const goToNext = () => ownProps.navigation.navigate('SignupFlow2')
   const { name, email, password, currentUser, showPasswordField } = stateProps
-  const { signup, updateUserSettings, updateLocalUserSettings, setSignupStep1Complete } = dispatchProps
+  const {
+    signup, updateUserSettings, updateLocalUserSettings, fetchCurrentUser
+  } = dispatchProps
   const saveFunc = currentUser ? updateUserSettings : signup
 
   const loadUserSettings = currentUser
@@ -57,13 +62,7 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     email,
     password: showPasswordField ? password : null
   }))
-  .then(({ error }) => {
-    if (error) return
-    // this is a consequence of SignupFlow1 having two modes (already have a user or creating one),
-    // and SessionCheck needs to be able to distinguish between them
-    setSignupStep1Complete(true)
-    return goToNext()
-  })
+  .then(({ error }) => !error && fetchCurrentUser().then(() => goToNext()))
 
   return {
     ...stateProps,
