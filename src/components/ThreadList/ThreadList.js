@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { FlatList, TouchableOpacity, View, Text } from 'react-native'
 import { isEmpty } from 'lodash/fp'
-import { withNavigationFocus } from 'react-navigation-is-focused-hoc'
 
 import { getSocket } from 'util/websockets'
 import header from 'util/header'

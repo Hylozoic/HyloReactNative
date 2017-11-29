@@ -28,23 +28,21 @@ export default function ThreadCard (props) {
 
 export function lastMessageCreator (message, currentUser, participants) {
   if (get('id', message.creator) === currentUser.id) return 'You: '
-  if (participants.length === 2) return ''
+  if (participants.length <= 2) return ''
   return find(p => p.id === get('id', message.creator), participants).name + ': '
 }
 
-
 export function threadNames (names) {
-  let nameString = ''
-  switch (names.length) {
+  const l = names.length
+  switch (l) {
+    case 0:
+      return 'You'
     case 1:
     case 2:
-      nameString = names.join(', ')
-      break
+      return names.join(', ')
     default:
-      nameString = `${names.slice(0, 1).join(', ')} and ${names.length - 1} other${names.length > 2 ? 's' : ''}`
-      break
+      return `${names.slice(0, 1).join(', ')} and ${l - 1} other${l > 2 ? 's' : ''}`
   }
-  return nameString
 }
 
 export function ThreadAvatars ({avatarUrls}) {
