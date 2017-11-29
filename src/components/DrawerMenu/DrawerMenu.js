@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { Image, Text, TouchableOpacity, View, SectionList } from 'react-native'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
 import styles from './DrawerMenu.styles'
+import SocketListener from '../SocketListener'
 import { ALL_COMMUNITIES_ID } from '../../store/models/Community'
 const allCommunitiesImage = require('../../assets/All_Communities2.png')
 
@@ -52,8 +53,7 @@ export default class DrawerMenu extends Component {
         stickySectionHeadersEnabled={false} />
       <View style={styles.footer}>
         <TouchableOpacity onPress={goToMyProfile} style={styles.avatar}>
-          <Image source={{uri: avatarUrl}}
-            style={styles.avatar} />
+          <Image source={{uri: avatarUrl}} style={styles.avatar} />
         </TouchableOpacity>
         <View style={styles.footerContent}>
           <Text style={styles.footerTopText} numberOfLines={1}>
@@ -64,6 +64,8 @@ export default class DrawerMenu extends Component {
           </View>
         </View>
       </View>
+      {/* putting SocketListener here so it's only rendered after login */}
+      <SocketListener />
     </View>
   }
 }
@@ -142,7 +144,8 @@ export function CommunityRow ({ community, goToCommunity, currentCommunityId, ad
   const highlight = id === currentCommunityId
   return <View style={[styles.communityRow, addPadding && styles.defaultPadding]}>
     <TouchableOpacity onPress={() => goToCommunity(community)} style={styles.rowTouchable}>
-      <Image source={{uri: avatarUrl}} style={styles.communityAvatar} />
+      {!!avatarUrl &&
+        <Image source={{uri: avatarUrl}} style={styles.communityAvatar} />}
       <Text style={[styles.communityRowText, highlight && styles.highlight]} ellipsizeMode='tail'
         numberOfLines={1}>
         {name}

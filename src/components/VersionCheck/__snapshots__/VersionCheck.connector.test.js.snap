@@ -1,32 +1,40 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`mapDispatchToProps maps the action generators 1`] = `
-Object {
-  "checkVersion": [Function],
-}
-`;
-
-exports[`mapDispatchToProps maps the action generators 2`] = `
+exports[`alerts with a forced version update 1`] = `
 Array [
   Array [
-    Object {
-      "payload": Object {
-        "api": Object {
-          "method": "get",
-          "path": "/noo/mobile/check-should-update?ios-version=2.0",
-        },
+    "Force title",
+    "Force message",
+    Array [
+      Object {
+        "onPress": [Function],
+        "text": "Update Now",
       },
-      "type": "CHECK_VERSION",
+    ],
+    Object {
+      "cancelable": false,
     },
   ],
 ]
 `;
 
-exports[`mapStateToProps returns the right keys 1`] = `
-Object {
-  "pending": true,
-  "updateType": Object {
-    "type": true,
-  },
-}
+exports[`alerts with a suggested version update 1`] = `
+Array [
+  Array [
+    "Suggest title",
+    "Suggest message",
+    Array [
+      Object {
+        "onPress": [Function],
+        "text": "Update Now",
+      },
+      Object {
+        "text": "Cancel",
+      },
+    ],
+    Object {
+      "cancelable": false,
+    },
+  ],
+]
 `;

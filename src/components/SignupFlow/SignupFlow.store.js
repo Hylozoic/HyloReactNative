@@ -1,5 +1,3 @@
-import { createSelector as ormCreateSelector } from 'redux-orm'
-import orm from 'store/models'
 export
   { default as updateUserSettings, UPDATE_USER_SETTINGS, UPDATE_USER_SETTINGS_PENDING }
 from '../../store/actions/updateUserSettings'
@@ -7,7 +5,6 @@ from '../../store/actions/updateUserSettings'
 export const MODULE_NAME = 'SignupFlow'
 export const UPDATE_LOCAL_USER_SETTINGS = `${MODULE_NAME}/UPDATE_LOCAL_USER_SETTINGS`
 export const SIGNUP = `${MODULE_NAME}/SIGNUP`
-export const SET_SIGNUP_STEP1_COMPLETE = `${MODULE_NAME}/SET_SIGNUP_STEP1_COMPLETE`
 
 export const defaultUserSettings = {
   name: '',
@@ -21,8 +18,7 @@ export const defaultUserSettings = {
 
 export const defaultState = {
   userSettings: defaultUserSettings,
-  errors: {},
-  signupStep1Complete: false
+  errors: {}
 }
 
 export function getErrors (payload) {
@@ -34,7 +30,7 @@ export function getErrors (payload) {
 }
 
 export default function reducer (state = defaultState, action) {
-  const { error, type, payload, meta } = action
+  const { error, type, payload } = action
   if (error) {
     switch (type) {
       case SIGNUP:
@@ -61,11 +57,6 @@ export default function reducer (state = defaultState, action) {
           ...payload
         }
       }
-    case SET_SIGNUP_STEP1_COMPLETE:
-      return {
-        ...state,
-        signupStep1Complete: payload
-      }
     default:
       return state
   }
@@ -88,21 +79,10 @@ export function updateLocalUserSettings (settings) {
   }
 }
 
-export function setSignupStep1Complete (payload) {
-  return {
-    type: SET_SIGNUP_STEP1_COMPLETE,
-    payload
-  }
-}
-
 export function getUserSettings (state) {
   return state[MODULE_NAME].userSettings
 }
 
 export function getSignupErrors (state) {
   return state[MODULE_NAME].errors
-}
-
-export function getSignupStep1Complete (state) {
-  return state[MODULE_NAME].signupStep1Complete
 }

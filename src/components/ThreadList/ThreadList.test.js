@@ -96,18 +96,17 @@ describe('MessageRow', () => {
     const name = 'Test User'
     const text = 'This is a message.'
     const showThread = jest.fn()
-    const currentUser = {
-      id: 1
-    }
+    const currentUser = {id: 1}
     const message = {
       id: 1,
-      creator: {
-        id: 2
-      },
+      creator: {id: 2},
       text
     }
 
-    const participants = [{id: 2, avatarUrl: 'blah', name}]
+    const participants = [
+      {id: 1, avatarUrl: 'me', name: 'me'},
+      {id: 2, avatarUrl: 'blah', name}
+    ]
 
     const renderer = TestRenderer.create(
       <MessageRow

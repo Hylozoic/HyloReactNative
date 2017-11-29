@@ -13,10 +13,9 @@ exports[`RootView matches last snapshot without a store 1`] = `
 
 exports[`RootView renders as expected when store is loaded 1`] = `
 <View>
+  <VersionCheck />
   <LoadingModal />
-  <VersionCheck>
-    <SessionCheck />
-  </VersionCheck>
+  <RootNavigator />
 </View>
 `;
 

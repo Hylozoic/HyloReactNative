@@ -43,8 +43,8 @@ export default class SpaceFillingImage extends React.Component {
 
   render () {
     const { imageUrl, style } = this.props
-    if (!imageUrl) return null
     const { imageWidth, imageHeight, containerWidth } = this.state
+    if (!imageUrl || !imageWidth) return null
     const imageStyle = {
       ...generateImageDimensions(containerWidth, imageWidth, imageHeight)
     }

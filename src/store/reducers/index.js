@@ -6,6 +6,7 @@ import queryResults from './queryResults'
 import currentNetworkAndCommunity from './currentNetworkAndCommunity'
 import sessionReducer from './sessionReducer'
 import CommentEditor from '../../components/PostDetails/CommentEditor/CommentEditor.store'
+import DeepLinkHandler from '../../components/DeepLinkHandler/DeepLinkHandler.store'
 import FeedList from '../../components/FeedList/FeedList.store'
 import LoadingModal from '../../components/LoadingModal/LoadingModal.store'
 import MemberFeed from '../../components/MemberProfile/MemberFeed/MemberFeed.store'
@@ -26,6 +27,7 @@ export const combinedReducers = combineReducers({
   currentNetworkAndCommunity,
   session: sessionReducer,
   CommentEditor,
+  DeepLinkHandler,
   FeedList,
   LoadingModal,
   MemberFeed,

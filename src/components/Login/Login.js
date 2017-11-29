@@ -30,7 +30,7 @@ export default class Login extends React.Component {
     }
   }
 
-  login () {
+  login = () => {
     this.props.login(this.state.email, this.state.password)
   }
 
@@ -38,7 +38,7 @@ export default class Login extends React.Component {
     this.setState({ssoError: error})
   }
 
-  togglePassword () {
+  togglePassword = () => {
     this.setState({
       securePassword: !this.state.securePassword
     })
@@ -125,13 +125,13 @@ export default class Login extends React.Component {
           <View style={styles.rightIconView}>
             <EntypoIcon name={this.state.securePassword ? 'eye' : 'eye-with-line'}
               style={styles.iconOpaque}
-              onPress={() => this.togglePassword()}
+              onPress={this.togglePassword}
             />
           </View>
         </View>
       </View>
       <View style={styles.paddedRow}>
-        <TouchableOpacity onPress={() => this.login()} style={styles.loginButton}>
+        <TouchableOpacity onPress={this.login} style={styles.loginButton}>
           <Text style={styles.loginText}>Log In</Text>
         </TouchableOpacity>
       </View>

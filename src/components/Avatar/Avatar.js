@@ -2,15 +2,17 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Image, View } from 'react-native'
 import { memoize } from 'lodash'
+import defaultAvatar from '../../assets/default-user-avatar.png'
 
 export default function Avatar ({ size, hasBorder, hasOverlap, avatarUrl, zIndex, style, dimension }) {
   const styles = generateStyles({ size, hasBorder, hasOverlap, dimension })
+  const source = avatarUrl ? {uri: avatarUrl} : defaultAvatar
   return <View style={[styles.container, {zIndex}, style]}>
-    <Image style={styles.image} source={{uri: avatarUrl}} />
+    <Image style={styles.image} source={source} />
   </View>
 }
 Avatar.propTypes = {
-  avatarUrl: PropTypes.string.isRequired,
+  avatarUrl: PropTypes.string,
   forFooter: PropTypes.bool,
   hasBorder: PropTypes.bool,
   hasOverlap: PropTypes.bool,

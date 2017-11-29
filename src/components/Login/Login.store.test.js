@@ -1,11 +1,13 @@
 import { getPending } from './Login.store'
 import { LOGIN, LOGIN_WITH_FACEBOOK, LOGIN_WITH_GOOGLE } from './actions'
+import { FETCH_CURRENT_USER } from 'store/actions/fetchCurrentUser'
 
 describe('getPending', () => {
   const defaultPending = {
     [LOGIN]: false,
     [LOGIN_WITH_FACEBOOK]: false,
-    [LOGIN_WITH_GOOGLE]: false
+    [LOGIN_WITH_GOOGLE]: false,
+    [FETCH_CURRENT_USER]: false
   }
 
   it('returns false when none are pending', () => {

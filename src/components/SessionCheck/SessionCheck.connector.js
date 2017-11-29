@@ -1,41 +1,25 @@
 import { connect } from 'react-redux'
-import { get } from 'lodash/fp'
-import fetchCurrentUser, { FETCH_CURRENT_USER } from '../../store/actions/fetchCurrentUser'
-import {
-  checkSession,
-  CHECK_SESSION,
-  setEntryURL,
-  getEntryURL,
-  resetEntryURL
-} from './SessionCheck.store'
-import { getSignupStep1Complete } from '../SignupFlow/SignupFlow.store'
-import getMe from '../../store/selectors/getMe'
+import { checkSession } from './SessionCheck.store'
+import fetchCurrentUser from 'store/actions/fetchCurrentUser'
 
-export function mapStateToProps (state) {
-  const pending = !!(state.pending[CHECK_SESSION] || state.pending[FETCH_CURRENT_USER])
-  const currentUser = getMe(state)
-  const signupInProgress = get('settings.signupInProgress', currentUser)
-  const loggedIn = state.session.loggedIn
-  const loading = pending || loggedIn === undefined
-  return {
-    // NOTE: loading is necessary so that the LoginNavigator
-    // doesn't render unncessarily on first render when already logged in
-    // but the sessionCheck or fetchCurrentUser have been kicked-off.
-    loading,
-    pending,
-    loggedIn,
-    signupInProgress,
-    signupStep1Complete: getSignupStep1Complete(state),
-    currentUser,
-    entryURL: getEntryURL(state)
+const mapDispatchToProps = {checkSession, fetchCurrentUser}
+
+export function mergeProps (stateProps, dispatchProps, ownProps) {
+  const handleResult = ({ error, payload: loggedIn }) => {
+    if (error) {
+      // automatically retry -- this prevents us from getting stuck with
+      // nothing to interact with if we start the app while temporarily offline
+      return new Promise(resolve =>
+        setTimeout(() => resolve(checkSessionWithRetry()), 1000))
+    } else if (loggedIn) {
+      return dispatchProps.fetchCurrentUser()
+    }
   }
+
+  const checkSessionWithRetry = () =>
+    dispatchProps.checkSession().then(handleResult)
+
+  return {...ownProps, checkSession: checkSessionWithRetry}
 }
 
-const mapDispatchToProps = {
-  checkSession,
-  setEntryURL,
-  resetEntryURL,
-  fetchCurrentUser
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)
+export default connect(null, mapDispatchToProps, mergeProps)
