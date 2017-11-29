@@ -53,8 +53,7 @@ export default class DrawerMenu extends Component {
         stickySectionHeadersEnabled={false} />
       <View style={styles.footer}>
         <TouchableOpacity onPress={goToMyProfile} style={styles.avatar}>
-          <Image source={{uri: avatarUrl}}
-            style={styles.avatar} />
+          <Image source={{uri: avatarUrl}} style={styles.avatar} />
         </TouchableOpacity>
         <View style={styles.footerContent}>
           <Text style={styles.footerTopText} numberOfLines={1}>
@@ -145,7 +144,8 @@ export function CommunityRow ({ community, goToCommunity, currentCommunityId, ad
   const highlight = id === currentCommunityId
   return <View style={[styles.communityRow, addPadding && styles.defaultPadding]}>
     <TouchableOpacity onPress={() => goToCommunity(community)} style={styles.rowTouchable}>
-      <Image source={{uri: avatarUrl}} style={styles.communityAvatar} />
+      {!!avatarUrl &&
+        <Image source={{uri: avatarUrl}} style={styles.communityAvatar} />}
       <Text style={[styles.communityRowText, highlight && styles.highlight]} ellipsizeMode='tail'
         numberOfLines={1}>
         {name}
