@@ -10,7 +10,7 @@ import PostBody from '../PostCard/PostBody'
 import PostImage from '../PostCard/PostImage'
 import PostFooter from '../PostCard/PostFooter'
 import PostHeader from '../PostCard/PostHeader'
-import Loading from '../Loading'
+import { LoadingScreen } from '../Loading'
 import SocketSubscriber from '../SocketSubscriber'
 import styles from './PostDetails.styles'
 import { FileLabel } from '../PostEditor/FileSelector'
@@ -60,7 +60,7 @@ export default class PostDetails extends React.Component {
       goToCommunity
     } = this.props
 
-    if (!post.title) return <Loading />
+    if (!post || !post.title) return <LoadingScreen />
 
     const slug = get('0.slug', post.communities)
 

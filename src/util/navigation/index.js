@@ -15,6 +15,7 @@ export function resetToRoute (navigation, routeName) {
 }
 
 export const MAIN_ROUTE_NAME = 'Main'
+export const MAIN_ROUTE_PATH = 'main'
 
 export function resetToMainRoute (navigation) {
   return resetToRoute(navigation, MAIN_ROUTE_NAME)
