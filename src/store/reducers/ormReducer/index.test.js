@@ -30,6 +30,7 @@ import {
 import {
   PIN_POST_PENDING
 } from '../../../components/PostCard/PostHeader/PostHeader.store'
+import { FETCH_CURRENT_USER } from 'store/actions/fetchCurrentUser'
 
 it('responds to an action with meta.extractModel', () => {
   const state = orm.getEmptyState()
@@ -318,6 +319,39 @@ describe('on UPDATE_USER_SETTINGS_PENDING', () => {
   it('updates Me and the Person', () => {
     const newSession = orm.session(ormReducer(session.state, action))
     expect(newSession.Me.first().ref).toMatchSnapshot()
+    expect(newSession.Person.withId(id).ref).toMatchSnapshot()
+  })
+})
+
+describe('on FETCH_CURRENT_USER', () => {
+  const session = orm.session(orm.getEmptyState())
+  const id = 123
+  const userData = {
+    id,
+    name: 'Maurice',
+    location: 'Spain',
+    tagline: 'lalala',
+    avatarUrl: 'm.png',
+    settings: {
+      setting1: 1,
+      setting2: 2
+    }
+  }
+  session.Me.create(userData)
+
+  session.Person.create(userData)
+
+  const action = {
+    type: FETCH_CURRENT_USER,
+    payload: {
+      data: {
+        me: userData
+      }
+    }
+  }
+
+  it('creates the Person', () => {
+    const newSession = orm.session(ormReducer(session.state, action))
     expect(newSession.Person.withId(id).ref).toMatchSnapshot()
   })
 })
