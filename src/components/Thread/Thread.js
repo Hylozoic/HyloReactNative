@@ -65,6 +65,7 @@ export default class Thread extends React.Component {
     this.scrollToBottom()
     fetchMessages()
     setNavParams()
+    this.props.updateThreadReadTime()
   }
 
   componentWillUpdate (nextProps) {
@@ -103,10 +104,13 @@ export default class Thread extends React.Component {
   }
 
   componentDidUpdate (prevProps) {
-    const { setNavParams, title } = this.props
+    const { setNavParams, title, id } = this.props
     if (prevProps.title !== title) setNavParams()
     if (this.atBottom()) this.markAsRead()
     if (this.shouldScroll) this.scrollToBottom()
+    if (prevProps.id !== id) {
+      this.props.updateThreadReadTime()
+    }
   }
 
   componentWillUnmount () {

@@ -42,6 +42,7 @@ export const getThreads = ormCreateSelector(
     MessageThread.all().orderBy(thread => -new Date(thread.updatedAt))
     .toModelArray().map(thread => ({
       ...thread.ref,
+      unread: thread.isUnread(),
       participants: thread.participants.toRefArray(),
       latestMessage: thread.messages.orderBy(m => -new Date(m.createdAt)).first()
     }))

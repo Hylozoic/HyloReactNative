@@ -89,6 +89,7 @@ exports[`MessageRow renders correctly 1`] = `
           },
         ]
       }
+      unread={undefined}
     />
   </TouchableOpacity>
 </View>

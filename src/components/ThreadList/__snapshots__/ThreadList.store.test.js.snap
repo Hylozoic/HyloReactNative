@@ -49,6 +49,7 @@ Array [
         "skills": undefined,
       },
     ],
+    "unread": false,
     "unreadCount": 1,
   },
   Object {
@@ -74,6 +75,7 @@ Array [
         "skills": undefined,
       },
     ],
+    "unread": false,
     "unreadCount": 1,
   },
 ]
