@@ -3,6 +3,8 @@ import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import TabLabel from './index'
 
+jest.mock('util/platform', () => ({isIOS: true}))
+
 it('renders correctly with all=true, and no community or user', () => {
   const renderer = new ReactShallowRenderer()
   const name = 'Home'
