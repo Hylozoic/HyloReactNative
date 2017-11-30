@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { FlatList, TouchableOpacity, View, Text } from 'react-native'
-import { isEmpty } from 'lodash/fp'
+import { isEmpty, get } from 'lodash/fp'
 
 import { getSocket } from 'util/websockets'
 import header from 'util/header'
@@ -93,6 +93,7 @@ export function MessageRow ({message, participants, currentUser, showThread, isL
   return <View>
     <TouchableOpacity onPress={() => showThread(message.messageThread)}>
       <ThreadCard
+        unread={get('id', message) % 2 === 0}
         message={message}
         participants={participants}
         currentUser={currentUser}
