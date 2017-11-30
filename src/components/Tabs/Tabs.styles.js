@@ -1,5 +1,6 @@
 import { caribbeanGreen } from 'style/colors'
 import { StyleSheet } from 'react-native'
+import { isIOS } from 'util/platform'
 
 const gray = '#929292'
 
@@ -12,10 +13,11 @@ export default {
     backgroundColor: 'white'
   },
   icon: {
-    paddingTop: 4
+    marginBottom: isIOS ? 27 : 0,
+    paddingTop: isIOS ? 0 : 5
   },
   labelView: {
-    height: 17
+    height: 16
   },
   labelText: {
     textAlign: 'center',
