@@ -113,12 +113,12 @@ export function refineMessage ({ id, createdAt, creator, text }, i, messages) {
   // when received in MessageCard.
   const next = i > 0 && i < messages.length ? messages[i - 1] : null
   const prev = i > 0 && i < messages.length - 1 ? messages[i + 1] : null
-  const suppressCreator = prev
-    && creator.id === prev.creator.id
-    && isWithinBatchLimit(createdAt, prev.createdAt)
-  const suppressDate = next
-    && creator.id === next.creator.id
-    && isWithinBatchLimit(next.createdAt, createdAt)
+  const suppressCreator = prev &&
+    creator.id === prev.creator.id &&
+    isWithinBatchLimit(createdAt, prev.createdAt)
+  const suppressDate = next &&
+    creator.id === next.creator.id &&
+    isWithinBatchLimit(next.createdAt, createdAt)
 
   return {
     id,
@@ -133,10 +133,6 @@ export function refineMessage ({ id, createdAt, creator, text }, i, messages) {
 // NOTE: descending order to accommodate inverted FlatList
 export function presentThread (thread, currentUserId) {
   if (!thread) return null
-  const messages = thread.messages
-    .orderBy(m => Number(m.id), 'desc')
-    .toModelArray()
-    .map(refineMessage)
   const otherParticipants = thread.participants.filter(p => p.id !== currentUserId)
   .toRefArray().map(firstName)
   var title
@@ -147,7 +143,6 @@ export function presentThread (thread, currentUserId) {
   }
   return {
     id: thread.id,
-    messages,
     title
   }
 }
@@ -158,7 +153,18 @@ export const getThread = ormCreateSelector(
   orm,
   state => state.orm,
   (_, { navigation }) => navigation.state.params.id,
-  ({ MessageThread }, id) => MessageThread.safeGet({id})
+  ({ MessageThread }, id) => MessageThread.safeWithId(id)
+)
+
+export const getAndPresentMessages = ormCreateSelector(
+  orm,
+  state => state.orm,
+  (_, { navigation }) => navigation.state.params.id,
+  ({ Message }, id) =>
+    Message.filter(m => m.messageThread === id)
+    .orderBy(m => Number(m.id), 'desc')
+    .toModelArray()
+    .map(refineMessage)
 )
 
 const getMessageResults = makeGetQueryResults(FETCH_MESSAGES)

@@ -36,7 +36,7 @@ describe('getThread', () => {
   })
 })
 
-describe('presentThread', () => {
+describe('presentation', () => {
   let session
 
   beforeEach(() => {
@@ -53,9 +53,8 @@ describe('presentThread', () => {
   it('orders by id (descending) for the inverted list', () => {
     const props = { navigation: { state: { params: { id: '1' } } } }
     const state = { orm: session.state }
-    const thread = store.getThread(state, props)
-    const presented = store.presentThread(thread, '10')
-    expect(presented.messages.map(m => m.id)).toEqual(['200', '10', '4', '1'])
+    const messages = store.getAndPresentMessages(state, props)
+    expect(messages.map(m => m.id)).toEqual(['200', '10', '4', '1'])
   })
 
   it('removes currentUser from title', () => {

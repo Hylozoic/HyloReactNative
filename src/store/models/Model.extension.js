@@ -3,6 +3,10 @@ import { ManyToMany } from 'redux-orm/lib/fields'
 import { normalizeEntity } from 'redux-orm/lib/utils'
 import { mapValues, uniq } from 'lodash'
 
+Model.safeWithId = function (id) {
+  return this.hasId(id) ? this.withId(id) : null
+}
+
 Model.safeGet = function (matchObj) {
   let result
   try {
