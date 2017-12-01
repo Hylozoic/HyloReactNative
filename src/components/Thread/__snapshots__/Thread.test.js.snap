@@ -57,7 +57,7 @@ exports[`Thread matches the last snapshot 1`] = `
     />
     <PeopleTyping />
     <SocketSubscriber
-      id={undefined}
+      id="1"
       type="post"
     />
   </View>

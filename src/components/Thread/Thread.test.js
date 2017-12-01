@@ -11,6 +11,7 @@ describe('Thread', () => {
 
   beforeEach(() => {
     props = {
+      id: '1',
       createMessage: () => {},
       currentUserId: '1',
       fetchMessages: () => {},
@@ -124,6 +125,33 @@ describe('Thread', () => {
       }
       root.instance.componentWillUpdate(nextProps)
       expect(root.instance.shouldScroll).toBe(true)
+    })
+  })
+
+  describe('componentDidUpdate', () => {
+    it('calls props.updateThreadReadTime when id changes', () => {
+      const currentProps = {
+        ...props,
+        updateThreadReadTime: jest.fn()
+      }
+
+      const prevPropsSameId = {
+        ...props,
+        messages: []
+      }
+
+      const prevPropsDifferentId = {
+        ...props,
+        id: '2',
+        messages: []
+      }
+
+      const instance = ReactTestRenderer.create(<Thread {...currentProps} />).getInstance()
+      currentProps.updateThreadReadTime.mockClear()
+      instance.componentDidUpdate(prevPropsSameId)
+      expect(currentProps.updateThreadReadTime).not.toHaveBeenCalled()
+      instance.componentDidUpdate(prevPropsDifferentId)
+      expect(currentProps.updateThreadReadTime).toHaveBeenCalled()
     })
   })
 })
