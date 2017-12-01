@@ -7,7 +7,7 @@ import styles from './ThreadCard.styles'
 import { humanDate } from 'hylo-utils/text'
 
 export default function ThreadCard (props) {
-  const { message, currentUser, participants, isLast } = props
+  const { message, currentUser, participants, isLast, unread } = props
   if (!message) return null
   const otherParticipants = filter(p => p.id !== get('id', currentUser), participants)
   const names = threadNames(map('name', otherParticipants))
@@ -16,7 +16,7 @@ export default function ThreadCard (props) {
     ? [get('avatarUrl', currentUser)]
     : map('avatarUrl', otherParticipants)
 
-  return <View style={styles.threadCard}>
+  return <View style={[styles.threadCard, unread && styles.highlight]}>
     <ThreadAvatars avatarUrls={avatarUrls} />
     <View style={[styles.messageContent, isLast && styles.lastCard]}>
       <Text style={styles.header}>{names}</Text>

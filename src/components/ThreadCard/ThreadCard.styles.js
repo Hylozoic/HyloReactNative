@@ -1,12 +1,18 @@
 import { StyleSheet } from 'react-native'
-import { caribbeanGreen, capeCod10, limedSpruce, nevada, rhino60 } from 'style/colors'
+import { caribbeanGreen, rhino30, limedSpruce, nevada, rhino60, rhino05 } from 'style/colors'
 
 export default {
   threadCard: {
     flex: 1,
     flexDirection: 'row',
-    marginTop: 5,
+    paddingTop: 8,
     backgroundColor: 'white'
+  },
+  highlight: {
+    backgroundColor: rhino05
+  },
+  firstCard: {
+    marginTop: 0
   },
   lastCard: {
     borderColor: '#FFF'
@@ -23,7 +29,6 @@ export default {
   },
   body: {
     marginRight: 30,
-    marginBottom: 3,
     fontFamily: 'Circular-Book',
     color: nevada,
     fontSize: 14
@@ -35,10 +40,9 @@ export default {
   },
   messageContent: {
     flex: 1,
-    paddingBottom: 17,
-    marginBottom: 7,
+    paddingBottom: 24,
     borderBottomWidth: StyleSheet.hairlineWidth,
-    borderColor: capeCod10
+    borderColor: rhino30
   },
   count: {
     backgroundColor: caribbeanGreen,

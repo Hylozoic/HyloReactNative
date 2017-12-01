@@ -16,7 +16,7 @@ import {
   MARK_ACTIVITY_READ, MARK_ALL_ACTIVITIES_READ, UPDATE_NEW_NOTIFICATION_COUNT_PENDING
 } from '../../../components/NotificationsList/NotificationsList.store'
 import {
-  CREATE_MESSAGE, CREATE_MESSAGE_PENDING
+  CREATE_MESSAGE, CREATE_MESSAGE_PENDING, UPDATE_THREAD_READ_TIME_PENDING
 } from '../../../components/Thread/Thread.store'
 import {
   VOTE_ON_POST_PENDING
@@ -46,7 +46,7 @@ export default function ormReducer (state = {}, action) {
     extractModelsFromAction(action, session)
   }
 
-  let me, skill, post
+  let me, skill, post, thread
 
   switch (type) {
     case CREATE_COMMENT:
@@ -174,6 +174,11 @@ export default function ormReducer (state = {}, action) {
       let postMembership = post.postMemberships.filter(p =>
         Number(p.community) === Number(meta.communityId)).toModelArray()[0]
       postMembership && postMembership.update({pinned: !postMembership.pinned})
+      break
+
+    case UPDATE_THREAD_READ_TIME_PENDING:
+      thread = session.MessageThread.withId(meta.id)
+      thread.update({lastReadAt: new Date().toString()})
   }
 
   values(sessionReducers).forEach(fn => fn(session, action))
