@@ -130,11 +130,6 @@ describe('Thread', () => {
 
   describe('componentDidUpdate', () => {
     it('calls props.updateThreadReadTime when id changes', () => {
-      const currentProps = {
-        ...props,
-        updateThreadReadTime: jest.fn()
-      }
-
       const prevPropsSameId = {
         ...props,
         messages: []
@@ -146,12 +141,13 @@ describe('Thread', () => {
         messages: []
       }
 
-      const instance = ReactTestRenderer.create(<Thread {...currentProps} />).getInstance()
-      currentProps.updateThreadReadTime.mockClear()
+      const instance = ReactTestRenderer.create(<Thread {...props} />).getInstance()
+      jest.spyOn(instance, 'markAsRead')
+
       instance.componentDidUpdate(prevPropsSameId)
-      expect(currentProps.updateThreadReadTime).not.toHaveBeenCalled()
+      expect(instance.markAsRead).not.toHaveBeenCalled()
       instance.componentDidUpdate(prevPropsDifferentId)
-      expect(currentProps.updateThreadReadTime).toHaveBeenCalled()
+      expect(instance.markAsRead).toHaveBeenCalled()
     })
   })
 })
