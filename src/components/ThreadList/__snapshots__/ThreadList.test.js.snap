@@ -202,7 +202,7 @@ exports[`ThreadList handles pending correctly with threads 1`] = `
 </View>
 `;
 
-exports[`ThreadList handles pending correctly without threads 1`] = `<Loading />`;
+exports[`ThreadList handles pending correctly without threads 1`] = `<LoadingScreen />`;
 
 exports[`ThreadList handles when there are no threads correctly 1`] = `
 <Text

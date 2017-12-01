@@ -5,7 +5,7 @@ import { isEmpty, get } from 'lodash/fp'
 import { getSocket } from 'util/websockets'
 import header from 'util/header'
 import NotificationOverlay from '../NotificationOverlay'
-import Loading from '../Loading'
+import { LoadingScreen } from '../Loading'
 import styles from './ThreadList.styles'
 import ThreadCard from '../ThreadCard'
 
@@ -55,7 +55,7 @@ export default class ThreadList extends Component {
     } = this.props
     const { ready } = this.state
 
-    if (!ready || (pending && threads.length === 0)) return <Loading />
+    if (!ready || (pending && threads.length === 0)) return <LoadingScreen />
     if (ready && !pending && threads.length === 0) {
       return <Text style={styles.center}>No active conversations</Text>
     }

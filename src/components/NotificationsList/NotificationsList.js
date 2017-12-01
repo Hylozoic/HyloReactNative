@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { FlatList, TouchableOpacity, View, Text } from 'react-native'
 
 import header from 'util/header'
-import Loading from '../Loading'
+import { LoadingScreen } from '../Loading'
 import NotificationCard from '../NotificationCard'
 import styles from './NotificationsList.styles'
 
@@ -39,7 +39,9 @@ export default class NotificationsList extends Component {
   render () {
     const { hasMore, markActivityRead, notifications, pending } = this.props
     const { ready } = this.state
-    if (!ready || (pending && notifications.length === 0)) return <Loading />
+    if (!ready || (pending && notifications.length === 0)) {
+      return <LoadingScreen />
+    }
     if (ready && !pending && notifications.length === 0) {
       return <Text style={styles.center}>Nothing new for you!</Text>
     }
