@@ -178,7 +178,7 @@ export default function ormReducer (state = {}, action) {
 
     case UPDATE_THREAD_READ_TIME_PENDING:
       thread = session.MessageThread.withId(meta.id)
-      thread.lastReadAt = new Date().toString()
+      thread.update({lastReadAt: new Date().toString()})
   }
 
   values(sessionReducers).forEach(fn => fn(session, action))
