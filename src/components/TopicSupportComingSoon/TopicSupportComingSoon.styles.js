@@ -1,4 +1,5 @@
 import {
+  capeCod,
   rhino60,
   caribbeanGreen
 } from '../../style/colors'
@@ -28,34 +29,33 @@ export default {
     paddingHorizontal: 52
   },
   headerText: {
-    color: rhino60,
+    color: capeCod,
     fontSize: 24,
-    fontWeight: 'bold',
     fontFamily: 'Circular-Bold',
-    textAlign: 'center'
+    textAlign: 'center',
+    marginBottom: 25
   },
   bodyText: {
     color: rhino60,
     fontSize: 16,
     fontFamily: 'Circular-Bold',
-    textAlign: 'center'
+    textAlign: 'center',
+    marginBottom: 25
   },
   image: {
     width: 288,
     height: 309,
-    marginBottom: 25,
-    marginTop: 25
+    marginBottom: 25
   },
-  goToLoginButton: {
+  gotBackButton: {
     flex: 1,
     flexDirection: 'row',
     backgroundColor: caribbeanGreen,
     height: 36,
     borderRadius: 50,
-    justifyContent: 'center',
-    marginTop: 22
+    justifyContent: 'center'
   },
-  goToLoginButtonText: {
+  gotBackButtonText: {
     color: 'white',
     backgroundColor: 'transparent',
     textAlign: 'center',

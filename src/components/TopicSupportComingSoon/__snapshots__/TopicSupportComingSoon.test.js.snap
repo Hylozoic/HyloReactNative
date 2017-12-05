@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches last snapshot 1`] = `
+<View>
+  <View>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+    >
+      We're working on expanding #topics to more places.
+    </Text>
+  </View>
+  <View>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+    >
+      In the meantime, click a #topic from an individual community to see posts from that community.
+    </Text>
+  </View>
+  <Image
+    resizeMode="stretch"
+    source={
+      Object {
+        "testUri": "../../../src/assets/Axolotyl_Digging.png",
+      }
+    }
+  />
+  <View>
+    <TouchableOpacity
+      activeOpacity={0.2}
+      onPress={[Function]}
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+      >
+        Go Back
+      </Text>
+    </TouchableOpacity>
+  </View>
+</View>
+`;
