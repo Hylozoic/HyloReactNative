@@ -8,6 +8,9 @@ jest.mock('react-native-onesignal', () => ({
   addEventListener: jest.fn()
 }))
 
+// this is needed because DeepLinkHandler uses setImmediate
+jest.useFakeTimers()
+
 const user = {id: '1'}
 const initialUrl = '/t/17'
 const navigateAction = {
@@ -59,6 +62,8 @@ it('handles an initial push notification event', async () => {
     navigator={mockNavigator}
     initialPushNotificationEvent={event} />)
 
+  jest.runAllImmediates()
+
   expect(mockNavigator.dispatch).toHaveBeenLastCalledWith(navigateAction)
 })
 
@@ -66,6 +71,8 @@ it('handles an initial url', async () => {
   await TestRenderer.create(<DeepLinkHandler currentUser={user}
     initialUrl={initialUrl}
     navigator={mockNavigator} />)
+
+  jest.runAllImmediates()
 
   expect(mockNavigator.dispatch).toHaveBeenLastCalledWith(navigateAction)
 })
@@ -76,6 +83,8 @@ it('stores the action for a logged-out user', async () => {
   await TestRenderer.create(<DeepLinkHandler initialUrl={initialUrl}
     storeNavigationAction={storeNavigationAction}
     navigator={mockNavigator} />)
+
+  jest.runAllImmediates()
 
   expect(mockNavigator.dispatch).toHaveBeenCalledTimes(1)
   expect(storeNavigationAction).toHaveBeenCalledWith(navigateAction)
@@ -96,6 +105,8 @@ it('redirects to an invitation link for a logged-out user', async () => {
   await TestRenderer.create(<DeepLinkHandler initialUrl={invitationUrl}
     storeNavigationAction={storeNavigationAction}
     navigator={mockNavigator} />)
+
+  jest.runAllImmediates()
 
   expect(mockNavigator.dispatch).toHaveBeenLastCalledWith(joinAction)
   expect(storeNavigationAction).toHaveBeenCalledWith(joinAction)
