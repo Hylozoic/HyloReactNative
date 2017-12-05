@@ -42,13 +42,13 @@ export function mapStateToProps (state, props) {
   }
 }
 
-export function mapDispatchToProps (dispatch, { navigation, networkId }) {
+export function mapDispatchToProps (dispatch, { navigation }) {
   return {
     newPost: communityId => navigation.navigate('PostEditor', {communityId}),
     showPost: id => navigation.navigate('PostDetails', {id}),
     editPost: id => navigation.navigate('PostEditor', {id}),
     showMember: id => navigation.navigate('MemberProfile', {id}),
-    showTopic: communityId => topicName => {
+    showTopic: (communityId, networkId) => topicName => {
       // All Communities and Network feed to topic nav
       // currently not supported
       if (networkId || communityId === ALL_COMMUNITIES_ID) {
@@ -66,15 +66,16 @@ export function mapDispatchToProps (dispatch, { navigation, networkId }) {
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
-  const { community, topic, topicName, topicSubscribed } = stateProps
+  const { community, network, topic, topicName, topicSubscribed } = stateProps
   const communityId = get('id', community)
+  const networkId = get('id', network)
   const slug = get('slug', community)
   return {
     ...stateProps,
     ...dispatchProps,
     ...ownProps,
     newPost: () => dispatchProps.newPost(communityId),
-    showTopic: dispatchProps.showTopic(communityId),
+    showTopic: dispatchProps.showTopic(communityId, networkId),
     fetchCommunityTopic: topicName && slug
       ? () => dispatchProps.fetchCommunityTopic(topicName, slug)
       : () => {},
