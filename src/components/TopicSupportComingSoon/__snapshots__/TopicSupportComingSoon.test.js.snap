@@ -10,14 +10,24 @@ exports[`matches last snapshot 1`] = `
     >
       We're working on expanding #topics to more places.
     </Text>
+  </View>
+  <View>
     <Text
       accessible={true}
       allowFontScaling={true}
       ellipsizeMode="tail"
     >
-      Contact your moderator for another one.
+      In the meantime, click a #topic from an individual community to see posts from that community.
     </Text>
   </View>
+  <Image
+    resizeMode="stretch"
+    source={
+      Object {
+        "testUri": "../../../src/assets/Axolotyl_Digging.png",
+      }
+    }
+  />
   <View>
     <TouchableOpacity
       activeOpacity={0.2}
@@ -32,13 +42,5 @@ exports[`matches last snapshot 1`] = `
       </Text>
     </TouchableOpacity>
   </View>
-  <Image
-    resizeMode="stretch"
-    source={
-      Object {
-        "testUri": "../../../src/assets/Axel_Fretting.png",
-      }
-    }
-  />
 </View>
 `;

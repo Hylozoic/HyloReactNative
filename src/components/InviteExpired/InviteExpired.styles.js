@@ -21,7 +21,7 @@ export default {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingTop: 100
+    paddingTop: 50
   },
   header: {
     alignItems: 'center',
@@ -30,6 +30,13 @@ export default {
   headerText: {
     color: rhino60,
     fontSize: 24,
+    fontWeight: 'bold',
+    fontFamily: 'Circular-Bold',
+    textAlign: 'center'
+  },
+  bodyText: {
+    color: rhino60,
+    fontSize: 16,
     fontFamily: 'Circular-Bold',
     textAlign: 'center'
   },
