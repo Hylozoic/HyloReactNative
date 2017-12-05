@@ -22,6 +22,7 @@ import NewMessage from '../NewMessage'
 import Thread from '../Thread'
 import ThreadList from '../ThreadList'
 import ThreadParticipants from '../ThreadParticipants'
+import TopicSupportComingSoon from '../TopicSupportComingSoon'
 import MemberDetails from '../MemberProfile/MemberDetails'
 import MemberSkillEditor from '../MemberProfile/MemberSkillEditor'
 import UserSettings from '../UserSettings'
@@ -99,6 +100,7 @@ const screensInStack = {
   NotificationsList: {screen: NotificationsList},
   ThreadList: {screen: ThreadList},
   ThreadParticipants: {screen: ThreadParticipants},
+  TopicSupportComingSoon: {screen: TopicSupportComingSoon},
   SessionCheck: {screen: SessionCheck},
   InviteExpired: {screen: InviteExpired},
   Signup: {screen: Signup},

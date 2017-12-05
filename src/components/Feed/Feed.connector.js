@@ -6,6 +6,7 @@ import getMe from '../../store/selectors/getMe'
 import getNetwork from '../../store/selectors/getNetwork'
 import getCommunity from '../../store/selectors/getCommunity'
 import makeGoToCommunity from '../../store/actions/makeGoToCommunity'
+import { ALL_COMMUNITIES_ID } from '../../store/models/Community'
 import {
   fetchCommunityTopic,
   getCommunityTopic,
@@ -41,14 +42,21 @@ export function mapStateToProps (state, props) {
   }
 }
 
-export function mapDispatchToProps (dispatch, { navigation }) {
+export function mapDispatchToProps (dispatch, { navigation, networkId }) {
   return {
     newPost: communityId => navigation.navigate('PostEditor', {communityId}),
     showPost: id => navigation.navigate('PostDetails', {id}),
     editPost: id => navigation.navigate('PostEditor', {id}),
     showMember: id => navigation.navigate('MemberProfile', {id}),
-    showTopic: communityId => topicName =>
-      navigation.navigate('Feed', {communityId, topicName}),
+    showTopic: communityId => topicName => {
+      // All Communities and Network feed to topic nav
+      // currently not supported
+      if (networkId || communityId === ALL_COMMUNITIES_ID) {
+        navigation.navigate('TopicSupportComingSoon')
+      } else {
+        navigation.navigate('Feed', {communityId, topicName})
+      }
+    },
     goToCommunity: makeGoToCommunity(dispatch, navigation),
     ...bindActionCreators({
       fetchCommunityTopic,

@@ -64,7 +64,6 @@ export default class Feed extends Component {
         screenProps={screenProps}
         showCommunities={!community}
         showMember={showMember}
-        showPost={showPost}
         showTopic={showTopic}
         topicName={topicName} />
       {!topicName && community && <SocketSubscriber type='community' id={community.id} />}
