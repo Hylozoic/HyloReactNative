@@ -5,7 +5,6 @@ import styles from './TopicSupportComingSoon.styles'
 const axolotlImage = require('../../assets/Axel_Fretting.png')
 
 export default function TopicSupportComingSoon ({ style, navigation }) {
-  console.log('111: ', navigation)
   return <View style={[style, styles.container]}>
     <View style={styles.header}>
       <Text style={styles.headerText}>We're working on expanding #topics to more places.</Text>

@@ -1,1 +1,3 @@
-export { default } from './TopicSupportComingSoon'
+import component from './TopicSupportComingSoon'
+
+export default component
