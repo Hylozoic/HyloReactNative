@@ -16,6 +16,9 @@ import {
   DELETE_COMMENT_PENDING
 } from '../../../components/Comment/Comment.store'
 import {
+  UPDATE_THREAD_READ_TIME_PENDING
+} from '../../../components/Thread/Thread.store'
+import {
   UPDATE_LAST_VIEWED_PENDING
 } from '../../../components/ThreadList/ThreadList.store'
 import {
@@ -385,5 +388,30 @@ describe('on PIN_POST_PENDING', () => {
 
     const postMembership = newSession.Post.withId(postId).postMemberships.toModelArray()[0]
     expect(postMembership.pinned).toEqual(true)
+  })
+})
+
+describe('on UPDATE_THREAD_READ_TIME_PENDING', () => {
+  const session = orm.session(orm.getEmptyState())
+  const id = 123
+
+  session.MessageThread.create({
+    id,
+    lastReadAt: new Date(0)
+  })
+
+  const action = {
+    type: UPDATE_THREAD_READ_TIME_PENDING,
+    meta: {
+      id
+    }
+  }
+
+  it('updates the thread lastReadAt', () => {
+    const newState = ormReducer(session.state, action)
+    const newSession = orm.session(newState)
+
+    const thread = newSession.MessageThread.withId(id)
+    expect(new Date(thread.lastReadAt).getTime()).toBeGreaterThan(new Date().getTime() - 5000)
   })
 })

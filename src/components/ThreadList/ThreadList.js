@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import { FlatList, TouchableOpacity, View, Text } from 'react-native'
-import { isEmpty } from 'lodash/fp'
+import { isEmpty, get } from 'lodash/fp'
 
 import { getSocket } from 'util/websockets'
 import header from 'util/header'
 import NotificationOverlay from '../NotificationOverlay'
-import Loading from '../Loading'
+import { LoadingScreen } from '../Loading'
 import styles from './ThreadList.styles'
 import ThreadCard from '../ThreadCard'
 
@@ -55,7 +55,7 @@ export default class ThreadList extends Component {
     } = this.props
     const { ready } = this.state
 
-    if (!ready || (pending && threads.length === 0)) return <Loading />
+    if (!ready || (pending && threads.length === 0)) return <LoadingScreen />
     if (ready && !pending && threads.length === 0) {
       return <Text style={styles.center}>No active conversations</Text>
     }
@@ -67,15 +67,15 @@ export default class ThreadList extends Component {
         onEndReached={fetchMoreThreads}
         onRefresh={refreshThreads}
         refreshing={pendingRefresh}
-        renderItem={({ item, index }) =>
-          <MessageRow
-            participants={item.participants}
-            message={item.latestMessage}
-            currentUser={currentUser}
-            isLast={index === threads.length - 1}
-            showThread={showThread}
-         />}
-        />
+        renderItem={({ item, index }) => <MessageRow
+          participants={item.participants}
+          message={item.latestMessage}
+          unread={item.unread}
+          currentUser={currentUser}
+          isLast={index === threads.length - 1}
+          showThread={showThread}
+        />}
+      />
       {!pending && threads.length === 0 &&
         <Text style={styles.center}>No active conversations</Text>
       }
@@ -89,10 +89,11 @@ export default class ThreadList extends Component {
   }
 }
 
-export function MessageRow ({message, participants, currentUser, showThread, isLast}) {
+export function MessageRow ({message, participants, currentUser, showThread, isLast, unread}) {
   return <View>
     <TouchableOpacity onPress={() => showThread(message.messageThread)}>
       <ThreadCard
+        unread={unread}
         message={message}
         participants={participants}
         currentUser={currentUser}

@@ -22,6 +22,7 @@ import NewMessage from '../NewMessage'
 import Thread from '../Thread'
 import ThreadList from '../ThreadList'
 import ThreadParticipants from '../ThreadParticipants'
+import TopicSupportComingSoon from '../TopicSupportComingSoon'
 import MemberDetails from '../MemberProfile/MemberDetails'
 import MemberSkillEditor from '../MemberProfile/MemberSkillEditor'
 import UserSettings from '../UserSettings'
@@ -35,7 +36,7 @@ import InviteExpired from '../InviteExpired'
 import Signup from '../Signup'
 import trackCurrentTab from './trackCurrentTab'
 import { isIOS } from 'util/platform'
-import { MAIN_ROUTE_NAME } from 'util/navigation'
+import { MAIN_ROUTE_NAME, MAIN_ROUTE_PATH } from 'util/navigation'
 import TabBar from './TabBar'
 import extendRouter from './extendRouter'
 
@@ -51,8 +52,8 @@ const screensInTabs = {
   Feed: {screen: Feed},
   PostEditor: {screen: PostEditor},
   DetailsEditor: {screen: DetailsEditor},
-  PostDetails: {screen: PostDetails, path: '/post/:id'},
-  MemberProfile: {screen: MemberProfile, path: '/people/:id'},
+  PostDetails: {screen: PostDetails, path: 'post/:id'},
+  MemberProfile: {screen: MemberProfile, path: 'people/:id'},
   MemberDetails: {screen: MemberDetails},
   MemberSkillEditor: {screen: MemberSkillEditor},
   CommentEditor: {screen: CommentEditor},
@@ -73,9 +74,7 @@ const TabNavigatorWithBar = TabNavigator(
     tabBarOptions: {
       showIcon: true,
       showLabel: true,
-      indicatorStyle: {
-        display: 'none'
-      },
+      indicatorStyle: {display: 'none'},
       style: isIOS ? tabStyles.tabNavigatorIOS : tabStyles.tabNavigatorAndroid
     },
     // TODO remove this line once this PR is merged and released:
@@ -86,9 +85,7 @@ const TabNavigatorWithBar = TabNavigator(
 
 const DrawerAndTabsNavigator = DrawerNavigator(
   {
-    DrawerHome: {
-      screen: TabNavigatorWithBar
-    }
+    DrawerHome: {screen: TabNavigatorWithBar}
   },
   {
     contentComponent: DrawerMenu,
@@ -103,6 +100,7 @@ const screensInStack = {
   NotificationsList: {screen: NotificationsList},
   ThreadList: {screen: ThreadList},
   ThreadParticipants: {screen: ThreadParticipants},
+  TopicSupportComingSoon: {screen: TopicSupportComingSoon},
   SessionCheck: {screen: SessionCheck},
   InviteExpired: {screen: InviteExpired},
   Signup: {screen: Signup},
@@ -111,10 +109,10 @@ const screensInStack = {
   SignupFlow3: {screen: SignupFlow3},
   SignupFlow4: {screen: SignupFlow4},
   SignupFlow5: {screen: SignupFlow5},
-  Login: {screen: Login, path: '/login'},
-  Thread: {screen: Thread, path: '/thread/:id'},
-  UseInvitation: {screen: JoinCommunity, path: '/useInvitation/:token'},
-  UseAccessCode: {screen: JoinCommunity, path: '/useAccessCode/:slug/:accessCode'},
+  Login: {screen: Login, path: 'login'},
+  Thread: {screen: Thread, path: 'thread/:id'},
+  UseInvitation: {screen: JoinCommunity, path: 'useInvitation/:token'},
+  UseAccessCode: {screen: JoinCommunity, path: 'useAccessCode/:slug/:accessCode'},
   Loading: {screen: LoadingScreen}
 }
 
@@ -122,7 +120,7 @@ const RootNavigator = StackNavigator(
   {
     [MAIN_ROUTE_NAME]: {
       screen: DrawerAndTabsNavigator,
-      path: '/main',
+      path: MAIN_ROUTE_PATH,
       navigationOptions: {header: null}
     },
     ...screensInStack

@@ -5,6 +5,7 @@ import {
   createMessage,
   fetchMessages,
   FETCH_MESSAGES,
+  getAndPresentMessages,
   getHasMoreMessages,
   getThread,
   presentThread,
@@ -15,7 +16,8 @@ import { sendIsTyping } from 'util/websockets'
 
 export function mapStateToProps (state, props) {
   const currentUserId = getCurrentUserId(state)
-  const { id, messages, title } = presentThread(getThread(state, props), currentUserId) || {messages: []}
+  const { id, title } = presentThread(getThread(state, props), currentUserId) || {}
+  const messages = getAndPresentMessages(state, props)
   return {
     id,
     currentUserId,

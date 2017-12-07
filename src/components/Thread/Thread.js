@@ -65,6 +65,7 @@ export default class Thread extends React.Component {
     this.scrollToBottom()
     fetchMessages()
     setNavParams()
+    this.markAsRead()
   }
 
   componentWillUpdate (nextProps) {
@@ -103,10 +104,17 @@ export default class Thread extends React.Component {
   }
 
   componentDidUpdate (prevProps) {
-    const { setNavParams, title } = this.props
+    const { setNavParams, title, id, messages: { length } } = this.props
     if (prevProps.title !== title) setNavParams()
-    if (this.atBottom()) this.markAsRead()
     if (this.shouldScroll) this.scrollToBottom()
+
+    if (prevProps.id !== id) {
+      this.markAsRead()
+    } else if (this.atBottom() && prevProps.messages.length + 1 === length) {
+      // if you're at the bottom and a new message comes in, consider it read
+      // immediately so we don't try to send you a push notification about it.
+      this.markAsRead()
+    }
   }
 
   componentWillUnmount () {
@@ -124,7 +132,7 @@ export default class Thread extends React.Component {
     fetchMessages(messages[messages.length - 1].id)
   }, 2000)
 
-  markAsRead = debounce(() => this.props.updateThreadReadTime(), 2000)
+  markAsRead = debounce(() => this.props.updateThreadReadTime(), 1000)
 
   renderItem = ({ item }) => <MessageCard message={item} />
 

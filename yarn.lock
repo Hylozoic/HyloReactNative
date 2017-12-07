@@ -5053,9 +5053,9 @@ react-native@^0.50.3:
     xmldoc "^0.4.0"
     yargs "^9.0.0"
 
-react-navigation-is-focused-hoc@patlux/react-navigation-is-focused-hoc:
+react-navigation-is-focused-hoc@Hylozoic/react-navigation-is-focused-hoc#multiple-set-state:
   version "1.1.0"
-  resolved "https://codeload.github.com/patlux/react-navigation-is-focused-hoc/tar.gz/7ebb554ac9bf79a3c5aab29afdd5ffd0ff46d92b"
+  resolved "https://codeload.github.com/Hylozoic/react-navigation-is-focused-hoc/tar.gz/31b608deb006b03d83c6d42157e83ae15653902f"
   dependencies:
     prop-types "15.6.0"
     react-navigation "^1.0.0-beta.11"

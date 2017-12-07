@@ -6,6 +6,7 @@ import getMe from '../../store/selectors/getMe'
 import getNetwork from '../../store/selectors/getNetwork'
 import getCommunity from '../../store/selectors/getCommunity'
 import makeGoToCommunity from '../../store/actions/makeGoToCommunity'
+import { ALL_COMMUNITIES_ID } from '../../store/models/Community'
 import {
   fetchCommunityTopic,
   getCommunityTopic,
@@ -47,8 +48,15 @@ export function mapDispatchToProps (dispatch, { navigation }) {
     showPost: id => navigation.navigate('PostDetails', {id}),
     editPost: id => navigation.navigate('PostEditor', {id}),
     showMember: id => navigation.navigate('MemberProfile', {id}),
-    showTopic: communityId => topicName =>
-      navigation.navigate('Feed', {communityId, topicName}),
+    showTopic: (communityId, networkId) => topicName => {
+      // All Communities and Network feed to topic nav
+      // currently not supported
+      if (networkId || communityId === ALL_COMMUNITIES_ID) {
+        navigation.navigate('TopicSupportComingSoon')
+      } else {
+        navigation.navigate('Feed', {communityId, topicName})
+      }
+    },
     goToCommunity: makeGoToCommunity(dispatch, navigation),
     ...bindActionCreators({
       fetchCommunityTopic,
@@ -58,15 +66,16 @@ export function mapDispatchToProps (dispatch, { navigation }) {
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
-  const { community, topic, topicName, topicSubscribed } = stateProps
+  const { community, network, topic, topicName, topicSubscribed } = stateProps
   const communityId = get('id', community)
+  const networkId = get('id', network)
   const slug = get('slug', community)
   return {
     ...stateProps,
     ...dispatchProps,
     ...ownProps,
     newPost: () => dispatchProps.newPost(communityId),
-    showTopic: dispatchProps.showTopic(communityId),
+    showTopic: dispatchProps.showTopic(communityId, networkId),
     fetchCommunityTopic: topicName && slug
       ? () => dispatchProps.fetchCommunityTopic(topicName, slug)
       : () => {},

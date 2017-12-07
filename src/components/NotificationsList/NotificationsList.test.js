@@ -3,7 +3,7 @@ import React from 'react'
 import ShallowRenderer from 'react-test-renderer/shallow'
 import TestRenderer from 'react-test-renderer'
 import { simulate } from 'util/testing'
-import Loading from '../Loading'
+import { LoadingScreen } from '../Loading'
 import NotificationsList, { NotificationRow } from './NotificationsList'
 
 jest.mock('util/platform', () => ({isIOS: true}))
@@ -50,7 +50,7 @@ describe('NotificationsList', () => {
     shallowRenderer.render(<NotificationsList {...props} />)
     const actual = shallowRenderer.getRenderOutput()
 
-    expect(actual).toEqual(<Loading />)
+    expect(actual).toEqual(<LoadingScreen />)
   })
 
   it('returns a message when no notifications are available', () => {

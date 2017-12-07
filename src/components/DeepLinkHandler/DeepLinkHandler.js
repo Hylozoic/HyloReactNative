@@ -23,10 +23,14 @@ export default class DeepLinkHandler extends React.Component {
     }
 
     const event = this.props.initialPushNotificationEvent
-    if (event) return this.handlePushNotificationEvent(event)
+    if (event) {
+      return setImmediate(() => this.handlePushNotificationEvent(event))
+    }
 
     const initialUrl = this.props.initialUrl || await Linking.getInitialURL()
-    if (initialUrl) return this.handleUrl(initialUrl)
+    if (initialUrl) {
+      return setImmediate(() => this.handleUrl(initialUrl))
+    }
   }
 
   componentWillUnmount () {
