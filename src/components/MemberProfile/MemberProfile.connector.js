@@ -59,13 +59,16 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
 
   const onPressMessages = makeOnPressMessages(currentUser, person, navigation)
 
+  const goToMemberProfile = () => navigation.navigate('MemberProfile', {id})
+
   return {
     ...stateProps,
     ...dispatchProps,
     ...ownProps,
     canFlag,
     fetchPerson,
-    onPressMessages
+    onPressMessages,
+    goToMemberProfile
   }
 }
 

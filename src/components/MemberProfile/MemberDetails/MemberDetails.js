@@ -67,7 +67,7 @@ export default class MemberDetails extends React.Component {
 
   goBack = () => {
     if (this.saveChanges()) {
-      this.props.navigation.goBack()
+      this.props.goToMemberProfile()
     }
   }
 
