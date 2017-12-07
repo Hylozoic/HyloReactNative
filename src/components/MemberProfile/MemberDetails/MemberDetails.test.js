@@ -182,7 +182,8 @@ describe('MemberBio', () => {
     const renderer = new ReactShallowRenderer()
     renderer.render(<MemberBio
       person={person}
-      updateSetting={() => () => {}} />)
+      updateSetting={() => () => {}}
+      isMe />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
