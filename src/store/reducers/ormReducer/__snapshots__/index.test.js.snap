@@ -1,5 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`on FETCH_CURRENT_USER creates the Person 1`] = `
+Object {
+  "avatarUrl": "m.png",
+  "id": 123,
+  "location": "Spain",
+  "memberships": undefined,
+  "name": "Maurice",
+  "skills": undefined,
+}
+`;
+
 exports[`on UPDATE_USER_SETTINGS_PENDING updates Me and the Person 1`] = `
 Object {
   "id": 123,

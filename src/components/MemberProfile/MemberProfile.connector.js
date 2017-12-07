@@ -64,6 +64,8 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
   // settings)
   const updateUserSettings = isMe ? dispatchProps.updateUserSettings : () => {}
 
+  const goToMemberProfile = () => navigation.navigate('MemberProfile', {id})
+
   return {
     ...stateProps,
     ...dispatchProps,
@@ -71,7 +73,8 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     updateUserSettings,
     canFlag,
     fetchPerson,
-    onPressMessages
+    onPressMessages,
+    goToMemberProfile
   }
 }
 

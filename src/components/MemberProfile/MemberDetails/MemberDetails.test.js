@@ -62,20 +62,19 @@ describe('MemberDetails', () => {
   })
 
   describe('goBack', () => {
-    it('calls navigation.goBack when saveChanges succeeds', () => {
+    it('calls goToMemberDetails when saveChanges succeeds', () => {
       const props = {
+        id: 12,
         person: {},
         fetchPerson: () => {},
-        navigation: {
-          ...navigation,
-          goBack: jest.fn()
-        }
+        navigation,
+        goToMemberProfile: jest.fn()
       }
 
       const instance = ReactTestRenderer.create(<MemberDetails {...props} />).getInstance()
       instance.saveChanges = () => true
       instance.goBack()
-      expect(props.navigation.goBack).toHaveBeenCalled()
+      expect(props.goToMemberProfile).toHaveBeenCalledWith()
     })
   })
 
