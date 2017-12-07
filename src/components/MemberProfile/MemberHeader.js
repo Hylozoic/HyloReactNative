@@ -28,7 +28,8 @@ export default function MemberHeader ({
         placeholder='Name'
         editable={editable}
         onChangeText={updateSetting('name')}
-        error={errors.name} />
+        error={errors.name}
+        isMe={isMe} />
       <View style={styles.icons}>
         <TouchableOpacity onPress={onPressMessages}>
           <Icon name='Messages' style={styles.icon} />
@@ -41,13 +42,15 @@ export default function MemberHeader ({
       value={location}
       placeholder='Location'
       editable={editable}
-      onChangeText={updateSetting('location')} />
+      onChangeText={updateSetting('location')}
+      isMe={isMe} />
     <Control
       style={styles.tagline}
       value={tagline}
       placeholder='Short Description'
       editable={editable}
-      onChangeText={updateSetting('tagline')} />
+      onChangeText={updateSetting('tagline')}
+      isMe={isMe} />
   </View>
 }
 
@@ -57,7 +60,10 @@ export class Control extends React.Component {
   }
 
   render () {
-    const { value, onChangeText, editable = false, style, onBlur, multiline, hideEditIcon, error, placeholder } = this.props
+    const {
+      value, onChangeText, editable = false, style, onBlur, multiline,
+      hideEditIcon, error, placeholder, isMe
+    } = this.props
     return <View style={[styles.control, editable && styles.editableControl]}>
       <View style={styles.controlInputRow}>
         {editable || !multiline
@@ -68,7 +74,7 @@ export class Control extends React.Component {
             onChangeText={onChangeText}
             editable={editable}
             onBlur={onBlur}
-            placeholder={placeholder}
+            placeholder={isMe ? placeholder : ''}
             multiline={multiline}
             numberOfLines={multiline ? 8 : 1}
             underlineColorAndroid='transparent' />

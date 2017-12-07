@@ -71,6 +71,7 @@ exports[`MemberBio matches the last snapshot 1`] = `
   <Control
     editable={undefined}
     hideEditIcon={true}
+    isMe={true}
     multiline={true}
     onChangeText={[Function]}
     placeholder="Description"

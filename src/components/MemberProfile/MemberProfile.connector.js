@@ -50,7 +50,7 @@ export function makeOnPressMessages (currentUser, person, navigation) {
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
-  const { id, currentUser, person } = stateProps
+  const { id, currentUser, person, isMe } = stateProps
   const { navigation } = ownProps
 
   const fetchPerson = () => dispatchProps.fetchPerson(id)
@@ -59,10 +59,16 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
 
   const onPressMessages = makeOnPressMessages(currentUser, person, navigation)
 
+  // only call updateUserSettings if isMe (otherwise when you visit another
+  // user and then press the back button, you will update your profile with their
+  // settings)
+  const updateUserSettings = isMe ? dispatchProps.updateUserSettings : () => {}
+
   return {
     ...stateProps,
     ...dispatchProps,
     ...ownProps,
+    updateUserSettings,
     canFlag,
     fetchPerson,
     onPressMessages

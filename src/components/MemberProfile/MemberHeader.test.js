@@ -18,7 +18,8 @@ describe('MemberHeader', () => {
     renderer.render(<MemberHeader
       flagMember={() => {}}
       person={person}
-      updateSetting={() => () => {}} />)
+      updateSetting={() => () => {}}
+      isMe />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
@@ -52,7 +53,8 @@ describe('Control', () => {
       editable: true,
       onBlur: () => {},
       multiline: true,
-      hideEditIcon: false
+      hideEditIcon: false,
+      isMe: true
     }
 
     const renderer = new ReactShallowRenderer()
