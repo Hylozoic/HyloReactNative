@@ -29,7 +29,9 @@ Object {
     "id": 1,
   },
   "fetchPerson": [Function],
+  "goToMemberProfile": [Function],
   "id": 78,
+  "isMe": true,
   "navigation": Object {
     "navigate": [Function],
   },
@@ -37,5 +39,6 @@ Object {
   "person": Object {
     "id": 78,
   },
+  "updateUserSettings": [Function],
 }
 `;

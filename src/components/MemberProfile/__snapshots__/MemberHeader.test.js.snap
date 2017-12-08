@@ -34,6 +34,7 @@ exports[`MemberHeader matches the last snapshot 1`] = `
     <Control
       editable={undefined}
       error={undefined}
+      isMe={true}
       onChangeText={[Function]}
       placeholder="Name"
       value="Jonas"
@@ -51,19 +52,21 @@ exports[`MemberHeader matches the last snapshot 1`] = `
         editProfile={undefined}
         editable={undefined}
         flagMember={[Function]}
-        isMe={undefined}
+        isMe={true}
         saveChanges={undefined}
       />
     </View>
   </View>
   <Control
     editable={undefined}
+    isMe={true}
     onChangeText={[Function]}
     placeholder="Location"
     value="whale"
   />
   <Control
     editable={undefined}
+    isMe={true}
     onChangeText={[Function]}
     placeholder="Short Description"
     value="fingers crossed"

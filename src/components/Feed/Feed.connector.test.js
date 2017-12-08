@@ -90,6 +90,21 @@ describe('mergeProps', () => {
     .toBeCalledWith('Feed', {communityId: '12', topicName: 'disarmament'})
   })
 
+  it('binds networkId to showTopic from dispatchProps', () => {
+    const testStateProps = {
+      ...stateProps,
+      network: {id: 'anynetworkId'}
+    }
+    const props = mergeProps(
+      testStateProps,
+      dispatchProps,
+      ownProps
+    )
+
+    props.showTopic('anything')
+    expect(navigation.navigate).toBeCalledWith('TopicSupportComingSoon')
+  })
+
   it('sets up fetchCommunityTopic', () => {
     stateProps.topicName = 'inquiry'
     const props = mergeProps(stateProps, dispatchProps, ownProps)

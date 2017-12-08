@@ -62,10 +62,12 @@ describe('mergeProps', () => {
     const stateProps = {
       currentUser: {id: 1},
       person: {id},
-      id
+      id,
+      isMe: true
     }
     const dispatchProps = {
-      fetchPerson: jest.fn()
+      fetchPerson: jest.fn(),
+      updateUserSettings: jest.fn()
     }
     const ownProps = {
       navigation: {
@@ -76,5 +78,21 @@ describe('mergeProps', () => {
     expect(mergedProps).toMatchSnapshot()
     mergedProps.fetchPerson()
     expect(dispatchProps.fetchPerson).toHaveBeenCalledWith(id)
+    const changes = {name: 'bob'}
+    mergedProps.updateUserSettings(changes)
+    expect(dispatchProps.updateUserSettings).toHaveBeenCalledWith(changes)
+  })
+
+  it('sets updateUserSettings to no-op if isMe is false', () => {
+    const stateProps = {
+      isMe: false
+    }
+    const dispatchProps = {
+      updateUserSettings: jest.fn()
+    }
+    const mergedProps = mergeProps(stateProps, dispatchProps, {})
+    const changes = {name: 'bob'}
+    mergedProps.updateUserSettings(changes)
+    expect(dispatchProps.updateUserSettings).not.toHaveBeenCalledWith(changes)
   })
 })

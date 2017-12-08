@@ -67,7 +67,7 @@ export default class MemberDetails extends React.Component {
 
   goBack = () => {
     if (this.saveChanges()) {
-      this.props.navigation.goBack()
+      this.props.goToMemberProfile()
     }
   }
 
@@ -126,7 +126,8 @@ export default class MemberDetails extends React.Component {
         errors={errors} />
       <MemberBio person={personEdits}
         editable={editing}
-        updateSetting={this.updateSetting} />
+        updateSetting={this.updateSetting}
+        isMe={isMe} />
       <MemberSkills
         skills={skills}
         editable={editing}
@@ -145,7 +146,7 @@ export class MemberBio extends React.Component {
   }
 
   render () {
-    const { person: { bio }, editable, updateSetting } = this.props
+    const { person: { bio }, editable, updateSetting, isMe } = this.props
     if (isEmpty(bio) && !editable) return null
     return <View style={styles.bioContainer}>
       <View style={styles.labelWrapper}>
@@ -161,6 +162,7 @@ export class MemberBio extends React.Component {
         placeholder='Description'
         editable={editable}
         onChangeText={updateSetting('bio')}
+        isMe={isMe}
         multiline
         hideEditIcon />
     </View>
