@@ -1,4 +1,4 @@
-import { attr, Model } from 'redux-orm'
+import { attr, Model, many } from 'redux-orm'
 
 const Network = Model.createClass({
   toString () {
@@ -12,5 +12,6 @@ Network.modelName = 'Network'
 
 Network.fields = {
   id: attr(),
-  name: attr()
+  name: attr(),
+  posts: many('Post')
 }
