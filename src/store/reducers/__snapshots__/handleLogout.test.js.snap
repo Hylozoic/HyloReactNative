@@ -146,6 +146,11 @@ Object {
       "itemsById": Object {},
       "meta": Object {},
     },
+    "NetworkPosts": Object {
+      "items": Array [],
+      "itemsById": Object {},
+      "meta": Object {},
+    },
     "Notification": Object {
       "items": Array [],
       "itemsById": Object {},
