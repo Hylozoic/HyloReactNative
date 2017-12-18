@@ -73,7 +73,10 @@ export default class Login extends React.Component {
   }
 
   render () {
-    const { loginWithGoogle, error, loginWithFacebook, pending, goToSignup, hasSignupLink } = this.props
+    const {
+      loginWithGoogle, error, loginWithFacebook, pending,
+      goToResetPassword, goToSignup, hasSignupLink
+    } = this.props
     const { ssoError, emailIsValid, isConnected } = this.state
     return <ScrollView contentContainerStyle={styles.login} style={styles.container}>
       {ssoError && <Text style={styles.errorBanner}>{ssoError}</Text>}
@@ -131,7 +134,7 @@ export default class Login extends React.Component {
         </View>
       </View>
       <View style={styles.labelRow}>
-        <TouchableOpacity onPress={this.login}>
+        <TouchableOpacity onPress={goToResetPassword}>
           <Text style={styles.forgotPasswordText}>Forgot your password?</Text>
         </TouchableOpacity>
       </View>

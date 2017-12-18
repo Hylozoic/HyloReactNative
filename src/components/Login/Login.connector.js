@@ -15,12 +15,14 @@ export function mapStateToProps (state, props) {
   const error = state.session.loginError
   const pending = getPending(state)
   const goToSignup = () => props.navigation.navigate('Signup')
+  const goToResetPassword = () => props.navigation.navigate('PasswordReset')
   return {
     loggedIn: state.session.loggedIn,
     error,
     pending,
     defaultEmail: state.session.defaultLoginEmail,
     goToSignup,
+    goToResetPassword,
     hasSignupLink: !!state.session.hasSignupLink,
     deepLinkAction: getNavigationAction(state)
   }
