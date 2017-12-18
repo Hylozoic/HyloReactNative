@@ -119,6 +119,11 @@ export default {
     marginTop: 4 * smallScreenFudge,
     marginBottom: 14 * smallScreenFudge
   },
+  forgotPasswordText: {
+    fontFamily: 'Circular-Book',
+    fontSize: 14,
+    color: caribbeanGreen
+  },
   helpText: {
     fontFamily: 'Circular-Book',
     fontSize: 14,

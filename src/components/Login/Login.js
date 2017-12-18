@@ -130,6 +130,11 @@ export default class Login extends React.Component {
           </View>
         </View>
       </View>
+      <View style={styles.labelRow}>
+        <TouchableOpacity onPress={this.login}>
+          <Text style={styles.forgotPasswordText}>Forgot your password?</Text>
+        </TouchableOpacity>
+      </View>
       <View style={styles.paddedRow}>
         <TouchableOpacity onPress={this.login} style={styles.loginButton}>
           <Text style={styles.loginText}>Log In</Text>
