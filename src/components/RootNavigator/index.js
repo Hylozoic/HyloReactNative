@@ -32,6 +32,7 @@ import SignupFlow3 from '../SignupFlow/SignupFlow3'
 import SignupFlow4 from '../SignupFlow/SignupFlow4'
 import SignupFlow5 from '../SignupFlow/SignupFlow5'
 import Login from '../Login'
+import CreateCommunityName from '../CreateCommunityFlow/CreateCommunityName'
 import InviteExpired from '../InviteExpired'
 import Signup from '../Signup'
 import trackCurrentTab from './trackCurrentTab'
@@ -113,7 +114,8 @@ const screensInStack = {
   Thread: {screen: Thread, path: 'thread/:id'},
   UseInvitation: {screen: JoinCommunity, path: 'useInvitation/:token'},
   UseAccessCode: {screen: JoinCommunity, path: 'useAccessCode/:slug/:accessCode'},
-  Loading: {screen: LoadingScreen}
+  Loading: {screen: LoadingScreen},
+  CreateCommunityName: {screen: CreateCommunityName}
 }
 
 const RootNavigator = StackNavigator(
