@@ -13,6 +13,5 @@ Network.modelName = 'Network'
 Network.fields = {
   id: attr(),
   name: attr(),
-  posts: many('Post'),
-  members: many('Person')
+  posts: many('Post')
 }
