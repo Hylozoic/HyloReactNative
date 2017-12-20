@@ -83,8 +83,7 @@ export function fetchNetworkMembers (slug, sortBy, offset, search) {
     meta: {
       extractModel: 'Network',
       extractQueryResults: {
-        getItems: get('payload.data.network.members'),
-        getParams: (action) => ({...get('meta.graphql.variables', action), memberSubject: 'network'})
+        getItems: get('payload.data.network.members')
       }
     }
   }
@@ -100,8 +99,7 @@ export function fetchCommunityMembers (slug, sortBy, offset, search) {
     meta: {
       extractModel: 'Community',
       extractQueryResults: {
-        getItems: get('payload.data.community.members'),
-        getParams: (action) => ({...get('meta.graphql.variables', action), memberSubject: 'community'})
+        getItems: get('payload.data.community.members')
       }
     }
   }

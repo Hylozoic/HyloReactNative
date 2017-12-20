@@ -6,7 +6,7 @@ export default function reducer (state = {isVisible: true}, action) {
     return {isVisible: action.payload !== ALL_COMMUNITIES_ID}
   }
   if (action.type === SELECT_NETWORK) {
-    return {isVisible: true}
+    return {isVisible: false}
   }
   return state
 }
