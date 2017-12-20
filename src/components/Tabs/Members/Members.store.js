@@ -157,15 +157,16 @@ export function fetchMembers ({ subject, slug, sortBy, offset, search }) {
 
 const getMemberResults = makeGetQueryResults(FETCH_MEMBERS)
 
+// TODO: Use makeQueryResultsModelSelector
 export const getMembers = ormCreateSelector(
   orm,
   state => state.orm,
   getMemberResults,
   state => getCurrentCommunity(state),
-  (session, results, community) => {
+  ({ Person }, results) => {
     if (isEmpty(results) || isEmpty(results.ids)) return []
 
-    return community.members
+    return Person.all()
     .filter(x => includes(x.id, results.ids))
     .orderBy(x => results.ids.indexOf(x.id))
     .toModelArray()
