@@ -17,6 +17,8 @@ import { decode } from 'ent'
 import KeyboardFriendlyView from '../KeyboardFriendlyView'
 import ImageSelector from './ImageSelector'
 import FileSelector from './FileSelector'
+import { caribbeanGreen } from 'style/colors'
+import BackArrow from '../BackArrow'
 
 export default class PostEditor extends React.Component {
   static contextTypes = {navigate: PropTypes.func}
@@ -26,7 +28,10 @@ export default class PostEditor extends React.Component {
     const title = isSaving ? 'Saving...' : 'Save'
     return {
       headerTitle,
-      headerRight: save ? <View style={styles.saveButton}><Button title={title} disabled={isSaving} onPress={save} /></View> : null
+      headerTitleStyle: { color: 'black' },
+      headerTintColor: caribbeanGreen,
+      headerLeft: <BackArrow navigation={navigation} />,
+      headerRight: save ? <View style={styles.saveButton}><Button color={caribbeanGreen} title={title} disabled={isSaving} onPress={save} /></View> : null
     }
   }
 

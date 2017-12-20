@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
-import DetailsEditor from './DetailsEditor'
+import DetailsEditor, { SaveButton } from './DetailsEditor'
 
 jest.mock('react-native-device-info')
 
@@ -27,5 +27,16 @@ describe('DetailsEditor', () => {
   it('has navigation options', () => {
     const props = {navigation: {}}
     expect(DetailsEditor.navigationOptions(props)).toMatchSnapshot()
+  })
+})
+
+describe('SaveButton', () => {
+  it('renders correctly', () => {
+    const renderer = new ReactShallowRenderer()
+    renderer.render(<SaveButton
+      navigation={jest.fn()}
+    />)
+    const actual = renderer.getRenderOutput()
+    expect(actual).toMatchSnapshot()
   })
 })

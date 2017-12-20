@@ -2,14 +2,32 @@
 
 exports[`PostEditor has navigation options 1`] = `
 Object {
+  "headerLeft": <BackArrow
+    navigation={
+        Object {
+            "state": Object {
+              "params": Object {
+                "headerTitle": "a title",
+                "isSaving": false,
+                "save": [Function],
+              },
+            },
+          }
+    }
+/>,
   "headerRight": <View>
     <Button
+        color="#0DC39F"
         disabled={false}
         onPress={[Function]}
         title="Save"
     />
 </View>,
+  "headerTintColor": "#0DC39F",
   "headerTitle": "a title",
+  "headerTitleStyle": Object {
+    "color": "black",
+  },
 }
 `;
 

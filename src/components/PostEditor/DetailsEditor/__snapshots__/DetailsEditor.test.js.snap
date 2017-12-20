@@ -2,13 +2,17 @@
 
 exports[`DetailsEditor has navigation options 1`] = `
 Object {
-  "headerRight": <View>
-    <Button
-        onPress={[Function]}
-        title="Save"
-    />
-</View>,
+  "headerLeft": <BackArrow
+    navigation={Object {}}
+/>,
+  "headerRight": <SaveButton
+    navigation={Object {}}
+/>,
+  "headerTintColor": "#0DC39F",
   "headerTitle": "Details",
+  "headerTitleStyle": Object {
+    "color": "black",
+  },
 }
 `;
 
@@ -32,4 +36,14 @@ exports[`DetailsEditor renders correctly 1`] = `
     onChange={[Function]}
   />
 </Unknown>
+`;
+
+exports[`SaveButton renders correctly 1`] = `
+<View>
+  <Button
+    color="#0DC39F"
+    onPress={[Function]}
+    title="Save"
+  />
+</View>
 `;
