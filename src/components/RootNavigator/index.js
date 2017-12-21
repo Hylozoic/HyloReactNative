@@ -34,6 +34,7 @@ import SignupFlow5 from '../SignupFlow/SignupFlow5'
 import Login from '../Login'
 import CreateCommunityName from '../CreateCommunityFlow/CreateCommunityName'
 import CreateCommunityUrl from '../CreateCommunityFlow/CreateCommunityUrl'
+import CreateCommunityReview from '../CreateCommunityFlow/CreateCommunityReview'
 
 import InviteExpired from '../InviteExpired'
 import Signup from '../Signup'
@@ -118,7 +119,8 @@ const screensInStack = {
   UseAccessCode: {screen: JoinCommunity, path: 'useAccessCode/:slug/:accessCode'},
   Loading: {screen: LoadingScreen},
   CreateCommunityName: {screen: CreateCommunityName},
-  CreateCommunityUrl: {screen: CreateCommunityUrl}
+  CreateCommunityUrl: {screen: CreateCommunityUrl},
+  CreateCommunityReview: {screen: CreateCommunityReview}
 }
 
 const RootNavigator = StackNavigator(
