@@ -17,7 +17,7 @@ import { mapWhenFocused, mergeWhenFocused } from 'util/connector'
 import getCurrentCommunity from '../../../store/selectors/getCurrentCommunity'
 import getCurrentNetwork from '../../../store/selectors/getCurrentNetwork'
 
-function makeFetchOpts (props) {
+export function makeFetchOpts (props) {
   const { community, network, sortBy } = props
 
   var subject, slug, sortByName

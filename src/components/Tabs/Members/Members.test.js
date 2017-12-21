@@ -91,7 +91,27 @@ describe('componentDidUpdate', () => {
 })
 
 describe('Banner', () => {
-  it('returns null if community and all are both falsy', () => {
+  it('returns null if community, netowrk and all are all falsy', () => {
     expect(Banner({})).toBe(null)
+  })
+
+  it('matches snapshot when all is true', () => {
+    expect(Banner({all: true})).toMatchSnapshot()
+  })
+
+  it('matches snapshot with community', () => {
+    const community = {
+      name: 'Foomunity',
+      bannerUrl: 'foom.png'
+    }
+    expect(Banner({community})).toMatchSnapshot()
+  })
+
+  it('matches snapshot with network', () => {
+    const network = {
+      name: 'Foom Network',
+      bannerUrl: 'foomn.png'
+    }
+    expect(Banner({network})).toMatchSnapshot()
   })
 })

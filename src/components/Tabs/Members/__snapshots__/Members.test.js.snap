@@ -1,5 +1,68 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Banner matches snapshot when all is true 1`] = `
+<View>
+  <Image
+    source={
+      Object {
+        "uri": "https://d3ngex8q79bk55.cloudfront.net/misc/default_community_banner.jpg",
+      }
+    }
+  />
+  <View>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+    >
+      All Communities
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`Banner matches snapshot with community 1`] = `
+<View>
+  <Image
+    source={
+      Object {
+        "uri": "foom.png",
+      }
+    }
+  />
+  <View>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+    >
+      Foomunity
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`Banner matches snapshot with network 1`] = `
+<View>
+  <Image
+    source={
+      Object {
+        "uri": "foomn.png",
+      }
+    }
+  />
+  <View>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+    >
+      Foom Network
+    </Text>
+  </View>
+</View>
+`;
+
 exports[`Member matches the last snapshot 1`] = `
 <TouchableOpacity
   activeOpacity={0.2}

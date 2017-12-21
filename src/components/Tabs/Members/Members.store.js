@@ -1,4 +1,6 @@
-import { makeGetQueryResults } from '../../../store/reducers/queryResults'
+import {
+  makeGetQueryResults, makeQueryResultsModelSelector
+} from '../../../store/reducers/queryResults'
 import { createSelector } from 'reselect'
 import { createSelector as ormCreateSelector } from 'redux-orm'
 import { get, includes, isEmpty } from 'lodash/fp'
@@ -159,8 +161,16 @@ export function fetchMembers ({ subject, slug, sortBy, offset, search }) {
 
 const getMemberResults = makeGetQueryResults(FETCH_MEMBERS)
 
-// TODO: Use makeQueryResultsModelSelector
-export const getMembers = ormCreateSelector(
+export const getMembers = makeQueryResultsModelSelector(
+  getMemberResults,
+  'Person',
+  person => ({
+    ...person.ref,
+    skills: person.skills && person.skills.toModelArray()
+  })
+)
+
+export const getMembersOld = ormCreateSelector(
   orm,
   state => state.orm,
   getMemberResults,
