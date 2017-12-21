@@ -52,7 +52,7 @@ export function mapStateToProps (state, props) {
   const sortBy = getSort(state)
 
   const fetchOpts = makeFetchOpts({community, network, sortBy, search})
-  const { slug } = fetchOpts
+  const { slug, subject } = fetchOpts
 
   const getOpts = omit('subject', fetchOpts)
   getOpts.memberSubject = fetchOpts.subject
@@ -67,7 +67,10 @@ export function mapStateToProps (state, props) {
     pending: state.pending[FETCH_MEMBERS],
     search,
     slug,
-    sortBy
+    subject,
+    // Use the sortBy that has been adjusted in the case of networks (see makeFetchOpts)
+    sortBy: fetchOpts.sortBy,
+    isAll: slug === ALL_COMMUNITIES_ID
   }
 }
 

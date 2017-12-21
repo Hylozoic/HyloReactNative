@@ -22,6 +22,7 @@ query ($slug: String, $first: Int, $sortBy: String, $offset: Int, $search: Strin
     id
     name
     avatarUrl
+    bannerUrl
     memberCount
     members (first: $first, sortBy: $sortBy, offset: $offset, search: $search) {
       items {
@@ -51,6 +52,7 @@ query ($slug: String, $first: Int, $sortBy: String, $offset: Int, $search: Strin
     name
     slug
     avatarUrl
+    bannerUrl
     memberCount
     members (first: $first, sortBy: $sortBy, offset: $offset, search: $search) {
       items {
