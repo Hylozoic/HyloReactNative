@@ -30,7 +30,8 @@ describe('UserSettings', () => {
     renderer.render(<UserSettings {...props} />)
     const actual = renderer.getRenderOutput()
 
-    expect(actual).toMatchSnapshot()
+    // expect(actual).toMatchSnapshot()
+    expect(actual).toBe(1)
   })
 
   it('matches snapshot with state set', () => {

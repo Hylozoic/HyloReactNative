@@ -45,7 +45,10 @@ export function fetchPerson (id) {
       }`,
       variables: { id }
     },
-    meta: { extractModel: 'Person' }
+    meta: {
+      afterInteractions: true,
+      extractModel: 'Person'
+    }
   }
 }
 
