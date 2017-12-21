@@ -6,7 +6,7 @@ import {
   Button
 } from 'react-native'
 
-import styles from './CreateCommunityReview.styles'
+import styles from '../CreateCommunityFlow.styles'
 
 export default class CreateCommunityReview extends React.Component {
   static navigationOptions = {

@@ -5,7 +5,7 @@ import {
   TouchableOpacity,
   Button
 } from 'react-native'
-import styles from './CreateCommunityName.styles'
+import styles from '../CreateCommunityFlow.styles'
 
 export default class CreateCommunityName extends React.Component {
   static navigationOptions = {
@@ -14,8 +14,8 @@ export default class CreateCommunityName extends React.Component {
 
   render () {
     return <View style={styles.container}>
-      <Text>Let's get started!</Text>
-      <Text>All good things start somewhere! Let's kick things off with a catchy name for your community.</Text>
+      <Text style={styles.header}>Let's get started!</Text>
+      <Text style={styles.description}>All good things start somewhere! Let's kick things off with a catchy name for your community.</Text>
       <TouchableOpacity>
         <Button title='Continue' onPress={() => console.log('click')} />
       </TouchableOpacity>

@@ -6,7 +6,7 @@ import {
   Button
 } from 'react-native'
 
-import styles from './CreateCommunityUrl.styles'
+import styles from './CreateCommunityFlow.styles'
 
 export default class CreateCommunityUrl extends React.Component {
   static navigationOptions = {
