@@ -87,9 +87,6 @@
       "json",
       "lcov"
     ],
-    "reporters": [
-      "jest-simple-reporter"
-    ],
     "timers": "fake",
     "transformIgnorePatterns": [
       "/!node_modules\\/react-navigation"
