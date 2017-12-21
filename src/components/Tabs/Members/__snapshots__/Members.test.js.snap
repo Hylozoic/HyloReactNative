@@ -61,7 +61,7 @@ Object {
 }
 `;
 
-exports[`renders correctly with no community 1`] = `
+exports[`renders correctly with no community and isAll 1`] = `
 <View>
   <RCTScrollView
     ListHeaderComponent={
@@ -69,6 +69,7 @@ exports[`renders correctly with no community 1`] = `
         <Banner
           all={true}
           community={undefined}
+          network={undefined}
         />
         <View>
           <View>

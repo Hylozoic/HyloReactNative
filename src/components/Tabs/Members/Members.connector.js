@@ -85,9 +85,10 @@ export function mapDispatchToProps (dispatch, { navigation }) {
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
-  const { hasMore, pending, members, fetchOpts } = stateProps
-  const fetchMembers = () =>
-    dispatchProps.fetchMembers(fetchOpts)
+  const { hasMore, pending, members, fetchOpts, community, network } = stateProps
+  const fetchMembers = (community || network)
+    ? () => dispatchProps.fetchMembers(fetchOpts)
+    : () => {}
   const offset = members.length
   const fetchMoreMembers = hasMore && !pending
     ? () => dispatchProps.fetchMembers({ ...fetchOpts, offset })

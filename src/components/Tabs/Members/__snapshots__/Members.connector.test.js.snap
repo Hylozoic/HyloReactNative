@@ -14,11 +14,20 @@ Object {
     },
     "id": 123,
   },
+  "fetchOpts": Object {
+    "search": undefined,
+    "slug": "all-communities",
+    "sortBy": undefined,
+    "subject": "all-communities",
+  },
   "hasMore": undefined,
+  "isAll": true,
   "members": Array [],
+  "network": null,
   "pending": undefined,
   "search": undefined,
-  "slug": null,
+  "slug": "all-communities",
   "sortBy": undefined,
+  "subject": "all-communities",
 }
 `;

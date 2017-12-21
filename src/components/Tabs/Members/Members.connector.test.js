@@ -24,9 +24,9 @@ describe('mergeProps', () => {
     stateProps = { hasMore: true, members: [], pending: false }
   })
 
-  it('makes fetchMembers a no-op when there is no community', () => {
+  it('makes fetchMembers a no-op when there is no community or network', () => {
     const props = mergeProps(stateProps, dispatchProps)
-    expect(props.fetchMembers()).toEqual(false)
+    expect(props.fetchMembers()).toEqual(undefined)
     expect(dispatchProps.fetchMembers).not.toBeCalled()
   })
 
