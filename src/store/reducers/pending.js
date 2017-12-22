@@ -1,3 +1,14 @@
+// The pending reducer:
+//   - checks for _PENDING suffix,
+//       adds the action to state.pending
+//   - checks for CLEAR_ prefix used with _PENDING,
+//       sets the action to `undefined` in state.pending
+//   - if neither suffix nor prefix are present,
+//       sets action to `null` in state.pending
+// The distinction between `undefined` and `null` is slightly arbitrary,
+// but it allows us to completely reset pending state (as opposed to just
+// turning pending off between repeated queries. The alternative would be
+// using `delete`, but it's slow.
 export default function pending (state = {}, action) {
   const { type, meta } = action
 

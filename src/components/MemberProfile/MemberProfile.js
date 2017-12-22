@@ -34,7 +34,18 @@ export default class MemberProfile extends React.Component {
   }
 
   render () {
-    const { clearFetchPersonPending, pending, person, id, goToDetails, canFlag, onPressMessages, isMe, goToEdit, updateUserSettings } = this.props
+    const {
+      canFlag,
+      clearFetchPersonPending,
+      goToDetails,
+      goToEdit,
+      id,
+      isMe,
+      onPressMessages,
+      pending,
+      person,
+      updateUserSettings
+    } = this.props
     const { flaggingVisible } = this.state
     if (!person) return <Loading />
 
@@ -52,7 +63,12 @@ export default class MemberProfile extends React.Component {
     }
 
     const header = <View>
-      <MemberBanner clearFetchPersonPending={clearFetchPersonPending} pending={pending} person={person} isMe={isMe} updateUserSettings={updateUserSettings} />
+      <MemberBanner
+        clearFetchPersonPending={clearFetchPersonPending}
+        isMe={isMe}
+        pending={pending}
+        person={person}
+        updateUserSettings={updateUserSettings} />
       <View style={styles.marginContainer}>
         <MemberHeader
           person={person}
@@ -102,7 +118,6 @@ export class MemberBanner extends React.Component {
       ? {uri: avatarLocalUri}
       : avatarUrl && {uri: avatarUrl}
 
-    console.log('P', pending)
     // This is a suprisingly annoying piece of logic. Basically, prefer
     // displaying `bannerLocalUri`, then `bannerUrl`, then `defaultBanner`.
     // However, don't display `defaultBanner` only to be replaced with `bannerUrl`
@@ -122,7 +137,7 @@ export class MemberBanner extends React.Component {
         onPendingChange={pending => this.setState({bannerPickerPending: pending})}
         disabled={!isMe}>
         <Image source={bannerSource} style={styles.bannerImage} />
-        {isMe && <EditButton isLoading={bannerPickerPending} style={styles.bannerEditButton} />}
+        {!pending && isMe && <EditButton isLoading={bannerPickerPending} style={styles.bannerEditButton} />}
       </ImagePicker>
       <View style={styles.avatarW3}>
         <ImagePicker
