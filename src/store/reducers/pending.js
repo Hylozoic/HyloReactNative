@@ -7,8 +7,8 @@
 //       sets action to `null` in state.pending
 // The distinction between `undefined` and `null` is slightly arbitrary,
 // but it allows us to completely reset pending state (as opposed to just
-// turning pending off between repeated queries. The alternative would be
-// using `delete`, but it's slow.
+// turning pending off between repeated queries). The alternative would be
+// using `delete` or filtering, but it's slow.
 export default function pending (state = {}, action) {
   const { type, meta } = action
 
