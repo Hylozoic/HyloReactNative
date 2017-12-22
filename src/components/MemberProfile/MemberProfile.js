@@ -34,7 +34,7 @@ export default class MemberProfile extends React.Component {
   }
 
   render () {
-    const { person, id, goToDetails, canFlag, onPressMessages, isMe, goToEdit, updateUserSettings } = this.props
+    const { clearFetchPersonPending, pending, person, id, goToDetails, canFlag, onPressMessages, isMe, goToEdit, updateUserSettings } = this.props
     const { flaggingVisible } = this.state
     if (!person) return <Loading />
 
@@ -52,7 +52,7 @@ export default class MemberProfile extends React.Component {
     }
 
     const header = <View>
-      <MemberBanner person={person} isMe={isMe} updateUserSettings={updateUserSettings} />
+      <MemberBanner clearFetchPersonPending={clearFetchPersonPending} pending={pending} person={person} isMe={isMe} updateUserSettings={updateUserSettings} />
       <View style={styles.marginContainer}>
         <MemberHeader
           person={person}
@@ -90,22 +90,33 @@ export class MemberBanner extends React.Component {
     this.props.updateUserSettings({[remoteKey]: remote})
   }
 
+  componentWillUnmount () {
+    this.props.clearFetchPersonPending()
+  }
+
   render () {
-    const { person: { id, avatarUrl, bannerUrl }, isMe } = this.props
+    const { pending, person: { id, avatarUrl, bannerUrl }, isMe } = this.props
     const { avatarPickerPending, bannerPickerPending, avatarLocalUri, bannerLocalUri } = this.state
 
     const avatarSource = avatarLocalUri
       ? {uri: avatarLocalUri}
       : avatarUrl && {uri: avatarUrl}
 
-    const bannerSource = bannerLocalUri
-      ? {uri: bannerLocalUri}
-      : bannerUrl ? {uri: bannerUrl} : defaultBanner
+    console.log('P', pending)
+    // This is a suprisingly annoying piece of logic. Basically, prefer
+    // displaying `bannerLocalUri`, then `bannerUrl`, then `defaultBanner`.
+    // However, don't display `defaultBanner` only to be replaced with `bannerUrl`
+    // after the request finishes!
+    let bannerSource = {
+      uri: bannerLocalUri || bannerUrl || null
+    }
+    if (bannerSource.uri === null && !pending) bannerSource = defaultBanner
 
     return <View>
       <ImagePicker
         title='Change Banner'
         type='userBanner'
+        style={styles.bannerImagePicker}
         id={id}
         onChoice={choice => this.onChoice(choice, 'banner')}
         onPendingChange={pending => this.setState({bannerPickerPending: pending})}

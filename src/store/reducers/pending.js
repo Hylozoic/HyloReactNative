@@ -1,17 +1,44 @@
 export default function pending (state = {}, action) {
   const { type, meta } = action
 
-  const originalType = type.replace(/_PENDING/, '')
+  // Regexplanation: use matching groups instead of previous approach
+  // (simple regex replace, then `.endsWith`). Groups are fairly
+  // self-documenting in array destructure below.
+  const match = /^(.+?\/)?(CLEAR_)?(.+?)(_PENDING)?$/.exec(type)
+  if (!match) return state
 
-  if (type.endsWith('_PENDING')) {
+  const [
+    _,                                     // eslint-disable-line no-unused-vars
+    moduleName,
+    clearPrefix,
+    originalType,
+    pendingSuffix
+  ] = match
+
+  // Skip for special Redux actions
+  if (originalType === '@@INIT' || moduleName === '@@redux/') return state
+  const pendingType = moduleName ? `${moduleName}${originalType}` : originalType
+
+  // Check pending here so actions like CLEAR_BIG_BUTTON don't get stomped on
+  if (clearPrefix && pendingSuffix) {
     return {
       ...state,
-      [originalType]: meta || true
+      [pendingType]: undefined
     }
-  } else if (state[originalType]) {
+  }
+
+  if (pendingSuffix) {
     return {
       ...state,
-      [originalType]: null
+      [pendingType]: meta || true
+    }
+  }
+
+  // No _PENDING action should make it this far, so we're officially not pending
+  if (state[pendingType]) {
+    return {
+      ...state,
+      [pendingType]: null
     }
   }
 

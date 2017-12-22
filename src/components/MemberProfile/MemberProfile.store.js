@@ -2,7 +2,18 @@ import { createSelector as ormCreateSelector } from 'redux-orm'
 import orm from 'store/models'
 
 export const MODULE_NAME = 'MemberProfile'
+export const CLEAR_FETCH_PERSON_PENDING = `${MODULE_NAME}/CLEAR_FETCH_PERSON_PENDING`
 export const FETCH_PERSON = `${MODULE_NAME}/FETCH_PERSON`
+
+// Pending handling is a bit sensitive in the profile banner. It needs to be
+// undefined (not null) unless/until we arrive at a better solution. See
+// definition of `pending` in connector.
+// TODO: the sort of thing that could be made into a generic action creator
+export function clearFetchPersonPending () {
+  return {
+    type: CLEAR_FETCH_PERSON_PENDING
+  }
+}
 
 export function fetchPerson (id) {
   return {

@@ -1,13 +1,14 @@
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { get } from 'lodash/fp'
-import { getPerson, fetchPerson } from './MemberProfile.store'
+import { FETCH_PERSON, clearFetchPersonPending, getPerson, fetchPerson } from './MemberProfile.store'
 import makeGoToCommunity from '../../store/actions/makeGoToCommunity'
 import getMe from '../../store/selectors/getMe'
 import updateUserSettings from '../../store/actions/updateUserSettings'
 import { getSkillsFromOrm as getSkills } from '../SkillEditor/SkillEditor.store'
 
 export function mapStateToProps (state, props) {
+  const { pending } = state
   const id = get('navigation.state.params.id', props)
   const editing = get('navigation.state.params.editing', props)
 
@@ -22,6 +23,11 @@ export function mapStateToProps (state, props) {
   return {
     id,
     editing,
+
+    // This copes with brief moments where a request is being sent but
+    // pendingMiddleware has not yet set pending state.
+    pending: pending[FETCH_PERSON] === undefined || pending[FETCH_PERSON],
+
     person,
     currentUser,
     skills,
@@ -36,6 +42,7 @@ export function mapDispatchToProps (dispatch, props) {
   return {
     goToCommunity: makeGoToCommunity(dispatch, props.navigation),
     ...bindActionCreators({
+      clearFetchPersonPending,
       fetchPerson,
       updateUserSettings
     }, dispatch)
