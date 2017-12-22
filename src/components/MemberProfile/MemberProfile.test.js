@@ -12,6 +12,7 @@ describe('MemberProfile', () => {
   it('matches the last snapshot', () => {
     const renderer = new ReactShallowRenderer()
     renderer.render(<MemberProfile
+      isFocused
       person={{id: 1}}
       canFlag
       id={1} />)
@@ -23,6 +24,7 @@ describe('MemberProfile', () => {
   it('doesnt have the flag content option', () => {
     const renderer = new ReactShallowRenderer()
     renderer.render(<MemberProfile
+      isFocused
       person={{id: 1}}
       canFlag={false}
       id={1} />)

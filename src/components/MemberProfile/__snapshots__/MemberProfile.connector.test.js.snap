@@ -2,6 +2,7 @@
 
 exports[`mapDispatchToProps returns the right keys 1`] = `
 Object {
+  "clearFetchPersonPending": [Function],
   "fetchPerson": [Function],
   "goToCommunity": [Function],
   "updateUserSettings": [Function],
@@ -17,6 +18,7 @@ Object {
   "goToSkills": [Function],
   "id": 123,
   "isMe": false,
+  "pending": null,
   "person": null,
   "skills": Array [],
 }
