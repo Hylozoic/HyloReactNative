@@ -3,6 +3,7 @@
  */
 import React from 'react'
 import { StyleSheet, Text, TouchableOpacity } from 'react-native'
+import { HeaderBackButton } from 'react-navigation'
 import { rhino60, rhino20 } from 'style/colors'
 import Icon from '../components/Icon'
 
@@ -79,7 +80,7 @@ const headerClose = goBack => <HeaderButton onPress={() => goBack()} text='Close
 // This can all be placed in the connector and passed via mapDispatchToProps.
 // Of course, if you need even more customisation than this, don't use the
 // helper (or override parts of it using setParams in the component).
-export default function header ({ goBack, state }, { left, right, title, options } = {}) {
+export default function header ({ goBack, state }, { headerBackButton, left, right, title, options } = {}) {
   const headerOptions = {
     ...state.params,
     headerStyle: styles.header,
@@ -93,6 +94,11 @@ export default function header ({ goBack, state }, { left, right, title, options
     headerOptions.headerTitleStyle = [ styles.title, styles.center ]
   }
   if (right) headerOptions.headerRight = <HeaderButton {...right} />
+  if (headerBackButton) {
+    headerOptions.headerLeft = <HeaderBackButton
+      onPress={headerBackButton}
+      tintColor={tintColor} />
+  }
 
   return headerOptions
 }

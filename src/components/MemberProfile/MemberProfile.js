@@ -8,11 +8,12 @@ import ImagePicker from '../ImagePicker'
 import FlagContent from '../FlagContent'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
 import defaultBanner from '../../assets/default-user-banner.jpg'
-import header from 'util/header'
+import header, { tintColor } from 'util/header'
 
 export default class MemberProfile extends React.Component {
   static navigationOptions = ({ navigation }) =>
     header(navigation, {
+      headerBackButton: () => navigation.navigate('Members'),
       title: 'Member',
       options: {
         headerBackTitle: null
