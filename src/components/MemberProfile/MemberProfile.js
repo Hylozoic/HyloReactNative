@@ -41,6 +41,7 @@ export default class MemberProfile extends React.Component {
       goToDetails,
       goToEdit,
       id,
+      isFocused,
       isMe,
       onPressMessages,
       pending,
@@ -66,6 +67,7 @@ export default class MemberProfile extends React.Component {
     const header = <View>
       <MemberBanner
         clearFetchPersonPending={clearFetchPersonPending}
+        isFocused={isFocused}
         isMe={isMe}
         pending={pending}
         person={person}
@@ -107,8 +109,10 @@ export class MemberBanner extends React.Component {
     this.props.updateUserSettings({[remoteKey]: remote})
   }
 
-  componentWillUnmount () {
-    this.props.clearFetchPersonPending()
+  componentWillUpdate (nextProps) {
+    if (this.props.isFocused && !nextProps.isFocused) {
+      this.props.clearFetchPersonPending()
+    }
   }
 
   render () {
