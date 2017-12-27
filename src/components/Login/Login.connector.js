@@ -1,4 +1,5 @@
 import { connect } from 'react-redux'
+import { get } from 'lodash/fp'
 import {
   login,
   loginWithFacebook,
@@ -25,6 +26,8 @@ export function mapStateToProps (state, props) {
     goToSignup,
     goToResetPassword,
     hasSignupLink: !!state.session.hasSignupLink,
+    loginToken: decodeURIComponent(get('navigation.state.params.loginToken', props)),
+    loginTokenUserId: get('navigation.state.params.userId', props),
     deepLinkAction: getNavigationAction(state)
   }
 }
@@ -34,6 +37,7 @@ export const mapDispatchToProps = {
   loginWithFacebook,
   loginWithGoogle,
   login,
+  loginByToken,
   fetchCurrentUser
 }
 
@@ -43,6 +47,7 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     loginWithGoogle,
     loginWithFacebook,
     login,
+    loginByToken,
     fetchCurrentUser
   } = dispatchProps
 
@@ -65,9 +70,12 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
       loginWithFacebook(token).then(finishLogin),
     loginWithGoogle: (token) =>
       loginWithGoogle(token).then(finishLogin),
-    loginByToken: (token) => {
-      const { loginToken } = ownProps.navigation.state.params
-      return loginToken && loginByToken(loginToken).then(finishLogin)
+    loginByToken: () => {
+      const { loginTokenUserId, loginToken } = stateProps
+      console.log('!!! deepLinkAction:', stateProps.deepLinkAction)
+      console.log('!!! loginByToken(loginTokenUserId, loginToken):', loginTokenUserId, loginToken)
+      return loginToken && loginByToken(loginTokenUserId, loginToken)
+      .then(finishLogin)
     },
     login: (email, password) =>
       login(email, password).then(finishLogin)

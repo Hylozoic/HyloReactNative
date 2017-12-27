@@ -29,8 +29,10 @@ export function reformatPath (path) {
   match = routeMatchers.passwordResetTokenLogin(pathname)
   if (match) {
     const {u: userId, t: loginToken, n: nextURL} = params
-    return `passwordResetTokenLogin/${userId}/${loginToken}/${encodeURIComponent(nextURL)}`
+    return `passwordResetTokenLogin/${userId}/${encodeURIComponent(loginToken)}/${encodeURIComponent(nextURL)}`
   }
 
   return path
 }
+
+// hylo.com/noo/login/token?u=1&t=$2a$10$txtLNIZutPgF45WGUk1Sd.nRYYRWy25GlLy3ndFg2f2IPLwF4nSV6&n=http%3A%2F%2Flocalhost%3A9000%2Fsettings%2Fpassword

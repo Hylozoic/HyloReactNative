@@ -1,4 +1,5 @@
 import React from 'react'
+import { get } from 'lodash/fp'
 import {
   ScrollView,
   Text,
@@ -60,16 +61,18 @@ export default class Login extends React.Component {
     }
   }
 
+  componentWillMount () {
+    const { loginToken, loginByToken } = this.props
+    console.log('!!!! componentWillMount')
+    if (loginToken) loginByToken()
+  }
+
   componentDidMount () {
     NetInfo.isConnected.addEventListener('connectionChange', this.handleConnectivityChange)
   }
 
   componentWillUnmount () {
     NetInfo.isConnected.removeEventListener('connectionChange', this.handleConnectivityChange)
-  }
-
-  componentWillUpdate (nextProps) {
-    console.log('componentWillUpdate:', this.props, nextProps)
   }
 
   handleConnectivityChange = isConnected => {
