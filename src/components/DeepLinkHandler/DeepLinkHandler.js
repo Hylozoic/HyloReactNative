@@ -60,13 +60,14 @@ export default class DeepLinkHandler extends React.Component {
       : action
     if (isDev) console.log(`handling deep link "${path}" with action:`, action)
     if (!action) return
-    if (isInvitationLink(path) || (get('loginToken', action.params) && !currentUser)) {
+    if (!currentUser) {
       storeNavigationAction(nextAction)
-      this.redirectNow(action)
-    } else if (currentUser) {
+      if (action.params.nextURL) {
+        this.redirectNow(action)
+      }
+    }
+    if (currentUser || isInvitationLink(path)) {
       this.redirectNow(nextAction)
-    } else {
-      storeNavigationAction(nextAction)
     }
   }
 
