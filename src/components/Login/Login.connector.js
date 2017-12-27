@@ -65,8 +65,10 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
       loginWithFacebook(token).then(finishLogin),
     loginWithGoogle: (token) =>
       loginWithGoogle(token).then(finishLogin),
-    loginByToken: (token) =>
-      loginByToken(token).then(finishLogin),
+    loginByToken: (token) => {
+      const { loginToken } = ownProps.navigation.state.params
+      return loginToken && loginByToken(loginToken).then(finishLogin)
+    },
     login: (email, password) =>
       login(email, password).then(finishLogin)
   }
