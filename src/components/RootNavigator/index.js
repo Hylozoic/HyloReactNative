@@ -32,6 +32,7 @@ import SignupFlow3 from '../SignupFlow/SignupFlow3'
 import SignupFlow4 from '../SignupFlow/SignupFlow4'
 import SignupFlow5 from '../SignupFlow/SignupFlow5'
 import Login from '../Login'
+import ForgotPassword from '../ForgotPassword'
 import PasswordReset from '../PasswordReset'
 import InviteExpired from '../InviteExpired'
 import Signup from '../Signup'
@@ -111,7 +112,10 @@ const screensInStack = {
   SignupFlow4: {screen: SignupFlow4},
   SignupFlow5: {screen: SignupFlow5},
   Login: {screen: Login, path: 'login'},
-  PasswordReset: {screen: PasswordReset, path: 'password-reset/:token'},
+  LoginByPasswordResetToken: {screen: Login, path: 'passwordResetTokenLogin/:userId/:loginToken/:nextURL'},
+  ForgotPassword: {screen: ForgotPassword, path: 'forgot-password'},
+  PasswordReset: {screen: PasswordReset, path: 'settings/password'},
+  // PasswordResetTokenLogin: {screen: PasswordReset, path: 'passwordResetTokenLogin/:userId/:token/:nextURL'},
   Thread: {screen: Thread, path: 'thread/:id'},
   UseInvitation: {screen: JoinCommunity, path: 'useInvitation/:token'},
   UseAccessCode: {screen: JoinCommunity, path: 'useAccessCode/:slug/:accessCode'},

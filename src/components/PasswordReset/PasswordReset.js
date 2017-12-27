@@ -19,14 +19,13 @@ export default class PasswordReset extends React.Component {
     super(props)
     this.state = {
       securePassword: true,
-      emailIsValid: false,
       password: null,
       passwordConfirmation: null
     }
   }
 
   submit = () => {
-    this.props.resetPassword(this.state.password, this.state.passwordConfirmation)
+    this.props.updatePassword(this.state.password)
   }
 
   togglePassword = () => {
@@ -44,6 +43,12 @@ export default class PasswordReset extends React.Component {
 
   render () {
     const { error } = this.props
+    const { password, passwordConfirmation } = this.state
+
+    const matching = password === passwordConfirmation
+    const canSave = password && password.length > 8 && matching
+    // const matchError = !isEmpty(password) && !matching
+
     return <ScrollView contentContainerStyle={styles.passwordReset} style={styles.container}>
       <Text style={styles.title}>Change Your Password</Text>
       {error && <FormError />}
@@ -94,7 +99,7 @@ export default class PasswordReset extends React.Component {
         </View>
       </View>
       <View style={styles.paddedRow}>
-        <TouchableOpacity onPress={this.submit} style={styles.passwordResetButton}>
+        <TouchableOpacity onPress={this.submit} disabled={!canSave} style={styles.passwordResetButton}>
           <Text style={styles.passwordResetText}>Create Password</Text>
         </TouchableOpacity>
       </View>

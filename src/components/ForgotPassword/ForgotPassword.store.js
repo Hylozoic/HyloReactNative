@@ -1,4 +1,4 @@
-export const MODULE_NAME = 'PasswordReset'
+export const MODULE_NAME = 'ForgotPassword'
 export const RESET_PASSWORD = `${MODULE_NAME}/RESET_PASSWORD`
 
 export function resetPassword (email) {

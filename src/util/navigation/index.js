@@ -32,6 +32,7 @@ const route = pathMatch()
 export const routeMatchers = {
   invitation: route('/h/use-invitation'),
   accessLink: route('/c/:slug/join/:accessCode'),
+  passwordResetTokenLogin: route('/noo/login/token'),
   post: route('/c/:slug/p/:id'),
   thread: route('/t/:id')
 }

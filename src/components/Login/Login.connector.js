@@ -15,7 +15,7 @@ export function mapStateToProps (state, props) {
   const error = state.session.loginError
   const pending = getPending(state)
   const goToSignup = () => props.navigation.navigate('Signup')
-  const goToResetPassword = () => props.navigation.navigate('PasswordReset')
+  const goToResetPassword = () => props.navigation.navigate('ForgotPassword')
   return {
     loggedIn: state.session.loggedIn,
     error,

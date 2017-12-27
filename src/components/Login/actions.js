@@ -4,6 +4,7 @@ import { GoogleSignin } from 'react-native-google-signin'
 import { isEmpty } from 'lodash'
 
 export const LOGIN = 'LOGIN'
+export const LOGIN_BY_TOKEN = 'LOGIN_BY_TOKEN'
 export const LOGIN_WITH_FACEBOOK = 'LOGIN_WITH_FACEBOOK'
 export const LOGIN_WITH_GOOGLE = 'LOGIN_WITH_GOOGLE'
 export const LOGOUT = 'LOGOUT'
@@ -15,6 +16,15 @@ export function login (email, password) {
       api: {method: 'post', path: '/noo/login', params: {email, password}}
     },
     meta: {email}
+  }
+}
+
+export function loginByToken (userId, token) {
+  return {
+    type: LOGIN_BY_TOKEN,
+    payload: {
+      api: {method: 'post', path: '/noo/login/token', params: {u: userId, t: token}}
+    }
   }
 }
 
