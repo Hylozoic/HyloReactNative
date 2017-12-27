@@ -2,7 +2,8 @@ import { connect } from 'react-redux'
 import {
   login,
   loginWithFacebook,
-  loginWithGoogle
+  loginWithGoogle,
+  loginByToken
 } from './actions'
 import { getPending } from './Login.store'
 import { register as registerOneSignal } from 'util/onesignal'
@@ -64,6 +65,8 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
       loginWithFacebook(token).then(finishLogin),
     loginWithGoogle: (token) =>
       loginWithGoogle(token).then(finishLogin),
+    loginByToken: (token) =>
+      loginByToken(token).then(finishLogin),
     login: (email, password) =>
       login(email, password).then(finishLogin)
   }

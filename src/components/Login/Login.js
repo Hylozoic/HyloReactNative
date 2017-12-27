@@ -61,6 +61,7 @@ export default class Login extends React.Component {
   }
 
   componentDidMount () {
+    console.log('!!!!', this.props)
     NetInfo.isConnected.addEventListener('connectionChange', this.handleConnectivityChange)
   }
 
