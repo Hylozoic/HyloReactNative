@@ -47,7 +47,7 @@ export default class Members extends React.Component {
 
   render () {
     let {
-      community, members, subject, sortBy, setSort, fetchMoreMembers
+      community, network, members, subject, sortBy, setSort, fetchMoreMembers, isAll
     } = this.props
     const sortKeys = sortKeysFactory(subject)
     const onSearch = debounce(300, text => this.props.setSearch(text))
@@ -58,7 +58,7 @@ export default class Members extends React.Component {
     if (size(members) % 2 > 0) members.push({id: -1})
 
     const header = <View>
-      <Banner community={community} all={!community} />
+      <Banner community={community} network={network} all={isAll} />
       <View style={styles.listControls}>
         <View style={styles.searchWrapper}>
           <Icon style={styles.searchIcon} name='Search' size={30}
@@ -112,16 +112,18 @@ export function Member ({ member, showMember }) {
   </TouchableOpacity>
 }
 
-export function Banner ({ community, all }) {
+export function Banner ({ community, network, all }) {
   let bannerUrl, name
 
-  if (all) {
+  if (network) {
+    ({ bannerUrl, name } = network)
+  } else if (community) {
+    ({ bannerUrl, name } = community)
+  } else if (all) {
     name = 'All Communities'
     bannerUrl = DEFAULT_BANNER
-  } else if (!community) {
-    return null
   } else {
-    ({ bannerUrl, name } = community)
+    return null
   }
 
   return <View style={styles.bannerContainer}>

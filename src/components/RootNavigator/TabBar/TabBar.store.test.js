@@ -23,5 +23,5 @@ it('sets isVisible to true if changing to a network', () => {
     type: SELECT_NETWORK,
     payload: '1'
   }
-  expect(reducer({}, action)).toEqual({isVisible: false})
+  expect(reducer({}, action)).toEqual({isVisible: true})
 })
