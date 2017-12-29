@@ -125,7 +125,7 @@ export class NetworkRow extends React.Component {
           numberOfLines={1}>
           {name}
         </Text>
-        {expandable && <EntypoIcon onPress={this.toggleExpanded} style={styles.networkOpenIcon} name={expanded ? 'chevron-down' : 'chevron-right'} />}
+        {expandable && <TouchableOpacity onPress={this.toggleExpanded} style={styles.networkOpenWrapper}><EntypoIcon style={styles.networkOpenIcon} name={expanded ? 'chevron-down' : 'chevron-right'} /></TouchableOpacity>}
       </TouchableOpacity>
       {expanded && expandable && <View style={styles.networkCommunities}>
         {communities.map(c => <CommunityRow
