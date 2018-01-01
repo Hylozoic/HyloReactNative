@@ -1,9 +1,10 @@
 import React from 'react'
 import HTMLView from 'react-native-htmlview'
-import { StyleSheet, Text, View } from 'react-native'
+import { Text, View } from 'react-native'
 import { present, sanitize } from 'hylo-utils/text'
 import { any, bool, shape, string } from 'prop-types'
 import urlHandler from '../../util/urlHandler'
+import richTextStyles from '../../style/richTextStyles'
 
 import Avatar from '../Avatar'
 
@@ -46,11 +47,3 @@ MessageCard.propTypes = {
     text: string
   })
 }
-
-// TODO: remove duplication between here and PostBody
-
-const richTextStyles = StyleSheet.create({
-  a: {
-    color: '#0DC39F'
-  }
-})
