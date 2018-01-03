@@ -145,7 +145,8 @@ export const queryParamWhitelist = [
   'autocomplete',
   'filter',
   'topic',
-  'type'
+  'type',
+  'memberSubject'
 ]
 
 export function makeQueryResultsModelSelector (resultsSelector, modelName, transform = i => i) {
