@@ -33,7 +33,7 @@ import SignupFlow4 from '../SignupFlow/SignupFlow4'
 import SignupFlow5 from '../SignupFlow/SignupFlow5'
 import Login from '../Login'
 import ForgotPassword from '../ForgotPassword'
-import PasswordReset from '../PasswordReset'
+// import PasswordReset from '../PasswordReset'
 import InviteExpired from '../InviteExpired'
 import Signup from '../Signup'
 import trackCurrentTab from './trackCurrentTab'
@@ -99,6 +99,13 @@ const DrawerAndTabsNavigator = DrawerNavigator(
 // Screens that appear outside of tabs: Settings, Messages, etc.
 const screensInStack = {
   UserSettings: {screen: UserSettings},
+  PasswordReset: {
+    screen: UserSettings,
+    path: 'settings/password',
+    navigationOptions: {
+      test: 'test'
+    }
+  },
   NotificationsList: {screen: NotificationsList},
   ThreadList: {screen: ThreadList},
   ThreadParticipants: {screen: ThreadParticipants},
@@ -114,7 +121,6 @@ const screensInStack = {
   Login: {screen: Login, path: 'login'},
   LoginByPasswordResetToken: {screen: Login, path: 'passwordResetTokenLogin/:userId/:loginToken/:nextURL'},
   ForgotPassword: {screen: ForgotPassword, path: 'forgot-password'},
-  PasswordReset: {screen: PasswordReset, path: 'settings/password'},
   // PasswordResetTokenLogin: {screen: PasswordReset, path: 'passwordResetTokenLogin/:userId/:token/:nextURL'},
   Thread: {screen: Thread, path: 'thread/:id'},
   UseInvitation: {screen: JoinCommunity, path: 'useInvitation/:token'},

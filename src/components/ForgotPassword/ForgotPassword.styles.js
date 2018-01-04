@@ -1,5 +1,5 @@
 import { Dimensions, StyleSheet } from 'react-native'
-import { caribbeanGreen } from 'style/colors'
+import { caribbeanGreen, gunsmoke } from 'style/colors'
 import { isIOS } from 'util/platform'
 
 const screenHeight = Dimensions.get('window').height
@@ -53,20 +53,39 @@ export default {
   container: {
     backgroundColor: 'white'
   },
+  header: {
+    backgroundColor: 'white'
+  },
+  headerTitleStyle: {
+    fontSize: 17,
+    color: 'black',
+    fontFamily: 'Circular-Bold'
+  },
+  headerTintColor: gunsmoke,
   title: {
     fontSize: 24,
     color: caribbeanGreen,
     marginBottom: 20 * smallScreenFudge,
     fontFamily: 'Circular-Bold'
   },
+  messageText: {
+    fontFamily: 'Circular-Book',
+    fontSize: 16,
+    textAlign: 'left'
+  },
   iconOpaque: {
     ...mixins.icon,
     opacity: 0.5
   },
+  iconGreen: {
+    ...mixins.icon,
+    color: caribbeanGreen
+  },
   forgotPassword: {
     backgroundColor: 'white',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    paddingTop: 20
   },
   forgotPasswordText: {
     color: 'white',
@@ -99,8 +118,7 @@ export default {
     backgroundColor: caribbeanGreen,
     height: 36,
     borderRadius: 50,
-    justifyContent: 'center',
-    marginTop: 22
+    justifyContent: 'center'
   },
   paddedBorderValid: {
     flex: 1,

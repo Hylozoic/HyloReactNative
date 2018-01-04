@@ -72,9 +72,7 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
       loginWithGoogle(token).then(finishLogin),
     loginByToken: () => {
       const { loginTokenUserId, loginToken } = stateProps
-      console.log('!!! deepLinkAction:', stateProps.deepLinkAction)
-      console.log('!!! loginByToken(loginTokenUserId, loginToken):', loginTokenUserId, loginToken)
-      return loginToken && loginByToken(loginTokenUserId, loginToken)
+      return loginTokenUserId && loginByToken(loginTokenUserId, loginToken)
       .then(finishLogin)
     },
     login: (email, password) =>

@@ -4,13 +4,17 @@ import { unlinkAccount } from './UserSettings.store'
 import { connect } from 'react-redux'
 import getMe from '../../store/selectors/getMe'
 import { bindActionCreators } from 'redux'
-import { resetToRoute } from 'util/navigation'
+import { resetToRoute, resetToMainRoute } from 'util/navigation'
 
 export function mapStateToProps (state, props) {
-  const cancel = () => props.navigation.goBack()
+  const resettingPassword = props.navigation.state.routeName === 'PasswordReset'
+  const cancel = () => resettingPassword
+    ? resetToMainRoute(props.navigation)
+    : props.navigation.goBack()
 
   return {
     currentUser: getMe(state, props),
+    resettingPassword,
     cancel
   }
 }

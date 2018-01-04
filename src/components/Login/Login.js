@@ -63,7 +63,6 @@ export default class Login extends React.Component {
 
   componentWillMount () {
     const { loginToken, loginByToken } = this.props
-    console.log('!!!! componentWillMount')
     if (loginToken) loginByToken()
   }
 

@@ -13,13 +13,16 @@ import styles from './UserSettings.styles'
 import { any, values, isNil } from 'lodash/fp'
 
 export default class UserSettings extends React.Component {
-  static navigationOptions = () => {
-    return {
+  static navigationOptions = ({ navigation }) => {
+    const resettingPassword = navigation.state.routeName === 'PasswordReset'
+    let options = {
       title: 'Edit Account Info',
       headerStyle: styles.header,
       headerTintColor: styles.headerTintColor,
       headerTitleStyle: styles.headerTitleStyle
     }
+    if (resettingPassword) options = {...options, headerLeft: (<Text />)}
+    return options
   }
 
   state = {
@@ -43,7 +46,10 @@ export default class UserSettings extends React.Component {
 
   setEditState () {
     if (!this.props.currentUser) return
+    const { resettingPassword } = this.props
     const { email, facebookUrl, twitterName } = this.props.currentUser
+
+    resettingPassword && this.editPassword()
     this.setState({
       edits: {
         email,
@@ -54,6 +60,9 @@ export default class UserSettings extends React.Component {
   }
 
   editPassword = () => {
+    // TODO: Currently not setting focus perhaps because it needs to happen
+    // after field is shown?
+    this.passwordInput.focus()
     this.setState({editingPassword: true})
   }
 
@@ -181,7 +190,7 @@ export default class UserSettings extends React.Component {
         {!editingPassword && <View style={styles.setting}>
           <Text style={styles.settingLabel}>PASSWORD</Text>
           <TouchableOpacity onPress={this.editPassword}>
-            <Text style={styles.linkText}>Change Password</Text>
+            <Text style={styles.linkText} ref={ref => { this.passwordInput = ref }}>Change Password</Text>
           </TouchableOpacity>
         </View>}
         {editingPassword && <SettingControl

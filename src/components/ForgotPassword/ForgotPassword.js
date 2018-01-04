@@ -13,7 +13,10 @@ import styles from './ForgotPassword.styles'
 
 export default class ForgotPassword extends React.Component {
   static navigationOptions = {
-    header: null
+    title: 'Reset Your Password',
+    headerStyle: styles.header,
+    headerTintColor: styles.headerTintColor,
+    headerTitleStyle: styles.headerTitleStyle
   }
 
   constructor (props) {
@@ -23,8 +26,9 @@ export default class ForgotPassword extends React.Component {
     }
   }
 
-  submit = () => {
-    this.props.resetPassword(this.state.email)
+  submit = async () => {
+    await this.props.resetPassword(this.state.email)
+    await this.props.navigation.navigate('Login')
   }
 
   validateEmail (email) {
@@ -48,10 +52,12 @@ export default class ForgotPassword extends React.Component {
     const { emailIsValid } = this.state
     // const message = 'If your email address matched an account in our system, we sent you an email. Please check your inbox.'
     return <ScrollView contentContainerStyle={styles.forgotPassword} style={styles.container}>
-      <Text style={styles.title}>Reset Your Password</Text>
-      <Text style={styles.labelText}>
-        Enter your email address and we'll send you an email that lets you reset your password.
-      </Text>
+      <View style={styles.paddedRow}>
+        <Text style={styles.messageText}>
+          Enter your email address and we'll send you an email
+          that lets you reset your password.
+        </Text>
+      </View>
       {error && <FormError />}
       {!error && <View style={styles.labelRow}>
         <Text style={styles.labelText}>Your email address</Text>
