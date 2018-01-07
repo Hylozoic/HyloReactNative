@@ -1,10 +1,10 @@
 import { caribbeanGreen, white, white80onCaribbeanGreen } from 'style/colors'
-import { StyleSheet } from 'react-native'
 
-export default StyleSheet.create({
+export default {
   container: {
     backgroundColor: caribbeanGreen,
-    padding: 20
+    padding: 20,
+    flex: 1
   },
   header: {
     color: white,
@@ -16,7 +16,13 @@ export default StyleSheet.create({
     color: white80onCaribbeanGreen
   },
   button: {
-    width: 30,
-    backgroundColor: 'white'
+    width: 134,
+    height: 40,
+    fontSize: 16,
+    backgroundColor: 'white',
+    color: caribbeanGreen,
+    position: 'absolute',
+    right: 20,
+    bottom: 20
   }
-})
+}

@@ -11,8 +11,6 @@ import styles from '../CreateCommunityFlow.styles'
 
 export default class CreateCommunityName extends React.Component {
   static navigationOptions = ({ navigation }) => {
-    console.log('navigation', navigation)
-
     return header(navigation, {
       title: 'Step 1/3',
       options: {
@@ -24,6 +22,7 @@ export default class CreateCommunityName extends React.Component {
   }
 
   render () {
+    console.log('styles.button', styles.button)
     return <View style={styles.container}>
       <Text style={styles.header}>Let's get started!</Text>
       <Text style={styles.description}>All good things start somewhere! Let's kick things off with a catchy name for your community.</Text>
