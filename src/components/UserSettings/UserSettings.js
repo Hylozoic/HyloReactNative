@@ -62,7 +62,7 @@ export default class UserSettings extends React.Component {
   editPassword = () => {
     // TODO: Currently not setting focus perhaps because it needs to happen
     // after field is shown?
-    this.passwordInput.focus()
+    // this.passwordInput.focus()
     this.setState({editingPassword: true})
   }
 

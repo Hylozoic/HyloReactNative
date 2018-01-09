@@ -23,7 +23,7 @@ export function loginByToken (userId, loginToken) {
   return {
     type: LOGIN_BY_TOKEN,
     payload: {
-      api: {method: 'post', path: '/noo/login/token', params: {userId, loginToken}}
+      api: {method: 'post', path: '/noo/login/token', params: {u: userId, t: loginToken}}
     }
   }
 }

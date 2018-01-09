@@ -61,9 +61,12 @@ export default class Login extends React.Component {
     }
   }
 
-  componentWillMount () {
+  async componentWillMount () {
     const { loginToken, loginByToken } = this.props
-    if (loginToken) loginByToken()
+    if (loginToken) {
+      const error = await loginByToken()
+      if (error) this.createErrorNotification(error)
+    }
   }
 
   componentDidMount () {
@@ -80,7 +83,7 @@ export default class Login extends React.Component {
 
   render () {
     const {
-      loginWithGoogle, error, loginWithFacebook, pending,
+      loginWithGoogle, formError, loginWithFacebook, pending,
       goToResetPassword, goToSignup, hasSignupLink
     } = this.props
     const { ssoError, emailIsValid, isConnected } = this.state
@@ -92,8 +95,8 @@ export default class Login extends React.Component {
       <Image style={styles.logo}
         source={require('../../assets/merkaba-green-on-white.png')} />
       <Text style={styles.title}>Log in to Hylo</Text>
-      {error && <FormError />}
-      {!error && <View style={styles.labelRow}>
+      {formError && <FormError />}
+      {!formError && <View style={styles.labelRow}>
         <Text style={styles.labelText}>Your email address</Text>
       </View>}
       <View style={styles.paddedRow}>

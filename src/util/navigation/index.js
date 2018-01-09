@@ -46,3 +46,9 @@ export function redirectAfterLogin ({ currentUser, navigation, action }) {
     resetToMainRoute(navigation)
   }
 }
+
+export function getPathFromURL (URL) {
+  let nextPath = get('pathname', url.parse(URL))
+  if (nextPath && nextPath[0] === '/') nextPath = nextPath.slice(1)
+  return nextPath
+}

@@ -14,13 +14,13 @@ import { redirectAfterLogin } from 'util/navigation'
 import { getNavigationAction } from '../DeepLinkHandler/DeepLinkHandler.store'
 
 export function mapStateToProps (state, props) {
-  const error = state.session.loginError
+  const formError = state.session.loginError
   const pending = getPending(state)
   const goToSignup = () => props.navigation.navigate('Signup')
   const goToResetPassword = () => props.navigation.navigate('ForgotPassword')
   return {
     loggedIn: state.session.loggedIn,
-    error,
+    formError,
     pending,
     defaultEmail: state.session.defaultLoginEmail,
     goToSignup,
@@ -51,16 +51,16 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     fetchCurrentUser
   } = dispatchProps
 
-  const finishLogin = action => {
-    if (action.error) return
+  const finishLogin = async (action) => {
+    // TODO: intercept any loginToken error here passing along the
+    if (action.error) return get('payload.response.body', action)
     registerOneSignal({registerDevice})
-
-    return fetchCurrentUser().then(({ error, payload }) =>
-      !error && redirectAfterLogin({
-        navigation: ownProps.navigation,
-        currentUser: payload.data.me,
-        action: stateProps.deepLinkAction
-      }))
+    const { error, payload } = await fetchCurrentUser()
+    return !error && redirectAfterLogin({
+      navigation: ownProps.navigation,
+      currentUser: payload.data.me,
+      action: stateProps.deepLinkAction
+    })
   }
 
   return {
