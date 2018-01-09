@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches last snapshot 1`] = `
+<View>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+  >
+    Choose an address for your community
+  </Text>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+  >
+    Your URL is the address that members will use to access your community online. The shorter the better!
+  </Text>
+  <TouchableOpacity
+    activeOpacity={0.2}
+  >
+    <Button
+      onPress={[Function]}
+      title="Continue"
+    />
+  </TouchableOpacity>
+</View>
+`;

@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches last snapshot 1`] = `
+<View>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+  >
+    Review
+  </Text>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+  >
+    Review and make changes below.
+  </Text>
+  <TouchableOpacity
+    activeOpacity={0.2}
+  >
+    <Button
+      onPress={[Function]}
+      title="Continue"
+    />
+  </TouchableOpacity>
+</View>
+`;
