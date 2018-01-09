@@ -343,7 +343,9 @@ Object {
       "fontSize": 17,
       "marginLeft": 15,
     },
-    undefined,
+    Object {
+      "alignSelf": "center",
+    },
   ],
 }
 `;

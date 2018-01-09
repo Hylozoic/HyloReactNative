@@ -35,8 +35,8 @@ export class HeaderButton extends React.Component {
     if (typeof onPress !== 'function') throw new Error('HeaderButton: onPress is not a function.')
     return <TouchableOpacity onPress={this.onPress} disabled={disabled}>
       {text === 'Close'
-                  ? <Icon name='Ex' style={headerButtonStyles.exIcon} />
-                  : <Text style={[headerButtonStyles.button, disabled && headerButtonStyles.disabled]}>{text}</Text>}
+                  ? <Icon name='Ex' style={styles.exIcon} />
+                  : <Text style={[styles.button, disabled && styles.disabled]}>{text}</Text>}
     </TouchableOpacity>
   }
 }
@@ -79,8 +79,7 @@ const headerClose = goBack => <HeaderButton onPress={() => goBack()} text='Close
 // This can all be placed in the connector and passed via mapDispatchToProps.
 // Of course, if you need even more customisation than this, don't use the
 // helper (or override parts of it using setParams in the component).
-export default function header ({ goBack, state }, { left, right, title, options, customStyles = {} } = {}) {
-  const styles = Object.assign(headerStyles, customStyles)
+export default function header ({ goBack, state }, { left, right, title, options } = {}) {
   const headerOptions = {
     ...state.params,
     headerStyle: styles.header,
@@ -98,7 +97,7 @@ export default function header ({ goBack, state }, { left, right, title, options
   return headerOptions
 }
 
-const headerButtonStyles = StyleSheet.create({
+const styles = StyleSheet.create({
   button: {
     fontFamily: 'Circular-Book',
     fontSize: 15,
@@ -110,10 +109,7 @@ const headerButtonStyles = StyleSheet.create({
   },
   center: {
     alignSelf: 'center'
-  }
-})
-
-const headerStyles = {
+  },
   header: {
     paddingHorizontal: 10,
     backgroundColor: 'white'
@@ -132,4 +128,4 @@ const headerStyles = {
   exIcon: {
     fontSize: 20
   }
-}
+})
