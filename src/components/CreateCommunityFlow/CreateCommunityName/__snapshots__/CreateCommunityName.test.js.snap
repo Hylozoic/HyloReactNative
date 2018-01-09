@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches last snapshot 1`] = `
+<KeyboardFriendlyView>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+  >
+    Lets get started!
+  </Text>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+  >
+    All good things start somewhere! Lets kick things off with a catchy name for your community.
+  </Text>
+  <View>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+    >
+      Whats the name of your community?
+    </Text>
+    <TextInput
+      allowFontScaling={true}
+      autoCapitalize="none"
+      autoCorrect={false}
+      onChangeText={[Function]}
+      returnKeyType="next"
+      underlineColorAndroid="rgba(0,0,0,0)"
+    />
+  </View>
+  <Button
+    disabled={false}
+    onPress={[Function]}
+    text="Continue"
+  />
+</KeyboardFriendlyView>
+`;
