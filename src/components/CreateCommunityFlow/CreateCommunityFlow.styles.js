@@ -1,4 +1,5 @@
 import { caribbeanGreen, white, white80onCaribbeanGreen } from 'style/colors'
+import { StyleSheet } from 'react-native'
 
 export default {
   container: {
@@ -23,6 +24,22 @@ export default {
     color: caribbeanGreen,
     position: 'absolute',
     right: 20,
-    bottom: 20
-  }
+    bottom: 220
+  },
+  textInputContainer: {
+    marginTop: 100
+  },
+  textInputLabel: {
+    color: white80onCaribbeanGreen,
+    fontWeight: 'bold'
+  },
+  textInput: {
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: white80onCaribbeanGreen,
+    minHeight: 40,
+    color: white,
+    fontSize: 18,
+    fontWeight: 'bold'
+  },
+  androidInvisibleUnderline: 'rgba(0,0,0,0)'
 }
