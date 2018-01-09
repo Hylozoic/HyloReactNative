@@ -13,6 +13,7 @@ import styles from './MessageCard.style'
 export default function MessageCard ({ message }) {
   const { createdAt, creator, suppressCreator, suppressDate, text, showTopic, showMember } = message
 
+  // TODO: move the linebreak replacement into the present function. See MBL-379
   const presentedText = present(
     sanitize(text).replace(/\n/g, '').replace('<p>&nbsp;</p>', ''))
 
