@@ -121,7 +121,7 @@ export default {
   },
   networkOpenWrapper: {
     borderLeftWidth: 1,
-    borderColor: 'white',
+    borderColor: rhino40,
     paddingLeft: 14
   },
   networkOpenIcon: {
