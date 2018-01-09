@@ -6,14 +6,13 @@ import {
 } from 'react-native'
 import Button from '../../Button'
 import KeyboardFriendlyView from '../../KeyboardFriendlyView'
-import header, { tintColor } from 'util/header'
+import header from 'util/header'
 import { HeaderBackButton } from 'react-navigation'
 import styles from '../CreateCommunityFlow.styles'
 import { caribbeanGreen, white, white60onCaribbeanGreen } from 'style/colors'
 
 export default class CreateCommunityName extends React.Component {
   static navigationOptions = ({ navigation }) => {
-    console.log('tintColor', tintColor)
     return header(navigation, {
       title: 'Step 1/3',
       options: {

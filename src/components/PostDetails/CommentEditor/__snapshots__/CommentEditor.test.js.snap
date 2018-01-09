@@ -19,9 +19,7 @@ Object {
       "fontSize": 17,
       "marginLeft": 15,
     },
-    Object {
-      "alignSelf": "center",
-    },
+    undefined,
   ],
 }
 `;
