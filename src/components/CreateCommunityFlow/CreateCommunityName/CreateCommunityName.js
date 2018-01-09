@@ -9,15 +9,28 @@ import KeyboardFriendlyView from '../../KeyboardFriendlyView'
 import header, { tintColor } from 'util/header'
 import { HeaderBackButton } from 'react-navigation'
 import styles from '../CreateCommunityFlow.styles'
+import { caribbeanGreen, white, white60onCaribbeanGreen } from 'style/colors'
 
 export default class CreateCommunityName extends React.Component {
   static navigationOptions = ({ navigation }) => {
+    console.log('tintColor', tintColor)
     return header(navigation, {
       title: 'Step 1/3',
       options: {
-        headerLeft: <HeaderBackButton onPress={() => navigation.goBack()} tintColor={tintColor} />,
+        headerLeft: <HeaderBackButton onPress={() => navigation.goBack()} tintColor={white60onCaribbeanGreen} />,
         headerBackTitle: null,
         headerBackgroundColor: '#fff'
+      },
+      customStyles: {
+        header: {
+          backgroundColor: caribbeanGreen,
+          marginTop: 20,
+          paddingTop: -20,
+          paddingHorizontal: 10
+        },
+        title: {
+          color: white
+        }
       }
     })
   }

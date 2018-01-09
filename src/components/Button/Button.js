@@ -15,9 +15,7 @@ export default function Button ({
     fontSize = 13,
     height = 30
   } = style
-  console.log('Button style.backgroundColor', style.backgroundColor)
-  console.log('Button style.color', style.color)
-  console.log('Buttons style', style)
+
   const containerStyle = {
     ...styles.container,
     ...omit([

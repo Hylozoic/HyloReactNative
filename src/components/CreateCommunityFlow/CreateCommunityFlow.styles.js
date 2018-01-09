@@ -24,7 +24,7 @@ export default {
     color: caribbeanGreen,
     position: 'absolute',
     right: 20,
-    bottom: 220
+    bottom: 20
   },
   textInputContainer: {
     marginTop: 100
