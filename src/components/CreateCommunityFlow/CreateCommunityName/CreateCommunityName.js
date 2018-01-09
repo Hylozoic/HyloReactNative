@@ -32,11 +32,22 @@ export default class CreateCommunityName extends React.Component {
     })
   }
 
+  constructor (props) {
+    super(props)
+    this.state = {
+      communityName: null
+    }
+  }
+
   setInput (key, value) {
     this.setState({
       ...this.state,
       [key]: value
     })
+  }
+
+  checkAndSubmit = () => {
+    this.props.saveCommunityName(this.state.communityName)
   }
 
   render () {
@@ -53,7 +64,7 @@ export default class CreateCommunityName extends React.Component {
           autoCorrect={false}
           underlineColorAndroid={styles.androidInvisibleUnderline} />
       </View>
-      <Button text='Continue' onPress={() => console.log('pressed')} style={styles.button} disabled={false} />
+      <Button text='Continue' onPress={this.checkAndSubmit} style={styles.button} disabled={false} />
     </KeyboardFriendlyView>
   }
 }

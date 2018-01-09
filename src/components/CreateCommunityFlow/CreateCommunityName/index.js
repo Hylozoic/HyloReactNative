@@ -1,2 +1,3 @@
 import component from './CreateCommunityName'
-export default component
+import connector from './CreateCommunityName.connector'
+export default connector(component)
