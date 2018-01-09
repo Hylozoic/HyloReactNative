@@ -1,4 +1,5 @@
 import { mapStateToProps, mapDispatchToProps, mergeProps } from './Thread.connector'
+import { ALL_COMMUNITIES_ID } from '../../store/models/Community'
 
 jest.mock('react-native-device-info')
 
@@ -21,7 +22,10 @@ describe('mapDispatchToProps', () => {
   it('creates actions', () => {
     const dispatch = jest.fn()
     const props = {
-      navigation: {state: {params: {id: 77}}}
+      navigation: {
+        state: {params: {id: 77}},
+        navigate: jest.fn()
+      }
     }
     const dispatchProps = mapDispatchToProps(dispatch, props)
     expect(dispatchProps).toMatchSnapshot()
@@ -31,6 +35,9 @@ describe('mapDispatchToProps', () => {
     dispatchProps.sendIsTyping()
     dispatchProps.updateThreadReadTime()
     expect(dispatch.mock.calls).toMatchSnapshot()
+    dispatchProps.showTopic(ALL_COMMUNITIES_ID)('topicName')
+    dispatchProps.showTopic(123)('topicName')
+    expect(props.navigation.navigate.mock.calls).toMatchSnapshot()
   })
 })
 
@@ -44,11 +51,19 @@ describe('mergeProps', () => {
         navigate
       }
     }
+    const communityId = 123
+    const networkId = 456
     const stateProps = {
       id: 12,
-      title: 'Jon and 3 others'
+      title: 'Jon and 3 others',
+      communityId,
+      networkId
     }
-    const mergedProps = mergeProps(stateProps, {}, ownProps)
+    const dispatchProps = {
+      showTopic: jest.fn()
+    }
+    const mergedProps = mergeProps(stateProps, dispatchProps, ownProps)
+    expect(dispatchProps.showTopic).toHaveBeenCalledWith(communityId, networkId)
     mergedProps.setNavParams()
     expect(setParams).toHaveBeenCalled()
     const { title, onPressTitle } = setParams.mock.calls[0][0]

@@ -6,6 +6,8 @@ Object {
   "fetchMessages": [Function],
   "reconnectFetchMessages": [Function],
   "sendIsTyping": [Function],
+  "showMember": [Function],
+  "showTopic": [Function],
   "updateThreadReadTime": [Function],
 }
 `;
@@ -149,13 +151,30 @@ Array [
 ]
 `;
 
+exports[`mapDispatchToProps creates actions 3`] = `
+Array [
+  Array [
+    "TopicSupportComingSoon",
+  ],
+  Array [
+    "Feed",
+    Object {
+      "communityId": 123,
+      "topicName": "topicName",
+    },
+  ],
+]
+`;
+
 exports[`mapStateToProps returns the right keys 1`] = `
 Object {
+  "communityId": undefined,
   "currentUserId": undefined,
   "hasMore": undefined,
   "id": undefined,
   "isConnected": undefined,
   "messages": Array [],
+  "networkId": undefined,
   "pending": undefined,
   "title": undefined,
 }
