@@ -11,7 +11,8 @@ export default {
     color: white,
     fontSize: 20,
     fontWeight: 'bold',
-    paddingBottom: 10
+    paddingBottom: 10,
+    marginTop: -20
   },
   description: {
     color: white80onCaribbeanGreen

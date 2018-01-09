@@ -23,8 +23,6 @@ export default class CreateCommunityName extends React.Component {
       customStyles: {
         header: {
           backgroundColor: caribbeanGreen,
-          marginTop: 20,
-          paddingTop: -20,
           paddingHorizontal: 10
         },
         title: {

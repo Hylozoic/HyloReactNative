@@ -80,7 +80,6 @@ const headerClose = goBack => <HeaderButton onPress={() => goBack()} text='Close
 // Of course, if you need even more customisation than this, don't use the
 // helper (or override parts of it using setParams in the component).
 export default function header ({ goBack, state }, { left, right, title, options, customStyles = {} } = {}) {
-  console.log('customStyles', customStyles)
   const styles = Object.assign(headerStyles, customStyles)
   const headerOptions = {
     ...state.params,
