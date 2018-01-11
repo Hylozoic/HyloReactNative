@@ -179,6 +179,7 @@ export function SignupLink ({goToSignup}) {
     </TouchableOpacity>
   </View>
 }
+
 export function FormError () {
   const rowStyle = styles.emailErrorRow
   const triangleStyle = styles.emailTriangle

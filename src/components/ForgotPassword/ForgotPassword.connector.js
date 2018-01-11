@@ -5,4 +5,11 @@ export const mapDispatchToProps = {
   resetPassword
 }
 
-export default connect(null, mapDispatchToProps)
+export function mergeProps (stateProps, dispatchProps, ownProps) {
+  const { navigation } = stateProps
+  return {
+    goToLogin: () => navigation.navigate('Login')
+  }
+}
+
+export default connect(null, mapDispatchToProps, mergeProps)

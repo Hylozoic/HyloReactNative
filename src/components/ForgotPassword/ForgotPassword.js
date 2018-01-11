@@ -28,7 +28,7 @@ export default class ForgotPassword extends React.Component {
 
   submit = async () => {
     await this.props.resetPassword(this.state.email)
-    await this.props.navigation.navigate('Login')
+    await this.props.goToLogin()
   }
 
   validateEmail (email) {
