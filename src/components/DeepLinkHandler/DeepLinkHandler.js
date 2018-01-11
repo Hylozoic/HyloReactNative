@@ -1,6 +1,5 @@
 import React from 'react'
 import { Linking } from 'react-native'
-import { get } from 'lodash/fp'
 import { parse } from 'url'
 import {
   isInvitationLink, redirectAfterLogin, resetToRoute, resetToMainRoute
@@ -70,20 +69,6 @@ export default class DeepLinkHandler extends React.Component {
       this.redirectNow(nextAction)
     }
   }
-
-  // if (currentUser) {
-  //   // redirect immediately if you're already logged in,
-  //   // have a loginToken or if this is an invitationLink
-  //   //
-  //   // TODO: CHECK -- Might need to storeNavigationAction even if currentUser
-  //   // in the case of invitationLinks
-  //   // if (isInvitationLink(path)) storeNavigationAction(nextAction)
-  //   //
-  //   // you should already be at the Login screen now
-  //   this.redirectNow(action)
-  // } else if (isInvitationLink(path) || action.params.loginToken) {
-  //   storeNavigationAction(nextAction)
-  // }
 
   render () {
     return null
