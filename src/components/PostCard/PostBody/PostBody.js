@@ -5,6 +5,7 @@ import { decode } from 'ent'
 import { present, sanitize } from 'hylo-utils/text'
 import urlHandler from '../../../util/urlHandler'
 import LinkPreview from '../LinkPreview'
+import richTextStyles from '../../../style/richTextStyles'
 
 const MAX_DETAILS_LENGTH = 144
 
@@ -52,11 +53,5 @@ const styles = StyleSheet.create({
     fontSize: 14,
     lineHeight: 20,
     fontFamily: 'Circular-Book'
-  }
-})
-
-const richTextStyles = StyleSheet.create({
-  a: {
-    color: '#0DC39F'
   }
 })
