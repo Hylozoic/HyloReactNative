@@ -1,6 +1,12 @@
 import { caribbeanGreen, white, white80onCaribbeanGreen } from 'style/colors'
 import { StyleSheet } from 'react-native'
 
+const mixins = {
+  underline: {
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: white80onCaribbeanGreen
+  }
+}
 export default {
   container: {
     backgroundColor: caribbeanGreen,
@@ -28,15 +34,18 @@ export default {
     bottom: 20
   },
   textInputContainer: {
-    marginTop: 100
+    marginTop: 100,
+    ...mixins.underline
+  },
+  secondTextInputContainer: {
+    marginTop: 10,
+    ...mixins.underline
   },
   textInputLabel: {
     color: white80onCaribbeanGreen,
     fontWeight: 'bold'
   },
   textInput: {
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: white80onCaribbeanGreen,
     minHeight: 40,
     color: white,
     fontSize: 18,

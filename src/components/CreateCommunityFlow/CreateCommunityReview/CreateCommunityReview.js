@@ -2,10 +2,10 @@ import React from 'react'
 import {
   Text,
   View,
-  TouchableOpacity,
-  Button
+  TextInput
 } from 'react-native'
-
+import Button from '../../Button'
+import KeyboardFriendlyView from '../../KeyboardFriendlyView'
 import header from 'util/header'
 import { HeaderBackButton } from 'react-navigation'
 import styles from '../CreateCommunityFlow.styles'
@@ -33,12 +33,30 @@ export default class CreateCommunityReview extends React.Component {
   }
 
   render () {
-    return <View style={styles.container}>
-      <Text>Review</Text>
-      <Text>Review and make changes below.</Text>
-      <TouchableOpacity>
-        <Button title='Continue' onPress={() => console.log('click')} />
-      </TouchableOpacity>
-    </View>
+    return <KeyboardFriendlyView style={styles.container}>
+      <Text style={styles.header}>Everything look good?</Text>
+      <Text style={styles.description}>You can always come back and change your details at any time</Text>
+      <View style={styles.textInputContainer}>
+        <Text style={styles.textInputLabel}>Whats the name of your community?</Text>
+        <TextInput
+          style={styles.textInput}
+          onChangeText={communityName => this.setInput('communityName', communityName)}
+          returnKeyType='next'
+          autoCapitalize='none'
+          autoCorrect={false}
+          underlineColorAndroid={styles.androidInvisibleUnderline} />
+      </View>
+      <View style={styles.secondTextInputContainer}>
+        <Text style={styles.textInputLabel}>Whats the url of your community?</Text>
+        <TextInput
+          style={styles.textInput}
+          onChangeText={communityName => this.setInput('communityName', communityName)}
+          returnKeyType='next'
+          autoCapitalize='none'
+          autoCorrect={false}
+          underlineColorAndroid={styles.androidInvisibleUnderline} />
+      </View>
+      <Button text='Continue' onPress={this.checkAndSubmit} style={styles.button} disabled={false} />
+    </KeyboardFriendlyView>
   }
 }
