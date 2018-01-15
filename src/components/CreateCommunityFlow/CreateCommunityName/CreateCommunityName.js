@@ -54,7 +54,13 @@ export default class CreateCommunityName extends React.Component {
         ...this.state,
         error: 'Please enter a community name'
       })
+      return
     }
+
+    this.setState({
+      ...this.state,
+      error: null
+    })
   }
 
   render () {
