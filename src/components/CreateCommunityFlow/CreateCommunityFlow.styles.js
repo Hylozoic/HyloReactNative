@@ -51,5 +51,23 @@ export default {
     fontSize: 18,
     fontWeight: 'bold'
   },
+  errorMessage: {
+    color: 'red',
+    textAlign: 'center'
+  },
+  errorRow: {
+    alignSelf: 'stretch',
+    marginLeft: 5,
+    marginRight: 5,
+    backgroundColor: white,
+    padding: 10,
+    marginBottom: 3,
+    marginTop: 8,
+    borderRadius: 30
+  },
+  triangle: {
+    marginLeft: 30,
+    marginTop: -45
+  },
   androidInvisibleUnderline: 'rgba(0,0,0,0)'
 }
