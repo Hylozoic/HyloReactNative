@@ -1,28 +1,59 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`matches last snapshot 1`] = `
-<View>
+<KeyboardFriendlyView>
   <Text
     accessible={true}
     allowFontScaling={true}
     ellipsizeMode="tail"
   >
-    Review
+    Everything look good?
   </Text>
   <Text
     accessible={true}
     allowFontScaling={true}
     ellipsizeMode="tail"
   >
-    Review and make changes below.
+    You can always come back and change your details at any time
   </Text>
-  <TouchableOpacity
-    activeOpacity={0.2}
-  >
-    <Button
-      onPress={[Function]}
-      title="Continue"
+  <View>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+    >
+      Whats the name of your community?
+    </Text>
+    <TextInput
+      allowFontScaling={true}
+      autoCapitalize="none"
+      autoCorrect={false}
+      onChangeText={[Function]}
+      returnKeyType="next"
+      underlineColorAndroid="rgba(0,0,0,0)"
     />
-  </TouchableOpacity>
-</View>
+  </View>
+  <View>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+    >
+      Whats the url of your community?
+    </Text>
+    <TextInput
+      allowFontScaling={true}
+      autoCapitalize="none"
+      autoCorrect={false}
+      onChangeText={[Function]}
+      returnKeyType="next"
+      underlineColorAndroid="rgba(0,0,0,0)"
+    />
+  </View>
+  <Button
+    disabled={false}
+    onPress={undefined}
+    text="Continue"
+  />
+</KeyboardFriendlyView>
 `;
