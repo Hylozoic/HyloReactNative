@@ -18,7 +18,7 @@ export default class CreateCommunityName extends React.Component {
       options: {
         headerLeft: <HeaderBackButton onPress={() => navigation.goBack()} tintColor={white60onCaribbeanGreen} />,
         headerBackTitle: null,
-        headerBackgroundColor: '#fff'
+        headerBackgroundColor: white
       },
       customStyles: {
         header: {
