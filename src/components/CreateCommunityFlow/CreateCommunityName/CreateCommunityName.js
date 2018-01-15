@@ -61,6 +61,7 @@ export default class CreateCommunityName extends React.Component {
       ...this.state,
       error: null
     })
+    this.props.saveCommunityName(communityName)
   }
 
   render () {

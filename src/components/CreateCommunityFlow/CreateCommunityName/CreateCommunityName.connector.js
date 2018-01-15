@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { saveCommunityName } from './CreateCommunityName.store'
+import { saveCommunityName } from '../CreateCommunityFlow.store'
 
 export const mapDispatchToProps = {
   saveCommunityName
