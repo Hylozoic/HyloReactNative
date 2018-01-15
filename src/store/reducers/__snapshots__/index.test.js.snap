@@ -3,6 +3,7 @@
 exports[`sets up the expected reducers 1`] = `
 Object {
   "CommentEditor": Object {},
+  "CreateCommunityFlow": Object {},
   "DeepLinkHandler": Object {},
   "FeedList": Object {
     "filter": null,
