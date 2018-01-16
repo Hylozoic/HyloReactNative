@@ -32,6 +32,17 @@ export default class CreateCommunityUrl extends React.Component {
     })
   }
 
+  setInput (key, value) {
+    this.setState({
+      ...this.state,
+      [key]: value
+    })
+  }
+
+  checkAndSubmit = () => {
+    this.props.fetchCommunityExists(this.state.communityUrl)
+  }
+
   render () {
     return <KeyboardFriendlyView style={styles.container}>
       <Text style={styles.header}>Choose an address for your community</Text>
@@ -40,7 +51,7 @@ export default class CreateCommunityUrl extends React.Component {
         <Text style={styles.textInputLabel}>Whats the name of your community?</Text>
         <TextInput
           style={styles.textInput}
-          onChangeText={communityName => this.setInput('communityName', communityName)}
+          onChangeText={communityUrl => this.setInput('communityUrl', communityUrl)}
           returnKeyType='next'
           autoCapitalize='none'
           autoCorrect={false}
