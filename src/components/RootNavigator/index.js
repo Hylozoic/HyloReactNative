@@ -22,6 +22,7 @@ import NewMessage from '../NewMessage'
 import Thread from '../Thread'
 import ThreadList from '../ThreadList'
 import ThreadParticipants from '../ThreadParticipants'
+// import Topics from '../Topics'
 import TopicSupportComingSoon from '../TopicSupportComingSoon'
 import MemberDetails from '../MemberProfile/MemberDetails'
 import MemberSkillEditor from '../MemberProfile/MemberSkillEditor'
@@ -43,8 +44,8 @@ import extendRouter from './extendRouter'
 // If you change or add tabs you have to edit trackCurrentTab.js
 const tabs = {
   Home: {screen: Home, path: ''},
-  Members: {screen: Members, path: 'people'}
-  // Topics: {screen: Topics, path: 'topics'} // TODO
+  Members: {screen: Members, path: 'people'},
+  Topics: {screen: Topics, path: 'topics'}
 }
 
 // Screens that can be shown in any tab (the same tab icon stays highlighted)
