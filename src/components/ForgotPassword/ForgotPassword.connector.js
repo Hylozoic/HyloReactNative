@@ -6,8 +6,11 @@ export const mapDispatchToProps = {
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
-  const { navigation } = stateProps
+  const { navigation } = ownProps
   return {
+    ...stateProps,
+    ...dispatchProps,
+    ...ownProps,
     goToLogin: () => navigation.navigate('Login')
   }
 }
