@@ -31,6 +31,7 @@ exports[`matches last snapshot 1`] = `
       onChangeText={[Function]}
       returnKeyType="next"
       underlineColorAndroid="rgba(0,0,0,0)"
+      value={undefined}
     />
   </View>
   <Button

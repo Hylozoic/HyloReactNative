@@ -32,6 +32,14 @@ export default class CreateCommunityReview extends React.Component {
     })
   }
 
+  constructor (props) {
+    super(props)
+    this.state = {
+      communityName: this.props.communityName,
+      communityUrl: this.props.communityUrl
+    }
+  }
+
   render () {
     return <KeyboardFriendlyView style={styles.container}>
       <Text style={styles.header}>Everything look good?</Text>
@@ -43,8 +51,11 @@ export default class CreateCommunityReview extends React.Component {
           onChangeText={communityName => this.setInput('communityName', communityName)}
           returnKeyType='next'
           autoCapitalize='none'
+          value={this.state.communityName}
           autoCorrect={false}
-          underlineColorAndroid={styles.androidInvisibleUnderline} />
+          underlineColorAndroid={styles.androidInvisibleUnderline}
+          disabled
+          />
       </View>
       <View style={styles.secondTextInputContainer}>
         <Text style={styles.textInputLabel}>Whats the url of your community?</Text>
@@ -53,8 +64,11 @@ export default class CreateCommunityReview extends React.Component {
           onChangeText={communityName => this.setInput('communityName', communityName)}
           returnKeyType='next'
           autoCapitalize='none'
+          value={this.state.communityUrl}
           autoCorrect={false}
-          underlineColorAndroid={styles.androidInvisibleUnderline} />
+          underlineColorAndroid={styles.androidInvisibleUnderline}
+          disabled
+          />
       </View>
       <Button text='Continue' onPress={this.checkAndSubmit} style={styles.button} disabled={false} />
     </KeyboardFriendlyView>

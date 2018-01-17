@@ -1,6 +1,13 @@
 import { connect } from 'react-redux'
 import { saveCommunityName } from '../CreateCommunityFlow.store'
 
+export function mapStateToProps (state, props) {
+  const communityName = state.CreateCommunityFlow.communityName
+  return {
+    communityName
+  }
+}
+
 export const mapDispatchToProps = {
   saveCommunityName
 }
@@ -17,4 +24,4 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
   }
 }
 
-export default connect(null, mapDispatchToProps, mergeProps)
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps)

@@ -37,7 +37,7 @@ export default class CreateCommunityUrl extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      communityUrl: null
+      communityUrl: this.props.communityUrl
     }
   }
 
@@ -97,6 +97,7 @@ export default class CreateCommunityUrl extends React.Component {
           onChangeText={communityUrl => this.setInput('communityUrl', communityUrl)}
           returnKeyType='next'
           autoCapitalize='none'
+          value={this.props.communityUrl}
           autoCorrect={false}
           underlineColorAndroid={styles.androidInvisibleUnderline} />
       </View>

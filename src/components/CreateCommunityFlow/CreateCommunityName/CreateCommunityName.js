@@ -36,7 +36,7 @@ export default class CreateCommunityName extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      communityName: null
+      communityName: this.props.communityName
     }
   }
 
@@ -75,7 +75,7 @@ export default class CreateCommunityName extends React.Component {
   }
 
   render () {
-    const { error } = this.state
+    const { error, communityName } = this.state
     return <KeyboardFriendlyView style={styles.container}>
       <Text style={styles.header}>Lets get started!</Text>
       <Text style={styles.description}>All good things start somewhere! Lets kick things off with a catchy name for your community.</Text>
@@ -86,6 +86,7 @@ export default class CreateCommunityName extends React.Component {
           onChangeText={communityName => this.setInput('communityName', communityName)}
           returnKeyType='next'
           autoCapitalize='none'
+          value={communityName}
           autoCorrect={false}
           underlineColorAndroid={styles.androidInvisibleUnderline} />
       </View>

@@ -28,9 +28,11 @@ exports[`matches last snapshot 1`] = `
       allowFontScaling={true}
       autoCapitalize="none"
       autoCorrect={false}
+      disabled={true}
       onChangeText={[Function]}
       returnKeyType="next"
       underlineColorAndroid="rgba(0,0,0,0)"
+      value={undefined}
     />
   </View>
   <View>
@@ -45,9 +47,11 @@ exports[`matches last snapshot 1`] = `
       allowFontScaling={true}
       autoCapitalize="none"
       autoCorrect={false}
+      disabled={true}
       onChangeText={[Function]}
       returnKeyType="next"
       underlineColorAndroid="rgba(0,0,0,0)"
+      value={undefined}
     />
   </View>
   <Button

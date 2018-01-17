@@ -1,2 +1,3 @@
 import component from './CreateCommunityReview'
-export default component
+import connector from './CreateCommunityReview.connector'
+export default connector(component)
