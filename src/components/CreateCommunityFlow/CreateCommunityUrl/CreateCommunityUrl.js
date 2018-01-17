@@ -74,6 +74,14 @@ export default class CreateCommunityUrl extends React.Component {
       return
     }
     this.props.fetchCommunityExists(this.state.communityUrl)
+    if (this.props.urlExists === false) {
+      this.props.goToCreateCommunityReview()
+    } else {
+      this.setState({
+        ...this.state,
+        error: 'This url already exists. Please choose another one.'
+      })
+    }
   }
 
   render () {
