@@ -69,5 +69,24 @@ export default {
     marginLeft: 30,
     marginTop: -45
   },
+  textInputWithButton: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center'
+  },
+  reviewTextInput: {
+    minHeight: 40,
+    color: white,
+    fontSize: 18,
+    fontWeight: 'bold',
+    width: 300
+  },
+  reviewButton: {
+    width: 40,
+    height: 30,
+    fontSize: 16,
+    backgroundColor: 'white',
+    color: caribbeanGreen
+  },
   androidInvisibleUnderline: 'rgba(0,0,0,0)'
 }
