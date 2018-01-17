@@ -24,16 +24,23 @@ exports[`matches last snapshot 1`] = `
     >
       Whats the name of your community?
     </Text>
-    <TextInput
-      allowFontScaling={true}
-      autoCapitalize="none"
-      autoCorrect={false}
-      disabled={true}
-      onChangeText={[Function]}
-      returnKeyType="next"
-      underlineColorAndroid="rgba(0,0,0,0)"
-      value={undefined}
-    />
+    <View>
+      <TextInput
+        allowFontScaling={true}
+        autoCapitalize="none"
+        autoCorrect={false}
+        disabled={true}
+        onChangeText={[Function]}
+        returnKeyType="next"
+        underlineColorAndroid="rgba(0,0,0,0)"
+        value={undefined}
+      />
+      <Button
+        disabled={false}
+        onPress={undefined}
+        text="Edit"
+      />
+    </View>
   </View>
   <View>
     <Text
@@ -43,16 +50,23 @@ exports[`matches last snapshot 1`] = `
     >
       Whats the url of your community?
     </Text>
-    <TextInput
-      allowFontScaling={true}
-      autoCapitalize="none"
-      autoCorrect={false}
-      disabled={true}
-      onChangeText={[Function]}
-      returnKeyType="next"
-      underlineColorAndroid="rgba(0,0,0,0)"
-      value={undefined}
-    />
+    <View>
+      <TextInput
+        allowFontScaling={true}
+        autoCapitalize="none"
+        autoCorrect={false}
+        disabled={true}
+        onChangeText={[Function]}
+        returnKeyType="next"
+        underlineColorAndroid="rgba(0,0,0,0)"
+        value={undefined}
+      />
+      <Button
+        disabled={false}
+        onPress={undefined}
+        text="Edit"
+      />
+    </View>
   </View>
   <Button
     disabled={false}
