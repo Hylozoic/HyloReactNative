@@ -4,13 +4,14 @@ import {
   View,
   TextInput
 } from 'react-native'
+import { HeaderBackButton } from 'react-navigation'
+import ErrorBubble from '../../ErrorBubble'
 import KeyboardFriendlyView from '../../KeyboardFriendlyView'
 import header from 'util/header'
-import { HeaderBackButton } from 'react-navigation'
+import { slugValidatorRegex, invalidSlugMessage } from '../util'
 import Button from '../../Button'
 import styles from '../CreateCommunityFlow.styles'
 import { caribbeanGreen, white, white60onCaribbeanGreen } from 'style/colors'
-import ErrorBubble from '../../ErrorBubble'
 
 export default class CreateCommunityUrl extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -47,8 +48,17 @@ export default class CreateCommunityUrl extends React.Component {
     })
   }
 
+  clearErrors = () => {
+    this.setState({
+      ...this.state,
+      error: null
+    })
+  }
+
   checkAndSubmit = () => {
     const { communityUrl } = this.state
+
+    this.clearErrors()
     if (!communityUrl || communityUrl.length === 0) {
       this.setState({
         ...this.state,
@@ -56,7 +66,13 @@ export default class CreateCommunityUrl extends React.Component {
       })
       return
     }
-
+    if (!slugValidatorRegex.test(communityUrl)) {
+      this.setState({
+        ...this.state,
+        error: invalidSlugMessage
+      })
+      return
+    }
     this.props.fetchCommunityExists(this.state.communityUrl)
   }
 
@@ -75,7 +91,7 @@ export default class CreateCommunityUrl extends React.Component {
           autoCorrect={false}
           underlineColorAndroid={styles.androidInvisibleUnderline} />
       </View>
-      {error && <ErrorBubble styles={null} text={'Please enter a community name'} />}
+      {error && <ErrorBubble styles={null} text={error} />}
       <Button text='Continue' onPress={this.checkAndSubmit} style={styles.button} disabled={false} />
     </KeyboardFriendlyView>
   }

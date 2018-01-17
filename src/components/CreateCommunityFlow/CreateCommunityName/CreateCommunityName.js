@@ -47,8 +47,17 @@ export default class CreateCommunityName extends React.Component {
     })
   }
 
+  clearErrors = () => {
+    this.setState({
+      ...this.state,
+      error: null
+    })
+  }
+
   checkAndSubmit = () => {
     const { communityName } = this.state
+
+    this.clearErrors()
     if (!communityName || communityName.length === 0) {
       this.setState({
         ...this.state,
