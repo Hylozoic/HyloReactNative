@@ -94,6 +94,7 @@ export default class CreateCommunityUrl extends React.Component {
 
   render () {
     const { error } = this.state
+    const { fetchUrlPending } = this.props
     return <KeyboardFriendlyView style={styles.container}>
       <Text style={styles.header}>Choose an address for your community</Text>
       <Text style={styles.description}>Your URL is the address that members will use to access your community online. The shorter the better!</Text>
@@ -109,7 +110,7 @@ export default class CreateCommunityUrl extends React.Component {
           underlineColorAndroid={styles.androidInvisibleUnderline} />
       </View>
       {error && <ErrorBubble styles={null} text={error} />}
-      <Button text='Continue' onPress={this.checkAndSubmit} style={styles.button} disabled={false} />
+      <Button text='Continue' onPress={this.checkAndSubmit} style={fetchUrlPending ? styles.pendingButton : styles.button} disabled={!!this.props.fetchUrlPending} />
     </KeyboardFriendlyView>
   }
 }

@@ -33,6 +33,15 @@ export default {
     right: 20,
     bottom: 20
   },
+  pendingButton: {
+    width: 134,
+    height: 40,
+    fontSize: 16,
+    color: white,
+    position: 'absolute',
+    right: 20,
+    bottom: 20
+  },
   textInputContainer: {
     marginTop: 100,
     ...mixins.underline
