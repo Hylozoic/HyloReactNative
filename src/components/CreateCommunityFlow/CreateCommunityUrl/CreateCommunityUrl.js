@@ -97,7 +97,7 @@ export default class CreateCommunityUrl extends React.Component {
           onChangeText={communityUrl => this.setInput('communityUrl', communityUrl)}
           returnKeyType='next'
           autoCapitalize='none'
-          value={this.props.communityUrl}
+          value={this.state.communityUrl}
           autoCorrect={false}
           underlineColorAndroid={styles.androidInvisibleUnderline} />
       </View>
