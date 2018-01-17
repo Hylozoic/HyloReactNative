@@ -48,7 +48,8 @@ export default {
     color: rhino50,
     borderWidth: 1,
     borderColor: ghost,
-    lineHeight: 24,
+    lineHeight: 18,
+    textAlignVertical: 'top',
     textAlign: 'center'
   },
   communitiesContainer: {
