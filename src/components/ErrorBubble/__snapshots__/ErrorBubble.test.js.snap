@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches last snapshot 1`] = `
+<View>
+  <View>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+    >
+      Some error message
+    </Text>
+  </View>
+  <Triangle
+    color="white"
+    direction="up"
+    height={5}
+    width={10}
+  />
+</View>
+`;

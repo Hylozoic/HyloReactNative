@@ -4,7 +4,6 @@ import {
   View,
   TextInput
 } from 'react-native'
-import Triangle from 'react-native-triangle'
 import { HeaderBackButton } from 'react-navigation'
 import Button from '../../Button'
 import KeyboardFriendlyView from '../../KeyboardFriendlyView'
