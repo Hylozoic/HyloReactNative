@@ -14,7 +14,7 @@ import { caribbeanGreen, white, white60onCaribbeanGreen } from 'style/colors'
 export default class CreateCommunityUrl extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return header(navigation, {
-      title: 'Step 1/3',
+      title: 'Step 2/3',
       options: {
         headerLeft: <HeaderBackButton onPress={() => navigation.goBack()} tintColor={white60onCaribbeanGreen} />,
         headerBackTitle: null,
