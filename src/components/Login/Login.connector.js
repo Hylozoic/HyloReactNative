@@ -52,8 +52,10 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
   } = dispatchProps
 
   const finishLogin = async (action) => {
-    // TODO: intercept any loginToken error here passing along the
-    if (action.error) return get('payload.response.body', action)
+    if (action.error) {
+      const errorMessage = get('payload.response.body', action)
+      return errorMessage ? { errorMessage } : null
+    }
     registerOneSignal({registerDevice})
     const { error, payload } = await fetchCurrentUser()
     return !error && redirectAfterLogin({

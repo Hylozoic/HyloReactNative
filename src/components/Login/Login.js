@@ -64,8 +64,9 @@ export default class Login extends React.Component {
   async componentWillMount () {
     const { loginToken, loginByToken } = this.props
     if (loginToken) {
-      const error = await loginByToken()
-      if (error) this.createErrorNotification(error)
+      const loginByTokenResponse = await loginByToken()
+      const errorMessage = get('errorMessage', loginByTokenResponse)
+      if (errorMessage) this.createErrorNotification(errorMessage)
     }
   }
 
