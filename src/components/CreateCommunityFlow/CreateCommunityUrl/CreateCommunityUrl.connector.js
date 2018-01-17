@@ -1,5 +1,6 @@
 import { connect } from 'react-redux'
 import { fetchCommunityExists } from '../actions'
+import { saveCommunityUrl } from '../CreateCommunityFlow.store'
 
 export function mapStateToProps (state, props) {
   const urlExists = state.CreateCommunityFlow.urlExists
@@ -8,7 +9,8 @@ export function mapStateToProps (state, props) {
   }
 }
 export const mapDispatchToProps = {
-  fetchCommunityExists
+  fetchCommunityExists,
+  saveCommunityUrl
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {

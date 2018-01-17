@@ -73,8 +73,9 @@ export default class CreateCommunityUrl extends React.Component {
       })
       return
     }
-    this.props.fetchCommunityExists(this.state.communityUrl)
+    this.props.fetchCommunityExists(communityUrl)
     if (this.props.urlExists === false) {
+      this.props.saveCommunityUrl(communityUrl)
       this.props.goToCreateCommunityReview()
     } else {
       this.setState({
