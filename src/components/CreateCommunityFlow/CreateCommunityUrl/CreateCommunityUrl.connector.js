@@ -1,13 +1,15 @@
 import { connect } from 'react-redux'
 import { fetchCommunityExists } from '../actions'
-import { saveCommunityUrl } from '../CreateCommunityFlow.store'
+import { saveCommunityUrl, FETCH_URL_EXISTS } from '../CreateCommunityFlow.store'
 
 export function mapStateToProps (state, props) {
   const urlExists = state.CreateCommunityFlow.urlExists
   const communityUrl = state.CreateCommunityFlow.communityUrl
+  const fetchUrlPending = state.pending[FETCH_URL_EXISTS]
   return {
     urlExists,
-    communityUrl
+    communityUrl,
+    fetchUrlPending
   }
 }
 

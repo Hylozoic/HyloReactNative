@@ -74,15 +74,22 @@ export default class CreateCommunityUrl extends React.Component {
       return
     }
     this.props.fetchCommunityExists(communityUrl)
-    if (this.props.urlExists === false) {
-      this.props.saveCommunityUrl(communityUrl)
-      this.props.goToCreateCommunityReview()
-    } else {
-      this.setState({
-        ...this.state,
-        error: 'This url already exists. Please choose another one.'
-      })
-    }
+    .then(({ error }) => {
+      if (error) {
+        this.setState({
+          error: 'There was an error, please try again.'
+        })
+      }
+      if (this.props.urlExists === false) {
+        this.props.saveCommunityUrl(communityUrl)
+        this.props.goToCreateCommunityReview()
+      } else {
+        this.setState({
+          ...this.state,
+          error: 'This url already exists. Please choose another one.'
+        })
+      }
+    })
   }
 
   render () {
