@@ -8,6 +8,7 @@ import Triangle from 'react-native-triangle'
 import { HeaderBackButton } from 'react-navigation'
 import Button from '../../Button'
 import KeyboardFriendlyView from '../../KeyboardFriendlyView'
+import ErrorBubble from '../../ErrorBubble'
 import header from 'util/header'
 import styles from '../CreateCommunityFlow.styles'
 import { caribbeanGreen, white, white60onCaribbeanGreen } from 'style/colors'
@@ -80,25 +81,9 @@ export default class CreateCommunityName extends React.Component {
           autoCorrect={false}
           underlineColorAndroid={styles.androidInvisibleUnderline} />
       </View>
-      {error && <FormError />}
+      {error && <ErrorBubble styles={null} text={'Please enter a community name'} />}
 
       <Button text='Continue' onPress={this.checkAndSubmit} style={styles.button} disabled={false} />
     </KeyboardFriendlyView>
   }
-}
-
-export function FormError () {
-  const rowStyle = styles.errorRow
-  const message = 'Username or Password was incorrect'
-  return <View style={styles.errorView}>
-    <View style={rowStyle}>
-      <Text style={styles.errorMessage}>{message}</Text>
-    </View>
-    <Triangle
-      style={styles.triangle}
-      width={10}
-      height={5}
-      color='white'
-      direction='up' />
-  </View>
 }
