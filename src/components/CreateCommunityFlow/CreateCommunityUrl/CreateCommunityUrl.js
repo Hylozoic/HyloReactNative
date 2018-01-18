@@ -7,7 +7,6 @@ import {
 import { HeaderBackButton } from 'react-navigation'
 import ErrorBubble from '../../ErrorBubble'
 import KeyboardFriendlyView from '../../KeyboardFriendlyView'
-import header from 'util/header'
 import { slugValidatorRegex, invalidSlugMessage } from '../util'
 import Button from '../../Button'
 import styles from '../CreateCommunityFlow.styles'
@@ -15,23 +14,17 @@ import { caribbeanGreen, white, white60onCaribbeanGreen } from 'style/colors'
 
 export default class CreateCommunityUrl extends React.Component {
   static navigationOptions = ({ navigation }) => {
-    return header(navigation, {
-      title: 'Step 2/3',
-      options: {
-        headerLeft: <HeaderBackButton onPress={() => navigation.goBack()} tintColor={white60onCaribbeanGreen} />,
-        headerBackTitle: null,
-        headerBackgroundColor: white
+    return {
+      title: <Text style={styles.headerTitle}>STEP 2/3</Text>,
+      color: white,
+      fontSize: 10,
+      headerStyle: {
+        backgroundColor: caribbeanGreen,
+        borderBottomWidth: 0
       },
-      customStyles: {
-        header: {
-          backgroundColor: caribbeanGreen,
-          paddingHorizontal: 10
-        },
-        title: {
-          color: white
-        }
-      }
-    })
+      headerBackgroundColor: caribbeanGreen,
+      headerLeft: <HeaderBackButton onPress={() => navigation.goBack()} tintColor={white60onCaribbeanGreen} />
+    }
   }
 
   constructor (props) {

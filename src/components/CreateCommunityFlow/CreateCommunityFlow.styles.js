@@ -95,5 +95,10 @@ export default {
     fontSize: 16,
     marginTop: 10
   },
+  headerTitle: {
+    color: white,
+    fontSize: 12,
+    fontWeight: 'bold'
+  },
   androidInvisibleUnderline: 'rgba(0,0,0,0)'
 }

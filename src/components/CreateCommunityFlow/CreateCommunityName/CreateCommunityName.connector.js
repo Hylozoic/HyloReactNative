@@ -20,7 +20,8 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     ...ownProps,
     goToCreateCommunityUrl: () => {
       navigation.navigate('CreateCommunityUrl')
-    }
+    },
+    navigation: navigation
   }
 }
 
