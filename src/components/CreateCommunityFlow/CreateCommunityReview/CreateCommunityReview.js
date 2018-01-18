@@ -5,9 +5,10 @@ import {
   TextInput,
   TouchableOpacity
 } from 'react-native'
+import { HeaderBackButton } from 'react-navigation'
 import Button from '../../Button'
 import KeyboardFriendlyView from '../../KeyboardFriendlyView'
-import { HeaderBackButton } from 'react-navigation'
+import ErrorBubble from '../../ErrorBubble'
 import styles from '../CreateCommunityFlow.styles'
 import { caribbeanGreen, white, white60onCaribbeanGreen } from 'style/colors'
 
@@ -49,6 +50,7 @@ export default class CreateCommunityReview extends React.Component {
   }
 
   render () {
+    const { error } = this.state
     return <KeyboardFriendlyView style={styles.container}>
       <Text style={styles.header}>Everything look good?</Text>
       <Text style={styles.description}>You can always come back and change your details at any time</Text>
@@ -87,6 +89,7 @@ export default class CreateCommunityReview extends React.Component {
             <Text style={styles.editText}>Edit</Text>
           </TouchableOpacity>
         </View>
+        {error && <ErrorBubble styles={null} text={error} />}
       </View>
       <Button text="Let's Do This!" onPress={this.submit} style={styles.button} disabled={false} />
     </KeyboardFriendlyView>
