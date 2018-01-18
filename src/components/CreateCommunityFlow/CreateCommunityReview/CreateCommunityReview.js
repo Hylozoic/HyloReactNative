@@ -37,6 +37,15 @@ export default class CreateCommunityReview extends React.Component {
   submit = () => {
     const { communityName, communityUrl } = this.state
     this.props.createCommunity(communityName, communityUrl)
+    .then(({error}) => {
+      if (error) {
+        this.setState({
+          error: 'There was an error, please try again.'
+        })
+      }
+      console.log('hello')
+      this.props.clearNameAndUrlFromStore()
+    })
   }
 
   render () {

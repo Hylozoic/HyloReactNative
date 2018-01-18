@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { createCommunity } from '../CreateCommunityFlow.store'
+import { createCommunity, clearNameAndUrlFromStore } from '../CreateCommunityFlow.store'
 
 export function mapStateToProps (state, props) {
   const { communityName, communityUrl } = state.CreateCommunityFlow
@@ -11,7 +11,8 @@ export function mapStateToProps (state, props) {
 
 export function mapDispatchToProps (dispatch, props) {
   return {
-    createCommunity: (name, slug) => dispatch(createCommunity(name, slug))
+    createCommunity: (name, slug) => dispatch(createCommunity(name, slug)),
+    clearNameAndUrlFromStore: () => dispatch(clearNameAndUrlFromStore())
   }
 }
 

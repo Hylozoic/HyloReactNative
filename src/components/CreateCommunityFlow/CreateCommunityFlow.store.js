@@ -3,6 +3,7 @@ export const SAVE_COMMUNITY_NAME = `${MODULE_NAME}/SAVE_COMMUNITY_NAME`
 export const SAVE_COMMUNITY_URL = `${MODULE_NAME}/SAVE_COMMUNITY_URL`
 export const FETCH_URL_EXISTS = `${MODULE_NAME}/FETCH_URL_EXISTS`
 export const CREATE_COMMUNITY = `${MODULE_NAME}/CREATE_COMMUNITY`
+export const CLEAR_NAME_AND_URL_FROM_STORE = `${MODULE_NAME}/CLEAR_NAME_AND_URL_FROM_STORE`
 
 export default function reducer (state = {}, action) {
   const { type, payload } = action
@@ -16,6 +17,12 @@ export default function reducer (state = {}, action) {
       return {
         ...state,
         communityUrl: payload
+      }
+    case CLEAR_NAME_AND_URL_FROM_STORE:
+      return {
+        ...state,
+        communityUrl: null,
+        communityName: null
       }
     case FETCH_URL_EXISTS:
       return {
@@ -68,5 +75,11 @@ export function saveCommunityUrl (url) {
   return {
     type: SAVE_COMMUNITY_URL,
     payload: url
+  }
+}
+
+export function clearNameAndUrlFromStore () {
+  return {
+    type: CLEAR_NAME_AND_URL_FROM_STORE
   }
 }
