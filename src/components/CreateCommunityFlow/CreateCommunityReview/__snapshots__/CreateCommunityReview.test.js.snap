@@ -35,11 +35,18 @@ exports[`matches last snapshot 1`] = `
         underlineColorAndroid="rgba(0,0,0,0)"
         value={undefined}
       />
-      <Button
-        disabled={false}
+      <TouchableOpacity
+        activeOpacity={0.2}
         onPress={undefined}
-        text="Edit"
-      />
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+        >
+          Edit
+        </Text>
+      </TouchableOpacity>
     </View>
   </View>
   <View>
@@ -61,17 +68,24 @@ exports[`matches last snapshot 1`] = `
         underlineColorAndroid="rgba(0,0,0,0)"
         value={undefined}
       />
-      <Button
-        disabled={false}
+      <TouchableOpacity
+        activeOpacity={0.2}
         onPress={undefined}
-        text="Edit"
-      />
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+        >
+          Edit
+        </Text>
+      </TouchableOpacity>
     </View>
   </View>
   <Button
     disabled={false}
     onPress={undefined}
-    text="Continue"
+    text="Let's Do This!"
   />
 </KeyboardFriendlyView>
 `;
