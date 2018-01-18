@@ -82,9 +82,14 @@ exports[`matches last snapshot 1`] = `
       </TouchableOpacity>
     </View>
   </View>
+  <ErrorBubble
+    hideArrow={true}
+    styles={null}
+    text="test"
+  />
   <Button
     disabled={false}
-    onPress={undefined}
+    onPress={[Function]}
     text="Let's Do This!"
   />
 </KeyboardFriendlyView>
