@@ -2,8 +2,10 @@ import React from 'react'
 import { Text, ScrollView, Image, View, TouchableOpacity } from 'react-native'
 import KeyboardFriendlyView from '../../KeyboardFriendlyView'
 import StarIcon from '../../StarIcon'
+import Badge from '../../Badge'
 import Header from '../Header'
 import styles from './Topics.styles'
+import EntypoIcon from 'react-native-vector-icons/Entypo'
 
 const title = 'Topics'
 
@@ -20,7 +22,6 @@ export default class Topics extends React.Component {
         <Image source={image} style={styles.image} />
         <View style={styles.imageOverlay} />
         <Text style={styles.title}>{name}</Text>
-        <View style={styles.searchPlaceholder} />
         <TopicList topics={topics} />
       </ScrollView>
     </KeyboardFriendlyView>
@@ -38,17 +39,24 @@ export class TopicList extends React.Component {
 
 export function TopicRow ({ topic, first }) {
   const { name, unreadCount, subscribed } = topic
-  return <View style={[styles.topicRow, first && styles.firstRow]}>
+  return <TouchableOpacity style={[styles.topicRow, first && styles.firstRow]}
+    onPress={() => console.log('GoTo', topic.name)}>
     <SubscribeStar subscribed={subscribed} onPress={subscribe => console.log('subscribe', subscribe)} />
     <Text style={styles.topicName}>#{name}</Text>
-  </View>
+    <View style={styles.rightItems}>
+      <Badge style={styles.badge} count={unreadCount} />
+      <EntypoIcon style={styles.chevron} name={'chevron-right'} />
+    </View>
+  </TouchableOpacity>
 }
 
 export function SubscribeStar ({ subscribed, onPress }) {
   const theme = subscribed
     ? styles.subscribedStar
     : styles.unSubscribedStar
-  return <TouchableOpacity style={styles.star} onPress={() => onPress(!subscribed)}>
+  return <TouchableOpacity style={styles.star}
+    onPress={() => onPress(!subscribed)}
+    hitSlop={{top: 10, bottom: 10, left: 15, right: 15}}>
     <StarIcon theme={theme} />
   </TouchableOpacity>
 }

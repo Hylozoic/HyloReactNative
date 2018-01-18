@@ -32,9 +32,6 @@ export default {
     zIndex: 10,
     marginLeft: 16
   },
-  searchPlaceholder: {
-    height: 16
-  },
   topicList: {
     borderTopWidth: StyleSheet.hairlineWidth,
     borderTopColor: capeCod40,
@@ -54,6 +51,20 @@ export default {
   },
   topicName: {
     fontSize: 16
+  },
+  rightItems: {
+    flexDirection: 'row',
+    marginLeft: 'auto'
+  },
+  badge: {
+    marginRight: 10,
+    position: 'relative',
+    top: 3
+  },
+  chevron: {
+    marginRight: 12,
+    fontSize: 24,
+    color: capeCod20
   },
   star: {
     marginRight: 15
