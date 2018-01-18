@@ -157,5 +157,14 @@ export default {
   badgeText: {
     color: 'white',
     fontSize: 12
+  },
+  createCommunityButton: {
+    backgroundColor: black10onRhino,
+    paddingTop: 15,
+    paddingBottom: 15,
+    height: 40,
+    fontSize: 14,
+    paddingRight: '7%',
+    paddingLeft: '7%'
   }
 }

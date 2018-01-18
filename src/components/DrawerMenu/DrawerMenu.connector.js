@@ -91,10 +91,13 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
       dispatchProps.selectNetwork(network.id)
     },
     showSettings: () => {
-      navigation.navigate('CreateCommunityName', {name})
+      navigation.navigate('UserSettings', {name})
     },
     goToMyProfile: () => {
       navigation.navigate('MemberProfile', {id: currentUser.id})
+    },
+    goToCreateCommunityName: () => {
+      navigation.navigate('CreateCommunityName')
     }
   }
 }
