@@ -31,7 +31,8 @@ export default class CreateCommunityReview extends React.Component {
     super(props)
     this.state = {
       communityName: this.props.communityName,
-      communityUrl: this.props.communityUrl
+      communityUrl: this.props.communityUrl,
+      error: 'test'
     }
   }
 
@@ -89,8 +90,8 @@ export default class CreateCommunityReview extends React.Component {
             <Text style={styles.editText}>Edit</Text>
           </TouchableOpacity>
         </View>
-        {error && <ErrorBubble styles={null} text={error} />}
       </View>
+      {error && <ErrorBubble styles={null} text={error} hideArrow />}
       <Button text="Let's Do This!" onPress={this.submit} style={styles.button} disabled={false} />
     </KeyboardFriendlyView>
   }

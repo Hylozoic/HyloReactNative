@@ -5,18 +5,19 @@ import { white } from 'style/colors'
 
 export default function ErrorBubble ({
   customStyles,
-  text
+  text,
+  hideArrow
 }) {
   const styles = customStyles || defaultStyles
   return <View>
     <View style={styles.row}>
       <Text style={styles.errorText}>{text}</Text>
     </View>
-    <Triangle
+    {!hideArrow && <Triangle
       style={styles.triangle}
       width={10}
       height={5}
-      direction='up' />
+      direction='up' />}
   </View>
 }
 
