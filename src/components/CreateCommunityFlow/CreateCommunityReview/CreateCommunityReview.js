@@ -2,7 +2,8 @@ import React from 'react'
 import {
   Text,
   View,
-  TextInput
+  TextInput,
+  TouchableOpacity
 } from 'react-native'
 import Button from '../../Button'
 import KeyboardFriendlyView from '../../KeyboardFriendlyView'
@@ -57,7 +58,9 @@ export default class CreateCommunityReview extends React.Component {
             underlineColorAndroid={styles.androidInvisibleUnderline}
             disabled
           />
-          <Button text='Edit' onPress={this.props.goToCreateCommunityName} style={styles.reviewButton} disabled={false} />
+          <TouchableOpacity onPress={this.props.goToCreateCommunityName} style={styles.editContainer}>
+            <Text style={styles.editText}>Edit</Text>
+          </TouchableOpacity>
         </View>
       </View>
       <View style={styles.secondTextInputContainer}>
@@ -73,10 +76,12 @@ export default class CreateCommunityReview extends React.Component {
             underlineColorAndroid={styles.androidInvisibleUnderline}
             disabled
           />
-          <Button text='Edit' onPress={this.props.goToCreateCommunityUrl} style={styles.reviewButton} disabled={false} />
+          <TouchableOpacity onPress={this.props.goToCreateCommunityUrl} style={styles.editContainer}>
+            <Text style={styles.editText}>Edit</Text>
+          </TouchableOpacity>
         </View>
       </View>
-      <Button text='Continue' onPress={this.checkAndSubmit} style={styles.button} disabled={false} />
+      <Button text="Let's Do This!" onPress={this.checkAndSubmit} style={styles.button} disabled={false} />
     </KeyboardFriendlyView>
   }
 }

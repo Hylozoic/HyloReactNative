@@ -93,9 +93,16 @@ export default {
   reviewButton: {
     width: 40,
     height: 30,
+    marginBottom: -10
+  },
+  editContainer: {
+    width: 40,
+    height: 30
+  },
+  editText: {
+    color: white,
     fontSize: 16,
-    backgroundColor: 'white',
-    color: caribbeanGreen
+    marginTop: 10
   },
   androidInvisibleUnderline: 'rgba(0,0,0,0)'
 }
