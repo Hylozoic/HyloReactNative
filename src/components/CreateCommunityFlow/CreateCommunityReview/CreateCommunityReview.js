@@ -9,6 +9,9 @@ import { HeaderBackButton } from 'react-navigation'
 import Button from '../../Button'
 import KeyboardFriendlyView from '../../KeyboardFriendlyView'
 import ErrorBubble from '../../ErrorBubble'
+import {
+  formatDomainWithUrl
+} from '../util'
 import styles from '../CreateCommunityFlow.styles'
 import { caribbeanGreen, white, white60onCaribbeanGreen } from 'style/colors'
 
@@ -32,7 +35,7 @@ export default class CreateCommunityReview extends React.Component {
     this.state = {
       communityName: this.props.communityName,
       communityUrl: this.props.communityUrl,
-      error: 'test'
+      error: null
     }
   }
 
@@ -45,7 +48,6 @@ export default class CreateCommunityReview extends React.Component {
           error: 'There was an error, please try again.'
         })
       }
-      console.log('hello')
       this.props.clearNameAndUrlFromStore()
     })
   }
@@ -81,7 +83,7 @@ export default class CreateCommunityReview extends React.Component {
             onChangeText={communityName => this.setInput('communityName', communityName)}
             returnKeyType='next'
             autoCapitalize='none'
-            value={this.state.communityUrl}
+            value={formatDomainWithUrl(this.state.communityUrl)}
             autoCorrect={false}
             underlineColorAndroid={styles.androidInvisibleUnderline}
             disabled

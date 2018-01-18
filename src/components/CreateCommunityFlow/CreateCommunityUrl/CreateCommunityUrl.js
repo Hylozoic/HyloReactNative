@@ -7,7 +7,12 @@ import {
 import { HeaderBackButton } from 'react-navigation'
 import ErrorBubble from '../../ErrorBubble'
 import KeyboardFriendlyView from '../../KeyboardFriendlyView'
-import { slugValidatorRegex, invalidSlugMessage } from '../util'
+import {
+  slugValidatorRegex,
+  invalidSlugMessage,
+  formatDomainWithUrl,
+  removeUrlFromDomain
+} from '../util'
 import Button from '../../Button'
 import styles from '../CreateCommunityFlow.styles'
 import { caribbeanGreen, white, white60onCaribbeanGreen } from 'style/colors'
@@ -35,6 +40,7 @@ export default class CreateCommunityUrl extends React.Component {
   }
 
   setInput (key, value) {
+    value = removeUrlFromDomain(value)
     this.setState({
       ...this.state,
       [key]: value
@@ -97,7 +103,7 @@ export default class CreateCommunityUrl extends React.Component {
           onChangeText={communityUrl => this.setInput('communityUrl', communityUrl)}
           returnKeyType='next'
           autoCapitalize='none'
-          value={this.state.communityUrl}
+          value={formatDomainWithUrl(this.state.communityUrl)}
           autoCorrect={false}
           underlineColorAndroid={styles.androidInvisibleUnderline} />
       </View>
