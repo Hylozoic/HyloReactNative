@@ -4,26 +4,16 @@ import {
   View,
   TextInput
 } from 'react-native'
-import { HeaderBackButton } from 'react-navigation'
 import Button from '../../Button'
 import KeyboardFriendlyView from '../../KeyboardFriendlyView'
 import ErrorBubble from '../../ErrorBubble'
 import styles from '../CreateCommunityFlow.styles'
-import { caribbeanGreen, white, white60onCaribbeanGreen } from 'style/colors'
+import createCommunityHeader from '../createCommunityHeader'
 
 export default class CreateCommunityName extends React.Component {
   static navigationOptions = ({ navigation }) => {
-    return {
-      title: <Text style={styles.headerTitle}>STEP 1/3</Text>,
-      color: white,
-      fontSize: 10,
-      headerStyle: {
-        backgroundColor: caribbeanGreen,
-        borderBottomWidth: 0
-      },
-      headerBackgroundColor: caribbeanGreen,
-      headerLeft: <HeaderBackButton onPress={() => navigation.goBack()} tintColor={white60onCaribbeanGreen} />
-    }
+    const title = 'STEP 1/3'
+    return createCommunityHeader(title, navigation)
   }
 
   componentDidMount = () => {
