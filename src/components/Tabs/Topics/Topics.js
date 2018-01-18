@@ -1,6 +1,7 @@
 import React from 'react'
 import { Text, ScrollView, Image, View, TouchableOpacity } from 'react-native'
 import KeyboardFriendlyView from '../../KeyboardFriendlyView'
+import Loading from '../../Loading'
 import StarIcon from '../../StarIcon'
 import Badge from '../../Badge'
 import Header from '../Header'
@@ -12,8 +13,12 @@ const title = 'Topics'
 export default class Topics extends React.Component {
   static navigationOptions = ({navigation}) => (Header(navigation, title))
 
+  componentDidMount () {
+    this.props.fetchCommunityTopics()
+  }
+
   render () {
-    const { community, topics } = this.props
+    const { community, topics, pending } = this.props
     const { bannerUrl, name } = community
     const image = {uri: bannerUrl}
 
@@ -22,7 +27,9 @@ export default class Topics extends React.Component {
         <Image source={image} style={styles.image} />
         <View style={styles.imageOverlay} />
         <Text style={styles.title}>{name}</Text>
-        <TopicList topics={topics} />
+        {pending
+          ? <Loading />
+          : <TopicList topics={topics} />}
       </ScrollView>
     </KeyboardFriendlyView>
   }
@@ -38,24 +45,24 @@ export class TopicList extends React.Component {
 }
 
 export function TopicRow ({ topic, first }) {
-  const { name, unreadCount, subscribed } = topic
+  const { name, newPostCount, isSubscribed } = topic
   return <TouchableOpacity style={[styles.topicRow, first && styles.firstRow]}
     onPress={() => console.log('GoTo', topic.name)}>
-    <SubscribeStar subscribed={subscribed} onPress={subscribe => console.log('subscribe', subscribe)} />
+    <SubscribeStar isSubscribed={isSubscribed} onPress={subscribe => console.log('subscribe', subscribe)} />
     <Text style={styles.topicName}>#{name}</Text>
     <View style={styles.rightItems}>
-      <Badge style={styles.badge} count={unreadCount} />
+      <Badge style={styles.badge} count={newPostCount} />
       <EntypoIcon style={styles.chevron} name={'chevron-right'} />
     </View>
   </TouchableOpacity>
 }
 
-export function SubscribeStar ({ subscribed, onPress }) {
-  const theme = subscribed
+export function SubscribeStar ({ isSubscribed, onPress }) {
+  const theme = isSubscribed
     ? styles.subscribedStar
     : styles.unSubscribedStar
   return <TouchableOpacity style={styles.star}
-    onPress={() => onPress(!subscribed)}
+    onPress={() => onPress(!isSubscribed)}
     hitSlop={{top: 10, bottom: 10, left: 15, right: 15}}>
     <StarIcon theme={theme} />
   </TouchableOpacity>
