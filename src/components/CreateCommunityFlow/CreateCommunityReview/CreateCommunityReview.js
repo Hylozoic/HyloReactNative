@@ -34,6 +34,11 @@ export default class CreateCommunityReview extends React.Component {
     }
   }
 
+  submit = () => {
+    const { communityName, communityUrl } = this.state
+    this.props.createCommunity(communityName, communityUrl)
+  }
+
   render () {
     return <KeyboardFriendlyView style={styles.container}>
       <Text style={styles.header}>Everything look good?</Text>
@@ -74,7 +79,7 @@ export default class CreateCommunityReview extends React.Component {
           </TouchableOpacity>
         </View>
       </View>
-      <Button text="Let's Do This!" onPress={this.checkAndSubmit} style={styles.button} disabled={false} />
+      <Button text="Let's Do This!" onPress={this.submit} style={styles.button} disabled={false} />
     </KeyboardFriendlyView>
   }
 }
