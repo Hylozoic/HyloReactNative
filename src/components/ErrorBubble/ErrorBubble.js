@@ -6,25 +6,43 @@ import { white } from 'style/colors'
 export default function ErrorBubble ({
   customStyles,
   text,
-  hideArrow
+  topArrow,
+  bottomArrow
 }) {
   const styles = customStyles || defaultStyles
   return <View>
-    <View style={styles.row}>
-      <Text style={styles.errorText}>{text}</Text>
-    </View>
-    {!hideArrow && <Triangle
-      style={styles.triangle}
+    {topArrow && <Triangle
+      style={styles.topArrow}
       width={10}
       height={5}
       direction='up' />}
+    <View style={styles.row}>
+      <Text style={styles.errorText}>{text}</Text>
+    </View>
+    {bottomArrow && <Triangle
+      style={styles.bottomArrow}
+      width={10}
+      height={5}
+      direction='down' />}
   </View>
 }
 
+// export function ErrorTriangle (style, direction) {
+//  return <triangle
+//      width={10}
+//      height={5}
+//      style={style}
+//      direction={direction}
+// }
+
 const defaultStyles = {
-  triangle: {
+  topArrow: {
     marginLeft: 30,
-    marginTop: -45
+    marginBottom: -1
+  },
+  bottomArrow: {
+    marginLeft: 30,
+    marginTop: -1
   },
   errorText: {
     color: 'red',
@@ -36,8 +54,6 @@ const defaultStyles = {
     marginRight: 5,
     backgroundColor: white,
     padding: 10,
-    marginBottom: 3,
-    marginTop: 8,
     borderRadius: 30
   }
 }

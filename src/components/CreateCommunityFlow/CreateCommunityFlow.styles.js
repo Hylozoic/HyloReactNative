@@ -65,6 +65,9 @@ export default {
     marginTop: 8,
     borderRadius: 30
   },
+  errorBubble: {
+    marginTop: 8
+  },
   triangle: {
     marginLeft: 30,
     marginTop: -45

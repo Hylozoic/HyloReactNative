@@ -83,7 +83,7 @@ export default class CreateCommunityReview extends React.Component {
           </TouchableOpacity>
         </View>
       </View>
-      {error && <ErrorBubble styles={null} text={error} hideArrow />}
+      {error && <View style={styles.errorBubble}><ErrorBubble text={error} /></View> }
       <Button text="Let's Do This!" onPress={this.submit} style={styles.button} disabled={false} />
     </KeyboardFriendlyView>
   }

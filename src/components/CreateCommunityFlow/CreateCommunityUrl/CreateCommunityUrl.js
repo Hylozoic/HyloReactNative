@@ -97,7 +97,7 @@ export default class CreateCommunityUrl extends React.Component {
           autoCorrect={false}
           underlineColorAndroid={styles.androidInvisibleUnderline} />
       </View>
-      {error && <ErrorBubble styles={null} text={error} />}
+      {error && <View style={styles.errorBubble}><ErrorBubble text={error} topArrow /></View> }
       <Button text='Continue' onPress={this.checkAndSubmit} style={styles.button} disabled={!!this.props.fetchUrlPending} />
     </KeyboardFriendlyView>
   }

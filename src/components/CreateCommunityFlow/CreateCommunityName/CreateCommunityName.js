@@ -80,8 +80,7 @@ export default class CreateCommunityName extends React.Component {
           autoCorrect={false}
           underlineColorAndroid={styles.androidInvisibleUnderline} />
       </View>
-      {error && <ErrorBubble styles={null} text={'Please enter a community name'} />}
-
+      {error && <View style={styles.errorBubble}><ErrorBubble text={error} topArrow /></View>}
       <Button text='Continue' onPress={this.checkAndSubmit} style={styles.button} disabled={false} />
     </KeyboardFriendlyView>
   }
