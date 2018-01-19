@@ -119,6 +119,11 @@ export default {
     flex: 1,
     fontSize: 15
   },
+  networkOpenWrapper: {
+    borderLeftWidth: 1,
+    borderColor: rhino40,
+    paddingLeft: 14
+  },
   networkOpenIcon: {
     color: 'white',
     fontSize: 25

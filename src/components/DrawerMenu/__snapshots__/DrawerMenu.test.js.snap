@@ -202,12 +202,16 @@ exports[`NetworkRow matches the last snapshot 1`] = `
     >
       Network Name
     </Text>
-    <Icon
-      allowFontScaling={false}
-      name="chevron-down"
+    <TouchableOpacity
+      activeOpacity={0.2}
       onPress={[Function]}
-      size={12}
-    />
+    >
+      <Icon
+        allowFontScaling={false}
+        name="chevron-down"
+        size={12}
+      />
+    </TouchableOpacity>
   </TouchableOpacity>
   <View>
     <CommunityRow

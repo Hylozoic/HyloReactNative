@@ -1,4 +1,6 @@
-import { makeGetQueryResults } from '../../../store/reducers/queryResults'
+import {
+  makeGetQueryResults, makeQueryResultsModelSelector
+} from '../../../store/reducers/queryResults'
 import { createSelector } from 'reselect'
 import { createSelector as ormCreateSelector } from 'redux-orm'
 import { get, includes, isEmpty } from 'lodash/fp'
@@ -22,6 +24,7 @@ query ($slug: String, $first: Int, $sortBy: String, $offset: Int, $search: Strin
     id
     name
     avatarUrl
+    bannerUrl
     memberCount
     members (first: $first, sortBy: $sortBy, offset: $offset, search: $search) {
       items {
@@ -51,6 +54,7 @@ query ($slug: String, $first: Int, $sortBy: String, $offset: Int, $search: Strin
     name
     slug
     avatarUrl
+    bannerUrl
     memberCount
     members (first: $first, sortBy: $sortBy, offset: $offset, search: $search) {
       items {
@@ -83,7 +87,8 @@ export function fetchNetworkMembers (slug, sortBy, offset, search) {
     meta: {
       extractModel: 'Network',
       extractQueryResults: {
-        getItems: get('payload.data.network.members')
+        getItems: get('payload.data.network.members'),
+        getParams: (action) => ({...get('meta.graphql.variables', action), memberSubject: 'network'})
       }
     }
   }
@@ -99,7 +104,8 @@ export function fetchCommunityMembers (slug, sortBy, offset, search) {
     meta: {
       extractModel: 'Community',
       extractQueryResults: {
-        getItems: get('payload.data.community.members')
+        getItems: get('payload.data.community.members'),
+        getParams: (action) => ({...get('meta.graphql.variables', action), memberSubject: 'community'})
       }
     }
   }
@@ -155,15 +161,24 @@ export function fetchMembers ({ subject, slug, sortBy, offset, search }) {
 
 const getMemberResults = makeGetQueryResults(FETCH_MEMBERS)
 
-export const getMembers = ormCreateSelector(
+export const getMembers = makeQueryResultsModelSelector(
+  getMemberResults,
+  'Person',
+  person => ({
+    ...person.ref,
+    skills: person.skills && person.skills.toModelArray()
+  })
+)
+
+export const getMembersOld = ormCreateSelector(
   orm,
   state => state.orm,
   getMemberResults,
   state => getCurrentCommunity(state),
-  (session, results, community) => {
+  ({ Person }, results) => {
     if (isEmpty(results) || isEmpty(results.ids)) return []
 
-    return community.members
+    return Person.all()
     .filter(x => includes(x.id, results.ids))
     .orderBy(x => results.ids.indexOf(x.id))
     .toModelArray()

@@ -11,6 +11,11 @@ const community = {
   id: '1',
   bannerUrl: 'community.png'
 }
+
+const network = {
+  id: '2',
+  bannerUrl: 'network.png'
+}
 const currentUser = {
   id: '2',
   avatarUrl: 'user.png',
@@ -35,6 +40,17 @@ describe('FeedBanner', () => {
     const renderer = new ReactShallowRenderer()
     renderer.render(<FeedBanner
       community={community}
+      currentUser={currentUser}
+      newPost={newPost} />)
+    const actual = renderer.getRenderOutput()
+
+    expect(actual).toMatchSnapshot()
+  })
+  
+  it('renders correctly with a network and user', () => {
+    const renderer = new ReactShallowRenderer()
+    renderer.render(<FeedBanner
+      network={network}
       currentUser={currentUser}
       newPost={newPost} />)
     const actual = renderer.getRenderOutput()

@@ -103,6 +103,48 @@ exports[`FeedBanner renders correctly with a community and user 1`] = `
 </View>
 `;
 
+exports[`FeedBanner renders correctly with a network and user 1`] = `
+<View>
+  <Image
+    source={
+      Object {
+        "uri": "network.png",
+      }
+    }
+  />
+  <MockLinearGradient
+    colors={
+      Array [
+        "rgba(0, 0, 0, 0)",
+        "rgba(0, 0, 0, 0.1)",
+        "rgba(0, 0, 0, 0.3)",
+        "rgba(0, 0, 0, 0.6)",
+      ]
+    }
+  />
+  <View>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      numberOfLines={3}
+    />
+  </View>
+  <PostPrompt
+    currentUser={
+      Object {
+        "avatarUrl": "user.png",
+        "firstName": [Function],
+        "id": "2",
+        "name": "John Wayne",
+      }
+    }
+    newPost={[Function]}
+  />
+  <View />
+</View>
+`;
+
 exports[`FeedBanner renders correctly with all=true, and no community or user 1`] = `
 <View>
   <Image
