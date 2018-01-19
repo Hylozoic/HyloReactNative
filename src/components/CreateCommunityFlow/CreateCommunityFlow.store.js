@@ -4,6 +4,7 @@ export const SAVE_COMMUNITY_URL = `${MODULE_NAME}/SAVE_COMMUNITY_URL`
 export const FETCH_URL_EXISTS = `${MODULE_NAME}/FETCH_URL_EXISTS`
 export const CREATE_COMMUNITY = `${MODULE_NAME}/CREATE_COMMUNITY`
 export const CLEAR_NAME_AND_URL_FROM_STORE = `${MODULE_NAME}/CLEAR_NAME_AND_URL_FROM_STORE`
+export const FETCH_COMMUNITY_EXISTS = `${MODULE_NAME}/FETCH_URL_EXISTS`
 
 export default function reducer (state = {}, action) {
   const { type, payload } = action
@@ -60,6 +61,24 @@ export function createCommunity (name, slug) {
       extractModel: 'Membership',
       slug,
       name
+    }
+  }
+}
+
+export function fetchCommunityExists (slug) {
+  return {
+    type: FETCH_COMMUNITY_EXISTS,
+    graphql: {
+      query: `
+        query ($slug: String) {
+          communityExists (slug: $slug) {
+            exists
+          }
+        }
+      `,
+      variables: {
+        slug
+      }
     }
   }
 }
