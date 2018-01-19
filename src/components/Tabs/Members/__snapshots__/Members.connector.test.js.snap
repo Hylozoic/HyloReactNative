@@ -1,5 +1,32 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`makeFetchOpts handles a community 1`] = `
+Object {
+  "search": "fee",
+  "slug": "comslug",
+  "sortBy": "join",
+  "subject": "community",
+}
+`;
+
+exports[`makeFetchOpts handles a network 1`] = `
+Object {
+  "search": "fee",
+  "slug": "netslug",
+  "sortBy": "name",
+  "subject": "network",
+}
+`;
+
+exports[`makeFetchOpts handles no community or network 1`] = `
+Object {
+  "search": "fee",
+  "slug": "all-communities",
+  "sortBy": "join",
+  "subject": "all-communities",
+}
+`;
+
 exports[`mapStateToProps handles null value for lastViewedCommunity 1`] = `
 Object {
   "community": null,
@@ -14,11 +41,20 @@ Object {
     },
     "id": 123,
   },
+  "fetchOpts": Object {
+    "search": undefined,
+    "slug": "all-communities",
+    "sortBy": undefined,
+    "subject": "all-communities",
+  },
   "hasMore": undefined,
+  "isAll": true,
   "members": Array [],
+  "network": null,
   "pending": undefined,
   "search": undefined,
-  "slug": null,
+  "slug": "all-communities",
   "sortBy": undefined,
+  "subject": "all-communities",
 }
 `;

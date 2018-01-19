@@ -11,13 +11,33 @@ exports[`matches the last snapshot 1`] = `
       allowFontScaling={true}
       ellipsizeMode="tail"
     />
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
-      Hi
-    </Text>
+    <HtmlView
+      RootComponent={[Function]}
+      addLineBreaks={false}
+      onError={[Function]}
+      onLinkLongPress={null}
+      onLinkPress={[Function]}
+      stylesheet={
+        Object {
+          "a": Object {
+            "color": "#0DC39F",
+          },
+        }
+      }
+      textComponentProps={
+        Object {
+          "style": Array [
+            Object {
+              "color": "#5D757A",
+              "fontFamily": "Circular-Book",
+              "marginTop": 3,
+            },
+            undefined,
+          ],
+        }
+      }
+      value="<p>Hi</p>"
+    />
     <Text
       accessible={true}
       allowFontScaling={true}

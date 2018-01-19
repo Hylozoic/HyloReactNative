@@ -1,6 +1,5 @@
 import { connect } from 'react-redux'
 import { sanitize } from 'hylo-utils/text'
-
 import {
   createMessage,
   fetchMessages,
@@ -11,16 +10,23 @@ import {
   presentThread,
   updateThreadReadTime
 } from './Thread.store'
+import { ALL_COMMUNITIES_ID } from '../../store/models/Community'
 import getCurrentUserId from '../../store/selectors/getCurrentUserId'
+import getCurrentNetworkId from '../../store/selectors/getCurrentNetworkId'
+import getCurrentCommunityId from '../../store/selectors/getCurrentCommunityId'
 import { sendIsTyping } from 'util/websockets'
 
 export function mapStateToProps (state, props) {
   const currentUserId = getCurrentUserId(state)
+  const communityId = getCurrentCommunityId(state)
+  const networkId = getCurrentNetworkId(state)
   const { id, title } = presentThread(getThread(state, props), currentUserId) || {}
   const messages = getAndPresentMessages(state, props)
   return {
     id,
     currentUserId,
+    communityId,
+    networkId,
     hasMore: getHasMoreMessages(state, { id }),
     messages,
     pending: state.pending[FETCH_MESSAGES],
@@ -36,13 +42,23 @@ export function mapDispatchToProps (dispatch, { navigation }) {
     fetchMessages: cursor => dispatch(fetchMessages(threadId, { cursor })),
     reconnectFetchMessages: () => dispatch(fetchMessages(threadId, {reset: true})),
     sendIsTyping: () => sendIsTyping(threadId, true),
-    updateThreadReadTime: () => dispatch(updateThreadReadTime(threadId))
+    updateThreadReadTime: () => dispatch(updateThreadReadTime(threadId)),
+    showMember: id => navigation.navigate('MemberProfile', {id}),
+    showTopic: (communityId, networkId) => topicName => {
+      // All Communities and Network feed to topic nav
+      // currently not supported
+      if (networkId || communityId === ALL_COMMUNITIES_ID) {
+        navigation.navigate('TopicSupportComingSoon')
+      } else {
+        navigation.navigate('Feed', {communityId, topicName})
+      }
+    }
   }
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
   const { navigation } = ownProps
-  const { id, title } = stateProps
+  const { id, title, communityId, networkId } = stateProps
   const setNavParams = title
     ? () => navigation.setParams({
       title,
@@ -53,7 +69,8 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     ...ownProps,
     ...dispatchProps,
     ...stateProps,
-    setNavParams
+    setNavParams,
+    showTopic: dispatchProps.showTopic(communityId, networkId)
   }
 }
 

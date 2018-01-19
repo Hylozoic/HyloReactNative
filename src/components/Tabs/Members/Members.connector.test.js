@@ -1,6 +1,42 @@
-import { mapStateToProps, mergeProps } from './Members.connector'
+import { mapStateToProps, mergeProps, makeFetchOpts } from './Members.connector'
 import { MODULE_NAME } from './Members.store'
 import orm from '../../../store/models'
+
+describe('makeFetchOpts', () => {
+  it('handles a network', () => {
+    const props = {
+      network: {
+        slug: 'netslug'
+      },
+      community: null,
+      sortBy: 'join',
+      search: 'fee'
+    }
+    expect(makeFetchOpts(props)).toMatchSnapshot()
+  })
+
+  it('handles a community', () => {
+    const props = {
+      network: null,
+      community: {
+        slug: 'comslug'
+      },
+      sortBy: 'join',
+      search: 'fee'
+    }
+    expect(makeFetchOpts(props)).toMatchSnapshot()
+  })
+
+  it('handles no community or network', () => {
+    const props = {
+      network: null,
+      community: null,
+      sortBy: 'join',
+      search: 'fee'
+    }
+    expect(makeFetchOpts(props)).toMatchSnapshot()
+  })
+})
 
 describe('mapStateToProps', () => {
   it('handles null value for lastViewedCommunity', () => {
@@ -24,9 +60,9 @@ describe('mergeProps', () => {
     stateProps = { hasMore: true, members: [], pending: false }
   })
 
-  it('makes fetchMembers a no-op when there is no community', () => {
+  it('makes fetchMembers a no-op when there is no community or network', () => {
     const props = mergeProps(stateProps, dispatchProps)
-    expect(props.fetchMembers()).toEqual(false)
+    expect(props.fetchMembers()).toEqual(undefined)
     expect(dispatchProps.fetchMembers).not.toBeCalled()
   })
 
