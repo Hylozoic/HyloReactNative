@@ -32,12 +32,15 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
   const fetchCommunityTopics = () => dispatchProps.fetchCommunityTopics(get('id', community), {first: null})
   const toggleTopicSubscribe = (topicId, isSubscribing) =>
     dispatchProps.toggleTopicSubscribe(topicId, community.id, isSubscribing)
+  const goToTopic = topicName => ownProps.navigation.navigate('Feed', {topicName})
+
   return {
     ...ownProps,
     ...stateProps,
     ...dispatchProps,
     fetchCommunityTopics,
-    toggleTopicSubscribe
+    toggleTopicSubscribe,
+    goToTopic
   }
 }
 

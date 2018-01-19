@@ -18,7 +18,7 @@ export default class Topics extends React.Component {
   }
 
   render () {
-    const { community, topics, pending, toggleTopicSubscribe } = this.props
+    const { community, topics, pending, toggleTopicSubscribe, goToTopic } = this.props
     const { bannerUrl, name } = community
     const image = {uri: bannerUrl}
 
@@ -29,7 +29,9 @@ export default class Topics extends React.Component {
         <Text style={styles.title}>{name}</Text>
         {pending
           ? <Loading />
-          : <TopicList topics={topics} toggleTopicSubscribe={toggleTopicSubscribe} />}
+          : <TopicList topics={topics}
+            toggleTopicSubscribe={toggleTopicSubscribe}
+            goToTopic={goToTopic} />}
       </ScrollView>
     </KeyboardFriendlyView>
   }
@@ -37,18 +39,20 @@ export default class Topics extends React.Component {
 
 export class TopicList extends React.Component {
   render () {
-    const { topics, toggleTopicSubscribe } = this.props
+    const { topics, toggleTopicSubscribe, goToTopic } = this.props
     return <View style={styles.topicList}>
       {topics.map((topic, i) =>
-        <TopicRow topic={topic} key={i} first={i === 0} toggleTopicSubscribe={toggleTopicSubscribe} />)}
+        <TopicRow topic={topic} key={i} first={i === 0}
+          toggleTopicSubscribe={toggleTopicSubscribe}
+          goToTopic={goToTopic} />)}
     </View>
   }
 }
 
-export function TopicRow ({ topic, first, toggleTopicSubscribe }) {
+export function TopicRow ({ topic, first, toggleTopicSubscribe, goToTopic }) {
   const { name, newPostCount, isSubscribed } = topic
   return <TouchableOpacity style={[styles.topicRow, first && styles.firstRow]}
-    onPress={() => console.log('GoTo', topic.name)}>
+    onPress={() => goToTopic(topic.name)}>
     <SubscribeStar isSubscribed={isSubscribed} onPress={() => toggleTopicSubscribe(topic.id, !isSubscribed)} />
     <Text style={styles.topicName}>#{name}</Text>
     <View style={styles.rightItems}>

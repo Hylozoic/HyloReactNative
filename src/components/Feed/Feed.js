@@ -20,7 +20,7 @@ export default class Feed extends Component {
   componentDidMount () {
     const { fetchCommunityTopic } = this.props
     if (fetchCommunityTopic) fetchCommunityTopic()
-    this.props.navigation.navigate('Topics')
+    // this.props.navigation.navigate('Topics')
   }
 
   shouldComponentUpdate (nextProps) {
