@@ -51,26 +51,8 @@ export default {
     fontSize: 18,
     fontWeight: 'bold'
   },
-  errorMessage: {
-    color: 'red',
-    textAlign: 'center'
-  },
-  errorRow: {
-    alignSelf: 'stretch',
-    marginLeft: 5,
-    marginRight: 5,
-    backgroundColor: white,
-    padding: 10,
-    marginBottom: 3,
-    marginTop: 8,
-    borderRadius: 30
-  },
   errorBubble: {
     marginTop: 8
-  },
-  triangle: {
-    marginLeft: 30,
-    marginTop: -45
   },
   textInputWithButton: {
     display: 'flex',
@@ -97,11 +79,6 @@ export default {
     color: white,
     fontSize: 16,
     marginTop: 10
-  },
-  headerTitle: {
-    color: white,
-    fontSize: 12,
-    fontWeight: 'bold'
   },
   androidInvisibleUnderline: 'rgba(0,0,0,0)'
 }
