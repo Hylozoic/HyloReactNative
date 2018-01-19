@@ -1,6 +1,86 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders correctly a community and topics 1`] = `
+exports[`SubscribeStar matches last snapshot 1`] = `
+<TouchableOpacity
+  activeOpacity={0.2}
+  hitSlop={
+    Object {
+      "bottom": 10,
+      "left": 15,
+      "right": 15,
+      "top": 10,
+    }
+  }
+  onPress={[Function]}
+>
+  <StarIcon
+    theme={
+      Object {
+        "icon": Object {
+          "backgroundColor": "transparent",
+          "color": "#0DC39F",
+          "fontSize": 30,
+        },
+      }
+    }
+  />
+</TouchableOpacity>
+`;
+
+exports[`TopicList matches last snapshot 1`] = `
+<View>
+  <TopicRow
+    first={true}
+    goToTopic={[Function]}
+    toggleTopicSubscribe={[Function]}
+    topic={1}
+  />
+  <TopicRow
+    first={false}
+    goToTopic={[Function]}
+    toggleTopicSubscribe={[Function]}
+    topic={2}
+  />
+  <TopicRow
+    first={false}
+    goToTopic={[Function]}
+    toggleTopicSubscribe={[Function]}
+    topic={3}
+  />
+</View>
+`;
+
+exports[`TopicRow matches last snapshot 1`] = `
+<TouchableOpacity
+  activeOpacity={0.2}
+  onPress={[Function]}
+>
+  <SubscribeStar
+    isSubscribed={true}
+    onPress={[Function]}
+  />
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+  >
+    #
+    theTopic
+  </Text>
+  <View>
+    <Badge
+      count={4}
+    />
+    <Icon
+      allowFontScaling={false}
+      name="chevron-right"
+      size={12}
+    />
+  </View>
+</TouchableOpacity>
+`;
+
+exports[`Topics renders correctly a community and topics 1`] = `
 <Unknown>
   <ScrollViewMock
     contentContainerStyle={
@@ -39,7 +119,7 @@ exports[`renders correctly a community and topics 1`] = `
 </Unknown>
 `;
 
-exports[`renders correctly with pending=true 1`] = `
+exports[`Topics renders correctly with pending=true 1`] = `
 <Unknown>
   <ScrollViewMock
     contentContainerStyle={

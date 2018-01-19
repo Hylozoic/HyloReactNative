@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mapDispatchToProps returns the right keys 1`] = `
+Object {
+  "fetchCommunityTopics": [Function],
+  "toggleTopicSubscribe": [Function],
+}
+`;
+
+exports[`mapStateToProps returns the right keys 1`] = `
+Object {
+  "community": null,
+  "pending": true,
+  "topics": Array [],
+}
+`;
+
+exports[`mergeProps sets up functions 1`] = `
+Object {
+  "community": Object {
+    "id": 132,
+  },
+  "fetchCommunityTopics": [Function],
+  "goToTopic": [Function],
+  "navigation": Object {
+    "navigate": [Function],
+  },
+  "toggleTopicSubscribe": [Function],
+}
+`;
