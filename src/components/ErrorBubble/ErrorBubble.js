@@ -11,29 +11,22 @@ export default function ErrorBubble ({
 }) {
   const styles = customStyles || defaultStyles
   return <View>
-    {topArrow && <Triangle
-      style={styles.topArrow}
-      width={10}
-      height={5}
-      direction='up' />}
+    {topArrow && <ErrorPointer style={styles.topArrow} direction={'up'} />}
     <View style={styles.row}>
       <Text style={styles.errorText}>{text}</Text>
     </View>
-    {bottomArrow && <Triangle
-      style={styles.bottomArrow}
-      width={10}
-      height={5}
-      direction='down' />}
+    {bottomArrow && <ErrorPointer style={styles.bottomArrow} direction={'down'} />}
   </View>
 }
 
-// export function ErrorTriangle (style, direction) {
-//  return <triangle
-//      width={10}
-//      height={5}
-//      style={style}
-//      direction={direction}
-// }
+export function ErrorPointer ({style, direction}) {
+  return <Triangle
+    width={10}
+    height={5}
+    style={style}
+    direction={direction}
+  />
+}
 
 const defaultStyles = {
   topArrow: {
