@@ -17,6 +17,12 @@ export default class Topics extends React.Component {
     this.props.fetchCommunityTopics()
   }
 
+  componentDidUpdate (prevProps) {
+    if (prevProps.community.id !== this.props.community.id) {
+      this.props.fetchCommunityTopics()
+    }
+  }
+
   render () {
     const { community, topics, pending, toggleTopicSubscribe, goToTopic } = this.props
     const { bannerUrl, name } = community
