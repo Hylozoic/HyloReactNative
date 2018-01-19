@@ -85,7 +85,7 @@ export default class CreateCommunityReview extends React.Component {
         </View>
       </View>
       {error && <View style={styles.errorBubble}><ErrorBubble text={error} /></View> }
-      <Button text="Let's Do This!" onPress={this.submit} style={styles.button} disabled={false} />
+      <Button text="Let's Do This!" onPress={this.submit} style={styles.button} disabled={!!this.props.createCommunityPending} />
     </KeyboardFriendlyView>
   }
 }
