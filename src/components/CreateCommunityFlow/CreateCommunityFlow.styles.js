@@ -37,6 +37,14 @@ export default {
     marginTop: 100,
     ...mixins.underline
   },
+  urlTextInputContainer: {
+    marginTop: 59,
+    ...mixins.underline
+  },
+  reviewTextInputContainer: {
+    marginTop: 20,
+    ...mixins.underline
+  },
   secondTextInputContainer: {
     marginTop: 10,
     ...mixins.underline
@@ -66,13 +74,8 @@ export default {
     fontWeight: 'bold',
     width: 300
   },
-  reviewButton: {
-    width: 40,
-    height: 30,
-    marginBottom: -10
-  },
   editContainer: {
-    width: 40,
+    width: 30,
     height: 30
   },
   editText: {

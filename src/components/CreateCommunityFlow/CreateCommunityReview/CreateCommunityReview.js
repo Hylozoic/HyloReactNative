@@ -48,7 +48,7 @@ export default class CreateCommunityReview extends React.Component {
     return <KeyboardFriendlyView style={styles.container}>
       <Text style={styles.header}>Everything look good?</Text>
       <Text style={styles.description}>You can always come back and change your details at any time</Text>
-      <View style={styles.textInputContainer}>
+      <View style={styles.reviewTextInputContainer}>
         <Text style={styles.textInputLabel}>Whats the name of your community?</Text>
         <View style={styles.textInputWithButton}>
           <TextInput
