@@ -2,7 +2,8 @@ import React from 'react'
 import {
   Text,
   View,
-  TextInput
+  TextInput,
+  ScrollView
 } from 'react-native'
 import Button from '../../Button'
 import KeyboardFriendlyView from '../../KeyboardFriendlyView'

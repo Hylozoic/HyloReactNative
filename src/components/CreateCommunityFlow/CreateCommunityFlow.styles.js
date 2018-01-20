@@ -12,7 +12,9 @@ export default {
   container: {
     backgroundColor: caribbeanGreen,
     padding: 20,
-    flex: 1
+    display: 'flex',
+    flex: 1,
+    alignItems: 'stretch'
   },
   header: {
     color: white,
@@ -30,9 +32,10 @@ export default {
     fontSize: 16,
     backgroundColor: 'white',
     color: caribbeanGreen,
-    position: 'absolute',
-    right: 20,
-    bottom: 20
+    alignSelf: 'stretch',
+    marginTop: 'auto',
+    marginLeft: 'auto',
+    marginBottom: 20
   },
   textInputContainer: {
     marginTop: 100,
