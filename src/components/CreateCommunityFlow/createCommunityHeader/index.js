@@ -12,7 +12,12 @@ export default function createCommunityHeader (title, navigation) {
     fontSize: 10,
     headerStyle: {
       backgroundColor: caribbeanGreen,
-      borderBottomWidth: 0
+      borderBottomWidth: 0,
+      shadowRadius: 0,
+      shadowOffset: {
+        height: 0
+      },
+      elevation: 0
     },
     headerBackgroundColor: caribbeanGreen,
     headerLeft: <HeaderBackButton onPress={() => navigation.goBack()} tintColor={white60onCaribbeanGreen} />
