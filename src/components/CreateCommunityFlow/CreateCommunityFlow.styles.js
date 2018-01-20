@@ -1,5 +1,6 @@
 import { caribbeanGreen, white, white80onCaribbeanGreen } from 'style/colors'
 import { StyleSheet } from 'react-native'
+import { isIOS } from 'util/platform'
 
 const mixins = {
   underline: {
@@ -42,7 +43,7 @@ export default {
     ...mixins.underline
   },
   reviewTextInputContainer: {
-    marginTop: 20,
+    marginTop: isIOS ? 100 : 20,
     ...mixins.underline
   },
   secondTextInputContainer: {
