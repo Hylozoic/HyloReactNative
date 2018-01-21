@@ -35,7 +35,6 @@ exports[`matches last snapshot 1`] = `
     />
   </View>
   <Button
-    disabled={false}
     onPress={[Function]}
     text="Continue"
   />
