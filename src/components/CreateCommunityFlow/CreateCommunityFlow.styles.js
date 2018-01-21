@@ -35,7 +35,7 @@ export default {
     alignSelf: 'stretch',
     marginTop: 'auto',
     marginLeft: 'auto',
-    marginBottom: 20
+    marginBottom: isIOS ? 20 : 0
   },
   textInputContainer: {
     marginTop: 100,
