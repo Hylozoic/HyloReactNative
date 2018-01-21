@@ -82,7 +82,7 @@ export default class CreateCommunityUrl extends React.Component {
   }
 
   render () {
-    const { error } = this.state
+    const { error, communityUrl } = this.state
     return <KeyboardFriendlyView style={styles.container}>
       <Text style={styles.header}>Choose an address for your community</Text>
       <Text style={styles.description}>Your URL is the address that members will use to access your community online. The shorter the better!</Text>
@@ -93,7 +93,7 @@ export default class CreateCommunityUrl extends React.Component {
           onChangeText={communityUrl => this.setInput('communityUrl', communityUrl)}
           returnKeyType='next'
           autoCapitalize='none'
-          value={formatDomainWithUrl(this.state.communityUrl)}
+          value={formatDomainWithUrl(communityUrl)}
           autoCorrect={false}
           underlineColorAndroid={styles.androidInvisibleUnderline} />
       </View>

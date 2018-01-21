@@ -82,7 +82,7 @@ export default class CreateCommunityName extends React.Component {
           underlineColorAndroid={styles.androidInvisibleUnderline} />
       </View>
       {error && <View style={styles.errorBubble}><ErrorBubble text={error} topArrow /></View>}
-      <Button text='Continue' onPress={this.checkAndSubmit} style={styles.button} disabled={false} />
+      <Button text='Continue' onPress={this.checkAndSubmit} style={styles.button} />
     </KeyboardFriendlyView>
   }
 }
