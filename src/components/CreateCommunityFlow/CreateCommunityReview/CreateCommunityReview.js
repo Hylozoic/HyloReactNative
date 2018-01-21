@@ -11,7 +11,7 @@ import ErrorBubble from '../../ErrorBubble'
 import {
   formatDomainWithUrl
 } from '../util'
-import createCommunityHeader from '../createCommunityHeader'
+import createCommunityHeader from '../util/createCommunityHeader'
 import styles from '../CreateCommunityFlow.styles'
 
 export default class CreateCommunityReview extends React.Component {

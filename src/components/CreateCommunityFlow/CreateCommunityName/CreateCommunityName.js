@@ -9,7 +9,7 @@ import Button from '../../Button'
 import KeyboardFriendlyView from '../../KeyboardFriendlyView'
 import ErrorBubble from '../../ErrorBubble'
 import styles from '../CreateCommunityFlow.styles'
-import createCommunityHeader from '../createCommunityHeader'
+import createCommunityHeader from '../util/createCommunityHeader'
 
 export default class CreateCommunityName extends React.Component {
   static navigationOptions = ({ navigation }) => {

@@ -13,7 +13,7 @@ import {
   removeUrlFromDomain
 } from '../util'
 import Button from '../../Button'
-import createCommunityHeader from '../createCommunityHeader'
+import createCommunityHeader from '../util/createCommunityHeader'
 import styles from '../CreateCommunityFlow.styles'
 
 export default class CreateCommunityUrl extends React.Component {
