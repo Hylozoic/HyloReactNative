@@ -17,13 +17,6 @@ export default class CreateCommunityName extends React.Component {
     return createCommunityHeader(title, navigation)
   }
 
-  componentDidMount = () => {
-    const { navigation } = this.props
-    navigation.setParams({
-
-    })
-  }
-
   constructor (props) {
     super(props)
     this.state = {
