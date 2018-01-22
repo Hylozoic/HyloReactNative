@@ -31,234 +31,240 @@ Object {
 `;
 
 exports[`matches last snapshot 1`] = `
-<KeyboardFriendlyView>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-  >
-    Everything look good?
-  </Text>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-  >
-    You can always come back and change your details at any time
-  </Text>
-  <View>
+<ScrollViewMock>
+  <KeyboardFriendlyView>
     <Text
       accessible={true}
       allowFontScaling={true}
       ellipsizeMode="tail"
     >
-      Whats the name of your community?
+      Everything look good?
     </Text>
-    <View>
-      <TextInput
-        allowFontScaling={true}
-        disabled={true}
-        underlineColorAndroid="rgba(0,0,0,0)"
-        value={undefined}
-      />
-      <TouchableOpacity
-        activeOpacity={0.2}
-        onPress={undefined}
-      >
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-        >
-          Edit
-        </Text>
-      </TouchableOpacity>
-    </View>
-  </View>
-  <View>
     <Text
       accessible={true}
       allowFontScaling={true}
       ellipsizeMode="tail"
     >
-      Whats the url of your community?
+      You can always come back and change your details at any time
     </Text>
     <View>
-      <TextInput
+      <Text
+        accessible={true}
         allowFontScaling={true}
-        disabled={true}
-        underlineColorAndroid="rgba(0,0,0,0)"
-        value={undefined}
-      />
-      <TouchableOpacity
-        activeOpacity={0.2}
-        onPress={undefined}
+        ellipsizeMode="tail"
       >
-        <Text
-          accessible={true}
+        Whats the name of your community?
+      </Text>
+      <View>
+        <TextInput
           allowFontScaling={true}
-          ellipsizeMode="tail"
+          disabled={true}
+          underlineColorAndroid="rgba(0,0,0,0)"
+          value={undefined}
+        />
+        <TouchableOpacity
+          activeOpacity={0.2}
+          onPress={undefined}
         >
-          Edit
-        </Text>
-      </TouchableOpacity>
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+          >
+            Edit
+          </Text>
+        </TouchableOpacity>
+      </View>
     </View>
-  </View>
-  <Button
-    disabled={false}
-    onPress={[Function]}
-    text="Let's Do This!"
-  />
-</KeyboardFriendlyView>
+    <View>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+      >
+        Whats the url of your community?
+      </Text>
+      <View>
+        <TextInput
+          allowFontScaling={true}
+          disabled={true}
+          underlineColorAndroid="rgba(0,0,0,0)"
+          value={undefined}
+        />
+        <TouchableOpacity
+          activeOpacity={0.2}
+          onPress={undefined}
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+          >
+            Edit
+          </Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+    <Button
+      disabled={false}
+      onPress={[Function]}
+      text="Let's Do This!"
+    />
+  </KeyboardFriendlyView>
+</ScrollViewMock>
 `;
 
 exports[`matches last snapshot when visible is true 1`] = `
-<KeyboardFriendlyView>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-  >
-    Everything look good?
-  </Text>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-  >
-    You can always come back and change your details at any time
-  </Text>
+<RCTScrollView>
   <View>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
-      Whats the name of your community?
-    </Text>
-    <View>
-      <TextInput
-        allowFontScaling={true}
-        disabled={true}
-        underlineColorAndroid="rgba(0,0,0,0)"
-        value={undefined}
-      />
-      <View
-        accessibilityComponentType={undefined}
-        accessibilityLabel={undefined}
-        accessibilityTraits={undefined}
+    <KeyboardFriendlyView>
+      <Text
         accessible={true}
-        collapsable={undefined}
-        hitSlop={undefined}
-        isTVSelectable={true}
-        nativeID={undefined}
-        onLayout={undefined}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
-        testID={undefined}
-        tvParallaxProperties={undefined}
-      >
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-        >
-          Edit
-        </Text>
-      </View>
-    </View>
-  </View>
-  <View>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
-      Whats the url of your community?
-    </Text>
-    <View>
-      <TextInput
         allowFontScaling={true}
-        disabled={true}
-        underlineColorAndroid="rgba(0,0,0,0)"
-        value={undefined}
-      />
-      <View
-        accessibilityComponentType={undefined}
-        accessibilityLabel={undefined}
-        accessibilityTraits={undefined}
-        accessible={true}
-        collapsable={undefined}
-        hitSlop={undefined}
-        isTVSelectable={true}
-        nativeID={undefined}
-        onLayout={undefined}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
-        testID={undefined}
-        tvParallaxProperties={undefined}
+        ellipsizeMode="tail"
       >
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-        >
-          Edit
-        </Text>
-      </View>
-    </View>
-  </View>
-  <View>
-    <View>
+        Everything look good?
+      </Text>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+      >
+        You can always come back and change your details at any time
+      </Text>
       <View>
         <Text
           accessible={true}
           allowFontScaling={true}
           ellipsizeMode="tail"
         >
-          This is an error
+          Whats the name of your community?
         </Text>
+        <View>
+          <TextInput
+            allowFontScaling={true}
+            disabled={true}
+            underlineColorAndroid="rgba(0,0,0,0)"
+            value={undefined}
+          />
+          <View
+            accessibilityComponentType={undefined}
+            accessibilityLabel={undefined}
+            accessibilityTraits={undefined}
+            accessible={true}
+            collapsable={undefined}
+            hitSlop={undefined}
+            isTVSelectable={true}
+            nativeID={undefined}
+            onLayout={undefined}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            testID={undefined}
+            tvParallaxProperties={undefined}
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+            >
+              Edit
+            </Text>
+          </View>
+        </View>
       </View>
-    </View>
-  </View>
-  <View>
-    <View
-      accessibilityComponentType={undefined}
-      accessibilityLabel={undefined}
-      accessibilityTraits={undefined}
-      accessible={true}
-      collapsable={undefined}
-      hitSlop={undefined}
-      isTVSelectable={true}
-      nativeID={undefined}
-      onLayout={undefined}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      testID={undefined}
-      tvParallaxProperties={undefined}
-    >
       <View>
         <Text
           accessible={true}
           allowFontScaling={true}
           ellipsizeMode="tail"
         >
-          Let's Do This!
+          Whats the url of your community?
         </Text>
+        <View>
+          <TextInput
+            allowFontScaling={true}
+            disabled={true}
+            underlineColorAndroid="rgba(0,0,0,0)"
+            value={undefined}
+          />
+          <View
+            accessibilityComponentType={undefined}
+            accessibilityLabel={undefined}
+            accessibilityTraits={undefined}
+            accessible={true}
+            collapsable={undefined}
+            hitSlop={undefined}
+            isTVSelectable={true}
+            nativeID={undefined}
+            onLayout={undefined}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            testID={undefined}
+            tvParallaxProperties={undefined}
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+            >
+              Edit
+            </Text>
+          </View>
+        </View>
       </View>
-    </View>
+      <View>
+        <View>
+          <View>
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+            >
+              This is an error
+            </Text>
+          </View>
+        </View>
+      </View>
+      <View>
+        <View
+          accessibilityComponentType={undefined}
+          accessibilityLabel={undefined}
+          accessibilityTraits={undefined}
+          accessible={true}
+          collapsable={undefined}
+          hitSlop={undefined}
+          isTVSelectable={true}
+          nativeID={undefined}
+          onLayout={undefined}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          testID={undefined}
+          tvParallaxProperties={undefined}
+        >
+          <View>
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+            >
+              Let's Do This!
+            </Text>
+          </View>
+        </View>
+      </View>
+    </KeyboardFriendlyView>
   </View>
-</KeyboardFriendlyView>
+</RCTScrollView>
 `;

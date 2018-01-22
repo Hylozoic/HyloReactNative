@@ -2,7 +2,8 @@ import React from 'react'
 import {
   Text,
   View,
-  TextInput
+  TextInput,
+  ScrollView
 } from 'react-native'
 import ErrorBubble from '../../ErrorBubble'
 import KeyboardFriendlyView from '../../KeyboardFriendlyView'
@@ -85,22 +86,24 @@ export default class CreateCommunityUrl extends React.Component {
 
   render () {
     const { error, communityUrl } = this.state
-    return <KeyboardFriendlyView style={styles.container}>
-      <Text style={styles.header}>Choose an address for your community</Text>
-      <Text style={styles.description}>Your URL is the address that members will use to access your community online. The shorter the better!</Text>
-      <View style={styles.urlTextInputContainer}>
-        <Text style={styles.textInputLabel}>Whats the name of your community?</Text>
-        <TextInput
-          style={styles.textInput}
-          onChangeText={communityUrl => this.setInput('communityUrl', removeUrlFromDomain(communityUrl))}
-          returnKeyType='next'
-          autoCapitalize='none'
-          value={formatDomainWithUrl(communityUrl)}
-          autoCorrect={false}
-          underlineColorAndroid={styles.androidInvisibleUnderline} />
-      </View>
-      {error && <View style={styles.errorBubble}><ErrorBubble text={error} topArrow /></View> }
-      <Button text='Continue' onPress={this.checkAndSubmit} style={styles.button} disabled={!!this.props.fetchUrlPending} />
-    </KeyboardFriendlyView>
+    return <ScrollView>
+      <KeyboardFriendlyView style={styles.container}>
+        <Text style={styles.header}>Choose an address for your community</Text>
+        <Text style={styles.description}>Your URL is the address that members will use to access your community online. The shorter the better!</Text>
+        <View style={styles.urlTextInputContainer}>
+          <Text style={styles.textInputLabel}>Whats the name of your community?</Text>
+          <TextInput
+            style={styles.textInput}
+            onChangeText={communityUrl => this.setInput('communityUrl', removeUrlFromDomain(communityUrl))}
+            returnKeyType='next'
+            autoCapitalize='none'
+            value={formatDomainWithUrl(communityUrl)}
+            autoCorrect={false}
+            underlineColorAndroid={styles.androidInvisibleUnderline} />
+        </View>
+        {error && <View style={styles.errorBubble}><ErrorBubble text={error} topArrow /></View> }
+        <Button text='Continue' onPress={this.checkAndSubmit} style={styles.button} disabled={!!this.props.fetchUrlPending} />
+      </KeyboardFriendlyView>
+    </ScrollView>
   }
 }

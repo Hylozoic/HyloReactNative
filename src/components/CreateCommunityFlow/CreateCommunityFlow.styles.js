@@ -1,6 +1,10 @@
 import { caribbeanGreen, white, white80onCaribbeanGreen } from 'style/colors'
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Dimensions } from 'react-native'
 import { isIOS } from 'util/platform'
+
+const screenHeight = Dimensions.get('window').height
+const screenWidth = Dimensions.get('window').width
+const containerHeightModifier = isIOS ? 60 : 80
 
 const mixins = {
   underline: {
@@ -14,7 +18,8 @@ export default {
     padding: 20,
     display: 'flex',
     flex: 1,
-    alignItems: 'stretch'
+    alignItems: 'stretch',
+    minHeight: screenHeight - containerHeightModifier
   },
   header: {
     color: white,
