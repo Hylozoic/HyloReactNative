@@ -67,6 +67,7 @@ export default class CreateCommunityUrl extends React.Component {
     .then(({ error }) => {
       if (error) {
         this.setErrorMessage('There was an error, please try again.')
+        return
       }
       if (this.props.urlExists === false) {
         this.props.saveCommunityUrl(communityUrl)
