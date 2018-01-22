@@ -5,6 +5,8 @@ import { get } from 'lodash/fp'
 import getMe from '../../store/selectors/getMe'
 import getNetwork from '../../store/selectors/getNetwork'
 import getCommunity from '../../store/selectors/getCommunity'
+import getCurrentCommunityId from '../../store/selectors/getCurrentCommunityId'
+import getCurrentNetworkId from '../../store/selectors/getCurrentNetworkId'
 import makeGoToCommunity from '../../store/actions/makeGoToCommunity'
 import { ALL_COMMUNITIES_ID } from '../../store/models/Community'
 import {
@@ -18,11 +20,11 @@ import { mapWhenFocused, mergeWhenFocused } from 'util/connector'
 export function mapStateToProps (state, props) {
   const params = get('state.params', props.navigation) || {}
   // NOTE: networkId is only received as a prop (currently via Home)
-  const networkId = props.networkId
+  const networkId = getCurrentNetworkId(state, props)
   // NOTE: communityId is is received either as a prop (via Home) or as a
   // navigation parameter. In case of nav params the screen will load with a
   // back button and be added to the stack.
-  const communityId = params.communityId || props.communityId
+  const communityId = getCurrentCommunityId(state, props)
   const topicName = props.topicName || params.topicName
   const community = !networkId && getCommunity(state, {id: communityId})
   const network = getNetwork(state, {id: networkId})
