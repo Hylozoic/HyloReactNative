@@ -39,7 +39,7 @@ export default class Feed extends Component {
       showPost,
       showTopic,
       screenProps,
-      toggleTopicSubscribe,
+      setTopicSubscribe,
       topicName,
       topicSubscribed
     } = this.props
@@ -59,7 +59,7 @@ export default class Feed extends Component {
             newPost={newPost}
             topicName={topicName}
             topicSubscribed={topicSubscribed}
-            toggleTopicSubscribe={toggleTopicSubscribe} />}
+            setTopicSubscribe={setTopicSubscribe} />}
         navigation={navigation}
         screenProps={screenProps}
         showCommunities={!community}

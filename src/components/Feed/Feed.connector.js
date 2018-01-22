@@ -10,7 +10,7 @@ import { ALL_COMMUNITIES_ID } from '../../store/models/Community'
 import {
   fetchCommunityTopic,
   getCommunityTopic,
-  toggleTopicSubscribe,
+  setTopicSubscribe,
   FETCH_COMMUNITY_TOPIC
 } from './Feed.store'
 import { mapWhenFocused, mergeWhenFocused } from 'util/connector'
@@ -60,7 +60,7 @@ export function mapDispatchToProps (dispatch, { navigation }) {
     goToCommunity: makeGoToCommunity(dispatch, navigation),
     ...bindActionCreators({
       fetchCommunityTopic,
-      toggleTopicSubscribe
+      setTopicSubscribe
     }, dispatch)
   }
 }
@@ -79,8 +79,8 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     fetchCommunityTopic: topicName && slug
       ? () => dispatchProps.fetchCommunityTopic(topicName, slug)
       : () => {},
-    toggleTopicSubscribe: topic && communityId
-      ? () => dispatchProps.toggleTopicSubscribe(topic.id, communityId, !topicSubscribed)
+    setTopicSubscribe: topic && communityId
+      ? () => dispatchProps.setTopicSubscribe(topic.id, communityId, !topicSubscribed)
       : () => {}
   }
 }

@@ -14,7 +14,7 @@ describe('Topics', () => {
         bannerUrl: 'community-banner.png'
       },
       topics: [1, 2, 3],
-      toggleTopicSubscribe: () => {},
+      setTopicSubscribe: () => {},
       goToTopic: () => {}
     }
     renderer.render(<Topics {...props} />)
@@ -32,7 +32,7 @@ describe('Topics', () => {
       },
       topics: [1, 2, 3],
       pending: true,
-      toggleTopicSubscribe: () => {},
+      setTopicSubscribe: () => {},
       goToTopic: () => {}
     }
     renderer.render(<Topics {...props} />)
@@ -46,7 +46,7 @@ describe('TopicList', () => {
   it('matches last snapshot', () => {
     const props = {
       topics: [1, 2, 3],
-      toggleTopicSubscribe: () => {},
+      setTopicSubscribe: () => {},
       goToTopic: () => {}
     }
     const renderer = new ReactShallowRenderer()
@@ -64,7 +64,7 @@ describe('TopicRow', () => {
         newPostCount: 4,
         isSubscribed: true
       },
-      toggleTopicSubscribe: () => {},
+      setTopicSubscribe: () => {},
       goToTopic: () => {}
     }
     const renderer = new ReactShallowRenderer()

@@ -32,7 +32,7 @@ describe('mergeProps', () => {
     }
     const dispatchProps = {
       fetchCommunityTopics: jest.fn(),
-      toggleTopicSubscribe: jest.fn()
+      setTopicSubscribe: jest.fn()
     }
     const ownProps = {
       navigation: {
@@ -43,8 +43,8 @@ describe('mergeProps', () => {
     expect(mergedProps).toMatchSnapshot()
     mergedProps.fetchCommunityTopics()
     expect(dispatchProps.fetchCommunityTopics).toHaveBeenCalledWith(communityId, {first: null})
-    mergedProps.toggleTopicSubscribe(topicId, isSubscribing)
-    expect(dispatchProps.toggleTopicSubscribe).toHaveBeenCalledWith(topicId, communityId, isSubscribing)
+    mergedProps.setTopicSubscribe(topicId, isSubscribing)
+    expect(dispatchProps.setTopicSubscribe).toHaveBeenCalledWith(topicId, communityId, isSubscribing)
     mergedProps.goToTopic(topicName)
     expect(ownProps.navigation.navigate).toHaveBeenCalledWith('Feed', {topicName})
   })

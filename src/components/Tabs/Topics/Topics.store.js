@@ -1,6 +1,6 @@
 import { makeGetQueryResults, makeQueryResultsModelSelector } from '../../../store/reducers/queryResults'
 import { FETCH_COMMUNITY_TOPICS } from '../../../store/actions/fetchCommunityTopics'
-export { toggleTopicSubscribe } from '../../Feed/Feed.store'
+export { setTopicSubscribe } from '../../Feed/Feed.store'
 
 const getCommunityTopicResults = makeGetQueryResults(FETCH_COMMUNITY_TOPICS)
 

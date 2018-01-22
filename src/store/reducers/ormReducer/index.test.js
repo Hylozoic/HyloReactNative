@@ -1,7 +1,7 @@
 import orm from 'store/models'
 import ormReducer from './index'
 import {
-  TOGGLE_TOPIC_SUBSCRIBE_PENDING
+  SET_TOPIC_SUBSCRIBE_PENDING
 } from '../../../components/Feed/Feed.store'
 import {
   VOTE_ON_POST_PENDING
@@ -118,13 +118,13 @@ it('handles CREATE_COMMENT', () => {
   expect(newSession.Post.withId('10').commentsTotal).toEqual(1)
 })
 
-it('handles TOGGLE_TOPIC_SUBSCRIBE_PENDING', () => {
+it('handles SET_TOPIC_SUBSCRIBE_PENDING', () => {
   const session = orm.session(orm.getEmptyState())
   session.CommunityTopic.create({
     topic: '1', community: '1', isSubscribed: false, followersTotal: 3
   })
   const action = {
-    type: TOGGLE_TOPIC_SUBSCRIBE_PENDING,
+    type: SET_TOPIC_SUBSCRIBE_PENDING,
     meta: {
       topicId: '1',
       communityId: '1',

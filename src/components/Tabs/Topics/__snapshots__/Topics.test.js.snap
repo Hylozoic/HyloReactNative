@@ -32,19 +32,19 @@ exports[`TopicList matches last snapshot 1`] = `
   <TopicRow
     first={true}
     goToTopic={[Function]}
-    toggleTopicSubscribe={[Function]}
+    setTopicSubscribe={[Function]}
     topic={1}
   />
   <TopicRow
     first={false}
     goToTopic={[Function]}
-    toggleTopicSubscribe={[Function]}
+    setTopicSubscribe={[Function]}
     topic={2}
   />
   <TopicRow
     first={false}
     goToTopic={[Function]}
-    toggleTopicSubscribe={[Function]}
+    setTopicSubscribe={[Function]}
     topic={3}
   />
 </View>
@@ -106,7 +106,7 @@ exports[`Topics renders correctly a community and topics 1`] = `
     </Text>
     <TopicList
       goToTopic={[Function]}
-      toggleTopicSubscribe={[Function]}
+      setTopicSubscribe={[Function]}
       topics={
         Array [
           1,

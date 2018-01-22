@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import getCurrentCommunity from '../../../store/selectors/getCurrentCommunity'
 import fetchCommunityTopics, { FETCH_COMMUNITY_TOPICS } from '../../../store/actions/fetchCommunityTopics'
-import { getCommunityTopics, presentCommunityTopic, toggleTopicSubscribe } from './Topics.store'
+import { getCommunityTopics, presentCommunityTopic, setTopicSubscribe } from './Topics.store'
 import { get } from 'lodash/fp'
 
 export function mapStateToProps (state, props) {
@@ -24,14 +24,14 @@ export function mapStateToProps (state, props) {
 
 export const mapDispatchToProps = {
   fetchCommunityTopics,
-  toggleTopicSubscribe
+  setTopicSubscribe
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
   const { community } = stateProps
   const fetchCommunityTopics = () => dispatchProps.fetchCommunityTopics(get('id', community), {first: null})
-  const toggleTopicSubscribe = (topicId, isSubscribing) =>
-    dispatchProps.toggleTopicSubscribe(topicId, community.id, isSubscribing)
+  const setTopicSubscribe = (topicId, isSubscribing) =>
+    dispatchProps.setTopicSubscribe(topicId, community.id, isSubscribing)
   const goToTopic = topicName => ownProps.navigation.navigate('Feed', {topicName})
 
   return {
@@ -39,7 +39,7 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     ...stateProps,
     ...dispatchProps,
     fetchCommunityTopics,
-    toggleTopicSubscribe,
+    setTopicSubscribe,
     goToTopic
   }
 }
