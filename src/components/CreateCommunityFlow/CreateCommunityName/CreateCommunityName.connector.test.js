@@ -27,15 +27,12 @@ describe('mapDispatchToProps', () => {
 
 describe('mergeProps', () => {
   it('merges the props', () => {
-    const dispatchProps = {
-      saveCommunityName: jest.fn(name => Promise.resolve({}))
-    }
     const ownProps = {
       navigation: {
         navigate: jest.fn()
       }
     }
-    const mergedProps = mergeProps(state, dispatchProps, ownProps)
+    const mergedProps = mergeProps(state, {}, ownProps)
     expect(mergedProps).toMatchSnapshot()
     mergedProps.goToCreateCommunityUrl()
     expect(ownProps.navigation.navigate).toHaveBeenCalled()

@@ -22,6 +22,5 @@ Object {
   "navigation": Object {
     "navigate": [Function],
   },
-  "saveCommunityName": [Function],
 }
 `;
