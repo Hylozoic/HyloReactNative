@@ -33,6 +33,9 @@ import {
 import {
   PIN_POST_PENDING
 } from '../../../components/PostCard/PostHeader/PostHeader.store'
+import {
+  CREATE_COMMUNITY
+} from '../../../components/CreateCommunityFlow/CreateCommunityFlow.store'
 import { FETCH_CURRENT_USER } from 'store/actions/fetchCurrentUser'
 
 it('responds to an action with meta.extractModel', () => {
@@ -413,5 +416,34 @@ describe('on UPDATE_THREAD_READ_TIME_PENDING', () => {
 
     const thread = newSession.MessageThread.withId(id)
     expect(new Date(thread.lastReadAt).getTime()).toBeGreaterThan(new Date().getTime() - 5000)
+  })
+})
+
+describe('handles CREATE_COMMUNITY', () => {
+  it('should link the new Community to MeMemberships', () => {
+    const session = orm.mutableSession(orm.getEmptyState())
+    const meId = 'meId'
+    const communityId = 'communityId'
+    const membershipId = 'membershipId'
+    session.Me.create({id: meId})
+    session.Community.create({id: communityId, name: 'community 1'})
+    session.Membership.create({id: membershipId, community: communityId, person: meId})
+
+    const action = {
+      type: CREATE_COMMUNITY,
+      payload: {
+        data: {
+          createCommunity: {
+            id: membershipId
+          }
+        }
+      }
+    }
+
+    const memberships = session.Me.first().memberships
+    expect(memberships.count()).toEqual(0)
+    const newSession = orm.session(ormReducer(session.state, action))
+    const membershipsAfterAction = newSession.Me.first().memberships
+    expect(membershipsAfterAction.count()).toEqual(1)
   })
 })
