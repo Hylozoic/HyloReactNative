@@ -49,11 +49,6 @@ export default class CreateCommunityName extends React.Component {
       })
       return
     }
-
-    this.setState({
-      ...this.state,
-      error: null
-    })
     this.props.saveCommunityName(communityName)
     this.props.goToCreateCommunityUrl()
   }

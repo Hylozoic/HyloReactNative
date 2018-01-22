@@ -15,7 +15,7 @@ it('matches last snapshot', () => {
   expect(actual).toMatchSnapshot()
 })
 
-it('matches last snapshot when visible is true', () => {
+it('matches last snapshot when there is an error', () => {
   const renderer = ReactTestRenderer.create(<CreateCommunityUrl />)
   const instance = renderer.getInstance()
   instance.setState({error: 'This is an error'})
