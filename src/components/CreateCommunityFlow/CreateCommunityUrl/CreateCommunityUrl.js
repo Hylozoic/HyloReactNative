@@ -44,39 +44,35 @@ export default class CreateCommunityUrl extends React.Component {
     })
   }
 
+  setErrorMessage = (error) => {
+    this.setState({
+      ...this.state,
+      error
+    })
+  }
+
   checkAndSubmit = () => {
     const { communityUrl } = this.state
 
     this.clearErrors()
     if (!communityUrl || communityUrl.length === 0) {
-      this.setState({
-        ...this.state,
-        error: 'Please enter a URL'
-      })
+      this.setErrorMessage('Please enter a URL')
       return
     }
     if (!slugValidatorRegex.test(communityUrl)) {
-      this.setState({
-        ...this.state,
-        error: invalidSlugMessage
-      })
+      this.setErrorMessage(invalidSlugMessage)
       return
     }
     this.props.fetchCommunityExists(communityUrl)
     .then(({ error }) => {
       if (error) {
-        this.setState({
-          error: 'There was an error, please try again.'
-        })
+        this.setErrorMessage('There was an error, please try again.')
       }
       if (this.props.urlExists === false) {
         this.props.saveCommunityUrl(communityUrl)
         this.props.goToCreateCommunityReview()
       } else {
-        this.setState({
-          ...this.state,
-          error: 'This url already exists. Please choose another one.'
-        })
+        this.setErrorMessage('This url already exists. Please choose another one.')
       }
     })
   }
