@@ -54,7 +54,6 @@ export default class CreateCommunityReview extends React.Component {
         <View style={styles.textInputWithButton}>
           <TextInput
             style={styles.reviewTextInput}
-            onChangeText={communityName => this.setInput('communityName', communityName)}
             returnKeyType='next'
             autoCapitalize='none'
             value={this.state.communityName}
@@ -72,7 +71,6 @@ export default class CreateCommunityReview extends React.Component {
         <View style={styles.textInputWithButton}>
           <TextInput
             style={styles.reviewTextInput}
-            onChangeText={communityName => this.setInput('communityName', communityName)}
             returnKeyType='next'
             autoCapitalize='none'
             value={formatDomainWithUrl(this.state.communityUrl)}
