@@ -21,3 +21,41 @@ it('matches last snapshot when there is an error', () => {
   instance.setState({error: 'This is an error'})
   expect(renderer.toJSON()).toMatchSnapshot()
 })
+
+it('displays an error message without a community url with checkAndSubmit', () => {
+  const renderer = ReactTestRenderer.create(<CreateCommunityUrl />)
+  const instance = renderer.getInstance()
+  const communityUrl = ''
+  instance.setState({communityUrl})
+  instance.checkAndSubmit()
+  expect(renderer.toJSON()).toMatchSnapshot()
+})
+
+it('clears error from state with clearErrors', () => {
+  const renderer = ReactTestRenderer.create(<CreateCommunityUrl />)
+  const instance = renderer.getInstance()
+  const error = 'some error'
+  instance.setState({error})
+  instance.clearErrors()
+  expect(instance.state.error).toBeNull()
+})
+
+it('updates state with setInput', () => {
+  const renderer = ReactTestRenderer.create(<CreateCommunityUrl />)
+  const instance = renderer.getInstance()
+  const key = 'key'
+  const value = 'value'
+  instance.setInput(key, value)
+  instance.clearErrors()
+  expect(instance.state[key]).toEqual(value)
+})
+
+it('sets the initial state with the initial communityUrl prop value', () => {
+  const communityUrl = 'communityUrl'
+  const props = {
+    communityUrl
+  }
+  const renderer = ReactTestRenderer.create(<CreateCommunityUrl {...props} />)
+  const instance = renderer.getInstance()
+  expect(instance.state.communityUrl).toEqual(communityUrl)
+})

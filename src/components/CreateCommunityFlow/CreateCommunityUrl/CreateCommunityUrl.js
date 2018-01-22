@@ -30,7 +30,6 @@ export default class CreateCommunityUrl extends React.Component {
   }
 
   setInput (key, value) {
-    value = removeUrlFromDomain(value)
     this.setState({
       ...this.state,
       [key]: value
@@ -51,19 +50,25 @@ export default class CreateCommunityUrl extends React.Component {
     })
   }
 
-  checkAndSubmit = () => {
-    const { communityUrl } = this.state
-
+  validate (communityUrl) {
     this.clearErrors()
     if (!communityUrl || communityUrl.length === 0) {
       this.setErrorMessage('Please enter a URL')
-      return
+      return false
     }
     if (!slugValidatorRegex.test(communityUrl)) {
       this.setErrorMessage(invalidSlugMessage)
-      return
+      return false
     }
-    this.props.fetchCommunityExists(communityUrl)
+    return true
+  }
+
+  checkAndSubmit = () => {
+    const { communityUrl } = this.state
+    const { fetchCommunityExists } = this.props
+    if (!this.validate(communityUrl)) return
+
+    fetchCommunityExists(communityUrl)
     .then(({ error }) => {
       if (error) {
         this.setErrorMessage('There was an error, please try again.')
@@ -87,7 +92,7 @@ export default class CreateCommunityUrl extends React.Component {
         <Text style={styles.textInputLabel}>Whats the name of your community?</Text>
         <TextInput
           style={styles.textInput}
-          onChangeText={communityUrl => this.setInput('communityUrl', communityUrl)}
+          onChangeText={communityUrl => this.setInput('communityUrl', removeUrlFromDomain(communityUrl))}
           returnKeyType='next'
           autoCapitalize='none'
           value={formatDomainWithUrl(communityUrl)}
