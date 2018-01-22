@@ -51,10 +51,7 @@ export default class CreateCommunityReview extends React.Component {
         <View style={styles.textInputWithButton}>
           <TextInput
             style={styles.reviewTextInput}
-            returnKeyType='next'
-            autoCapitalize='none'
             value={this.state.communityName}
-            autoCorrect={false}
             underlineColorAndroid={styles.androidInvisibleUnderline}
             disabled
           />
@@ -68,10 +65,7 @@ export default class CreateCommunityReview extends React.Component {
         <View style={styles.textInputWithButton}>
           <TextInput
             style={styles.reviewTextInput}
-            returnKeyType='next'
-            autoCapitalize='none'
             value={this.state.communityUrl}
-            autoCorrect={false}
             underlineColorAndroid={styles.androidInvisibleUnderline}
             disabled
           />
