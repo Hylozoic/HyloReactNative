@@ -14,7 +14,7 @@ it('matches last snapshot', () => {
   expect(actual).toMatchSnapshot()
 })
 
-it('displays an error message without a community name after clicking submit', () => {
+it('displays an error message without a community name with checkAndSubmit', () => {
   const renderer = ReactTestRenderer.create(<CreateCommunityName />)
   const instance = renderer.getInstance()
   const communityName = ''
@@ -23,7 +23,7 @@ it('displays an error message without a community name after clicking submit', (
   expect(renderer.toJSON()).toMatchSnapshot()
 })
 
-it('stores the community name and redirects with a community name after clicking submit', () => {
+it('stores the community name and redirects with a community name with checkAndSubmit', () => {
   const props = {
     saveCommunityName: jest.fn(),
     goToCreateCommunityUrl: jest.fn()
