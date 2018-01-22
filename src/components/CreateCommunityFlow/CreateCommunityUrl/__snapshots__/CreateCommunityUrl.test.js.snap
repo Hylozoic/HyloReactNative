@@ -42,7 +42,7 @@ exports[`matches last snapshot 1`] = `
 </KeyboardFriendlyView>
 `;
 
-exports[`matches last snapshot when visible is true 1`] = `
+exports[`matches last snapshot when there is an error 1`] = `
 <KeyboardFriendlyView>
   <Text
     accessible={true}
