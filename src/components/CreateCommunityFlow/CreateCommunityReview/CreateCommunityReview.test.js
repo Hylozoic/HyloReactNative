@@ -21,3 +21,19 @@ it('matches last snapshot when visible is true', () => {
   instance.setState({error: 'This is an error'})
   expect(renderer.toJSON()).toMatchSnapshot()
 })
+
+it('calls createCommunity on submit', () => {
+  const props = {
+    createCommunity: jest.fn(() => Promise.resolve({}))
+  }
+  const communityName = 'communityName'
+  const communityUrl = 'communityUrl'
+  const renderer = ReactTestRenderer.create(<CreateCommunityReview {...props} />)
+  const instance = renderer.getInstance()
+  instance.setState({
+    communityName,
+    communityUrl
+  })
+  instance.submit()
+  expect(props.createCommunity).toHaveBeenCalledWith(communityName, communityUrl)
+})
