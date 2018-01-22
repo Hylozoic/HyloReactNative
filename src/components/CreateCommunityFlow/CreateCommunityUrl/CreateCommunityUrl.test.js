@@ -81,6 +81,20 @@ it('calls fetchCommunityExists on checkAndSubmit', () => {
   expect(props.fetchCommunityExists).toHaveBeenCalledWith(communityUrl)
 })
 
+it('does not call fetchCommunityExists on checkAndSubmit with malformed url', () => {
+  const props = {
+    fetchCommunityExists: jest.fn(() => Promise.resolve({}))
+  }
+  const communityUrl = 'malformed-url-@$#%$#^#'
+  const renderer = ReactTestRenderer.create(<CreateCommunityUrl {...props} />)
+  const instance = renderer.getInstance()
+  instance.setState({
+    communityUrl
+  })
+  instance.checkAndSubmit()
+  expect(props.fetchCommunityExists).toHaveBeenCalledTimes(0)
+})
+
 it('has navigationOptions', () => {
   const navigation = jest.fn()
   expect(CreateCommunityUrl.navigationOptions(navigation)).toMatchSnapshot()
