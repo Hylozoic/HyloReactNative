@@ -67,6 +67,20 @@ it('validates the url', () => {
   expect(instance.validate(communityUrl)).toBeTruthy()
 })
 
+it('calls fetchCommunityExists on checkAndSubmit', () => {
+  const props = {
+    fetchCommunityExists: jest.fn(() => Promise.resolve({}))
+  }
+  const communityUrl = 'passing-url'
+  const renderer = ReactTestRenderer.create(<CreateCommunityUrl {...props} />)
+  const instance = renderer.getInstance()
+  instance.setState({
+    communityUrl
+  })
+  instance.checkAndSubmit()
+  expect(props.fetchCommunityExists).toHaveBeenCalledWith(communityUrl)
+})
+
 it('has navigationOptions', () => {
   const navigation = jest.fn()
   expect(CreateCommunityUrl.navigationOptions(navigation)).toMatchSnapshot()

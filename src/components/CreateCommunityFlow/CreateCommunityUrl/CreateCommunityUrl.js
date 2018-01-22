@@ -65,7 +65,7 @@ export default class CreateCommunityUrl extends React.Component {
 
   checkAndSubmit = () => {
     const { communityUrl } = this.state
-    const { fetchCommunityExists } = this.props
+    const { fetchCommunityExists, saveCommunityUrl, goToCreateCommunityReview } = this.props
     if (!this.validate(communityUrl)) return
 
     fetchCommunityExists(communityUrl)
@@ -75,8 +75,8 @@ export default class CreateCommunityUrl extends React.Component {
         return
       }
       if (this.props.urlExists === false) {
-        this.props.saveCommunityUrl(communityUrl)
-        this.props.goToCreateCommunityReview()
+        saveCommunityUrl(communityUrl)
+        goToCreateCommunityReview()
       } else {
         this.setErrorMessage('This url already exists. Please choose another one.')
       }
