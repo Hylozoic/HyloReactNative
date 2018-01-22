@@ -22,15 +22,6 @@ it('matches last snapshot when there is an error', () => {
   expect(renderer.toJSON()).toMatchSnapshot()
 })
 
-it('displays an error message without a community url with checkAndSubmit', () => {
-  const renderer = ReactTestRenderer.create(<CreateCommunityUrl />)
-  const instance = renderer.getInstance()
-  const communityUrl = ''
-  instance.setState({communityUrl})
-  instance.checkAndSubmit()
-  expect(renderer.toJSON()).toMatchSnapshot()
-})
-
 it('clears error from state with clearErrors', () => {
   const renderer = ReactTestRenderer.create(<CreateCommunityUrl />)
   const instance = renderer.getInstance()
@@ -58,4 +49,17 @@ it('sets the initial state with the initial communityUrl prop value', () => {
   const renderer = ReactTestRenderer.create(<CreateCommunityUrl {...props} />)
   const instance = renderer.getInstance()
   expect(instance.state.communityUrl).toEqual(communityUrl)
+})
+
+it('validates the url', () => {
+  const renderer = ReactTestRenderer.create(<CreateCommunityUrl />)
+  const instance = renderer.getInstance()
+
+  let communityUrl = ''
+  instance.validate(communityUrl)
+  expect(renderer.toJSON()).toMatchSnapshot()
+
+  communityUrl = 'symbols-fail-regex-*^%'
+  instance.validate(communityUrl)
+  expect(renderer.toJSON()).toMatchSnapshot()
 })

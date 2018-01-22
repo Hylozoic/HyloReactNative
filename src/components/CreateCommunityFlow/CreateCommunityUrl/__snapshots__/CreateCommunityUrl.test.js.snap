@@ -1,87 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`displays an error message without a community url with checkAndSubmit 1`] = `
-<KeyboardFriendlyView>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-  >
-    Choose an address for your community
-  </Text>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-  >
-    Your URL is the address that members will use to access your community online. The shorter the better!
-  </Text>
-  <View>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
-      Whats the name of your community?
-    </Text>
-    <TextInput
-      allowFontScaling={true}
-      autoCapitalize="none"
-      autoCorrect={false}
-      onChangeText={[Function]}
-      returnKeyType="next"
-      underlineColorAndroid="rgba(0,0,0,0)"
-      value={undefined}
-    />
-  </View>
-  <View>
-    <View>
-      <View />
-      <View>
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-        >
-          Please enter a URL
-        </Text>
-      </View>
-    </View>
-  </View>
-  <View>
-    <View
-      accessibilityComponentType={undefined}
-      accessibilityLabel={undefined}
-      accessibilityTraits={undefined}
-      accessible={true}
-      collapsable={undefined}
-      hitSlop={undefined}
-      isTVSelectable={true}
-      nativeID={undefined}
-      onLayout={undefined}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      testID={undefined}
-      tvParallaxProperties={undefined}
-    >
-      <View>
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-        >
-          Continue
-        </Text>
-      </View>
-    </View>
-  </View>
-</KeyboardFriendlyView>
-`;
-
 exports[`matches last snapshot 1`] = `
 <KeyboardFriendlyView>
   <Text
@@ -168,6 +86,170 @@ exports[`matches last snapshot when there is an error 1`] = `
           ellipsizeMode="tail"
         >
           This is an error
+        </Text>
+      </View>
+    </View>
+  </View>
+  <View>
+    <View
+      accessibilityComponentType={undefined}
+      accessibilityLabel={undefined}
+      accessibilityTraits={undefined}
+      accessible={true}
+      collapsable={undefined}
+      hitSlop={undefined}
+      isTVSelectable={true}
+      nativeID={undefined}
+      onLayout={undefined}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      testID={undefined}
+      tvParallaxProperties={undefined}
+    >
+      <View>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+        >
+          Continue
+        </Text>
+      </View>
+    </View>
+  </View>
+</KeyboardFriendlyView>
+`;
+
+exports[`validates the url 1`] = `
+<KeyboardFriendlyView>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+  >
+    Choose an address for your community
+  </Text>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+  >
+    Your URL is the address that members will use to access your community online. The shorter the better!
+  </Text>
+  <View>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+    >
+      Whats the name of your community?
+    </Text>
+    <TextInput
+      allowFontScaling={true}
+      autoCapitalize="none"
+      autoCorrect={false}
+      onChangeText={[Function]}
+      returnKeyType="next"
+      underlineColorAndroid="rgba(0,0,0,0)"
+      value={undefined}
+    />
+  </View>
+  <View>
+    <View>
+      <View />
+      <View>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+        >
+          Please enter a URL
+        </Text>
+      </View>
+    </View>
+  </View>
+  <View>
+    <View
+      accessibilityComponentType={undefined}
+      accessibilityLabel={undefined}
+      accessibilityTraits={undefined}
+      accessible={true}
+      collapsable={undefined}
+      hitSlop={undefined}
+      isTVSelectable={true}
+      nativeID={undefined}
+      onLayout={undefined}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      testID={undefined}
+      tvParallaxProperties={undefined}
+    >
+      <View>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+        >
+          Continue
+        </Text>
+      </View>
+    </View>
+  </View>
+</KeyboardFriendlyView>
+`;
+
+exports[`validates the url 2`] = `
+<KeyboardFriendlyView>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+  >
+    Choose an address for your community
+  </Text>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+  >
+    Your URL is the address that members will use to access your community online. The shorter the better!
+  </Text>
+  <View>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+    >
+      Whats the name of your community?
+    </Text>
+    <TextInput
+      allowFontScaling={true}
+      autoCapitalize="none"
+      autoCorrect={false}
+      onChangeText={[Function]}
+      returnKeyType="next"
+      underlineColorAndroid="rgba(0,0,0,0)"
+      value={undefined}
+    />
+  </View>
+  <View>
+    <View>
+      <View />
+      <View>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+        >
+          URLs must have between 2 and 40 characters, and can only have lower case letters, numbers, and dashes.
         </Text>
       </View>
     </View>
