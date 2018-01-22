@@ -8,9 +8,6 @@ import {
 import Button from '../../Button'
 import KeyboardFriendlyView from '../../KeyboardFriendlyView'
 import ErrorBubble from '../../ErrorBubble'
-import {
-  formatDomainWithUrl
-} from '../util'
 import createCommunityHeader from '../util/createCommunityHeader'
 import styles from '../CreateCommunityFlow.styles'
 
@@ -73,7 +70,7 @@ export default class CreateCommunityReview extends React.Component {
             style={styles.reviewTextInput}
             returnKeyType='next'
             autoCapitalize='none'
-            value={formatDomainWithUrl(this.state.communityUrl)}
+            value={this.state.communityUrl}
             autoCorrect={false}
             underlineColorAndroid={styles.androidInvisibleUnderline}
             disabled
