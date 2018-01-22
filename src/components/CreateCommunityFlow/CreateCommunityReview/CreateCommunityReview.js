@@ -37,6 +37,7 @@ export default class CreateCommunityReview extends React.Component {
         this.setState({
           error: 'There was an error, please try again.'
         })
+        return
       }
       this.props.clearNameAndUrlFromStore()
       this.props.goToCommunity(data.payload.data.createCommunity.community)
