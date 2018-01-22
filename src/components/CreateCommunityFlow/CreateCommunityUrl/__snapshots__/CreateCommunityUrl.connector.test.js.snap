@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mapDispatchToProps maps the action generators 1`] = `
+Object {
+  "payload": "my-url",
+  "type": "CreateCommunityFlow/SAVE_COMMUNITY_URL",
+}
+`;
+
+exports[`mapStateToProps returns the right keys 1`] = `
+Object {
+  "communityUrl": "my-url",
+  "fetchUrlPending": true,
+  "urlExists": false,
+}
+`;
+
+exports[`mergeProps merges the props 1`] = `
+Object {
+  "CreateCommunityFlow": Object {
+    "communityUrl": "my-url",
+    "urlExists": false,
+  },
+  "goToCreateCommunityReview": [Function],
+  "navigation": Object {
+    "navigate": [Function],
+  },
+  "pending": Object {
+    "CreateCommunityFlow/FETCH_URL_EXISTS": true,
+  },
+  "saveCommunityName": [Function],
+}
+`;
