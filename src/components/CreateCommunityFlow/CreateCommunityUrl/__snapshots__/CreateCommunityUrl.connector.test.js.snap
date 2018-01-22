@@ -28,6 +28,5 @@ Object {
   "pending": Object {
     "CreateCommunityFlow/FETCH_URL_EXISTS": true,
   },
-  "saveCommunityName": [Function],
 }
 `;
