@@ -37,3 +37,8 @@ it('calls createCommunity on submit', () => {
   instance.submit()
   expect(props.createCommunity).toHaveBeenCalledWith(communityName, communityUrl)
 })
+
+it('has navigationOptions', () => {
+  const navigation = jest.fn()
+  expect(CreateCommunityReview.navigationOptions(navigation)).toMatchSnapshot()
+})

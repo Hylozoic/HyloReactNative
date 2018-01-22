@@ -65,3 +65,8 @@ it('sets the initial state with the initial communityName prop value', () => {
   const instance = renderer.getInstance()
   expect(instance.state.communityName).toEqual(communityName)
 })
+
+it('has navigationOptions', () => {
+  const navigation = jest.fn()
+  expect(CreateCommunityName.navigationOptions(navigation)).toMatchSnapshot()
+})

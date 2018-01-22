@@ -62,4 +62,12 @@ it('validates the url', () => {
   communityUrl = 'symbols-fail-regex-*^%'
   instance.validate(communityUrl)
   expect(renderer.toJSON()).toMatchSnapshot()
+
+  communityUrl = 'passing-url'
+  expect(instance.validate(communityUrl)).toBeTruthy()
+})
+
+it('has navigationOptions', () => {
+  const navigation = jest.fn()
+  expect(CreateCommunityUrl.navigationOptions(navigation)).toMatchSnapshot()
 })

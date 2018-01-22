@@ -1,5 +1,35 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`has navigationOptions 1`] = `
+Object {
+  "color": "#FFFFFF",
+  "fontSize": 10,
+  "headerBackgroundColor": "#0DC39F",
+  "headerLeft": <HeaderBackButton
+    onPress={[Function]}
+    pressColorAndroid="rgba(0, 0, 0, .32)"
+    tintColor="#9ee7d9"
+    truncatedTitle="Back"
+/>,
+  "headerStyle": Object {
+    "backgroundColor": "#0DC39F",
+    "borderBottomWidth": 0,
+    "elevation": 0,
+    "shadowOffset": Object {
+      "height": 0,
+    },
+    "shadowRadius": 0,
+  },
+  "title": <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+>
+    STEP 3/3
+</Text>,
+}
+`;
+
 exports[`matches last snapshot 1`] = `
 <KeyboardFriendlyView>
   <Text
