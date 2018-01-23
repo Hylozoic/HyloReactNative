@@ -85,13 +85,14 @@ export default class Login extends React.Component {
   render () {
     const {
       loginWithGoogle, formError, loginWithFacebook, pending,
-      goToResetPassword, goToSignup, hasSignupLink
+      goToResetPassword, goToSignup, hasSignupLink, bannerMessage
     } = this.props
     const { ssoError, emailIsValid, isConnected } = this.state
     return <ScrollView contentContainerStyle={styles.login} style={styles.container}>
       {ssoError && <Text style={styles.errorBanner}>{ssoError}</Text>}
       {!isConnected && <Text style={styles.errorBanner}>OFFLINE; TRYING TO RECONNECT...</Text>}
       {pending && <Text style={styles.banner}>LOGGING IN...</Text>}
+      {bannerMessage && <Text style={styles.banner}>{bannerMessage}</Text>}
 
       <Image style={styles.logo}
         source={require('../../assets/merkaba-green-on-white.png')} />

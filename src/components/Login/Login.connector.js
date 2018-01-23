@@ -21,6 +21,7 @@ export function mapStateToProps (state, props) {
   return {
     loggedIn: state.session.loggedIn,
     formError,
+    bannerMessage: get('navigation.state.params.bannerMessage', props),
     pending,
     defaultEmail: state.session.defaultLoginEmail,
     goToSignup,

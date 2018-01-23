@@ -14,9 +14,12 @@ describe('mergeProps', () => {
     }
 
     const mergedProps = mergeProps(ownProps, dispatchProps, ownProps)
-    return mergedProps.goToLogin()
-    .then(() => {
-      expect(ownProps.navigation.navigate).toHaveBeenCalledWith('Login')
-    })
+    const testEmail = 'testemail'
+    return mergedProps.goToLogin(testEmail)
+    .then(() =>
+      expect(ownProps.navigation.navigate)
+      .toHaveBeenCalledWith('Login',
+        {bannerMessage: `A link to reset your password has been sent to you at ${testEmail}`})
+    )
   })
 })

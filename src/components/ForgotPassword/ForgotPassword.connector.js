@@ -11,7 +11,9 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     ...stateProps,
     ...dispatchProps,
     ...ownProps,
-    goToLogin: () => navigation.navigate('Login')
+    goToLogin: (email) => navigation.navigate('Login', {
+      bannerMessage: `A link to reset your password has been sent to you at ${email}`
+    })
   }
 }
 
