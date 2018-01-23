@@ -23,8 +23,22 @@ it('matches last snapshot when visible is true', () => {
 })
 
 it('calls createCommunity on submit', () => {
+  const result = {
+    payload: {
+      data: {
+        createCommunity: {
+          community: {
+            id: 1
+          }
+        }
+      }
+    }
+  }
+
   const props = {
-    createCommunity: jest.fn(() => Promise.resolve({}))
+    createCommunity: jest.fn(() => Promise.resolve(result)),
+    clearNameAndUrlFromStore: jest.fn(),
+    goToCommunity: jest.fn()
   }
   const communityName = 'communityName'
   const communityUrl = 'communityUrl'
@@ -34,8 +48,55 @@ it('calls createCommunity on submit', () => {
     communityName,
     communityUrl
   })
-  instance.submit()
-  expect(props.createCommunity).toHaveBeenCalledWith(communityName, communityUrl)
+  return instance.submit()
+  .then(() => {
+    expect(props.createCommunity).toHaveBeenCalledWith(communityName, communityUrl)
+    expect(props.clearNameAndUrlFromStore).toHaveBeenCalled()
+    expect(props.goToCommunity).toHaveBeenCalledWith(result.payload.data.createCommunity.community)
+  })
+})
+
+it('creates an error on submit if an error is returned', () => {
+  const result = {
+    error: 'some error'
+  }
+  const props = {
+    createCommunity: jest.fn(() => Promise.resolve(result)),
+    clearNameAndUrlFromStore: jest.fn(),
+    goToCommunity: jest.fn()
+  }
+  const communityName = 'communityName'
+  const communityUrl = 'communityUrl'
+  const renderer = ReactTestRenderer.create(<CreateCommunityReview {...props} />)
+  const instance = renderer.getInstance()
+  instance.setState({
+    communityName,
+    communityUrl
+  })
+  return instance.submit()
+  .then(() => {
+    expect(instance.state.error).toBeTruthy()
+  })
+})
+
+it('creates an error on submit if the promise is rejected', () => {
+  const props = {
+    createCommunity: jest.fn(() => Promise.reject(new Error(''))),
+    clearNameAndUrlFromStore: jest.fn(),
+    goToCommunity: jest.fn()
+  }
+  const communityName = 'communityName'
+  const communityUrl = 'communityUrl'
+  const renderer = ReactTestRenderer.create(<CreateCommunityReview {...props} />)
+  const instance = renderer.getInstance()
+  instance.setState({
+    communityName,
+    communityUrl
+  })
+  return instance.submit()
+  .then(() => {
+    expect(instance.state.error).toBeTruthy()
+  })
 })
 
 it('has navigationOptions', () => {

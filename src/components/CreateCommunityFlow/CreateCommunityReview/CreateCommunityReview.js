@@ -29,7 +29,8 @@ export default class CreateCommunityReview extends React.Component {
 
   submit = () => {
     const { communityName, communityUrl } = this.state
-    this.props.createCommunity(communityName, communityUrl)
+    const { createCommunity, clearNameAndUrlFromStore, goToCommunity } = this.props
+    return createCommunity(communityName, communityUrl)
     .then((data) => {
       if (data.error) {
         this.setState({
@@ -37,8 +38,12 @@ export default class CreateCommunityReview extends React.Component {
         })
         return
       }
-      this.props.clearNameAndUrlFromStore()
-      this.props.goToCommunity(data.payload.data.createCommunity.community)
+      clearNameAndUrlFromStore()
+      goToCommunity(data.payload.data.createCommunity.community)
+    }, () => {
+      this.setState({
+        error: 'There was an error, please try again.'
+      })
     })
   }
 
