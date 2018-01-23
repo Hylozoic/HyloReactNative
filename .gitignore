@@ -58,3 +58,7 @@ coverage/
 # Google login
 google-services.json
 GoogleService-Info.plist
+
+# Bundler (for iOS build tools)
+.bundle/
+vendor/

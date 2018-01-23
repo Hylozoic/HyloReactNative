@@ -3,7 +3,6 @@ import { Button, View } from 'react-native'
 import KeyboardFriendlyView from '../../KeyboardFriendlyView'
 import Editor from '../../Editor'
 import { keyboardAvoidingViewProps as kavProps } from 'util/viewHelpers'
-import { get } from 'lodash/fp'
 
 export default class DetailsEditor extends React.Component {
   static navigationOptions = ({ navigation }) => {
