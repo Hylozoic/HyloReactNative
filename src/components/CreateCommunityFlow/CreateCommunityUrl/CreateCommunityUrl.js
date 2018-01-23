@@ -5,6 +5,7 @@ import {
   TextInput,
   ScrollView
 } from 'react-native'
+import { get } from 'lodash/fp'
 import ErrorBubble from '../../ErrorBubble'
 import KeyboardFriendlyView from '../../KeyboardFriendlyView'
 import {
@@ -68,20 +69,12 @@ export default class CreateCommunityUrl extends React.Component {
     const { communityUrl } = this.state
     const { fetchCommunityExists, saveCommunityUrl, goToCreateCommunityReview } = this.props
     if (!this.validate(communityUrl)) return
-
-    fetchCommunityExists(communityUrl)
-    .then(({ error }) => {
-      if (error) {
-        this.setErrorMessage('There was an error, please try again.')
-        return
-      }
-      if (this.props.urlExists === false) {
-        saveCommunityUrl(communityUrl)
-        goToCreateCommunityReview()
-      } else {
-        this.setErrorMessage('This url already exists. Please choose another one.')
-      }
-    })
+    return checkCommunityUrlThenRedirect(communityUrl,
+      fetchCommunityExists,
+      this.setErrorMessage,
+      saveCommunityUrl,
+      goToCreateCommunityReview
+    )
   }
 
   render () {
@@ -106,4 +99,28 @@ export default class CreateCommunityUrl extends React.Component {
       </KeyboardFriendlyView>
     </ScrollView>
   }
+}
+
+export function checkCommunityUrlThenRedirect (communityUrl, fetchCommunityExists, setErrorMessage, saveCommunityUrl, goToCreateCommunityReview) {
+  return fetchCommunityExists(communityUrl)
+  .then((data) => {
+    const error = get('error', data)
+    const communityExists = get('payload.data.communityExists.exists', data)
+    if (error) {
+      setErrorMessage('There was an error, please try again.')
+      return
+    }
+    if (communityExists) {
+      setErrorMessage('This url already exists. Please choose another one.')
+      return
+    }
+    if (communityExists === false) {
+      saveCommunityUrl(communityUrl)
+      goToCreateCommunityReview()
+      return
+    }
+    setErrorMessage('There was an error, please try again')
+  }, () => {
+    setErrorMessage('There was an error, please try again')
+  })
 }

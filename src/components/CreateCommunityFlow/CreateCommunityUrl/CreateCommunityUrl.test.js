@@ -2,7 +2,7 @@ import 'react-native'
 import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import ReactTestRenderer from 'react-test-renderer'
-import CreateCommunityUrl from './CreateCommunityUrl'
+import CreateCommunityUrl, { checkCommunityUrlThenRedirect } from './CreateCommunityUrl'
 
 jest.mock('../../KeyboardFriendlyView', () => 'KeyboardFriendlyView')
 jest.mock('react-native-device-info')
@@ -98,4 +98,132 @@ it('does not call fetchCommunityExists on checkAndSubmit with malformed url', ()
 it('has navigationOptions', () => {
   const navigation = jest.fn()
   expect(CreateCommunityUrl.navigationOptions(navigation)).toMatchSnapshot()
+})
+
+describe('checkCommunityUrlThenRedirect', () => {
+  it('stores the community url and redirects with appropriate url', () => {
+    const result = {
+      payload: {
+        data: {
+          communityExists: {
+            exists: false
+          }
+        }
+      }
+    }
+    const fetchCommunityExists = jest.fn(() => Promise.resolve(result))
+    const goToCreateCommunityReview = jest.fn()
+    const setErrorMessage = jest.fn()
+    const saveCommunityUrl = jest.fn()
+
+    const communityUrl = 'community-url'
+
+    return checkCommunityUrlThenRedirect(
+      communityUrl,
+      fetchCommunityExists,
+      setErrorMessage,
+      saveCommunityUrl,
+      goToCreateCommunityReview
+    ).then(() => {
+      expect(saveCommunityUrl).toHaveBeenCalledWith(communityUrl)
+      expect(goToCreateCommunityReview).toHaveBeenCalled()
+    })
+  })
+
+  it('calls setErrorMessage on error', () => {
+    const result = {
+      error: 'some error'
+    }
+    const fetchCommunityExists = jest.fn(() => Promise.resolve(result))
+    const goToCreateCommunityReview = jest.fn()
+    const setErrorMessage = jest.fn()
+    const saveCommunityUrl = jest.fn()
+
+    const communityUrl = 'community-url'
+
+    return checkCommunityUrlThenRedirect(
+      communityUrl,
+      fetchCommunityExists,
+      setErrorMessage,
+      saveCommunityUrl,
+      goToCreateCommunityReview
+    ).then(() => {
+      expect(setErrorMessage).toHaveBeenCalled()
+    })
+  })
+
+  it('calls setErrorMessage if the community exists', () => {
+    const result = {
+      payload: {
+        data: {
+          communityExists: {
+            exists: true
+          }
+        }
+      }
+    }
+    const fetchCommunityExists = jest.fn(() => Promise.resolve(result))
+    const goToCreateCommunityReview = jest.fn()
+    const setErrorMessage = jest.fn()
+    const saveCommunityUrl = jest.fn()
+
+    const communityUrl = 'community-url'
+
+    return checkCommunityUrlThenRedirect(
+      communityUrl,
+      fetchCommunityExists,
+      setErrorMessage,
+      saveCommunityUrl,
+      goToCreateCommunityReview
+    ).then(() => {
+      expect(setErrorMessage).toHaveBeenCalled()
+    })
+  })
+
+  it('calls setErrorMessage with a malformed payload', () => {
+    const result = {
+      payload: {
+        malformed: {
+          data: {
+            equals: true
+          }
+        }
+      }
+    }
+    const fetchCommunityExists = jest.fn(() => Promise.resolve(result))
+    const goToCreateCommunityReview = jest.fn()
+    const setErrorMessage = jest.fn()
+    const saveCommunityUrl = jest.fn()
+
+    const communityUrl = 'community-url'
+
+    return checkCommunityUrlThenRedirect(
+      communityUrl,
+      fetchCommunityExists,
+      setErrorMessage,
+      saveCommunityUrl,
+      goToCreateCommunityReview
+    ).then(() => {
+      expect(setErrorMessage).toHaveBeenCalled()
+    })
+  })
+
+  it('calls setErrorMessage with a rejected promise', () => {
+    const fetchCommunityExists = jest.fn(() => Promise.reject(new Error('')))
+    const goToCreateCommunityReview = jest.fn()
+    const setErrorMessage = jest.fn()
+    const saveCommunityUrl = jest.fn()
+
+    const communityUrl = 'community-url'
+
+    return checkCommunityUrlThenRedirect(
+      communityUrl,
+      fetchCommunityExists,
+      setErrorMessage,
+      saveCommunityUrl,
+      goToCreateCommunityReview
+    ).then(() => {
+      expect(setErrorMessage).toHaveBeenCalled()
+    })
+  })
 })
