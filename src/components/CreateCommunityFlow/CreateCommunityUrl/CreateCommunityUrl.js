@@ -84,7 +84,7 @@ export default class CreateCommunityUrl extends React.Component {
         <Text style={styles.header}>Choose an address for your community</Text>
         <Text style={styles.description}>Your URL is the address that members will use to access your community online. The shorter the better!</Text>
         <View style={styles.urlTextInputContainer}>
-          <Text style={styles.textInputLabel}>Whats the name of your community?</Text>
+          <Text style={styles.textInputLabel}>What's the name of your community?</Text>
           <TextInput
             style={styles.textInput}
             onChangeText={communityUrl => this.setInput('communityUrl', removeUrlFromDomain(communityUrl))}
@@ -119,8 +119,9 @@ export function checkCommunityUrlThenRedirect (communityUrl, fetchCommunityExist
       goToCreateCommunityReview()
       return
     }
-    setErrorMessage('There was an error, please try again')
+    // if there is no error or communityExists variable, assume some other error
+    setErrorMessage('There was an error, please try again.')
   }, () => {
-    setErrorMessage('There was an error, please try again')
+    setErrorMessage('There was an error, please try again.')
   })
 }

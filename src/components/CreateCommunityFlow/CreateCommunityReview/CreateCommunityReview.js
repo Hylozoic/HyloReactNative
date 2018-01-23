@@ -49,7 +49,7 @@ export default class CreateCommunityReview extends React.Component {
         <Text style={styles.header}>Everything look good?</Text>
         <Text style={styles.description}>You can always come back and change your details at any time</Text>
         <View style={styles.reviewTextInputContainer}>
-          <Text style={styles.textInputLabel}>Whats the name of your community?</Text>
+          <Text style={styles.textInputLabel}>What's the name of your community?</Text>
           <View style={styles.textInputWithButton}>
             <TextInput
               style={styles.reviewTextInput}
@@ -63,7 +63,7 @@ export default class CreateCommunityReview extends React.Component {
           </View>
         </View>
         <View style={styles.secondTextInputContainer}>
-          <Text style={styles.textInputLabel}>Whats the url of your community?</Text>
+          <Text style={styles.textInputLabel}>What's the url of your community?</Text>
           <View style={styles.textInputWithButton}>
             <TextInput
               style={styles.reviewTextInput}
