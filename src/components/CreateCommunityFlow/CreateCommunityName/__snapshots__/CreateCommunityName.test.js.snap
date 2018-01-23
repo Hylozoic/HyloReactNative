@@ -9,14 +9,14 @@ exports[`displays an error message without a community name with checkAndSubmit 
         allowFontScaling={true}
         ellipsizeMode="tail"
       >
-        Lets get started!
+        Let's get started!
       </Text>
       <Text
         accessible={true}
         allowFontScaling={true}
         ellipsizeMode="tail"
       >
-        All good things start somewhere! Lets kick things off with a catchy name for your community.
+        All good things start somewhere! Let's kick things off with a catchy name for your community.
       </Text>
       <View>
         <Text
@@ -24,7 +24,7 @@ exports[`displays an error message without a community name with checkAndSubmit 
           allowFontScaling={true}
           ellipsizeMode="tail"
         >
-          Whats the name of your community?
+          What's the name of your community?
         </Text>
         <TextInput
           allowFontScaling={true}
@@ -124,14 +124,14 @@ exports[`matches last snapshot 1`] = `
       allowFontScaling={true}
       ellipsizeMode="tail"
     >
-      Lets get started!
+      Let's get started!
     </Text>
     <Text
       accessible={true}
       allowFontScaling={true}
       ellipsizeMode="tail"
     >
-      All good things start somewhere! Lets kick things off with a catchy name for your community.
+      All good things start somewhere! Let's kick things off with a catchy name for your community.
     </Text>
     <View>
       <Text
@@ -139,7 +139,7 @@ exports[`matches last snapshot 1`] = `
         allowFontScaling={true}
         ellipsizeMode="tail"
       >
-        Whats the name of your community?
+        What's the name of your community?
       </Text>
       <TextInput
         allowFontScaling={true}

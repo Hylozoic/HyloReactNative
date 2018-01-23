@@ -53,7 +53,7 @@ exports[`matches last snapshot 1`] = `
         allowFontScaling={true}
         ellipsizeMode="tail"
       >
-        Whats the name of your community?
+        What's the name of your community?
       </Text>
       <View>
         <TextInput
@@ -82,7 +82,7 @@ exports[`matches last snapshot 1`] = `
         allowFontScaling={true}
         ellipsizeMode="tail"
       >
-        Whats the url of your community?
+        What's the url of your community?
       </Text>
       <View>
         <TextInput
@@ -138,7 +138,7 @@ exports[`matches last snapshot when visible is true 1`] = `
           allowFontScaling={true}
           ellipsizeMode="tail"
         >
-          Whats the name of your community?
+          What's the name of your community?
         </Text>
         <View>
           <TextInput
@@ -182,7 +182,7 @@ exports[`matches last snapshot when visible is true 1`] = `
           allowFontScaling={true}
           ellipsizeMode="tail"
         >
-          Whats the url of your community?
+          What's the url of your community?
         </Text>
         <View>
           <TextInput

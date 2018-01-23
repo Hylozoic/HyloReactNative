@@ -53,7 +53,7 @@ exports[`matches last snapshot 1`] = `
         allowFontScaling={true}
         ellipsizeMode="tail"
       >
-        Whats the name of your community?
+        What's the name of your community?
       </Text>
       <TextInput
         allowFontScaling={true}
@@ -98,7 +98,7 @@ exports[`matches last snapshot when there is an error 1`] = `
           allowFontScaling={true}
           ellipsizeMode="tail"
         >
-          Whats the name of your community?
+          What's the name of your community?
         </Text>
         <TextInput
           allowFontScaling={true}
@@ -184,7 +184,7 @@ exports[`validates the url 1`] = `
           allowFontScaling={true}
           ellipsizeMode="tail"
         >
-          Whats the name of your community?
+          What's the name of your community?
         </Text>
         <TextInput
           allowFontScaling={true}
@@ -270,7 +270,7 @@ exports[`validates the url 2`] = `
           allowFontScaling={true}
           ellipsizeMode="tail"
         >
-          Whats the name of your community?
+          What's the name of your community?
         </Text>
         <TextInput
           allowFontScaling={true}
