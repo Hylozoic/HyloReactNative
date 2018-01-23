@@ -35,6 +35,7 @@ export default class FeedBanner extends React.Component {
       image = bannerImage
     } else if (network) {
       ({ bannerUrl, name } = network)
+      if (bannerUrl) image = {uri: bannerUrl}
     } else if (community) {
       ({ bannerUrl, name } = community)
       if (bannerUrl) image = {uri: bannerUrl}

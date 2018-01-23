@@ -1,13 +1,12 @@
 import React from 'react'
 import { TouchableOpacity, Image } from 'react-native'
 import { get } from 'lodash/fp'
+import styles from './MenuButton.styles.js'
 const allCommunitiesLogo = require('../../../../assets/All_Communities.png')
 
-import styles from './MenuButton.styles.js'
-
 export default function MenuButton (props) {
-  const { currentCommunity, openDrawer } = props
-  const avatarUrl = get('avatarUrl', currentCommunity)
+  const { currentContext, openDrawer } = props
+  const avatarUrl = get('avatarUrl', currentContext)
 
   const imageSource = avatarUrl
     ? {uri: avatarUrl}
