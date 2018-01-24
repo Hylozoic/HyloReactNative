@@ -1,11 +1,14 @@
 import { connect } from 'react-redux'
 import getCurrentCommunity from '../../../store/selectors/getCurrentCommunity'
+import getCurrentNetwork from '../../../store/selectors/getCurrentNetwork'
+import { ALL_COMMUNITIES_ID } from '../../../store/models/Community'
 import fetchCommunityTopics, { FETCH_COMMUNITY_TOPICS } from '../../../store/actions/fetchCommunityTopics'
 import { getCommunityTopics, presentCommunityTopic, setTopicSubscribe } from './Topics.store'
 import { get } from 'lodash/fp'
 
 export function mapStateToProps (state, props) {
   const community = getCurrentCommunity(state, props)
+  const network = getCurrentNetwork(state, props)
   const pending = state.pending[FETCH_COMMUNITY_TOPICS]
   const queryResultParams = {
     id: get('id', community),
@@ -18,7 +21,8 @@ export function mapStateToProps (state, props) {
   return {
     community,
     topics,
-    pending
+    pending,
+    network
   }
 }
 
@@ -28,11 +32,19 @@ export const mapDispatchToProps = {
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
-  const { community } = stateProps
-  const fetchCommunityTopics = () => dispatchProps.fetchCommunityTopics(get('id', community), {first: null})
+  const { community, network } = stateProps
+  const communityId = get('id', community)
+  const fetchCommunityTopics = () => dispatchProps.fetchCommunityTopics(communityId, {first: null})
   const setTopicSubscribe = (topicId, isSubscribing) =>
-    dispatchProps.setTopicSubscribe(topicId, community.id, isSubscribing)
+    dispatchProps.setTopicSubscribe(topicId, communityId, isSubscribing)
   const goToTopic = topicName => ownProps.navigation.navigate('Feed', {topicName})
+
+  const goToComingSoon = () => ownProps.navigation.navigate('TopicSupportComingSoon')
+  const shouldRedirect = network || communityId === ALL_COMMUNITIES_ID
+
+  console.log('network', network)
+  console.log('communityId', communityId)
+  console.log('shouldRedirect', shouldRedirect)
 
   return {
     ...ownProps,
@@ -40,7 +52,9 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     ...dispatchProps,
     fetchCommunityTopics,
     setTopicSubscribe,
-    goToTopic
+    goToTopic,
+    shouldRedirect,
+    goToComingSoon
   }
 }
 
