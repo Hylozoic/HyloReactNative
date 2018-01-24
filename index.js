@@ -5,8 +5,13 @@ import { AppRegistry, Platform } from 'react-native'
 import Timer from 'react-native-background-timer'
 import { Sentry } from 'react-native-sentry'
 import ErrorBoundary from './src/components/ErrorBoundary'
+import { isDev } from 'util/testing'
 
-Sentry.config('https://fd5d26d434e14aa09ce182f2c73b80bb:47b73736cae84b2f854015df24edaa5b@sentry.io/276500').install()
+Sentry.config(process.env.SENTRY_CONFIG_URL)
+
+if (!isDev) {
+  Sentry.install()
+}
 
 if (Platform.OS === 'android') {
   // We get these long polling warnings in development, which can actually cause
