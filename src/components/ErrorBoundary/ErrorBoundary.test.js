@@ -2,6 +2,15 @@ import { Text, Image, View } from 'react-native'
 import React from 'react'
 import ReactTestRenderer from 'react-test-renderer'
 import ErrorBoundary from './ErrorBoundary'
+import Sentry from 'react-native-sentry'
+
+jest.mock('react-native-sentry', () => ({captureException: jest.fn()}))
+
+beforeEach(() => {
+  Sentry.captureException.mockReset()
+})
+
+const buggyError = new Error('I Crashed')
 
 it('matches last snapshot', () => {
   const logError = jest.fn()
@@ -16,6 +25,10 @@ it('displays an error when a child component throws an error', () => {
   const renderer = ReactTestRenderer.create(<ErrorBoundary logError={logError}>
     <BuggyComponent />
   </ErrorBoundary>)
+
+  const stack = {'extra': {'componentStack': '\n    in BuggyComponent\n    in ErrorBoundary'}}
+
+  expect(Sentry.captureException).toHaveBeenCalledWith(buggyError, stack)
   expect(renderer.toJSON()).toMatchSnapshot()
 })
 
@@ -27,11 +40,15 @@ it('displays a custom error when a child component throws an error', () => {
       <BuggyComponent />
     </ErrorBoundary>
   </ErrorBoundary>)
+
+  const stack = {'extra': {'componentStack': '\n    in BuggyComponent\n    in ErrorBoundary\n    in ErrorBoundary'}}
+
+  expect(Sentry.captureException).toHaveBeenCalledWith(buggyError, stack)
   expect(renderer.toJSON()).toMatchSnapshot()
 })
 
 function BuggyComponent () {
-  throw new Error('I Crashed')
+  throw buggyError
 }
 
 function CustomErrorComponent () {
