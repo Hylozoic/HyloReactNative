@@ -10,6 +10,7 @@ Object {
 exports[`mapStateToProps returns the right keys 1`] = `
 Object {
   "community": null,
+  "network": false,
   "pending": true,
   "topics": Array [],
 }
@@ -21,10 +22,12 @@ Object {
     "id": 132,
   },
   "fetchCommunityTopics": [Function],
+  "goToComingSoon": [Function],
   "goToTopic": [Function],
   "navigation": Object {
     "navigate": [Function],
   },
   "setTopicSubscribe": [Function],
+  "shouldRedirect": false,
 }
 `;

@@ -14,10 +14,16 @@ export default class Topics extends React.Component {
   static navigationOptions = ({navigation}) => (Header(navigation, title))
 
   componentDidMount () {
+    if (this.props.shouldRedirect) {
+      return this.props.goToComingSoon()
+    }
     this.props.fetchCommunityTopics()
   }
 
   componentDidUpdate (prevProps) {
+    if (this.props.shouldRedirect !== prevProps.shouldRedirect) {
+      return this.props.goToComingSoon()
+    }
     if (prevProps.community.id !== this.props.community.id) {
       this.props.fetchCommunityTopics()
     }
