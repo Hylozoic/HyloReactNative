@@ -1,5 +1,6 @@
 import 'react-native'
 import React from 'react'
+import ReactTestRenderer from 'react-test-renderer'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import Topics, { TopicList, TopicRow, SubscribeStar } from './Topics'
 
@@ -39,6 +40,83 @@ describe('Topics', () => {
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
+  })
+
+  describe('componentDidMount', () => {
+    it('redirects when it should', () => {
+      const props = {
+        shouldRedirect: true,
+        goToComingSoon: jest.fn(),
+        fetchCommunityTopics: jest.fn(),
+        community: {},
+        topics: []
+      }
+
+      const instance = ReactTestRenderer.create(<Topics {...props} />).getInstance()
+
+      instance.componentDidMount()
+      expect(props.goToComingSoon).toBeCalled()
+      expect(props.fetchCommunityTopics).not.toBeCalled()
+    })
+  })
+
+  it('calls fetchCommunityTopics when it should not redirect', () => {
+    const props = {
+      shouldRedirect: false,
+      goToComingSoon: jest.fn(),
+      fetchCommunityTopics: jest.fn(),
+      community: {},
+      topics: []
+    }
+
+    const instance = ReactTestRenderer.create(<Topics {...props} />).getInstance()
+
+    instance.componentDidMount()
+    expect(props.goToComingSoon).not.toBeCalled()
+    expect(props.fetchCommunityTopics).toBeCalled()
+  })
+
+  describe('componentDidUpdate', () => {
+    it('redirects when shouldRedirect changes', () => {
+      const props = {
+        shouldRedirect: true,
+        goToComingSoon: jest.fn(),
+        fetchCommunityTopics: jest.fn(),
+        community: {},
+        topics: []
+      }
+
+      const prevProps = {
+        shouldRedirect: false
+      }
+
+      const instance = ReactTestRenderer.create(<Topics {...props} />).getInstance()
+
+      instance.componentDidUpdate(prevProps)
+      expect(props.goToComingSoon).toBeCalled()
+      expect(props.fetchCommunityTopics).not.toBeCalled()
+    })
+
+    it('calls fetchCommunityTopics when community id changes', () => {
+      const props = {
+        shouldRedirect: false,
+        goToComingSoon: jest.fn(),
+        fetchCommunityTopics: jest.fn(),
+        community: {id: 123},
+        topics: []
+      }
+
+      const prevProps = {
+        shouldRedirect: false,
+        community: {id: 543}
+      }
+
+      const instance = ReactTestRenderer.create(<Topics {...props} />).getInstance()
+
+      instance.componentDidUpdate(prevProps)
+      expect(props.goToComingSoon).not.toBeCalled()
+      expect(props.fetchCommunityTopics).toBeCalled()
+    })
   })
 })
 
