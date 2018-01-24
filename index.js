@@ -1,7 +1,12 @@
 /* eslint-disable no-global-assign */
+import React from 'react'
 import RootView from './src/components/RootView'
 import { AppRegistry, Platform } from 'react-native'
 import Timer from 'react-native-background-timer'
+import { Sentry } from 'react-native-sentry'
+import ErrorBoundary from './src/components/ErrorBoundary'
+
+Sentry.config('https://fd5d26d434e14aa09ce182f2c73b80bb:47b73736cae84b2f854015df24edaa5b@sentry.io/276500').install()
 
 if (Platform.OS === 'android') {
   // We get these long polling warnings in development, which can actually cause
@@ -15,4 +20,10 @@ if (Platform.OS === 'android') {
 
 AppRegistry.registerComponent('HyloReactNative', () => RootView)
 
-export default RootView
+export default AppContainer
+
+function AppContainer () {
+  return <ErrorBoundary>
+    <RootView />
+  </ErrorBoundary>
+}
