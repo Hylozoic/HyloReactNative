@@ -3,11 +3,11 @@ import {
   mapDispatchToProps,
   mergeProps
 } from './CreateCommunityName.connector'
-
+import { MODULE_NAME } from '../CreateCommunityFlow.store'
 const communityName = 'name'
 
 const state = {
-  CreateCommunityFlow: {
+  [MODULE_NAME]: {
     communityName
   }
 }

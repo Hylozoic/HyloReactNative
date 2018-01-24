@@ -3,12 +3,12 @@ import {
   mapDispatchToProps,
   mergeProps
 } from './CreateCommunityUrl.connector'
-import { FETCH_URL_EXISTS } from '../CreateCommunityFlow.store'
+import { FETCH_URL_EXISTS, MODULE_NAME } from '../CreateCommunityFlow.store'
 
 const communityUrl = 'my-url'
 
 const state = {
-  CreateCommunityFlow: {
+  [MODULE_NAME]: {
     communityUrl,
     urlExists: false
   },

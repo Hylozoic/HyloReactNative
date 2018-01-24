@@ -102,3 +102,15 @@ export function clearNameAndUrlFromStore () {
     type: CLEAR_NAME_AND_URL_FROM_STORE
   }
 }
+
+export function getCommunityName (state) {
+  return state[MODULE_NAME].communityName
+}
+
+export function getCommunityUrl (state) {
+  return state[MODULE_NAME].communityUrl
+}
+
+export function getCommunityUrlExists (state) {
+  return state[MODULE_NAME].urlExists
+}

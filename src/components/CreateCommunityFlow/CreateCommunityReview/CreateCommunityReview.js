@@ -40,7 +40,8 @@ export default class CreateCommunityReview extends React.Component {
       }
       clearNameAndUrlFromStore()
       goToCommunity(data.payload.data.createCommunity.community)
-    }, () => {
+    })
+    .catch(() => {
       this.setState({
         error: 'There was an error, please try again.'
       })

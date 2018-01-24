@@ -4,12 +4,10 @@ import Triangle from 'react-native-triangle'
 import { white } from 'style/colors'
 
 export default function ErrorBubble ({
-  customStyles,
   text,
   topArrow,
   bottomArrow
 }) {
-  const styles = customStyles || defaultStyles
   return <View>
     {topArrow && <ErrorPointer style={styles.topArrow} direction={'up'} />}
     <View style={styles.row}>
@@ -28,7 +26,7 @@ export function ErrorPointer ({style, direction}) {
   />
 }
 
-const defaultStyles = {
+const styles = {
   topArrow: {
     marginLeft: 30,
     marginBottom: -1

@@ -3,14 +3,13 @@ import {
   mapDispatchToProps,
   mergeProps
 } from './CreateCommunityReview.connector'
-
-import { CREATE_COMMUNITY } from '../CreateCommunityFlow.store'
+import { CREATE_COMMUNITY, MODULE_NAME } from '../CreateCommunityFlow.store'
 
 const communityName = 'name'
 const communityUrl = 'my-url'
 
 const state = {
-  CreateCommunityFlow: {
+  [MODULE_NAME]: {
     communityName,
     communityUrl
   },

@@ -1,11 +1,16 @@
 import { connect } from 'react-redux'
 import selectCommunity from '../../../store/actions/selectCommunity'
-import { SELECT_COMMUNITY } from 'store/constants'
-import { createCommunity, clearNameAndUrlFromStore, CREATE_COMMUNITY } from '../CreateCommunityFlow.store'
-import { ALL_COMMUNITIES_ID } from '../../../store/models/Community'
+import {
+  createCommunity,
+  clearNameAndUrlFromStore,
+  CREATE_COMMUNITY,
+  getCommunityName,
+  getCommunityUrl
+} from '../CreateCommunityFlow.store'
 
 export function mapStateToProps (state, props) {
-  const { communityName, communityUrl } = state.CreateCommunityFlow
+  const communityName = getCommunityName(state)
+  const communityUrl = getCommunityUrl(state)
   const createCommunityPending = state.pending[CREATE_COMMUNITY]
   return {
     communityName,

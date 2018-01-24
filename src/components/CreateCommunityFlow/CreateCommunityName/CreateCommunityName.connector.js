@@ -1,8 +1,8 @@
 import { connect } from 'react-redux'
-import { saveCommunityName } from '../CreateCommunityFlow.store'
+import { saveCommunityName, getCommunityName } from '../CreateCommunityFlow.store'
 
 export function mapStateToProps (state, props) {
-  const communityName = state.CreateCommunityFlow.communityName
+  const communityName = getCommunityName(state)
   return {
     communityName
   }
@@ -21,7 +21,7 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     goToCreateCommunityUrl: () => {
       navigation.navigate('CreateCommunityUrl')
     },
-    navigation: navigation
+    navigation
   }
 }
 
