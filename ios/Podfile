@@ -7,4 +7,6 @@ target 'HyloReactNative' do
   pod 'FBSDKCoreKit'
   pod 'FBSDKShareKit'
   pod 'FBSDKLoginKit'
+  pod 'SentryReactNative', :path => '../node_modules/react-native-sentry'
+
 end
