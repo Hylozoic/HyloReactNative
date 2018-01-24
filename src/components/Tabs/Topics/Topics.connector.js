@@ -42,10 +42,6 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
   const goToComingSoon = () => ownProps.navigation.navigate('TopicSupportComingSoon')
   const shouldRedirect = network || communityId === ALL_COMMUNITIES_ID
 
-  console.log('network', network)
-  console.log('communityId', communityId)
-  console.log('shouldRedirect', shouldRedirect)
-
   return {
     ...ownProps,
     ...stateProps,
