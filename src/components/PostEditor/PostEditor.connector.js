@@ -13,10 +13,9 @@ export function mapStateToProps (state, props) {
   const communityId = get('navigation.state.params.communityId', props)
   const selectedTopicName = get('navigation.state.params.topicName', props)
   const selectedTopicTag = createTopicTag({name: selectedTopicName})
-  const defaultPost = selectedTopicName && {
-    details: selectedTopicTag,
-    communityIds: [communityId]
-  }
+  const defaultPost = selectedTopicName
+    ? {details: selectedTopicTag, communityIds: [communityId]}
+    : {}
   const post = getPost(state, {id: getPostId(state, props)})
   return {
     details: state.PostEditor.details,
