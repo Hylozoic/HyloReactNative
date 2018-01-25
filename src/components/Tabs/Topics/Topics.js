@@ -8,6 +8,7 @@ import Icon from '../../Icon'
 import Header from '../Header'
 import styles from './Topics.styles'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
+import { isEmpty } from 'lodash/fp'
 
 const title = 'Topics'
 
@@ -22,10 +23,11 @@ export default class Topics extends React.Component {
   }
 
   componentDidUpdate (prevProps) {
-    if (this.props.shouldRedirect !== prevProps.shouldRedirect) {
+    if (prevProps.shouldRedirect !== this.props.shouldRedirect) {
       return this.props.goToComingSoon()
     }
-    if (prevProps.community.id !== this.props.community.id) {
+    if ((prevProps.community.id !== this.props.community.id) ||
+      (prevProps.term !== this.props.term)) {
       this.props.fetchCommunityTopics()
     }
   }
@@ -43,7 +45,7 @@ export default class Topics extends React.Component {
         <View style={styles.imageOverlay} />
         <Text style={styles.title}>{name}</Text>
         <SearchBar term={term} setTerm={setTerm} />
-        {pending
+        {pending && isEmpty(topics)
           ? <Loading />
           : <TopicList topics={topics}
             setTopicSubscribe={setTopicSubscribe}
@@ -59,7 +61,9 @@ export function SearchBar ({ term, setTerm }) {
     <TextInput
       style={styles.searchInput}
       value={term}
-      onChangeText={setTerm} />
+      onChangeText={setTerm}
+      placeholder='Search Topics'
+      editable />
   </View>
 }
 
@@ -67,10 +71,12 @@ export class TopicList extends React.Component {
   render () {
     const { topics, setTopicSubscribe, goToTopic } = this.props
     return <View style={styles.topicList}>
-      {topics.map((topic, i) =>
-        <TopicRow topic={topic} key={i} first={i === 0}
-          setTopicSubscribe={setTopicSubscribe}
-          goToTopic={goToTopic} />)}
+      {isEmpty(topics)
+        ? <Text style={styles.emptyList}>No topics match your search</Text>
+        : topics.map((topic, i) =>
+          <TopicRow topic={topic} key={i} first={i === 0}
+            setTopicSubscribe={setTopicSubscribe}
+            goToTopic={goToTopic} />)}
     </View>
   }
 }

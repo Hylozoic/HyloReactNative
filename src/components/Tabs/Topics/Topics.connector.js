@@ -3,18 +3,19 @@ import getCurrentCommunity from '../../../store/selectors/getCurrentCommunity'
 import getCurrentNetwork from '../../../store/selectors/getCurrentNetwork'
 import { ALL_COMMUNITIES_ID } from '../../../store/models/Community'
 import fetchCommunityTopics, { FETCH_COMMUNITY_TOPICS } from '../../../store/actions/fetchCommunityTopics'
-import { getCommunityTopics, presentCommunityTopic, setTopicSubscribe } from './Topics.store'
+import {
+  getCommunityTopics, presentCommunityTopic, setTopicSubscribe, getTerm, setTerm
+ } from './Topics.store'
 import { get } from 'lodash/fp'
 
 export function mapStateToProps (state, props) {
-  const term = 'lala'
-  const setTerm = text => console.log('term', text)
+  const term = getTerm(state)
   const community = getCurrentCommunity(state, props)
   const network = getCurrentNetwork(state, props)
   const pending = state.pending[FETCH_COMMUNITY_TOPICS]
   const queryResultParams = {
     id: get('id', community),
-    autocomplete: ''
+    autocomplete: term
   }
   const topics = getCommunityTopics(state, queryResultParams)
   .map(presentCommunityTopic)
@@ -25,20 +26,20 @@ export function mapStateToProps (state, props) {
     topics,
     pending,
     network,
-    term,
-    setTerm
+    term
   }
 }
 
 export const mapDispatchToProps = {
   fetchCommunityTopics,
-  setTopicSubscribe
+  setTopicSubscribe,
+  setTerm
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
-  const { community, network } = stateProps
+  const { community, network, term } = stateProps
   const communityId = get('id', community)
-  const fetchCommunityTopics = () => dispatchProps.fetchCommunityTopics(communityId, {first: null})
+  const fetchCommunityTopics = () => dispatchProps.fetchCommunityTopics(communityId, {first: null, autocomplete: term})
   const setTopicSubscribe = (topicId, isSubscribing) =>
     dispatchProps.setTopicSubscribe(topicId, communityId, isSubscribing)
   const goToTopic = topicName => ownProps.navigation.navigate('Feed', {topicName})

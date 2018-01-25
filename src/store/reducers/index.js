@@ -19,6 +19,7 @@ import SkillEditor from '../../components/SkillEditor/SkillEditor.store'
 import SignupFlow from '../../components/SignupFlow/SignupFlow.store'
 import SocketListener from '../../components/SocketListener/SocketListener.store'
 import TabBar from '../../components/RootNavigator/TabBar/TabBar.store'
+import Topics from '../../components/Tabs/Topics/Topics.store'
 
 export const combinedReducers = combineReducers({
   orm: ormReducer,
@@ -39,7 +40,8 @@ export const combinedReducers = combineReducers({
   SignupFlow,
   SkillEditor,
   SocketListener,
-  TabBar
+  TabBar,
+  Topics
 })
 
 const composeReducers = (...reducers) => (state, action) =>
