@@ -10,7 +10,6 @@ import receivePushNotification from '../../store/actions/receivePushNotification
 import DeepLinkHandler from '../DeepLinkHandler'
 import RootNavigator from '../RootNavigator'
 import SessionCheck from '../SessionCheck'
-import ErrorBoundary from '../ErrorBoundary'
 import OneSignal from 'react-native-onesignal'
 
 // if the user opens the app from a push notification and the app wasn't already
@@ -49,18 +48,16 @@ export default class RootView extends React.Component {
     if (!store) return <LoadingScreen />
 
     return <Provider store={this.state.store}>
-      <ErrorBoundary>
-        <View style={{flex: 1}}>
-          <VersionCheck />
-          <SessionCheck>
-            <DeepLinkHandler
-              navigator={this.navigator}
-              {...{initialPushNotificationEvent}} />
-          </SessionCheck>
-          <LoadingModal />
-          <RootNavigator ref={this.setNavigator} />
-        </View>
-      </ErrorBoundary>
+      <View style={{flex: 1}}>
+        <VersionCheck />
+        <SessionCheck>
+          <DeepLinkHandler
+            navigator={this.navigator}
+            {...{initialPushNotificationEvent}} />
+        </SessionCheck>
+        <LoadingModal />
+        <RootNavigator ref={this.setNavigator} />
+      </View>
     </Provider>
   }
 }
