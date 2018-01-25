@@ -2,6 +2,8 @@ import React from 'react'
 import { Text, View, Button, Image } from 'react-native'
 import RNRestart from 'react-native-restart'
 
+import Sentry from 'react-native-sentry'
+
 const axelFretting = require('../../assets/Axel_Fretting.png')
 
 export default class ErrorBoundary extends React.Component {
@@ -13,24 +15,7 @@ export default class ErrorBoundary extends React.Component {
   componentDidCatch (error, info) {
     this.setState({hasError: true})
 
-    function replaceErrors (key, value) {
-      if (value instanceof Error) {
-        var error = {}
-
-        Object.getOwnPropertyNames(value).forEach(function (key) {
-          error[key] = value[key]
-        })
-
-        return error
-      }
-
-      return value
-    }
-
-    const errorStr = JSON.stringify(error, replaceErrors)
-    const infoStr = JSON.stringify(info)
-
-    this.props.logError(errorStr, infoStr)
+    Sentry.captureException(error, { extra: info })
   }
 
   render () {
