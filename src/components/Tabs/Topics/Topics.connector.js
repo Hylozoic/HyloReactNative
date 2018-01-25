@@ -7,6 +7,8 @@ import { getCommunityTopics, presentCommunityTopic, setTopicSubscribe } from './
 import { get } from 'lodash/fp'
 
 export function mapStateToProps (state, props) {
+  const term = 'lala'
+  const setTerm = text => console.log('term', text)
   const community = getCurrentCommunity(state, props)
   const network = getCurrentNetwork(state, props)
   const pending = state.pending[FETCH_COMMUNITY_TOPICS]
@@ -22,7 +24,9 @@ export function mapStateToProps (state, props) {
     community,
     topics,
     pending,
-    network
+    network,
+    term,
+    setTerm
   }
 }
 

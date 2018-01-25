@@ -1,9 +1,10 @@
 import React from 'react'
-import { Text, ScrollView, Image, View, TouchableOpacity } from 'react-native'
+import { Text, ScrollView, Image, View, TouchableOpacity, TextInput } from 'react-native'
 import KeyboardFriendlyView from '../../KeyboardFriendlyView'
 import Loading from '../../Loading'
 import StarIcon from '../../StarIcon'
 import Badge from '../../Badge'
+import Icon from '../../Icon'
 import Header from '../Header'
 import styles from './Topics.styles'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
@@ -30,7 +31,9 @@ export default class Topics extends React.Component {
   }
 
   render () {
-    const { community, topics, pending, setTopicSubscribe, goToTopic } = this.props
+    const {
+      community, topics, pending, setTopicSubscribe, goToTopic, term, setTerm
+    } = this.props
     const { bannerUrl, name } = community
     const image = {uri: bannerUrl}
 
@@ -39,6 +42,7 @@ export default class Topics extends React.Component {
         <Image source={image} style={styles.image} />
         <View style={styles.imageOverlay} />
         <Text style={styles.title}>{name}</Text>
+        <SearchBar term={term} setTerm={setTerm} />
         {pending
           ? <Loading />
           : <TopicList topics={topics}
@@ -47,6 +51,16 @@ export default class Topics extends React.Component {
       </ScrollView>
     </KeyboardFriendlyView>
   }
+}
+
+export function SearchBar ({ term, setTerm }) {
+  return <View style={styles.searchBar}>
+    <Icon style={styles.searchIcon} name='Search' />
+    <TextInput
+      style={styles.searchInput}
+      value={term}
+      onChangeText={setTerm} />
+  </View>
 }
 
 export class TopicList extends React.Component {

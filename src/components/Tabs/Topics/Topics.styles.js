@@ -32,6 +32,9 @@ export default {
     zIndex: 10,
     marginLeft: 16
   },
+  searchBar: {
+    flexDirection: 'row'
+  },
   topicList: {
     borderTopWidth: StyleSheet.hairlineWidth,
     borderTopColor: capeCod40,
