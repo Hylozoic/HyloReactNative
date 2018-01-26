@@ -7,9 +7,8 @@ import { Sentry } from 'react-native-sentry'
 import ErrorBoundary from './src/components/ErrorBoundary'
 import { isDev } from 'util/testing'
 
-Sentry.config(process.env.SENTRY_CONFIG_URL)
-
 if (!isDev) {
+  Sentry.config(process.env.SENTRY_CONFIG_URL)
   Sentry.install()
 }
 
