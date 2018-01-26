@@ -152,7 +152,7 @@ export default function ormReducer (state = {}, action) {
       // post id in the action.
       const post = session.Post.all().toModelArray()
         .find(p => p.comments.toRefArray().find(c => c.id === meta.id))
-      if (post) post.commentsTotal -= 1
+      if (post) post.update({ commentsTotal: post.commentsTotal - 1 })
       comment.delete()
       break
 
