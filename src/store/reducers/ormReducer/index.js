@@ -148,7 +148,7 @@ export default function ormReducer (state = {}, action) {
 
     case DELETE_COMMENT_PENDING:
       const comment = session.Comment.withId(meta.id)
-      const post = comment.post
+      post = comment.post
       post.update({ commentsTotal: post.commentsTotal - 1 })
       comment.delete()
       break
