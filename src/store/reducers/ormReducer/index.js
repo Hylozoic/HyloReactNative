@@ -148,11 +148,8 @@ export default function ormReducer (state = {}, action) {
 
     case DELETE_COMMENT_PENDING:
       const comment = session.Comment.withId(meta.id)
-      // Find the parent. We could potentially shortcut this by providing the
-      // post id in the action.
-      const post = session.Post.all().toModelArray()
-        .find(p => p.comments.toRefArray().find(c => c.id === meta.id))
-      if (post) post.update({ commentsTotal: post.commentsTotal - 1 })
+      const post = comment.post
+      post.update({ commentsTotal: post.commentsTotal - 1 })
       comment.delete()
       break
 
