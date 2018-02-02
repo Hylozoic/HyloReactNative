@@ -7,6 +7,7 @@ import Badge from '../../Badge'
 import Header from '../Header'
 import styles from './Topics.styles'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
+import { get } from 'lodash/fp'
 
 const title = 'Topics'
 
@@ -14,15 +15,24 @@ export default class Topics extends React.Component {
   static navigationOptions = ({navigation}) => (Header(navigation, title))
 
   componentDidMount () {
+    console.log('Topics mounting')
     if (this.props.shouldRedirect) {
       return this.props.goToComingSoon()
     }
     this.props.fetchCommunityTopics()
   }
 
+  componentWillUnmount () {
+    console.log('Topics unmounting')
+  }
+
   componentDidUpdate (prevProps) {
-    if (this.props.shouldRedirect !== prevProps.shouldRedirect) {
-      return this.props.goToComingSoon()
+    const shouldRedirect =
+      (this.props.isFocused && !prevProps.shouldRedirect && this.props.shouldRedirect) ||
+      (this.props.shouldRedirect && !prevProps.isFocused && this.props.isFocused)
+    if (shouldRedirect) {
+      // only back up to prev community if we're transitioning into a network
+      return this.props.goToComingSoon(!prevProps.networkId && prevProps.community.id)
     }
     if (prevProps.community.id !== this.props.community.id) {
       this.props.fetchCommunityTopics()
