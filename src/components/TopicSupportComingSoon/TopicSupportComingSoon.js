@@ -3,11 +3,12 @@ import { View, Text, Image, TouchableOpacity } from 'react-native'
 import styles from './TopicSupportComingSoon.styles'
 import header, { tintColor } from 'util/header'
 import { HeaderBackButton } from 'react-navigation'
+import { get } from 'lodash/fp'
 
 const axolotlImage = require('../../assets/Axolotyl_Digging.png')
 
 const goBack = navigation => () => {
-  const { onBack } = navigation.state.params
+  const onBack = get('state.params.onBack', navigation)
   navigation.goBack()
   onBack && onBack()
 }

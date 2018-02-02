@@ -14,8 +14,6 @@ export function mapStateToProps (state, props) {
   // ALL_COMMUNITIES_ID, getCurrentNetwork will be null, but we still need to check
   // if networkId is set
   const networkId = getCurrentNetworkId(state, props)
-  console.log('community', community.id)
-  console.log('network', networkId)
   const pending = state.pending[FETCH_COMMUNITY_TOPICS]
   const queryResultParams = {
     id: get('id', community),
@@ -53,21 +51,12 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
   // network/all communities
   // this is a hack to handle the fact that we have pseudo navigation events (changing community/network)
   // which don't go on the router navigation stack
-  const onBackFromComingSoon = prevCommunityId => () => {
-    console.log('COMING BACK', prevCommunityId)
-    if (!prevCommunityId && networkId) {
-      // we came from the network feed, so we should go back!
-      console.log('Going back to the feed')
-      navigation.navigate('Feed')
-    } else if (prevCommunityId) {
-      // we came from a community topics list to a network topics list
-      dispatchProps.selectCommunity(prevCommunityId)
-    }
+  const onBackFromComingSoon = () => {
+    navigation.navigate('Home')
   }
 
-  const goToComingSoon = prevCommunityId => {
-    console.log('GOING', prevCommunityId)
-    navigation.navigate('TopicSupportComingSoon', {onBack: onBackFromComingSoon(prevCommunityId)})
+  const goToComingSoon = () => {
+    navigation.navigate('TopicSupportComingSoon', {onBack: onBackFromComingSoon})
   }
 
   const shouldRedirect = !!networkId

@@ -15,15 +15,10 @@ export default class Topics extends React.Component {
   static navigationOptions = ({navigation}) => (Header(navigation, title))
 
   componentDidMount () {
-    console.log('Topics mounting')
     if (this.props.shouldRedirect) {
       return this.props.goToComingSoon()
     }
     this.props.fetchCommunityTopics()
-  }
-
-  componentWillUnmount () {
-    console.log('Topics unmounting')
   }
 
   componentDidUpdate (prevProps) {
@@ -31,10 +26,10 @@ export default class Topics extends React.Component {
       (this.props.isFocused && !prevProps.shouldRedirect && this.props.shouldRedirect) ||
       (this.props.shouldRedirect && !prevProps.isFocused && this.props.isFocused)
     if (shouldRedirect) {
-      // only back up to prev community if we're transitioning into a network
-      return this.props.goToComingSoon(!prevProps.networkId && prevProps.community.id)
+      return this.props.goToComingSoon()
     }
-    if (prevProps.community.id !== this.props.community.id) {
+
+    if (get('community.id', prevProps) !== get('props.community.id', this)) {
       this.props.fetchCommunityTopics()
     }
   }
