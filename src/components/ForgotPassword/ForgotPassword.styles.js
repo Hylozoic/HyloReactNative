@@ -1,19 +1,11 @@
 import { Dimensions, StyleSheet } from 'react-native'
-import { caribbeanGreen, rhino60 } from 'style/colors'
+import { caribbeanGreen, gunsmoke } from 'style/colors'
 import { isIOS } from 'util/platform'
 
 const screenHeight = Dimensions.get('window').height
 const smallScreenFudge = screenHeight < 550 ? 0.6 : 1
 
 const mixins = {
-  loginContainer: {
-    height: 36,
-    backgroundColor: 'lightgray',
-    justifyContent: 'center',
-    alignItems: 'center',
-    opacity: 0.5,
-    marginLeft: 1
-  },
   icon: {
     fontSize: 20,
     marginTop: 10
@@ -61,17 +53,25 @@ export default {
   container: {
     backgroundColor: 'white'
   },
-  logo: {
-    height: 80,
-    width: 80,
-    marginTop: (screenHeight - 480) * 0.6,
-    marginBottom: 10
+  header: {
+    backgroundColor: 'white'
   },
+  headerTitleStyle: {
+    fontSize: 17,
+    color: 'black',
+    fontFamily: 'Circular-Bold'
+  },
+  headerTintColor: gunsmoke,
   title: {
     fontSize: 24,
     color: caribbeanGreen,
     marginBottom: 20 * smallScreenFudge,
     fontFamily: 'Circular-Bold'
+  },
+  messageText: {
+    fontFamily: 'Circular-Book',
+    fontSize: 16,
+    textAlign: 'left'
   },
   iconOpaque: {
     ...mixins.icon,
@@ -81,53 +81,19 @@ export default {
     ...mixins.icon,
     color: caribbeanGreen
   },
-  login: {
+  forgotPassword: {
     backgroundColor: 'white',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    paddingTop: 20
   },
-  facebookLoginContainer: {
-    ...mixins.loginContainer,
-    borderTopLeftRadius: 50,
-    borderBottomLeftRadius: 50,
-    flex: 0.5
-  },
-  googleLoginContainer: {
-    ...mixins.loginContainer,
-    borderTopRightRadius: 50,
-    borderBottomRightRadius: 50,
-    flex: 0.5
-  },
-  signup: {
-    marginTop: 10,
-    marginBottom: 20,
-    flexDirection: 'row'
-  },
-  signupText: {
-    color: caribbeanGreen,
-    fontFamily: 'Circular-Bold'
-  },
-  loginText: {
+  forgotPasswordText: {
     color: 'white',
     backgroundColor: 'transparent',
     textAlign: 'center',
     fontFamily: 'Circular-Book',
     fontSize: 18,
     lineHeight: isIOS ? 32 : 28
-  },
-  connectWith: {
-    marginTop: 4 * smallScreenFudge,
-    marginBottom: 14 * smallScreenFudge
-  },
-  forgotPasswordText: {
-    fontFamily: 'Circular-Book',
-    fontSize: 14,
-    color: caribbeanGreen
-  },
-  helpText: {
-    fontFamily: 'Circular-Book',
-    fontSize: 14,
-    color: rhino60
   },
   paddedRow: mixins.paddedRow,
   paddedRowWithOpacity: {
@@ -146,14 +112,13 @@ export default {
     borderRadius: 5,
     minHeight: 40
   },
-  loginButton: {
+  forgotPasswordButton: {
     flex: 1,
     flexDirection: 'row',
     backgroundColor: caribbeanGreen,
     height: 36,
     borderRadius: 50,
-    justifyContent: 'center',
-    marginTop: 22
+    justifyContent: 'center'
   },
   paddedBorderValid: {
     flex: 1,

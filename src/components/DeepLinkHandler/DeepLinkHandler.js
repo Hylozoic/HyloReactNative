@@ -54,16 +54,19 @@ export default class DeepLinkHandler extends React.Component {
     const { storeNavigationAction, currentUser } = this.props
     const { path } = parse(url)
     const action = convertDeepLinkToAction(path)
-    if (isDev) console.log(`handling deep link "${path}" with action:`, action)
     if (!action) return
-
-    if (currentUser) {
-      // if you're already logged in, redirect immediately.
-      this.redirectNow(action)
-    } else {
-      // you should already be at the Login screen now
-      storeNavigationAction(action)
-      if (isInvitationLink(path)) this.redirectNow(action)
+    const nextAction = action.params.nextURL
+      ? convertDeepLinkToAction(decodeURIComponent(action.params.nextURL))
+      : action
+    if (isDev) console.log(`handling deep link "${path}" with action:`, action)
+    if (!currentUser) {
+      storeNavigationAction(nextAction)
+      if (action.params.nextURL) {
+        this.redirectNow(action)
+      }
+    }
+    if (currentUser || isInvitationLink(path)) {
+      this.redirectNow(nextAction)
     }
   }
 
