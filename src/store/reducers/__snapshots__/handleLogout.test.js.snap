@@ -3,6 +3,7 @@
 exports[`resets the whole app state 1`] = `
 Object {
   "CommentEditor": Object {},
+  "CreateCommunityFlow": Object {},
   "DeepLinkHandler": Object {},
   "FeedList": Object {
     "filter": null,

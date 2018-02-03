@@ -1,4 +1,4 @@
-import convertDeepLinkToAction from './convertDeepLinkToAction'
+import convertDeepLinkToAction, { reformatPath } from './convertDeepLinkToAction'
 
 jest.mock('react-native-device-info')
 
@@ -33,4 +33,18 @@ it('handles a message thread link', () => {
 
 it('returns null for an unmatched link', () => {
   expect(convertDeepLinkToAction('dinosaur')).toBeNull()
+})
+
+// reformatPath
+it('handles a password reset link', () => {
+  const loginToken = 'token'
+  const userId = 'user'
+  const nextPath = 'where/to/go'
+  const nextURL = `http://anywhere.com/${nextPath}`
+  const deepLinkURL = `/noo/login/token?t=${loginToken}&u=${userId}&n=${nextURL}`
+  // Note: Purposely unit testing reformatPath here vs convertDeepLinkToAction
+  expect(reformatPath(deepLinkURL))
+  .toEqual(
+    `passwordResetTokenLogin/${userId}/${encodeURIComponent(loginToken)}/${encodeURIComponent(nextPath)}`
+  )
 })

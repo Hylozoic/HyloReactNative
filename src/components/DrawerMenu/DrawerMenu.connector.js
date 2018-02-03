@@ -97,6 +97,9 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     },
     goToMyProfile: () => {
       navigation.navigate('MemberProfile', {id: currentUser.id})
+    },
+    goToCreateCommunityName: () => {
+      navigation.navigate('CreateCommunityName')
     }
   }
 }

@@ -1,16 +1,21 @@
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { get } from 'lodash/fp'
+import { resetToRoute, resetToMainRoute } from 'util/navigation'
 import { logout, loginWithFacebook } from '../Login/actions'
 import updateUserSettings from '../../store/actions/updateUserSettings'
 import { unlinkAccount } from './UserSettings.store'
-import { connect } from 'react-redux'
 import getMe from '../../store/selectors/getMe'
-import { bindActionCreators } from 'redux'
-import { resetToRoute } from 'util/navigation'
 
 export function mapStateToProps (state, props) {
-  const cancel = () => props.navigation.goBack()
+  const resettingPassword = get('navigation.state.routeName', props) === 'PasswordReset'
+  const cancel = () => resettingPassword
+    ? resetToMainRoute(props.navigation)
+    : props.navigation.goBack()
 
   return {
     currentUser: getMe(state, props),
+    resettingPassword,
     cancel
   }
 }

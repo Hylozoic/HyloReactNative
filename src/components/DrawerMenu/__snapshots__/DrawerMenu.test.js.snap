@@ -141,6 +141,10 @@ exports[`DrawerMenu matches the last snapshot 1`] = `
     updateCellsBatchingPeriod={50}
     windowSize={21}
   />
+  <Button
+    onPress={undefined}
+    text="Create a Community"
+  />
   <View>
     <TouchableOpacity
       activeOpacity={0.2}
