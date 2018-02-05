@@ -84,7 +84,6 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     ...stateProps,
     ...dispatchProps,
     fetchCommunityTopics,
-    // fetchCommunityTopicsImmediately,
     setTopicSubscribe,
     goToTopic,
     shouldRedirect,
