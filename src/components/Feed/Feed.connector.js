@@ -25,6 +25,7 @@ export function mapStateToProps (state, props) {
   const communityId = params.communityId || props.communityId
   const topicName = props.topicName || params.topicName
   const community = !networkId && getCommunity(state, {id: communityId})
+  const communitySlug = get('slug', community)
   const network = getNetwork(state, {id: networkId})
   const currentUser = getMe(state)
   const communityTopic = topicName && community &&
@@ -32,11 +33,14 @@ export function mapStateToProps (state, props) {
     getCommunityTopic(state, {topicName, slug: community.slug})
   // when this is undefined, the subscribe button is not shown at all
   const topicSubscribed = communityTopic && communityTopic.isSubscribed
+  const topic = get('topic', communityTopic)
   return {
     currentUser,
     community,
     network,
-    topic: get('topic', communityTopic),
+    topic,
+    postsTotal: get('postsTotal', communitySlug ? communityTopic : topic),
+    followersTotal: get('followersTotal', communitySlug ? communityTopic : topic),
     topicName,
     topicSubscribed
   }

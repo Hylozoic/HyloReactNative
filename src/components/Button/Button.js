@@ -1,12 +1,14 @@
 import React from 'react'
 import { Text, View, TouchableOpacity } from 'react-native'
 import { caribbeanGreen } from 'style/colors'
+import Icon from '../Icon'
 import { omit } from 'lodash/fp'
 
 export default function Button ({
   style = {},
   text,
   onPress,
+  iconName,
   disabled
  }) {
   const {
@@ -32,7 +34,10 @@ export default function Button ({
   return <View style={containerStyle}>
     <TouchableOpacity disabled={disabled} onPress={disabled ? () => {} : onPress} style={styles.wrapper}>
       <View style={buttonStyle}>
-        <Text style={textStyle}>{text}</Text>
+        <View style={styles.buttonInner}>
+          {iconName && <Icon name={iconName} style={styles.icon} />}
+          <Text style={textStyle}>{text}</Text>
+        </View>
       </View>
     </TouchableOpacity>
   </View>
@@ -52,7 +57,17 @@ const styles = {
     borderRadius: 100,
     borderWidth: 1
   },
+  buttonInner: {
+    flex: 1,
+    alignItems: 'center',
+    flexDirection: 'row'
+  },
   text: {
     fontFamily: 'Circular-Bold'
+  },
+  icon: {
+    color: 'white',
+    fontSize: 16,
+    paddingRight: 5
   }
 }

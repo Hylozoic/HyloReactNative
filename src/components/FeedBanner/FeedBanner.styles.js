@@ -1,4 +1,4 @@
-import { capeCod40, capeCod10 } from '../../style/colors'
+import { capeCod40, capeCod10, caribbeanGreen } from '../../style/colors'
 import { isIOS } from 'util/platform'
 
 const postPromptShape = {
@@ -44,13 +44,24 @@ export default {
     marginRight: 16,
     alignItems: 'flex-end'
   },
+  title: {
+    flex: 1
+  },
   name: {
     fontSize: 24,
     fontFamily: 'Circular-Black',
     color: 'white',
     backgroundColor: 'transparent',
-    flex: 1,
     ...hasTextShadow
+  },
+  subName: {
+    fontSize: 16,
+    fontFamily: 'Circular',
+    color: 'white',
+    backgroundColor: 'transparent'
+  },
+  postTotalIcon: {
+    paddingLeft: 15
   },
   postPrompt: {
     ...postPromptShape,
@@ -82,15 +93,9 @@ export default {
     fontStyle: 'italic'
   },
   subscribeButton: {
-  },
-  subscribeButtonIcon: {
-    fontSize: 30,
-    backgroundColor: 'transparent',
-    color: 'white',
-    opacity: 0.8,
-    ...hasTextShadow
-  },
-  subscribeButtonIconActive: {
-    opacity: 1
+    width: 130,
+    fontSize: 14,
+    height: 36,
+    borderColor: caribbeanGreen
   }
 }

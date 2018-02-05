@@ -12,12 +12,14 @@ export default class Feed extends Component {
 
   static navigationOptions = ({ navigation }) => {
     const topicName = get('state.params.topicName', navigation)
+    const communityName = get('state.params.communityName', navigation)
     return {
-      headerTitle: topicName ? '#' + topicName : 'Home'
+      headerTitle: topicName ? communityName : 'Home'
     }
   }
 
   componentDidMount () {
+    if (this.props.community) this.props.navigation.setParams({communityName: this.props.community.name})
     const { fetchCommunityTopic } = this.props
     if (fetchCommunityTopic) fetchCommunityTopic()
   }
@@ -41,8 +43,11 @@ export default class Feed extends Component {
       screenProps,
       toggleTopicSubscribe,
       topicName,
-      topicSubscribed
+      topicSubscribed,
+      postsTotal = 0,
+      followersTotal = 0
     } = this.props
+
     return <View style={styles.container}>
       <FeedList
         community={community}
@@ -58,6 +63,8 @@ export default class Feed extends Component {
             all={!community}
             newPost={newPost}
             topicName={topicName}
+            postsTotal={postsTotal}
+            followersTotal={followersTotal}
             topicSubscribed={topicSubscribed}
             toggleTopicSubscribe={toggleTopicSubscribe} />}
         navigation={navigation}
