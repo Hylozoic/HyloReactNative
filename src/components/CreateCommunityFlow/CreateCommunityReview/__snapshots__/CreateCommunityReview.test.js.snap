@@ -254,13 +254,15 @@ exports[`matches last snapshot when visible is true 1`] = `
           tvParallaxProperties={undefined}
         >
           <View>
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-            >
-              Let's Do This!
-            </Text>
+            <View>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+              >
+                Let's Do This!
+              </Text>
+            </View>
           </View>
         </View>
       </View>

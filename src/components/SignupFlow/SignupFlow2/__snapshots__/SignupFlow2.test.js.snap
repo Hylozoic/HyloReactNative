@@ -56,13 +56,15 @@ exports[`handles localUri 1`] = `
       tvParallaxProperties={undefined}
     >
       <View>
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-        >
-          Continue
-        </Text>
+        <View>
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+          >
+            Continue
+          </Text>
+        </View>
       </View>
     </View>
   </View>

@@ -8,13 +8,15 @@ exports[`disables 1`] = `
     onPress={[Function]}
   >
     <View>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-      >
-        Push Me
-      </Text>
+      <View>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+        >
+          Push Me
+        </Text>
+      </View>
     </View>
   </TouchableOpacity>
 </View>
@@ -28,13 +30,15 @@ exports[`matches last snapshot 1`] = `
     onPress={[Function]}
   >
     <View>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-      >
-        Push Me
-      </Text>
+      <View>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+        >
+          Push Me
+        </Text>
+      </View>
     </View>
   </TouchableOpacity>
 </View>
