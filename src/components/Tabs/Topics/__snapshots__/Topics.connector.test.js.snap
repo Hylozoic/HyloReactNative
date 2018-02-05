@@ -4,6 +4,7 @@ exports[`mapDispatchToProps returns the right keys 1`] = `
 Object {
   "fetchCommunityTopics": [Function],
   "selectCommunity": [Function],
+  "setTerm": [Function],
   "setTopicSubscribe": [Function],
 }
 `;
@@ -14,6 +15,7 @@ Object {
   "network": false,
   "networkId": undefined,
   "pending": true,
+  "term": undefined,
   "topics": Array [],
 }
 `;

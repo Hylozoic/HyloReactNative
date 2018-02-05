@@ -2,7 +2,7 @@ import 'react-native'
 import React from 'react'
 import ReactTestRenderer from 'react-test-renderer'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
-import Topics, { TopicList, TopicRow, SubscribeStar } from './Topics'
+import Topics, { SearchBar, TopicList, TopicRow, SubscribeStar } from './Topics'
 
 jest.mock('react-native-device-info')
 
@@ -182,10 +182,35 @@ describe('Topics', () => {
   })
 })
 
+describe('SearchBar', () => {
+  it('matches last snapshot', () => {
+    const props = {
+      term: 'searching',
+      setTerm: () => {}
+    }
+    const renderer = new ReactShallowRenderer()
+    renderer.render(<SearchBar {...props} />)
+    const actual = renderer.getRenderOutput()
+    expect(actual).toMatchSnapshot()
+  })
+})
+
 describe('TopicList', () => {
   it('matches last snapshot', () => {
     const props = {
       topics: [1, 2, 3],
+      setTopicSubscribe: () => {},
+      goToTopic: () => {}
+    }
+    const renderer = new ReactShallowRenderer()
+    renderer.render(<TopicList {...props} />)
+    const actual = renderer.getRenderOutput()
+    expect(actual).toMatchSnapshot()
+  })
+
+  it('matches last snapshot with empty list', () => {
+    const props = {
+      topics: [],
       setTopicSubscribe: () => {},
       goToTopic: () => {}
     }
