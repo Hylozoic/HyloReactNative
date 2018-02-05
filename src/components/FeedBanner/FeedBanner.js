@@ -17,7 +17,7 @@ export default class FeedBanner extends React.Component {
         ? 'UNSUBSCRIBED FROM TOPIC'
         : 'SUBSCRIBED TO TOPIC'
     })
-    this.props.toggleTopicSubscribe()
+    this.props.setTopicSubscribe()
   }
 
   resetOverlayMessage = () => {
