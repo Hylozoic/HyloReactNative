@@ -19,4 +19,4 @@ export default function reducer (state = {}, action) {
   return state
 }
 
-export const getNavigationAction = get('DeepLinkHandler.navigationAction')
+export const getNavigationAction = get(`${MODULE_NAME}.navigationAction`)

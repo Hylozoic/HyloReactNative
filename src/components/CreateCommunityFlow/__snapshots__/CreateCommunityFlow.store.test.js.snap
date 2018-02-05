@@ -1,0 +1,70 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`clearNameAndUrlFromStore matches snapshot 1`] = `
+Object {
+  "type": "CreateCommunityFlow/CLEAR_NAME_AND_URL_FROM_STORE",
+}
+`;
+
+exports[`fetchCommunityExists matches snapshot 1`] = `
+Object {
+  "graphql": Object {
+    "query": "
+        query ($slug: String) {
+          communityExists (slug: $slug) {
+            exists
+          }
+        }
+      ",
+    "variables": Object {
+      "slug": "community_name",
+    },
+  },
+  "type": "CreateCommunityFlow/FETCH_URL_EXISTS",
+}
+`;
+
+exports[`saveCommunityName matches snapshot 1`] = `
+Object {
+  "payload": "community name",
+  "type": "CreateCommunityFlow/SAVE_COMMUNITY_NAME",
+}
+`;
+
+exports[`saveCommunityUrl matches snapshot 1`] = `
+Object {
+  "payload": "community_name",
+  "type": "CreateCommunityFlow/SAVE_COMMUNITY_URL",
+}
+`;
+
+exports[`showLoadingModal matches snapshot 1`] = `
+Object {
+  "graphql": Object {
+    "query": "mutation ($data: CommunityInput) {
+        createCommunity(data: $data) {
+          id
+          hasModeratorRole
+          community {
+            id
+            name
+            slug
+          }
+        }
+      }
+      ",
+    "variables": Object {
+      "data": Object {
+        "name": "community name",
+        "slug": "community_name",
+      },
+    },
+  },
+  "meta": Object {
+    "extractModel": "Membership",
+    "name": "community name",
+    "slug": "community_name",
+  },
+  "type": "CreateCommunityFlow/CREATE_COMMUNITY",
+}
+`;
