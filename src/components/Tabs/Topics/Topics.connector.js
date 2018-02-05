@@ -8,7 +8,7 @@ import fetchCommunityTopics, { FETCH_COMMUNITY_TOPICS } from '../../../store/act
 import {
   getCommunityTopics, presentCommunityTopic, setTopicSubscribe, getTerm, setTerm
  } from './Topics.store'
-import { get, debounce } from 'lodash/fp'
+import { get } from 'lodash/fp'
 
 export function mapStateToProps (state, props) {
   const term = getTerm(state)
@@ -37,23 +37,35 @@ export function mapStateToProps (state, props) {
   }
 }
 
-export function mapDispatchToProps (dispatch, props) {
-  return {
-    fetchCommunityTopics: debounce(400, (communityId, opts) =>
-      dispatch(fetchCommunityTopics(communityId, opts))),
-    ...bindActionCreators({
-      setTopicSubscribe,
-      setTerm,
-      selectCommunity
-    }, dispatch)
-  }
+// export function mapDispatchToProps (dispatch, props) {
+//   return {
+//     // fetchCommunityTopicsDebounced: debounce(400, (communityId, opts) =>
+//     //   dispatch(fetchCommunityTopics(communityId, opts))),
+//     ...bindActionCreators({
+//       fetchCommunityTopics,
+//       setTopicSubscribe,
+//       setTerm,
+//       selectCommunity
+//     }, dispatch)
+//   }
+// }
+
+export const mapDispatchToProps = {
+  fetchCommunityTopics,
+  setTopicSubscribe,
+  setTerm,
+  selectCommunity
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
-  const { community, networkId, term } = stateProps
+  const { community, networkId, term, pending } = stateProps
   const { navigation } = ownProps
   const communityId = get('id', community)
-  const fetchCommunityTopics = () => dispatchProps.fetchCommunityTopics(communityId, {first: null, autocomplete: term})
+  // const fetchCommunityTopicsImmediately = () =>
+  //   dispatchProps.fetchCommunityTopics(communityId, {first: null, autocomplete: term})
+  const fetchCommunityTopics = (pending && false)
+    ? () => {}
+    : () => dispatchProps.fetchCommunityTopics(communityId, {first: null, autocomplete: term})
   const setTopicSubscribe = (topicId, isSubscribing) =>
     dispatchProps.setTopicSubscribe(topicId, communityId, isSubscribing)
   const goToTopic = topicName => navigation.navigate('Feed', {topicName})
@@ -77,6 +89,7 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     ...stateProps,
     ...dispatchProps,
     fetchCommunityTopics,
+    // fetchCommunityTopicsImmediately,
     setTopicSubscribe,
     goToTopic,
     shouldRedirect,
