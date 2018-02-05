@@ -8,7 +8,7 @@ import Icon from '../../Icon'
 import Header from '../Header'
 import styles from './Topics.styles'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
-import { isEmpty } from 'lodash/fp'
+import { isEmpty, get } from 'lodash/fp'
 
 const title = 'Topics'
 
@@ -23,11 +23,18 @@ export default class Topics extends React.Component {
   }
 
   componentDidUpdate (prevProps) {
-    if (prevProps.shouldRedirect !== this.props.shouldRedirect) {
+    const shouldRedirect =
+      (this.props.isFocused && !prevProps.shouldRedirect && this.props.shouldRedirect) ||
+      (this.props.shouldRedirect && !prevProps.isFocused && this.props.isFocused)
+
+    if (shouldRedirect) {
       return this.props.goToComingSoon()
     }
-    if ((prevProps.community.id !== this.props.community.id) ||
-      (prevProps.term !== this.props.term)) {
+
+    const shouldReload = (get('community.id', prevProps) !== get('props.community.id', this)) ||
+      (prevProps.term !== this.props.term)
+
+    if (shouldReload) {
       this.props.fetchCommunityTopics()
     }
   }

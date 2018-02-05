@@ -60,6 +60,68 @@ describe('Topics', () => {
     })
   })
 
+  describe('componentDidUpdate', () => {
+    it('redirects when it is focussed and shouldRedirect becomes true', () => {
+      const props = {
+        isFocused: true,
+        shouldRedirect: true,
+        goToComingSoon: jest.fn(),
+        fetchCommunityTopics: () => {},
+        community: {},
+        topics: []
+      }
+
+      const prevProps = {
+        shouldRedirect: false
+      }
+
+      const instance = ReactTestRenderer.create(<Topics {...props} />).getInstance()
+      props.goToComingSoon.mockClear()
+      instance.componentDidUpdate(prevProps)
+      expect(props.goToComingSoon).toBeCalled()
+    })
+
+    it('redirects when shouldRedirect is true and is focussed becomes true', () => {
+      const props = {
+        isFocused: true,
+        shouldRedirect: true,
+        goToComingSoon: jest.fn(),
+        fetchCommunityTopics: () => {},
+        community: {},
+        topics: []
+      }
+
+      const prevProps = {
+        isFocused: false
+      }
+
+      const instance = ReactTestRenderer.create(<Topics {...props} />).getInstance()
+      props.goToComingSoon.mockClear()
+      instance.componentDidUpdate(prevProps)
+      expect(props.goToComingSoon).toBeCalled()
+    })
+
+    it('does not redirect when not focussed and shouldRedirect becomes true', () => {
+      const props = {
+        isFocused: false,
+        shouldRedirect: true,
+        goToComingSoon: jest.fn(),
+        fetchCommunityTopics: () => {},
+        community: {},
+        topics: []
+      }
+
+      const prevProps = {
+        shouldRedirect: false
+      }
+
+      const instance = ReactTestRenderer.create(<Topics {...props} />).getInstance()
+      props.goToComingSoon.mockClear()
+      instance.componentDidUpdate(prevProps)
+      expect(props.goToComingSoon).not.toBeCalled()
+    })
+  })
+
   it('calls fetchCommunityTopics when it should not redirect', () => {
     const props = {
       shouldRedirect: false,
