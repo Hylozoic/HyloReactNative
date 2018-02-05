@@ -10,7 +10,7 @@ import {
   CREATE_COMMENT
 } from '../../../components/PostDetails/CommentEditor/CommentEditor.store'
 import {
-  TOGGLE_TOPIC_SUBSCRIBE_PENDING
+  SET_TOPIC_SUBSCRIBE_PENDING
 } from '../../../components/Feed/Feed.store'
 import {
   MARK_ACTIVITY_READ, MARK_ALL_ACTIVITIES_READ, UPDATE_NEW_NOTIFICATION_COUNT_PENDING
@@ -130,7 +130,7 @@ export default function ormReducer (state = {}, action) {
       }
       break
 
-    case TOGGLE_TOPIC_SUBSCRIBE_PENDING:
+    case SET_TOPIC_SUBSCRIBE_PENDING:
       const ct = session.CommunityTopic.get({
         topic: meta.topicId, community: meta.communityId
       })

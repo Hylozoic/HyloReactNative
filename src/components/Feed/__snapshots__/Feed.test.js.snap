@@ -27,7 +27,7 @@ exports[`renders correctly 1`] = `
         network={undefined}
         newPost={[Function]}
         postsTotal={0}
-        toggleTopicSubscribe={undefined}
+        setTopicSubscribe={undefined}
         topicName="amazing"
         topicSubscribed={undefined}
       />

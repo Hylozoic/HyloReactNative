@@ -4,8 +4,8 @@ import orm from 'store/models'
 
 const MODULE_NAME = 'Feed'
 export const FETCH_COMMUNITY_TOPIC = `${MODULE_NAME}/FETCH_COMMUNITY_TOPIC`
-export const TOGGLE_TOPIC_SUBSCRIBE = `${MODULE_NAME}/TOGGLE_TOPIC_SUBSCRIBE`
-export const TOGGLE_TOPIC_SUBSCRIBE_PENDING = TOGGLE_TOPIC_SUBSCRIBE + '_PENDING'
+export const SET_TOPIC_SUBSCRIBE = `${MODULE_NAME}/SET_TOPIC_SUBSCRIBE`
+export const SET_TOPIC_SUBSCRIBE_PENDING = SET_TOPIC_SUBSCRIBE + '_PENDING'
 
 export function fetchCommunityTopic (topicName, communitySlug) {
   return {
@@ -35,9 +35,9 @@ export function fetchCommunityTopic (topicName, communitySlug) {
   }
 }
 
-export function toggleTopicSubscribe (topicId, communityId, isSubscribing) {
+export function setTopicSubscribe (topicId, communityId, isSubscribing) {
   return {
-    type: TOGGLE_TOPIC_SUBSCRIBE,
+    type: SET_TOPIC_SUBSCRIBE,
     graphql: {
       query: `mutation($topicId: ID, $communityId: ID, $isSubscribing: Boolean) {
         subscribe(topicId: $topicId, communityId: $communityId, isSubscribing: $isSubscribing) {

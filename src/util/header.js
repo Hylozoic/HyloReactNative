@@ -5,6 +5,7 @@ import React from 'react'
 import { StyleSheet, Text, TouchableOpacity } from 'react-native'
 import { rhino60, rhino20 } from 'style/colors'
 import Icon from '../components/Icon'
+import { get } from 'lodash/fp'
 
 export const tintColor = rhino60
 
@@ -84,7 +85,7 @@ export default function header ({ goBack, state }, { left, right, title, options
     ...state.params,
     headerStyle: styles.header,
     headerTintColor: tintColor,
-    headerTitle: title || state.params.title,
+    headerTitle: title || get('params.title', state),
     headerTitleStyle: styles.title,
     ...options
   }

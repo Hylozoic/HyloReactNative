@@ -41,7 +41,7 @@ export default class Feed extends Component {
       showPost,
       showTopic,
       screenProps,
-      toggleTopicSubscribe,
+      setTopicSubscribe,
       topicName,
       topicSubscribed,
       postsTotal = 0,
@@ -66,7 +66,7 @@ export default class Feed extends Component {
             postsTotal={postsTotal}
             followersTotal={followersTotal}
             topicSubscribed={topicSubscribed}
-            toggleTopicSubscribe={toggleTopicSubscribe} />}
+            setTopicSubscribe={setTopicSubscribe} />}
         navigation={navigation}
         screenProps={screenProps}
         showCommunities={!community}

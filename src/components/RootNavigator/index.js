@@ -48,8 +48,8 @@ import extendRouter from './extendRouter'
 // If you change or add tabs you have to edit trackCurrentTab.js
 const tabs = {
   Home: {screen: Home, path: ''},
-  Members: {screen: Members, path: 'people'}
-  // Topics: {screen: Topics, path: 'topics'} // TODO
+  Members: {screen: Members, path: 'people'},
+  Topics: {screen: Topics, path: 'topics'}
 }
 
 // Screens that can be shown in any tab (the same tab icon stays highlighted)
