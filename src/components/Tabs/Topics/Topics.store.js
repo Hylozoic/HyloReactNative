@@ -2,7 +2,7 @@ import { makeGetQueryResults, makeQueryResultsModelSelector } from '../../../sto
 import { FETCH_COMMUNITY_TOPICS } from '../../../store/actions/fetchCommunityTopics'
 export { setTopicSubscribe } from '../../Feed/Feed.store'
 
-const MODULE_NAME = 'Topics'
+export const MODULE_NAME = 'Topics'
 export const SET_TERM = `${MODULE_NAME}/SET_TERM`
 
 const getCommunityTopicResults = makeGetQueryResults(FETCH_COMMUNITY_TOPICS)
