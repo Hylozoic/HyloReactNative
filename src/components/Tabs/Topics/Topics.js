@@ -25,6 +25,7 @@ export default class Topics extends React.Component {
     const shouldRedirect =
       (this.props.isFocused && !prevProps.shouldRedirect && this.props.shouldRedirect) ||
       (this.props.shouldRedirect && !prevProps.isFocused && this.props.isFocused)
+
     if (shouldRedirect) {
       return this.props.goToComingSoon()
     }
