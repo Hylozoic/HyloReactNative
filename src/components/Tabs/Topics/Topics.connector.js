@@ -1,5 +1,4 @@
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 import getCurrentCommunity from '../../../store/selectors/getCurrentCommunity'
 import getCurrentNetwork from '../../../store/selectors/getCurrentNetwork'
 import getCurrentNetworkId from '../../../store/selectors/getCurrentNetworkId'
@@ -21,11 +20,22 @@ export function mapStateToProps (state, props) {
   const pending = state.pending[FETCH_COMMUNITY_TOPICS]
   const queryResultParams = {
     id: get('id', community),
-    autocomplete: term
+    autocomplete: ''
   }
+
+  const lowcaseTerm = term && term.toLowerCase()
+
+  const topicFilter = ct => ct.topic.name.toLowerCase().indexOf(lowcaseTerm) > -1
+  const topicSort = (a, b) => {
+    if (a.isSubscribed && !b.isSubscribed) return -1
+    if (!a.isSubscribed && b.isSubscribed) return 1
+    return a.name.toLowerCase() > b.name.toLowerCase()
+  }
+
   const topics = getCommunityTopics(state, queryResultParams)
+  .filter(topicFilter)
   .map(presentCommunityTopic)
-  .sort((a, b) => b.newPostCount - a.newPostCount)
+  .sort(topicSort)
 
   return {
     community,
@@ -37,19 +47,6 @@ export function mapStateToProps (state, props) {
   }
 }
 
-// export function mapDispatchToProps (dispatch, props) {
-//   return {
-//     // fetchCommunityTopicsDebounced: debounce(400, (communityId, opts) =>
-//     //   dispatch(fetchCommunityTopics(communityId, opts))),
-//     ...bindActionCreators({
-//       fetchCommunityTopics,
-//       setTopicSubscribe,
-//       setTerm,
-//       selectCommunity
-//     }, dispatch)
-//   }
-// }
-
 export const mapDispatchToProps = {
   fetchCommunityTopics,
   setTopicSubscribe,
@@ -58,14 +55,12 @@ export const mapDispatchToProps = {
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
-  const { community, networkId, term, pending } = stateProps
+  const { community, networkId } = stateProps
   const { navigation } = ownProps
   const communityId = get('id', community)
-  // const fetchCommunityTopicsImmediately = () =>
-  //   dispatchProps.fetchCommunityTopics(communityId, {first: null, autocomplete: term})
-  const fetchCommunityTopics = (pending && false)
-    ? () => {}
-    : () => dispatchProps.fetchCommunityTopics(communityId, {first: null, autocomplete: term})
+  const fetchCommunityTopics = () =>
+    dispatchProps.fetchCommunityTopics(communityId, {first: null})
+
   const setTopicSubscribe = (topicId, isSubscribing) =>
     dispatchProps.setTopicSubscribe(topicId, communityId, isSubscribing)
   const goToTopic = topicName => navigation.navigate('Feed', {topicName})

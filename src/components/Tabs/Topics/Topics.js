@@ -31,10 +31,7 @@ export default class Topics extends React.Component {
       return this.props.goToComingSoon()
     }
 
-    const shouldReload = (get('community.id', prevProps) !== get('props.community.id', this)) ||
-      (prevProps.term !== this.props.term)
-
-    if (shouldReload) {
+    if (get('community.id', prevProps) !== get('props.community.id', this)) {
       this.props.fetchCommunityTopics()
     }
   }
