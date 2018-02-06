@@ -1,13 +1,14 @@
 import React from 'react'
-import { Text, ScrollView, Image, View, TouchableOpacity } from 'react-native'
+import { Text, ScrollView, Image, View, TouchableOpacity, TextInput } from 'react-native'
 import KeyboardFriendlyView from '../../KeyboardFriendlyView'
 import Loading from '../../Loading'
 import StarIcon from '../../StarIcon'
 import Badge from '../../Badge'
+import Icon from '../../Icon'
 import Header from '../Header'
 import styles from './Topics.styles'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
-import { get } from 'lodash/fp'
+import { isEmpty, get } from 'lodash/fp'
 
 const title = 'Topics'
 
@@ -36,7 +37,9 @@ export default class Topics extends React.Component {
   }
 
   render () {
-    const { community, topics, pending, setTopicSubscribe, goToTopic } = this.props
+    const {
+      community, topics, pending, setTopicSubscribe, goToTopic, term, setTerm
+    } = this.props
     const { bannerUrl, name } = community
     const image = {uri: bannerUrl}
 
@@ -45,7 +48,8 @@ export default class Topics extends React.Component {
         <Image source={image} style={styles.image} />
         <View style={styles.imageOverlay} />
         <Text style={styles.title}>{name}</Text>
-        {pending
+        <SearchBar term={term} setTerm={setTerm} />
+        {pending && isEmpty(topics)
           ? <Loading />
           : <TopicList topics={topics}
             setTopicSubscribe={setTopicSubscribe}
@@ -55,14 +59,28 @@ export default class Topics extends React.Component {
   }
 }
 
+export function SearchBar ({ term, setTerm }) {
+  return <View style={styles.searchBar}>
+    <Icon style={styles.searchIcon} name='Search' />
+    <TextInput
+      style={styles.searchInput}
+      value={term}
+      onChangeText={setTerm}
+      placeholder='Search Topics'
+      editable />
+  </View>
+}
+
 export class TopicList extends React.Component {
   render () {
     const { topics, setTopicSubscribe, goToTopic } = this.props
     return <View style={styles.topicList}>
-      {topics.map((topic, i) =>
-        <TopicRow topic={topic} key={i} first={i === 0}
-          setTopicSubscribe={setTopicSubscribe}
-          goToTopic={goToTopic} />)}
+      {isEmpty(topics)
+        ? <Text style={styles.emptyList}>No topics match your search</Text>
+        : topics.map((topic, i) =>
+          <TopicRow topic={topic} key={i} first={i === 0}
+            setTopicSubscribe={setTopicSubscribe}
+            goToTopic={goToTopic} />)}
     </View>
   }
 }

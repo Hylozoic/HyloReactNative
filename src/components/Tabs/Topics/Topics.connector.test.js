@@ -1,4 +1,5 @@
 import { mapStateToProps, mapDispatchToProps, mergeProps } from './Topics.connector'
+import { MODULE_NAME } from './Topics.store'
 import { FETCH_COMMUNITY_TOPICS } from '../../../store/actions/fetchCommunityTopics'
 
 describe('mapStateToProps', () => {
@@ -7,7 +8,8 @@ describe('mapStateToProps', () => {
       pending: {
         [FETCH_COMMUNITY_TOPICS]: true
       },
-      queryResults: {}
+      queryResults: {},
+      [MODULE_NAME]: {}
     }
     expect(mapStateToProps(state, {})).toMatchSnapshot()
   })

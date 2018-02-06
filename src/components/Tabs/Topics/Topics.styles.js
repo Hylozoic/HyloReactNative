@@ -32,12 +32,37 @@ export default {
     zIndex: 10,
     marginLeft: 16
   },
+  searchBar: {
+    position: 'relative',
+    top: -16,
+    flexDirection: 'row',
+    borderColor: capeCod40,
+    borderWidth: StyleSheet.hairlineWidth,
+    borderRadius: 100,
+    marginHorizontal: 15,
+    height: 31
+  },
+  searchIcon: {
+    fontSize: 26,
+    color: capeCod40,
+    backgroundColor: 'transparent',
+    marginLeft: 5,
+    marginRight: 3,
+    position: 'relative',
+    top: 3
+  },
+  searchInput: {
+    flex: 1
+  },
   topicList: {
     borderTopWidth: StyleSheet.hairlineWidth,
     borderTopColor: capeCod40,
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: capeCod40,
     paddingLeft: 15
+  },
+  emptyList: {
+    paddingVertical: 10
   },
   topicRow: {
     borderTopWidth: StyleSheet.hairlineWidth,
