@@ -1,5 +1,7 @@
 import { StyleSheet } from 'react-native'
 import { caribbeanGreen, capeCod40, capeCod20 } from 'style/colors'
+import { isIOS } from 'util/platform'
+
 const imageHeight = 96
 
 export default {
@@ -52,7 +54,10 @@ export default {
     top: 3
   },
   searchInput: {
-    flex: 1
+    flex: 1,
+    position: 'relative',
+    top: isIOS ? 0 : 6,
+    paddingTop: 0
   },
   topicList: {
     borderTopWidth: StyleSheet.hairlineWidth,
