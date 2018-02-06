@@ -4,7 +4,6 @@ import { isEmpty } from 'lodash/fp'
 import {
   fetchComments,
   getHasMoreComments,
-  getTotalComments,
   getComments,
   FETCH_COMMENTS
 } from './Comments.store'
@@ -14,10 +13,10 @@ export function mapStateToProps (state, props) {
   const pending = props.postPending ||
     state.pending[FETCH_COMMENTS] ||
     state.pending[FETCH_POST]
-
+  const { comments, total } = getComments(state, props)
   return {
-    comments: getComments(state, props),
-    total: getTotalComments(state, {id: props.postId}),
+    comments,
+    total,
     hasMore: getHasMoreComments(state, {id: props.postId}),
     currentUser: getMe(state),
     pending
