@@ -1,5 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`SearchBar matches last snapshot 1`] = `
+<View>
+  <Icon
+    name="Search"
+  />
+  <TextInput
+    allowFontScaling={true}
+    editable={true}
+    onChangeText={[Function]}
+    placeholder="Search Topics"
+    value="searching"
+  />
+</View>
+`;
+
 exports[`SubscribeStar matches last snapshot 1`] = `
 <TouchableOpacity
   activeOpacity={0.2}
@@ -47,6 +62,18 @@ exports[`TopicList matches last snapshot 1`] = `
     setTopicSubscribe={[Function]}
     topic={3}
   />
+</View>
+`;
+
+exports[`TopicList matches last snapshot with empty list 1`] = `
+<View>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+  >
+    No topics match your search
+  </Text>
 </View>
 `;
 
@@ -104,6 +131,10 @@ exports[`Topics renders correctly a community and topics 1`] = `
     >
       Foomunity
     </Text>
+    <SearchBar
+      setTerm={undefined}
+      term={undefined}
+    />
     <TopicList
       goToTopic={[Function]}
       setTopicSubscribe={[Function]}
@@ -143,7 +174,21 @@ exports[`Topics renders correctly with pending=true 1`] = `
     >
       Foomunity
     </Text>
-    <Loading />
+    <SearchBar
+      setTerm={undefined}
+      term={undefined}
+    />
+    <TopicList
+      goToTopic={[Function]}
+      setTopicSubscribe={[Function]}
+      topics={
+        Array [
+          1,
+          2,
+          3,
+        ]
+      }
+    />
   </ScrollViewMock>
 </Unknown>
 `;
