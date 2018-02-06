@@ -132,10 +132,10 @@ function ToolbarIcon ({ action }) {
 // behavior of the editor when typing immediately after inserting a tag. without
 // the href attributes, new typing ends up inside the tag.
 
-const createMentionTag = ({ id, name }) =>
+export const createMentionTag = ({ id, name }) =>
   `<a href="#" data-entity-type="${MENTION_ENTITY_TYPE}" data-user-id="${id}">${name}</a>`
 
-const createTopicTag = topic =>
+export const createTopicTag = topic =>
   `<a href="#" data-entity-type="${TOPIC_ENTITY_TYPE}">#${topic.name}</a>`
 
 const customCSS = `

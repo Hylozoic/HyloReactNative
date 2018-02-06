@@ -46,7 +46,7 @@ export function mapStateToProps (state, props) {
 
 export function mapDispatchToProps (dispatch, { navigation }) {
   return {
-    newPost: communityId => navigation.navigate('PostEditor', {communityId}),
+    newPost: (communityId, topicName) => navigation.navigate('PostEditor', {communityId, topicName}),
     showPost: id => navigation.navigate('PostDetails', {id}),
     editPost: id => navigation.navigate('PostEditor', {id}),
     showMember: id => navigation.navigate('MemberProfile', {id}),
@@ -76,7 +76,7 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     ...stateProps,
     ...dispatchProps,
     ...ownProps,
-    newPost: () => dispatchProps.newPost(communityId),
+    newPost: () => dispatchProps.newPost(communityId, topicName),
     showTopic: dispatchProps.showTopic(communityId, networkId),
     fetchCommunityTopic: topicName && slug
       ? () => dispatchProps.fetchCommunityTopic(topicName, slug)
