@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches the last snapshot for fetchComments 1`] = `
+Object {
+  "graphql": Object {
+    "query": "query ($id: ID, $cursor: ID) {
+        post(id: $id) {
+          id
+          comments(first: 10, cursor: $cursor, order: \\"desc\\") {
+            items {
+              id
+              text
+              creator {
+                id
+                name
+                avatarUrl
+              }
+              createdAt
+            }
+            total
+            hasMore
+          }
+        }
+      }",
+    "variables": Object {
+      "cursor": 20,
+      "id": 1,
+    },
+  },
+  "meta": Object {
+    "extractModel": "Post",
+    "extractQueryResults": Object {
+      "getItems": [Function],
+    },
+  },
+  "type": "Comments/FETCH_COMMENTS",
+}
+`;
