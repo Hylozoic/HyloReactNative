@@ -67,7 +67,15 @@ export default class FeedBanner extends React.Component {
             numberOfLines={3}>
             {name}
           </Text>
-          {topicName && <Text style={styles.subName}><Icon name='Star' /> {followersTotal} subscriber{pluralFollowers && 's'}   <Icon name='Post' style={styles.postTotalIcon} /> {postsTotal} post{pluralPosts && 's'}</Text>}
+          {topicName &&
+            <View style={styles.topicInfo}>
+              <Text style={styles.subName}>
+                <Icon name='Star' /> {followersTotal} subscriber{pluralFollowers && 's'}
+              </Text>
+              <Text style={styles.subName}>
+                <Icon name='Post' /> {postsTotal} post{pluralPosts && 's'}
+              </Text>
+            </View>}
         </View>
         {!isUndefined(topicSubscribed) && <SubscribeButton
           active={topicSubscribed} onPress={this.toggleSubscribe} />}

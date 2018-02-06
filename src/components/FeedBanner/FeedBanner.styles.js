@@ -54,14 +54,17 @@ export default {
     backgroundColor: 'transparent',
     ...hasTextShadow
   },
+  topicInfo: {
+    flexDirection: 'row',
+    flexWrap: 'wrap'
+  },
   subName: {
+    flexWrap: 'wrap',
     fontSize: 16,
     fontFamily: 'Circular',
     color: white,
+    paddingRight: 10,
     backgroundColor: 'transparent'
-  },
-  postTotalIcon: {
-    paddingLeft: 15
   },
   postPrompt: {
     ...postPromptShape,
