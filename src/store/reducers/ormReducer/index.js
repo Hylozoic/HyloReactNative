@@ -10,7 +10,7 @@ import {
   CREATE_COMMENT
 } from '../../../components/PostDetails/CommentEditor/CommentEditor.store'
 import {
-  TOGGLE_TOPIC_SUBSCRIBE_PENDING
+  SET_TOPIC_SUBSCRIBE_PENDING
 } from '../../../components/Feed/Feed.store'
 import {
   MARK_ACTIVITY_READ, MARK_ALL_ACTIVITIES_READ, UPDATE_NEW_NOTIFICATION_COUNT_PENDING
@@ -30,6 +30,9 @@ import {
 import {
   UPDATE_LAST_VIEWED_PENDING
 } from '../../../components/ThreadList/ThreadList.store'
+import {
+  CREATE_COMMUNITY
+} from '../../../components/CreateCommunityFlow/CreateCommunityFlow.store'
 import { RESET_NEW_POST_COUNT_PENDING } from '../../actions/resetNewPostCount'
 import { PIN_POST_PENDING } from '../../../components/PostCard/PostHeader/PostHeader.store'
 import { FETCH_CURRENT_USER } from 'store/actions/fetchCurrentUser'
@@ -37,6 +40,7 @@ import orm from 'store/models'
 import ModelExtractor from '../ModelExtractor'
 import extractModelsFromAction from '../ModelExtractor/extractModelsFromAction'
 import { isPromise } from 'util/index'
+import { buildKey } from 'store/reducers/queryResults'
 
 export default function ormReducer (state = {}, action) {
   const session = orm.session(state)
@@ -127,7 +131,7 @@ export default function ormReducer (state = {}, action) {
       }
       break
 
-    case TOGGLE_TOPIC_SUBSCRIBE_PENDING:
+    case SET_TOPIC_SUBSCRIBE_PENDING:
       const ct = session.CommunityTopic.get({
         topic: meta.topicId, community: meta.communityId
       })
@@ -144,6 +148,8 @@ export default function ormReducer (state = {}, action) {
 
     case DELETE_COMMENT_PENDING:
       const comment = session.Comment.withId(meta.id)
+      post = comment.post
+      post.update({ commentsTotal: post.commentsTotal - 1 })
       comment.delete()
       break
 
@@ -180,6 +186,11 @@ export default function ormReducer (state = {}, action) {
     case FETCH_CURRENT_USER:
       const attrs = pick(['id', 'avatarUrl', 'name', 'location'], payload.data.me)
       session.Person.create(attrs)
+      break
+
+    case CREATE_COMMUNITY:
+      me = session.Me.first()
+      me.updateAppending({memberships: [payload.data.createCommunity.id]})
       break
 
     case UPDATE_THREAD_READ_TIME_PENDING:

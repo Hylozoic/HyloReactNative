@@ -63,6 +63,7 @@ Post.fields = {
     throughFields: [ 'post', 'commenter' ]
   }),
   commentersTotal: attr(),
+  commentsTotal: attr(),
   createdAt: attr(),
   startsAt: attr(),
   endsAt: attr(),

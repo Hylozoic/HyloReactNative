@@ -100,6 +100,20 @@ exports[`Login renders correctly 1`] = `
   <View>
     <TouchableOpacity
       activeOpacity={0.2}
+      onPress={undefined}
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+      >
+        Forgot your password?
+      </Text>
+    </TouchableOpacity>
+  </View>
+  <View>
+    <TouchableOpacity
+      activeOpacity={0.2}
       onPress={[Function]}
     >
       <Text
@@ -157,7 +171,15 @@ exports[`Login renders error message 1`] = `
   >
     Log in to Hylo
   </Text>
-  <FormError />
+  <View>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+    >
+      Your email address
+    </Text>
+  </View>
   <View>
     <View>
       <View>
@@ -206,6 +228,20 @@ exports[`Login renders error message 1`] = `
         />
       </View>
     </View>
+  </View>
+  <View>
+    <TouchableOpacity
+      activeOpacity={0.2}
+      onPress={undefined}
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+      >
+        Forgot your password?
+      </Text>
+    </TouchableOpacity>
   </View>
   <View>
     <TouchableOpacity
@@ -328,6 +364,20 @@ exports[`Login renders with a signup link 1`] = `
   <View>
     <TouchableOpacity
       activeOpacity={0.2}
+      onPress={undefined}
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+      >
+        Forgot your password?
+      </Text>
+    </TouchableOpacity>
+  </View>
+  <View>
+    <TouchableOpacity
+      activeOpacity={0.2}
       onPress={[Function]}
     >
       <Text
@@ -445,6 +495,20 @@ exports[`Login renders with no network connection error 1`] = `
         />
       </View>
     </View>
+  </View>
+  <View>
+    <TouchableOpacity
+      activeOpacity={0.2}
+      onPress={undefined}
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+      >
+        Forgot your password?
+      </Text>
+    </TouchableOpacity>
   </View>
   <View>
     <TouchableOpacity
@@ -574,6 +638,20 @@ exports[`Login renders with pending banner 1`] = `
   <View>
     <TouchableOpacity
       activeOpacity={0.2}
+      onPress={undefined}
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+      >
+        Forgot your password?
+      </Text>
+    </TouchableOpacity>
+  </View>
+  <View>
+    <TouchableOpacity
+      activeOpacity={0.2}
       onPress={[Function]}
     >
       <Text
@@ -688,6 +766,20 @@ exports[`Login renders without a signup link 1`] = `
         />
       </View>
     </View>
+  </View>
+  <View>
+    <TouchableOpacity
+      activeOpacity={0.2}
+      onPress={undefined}
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+      >
+        Forgot your password?
+      </Text>
+    </TouchableOpacity>
   </View>
   <View>
     <TouchableOpacity

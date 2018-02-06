@@ -111,9 +111,9 @@ describe('mergeProps', () => {
     expect(props.fetchCommunityTopic()).toMatchSnapshot()
   })
 
-  it('sets up toggleTopicSubscribe', () => {
+  it('sets up setTopicSubscribe', () => {
     stateProps.topic = {id: '5', name: 'inquiry'}
     const props = mergeProps(stateProps, dispatchProps, ownProps)
-    expect(props.toggleTopicSubscribe()).toMatchSnapshot()
+    expect(props.setTopicSubscribe()).toMatchSnapshot()
   })
 })

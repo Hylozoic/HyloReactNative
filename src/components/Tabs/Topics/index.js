@@ -1,13 +1,5 @@
-import React from 'react'
-import Header from '../Header'
+import { withNavigationFocus } from 'react-navigation-is-focused-hoc'
 
-const title = 'Topics'
-
-export default class Topics extends React.Component {
-  static navigationOptions = ({navigation}) => (Header(navigation, title))
-
-  render () {
-    const { navigation } = this.props
-    return null
-  }
-}
+import component from './Topics'
+import connector from './Topics.connector'
+export default withNavigationFocus(connector(component))

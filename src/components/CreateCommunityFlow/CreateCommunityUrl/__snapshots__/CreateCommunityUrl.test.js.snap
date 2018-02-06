@@ -1,0 +1,333 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`has navigationOptions 1`] = `
+Object {
+  "color": "#FFFFFF",
+  "fontSize": 10,
+  "headerBackgroundColor": "#0DC39F",
+  "headerLeft": <HeaderBackButton
+    onPress={[Function]}
+    pressColorAndroid="rgba(0, 0, 0, .32)"
+    tintColor="#9ee7d9"
+    truncatedTitle="Back"
+/>,
+  "headerStyle": Object {
+    "backgroundColor": "#0DC39F",
+    "borderBottomWidth": 0,
+    "elevation": 0,
+    "shadowOffset": Object {
+      "height": 0,
+    },
+    "shadowRadius": 0,
+  },
+  "title": <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+>
+    STEP 2/3
+</Text>,
+}
+`;
+
+exports[`matches last snapshot 1`] = `
+<ScrollViewMock>
+  <KeyboardFriendlyView>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+    >
+      Choose an address for your community
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+    >
+      Your URL is the address that members will use to access your community online. The shorter the better!
+    </Text>
+    <View>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+      >
+        What's the name of your community?
+      </Text>
+      <TextInput
+        allowFontScaling={true}
+        autoCapitalize="none"
+        autoCorrect={false}
+        onChangeText={[Function]}
+        returnKeyType="next"
+        underlineColorAndroid="rgba(0,0,0,0)"
+        value={undefined}
+      />
+    </View>
+    <Button
+      disabled={false}
+      onPress={[Function]}
+      text="Continue"
+    />
+  </KeyboardFriendlyView>
+</ScrollViewMock>
+`;
+
+exports[`matches last snapshot when there is an error 1`] = `
+<RCTScrollView>
+  <View>
+    <KeyboardFriendlyView>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+      >
+        Choose an address for your community
+      </Text>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+      >
+        Your URL is the address that members will use to access your community online. The shorter the better!
+      </Text>
+      <View>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+        >
+          What's the name of your community?
+        </Text>
+        <TextInput
+          allowFontScaling={true}
+          autoCapitalize="none"
+          autoCorrect={false}
+          onChangeText={[Function]}
+          returnKeyType="next"
+          underlineColorAndroid="rgba(0,0,0,0)"
+          value={undefined}
+        />
+      </View>
+      <View>
+        <View>
+          <View />
+          <View>
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+            >
+              This is an error
+            </Text>
+          </View>
+        </View>
+      </View>
+      <View>
+        <View
+          accessibilityComponentType={undefined}
+          accessibilityLabel={undefined}
+          accessibilityTraits={undefined}
+          accessible={true}
+          collapsable={undefined}
+          hitSlop={undefined}
+          isTVSelectable={true}
+          nativeID={undefined}
+          onLayout={undefined}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          testID={undefined}
+          tvParallaxProperties={undefined}
+        >
+          <View>
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+            >
+              Continue
+            </Text>
+          </View>
+        </View>
+      </View>
+    </KeyboardFriendlyView>
+  </View>
+</RCTScrollView>
+`;
+
+exports[`validates the url 1`] = `
+<RCTScrollView>
+  <View>
+    <KeyboardFriendlyView>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+      >
+        Choose an address for your community
+      </Text>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+      >
+        Your URL is the address that members will use to access your community online. The shorter the better!
+      </Text>
+      <View>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+        >
+          What's the name of your community?
+        </Text>
+        <TextInput
+          allowFontScaling={true}
+          autoCapitalize="none"
+          autoCorrect={false}
+          onChangeText={[Function]}
+          returnKeyType="next"
+          underlineColorAndroid="rgba(0,0,0,0)"
+          value={undefined}
+        />
+      </View>
+      <View>
+        <View>
+          <View />
+          <View>
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+            >
+              Please enter a URL
+            </Text>
+          </View>
+        </View>
+      </View>
+      <View>
+        <View
+          accessibilityComponentType={undefined}
+          accessibilityLabel={undefined}
+          accessibilityTraits={undefined}
+          accessible={true}
+          collapsable={undefined}
+          hitSlop={undefined}
+          isTVSelectable={true}
+          nativeID={undefined}
+          onLayout={undefined}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          testID={undefined}
+          tvParallaxProperties={undefined}
+        >
+          <View>
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+            >
+              Continue
+            </Text>
+          </View>
+        </View>
+      </View>
+    </KeyboardFriendlyView>
+  </View>
+</RCTScrollView>
+`;
+
+exports[`validates the url 2`] = `
+<RCTScrollView>
+  <View>
+    <KeyboardFriendlyView>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+      >
+        Choose an address for your community
+      </Text>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+      >
+        Your URL is the address that members will use to access your community online. The shorter the better!
+      </Text>
+      <View>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+        >
+          What's the name of your community?
+        </Text>
+        <TextInput
+          allowFontScaling={true}
+          autoCapitalize="none"
+          autoCorrect={false}
+          onChangeText={[Function]}
+          returnKeyType="next"
+          underlineColorAndroid="rgba(0,0,0,0)"
+          value={undefined}
+        />
+      </View>
+      <View>
+        <View>
+          <View />
+          <View>
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+            >
+              URLs must have between 2 and 40 characters, and can only have lower case letters, numbers, and dashes.
+            </Text>
+          </View>
+        </View>
+      </View>
+      <View>
+        <View
+          accessibilityComponentType={undefined}
+          accessibilityLabel={undefined}
+          accessibilityTraits={undefined}
+          accessible={true}
+          collapsable={undefined}
+          hitSlop={undefined}
+          isTVSelectable={true}
+          nativeID={undefined}
+          onLayout={undefined}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          testID={undefined}
+          tvParallaxProperties={undefined}
+        >
+          <View>
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+            >
+              Continue
+            </Text>
+          </View>
+        </View>
+      </View>
+    </KeyboardFriendlyView>
+  </View>
+</RCTScrollView>
+`;

@@ -59,18 +59,18 @@ describe('FeedBanner', () => {
   })
 
   it('has a topic subscribe toggle button', () => {
-    const toggleTopicSubscribe = jest.fn()
+    const setTopicSubscribe = jest.fn()
     const renderer = TestRenderer.create(
       <FeedBanner community={{name: 'Earth'}}
         topicSubscribed={false}
-        toggleTopicSubscribe={toggleTopicSubscribe} />
+        setTopicSubscribe={setTopicSubscribe} />
     )
 
     expect(renderer.toJSON()).toMatchSnapshot()
     const { root } = renderer
     root.findByType(TouchableOpacity).props.onPress()
     expect(root.instance.state.overlayMessage).toEqual('SUBSCRIBED TO TOPIC')
-    expect(toggleTopicSubscribe).toBeCalled()
+    expect(setTopicSubscribe).toBeCalled()
   })
 })
 

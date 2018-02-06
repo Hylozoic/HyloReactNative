@@ -1,7 +1,7 @@
 import orm from 'store/models'
 import ormReducer from './index'
 import {
-  TOGGLE_TOPIC_SUBSCRIBE_PENDING
+  SET_TOPIC_SUBSCRIBE_PENDING
 } from '../../../components/Feed/Feed.store'
 import {
   VOTE_ON_POST_PENDING
@@ -33,6 +33,9 @@ import {
 import {
   PIN_POST_PENDING
 } from '../../../components/PostCard/PostHeader/PostHeader.store'
+import {
+  CREATE_COMMUNITY
+} from '../../../components/CreateCommunityFlow/CreateCommunityFlow.store'
 import { FETCH_CURRENT_USER } from 'store/actions/fetchCurrentUser'
 
 it('responds to an action with meta.extractModel', () => {
@@ -118,13 +121,13 @@ it('handles CREATE_COMMENT', () => {
   expect(newSession.Post.withId('10').commentsTotal).toEqual(1)
 })
 
-it('handles TOGGLE_TOPIC_SUBSCRIBE_PENDING', () => {
+it('handles SET_TOPIC_SUBSCRIBE_PENDING', () => {
   const session = orm.session(orm.getEmptyState())
   session.CommunityTopic.create({
     topic: '1', community: '1', isSubscribed: false, followersTotal: 3
   })
   const action = {
-    type: TOGGLE_TOPIC_SUBSCRIBE_PENDING,
+    type: SET_TOPIC_SUBSCRIBE_PENDING,
     meta: {
       topicId: '1',
       communityId: '1',
@@ -214,26 +217,41 @@ describe('handles USE_INVITATION', () => {
   })
 })
 
-it('handles DELETE_COMMENT_PENDING', () => {
-  const session = orm.session(orm.getEmptyState())
-  session.Comment.create({
-    id: 3
-  })
-  session.Comment.create({
-    id: 10
-  })
-  const action = {
-    type: DELETE_COMMENT_PENDING,
-    meta: {
-      id: '3'
-    }
-  }
+describe('DELETE_COMMENT_PENDING', () => {
+  let session
 
-  expect(session.Comment.count()).toBe(2)
-  const newState = ormReducer(session.state, action)
-  const newSession = orm.session(newState)
-  expect(newSession.Comment.count()).toBe(1)
-  expect(newSession.Comment.first().id).toBe(10)
+  beforeEach(() => {
+    session = orm.session(orm.getEmptyState())
+    const post = session.Post.create({ id: '1', commentsTotal: 2 })
+    session.Comment.create({ id: '3', post })
+    session.Comment.create({ id: '10', post })
+  })
+
+  it('optimistically deletes a comment', () => {
+    const action = {
+      type: DELETE_COMMENT_PENDING,
+      meta: {
+        id: '3'
+      }
+    }
+
+    const newState = ormReducer(session.state, action)
+    const newSession = orm.session(newState)
+    expect(newSession.Comment.count()).toBe(1)
+    expect(newSession.Comment.first().id).toBe('10')
+  })
+
+  it('decrements commentsTotal', () => {
+    const action = {
+      type: DELETE_COMMENT_PENDING,
+      meta: {
+        id: '3'
+      }
+    }
+    const newState = ormReducer(session.state, action)
+    const newSession = orm.session(newState)
+    expect(newSession.Post.withId(1).commentsTotal).toBe(1)
+  })
 })
 
 describe('on UPDATE_LAST_VIEWED_PENDING', () => {
@@ -413,5 +431,34 @@ describe('on UPDATE_THREAD_READ_TIME_PENDING', () => {
 
     const thread = newSession.MessageThread.withId(id)
     expect(new Date(thread.lastReadAt).getTime()).toBeGreaterThan(new Date().getTime() - 5000)
+  })
+})
+
+describe('handles CREATE_COMMUNITY', () => {
+  it('should link the new Community to MeMemberships', () => {
+    const session = orm.mutableSession(orm.getEmptyState())
+    const meId = 'meId'
+    const communityId = 'communityId'
+    const membershipId = 'membershipId'
+    session.Me.create({id: meId})
+    session.Community.create({id: communityId, name: 'community 1'})
+    session.Membership.create({id: membershipId, community: communityId, person: meId})
+
+    const action = {
+      type: CREATE_COMMUNITY,
+      payload: {
+        data: {
+          createCommunity: {
+            id: membershipId
+          }
+        }
+      }
+    }
+
+    const memberships = session.Me.first().memberships
+    expect(memberships.count()).toEqual(0)
+    const newSession = orm.session(ormReducer(session.state, action))
+    const membershipsAfterAction = newSession.Me.first().memberships
+    expect(membershipsAfterAction.count()).toEqual(1)
   })
 })

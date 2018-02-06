@@ -51,6 +51,8 @@ describe('mergeProps matches the last snapshot and bound functions work as expec
   expect(ownProps.navigation.navigate).toHaveBeenCalled()
   props.goToMyProfile()
   expect(ownProps.navigation.navigate).toHaveBeenCalled()
+  props.goToCreateCommunityName()
+  expect(ownProps.navigation.navigate).toHaveBeenCalled()
 })
 
 describe('partitionCommunities', () => {

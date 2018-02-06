@@ -307,8 +307,10 @@ describe('UserSettings', () => {
     })
   })
 
-  it('has navigationOptions', () =>
-    expect(UserSettings.navigationOptions()).toMatchSnapshot())
+  it('has navigationOptions', () => {
+    const navigation = {state: {routeName: 'test'}}
+    expect(UserSettings.navigationOptions({ navigation })).toMatchSnapshot()
+  })
 })
 
 describe('SocialAccounts', () => {
