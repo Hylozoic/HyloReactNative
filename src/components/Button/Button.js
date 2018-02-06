@@ -1,6 +1,6 @@
 import React from 'react'
 import { Text, View, TouchableOpacity } from 'react-native'
-import { caribbeanGreen } from 'style/colors'
+import { caribbeanGreen, white } from 'style/colors'
 import Icon from '../Icon'
 import { omit } from 'lodash/fp'
 
@@ -12,8 +12,8 @@ export default function Button ({
   disabled
  }) {
   const {
-    color = 'white',
-    borderColor = 'white',
+    color = white,
+    borderColor = white,
     fontSize = 13,
     height = 30
   } = style
@@ -66,7 +66,7 @@ const styles = {
     fontFamily: 'Circular-Bold'
   },
   icon: {
-    color: 'white',
+    color: white,
     fontSize: 16,
     paddingRight: 5
   }

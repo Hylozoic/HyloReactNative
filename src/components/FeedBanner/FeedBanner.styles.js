@@ -1,4 +1,4 @@
-import { capeCod40, capeCod10, caribbeanGreen } from '../../style/colors'
+import { capeCod40, capeCod10, caribbeanGreen, white } from '../../style/colors'
 import { isIOS } from 'util/platform'
 
 const postPromptShape = {
@@ -50,14 +50,14 @@ export default {
   name: {
     fontSize: 24,
     fontFamily: 'Circular-Black',
-    color: 'white',
+    color: white,
     backgroundColor: 'transparent',
     ...hasTextShadow
   },
   subName: {
     fontSize: 16,
     fontFamily: 'Circular',
-    color: 'white',
+    color: white,
     backgroundColor: 'transparent'
   },
   postTotalIcon: {
@@ -67,13 +67,13 @@ export default {
     ...postPromptShape,
     paddingHorizontal: 12,
     paddingVertical: 8,
-    backgroundColor: 'white',
+    backgroundColor: white,
     borderWidth: isIOS ? 0 : 1,
     borderColor: capeCod10
   },
   promptShadow: {
     ...postPromptShape,
-    backgroundColor: 'white',
+    backgroundColor: white,
     shadowOffset: {width: 0, height: 4},
     shadowRadius: 5,
     shadowOpacity: 1.0,
