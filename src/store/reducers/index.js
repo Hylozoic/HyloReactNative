@@ -19,6 +19,7 @@ import SkillEditor from '../../components/SkillEditor/SkillEditor.store'
 import SignupFlow from '../../components/SignupFlow/SignupFlow.store'
 import SocketListener from '../../components/SocketListener/SocketListener.store'
 import TabBar from '../../components/RootNavigator/TabBar/TabBar.store'
+import Topics from '../../components/Tabs/Topics/Topics.store'
 import CreateCommunityFlow from '../../components/CreateCommunityFlow/CreateCommunityFlow.store'
 
 export const combinedReducers = combineReducers({
@@ -41,6 +42,7 @@ export const combinedReducers = combineReducers({
   SkillEditor,
   SocketListener,
   TabBar,
+  Topics,
   CreateCommunityFlow
 })
 

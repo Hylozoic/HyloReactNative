@@ -47,6 +47,9 @@ Object {
   "TabBar": Object {
     "isVisible": true,
   },
+  "Topics": Object {
+    "term": "",
+  },
   "currentNetworkAndCommunity": Object {
     "communityId": null,
     "networkId": null,

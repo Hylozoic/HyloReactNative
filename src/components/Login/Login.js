@@ -1,4 +1,5 @@
 import React from 'react'
+import { get } from 'lodash/fp'
 import {
   ScrollView,
   Text,
@@ -60,6 +61,15 @@ export default class Login extends React.Component {
     }
   }
 
+  async componentWillMount () {
+    const { loginToken, loginByToken } = this.props
+    if (loginToken) {
+      const loginByTokenResponse = await loginByToken()
+      const errorMessage = get('errorMessage', loginByTokenResponse)
+      if (errorMessage) this.createErrorNotification(errorMessage)
+    }
+  }
+
   componentDidMount () {
     NetInfo.isConnected.addEventListener('connectionChange', this.handleConnectivityChange)
   }
@@ -73,18 +83,22 @@ export default class Login extends React.Component {
   }
 
   render () {
-    const { loginWithGoogle, error, loginWithFacebook, pending, goToSignup, hasSignupLink } = this.props
+    const {
+      loginWithGoogle, formError, loginWithFacebook, pending,
+      goToResetPassword, goToSignup, hasSignupLink, bannerMessage
+    } = this.props
     const { ssoError, emailIsValid, isConnected } = this.state
     return <ScrollView contentContainerStyle={styles.login} style={styles.container}>
       {ssoError && <Text style={styles.errorBanner}>{ssoError}</Text>}
       {!isConnected && <Text style={styles.errorBanner}>OFFLINE; TRYING TO RECONNECT...</Text>}
       {pending && <Text style={styles.banner}>LOGGING IN...</Text>}
+      {bannerMessage && <Text style={styles.banner}>{bannerMessage}</Text>}
 
       <Image style={styles.logo}
         source={require('../../assets/merkaba-green-on-white.png')} />
       <Text style={styles.title}>Log in to Hylo</Text>
-      {error && <FormError />}
-      {!error && <View style={styles.labelRow}>
+      {formError && <FormError />}
+      {!formError && <View style={styles.labelRow}>
         <Text style={styles.labelText}>Your email address</Text>
       </View>}
       <View style={styles.paddedRow}>
@@ -130,6 +144,11 @@ export default class Login extends React.Component {
           </View>
         </View>
       </View>
+      <View style={styles.labelRow}>
+        <TouchableOpacity onPress={goToResetPassword}>
+          <Text style={styles.forgotPasswordText}>Forgot your password?</Text>
+        </TouchableOpacity>
+      </View>
       <View style={styles.paddedRow}>
         <TouchableOpacity onPress={this.login} style={styles.loginButton}>
           <Text style={styles.loginText}>Log In</Text>
@@ -162,6 +181,7 @@ export function SignupLink ({goToSignup}) {
     </TouchableOpacity>
   </View>
 }
+
 export function FormError () {
   const rowStyle = styles.emailErrorRow
   const triangleStyle = styles.emailTriangle

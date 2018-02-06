@@ -1,8 +1,10 @@
 import { connect } from 'react-redux'
+import { get } from 'lodash/fp'
 import {
   login,
   loginWithFacebook,
-  loginWithGoogle
+  loginWithGoogle,
+  loginByToken
 } from './actions'
 import { getPending } from './Login.store'
 import { register as registerOneSignal } from 'util/onesignal'
@@ -12,16 +14,21 @@ import { redirectAfterLogin } from 'util/navigation'
 import { getNavigationAction } from '../DeepLinkHandler/DeepLinkHandler.store'
 
 export function mapStateToProps (state, props) {
-  const error = state.session.loginError
+  const formError = state.session.loginError
   const pending = getPending(state)
   const goToSignup = () => props.navigation.navigate('Signup')
+  const goToResetPassword = () => props.navigation.navigate('ForgotPassword')
   return {
     loggedIn: state.session.loggedIn,
-    error,
+    formError,
+    bannerMessage: get('navigation.state.params.bannerMessage', props),
     pending,
     defaultEmail: state.session.defaultLoginEmail,
     goToSignup,
+    goToResetPassword,
     hasSignupLink: !!state.session.hasSignupLink,
+    loginToken: decodeURIComponent(get('navigation.state.params.loginToken', props)),
+    loginTokenUserId: get('navigation.state.params.userId', props),
     deepLinkAction: getNavigationAction(state)
   }
 }
@@ -31,6 +38,7 @@ export const mapDispatchToProps = {
   loginWithFacebook,
   loginWithGoogle,
   login,
+  loginByToken,
   fetchCurrentUser
 }
 
@@ -40,19 +48,22 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     loginWithGoogle,
     loginWithFacebook,
     login,
+    loginByToken,
     fetchCurrentUser
   } = dispatchProps
 
-  const finishLogin = action => {
-    if (action.error) return
+  const finishLogin = async (action) => {
+    if (action.error) {
+      const errorMessage = get('payload.response.body', action)
+      return errorMessage ? { errorMessage } : null
+    }
     registerOneSignal({registerDevice})
-
-    return fetchCurrentUser().then(({ error, payload }) =>
-      !error && redirectAfterLogin({
-        navigation: ownProps.navigation,
-        currentUser: payload.data.me,
-        action: stateProps.deepLinkAction
-      }))
+    const { error, payload } = await fetchCurrentUser()
+    return !error && redirectAfterLogin({
+      navigation: ownProps.navigation,
+      currentUser: payload.data.me,
+      action: stateProps.deepLinkAction
+    })
   }
 
   return {
@@ -62,6 +73,11 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
       loginWithFacebook(token).then(finishLogin),
     loginWithGoogle: (token) =>
       loginWithGoogle(token).then(finishLogin),
+    loginByToken: () => {
+      const { loginTokenUserId, loginToken } = stateProps
+      return loginTokenUserId && loginByToken(loginTokenUserId, loginToken)
+      .then(finishLogin)
+    },
     login: (email, password) =>
       login(email, password).then(finishLogin)
   }

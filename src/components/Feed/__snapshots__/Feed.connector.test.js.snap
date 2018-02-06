@@ -12,10 +12,10 @@ Object {
   "newPost": [Function],
   "otherProp1": "foo1",
   "otherProp2": "foo2",
+  "setTopicSubscribe": [Function],
   "showMember": [Function],
   "showPost": [Function],
   "showTopic": [Function],
-  "toggleTopicSubscribe": [Function],
 }
 `;
 
@@ -49,7 +49,7 @@ Object {
 }
 `;
 
-exports[`mergeProps sets up toggleTopicSubscribe 1`] = `
+exports[`mergeProps sets up setTopicSubscribe 1`] = `
 Object {
   "graphql": Object {
     "query": "mutation($topicId: ID, $communityId: ID, $isSubscribing: Boolean) {
@@ -69,6 +69,6 @@ Object {
     "optimistic": true,
     "topicId": "5",
   },
-  "type": "Feed/TOGGLE_TOPIC_SUBSCRIBE",
+  "type": "Feed/SET_TOPIC_SUBSCRIBE",
 }
 `;
