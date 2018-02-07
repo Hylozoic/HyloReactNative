@@ -23,10 +23,10 @@ exports[`renders correctly 1`] = `
             "id": "2",
           }
         }
-        followersTotal={0}
+        followersTotal={undefined}
         network={undefined}
         newPost={[Function]}
-        postsTotal={0}
+        postsTotal={undefined}
         setTopicSubscribe={undefined}
         topicName="amazing"
         topicSubscribed={undefined}
