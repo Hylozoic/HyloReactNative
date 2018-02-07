@@ -44,8 +44,8 @@ export default class Feed extends Component {
       setTopicSubscribe,
       topicName,
       topicSubscribed,
-      postsTotal = 0,
-      followersTotal = 0
+      postsTotal,
+      followersTotal
     } = this.props
 
     return <View style={styles.container}>

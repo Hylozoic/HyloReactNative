@@ -31,10 +31,8 @@ export function mapStateToProps (state, props) {
   const network = getNetwork(state, {id: networkId})
   const currentUser = getMe(state)
   const communityTopic = topicName && community &&
-    (get(FETCH_COMMUNITY_TOPIC, state.pending) ? undefined : true) &&
     getCommunityTopic(state, {topicName, slug: community.slug})
-  // when this is undefined, the subscribe button is not shown at all
-  const topicSubscribed = communityTopic && communityTopic.isSubscribed
+  const topicSubscribed = topicName && communityTopic.isSubscribed
   const topic = get('topic', communityTopic)
   return {
     currentUser,
