@@ -95,6 +95,14 @@ export default {
     fontSize: 14,
     fontStyle: 'italic'
   },
+  unsubscribeButton: {
+    width: 130,
+    fontSize: 14,
+    height: 36,
+    color: caribbeanGreen,
+    backgroundColor: white,
+    borderColor: white
+  },
   subscribeButton: {
     width: 130,
     fontSize: 14,

@@ -103,5 +103,6 @@ export function PostPrompt ({ currentUser, newPost }) {
 
 function SubscribeButton ({ active, onPress }) {
   const text = active ? 'Unsubscribe' : 'Subscribe'
-  return <Button onPress={onPress} style={styles.subscribeButton} iconName='Star' text={text} />
+  const style = active ? styles.unsubscribeButton : styles.subscribeButton
+  return <Button onPress={onPress} style={style} iconName='Star' text={text} />
 }

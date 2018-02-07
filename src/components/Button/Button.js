@@ -30,12 +30,13 @@ export default function Button ({
 
   const buttonStyle = {...styles.button, backgroundColor, height, borderColor}
   const textStyle = {...styles.text, color, fontSize}
+  const iconStyle = {...styles.icon, color}
 
   return <View style={containerStyle}>
     <TouchableOpacity disabled={disabled} onPress={disabled ? () => {} : onPress} style={styles.wrapper}>
       <View style={buttonStyle}>
         <View style={styles.buttonInner}>
-          {iconName && <Icon name={iconName} style={styles.icon} />}
+          {iconName && <Icon name={iconName} style={iconStyle} />}
           <Text style={textStyle}>{text}</Text>
         </View>
       </View>
