@@ -24,6 +24,8 @@ describe('mapStateToProps', () => {
 
   it('gets props from navigation object', () => {
     const community = session.Community.create({id: '7', slug: 'world'})
+    const topic = session.Topic.create({id: '111', name: 'logistics'})
+    session.CommunityTopic.create({community: '7', topic: '111', isSubscribed: false, followersTotal: 10, postsTotal: 20})
     const currentUser = session.Me.create({name: 'me'})
     const props = {
       navigation: {
@@ -39,6 +41,9 @@ describe('mapStateToProps', () => {
       community,
       currentUser,
       network: false,
+      followersTotal: 10,
+      postsTotal: 20,
+      topic,
       topicName: 'logistics',
       topicSubscribed: false
     })

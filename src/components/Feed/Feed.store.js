@@ -16,6 +16,7 @@ export function fetchCommunityTopic (topicName, communitySlug) {
           id
           isSubscribed
           followersTotal
+          postsTotal
           topic {
             id
             name

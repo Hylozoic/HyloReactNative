@@ -6,6 +6,7 @@ import Icon from '../Icon'
 import NotificationOverlay from '../NotificationOverlay'
 import LinearGradient from 'react-native-linear-gradient'
 import { isUndefined } from 'lodash'
+import Button from '../Button'
 const bannerImage = require('../../assets/all-communities-banner.png')
 
 export default class FeedBanner extends React.Component {
@@ -26,7 +27,8 @@ export default class FeedBanner extends React.Component {
 
   render () {
     const {
-      all, community, network, newPost, currentUser, topicSubscribed
+      all, community, network, newPost, currentUser, topicSubscribed, topicName,
+      postsTotal, followersTotal
     } = this.props
 
     let bannerUrl, name, image
@@ -43,6 +45,13 @@ export default class FeedBanner extends React.Component {
       return null
     }
 
+    if (topicName) {
+      name = '#' + topicName
+    }
+
+    const pluralFollowers = (followersTotal !== 1)
+    const pluralPosts = (postsTotal !== 1)
+
     return <View style={styles.container}>
       <Image source={image} style={styles.image} />
       <LinearGradient style={styles.gradient}
@@ -53,10 +62,21 @@ export default class FeedBanner extends React.Component {
           'rgba(0, 0, 0, 0.6)'
         ]} />
       <View style={styles.titleRow}>
-        <Text style={styles.name}
-          numberOfLines={3}>
-          {name}
-        </Text>
+        <View style={styles.title}>
+          <Text style={styles.name}
+            numberOfLines={3}>
+            {name}
+          </Text>
+          {topicName &&
+            <View style={styles.topicInfo}>
+              <Text style={styles.subName}>
+                <Icon name='Star' /> {followersTotal} subscriber{pluralFollowers && 's'}
+              </Text>
+              <Text style={styles.subName}>
+                <Icon name='Post' /> {postsTotal} post{pluralPosts && 's'}
+              </Text>
+            </View>}
+        </View>
         {!isUndefined(topicSubscribed) && <SubscribeButton
           active={topicSubscribed} onPress={this.toggleSubscribe} />}
       </View>
@@ -82,12 +102,7 @@ export function PostPrompt ({ currentUser, newPost }) {
 }
 
 function SubscribeButton ({ active, onPress }) {
-  return <TouchableOpacity style={styles.subscribeButton}
-    onPress={onPress}
-    hitSlop={{top: 10, bottom: 10, left: 10, right: 10}}>
-    <Icon name='Star' style={[
-      styles.subscribeButtonIcon,
-      active && styles.subscribeButtonIconActive
-    ]} />
-  </TouchableOpacity>
+  const text = active ? 'Unsubscribe' : 'Subscribe'
+  const style = active ? styles.unsubscribeButton : styles.subscribeButton
+  return <Button onPress={onPress} style={style} iconName='Star' text={text} />
 }

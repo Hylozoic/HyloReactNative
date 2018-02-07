@@ -12,8 +12,7 @@ import { ALL_COMMUNITIES_ID } from '../../store/models/Community'
 import {
   fetchCommunityTopic,
   getCommunityTopic,
-  setTopicSubscribe,
-  FETCH_COMMUNITY_TOPIC
+  setTopicSubscribe
 } from './Feed.store'
 import { mapWhenFocused, mergeWhenFocused } from 'util/connector'
 
@@ -27,18 +26,20 @@ export function mapStateToProps (state, props) {
   const communityId = getCurrentCommunityId(state, props)
   const topicName = props.topicName || params.topicName
   const community = !networkId && getCommunity(state, {id: communityId})
+  const communitySlug = get('slug', community)
   const network = getNetwork(state, {id: networkId})
   const currentUser = getMe(state)
   const communityTopic = topicName && community &&
-    (get(FETCH_COMMUNITY_TOPIC, state.pending) ? undefined : true) &&
     getCommunityTopic(state, {topicName, slug: community.slug})
-  // when this is undefined, the subscribe button is not shown at all
-  const topicSubscribed = communityTopic && communityTopic.isSubscribed
+  const topicSubscribed = topicName && communityTopic.isSubscribed
+  const topic = get('topic', communityTopic)
   return {
     currentUser,
     community,
     network,
-    topic: get('topic', communityTopic),
+    topic,
+    postsTotal: get('postsTotal', communitySlug ? communityTopic : topic),
+    followersTotal: get('followersTotal', communitySlug ? communityTopic : topic),
     topicName,
     topicSubscribed
   }

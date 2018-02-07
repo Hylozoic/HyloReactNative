@@ -27,6 +27,7 @@ Object {
           id
           isSubscribed
           followersTotal
+          postsTotal
           topic {
             id
             name
