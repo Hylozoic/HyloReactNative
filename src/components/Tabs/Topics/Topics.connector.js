@@ -29,7 +29,7 @@ export function mapStateToProps (state, props) {
   const topicSort = (a, b) => {
     if (a.isSubscribed && !b.isSubscribed) return -1
     if (!a.isSubscribed && b.isSubscribed) return 1
-    return a.name.toLowerCase() > b.name.toLowerCase()
+    return a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1
   }
 
   const topics = getCommunityTopics(state, queryResultParams)

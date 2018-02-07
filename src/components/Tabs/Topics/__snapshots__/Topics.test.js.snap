@@ -7,9 +7,11 @@ exports[`SearchBar matches last snapshot 1`] = `
   />
   <TextInput
     allowFontScaling={true}
+    autoCorrect={false}
     editable={true}
     onChangeText={[Function]}
     placeholder="Search Topics"
+    underlineColorAndroid="transparent"
     value="searching"
   />
 </View>
