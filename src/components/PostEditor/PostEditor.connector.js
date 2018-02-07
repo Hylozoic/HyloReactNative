@@ -1,8 +1,9 @@
 import { connect } from 'react-redux'
 import { createPost, updatePost, setDetails } from './PostEditor.store'
+import { createTopicTag } from '../Editor/Editor'
 import { get, isEmpty } from 'lodash/fp'
 import getPost from '../../store/selectors/getPost'
-import { mapWhenFocused, mergeWhenFocused } from 'util/connector'
+import { mapWhenFocused } from 'util/connector'
 
 function getPostId (state, props) {
   return props.navigation.state.params.id
@@ -10,10 +11,15 @@ function getPostId (state, props) {
 
 export function mapStateToProps (state, props) {
   const communityId = get('navigation.state.params.communityId', props)
+  const selectedTopicName = get('navigation.state.params.topicName', props)
+  const selectedTopicTag = createTopicTag({name: selectedTopicName})
+  const defaultPost = selectedTopicName
+    ? {details: selectedTopicTag, communityIds: [communityId]}
+    : {}
   const post = getPost(state, {id: getPostId(state, props)})
   return {
     details: state.PostEditor.details,
-    post,
+    post: post || defaultPost,
     communityIds: post
       ? post.communities.toRefArray().map(x => x.id)
       : [communityId],

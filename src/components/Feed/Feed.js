@@ -60,7 +60,7 @@ export default class Feed extends Component {
             community={community}
             network={network}
             currentUser={currentUser}
-            all={!community}
+            all={!community && !topicName}
             newPost={newPost}
             topicName={topicName}
             postsTotal={postsTotal}

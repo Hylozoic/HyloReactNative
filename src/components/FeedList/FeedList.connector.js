@@ -45,7 +45,7 @@ export function mapStateToProps (state, props) {
     network,
     sortBy,
     filter,
-    topicName
+    topic: topicName
   })
   const pending = state.pending[FETCH_POSTS]
   return {
@@ -80,7 +80,6 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     return Promise.all(promises)
   }
 
-  // topic
   return {
     ...omit(['queryProps'], stateProps),
     ...dispatchProps,

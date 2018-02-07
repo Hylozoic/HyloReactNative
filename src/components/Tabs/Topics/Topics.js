@@ -67,6 +67,8 @@ export function SearchBar ({ term, setTerm }) {
       value={term}
       onChangeText={setTerm}
       placeholder='Search Topics'
+      underlineColorAndroid='transparent'
+      autoCorrect={false}
       editable />
   </View>
 }
