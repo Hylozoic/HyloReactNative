@@ -3,28 +3,6 @@ import TestRenderer from 'react-test-renderer'
 import RootView from './index'
 import OneSignal from 'react-native-onesignal'
 import SessionCheck from '../SessionCheck'
-import { AppState } from 'react-native'
-
-// const mockStorage = {}
-
-// jest.mock('react-native', () => ({
-//   AppState: {
-//     addEventListener: jest.fn(),
-//     removeEventListener: jest.fn()
-//   },
-//   AsyncStorage: {
-//     setItem: (key, value) => {
-//       mockStorage[key] = value
-//       return Promise.resolve()
-//     },
-//     getItem: key => Promise.resolve(mockStorage[key]),
-//     Platform: {OS: 'ios'}
-//   },
-//   NativeModules: {
-//     RNDeviceInfo: {}
-//   },
-//   Platform: {OS: 'ios'}
-// }))
 
 jest.mock('../../store', () => () => Promise.resolve({
   subscribe: jest.fn(),
