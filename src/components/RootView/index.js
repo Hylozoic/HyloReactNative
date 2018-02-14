@@ -21,10 +21,12 @@ OneSignal.addEventListener('opened', event => {
 })
 
 export default class RootView extends React.Component {
-  state = {
-    appState: AppState.currentState
+  constructor (props) {
+    super(props)
+    this.state = {
+      appState: AppState.currentState
+    }
   }
-
   componentDidMount () {
     getStore().then(store => {
       this.setState({

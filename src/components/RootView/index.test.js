@@ -3,6 +3,28 @@ import TestRenderer from 'react-test-renderer'
 import RootView from './index'
 import OneSignal from 'react-native-onesignal'
 import SessionCheck from '../SessionCheck'
+import { AppState } from 'react-native'
+
+// const mockStorage = {}
+
+// jest.mock('react-native', () => ({
+//   AppState: {
+//     addEventListener: jest.fn(),
+//     removeEventListener: jest.fn()
+//   },
+//   AsyncStorage: {
+//     setItem: (key, value) => {
+//       mockStorage[key] = value
+//       return Promise.resolve()
+//     },
+//     getItem: key => Promise.resolve(mockStorage[key]),
+//     Platform: {OS: 'ios'}
+//   },
+//   NativeModules: {
+//     RNDeviceInfo: {}
+//   },
+//   Platform: {OS: 'ios'}
+// }))
 
 jest.mock('../../store', () => () => Promise.resolve({
   subscribe: jest.fn(),
@@ -26,7 +48,8 @@ jest.mock('react-native-onesignal', () => ({
 
     if (name === 'opened') callback(mockNotificationEvent)
   }),
-  inFocusDisplaying: jest.fn()
+  inFocusDisplaying: jest.fn(),
+  clearOneSignalNotifications: jest.fn()
 }))
 
 jest.mock('../VersionCheck', () => 'VersionCheck')
@@ -77,5 +100,28 @@ describe('RootView', () => {
     const renderer = TestRenderer.create(<RootView />)
     renderer.getInstance().setState({store: null})
     expect(renderer.toJSON()).toMatchSnapshot()
+  })
+
+  describe('_handleAppStateChange', () => {
+    it('changes state.appState', () => {
+      const active = 'active'
+      const inactive = 'inactive'
+      const renderer = TestRenderer.create(<RootView />)
+      const instance = renderer.getInstance()
+      instance.setState({appState: active})
+      instance._handleAppStateChange(inactive)
+      expect(instance.state.appState).toEqual(inactive)
+    })
+
+    it('changes appState from inactive to background', () => {
+      const background = 'background'
+      const active = 'active'
+      const renderer = TestRenderer.create(<RootView />)
+      const instance = renderer.getInstance()
+      instance.setState({appState: background})
+      instance._handleAppStateChange(active)
+      expect(instance.state.appState).toEqual(active)
+      expect(OneSignal.clearOneSignalNotifications).toHaveBeenCalled()
+    })
   })
 })
