@@ -1,5 +1,5 @@
 import React from 'react'
-import { View } from 'react-native'
+import { View, AppState } from 'react-native'
 import { LoadingScreen } from '../Loading'
 import VersionCheck from '../VersionCheck'
 import LoadingModal from '../LoadingModal'
@@ -21,7 +21,9 @@ OneSignal.addEventListener('opened', event => {
 })
 
 export default class RootView extends React.Component {
-  state = {}
+  state = {
+    appState: AppState.currentState
+  }
 
   componentDidMount () {
     getStore().then(store => {
@@ -29,12 +31,23 @@ export default class RootView extends React.Component {
         store,
         initialPushNotificationEvent
       })
-
       initOneSignal({
         receivePushNotification: notification =>
           store.dispatch(receivePushNotification(notification))
       })
     })
+    AppState.addEventListener('change', this._handleAppStateChange)
+  }
+
+  componentWillUnmount () {
+    AppState.removeEventListener('change', this._handleAppStateChange)
+  }
+
+  _handleAppStateChange = (nextAppState) => {
+    if (this.state.appState.match(/inactive|background/) && nextAppState === 'active') {
+      OneSignal.clearOneSignalNotifications()
+    }
+    this.setState({appState: nextAppState})
   }
 
   setNavigator = ref => {
