@@ -26,7 +26,8 @@ jest.mock('react-native-onesignal', () => ({
 
     if (name === 'opened') callback(mockNotificationEvent)
   }),
-  inFocusDisplaying: jest.fn()
+  inFocusDisplaying: jest.fn(),
+  clearOneSignalNotifications: jest.fn()
 }))
 
 jest.mock('../VersionCheck', () => 'VersionCheck')
@@ -77,5 +78,28 @@ describe('RootView', () => {
     const renderer = TestRenderer.create(<RootView />)
     renderer.getInstance().setState({store: null})
     expect(renderer.toJSON()).toMatchSnapshot()
+  })
+
+  describe('_handleAppStateChange', () => {
+    it('changes state.appState', () => {
+      const active = 'active'
+      const inactive = 'inactive'
+      const renderer = TestRenderer.create(<RootView />)
+      const instance = renderer.getInstance()
+      instance.setState({appState: active})
+      instance._handleAppStateChange(inactive)
+      expect(instance.state.appState).toEqual(inactive)
+    })
+
+    it('changes appState from inactive to background', () => {
+      const background = 'background'
+      const active = 'active'
+      const renderer = TestRenderer.create(<RootView />)
+      const instance = renderer.getInstance()
+      instance.setState({appState: background})
+      instance._handleAppStateChange(active)
+      expect(instance.state.appState).toEqual(active)
+      expect(OneSignal.clearOneSignalNotifications).toHaveBeenCalled()
+    })
   })
 })
