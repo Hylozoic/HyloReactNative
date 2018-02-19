@@ -1,63 +1,69 @@
 import { StyleSheet } from 'react-native'
-import { caribbeanGreen, capeCod40, capeCod20 } from 'style/colors'
+import { caribbeanGreen, capeCod40, capeCod20, rhino50, ghost } from 'style/colors'
 import { isIOS } from 'util/platform'
 
-const imageHeight = 96
+const imageHeight = 132
+
+const hasTextShadow = {
+  textShadowColor: 'rgba(0, 0, 0, 0.25)',
+  textShadowOffset: {width: 0, height: 2},
+  textShadowRadius: 7
+}
 
 export default {
   container: {
+    zIndex: 10,
     backgroundColor: 'white',
     flex: 1
   },
   scrollContainer: {
     flexGrow: 1
   },
+  bannerContainer: {
+    height: imageHeight
+  },
   image: {
     height: imageHeight,
-    width: '100%'
+    width: '100%',
+    position: 'absolute'
   },
-  imageOverlay: {
-    position: 'absolute',
-    top: 0,
+  gradient: {
     height: imageHeight,
     width: '100%',
-    backgroundColor: 'black',
-    opacity: 0.3
+    position: 'absolute'
   },
   title: {
-    position: 'relative',
-    top: -44,
-    fontFamily: 'Circular-Bold',
+    fontFamily: 'Circular-Black',
     fontSize: 24,
     color: 'white',
     backgroundColor: 'transparent',
     zIndex: 10,
-    marginLeft: 16
+    marginLeft: 16,
+    top: 46,
+    ...hasTextShadow
   },
   searchBar: {
-    position: 'relative',
-    top: -16,
     flexDirection: 'row',
-    borderColor: capeCod40,
-    borderWidth: StyleSheet.hairlineWidth,
-    borderRadius: 100,
-    marginHorizontal: 15,
-    height: 31
+    borderColor: ghost,
+    borderWidth: 1,
+    borderRadius: 32,
+    marginHorizontal: 8,
+    marginTop: 10,
+    marginBottom: 10,
+    height: 38
   },
   searchIcon: {
-    fontSize: 26,
-    color: capeCod40,
+    fontSize: 30,
+    color: rhino50,
     backgroundColor: 'transparent',
     marginLeft: 5,
-    marginRight: 3,
-    position: 'relative',
-    top: 3
+    top: 4
   },
   searchInput: {
     flex: 1,
     position: 'relative',
-    top: isIOS ? 0 : 6,
-    paddingTop: 0
+    top: isIOS ? 0 : 1,
+    fontFamily: 'Circular-Book'
   },
   topicList: {
     borderTopWidth: StyleSheet.hairlineWidth,
