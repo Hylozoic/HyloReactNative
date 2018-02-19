@@ -22,7 +22,7 @@ export function editableFields (person) {
 
 export default class MemberDetails extends React.Component {
   static navigationOptions = ({ navigation }) => {
-    const onPress = navigation.state.params.goBack || (() => {})
+    const onPress = navigation.goBack || (() => {})
     return header(navigation, {
       title: 'About This Member',
       options: {
