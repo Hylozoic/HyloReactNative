@@ -1,29 +1,43 @@
-import { capeCod, rhino, rhino50, ghost } from '../../../style/colors'
+import { capeCod, rhino, rhino50, ghost, white } from '../../../style/colors'
+
+const hasTextShadow = {
+  textShadowColor: 'rgba(0, 0, 0, 0.25)',
+  textShadowOffset: {width: 0, height: 2},
+  textShadowRadius: 7
+}
+
+const bannerHeight = 132
 
 export default {
   container: {
     backgroundColor: '#FFF'
   },
   bannerContainer: {
-    zIndex: 10
+    zIndex: 10,
+    height: bannerHeight
   },
   image: {
-    height: 110
+    height: bannerHeight,
+    width: '100%',
+    position: 'absolute'
+  },
+  gradient: {
+    height: bannerHeight,
+    width: '100%',
+    position: 'absolute'
   },
   titleRow: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
+    top: 46,
     flexDirection: 'row',
     marginLeft: 16,
-    marginRight: 16,
-    top: 60
+    marginRight: 16
   },
   name: {
     fontSize: 24,
-    fontWeight: 'bold',
-    color: 'white',
-    backgroundColor: 'transparent'
+    fontFamily: 'Circular-Black',
+    color: white,
+    backgroundColor: 'transparent',
+    ...hasTextShadow
   },
   cell: {
     flex: 1,

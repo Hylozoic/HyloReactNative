@@ -8,6 +8,7 @@ import Icon from '../../Icon'
 import Header from '../Header'
 import styles from './Topics.styles'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
+import LinearGradient from 'react-native-linear-gradient'
 import { isEmpty, get } from 'lodash/fp'
 
 const title = 'Topics'
@@ -45,9 +46,17 @@ export default class Topics extends React.Component {
 
     return <KeyboardFriendlyView style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
-        <Image source={image} style={styles.image} />
-        <View style={styles.imageOverlay} />
-        <Text style={styles.title}>{name}</Text>
+        <View style={styles.bannerContainer}>
+          <Image source={image} style={styles.image} />
+          <LinearGradient style={styles.gradient}
+            colors={[
+              'rgba(0, 0, 0, 0)',
+              'rgba(0, 0, 0, 0.1)',
+              'rgba(0, 0, 0, 0.3)',
+              'rgba(0, 0, 0, 0.6)'
+            ]} />
+          <Text style={styles.title}>{name}</Text>
+        </View>
         <SearchBar term={term} setTerm={setTerm} />
         {pending && isEmpty(topics)
           ? <Loading />

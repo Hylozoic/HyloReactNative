@@ -118,21 +118,32 @@ exports[`Topics renders correctly a community and topics 1`] = `
       }
     }
   >
-    <Image
-      source={
-        Object {
-          "uri": "community-banner.png",
+    <View>
+      <Image
+        source={
+          Object {
+            "uri": "community-banner.png",
+          }
         }
-      }
-    />
-    <View />
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
-      Foomunity
-    </Text>
+      />
+      <MockLinearGradient
+        colors={
+          Array [
+            "rgba(0, 0, 0, 0)",
+            "rgba(0, 0, 0, 0.1)",
+            "rgba(0, 0, 0, 0.3)",
+            "rgba(0, 0, 0, 0.6)",
+          ]
+        }
+      />
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+      >
+        Foomunity
+      </Text>
+    </View>
     <SearchBar
       setTerm={undefined}
       term={undefined}
@@ -161,21 +172,32 @@ exports[`Topics renders correctly with pending=true 1`] = `
       }
     }
   >
-    <Image
-      source={
-        Object {
-          "uri": "community-banner.png",
+    <View>
+      <Image
+        source={
+          Object {
+            "uri": "community-banner.png",
+          }
         }
-      }
-    />
-    <View />
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
-      Foomunity
-    </Text>
+      />
+      <MockLinearGradient
+        colors={
+          Array [
+            "rgba(0, 0, 0, 0)",
+            "rgba(0, 0, 0, 0.1)",
+            "rgba(0, 0, 0, 0.3)",
+            "rgba(0, 0, 0, 0.6)",
+          ]
+        }
+      />
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+      >
+        Foomunity
+      </Text>
+    </View>
     <SearchBar
       setTerm={undefined}
       term={undefined}

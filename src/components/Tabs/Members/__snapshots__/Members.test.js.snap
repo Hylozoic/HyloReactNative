@@ -9,6 +9,16 @@ exports[`Banner matches snapshot when all is true 1`] = `
       }
     }
   />
+  <MockLinearGradient
+    colors={
+      Array [
+        "rgba(0, 0, 0, 0)",
+        "rgba(0, 0, 0, 0.1)",
+        "rgba(0, 0, 0, 0.3)",
+        "rgba(0, 0, 0, 0.6)",
+      ]
+    }
+  />
   <View>
     <Text
       accessible={true}
@@ -30,6 +40,16 @@ exports[`Banner matches snapshot with community 1`] = `
       }
     }
   />
+  <MockLinearGradient
+    colors={
+      Array [
+        "rgba(0, 0, 0, 0)",
+        "rgba(0, 0, 0, 0.1)",
+        "rgba(0, 0, 0, 0.3)",
+        "rgba(0, 0, 0, 0.6)",
+      ]
+    }
+  />
   <View>
     <Text
       accessible={true}
@@ -49,6 +69,16 @@ exports[`Banner matches snapshot with network 1`] = `
       Object {
         "uri": "foomn.png",
       }
+    }
+  />
+  <MockLinearGradient
+    colors={
+      Array [
+        "rgba(0, 0, 0, 0)",
+        "rgba(0, 0, 0, 0.1)",
+        "rgba(0, 0, 0, 0.3)",
+        "rgba(0, 0, 0, 0.6)",
+      ]
     }
   />
   <View>
@@ -252,6 +282,18 @@ exports[`renders correctly with no community and isAll 1`] = `
                 }
               }
             />
+            <div
+              colors={
+                Array [
+                  "rgba(0, 0, 0, 0)",
+                  "rgba(0, 0, 0, 0.1)",
+                  "rgba(0, 0, 0, 0.3)",
+                  "rgba(0, 0, 0, 0.6)",
+                ]
+              }
+            >
+              MockLinearGradient
+            </div>
             <View>
               <Text
                 accessible={true}

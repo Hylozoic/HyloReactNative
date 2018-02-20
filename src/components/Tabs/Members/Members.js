@@ -10,6 +10,7 @@ import { focus } from '../../../util/textInput'
 import Header from '../Header'
 import Icon from '../../Icon'
 import PopupMenuButton from '../../PopupMenuButton'
+import LinearGradient from 'react-native-linear-gradient'
 import styles from './Members.styles'
 
 export default class Members extends React.Component {
@@ -128,6 +129,13 @@ export function Banner ({ community, network, all }) {
 
   return <View style={styles.bannerContainer}>
     <Image source={{uri: bannerUrl}} style={styles.image} />
+    <LinearGradient style={styles.gradient}
+      colors={[
+        'rgba(0, 0, 0, 0)',
+        'rgba(0, 0, 0, 0.1)',
+        'rgba(0, 0, 0, 0.3)',
+        'rgba(0, 0, 0, 0.6)'
+      ]} />
     <View style={styles.titleRow}>
       <Text style={styles.name}>{name}</Text>
     </View>
