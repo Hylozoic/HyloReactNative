@@ -181,6 +181,48 @@ exports[`DrawerMenu matches the last snapshot 1`] = `
 </View>
 `;
 
+exports[`NetworkRow hides image when no avatarUrl 1`] = `
+<View>
+  <TouchableOpacity
+    activeOpacity={0.2}
+    onPress={[Function]}
+  >
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      numberOfLines={1}
+    >
+      Network Name
+    </Text>
+    <TouchableOpacity
+      activeOpacity={0.2}
+      onPress={[Function]}
+    >
+      <Icon
+        allowFontScaling={false}
+        name="chevron-down"
+        size={12}
+      />
+    </TouchableOpacity>
+  </TouchableOpacity>
+  <View>
+    <CommunityRow
+      community={
+        Object {
+          "avatarUrl": "foo.png",
+          "id": 1,
+          "name": "Foom",
+          "newPostCount": 1,
+        }
+      }
+      currentCommunityId={1}
+      goToCommunity={[Function]}
+    />
+  </View>
+</View>
+`;
+
 exports[`NetworkRow matches the last snapshot 1`] = `
 <View>
   <TouchableOpacity

@@ -4997,9 +4997,9 @@ react-native-fbsdk@^0.6.3:
     pump "^1.0.2"
     xcode "^0.9.3"
 
-react-native-google-signin@^0.12.0:
-  version "0.12.0"
-  resolved "https://registry.yarnpkg.com/react-native-google-signin/-/react-native-google-signin-0.12.0.tgz#fc549593adbc92ed2a5a683a957f157650ece961"
+"react-native-google-signin@https://github.com/njt1982/react-native-google-signin#1c99bcf":
+  version "0.11.0"
+  resolved "https://github.com/njt1982/react-native-google-signin#1c99bcf05c77f54e2582fe25fdae93bfcef23c7f"
 
 react-native-htmlview@^0.12.0:
   version "0.12.1"
