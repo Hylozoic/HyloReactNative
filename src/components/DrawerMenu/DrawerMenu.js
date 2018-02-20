@@ -48,7 +48,7 @@ export default class DrawerMenu extends Component {
         keyExtractor: item => 'c' + item.id
       }
     ]
-
+    
     return <View style={styles.parent}>
       <SectionList
         renderSectionHeader={SectionHeader}
@@ -118,13 +118,13 @@ export class NetworkRow extends React.Component {
     const isAll = id === ALL_COMMUNITIES_ID
     const imageSource = isAll
       ? allCommunitiesImage
-      : {uri: avatarUrl}
+      : avatarUrl && {uri: avatarUrl}
     const openNetwork = () => goToNetwork(network)
     const expandable = communities && !!communities.length
     const { expanded } = this.state
     return <View style={[ styles.networkRow, expanded ? styles.networkRowExpanded : styles.networkRowCollapsed ]}>
       <TouchableOpacity onPress={openNetwork} style={[styles.rowTouchable, styles.networkRowTouchable]}>
-        <Image source={imageSource} style={styles.networkAvatar} />
+        {imageSource && <Image source={imageSource} style={styles.networkAvatar} />}
         <Text style={styles.networkRowText} ellipsizeMode='tail'
           numberOfLines={1}>
           {name}
