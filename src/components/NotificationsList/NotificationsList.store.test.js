@@ -142,12 +142,12 @@ describe('selectors/refiners', () => {
       expect(actual).toMatchSnapshot()
     })
 
-    it('navigates to Feed (topic) for ACTION_TOPIC', () => {
+    it('navigates to Post Detail for ACTION_TOPIC', () => {
       session.Activity.withId('1').update({ action: 'tag', meta: { reasons: [ 'tag: aardvark' ] } })
       const notification = session.Notification.withId('1')
       const actual = store.refineActivity(notification.activity, navigation)
       actual.onPress()
-      expect(navigation.navigate).toHaveBeenCalledWith('Feed', { topicName: 'aardvark' })
+      expect(navigation.navigate).toHaveBeenCalledWith('PostDetails', { id: '333' })
     })
 
     it('matches the previous ACTION_JOIN_REQUEST snapshot', () => {
