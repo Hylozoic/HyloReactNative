@@ -157,6 +157,7 @@ Object {
 exports[`renders correctly with no community and isAll 1`] = `
 <View>
   <RCTScrollView
+    ListFooterComponent={null}
     ListHeaderComponent={
       <View>
         <Banner
