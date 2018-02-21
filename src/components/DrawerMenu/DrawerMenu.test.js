@@ -36,17 +36,6 @@ describe('DrawerMenu', () => {
     const actual = renderer.getRenderOutput()
     expect(actual).toMatchSnapshot()
   })
-
-  describe('resetToTop', () => {
-    const renderer = new ReactShallowRenderer()
-    renderer.render(<DrawerMenu {...minProps} />)
-    const instance = renderer._instance
-    instance.listView = {
-      scrollTo: jest.fn()
-    }
-    instance.resetToTop()
-    expect(instance.listView.scrollTo).toHaveBeenCalledTimes(2)
-  })
 })
 
 describe('SectionHeader', () => {
@@ -81,7 +70,7 @@ describe('NetworkRow', () => {
 
     expect(actual).toMatchSnapshot()
   })
-  
+
   it('hides image when no avatarUrl', () => {
     const renderer = new ReactShallowRenderer()
     const network = {

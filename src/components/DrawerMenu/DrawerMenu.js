@@ -41,7 +41,7 @@ export default class DrawerMenu extends Component {
         keyExtractor: item => 'c' + item.id
       }
     ]
-    
+
     return <View style={styles.parent}>
       <SectionList
         renderSectionHeader={SectionHeader}
