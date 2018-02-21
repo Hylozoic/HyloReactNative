@@ -5,38 +5,41 @@ import { get } from 'lodash/fp'
 import getMe from '../../store/selectors/getMe'
 import getNetwork from '../../store/selectors/getNetwork'
 import getCommunity from '../../store/selectors/getCommunity'
+import getCurrentCommunityId from '../../store/selectors/getCurrentCommunityId'
+import getCurrentNetworkId from '../../store/selectors/getCurrentNetworkId'
 import makeGoToCommunity from '../../store/actions/makeGoToCommunity'
 import { ALL_COMMUNITIES_ID } from '../../store/models/Community'
 import {
   fetchCommunityTopic,
   getCommunityTopic,
-  toggleTopicSubscribe,
-  FETCH_COMMUNITY_TOPIC
+  setTopicSubscribe
 } from './Feed.store'
 import { mapWhenFocused, mergeWhenFocused } from 'util/connector'
 
 export function mapStateToProps (state, props) {
   const params = get('state.params', props.navigation) || {}
   // NOTE: networkId is only received as a prop (currently via Home)
-  const networkId = props.networkId
+  const networkId = getCurrentNetworkId(state, props)
   // NOTE: communityId is is received either as a prop (via Home) or as a
   // navigation parameter. In case of nav params the screen will load with a
   // back button and be added to the stack.
-  const communityId = params.communityId || props.communityId
+  const communityId = getCurrentCommunityId(state, props)
   const topicName = props.topicName || params.topicName
   const community = !networkId && getCommunity(state, {id: communityId})
+  const communitySlug = get('slug', community)
   const network = getNetwork(state, {id: networkId})
   const currentUser = getMe(state)
   const communityTopic = topicName && community &&
-    (get(FETCH_COMMUNITY_TOPIC, state.pending) ? undefined : true) &&
     getCommunityTopic(state, {topicName, slug: community.slug})
-  // when this is undefined, the subscribe button is not shown at all
-  const topicSubscribed = communityTopic && communityTopic.isSubscribed
+  const topicSubscribed = topicName && communityTopic.isSubscribed
+  const topic = get('topic', communityTopic)
   return {
     currentUser,
     community,
     network,
-    topic: get('topic', communityTopic),
+    topic,
+    postsTotal: get('postsTotal', communitySlug ? communityTopic : topic),
+    followersTotal: get('followersTotal', communitySlug ? communityTopic : topic),
     topicName,
     topicSubscribed
   }
@@ -44,7 +47,7 @@ export function mapStateToProps (state, props) {
 
 export function mapDispatchToProps (dispatch, { navigation }) {
   return {
-    newPost: communityId => navigation.navigate('PostEditor', {communityId}),
+    newPost: (communityId, topicName) => navigation.navigate('PostEditor', {communityId, topicName}),
     showPost: id => navigation.navigate('PostDetails', {id}),
     editPost: id => navigation.navigate('PostEditor', {id}),
     showMember: id => navigation.navigate('MemberProfile', {id}),
@@ -60,7 +63,7 @@ export function mapDispatchToProps (dispatch, { navigation }) {
     goToCommunity: makeGoToCommunity(dispatch, navigation),
     ...bindActionCreators({
       fetchCommunityTopic,
-      toggleTopicSubscribe
+      setTopicSubscribe
     }, dispatch)
   }
 }
@@ -74,13 +77,13 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     ...stateProps,
     ...dispatchProps,
     ...ownProps,
-    newPost: () => dispatchProps.newPost(communityId),
+    newPost: () => dispatchProps.newPost(communityId, topicName),
     showTopic: dispatchProps.showTopic(communityId, networkId),
     fetchCommunityTopic: topicName && slug
       ? () => dispatchProps.fetchCommunityTopic(topicName, slug)
       : () => {},
-    toggleTopicSubscribe: topic && communityId
-      ? () => dispatchProps.toggleTopicSubscribe(topic.id, communityId, !topicSubscribed)
+    setTopicSubscribe: topic && communityId
+      ? () => dispatchProps.setTopicSubscribe(topic.id, communityId, !topicSubscribed)
       : () => {}
   }
 }

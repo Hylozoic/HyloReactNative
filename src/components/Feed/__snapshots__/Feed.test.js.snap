@@ -23,9 +23,11 @@ exports[`renders correctly 1`] = `
             "id": "2",
           }
         }
+        followersTotal={undefined}
         network={undefined}
         newPost={[Function]}
-        toggleTopicSubscribe={undefined}
+        postsTotal={undefined}
+        setTopicSubscribe={undefined}
         topicName="amazing"
         topicSubscribed={undefined}
       />

@@ -32,6 +32,7 @@ const route = pathMatch()
 export const routeMatchers = {
   invitation: route('/h/use-invitation'),
   accessLink: route('/c/:slug/join/:accessCode'),
+  passwordResetTokenLogin: route('/noo/login/token'),
   post: route('/c/:slug/p/:id'),
   thread: route('/t/:id')
 }
@@ -44,4 +45,10 @@ export function redirectAfterLogin ({ currentUser, navigation, action }) {
   } else {
     resetToMainRoute(navigation)
   }
+}
+
+export function getPathFromURL (URL) {
+  let nextPath = get('pathname', url.parse(URL))
+  if (nextPath && nextPath[0] === '/') nextPath = nextPath.slice(1)
+  return nextPath
 }

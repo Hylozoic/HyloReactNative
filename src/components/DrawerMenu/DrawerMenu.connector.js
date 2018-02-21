@@ -83,11 +83,13 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
         navigation.navigate('Home')
       } else {
         navigation.navigate('DrawerClose')
+        navigation.navigate('Home')
       }
       dispatchProps.selectCommunity(community.id)
     },
     goToNetwork: network => {
       navigation.navigate('DrawerClose')
+      navigation.navigate('Home')
       dispatchProps.selectNetwork(network.id)
     },
     showSettings: () => {
@@ -95,6 +97,9 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     },
     goToMyProfile: () => {
       navigation.navigate('MemberProfile', {id: currentUser.id})
+    },
+    goToCreateCommunityName: () => {
+      navigation.navigate('CreateCommunityName')
     }
   }
 }

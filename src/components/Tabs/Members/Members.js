@@ -9,7 +9,9 @@ import { DEFAULT_BANNER } from '../../../store/models/Community'
 import { focus } from '../../../util/textInput'
 import Header from '../Header'
 import Icon from '../../Icon'
+import Loading from '../../Loading'
 import PopupMenuButton from '../../PopupMenuButton'
+import LinearGradient from 'react-native-linear-gradient'
 import styles from './Members.styles'
 
 export default class Members extends React.Component {
@@ -47,7 +49,7 @@ export default class Members extends React.Component {
 
   render () {
     let {
-      community, network, members, subject, sortBy, setSort, fetchMoreMembers, isAll
+      community, network, members, subject, sortBy, setSort, fetchMoreMembers, isAll, pending
     } = this.props
     const sortKeys = sortKeysFactory(subject)
     const onSearch = debounce(300, text => this.props.setSearch(text))
@@ -92,6 +94,7 @@ export default class Members extends React.Component {
         onEndReached={fetchMoreMembers}
         keyExtractor={(item, index) => item.id}
         ListHeaderComponent={header}
+        ListFooterComponent={pending ? <Loading /> : null}
       />
     </View>
   }
@@ -128,6 +131,13 @@ export function Banner ({ community, network, all }) {
 
   return <View style={styles.bannerContainer}>
     <Image source={{uri: bannerUrl}} style={styles.image} />
+    <LinearGradient style={styles.gradient}
+      colors={[
+        'rgba(0, 0, 0, 0)',
+        'rgba(0, 0, 0, 0.1)',
+        'rgba(0, 0, 0, 0.3)',
+        'rgba(0, 0, 0, 0.6)'
+      ]} />
     <View style={styles.titleRow}>
       <Text style={styles.name}>{name}</Text>
     </View>

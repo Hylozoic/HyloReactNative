@@ -32,6 +32,7 @@ Object {
     "id": "anyid",
   },
   "goToCommunity": [Function],
+  "goToCreateCommunityName": [Function],
   "goToMyProfile": [Function],
   "goToNetwork": [Function],
   "name": "Roy Rogers",

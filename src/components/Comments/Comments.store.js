@@ -1,5 +1,6 @@
 import { get } from 'lodash/fp'
 import { createSelector } from 'reselect'
+import { createSelector as ormCreateSelector } from 'redux-orm'
 import { makeGetQueryResults } from '../../store/reducers/queryResults'
 import orm from '../../store/models'
 
@@ -43,27 +44,24 @@ export function fetchComments (id, opts = {}) {
   }
 }
 
-export const getComments = createSelector(
-  state => orm.session(state.orm),
-  (state, props) => props.postId,
+export const getComments = ormCreateSelector(
+  orm,
+  state => state.orm,
+  (_, props) => props.postId,
   (session, id) => {
-    var post
-    try {
-      post = session.Post.get({id})
-    } catch (e) {
-      return []
+    if (!session.Post.hasId(id)) return []
+    const post = session.Post.withId(id)
+
+    return {
+      comments: post.comments.orderBy(c => Number(c.id)).toModelArray(),
+      total: post.commentsTotal
     }
-    return post.comments.orderBy(c => Number(c.id)).toModelArray()
-  })
+  }
+)
 
 const getCommentResults = makeGetQueryResults(FETCH_COMMENTS)
 
 export const getHasMoreComments = createSelector(
   getCommentResults,
   get('hasMore')
-)
-
-export const getTotalComments = createSelector(
-  getCommentResults,
-  get('total')
 )

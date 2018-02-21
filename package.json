@@ -38,7 +38,7 @@
     "react-native-device-info": "^0.12.1",
     "react-native-document-picker": "^2.1.0",
     "react-native-fbsdk": "^0.6.3",
-    "react-native-google-signin": "^0.12.0",
+    "react-native-google-signin": "https://github.com/njt1982/react-native-google-signin#1c99bcf",
     "react-native-htmlview": "^0.12.0",
     "react-native-image-picker": "^0.26.7",
     "react-native-linear-gradient": "^2.3.0",

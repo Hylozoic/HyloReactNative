@@ -3,6 +3,7 @@
 exports[`getEmptyState matches last snapshot 1`] = `
 Object {
   "CommentEditor": Object {},
+  "CreateCommunityFlow": Object {},
   "DeepLinkHandler": Object {},
   "FeedList": Object {
     "filter": null,
@@ -45,6 +46,9 @@ Object {
   "SocketListener": Object {},
   "TabBar": Object {
     "isVisible": true,
+  },
+  "Topics": Object {
+    "term": "",
   },
   "currentNetworkAndCommunity": Object {
     "communityId": null,

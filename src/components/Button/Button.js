@@ -1,17 +1,19 @@
 import React from 'react'
 import { Text, View, TouchableOpacity } from 'react-native'
-import { caribbeanGreen } from 'style/colors'
+import { caribbeanGreen, white } from 'style/colors'
+import Icon from '../Icon'
 import { omit } from 'lodash/fp'
 
 export default function Button ({
   style = {},
   text,
   onPress,
+  iconName,
   disabled
  }) {
   const {
-    color = 'white',
-    borderColor = 'white',
+    color = white,
+    borderColor = white,
     fontSize = 13,
     height = 30
   } = style
@@ -28,11 +30,15 @@ export default function Button ({
 
   const buttonStyle = {...styles.button, backgroundColor, height, borderColor}
   const textStyle = {...styles.text, color, fontSize}
+  const iconStyle = {...styles.icon, color}
 
   return <View style={containerStyle}>
     <TouchableOpacity disabled={disabled} onPress={disabled ? () => {} : onPress} style={styles.wrapper}>
       <View style={buttonStyle}>
-        <Text style={textStyle}>{text}</Text>
+        <View style={styles.buttonInner}>
+          {iconName && <Icon name={iconName} style={iconStyle} />}
+          <Text style={textStyle}>{text}</Text>
+        </View>
       </View>
     </TouchableOpacity>
   </View>
@@ -52,7 +58,17 @@ const styles = {
     borderRadius: 100,
     borderWidth: 1
   },
+  buttonInner: {
+    flex: 1,
+    alignItems: 'center',
+    flexDirection: 'row'
+  },
   text: {
     fontFamily: 'Circular-Bold'
+  },
+  icon: {
+    color: white,
+    fontSize: 16,
+    paddingRight: 5
   }
 }

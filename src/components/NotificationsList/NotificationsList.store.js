@@ -172,7 +172,7 @@ export function refineActivity ({ action, actor, comment, community, post, meta 
       return {
         body: `wrote: ${presentedText(post.details)}`,
         header: `New Post in`,
-        onPress: () => navigate('Feed', { topicName: topic }),
+        onPress: () => navigate('PostDetails', { id: post.id }),
         topic
       }
 

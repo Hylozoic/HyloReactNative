@@ -1,169 +1,330 @@
 {
   "selection": [
     {
-      "order": 29,
-      "ligatures": ""
+      "order": 3,
+      "name": "Post",
+      "prevSize": 32
     },
     {
-      "order": 30,
-      "ligatures": ""
-    },
-    {
-      "order": 31,
-      "ligatures": ""
-    },
-    {
-      "order": 32,
-      "ligatures": ""
-    },
-    {
-      "order": 33,
-      "ligatures": ""
-    },
-    {
-      "order": 34,
-      "ligatures": ""
-    },
-    {
-      "order": 35,
-      "ligatures": ""
+      "order": 4,
+      "name": "",
+      "prevSize": 32
     },
     {
       "order": 36,
-      "ligatures": ""
+      "name": "Plus",
+      "prevSize": 32
+    },
+    {
+      "order": 5,
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "Settings"
+    },
+    {
+      "order": 6,
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "ArrowForward"
+    },
+    {
+      "order": 7,
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "Document"
+    },
+    {
+      "order": 8,
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "Download"
+    },
+    {
+      "order": 9,
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "Send"
+    },
+    {
+      "order": 10,
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "Checkmark"
+    },
+    {
+      "order": 11,
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "Empty"
+    },
+    {
+      "order": 12,
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "Back"
+    },
+    {
+      "order": 13,
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "AddImage"
+    },
+    {
+      "order": 14,
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "Clock"
+    },
+    {
+      "order": 15,
+      "ligatures": "",
+      "prevSize": 32,
+      "name": ""
+    },
+    {
+      "order": 16,
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "ProfileUrl"
+    },
+    {
+      "order": 17,
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "ProfileTwitter"
+    },
+    {
+      "order": 18,
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "ProfileLinkedin"
+    },
+    {
+      "order": 19,
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "ProfileFacebook"
+    },
+    {
+      "order": 20,
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "Reply"
+    },
+    {
+      "order": 21,
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "LinkedIn"
+    },
+    {
+      "order": 22,
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "Google"
+    },
+    {
+      "order": 23,
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "Facebook"
+    },
+    {
+      "order": 24,
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "Ex"
+    },
+    {
+      "order": 25,
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "NewCommunity"
+    },
+    {
+      "order": 26,
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "Projects"
+    },
+    {
+      "order": 27,
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "Events"
+    },
+    {
+      "order": 28,
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "Home"
+    },
+    {
+      "order": 29,
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "Topics"
+    },
+    {
+      "order": 30,
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "Members"
+    },
+    {
+      "order": 31,
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "Messages"
+    },
+    {
+      "order": 32,
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "Notifications"
+    },
+    {
+      "order": 33,
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "Search"
+    },
+    {
+      "order": 34,
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "Share"
+    },
+    {
+      "order": 35,
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "More"
     },
     {
       "order": 37,
-      "ligatures": ""
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "ArrowUp"
     },
     {
       "order": 38,
-      "ligatures": ""
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "ArrowDown"
     },
     {
       "order": 39,
-      "ligatures": ""
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "Location"
     },
     {
       "order": 40,
-      "ligatures": ""
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "Trash"
     },
     {
       "order": 41,
-      "ligatures": ""
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "Pin"
     },
     {
       "order": 42,
-      "ligatures": ""
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "Complete"
     },
     {
       "order": 43,
-      "ligatures": ""
-    },
-    {
-      "order": 44,
-      "ligatures": ""
-    },
-    {
-      "order": 45,
-      "ligatures": ""
-    },
-    {
-      "order": 46,
-      "ligatures": ""
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "Flag"
     },
     {
       "order": 47,
-      "ligatures": ""
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "Circle"
     },
     {
-      "order": 48,
-      "ligatures": ""
+      "order": 45,
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "Paperclip"
     },
     {
-      "order": 49,
-      "ligatures": ""
-    },
-    {
-      "order": 50,
-      "ligatures": ""
-    },
-    {
-      "order": 51,
-      "ligatures": ""
-    },
-    {
-      "order": 52,
-      "ligatures": ""
-    },
-    {
-      "order": 53,
-      "ligatures": ""
-    },
-    {
-      "order": 54,
-      "ligatures": ""
-    },
-    {
-      "order": 55,
-      "ligatures": ""
-    },
-    {
-      "order": 56,
-      "ligatures": ""
-    },
-    {
-      "order": 57,
-      "ligatures": ""
-    },
-    {
-      "order": 58,
-      "ligatures": ""
-    },
-    {
-      "order": 59,
-      "ligatures": ""
-    },
-    {
-      "order": 60,
-      "ligatures": ""
-    },
-    {
-      "order": 61,
-      "ligatures": ""
-    },
-    {
-      "order": 62,
-      "ligatures": ""
-    },
-    {
-      "order": 63,
-      "ligatures": ""
-    },
-    {
-      "order": 64,
-      "ligatures": ""
-    },
-    {
-      "order": 65,
-      "ligatures": ""
-    },
-    {
-      "order": 66,
-      "ligatures": ""
-    },
-    {
-      "order": 67,
-      "ligatures": ""
+      "order": 46,
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "Edit"
     }
   ],
   "metadata": {
     "name": "hylo-evo-icons",
-    "iconsHash": 1693500346
+    "importSize": {
+      "width": 10,
+      "height": 10
+    },
+    "iconsHash": 1889339332
   },
   "height": 1024,
   "prevSize": 32,
   "icons": [
+    {
+      "paths": [
+        "M227.663 125.263h568.674c56.554 0 102.4 45.846 102.4 102.4v568.674c0 56.554-45.846 102.4-102.4 102.4h-568.674c-56.554 0-102.4-45.846-102.4-102.4v-568.674c0-56.554 45.846-102.4 102.4-102.4zM312.283 412.617c53.397 0 96.684-43.287 96.684-96.684s-43.287-96.684-96.684-96.684c-53.397 0-96.684 43.287-96.684 96.684s43.287 96.684 96.684 96.684zM493.917 267.59v96.684h313.912v-96.684h-313.912zM216.328 489.682v301.366h591.345v-301.366h-591.345z"
+      ],
+      "grid": 0,
+      "tags": [
+        "Post"
+      ],
+      "defaultCode": 59648
+    },
+    {
+      "paths": [
+        "M511.997 860.82l-229.448 121.23c-34.093 18.013-76.334 4.978-94.348-29.115-7.219-13.663-9.701-29.335-7.058-44.56l44.393-255.68-186.2-180.756c-27.667-26.858-28.323-71.060-1.465-98.727 10.763-11.088 24.901-18.291 40.198-20.482l256.884-36.789 114.37-232.943c16.994-34.613 58.83-48.895 93.442-31.901 13.871 6.81 25.091 18.030 31.901 31.901l114.37 232.943 256.884 36.789c38.17 5.466 64.682 40.841 59.215 79.011-2.191 15.297-9.394 29.434-20.482 40.198l-186.2 180.756 44.393 255.68c6.596 37.991-18.854 74.136-56.845 80.733-15.225 2.643-30.897 0.161-44.56-7.058l-229.448-121.23z"
+      ],
+      "grid": 0,
+      "tags": [
+        "Star"
+      ],
+      "defaultCode": 59649
+    },
+    {
+      "paths": [
+        "M559.941 83.928l-95.883-0 0 380.131h-380.131v95.883l380.131 0-0 380.131 95.883-0 0-380.131 380.131 0v-95.883l-380.131 0z"
+      ],
+      "grid": 0,
+      "tags": [
+        "Plus"
+      ],
+      "defaultCode": 59650
+    },
+    {
+      "paths": [
+        "M1058.355 474.65v90.401c0 33.895-23.631 63.122-51.559 67.691l-55.911 24.537c-17.147 7.015-25.408 26.369-18.435 44.192l20.957 54.061c16.987 27.603 12.651 64.763-10.403 87.817l-63.416 63.416c-24.609 24.609-62.441 28.951-85.4 12.308l-55.823-22.613c-17.635-6.413-37.364 1.768-45.009 18.573l-22.733 51.665c-6.452 32.258-35.872 55.418-69.333 55.418h-90.401c-33.895 0-63.122-23.631-67.691-51.559l-24.537-55.911c-7.015-17.147-26.369-25.408-44.192-18.435l-54.061 20.957c-27.603 16.987-64.763 12.651-87.817-10.403l-63.416-63.416c-24.552-24.552-28.76-60.62-12.308-85.4l22.613-55.823c6.413-17.635-1.768-37.364-18.573-45.009l-51.665-22.733c-32.258-6.452-55.418-35.872-55.418-69.333v-90.401c0-33.895 23.631-63.122 51.559-67.691l55.911-24.537c17.147-7.015 25.408-26.369 18.435-44.192l-20.957-54.061c-16.987-27.603-12.651-64.763 10.403-87.817l63.416-63.416c24.609-24.609 62.441-28.951 85.4-12.308l55.823 22.613c17.635 6.413 37.364-1.768 45.009-18.573l22.733-51.665c6.452-32.258 35.872-55.418 69.333-55.418h90.401c33.895 0 63.122 23.631 67.691 51.559l24.537 55.911c7.015 17.147 26.369 25.408 44.192 18.435l54.061-20.957c27.603-16.987 64.763-12.651 87.817 10.403l63.416 63.416c23.585 23.585 28.496 61.031 12.308 85.4l-22.899 56.573c-3.032 7.58-3.032 17.359 0.286 26.484l0.549 3.114c4.161 6.89 9.873 11.933 16.675 14.661l54.39 23.31c31.828 7.417 54.042 35.892 54.042 68.756zM884.796 381.117c-7.122-20.294-7-42.489 0.676-61.68l25.107-60.858c5.212-8.108 3.737-19.358-3.354-26.449l-63.416-63.416c-6.477-6.477-17.859-7.805-29.479-1.108l-58.101 22.97c-43.618 17.068-92.050-3.604-109.292-45.772l-25.988-60.828c-1.731-9.233-9.846-15.794-19.66-15.794h-90.401c-9.751 0-18.081 6.558-21.273 19.748l-24.509 57.172c-18.842 41.452-66.218 61.096-109.432 45.364l-61.578-25.588c-7.323-5.070-18.056-3.838-25.729 3.835l-63.416 63.416c-6.477 6.477-7.805 17.859-1.108 29.479l22.97 58.101c17.068 43.618-3.604 92.050-45.772 109.292l-60.828 25.988c-9.233 1.731-15.794 9.846-15.794 19.66v90.401c0 9.751 6.558 18.081 19.748 21.273l57.172 24.509c41.452 18.842 61.096 66.218 45.364 109.432l-25.107 60.858c-5.646 8.782-4.501 18.594 3.354 26.449l63.416 63.416c6.477 6.477 17.859 7.805 29.479 1.108l58.101-22.97c43.618-17.068 92.050 3.604 109.292 45.772l25.988 60.828c1.731 9.233 9.846 15.794 19.66 15.794h90.401c9.751 0 18.081-6.558 21.273-19.748l24.509-57.172c18.842-41.452 66.218-61.096 109.432-45.364l61.578 25.588c7.323 5.070 18.056 3.838 25.729-3.835l63.416-63.416c6.477-6.477 7.805-17.859 1.108-29.479l-22.97-58.101c-17.068-43.618 3.604-92.050 45.772-109.292l60.828-25.988c9.233-1.731 15.794-9.846 15.794-19.66v-90.401c0-9.814-6.561-17.929-15.794-19.66l-5.303-1.612-56.099-24.051c-19.163-7.665-34.674-22.676-44.265-41.859l-1.499-6.35zM555.415 689.521c93.969 0 170.345-76.376 170.345-170.345s-76.376-170.345-170.345-170.345c-93.969 0-170.345 76.376-170.345 170.345s76.376 170.345 170.345 170.345zM555.415 740.119c-121.914 0-220.943-99.029-220.943-220.943s99.029-220.943 220.943-220.943c121.914 0 220.943 99.029 220.943 220.943s-99.029 220.943-220.943 220.943z"
+      ],
+      "width": 1084,
+      "tags": [
+        "Settings"
+      ],
+      "defaultCode": 59651,
+      "grid": 0
+    },
+    {
+      "paths": [
+        "M32 914.278l96.571 96.686 479.429-480-479.429-480-96.571 96.686 382.859 383.314z"
+      ],
+      "width": 640,
+      "tags": [
+        "ArrowForward"
+      ],
+      "defaultCode": 59652,
+      "grid": 0
+    },
     {
       "paths": [
         "M608 32h-384c-52.8 0-95.52 43.2-95.52 96l-0.48 768c0 52.8 42.72 96 95.52 96h576.48c52.8 0 96-43.2 96-96v-576l-288-288zM704 800h-384v-96h384v96zM704 608h-384v-96h384v96zM560 368v-264l264 264h-264z"
@@ -171,7 +332,7 @@
       "tags": [
         "Document"
       ],
-      "defaultCode": 59648,
+      "defaultCode": 59653,
       "grid": 0
     },
     {
@@ -181,7 +342,7 @@
       "tags": [
         "Download"
       ],
-      "defaultCode": 59649,
+      "defaultCode": 59654,
       "grid": 0
     },
     {
@@ -191,7 +352,7 @@
       "tags": [
         "Send"
       ],
-      "defaultCode": 59650,
+      "defaultCode": 59655,
       "grid": 0
     },
     {
@@ -201,7 +362,7 @@
       "tags": [
         "Checkmark"
       ],
-      "defaultCode": 59651,
+      "defaultCode": 59656,
       "grid": 0
     },
     {
@@ -211,7 +372,7 @@
       "tags": [
         "Empty"
       ],
-      "defaultCode": 59652,
+      "defaultCode": 59657,
       "grid": 0
     },
     {
@@ -222,7 +383,7 @@
       "tags": [
         "Back"
       ],
-      "defaultCode": 59653,
+      "defaultCode": 59658,
       "grid": 0
     },
     {
@@ -232,7 +393,7 @@
       "tags": [
         "AddImage"
       ],
-      "defaultCode": 59654,
+      "defaultCode": 59659,
       "grid": 0
     },
     {
@@ -242,7 +403,7 @@
       "tags": [
         "Clock"
       ],
-      "defaultCode": 59655,
+      "defaultCode": 59660,
       "grid": 0
     },
     {
@@ -250,9 +411,9 @@
         "M512 921.6c-226.216 0-409.6-183.384-409.6-409.6s183.384-409.6 409.6-409.6c226.216 0 409.6 183.384 409.6 409.6s-183.384 409.6-409.6 409.6zM512 680.539l158.216 87.46-30.217-185.243 128-131.19-176.891-27.027-79.108-168.54-79.108 168.54-176.891 27.027 128 131.19-30.217 185.243 158.216-87.46z"
       ],
       "tags": [
-        "Star"
+        "StarCircle"
       ],
-      "defaultCode": 59656,
+      "defaultCode": 59661,
       "grid": 0
     },
     {
@@ -262,7 +423,7 @@
       "tags": [
         "ProfileUrl"
       ],
-      "defaultCode": 59657,
+      "defaultCode": 59662,
       "grid": 0
     },
     {
@@ -272,7 +433,7 @@
       "tags": [
         "ProfileTwitter"
       ],
-      "defaultCode": 59658,
+      "defaultCode": 59663,
       "grid": 0
     },
     {
@@ -282,7 +443,7 @@
       "tags": [
         "ProfileLinkedin"
       ],
-      "defaultCode": 59659,
+      "defaultCode": 59664,
       "grid": 0
     },
     {
@@ -292,7 +453,7 @@
       "tags": [
         "ProfileFacebook"
       ],
-      "defaultCode": 59660,
+      "defaultCode": 59665,
       "grid": 0
     },
     {
@@ -303,7 +464,7 @@
       "tags": [
         "Reply"
       ],
-      "defaultCode": 59661,
+      "defaultCode": 59666,
       "grid": 0
     },
     {
@@ -313,7 +474,7 @@
       "tags": [
         "LinkedIn"
       ],
-      "defaultCode": 59662,
+      "defaultCode": 59667,
       "grid": 0
     },
     {
@@ -323,7 +484,7 @@
       "tags": [
         "Google"
       ],
-      "defaultCode": 59663,
+      "defaultCode": 59668,
       "grid": 0
     },
     {
@@ -334,7 +495,7 @@
       "tags": [
         "Facebook"
       ],
-      "defaultCode": 59664,
+      "defaultCode": 59669,
       "grid": 0
     },
     {
@@ -344,7 +505,7 @@
       "tags": [
         "Ex"
       ],
-      "defaultCode": 59665,
+      "defaultCode": 59670,
       "grid": 0
     },
     {
@@ -354,7 +515,7 @@
       "tags": [
         "NewCommunity"
       ],
-      "defaultCode": 59666,
+      "defaultCode": 59671,
       "grid": 0
     },
     {
@@ -364,7 +525,7 @@
       "tags": [
         "Projects"
       ],
-      "defaultCode": 59667,
+      "defaultCode": 59672,
       "grid": 0
     },
     {
@@ -374,7 +535,7 @@
       "tags": [
         "Events"
       ],
-      "defaultCode": 59668,
+      "defaultCode": 59673,
       "grid": 0
     },
     {
@@ -384,7 +545,7 @@
       "tags": [
         "Home"
       ],
-      "defaultCode": 59669,
+      "defaultCode": 59674,
       "grid": 0
     },
     {
@@ -394,7 +555,7 @@
       "tags": [
         "Topics"
       ],
-      "defaultCode": 59670,
+      "defaultCode": 59675,
       "grid": 0
     },
     {
@@ -404,7 +565,7 @@
       "tags": [
         "Members"
       ],
-      "defaultCode": 59671,
+      "defaultCode": 59676,
       "grid": 0
     },
     {
@@ -414,7 +575,7 @@
       "tags": [
         "Messages"
       ],
-      "defaultCode": 59672,
+      "defaultCode": 59677,
       "grid": 0
     },
     {
@@ -424,7 +585,7 @@
       "tags": [
         "Notifications"
       ],
-      "defaultCode": 59673,
+      "defaultCode": 59678,
       "grid": 0
     },
     {
@@ -434,7 +595,7 @@
       "tags": [
         "Search"
       ],
-      "defaultCode": 59674,
+      "defaultCode": 59679,
       "grid": 0
     },
     {
@@ -444,7 +605,7 @@
       "tags": [
         "Share"
       ],
-      "defaultCode": 59675,
+      "defaultCode": 59680,
       "grid": 0
     },
     {
@@ -454,7 +615,7 @@
       "tags": [
         "More"
       ],
-      "defaultCode": 59676,
+      "defaultCode": 59681,
       "grid": 0
     },
     {
@@ -464,7 +625,7 @@
       "tags": [
         "ArrowUp"
       ],
-      "defaultCode": 59677,
+      "defaultCode": 59682,
       "grid": 0
     },
     {
@@ -474,7 +635,7 @@
       "tags": [
         "ArrowDown"
       ],
-      "defaultCode": 59678,
+      "defaultCode": 59683,
       "grid": 0
     },
     {
@@ -484,7 +645,7 @@
       "tags": [
         "Location"
       ],
-      "defaultCode": 59679,
+      "defaultCode": 59684,
       "grid": 0
     },
     {
@@ -494,7 +655,7 @@
       "tags": [
         "Trash"
       ],
-      "defaultCode": 59680,
+      "defaultCode": 59685,
       "grid": 0
     },
     {
@@ -504,7 +665,7 @@
       "tags": [
         "Pin"
       ],
-      "defaultCode": 59681,
+      "defaultCode": 59686,
       "grid": 0
     },
     {
@@ -514,7 +675,7 @@
       "tags": [
         "Complete"
       ],
-      "defaultCode": 59682,
+      "defaultCode": 59687,
       "grid": 0
     },
     {
@@ -524,7 +685,7 @@
       "tags": [
         "Flag"
       ],
-      "defaultCode": 59683,
+      "defaultCode": 59688,
       "grid": 0
     },
     {
@@ -534,7 +695,7 @@
       "tags": [
         "Circle"
       ],
-      "defaultCode": 59684,
+      "defaultCode": 59689,
       "grid": 0
     },
     {
@@ -544,7 +705,7 @@
       "tags": [
         "Paperclip"
       ],
-      "defaultCode": 59685,
+      "defaultCode": 59690,
       "grid": 0
     },
     {
@@ -559,6 +720,7 @@
       "grid": 0
     }
   ],
+  "colorThemes": [],
   "preferences": {
     "showGlyphs": true,
     "showQuickUse": true,
@@ -566,7 +728,11 @@
     "showSVGs": true,
     "fontPref": {
       "prefix": "icon-",
-      "metadata": {},
+      "metadata": {
+        "fontFamily": "icomoon",
+        "majorVersion": 1,
+        "minorVersion": 0
+      },
       "metrics": {
         "emSize": 1024,
         "baseline": 6.25,

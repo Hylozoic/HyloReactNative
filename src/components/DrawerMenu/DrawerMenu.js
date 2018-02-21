@@ -4,6 +4,8 @@ import { Image, Text, TouchableOpacity, View, SectionList } from 'react-native'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
 import styles from './DrawerMenu.styles'
 import SocketListener from '../SocketListener'
+import Button from '../Button'
+
 import { ALL_COMMUNITIES_ID } from '../../store/models/Community'
 const allCommunitiesImage = require('../../assets/All_Communities2.png')
 
@@ -12,7 +14,8 @@ export default class DrawerMenu extends Component {
     const {
       name, avatarUrl, goToCommunity, goToNetwork, goToMyProfile,
       showSettings, networks, communities,
-      currentNetworkId, currentCommunityId
+      currentNetworkId, currentCommunityId,
+      goToCreateCommunityName
     } = this.props
 
     const listSections = [
@@ -38,12 +41,13 @@ export default class DrawerMenu extends Component {
         keyExtractor: item => 'c' + item.id
       }
     ]
-
+    
     return <View style={styles.parent}>
       <SectionList
         renderSectionHeader={SectionHeader}
         sections={listSections}
         stickySectionHeadersEnabled={false} />
+      <Button text='Create a Community' onPress={goToCreateCommunityName} style={styles.createCommunityButton} />
       <View style={styles.footer}>
         <TouchableOpacity onPress={goToMyProfile} style={styles.avatar}>
           <Image source={{uri: avatarUrl}} style={styles.avatar} />
@@ -107,13 +111,13 @@ export class NetworkRow extends React.Component {
     const isAll = id === ALL_COMMUNITIES_ID
     const imageSource = isAll
       ? allCommunitiesImage
-      : {uri: avatarUrl}
+      : avatarUrl && {uri: avatarUrl}
     const openNetwork = () => goToNetwork(network)
     const expandable = communities && !!communities.length
     const { expanded } = this.state
     return <View style={[ styles.networkRow, expanded ? styles.networkRowExpanded : styles.networkRowCollapsed ]}>
       <TouchableOpacity onPress={openNetwork} style={[styles.rowTouchable, styles.networkRowTouchable]}>
-        <Image source={imageSource} style={styles.networkAvatar} />
+        {imageSource && <Image source={imageSource} style={styles.networkAvatar} />}
         <Text style={styles.networkRowText} ellipsizeMode='tail'
           numberOfLines={1}>
           {name}

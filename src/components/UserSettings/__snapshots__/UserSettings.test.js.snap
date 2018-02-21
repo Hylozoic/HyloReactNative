@@ -455,13 +455,15 @@ exports[`UserSettings matches snapshot with state set 1`] = `
             tvParallaxProperties={undefined}
           >
             <View>
-              <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
-              >
-                Save Changes
-              </Text>
+              <View>
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                >
+                  Save Changes
+                </Text>
+              </View>
             </View>
           </View>
         </View>
@@ -513,13 +515,15 @@ exports[`UserSettings matches snapshot with state set 1`] = `
             tvParallaxProperties={undefined}
           >
             <View>
-              <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
-              >
-                Logout
-              </Text>
+              <View>
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                >
+                  Logout
+                </Text>
+              </View>
             </View>
           </View>
         </View>

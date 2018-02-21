@@ -1,4 +1,4 @@
-import { capeCod40, capeCod10 } from '../../style/colors'
+import { capeCod40, capeCod10, caribbeanGreen, white } from '../../style/colors'
 import { isIOS } from 'util/platform'
 
 const postPromptShape = {
@@ -44,25 +44,39 @@ export default {
     marginRight: 16,
     alignItems: 'flex-end'
   },
+  title: {
+    flex: 1
+  },
   name: {
     fontSize: 24,
     fontFamily: 'Circular-Black',
-    color: 'white',
+    color: white,
     backgroundColor: 'transparent',
-    flex: 1,
     ...hasTextShadow
+  },
+  topicInfo: {
+    flexDirection: 'row',
+    flexWrap: 'wrap'
+  },
+  subName: {
+    flexWrap: 'wrap',
+    fontSize: 16,
+    fontFamily: 'Circular',
+    color: white,
+    paddingRight: 10,
+    backgroundColor: 'transparent'
   },
   postPrompt: {
     ...postPromptShape,
     paddingHorizontal: 12,
     paddingVertical: 8,
-    backgroundColor: 'white',
+    backgroundColor: white,
     borderWidth: isIOS ? 0 : 1,
     borderColor: capeCod10
   },
   promptShadow: {
     ...postPromptShape,
-    backgroundColor: 'white',
+    backgroundColor: white,
     shadowOffset: {width: 0, height: 4},
     shadowRadius: 5,
     shadowOpacity: 1.0,
@@ -81,16 +95,18 @@ export default {
     fontSize: 14,
     fontStyle: 'italic'
   },
+  unsubscribeButton: {
+    width: 130,
+    fontSize: 14,
+    height: 36,
+    color: caribbeanGreen,
+    backgroundColor: white,
+    borderColor: white
+  },
   subscribeButton: {
-  },
-  subscribeButtonIcon: {
-    fontSize: 30,
-    backgroundColor: 'transparent',
-    color: 'white',
-    opacity: 0.8,
-    ...hasTextShadow
-  },
-  subscribeButtonIconActive: {
-    opacity: 1
+    width: 130,
+    fontSize: 14,
+    height: 36,
+    borderColor: caribbeanGreen
   }
 }

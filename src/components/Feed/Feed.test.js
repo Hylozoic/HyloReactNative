@@ -33,17 +33,18 @@ it('renders correctly', () => {
   expect(actual).toMatchSnapshot()
 })
 
-it('sets the title if there is a topic', () => {
+it('sets the title to the community if there is a topic', () => {
   const navigation = {
     state: {
       params: {
+        communityName: 'test community',
         topicName: 'math'
       }
     }
   }
 
   expect(Feed.navigationOptions({ navigation })).toEqual({
-    headerTitle: '#math'
+    headerTitle: 'test community'
   })
 })
 
