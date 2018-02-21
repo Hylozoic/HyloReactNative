@@ -24,6 +24,7 @@ exports[`PopupMenuButton matches the last snapshot on android 1`] = `
   accessibilityTraits={undefined}
   accessible={true}
   collapsable={undefined}
+  hasTVPreferredFocus={undefined}
   hitSlop={
     Object {
       "top": 10,
@@ -52,6 +53,7 @@ exports[`PopupMenuButton matches the last snapshot on ios 1`] = `
   accessibilityTraits={undefined}
   accessible={true}
   collapsable={undefined}
+  hasTVPreferredFocus={undefined}
   hitSlop={
     Object {
       "top": 10,

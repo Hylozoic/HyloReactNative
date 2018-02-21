@@ -19,7 +19,7 @@ exports[`ParticipantRow matches the last snapshot 1`] = `
 `;
 
 exports[`ThreadParticipants matches the last snapshot 1`] = `
-<ScrollViewMock
+<ScrollView
   contentContainerStyle={
     Object {
       "backgroundColor": "white",
@@ -45,7 +45,7 @@ exports[`ThreadParticipants matches the last snapshot 1`] = `
       }
     }
   />
-</ScrollViewMock>
+</ScrollView>
 `;
 
 exports[`ThreadParticipants returns loading if no participants 1`] = `

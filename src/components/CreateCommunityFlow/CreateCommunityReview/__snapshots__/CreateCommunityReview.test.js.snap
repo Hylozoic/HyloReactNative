@@ -31,7 +31,7 @@ Object {
 `;
 
 exports[`matches last snapshot 1`] = `
-<ScrollViewMock>
+<ScrollView>
   <KeyboardFriendlyView>
     <Text
       accessible={true}
@@ -111,7 +111,7 @@ exports[`matches last snapshot 1`] = `
       text="Let's Do This!"
     />
   </KeyboardFriendlyView>
-</ScrollViewMock>
+</ScrollView>
 `;
 
 exports[`matches last snapshot when visible is true 1`] = `
@@ -153,6 +153,7 @@ exports[`matches last snapshot when visible is true 1`] = `
             accessibilityTraits={undefined}
             accessible={true}
             collapsable={undefined}
+            hasTVPreferredFocus={undefined}
             hitSlop={undefined}
             isTVSelectable={true}
             nativeID={undefined}
@@ -197,6 +198,7 @@ exports[`matches last snapshot when visible is true 1`] = `
             accessibilityTraits={undefined}
             accessible={true}
             collapsable={undefined}
+            hasTVPreferredFocus={undefined}
             hitSlop={undefined}
             isTVSelectable={true}
             nativeID={undefined}
@@ -240,6 +242,7 @@ exports[`matches last snapshot when visible is true 1`] = `
           accessibilityTraits={undefined}
           accessible={true}
           collapsable={undefined}
+          hasTVPreferredFocus={undefined}
           hitSlop={undefined}
           isTVSelectable={true}
           nativeID={undefined}

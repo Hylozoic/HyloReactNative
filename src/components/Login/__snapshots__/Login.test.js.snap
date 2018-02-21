@@ -16,7 +16,7 @@ exports[`FormError renders correctly 1`] = `
 `;
 
 exports[`Login renders correctly 1`] = `
-<ScrollViewMock
+<ScrollView
   contentContainerStyle={
     Object {
       "alignItems": "center",
@@ -144,11 +144,11 @@ exports[`Login renders correctly 1`] = `
       onLoginFinished={undefined}
     />
   </View>
-</ScrollViewMock>
+</ScrollView>
 `;
 
 exports[`Login renders error message 1`] = `
-<ScrollViewMock
+<ScrollView
   contentContainerStyle={
     Object {
       "alignItems": "center",
@@ -276,11 +276,11 @@ exports[`Login renders error message 1`] = `
       onLoginFinished={undefined}
     />
   </View>
-</ScrollViewMock>
+</ScrollView>
 `;
 
 exports[`Login renders with a signup link 1`] = `
-<ScrollViewMock
+<ScrollView
   contentContainerStyle={
     Object {
       "alignItems": "center",
@@ -411,11 +411,11 @@ exports[`Login renders with a signup link 1`] = `
   <SignupLink
     goToSignup={undefined}
   />
-</ScrollViewMock>
+</ScrollView>
 `;
 
 exports[`Login renders with no network connection error 1`] = `
-<ScrollViewMock
+<ScrollView
   contentContainerStyle={
     Object {
       "alignItems": "center",
@@ -543,11 +543,11 @@ exports[`Login renders with no network connection error 1`] = `
       onLoginFinished={undefined}
     />
   </View>
-</ScrollViewMock>
+</ScrollView>
 `;
 
 exports[`Login renders with pending banner 1`] = `
-<ScrollViewMock
+<ScrollView
   contentContainerStyle={
     Object {
       "alignItems": "center",
@@ -682,11 +682,11 @@ exports[`Login renders with pending banner 1`] = `
       onLoginFinished={undefined}
     />
   </View>
-</ScrollViewMock>
+</ScrollView>
 `;
 
 exports[`Login renders without a signup link 1`] = `
-<ScrollViewMock
+<ScrollView
   contentContainerStyle={
     Object {
       "alignItems": "center",
@@ -814,7 +814,7 @@ exports[`Login renders without a signup link 1`] = `
       onLoginFinished={undefined}
     />
   </View>
-</ScrollViewMock>
+</ScrollView>
 `;
 
 exports[`SignupLink renders correctly 1`] = `

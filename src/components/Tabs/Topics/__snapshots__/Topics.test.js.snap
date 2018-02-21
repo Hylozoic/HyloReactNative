@@ -111,7 +111,7 @@ exports[`TopicRow matches last snapshot 1`] = `
 
 exports[`Topics renders correctly a community and topics 1`] = `
 <Unknown>
-  <ScrollViewMock
+  <ScrollView
     contentContainerStyle={
       Object {
         "flexGrow": 1,
@@ -159,13 +159,13 @@ exports[`Topics renders correctly a community and topics 1`] = `
         ]
       }
     />
-  </ScrollViewMock>
+  </ScrollView>
 </Unknown>
 `;
 
 exports[`Topics renders correctly with pending=true 1`] = `
 <Unknown>
-  <ScrollViewMock
+  <ScrollView
     contentContainerStyle={
       Object {
         "flexGrow": 1,
@@ -213,6 +213,6 @@ exports[`Topics renders correctly with pending=true 1`] = `
         ]
       }
     />
-  </ScrollViewMock>
+  </ScrollView>
 </Unknown>
 `;

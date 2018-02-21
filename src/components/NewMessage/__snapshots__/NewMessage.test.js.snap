@@ -186,7 +186,7 @@ exports[`Participant renders correctly 1`] = `
 
 exports[`ParticipantInput renders correctly 1`] = `
 <View>
-  <ScrollViewMock
+  <ScrollView
     contentContainerStyle={
       Object {
         "alignItems": "center",
@@ -229,6 +229,6 @@ exports[`ParticipantInput renders correctly 1`] = `
       underlineColorAndroid="transparent"
       value="Jon"
     />
-  </ScrollViewMock>
+  </ScrollView>
 </View>
 `;

@@ -31,7 +31,7 @@ Object {
 `;
 
 exports[`matches last snapshot 1`] = `
-<ScrollViewMock>
+<ScrollView>
   <KeyboardFriendlyView>
     <Text
       accessible={true}
@@ -71,7 +71,7 @@ exports[`matches last snapshot 1`] = `
       text="Continue"
     />
   </KeyboardFriendlyView>
-</ScrollViewMock>
+</ScrollView>
 `;
 
 exports[`matches last snapshot when there is an error 1`] = `
@@ -131,6 +131,7 @@ exports[`matches last snapshot when there is an error 1`] = `
           accessibilityTraits={undefined}
           accessible={true}
           collapsable={undefined}
+          hasTVPreferredFocus={undefined}
           hitSlop={undefined}
           isTVSelectable={true}
           nativeID={undefined}
@@ -219,6 +220,7 @@ exports[`validates the url 1`] = `
           accessibilityTraits={undefined}
           accessible={true}
           collapsable={undefined}
+          hasTVPreferredFocus={undefined}
           hitSlop={undefined}
           isTVSelectable={true}
           nativeID={undefined}
@@ -307,6 +309,7 @@ exports[`validates the url 2`] = `
           accessibilityTraits={undefined}
           accessible={true}
           collapsable={undefined}
+          hasTVPreferredFocus={undefined}
           hitSlop={undefined}
           isTVSelectable={true}
           nativeID={undefined}
