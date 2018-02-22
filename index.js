@@ -3,14 +3,14 @@ import React from 'react'
 import RootView from './src/components/RootView'
 import { AppRegistry, Platform } from 'react-native'
 import Timer from 'react-native-background-timer'
-// import { Sentry } from 'react-native-sentry'
+import { Sentry } from 'react-native-sentry'
 import ErrorBoundary from './src/components/ErrorBoundary'
 import { isDev } from 'util/testing'
 
-// if (!isDev) {
-//   Sentry.config(process.env.SENTRY_CONFIG_URL)
-//   Sentry.install()
-// }
+if (!isDev) {
+  Sentry.config(process.env.SENTRY_CONFIG_URL)
+  Sentry.install()
+}
 
 if (Platform.OS === 'android') {
   // We get these long polling warnings in development, which can actually cause

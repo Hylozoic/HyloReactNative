@@ -41,6 +41,7 @@
 		55C60443711945879410FC1B /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 277CC724C19944EC9C127E8B /* MaterialIcons.ttf */; };
 		57859702B413478A8B272853 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C5672ACA397455C9B9FA940 /* SystemConfiguration.framework */; };
 		59582AB5127847F4B8351B2D /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0CB25F82AC1949C7AC5AA8C3 /* MaterialCommunityIcons.ttf */; };
+		5C687825203F8560008A6621 /* libRNSentry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C687823203F84DD008A6621 /* libRNSentry.a */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		622DC7EEADF7461D93933819 /* libRNDocumentPicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 911CA012D21D42968AAC80C7 /* libRNDocumentPicker.a */; };
 		7636F1FA120D4E05A3524BE6 /* libRNBackgroundTimer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B9500B5880E94352BF665415 /* libRNBackgroundTimer.a */; };
@@ -369,6 +370,13 @@
 			remoteGlobalIDString = 3245CDED1BFEE35C00EABF68;
 			remoteInfo = RCTRestart;
 		};
+		5C687822203F84DD008A6621 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5C6877EC203F84DD008A6621 /* RNSentry.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RNSentry;
+		};
 		5E9157321DD0AC6500FF2AA8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */;
@@ -480,6 +488,7 @@
 		4BA1D430DD6C46F781C67BCF /* AddressBook.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		4D3FA7F0E1504BFAA5795C32 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
 		5AF97D1AA7A06ED99997C525 /* Pods-HyloReactNative.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HyloReactNative.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HyloReactNative/Pods-HyloReactNative.debug.xcconfig"; sourceTree = "<group>"; };
+		5C6877EC203F84DD008A6621 /* RNSentry.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNSentry.xcodeproj; path = "../node_modules/react-native-sentry/ios/RNSentry.xcodeproj"; sourceTree = "<group>"; };
 		5CDE6349FEA94B0283A6393B /* libRNDeviceInfo.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNDeviceInfo.a; sourceTree = "<group>"; };
 		5CF26E721F415BCA00CC02E1 /* HyloReactNative.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = HyloReactNative.entitlements; path = HyloReactNative/HyloReactNative.entitlements; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
@@ -531,6 +540,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C687825203F8560008A6621 /* libRNSentry.a in Frameworks */,
 				ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */,
 				5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */,
 				B726CF951F34F0B200CA78B5 /* libRNImagePicker.a in Frameworks */,
@@ -651,6 +661,7 @@
 		13B07FAE1A68108700A75B9A /* HyloReactNative */ = {
 			isa = PBXGroup;
 			children = (
+				5C6877EC203F84DD008A6621 /* RNSentry.xcodeproj */,
 				21B39E5C1F51229300B8B1BA /* debug.xcconfig */,
 				21B39E801F5122F600B8B1BA /* release.xcconfig */,
 				5CF26E721F415BCA00CC02E1 /* HyloReactNative.entitlements */,
@@ -788,6 +799,14 @@
 			isa = PBXGroup;
 			children = (
 				5C2AB9D12036FBE100120029 /* libRCTRestart.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5C6877ED203F84DD008A6621 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5C687823203F84DD008A6621 /* libRNSentry.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1122,6 +1141,10 @@
 					ProjectRef = B726CF8E1F34ECE100CA78B5 /* RNImagePicker.xcodeproj */;
 				},
 				{
+					ProductGroup = 5C6877ED203F84DD008A6621 /* Products */;
+					ProjectRef = 5C6877EC203F84DD008A6621 /* RNSentry.xcodeproj */;
+				},
+				{
 					ProductGroup = 217A25D21EF2261F00F95ED4 /* Products */;
 					ProjectRef = C399AB4A83A944CC9B2E2DBF /* RNVectorIcons.xcodeproj */;
 				},
@@ -1427,6 +1450,13 @@
 			fileType = archive.ar;
 			path = libRCTRestart.a;
 			remoteRef = 5C2AB9D02036FBE100120029 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		5C687823203F84DD008A6621 /* libRNSentry.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNSentry.a;
+			remoteRef = 5C687822203F84DD008A6621 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */ = {
@@ -1738,7 +1768,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION =52;
+				CURRENT_PROJECT_VERSION = 56;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = L4KZBPS2F3;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)/**";
@@ -1783,7 +1813,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 52;
+				CURRENT_PROJECT_VERSION = 56;
 				DEVELOPMENT_TEAM = L4KZBPS2F3;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)/**";
 				HEADER_SEARCH_PATHS = (
