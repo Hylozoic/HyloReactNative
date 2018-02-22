@@ -58,7 +58,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>51</string>
+	<string>52</string>
 	<key>FacebookAppID</key>
 	<string>${FACEBOOK_APP_ID}</string>
 	<key>FacebookDisplayName</key>
