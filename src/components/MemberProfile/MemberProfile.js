@@ -172,12 +172,8 @@ export function EditButton ({ isLoading, style }) {
 }
 
 export function ReadMoreButton ({ goToDetails }) {
-  const onPress = () => {
-    setTimeout(goToDetails, 0)
-  }
-
   return <View style={styles.buttonContainer}>
-    <TouchableOpacity onPress={onPress} style={styles.buttonWrapper}>
+    <TouchableOpacity onPress={goToDetails} style={styles.buttonWrapper}>
       <View style={styles.button}>
         <Text style={styles.buttonText}>Read More</Text>
       </View>
