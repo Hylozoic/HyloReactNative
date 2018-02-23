@@ -45,7 +45,7 @@
     "react-native-onesignal": "^3.0.7",
     "react-native-prompt-android": "^0.3.1",
     "react-native-restart": "^0.0.4",
-    "react-native-sentry": "^0.32.1",
+    "react-native-sentry": "^0.34.0",
     "react-native-tab-navigator": "^0.3.4",
     "react-native-triangle": "^0.0.9",
     "react-native-vector-icons": "^4.4.2",
