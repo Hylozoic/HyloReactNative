@@ -34,10 +34,13 @@ export default class MemberProfile extends React.Component {
     }
   }
 
+  shouldComponentUpdate (nextProps) {
+    return nextProps.isFocused
+  }
+
   render () {
     const {
       canFlag,
-      clearFetchPersonPending,
       goToDetails,
       goToEdit,
       id,
@@ -66,7 +69,6 @@ export default class MemberProfile extends React.Component {
 
     const header = <View>
       <MemberBanner
-        clearFetchPersonPending={clearFetchPersonPending}
         isFocused={isFocused}
         isMe={isMe}
         pending={pending}
@@ -109,14 +111,8 @@ export class MemberBanner extends React.Component {
     this.props.updateUserSettings({[remoteKey]: remote})
   }
 
-  componentWillUpdate (nextProps) {
-    if (this.props.isFocused && !nextProps.isFocused) {
-      this.props.clearFetchPersonPending()
-    }
-  }
-
   render () {
-    const { pending, person: { id, avatarUrl, bannerUrl }, isMe } = this.props
+    const { person: { id, avatarUrl, bannerUrl }, isMe } = this.props
     const { avatarPickerPending, bannerPickerPending, avatarLocalUri, bannerLocalUri } = this.state
 
     const avatarSource = avatarLocalUri
@@ -125,12 +121,15 @@ export class MemberBanner extends React.Component {
 
     // This is a suprisingly annoying piece of logic. Basically, prefer
     // displaying `bannerLocalUri`, then `bannerUrl`, then `defaultBanner`.
-    // However, don't display `defaultBanner` only to be replaced with `bannerUrl`
-    // after the request finishes!
+    // However, don't display `defaultBanner` only to be replaced with
+    // `bannerUrl` after the request finishes! The trick to it is this:
+    // `bannerUrl` will be undefined until the request finishes, then it should
+    // be either string or null. So we don't display the default unless it's null.
+
     let bannerSource = {
-      uri: bannerLocalUri || bannerUrl || null
+      uri: bannerLocalUri || bannerUrl
     }
-    if (bannerSource.uri === null && !pending) bannerSource = defaultBanner
+    if (bannerUrl === null) bannerSource = defaultBanner
 
     return <View>
       <ImagePicker
@@ -142,7 +141,7 @@ export class MemberBanner extends React.Component {
         onPendingChange={pending => this.setState({bannerPickerPending: pending})}
         disabled={!isMe}>
         <Image source={bannerSource} style={styles.bannerImage} />
-        {!pending && isMe && <EditButton isLoading={bannerPickerPending} style={styles.bannerEditButton} />}
+        {isMe && <EditButton isLoading={bannerPickerPending} style={styles.bannerEditButton} />}
       </ImagePicker>
       <View style={styles.avatarW3}>
         <ImagePicker

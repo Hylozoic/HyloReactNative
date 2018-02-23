@@ -65,6 +65,10 @@ export default class MemberDetails extends React.Component {
     BackHandler.removeEventListener('hardwareBackPress', this.goBack)
   }
 
+  shouldComponentUpdate (nextProps) {
+    return nextProps.isFocused
+  }
+
   goBack = () => {
     if (this.saveChanges()) {
       this.props.goToMemberProfile()
