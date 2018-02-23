@@ -127,7 +127,9 @@ export class MemberBanner extends React.Component {
     let bannerSource = {
       uri: bannerLocalUri || bannerUrl
     }
-    if (bannerUrl === null) bannerSource = defaultBanner
+    if (bannerUrl === null && bannerLocalUri === null) {
+      bannerSource = defaultBanner
+    }
 
     return <View>
       <ImagePicker
