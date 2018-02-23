@@ -14,7 +14,8 @@
     "test": "jest",
     "coverage:diff": "node ../jest-diff-coverage && open coverage/lcov-report/index.html",
     "clean-start": "./scripts/clean-rebuild.sh",
-    "configure": "./scripts/configure.sh"
+    "configure": "./scripts/configure.sh",
+    "postinstall": "rm -f ./node_modules/react-native/local-cli/core/__fixtures__/files/package.json"
   },
   "dependencies": {
     "babel-eslint": "^8.0.1",
