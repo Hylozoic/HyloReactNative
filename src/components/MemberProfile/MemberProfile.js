@@ -47,7 +47,6 @@ export default class MemberProfile extends React.Component {
       isFocused,
       isMe,
       onPressMessages,
-      pending,
       person,
       updateUserSettings
     } = this.props
@@ -71,7 +70,6 @@ export default class MemberProfile extends React.Component {
       <MemberBanner
         isFocused={isFocused}
         isMe={isMe}
-        pending={pending}
         person={person}
         updateUserSettings={updateUserSettings} />
       <View style={styles.marginContainer}>
