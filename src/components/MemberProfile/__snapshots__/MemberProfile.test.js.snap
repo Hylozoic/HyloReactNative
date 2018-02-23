@@ -79,10 +79,8 @@ exports[`MemberProfile doesnt have the flag content option 1`] = `
   header={
     <View>
       <MemberBanner
-        clearFetchPersonPending={undefined}
         isFocused={true}
         isMe={undefined}
-        pending={undefined}
         person={
           Object {
             "id": 1,
@@ -117,10 +115,8 @@ exports[`MemberProfile matches the last snapshot 1`] = `
   header={
     <View>
       <MemberBanner
-        clearFetchPersonPending={undefined}
         isFocused={true}
         isMe={undefined}
-        pending={undefined}
         person={
           Object {
             "id": 1,
