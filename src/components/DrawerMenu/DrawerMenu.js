@@ -10,13 +10,6 @@ import { ALL_COMMUNITIES_ID } from '../../store/models/Community'
 const allCommunitiesImage = require('../../assets/All_Communities2.png')
 
 export default class DrawerMenu extends Component {
-  // FIXME: I don't think this function is used anywhere
-  resetToTop () {
-    // hack to fix apparent scroll bug: https://github.com/facebook/react-native/issues/1831
-    this.listView.scrollTo({x: 0, y: 1})
-    this.listView.scrollTo({x: 0, y: 0})
-  }
-
   render () {
     const {
       name, avatarUrl, goToCommunity, goToNetwork, goToMyProfile,
@@ -48,7 +41,7 @@ export default class DrawerMenu extends Component {
         keyExtractor: item => 'c' + item.id
       }
     ]
-    
+
     return <View style={styles.parent}>
       <SectionList
         renderSectionHeader={SectionHeader}

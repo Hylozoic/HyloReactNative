@@ -13,6 +13,7 @@ describe('MemberDetails', () => {
   it('matches the last snapshot', () => {
     const renderer = new ReactShallowRenderer()
     renderer.render(<MemberDetails
+      isFocused
       person={{id: 1}}
       goToCommunity={() => {}}
       skills={['One']}
@@ -24,7 +25,7 @@ describe('MemberDetails', () => {
 
   it("returns Loading when there's no person", () => {
     const renderer = new ReactShallowRenderer()
-    renderer.render(<MemberDetails navigation={navigation} />)
+    renderer.render(<MemberDetails isFocused navigation={navigation} />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
@@ -42,6 +43,7 @@ describe('MemberDetails', () => {
       }
 
       const props = {
+        isFocused: true,
         person: {
           id: 1,
           name: 'don',
@@ -64,6 +66,7 @@ describe('MemberDetails', () => {
   describe('goBack', () => {
     it('calls goToMemberDetails when saveChanges succeeds', () => {
       const props = {
+        isFocused: true,
         id: 12,
         person: {},
         fetchPerson: () => {},
@@ -81,6 +84,7 @@ describe('MemberDetails', () => {
   describe('validate', () => {
     it('returns true when name is present', () => {
       const props = {
+        isFocused: true,
         person: {},
         fetchPerson: () => {},
         navigation
@@ -95,6 +99,7 @@ describe('MemberDetails', () => {
 
     it('returns false and sets error when name is empty', () => {
       const props = {
+        isFocused: true,
         person: {},
         fetchPerson: () => {},
         navigation
@@ -112,6 +117,7 @@ describe('MemberDetails', () => {
   describe('editProfile', () => {
     it('sets state.editing to true', () => {
       const props = {
+        isFocused: true,
         person: {},
         fetchPerson: () => {},
         navigation
@@ -126,6 +132,7 @@ describe('MemberDetails', () => {
   describe('updateSetting', () => {
     it('updates state.person', () => {
       const props = {
+        isFocused: true,
         person: {},
         fetchPerson: () => {},
         navigation
@@ -140,6 +147,7 @@ describe('MemberDetails', () => {
   describe('saveChanges', () => {
     it('calls updateUserSettings', () => {
       const props = {
+        isFocused: true,
         person: {},
         fetchPerson: () => {},
         updateUserSettings: jest.fn(),
@@ -159,6 +167,7 @@ describe('MemberDetails', () => {
 
     it("returns false and doesn't call updateUserSettings when validate is false", () => {
       const props = {
+        isFocused: true,
         person: {},
         fetchPerson: () => {},
         updateUserSettings: jest.fn(),

@@ -52,7 +52,7 @@ describe('PostEditor', () => {
           editDetails={editDetails}
           isFocused
           navigation={navigation}
-          post={mockPost} 
+          post={mockPost}
           save={save}
           setDetails={jest.fn()} />
       </Provider>)

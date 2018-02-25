@@ -1,4 +1,5 @@
 import { mapStateToProps, mapDispatchToProps, makeOnPressMessages, mergeProps } from './MemberProfile.connector'
+import { FETCH_PERSON } from './MemberProfile.store'
 
 describe('mapStateToProps', () => {
   it('maps the state to the props', () => {
@@ -7,7 +8,8 @@ describe('mapStateToProps', () => {
       state: {params: {id}},
       navigate: jest.fn()
     }
-    const props = mapStateToProps({}, {navigation})
+    const state = { pending: { [FETCH_PERSON]: null } }
+    const props = mapStateToProps(state, {navigation})
     expect(props).toMatchSnapshot()
     props.goToDetails()
     expect(navigation.navigate).toHaveBeenCalledWith('MemberDetails', {id})

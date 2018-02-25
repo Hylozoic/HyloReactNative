@@ -331,6 +331,7 @@ exports[`UserSettings matches snapshot with state set 1`] = `
         accessibilityTraits={undefined}
         accessible={true}
         collapsable={undefined}
+        hasTVPreferredFocus={undefined}
         hitSlop={undefined}
         isTVSelectable={true}
         nativeID={undefined}
@@ -374,6 +375,7 @@ exports[`UserSettings matches snapshot with state set 1`] = `
             accessibilityTraits={undefined}
             accessible={true}
             collapsable={undefined}
+            hasTVPreferredFocus={undefined}
             hitSlop={undefined}
             isTVSelectable={true}
             nativeID={undefined}
@@ -410,6 +412,7 @@ exports[`UserSettings matches snapshot with state set 1`] = `
             accessibilityTraits={undefined}
             accessible={true}
             collapsable={undefined}
+            hasTVPreferredFocus={undefined}
             hitSlop={undefined}
             isTVSelectable={true}
             nativeID={undefined}
@@ -441,6 +444,7 @@ exports[`UserSettings matches snapshot with state set 1`] = `
             accessibilityTraits={undefined}
             accessible={true}
             collapsable={undefined}
+            hasTVPreferredFocus={undefined}
             hitSlop={undefined}
             isTVSelectable={true}
             nativeID={undefined}
@@ -473,6 +477,7 @@ exports[`UserSettings matches snapshot with state set 1`] = `
           accessibilityTraits={undefined}
           accessible={true}
           collapsable={undefined}
+          hasTVPreferredFocus={undefined}
           hitSlop={undefined}
           isTVSelectable={true}
           nativeID={undefined}
@@ -501,6 +506,7 @@ exports[`UserSettings matches snapshot with state set 1`] = `
             accessibilityTraits={undefined}
             accessible={true}
             collapsable={undefined}
+            hasTVPreferredFocus={undefined}
             hitSlop={undefined}
             isTVSelectable={true}
             nativeID={undefined}
@@ -535,7 +541,7 @@ exports[`UserSettings matches snapshot with state set 1`] = `
 
 exports[`UserSettings matches the last snapshot 1`] = `
 <Unknown>
-  <ScrollViewMock
+  <ScrollView
     contentContainerStyle={
       Object {
         "flexGrow": 1,
@@ -611,7 +617,7 @@ exports[`UserSettings matches the last snapshot 1`] = `
       logout={[Function]}
       saveChanges={false}
     />
-  </ScrollViewMock>
+  </ScrollView>
 </Unknown>
 `;
 

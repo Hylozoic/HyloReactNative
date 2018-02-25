@@ -146,8 +146,11 @@ export function PostMenu ({deletePost, editPost, flagPost, removePost, pinPost, 
 }
 
 export function PostLabel ({ type }) {
-  const boxStyle = [labelStyles.box, labelStyles[type].box]
-  const textStyle = [labelStyles.text, labelStyles[type].text]
+  // Prevent redboxing on missing type in styles object
+  // TODO: is this the default style we want to use?
+  const labelTypeStyle = get(type, labelStyles) || labelStyles.discussion
+  const boxStyle = [labelStyles.box, labelTypeStyle.box]
+  const textStyle = [labelStyles.text, labelTypeStyle.text]
   return <View style={boxStyle}>
     <Text style={textStyle}>
       {type.toUpperCase()}

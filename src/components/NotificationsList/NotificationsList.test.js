@@ -1,6 +1,7 @@
 import { FlatList, TouchableOpacity } from 'react-native'
 import React from 'react'
 import ShallowRenderer from 'react-test-renderer/shallow'
+
 import TestRenderer from 'react-test-renderer'
 import { simulate } from 'util/testing'
 import { LoadingScreen } from '../Loading'

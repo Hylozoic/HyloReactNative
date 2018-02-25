@@ -13,6 +13,7 @@ import header from 'util/header'
 export default class MemberProfile extends React.Component {
   static navigationOptions = ({ navigation }) =>
     header(navigation, {
+      headerBackButton: () => navigation.navigate('Members'),
       title: 'Member',
       options: {
         headerBackTitle: null
@@ -33,8 +34,22 @@ export default class MemberProfile extends React.Component {
     }
   }
 
+  shouldComponentUpdate (nextProps) {
+    return nextProps.isFocused
+  }
+
   render () {
-    const { person, id, goToDetails, canFlag, onPressMessages, isMe, goToEdit, updateUserSettings } = this.props
+    const {
+      canFlag,
+      goToDetails,
+      goToEdit,
+      id,
+      isFocused,
+      isMe,
+      onPressMessages,
+      person,
+      updateUserSettings
+    } = this.props
     const { flaggingVisible } = this.state
     if (!person) return <Loading />
 
@@ -52,7 +67,11 @@ export default class MemberProfile extends React.Component {
     }
 
     const header = <View>
-      <MemberBanner person={person} isMe={isMe} updateUserSettings={updateUserSettings} />
+      <MemberBanner
+        isFocused={isFocused}
+        isMe={isMe}
+        person={person}
+        updateUserSettings={updateUserSettings} />
       <View style={styles.marginContainer}>
         <MemberHeader
           person={person}
@@ -98,14 +117,25 @@ export class MemberBanner extends React.Component {
       ? {uri: avatarLocalUri}
       : avatarUrl && {uri: avatarUrl}
 
-    const bannerSource = bannerLocalUri
-      ? {uri: bannerLocalUri}
-      : bannerUrl ? {uri: bannerUrl} : defaultBanner
+    // This is a suprisingly annoying piece of logic. Basically, prefer
+    // displaying `bannerLocalUri`, then `bannerUrl`, then `defaultBanner`.
+    // However, don't display `defaultBanner` only to be replaced with
+    // `bannerUrl` after the request finishes! The trick to it is this:
+    // `bannerUrl` will be undefined until the request finishes, then it should
+    // be either string or null. So we don't display the default unless it's null.
+
+    let bannerSource = {
+      uri: bannerLocalUri || bannerUrl
+    }
+    if (bannerUrl === null && bannerLocalUri === null) {
+      bannerSource = defaultBanner
+    }
 
     return <View>
       <ImagePicker
         title='Change Banner'
         type='userBanner'
+        style={styles.bannerImagePicker}
         id={id}
         onChoice={choice => this.onChoice(choice, 'banner')}
         onPendingChange={pending => this.setState({bannerPickerPending: pending})}

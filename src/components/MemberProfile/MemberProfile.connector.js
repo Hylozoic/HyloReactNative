@@ -6,6 +6,7 @@ import makeGoToCommunity from '../../store/actions/makeGoToCommunity'
 import getMe from '../../store/selectors/getMe'
 import updateUserSettings from '../../store/actions/updateUserSettings'
 import { getSkillsFromOrm as getSkills } from '../SkillEditor/SkillEditor.store'
+import { mapWhenFocused, mergeWhenFocused } from 'util/connector'
 
 export function mapStateToProps (state, props) {
   const id = get('navigation.state.params.id', props)
@@ -78,4 +79,8 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps, mergeProps)
+export default connect(
+  mapWhenFocused(mapStateToProps),
+  mapWhenFocused(mapDispatchToProps),
+  mergeWhenFocused(mergeProps)
+)

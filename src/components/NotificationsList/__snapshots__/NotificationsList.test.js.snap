@@ -53,6 +53,7 @@ exports[`NotificationsList matches the last snapshot 1`] = `
             accessibilityTraits={undefined}
             accessible={true}
             collapsable={undefined}
+            hasTVPreferredFocus={undefined}
             hitSlop={undefined}
             isTVSelectable={true}
             nativeID={undefined}

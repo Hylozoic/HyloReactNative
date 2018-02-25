@@ -19,6 +19,9 @@ export default {
     right: -10,
     paddingRight: 15
   },
+  bannerImagePicker: {
+    height: 140
+  },
   avatarW3: {
     alignItems: 'center'
   },

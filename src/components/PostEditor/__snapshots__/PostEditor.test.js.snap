@@ -18,7 +18,7 @@ exports[`PostEditor renders a new editor correctly 1`] = `
   behavior="padding"
   keyboardVerticalOffset={64}
 >
-  <ScrollViewMock>
+  <ScrollView>
     <View>
       <SectionLabel>
         What are you posting today?
@@ -86,7 +86,7 @@ exports[`PostEditor renders a new editor correctly 1`] = `
         type="post"
       />
     </View>
-  </ScrollViewMock>
+  </ScrollView>
 </Unknown>
 `;
 
@@ -112,6 +112,7 @@ exports[`PostEditor renders correctly while saving 1`] = `
             accessibilityTraits={undefined}
             accessible={true}
             collapsable={undefined}
+            hasTVPreferredFocus={undefined}
             hitSlop={undefined}
             isTVSelectable={true}
             nativeID={undefined}
@@ -139,6 +140,7 @@ exports[`PostEditor renders correctly while saving 1`] = `
             accessibilityTraits={undefined}
             accessible={true}
             collapsable={undefined}
+            hasTVPreferredFocus={undefined}
             hitSlop={undefined}
             isTVSelectable={true}
             nativeID={undefined}
@@ -166,6 +168,7 @@ exports[`PostEditor renders correctly while saving 1`] = `
             accessibilityTraits={undefined}
             accessible={true}
             collapsable={undefined}
+            hasTVPreferredFocus={undefined}
             hitSlop={undefined}
             isTVSelectable={true}
             nativeID={undefined}
@@ -218,6 +221,7 @@ exports[`PostEditor renders correctly while saving 1`] = `
           accessibilityTraits={undefined}
           accessible={true}
           collapsable={undefined}
+          hasTVPreferredFocus={undefined}
           hitSlop={undefined}
           isTVSelectable={true}
           nativeID={undefined}
@@ -253,6 +257,7 @@ exports[`PostEditor renders correctly while saving 1`] = `
             accessibilityTraits={undefined}
             accessible={true}
             collapsable={undefined}
+            hasTVPreferredFocus={undefined}
             hitSlop={undefined}
             isTVSelectable={true}
             nativeID={undefined}
@@ -286,6 +291,7 @@ exports[`PostEditor renders correctly while saving 1`] = `
             accessibilityTraits={undefined}
             accessible={true}
             collapsable={undefined}
+            hasTVPreferredFocus={undefined}
             hitSlop={undefined}
             isTVSelectable={true}
             nativeID={undefined}
@@ -340,6 +346,7 @@ exports[`PostEditor renders correctly while saving 2`] = `
             accessibilityTraits={undefined}
             accessible={true}
             collapsable={undefined}
+            hasTVPreferredFocus={undefined}
             hitSlop={undefined}
             isTVSelectable={true}
             nativeID={undefined}
@@ -367,6 +374,7 @@ exports[`PostEditor renders correctly while saving 2`] = `
             accessibilityTraits={undefined}
             accessible={true}
             collapsable={undefined}
+            hasTVPreferredFocus={undefined}
             hitSlop={undefined}
             isTVSelectable={true}
             nativeID={undefined}
@@ -394,6 +402,7 @@ exports[`PostEditor renders correctly while saving 2`] = `
             accessibilityTraits={undefined}
             accessible={true}
             collapsable={undefined}
+            hasTVPreferredFocus={undefined}
             hitSlop={undefined}
             isTVSelectable={true}
             nativeID={undefined}
@@ -446,6 +455,7 @@ exports[`PostEditor renders correctly while saving 2`] = `
           accessibilityTraits={undefined}
           accessible={true}
           collapsable={undefined}
+          hasTVPreferredFocus={undefined}
           hitSlop={undefined}
           isTVSelectable={true}
           nativeID={undefined}
@@ -481,6 +491,7 @@ exports[`PostEditor renders correctly while saving 2`] = `
             accessibilityTraits={undefined}
             accessible={true}
             collapsable={undefined}
+            hasTVPreferredFocus={undefined}
             hitSlop={undefined}
             isTVSelectable={true}
             nativeID={undefined}
@@ -514,6 +525,7 @@ exports[`PostEditor renders correctly while saving 2`] = `
             accessibilityTraits={undefined}
             accessible={true}
             collapsable={undefined}
+            hasTVPreferredFocus={undefined}
             hitSlop={undefined}
             isTVSelectable={true}
             nativeID={undefined}
@@ -551,7 +563,7 @@ exports[`PostEditor renders with a post 1`] = `
   behavior="padding"
   keyboardVerticalOffset={64}
 >
-  <ScrollViewMock>
+  <ScrollView>
     <View>
       <SectionLabel>
         What are you posting today?
@@ -624,7 +636,7 @@ exports[`PostEditor renders with a post 1`] = `
         type="post"
       />
     </View>
-  </ScrollViewMock>
+  </ScrollView>
 </Unknown>
 `;
 

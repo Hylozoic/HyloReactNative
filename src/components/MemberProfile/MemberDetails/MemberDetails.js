@@ -22,7 +22,7 @@ export function editableFields (person) {
 
 export default class MemberDetails extends React.Component {
   static navigationOptions = ({ navigation }) => {
-    const onPress = navigation.goBack || (() => {})
+    const onPress = navigation.state.params.goBack || (() => {})
     return header(navigation, {
       title: 'About This Member',
       options: {
@@ -63,6 +63,10 @@ export default class MemberDetails extends React.Component {
 
   componentWillUnmount () {
     BackHandler.removeEventListener('hardwareBackPress', this.goBack)
+  }
+
+  shouldComponentUpdate (nextProps) {
+    return nextProps.isFocused
   }
 
   goBack = () => {
@@ -109,7 +113,7 @@ export default class MemberDetails extends React.Component {
   }
 
   render () {
-    const { goToCommunity, goToSkills, isMe, person, skills } = this.props
+    const { goToCommunity, goToSkills, isMe, person, skills, onPressMessages } = this.props
     const { editing, errors } = this.state
     const personEdits = this.state.person
 
@@ -119,6 +123,7 @@ export default class MemberDetails extends React.Component {
       <MemberHeader
         person={personEdits}
         isMe={isMe}
+        onPressMessages={onPressMessages}
         editProfile={this.editProfile}
         saveChanges={this.saveChanges}
         editable={editing}

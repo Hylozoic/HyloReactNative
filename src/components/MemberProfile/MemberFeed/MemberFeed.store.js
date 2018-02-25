@@ -32,6 +32,7 @@ export function fetchMemberPosts ({id, first = 10, offset}) {
       variables: {id, first, offset}
     },
     meta: {
+      afterInteractions: true,
       extractModel: 'Person',
       extractQueryResults: {
         getItems: get('payload.data.person.posts')
@@ -67,6 +68,7 @@ export function fetchMemberComments ({id, first = 20, offset}) {
       variables: { id, first, offset }
     },
     meta: {
+      afterInteractions: true,
       extractModel: 'Person',
       extractQueryResults: {
         getItems: get('payload.data.person.comments')
@@ -119,6 +121,7 @@ export function fetchMemberUpvotes ({id, first = 20, offset}) {
       variables: { id, first, offset }
     },
     meta: {
+      afterInteractions: true,
       extractModel: 'Person',
       extractQueryResults: {
         getItems: get('payload.data.person.votes')
