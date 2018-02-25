@@ -75,7 +75,7 @@ exports[`MemberBanner matches the last snapshot 1`] = `
 exports[`MemberBanner shows local images if present 1`] = `undefined`;
 
 exports[`MemberProfile doesnt have the flag content option 1`] = `
-<Connect(MemberFeed)
+<MemberFeed
   header={
     <View>
       <MemberBanner
@@ -111,7 +111,7 @@ exports[`MemberProfile doesnt have the flag content option 1`] = `
 `;
 
 exports[`MemberProfile matches the last snapshot 1`] = `
-<Connect(MemberFeed)
+<MemberFeed
   header={
     <View>
       <MemberBanner
@@ -145,6 +145,8 @@ exports[`MemberProfile matches the last snapshot 1`] = `
   id={1}
 />
 `;
+
+exports[`MemberProfile shows loading without a person 1`] = `<Loading />`;
 
 exports[`ReadMoreButton matches the last snapshot 1`] = `
 <View>
