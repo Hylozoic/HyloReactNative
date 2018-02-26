@@ -43,7 +43,7 @@
     "react-native-htmlview": "^0.12.0",
     "react-native-image-picker": "^0.26.7",
     "react-native-linear-gradient": "^2.3.0",
-    "react-native-onesignal": "^3.0.7",
+    "react-native-onesignal": "^3.1.0",
     "react-native-prompt-android": "^0.3.1",
     "react-native-restart": "^0.0.4",
     "react-native-sentry": "^0.34.0",
