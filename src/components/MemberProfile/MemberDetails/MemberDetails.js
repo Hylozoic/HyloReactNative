@@ -3,40 +3,53 @@ import {
   Text,
   View,
   TouchableOpacity,
-  ScrollView,
-  BackHandler
+  ScrollView
 } from 'react-native'
+import EntypoIcon from 'react-native-vector-icons/Entypo'
+import { debounce, find, get, isEmpty, pick } from 'lodash/fp'
+import { validateUser } from 'hylo-utils/validators'
+
 import Icon from '../../Icon'
-import StarIcon from '../../StarIcon'
 import Loading from '../../Loading'
 import MemberHeader, { Control } from '../MemberHeader'
-import EntypoIcon from 'react-native-vector-icons/Entypo'
+import StarIcon from '../../StarIcon'
+import header, { HeaderButton } from 'util/header'
 import styles from './MemberDetails.styles'
-import { isEmpty, pick } from 'lodash/fp'
-import header from 'util/header'
 
 export function editableFields (person) {
   return pick(['name', 'location', 'tagline', 'bio'], person)
 }
 
 export default class MemberDetails extends React.Component {
-  static navigationOptions = ({ navigation }) =>
-    header(navigation, { title: 'About This Member' })
+  static navigationOptions = ({ navigation }) => {
+    const editing = navigation.getParam('editing', false)
+    const isMe = navigation.getParam('isMe', false)
+
+    const subject = !editing && isMe ? 'You' : 'This Member'
+    const title = !editing ? `About ${subject}` : 'Edit Your Profile'
+    return header(navigation, { title })
+  }
 
   constructor (props) {
     super(props)
+    const { editing, isMe, person } = props
     this.state = {
-      editing: this.props.editing,
-      person: editableFields(props.person),
+      editing,
+      person: editableFields(person),
       errors: {}
     }
+    props.navigation.setParams({
+      editing,
+      headerRight: editing ? this.saveButton(this.isValid()) : null,
+      isMe
+    })
   }
 
   componentDidMount () {
     this.props.fetchPerson()
   }
 
-  componentDidUpdate (prevProps) {
+  componentDidUpdate (prevProps, prevState) {
     if (prevProps.id !== this.props.id) {
       this.props.fetchPerson()
     }
@@ -46,47 +59,69 @@ export default class MemberDetails extends React.Component {
         person: editableFields(this.props.person)
       })
     }
+
+    const isValid = this.isValid()
+    const wasValid = this.isValid(prevState.errors)
+    if ((!isValid && wasValid) || (isValid && !wasValid)) {
+      this.props.navigation.setParams({ headerRight: this.saveButton(isValid) })
+    }
   }
+
+  // Errors are strings, or null
+  isValid = (errors = this.state.errors) => !find(e => e !== null, errors)
 
   shouldComponentUpdate (nextProps) {
     return nextProps.isFocused
   }
 
-  validate = () => {
-    if (isEmpty(this.state.person.name)) {
-      this.setState({errors: {
-        ...this.state.errors,
-        name: 'Cannot be blank'
-      }})
-      return false
-    }
-    return true
-  }
+  validate = debounce(500, () => {
+    this.setState(
+      {
+        errors: {
+          // TODO: validate more fields!
+          name: validateUser.name(this.state.person.name)
+        }
+      })
+  })
 
   editProfile = () => {
-    this.setState({editing: true})
+    this.setState(
+      { editing: true },
+      () => this.props.navigation.setParams({
+        editing: true,
+        headerRight: this.saveButton(this.isValid())
+      })
+    )
   }
 
   updateSetting = setting => value => {
-    this.setState({
-      person: {
-        ...this.state.person,
-        [setting]: value
+    this.setState(
+      {
+        person: {
+          ...this.state.person,
+          [setting]: value
+        }
       },
-      errors: {
-        ...this.state.errors,
-        [setting]: false
-      }
-    })
+      this.validate
+    )
   }
 
+  saveButton = valid => <HeaderButton
+    disabled={!valid}
+    onPress={this.saveChanges}
+    text='Save' />
+
   saveChanges = () => {
-    if (this.validate()) {
+    if (this.isValid()) {
       this.props.updateUserSettings(this.state.person)
-      this.setState({editing: false})
-      return true
+      this.setState(
+        { editing: false },
+        () => this.props.navigation.setParams({
+          editing: false,
+          headerRight: null
+        })
+      )
     }
-    return false
   }
 
   render () {
