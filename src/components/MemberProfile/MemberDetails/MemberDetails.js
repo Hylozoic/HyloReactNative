@@ -7,30 +7,21 @@ import {
   BackHandler
 } from 'react-native'
 import Icon from '../../Icon'
-import { HeaderBackButton } from 'react-navigation'
 import StarIcon from '../../StarIcon'
 import Loading from '../../Loading'
 import MemberHeader, { Control } from '../MemberHeader'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
 import styles from './MemberDetails.styles'
 import { isEmpty, pick } from 'lodash/fp'
-import header, { tintColor } from 'util/header'
+import header from 'util/header'
 
 export function editableFields (person) {
   return pick(['name', 'location', 'tagline', 'bio'], person)
 }
 
 export default class MemberDetails extends React.Component {
-  static navigationOptions = ({ navigation }) => {
-    const onPress = navigation.state.params.goBack || (() => {})
-    return header(navigation, {
-      title: 'About This Member',
-      options: {
-        headerLeft: <HeaderBackButton onPress={onPress} tintColor={tintColor} />,
-        headerBackTitle: null
-      }
-    })
-  }
+  static navigationOptions = ({ navigation }) =>
+    header(navigation, { title: 'About This Member' })
 
   constructor (props) {
     super(props)
@@ -43,10 +34,6 @@ export default class MemberDetails extends React.Component {
 
   componentDidMount () {
     this.props.fetchPerson()
-    this.props.navigation.setParams({
-      goBack: this.goBack
-    })
-    BackHandler.addEventListener('hardwareBackPress', this.goBack)
   }
 
   componentDidUpdate (prevProps) {
@@ -61,18 +48,8 @@ export default class MemberDetails extends React.Component {
     }
   }
 
-  componentWillUnmount () {
-    BackHandler.removeEventListener('hardwareBackPress', this.goBack)
-  }
-
   shouldComponentUpdate (nextProps) {
     return nextProps.isFocused
-  }
-
-  goBack = () => {
-    if (this.saveChanges()) {
-      this.props.goToMemberProfile()
-    }
   }
 
   validate = () => {
