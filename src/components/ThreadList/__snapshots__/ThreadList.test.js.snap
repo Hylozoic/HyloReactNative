@@ -346,10 +346,11 @@ Object {
       "color": "black",
       "fontFamily": "Circular-Bold",
       "fontSize": 17,
-      "marginLeft": 15,
     },
     Object {
       "alignSelf": "center",
+      "flex": 1,
+      "textAlign": "center",
     },
   ],
 }

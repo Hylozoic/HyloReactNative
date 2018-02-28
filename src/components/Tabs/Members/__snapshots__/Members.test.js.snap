@@ -144,13 +144,16 @@ Object {
         showNotifications={[Function]}
     />
 </View>,
-  "headerTitle": <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
->
-    Members
-</Text>,
+  "headerTitle": "Members",
+  "headerTitleStyle": Object {
+    "alignSelf": "center",
+    "color": "black",
+    "flex": 1,
+    "fontFamily": "Circular-Bold",
+    "fontSize": 18,
+    "fontWeight": "200",
+    "textAlign": "center",
+  },
 }
 `;
 

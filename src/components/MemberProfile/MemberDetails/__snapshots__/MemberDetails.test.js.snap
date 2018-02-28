@@ -121,13 +121,6 @@ exports[`MemberCommunities matches the last snapshot 1`] = `
 
 exports[`MemberDetails has navigation options 1`] = `
 Object {
-  "headerBackTitle": null,
-  "headerLeft": <HeaderBackButton
-    onPress={[Function]}
-    pressColorAndroid="rgba(0, 0, 0, .32)"
-    tintColor="#808c9b"
-    truncatedTitle="Back"
-/>,
   "headerStyle": Object {
     "backgroundColor": "white",
     "paddingHorizontal": 10,
@@ -138,7 +131,6 @@ Object {
     "color": "black",
     "fontFamily": "Circular-Bold",
     "fontSize": 17,
-    "marginLeft": 15,
   },
 }
 `;

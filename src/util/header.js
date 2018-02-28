@@ -127,11 +127,6 @@ const styles = StyleSheet.create({
     color: 'black',
     fontFamily: 'Circular-Bold',
     fontSize: 17
-
-    // Required to avoid font-weight bug where RN goes looking for
-    // CustomFontName_bold.ttf, which doesn't exist:
-    // https://github.com/react-community/react-navigation/issues/542#issuecomment-283663786
-    // fontWeight: '200'
   },
   exIcon: {
     fontSize: 20
