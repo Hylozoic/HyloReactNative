@@ -115,7 +115,9 @@ const styles = StyleSheet.create({
     color: rhino20
   },
   center: {
-    alignSelf: 'center'
+    alignSelf: 'center',
+    flex: 1,
+    textAlign: 'center'
   },
   header: {
     paddingHorizontal: 10,
@@ -124,8 +126,7 @@ const styles = StyleSheet.create({
   title: {
     color: 'black',
     fontFamily: 'Circular-Bold',
-    fontSize: 17,
-    marginLeft: 15
+    fontSize: 17
 
     // Required to avoid font-weight bug where RN goes looking for
     // CustomFontName_bold.ttf, which doesn't exist:
