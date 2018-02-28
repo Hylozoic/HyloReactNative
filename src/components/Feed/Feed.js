@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { View } from 'react-native'
+import { View, Text } from 'react-native'
 import { get } from 'lodash/fp'
 
+import Button from '../Button'
 import FeedList from '../FeedList'
 import FeedBanner from '../FeedBanner'
 import SocketSubscriber from '../SocketSubscriber'
@@ -19,7 +20,9 @@ export default class Feed extends Component {
   }
 
   componentDidMount () {
-    if (this.props.community) this.props.navigation.setParams({communityName: this.props.community.name})
+    const { community, goToAllCommunities, navigation } = this.props
+    if (!community) goToAllCommunities()
+    if (community) navigation.setParams({communityName: this.props.community.name})
     const { fetchCommunityTopic } = this.props
     if (fetchCommunityTopic) fetchCommunityTopic()
   }
@@ -45,8 +48,10 @@ export default class Feed extends Component {
       topicName,
       topicSubscribed,
       postsTotal,
-      followersTotal
+      followersTotal,
+      currentUserPending
     } = this.props
+    if (!community && !currentUserPending) return <CreateCommunityPrompt goToCreateCommunity={() => {}} />
 
     return <View style={styles.container}>
       <FeedList
@@ -76,4 +81,14 @@ export default class Feed extends Component {
       {!topicName && community && <SocketSubscriber type='community' id={community.id} />}
     </View>
   }
+}
+
+export function CreateCommunityPrompt ({goToCreateCommunity}) {
+  return <View>
+    <Text>Theres no posts yet, try starting a community!</Text>
+    <Button
+      text='Create a Community'
+      onClick={() => console.log('click')}
+    />
+  </View>
 }

@@ -14,7 +14,11 @@ import {
   getCommunityTopic,
   setTopicSubscribe
 } from './Feed.store'
+import {
+  FETCH_CURRENT_USER
+} from 'store/actions/fetchCurrentUser'
 import { mapWhenFocused, mergeWhenFocused } from 'util/connector'
+import selectNetwork from '../../store/actions/selectNetwork'
 
 export function mapStateToProps (state, props) {
   const params = get('state.params', props.navigation) || {}
@@ -41,7 +45,8 @@ export function mapStateToProps (state, props) {
     postsTotal: get('postsTotal', communitySlug ? communityTopic : topic),
     followersTotal: get('followersTotal', communitySlug ? communityTopic : topic),
     topicName,
-    topicSubscribed
+    topicSubscribed,
+    currentUserPending: state.pending[FETCH_CURRENT_USER]
   }
 }
 
@@ -70,6 +75,7 @@ export function mapDispatchToProps (dispatch, { navigation }) {
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
   const { community, network, topic, topicName, topicSubscribed } = stateProps
+  const { navigation } = ownProps
   const communityId = get('id', community)
   const networkId = get('id', network)
   const slug = get('slug', community)
@@ -84,7 +90,10 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
       : () => {},
     setTopicSubscribe: topic && communityId
       ? () => dispatchProps.setTopicSubscribe(topic.id, communityId, !topicSubscribed)
-      : () => {}
+      : () => {},
+    goToAllCommunities: () => {
+      selectNetwork('all-communities')
+    }
   }
 }
 
