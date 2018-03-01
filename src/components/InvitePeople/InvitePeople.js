@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import { Clipboard, StyleSheet, Dimensions, Text, View, TextInput, TouchableOpacity } from 'react-native'
+import { Clipboard, StyleSheet, Dimensions, Text, View, TextInput, TouchableOpacity, KeyboardAvoidingView } from 'react-native'
 import { TabViewAnimated, TabBar } from 'react-native-tab-view'
 import Button from '../Button'
-import { caribbeanGreen, white, capeCod40 } from 'style/colors'
+import { caribbeanGreen, white, capeCod40, amaranth } from 'style/colors'
 import header from 'util/header'
 import { get, isEmpty } from 'lodash/fp'
 import { humanDate } from 'hylo-utils/text'
@@ -157,7 +157,9 @@ export class SendInvitesPage extends Component {
     const {
       emails,
       inputText,
-      copied
+      copied,
+      successMessage,
+      errorMessage
     } = this.state
 
     const {
@@ -176,6 +178,9 @@ export class SendInvitesPage extends Component {
         <Button text='Reset Link' onPress={this.resetLink} style={styles.button} />
         <Button text={copied ? 'Copied' : 'Copy Link'} onPress={this.copyToClipboard} style={styles.button} />
       </View>
+
+      {successMessage && <Text style={styles.successMessage}>{successMessage}</Text>}
+      {errorMessage && <Text style={styles.errorMessage}>{errorMessage}</Text>}
 
       <TextInput value={emails} placeholder='Type email addresses' onChangeText={(text) => this.setState({emails: text})} />
       <TextInput value={inputText} multiline numberOfLines={5} onChangeText={(text) => this.setState({inputText: text})} />
@@ -232,6 +237,12 @@ const styles = StyleSheet.create({
   label: {
     color: '#000',
     fontWeight: '400'
+  },
+  successMessage: {
+    color: caribbeanGreen
+  },
+  errorMessage: {
+    color: amaranth
   },
   buttonRow: {
     height: 100
