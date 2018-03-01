@@ -131,6 +131,7 @@ exports[`Member matches the last snapshot 1`] = `
 
 exports[`matches the last header snapshot 1`] = `
 Object {
+  "headerBackTitle": null,
   "headerLeft": <Connect(MenuButton)
     openDrawer={[Function]}
 />,

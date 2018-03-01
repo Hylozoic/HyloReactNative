@@ -327,6 +327,7 @@ exports[`ThreadList renders correctly 1`] = `
 
 exports[`ThreadList sets the navigationOptions 1`] = `
 Object {
+  "headerBackTitle": null,
   "headerLeft": <HeaderButton
     onPress={[Function]}
     text="Close"

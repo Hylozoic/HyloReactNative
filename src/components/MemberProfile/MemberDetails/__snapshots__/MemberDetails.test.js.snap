@@ -121,6 +121,7 @@ exports[`MemberCommunities matches the last snapshot 1`] = `
 
 exports[`MemberDetails has navigation options 1`] = `
 Object {
+  "headerBackTitle": null,
   "headerStyle": Object {
     "backgroundColor": "white",
     "paddingHorizontal": 10,
