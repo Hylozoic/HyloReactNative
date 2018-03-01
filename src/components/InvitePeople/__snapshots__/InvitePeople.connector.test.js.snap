@@ -62,6 +62,121 @@ Object {
 
 exports[`mergeProps merges the props 2`] = `
 Object {
+  "graphql": Object {
+    "query": "mutation ($communityId: ID) {
+        regenerateAccessCode(communityId: $communityId) {
+          id
+          invitePath
+        }
+      }",
+    "variables": Object {
+      "communityId": "99",
+    },
+  },
+  "meta": Object {
+    "extractModel": "Community",
+  },
+  "type": "InvitePeople/REGENERATE_ACCESS_CODE",
+}
+`;
+
+exports[`mergeProps merges the props 3`] = `
+Object {
+  "graphql": Object {
+    "query": "mutation ($communityId: ID, $data: InviteInput) {
+        createInvitation(communityId: $communityId, data: $data) {
+          invitations {
+            id,
+            email,
+            createdAt,
+            lastSentAt,
+            error
+          }
+        }
+      }",
+    "variables": Object {
+      "communityId": "99",
+      "data": Object {
+        "emails": Array [
+          "john@doe.com",
+        ],
+        "message": "MyMessage",
+      },
+    },
+  },
+  "meta": Object {
+    "communityId": "99",
+    "emails": Array [
+      "john@doe.com",
+    ],
+    "optimistic": true,
+  },
+  "type": "InvitePeople/CREATE_INVITATIONS",
+}
+`;
+
+exports[`mergeProps merges the props 4`] = `
+Object {
+  "graphql": Object {
+    "query": "mutation ($communityId: ID) {
+        reinviteAll(communityId: $communityId) {
+          success
+        }
+      }",
+    "variables": Object {
+      "communityId": "99",
+    },
+  },
+  "meta": Object {
+    "communityId": "99",
+    "optimistic": true,
+  },
+  "type": "InvitePeople/REINVITE_ALL",
+}
+`;
+
+exports[`mergeProps merges the props 5`] = `
+Object {
+  "graphql": Object {
+    "query": "mutation ($invitationToken: ID) {
+        expireInvitation(invitationId: $invitationToken) {
+          success
+        }
+      }",
+    "variables": Object {
+      "invitationToken": 10,
+    },
+  },
+  "meta": Object {
+    "invitationToken": 10,
+    "optimistic": true,
+  },
+  "type": "InvitePeople/EXPIRE_INVITATION",
+}
+`;
+
+exports[`mergeProps merges the props 6`] = `
+Object {
+  "graphql": Object {
+    "query": "mutation ($invitationToken: ID) {
+        resendInvitation(invitationId: $invitationToken) {
+          success
+        }
+      }",
+    "variables": Object {
+      "invitationToken": 10,
+    },
+  },
+  "meta": Object {
+    "invitationToken": 10,
+    "optimistic": true,
+  },
+  "type": "InvitePeople/RESEND_INVITATION",
+}
+`;
+
+exports[`mergeProps merges the props 7`] = `
+Object {
   "community": SessionBoundModel {
     "_fields": Object {
       "id": "99",

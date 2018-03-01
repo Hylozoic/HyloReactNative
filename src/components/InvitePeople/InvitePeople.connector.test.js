@@ -34,13 +34,17 @@ describe('mapStateToProps', () => {
 
 describe('mergeProps', () => {
   it('merges the props', () => {
-    const slug = 'foo'
     const dispatch = x => x
     const ownProps = {}
-    const stateProps = mapStateToProps(state, {match: {params: {slug}}})
+    const stateProps = mapStateToProps(state, {navigation: {state: {params: {id: 1}}}})
     const dispatchProps = mapDispatchToProps(dispatch, stateProps)
     const mergedProps = mergeProps(stateProps, dispatchProps, ownProps)
     expect(mergedProps.fetchCommunitySettings()).toMatchSnapshot()
+    expect(mergedProps.regenerateAccessCode()).toMatchSnapshot()
+    expect(mergedProps.createInvitations(['john@doe.com'], 'MyMessage')).toMatchSnapshot()
+    expect(mergedProps.reinviteAll()).toMatchSnapshot()
+    expect(mergedProps.expireInvitation(10)).toMatchSnapshot()
+    expect(mergedProps.resendInvitation(10)).toMatchSnapshot()
     expect(mergedProps).toMatchSnapshot()
   })
 })
