@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Clipboard, StyleSheet, Dimensions, Text, View, TextInput, TouchableOpacity, KeyboardAvoidingView } from 'react-native'
+import { Clipboard, StyleSheet, Dimensions, Text, View, TextInput, TouchableOpacity, ScrollView } from 'react-native'
 import { TabViewAnimated, TabBar } from 'react-native-tab-view'
 import Button from '../Button'
 import { caribbeanGreen, white, capeCod40, amaranth } from 'style/colors'
@@ -12,7 +12,7 @@ const initialLayout = {
   width: Dimensions.get('window').width
 }
 
-const parseEmailList = emails =>
+export const parseEmailList = emails =>
   (emails || '').split(/,|\n/).map(email => {
     var trimmed = email.trim()
     // use only the email portion of a "Joe Bloggs <joe@bloggs.org>" line
@@ -169,29 +169,32 @@ export class SendInvitesPage extends Component {
 
     const disableSendBtn = !!(isEmpty(emails) || pendingCreate)
 
-    return <View style={styles.container}>
-      <Text>Anyone with this link can join the community</Text>
-      {inviteLink && <Text>{inviteLink}</Text>}
-      {!inviteLink && <Text>No link has been set yet</Text>}
+    return (
+      <ScrollView>
+        <View style={styles.container}>
+          <Text>Anyone with this link can join the community</Text>
+          {inviteLink && <Text>{inviteLink}</Text>}
+          {!inviteLink && <Text>No link has been set yet</Text>}
 
-      <View style={styles.buttonRow}>
-        <Button text='Reset Link' onPress={this.resetLink} style={styles.button} />
-        <Button text={copied ? 'Copied' : 'Copy Link'} onPress={this.copyToClipboard} style={styles.button} />
-      </View>
+          <View style={styles.buttonRow}>
+            <Button text='Reset Link' onPress={this.resetLink} style={styles.button} />
+            <Button text={copied ? 'Copied' : 'Copy Link'} onPress={this.copyToClipboard} style={styles.button} />
+          </View>
 
-      {successMessage && <Text style={styles.successMessage}>{successMessage}</Text>}
-      {errorMessage && <Text style={styles.errorMessage}>{errorMessage}</Text>}
+          {successMessage && <Text style={styles.successMessage}>{successMessage}</Text>}
+          {errorMessage && <Text style={styles.errorMessage}>{errorMessage}</Text>}
 
-      <TextInput value={emails} placeholder='Type email addresses' onChangeText={(text) => this.setState({emails: text})} />
-      <TextInput value={inputText} multiline numberOfLines={5} onChangeText={(text) => this.setState({inputText: text})} />
+          <TextInput value={emails} placeholder='Type email addresses' onChangeText={(text) => this.setState({emails: text})} />
+          <TextInput value={inputText} multiline numberOfLines={5} onChangeText={(text) => this.setState({inputText: text})} />
 
-      <Button text='Send Invite' disabled={disableSendBtn} onPress={this.sendInvite} style={styles.button} />
-    </View>
+          <Button text='Send Invite' disabled={disableSendBtn} onPress={this.sendInvite} style={styles.button} />
+        </View>
+      </ScrollView>)
   }
 }
 
 export function PendingInvitesPage ({invites, expireInvitation, resendInvitation, reinviteAll}) {
-  return <View style={styles.pendingInvitesList}>
+  return <ScrollView style={styles.pendingInvitesList}>
     <Button text='Resend All' onPress={reinviteAll} />
     {isEmpty(invites)
     ? <Text style={styles.emptyList}>No pending invites</Text>
@@ -199,7 +202,7 @@ export function PendingInvitesPage ({invites, expireInvitation, resendInvitation
       <PendingInviteRow invite={invite} key={i} first={i === 0}
         expireInvitation={expireInvitation}
         resendInvitation={resendInvitation} />)}
-  </View>
+  </ScrollView>
 }
 
 export function PendingInviteRow ({ invite, first, expireInvitation, resendInvitation }) {
