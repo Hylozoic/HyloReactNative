@@ -102,7 +102,7 @@ class SendInvitesPage extends Component {
   }
 
   copyToClipboard = () => {
-    this.setTemporatyState('copied', true)
+    this.setTemporaryState('copied', true)
     Clipboard.setString(this.props.inviteLink)
   }
 
