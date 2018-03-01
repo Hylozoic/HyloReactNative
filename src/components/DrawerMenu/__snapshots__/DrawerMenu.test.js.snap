@@ -3,6 +3,14 @@
 exports[` 1`] = `
 <TouchableOpacity
   activeOpacity={0.2}
+  hitSlop={
+    Object {
+      "bottom": 10,
+      "left": 10,
+      "right": 15,
+      "top": 20,
+    }
+  }
   onPress={[Function]}
 >
   <Text

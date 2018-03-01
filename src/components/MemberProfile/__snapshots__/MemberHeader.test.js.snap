@@ -8,7 +8,6 @@ exports[`Control matches the last snapshot 1`] = `
       editable={true}
       multiline={true}
       numberOfLines={8}
-      onBlur={[Function]}
       onChangeText={undefined}
       placeholder="b"
       underlineColorAndroid="transparent"
