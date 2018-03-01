@@ -24,7 +24,7 @@ describe('InvitePeople', () => {
     const invites = [{
       id: 10,
       email: 'john@doe.com',
-      lastSentAt: new Date()
+      lastSentAt: new Date(99, 5, 24, 11, 33, 30, 0)
     }]
 
     const reinviteAll = jest.fn()
@@ -41,7 +41,7 @@ describe('InvitePeople', () => {
     const invite = {
       id: 10,
       email: 'john@doe.com',
-      lastSentAt: new Date()
+      lastSentAt: new Date(99, 5, 24, 11, 33, 30, 0)
     }
     const expireInvitation = jest.fn()
     const resendInvitation = jest.fn()

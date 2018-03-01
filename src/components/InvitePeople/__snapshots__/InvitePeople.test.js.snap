@@ -46,7 +46,7 @@ exports[`InvitePeople renders PendingInviteRow 1`] = `
     allowFontScaling={true}
     ellipsizeMode="tail"
   >
-    just now
+    18 years ago
   </Text>
   <TouchableOpacity
     activeOpacity={0.2}
@@ -104,7 +104,7 @@ exports[`InvitePeople renders PendingInvitesPage 1`] = `
       Object {
         "email": "john@doe.com",
         "id": 10,
-        "lastSentAt": 2018-03-01T08:30:47.842Z,
+        "lastSentAt": 1999-06-24T18:33:30.000Z,
       }
     }
     resendInvitation={[Function]}
