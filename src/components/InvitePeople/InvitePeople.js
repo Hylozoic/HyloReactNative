@@ -91,7 +91,7 @@ export default class InvitePeople extends Component {
   }
 }
 
-class SendInvitesPage extends Component {
+export class SendInvitesPage extends Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -185,25 +185,16 @@ class SendInvitesPage extends Component {
   }
 }
 
-class PendingInvitesPage extends Component {
-  render () {
-    const {
-      invites,
-      expireInvitation,
-      resendInvitation,
-      reinviteAll
-    } = this.props
-
-    return <View style={styles.pendingInvitesList}>
-      <Button text='Resend All' onPress={reinviteAll} />
-      {isEmpty(invites)
-      ? <Text style={styles.emptyList}>No pending invites</Text>
-      : invites.map((invite, i) =>
-        <PendingInviteRow invite={invite} key={i} first={i === 0}
-          expireInvitation={expireInvitation}
-          resendInvitation={resendInvitation} />)}
-    </View>
-  }
+export function PendingInvitesPage ({invites, expireInvitation, resendInvitation, reinviteAll}) {
+  return <View style={styles.pendingInvitesList}>
+    <Button text='Resend All' onPress={reinviteAll} />
+    {isEmpty(invites)
+    ? <Text style={styles.emptyList}>No pending invites</Text>
+    : invites.map((invite, i) =>
+      <PendingInviteRow invite={invite} key={i} first={i === 0}
+        expireInvitation={expireInvitation}
+        resendInvitation={resendInvitation} />)}
+  </View>
 }
 
 export function PendingInviteRow ({ invite, first, expireInvitation, resendInvitation }) {
