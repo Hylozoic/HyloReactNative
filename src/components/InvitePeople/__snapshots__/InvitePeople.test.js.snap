@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`InviteExpired matches the last snapshot 1`] = `
+<TabViewAnimated
+  canJumpToTab={[Function]}
+  initialLayout={
+    Object {
+      "height": 0,
+      "width": 750,
+    }
+  }
+  navigationState={
+    Object {
+      "index": 0,
+      "routes": Array [
+        Object {
+          "key": "0",
+          "title": "Send Invites",
+        },
+        Object {
+          "key": "1",
+          "title": "Pending Invites",
+        },
+      ],
+    }
+  }
+  onIndexChange={[Function]}
+  renderHeader={[Function]}
+  renderPager={[Function]}
+  renderScene={[Function]}
+  useNativeDriver={false}
+/>
+`;

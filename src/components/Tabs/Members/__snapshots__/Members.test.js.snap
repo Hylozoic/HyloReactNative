@@ -165,6 +165,10 @@ exports[`renders correctly with no community and isAll 1`] = `
           community={undefined}
           network={undefined}
         />
+        <Button
+          onPress={[Function]}
+          text="Invite People"
+        />
         <View>
           <View>
             <Icon
@@ -303,6 +307,40 @@ exports[`renders correctly with no community and isAll 1`] = `
               >
                 All Communities
               </Text>
+            </View>
+          </View>
+          <View>
+            <View
+              accessibilityComponentType={undefined}
+              accessibilityLabel={undefined}
+              accessibilityTraits={undefined}
+              accessible={true}
+              collapsable={undefined}
+              hasTVPreferredFocus={undefined}
+              hitSlop={undefined}
+              isTVSelectable={true}
+              nativeID={undefined}
+              onLayout={undefined}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              testID={undefined}
+              tvParallaxProperties={undefined}
+            >
+              <View>
+                <View>
+                  <Text
+                    accessible={true}
+                    allowFontScaling={true}
+                    ellipsizeMode="tail"
+                  >
+                    Invite People
+                  </Text>
+                </View>
+              </View>
             </View>
           </View>
           <View>

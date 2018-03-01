@@ -95,6 +95,11 @@ Object {
       "itemsById": Object {},
       "meta": Object {},
     },
+    "Invitation": Object {
+      "items": Array [],
+      "itemsById": Object {},
+      "meta": Object {},
+    },
     "Me": Object {
       "items": Array [],
       "itemsById": Object {},

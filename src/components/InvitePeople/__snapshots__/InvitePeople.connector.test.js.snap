@@ -1,0 +1,100 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mapStateToProps returns the right keys 1`] = `
+Object {
+  "community": SessionBoundModel {
+    "_fields": Object {
+      "id": "99",
+      "inviteLink": "/38adslkjlkj3",
+      "members": undefined,
+      "moderators": undefined,
+      "posts": undefined,
+      "slug": "foo",
+    },
+    "inviteLink": "/38adslkjlkj3",
+    "slug": "foo",
+  },
+  "inviteLink": "https://www.hylo.comundefined",
+  "invites": Array [
+    SessionBoundModel {
+      "_fields": Object {
+        "community": "99",
+        "email": "john@doe.com",
+        "id": "33",
+      },
+    },
+  ],
+  "pending": undefined,
+  "pendingCreate": undefined,
+}
+`;
+
+exports[`mergeProps merges the props 1`] = `
+Object {
+  "graphql": Object {
+    "query": "query ($communityId: ID) {
+        community (id: $communityId) {
+          id
+          name
+          slug
+          invitePath
+          pendingInvitations (first: 100) {
+            hasMore
+            items {
+              id
+              email
+              createdAt
+              lastSentAt
+            }
+          }
+        }
+      }",
+    "variables": Object {
+      "communityId": "99",
+    },
+  },
+  "meta": Object {
+    "extractModel": "Community",
+  },
+  "type": "InvitePeople/FETCH_COMMUNITY_SETTINGS",
+}
+`;
+
+exports[`mergeProps merges the props 2`] = `
+Object {
+  "community": SessionBoundModel {
+    "_fields": Object {
+      "id": "99",
+      "inviteLink": "/38adslkjlkj3",
+      "members": undefined,
+      "moderators": undefined,
+      "posts": undefined,
+      "slug": "foo",
+    },
+    "inviteLink": "/38adslkjlkj3",
+    "slug": "foo",
+  },
+  "createInvitations": [Function],
+  "createInvitationsMaker": [Function],
+  "expireInvitation": [Function],
+  "fetchCommunitySettings": [Function],
+  "fetchCommunitySettingsMaker": [Function],
+  "inviteLink": "https://www.hylo.comundefined",
+  "invites": Array [
+    SessionBoundModel {
+      "_fields": Object {
+        "community": "99",
+        "email": "john@doe.com",
+        "id": "33",
+      },
+    },
+  ],
+  "pending": undefined,
+  "pendingCreate": undefined,
+  "regenerateAccessCode": [Function],
+  "regenerateAccessCodeMaker": [Function],
+  "reinviteAll": [Function],
+  "reinviteAllMaker": [Function],
+  "resendInvitation": [Function],
+}
+`;
