@@ -13,6 +13,7 @@ import Loading from '../../Loading'
 import PopupMenuButton from '../../PopupMenuButton'
 import LinearGradient from 'react-native-linear-gradient'
 import styles from './Members.styles'
+import Button from '../../Button'
 
 export default class Members extends React.Component {
   static navigationOptions = ({ navigation, screenProps }) =>
@@ -22,6 +23,8 @@ export default class Members extends React.Component {
     const { hasMore, members, fetchMembers } = this.props
     if (isEmpty(members) && hasMore !== false) fetchMembers()
   }
+
+  goToInvitePeople = () => this.props.navigation.navigate('InvitePeople')
 
   componentDidMount () {
     this.fetchOrShowCached()
@@ -61,6 +64,9 @@ export default class Members extends React.Component {
 
     const header = <View>
       <Banner community={community} network={network} all={isAll} />
+      <Button
+        text='Invite People'
+        onPress={this.goToInvitePeople} />
       <View style={styles.listControls}>
         <View style={styles.searchWrapper}>
           <Icon style={styles.searchIcon} name='Search' size={30}
