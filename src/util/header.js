@@ -88,6 +88,7 @@ export default function header ({ goBack, state }, { headerBackButton, left, rig
     headerTintColor: tintColor,
     headerTitle: title || get('params.title', state),
     headerTitleStyle: styles.title,
+    headerBackTitle: null,
     ...options
   }
   if (left) {

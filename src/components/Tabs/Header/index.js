@@ -16,6 +16,7 @@ export default function Header (navigation, title) {
   const showNotifications = () => navigation.navigate('NotificationsList')
 
   return {
+    headerBackTitle: null,
     headerTitle: title,
     headerTitleStyle: styles.headerTitle,
     headerLeft: <MenuButton openDrawer={openDrawer} />,
