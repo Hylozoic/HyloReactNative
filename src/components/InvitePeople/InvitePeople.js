@@ -4,7 +4,7 @@ import { TabViewAnimated, TabBar } from 'react-native-tab-view'
 import Button from '../Button'
 import { caribbeanGreen, white, capeCod40, amaranth } from 'style/colors'
 import header from 'util/header'
-import { get, isEmpty } from 'lodash/fp'
+import { get, isEmpty, compact } from 'lodash/fp'
 import { humanDate } from 'hylo-utils/text'
 
 const initialLayout = {
@@ -13,12 +13,12 @@ const initialLayout = {
 }
 
 export const parseEmailList = emails =>
-  (emails || '').split(/,|\n/).map(email => {
+  compact((emails || '').split(/,|\n/).map(email => {
     var trimmed = email.trim()
     // use only the email portion of a "Joe Bloggs <joe@bloggs.org>" line
     var match = trimmed.match(/.*<(.*)>/)
     return match ? match[1] : trimmed
-  })
+  }))
 
 export default class InvitePeople extends Component {
   static navigationOptions = ({navigation}) => header(navigation, {title: 'Invite People'})

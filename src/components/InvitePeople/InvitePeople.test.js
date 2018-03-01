@@ -1,7 +1,7 @@
 import 'react-native'
 import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
-import InvitePeople, { PendingInvitesPage, SendInvitesPage, PendingInviteRow } from './InvitePeople'
+import InvitePeople, { PendingInvitesPage, SendInvitesPage, PendingInviteRow, parseEmailList } from './InvitePeople'
 
 describe('InvitePeople', () => {
   it('matches the last snapshot', () => {
@@ -10,6 +10,20 @@ describe('InvitePeople', () => {
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
+  })
+
+  it('parses emails correctly', () => {
+    const emails = 'asdlfkjf <joe@shoe.com>, joe@eee.com,, tom@fool \n joeii@gmail.com'
+    const parsed = parseEmailList(emails)
+    expect(parsed).toHaveLength(4)
+    expect(parsed[0]).toEqual('joe@shoe.com')
+    expect(parsed[2]).toEqual('tom@fool')
+    expect(parsed[3]).toEqual('joeii@gmail.com')
+
+    expect(parseEmailList('')).toHaveLength(0)
+    expect(parseEmailList(',')).toHaveLength(0)
+    expect(parseEmailList('   ')).toHaveLength(0)
+    expect(parseEmailList(' \n \n  ')).toHaveLength(0)
   })
 
   it('renders SendInvitesPage', () => {
