@@ -42,6 +42,8 @@ export default class ImagePicker extends Component {
 
     const pickerOptions = {
       title,
+      // TODO: fix take photo option on ios, then remove this
+      takePhotoButtonTitle: null,
       storageOptions: {
         skipBackup: true,
         path: 'images'
