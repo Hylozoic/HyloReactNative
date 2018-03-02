@@ -13,7 +13,6 @@ export default {
     backgroundColor: 'white'
   },
   icon: {
-    marginBottom: isIOS ? 27 : 0,
     paddingTop: isIOS ? 0 : 5
   },
   labelView: {

@@ -45,7 +45,11 @@ export function mapStateToProps (state, props) {
     network,
     sortBy,
     filter,
-    topic: topicName
+
+    // TODO: Establish whether `topic` is necessary here?
+    // Removing `topicName` breaks topic feeds.
+    topic: topicName,
+    topicName
   })
   const pending = state.pending[FETCH_POSTS]
   return {

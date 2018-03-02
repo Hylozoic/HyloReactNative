@@ -52,7 +52,7 @@
     "react-native-vector-icons": "^4.4.2",
     "react-native-webview-bridge-updated": "Hylozoic/react-native-webview-bridge#62f520e8",
     "react-native-zss-rich-text-editor": "Hylozoic/react-native-zss-rich-text-editor#6cb3038e",
-    "react-navigation": "^1.0.0-beta.19",
+    "react-navigation": "^1.2",
     "react-navigation-is-focused-hoc": "Hylozoic/react-navigation-is-focused-hoc#multiple-set-state",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
