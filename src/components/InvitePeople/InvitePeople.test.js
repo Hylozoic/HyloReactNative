@@ -1,8 +1,12 @@
-import 'react-native'
 import React from 'react'
+import { Clipboard } from 'react-native'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import InvitePeople, { PendingInvitesPage, SendInvitesPage, PendingInviteRow, parseEmailList } from './InvitePeople'
 import ReactTestRenderer from 'react-test-renderer'
+
+jest.mock('Clipboard', () => ({
+  setString: jest.fn()
+}))
 
 describe('InvitePeople', () => {
   it('matches the last snapshot', () => {
@@ -83,22 +87,14 @@ describe('InvitePeople', () => {
   })
 
   it('copies to clipboard', () => {
-    const setStringFn = jest.fn()
-    jest.mock('Clipboard', () => {
-      setString: setStringFn
-    })
-
     const props = {
       inviteLink: 'invitelinkhere'
     }
 
-    const instance = ReactTestRenderer.create(<InvitePeople {...props} />).getInstance()
+    const instance = ReactTestRenderer.create(<SendInvitesPage {...props} />).getInstance()
 
-    instance._handleIndexChange(1)
-    expect(instance.state.index).toEqual(1)
-
-    expect(instance._renderHeader({})).toMatchSnapshot()
-
+    instance.copyToClipboard()
+    expect(Clipboard.setString).toHaveBeenCalledWith('invitelinkhere')
   })
 
   it('renders PendingInvitesPage', () => {
