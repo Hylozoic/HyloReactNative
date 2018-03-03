@@ -56,7 +56,7 @@ export default class CommentEditor extends React.Component {
     return <Editor ref={ref => { this.editor = ref }}
       initialContent={content}
       navigation={navigation}
-      placeholder='Add a comment?'
+      placeholder='Add a comment...'
       onChange={content => this.setState({content})}
       communityId={navigation.state.params.communityId} />
   }
