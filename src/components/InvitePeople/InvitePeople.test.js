@@ -2,6 +2,7 @@ import 'react-native'
 import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import InvitePeople, { PendingInvitesPage, SendInvitesPage, PendingInviteRow, parseEmailList } from './InvitePeople'
+import ReactTestRenderer from 'react-test-renderer'
 
 describe('InvitePeople', () => {
   it('matches the last snapshot', () => {
@@ -10,6 +11,53 @@ describe('InvitePeople', () => {
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
+  })
+
+  it('has navigation options', () => {
+    const props = {navigation: {state: {params: {}}}}
+    expect(InvitePeople.navigationOptions(props)).toMatchSnapshot()
+  })
+
+  it('fetches communities on update', () => {
+    const props = {
+      community: { slug: 'foo' },
+      fetchCommunitySettings: jest.fn()
+    }
+    const prevPropsSameSlug = {
+      community: { slug: 'foo' },
+      fetchCommunitySettings: jest.fn()
+    }
+
+    const prevPropsDifferentSlug = {
+      community: { slug: 'bar' },
+      fetchCommunitySettings: jest.fn()
+    }
+
+    const instance = ReactTestRenderer.create(<InvitePeople {...props} />).getInstance()
+
+    expect(props.fetchCommunitySettings).toHaveBeenCalledTimes(1)
+    instance.componentDidUpdate(prevPropsSameSlug)
+    expect(props.fetchCommunitySettings).toHaveBeenCalledTimes(1)
+    instance.componentDidUpdate(prevPropsDifferentSlug)
+    expect(props.fetchCommunitySettings).toHaveBeenCalledTimes(2)
+  })
+
+  it('handles tab-view functions', () => {
+    const props = {
+      community: { slug: 'foo' },
+      fetchCommunitySettings: jest.fn()
+    }
+
+    const instance = ReactTestRenderer.create(<InvitePeople {...props} />).getInstance()
+
+    instance._handleIndexChange(1)
+    expect(instance.state.index).toEqual(1)
+
+    expect(instance._renderHeader({})).toMatchSnapshot()
+
+    expect(instance._renderScene({route: {key: '0'}})).toMatchSnapshot()
+    expect(instance._renderScene({route: {key: '1'}})).toMatchSnapshot()
+    expect(instance._renderScene({route: {key: '2'}})).toEqual(null)
   })
 
   it('parses emails correctly', () => {
@@ -32,6 +80,25 @@ describe('InvitePeople', () => {
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
+  })
+
+  it('copies to clipboard', () => {
+    const setStringFn = jest.fn()
+    jest.mock('Clipboard', () => {
+      setString: setStringFn
+    })
+
+    const props = {
+      inviteLink: 'invitelinkhere'
+    }
+
+    const instance = ReactTestRenderer.create(<InvitePeople {...props} />).getInstance()
+
+    instance._handleIndexChange(1)
+    expect(instance.state.index).toEqual(1)
+
+    expect(instance._renderHeader({})).toMatchSnapshot()
+
   })
 
   it('renders PendingInvitesPage', () => {

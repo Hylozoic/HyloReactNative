@@ -1,5 +1,63 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`InvitePeople handles tab-view functions 1`] = `
+<TabBar
+  getLabelText={[Function]}
+  indicatorStyle={
+    Object {
+      "backgroundColor": "#0DC39F",
+    }
+  }
+  labelStyle={
+    Object {
+      "color": "#000",
+      "fontWeight": "400",
+    }
+  }
+  tabStyle={
+    Object {
+      "width": 120,
+    }
+  }
+/>
+`;
+
+exports[`InvitePeople handles tab-view functions 2`] = `
+<SendInvitesPage
+  communityName={undefined}
+  createInvitations={undefined}
+  inviteLink={undefined}
+  pendingCreate={undefined}
+  regenerateAccessCode={undefined}
+/>
+`;
+
+exports[`InvitePeople handles tab-view functions 3`] = `
+<PendingInvitesPage
+  expireInvitation={undefined}
+  invites={undefined}
+  reinviteAll={undefined}
+  resendInvitation={undefined}
+/>
+`;
+
+exports[`InvitePeople has navigation options 1`] = `
+Object {
+  "headerStyle": Object {
+    "backgroundColor": "white",
+    "paddingHorizontal": 10,
+  },
+  "headerTintColor": "#808c9b",
+  "headerTitle": "Invite People",
+  "headerTitleStyle": Object {
+    "color": "black",
+    "fontFamily": "Circular-Bold",
+    "fontSize": 17,
+    "marginLeft": 15,
+  },
+}
+`;
+
 exports[`InvitePeople matches the last snapshot 1`] = `
 <TabViewAnimated
   canJumpToTab={[Function]}
@@ -92,7 +150,7 @@ exports[`InvitePeople renders PendingInviteRow 1`] = `
 `;
 
 exports[`InvitePeople renders PendingInvitesPage 1`] = `
-<View>
+<ScrollView>
   <Button
     onPress={[Function]}
     text="Resend All"
@@ -109,52 +167,54 @@ exports[`InvitePeople renders PendingInvitesPage 1`] = `
     }
     resendInvitation={[Function]}
   />
-</View>
+</ScrollView>
 `;
 
 exports[`InvitePeople renders SendInvitesPage 1`] = `
-<View>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-  >
-    Anyone with this link can join the community
-  </Text>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-  >
-    https://hylo.com/invitepathhere
-  </Text>
+<ScrollView>
   <View>
-    <Button
-      onPress={[Function]}
-      text="Reset Link"
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+    >
+      Anyone with this link can join the community
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+    >
+      https://hylo.com/invitepathhere
+    </Text>
+    <View>
+      <Button
+        onPress={[Function]}
+        text="Reset Link"
+      />
+      <Button
+        onPress={[Function]}
+        text="Copy Link"
+      />
+    </View>
+    <TextInput
+      allowFontScaling={true}
+      onChangeText={[Function]}
+      placeholder="Type email addresses"
+      value=""
+    />
+    <TextInput
+      allowFontScaling={true}
+      multiline={true}
+      numberOfLines={5}
+      onChangeText={[Function]}
+      value="Hey! Here's an invite to the undefined"
     />
     <Button
+      disabled={true}
       onPress={[Function]}
-      text="Copy Link"
+      text="Send Invite"
     />
   </View>
-  <TextInput
-    allowFontScaling={true}
-    onChangeText={[Function]}
-    placeholder="Type email addresses"
-    value=""
-  />
-  <TextInput
-    allowFontScaling={true}
-    multiline={true}
-    numberOfLines={5}
-    onChangeText={[Function]}
-    value="Hey! Here's an invite to the undefined"
-  />
-  <Button
-    disabled={true}
-    onPress={[Function]}
-    text="Send Invite"
-  />
-</View>
+</ScrollView>
 `;
