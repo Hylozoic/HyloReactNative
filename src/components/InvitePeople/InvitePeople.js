@@ -126,7 +126,7 @@ export class SendInvitesPage extends Component {
     const { createInvitations } = this.props
     const { emails, message } = this.state
 
-    createInvitations(parseEmailList(emails), message)
+    return createInvitations(parseEmailList(emails), message)
     .then(res => {
       this.sending = false
       const { invitations } = res.payload.data.createInvitation

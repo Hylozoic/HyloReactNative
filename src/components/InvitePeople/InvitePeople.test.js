@@ -97,6 +97,42 @@ describe('InvitePeople', () => {
     expect(Clipboard.setString).toHaveBeenCalledWith('invitelinkhere')
   })
 
+  it('resetLink works', () => {
+    const props = {
+      regenerateAccessCode: jest.fn()
+    }
+
+    const instance = ReactTestRenderer.create(<SendInvitesPage {...props} />).getInstance()
+
+    instance.resetLink()
+    expect(props.regenerateAccessCode).toHaveBeenCalledWith()
+  })
+
+  it('sends invites', async () => {
+    const props = {
+      createInvitations: jest.fn(() => Promise.resolve({
+        payload: {
+          data: {
+            createInvitation: {
+              invitations: [{email: 'john@doe.com'}, {email: 'peaceout@way.deep'}]
+            }
+          }
+        }
+      }))
+    }
+
+    const instance = ReactTestRenderer.create(<SendInvitesPage {...props} />).getInstance()
+    instance.setState({
+      emails: 'john@doe.com, peaceout@way.deep, ,  ',
+      message: 'hello world'
+    })
+
+    await instance.sendInvite()
+    expect(props.createInvitations).toHaveBeenCalledWith(['john@doe.com', 'peaceout@way.deep'], 'hello world')
+    expect(instance.state.emails).toEqual('')
+    expect(instance.state.successMessage).toEqual('Sent 2 emails.')
+  })
+
   it('renders PendingInvitesPage', () => {
     const invites = [{
       id: 10,
