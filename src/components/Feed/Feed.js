@@ -49,9 +49,11 @@ export default class Feed extends Component {
       topicSubscribed,
       postsTotal,
       followersTotal,
-      currentUserPending
+      currentUserPending,
+      goToCreateCommunityName
     } = this.props
-    if (!community && !currentUserPending) return <CreateCommunityPrompt goToCreateCommunity={() => {}} />
+    console.log({goToCreateCommunityName})
+    if (!community && !currentUserPending) return <CreateCommunityPrompt goToCreateCommunityName={goToCreateCommunityName} />
 
     return <View style={styles.container}>
       <FeedList
@@ -83,12 +85,13 @@ export default class Feed extends Component {
   }
 }
 
-export function CreateCommunityPrompt ({goToCreateCommunity}) {
+export function CreateCommunityPrompt ({goToCreateCommunityName}) {
   return <View>
-    <Text>Theres no posts yet, try starting a community!</Text>
+    <Text style={styles.promptText}>There's no posts yet, try starting a community!</Text>
     <Button
       text='Create a Community'
-      onClick={() => console.log('click')}
+      style={styles.button}
+      onPress={goToCreateCommunityName}
     />
   </View>
 }

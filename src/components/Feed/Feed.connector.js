@@ -69,13 +69,18 @@ export function mapDispatchToProps (dispatch, { navigation }) {
     ...bindActionCreators({
       fetchCommunityTopic,
       setTopicSubscribe
-    }, dispatch)
+    }, dispatch),
+    goToCreateCommunityName: () => {
+      navigation.navigate('CreateCommunityName')
+    },
+    goToAllCommunities: () => {
+      selectNetwork('all-communities')
+    }
   }
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
   const { community, network, topic, topicName, topicSubscribed } = stateProps
-  const { navigation } = ownProps
   const communityId = get('id', community)
   const networkId = get('id', network)
   const slug = get('slug', community)
@@ -90,10 +95,7 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
       : () => {},
     setTopicSubscribe: topic && communityId
       ? () => dispatchProps.setTopicSubscribe(topic.id, communityId, !topicSubscribed)
-      : () => {},
-    goToAllCommunities: () => {
-      selectNetwork('all-communities')
-    }
+      : () => {}
   }
 }
 
