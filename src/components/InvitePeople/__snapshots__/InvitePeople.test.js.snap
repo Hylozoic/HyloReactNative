@@ -43,6 +43,7 @@ exports[`InvitePeople handles tab-view functions 3`] = `
 
 exports[`InvitePeople has navigation options 1`] = `
 Object {
+  "headerBackTitle": null,
   "headerStyle": Object {
     "backgroundColor": "white",
     "paddingHorizontal": 10,
@@ -53,7 +54,6 @@ Object {
     "color": "black",
     "fontFamily": "Circular-Bold",
     "fontSize": 17,
-    "marginLeft": 15,
   },
 }
 `;
