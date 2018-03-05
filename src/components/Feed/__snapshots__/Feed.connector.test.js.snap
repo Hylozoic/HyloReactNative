@@ -8,6 +8,7 @@ Object {
   },
   "editPost": [Function],
   "fetchCommunityTopic": [Function],
+  "goToAllCommunities": [Function],
   "goToCommunity": [Function],
   "newPost": [Function],
   "otherProp1": "foo1",
