@@ -2,10 +2,11 @@ import React, { Component } from 'react'
 import { Clipboard, StyleSheet, Dimensions, Text, View, TextInput, TouchableOpacity, ScrollView } from 'react-native'
 import { TabViewAnimated, TabBar } from 'react-native-tab-view'
 import Button from '../Button'
-import { caribbeanGreen, white, capeCod40, amaranth } from 'style/colors'
+import { caribbeanGreen, white, capeCod40, amaranth, rhino20 } from 'style/colors'
 import header from 'util/header'
 import { get, isEmpty, compact } from 'lodash/fp'
 import { humanDate } from 'hylo-utils/text'
+const screenWidth = Dimensions.get('window').width
 
 const initialLayout = {
   height: 0,
@@ -172,22 +173,41 @@ export class SendInvitesPage extends Component {
     return (
       <ScrollView>
         <View style={styles.container}>
-          <Text>Anyone with this link can join the community</Text>
-          {inviteLink && <Text>{inviteLink}</Text>}
+          <Text style={styles.joinCommunityText}>Anyone with this link can join the community</Text>
+          {inviteLink && <Text style={styles.joinCommunityLink}>{inviteLink}</Text>}
           {!inviteLink && <Text>No link has been set yet</Text>}
 
           <View style={styles.buttonRow}>
-            <Button text='Reset Link' onPress={this.resetLink} style={styles.button} />
-            <Button text={copied ? 'Copied' : 'Copy Link'} onPress={this.copyToClipboard} style={styles.button} />
+            <Button text='Reset Link' onPress={this.resetLink} style={styles.resetLinkButton} />
+            <Button text={copied ? 'Copied' : 'Copy Link'} onPress={this.copyToClipboard} style={styles.copyLinkButton} />
           </View>
 
           {successMessage && <Text style={styles.successMessage}>{successMessage}</Text>}
           {errorMessage && <Text style={styles.errorMessage}>{errorMessage}</Text>}
 
-          <TextInput value={emails} placeholder='Type email addresses' onChangeText={(text) => this.setState({emails: text})} />
-          <TextInput value={inputText} multiline numberOfLines={5} onChangeText={(text) => this.setState({inputText: text})} />
+          <TextInput
+            value={emails}
+            placeholder='Type email addresses'
+            onChangeText={(text) => this.setState({emails: text})}
+            style={styles.textInput}
+            underlineColorAndroid={styles.androidInvisibleUnderline}
+          />
+          <TextInput
+            value={inputText}
+            multiline
+            numberOfLines={5}
+            underlineColorAndroid={styles.androidInvisibleUnderline}
+            style={styles.textInput}
+            onChangeText={(text) => this.setState({inputText: text})}
+          />
 
-          <Button text='Send Invite' disabled={disableSendBtn} onPress={this.sendInvite} style={styles.button} />
+          <Button
+            text='Send Invite'
+            disabled={disableSendBtn}
+            onPress={this.sendInvite}
+            style={styles.sendInviteButton}
+          />
+
         </View>
       </ScrollView>)
   }
@@ -223,7 +243,7 @@ export function PendingInviteRow ({ invite, first, expireInvitation, resendInvit
   </View>
 }
 
-const styles = StyleSheet.create({
+const styles = {
   container: {
     flex: 1,
     backgroundColor: white
@@ -232,30 +252,29 @@ const styles = StyleSheet.create({
     backgroundColor: white
   },
   tab: {
-    width: 120
+    width: screenWidth / 2
   },
   indicator: {
     backgroundColor: caribbeanGreen
   },
   label: {
     color: '#000',
-    fontWeight: '400'
+    fontFamily: 'Circular-Book'
   },
   successMessage: {
-    color: caribbeanGreen
+    color: caribbeanGreen,
+    marginLeft: 18
   },
   errorMessage: {
-    color: amaranth
+    color: amaranth,
+    marginLeft: 18
   },
   buttonRow: {
-    height: 100
-  },
-  button: {
-    width: 134,
-    height: 30,
-    backgroundColor: white,
-    borderColor: caribbeanGreen,
-    color: caribbeanGreen
+    height: 100,
+    flex: 1,
+    flexDirection: 'row',
+    marginLeft: 18,
+    marginBottom: -45
   },
   pendingInvitesList: {
     borderTopWidth: StyleSheet.hairlineWidth,
@@ -273,5 +292,47 @@ const styles = StyleSheet.create({
     height: 44,
     flexDirection: 'row',
     alignItems: 'center'
-  }
-})
+  },
+  joinCommunityText: {
+    marginTop: 30,
+    marginLeft: 18,
+    marginBottom: 6
+  },
+  joinCommunityLink: {
+    color: caribbeanGreen,
+    marginLeft: 18,
+    marginBottom: 24
+  },
+  copyLinkButton: {
+    height: 36,
+    backgroundColor: white,
+    width: 110,
+    borderColor: caribbeanGreen,
+    color: caribbeanGreen,
+    fontSize: 14,
+    marginRight: 14
+  },
+  resetLinkButton: {
+    height: 36,
+    backgroundColor: white,
+    width: 110,
+    borderColor: rhino20,
+    color: rhino20,
+    fontSize: 14,
+    marginRight: 14
+  },
+  textInput: {
+    borderColor: rhino20,
+    borderWidth: 2,
+    marginLeft: 18,
+    marginRight: 18,
+    marginBottom: 10
+  },
+  sendInviteButton: {
+    width: 200,
+    height: 36,
+    marginLeft: 'auto',
+    marginRight: 18
+  },
+  androidInvisibleUnderline: 'rgba(0,0,0,0)'
+}
