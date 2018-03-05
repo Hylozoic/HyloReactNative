@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { get } from 'lodash/fp'
+import { isEmpty } from 'lodash'
 
 import getMe from '../../store/selectors/getMe'
 import getNetwork from '../../store/selectors/getNetwork'
@@ -19,6 +20,7 @@ import {
 } from 'store/actions/fetchCurrentUser'
 import { mapWhenFocused, mergeWhenFocused } from 'util/connector'
 import selectNetwork from '../../store/actions/selectNetwork'
+import getMemberships from '../../store/selectors/getMemberships'
 
 export function mapStateToProps (state, props) {
   const params = get('state.params', props.navigation) || {}
@@ -37,6 +39,8 @@ export function mapStateToProps (state, props) {
     getCommunityTopic(state, {topicName, slug: community.slug})
   const topicSubscribed = topicName && communityTopic.isSubscribed
   const topic = get('topic', communityTopic)
+  const currentUserHasMemberships = !isEmpty(getMemberships(state))
+
   return {
     currentUser,
     community,
@@ -46,7 +50,8 @@ export function mapStateToProps (state, props) {
     followersTotal: get('followersTotal', communitySlug ? communityTopic : topic),
     topicName,
     topicSubscribed,
-    currentUserPending: state.pending[FETCH_CURRENT_USER]
+    currentUserPending: state.pending[FETCH_CURRENT_USER],
+    currentUserHasMemberships
   }
 }
 

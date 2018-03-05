@@ -52,10 +52,10 @@ export default class Feed extends Component {
       postsTotal,
       followersTotal,
       currentUserPending,
-      goToCreateCommunityName
+      goToCreateCommunityName,
+      currentUserHasMemberships
     } = this.props
-    console.log({goToCreateCommunityName})
-    if (!community && !currentUserPending) return <CreateCommunityPrompt goToCreateCommunityName={goToCreateCommunityName} />
+    if (!currentUserHasMemberships && !currentUserPending) return <CreateCommunityPrompt goToCreateCommunityName={goToCreateCommunityName} />
 
     return <View style={styles.container}>
       <FeedList
