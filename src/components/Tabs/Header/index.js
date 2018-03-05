@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, View } from 'react-native'
+import { View } from 'react-native'
 import { get } from 'lodash/fp'
 
 import MenuButton from './MenuButton'
@@ -16,7 +16,9 @@ export default function Header (navigation, title) {
   const showNotifications = () => navigation.navigate('NotificationsList')
 
   return {
-    headerTitle: <Text style={styles.headerTitle}>{title}</Text>,
+    headerBackTitle: null,
+    headerTitle: title,
+    headerTitleStyle: styles.headerTitle,
     headerLeft: <MenuButton openDrawer={openDrawer} />,
     headerRight: <View style={styles.controls}>
       <MessagesIcon
