@@ -3,7 +3,6 @@ import { Text, View, Image, TouchableOpacity } from 'react-native'
 import Loading from '../Loading'
 import styles from './CommunitySettings.styles'
 import ImagePicker from '../ImagePicker'
-import FlagContent from '../FlagContent'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
 import defaultBanner from '../../assets/default-user-banner.jpg'
 import header from 'util/header'
@@ -18,18 +17,14 @@ export default class CommunitySettings extends React.Component {
       }
     })
 
-  state = {
-    flaggingVisible: false
-  }
-
   componentDidMount () {
-    // this.props.fetchPerson()
+    this.props.fetchCommunitySettings()
   }
 
   componentDidUpdate (prevProps) {
-    // if (prevProps.id !== this.props.id) {
-    //   this.props.fetchPerson()
-    // }
+    if (prevProps.id !== this.props.id) {
+      this.props.fetchCommunitySettings()
+    }
   }
 
   shouldComponentUpdate (nextProps) {
@@ -38,30 +33,12 @@ export default class CommunitySettings extends React.Component {
 
   render () {
     const {
-      canFlag,
-      goToEdit,
-      id,
       isFocused,
       canEdit,
-      onPressMessages,
       community,
       updateUserSettings
     } = this.props
-    const { flaggingVisible } = this.state
     if (!community) return <Loading />
-
-    let flagMember
-    if (canFlag) {
-      flagMember = () => {
-        this.setState({flaggingVisible: true})
-      }
-    }
-
-    // Used to generate a link to this post from the backend.
-    const linkData = {
-      id,
-      type: 'member'
-    }
 
     return <View>
       <CommunityBanner
@@ -69,10 +46,6 @@ export default class CommunitySettings extends React.Component {
         canEdit={canEdit}
         community={community}
         updateUserSettings={updateUserSettings} />
-      {flaggingVisible && <FlagContent type='member'
-        linkData={linkData}
-        onClose={() => this.setState({flaggingVisible: false})} />
-      }
     </View>
   }
 }

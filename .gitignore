@@ -58,3 +58,6 @@ coverage/
 # Google login
 google-services.json
 GoogleService-Info.plist
+
+# Personal
+androidemulator
