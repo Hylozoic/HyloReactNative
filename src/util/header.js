@@ -88,6 +88,7 @@ export default function header ({ goBack, state }, { headerBackButton, left, rig
     headerTintColor: tintColor,
     headerTitle: title || get('params.title', state),
     headerTitleStyle: styles.title,
+    headerBackTitle: null,
     ...options
   }
   if (left) {
@@ -115,7 +116,9 @@ const styles = StyleSheet.create({
     color: rhino20
   },
   center: {
-    alignSelf: 'center'
+    alignSelf: 'center',
+    flex: 1,
+    textAlign: 'center'
   },
   header: {
     paddingHorizontal: 10,
@@ -124,13 +127,7 @@ const styles = StyleSheet.create({
   title: {
     color: 'black',
     fontFamily: 'Circular-Bold',
-    fontSize: 17,
-    marginLeft: 15
-
-    // Required to avoid font-weight bug where RN goes looking for
-    // CustomFontName_bold.ttf, which doesn't exist:
-    // https://github.com/react-community/react-navigation/issues/542#issuecomment-283663786
-    // fontWeight: '200'
+    fontSize: 17
   },
   exIcon: {
     fontSize: 20

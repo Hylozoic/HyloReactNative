@@ -55,13 +55,11 @@ export default function MemberHeader ({
 }
 
 export class Control extends React.Component {
-  focus = () => {
-    this.input && this.input.focus()
-  }
+  focus = () => this.input && this.input.focus()
 
   render () {
     const {
-      value, onChangeText, editable = false, style, onBlur, multiline,
+      value, onChangeText, editable = false, style, multiline,
       hideEditIcon, error, placeholder, isMe
     } = this.props
     return <View style={[styles.control, editable && styles.editableControl]}>
@@ -73,7 +71,6 @@ export class Control extends React.Component {
             value={value}
             onChangeText={onChangeText}
             editable={editable}
-            onBlur={onBlur}
             placeholder={isMe ? placeholder : ''}
             multiline={multiline}
             numberOfLines={multiline ? 8 : 1}
