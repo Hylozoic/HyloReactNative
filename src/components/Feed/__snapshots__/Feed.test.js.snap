@@ -1,45 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
-<View>
-  <Connect(FeedList)
-    community={
-      Object {
-        "id": "1",
-      }
-    }
-    editPost={[Function]}
-    goToCommunity={[Function]}
-    header={
-      <FeedBanner
-        all={false}
-        community={
-          Object {
-            "id": "1",
-          }
-        }
-        currentUser={
-          Object {
-            "id": "2",
-          }
-        }
-        followersTotal={undefined}
-        network={undefined}
-        newPost={[Function]}
-        postsTotal={undefined}
-        setTopicSubscribe={undefined}
-        topicName="amazing"
-        topicSubscribed={undefined}
-      />
-    }
-    navigation={Object {}}
-    network={undefined}
-    screenProps={undefined}
-    showCommunities={false}
-    showMember={undefined}
-    showPost={[Function]}
-    showTopic={undefined}
-    topicName="amazing"
-  />
-</View>
+<CreateCommunityPrompt
+  goToCreateCommunityName={undefined}
+/>
 `;

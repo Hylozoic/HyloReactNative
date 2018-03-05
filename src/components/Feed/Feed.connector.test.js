@@ -18,7 +18,10 @@ describe('mapStateToProps', () => {
       network: false,
       topic: undefined,
       topicSubscribed: undefined,
-      topicName: undefined
+      topicName: undefined,
+      followersTotal: undefined,
+      postsTotal: undefined,
+      currentUserHasMemberships: false
     })
   })
 
@@ -45,7 +48,8 @@ describe('mapStateToProps', () => {
       postsTotal: 20,
       topic,
       topicName: 'logistics',
-      topicSubscribed: false
+      topicSubscribed: false,
+      currentUserHasMemberships: false
     })
   })
 

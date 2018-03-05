@@ -22,8 +22,7 @@ export default class Feed extends Component {
   }
 
   componentDidMount () {
-    const { community, goToAllCommunities, navigation } = this.props
-    if (!community) goToAllCommunities()
+    const { community, navigation } = this.props
     if (community) navigation.setParams({communityName: this.props.community.name})
     const { fetchCommunityTopic } = this.props
     if (fetchCommunityTopic) fetchCommunityTopic()
@@ -51,11 +50,10 @@ export default class Feed extends Component {
       topicSubscribed,
       postsTotal,
       followersTotal,
-      currentUserPending,
       goToCreateCommunityName,
       currentUserHasMemberships
     } = this.props
-    if (!currentUserHasMemberships && !currentUserPending) return <CreateCommunityPrompt goToCreateCommunityName={goToCreateCommunityName} />
+    if (!currentUserHasMemberships) return <CreateCommunityPrompt goToCreateCommunityName={goToCreateCommunityName} />
 
     return <View style={styles.container}>
       <FeedList

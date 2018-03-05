@@ -15,11 +15,7 @@ import {
   getCommunityTopic,
   setTopicSubscribe
 } from './Feed.store'
-import {
-  FETCH_CURRENT_USER
-} from 'store/actions/fetchCurrentUser'
 import { mapWhenFocused, mergeWhenFocused } from 'util/connector'
-import selectNetwork from '../../store/actions/selectNetwork'
 import getMemberships from '../../store/selectors/getMemberships'
 
 export function mapStateToProps (state, props) {
@@ -50,7 +46,6 @@ export function mapStateToProps (state, props) {
     followersTotal: get('followersTotal', communitySlug ? communityTopic : topic),
     topicName,
     topicSubscribed,
-    currentUserPending: state.pending[FETCH_CURRENT_USER],
     currentUserHasMemberships
   }
 }
@@ -77,9 +72,6 @@ export function mapDispatchToProps (dispatch, { navigation }) {
     }, dispatch),
     goToCreateCommunityName: () => {
       navigation.navigate('CreateCommunityName')
-    },
-    goToAllCommunities: () => {
-      selectNetwork('all-communities')
     }
   }
 }
