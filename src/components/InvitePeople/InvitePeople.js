@@ -215,7 +215,7 @@ export class SendInvitesPage extends Component {
 
 export function PendingInvitesPage ({invites, expireInvitation, resendInvitation, reinviteAll}) {
   return <ScrollView style={styles.pendingInvitesList}>
-    <Button text='Resend All' onPress={reinviteAll} />
+    <Button text='Resend All' onPress={reinviteAll} style={styles.resendAllButton} />
     {isEmpty(invites)
     ? <Text style={styles.emptyList}>No pending invites</Text>
     : invites.map((invite, i) =>
@@ -227,19 +227,25 @@ export function PendingInvitesPage ({invites, expireInvitation, resendInvitation
 
 export function PendingInviteRow ({ invite, first, expireInvitation, resendInvitation }) {
   const { id, email, lastSentAt } = invite
-  return <View style={[styles.row, first && styles.firstRow]}>
-    <Text>{email}</Text>
-    <Text>{humanDate(lastSentAt)}</Text>
-    <TouchableOpacity
-      onPress={() => expireInvitation(id)}
-      hitSlop={{top: 10, bottom: 10, left: 10, right: 10}}>
-      <Text>Expire</Text>
-    </TouchableOpacity>
-    <TouchableOpacity
-      onPress={() => !invite.resent && resendInvitation(id)}
-      hitSlop={{top: 10, bottom: 10, left: 10, right: 10}}>
-      <Text>{invite.resent ? 'Sent' : 'Resend'}</Text>
-    </TouchableOpacity>
+  return <View style={styles.rowContainer}>
+    <View style={styles.nameRow}>
+      <Text style={styles.pendingInviteEmail}>{email}</Text>
+    </View>
+    <View style={styles.actionRow}>
+      <Text style={styles.timeAgoText}>{humanDate(lastSentAt)}</Text>
+      <View style={styles.actionItems}>
+        <TouchableOpacity
+          onPress={() => expireInvitation(id)}
+          hitSlop={{top: 10, bottom: 10, left: 10, right: 10}}>
+          <Text style={styles.expireText}>Expire</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => !invite.resent && resendInvitation(id)}
+          hitSlop={{top: 10, bottom: 10, left: 10, right: 10}}>
+          <Text style={styles.resendText}>{invite.resent ? 'Sent' : 'Resend'}</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
   </View>
 }
 
@@ -274,27 +280,39 @@ const styles = {
     flex: 1,
     flexDirection: 'row',
     marginLeft: 18,
-    marginBottom: -45
+    marginBottom: -45,
+    marginTop: -10
   },
   pendingInvitesList: {
     borderTopWidth: StyleSheet.hairlineWidth,
     borderTopColor: capeCod40,
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: capeCod40,
-    paddingLeft: 15
+    paddingLeft: 18,
+    paddingRight: 18
   },
   emptyList: {
     paddingVertical: 10
   },
-  row: {
-    borderTopWidth: StyleSheet.hairlineWidth,
-    borderTopColor: capeCod40,
-    height: 44,
+  nameRow: {
+    paddingTop: 18,
+    paddingBottom: 18,
+    height: 20,
     flexDirection: 'row',
     alignItems: 'center'
   },
+  actionRow: {
+    paddingBottom: 18,
+    height: 20,
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  rowContainer: {
+    borderTopWidth: StyleSheet.hairlineWidth,
+    borderTopColor: capeCod40
+  },
   joinCommunityText: {
-    marginTop: 30,
+    marginTop: 20,
     marginLeft: 18,
     marginBottom: 6
   },
@@ -332,7 +350,37 @@ const styles = {
     width: 200,
     height: 36,
     marginLeft: 'auto',
-    marginRight: 18
+    marginRight: 18,
+    fontSize: 14
+  },
+  resendAllButton: {
+    marginBottom: 18,
+    marginTop: 18,
+    fontSize: 14,
+    height: 36,
+    backgroundColor: white,
+    borderColor: caribbeanGreen,
+    color: caribbeanGreen
+  },
+  pendingInviteEmail: {
+
+  },
+  expireText: {
+    fontSize: 14,
+    color: 'red'
+  },
+  resendText: {
+    fontSize: 14,
+    color: caribbeanGreen,
+    marginLeft: 20
+  },
+  actionItems: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginLeft: 'auto'
+  },
+  timeAgoText: {
+    color: rhino20
   },
   androidInvisibleUnderline: 'rgba(0,0,0,0)'
 }
