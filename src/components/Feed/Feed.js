@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, Image } from 'react-native'
 import { get } from 'lodash/fp'
 
 import Button from '../Button'
@@ -7,6 +7,8 @@ import FeedList from '../FeedList'
 import FeedBanner from '../FeedBanner'
 import SocketSubscriber from '../SocketSubscriber'
 import styles from './Feed.styles'
+
+const axolotlImage = require('../../assets/hey-axolotl.png')
 
 export default class Feed extends Component {
   state = {showNotification: false}
@@ -86,8 +88,9 @@ export default class Feed extends Component {
 }
 
 export function CreateCommunityPrompt ({goToCreateCommunityName}) {
-  return <View>
+  return <View style={styles.container}>
     <Text style={styles.promptText}>There's no posts yet, try starting a community!</Text>
+    <Image style={styles.image} source={axolotlImage} />
     <Button
       text='Create a Community'
       style={styles.button}
