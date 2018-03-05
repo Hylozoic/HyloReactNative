@@ -12,13 +12,7 @@ import header from 'util/header'
 
 export default class MemberProfile extends React.Component {
   static navigationOptions = ({ navigation }) =>
-    header(navigation, {
-      headerBackButton: () => navigation.navigate('Members'),
-      title: 'Member',
-      options: {
-        headerBackTitle: null
-      }
-    })
+    header(navigation, { title: 'Member' })
 
   state = {
     flaggingVisible: false

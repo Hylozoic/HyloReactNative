@@ -76,7 +76,7 @@ DrawerMenu.propTypes = {
 }
 
 export function TextButton ({ text, onPress }) {
-  return <TouchableOpacity onPress={onPress} style={styles.footerButton}>
+  return <TouchableOpacity onPress={onPress} style={styles.footerButton} hitSlop={{top: 20, bottom: 10, left: 10, right: 15}}>
     <Text style={{color: 'white', fontSize: 14}}>{text}</Text>
   </TouchableOpacity>
 }

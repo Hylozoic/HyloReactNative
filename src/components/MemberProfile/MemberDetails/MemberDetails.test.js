@@ -7,6 +7,9 @@ import { pick } from 'lodash/fp'
 
 jest.mock('react-native-device-info')
 jest.mock('TextInput', () => 'TextInput')
+jest.mock('lodash/fp/debounce', () => ({
+  debounce: (timeout, fn) => fn
+}))
 
 describe('MemberDetails', () => {
   const navigation = {setParams: () => {}}
@@ -32,7 +35,12 @@ describe('MemberDetails', () => {
   })
 
   it('has navigation options', () =>
-    expect(MemberDetails.navigationOptions({navigation: {state: {params: {}}}})).toMatchSnapshot())
+    expect(MemberDetails.navigationOptions({
+      navigation: {
+        state: {params: {}},
+        getParam: jest.fn()
+      }
+    })).toMatchSnapshot())
 
   describe('componentDidMount', () => {
     it('sets the state when person changes', () => {
@@ -58,26 +66,8 @@ describe('MemberDetails', () => {
 
       const instance = ReactTestRenderer.create(<MemberDetails {...props} />).getInstance()
       instance.setState({person: {}})
-      instance.componentDidUpdate(prevProps)
+      instance.componentDidUpdate(prevProps, {})
       expect(instance.state.person).toEqual(pick(['name', 'location', 'tagline', 'bio'], props.person))
-    })
-  })
-
-  describe('goBack', () => {
-    it('calls goToMemberDetails when saveChanges succeeds', () => {
-      const props = {
-        isFocused: true,
-        id: 12,
-        person: {},
-        fetchPerson: () => {},
-        navigation,
-        goToMemberProfile: jest.fn()
-      }
-
-      const instance = ReactTestRenderer.create(<MemberDetails {...props} />).getInstance()
-      instance.saveChanges = () => true
-      instance.goBack()
-      expect(props.goToMemberProfile).toHaveBeenCalledWith()
     })
   })
 
@@ -94,7 +84,7 @@ describe('MemberDetails', () => {
       instance.setState({
         person: {name: 'Sue'}
       })
-      expect(instance.validate()).toEqual(true)
+      expect(instance.state.errors.name).toEqual(undefined)
     })
 
     it('returns false and sets error when name is empty', () => {
@@ -109,8 +99,8 @@ describe('MemberDetails', () => {
       instance.setState({
         person: {name: ''}
       })
-      expect(instance.validate()).toEqual(false)
-      expect(instance.state.errors.name).toEqual('Cannot be blank')
+      instance.validate()
+      expect(instance.state.errors.name).toEqual('Name must not consist solely of whitespace.')
     })
   })
 
@@ -159,9 +149,11 @@ describe('MemberDetails', () => {
         person: {
           name: 'joe',
           location: 'oakland'
-        }
+        },
+        editing: true
       })
-      expect(instance.saveChanges()).toEqual(true)
+      instance.saveChanges()
+      expect(instance.state.editing).toEqual(false)
       expect(props.updateUserSettings).toHaveBeenCalledWith(instance.state.person)
     })
 
@@ -175,8 +167,14 @@ describe('MemberDetails', () => {
       }
 
       const instance = ReactTestRenderer.create(<MemberDetails {...props} />).getInstance()
-      instance.validate = () => false
-      expect(instance.saveChanges()).toEqual(false)
+      instance.setState({
+        errors: {
+          person: {}
+        },
+        editing: true
+      })
+      instance.saveChanges()
+      expect(instance.state.editing).toEqual(true)
       expect(props.updateUserSettings).not.toHaveBeenCalled()
     })
   })

@@ -46,7 +46,8 @@ it('uploads the picked image', async () => {
 
   expect(RNImagePicker.showImagePicker).toBeCalledWith({
     title: 'Choose yer image bub',
-    storageOptions: {skipBackup: true, path: 'images'}
+    storageOptions: {skipBackup: true, path: 'images'},
+    takePhotoButtonTitle: null
   }, expect.any(Function))
 
   expect(instance.state.pending).toBeTruthy()
