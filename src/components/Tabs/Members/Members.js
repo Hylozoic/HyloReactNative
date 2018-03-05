@@ -66,6 +66,8 @@ export default class Members extends React.Component {
       <Banner community={community} network={network} all={isAll} />
       <Button
         text='Invite People'
+        style={styles.button}
+        iconName={'Members'}
         onPress={this.goToInvitePeople} />
       <View style={styles.listControls}>
         <View style={styles.searchWrapper}>

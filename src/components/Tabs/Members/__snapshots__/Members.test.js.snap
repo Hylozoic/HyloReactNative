@@ -170,6 +170,7 @@ exports[`renders correctly with no community and isAll 1`] = `
           network={undefined}
         />
         <Button
+          iconName="Members"
           onPress={[Function]}
           text="Invite People"
         />
@@ -336,6 +337,10 @@ exports[`renders correctly with no community and isAll 1`] = `
             >
               <View>
                 <View>
+                  <Icon
+                    color={undefined}
+                    name="Members"
+                  />
                   <Text
                     accessible={true}
                     allowFontScaling={true}
