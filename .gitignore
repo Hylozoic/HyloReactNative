@@ -58,3 +58,7 @@ coverage/
 # Google login
 google-services.json
 GoogleService-Info.plist
+
+# Ruby Gems / Bundle (Fastlane related)
+.bundle/*
+vendor/*
