@@ -87,7 +87,7 @@ export default class Feed extends Component {
 
 export function CreateCommunityPrompt ({goToCreateCommunityName}) {
   return <View style={styles.container}>
-    <Text style={styles.promptText}>There's no posts yet, try starting a community!</Text>
+    <Text style={styles.promptText}>No posts here, try creating you're own Community!</Text>
     <Image style={styles.image} source={axolotlImage} />
     <Button
       text='Create a Community'
