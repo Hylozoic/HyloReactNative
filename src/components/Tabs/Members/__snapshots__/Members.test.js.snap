@@ -169,6 +169,439 @@ exports[`renders correctly with no community and isAll 1`] = `
           community={undefined}
           network={undefined}
         />
+        <View>
+          <View>
+            <Icon
+              name="Search"
+              onPress={[Function]}
+              size={30}
+            />
+            <TextInput
+              allowFontScaling={true}
+              onChangeText={[Function]}
+              placeholder="Search Members"
+              underlineColorAndroid="transparent"
+            />
+          </View>
+          <PopupMenuButton
+            actions={
+              Array [
+                Array [
+                  "Name",
+                  [Function],
+                ],
+                Array [
+                  "Location",
+                  [Function],
+                ],
+                Array [
+                  "Newest",
+                  [Function],
+                ],
+              ]
+            }
+          >
+            <View>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+              />
+              <Icon
+                name="ArrowDown"
+              />
+            </View>
+          </PopupMenuButton>
+        </View>
+      </View>
+    }
+    data={
+      Array [
+        Object {
+          "avatarUrl": "foo.gif",
+          "bio": "Hello!",
+          "id": "1",
+          "location": "here",
+          "name": "Foo Lane",
+        },
+        Object {
+          "avatarUrl": "bar.png",
+          "bio": "Not a stork",
+          "id": "2",
+          "location": "there",
+          "name": "Bar Jones",
+        },
+        Object {
+          "avatarUrl": "baz.png",
+          "bio": "Could be",
+          "id": "3",
+          "name": "Baz Chu",
+        },
+        Object {
+          "avatarUrl": "bonk.jpg",
+          "id": "4",
+          "name": "Bonk Gundsdottir",
+        },
+        Object {
+          "avatarUrl": "woof.png",
+          "id": "5",
+        },
+        Object {
+          "id": -1,
+        },
+      ]
+    }
+    disableVirtualization={false}
+    getItem={[Function]}
+    getItemCount={[Function]}
+    horizontal={false}
+    initialNumToRender={10}
+    keyExtractor={[Function]}
+    maxToRenderPerBatch={10}
+    numColumns="2"
+    onContentSizeChange={[Function]}
+    onEndReached={undefined}
+    onEndReachedThreshold={2}
+    onLayout={[Function]}
+    onMomentumScrollEnd={[Function]}
+    onScroll={[Function]}
+    onScrollBeginDrag={[Function]}
+    onScrollEndDrag={[Function]}
+    renderItem={[Function]}
+    scrollEventThrottle={50}
+    stickyHeaderIndices={Array []}
+    updateCellsBatchingPeriod={50}
+    viewabilityConfigCallbackPairs={Array []}
+    windowSize={21}
+  >
+    <View>
+      <View
+        onLayout={[Function]}
+      >
+        <View>
+          <View>
+            <Image
+              source={
+                Object {
+                  "uri": "https://d3ngex8q79bk55.cloudfront.net/misc/default_community_banner.jpg",
+                }
+              }
+            />
+            <div
+              colors={
+                Array [
+                  "rgba(0, 0, 0, 0)",
+                  "rgba(0, 0, 0, 0.1)",
+                  "rgba(0, 0, 0, 0.3)",
+                  "rgba(0, 0, 0, 0.6)",
+                ]
+              }
+            >
+              MockLinearGradient
+            </div>
+            <View>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+              >
+                All Communities
+              </Text>
+            </View>
+          </View>
+          <View>
+            <View>
+              <Icon
+                color={undefined}
+                name="Search"
+                onPress={[Function]}
+                size={30}
+              />
+              <TextInput
+                allowFontScaling={true}
+                onChangeText={[Function]}
+                placeholder="Search Members"
+                underlineColorAndroid="transparent"
+              />
+            </View>
+            <View
+              accessibilityComponentType={undefined}
+              accessibilityLabel={undefined}
+              accessibilityTraits={undefined}
+              accessible={true}
+              collapsable={undefined}
+              hasTVPreferredFocus={undefined}
+              hitSlop={
+                Object {
+                  "bottom": 5,
+                  "left": 5,
+                  "right": 5,
+                  "top": 5,
+                }
+              }
+              isTVSelectable={true}
+              nativeID={undefined}
+              onLayout={undefined}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              testID={undefined}
+              tvParallaxProperties={undefined}
+            >
+              <View>
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                />
+                <Icon
+                  color={undefined}
+                  name="ArrowDown"
+                />
+              </View>
+            </View>
+          </View>
+        </View>
+      </View>
+      <View
+        onLayout={[Function]}
+      >
+        <View>
+          <View
+            accessibilityComponentType={undefined}
+            accessibilityLabel={undefined}
+            accessibilityTraits={undefined}
+            accessible={true}
+            collapsable={undefined}
+            hasTVPreferredFocus={undefined}
+            hitSlop={undefined}
+            isTVSelectable={true}
+            nativeID={undefined}
+            onLayout={undefined}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            testID={undefined}
+            tvParallaxProperties={undefined}
+          >
+            <View>
+              <View>
+                <Image
+                  source={
+                    Object {
+                      "uri": "foo.gif",
+                    }
+                  }
+                />
+              </View>
+            </View>
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+            >
+              Foo Lane
+            </Text>
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+            >
+              here
+            </Text>
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              numberOfLines={4}
+            >
+              Hello!
+            </Text>
+          </View>
+          <View
+            accessibilityComponentType={undefined}
+            accessibilityLabel={undefined}
+            accessibilityTraits={undefined}
+            accessible={true}
+            collapsable={undefined}
+            hasTVPreferredFocus={undefined}
+            hitSlop={undefined}
+            isTVSelectable={true}
+            nativeID={undefined}
+            onLayout={undefined}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            testID={undefined}
+            tvParallaxProperties={undefined}
+          >
+            <View>
+              <View>
+                <Image
+                  source={
+                    Object {
+                      "uri": "bar.png",
+                    }
+                  }
+                />
+              </View>
+            </View>
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+            >
+              Bar Jones
+            </Text>
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+            >
+              there
+            </Text>
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              numberOfLines={4}
+            >
+              Not a stork
+            </Text>
+          </View>
+        </View>
+      </View>
+      <View
+        onLayout={[Function]}
+      >
+        <View>
+          <View
+            accessibilityComponentType={undefined}
+            accessibilityLabel={undefined}
+            accessibilityTraits={undefined}
+            accessible={true}
+            collapsable={undefined}
+            hasTVPreferredFocus={undefined}
+            hitSlop={undefined}
+            isTVSelectable={true}
+            nativeID={undefined}
+            onLayout={undefined}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            testID={undefined}
+            tvParallaxProperties={undefined}
+          >
+            <View>
+              <View>
+                <Image
+                  source={
+                    Object {
+                      "uri": "baz.png",
+                    }
+                  }
+                />
+              </View>
+            </View>
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+            >
+              Baz Chu
+            </Text>
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              numberOfLines={4}
+            >
+              Could be
+            </Text>
+          </View>
+          <View
+            accessibilityComponentType={undefined}
+            accessibilityLabel={undefined}
+            accessibilityTraits={undefined}
+            accessible={true}
+            collapsable={undefined}
+            hasTVPreferredFocus={undefined}
+            hitSlop={undefined}
+            isTVSelectable={true}
+            nativeID={undefined}
+            onLayout={undefined}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            testID={undefined}
+            tvParallaxProperties={undefined}
+          >
+            <View>
+              <View>
+                <Image
+                  source={
+                    Object {
+                      "uri": "bonk.jpg",
+                    }
+                  }
+                />
+              </View>
+            </View>
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+            >
+              Bonk Gundsdottir
+            </Text>
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              numberOfLines={4}
+            />
+          </View>
+        </View>
+      </View>
+      <View
+        onLayout={[Function]}
+      >
+        <View>
+          <View />
+          <View />
+        </View>
+      </View>
+    </View>
+  </RCTScrollView>
+</View>
+`;
+
+exports[`renders with invite button when a moderator 1`] = `
+<View>
+  <RCTScrollView
+    ListFooterComponent={null}
+    ListHeaderComponent={
+      <View>
+        <Banner
+          all={true}
+          community={undefined}
+          network={undefined}
+        />
         <Button
           iconName="Members"
           onPress={[Function]}

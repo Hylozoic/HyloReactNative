@@ -52,7 +52,7 @@ export default class Members extends React.Component {
 
   render () {
     let {
-      community, network, members, subject, sortBy, setSort, fetchMoreMembers, isAll, pending
+      community, canModerate, network, members, subject, sortBy, setSort, fetchMoreMembers, isAll, pending
     } = this.props
     const sortKeys = sortKeysFactory(subject)
     const onSearch = debounce(300, text => this.props.setSearch(text))
@@ -64,11 +64,11 @@ export default class Members extends React.Component {
 
     const header = <View>
       <Banner community={community} network={network} all={isAll} />
-      <Button
+      {canModerate && <Button
         text='Invite People'
         style={styles.button}
         iconName={'Members'}
-        onPress={this.goToInvitePeople} />
+        onPress={this.goToInvitePeople} />}
       <View style={styles.listControls}>
         <View style={styles.searchWrapper}>
           <Icon style={styles.searchIcon} name='Search' size={30}
