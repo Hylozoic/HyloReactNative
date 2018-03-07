@@ -8,6 +8,12 @@ import { pick } from 'lodash/fp'
 jest.mock('react-native-device-info')
 jest.mock('TextInput', () => 'TextInput')
 
+// Ugly, but seems to be necessary to dodge issues with debounce and timers
+// (see https://github.com/facebook/jest/issues/3465)
+jest.unmock('lodash')
+const lodash = require.requireActual('lodash/fp')
+lodash.debounce = (_, fn) => fn
+
 describe('MemberDetails', () => {
   const navigation = {setParams: () => {}}
   it('matches the last snapshot', () => {
@@ -81,11 +87,11 @@ describe('MemberDetails', () => {
       instance.setState({
         person: {name: 'Sue'}
       })
-      expect(instance.state.errors.name).toEqual(undefined)
+      instance.validate()
+      expect(instance.state.errors.name).toEqual(null)
     })
 
     it('returns false and sets error when name is empty', () => {
-      jest.useFakeTimers()
       const props = {
         isFocused: true,
         person: {},
@@ -98,7 +104,6 @@ describe('MemberDetails', () => {
         person: {name: ''}
       })
       instance.validate()
-      jest.runAllTimers()
       expect(instance.state.errors.name).toEqual('Name must not consist solely of whitespace.')
     })
   })
