@@ -7,9 +7,6 @@ import { pick } from 'lodash/fp'
 
 jest.mock('react-native-device-info')
 jest.mock('TextInput', () => 'TextInput')
-jest.mock('lodash/fp/debounce', () => ({
-  debounce: (timeout, fn) => fn
-}))
 
 describe('MemberDetails', () => {
   const navigation = {setParams: () => {}}
@@ -88,6 +85,7 @@ describe('MemberDetails', () => {
     })
 
     it('returns false and sets error when name is empty', () => {
+      jest.useFakeTimers()
       const props = {
         isFocused: true,
         person: {},
@@ -100,6 +98,7 @@ describe('MemberDetails', () => {
         person: {name: ''}
       })
       instance.validate()
+      jest.runAllTimers()
       expect(instance.state.errors.name).toEqual('Name must not consist solely of whitespace.')
     })
   })
