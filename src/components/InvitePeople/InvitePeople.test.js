@@ -80,7 +80,7 @@ describe('InvitePeople', () => {
 
   it('renders SendInvitesPage', () => {
     const renderer = new ReactShallowRenderer()
-    renderer.render(<SendInvitesPage inviteLink={'https://hylo.com/invitepathhere'} />)
+    renderer.render(<SendInvitesPage inviteLink={'https://hylo.com/invitepathhere'} communityName='Axolotle' />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()

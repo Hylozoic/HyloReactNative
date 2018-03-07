@@ -216,7 +216,7 @@ exports[`InvitePeople renders SendInvitesPage 1`] = `
       numberOfLines={5}
       onChangeText={[Function]}
       underlineColorAndroid="rgba(0,0,0,0)"
-      value="Hey! Here's an invite to the undefined"
+      value="Hey! Here's an invite to the Axolotle community on Hylo."
     />
     <Button
       disabled={true}

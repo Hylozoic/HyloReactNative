@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, PureComponent } from 'react'
 import { Clipboard, Dimensions, Text, View, TextInput, TouchableOpacity, ScrollView } from 'react-native'
 import { TabViewAnimated, TabBar } from 'react-native-tab-view'
 import Button from '../Button'
@@ -91,13 +91,13 @@ export default class InvitePeople extends Component {
   }
 }
 
-export class SendInvitesPage extends Component {
+export class SendInvitesPage extends PureComponent {
   constructor (props) {
     super(props)
     this.state = {
       emails: '',
       copied: false,
-      inputText: `Hey! Here's an invite to the ${this.props.communityName}`
+      inputText: `Hey! Here's an invite to the ${this.props.communityName} community on Hylo.`
     }
   }
 
