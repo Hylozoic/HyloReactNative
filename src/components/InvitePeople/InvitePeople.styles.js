@@ -1,5 +1,5 @@
 import { StyleSheet, Dimensions } from 'react-native'
-import { caribbeanGreen, white, capeCod40, amaranth, rhino20 } from 'style/colors'
+import { caribbeanGreen, white, capeCod40, amaranth, rhino20, white60onCaribbeanGreen } from 'style/colors'
 const screenWidth = Dimensions.get('window').width
 
 export default {
@@ -104,7 +104,8 @@ export default {
     height: 36,
     marginLeft: 'auto',
     marginRight: 18,
-    fontSize: 14
+    fontSize: 14,
+    disabledBackgroundColor: white60onCaribbeanGreen,
   },
   resendAllButton: {
     marginBottom: 18,

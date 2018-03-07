@@ -175,13 +175,15 @@ export function ormSessionReducer (session, { type, meta, payload }) {
 
   switch (type) {
     case CREATE_INVITATIONS:
-      payload.data.createInvitation.invitations.forEach(i =>
-      Invitation.create({
-        email: i.email,
-        id: Math.random().toString().substring(2, 7),
-        createdAt: new Date().toString(),
-        community: meta.communityId
-      }))
+      payload.data.createInvitation.invitations.forEach(i => {
+        !i.error && Invitation.create({
+          email: i.email,
+          id: Math.random().toString().substring(2, 7),
+          createdAt: new Date().toString(),
+          lastSentAt: new Date().toString(),
+          community: meta.communityId
+        })
+      })
       break
 
     case RESEND_INVITATION_PENDING:
