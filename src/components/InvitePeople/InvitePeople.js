@@ -102,15 +102,12 @@ export class SendInvitesPage extends PureComponent {
   }
 
   copyToClipboard = () => {
-    this.setTemporaryState('copied', true)
-    Clipboard.setString(this.props.inviteLink)
-  }
+    this.setState({copied: true})
 
-  setTemporaryState (key, value) {
-    const oldValue = this.state[key]
-    this.setState({[key]: value})
+    Clipboard.setString(this.props.inviteLink)
+
     setTimeout(() => {
-      this.setState({[key]: oldValue})
+      this.setState({copied: false})
     }, 3000)
   }
 
