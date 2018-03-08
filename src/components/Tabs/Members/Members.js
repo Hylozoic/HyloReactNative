@@ -67,7 +67,7 @@ export default class Members extends React.Component {
       {canModerate && <Button
         text='Invite People'
         style={styles.button}
-        iconName={'Members'}
+        iconName={'Invite'}
         onPress={this.goToInvitePeople} />}
       <View style={styles.listControls}>
         <View style={styles.searchWrapper}>
