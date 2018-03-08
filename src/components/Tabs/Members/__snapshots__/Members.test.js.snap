@@ -603,7 +603,7 @@ exports[`renders with invite button when a moderator 1`] = `
           network={undefined}
         />
         <Button
-          iconName="Members"
+          iconName="Invite"
           onPress={[Function]}
           text="Invite People"
         />
@@ -772,7 +772,7 @@ exports[`renders with invite button when a moderator 1`] = `
                 <View>
                   <Icon
                     color={undefined}
-                    name="Members"
+                    name="Invite"
                   />
                   <Text
                     accessible={true}
