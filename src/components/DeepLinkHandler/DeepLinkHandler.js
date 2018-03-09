@@ -1,5 +1,5 @@
 import React from 'react'
-import { Linking } from 'react-native'
+import { InteractionManager, Linking } from 'react-native'
 import { parse } from 'url'
 import {
   isInvitationLink, redirectAfterLogin, resetToRoute, resetToMainRoute
@@ -24,12 +24,16 @@ export default class DeepLinkHandler extends React.Component {
 
     const event = this.props.initialPushNotificationEvent
     if (event) {
-      return setImmediate(() => this.handlePushNotificationEvent(event))
+      return InteractionManager.runAfterInteractions(
+        () => this.handlePushNotificationEvent(event)
+      )
     }
 
     const initialUrl = this.props.initialUrl || await Linking.getInitialURL()
     if (initialUrl) {
-      return setImmediate(() => this.handleUrl(initialUrl))
+      return InteractionManager.runAfterInteractions(
+        () => this.handleUrl(initialUrl)
+      )
     }
   }
 
@@ -49,11 +53,13 @@ export default class DeepLinkHandler extends React.Component {
   }
 
   handleUrl (url) {
+    console.log('HANDLING', url)
     if (!url) return
 
     const { storeNavigationAction, currentUser } = this.props
     const { path } = parse(url)
     const action = convertDeepLinkToAction(path)
+    console.log('ACTION', action)
     if (!action) return
     const nextAction = action.params && action.params.nextURL
       ? convertDeepLinkToAction(decodeURIComponent(action.params.nextURL))
