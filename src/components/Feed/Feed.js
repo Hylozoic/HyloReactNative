@@ -53,7 +53,7 @@ export default class Feed extends Component {
       goToCreateCommunityName,
       currentUserHasMemberships
     } = this.props
-    if (!currentUserHasMemberships) return <CreateCommunityPrompt goToCreateCommunityName={goToCreateCommunityName} />
+    if (!currentUserHasMemberships) return <CreateCommunitySection goToCreateCommunityName={goToCreateCommunityName} />
 
     return <View style={styles.container}>
       <FeedList
@@ -85,7 +85,7 @@ export default class Feed extends Component {
   }
 }
 
-export function CreateCommunityPrompt ({goToCreateCommunityName}) {
+export function CreateCommunitySection ({goToCreateCommunityName}) {
   return <View style={styles.container}>
     <Text style={styles.promptText}>No posts here, try creating you're own Community!</Text>
     <Image style={styles.image} source={axolotlImage} />

@@ -45,7 +45,7 @@ exports[`renders correctly if currentUserHasMemberships 1`] = `
 `;
 
 exports[`renders correctly if currentUserHasMemberships is false 1`] = `
-<CreateCommunityPrompt
+<CreateCommunitySection
   goToCreateCommunityName={undefined}
 />
 `;
