@@ -1,17 +1,20 @@
 import {
-  capeCod, caribbeanGreen, alabaster
+  capeCod, caribbeanGreen, alabaster, rhino, catskillWhite
 } from '../../style/colors'
 
 const screenMargin = 16
 const avatarSize = 112
 
 export default {
-  marginContainer: {
-    marginHorizontal: screenMargin
+  container: {
+    backgroundColor: 'white',
+    paddingTop: 20,
+    paddingHorizontal: screenMargin
   },
   bannerImage: {
     height: 140,
-    width: '100%'
+    width: '100%',
+    borderRadius: 5
   },
   bannerEditButton: {
     position: 'absolute',
@@ -82,5 +85,14 @@ export default {
     color: caribbeanGreen,
     fontSize: 13,
     fontFamily: 'Circular-Bold'
+  },
+  nameInput: {
+    color: rhino,
+    fontFamily: 'Circular-Bold',
+    fontSize: 22,
+    backgroundColor: catskillWhite,
+    height: 36,
+    marginBottom: 15,
+    textAlign: 'center'
   }
 }

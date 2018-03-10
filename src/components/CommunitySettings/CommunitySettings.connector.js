@@ -19,6 +19,7 @@ export const mapDispatchToProps = {
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
   const { communityId } = stateProps
+
   const fetchCommunitySettings = () =>
     dispatchProps.fetchCommunitySettings(communityId)
 
@@ -34,4 +35,4 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps)

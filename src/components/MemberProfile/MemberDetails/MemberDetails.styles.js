@@ -9,7 +9,8 @@ export default {
   container: {
     backgroundColor: 'white',
     paddingTop: 12,
-    paddingHorizontal: screenMargin
+    paddingHorizontal: screenMargin,
+    flex: 1
   },
   labelWrapper: {
     flexDirection: 'row',

@@ -1,29 +1,52 @@
 import React from 'react'
-import { Text, View, Image, TouchableOpacity } from 'react-native'
+import { Text, View, Image, TouchableOpacity, TextInput, ScrollView } from 'react-native'
 import Loading from '../Loading'
 import styles from './CommunitySettings.styles'
 import ImagePicker from '../ImagePicker'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
 import defaultBanner from '../../assets/default-user-banner.jpg'
-import header from 'util/header'
+import header, { HeaderButton } from 'util/header'
+import { some } from 'lodash/fp'
 
 export default class CommunitySettings extends React.Component {
-  static navigationOptions = ({ navigation }) =>
-    header(navigation, {
+  static navigationOptions = ({ navigation }) => {
+    const valid = navigation.getParam('valid', true)
+    const saveChanges = navigation.getParam('saveChanges', () => {})
+
+    return header(navigation, {
       headerBackButton: () => navigation.navigate('Members'),
-      title: 'Community Information',
+      title: 'Community',
       options: {
-        headerBackTitle: null
+        headerBackTitle: null,
+        headerRight: <HeaderButton
+          disabled={!valid}
+          onPress={saveChanges}
+          text='Save' />
       }
     })
+  }
+
+  state = {
+    edits: {}
+  }
 
   componentDidMount () {
     this.props.fetchCommunitySettings()
+    this.syncLocalFields()
+    this.props.navigation.setParams({
+      saveChanges: this.saveChanges
+    })
   }
 
   componentDidUpdate (prevProps) {
     if (prevProps.id !== this.props.id) {
       this.props.fetchCommunitySettings()
+    }
+
+    const hasChanged = key => prevProps.community[key] !== this.props.community[key]
+
+    if (some(hasChanged, ['name', 'description', 'location'])) {
+      this.syncLocalFields()
     }
   }
 
@@ -31,22 +54,85 @@ export default class CommunitySettings extends React.Component {
     return nextProps.isFocused
   }
 
+  syncLocalFields () {
+    const { community } = this.props
+    this.setState({
+      edits: {
+        name: community.name,
+        location: community.location,
+        description: community.description
+      }
+    })
+  }
+
+  updateField = key => value => {
+    this.setState({
+      edits: {
+        ...this.state.edits,
+        [key]: value
+      }
+    })
+    // console.log('set valid to true')
+    // this.props.navigation.setParams({
+    //   valid: true
+    // })
+  }
+
+  archiveCommunity = () => {
+    console.log('archive community', this.props.community)
+  }
+
+  saveChanges = () => {
+    console.log('save community', this.state.edits)
+    this.props.navigation.setParams({
+      valid: true
+    })
+  }
+
   render () {
     const {
       isFocused,
-      canEdit,
       community,
-      updateUserSettings
+      updateCommunitySettings
     } = this.props
     if (!community) return <Loading />
 
-    return <View>
+    const { name, description, location } = this.state.edits
+
+    return <ScrollView contentContainerStyle={styles.container}>
+      <TextInput
+        style={styles.nameInput}
+        onChangeText={this.updateField('name')}
+        value={name}
+        underlineColorAndroid='transparent' />
       <CommunityBanner
         isFocused={isFocused}
-        canEdit={canEdit}
         community={community}
-        updateUserSettings={updateUserSettings} />
-    </View>
+        updateCommunitySettings={updateCommunitySettings} />
+      <Text style={styles.label}>DESCRIPTION</Text>
+      <TextInput
+        ref={i => { this.input = i }}
+        style={styles.input}
+        value={description}
+        onChangeText={this.updateField('description')}
+        multiline
+        numberOfLines={5}
+        underlineColorAndroid='transparent' />
+      <Text style={styles.label}>LOCATION</Text>
+      <TextInput
+        ref={i => { this.input = i }}
+        style={styles.input}
+        value={location}
+        onChangeText={this.updateField('location')}
+        underlineColorAndroid='transparent' />
+      <Text style={styles.deleteLabel}>DELETE</Text>
+      <View style={styles.archiveRow}>
+        <Text>Archive Community</Text>
+        <TouchableOpacity onPress={this.archiveCommunity}>
+          <Text>Archive</Text>
+        </TouchableOpacity>
+      </View>
+    </ScrollView>
   }
 }
 
@@ -65,11 +151,14 @@ export class CommunityBanner extends React.Component {
       [localKey]: local
     })
 
-    this.props.updateUserSettings({[remoteKey]: remote})
+    console.log('onChoice', {[remoteKey]: remote})
+    console.log('updateCommunitySettings')
+
+    this.props.updateCommunitySettings({[remoteKey]: remote})
   }
 
   render () {
-    const { community: { id, avatarUrl, bannerUrl }, canEdit } = this.props
+    const { community: { id, avatarUrl, bannerUrl } } = this.props
     const { avatarPickerPending, bannerPickerPending, avatarLocalUri, bannerLocalUri } = this.state
 
     const avatarSource = avatarLocalUri
@@ -97,10 +186,9 @@ export class CommunityBanner extends React.Component {
         style={styles.bannerImagePicker}
         id={id}
         onChoice={choice => this.onChoice(choice, 'banner')}
-        onPendingChange={pending => this.setState({bannerPickerPending: pending})}
-        disabled={!canEdit}>
+        onPendingChange={pending => this.setState({bannerPickerPending: pending})}>
         <Image source={bannerSource} style={styles.bannerImage} />
-        {canEdit && <EditButton isLoading={bannerPickerPending} style={styles.bannerEditButton} />}
+        <EditButton isLoading={bannerPickerPending} style={styles.bannerEditButton} />
       </ImagePicker>
       <View style={styles.avatarW3}>
         <ImagePicker
@@ -109,11 +197,10 @@ export class CommunityBanner extends React.Component {
           type='userAvatar'
           id={id}
           onChoice={choice => this.onChoice(choice, 'avatar')}
-          onPendingChange={pending => this.setState({avatarPickerPending: pending})}
-          disabled={!canEdit}>
+          onPendingChange={pending => this.setState({avatarPickerPending: pending})}>
           <View style={styles.avatarWrapper}>
             <Image source={avatarSource} style={styles.avatarImage} />
-            {canEdit && <EditButton isLoading={avatarPickerPending} style={styles.avatarEditButton} />}
+            <EditButton isLoading={avatarPickerPending} style={styles.avatarEditButton} />
           </View>
         </ImagePicker>
       </View>
