@@ -6,6 +6,10 @@ import Timer from 'react-native-background-timer'
 import { Sentry } from 'react-native-sentry'
 import ErrorBoundary from './src/components/ErrorBoundary'
 import { isDev } from 'util/testing'
+import getStore from './src/store'
+
+let store = null
+getStore().then(s => store = s) // eslint-disable-line no-return-assign
 
 if (!isDev) {
   Sentry.config(process.env.SENTRY_CONFIG_URL)
@@ -22,12 +26,12 @@ if (Platform.OS === 'android') {
   clearInterval = (fn, ms = 0) => Timer.clearInterval(fn, ms)
 }
 
-AppRegistry.registerComponent('HyloReactNative', () => RootView)
-
-export default AppContainer
+AppRegistry.registerComponent('HyloReactNative', () => AppContainer)
 
 function AppContainer () {
   return <ErrorBoundary>
-    <RootView />
+    <RootView store={store} />
   </ErrorBoundary>
 }
+
+export default AppContainer
