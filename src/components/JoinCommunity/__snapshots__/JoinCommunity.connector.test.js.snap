@@ -1,12 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`goToCommunity 1`] = `
-Object {
-  "payload": "anycommunityid",
-  "type": "SELECT_COMMUNITY",
-}
-`;
-
 exports[`mapDispatchToProps 1`] = `
 Object {
   "checkInvitation": [Function],
