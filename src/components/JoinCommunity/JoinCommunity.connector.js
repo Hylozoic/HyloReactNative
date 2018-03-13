@@ -2,27 +2,10 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { get } from 'lodash/fp'
 import getMe from '../../store/selectors/getMe'
-import { NavigationActions } from 'react-navigation'
-import selectCommunity from '../../store/actions/selectCommunity'
+import makeGoToCommunity from '../../store/actions/makeGoToCommunity'
 import getNavigationParam from '../../store/selectors/getNavigationParam'
 import { checkInvitation, useInvitation } from './JoinCommunity.store'
 import { resetToRoute, resetToMainRoute } from 'util/navigation'
-
-export function goToCommunity (communityId, navigation) {
-  navigation.dispatch(NavigationActions.reset({
-    index: 0,
-    actions: [
-      NavigationActions.navigate({
-        routeName: 'Main',
-        action: {
-          routeName: 'Feed',
-          params: {communityId}
-        }
-      })
-    ]
-  }))
-  return selectCommunity(communityId)
-}
 
 export function mapStateToProps (state, props) {
   const { navigation } = props
@@ -41,8 +24,7 @@ export function mapStateToProps (state, props) {
 
 export function mapDispatchToProps (dispatch, { navigation }) {
   return {
-    goToCommunity: (communityId) =>
-      dispatch(goToCommunity(communityId, navigation)),
+    goToCommunity: makeGoToCommunity(dispatch, navigation),
     ...bindActionCreators({
       checkInvitation,
       useInvitation
