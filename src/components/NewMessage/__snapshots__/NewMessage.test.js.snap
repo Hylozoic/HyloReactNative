@@ -226,6 +226,7 @@ exports[`ParticipantInput renders correctly 1`] = `
     <TextInput
       allowFontScaling={true}
       onChangeText={[Function]}
+      placeholder="Search"
       underlineColorAndroid="transparent"
       value="Jon"
     />

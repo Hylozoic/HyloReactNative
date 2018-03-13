@@ -6,7 +6,8 @@ import {
   Text,
   TouchableOpacity,
   TextInput,
-  View
+  View,
+  StyleSheet
 } from 'react-native'
 import Avatar from '../Avatar'
 import Icon from '../Icon'
@@ -95,7 +96,12 @@ export default class NewMessage extends React.Component {
 
 export function ParticipantInput ({ participants, onChangeText, removeParticipant, text }) {
   const { width } = Dimensions.get('window')
-  const inputStyle = {width: width - 30}
+  const inputStyle = {width: width - 30,
+    borderWidth: StyleSheet.hairlineWidth,
+    borderColor: 'black',
+    borderRadius: 5,
+    minHeight: 40
+  }
   return <View style={styles.scrollViewWrapper}>
     <ScrollView
       contentContainerStyle={styles.participantInputContainer}
@@ -105,6 +111,7 @@ export function ParticipantInput ({ participants, onChangeText, removeParticipan
         value={text}
         onChangeText={onChangeText}
         underlineColorAndroid='transparent'
+        placeholder={'Search'}
         style={[styles.participantTextInput, inputStyle]} />
     </ScrollView>
   </View>
