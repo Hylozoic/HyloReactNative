@@ -11,7 +11,6 @@ import { isDev } from 'util/testing'
 export default class DeepLinkHandler extends React.Component {
   async componentDidMount () {
     Linking.addEventListener('url', this.handleLinkingEvent)
-    OneSignal.addEventListener('opened', this.handlePushNotificationEvent)
 
     // even if there is a deep link, we still have to change the initial route
     // to one of these. otherwise, the back button on the deep-linked screen
@@ -22,10 +21,10 @@ export default class DeepLinkHandler extends React.Component {
       resetToRoute(this.props.navigator, 'Login')
     }
 
-    const event = this.props.initialPushNotificationEvent
-    if (event) {
+    const pushNotification = this.props.onesignalNotification
+    if (pushNotification) {
       return InteractionManager.runAfterInteractions(
-        () => this.handlePushNotificationEvent(event)
+        () => this.handlePushNotification(pushNotification)
       )
     }
 
@@ -37,13 +36,21 @@ export default class DeepLinkHandler extends React.Component {
     }
   }
 
+  componentDidUpdate (prevProps) {
+    const { onesignalNotification } = this.props
+    if (onesignalNotification !== prevProps.onesignalNotification) {
+      InteractionManager.runAfterInteractions(
+        () => this.handlePushNotification(onesignalNotification)
+      )
+    }
+  }
+
   componentWillUnmount () {
     Linking.removeEventListener('url', this.handleLinkingEvent)
     OneSignal.removeEventListener('opened', this.handlePushNotificationEvent)
   }
 
-  handlePushNotificationEvent = ({ notification }) =>
-    this.handleUrl(notification.payload.additionalData.path)
+  handlePushNotification = ({ additionalData: { path } }) => this.handleUrl(path)
 
   handleLinkingEvent = ({ url }) => this.handleUrl(url)
 

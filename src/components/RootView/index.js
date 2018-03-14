@@ -1,28 +1,29 @@
 import React from 'react'
 import { View, AppState } from 'react-native'
-import { LoadingScreen } from '../Loading'
-import VersionCheck from '../VersionCheck'
-import LoadingModal from '../LoadingModal'
+import OneSignal from 'react-native-onesignal'
 import { Provider } from 'react-redux'
-// import { init as initOneSignal } from 'util/onesignal'
-// import receivePushNotification from '../../store/actions/receivePushNotification'
+
 import DeepLinkHandler from '../DeepLinkHandler'
+import { LoadingScreen } from '../Loading'
+import LoadingModal from '../LoadingModal'
 import RootNavigator from '../RootNavigator'
 import SessionCheck from '../SessionCheck'
-import OneSignal from 'react-native-onesignal'
+import VersionCheck from '../VersionCheck'
+import receivePushNotification from '../../store/actions/receivePushNotification'
 
 export default class RootView extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      appState: AppState.currentState
+      appState: AppState.currentState,
+      onesignalNotification: null
     }
   }
 
   componentWillMount () {
     OneSignal.addEventListener('received', this._handleReceivedPushNotification)
     OneSignal.addEventListener('opened', this._handleOpenedPushNotification)
-    OneSignal.addEventListener('ids', this._handleIds)
+    OneSignal.inFocusDisplaying(0)
   }
 
   componentDidMount () {
@@ -31,19 +32,19 @@ export default class RootView extends React.Component {
 
   componentWillUnmount () {
     AppState.removeEventListener('change', this._handleAppStateChange)
-    OneSignal.removeEventListener('received', this._handleReceivedPushNotification)
+    OneSignal.removeEventListener('received', receivePushNotification)
     OneSignal.removeEventListener('opened', this._handleOpenedPushNotification)
-    OneSignal.removeEventListener('ids', this._handleIds)
   }
 
-  _handleAppStateChange = (nextAppState) => {
+  _handleAppStateChange = nextAppState => {
     if (this.state.appState.match(/inactive|background/) && nextAppState === 'active') {
       OneSignal.clearOneSignalNotifications()
     }
     this.setState({appState: nextAppState})
   }
 
-  _handleReceivedPushNotification = notification => {}
+  _handleOpenedPushNotification = ({ notification: { payload } }) =>
+    this.setState({ onesignalNotification: payload })
 
   setNavigator = ref => {
     if (!ref) return
@@ -53,6 +54,7 @@ export default class RootView extends React.Component {
 
   render () {
     const { store } = this.props
+    const { onesignalNotification } = this.state
 
     if (store === null) return <LoadingScreen />
 
@@ -60,7 +62,9 @@ export default class RootView extends React.Component {
       <View style={{flex: 1}}>
         <VersionCheck />
         <SessionCheck>
-          <DeepLinkHandler navigator={this.navigator} />
+          <DeepLinkHandler
+            navigator={this.navigator}
+            onesignalNotification={onesignalNotification} />
         </SessionCheck>
         <LoadingModal />
         <RootNavigator ref={this.setNavigator} />
