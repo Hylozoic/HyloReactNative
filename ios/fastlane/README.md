@@ -28,6 +28,25 @@ fastlane ios beta
 Submit a new Beta Build to Apple TestFlight
 
 This will also make sure the profile is up to date
+### ios dev
+```
+fastlane ios dev
+```
+Build a development IPA file to install to a device
+
+This builds using the connection with metro running in terminal
+### ios qa
+```
+fastlane ios qa
+```
+Build an IPA file for QA distribution
+
+Be aware that this will hit the live API
+### ios devices
+```
+fastlane ios devices
+```
+Update team device ids from the devices.txt file
 
 ----
 

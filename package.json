@@ -11,6 +11,7 @@
     "android:usb": "adb -d install -r android/app/build/outputs/apk/app-release.apk",
     "ios": "react-native run-ios",
     "ios:testflight": "cd ios && bundle exec fastlane beta",
+    "ios:qa": "cd ios && bundle exec fastlane qa",
     "test": "jest",
     "coverage:diff": "node ../jest-diff-coverage && open coverage/lcov-report/index.html",
     "clean-start": "./scripts/clean-rebuild.sh",
