@@ -10,6 +10,7 @@
     "android:prod": "cd android && ./gradlew assembleRelease",
     "android:usb": "adb -d install -r android/app/build/outputs/apk/app-release.apk",
     "ios": "react-native run-ios",
+    "ios:devices": "cd ios && bundle exec fastlane devices",
     "ios:testflight": "cd ios && bundle exec fastlane beta",
     "ios:qa": "cd ios && bundle exec fastlane qa",
     "test": "jest",
