@@ -65,7 +65,7 @@ export default class DeepLinkHandler extends React.Component {
     if (isDev) console.log(`handling deep link "${path}" with action:`, action)
     if (!currentUser) {
       storeNavigationAction(nextAction)
-      if (action.params.nextURL) {
+      if (action.params && action.params.nextURL) {
         this.redirectNow(action)
       }
     }
