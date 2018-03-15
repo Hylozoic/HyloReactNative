@@ -21,8 +21,8 @@ export default class RootView extends React.Component {
   }
 
   componentWillMount () {
-    OneSignal.addEventListener('received', this._handleReceivedPushNotification)
     OneSignal.addEventListener('opened', this._handleOpenedPushNotification)
+    OneSignal.addEventListener('received', receivePushNotification)
     OneSignal.inFocusDisplaying(0)
   }
 
@@ -32,8 +32,8 @@ export default class RootView extends React.Component {
 
   componentWillUnmount () {
     AppState.removeEventListener('change', this._handleAppStateChange)
-    OneSignal.removeEventListener('received', receivePushNotification)
     OneSignal.removeEventListener('opened', this._handleOpenedPushNotification)
+    OneSignal.removeEventListener('received', receivePushNotification)
   }
 
   _handleAppStateChange = nextAppState => {
