@@ -9,7 +9,12 @@ export default function convertDeepLinkToAction (path) {
 
 export function reformatPath (path) {
   let match
-  const { query, pathname } = url.parse(path)
+  let { query, pathname } = url.parse(path)
+
+  // LEJ: For the case of already path reformatted
+  // nextURLs in token auth'dlinks
+  pathname = pathname[0] === '/' ? pathname : `/${pathname}`
+
   const params = qs.parse(query)
 
   match = routeMatchers.post(pathname)
