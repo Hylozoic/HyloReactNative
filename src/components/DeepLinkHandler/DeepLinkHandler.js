@@ -5,7 +5,6 @@ import {
   isInvitationLink, redirectAfterLogin, resetToRoute, resetToMainRoute
 } from 'util/navigation'
 import convertDeepLinkToAction from './convertDeepLinkToAction'
-import OneSignal from 'react-native-onesignal'
 import { isDev } from 'util/testing'
 
 export default class DeepLinkHandler extends React.Component {
@@ -47,7 +46,6 @@ export default class DeepLinkHandler extends React.Component {
 
   componentWillUnmount () {
     Linking.removeEventListener('url', this.handleLinkingEvent)
-    OneSignal.removeEventListener('opened', this.handlePushNotificationEvent)
   }
 
   handlePushNotification = ({ additionalData: { path } }) => this.handleUrl(path)
