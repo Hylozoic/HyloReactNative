@@ -8,8 +8,13 @@ import pathMatch from 'path-match'
 import { get } from 'lodash/fp'
 
 export function resetToRoute (navigation, routeName) {
+  // Setting key to null to handle "There is no route defined for..." exceptions
+  // on nested navigation reference:
+  //
+  // https://github.com/react-navigation/react-navigation/issues/1127
   return navigation.dispatch(NavigationActions.reset({
     index: 0,
+    key: null,
     actions: [NavigationActions.navigate({routeName})]
   }))
 }

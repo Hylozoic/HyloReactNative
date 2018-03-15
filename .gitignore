@@ -44,6 +44,7 @@ android/app/src/release/res/values/strings.xml
 #
 node_modules/
 npm-debug.log
+yarn-error.log
 
 # BUCK
 buck-out/
