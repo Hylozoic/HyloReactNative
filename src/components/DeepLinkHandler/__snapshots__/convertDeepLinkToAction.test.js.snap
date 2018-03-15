@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`handles a post link 1`] = `
+Object {
+  "action": Object {
+    "params": Object {
+      "id": "8190",
+    },
+    "routeName": "PostDetails",
+    "type": "Navigation/NAVIGATE",
+  },
+  "routeName": "Main",
+  "type": "Navigation/NAVIGATE",
+}
+`;
