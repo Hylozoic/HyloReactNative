@@ -1,5 +1,6 @@
 import OneSignal from 'react-native-onesignal'
 import React from 'react'
+import { AppState } from 'react-native'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import TestRenderer from 'react-test-renderer'
 
@@ -9,7 +10,8 @@ import RootView from './'
 jest.mock('react-native-onesignal', () => ({
   addEventListener: jest.fn(),
   inFocusDisplaying: jest.fn(),
-  clearOneSignalNotifications: jest.fn()
+  clearOneSignalNotifications: jest.fn(),
+  removeEventListener: jest.fn()
 }))
 
 jest.mock('../VersionCheck', () => 'VersionCheck')
@@ -28,6 +30,23 @@ describe('RootView', () => {
     const renderer = new ReactShallowRenderer()
     renderer.render(<RootView store={null} />)
     expect(renderer.getRenderOutput()).toMatchSnapshot()
+  })
+
+  it('tidies up event handlers', () => {
+    AppState.removeEventListener = jest.fn()
+    const renderer = TestRenderer.create(<RootView store={null} />)
+    const instance = renderer.getInstance()
+    instance.componentWillUnmount()
+    expect(OneSignal.removeEventListener).toHaveBeenCalled()
+    expect(AppState.removeEventListener).toHaveBeenCalled()
+  })
+
+  it('stores the OneSignal payload in component state', () => {
+    const renderer = TestRenderer.create(<RootView store={null} />)
+    const instance = renderer.getInstance()
+    const payload = { additionalData: { path: 'wombat' } }
+    instance._handleOpenedPushNotification({ notification: { payload } })
+    expect(instance.state.onesignalNotification).toEqual(payload)
   })
 
   describe('_handleAppStateChange', () => {
