@@ -29,6 +29,7 @@ describe('mapDispatchToProps', () => {
     expect(props.navigation.dispatch).toHaveBeenCalledWith({
       type: 'Navigation/RESET',
       index: 0,
+      key: null,
       actions: [
         {routeName: 'Login', type: 'Navigation/NAVIGATE'}
       ]

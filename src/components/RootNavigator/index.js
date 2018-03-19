@@ -117,7 +117,7 @@ const screensInStack = {
   SignupFlow5: {screen: SignupFlow5},
   Login: {screen: Login, path: 'login'},
   LoginByPasswordResetToken: {screen: Login, path: 'passwordResetTokenLogin/:userId/:loginToken/:nextURL'},
-  ForgotPassword: {screen: ForgotPassword, path: 'forgot-password'},
+  ForgotPassword: {screen: ForgotPassword, path: 'reset-password'},
   Thread: {screen: Thread, path: 'thread/:id'},
   UseInvitation: {screen: JoinCommunity, path: 'useInvitation/:token'},
   UseAccessCode: {screen: JoinCommunity, path: 'useAccessCode/:slug/:accessCode'},
