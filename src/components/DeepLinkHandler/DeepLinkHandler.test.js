@@ -34,6 +34,7 @@ function expectResetToRoute (routeName) {
       {routeName, type: 'Navigation/NAVIGATE'}
     ],
     index: 0,
+    key: null,
     type: 'Navigation/RESET'
   })
 }

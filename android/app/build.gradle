@@ -95,8 +95,8 @@ android {
         applicationId "com.hylo.hyloandroid"
         minSdkVersion 16
         targetSdkVersion 22
-        versionCode 74
-        versionName "2.1"
+        versionCode 78
+        versionName "2.1.1"
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }

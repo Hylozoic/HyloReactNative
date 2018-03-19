@@ -7,9 +7,11 @@ import sailsIo from 'sails.io.js'
 import apiHost from '../apiHost'
 import { getSessionCookie } from '../session'
 import { curry } from 'lodash/fp'
+import { isDev } from 'util/testing'
 
-// socket host is same as API host in development, different in production
-const socketHost = process.env.SOCKET_HOST || apiHost
+// NOTE: SOCKET_HOST now disabled in production to avoid slip-ups!
+// In other words, API_HOST is the only value that matters in prod.
+const socketHost = (isDev && process.env.SOCKET_HOST) || apiHost
 
 let socket, socketPromise
 
