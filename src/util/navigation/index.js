@@ -9,14 +9,21 @@ import { get } from 'lodash/fp'
 
 export function resetToRoute (navigation, routeName) {
   // Setting key to null to handle "There is no route defined for..." exceptions
-  // on nested navigation reference:
+  // on nested navigation reference
+  // NOTE: "key: null" solution works in iOS but not Android, hence the try/catch
+  //
   //
   // https://github.com/react-navigation/react-navigation/issues/1127
-  return navigation.dispatch(NavigationActions.reset({
-    index: 0,
-    key: null,
-    actions: [NavigationActions.navigate({routeName})]
-  }))
+  try {
+    return navigation.dispatch(NavigationActions.reset({
+      index: 0,
+      key: null,
+      actions: [NavigationActions.navigate({routeName})]
+    }))
+  } catch (err) {
+    console.log('!! failed to navigate:', err)
+    return false
+  }
 }
 
 export const MAIN_ROUTE_NAME = 'Main'
