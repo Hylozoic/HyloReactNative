@@ -117,15 +117,15 @@ export class SendInvitesPage extends PureComponent {
   }
 
   sendInvite = () => {
-    if (this.sending) return
-    this.sending = true
-
     const { createInvitations } = this.props
-    const { emails, message } = this.state
+    const { emails, message, sending } = this.state
+
+    if (sending) return
+
+    this.setState({sending: true})
 
     return createInvitations(parseEmailList(emails), message)
     .then(res => {
-      this.sending = false
       const { invitations } = res.payload.data.createInvitation
       const badEmails = invitations.filter(email => email.error).map(e => e.email)
 
@@ -145,7 +145,8 @@ export class SendInvitesPage extends PureComponent {
       this.setState({
         emails: badEmails.join('\n'),
         errorMessage,
-        successMessage
+        successMessage,
+        sending: false
       })
     })
   }
@@ -156,7 +157,8 @@ export class SendInvitesPage extends PureComponent {
       inputText,
       copied,
       successMessage,
-      errorMessage
+      errorMessage,
+      sending
     } = this.state
 
     const {
@@ -164,7 +166,7 @@ export class SendInvitesPage extends PureComponent {
       pendingCreate
     } = this.props
 
-    const disableSendBtn = !!(isEmpty(emails) || pendingCreate)
+    const disableSendBtn = !!(isEmpty(emails) || pendingCreate || sending)
 
     return (
       <ScrollView>
