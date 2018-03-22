@@ -7,9 +7,12 @@ import { pick } from 'lodash/fp'
 
 jest.mock('react-native-device-info')
 jest.mock('TextInput', () => 'TextInput')
-jest.mock('lodash/fp/debounce', () => ({
-  debounce: (timeout, fn) => fn
-}))
+
+// Ugly, but seems to be necessary to dodge issues with debounce and timers
+// (see https://github.com/facebook/jest/issues/3465)
+jest.unmock('lodash')
+const lodash = require.requireActual('lodash/fp')
+lodash.debounce = (_, fn) => fn
 
 describe('MemberDetails', () => {
   const navigation = {setParams: () => {}}
@@ -84,7 +87,8 @@ describe('MemberDetails', () => {
       instance.setState({
         person: {name: 'Sue'}
       })
-      expect(instance.state.errors.name).toEqual(undefined)
+      instance.validate()
+      expect(instance.state.errors.name).toEqual(null)
     })
 
     it('returns false and sets error when name is empty', () => {
