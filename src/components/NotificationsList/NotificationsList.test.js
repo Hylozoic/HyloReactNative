@@ -24,6 +24,7 @@ describe('NotificationsList', () => {
       markActivityRead: jest.fn(),
       markAllRead: jest.fn(),
       pending: false,
+      currentUserHasMemberships: true,
       notifications: [
         {
           activityId: '1',

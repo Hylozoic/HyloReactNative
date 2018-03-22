@@ -10,7 +10,7 @@ const androidHost = isDev && !isIOS &&
 const iosHost = isDev && isIOS &&
   (process.env.IOS_API_HOST || process.env.IOS_EMULATOR_API_HOST)
 
-const HOST = androidHost || iosHost || process.env.API_HOST
+const HOST = 'http://10.0.2.2:3001'
 export default HOST
 
 if (process.env.NODE_ENV === 'development') console.log(`API host: ${HOST}`)

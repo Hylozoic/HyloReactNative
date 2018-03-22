@@ -1,14 +1,12 @@
 import React, { Component } from 'react'
-import { View, Text, Image } from 'react-native'
+import { View } from 'react-native'
 import { get } from 'lodash/fp'
 
-import Button from '../Button'
+import CreateCommunityNotice from '../CreateCommunityNotice'
 import FeedList from '../FeedList'
 import FeedBanner from '../FeedBanner'
 import SocketSubscriber from '../SocketSubscriber'
 import styles from './Feed.styles'
-
-const axolotlImage = require('../../assets/hey-axolotl.png')
 
 export default class Feed extends Component {
   state = {showNotification: false}
@@ -53,8 +51,12 @@ export default class Feed extends Component {
       goToCreateCommunityName,
       currentUserHasMemberships
     } = this.props
-    if (!currentUserHasMemberships) return <CreateCommunitySection goToCreateCommunityName={goToCreateCommunityName} />
-
+    if (!currentUserHasMemberships) {
+      return <CreateCommunityNotice
+        goToCreateCommunityName={goToCreateCommunityName}
+        text={'No posts here, try creating your own Community!'}
+      />
+    }
     return <View style={styles.container}>
       <FeedList
         community={community}
@@ -83,16 +85,4 @@ export default class Feed extends Component {
       {!topicName && community && <SocketSubscriber type='community' id={community.id} />}
     </View>
   }
-}
-
-export function CreateCommunitySection ({goToCreateCommunityName}) {
-  return <View style={styles.container}>
-    <Text style={styles.promptText}>No posts here, try creating you're own Community!</Text>
-    <Image style={styles.image} source={axolotlImage} />
-    <Button
-      text='Create a Community'
-      style={styles.button}
-      onPress={goToCreateCommunityName}
-    />
-  </View>
 }

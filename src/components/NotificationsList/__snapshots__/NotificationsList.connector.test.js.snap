@@ -4,6 +4,7 @@ exports[`matches the last snapshot for mapDispatchToProps 1`] = `
 Object {
   "fetchMore": [Function],
   "fetchNotifications": [Function],
+  "goToCreateCommunityName": [Function],
   "markActivityRead": [Function],
   "setRightButton": [Function],
   "updateNewNotificationCount": [Function],
@@ -50,6 +51,7 @@ Array [
 
 exports[`matches the last snapshot for mapStateToProps 1`] = `
 Object {
+  "currentUserHasMemberships": false,
   "hasMore": false,
   "notifications": Array [
     Object {
