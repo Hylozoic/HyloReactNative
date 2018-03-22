@@ -9,6 +9,7 @@ import Attachment from './Attachment'
 import Comment from './Comment'
 import Community, { CommunityModerator } from './Community'
 import CommunityTopic from './CommunityTopic'
+import Invitation from './Invitation'
 import Me from './Me'
 import Membership from './Membership'
 import Person from './Person'
@@ -31,6 +32,7 @@ orm.register(
   Community,
   CommunityModerator,
   CommunityTopic,
+  Invitation,
   Me,
   Membership,
   Message,
