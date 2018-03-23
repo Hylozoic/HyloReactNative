@@ -59,7 +59,8 @@ export default class FeedList extends Component {
       showMember,
       showTopic,
       showCommunities,
-      goToCommunity
+      goToCommunity,
+      goToTopic
     } = this.props
     const listHeaderComponent = <View>
       {header}
@@ -88,6 +89,7 @@ export default class FeedList extends Component {
             showTopic={showTopic}
             showCommunity={showCommunities}
             goToCommunity={goToCommunity}
+            goToTopic={goToTopic}
             selectedNetworkId={networkId} />}
         onRefresh={this.props.refreshPosts}
         refreshing={!!this.props.pendingRefresh}
@@ -139,7 +141,7 @@ export function ListControl ({ selected, options, onChange }) {
 
 export function PostRow ({
   post, showPost, editPost, showMember, showTopic,
-  showCommunity, goToCommunity, selectedNetworkId
+  showCommunity, goToCommunity, selectedNetworkId, goToTopic
 }) {
   // TODO: Move to Post model instance method...
   // When a network is selected only show communities
@@ -162,6 +164,7 @@ export function PostRow ({
           showMember={showMember}
           showTopic={showTopic}
           showCommunity={showCommunity}
+          goToTopic={goToTopic}
           goToCommunity={goToCommunity} />
       </View>
     </TouchableWithoutFeedback>

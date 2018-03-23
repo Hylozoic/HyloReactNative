@@ -34,7 +34,9 @@ export default class PostHeader extends PureComponent {
       removePost,
       deletePost,
       pinned,
-      pinPost
+      pinPost,
+      topics,
+      goToTopic
     } = this.props
 
     const { flaggingVisible } = this.state
@@ -48,6 +50,8 @@ export default class PostHeader extends PureComponent {
         onPress: () => goToCommunity(community.id)
       }
     }
+
+    const showTopics = !isEmpty(topics) && !context
 
     // Used to generate a link to this post from the backend.
     const linkData = {
@@ -96,6 +100,10 @@ export default class PostHeader extends PureComponent {
           {!!context && <TouchableOpacity onPress={context.onPress}>
             <Text style={styles.contextLabel}>{context.label}</Text>
           </TouchableOpacity>}
+          {!!showTopics && <Text style={styles.topicSpacer} />}
+          {!!showTopics && topics.map(topic => <TouchableOpacity key={topic.id} onPress={() => goToTopic(topic.name)}>
+            <Text style={styles.topicLabel}>#{topic.name}</Text>
+          </TouchableOpacity>)}
         </View>
 
       </View>
@@ -196,6 +204,15 @@ const styles = {
     fontSize: 12,
     fontFamily: 'Circular-Book',
     color: caribbeanGreen
+  },
+  topicLabel: {
+    fontSize: 12,
+    paddingRight: 5,
+    fontFamily: 'Circular-Book',
+    color: caribbeanGreen
+  },
+  topicSpacer: {
+    paddingRight: 10
   },
   upperRight: {
     paddingTop: 14,
