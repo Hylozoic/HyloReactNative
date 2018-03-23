@@ -1,6 +1,6 @@
 import React from 'react'
 import { FlatList, Text, TouchableOpacity, View } from 'react-native'
-import { get, isEmpty } from 'lodash/fp'
+import { isEmpty } from 'lodash/fp'
 import { array, func } from 'prop-types'
 
 import Icon from '../Icon'
@@ -19,10 +19,14 @@ export default class TopicList extends React.Component {
       <View style={styles.topicTitle}>
         <Text style={styles.hashtag}>#</Text><Text style={styles.topicName}>{item.name}</Text>
       </View>
-      <View style={styles.topicDetails}>
-        <Icon name='Star' style={styles.detailIcon} /><Text style={styles.detailText}>subscribers</Text>
-        <Icon name='Post' style={styles.detailIcon} /><Text style={styles.detailText}>posts</Text>
-      </View>
+      {item.followersTotal === undefined
+        ? <View style={styles.topicDetails}><Text style={styles.detailText}>create new</Text></View>
+        : <View style={styles.topicDetails}>
+          <Icon name='Star' style={styles.detailIcon} />
+          <Text style={styles.detailText}>{item.followersTotal} subscribers</Text>
+          <Icon name='Post' style={styles.detailIcon} />
+          <Text style={styles.detailText}>{item.postsTotal} posts</Text>
+        </View>}
     </TouchableOpacity>
 
   render () {

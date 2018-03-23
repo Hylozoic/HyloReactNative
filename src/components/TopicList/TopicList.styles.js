@@ -17,6 +17,10 @@ export default StyleSheet.create({
     fontSize: 16,
     marginRight: 10
   },
+  emptyList: {
+    fontFamily: 'Circular-Book',
+    fontSize: 16
+  },
   hashtag: {
     color: caribbeanGreen,
     fontFamily: 'Circular-Book',
@@ -29,13 +33,14 @@ export default StyleSheet.create({
     alignItems: 'center',
     paddingTop: 7
   },
+  topicList: {
+    paddingVertical: 10,
+    paddingHorizontal: 15
+  },
   topicName: {
     color: caribbeanGreen,
     fontFamily: 'Circular-Book',
     fontSize: 18
-  },
-  topicList: {
-    paddingHorizontal: 15
   },
   topicRow: {
     marginBottom: 10,

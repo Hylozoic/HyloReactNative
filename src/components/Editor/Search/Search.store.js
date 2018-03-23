@@ -56,11 +56,13 @@ export function findTopics (term, communityId) {
     graphql: {
       query: `query ($term: String, $communityId: ID) {
         community(id: $communityId) {
-          communityTopics(autocomplete: $term, first: 1) {
+          communityTopics(autocomplete: $term, first: 20) {
             items {
               topic {
                 id
+                followersTotal
                 name
+                postsTotal
               }
             }
           }
@@ -108,9 +110,15 @@ export const getTopics = ormCreateSelector(
     if (!topicSearchTerm) return []
 
     const term = topicSearchTerm.toLowerCase()
-    return session.Topic.all()
-    .filter(({ name }) => name && name.toLowerCase().match(term))
-    .toRefArray()
+    const topics = session.Topic.all()
+      .filter(({ name }) => name && name.toLowerCase().match(term))
+      .orderBy('name')
+      .toRefArray()
+    const isNewTopic = !!topics.find(t => t.name !== topicSearchTerm)
+
+    return isNewTopic
+      ? [ { id: 'newtopic', name: topicSearchTerm }, ...topics ]
+      : topics
   }
 )
 
