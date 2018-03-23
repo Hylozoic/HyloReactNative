@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect'
 import { createSelector as ormCreateSelector } from 'redux-orm'
-import { get, find, pick, difference } from 'lodash/fp'
+import { get, find, pick } from 'lodash/fp'
 import { humanDate } from 'hylo-utils/text'
 import { decode } from 'ent'
 import striptags from 'striptags'
