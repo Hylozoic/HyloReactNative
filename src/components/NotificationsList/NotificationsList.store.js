@@ -13,7 +13,8 @@ import {
   ACTION_JOIN_REQUEST,
   ACTION_APPROVED_JOIN_REQUEST,
   ACTION_MENTION,
-  ACTION_COMMENT_MENTION
+  ACTION_COMMENT_MENTION,
+  ACTION_ANNOUNCEMENT
 } from '../../store/models/Notification'
 
 export const MODULE_NAME = 'NotificationsList'
@@ -191,6 +192,13 @@ export function refineActivity ({ action, actor, comment, community, post, meta 
         community: community.name,
         header: `Join Request Approved`,
         onPress: () => navigate('Feed', { communityId: community.id })
+      }
+    case ACTION_ANNOUNCEMENT:
+      return {
+        body: `wrote: ${presentedText(post.title)}`,
+        header: `posted an announcement`,
+        onPress: () => navigate('PostDetails', { id: post.id }),
+        nameInHeader: true
       }
   }
 }
