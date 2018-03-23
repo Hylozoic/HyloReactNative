@@ -13,7 +13,10 @@ it('matches the last snapshot for mapStateToProps', () => {
     createdAt: 'Wed Oct 04 2017 00:06:56 GMT+1300 (NZDT)',
     id: '1',
     post: '1',
-    unread: false
+    unread: false,
+    meta: {
+      reasons: ['announcement']
+    }
   })
   session.Comment.create({ id: '1' })
   session.Notification.create({ id: '1', activity: '1' })

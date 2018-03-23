@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect'
 import { createSelector as ormCreateSelector } from 'redux-orm'
-import { get, find, pick } from 'lodash/fp'
+import { get, find, pick, difference } from 'lodash/fp'
 import { humanDate } from 'hylo-utils/text'
 import { decode } from 'ent'
 import striptags from 'striptags'
@@ -14,7 +14,8 @@ import {
   ACTION_APPROVED_JOIN_REQUEST,
   ACTION_MENTION,
   ACTION_COMMENT_MENTION,
-  ACTION_ANNOUNCEMENT
+  ACTION_ANNOUNCEMENT,
+  NOTIFICATIONS_WHITELIST
 } from '../../store/models/Notification'
 
 export const MODULE_NAME = 'NotificationsList'
@@ -207,6 +208,7 @@ export function refineNotification (navigation) {
   return ({ activity, createdAt, id }, i, notifications) => {
     const { action, actor, meta, unread } = activity
     // Only show separator between read and unread notifications
+
     const avatarSeparator = i !== notifications.length - 1
       ? unread !== notifications[i + 1].activity.unread
       : false
@@ -218,7 +220,8 @@ export function refineNotification (navigation) {
       avatarSeparator,
       createdAt: humanDate(createdAt),
       ...refineActivity(activity, navigation),
-      unread
+      unread,
+      reasons: meta.reasons
     }
   }
 }
@@ -239,4 +242,11 @@ export const getNotifications = ormCreateSelector(
     .orderBy(m => Number(m.id), 'desc')
     .toModelArray()
     .map(refineNotification(navigation))
+    .filter(n => n.reasons.every(r => reasonInWhitelist(r, NOTIFICATIONS_WHITELIST)))
 )
+
+export function reasonInWhitelist (reason, whitelist) {
+  const reasonSubstring = reason.indexOf(':') === -1 ? reason : reason.substring(0, reason.indexOf(':'))
+  const response = whitelist.indexOf(reasonSubstring) !== -1
+  return response
+}
