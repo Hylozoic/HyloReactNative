@@ -90,7 +90,8 @@ describe('PostRow', () => {
     renderer.render(<PostRow
       post={post}
       navigate={() => {}}
-      goToCommunity={() => {}} />)
+      goToCommunity={() => {}}
+      goToTopic={() => {}} />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
