@@ -17,6 +17,7 @@ it('renders correctly with all=true, and no community or user', () => {
     canFlag
     pinned
     removePost={() => {}}
+    topics={[{name: 'topic1'}, {name: 'topic2'}]}
     editPost={() => {}}
     pinPost={() => {}}
     date={new Date(new Date().getTime() - 60000 * 10)} />)
