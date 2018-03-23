@@ -49,8 +49,7 @@ export default class PostCard extends React.Component {
       currentUser,
       showMember,
       showTopic,
-      goToCommunity,
-      goToTopic
+      goToCommunity
     } = this.props
 
     const slug = get('0.slug', post.communities)
@@ -66,7 +65,7 @@ export default class PostCard extends React.Component {
         pinned={post.pinned}
         postId={post.id}
         showMember={showMember}
-        goToTopic={goToTopic}
+        showTopic={showTopic}
         goToCommunity={goToCommunity} />
       <PostImage postId={post.id} />
       <PostBody

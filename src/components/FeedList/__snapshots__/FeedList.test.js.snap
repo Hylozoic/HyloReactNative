@@ -130,7 +130,6 @@ exports[`PostRow only displays communities in the selected network 1`] = `
       <PostCard
         editPost={[Function]}
         goToCommunity={[Function]}
-        goToTopic={undefined}
         post={
           Object {
             "communities": Array [
@@ -168,7 +167,6 @@ exports[`PostRow renders correctly 1`] = `
       <PostCard
         editPost={[Function]}
         goToCommunity={[Function]}
-        goToTopic={[Function]}
         post={
           Object {
             "id": 1,

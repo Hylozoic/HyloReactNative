@@ -36,7 +36,7 @@ export default class PostHeader extends PureComponent {
       pinned,
       pinPost,
       topics,
-      goToTopic
+      showTopic
     } = this.props
 
     const { flaggingVisible } = this.state
@@ -101,7 +101,7 @@ export default class PostHeader extends PureComponent {
             <Text style={styles.contextLabel}>{context.label}</Text>
           </TouchableOpacity>}
           {!!showTopics && <Text style={styles.topicSpacer} />}
-          {!!showTopics && topics.map(topic => <TouchableOpacity key={topic.id} onPress={() => goToTopic(topic.name)}>
+          {!!showTopics && topics.map(topic => <TouchableOpacity key={topic.id} onPress={() => showTopic(topic.name)}>
             <Text style={styles.topicLabel}>#{topic.name}</Text>
           </TouchableOpacity>)}
         </View>

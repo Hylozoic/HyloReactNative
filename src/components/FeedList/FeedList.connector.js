@@ -72,7 +72,7 @@ export function shouldResetNewPostCount ({subject, sortBy, filter, topic}) {
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
   const { hasMore, pending, posts, queryProps } = stateProps
-  const { community, navigation } = ownProps
+  const { community } = ownProps
   const fetchMorePosts = hasMore && !pending
     ? () => dispatchProps.fetchPosts({...queryProps, offset: posts.length})
     : () => {}
@@ -85,13 +85,10 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     return Promise.all(promises)
   }
 
-  const goToTopic = topicName => navigation.navigate('Feed', {topicName})
-
   return {
     ...omit(['queryProps'], stateProps),
     ...dispatchProps,
     ...ownProps,
-    goToTopic,
     fetchPosts: () => fetchPostsAndResetCount(queryProps),
     refreshPosts: () => fetchPostsAndResetCount(queryProps, {reset: true}),
     fetchMorePosts
