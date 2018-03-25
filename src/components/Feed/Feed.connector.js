@@ -12,7 +12,6 @@ import { ALL_COMMUNITIES_ID } from '../../store/models/Community'
 import {
   fetchCommunityTopic,
   getCommunityTopic,
-  FETCH_COMMUNITY_TOPIC,
   setTopicSubscribe
 } from './Feed.store'
 import { mapWhenFocused, mergeWhenFocused } from 'util/connector'
@@ -30,10 +29,9 @@ export function mapStateToProps (state, props) {
   const communitySlug = get('slug', community)
   const network = getNetwork(state, {id: networkId})
   const currentUser = getMe(state)
-  const fetchCommunityTopicPending = state.pending[FETCH_COMMUNITY_TOPIC]
   const communityTopic = topicName && community &&
     getCommunityTopic(state, {topicName, slug: community.slug})
-  const topicSubscribed = !fetchCommunityTopicPending && topicName && communityTopic && communityTopic.isSubscribed
+  const topicSubscribed = topicName && communityTopic && communityTopic.isSubscribed
   const topic = get('topic', communityTopic)
   return {
     currentUser,
