@@ -232,37 +232,30 @@ exports[`renders correctly with all=true, and no community or user 1`] = `
       >
         10m ago
       </Text>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
+      <FlatList
+        data={
+          Array [
+            Object {
+              "name": "topic1",
+            },
+            Object {
+              "name": "topic2",
+            },
+          ]
+        }
+        disableVirtualization={false}
+        horizontal={true}
+        initialNumToRender={10}
+        keyExtractor={[Function]}
+        maxToRenderPerBatch={10}
+        numColumns={1}
+        onEndReachedThreshold={2}
+        renderItem={[Function]}
+        scrollEventThrottle={50}
+        showsHorizontalScrollIndicator={false}
+        updateCellsBatchingPeriod={50}
+        windowSize={21}
       />
-      <TouchableOpacity
-        activeOpacity={0.2}
-        onPress={[Function]}
-      >
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-        >
-          #
-          topic1
-        </Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        activeOpacity={0.2}
-        onPress={[Function]}
-      >
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-        >
-          #
-          topic2
-        </Text>
-      </TouchableOpacity>
     </View>
   </View>
   <View>
