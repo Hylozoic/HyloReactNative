@@ -104,8 +104,9 @@ export default class PostHeader extends PureComponent {
             data={topics}
             style={styles.topicList}
             horizontal
+            keyExtractor={(item, index) => item.id}
             showsHorizontalScrollIndicator={false}
-            renderItem={({item}) => <TouchableOpacity key={item.id} onPress={() => showTopic(item.name)}>
+            renderItem={({item}) => <TouchableOpacity onPress={() => showTopic(item.name)}>
               <Text style={styles.topicLabel}>#{item.name}</Text>
             </TouchableOpacity>} />}
         </View>
