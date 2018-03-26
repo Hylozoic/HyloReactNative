@@ -15,11 +15,12 @@ platform :ios do
     scan
   end
 
-  desc "Submit a new Beta Build to Apple TestFlight"
-  desc "This will also make sure the profile is up to date"
+  desc "Submit a new Beta Build to Apple TestFlight."
+  desc "This will also make sure the profile is up to date."
   lane :beta do
     match(
-      type: "appstore"
+      type: "appstore",
+      force_for_new_devices: true
     )
     increment_build_number(
       xcodeproj: 'HyloReactNative.xcodeproj'
@@ -33,8 +34,8 @@ platform :ios do
     )
   end
 
-  desc "Build a development IPA file to install to a device"
-  desc "This builds using the connection with metro running in terminal"
+  desc "Build a development IPA file to install to a device."
+  desc "This builds using the connection with metro running in terminal."
   lane :dev do
     match(
       type: "development"
@@ -46,11 +47,12 @@ platform :ios do
     )
   end
 
-  desc "Build an IPA file for QA distribution"
-  desc "Be aware that this will hit the live API"
+  desc "Build an IPA file for QA distribution."
+  desc "Be aware that this will hit the live API."
   lane :qa do
     match(
-      type: "adhoc"
+      type: "adhoc",
+      force_for_new_devices: true
     )
     gym(
      scheme: "HyloReactNative",
@@ -59,7 +61,7 @@ platform :ios do
     )
   end
 
-  desc "Update team device ids from the devices.txt file"
+  desc "Update team device ids from the devices.txt file."
   lane :devices do
     register_devices(
       devices_file: "./devices.txt"
