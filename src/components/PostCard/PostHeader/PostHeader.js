@@ -37,7 +37,7 @@ export default class PostHeader extends PureComponent {
       pinPost,
       announcement
     } = this.props
-
+    console.log('render announcement', announcement)
     const { flaggingVisible } = this.state
 
     let context
@@ -225,7 +225,8 @@ const styles = {
   announcementRow: {
     flex: 1,
     alignItems: 'flex-end',
-    paddingTop: 14
+    paddingTop: 14,
+    marginRight: 2
   }
 }
 
