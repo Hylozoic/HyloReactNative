@@ -74,6 +74,8 @@ export default class PostDetails extends React.Component {
         communities={post.communities}
         slug={slug}
         pinned={post.pinned}
+        topics={post.topics}
+        showTopic={showTopic}
         postId={post.id}
         showMember={showMember}
         goToCommunity={goToCommunity} />

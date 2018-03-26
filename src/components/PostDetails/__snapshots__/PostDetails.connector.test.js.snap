@@ -44,6 +44,7 @@ Object {
     "linkPreview": undefined,
     "pinned": undefined,
     "postMemberships": undefined,
+    "topics": Array [],
   },
   "showMember": [Function],
   "showTopic": [Function],
@@ -129,6 +130,12 @@ Object {
     community {
       id
     }
+  }
+  topics {
+    id
+    name
+    postsTotal
+    followersTotal
   }
         }
       }",
