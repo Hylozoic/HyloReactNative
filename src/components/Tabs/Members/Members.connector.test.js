@@ -41,13 +41,23 @@ describe('makeFetchOpts', () => {
 describe('mapStateToProps', () => {
   it('handles null value for lastViewedCommunity', () => {
     const session = orm.session(orm.getEmptyState())
-    session.Me.create({id: 123})
+    const community = session.Community.create({id: 10, slug: 'tom'})
+    session.Me.create({
+      id: 123,
+      memberships: [session.Membership.create({
+        id: '345',
+        community: community.id,
+        hasModeratorRole: true
+      })]
+    })
+
     const state = {
       orm: session.state,
       [MODULE_NAME]: {},
       pending: {},
       queryResults: {}
     }
+    session.Community.create({})
     expect(mapStateToProps(state)).toMatchSnapshot()
   })
 })

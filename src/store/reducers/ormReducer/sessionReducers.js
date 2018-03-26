@@ -10,3 +10,6 @@ export {
 export {
   ormSessionReducer as postEditorReducer
 } from '../../../components/PostEditor/PostEditor.store'
+export {
+  ormSessionReducer as invitePeopleReducer
+} from '../../../components/InvitePeople/InvitePeople.store'

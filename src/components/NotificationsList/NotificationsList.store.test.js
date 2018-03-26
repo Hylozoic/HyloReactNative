@@ -179,6 +179,21 @@ describe('selectors/refiners', () => {
       actual.onPress()
       expect(navigation.navigate).toHaveBeenCalledWith('Feed', { communityId: '222' })
     })
+
+    it('matches the previous ACTION_ANNOUNCEMENT snapshot', () => {
+      session.Activity.withId('1').update({ action: 'announcement' })
+      const notification = session.Notification.withId('1')
+      const actual = store.refineActivity(notification.activity, navigation)
+      expect(actual).toMatchSnapshot()
+    })
+
+    it('navigates to PostDetails for ACTION_ANNOUNCEMENT', () => {
+      session.Activity.withId('1').update({ action: 'announcement' })
+      const notification = session.Notification.withId('1')
+      const actual = store.refineActivity(notification.activity, navigation)
+      actual.onPress()
+      expect(navigation.navigate).toHaveBeenCalledWith('PostDetails', { id: '333' })
+    })
   })
 
   describe('refineNotification', () => {
@@ -206,6 +221,18 @@ describe('selectors/refiners', () => {
       const notifications = session.Notification.all().toModelArray()
       const actual = store.refineNotification(navigation)(notifications[0], 0, notifications)
       expect(actual.avatarSeparator).toMatchSnapshot()
+    })
+  })
+  describe('reasonInWhitelist', () => {
+    it('returns expected values', () => {
+      const { reasonInWhitelist } = store
+      const whitelist = ['announcement', 'mention']
+      const validReason = 'announcement'
+      const invalidReason = 'invalidReason'
+      const formatedReason = 'mention: 2'
+      expect(reasonInWhitelist(validReason, whitelist)).toBeTruthy()
+      expect(reasonInWhitelist(invalidReason, whitelist)).toBeFalsy()
+      expect(reasonInWhitelist(formatedReason, whitelist)).toBeTruthy()
     })
   })
 })
