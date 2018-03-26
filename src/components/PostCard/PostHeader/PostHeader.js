@@ -37,7 +37,6 @@ export default class PostHeader extends PureComponent {
       pinPost,
       announcement
     } = this.props
-    console.log('render announcement', announcement)
     const { flaggingVisible } = this.state
 
     let context
