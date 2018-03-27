@@ -40,7 +40,9 @@ export default class PostEditor extends React.Component {
       communityIds,
       imageUrls,
       fileUrls,
-      showPicker: false
+      showPicker: false,
+      topics: get('topics', post) || [],
+      topicsEdited: false
     }
   }
 
