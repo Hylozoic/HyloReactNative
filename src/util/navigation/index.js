@@ -46,7 +46,8 @@ export const routeMatchers = {
   accessLink: route('/c/:slug/join/:accessCode'),
   passwordResetTokenLogin: route('/noo/login/token'),
   post: route('/c/:slug/p/:id'),
-  thread: route('/t/:id')
+  thread: route('/t/:id'),
+  allCommunities: route('/all')
 }
 
 export function redirectAfterLogin ({ currentUser, navigation, action }) {

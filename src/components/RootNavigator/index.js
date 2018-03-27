@@ -55,7 +55,7 @@ const tabs = {
 
 // Screens that can be shown in any tab (the same tab icon stays highlighted)
 const screensInTabs = {
-  Feed: {screen: Feed},
+  Feed: {screen: Feed, path: 'feed/:communityId'},
   PostEditor: {screen: PostEditor},
   DetailsEditor: {screen: DetailsEditor},
   PostDetails: {screen: PostDetails, path: 'post/:id'},

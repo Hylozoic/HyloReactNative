@@ -15,6 +15,7 @@ import {
   setTopicSubscribe
 } from './Feed.store'
 import { mapWhenFocused, mergeWhenFocused } from 'util/connector'
+import getNavigationParam from '../../store/selectors/getNavigationParam'
 
 export function mapStateToProps (state, props) {
   const params = get('state.params', props.navigation) || {}
@@ -23,7 +24,8 @@ export function mapStateToProps (state, props) {
   // NOTE: communityId is is received either as a prop (via Home) or as a
   // navigation parameter. In case of nav params the screen will load with a
   // back button and be added to the stack.
-  const communityId = getCurrentCommunityId(state, props)
+  const communityId = getNavigationParam('communityId', state, props) ||
+                        getCurrentCommunityId(state, props)
   const topicName = props.topicName || params.topicName
   const community = !networkId && getCommunity(state, {id: communityId})
   const communitySlug = get('slug', community)

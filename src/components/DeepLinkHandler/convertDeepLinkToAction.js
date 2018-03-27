@@ -22,6 +22,9 @@ export function reformatPath (path) {
   // in a nested navigator, not the top-level StackNavigator.
   if (match) return `${MAIN_ROUTE_PATH}/post/${match.id}`
 
+  match = routeMatchers.allCommunities(pathname)
+  if (match) return `${MAIN_ROUTE_PATH}/feed/all-communities`
+
   match = routeMatchers.thread(pathname)
   if (match) return 'thread/' + match.id
 
