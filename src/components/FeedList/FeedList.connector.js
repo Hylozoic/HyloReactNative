@@ -72,12 +72,13 @@ export function shouldResetNewPostCount ({subject, sortBy, filter, topic}) {
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
   const { hasMore, pending, posts, queryProps } = stateProps
+  const { community } = ownProps
   const fetchMorePosts = hasMore && !pending
     ? () => dispatchProps.fetchPosts({...queryProps, offset: posts.length})
     : () => {}
   const fetchPostsAndResetCount = (params, opts) => {
     const promises = [dispatchProps.fetchPosts(params, opts)]
-    const communityID = get('id', ownProps.community)
+    const communityID = get('id', community)
     if (shouldResetNewPostCount(queryProps)) {
       promises.push(dispatchProps.resetNewPostCount(communityID, 'Membership'))
     }

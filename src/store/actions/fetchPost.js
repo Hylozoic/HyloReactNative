@@ -62,6 +62,12 @@ export function getPostFieldsFragment (withComments = true) {
     community {
       id
     }
+  }
+  topics {
+    id
+    name
+    postsTotal
+    followersTotal
   }`
 }
 

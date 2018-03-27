@@ -114,11 +114,11 @@ export const getTopics = ormCreateSelector(
       .filter(({ name }) => name && name.toLowerCase().match(term))
       .orderBy('name')
       .toRefArray()
-    const isNewTopic = !!topics.find(t => t.name !== topicSearchTerm)
+    const topicExists = !!topics.find(t => t.name === topicSearchTerm)
 
-    return isNewTopic
-      ? [ { id: 'newtopic', name: topicSearchTerm }, ...topics ]
-      : topics
+    return topicExists
+      ? topics
+      : [ { id: 'newtopic', name: topicSearchTerm }, ...topics ]
   }
 )
 
