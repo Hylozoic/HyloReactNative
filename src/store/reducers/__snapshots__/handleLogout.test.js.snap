@@ -220,6 +220,11 @@ Object {
       "itemsById": Object {},
       "meta": Object {},
     },
+    "PostTopics": Object {
+      "items": Array [],
+      "itemsById": Object {},
+      "meta": Object {},
+    },
     "Skill": Object {
       "items": Array [],
       "itemsById": Object {},
