@@ -104,7 +104,7 @@ export default class PostEditor extends React.Component {
   }
 
   render () {
-    const { details, editDetails, postId } = this.props
+    const { details, editDetails, editTopics, postId, topics } = this.props
     const { title, type, imageUrls, fileUrls, isSaving } = this.state
 
     if (postId && !details) return <Loading />
@@ -138,6 +138,17 @@ export default class PostEditor extends React.Component {
             <Details details={details} placeholder={detailsPlaceholder} />
           </TouchableOpacity>
 
+          <SectionLabel>Topics</SectionLabel>
+          <TouchableOpacity
+            style={[
+              styles.textInputWrapper,
+              styles.section,
+              styles.details
+            ]}
+            onPress={() => !isSaving && editTopics()}>
+            <Topics topics={topics} placeholder={topicsPlaceholder} />
+          </TouchableOpacity>
+
           <SectionLabel>Images</SectionLabel>
           <ImageSelector
             onAdd={this.addImage}
@@ -168,6 +179,8 @@ const titlePlaceholders = {
 
 const detailsPlaceholder = 'What else should we know?'
 
+const topicsPlaceholder = 'Choose up to three topics.'
+
 export function SectionLabel ({ children }) {
   return <Text style={styles.sectionLabel}>
     {children}
@@ -178,6 +191,11 @@ export function Details ({details, placeholder}) {
   const style = details ? styles.textInput : styles.textInputPlaceholder
   const body = excerptDetails(details) || placeholder
   return <Text style={style}>{body}</Text>
+}
+
+export function Topics ({ topics, placeholder }) {
+  const style = topics ? styles.textInput : styles.textInputPlaceholder
+  return <Text style={style}>{topics || placeholder}</Text>
 }
 
 export function TypeButton ({ type, selected, onPress }) {
