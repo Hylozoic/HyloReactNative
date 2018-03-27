@@ -17,6 +17,7 @@ import { decode } from 'ent'
 import KeyboardFriendlyView from '../KeyboardFriendlyView'
 import ImageSelector from './ImageSelector'
 import FileSelector from './FileSelector'
+import Search from '../Editor/Search'
 
 export default class PostEditor extends React.Component {
   static contextTypes = {navigate: PropTypes.func}
@@ -38,7 +39,8 @@ export default class PostEditor extends React.Component {
       type: 'discussion',
       communityIds,
       imageUrls,
-      fileUrls
+      fileUrls,
+      showPicker: false
     }
   }
 
@@ -103,11 +105,23 @@ export default class PostEditor extends React.Component {
     })
   }
 
+  cancelPicker = () => this.setState({ showPicker: false })
+
+  insertPicked = () => this.cancelPicker()
+
   render () {
-    const { details, editDetails, editTopics, postId, topics } = this.props
-    const { title, type, imageUrls, fileUrls, isSaving } = this.state
+    const { communityIds, details, editDetails, postId, topics } = this.props
+    const { fileUrls, imageUrls, isSaving, showPicker, title, type } = this.state
 
     if (postId && !details) return <Loading />
+
+    if (showPicker) {
+      return <Search style={styles.search}
+        communityId={communityIds[0]}
+        onCancel={this.cancelPicker}
+        onSelect={this.insertPicked}
+        type='topics' />
+    }
 
     return <KeyboardFriendlyView style={styles.container} {...kavProps}>
       <ScrollView style={styles.scrollContainer}>
@@ -145,7 +159,7 @@ export default class PostEditor extends React.Component {
               styles.section,
               styles.details
             ]}
-            onPress={() => !isSaving && editTopics()}>
+            onPress={() => this.setState({ showPicker: true })}>
             <Topics topics={topics} placeholder={topicsPlaceholder} />
           </TouchableOpacity>
 
@@ -179,7 +193,7 @@ const titlePlaceholders = {
 
 const detailsPlaceholder = 'What else should we know?'
 
-const topicsPlaceholder = 'Choose up to three topics.'
+const topicsPlaceholder = 'Add topics.'
 
 export function SectionLabel ({ children }) {
   return <Text style={styles.sectionLabel}>
