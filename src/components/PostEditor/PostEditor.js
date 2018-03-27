@@ -134,7 +134,7 @@ export default class PostEditor extends React.Component {
               styles.section,
               styles.details
             ]}
-            onPress={() => !isSaving && editDetails()}>
+            onPress={() => !isSaving && editDetails(topics => console.log('here are the topics returning from editDetails', topics))}>
             <Details details={details} placeholder={detailsPlaceholder} />
           </TouchableOpacity>
 

@@ -56,7 +56,7 @@ export function mapDispatchToProps (dispatch, props) {
         return Promise.resolve({})
       })
     },
-    editDetails: () => navigation.navigate('DetailsEditor', {communityId}),
+    editDetails: setTopics => navigation.navigate('DetailsEditor', {communityId, setTopics}),
     setDetails: content => dispatch(setDetails(content))
   }
 }
