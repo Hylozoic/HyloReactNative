@@ -3,6 +3,8 @@ import { Button, View } from 'react-native'
 import KeyboardFriendlyView from '../../KeyboardFriendlyView'
 import Editor from '../../Editor'
 import { keyboardAvoidingViewProps as kavProps } from 'util/viewHelpers'
+import { TOPIC_ENTITY_TYPE } from 'hylo-utils/constants'
+import cheerio from 'cheerio'
 
 export default class DetailsEditor extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -20,11 +22,24 @@ export default class DetailsEditor extends React.Component {
   }
 
   componentWillUnmount () {
-    this.props.saveChanges(this.state.content)
+    this.save()
   }
 
   shouldComponentUpdate (nextProps) {
     return nextProps.isFocused
+  }
+
+  save () {
+    const { setTopics } = this.props
+    const content = this.state.content
+    if (setTopics) {
+      const $ = cheerio.load(content)
+      var topicNames = []
+      $(`a[data-entity-type=${TOPIC_ENTITY_TYPE}]`).map((i, el) =>
+        topicNames.push($(el).text().replace('#', '')))
+      setTopics(topicNames)
+    }
+    this.props.saveChanges(content)
   }
 
   render () {
