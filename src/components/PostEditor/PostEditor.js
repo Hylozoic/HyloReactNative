@@ -233,7 +233,9 @@ export function Details ({details, placeholder}) {
 
 export function Topics ({ onPress, topics, placeholder }) {
   if (topics.length > 0) {
-    return topics.map((t, i) => <TopicPill key={i} topic={t} onPress={onPress(t)} />)
+    return <ScrollView horizontal style={styles.topicPillBox}>
+      {topics.map((t, i) => <TopicPill key={i} topic={t} onPress={onPress(t)} />)}
+    </ScrollView>
   }
   return <Text style={styles.textInputPlaceholder}>{placeholder}</Text>
 }

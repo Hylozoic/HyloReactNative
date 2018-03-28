@@ -137,6 +137,10 @@ export default {
     marginRight: 8,
     marginBottom: 8
   },
+  topicPillBox: {
+    display: 'flex',
+    flexDirection: 'row'
+  },
   topicRemove: {
     color: rhino30,
     fontSize: 16,
