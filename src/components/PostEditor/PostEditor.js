@@ -8,7 +8,7 @@ import {
   View
 } from 'react-native'
 import { decode } from 'ent'
-import { get, uniq } from 'lodash/fp'
+import { get, uniq, uniqBy } from 'lodash/fp'
 import PropTypes from 'prop-types'
 import striptags from 'striptags'
 
@@ -122,15 +122,27 @@ export default class PostEditor extends React.Component {
   // Note that as it stands, this will _replace_ anything in the topic line.
   // TODO: this will likely need to change when we get around to allowing
   // post editing on mobile.
-  insertEditorTopics = topics => this.setState({ topics })
+  insertEditorTopics = topicNames => {
+    if (this.state.topicsEdited) return
+
+    const newTopics = uniqBy(
+      t => t.name,
+      this.state.topics.concat(topicNames.map(t => ({name: t, id: t}))).slice(0, 3))
+    this.setState({
+      topics: newTopics
+    })
+  }
 
   removeTopic = topicName => () => this.setState({
-    topics: this.state.topics.filter(t => t !== topicName)
+    topics: this.state.topics.filter(t => t !== topicName),
+    topicsEdited: true
   })
 
   render () {
     const { communityIds, details, editDetails, postId } = this.props
     const { fileUrls, imageUrls, isSaving, showPicker, topics, title, type } = this.state
+
+    console.log('topics', topics)
 
     if (postId && !details) return <Loading />
 
@@ -242,9 +254,9 @@ export function Topics ({ onPress, topics, placeholder }) {
   return <Text style={styles.textInputPlaceholder}>{placeholder}</Text>
 }
 
-export function TopicPill ({ topic, onPress }) {
+export function TopicPill ({ topic, topic: { name }, onPress }) {
   return <TouchableOpacity onPress={onPress} style={styles.topicPill}>
-    <Text style={styles.topicText}>#{topic.toLowerCase()}</Text>
+    <Text style={styles.topicText}>#{name.toLowerCase()}</Text>
     <Icon name='Ex' style={styles.topicRemove} />
   </TouchableOpacity>
 }
