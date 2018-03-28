@@ -1,12 +1,13 @@
 import { isIOS } from 'util/platform'
-
 import {
-  havelockBlue,
+  caribbeanGreen,
   fakeAlpha,
   ghost,
+  havelockBlue,
   jade,
   limedSpruce,
   rhino10,
+  rhino30,
   westSide
 } from 'style/colors'
 
@@ -37,7 +38,7 @@ export default {
     fontSize: 14,
     fontFamily: 'Circular-Book',
     paddingBottom: 4,
-    opacity: 0.45
+    color: rhino30
   },
   details: {
     paddingTop: isIOS ? null : 15
@@ -90,10 +91,61 @@ export default {
   },
   sectionLabel: {
     marginBottom: 8,
-    fontFamily: 'Circular-Medium'
+    fontFamily: 'Circular-Bold'
   },
   saveButton: {
     marginRight: 10
+  },
+  topics: {
+    justifyContent: 'center',
+    display: 'flex',
+    flexDirection: 'column',
+    marginBottom: 10
+  },
+  topicAddBorder: {
+    borderColor: caribbeanGreen,
+    borderRadius: 100,
+    borderWidth: 1,
+    display: 'flex',
+    alignItems: 'center',
+    height: 25,
+    justifyContent: 'center',
+    padding: 3,
+    marginBottom: 8,
+    marginHorizontal: 10,
+    width: 25
+  },
+  topicAdd: {
+    color: caribbeanGreen,
+    fontSize: 16
+  },
+  topicLabel: {
+    alignItems: 'center',
+    display: 'flex',
+    flexDirection: 'row',
+    marginBottom: 10
+  },
+  topicPill: {
+    display: 'flex',
+    alignItems: 'center',
+    flexDirection: 'row',
+    borderRadius: 4,
+    borderWidth: 1,
+    borderColor: rhino30,
+    paddingVertical: 10,
+    paddingHorizontal: 10,
+    marginRight: 8,
+    marginBottom: 8
+  },
+  topicRemove: {
+    color: rhino30,
+    fontSize: 16,
+    marginLeft: 10
+  },
+  topicText: {
+    color: caribbeanGreen,
+    fontFamily: 'Circular-Bold',
+    fontSize: 16
   },
   imageSelector: {
     marginBottom: 10

@@ -18,7 +18,9 @@ import KeyboardFriendlyView from '../KeyboardFriendlyView'
 import ImageSelector from './ImageSelector'
 import FileSelector from './FileSelector'
 import Search from '../Editor/Search'
+import Icon from '../../components/Icon'
 import { SearchType } from '../Editor/Search/Search.store'
+import { rhino30 } from 'style/colors'
 
 export default class PostEditor extends React.Component {
   static contextTypes = {navigate: PropTypes.func}
@@ -120,6 +122,10 @@ export default class PostEditor extends React.Component {
   // post editing on mobile.
   insertEditorTopics = topics => this.setState({ topics })
 
+  removeTopic = topicName => () => this.setState({
+    topics: this.state.topics.filter(t => t !== topicName)
+  })
+
   render () {
     const { communityIds, details, editDetails, postId } = this.props
     const { fileUrls, imageUrls, isSaving, showPicker, topics, title, type } = this.state
@@ -127,7 +133,6 @@ export default class PostEditor extends React.Component {
     if (postId && !details) return <Loading />
 
     if (showPicker) {
-      console.log(SearchType.TOPIC, 't')
       return <Search style={styles.search}
         communityId={communityIds[0]}
         onCancel={this.cancelTopicPicker}
@@ -147,10 +152,14 @@ export default class PostEditor extends React.Component {
 
           <SectionLabel>Title</SectionLabel>
           <View style={[styles.textInputWrapper, styles.section]}>
-            <TextInput value={title} style={styles.textInput}
+            <TextInput
+              editable={!isSaving}
               onChangeText={title => this.setState({title})}
-              placeholder={titlePlaceholders[type]} editable={!isSaving}
-              underlineColorAndroid='transparent' />
+              placeholder={titlePlaceholders[type]}
+              placeholderTextColor={rhino30}
+              style={styles.textInput}
+              underlineColorAndroid='transparent'
+              value={title} />
           </View>
 
           <SectionLabel>Details</SectionLabel>
@@ -164,15 +173,18 @@ export default class PostEditor extends React.Component {
             <Details details={details} placeholder={detailsPlaceholder} />
           </TouchableOpacity>
 
-          <SectionLabel>Topics</SectionLabel>
           <TouchableOpacity
             style={[
-              styles.textInputWrapper,
               styles.section,
-              styles.details
+              styles.textInputWrapper,
+              styles.topics
             ]}
             onPress={() => this.setState({ showPicker: true })}>
-            <Topics topics={topics} placeholder={topicsPlaceholder} />
+            <View style={styles.topicLabel}>
+              <SectionLabel>Topics</SectionLabel>
+              <View style={styles.topicAddBorder}><Icon name='Plus' style={styles.topicAdd} /></View>
+            </View>
+            <Topics onPress={this.removeTopic} topics={topics} placeholder={topicsPlaceholder} />
           </TouchableOpacity>
 
           <SectionLabel>Images</SectionLabel>
@@ -219,11 +231,18 @@ export function Details ({details, placeholder}) {
   return <Text style={style}>{body}</Text>
 }
 
-export function Topics ({ topics, placeholder }) {
+export function Topics ({ onPress, topics, placeholder }) {
   if (topics.length > 0) {
-    return topics.map((t, i) => <Text key={i} style={styles.textInput}>{t}</Text>)
+    return topics.map((t, i) => <TopicPill key={i} topic={t} onPress={onPress(t)} />)
   }
-  return <Text style={styles.placeholder}>{placeholder}</Text>
+  return <Text style={styles.textInputPlaceholder}>{placeholder}</Text>
+}
+
+export function TopicPill ({ topic, onPress }) {
+  return <TouchableOpacity onPress={onPress} style={styles.topicPill}>
+    <Text style={styles.topicText}>#{topic.toLowerCase()}</Text>
+    <Icon name='Ex' style={styles.topicRemove} />
+  </TouchableOpacity>
 }
 
 export function TypeButton ({ type, selected, onPress }) {
