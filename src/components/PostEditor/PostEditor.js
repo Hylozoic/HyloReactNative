@@ -7,19 +7,21 @@ import {
   TouchableOpacity,
   View
 } from 'react-native'
-import PropTypes from 'prop-types'
-import styles from './PostEditor.styles'
-import Loading from '../Loading'
-import striptags from 'striptags'
-import { get, uniq } from 'lodash/fp'
-import { keyboardAvoidingViewProps as kavProps } from 'util/viewHelpers'
 import { decode } from 'ent'
-import KeyboardFriendlyView from '../KeyboardFriendlyView'
-import ImageSelector from './ImageSelector'
-import FileSelector from './FileSelector'
-import Search from '../Editor/Search'
+import { get, uniq } from 'lodash/fp'
+import PropTypes from 'prop-types'
+import striptags from 'striptags'
+
 import Icon from '../../components/Icon'
+import KeyboardFriendlyView from '../KeyboardFriendlyView'
+import Loading from '../Loading'
+import Search from '../Editor/Search'
 import { SearchType } from '../Editor/Search/Search.store'
+import FileSelector from './FileSelector'
+import ImageSelector from './ImageSelector'
+import { keyboardAvoidingViewProps as kavProps } from 'util/viewHelpers'
+
+import styles from './PostEditor.styles'
 import { rhino30 } from 'style/colors'
 
 export default class PostEditor extends React.Component {

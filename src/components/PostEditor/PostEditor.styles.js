@@ -2,7 +2,6 @@ import { isIOS } from 'util/platform'
 import {
   caribbeanGreen,
   fakeAlpha,
-  ghost,
   havelockBlue,
   jade,
   limedSpruce,
@@ -25,7 +24,7 @@ export default {
   },
   textInputWrapper: {
     borderBottomWidth: 0.5,
-    borderColor: ghost
+    borderColor: rhino30
   },
   textInput: {
     height: isIOS ? 22 : null,
