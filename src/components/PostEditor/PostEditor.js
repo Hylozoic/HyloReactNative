@@ -18,6 +18,7 @@ import KeyboardFriendlyView from '../KeyboardFriendlyView'
 import ImageSelector from './ImageSelector'
 import FileSelector from './FileSelector'
 import Search from '../Editor/Search'
+import { SearchType } from '../Editor/Search/Search.store'
 
 export default class PostEditor extends React.Component {
   static contextTypes = {navigate: PropTypes.func}
@@ -107,22 +108,31 @@ export default class PostEditor extends React.Component {
     })
   }
 
-  cancelPicker = () => this.setState({ showPicker: false })
+  cancelTopicPicker = () => this.setState({ showPicker: false })
 
-  insertPicked = () => this.cancelPicker()
+  insertPickerTopic = ({ name }) => {
+    this.setState({ topics: [ ...this.state.topics, name ] })
+    this.cancelTopicPicker()
+  }
+
+  // Note that as it stands, this will _replace_ anything in the topic line.
+  // TODO: this will likely need to change when we get around to allowing
+  // post editing on mobile.
+  insertEditorTopics = topics => this.setState({ topics })
 
   render () {
-    const { communityIds, details, editDetails, postId, topics } = this.props
-    const { fileUrls, imageUrls, isSaving, showPicker, title, type } = this.state
+    const { communityIds, details, editDetails, postId } = this.props
+    const { fileUrls, imageUrls, isSaving, showPicker, topics, title, type } = this.state
 
     if (postId && !details) return <Loading />
 
     if (showPicker) {
+      console.log(SearchType.TOPIC, 't')
       return <Search style={styles.search}
         communityId={communityIds[0]}
-        onCancel={this.cancelPicker}
-        onSelect={this.insertPicked}
-        type='topics' />
+        onCancel={this.cancelTopicPicker}
+        onSelect={this.insertPickerTopic}
+        type={SearchType.TOPIC} />
     }
 
     return <KeyboardFriendlyView style={styles.container} {...kavProps}>
@@ -150,7 +160,7 @@ export default class PostEditor extends React.Component {
               styles.section,
               styles.details
             ]}
-            onPress={() => !isSaving && editDetails(topics => console.log('here are the topics returning from editDetails', topics))}>
+            onPress={() => !isSaving && editDetails(this.insertEditorTopics)}>
             <Details details={details} placeholder={detailsPlaceholder} />
           </TouchableOpacity>
 
@@ -210,8 +220,10 @@ export function Details ({details, placeholder}) {
 }
 
 export function Topics ({ topics, placeholder }) {
-  const style = topics ? styles.textInput : styles.textInputPlaceholder
-  return <Text style={style}>{topics || placeholder}</Text>
+  if (topics.length > 0) {
+    return topics.map((t, i) => <Text key={i} style={styles.textInput}>{t}</Text>)
+  }
+  return <Text style={styles.placeholder}>{placeholder}</Text>
 }
 
 export function TypeButton ({ type, selected, onPress }) {
