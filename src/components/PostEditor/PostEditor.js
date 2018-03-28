@@ -7,17 +7,22 @@ import {
   TouchableOpacity,
   View
 } from 'react-native'
-import PropTypes from 'prop-types'
-import styles from './PostEditor.styles'
-import Loading from '../Loading'
-import striptags from 'striptags'
-import { get, uniq } from 'lodash/fp'
-import { keyboardAvoidingViewProps as kavProps } from 'util/viewHelpers'
 import { decode } from 'ent'
+import { get, uniq } from 'lodash/fp'
+import PropTypes from 'prop-types'
+import striptags from 'striptags'
+
+import Icon from '../../components/Icon'
 import KeyboardFriendlyView from '../KeyboardFriendlyView'
-import ImageSelector from './ImageSelector'
-import FileSelector from './FileSelector'
+import Loading from '../Loading'
 import Search from '../Editor/Search'
+import { SearchType } from '../Editor/Search/Search.store'
+import FileSelector from './FileSelector'
+import ImageSelector from './ImageSelector'
+import { keyboardAvoidingViewProps as kavProps } from 'util/viewHelpers'
+
+import styles from './PostEditor.styles'
+import { rhino30 } from 'style/colors'
 
 export default class PostEditor extends React.Component {
   static contextTypes = {navigate: PropTypes.func}
@@ -107,22 +112,34 @@ export default class PostEditor extends React.Component {
     })
   }
 
-  cancelPicker = () => this.setState({ showPicker: false })
+  cancelTopicPicker = () => this.setState({ showPicker: false })
 
-  insertPicked = () => this.cancelPicker()
+  insertPickerTopic = ({ name }) => {
+    this.setState({ topics: [ ...this.state.topics, name ] })
+    this.cancelTopicPicker()
+  }
+
+  // Note that as it stands, this will _replace_ anything in the topic line.
+  // TODO: this will likely need to change when we get around to allowing
+  // post editing on mobile.
+  insertEditorTopics = topics => this.setState({ topics })
+
+  removeTopic = topicName => () => this.setState({
+    topics: this.state.topics.filter(t => t !== topicName)
+  })
 
   render () {
-    const { communityIds, details, editDetails, postId, topics } = this.props
-    const { fileUrls, imageUrls, isSaving, showPicker, title, type } = this.state
+    const { communityIds, details, editDetails, postId } = this.props
+    const { fileUrls, imageUrls, isSaving, showPicker, topics, title, type } = this.state
 
     if (postId && !details) return <Loading />
 
     if (showPicker) {
       return <Search style={styles.search}
         communityId={communityIds[0]}
-        onCancel={this.cancelPicker}
-        onSelect={this.insertPicked}
-        type='topics' />
+        onCancel={this.cancelTopicPicker}
+        onSelect={this.insertPickerTopic}
+        type={SearchType.TOPIC} />
     }
 
     return <KeyboardFriendlyView style={styles.container} {...kavProps}>
@@ -137,10 +154,14 @@ export default class PostEditor extends React.Component {
 
           <SectionLabel>Title</SectionLabel>
           <View style={[styles.textInputWrapper, styles.section]}>
-            <TextInput value={title} style={styles.textInput}
+            <TextInput
+              editable={!isSaving}
               onChangeText={title => this.setState({title})}
-              placeholder={titlePlaceholders[type]} editable={!isSaving}
-              underlineColorAndroid='transparent' />
+              placeholder={titlePlaceholders[type]}
+              placeholderTextColor={rhino30}
+              style={styles.textInput}
+              underlineColorAndroid='transparent'
+              value={title} />
           </View>
 
           <SectionLabel>Details</SectionLabel>
@@ -150,19 +171,22 @@ export default class PostEditor extends React.Component {
               styles.section,
               styles.details
             ]}
-            onPress={() => !isSaving && editDetails(topics => console.log('here are the topics returning from editDetails', topics))}>
+            onPress={() => !isSaving && editDetails(this.insertEditorTopics)}>
             <Details details={details} placeholder={detailsPlaceholder} />
           </TouchableOpacity>
 
-          <SectionLabel>Topics</SectionLabel>
           <TouchableOpacity
             style={[
-              styles.textInputWrapper,
               styles.section,
-              styles.details
+              styles.textInputWrapper,
+              styles.topics
             ]}
             onPress={() => this.setState({ showPicker: true })}>
-            <Topics topics={topics} placeholder={topicsPlaceholder} />
+            <View style={styles.topicLabel}>
+              <SectionLabel>Topics</SectionLabel>
+              <View style={styles.topicAddBorder}><Icon name='Plus' style={styles.topicAdd} /></View>
+            </View>
+            <Topics onPress={this.removeTopic} topics={topics} placeholder={topicsPlaceholder} />
           </TouchableOpacity>
 
           <SectionLabel>Images</SectionLabel>
@@ -209,9 +233,20 @@ export function Details ({details, placeholder}) {
   return <Text style={style}>{body}</Text>
 }
 
-export function Topics ({ topics, placeholder }) {
-  const style = topics ? styles.textInput : styles.textInputPlaceholder
-  return <Text style={style}>{topics || placeholder}</Text>
+export function Topics ({ onPress, topics, placeholder }) {
+  if (topics.length > 0) {
+    return <ScrollView horizontal style={styles.topicPillBox}>
+      {topics.map((t, i) => <TopicPill key={i} topic={t} onPress={onPress(t)} />)}
+    </ScrollView>
+  }
+  return <Text style={styles.textInputPlaceholder}>{placeholder}</Text>
+}
+
+export function TopicPill ({ topic, onPress }) {
+  return <TouchableOpacity onPress={onPress} style={styles.topicPill}>
+    <Text style={styles.topicText}>#{topic.toLowerCase()}</Text>
+    <Icon name='Ex' style={styles.topicRemove} />
+  </TouchableOpacity>
 }
 
 export function TypeButton ({ type, selected, onPress }) {
