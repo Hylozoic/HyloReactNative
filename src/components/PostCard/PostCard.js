@@ -66,7 +66,9 @@ export default class PostCard extends React.Component {
         postId={post.id}
         showMember={showMember}
         showTopic={showTopic}
-        goToCommunity={goToCommunity} />
+        goToCommunity={goToCommunity}
+        announcement={post.announcement}
+      />
       <PostImage postId={post.id} />
       <PostBody
         title={post.title}

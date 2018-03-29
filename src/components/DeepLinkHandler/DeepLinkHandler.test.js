@@ -7,8 +7,6 @@ jest.mock('react-native-htmlview', () => {})
 jest.mock('react-native-onesignal', () => ({
   addEventListener: jest.fn()
 }))
-
-// this is needed because DeepLinkHandler uses setImmediate
 jest.useFakeTimers()
 
 const user = {id: '1'}
@@ -39,59 +37,58 @@ function expectResetToRoute (routeName) {
   })
 }
 
-it('sends a logged-in user to Main', async () => {
-  await TestRenderer.create(<DeepLinkHandler currentUser={user}
+it('sends a logged-in user to Main', () => {
+  TestRenderer.create(<DeepLinkHandler currentUser={user}
     navigator={mockNavigator} />)
   expectResetToRoute('Main')
 })
 
-it('sends a logged-out user to Login', async () => {
-  await TestRenderer.create(<DeepLinkHandler navigator={mockNavigator} />)
+it('sends a logged-out user to Login', () => {
+  TestRenderer.create(<DeepLinkHandler navigator={mockNavigator} />)
   expectResetToRoute('Login')
 })
 
-it('handles an initial push notification event', async () => {
-  const event = {
-    notification: {
-      payload: {
-        additionalData: {path: initialUrl}
-      }
+it('handles an initial push notification event', () => {
+  const notification = {
+    additionalData: {
+      path: initialUrl
     }
   }
 
-  await TestRenderer.create(<DeepLinkHandler currentUser={user}
+  TestRenderer.create(<DeepLinkHandler currentUser={user}
     navigator={mockNavigator}
-    initialPushNotificationEvent={event} />)
+    onesignalNotification={notification} />)
 
-  jest.runAllImmediates()
+  jest.runAllTimers()
 
   expect(mockNavigator.dispatch).toHaveBeenLastCalledWith(navigateAction)
 })
 
-it('handles an initial url', async () => {
-  await TestRenderer.create(<DeepLinkHandler currentUser={user}
+it('handles an initial url', () => {
+  TestRenderer.create(<DeepLinkHandler
+    currentUser={user}
     initialUrl={initialUrl}
     navigator={mockNavigator} />)
 
-  jest.runAllImmediates()
-
+  jest.runAllTimers()
   expect(mockNavigator.dispatch).toHaveBeenLastCalledWith(navigateAction)
 })
 
-it('stores the action for a logged-out user', async () => {
+it('stores the action for a logged-out user', () => {
   const storeNavigationAction = jest.fn()
 
-  await TestRenderer.create(<DeepLinkHandler initialUrl={initialUrl}
+  TestRenderer.create(<DeepLinkHandler
+    initialUrl={initialUrl}
     storeNavigationAction={storeNavigationAction}
     navigator={mockNavigator} />)
 
-  jest.runAllImmediates()
+  jest.runAllTimers()
 
   expect(mockNavigator.dispatch).toHaveBeenCalledTimes(1)
   expect(storeNavigationAction).toHaveBeenCalledWith(navigateAction)
 })
 
-it('redirects to an invitation link for a logged-out user', async () => {
+it('redirects to an invitation link for a logged-out user', () => {
   const storeNavigationAction = jest.fn()
   const invitationUrl = '/c/sandbox/join/foo'
   const joinAction = {
@@ -103,11 +100,12 @@ it('redirects to an invitation link for a logged-out user', async () => {
     }
   }
 
-  await TestRenderer.create(<DeepLinkHandler initialUrl={invitationUrl}
+  TestRenderer.create(<DeepLinkHandler
+    initialUrl={invitationUrl}
     storeNavigationAction={storeNavigationAction}
     navigator={mockNavigator} />)
 
-  jest.runAllImmediates()
+  jest.runAllTimers()
 
   expect(mockNavigator.dispatch).toHaveBeenLastCalledWith(joinAction)
   expect(storeNavigationAction).toHaveBeenCalledWith(joinAction)

@@ -134,6 +134,7 @@ exports[`PostDetails renders correctly 1`] = `
     header={
       <View>
         <Connect(PostHeader)
+          announcement={undefined}
           communities={
             Array [
               Object {

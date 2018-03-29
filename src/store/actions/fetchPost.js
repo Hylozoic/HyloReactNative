@@ -9,6 +9,7 @@ export function getPostFieldsFragment (withComments = true) {
   details
   type
   location
+  announcement
   creator {
     id
     name

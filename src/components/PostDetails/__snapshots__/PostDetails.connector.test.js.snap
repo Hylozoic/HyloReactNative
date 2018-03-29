@@ -77,6 +77,7 @@ Object {
   details
   type
   location
+  announcement
   creator {
     id
     name

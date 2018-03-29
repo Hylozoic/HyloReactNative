@@ -36,9 +36,9 @@ export default class PostHeader extends PureComponent {
       pinned,
       pinPost,
       topics,
-      showTopic
+      showTopic,
+      announcement
     } = this.props
-
     const { flaggingVisible } = this.state
 
     let context
@@ -110,8 +110,10 @@ export default class PostHeader extends PureComponent {
               <Text style={styles.topicLabel}>#{item.name}</Text>
             </TouchableOpacity>} />}
         </View>
-
       </View>
+      {announcement && <View style={styles.announcementRow}>
+        <Icon name='Announcement' style={styles.announcementIcon} />
+      </View>}
       <View style={styles.upperRight}>
         {pinned && <Icon name='Pin' style={styles.pinIcon} />}
         {type && <PostLabel type={type} />}
@@ -240,6 +242,17 @@ const styles = {
     paddingLeft: 10,
     paddingRight: 5,
     color: rhino50
+  },
+  announcementIcon: {
+    color: caribbeanGreen,
+    fontSize: 20,
+    alignItems: 'flex-end'
+  },
+  announcementRow: {
+    flex: 1,
+    alignItems: 'flex-end',
+    paddingTop: 14,
+    marginRight: 2
   }
 }
 
