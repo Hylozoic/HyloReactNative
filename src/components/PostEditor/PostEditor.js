@@ -7,6 +7,7 @@ import {
   View
 } from 'react-native'
 import { decode } from 'ent'
+import { validateTopicName } from 'hylo-utils/validators'
 import { get, uniq, uniqBy } from 'lodash/fp'
 import PropTypes from 'prop-types'
 import striptags from 'striptags'
@@ -119,8 +120,17 @@ export default class PostEditor extends React.Component {
     this.props.navigation.setParams({ showPicker: false })
   }
 
+  ignoreHash = name => name[0] === '#' ? name.slice(1) : name
+
   insertPickerTopic = topic => {
-    this.insertUniqueTopics([ topic ], true)
+    const t = {
+      ...topic,
+      name: this.ignoreHash(topic.name)
+    }
+
+    if (validateTopicName(t.name) === null) {
+      this.insertUniqueTopics([ t ], true)
+    }
     this.cancelTopicPicker()
   }
 
@@ -128,7 +138,16 @@ export default class PostEditor extends React.Component {
     // If topic picker has been used, don't override it with the details editor
     if (this.state.topicsPicked) return
 
-    this.insertUniqueTopics(topicNames.map(t => ({ id: t, name: t })), false)
+    const validTopicNames = topicNames
+      .map(t => {
+        const name = this.ignoreHash(t.name)
+
+        // Temporary id for topics without one (note that some may be existing
+        // topics, we just don't have their id after processing from markup
+        return { id: name, name }
+      })
+      .filter(({ name }) => validateTopicName(name) === null)
+    this.insertUniqueTopics(validTopicNames)
   }
 
   // Assumptions:
