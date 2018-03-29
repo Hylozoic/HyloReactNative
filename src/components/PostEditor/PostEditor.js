@@ -56,14 +56,15 @@ export default class PostEditor extends React.Component {
 
   save = () => {
     const { navigation, save, details } = this.props
-    const { title, type, communityIds, imageUrls, fileUrls } = this.state
+    const { communityIds, fileUrls, imageUrls, title, topics, type } = this.state
     const postData = {
-      title,
-      type,
-      details: details,
       communities: communityIds.map(id => ({id})),
+      details: details,
+      fileUrls,
       imageUrls,
-      fileUrls
+      title,
+      topicNames: topics.map(t => t.name),
+      type
     }
 
     this.setState({isSaving: true})

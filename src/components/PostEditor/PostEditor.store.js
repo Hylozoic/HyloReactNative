@@ -15,7 +15,8 @@ export function createPost (post) {
     details,
     communities,
     imageUrls = [],
-    fileUrls = []
+    fileUrls = [],
+    topicNames = []
   } = post
   const communityIds = communities.map(c => c.id)
   const preprocessedDetails = divToP(details)
@@ -28,7 +29,8 @@ export function createPost (post) {
         $details: String,
         $communityIds: [String],
         $imageUrls: [String],
-        $fileUrls: [String]
+        $fileUrls: [String],
+        $topicNames: [String]
       ) {
         createPost(data: {
           type: $type,
@@ -36,7 +38,8 @@ export function createPost (post) {
           details: $details,
           communityIds: $communityIds,
           imageUrls: $imageUrls,
-          fileUrls: $fileUrls
+          fileUrls: $fileUrls,
+          topicNames: $topicNames
         }) {
           id
           type
@@ -65,7 +68,8 @@ export function createPost (post) {
         details: preprocessedDetails,
         communityIds,
         imageUrls,
-        fileUrls
+        fileUrls,
+        topicNames
       }
     },
     meta: {extractModel: 'Post'}
@@ -80,7 +84,8 @@ export function updatePost (post) {
     details,
     communities,
     imageUrls = [],
-    fileUrls = []
+    fileUrls = [],
+    topicNames = []
   } = post
   const communityIds = communities.map(c => c.id)
   const preprocessedDetails = divToP(details)
@@ -93,7 +98,8 @@ export function updatePost (post) {
         $details: String,
         $communityIds: [String],
         $imageUrls: [String],
-        $fileUrls: [String]
+        $fileUrls: [String],
+        $topicNames: [String]
       ) {
         updatePost(id: $id, data: {
           type: $type,
@@ -101,7 +107,8 @@ export function updatePost (post) {
           details: $details,
           communityIds: $communityIds,
           imageUrls: $imageUrls,
-          fileUrls: $fileUrls
+          fileUrls: $fileUrls,
+          topicNames: $topicNames
         }) {
           id
           type
@@ -127,7 +134,8 @@ export function updatePost (post) {
         details: preprocessedDetails,
         communityIds,
         imageUrls,
-        fileUrls
+        fileUrls,
+        topicNames
       }
     },
     meta: {
