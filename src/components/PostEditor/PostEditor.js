@@ -13,6 +13,7 @@ import PropTypes from 'prop-types'
 import striptags from 'striptags'
 
 import Icon from '../../components/Icon'
+import header from 'util/header'
 import KeyboardFriendlyView from '../KeyboardFriendlyView'
 import Loading from '../Loading'
 import Search from '../Editor/Search'
@@ -30,14 +31,12 @@ export default class PostEditor extends React.Component {
   static navigationOptions = ({ navigation }) => {
     const { headerTitle, save, isSaving, showPicker } = get('state.params', navigation) || {}
     const title = isSaving ? 'Saving...' : 'Save'
-    return {
-      headerTitle,
-      headerRight: save
-        ? <View style={styles.saveButton}>
-          <Button title={title} disabled={isSaving || showPicker} onPress={save} />
-        </View>
-        : null
-    }
+    const def = () => {}
+
+    return header(navigation, {
+      title: headerTitle,
+      right: { disabled: showPicker, text: title, onPress: save || def }
+    })
   }
 
   constructor (props) {

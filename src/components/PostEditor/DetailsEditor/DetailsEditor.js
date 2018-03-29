@@ -1,5 +1,4 @@
 import React from 'react'
-import { Button, View } from 'react-native'
 import KeyboardFriendlyView from '../../KeyboardFriendlyView'
 import Editor from '../../Editor'
 import { keyboardAvoidingViewProps as kavProps } from 'util/viewHelpers'
@@ -7,16 +6,16 @@ import { TOPIC_ENTITY_TYPE } from 'hylo-utils/constants'
 import cheerio from 'cheerio'
 import { get } from 'lodash/fp'
 
+import header from 'util/header'
+
 export default class DetailsEditor extends React.Component {
   static navigationOptions = ({ navigation }) => {
     const showPicker = !!get('state.params.showPicker', navigation)
 
-    return {
-      headerTitle: 'Details',
-      headerRight: <View style={styles.saveButton}>
-        <Button title={'Save'} onPress={() => navigation.goBack()} disabled={showPicker} />
-      </View>
-    }
+    return header(navigation, {
+      title: 'Details',
+      right: { disabled: showPicker, text: 'Save', onPress: navigation.goBack }
+    })
   }
 
   state = {
@@ -57,9 +56,6 @@ export default class DetailsEditor extends React.Component {
 }
 
 const styles = {
-  saveButton: {
-    marginRight: 10
-  },
   container: {
     backgroundColor: 'white',
     flex: 1

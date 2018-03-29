@@ -92,9 +92,6 @@ export default {
     marginBottom: 8,
     fontFamily: 'Circular-Bold'
   },
-  saveButton: {
-    marginRight: 10
-  },
   topics: {
     justifyContent: 'center',
     display: 'flex',
