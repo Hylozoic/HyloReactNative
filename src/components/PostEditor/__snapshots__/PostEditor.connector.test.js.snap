@@ -19,7 +19,8 @@ Array [
         $details: String,
         $communityIds: [String],
         $imageUrls: [String],
-        $fileUrls: [String]
+        $fileUrls: [String],
+        $topicNames: [String]
       ) {
         updatePost(id: $id, data: {
           type: $type,
@@ -27,7 +28,8 @@ Array [
           details: $details,
           communityIds: $communityIds,
           imageUrls: $imageUrls,
-          fileUrls: $fileUrls
+          fileUrls: $fileUrls,
+          topicNames: $topicNames
         }) {
           id
           type
@@ -55,6 +57,7 @@ Array [
           "id": 1,
           "imageUrls": Array [],
           "title": "a title",
+          "topicNames": Array [],
           "type": undefined,
         },
       },

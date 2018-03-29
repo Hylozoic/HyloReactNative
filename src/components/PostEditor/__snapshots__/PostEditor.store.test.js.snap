@@ -9,7 +9,8 @@ Object {
         $details: String,
         $communityIds: [String],
         $imageUrls: [String],
-        $fileUrls: [String]
+        $fileUrls: [String],
+        $topicNames: [String]
       ) {
         createPost(data: {
           type: $type,
@@ -17,7 +18,8 @@ Object {
           details: $details,
           communityIds: $communityIds,
           imageUrls: $imageUrls,
-          fileUrls: $fileUrls
+          fileUrls: $fileUrls,
+          topicNames: $topicNames
         }) {
           id
           type
@@ -48,6 +50,7 @@ Object {
       "fileUrls": Array [],
       "imageUrls": Array [],
       "title": "title",
+      "topicNames": Array [],
       "type": "post",
     },
   },
@@ -74,7 +77,8 @@ Object {
         $details: String,
         $communityIds: [String],
         $imageUrls: [String],
-        $fileUrls: [String]
+        $fileUrls: [String],
+        $topicNames: [String]
       ) {
         updatePost(id: $id, data: {
           type: $type,
@@ -82,7 +86,8 @@ Object {
           details: $details,
           communityIds: $communityIds,
           imageUrls: $imageUrls,
-          fileUrls: $fileUrls
+          fileUrls: $fileUrls,
+          topicNames: $topicNames
         }) {
           id
           type
@@ -110,6 +115,7 @@ Object {
       "id": 1,
       "imageUrls": Array [],
       "title": "title",
+      "topicNames": Array [],
       "type": "post",
     },
   },
