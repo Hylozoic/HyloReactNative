@@ -28,11 +28,15 @@ export default class PostEditor extends React.Component {
   static contextTypes = {navigate: PropTypes.func}
 
   static navigationOptions = ({ navigation }) => {
-    const { headerTitle, save, isSaving } = get('state.params', navigation) || {}
+    const { headerTitle, save, isSaving, showPicker } = get('state.params', navigation) || {}
     const title = isSaving ? 'Saving...' : 'Save'
     return {
       headerTitle,
-      headerRight: save ? <View style={styles.saveButton}><Button title={title} disabled={isSaving} onPress={save} /></View> : null
+      headerRight: save
+        ? <View style={styles.saveButton}>
+          <Button title={title} disabled={isSaving || showPicker} onPress={save} />
+        </View>
+        : null
     }
   }
 
@@ -47,7 +51,7 @@ export default class PostEditor extends React.Component {
       fileUrls,
       showPicker: false,
       topics: get('topics', post) || [],
-      topicsEdited: false
+      topicsPicked: false
     }
   }
 
@@ -112,7 +116,10 @@ export default class PostEditor extends React.Component {
     })
   }
 
-  cancelTopicPicker = () => this.setState({ showPicker: false })
+  cancelTopicPicker = () => {
+    this.setState({ showPicker: false })
+    this.props.navigation.setParams({ showPicker: false })
+  }
 
   insertPickerTopic = topic => {
     this.insertUniqueTopics([ topic ], true)
@@ -120,27 +127,33 @@ export default class PostEditor extends React.Component {
   }
 
   insertEditorTopics = topicNames => {
-    if (this.state.topicsEdited) return
+    // If topic picker has been used, don't override it with the details editor
+    if (this.state.topicsPicked) return
 
     this.insertUniqueTopics(topicNames.map(t => ({ id: t, name: t })), false)
   }
 
-  removeTopic = topicName => () => this.setState({
-    topics: this.state.topics.filter(t => t !== topicName),
-    topicsEdited: true
-  })
-
-  // Design assumptions:
+  // Assumptions:
   //  - a maximum of three topics per post are allowed
   //  - topics must be unique
   //  - priority is given to topics already on the post (preserve order)
   // TODO: support topics from more than one community, for crossposting
-  insertUniqueTopics = (topicCandidates, topicsEdited) => {
+  insertUniqueTopics = (topicCandidates, topicsPicked) => {
     const topics = uniqBy(
       t => t.name,
       [ ...this.state.topics, ...topicCandidates ]
     ).slice(0, 3)
-    this.setState({ topics, topicsEdited })
+    this.setState({ topics, topicsPicked })
+  }
+
+  removeTopic = topicName => () => this.setState({
+    topics: this.state.topics.filter(t => t !== topicName),
+    topicsPicked: true
+  })
+
+  showTopicPicker = () => {
+    this.setState({ showPicker: true })
+    this.props.navigation.setParams({ showPicker: true })
   }
 
   render () {
@@ -196,7 +209,7 @@ export default class PostEditor extends React.Component {
               styles.textInputWrapper,
               styles.topics
             ]}
-            onPress={() => this.setState({ showPicker: true })}>
+            onPress={this.showTopicPicker}>
             <View style={styles.topicLabel}>
               <SectionLabel>Topics</SectionLabel>
               <View style={styles.topicAddBorder}><Icon name='Plus' style={styles.topicAdd} /></View>
@@ -258,7 +271,6 @@ export function Topics ({ onPress, topics, placeholder }) {
 }
 
 export function TopicPill ({ topic, topic: { name }, onPress }) {
-  console.log('t', topic)
   return <TouchableOpacity onPress={onPress} style={styles.topicPill}>
     <Text style={styles.topicText}>#{name.toLowerCase()}</Text>
     <Icon name='Ex' style={styles.topicRemove} />
