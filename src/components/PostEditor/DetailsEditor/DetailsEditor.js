@@ -5,12 +5,17 @@ import Editor from '../../Editor'
 import { keyboardAvoidingViewProps as kavProps } from 'util/viewHelpers'
 import { TOPIC_ENTITY_TYPE } from 'hylo-utils/constants'
 import cheerio from 'cheerio'
+import { get } from 'lodash/fp'
 
 export default class DetailsEditor extends React.Component {
   static navigationOptions = ({ navigation }) => {
+    const showPicker = !!get('state.params.showPicker', navigation)
+
     return {
       headerTitle: 'Details',
-      headerRight: <View style={styles.saveButton}><Button title={'Save'} onPress={() => navigation.goBack()} /></View>
+      headerRight: <View style={styles.saveButton}>
+        <Button title={'Save'} onPress={() => navigation.goBack()} disabled={showPicker} />
+      </View>
     }
   }
 
