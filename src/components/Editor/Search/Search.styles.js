@@ -2,6 +2,7 @@ import { rhino50 } from 'style/colors'
 
 export default {
   container: {
+    backgroundColor: 'white',
     flex: 1
   },
   inputWrapper: {
