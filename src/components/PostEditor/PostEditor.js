@@ -114,23 +114,15 @@ export default class PostEditor extends React.Component {
 
   cancelTopicPicker = () => this.setState({ showPicker: false })
 
-  insertPickerTopic = ({ name }) => {
-    this.setState({ topics: [ ...this.state.topics, name ] })
+  insertPickerTopic = topic => {
+    this.insertUniqueTopics([ topic ], true)
     this.cancelTopicPicker()
   }
 
-  // Note that as it stands, this will _replace_ anything in the topic line.
-  // TODO: this will likely need to change when we get around to allowing
-  // post editing on mobile.
   insertEditorTopics = topicNames => {
     if (this.state.topicsEdited) return
 
-    const newTopics = uniqBy(
-      t => t.name,
-      this.state.topics.concat(topicNames.map(t => ({name: t, id: t}))).slice(0, 3))
-    this.setState({
-      topics: newTopics
-    })
+    this.insertUniqueTopics(topicNames.map(t => ({ id: t, name: t })), false)
   }
 
   removeTopic = topicName => () => this.setState({
@@ -138,11 +130,22 @@ export default class PostEditor extends React.Component {
     topicsEdited: true
   })
 
+  // Design assumptions:
+  //  - a maximum of three topics per post are allowed
+  //  - topics must be unique
+  //  - priority is given to topics already on the post (preserve order)
+  // TODO: support topics from more than one community, for crossposting
+  insertUniqueTopics = (topicCandidates, topicsEdited) => {
+    const topics = uniqBy(
+      t => t.name,
+      [ ...this.state.topics, ...topicCandidates ]
+    ).slice(0, 3)
+    this.setState({ topics, topicsEdited })
+  }
+
   render () {
     const { communityIds, details, editDetails, postId } = this.props
     const { fileUrls, imageUrls, isSaving, showPicker, topics, title, type } = this.state
-
-    console.log('topics', topics)
 
     if (postId && !details) return <Loading />
 
@@ -255,6 +258,7 @@ export function Topics ({ onPress, topics, placeholder }) {
 }
 
 export function TopicPill ({ topic, topic: { name }, onPress }) {
+  console.log('t', topic)
   return <TouchableOpacity onPress={onPress} style={styles.topicPill}>
     <Text style={styles.topicText}>#{name.toLowerCase()}</Text>
     <Icon name='Ex' style={styles.topicRemove} />

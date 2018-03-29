@@ -118,7 +118,7 @@ export const getTopics = ormCreateSelector(
 
     return topicExists
       ? topics
-      : [ { id: 'newtopic', name: topicSearchTerm }, ...topics ]
+      : [ { id: topicSearchTerm, name: topicSearchTerm }, ...topics ]
   }
 )
 
