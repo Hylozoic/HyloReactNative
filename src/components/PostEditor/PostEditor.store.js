@@ -60,6 +60,10 @@ export function createPost (post) {
             type
             url
           }
+          topics {
+            id
+            name
+          }
         }
       }`,
       variables: {
@@ -124,6 +128,10 @@ export function updatePost (post) {
             position
             type
             url
+          }
+          topics {
+            id
+            name
           }
         }
       }`,

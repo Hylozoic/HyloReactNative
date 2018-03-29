@@ -139,16 +139,16 @@ export default class PostEditor extends React.Component {
     // If topic picker has been used, don't override it with the details editor
     if (this.state.topicsPicked) return
 
-    const validTopicNames = topicNames
+    const validTopics = topicNames
       .map(t => {
-        const name = this.ignoreHash(t.name)
+        const name = this.ignoreHash(t)
 
         // Temporary id for topics without one (note that some may be existing
         // topics, we just don't have their id after processing from markup
         return { id: name, name }
       })
       .filter(({ name }) => validateTopicName(name) === null)
-    this.insertUniqueTopics(validTopicNames)
+    this.insertUniqueTopics(validTopics, false)
   }
 
   // Assumptions:
@@ -157,6 +157,7 @@ export default class PostEditor extends React.Component {
   //  - priority is given to topics already on the post (preserve order)
   // TODO: support topics from more than one community, for crossposting
   insertUniqueTopics = (topicCandidates, topicsPicked) => {
+    console.log('insertUniqueTopics')
     const topics = uniqBy(
       t => t.name,
       [ ...this.state.topics, ...topicCandidates ]
