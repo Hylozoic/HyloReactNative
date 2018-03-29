@@ -14,11 +14,8 @@ export default class DetailsEditor extends React.Component {
     }
   }
 
-  constructor (props) {
-    super(props)
-    this.state = {
-      content: props.initialContent
-    }
+  state = {
+    content: this.props.initialContent || ''
   }
 
   componentWillUnmount () {
