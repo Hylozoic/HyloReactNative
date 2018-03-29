@@ -1,6 +1,5 @@
 import React from 'react'
 import {
-  Button,
   FlatList,
   Image,
   Text,
@@ -13,6 +12,7 @@ import Icon from '../../Icon'
 import TopicList from '../../TopicList'
 import { SearchType } from './Search.store'
 import styles from './Search.styles'
+import { rhino30 } from 'style/colors'
 
 export default class Search extends React.Component {
   render () {
@@ -27,9 +27,16 @@ export default class Search extends React.Component {
     return <View style={[styles.container, style]}>
       <View style={styles.inputWrapper}>
         <Icon name='Search' style={styles.inputIcon} />
-        <TextInput style={styles.input} autoFocus onChangeText={updateSearch}
-          placeholder={placeholder} />
-        <Button title='Cancel' onPress={onCancel} />
+        <TextInput
+          autoFocus
+          onChangeText={updateSearch}
+          placeholder={placeholder}
+          placeholderTextColor={rhino30}
+          style={styles.input}
+          underlineColorAndroid='transparent' />
+        <TouchableOpacity onPress={onCancel}>
+          <Icon name='Ex' style={styles.cancelButton} />
+        </TouchableOpacity>
       </View>
       <View style={styles.resultsWrapper}>
         {type === SearchType.TOPIC

@@ -1,12 +1,16 @@
 import { rhino50 } from 'style/colors'
 
 export default {
+  cancelButton: {
+    fontSize: 20,
+    paddingVertical: 5,
+    paddingHorizontal: 10
+  },
   container: {
     backgroundColor: 'white',
     flex: 1
   },
   inputWrapper: {
-    height: 40,
     paddingLeft: 8,
     flexDirection: 'row',
     alignItems: 'center',
@@ -18,7 +22,10 @@ export default {
     marginRight: 4
   },
   input: {
-    flex: 1
+    flex: 1,
+    fontFamily: 'Circular-Book',
+    fontSize: 16,
+    marginVertical: 3
   },
   resultsWrapper: {
     flex: 1
