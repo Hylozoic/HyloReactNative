@@ -30,6 +30,7 @@ export default class Search extends React.Component {
         <TextInput
           autoFocus
           onChangeText={updateSearch}
+          autoCapitalize='none'
           placeholder={placeholder}
           placeholderTextColor={rhino30}
           style={styles.input}
