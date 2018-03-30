@@ -35,6 +35,7 @@ Array [
           type
           title
           details
+          updatedAt
           communities {
             id
             name
@@ -45,6 +46,10 @@ Array [
             position
             type
             url
+          }
+          topics {
+            id
+            name
           }
         }
       }",

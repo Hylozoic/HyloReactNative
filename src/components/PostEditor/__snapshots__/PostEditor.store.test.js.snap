@@ -26,6 +26,7 @@ Object {
           title
           details
           commentersTotal
+          updatedAt
           communities {
             id
             name
@@ -39,6 +40,10 @@ Object {
             position
             type
             url
+          }
+          topics {
+            id
+            name
           }
         }
       }",
@@ -93,6 +98,7 @@ Object {
           type
           title
           details
+          updatedAt
           communities {
             id
             name
@@ -103,6 +109,10 @@ Object {
             position
             type
             url
+          }
+          topics {
+            id
+            name
           }
         }
       }",
