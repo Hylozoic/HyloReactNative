@@ -114,13 +114,13 @@ export const getTopics = ormCreateSelector(
       .filter(({ name }) => name && name.toLowerCase().match(term))
       .orderBy('name')
       .toRefArray()
-    const topicExists = !!topics.find(t => t.name === topicSearchTerm)
-
-    return topicExists
-      ? topics
-      : [ { id: topicSearchTerm, name: topicSearchTerm }, ...topics ]
+    return topics
   }
 )
+
+export function getTopicSearchTerm (state) {
+  return moduleSelector(state).topicSearchTerm
+}
 
 export function getResults (state, props) {
   switch (props.type) {
