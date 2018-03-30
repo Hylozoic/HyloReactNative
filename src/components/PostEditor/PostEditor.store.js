@@ -46,6 +46,7 @@ export function createPost (post) {
           title
           details
           commentersTotal
+          updatedAt
           communities {
             id
             name
@@ -118,6 +119,7 @@ export function updatePost (post) {
           type
           title
           details
+          updatedAt
           communities {
             id
             name
