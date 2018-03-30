@@ -174,8 +174,9 @@ export default function reducer (state = {}, action) {
 export function ormSessionReducer (session, action) {
   const { type, meta } = action
   if (type === UPDATE_POST_PENDING) {
-    // deleting all attachments here because we restore them from the result of the UPDATE_POST action
+    // deleting all attachments and topics here because we restore them from the result of the UPDATE_POST action
     const post = session.Post.withId(meta.graphql.variables.id)
     post.attachments.delete()
+    post.update({topics: []})
   }
 }
