@@ -40,5 +40,11 @@ export function reformatPath (path) {
     const nextPath = getPathFromURL(nextURL)
     return `passwordResetTokenLogin/${userId}/${encodeURIComponent(loginToken)}/${encodeURIComponent(nextPath)}`
   }
+
+  match = routeMatchers.membersIndex(pathname)
+  if (match) return `${MAIN_ROUTE_PATH}/people`
+
+  match = routeMatchers.topicsIndex(pathname)
+  if (match) return `${MAIN_ROUTE_PATH}/topics`
   return path
 }

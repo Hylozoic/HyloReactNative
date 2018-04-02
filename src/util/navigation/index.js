@@ -47,7 +47,9 @@ export const routeMatchers = {
   passwordResetTokenLogin: route('/noo/login/token'),
   post: route('/c/:slug/p/:id'),
   thread: route('/t/:id'),
-  allCommunities: route('/all')
+  allCommunities: route('/all'),
+  membersIndex: route('/c/hylo/members'),
+  topicsIndex: route('/c/hylo-community-organizing/topics')
 }
 
 export function redirectAfterLogin ({ currentUser, navigation, action }) {
