@@ -49,7 +49,8 @@ export const routeMatchers = {
   thread: route('/t/:id'),
   allCommunities: route('/all'),
   membersIndex: route('/c/hylo/members'),
-  topicsIndex: route('/c/hylo-community-organizing/topics')
+  topicsIndex: route('/c/hylo-community-organizing/topics'),
+  showTopic: route('/c/hylo-community-organizing/:topicName')
 }
 
 export function redirectAfterLogin ({ currentUser, navigation, action }) {
