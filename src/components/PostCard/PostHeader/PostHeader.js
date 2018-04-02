@@ -111,11 +111,9 @@ export default class PostHeader extends PureComponent {
             </TouchableOpacity>} />}
         </View>
       </View>
-      {announcement && <View style={styles.announcementRow}>
-        <Icon name='Announcement' style={styles.announcementIcon} />
-      </View>}
       <View style={styles.upperRight}>
         {pinned && <Icon name='Pin' style={styles.pinIcon} />}
+        {announcement && <Icon name='Announcement' style={styles.announcementIcon} />}
         {type && <PostLabel type={type} />}
         <PostMenu
           removePost={removePostWithConfirm}
@@ -246,12 +244,7 @@ const styles = {
   announcementIcon: {
     color: caribbeanGreen,
     fontSize: 20,
-    alignItems: 'flex-end'
-  },
-  announcementRow: {
-    flex: 1,
     alignItems: 'flex-end',
-    paddingTop: 14,
     marginRight: 2
   }
 }
