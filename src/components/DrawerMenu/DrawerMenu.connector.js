@@ -1,5 +1,6 @@
 import { connect } from 'react-redux'
-import { get, omit, values } from 'lodash/fp'
+import { get, omit, values, each } from 'lodash/fp'
+import { pullAllBy } from 'lodash'
 import getMe from '../../store/selectors/getMe'
 import getMemberships from '../../store/selectors/getMemberships'
 import getCurrentCommunityId from '../../store/selectors/getCurrentCommunityId'
@@ -12,11 +13,14 @@ import { ALL_COMMUNITIES_ID } from '../../store/models/Community'
 export function partitionCommunities (memberships) {
   const allCommunities = memberships.map(m => ({
     ...m.community.ref,
-    network: get('network.ref', m.community),
+    network: m.community.network && {
+      ...get('network.ref', m.community),
+      communities: get('network.communities', m.community).toRefArray()
+    },
     newPostCount: m.newPostCount
   }))
 
-  return allCommunities.reduce((acc, community) => {
+  const reduced = allCommunities.reduce((acc, community) => {
     if (community.network) {
       if (acc[community.network.id]) {
         acc[community.network.id].communities = acc[community.network.id].communities.concat([community])
@@ -24,7 +28,9 @@ export function partitionCommunities (memberships) {
       } else {
         acc[community.network.id] = {
           ...community.network,
-          communities: [community]
+          communities: [community],
+          // add all network communities here, some will be removed a few lines down
+          nonMemberCommunities: community.network.communities
         }
         return acc
       }
@@ -35,23 +41,33 @@ export function partitionCommunities (memberships) {
   }, {
     independent: []
   })
-}
 
-export function mapStateToProps (state, props) {
-  const currentUser = getMe(state)
-  const currentCommunityId = getCurrentCommunityId(state, props)
-  const currentNetworkId = getCurrentNetworkId(state, props)
-  const paritionedCommunities =
-    partitionCommunities(getMemberships(state))
   const networks = [
     {
       id: ALL_COMMUNITIES_ID,
       name: 'All Communities',
       communities: []
     }
-  ].concat(values(omit('independent', paritionedCommunities)))
+  ].concat(values(omit('independent', reduced)))
 
-  const communities = paritionedCommunities.independent
+  // pulls out the communities we are already a member of from the nonMemberCommunities array
+  each(n => {
+    pullAllBy(n.nonMemberCommunities, n.communities, 'id')
+  })(networks)
+
+  return {
+    networks,
+    communities: reduced.independent
+  }
+}
+
+export function mapStateToProps (state, props) {
+  const currentUser = getMe(state)
+  const currentCommunityId = getCurrentCommunityId(state, props)
+  const currentNetworkId = getCurrentNetworkId(state, props)
+  const { networks, communities } = partitionCommunities(getMemberships(state))
+
+  console.log('networks', networks)
 
   return {
     currentUser,

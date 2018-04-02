@@ -5,6 +5,7 @@ import EntypoIcon from 'react-native-vector-icons/Entypo'
 import styles from './DrawerMenu.styles'
 import SocketListener from '../SocketListener'
 import Button from '../Button'
+import { isEmpty } from 'lodash/fp'
 
 import { ALL_COMMUNITIES_ID } from '../../store/models/Community'
 const allCommunitiesImage = require('../../assets/All_Communities2.png')
@@ -95,7 +96,8 @@ export class NetworkRow extends React.Component {
       acc || !!community.newPostCount,
       false)
     this.state = {
-      expanded
+      expanded,
+      seeAllExpanded: false
     }
   }
 
@@ -105,16 +107,23 @@ export class NetworkRow extends React.Component {
     })
   }
 
+  toggleSeeAll = () => {
+    this.setState({
+      seeAllExpanded: !this.state.seeAllExpanded
+    })
+  }
+
   render () {
     const { network, goToCommunity, goToNetwork, currentCommunityId } = this.props
-    const { id, avatarUrl, name, communities } = network
+    const { id, avatarUrl, name, communities, nonMemberCommunities } = network
     const isAll = id === ALL_COMMUNITIES_ID
     const imageSource = isAll
       ? allCommunitiesImage
       : avatarUrl && {uri: avatarUrl}
     const openNetwork = () => goToNetwork(network)
-    const expandable = communities && !!communities.length
-    const { expanded } = this.state
+    const expandable = !isEmpty(communities)
+    const moreCommunities = !isEmpty(nonMemberCommunities)
+    const { expanded, seeAllExpanded } = this.state
     return <View style={[ styles.networkRow, expanded ? styles.networkRowExpanded : styles.networkRowCollapsed ]}>
       <TouchableOpacity onPress={openNetwork} style={[styles.rowTouchable, styles.networkRowTouchable]}>
         {imageSource && <Image source={imageSource} style={styles.networkAvatar} />}
@@ -130,6 +139,15 @@ export class NetworkRow extends React.Component {
           community={c}
           goToCommunity={goToCommunity}
           currentCommunityId={currentCommunityId} />)}
+        {seeAllExpanded && moreCommunities && nonMemberCommunities.map(c => <CommunityRow
+          key={c.id}
+          community={c}
+          goToCommunity={goToCommunity}
+          currentCommunityId={currentCommunityId}
+          isMember={false} />)}
+        {moreCommunities && <TouchableOpacity onPress={this.toggleSeeAll}>
+          <Text>{seeAllExpanded ? 'See less' : 'See all'}</Text>
+        </TouchableOpacity>}
       </View>}
     </View>
   }

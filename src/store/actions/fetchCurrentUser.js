@@ -36,6 +36,17 @@ export default function fetchCurrentUser () {
                 slug
                 avatarUrl
                 bannerUrl
+                communities(first: 300) {
+                  items {
+                    id
+                    name
+                    slug
+                    avatarUrl
+                    network {
+                      id
+                    }
+                  }
+                }
               }
             }
           }
