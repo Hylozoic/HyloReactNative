@@ -53,7 +53,6 @@ export function mapStateToProps (state, props) {
   })
   const pending = state.pending[FETCH_POSTS]
 
-  console.log('p', getPosts(state, queryProps).map(p => presentPost(p, get('id', community))))
   return {
     posts: getPosts(state, queryProps).map(p => presentPost(p, get('id', community))),
     sortBy,
