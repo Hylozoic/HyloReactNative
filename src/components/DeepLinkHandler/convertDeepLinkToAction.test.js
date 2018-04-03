@@ -24,6 +24,42 @@ it('handles a post link', () => {
   expect(convertDeepLinkToAction('/c/sandbox/p/8190')).toMatchSnapshot()
 })
 
+it('handles a network post link', () => {
+  expect(convertDeepLinkToAction('/n/sandbox/p/1234')).toMatchSnapshot()
+})
+
+it('handles an all-communities post link', () => {
+  expect(convertDeepLinkToAction('/all/p/1234')).toMatchSnapshot()
+})
+
+it('handles a thread link', () => {
+  expect(convertDeepLinkToAction('/t/1234')).toMatchSnapshot()
+})
+
+it('handles an all-communities link', () => {
+  expect(convertDeepLinkToAction('/all')).toMatchSnapshot()
+})
+
+it('handles a members link', () => {
+  expect(convertDeepLinkToAction('/c/hylo/members')).toMatchSnapshot()
+})
+
+it('handles a members index link', () => {
+  expect(convertDeepLinkToAction('/c/hylo/members')).toMatchSnapshot()
+})
+
+it('handles a topics index link', () => {
+  expect(convertDeepLinkToAction('/c/hylo-community-organizing/topics')).toMatchSnapshot()
+})
+
+it('handles a show topic link', () => {
+  expect(convertDeepLinkToAction('/c/hylo-community-organizing/topicName')).toMatchSnapshot()
+})
+
+it('handles a member profile link', () => {
+  expect(convertDeepLinkToAction('/m/1234')).toMatchSnapshot()
+})
+
 it('handles a link without a preceding slash (for tokenAuth nextURL handling)', () => {
   expect(convertDeepLinkToAction('c/sandbox/p/8190')).toMatchSnapshot()
 })
