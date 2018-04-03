@@ -12,7 +12,9 @@ import { ALL_COMMUNITIES_ID } from '../../store/models/Community'
 import {
   fetchCommunityTopic,
   getCommunityTopic,
-  setTopicSubscribe
+  setTopicSubscribe,
+  getCommunitySearchObject,
+  getNetworkSearchObject
 } from './Feed.store'
 import { mapWhenFocused, mergeWhenFocused } from 'util/connector'
 import getNavigationParam from '../../store/selectors/getNavigationParam'
@@ -27,17 +29,15 @@ export function mapStateToProps (state, props) {
   const communityId = getNavigationParam('communityId', state, props) ||
                         getCurrentCommunityId(state, props)
   const communitySlugFromLink = getNavigationParam('communitySlugFromLink', state, props)
-  let communitySearchObject = {}
-  if (communityId) communitySearchObject = {id: communityId}
-  if (communitySlugFromLink) communitySearchObject = {slug: communitySlugFromLink}
+  const communitySearchObject = getCommunitySearchObject(communityId, communitySlugFromLink)
+
   const topicName = props.topicName || params.topicName || getNavigationParam('topicName', state, props)
   const community = !networkId && getCommunity(state, communitySearchObject)
   const communitySlug = get('slug', community)
 
   const networkSlug = getNavigationParam('networkSlug', state, props)
-  let networkSearchObject = {}
-  if (networkId) networkSearchObject = {id: networkId}
-  if (networkSlug) networkSearchObject = {slug: networkSlug}
+  const networkSearchObject = getNetworkSearchObject(networkId, networkSlug)
+
   const network = getNetwork(state, networkSearchObject)
   const currentUser = getMe(state)
   const communityTopic = topicName && community &&
