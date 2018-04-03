@@ -33,7 +33,12 @@ export function mapStateToProps (state, props) {
   const topicName = props.topicName || params.topicName || getNavigationParam('topicName', state, props)
   const community = !networkId && getCommunity(state, communitySearchObject)
   const communitySlug = get('slug', community)
-  const network = getNetwork(state, {id: networkId})
+
+  const networkSlug = getNavigationParam('networkSlug', state, props)
+  let networkSearchObject = {}
+  if (networkId) networkSearchObject = {id: networkId}
+  if (networkSlug) networkSearchObject = {slug: networkSlug}
+  const network = getNetwork(state, networkSearchObject)
   const currentUser = getMe(state)
   const communityTopic = topicName && community &&
     getCommunityTopic(state, {topicName, slug: community.slug})

@@ -64,6 +64,10 @@ it('handles a community link', () => {
   expect(convertDeepLinkToAction('/c/my-community')).toMatchSnapshot()
 })
 
+it('handles a network link', () => {
+  expect(convertDeepLinkToAction('/n/my-network')).toMatchSnapshot()
+})
+
 it('handles a link without a preceding slash (for tokenAuth nextURL handling)', () => {
   expect(convertDeepLinkToAction('c/sandbox/p/8190')).toMatchSnapshot()
 })

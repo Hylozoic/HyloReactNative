@@ -64,6 +64,20 @@ Object {
 }
 `;
 
+exports[`handles a network link 1`] = `
+Object {
+  "action": Object {
+    "params": Object {
+      "networkSlug": "my-network",
+    },
+    "routeName": "NetworkFeed",
+    "type": "Navigation/NAVIGATE",
+  },
+  "routeName": "Main",
+  "type": "Navigation/NAVIGATE",
+}
+`;
+
 exports[`handles a network post link 1`] = `
 Object {
   "action": Object {

@@ -58,6 +58,7 @@ const screensInTabs = {
   Feed: {screen: Feed, path: 'feed/:communityId'},
   TopicFeed: {screen: Feed, path: 'topicFeed/:topicName'},
   CommunityFeed: {screen: Feed, path: 'communityFeed/:communitySlugFromLink'},
+  NetworkFeed: {screen: Feed, path: 'networkFeed/:networkSlug'},
   PostEditor: {screen: PostEditor},
   DetailsEditor: {screen: DetailsEditor},
   PostDetails: {screen: PostDetails, path: 'post/:id'},

@@ -59,5 +59,8 @@ export function reformatPath (path) {
   match = routeMatchers.showCommunity(pathname)
   if (match) return `${MAIN_ROUTE_PATH}/communityFeed/${match.communitySlug}`
 
+  match = routeMatchers.showNetwork(pathname)
+  if (match) return `${MAIN_ROUTE_PATH}/networkFeed/${match.networkSlug}`
+
   return path
 }
