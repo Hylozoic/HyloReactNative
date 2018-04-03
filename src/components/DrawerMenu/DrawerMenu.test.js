@@ -71,6 +71,34 @@ describe('NetworkRow', () => {
     expect(actual).toMatchSnapshot()
   })
 
+  it('renders correctly with nonMemberCommunities', () => {
+    const renderer = new ReactShallowRenderer()
+    const network = {
+      id: 1,
+      avatarUrl: 'network.png',
+      name: 'Network Name',
+      communities: [{
+        id: 1,
+        avatarUrl: 'foo.png',
+        name: 'Foom',
+        newPostCount: 1
+      }],
+      nonMemberCommunities: [{
+        id: 2,
+        avatarUrl: 'twofoo.png',
+        name: 'Twoom',
+        newPostCount: 1
+      }]
+    }
+    renderer.render(<NetworkRow
+      network={network}
+      goToCommunity={() => {}}
+      currentCommunityId={1} />)
+    const actual = renderer.getRenderOutput()
+
+    expect(actual).toMatchSnapshot()
+  })
+
   it('hides image when no avatarUrl', () => {
     const renderer = new ReactShallowRenderer()
     const network = {
