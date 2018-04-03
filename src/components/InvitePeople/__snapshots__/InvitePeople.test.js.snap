@@ -1,0 +1,228 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`InvitePeople handles tab-view functions 1`] = `
+<TabBar
+  getLabelText={[Function]}
+  indicatorStyle={
+    Object {
+      "backgroundColor": "#0DC39F",
+    }
+  }
+  labelStyle={
+    Object {
+      "color": "#000",
+      "fontFamily": "Circular-Book",
+    }
+  }
+  tabStyle={
+    Object {
+      "width": 375,
+    }
+  }
+/>
+`;
+
+exports[`InvitePeople handles tab-view functions 2`] = `
+<SendInvitesPage
+  communityName={undefined}
+  createInvitations={undefined}
+  inviteLink={undefined}
+  pendingCreate={undefined}
+  regenerateAccessCode={undefined}
+/>
+`;
+
+exports[`InvitePeople handles tab-view functions 3`] = `
+<PendingInvitesPage
+  expireInvitation={undefined}
+  invites={undefined}
+  reinviteAll={undefined}
+  resendInvitation={undefined}
+/>
+`;
+
+exports[`InvitePeople has navigation options 1`] = `
+Object {
+  "headerBackTitle": null,
+  "headerStyle": Object {
+    "backgroundColor": "white",
+    "paddingHorizontal": 10,
+  },
+  "headerTintColor": "#808c9b",
+  "headerTitle": "Invite People",
+  "headerTitleStyle": Object {
+    "color": "black",
+    "fontFamily": "Circular-Bold",
+    "fontSize": 17,
+  },
+}
+`;
+
+exports[`InvitePeople matches the last snapshot 1`] = `
+<TabViewAnimated
+  canJumpToTab={[Function]}
+  initialLayout={
+    Object {
+      "height": 0,
+      "width": 750,
+    }
+  }
+  navigationState={
+    Object {
+      "index": 0,
+      "routes": Array [
+        Object {
+          "key": "0",
+          "title": "Send Invites",
+        },
+        Object {
+          "key": "1",
+          "title": "Pending Invites",
+        },
+      ],
+    }
+  }
+  onIndexChange={[Function]}
+  renderHeader={[Function]}
+  renderPager={[Function]}
+  renderScene={[Function]}
+  useNativeDriver={false}
+/>
+`;
+
+exports[`InvitePeople renders PendingInviteRow 1`] = `
+<View>
+  <View>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+    >
+      john@doe.com
+    </Text>
+  </View>
+  <View>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+    >
+      just now
+    </Text>
+    <View>
+      <TouchableOpacity
+        activeOpacity={0.2}
+        hitSlop={
+          Object {
+            "bottom": 10,
+            "left": 10,
+            "right": 10,
+            "top": 10,
+          }
+        }
+        onPress={[Function]}
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+        >
+          Expire
+        </Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        activeOpacity={0.2}
+        hitSlop={
+          Object {
+            "bottom": 10,
+            "left": 10,
+            "right": 10,
+            "top": 10,
+          }
+        }
+        onPress={[Function]}
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+        >
+          Resend
+        </Text>
+      </TouchableOpacity>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`InvitePeople renders PendingInvitesPage 1`] = `
+<ScrollView>
+  <Button
+    onPress={[Function]}
+    text="Resend All"
+  />
+  <PendingInviteRow
+    expireInvitation={[Function]}
+    first={true}
+    invite={
+      Object {
+        "email": "john@doe.com",
+        "id": 10,
+        "lastSentAt": 2018-03-03T05:51:49.903Z,
+      }
+    }
+    resendInvitation={[Function]}
+  />
+</ScrollView>
+`;
+
+exports[`InvitePeople renders SendInvitesPage 1`] = `
+<ScrollView>
+  <View>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+    >
+      Anyone with this link can join the community
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+    >
+      https://hylo.com/invitepathhere
+    </Text>
+    <View>
+      <Button
+        onPress={[Function]}
+        text="Reset Link"
+      />
+      <Button
+        onPress={[Function]}
+        text="Copy Link"
+      />
+    </View>
+    <TextInput
+      allowFontScaling={true}
+      onChangeText={[Function]}
+      placeholder="Type email addresses"
+      underlineColorAndroid="rgba(0,0,0,0)"
+      value=""
+    />
+    <TextInput
+      allowFontScaling={true}
+      multiline={true}
+      numberOfLines={5}
+      onChangeText={[Function]}
+      underlineColorAndroid="rgba(0,0,0,0)"
+      value="Hey! Here's an invite to the Axolotle community on Hylo."
+    />
+    <Button
+      disabled={true}
+      onPress={[Function]}
+      text="Send Invite"
+    />
+  </View>
+</ScrollView>
+`;

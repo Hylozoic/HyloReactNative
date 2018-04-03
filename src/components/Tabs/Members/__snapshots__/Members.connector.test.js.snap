@@ -29,11 +29,20 @@ Object {
 
 exports[`mapStateToProps handles null value for lastViewedCommunity 1`] = `
 Object {
-  "community": null,
+  "canModerate": true,
+  "community": SessionBoundModel {
+    "_fields": Object {
+      "id": 10,
+      "members": undefined,
+      "moderators": undefined,
+      "posts": undefined,
+      "slug": "tom",
+    },
+    "slug": "tom",
+  },
   "currentUser": SessionBoundModel {
     "_fields": Object {
       "id": 123,
-      "memberships": undefined,
       "messageThreads": undefined,
       "notifications": undefined,
       "posts": undefined,
@@ -43,18 +52,18 @@ Object {
   },
   "fetchOpts": Object {
     "search": undefined,
-    "slug": "all-communities",
+    "slug": "tom",
     "sortBy": undefined,
-    "subject": "all-communities",
+    "subject": "community",
   },
   "hasMore": undefined,
-  "isAll": true,
+  "isAll": false,
   "members": Array [],
   "network": false,
   "pending": undefined,
   "search": undefined,
-  "slug": "all-communities",
+  "slug": "tom",
   "sortBy": undefined,
-  "subject": "all-communities",
+  "subject": "community",
 }
 `;
