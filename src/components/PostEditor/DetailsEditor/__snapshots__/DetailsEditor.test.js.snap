@@ -2,23 +2,13 @@
 
 exports[`DetailsEditor has navigation options 1`] = `
 Object {
-  "headerBackTitle": null,
-  "headerRight": <HeaderButton
-    disabled={false}
-    onPress={undefined}
-    text="Save"
-/>,
-  "headerStyle": Object {
-    "backgroundColor": "white",
-    "paddingHorizontal": 10,
-  },
-  "headerTintColor": "#808c9b",
+  "headerRight": <View>
+    <Button
+        onPress={[Function]}
+        title="Save"
+    />
+</View>,
   "headerTitle": "Details",
-  "headerTitleStyle": Object {
-    "color": "black",
-    "fontFamily": "Circular-Bold",
-    "fontSize": 17,
-  },
 }
 `;
 

@@ -15,7 +15,7 @@ export function partitionCommunities (memberships) {
     ...m.community.ref,
     network: m.community.network && {
       ...get('network.ref', m.community),
-      communities: get('network.communities', m.community).toRefArray()
+      communities: get('network.communities', m.community) && get('network.communities', m.community).toRefArray()
     },
     newPostCount: m.newPostCount
   }))
@@ -66,8 +66,6 @@ export function mapStateToProps (state, props) {
   const currentCommunityId = getCurrentCommunityId(state, props)
   const currentNetworkId = getCurrentNetworkId(state, props)
   const { networks, communities } = partitionCommunities(getMemberships(state))
-
-  console.log('networks', networks)
 
   return {
     currentUser,
