@@ -44,7 +44,7 @@ const route = pathMatch()
 export const routeMatchers = {
   invitation: route('/h/use-invitation'),
   accessLink: route('/c/:slug/join/:accessCode'),
-  loginToken: route('/noo/login/token'),
+  passwordResetTokenLogin: route('/noo/login/token'),
   post: route('/c/:slug/p/:id'),
   networkPost: route('/n/:slug/p/:id'),
   allCommunitiesPost: route('/all/p/:id'),

@@ -36,7 +36,7 @@ export function reformatPath (path) {
   match = routeMatchers.accessLink(pathname)
   if (match) return `useAccessCode/${match.slug}/${match.accessCode}`
 
-  match = routeMatchers.loginToken(pathname)
+  match = routeMatchers.passwordResetTokenLogin(pathname)
   if (match) {
     const {u: userId, t: loginToken, n: nextURL} = params
     const nextPath = getPathFromURL(nextURL)
