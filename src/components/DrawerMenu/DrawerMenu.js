@@ -146,14 +146,14 @@ export class NetworkRow extends React.Component {
           currentCommunityId={currentCommunityId}
           isMember={false} />)}
         {moreCommunities && <TouchableOpacity onPress={this.toggleSeeAll}>
-          <Text>{seeAllExpanded ? 'See less' : 'See all'}</Text>
+          <Text style={styles.seeAll}>{seeAllExpanded ? 'See less' : 'See all'}</Text>
         </TouchableOpacity>}
       </View>}
     </View>
   }
 }
 
-export function CommunityRow ({ community, goToCommunity, currentCommunityId, addPadding }) {
+export function CommunityRow ({ community, goToCommunity, currentCommunityId, addPadding, isMember = true }) {
   const { id, avatarUrl, name } = community
   const newPostCount = Math.min(99, community.newPostCount)
   const highlight = id === currentCommunityId
@@ -161,7 +161,7 @@ export function CommunityRow ({ community, goToCommunity, currentCommunityId, ad
     <TouchableOpacity onPress={() => goToCommunity(community)} style={styles.rowTouchable}>
       {!!avatarUrl &&
         <Image source={{uri: avatarUrl}} style={styles.communityAvatar} />}
-      <Text style={[styles.communityRowText, highlight && styles.highlight]} ellipsizeMode='tail'
+      <Text style={[styles.communityRowText, highlight && styles.highlight, isMember && styles.isMember]} ellipsizeMode='tail'
         numberOfLines={1}>
         {name}
       </Text>
