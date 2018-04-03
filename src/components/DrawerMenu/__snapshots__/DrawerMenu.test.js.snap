@@ -280,6 +280,67 @@ exports[`NetworkRow matches the last snapshot 1`] = `
 </View>
 `;
 
+exports[`NetworkRow renders correctly with nonMemberCommunities 1`] = `
+<View>
+  <TouchableOpacity
+    activeOpacity={0.2}
+    onPress={[Function]}
+  >
+    <Image
+      source={
+        Object {
+          "uri": "network.png",
+        }
+      }
+    />
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      numberOfLines={1}
+    >
+      Network Name
+    </Text>
+    <TouchableOpacity
+      activeOpacity={0.2}
+      onPress={[Function]}
+    >
+      <Icon
+        allowFontScaling={false}
+        name="chevron-down"
+        size={12}
+      />
+    </TouchableOpacity>
+  </TouchableOpacity>
+  <View>
+    <CommunityRow
+      community={
+        Object {
+          "avatarUrl": "foo.png",
+          "id": 1,
+          "name": "Foom",
+          "newPostCount": 1,
+        }
+      }
+      currentCommunityId={1}
+      goToCommunity={[Function]}
+    />
+    <TouchableOpacity
+      activeOpacity={0.2}
+      onPress={[Function]}
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+      >
+        See all
+      </Text>
+    </TouchableOpacity>
+  </View>
+</View>
+`;
+
 exports[`NetworkRow shows all communities link 1`] = `
 <View>
   <TouchableOpacity
