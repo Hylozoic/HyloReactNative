@@ -53,7 +53,8 @@ export const routeMatchers = {
   membersIndex: route('/c/hylo/members'),
   topicsIndex: route('/c/hylo-community-organizing/topics'),
   showTopic: route('/c/hylo-community-organizing/:topicName'),
-  showMember: route('/m/:memberId')
+  showMember: route('/m/:memberId'),
+  showCommunity: route('/c/:communitySlug')
 }
 
 export function redirectAfterLogin ({ currentUser, navigation, action }) {

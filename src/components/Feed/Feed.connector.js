@@ -26,8 +26,12 @@ export function mapStateToProps (state, props) {
   // back button and be added to the stack.
   const communityId = getNavigationParam('communityId', state, props) ||
                         getCurrentCommunityId(state, props)
+  const communitySlugFromLink = getNavigationParam('communitySlugFromLink', state, props)
+  let communitySearchObject = {}
+  if (communityId) communitySearchObject = {id: communityId}
+  if (communitySlugFromLink) communitySearchObject = {slug: communitySlugFromLink}
   const topicName = props.topicName || params.topicName || getNavigationParam('topicName', state, props)
-  const community = !networkId && getCommunity(state, {id: communityId})
+  const community = !networkId && getCommunity(state, communitySearchObject)
   const communitySlug = get('slug', community)
   const network = getNetwork(state, {id: networkId})
   const currentUser = getMe(state)

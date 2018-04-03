@@ -60,6 +60,10 @@ it('handles a member profile link', () => {
   expect(convertDeepLinkToAction('/m/1234')).toMatchSnapshot()
 })
 
+it('handles a community link', () => {
+  expect(convertDeepLinkToAction('/c/my-community')).toMatchSnapshot()
+})
+
 it('handles a link without a preceding slash (for tokenAuth nextURL handling)', () => {
   expect(convertDeepLinkToAction('c/sandbox/p/8190')).toMatchSnapshot()
 })

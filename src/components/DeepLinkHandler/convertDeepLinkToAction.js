@@ -56,5 +56,8 @@ export function reformatPath (path) {
   match = routeMatchers.showMember(pathname)
   if (match) return `${MAIN_ROUTE_PATH}/people/${match.memberId}`
 
+  match = routeMatchers.showCommunity(pathname)
+  if (match) return `${MAIN_ROUTE_PATH}/communityFeed/${match.communitySlug}`
+
   return path
 }

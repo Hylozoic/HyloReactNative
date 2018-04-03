@@ -1,5 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`handles a community link 1`] = `
+Object {
+  "action": Object {
+    "params": Object {
+      "communitySlugFromLink": "my-community",
+    },
+    "routeName": "CommunityFeed",
+    "type": "Navigation/NAVIGATE",
+  },
+  "routeName": "Main",
+  "type": "Navigation/NAVIGATE",
+}
+`;
+
 exports[`handles a link without a preceding slash (for tokenAuth nextURL handling) 1`] = `
 Object {
   "action": Object {
