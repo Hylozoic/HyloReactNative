@@ -1,33 +1,27 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`RootView matches last snapshot without a store 1`] = `
-<View>
-  <ActivityIndicator
-    animating={true}
-    color="#999999"
-    hidesWhenStopped={true}
-    size="small"
-  />
-</View>
+exports[`RootView matches the last snapshot with a store 1`] = `
+<Provider
+  store={
+    Object {
+      "dispatch": [Function],
+      "getState": [Function],
+      "subscribe": [Function],
+    }
+  }
+>
+  <View>
+    <VersionCheck />
+    <SessionCheck>
+      <Connect(DeepLinkHandler)
+        navigator={undefined}
+        onesignalNotification={null}
+      />
+    </SessionCheck>
+    <LoadingModal />
+    <RootNavigator />
+  </View>
+</Provider>
 `;
 
-exports[`RootView renders as expected when store is loaded 1`] = `
-<View>
-  <VersionCheck />
-  <LoadingModal />
-  <RootNavigator />
-</View>
-`;
-
-exports[`RootView renders as expected when store is loaded 2`] = `
-Object {
-  "payload": Object {
-    "payload": Object {
-      "additionalData": Object {
-        "path": "/c/sandbox",
-      },
-    },
-  },
-  "type": "RECEIVE_PUSH_NOTIFICATION",
-}
-`;
+exports[`RootView matches the last snapshot without a store 1`] = `<LoadingScreen />`;

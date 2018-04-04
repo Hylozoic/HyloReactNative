@@ -114,6 +114,15 @@ Object {
 }
 `;
 
+exports[`selectors/refiners refineActivity matches the previous ACTION_ANNOUNCEMENT snapshot 1`] = `
+Object {
+  "body": "wrote: This post should have a really long title. It should not even come close to fitting on a notificatio",
+  "header": "posted an announcement",
+  "nameInHeader": true,
+  "onPress": [Function],
+}
+`;
+
 exports[`selectors/refiners refineActivity matches the previous ACTION_APPROVED_JOIN_REQUEST snapshot 1`] = `
 Object {
   "body": "approved your request to join",

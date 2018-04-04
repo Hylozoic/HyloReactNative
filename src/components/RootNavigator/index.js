@@ -17,6 +17,7 @@ import PostDetails from '../PostDetails'
 import MemberProfile from '../MemberProfile'
 import NotificationsList from '../NotificationsList'
 import CommentEditor from '../PostDetails/CommentEditor'
+import InvitePeople from '../InvitePeople'
 import tabStyles from '../Tabs/Tabs.styles'
 import NewMessage from '../NewMessage'
 import Thread from '../Thread'
@@ -62,6 +63,7 @@ const screensInTabs = {
   MemberDetails: {screen: MemberDetails},
   MemberSkillEditor: {screen: MemberSkillEditor},
   CommentEditor: {screen: CommentEditor},
+  InvitePeople: {screen: InvitePeople},
   NewMessage: {screen: NewMessage}
 }
 
@@ -117,7 +119,7 @@ const screensInStack = {
   SignupFlow5: {screen: SignupFlow5},
   Login: {screen: Login, path: 'login'},
   LoginByPasswordResetToken: {screen: Login, path: 'passwordResetTokenLogin/:userId/:loginToken/:nextURL'},
-  ForgotPassword: {screen: ForgotPassword, path: 'forgot-password'},
+  ForgotPassword: {screen: ForgotPassword, path: 'reset-password'},
   Thread: {screen: Thread, path: 'thread/:id'},
   UseInvitation: {screen: JoinCommunity, path: 'useInvitation/:token'},
   UseAccessCode: {screen: JoinCommunity, path: 'useAccessCode/:slug/:accessCode'},

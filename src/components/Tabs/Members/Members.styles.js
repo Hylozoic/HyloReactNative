@@ -121,5 +121,13 @@ export default {
     marginLeft: 4,
     fontSize: 12,
     color: capeCod
+  },
+  button: {
+    width: 185,
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    height: 40,
+    marginTop: 12,
+    fontSize: 14
   }
 }
