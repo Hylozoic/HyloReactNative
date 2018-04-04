@@ -47,6 +47,8 @@ exports[`NewMessage renders correctly 1`] = `
   <SectionList
     contentContainerStyle={
       Object {
+        "borderTopColor": "#d7d8d8",
+        "borderTopWidth": 0,
         "paddingHorizontal": 12,
       }
     }
@@ -117,6 +119,8 @@ exports[`NewMessage renders correctly 2`] = `
   <SectionList
     contentContainerStyle={
       Object {
+        "borderTopColor": "#d7d8d8",
+        "borderTopWidth": 0,
         "paddingHorizontal": 12,
       }
     }
@@ -193,7 +197,7 @@ exports[`ParticipantInput renders correctly 1`] = `
         "borderBottomColor": "#d7d8d8",
         "borderBottomWidth": 1,
         "flexDirection": "row",
-        "minHeight": 60,
+        "height": 60,
         "minWidth": 750,
         "paddingHorizontal": 15,
       }

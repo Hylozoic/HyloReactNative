@@ -122,7 +122,7 @@ export function Participant ({ participant, remove }) {
 }
 
 export function renderContact (addParticipant) {
-  return ({ item }) => <ContactRow contact={item} add={addParticipant} />
+  return ({ item }) => <ContactRow style={styles.contactRow} contact={item} add={addParticipant} />
 }
 
 export function SectionHeader ({ section }) {

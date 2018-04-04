@@ -23,16 +23,18 @@ export default {
     flex: 1
   },
   sectionList: {
-    ...defaultPadding
+    ...defaultPadding,
+    borderTopWidth: isIOS ? 0 : 1,
+    borderTopColor: capeCod20
   },
   messageInput: {
     marginBottom: 20
   },
   scrollViewWrapper: {
-    minHeight: 60
+    height: 60
   },
   participantInputContainer: {
-    minHeight: 60,
+    height: 60,
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: 15,
@@ -41,6 +43,7 @@ export default {
     minWidth: screenWidth
   },
   participantTextInput: {
+    minWidth: screenWidth
   },
   participant: {
     borderWidth: 1,
@@ -73,7 +76,8 @@ export default {
   contactRow: {
     height: 40,
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
+    maxWidth: 225
   },
   grayed: {
     opacity: 0.2
