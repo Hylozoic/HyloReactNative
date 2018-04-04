@@ -1,4 +1,4 @@
-import { mapStateToProps, mapDispatchToProps } from './ModeratorSettings.connector'
+import { mapStateToProps, mapDispatchToProps, mergeProps } from './ModeratorSettings.connector'
 import orm from '../../store/models'
 
 let state
@@ -68,5 +68,20 @@ describe('mapDispatchToProps', () => {
     expect(dispatch.mock.calls).toMatchSnapshot()
     dispatchProps.showMember(22)
     expect(props.navigation.navigate.mock.calls).toMatchSnapshot()
+  })
+})
+
+describe('mergeProps', () => {
+  it('merges the props', () => {
+    const dispatch = x => x
+    const ownProps = {}
+    const stateProps = mapStateToProps(state, {})
+    const dispatchProps = mapDispatchToProps(dispatch, stateProps)
+    const mergedProps = mergeProps(stateProps, dispatchProps, ownProps)
+    expect(mergedProps.addModerator(10)).toMatchSnapshot()
+    expect(mergedProps.removeModerator(10, true)).toMatchSnapshot()
+    expect(mergedProps.fetchModeratorSuggestions('autocomplete')).toMatchSnapshot()
+    expect(mergedProps.fetchModerators()).toMatchSnapshot()
+    expect(mergedProps).toMatchSnapshot()
   })
 })

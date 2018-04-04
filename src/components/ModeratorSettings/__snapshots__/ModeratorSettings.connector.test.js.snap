@@ -158,3 +158,172 @@ Object {
   ],
 }
 `;
+
+exports[`mergeProps merges the props 1`] = `
+Object {
+  "graphql": Object {
+    "query": "mutation ($personId: ID, $communityId: ID) {
+        addModerator(personId: $personId, communityId: $communityId) {
+          id
+          moderators (first: 100) {
+            items {
+              id
+              name
+              avatarUrl
+            }
+          }
+        }
+      }",
+    "variables": Object {
+      "communityId": "99",
+      "personId": 10,
+    },
+  },
+  "meta": Object {
+    "communityId": "99",
+    "optimistic": true,
+    "personId": 10,
+  },
+  "type": "ModeratorSettings/ADD_MODERATOR",
+}
+`;
+
+exports[`mergeProps merges the props 2`] = `
+Object {
+  "graphql": Object {
+    "query": "mutation ($personId: ID, $communityId: ID, $isRemoveFromCommunity: Boolean) {
+        removeModerator(personId: $personId, communityId: $communityId, isRemoveFromCommunity: $isRemoveFromCommunity) {
+          id
+          moderators (first: 100) {
+            items {
+              id
+              name
+              avatarUrl
+            }
+          }
+        }
+      }",
+    "variables": Object {
+      "communityId": "99",
+      "isRemoveFromCommunity": true,
+      "personId": 10,
+    },
+  },
+  "meta": Object {
+    "communityId": "99",
+    "isRemoveFromCommunity": true,
+    "optimistic": true,
+    "personId": 10,
+  },
+  "type": "ModeratorSettings/REMOVE_MODERATOR",
+}
+`;
+
+exports[`mergeProps merges the props 3`] = `
+Object {
+  "graphql": Object {
+    "query": "query ($id: ID, $autocomplete: String) {
+        community (id: $id) {
+          id
+          members (first: 10, autocomplete: $autocomplete) {
+            hasMore
+            items {
+              id
+              name
+              avatarUrl
+            }
+          }
+        }
+      }",
+    "variables": Object {
+      "autocomplete": "autocomplete",
+      "id": "99",
+    },
+  },
+  "meta": Object {
+    "extractModel": "Community",
+  },
+  "type": "ModeratorSettings/FETCH_MODERATOR_SUGGESTIONS",
+}
+`;
+
+exports[`mergeProps merges the props 4`] = `
+Object {
+  "graphql": Object {
+    "query": "query ($slug: String) {
+        community (slug: $slug) {
+          id
+          name
+          slug
+          moderators (first: 100) {
+            hasMore
+            items {
+              id
+              name
+              avatarUrl
+            }
+          }
+        }
+      }",
+    "variables": Object {
+      "slug": "foo",
+    },
+  },
+  "meta": Object {
+    "extractModel": "Community",
+  },
+  "type": "ModeratorSettings/FETCH_MODERATORS",
+}
+`;
+
+exports[`mergeProps merges the props 5`] = `
+Object {
+  "addModerator": [Function],
+  "addModeratorMaker": [Function],
+  "clearModeratorSuggestions": [Function],
+  "community": SessionBoundModel {
+    "_fields": Object {
+      "id": "99",
+      "members": undefined,
+      "moderators": undefined,
+      "posts": undefined,
+      "slug": "foo",
+    },
+    "slug": "foo",
+  },
+  "currentUser": SessionBoundModel {
+    "_fields": Object {
+      "id": "1",
+      "messageThreads": undefined,
+      "notifications": undefined,
+      "posts": undefined,
+      "skills": undefined,
+    },
+    "id": "1",
+  },
+  "fetchModeratorSuggestions": [Function],
+  "fetchModeratorSuggestionsMaker": [Function],
+  "fetchModerators": [Function],
+  "fetchModeratorsMaker": [Function],
+  "moderatorSuggestions": Array [],
+  "moderators": Array [
+    SessionBoundModel {
+      "_fields": Object {
+        "id": "1",
+        "memberships": undefined,
+        "skills": undefined,
+      },
+    },
+    SessionBoundModel {
+      "_fields": Object {
+        "id": "2",
+        "memberships": undefined,
+        "skills": undefined,
+      },
+    },
+  ],
+  "removeModerator": [Function],
+  "removeModeratorMaker": [Function],
+  "showMember": [Function],
+}
+`;
