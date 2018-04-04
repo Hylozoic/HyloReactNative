@@ -19,6 +19,7 @@ Object {
     "search": "",
     "sortBy": "join",
   },
+  "ModeratorSettings": Array [],
   "NewMessage": Object {
     "input": "",
     "message": "",
