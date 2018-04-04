@@ -5072,6 +5072,12 @@ react-dom@>=0.14.0:
     object-assign "^4.1.1"
     prop-types "^15.6.0"
 
+react-native-autocomplete-input@^3.5.0:
+  version "3.5.0"
+  resolved "https://registry.yarnpkg.com/react-native-autocomplete-input/-/react-native-autocomplete-input-3.5.0.tgz#2e52e3865abf1ad3e8d04f7e39f5314c03a89e4d"
+  dependencies:
+    prop-types "^15.5.10"
+
 react-native-background-timer@^1.3.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/react-native-background-timer/-/react-native-background-timer-1.3.0.tgz#032114347e74512f2fb69c59c19fdb7ebdefafd7"
