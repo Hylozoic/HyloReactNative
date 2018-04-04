@@ -193,7 +193,10 @@ exports[`ParticipantInput renders correctly 1`] = `
         "borderBottomColor": "#d7d8d8",
         "borderBottomWidth": 1,
         "flexDirection": "row",
-        "height": 60,
+        "flexWrap": "wrap",
+        "maxWidth": 750,
+        "minHeight": 60,
+        "minWidth": 750,
         "paddingHorizontal": 15,
       }
     }
@@ -226,7 +229,7 @@ exports[`ParticipantInput renders correctly 1`] = `
     <TextInput
       allowFontScaling={true}
       onChangeText={[Function]}
-      placeholder="Search"
+      placeholder=""
       underlineColorAndroid="transparent"
       value="Jon"
     />

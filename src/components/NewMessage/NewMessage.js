@@ -95,13 +95,7 @@ export default class NewMessage extends React.Component {
 }
 
 export function ParticipantInput ({ participants, onChangeText, removeParticipant, text }) {
-  const { width } = Dimensions.get('window')
-  const inputStyle = {width: width - 30,
-    borderWidth: StyleSheet.hairlineWidth,
-    borderColor: 'black',
-    borderRadius: 5,
-    minHeight: 40
-  }
+  const placeholderText = isEmpty(participants) ? 'Type in the names of people to message' : ''
   return <View style={styles.scrollViewWrapper}>
     <ScrollView
       contentContainerStyle={styles.participantInputContainer}
@@ -111,8 +105,8 @@ export function ParticipantInput ({ participants, onChangeText, removeParticipan
         value={text}
         onChangeText={onChangeText}
         underlineColorAndroid='transparent'
-        placeholder={'Search'}
-        style={[styles.participantTextInput, inputStyle]} />
+        placeholder={placeholderText}
+        style={styles.participantTextInput} />
     </ScrollView>
   </View>
 }
