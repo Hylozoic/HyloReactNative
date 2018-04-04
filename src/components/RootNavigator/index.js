@@ -20,6 +20,7 @@ import CommentEditor from '../PostDetails/CommentEditor'
 import InvitePeople from '../InvitePeople'
 import tabStyles from '../Tabs/Tabs.styles'
 import NewMessage from '../NewMessage'
+import ModeratorSettings from '../ModeratorSettings'
 import Thread from '../Thread'
 import ThreadList from '../ThreadList'
 import ThreadParticipants from '../ThreadParticipants'
@@ -50,7 +51,8 @@ import extendRouter from './extendRouter'
 const tabs = {
   Home: {screen: Home, path: ''},
   Members: {screen: Members, path: 'people'},
-  Topics: {screen: Topics, path: 'topics'}
+  Topics: {screen: Topics, path: 'topics'},
+  Plus: {screen: ModeratorSettings}
 }
 
 // Screens that can be shown in any tab (the same tab icon stays highlighted)
@@ -73,7 +75,7 @@ Object.freeze(screensInTabs)
 const TabNavigatorWithBar = TabNavigator(
   stacksInTabsFactory(tabs, screensInTabs),
   {
-    initialRouteName: 'Home',
+    initialRouteName: 'Plus',
     tabBarPosition: 'bottom',
     animationEnabled: false,
     swipeEnabled: false,
