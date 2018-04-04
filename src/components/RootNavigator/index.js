@@ -51,8 +51,7 @@ import extendRouter from './extendRouter'
 const tabs = {
   Home: {screen: Home, path: ''},
   Members: {screen: Members, path: 'people'},
-  Topics: {screen: Topics, path: 'topics'},
-  Plus: {screen: ModeratorSettings}
+  Topics: {screen: Topics, path: 'topics'}
 }
 
 // Screens that can be shown in any tab (the same tab icon stays highlighted)
@@ -66,6 +65,7 @@ const screensInTabs = {
   MemberSkillEditor: {screen: MemberSkillEditor},
   CommentEditor: {screen: CommentEditor},
   InvitePeople: {screen: InvitePeople},
+  ModeratorSettings: {screen: ModeratorSettings},
   NewMessage: {screen: NewMessage}
 }
 
@@ -75,7 +75,7 @@ Object.freeze(screensInTabs)
 const TabNavigatorWithBar = TabNavigator(
   stacksInTabsFactory(tabs, screensInTabs),
   {
-    initialRouteName: 'Plus',
+    initialRouteName: 'Home',
     tabBarPosition: 'bottom',
     animationEnabled: false,
     swipeEnabled: false,
