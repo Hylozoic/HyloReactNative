@@ -16,6 +16,7 @@ describe('ModeratorSettings', () => {
     fetchModerators: jest.fn(),
     addModerator: jest.fn(),
     moderatorSuggestions: [],
+    fetchModeratorSuggestions: jest.fn(),
     clearModeratorSuggestions: jest.fn()
   }
 
@@ -57,6 +58,13 @@ describe('ModeratorSettings', () => {
     expect(props.fetchModerators).toHaveBeenCalledTimes(2)
   })
 
+  it('unmounts successfully', () => {
+    const renderer = ReactTestRenderer.create(<ModeratorSettings {...props} />)
+
+    renderer.unmount()
+    expect(props.clearModeratorSuggestions).toHaveBeenCalled()
+  })
+
   it('renders ModeratorRow', () => {
     const renderer = new ReactShallowRenderer()
     const props = {
@@ -77,7 +85,7 @@ describe('ModeratorSettings', () => {
     expect(Alert.alert).toHaveBeenCalled()
   })
 
-  it('adds moderator', () => {
+  it('addModerator', () => {
     const instance = ReactTestRenderer.create(<ModeratorSettings {...props} />).getInstance()
     instance.setState({moderatorToAdd: 12, query: 'myquery', isAdding: true})
 
@@ -87,4 +95,42 @@ describe('ModeratorSettings', () => {
     expect(instance.state.moderatorToAdd).toBeNull()
     expect(props.clearModeratorSuggestions).toHaveBeenCalled()
   })
+
+  it('focusAddNew', () => {
+    const instance = ReactTestRenderer.create(<ModeratorSettings {...props} />).getInstance()
+
+    instance.focusAddNew()
+    expect(instance.state.isAdding).toBeTruthy()
+  })
+
+  it('queryModerators', () => {
+    const instance = ReactTestRenderer.create(<ModeratorSettings {...props} />).getInstance()
+    const autocompleteText = 'sometext'
+
+    instance.queryModerators(autocompleteText)
+
+    expect(instance.state.moderatorToAdd).toBeNull()
+    expect(instance.state.query).toEqual(autocompleteText)
+    expect(props.fetchModeratorSuggestions).toHaveBeenCalledWith(autocompleteText)
+  })
+
+  it('selectModeratorToAdd', () => {
+    const instance = ReactTestRenderer.create(<ModeratorSettings {...props} />).getInstance()
+
+    instance.setState({query: 'sometext'})
+
+    instance.selectModeratorToAdd(25, 'John Others')
+
+    expect(instance.state.moderatorToAdd).toEqual(25)
+    expect(instance.state.query).toEqual('John Others')
+  })
+
+  it('_renderAutocompleteItem', () => {
+    const instance = ReactTestRenderer.create(<ModeratorSettings {...props} />).getInstance()
+
+    const autocompleteRendered = instance._renderAutocompleteItem({id: 25, name: 'John Others', avatarUrl: 'someurl'})
+
+    expect(autocompleteRendered).toMatchSnapshot()
+  })
+
 })

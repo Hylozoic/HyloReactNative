@@ -49,17 +49,24 @@ describe('mapStateToProps', () => {
   })
 })
 
-//describe('mapDispatchToProps', () => {
-//  it('correctly sets up dispatches', () => {
-//    const dispatch = jest.fn(x => x)
-//    const props = {
-//      communityId: 11
-//    }
-//
-//    const dispatchProps = mapDispatchToProps(dispatch, props)
-//    expect(dispatchProps.addModerator(10)).toMatchSnapshot()
-//    expect(dispatchProps.removeModerator(10, true)).toMatchSnapshot()
-//    expect(dispatchProps.fetchModeratorSuggestions('autocomplete')).toMatchSnapshot()
-//    expect(dispatchProps.clearModeratorSuggestions()).toMatchSnapshot()
-//  })
-//})
+describe('mapDispatchToProps', () => {
+  it('creates actions', () => {
+    const dispatch = jest.fn()
+    const props = {
+      navigation: {
+        state: {params: {id: 77}},
+        navigate: jest.fn()
+      }
+    }
+    const dispatchProps = mapDispatchToProps(dispatch, props)
+    expect(dispatchProps).toMatchSnapshot()
+    dispatchProps.addModeratorMaker(22, 33)
+    dispatchProps.removeModeratorMaker(22, true, 33)
+    dispatchProps.fetchModeratorsMaker('slug')
+    dispatchProps.fetchModeratorSuggestionsMaker(33, 'autocomplete')
+    dispatchProps.clearModeratorSuggestions()
+    expect(dispatch.mock.calls).toMatchSnapshot()
+    dispatchProps.showMember(22)
+    expect(props.navigation.navigate.mock.calls).toMatchSnapshot()
+  })
+})

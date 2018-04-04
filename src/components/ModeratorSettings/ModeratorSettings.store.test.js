@@ -1,11 +1,20 @@
 import reducer, {
+  ormSessionReducer,
   fetchModeratorSuggestions,
   clearModeratorSuggestions,
   addModerator,
+  fetchModerators,
   removeModerator,
   CLEAR_MODERATOR_SUGGESTIONS,
-  FETCH_MODERATOR_SUGGESTIONS
+  FETCH_MODERATOR_SUGGESTIONS,
+  REMOVE_MODERATOR_PENDING,
+  ADD_MODERATOR_PENDING
 } from './ModeratorSettings.store'
+import orm from 'store/models'
+
+it('fetchModerators', () => {
+  expect(fetchModerators('mycommunity')).toMatchSnapshot()
+})
 
 it('fetchModeratorSuggestions', () => {
   expect(fetchModeratorSuggestions(123, 'to')).toMatchSnapshot()
@@ -50,5 +59,49 @@ describe('reducer', () => {
       }
     })
     expect(actual).toEqual(expected)
+  })
+})
+
+describe('ModeratorSettings.store.ormSessionReducer', () => {
+  let session
+  beforeEach(() => {
+    session = orm.session(orm.getEmptyState())
+  })
+
+  it('responds to ADD_MODERATOR_PENDING', () => {
+    session.Community.create({id: '5'})
+    session.Person.create({id: '10', name: 'John Smith'})
+
+    const action = {
+      type: ADD_MODERATOR_PENDING,
+      payload: {
+        data: {
+          addModerator: {
+            id: 10
+          }
+        }
+      },
+      meta: {personId: 10, communityId: '5'}
+    }
+
+    ormSessionReducer(session, action)
+    const moderators = session.Community.withId(5).moderators.toRefArray()
+    expect(moderators).toHaveLength(1)
+    expect(moderators[0].name).toEqual('John Smith')
+  })
+
+  it('responds to REMOVE_MODERATOR_PENDING', () => {
+    const community = session.Community.create({id: '5'})
+    const person = session.Person.create({id: '10', name: 'John Smith'})
+    community.updateAppending({moderators: [person]})
+
+    const action = {
+      type: REMOVE_MODERATOR_PENDING,
+      meta: {communityId: '5', personId: '10'}
+    }
+
+    expect(session.Community.withId('5').moderators.toRefArray()).toHaveLength(1)
+    ormSessionReducer(session, action)
+    expect(session.Community.withId('5').moderators.toRefArray()).toHaveLength(0)
   })
 })

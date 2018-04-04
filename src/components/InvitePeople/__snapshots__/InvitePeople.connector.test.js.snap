@@ -1,5 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`mapDispatchToProps creates actions 1`] = `
+Object {
+  "createInvitationsMaker": [Function],
+  "expireInvitation": [Function],
+  "fetchCommunitySettingsMaker": [Function],
+  "regenerateAccessCodeMaker": [Function],
+  "reinviteAllMaker": [Function],
+  "resendInvitation": [Function],
+}
+`;
+
 exports[`mapStateToProps returns the right keys 1`] = `
 Object {
   "community": SessionBoundModel {

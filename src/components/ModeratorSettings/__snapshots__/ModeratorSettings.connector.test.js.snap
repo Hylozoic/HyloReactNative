@@ -1,5 +1,122 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`mapDispatchToProps creates actions 1`] = `
+Object {
+  "addModeratorMaker": [Function],
+  "clearModeratorSuggestions": [Function],
+  "fetchModeratorSuggestionsMaker": [Function],
+  "fetchModeratorsMaker": [Function],
+  "removeModeratorMaker": [Function],
+  "showMember": [Function],
+}
+`;
+
+exports[`mapDispatchToProps creates actions 2`] = `
+Array [
+  Array [
+    Object {
+      "graphql": Object {
+        "query": "mutation ($personId: ID, $communityId: ID) {
+        addModerator(personId: $personId, communityId: $communityId) {
+          id
+          moderators (first: 100) {
+            items {
+              id
+              name
+              avatarUrl
+            }
+          }
+        }
+      }",
+        "variables": Object {
+          "communityId": 33,
+          "personId": 22,
+        },
+      },
+      "meta": Object {
+        "communityId": 33,
+        "optimistic": true,
+        "personId": 22,
+      },
+      "type": "ModeratorSettings/ADD_MODERATOR",
+    },
+  ],
+  Array [
+    Object {
+      "graphql": Object {
+        "query": "mutation ($personId: ID, $communityId: ID, $isRemoveFromCommunity: Boolean) {
+        removeModerator(personId: $personId, communityId: $communityId, isRemoveFromCommunity: $isRemoveFromCommunity) {
+          id
+          moderators (first: 100) {
+            items {
+              id
+              name
+              avatarUrl
+            }
+          }
+        }
+      }",
+        "variables": Object {
+          "communityId": 33,
+          "isRemoveFromCommunity": true,
+          "personId": 22,
+        },
+      },
+      "meta": Object {
+        "communityId": 33,
+        "isRemoveFromCommunity": true,
+        "optimistic": true,
+        "personId": 22,
+      },
+      "type": "ModeratorSettings/REMOVE_MODERATOR",
+    },
+  ],
+  Array [
+    Object {
+      "graphql": Object {
+        "query": "query ($id: ID, $autocomplete: String) {
+        community (id: $id) {
+          id
+          members (first: 10, autocomplete: $autocomplete) {
+            hasMore
+            items {
+              id
+              name
+              avatarUrl
+            }
+          }
+        }
+      }",
+        "variables": Object {
+          "autocomplete": "autocomplete",
+          "id": 33,
+        },
+      },
+      "meta": Object {
+        "extractModel": "Community",
+      },
+      "type": "ModeratorSettings/FETCH_MODERATOR_SUGGESTIONS",
+    },
+  ],
+  Array [
+    Object {
+      "type": "ModeratorSettings/CLEAR_MODERATOR_SUGGESTIONS",
+    },
+  ],
+]
+`;
+
+exports[`mapDispatchToProps creates actions 3`] = `
+Array [
+  Array [
+    "MemberProfile",
+    Object {
+      "id": 22,
+    },
+  ],
+]
+`;
+
 exports[`mapStateToProps works 1`] = `
 Object {
   "community": SessionBoundModel {
