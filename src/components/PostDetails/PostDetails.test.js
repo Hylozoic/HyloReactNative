@@ -29,7 +29,10 @@ const post = {
     'http://foo.com/foo.pdf',
     'http://foo.com/bar.zip'
   ],
-  pinned: true
+  pinned: true,
+  topics: [
+    {name: 'topic1', id: 1}
+  ]
 }
 const currentUser = {
   id: 123,

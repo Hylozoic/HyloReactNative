@@ -15,7 +15,8 @@ export function createPost (post) {
     details,
     communities,
     imageUrls = [],
-    fileUrls = []
+    fileUrls = [],
+    topicNames = []
   } = post
   const communityIds = communities.map(c => c.id)
   const preprocessedDetails = divToP(details)
@@ -28,7 +29,8 @@ export function createPost (post) {
         $details: String,
         $communityIds: [String],
         $imageUrls: [String],
-        $fileUrls: [String]
+        $fileUrls: [String],
+        $topicNames: [String]
       ) {
         createPost(data: {
           type: $type,
@@ -36,13 +38,15 @@ export function createPost (post) {
           details: $details,
           communityIds: $communityIds,
           imageUrls: $imageUrls,
-          fileUrls: $fileUrls
+          fileUrls: $fileUrls,
+          topicNames: $topicNames
         }) {
           id
           type
           title
           details
           commentersTotal
+          updatedAt
           communities {
             id
             name
@@ -57,6 +61,10 @@ export function createPost (post) {
             type
             url
           }
+          topics {
+            id
+            name
+          }
         }
       }`,
       variables: {
@@ -65,7 +73,8 @@ export function createPost (post) {
         details: preprocessedDetails,
         communityIds,
         imageUrls,
-        fileUrls
+        fileUrls,
+        topicNames
       }
     },
     meta: {extractModel: 'Post'}
@@ -80,7 +89,8 @@ export function updatePost (post) {
     details,
     communities,
     imageUrls = [],
-    fileUrls = []
+    fileUrls = [],
+    topicNames = []
   } = post
   const communityIds = communities.map(c => c.id)
   const preprocessedDetails = divToP(details)
@@ -93,7 +103,8 @@ export function updatePost (post) {
         $details: String,
         $communityIds: [String],
         $imageUrls: [String],
-        $fileUrls: [String]
+        $fileUrls: [String],
+        $topicNames: [String]
       ) {
         updatePost(id: $id, data: {
           type: $type,
@@ -101,12 +112,14 @@ export function updatePost (post) {
           details: $details,
           communityIds: $communityIds,
           imageUrls: $imageUrls,
-          fileUrls: $fileUrls
+          fileUrls: $fileUrls,
+          topicNames: $topicNames
         }) {
           id
           type
           title
           details
+          updatedAt
           communities {
             id
             name
@@ -118,6 +131,10 @@ export function updatePost (post) {
             type
             url
           }
+          topics {
+            id
+            name
+          }
         }
       }`,
       variables: {
@@ -127,7 +144,8 @@ export function updatePost (post) {
         details: preprocessedDetails,
         communityIds,
         imageUrls,
-        fileUrls
+        fileUrls,
+        topicNames
       }
     },
     meta: {
@@ -158,8 +176,9 @@ export default function reducer (state = {}, action) {
 export function ormSessionReducer (session, action) {
   const { type, meta } = action
   if (type === UPDATE_POST_PENDING) {
-    // deleting all attachments here because we restore them from the result of the UPDATE_POST action
+    // deleting all attachments and topics here because we restore them from the result of the UPDATE_POST action
     const post = session.Post.withId(meta.graphql.variables.id)
     post.attachments.delete()
+    post.update({topics: []})
   }
 }

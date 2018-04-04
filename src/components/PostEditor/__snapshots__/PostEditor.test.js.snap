@@ -2,14 +2,25 @@
 
 exports[`PostEditor has navigation options 1`] = `
 Object {
-  "headerRight": <View>
-    <Button
-        disabled={false}
-        onPress={[Function]}
-        title="Save"
-    />
-</View>,
+  "headerBackTitle": null,
+  "headerRight": <HeaderButton
+    disabled={undefined}
+    onPress={[Function]}
+    text="Save"
+/>,
+  "headerStyle": Object {
+    "backgroundColor": "white",
+    "paddingHorizontal": 10,
+  },
+  "headerTintColor": "#808c9b",
   "headerTitle": "a title",
+  "headerTitleStyle": Object {
+    "color": "black",
+    "fontFamily": "Circular-Bold",
+    "fontSize": 17,
+  },
+  "isSaving": false,
+  "save": [Function],
 }
 `;
 
@@ -49,6 +60,7 @@ exports[`PostEditor renders a new editor correctly 1`] = `
           editable={true}
           onChangeText={[Function]}
           placeholder="What do you want to discuss?"
+          placeholderTextColor="#c0c6cd"
           underlineColorAndroid="transparent"
           value=""
         />
@@ -63,6 +75,26 @@ exports[`PostEditor renders a new editor correctly 1`] = `
         <Details
           details={undefined}
           placeholder="What else should we know?"
+        />
+      </TouchableOpacity>
+      <TouchableOpacity
+        activeOpacity={0.2}
+        onPress={[Function]}
+      >
+        <View>
+          <SectionLabel>
+            Topics
+          </SectionLabel>
+          <View>
+            <Icon
+              name="Plus"
+            />
+          </View>
+        </View>
+        <Topics
+          onPress={[Function]}
+          placeholder="Add topics."
+          topics={Array []}
         />
       </TouchableOpacity>
       <SectionLabel>
@@ -204,6 +236,7 @@ exports[`PostEditor renders correctly while saving 1`] = `
             editable={true}
             onChangeText={[Function]}
             placeholder="What do you want to discuss?"
+            placeholderTextColor="#c0c6cd"
             underlineColorAndroid="transparent"
             value=""
           />
@@ -241,6 +274,49 @@ exports[`PostEditor renders correctly while saving 1`] = `
             ellipsizeMode="tail"
           >
             What else should we know?
+          </Text>
+        </View>
+        <View
+          accessibilityComponentType={undefined}
+          accessibilityLabel={undefined}
+          accessibilityTraits={undefined}
+          accessible={true}
+          collapsable={undefined}
+          hasTVPreferredFocus={undefined}
+          hitSlop={undefined}
+          isTVSelectable={true}
+          nativeID={undefined}
+          onLayout={undefined}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          testID={undefined}
+          tvParallaxProperties={undefined}
+        >
+          <View>
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+            >
+              Topics
+            </Text>
+            <View>
+              <Icon
+                color={undefined}
+                name="Plus"
+              />
+            </View>
+          </View>
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+          >
+            Add topics.
           </Text>
         </View>
         <Text
@@ -438,6 +514,7 @@ exports[`PostEditor renders correctly while saving 2`] = `
             editable={false}
             onChangeText={[Function]}
             placeholder="What do you need help with?"
+            placeholderTextColor="#c0c6cd"
             underlineColorAndroid="transparent"
             value=""
           />
@@ -475,6 +552,49 @@ exports[`PostEditor renders correctly while saving 2`] = `
             ellipsizeMode="tail"
           >
             What else should we know?
+          </Text>
+        </View>
+        <View
+          accessibilityComponentType={undefined}
+          accessibilityLabel={undefined}
+          accessibilityTraits={undefined}
+          accessible={true}
+          collapsable={undefined}
+          hasTVPreferredFocus={undefined}
+          hitSlop={undefined}
+          isTVSelectable={true}
+          nativeID={undefined}
+          onLayout={undefined}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          testID={undefined}
+          tvParallaxProperties={undefined}
+        >
+          <View>
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+            >
+              Topics
+            </Text>
+            <View>
+              <Icon
+                color={undefined}
+                name="Plus"
+              />
+            </View>
+          </View>
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+          >
+            Add topics.
           </Text>
         </View>
         <Text
@@ -594,6 +714,7 @@ exports[`PostEditor renders with a post 1`] = `
           editable={true}
           onChangeText={[Function]}
           placeholder="What do you want to discuss?"
+          placeholderTextColor="#c0c6cd"
           underlineColorAndroid="transparent"
           value=""
         />
@@ -608,6 +729,26 @@ exports[`PostEditor renders with a post 1`] = `
         <Details
           details={undefined}
           placeholder="What else should we know?"
+        />
+      </TouchableOpacity>
+      <TouchableOpacity
+        activeOpacity={0.2}
+        onPress={[Function]}
+      >
+        <View>
+          <SectionLabel>
+            Topics
+          </SectionLabel>
+          <View>
+            <Icon
+              name="Plus"
+            />
+          </View>
+        </View>
+        <Topics
+          onPress={[Function]}
+          placeholder="Add topics."
+          topics={Array []}
         />
       </TouchableOpacity>
       <SectionLabel>
