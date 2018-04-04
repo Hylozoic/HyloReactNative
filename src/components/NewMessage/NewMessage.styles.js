@@ -38,9 +38,7 @@ export default {
     paddingHorizontal: 15,
     borderBottomWidth: 1,
     borderBottomColor: capeCod20,
-    minWidth: screenWidth,
-    maxWidth: screenWidth,
-    flexWrap: 'wrap'
+    minWidth: screenWidth
   },
   participantTextInput: {
   },
