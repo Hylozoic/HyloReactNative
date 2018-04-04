@@ -4,7 +4,6 @@ import ReactShallowRenderer from 'react-test-renderer/shallow'
 import ModeratorSettings, { ModeratorRow } from './ModeratorSettings'
 import ReactTestRenderer from 'react-test-renderer'
 
-jest.mock('react-native-autocomplete-input', () => 'Autocomplete')
 jest.mock('Alert', () => ({
   alert: jest.fn()
 }))
