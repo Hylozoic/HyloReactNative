@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mapStateToProps works 1`] = `
+Object {
+  "community": SessionBoundModel {
+    "_fields": Object {
+      "id": "99",
+      "members": undefined,
+      "moderators": undefined,
+      "posts": undefined,
+      "slug": "foo",
+    },
+    "slug": "foo",
+  },
+  "currentUser": SessionBoundModel {
+    "_fields": Object {
+      "id": "1",
+      "messageThreads": undefined,
+      "notifications": undefined,
+      "posts": undefined,
+      "skills": undefined,
+    },
+    "id": "1",
+  },
+  "moderatorSuggestions": Array [],
+  "moderators": Array [
+    SessionBoundModel {
+      "_fields": Object {
+        "id": "1",
+        "memberships": undefined,
+        "skills": undefined,
+      },
+    },
+    SessionBoundModel {
+      "_fields": Object {
+        "id": "2",
+        "memberships": undefined,
+        "skills": undefined,
+      },
+    },
+  ],
+}
+`;

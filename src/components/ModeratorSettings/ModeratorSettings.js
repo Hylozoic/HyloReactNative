@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
-import { Alert, FlatList, Text, TextInput, View, TouchableOpacity } from 'react-native'
+import { Alert, FlatList, Text, View, TouchableOpacity } from 'react-native'
 import header from 'util/header'
 import Avatar from '../Avatar'
-import Icon from '../Icon'
-import Autocomplete from 'react-native-autocomplete-input';
+import Autocomplete from 'react-native-autocomplete-input'
 
 import { get, isEmpty } from 'lodash/fp'
 
@@ -29,10 +28,6 @@ export default class ModeratorSettings extends Component {
 
   componentWillUnmount () {
     this.props.clearModeratorSuggestions()
-  }
-
-  submitRemoveModerator = () => {
-    this.props.removeModerator(this.state.moderatorToRemove, this.state.isRemoveFromCommunity)
   }
 
   removeModerator = (id) => {
@@ -79,7 +74,7 @@ export default class ModeratorSettings extends Component {
     this.props.clearModeratorSuggestions()
   }
 
-  renderSeparator = () => {
+  _renderSeparator = () => {
     return (
       <View
         style={{
@@ -92,12 +87,23 @@ export default class ModeratorSettings extends Component {
     )
   }
 
+  isMe = (id) => this.props.currentUser.id === id
+
+  _renderModeratorRow = ({item}) => (
+    <ModeratorRow moderator={item} showMember={this.props.showMember} removeModerator={this.isMe(item.id) ? null : this.removeModerator} />
+  )
+
+  _renderAutocompleteItem = ({ id, name, avatarUrl }) => (
+    <TouchableOpacity style={styles.autocompleteItem} onPress={() => this.selectModeratorToAdd(id, name)}>
+      <Avatar style={{width: 50}} avatarUrl={avatarUrl} />
+      <Text style={{flex: 1}}>{name}</Text>
+    </TouchableOpacity>
+  )
+
   render () {
     const {
       moderators,
       community,
-      showMember,
-      currentUser,
       moderatorSuggestions
     } = this.props
 
@@ -110,14 +116,12 @@ export default class ModeratorSettings extends Component {
       return <Text>Loading...</Text>
     }
 
-    const isMe = (id) => currentUser.id === id
-
     return <FlatList
       style={styles.container}
       data={moderators}
-      ItemSeparatorComponent={this.renderSeparator}
-      keyExtractor={item => item.id}
-      renderItem={({item}) => <ModeratorRow moderator={item} showMember={showMember} removeModerator={isMe(item.id) ? null : this.removeModerator} />}
+      ItemSeparatorComponent={this._renderSeparator}
+      keyExtractor={item => item.id.toString()}
+      renderItem={this._renderModeratorRow}
       ListHeaderComponent={<View style={styles.headerContainer}><Text style={styles.headerText}>{community.name}</Text></View>}
       ListFooterComponent={<View style={styles.addModeratorContainer}>
         {isAdding && <View>
@@ -133,12 +137,7 @@ export default class ModeratorSettings extends Component {
               defaultValue={query}
               onChangeText={text => this.queryModerators(text)}
               placeholder='Enter member name'
-              renderItem={({ id, name, avatarUrl }) => (
-                <TouchableOpacity style={styles.autocompleteItem} onPress={() => this.selectModeratorToAdd(id, name)}>
-                  <Avatar style={{width: 50}} avatarUrl={avatarUrl} />
-                  <Text style={{flex: 1}}>{name}</Text>
-                </TouchableOpacity>
-            )}
+              renderItem={this._renderAutocompleteItem}
             />
             <TouchableOpacity style={styles.button} onPress={() => this.clearAutocomplete(true)}>
               <Text style={styles.cancelButton}>Cancel</Text>
