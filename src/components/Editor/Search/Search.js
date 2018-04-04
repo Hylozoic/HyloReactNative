@@ -1,6 +1,5 @@
 import React from 'react'
 import {
-  Button,
   FlatList,
   Image,
   Text,
@@ -8,9 +7,12 @@ import {
   TouchableOpacity,
   View
 } from 'react-native'
+
 import Icon from '../../Icon'
-import styles from './Search.styles'
+import TopicList from '../../TopicList'
 import { SearchType } from './Search.store'
+import styles from './Search.styles'
+import { rhino30 } from 'style/colors'
 
 export default class Search extends React.Component {
   render () {
@@ -19,22 +21,31 @@ export default class Search extends React.Component {
     const renderItem = ({ item }) =>
       <SearchResult item={item} type={type} onPress={() => onSelect(item)} />
 
-    const placeholder = type === SearchType.MENTION
-      ? 'Search for a person by name'
-      : 'Search for a topic by name'
+    const placeholder =
+      `Search for a ${type === SearchType.MENTION ? 'person' : 'topic'} by name`
 
     return <View style={[styles.container, style]}>
       <View style={styles.inputWrapper}>
         <Icon name='Search' style={styles.inputIcon} />
-        <TextInput style={styles.input} autoFocus onChangeText={updateSearch}
-          placeholder={placeholder} />
-        <Button title='Cancel' onPress={onCancel} />
+        <TextInput
+          autoFocus
+          onChangeText={updateSearch}
+          autoCapitalize='none'
+          placeholder={placeholder}
+          placeholderTextColor={rhino30}
+          style={styles.input}
+          underlineColorAndroid='transparent' />
+        <TouchableOpacity onPress={onCancel}>
+          <Icon name='Ex' style={styles.cancelButton} />
+        </TouchableOpacity>
       </View>
       <View style={styles.resultsWrapper}>
-        <FlatList data={results}
-          renderItem={renderItem}
-          keyExtractor={item => item.id}
-          keyboardShouldPersistTaps='handled' />
+        {type === SearchType.TOPIC
+          ? <TopicList topics={results} touchAction={onSelect} />
+          : <FlatList data={results}
+            renderItem={renderItem}
+            keyExtractor={item => item.id}
+            keyboardShouldPersistTaps='handled' />}
       </View>
     </View>
   }

@@ -9,7 +9,8 @@ Object {
         $details: String,
         $communityIds: [String],
         $imageUrls: [String],
-        $fileUrls: [String]
+        $fileUrls: [String],
+        $topicNames: [String]
       ) {
         createPost(data: {
           type: $type,
@@ -17,13 +18,15 @@ Object {
           details: $details,
           communityIds: $communityIds,
           imageUrls: $imageUrls,
-          fileUrls: $fileUrls
+          fileUrls: $fileUrls,
+          topicNames: $topicNames
         }) {
           id
           type
           title
           details
           commentersTotal
+          updatedAt
           communities {
             id
             name
@@ -38,6 +41,10 @@ Object {
             type
             url
           }
+          topics {
+            id
+            name
+          }
         }
       }",
     "variables": Object {
@@ -48,6 +55,7 @@ Object {
       "fileUrls": Array [],
       "imageUrls": Array [],
       "title": "title",
+      "topicNames": Array [],
       "type": "post",
     },
   },
@@ -74,7 +82,8 @@ Object {
         $details: String,
         $communityIds: [String],
         $imageUrls: [String],
-        $fileUrls: [String]
+        $fileUrls: [String],
+        $topicNames: [String]
       ) {
         updatePost(id: $id, data: {
           type: $type,
@@ -82,12 +91,14 @@ Object {
           details: $details,
           communityIds: $communityIds,
           imageUrls: $imageUrls,
-          fileUrls: $fileUrls
+          fileUrls: $fileUrls,
+          topicNames: $topicNames
         }) {
           id
           type
           title
           details
+          updatedAt
           communities {
             id
             name
@@ -98,6 +109,10 @@ Object {
             position
             type
             url
+          }
+          topics {
+            id
+            name
           }
         }
       }",
@@ -110,6 +125,7 @@ Object {
       "id": 1,
       "imageUrls": Array [],
       "title": "title",
+      "topicNames": Array [],
       "type": "post",
     },
   },
