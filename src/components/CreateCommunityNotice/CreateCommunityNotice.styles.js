@@ -10,6 +10,8 @@ export default {
     marginBottom: 20,
     marginLeft: 'auto',
     marginRight: 'auto',
+    paddingLeft: 10,
+    paddingRight: 10,
     fontSize: 20,
     textAlign: 'center',
     color: rhino50
