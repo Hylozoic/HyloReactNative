@@ -1456,7 +1456,7 @@ chardet@^0.4.0:
   version "0.4.2"
   resolved "https://registry.yarnpkg.com/chardet/-/chardet-0.4.2.tgz#b5473b33dc97c424e5d98dc87d55d4d8a29c8bf2"
 
-cheerio@^0.22.0:
+cheerio@0.22.0, cheerio@^0.22.0:
   version "0.22.0"
   resolved "https://registry.yarnpkg.com/cheerio/-/cheerio-0.22.0.tgz#a9baa860a3f9b595a6b81b1a86873121ed3a269e"
   dependencies:
@@ -3106,9 +3106,9 @@ https-proxy-agent@^2.1.1:
     agent-base "^4.1.0"
     debug "^3.1.0"
 
-hylo-utils@Hylozoic/hylo-utils#716622b5:
-  version "1.2.1"
-  resolved "https://codeload.github.com/Hylozoic/hylo-utils/tar.gz/716622b5a57b2702612b4e93864888cac2c4e363"
+hylo-utils@Hylozoic/hylo-utils#77dadf8:
+  version "1.2.3"
+  resolved "https://codeload.github.com/Hylozoic/hylo-utils/tar.gz/77dadf8b5a99d365f52eef900d094df9f1043fdc"
   dependencies:
     buffer "^5.0.6"
     cheerio "^0.22.0"

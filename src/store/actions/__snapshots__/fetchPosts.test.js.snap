@@ -74,6 +74,12 @@ posts(
       id
     }
   }
+  topics {
+    id
+    name
+    postsTotal
+    followersTotal
+  }
   }
 }
   }

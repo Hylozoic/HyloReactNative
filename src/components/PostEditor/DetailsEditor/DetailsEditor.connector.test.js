@@ -1,7 +1,15 @@
 import { mapDispatchToProps, mapStateToProps } from './DetailsEditor.connector'
 
 const dispatch = jest.fn(x => x)
-const props = {}
+const props = {
+  navigation: {
+    state: {
+      params: {
+        setTopics: () => {}
+      }
+    }
+  }
+}
 const dispatchProps = mapDispatchToProps(dispatch, props)
 
 describe('DetailsEditor mapStateToProps', () => {

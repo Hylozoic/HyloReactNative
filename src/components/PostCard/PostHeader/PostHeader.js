@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { View, Text, TouchableOpacity, Alert } from 'react-native'
+import { View, Text, TouchableOpacity, Alert, FlatList } from 'react-native'
 import Avatar from '../../Avatar'
 import Icon from '../../Icon'
 import { rhino30, rhino50, caribbeanGreen } from 'style/colors'
@@ -35,6 +35,8 @@ export default class PostHeader extends PureComponent {
       deletePost,
       pinned,
       pinPost,
+      topics,
+      showTopic,
       announcement
     } = this.props
     const { flaggingVisible } = this.state
@@ -48,6 +50,8 @@ export default class PostHeader extends PureComponent {
         onPress: () => goToCommunity(community.id)
       }
     }
+
+    const showTopics = !isEmpty(topics) && !context
 
     // Used to generate a link to this post from the backend.
     const linkData = {
@@ -96,13 +100,20 @@ export default class PostHeader extends PureComponent {
           {!!context && <TouchableOpacity onPress={context.onPress}>
             <Text style={styles.contextLabel}>{context.label}</Text>
           </TouchableOpacity>}
+          {!!showTopics && <FlatList
+            data={topics}
+            style={styles.topicList}
+            horizontal
+            keyExtractor={(item, index) => item.id}
+            showsHorizontalScrollIndicator={false}
+            renderItem={({item}) => <TouchableOpacity onPress={() => showTopic(item.name)}>
+              <Text style={styles.topicLabel}>#{item.name}</Text>
+            </TouchableOpacity>} />}
         </View>
       </View>
-      {announcement && <View style={styles.announcementRow}>
-        <Icon name='Announcement' style={styles.announcementIcon} />
-      </View>}
       <View style={styles.upperRight}>
         {pinned && <Icon name='Pin' style={styles.pinIcon} />}
+        {announcement && <Icon name='Announcement' style={styles.announcementIcon} />}
         {type && <PostLabel type={type} />}
         <PostMenu
           removePost={removePostWithConfirm}
@@ -181,7 +192,8 @@ const styles = {
     fontFamily: 'Circular-Bold'
   },
   dateRow: {
-    flexDirection: 'row'
+    flexDirection: 'row',
+    flex: 1
   },
   metaText: {
     fontSize: 12,
@@ -199,9 +211,22 @@ const styles = {
     fontFamily: 'Circular-Book',
     color: caribbeanGreen
   },
+  topicList: {
+    marginLeft: 4,
+    flex: 1
+  },
+  topicLabel: {
+    fontSize: 12,
+    paddingRight: 5,
+    flex: 1,
+    fontFamily: 'Circular-Book',
+    color: caribbeanGreen
+  },
   upperRight: {
+    position: 'absolute',
     paddingTop: 14,
     paddingRight: 6,
+    right: 0,
     flexDirection: 'row',
     alignItems: 'flex-start'
   },
@@ -219,12 +244,7 @@ const styles = {
   announcementIcon: {
     color: caribbeanGreen,
     fontSize: 20,
-    alignItems: 'flex-end'
-  },
-  announcementRow: {
-    flex: 1,
     alignItems: 'flex-end',
-    paddingTop: 14,
     marginRight: 2
   }
 }

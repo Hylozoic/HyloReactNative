@@ -154,7 +154,16 @@ exports[`PostDetails renders correctly 1`] = `
           pinned={true}
           postId="91"
           showMember={[Function]}
+          showTopic={[Function]}
           slug="foom"
+          topics={
+            Array [
+              Object {
+                "id": 1,
+                "name": "topic1",
+              },
+            ]
+          }
           type="request"
         />
         <Connect(PostImage)
