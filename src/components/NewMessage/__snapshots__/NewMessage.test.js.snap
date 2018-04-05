@@ -47,6 +47,8 @@ exports[`NewMessage renders correctly 1`] = `
   <SectionList
     contentContainerStyle={
       Object {
+        "borderTopColor": "#d7d8d8",
+        "borderTopWidth": 0,
         "paddingHorizontal": 12,
       }
     }
@@ -117,6 +119,8 @@ exports[`NewMessage renders correctly 2`] = `
   <SectionList
     contentContainerStyle={
       Object {
+        "borderTopColor": "#d7d8d8",
+        "borderTopWidth": 0,
         "paddingHorizontal": 12,
       }
     }
@@ -194,6 +198,7 @@ exports[`ParticipantInput renders correctly 1`] = `
         "borderBottomWidth": 1,
         "flexDirection": "row",
         "height": 60,
+        "minWidth": 750,
         "paddingHorizontal": 15,
       }
     }
@@ -226,6 +231,7 @@ exports[`ParticipantInput renders correctly 1`] = `
     <TextInput
       allowFontScaling={true}
       onChangeText={[Function]}
+      placeholder=""
       underlineColorAndroid="transparent"
       value="Jon"
     />

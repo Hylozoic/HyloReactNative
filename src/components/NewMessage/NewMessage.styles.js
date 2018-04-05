@@ -1,5 +1,8 @@
 import { caribbeanGreen, capeCod, capeCod10, capeCod20, capeCod40, rhino80, rhino50 } from '../../style/colors'
+import { Dimensions } from 'react-native'
 import { isIOS } from 'util/platform'
+
+const screenWidth = Dimensions.get('window').width
 
 const messagePromptShape = {
   height: 52,
@@ -20,7 +23,9 @@ export default {
     flex: 1
   },
   sectionList: {
-    ...defaultPadding
+    ...defaultPadding,
+    borderTopWidth: isIOS ? 0 : 1,
+    borderTopColor: capeCod20
   },
   messageInput: {
     marginBottom: 20
@@ -34,9 +39,11 @@ export default {
     alignItems: 'center',
     paddingHorizontal: 15,
     borderBottomWidth: 1,
-    borderBottomColor: capeCod20
+    borderBottomColor: capeCod20,
+    minWidth: screenWidth
   },
   participantTextInput: {
+    minWidth: screenWidth
   },
   participant: {
     borderWidth: 1,
@@ -69,7 +76,8 @@ export default {
   contactRow: {
     height: 40,
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
+    maxWidth: 225
   },
   grayed: {
     opacity: 0.2
