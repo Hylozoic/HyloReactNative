@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import { createPost, updatePost, setDetails } from './PostEditor.store'
 import { createTopicTag } from '../Editor/Editor'
 import { get, isEmpty } from 'lodash/fp'
-import getPost from '../../store/selectors/getPost'
+import getPost, { presentPost } from '../../store/selectors/getPost'
 import { mapWhenFocused } from 'util/connector'
 
 function getPostId (state, props) {
@@ -16,15 +16,16 @@ export function mapStateToProps (state, props) {
   const defaultPost = selectedTopicName
     ? {details: selectedTopicTag, communityIds: [communityId]}
     : {}
-  const post = getPost(state, {id: getPostId(state, props)})
+  const postModel = getPost(state, {id: getPostId(state, props)})
+  const post = presentPost(postModel)
   return {
     details: state.PostEditor.details,
     post: post || defaultPost,
     communityIds: post
-      ? post.communities.toRefArray().map(x => x.id)
+      ? post.communities.map(x => x.id)
       : [communityId],
-    imageUrls: post ? post.getImageUrls() : [],
-    fileUrls: post ? post.getFileUrls() : []
+    imageUrls: post ? postModel.getImageUrls() : [],
+    fileUrls: post ? postModel.getFileUrls() : []
   }
 }
 
@@ -56,7 +57,7 @@ export function mapDispatchToProps (dispatch, props) {
         return Promise.resolve({})
       })
     },
-    editDetails: () => navigation.navigate('DetailsEditor', {communityId}),
+    editDetails: setTopics => navigation.navigate('DetailsEditor', {communityId, setTopics}),
     setDetails: content => dispatch(setDetails(content))
   }
 }

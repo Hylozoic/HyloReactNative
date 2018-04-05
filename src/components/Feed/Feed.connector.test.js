@@ -53,16 +53,6 @@ describe('mapStateToProps', () => {
     })
   })
 
-  it('has topicSubscribed=undefined when pending topic fetch', () => {
-    state.pending = {[FETCH_COMMUNITY_TOPIC]: true}
-    session.Community.create({id: '7', slug: 'world'})
-    const props = {topicName: 'foo', communityId: '7'}
-
-    expect(mapStateToProps(state, props)).toEqual(expect.objectContaining({
-      topicSubscribed: undefined
-    }))
-  })
-
   it('has topicSubscribed=true when subscribed', () => {
     session.Community.create({id: '7', slug: 'world'})
     session.Topic.create({id: '1', name: 'foo'})

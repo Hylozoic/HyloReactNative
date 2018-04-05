@@ -57,7 +57,8 @@ platform :ios do
     gym(
      scheme: "HyloReactNative",
      configuration: "Release",
-     export_method: "ad-hoc"
+     export_method: "ad-hoc",
+     export_options: {iCloudContainerEnvironment: 'Development'}
     )
   end
 

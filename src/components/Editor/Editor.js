@@ -21,6 +21,7 @@ export default class Editor extends React.Component {
   }
 
   startPicker = action => {
+    const { navigation } = this.props
     this.editor.prepareInsert()
 
     // This timeout avoids a race condition. the `prepareInsert` call above
@@ -31,19 +32,26 @@ export default class Editor extends React.Component {
     // the caret position. That will cause any inserted content to either not
     // appear at all or to appear in the wrong place.
     setTimeout(() => {
+      let showPicker = false
       switch (action) {
         case INSERT_MENTION:
-          this.setState({showPicker: SearchType.MENTION})
+          showPicker = SearchType.MENTION
           break
         case INSERT_TOPIC:
-          this.setState({showPicker: SearchType.TOPIC})
+          showPicker = SearchType.TOPIC
           break
+      }
+
+      if (showPicker) {
+        this.setState({ showPicker })
+        navigation.setParams({ showPicker })
       }
     }, 200)
   }
 
   cancelPicker = () => {
     this.setState({showPicker: false})
+    this.props.navigation.setParams({ showPicker: false })
     this.editor.focusContent()
     this.editor.restoreSelection()
   }
@@ -60,6 +68,7 @@ export default class Editor extends React.Component {
     }
     this.editor.insertCustomHTML(html)
     this.setState({showPicker: false})
+    this.props.navigation.setParams({ showPicker: false })
   }
 
   setupEditor (ref) {
