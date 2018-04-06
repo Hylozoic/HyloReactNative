@@ -1,5 +1,4 @@
 git_url "https://github.com/Hylozoic/code-signing"
-git_username "lorenjohnson"
 
 type "development" # The default type, can be: appstore, adhoc, enterprise or development
 
