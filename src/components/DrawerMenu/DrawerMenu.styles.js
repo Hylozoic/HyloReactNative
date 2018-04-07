@@ -2,6 +2,7 @@ import mixins from '../../style/mixins'
 import {
   bigStone, mirage, rhino, rhino50, persimmon, rhino40, black10onRhino, white
 } from '../../style/colors'
+import { StyleSheet } from 'react-native'
 
 const defaultPadding = {
   paddingHorizontal: 15
@@ -187,7 +188,7 @@ export default {
     marginLeft: '3%',
     flexDirection: 'column',
     alignItems: 'center',
-    borderBottomWidth: 1,
+    borderBottomWidth: StyleSheet.hairlineWidth,
     borderColor: white,
     paddingBottom: 18,
     marginBottom: 10

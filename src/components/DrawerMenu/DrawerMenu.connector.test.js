@@ -23,9 +23,10 @@ describe('mapDispatchToProps matches the last snapshot', () =>
   expect(mapDispatchToProps).toMatchSnapshot()
 )
 
-describe('mergeProps matches the last snapshot and bound functions work as expected', () => {
+it('mergeProps matches the last snapshot and bound functions work as expected', () => {
   const stateProps = {
     currentUser: {id: 'anyid'},
+    canModerateCurrentCommunity: false,
     name: 'Roy Rogers'
   }
   const dispatchProps = {
@@ -37,8 +38,15 @@ describe('mergeProps matches the last snapshot and bound functions work as expec
       navigate: jest.fn(x => x)
     }
   }
+  const propsNonModerator = mergeProps(stateProps, dispatchProps, ownProps)
+  expect(propsNonModerator).toMatchSnapshot()
+  expect(propsNonModerator.goToCommunitySettings).toBeFalsy()
+
+  stateProps.canModerateCurrentCommunity = true
   const props = mergeProps(stateProps, dispatchProps, ownProps)
   expect(props).toMatchSnapshot()
+  expect(props.goToCommunitySettings).toBeDefined()
+
   const community = {id: 'testcommunity'}
   props.goToCommunity(community)
   expect(dispatchProps.selectCommunity).toHaveBeenCalled()
