@@ -1,6 +1,6 @@
 import mixins from '../../style/mixins'
 import {
-  bigStone, mirage, rhino, rhino50, persimmon, rhino40, black10onRhino
+  bigStone, mirage, rhino, rhino50, persimmon, rhino40, black10onRhino, white
 } from '../../style/colors'
 
 const defaultPadding = {
@@ -181,5 +181,43 @@ export default {
     fontSize: 14,
     paddingRight: '7%',
     paddingLeft: '7%'
+  },
+  communityHeader: {
+    width: '94%',
+    marginLeft: '3%',
+    flexDirection: 'column',
+    alignItems: 'center',
+    borderBottomWidth: 1,
+    borderColor: white,
+    paddingBottom: 18,
+    marginBottom: 10
+  },
+  communityHeaderAvatar: {
+    marginTop: 18,
+    height: 42,
+    width: 42,
+    borderRadius: 4
+  },
+  communityHeaderText: {
+    fontFamily: 'Circular-Bold',
+    color: white,
+    marginTop: 10,
+    fontSize: 24
+  },
+  communityHeaderSettingsButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 15
+  },
+  communityHeaderSettingsButtonIcon: {
+    fontFamily: 'Circular-Book',
+    color: white,
+    marginRight: 6,
+    fontSize: 16
+  },
+  communityHeaderSettingsButtonText: {
+    fontFamily: 'Circular-Book',
+    color: white,
+    fontSize: 18
   }
 }
