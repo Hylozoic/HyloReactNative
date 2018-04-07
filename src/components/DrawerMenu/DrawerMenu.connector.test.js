@@ -50,17 +50,19 @@ it('mergeProps matches the last snapshot and bound functions work as expected', 
   const community = {id: 'testcommunity'}
   props.goToCommunity(community)
   expect(dispatchProps.selectCommunity).toHaveBeenCalled()
-  expect(ownProps.navigation.navigate).toHaveBeenCalled()
+  expect(ownProps.navigation.navigate).toHaveBeenCalledTimes(2)
   const network = {id: 'testnetwork'}
   props.goToNetwork(network)
-  expect(dispatchProps.selectNetwork).toHaveBeenCalled()
-  expect(ownProps.navigation.navigate).toHaveBeenCalled()
+  expect(dispatchProps.selectNetwork).toHaveBeenCalledTimes(1)
+  expect(ownProps.navigation.navigate).toHaveBeenCalledTimes(4)
   props.showSettings()
-  expect(ownProps.navigation.navigate).toHaveBeenCalled()
+  expect(ownProps.navigation.navigate).toHaveBeenCalledTimes(5)
   props.goToMyProfile()
-  expect(ownProps.navigation.navigate).toHaveBeenCalled()
+  expect(ownProps.navigation.navigate).toHaveBeenCalledTimes(6)
   props.goToCreateCommunityName()
-  expect(ownProps.navigation.navigate).toHaveBeenCalled()
+  expect(ownProps.navigation.navigate).toHaveBeenCalledTimes(7)
+  props.goToCommunitySettings()
+  expect(ownProps.navigation.navigate).toHaveBeenCalledTimes(8)
 })
 
 describe('partitionCommunities', () => {
