@@ -1,7 +1,6 @@
 import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import CommunitySettings from './CommunitySettings'
-import ReactTestRenderer from 'react-test-renderer'
 
 describe('CommunitySettings', () => {
   it('matches the last snapshot', () => {
