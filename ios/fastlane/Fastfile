@@ -29,7 +29,7 @@ platform :ios do
     gym(
       scheme: "HyloReactNative",
       configuration: "Release",
-      export_options: {iCloudContainerEnvironment: 'Development'}
+      export_options: {iCloudContainerEnvironment: 'Production'}
     )
     pilot(
       skip_waiting_for_build_processing: true
