@@ -6,7 +6,7 @@ Object {
   "headerLeft": <HeaderButton
     onPress={[Function]}
     text="Close"
-/>,
+  />,
   "headerStyle": Object {
     "backgroundColor": "white",
     "paddingHorizontal": 10,
@@ -31,6 +31,7 @@ Object {
 exports[`renders correctly 1`] = `
 <KeyboardAvoidingView
   behavior="padding"
+  enabled={true}
   keyboardVerticalOffset={64}
 >
   <Editor

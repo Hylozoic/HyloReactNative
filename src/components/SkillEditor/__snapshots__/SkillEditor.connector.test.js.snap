@@ -34,7 +34,7 @@ Object {
 exports[`mergeProps merges the props 1`] = `
 Object {
   "loadSkills": [Function],
-  "setUserSkills": [Function],
+  "setUserSkills": [MockFunction],
   "storedSkills": Array [
     "a",
     "b",

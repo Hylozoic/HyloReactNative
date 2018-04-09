@@ -20,7 +20,7 @@ Object {
   },
   "goToCreateCommunityUrl": [Function],
   "navigation": Object {
-    "navigate": [Function],
+    "navigate": [MockFunction],
   },
 }
 `;

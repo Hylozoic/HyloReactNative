@@ -1,5 +1,6 @@
 /* eslint-disable no-global-assign */
 import React from 'react'
+import { Provider } from 'react-redux'
 import RootView from './src/components/RootView'
 import { AppRegistry, Platform } from 'react-native'
 import Timer from 'react-native-background-timer'
@@ -8,8 +9,7 @@ import ErrorBoundary from './src/components/ErrorBoundary'
 import { isDev } from 'util/testing'
 import getStore from './src/store'
 
-let store = null
-getStore().then(s => store = s) // eslint-disable-line no-return-assign
+let store = getStore()
 
 if (!isDev) {
   Sentry.config(process.env.SENTRY_CONFIG_URL)
@@ -30,7 +30,9 @@ AppRegistry.registerComponent('HyloReactNative', () => AppContainer)
 
 function AppContainer () {
   return <ErrorBoundary>
-    <RootView store={store} />
+    <Provider store={store}>
+      <RootView />
+    </Provider>
   </ErrorBoundary>
 }
 
