@@ -19,15 +19,12 @@ export default class PostImage extends PureComponent {
     const { communityName } = this.props
 
     const menuItems = [{
-      key: '1',
       name: 'Edit Community Info',
       navigate: 'UserSettings' // TODO change me
     }, {
-      key: '2',
       name: 'Community Members',
       navigate: 'UserSettings' // TODO change me
     }, {
-      key: '3',
       name: 'Invite Members',
       navigate: 'InvitePeople'
     }]
