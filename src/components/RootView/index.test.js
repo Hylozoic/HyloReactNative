@@ -1,7 +1,6 @@
 import OneSignal from 'react-native-onesignal'
 import React from 'react'
 import { AppState } from 'react-native'
-import { Provider } from 'react-redux'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import TestRenderer from 'react-test-renderer'
 
@@ -15,21 +14,17 @@ jest.mock('react-native-onesignal', () => ({
   removeEventListener: jest.fn()
 }))
 
-jest.mock('../VersionCheck', () => 'VersionCheck')
+jest.mock('../DeepLinkHandler', () => 'DeepLinkHandler')
 jest.mock('../LoadingModal', () => 'LoadingModal')
 jest.mock('../RootNavigator', () => 'RootNavigator')
 jest.mock('../SessionCheck', () => 'SessionCheck')
+jest.mock('../VersionCheck', () => 'VersionCheck')
 
 describe('RootView', () => {
-  let instance, renderer
+  let instance
 
   beforeEach(() => {
-    renderer = TestRenderer.create(
-      <Provider store={createMockStore()}>
-        <RootView />
-      </Provider>
-    )
-    instance = renderer.getInstance()
+    instance = TestRenderer.create(<RootView />).getInstance()
   })
 
   it('matches the last snapshot', () => {

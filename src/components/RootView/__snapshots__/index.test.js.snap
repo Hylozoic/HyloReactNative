@@ -4,7 +4,7 @@ exports[`RootView matches the last snapshot 1`] = `
 <View>
   <VersionCheck />
   <SessionCheck>
-    <Connect(DeepLinkHandler)
+    <DeepLinkHandler
       navigator={undefined}
       onesignalNotification={null}
     />
