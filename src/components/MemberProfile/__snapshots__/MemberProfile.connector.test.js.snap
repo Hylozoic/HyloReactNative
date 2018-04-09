@@ -39,6 +39,6 @@ Object {
   "person": Object {
     "id": 78,
   },
-  "updateUserSettings": [Function],
+  "updateUserSettings": [MockFunction],
 }
 `;

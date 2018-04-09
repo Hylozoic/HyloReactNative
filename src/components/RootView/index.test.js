@@ -14,36 +14,33 @@ jest.mock('react-native-onesignal', () => ({
   removeEventListener: jest.fn()
 }))
 
-jest.mock('../VersionCheck', () => 'VersionCheck')
+jest.mock('../DeepLinkHandler', () => 'DeepLinkHandler')
 jest.mock('../LoadingModal', () => 'LoadingModal')
 jest.mock('../RootNavigator', () => 'RootNavigator')
 jest.mock('../SessionCheck', () => 'SessionCheck')
+jest.mock('../VersionCheck', () => 'VersionCheck')
 
 describe('RootView', () => {
-  it('matches the last snapshot with a store', () => {
+  let instance
+
+  beforeEach(() => {
+    instance = TestRenderer.create(<RootView />).getInstance()
+  })
+
+  it('matches the last snapshot', () => {
     const renderer = new ReactShallowRenderer()
     renderer.render(<RootView store={createMockStore()} />)
     expect(renderer.getRenderOutput()).toMatchSnapshot()
   })
 
-  it('matches the last snapshot without a store', () => {
-    const renderer = new ReactShallowRenderer()
-    renderer.render(<RootView store={null} />)
-    expect(renderer.getRenderOutput()).toMatchSnapshot()
-  })
-
   it('tidies up event handlers', () => {
     AppState.removeEventListener = jest.fn()
-    const renderer = TestRenderer.create(<RootView store={null} />)
-    const instance = renderer.getInstance()
     instance.componentWillUnmount()
     expect(OneSignal.removeEventListener).toHaveBeenCalled()
     expect(AppState.removeEventListener).toHaveBeenCalled()
   })
 
   it('stores the OneSignal payload in component state', () => {
-    const renderer = TestRenderer.create(<RootView store={null} />)
-    const instance = renderer.getInstance()
     const payload = { additionalData: { path: 'wombat' } }
     instance._handleOpenedPushNotification({ notification: { payload } })
     expect(instance.state.onesignalNotification).toEqual(payload)
@@ -53,8 +50,6 @@ describe('RootView', () => {
     it('changes state.appState', () => {
       const active = 'active'
       const inactive = 'inactive'
-      const renderer = TestRenderer.create(<RootView store={createMockStore()} />)
-      const instance = renderer.getInstance()
       instance.setState({appState: active})
       instance._handleAppStateChange(inactive)
       expect(instance.state.appState).toEqual(inactive)
@@ -63,8 +58,6 @@ describe('RootView', () => {
     it('changes appState from inactive to background', () => {
       const background = 'background'
       const active = 'active'
-      const renderer = TestRenderer.create(<RootView store={createMockStore()} />)
-      const instance = renderer.getInstance()
       instance.setState({appState: background})
       instance._handleAppStateChange(active)
       expect(instance.state.appState).toEqual(active)

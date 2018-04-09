@@ -158,11 +158,11 @@ exports[`InvitePeople renders PendingInviteRow 1`] = `
 exports[`InvitePeople renders PendingInvitesPage 1`] = `
 <ScrollView>
   <Button
-    onPress={[Function]}
+    onPress={[MockFunction]}
     text="Resend All"
   />
   <PendingInviteRow
-    expireInvitation={[Function]}
+    expireInvitation={[MockFunction]}
     first={true}
     invite={
       Object {
@@ -171,7 +171,7 @@ exports[`InvitePeople renders PendingInvitesPage 1`] = `
         "lastSentAt": 2018-03-03T05:51:49.903Z,
       }
     }
-    resendInvitation={[Function]}
+    resendInvitation={[MockFunction]}
   />
 </ScrollView>
 `;

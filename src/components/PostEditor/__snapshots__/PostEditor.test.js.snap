@@ -5,9 +5,9 @@ Object {
   "headerBackTitle": null,
   "headerRight": <HeaderButton
     disabled={undefined}
-    onPress={[Function]}
+    onPress={[MockFunction]}
     text="Save"
-/>,
+  />,
   "headerStyle": Object {
     "backgroundColor": "white",
     "paddingHorizontal": 10,
@@ -20,7 +20,7 @@ Object {
     "fontSize": 17,
   },
   "isSaving": false,
-  "save": [Function],
+  "save": [MockFunction],
 }
 `;
 
@@ -124,6 +124,7 @@ exports[`PostEditor renders a new editor correctly 1`] = `
 
 exports[`PostEditor renders correctly while saving 1`] = `
 <View
+  enabled={true}
   keyboardVerticalOffset={64}
   onLayout={[Function]}
 >
@@ -402,6 +403,7 @@ exports[`PostEditor renders correctly while saving 1`] = `
 
 exports[`PostEditor renders correctly while saving 2`] = `
 <View
+  enabled={true}
   keyboardVerticalOffset={64}
   onLayout={[Function]}
 >
@@ -794,7 +796,7 @@ exports[`SectionLabel renders correctly 1`] = `
 exports[`TypeButton renders correctly 1`] = `
 <TouchableOpacity
   activeOpacity={0.2}
-  onPress={[Function]}
+  onPress={[MockFunction]}
 >
   <Text
     accessible={true}

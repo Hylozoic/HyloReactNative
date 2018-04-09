@@ -6,7 +6,7 @@ exports[`commentMenu renders correctly 1`] = `
     Array [
       Array [
         "Delete this Comment",
-        [Function],
+        [MockFunction],
       ],
     ]
   }
@@ -32,7 +32,7 @@ exports[`commentMenu returns removeComment 1`] = `
     Array [
       Array [
         "Remove this Comment",
-        [Function],
+        [MockFunction],
       ],
     ]
   }
@@ -71,7 +71,9 @@ exports[`renders correctly 1`] = `
           accessible={true}
           allowFontScaling={true}
           ellipsizeMode="tail"
-        />
+        >
+          
+        </Text>
       </View>
       <View>
         <CommentMenu
@@ -131,7 +133,9 @@ exports[`shows the post title when displayPostTitle is true 1`] = `
           accessible={true}
           allowFontScaling={true}
           ellipsizeMode="tail"
-        />
+        >
+          
+        </Text>
         <Text
           accessible={true}
           allowFontScaling={true}

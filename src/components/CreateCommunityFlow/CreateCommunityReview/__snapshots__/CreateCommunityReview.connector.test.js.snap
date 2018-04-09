@@ -74,11 +74,11 @@ Object {
   "goToCreateCommunityName": [Function],
   "goToCreateCommunityUrl": [Function],
   "navigation": Object {
-    "navigate": [Function],
+    "navigate": [MockFunction],
   },
   "pending": Object {
     "CreateCommunityFlow/CREATE_COMMUNITY": true,
   },
-  "selectCommunity": [Function],
+  "selectCommunity": [MockFunction],
 }
 `;

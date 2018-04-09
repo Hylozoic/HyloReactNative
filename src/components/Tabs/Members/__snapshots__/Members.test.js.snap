@@ -134,17 +134,17 @@ Object {
   "headerBackTitle": null,
   "headerLeft": <Connect(MenuButton)
     openDrawer={[Function]}
-/>,
+  />,
   "headerRight": <View>
     <Connect(MessagesIcon)
-        hasUnreadMessages={undefined}
-        showMessages={[Function]}
+      hasUnreadMessages={undefined}
+      showMessages={[Function]}
     />
     <Connect(NotificationsIcon)
-        hasUnreadNotifications={undefined}
-        showNotifications={[Function]}
+      hasUnreadNotifications={undefined}
+      showNotifications={[Function]}
     />
-</View>,
+  </View>,
   "headerTitle": "Members",
   "headerTitleStyle": Object {
     "alignSelf": "center",
@@ -256,6 +256,7 @@ exports[`renders correctly with no community and isAll 1`] = `
     getItemCount={[Function]}
     horizontal={false}
     initialNumToRender={10}
+    invertStickyHeaders={undefined}
     keyExtractor={[Function]}
     maxToRenderPerBatch={10}
     numColumns="2"
@@ -694,6 +695,7 @@ exports[`renders with invite button when a moderator 1`] = `
     getItemCount={[Function]}
     horizontal={false}
     initialNumToRender={10}
+    invertStickyHeaders={undefined}
     keyExtractor={[Function]}
     maxToRenderPerBatch={10}
     numColumns="2"

@@ -3,7 +3,7 @@
 exports[`MenuButton renders correctly 1`] = `
 <TouchableOpacity
   activeOpacity={0.2}
-  onPress={[Function]}
+  onPress={[MockFunction]}
 >
   <Image
     source={
