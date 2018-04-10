@@ -83,5 +83,5 @@ if [ -z ${CI+x} ]; then
 else
     echo "Creating ~/.gradle/gradle.properties for BitRise (CI) environment"
     mkdir -p $HOME/.gradle
-    echo "$gradleProperties" > "../.gradle/gradle.properties"
+    echo "$gradleProperties" > "$HOME/.gradle/gradle.properties"
 fi
