@@ -6,13 +6,13 @@ cd ../
 
 echo "Root Directory $PWD"
 
-source .env
+export $(cat .env | grep -v ^# | xargs)
 
 if [ -z ${FACEBOOK_APP_ID_DEBUG+x} ]; then echo "ERROR: Missing appropriate config in .env. eg: FACEBOOK_APP_ID_DEBUG"; exit 1; else echo "Configuring Project:"; fi
 
 mytmpdir=`mktemp -d 2>/dev/null || mktemp -d -t 'mytmpdir'`
-git clone -b android https://github.com/Hylozoic/code-signing.git $mytmpdir/android
-git clone -b ios https://github.com/Hylozoic/code-signing.git $mytmpdir/ios
+git clone -b android git@github.com:Hylozoic/code-signing.git $mytmpdir/android
+git clone -b ios git@github.com:Hylozoic/code-signing.git $mytmpdir/ios
 
 echo "Applying android/app/google-services.json"
 cp $mytmpdir/android/google-services.json android/app/
@@ -62,13 +62,30 @@ cat > android/app/src/release/res/values/strings.xml <<EOL
 
 EOL
 
-echo ""
-echo "IMPORTANT!!! Final Step:"
-echo "Add the following values to your ~/.gradle/gradle.properties":
-echo ""
-echo "HYLO_DEBUG_STORE_FILE=debug.keystore"
-echo "HYLO_DEBUG_KEY_ALIAS=androiddebugkey"
-echo "HYLO_DEBUG_STORE_PASSWORD=android"
-echo "HYLO_DEBUG_KEY_PASSWORD=android"
-echo "DEBUG_ONESIGNAL_APP_ID=$ONESIGNAL_APP_ID_DEBUG"
-echo "RELEASE_ONESIGNAL_APP_ID=$ONESIGNAL_APP_ID_RELEASE"
+if [ -z ${CI+x} ]; then
+  echo "IMPORTANT!!! Final Step:"
+  echo "Add the following values to your ~/.gradle/gradle.properties":
+  echo ""
+  echo "HYLO_DEBUG_STORE_FILE=debug.keystore"
+  echo "HYLO_DEBUG_KEY_ALIAS=androiddebugkey"
+  echo "HYLO_DEBUG_STORE_PASSWORD=android"
+  echo "HYLO_DEBUG_KEY_PASSWORD=android"
+  echo "DEBUG_ONESIGNAL_APP_ID=$ONESIGNAL_APP_ID_DEBUG"
+  echo "RELEASE_ONESIGNAL_APP_ID=$ONESIGNAL_APP_ID_RELEASE"
+else
+  echo "creating gradle.properties for BitRise (CI) environment"
+  mkdir -p ../.gradle
+  cat > ../.gradle/gradle.properties <<EOL
+HYLO_DEBUG_STORE_FILE=debug.keystore
+HYLO_DEBUG_KEY_ALIAS=androiddebugkey
+HYLO_DEBUG_STORE_PASSWORD=android
+HYLO_DEBUG_KEY_PASSWORD=android
+DEBUG_ONESIGNAL_APP_ID=$ONESIGNAL_APP_ID_DEBUG
+RELEASE_ONESIGNAL_APP_ID=$ONESIGNAL_APP_ID_RELEASE
+
+HYLO_RELEASE_STORE_FILE=hylo-release-original.keystore
+HYLO_RELEASE_KEY_ALIAS=MyAndroidKey
+HYLO_RELEASE_STORE_PASSWORD=$HYLO_RELEASE_STORE_PASSWORD
+HYLO_RELEASE_KEY_PASSWORD=$HYLO_RELEASE_KEY_PASSWORD
+EOL
+fi
