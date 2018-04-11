@@ -1,10 +1,8 @@
 import React from 'react'
 import { View, AppState } from 'react-native'
 import OneSignal from 'react-native-onesignal'
-import { Provider } from 'react-redux'
 
 import DeepLinkHandler from '../DeepLinkHandler'
-import { LoadingScreen } from '../Loading'
 import LoadingModal from '../LoadingModal'
 import RootNavigator from '../RootNavigator'
 import SessionCheck from '../SessionCheck'
@@ -53,22 +51,17 @@ export default class RootView extends React.Component {
   }
 
   render () {
-    const { store } = this.props
     const { onesignalNotification } = this.state
 
-    if (store === null) return <LoadingScreen />
-
-    return <Provider store={store}>
-      <View style={{flex: 1}}>
-        <VersionCheck />
-        <SessionCheck>
-          <DeepLinkHandler
-            navigator={this.navigator}
-            onesignalNotification={onesignalNotification} />
-        </SessionCheck>
-        <LoadingModal />
-        <RootNavigator ref={this.setNavigator} />
-      </View>
-    </Provider>
+    return <View style={{flex: 1}}>
+      <VersionCheck />
+      <SessionCheck>
+        <DeepLinkHandler
+          navigator={this.navigator}
+          onesignalNotification={onesignalNotification} />
+      </SessionCheck>
+      <LoadingModal />
+      <RootNavigator ref={this.setNavigator} />
+    </View>
   }
 }

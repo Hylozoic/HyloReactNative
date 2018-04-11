@@ -6,19 +6,19 @@ Array [
     accessible={true}
     allowFontScaling={true}
     ellipsizeMode="tail"
->
+  >
     Happy Child
-</Text>,
+  </Text>,
   <View>
     <Image />
     <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
     >
-        Custom Error Message
+      Custom Error Message
     </Text>
-</View>,
+  </View>,
 ]
 `;
 

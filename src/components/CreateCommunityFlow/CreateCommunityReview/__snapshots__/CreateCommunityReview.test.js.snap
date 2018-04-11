@@ -7,15 +7,15 @@ Object {
   "headerBackgroundColor": "#0DC39F",
   "headerLeft": <HeaderBackButton
     buttonImage={
-        Object {
-            "testUri": "../../react-navigation/src/views/assets/back-icon.png",
-          }
+      Object {
+        "testUri": "../../react-navigation/src/views/assets/back-icon.png",
+      }
     }
     onPress={[Function]}
     pressColorAndroid="rgba(0, 0, 0, .32)"
     tintColor="#9ee7d9"
     truncatedTitle="Back"
-/>,
+  />,
   "headerStyle": Object {
     "backgroundColor": "#0DC39F",
     "borderBottomWidth": 0,
@@ -29,9 +29,9 @@ Object {
     accessible={true}
     allowFontScaling={true}
     ellipsizeMode="tail"
->
+  >
     STEP 3/3
-</Text>,
+  </Text>,
 }
 `;
 

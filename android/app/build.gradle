@@ -162,7 +162,6 @@ android {
 }
 
 dependencies {
-    compile project(':react-native-google-signin')
     compile project(':react-native-sentry')
     compile project(':react-native-restart')
     compile project(':react-native-document-picker')

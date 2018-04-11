@@ -62,10 +62,10 @@ Object {
   "goToNetwork": [Function],
   "name": "Roy Rogers",
   "navigation": Object {
-    "navigate": [Function],
+    "navigate": [MockFunction],
   },
-  "selectCommunity": [Function],
-  "selectNetwork": [Function],
+  "selectCommunity": [MockFunction],
+  "selectNetwork": [MockFunction],
   "showSettings": [Function],
 }
 `;
