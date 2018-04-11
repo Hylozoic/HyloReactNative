@@ -1,70 +1,53 @@
 import React from 'react'
 import PopupMenuButton from '../../PopupMenuButton'
-import { Alert, Text, TouchableOpacity, View } from 'react-native'
+import { TouchableOpacity, Text, View } from 'react-native'
 import Icon from '../../Icon'
 import { DocumentPicker, DocumentPickerUtil } from 'react-native-document-picker'
 import styles from './FileSelector.styles'
 import { cleanName } from '../../../store/models/Attachment'
-import { partial } from 'lodash'
 
-export default class FileSelector extends React.PureComponent {
-  static defaultProps = {fileUrls: []}
-  state = {}
-
-  pick = () => {
-    this.setState({pending: true})
-    const { upload, type, id, onError } = this.props
-    DocumentPicker.show({
-      filetype: [DocumentPickerUtil.allFiles()]
-    }, (err, result) => {
-      if (err) {
-        if (onError) {
-          onError(err.message)
-        } else {
-          showAlert(err.message)
-        }
-        return
-      }
-
-      const file = {
-        uri: result.uri,
-        name: result.fileName,
-        type: result.type
-      }
-
-      return upload(type, id, file)
-      .then(({ payload: { url, message }, error }) => {
-        this.setState({pending: false})
-        if (error) {
-          if (onError) {
-            onError(message)
-          } else {
-            showAlert(message)
-          }
-        } else {
-          this.props.onAdd({local: result.uri, remote: url})
-        }
-      })
-    })
-  }
-
-  render () {
-    const { fileUrls, onRemove } = this.props
-    const { pending } = this.state
-    return <View style={styles.container}>
-      {fileUrls.map((url, index) => renderFileButton(url, index, onRemove))}
-      <TouchableOpacity onPress={this.pick}
-        style={[styles.fileLabel, styles.addButton]}>
-        <Icon name={pending ? 'Clock' : 'Paperclip'} style={styles.addIcon} />
-        <Text style={styles.fileLabelText}>
-          {pending ? 'Adding...' : 'Add file'}
-        </Text>
-      </TouchableOpacity>
-    </View>
-  }
+export default function FileSelector (props) {
+  const {fileUrls = [], onRemove, showPicker = false} = props
+  return <View>
+    {fileUrls.map((url, index) => renderFileButton(url, index, onRemove))}
+    {showPicker && <FilePickerButton {...props} />}
+  </View>
 }
 
-const showAlert = partial(Alert.alert, 'Could not add file')
+export function showFilePicker ({upload, type, id, onAdd, onError, onComplete}) {
+  DocumentPicker.show({
+    filetype: [DocumentPickerUtil.allFiles()]
+  }, (err, result) => {
+    if (err) {
+      return onComplete && onComplete()
+    }
+
+    const file = {
+      uri: result.uri,
+      name: result.fileName,
+      type: result.type
+    }
+    return upload(type, id, file)
+      .then(({ payload: { url, message }, error }) => {
+        onComplete && onComplete()
+        if (error) {
+          return onError && onError(message)
+        } else {
+          onAdd({local: result.uri, remote: url})
+        }
+      })
+  })
+}
+
+export function FilePickerButton (props) {
+  return <TouchableOpacity onPress={() => showFilePicker(props)}
+    style={[styles.fileLabel, styles.addButton]}>
+    <Icon name={props.pending ? 'Clock' : 'Paperclip'} style={styles.addIcon} />
+    <Text style={styles.fileLabelText}>
+      {props.pending ? 'Adding...' : 'Add file'}
+    </Text>
+  </TouchableOpacity>
+}
 
 function renderFileButton (url, buttonIndex, onRemove) {
   return <PopupMenuButton

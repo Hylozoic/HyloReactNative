@@ -26,56 +26,10 @@ export default class ImagePicker extends Component {
     onPendingChange && onPendingChange(pending)
   }
 
-  showPicker () {
-    const {
-      title = 'Choose an image',
-      onChoice,
-      onCancel,
-      onError,
-      type,
-      id = 'new',
-      upload
-    } = this.props
-
+  showPicker = () => {
     if (this.state.pending) return
     this.setPending(true)
-
-    const pickerOptions = {
-      title,
-      // TODO: fix take photo option on ios, then remove this
-      takePhotoButtonTitle: null,
-      storageOptions: {
-        skipBackup: true,
-        path: 'images'
-      }
-    }
-
-    RNImagePicker.showImagePicker(pickerOptions, result => {
-      if (result.didCancel) {
-        this.setPending(false)
-        onCancel && onCancel()
-      } else if (result.error) {
-        this.setPending(false)
-        onError && onError(result.error)
-      } else {
-        const file = {
-          uri: result.uri,
-          name: result.fileName,
-          type: result.type
-        }
-
-        return upload(type, id, file)
-        .then(({ payload, error }) => {
-          this.setPending(false)
-
-          if (error) {
-            onError && onError(payload.message)
-          } else {
-            onChoice({local: result.uri, remote: payload.url})
-          }
-        })
-      }
-    })
+    showImagePicker(this.props)
   }
 
   render () {
@@ -95,6 +49,51 @@ export default class ImagePicker extends Component {
       {children}
     </TouchableOpacity>
   }
+}
+
+export function showImagePicker ({
+  title = 'Choose an image',
+  onChoice,
+  onCancel,
+  onError,
+  onComplete,
+  type,
+  id = 'new',
+  upload
+}) {
+  const pickerOptions = {
+    title,
+    // TODO: fix take photo option on ios, then remove this
+    takePhotoButtonTitle: null,
+    storageOptions: {
+      skipBackup: true,
+      path: 'images'
+    }
+  }
+
+  RNImagePicker.showImagePicker(pickerOptions, result => {
+    if (result.didCancel) {
+      onCancel && onCancel()
+    } else if (result.error) {
+      onError && onError(result.error)
+    } else {
+      const file = {
+        uri: result.uri,
+        name: result.fileName,
+        type: result.type
+      }
+
+      return upload(type, id, file)
+        .then(({ payload, error }) => {
+          if (error) {
+            onError && onError(payload.message)
+          } else {
+            onChoice({local: result.uri, remote: payload.url})
+          }
+          onComplete && onComplete()
+        })
+    }
+  })
 }
 
 const styles = {

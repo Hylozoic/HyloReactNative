@@ -4,6 +4,7 @@ import { createTopicTag } from '../Editor/Editor'
 import { get, isEmpty } from 'lodash/fp'
 import getPost, { presentPost } from '../../store/selectors/getPost'
 import { mapWhenFocused } from 'util/connector'
+import upload from 'store/actions/upload'
 
 function getPostId (state, props) {
   return props.navigation.state.params.id
@@ -48,17 +49,18 @@ export function mapDispatchToProps (dispatch, props) {
       if (postId) postData.id = postId
 
       return dispatch(saveAction(postData))
-      .then(({ error, payload }) => {
-        if (error) {
-          // TODO: handle API errors more appropriately
-          throw new Error('Error submitting post')
-        }
-        navigation.goBack()
-        return Promise.resolve({})
-      })
+        .then(({ error, payload }) => {
+          if (error) {
+            // TODO: handle API errors more appropriately
+            throw new Error('Error submitting post')
+          }
+          navigation.goBack()
+          return Promise.resolve({})
+        })
     },
     editDetails: setTopics => navigation.navigate('DetailsEditor', {communityId, setTopics}),
-    setDetails: content => dispatch(setDetails(content))
+    setDetails: content => dispatch(setDetails(content)),
+    upload: (type, id, file) => dispatch(upload(type, id, file))
   }
 }
 
