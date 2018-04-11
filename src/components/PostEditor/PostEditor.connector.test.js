@@ -1,6 +1,12 @@
 import { mapStateToProps, mapDispatchToProps } from './PostEditor.connector'
 import orm from 'store/models'
 
+jest.mock('react-native-device-info', () => {
+  return {
+    getVersion: jest.fn(() => 1)
+  }
+})
+
 const communityId = 1
 const id = 1
 const details = 'details'
