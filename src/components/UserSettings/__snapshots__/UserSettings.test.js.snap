@@ -183,7 +183,7 @@ Array [
     "Are you sure you want to discard your changes?",
     Array [
       Object {
-        "onPress": [Function],
+        "onPress": [MockFunction],
         "text": "Discard",
       },
       Object {
@@ -212,6 +212,7 @@ Object {
 
 exports[`UserSettings matches snapshot with state set 1`] = `
 <View
+  enabled={true}
   keyboardVerticalOffset={64}
   onLayout={[Function]}
 >

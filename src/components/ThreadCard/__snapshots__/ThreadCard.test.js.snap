@@ -81,7 +81,9 @@ exports[`renders correctly 1`] = `
       accessible={true}
       allowFontScaling={true}
       ellipsizeMode="tail"
-    />
+    >
+      
+    </Text>
   </View>
 </View>
 `;
