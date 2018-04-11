@@ -5,16 +5,16 @@ exports[`renders as expected 1`] = `
   <RichTextEditor
     contentPlaceholder="Details"
     customCSS="
-  [data-entity-type=\\"mention\\"] {
-    text-decoration: none;
-    color: #0DC39F;
-  }
-  
-  [data-entity-type=\\"#mention\\"] {
-    text-decoration: none;
-    color: #0DC39F;
-  }
-  "
+[data-entity-type=\\"mention\\"] {
+  text-decoration: none;
+  color: #0DC39F;
+}
+
+[data-entity-type=\\"#mention\\"] {
+  text-decoration: none;
+  color: #0DC39F;
+}
+"
     enableOnChange={true}
     hiddenTitle={true}
     initialContentHTML={undefined}

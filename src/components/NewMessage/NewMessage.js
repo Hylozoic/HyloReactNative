@@ -6,7 +6,8 @@ import {
   Text,
   TouchableOpacity,
   TextInput,
-  View
+  View,
+  StyleSheet
 } from 'react-native'
 import Avatar from '../Avatar'
 import Icon from '../Icon'
@@ -94,8 +95,7 @@ export default class NewMessage extends React.Component {
 }
 
 export function ParticipantInput ({ participants, onChangeText, removeParticipant, text }) {
-  const { width } = Dimensions.get('window')
-  const inputStyle = {width: width - 30}
+  const placeholderText = isEmpty(participants) ? 'Type in the names of people to message' : ''
   return <View style={styles.scrollViewWrapper}>
     <ScrollView
       contentContainerStyle={styles.participantInputContainer}
@@ -105,7 +105,8 @@ export function ParticipantInput ({ participants, onChangeText, removeParticipan
         value={text}
         onChangeText={onChangeText}
         underlineColorAndroid='transparent'
-        style={[styles.participantTextInput, inputStyle]} />
+        placeholder={placeholderText}
+        style={styles.participantTextInput} />
     </ScrollView>
   </View>
 }
@@ -121,7 +122,7 @@ export function Participant ({ participant, remove }) {
 }
 
 export function renderContact (addParticipant) {
-  return ({ item }) => <ContactRow contact={item} add={addParticipant} />
+  return ({ item }) => <ContactRow style={styles.contactRow} contact={item} add={addParticipant} />
 }
 
 export function SectionHeader ({ section }) {

@@ -89,7 +89,14 @@ describe('partitionCommunities', () => {
           network: {
             ref: {
               id: '2',
-              name: 'networkTwo'
+              name: 'networkTwo',
+              communities: {
+                toRefArray: () => [
+                  {id: '1', name: 'one'},
+                  {id: '2', name: 'two'},
+                  {id: '3', name: 'three'}
+                ]
+              }
             }
           }
         }

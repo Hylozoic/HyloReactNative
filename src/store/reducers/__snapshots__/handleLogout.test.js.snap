@@ -155,6 +155,11 @@ Object {
       "itemsById": Object {},
       "meta": Object {},
     },
+    "NetworkCommunities": Object {
+      "items": Array [],
+      "itemsById": Object {},
+      "meta": Object {},
+    },
     "NetworkMembers": Object {
       "items": Array [],
       "itemsById": Object {},
@@ -216,6 +221,11 @@ Object {
       "meta": Object {},
     },
     "PostPostMemberships": Object {
+      "items": Array [],
+      "itemsById": Object {},
+      "meta": Object {},
+    },
+    "PostTopics": Object {
       "items": Array [],
       "itemsById": Object {},
       "meta": Object {},

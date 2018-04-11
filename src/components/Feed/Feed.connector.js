@@ -42,7 +42,7 @@ export function mapStateToProps (state, props) {
   const currentUser = getMe(state)
   const communityTopic = topicName && community &&
     getCommunityTopic(state, {topicName, slug: community.slug})
-  const topicSubscribed = topicName && communityTopic.isSubscribed
+  const topicSubscribed = topicName && communityTopic && communityTopic.isSubscribed
   const topic = get('topic', communityTopic)
   return {
     currentUser,

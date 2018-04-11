@@ -8,11 +8,12 @@ SessionBoundModel {
     "followers": undefined,
     "id": 31,
     "postMemberships": undefined,
+    "topics": undefined,
   },
 }
 `;
 
-exports[`true 1`] = `
+exports[`presentPost matches the snapshot: true 1`] = `
 Object {
   "commenters": Array [],
   "communities": Array [],
@@ -24,5 +25,6 @@ Object {
   "imageUrls": Array [],
   "linkPreview": undefined,
   "pinned": true,
+  "topics": Array [],
 }
 `;

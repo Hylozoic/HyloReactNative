@@ -95,8 +95,8 @@ android {
         applicationId "com.hylo.hyloandroid"
         minSdkVersion 16
         targetSdkVersion 22
-        versionCode 81
-        versionName "2.1.2"
+        versionCode 86
+        versionName "2.2"
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
@@ -162,7 +162,6 @@ android {
 }
 
 dependencies {
-    compile project(':react-native-google-signin')
     compile project(':react-native-sentry')
     compile project(':react-native-restart')
     compile project(':react-native-document-picker')

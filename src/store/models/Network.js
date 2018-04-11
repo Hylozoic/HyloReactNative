@@ -14,5 +14,6 @@ Network.fields = {
   id: attr(),
   name: attr(),
   posts: many('Post'),
-  members: many('Person')
+  members: many('Person'),
+  communities: many('Community')
 }

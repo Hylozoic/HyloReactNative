@@ -29,7 +29,7 @@ Object {
   "goToComingSoon": [Function],
   "goToTopic": [Function],
   "navigation": Object {
-    "navigate": [Function],
+    "navigate": [MockFunction],
   },
   "setTopicSubscribe": [Function],
   "shouldRedirect": false,
