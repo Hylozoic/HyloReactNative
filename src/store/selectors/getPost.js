@@ -24,6 +24,7 @@ export const presentPost = (post, communityId) => {
     fileAttachments: post.attachments.filter(a => a.type === 'file').toModelArray(),
     fileUrls: post.getFileUrls(),
     imageUrls: post.getImageUrls(),
-    pinned
+    pinned,
+    topics: post.topics.toModelArray()
   }
 }

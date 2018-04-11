@@ -3,6 +3,7 @@
 exports[`Thread matches the last snapshot 1`] = `
 <KeyboardAvoidingView
   behavior="padding"
+  enabled={true}
   keyboardVerticalOffset={64}
 >
   <View>

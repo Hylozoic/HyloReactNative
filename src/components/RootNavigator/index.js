@@ -17,6 +17,8 @@ import DetailsEditor from '../PostEditor/DetailsEditor'
 import PostDetails from '../PostDetails'
 import MemberProfile from '../MemberProfile'
 import NotificationsList from '../NotificationsList'
+import CommentEditor from '../PostDetails/CommentEditor'
+import InvitePeople from '../InvitePeople'
 import tabStyles from '../Tabs/Tabs.styles'
 import NewMessage from '../NewMessage'
 import SessionCheck from '../SessionCheck'
@@ -65,6 +67,8 @@ const screensInTabs = {
   CommentEditor: {screen: CommentEditor},
   NewMessage: {screen: NewMessage},
   CommunitySettings: {screen: CommunitySettings}
+  InvitePeople: {screen: InvitePeople},
+  NewMessage: {screen: NewMessage}
 }
 
 Object.freeze(tabs)
@@ -119,7 +123,7 @@ const screensInStack = {
   SignupFlow5: {screen: SignupFlow5},
   Login: {screen: Login, path: 'login'},
   LoginByPasswordResetToken: {screen: Login, path: 'passwordResetTokenLogin/:userId/:loginToken/:nextURL'},
-  ForgotPassword: {screen: ForgotPassword, path: 'forgot-password'},
+  ForgotPassword: {screen: ForgotPassword, path: 'reset-password'},
   Thread: {screen: Thread, path: 'thread/:id'},
   UseInvitation: {screen: JoinCommunity, path: 'useInvitation/:token'},
   UseAccessCode: {screen: JoinCommunity, path: 'useAccessCode/:slug/:accessCode'},

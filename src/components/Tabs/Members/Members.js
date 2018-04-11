@@ -13,6 +13,7 @@ import Loading from '../../Loading'
 import PopupMenuButton from '../../PopupMenuButton'
 import LinearGradient from 'react-native-linear-gradient'
 import styles from './Members.styles'
+import Button from '../../Button'
 
 export default class Members extends React.Component {
   static navigationOptions = ({ navigation, screenProps }) =>
@@ -22,6 +23,8 @@ export default class Members extends React.Component {
     const { hasMore, members, fetchMembers } = this.props
     if (isEmpty(members) && hasMore !== false) fetchMembers()
   }
+
+  goToInvitePeople = () => this.props.navigation.navigate('InvitePeople')
 
   componentDidMount () {
     this.fetchOrShowCached()
@@ -49,7 +52,7 @@ export default class Members extends React.Component {
 
   render () {
     let {
-      community, network, members, subject, sortBy, setSort, fetchMoreMembers, isAll, pending
+      community, canModerate, network, members, subject, sortBy, setSort, fetchMoreMembers, isAll, pending
     } = this.props
     const sortKeys = sortKeysFactory(subject)
     const onSearch = debounce(300, text => this.props.setSearch(text))
@@ -61,6 +64,11 @@ export default class Members extends React.Component {
 
     const header = <View>
       <Banner community={community} network={network} all={isAll} />
+      {canModerate && <Button
+        text='Invite People'
+        style={styles.button}
+        iconName={'Invite'}
+        onPress={this.goToInvitePeople} />}
       <View style={styles.listControls}>
         <View style={styles.searchWrapper}>
           <Icon style={styles.searchIcon} name='Search' size={30}

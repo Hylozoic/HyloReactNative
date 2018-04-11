@@ -1,112 +1,126 @@
 {
   "selection": [
     {
-      "order": 3,
-      "name": "Post",
+      "order": 2,
+      "name": "Announcement",
       "prevSize": 32
     },
     {
       "order": 4,
-      "name": "",
-      "prevSize": 32
-    },
-    {
-      "order": 36,
-      "name": "Plus",
-      "prevSize": 32
-    },
-    {
-      "order": 5,
       "ligatures": "",
       "prevSize": 32,
-      "name": "Settings"
-    },
-    {
-      "order": 6,
-      "ligatures": "",
-      "prevSize": 32,
-      "name": "ArrowForward"
+      "name": "Invite"
     },
     {
       "order": 7,
       "ligatures": "",
       "prevSize": 32,
-      "name": "Document"
+      "name": "Post"
     },
     {
       "order": 8,
       "ligatures": "",
       "prevSize": 32,
-      "name": "Download"
-    },
-    {
-      "order": 9,
-      "ligatures": "",
-      "prevSize": 32,
-      "name": "Send"
-    },
-    {
-      "order": 10,
-      "ligatures": "",
-      "prevSize": 32,
-      "name": "Checkmark"
+      "name": "Star"
     },
     {
       "order": 11,
       "ligatures": "",
       "prevSize": 32,
-      "name": "Empty"
+      "name": "Plus"
     },
     {
       "order": 12,
       "ligatures": "",
       "prevSize": 32,
-      "name": "Back"
-    },
-    {
-      "order": 13,
-      "ligatures": "",
-      "prevSize": 32,
-      "name": "AddImage"
-    },
-    {
-      "order": 14,
-      "ligatures": "",
-      "prevSize": 32,
-      "name": "Clock"
+      "name": "Settings"
     },
     {
       "order": 15,
       "ligatures": "",
       "prevSize": 32,
-      "name": ""
+      "name": "ArrowForward"
     },
     {
       "order": 16,
       "ligatures": "",
       "prevSize": 32,
-      "name": "ProfileUrl"
-    },
-    {
-      "order": 17,
-      "ligatures": "",
-      "prevSize": 32,
-      "name": "ProfileTwitter"
-    },
-    {
-      "order": 18,
-      "ligatures": "",
-      "prevSize": 32,
-      "name": "ProfileLinkedin"
+      "name": "Document"
     },
     {
       "order": 19,
       "ligatures": "",
       "prevSize": 32,
-      "name": "ProfileFacebook"
+      "name": "Download"
     },
     {
       "order": 20,
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "Send"
+    },
+    {
+      "order": 23,
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "Checkmark"
+    },
+    {
+      "order": 24,
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "Empty"
+    },
+    {
+      "order": 3,
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "Back"
+    },
+    {
+      "order": 5,
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "AddImage"
+    },
+    {
+      "order": 6,
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "Clock"
+    },
+    {
+      "order": 9,
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "StarCircle"
+    },
+    {
+      "order": 10,
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "ProfileUrl"
+    },
+    {
+      "order": 13,
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "ProfileTwitter"
+    },
+    {
+      "order": 14,
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "ProfileLinkedin"
+    },
+    {
+      "order": 17,
+      "ligatures": "",
+      "prevSize": 32,
+      "name": "ProfileFacebook"
+    },
+    {
+      "order": 18,
       "ligatures": "",
       "prevSize": 32,
       "name": "Reply"
@@ -124,139 +138,139 @@
       "name": "Google"
     },
     {
-      "order": 23,
+      "order": 25,
       "ligatures": "",
       "prevSize": 32,
       "name": "Facebook"
     },
     {
-      "order": 24,
+      "order": 47,
       "ligatures": "",
       "prevSize": 32,
       "name": "Ex"
     },
     {
-      "order": 25,
+      "order": 44,
       "ligatures": "",
       "prevSize": 32,
       "name": "NewCommunity"
     },
     {
-      "order": 26,
+      "order": 43,
       "ligatures": "",
       "prevSize": 32,
       "name": "Projects"
     },
     {
-      "order": 27,
+      "order": 40,
       "ligatures": "",
       "prevSize": 32,
       "name": "Events"
     },
     {
-      "order": 28,
+      "order": 39,
       "ligatures": "",
       "prevSize": 32,
       "name": "Home"
     },
     {
-      "order": 29,
+      "order": 36,
       "ligatures": "",
       "prevSize": 32,
       "name": "Topics"
     },
     {
-      "order": 30,
+      "order": 35,
       "ligatures": "",
       "prevSize": 32,
       "name": "Members"
     },
     {
-      "order": 31,
+      "order": 32,
       "ligatures": "",
       "prevSize": 32,
       "name": "Messages"
     },
     {
-      "order": 32,
+      "order": 31,
       "ligatures": "",
       "prevSize": 32,
       "name": "Notifications"
     },
     {
-      "order": 33,
+      "order": 28,
       "ligatures": "",
       "prevSize": 32,
       "name": "Search"
     },
     {
-      "order": 34,
+      "order": 27,
       "ligatures": "",
       "prevSize": 32,
       "name": "Share"
     },
     {
-      "order": 35,
+      "order": 26,
       "ligatures": "",
       "prevSize": 32,
       "name": "More"
     },
     {
-      "order": 37,
+      "order": 46,
       "ligatures": "",
       "prevSize": 32,
       "name": "ArrowUp"
     },
     {
-      "order": 38,
+      "order": 45,
       "ligatures": "",
       "prevSize": 32,
       "name": "ArrowDown"
     },
     {
-      "order": 39,
+      "order": 42,
       "ligatures": "",
       "prevSize": 32,
       "name": "Location"
     },
     {
-      "order": 40,
+      "order": 41,
       "ligatures": "",
       "prevSize": 32,
       "name": "Trash"
     },
     {
-      "order": 41,
+      "order": 38,
       "ligatures": "",
       "prevSize": 32,
       "name": "Pin"
     },
     {
-      "order": 42,
+      "order": 37,
       "ligatures": "",
       "prevSize": 32,
       "name": "Complete"
     },
     {
-      "order": 43,
+      "order": 34,
       "ligatures": "",
       "prevSize": 32,
       "name": "Flag"
     },
     {
-      "order": 47,
+      "order": 33,
       "ligatures": "",
       "prevSize": 32,
       "name": "Circle"
     },
     {
-      "order": 45,
+      "order": 30,
       "ligatures": "",
       "prevSize": 32,
       "name": "Paperclip"
     },
     {
-      "order": 46,
+      "order": 48,
       "ligatures": "",
       "prevSize": 32,
       "name": "Edit"
@@ -265,43 +279,65 @@
   "metadata": {
     "name": "hylo-evo-icons",
     "importSize": {
-      "width": 10,
-      "height": 10
+      "width": 33,
+      "height": 33
     },
-    "iconsHash": 1889339332
+    "iconsHash": 1938195150
   },
   "height": 1024,
   "prevSize": 32,
   "icons": [
     {
       "paths": [
-        "M227.663 125.263h568.674c56.554 0 102.4 45.846 102.4 102.4v568.674c0 56.554-45.846 102.4-102.4 102.4h-568.674c-56.554 0-102.4-45.846-102.4-102.4v-568.674c0-56.554 45.846-102.4 102.4-102.4zM312.283 412.617c53.397 0 96.684-43.287 96.684-96.684s-43.287-96.684-96.684-96.684c-53.397 0-96.684 43.287-96.684 96.684s43.287 96.684 96.684 96.684zM493.917 267.59v96.684h313.912v-96.684h-313.912zM216.328 489.682v301.366h591.345v-301.366h-591.345z"
+        "M736.766 251.886c14.661-14.66 39.729-4.277 39.729 16.457v489.398c0 20.734-25.068 31.117-39.729 16.456-95.746-95.746-225.134-150.502-363.199-150.502h-22.362c-61.112 0-110.653-49.536-110.653-110.653s49.549-110.679 110.653-110.679h22.134c135.479 0 265.732-52.787 363.428-150.477zM373.338 448.909h-22.134c-35.395 0-64.108 28.72-64.108 64.134 0 35.41 28.701 64.108 64.108 64.108h22.362c132.206 0 257.196 46.081 356.383 128.008v-384.228c-100.892 83.344-226.593 127.979-356.611 127.979z",
+        "M377.194 609.519c0-12.853 10.42-23.273 23.273-23.273s23.273 10.42 23.273 23.273v152.63c0 12.853-10.42 23.273-23.273 23.273s-23.273-10.42-23.273-23.273v-152.63z"
       ],
       "grid": 0,
       "tags": [
-        "Post"
+        "Announcement"
       ],
       "defaultCode": 59648
     },
     {
       "paths": [
-        "M511.997 860.82l-229.448 121.23c-34.093 18.013-76.334 4.978-94.348-29.115-7.219-13.663-9.701-29.335-7.058-44.56l44.393-255.68-186.2-180.756c-27.667-26.858-28.323-71.060-1.465-98.727 10.763-11.088 24.901-18.291 40.198-20.482l256.884-36.789 114.37-232.943c16.994-34.613 58.83-48.895 93.442-31.901 13.871 6.81 25.091 18.030 31.901 31.901l114.37 232.943 256.884 36.789c38.17 5.466 64.682 40.841 59.215 79.011-2.191 15.297-9.394 29.434-20.482 40.198l-186.2 180.756 44.393 255.68c6.596 37.991-18.854 74.136-56.845 80.733-15.225 2.643-30.897 0.161-44.56-7.058l-229.448-121.23z"
+        "M458.459 443.598c57.863 0 104.853-47.116 104.853-105.339s-46.99-105.339-104.853-105.339c-57.863 0-104.853 47.116-104.853 105.339s46.99 105.339 104.853 105.339zM458.459 520.398c-100.324 0-181.653-81.546-181.653-182.139s81.329-182.139 181.653-182.139c100.324 0 181.653 81.546 181.653 182.139s-81.329 182.139-181.653 182.139zM667.114 858.656c0-115.705-93.464-209.419-208.655-209.419s-208.655 93.714-208.655 209.419zM173.003 858.656c0-158.074 127.803-286.219 285.455-286.219s285.455 128.144 285.455 286.219zM898.24 357.971c0-21.208 17.192-38.4 38.4-38.4s38.4 17.192 38.4 38.4v322.815c0 21.208-17.192 38.4-38.4 38.4s-38.4-17.192-38.4-38.4v-322.815zM775.444 559.73c-21.208 0-38.4-17.192-38.4-38.4s17.192-38.4 38.4-38.4h319.587c21.208 0 38.4 17.192 38.4 38.4s-17.192 38.4-38.4 38.4h-319.587z"
       ],
-      "grid": 0,
+      "width": 1280,
       "tags": [
-        "Star"
+        "Invite"
       ],
-      "defaultCode": 59649
+      "defaultCode": 59649,
+      "grid": 0
     },
     {
       "paths": [
-        "M559.941 83.928l-95.883-0 0 380.131h-380.131v95.883l380.131 0-0 380.131 95.883-0 0-380.131 380.131 0v-95.883l-380.131 0z"
+        "M227.663 125.263h568.674c56.554 0 102.4 45.846 102.4 102.4v568.674c0 56.554-45.846 102.4-102.4 102.4h-568.674c-56.554 0-102.4-45.846-102.4-102.4v-568.674c0-56.554 45.846-102.4 102.4-102.4zM312.283 412.617c53.397 0 96.684-43.287 96.684-96.684s-43.287-96.684-96.684-96.684c-53.397 0-96.684 43.287-96.684 96.684s43.287 96.684 96.684 96.684zM493.917 267.59v96.684h313.912v-96.684h-313.912zM216.328 489.682v301.366h591.345v-301.366h-591.345z"
       ],
-      "grid": 0,
+      "tags": [
+        "Post"
+      ],
+      "defaultCode": 59650,
+      "grid": 0
+    },
+    {
+      "paths": [
+        "M511.997 860.82l-229.448 121.23c-34.093 18.013-76.334 4.978-94.348-29.115-7.219-13.663-9.701-29.335-7.058-44.56l44.393-255.68-186.2-180.756c-27.667-26.858-28.323-71.060-1.465-98.727 10.763-11.088 24.901-18.291 40.198-20.482l256.884-36.789 114.37-232.943c16.994-34.613 58.83-48.895 93.442-31.901 13.871 6.81 25.091 18.030 31.901 31.901l114.37 232.943 256.884 36.789c38.17 5.466 64.682 40.841 59.215 79.011-2.191 15.297-9.394 29.434-20.482 40.198l-186.2 180.756 44.393 255.68c6.596 37.991-18.854 74.136-56.845 80.733-15.225 2.643-30.897 0.161-44.56-7.058l-229.448-121.23z"
+      ],
+      "tags": [
+        "Star"
+      ],
+      "defaultCode": 59651,
+      "grid": 0
+    },
+    {
+      "paths": [
+        "M559.941 83.928h-95.883v380.131h-380.131v95.883h380.131v380.131h95.883v-380.131h380.131v-95.883h-380.131z"
+      ],
       "tags": [
         "Plus"
       ],
-      "defaultCode": 59650
+      "defaultCode": 59652,
+      "grid": 0
     },
     {
       "paths": [
@@ -311,7 +347,7 @@
       "tags": [
         "Settings"
       ],
-      "defaultCode": 59651,
+      "defaultCode": 59653,
       "grid": 0
     },
     {
@@ -322,7 +358,7 @@
       "tags": [
         "ArrowForward"
       ],
-      "defaultCode": 59652,
+      "defaultCode": 59654,
       "grid": 0
     },
     {
@@ -332,7 +368,7 @@
       "tags": [
         "Document"
       ],
-      "defaultCode": 59653,
+      "defaultCode": 59655,
       "grid": 0
     },
     {
@@ -342,7 +378,7 @@
       "tags": [
         "Download"
       ],
-      "defaultCode": 59654,
+      "defaultCode": 59656,
       "grid": 0
     },
     {
@@ -352,7 +388,7 @@
       "tags": [
         "Send"
       ],
-      "defaultCode": 59655,
+      "defaultCode": 59657,
       "grid": 0
     },
     {
@@ -362,7 +398,7 @@
       "tags": [
         "Checkmark"
       ],
-      "defaultCode": 59656,
+      "defaultCode": 59658,
       "grid": 0
     },
     {
@@ -372,7 +408,7 @@
       "tags": [
         "Empty"
       ],
-      "defaultCode": 59657,
+      "defaultCode": 59659,
       "grid": 0
     },
     {
@@ -383,7 +419,7 @@
       "tags": [
         "Back"
       ],
-      "defaultCode": 59658,
+      "defaultCode": 59660,
       "grid": 0
     },
     {
@@ -393,7 +429,7 @@
       "tags": [
         "AddImage"
       ],
-      "defaultCode": 59659,
+      "defaultCode": 59661,
       "grid": 0
     },
     {
@@ -403,7 +439,7 @@
       "tags": [
         "Clock"
       ],
-      "defaultCode": 59660,
+      "defaultCode": 59662,
       "grid": 0
     },
     {
@@ -413,7 +449,7 @@
       "tags": [
         "StarCircle"
       ],
-      "defaultCode": 59661,
+      "defaultCode": 59663,
       "grid": 0
     },
     {
@@ -423,7 +459,7 @@
       "tags": [
         "ProfileUrl"
       ],
-      "defaultCode": 59662,
+      "defaultCode": 59664,
       "grid": 0
     },
     {
@@ -433,7 +469,7 @@
       "tags": [
         "ProfileTwitter"
       ],
-      "defaultCode": 59663,
+      "defaultCode": 59665,
       "grid": 0
     },
     {
@@ -443,7 +479,7 @@
       "tags": [
         "ProfileLinkedin"
       ],
-      "defaultCode": 59664,
+      "defaultCode": 59666,
       "grid": 0
     },
     {
@@ -453,7 +489,7 @@
       "tags": [
         "ProfileFacebook"
       ],
-      "defaultCode": 59665,
+      "defaultCode": 59667,
       "grid": 0
     },
     {
@@ -464,7 +500,7 @@
       "tags": [
         "Reply"
       ],
-      "defaultCode": 59666,
+      "defaultCode": 59668,
       "grid": 0
     },
     {
@@ -474,7 +510,7 @@
       "tags": [
         "LinkedIn"
       ],
-      "defaultCode": 59667,
+      "defaultCode": 59669,
       "grid": 0
     },
     {
@@ -484,7 +520,7 @@
       "tags": [
         "Google"
       ],
-      "defaultCode": 59668,
+      "defaultCode": 59670,
       "grid": 0
     },
     {
@@ -495,7 +531,7 @@
       "tags": [
         "Facebook"
       ],
-      "defaultCode": 59669,
+      "defaultCode": 59671,
       "grid": 0
     },
     {
@@ -505,7 +541,7 @@
       "tags": [
         "Ex"
       ],
-      "defaultCode": 59670,
+      "defaultCode": 59672,
       "grid": 0
     },
     {
@@ -515,7 +551,7 @@
       "tags": [
         "NewCommunity"
       ],
-      "defaultCode": 59671,
+      "defaultCode": 59673,
       "grid": 0
     },
     {
@@ -525,7 +561,7 @@
       "tags": [
         "Projects"
       ],
-      "defaultCode": 59672,
+      "defaultCode": 59674,
       "grid": 0
     },
     {
@@ -535,7 +571,7 @@
       "tags": [
         "Events"
       ],
-      "defaultCode": 59673,
+      "defaultCode": 59675,
       "grid": 0
     },
     {
@@ -545,7 +581,7 @@
       "tags": [
         "Home"
       ],
-      "defaultCode": 59674,
+      "defaultCode": 59676,
       "grid": 0
     },
     {
@@ -555,7 +591,7 @@
       "tags": [
         "Topics"
       ],
-      "defaultCode": 59675,
+      "defaultCode": 59677,
       "grid": 0
     },
     {
@@ -565,7 +601,7 @@
       "tags": [
         "Members"
       ],
-      "defaultCode": 59676,
+      "defaultCode": 59678,
       "grid": 0
     },
     {
@@ -575,7 +611,7 @@
       "tags": [
         "Messages"
       ],
-      "defaultCode": 59677,
+      "defaultCode": 59679,
       "grid": 0
     },
     {
@@ -585,7 +621,7 @@
       "tags": [
         "Notifications"
       ],
-      "defaultCode": 59678,
+      "defaultCode": 59680,
       "grid": 0
     },
     {
@@ -595,7 +631,7 @@
       "tags": [
         "Search"
       ],
-      "defaultCode": 59679,
+      "defaultCode": 59681,
       "grid": 0
     },
     {
@@ -605,7 +641,7 @@
       "tags": [
         "Share"
       ],
-      "defaultCode": 59680,
+      "defaultCode": 59682,
       "grid": 0
     },
     {
@@ -615,7 +651,7 @@
       "tags": [
         "More"
       ],
-      "defaultCode": 59681,
+      "defaultCode": 59683,
       "grid": 0
     },
     {
@@ -625,7 +661,7 @@
       "tags": [
         "ArrowUp"
       ],
-      "defaultCode": 59682,
+      "defaultCode": 59684,
       "grid": 0
     },
     {
@@ -635,7 +671,7 @@
       "tags": [
         "ArrowDown"
       ],
-      "defaultCode": 59683,
+      "defaultCode": 59685,
       "grid": 0
     },
     {
@@ -645,7 +681,7 @@
       "tags": [
         "Location"
       ],
-      "defaultCode": 59684,
+      "defaultCode": 59686,
       "grid": 0
     },
     {
@@ -655,7 +691,7 @@
       "tags": [
         "Trash"
       ],
-      "defaultCode": 59685,
+      "defaultCode": 59687,
       "grid": 0
     },
     {
@@ -665,7 +701,7 @@
       "tags": [
         "Pin"
       ],
-      "defaultCode": 59686,
+      "defaultCode": 59688,
       "grid": 0
     },
     {
@@ -675,7 +711,7 @@
       "tags": [
         "Complete"
       ],
-      "defaultCode": 59687,
+      "defaultCode": 59689,
       "grid": 0
     },
     {
@@ -685,7 +721,7 @@
       "tags": [
         "Flag"
       ],
-      "defaultCode": 59688,
+      "defaultCode": 59690,
       "grid": 0
     },
     {
@@ -695,7 +731,7 @@
       "tags": [
         "Circle"
       ],
-      "defaultCode": 59689,
+      "defaultCode": 59691,
       "grid": 0
     },
     {
@@ -705,7 +741,7 @@
       "tags": [
         "Paperclip"
       ],
-      "defaultCode": 59690,
+      "defaultCode": 59692,
       "grid": 0
     },
     {
@@ -729,7 +765,7 @@
     "fontPref": {
       "prefix": "icon-",
       "metadata": {
-        "fontFamily": "icomoon",
+        "fontFamily": "hylo-evo-icons",
         "majorVersion": 1,
         "minorVersion": 0
       },

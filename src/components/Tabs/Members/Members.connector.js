@@ -48,6 +48,7 @@ export function mapStateToProps (state, props) {
   const community = getCurrentCommunity(state, props)
   const network = getCurrentNetwork(state, props)
 
+  const canModerate = currentUser && currentUser.canModerate(community)
   const search = getSearch(state)
   const sortBy = getSort(state)
 
@@ -62,6 +63,7 @@ export function mapStateToProps (state, props) {
     currentUser,
     community,
     network,
+    canModerate,
     hasMore: getHasMoreMembers(state, getOpts),
     members: getMembers(state, getOpts),
     pending: state.pending[FETCH_MEMBERS],

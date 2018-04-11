@@ -25,7 +25,7 @@ describe('DetailsEditor', () => {
   })
 
   it('has navigation options', () => {
-    const props = {navigation: {}}
+    const props = {navigation: {state: {}}}
     expect(DetailsEditor.navigationOptions(props)).toMatchSnapshot()
   })
 })

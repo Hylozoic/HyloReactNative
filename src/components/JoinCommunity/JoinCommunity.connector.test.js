@@ -2,7 +2,6 @@ import orm from 'store/models'
 import {
   mapStateToProps,
   mapDispatchToProps,
-  goToCommunity,
   makeJoinCommunity,
   makeCheckInvitation,
   mergeProps
@@ -13,15 +12,6 @@ let session, defaultState
 beforeEach(() => {
   session = orm.mutableSession(orm.getEmptyState())
   defaultState = {orm: session.state}
-})
-
-test('goToCommunity', () => {
-  const communityId = 'anycommunityid'
-  const navigation = {
-    dispatch: testOutput => testOutput
-  }
-  const result = goToCommunity(communityId, navigation)
-  expect(result).toMatchSnapshot()
 })
 
 describe('mapStateToProps', () => {

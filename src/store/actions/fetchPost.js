@@ -9,6 +9,7 @@ export function getPostFieldsFragment (withComments = true) {
   details
   type
   location
+  announcement
   creator {
     id
     name
@@ -62,6 +63,12 @@ export function getPostFieldsFragment (withComments = true) {
     community {
       id
     }
+  }
+  topics {
+    id
+    name
+    postsTotal
+    followersTotal
   }`
 }
 

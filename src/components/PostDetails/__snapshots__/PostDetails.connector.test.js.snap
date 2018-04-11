@@ -44,6 +44,7 @@ Object {
     "linkPreview": undefined,
     "pinned": undefined,
     "postMemberships": undefined,
+    "topics": Array [],
   },
   "showMember": [Function],
   "showTopic": [Function],
@@ -76,6 +77,7 @@ Object {
   details
   type
   location
+  announcement
   creator {
     id
     name
@@ -129,6 +131,12 @@ Object {
     community {
       id
     }
+  }
+  topics {
+    id
+    name
+    postsTotal
+    followersTotal
   }
         }
       }",

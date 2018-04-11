@@ -17,7 +17,7 @@ Array [
       "headerRight": <HeaderButton
         onPress={[Function]}
         text="Mark as read"
-/>,
+      />,
     },
   ],
 ]
@@ -61,6 +61,9 @@ Object {
       "avatarSeparator": false,
       "createdAt": "",
       "id": "1",
+      "reasons": Array [
+        "announcement",
+      ],
       "unread": false,
     },
   ],

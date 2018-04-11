@@ -23,7 +23,7 @@ Object {
   },
   "goToCreateCommunityReview": [Function],
   "navigation": Object {
-    "navigate": [Function],
+    "navigate": [MockFunction],
   },
   "pending": Object {
     "CreateCommunityFlow/FETCH_URL_EXISTS": true,

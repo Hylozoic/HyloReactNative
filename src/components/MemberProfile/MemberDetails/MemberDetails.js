@@ -6,8 +6,7 @@ import {
   ScrollView
 } from 'react-native'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
-import { debounce } from 'lodash/fp/debounce'
-import { find, get, isEmpty, pick } from 'lodash/fp'
+import { debounce, find, isEmpty, pick } from 'lodash/fp'
 import { validateUser } from 'hylo-utils/validators'
 
 import Icon from '../../Icon'

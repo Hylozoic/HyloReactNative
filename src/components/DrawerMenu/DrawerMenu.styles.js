@@ -128,6 +128,12 @@ export default {
     color: 'white',
     fontSize: 25
   },
+  seeAll: {
+    color: rhino40,
+    textAlign: 'center',
+    paddingTop: 5,
+    paddingBottom: 3
+  },
   communityRow: {
     marginLeft: 10,
     paddingVertical: 10
@@ -149,6 +155,10 @@ export default {
     fontSize: 15
   },
   highlight: {
+    color: 'white',
+    fontFamily: 'Circular-Bold'
+  },
+  isMember: {
     color: 'white'
   },
   badge: {

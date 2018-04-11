@@ -1,11 +1,15 @@
 /* eslint-disable no-global-assign */
 import React from 'react'
+import { Provider } from 'react-redux'
 import RootView from './src/components/RootView'
 import { AppRegistry, Platform } from 'react-native'
 import Timer from 'react-native-background-timer'
 import { Sentry } from 'react-native-sentry'
 import ErrorBoundary from './src/components/ErrorBoundary'
 import { isDev } from 'util/testing'
+import getStore from './src/store'
+
+let store = getStore()
 
 if (!isDev) {
   Sentry.config(process.env.SENTRY_CONFIG_URL)
@@ -22,12 +26,14 @@ if (Platform.OS === 'android') {
   clearInterval = (fn, ms = 0) => Timer.clearInterval(fn, ms)
 }
 
-AppRegistry.registerComponent('HyloReactNative', () => RootView)
-
-export default AppContainer
+AppRegistry.registerComponent('HyloReactNative', () => AppContainer)
 
 function AppContainer () {
   return <ErrorBoundary>
-    <RootView />
+    <Provider store={store}>
+      <RootView />
+    </Provider>
   </ErrorBoundary>
 }
+
+export default AppContainer

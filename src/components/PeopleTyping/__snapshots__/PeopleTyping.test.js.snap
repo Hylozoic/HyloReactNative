@@ -6,6 +6,8 @@ exports[`matches the last snapshot 1`] = `
     accessible={true}
     allowFontScaling={true}
     ellipsizeMode="tail"
-  />
+  >
+    
+  </Text>
 </View>
 `;

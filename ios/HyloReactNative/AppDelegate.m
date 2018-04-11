@@ -34,11 +34,18 @@
   return [[FBSDKApplicationDelegate sharedInstance] application:application
                                                         openURL:url
                                               sourceApplication:sourceApplication
-                                                     annotation:annotation] ||
+                                                     annotation:annotation
+          ] ||
           [RNGoogleSignin application:application
                               openURL:url
                     sourceApplication:sourceApplication
-                           annotation:annotation];
+                           annotation:annotation
+          ] ||
+          [RCTLinkingManager application:application
+                                 openURL:url
+                       sourceApplication:sourceApplication
+                              annotation:annotation
+          ];
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions

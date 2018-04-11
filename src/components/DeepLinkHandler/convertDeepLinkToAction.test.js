@@ -20,8 +20,13 @@ it('handles a community join link', () => {
   })
 })
 
-it('handles a post link')
-// expect(convertDeepLinkToAction('/c/sandbox/p/8190')).toEqual({
+it('handles a post link', () => {
+  expect(convertDeepLinkToAction('/c/sandbox/p/8190')).toMatchSnapshot()
+})
+
+it('handles a link without a preceding slash (for tokenAuth nextURL handling)', () => {
+  expect(convertDeepLinkToAction('c/sandbox/p/8190')).toMatchSnapshot()
+})
 
 it('handles a message thread link', () => {
   expect(convertDeepLinkToAction('/t/247')).toEqual({
