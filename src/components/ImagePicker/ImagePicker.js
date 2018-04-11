@@ -68,6 +68,8 @@ export default class ImagePicker extends Component {
         .then(({ payload, error }) => {
           this.setPending(false)
 
+          console.log('upload finished, error', error)
+
           if (error) {
             onError && onError(payload.message)
           } else {
