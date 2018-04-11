@@ -18,8 +18,12 @@ echo "Applying android/app/google-services.json"
 cp $mytmpdir/android/google-services.json android/app/
 echo "Applying android/app/debug.keystore"
 cp $mytmpdir/android/debug.keystore android/app/
+echo "Applying android/app/hylo-release-original.keystore"
+cp $mytmpdir/android/hylo-release-original.keystore android/app/
+echo "Applying android/app/hylo-release-key-2017-08.keystore"
+cp $mytmpdir/android/hylo-release-key-2017-08.keystore android/app/
 
-echo "Applying ios/debug.keystore"
+echo "Applying ios/GoogleService-Info.plist"
 cp $mytmpdir/ios/GoogleService-Info.plist ios/
 
 trap 'rm -rf "$mytmpdir"' EXIT
