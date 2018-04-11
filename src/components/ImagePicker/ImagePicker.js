@@ -29,7 +29,10 @@ export default class ImagePicker extends Component {
   showPicker = () => {
     if (this.state.pending) return
     this.setPending(true)
-    showImagePicker(this.props)
+    showImagePicker({
+      ...this.props,
+      onComplete: () => this.setPending(false)
+    })
   }
 
   render () {

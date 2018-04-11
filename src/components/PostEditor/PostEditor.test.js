@@ -170,11 +170,13 @@ describe('PostEditor', () => {
           isFocused
           setDetails={jest.fn()}
           navigation={navigation}
+          postId={mockPost.id}
           fileUrls={['http://foo.com/foo.pdf']}
           post={mockPost} />
       </Provider>)
 
     const instance = renderer.root.findByType(PostEditor).instance
+
     instance.addFile({remote: 'http://bar.com/bar.pdf'})
     expect(instance.state.fileUrls).toEqual([
       'http://foo.com/foo.pdf',

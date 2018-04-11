@@ -7,10 +7,9 @@ import styles from './FileSelector.styles'
 import { cleanName } from '../../../store/models/Attachment'
 
 export default function FileSelector (props) {
-  const {fileUrls = [], onRemove, showPicker = false} = props
+  const {fileUrls = [], onRemove} = props
   return <View>
     {fileUrls.map((url, index) => renderFileButton(url, index, onRemove))}
-    {showPicker && <FilePickerButton {...props} />}
   </View>
 }
 
@@ -19,7 +18,7 @@ export function showFilePicker ({upload, type, id, onAdd, onError, onComplete}) 
     filetype: [DocumentPickerUtil.allFiles()]
   }, (err, result) => {
     if (err) {
-      return onComplete && onComplete()
+      return onComplete && onComplete(err.message)
     }
 
     const file = {
