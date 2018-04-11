@@ -1,6 +1,6 @@
 import React from 'react'
 import PopupMenuButton from '../../PopupMenuButton'
-import { TouchableOpacity, Text, View } from 'react-native'
+import { Text, View } from 'react-native'
 import Icon from '../../Icon'
 import { DocumentPicker, DocumentPickerUtil } from 'react-native-document-picker'
 import styles from './FileSelector.styles'
@@ -36,16 +36,6 @@ export function showFilePicker ({upload, type, id, onAdd, onError, onComplete}) 
         }
       })
   })
-}
-
-export function FilePickerButton (props) {
-  return <TouchableOpacity onPress={() => showFilePicker(props)}
-    style={[styles.fileLabel, styles.addButton]}>
-    <Icon name={props.pending ? 'Clock' : 'Paperclip'} style={styles.addIcon} />
-    <Text style={styles.fileLabelText}>
-      {props.pending ? 'Adding...' : 'Add file'}
-    </Text>
-  </TouchableOpacity>
 }
 
 function renderFileButton (url, buttonIndex, onRemove) {
