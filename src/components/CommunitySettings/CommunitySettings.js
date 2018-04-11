@@ -2,13 +2,12 @@ import React, { PureComponent } from 'react'
 import {
   TouchableOpacity,
   Text,
-  StyleSheet,
   FlatList,
   View
 } from 'react-native'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
-import { capeCod40, capeCod20, white } from 'style/colors'
 import header from 'util/header'
+import styles from './CommunitySettings.style'
 
 export default class PostImage extends PureComponent {
   static navigationOptions = ({navigation}) => header(navigation, {title: 'Community Settings'})
@@ -39,44 +38,3 @@ export default class PostImage extends PureComponent {
       </TouchableOpacity>} />)
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: white,
-    flex: 1,
-    flexDirection: 'column'
-  },
-  headerContainer: {
-    alignItems: 'center',
-    backgroundColor: white
-  },
-  headerText: {
-    backgroundColor: '#FAFBFC',
-    padding: 20,
-    width: '90%',
-    textAlign: 'center',
-    marginTop: 15,
-    marginBottom: 10,
-    borderRadius: 8,
-    fontFamily: 'Circular-Book',
-    fontSize: 24
-  },
-  item: {
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    width: '90%',
-    marginLeft: '5%',
-    height: 70,
-    flexDirection: 'row',
-    alignItems: 'center',
-    borderColor: capeCod40
-  },
-  text: {
-    fontSize: 22,
-    flex: 1
-  },
-  chevron: {
-    marginRight: 12,
-    fontSize: 24,
-    color: capeCod20
-  }
-})
