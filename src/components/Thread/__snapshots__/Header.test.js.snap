@@ -6,7 +6,7 @@ Object {
   "headerTitle": <Title
     onPress={[Function]}
     title="Header Title"
-/>,
+  />,
 }
 `;
 

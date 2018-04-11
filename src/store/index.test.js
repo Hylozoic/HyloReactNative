@@ -10,7 +10,7 @@ describe('getStore', () => {
   let store
 
   beforeAll(() => {
-    return getStore().then(s => { store = s })
+    store = getStore()
   })
 
   it('works', () => {

@@ -20,14 +20,16 @@ platform :ios do
   lane :beta do
     match(
       type: "appstore",
-      force_for_new_devices: true
+      force_for_new_devices: true,
+      readonly: true
     )
     increment_build_number(
       xcodeproj: 'HyloReactNative.xcodeproj'
     )
     gym(
       scheme: "HyloReactNative",
-      configuration: "Release"
+      configuration: "Release",
+      export_options: {iCloudContainerEnvironment: 'Production'}
     )
     pilot(
       skip_waiting_for_build_processing: true
@@ -38,12 +40,14 @@ platform :ios do
   desc "This builds using the connection with metro running in terminal."
   lane :dev do
     match(
-      type: "development"
+      type: "development",
+      readonly: true
     )
     gym(
      scheme: "HyloReactNative",
      configuration: "Debug",
-     export_method: "development"
+     export_method: "development",
+     export_options: {iCloudContainerEnvironment: 'Development'}
     )
   end
 
@@ -52,7 +56,8 @@ platform :ios do
   lane :qa do
     match(
       type: "adhoc",
-      force_for_new_devices: true
+      force_for_new_devices: true,
+      readonly: true
     )
     gym(
      scheme: "HyloReactNative",

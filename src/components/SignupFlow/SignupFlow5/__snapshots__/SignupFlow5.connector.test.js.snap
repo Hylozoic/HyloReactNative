@@ -37,8 +37,8 @@ Object {
   "goToSkills": [Function],
   "makeChanges": [Function],
   "navigation": Object {
-    "dispatch": [Function],
-    "navigate": [Function],
+    "dispatch": [MockFunction],
+    "navigate": [MockFunction],
   },
   "storedSkills": Array [
     "a",
@@ -46,9 +46,9 @@ Object {
     "c",
   ],
   "updateLocalSetting": [Function],
-  "updateLocalUserSettings": [Function],
+  "updateLocalUserSettings": [MockFunction],
   "updateSetting": [Function],
-  "updateUserSettings": [Function],
+  "updateUserSettings": [MockFunction],
 }
 `;
 

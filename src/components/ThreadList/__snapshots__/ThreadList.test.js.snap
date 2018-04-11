@@ -121,6 +121,7 @@ exports[`ThreadList handles pending correctly with threads 1`] = `
     getItemCount={[Function]}
     horizontal={false}
     initialNumToRender={10}
+    invertStickyHeaders={undefined}
     keyExtractor={[Function]}
     maxToRenderPerBatch={10}
     numColumns={1}
@@ -241,6 +242,7 @@ exports[`ThreadList renders correctly 1`] = `
     getItemCount={[Function]}
     horizontal={false}
     initialNumToRender={10}
+    invertStickyHeaders={undefined}
     keyExtractor={[Function]}
     maxToRenderPerBatch={10}
     numColumns={1}
@@ -331,11 +333,11 @@ Object {
   "headerLeft": <HeaderButton
     onPress={[Function]}
     text="Close"
-/>,
+  />,
   "headerRight": <HeaderButton
     onPress={[Function]}
     text="New"
-/>,
+  />,
   "headerStyle": Object {
     "backgroundColor": "white",
     "paddingHorizontal": 10,

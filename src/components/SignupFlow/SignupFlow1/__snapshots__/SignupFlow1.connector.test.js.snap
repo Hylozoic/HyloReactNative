@@ -95,18 +95,18 @@ Object {
     },
   },
   "email": "b",
-  "fetchCurrentUser": [Function],
+  "fetchCurrentUser": [MockFunction],
   "loadUserSettings": [Function],
   "name": "a",
   "navigation": Object {
-    "navigate": [Function],
+    "navigate": [MockFunction],
   },
   "password": "c",
   "showPasswordField": true,
-  "signup": [Function],
+  "signup": [MockFunction],
   "signupOrUpdate": [Function],
-  "updateLocalUserSettings": [Function],
-  "updateUserSettings": [Function],
+  "updateLocalUserSettings": [MockFunction],
+  "updateUserSettings": [MockFunction],
 }
 `;
 

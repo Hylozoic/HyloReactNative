@@ -54,10 +54,10 @@ exports[`mergeProps merges the props 1`] = `
 Object {
   "avatarUrl": "a",
   "navigation": Object {
-    "navigate": [Function],
+    "navigate": [MockFunction],
   },
   "saveAndNext": [Function],
-  "updateUserSettings": [Function],
+  "updateUserSettings": [MockFunction],
 }
 `;
 

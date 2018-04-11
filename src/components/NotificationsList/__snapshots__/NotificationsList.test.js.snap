@@ -14,7 +14,7 @@ exports[`NotificationsList matches the last snapshot 1`] = `
           "avatarSeparator": false,
           "createdAt": "2 min ago",
           "id": "1",
-          "onPress": [Function],
+          "onPress": [MockFunction],
           "unread": false,
         },
       ]
@@ -24,6 +24,7 @@ exports[`NotificationsList matches the last snapshot 1`] = `
     getItemCount={[Function]}
     horizontal={false}
     initialNumToRender={10}
+    invertStickyHeaders={undefined}
     keyExtractor={[Function]}
     maxToRenderPerBatch={10}
     numColumns={1}
@@ -140,7 +141,7 @@ exports[`NotificationsList matches the last snapshot for NotificationRow 1`] = `
           "avatarSeparator": false,
           "createdAt": "2 min ago",
           "id": "1",
-          "onPress": [Function],
+          "onPress": [MockFunction],
           "unread": false,
         }
       }
