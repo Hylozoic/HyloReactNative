@@ -33,17 +33,14 @@ exports[`CommunitySettings matches the last snapshot 1`] = `
   data={
     Array [
       Object {
-        "key": "1",
         "name": "Edit Community Info",
         "navigate": "UserSettings",
       },
       Object {
-        "key": "2",
         "name": "Community Members",
         "navigate": "UserSettings",
       },
       Object {
-        "key": "3",
         "name": "Invite Members",
         "navigate": "InvitePeople",
       },

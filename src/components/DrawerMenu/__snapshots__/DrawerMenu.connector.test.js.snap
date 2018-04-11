@@ -28,28 +28,7 @@ Object {
 }
 `;
 
-exports[`mergeProps matches the last snapshot and bound functions work as expected 1`] = `
-Object {
-  "canModerateCurrentCommunity": false,
-  "currentUser": Object {
-    "id": "anyid",
-  },
-  "goToCommunity": [Function],
-  "goToCommunitySettings": false,
-  "goToCreateCommunityName": [Function],
-  "goToMyProfile": [Function],
-  "goToNetwork": [Function],
-  "name": "Roy Rogers",
-  "navigation": Object {
-    "navigate": [Function],
-  },
-  "selectCommunity": [Function],
-  "selectNetwork": [Function],
-  "showSettings": [Function],
-}
-`;
-
-exports[`mergeProps matches the last snapshot and bound functions work as expected 2`] = `
+exports[`mergeProps matches snapshot 1`] = `
 Object {
   "canModerateCurrentCommunity": true,
   "currentUser": Object {
@@ -57,6 +36,27 @@ Object {
   },
   "goToCommunity": [Function],
   "goToCommunitySettings": [Function],
+  "goToCreateCommunityName": [Function],
+  "goToMyProfile": [Function],
+  "goToNetwork": [Function],
+  "name": "Roy Rogers",
+  "navigation": Object {
+    "navigate": [MockFunction],
+  },
+  "selectCommunity": [MockFunction],
+  "selectNetwork": [MockFunction],
+  "showSettings": [Function],
+}
+`;
+
+exports[`mergeProps matches snapshot 2`] = `
+Object {
+  "canModerateCurrentCommunity": false,
+  "currentUser": Object {
+    "id": "anyid",
+  },
+  "goToCommunity": [Function],
+  "goToCommunitySettings": false,
   "goToCreateCommunityName": [Function],
   "goToMyProfile": [Function],
   "goToNetwork": [Function],

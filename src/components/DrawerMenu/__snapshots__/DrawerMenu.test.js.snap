@@ -126,7 +126,7 @@ exports[`DrawerMenu matches the last snapshot 1`] = `
     </Text>
     <TouchableOpacity
       activeOpacity={0.2}
-      onPress={[Function]}
+      onPress={[MockFunction]}
     >
       <Icon
         name="Settings"
