@@ -19,8 +19,8 @@ export default {
     marginTop: 15,
     marginBottom: 10,
     borderRadius: 8,
-    fontFamily: 'Circular-Book',
-    fontSize: 26
+    fontFamily: 'Circular-Bold',
+    fontSize: 28
   },
   item: {
     borderBottomWidth: StyleSheet.hairlineWidth,
@@ -32,11 +32,10 @@ export default {
     borderColor: capeCod40
   },
   text: {
-    fontSize: 22,
+    fontSize: 20,
     flex: 1
   },
   chevron: {
-    marginRight: 12,
     fontSize: 24,
     color: capeCod20
   }
