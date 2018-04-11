@@ -87,7 +87,6 @@ describe('mergeProps', () => {
       props.goToCommunitySettings()
       expect(ownProps.navigation.navigate).toHaveBeenCalledTimes(1)
     })
-
   })
 })
 
