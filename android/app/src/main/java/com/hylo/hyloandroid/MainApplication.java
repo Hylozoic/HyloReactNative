@@ -9,6 +9,7 @@ import com.avishayil.rnrestart.ReactNativeRestartPackage;
 import co.apptailor.googlesignin.RNGoogleSigninPackage;
 import com.reactnativedocumentpicker.ReactNativeDocumentPicker;
 import im.shimo.react.prompt.RNPromptPackage;
+import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.BV.LinearGradient.LinearGradientPackage;
 import com.ocetnik.timer.BackgroundTimerPackage;
 import com.geektime.rnonesignalandroid.ReactNativeOneSignalPackage;
@@ -51,6 +52,7 @@ public class MainApplication extends Application implements ReactApplication {
             new ReactNativeRestartPackage(),
             new ReactNativeDocumentPicker(),
             new RNPromptPackage(),
+            new RNDeviceInfo(),
             new LinearGradientPackage(),
             new BackgroundTimerPackage(),
             new ReactNativeOneSignalPackage(),
