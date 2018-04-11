@@ -66,7 +66,7 @@ const screensInTabs = {
   MemberSkillEditor: {screen: MemberSkillEditor},
   CommentEditor: {screen: CommentEditor},
   NewMessage: {screen: NewMessage},
-  CommunitySettings: {screen: CommunitySettings}
+  CommunitySettings: {screen: CommunitySettings},
   InvitePeople: {screen: InvitePeople},
   NewMessage: {screen: NewMessage}
 }
