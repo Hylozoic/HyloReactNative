@@ -8,7 +8,7 @@ import { LoadingScreen } from '../Loading'
 import SessionCheck from '../SessionCheck'
 import Feed from '../Feed'
 import JoinCommunity from '../JoinCommunity'
-import CommunitySettings from '../CommunitySettings'
+import CommunitySettingsMenu from '../CommunitySettingsMenu'
 import DrawerMenu from '../DrawerMenu'
 import { Home, Members, Topics } from '../Tabs' // eslint-disable-line no-unused-vars
 import stacksInTabsFactory from './stacksInTabsFactory'
@@ -107,7 +107,7 @@ const DrawerAndTabsNavigator = DrawerNavigator(
 // Screens that appear outside of tabs: Settings, Messages, etc.
 const screensInStack = {
   UserSettings: {screen: UserSettings},
-  CommunitySettings: {screen: CommunitySettings},
+  CommunitySettingsMenu: {screen: CommunitySettingsMenu},
   PasswordReset: {screen: UserSettings, path: 'settings/password'},
   NotificationsList: {screen: NotificationsList},
   ThreadList: {screen: ThreadList},

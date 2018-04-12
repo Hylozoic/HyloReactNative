@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CommunitySettingsMenu has navigation options 1`] = `
+Object {
+  "headerBackTitle": null,
+  "headerStyle": Object {
+    "backgroundColor": "white",
+    "paddingHorizontal": 10,
+  },
+  "headerTintColor": "#808c9b",
+  "headerTitle": "Community Settings",
+  "headerTitleStyle": Object {
+    "color": "black",
+    "fontFamily": "Circular-Bold",
+    "fontSize": 17,
+  },
+}
+`;
+
+exports[`CommunitySettingsMenu matches the last snapshot 1`] = `
+<FlatList
+  ListHeaderComponent={
+    <View>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+      >
+        foo
+      </Text>
+    </View>
+  }
+  data={
+    Array [
+      Object {
+        "name": "Edit Community Info",
+        "navigate": "UserSettings",
+      },
+      Object {
+        "name": "Community Members",
+        "navigate": "ModeratorSettings",
+      },
+      Object {
+        "name": "Invite Members",
+        "navigate": "InvitePeople",
+      },
+    ]
+  }
+  disableVirtualization={false}
+  horizontal={false}
+  initialNumToRender={10}
+  keyExtractor={[Function]}
+  maxToRenderPerBatch={10}
+  numColumns={1}
+  onEndReachedThreshold={2}
+  renderItem={[Function]}
+  scrollEventThrottle={50}
+  updateCellsBatchingPeriod={50}
+  windowSize={21}
+/>
+`;
