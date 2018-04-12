@@ -22,7 +22,7 @@ export default class PostImage extends PureComponent {
       navigate: 'UserSettings' // TODO change me
     }, {
       name: 'Community Members',
-      navigate: 'UserSettings' // TODO change me
+      navigate: 'ModeratorSettings'
     }, {
       name: 'Invite Members',
       navigate: 'InvitePeople'
