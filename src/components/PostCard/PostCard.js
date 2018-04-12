@@ -5,6 +5,7 @@ import PostHeader from './PostHeader'
 import PostBody from './PostBody'
 import PostImage from './PostImage'
 import PostFooter from './PostFooter'
+import PostCommunities from './PostCommunities'
 import samplePost from './samplePost'
 import { get } from 'lodash/fp'
 import { capeCod10 } from '../../style/colors'
@@ -78,6 +79,9 @@ export default class PostCard extends React.Component {
         showMember={showMember}
         showTopic={showTopic}
         shouldTruncate />
+      <PostCommunities
+        communities={post.communities}
+        slug={slug} />
       <PostFooter id={post.id}
         currentUser={currentUser}
         commenters={post.commenters}
