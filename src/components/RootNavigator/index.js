@@ -21,6 +21,7 @@ import CommentEditor from '../PostDetails/CommentEditor'
 import InvitePeople from '../InvitePeople'
 import tabStyles from '../Tabs/Tabs.styles'
 import NewMessage from '../NewMessage'
+import ModeratorSettings from '../ModeratorSettings'
 import Thread from '../Thread'
 import ThreadList from '../ThreadList'
 import ThreadParticipants from '../ThreadParticipants'
@@ -65,6 +66,7 @@ const screensInTabs = {
   MemberSkillEditor: {screen: MemberSkillEditor},
   CommentEditor: {screen: CommentEditor},
   InvitePeople: {screen: InvitePeople},
+  ModeratorSettings: {screen: ModeratorSettings},
   NewMessage: {screen: NewMessage}
 }
 
