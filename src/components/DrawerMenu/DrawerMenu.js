@@ -5,6 +5,7 @@ import EntypoIcon from 'react-native-vector-icons/Entypo'
 import styles from './DrawerMenu.styles'
 import SocketListener from '../SocketListener'
 import Button from '../Button'
+import Icon from '../Icon'
 import { isEmpty } from 'lodash/fp'
 
 import { ALL_COMMUNITIES_ID } from '../../store/models/Community'
@@ -14,9 +15,9 @@ export default class DrawerMenu extends Component {
   render () {
     const {
       name, avatarUrl, goToCommunity, goToNetwork, goToMyProfile,
-      showSettings, networks, communities,
-      currentNetworkId, currentCommunityId,
-      goToCreateCommunityName
+      showSettings, networks, communities, currentCommunity,
+      currentNetworkId, currentCommunityId, canModerateCurrentCommunity,
+      goToCreateCommunityName, goToCommunitySettings
     } = this.props
 
     const listSections = [
@@ -44,6 +45,14 @@ export default class DrawerMenu extends Component {
     ]
 
     return <View style={styles.parent}>
+      <View style={styles.communityHeader}>
+        <Image source={{uri: currentCommunity.avatarUrl}} style={styles.communityHeaderAvatar} />
+        <Text style={styles.communityHeaderText}>{currentCommunity.name}</Text>
+        {canModerateCurrentCommunity && <TouchableOpacity onPress={goToCommunitySettings} style={styles.communityHeaderSettingsButton}>
+          <Icon style={styles.communityHeaderSettingsButtonIcon} name='Settings' />
+          <Text style={styles.communityHeaderSettingsButtonText}>Settings</Text>
+        </TouchableOpacity>}
+      </View>
       <SectionList
         renderSectionHeader={SectionHeader}
         sections={listSections}

@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mapStateToProps matches the latest snapshot 1`] = `
+Object {
+  "communityName": "bar",
+}
+`;
