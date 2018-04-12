@@ -1,12 +1,12 @@
 import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
-import CommunitySettings from './CommunitySettings'
+import CommunitySettingsMenu from './CommunitySettingsMenu'
 import ReactTestRenderer from 'react-test-renderer'
 
-describe('CommunitySettings', () => {
+describe('CommunitySettingsMenu', () => {
   it('matches the last snapshot', () => {
     const renderer = new ReactShallowRenderer()
-    renderer.render(<CommunitySettings communityName='foo' />)
+    renderer.render(<CommunitySettingsMenu communityName='foo' />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
@@ -14,13 +14,13 @@ describe('CommunitySettings', () => {
 
   it('has navigation options', () => {
     const props = {navigation: {state: {params: {}}}}
-    expect(CommunitySettings.navigationOptions(props)).toMatchSnapshot()
+    expect(CommunitySettingsMenu.navigationOptions(props)).toMatchSnapshot()
   })
 
   it('navigates', () => {
     const props = {navigation: {navigate: jest.fn()}}
 
-    const instance = ReactTestRenderer.create(<CommunitySettings {...props} />).getInstance()
+    const instance = ReactTestRenderer.create(<CommunitySettingsMenu {...props} />).getInstance()
 
     instance.navigate('somePath')
     expect(props.navigation.navigate).toHaveBeenCalledWith('somePath')

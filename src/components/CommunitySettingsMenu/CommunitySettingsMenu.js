@@ -7,7 +7,7 @@ import {
 } from 'react-native'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
 import header from 'util/header'
-import styles from './CommunitySettings.style'
+import styles from './CommunitySettingsMenu.style'
 
 export default class PostImage extends PureComponent {
   static navigationOptions = ({navigation}) => header(navigation, {title: 'Community Settings'})

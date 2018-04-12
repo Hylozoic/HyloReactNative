@@ -1,6 +1,6 @@
 import {
   mapStateToProps
-} from './CommunitySettings.connector'
+} from './CommunitySettingsMenu.connector'
 
 import orm from 'store/models'
 

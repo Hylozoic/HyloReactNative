@@ -93,8 +93,8 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
   const { currentUser, name, canModerateCurrentCommunity } = stateProps
   const { navigation } = ownProps
 
-  const goToCommunitySettings = () => {
-    navigation.navigate('CommunitySettings')
+  const goToCommunitySettingsMenu = () => {
+    navigation.navigate('CommunitySettingsMenu')
   }
 
   return {
@@ -125,7 +125,7 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     goToCreateCommunityName: () => {
       navigation.navigate('CreateCommunityName')
     },
-    goToCommunitySettings: canModerateCurrentCommunity && goToCommunitySettings
+    goToCommunitySettingsMenu: canModerateCurrentCommunity && goToCommunitySettingsMenu
   }
 }
 

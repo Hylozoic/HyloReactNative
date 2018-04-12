@@ -45,12 +45,12 @@ describe('mergeProps', () => {
 
   it('matches snapshot', () => {
     expect(props).toMatchSnapshot()
-    expect(props.goToCommunitySettings).toBeDefined()
+    expect(props.goToCommunitySettingsMenu).toBeDefined()
 
     stateProps.canModerateCurrentCommunity = false
     const propsNonModerator = mergeProps(stateProps, dispatchProps, ownProps)
     expect(propsNonModerator).toMatchSnapshot()
-    expect(propsNonModerator.goToCommunitySettings).toBeFalsy()
+    expect(propsNonModerator.goToCommunitySettingsMenu).toBeFalsy()
   })
 
   describe('canModerate functions are bound', () => {
@@ -83,8 +83,8 @@ describe('mergeProps', () => {
       expect(ownProps.navigation.navigate).toHaveBeenCalledTimes(1)
     })
 
-    it('goToCommunitySettings', () => {
-      props.goToCommunitySettings()
+    it('goToCommunitySettingsMenu', () => {
+      props.goToCommunitySettingsMenu()
       expect(ownProps.navigation.navigate).toHaveBeenCalledTimes(1)
     })
   })

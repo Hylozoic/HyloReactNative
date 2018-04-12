@@ -18,7 +18,7 @@ describe('DrawerMenu', () => {
     currentCommunityId: 12,
     canModerateCurrentCommunity: true,
     networks: [],
-    goToCommunitySettings: jest.fn(),
+    goToCommunitySettingsMenu: jest.fn(),
     currentCommunity: {name: 'foo', avatarUrl: 'someurl'},
     communities: []
   }

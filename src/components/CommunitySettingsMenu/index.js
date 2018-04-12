@@ -1,4 +1,4 @@
-import component from './CommunitySettings'
-import connector from './CommunitySettings.connector'
+import component from './CommunitySettingsMenu'
+import connector from './CommunitySettingsMenu.connector'
 
 export default connector(component)
