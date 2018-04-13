@@ -62,7 +62,8 @@ afterAll(() => {
 
 it('works as expected', async () => {
   const action = upload('userAvatar', '11', file)
-  expect(action).toMatchSnapshot()
+  expect(action.meta).toMatchSnapshot()
+  expect(action.type).toEqual('UPLOAD')
   expect(open).toBeCalledWith('POST', apiHost + '/noo/upload')
   expect(append.mock.calls).toEqual([
     ['type', 'userAvatar'],

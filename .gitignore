@@ -69,3 +69,4 @@ androidemulator
 #
 .bundle/*
 vendor/*
+*.code-workspace
