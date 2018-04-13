@@ -5,21 +5,22 @@ import {
 } from 'react-navigation'
 import { Dimensions } from 'react-native'
 import { LoadingScreen } from '../Loading'
-import SessionCheck from '../SessionCheck'
-import Feed from '../Feed'
-import JoinCommunity from '../JoinCommunity'
+import CommentEditor from '../PostDetails/CommentEditor'
+import CommunitySettings from '../CommunitySettings'
 import DrawerMenu from '../DrawerMenu'
+import Feed from '../Feed'
 import { Home, Members, Topics } from '../Tabs' // eslint-disable-line no-unused-vars
+import JoinCommunity from '../JoinCommunity'
 import stacksInTabsFactory from './stacksInTabsFactory'
 import PostEditor from '../PostEditor'
 import DetailsEditor from '../PostEditor/DetailsEditor'
 import PostDetails from '../PostDetails'
 import MemberProfile from '../MemberProfile'
 import NotificationsList from '../NotificationsList'
-import CommentEditor from '../PostDetails/CommentEditor'
 import InvitePeople from '../InvitePeople'
 import tabStyles from '../Tabs/Tabs.styles'
 import NewMessage from '../NewMessage'
+import SessionCheck from '../SessionCheck'
 import Thread from '../Thread'
 import ThreadList from '../ThreadList'
 import ThreadParticipants from '../ThreadParticipants'
@@ -63,6 +64,8 @@ const screensInTabs = {
   MemberDetails: {screen: MemberDetails},
   MemberSkillEditor: {screen: MemberSkillEditor},
   CommentEditor: {screen: CommentEditor},
+  NewMessage: {screen: NewMessage},
+  CommunitySettings: {screen: CommunitySettings},
   InvitePeople: {screen: InvitePeople},
   NewMessage: {screen: NewMessage}
 }

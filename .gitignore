@@ -57,10 +57,16 @@ android/app/libs
 coverage/
 
 # Google login
+#
 google-services.json
 GoogleService-Info.plist
 
+# Personal
+#
+androidemulator
+
 # Ruby Gems / Bundle (Fastlane related)
+#
 .bundle/*
 vendor/*
 *.code-workspace
