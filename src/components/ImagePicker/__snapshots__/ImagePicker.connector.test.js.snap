@@ -2,53 +2,7 @@
 
 exports[`works as expected 1`] = `
 Object {
-  "meta": Object {
-    "id": "11",
-    "type": "userAvatar",
-  },
-  "payload": Request {
-    "_formData": mockFormData {
-      "append": [MockFunction] {
-        "calls": Array [
-          Array [
-            "type",
-            "userAvatar",
-          ],
-          Array [
-            "id",
-            "11",
-          ],
-          Array [
-            "file",
-            Object {
-              "name": "foo.jpg",
-              "uri": "file:///tmp/foo.jpg",
-            },
-          ],
-        ],
-      },
-    },
-    "_promise": Promise {
-      "_40": 0,
-      "_55": null,
-      "_65": 0,
-      "_72": null,
-    },
-    "_xhr": mockXMLHttpRequest {
-      "onerror": [Function],
-      "onload": [Function],
-      "open": [MockFunction] {
-        "calls": Array [
-          Array [
-            "POST",
-            "https://api.hylo.com/noo/upload",
-          ],
-        ],
-      },
-      "responseText": "{\\"url\\": \\"https://images.hylo.com/bar.jpg\\"}",
-      "status": 200,
-    },
-  },
-  "type": "UPLOAD",
+  "id": "11",
+  "type": "userAvatar",
 }
 `;

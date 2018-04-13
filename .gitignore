@@ -63,3 +63,4 @@ GoogleService-Info.plist
 # Ruby Gems / Bundle (Fastlane related)
 .bundle/*
 vendor/*
+*.code-workspace
