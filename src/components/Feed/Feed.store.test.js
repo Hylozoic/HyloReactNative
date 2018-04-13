@@ -22,7 +22,7 @@ describe('getCommunitySearchObject', () => {
   it('it returns the correct value with a communitySlug', () => {
     const communityId = '1'
     const communitySlug = 'my-community'
-    const expected = {id: communityId}
+    const expected = {slug: communitySlug}
     expect(getCommunitySearchObject(communityId, communitySlug)).toEqual(expected)
   })
 
@@ -38,7 +38,7 @@ describe('getNetworkSearchObject', () => {
   it('returns the correct value with a networkId', () => {
     const networkId = '1'
     const networkSlug = 'my-network'
-    const expected = {id: networkId}
+    const expected = {slug: networkSlug}
     expect(getNetworkSearchObject(networkId, networkSlug)).toEqual(expected)
   })
 
