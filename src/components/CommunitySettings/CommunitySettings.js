@@ -14,7 +14,7 @@ export default class CommunitySettings extends React.Component {
     const saveChanges = navigation.getParam('saveChanges', () => {})
 
     return header(navigation, {
-      headerBackButton: () => navigation.navigate('Members'),
+      headerBackButton: () => navigation.goBack(),
       title: 'Community',
       options: {
         headerBackTitle: null,
@@ -99,7 +99,7 @@ export default class CommunitySettings extends React.Component {
 
     const { name, description, location } = this.state.edits
 
-    return <ScrollView contentContainerStyle={styles.container}>
+    return <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
       <TextInput
         style={styles.nameInput}
         onChangeText={this.updateField('name')}
@@ -125,13 +125,6 @@ export default class CommunitySettings extends React.Component {
         value={location}
         onChangeText={this.updateField('location')}
         underlineColorAndroid='transparent' />
-      <Text style={styles.deleteLabel}>DELETE</Text>
-      <View style={styles.archiveRow}>
-        <Text>Archive Community</Text>
-        <TouchableOpacity onPress={this.archiveCommunity}>
-          <Text>Archive</Text>
-        </TouchableOpacity>
-      </View>
     </ScrollView>
   }
 }

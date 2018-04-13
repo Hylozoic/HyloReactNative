@@ -1,13 +1,25 @@
-import { capeCod, caribbeanGreen, alabaster, rhino, catskillWhite } from '../../style/colors'
+import { capeCod, white, caribbeanGreen, alabaster, rhino30, rhino } from '../../style/colors'
 
 const screenMargin = 16
 const avatarSize = 112
 
 export default {
   container: {
-    backgroundColor: 'white',
+    backgroundColor: white
+  },
+  contentContainer: {
+    backgroundColor: white,
     paddingTop: 20,
     paddingHorizontal: screenMargin
+  },
+  label: {
+    marginLeft: 2,
+    fontSize: 12,
+    color: rhino30,
+    fontFamily: 'Circular-Bold'
+  },
+  input: {
+    textAlignVertical: 'top'
   },
   bannerImage: {
     height: 140,
@@ -46,7 +58,7 @@ export default {
     top: 83
   },
   editButton: {
-    backgroundColor: 'white',
+    backgroundColor: white,
     opacity: 0.9,
     paddingHorizontal: 10,
     paddingVertical: 5,
@@ -87,9 +99,10 @@ export default {
   nameInput: {
     color: rhino,
     fontFamily: 'Circular-Bold',
-    fontSize: 22,
-    backgroundColor: catskillWhite,
-    height: 36,
+    fontSize: 28,
+    backgroundColor: '#FAFBFC',
+    borderRadius: 5,
+    height: 56,
     marginBottom: 15,
     textAlign: 'center'
   }
