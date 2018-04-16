@@ -4,7 +4,6 @@ export const UPDATE_COMMUNITY_SETTINGS = `${MODULE_NAME}/UPDATE_COMMUNITY_SETTIN
 export const UPDATE_COMMUNITY_SETTINGS_PENDING = UPDATE_COMMUNITY_SETTINGS + '_PENDING'
 
 export function fetchCommunitySettings (id) {
-  console.log('fetchCommunitySettings communityId', id)
   return {
     type: FETCH_COMMUNITY_SETTINGS,
     graphql: {
