@@ -174,7 +174,7 @@ export class CommunityBanner extends React.Component {
     return <View>
       <ImagePicker
         title='Change Banner'
-        type='userBanner'
+        type='communityBanner'
         style={styles.bannerImagePicker}
         id={id}
         onChoice={choice => this.onChoice(choice, 'banner')}
@@ -186,7 +186,7 @@ export class CommunityBanner extends React.Component {
         <ImagePicker
           style={styles.avatarWrapperWrapper}
           title='Change Avatar'
-          type='userAvatar'
+          type='communityAvatar'
           id={id}
           onChoice={choice => this.onChoice(choice, 'avatar')}
           onPendingChange={pending => this.setState({avatarPickerPending: pending})}>
