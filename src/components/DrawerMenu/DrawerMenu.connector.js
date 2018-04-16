@@ -9,6 +9,7 @@ import { logout } from '../Login/actions'
 import selectCommunity from '../../store/actions/selectCommunity'
 import selectNetwork from '../../store/actions/selectNetwork'
 import { ALL_COMMUNITIES_ID } from '../../store/models/Community'
+import getCommunity from '../../store/selectors/getCommunity'
 
 export function partitionCommunities (memberships) {
   const allCommunities = memberships.map(m => ({
@@ -64,6 +65,8 @@ export function partitionCommunities (memberships) {
 export function mapStateToProps (state, props) {
   const currentUser = getMe(state)
   const currentCommunityId = getCurrentCommunityId(state, props)
+  const currentCommunity = currentCommunityId && getCommunity(state, {id: currentCommunityId})
+  const canModerateCurrentCommunity = currentUser && currentUser.canModerate(currentCommunity)
   const currentNetworkId = getCurrentNetworkId(state, props)
   const { networks, communities } = partitionCommunities(getMemberships(state))
 
@@ -73,7 +76,9 @@ export function mapStateToProps (state, props) {
     avatarUrl: get('avatarUrl', currentUser),
     networks,
     communities,
+    canModerateCurrentCommunity,
     currentCommunityId,
+    currentCommunity,
     currentNetworkId
   }
 }
@@ -85,8 +90,13 @@ export const mapDispatchToProps = {
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
-  const { currentUser, name } = stateProps
+  const { currentUser, name, canModerateCurrentCommunity } = stateProps
   const { navigation } = ownProps
+
+  const goToCommunitySettings = () => {
+    navigation.navigate('CommunitySettings')
+  }
+
   return {
     ...stateProps,
     ...dispatchProps,
@@ -114,7 +124,8 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     },
     goToCreateCommunityName: () => {
       navigation.navigate('CreateCommunityName')
-    }
+    },
+    goToCommunitySettings: canModerateCurrentCommunity && goToCommunitySettings
   }
 }
 

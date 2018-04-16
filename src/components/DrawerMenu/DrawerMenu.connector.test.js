@@ -23,36 +23,71 @@ describe('mapDispatchToProps matches the last snapshot', () =>
   expect(mapDispatchToProps).toMatchSnapshot()
 )
 
-describe('mergeProps matches the last snapshot and bound functions work as expected', () => {
-  const stateProps = {
-    currentUser: {id: 'anyid'},
-    name: 'Roy Rogers'
-  }
-  const dispatchProps = {
-    selectCommunity: jest.fn(x => x),
-    selectNetwork: jest.fn(x => x)
-  }
-  const ownProps = {
-    navigation: {
-      navigate: jest.fn(x => x)
+describe('mergeProps', () => {
+  let stateProps, dispatchProps, ownProps, props
+  beforeEach(() => {
+    stateProps = {
+      currentUser: {id: 'anyid'},
+      canModerateCurrentCommunity: true,
+      name: 'Roy Rogers'
     }
-  }
-  const props = mergeProps(stateProps, dispatchProps, ownProps)
-  expect(props).toMatchSnapshot()
-  const community = {id: 'testcommunity'}
-  props.goToCommunity(community)
-  expect(dispatchProps.selectCommunity).toHaveBeenCalled()
-  expect(ownProps.navigation.navigate).toHaveBeenCalled()
-  const network = {id: 'testnetwork'}
-  props.goToNetwork(network)
-  expect(dispatchProps.selectNetwork).toHaveBeenCalled()
-  expect(ownProps.navigation.navigate).toHaveBeenCalled()
-  props.showSettings()
-  expect(ownProps.navigation.navigate).toHaveBeenCalled()
-  props.goToMyProfile()
-  expect(ownProps.navigation.navigate).toHaveBeenCalled()
-  props.goToCreateCommunityName()
-  expect(ownProps.navigation.navigate).toHaveBeenCalled()
+    dispatchProps = {
+      selectCommunity: jest.fn(x => x),
+      selectNetwork: jest.fn(x => x)
+    }
+    ownProps = {
+      navigation: {
+        navigate: jest.fn(x => x)
+      }
+    }
+    props = mergeProps(stateProps, dispatchProps, ownProps)
+  })
+
+  it('matches snapshot', () => {
+    expect(props).toMatchSnapshot()
+    expect(props.goToCommunitySettings).toBeDefined()
+
+    stateProps.canModerateCurrentCommunity = false
+    const propsNonModerator = mergeProps(stateProps, dispatchProps, ownProps)
+    expect(propsNonModerator).toMatchSnapshot()
+    expect(propsNonModerator.goToCommunitySettings).toBeFalsy()
+  })
+
+  describe('canModerate functions are bound', () => {
+    it('goToCommunity', () => {
+      const community = {id: 'testcommunity'}
+      props.goToCommunity(community)
+      expect(dispatchProps.selectCommunity).toHaveBeenCalled()
+      expect(ownProps.navigation.navigate).toHaveBeenCalledTimes(2)
+    })
+
+    it('goToNetwork', () => {
+      const network = {id: 'testnetwork'}
+      props.goToNetwork(network)
+      expect(dispatchProps.selectNetwork).toHaveBeenCalledTimes(1)
+      expect(ownProps.navigation.navigate).toHaveBeenCalledTimes(2)
+    })
+
+    it('should showSetting', () => {
+      props.showSettings()
+      expect(ownProps.navigation.navigate).toHaveBeenCalledTimes(1)
+    })
+
+    it('should goToMyProfile', () => {
+      props.goToMyProfile()
+      expect(ownProps.navigation.navigate).toHaveBeenCalledTimes(1)
+    })
+
+    it('goToCreateCommunityName', () => {
+      props.goToCreateCommunityName()
+      expect(ownProps.navigation.navigate).toHaveBeenCalledTimes(1)
+    })
+
+    it('goToCommunitySettings', () => {
+      props.goToCommunitySettings()
+      expect(ownProps.navigation.navigate).toHaveBeenCalledTimes(1)
+    })
+  })
 })
 
 describe('partitionCommunities', () => {
