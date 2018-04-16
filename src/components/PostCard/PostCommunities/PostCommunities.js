@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 import { get, isEmpty, chunk } from 'lodash/fp'
 import Icon from '../../Icon'
 import { Text, View, TouchableOpacity } from 'react-native'
-import { DEFAULT_AVATAR } from 'store/models/Community'
-// import {
-//   caribbeanGreen, rhino30, rhino80, slateGrey80
-// } from '../../../style/colors'
+import { DEFAULT_AVATAR } from '../../../store/models/Community'
+import {
+  capeCod10
+} from '../../../style/colors'
 
 export default class PostCommunities extends Component {
   static defaultState = {
@@ -42,7 +42,7 @@ export default class PostCommunities extends Component {
         </View>
         {chunk(2, communities).map(pair => <CommunityRow communities={pair} key={pair[0].id} />)}
       </View>
-      : <View>
+      : <View style={styles.row}>
         <Text style={styles.label}>Posted In: </Text>
         <CommunityList communities={communities} expandFunc={this.toggleExpanded} />
         <TouchableOpacity onPress={this.toggleExpanded}>
@@ -69,22 +69,21 @@ export function CommunityRow ({communities}) {
 }
 
 const styles = {
-  // blah: {
-  //   height: 40,
-  //   flexDirection: 'row',
-  //   alignItems: 'center',
-  //   paddingLeft: 12
-  // },
+  communities: {
+    borderTopWidth: 1,
+    borderBottomWidth: 1,
+    borderColor: capeCod10
+  },
+  row: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center'
+  }
   // blah: {
   //   color: rhino80,
   //   fontSize: 18,
   //   fontFamily: 'Circular-Book',
   //   marginRight: 8
-  // },
-  // blah: {
-  //   flex: 1,
-  //   flexDirection: 'row',
-  //   alignItems: 'center'
   // },
   // blah: {
   //   paddingLeft: 6,
