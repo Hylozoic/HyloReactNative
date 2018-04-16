@@ -42,7 +42,7 @@ export default class CommunitySettings extends React.Component {
   }
 
   componentDidUpdate (prevProps) {
-    if (prevProps.id !== this.props.id) {
+    if (prevProps.communityId !== this.props.communityId) {
       this.props.fetchCommunitySettings()
     }
 
