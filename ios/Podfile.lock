@@ -31,22 +31,12 @@ PODS:
   - GTMSessionFetcher/Core (1.1.10)
   - GTMSessionFetcher/Full (1.1.10):
     - GTMSessionFetcher/Core (= 1.1.10)
-  - React (0.11.0):
-    - React/Core (= 0.11.0)
-  - React/Core (0.11.0)
-  - RNDeviceInfo (0.21.5):
-    - React
 
 DEPENDENCIES:
   - FBSDKCoreKit
   - FBSDKLoginKit
   - FBSDKShareKit
   - GoogleSignIn
-  - RNDeviceInfo (from `../node_modules/react-native-device-info`)
-
-EXTERNAL SOURCES:
-  RNDeviceInfo:
-    :path: ../node_modules/react-native-device-info
 
 SPEC CHECKSUMS:
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
@@ -57,9 +47,7 @@ SPEC CHECKSUMS:
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   GTMOAuth2: 7fc9c10f5c745f4d9850419ea88889fe3baa6b7d
   GTMSessionFetcher: 30d874b96d0d76028f61fbd122801e3f030d47db
-  React: ab1a2e21deb34965c38328d5ec40cc7d12c6050a
-  RNDeviceInfo: 568c5641057313b4912d08a7742ff0b2f753ed5c
 
-PODFILE CHECKSUM: 57e0b58ac4548ae53720cd91858860b5544d2ebb
+PODFILE CHECKSUM: a03f0dd5be568b597eb0cb588ad90a3a105e3312
 
 COCOAPODS: 1.4.0
