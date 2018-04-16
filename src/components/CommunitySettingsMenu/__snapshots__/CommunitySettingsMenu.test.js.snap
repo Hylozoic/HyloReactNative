@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`CommunitySettings has navigation options 1`] = `
+exports[`CommunitySettingsMenu has navigation options 1`] = `
 Object {
   "headerBackTitle": null,
   "headerStyle": Object {
@@ -17,7 +17,7 @@ Object {
 }
 `;
 
-exports[`CommunitySettings matches the last snapshot 1`] = `
+exports[`CommunitySettingsMenu matches the last snapshot 1`] = `
 <FlatList
   ListHeaderComponent={
     <View>
@@ -34,11 +34,11 @@ exports[`CommunitySettings matches the last snapshot 1`] = `
     Array [
       Object {
         "name": "Edit Community Info",
-        "navigate": "UserSettings",
+        "navigate": "CommunitySettings",
       },
       Object {
         "name": "Community Members",
-        "navigate": "UserSettings",
+        "navigate": "ModeratorSettings",
       },
       Object {
         "name": "Invite Members",

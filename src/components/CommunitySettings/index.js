@@ -1,4 +1,5 @@
-import component from './CommunitySettings'
-import connector from './CommunitySettings.connector'
+import { withNavigationFocus } from 'react-navigation-is-focused-hoc'
 
-export default connector(component)
+import component from './CommunitySettings.js'
+import connector from './CommunitySettings.connector.js'
+export default withNavigationFocus(connector(component))

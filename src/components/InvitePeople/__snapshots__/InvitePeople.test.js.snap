@@ -44,6 +44,17 @@ exports[`InvitePeople handles tab-view functions 3`] = `
 exports[`InvitePeople has navigation options 1`] = `
 Object {
   "headerBackTitle": null,
+  "headerLeft": <HeaderBackButton
+    buttonImage={
+      Object {
+        "testUri": "../../react-navigation/src/views/assets/back-icon.png",
+      }
+    }
+    onPress={[Function]}
+    pressColorAndroid="rgba(0, 0, 0, .32)"
+    tintColor="#808c9b"
+    truncatedTitle="Back"
+  />,
   "headerStyle": Object {
     "backgroundColor": "white",
     "paddingHorizontal": 10,
