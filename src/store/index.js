@@ -6,11 +6,7 @@ import middleware from './middleware'
 
 export default function getStore () {
   const emptyState = getEmptyState()
-  const composeEnhancers = composeWithDevTools({
-    realtime: true,
-    suppressConnectErrors: false
-  })
-  const composedMiddleware = composeEnhancers(applyMiddleware(...middleware))
+  const composedMiddleware = composeWithDevTools(applyMiddleware(...middleware))
   const store = createStore(rootReducer, emptyState, composedMiddleware)
 
   // Enable Webpack hot module replacement for reducers
