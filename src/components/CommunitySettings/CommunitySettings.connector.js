@@ -6,7 +6,7 @@ import { fetchCommunitySettings, updateCommunitySettings, UPDATE_COMMUNITY_SETTI
 export function mapStateToProps (state, props) {
   const communityId = getCurrentCommunityId(state, props)
   const community = getCurrentCommunity(state, props)
-  const pendingSave = state.pending[UPDATE_COMMUNITY_SETTINGS]
+  const pendingSave = !!state.pending[UPDATE_COMMUNITY_SETTINGS]
   return {
     communityId,
     community,
