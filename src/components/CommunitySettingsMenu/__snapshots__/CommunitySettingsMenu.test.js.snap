@@ -34,7 +34,7 @@ exports[`CommunitySettingsMenu matches the last snapshot 1`] = `
     Array [
       Object {
         "name": "Edit Community Info",
-        "navigate": "UserSettings",
+        "navigate": "CommunitySettings",
       },
       Object {
         "name": "Community Members",

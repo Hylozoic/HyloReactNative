@@ -13,13 +13,13 @@ export default {
     paddingHorizontal: screenMargin
   },
   label: {
-    marginLeft: 2,
     fontSize: 12,
     color: rhino30,
     fontFamily: 'Circular-Bold'
   },
   input: {
-    textAlignVertical: 'top'
+    textAlignVertical: 'top',
+    paddingLeft: 0
   },
   bannerImage: {
     height: 140,

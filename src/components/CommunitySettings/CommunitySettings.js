@@ -15,7 +15,7 @@ export default class CommunitySettings extends React.Component {
 
     return header(navigation, {
       headerBackButton: () => navigation.goBack(),
-      title: 'Community',
+      title: 'Community Information',
       options: {
         headerBackTitle: null,
         headerRight: <HeaderButton
@@ -72,18 +72,14 @@ export default class CommunitySettings extends React.Component {
         [key]: value
       }
     })
-    // console.log('set valid to true')
-    // this.props.navigation.setParams({
-    //   valid: true
-    // })
   }
 
   archiveCommunity = () => {
-    console.log('archive community', this.props.community)
+    // TODO
   }
 
   saveChanges = () => {
-    console.log('save community', this.state.edits)
+    this.props.updateCommunitySettings(this.state.edits)
     this.props.navigation.setParams({
       valid: true
     })
