@@ -10,8 +10,8 @@ import { some } from 'lodash/fp'
 
 export default class CommunitySettings extends React.Component {
   static navigationOptions = ({ navigation }) => {
-    const valid = navigation.getParam('valid', true)
     const saveChanges = navigation.getParam('saveChanges', () => {})
+    const pendingSave = navigation.getParam('pendingSave', false)
 
     return header(navigation, {
       headerBackButton: () => navigation.goBack(),
@@ -19,23 +19,26 @@ export default class CommunitySettings extends React.Component {
       options: {
         headerBackTitle: null,
         headerRight: <HeaderButton
-          disabled={!valid}
+          disabled={!!pendingSave}
           onPress={saveChanges}
-          text='Save' />
+          text={pendingSave ? 'Saving' : 'Save'} />
       }
     })
   }
 
-  state = {
-    edits: {}
+  constructor (props) {
+    super(props)
+    this.state = {
+      edits: {}
+    }
+    this.props.navigation.setParams({
+      saveChanges: this.saveChanges
+    })
   }
 
   componentDidMount () {
     this.props.fetchCommunitySettings()
     this.syncLocalFields()
-    this.props.navigation.setParams({
-      saveChanges: this.saveChanges
-    })
   }
 
   componentDidUpdate (prevProps) {
@@ -47,6 +50,12 @@ export default class CommunitySettings extends React.Component {
 
     if (some(hasChanged, ['name', 'description', 'location'])) {
       this.syncLocalFields()
+    }
+
+    if (prevProps.pendingSave !== this.props.pendingSave) {
+      this.props.navigation.setParams({
+        pendingSave: this.props.pendingSave
+      })
     }
   }
 
@@ -80,9 +89,6 @@ export default class CommunitySettings extends React.Component {
 
   saveChanges = () => {
     this.props.updateCommunitySettings(this.state.edits)
-    this.props.navigation.setParams({
-      valid: true
-    })
   }
 
   render () {

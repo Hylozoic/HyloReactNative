@@ -1,14 +1,16 @@
 import { connect } from 'react-redux'
 import getCurrentCommunityId from '../../store/selectors/getCurrentCommunityId'
 import getCurrentCommunity from '../../store/selectors/getCurrentCommunity'
-import { fetchCommunitySettings, updateCommunitySettings } from './CommunitySettings.store'
+import { fetchCommunitySettings, updateCommunitySettings, UPDATE_COMMUNITY_SETTINGS } from './CommunitySettings.store'
 
 export function mapStateToProps (state, props) {
   const communityId = getCurrentCommunityId(state, props)
   const community = getCurrentCommunity(state, props)
+  const pendingSave = state.pending[UPDATE_COMMUNITY_SETTINGS]
   return {
     communityId,
-    community
+    community,
+    pendingSave
   }
 }
 
