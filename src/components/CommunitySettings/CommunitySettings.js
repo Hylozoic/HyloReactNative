@@ -144,9 +144,6 @@ export class CommunityBanner extends React.Component {
       [localKey]: local
     })
 
-    console.log('onChoice', {[remoteKey]: remote})
-    console.log('updateCommunitySettings')
-
     this.props.updateCommunitySettings({[remoteKey]: remote})
   }
 
