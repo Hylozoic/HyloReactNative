@@ -48,7 +48,7 @@ export default class DrawerMenu extends Component {
       <View style={styles.communityHeader}>
         <Image source={{uri: currentCommunity.avatarUrl}} style={styles.communityHeaderAvatar} />
         <Text style={styles.communityHeaderText}>{currentCommunity.name}</Text>
-        {canModerateCurrentCommunity && <TouchableOpacity onPress={goToCommunitySettingsMenu} style={styles.communityHeaderSettingsButton}>
+        {canModerateCurrentCommunity && <TouchableOpacity onPress={goToCommunitySettingsMenu} hitSlop={{top: 5, bottom: 5, left: 10, right: 10}} style={styles.communityHeaderSettingsButton}>
           <Icon style={styles.communityHeaderSettingsButtonIcon} name='Settings' />
           <Text style={styles.communityHeaderSettingsButtonText}>Settings</Text>
         </TouchableOpacity>}

@@ -126,6 +126,14 @@ exports[`DrawerMenu matches the last snapshot 1`] = `
     </Text>
     <TouchableOpacity
       activeOpacity={0.2}
+      hitSlop={
+        Object {
+          "bottom": 5,
+          "left": 10,
+          "right": 10,
+          "top": 5,
+        }
+      }
       onPress={[MockFunction]}
     >
       <Icon
