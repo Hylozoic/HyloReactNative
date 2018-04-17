@@ -50,9 +50,9 @@ export const routeMatchers = {
   allCommunitiesPost: route('/all/p/:id'),
   thread: route('/t/:id'),
   allCommunities: route('/all'),
-  membersIndex: route('/c/hylo/members'),
-  topicsIndex: route('/c/hylo-community-organizing/topics'),
-  showTopic: route('/c/hylo-community-organizing/:topicName'),
+  membersIndex: route('/c/:communityName/members'),
+  topicsIndex: route('/c/:communityName/topics'),
+  showTopic: route('/c/:communityName/:topicName'),
   showMember: route('/m/:memberId'),
   showCommunity: route('/c/:communitySlug'),
   showNetwork: route('/n/:networkSlug')
