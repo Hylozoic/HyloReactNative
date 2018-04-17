@@ -110,6 +110,7 @@ exports[`handles a show topic link 1`] = `
 Object {
   "action": Object {
     "params": Object {
+      "communityName": "hylo-community-organizing",
       "topicName": "topicName",
     },
     "routeName": "TopicFeed",
