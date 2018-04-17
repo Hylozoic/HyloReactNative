@@ -4,6 +4,14 @@ exports[`HeaderButton matches last Close icon snapshot 1`] = `
 <TouchableOpacity
   activeOpacity={0.2}
   disabled={false}
+  hitSlop={
+    Object {
+      "bottom": 7,
+      "left": 7,
+      "right": 7,
+      "top": 7,
+    }
+  }
   onPress={[Function]}
 >
   <Icon
@@ -16,6 +24,14 @@ exports[`HeaderButton matches last snapshot 1`] = `
 <TouchableOpacity
   activeOpacity={0.2}
   disabled={false}
+  hitSlop={
+    Object {
+      "bottom": 7,
+      "left": 7,
+      "right": 7,
+      "top": 7,
+    }
+  }
   onPress={[Function]}
 >
   <Text

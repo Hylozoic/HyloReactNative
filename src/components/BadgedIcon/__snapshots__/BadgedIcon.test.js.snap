@@ -1,7 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`BadgedIcon matches the last snapshot with the badge 1`] = `
-<View>
+<TouchableOpacity
+  activeOpacity={0.2}
+  onPress={undefined}
+>
   <Icon
     name="Notifications"
     onPress={[Function]}
@@ -10,14 +13,17 @@ exports[`BadgedIcon matches the last snapshot with the badge 1`] = `
   <View>
     <View />
   </View>
-</View>
+</TouchableOpacity>
 `;
 
 exports[`BadgedIcon matches the last snapshot without the badge 1`] = `
-<View>
+<TouchableOpacity
+  activeOpacity={0.2}
+  onPress={undefined}
+>
   <Icon
     name="Notifications"
     onPress={[Function]}
   />
-</View>
+</TouchableOpacity>
 `;
