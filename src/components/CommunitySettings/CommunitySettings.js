@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, View, Image, TouchableOpacity, TextInput, ScrollView } from 'react-native'
+import { Alert, Text, View, Image, TouchableOpacity, TextInput, ScrollView } from 'react-native'
 import Loading from '../Loading'
 import styles from './CommunitySettings.styles'
 import ImagePicker from '../ImagePicker'
@@ -12,9 +12,9 @@ export default class CommunitySettings extends React.Component {
   static navigationOptions = ({ navigation }) => {
     const saveChanges = navigation.getParam('saveChanges', () => {})
     const pendingSave = navigation.getParam('pendingSave', false)
-
+    const confirmLeave = navigation.getParam('confirmLeave', () => {})
     return header(navigation, {
-      headerBackButton: () => navigation.goBack(),
+      headerBackButton: () => confirmLeave(navigation.goBack),
       title: 'Community Information',
       options: {
         headerBackTitle: null,
@@ -29,11 +29,27 @@ export default class CommunitySettings extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      edits: {}
+      edits: {},
+      changed: false
     }
     this.props.navigation.setParams({
+      confirmLeave: this.confirmLeave,
       saveChanges: this.saveChanges
     })
+  }
+
+  confirmLeave = (onLeave) => {
+    if (this.state.changed) {
+      Alert.alert(
+        'You have unsaved changes',
+        'Are you sure you want to discard your changes?',
+        [
+          {text: 'Discard', onPress: onLeave},
+          {text: 'Continue Editing', style: 'cancel'}
+        ])
+    } else {
+      onLeave()
+    }
   }
 
   componentDidMount () {
@@ -76,6 +92,7 @@ export default class CommunitySettings extends React.Component {
 
   updateField = key => value => {
     this.setState({
+      changed: true,
       edits: {
         ...this.state.edits,
         [key]: value
@@ -89,6 +106,9 @@ export default class CommunitySettings extends React.Component {
 
   saveChanges = () => {
     this.props.updateCommunitySettings(this.state.edits)
+    this.setState({
+      changed: false
+    })
   }
 
   render () {
