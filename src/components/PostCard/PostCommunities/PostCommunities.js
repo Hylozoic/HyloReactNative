@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { get, isEmpty, chunk } from 'lodash/fp'
 import Icon from '../../Icon'
-import { Text, View, TouchableOpacity } from 'react-native'
+import { Text, View, TouchableOpacity, Image } from 'react-native'
 import { DEFAULT_AVATAR } from '../../../store/models/Community'
 import {
-  capeCod10
+  capeCod10, rhino30, caribbeanGreen
 } from '../../../style/colors'
 
 export default class PostCommunities extends Component {
@@ -24,7 +24,7 @@ export default class PostCommunities extends Component {
   }
 
   render () {
-    const { communities, slug } = this.props
+    const { communities, slug, goToCommunity } = this.props
 
     // don't show if there are no communities or this isn't cross posted
 
@@ -34,19 +34,19 @@ export default class PostCommunities extends Component {
 
     const content = expanded
       ? <View style={styles.expandedSection}>
-        <View styleName='row'>
-          <Text style={styles.label}>Posted In: </Text>
-          <TouchableOpacity onPress={this.toggleExpanded}>
-            <Icon name='ArrowDown' />
+        <View style={styles.row}>
+          <Text style={styles.reminderText}>Posted In: </Text>
+          <TouchableOpacity onPress={this.toggleExpanded} style={styles.arrowButton}>
+            <Icon name='ArrowDown' style={styles.arrowIcon} />
           </TouchableOpacity>
         </View>
-        {chunk(2, communities).map(pair => <CommunityRow communities={pair} key={pair[0].id} />)}
+        {chunk(2, communities).map(pair => <CommunityRow communities={pair} key={pair[0].id} goToCommunity={goToCommunity} />)}
       </View>
       : <View style={styles.row}>
-        <Text style={styles.label}>Posted In: </Text>
-        <CommunityList communities={communities} expandFunc={this.toggleExpanded} />
-        <TouchableOpacity onPress={this.toggleExpanded}>
-          <Icon name='ArrowDown' />
+        <Text style={styles.reminderText}>Posted In: </Text>
+        <CommunityList communities={communities} expandFunc={this.toggleExpanded} goToCommunity={goToCommunity} />
+        <TouchableOpacity onPress={this.toggleExpanded} style={styles.arrowButton}>
+          <Icon name='ArrowDown' style={styles.arrowIcon} />
         </TouchableOpacity>
       </View>
 
@@ -56,28 +56,78 @@ export default class PostCommunities extends Component {
   }
 }
 
-export function CommunityList ({communities, expandFunc}) {
-  return <View>
-    <Text>CommunityList</Text>
+export function CommunityList ({communities, goToCommunity, expandFunc}) {
+  const moreCommunities = communities.length > 1
+  const othersText = n => n === 1 ? '1 other' : `${n} others`
+  return <View style={[styles.communityList, styles.row]}>
+    <TouchableOpacity onPress={() => goToCommunity(communities[0].id)} style={{flex: 1}}><Text style={styles.linkText} numberOfLines={1}>{communities[0].name}</Text></TouchableOpacity>
+    {moreCommunities && <Text style={[styles.reminderText]}> and </Text>}
+    {moreCommunities && <TouchableOpacity onPress={expandFunc}><Text style={styles.linkText}>{othersText(communities.length - 1)}</Text></TouchableOpacity>}
   </View>
 }
 
-export function CommunityRow ({communities}) {
-  return <View>
-    <Text>CommunityList</Text>
+export function CommunityRow ({ communities, goToCommunity }) {
+  return <View style={[styles.communityRow, styles.row]}>
+    {communities.map(community => <CommunityCell key={community.id} community={community} goToCommunity={goToCommunity} />)}
   </View>
+}
+
+export function CommunityCell ({ community, goToCommunity }) {
+  const { name, avatarUrl } = community
+  const imageSource = {uri: avatarUrl || DEFAULT_AVATAR}
+
+  return <TouchableOpacity style={[styles.communityCell, styles.row]} onPress={() => goToCommunity(community.id)}>
+    <Image source={imageSource} style={styles.communityAvatar} />}
+    <Text style={[styles.linkText, styles.communityCell]} numberOfLines={1}>{name}</Text>
+  </TouchableOpacity>
 }
 
 const styles = {
   communities: {
     borderTopWidth: 1,
     borderBottomWidth: 1,
-    borderColor: capeCod10
+    borderColor: capeCod10,
+    paddingHorizontal: 12
   },
   row: {
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center'
+  },
+  communityList: {
+    height: 40
+  },
+  arrowButton: {
+    marginLeft: 'auto'
+  },
+  arrowIcon: {
+    color: rhino30,
+    fontSize: 18
+  },
+  reminderText: {
+    color: rhino30,
+    fontSize: 13,
+    fontFamily: 'Circular-Book'
+  },
+  linkText: {
+    color: caribbeanGreen,
+    fontSize: 13,
+    fontFamily: 'Circular-Book'
+  },
+  expandedSection: {
+    paddingTop: 11
+  },
+  communityRow: {
+    paddingVertical: 8
+  },
+  communityCell: {
+    paddingRight: 15
+  },
+  communityAvatar: {
+    height: 20,
+    width: 20,
+    borderRadius: 4,
+    marginRight: 9
   }
   // blah: {
   //   color: rhino80,

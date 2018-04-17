@@ -81,7 +81,8 @@ export default class PostCard extends React.Component {
         shouldTruncate />
       <PostCommunities
         communities={post.communities}
-        slug={slug} />
+        slug={slug}
+        goToCommunity={goToCommunity} />
       <PostFooter id={post.id}
         currentUser={currentUser}
         commenters={post.commenters}
