@@ -25,4 +25,6 @@ global.FormData = jest.fn(() => {
   return []
 })
 
+jest.mock('react-native-device-info')
+
 global.XMLHttpRequest = jest.fn()

@@ -64,3 +64,4 @@ GoogleService-Info.plist
 .bundle/*
 vendor/*
 *.code-workspace
+.vscode

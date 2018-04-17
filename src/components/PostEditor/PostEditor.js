@@ -4,11 +4,12 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  View
+  View,
+  Alert
 } from 'react-native'
 import { decode } from 'ent'
 import { validateTopicName } from 'hylo-utils/validators'
-import { get, uniq, uniqBy } from 'lodash/fp'
+import { get, uniq, uniqBy, isEmpty } from 'lodash/fp'
 import PropTypes from 'prop-types'
 import striptags from 'striptags'
 
@@ -18,7 +19,8 @@ import KeyboardFriendlyView from '../KeyboardFriendlyView'
 import Loading from '../Loading'
 import Search from '../Editor/Search'
 import { SearchType } from '../Editor/Search/Search.store'
-import FileSelector from './FileSelector'
+import FileSelector, { showFilePicker } from './FileSelector'
+import { showImagePicker } from '../ImagePicker'
 import ImageSelector from './ImageSelector'
 import { keyboardAvoidingViewProps as kavProps } from 'util/viewHelpers'
 
@@ -71,10 +73,10 @@ export default class PostEditor extends React.Component {
     navigation.setParams({isSaving: true})
 
     return save(postData)
-    .catch(e => {
-      this.setState({isSaving: false})
-      navigation.setParams({isSaving: false})
-    })
+      .catch(e => {
+        this.setState({isSaving: false})
+        navigation.setParams({isSaving: false})
+      })
   }
 
   componentDidMount () {
@@ -115,6 +117,8 @@ export default class PostEditor extends React.Component {
       fileUrls: this.state.fileUrls.filter(u => u !== url)
     })
   }
+
+  showAlert = (msg) => Alert.alert(msg)
 
   cancelTopicPicker = () => {
     this.setState({ showPicker: false })
@@ -175,9 +179,34 @@ export default class PostEditor extends React.Component {
     this.props.navigation.setParams({ showPicker: true })
   }
 
+  _showFilePicker = () => {
+    this.setState({filePickerPending: true})
+    showFilePicker({
+      upload: this.props.upload,
+      type: 'post',
+      id: this.props.postId,
+      onAdd: this.addFile,
+      onError: this.showAlert,
+      onComplete: () => this.setState({filePickerPending: false})
+    })
+  }
+
+  _showImagePicker = () => {
+    this.setState({imagePickerPending: true})
+    showImagePicker({
+      upload: this.props.upload,
+      type: 'post',
+      id: this.props.postId,
+      onChoice: this.addImage,
+      onError: this.showAlert,
+      onCancel: () => this.setState({imagePickerPending: false}),
+      onComplete: () => this.setState({imagePickerPending: false})
+    })
+  }
+
   render () {
     const { communityIds, details, editDetails, postId } = this.props
-    const { fileUrls, imageUrls, isSaving, showPicker, topics, title, type } = this.state
+    const { fileUrls, imageUrls, isSaving, showPicker, topics, title, type, filePickerPending, imagePickerPending } = this.state
 
     if (postId && !details) return <Loading />
 
@@ -236,24 +265,35 @@ export default class PostEditor extends React.Component {
             <Topics onPress={this.removeTopic} topics={topics} placeholder={topicsPlaceholder} />
           </TouchableOpacity>
 
-          <SectionLabel>Images</SectionLabel>
-          <ImageSelector
-            onAdd={this.addImage}
-            onRemove={this.removeImage}
-            imageUrls={imageUrls}
-            style={styles.imageSelector}
-            type='post'
-            id={postId} />
+          {!isEmpty(imageUrls) && <View>
+            <SectionLabel>Images</SectionLabel>
+            <ImageSelector
+              onAdd={this.addImage}
+              onRemove={this.removeImage}
+              imageUrls={imageUrls}
+              style={styles.imageSelector}
+              type='post'
+              id={postId} />
+          </View>}
 
-          <SectionLabel>Files</SectionLabel>
-          <FileSelector
-            onAdd={this.addFile}
-            onRemove={this.removeFile}
-            fileUrls={fileUrls}
-            type='post'
-            id={postId} />
+          {!isEmpty(fileUrls) && <View>
+            <SectionLabel>Files</SectionLabel>
+            <FileSelector
+              onRemove={this.removeFile}
+              fileUrls={fileUrls} />
+          </View>}
         </View>
       </ScrollView>
+      <View style={styles.bottomBar}>
+        <View style={styles.bottomBarIcons}>
+          <TouchableOpacity onPress={this._showFilePicker}><Icon name={filePickerPending ? 'Clock' : 'Paperclip'} style={styles.bottomBarIcon} /></TouchableOpacity>
+          <TouchableOpacity onPress={this._showImagePicker}><Icon name={imagePickerPending ? 'Clock' : 'AddImage'} style={styles.bottomBarIcon} /></TouchableOpacity>
+        </View>
+        {/* <TouchableOpacity> */}
+        {/* <Text>Public</Text> */}
+        {/* </TouchableOpacity> */}
+
+      </View>
     </KeyboardFriendlyView>
   }
 }
@@ -308,6 +348,6 @@ export function TypeButton ({ type, selected, onPress }) {
 
 function excerptDetails (details) {
   return decode(striptags(details, [], ' '))
-  .replace(/\s+/g, ' ')
-  .substring(0, 100)
+    .replace(/\s+/g, ' ')
+    .substring(0, 100)
 }

@@ -40,7 +40,7 @@ export default class ThreadList extends Component {
     if (!this.state.ready) this.setState({ ready: true })
   }
 
-  _keyExtractor = (item, index) => item.id
+  _keyExtractor = (item, index) => item.id.toString()
 
   render () {
     const {
