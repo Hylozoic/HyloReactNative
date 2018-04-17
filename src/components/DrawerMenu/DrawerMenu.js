@@ -17,7 +17,7 @@ export default class DrawerMenu extends Component {
       name, avatarUrl, goToCommunity, goToNetwork, goToMyProfile,
       showSettings, networks, communities, currentCommunity,
       currentNetworkId, currentCommunityId, canModerateCurrentCommunity,
-      goToCreateCommunityName, goToCommunitySettings
+      goToCreateCommunityName, goToCommunitySettingsMenu
     } = this.props
 
     const listSections = [
@@ -48,7 +48,7 @@ export default class DrawerMenu extends Component {
       <View style={styles.communityHeader}>
         <Image source={{uri: currentCommunity.avatarUrl}} style={styles.communityHeaderAvatar} />
         <Text style={styles.communityHeaderText}>{currentCommunity.name}</Text>
-        {canModerateCurrentCommunity && <TouchableOpacity onPress={goToCommunitySettings} style={styles.communityHeaderSettingsButton}>
+        {canModerateCurrentCommunity && <TouchableOpacity onPress={goToCommunitySettingsMenu} style={styles.communityHeaderSettingsButton}>
           <Icon style={styles.communityHeaderSettingsButtonIcon} name='Settings' />
           <Text style={styles.communityHeaderSettingsButtonText}>Settings</Text>
         </TouchableOpacity>}

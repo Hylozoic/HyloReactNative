@@ -9,7 +9,10 @@ import { get, isEmpty } from 'lodash/fp'
 import styles from './ModeratorSettings.styles'
 
 export default class ModeratorSettings extends Component {
-  static navigationOptions = ({navigation}) => header(navigation, {title: 'Community Moderators'})
+  static navigationOptions = ({navigation}) => header(navigation, {
+    headerBackButton: () => navigation.goBack(),
+    title: 'Community Moderators'
+  })
 
   state = {
     query: '',
@@ -32,14 +35,14 @@ export default class ModeratorSettings extends Component {
 
   removeModerator = (id) => {
     Alert.alert(
-    'Remove Moderator',
-    'Also remove from community as well?',
+      'Remove Moderator',
+      'Also remove from community as well?',
       [
         {text: 'Cancel', onPress: () => {}, style: 'cancel'},
         {text: 'No', onPress: () => this.props.removeModerator(id, false)},
         {text: 'Yes', onPress: () => this.props.removeModerator(id, true)}
       ],
-    {cancelable: false}
+      {cancelable: false}
     )
   }
 

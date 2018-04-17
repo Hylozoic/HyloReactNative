@@ -1,7 +1,25 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`mapStateToProps matches the latest snapshot 1`] = `
+exports[`CommunitySettings.connector mapStateToProps works 1`] = `
 Object {
-  "communityName": "bar",
+  "community": SessionBoundModel {
+    "_fields": Object {
+      "avatarUrl": "someAvatarUrl",
+      "bannerUrl": "someBannerUrl",
+      "description": "some community description",
+      "id": "99",
+      "members": undefined,
+      "moderators": undefined,
+      "name": "Some Community Name",
+      "posts": undefined,
+      "slug": "foo",
+    },
+    "avatarUrl": "someAvatarUrl",
+    "bannerUrl": "someBannerUrl",
+    "description": "some community description",
+    "slug": "foo",
+  },
+  "communityId": "99",
+  "pendingSave": false,
 }
 `;
