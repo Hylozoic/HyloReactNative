@@ -21,7 +21,7 @@ export default class PostImage extends PureComponent {
       name: 'Edit Community Info',
       navigate: 'CommunitySettings'
     }, {
-      name: 'Community Members',
+      name: 'Community Moderators',
       navigate: 'ModeratorSettings'
     }, {
       name: 'Invite Members',
