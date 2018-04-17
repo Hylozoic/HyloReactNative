@@ -37,7 +37,7 @@ export default class PostCommunities extends Component {
         <View style={styles.row}>
           <Text style={styles.reminderText}>Posted In: </Text>
           <TouchableOpacity onPress={this.toggleExpanded} style={styles.arrowButton}>
-            <Icon name='ArrowDown' style={styles.arrowIcon} />
+            <Icon name='ArrowUp' style={styles.arrowIcon} />
           </TouchableOpacity>
         </View>
         {chunk(2, communities).map(pair => <CommunityRow communities={pair} key={pair[0].id} goToCommunity={goToCommunity} />)}

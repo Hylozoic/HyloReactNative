@@ -140,7 +140,7 @@ exports[`PostCommunities matches last snapshot when expanded 1`] = `
       >
         <Icon
           color={undefined}
-          name="ArrowDown"
+          name="ArrowUp"
         />
       </View>
     </View>
