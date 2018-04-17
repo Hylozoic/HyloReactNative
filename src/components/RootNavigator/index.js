@@ -66,8 +66,6 @@ const screensInTabs = {
   MemberDetails: {screen: MemberDetails},
   MemberSkillEditor: {screen: MemberSkillEditor},
   CommentEditor: {screen: CommentEditor},
-  InvitePeople: {screen: InvitePeople},
-  ModeratorSettings: {screen: ModeratorSettings},
   NewMessage: {screen: NewMessage}
 }
 
@@ -108,6 +106,8 @@ const DrawerAndTabsNavigator = DrawerNavigator(
 // Screens that appear outside of tabs: Settings, Messages, etc.
 const screensInStack = {
   UserSettings: {screen: UserSettings},
+  InvitePeople: {screen: InvitePeople},
+  ModeratorSettings: {screen: ModeratorSettings},
   CommunitySettingsMenu: {screen: CommunitySettingsMenu},
   CommunitySettings: {screen: CommunitySettings},
   PasswordReset: {screen: UserSettings, path: 'settings/password'},

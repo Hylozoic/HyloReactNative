@@ -94,7 +94,7 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
   const { navigation } = ownProps
 
   const goToCommunitySettingsMenu = () => {
-    navigation.navigate('CommunitySettingsMenu')
+    navigation.navigate({routeName: 'CommunitySettingsMenu', key: 'CommunitySettingsMenu'})
   }
 
   return {
@@ -104,26 +104,26 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     goToCommunity: community => {
       if (community.id === ALL_COMMUNITIES_ID &&
         ownProps.screenProps.currentTabName !== 'Home') {
-        navigation.navigate('Home')
+        navigation.navigate({routeName: 'Home', key: 'Home'})
       } else {
-        navigation.navigate('DrawerClose')
-        navigation.navigate('Home')
+        navigation.navigate({routeName: 'DrawerClose', key: 'DrawerClose'})
+        navigation.navigate({routeName: 'Home', key: 'Home'})
       }
       dispatchProps.selectCommunity(community.id)
     },
     goToNetwork: network => {
-      navigation.navigate('DrawerClose')
-      navigation.navigate('Home')
+      navigation.navigate({routeName: 'DrawerClose', key: 'DrawerClose'})
+      navigation.navigate({routeName: 'Home', key: 'Home'})
       dispatchProps.selectNetwork(network.id)
     },
     showSettings: () => {
-      navigation.navigate('UserSettings', {name})
+      navigation.navigate({routeName: 'UserSettings', params: {name}, key: 'UserSettings'})
     },
     goToMyProfile: () => {
-      navigation.navigate('MemberProfile', {id: currentUser.id})
+      navigation.navigate({routeName: 'MemberProfile', params: {id: currentUser.id}, key: 'MemberProfile'})
     },
     goToCreateCommunityName: () => {
-      navigation.navigate('CreateCommunityName')
+      navigation.navigate({routeName: 'CreateCommunityName', key: 'CreateCommunityName'})
     },
     goToCommunitySettingsMenu: canModerateCurrentCommunity && goToCommunitySettingsMenu
   }

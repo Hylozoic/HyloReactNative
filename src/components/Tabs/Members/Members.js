@@ -24,7 +24,7 @@ export default class Members extends React.Component {
     if (isEmpty(members) && hasMore !== false) fetchMembers()
   }
 
-  goToInvitePeople = () => this.props.navigation.navigate('InvitePeople')
+  goToInvitePeople = () => this.props.navigation.navigate({routeName: 'InvitePeople', key: 'InvitePeople'})
 
   componentDidMount () {
     this.fetchOrShowCached()
