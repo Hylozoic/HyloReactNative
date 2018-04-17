@@ -60,9 +60,11 @@ export function CommunityList ({communities, goToCommunity, expandFunc}) {
   const moreCommunities = communities.length > 1
   const othersText = n => n === 1 ? '1 other' : `${n} others`
   return <View style={[styles.communityList, styles.row]}>
-    <TouchableOpacity onPress={() => goToCommunity(communities[0].id)} style={{flex: 1}}><Text style={styles.linkText} numberOfLines={1}>{communities[0].name}</Text></TouchableOpacity>
-    {moreCommunities && <Text style={[styles.reminderText]}> and </Text>}
-    {moreCommunities && <TouchableOpacity onPress={expandFunc}><Text style={styles.linkText}>{othersText(communities.length - 1)}</Text></TouchableOpacity>}
+    <TouchableOpacity onPress={() => goToCommunity(communities[0].id)} style={{flex: -1}}><Text style={styles.linkText} numberOfLines={1}>{communities[0].name}</Text></TouchableOpacity>
+    {moreCommunities && <View style={[styles.row, {flex: 0}]}>
+      <Text style={[styles.reminderText]}> and </Text>
+      <TouchableOpacity onPress={expandFunc}><Text style={styles.linkText}>{othersText(communities.length - 1)}</Text></TouchableOpacity>
+    </View>}
   </View>
 }
 
@@ -95,7 +97,8 @@ const styles = {
     alignItems: 'center'
   },
   communityList: {
-    height: 40
+    height: 40,
+    justifyContent: 'flex-start'
   },
   arrowButton: {
     marginLeft: 'auto'
@@ -115,7 +118,8 @@ const styles = {
     fontFamily: 'Circular-Book'
   },
   expandedSection: {
-    paddingTop: 11
+    paddingTop: 11,
+    paddingBottom: 5
   },
   communityRow: {
     paddingVertical: 8
