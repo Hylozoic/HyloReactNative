@@ -6,7 +6,7 @@ import styles from '../Header.styles'
 export default function NotificationsIcon ({ showBadge, showNotifications }) {
   return <BadgedIcon
     name='Notifications'
-    onPress={showNotifications}
+    action={showNotifications}
     showBadge={showBadge}
     style={styles.icon}
   />
