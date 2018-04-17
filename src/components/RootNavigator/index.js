@@ -56,7 +56,6 @@ const tabs = {
 // Screens that can be shown in any tab (the same tab icon stays highlighted)
 const screensInTabs = {
   Feed: {screen: Feed},
-  PostEditor: {screen: PostEditor},
   DetailsEditor: {screen: DetailsEditor},
   PostDetails: {screen: PostDetails, path: 'post/:id'},
   MemberProfile: {screen: MemberProfile, path: 'people/:id'},
@@ -103,6 +102,7 @@ const DrawerAndTabsNavigator = DrawerNavigator(
 
 // Screens that appear outside of tabs: Settings, Messages, etc.
 const screensInStack = {
+  PostEditor: {screen: PostEditor},
   UserSettings: {screen: UserSettings},
   PasswordReset: {screen: UserSettings, path: 'settings/password'},
   NotificationsList: {screen: NotificationsList},

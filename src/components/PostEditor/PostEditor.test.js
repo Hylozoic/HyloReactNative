@@ -2,11 +2,35 @@ import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import TestRenderer from 'react-test-renderer'
 import PostEditor, { SectionLabel, TypeButton } from './PostEditor'
-import { TouchableOpacity } from 'react-native'
+import { TouchableOpacity, Alert } from 'react-native'
 import { Provider } from 'react-redux'
 import { createMockStore } from 'util/testing'
+import { DocumentPicker } from 'react-native-document-picker'
+import RNImagePicker from 'react-native-image-picker'
 
-jest.mock('react-native-device-info')
+jest.mock('Alert', () => {
+  return {
+    alert: jest.fn()
+  }
+})
+
+jest.mock('react-native-document-picker', () => {
+  let callback
+
+  return {
+    DocumentPicker: {
+      show: jest.fn((options, cb) => {
+        callback = cb
+      }),
+      finishShow: (err, result) => callback(err, result)
+    },
+    DocumentPickerUtil: {
+      allFiles: jest.fn()
+    }
+  }
+})
+
+jest.mock('react-native-image-picker')
 
 const mockPost = {
   details: 'myDetails'
@@ -162,6 +186,88 @@ describe('PostEditor', () => {
     ])
   })
 
+  it('showsAlert', () => {
+    const renderer = TestRenderer.create(
+      <Provider store={createMockStore()}>
+        <PostEditor
+          editDetails={jest.fn()}
+          isFocused
+          setDetails={jest.fn()}
+          navigation={navigation}
+          imageUrls={['http://foo.com/foo.png']}
+          post={mockPost} />
+      </Provider>)
+
+    const instance = renderer.root.findByType(PostEditor).instance
+    instance.showAlert('alert message')
+    expect(Alert.alert).toHaveBeenCalledWith('alert message')
+  })
+
+  it('_showFilePicker', async () => {
+    const upload = jest.fn(() => Promise.resolve({
+      payload: {
+        url: 'https:/storage.hylo.com/foo.pdf'
+      }
+    }))
+    const renderer = TestRenderer.create(
+      <Provider store={createMockStore()}>
+        <PostEditor
+          editDetails={jest.fn()}
+          isFocused
+          setDetails={jest.fn()}
+          upload={upload}
+          fileUrls={[]}
+          navigation={navigation}
+          imageUrls={['http://foo.com/foo.png']}
+          post={mockPost} />
+      </Provider>)
+
+    const instance = renderer.root.findByType(PostEditor).instance
+    jest.spyOn(instance, 'addFile')
+    instance._showFilePicker()
+    expect(instance.state.filePickerPending).toBeTruthy()
+    await DocumentPicker.finishShow(null, {
+      uri: 'file:///somewhere/foo.pdf',
+      fileName: 'foo.pdf',
+      type: 'application/x-pdf'
+    })
+    expect(instance.state.filePickerPending).toBeFalsy()
+    expect(upload).toHaveBeenCalled()
+    expect(instance.addFile).toHaveBeenCalledWith({'local': 'file:///somewhere/foo.pdf', 'remote': 'https:/storage.hylo.com/foo.pdf'})
+  })
+
+  it('_showImagePicker', async () => {
+    const upload = jest.fn(() => Promise.resolve({
+      payload: {
+        url: 'https:/storage.hylo.com/foo.pdf'
+      }
+    }))
+    const renderer = TestRenderer.create(
+      <Provider store={createMockStore()}>
+        <PostEditor
+          editDetails={jest.fn()}
+          isFocused
+          setDetails={jest.fn()}
+          upload={upload}
+          fileUrls={[]}
+          navigation={navigation}
+          imageUrls={['http://foo.com/foo.png']}
+          post={mockPost} />
+      </Provider>)
+
+    const instance = renderer.root.findByType(PostEditor).instance
+    jest.spyOn(instance, 'addImage')
+    instance._showImagePicker()
+    expect(instance.state.imagePickerPending).toBeTruthy()
+    await RNImagePicker.finishImagePicker({
+      uri: 'file:///tmp/bar.jpg',
+      fileName: 'bar.jpg'
+    })
+    expect(instance.state.imagePickerPending).toBeFalsy()
+    expect(upload).toHaveBeenCalled()
+    expect(instance.addImage).toHaveBeenCalledWith({'local': 'file:///tmp/bar.jpg', 'remote': 'https:/storage.hylo.com/foo.pdf'})
+  })
+
   it('has file methods', () => {
     const renderer = TestRenderer.create(
       <Provider store={createMockStore()}>
@@ -170,11 +276,13 @@ describe('PostEditor', () => {
           isFocused
           setDetails={jest.fn()}
           navigation={navigation}
+          postId={mockPost.id}
           fileUrls={['http://foo.com/foo.pdf']}
           post={mockPost} />
       </Provider>)
 
     const instance = renderer.root.findByType(PostEditor).instance
+
     instance.addFile({remote: 'http://bar.com/bar.pdf'})
     expect(instance.state.fileUrls).toEqual([
       'http://foo.com/foo.pdf',
