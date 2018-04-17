@@ -106,13 +106,13 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
         ownProps.screenProps.currentTabName !== 'Home') {
         navigation.navigate({routeName: 'Home', key: 'Home'})
       } else {
-        navigation.navigate({routeName: 'DrawerClose', key: 'DrawerClose'})
+        navigation.navigate('DrawerClose')
         navigation.navigate({routeName: 'Home', key: 'Home'})
       }
       dispatchProps.selectCommunity(community.id)
     },
     goToNetwork: network => {
-      navigation.navigate({routeName: 'DrawerClose', key: 'DrawerClose'})
+      navigation.navigate('DrawerClose')
       navigation.navigate({routeName: 'Home', key: 'Home'})
       dispatchProps.selectNetwork(network.id)
     },
