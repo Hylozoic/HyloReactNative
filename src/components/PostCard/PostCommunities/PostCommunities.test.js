@@ -1,18 +1,76 @@
 import 'react-native'
 import React from 'react'
-import renderer from 'react-test-renderer'
+import ReactTestRenderer from 'react-test-renderer'
 import PostCommunities from './PostCommunities'
 
-it('matches the last snapshot', () => {
-  const post = {
-    title: "Combined breaks and links",
-    details: "<p>This post has a <a data-entity-type=\"mention\" data-user-id=\"86895\">Flargle</a> mention.</p><p>Then a break.</p><p>Then a para ending with a mention <a data-entity-type=\"mention\" data-user-id=\"86197\">Anita Cartwright</a> </p><p><a data-entity-type=\"mention\" data-user-id=\"86742\">Alexane Rowe</a> </p><p>More characters to trigger truncate.",
-    linkPreview: null,
-    slug: "notifications-testing",
-    showMember: () => {},
-    showTopic: () => {},
-    shouldTruncate: true
-  }
-  const actual = renderer.create(<PostCommunities { ...post } />)
-  expect(actual).toMatchSnapshot()
+describe('PostCommunities', () => {
+  it('matches last snapshot', () => {
+    const props = {
+      communities: [
+        {
+          id: 1,
+          name: 'One',
+          slug: 'one'
+        },
+        {
+          id: 2,
+          name: 'Two',
+          slug: 'two'
+        },
+        {
+          id: 3,
+          name: 'Three',
+          slug: 'three'
+        }
+      ],
+      slug: 'hylo'
+    }
+
+    const renderer = ReactTestRenderer.create(<PostCommunities {...props} />)
+    expect(renderer).toMatchSnapshot()
+  })
+
+  it('matches last snapshot when expanded', () => {
+    const props = {
+      communities: [
+        {
+          id: 1,
+          name: 'One',
+          slug: 'one',
+          avatarUrl: 'foo.png'
+        },
+        {
+          id: 2,
+          name: 'Two',
+          slug: 'two'
+        },
+        {
+          id: 3,
+          name: 'Three',
+          slug: 'three'
+        }
+      ],
+      slug: 'hylo'
+    }
+
+    const renderer = ReactTestRenderer.create(<PostCommunities {...props} />)
+    renderer.getInstance().toggleExpanded()
+    expect(renderer).toMatchSnapshot()
+  })
+
+  it('returns null when in the only community', () => {
+    const props = {
+      communities: [
+        {
+          id: 1,
+          name: 'One',
+          slug: 'one'
+        }
+      ],
+      slug: 'one'
+    }
+
+    const renderer = ReactTestRenderer.create(<PostCommunities {...props} />)
+    expect(renderer).toMatchSnapshot()
+  })
 })
