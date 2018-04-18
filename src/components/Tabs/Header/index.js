@@ -12,8 +12,8 @@ export default function Header (navigation, title) {
   const hasUnreadNotifications = get('hasUnreadNotifications', navigation.state.params)
 
   const openDrawer = () => navigation.navigate('DrawerOpen')
-  const showMessages = () => navigation.navigate('ThreadList')
-  const showNotifications = () => navigation.navigate('NotificationsList')
+  const showMessages = () => navigation.navigate({routeName: 'ThreadList', key: 'ThreadList'})
+  const showNotifications = () => navigation.navigate({routeName: 'NotificationsList', key: 'NotificationsList'})
 
   return {
     headerBackTitle: null,

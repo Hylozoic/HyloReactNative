@@ -13,3 +13,6 @@ export {
 export {
   ormSessionReducer as invitePeopleReducer
 } from '../../../components/InvitePeople/InvitePeople.store'
+export {
+  ormSessionReducer as moderatorSettingsReducer
+} from '../../../components/ModeratorSettings/ModeratorSettings.store'

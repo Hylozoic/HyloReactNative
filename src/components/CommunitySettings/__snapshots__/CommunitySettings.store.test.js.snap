@@ -1,0 +1,75 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`fetchCommunitySettings 1`] = `
+Object {
+  "graphql": Object {
+    "query": "query ($id: ID) {
+        community (id: $id) {
+          id
+          name
+          slug
+          avatarUrl
+          bannerUrl
+          description
+          location
+          settings
+          invitePath
+          hidden
+          pendingInvitations (first: 100) {
+            hasMore
+            items {
+              id
+              email
+              createdAt
+              lastSentAt
+            }
+          }
+          moderators (first: 100) {
+            hasMore
+            items {
+              id
+              name
+              avatarUrl
+            }
+          }
+        }
+      }",
+    "variables": Object {
+      "id": 10,
+    },
+  },
+  "meta": Object {
+    "extractModel": "Community",
+    "id": 10,
+  },
+  "type": "CommunitySettings/FETCH_COMMUNITY_SETTINGS",
+}
+`;
+
+exports[`updateCommunitySettings 1`] = `
+Object {
+  "graphql": Object {
+    "query": "mutation ($id: ID, $changes: CommunityInput) {
+        updateCommunitySettings(id: $id, changes: $changes) {
+          id
+        }
+      }",
+    "variables": Object {
+      "changes": Object {
+        "description": "some desc",
+        "name": "blah",
+      },
+      "id": 123,
+    },
+  },
+  "meta": Object {
+    "changes": Object {
+      "description": "some desc",
+      "name": "blah",
+    },
+    "id": 123,
+    "optimistic": true,
+  },
+  "type": "CommunitySettings/UPDATE_COMMUNITY_SETTINGS",
+}
+`;
