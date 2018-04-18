@@ -1,8 +1,7 @@
-import FileSelector from './FileSelector'
+import FileSelector, { showFilePicker } from './FileSelector'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
-import TestRenderer from 'react-test-renderer'
 import React from 'react'
-import { DocumentPicker, DocumentPickerUtil } from 'react-native-document-picker'
+import { DocumentPicker } from 'react-native-document-picker'
 
 jest.mock('react-native-document-picker', () => {
   let callback
@@ -33,87 +32,69 @@ it('matches last snapshot', () => {
   expect(actual).toMatchSnapshot()
 })
 
-it('uses react-native-document-picker', async () => {
-  const onAdd = jest.fn()
-  const upload = jest.fn(() => Promise.resolve({
-    payload: {
-      url: 'https:/storage.hylo.com/foo.pdf'
+describe('showFilePicker', () => {
+  let props
+  beforeEach(() => {
+    props = {
+      onAdd: jest.fn(),
+      upload: jest.fn(() => Promise.resolve({
+        payload: {
+          url: 'https:/storage.hylo.com/foo.pdf'
+        }
+      })),
+      type: 'post',
+      id: '10',
+      onError: jest.fn(),
+      onComplete: jest.fn()
     }
-  }))
+  })
+  it('uses react-native-document-picker', async () => {
+    showFilePicker(props)
+    await DocumentPicker.finishShow(null, {
+      uri: 'file:///somewhere/foo.pdf',
+      fileName: 'foo.pdf',
+      type: 'application/x-pdf'
+    })
 
-  const { root: { instance } } = TestRenderer.create(
-    <FileSelector onAdd={onAdd} upload={upload} type='post' id='7' />)
+    expect(props.upload).toHaveBeenCalledWith('post', '10', {
+      uri: 'file:///somewhere/foo.pdf',
+      name: 'foo.pdf',
+      type: 'application/x-pdf'
+    })
 
-  instance.pick()
-  expect(instance.state.pending).toBeTruthy()
-  await DocumentPicker.finishShow(null, {
-    uri: 'file:///somewhere/foo.pdf',
-    fileName: 'foo.pdf',
-    type: 'application/x-pdf'
+    expect(props.onAdd).toHaveBeenCalledWith({
+      local: 'file:///somewhere/foo.pdf',
+      remote: 'https:/storage.hylo.com/foo.pdf'
+    })
   })
 
-  expect(upload).toHaveBeenCalledWith('post', '7', {
-    uri: 'file:///somewhere/foo.pdf',
-    name: 'foo.pdf',
-    type: 'application/x-pdf'
+  it('handles picker error', async () => {
+    showFilePicker(props)
+    await DocumentPicker.finishShow({message: 'Zounds!'})
+
+    expect(props.upload).not.toHaveBeenCalled()
+    expect(props.onComplete).toHaveBeenCalledWith('Zounds!')
   })
 
-  expect(onAdd).toHaveBeenCalledWith({
-    local: 'file:///somewhere/foo.pdf',
-    remote: 'https:/storage.hylo.com/foo.pdf'
-  })
-
-  expect(instance.state.pending).toBeFalsy()
-})
-
-it('handles picker error', async () => {
-  const onAdd = jest.fn()
-  const onError = jest.fn()
-  const upload = jest.fn(() => Promise.resolve({
-    payload: {
-      url: 'https:/storage.hylo.com/foo.pdf'
+  it('handles upload error', async () => {
+    const errorProps = {
+      ...props,
+      upload: jest.fn(() => Promise.resolve({
+        error: true,
+        payload: {
+          message: 'Defrobulation imminent'
+        }
+      }))
     }
-  }))
+    showFilePicker(errorProps)
+    await DocumentPicker.finishShow(null, {
+      uri: 'file:///somewhere/foo.pdf',
+      fileName: 'foo.pdf',
+      type: 'application/x-pdf'
+    })
 
-  const { root: { instance } } = TestRenderer.create(
-    <FileSelector onAdd={onAdd}
-      onError={onError}
-      upload={upload}
-      type='post'
-      id='7' />)
-
-  instance.pick()
-  expect(instance.state.pending).toBeTruthy()
-  await DocumentPicker.finishShow({message: 'Zounds!'})
-
-  expect(upload).not.toHaveBeenCalled()
-  expect(onError).toHaveBeenCalledWith('Zounds!')
-})
-
-it('handles upload error', async () => {
-  const onAdd = jest.fn()
-  const onError = jest.fn()
-  const upload = jest.fn(() => Promise.resolve({
-    error: true,
-    payload: {
-      message: 'Defrobulation imminent'
-    }
-  }))
-
-  const { root: { instance } } = TestRenderer.create(
-    <FileSelector onAdd={onAdd}
-      upload={upload}
-      type='post'
-      id='7'
-      onError={onError} />)
-
-  instance.pick()
-  await DocumentPicker.finishShow(null, {
-    uri: 'file:///somewhere/foo.pdf',
-    fileName: 'foo.pdf',
-    type: 'application/x-pdf'
+    expect(props.onAdd).not.toHaveBeenCalled()
+    expect(props.onError).toHaveBeenCalledWith('Defrobulation imminent')
+    expect(props.onComplete).toHaveBeenCalled()
   })
-
-  expect(onAdd).not.toHaveBeenCalled()
-  expect(onError).toHaveBeenCalledWith('Defrobulation imminent')
 })
