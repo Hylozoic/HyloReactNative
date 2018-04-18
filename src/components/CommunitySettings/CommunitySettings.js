@@ -7,6 +7,7 @@ import EntypoIcon from 'react-native-vector-icons/Entypo'
 import defaultBanner from '../../assets/default-user-banner.jpg'
 import header, { HeaderButton } from 'util/header'
 import { some } from 'lodash/fp'
+import showToast from 'util/toast'
 
 export default class CommunitySettings extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -67,12 +68,6 @@ export default class CommunitySettings extends React.Component {
     if (some(hasChanged, ['name', 'description', 'location'])) {
       this.syncLocalFields()
     }
-
-    if (prevProps.pendingSave !== this.props.pendingSave) {
-      this.props.navigation.setParams({
-        pendingSave: this.props.pendingSave
-      })
-    }
   }
 
   shouldComponentUpdate (nextProps) {
@@ -105,10 +100,25 @@ export default class CommunitySettings extends React.Component {
   }
 
   saveChanges = () => {
-    this.props.updateCommunitySettings(this.state.edits)
-    this.setState({
-      changed: false
+    this.props.navigation.setParams({
+      pendingSave: true
     })
+
+    this.props.updateCommunitySettings(this.state.edits)
+      .then(({error}) => {
+        this.props.navigation.setParams({
+          pendingSave: this.props.pendingSave
+        })
+
+        if (error) {
+          showToast('Error Saving Changes', {isError: true})
+        } else {
+          this.setState({
+            changed: false
+          })
+          showToast('Saved')
+        }
+      })
   }
 
   render () {
