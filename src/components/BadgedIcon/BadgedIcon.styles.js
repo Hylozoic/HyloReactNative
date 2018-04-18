@@ -6,7 +6,7 @@ export default StyleSheet.create({
     backgroundColor: persimmon,
     borderRadius: 4,
     height: 8,
-    width: 8,
+    width: 8
   },
   badgeOuter: {
     alignItems: 'center',

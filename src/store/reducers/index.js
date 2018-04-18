@@ -11,6 +11,7 @@ import FeedList from '../../components/FeedList/FeedList.store'
 import LoadingModal from '../../components/LoadingModal/LoadingModal.store'
 import MemberFeed from '../../components/MemberProfile/MemberFeed/MemberFeed.store'
 import Members from '../../components/Tabs/Members/Members.store'
+import ModeratorSettings from '../../components/ModeratorSettings/ModeratorSettings.store'
 import NewMessage from '../../components/NewMessage/NewMessage.store'
 import PeopleTyping from '../../components/PeopleTyping/PeopleTyping.store'
 import PostEditor from '../../components/PostEditor/PostEditor.store'
@@ -34,6 +35,7 @@ export const combinedReducers = combineReducers({
   LoadingModal,
   MemberFeed,
   Members,
+  ModeratorSettings,
   NewMessage,
   PeopleTyping,
   PostEditor,

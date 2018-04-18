@@ -69,7 +69,7 @@ export default class FeedList extends Component {
         setFilter={setFilter}
         setSort={setSort}
         pending={pending}
-        />
+      />
     </View>
 
     const listFooterComponent = pending
