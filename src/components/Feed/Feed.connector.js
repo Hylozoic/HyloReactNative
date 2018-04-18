@@ -33,7 +33,7 @@ export function mapStateToProps (state, props) {
 
   const topicName = props.topicName || params.topicName || getNavigationParam('topicName', state, props)
   const community = !networkId && getCommunity(state, communitySearchObject)
-  console.log('Feed connector community', get('name', community))
+
   const communitySlug = get('slug', community)
 
   const networkSlug = getNavigationParam('networkSlug', state, props)

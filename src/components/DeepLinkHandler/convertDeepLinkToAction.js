@@ -47,8 +47,8 @@ export function reformatPath (path) {
   match = routeMatchers.membersIndex(pathname)
   if (match) return `${MAIN_ROUTE_PATH}/people`
 
-  match = routeMatchers.topicsIndex(pathname)
-  if (match) return `${MAIN_ROUTE_PATH}/topics`
+  // match = routeMatchers.topicsIndex(pathname)
+  // if (match) return `${MAIN_ROUTE_PATH}/c/${match.communityName}/topics`
 
   match = routeMatchers.showTopic(pathname)
   if (match) return `${MAIN_ROUTE_PATH}/c/${match.communityName}/topicFeed/${match.topicName}`
