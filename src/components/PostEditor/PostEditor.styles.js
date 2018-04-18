@@ -167,5 +167,8 @@ export default {
   bottomBarIcon: {
     fontSize: 46,
     color: rhino30
+  },
+  annoucementIcon: {
+    fontSize: 46
   }
 }
