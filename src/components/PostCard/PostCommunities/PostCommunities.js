@@ -133,40 +133,4 @@ const styles = {
     borderRadius: 4,
     marginRight: 9
   }
-  // blah: {
-  //   color: rhino80,
-  //   fontSize: 18,
-  //   fontFamily: 'Circular-Book',
-  //   marginRight: 8
-  // },
-  // blah: {
-  //   paddingLeft: 6,
-  //   color: rhino30,
-  //   fontSize: 13,
-  //   fontFamily: 'Circular-Book'
-  // },
-  // blah: {
-  //   blah: {
-  //     paddingRight: 14,
-  //     paddingLeft: 14,
-  //     height: 40,
-  //     flexDirection: 'row',
-  //     alignItems: 'center'
-  //   },
-  //   blah: {
-  //     fontSize: 18,
-  //     marginRight: 4
-  //   },
-  //   blah: {
-  //     fontSize: 14
-  //   },
-  //   blah: {
-  //     color: caribbeanGreen,
-  //     fontFamily: 'Circular-Bold'
-  //   },
-  //   blah: {
-  //     color: slateGrey80,
-  //     fontFamily: 'Circular-Book'
-  //   }
-  // }
 }
