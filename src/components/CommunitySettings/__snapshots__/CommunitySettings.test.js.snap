@@ -1,0 +1,141 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CommunitySettings CommunityBanner matches the last snapshot 1`] = `
+<View>
+  <ImagePicker
+    id={1}
+    onChoice={[Function]}
+    onPendingChange={[Function]}
+    title="Change Banner"
+    type="communityBanner"
+  >
+    <Image
+      source={
+        Object {
+          "uri": "yay.png",
+        }
+      }
+    />
+    <EditButton
+      isLoading={false}
+    />
+  </ImagePicker>
+  <View>
+    <ImagePicker
+      id={1}
+      onChoice={[Function]}
+      onPendingChange={[Function]}
+      title="Change Avatar"
+      type="communityAvatar"
+    >
+      <View>
+        <Image
+          source={
+            Object {
+              "uri": "pong.png",
+            }
+          }
+        />
+        <EditButton
+          isLoading={false}
+        />
+      </View>
+    </ImagePicker>
+  </View>
+</View>
+`;
+
+exports[`CommunitySettings CommunityBanner shows local images if present 1`] = `undefined`;
+
+exports[`CommunitySettings has navigation options 1`] = `
+Object {
+  "headerBackTitle": null,
+  "headerLeft": <HeaderBackButton
+    buttonImage={
+      Object {
+        "testUri": "../../react-navigation/src/views/assets/back-icon.png",
+      }
+    }
+    onPress={[Function]}
+    pressColorAndroid="rgba(0, 0, 0, .32)"
+    tintColor="#808c9b"
+    truncatedTitle="Back"
+  />,
+  "headerRight": <HeaderButton
+    disabled={undefined}
+    onPress={undefined}
+    text="Save"
+  />,
+  "headerStyle": Object {
+    "backgroundColor": "white",
+    "paddingHorizontal": 10,
+  },
+  "headerTintColor": "#808c9b",
+  "headerTitle": "Community Information",
+  "headerTitleStyle": Object {
+    "color": "black",
+    "fontFamily": "Circular-Bold",
+    "fontSize": 17,
+  },
+}
+`;
+
+exports[`CommunitySettings matches the last snapshot 1`] = `
+<ScrollView
+  contentContainerStyle={
+    Object {
+      "backgroundColor": "#FFFFFF",
+      "paddingHorizontal": 16,
+      "paddingTop": 20,
+    }
+  }
+>
+  <TextInput
+    allowFontScaling={true}
+    onChangeText={[Function]}
+    underlineColorAndroid="transparent"
+    value={undefined}
+  />
+  <CommunityBanner
+    community={
+      Object {
+        "avatarUrl": "someAvatarUrl.com",
+        "bannerUrl": "someBannerUrl.com",
+        "description": "some description",
+        "id": 10,
+        "name": "Community Time",
+      }
+    }
+    isFocused={true}
+    updateCommunitySettings={[MockFunction]}
+  />
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+  >
+    DESCRIPTION
+  </Text>
+  <TextInput
+    allowFontScaling={true}
+    multiline={true}
+    numberOfLines={5}
+    onChangeText={[Function]}
+    underlineColorAndroid="transparent"
+    value={undefined}
+  />
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+  >
+    LOCATION
+  </Text>
+  <TextInput
+    allowFontScaling={true}
+    onChangeText={[Function]}
+    underlineColorAndroid="transparent"
+    value={undefined}
+  />
+</ScrollView>
+`;

@@ -35,10 +35,10 @@ export class HeaderButton extends React.Component {
     const { onPress, text } = this.props
     const { disabled } = this.state
     if (typeof onPress !== 'function') throw new Error('HeaderButton: onPress is not a function.')
-    return <TouchableOpacity onPress={this.onPress} disabled={disabled}>
+    return <TouchableOpacity onPress={this.onPress} hitSlop={{top: 7, bottom: 7, left: 7, right: 7}} disabled={disabled}>
       {text === 'Close'
-                  ? <Icon name='Ex' style={styles.exIcon} />
-                  : <Text style={[styles.button, disabled && styles.disabled]}>{text}</Text>}
+        ? <Icon name='Ex' style={styles.exIcon} />
+        : <Text style={[styles.button, disabled && styles.disabled]}>{text}</Text>}
     </TouchableOpacity>
   }
 }
@@ -130,6 +130,7 @@ const styles = StyleSheet.create({
     fontSize: 17
   },
   exIcon: {
-    fontSize: 20
+    fontSize: 20,
+    padding: 7
   }
 })

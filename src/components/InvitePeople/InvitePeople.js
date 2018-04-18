@@ -21,7 +21,10 @@ export const parseEmailList = emails =>
   }))
 
 export default class InvitePeople extends Component {
-  static navigationOptions = ({navigation}) => header(navigation, {title: 'Invite People'})
+  static navigationOptions = ({navigation}) => header(navigation, {
+    title: 'Invite People',
+    headerBackButton: () => navigation.goBack()
+  })
 
   state = {
     index: 0,

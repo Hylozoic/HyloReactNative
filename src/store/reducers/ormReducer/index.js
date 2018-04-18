@@ -1,6 +1,9 @@
 import * as sessionReducers from './sessionReducers'
 import { values, pick } from 'lodash/fp'
 import {
+  UPDATE_COMMUNITY_SETTINGS_PENDING
+} from '../../../components/CommunitySettings/CommunitySettings.store'
+import {
   UPDATE_USER_SETTINGS_PENDING
 } from '../../actions/updateUserSettings'
 import {
@@ -40,7 +43,6 @@ import orm from 'store/models'
 import ModelExtractor from '../ModelExtractor'
 import extractModelsFromAction from '../ModelExtractor/extractModelsFromAction'
 import { isPromise } from 'util/index'
-import { buildKey } from 'store/reducers/queryResults'
 
 export default function ormReducer (state = {}, action) {
   const session = orm.session(state)
@@ -51,7 +53,7 @@ export default function ormReducer (state = {}, action) {
     extractModelsFromAction(action, session)
   }
 
-  let me, skill, post, thread
+  let me, skill, post, thread, community, membership
 
   switch (type) {
     case CREATE_COMMENT:
@@ -131,6 +133,13 @@ export default function ormReducer (state = {}, action) {
       }
       break
 
+    case UPDATE_COMMUNITY_SETTINGS_PENDING:
+      community = session.Community.withId(meta.id)
+      community.update(meta.changes)
+
+      membership = session.Membership.safeGet({community: meta.id}).update({forceUpdate: new Date()})
+      break
+
     case SET_TOPIC_SUBSCRIBE_PENDING:
       const ct = session.CommunityTopic.get({
         topic: meta.topicId, community: meta.communityId
@@ -169,7 +178,7 @@ export default function ormReducer (state = {}, action) {
 
     case RESET_NEW_POST_COUNT_PENDING:
       const { id } = meta.graphql.variables
-      const membership = session.Membership.safeGet({community: id})
+      membership = session.Membership.safeGet({community: id})
       if (!membership) break
       membership.update({newPostCount: 0})
       break

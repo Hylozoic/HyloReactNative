@@ -3,7 +3,9 @@
 exports[` 1`] = `
 Object {
   "avatarUrl": undefined,
+  "canModerateCurrentCommunity": undefined,
   "communities": Array [],
+  "currentCommunity": undefined,
   "currentCommunityId": undefined,
   "currentNetworkId": undefined,
   "currentUser": undefined,
@@ -26,12 +28,35 @@ Object {
 }
 `;
 
-exports[` 3`] = `
+exports[`mergeProps matches snapshot 1`] = `
 Object {
+  "canModerateCurrentCommunity": true,
   "currentUser": Object {
     "id": "anyid",
   },
   "goToCommunity": [Function],
+  "goToCommunitySettingsMenu": [Function],
+  "goToCreateCommunityName": [Function],
+  "goToMyProfile": [Function],
+  "goToNetwork": [Function],
+  "name": "Roy Rogers",
+  "navigation": Object {
+    "navigate": [MockFunction],
+  },
+  "selectCommunity": [MockFunction],
+  "selectNetwork": [MockFunction],
+  "showSettings": [Function],
+}
+`;
+
+exports[`mergeProps matches snapshot 2`] = `
+Object {
+  "canModerateCurrentCommunity": false,
+  "currentUser": Object {
+    "id": "anyid",
+  },
+  "goToCommunity": [Function],
+  "goToCommunitySettingsMenu": false,
   "goToCreateCommunityName": [Function],
   "goToMyProfile": [Function],
   "goToNetwork": [Function],

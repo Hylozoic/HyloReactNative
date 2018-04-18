@@ -46,7 +46,7 @@ describe('FeedBanner', () => {
 
     expect(actual).toMatchSnapshot()
   })
-  
+
   it('renders correctly with a network and user', () => {
     const renderer = new ReactShallowRenderer()
     renderer.render(<FeedBanner
