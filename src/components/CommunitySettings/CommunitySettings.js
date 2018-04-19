@@ -104,7 +104,7 @@ export default class CommunitySettings extends React.Component {
       pendingSave: true
     })
 
-    this.props.updateCommunitySettings(this.state.edits)
+    return this.props.updateCommunitySettings(this.state.edits)
       .then(({error}) => {
         this.props.navigation.setParams({
           pendingSave: this.props.pendingSave
