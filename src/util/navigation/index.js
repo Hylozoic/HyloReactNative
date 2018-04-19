@@ -51,7 +51,6 @@ export const routeMatchers = {
   thread: route('/t/:id'),
   allCommunities: route('/all'),
   membersIndex: route('/c/:communityName/members'),
-  topicsIndex: route('/c/:communityName/topics'),
   showTopic: route('/c/:communityName/:topicName'),
   showMember: route('/m/:memberId'),
   showCommunity: route('/c/:communitySlug'),

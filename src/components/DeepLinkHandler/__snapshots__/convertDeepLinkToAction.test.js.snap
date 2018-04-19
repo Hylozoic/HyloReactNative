@@ -134,7 +134,11 @@ Object {
 exports[`handles a topics index link 1`] = `
 Object {
   "action": Object {
-    "routeName": "Topics",
+    "params": Object {
+      "communitySlugFromLink": "hylo-community-organizing",
+      "topicName": "topics",
+    },
+    "routeName": "TopicFeed",
     "type": "Navigation/NAVIGATE",
   },
   "routeName": "Main",
