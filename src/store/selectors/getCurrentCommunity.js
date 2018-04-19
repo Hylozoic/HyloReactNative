@@ -1,6 +1,10 @@
 import getCurrentCommunityId from './getCurrentCommunityId'
 import getCommunity from './getCommunity'
+import { createSelector } from 'reselect'
 
-export default function (state, props) {
-  return getCommunity(state, {id: getCurrentCommunityId(state, props)})
-}
+const getCurrentCommunity = createSelector(
+  state => state,
+  getCurrentCommunityId,
+  (state, id) => getCommunity(state, {id})
+)
+export default getCurrentCommunity

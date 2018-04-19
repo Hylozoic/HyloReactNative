@@ -23,7 +23,7 @@ export function mapStateToProps (state, props) {
   return {
     details: state.PostEditor.details,
     post: post || defaultPost,
-    canModerate: getCanModerate(state, props),
+    canModerate: getCanModerate(state),
     communityIds: post
       ? post.communities.map(x => x.id)
       : [communityId],
