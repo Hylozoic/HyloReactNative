@@ -26,7 +26,7 @@ import { keyboardAvoidingViewProps as kavProps } from 'util/viewHelpers'
 
 import styles from './PostEditor.styles'
 import { rhino30 } from 'style/colors'
-import showToast, { hideToast } from 'util/toast'
+import { showToast, hideToast } from 'util/toast'
 
 export default class PostEditor extends React.Component {
   static contextTypes = {navigate: PropTypes.func}
