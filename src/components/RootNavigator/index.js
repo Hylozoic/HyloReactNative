@@ -8,6 +8,8 @@ import { LoadingScreen } from '../Loading'
 import SessionCheck from '../SessionCheck'
 import Feed from '../Feed'
 import JoinCommunity from '../JoinCommunity'
+import CommunitySettingsMenu from '../CommunitySettingsMenu'
+import CommunitySettings from '../CommunitySettings'
 import DrawerMenu from '../DrawerMenu'
 import { Home, Members, Topics } from '../Tabs' // eslint-disable-line no-unused-vars
 import stacksInTabsFactory from './stacksInTabsFactory'
@@ -20,6 +22,7 @@ import CommentEditor from '../PostDetails/CommentEditor'
 import InvitePeople from '../InvitePeople'
 import tabStyles from '../Tabs/Tabs.styles'
 import NewMessage from '../NewMessage'
+import ModeratorSettings from '../ModeratorSettings'
 import Thread from '../Thread'
 import ThreadList from '../ThreadList'
 import ThreadParticipants from '../ThreadParticipants'
@@ -66,7 +69,6 @@ const screensInTabs = {
   MemberDetails: {screen: MemberDetails},
   MemberSkillEditor: {screen: MemberSkillEditor},
   CommentEditor: {screen: CommentEditor},
-  InvitePeople: {screen: InvitePeople},
   NewMessage: {screen: NewMessage}
 }
 
@@ -106,7 +108,13 @@ const DrawerAndTabsNavigator = DrawerNavigator(
 
 // Screens that appear outside of tabs: Settings, Messages, etc.
 const screensInStack = {
+  PostEditor: {screen: PostEditor},
+  DetailsEditor: {screen: DetailsEditor},
   UserSettings: {screen: UserSettings},
+  InvitePeople: {screen: InvitePeople},
+  ModeratorSettings: {screen: ModeratorSettings},
+  CommunitySettingsMenu: {screen: CommunitySettingsMenu},
+  CommunitySettings: {screen: CommunitySettings},
   PasswordReset: {screen: UserSettings, path: 'settings/password'},
   NotificationsList: {screen: NotificationsList},
   ThreadList: {screen: ThreadList},

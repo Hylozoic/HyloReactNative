@@ -2,8 +2,8 @@
 
 exports[`matches the last snapshot 1`] = `
 <BadgedIcon
+  action={[Function]}
   name="Notifications"
-  onPress={[Function]}
   showBadge={undefined}
 />
 `;
