@@ -1,0 +1,56 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot for fetchCommunityTopic 1`] = `
+Object {
+  "graphql": Object {
+    "query": "query ($topicName: String, $communitySlug: String) {
+        communityTopic(topicName: $topicName, communitySlug: $communitySlug) {
+          id
+          isSubscribed
+          followersTotal
+          postsTotal
+          topic {
+            id
+            name
+          }
+          community {
+            id
+          }
+        }
+      }",
+    "variables": Object {
+      "communitySlug": "my-community",
+      "topicName": "news",
+    },
+  },
+  "meta": Object {
+    "afterInteractions": true,
+    "extractModel": "CommunityTopic",
+  },
+  "type": "Feed/FETCH_COMMUNITY_TOPIC",
+}
+`;
+
+exports[`matches snapshot for setTopicSubscribe 1`] = `
+Object {
+  "graphql": Object {
+    "query": "mutation($topicId: ID, $communityId: ID, $isSubscribing: Boolean) {
+        subscribe(topicId: $topicId, communityId: $communityId, isSubscribing: $isSubscribing) {
+          success
+        }
+      }",
+    "variables": Object {
+      "communityId": 2,
+      "isSubscribing": true,
+      "topicId": 1,
+    },
+  },
+  "meta": Object {
+    "communityId": 2,
+    "isSubscribing": true,
+    "optimistic": true,
+    "topicId": 1,
+  },
+  "type": "Feed/SET_TOPIC_SUBSCRIBE",
+}
+`;
