@@ -58,18 +58,3 @@ export function setTopicSubscribe (topicId, communityId, isSubscribing) {
     }
   }
 }
-
-export const getCommunityTopic = ormCreateSelector(
-  orm,
-  get('orm'),
-  (state, props) => props,
-  (session, { topicName, slug }) => {
-    const topic = session.Topic.filter({name: topicName}).first()
-    const community = session.Community.filter({slug}).first()
-    if (!topic || !community) return false
-
-    return session.CommunityTopic.filter({
-      topic: topic.id, community: community.id
-    }).first()
-  }
-)

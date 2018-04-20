@@ -4,43 +4,72 @@ import { get } from 'lodash/fp'
 
 import getMe from '../../store/selectors/getMe'
 import getNetwork from '../../store/selectors/getNetwork'
-import getCommunity from '../../store/selectors/getCommunity'
-import getCurrentCommunityId from '../../store/selectors/getCurrentCommunityId'
+import getCurrentCommunity from '../../store/selectors/getCurrentCommunity'
 import getCurrentNetworkId from '../../store/selectors/getCurrentNetworkId'
 import makeGoToCommunity from '../../store/actions/makeGoToCommunity'
 import { ALL_COMMUNITIES_ID } from '../../store/models/Community'
 import {
   fetchCommunityTopic,
-  getCommunityTopic,
   setTopicSubscribe
 } from './Feed.store'
 import { mapWhenFocused, mergeWhenFocused } from 'util/connector'
+import { createSelector } from 'reselect'
+import { createSelector as ormCreateSelector } from 'redux-orm'
+import orm from '../../store/models'
+
+const getTopicName = createSelector(
+  (state, props) => props.topicName,
+  (state, props) => get('state.params.TopicName', props.navigation),
+  (propsTopicName, paramsTopicName) => propsTopicName || paramsTopicName
+)
+
+const getCommunityIfNetworkBlank = createSelector(
+  getCurrentNetworkId,
+  getCurrentCommunity,
+  (networkId, community) => !networkId && community
+)
+
+const getCommunityTopic = ormCreateSelector(
+  orm,
+  state => state.orm,
+  getTopicName,
+  getCommunityIfNetworkBlank,
+  (session, topicName, community) => {
+    if (!topicName || !community) return false
+    const topic = session.Topic.safeGet({name: topicName})
+    if (!topic) return false
+
+    return session.CommunityTopic.safeGet({
+      topic: topic.id, community: community.id
+    }).first()
+  }
+)
+
+const getTopicSubscribed = createSelector(
+  getTopicName,
+  getCommunityTopic,
+  (topicName, communityTopic) => topicName && communityTopic && communityTopic.isSubscribed
+)
 
 export function mapStateToProps (state, props) {
-  const params = get('state.params', props.navigation) || {}
   // NOTE: networkId is only received as a prop (currently via Home)
-  const networkId = getCurrentNetworkId(state, props)
+  const networkId = getCurrentNetworkId(state)
   // NOTE: communityId is is received either as a prop (via Home) or as a
   // navigation parameter. In case of nav params the screen will load with a
   // back button and be added to the stack.
-  const communityId = getCurrentCommunityId(state, props)
-  const topicName = props.topicName || params.topicName
-  const community = !networkId && getCommunity(state, {id: communityId})
+  const community = getCurrentCommunity(state)
   const communitySlug = get('slug', community)
-  const network = getNetwork(state, {id: networkId})
-  const currentUser = getMe(state)
-  const communityTopic = topicName && community &&
-    getCommunityTopic(state, {topicName, slug: community.slug})
-  const topicSubscribed = topicName && communityTopic && communityTopic.isSubscribed
+  const communityTopic = getCommunityTopic(state, props)
+  const topicSubscribed = getTopicSubscribed(state, props)
   const topic = get('topic', communityTopic)
   return {
-    currentUser,
-    community,
-    network,
+    currentUser: getMe(state),
+    community: community,
+    network: getNetwork(state, {id: networkId}),
     topic,
     postsTotal: get('postsTotal', communitySlug ? communityTopic : topic),
     followersTotal: get('followersTotal', communitySlug ? communityTopic : topic),
-    topicName,
+    topicName: getTopicName(state, props),
     topicSubscribed
   }
 }
@@ -49,7 +78,6 @@ export function mapDispatchToProps (dispatch, { navigation }) {
   return {
     newPost: (communityId, topicName) => navigation.navigate({routeName: 'PostEditor', params: {communityId, topicName}, key: 'PostEditor'}),
     showPost: id => navigation.navigate({routeName: 'PostDetails', params: {id}, key: 'PostDetails'}),
-    editPost: id => navigation.navigate({routeName: 'PostEditor', params: {id}, key: 'PostEditor'}),
     showMember: id => navigation.navigate({routeName: 'MemberProfile', params: {id}, key: 'MemberProfile'}),
     showTopic: (communityId, networkId) => topicName => {
       // All Communities and Network feed to topic nav

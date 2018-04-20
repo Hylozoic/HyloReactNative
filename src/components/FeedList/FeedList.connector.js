@@ -15,6 +15,7 @@ import { ALL_COMMUNITIES_ID } from '../../store/models/Community'
 import fetchPosts, { FETCH_POSTS } from '../../store/actions/fetchPosts'
 import { presentPost } from '../../store/selectors/getPost'
 import resetNewPostCount from '../../store/actions/resetNewPostCount'
+import { createSelector } from 'reselect'
 
 function makeFetchOpts (props) {
   const { community, network, topicName } = props
@@ -36,6 +37,12 @@ function makeFetchOpts (props) {
   })
 }
 
+const getPresentedPosts = createSelector(
+  getPosts,
+  (state, props) => get('id', props.community),
+  (posts, communityId) => posts.map(p => presentPost(p, communityId))
+)
+
 export function mapStateToProps (state, props) {
   const sortBy = getSort(state, props)
   const filter = getFilter(state, props)
@@ -54,7 +61,7 @@ export function mapStateToProps (state, props) {
   const pending = state.pending[FETCH_POSTS]
 
   return {
-    posts: getPosts(state, queryProps).map(p => presentPost(p, get('id', community))),
+    posts: getPresentedPosts(state, queryProps),
     sortBy,
     filter,
     hasMore: getHasMorePosts(state, queryProps),

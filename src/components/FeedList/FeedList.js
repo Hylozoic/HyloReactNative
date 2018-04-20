@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { FlatList, Text, TouchableWithoutFeedback, View } from 'react-native'
 import styles from './FeedList.styles'
 import PostCard from '../PostCard'
@@ -7,10 +7,12 @@ import Icon from '../Icon'
 import PopupMenuButton from '../PopupMenuButton'
 import { find, get, isEmpty, filter } from 'lodash/fp'
 
-export default class FeedList extends Component {
+export default class FeedList extends React.Component {
   fetchOrShowCached () {
     const { hasMore, posts, fetchPosts, pending } = this.props
-    if (isEmpty(posts) && hasMore !== false && !pending) fetchPosts()
+    if (fetchPosts && isEmpty(posts) && hasMore !== false && !pending) {
+      fetchPosts()
+    }
   }
 
   componentDidMount () {
@@ -25,7 +27,6 @@ export default class FeedList extends Component {
     // the Home tab, both by hard-coding the tab name and by using screenProps,
     // which we had to pass down from the Home component through Feed. This will
     // have to be reworked to allow opening topic feeds in the Topic tab, e.g.
-
     if (this.props.screenProps.currentTabName !== 'Home') {
       return
     }
@@ -55,7 +56,6 @@ export default class FeedList extends Component {
       pending,
       header,
       showPost,
-      editPost,
       showMember,
       showTopic,
       showCommunities,
@@ -83,7 +83,6 @@ export default class FeedList extends Component {
           <PostRow
             post={item}
             showPost={showPost}
-            editPost={editPost}
             showMember={showMember}
             showTopic={showTopic}
             showCommunity={showCommunities}
@@ -138,7 +137,7 @@ export function ListControl ({ selected, options, onChange }) {
 }
 
 export function PostRow ({
-  post, showPost, editPost, showMember, showTopic,
+  post, showPost, showMember, showTopic,
   showCommunity, goToCommunity, selectedNetworkId
 }) {
   // TODO: Move to Post model instance method...
@@ -158,7 +157,6 @@ export function PostRow ({
     <TouchableWithoutFeedback onPress={() => showPost(post.id)}>
       <View>
         <PostCard post={filteredPost}
-          editPost={() => editPost(post.id)}
           showMember={showMember}
           showTopic={showTopic}
           showCommunity={showCommunity}

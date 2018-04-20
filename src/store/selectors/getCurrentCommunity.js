@@ -1,10 +1,11 @@
+import orm from '../models'
 import getCurrentCommunityId from './getCurrentCommunityId'
-import getCommunity from './getCommunity'
-import { createSelector } from 'reselect'
+import { createSelector as ormCreateSelector } from 'redux-orm'
 
-const getCurrentCommunity = createSelector(
-  state => state,
+const getCurrentCommunity = ormCreateSelector(
+  orm,
+  state => state.orm,
   getCurrentCommunityId,
-  (state, id) => getCommunity(state, {id})
+  (session, id) => session.Community.withId(id)
 )
 export default getCurrentCommunity
