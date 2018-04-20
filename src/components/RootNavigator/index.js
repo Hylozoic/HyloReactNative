@@ -74,13 +74,11 @@ const TabNavigatorWithBar = TabNavigator(
     lazy: true,
     tabBarOptions: {
       showIcon: true,
+      pressColor: '#DCDCDC',
       showLabel: true,
-      indicatorStyle: {display: 'none'},
+      indicatorStyle: {backgroundColor: 'white'},
       style: isIOS ? tabStyles.tabNavigatorIOS : tabStyles.tabNavigatorAndroid
-    },
-    // TODO remove this line once this PR is merged and released:
-    // https://github.com/react-community/react-navigation/pull/1764
-    tabBarComponent: TabBar
+    }
   }
 )
 
