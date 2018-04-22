@@ -23,7 +23,7 @@ const getTopicName = createSelector(
   (propsTopicName, paramsTopicName) => propsTopicName || paramsTopicName
 )
 
-const getCommunityIfNetworkBlank = createSelector(
+const getCommunityIfNetworkUnset = createSelector(
   getCurrentNetworkId,
   getCurrentCommunity,
   (networkId, community) => !networkId && community
@@ -33,7 +33,7 @@ const getCommunityTopic = ormCreateSelector(
   orm,
   state => state.orm,
   getTopicName,
-  getCommunityIfNetworkBlank,
+  getCommunityIfNetworkUnset,
   (session, topicName, community) => {
     if (!topicName || !community) return false
     const topic = session.Topic.safeGet({name: topicName})
@@ -57,7 +57,7 @@ export function mapStateToProps (state, props) {
   // NOTE: communityId is is received either as a prop (via Home) or as a
   // navigation parameter. In case of nav params the screen will load with a
   // back button and be added to the stack.
-  const community = getCommunityIfNetworkBlank(state, props)
+  const community = getCommunityIfNetworkUnset(state, props)
   const communitySlug = get('slug', community)
   const communityTopic = getCommunityTopic(state, props)
   const topicSubscribed = getTopicSubscribed(state, props)
