@@ -1,5 +1,5 @@
 import React from 'react'
-import { FlatList, Text, TouchableWithoutFeedback, View } from 'react-native'
+import { FlatList, Text, TouchableOpacity, View } from 'react-native'
 import styles from './FeedList.styles'
 import PostCard from '../PostCard'
 import Loading from '../Loading'
@@ -154,7 +154,7 @@ export function PostRow ({
     }
   }
   return <View style={styles.postRow}>
-    <TouchableWithoutFeedback onPress={() => showPost(post.id)}>
+    <TouchableOpacity delayPressIn={50} activeOpacity={0.6} onPress={() => showPost(post.id)}>
       <View>
         <PostCard post={filteredPost}
           showMember={showMember}
@@ -162,6 +162,6 @@ export function PostRow ({
           showCommunity={showCommunity}
           goToCommunity={goToCommunity} />
       </View>
-    </TouchableWithoutFeedback>
+    </TouchableOpacity>
   </View>
 }
