@@ -57,7 +57,7 @@ export function mapStateToProps (state, props) {
   // NOTE: communityId is is received either as a prop (via Home) or as a
   // navigation parameter. In case of nav params the screen will load with a
   // back button and be added to the stack.
-  const community = getCurrentCommunity(state)
+  const community = getCommunityIfNetworkBlank(state, props)
   const communitySlug = get('slug', community)
   const communityTopic = getCommunityTopic(state, props)
   const topicSubscribed = getTopicSubscribed(state, props)
