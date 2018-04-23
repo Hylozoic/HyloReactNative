@@ -237,7 +237,7 @@ export default class PostEditor extends React.Component {
   }
 
   render () {
-    const { communityIds, details, editDetails, postId, canModerate } = this.props
+    const { communityIds, details, editDetails, postId, canModerate, post } = this.props
 
     const { fileUrls, imageUrls, isSaving, showPicker,
       topics, title, type, filePickerPending, imagePickerPending,
@@ -324,7 +324,7 @@ export default class PostEditor extends React.Component {
         <View style={styles.bottomBarIcons}>
           <TouchableOpacity onPress={this._showFilePicker}><Icon name={filePickerPending ? 'Clock' : 'Paperclip'} style={styles.bottomBarIcon} /></TouchableOpacity>
           <TouchableOpacity onPress={this._showImagePicker}><Icon name={imagePickerPending ? 'Clock' : 'AddImage'} style={styles.bottomBarIcon} /></TouchableOpacity>
-          {canModerate && <TouchableOpacity onPress={this.toggleAnnoucement}><Icon name={'Announcement'} style={styles.annoucementIcon} color={announcementEnabled ? 'caribbeanGreen' : 'rhino30'} /></TouchableOpacity>}
+          {isEmpty(post) && canModerate && <TouchableOpacity onPress={this.toggleAnnoucement}><Icon name={'Announcement'} style={styles.annoucementIcon} color={announcementEnabled ? 'caribbeanGreen' : 'rhino30'} /></TouchableOpacity>}
         </View>
         {/* <TouchableOpacity> */}
         {/* <Text>Public</Text> */}
