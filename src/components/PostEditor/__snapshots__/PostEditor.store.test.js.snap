@@ -87,7 +87,6 @@ Object {
         $communityIds: [String]
         $imageUrls: [String]
         $fileUrls: [String]
-        $announcement: Boolean
         $topicNames: [String]
       ) {
         updatePost(id: $id, data: {
@@ -96,7 +95,6 @@ Object {
           details: $details
           communityIds: $communityIds
           imageUrls: $imageUrls
-          announcement: $announcement
           fileUrls: $fileUrls
           topicNames: $topicNames
         }) {
@@ -124,7 +122,6 @@ Object {
         }
       }",
     "variables": Object {
-      "announcement": undefined,
       "communityIds": Array [
         undefined,
       ],
