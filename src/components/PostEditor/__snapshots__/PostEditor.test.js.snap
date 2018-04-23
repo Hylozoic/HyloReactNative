@@ -97,28 +97,28 @@ exports[`PostEditor renders a new editor correctly 1`] = `
           topics={Array []}
         />
       </TouchableOpacity>
-      <SectionLabel>
-        Images
-      </SectionLabel>
-      <ImageSelector
-        id={undefined}
-        imageUrls={Array []}
-        onAdd={[Function]}
-        onRemove={[Function]}
-        type="post"
-      />
-      <SectionLabel>
-        Files
-      </SectionLabel>
-      <Connect(FileSelector)
-        fileUrls={undefined}
-        id={undefined}
-        onAdd={[Function]}
-        onRemove={[Function]}
-        type="post"
-      />
     </View>
   </ScrollView>
+  <View>
+    <View>
+      <TouchableOpacity
+        activeOpacity={0.2}
+        onPress={[Function]}
+      >
+        <Icon
+          name="Paperclip"
+        />
+      </TouchableOpacity>
+      <TouchableOpacity
+        activeOpacity={0.2}
+        onPress={[Function]}
+      >
+        <Icon
+          name="AddImage"
+        />
+      </TouchableOpacity>
+    </View>
+  </View>
 </Unknown>
 `;
 
@@ -320,84 +320,63 @@ exports[`PostEditor renders correctly while saving 1`] = `
             Add topics.
           </Text>
         </View>
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-        >
-          Images
-        </Text>
-        <View>
-          <View
-            accessibilityComponentType={undefined}
-            accessibilityLabel={undefined}
-            accessibilityTraits={undefined}
-            accessible={true}
-            collapsable={undefined}
-            hasTVPreferredFocus={undefined}
-            hitSlop={undefined}
-            isTVSelectable={true}
-            nativeID={undefined}
-            onLayout={undefined}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
-            testID={undefined}
-            tvParallaxProperties={undefined}
-          >
-            <Icon
-              color={undefined}
-              name="AddImage"
-            />
-          </View>
-        </View>
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-        >
-          Files
-        </Text>
-        <View>
-          <View
-            accessibilityComponentType={undefined}
-            accessibilityLabel={undefined}
-            accessibilityTraits={undefined}
-            accessible={true}
-            collapsable={undefined}
-            hasTVPreferredFocus={undefined}
-            hitSlop={undefined}
-            isTVSelectable={true}
-            nativeID={undefined}
-            onLayout={undefined}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
-            testID={undefined}
-            tvParallaxProperties={undefined}
-          >
-            <Icon
-              color={undefined}
-              name="Paperclip"
-            />
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-            >
-              Add file
-            </Text>
-          </View>
-        </View>
       </View>
     </View>
   </RCTScrollView>
+  <View>
+    <View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hasTVPreferredFocus={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Icon
+          color={undefined}
+          name="Paperclip"
+        />
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hasTVPreferredFocus={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Icon
+          color={undefined}
+          name="AddImage"
+        />
+      </View>
+    </View>
+  </View>
 </View>
 `;
 
@@ -599,84 +578,63 @@ exports[`PostEditor renders correctly while saving 2`] = `
             Add topics.
           </Text>
         </View>
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-        >
-          Images
-        </Text>
-        <View>
-          <View
-            accessibilityComponentType={undefined}
-            accessibilityLabel={undefined}
-            accessibilityTraits={undefined}
-            accessible={true}
-            collapsable={undefined}
-            hasTVPreferredFocus={undefined}
-            hitSlop={undefined}
-            isTVSelectable={true}
-            nativeID={undefined}
-            onLayout={undefined}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
-            testID={undefined}
-            tvParallaxProperties={undefined}
-          >
-            <Icon
-              color={undefined}
-              name="AddImage"
-            />
-          </View>
-        </View>
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-        >
-          Files
-        </Text>
-        <View>
-          <View
-            accessibilityComponentType={undefined}
-            accessibilityLabel={undefined}
-            accessibilityTraits={undefined}
-            accessible={true}
-            collapsable={undefined}
-            hasTVPreferredFocus={undefined}
-            hitSlop={undefined}
-            isTVSelectable={true}
-            nativeID={undefined}
-            onLayout={undefined}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
-            testID={undefined}
-            tvParallaxProperties={undefined}
-          >
-            <Icon
-              color={undefined}
-              name="Paperclip"
-            />
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-            >
-              Add file
-            </Text>
-          </View>
-        </View>
       </View>
     </View>
   </RCTScrollView>
+  <View>
+    <View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hasTVPreferredFocus={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Icon
+          color={undefined}
+          name="Paperclip"
+        />
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hasTVPreferredFocus={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Icon
+          color={undefined}
+          name="AddImage"
+        />
+      </View>
+    </View>
+  </View>
 </View>
 `;
 
@@ -753,33 +711,45 @@ exports[`PostEditor renders with a post 1`] = `
           topics={Array []}
         />
       </TouchableOpacity>
-      <SectionLabel>
-        Images
-      </SectionLabel>
-      <ImageSelector
-        id={undefined}
-        imageUrls={
-          Array [
-            "http://foo.com/foo.png",
-            "http://baz.com/baz.png",
-          ]
-        }
-        onAdd={[Function]}
-        onRemove={[Function]}
-        type="post"
-      />
-      <SectionLabel>
-        Files
-      </SectionLabel>
-      <Connect(FileSelector)
-        fileUrls={undefined}
-        id={undefined}
-        onAdd={[Function]}
-        onRemove={[Function]}
-        type="post"
-      />
+      <View>
+        <SectionLabel>
+          Images
+        </SectionLabel>
+        <ImageSelector
+          id={undefined}
+          imageUrls={
+            Array [
+              "http://foo.com/foo.png",
+              "http://baz.com/baz.png",
+            ]
+          }
+          onAdd={[Function]}
+          onRemove={[Function]}
+          type="post"
+        />
+      </View>
     </View>
   </ScrollView>
+  <View>
+    <View>
+      <TouchableOpacity
+        activeOpacity={0.2}
+        onPress={[Function]}
+      >
+        <Icon
+          name="Paperclip"
+        />
+      </TouchableOpacity>
+      <TouchableOpacity
+        activeOpacity={0.2}
+        onPress={[Function]}
+      >
+        <Icon
+          name="AddImage"
+        />
+      </TouchableOpacity>
+    </View>
+  </View>
 </Unknown>
 `;
 

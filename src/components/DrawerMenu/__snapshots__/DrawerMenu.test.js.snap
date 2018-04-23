@@ -109,6 +109,45 @@ exports[`CommunityRow matches the last snapshot 1`] = `
 
 exports[`DrawerMenu matches the last snapshot 1`] = `
 <View>
+  <View>
+    <Image
+      source={
+        Object {
+          "uri": "someurl",
+        }
+      }
+    />
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+    >
+      foo
+    </Text>
+    <TouchableOpacity
+      activeOpacity={0.2}
+      hitSlop={
+        Object {
+          "bottom": 5,
+          "left": 10,
+          "right": 10,
+          "top": 5,
+        }
+      }
+      onPress={[MockFunction]}
+    >
+      <Icon
+        name="Settings"
+      />
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+      >
+        Settings
+      </Text>
+    </TouchableOpacity>
+  </View>
   <SectionList
     data={Array []}
     disableVirtualization={false}

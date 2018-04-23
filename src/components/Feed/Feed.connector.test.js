@@ -82,11 +82,11 @@ describe('mergeProps', () => {
 
     props.newPost()
     expect(navigation.navigate)
-    .toBeCalledWith('PostEditor', {communityId: '12'})
+      .toBeCalledWith({'key': 'PostEditor', 'params': {'communityId': '12', 'topicName': undefined}, 'routeName': 'PostEditor'})
 
     props.showTopic('disarmament')
     expect(navigation.navigate)
-    .toBeCalledWith('Feed', {communityId: '12', topicName: 'disarmament'})
+      .toBeCalledWith({'key': 'Feed', 'params': {'communityId': '12', 'topicName': 'disarmament'}, 'routeName': 'Feed'})
   })
 
   it('binds networkId to showTopic from dispatchProps', () => {
@@ -101,7 +101,7 @@ describe('mergeProps', () => {
     )
 
     props.showTopic('anything')
-    expect(navigation.navigate).toBeCalledWith('TopicSupportComingSoon')
+    expect(navigation.navigate).toBeCalledWith({'key': 'TopicSupportComingSoon', 'routeName': 'TopicSupportComingSoon'})
   })
 
   it('sets up fetchCommunityTopic', () => {

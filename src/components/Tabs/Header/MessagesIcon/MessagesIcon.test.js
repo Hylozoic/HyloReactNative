@@ -8,7 +8,7 @@ describe('MessagesIcon', () => {
     const showMessages = jest.fn()
     renderer.render(<MessagesIcon showMessages={showMessages} />)
     const actual = renderer.getRenderOutput()
-    expect(actual.props.onPress).toBe(showMessages)
+    expect(actual.props.action).toBe(showMessages)
     expect(actual).toMatchSnapshot()
   })
 })

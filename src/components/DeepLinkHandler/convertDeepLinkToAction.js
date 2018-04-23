@@ -17,10 +17,15 @@ export function reformatPath (path) {
 
   const params = qs.parse(query)
 
-  match = routeMatchers.post(pathname)
+  match = routeMatchers.post(pathname) ||
+    routeMatchers.networkPost(pathname) ||
+    routeMatchers.allCommunitiesPost(pathname)
   // we have to prepend the main route's path segment because PostDetails is
   // in a nested navigator, not the top-level StackNavigator.
   if (match) return `${MAIN_ROUTE_PATH}/post/${match.id}`
+
+  match = routeMatchers.allCommunities(pathname)
+  if (match) return `${MAIN_ROUTE_PATH}/feed/all-communities`
 
   match = routeMatchers.thread(pathname)
   if (match) return 'thread/' + match.id
@@ -35,7 +40,24 @@ export function reformatPath (path) {
   if (match) {
     const {u: userId, t: loginToken, n: nextURL} = params
     const nextPath = getPathFromURL(nextURL)
+
     return `passwordResetTokenLogin/${userId}/${encodeURIComponent(loginToken)}/${encodeURIComponent(nextPath)}`
   }
+
+  match = routeMatchers.membersIndex(pathname)
+  if (match) return `${MAIN_ROUTE_PATH}/people`
+
+  match = routeMatchers.showTopic(pathname)
+  if (match) return `${MAIN_ROUTE_PATH}/c/${match.communityName}/topicFeed/${match.topicName}`
+
+  match = routeMatchers.showMember(pathname)
+  if (match) return `${MAIN_ROUTE_PATH}/people/${match.memberId}`
+
+  match = routeMatchers.showCommunity(pathname)
+  if (match) return `${MAIN_ROUTE_PATH}/communityFeed/${match.communitySlug}`
+
+  match = routeMatchers.showNetwork(pathname)
+  if (match) return `${MAIN_ROUTE_PATH}/networkFeed/${match.networkSlug}`
+
   return path
 }

@@ -5,6 +5,7 @@ Object {
   "editDetails": [Function],
   "save": [Function],
   "setDetails": [Function],
+  "upload": [Function],
 }
 `;
 
@@ -84,6 +85,7 @@ Object {
   "editDetails": [Function],
   "save": [Function],
   "setDetails": [Function],
+  "upload": [Function],
 }
 `;
 

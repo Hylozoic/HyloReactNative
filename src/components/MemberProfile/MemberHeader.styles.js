@@ -51,6 +51,7 @@ export default {
     alignItems: 'center'
   },
   controlInput: {
+    textAlignVertical: 'top',
     flex: 1
   },
   editIconWrapper: {

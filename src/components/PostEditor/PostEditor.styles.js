@@ -1,4 +1,5 @@
 import { isIOS } from 'util/platform'
+import { StyleSheet } from 'react-native'
 import {
   caribbeanGreen,
   fakeAlpha,
@@ -7,7 +8,9 @@ import {
   limedSpruce,
   rhino10,
   rhino30,
-  westSide
+  westSide,
+  capeCod40,
+  white
 } from 'style/colors'
 
 export default {
@@ -149,5 +152,20 @@ export default {
   },
   imageSelector: {
     marginBottom: 10
+  },
+  bottomBar: {
+    flexDirection: 'row',
+    borderTopWidth: StyleSheet.hairlineWidth,
+    borderTopColor: capeCod40,
+    backgroundColor: white,
+    padding: 8
+  },
+  bottomBarIcons: {
+    flexDirection: 'row',
+    flex: 1
+  },
+  bottomBarIcon: {
+    fontSize: 46,
+    color: rhino30
   }
 }
