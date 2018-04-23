@@ -10,7 +10,6 @@ import {
   getHasMorePosts,
   defaultSortBy
 } from './FeedList.store'
-import { mapWhenFocused, mergeWhenFocused } from 'util/connector'
 import { ALL_COMMUNITIES_ID } from '../../store/models/Community'
 import fetchPosts, { FETCH_POSTS } from '../../store/actions/fetchPosts'
 import { presentPost } from '../../store/selectors/getPost'
@@ -103,8 +102,4 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
   }
 }
 
-export default connect(
-  mapWhenFocused(mapStateToProps),
-  mapDispatchToProps,
-  mergeWhenFocused(mergeProps)
-)
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps)

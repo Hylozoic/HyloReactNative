@@ -7,7 +7,7 @@ import Icon from '../Icon'
 import PopupMenuButton from '../PopupMenuButton'
 import { find, get, isEmpty, filter } from 'lodash/fp'
 
-export default class FeedList extends React.Component {
+export default class FeedList extends React.PureComponent {
   fetchOrShowCached () {
     const { hasMore, posts, fetchPosts, pending } = this.props
     if (fetchPosts && isEmpty(posts) && hasMore !== false && !pending) {
@@ -39,10 +39,6 @@ export default class FeedList extends React.Component {
         get('id', prevProps.network) !== get('id', this.props.network)) {
       this.fetchOrShowCached()
     }
-  }
-
-  shouldComponentUpdate (nextProps) {
-    return nextProps.isFocused
   }
 
   render () {
