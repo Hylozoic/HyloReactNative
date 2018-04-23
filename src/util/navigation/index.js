@@ -46,7 +46,15 @@ export const routeMatchers = {
   accessLink: route('/c/:slug/join/:accessCode'),
   passwordResetTokenLogin: route('/noo/login/token'),
   post: route('/c/:slug/p/:id'),
-  thread: route('/t/:id')
+  networkPost: route('/n/:slug/p/:id'),
+  allCommunitiesPost: route('/all/p/:id'),
+  thread: route('/t/:id'),
+  allCommunities: route('/all'),
+  membersIndex: route('/c/:communityName/members'),
+  showTopic: route('/c/:communityName/:topicName'),
+  showMember: route('/m/:memberId'),
+  showCommunity: route('/c/:communitySlug'),
+  showNetwork: route('/n/:networkSlug')
 }
 
 export function redirectAfterLogin ({ currentUser, navigation, action }) {

@@ -4,28 +4,38 @@ import { get } from 'lodash/fp'
 
 import getMe from '../../store/selectors/getMe'
 import getNetwork from '../../store/selectors/getNetwork'
-import getCurrentCommunity from '../../store/selectors/getCurrentCommunity'
+import getCurrentCommunityId from '../../store/selectors/getCurrentCommunityId'
+import getCommunity from '../../store/selectors/getCommunity'
 import getCurrentNetworkId from '../../store/selectors/getCurrentNetworkId'
 import makeGoToCommunity from '../../store/actions/makeGoToCommunity'
 import { ALL_COMMUNITIES_ID } from '../../store/models/Community'
 import {
   fetchCommunityTopic,
-  setTopicSubscribe
+  setTopicSubscribe,
+  getCommunitySearchObject,
+  getNetworkSearchObject
 } from './Feed.store'
 import { mapWhenFocused, mergeWhenFocused } from 'util/connector'
 import { createSelector } from 'reselect'
 import { createSelector as ormCreateSelector } from 'redux-orm'
 import orm from '../../store/models'
+import getNavigationParam from '../../store/selectors/getNavigationParam'
 
 const getTopicName = createSelector(
   (state, props) => props.topicName,
-  (state, props) => get('state.params.TopicName', props.navigation),
+  (state, props) => getNavigationParam('topicName', state, props),
   (propsTopicName, paramsTopicName) => propsTopicName || paramsTopicName
+)
+
+const getCommunityId = createSelector(
+  (state, props) => getNavigationParam('communityId', state, props),
+  getCurrentCommunityId,
+  (communityNavParam, currentCommunityId) => communityNavParam || currentCommunityId
 )
 
 const getCommunityIfNetworkUnset = createSelector(
   getCurrentNetworkId,
-  getCurrentCommunity,
+  getCommunity,
   (networkId, community) => !networkId && community
 )
 
@@ -57,15 +67,25 @@ export function mapStateToProps (state, props) {
   // NOTE: communityId is is received either as a prop (via Home) or as a
   // navigation parameter. In case of nav params the screen will load with a
   // back button and be added to the stack.
-  const community = getCommunityIfNetworkUnset(state, props)
+
+  const communityId = getCommunityId(state, props)
+  const communitySlugFromLink = getNavigationParam('communitySlugFromLink', state, props)
+  const communitySearchObject = getCommunitySearchObject(communityId, communitySlugFromLink)
+  const community = getCommunityIfNetworkUnset(state, communitySearchObject)
   const communitySlug = get('slug', community)
+
   const communityTopic = getCommunityTopic(state, props)
   const topicSubscribed = getTopicSubscribed(state, props)
+
+  const networkSlug = getNavigationParam('networkSlug', state, props)
+  const networkSearchObject = getNetworkSearchObject(networkId, networkSlug)
+
   const topic = get('topic', communityTopic)
+
   return {
     currentUser: getMe(state),
     community: community,
-    network: getNetwork(state, {id: networkId}),
+    network: getNetwork(state, networkSearchObject),
     topic,
     postsTotal: get('postsTotal', communitySlug ? communityTopic : topic),
     followersTotal: get('followersTotal', communitySlug ? communityTopic : topic),

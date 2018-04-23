@@ -46,7 +46,6 @@ import Signup from '../Signup'
 import trackCurrentTab from './trackCurrentTab'
 import { isIOS } from 'util/platform'
 import { MAIN_ROUTE_NAME, MAIN_ROUTE_PATH } from 'util/navigation'
-import TabBar from './TabBar'
 import extendRouter from './extendRouter'
 
 // If you change or add tabs you have to edit trackCurrentTab.js
@@ -58,7 +57,10 @@ const tabs = {
 
 // Screens that can be shown in any tab (the same tab icon stays highlighted)
 const screensInTabs = {
-  Feed: {screen: Feed}
+  Feed: {screen: Feed, path: 'feed/:communityId'},
+  TopicFeed: {screen: Feed, path: 'c/:communitySlugFromLink/topicFeed/:topicName'},
+  CommunityFeed: {screen: Feed, path: 'communityFeed/:communitySlugFromLink'},
+  NetworkFeed: {screen: Feed, path: 'networkFeed/:networkSlug'}
 }
 
 Object.freeze(tabs)
