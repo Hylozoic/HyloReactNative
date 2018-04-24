@@ -26,7 +26,7 @@ let styles = StyleSheet.create({
  * @param {*} msg
  * @param {*} props
  */
-export default function showToast (msg = 'Cheers!', props = {}) {
+const showToast = (msg = 'Cheers!', props = {}) => {
   const mergedProps = defaults(props, {
     duration: Toast.durations.LONG,
     position: 34,
@@ -41,3 +41,9 @@ export default function showToast (msg = 'Cheers!', props = {}) {
   })
   return Toast.show(msg, mergedProps)
 }
+
+const hideToast = (toast) => {
+  Toast.hide(toast)
+}
+
+export { showToast, hideToast }

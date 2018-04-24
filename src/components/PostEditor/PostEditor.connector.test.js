@@ -4,26 +4,50 @@ import orm from 'store/models'
 const communityId = 1
 const id = 1
 const details = 'details'
-const props = {
-  navigation: {
-    goBack: jest.fn(),
-    state: {
-      params: {
-        communityId,
-        id
-      }
-    }
-  }
-}
-const state = {
-  PostEditor: {
-    details
-  }
-}
+let community1, community2
+let props, state
 
 describe('PostEditor mapStateToProps', () => {
+  beforeEach(() => {
+    const session = orm.session(orm.getEmptyState())
+    community1 = session.Community.create({id: '7'})
+    session.Me.create({
+      id: '10',
+      memberships: [session.Membership.create({
+        id: '345',
+        community: community1.id,
+        hasModeratorRole: true
+      })]})
+
+    community2 = session.Community.create({id: '8'})
+    session.Post.create({id: '1', communities: [community1.id, '8']})
+    session.Attachment.create({
+      id: '2', post: '1', type: 'image', url: 'foo.png', position: 1
+    })
+    session.Attachment.create({
+      id: '3', post: '1', type: 'image', url: 'bar.png', position: 0
+    })
+    state = {
+      orm: session.state,
+      PostEditor: {
+        details
+      }
+    }
+    props = {
+      navigation: {
+        goBack: jest.fn(),
+        state: {
+          params: {
+            communityId,
+            id
+          }
+        }
+      }
+    }
+  })
+
   it('returns communityIds', () => {
-    expect(mapStateToProps(state, props).communityIds).toEqual([communityId])
+    expect(mapStateToProps(state, props).communityIds).toEqual([community1.id, community2.id])
   })
 
   it('returns details', () => {
@@ -35,31 +59,8 @@ describe('PostEditor mapStateToProps', () => {
   })
 
   it('sets communityIds and imageUrls from post', () => {
-    const session = orm.session(orm.getEmptyState())
-    session.Community.create({id: '7'})
-    session.Community.create({id: '8'})
-    session.Post.create({id: '1', communities: ['7', '8']})
-    session.Attachment.create({
-      id: '2', post: '1', type: 'image', url: 'foo.png', position: 1
-    })
-    session.Attachment.create({
-      id: '3', post: '1', type: 'image', url: 'bar.png', position: 0
-    })
-    const state = {
-      orm: session.state,
-      PostEditor: {
-        details: ''
-      }
-    }
-    const props = {
-      navigation: {
-        state: {
-          params: {id: '1'}
-        }
-      }
-    }
     const stateProps = mapStateToProps(state, props)
-    expect(stateProps.communityIds).toEqual(['7', '8'])
+    expect(stateProps.communityIds).toEqual([community1.id, community2.id])
     expect(stateProps.imageUrls).toEqual(['bar.png', 'foo.png'])
   })
 })

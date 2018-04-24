@@ -2,6 +2,7 @@ import { connect } from 'react-redux'
 import getMe from '../../../store/selectors/getMe'
 import getCurrentCommunity from '../../../store/selectors/getCurrentCommunity'
 import { removePost, deletePost, pinPost } from './PostHeader.store'
+import getCanModerate from '../../../store/selectors/getCanModerate'
 
 export function mapStateToProps (state, props) {
   const community = getCurrentCommunity(state, props)
@@ -11,7 +12,6 @@ export function mapStateToProps (state, props) {
   const isCreator = currentUser && creator && currentUser.id === creator.id
   const canEdit = isCreator
   const canFlag = !isCreator
-  const canModerate = currentUser && currentUser.canModerate(community)
 
   return {
     currentUser,
@@ -20,7 +20,7 @@ export function mapStateToProps (state, props) {
     canEdit,
     canFlag,
     isCreator,
-    canModerate
+    canModerate: getCanModerate(state)
   }
 }
 
