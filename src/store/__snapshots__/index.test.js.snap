@@ -255,10 +255,10 @@ Object {
 
 exports[`getStore works 1`] = `
 Object {
+  "@@observable": [Function],
   "dispatch": [Function],
   "getState": [Function],
   "replaceReducer": [Function],
   "subscribe": [Function],
-  Symbol(observable): [Function],
 }
 `;
