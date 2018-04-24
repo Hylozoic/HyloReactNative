@@ -1,7 +1,5 @@
 import convertDeepLinkToAction, { reformatPath } from './convertDeepLinkToAction'
 
-jest.mock('react-native-device-info')
-
 it('handles an invitation link', () => {
   expect(convertDeepLinkToAction('/h/use-invitation?token=foo'))
     .toEqual({
