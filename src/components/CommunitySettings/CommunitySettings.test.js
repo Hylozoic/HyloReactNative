@@ -4,6 +4,7 @@ import CommunitySettings, { CommunityBanner, EditButton } from './CommunitySetti
 import ReactTestRenderer from 'react-test-renderer'
 import ImagePicker from '../ImagePicker'
 import defaultBanner from '../../assets/default-user-banner.jpg'
+import Toast from 'react-native-root-toast'
 
 jest.mock('../ImagePicker', props => 'ImagePicker')
 
@@ -24,7 +25,7 @@ describe('CommunitySettings', () => {
     },
     isFocused: true,
     fetchCommunitySettings: jest.fn(),
-    updateCommunitySettings: jest.fn()
+    updateCommunitySettings: jest.fn(() => Promise.resolve({}))
   }
 
   it('matches the last snapshot', () => {
@@ -97,14 +98,30 @@ describe('CommunitySettings', () => {
 
   it('syncs fields on update', () => {
     const instance = ReactTestRenderer.create(<CommunitySettings {...props} />).getInstance()
-    instance.saveChanges()
+    jest.spyOn(Toast, 'show')
+    return instance.saveChanges()
+      .then((response) => {
+        const edits = {
+          name: props.community.name,
+          description: props.community.description,
+          location: props.community.location
+        }
+        expect(props.updateCommunitySettings).toHaveBeenLastCalledWith(edits)
+        expect(Toast.show).toHaveBeenCalled()
+        expect(instance.state.changed).toBeFalsy()
+      })
+  })
 
-    const edits = {
-      name: props.community.name,
-      description: props.community.description,
-      location: props.community.location
-    }
-    expect(props.updateCommunitySettings).toHaveBeenCalledWith(edits)
+  it('shows error toast when updates failed', () => {
+    props.updateCommunitySettings = jest.fn(() => Promise.resolve({error: true}))
+    const instance = ReactTestRenderer.create(<CommunitySettings {...props} />).getInstance()
+    jest.spyOn(Toast, 'show')
+    instance.setState({changed: true})
+    return instance.saveChanges()
+      .then((response) => {
+        expect(Toast.show).toHaveBeenCalled()
+        expect(instance.state.changed).toBeTruthy()
+      })
   })
 
   describe('CommunityBanner', () => {
