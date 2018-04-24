@@ -1,13 +1,14 @@
 import { Model } from 'redux-orm'
 import { ManyToMany } from 'redux-orm/lib/fields'
 import { normalizeEntity } from 'redux-orm/lib/utils'
-import { mapValues, uniq } from 'lodash'
+import { mapValues, uniq, isEmpty } from 'lodash'
 
 Model.safeWithId = function (id) {
   return this.hasId(id) ? this.withId(id) : null
 }
 
 Model.safeGet = function (matchObj) {
+  if (isEmpty(matchObj)) return null
   let result
   try {
     result = this.get(matchObj)
