@@ -238,7 +238,7 @@ describe('CommunityRow', () => {
   })
 })
 
-describe('TextButton', () => {
+it('TextButton renders', () => {
   const renderer = new ReactShallowRenderer()
   renderer.render(<TextButton text='anything' onPress={() => {}} />)
   const actual = renderer.getRenderOutput()

@@ -4,20 +4,20 @@ jest.mock('react-native-device-info')
 
 it('handles an invitation link', () => {
   expect(convertDeepLinkToAction('/h/use-invitation?token=foo'))
-  .toEqual({
-    params: {token: 'foo'},
-    routeName: 'UseInvitation',
-    type: 'Navigation/NAVIGATE'
-  })
+    .toEqual({
+      params: {token: 'foo'},
+      routeName: 'UseInvitation',
+      type: 'Navigation/NAVIGATE'
+    })
 })
 
 it('handles a community join link', () => {
   expect(convertDeepLinkToAction('/c/sandbox/join/foo'))
-  .toEqual({
-    params: {accessCode: 'foo', slug: 'sandbox'},
-    routeName: 'UseAccessCode',
-    type: 'Navigation/NAVIGATE'
-  })
+    .toEqual({
+      params: {accessCode: 'foo', slug: 'sandbox'},
+      routeName: 'UseAccessCode',
+      type: 'Navigation/NAVIGATE'
+    })
 })
 
 it('handles a post link', () => {
@@ -93,7 +93,7 @@ it('handles a password reset link', () => {
   const deepLinkURL = `/noo/login/token?t=${loginToken}&u=${userId}&n=${nextURL}`
   // Note: Purposely unit testing reformatPath here vs convertDeepLinkToAction
   expect(reformatPath(deepLinkURL))
-  .toEqual(
-    `passwordResetTokenLogin/${userId}/${encodeURIComponent(loginToken)}/${encodeURIComponent(nextPath)}`
-  )
+    .toEqual(
+      `passwordResetTokenLogin/${userId}/${encodeURIComponent(loginToken)}/${encodeURIComponent(nextPath)}`
+    )
 })
