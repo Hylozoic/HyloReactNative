@@ -28,7 +28,7 @@ describe('getStore', () => {
     }
 
     expect(await store.dispatch(action)).toEqual({
-      type: 'TEST',
+      type: 'TEdST',
       payload: {message: 'ok'}
     })
   })
