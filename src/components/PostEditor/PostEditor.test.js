@@ -7,6 +7,7 @@ import { Provider } from 'react-redux'
 import { createMockStore } from 'util/testing'
 import { DocumentPicker } from 'react-native-document-picker'
 import RNImagePicker from 'react-native-image-picker'
+import { showToast, hideToast } from 'util/toast'
 
 jest.mock('Alert', () => {
   return {
@@ -137,6 +138,55 @@ describe('PostEditor', () => {
     expect(instance.state.isSaving).toBeTruthy()
 
     expect(renderer.toJSON()).toMatchSnapshot()
+  })
+
+  it('calls alert when announcementEnabled', () => {
+    const save = jest.fn(() => Promise.resolve())
+    const renderer = TestRenderer.create(
+      <Provider store={createMockStore()}>
+        <PostEditor
+          editDetails={jest.fn()}
+          isFocused
+          setDetails={jest.fn()}
+          save={save}
+          communityIds={[1]}
+          navigation={navigation}
+          post={mockPost} />
+      </Provider>)
+
+    const instance = renderer.root.findByType(PostEditor).instance
+    instance.setState({type: 'request', announcementEnabled: true})
+    instance.save()
+
+    expect(Alert.alert).toHaveBeenCalled()
+    expect(save).not.toHaveBeenCalled()
+    expect(instance.state.isSaving).toBeTruthy()
+  })
+
+  it('toggles announcement', () => {
+    const save = jest.fn(() => Promise.resolve())
+    const renderer = TestRenderer.create(
+      <Provider store={createMockStore()}>
+        <PostEditor
+          editDetails={jest.fn()}
+          isFocused
+          setDetails={jest.fn()}
+          save={save}
+          communityIds={[1]}
+          navigation={navigation}
+          post={mockPost} />
+      </Provider>)
+    jest.mock('util/toast', () => ({
+      showToast: jest.fn(),
+      hideToast: jest.fn()
+    }))
+    const instance = renderer.root.findByType(PostEditor).instance
+    expect(instance.toast).not.toBeDefined()
+    instance.toggleAnnoucement()
+    expect(instance.toast).toBeDefined()
+    expect(instance.state.announcementEnabled).toBeTruthy()
+    instance.toggleAnnoucement()
+    expect(instance.state.announcementEnabled).toBeFalsy()
   })
 
   it('handles save rejections properly', async () => {

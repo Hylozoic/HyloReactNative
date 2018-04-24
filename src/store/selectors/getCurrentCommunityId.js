@@ -1,8 +1,11 @@
 import { get } from 'lodash/fp'
 import getMe from './getMe'
+import { createSelector } from 'reselect'
 
-export default function (state, props) {
-  const currentUser = getMe(state)
-  return get('communityId', state.currentNetworkAndCommunity) ||
-    (currentUser && get('id', currentUser.lastViewedCommunity()))
-}
+const getCurrentCommunityId = createSelector(
+  getMe,
+  state => get('communityId', state.currentNetworkAndCommunity),
+  (currentUser, currentCommunityId) => currentCommunityId || ((currentUser) && get('id', currentUser.lastViewedCommunity()))
+)
+
+export default getCurrentCommunityId

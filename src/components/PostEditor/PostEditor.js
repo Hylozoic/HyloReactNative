@@ -26,6 +26,7 @@ import { keyboardAvoidingViewProps as kavProps } from 'util/viewHelpers'
 
 import styles from './PostEditor.styles'
 import { rhino30 } from 'style/colors'
+import { showToast, hideToast } from 'util/toast'
 
 export default class PostEditor extends React.Component {
   static contextTypes = {navigate: PropTypes.func}
@@ -37,7 +38,7 @@ export default class PostEditor extends React.Component {
 
     return header(navigation, {
       title: headerTitle,
-      right: { disabled: showPicker, text: title, onPress: save || def }
+      right: { disabled: showPicker || isSaving, text: title, onPress: save || def }
     })
   }
 
@@ -52,31 +53,56 @@ export default class PostEditor extends React.Component {
       fileUrls,
       showPicker: false,
       topics: get('topics', post) || [],
-      topicsPicked: false
+      topicsPicked: false,
+      announcementEnabled: false
     }
   }
 
-  save = () => {
+  _doSave = () => {
     const { navigation, save, details } = this.props
-    const { communityIds, fileUrls, imageUrls, title, topics, type } = this.state
+    const { communityIds, fileUrls, imageUrls, title, topics, type, announcementEnabled } = this.state
+
     const postData = {
       communities: communityIds.map(id => ({id})),
       details: details,
       fileUrls,
       imageUrls,
       title,
+      sendAnnouncement: announcementEnabled,
       topicNames: topics.map(t => t.name),
       type
     }
-
-    this.setState({isSaving: true})
-    navigation.setParams({isSaving: true})
 
     return save(postData)
       .catch(e => {
         this.setState({isSaving: false})
         navigation.setParams({isSaving: false})
       })
+  }
+
+  save = () => {
+    const { navigation } = this.props
+    const { announcementEnabled } = this.state
+
+    this.setState({isSaving: true})
+    navigation.setParams({isSaving: true})
+
+    if (announcementEnabled) {
+      Alert.alert(
+        'MAKE AN ANNOUNCEMENT',
+        'This means that all members of this community will receive an instant email and push notification about this Post. \n(This feature is available to moderators only.)',
+        [
+          {text: 'Send It', onPress: this._doSave},
+          {text: 'Go Back',
+            style: 'cancel',
+            onPress: () => {
+              this.setState({isSaving: false})
+              navigation.setParams({isSaving: false})
+            }}
+        ])
+    } else {
+      this._doSave()
+    }
   }
 
   componentDidMount () {
@@ -204,9 +230,19 @@ export default class PostEditor extends React.Component {
     })
   }
 
+  toggleAnnoucement = () => {
+    this.toast && hideToast(this.toast)
+    this.toast = showToast(`announcement ${!this.state.announcementEnabled ? 'on' : 'off'}`, {isError: this.state.announcementEnabled})
+    this.setState({announcementEnabled: !this.state.announcementEnabled})
+  }
+
   render () {
-    const { communityIds, details, editDetails, postId } = this.props
-    const { fileUrls, imageUrls, isSaving, showPicker, topics, title, type, filePickerPending, imagePickerPending } = this.state
+    const { communityIds, details, editDetails, postId, canModerate, post } = this.props
+
+    const { fileUrls, imageUrls, isSaving, showPicker,
+      topics, title, type, filePickerPending, imagePickerPending,
+      announcementEnabled
+    } = this.state
 
     if (postId && !details) return <Loading />
 
@@ -288,6 +324,7 @@ export default class PostEditor extends React.Component {
         <View style={styles.bottomBarIcons}>
           <TouchableOpacity onPress={this._showFilePicker}><Icon name={filePickerPending ? 'Clock' : 'Paperclip'} style={styles.bottomBarIcon} /></TouchableOpacity>
           <TouchableOpacity onPress={this._showImagePicker}><Icon name={imagePickerPending ? 'Clock' : 'AddImage'} style={styles.bottomBarIcon} /></TouchableOpacity>
+          {isEmpty(post) && canModerate && <TouchableOpacity onPress={this.toggleAnnoucement}><Icon name={'Announcement'} style={styles.annoucementIcon} color={announcementEnabled ? 'caribbeanGreen' : 'rhino30'} /></TouchableOpacity>}
         </View>
         {/* <TouchableOpacity> */}
         {/* <Text>Public</Text> */}

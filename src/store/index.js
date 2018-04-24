@@ -1,13 +1,17 @@
-import { composeWithDevTools } from 'remote-redux-devtools'
-import { applyMiddleware, createStore } from 'redux'
+import { applyMiddleware, createStore, compose } from 'redux'
 import orm from './models'
 import rootReducer, { combinedReducers } from './reducers'
 import middleware from './middleware'
 
 export default function getStore () {
   const emptyState = getEmptyState()
-  const composedMiddleware = composeWithDevTools(applyMiddleware(...middleware))
-  const store = createStore(rootReducer, emptyState, composedMiddleware)
+  const store = (undefined === window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__)
+    ? createStore(rootReducer, emptyState, compose(applyMiddleware(...middleware)))
+    : createStore(rootReducer, emptyState,
+      window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__(
+        applyMiddleware(...middleware)
+      )
+    )
 
   // Enable Webpack hot module replacement for reducers
   if (module.hot) {
@@ -25,15 +29,15 @@ export default function getStore () {
 // If we reinstated this, we'd need to rewire the currently synchronous store
 // load in index.js
 // export async function getInitialState () {
-  // if (!isDev) return getEmptyState()
+// if (!isDev) return getEmptyState()
 
-  // try {
-  //   const state = await AsyncStorage.getItem(PERSISTED_STATE_KEY)
-  //   return state ? JSON.parse(state) : getEmptyState()
-  // } catch (e) {
-  //   console.log("Couldn't retrieve state from AsyncStorage!")
-  //   return getEmptyState()
-  // }
+// try {
+//   const state = await AsyncStorage.getItem(PERSISTED_STATE_KEY)
+//   return state ? JSON.parse(state) : getEmptyState()
+// } catch (e) {
+//   console.log("Couldn't retrieve state from AsyncStorage!")
+//   return getEmptyState()
+// }
 // }
 
 export function getEmptyState () {
