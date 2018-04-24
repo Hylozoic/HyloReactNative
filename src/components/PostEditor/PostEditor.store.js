@@ -95,8 +95,7 @@ export function updatePost (post) {
     communities,
     imageUrls = [],
     fileUrls = [],
-    topicNames = [],
-    sendAnnouncement
+    topicNames = []
   } = post
   const communityIds = communities.map(c => c.id)
   const preprocessedDetails = divToP(details)
@@ -110,7 +109,6 @@ export function updatePost (post) {
         $communityIds: [String]
         $imageUrls: [String]
         $fileUrls: [String]
-        $announcement: Boolean
         $topicNames: [String]
       ) {
         updatePost(id: $id, data: {
@@ -119,7 +117,6 @@ export function updatePost (post) {
           details: $details
           communityIds: $communityIds
           imageUrls: $imageUrls
-          announcement: $announcement
           fileUrls: $fileUrls
           topicNames: $topicNames
         }) {
@@ -154,7 +151,6 @@ export function updatePost (post) {
         communityIds,
         imageUrls,
         fileUrls,
-        announcement: sendAnnouncement,
         topicNames
       }
     },

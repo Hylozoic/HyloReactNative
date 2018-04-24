@@ -13,7 +13,6 @@ export function mapStateToProps (state, props) {
   const canEdit = isCreator
   const canFlag = !isCreator
 
-
   return {
     currentUser,
     community,

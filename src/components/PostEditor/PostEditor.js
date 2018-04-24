@@ -26,7 +26,7 @@ import { keyboardAvoidingViewProps as kavProps } from 'util/viewHelpers'
 
 import styles from './PostEditor.styles'
 import { rhino30 } from 'style/colors'
-import showToast, { hideToast } from 'util/toast'
+import { showToast, hideToast } from 'util/toast'
 
 export default class PostEditor extends React.Component {
   static contextTypes = {navigate: PropTypes.func}
@@ -230,12 +230,12 @@ export default class PostEditor extends React.Component {
 
   toggleAnnoucement = () => {
     this.toast && hideToast(this.toast)
-    this.toast = showToast(`announcement ${!this.state.announcementEnabled ? 'on' : 'off'}`)
+    this.toast = showToast(`announcement ${!this.state.announcementEnabled ? 'on' : 'off'}`, {isError: this.state.announcementEnabled})
     this.setState({announcementEnabled: !this.state.announcementEnabled})
   }
 
   render () {
-    const { communityIds, details, editDetails, postId, canModerate } = this.props
+    const { communityIds, details, editDetails, postId, canModerate, post } = this.props
 
     const { fileUrls, imageUrls, isSaving, showPicker,
       topics, title, type, filePickerPending, imagePickerPending,
@@ -322,7 +322,7 @@ export default class PostEditor extends React.Component {
         <View style={styles.bottomBarIcons}>
           <TouchableOpacity onPress={this._showFilePicker}><Icon name={filePickerPending ? 'Clock' : 'Paperclip'} style={styles.bottomBarIcon} /></TouchableOpacity>
           <TouchableOpacity onPress={this._showImagePicker}><Icon name={imagePickerPending ? 'Clock' : 'AddImage'} style={styles.bottomBarIcon} /></TouchableOpacity>
-          {canModerate && <TouchableOpacity onPress={this.toggleAnnoucement}><Icon name={'Announcement'} style={styles.annoucementIcon} color={announcementEnabled ? 'caribbeanGreen' : 'rhino30'} /></TouchableOpacity>}
+          {isEmpty(post) && canModerate && <TouchableOpacity onPress={this.toggleAnnoucement}><Icon name={'Announcement'} style={styles.annoucementIcon} color={announcementEnabled ? 'caribbeanGreen' : 'rhino30'} /></TouchableOpacity>}
         </View>
         {/* <TouchableOpacity> */}
         {/* <Text>Public</Text> */}

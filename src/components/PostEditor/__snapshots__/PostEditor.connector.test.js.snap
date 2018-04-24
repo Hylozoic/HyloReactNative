@@ -21,7 +21,6 @@ Array [
         $communityIds: [String]
         $imageUrls: [String]
         $fileUrls: [String]
-        $announcement: Boolean
         $topicNames: [String]
       ) {
         updatePost(id: $id, data: {
@@ -30,7 +29,6 @@ Array [
           details: $details
           communityIds: $communityIds
           imageUrls: $imageUrls
-          announcement: $announcement
           fileUrls: $fileUrls
           topicNames: $topicNames
         }) {
@@ -58,7 +56,6 @@ Array [
         }
       }",
         "variables": Object {
-          "announcement": undefined,
           "communityIds": Array [
             1,
           ],

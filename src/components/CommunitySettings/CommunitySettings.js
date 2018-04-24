@@ -7,7 +7,7 @@ import EntypoIcon from 'react-native-vector-icons/Entypo'
 import defaultBanner from '../../assets/default-user-banner.jpg'
 import header, { HeaderButton } from 'util/header'
 import { some } from 'lodash/fp'
-import showToast from 'util/toast'
+import { showToast } from 'util/toast'
 
 export default class CommunitySettings extends React.Component {
   static navigationOptions = ({ navigation }) => {
