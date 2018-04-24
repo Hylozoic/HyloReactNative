@@ -41,3 +41,7 @@ export default function showToast (msg = 'Cheers!', props = {}) {
   })
   return Toast.show(msg, mergedProps)
 }
+
+export function hideToast (toast) {
+  Toast.hide(toast)
+}
