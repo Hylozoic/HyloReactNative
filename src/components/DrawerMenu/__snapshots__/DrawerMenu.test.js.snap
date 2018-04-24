@@ -416,3 +416,26 @@ exports[`SectionHeader matches the last snapshot 1`] = `
   </Text>
 </View>
 `;
+
+exports[`TextButton renders 1`] = `
+<TouchableOpacity
+  activeOpacity={0.2}
+  hitSlop={
+    Object {
+      "bottom": 10,
+      "left": 10,
+      "right": 15,
+      "top": 20,
+    }
+  }
+  onPress={[Function]}
+>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+  >
+    anything
+  </Text>
+</TouchableOpacity>
+`;
