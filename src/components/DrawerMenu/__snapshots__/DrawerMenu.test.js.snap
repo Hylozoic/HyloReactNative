@@ -1,28 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[` 1`] = `
-<TouchableOpacity
-  activeOpacity={0.2}
-  hitSlop={
-    Object {
-      "bottom": 10,
-      "left": 10,
-      "right": 15,
-      "top": 20,
-    }
-  }
-  onPress={[Function]}
->
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-  >
-    anything
-  </Text>
-</TouchableOpacity>
-`;
-
 exports[`CommunityRow hides badge when no newPostCount 1`] = `
 <View>
   <TouchableOpacity
