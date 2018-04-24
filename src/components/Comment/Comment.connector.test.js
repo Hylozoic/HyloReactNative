@@ -21,6 +21,7 @@ describe('mapStateToProps', () => {
       })]})
 
     const props = {
+      slug: community.slug,
       comment: {
         creator: {
           id: 10

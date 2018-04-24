@@ -19,7 +19,7 @@ afterAll(() => timezoneMock.unregister())
 it('returns the expected value', () => {
   const session = orm.session(orm.getEmptyState())
   session.Community.create({id: '7'})
-  const state = {currentNetworkAndCommunity: {communityId: '7'}, orm: session.state}
+  const state = {currentCommunity: '7', orm: session.state}
   const props = {}
   const stateProps = mapStateToProps(state, props)
   const dispatch = jest.fn(value => value)
