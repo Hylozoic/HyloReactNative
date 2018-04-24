@@ -232,7 +232,7 @@ export default class PostEditor extends React.Component {
 
   toggleAnnoucement = () => {
     this.toast && hideToast(this.toast)
-    this.toast = showToast(`announcement ${!this.state.announcementEnabled ? 'on' : 'off'}`)
+    this.toast = showToast(`announcement ${!this.state.announcementEnabled ? 'on' : 'off'}`, {isError: this.state.announcementEnabled})
     this.setState({announcementEnabled: !this.state.announcementEnabled})
   }
 
