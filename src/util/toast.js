@@ -4,7 +4,7 @@
 import Toast from 'react-native-root-toast'
 import { StyleSheet } from 'react-native'
 import { defaults } from 'lodash'
-import { white40onCaribbeanGreen, white } from 'style/colors'
+import { white40onCaribbeanGreen, white, amaranth } from 'style/colors'
 
 let styles = StyleSheet.create({
   containerStyle: {
@@ -32,9 +32,9 @@ export default function showToast (msg = 'Cheers!', props = {}) {
     position: 34,
     textStyle: styles.textStyle,
     containerStyle: styles.containerStyle,
-    backgroundColor: white40onCaribbeanGreen,
+    backgroundColor: props.isError ? amaranth : white40onCaribbeanGreen,
     shadow: false,
-    opacity: 1,
+    opacity: 0.95,
     animation: true,
     hideOnPress: true,
     delay: 0
