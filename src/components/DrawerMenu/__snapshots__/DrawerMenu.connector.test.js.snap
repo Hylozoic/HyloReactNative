@@ -28,6 +28,34 @@ Object {
 }
 `;
 
+exports[`mapDispatchToProps matches the last snapshot 1`] = `
+Object {
+  "logout": [Function],
+  "selectCommunity": [Function],
+  "selectNetwork": [Function],
+}
+`;
+
+exports[`mapStateToProps matches the latest snapshot 1`] = `
+Object {
+  "avatarUrl": undefined,
+  "canModerateCurrentCommunity": undefined,
+  "communities": Array [],
+  "currentCommunity": null,
+  "currentCommunityId": undefined,
+  "currentNetworkId": undefined,
+  "currentUser": undefined,
+  "name": "you",
+  "networks": Array [
+    Object {
+      "communities": Array [],
+      "id": "all-communities",
+      "name": "All Communities",
+    },
+  ],
+}
+`;
+
 exports[`mergeProps matches snapshot 1`] = `
 Object {
   "canModerateCurrentCommunity": true,
