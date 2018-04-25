@@ -154,13 +154,19 @@ Array [
 exports[`mapDispatchToProps creates actions 3`] = `
 Array [
   Array [
-    "TopicSupportComingSoon",
+    Object {
+      "key": "TopicSupportComingSoon",
+      "routeName": "TopicSupportComingSoon",
+    },
   ],
   Array [
-    "Feed",
     Object {
-      "communityId": 123,
-      "topicName": "topicName",
+      "key": "Feed",
+      "params": Object {
+        "communityId": 123,
+        "topicName": "topicName",
+      },
+      "routeName": "Feed",
     },
   ],
 ]
