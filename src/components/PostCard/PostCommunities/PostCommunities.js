@@ -79,7 +79,7 @@ export function CommunityCell ({ community, goToCommunity }) {
   const imageSource = {uri: avatarUrl || DEFAULT_AVATAR}
 
   return <TouchableOpacity style={[styles.communityCell, styles.row]} onPress={() => goToCommunity(community.id)}>
-    <Image source={imageSource} style={styles.communityAvatar} />}
+    <Image source={imageSource} style={styles.communityAvatar} />
     <Text style={[styles.linkText, styles.communityCell]} numberOfLines={1}>{name}</Text>
   </TouchableOpacity>
 }
