@@ -16,7 +16,7 @@ export default class ThreadList extends Component {
     header(navigation, {
       left: 'close',
       title: 'Messages',
-      right: {text: 'New', onPress: () => navigation.navigate('NewMessage')}
+      right: {text: 'New', onPress: () => navigation.navigate({routeName: 'NewMessage', key: 'NewMessage'})}
     })
 
   componentDidMount () {

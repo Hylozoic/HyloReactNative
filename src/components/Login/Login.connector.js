@@ -16,8 +16,8 @@ import { getNavigationAction } from '../DeepLinkHandler/DeepLinkHandler.store'
 export function mapStateToProps (state, props) {
   const formError = state.session.loginError
   const pending = getPending(state)
-  const goToSignup = () => props.navigation.navigate('Signup')
-  const goToResetPassword = () => props.navigation.navigate('ForgotPassword')
+  const goToSignup = () => props.navigation.navigate({routeName: 'Signup', key: 'Signup'})
+  const goToResetPassword = () => props.navigation.navigate({routeName: 'ForgotPassword', key: 'ForgotPassword'})
   return {
     loggedIn: state.session.loggedIn,
     formError,

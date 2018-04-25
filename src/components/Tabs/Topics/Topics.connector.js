@@ -70,7 +70,7 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
   // this is a hack to handle the fact that we have pseudo navigation events (changing community/network)
   // which don't go on the router navigation stack
   const onBackFromComingSoon = () => {
-    navigation.navigate('Home')
+    navigation.navigate({routeName: 'Home', key: 'Home'})
   }
 
   const goToComingSoon = () => {

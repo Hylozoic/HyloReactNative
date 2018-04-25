@@ -184,7 +184,7 @@ export function refineActivity ({ action, actor, comment, community, post, meta 
         community: community.name,
         header: `New join request`,
         nameInHeader: true,
-        onPress: () => navigate('Settings')
+        onPress: () => navigate({routeName: 'Settings', key: 'Settings'})
       }
 
     case ACTION_APPROVED_JOIN_REQUEST:

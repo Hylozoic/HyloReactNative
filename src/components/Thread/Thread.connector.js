@@ -48,7 +48,7 @@ export function mapDispatchToProps (dispatch, { navigation }) {
       // All Communities and Network feed to topic nav
       // currently not supported
       if (networkId || communityId === ALL_COMMUNITIES_ID) {
-        navigation.navigate('TopicSupportComingSoon')
+        navigation.navigate({routeName: 'TopicSupportComingSoon', key: 'TopicSupportComingSoon'})
       } else {
         navigation.navigate({routeName: 'Feed', params: {communityId, topicName}, key: 'Feed'})
       }
