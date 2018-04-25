@@ -2,6 +2,10 @@ import { StyleSheet } from 'react-native'
 import { gunsmoke, rhino30, rhino80, caribbeanGreen, white60onCaribbeanGreen, amaranth } from 'style/colors'
 
 export default {
+
+}
+
+export const sample = {
   header: {
     backgroundColor: 'white'
   },

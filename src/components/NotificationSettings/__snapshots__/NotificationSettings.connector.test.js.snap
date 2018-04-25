@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mapDispatchToProps has the right keys and behavior 1`] = `
+Object {
+  "updateUserSettings": [Function],
+}
+`;
+
+exports[`mapStateToProps sets up cancel 1`] = `
+Object {
+  "currentUser": undefined,
+}
+`;

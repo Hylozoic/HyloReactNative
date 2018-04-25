@@ -23,7 +23,6 @@ describe('NotificationSettings', () => {
     const renderer = new ReactShallowRenderer()
     const props = {
       currentUser: {id: 1},
-      updateNotificationSettings: () => {},
       unlinkAccount: () => {}
     }
 
@@ -36,7 +35,6 @@ describe('NotificationSettings', () => {
   it('matches snapshot with state set', () => {
     const props = {
       currentUser: {id: 1},
-      updateNotificationSettings: () => {},
       unlinkAccount: () => {}
     }
     const renderer = ReactTestRenderer.create(<NotificationSettings {...props} />)
@@ -197,28 +195,6 @@ describe('NotificationSettings', () => {
     })
   })
 
-  describe('saveChanges', () => {
-    it('sets the state and calls updateNotificationSettings', () => {
-      const updateNotificationSettings = jest.fn()
-      const instance = ReactTestRenderer.create(
-        <NotificationSettings updateNotificationSettings={updateNotificationSettings} />).getInstance()
-      const edits = {
-        email: 'rara@rara.com',
-        password: 'abcabcabc',
-        confirmPassword: 'abcabcabc'
-      }
-      instance.setState({
-        changed: true,
-        editingPassword: true,
-        edits
-      })
-      instance.saveChanges()
-      expect(updateNotificationSettings).toHaveBeenCalledWith(omit('confirmPassword', edits))
-      expect(instance.state.changed).toEqual(false)
-      expect(instance.state.editingPassword).toEqual(false)
-    })
-  })
-
   describe('confirmLeave', () => {
     it('calls onLeave when changed is false', () => {
       const instance = ReactTestRenderer.create(<NotificationSettings />).getInstance()
@@ -321,7 +297,6 @@ describe('SocialAccounts', () => {
       facebookUrl: 'foo.com',
       twitterName: 'rara',
       loginWithFacebook: () => {},
-      updateNotificationSettings: () => {},
       unlinkAccount: () => {},
       updateField: () => {}
     }
@@ -339,7 +314,6 @@ describe('SocialControl', () => {
     facebookUrl: 'foo.com',
     twitterName: 'rara',
     loginWithFacebook: () => {},
-    updateNotificationSettings: () => {},
     unlinkAccount: () => {},
     updateField: () => {}
   }
@@ -375,7 +349,6 @@ describe('SocialControl', () => {
       it('does the right thing with no twitterName', () => {
         const props = {
           onLink: jest.fn(fn => fn()),
-          updateNotificationSettings: jest.fn(),
           onChange: jest.fn(),
           provider
         }
@@ -384,14 +357,12 @@ describe('SocialControl', () => {
         instance.linkClicked()
         expect(props.onLink).toHaveBeenCalled()
         expect(props.onChange).toHaveBeenCalledWith(false)
-        expect(props.updateNotificationSettings).not.toHaveBeenCalled()
       })
 
       it('does the right thing with a twitterName', () => {
         const twitterName = 'mrtweets'
         const props = {
           onLink: jest.fn(fn => fn(twitterName)),
-          updateNotificationSettings: jest.fn(),
           onChange: jest.fn(),
           provider
         }
@@ -399,7 +370,6 @@ describe('SocialControl', () => {
           <SocialControl {...props} />).getInstance()
         instance.linkClicked()
         expect(props.onLink).toHaveBeenCalled()
-        expect(props.updateNotificationSettings)
         .toHaveBeenCalledWith({twitterName})
         expect(props.onChange).toHaveBeenCalledWith(true)
       })
@@ -411,7 +381,6 @@ describe('SocialControl', () => {
       it('does the right thing with', () => {
         const props = {
           onLink: jest.fn(fn => Promise.resolve(fn(true))),
-          updateNotificationSettings: jest.fn(),
           onChange: jest.fn(),
           provider
         }

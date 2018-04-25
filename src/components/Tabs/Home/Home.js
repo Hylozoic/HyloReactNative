@@ -13,6 +13,10 @@ export default class Home extends React.Component {
     return nextProps.isFocused
   }
 
+  componentDidMount () {
+    this.props.navigation.navigate('NotificationSettings')
+  }
+  
   render () {
     const { communityId, currentUser, navigation, networkId } = this.props
     if (!currentUser) return <Loading style={{flex: 1}} />

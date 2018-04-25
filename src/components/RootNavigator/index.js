@@ -17,6 +17,7 @@ import PostEditor from '../PostEditor'
 import DetailsEditor from '../PostEditor/DetailsEditor'
 import PostDetails from '../PostDetails'
 import MemberProfile from '../MemberProfile'
+import NotificationSettings from '../NotificationSettings'
 import NotificationsList from '../NotificationsList'
 import CommentEditor from '../PostDetails/CommentEditor'
 import InvitePeople from '../InvitePeople'
@@ -132,7 +133,8 @@ const screensInStack = {
   Loading: {screen: LoadingScreen},
   CreateCommunityName: {screen: CreateCommunityName},
   CreateCommunityUrl: {screen: CreateCommunityUrl},
-  CreateCommunityReview: {screen: CreateCommunityReview}
+  CreateCommunityReview: {screen: CreateCommunityReview},
+  NotificationSettings: {screen: NotificationSettings}
 }
 
 const RootNavigator = StackNavigator(

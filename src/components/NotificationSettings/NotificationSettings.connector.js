@@ -1,36 +1,26 @@
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-import { get } from 'lodash/fp'
-import { resetToRoute, resetToMainRoute } from 'util/navigation'
-import { logout, loginWithFacebook } from '../Login/actions'
-import updateNotificationSettings from '../../store/actions/updateNotificationSettings'
-import { unlinkAccount } from './NotificationSettings.store'
+// import { bindActionCreators } from 'redux'
+import { createSelector } from 'reselect'
 import getMe from '../../store/selectors/getMe'
 
-export function mapStateToProps (state, props) {
-  const resettingPassword = get('navigation.state.routeName', props) === 'PasswordReset'
-  const cancel = () => resettingPassword
-    ? resetToMainRoute(props.navigation)
-    : props.navigation.goBack()
+export const getPresentedMe = createSelector(
+  getMe,
+  me => me && ({
+    settings: me.settings,
+    memberships: me.memberships.toModelArray()
+  })
+)
 
+export function mapStateToProps (state, props) {
   return {
-    currentUser: getMe(state, props),
-    resettingPassword,
-    cancel
+    currentUser: getPresentedMe(state, props)
   }
 }
 
 export function mapDispatchToProps (dispatch, props) {
   return {
-    logout: () => {
-      resetToRoute(props.navigation, 'Login')
-      return dispatch(logout())
-    },
-    ...bindActionCreators({
-      updateNotificationSettings,
-      unlinkAccount,
-      loginWithFacebook
-    }, dispatch)
+    updateUserSettings: changes => console.log('updateUserSettings', changes),
+    updateMembershipSettings: (communityId, changes) => console.log('update memberships settings for', communityId, 'with', changes)
   }
 }
 
