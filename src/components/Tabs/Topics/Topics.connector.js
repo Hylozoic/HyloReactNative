@@ -63,7 +63,7 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
 
   const setTopicSubscribe = (topicId, isSubscribing) =>
     dispatchProps.setTopicSubscribe(topicId, communityId, isSubscribing)
-  const goToTopic = topicName => navigation.navigate('Feed', {topicName})
+  const goToTopic = topicName => navigation.navigate({routeName: 'Feed', params: {topicName}, key: 'Feed'})
 
   // previous communityId gets passed here so we can get out of
   // network/all communities
@@ -74,7 +74,7 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
   }
 
   const goToComingSoon = () => {
-    navigation.navigate('TopicSupportComingSoon', {onBack: onBackFromComingSoon})
+    navigation.navigate({routeName: 'TopicSupportComingSoon', params: {onBack: onBackFromComingSoon}, key: 'TopicSupportComingSoon'})
   }
 
   const shouldRedirect = !!networkId

@@ -148,7 +148,7 @@ export function refineActivity ({ action, actor, comment, community, post, meta 
         body: `wrote: ${presentedText(comment.text)}`,
         header: `mentioned you in a comment on`,
         nameInHeader: true,
-        onPress: () => navigate('PostDetails', { id: post.id }),
+        onPress: () => navigate({routeName: 'PostDetails', params: { id: post.id }, key: 'PostDetails'}),
         title: post.title
       }
 
@@ -156,7 +156,7 @@ export function refineActivity ({ action, actor, comment, community, post, meta 
       return {
         body: `wrote: ${presentedText(comment.text)}`,
         header: `New Comment on`,
-        onPress: () => navigate('PostDetails', { id: post.id }),
+        onPress: () => navigate({routeName: 'PostDetails', params: { id: post.id }, key: 'PostDetails'}),
         title: post.title
       }
 
@@ -164,7 +164,7 @@ export function refineActivity ({ action, actor, comment, community, post, meta 
       return {
         body: `wrote: ${presentedText(post.details)}`,
         header: `mentioned you`,
-        onPress: () => navigate('PostDetails', { id: post.id }),
+        onPress: () => navigate({routeName: 'PostDetails', params: { id: post.id }, key: 'PostDetails'}),
         nameInHeader: true
       }
 
@@ -174,7 +174,7 @@ export function refineActivity ({ action, actor, comment, community, post, meta 
       return {
         body: `wrote: ${presentedText(post.details)}`,
         header: `New Post in`,
-        onPress: () => navigate('PostDetails', { id: post.id }),
+        onPress: () => navigate({routeName: 'PostDetails', params: { id: post.id }, key: 'PostDetails'}),
         topic
       }
 
@@ -192,13 +192,13 @@ export function refineActivity ({ action, actor, comment, community, post, meta 
         body: `approved your request to join`,
         community: community.name,
         header: `Join Request Approved`,
-        onPress: () => navigate('Feed', { communityId: community.id })
+        onPress: () => navigate({routeName: 'Feed', params: { communityId: community.id }, key: 'Feed'})
       }
     case ACTION_ANNOUNCEMENT:
       return {
         body: `wrote: ${presentedText(post.title)}`,
         header: `posted an announcement`,
-        onPress: () => navigate('PostDetails', { id: post.id }),
+        onPress: () => navigate({routeName: 'PostDetails', params: { id: post.id }, key: 'PostDetails'}),
         nameInHeader: true
       }
   }
