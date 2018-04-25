@@ -60,9 +60,7 @@ const screensInTabs = {
   Feed: {screen: Feed, path: 'feed/:communityId'},
   TopicFeed: {screen: Feed, path: 'c/:communitySlugFromLink/topicFeed/:topicName'},
   CommunityFeed: {screen: Feed, path: 'communityFeed/:communitySlugFromLink'},
-  NetworkFeed: {screen: Feed, path: 'networkFeed/:networkSlug'},
-  PostDetails: {screen: PostDetails, path: 'post/:id'},
-  MemberProfile: {screen: MemberProfile, path: 'people/:id'}
+  NetworkFeed: {screen: Feed, path: 'networkFeed/:networkSlug'}
 }
 
 Object.freeze(tabs)
@@ -99,10 +97,12 @@ const DrawerAndTabsNavigator = DrawerNavigator(
 
 // Screens that appear outside of tabs: Settings, Messages, etc.
 const screensInStack = {
+  MemberProfile: {screen: MemberProfile, path: 'people/:id'},
   MemberDetails: {screen: MemberDetails},
   MemberSkillEditor: {screen: MemberSkillEditor},
   CommentEditor: {screen: CommentEditor},
   NewMessage: {screen: NewMessage},
+  PostDetails: {screen: PostDetails, path: 'post/:id'},
   PostEditor: {screen: PostEditor},
   DetailsEditor: {screen: DetailsEditor},
   UserSettings: {screen: UserSettings},
