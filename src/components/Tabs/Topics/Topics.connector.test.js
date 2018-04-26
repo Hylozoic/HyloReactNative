@@ -48,6 +48,10 @@ describe('mergeProps', () => {
     mergedProps.setTopicSubscribe(topicId, isSubscribing)
     expect(dispatchProps.setTopicSubscribe).toHaveBeenCalledWith(topicId, communityId, isSubscribing)
     mergedProps.goToTopic(topicName)
-    expect(ownProps.navigation.navigate).toHaveBeenCalledWith('Feed', {topicName})
+    expect(ownProps.navigation.navigate).toHaveBeenCalledWith({
+      'key': 'Feed',
+      'params': {'topicName': topicName},
+      'routeName': 'Feed'
+    })
   })
 })

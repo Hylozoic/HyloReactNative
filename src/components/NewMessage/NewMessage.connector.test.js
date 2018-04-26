@@ -72,7 +72,11 @@ describe('mergeProps', () => {
     return mergedProps.createMessage('hello')
     .then(() => {
       expect(dispatchProps.createMessage).toHaveBeenCalledWith(122, 'hello', true)
-      expect(ownProps.navigation.navigate).toHaveBeenCalledWith('Thread', {id})
+      expect(ownProps.navigation.navigate).toHaveBeenCalledWith({
+        'key': 'Thread',
+        'params': {'id': id},
+        'routeName': 'Thread'
+      })
     })
   })
 

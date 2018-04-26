@@ -34,10 +34,10 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     ...dispatchProps,
     ...ownProps,
     goToCreateCommunityName: () => {
-      navigation.navigate('CreateCommunityName')
+      navigation.navigate({routeName: 'CreateCommunityName', key: 'CreateCommunityName'})
     },
     goToCreateCommunityUrl: () => {
-      navigation.navigate('CreateCommunityUrl')
+      navigation.navigate({routeName: 'CreateCommunityUrl', key: 'CreateCommunityUrl'})
     },
     goToCommunity: community => {
       navigation.navigate('DrawerClose')

@@ -58,9 +58,12 @@ Object {
   "editPost": Array [
     "navigate",
     Array [
-      "PostEditor",
       Object {
-        "id": "1",
+        "key": "PostEditor",
+        "params": Object {
+          "id": "1",
+        },
+        "routeName": "PostEditor",
       },
     ],
   ],
@@ -180,18 +183,24 @@ Object {
   "showMember": Array [
     "navigate",
     Array [
-      "MemberProfile",
       Object {
-        "id": undefined,
+        "key": "MemberProfile",
+        "params": Object {
+          "id": undefined,
+        },
+        "routeName": "MemberProfile",
       },
     ],
   ],
   "showTopic": Array [
     "navigate",
     Array [
-      "Feed",
       Object {
-        "topicName": undefined,
+        "key": "Feed",
+        "params": Object {
+          "topicName": undefined,
+        },
+        "routeName": "Feed",
       },
     ],
   ],

@@ -44,7 +44,7 @@ export function mapDispatchToProps (dispatch, props) {
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
-  const goToNext = () => ownProps.navigation.navigate('SignupFlow2')
+  const goToNext = () => ownProps.navigation.navigate({routeName: 'SignupFlow2', key: 'SignupFlow2'})
   const { name, email, password, currentUser, showPasswordField } = stateProps
   const {
     signup, updateUserSettings, updateLocalUserSettings, fetchCurrentUser

@@ -3,8 +3,8 @@ import { loginWithFacebook, loginWithGoogle } from '../Login/actions'
 import { getPending } from '../Login/Login.store'
 
 export function mapStateToProps (state, props) {
-  const goToSignupFlow = () => props.navigation.navigate('SignupFlow1')
-  const goToLogin = () => props.navigation.navigate('Login')
+  const goToSignupFlow = () => props.navigation.navigate({routeName: 'SignupFlow1', key: 'SignupFlow1'})
+  const goToLogin = () => props.navigation.navigate({routeName: 'Login', key: 'Login'})
   return {
     goToSignupFlow,
     goToLogin,
