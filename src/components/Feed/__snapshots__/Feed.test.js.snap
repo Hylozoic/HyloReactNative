@@ -35,9 +35,9 @@ exports[`renders correctly 1`] = `
     network={undefined}
     screenProps={undefined}
     showCommunities={false}
-    showMember={undefined}
+    showMember={[Function]}
     showPost={[Function]}
-    showTopic={undefined}
+    showTopic={[Function]}
     topicName="amazing"
   />
 </View>
