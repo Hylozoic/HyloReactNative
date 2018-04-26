@@ -108,9 +108,8 @@ export default class PostEditor extends React.Component {
   componentDidMount () {
     const { post, navigation, setDetails } = this.props
     setDetails(get('details', post))
-
     navigation.setParams({
-      headerTitle: post ? 'Edit Post' : 'New Post',
+      headerTitle: isEmpty(post) ? 'New Post' : 'Edit Post',
       save: this.save
     })
   }
@@ -187,7 +186,6 @@ export default class PostEditor extends React.Component {
   //  - priority is given to topics already on the post (preserve order)
   // TODO: support topics from more than one community, for crossposting
   insertUniqueTopics = (topicCandidates, topicsPicked) => {
-    console.log('insertUniqueTopics')
     const topics = uniqBy(
       t => t.name,
       [ ...this.state.topics, ...topicCandidates ]

@@ -27,4 +27,4 @@ yarn install
 
 ./android/gradlew clean -p ./android/
 rm -rf ios/build
-yarn start -- --reset-cache
+yarn start --reset-cache
