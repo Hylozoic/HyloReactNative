@@ -4,6 +4,8 @@ import { FlatList, TouchableOpacity, View, Text } from 'react-native'
 import header from 'util/header'
 import { LoadingScreen } from '../Loading'
 import NotificationCard from '../NotificationCard'
+import CreateCommunityNotice from '../CreateCommunityNotice'
+
 import styles from './NotificationsList.styles'
 
 export default class NotificationsList extends Component {
@@ -37,10 +39,16 @@ export default class NotificationsList extends Component {
   keyExtractor = item => item.id
 
   render () {
-    const { hasMore, markActivityRead, notifications, pending } = this.props
+    const { hasMore, markActivityRead, notifications, pending, currentUserHasMemberships, goToCreateCommunityName } = this.props
     const { ready } = this.state
     if (!ready || (pending && notifications.length === 0)) {
       return <LoadingScreen />
+    }
+    if (!currentUserHasMemberships) {
+      return <CreateCommunityNotice
+        goToCreateCommunityName={goToCreateCommunityName}
+        text={'No notifications here, try creating your own Community!'}
+      />
     }
     if (ready && !pending && notifications.length === 0) {
       return <Text style={styles.center}>Nothing new for you!</Text>

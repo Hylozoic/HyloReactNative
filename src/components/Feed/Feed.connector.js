@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { get } from 'lodash/fp'
+import { isEmpty } from 'lodash'
 
 import getMe from '../../store/selectors/getMe'
 import getNetwork from '../../store/selectors/getNetwork'
@@ -17,6 +18,7 @@ import {
   getNetworkSearchObject
 } from './Feed.store'
 import { mapWhenFocused, mergeWhenFocused } from 'util/connector'
+import getMemberships from '../../store/selectors/getMemberships'
 import getNavigationParam from '../../store/selectors/getNavigationParam'
 
 export function mapStateToProps (state, props) {
@@ -45,6 +47,8 @@ export function mapStateToProps (state, props) {
     getCommunityTopic(state, {topicName, slug: community.slug})
   const topicSubscribed = topicName && communityTopic && communityTopic.isSubscribed
   const topic = get('topic', communityTopic)
+  const currentUserHasMemberships = !isEmpty(getMemberships(state))
+
   return {
     currentUser,
     community,
@@ -53,7 +57,8 @@ export function mapStateToProps (state, props) {
     postsTotal: get('postsTotal', communitySlug ? communityTopic : topic),
     followersTotal: get('followersTotal', communitySlug ? communityTopic : topic),
     topicName,
-    topicSubscribed
+    topicSubscribed,
+    currentUserHasMemberships
   }
 }
 
@@ -75,7 +80,10 @@ export function mapDispatchToProps (dispatch, { navigation }) {
     ...bindActionCreators({
       fetchCommunityTopic,
       setTopicSubscribe
-    }, dispatch)
+    }, dispatch),
+    goToCreateCommunityName: () => {
+      navigation.navigate('CreateCommunityName')
+    }
   }
 }
 

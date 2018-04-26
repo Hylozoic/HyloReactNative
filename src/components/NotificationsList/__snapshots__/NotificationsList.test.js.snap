@@ -149,3 +149,56 @@ exports[`NotificationsList matches the last snapshot for NotificationRow 1`] = `
   </TouchableOpacity>
 </View>
 `;
+
+exports[`NotificationsList matches the renders CreateCommunityNotice if user does not have memberships 1`] = `
+<View>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+  >
+    No notifications here, try creating your own Community!
+  </Text>
+  <Image
+    source={
+      Object {
+        "testUri": "../../../src/assets/hey-axolotl.png",
+      }
+    }
+  />
+  <View>
+    <View
+      accessibilityComponentType={undefined}
+      accessibilityLabel={undefined}
+      accessibilityTraits={undefined}
+      accessible={true}
+      collapsable={undefined}
+      hasTVPreferredFocus={undefined}
+      hitSlop={undefined}
+      isTVSelectable={true}
+      nativeID={undefined}
+      onLayout={undefined}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      testID={undefined}
+      tvParallaxProperties={undefined}
+    >
+      <View>
+        <View>
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+          >
+            Create a Community
+          </Text>
+        </View>
+      </View>
+    </View>
+  </View>
+</View>
+`;

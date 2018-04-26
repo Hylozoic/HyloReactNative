@@ -24,6 +24,7 @@ describe('NotificationsList', () => {
       markActivityRead: jest.fn(),
       markAllRead: jest.fn(),
       pending: false,
+      currentUserHasMemberships: true,
       notifications: [
         {
           activityId: '1',
@@ -91,5 +92,12 @@ describe('NotificationsList', () => {
       markActivityRead={props.markActivityRead}
       notification={props.notifications[0]} />)
     expect(shallowRenderer.getRenderOutput()).toMatchSnapshot()
+  })
+
+  it('matches the renders CreateCommunityNotice if user does not have memberships', () => {
+    props['currentUserHasMemberships'] = false
+    const renderer = TestRenderer.create(<NotificationsList {...props} />)
+    renderer.getInstance().setState({ ready: true })
+    expect(renderer.toJSON()).toMatchSnapshot()
   })
 })
