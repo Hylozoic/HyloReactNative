@@ -33,9 +33,9 @@ export function mapDispatchToProps (dispatch, props) {
 
   return {
     fetchPost: () => dispatch(fetchPost(id)),
-    editPost: () => props.navigation.navigate('PostEditor', {id}),
-    showMember: id => props.navigation.navigate('MemberProfile', {id}),
-    showTopic: topicName => props.navigation.navigate('Feed', {topicName}),
+    editPost: () => props.navigation.navigate({routeName: 'PostEditor', params: {id}, key: 'PostEditor'}),
+    showMember: id => props.navigation.navigate({routeName: 'MemberProfile', params: {id}, key: 'MemberProfile'}),
+    showTopic: topicName => props.navigation.navigate({routeName: 'Feed', params: {topicName}, key: 'Feed'}),
     newComment: communityId => {
       return props.navigation.navigate('CommentEditor', {
         postId: id,

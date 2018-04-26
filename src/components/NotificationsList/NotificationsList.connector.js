@@ -1,5 +1,6 @@
 import { connect } from 'react-redux'
 import React from 'react'
+import { isEmpty } from 'lodash'
 import {
   FETCH_NOTIFICATIONS,
   fetchNotifications,
@@ -9,6 +10,7 @@ import {
   markAllActivitiesRead,
   updateNewNotificationCount
 } from './NotificationsList.store'
+import getMemberships from '../../store/selectors/getMemberships'
 import { HeaderButton } from 'util/header'
 import { mapWhenFocused } from 'util/connector'
 
@@ -18,7 +20,8 @@ export function mapStateToProps (state, props) {
   return {
     hasMore: getHasMoreNotifications(state),
     pending: state.pending[FETCH_NOTIFICATIONS],
-    notifications: getNotifications(state, props)
+    notifications: getNotifications(state, props),
+    currentUserHasMemberships: !isEmpty(getMemberships(state))
   }
 }
 
@@ -32,7 +35,10 @@ export function mapDispatchToProps (dispatch, { navigation }) {
     fetchMore: offset => dispatch(fetchNotifications(NOTIFICATIONS_PAGE_SIZE, offset)),
     markActivityRead: id => dispatch(markActivityRead(id)),
     setRightButton: () => navigation.setParams({ headerRight: <HeaderButton {...right} /> }),
-    updateNewNotificationCount: () => dispatch(updateNewNotificationCount())
+    updateNewNotificationCount: () => dispatch(updateNewNotificationCount()),
+    goToCreateCommunityName: () => {
+      navigation.navigate('CreateCommunityName')
+    }
   }
 }
 

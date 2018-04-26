@@ -3,6 +3,7 @@ import { createPost, updatePost, setDetails } from './PostEditor.store'
 import { createTopicTag } from '../Editor/Editor'
 import { get, isEmpty } from 'lodash/fp'
 import getPost, { presentPost } from '../../store/selectors/getPost'
+import getCanModerate from '../../store/selectors/getCanModerate'
 import { mapWhenFocused } from 'util/connector'
 import upload from 'store/actions/upload'
 
@@ -22,6 +23,7 @@ export function mapStateToProps (state, props) {
   return {
     details: state.PostEditor.details,
     post: post || defaultPost,
+    canModerate: getCanModerate(state),
     communityIds: post
       ? post.communities.map(x => x.id)
       : [communityId],
@@ -58,7 +60,7 @@ export function mapDispatchToProps (dispatch, props) {
           return Promise.resolve({})
         })
     },
-    editDetails: setTopics => navigation.navigate('DetailsEditor', {communityId, setTopics}),
+    editDetails: setTopics => navigation.navigate({routeName: 'DetailsEditor', params: {communityId, setTopics}, key: 'DetailsEditor'}),
     setDetails: content => dispatch(setDetails(content)),
     upload: (type, id, file) => dispatch(upload(type, id, file))
   }

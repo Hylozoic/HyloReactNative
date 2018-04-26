@@ -1,13 +1,14 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { View } from 'react-native'
 import { get } from 'lodash/fp'
 
+import CreateCommunityNotice from '../CreateCommunityNotice'
 import FeedList from '../FeedList'
 import FeedBanner from '../FeedBanner'
 import SocketSubscriber from '../SocketSubscriber'
 import styles from './Feed.styles'
 
-export default class Feed extends Component {
+export default class Feed extends React.Component {
   state = {showNotification: false}
 
   static navigationOptions = ({ navigation }) => {
@@ -19,7 +20,8 @@ export default class Feed extends Component {
   }
 
   componentDidMount () {
-    if (this.props.community) this.props.navigation.setParams({communityName: this.props.community.name})
+    const { community, navigation } = this.props
+    if (community) navigation.setParams({communityName: this.props.community.name})
     const { fetchCommunityTopic } = this.props
     if (fetchCommunityTopic) fetchCommunityTopic()
   }
@@ -33,7 +35,6 @@ export default class Feed extends Component {
       community,
       network,
       currentUser,
-      editPost,
       goToCommunity,
       navigation,
       newPost,
@@ -45,15 +46,21 @@ export default class Feed extends Component {
       topicName,
       topicSubscribed,
       postsTotal,
-      followersTotal
+      followersTotal,
+      goToCreateCommunityName,
+      currentUserHasMemberships
     } = this.props
-
+    if (!currentUserHasMemberships) {
+      return <CreateCommunityNotice
+        goToCreateCommunityName={goToCreateCommunityName}
+        text={'No posts here, try creating your own Community!'}
+      />
+    }
     return <View style={styles.container}>
       <FeedList
         community={community}
         network={network}
         showPost={showPost}
-        editPost={editPost}
         goToCommunity={goToCommunity}
         header={
           <FeedBanner

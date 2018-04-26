@@ -47,7 +47,6 @@ import Signup from '../Signup'
 import trackCurrentTab from './trackCurrentTab'
 import { isIOS } from 'util/platform'
 import { MAIN_ROUTE_NAME, MAIN_ROUTE_PATH } from 'util/navigation'
-import TabBar from './TabBar'
 import extendRouter from './extendRouter'
 
 // If you change or add tabs you have to edit trackCurrentTab.js
@@ -59,13 +58,10 @@ const tabs = {
 
 // Screens that can be shown in any tab (the same tab icon stays highlighted)
 const screensInTabs = {
-  Feed: {screen: Feed},
-  PostDetails: {screen: PostDetails, path: 'post/:id'},
-  MemberProfile: {screen: MemberProfile, path: 'people/:id'},
-  MemberDetails: {screen: MemberDetails},
-  MemberSkillEditor: {screen: MemberSkillEditor},
-  CommentEditor: {screen: CommentEditor},
-  NewMessage: {screen: NewMessage}
+  Feed: {screen: Feed, path: 'feed/:communityId'},
+  TopicFeed: {screen: Feed, path: 'c/:communitySlugFromLink/topicFeed/:topicName'},
+  CommunityFeed: {screen: Feed, path: 'communityFeed/:communitySlugFromLink'},
+  NetworkFeed: {screen: Feed, path: 'networkFeed/:networkSlug'}
 }
 
 Object.freeze(tabs)
@@ -81,13 +77,11 @@ const TabNavigatorWithBar = TabNavigator(
     lazy: true,
     tabBarOptions: {
       showIcon: true,
+      pressColor: '#DCDCDC',
       showLabel: true,
-      indicatorStyle: {display: 'none'},
+      indicatorStyle: {backgroundColor: 'white'},
       style: isIOS ? tabStyles.tabNavigatorIOS : tabStyles.tabNavigatorAndroid
-    },
-    // TODO remove this line once this PR is merged and released:
-    // https://github.com/react-community/react-navigation/pull/1764
-    tabBarComponent: TabBar
+    }
   }
 )
 
@@ -104,6 +98,12 @@ const DrawerAndTabsNavigator = DrawerNavigator(
 
 // Screens that appear outside of tabs: Settings, Messages, etc.
 const screensInStack = {
+  MemberProfile: {screen: MemberProfile, path: 'people/:id'},
+  MemberDetails: {screen: MemberDetails},
+  MemberSkillEditor: {screen: MemberSkillEditor},
+  CommentEditor: {screen: CommentEditor},
+  NewMessage: {screen: NewMessage},
+  PostDetails: {screen: PostDetails, path: 'post/:id'},
   PostEditor: {screen: PostEditor},
   DetailsEditor: {screen: DetailsEditor},
   UserSettings: {screen: UserSettings},

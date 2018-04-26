@@ -16,7 +16,8 @@ export function createPost (post) {
     communities,
     imageUrls = [],
     fileUrls = [],
-    topicNames = []
+    topicNames = [],
+    sendAnnouncement
   } = post
   const communityIds = communities.map(c => c.id)
   const preprocessedDetails = divToP(details)
@@ -24,27 +25,30 @@ export function createPost (post) {
     type: CREATE_POST,
     graphql: {
       query: `mutation (
-        $type: String,
-        $title: String,
-        $details: String,
-        $communityIds: [String],
-        $imageUrls: [String],
-        $fileUrls: [String],
+        $type: String
+        $title: String
+        $details: String
+        $communityIds: [String]
+        $imageUrls: [String]
+        $fileUrls: [String]
+        $announcement: Boolean
         $topicNames: [String]
       ) {
         createPost(data: {
-          type: $type,
-          title: $title,
-          details: $details,
-          communityIds: $communityIds,
-          imageUrls: $imageUrls,
-          fileUrls: $fileUrls,
+          type: $type
+          title: $title
+          details: $details
+          communityIds: $communityIds
+          imageUrls: $imageUrls
+          fileUrls: $fileUrls
+          announcement: $announcement
           topicNames: $topicNames
         }) {
           id
           type
           title
           details
+          announcement
           commentersTotal
           updatedAt
           communities {
@@ -74,6 +78,7 @@ export function createPost (post) {
         communityIds,
         imageUrls,
         fileUrls,
+        announcement: sendAnnouncement,
         topicNames
       }
     },
@@ -97,22 +102,22 @@ export function updatePost (post) {
   return {
     type: UPDATE_POST,
     graphql: {
-      query: `mutation ($id: ID,
-        $type: String,
-        $title: String,
-        $details: String,
-        $communityIds: [String],
-        $imageUrls: [String],
-        $fileUrls: [String],
+      query: `mutation ($id: ID
+        $type: String
+        $title: String
+        $details: String
+        $communityIds: [String]
+        $imageUrls: [String]
+        $fileUrls: [String]
         $topicNames: [String]
       ) {
         updatePost(id: $id, data: {
-          type: $type,
-          title: $title,
-          details: $details,
-          communityIds: $communityIds,
-          imageUrls: $imageUrls,
-          fileUrls: $fileUrls,
+          type: $type
+          title: $title
+          details: $details
+          communityIds: $communityIds
+          imageUrls: $imageUrls
+          fileUrls: $fileUrls
           topicNames: $topicNames
         }) {
           id
@@ -120,6 +125,7 @@ export function updatePost (post) {
           title
           details
           updatedAt
+          announcement
           communities {
             id
             name

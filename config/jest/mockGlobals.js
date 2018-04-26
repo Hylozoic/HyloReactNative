@@ -28,6 +28,7 @@ global.FormData = jest.fn(() => {
 jest.mock('react-native-device-info')
 
 global.XMLHttpRequest = jest.fn()
+global.window = {}
 
 // Mock this globally @see https://github.com/l-urence/react-native-autocomplete-input#known-issues
 jest.mock('react-native-autocomplete-input', () => 'Autocomplete')

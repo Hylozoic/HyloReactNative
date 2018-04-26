@@ -9,6 +9,9 @@ describe('mapStateToProps', () => {
     }
     const stateProps = mapStateToProps({}, props)
     stateProps.goToNext()
-    expect(props.navigation.navigate).toHaveBeenCalledWith('SignupFlow5')
+    expect(props.navigation.navigate).toHaveBeenCalledWith({
+      'key': 'SignupFlow5',
+      'routeName': 'SignupFlow5'
+    })
   })
 })

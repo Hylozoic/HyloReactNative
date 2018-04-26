@@ -33,9 +33,9 @@ export function mapStateToProps (state, props) {
   }
 
   const topics = getCommunityTopics(state, queryResultParams)
-  .filter(topicFilter)
-  .map(presentCommunityTopic)
-  .sort(topicSort)
+    .filter(topicFilter)
+    .map(presentCommunityTopic)
+    .sort(topicSort)
 
   return {
     community,
@@ -63,18 +63,18 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
 
   const setTopicSubscribe = (topicId, isSubscribing) =>
     dispatchProps.setTopicSubscribe(topicId, communityId, isSubscribing)
-  const goToTopic = topicName => navigation.navigate('Feed', {topicName})
+  const goToTopic = topicName => navigation.navigate({routeName: 'Feed', params: {topicName}, key: 'Feed'})
 
   // previous communityId gets passed here so we can get out of
   // network/all communities
   // this is a hack to handle the fact that we have pseudo navigation events (changing community/network)
   // which don't go on the router navigation stack
   const onBackFromComingSoon = () => {
-    navigation.navigate('Home')
+    navigation.navigate({routeName: 'Home', key: 'Home'})
   }
 
   const goToComingSoon = () => {
-    navigation.navigate('TopicSupportComingSoon', {onBack: onBackFromComingSoon})
+    navigation.navigate({routeName: 'TopicSupportComingSoon', params: {onBack: onBackFromComingSoon}, key: 'TopicSupportComingSoon'})
   }
 
   const shouldRedirect = !!networkId

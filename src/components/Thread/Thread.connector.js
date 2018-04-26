@@ -43,14 +43,14 @@ export function mapDispatchToProps (dispatch, { navigation }) {
     reconnectFetchMessages: () => dispatch(fetchMessages(threadId, {reset: true})),
     sendIsTyping: () => sendIsTyping(threadId, true),
     updateThreadReadTime: () => dispatch(updateThreadReadTime(threadId)),
-    showMember: id => navigation.navigate('MemberProfile', {id}),
+    showMember: id => navigation.navigate({routeName: 'MemberProfile', params: {id}, key: 'MemberProfile'}),
     showTopic: (communityId, networkId) => topicName => {
       // All Communities and Network feed to topic nav
       // currently not supported
       if (networkId || communityId === ALL_COMMUNITIES_ID) {
-        navigation.navigate('TopicSupportComingSoon')
+        navigation.navigate({routeName: 'TopicSupportComingSoon', key: 'TopicSupportComingSoon'})
       } else {
-        navigation.navigate('Feed', {communityId, topicName})
+        navigation.navigate({routeName: 'Feed', params: {communityId, topicName}, key: 'Feed'})
       }
     }
   }
@@ -62,7 +62,7 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
   const setNavParams = title
     ? () => navigation.setParams({
       title,
-      onPressTitle: () => navigation.navigate('ThreadParticipants', {id})
+      onPressTitle: () => navigation.navigate({routeName: 'ThreadParticipants', params: {id}, key: 'ThreadParticipants'})
     })
     : () => {}
   return {
