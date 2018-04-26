@@ -28,17 +28,18 @@ export default class Feed extends React.Component {
     return nextProps.isFocused
   }
 
+  handleShowTopic = (topicName) => this.props.showTopic(topicName)
+  handleShowMember = (memberId) => this.props.showMember(memberId)
+  handleGoToCommunity = (communityId) => this.props.goToCommunity(communityId)
+
   render () {
     const {
       community,
       network,
       currentUser,
-      goToCommunity,
       navigation,
       newPost,
-      showMember,
       showPost,
-      showTopic,
       screenProps,
       setTopicSubscribe,
       topicName,
@@ -52,7 +53,7 @@ export default class Feed extends React.Component {
         community={community}
         network={network}
         showPost={showPost}
-        goToCommunity={goToCommunity}
+        goToCommunity={this.handleGoToCommunity}
         header={
           <FeedBanner
             community={community}
@@ -68,8 +69,8 @@ export default class Feed extends React.Component {
         navigation={navigation}
         screenProps={screenProps}
         showCommunities={!community}
-        showMember={showMember}
-        showTopic={showTopic}
+        showMember={this.handleShowMember}
+        showTopic={this.handleShowTopic}
         topicName={topicName} />
       {!topicName && community && <SocketSubscriber type='community' id={community.id} />}
     </View>
