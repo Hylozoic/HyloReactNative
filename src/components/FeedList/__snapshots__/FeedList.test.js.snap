@@ -123,12 +123,13 @@ exports[`ListControls renders correctly 1`] = `
 
 exports[`PostRow only displays communities in the selected network 1`] = `
 <View>
-  <TouchableWithoutFeedback
+  <TouchableOpacity
+    activeOpacity={0.6}
+    delayPressIn={50}
     onPress={[Function]}
   >
     <View>
       <PostCard
-        editPost={[Function]}
         goToCommunity={[Function]}
         post={
           Object {
@@ -154,18 +155,19 @@ exports[`PostRow only displays communities in the selected network 1`] = `
         showTopic={undefined}
       />
     </View>
-  </TouchableWithoutFeedback>
+  </TouchableOpacity>
 </View>
 `;
 
 exports[`PostRow renders correctly 1`] = `
 <View>
-  <TouchableWithoutFeedback
+  <TouchableOpacity
+    activeOpacity={0.6}
+    delayPressIn={50}
     onPress={[Function]}
   >
     <View>
       <PostCard
-        editPost={[Function]}
         goToCommunity={[Function]}
         post={
           Object {
@@ -177,6 +179,6 @@ exports[`PostRow renders correctly 1`] = `
         showTopic={undefined}
       />
     </View>
-  </TouchableWithoutFeedback>
+  </TouchableOpacity>
 </View>
 `;
