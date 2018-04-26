@@ -50,7 +50,7 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>HyloApp</string>
+			<string>HyloA</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>HyloApp</string>
