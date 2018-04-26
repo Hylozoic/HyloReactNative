@@ -9,13 +9,16 @@ import { get, filter, isEmpty } from 'lodash/fp'
 import FlagContent from '../../FlagContent'
 
 export default class PostHeader extends PureComponent {
-  state = {
-    flaggingVisible: false
+  constructor (props) {
+    super(props)
+    this.state = {
+      creator: {},
+      flaggingVisible: false
+    }
   }
 
-  static defaultProps = {
-    creator: {},
-    flaggingVisible: false
+  handleEditPost = () => {
+    this.props.editPost(this.props.postId)
   }
 
   render () {
@@ -27,7 +30,6 @@ export default class PostHeader extends PureComponent {
       postId,
       slug,
       showCommunity,
-      editPost,
       showMember,
       canFlag,
       goToCommunity,
@@ -37,7 +39,8 @@ export default class PostHeader extends PureComponent {
       pinPost,
       topics,
       showTopic,
-      announcement
+      announcement,
+      canEdit
     } = this.props
     const { flaggingVisible } = this.state
 
@@ -118,7 +121,7 @@ export default class PostHeader extends PureComponent {
         <PostMenu
           removePost={removePostWithConfirm}
           deletePost={deletePostWithConfirm}
-          editPost={editPost}
+          editPost={canEdit && this.handleEditPost}
           flagPost={flagPost}
           pinPost={pinPost}
           pinned={pinned} />

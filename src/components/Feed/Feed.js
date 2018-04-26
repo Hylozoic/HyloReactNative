@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { View } from 'react-native'
 import { get } from 'lodash/fp'
 
@@ -7,7 +7,7 @@ import FeedBanner from '../FeedBanner'
 import SocketSubscriber from '../SocketSubscriber'
 import styles from './Feed.styles'
 
-export default class Feed extends Component {
+export default class Feed extends React.Component {
   state = {showNotification: false}
 
   static navigationOptions = ({ navigation }) => {
@@ -28,18 +28,18 @@ export default class Feed extends Component {
     return nextProps.isFocused
   }
 
+  handleShowTopic = (topicName) => this.props.showTopic(topicName)
+  handleShowMember = (memberId) => this.props.showMember(memberId)
+  handleGoToCommunity = (communityId) => this.props.goToCommunity(communityId)
+
   render () {
     const {
       community,
       network,
       currentUser,
-      editPost,
-      goToCommunity,
       navigation,
       newPost,
-      showMember,
       showPost,
-      showTopic,
       screenProps,
       setTopicSubscribe,
       topicName,
@@ -53,8 +53,7 @@ export default class Feed extends Component {
         community={community}
         network={network}
         showPost={showPost}
-        editPost={editPost}
-        goToCommunity={goToCommunity}
+        goToCommunity={this.handleGoToCommunity}
         header={
           <FeedBanner
             community={community}
@@ -70,8 +69,8 @@ export default class Feed extends Component {
         navigation={navigation}
         screenProps={screenProps}
         showCommunities={!community}
-        showMember={showMember}
-        showTopic={showTopic}
+        showMember={this.handleShowMember}
+        showTopic={this.handleShowTopic}
         topicName={topicName} />
       {!topicName && community && <SocketSubscriber type='community' id={community.id} />}
     </View>

@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-export default class SessionCheck extends React.Component {
+export default class SessionCheck extends React.PureComponent {
   static navigationOptions = {
     header: null
   }

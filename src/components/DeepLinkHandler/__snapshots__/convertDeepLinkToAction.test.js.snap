@@ -16,28 +16,20 @@ Object {
 
 exports[`handles a link without a preceding slash (for tokenAuth nextURL handling) 1`] = `
 Object {
-  "action": Object {
-    "params": Object {
-      "id": "8190",
-    },
-    "routeName": "PostDetails",
-    "type": "Navigation/NAVIGATE",
+  "params": Object {
+    "id": "8190",
   },
-  "routeName": "Main",
+  "routeName": "PostDetails",
   "type": "Navigation/NAVIGATE",
 }
 `;
 
 exports[`handles a member profile link 1`] = `
 Object {
-  "action": Object {
-    "params": Object {
-      "id": "1234",
-    },
-    "routeName": "MemberProfile",
-    "type": "Navigation/NAVIGATE",
+  "params": Object {
+    "id": "1234",
   },
-  "routeName": "Main",
+  "routeName": "MemberProfile",
   "type": "Navigation/NAVIGATE",
 }
 `;
@@ -80,28 +72,20 @@ Object {
 
 exports[`handles a network post link 1`] = `
 Object {
-  "action": Object {
-    "params": Object {
-      "id": "1234",
-    },
-    "routeName": "PostDetails",
-    "type": "Navigation/NAVIGATE",
+  "params": Object {
+    "id": "1234",
   },
-  "routeName": "Main",
+  "routeName": "PostDetails",
   "type": "Navigation/NAVIGATE",
 }
 `;
 
 exports[`handles a post link 1`] = `
 Object {
-  "action": Object {
-    "params": Object {
-      "id": "8190",
-    },
-    "routeName": "PostDetails",
-    "type": "Navigation/NAVIGATE",
+  "params": Object {
+    "id": "8190",
   },
-  "routeName": "Main",
+  "routeName": "PostDetails",
   "type": "Navigation/NAVIGATE",
 }
 `;
@@ -162,14 +146,10 @@ Object {
 
 exports[`handles an all-communities post link 1`] = `
 Object {
-  "action": Object {
-    "params": Object {
-      "id": "1234",
-    },
-    "routeName": "PostDetails",
-    "type": "Navigation/NAVIGATE",
+  "params": Object {
+    "id": "1234",
   },
-  "routeName": "Main",
+  "routeName": "PostDetails",
   "type": "Navigation/NAVIGATE",
 }
 `;

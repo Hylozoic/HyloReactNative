@@ -1,11 +1,11 @@
-import { createSelector as ormCreateSelector } from 'reselect'
+import { createSelector as ormCreateSelector } from 'redux-orm'
 import orm from '../../store/models'
 
 const getPost = ormCreateSelector(
-  state => state,
-  state => orm.session(state.orm),
+  orm,
+  state => state.orm,
   (state, props) => props.id,
-  (state, { Post }, id) => Post.safeGet({id})
+  (session, id) => session.Post.safeGet({id})
 )
 
 export default getPost

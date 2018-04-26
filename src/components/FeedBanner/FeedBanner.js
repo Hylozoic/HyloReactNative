@@ -7,9 +7,10 @@ import NotificationOverlay from '../NotificationOverlay'
 import LinearGradient from 'react-native-linear-gradient'
 import { isUndefined } from 'lodash'
 import Button from '../Button'
+import { bannerlinearGradientColors } from 'style/colors'
 const bannerImage = require('../../assets/all-communities-banner.png')
 
-export default class FeedBanner extends React.Component {
+export default class FeedBanner extends React.PureComponent {
   state = {}
 
   toggleSubscribe = () => {
@@ -54,13 +55,7 @@ export default class FeedBanner extends React.Component {
 
     return <View style={styles.container}>
       <Image source={image} style={styles.image} />
-      <LinearGradient style={styles.gradient}
-        colors={[
-          'rgba(0, 0, 0, 0)',
-          'rgba(0, 0, 0, 0.1)',
-          'rgba(0, 0, 0, 0.3)',
-          'rgba(0, 0, 0, 0.6)'
-        ]} />
+      <LinearGradient style={styles.gradient} colors={bannerlinearGradientColors} />
       <View style={styles.titleRow}>
         <View style={styles.title}>
           <Text style={styles.name}

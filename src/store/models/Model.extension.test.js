@@ -29,19 +29,26 @@ describe('updateAppending', () => {
 
   beforeEach(() => {
     session = orm.session(orm.getEmptyState())
-    session.Dog.create({id: 1, legs: [1, 2]})
+    session.Dog.create({id: 1, legs: [1, 2], name: 'sender'})
     times(4, i => session.Limb.create({id: i + 1}))
+  })
+
+  it('handles safeget', () => {
+    expect(session.Dog.safeGet({})).toBeFalsy()
+    expect(session.Dog.safeGet()).toBeFalsy()
+    expect(session.Dog.safeGet({id: 1})).toEqual(session.Dog.withId(1))
+    expect(session.Dog.safeGet({id: null, name: 'sender'})).toEqual(session.Dog.withId(1))
   })
 
   it('appends ids for many-to-many relations', () => {
     session.Dog.withId(1).updateAppending({legs: [3, 4]})
     expect(session.Dog.withId(1).legs.toRefArray().map(x => x.id))
-    .toEqual([1, 2, 3, 4])
+      .toEqual([1, 2, 3, 4])
   })
 
   it('removes duplicate ids', () => {
     session.Dog.withId(1).updateAppending({legs: [2, 3, 4]})
     expect(session.Dog.withId(1).legs.toRefArray().map(x => x.id))
-    .toEqual([1, 2, 3, 4])
+      .toEqual([1, 2, 3, 4])
   })
 })
