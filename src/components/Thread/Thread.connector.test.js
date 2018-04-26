@@ -69,6 +69,10 @@ describe('mergeProps', () => {
     const { title, onPressTitle } = setParams.mock.calls[0][0]
     expect(title).toEqual(stateProps.title)
     onPressTitle()
-    expect(navigate).toHaveBeenCalledWith('ThreadParticipants', {id: stateProps.id})
+    expect(navigate).toHaveBeenCalledWith({
+      'key': 'ThreadParticipants',
+      'params': {'id': stateProps.id},
+      'routeName': 'ThreadParticipants'
+    })
   })
 })

@@ -11,6 +11,10 @@ describe('mapStateToProps', () => {
     const stateProps = mapStateToProps({}, props)
     expect(stateProps).toMatchSnapshot()
     stateProps.goToParticipant(1)
-    expect(props.navigation.navigate).toHaveBeenCalledWith('MemberProfile', {id: 1})
+    expect(props.navigation.navigate).toHaveBeenCalledWith({
+      'key': 'MemberProfile',
+      'params': {'id': 1},
+      'routeName': 'MemberProfile'
+    })
   })
 })
