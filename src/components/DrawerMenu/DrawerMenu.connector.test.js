@@ -5,7 +5,7 @@ import {
   partitionCommunities
 } from './DrawerMenu.connector'
 
-describe('mapStateToProps matches the latest snapshot', () => {
+it('mapStateToProps matches the latest snapshot', () => {
   const state = {
     session: {
       loggedIn: true,
@@ -19,7 +19,7 @@ describe('mapStateToProps matches the latest snapshot', () => {
   expect(mapStateToProps(state, props)).toMatchSnapshot()
 })
 
-describe('mapDispatchToProps matches the last snapshot', () =>
+it('mapDispatchToProps matches the last snapshot', () =>
   expect(mapDispatchToProps).toMatchSnapshot()
 )
 

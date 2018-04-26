@@ -1,11 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[` 1`] = `
+exports[`mapDispatchToProps matches the last snapshot 1`] = `
+Object {
+  "logout": [Function],
+  "selectCommunity": [Function],
+  "selectNetwork": [Function],
+}
+`;
+
+exports[`mapStateToProps matches the latest snapshot 1`] = `
 Object {
   "avatarUrl": undefined,
   "canModerateCurrentCommunity": undefined,
   "communities": Array [],
-  "currentCommunity": undefined,
+  "currentCommunity": null,
   "currentCommunityId": undefined,
   "currentNetworkId": undefined,
   "currentUser": undefined,
@@ -17,14 +25,6 @@ Object {
       "name": "All Communities",
     },
   ],
-}
-`;
-
-exports[` 2`] = `
-Object {
-  "logout": [Function],
-  "selectCommunity": [Function],
-  "selectNetwork": [Function],
 }
 `;
 

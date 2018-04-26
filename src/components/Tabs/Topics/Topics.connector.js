@@ -33,9 +33,9 @@ export function mapStateToProps (state, props) {
   }
 
   const topics = getCommunityTopics(state, queryResultParams)
-  .filter(topicFilter)
-  .map(presentCommunityTopic)
-  .sort(topicSort)
+    .filter(topicFilter)
+    .map(presentCommunityTopic)
+    .sort(topicSort)
 
   return {
     community,

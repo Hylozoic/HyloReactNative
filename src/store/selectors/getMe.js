@@ -10,5 +10,4 @@ const getMe = ormCreateSelector(
   state => state.orm,
   session => session.Me.first()
 )
-
 export default getMe
