@@ -9,7 +9,7 @@ import { isUndefined } from 'lodash'
 import Button from '../Button'
 const bannerImage = require('../../assets/all-communities-banner.png')
 
-export default class FeedBanner extends React.Component {
+export default class FeedBanner extends React.PureComponent {
   state = {}
 
   toggleSubscribe = () => {

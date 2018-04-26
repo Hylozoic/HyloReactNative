@@ -133,7 +133,7 @@ exports[`PostDetails renders correctly 1`] = `
     }
     header={
       <View>
-        <Connect(PostHeader)
+        <withNavigation(Connect(PostHeader))
           announcement={undefined}
           communities={
             Array [

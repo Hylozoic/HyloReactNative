@@ -6,7 +6,6 @@ Object {
     "id": "12",
     "slug": "life",
   },
-  "editPost": [Function],
   "fetchCommunityTopic": [Function],
   "goToCommunity": [Function],
   "newPost": [Function],

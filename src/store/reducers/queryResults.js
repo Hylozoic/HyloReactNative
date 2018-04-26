@@ -27,7 +27,6 @@ import { get, isNull, omitBy, pick, reduce, uniq, isEmpty, includes } from 'loda
 import { createSelector as ormCreateSelector } from 'redux-orm'
 import orm from 'store/models'
 import { mapValues } from 'lodash'
-
 // reducer
 
 export default function (state = {}, action) {
@@ -157,9 +156,9 @@ export function makeQueryResultsModelSelector (resultsSelector, modelName, trans
     (session, results) => {
       if (isEmpty(results) || isEmpty(results.ids)) return []
       return session[modelName].all()
-      .filter(x => includes(x.id, results.ids))
-      .orderBy(x => results.ids.indexOf(x.id))
-      .toModelArray()
-      .map(transform)
+        .filter(x => includes(x.id, results.ids))
+        .orderBy(x => results.ids.indexOf(x.id))
+        .toModelArray()
+        .map(transform)
     })
 }

@@ -1,12 +1,9 @@
-import { createSelector } from 'redux-orm'
-
-import orm from '../models'
+import { createSelector } from 'reselect'
+import getMe from './getMe'
 
 const getCurrentUserId = createSelector(
-  orm,
-  state => state.orm,
-  session => {
-    const me = session.Me.first()
+  getMe,
+  (me) => {
     return me && me.id
   }
 )

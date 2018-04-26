@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { Image, Text, TouchableOpacity, View, SectionList } from 'react-native'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
@@ -11,7 +11,7 @@ import { isEmpty } from 'lodash/fp'
 import { ALL_COMMUNITIES_ID } from '../../store/models/Community'
 const allCommunitiesImage = require('../../assets/All_Communities2.png')
 
-export default class DrawerMenu extends Component {
+export default class DrawerMenu extends React.PureComponent {
   render () {
     const {
       name, avatarUrl, goToCommunity, goToNetwork, goToMyProfile,
