@@ -14,6 +14,7 @@ import PopupMenuButton from '../../PopupMenuButton'
 import LinearGradient from 'react-native-linear-gradient'
 import styles from './Members.styles'
 import Button from '../../Button'
+import { bannerlinearGradientColors } from 'style/colors'
 
 export default class Members extends React.Component {
   static navigationOptions = ({ navigation, screenProps }) =>
@@ -139,13 +140,7 @@ export function Banner ({ community, network, all }) {
 
   return <View style={styles.bannerContainer}>
     <Image source={{uri: bannerUrl}} style={styles.image} />
-    <LinearGradient style={styles.gradient}
-      colors={[
-        'rgba(0, 0, 0, 0)',
-        'rgba(0, 0, 0, 0.1)',
-        'rgba(0, 0, 0, 0.3)',
-        'rgba(0, 0, 0, 0.6)'
-      ]} />
+    <LinearGradient style={styles.gradient} colors={bannerlinearGradientColors} />
     <View style={styles.titleRow}>
       <Text style={styles.name}>{name}</Text>
     </View>

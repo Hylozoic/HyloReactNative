@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { UIManager, findNodeHandle, TouchableOpacity } from 'react-native'
 
-export default class PopupMenuButton extends Component {
+export default class PopupMenuButton extends React.PureComponent {
   state = {
     open: false
   }

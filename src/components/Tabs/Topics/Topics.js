@@ -10,6 +10,7 @@ import styles from './Topics.styles'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
 import LinearGradient from 'react-native-linear-gradient'
 import { isEmpty, get } from 'lodash/fp'
+import { bannerlinearGradientColors } from 'style/colors'
 
 const title = 'Topics'
 
@@ -48,13 +49,7 @@ export default class Topics extends React.Component {
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <View style={styles.bannerContainer}>
           <Image source={image} style={styles.image} />
-          <LinearGradient style={styles.gradient}
-            colors={[
-              'rgba(0, 0, 0, 0)',
-              'rgba(0, 0, 0, 0.1)',
-              'rgba(0, 0, 0, 0.3)',
-              'rgba(0, 0, 0, 0.6)'
-            ]} />
+          <LinearGradient style={styles.gradient} colors={bannerlinearGradientColors} />
           <Text style={styles.title}>{name}</Text>
         </View>
         <SearchBar term={term} setTerm={setTerm} />

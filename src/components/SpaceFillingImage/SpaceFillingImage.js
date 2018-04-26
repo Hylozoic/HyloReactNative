@@ -2,7 +2,7 @@ import React from 'react'
 import { View, Image } from 'react-native'
 import { string } from 'prop-types'
 
-export default class SpaceFillingImage extends React.Component {
+export default class SpaceFillingImage extends React.PureComponent {
   static propTypes = {
     imageUrl: string
   }
