@@ -24,6 +24,10 @@ export default function fetchCurrentUser () {
             lastViewedAt
             newPostCount
             hasModeratorRole
+            settings {
+              sendPushNotifications
+              sendEmail
+            }
             community {
               id
               name

@@ -1,8 +1,19 @@
 import { StyleSheet } from 'react-native'
 import { gunsmoke, rhino30, rhino80, caribbeanGreen, white60onCaribbeanGreen, amaranth } from 'style/colors'
 
-export default {
+const row = {
+  flexDirection: 'row'
+}
 
+
+export default {
+  row,
+  settingsRow: {
+    ...row
+  },
+  iconRow: {
+    ...row
+  }
 }
 
 export const sample = {
