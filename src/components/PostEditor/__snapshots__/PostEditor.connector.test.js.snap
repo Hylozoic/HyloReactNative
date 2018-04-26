@@ -14,22 +14,22 @@ Array [
   Array [
     Object {
       "graphql": Object {
-        "query": "mutation ($id: ID,
-        $type: String,
-        $title: String,
-        $details: String,
-        $communityIds: [String],
-        $imageUrls: [String],
-        $fileUrls: [String],
+        "query": "mutation ($id: ID
+        $type: String
+        $title: String
+        $details: String
+        $communityIds: [String]
+        $imageUrls: [String]
+        $fileUrls: [String]
         $topicNames: [String]
       ) {
         updatePost(id: $id, data: {
-          type: $type,
-          title: $title,
-          details: $details,
-          communityIds: $communityIds,
-          imageUrls: $imageUrls,
-          fileUrls: $fileUrls,
+          type: $type
+          title: $title
+          details: $details
+          communityIds: $communityIds
+          imageUrls: $imageUrls
+          fileUrls: $fileUrls
           topicNames: $topicNames
         }) {
           id
@@ -37,6 +37,7 @@ Array [
           title
           details
           updatedAt
+          announcement
           communities {
             id
             name

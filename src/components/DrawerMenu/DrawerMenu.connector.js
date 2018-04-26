@@ -9,7 +9,9 @@ import { logout } from '../Login/actions'
 import selectCommunity from '../../store/actions/selectCommunity'
 import selectNetwork from '../../store/actions/selectNetwork'
 import { ALL_COMMUNITIES_ID } from '../../store/models/Community'
-import getCommunity from '../../store/selectors/getCommunity'
+import getCanModerate from '../../store/selectors/getCanModerate'
+import getCurrentCommunity from '../../store/selectors/getCurrentCommunity'
+import { createSelector } from 'reselect'
 
 export function partitionCommunities (memberships) {
   const allCommunities = memberships.map(m => ({
@@ -62,24 +64,24 @@ export function partitionCommunities (memberships) {
   }
 }
 
-export function mapStateToProps (state, props) {
-  const currentUser = getMe(state)
-  const currentCommunityId = getCurrentCommunityId(state, props)
-  const currentCommunity = currentCommunityId && getCommunity(state, {id: currentCommunityId})
-  const canModerateCurrentCommunity = currentUser && currentUser.canModerate(currentCommunity)
-  const currentNetworkId = getCurrentNetworkId(state, props)
-  const { networks, communities } = partitionCommunities(getMemberships(state))
+const getPartitionCommunities = createSelector(
+  getMemberships,
+  (memberships) => partitionCommunities(memberships)
+)
 
+export function mapStateToProps (state, props) {
+  const { networks, communities } = getPartitionCommunities(state)
+  const currentUser = getMe(state)
   return {
-    currentUser,
+    currentUser: getMe(state),
     name: get('name', currentUser) || 'you',
     avatarUrl: get('avatarUrl', currentUser),
     networks,
     communities,
-    canModerateCurrentCommunity,
-    currentCommunityId,
-    currentCommunity,
-    currentNetworkId
+    canModerateCurrentCommunity: getCanModerate(state),
+    currentCommunityId: getCurrentCommunityId(state, props),
+    currentCommunity: getCurrentCommunity(state),
+    currentNetworkId: getCurrentNetworkId(state, props)
   }
 }
 

@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { View } from 'react-native'
 import { get } from 'lodash/fp'
 
@@ -8,7 +8,7 @@ import FeedBanner from '../FeedBanner'
 import SocketSubscriber from '../SocketSubscriber'
 import styles from './Feed.styles'
 
-export default class Feed extends Component {
+export default class Feed extends React.Component {
   state = {showNotification: false}
 
   static navigationOptions = ({ navigation }) => {
@@ -35,7 +35,6 @@ export default class Feed extends Component {
       community,
       network,
       currentUser,
-      editPost,
       goToCommunity,
       navigation,
       newPost,
@@ -62,7 +61,6 @@ export default class Feed extends Component {
         community={community}
         network={network}
         showPost={showPost}
-        editPost={editPost}
         goToCommunity={goToCommunity}
         header={
           <FeedBanner

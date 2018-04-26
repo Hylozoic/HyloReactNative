@@ -28,6 +28,12 @@ if (Platform.OS === 'android') {
 
 AppRegistry.registerComponent('HyloReactNative', () => AppContainer)
 
+// Uncomment this in order to debug un-performant code: https://github.com/maicki/why-did-you-update
+// if (process.env.NODE_ENV !== 'production') {
+//   const {whyDidYouUpdate} = require('why-did-you-update')
+//   whyDidYouUpdate(React, { exclude: [/^Connect/, /^Icon/, /^TabBarIcon/, /^LinearGradient/] })
+// }
+
 function AppContainer () {
   return <ErrorBoundary>
     <Provider store={store}>

@@ -10,7 +10,7 @@ import { get } from 'lodash/fp'
 import { capeCod10 } from '../../style/colors'
 import { shape, any, object, string, func, array, bool } from 'prop-types'
 
-export default class PostCard extends React.Component {
+export default class PostCard extends React.PureComponent {
   static propTypes = {
     post: shape({
       id: any,
@@ -31,7 +31,6 @@ export default class PostCard extends React.Component {
     fetchPost: func,
     expanded: bool,
     showDetails: func,
-    editPost: func,
     showCommunity: bool,
     showMember: func,
     showTopic: func
@@ -45,7 +44,6 @@ export default class PostCard extends React.Component {
     const {
       post,
       showCommunity,
-      editPost,
       currentUser,
       showMember,
       showTopic,
@@ -58,7 +56,6 @@ export default class PostCard extends React.Component {
         date={post.createdAt}
         type={post.type}
         showCommunity={showCommunity}
-        editPost={editPost}
         topics={post.topics}
         communities={post.communities}
         slug={slug}

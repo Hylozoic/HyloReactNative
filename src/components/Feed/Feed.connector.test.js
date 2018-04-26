@@ -1,6 +1,5 @@
 import { mapStateToProps, mapDispatchToProps, mergeProps } from './Feed.connector'
 import orm from 'store/models'
-import { FETCH_COMMUNITY_TOPIC } from './Feed.store'
 
 let session, state
 
@@ -57,7 +56,17 @@ describe('mapStateToProps', () => {
     session.Community.create({id: '7', slug: 'world'})
     session.Topic.create({id: '1', name: 'foo'})
     session.CommunityTopic.create({community: '7', topic: '1', isSubscribed: true})
-    const props = {topicName: 'foo', communityId: '7'}
+    const props = {
+      topicName: 'foo',
+      navigation: {
+        state: {
+          params: {
+            communityId: '7'
+          }
+        }
+      }
+    }
+    state = {orm: session.state}
 
     expect(mapStateToProps(state, props)).toEqual(expect.objectContaining({
       topicSubscribed: true

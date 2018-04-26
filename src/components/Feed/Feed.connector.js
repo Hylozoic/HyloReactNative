@@ -66,7 +66,6 @@ export function mapDispatchToProps (dispatch, { navigation }) {
   return {
     newPost: (communityId, topicName) => navigation.navigate({routeName: 'PostEditor', params: {communityId, topicName}, key: 'PostEditor'}),
     showPost: id => navigation.navigate({routeName: 'PostDetails', params: {id}, key: 'PostDetails'}),
-    editPost: id => navigation.navigate({routeName: 'PostEditor', params: {id}, key: 'PostEditor'}),
     showMember: id => navigation.navigate({routeName: 'MemberProfile', params: {id}, key: 'MemberProfile'}),
     showTopic: (communityId, networkId) => topicName => {
       // All Communities and Network feed to topic nav
