@@ -10,10 +10,16 @@ Object {
 exports[`mapStateToProps maps the state... to the props 1`] = `
 Array [
   Array [
-    "SignupFlow1",
+    Object {
+      "key": "SignupFlow1",
+      "routeName": "SignupFlow1",
+    },
   ],
   Array [
-    "Login",
+    Object {
+      "key": "Login",
+      "routeName": "Login",
+    },
   ],
 ]
 `;
