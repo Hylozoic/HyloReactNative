@@ -2,6 +2,7 @@ import React from 'react'
 import { View } from 'react-native'
 import { get } from 'lodash/fp'
 
+import CreateCommunityNotice from '../CreateCommunityNotice'
 import FeedList from '../FeedList'
 import FeedBanner from '../FeedBanner'
 import SocketSubscriber from '../SocketSubscriber'
@@ -19,7 +20,8 @@ export default class Feed extends React.Component {
   }
 
   componentDidMount () {
-    if (this.props.community) this.props.navigation.setParams({communityName: this.props.community.name})
+    const { community, navigation } = this.props
+    if (community) navigation.setParams({communityName: this.props.community.name})
     const { fetchCommunityTopic } = this.props
     if (fetchCommunityTopic) fetchCommunityTopic()
   }
@@ -44,9 +46,16 @@ export default class Feed extends React.Component {
       topicName,
       topicSubscribed,
       postsTotal,
-      followersTotal
+      followersTotal,
+      goToCreateCommunityName,
+      currentUserHasMemberships
     } = this.props
-
+    if (!currentUserHasMemberships) {
+      return <CreateCommunityNotice
+        goToCreateCommunityName={goToCreateCommunityName}
+        text={'No posts here, try creating your own Community!'}
+      />
+    }
     return <View style={styles.container}>
       <FeedList
         community={community}

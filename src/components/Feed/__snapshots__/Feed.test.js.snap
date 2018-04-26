@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders correctly 1`] = `
+exports[`renders correctly if currentUserHasMemberships 1`] = `
 <View>
   <Connect(FeedList)
     community={
@@ -41,4 +41,11 @@ exports[`renders correctly 1`] = `
     topicName="amazing"
   />
 </View>
+`;
+
+exports[`renders correctly if currentUserHasMemberships is false 1`] = `
+<CreateCommunityNotice
+  goToCreateCommunityName={undefined}
+  text="No posts here, try creating your own Community!"
+/>
 `;
