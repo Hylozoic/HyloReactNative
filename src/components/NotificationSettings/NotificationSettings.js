@@ -25,6 +25,7 @@ export default class NotificationSettings extends React.Component {
 
     return <ScrollView contentContainerStyle={styles.scrollContainer}>
       {memberships.map(membership => <MembershipSettingsRow
+        key={membership.id}
         membership={membership}
         updateMembershipSettings={updateMembershipSettings} />)}
     </ScrollView>
@@ -56,10 +57,10 @@ export class SettingsRow extends React.Component {
     const { expanded } = this.state
     return <View style={styles.settingsRow}>
       <View style={styles.row}>
-        <Image source={{uri: imageUrl}} style={styles.image} />
+        <Image source={{uri: imageUrl}} style={styles.communityAvatar} />
         <Text>{name}</Text>
         <TouchableOpacity onPress={this.toggleExpand}>
-          {expanded ? <Icon name='ArrowUp' /> : <Icon name='ArrowDown' />}
+          {expanded ? <Icon name='ArrowUp' style={styles.icon} /> : <Icon name='ArrowDown' style={styles.icon} />}
         </TouchableOpacity>
       </View>
       {expanded && <View style={styles.iconRow}>

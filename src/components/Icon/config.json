@@ -2,15 +2,21 @@
   "selection": [
     {
       "order": 2,
-      "name": "EmailNotification"
+      "name": "EmailNotification",
+      "prevSize": 32,
+      "codes": [
+        59648
+      ]
     },
     {
       "order": 3,
-      "name": "InAppNotification"
+      "name": "InAppNotification",
+      "prevSize": 32
     },
     {
       "order": 5,
-      "name": "PushNotification"
+      "name": "PushNotification",
+      "prevSize": 32
     },
     {
       "order": 2,
@@ -290,10 +296,6 @@
   ],
   "metadata": {
     "name": "hylo-evo-icons",
-    "importSize": {
-      "width": 45,
-      "height": 45
-    },
     "iconsHash": 1237827210
   },
   "height": 1024,
@@ -304,12 +306,11 @@
         "M512 932.978c232.5 0 420.978-188.478 420.978-420.978s-188.478-420.978-420.978-420.978c-232.5 0-420.978 188.478-420.978 420.978s188.478 420.978 420.978 420.978zM512 967.111c-251.351 0-455.111-203.76-455.111-455.111s203.76-455.111 455.111-455.111c251.351 0 455.111 203.76 455.111 455.111s-203.76 455.111-455.111 455.111z",
         "M702.564 668.36h-381.129c-24.246 0-43.976-19.731-43.976-43.976v-234.541c0-24.246 19.731-43.976 43.976-43.976h381.129c24.246 0 43.976 19.731 43.976 43.976v234.541c0 24.246-19.731 43.976-43.976 43.976zM321.436 639.043h381.129c8.077 0 14.659-6.582 14.659-14.659v-229.894l-195.68 167.726c-2.756 2.345-6.142 3.533-9.543 3.533s-6.787-1.187-9.543-3.533l-195.68-167.726v229.894c0 8.077 6.582 14.659 14.659 14.659zM694.693 375.185h-365.385l182.693 156.6 182.693-156.6z"
       ],
-      "isMulticolor": true,
-      "isMulticolor2": true,
-      "grid": 0,
       "tags": [
         "EmailNotification"
-      ]
+      ],
+      "grid": 0,
+      "defaultCode": 59648
     },
     {
       "paths": [
@@ -317,10 +318,11 @@
         "M653.775 581.353l-45.783-61.044v-110.757c0-43.882-35.692-79.597-79.611-79.597h-38.897c-44.086 0-79.611 35.562-79.611 79.597v110.757l-45.783 61.044h289.686zM375.738 409.552c0-62.811 50.732-113.73 113.745-113.73h38.897c62.82 0 113.745 51.045 113.745 113.73v99.38l52.637 70.183c15.066 20.088 6.722 36.372-18.334 36.372h-334.993c-25.191 0-33.475-16.183-18.334-36.372l52.637-70.183v-99.38z",
         "M463.149 642.125h-34.133c0 44.165 35.78 79.916 79.916 79.916 44.047 0 79.916-35.78 79.916-79.916h-34.133c0 25.248-20.551 45.783-45.783 45.783-25.297 0-45.783-20.481-45.783-45.783z"
       ],
-      "grid": 0,
       "tags": [
         "InAppNotification"
-      ]
+      ],
+      "grid": 0,
+      "defaultCode": 59649
     },
     {
       "paths": [
@@ -329,10 +331,11 @@
         "M381.156 370.7v-34.133h261.689v34.133z",
         "M432.356 307.2c-18.851 0-34.133 15.282-34.133 34.133v341.333c0 18.851 15.282 34.133 34.133 34.133h159.289c18.851 0 34.133-15.282 34.133-34.133v-341.333c0-18.851-15.282-34.133-34.133-34.133h-159.289zM432.356 273.067h159.289c37.703 0 68.267 30.564 68.267 68.267v341.333c0 37.703-30.564 68.267-68.267 68.267h-159.289c-37.703 0-68.267-30.564-68.267-68.267v-341.333c0-37.703 30.564-68.267 68.267-68.267z"
       ],
-      "grid": 0,
       "tags": [
         "PushNotification"
-      ]
+      ],
+      "grid": 0,
+      "defaultCode": 59650
     },
     {
       "paths": [
@@ -342,7 +345,7 @@
       "tags": [
         "Announcement"
       ],
-      "defaultCode": 59648,
+      "defaultCode": 59651,
       "grid": 0
     },
     {
@@ -353,7 +356,7 @@
       "tags": [
         "Invite"
       ],
-      "defaultCode": 59649,
+      "defaultCode": 59652,
       "grid": 0
     },
     {
@@ -363,7 +366,7 @@
       "tags": [
         "Post"
       ],
-      "defaultCode": 59650,
+      "defaultCode": 59653,
       "grid": 0
     },
     {
@@ -373,7 +376,7 @@
       "tags": [
         "Star"
       ],
-      "defaultCode": 59651,
+      "defaultCode": 59654,
       "grid": 0
     },
     {
@@ -383,7 +386,7 @@
       "tags": [
         "Plus"
       ],
-      "defaultCode": 59652,
+      "defaultCode": 59655,
       "grid": 0
     },
     {
@@ -394,7 +397,7 @@
       "tags": [
         "Settings"
       ],
-      "defaultCode": 59653,
+      "defaultCode": 59656,
       "grid": 0
     },
     {
@@ -405,7 +408,7 @@
       "tags": [
         "ArrowForward"
       ],
-      "defaultCode": 59654,
+      "defaultCode": 59657,
       "grid": 0
     },
     {
@@ -415,7 +418,7 @@
       "tags": [
         "Document"
       ],
-      "defaultCode": 59655,
+      "defaultCode": 59658,
       "grid": 0
     },
     {
@@ -425,7 +428,7 @@
       "tags": [
         "Download"
       ],
-      "defaultCode": 59656,
+      "defaultCode": 59659,
       "grid": 0
     },
     {
@@ -435,7 +438,7 @@
       "tags": [
         "Send"
       ],
-      "defaultCode": 59657,
+      "defaultCode": 59660,
       "grid": 0
     },
     {
@@ -445,7 +448,7 @@
       "tags": [
         "Checkmark"
       ],
-      "defaultCode": 59658,
+      "defaultCode": 59661,
       "grid": 0
     },
     {
@@ -455,7 +458,7 @@
       "tags": [
         "Empty"
       ],
-      "defaultCode": 59659,
+      "defaultCode": 59662,
       "grid": 0
     },
     {
@@ -466,7 +469,7 @@
       "tags": [
         "Back"
       ],
-      "defaultCode": 59660,
+      "defaultCode": 59663,
       "grid": 0
     },
     {
@@ -476,7 +479,7 @@
       "tags": [
         "AddImage"
       ],
-      "defaultCode": 59661,
+      "defaultCode": 59664,
       "grid": 0
     },
     {
@@ -486,7 +489,7 @@
       "tags": [
         "Clock"
       ],
-      "defaultCode": 59662,
+      "defaultCode": 59665,
       "grid": 0
     },
     {
@@ -496,7 +499,7 @@
       "tags": [
         "StarCircle"
       ],
-      "defaultCode": 59663,
+      "defaultCode": 59666,
       "grid": 0
     },
     {
@@ -506,7 +509,7 @@
       "tags": [
         "ProfileUrl"
       ],
-      "defaultCode": 59664,
+      "defaultCode": 59667,
       "grid": 0
     },
     {
@@ -516,7 +519,7 @@
       "tags": [
         "ProfileTwitter"
       ],
-      "defaultCode": 59665,
+      "defaultCode": 59668,
       "grid": 0
     },
     {
@@ -526,7 +529,7 @@
       "tags": [
         "ProfileLinkedin"
       ],
-      "defaultCode": 59666,
+      "defaultCode": 59669,
       "grid": 0
     },
     {
@@ -536,7 +539,7 @@
       "tags": [
         "ProfileFacebook"
       ],
-      "defaultCode": 59667,
+      "defaultCode": 59670,
       "grid": 0
     },
     {
@@ -547,7 +550,7 @@
       "tags": [
         "Reply"
       ],
-      "defaultCode": 59668,
+      "defaultCode": 59671,
       "grid": 0
     },
     {
@@ -557,7 +560,7 @@
       "tags": [
         "LinkedIn"
       ],
-      "defaultCode": 59669,
+      "defaultCode": 59672,
       "grid": 0
     },
     {
@@ -567,7 +570,7 @@
       "tags": [
         "Google"
       ],
-      "defaultCode": 59670,
+      "defaultCode": 59673,
       "grid": 0
     },
     {
@@ -578,7 +581,7 @@
       "tags": [
         "Facebook"
       ],
-      "defaultCode": 59671,
+      "defaultCode": 59674,
       "grid": 0
     },
     {
@@ -588,7 +591,7 @@
       "tags": [
         "Ex"
       ],
-      "defaultCode": 59672,
+      "defaultCode": 59675,
       "grid": 0
     },
     {
@@ -598,7 +601,7 @@
       "tags": [
         "NewCommunity"
       ],
-      "defaultCode": 59673,
+      "defaultCode": 59676,
       "grid": 0
     },
     {
@@ -608,7 +611,7 @@
       "tags": [
         "Projects"
       ],
-      "defaultCode": 59674,
+      "defaultCode": 59677,
       "grid": 0
     },
     {
@@ -618,7 +621,7 @@
       "tags": [
         "Events"
       ],
-      "defaultCode": 59675,
+      "defaultCode": 59678,
       "grid": 0
     },
     {
@@ -628,7 +631,7 @@
       "tags": [
         "Home"
       ],
-      "defaultCode": 59676,
+      "defaultCode": 59679,
       "grid": 0
     },
     {
@@ -638,7 +641,7 @@
       "tags": [
         "Topics"
       ],
-      "defaultCode": 59677,
+      "defaultCode": 59680,
       "grid": 0
     },
     {
@@ -648,7 +651,7 @@
       "tags": [
         "Members"
       ],
-      "defaultCode": 59678,
+      "defaultCode": 59681,
       "grid": 0
     },
     {
@@ -658,7 +661,7 @@
       "tags": [
         "Messages"
       ],
-      "defaultCode": 59679,
+      "defaultCode": 59682,
       "grid": 0
     },
     {
@@ -668,7 +671,7 @@
       "tags": [
         "Notifications"
       ],
-      "defaultCode": 59680,
+      "defaultCode": 59683,
       "grid": 0
     },
     {
@@ -678,7 +681,7 @@
       "tags": [
         "Search"
       ],
-      "defaultCode": 59681,
+      "defaultCode": 59684,
       "grid": 0
     },
     {
@@ -688,7 +691,7 @@
       "tags": [
         "Share"
       ],
-      "defaultCode": 59682,
+      "defaultCode": 59685,
       "grid": 0
     },
     {
@@ -698,7 +701,7 @@
       "tags": [
         "More"
       ],
-      "defaultCode": 59683,
+      "defaultCode": 59686,
       "grid": 0
     },
     {
@@ -708,7 +711,7 @@
       "tags": [
         "ArrowUp"
       ],
-      "defaultCode": 59684,
+      "defaultCode": 59687,
       "grid": 0
     },
     {
@@ -718,7 +721,7 @@
       "tags": [
         "ArrowDown"
       ],
-      "defaultCode": 59685,
+      "defaultCode": 59688,
       "grid": 0
     },
     {
@@ -728,7 +731,7 @@
       "tags": [
         "Location"
       ],
-      "defaultCode": 59686,
+      "defaultCode": 59689,
       "grid": 0
     },
     {
@@ -738,7 +741,7 @@
       "tags": [
         "Trash"
       ],
-      "defaultCode": 59687,
+      "defaultCode": 59690,
       "grid": 0
     },
     {
@@ -748,7 +751,7 @@
       "tags": [
         "Pin"
       ],
-      "defaultCode": 59688,
+      "defaultCode": 59691,
       "grid": 0
     },
     {
@@ -758,7 +761,7 @@
       "tags": [
         "Complete"
       ],
-      "defaultCode": 59689,
+      "defaultCode": 59692,
       "grid": 0
     },
     {
@@ -768,7 +771,7 @@
       "tags": [
         "Flag"
       ],
-      "defaultCode": 59690,
+      "defaultCode": 59693,
       "grid": 0
     },
     {
@@ -778,7 +781,7 @@
       "tags": [
         "Circle"
       ],
-      "defaultCode": 59691,
+      "defaultCode": 59694,
       "grid": 0
     },
     {
@@ -788,7 +791,7 @@
       "tags": [
         "Paperclip"
       ],
-      "defaultCode": 59692,
+      "defaultCode": 59695,
       "grid": 0
     },
     {
@@ -803,23 +806,6 @@
       "grid": 0
     }
   ],
-  "colorThemes": [
-    [
-      [
-        44,
-        64,
-        90,
-        1
-      ],
-      [
-        191,
-        197,
-        205,
-        1
-      ]
-    ]
-  ],
-  "colorThemeIdx": 0,
   "preferences": {
     "showGlyphs": true,
     "showQuickUse": true,
@@ -828,14 +814,18 @@
     "fontPref": {
       "prefix": "icon-",
       "metadata": {
-        "fontFamily": "icomoon"
+        "fontFamily": "hylo-evo-icons",
+        "majorVersion": 1,
+        "minorVersion": 0
       },
       "metrics": {
         "emSize": 1024,
         "baseline": 6.25,
         "whitespace": 50
       },
-      "embed": false
+      "embed": false,
+      "ie7": true,
+      "noie8": false
     },
     "imagePref": {
       "prefix": "icon-",

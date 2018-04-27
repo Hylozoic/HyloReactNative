@@ -9,10 +9,21 @@ const row = {
 export default {
   row,
   settingsRow: {
-    ...row
   },
   iconRow: {
     ...row
+  },
+  communityAvatar: {
+    height: 20,
+    width: 20,
+    borderRadius: 4,
+    marginRight: 9
+  },
+  icon: {
+    fontSize: 20
+  },
+  highlightIcon: {
+    color: 'red'
   }
 }
 
