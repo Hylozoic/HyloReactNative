@@ -23,9 +23,11 @@ platform :ios do
       force_for_new_devices: true,
       readonly: true
     )
-    increment_build_number(
-      xcodeproj: 'HyloReactNative.xcodeproj'
-    )
+    if !options[:CI]
+      increment_build_number(
+        xcodeproj: 'HyloReactNative.xcodeproj'
+      )
+    end
     gym(
       scheme: "HyloReactNative",
       configuration: "Release",
