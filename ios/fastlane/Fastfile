@@ -17,7 +17,7 @@ platform :ios do
 
   desc "Submit a new Beta Build to Apple TestFlight."
   desc "This will also make sure the profile is up to date."
-  lane :beta do
+  lane :beta do |options|
     match(
       type: "appstore",
       force_for_new_devices: true,
