@@ -33,7 +33,6 @@ export default class NotificationSettings extends React.Component {
 }
 
 export function MembershipSettingsRow ({ membership, updateMembershipSettings }) {
-  console.log('membership', membership)
   return <SettingsRow
     imageUrl={membership.community.avatarUrl}
     name={membership.community.name}
@@ -43,7 +42,7 @@ export function MembershipSettingsRow ({ membership, updateMembershipSettings })
 
 export class SettingsRow extends React.Component {
   state = {
-    expanded: false
+    expanded: true
   }
 
   toggleExpand = () => {
@@ -56,16 +55,16 @@ export class SettingsRow extends React.Component {
     const { imageUrl, name, settings, update } = this.props
     const { expanded } = this.state
     return <View style={styles.settingsRow}>
-      <View style={styles.row}>
+      <View style={styles.nameRow}>
         <Image source={{uri: imageUrl}} style={styles.communityAvatar} />
-        <Text>{name}</Text>
-        <TouchableOpacity onPress={this.toggleExpand}>
-          {expanded ? <Icon name='ArrowUp' style={styles.icon} /> : <Icon name='ArrowDown' style={styles.icon} />}
+        <Text style={styles.name} numberOfLines={1}>{name}</Text>
+        <TouchableOpacity onPress={this.toggleExpand} style={styles.arrowWrapper}>
+          {expanded ? <Icon name='ArrowUp' style={styles.arrowIcon} /> : <Icon name='ArrowDown' style={styles.arrowIcon} />}
         </TouchableOpacity>
       </View>
       {expanded && <View style={styles.iconRow}>
         <SettingsIcon settingKey='sendPushNotifications' name='PushNotification' settings={settings} update={update} />
-        <SettingsIcon settingKey='sendEmail' name='EmailNotification' settings={settings} update={update} />
+        <SettingsIcon settingKey='sendEmailz' name='EmailNotification' settings={settings} update={update} />
       </View>}
     </View>
   }

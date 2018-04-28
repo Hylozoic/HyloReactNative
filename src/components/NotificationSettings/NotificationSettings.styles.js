@@ -1,135 +1,53 @@
 import { StyleSheet } from 'react-native'
-import { gunsmoke, rhino30, rhino80, caribbeanGreen, white60onCaribbeanGreen, amaranth } from 'style/colors'
+import { gunsmoke, rhino30, rhino80, caribbeanGreen, white60onCaribbeanGreen, amaranth, treePoppy } from 'style/colors'
 
 const row = {
   flexDirection: 'row'
 }
 
-
 export default {
+  scrollContainer: {
+    marginTop: 30
+  },
   row,
   settingsRow: {
+    marginHorizontal: 17
+  },
+  nameRow: {
+    ...row,
+    height: 38
+  },
+  name: {
+    fontFamily: 'Circular-Book',
+    fontSize: 17
   },
   iconRow: {
-    ...row
+    ...row,
+    height: 50,
+    marginLeft: 38,
+    marginBottom: 18,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: rhino30
   },
   communityAvatar: {
-    height: 20,
-    width: 20,
+    height: 22,
+    width: 22,
     borderRadius: 4,
     marginRight: 9
   },
+  arrowWrapper: {
+    marginLeft: 'auto'
+  },
+  arrowIcon: {
+    fontSize: 20,
+    color: rhino30
+  },
   icon: {
-    fontSize: 20
+    fontSize: 46,
+    marginRight: 25,
+    marginBottom: 12
   },
   highlightIcon: {
-    color: 'red'
-  }
-}
-
-export const sample = {
-  header: {
-    backgroundColor: 'white'
-  },
-  headerTitleStyle: {
-    fontSize: 17,
-    color: 'black',
-    fontFamily: 'Circular-Bold'
-  },
-  headerTintColor: gunsmoke,
-  container: {
-    backgroundColor: 'white',
-    flex: 1,
-    padding: 20
-  },
-  scrollContainer: {
-    flexGrow: 1
-  },
-  setting: {
-    marginBottom: 23
-  },
-  settingLabel: {
-    fontSize: 10,
-    color: rhino30,
-    fontFamily: 'Circular-Bold',
-    marginBottom: 10
-  },
-  settingText: {
-    fontSize: 16,
-    color: rhino80,
-    fontFamily: 'Circular-Book'
-  },
-  loadingText: {
-    color: white60onCaribbeanGreen,
-    fontFamily: 'Circular-Book'
-  },
-  linkText: {
-    color: caribbeanGreen,
-    fontFamily: 'Circular-Book'
-  },
-  cancelPassword: {
-    marginBottom: 15
-  },
-  socialAccountsLabel: {
-    marginBottom: 3
-  },
-  socialControl: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderColor: rhino30,
-    paddingBottom: 8,
-    marginBottom: 10
-  },
-  linked: {
-    borderColor: caribbeanGreen
-  },
-  footer: {
-    marginTop: 'auto',
-    alignItems: 'center',
-    paddingBottom: 12
-  },
-  save: {
-    width: 170,
-    height: 43,
-    fontSize: 16,
-    marginBottom: 5,
-    disabledBackgroundColor: white60onCaribbeanGreen
-  },
-  cancel: {
-    fontSize: 16,
-    color: rhino30,
-    fontFamily: 'Circular-Book',
-    marginBottom: 20
-  },
-  logoutButton: {
-    width: 134,
-    height: 30,
-    backgroundColor: 'white',
-    borderColor: amaranth,
-    color: amaranth
-  },
-  settingControl: {
-    control: {
-      marginBottom: 3
-    },
-    label: {
-      fontSize: 10,
-      color: rhino30,
-      fontFamily: 'Circular-Bold',
-      marginBottom: 10
-    },
-    textInput: {
-      fontSize: 16,
-      color: rhino80,
-      fontFamily: 'Circular-Book',
-      borderBottomWidth: StyleSheet.hairlineWidth,
-      borderBottomColor: rhino30
-    },
-    error: {
-      paddingVertical: 0,
-      paddingBottom: 10
-    },
-    hideErrorTriangle: true
+    color: treePoppy
   }
 }
