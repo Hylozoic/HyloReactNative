@@ -23,7 +23,7 @@ export default {
   },
   iconRow: {
     ...row,
-    height: 50,
+    height: 52,
     marginLeft: 38,
     marginBottom: 18,
     borderBottomWidth: StyleSheet.hairlineWidth,
@@ -45,7 +45,8 @@ export default {
   icon: {
     fontSize: 46,
     marginRight: 25,
-    marginBottom: 12
+    color: rhino30,
+    top: -4
   },
   highlightIcon: {
     color: treePoppy
