@@ -36,6 +36,10 @@ import {
 import {
   CREATE_COMMUNITY
 } from '../../../components/CreateCommunityFlow/CreateCommunityFlow.store'
+import {
+  UPDATE_MEMBERSHIP_SETTINGS_PENDING
+} from '../../../components/NotificationSettings/NotificationSettings.store'
+
 import { RESET_NEW_POST_COUNT_PENDING } from '../../actions/resetNewPostCount'
 import { PIN_POST_PENDING } from '../../../components/PostCard/PostHeader/PostHeader.store'
 import { FETCH_CURRENT_USER } from 'store/actions/fetchCurrentUser'
@@ -205,6 +209,18 @@ export default function ormReducer (state = {}, action) {
     case UPDATE_THREAD_READ_TIME_PENDING:
       thread = session.MessageThread.safeWithId(meta.id)
       if (thread) thread.update({lastReadAt: new Date().toString()})
+      break
+
+    case UPDATE_MEMBERSHIP_SETTINGS_PENDING:
+      membership = session.Membership.safeGet({community: meta.communityId})
+      if (!membership) break
+      membership.update({
+        settings: {
+          ...membership.settings,
+          ...meta.settings
+        }
+      })
+      break
   }
 
   values(sessionReducers).forEach(fn => fn(session, action))
