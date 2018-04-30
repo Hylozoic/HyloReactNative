@@ -60,10 +60,12 @@ export default class ModeratorSettings extends Component {
     setTimeout(() => this.addModeratorInput.focus(), 100)
   }
 
-  queryModerators = debounce((text) => {
+  queryModerators = (text) => {
     this.setState({ query: text, moderatorToAdd: null })
     this.props.fetchModeratorSuggestions(text)
-  }, 400)
+  }
+
+  debouncedQueryModerators = debounce(this.queryModerators, 400)
 
   selectModeratorToAdd = (id, name) => {
     this.setState({query: name, moderatorToAdd: id})
@@ -141,7 +143,7 @@ export default class ModeratorSettings extends Component {
                 inputContainerStyle={styles.autocompleteInput}
                 data={moderatorSuggestions.length === 1 && query === moderatorSuggestions[0].name ? [] : moderatorSuggestions}
                 defaultValue={query}
-                onChangeText={text => this.queryModerators(text)}
+                onChangeText={this.debouncedQueryModerators}
                 placeholder='Enter member name'
                 renderItem={this._renderAutocompleteItem}
               />
