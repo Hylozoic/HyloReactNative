@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Alert, FlatList, ScrollView, Text, View, TouchableOpacity } from 'react-native'
+import { Alert, FlatList, Text, View, TouchableOpacity } from 'react-native'
 import header from 'util/header'
 import Avatar from '../Avatar'
 import Autocomplete from 'react-native-autocomplete-input'
@@ -120,49 +120,47 @@ export default class ModeratorSettings extends Component {
       return <Text>Loading...</Text>
     }
 
-    return <ScrollView keyboardShouldPersistTaps='always'>
-      <FlatList
-        style={styles.container}
-        data={moderators}
-        keyboardShouldPersistTaps='always'
-        ItemSeparatorComponent={this._renderSeparator}
-        keyExtractor={item => item.id.toString()}
-        renderItem={this._renderModeratorRow}
-        ListHeaderComponent={<View style={styles.headerContainer}><Text style={styles.headerText}>{community.name}</Text></View>}
-        ListFooterComponent={<View style={styles.addModeratorContainer}>
-          {isAdding && <View>
-            <Text>Search here for members to grant moderator powers</Text>
-            <View style={styles.addModeratorButtonsContainer}>
-              <View style={styles.autocomplete}>
-                <Autocomplete
-                  autoCapitalize='none'
-                  autoCorrect={false}
-                  ref={input => { this.addModeratorInput = input }}
-                  containerStyle={styles.autocompleteContainer}
-                  inputContainerStyle={styles.autocompleteInput}
-                  data={moderatorSuggestions.length === 1 && query === moderatorSuggestions[0].name ? [] : moderatorSuggestions}
-                  defaultValue={query}
-                  onChangeText={text => this.queryModerators(text)}
-                  placeholder='Enter member name'
-                  renderItem={this._renderAutocompleteItem}
-                />
-              </View>
-              <TouchableOpacity style={styles.button} onPress={() => this.clearAutocomplete(true)}>
-                <Text style={styles.cancelButton}>Cancel</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.button} onPress={() => this.addModerator()}>
-                <Text style={styles.addButton}>Add</Text>
-              </TouchableOpacity>
+    return <FlatList
+      style={styles.container}
+      data={moderators}
+      keyboardShouldPersistTaps='always'
+      ItemSeparatorComponent={this._renderSeparator}
+      keyExtractor={item => item.id.toString()}
+      renderItem={this._renderModeratorRow}
+      ListHeaderComponent={<View style={styles.headerContainer}><Text style={styles.headerText}>{community.name}</Text></View>}
+      ListFooterComponent={<View style={styles.addModeratorContainer}>
+        {isAdding && <View>
+          <Text>Search here for members to grant moderator powers</Text>
+          <View style={styles.addModeratorButtonsContainer}>
+            <View style={styles.autocomplete}>
+              <Autocomplete
+                autoCapitalize='none'
+                autoCorrect={false}
+                ref={input => { this.addModeratorInput = input }}
+                containerStyle={styles.autocompleteContainer}
+                inputContainerStyle={styles.autocompleteInput}
+                data={moderatorSuggestions.length === 1 && query === moderatorSuggestions[0].name ? [] : moderatorSuggestions}
+                defaultValue={query}
+                onChangeText={text => this.queryModerators(text)}
+                placeholder='Enter member name'
+                renderItem={this._renderAutocompleteItem}
+              />
             </View>
-          </View>}
-
-          {!isAdding && <View style={styles.addNewContainer}>
-            <TouchableOpacity onPress={this.focusAddNew}>
-              <Text style={styles.addNewButton}>+ Add New</Text>
+            <TouchableOpacity style={styles.button} onPress={() => this.clearAutocomplete(true)}>
+              <Text style={styles.cancelButton}>Cancel</Text>
             </TouchableOpacity>
-          </View>}
-        </View>} />
-    </ScrollView>
+            <TouchableOpacity style={styles.button} onPress={() => this.addModerator()}>
+              <Text style={styles.addButton}>Add</Text>
+            </TouchableOpacity>
+          </View>
+        </View>}
+
+        {!isAdding && <View style={styles.addNewContainer}>
+          <TouchableOpacity onPress={this.focusAddNew}>
+            <Text style={styles.addNewButton}>+ Add New</Text>
+          </TouchableOpacity>
+        </View>}
+      </View>} />
   }
 }
 
