@@ -47,7 +47,7 @@ export default class DrawerMenu extends React.PureComponent {
     const isAll = currentNetworkId && currentNetworkId === ALL_COMMUNITIES_ID
 
     return <View style={styles.parent}>
-      {!isAll && <View style={styles.header}>
+      {!isAll && currentContext && <View style={styles.header}>
         <Image source={{uri: currentContext.avatarUrl}} style={styles.headerAvatar} />
         <Text style={styles.headerText}>{currentContext.name}</Text>
         {canModerateCurrentCommunity && <TouchableOpacity onPress={goToCommunitySettingsMenu} hitSlop={{top: 5, bottom: 5, left: 10, right: 10}} style={styles.headerSettingsButton}>

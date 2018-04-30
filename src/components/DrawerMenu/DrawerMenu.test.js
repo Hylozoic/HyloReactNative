@@ -20,6 +20,7 @@ describe('DrawerMenu', () => {
     networks: [],
     goToCommunitySettingsMenu: jest.fn(),
     currentCommunity: {name: 'foo', avatarUrl: 'someurl'},
+    currentContext: {name: 'foo', avatarUrl: 'someurl'},
     communities: []
   }
 
