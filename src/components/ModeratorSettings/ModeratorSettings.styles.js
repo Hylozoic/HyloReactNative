@@ -58,7 +58,7 @@ export default {
   },
   button: {
     paddingLeft: 15,
-    paddingTop: 15
+    paddingTop: 10
   },
   cancelButton: {
     fontFamily: 'Circular-Bold',
