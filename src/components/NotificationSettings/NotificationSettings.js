@@ -3,9 +3,8 @@ import { Image, View, Text, ScrollView, TouchableOpacity, Alert } from 'react-na
 import Loading from '../Loading'
 import Icon from '../Icon'
 import styles from './NotificationSettings.styles'
-// import { any, values, isNil } from 'lodash/fp'
 import header from 'util/header'
-const allCommunitiesLogo = require('../../assets/All_Communities.png')
+const allCommunitiesLogo = require('../../assets/hylo-merkaba.png')
 
 export default class NotificationSettings extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -13,6 +12,29 @@ export default class NotificationSettings extends React.Component {
       title: 'Notification Settings',
       options: {
         headerBackTitle: null
+      }
+    })
+  }
+
+  updateMessageSettings = changes => {
+    const { messageSettings, updateUserSettings } = this.props
+    const newMessageSettings = {
+      ...messageSettings,
+      ...changes
+    }
+    var dmNotifications
+    if (newMessageSettings['sendEmail'] && newMessageSettings['sendPushNotifications']) {
+      dmNotifications = 'both'
+    } else if (newMessageSettings['sendEmail']) {
+      dmNotifications = 'email'
+    } else if (newMessageSettings['sendPushNotifications']) {
+      dmNotifications = 'push'
+    } else {
+      dmNotifications = 'none'
+    }
+    updateUserSettings({
+      settings: {
+        dmNotifications
       }
     })
   }
@@ -39,10 +61,13 @@ export default class NotificationSettings extends React.Component {
   }
 
   render () {
-    const { settings, allCommunitiesSettings, memberships, updateMembershipSettings } = this.props
-    if (!settings) return <Loading />
+    const { messageSettings, allCommunitiesSettings, memberships, updateMembershipSettings } = this.props
+    if (!messageSettings) return <Loading />
 
     return <ScrollView contentContainerStyle={styles.scrollContainer}>
+      <MessageSettingsRow
+        settings={messageSettings}
+        updateMessageSettings={this.updateMessageSettings} />
       <AllCommunitiesSettingsRow
         settings={allCommunitiesSettings}
         updateAllCommunities={this.updateAllCommunitiesAlert} />
@@ -52,6 +77,14 @@ export default class NotificationSettings extends React.Component {
         updateMembershipSettings={changes => updateMembershipSettings(membership.community.id, changes)} />)}
     </ScrollView>
   }
+}
+
+export function MessageSettingsRow ({ settings, updateMessageSettings }) {
+  return <SettingsRow
+    iconName='Messages'
+    name='Messages'
+    settings={settings}
+    update={updateMessageSettings} />
 }
 
 export function AllCommunitiesSettingsRow ({ settings, updateAllCommunities }) {
@@ -72,7 +105,7 @@ export function MembershipSettingsRow ({ membership, updateMembershipSettings })
 
 export class SettingsRow extends React.Component {
   state = {
-    expanded: true
+    expanded: false
   }
 
   toggleExpand = () => {
@@ -82,14 +115,15 @@ export class SettingsRow extends React.Component {
   }
 
   render () {
-    const { imageUrl, imageSrc, name, settings, update } = this.props
+    const { iconName, imageUrl, imageSrc, name, settings, update } = this.props
     const { expanded } = this.state
 
     const source = imageSrc || {uri: imageUrl}
 
     return <View style={styles.settingsRow}>
       <View style={styles.nameRow}>
-        <Image source={source} style={styles.communityAvatar} />
+        {iconName && <Icon name={iconName} style={styles.avatarIcon} />}
+        {!iconName && <Image source={source} style={styles.communityAvatar} />}
         <Text style={styles.name} numberOfLines={1}>{name}</Text>
         <TouchableOpacity onPress={this.toggleExpand} style={styles.arrowWrapper}>
           {expanded ? <Icon name='ArrowUp' style={styles.arrowIcon} /> : <Icon name='ArrowDown' style={styles.arrowIcon} />}

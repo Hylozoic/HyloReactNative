@@ -13,10 +13,14 @@ export function mapStateToProps (state, props) {
     ? resetToMainRoute(props.navigation)
     : props.navigation.goBack()
 
+  const goToNotificationSettings = () =>
+    props.navigation.navigate('NotificationSettings')
+
   return {
     currentUser: getMe(state, props),
     resettingPassword,
-    cancel
+    cancel,
+    goToNotificationSettings
   }
 }
 

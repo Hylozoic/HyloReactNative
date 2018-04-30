@@ -64,6 +64,7 @@ export default function fetchCurrentUser () {
           }
           settings {
             signupInProgress
+            dmNotifications
           }
         }
       }`

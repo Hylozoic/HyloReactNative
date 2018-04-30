@@ -1,5 +1,7 @@
 import { StyleSheet } from 'react-native'
-import { gunsmoke, rhino30, rhino80, caribbeanGreen, white60onCaribbeanGreen, amaranth } from 'style/colors'
+import {
+  gunsmoke, rhino30, rhino80, caribbeanGreen, white60onCaribbeanGreen, amaranth, white
+} from 'style/colors'
 
 export default {
   header: {
@@ -57,6 +59,19 @@ export default {
   },
   linked: {
     borderColor: caribbeanGreen
+  },
+  notificationSettingsWrapper: {
+    marginTop: 50,
+    alignItems: 'center'
+  },
+  notificationSettings: {
+    height: 43,
+    width: 205,
+    fontSize: 16,
+    marginBottom: 5,
+    color: caribbeanGreen,
+    borderColor: caribbeanGreen,
+    backgroundColor: white
   },
   footer: {
     marginTop: 'auto',

@@ -3,12 +3,14 @@ import { bindActionCreators } from 'redux'
 import { createSelector } from 'reselect'
 import getMe from '../../store/selectors/getMe'
 import { updateMembershipSettings, getMemberships } from './NotificationSettings.store'
-import { every } from 'lodash/fp'
+import updateUserSettings from '../../store/actions/updateUserSettings'
+import { every, includes } from 'lodash/fp'
 
-export const getUserSettings = createSelector(
+export const getMessageSettings = createSelector(
   getMe,
   me => me && ({
-    settings: me.settings
+    sendEmail: includes(me.settings.dmNotifications, ['email', 'both']),
+    sendPushNotifications: includes(me.settings.dmNotifications, ['push', 'both'])
   })
 )
 
@@ -22,7 +24,7 @@ export const getAllCommunitiesSettings = createSelector(
 
 export function mapStateToProps (state, props) {
   return {
-    settings: getUserSettings(state, props),
+    messageSettings: getMessageSettings(state, props),
     memberships: getMemberships(state, props),
     allCommunitiesSettings: getAllCommunitiesSettings(state, props)
   }
@@ -30,8 +32,8 @@ export function mapStateToProps (state, props) {
 
 export function mapDispatchToProps (dispatch, props) {
   return {
-    updateUserSettings: changes => console.log('updateUserSettings', changes),
     ...bindActionCreators({
+      updateUserSettings,
       updateMembershipSettings
     }, dispatch)
   }

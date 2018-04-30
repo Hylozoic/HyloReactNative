@@ -14,9 +14,9 @@ export default class Home extends React.Component {
   }
 
   componentDidMount () {
-    this.props.navigation.navigate('NotificationSettings')
+    this.props.navigation.navigate('UserSettings')
   }
-  
+
   render () {
     const { communityId, currentUser, navigation, networkId } = this.props
     if (!currentUser) return <Loading style={{flex: 1}} />

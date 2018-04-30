@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native'
-import { gunsmoke, rhino30, rhino80, caribbeanGreen, white60onCaribbeanGreen, amaranth, treePoppy } from 'style/colors'
+import { rhino30, treePoppy } from 'style/colors'
 
 const row = {
   flexDirection: 'row'
@@ -16,6 +16,11 @@ export default {
   nameRow: {
     ...row,
     height: 38
+  },
+  avatarIcon: {
+    fontSize: 26,
+    color: rhino30,
+    marginRight: 5
   },
   name: {
     fontFamily: 'Circular-Book',
