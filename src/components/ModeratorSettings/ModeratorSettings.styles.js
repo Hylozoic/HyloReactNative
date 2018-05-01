@@ -54,11 +54,11 @@ export default {
     marginRight: '5%'
   },
   addModeratorButtonsContainer: {
-    flexDirection: 'row',
-    alignItems: 'center'
+    flexDirection: 'row'
   },
   button: {
-    paddingLeft: 15
+    paddingLeft: 15,
+    paddingTop: 10
   },
   cancelButton: {
     fontFamily: 'Circular-Bold',
@@ -68,18 +68,20 @@ export default {
     fontFamily: 'Circular-Bold',
     color: caribbeanGreen
   },
+  autocomplete: {
+    flex: 1
+  },
   autocompleteContainer: {
-    borderWidth: 0
+    borderWidth: 0,
+    flex: 1
   },
   autocompleteInput: {
-    borderWidth: 0
+    borderWidth: 0,
+    flex: 1
   },
   autocompleteItem: {
     flexDirection: 'row',
     alignItems: 'center',
     padding: 10
-  },
-  moderatorAutocompleteTextInput: {
-    flex: 1
   }
 }

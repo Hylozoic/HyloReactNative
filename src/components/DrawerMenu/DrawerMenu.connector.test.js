@@ -4,14 +4,20 @@ import {
   mergeProps,
   partitionCommunities
 } from './DrawerMenu.connector'
+import orm from '../../store/models'
 
 it('mapStateToProps matches the latest snapshot', () => {
+  const session = orm.session(orm.getEmptyState())
+  session.Me.create({id: '33', name: 'meUser'})
+  session.Community.create({id: '7', avatarUrl: 'someUrl', name: 'someName'})
   const state = {
     session: {
       loggedIn: true,
       entryUrl: 'http://www.hylo.com/a/path'
     },
-    pending: {}
+    pending: {},
+    currentNetworkAndCommunity: {communityId: '7'},
+    orm: session.state
   }
   const props = {
     navigation: 'anything'
