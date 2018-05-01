@@ -63,6 +63,35 @@ describe('NotificationSettings', () => {
       const instance = ReactTestRenderer.create(<NotificationSettings {...props} />).getInstance()
       instance.updateMessageSettings({sendPushNotifications: true})
       expect(props.updateUserSettings).toHaveBeenCalledWith({settings: {dmNotifications: 'both'}})
+      instance.updateMessageSettings({sendEmail: false})
+      expect(props.updateUserSettings).toHaveBeenCalledWith({settings: {dmNotifications: 'none'}})
+      instance.updateMessageSettings({})
+      expect(props.updateUserSettings).toHaveBeenCalledWith({settings: {dmNotifications: 'email'}})
+      instance.updateMessageSettings({sendEmail: false, sendPushNotifications: true})
+      expect(props.updateUserSettings).toHaveBeenCalledWith({settings: {dmNotifications: 'push'}})
+    })
+  })
+
+  describe('updateAllCommunities', () => {
+    it('calls updateAllMemberships', () => {
+      const props = {
+        messageSettings: {
+          sendEmail: true
+        },
+        updateAllMemberships: jest.fn(),
+        memberships: [{
+          community: {
+            id: 1
+          }
+        }, {
+          community: {
+            id: 2
+          }
+        }]
+      }
+      const instance = ReactTestRenderer.create(<NotificationSettings {...props} />).getInstance()
+      instance.updateAllCommunities({sendPushNotifications: true})
+      expect(props.updateAllMemberships).toHaveBeenCalledWith([1, 2], {sendPushNotifications: true})
     })
   })
 
