@@ -37,7 +37,7 @@ import {
   CREATE_COMMUNITY
 } from '../../../components/CreateCommunityFlow/CreateCommunityFlow.store'
 import {
-  UPDATE_MEMBERSHIP_SETTINGS_PENDING
+  UPDATE_MEMBERSHIP_SETTINGS_PENDING, UPDATE_ALL_MEMBERSHIP_SETTINGS_PENDING
 } from '../../../components/NotificationSettings/NotificationSettings.store'
 
 import { RESET_NEW_POST_COUNT_PENDING } from '../../actions/resetNewPostCount'
@@ -219,6 +219,18 @@ export default function ormReducer (state = {}, action) {
           ...membership.settings,
           ...meta.settings
         }
+      })
+      break
+
+    case UPDATE_ALL_MEMBERSHIP_SETTINGS_PENDING:
+      const memberships = session.Membership.all()
+      memberships.toModelArray().map(membership => {
+        membership.update({
+          settings: {
+            ...membership.settings,
+            ...meta.settings
+          }
+        })
       })
       break
   }
