@@ -1,6 +1,17 @@
+import orm from '../models'
 import getCurrentNetworkId from './getCurrentNetworkId'
-import getNetwork from './getNetwork'
+import { createSelector as ormCreateSelector } from 'redux-orm'
+import { ALL_COMMUNITIES_ID } from '../models/Community'
 
-export default function (state, props) {
-  return getNetwork(state, {id: getCurrentNetworkId(state, props)})
-}
+const getCurrentNetwork = ormCreateSelector(
+  orm,
+  state => state.orm,
+  getCurrentNetworkId,
+  (session, id) => {
+    console.log('id', id)
+    if (id === ALL_COMMUNITIES_ID) return {id: ALL_COMMUNITIES_ID}
+    return session.Network.safeGet({id})
+  }
+)
+
+export default getCurrentNetwork
