@@ -57,7 +57,8 @@ describe('NotificationSettings', () => {
         messageSettings: {
           sendEmail: true
         },
-        updateUserSettings: jest.fn()
+        updateUserSettings: jest.fn(),
+        memberships: []
       }
       const instance = ReactTestRenderer.create(<NotificationSettings {...props} />).getInstance()
       instance.updateMessageSettings({sendPushNotifications: true})
