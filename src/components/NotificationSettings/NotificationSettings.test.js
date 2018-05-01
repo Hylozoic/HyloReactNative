@@ -1,27 +1,46 @@
-import { Alert } from 'react-native'
 import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import ReactTestRenderer from 'react-test-renderer'
-import NotificationSettings, { SocialAccounts, SocialControl, Footer } from './NotificationSettings'
-import { omit } from 'lodash/fp'
-import { LoginManager, AccessToken } from 'react-native-fbsdk'
+import NotificationSettings, { MessageSettingsRow, AllCommunitiesSettingsRow, MembershipSettingsRow, SettingsRow, SettingsIcon } from './NotificationSettings'
 
-jest.mock('react-native-fbsdk', () => ({
-  LoginManager: {
-    logInWithReadPermissions: jest.fn()
-  },
-  AccessToken: {
-    getCurrentAccessToken: jest.fn()
-  }
-}))
 jest.mock('react-native-device-info')
-
-jest.mock('../SettingControl', () => 'SettingControl')
 
 describe('NotificationSettings', () => {
   it('matches the last snapshot', () => {
     const renderer = new ReactShallowRenderer()
     const props = {
+      messageSettings: {
+        sendEmail: true,
+        sendPushNotifications: false
+      },
+      allCommunitiesSettings: {
+        sendEmail: false,
+        sendPushNotifications: true
+      },
+      memberships: [
+        {
+          id: 11,
+          community: {
+            id: 12,
+            avatarUrl: 'foo1.png'
+          },
+          settings: {
+            sendEmail: true,
+            sendPushNotifications: false
+          }
+        },
+        {
+          id: 21,
+          community: {
+            id: 22,
+            avatarUrl: 'foo2.png'
+          },
+          settings: {
+            sendEmail: false,
+            sendPushNotifications: true
+          }
+        }
+      ],
       currentUser: {id: 1},
       unlinkAccount: () => {}
     }
@@ -32,7 +51,7 @@ describe('NotificationSettings', () => {
     expect(actual).toMatchSnapshot()
   })
 
-  it('matches snapshot with state set', () => {
+  it.skip('matches snapshot with state set', () => {
     const props = {
       currentUser: {id: 1},
       unlinkAccount: () => {}
@@ -58,7 +77,7 @@ describe('NotificationSettings', () => {
     expect(renderer.toJSON()).toMatchSnapshot()
   })
 
-  it('sets edit state on mount', () => {
+  it.skip('sets edit state on mount', () => {
     const props = {
       currentUser: {
         email: 'ra@ra.com',
@@ -71,97 +90,7 @@ describe('NotificationSettings', () => {
     expect(instance.state.edits).toEqual(props.currentUser)
   })
 
-  describe('componentDidUpdate', () => {
-    it('calls setEditState when currentUser changes', () => {
-      const prevProps = {
-        currentUser: null
-      }
-      const props = {
-        currentUser: {id: 1}
-      }
-      const instance = ReactTestRenderer.create(<NotificationSettings {...props} />).getInstance()
-      instance.setEditState = jest.fn()
-      instance.componentDidUpdate(prevProps)
-      expect(instance.setEditState).toHaveBeenCalled()
-    })
-  })
-
-  describe('setEditState', () => {
-    // the bulk of this function is tested above in the 'on mount' test
-    it("Doesn't change the state when currentUser is null", () => {
-      const props = {
-        currentUser: null
-      }
-      const instance = ReactTestRenderer.create(<NotificationSettings {...props} />).getInstance()
-      const state = {
-        edits: {
-          email: 'lala'
-        }
-      }
-      instance.setState(state)
-      instance.setEditState()
-      expect(instance.state).toEqual({
-        ...state,
-        changed: false,
-        editingPassword: false,
-        errors: {}
-      })
-    })
-  })
-
-  describe('editPassword', () => {
-    it('sets the state', () => {
-      const instance = ReactTestRenderer.create(<NotificationSettings />).getInstance()
-      instance.editPassword()
-      expect(instance.state.editingPassword).toEqual(true)
-    })
-  })
-
-  describe('cancelPassword', () => {
-    it('sets the state, setting changed to true when email has changed', () => {
-      const currentUser = {email: 'moo@moo.com'}
-      const instance = ReactTestRenderer.create(
-        <NotificationSettings currentUser={currentUser} />).getInstance()
-      instance.setState({
-        editingPassword: true,
-        edits: {
-          email: 'different@email.com',
-          password: 'ldlkd',
-          confirmPassword: 'djsdlks'
-        },
-        errors: {
-          email: 'bad email',
-          password: 'too short',
-          confirmPassword: 'too different'
-        }
-      })
-      instance.cancelPassword()
-      expect(instance.state).toMatchSnapshot()
-    })
-
-    it('sets the state, setting changed to false when email has not changed', () => {
-      const currentUser = {email: 'moo@moo.com'}
-      const instance = ReactTestRenderer.create(
-        <NotificationSettings currentUser={currentUser} />).getInstance()
-      instance.setState({
-        editingPassword: true,
-        edits: {
-          email: currentUser.email,
-          password: 'ldlkd',
-          confirmPassword: 'djsdlks'
-        },
-        errors: {
-          email: 'bad email',
-          password: 'too short',
-          confirmPassword: 'too different'
-        }
-      })
-      instance.cancelPassword()
-      expect(instance.state).toMatchSnapshot()
-    })
-  })
-
-  describe('updateField', () => {
+  describe.skip('updateField', () => {
     it('sets the state', () => {
       const instance = ReactTestRenderer.create(<NotificationSettings />).getInstance()
       instance.setState({
@@ -180,255 +109,123 @@ describe('NotificationSettings', () => {
     })
   })
 
-  describe('validate', () => {
-    it('validates its fields', () => {
-      const instance = ReactTestRenderer.create(<NotificationSettings />).root.instance
-      instance.setState({
-        edits: {
-          email: 'ra',
-          password: 'rarara',
-          confirmPassword: 'lalala'
-        }
-      })
-      expect(instance.validate()).toBeFalsy()
-      expect(instance.state).toMatchSnapshot()
-    })
-  })
-
-  describe('confirmLeave', () => {
-    it('calls onLeave when changed is false', () => {
-      const instance = ReactTestRenderer.create(<NotificationSettings />).getInstance()
-      instance.setState({
-        changed: false
-      })
-      const onLeave = jest.fn()
-      instance.confirmLeave(onLeave)
-      expect(onLeave).toHaveBeenCalled()
-    })
-
-    it('calls Alert.alert when changed is true', () => {
-      const origAlert = Alert.alert
-      Alert.alert = jest.fn()
-      const instance = ReactTestRenderer.create(<NotificationSettings />).getInstance()
-      instance.setState({
-        changed: true
-      })
-      const onLeave = jest.fn()
-      instance.confirmLeave(onLeave)
-      expect(Alert.alert).toHaveBeenCalled()
-      expect(Alert.alert.mock.calls).toMatchSnapshot()
-      Alert.alert = origAlert
-    })
-  })
-
-  describe('cancel', () => {
-    it('calls confirmLeave, passing in cancel', () => {
-      const cancel = () => {}
-      const confirmLeave = jest.fn(fn => fn())
-      const instance = ReactTestRenderer.create(<NotificationSettings cancel={cancel} />).root.instance
-      instance.confirmLeave = confirmLeave
-      instance.cancel()
-      expect(confirmLeave).toHaveBeenCalledWith(cancel)
-    })
-  })
-
-  describe('logout', () => {
-    it('calls confirmLeave, passing in logout', () => {
-      const logout = () => {}
-      const confirmLeave = jest.fn(fn => fn())
-      const instance = ReactTestRenderer.create(<NotificationSettings logout={logout} />).root.instance
-      instance.confirmLeave = confirmLeave
-      instance.logout()
-      expect(confirmLeave).toHaveBeenCalledWith(logout)
-    })
-  })
-
-  describe('loginWithFacebook', () => {
-    describe('when cancelled', () => {
-      beforeEach(() => {
-
-      })
-
-      it('calls onLogin with false', () => {
-        LoginManager.logInWithReadPermissions.mockImplementation(() => Promise.resolve({isCancelled: true}))
-        const onLogin = jest.fn()
-        const loginWithFacebook = jest.fn()
-        const instance = ReactTestRenderer.create(
-          <NotificationSettings loginWithFacebook={loginWithFacebook} />).getInstance()
-        expect.assertions(1)
-        return instance.loginWithFacebook(onLogin)
-        .then(() => {
-          expect(onLogin).toHaveBeenCalledWith(false)
-        })
-      })
-    })
-
-    describe('on success', () => {
-      it('calls the prop with token, onLogin with true', () => {
-        LoginManager.logInWithReadPermissions.mockImplementation(() => Promise.resolve({}))
-        AccessToken.getCurrentAccessToken.mockImplementation(() => Promise.resolve({
-          accessToken: 'atoken'
-        }))
-        const onLogin = jest.fn()
-        const loginWithFacebook = jest.fn()
-        const instance = ReactTestRenderer.create(
-          <NotificationSettings loginWithFacebook={loginWithFacebook} />).getInstance()
-        expect.assertions(2)
-        return instance.loginWithFacebook(onLogin)
-        .then(() => {
-          expect(onLogin).toHaveBeenCalledWith(true)
-          expect(loginWithFacebook).toHaveBeenCalledWith('atoken')
-        })
-      })
-    })
-  })
-
   it('has navigationOptions', () => {
     const navigation = {state: {routeName: 'test'}}
     expect(NotificationSettings.navigationOptions({ navigation })).toMatchSnapshot()
   })
 })
 
-describe('SocialAccounts', () => {
+describe('MessageSettingsRow', () => {
   it('matches the last snapshot', () => {
     const renderer = new ReactShallowRenderer()
     const props = {
-      twitterPrompt: () => {},
-      facebookUrl: 'foo.com',
-      twitterName: 'rara',
-      loginWithFacebook: () => {},
-      unlinkAccount: () => {},
-      updateField: () => {}
+      settings: {sendEmail: true},
+      updateMessageSettings: () => {}
     }
 
-    renderer.render(<SocialAccounts {...props} />)
+    renderer.render(<MessageSettingsRow {...props} />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
   })
 })
 
-describe('SocialControl', () => {
+describe('AllCommunitiesSettingsRow', () => {
+  it('matches the last snapshot', () => {
+    const renderer = new ReactShallowRenderer()
+    const props = {
+      settings: {sendEmail: true},
+      updateAllCommunities: () => {}
+    }
+
+    renderer.render(<AllCommunitiesSettingsRow {...props} />)
+    const actual = renderer.getRenderOutput()
+
+    expect(actual).toMatchSnapshot()
+  })
+})
+
+describe('MembershipSettingsRow', () => {
+  it('matches the last snapshot', () => {
+    const renderer = new ReactShallowRenderer()
+    const props = {
+      membership: {
+        settings: {
+          sendEmail: true
+        },
+        community: {
+          name: 'Foomunity',
+          avatarUrl: 'foo.png'
+        }
+      },
+      updateMembershipSettings: () => {}
+    }
+
+    renderer.render(<MembershipSettingsRow {...props} />)
+    const actual = renderer.getRenderOutput()
+
+    expect(actual).toMatchSnapshot()
+  })
+})
+
+describe('SettingsRow', () => {
   const props = {
-    twitterPrompt: () => {},
-    facebookUrl: 'foo.com',
-    twitterName: 'rara',
-    loginWithFacebook: () => {},
-    unlinkAccount: () => {},
-    updateField: () => {}
+    imageUrl: 'foo.png',
+    name: 'Foo Row',
+    settings: {
+      sendEmail: true,
+      sendPushNotifications: false
+    },
+    update: () => {}
   }
 
-  it('matches the last snapshot unlinked', () => {
+  it('matches the last snapshot', () => {
     const renderer = new ReactShallowRenderer()
-    renderer.render(<SocialControl {...props} />)
+
+    renderer.render(<SettingsRow {...props} />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
   })
 
-  it('matches the last snapshot linked', () => {
+  it('matches the last snapshot with iconName', () => {
     const renderer = new ReactShallowRenderer()
-    renderer.render(<SocialControl {...props} value='foo' />)
+
+    const iconProps = {
+      ...props,
+      iconName: 'iconname'
+    }
+
+    renderer.render(<SettingsRow {...iconProps} />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
   })
 
-  it('matches the last snapshot loading', () => {
-    const renderer = ReactTestRenderer.create(<SocialControl {...props} />)
+  it('matches snapshot when expanded', () => {
+    const renderer = ReactTestRenderer.create(<NotificationSettings {...props} />)
     const instance = renderer.getInstance()
-    instance.setState({loading: true})
+    instance.setState({
+      expanded: true
+    })
 
     expect(renderer.toJSON()).toMatchSnapshot()
   })
-
-  describe('linkClicked', () => {
-    describe('with twitter', () => {
-      const provider = 'twitter'
-
-      it('does the right thing with no twitterName', () => {
-        const props = {
-          onLink: jest.fn(fn => fn()),
-          onChange: jest.fn(),
-          provider
-        }
-        const instance = ReactTestRenderer.create(
-          <SocialControl {...props} />).getInstance()
-        instance.linkClicked()
-        expect(props.onLink).toHaveBeenCalled()
-        expect(props.onChange).toHaveBeenCalledWith(false)
-      })
-
-      it('does the right thing with a twitterName', () => {
-        const twitterName = 'mrtweets'
-        const props = {
-          onLink: jest.fn(fn => fn(twitterName)),
-          onChange: jest.fn(),
-          provider
-        }
-        const instance = ReactTestRenderer.create(
-          <SocialControl {...props} />).getInstance()
-        instance.linkClicked()
-        expect(props.onLink).toHaveBeenCalled()
-        .toHaveBeenCalledWith({twitterName})
-        expect(props.onChange).toHaveBeenCalledWith(true)
-      })
-    })
-
-    describe('with facebook', () => {
-      const provider = 'facebook'
-
-      it('does the right thing with', () => {
-        const props = {
-          onLink: jest.fn(fn => Promise.resolve(fn(true))),
-          onChange: jest.fn(),
-          provider
-        }
-        const instance = ReactTestRenderer.create(
-          <SocialControl {...props} />).getInstance()
-        return instance.linkClicked()
-        .then(() => {
-          expect(props.onLink).toHaveBeenCalled()
-          expect(props.onChange).toHaveBeenCalledWith(true)
-          expect(instance.state.loading).toEqual(false)
-        })
-      })
-    })
-  })
-
-  describe('unlinkClicked', () => {
-    it('does the right thing', () => {
-      const props = {
-        unlinkAccount: jest.fn(),
-        onChange: jest.fn(),
-        provider: 'facebook'
-      }
-      const instance = ReactTestRenderer.create(
-        <SocialControl {...props} />).getInstance()
-      instance.unlinkClicked()
-      expect(props.unlinkAccount).toHaveBeenCalledWith(props.provider)
-      expect(props.onChange).toHaveBeenCalledWith(false)
-    })
-  })
 })
 
-describe('Footer', () => {
-  const props = {
-    cancel: () => {},
-    logout: () => {}
-  }
-
-  it('matches the last snapshot without saveChanges', () => {
+describe('SettingsIcon', () => {
+  it('matches the last snapshot', () => {
     const renderer = new ReactShallowRenderer()
-    renderer.render(<Footer {...props} />)
-    const actual = renderer.getRenderOutput()
+    const props = {
+      settingKey: 'sendEmail',
+      settings: {
+        sendEmail: true
+      },
+      name: 'FooRow',
+      update: () => {}
+    }
 
-    expect(actual).toMatchSnapshot()
-  })
-
-  it('matches the last snapshot without saveChanges', () => {
-    const renderer = new ReactShallowRenderer()
-    renderer.render(<Footer {...props} saveChanges={() => {}} />)
+    renderer.render(<SettingsIcon {...props} />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()

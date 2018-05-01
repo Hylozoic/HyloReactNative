@@ -1,122 +1,62 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Footer matches the last snapshot without saveChanges 1`] = `
-<View>
-  <Button
-    disabled={true}
-    onPress={undefined}
-    text="Save Changes"
-  />
-  <TouchableOpacity
-    activeOpacity={0.2}
-    onPress={[Function]}
-  >
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
-      Cancel
-    </Text>
-  </TouchableOpacity>
-  <Button
-    onPress={[Function]}
-    text="Logout"
-  />
-</View>
+exports[`AllCommunitiesSettingsRow matches the last snapshot 1`] = `
+<SettingsRow
+  imageSrc={
+    Object {
+      "testUri": "../../../src/assets/hylo-merkaba.png",
+    }
+  }
+  name="All Communities"
+  settings={
+    Object {
+      "sendEmail": true,
+    }
+  }
+  update={[Function]}
+/>
 `;
 
-exports[`Footer matches the last snapshot without saveChanges 2`] = `
-<View>
-  <Button
-    disabled={false}
-    onPress={[Function]}
-    text="Save Changes"
-  />
-  <TouchableOpacity
-    activeOpacity={0.2}
-    onPress={[Function]}
-  >
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
-      Cancel
-    </Text>
-  </TouchableOpacity>
-  <Button
-    onPress={[Function]}
-    text="Logout"
-  />
-</View>
+exports[`MembershipSettingsRow matches the last snapshot 1`] = `
+<SettingsRow
+  imageUrl="foo.png"
+  name="Foomunity"
+  settings={
+    Object {
+      "sendEmail": true,
+    }
+  }
+  update={[Function]}
+/>
 `;
 
-exports[`NotificationSettings cancelPassword sets the state, setting changed to false when email has not changed 1`] = `
-Object {
-  "changed": false,
-  "editingPassword": false,
-  "edits": Object {
-    "confirmPassword": null,
-    "email": "moo@moo.com",
-    "password": null,
-  },
-  "errors": Object {
-    "confirmPassword": null,
-    "email": "bad email",
-    "password": null,
-  },
-}
-`;
-
-exports[`NotificationSettings cancelPassword sets the state, setting changed to true when email has changed 1`] = `
-Object {
-  "changed": true,
-  "editingPassword": false,
-  "edits": Object {
-    "confirmPassword": null,
-    "email": "different@email.com",
-    "password": null,
-  },
-  "errors": Object {
-    "confirmPassword": null,
-    "email": "bad email",
-    "password": null,
-  },
-}
-`;
-
-exports[`NotificationSettings confirmLeave calls Alert.alert when changed is true 1`] = `
-Array [
-  Array [
-    "You have unsaved changes",
-    "Are you sure you want to discard your changes?",
-    Array [
-      Object {
-        "onPress": [MockFunction],
-        "text": "Discard",
-      },
-      Object {
-        "style": "cancel",
-        "text": "Continue Editing",
-      },
-    ],
-  ],
-]
+exports[`MessageSettingsRow matches the last snapshot 1`] = `
+<SettingsRow
+  iconName="Messages"
+  name="Messages"
+  settings={
+    Object {
+      "sendEmail": true,
+    }
+  }
+  update={[Function]}
+/>
 `;
 
 exports[`NotificationSettings has navigationOptions 1`] = `
 Object {
+  "headerBackTitle": null,
   "headerStyle": Object {
     "backgroundColor": "white",
+    "paddingHorizontal": 10,
   },
-  "headerTintColor": "#818A88",
+  "headerTintColor": "#808c9b",
+  "headerTitle": "Notification Settings",
   "headerTitleStyle": Object {
     "color": "black",
     "fontFamily": "Circular-Bold",
     "fontSize": 17,
   },
-  "title": "Edit Account Info",
 }
 `;
 
@@ -451,85 +391,64 @@ exports[`NotificationSettings matches snapshot with state set 1`] = `
 `;
 
 exports[`NotificationSettings matches the last snapshot 1`] = `
-<Unknown>
-  <ScrollView
-    contentContainerStyle={
+<ScrollView
+  contentContainerStyle={
+    Object {
+      "marginTop": 30,
+    }
+  }
+>
+  <MessageSettingsRow
+    settings={
       Object {
-        "flexGrow": 1,
+        "sendEmail": true,
+        "sendPushNotifications": false,
       }
     }
-  >
-    <SettingControl
-      autoCapitalize="none"
-      autoCorrect={false}
-      error={undefined}
-      keyboardType="email-address"
-      label="EMAIL"
-      onChange={[Function]}
-      theme={
-        Object {
-          "control": Object {
-            "marginBottom": 3,
-          },
-          "error": Object {
-            "paddingBottom": 10,
-            "paddingVertical": 0,
-          },
-          "hideErrorTriangle": true,
-          "label": Object {
-            "color": "#c0c6cd",
-            "fontFamily": "Circular-Bold",
-            "fontSize": 10,
-            "marginBottom": 10,
-          },
-          "textInput": Object {
-            "borderBottomColor": "#c0c6cd",
-            "borderBottomWidth": 0.5,
-            "color": "#56667a",
-            "fontFamily": "Circular-Book",
-            "fontSize": 16,
-          },
-        }
+    updateMessageSettings={[Function]}
+  />
+  <AllCommunitiesSettingsRow
+    settings={
+      Object {
+        "sendEmail": false,
+        "sendPushNotifications": true,
       }
-      value=""
-    />
-    <View>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-      >
-        PASSWORD
-      </Text>
-      <TouchableOpacity
-        activeOpacity={0.2}
-        onPress={[Function]}
-      >
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-        >
-          Change Password
-        </Text>
-      </TouchableOpacity>
-    </View>
-    <SocialAccounts
-      facebookUrl={undefined}
-      loginWithFacebook={[Function]}
-      twitterName={undefined}
-      twitterPrompt={[Function]}
-      unlinkAccount={[Function]}
-      updateField={[Function]}
-      updateNotificationSettings={[Function]}
-    />
-    <Footer
-      cancel={[Function]}
-      logout={[Function]}
-      saveChanges={false}
-    />
-  </ScrollView>
-</Unknown>
+    }
+    updateAllCommunities={[Function]}
+  />
+  <MembershipSettingsRow
+    membership={
+      Object {
+        "community": Object {
+          "avatarUrl": "foo1.png",
+          "id": 12,
+        },
+        "id": 11,
+        "settings": Object {
+          "sendEmail": true,
+          "sendPushNotifications": false,
+        },
+      }
+    }
+    updateMembershipSettings={[Function]}
+  />
+  <MembershipSettingsRow
+    membership={
+      Object {
+        "community": Object {
+          "avatarUrl": "foo2.png",
+          "id": 22,
+        },
+        "id": 21,
+        "settings": Object {
+          "sendEmail": false,
+          "sendPushNotifications": true,
+        },
+      }
+    }
+    updateMembershipSettings={[Function]}
+  />
+</ScrollView>
 `;
 
 exports[`NotificationSettings updateField sets the state 1`] = `
@@ -547,109 +466,80 @@ Object {
 }
 `;
 
-exports[`NotificationSettings validate validates its fields 1`] = `
-Object {
-  "changed": false,
-  "editingPassword": false,
-  "edits": Object {
-    "confirmPassword": "lalala",
-    "email": "ra",
-    "password": "rarara",
-  },
-  "errors": Object {
-    "confirmPassword": "Passwords must match",
-    "email": "Must be a valid email",
-    "password": "Password must be at least 9 characters.",
-  },
-}
+exports[`SettingsIcon matches the last snapshot 1`] = `
+<TouchableOpacity
+  activeOpacity={0.2}
+  onPress={[Function]}
+>
+  <Icon
+    name="FooRow"
+  />
+</TouchableOpacity>
 `;
 
-exports[`SocialAccounts matches the last snapshot 1`] = `
+exports[`SettingsRow matches snapshot when expanded 1`] = `
 <View>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-  >
-    SOCIAL ACCOUNTS
-  </Text>
-  <SocialControl
-    label="Facebook"
-    onChange={[Function]}
-    onLink={[Function]}
-    provider="facebook"
-    unlinkAccount={[Function]}
-    value="foo.com"
-  />
-  <SocialControl
-    label="Twitter"
-    onChange={[Function]}
-    onLink={[Function]}
-    provider="twitter"
-    unlinkAccount={[Function]}
-    updateNotificationSettings={[Function]}
-    value="rara"
+  <ActivityIndicator
+    animating={true}
+    color="#999999"
+    hidesWhenStopped={true}
+    size="small"
   />
 </View>
 `;
 
-exports[`SocialControl matches the last snapshot linked 1`] = `
+exports[`SettingsRow matches the last snapshot 1`] = `
 <View>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-  />
-  <TouchableOpacity
-    activeOpacity={0.2}
-    onPress={[Function]}
-  >
+  <View>
+    <Image
+      source={
+        Object {
+          "uri": "foo.png",
+        }
+      }
+    />
     <Text
       accessible={true}
       allowFontScaling={true}
       ellipsizeMode="tail"
+      numberOfLines={1}
     >
-      Unlink
+      Foo Row
     </Text>
-  </TouchableOpacity>
+    <TouchableOpacity
+      activeOpacity={0.2}
+      onPress={[Function]}
+    >
+      <Icon
+        name="ArrowDown"
+      />
+    </TouchableOpacity>
+  </View>
 </View>
 `;
 
-exports[`SocialControl matches the last snapshot loading 1`] = `
+exports[`SettingsRow matches the last snapshot with iconName 1`] = `
 <View>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-  />
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-  >
-    Loading
-  </Text>
-</View>
-`;
-
-exports[`SocialControl matches the last snapshot unlinked 1`] = `
-<View>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-  />
-  <TouchableOpacity
-    activeOpacity={0.2}
-    onPress={[Function]}
-  >
+  <View>
+    <Icon
+      name="iconname"
+    />
     <Text
       accessible={true}
       allowFontScaling={true}
       ellipsizeMode="tail"
+      numberOfLines={1}
     >
-      Link
+      Foo Row
     </Text>
-  </TouchableOpacity>
+    <TouchableOpacity
+      activeOpacity={0.2}
+      onPress={[Function]}
+    >
+      <Icon
+        name="ArrowDown"
+      />
+    </TouchableOpacity>
+  </View>
 </View>
 `;
