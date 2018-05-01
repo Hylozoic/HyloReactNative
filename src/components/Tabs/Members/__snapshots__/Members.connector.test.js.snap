@@ -59,7 +59,7 @@ Object {
   "hasMore": undefined,
   "isAll": false,
   "members": Array [],
-  "network": false,
+  "network": null,
   "pending": undefined,
   "search": undefined,
   "slug": "tom",

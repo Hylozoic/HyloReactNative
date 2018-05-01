@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 import { get, omit, values, each } from 'lodash/fp'
 import { pullAllBy } from 'lodash'
+import getCurrentNetwork from '../../store/selectors/getCurrentNetwork'
 import getMe from '../../store/selectors/getMe'
 import getMemberships from '../../store/selectors/getMemberships'
 import getCurrentCommunityId from '../../store/selectors/getCurrentCommunityId'
@@ -71,6 +72,8 @@ const getPartitionCommunities = createSelector(
 
 export function mapStateToProps (state, props) {
   const { networks, communities } = getPartitionCommunities(state)
+  const currentContext = getCurrentNetwork(state) || getCurrentCommunity(state)
+  const currentNetworkId = getCurrentNetworkId(state, props)
   const currentUser = getMe(state)
   return {
     currentUser: getMe(state),
@@ -78,10 +81,11 @@ export function mapStateToProps (state, props) {
     avatarUrl: get('avatarUrl', currentUser),
     networks,
     communities,
-    canModerateCurrentCommunity: getCanModerate(state),
+    currentContext,
+    canModerateCurrentCommunity: !currentNetworkId && getCanModerate(state),
     currentCommunityId: getCurrentCommunityId(state, props),
     currentCommunity: getCurrentCommunity(state),
-    currentNetworkId: getCurrentNetworkId(state, props)
+    currentNetworkId
   }
 }
 
