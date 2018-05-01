@@ -14,7 +14,7 @@ export default class Home extends React.Component {
   }
 
   componentDidMount () {
-    this.props.navigation.navigate('UserSettings')
+    this.props.navigation.navigate('NotificationSettings')
   }
 
   render () {

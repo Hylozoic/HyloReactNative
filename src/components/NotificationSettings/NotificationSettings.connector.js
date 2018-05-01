@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { createSelector } from 'reselect'
 import getMe from '../../store/selectors/getMe'
-import { updateMembershipSettings, getMemberships } from './NotificationSettings.store'
+import { updateMembershipSettings, updateAllMemberships, getMemberships } from './NotificationSettings.store'
 import updateUserSettings from '../../store/actions/updateUserSettings'
 import { every, includes } from 'lodash/fp'
 
@@ -34,7 +34,8 @@ export function mapDispatchToProps (dispatch, props) {
   return {
     ...bindActionCreators({
       updateUserSettings,
-      updateMembershipSettings
+      updateMembershipSettings,
+      updateAllMemberships
     }, dispatch)
   }
 }

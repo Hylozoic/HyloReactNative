@@ -40,8 +40,8 @@ export default class NotificationSettings extends React.Component {
   }
 
   updateAllCommunities = changes => {
-    const { memberships, updateMembershipSettings } = this.props
-    memberships.map(m => updateMembershipSettings(m.community.id, changes))
+    const { memberships, updateAllMemberships } = this.props
+    updateAllMemberships(memberships.map(m => m.community.id), changes)
   }
 
   updateAllCommunitiesAlert = changes => {
