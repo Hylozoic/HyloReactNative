@@ -51,61 +51,17 @@ describe('NotificationSettings', () => {
     expect(actual).toMatchSnapshot()
   })
 
-  it.skip('matches snapshot with state set', () => {
-    const props = {
-      currentUser: {id: 1},
-      unlinkAccount: () => {}
-    }
-    const renderer = ReactTestRenderer.create(<NotificationSettings {...props} />)
-    const instance = renderer.getInstance()
-    instance.setState({
-      editingPassword: true,
-      edits: {
-        email: 'aa@bbb.com',
-        password: 'hunkjnkjn',
-        confirmPassword: 'fkldsflkjdf',
-        facebookUrl: 'foo.com',
-        twitterName: 'twee'
-      },
-      errors: {
-        email: 'bad email',
-        password: 'needs to be longer',
-        confirmPassword: 'needs to match'
-      }
-    })
-
-    expect(renderer.toJSON()).toMatchSnapshot()
-  })
-
-  it.skip('sets edit state on mount', () => {
-    const props = {
-      currentUser: {
-        email: 'ra@ra.com',
-        facebookUrl: 'foo.com',
-        twitterName: 'rara'
-      }
-    }
-
-    const instance = ReactTestRenderer.create(<NotificationSettings {...props} />).getInstance()
-    expect(instance.state.edits).toEqual(props.currentUser)
-  })
-
-  describe.skip('updateField', () => {
-    it('sets the state', () => {
-      const instance = ReactTestRenderer.create(<NotificationSettings />).getInstance()
-      instance.setState({
-        changed: false,
-        edits: {
-          email: 'moo',
-          password: 'ldlkd'
+  describe('updateMessageSettings', () => {
+    it('calls updateUserSettings', () => {
+      const props = {
+        messageSettings: {
+          sendEmail: true
         },
-        errors: {
-          email: 'bad email',
-          password: 'too short'
-        }
-      })
-      instance.updateField('email', 'newemail')
-      expect(instance.state).toMatchSnapshot()
+        updateUserSettings: jest.fn()
+      }
+      const instance = ReactTestRenderer.create(<NotificationSettings {...props} />).getInstance()
+      instance.updateMessageSettings({sendPushNotifications: true})
+      expect(props.updateUserSettings).toHaveBeenCalledWith({settings: {dmNotifications: 'both'}})
     })
   })
 
@@ -203,13 +159,21 @@ describe('SettingsRow', () => {
   })
 
   it('matches snapshot when expanded', () => {
-    const renderer = ReactTestRenderer.create(<NotificationSettings {...props} />)
+    const renderer = ReactTestRenderer.create(<SettingsRow {...props} />)
     const instance = renderer.getInstance()
     instance.setState({
       expanded: true
     })
 
     expect(renderer.toJSON()).toMatchSnapshot()
+  })
+
+  describe('toggleExpand', () => {
+    it('updates the state', () => {
+      const instance = ReactTestRenderer.create(<SettingsRow />).getInstance()
+      instance.toggleExpand()
+      expect(instance.state.expanded).toEqual(true)
+    })
   })
 })
 

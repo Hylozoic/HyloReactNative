@@ -60,336 +60,6 @@ Object {
 }
 `;
 
-exports[`NotificationSettings matches snapshot with state set 1`] = `
-<View
-  enabled={true}
-  keyboardVerticalOffset={64}
-  onLayout={[Function]}
->
-  <RCTScrollView
-    contentContainerStyle={
-      Object {
-        "flexGrow": 1,
-      }
-    }
-  >
-    <View>
-      <SettingControl
-        autoCapitalize="none"
-        autoCorrect={false}
-        error="bad email"
-        keyboardType="email-address"
-        label="EMAIL"
-        onChange={[Function]}
-        theme={
-          Object {
-            "control": Object {
-              "marginBottom": 3,
-            },
-            "error": Object {
-              "paddingBottom": 10,
-              "paddingVertical": 0,
-            },
-            "hideErrorTriangle": true,
-            "label": Object {
-              "color": "#c0c6cd",
-              "fontFamily": "Circular-Bold",
-              "fontSize": 10,
-              "marginBottom": 10,
-            },
-            "textInput": Object {
-              "borderBottomColor": "#c0c6cd",
-              "borderBottomWidth": 0.5,
-              "color": "#56667a",
-              "fontFamily": "Circular-Book",
-              "fontSize": 16,
-            },
-          }
-        }
-        value="aa@bbb.com"
-      />
-      <SettingControl
-        autoCapitalize="none"
-        autoCorrect={false}
-        error="needs to be longer"
-        label="PASSWORD"
-        onChange={[Function]}
-        theme={
-          Object {
-            "control": Object {
-              "marginBottom": 3,
-            },
-            "error": Object {
-              "paddingBottom": 10,
-              "paddingVertical": 0,
-            },
-            "hideErrorTriangle": true,
-            "label": Object {
-              "color": "#c0c6cd",
-              "fontFamily": "Circular-Bold",
-              "fontSize": 10,
-              "marginBottom": 10,
-            },
-            "textInput": Object {
-              "borderBottomColor": "#c0c6cd",
-              "borderBottomWidth": 0.5,
-              "color": "#56667a",
-              "fontFamily": "Circular-Book",
-              "fontSize": 16,
-            },
-          }
-        }
-        toggleSecureTextEntry={true}
-        value="hunkjnkjn"
-      />
-      <SettingControl
-        autoCapitalize="none"
-        autoCorrect={false}
-        error="needs to match"
-        label="CONFIRM PASSWORD"
-        onChange={[Function]}
-        theme={
-          Object {
-            "control": Object {
-              "marginBottom": 3,
-            },
-            "error": Object {
-              "paddingBottom": 10,
-              "paddingVertical": 0,
-            },
-            "hideErrorTriangle": true,
-            "label": Object {
-              "color": "#c0c6cd",
-              "fontFamily": "Circular-Bold",
-              "fontSize": 10,
-              "marginBottom": 10,
-            },
-            "textInput": Object {
-              "borderBottomColor": "#c0c6cd",
-              "borderBottomWidth": 0.5,
-              "color": "#56667a",
-              "fontFamily": "Circular-Book",
-              "fontSize": 16,
-            },
-          }
-        }
-        toggleSecureTextEntry={true}
-        value="fkldsflkjdf"
-      />
-      <View
-        accessibilityComponentType={undefined}
-        accessibilityLabel={undefined}
-        accessibilityTraits={undefined}
-        accessible={true}
-        collapsable={undefined}
-        hasTVPreferredFocus={undefined}
-        hitSlop={undefined}
-        isTVSelectable={true}
-        nativeID={undefined}
-        onLayout={undefined}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
-        testID={undefined}
-        tvParallaxProperties={undefined}
-      >
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-        >
-          Cancel Password Change
-        </Text>
-      </View>
-      <View>
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-        >
-          SOCIAL ACCOUNTS
-        </Text>
-        <View>
-          <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
-          >
-            Facebook
-          </Text>
-          <View
-            accessibilityComponentType={undefined}
-            accessibilityLabel={undefined}
-            accessibilityTraits={undefined}
-            accessible={true}
-            collapsable={undefined}
-            hasTVPreferredFocus={undefined}
-            hitSlop={undefined}
-            isTVSelectable={true}
-            nativeID={undefined}
-            onLayout={undefined}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
-            testID={undefined}
-            tvParallaxProperties={undefined}
-          >
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-            >
-              Unlink
-            </Text>
-          </View>
-        </View>
-        <View>
-          <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
-          >
-            Twitter
-          </Text>
-          <View
-            accessibilityComponentType={undefined}
-            accessibilityLabel={undefined}
-            accessibilityTraits={undefined}
-            accessible={true}
-            collapsable={undefined}
-            hasTVPreferredFocus={undefined}
-            hitSlop={undefined}
-            isTVSelectable={true}
-            nativeID={undefined}
-            onLayout={undefined}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
-            testID={undefined}
-            tvParallaxProperties={undefined}
-          >
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-            >
-              Unlink
-            </Text>
-          </View>
-        </View>
-      </View>
-      <View>
-        <View>
-          <View
-            accessibilityComponentType={undefined}
-            accessibilityLabel={undefined}
-            accessibilityTraits={undefined}
-            accessible={true}
-            collapsable={undefined}
-            hasTVPreferredFocus={undefined}
-            hitSlop={undefined}
-            isTVSelectable={true}
-            nativeID={undefined}
-            onLayout={undefined}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
-            testID={undefined}
-            tvParallaxProperties={undefined}
-          >
-            <View>
-              <View>
-                <Text
-                  accessible={true}
-                  allowFontScaling={true}
-                  ellipsizeMode="tail"
-                >
-                  Save Changes
-                </Text>
-              </View>
-            </View>
-          </View>
-        </View>
-        <View
-          accessibilityComponentType={undefined}
-          accessibilityLabel={undefined}
-          accessibilityTraits={undefined}
-          accessible={true}
-          collapsable={undefined}
-          hasTVPreferredFocus={undefined}
-          hitSlop={undefined}
-          isTVSelectable={true}
-          nativeID={undefined}
-          onLayout={undefined}
-          onResponderGrant={[Function]}
-          onResponderMove={[Function]}
-          onResponderRelease={[Function]}
-          onResponderTerminate={[Function]}
-          onResponderTerminationRequest={[Function]}
-          onStartShouldSetResponder={[Function]}
-          testID={undefined}
-          tvParallaxProperties={undefined}
-        >
-          <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
-          >
-            Cancel
-          </Text>
-        </View>
-        <View>
-          <View
-            accessibilityComponentType={undefined}
-            accessibilityLabel={undefined}
-            accessibilityTraits={undefined}
-            accessible={true}
-            collapsable={undefined}
-            hasTVPreferredFocus={undefined}
-            hitSlop={undefined}
-            isTVSelectable={true}
-            nativeID={undefined}
-            onLayout={undefined}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
-            testID={undefined}
-            tvParallaxProperties={undefined}
-          >
-            <View>
-              <View>
-                <Text
-                  accessible={true}
-                  allowFontScaling={true}
-                  ellipsizeMode="tail"
-                >
-                  Logout
-                </Text>
-              </View>
-            </View>
-          </View>
-        </View>
-      </View>
-    </View>
-  </RCTScrollView>
-</View>
-`;
-
 exports[`NotificationSettings matches the last snapshot 1`] = `
 <ScrollView
   contentContainerStyle={
@@ -451,21 +121,6 @@ exports[`NotificationSettings matches the last snapshot 1`] = `
 </ScrollView>
 `;
 
-exports[`NotificationSettings updateField sets the state 1`] = `
-Object {
-  "changed": true,
-  "editingPassword": false,
-  "edits": Object {
-    "email": "newemail",
-    "password": "ldlkd",
-  },
-  "errors": Object {
-    "email": null,
-    "password": "too short",
-  },
-}
-`;
-
 exports[`SettingsIcon matches the last snapshot 1`] = `
 <TouchableOpacity
   activeOpacity={0.2}
@@ -479,12 +134,100 @@ exports[`SettingsIcon matches the last snapshot 1`] = `
 
 exports[`SettingsRow matches snapshot when expanded 1`] = `
 <View>
-  <ActivityIndicator
-    animating={true}
-    color="#999999"
-    hidesWhenStopped={true}
-    size="small"
-  />
+  <View>
+    <Image
+      source={
+        Object {
+          "uri": "foo.png",
+        }
+      }
+    />
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      numberOfLines={1}
+    >
+      Foo Row
+    </Text>
+    <View
+      accessibilityComponentType={undefined}
+      accessibilityLabel={undefined}
+      accessibilityTraits={undefined}
+      accessible={true}
+      collapsable={undefined}
+      hasTVPreferredFocus={undefined}
+      hitSlop={undefined}
+      isTVSelectable={true}
+      nativeID={undefined}
+      onLayout={undefined}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      testID={undefined}
+      tvParallaxProperties={undefined}
+    >
+      <Icon
+        color={undefined}
+        name="ArrowUp"
+      />
+    </View>
+  </View>
+  <View>
+    <View
+      accessibilityComponentType={undefined}
+      accessibilityLabel={undefined}
+      accessibilityTraits={undefined}
+      accessible={true}
+      collapsable={undefined}
+      hasTVPreferredFocus={undefined}
+      hitSlop={undefined}
+      isTVSelectable={true}
+      nativeID={undefined}
+      onLayout={undefined}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      testID={undefined}
+      tvParallaxProperties={undefined}
+    >
+      <Icon
+        color={undefined}
+        name="PushNotification"
+      />
+    </View>
+    <View
+      accessibilityComponentType={undefined}
+      accessibilityLabel={undefined}
+      accessibilityTraits={undefined}
+      accessible={true}
+      collapsable={undefined}
+      hasTVPreferredFocus={undefined}
+      hitSlop={undefined}
+      isTVSelectable={true}
+      nativeID={undefined}
+      onLayout={undefined}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      testID={undefined}
+      tvParallaxProperties={undefined}
+    >
+      <Icon
+        color={undefined}
+        name="EmailNotification"
+      />
+    </View>
+  </View>
 </View>
 `;
 
