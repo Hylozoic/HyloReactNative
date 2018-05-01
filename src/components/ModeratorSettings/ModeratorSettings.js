@@ -3,6 +3,7 @@ import { Alert, FlatList, Text, View, TouchableOpacity } from 'react-native'
 import header from 'util/header'
 import Avatar from '../Avatar'
 import Autocomplete from 'react-native-autocomplete-input'
+import { debounce } from 'lodash'
 
 import { get, isEmpty } from 'lodash/fp'
 
@@ -64,6 +65,8 @@ export default class ModeratorSettings extends Component {
     this.props.fetchModeratorSuggestions(text)
   }
 
+  debouncedQueryModerators = debounce(this.queryModerators, 400)
+
   selectModeratorToAdd = (id, name) => {
     this.setState({query: name, moderatorToAdd: id})
   }
@@ -122,6 +125,7 @@ export default class ModeratorSettings extends Component {
     return <FlatList
       style={styles.container}
       data={moderators}
+      keyboardShouldPersistTaps='always'
       ItemSeparatorComponent={this._renderSeparator}
       keyExtractor={item => item.id.toString()}
       renderItem={this._renderModeratorRow}
@@ -130,18 +134,20 @@ export default class ModeratorSettings extends Component {
         {isAdding && <View>
           <Text>Search here for members to grant moderator powers</Text>
           <View style={styles.addModeratorButtonsContainer}>
-            <Autocomplete
-              autoCapitalize='none'
-              autoCorrect={false}
-              ref={input => { this.addModeratorInput = input }}
-              containerStyle={styles.autocompleteContainer}
-              inputContainerStyle={styles.autocompleteInput}
-              data={moderatorSuggestions.length === 1 && query === moderatorSuggestions[0].name ? [] : moderatorSuggestions}
-              defaultValue={query}
-              onChangeText={text => this.queryModerators(text)}
-              placeholder='Enter member name'
-              renderItem={this._renderAutocompleteItem}
-            />
+            <View style={styles.autocomplete}>
+              <Autocomplete
+                autoCapitalize='none'
+                autoCorrect={false}
+                ref={input => { this.addModeratorInput = input }}
+                containerStyle={styles.autocompleteContainer}
+                inputContainerStyle={styles.autocompleteInput}
+                data={moderatorSuggestions.length === 1 && query === moderatorSuggestions[0].name ? [] : moderatorSuggestions}
+                defaultValue={query}
+                onChangeText={this.debouncedQueryModerators}
+                placeholder='Enter member name'
+                renderItem={this._renderAutocompleteItem}
+              />
+            </View>
             <TouchableOpacity style={styles.button} onPress={() => this.clearAutocomplete(true)}>
               <Text style={styles.cancelButton}>Cancel</Text>
             </TouchableOpacity>
