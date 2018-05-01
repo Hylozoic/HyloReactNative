@@ -15,7 +15,7 @@ export default class DrawerMenu extends React.PureComponent {
   render () {
     const {
       name, avatarUrl, goToCommunity, goToNetwork, goToMyProfile,
-      showSettings, networks, communities, currentCommunity,
+      showSettings, networks, communities, currentCommunity, currentContext,
       currentNetworkId, currentCommunityId, canModerateCurrentCommunity,
       goToCreateCommunityName, goToCommunitySettingsMenu
     } = this.props
@@ -44,15 +44,17 @@ export default class DrawerMenu extends React.PureComponent {
       }
     ]
 
+    const isAll = currentNetworkId && currentNetworkId === ALL_COMMUNITIES_ID
+
     return <View style={styles.parent}>
-      <View style={styles.communityHeader}>
-        <Image source={{uri: currentCommunity.avatarUrl}} style={styles.communityHeaderAvatar} />
-        <Text style={styles.communityHeaderText}>{currentCommunity.name}</Text>
-        {canModerateCurrentCommunity && <TouchableOpacity onPress={goToCommunitySettingsMenu} hitSlop={{top: 5, bottom: 5, left: 10, right: 10}} style={styles.communityHeaderSettingsButton}>
-          <Icon style={styles.communityHeaderSettingsButtonIcon} name='Settings' />
-          <Text style={styles.communityHeaderSettingsButtonText}>Settings</Text>
+      {!isAll && currentContext && <View style={styles.header}>
+        <Image source={{uri: currentContext.avatarUrl}} style={styles.headerAvatar} />
+        <Text style={styles.headerText}>{currentContext.name}</Text>
+        {canModerateCurrentCommunity && <TouchableOpacity onPress={goToCommunitySettingsMenu} hitSlop={{top: 5, bottom: 5, left: 10, right: 10}} style={styles.headerSettingsButton}>
+          <Icon style={styles.headerSettingsButtonIcon} name='Settings' />
+          <Text style={styles.headerSettingsButtonText}>Settings</Text>
         </TouchableOpacity>}
-      </View>
+      </View>}
       <SectionList
         renderSectionHeader={SectionHeader}
         sections={listSections}
@@ -122,19 +124,20 @@ export class NetworkRow extends React.Component {
     })
   }
 
+  openNetwork = () => this.props.goToNetwork(this.props.network)
+
   render () {
-    const { network, goToCommunity, goToNetwork, currentCommunityId } = this.props
+    const { network, goToCommunity, currentCommunityId } = this.props
+    const { expanded, seeAllExpanded } = this.state
     const { id, avatarUrl, name, communities, nonMemberCommunities } = network
     const isAll = id === ALL_COMMUNITIES_ID
     const imageSource = isAll
       ? allCommunitiesImage
       : avatarUrl && {uri: avatarUrl}
-    const openNetwork = () => goToNetwork(network)
     const expandable = !isEmpty(communities)
     const moreCommunities = !isEmpty(nonMemberCommunities)
-    const { expanded, seeAllExpanded } = this.state
     return <View style={[ styles.networkRow, expanded ? styles.networkRowExpanded : styles.networkRowCollapsed ]}>
-      <TouchableOpacity onPress={openNetwork} style={[styles.rowTouchable, styles.networkRowTouchable]}>
+      <TouchableOpacity onPress={this.openNetwork} style={[styles.rowTouchable, styles.networkRowTouchable]}>
         {imageSource && <Image source={imageSource} style={styles.networkAvatar} />}
         <Text style={styles.networkRowText} ellipsizeMode='tail'
           numberOfLines={1}>
