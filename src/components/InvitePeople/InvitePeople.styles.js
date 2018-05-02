@@ -1,10 +1,10 @@
 import { StyleSheet, Dimensions } from 'react-native'
 import { caribbeanGreen, white, capeCod40, amaranth, rhino20, white60onCaribbeanGreen } from 'style/colors'
 const screenWidth = Dimensions.get('window').width
+const screenHeight = Dimensions.get('window').height
 
 export default {
   container: {
-    flex: 1,
     backgroundColor: white
   },
   tabbar: {
@@ -105,7 +105,7 @@ export default {
     marginLeft: 'auto',
     marginRight: 18,
     fontSize: 14,
-    disabledBackgroundColor: white60onCaribbeanGreen,
+    disabledBackgroundColor: white60onCaribbeanGreen
   },
   resendAllButton: {
     marginBottom: 18,
@@ -135,6 +135,12 @@ export default {
   },
   timeAgoText: {
     color: rhino20
+  },
+  keyboardFriendlyContainer: {
+    display: 'flex',
+    flex: 1,
+    alignItems: 'stretch',
+    minHeight: screenHeight
   },
   androidInvisibleUnderline: 'rgba(0,0,0,0)'
 }

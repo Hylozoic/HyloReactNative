@@ -189,51 +189,53 @@ exports[`InvitePeople renders PendingInvitesPage 1`] = `
 
 exports[`InvitePeople renders SendInvitesPage 1`] = `
 <ScrollView>
-  <View>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
-      Anyone with this link can join the community
-    </Text>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
-      https://hylo.com/invitepathhere
-    </Text>
+  <Unknown>
     <View>
-      <Button
-        onPress={[Function]}
-        text="Reset Link"
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+      >
+        Anyone with this link can join the community
+      </Text>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+      >
+        https://hylo.com/invitepathhere
+      </Text>
+      <View>
+        <Button
+          onPress={[Function]}
+          text="Reset Link"
+        />
+        <Button
+          onPress={[Function]}
+          text="Copy Link"
+        />
+      </View>
+      <TextInput
+        allowFontScaling={true}
+        onChangeText={[Function]}
+        placeholder="Type email addresses"
+        underlineColorAndroid="rgba(0,0,0,0)"
+        value=""
+      />
+      <TextInput
+        allowFontScaling={true}
+        multiline={true}
+        numberOfLines={5}
+        onChangeText={[Function]}
+        underlineColorAndroid="rgba(0,0,0,0)"
+        value="Hey! Here's an invite to the Axolotle community on Hylo."
       />
       <Button
+        disabled={true}
         onPress={[Function]}
-        text="Copy Link"
+        text="Send Invite"
       />
     </View>
-    <TextInput
-      allowFontScaling={true}
-      onChangeText={[Function]}
-      placeholder="Type email addresses"
-      underlineColorAndroid="rgba(0,0,0,0)"
-      value=""
-    />
-    <TextInput
-      allowFontScaling={true}
-      multiline={true}
-      numberOfLines={5}
-      onChangeText={[Function]}
-      underlineColorAndroid="rgba(0,0,0,0)"
-      value="Hey! Here's an invite to the Axolotle community on Hylo."
-    />
-    <Button
-      disabled={true}
-      onPress={[Function]}
-      text="Send Invite"
-    />
-  </View>
+  </Unknown>
 </ScrollView>
 `;
