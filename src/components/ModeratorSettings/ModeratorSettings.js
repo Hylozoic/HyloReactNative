@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Alert, FlatList, Text, View, TouchableOpacity } from 'react-native'
 import header from 'util/header'
 import Avatar from '../Avatar'
+import Loading from '../Loading'
 import Autocomplete from 'react-native-autocomplete-input'
 import { debounce } from 'lodash'
 
@@ -119,7 +120,7 @@ export default class ModeratorSettings extends Component {
     } = this.state
 
     if (isEmpty(moderators)) {
-      return <Text>Loading...</Text>
+      return <Loading />
     }
 
     return <FlatList
