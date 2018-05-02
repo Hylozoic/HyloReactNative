@@ -1,7 +1,9 @@
 import { capeCod, white, caribbeanGreen, alabaster, rhino30, rhino } from '../../style/colors'
+import { Dimensions } from 'react-native'
 
 const screenMargin = 16
 const avatarSize = 112
+const screenHeight = Dimensions.get('window').height
 
 export default {
   container: {
@@ -105,5 +107,11 @@ export default {
     height: 56,
     marginBottom: 15,
     textAlign: 'center'
+  },
+  keyboardFriendlyContainer: {
+    display: 'flex',
+    flex: 1,
+    alignItems: 'stretch',
+    minHeight: screenHeight
   }
 }

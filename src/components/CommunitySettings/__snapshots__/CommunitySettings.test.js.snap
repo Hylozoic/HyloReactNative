@@ -90,52 +90,54 @@ exports[`CommunitySettings matches the last snapshot 1`] = `
     }
   }
 >
-  <TextInput
-    allowFontScaling={true}
-    onChangeText={[Function]}
-    underlineColorAndroid="transparent"
-    value={undefined}
-  />
-  <CommunityBanner
-    community={
-      Object {
-        "avatarUrl": "someAvatarUrl.com",
-        "bannerUrl": "someBannerUrl.com",
-        "description": "some description",
-        "id": 10,
-        "name": "Community Time",
+  <Unknown>
+    <TextInput
+      allowFontScaling={true}
+      onChangeText={[Function]}
+      underlineColorAndroid="transparent"
+      value={undefined}
+    />
+    <CommunityBanner
+      community={
+        Object {
+          "avatarUrl": "someAvatarUrl.com",
+          "bannerUrl": "someBannerUrl.com",
+          "description": "some description",
+          "id": 10,
+          "name": "Community Time",
+        }
       }
-    }
-    isFocused={true}
-    updateCommunitySettings={[MockFunction]}
-  />
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-  >
-    DESCRIPTION
-  </Text>
-  <TextInput
-    allowFontScaling={true}
-    multiline={true}
-    numberOfLines={5}
-    onChangeText={[Function]}
-    underlineColorAndroid="transparent"
-    value={undefined}
-  />
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-  >
-    LOCATION
-  </Text>
-  <TextInput
-    allowFontScaling={true}
-    onChangeText={[Function]}
-    underlineColorAndroid="transparent"
-    value={undefined}
-  />
+      isFocused={true}
+      updateCommunitySettings={[MockFunction]}
+    />
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+    >
+      DESCRIPTION
+    </Text>
+    <TextInput
+      allowFontScaling={true}
+      multiline={true}
+      numberOfLines={5}
+      onChangeText={[Function]}
+      underlineColorAndroid="transparent"
+      value={undefined}
+    />
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+    >
+      LOCATION
+    </Text>
+    <TextInput
+      allowFontScaling={true}
+      onChangeText={[Function]}
+      underlineColorAndroid="transparent"
+      value={undefined}
+    />
+  </Unknown>
 </ScrollView>
 `;
