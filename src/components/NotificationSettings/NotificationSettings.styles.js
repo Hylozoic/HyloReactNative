@@ -50,8 +50,7 @@ export default {
   icon: {
     fontSize: 46,
     marginRight: 25,
-    color: rhino30,
-    top: -4
+    color: rhino30
   },
   highlightIcon: {
     color: treePoppy
