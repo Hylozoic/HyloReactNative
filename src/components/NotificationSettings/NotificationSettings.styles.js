@@ -7,7 +7,8 @@ const row = {
 
 export default {
   scrollContainer: {
-    marginTop: 30
+    marginTop: 30,
+    paddingBottom: 100
   },
   row,
   settingsRow: {
