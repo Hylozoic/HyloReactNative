@@ -65,6 +65,7 @@ exports[`NotificationSettings matches the last snapshot 1`] = `
   contentContainerStyle={
     Object {
       "marginTop": 30,
+      "paddingBottom": 100,
     }
   }
 >
