@@ -61,13 +61,6 @@ describe('ModeratorSettings', () => {
     expect(props.fetchModerators).toHaveBeenCalledTimes(2)
   })
 
-  // it('unmounts successfully', () => {
-  //   const renderer = ReactTestRenderer.create(<ModeratorSettings {...props} />)
-  //
-  //   renderer.unmount()
-  //   expect(props.clearModeratorSuggestions).toHaveBeenCalled()
-  // })
-
   it('renders ModeratorRow', () => {
     const renderer = new ReactShallowRenderer()
     const props = {
@@ -115,8 +108,5 @@ describe('ModeratorSettings', () => {
       showPicker: true
     })
     expect(renderer.toJSON()).toMatchSnapshot()
-    // const instance = ReactTestRenderer.create(<ModeratorSettings {...props} />).getInstance()
-    // instance.setState({showPicker: true})
-    // expect(instance).toMatchSnapshot()
   })
 })
