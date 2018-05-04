@@ -8,8 +8,8 @@ import {
   View
 } from 'react-native'
 
-import Icon from '../../Icon'
-import TopicList from '../../TopicList'
+import Icon from '../Icon'
+import TopicList from '../TopicList'
 import { SearchType } from './Search.store'
 import styles from './Search.styles'
 import { rhino30 } from 'style/colors'

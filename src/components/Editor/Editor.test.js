@@ -1,7 +1,7 @@
 // import Editor from './index'
 import React from 'react'
 import Editor, { setHtml } from './Editor'
-import { SearchType } from './Search'
+import { SearchType } from '../Search'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 
 it('renders as expected', () => {

@@ -6,8 +6,8 @@ import header from 'util/header'
 import Avatar from '../Avatar'
 import Icon from '../Icon'
 import LoadingScreen from '../Loading'
-import { SearchType } from '../Editor/Search/Search.store'
-import Search from '../Editor/Search'
+import { SearchType } from '../Search/Search.store'
+import Search from '../Search'
 
 import styles from './ModeratorSettings.styles'
 

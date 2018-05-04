@@ -8,7 +8,7 @@ jest.mock('Alert', () => ({
   alert: jest.fn()
 }))
 
-jest.mock('../Editor/Search', () => 'Search')
+jest.mock('../Search', () => 'Search')
 
 
 describe('ModeratorSettings', () => {
