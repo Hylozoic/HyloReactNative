@@ -57,8 +57,7 @@ export default class Editor extends React.Component {
   }
 
   insertPicked = choice => {
-    const html = setHtml(this.state.showPicker, choice)
-    this.editor.insertCustomHTML(html)
+    this.editor.insertCustomHTML(setHtml(this.state.showPicker, choice))
     this.setState({showPicker: false})
     this.props.navigation.setParams({ showPicker: false })
   }
