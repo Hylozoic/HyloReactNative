@@ -132,8 +132,8 @@ export default class CommunitySettings extends React.Component {
 
     const { name, description, location } = this.state.edits
 
-    return <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-      <KeyboardFriendlyView style={styles.keyboardFriendlyContainer}>
+    return <KeyboardFriendlyView style={styles.keyboardFriendlyContainer}>
+      <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
         <TextInput
           style={styles.nameInput}
           onChangeText={this.updateField('name')}
@@ -159,8 +159,8 @@ export default class CommunitySettings extends React.Component {
           value={location}
           onChangeText={this.updateField('location')}
           underlineColorAndroid='transparent' />
-        </KeyboardFriendlyView>
-    </ScrollView>
+      </ScrollView>
+    </KeyboardFriendlyView>
   }
 }
 

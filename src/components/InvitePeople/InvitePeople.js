@@ -173,8 +173,8 @@ export class SendInvitesPage extends PureComponent {
     const disableSendBtn = !!(isEmpty(emails) || pendingCreate || sending)
 
     return (
-      <ScrollView>
-        <KeyboardFriendlyView style={styles.keyboardFriendlyContainer}>
+      <KeyboardFriendlyView style={styles.keyboardFriendlyContainer}>
+        <ScrollView>
           <View style={styles.container}>
             <Text style={styles.joinCommunityText}>Anyone with this link can join the community</Text>
             {inviteLink && <Text style={styles.joinCommunityLink}>{inviteLink}</Text>}
@@ -212,8 +212,8 @@ export class SendInvitesPage extends PureComponent {
             />
 
           </View>
-        </KeyboardFriendlyView>
-      </ScrollView>)
+        </ScrollView>
+      </KeyboardFriendlyView>)
   }
 }
 

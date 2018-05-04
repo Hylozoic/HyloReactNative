@@ -81,16 +81,16 @@ Object {
 `;
 
 exports[`CommunitySettings matches the last snapshot 1`] = `
-<ScrollView
-  contentContainerStyle={
-    Object {
-      "backgroundColor": "#FFFFFF",
-      "paddingHorizontal": 16,
-      "paddingTop": 20,
+<Unknown>
+  <ScrollView
+    contentContainerStyle={
+      Object {
+        "backgroundColor": "#FFFFFF",
+        "paddingHorizontal": 16,
+        "paddingTop": 20,
+      }
     }
-  }
->
-  <Unknown>
+  >
     <TextInput
       allowFontScaling={true}
       onChangeText={[Function]}
@@ -138,6 +138,6 @@ exports[`CommunitySettings matches the last snapshot 1`] = `
       underlineColorAndroid="transparent"
       value={undefined}
     />
-  </Unknown>
-</ScrollView>
+  </ScrollView>
+</Unknown>
 `;
