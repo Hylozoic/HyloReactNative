@@ -57,15 +57,7 @@ export default class Editor extends React.Component {
   }
 
   insertPicked = choice => {
-    let html
-    switch (this.state.showPicker) {
-      case SearchType.PERSON:
-        html = createMentionTag(choice)
-        break
-      case SearchType.TOPIC:
-        html = createTopicTag(choice)
-        break
-    }
+    const html = setHtml(this.state.showPicker, choice)
     this.editor.insertCustomHTML(html)
     this.setState({showPicker: false})
     this.props.navigation.setParams({ showPicker: false })
@@ -158,3 +150,16 @@ const customCSS = `
   color: ${caribbeanGreen};
 }
 `
+
+export function setHtml (action, choice) {
+  let html
+  switch (action) {
+    case SearchType.PERSON:
+      html = createMentionTag(choice)
+      break
+    case SearchType.TOPIC:
+      html = createTopicTag(choice)
+      break
+  }
+  return html
+}

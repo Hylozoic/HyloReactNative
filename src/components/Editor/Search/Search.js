@@ -21,8 +21,7 @@ export default class Search extends React.Component {
     const renderItem = ({ item }) =>
       <SearchResult item={item} type={type} onPress={() => onSelect(item)} />
 
-    const placeholder =
-      `Search for a ${type} by name`
+    const placeholder = setPlaceholder(type)
 
     return <View style={[styles.container, style]}>
       <View style={styles.inputWrapper}>
@@ -49,6 +48,10 @@ export default class Search extends React.Component {
       </View>
     </View>
   }
+}
+
+export function setPlaceholder (type) {
+  return `Search for a ${type} by name`
 }
 
 function SearchResult ({ item: { name, avatarUrl }, type, onPress }) {
