@@ -37,6 +37,9 @@ import {
   CREATE_COMMUNITY
 } from '../../../components/CreateCommunityFlow/CreateCommunityFlow.store'
 import { FETCH_CURRENT_USER } from 'store/actions/fetchCurrentUser'
+import {
+  UPDATE_MEMBERSHIP_SETTINGS_PENDING, UPDATE_ALL_MEMBERSHIP_SETTINGS_PENDING
+} from '../../../components/NotificationSettings/NotificationSettings.store'
 
 it('responds to an action with meta.extractModel', () => {
   const state = orm.getEmptyState()
@@ -460,5 +463,57 @@ describe('handles CREATE_COMMUNITY', () => {
     const newSession = orm.session(ormReducer(session.state, action))
     const membershipsAfterAction = newSession.Me.first().memberships
     expect(membershipsAfterAction.count()).toEqual(1)
+  })
+})
+
+describe('on UPDATE_MEMBERSHIP_SETTINGS_PENDING', () => {
+  it('should update the membership settings', () => {
+    const session = orm.mutableSession(orm.getEmptyState())
+    const meId = 'meId'
+    const communityId = 'communityId'
+    const membershipId = 'membershipId'
+    session.Me.create({id: meId})
+    session.Community.create({id: communityId, name: 'community 1'})
+    session.Membership.create({id: membershipId, community: communityId, person: meId, settings: {}})
+
+    const action = {
+      type: UPDATE_MEMBERSHIP_SETTINGS_PENDING,
+      meta: {
+        settings: {
+          sendEmail: true
+        },
+        communityId
+      }
+    }
+
+    const newSession = orm.session(ormReducer(session.state, action))
+    const membershipAfterAction = newSession.Membership.safeWithId(membershipId)
+    expect(membershipAfterAction.settings.sendEmail).toEqual(true)
+  })
+})
+
+describe('on UPDATE_ALL_MEMBERSHIP_SETTINGS_PENDING', () => {
+  it('should update all the memberships settings', () => {
+    const session = orm.mutableSession(orm.getEmptyState())
+    const meId = 'meId'
+    session.Me.create({id: meId})
+    session.Membership.create({person: meId, settings: {}})
+    session.Membership.create({person: meId, settings: {}})
+    session.Membership.create({person: meId, settings: {}})
+
+    const action = {
+      type: UPDATE_ALL_MEMBERSHIP_SETTINGS_PENDING,
+      meta: {
+        settings: {
+          sendEmail: true
+        }
+      }
+    }
+
+    const newSession = orm.session(ormReducer(session.state, action))
+    const membershipsAfterAction = newSession.Membership.all().toModelArray()
+    membershipsAfterAction.map(membership => {
+      expect(membership.settings.sendEmail).toEqual(true)
+    })
   })
 })
