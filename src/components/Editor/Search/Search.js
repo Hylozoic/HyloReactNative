@@ -21,8 +21,6 @@ export default class Search extends React.Component {
     const renderItem = ({ item }) =>
       <SearchResult item={item} type={type} onPress={() => onSelect(item)} />
 
-    const placeholder = setPlaceholder(type)
-
     return <View style={[styles.container, style]}>
       <View style={styles.inputWrapper}>
         <Icon name='Search' style={styles.inputIcon} />
@@ -30,7 +28,7 @@ export default class Search extends React.Component {
           autoFocus
           onChangeText={updateSearch}
           autoCapitalize='none'
-          placeholder={placeholder}
+          placeholder={setPlaceholder(type)}
           placeholderTextColor={rhino30}
           style={styles.input}
           underlineColorAndroid='transparent' />
