@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { findMentions, findTopics, getResults, getTopicSearchTerm, SearchType } from './Search.store'
+import { findPeople, findTopics, getResults, getTopicSearchTerm, SearchType } from './Search.store'
 import { debounce } from 'lodash'
 import { validateTopicName } from 'hylo-utils/validators'
 
@@ -23,8 +23,8 @@ function mapStateToProps (state, props) {
 
 const debouncedUpdateSearch = debounce((dispatch, term, type, communityId) => {
   switch (type) {
-    case SearchType.MENTION:
-      return dispatch(findMentions(term))
+    case SearchType.PERSON:
+      return dispatch(findPeople(term))
     case SearchType.TOPIC:
       return dispatch(findTopics(term, communityId))
   }

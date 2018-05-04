@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import { Alert, FlatList, Text, View, TouchableOpacity } from 'react-native'
+import { get, isEmpty } from 'lodash/fp'
+
 import header from 'util/header'
 import Avatar from '../Avatar'
-import Autocomplete from 'react-native-autocomplete-input'
-import { debounce } from 'lodash'
-
-import { get, isEmpty } from 'lodash/fp'
+import Icon from '../Icon'
+import LoadingScreen from '../Loading'
+import { SearchType } from '../Search/Search.store'
+import Search from '../Search'
 
 import styles from './ModeratorSettings.styles'
 
@@ -16,8 +18,7 @@ export default class ModeratorSettings extends Component {
   })
 
   state = {
-    query: '',
-    isAdding: false
+    showPicker: false
   }
 
   componentDidMount () {
@@ -30,138 +31,63 @@ export default class ModeratorSettings extends Component {
     }
   }
 
-  componentWillUnmount () {
-    this.props.clearModeratorSuggestions()
-  }
-
   removeModerator = (id) => {
     Alert.alert(
       'Remove Moderator',
-      'Also remove from community as well?',
+      '',
       [
-        {text: 'Cancel', onPress: () => {}, style: 'cancel'},
-        {text: 'No', onPress: () => this.props.removeModerator(id, false)},
-        {text: 'Yes', onPress: () => this.props.removeModerator(id, true)}
+        {text: 'No', onPress: () => {}, style: 'No'},
+        {text: 'Yes', onPress: () => this.props.removeModerator(id, false)}
       ],
       {cancelable: false}
     )
   }
 
-  addModerator = () => {
-    const { moderatorToAdd } = this.state
-    if (moderatorToAdd) {
-      this.props.addModerator(moderatorToAdd)
-    }
-    this.clearAutocomplete()
+  addModerator = ({ id }) => {
+    this.props.addModerator(id)
+    this.cancelPersonPicker()
   }
 
-  focusAddNew = () => {
-    this.setState({isAdding: true})
-    setTimeout(() => this.addModeratorInput.focus(), 100)
-  }
-
-  queryModerators = (text) => {
-    this.setState({ query: text, moderatorToAdd: null })
-    this.props.fetchModeratorSuggestions(text)
-  }
-
-  debouncedQueryModerators = debounce(this.queryModerators, 400)
-
-  selectModeratorToAdd = (id, name) => {
-    this.setState({query: name, moderatorToAdd: id})
-  }
-
-  clearAutocomplete = (cancelAdding) => {
-    this.setState({
-      query: '',
-      moderatorToAdd: null,
-      isAdding: !cancelAdding
-    })
-    this.props.clearModeratorSuggestions()
-  }
-
-  _renderSeparator = () => {
-    return (
-      <View
-        style={{
-          height: 1,
-          width: '90%',
-          marginLeft: '5%',
-          backgroundColor: '#CED0CE'
-        }}
-      />
-    )
-  }
+  cancelPersonPicker = () => this.setState({ showPicker: false })
 
   isMe = (id) => this.props.currentUser.id === id
 
-  _renderModeratorRow = ({item}) => (
-    <ModeratorRow moderator={item} showMember={this.props.showMember} removeModerator={this.isMe(item.id) ? null : this.removeModerator} />
-  )
+  _renderModeratorRow = ({item}) => <ModeratorRow
+    moderator={item}
+    showMember={this.props.showMember}
+    removeModerator={this.isMe(item.id) ? null : this.removeModerator} />
 
-  _renderAutocompleteItem = ({ id, name, avatarUrl }) => (
-    <TouchableOpacity style={styles.autocompleteItem} onPress={() => this.selectModeratorToAdd(id, name)}>
-      <Avatar style={{width: 50}} avatarUrl={avatarUrl} />
-      <Text style={{flex: 1}}>{name}</Text>
-    </TouchableOpacity>
-  )
+  showPersonPicker = () => this.setState({ showPicker: true })
 
   render () {
-    const {
-      moderators,
-      community,
-      moderatorSuggestions
-    } = this.props
-
-    const {
-      isAdding,
-      query
-    } = this.state
+    const { community, moderators } = this.props
+    const { showPicker } = this.state
 
     if (isEmpty(moderators)) {
-      return <Text>Loading...</Text>
+      return <LoadingScreen />
+    }
+
+    if (showPicker) {
+      return <Search style={styles.search}
+        communityId={community.id}
+        onCancel={this.cancelPersonPicker}
+        onSelect={this.addModerator}
+        type={SearchType.PERSON} />
     }
 
     return <FlatList
       style={styles.container}
       data={moderators}
       keyboardShouldPersistTaps='always'
-      ItemSeparatorComponent={this._renderSeparator}
       keyExtractor={item => item.id.toString()}
       renderItem={this._renderModeratorRow}
-      ListHeaderComponent={<View style={styles.headerContainer}><Text style={styles.headerText}>{community.name}</Text></View>}
-      ListFooterComponent={<View style={styles.addModeratorContainer}>
-        {isAdding && <View>
-          <Text>Search here for members to grant moderator powers</Text>
-          <View style={styles.addModeratorButtonsContainer}>
-            <View style={styles.autocomplete}>
-              <Autocomplete
-                autoCapitalize='none'
-                autoCorrect={false}
-                ref={input => { this.addModeratorInput = input }}
-                containerStyle={styles.autocompleteContainer}
-                inputContainerStyle={styles.autocompleteInput}
-                data={moderatorSuggestions.length === 1 && query === moderatorSuggestions[0].name ? [] : moderatorSuggestions}
-                defaultValue={query}
-                onChangeText={this.debouncedQueryModerators}
-                placeholder='Enter member name'
-                renderItem={this._renderAutocompleteItem}
-              />
-            </View>
-            <TouchableOpacity style={styles.button} onPress={() => this.clearAutocomplete(true)}>
-              <Text style={styles.cancelButton}>Cancel</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={() => this.addModerator()}>
-              <Text style={styles.addButton}>Add</Text>
-            </TouchableOpacity>
-          </View>
-        </View>}
-
-        {!isAdding && <View style={styles.addNewContainer}>
-          <TouchableOpacity onPress={this.focusAddNew}>
-            <Text style={styles.addNewButton}>+ Add New</Text>
+      ListHeaderComponent={<View style={styles.headerContainer}>
+        <Text style={styles.headerText}>{community.name}</Text>
+        <View style={styles.addNewContainer}>
+          <TouchableOpacity onPress={this.showPersonPicker}>
+            <Text style={styles.addNewButton}><Icon name='Plus' green /> Add New</Text>
           </TouchableOpacity>
-        </View>}
+        </View>
       </View>} />
   }
 }
@@ -169,7 +95,7 @@ export default class ModeratorSettings extends Component {
 export function ModeratorRow ({moderator, showMember, removeModerator}) {
   return <TouchableOpacity style={styles.row} onPress={() => showMember(moderator.id)}>
     {moderator.avatarUrl && <Avatar style={{width: 50}} avatarUrl={moderator.avatarUrl} />}
-    <Text style={{flex: 1}}>{moderator.name}</Text>
+    <Text style={styles.moderatorName}>{moderator.name}</Text>
     {removeModerator && <TouchableOpacity hitSlop={{top: 15, bottom: 15, left: 10, right: 10}} onPress={() => removeModerator(moderator.id)}>
       <Text style={styles.removeButton}>Remove</Text>
     </TouchableOpacity>}

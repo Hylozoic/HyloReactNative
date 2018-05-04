@@ -35,3 +35,7 @@ exports[`renders as expected 1`] = `
   />
 </View>
 `;
+
+exports[`setHtml matches snapshot when searching for a Person 1`] = `"<a href=\\"#\\" data-entity-type=\\"mention\\" data-user-id=\\"1\\">jane</a>"`;
+
+exports[`setHtml matches snapshot when searching for a Topic 1`] = `"<a href=\\"#\\" data-entity-type=\\"#mention\\">#undefined</a>"`;

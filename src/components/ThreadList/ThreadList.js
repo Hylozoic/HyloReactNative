@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { FlatList, TouchableOpacity, View, Text } from 'react-native'
-import { isEmpty, get } from 'lodash/fp'
+import { isEmpty } from 'lodash/fp'
 
 import { getSocket } from 'util/websockets'
 import header from 'util/header'

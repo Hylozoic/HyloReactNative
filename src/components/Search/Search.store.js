@@ -2,19 +2,19 @@ import { createSelector as ormCreateSelector } from 'redux-orm'
 import orm from 'store/models'
 
 export const MODULE_NAME = 'Search'
-export const FIND_MENTIONS = `${MODULE_NAME}/FIND_MENTIONS`
-export const FIND_MENTIONS_PENDING = `${MODULE_NAME}/FIND_MENTIONS_PENDING`
+export const FIND_PEOPLE = `${MODULE_NAME}/FIND_PEOPLE`
+export const FIND_PEOPLE_PENDING = `${MODULE_NAME}/FIND_PEOPLE_PENDING`
 export const FIND_TOPICS = `${MODULE_NAME}/FIND_TOPICS`
 export const FIND_TOPICS_PENDING = `${MODULE_NAME}/FIND_TOPICS_PENDING`
 export const SearchType = {
-  MENTION: 'mention',
+  PERSON: 'person',
   TOPIC: 'topic'
 }
 
 export default function reducer (state = {}, action) {
   const { type, meta } = action
   switch (type) {
-    case FIND_MENTIONS_PENDING:
+    case FIND_PEOPLE_PENDING:
       return {
         ...state,
         mentionSearchTerm: meta.graphql.variables.term
@@ -28,9 +28,9 @@ export default function reducer (state = {}, action) {
   return state
 }
 
-export function findMentions (term) {
+export function findPeople (term) {
   return {
-    type: FIND_MENTIONS,
+    type: FIND_PEOPLE,
     graphql: {
       query: `query ($term: String) {
         people(autocomplete: $term, first: 20) {
@@ -95,8 +95,8 @@ export const getMentions = ormCreateSelector(
 
     const term = mentionSearchTerm.toLowerCase()
     return session.Person.all()
-    .filter(({ name }) => name && name.toLowerCase().match(term))
-    .toRefArray()
+      .filter(({ name }) => name && name.toLowerCase().match(term))
+      .toRefArray()
   }
 )
 
@@ -124,7 +124,7 @@ export function getTopicSearchTerm (state) {
 
 export function getResults (state, props) {
   switch (props.type) {
-    case SearchType.MENTION:
+    case SearchType.PERSON:
       return getMentions(state, props)
     case SearchType.TOPIC:
       return getTopics(state, props)
