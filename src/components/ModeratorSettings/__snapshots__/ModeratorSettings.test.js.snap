@@ -125,3 +125,12 @@ exports[`ModeratorSettings renders ModeratorRow 1`] = `
   </TouchableOpacity>
 </TouchableOpacity>
 `;
+
+exports[`ModeratorSettings shows the Search component appropriately 1`] = `
+<Search
+  communityId={undefined}
+  onCancel={[Function]}
+  onSelect={[Function]}
+  type="person"
+/>
+`;

@@ -8,6 +8,9 @@ jest.mock('Alert', () => ({
   alert: jest.fn()
 }))
 
+jest.mock('../Editor/Search', () => 'Search')
+
+
 describe('ModeratorSettings', () => {
   let props = {
     moderators: [{id: 10, name: 'John Current', avatarUrl: 'http://aurl.com'}, {id: 11, name: 'John Other', avatarUrl: 'http://aurl.com'}],
@@ -90,5 +93,17 @@ describe('ModeratorSettings', () => {
     const moderatorId = 12
     instance.addModerator({id: moderatorId})
     expect(props.addModerator).toHaveBeenCalledWith(moderatorId)
+  })
+
+  it('shows the Search component appropriately', () => {
+    const renderer = ReactTestRenderer.create(<ModeratorSettings {...props} />)
+    const instance = renderer.getInstance()
+    instance.setState({
+      showPicker: true
+    })
+    expect(renderer.toJSON()).toMatchSnapshot()
+    // const instance = ReactTestRenderer.create(<ModeratorSettings {...props} />).getInstance()
+    // instance.setState({showPicker: true})
+    // expect(instance).toMatchSnapshot()
   })
 })
