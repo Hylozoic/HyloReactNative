@@ -49,33 +49,33 @@ Object {
 exports[`ModeratorSettings matches the last snapshot 1`] = `
 <FlatList
   ItemSeparatorComponent={[Function]}
-  ListFooterComponent={
-    <View>
-      <View>
-        <TouchableOpacity
-          activeOpacity={0.2}
-          onPress={[Function]}
-        >
-          <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
-          >
-            + Add New
-          </Text>
-        </TouchableOpacity>
-      </View>
-    </View>
-  }
   ListHeaderComponent={
     <View>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-      >
-        Community Time
-      </Text>
+      <View>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+        >
+          Community Time
+        </Text>
+      </View>
+      <View>
+        <View>
+          <TouchableOpacity
+            activeOpacity={0.2}
+            onPress={[Function]}
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+            >
+              + Add New
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </View>
     </View>
   }
   data={
