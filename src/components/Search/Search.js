@@ -15,6 +15,11 @@ import styles from './Search.styles'
 import { rhino30 } from 'style/colors'
 
 export default class Search extends React.Component {
+  componentWillUnmount () {
+    const emptyString = ''
+    this.props.updateSearch(emptyString)
+  }
+
   render () {
     const { style, type, results, onSelect, updateSearch, onCancel } = this.props
 

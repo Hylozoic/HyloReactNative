@@ -34,11 +34,10 @@ export default class ModeratorSettings extends Component {
   removeModerator = (id) => {
     Alert.alert(
       'Remove Moderator',
-      'Also remove from community?',
+      '',
       [
-        {text: 'Cancel', onPress: () => {}, style: 'cancel'},
-        {text: 'No', onPress: () => this.props.removeModerator(id, false)},
-        {text: 'Yes', onPress: () => this.props.removeModerator(id, true)}
+        {text: 'No', onPress: () => {}, style: 'No'},
+        {text: 'Yes', onPress: () => this.props.removeModerator(id, false)}
       ],
       {cancelable: false}
     )
