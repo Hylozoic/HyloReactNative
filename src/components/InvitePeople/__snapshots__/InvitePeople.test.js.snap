@@ -189,7 +189,7 @@ exports[`InvitePeople renders PendingInvitesPage 1`] = `
 
 exports[`InvitePeople renders SendInvitesPage 1`] = `
 <ScrollView>
-  <Unknown>
+  <KeyboardFriendlyView>
     <View>
       <Text
         accessible={true}
@@ -236,6 +236,6 @@ exports[`InvitePeople renders SendInvitesPage 1`] = `
         text="Send Invite"
       />
     </View>
-  </Unknown>
+  </KeyboardFriendlyView>
 </ScrollView>
 `;
