@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot for findPeople 1`] = `
+Object {
+  "graphql": Object {
+    "query": "query ($term: String) {
+        people(autocomplete: $term, first: 20) {
+          items {
+            id
+            name
+            avatarUrl
+          }
+        }
+      }",
+    "variables": Object {
+      "term": "myTerm",
+    },
+  },
+  "meta": Object {
+    "extractModel": "Person",
+  },
+  "type": "Search/FIND_PEOPLE",
+}
+`;
+
+exports[`matches snapshot for findTopics 1`] = `
+Object {
+  "graphql": Object {
+    "query": "query ($term: String, $communityId: ID) {
+        community(id: $communityId) {
+          communityTopics(autocomplete: $term, first: 20) {
+            items {
+              topic {
+                id
+                followersTotal
+                name
+                postsTotal
+              }
+            }
+          }
+        }
+      }",
+    "variables": Object {
+      "communityId": 1,
+      "term": "myTerm",
+    },
+  },
+  "meta": Object {
+    "extractModel": Object {
+      "append": true,
+      "getRoot": [Function],
+      "modelName": "Topic",
+    },
+  },
+  "type": "Search/FIND_TOPICS",
+}
+`;
