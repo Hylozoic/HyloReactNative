@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native'
-import { capeCod40, capeCod20, white } from 'style/colors'
+import { capeCod40, capeCod20, capeCod05, rhino, white } from 'style/colors'
 
 export default {
   container: {
@@ -12,13 +12,14 @@ export default {
     backgroundColor: white
   },
   headerText: {
-    backgroundColor: '#FAFBFC',
-    padding: 20,
+    color: rhino,
+    backgroundColor: capeCod05,
+    padding: 5,
     width: '90%',
     textAlign: 'center',
     marginTop: 15,
     marginBottom: 10,
-    borderRadius: 8,
+    borderRadius: 4,
     fontFamily: 'Circular-Bold',
     fontSize: 28
   },
@@ -32,7 +33,7 @@ export default {
     borderColor: capeCod40
   },
   text: {
-    fontSize: 20,
+    fontSize: 18,
     flex: 1
   },
   chevron: {
