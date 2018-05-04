@@ -81,6 +81,19 @@ describe('ModeratorSettings', () => {
     expect(actual).toMatchSnapshot()
   })
 
+  it('renders ModeratorRow without removeModerator', () => {
+    const renderer = new ReactShallowRenderer()
+    const props = {
+      moderator: {id: 10, name: 'John Current', avatarUrl: 'http://aurl.com'},
+      showMember: jest.fn(),
+      removeModerator: null
+    }
+    renderer.render(<ModeratorRow {...props} />)
+    const actual = renderer.getRenderOutput()
+
+    expect(actual).toMatchSnapshot()
+  })
+
   it('sends alert when removing moderator', () => {
     const instance = ReactTestRenderer.create(<ModeratorSettings {...props} />).getInstance()
 

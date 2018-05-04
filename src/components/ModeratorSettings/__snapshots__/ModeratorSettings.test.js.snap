@@ -126,6 +126,24 @@ exports[`ModeratorSettings renders ModeratorRow 1`] = `
 </TouchableOpacity>
 `;
 
+exports[`ModeratorSettings renders ModeratorRow without removeModerator 1`] = `
+<TouchableOpacity
+  activeOpacity={0.2}
+  onPress={[Function]}
+>
+  <Avatar
+    avatarUrl="http://aurl.com"
+  />
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+  >
+    John Current
+  </Text>
+</TouchableOpacity>
+`;
+
 exports[`ModeratorSettings shows the Search component appropriately 1`] = `
 <Search
   communityId={undefined}
