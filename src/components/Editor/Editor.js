@@ -35,7 +35,7 @@ export default class Editor extends React.Component {
       let showPicker = false
       switch (action) {
         case INSERT_MENTION:
-          showPicker = SearchType.MENTION
+          showPicker = SearchType.PERSON
           break
         case INSERT_TOPIC:
           showPicker = SearchType.TOPIC
@@ -59,7 +59,7 @@ export default class Editor extends React.Component {
   insertPicked = choice => {
     let html
     switch (this.state.showPicker) {
-      case SearchType.MENTION:
+      case SearchType.PERSON:
         html = createMentionTag(choice)
         break
       case SearchType.TOPIC:

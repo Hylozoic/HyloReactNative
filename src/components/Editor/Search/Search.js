@@ -22,7 +22,7 @@ export default class Search extends React.Component {
       <SearchResult item={item} type={type} onPress={() => onSelect(item)} />
 
     const placeholder =
-      `Search for a ${type === SearchType.MENTION ? 'person' : 'topic'} by name`
+      `Search for a ${type} by name`
 
     return <View style={[styles.container, style]}>
       <View style={styles.inputWrapper}>
