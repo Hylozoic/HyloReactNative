@@ -11,34 +11,13 @@ import { get } from 'lodash/fp'
 export const tintColor = rhino60
 
 export class HeaderButton extends React.Component {
-  constructor (props) {
-    super(props)
-    const { disabled } = props
-    this.state = {
-      disabled
-    }
-  }
-
-  componentDidUpdate (prevProps) {
-    const { disabled } = this.props
-    if (disabled !== prevProps.disabled) {
-      this.setState({disabled})
-    }
-  }
-
-  onPress = () => {
-    this.setState({disabled: true})
-    this.props.onPress()
-  }
-
   render () {
     const { onPress, text } = this.props
-    const { disabled } = this.state
     if (typeof onPress !== 'function') throw new Error('HeaderButton: onPress is not a function.')
-    return <TouchableOpacity onPress={this.onPress} hitSlop={{top: 7, bottom: 7, left: 7, right: 7}} disabled={disabled}>
+    return <TouchableOpacity onPress={onPress} hitSlop={{top: 7, bottom: 7, left: 7, right: 7}}>
       {text === 'Close'
         ? <Icon name='Ex' style={styles.exIcon} />
-        : <Text style={[styles.button, disabled && styles.disabled]}>{text}</Text>}
+        : <Text style={styles.button}>{text}</Text>}
     </TouchableOpacity>
   }
 }
