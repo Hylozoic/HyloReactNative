@@ -22,7 +22,7 @@
   "dependencies": {
     "cheerio": "0.22.0",
     "ent": "^2.2.0",
-    "hylo-utils": "Hylozoic/hylo-utils#77dadf8",
+    "hylo-utils": "Hylozoic/hylo-utils#c4db0b4",
     "lodash": "^4.17.4",
     "parse": "^1.9.2",
     "path-match": "^1.2.4",
