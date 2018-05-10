@@ -93,20 +93,11 @@ export default function header ({ goBack, state }, { headerBackButton, left, rig
     ...options
   }
   if (left) {
-    const localProps = {
-      ...left,
-      doNotDisable
-    }
-    headerOptions.headerLeft = left === 'close' ? headerClose(goBack) : <HeaderButton {...localProps} />
+    headerOptions.headerLeft = left === 'close' ? headerClose(goBack) : <HeaderButton {...left} doNotDisable={doNotDisable} />
     headerOptions.headerTitleStyle = [ styles.title, styles.center ]
   }
-  if (right) {
-    const localProps = {
-      ...right,
-      doNotDisable
-    }
-    headerOptions.headerRight = <HeaderButton {...localProps} />
-  }
+  if (right) headerOptions.headerRight = <HeaderButton {...right} doNotDisable={doNotDisable} />
+
   if (headerBackButton) {
     headerOptions.headerLeft = <HeaderBackButton
       onPress={headerBackButton}
