@@ -335,6 +335,7 @@ Object {
     text="Close"
   />,
   "headerRight": <HeaderButton
+    doNotDisable={true}
     onPress={[Function]}
     text="New"
   />,

@@ -11,13 +11,35 @@ import { get } from 'lodash/fp'
 export const tintColor = rhino60
 
 export class HeaderButton extends React.Component {
+  constructor (props) {
+    super(props)
+    const { disabled } = props
+    this.state = {
+      disabled
+    }
+  }
+
+  componentDidUpdate (prevProps) {
+    const { disabled } = this.props
+    if (disabled !== prevProps.disabled) {
+      this.setState({disabled})
+    }
+  }
+
+  onPress = () => {
+    const { doNotDisable } = this.props
+    !doNotDisable && this.setState({disabled: true})
+    this.props.onPress()
+  }
   render () {
     const { onPress, text } = this.props
+    const { disabled } = this.state
+
     if (typeof onPress !== 'function') throw new Error('HeaderButton: onPress is not a function.')
-    return <TouchableOpacity onPress={onPress} hitSlop={{top: 7, bottom: 7, left: 7, right: 7}}>
+    return <TouchableOpacity onPress={this.onPress} hitSlop={{top: 7, bottom: 7, left: 7, right: 7}} disabled={disabled} >
       {text === 'Close'
         ? <Icon name='Ex' style={styles.exIcon} />
-        : <Text style={styles.button}>{text}</Text>}
+        : <Text style={[styles.button, disabled && styles.disabled]}>{text}</Text>}
     </TouchableOpacity>
   }
 }
@@ -60,7 +82,7 @@ const headerClose = goBack => <HeaderButton onPress={() => goBack()} text='Close
 // This can all be placed in the connector and passed via mapDispatchToProps.
 // Of course, if you need even more customisation than this, don't use the
 // helper (or override parts of it using setParams in the component).
-export default function header ({ goBack, state }, { headerBackButton, left, right, title, options } = {}) {
+export default function header ({ goBack, state }, { headerBackButton, left, right, title, options, doNotDisable } = {}) {
   const headerOptions = {
     ...state.params,
     headerStyle: styles.header,
@@ -71,10 +93,20 @@ export default function header ({ goBack, state }, { headerBackButton, left, rig
     ...options
   }
   if (left) {
-    headerOptions.headerLeft = left === 'close' ? headerClose(goBack) : <HeaderButton {...left} />
+    const localProps = {
+      ...left,
+      doNotDisable
+    }
+    headerOptions.headerLeft = left === 'close' ? headerClose(goBack) : <HeaderButton {...localProps} />
     headerOptions.headerTitleStyle = [ styles.title, styles.center ]
   }
-  if (right) headerOptions.headerRight = <HeaderButton {...right} />
+  if (right) {
+    const localProps = {
+      ...right,
+      doNotDisable
+    }
+    headerOptions.headerRight = <HeaderButton {...localProps} />
+  }
   if (headerBackButton) {
     headerOptions.headerLeft = <HeaderBackButton
       onPress={headerBackButton}

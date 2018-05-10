@@ -5,6 +5,7 @@ Object {
   "headerBackTitle": null,
   "headerRight": <HeaderButton
     disabled={false}
+    doNotDisable={undefined}
     onPress={undefined}
     text="Save"
   />,

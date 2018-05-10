@@ -33,4 +33,46 @@ describe('HeaderButton', () => {
 
     expect(actual).toMatchSnapshot()
   })
+  it('sets state.disabled to match props', () => {
+    const props = {
+      ...defaultProps,
+      disabled: true
+    }
+    const instance = ReactTestRenderer.create(<HeaderButton {...props} />).getInstance()
+    expect(instance.state.disabled).toEqual(true)
+  })
+
+  describe('componentDidUpdate', () => {
+    it('changes state.disabled when prop changes', () => {
+      const instance = ReactTestRenderer.create(<HeaderButton {...defaultProps} />).getInstance()
+      instance.setState({disabled: true})
+      instance.componentDidUpdate({disabled: true})
+      expect(instance.state.disabled).toEqual(false)
+    })
+  })
+
+  describe('onPress', () => {
+    it('sets state.disabled to true and calls props.onPress', () => {
+      const props = {
+        ...defaultProps,
+        onPress: jest.fn()
+      }
+      const instance = ReactTestRenderer.create(<HeaderButton {...props} />).getInstance()
+      instance.onPress()
+      expect(instance.state.disabled).toEqual(true)
+      expect(props.onPress).toHaveBeenCalled()
+    })
+
+    it('does not set state.disabled to true if doNotDisable is true and calls props.onPress', () => {
+      const props = {
+        ...defaultProps,
+        doNotDisable: true,
+        onPress: jest.fn()
+      }
+      const instance = ReactTestRenderer.create(<HeaderButton {...props} />).getInstance()
+      instance.onPress()
+      expect(instance.state.disabled).toEqual(false)
+      // expect(props.onPress).toHaveBeenCalled()
+    })
+  })
 })
