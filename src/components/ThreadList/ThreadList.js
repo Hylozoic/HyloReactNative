@@ -17,7 +17,7 @@ export default class ThreadList extends Component {
       left: 'close',
       title: 'Messages',
       right: {text: 'New', onPress: () => navigation.navigate({routeName: 'NewMessage', key: 'NewMessage'})},
-      doNotDisable: true
+      disableOnClick: false
     })
 
   componentDidMount () {

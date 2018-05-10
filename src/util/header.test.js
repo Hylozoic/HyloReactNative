@@ -63,16 +63,15 @@ describe('HeaderButton', () => {
       expect(props.onPress).toHaveBeenCalled()
     })
 
-    it('does not set state.disabled to true if doNotDisable is true and calls props.onPress', () => {
+    it('does not set state.disabled to true if disableOnClick is true and calls props.onPress', () => {
       const props = {
         ...defaultProps,
-        doNotDisable: true,
-        onPress: jest.fn()
+        onPress: jest.fn(),
+        disableOnClick: false
       }
       const instance = ReactTestRenderer.create(<HeaderButton {...props} />).getInstance()
       instance.onPress()
       expect(instance.state.disabled).toEqual(false)
-      // expect(props.onPress).toHaveBeenCalled()
     })
   })
 })

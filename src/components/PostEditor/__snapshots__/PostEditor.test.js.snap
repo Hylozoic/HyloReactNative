@@ -4,8 +4,8 @@ exports[`PostEditor has navigation options 1`] = `
 Object {
   "headerBackTitle": null,
   "headerRight": <HeaderButton
+    disableOnClick={undefined}
     disabled={false}
-    doNotDisable={undefined}
     onPress={[MockFunction]}
     text="Save"
   />,

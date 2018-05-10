@@ -27,8 +27,10 @@ export class HeaderButton extends React.Component {
   }
 
   onPress = () => {
-    const { doNotDisable } = this.props
-    !doNotDisable && this.setState({disabled: true})
+    const { disableOnClick } = this.props
+    if (disableOnClick !== false) {
+      this.setState({disabled: true})
+    }
     this.props.onPress()
   }
   render () {
@@ -82,7 +84,7 @@ const headerClose = goBack => <HeaderButton onPress={() => goBack()} text='Close
 // This can all be placed in the connector and passed via mapDispatchToProps.
 // Of course, if you need even more customisation than this, don't use the
 // helper (or override parts of it using setParams in the component).
-export default function header ({ goBack, state }, { headerBackButton, left, right, title, options, doNotDisable } = {}) {
+export default function header ({ goBack, state }, { headerBackButton, left, right, title, options, disableOnClick } = {}) {
   const headerOptions = {
     ...state.params,
     headerStyle: styles.header,
@@ -93,10 +95,10 @@ export default function header ({ goBack, state }, { headerBackButton, left, rig
     ...options
   }
   if (left) {
-    headerOptions.headerLeft = left === 'close' ? headerClose(goBack) : <HeaderButton {...left} doNotDisable={doNotDisable} />
+    headerOptions.headerLeft = left === 'close' ? headerClose(goBack) : <HeaderButton {...left} disableOnClick={disableOnClick} />
     headerOptions.headerTitleStyle = [ styles.title, styles.center ]
   }
-  if (right) headerOptions.headerRight = <HeaderButton {...right} doNotDisable={doNotDisable} />
+  if (right) headerOptions.headerRight = <HeaderButton {...right} disableOnClick={disableOnClick} />
 
   if (headerBackButton) {
     headerOptions.headerLeft = <HeaderBackButton

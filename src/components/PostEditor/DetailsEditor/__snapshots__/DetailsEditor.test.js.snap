@@ -4,8 +4,8 @@ exports[`DetailsEditor has navigation options 1`] = `
 Object {
   "headerBackTitle": null,
   "headerRight": <HeaderButton
+    disableOnClick={undefined}
     disabled={false}
-    doNotDisable={undefined}
     onPress={undefined}
     text="Save"
   />,
