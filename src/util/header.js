@@ -19,6 +19,10 @@ export class HeaderButton extends React.Component {
     }
   }
 
+  static defaultProps = {
+    disableOnClick: true
+  }
+
   componentDidUpdate (prevProps) {
     const { disabled } = this.props
     if (disabled !== prevProps.disabled) {
@@ -28,7 +32,7 @@ export class HeaderButton extends React.Component {
 
   onPress = () => {
     const { disableOnClick } = this.props
-    if (disableOnClick !== false) {
+    if (disableOnClick === true) {
       this.setState({disabled: true})
     }
     this.props.onPress()
