@@ -1,7 +1,7 @@
 /**
  * @providesModule util/header
  */
-import React from 'react'
+import React, { PureComponent } from 'react'
 import { StyleSheet, Text, TouchableOpacity } from 'react-native'
 import { HeaderBackButton } from 'react-navigation'
 import { rhino60, rhino20 } from 'style/colors'
@@ -10,7 +10,7 @@ import { get } from 'lodash/fp'
 
 export const tintColor = rhino60
 
-export class HeaderButton extends React.Component {
+export class HeaderButton extends PureComponent {
   constructor (props) {
     super(props)
     const { disabled } = props
