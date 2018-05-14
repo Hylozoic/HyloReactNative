@@ -1,7 +1,7 @@
 /**
  * @providesModule util/header
  */
-import React from 'react'
+import React, { PureComponent } from 'react'
 import { StyleSheet, Text, TouchableOpacity } from 'react-native'
 import { HeaderBackButton } from 'react-navigation'
 import { rhino60, rhino20 } from 'style/colors'
@@ -10,14 +10,42 @@ import { get } from 'lodash/fp'
 
 export const tintColor = rhino60
 
-export class HeaderButton extends React.Component {
+export class HeaderButton extends PureComponent {
+  constructor (props) {
+    super(props)
+    const { disabled } = props
+    this.state = {
+      disabled
+    }
+  }
+
+  static defaultProps = {
+    disableOnClick: true
+  }
+
+  componentDidUpdate (prevProps) {
+    const { disabled } = this.props
+    if (disabled !== prevProps.disabled) {
+      this.setState({disabled})
+    }
+  }
+
+  onPress = () => {
+    const { disableOnClick } = this.props
+    if (disableOnClick === true) {
+      this.setState({disabled: true})
+    }
+    this.props.onPress()
+  }
   render () {
     const { onPress, text } = this.props
+    const { disabled } = this.state
+
     if (typeof onPress !== 'function') throw new Error('HeaderButton: onPress is not a function.')
-    return <TouchableOpacity onPress={onPress} hitSlop={{top: 7, bottom: 7, left: 7, right: 7}}>
+    return <TouchableOpacity onPress={this.onPress} hitSlop={{top: 7, bottom: 7, left: 7, right: 7}} disabled={disabled} >
       {text === 'Close'
         ? <Icon name='Ex' style={styles.exIcon} />
-        : <Text style={styles.button}>{text}</Text>}
+        : <Text style={[styles.button, disabled && styles.disabled]}>{text}</Text>}
     </TouchableOpacity>
   }
 }
@@ -60,7 +88,7 @@ const headerClose = goBack => <HeaderButton onPress={() => goBack()} text='Close
 // This can all be placed in the connector and passed via mapDispatchToProps.
 // Of course, if you need even more customisation than this, don't use the
 // helper (or override parts of it using setParams in the component).
-export default function header ({ goBack, state }, { headerBackButton, left, right, title, options } = {}) {
+export default function header ({ goBack, state }, { headerBackButton, left, right, title, options, disableOnClick } = {}) {
   const headerOptions = {
     ...state.params,
     headerStyle: styles.header,
@@ -71,10 +99,11 @@ export default function header ({ goBack, state }, { headerBackButton, left, rig
     ...options
   }
   if (left) {
-    headerOptions.headerLeft = left === 'close' ? headerClose(goBack) : <HeaderButton {...left} />
+    headerOptions.headerLeft = left === 'close' ? headerClose(goBack) : <HeaderButton {...left} disableOnClick={disableOnClick} />
     headerOptions.headerTitleStyle = [ styles.title, styles.center ]
   }
-  if (right) headerOptions.headerRight = <HeaderButton {...right} />
+  if (right) headerOptions.headerRight = <HeaderButton {...right} disableOnClick={disableOnClick} />
+
   if (headerBackButton) {
     headerOptions.headerLeft = <HeaderBackButton
       onPress={headerBackButton}
