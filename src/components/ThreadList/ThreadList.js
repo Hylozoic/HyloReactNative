@@ -20,6 +20,7 @@ export default class ThreadList extends Component {
     })
 
   componentDidMount () {
+    this.props.updateLastViewed()
     this.fetchOrShowCached()
     getSocket().then(socket => socket.on('reconnect', this.props.refreshThreads))
   }
