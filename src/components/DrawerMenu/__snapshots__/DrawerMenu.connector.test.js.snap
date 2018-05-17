@@ -13,11 +13,48 @@ Object {
   "avatarUrl": undefined,
   "canModerateCurrentCommunity": undefined,
   "communities": Array [],
+<<<<<<< HEAD
   "currentCommunity": null,
   "currentCommunityId": undefined,
+=======
+  "currentCommunity": SessionBoundModel {
+    "_fields": Object {
+      "avatarUrl": "someUrl",
+      "id": "7",
+      "members": undefined,
+      "moderators": undefined,
+      "name": "someName",
+      "posts": undefined,
+    },
+    "avatarUrl": "someUrl",
+  },
+  "currentCommunityId": "7",
+  "currentContext": SessionBoundModel {
+    "_fields": Object {
+      "avatarUrl": "someUrl",
+      "id": "7",
+      "members": undefined,
+      "moderators": undefined,
+      "name": "someName",
+      "posts": undefined,
+    },
+    "avatarUrl": "someUrl",
+  },
+>>>>>>> master
   "currentNetworkId": undefined,
-  "currentUser": undefined,
-  "name": "you",
+  "currentUser": SessionBoundModel {
+    "_fields": Object {
+      "id": "33",
+      "memberships": undefined,
+      "messageThreads": undefined,
+      "name": "meUser",
+      "notifications": undefined,
+      "posts": undefined,
+      "skills": undefined,
+    },
+    "id": "33",
+  },
+  "name": "meUser",
   "networks": Array [
     Object {
       "communities": Array [],

@@ -182,6 +182,17 @@ exports[`PostDetails renders correctly 1`] = `
           slug="foom"
           title="Hi"
         />
+        <PostCommunities
+          communities={
+            Array [
+              Object {
+                "slug": "foom",
+              },
+            ]
+          }
+          goToCommunity={[Function]}
+          slug="foom"
+        />
         <Files
           urls={
             Array [

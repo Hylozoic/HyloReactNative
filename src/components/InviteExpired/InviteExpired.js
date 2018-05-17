@@ -15,7 +15,7 @@ export default class InviteExpired extends React.Component {
     headerBackTitle: null
   }
 
-  goToLogin = () => this.props.navigation.navigate('Login')
+  goToLogin = () => this.props.navigation.navigate({routeName: 'Login', key: 'Login'})
 
   render () {
     return <View style={styles.container}>

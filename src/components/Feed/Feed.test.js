@@ -9,7 +9,7 @@ import { createMockStore } from 'util/testing'
 
 jest.mock('react-native-device-info')
 
-it('renders correctly', () => {
+it('renders correctly if currentUserHasMemberships', () => {
   const community = {
     id: '1'
   }
@@ -22,6 +22,7 @@ it('renders correctly', () => {
   renderer.render(<Feed
     community={community}
     currentUser={currentUser}
+    currentUserHasMemberships
     navigation={{}}
     newPost={newPost}
     showPost={() => {}}
@@ -32,6 +33,32 @@ it('renders correctly', () => {
 
   expect(actual).toMatchSnapshot()
 })
+
+it('renders correctly if currentUserHasMemberships is false', () => {
+  const community = {
+    id: '1'
+  }
+  const currentUser = {
+    id: '2'
+  }
+  const newPost = () => {}
+
+  const renderer = new ReactShallowRenderer()
+  renderer.render(<Feed
+    community={community}
+    currentUser={currentUser}
+    currentUserHasMemberships={false}
+    navigation={{}}
+    newPost={newPost}
+    showPost={() => {}}
+    editPost={() => {}}
+    goToCommunity={() => {}}
+    topicName={'amazing'} />)
+  const actual = renderer.getRenderOutput()
+
+  expect(actual).toMatchSnapshot()
+})
+
 
 it('sets the title to the community if there is a topic', () => {
   const navigation = {

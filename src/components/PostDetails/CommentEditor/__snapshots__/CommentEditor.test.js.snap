@@ -4,6 +4,7 @@ exports[`has navigation options 1`] = `
 Object {
   "headerBackTitle": null,
   "headerLeft": <HeaderButton
+    disableOnClick={true}
     onPress={[Function]}
     text="Close"
   />,

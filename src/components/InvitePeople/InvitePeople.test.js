@@ -8,6 +8,8 @@ jest.mock('Clipboard', () => ({
   setString: jest.fn()
 }))
 
+jest.mock('../KeyboardFriendlyView', () => 'KeyboardFriendlyView')
+
 describe('InvitePeople', () => {
   it('matches the last snapshot', () => {
     const renderer = new ReactShallowRenderer()

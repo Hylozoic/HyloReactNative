@@ -7,6 +7,7 @@ import striptags from 'striptags'
 import Avatar from '../Avatar'
 import Comments from '../Comments'
 import PostBody from '../PostCard/PostBody'
+import PostCommunities from '../PostCard/PostCommunities'
 import PostImage from '../PostCard/PostImage'
 import PostFooter from '../PostCard/PostFooter'
 import PostHeader from '../PostCard/PostHeader'
@@ -60,7 +61,7 @@ export default class PostDetails extends React.Component {
       goToCommunity
     } = this.props
 
-    if (!post || !post.title) return <LoadingScreen />
+    if (!post || !post.creator || !post.title) return <LoadingScreen />
 
     const slug = get('0.slug', post.communities)
 
@@ -88,6 +89,10 @@ export default class PostDetails extends React.Component {
         slug={slug}
         showMember={showMember}
         showTopic={showTopic} />
+      <PostCommunities
+        communities={post.communities}
+        slug={slug}
+        goToCommunity={goToCommunity} />
       {!!location && <View style={[styles.infoRow, styles.bottomInfoRow]}>
         <Text style={styles.infoRowLabel}>Location:</Text>
         <Text style={styles.infoRowinfo}>{location}</Text>

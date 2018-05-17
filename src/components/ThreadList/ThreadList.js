@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { FlatList, TouchableOpacity, View, Text } from 'react-native'
-import { isEmpty, get } from 'lodash/fp'
+import { isEmpty } from 'lodash/fp'
 
 import { getSocket } from 'util/websockets'
 import header from 'util/header'
@@ -16,10 +16,12 @@ export default class ThreadList extends Component {
     header(navigation, {
       left: 'close',
       title: 'Messages',
-      right: {text: 'New', onPress: () => navigation.navigate('NewMessage')}
+      right: {text: 'New', onPress: () => navigation.navigate({routeName: 'NewMessage', key: 'NewMessage'})},
+      disableOnClick: false
     })
 
   componentDidMount () {
+    this.props.updateLastViewed()
     this.fetchOrShowCached()
     getSocket().then(socket => socket.on('reconnect', this.props.refreshThreads))
   }

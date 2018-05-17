@@ -34,9 +34,10 @@ export const treePoppy = '#FF9D21'
 // above, on a white background. use these where possible, to avoid any impact
 // to mobile performance.
 // You can calculate this using: http://tdekoning.github.io/rgba-converter/
-export const capeCod10 = '#EBEBEB'
+export const capeCod05 = fakeAlpha(capeCod, 0.05)
+export const capeCod10 = fakeAlpha(capeCod, 0.1)
 export const capeCod20 = fakeAlpha(capeCod, 0.2)
-export const capeCod40 = '#A79A9A'
+export const capeCod40 = fakeAlpha(capeCod, 0.4)
 export const rhino05 = fakeAlpha(rhino, 0.05)
 export const rhino10 = fakeAlpha(rhino, 0.1)
 export const rhino20 = fakeAlpha(rhino, 0.2)

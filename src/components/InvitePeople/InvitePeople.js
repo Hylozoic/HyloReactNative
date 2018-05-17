@@ -1,6 +1,7 @@
 import React, { Component, PureComponent } from 'react'
 import { Clipboard, Dimensions, Text, View, TextInput, TouchableOpacity, ScrollView } from 'react-native'
 import { TabViewAnimated, TabBar } from 'react-native-tab-view'
+import KeyboardFriendlyView from '../KeyboardFriendlyView'
 import Button from '../Button'
 import header from 'util/header'
 import { get, isEmpty, compact } from 'lodash/fp'
@@ -173,43 +174,45 @@ export class SendInvitesPage extends PureComponent {
 
     return (
       <ScrollView>
-        <View style={styles.container}>
-          <Text style={styles.joinCommunityText}>Anyone with this link can join the community</Text>
-          {inviteLink && <Text style={styles.joinCommunityLink}>{inviteLink}</Text>}
-          {!inviteLink && <Text>No link has been set yet</Text>}
+        <KeyboardFriendlyView style={styles.keyboardFriendlyContainer}>
+          <View style={styles.container}>
+            <Text style={styles.joinCommunityText}>Anyone with this link can join the community</Text>
+            {inviteLink && <Text style={styles.joinCommunityLink}>{inviteLink}</Text>}
+            {!inviteLink && <Text>No link has been set yet</Text>}
 
-          <View style={styles.buttonRow}>
-            <Button text='Reset Link' onPress={this.resetLink} style={styles.resetLinkButton} />
-            <Button text={copied ? 'Copied' : 'Copy Link'} onPress={this.copyToClipboard} style={styles.copyLinkButton} />
+            <View style={styles.buttonRow}>
+              <Button text='Reset Link' onPress={this.resetLink} style={styles.resetLinkButton} />
+              <Button text={copied ? 'Copied' : 'Copy Link'} onPress={this.copyToClipboard} style={styles.copyLinkButton} />
+            </View>
+
+            {successMessage && <Text style={styles.successMessage}>{successMessage}</Text>}
+            {errorMessage && <Text style={styles.errorMessage}>{errorMessage}</Text>}
+
+            <TextInput
+              value={emails}
+              placeholder='Type email addresses'
+              onChangeText={(text) => this.setState({emails: text})}
+              style={styles.textInput}
+              underlineColorAndroid={styles.androidInvisibleUnderline}
+            />
+            <TextInput
+              value={inputText}
+              multiline
+              numberOfLines={5}
+              underlineColorAndroid={styles.androidInvisibleUnderline}
+              style={styles.textInput}
+              onChangeText={(text) => this.setState({inputText: text})}
+            />
+
+            <Button
+              text='Send Invite'
+              disabled={disableSendBtn}
+              onPress={this.sendInvite}
+              style={styles.sendInviteButton}
+            />
+
           </View>
-
-          {successMessage && <Text style={styles.successMessage}>{successMessage}</Text>}
-          {errorMessage && <Text style={styles.errorMessage}>{errorMessage}</Text>}
-
-          <TextInput
-            value={emails}
-            placeholder='Type email addresses'
-            onChangeText={(text) => this.setState({emails: text})}
-            style={styles.textInput}
-            underlineColorAndroid={styles.androidInvisibleUnderline}
-          />
-          <TextInput
-            value={inputText}
-            multiline
-            numberOfLines={5}
-            underlineColorAndroid={styles.androidInvisibleUnderline}
-            style={styles.textInput}
-            onChangeText={(text) => this.setState({inputText: text})}
-          />
-
-          <Button
-            text='Send Invite'
-            disabled={disableSendBtn}
-            onPress={this.sendInvite}
-            style={styles.sendInviteButton}
-          />
-
-        </View>
+        </KeyboardFriendlyView>
       </ScrollView>)
   }
 }

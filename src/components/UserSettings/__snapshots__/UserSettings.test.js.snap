@@ -466,6 +466,42 @@ exports[`UserSettings matches snapshot with state set 1`] = `
                   allowFontScaling={true}
                   ellipsizeMode="tail"
                 >
+                  Notification Settings
+                </Text>
+              </View>
+            </View>
+          </View>
+        </View>
+      </View>
+      <View>
+        <View>
+          <View
+            accessibilityComponentType={undefined}
+            accessibilityLabel={undefined}
+            accessibilityTraits={undefined}
+            accessible={true}
+            collapsable={undefined}
+            hasTVPreferredFocus={undefined}
+            hitSlop={undefined}
+            isTVSelectable={true}
+            nativeID={undefined}
+            onLayout={undefined}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            testID={undefined}
+            tvParallaxProperties={undefined}
+          >
+            <View>
+              <View>
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                >
                   Save Changes
                 </Text>
               </View>
@@ -613,6 +649,12 @@ exports[`UserSettings matches the last snapshot 1`] = `
       updateField={[Function]}
       updateUserSettings={[Function]}
     />
+    <View>
+      <Button
+        onPress={undefined}
+        text="Notification Settings"
+      />
+    </View>
     <Footer
       cancel={[Function]}
       logout={[Function]}

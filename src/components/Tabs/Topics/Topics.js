@@ -42,13 +42,14 @@ export default class Topics extends React.Component {
     const {
       community, topics, pending, setTopicSubscribe, goToTopic, term, setTerm
     } = this.props
-    const { bannerUrl, name } = community
+    const bannerUrl = get('bannerUrl', community)
+    const name = get('name', community)
     const image = {uri: bannerUrl}
 
     return <KeyboardFriendlyView style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <View style={styles.bannerContainer}>
-          <Image source={image} style={styles.image} />
+          {image && <Image source={image} style={styles.image} />}
           <LinearGradient style={styles.gradient} colors={bannerlinearGradientColors} />
           <Text style={styles.title}>{name}</Text>
         </View>

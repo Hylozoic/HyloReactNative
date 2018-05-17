@@ -2,7 +2,7 @@ import React from 'react'
 import { Text, View } from 'react-native'
 import { RichTextEditor, RichTextToolbar, actions } from 'react-native-zss-rich-text-editor'
 import Icon from '../Icon'
-import Search, { SearchType } from './Search'
+import Search, { SearchType } from '../Search'
 import styles from './Editor.styles'
 import { MENTION_ENTITY_TYPE, TOPIC_ENTITY_TYPE } from 'hylo-utils/constants'
 import { caribbeanGreen } from 'style/colors'
@@ -35,7 +35,7 @@ export default class Editor extends React.Component {
       let showPicker = false
       switch (action) {
         case INSERT_MENTION:
-          showPicker = SearchType.MENTION
+          showPicker = SearchType.PERSON
           break
         case INSERT_TOPIC:
           showPicker = SearchType.TOPIC
@@ -57,16 +57,7 @@ export default class Editor extends React.Component {
   }
 
   insertPicked = choice => {
-    let html
-    switch (this.state.showPicker) {
-      case SearchType.MENTION:
-        html = createMentionTag(choice)
-        break
-      case SearchType.TOPIC:
-        html = createTopicTag(choice)
-        break
-    }
-    this.editor.insertCustomHTML(html)
+    this.editor.insertCustomHTML(setHtml(this.state.showPicker, choice))
     this.setState({showPicker: false})
     this.props.navigation.setParams({ showPicker: false })
   }
@@ -158,3 +149,16 @@ const customCSS = `
   color: ${caribbeanGreen};
 }
 `
+
+export function setHtml (action, choice) {
+  let html
+  switch (action) {
+    case SearchType.PERSON:
+      html = createMentionTag(choice)
+      break
+    case SearchType.TOPIC:
+      html = createTopicTag(choice)
+      break
+  }
+  return html
+}

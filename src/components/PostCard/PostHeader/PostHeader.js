@@ -26,13 +26,10 @@ export default class PostHeader extends PureComponent {
       creator: {avatarUrl, name, tagline, id},
       date,
       type,
-      communities,
       postId,
       slug,
-      showCommunity,
       showMember,
       canFlag,
-      goToCommunity,
       removePost,
       deletePost,
       pinned,
@@ -44,17 +41,7 @@ export default class PostHeader extends PureComponent {
     } = this.props
     const { flaggingVisible } = this.state
 
-    let context
-
-    if (showCommunity && get('0', communities)) {
-      const community = communities[0]
-      context = {
-        label: community.name,
-        onPress: () => goToCommunity(community.id)
-      }
-    }
-
-    const showTopics = !isEmpty(topics) && !context
+    const showTopics = !isEmpty(topics)
 
     // Used to generate a link to this post from the backend.
     const linkData = {
@@ -99,10 +86,6 @@ export default class PostHeader extends PureComponent {
         </TouchableOpacity>
         <View style={styles.dateRow}>
           <Text style={styles.metaText}>{humanDate(date)}</Text>
-          {!!context && <Text style={styles.spacer}>•</Text>}
-          {!!context && <TouchableOpacity onPress={context.onPress}>
-            <Text style={styles.contextLabel}>{context.label}</Text>
-          </TouchableOpacity>}
           {!!showTopics && <FlatList
             data={topics}
             style={styles.topicList}

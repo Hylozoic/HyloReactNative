@@ -1,6 +1,8 @@
-import { caribbeanGreen, white, capeCod40, amaranth, rhino20, white60onCaribbeanGreen } from 'style/colors'
+import { StyleSheet } from 'react-native'
 
-export default {
+import { caribbeanGreen, white, capeCod, capeCod05, capeCod40, amaranth, rhino20, white60onCaribbeanGreen } from 'style/colors'
+
+export default StyleSheet.create({
   container: {
     backgroundColor: white
   },
@@ -9,56 +11,48 @@ export default {
     backgroundColor: white
   },
   headerText: {
-    backgroundColor: '#FAFBFC',
-    padding: 20,
-    width: '90%',
-    textAlign: 'center',
+    backgroundColor: capeCod05,
+    padding: 5,
     marginTop: 15,
     marginBottom: 10,
-    borderRadius: 8,
-    fontFamily: 'Circular-Book',
+    width: '90%',
+    textAlign: 'center',
+    borderRadius: 4,
+    color: capeCod,
+    fontFamily: 'Circular-Bold',
     fontSize: 24
   },
   row: {
+    width: '90%',
     flexDirection: 'row',
     alignItems: 'center',
-    paddingLeft: '5%',
-    paddingRight: '5%',
     paddingTop: 10,
     paddingBottom: 10,
+    marginHorizontal: '5%',
     backgroundColor: white,
-    flex: 1
+    flex: 1,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: rhino20
   },
   removeButton: {
-    color: amaranth
+    color: amaranth,
+    fontFamily: 'Circular-Book',
+    fontSize: 16
   },
   addNewContainer: {
-    width: '100%',
-    paddingLeft: '5%',
-    paddingRight: '5%',
-    marginTop: 10
+    width: '90%',
+    padding: 5
   },
   addNewButton: {
-    padding: 10,
+    padding: 5,
     fontSize: 18,
     borderStyle: 'dashed',
-    borderColor: white60onCaribbeanGreen,
-    borderWidth: 2,
-    fontFamily: 'Circular-Bold',
+    borderWidth: 1,
+    borderColor: caribbeanGreen,
+    borderRadius: 4,
+    fontFamily: 'Circular-Book',
     color: caribbeanGreen,
     textAlign: 'center'
-  },
-  addModeratorContainer: {
-    marginTop: 10,
-    marginLeft: '5%',
-    marginRight: '5%'
-  },
-  addModeratorButtonsContainer: {
-    flexDirection: 'row',
-    alignItems: 'center'
-  },
-  button: {
-    paddingLeft: 15
   },
   cancelButton: {
     fontFamily: 'Circular-Bold',
@@ -68,18 +62,25 @@ export default {
     fontFamily: 'Circular-Bold',
     color: caribbeanGreen
   },
+  autocomplete: {
+    flex: 1
+  },
   autocompleteContainer: {
-    borderWidth: 0
+    borderWidth: 0,
+    flex: 1
   },
   autocompleteInput: {
-    borderWidth: 0
+    borderWidth: 0,
+    flex: 1
   },
   autocompleteItem: {
     flexDirection: 'row',
     alignItems: 'center',
     padding: 10
   },
-  moderatorAutocompleteTextInput: {
-    flex: 1
+  moderatorName: {
+    flex: 1,
+    fontFamily: 'Circular-Bold',
+    fontSize: 18
   }
-}
+})

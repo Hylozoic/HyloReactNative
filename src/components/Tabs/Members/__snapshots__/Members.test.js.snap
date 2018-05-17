@@ -137,11 +137,9 @@ Object {
   />,
   "headerRight": <View>
     <Connect(MessagesIcon)
-      hasUnreadMessages={undefined}
       showMessages={[Function]}
     />
     <Connect(NotificationsIcon)
-      hasUnreadNotifications={undefined}
       showNotifications={[Function]}
     />
   </View>,

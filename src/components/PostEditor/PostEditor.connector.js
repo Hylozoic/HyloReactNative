@@ -60,7 +60,7 @@ export function mapDispatchToProps (dispatch, props) {
           return Promise.resolve({})
         })
     },
-    editDetails: setTopics => navigation.navigate('DetailsEditor', {communityId, setTopics}),
+    editDetails: setTopics => navigation.navigate({routeName: 'DetailsEditor', params: {communityId, setTopics}, key: 'DetailsEditor'}),
     setDetails: content => dispatch(setDetails(content)),
     upload: (type, id, file) => dispatch(upload(type, id, file))
   }

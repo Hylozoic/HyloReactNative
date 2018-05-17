@@ -8,21 +8,23 @@ import {
   View
 } from 'react-native'
 
-import Icon from '../../Icon'
-import TopicList from '../../TopicList'
+import Icon from '../Icon'
+import TopicList from '../TopicList'
 import { SearchType } from './Search.store'
 import styles from './Search.styles'
 import { rhino30 } from 'style/colors'
 
 export default class Search extends React.Component {
+  componentWillUnmount () {
+    const emptyString = ''
+    this.props.updateSearch(emptyString)
+  }
+
   render () {
     const { style, type, results, onSelect, updateSearch, onCancel } = this.props
 
     const renderItem = ({ item }) =>
       <SearchResult item={item} type={type} onPress={() => onSelect(item)} />
-
-    const placeholder =
-      `Search for a ${type === SearchType.MENTION ? 'person' : 'topic'} by name`
 
     return <View style={[styles.container, style]}>
       <View style={styles.inputWrapper}>
@@ -31,7 +33,7 @@ export default class Search extends React.Component {
           autoFocus
           onChangeText={updateSearch}
           autoCapitalize='none'
-          placeholder={placeholder}
+          placeholder={setPlaceholder(type)}
           placeholderTextColor={rhino30}
           style={styles.input}
           underlineColorAndroid='transparent' />
@@ -49,6 +51,10 @@ export default class Search extends React.Component {
       </View>
     </View>
   }
+}
+
+export function setPlaceholder (type) {
+  return `Search for a ${type} by name`
 }
 
 function SearchResult ({ item: { name, avatarUrl }, type, onPress }) {

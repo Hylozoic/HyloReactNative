@@ -6,6 +6,7 @@ import ImagePicker from '../ImagePicker'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
 import defaultBanner from '../../assets/default-user-banner.jpg'
 import header, { HeaderButton } from 'util/header'
+import KeyboardFriendlyView from '../KeyboardFriendlyView'
 import { some } from 'lodash/fp'
 import { showToast } from 'util/toast'
 
@@ -132,32 +133,34 @@ export default class CommunitySettings extends React.Component {
     const { name, description, location } = this.state.edits
 
     return <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-      <TextInput
-        style={styles.nameInput}
-        onChangeText={this.updateField('name')}
-        value={name}
-        underlineColorAndroid='transparent' />
-      <CommunityBanner
-        isFocused={isFocused}
-        community={community}
-        updateCommunitySettings={updateCommunitySettings} />
-      <Text style={styles.label}>DESCRIPTION</Text>
-      <TextInput
-        ref={i => { this.input = i }}
-        style={styles.input}
-        value={description}
-        onChangeText={this.updateField('description')}
-        multiline
-        numberOfLines={5}
-        underlineColorAndroid='transparent' />
-      <Text style={styles.label}>LOCATION</Text>
-      <TextInput
-        ref={i => { this.input = i }}
-        style={styles.input}
-        value={location}
-        onChangeText={this.updateField('location')}
-        underlineColorAndroid='transparent' />
-    </ScrollView>
+      <KeyboardFriendlyView style={styles.keyboardFriendlyContainer}>
+        <TextInput
+          style={styles.nameInput}
+          onChangeText={this.updateField('name')}
+          value={name}
+          underlineColorAndroid='transparent' />
+        <CommunityBanner
+          isFocused={isFocused}
+          community={community}
+          updateCommunitySettings={updateCommunitySettings} />
+        <Text style={styles.label}>DESCRIPTION</Text>
+        <TextInput
+          ref={i => { this.input = i }}
+          style={styles.input}
+          value={description}
+          onChangeText={this.updateField('description')}
+          multiline
+          numberOfLines={5}
+          underlineColorAndroid='transparent' />
+        <Text style={styles.label}>LOCATION</Text>
+        <TextInput
+          ref={i => { this.input = i }}
+          style={styles.input}
+          value={location}
+          onChangeText={this.updateField('location')}
+          underlineColorAndroid='transparent' />
+        </KeyboardFriendlyView>
+      </ScrollView>
   }
 }
 

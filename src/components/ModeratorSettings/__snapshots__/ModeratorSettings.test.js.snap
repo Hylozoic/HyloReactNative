@@ -1,23 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ModeratorSettings _renderAutocompleteItem 1`] = `
-<TouchableOpacity
-  activeOpacity={0.2}
-  onPress={[Function]}
->
-  <Avatar
-    avatarUrl="someurl"
-  />
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-  >
-    John Others
-  </Text>
-</TouchableOpacity>
-`;
-
 exports[`ModeratorSettings has navigation options 1`] = `
 Object {
   "headerBackTitle": null,
@@ -48,9 +30,15 @@ Object {
 
 exports[`ModeratorSettings matches the last snapshot 1`] = `
 <FlatList
-  ItemSeparatorComponent={[Function]}
-  ListFooterComponent={
+  ListHeaderComponent={
     <View>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+      >
+        Community Time
+      </Text>
       <View>
         <TouchableOpacity
           activeOpacity={0.2}
@@ -61,21 +49,14 @@ exports[`ModeratorSettings matches the last snapshot 1`] = `
             allowFontScaling={true}
             ellipsizeMode="tail"
           >
-            + Add New
+            <Icon
+              green={true}
+              name="Plus"
+            />
+             Add New
           </Text>
         </TouchableOpacity>
       </View>
-    </View>
-  }
-  ListHeaderComponent={
-    <View>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-      >
-        Community Time
-      </Text>
     </View>
   }
   data={
@@ -96,6 +77,7 @@ exports[`ModeratorSettings matches the last snapshot 1`] = `
   horizontal={false}
   initialNumToRender={10}
   keyExtractor={[Function]}
+  keyboardShouldPersistTaps="always"
   maxToRenderPerBatch={10}
   numColumns={1}
   onEndReachedThreshold={2}
@@ -142,4 +124,31 @@ exports[`ModeratorSettings renders ModeratorRow 1`] = `
     </Text>
   </TouchableOpacity>
 </TouchableOpacity>
+`;
+
+exports[`ModeratorSettings renders ModeratorRow without removeModerator 1`] = `
+<TouchableOpacity
+  activeOpacity={0.2}
+  onPress={[Function]}
+>
+  <Avatar
+    avatarUrl="http://aurl.com"
+  />
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+  >
+    John Current
+  </Text>
+</TouchableOpacity>
+`;
+
+exports[`ModeratorSettings shows the Search component appropriately 1`] = `
+<Search
+  communityId={undefined}
+  onCancel={[Function]}
+  onSelect={[Function]}
+  type="person"
+/>
 `;

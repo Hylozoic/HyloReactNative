@@ -8,6 +8,9 @@ jest.mock('Alert', () => ({
   alert: jest.fn()
 }))
 
+jest.mock('../Search', () => 'Search')
+
+
 describe('ModeratorSettings', () => {
   let props = {
     moderators: [{id: 10, name: 'John Current', avatarUrl: 'http://aurl.com'}, {id: 11, name: 'John Other', avatarUrl: 'http://aurl.com'}],
@@ -58,19 +61,25 @@ describe('ModeratorSettings', () => {
     expect(props.fetchModerators).toHaveBeenCalledTimes(2)
   })
 
-  it('unmounts successfully', () => {
-    const renderer = ReactTestRenderer.create(<ModeratorSettings {...props} />)
-
-    renderer.unmount()
-    expect(props.clearModeratorSuggestions).toHaveBeenCalled()
-  })
-
   it('renders ModeratorRow', () => {
     const renderer = new ReactShallowRenderer()
     const props = {
       moderator: {id: 10, name: 'John Current', avatarUrl: 'http://aurl.com'},
       showMember: jest.fn(),
       removeModerator: jest.fn()
+    }
+    renderer.render(<ModeratorRow {...props} />)
+    const actual = renderer.getRenderOutput()
+
+    expect(actual).toMatchSnapshot()
+  })
+
+  it('renders ModeratorRow without removeModerator', () => {
+    const renderer = new ReactShallowRenderer()
+    const props = {
+      moderator: {id: 10, name: 'John Current', avatarUrl: 'http://aurl.com'},
+      showMember: jest.fn(),
+      removeModerator: null
     }
     renderer.render(<ModeratorRow {...props} />)
     const actual = renderer.getRenderOutput()
@@ -87,50 +96,17 @@ describe('ModeratorSettings', () => {
 
   it('addModerator', () => {
     const instance = ReactTestRenderer.create(<ModeratorSettings {...props} />).getInstance()
-    instance.setState({moderatorToAdd: 12, query: 'myquery', isAdding: true})
-
-    instance.addModerator()
-    expect(props.addModerator).toHaveBeenCalledWith(12)
-    expect(instance.state.query).toEqual('')
-    expect(instance.state.moderatorToAdd).toBeNull()
-    expect(props.clearModeratorSuggestions).toHaveBeenCalled()
+    const moderatorId = 12
+    instance.addModerator({id: moderatorId})
+    expect(props.addModerator).toHaveBeenCalledWith(moderatorId)
   })
 
-  it('focusAddNew', () => {
-    const instance = ReactTestRenderer.create(<ModeratorSettings {...props} />).getInstance()
-
-    instance.focusAddNew()
-    expect(instance.state.isAdding).toBeTruthy()
+  it('shows the Search component appropriately', () => {
+    const renderer = ReactTestRenderer.create(<ModeratorSettings {...props} />)
+    const instance = renderer.getInstance()
+    instance.setState({
+      showPicker: true
+    })
+    expect(renderer.toJSON()).toMatchSnapshot()
   })
-
-  it('queryModerators', () => {
-    const instance = ReactTestRenderer.create(<ModeratorSettings {...props} />).getInstance()
-    const autocompleteText = 'sometext'
-
-    instance.queryModerators(autocompleteText)
-
-    expect(instance.state.moderatorToAdd).toBeNull()
-    expect(instance.state.query).toEqual(autocompleteText)
-    expect(props.fetchModeratorSuggestions).toHaveBeenCalledWith(autocompleteText)
-  })
-
-  it('selectModeratorToAdd', () => {
-    const instance = ReactTestRenderer.create(<ModeratorSettings {...props} />).getInstance()
-
-    instance.setState({query: 'sometext'})
-
-    instance.selectModeratorToAdd(25, 'John Others')
-
-    expect(instance.state.moderatorToAdd).toEqual(25)
-    expect(instance.state.query).toEqual('John Others')
-  })
-
-  it('_renderAutocompleteItem', () => {
-    const instance = ReactTestRenderer.create(<ModeratorSettings {...props} />).getInstance()
-
-    const autocompleteRendered = instance._renderAutocompleteItem({id: 25, name: 'John Others', avatarUrl: 'someurl'})
-
-    expect(autocompleteRendered).toMatchSnapshot()
-  })
-
 })

@@ -4,6 +4,7 @@ exports[`matches the last snapshot for mapDispatchToProps 1`] = `
 Object {
   "fetchMore": [Function],
   "fetchNotifications": [Function],
+  "goToCreateCommunityName": [Function],
   "markActivityRead": [Function],
   "setRightButton": [Function],
   "updateNewNotificationCount": [Function],
@@ -15,6 +16,7 @@ Array [
   Array [
     Object {
       "headerRight": <HeaderButton
+        disableOnClick={true}
         onPress={[Function]}
         text="Mark as read"
       />,
@@ -50,6 +52,7 @@ Array [
 
 exports[`matches the last snapshot for mapStateToProps 1`] = `
 Object {
+  "currentUserHasMemberships": false,
   "hasMore": false,
   "notifications": Array [
     Object {
