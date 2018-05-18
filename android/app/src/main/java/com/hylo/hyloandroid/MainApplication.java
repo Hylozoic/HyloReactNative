@@ -4,6 +4,8 @@ import android.app.Application;
 import android.util.Log;
 
 import com.facebook.react.ReactApplication;
+import com.robinpowered.react.Intercom.IntercomPackage;
+import io.intercom.android.sdk.Intercom;
 import io.sentry.RNSentryPackage;
 import com.avishayil.rnrestart.ReactNativeRestartPackage;
 import co.apptailor.googlesignin.RNGoogleSigninPackage;
@@ -47,6 +49,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new IntercomPackage(),
             new RNGoogleSigninPackage(),
             new RNSentryPackage(MainApplication.this),
             new ReactNativeRestartPackage(),
@@ -77,8 +80,9 @@ public class MainApplication extends Application implements ReactApplication {
   @Override
   public void onCreate() {
     super.onCreate();
+    Intercom.initialize(this, "your api key", "your app id");
     FacebookSdk.sdkInitialize(getApplicationContext());
-
+    
     SoLoader.init(this, /* native exopackage */ false);
   }
 }

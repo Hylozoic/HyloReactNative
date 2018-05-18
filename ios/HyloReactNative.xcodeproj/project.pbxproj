@@ -58,6 +58,7 @@
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		B337FC1B1E8AD5FA006F9336 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B337FC1A1E8AD5FA006F9336 /* GoogleService-Info.plist */; };
 		B726CF951F34F0B200CA78B5 /* libRNImagePicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B726CF931F34ECE100CA78B5 /* libRNImagePicker.a */; };
+		B764867F20AF5F2F00E26423 /* libRNIntercom.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B764867C20AF5EF000E26423 /* libRNIntercom.a */; };
 		BC29B6FF53064F59984B2712 /* libRNGoogleSignin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F3B441C7C1D5498C98877B6D /* libRNGoogleSignin.a */; };
 		C8B92F6DC3424E54BC3D18A3 /* libRCTRestart.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C00D1EDD08B14ABB964F7AE1 /* libRCTRestart.a */; };
 		D5FDCD6B684B4978913EF43B /* libRCTOneSignal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 92ABB3FBD36F4FD98AED2116 /* libRCTOneSignal.a */; };
@@ -440,6 +441,13 @@
 			remoteGlobalIDString = 014A3B5C1C6CF33500B6D375;
 			remoteInfo = RNImagePicker;
 		};
+		B764867B20AF5EF000E26423 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B764864520AF5EF000E26423 /* RNIntercom.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 112EE36D1CC0AB8A00BF6BB8;
+			remoteInfo = RNIntercom;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -527,6 +535,7 @@
 		B337FC1A1E8AD5FA006F9336 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B5D4613FF5E54E88BAEB1223 /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
 		B726CF8E1F34ECE100CA78B5 /* RNImagePicker.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNImagePicker.xcodeproj; path = "../node_modules/react-native-image-picker/ios/RNImagePicker.xcodeproj"; sourceTree = "<group>"; };
+		B764864520AF5EF000E26423 /* RNIntercom.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNIntercom.xcodeproj; path = "../node_modules/react-native-intercom/iOS/RNIntercom.xcodeproj"; sourceTree = "<group>"; };
 		B9500B5880E94352BF665415 /* libRNBackgroundTimer.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNBackgroundTimer.a; sourceTree = "<group>"; };
 		C00D1EDD08B14ABB964F7AE1 /* libRCTRestart.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTRestart.a; sourceTree = "<group>"; };
 		C399AB4A83A944CC9B2E2DBF /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
@@ -553,6 +562,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B764867F20AF5F2F00E26423 /* libRNIntercom.a in Frameworks */,
 				0D02EB77208022DB00F4DD0F /* libRNDeviceInfo.a in Frameworks */,
 				5C687825203F8560008A6621 /* libRNSentry.a in Frameworks */,
 				ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */,
@@ -846,6 +856,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				B764864520AF5EF000E26423 /* RNIntercom.xcodeproj */,
 				0D02EB3C208021D600F4DD0F /* RNDeviceInfo.xcodeproj */,
 				B726CF8E1F34ECE100CA78B5 /* RNImagePicker.xcodeproj */,
 				5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */,
@@ -929,6 +940,14 @@
 			isa = PBXGroup;
 			children = (
 				B726CF931F34ECE100CA78B5 /* libRNImagePicker.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B764864620AF5EF000E26423 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B764867C20AF5EF000E26423 /* libRNIntercom.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1153,6 +1172,10 @@
 				{
 					ProductGroup = B726CF8F1F34ECE100CA78B5 /* Products */;
 					ProjectRef = B726CF8E1F34ECE100CA78B5 /* RNImagePicker.xcodeproj */;
+				},
+				{
+					ProductGroup = B764864620AF5EF000E26423 /* Products */;
+					ProjectRef = B764864520AF5EF000E26423 /* RNIntercom.xcodeproj */;
 				},
 				{
 					ProductGroup = 5C6877ED203F84DD008A6621 /* Products */;
@@ -1534,6 +1557,13 @@
 			fileType = archive.ar;
 			path = libRNImagePicker.a;
 			remoteRef = B726CF921F34ECE100CA78B5 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B764867C20AF5EF000E26423 /* libRNIntercom.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNIntercom.a;
+			remoteRef = B764867B20AF5EF000E26423 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
