@@ -4,7 +4,7 @@
 import React, { PureComponent } from 'react'
 import { StyleSheet, Text, TouchableOpacity } from 'react-native'
 import { HeaderBackButton } from 'react-navigation'
-import { rhino60, rhino20 } from 'style/colors'
+import { rhino60, rhino20, havelockBlue } from 'style/colors'
 import Icon from '../components/Icon'
 import { get } from 'lodash/fp'
 
@@ -116,9 +116,10 @@ export default function header ({ goBack, state }, { headerBackButton, left, rig
 const styles = StyleSheet.create({
   button: {
     fontFamily: 'Circular-Book',
-    fontSize: 15,
+    fontSize: 16,
     paddingTop: 1,
-    color: tintColor
+    color: havelockBlue,
+    fontWeight: 'bold'
   },
   disabled: {
     color: rhino20
