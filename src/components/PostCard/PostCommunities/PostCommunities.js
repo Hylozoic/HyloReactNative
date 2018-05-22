@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { get, isEmpty, chunk } from 'lodash/fp'
 import Icon from '../../Icon'
 import { Text, View, TouchableOpacity, Image } from 'react-native'
@@ -7,7 +7,7 @@ import {
   capeCod10, rhino30, caribbeanGreen
 } from '../../../style/colors'
 
-export default class PostCommunities extends Component {
+export default class PostCommunities extends React.PureComponent {
   static defaultState = {
     expanded: false
   }

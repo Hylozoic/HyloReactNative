@@ -1,11 +1,19 @@
 import { createSelector as ormCreateSelector } from 'redux-orm'
 import orm from '../../store/models'
+import createCachedSelector from 're-reselect'
 
-const getPost = ormCreateSelector(
+const getSession = ormCreateSelector(
   orm,
   state => state.orm,
+  session => session
+)
+
+const getPost = createCachedSelector(
+  getSession,
   (state, props) => props.id,
   (session, id) => session.Post.safeGet({id})
+)(
+  (state, props) => props.id
 )
 
 export default getPost
@@ -28,3 +36,11 @@ export const presentPost = (post, communityId) => {
     topics: post.topics.toModelArray()
   }
 }
+
+export const getPresentedPost = createCachedSelector(
+  getPost,
+  (state, props) => props.communityId,
+  (post, communityId) => presentPost(post, communityId)
+)(
+  (state, props) => `${props.id}:${props.communityId}`
+)

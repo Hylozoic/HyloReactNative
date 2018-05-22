@@ -1,17 +1,22 @@
 import { connect } from 'react-redux'
 import getPost from '../../../store/selectors/getPost'
 import { get } from 'lodash/fp'
+import createCachedSelector from 're-reselect'
 
-export function mapStateToProps (state, props) {
-  const post = getPost(state, {id: props.postId})
-  if (!post) return {}
+const getImageUrls = createCachedSelector(
+  getPost,
+  (post) => !post ? null : post.images()
+    .orderBy(get('position'))
+    .toRefArray()
+    .map(get('url'))
+)(
+  (state, props) => props.id
+)
 
-  const imageUrls = post.images()
-  .orderBy(get('position'))
-  .toRefArray()
-  .map(get('url'))
-
-  return {imageUrls}
+const mapStateToProps = (state, props) => {
+  return {
+    imageUrls: getImageUrls(state, {id: props.postId})
+  }
 }
 
 export default connect(mapStateToProps)

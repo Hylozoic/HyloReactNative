@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React from 'react'
 import { View, Text, TouchableOpacity, Alert, FlatList } from 'react-native'
 import Avatar from '../../Avatar'
 import Icon from '../../Icon'
@@ -8,7 +8,7 @@ import PopupMenuButton from '../../PopupMenuButton'
 import { get, filter, isEmpty } from 'lodash/fp'
 import FlagContent from '../../FlagContent'
 
-export default class PostHeader extends PureComponent {
+export default class PostHeader extends React.PureComponent {
   constructor (props) {
     super(props)
     this.state = {

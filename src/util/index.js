@@ -2,7 +2,7 @@
  * @providesModule util/index
  */
 
-import { last } from 'lodash'
+import { last, some, eq } from 'lodash'
 
 export function isPromise (value) {
   return value && typeof value.then === 'function'
@@ -33,4 +33,8 @@ export function noncircular (obj) {
 
 export function basename (url) {
   return last(url.split('/'))
+}
+
+export function propsChanged (props, nextProps) {
+  return some(nextProps, (value, key) => !eq(props[key], value))
 }

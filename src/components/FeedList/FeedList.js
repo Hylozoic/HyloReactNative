@@ -1,13 +1,14 @@
 import React from 'react'
 import { FlatList, Text, TouchableOpacity, View } from 'react-native'
+import { propsChanged } from 'util/index'
 import styles from './FeedList.styles'
 import PostCard from '../PostCard'
 import Loading from '../Loading'
 import Icon from '../Icon'
 import PopupMenuButton from '../PopupMenuButton'
 import { find, get, isEmpty, filter } from 'lodash/fp'
-
-export default class FeedList extends React.PureComponent {
+import { some } from 'lodash'
+export default class FeedList extends React.Component {
   fetchOrShowCached () {
     const { hasMore, posts, fetchPosts, pending } = this.props
     if (fetchPosts && isEmpty(posts) && hasMore !== false && !pending) {
@@ -17,6 +18,10 @@ export default class FeedList extends React.PureComponent {
 
   componentDidMount () {
     this.fetchOrShowCached()
+  }
+
+  shouldComponentUpdate (nextProps) {
+    return nextProps.isFocused && propsChanged(this.props, nextProps)
   }
 
   componentDidUpdate (prevProps) {

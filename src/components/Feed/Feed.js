@@ -7,6 +7,7 @@ import FeedList from '../FeedList'
 import FeedBanner from '../FeedBanner'
 import SocketSubscriber from '../SocketSubscriber'
 import styles from './Feed.styles'
+import { propsChanged } from 'util/index'
 
 export default class Feed extends React.Component {
   state = {showNotification: false}
@@ -27,7 +28,7 @@ export default class Feed extends React.Component {
   }
 
   shouldComponentUpdate (nextProps) {
-    return nextProps.isFocused
+    return nextProps.isFocused && propsChanged(this.props, nextProps)
   }
 
   handleShowTopic = (topicName) => this.props.showTopic(topicName)

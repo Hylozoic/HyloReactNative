@@ -3,7 +3,7 @@ import { get } from 'lodash/fp'
 
 import fetchPost from '../../store/actions/fetchPost'
 import { getCommentEdits } from './CommentEditor/CommentEditor.store'
-import getPost, { presentPost } from '../../store/selectors/getPost'
+import { getPresentedPost } from '../../store/selectors/getPost'
 import getCurrentCommunityId from '../../store/selectors/getCurrentCommunityId'
 import getMe from '../../store/selectors/getMe'
 import makeGoToCommunity from '../../store/actions/makeGoToCommunity'
@@ -18,10 +18,9 @@ export function mapStateToProps (state, props) {
   const currentUser = getMe(state, props)
   const commentEdit = getCommentEdits(state, {postId: id})
   const communityId = getCurrentCommunityId(state, props)
-  let post = presentPost(getPost(state, {id}), communityId)
 
   return {
-    post,
+    post: getPresentedPost(state, {id, communityId}),
     currentUser,
     commentEdit,
     isFocused: props.isFocused
