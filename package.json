@@ -51,7 +51,7 @@
     "react-native-triangle": "^0.0.9",
     "react-native-vector-icons": "^4.5.0",
     "react-native-webview-bridge-updated": "Hylozoic/react-native-webview-bridge#62f520e8",
-    "react-native-zss-rich-text-editor": "Hylozoic/react-native-zss-rich-text-editor#6cb3038e",
+    "react-native-zss-rich-text-editor": "Hylozoic/react-native-zss-rich-text-editor#6e094ed",
     "react-navigation": "^1.2",
     "react-navigation-is-focused-hoc": "Hylozoic/react-navigation-is-focused-hoc#multiple-set-state",
     "react-redux": "^5.0.6",

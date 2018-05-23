@@ -6015,19 +6015,20 @@ react-native-webview-bridge-updated@Hylozoic/react-native-webview-bridge#62f520e
     keymirror "0.1.1"
     prop-types "15.6.0"
 
-react-native-webview-bridge-updated@^1.0.0:
-  version "1.0.9"
-  resolved "https://registry.yarnpkg.com/react-native-webview-bridge-updated/-/react-native-webview-bridge-updated-1.0.9.tgz#930b4e6444f4a2b5f3151607c6eb6eba8deda08f"
+react-native-webview-bridge-updated@Hylozoic/react-native-webview-bridge#f91be91a:
+  version "1.0.8"
+  resolved "https://codeload.github.com/Hylozoic/react-native-webview-bridge/tar.gz/f91be91a73f02d10e1e96cc7cf434829c27954ee"
   dependencies:
     invariant "2.2.0"
     keymirror "0.1.1"
+    prop-types "^15.6.0"
 
-react-native-zss-rich-text-editor@Hylozoic/react-native-zss-rich-text-editor#6cb3038e:
+react-native-zss-rich-text-editor@Hylozoic/react-native-zss-rich-text-editor#6e094ed:
   version "1.0.3"
-  resolved "https://codeload.github.com/Hylozoic/react-native-zss-rich-text-editor/tar.gz/6cb3038e04161408b5b9b5adb4d55c0553daac2e"
+  resolved "https://codeload.github.com/Hylozoic/react-native-zss-rich-text-editor/tar.gz/6e094edeb9b3a1f602b78df3285ebfb2108c54bc"
   dependencies:
     prop-types "^15.6.0"
-    react-native-webview-bridge-updated "^1.0.0"
+    react-native-webview-bridge-updated Hylozoic/react-native-webview-bridge#f91be91a
 
 react-native@0.54.4:
   version "0.54.4"
