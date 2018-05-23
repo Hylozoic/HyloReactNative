@@ -17,7 +17,6 @@ import {
   getCommunitySearchObject,
   getNetworkSearchObject
 } from './Feed.store'
-import { mapWhenFocused, mergeWhenFocused } from 'util/connector'
 import getMemberships from '../../store/selectors/getMemberships'
 import getNavigationParam from '../../store/selectors/getNavigationParam'
 
@@ -107,8 +106,4 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
   }
 }
 
-export default connect(
-  mapWhenFocused(mapStateToProps),
-  mapWhenFocused(mapDispatchToProps),
-  mergeWhenFocused(mergeProps)
-)
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps)

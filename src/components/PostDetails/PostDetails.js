@@ -52,6 +52,10 @@ export default class PostDetails extends React.Component {
   handleShowTopic = (topicId) => this.props.showTopic(topicId)
   handleGoToCommunity = (communityId) => this.props.goToCommunity(communityId)
 
+  handleNewComment = () => {
+    this.props.newComment(get('communities.0.id', this.props.post))
+  }
+
   render () {
     const {
       post,
@@ -59,7 +63,7 @@ export default class PostDetails extends React.Component {
       editPost,
       pending,
       newComment,
-      commentEdit,
+      commentEdit
     } = this.props
 
     if (!post || !post.creator || !post.title) return <LoadingScreen />
@@ -83,7 +87,7 @@ export default class PostDetails extends React.Component {
         goToCommunity={this.handleGoToCommunity}
         announcement={post.announcement}
       />
-      <PostImage postId={post.id} linked />
+      <PostImage imageUrls={post.imageUrls} linked />
       <PostBody title={post.title}
         details={post.details}
         linkPreview={post.linkPreview}

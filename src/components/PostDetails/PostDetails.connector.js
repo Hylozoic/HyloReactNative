@@ -1,13 +1,11 @@
 import { connect } from 'react-redux'
-import { get } from 'lodash/fp'
 
-import fetchPost from '../../store/actions/fetchPost'
+import fetchPost, { FETCH_POST } from '../../store/actions/fetchPost'
 import { getCommentEdits } from './CommentEditor/CommentEditor.store'
 import { getPresentedPost } from '../../store/selectors/getPost'
 import getCurrentCommunityId from '../../store/selectors/getCurrentCommunityId'
 import getMe from '../../store/selectors/getMe'
 import makeGoToCommunity from '../../store/actions/makeGoToCommunity'
-import { mapWhenFocused, mergeWhenFocused } from 'util/connector'
 
 function getPostId (state, props) {
   return props.navigation.state.params.id
@@ -22,8 +20,7 @@ export function mapStateToProps (state, props) {
   return {
     post: getPresentedPost(state, {id, communityId}),
     currentUser,
-    commentEdit,
-    isFocused: props.isFocused
+    commentEdit
   }
 }
 
@@ -45,18 +42,4 @@ export function mapDispatchToProps (dispatch, props) {
   }
 }
 
-export function mergeProps (stateProps, dispatchProps, ownProps) {
-  // TODO: handle posts in multiple communities
-  const communityId = get('communities.0.id', stateProps.post)
-  return {
-    ...stateProps,
-    ...dispatchProps,
-    newComment: () => dispatchProps.newComment(communityId)
-  }
-}
-
-export default connect(
-  mapWhenFocused(mapStateToProps),
-  mapWhenFocused(mapDispatchToProps),
-  mergeWhenFocused(mergeProps)
-)
+export default connect(mapStateToProps, mapDispatchToProps)

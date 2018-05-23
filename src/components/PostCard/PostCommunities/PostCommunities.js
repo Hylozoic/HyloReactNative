@@ -1,5 +1,5 @@
 import React from 'react'
-import { get, isEmpty, chunk } from 'lodash/fp'
+import { get, isEmpty, chunk, filter } from 'lodash/fp'
 import Icon from '../../Icon'
 import { Text, View, TouchableOpacity, Image } from 'react-native'
 import { DEFAULT_AVATAR } from '../../../store/models/Community'
@@ -27,7 +27,6 @@ export default class PostCommunities extends React.PureComponent {
     const { communities, slug, goToCommunity } = this.props
 
     // don't show if there are no communities or this isn't cross posted
-
     if (isEmpty(communities) || (communities.length === 1 && get('0.slug', communities) === slug)) return null
 
     const { expanded } = this.state

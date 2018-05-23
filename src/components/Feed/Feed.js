@@ -31,9 +31,10 @@ export default class Feed extends React.Component {
     return nextProps.isFocused && propsChanged(this.props, nextProps)
   }
 
-  handleShowTopic = (topicName) => this.props.showTopic(topicName)
-  handleShowMember = (memberId) => this.props.showMember(memberId)
-  handleGoToCommunity = (communityId) => this.props.goToCommunity(communityId)
+  handleShowTopic = (...args) => this.props.showTopic(...args)
+  handleShowMember = (...args) => this.props.showMember(...args)
+  handleGoToCommunity = (...args) => this.props.goToCommunity(...args)
+  handleSetTopicSubscribe = (...args) => this.props.handleSetTopicSubscribe(...args)
 
   render () {
     const {
@@ -44,7 +45,6 @@ export default class Feed extends React.Component {
       newPost,
       showPost,
       screenProps,
-      setTopicSubscribe,
       topicName,
       topicSubscribed,
       postsTotal,
@@ -75,7 +75,7 @@ export default class Feed extends React.Component {
             postsTotal={postsTotal}
             followersTotal={followersTotal}
             topicSubscribed={topicSubscribed}
-            setTopicSubscribe={setTopicSubscribe} />}
+            setTopicSubscribe={this.handleSetTopicSubscribe} />}
         navigation={navigation}
         screenProps={screenProps}
         showCommunities={!community}

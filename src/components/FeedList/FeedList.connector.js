@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { get, isNull, isUndefined, omit, omitBy } from 'lodash/fp'
+import { get, isNull, isUndefined, omit, omitBy, isEqual } from 'lodash/fp'
 
 import {
   getSort,
@@ -12,9 +12,8 @@ import {
 } from './FeedList.store'
 import { ALL_COMMUNITIES_ID } from '../../store/models/Community'
 import fetchPosts, { FETCH_POSTS } from '../../store/actions/fetchPosts'
-import { presentPost } from '../../store/selectors/getPost'
 import resetNewPostCount from '../../store/actions/resetNewPostCount'
-import { createSelector } from 'reselect'
+import { createSelector, createSelectorCreator, defaultMemoize } from 'reselect'
 
 function makeFetchOpts (props) {
   const { community, network, topicName } = props
@@ -36,10 +35,23 @@ function makeFetchOpts (props) {
   })
 }
 
-const getPresentedPosts = createSelector(
+const getFeedListPosts = createSelector(
   getPosts,
-  (state, props) => get('id', props.community),
-  (posts, communityId) => posts.map(p => presentPost(p, communityId))
+  (posts) => {
+    return posts.map(p => p.id)
+  }
+)
+
+// create a "selector creator" that uses lodash.isEqual instead of ===
+const createDeepEqualSelector = createSelectorCreator(
+  defaultMemoize,
+  isEqual
+)
+
+// use the new "selector creator" to create a selector
+const getDeepFeedListPosts = createDeepEqualSelector(
+  getFeedListPosts,
+  posts => posts
 )
 
 export function mapStateToProps (state, props) {
@@ -58,9 +70,11 @@ export function mapStateToProps (state, props) {
     topicName
   })
   const pending = state.pending[FETCH_POSTS]
+  const communityId = get('community.id', props)
 
   return {
-    posts: getPresentedPosts(state, queryProps),
+    posts: getDeepFeedListPosts(state, queryProps),
+    communityId,
     sortBy,
     filter,
     hasMore: getHasMorePosts(state, queryProps),

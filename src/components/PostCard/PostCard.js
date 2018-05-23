@@ -44,11 +44,11 @@ export default class PostCard extends React.PureComponent {
   render () {
     const {
       post,
-      showCommunity,
       currentUser,
       showMember,
       showTopic,
-      goToCommunity
+      goToCommunity,
+      selectedNetworkId
     } = this.props
 
     const slug = get('0.slug', post.communities)
@@ -56,18 +56,15 @@ export default class PostCard extends React.PureComponent {
       <PostHeader creator={post.creator}
         date={post.createdAt}
         type={post.type}
-        showCommunity={showCommunity}
         topics={post.topics}
-        communities={post.communities}
         slug={slug}
         pinned={post.pinned}
         postId={post.id}
         showMember={showMember}
         showTopic={showTopic}
-        goToCommunity={goToCommunity}
         announcement={post.announcement}
       />
-      <PostImage postId={post.id} />
+      <PostImage imageUrls={post.imageUrls} />
       <PostBody
         title={post.title}
         details={post.details}
@@ -79,6 +76,7 @@ export default class PostCard extends React.PureComponent {
       <PostCommunities
         communities={post.communities}
         slug={slug}
+        selectedNetworkId={selectedNetworkId}
         goToCommunity={goToCommunity} />
       <PostFooter id={post.id}
         currentUser={currentUser}

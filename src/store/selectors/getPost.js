@@ -1,19 +1,14 @@
 import { createSelector as ormCreateSelector } from 'redux-orm'
 import orm from '../../store/models'
-import createCachedSelector from 're-reselect'
+import { createSelector } from 'reselect'
+import { get } from 'lodash/fp'
+import { random } from 'lodash'
 
-const getSession = ormCreateSelector(
+const getPost = ormCreateSelector(
   orm,
   state => state.orm,
-  session => session
-)
-
-const getPost = createCachedSelector(
-  getSession,
   (state, props) => props.id,
-  (session, id) => session.Post.safeGet({id})
-)(
-  (state, props) => props.id
+  ({ Post }, id) => Post.safeGet({id})
 )
 
 export default getPost
@@ -37,10 +32,26 @@ export const presentPost = (post, communityId) => {
   }
 }
 
-export const getPresentedPost = createCachedSelector(
+// Factory method so each instance can have its own selector, thus allowing shared selectors across multiple components.
+// @see https://github.com/reduxjs/reselect#sharing-selectors-with-props-across-multiple-component-instances
+export const makeGetPresentedPost = () => {
+  const _getPost = ormCreateSelector(
+    orm,
+    state => state.orm,
+    (state, props) => props.id,
+    ({ Post }, id) => Post.safeGet({id})
+  )
+
+  return createSelector(
+    _getPost,
+    (state, props) => props.communityId,
+    (post, communityId) => presentPost(post, communityId)
+  )
+}
+
+export const getPresentedPost = createSelector(
   getPost,
-  (state, props) => props.communityId,
-  (post, communityId) => presentPost(post, communityId)
-)(
-  (state, props) => `${props.id}:${props.communityId}`
+  (state, props) => get('id', props),
+  (state, props) => get('communityId', props),
+  (post, id, communityId) => presentPost(post, communityId)
 )

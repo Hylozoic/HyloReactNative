@@ -16,11 +16,12 @@ export default class PostImage extends React.PureComponent {
 
   render () {
     const { imageUrls, linked } = this.props
+
     if (isEmpty(imageUrls)) return null
 
     if (linked) {
       return <View>
-        <TouchableOpacity onPress={this.makeOpenURL(this.props.imageUrls[0])}>
+        <TouchableOpacity onPress={this.makeOpenURL(imageUrls[0])}>
           <ImageBackground
             style={[styles.background, styles.container]}
             imageStyle={styles.backgroundImage}

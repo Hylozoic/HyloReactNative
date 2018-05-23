@@ -1,2 +1,4 @@
 import PostCommunities from './PostCommunities'
-export default PostCommunities
+import connector from './PostCommunities.connector'
+
+export default connector(PostCommunities)
