@@ -78,7 +78,6 @@ export default class Feed extends React.Component {
             setTopicSubscribe={this.handleSetTopicSubscribe} />}
         navigation={navigation}
         screenProps={screenProps}
-        showCommunities={!community}
         showMember={this.handleShowMember}
         showTopic={this.handleShowTopic}
         topicName={topicName} />

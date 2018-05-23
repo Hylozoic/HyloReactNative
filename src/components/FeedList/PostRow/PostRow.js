@@ -9,8 +9,7 @@ export default class PostRow extends React.PureComponent {
 
   render () {
     const {
-      post, showMember, showTopic,
-      showCommunity, goToCommunity, selectedNetworkId
+      post, showMember, showTopic, goToCommunity, selectedNetworkId
     } = this.props
 
     console.log('POST', post)
@@ -23,7 +22,6 @@ export default class PostRow extends React.PureComponent {
             showMember={showMember}
             selectedNetworkId={selectedNetworkId}
             showTopic={showTopic}
-            showCommunity={showCommunity}
             goToCommunity={goToCommunity} />
         </View>
       </TouchableOpacity>

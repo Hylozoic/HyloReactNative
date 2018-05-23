@@ -32,7 +32,6 @@ export default class PostCard extends React.PureComponent {
     fetchPost: func,
     expanded: bool,
     showDetails: func,
-    showCommunity: bool,
     showMember: func,
     showTopic: func
   }

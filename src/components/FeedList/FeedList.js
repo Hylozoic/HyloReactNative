@@ -62,7 +62,6 @@ export default class FeedList extends React.Component {
     showPost={this.showPost}
     showMember={this.showMember}
     showTopic={this.showTopic}
-    showCommunities={!!this.props.showCommunities}
     goToCommunity={this.goToCommunity}
     selectedNetworkId={this.props.networkId} />
 
