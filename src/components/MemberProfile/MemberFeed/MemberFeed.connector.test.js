@@ -1,4 +1,4 @@
-import { mapStateToProps, mergeProps } from './MemberFeed.connector'
+import { mapStateToProps, mapDispatchToProps, mergeProps } from './MemberFeed.connector'
 import {
   FETCH_MEMBER_POSTS, FETCH_MEMBER_COMMENTS, FETCH_MEMBER_UPVOTES, MODULE_NAME
 } from './MemberFeed.store'
@@ -106,5 +106,16 @@ describe('mergeProps', () => {
 
     fetchMoreItems()
     expect(dispatchProps.fetchMemberUpvotes).toHaveBeenCalledWith({id: 34, offset: 3})
+  })
+})
+
+describe('mapDispatchToProps', () => {
+  it('maps the action generators', () => {
+    const dispatch = jest.fn(val => val)
+    const props = {
+      navigation: {}
+    }
+    const dispatchProps = mapDispatchToProps(dispatch, props)
+    expect(dispatchProps).toMatchSnapshot()
   })
 })
