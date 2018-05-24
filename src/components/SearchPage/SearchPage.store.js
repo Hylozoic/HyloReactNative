@@ -1,5 +1,9 @@
-import { get } from 'lodash/fp'
+import orm from '../../store/models'
+import { createSelector } from 'reselect'
+import { createSelector as ormCreateSelector } from 'redux-orm'
+import { makeGetQueryResults } from '../../store/reducers/queryResults'
 import { getPostFieldsFragment } from '../../store/actions/fetchPost'
+import { get, isEmpty, includes } from 'lodash/fp'
 
 export const MODULE_NAME = 'SearchPage'
 
@@ -116,5 +120,63 @@ export function fetchSearchResults ({search, offset = 0, filter}) {
         getItems: get('payload.data.search')
       }
     }
+  }
+}
+
+const getSearchResultResults = makeGetQueryResults(FETCH_SEARCH)
+
+export const getSearchResults = ormCreateSelector(
+  orm,
+  state => state.orm,
+  getSearchResultResults,
+  (session, results) => {
+    if (isEmpty(results) || isEmpty(results.ids)) return []
+    return session.SearchResult.all()
+      .filter(x => includes(x.id, results.ids))
+      .orderBy(x => results.ids.indexOf(x.id))
+      .toModelArray()
+      .map(searchResults => presentSearchResult(searchResults, session))
+  }
+)
+
+export const getHasMoreSearchResults = createSelector(getSearchResultResults, get('hasMore'))
+
+export function presentSearchResult (searchResult, session) {
+  const contentRaw = searchResult.getContent(session)
+  const type = contentRaw.constructor.modelName
+
+  var content = contentRaw
+
+  if (type === 'Post') {
+    content = {
+      ...content.ref,
+      creator: content.creator,
+      commenters: content.commenters.toModelArray(),
+      communities: content.communities.toModelArray(),
+      linkPreview: content.linkPreview,
+      fileAttachments: content.attachments.filter(a => a.type === 'file').toModelArray()
+    }
+  }
+
+  if (type === 'Person') {
+    content = {
+      ...content.ref,
+      skills: content.skills.toModelArray()
+    }
+  }
+
+  if (type === 'Comment') {
+    content = {
+      ...content.ref,
+      creator: content.creator,
+      post: content.post,
+      image: content.attachments.toModelArray()[0]
+    }
+  }
+
+  return {
+    ...searchResult.ref,
+    content,
+    type
   }
 }

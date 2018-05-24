@@ -1,144 +1,113 @@
 import React from 'react'
-import { Image, View, Text, ScrollView, TouchableOpacity, Alert } from 'react-native'
+import { View, ScrollView, Text, TextInput, FlatList } from 'react-native'
 import Loading from '../Loading'
-import Icon from '../Icon'
+import KeyboardFriendlyView from '../KeyboardFriendlyView'
 import styles from './SearchPage.styles'
 import header from 'util/header'
-const allCommunitiesLogo = require('../../assets/hylo-merkaba.png')
+import Icon from '../Icon'
 
 export default class SearchPage extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return header(navigation, {
-      title: 'Notification Settings',
+      title: 'Search',
       options: {
         headerBackTitle: null
       }
     })
   }
 
-  updateMessageSettings = changes => {
-    const { messageSettings, updateUserSettings } = this.props
-    const newMessageSettings = {
-      ...messageSettings,
-      ...changes
+  componentDidUpdate (prevProps) {
+    if (prevProps.searchTerm !== this.props.searchTerm ||
+      prevProps.filter !== this.props.filter) {
+      this.props.fetchSearchResults()
     }
-    var dmNotifications
-    if (newMessageSettings['sendEmail'] && newMessageSettings['sendPushNotifications']) {
-      dmNotifications = 'both'
-    } else if (newMessageSettings['sendEmail']) {
-      dmNotifications = 'email'
-    } else if (newMessageSettings['sendPushNotifications']) {
-      dmNotifications = 'push'
-    } else {
-      dmNotifications = 'none'
-    }
-    updateUserSettings({
-      settings: {
-        dmNotifications
-      }
-    })
-  }
-
-  updateAllCommunities = changes => {
-    const { memberships, updateAllMemberships } = this.props
-    updateAllMemberships(memberships.map(m => m.community.id), changes)
-  }
-
-  updateAllCommunitiesAlert = changes => {
-    const key = ('sendEmail' in changes) ? 'sendEmail' : 'sendPushNotifications'
-
-    const type = key === 'sendEmail' ? 'Email' : 'Push Notifications'
-    const onOrOff = changes[key] ? 'ON' : 'OFF'
-    const numCommunities = this.props.memberships.length
-
-    return Alert.alert(
-      `You wish to turn ${onOrOff} ${type} for all communities?`,
-      `This will affect ${numCommunities} ${numCommunities === 1 ? 'community' : 'communities'}`,
-      [
-        {text: `Turn ${onOrOff}`, onPress: () => this.updateAllCommunities(changes)},
-        {text: 'Cancel', style: 'cancel'}
-      ])
   }
 
   render () {
-    const { messageSettings, allCommunitiesSettings, memberships, updateMembershipSettings } = this.props
-    if (!messageSettings) return <Loading />
+    const { searchResults, searchTerm, setSearchTerm, pending } = this.props
+
+    const listHeaderComponent = <View>
+      <View style={styles.searchBar}>
+        <View style={styles.searchBox}>
+          <Icon name='Search' style={styles.searchIcon} />
+          <TextInput
+            value={searchTerm}
+            onChangeText={text => setSearchTerm(text)}
+            style={styles.textInput}
+            underlineColorAndroid={styles.androidInvisibleUnderline} />
+        </View>
+      </View>
+    </View>
+    const listFooterComponent = pending
+      ? <Loading style={styles.loading} />
+      : null
+
+    const goToPost = id => console.log('goToPost', id)
+    const goToPerson = id => console.log('goToPerson', id)
 
     return <ScrollView contentContainerStyle={styles.scrollContainer}>
-      <MessageSettingsRow
-        settings={messageSettings}
-        updateMessageSettings={this.updateMessageSettings} />
-      <AllCommunitiesSettingsRow
-        settings={allCommunitiesSettings}
-        updateAllCommunities={this.updateAllCommunitiesAlert} />
-      {memberships.map(membership => <MembershipSettingsRow
-        key={membership.id}
-        membership={membership}
-        updateMembershipSettings={changes => updateMembershipSettings(membership.community.id, changes)} />)}
+      <KeyboardFriendlyView>
+        <FlatList
+          data={searchResults}
+          renderItem={({ item }) =>
+            <SearchResult
+              searchResult={item}
+              goToPost={goToPost}
+              goToPerson={goToPerson} />}
+          onRefresh={this.props.fetchMoreSearchResults}
+          refreshing={pending}
+          keyExtractor={(item) => item.id}
+          onEndReached={this.props.fetchMoreSearchResults}
+          ListHeaderComponent={listHeaderComponent}
+          ListFooterComponent={listFooterComponent} />
+      </KeyboardFriendlyView>
     </ScrollView>
   }
 }
 
-export function MessageSettingsRow ({ settings, updateMessageSettings }) {
-  return <SettingsRow
-    iconName='Messages'
-    name='Messages'
-    settings={settings}
-    update={updateMessageSettings} />
-}
+export function SearchResult ({ searchResult, goToPost, goToPerson }) {
+  const { type, content } = searchResult
 
-export function AllCommunitiesSettingsRow ({ settings, updateAllCommunities }) {
-  return <SettingsRow
-    imageSrc={allCommunitiesLogo}
-    name='All Communities'
-    settings={settings}
-    update={updateAllCommunities} />
-}
-
-export function MembershipSettingsRow ({ membership, updateMembershipSettings }) {
-  return <SettingsRow
-    imageUrl={membership.community.avatarUrl}
-    name={membership.community.name}
-    settings={membership.settings}
-    update={updateMembershipSettings} />
-}
-
-export class SettingsRow extends React.Component {
-  state = {
-    expanded: false
+  var component
+  switch (type) {
+    case 'Person':
+      component = <PersonCard person={content} goToPerson={goToPerson} />
+      break
+    case 'Post':
+      component = <PostCard
+        styleName='postcard-expand'
+        post={content}
+        goToPost={goToPost} />
+      break
+    case 'Comment':
+      component = <CommentCard comment={content} expanded={false} goToPost={goToPost} />
+      break
   }
-
-  toggleExpand = () => {
-    this.setState({
-      expanded: !this.state.expanded
-    })
-  }
-
-  render () {
-    const { iconName, imageUrl, imageSrc, name, settings, update } = this.props
-    const { expanded } = this.state
-
-    const source = imageSrc || {uri: imageUrl}
-
-    return <View style={styles.settingsRow}>
-      <View style={styles.nameRow}>
-        {iconName && <Icon name={iconName} style={styles.avatarIcon} />}
-        {!iconName && <Image source={source} style={styles.communityAvatar} />}
-        <Text style={styles.name} numberOfLines={1}>{name}</Text>
-        <TouchableOpacity onPress={this.toggleExpand} style={styles.arrowWrapper}>
-          {expanded ? <Icon name='ArrowUp' style={styles.arrowIcon} /> : <Icon name='ArrowDown' style={styles.arrowIcon} />}
-        </TouchableOpacity>
-      </View>
-      {expanded && <View style={styles.iconRow}>
-        <SettingsIcon settingKey='sendPushNotifications' name='PushNotification' settings={settings} update={update} />
-        <SettingsIcon settingKey='sendEmail' name='EmailNotification' settings={settings} update={update} />
-      </View>}
-    </View>
-  }
+  return <View style={styles.searchResult}>
+    {component}
+  </View>
 }
 
-export function SettingsIcon ({ settingKey, name, update, settings }) {
-  return <TouchableOpacity onPress={() => update({[settingKey]: !settings[settingKey]})}>
-    <Icon name={name} style={[styles.icon, settings[settingKey] && styles.highlightIcon]} />
-  </TouchableOpacity>
+export function PersonCard ({ person }) {
+  return <View>
+    <Text>
+      This is a person named: {person.name}
+    </Text>
+  </View>
+}
+
+export function PostCard ({ post }) {
+  return <View>
+    <Text>
+      This is a post titled: {post.title}
+    </Text>
+  </View>
+}
+
+export function CommentCard ({ comment }) {
+  return <View>
+    <Text>
+      This is a comment: {comment.text}, on post: {comment.post.title}, by {comment.creator.name}
+    </Text>
+  </View>
 }

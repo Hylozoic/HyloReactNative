@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native'
-import { rhino30, treePoppy } from 'style/colors'
+import { capeCod40 } from 'style/colors'
 
 const row = {
   flexDirection: 'row'
@@ -7,53 +7,30 @@ const row = {
 
 export default {
   scrollContainer: {
-    marginTop: 30,
-    paddingBottom: 100
+    
   },
   row,
-  settingsRow: {
-    marginHorizontal: 17
-  },
-  nameRow: {
-    ...row,
-    height: 38
-  },
-  avatarIcon: {
-    fontSize: 26,
-    color: rhino30,
-    marginRight: 5
-  },
-  name: {
-    fontFamily: 'Circular-Book',
-    fontSize: 17
-  },
-  iconRow: {
-    ...row,
-    height: 52,
-    marginLeft: 38,
-    marginBottom: 18,
+  searchBar: {
+    height: 50,
     borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: rhino30
+    borderBottomColor: capeCod40,
+    justifyContent: 'center',
+    paddingHorizontal: 18
   },
-  communityAvatar: {
-    height: 22,
-    width: 22,
-    borderRadius: 4,
-    marginRight: 9
+  searchBox: {
+    ...row,
+    alignItems: 'center',
+    height: 30,
+    borderWidth: StyleSheet.hairlineWidth,
+    borderColor: capeCod40,
+    borderRadius: 100
   },
-  arrowWrapper: {
-    marginLeft: 'auto'
+  searchIcon: {
+    color: capeCod40,
+    fontSize: 26,
+    marginHorizontal: 5
   },
-  arrowIcon: {
-    fontSize: 20,
-    color: rhino30
-  },
-  icon: {
-    fontSize: 46,
-    marginRight: 25,
-    color: rhino30
-  },
-  highlightIcon: {
-    color: treePoppy
+  textInput: {
+    flex: 1
   }
 }
