@@ -9,3 +9,5 @@ Object {
   "showPost": [Function],
 }
 `;
+
+exports[`mapDispatchToProps maps the action generators 2`] = `undefined`;

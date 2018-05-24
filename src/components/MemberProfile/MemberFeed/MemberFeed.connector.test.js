@@ -113,9 +113,12 @@ describe('mapDispatchToProps', () => {
   it('maps the action generators', () => {
     const dispatch = jest.fn(val => val)
     const props = {
-      navigation: {}
+      navigation: {
+        navigate: jest.fn()
+      }
     }
     const dispatchProps = mapDispatchToProps(dispatch, props)
     expect(dispatchProps).toMatchSnapshot()
+    expect(dispatchProps.showPost(1)).toMatchSnapshot()
   })
 })
