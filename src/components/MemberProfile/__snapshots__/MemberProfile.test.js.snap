@@ -107,6 +107,7 @@ exports[`MemberProfile doesnt have the flag content option 1`] = `
     </View>
   }
   id={1}
+  navigation={undefined}
 />
 `;
 
@@ -143,6 +144,7 @@ exports[`MemberProfile matches the last snapshot 1`] = `
     </View>
   }
   id={1}
+  navigation={undefined}
 />
 `;
 
