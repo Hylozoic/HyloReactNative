@@ -12,7 +12,6 @@ export default class PostRow extends React.PureComponent {
       post, showMember, showTopic, goToCommunity, selectedNetworkId
     } = this.props
 
-    console.log('POST', post)
     if (!post) return null
 
     return <View style={styles.postRow}>
