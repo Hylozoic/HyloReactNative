@@ -1,14 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`produces expected props 1`] = `
+exports[`mapsDispatchToProps 1`] = `
 Object {
-  "commentEdit": "draft comment text",
-  "currentUser": undefined,
   "editPost": [Function],
   "fetchPost": [Function],
   "goToCommunity": [Function],
-  "isFocused": true,
   "newComment": [Function],
+  "showMember": [Function],
+  "showTopic": [Function],
+}
+`;
+
+exports[`mapsStateToProps 1`] = `
+Object {
+  "commentEdit": "draft comment text",
+  "currentUser": undefined,
   "post": Object {
     "commenters": Array [],
     "communities": Array [
@@ -46,163 +52,5 @@ Object {
     "postMemberships": undefined,
     "topics": Array [],
   },
-  "showMember": [Function],
-  "showTopic": [Function],
-}
-`;
-
-exports[`sets up navigation and redux actions 1`] = `
-Object {
-  "commentEdit": undefined,
-  "currentUser": undefined,
-  "editPost": Array [
-    "navigate",
-    Array [
-      Object {
-        "key": "PostEditor",
-        "params": Object {
-          "id": "1",
-        },
-        "routeName": "PostEditor",
-      },
-    ],
-  ],
-  "fetchPost": Array [
-    "dispatch",
-    Array [
-      Object {
-        "graphql": Object {
-          "query": "query ($id: ID) {
-        post(id: $id) {
-          
-  id
-  title
-  details
-  type
-  location
-  announcement
-  creator {
-    id
-    name
-    avatarUrl
-    tagline
-  }
-  createdAt
-  updatedAt
-  commenters(first: 3) {
-    id
-    name
-    avatarUrl
-  }
-  commentersTotal
-  commentsTotal
-  comments(first: 10, order: \\"desc\\") {
-    items {
-      id
-      text
-      creator {
-        id
-        name
-        avatarUrl
-      }
-      createdAt
-    }
-    total
-    hasMore
-  }
-  linkPreview {
-    title
-    url
-    imageUrl
-  }
-  votesTotal
-  myVote
-  communities {
-    id
-    name
-    slug
-  }
-  attachments {
-    id
-    position
-    type
-    url
-  }
-  postMemberships {
-    id
-    pinned
-    community {
-      id
-    }
-  }
-  topics {
-    id
-    name
-    postsTotal
-    followersTotal
-  }
-        }
-      }",
-          "variables": Object {
-            "id": "1",
-          },
-        },
-        "meta": Object {
-          "afterInteractions": true,
-          "extractModel": "Post",
-          "extractQueryResults": Object {
-            "getItems": [Function],
-            "getType": [Function],
-          },
-        },
-        "type": "FETCH_POST",
-      },
-    ],
-  ],
-  "goToCommunity": Array [
-    "dispatch",
-    Array [
-      Object {
-        "payload": undefined,
-        "type": "SELECT_COMMUNITY",
-      },
-    ],
-  ],
-  "isFocused": undefined,
-  "newComment": Array [
-    "navigate",
-    Array [
-      "CommentEditor",
-      Object {
-        "communityId": "2",
-        "postId": "1",
-      },
-    ],
-  ],
-  "post": undefined,
-  "showMember": Array [
-    "navigate",
-    Array [
-      Object {
-        "key": "MemberProfile",
-        "params": Object {
-          "id": undefined,
-        },
-        "routeName": "MemberProfile",
-      },
-    ],
-  ],
-  "showTopic": Array [
-    "navigate",
-    Array [
-      Object {
-        "key": "Feed",
-        "params": Object {
-          "topicName": undefined,
-        },
-        "routeName": "Feed",
-      },
-    ],
-  ],
 }
 `;

@@ -14,7 +14,7 @@ describe('mapStateToProps', () => {
     expect(mapStateToProps(state, props)).toEqual({
       community: null,
       currentUser: undefined,
-      network: false,
+      network: null,
       topic: undefined,
       topicSubscribed: undefined,
       topicName: undefined,
@@ -42,7 +42,7 @@ describe('mapStateToProps', () => {
     expect(mapStateToProps(state, props)).toEqual({
       community,
       currentUser,
-      network: false,
+      network: null,
       followersTotal: 10,
       postsTotal: 20,
       topic,
