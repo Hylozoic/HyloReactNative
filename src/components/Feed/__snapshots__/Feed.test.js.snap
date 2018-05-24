@@ -2,7 +2,7 @@
 
 exports[`renders correctly if currentUserHasMemberships 1`] = `
 <View>
-  <Connect(FeedList)
+  <withNavigationFocus(Connect(FeedList))
     community={
       Object {
         "id": "1",
@@ -26,7 +26,7 @@ exports[`renders correctly if currentUserHasMemberships 1`] = `
         network={undefined}
         newPost={[Function]}
         postsTotal={undefined}
-        setTopicSubscribe={undefined}
+        setTopicSubscribe={[Function]}
         topicName="amazing"
         topicSubscribed={undefined}
       />
@@ -34,7 +34,6 @@ exports[`renders correctly if currentUserHasMemberships 1`] = `
     navigation={Object {}}
     network={undefined}
     screenProps={undefined}
-    showCommunities={false}
     showMember={[Function]}
     showPost={[Function]}
     showTopic={[Function]}

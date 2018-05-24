@@ -3,18 +3,8 @@
 exports[`FeedList renders correctly 1`] = `
 <View>
   <FlatList
-    ListFooterComponent={<Loading />}
-    ListHeaderComponent={
-      <View>
-        <ListControls
-          filter="all"
-          pending={true}
-          setFilter={[Function]}
-          setSort={[Function]}
-          sortBy="latest"
-        />
-      </View>
-    }
+    ListFooterComponent={[Function]}
+    ListHeaderComponent={[Function]}
     data={
       Array [
         1,
@@ -23,6 +13,7 @@ exports[`FeedList renders correctly 1`] = `
       ]
     }
     disableVirtualization={false}
+    extraData={true}
     horizontal={false}
     initialNumToRender={10}
     keyExtractor={[Function]}

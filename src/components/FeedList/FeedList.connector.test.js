@@ -45,14 +45,16 @@ describe('mapStateToProps', () => {
   })
 
   it('returns posts in the correct order', () => {
-    expect(mapStateToProps(state, {community: {slug: 'foo'}})).toEqual({
+    expect(mapStateToProps(state, {community: {slug: 'foo', id: 10}})).toEqual({
       posts: [
-        expect.objectContaining({id: '1'}),
-        expect.objectContaining({id: '3'}),
-        expect.objectContaining({id: '2'})
+        '1',
+        '3',
+        '2'
       ],
       hasMore: true,
       pending: false,
+      communityId: 10,
+      networkId: undefined,
       pendingRefresh: false,
       filter: defaultState.filter,
       sortBy: defaultState.sortBy,
@@ -67,9 +69,9 @@ describe('mapStateToProps', () => {
   it('returns posts for a network ', () => {
     expect(mapStateToProps(state, {community: {slug: 'foo'}})).toEqual({
       posts: [
-        expect.objectContaining({id: '1'}),
-        expect.objectContaining({id: '3'}),
-        expect.objectContaining({id: '2'})
+        '1',
+        '3',
+        '2'
       ],
       hasMore: true,
       pending: false,
