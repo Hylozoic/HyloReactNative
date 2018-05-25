@@ -1,6 +1,7 @@
 import React from 'react'
 import { View, ScrollView, Text, TextInput, FlatList } from 'react-native'
 import Loading from '../Loading'
+import Avatar from '../Avatar'
 import KeyboardFriendlyView from '../KeyboardFriendlyView'
 import styles from './SearchPage.styles'
 import header from 'util/header'
@@ -14,6 +15,10 @@ export default class SearchPage extends React.Component {
         headerBackTitle: null
       }
     })
+  }
+
+  componentDidMount () {
+    this.props.fetchSearchResults()
   }
 
   componentDidUpdate (prevProps) {
@@ -89,10 +94,13 @@ export function SearchResult ({ searchResult, goToPost, goToPerson }) {
 }
 
 export function PersonCard ({ person }) {
-  return <View>
-    <Text>
-      This is a person named: {person.name}
-    </Text>
+  const { avatarUrl, name, location } = person
+  return <View style={styles.personCard}>
+    <Avatar avatarUrl={avatarUrl} style={styles.avatar} />
+    <View>
+      <Text style={styles.name}>{name}</Text>
+      {location && <Text style={styles.location}>{location}</Text>}
+    </View>
   </View>
 }
 

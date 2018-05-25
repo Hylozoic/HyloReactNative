@@ -7,7 +7,7 @@ const row = {
 
 export default {
   scrollContainer: {
-    
+
   },
   row,
   searchBar: {
@@ -32,5 +32,13 @@ export default {
   },
   textInput: {
     flex: 1
+  },
+  personBar: {
+    ...row,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: capeCod40
+  },
+  avatar: {
+
   }
 }
