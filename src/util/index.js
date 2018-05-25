@@ -48,7 +48,11 @@ export function propsChanged (props, nextProps) {
   const isDiff = some(nextProps, (value, key) => !eq(props[key], value))
 
   // For Debugging differences
-  // if (isDiff) console.log(`***** CHANGED PROPS ******`, omitBy(nextProps, (value, key) => eq(props[key], value)))
+  // if (isDiff) console.log(`***** DID CHANGED PROPS ******`, omitBy(nextProps, (value, key) => eq(props[key], value)))
 
   return isDiff
+}
+
+export function whatPropsChanged (props, prevProps) {
+  console.log(`***** WHAT PROPS CHANGED ******`, omitBy(props, (value, key) => eq(prevProps[key], value)))
 }

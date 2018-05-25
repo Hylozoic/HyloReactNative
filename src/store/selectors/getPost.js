@@ -2,7 +2,6 @@ import { createSelector as ormCreateSelector } from 'redux-orm'
 import orm from '../../store/models'
 import { createSelector } from 'reselect'
 import { get } from 'lodash/fp'
-import { random } from 'lodash'
 
 const getPost = ormCreateSelector(
   orm,
@@ -20,33 +19,16 @@ export const presentPost = (post, communityId) => {
   const pinned = postMembership && postMembership.pinned
   return {
     ...post.ref,
-    creator: post.creator,
+    creator: post.creator.ref,
     linkPreview: post.linkPreview,
-    commenters: post.commenters.toModelArray(),
-    communities: post.communities.toModelArray(),
-    fileAttachments: post.attachments.filter(a => a.type === 'file').toModelArray(),
+    commenters: post.commenters.toRefArray(),
+    communities: post.communities.toRefArray(),
+    fileAttachments: post.attachments.filter(a => a.type === 'file').toRefArray(),
     fileUrls: post.getFileUrls(),
     imageUrls: post.getImageUrls(),
     pinned,
-    topics: post.topics.toModelArray()
+    topics: post.topics.toRefArray()
   }
-}
-
-// Factory method so each instance can have its own selector, thus allowing shared selectors across multiple components.
-// @see https://github.com/reduxjs/reselect#sharing-selectors-with-props-across-multiple-component-instances
-export const makeGetPresentedPost = () => {
-  const _getPost = ormCreateSelector(
-    orm,
-    state => state.orm,
-    (state, props) => props.id,
-    ({ Post }, id) => Post.safeGet({id})
-  )
-
-  return createSelector(
-    _getPost,
-    (state, props) => props.communityId,
-    (post, communityId) => presentPost(post, communityId)
-  )
 }
 
 export const getPresentedPost = createSelector(

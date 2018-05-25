@@ -16,14 +16,18 @@ export default class PostCard extends React.PureComponent {
     post: shape({
       id: any,
       type: string,
-      creator: object,
       imageUrl: string,
       name: string,
       details: string,
-      commenters: array,
       upVotes: string,
       updatedAt: string
     }),
+    creator: object,
+    isPinned: bool,
+    commenters: array,
+    communities: array,
+    imageUrls: array,
+    topics: array,
     currentUser: shape({
       id: any,
       name: string,
@@ -43,6 +47,12 @@ export default class PostCard extends React.PureComponent {
   render () {
     const {
       post,
+      creator,
+      commenters,
+      communities,
+      imageUrls,
+      isPinned,
+      topics,
       currentUser,
       showMember,
       showTopic,
@@ -50,20 +60,20 @@ export default class PostCard extends React.PureComponent {
       selectedNetworkId
     } = this.props
 
-    const slug = get('0.slug', post.communities)
+    const slug = get('0.slug', communities)
     return <View style={styles.container}>
-      <PostHeader creator={post.creator}
+      <PostHeader creator={creator}
         date={post.createdAt}
         type={post.type}
-        topics={post.topics}
+        topics={topics}
         slug={slug}
-        pinned={post.pinned}
+        pinned={isPinned}
         postId={post.id}
         showMember={showMember}
         showTopic={showTopic}
         announcement={post.announcement}
       />
-      <PostImage imageUrls={post.imageUrls} />
+      <PostImage imageUrls={imageUrls} />
       <PostBody
         title={post.title}
         details={post.details}
@@ -73,13 +83,13 @@ export default class PostCard extends React.PureComponent {
         showTopic={showTopic}
         shouldTruncate />
       <PostCommunities
-        communities={post.communities}
+        communities={communities}
         slug={slug}
         selectedNetworkId={selectedNetworkId}
         goToCommunity={goToCommunity} />
       <PostFooter id={post.id}
         currentUser={currentUser}
-        commenters={post.commenters}
+        commenters={commenters}
         commentsTotal={post.commentsTotal}
         votesTotal={post.votesTotal}
         myVote={post.myVote} />

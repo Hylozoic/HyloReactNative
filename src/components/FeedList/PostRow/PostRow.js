@@ -9,7 +9,7 @@ export default class PostRow extends React.PureComponent {
 
   render () {
     const {
-      post, showMember, showTopic, goToCommunity, selectedNetworkId
+      post, commenters, communities, creator, topics, imageUrls, isPinned, showMember, showTopic, goToCommunity, selectedNetworkId
     } = this.props
 
     if (!post) return null
@@ -18,6 +18,12 @@ export default class PostRow extends React.PureComponent {
       <TouchableOpacity delayPressIn={50} activeOpacity={0.6} onPress={this.showPost}>
         <View>
           <PostCard post={post}
+            commenters={commenters}
+            communities={communities}
+            topics={topics}
+            creator={creator}
+            imageUrls={imageUrls}
+            isPinned={isPinned}
             showMember={showMember}
             selectedNetworkId={selectedNetworkId}
             showTopic={showTopic}
