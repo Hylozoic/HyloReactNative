@@ -21,21 +21,26 @@ export default class PostHeader extends React.PureComponent {
     this.props.editPost(this.props.postId)
   }
 
+  showMember = () => this.props.showMember(this.props.creator.id)
+
+  topicKeyExtractor = (item) => item.id
+  renderTopic = ({item}) => <TouchableOpacity onPress={() => this.props.showTopic(item.name)}>
+    <Text style={styles.topicLabel}>#{item.name}</Text>
+  </TouchableOpacity>
+
   render () {
     const {
-      creator: {avatarUrl, name, tagline, id},
+      creator: {avatarUrl, name, tagline},
       date,
       type,
       postId,
       slug,
-      showMember,
       canFlag,
       removePost,
       deletePost,
       pinned,
       pinPost,
       topics,
-      showTopic,
       announcement,
       canEdit
     } = this.props
@@ -75,12 +80,12 @@ export default class PostHeader extends React.PureComponent {
 
     return <View style={styles.container}>
       <View style={styles.avatarSpacing}>
-        <TouchableOpacity onPress={() => showMember(id)}>
+        <TouchableOpacity onPress={this.showMember}>
           {avatarUrl && <Avatar avatarUrl={avatarUrl} />}
         </TouchableOpacity>
       </View>
       <View style={styles.meta}>
-        <TouchableOpacity onPress={() => showMember(id)}>
+        <TouchableOpacity onPress={this.showMember}>
           {name && <Text style={styles.username}>{name}</Text>}
           {!!tagline && <Text style={styles.metaText}>{tagline}</Text>}
         </TouchableOpacity>
@@ -90,11 +95,9 @@ export default class PostHeader extends React.PureComponent {
             data={topics}
             style={styles.topicList}
             horizontal
-            keyExtractor={(item, index) => item.id}
+            keyExtractor={this.topicKeyExtractor}
             showsHorizontalScrollIndicator={false}
-            renderItem={({item}) => <TouchableOpacity onPress={() => showTopic(item.name)}>
-              <Text style={styles.topicLabel}>#{item.name}</Text>
-            </TouchableOpacity>} />}
+            renderItem={this.renderTopic} />}
         </View>
       </View>
       <View style={styles.upperRight}>

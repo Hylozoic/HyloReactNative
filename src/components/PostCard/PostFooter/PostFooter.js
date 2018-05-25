@@ -6,7 +6,7 @@ import Icon from '../../Icon'
 import {
   caribbeanGreen, rhino30, rhino80, slateGrey80
 } from '../../../style/colors'
-import { string, array, number, func, object } from 'prop-types'
+import { string, array, number, func } from 'prop-types'
 
 export default class PostFooter extends React.PureComponent {
   static propTypes = {
@@ -14,8 +14,7 @@ export default class PostFooter extends React.PureComponent {
     commenters: array,
     commentersTotal: number,
     votesTotal: number,
-    vote: func,
-    currentUser: object
+    vote: func
   }
 
   render () {

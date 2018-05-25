@@ -9,7 +9,8 @@ export default class PostRow extends React.PureComponent {
 
   render () {
     const {
-      post, commenters, communities, creator, topics, imageUrls, isPinned, showMember, showTopic, goToCommunity, selectedNetworkId
+      post, commenters, communities, creator, topics, imageUrls, isPinned,
+      showMember, showTopic, goToCommunity, selectedNetworkId
     } = this.props
 
     if (!post) return null
@@ -24,8 +25,8 @@ export default class PostRow extends React.PureComponent {
             creator={creator}
             imageUrls={imageUrls}
             isPinned={isPinned}
-            showMember={showMember}
             selectedNetworkId={selectedNetworkId}
+            showMember={showMember}
             showTopic={showTopic}
             goToCommunity={goToCommunity} />
         </View>

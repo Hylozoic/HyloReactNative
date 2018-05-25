@@ -20,7 +20,8 @@ export default class PostCard extends React.PureComponent {
       name: string,
       details: string,
       upVotes: string,
-      updatedAt: string
+      updatedAt: string,
+      linkPreview: object
     }),
     creator: object,
     isPinned: bool,
@@ -28,11 +29,6 @@ export default class PostCard extends React.PureComponent {
     communities: array,
     imageUrls: array,
     topics: array,
-    currentUser: shape({
-      id: any,
-      name: string,
-      avatarUrl: string
-    }),
     fetchPost: func,
     expanded: bool,
     showDetails: func,
@@ -53,7 +49,6 @@ export default class PostCard extends React.PureComponent {
       imageUrls,
       isPinned,
       topics,
-      currentUser,
       showMember,
       showTopic,
       goToCommunity,
@@ -88,7 +83,6 @@ export default class PostCard extends React.PureComponent {
         selectedNetworkId={selectedNetworkId}
         goToCommunity={goToCommunity} />
       <PostFooter id={post.id}
-        currentUser={currentUser}
         commenters={commenters}
         commentsTotal={post.commentsTotal}
         votesTotal={post.votesTotal}
