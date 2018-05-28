@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mapDispatchToProps maps the action generators 1`] = `
+Object {
+  "fetchMemberComments": [Function],
+  "fetchMemberPosts": [Function],
+  "fetchMemberUpvotes": [Function],
+  "setChoice": [Function],
+  "showPost": [Function],
+}
+`;
+
+exports[`mapDispatchToProps maps the action generators 2`] = `undefined`;

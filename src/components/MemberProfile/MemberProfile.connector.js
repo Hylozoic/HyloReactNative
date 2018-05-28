@@ -19,6 +19,7 @@ export function mapStateToProps (state, props) {
   const currentUser = getMe(state, props)
   const skills = getSkills(state, props)
   const isMe = Number(get('id', currentUser)) === Number(id)
+  const navigation = props.navigation
 
   return {
     id,
@@ -29,7 +30,8 @@ export function mapStateToProps (state, props) {
     goToDetails,
     goToEdit,
     goToSkills,
-    isMe
+    isMe,
+    navigation
   }
 }
 
