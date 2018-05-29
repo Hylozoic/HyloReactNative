@@ -1,11 +1,12 @@
 import React from 'react'
-import { View, ScrollView, Text, TextInput, FlatList } from 'react-native'
+import { View, ScrollView, Text, TextInput, FlatList, TouchableOpacity } from 'react-native'
 import Loading from '../Loading'
 import Avatar from '../Avatar'
 import KeyboardFriendlyView from '../KeyboardFriendlyView'
 import styles from './SearchPage.styles'
 import header from 'util/header'
 import Icon from '../Icon'
+import UnwrappedPostCard from '../PostCard'
 
 export default class SearchPage extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -104,12 +105,19 @@ export function PersonCard ({ person }) {
   </View>
 }
 
-export function PostCard ({ post }) {
-  return <View>
-    <Text>
-      This is a post titled: {post.title}
-    </Text>
-  </View>
+export function PostCard ({ post, goToPost }) {
+  const goToThisPost = () => goToPost(post.id)
+  return <TouchableOpacity onPress={goToThisPost}>
+    <View style={styles.postWrapper}>
+      <UnwrappedPostCard
+        showDetails={goToThisPost}
+        showMember={goToThisPost}
+        goToCommunity={goToThisPost}
+        post={post}
+        hideMenu
+        hideDetails />
+    </View>
+  </TouchableOpacity>
 }
 
 export function CommentCard ({ comment }) {

@@ -41,8 +41,8 @@ export default {
     height: 60,
     alignItems: 'center',
     marginHorizontal: cardMargin,
+    marginBottom: cardMargin,
     paddingHorizontal: cardPadding,
-    // paddingVertical: 12,
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: capeCod40
   },
@@ -60,5 +60,9 @@ export default {
   location: {
     color: rhino60,
     fontSize: 12
+  },
+  postWrapper: {
+    marginHorizontal: cardMargin,
+    marginBottom: cardMargin
   }
 }

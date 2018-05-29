@@ -16,7 +16,8 @@ export default function PostBody ({
   slug,
   showMember,
   showTopic,
-  shouldTruncate
+  shouldTruncate,
+  hideDetails
 }) {
   const decodedTitle = decode(title)
   const presentedDetails = present(
@@ -26,12 +27,12 @@ export default function PostBody ({
 
   return <View style={styles.container}>
     <Text style={styles.title}>{decodedTitle}</Text>
-    <HTMLView
+    {!hideDetails && <HTMLView
       onLinkPress={url => urlHandler(url, showMember, showTopic, slug)}
       addLineBreaks={false}
       stylesheet={richTextStyles}
       textComponentProps={{ style: styles.details }}
-      value={presentedDetails} />
+      value={presentedDetails} />}
     {linkPreview && <LinkPreview {...linkPreview} />}
   </View>
 }

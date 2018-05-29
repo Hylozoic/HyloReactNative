@@ -44,11 +44,12 @@ export default class PostCard extends React.PureComponent {
   render () {
     const {
       post,
-      showCommunity,
       currentUser,
       showMember,
       showTopic,
-      goToCommunity
+      goToCommunity,
+      hideMenu,
+      hideDetails
     } = this.props
 
     const slug = get('0.slug', post.communities)
@@ -56,7 +57,6 @@ export default class PostCard extends React.PureComponent {
       <PostHeader creator={post.creator}
         date={post.createdAt}
         type={post.type}
-        showCommunity={showCommunity}
         topics={post.topics}
         communities={post.communities}
         slug={slug}
@@ -66,6 +66,7 @@ export default class PostCard extends React.PureComponent {
         showTopic={showTopic}
         goToCommunity={goToCommunity}
         announcement={post.announcement}
+        hideMenu={hideMenu}
       />
       <PostImage postId={post.id} />
       <PostBody
@@ -75,7 +76,8 @@ export default class PostCard extends React.PureComponent {
         slug={slug}
         showMember={showMember}
         showTopic={showTopic}
-        shouldTruncate />
+        shouldTruncate
+        hideDetails={hideDetails} />
       <PostCommunities
         communities={post.communities}
         slug={slug}

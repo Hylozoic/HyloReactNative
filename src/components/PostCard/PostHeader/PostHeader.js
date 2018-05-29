@@ -28,8 +28,6 @@ export default class PostHeader extends PureComponent {
       type,
       postId,
       slug,
-      editPost,
-      showCommunity,
       showMember,
       canFlag,
       removePost,
@@ -39,7 +37,8 @@ export default class PostHeader extends PureComponent {
       topics,
       showTopic,
       announcement,
-      canEdit
+      canEdit,
+      hideMenu
     } = this.props
     const { flaggingVisible } = this.state
 
@@ -103,13 +102,13 @@ export default class PostHeader extends PureComponent {
         {pinned && <Icon name='Pin' style={styles.pinIcon} />}
         {announcement && <Icon name='Announcement' style={styles.announcementIcon} />}
         {type && <PostLabel type={type} />}
-        <PostMenu
+        {!hideMenu && <PostMenu
           removePost={removePostWithConfirm}
           deletePost={deletePostWithConfirm}
           editPost={canEdit && this.handleEditPost}
           flagPost={flagPost}
           pinPost={pinPost}
-          pinned={pinned} />
+          pinned={pinned} />}
         {flaggingVisible && <FlagContent type='post'
           linkData={linkData}
           onClose={() => this.setState({flaggingVisible: false})} />
