@@ -21,7 +21,16 @@ export default class MemberFeed extends React.Component {
   }
 
   render () {
-    const { items, itemType, choice, setChoice, header, fetchMoreItems, pending } = this.props
+    const {
+      items,
+      itemType,
+      choice,
+      setChoice,
+      header,
+      fetchMoreItems,
+      pending,
+      showPost
+    } = this.props
 
     const listHeaderComponent = <View>
       {header}
@@ -32,7 +41,7 @@ export default class MemberFeed extends React.Component {
             option={option}
             chosen={option === choice}
             onPress={() => setChoice(option)}
-            />)}
+          />)}
       </View>
     </View>
 
@@ -42,7 +51,7 @@ export default class MemberFeed extends React.Component {
 
     return <View style={styles.superContainer}><FlatList
       data={items}
-      renderItem={({ item }) => <ContentRow item={item} itemType={itemType} />}
+      renderItem={({ item }) => <ContentRow item={item} itemType={itemType} showPost={showPost} />}
       keyExtractor={item => item.id}
       onEndReached={fetchMoreItems}
       ListHeaderComponent={listHeaderComponent}
@@ -52,16 +61,18 @@ export default class MemberFeed extends React.Component {
   }
 }
 
-export function ContentRow ({ item, itemType }) {
+export function ContentRow ({ item, itemType, showPost }) {
   var content
   if (itemType === 'post') {
     content = <PostCard post={item} />
   } else {
     content = <Comment comment={item} displayPostTitle />
   }
-  return <View style={styles.contentRow}>
-    {content}
-  </View>
+  return <TouchableOpacity onPress={() => showPost(item.id)}>
+    <View style={styles.contentRow}>
+      {content}
+    </View>
+  </TouchableOpacity>
 }
 
 export function FeedTab ({ option, chosen, onPress }) {
