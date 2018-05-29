@@ -18,38 +18,31 @@ Object {
   "post": Object {
     "commenters": Array [],
     "communities": Array [
-      SessionBoundModel {
-        "_fields": Object {
-          "id": "2",
-          "members": undefined,
-          "moderators": undefined,
-          "name": "Home",
-          "posts": undefined,
-        },
+      Object {
+        "id": "2",
+        "name": "Home",
       },
     ],
-    "creator": undefined,
+    "creator": Object {
+      "id": "10",
+    },
     "fileAttachments": Array [
-      SessionBoundModel {
-        "_fields": Object {
-          "id": "1",
-          "post": "1",
-          "type": "file",
-          "url": "http://foo.com/foo.pdf",
-        },
+      Object {
+        "id": "1",
+        "post": "1",
+        "type": "file",
+        "url": "http://foo.com/foo.pdf",
       },
     ],
     "fileUrls": Array [
       "http://foo.com/foo.pdf",
     ],
-    "followers": undefined,
     "id": "1",
     "imageUrls": Array [
       "http://foo.com/bar.png",
     ],
     "linkPreview": undefined,
     "pinned": undefined,
-    "postMemberships": undefined,
     "topics": Array [],
   },
 }

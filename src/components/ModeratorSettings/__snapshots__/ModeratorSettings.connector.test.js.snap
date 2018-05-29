@@ -125,9 +125,6 @@ Object {
   "community": SessionBoundModel {
     "_fields": Object {
       "id": "99",
-      "members": undefined,
-      "moderators": undefined,
-      "posts": undefined,
       "slug": "foo",
     },
     "slug": "foo",
@@ -135,10 +132,6 @@ Object {
   "currentUser": SessionBoundModel {
     "_fields": Object {
       "id": "1",
-      "messageThreads": undefined,
-      "notifications": undefined,
-      "posts": undefined,
-      "skills": undefined,
     },
     "id": "1",
   },
@@ -147,15 +140,11 @@ Object {
     SessionBoundModel {
       "_fields": Object {
         "id": "1",
-        "memberships": undefined,
-        "skills": undefined,
       },
     },
     SessionBoundModel {
       "_fields": Object {
         "id": "2",
-        "memberships": undefined,
-        "skills": undefined,
       },
     },
   ],
@@ -287,9 +276,6 @@ Object {
   "community": SessionBoundModel {
     "_fields": Object {
       "id": "99",
-      "members": undefined,
-      "moderators": undefined,
-      "posts": undefined,
       "slug": "foo",
     },
     "slug": "foo",
@@ -297,10 +283,6 @@ Object {
   "currentUser": SessionBoundModel {
     "_fields": Object {
       "id": "1",
-      "messageThreads": undefined,
-      "notifications": undefined,
-      "posts": undefined,
-      "skills": undefined,
     },
     "id": "1",
   },
@@ -313,15 +295,11 @@ Object {
     SessionBoundModel {
       "_fields": Object {
         "id": "1",
-        "memberships": undefined,
-        "skills": undefined,
       },
     },
     SessionBoundModel {
       "_fields": Object {
         "id": "2",
-        "memberships": undefined,
-        "skills": undefined,
       },
     },
   ],

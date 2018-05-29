@@ -6,11 +6,6 @@ Object {
   "currentUser": SessionBoundModel {
     "_fields": Object {
       "id": 123,
-      "memberships": undefined,
-      "messageThreads": undefined,
-      "notifications": undefined,
-      "posts": undefined,
-      "skills": undefined,
     },
     "id": 123,
   },
