@@ -1,5 +1,8 @@
 import { StyleSheet } from 'react-native'
-import { capeCod40 } from 'style/colors'
+import { capeCod40, rhino, rhino60 } from 'style/colors'
+
+const cardMargin = 15
+const cardPadding = 10
 
 const row = {
   flexDirection: 'row'
@@ -33,12 +36,29 @@ export default {
   textInput: {
     flex: 1
   },
-  personBar: {
+  personCard: {
     ...row,
+    height: 60,
+    alignItems: 'center',
+    marginHorizontal: cardMargin,
+    paddingHorizontal: cardPadding,
+    // paddingVertical: 12,
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: capeCod40
   },
   avatar: {
-
+    marginRight: 8
+  },
+  nameAndLocation: {
+    justifyContent: 'space-between'
+  },
+  name: {
+    color: rhino,
+    fontSize: 16,
+    paddingBottom: 4
+  },
+  location: {
+    color: rhino60,
+    fontSize: 12
   }
 }

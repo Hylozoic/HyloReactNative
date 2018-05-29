@@ -97,7 +97,7 @@ export function PersonCard ({ person }) {
   const { avatarUrl, name, location } = person
   return <View style={styles.personCard}>
     <Avatar avatarUrl={avatarUrl} style={styles.avatar} />
-    <View>
+    <View style={styles.nameAndLocation}>
       <Text style={styles.name}>{name}</Text>
       {location && <Text style={styles.location}>{location}</Text>}
     </View>
