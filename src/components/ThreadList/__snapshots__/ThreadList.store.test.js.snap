@@ -38,15 +38,11 @@ Array [
     "participants": Array [
       Object {
         "id": 2,
-        "memberships": undefined,
         "name": "Second Person",
-        "skills": undefined,
       },
       Object {
         "id": 3,
-        "memberships": undefined,
         "name": "Third Person",
-        "skills": undefined,
       },
     ],
     "unread": false,
@@ -64,15 +60,11 @@ Array [
     "participants": Array [
       Object {
         "id": 1,
-        "memberships": undefined,
         "name": "First Person",
-        "skills": undefined,
       },
       Object {
         "id": 2,
-        "memberships": undefined,
         "name": "Second Person",
-        "skills": undefined,
       },
     ],
     "unread": false,

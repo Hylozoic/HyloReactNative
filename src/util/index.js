@@ -2,7 +2,7 @@
  * @providesModule util/index
  */
 
-import { last } from 'lodash'
+import { last, some, eq, omitBy } from 'lodash'
 
 export function isPromise (value) {
   return value && typeof value.then === 'function'
@@ -33,4 +33,26 @@ export function noncircular (obj) {
 
 export function basename (url) {
   return last(url.split('/'))
+}
+
+/**
+ * Useful for testing if props have changed in React.Components shouldComponentUpdate
+ * method.  You should use React.PureComponent if possible, but if you can't (like if you want to
+ * use react-navigations nextProps.isFocused, you can use this to prevent further updates.
+ *
+ * @param props
+ * @param nextProps
+ * @returns {*}
+ */
+export function propsChanged (props, nextProps) {
+  const isDiff = some(nextProps, (value, key) => !eq(props[key], value))
+
+  // For Debugging differences
+  // if (isDiff) console.log(`***** DID CHANGED PROPS ******`, omitBy(nextProps, (value, key) => eq(props[key], value)))
+
+  return isDiff
+}
+
+export function whatPropsChanged (props, prevProps, componentName = '') {
+  console.log(`***** WHAT PROPS CHANGED ${componentName} ******`, omitBy(props, (value, key) => eq(prevProps[key], value)))
 }

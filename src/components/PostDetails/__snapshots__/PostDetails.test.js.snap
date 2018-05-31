@@ -166,9 +166,13 @@ exports[`PostDetails renders correctly 1`] = `
           }
           type="request"
         />
-        <Connect(PostImage)
+        <PostImage
+          imageUrls={
+            Array [
+              "foom.png",
+            ]
+          }
           linked={true}
-          postId="91"
         />
         <PostBody
           details="Lo"
@@ -182,7 +186,7 @@ exports[`PostDetails renders correctly 1`] = `
           slug="foom"
           title="Hi"
         />
-        <PostCommunities
+        <Connect(PostCommunities)
           communities={
             Array [
               Object {

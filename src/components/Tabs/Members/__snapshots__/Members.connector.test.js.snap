@@ -33,9 +33,6 @@ Object {
   "community": SessionBoundModel {
     "_fields": Object {
       "id": 10,
-      "members": undefined,
-      "moderators": undefined,
-      "posts": undefined,
       "slug": "tom",
     },
     "slug": "tom",
@@ -43,10 +40,6 @@ Object {
   "currentUser": SessionBoundModel {
     "_fields": Object {
       "id": 123,
-      "messageThreads": undefined,
-      "notifications": undefined,
-      "posts": undefined,
-      "skills": undefined,
     },
     "id": 123,
   },

@@ -18,9 +18,10 @@ describe('PostEditor mapStateToProps', () => {
         community: community1.id,
         hasModeratorRole: true
       })]})
+    session.Person.create({id: '10'})
 
     community2 = session.Community.create({id: '8'})
-    session.Post.create({id: '1', communities: [community1.id, '8']})
+    session.Post.create({id: '1', communities: [community1.id, '8'], creator: '10'})
     session.Attachment.create({
       id: '2', post: '1', type: 'image', url: 'foo.png', position: 1
     })

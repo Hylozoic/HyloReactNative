@@ -1,10 +1,10 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Modal, Text, TouchableOpacity, View, FlatList } from 'react-native'
 import Icon from '../Icon'
 import { toUpper, isEmpty, trim } from 'lodash'
 import prompt from 'react-native-prompt-android'
 
-export default class FlagContent extends Component {
+export default class FlagContent extends React.PureComponent {
   state = {
     promptVisible: false,
     highlightRequired: false

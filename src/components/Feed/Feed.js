@@ -7,6 +7,7 @@ import FeedList from '../FeedList'
 import FeedBanner from '../FeedBanner'
 import SocketSubscriber from '../SocketSubscriber'
 import styles from './Feed.styles'
+import { propsChanged } from 'util/index'
 
 export default class Feed extends React.Component {
   state = {showNotification: false}
@@ -27,22 +28,23 @@ export default class Feed extends React.Component {
   }
 
   shouldComponentUpdate (nextProps) {
-    return nextProps.isFocused
+    return nextProps.isFocused && propsChanged(this.props, nextProps)
   }
+
+  handleShowTopic = (...args) => this.props.showTopic(...args)
+  handleShowMember = (...args) => this.props.showMember(...args)
+  handleGoToCommunity = (...args) => this.props.goToCommunity(...args)
+  handleSetTopicSubscribe = (...args) => this.props.handleSetTopicSubscribe(...args)
 
   render () {
     const {
       community,
       network,
       currentUser,
-      goToCommunity,
       navigation,
       newPost,
-      showMember,
       showPost,
-      showTopic,
       screenProps,
-      setTopicSubscribe,
       topicName,
       topicSubscribed,
       postsTotal,
@@ -61,7 +63,7 @@ export default class Feed extends React.Component {
         community={community}
         network={network}
         showPost={showPost}
-        goToCommunity={goToCommunity}
+        goToCommunity={this.handleGoToCommunity}
         header={
           <FeedBanner
             community={community}
@@ -73,12 +75,11 @@ export default class Feed extends React.Component {
             postsTotal={postsTotal}
             followersTotal={followersTotal}
             topicSubscribed={topicSubscribed}
-            setTopicSubscribe={setTopicSubscribe} />}
+            setTopicSubscribe={this.handleSetTopicSubscribe} />}
         navigation={navigation}
         screenProps={screenProps}
-        showCommunities={!community}
-        showMember={showMember}
-        showTopic={showTopic}
+        showMember={this.handleShowMember}
+        showTopic={this.handleShowTopic}
         topicName={topicName} />
       {!topicName && community && <SocketSubscriber type='community' id={community.id} />}
     </View>

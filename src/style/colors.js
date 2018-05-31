@@ -54,6 +54,13 @@ export const white60onCaribbeanGreen = fakeAlpha('#FFFFFF', 0.6, caribbeanGreen)
 export const white40onCaribbeanGreen = fakeAlpha('#FFFFFF', 0.4, caribbeanGreen)
 export const black10OnCaribbeanGreen = fakeAlpha('#000000', 0.1, caribbeanGreen)
 
+export const bannerlinearGradientColors = [
+  'rgba(0, 0, 0, 0)',
+  'rgba(0, 0, 0, 0.1)',
+  'rgba(0, 0, 0, 0.3)',
+  'rgba(0, 0, 0, 0.6)'
+]
+
 export function fakeAlpha (color, alpha, background = '#ffffff') {
   const fg = tinycolor(color).toRgb()
   const bg = tinycolor(background).toRgb()

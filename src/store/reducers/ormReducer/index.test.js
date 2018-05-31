@@ -111,6 +111,10 @@ it('handles CREATE_COMMENT', () => {
   session.Post.create({
     id: '10'
   })
+  session.Me.create({
+    id: '3322'
+  })
+  session.Person.create({id: '3322'})
 
   const action = {
     type: CREATE_COMMENT,
@@ -122,6 +126,7 @@ it('handles CREATE_COMMENT', () => {
   const newState = ormReducer(session.state, action)
   const newSession = orm.session(newState)
   expect(newSession.Post.withId('10').commentsTotal).toEqual(1)
+  expect(newSession.Post.withId('10').commenters.toRefArray()).toEqual([{id: '3322'}])
 })
 
 it('handles SET_TOPIC_SUBSCRIBE_PENDING', () => {

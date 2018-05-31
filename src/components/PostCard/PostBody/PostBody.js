@@ -9,31 +9,38 @@ import richTextStyles from '../../../style/richTextStyles'
 
 const MAX_DETAILS_LENGTH = 144
 
-export default function PostBody ({
-  title,
-  details,
-  linkPreview,
-  slug,
-  showMember,
-  showTopic,
-  shouldTruncate,
-  hideDetails
-}) {
-  const presentedDetails = present(
-    sanitize(details).replace(/\n/g, '').replace('<p>&nbsp;</p>', ''),
-    {slug, maxlength: shouldTruncate && MAX_DETAILS_LENGTH}
-  )
+export default class PostBody extends React.PureComponent {
+  handleLinkPress = (url) => {
+    const { slug, showMember, showTopic } = this.props
+    urlHandler(url, showMember, showTopic, slug)
+  }
 
-  return <View style={styles.container}>
-    <PostTitle title={title} />
-    {!hideDetails && <HTMLView
-      onLinkPress={url => urlHandler(url, showMember, showTopic, slug)}
-      addLineBreaks={false}
-      stylesheet={richTextStyles}
-      textComponentProps={{ style: styles.details }}
-      value={presentedDetails} />}
-    {linkPreview && <LinkPreview {...linkPreview} />}
-  </View>
+  render () {
+    const {
+      title,
+      details,
+      linkPreview,
+      slug,
+      shouldTruncate
+    } = this.props
+
+    const decodedTitle = decode(title)
+    const presentedDetails = present(
+      sanitize(details).replace(/\n/g, '').replace('<p>&nbsp;</p>', ''),
+      {slug, maxlength: shouldTruncate && MAX_DETAILS_LENGTH}
+    )
+
+    return <View style={styles.container}>
+      <PostTitle title={decodedTitle} />
+      <HTMLView
+        onLinkPress={this.handleLinkPress}
+        addLineBreaks={false}
+        stylesheet={richTextStyles}
+        textComponentProps={{ style: styles.details }}
+        value={presentedDetails} />
+      {linkPreview && <LinkPreview {...linkPreview} />}
+    </View>
+  }
 }
 
 export function PostTitle ({ title, style }) {

@@ -7,9 +7,6 @@ Object {
   "community": SessionBoundModel {
     "_fields": Object {
       "id": "7",
-      "members": undefined,
-      "moderators": undefined,
-      "posts": undefined,
     },
   },
   "receiveComment": [Function],

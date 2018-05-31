@@ -3,18 +3,8 @@
 exports[`FeedList renders correctly 1`] = `
 <View>
   <FlatList
-    ListFooterComponent={<Loading />}
-    ListHeaderComponent={
-      <View>
-        <ListControls
-          filter="all"
-          pending={true}
-          setFilter={[Function]}
-          setSort={[Function]}
-          sortBy="latest"
-        />
-      </View>
-    }
+    ListFooterComponent={[Function]}
+    ListHeaderComponent={[Function]}
     data={
       Array [
         1,
@@ -23,6 +13,7 @@ exports[`FeedList renders correctly 1`] = `
       ]
     }
     disableVirtualization={false}
+    extraData={true}
     horizontal={false}
     initialNumToRender={10}
     keyExtractor={[Function]}
@@ -118,67 +109,5 @@ exports[`ListControls renders correctly 1`] = `
     }
     selected="latest"
   />
-</View>
-`;
-
-exports[`PostRow only displays communities in the selected network 1`] = `
-<View>
-  <TouchableOpacity
-    activeOpacity={0.6}
-    delayPressIn={50}
-    onPress={[Function]}
-  >
-    <View>
-      <PostCard
-        goToCommunity={[Function]}
-        post={
-          Object {
-            "communities": Array [
-              Object {
-                "name": "community1",
-                "network": Object {
-                  "id": 1,
-                },
-              },
-              Object {
-                "name": "community3",
-                "network": Object {
-                  "id": 1,
-                },
-              },
-            ],
-            "id": 1,
-          }
-        }
-        showCommunity={undefined}
-        showMember={undefined}
-        showTopic={undefined}
-      />
-    </View>
-  </TouchableOpacity>
-</View>
-`;
-
-exports[`PostRow renders correctly 1`] = `
-<View>
-  <TouchableOpacity
-    activeOpacity={0.6}
-    delayPressIn={50}
-    onPress={[Function]}
-  >
-    <View>
-      <PostCard
-        goToCommunity={[Function]}
-        post={
-          Object {
-            "id": 1,
-          }
-        }
-        showCommunity={undefined}
-        showMember={undefined}
-        showTopic={undefined}
-      />
-    </View>
-  </TouchableOpacity>
 </View>
 `;

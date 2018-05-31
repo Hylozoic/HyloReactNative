@@ -2,6 +2,7 @@
 
 exports[`renders correctly with all=true, and no community or user 1`] = `
 <Icon
+  color="#929292"
   name="Home"
   size={28}
 />
