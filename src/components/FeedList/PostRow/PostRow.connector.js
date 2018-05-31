@@ -9,7 +9,7 @@ import {
   makeGetPostIsPinned
 } from './PostRow.store'
 
-const makeMapStateToProps = () => {
+export const makeMapStateToProps = () => {
   const getPost = makeGetPost()
   const getPostCommenters = makeGetPostCommenters()
   const getPostCommunities = makeGetPostCommunities()
