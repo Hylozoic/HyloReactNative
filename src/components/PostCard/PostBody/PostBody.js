@@ -19,14 +19,13 @@ export default function PostBody ({
   shouldTruncate,
   hideDetails
 }) {
-  const decodedTitle = decode(title)
   const presentedDetails = present(
     sanitize(details).replace(/\n/g, '').replace('<p>&nbsp;</p>', ''),
     {slug, maxlength: shouldTruncate && MAX_DETAILS_LENGTH}
   )
 
   return <View style={styles.container}>
-    <Text style={styles.title}>{decodedTitle}</Text>
+    <PostTitle title={title} />
     {!hideDetails && <HTMLView
       onLinkPress={url => urlHandler(url, showMember, showTopic, slug)}
       addLineBreaks={false}
@@ -35,6 +34,11 @@ export default function PostBody ({
       value={presentedDetails} />}
     {linkPreview && <LinkPreview {...linkPreview} />}
   </View>
+}
+
+export function PostTitle ({ title, style }) {
+  const decodedTitle = decode(title)
+  return <Text style={[styles.title, style]}>{decodedTitle}</Text>
 }
 
 const styles = StyleSheet.create({

@@ -7,6 +7,9 @@ import styles from './SearchPage.styles'
 import header from 'util/header'
 import Icon from '../Icon'
 import UnwrappedPostCard from '../PostCard'
+import PostHeader from '../PostCard/PostHeader'
+import { PostTitle } from '../PostCard/PostBody/PostBody'
+import UnwrappedCommentCard from '../Comment'
 
 export default class SearchPage extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -120,10 +123,28 @@ export function PostCard ({ post, goToPost }) {
   </TouchableOpacity>
 }
 
-export function CommentCard ({ comment }) {
-  return <View>
-    <Text>
-      This is a comment: {comment.text}, on post: {comment.post.title}, by {comment.creator.name}
-    </Text>
+export function CommentCard ({ comment, goToPost }) {
+  const { post } = comment
+  const goToThisPost = () => goToPost(post.id)
+
+  return <View style={styles.commentWrapper}>
+    <PostHeader creator={post.creator}
+      date={post.createdAt}
+      type={post.type}
+      topics={post.topics}
+      communities={post.communities}
+      pinned={post.pinned}
+      postId={post.id}
+      showMember={goToThisPost}
+      showTopic={goToThisPost}
+      goToCommunity={goToThisPost}
+      announcement={post.announcement}
+      hideMenu
+      smallAvatar />
+    <PostTitle title={post.title} style={styles.postTitle} />
+    <UnwrappedCommentCard
+      comment={comment}
+      showMember={goToThisPost}
+      showTopic={goToThisPost} />
   </View>
 }

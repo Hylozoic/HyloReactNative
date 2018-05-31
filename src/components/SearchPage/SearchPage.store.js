@@ -12,7 +12,7 @@ export const SET_SEARCH_FILTER = `${MODULE_NAME}/SET_SEARCH_FILTER`
 export const FETCH_SEARCH = `${MODULE_NAME}/FETCH_SEARCH`
 
 const defaultState = {
-  search: 'tre',
+  search: 'trello',
   filter: 'all'
 }
 
@@ -97,6 +97,12 @@ export function fetchSearchResults ({search, offset = 0, filter}) {
                 post {
                   id
                   title
+                  type
+                  creator {
+                    id
+                    name
+                    avatarUrl
+                  }
                 }
                 attachments {
                   id
@@ -166,10 +172,14 @@ export function presentSearchResult (searchResult, session) {
   }
 
   if (type === 'Comment') {
+    const post = {
+      ...content.post.ref,
+      creator: content.post.creator
+    }
     content = {
       ...content.ref,
       creator: content.creator,
-      post: content.post,
+      post,
       image: content.attachments.toModelArray()[0]
     }
   }

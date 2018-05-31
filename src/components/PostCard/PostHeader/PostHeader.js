@@ -38,7 +38,9 @@ export default class PostHeader extends PureComponent {
       showTopic,
       announcement,
       canEdit,
-      hideMenu
+      hideMenu,
+      hideDateRow,
+      smallAvatar
     } = this.props
     const { flaggingVisible } = this.state
 
@@ -77,15 +79,15 @@ export default class PostHeader extends PureComponent {
     return <View style={styles.container}>
       <View style={styles.avatarSpacing}>
         <TouchableOpacity onPress={() => showMember(id)}>
-          {avatarUrl && <Avatar avatarUrl={avatarUrl} />}
+          {avatarUrl && <Avatar avatarUrl={avatarUrl} dimension={smallAvatar && 20} />}
         </TouchableOpacity>
       </View>
       <View style={styles.meta}>
         <TouchableOpacity onPress={() => showMember(id)}>
-          {name && <Text style={styles.username}>{name}</Text>}
+          {name && <Text style={[styles.username, hideDateRow && styles.usernameNudge]}>{name}</Text>}
           {!!tagline && <Text style={styles.metaText}>{tagline}</Text>}
         </TouchableOpacity>
-        <View style={styles.dateRow}>
+        {!hideDateRow && <View style={styles.dateRow}>
           <Text style={styles.metaText}>{humanDate(date)}</Text>
           {!!showTopics && <FlatList
             data={topics}
@@ -96,7 +98,7 @@ export default class PostHeader extends PureComponent {
             renderItem={({item}) => <TouchableOpacity onPress={() => showTopic(item.name)}>
               <Text style={styles.topicLabel}>#{item.name}</Text>
             </TouchableOpacity>} />}
-        </View>
+        </View>}
       </View>
       <View style={styles.upperRight}>
         {pinned && <Icon name='Pin' style={styles.pinIcon} />}
@@ -166,17 +168,24 @@ const styles = {
   meta: {
     paddingTop: 7 + 9,
     paddingRight: 7,
-    flex: 1
+    flex: 1,
+    justifyContent: 'space-around'
   },
   avatarSpacing: {
     paddingTop: 7 + 9,
     paddingLeft: 7 + 5,
     paddingRight: 7
   },
+  avatarNudge: {
+    paddingTop: 18
+  },
   username: {
     fontSize: 14,
     color: '#363D3C',
     fontFamily: 'Circular-Bold'
+  },
+  usernameNudge: {
+    top: 10
   },
   dateRow: {
     flexDirection: 'row',

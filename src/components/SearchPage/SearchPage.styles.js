@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native'
-import { capeCod40, rhino, rhino60 } from 'style/colors'
+import { capeCod40, rhino, rhino60, capeCod10 } from 'style/colors'
 
 const cardMargin = 15
 const cardPadding = 10
@@ -64,5 +64,15 @@ export default {
   postWrapper: {
     marginHorizontal: cardMargin,
     marginBottom: cardMargin
+  },
+  commentWrapper: {
+    marginHorizontal: cardMargin,
+    marginBottom: cardMargin,
+    borderWidth: 1,
+    borderColor: capeCod10,
+    borderRadius: 4
+  },
+  postTitle: {
+    paddingHorizontal: cardPadding
   }
 }
