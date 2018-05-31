@@ -1,4 +1,4 @@
-import { noncircular } from './index'
+import { noncircular, propsChanged } from './index'
 
 describe('noncircular', () => {
   it('works as expected', () => {
@@ -7,5 +7,91 @@ describe('noncircular', () => {
     foo.wow = bar
 
     expect(noncircular(foo)).toMatchSnapshot()
+  })
+})
+
+describe('propsChanged', () => {
+  it('return true for different props', () => {
+    const props = {
+      a: 1,
+      b: 3
+    }
+    const nextProps = {
+      a: 1,
+      b: 2
+    }
+
+    expect(propsChanged(props, nextProps)).toBeTruthy()
+  })
+
+  it('returns false for same props', () => {
+    const obj = { id: 4 }
+    const props = {
+      a: 1,
+      b: 2,
+      c: obj
+    }
+    const nextProps = {
+      a: 1,
+      b: 2,
+      c: obj
+    }
+
+    expect(propsChanged(props, nextProps)).toBeFalsy()
+  })
+
+  it('returns true for same props different object reference', () => {
+    const obj = { id: 4 }
+    const obj2 = { id: 4 }
+    const props = {
+      a: 1,
+      b: 2,
+      c: obj
+    }
+    const nextProps = {
+      a: 1,
+      b: 2,
+      c: obj2
+    }
+
+    expect(propsChanged(props, nextProps)).toBeTruthy()
+  })
+
+  it('return false for same object', () => {
+    const props = {
+      a: 1,
+      b: 3
+    }
+    const nextProps = props
+
+    expect(propsChanged(props, nextProps)).toBeFalsy()
+  })
+
+  it('return true for same props but different keys', () => {
+    const props = {
+      a: 1,
+      b: 2
+    }
+    const nextProps = {
+      a: 1,
+      b: 2,
+      c: 3
+    }
+
+    expect(propsChanged(props, nextProps)).toBeTruthy()
+  })
+
+  it('return true for same props but different keys (inverse)', () => {
+    const props = {
+      a: 1,
+      b: 2,
+      c: 3
+    }
+    const nextProps = {
+      a: 1,
+      b: 2
+    }
+
+    expect(propsChanged(props, nextProps)).toBeTruthy()
   })
 })
