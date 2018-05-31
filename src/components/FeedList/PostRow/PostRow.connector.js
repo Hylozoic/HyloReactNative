@@ -19,14 +19,15 @@ const makeMapStateToProps = () => {
   const getPostIsPinned = makeGetPostIsPinned()
 
   const mapStateToProps = (state, props) => {
+    const post = getPost(state, {id: props.postId})
     return {
-      post: getPost(state, {id: props.postId}),
-      commenters: getPostCommenters(state, {id: props.postId}),
-      communities: getPostCommunities(state, {id: props.postId}),
-      creator: getPostCreator(state, {id: props.postId}),
-      imageUrls: getPostImageUrls(state, {id: props.postId}),
-      topics: getPostTopics(state, {id: props.postId}),
-      isPinned: getPostIsPinned(state, {id: props.postId, communityId: props.communityId})
+      post: post,
+      commenters: post && getPostCommenters(state, {id: props.postId}),
+      communities: post && getPostCommunities(state, {id: props.postId}),
+      creator: post && getPostCreator(state, {id: props.postId}),
+      imageUrls: post && getPostImageUrls(state, {id: props.postId}),
+      topics: post && getPostTopics(state, {id: props.postId}),
+      isPinned: post && getPostIsPinned(state, {id: props.postId, communityId: props.communityId})
     }
   }
   return mapStateToProps

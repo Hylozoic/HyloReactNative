@@ -13,7 +13,10 @@ export const makeGetPost = () => {
     orm,
     state => state.orm,
     (state, props) => props.id,
-    ({ Post }, id) => Post.safeGet({id}).ref
+    ({ Post }, id) => {
+      const post = Post.safeGet({id})
+      return post && post.ref
+    }
   )
   return _getPost
 }
