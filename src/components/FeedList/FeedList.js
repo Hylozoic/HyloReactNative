@@ -9,8 +9,8 @@ import PopupMenuButton from '../PopupMenuButton'
 import { find, get, isEmpty } from 'lodash/fp'
 export default class FeedList extends React.Component {
   fetchOrShowCached () {
-    const { hasMore, posts, fetchPosts, pending } = this.props
-    if (fetchPosts && isEmpty(posts) && hasMore !== false && !pending) {
+    const { hasMore, postIds, fetchPosts, pending } = this.props
+    if (fetchPosts && isEmpty(postIds) && hasMore !== false && !pending) {
       fetchPosts()
     }
   }
