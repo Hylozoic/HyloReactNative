@@ -1,7 +1,7 @@
-import { makeGetQueryResults, makeQueryResultsModelSelector } from '../../store/reducers/queryResults'
+import { makeGetQueryResults } from '../../store/reducers/queryResults'
 import { FETCH_POSTS } from '../../store/actions/fetchPosts'
 import { createSelector } from 'reselect'
-import { get } from 'lodash/fp'
+import { get, isEmpty } from 'lodash/fp'
 
 export const MODULE_NAME = 'FeedList'
 
@@ -60,9 +60,9 @@ export function getSort (state) {
 
 const getPostResults = makeGetQueryResults(FETCH_POSTS)
 
-export const getPosts = makeQueryResultsModelSelector(
+export const getPostIds = createSelector(
   getPostResults,
-  'Post'
+  results => isEmpty(results) ? [] : results.ids
 )
 
 export const getHasMorePosts = createSelector(getPostResults, get('hasMore'))

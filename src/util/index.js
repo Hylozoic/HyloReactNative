@@ -53,6 +53,6 @@ export function propsChanged (props, nextProps) {
   return isDiff
 }
 
-export function whatPropsChanged (props, prevProps) {
-  console.log(`***** WHAT PROPS CHANGED ******`, omitBy(props, (value, key) => eq(prevProps[key], value)))
+export function whatPropsChanged (props, prevProps, componentName = '') {
+  console.log(`***** WHAT PROPS CHANGED ${componentName} ******`, omitBy(props, (value, key) => eq(prevProps[key], value)))
 }

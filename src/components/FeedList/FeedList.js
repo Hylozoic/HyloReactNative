@@ -84,14 +84,14 @@ export default class FeedList extends React.Component {
 
   render () {
     const {
-      posts,
+      postIds,
       pending,
       pendingRefresh
     } = this.props
 
     return <View style={styles.container}>
       <FlatList
-        data={posts}
+        data={postIds}
         renderItem={this.renderItem}
         onRefresh={this.refreshPosts}
         refreshing={!!pendingRefresh}
