@@ -21,10 +21,9 @@ export default class PostHeader extends React.PureComponent {
     this.props.editPost(this.props.postId)
   }
 
-  showMember = () => this.props.showMember(this.props.creator.id)
-
+  showMember = () => this.props.showMember && this.props.showMember(this.props.creator.id)
   topicKeyExtractor = (item) => item.id
-  renderTopic = ({item}) => <TouchableOpacity onPress={() => this.props.showTopic(item.name)}>
+  renderTopic = ({item}) => <TouchableOpacity onPress={() => this.props.showTopic && this.props.showTopic(item.name)}>
     <Text style={styles.topicLabel}>#{item.name}</Text>
   </TouchableOpacity>
 
