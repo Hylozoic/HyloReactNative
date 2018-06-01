@@ -42,7 +42,7 @@ export default class SearchPage extends React.Component {
 
   fetchMore = () => {
     const { pending } = this.props
-    if (pending) return console.log('pending')
+    if (pending) return null
     this.props.fetchMoreSearchResults()
   }
 

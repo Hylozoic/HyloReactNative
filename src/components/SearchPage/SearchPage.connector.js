@@ -10,6 +10,7 @@ import {
   getHasMoreSearchResults,
   FETCH_SEARCH
 } from './SearchPage.store'
+import { debounce } from 'lodash/fp'
 
 export function mapStateToProps (state, props) {
   const searchTerm = getSearchTerm(state, props)
@@ -37,8 +38,8 @@ export function mapStateToProps (state, props) {
 
 export function mapDispatchToProps (dispatch, props) {
   return {
+    fetchSearchResults: debounce(400, params => dispatch(fetchSearchResults(params))),
     ...bindActionCreators({
-      fetchSearchResults,
       setSearchTerm,
       setSearchFilter
     }, dispatch)
@@ -54,7 +55,7 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
   const fetchMoreSearchResults = () => hasMore
     ? dispatchProps.fetchSearchResults({search: searchTerm, offset: searchResults.length, filter})
     : () => {}
-    
+
   return {
     ...stateProps,
     ...dispatchProps,
