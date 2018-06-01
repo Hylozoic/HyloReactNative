@@ -12,7 +12,7 @@ export const SET_SEARCH_FILTER = `${MODULE_NAME}/SET_SEARCH_FILTER`
 export const FETCH_SEARCH = `${MODULE_NAME}/FETCH_SEARCH`
 
 const defaultState = {
-  search: 'tre',
+  search: '',
   filter: 'all'
 }
 

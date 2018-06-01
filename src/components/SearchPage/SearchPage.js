@@ -54,7 +54,10 @@ export default class SearchPage extends React.Component {
   }
 
   render () {
-    const { searchResults, searchTerm, setSearchTerm, pending, goToPost, goToPerson } = this.props
+    const {
+      searchResults, searchTerm, setSearchTerm, pending, goToPost, goToPerson,
+      filter, setSearchFilter
+    } = this.props
     const { refreshing } = this.state
 
     const listHeaderComponent = <View>
@@ -68,6 +71,7 @@ export default class SearchPage extends React.Component {
             underlineColorAndroid={styles.androidInvisibleUnderline} />
         </View>
       </View>
+      <TabBar filter={filter} setSearchFilter={setSearchFilter} />
     </View>
 
     const listFooterComponent = pending
@@ -90,6 +94,30 @@ export default class SearchPage extends React.Component {
         ListFooterComponent={listFooterComponent} />
     </View>
   }
+}
+
+const tabs = [
+  {id: 'all', label: 'All'},
+  {id: 'post', label: 'Discussions'},
+  {id: 'person', label: 'People'},
+  {id: 'comment', label: 'Comments'}
+]
+
+export function TabBar ({ filter, setSearchFilter }) {
+  return <View style={styles.tabBar}>
+    {tabs.map(({ id, label }) => <Tab
+      key={id}
+      id={id}
+      label={label}
+      filter={filter}
+      setSearchFilter={setSearchFilter} />)}
+  </View>
+}
+
+export function Tab ({ id, label, filter, setSearchFilter }) {
+  return <TouchableOpacity onPress={() => setSearchFilter(id)}>
+    <Text style={[styles.tab, (filter === id) && styles.active]}>{label}</Text>
+  </TouchableOpacity>
 }
 
 export function SearchResult ({ searchResult, goToPost, goToPerson }) {

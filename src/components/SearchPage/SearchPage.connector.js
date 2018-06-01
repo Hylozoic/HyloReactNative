@@ -46,14 +46,15 @@ export function mapDispatchToProps (dispatch, props) {
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
-  const { searchTerm, filter, searchResults } = stateProps
+  const { searchTerm, filter, searchResults, hasMore } = stateProps
 
   const fetchSearchResults = () =>
     dispatchProps.fetchSearchResults({search: searchTerm, filter})
 
-  const fetchMoreSearchResults = () =>
-    dispatchProps.fetchSearchResults({search: searchTerm, offset: searchResults.length, filter})
-
+  const fetchMoreSearchResults = () => hasMore
+    ? dispatchProps.fetchSearchResults({search: searchTerm, offset: searchResults.length, filter})
+    : () => {}
+    
   return {
     ...stateProps,
     ...dispatchProps,
