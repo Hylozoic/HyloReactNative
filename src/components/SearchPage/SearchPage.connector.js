@@ -8,7 +8,7 @@ import {
   getSearchFilter,
   getSearchResults,
   getHasMoreSearchResults,
-  FETCH_SEARCH_RESULTS
+  FETCH_SEARCH
 } from './SearchPage.store'
 
 export function mapStateToProps (state, props) {
@@ -19,14 +19,19 @@ export function mapStateToProps (state, props) {
 
   const searchResults = getSearchResults(state, queryResultProps)
   const hasMore = getHasMoreSearchResults(state, queryResultProps)
-  const pending = !!state.pending[FETCH_SEARCH_RESULTS]
+  const pending = !!state.pending[FETCH_SEARCH]
+
+  const goToPost = id => props.navigation.navigate('PostDetails', {id})
+  const goToPerson = id => props.navigation.navigate('MemberProfile', {id})
 
   return {
     searchTerm,
     filter,
     searchResults,
     hasMore,
-    pending
+    pending,
+    goToPost,
+    goToPerson
   }
 }
 
@@ -53,7 +58,8 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     ...stateProps,
     ...dispatchProps,
     ...ownProps,
-    fetchSearchResults
+    fetchSearchResults,
+    fetchMoreSearchResults
   }
 }
 

@@ -12,6 +12,10 @@ export default {
   scrollContainer: {
 
   },
+  flatListContainer: {
+    flex: 1,
+    paddingBottom: 15
+  },
   row,
   searchBar: {
     height: 50,

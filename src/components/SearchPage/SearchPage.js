@@ -1,8 +1,7 @@
 import React from 'react'
-import { View, ScrollView, Text, TextInput, FlatList, TouchableOpacity } from 'react-native'
+import { View, Text, TextInput, FlatList, TouchableOpacity } from 'react-native'
 import Loading from '../Loading'
 import Avatar from '../Avatar'
-import KeyboardFriendlyView from '../KeyboardFriendlyView'
 import styles from './SearchPage.styles'
 import header from 'util/header'
 import Icon from '../Icon'
@@ -21,6 +20,10 @@ export default class SearchPage extends React.Component {
     })
   }
 
+  state = {
+    refreshing: false
+  }
+
   componentDidMount () {
     this.props.fetchSearchResults()
   }
@@ -30,10 +33,29 @@ export default class SearchPage extends React.Component {
       prevProps.filter !== this.props.filter) {
       this.props.fetchSearchResults()
     }
+    if (prevProps.pending && !this.props.pending) {
+      this.setState({
+        refreshing: false
+      })
+    }
+  }
+
+  fetchMore = () => {
+    const { pending } = this.props
+    if (pending) return console.log('pending')
+    this.props.fetchMoreSearchResults()
+  }
+
+  onRefresh = () => {
+    const { refreshing } = this.state
+    if (refreshing) return null
+    this.setState({refreshing: true})
+    this.props.fetchSearchResults()
   }
 
   render () {
-    const { searchResults, searchTerm, setSearchTerm, pending } = this.props
+    const { searchResults, searchTerm, setSearchTerm, pending, goToPost, goToPerson } = this.props
+    const { refreshing } = this.state
 
     const listHeaderComponent = <View>
       <View style={styles.searchBar}>
@@ -47,30 +69,26 @@ export default class SearchPage extends React.Component {
         </View>
       </View>
     </View>
+
     const listFooterComponent = pending
       ? <Loading style={styles.loading} />
       : null
 
-    const goToPost = id => console.log('goToPost', id)
-    const goToPerson = id => console.log('goToPerson', id)
-
-    return <ScrollView contentContainerStyle={styles.scrollContainer}>
-      <KeyboardFriendlyView>
-        <FlatList
-          data={searchResults}
-          renderItem={({ item }) =>
-            <SearchResult
-              searchResult={item}
-              goToPost={goToPost}
-              goToPerson={goToPerson} />}
-          onRefresh={this.props.fetchMoreSearchResults}
-          refreshing={pending}
-          keyExtractor={(item) => item.id}
-          onEndReached={this.props.fetchMoreSearchResults}
-          ListHeaderComponent={listHeaderComponent}
-          ListFooterComponent={listFooterComponent} />
-      </KeyboardFriendlyView>
-    </ScrollView>
+    return <View style={styles.flatListContainer}>
+      <FlatList
+        data={searchResults}
+        renderItem={({ item }) =>
+          <SearchResult
+            searchResult={item}
+            goToPost={goToPost}
+            goToPerson={goToPerson} />}
+        onRefresh={this.onRefresh}
+        refreshing={refreshing}
+        keyExtractor={(item) => item.id}
+        onEndReached={() => this.fetchMore()}
+        ListHeaderComponent={listHeaderComponent}
+        ListFooterComponent={listFooterComponent} />
+    </View>
   }
 }
 
@@ -97,31 +115,31 @@ export function SearchResult ({ searchResult, goToPost, goToPerson }) {
   </View>
 }
 
-export function PersonCard ({ person }) {
-  const { avatarUrl, name, location } = person
-  return <View style={styles.personCard}>
-    <Avatar avatarUrl={avatarUrl} style={styles.avatar} />
-    <View style={styles.nameAndLocation}>
-      <Text style={styles.name}>{name}</Text>
-      {location && <Text style={styles.location}>{location}</Text>}
+export function PersonCard ({ person, goToPerson }) {
+  const { id, avatarUrl, name, location } = person
+  return <TouchableOpacity onPress={() => goToPerson(id)}>
+    <View style={styles.personCard}>
+      <Avatar avatarUrl={avatarUrl} style={styles.avatar} />
+      <View style={styles.nameAndLocation}>
+        <Text style={styles.name}>{name}</Text>
+        {location && <Text style={styles.location}>{location}</Text>}
+      </View>
     </View>
-  </View>
+  </TouchableOpacity>
 }
 
 export function PostCard ({ post, goToPost }) {
   const goToThisPost = () => goToPost(post.id)
   const { creator } = post
-  return <TouchableOpacity onPress={goToThisPost}>
-    <View style={styles.postWrapper}>
-      <UnwrappedPostCard
-        creator={creator}
-        showDetails={goToThisPost}
-        showMember={goToThisPost}
-        goToCommunity={goToThisPost}
-        post={post}
-        hideMenu
-        hideDetails />
-    </View>
+  return <TouchableOpacity onPress={goToThisPost} style={styles.postWrapper}>
+    <UnwrappedPostCard
+      creator={creator}
+      showDetails={goToThisPost}
+      showMember={goToThisPost}
+      goToCommunity={goToThisPost}
+      post={post}
+      hideMenu
+      hideDetails />
   </TouchableOpacity>
 }
 
@@ -129,7 +147,7 @@ export function CommentCard ({ comment, goToPost }) {
   const { post } = comment
   const goToThisPost = () => goToPost(post.id)
 
-  return <View style={styles.commentWrapper}>
+  return <TouchableOpacity onPress={goToThisPost} style={styles.commentWrapper}>
     <View style={styles.commentPostHeader}>
       <PostHeader creator={post.creator}
         date={post.createdAt}
@@ -151,5 +169,5 @@ export function CommentCard ({ comment, goToPost }) {
       comment={comment}
       showMember={goToThisPost}
       showTopic={goToThisPost} />
-  </View>
+  </TouchableOpacity>
 }
