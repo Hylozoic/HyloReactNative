@@ -130,20 +130,23 @@ export function CommentCard ({ comment, goToPost }) {
   const goToThisPost = () => goToPost(post.id)
 
   return <View style={styles.commentWrapper}>
-    <PostHeader creator={post.creator}
-      date={post.createdAt}
-      type={post.type}
-      topics={post.topics}
-      communities={post.communities}
-      pinned={post.pinned}
-      postId={post.id}
-      showMember={goToThisPost}
-      showTopic={goToThisPost}
-      goToCommunity={goToThisPost}
-      announcement={post.announcement}
-      hideMenu
-      smallAvatar />
-    <PostTitle title={post.title} style={styles.postTitle} />
+    <View style={styles.commentPostHeader}>
+      <PostHeader creator={post.creator}
+        date={post.createdAt}
+        type={post.type}
+        topics={post.topics}
+        communities={post.communities}
+        pinned={post.pinned}
+        postId={post.id}
+        showMember={goToThisPost}
+        showTopic={goToThisPost}
+        goToCommunity={goToThisPost}
+        announcement={post.announcement}
+        hideMenu
+        smallAvatar />
+      <PostTitle title={post.title} style={styles.postTitle} />
+    </View>
+    <View style={styles.commentDivider} />
     <UnwrappedCommentCard
       comment={comment}
       showMember={goToThisPost}

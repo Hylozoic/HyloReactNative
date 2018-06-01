@@ -74,5 +74,15 @@ export default {
   },
   postTitle: {
     paddingHorizontal: cardPadding
+  },
+  commentPostHeader: {
+    opacity: 0.4
+  },
+  commentDivider: {
+    marginHorizontal: cardMargin,
+    borderBottomWidth: 1,
+    borderBottomColor: capeCod10,
+    marginTop: 9,
+    marginBottom: 21
   }
 }
