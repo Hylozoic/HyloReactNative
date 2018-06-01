@@ -50,8 +50,7 @@ export default class PostCard extends React.PureComponent {
       topics,
       showMember,
       showTopic,
-      goToCommunity,
-      selectedNetworkId
+      goToCommunity
     } = this.props
 
     const slug = get('0.slug', communities)
@@ -79,7 +78,6 @@ export default class PostCard extends React.PureComponent {
       <PostCommunities
         communities={communities}
         slug={slug}
-        selectedNetworkId={selectedNetworkId}
         goToCommunity={goToCommunity} />
       <PostFooter id={post.id}
         commenters={commenters}

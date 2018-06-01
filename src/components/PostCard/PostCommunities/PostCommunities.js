@@ -1,5 +1,5 @@
 import React from 'react'
-import { get, isEmpty, chunk, filter } from 'lodash/fp'
+import { get, isEmpty, chunk } from 'lodash/fp'
 import Icon from '../../Icon'
 import { Text, View, TouchableOpacity, Image } from 'react-native'
 import { DEFAULT_AVATAR } from '../../../store/models/Community'
