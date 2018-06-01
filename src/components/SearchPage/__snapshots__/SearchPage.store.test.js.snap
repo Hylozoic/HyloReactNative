@@ -1,0 +1,125 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`fetchSearchResults matches snapshot 1`] = `
+Object {
+  "graphql": Object {
+    "query": "query ($search: String, $type: String, $offset: Int) {
+        search(term: $search, first: 10, type: $type, offset: $offset) {
+          total
+          hasMore
+          items {
+            id
+            content {
+              __typename
+              ... on Person {
+                id
+                name
+                location
+                avatarUrl
+                skills {
+                  items {
+                    id
+                    name
+                  }
+                }
+              }
+              ... on Post {
+                
+  id
+  title
+  details
+  type
+  location
+  announcement
+  creator {
+    id
+    name
+    avatarUrl
+    tagline
+  }
+  createdAt
+  updatedAt
+  commenters(first: 3) {
+    id
+    name
+    avatarUrl
+  }
+  commentersTotal
+  commentsTotal
+  
+  linkPreview {
+    title
+    url
+    imageUrl
+  }
+  votesTotal
+  myVote
+  communities {
+    id
+    name
+    slug
+  }
+  attachments {
+    id
+    position
+    type
+    url
+  }
+  postMemberships {
+    id
+    pinned
+    community {
+      id
+    }
+  }
+  topics {
+    id
+    name
+    postsTotal
+    followersTotal
+  }
+              }
+              ... on Comment {
+                id
+                text
+                createdAt
+                creator {
+                  id
+                  name
+                  avatarUrl
+                }
+                post {
+                  id
+                  title
+                  type
+                  creator {
+                    id
+                    name
+                    avatarUrl
+                  }
+                }
+                attachments {
+                  id
+                  url
+                  type
+                }
+              }
+            }
+          }
+        }
+      }",
+    "variables": Object {
+      "offset": 20,
+      "search": "lae",
+      "type": "comment",
+    },
+  },
+  "meta": Object {
+    "extractModel": "SearchResult",
+    "extractQueryResults": Object {
+      "getItems": [Function],
+    },
+  },
+  "type": "SearchPage/FETCH_SEARCH",
+}
+`;

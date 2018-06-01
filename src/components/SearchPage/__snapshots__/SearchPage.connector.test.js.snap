@@ -7,3 +7,31 @@ Object {
   "setSearchTerm": [Function],
 }
 `;
+
+exports[`mapStateToProps matches last snapshot 1`] = `
+Object {
+  "filter": "all",
+  "goToPerson": [Function],
+  "goToPost": [Function],
+  "hasMore": undefined,
+  "pending": false,
+  "searchResults": Array [],
+  "searchTerm": "",
+}
+`;
+
+exports[`mergeProps matches last snapshot 1`] = `
+Object {
+  "fetchMoreSearchResults": [Function],
+  "fetchSearchResults": [Function],
+  "filter": "all",
+  "goToPerson": [Function],
+  "goToPost": [Function],
+  "hasMore": undefined,
+  "pending": false,
+  "searchResults": Array [],
+  "searchTerm": "",
+  "setSearchFilter": [Function],
+  "setSearchTerm": [Function],
+}
+`;

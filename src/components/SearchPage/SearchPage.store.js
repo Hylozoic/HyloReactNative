@@ -11,7 +11,7 @@ export const SET_SEARCH_TERM = `${MODULE_NAME}/SET_SEARCH_TERM`
 export const SET_SEARCH_FILTER = `${MODULE_NAME}/SET_SEARCH_FILTER`
 export const FETCH_SEARCH = `${MODULE_NAME}/FETCH_SEARCH`
 
-const defaultState = {
+export const defaultState = {
   search: '',
   filter: 'all'
 }
