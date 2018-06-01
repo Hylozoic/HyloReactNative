@@ -28,6 +28,10 @@ Object {
   "PeopleTyping": Object {},
   "PostEditor": Object {},
   "Search": Object {},
+  "SearchPage": Object {
+    "filter": "all",
+    "search": "",
+  },
   "SignupFlow": Object {
     "errors": Object {},
     "userSettings": Object {
@@ -227,6 +231,11 @@ Object {
       "meta": Object {},
     },
     "PostTopics": Object {
+      "items": Array [],
+      "itemsById": Object {},
+      "meta": Object {},
+    },
+    "SearchResult": Object {
       "items": Array [],
       "itemsById": Object {},
       "meta": Object {},

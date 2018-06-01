@@ -18,45 +18,45 @@ Object {
 `;
 
 exports[`SearchPage matches the last snapshot 1`] = `
-<ScrollView
-  contentContainerStyle={Object {}}
->
-  <Unknown>
-    <FlatList
-      ListFooterComponent={null}
-      ListHeaderComponent={
+<View>
+  <FlatList
+    ListFooterComponent={null}
+    ListHeaderComponent={
+      <View>
         <View>
           <View>
-            <View>
-              <Icon
-                name="Search"
-              />
-              <TextInput
-                allowFontScaling={true}
-                onChangeText={[Function]}
-                underlineColorAndroid={undefined}
-                value={undefined}
-              />
-            </View>
+            <Icon
+              name="Search"
+            />
+            <TextInput
+              allowFontScaling={true}
+              onChangeText={[Function]}
+              underlineColorAndroid={undefined}
+              value={undefined}
+            />
           </View>
         </View>
-      }
-      data={undefined}
-      disableVirtualization={false}
-      horizontal={false}
-      initialNumToRender={10}
-      keyExtractor={[Function]}
-      maxToRenderPerBatch={10}
-      numColumns={1}
-      onEndReached={undefined}
-      onEndReachedThreshold={2}
-      onRefresh={undefined}
-      refreshing={undefined}
-      renderItem={[Function]}
-      scrollEventThrottle={50}
-      updateCellsBatchingPeriod={50}
-      windowSize={21}
-    />
-  </Unknown>
-</ScrollView>
+        <TabBar
+          filter={undefined}
+          setSearchFilter={undefined}
+        />
+      </View>
+    }
+    data={undefined}
+    disableVirtualization={false}
+    horizontal={false}
+    initialNumToRender={10}
+    keyExtractor={[Function]}
+    maxToRenderPerBatch={10}
+    numColumns={1}
+    onEndReached={[Function]}
+    onEndReachedThreshold={2}
+    onRefresh={[Function]}
+    refreshing={false}
+    renderItem={[Function]}
+    scrollEventThrottle={50}
+    updateCellsBatchingPeriod={50}
+    windowSize={21}
+  />
+</View>
 `;
