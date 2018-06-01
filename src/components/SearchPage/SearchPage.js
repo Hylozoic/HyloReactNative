@@ -130,7 +130,6 @@ export function SearchResult ({ searchResult, goToPost, goToPerson }) {
       break
     case 'Post':
       component = <PostCard
-        styleName='postcard-expand'
         post={content}
         goToPost={goToPost} />
       break
@@ -180,8 +179,6 @@ export function CommentCard ({ comment, goToPost }) {
       <PostHeader creator={post.creator}
         date={post.createdAt}
         type={post.type}
-        topics={post.topics}
-        communities={post.communities}
         pinned={post.pinned}
         postId={post.id}
         showMember={goToThisPost}

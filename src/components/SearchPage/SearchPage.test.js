@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import ReactTestRenderer from 'react-test-renderer'
-import SearchPage, { MessageSettingsRow, AllCommunitiesSettingsRow, MembershipSettingsRow, SettingsRow, SettingsIcon } from './SearchPage'
+import SearchPage, { TabBar, Tab, SearchResult, PersonCard, PostCard, CommentCard } from './SearchPage'
 
 jest.mock('react-native-device-info')
 
@@ -9,40 +9,14 @@ describe('SearchPage', () => {
   it('matches the last snapshot', () => {
     const renderer = new ReactShallowRenderer()
     const props = {
-      messageSettings: {
-        sendEmail: true,
-        sendPushNotifications: false
-      },
-      allCommunitiesSettings: {
-        sendEmail: false,
-        sendPushNotifications: true
-      },
-      memberships: [
-        {
-          id: 11,
-          community: {
-            id: 12,
-            avatarUrl: 'foo1.png'
-          },
-          settings: {
-            sendEmail: true,
-            sendPushNotifications: false
-          }
-        },
-        {
-          id: 21,
-          community: {
-            id: 22,
-            avatarUrl: 'foo2.png'
-          },
-          settings: {
-            sendEmail: false,
-            sendPushNotifications: true
-          }
-        }
-      ],
-      currentUser: {id: 1},
-      unlinkAccount: () => {}
+      searchResults: [1, 2, 3],
+      searchTerm: 'how',
+      setSearchTerm: () => {},
+      pending: true,
+      goToPost: () => {},
+      goToPerson: () => {},
+      filter: 'post',
+      setSearchFilter: () => {}
     }
 
     renderer.render(<SearchPage {...props} />)
@@ -51,47 +25,27 @@ describe('SearchPage', () => {
     expect(actual).toMatchSnapshot()
   })
 
-  describe('updateMessageSettings', () => {
-    it('calls updateUserSettings', () => {
+  describe('fetchMore', () => {
+    it('calls fetchMoreSearchResults when not pending', () => {
       const props = {
-        messageSettings: {
-          sendEmail: true
-        },
-        updateUserSettings: jest.fn(),
-        memberships: []
+        fetchSearchResults: () => {},
+        fetchMoreSearchResults: jest.fn(),
+        pending: false
       }
       const instance = ReactTestRenderer.create(<SearchPage {...props} />).getInstance()
-      instance.updateMessageSettings({sendPushNotifications: true})
-      expect(props.updateUserSettings).toHaveBeenCalledWith({settings: {dmNotifications: 'both'}})
-      instance.updateMessageSettings({sendEmail: false})
-      expect(props.updateUserSettings).toHaveBeenCalledWith({settings: {dmNotifications: 'none'}})
-      instance.updateMessageSettings({})
-      expect(props.updateUserSettings).toHaveBeenCalledWith({settings: {dmNotifications: 'email'}})
-      instance.updateMessageSettings({sendEmail: false, sendPushNotifications: true})
-      expect(props.updateUserSettings).toHaveBeenCalledWith({settings: {dmNotifications: 'push'}})
+      instance.fetchMore({sendPushNotifications: true})
+      expect(props.fetchMoreSearchResults).toHaveBeenCalled()
     })
-  })
 
-  describe('updateAllCommunities', () => {
-    it('calls updateAllMemberships', () => {
+    it("doesn't call fetchMoreSearchResults when pending", () => {
       const props = {
-        messageSettings: {
-          sendEmail: true
-        },
-        updateAllMemberships: jest.fn(),
-        memberships: [{
-          community: {
-            id: 1
-          }
-        }, {
-          community: {
-            id: 2
-          }
-        }]
+        fetchSearchResults: () => {},
+        fetchMoreSearchResults: jest.fn(),
+        pending: true
       }
       const instance = ReactTestRenderer.create(<SearchPage {...props} />).getInstance()
-      instance.updateAllCommunities({sendPushNotifications: true})
-      expect(props.updateAllMemberships).toHaveBeenCalledWith([1, 2], {sendPushNotifications: true})
+      instance.fetchMore({sendPushNotifications: true})
+      expect(props.fetchMoreSearchResults).not.toHaveBeenCalled()
     })
   })
 
@@ -101,125 +55,155 @@ describe('SearchPage', () => {
   })
 })
 
-describe('MessageSettingsRow', () => {
+describe('TabBar', () => {
   it('matches the last snapshot', () => {
     const renderer = new ReactShallowRenderer()
     const props = {
-      settings: {sendEmail: true},
-      updateMessageSettings: () => {}
+      filter: 'post',
+      setSearchFilter: () => {}
     }
 
-    renderer.render(<MessageSettingsRow {...props} />)
+    renderer.render(<TabBar {...props} />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
   })
 })
 
-describe('AllCommunitiesSettingsRow', () => {
+describe('Tab', () => {
   it('matches the last snapshot', () => {
     const renderer = new ReactShallowRenderer()
     const props = {
-      settings: {sendEmail: true},
-      updateAllCommunities: () => {}
+      id: 'post',
+      label: 'Discussions',
+      filter: 'post',
+      setSearchFilter: () => {}
     }
 
-    renderer.render(<AllCommunitiesSettingsRow {...props} />)
+    renderer.render(<Tab {...props} />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
   })
 })
 
-describe('MembershipSettingsRow', () => {
-  it('matches the last snapshot', () => {
-    const renderer = new ReactShallowRenderer()
-    const props = {
-      membership: {
-        settings: {
-          sendEmail: true
-        },
-        community: {
-          name: 'Foomunity',
-          avatarUrl: 'foo.png'
-        }
-      },
-      updateMembershipSettings: () => {}
-    }
-
-    renderer.render(<MembershipSettingsRow {...props} />)
-    const actual = renderer.getRenderOutput()
-
-    expect(actual).toMatchSnapshot()
-  })
-})
-
-describe('SettingsRow', () => {
-  const props = {
-    imageUrl: 'foo.png',
-    name: 'Foo Row',
-    settings: {
-      sendEmail: true,
-      sendPushNotifications: false
-    },
-    update: () => {}
+describe('SearchResult', () => {
+  const defaultProps = {
+    goToPost: () => {},
+    goToPerson: () => {}
   }
 
-  it('matches the last snapshot', () => {
+  it('works with Person', () => {
     const renderer = new ReactShallowRenderer()
-
-    renderer.render(<SettingsRow {...props} />)
-    const actual = renderer.getRenderOutput()
-
-    expect(actual).toMatchSnapshot()
-  })
-
-  it('matches the last snapshot with iconName', () => {
-    const renderer = new ReactShallowRenderer()
-
-    const iconProps = {
-      ...props,
-      iconName: 'iconname'
+    const props = {
+      ...defaultProps,
+      searchResult: {
+        type: 'Person',
+        content: {id: 1}
+      }
     }
 
-    renderer.render(<SettingsRow {...iconProps} />)
+    renderer.render(<SearchResult {...props} />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
   })
 
-  it('matches snapshot when expanded', () => {
-    const renderer = ReactTestRenderer.create(<SettingsRow {...props} />)
-    const instance = renderer.getInstance()
-    instance.setState({
-      expanded: true
-    })
+  it('works with Post', () => {
+    const renderer = new ReactShallowRenderer()
+    const props = {
+      ...defaultProps,
+      searchResult: {
+        type: 'Post',
+        content: {id: 1}
+      }
+    }
 
-    expect(renderer.toJSON()).toMatchSnapshot()
+    renderer.render(<SearchResult {...props} />)
+    const actual = renderer.getRenderOutput()
+
+    expect(actual).toMatchSnapshot()
   })
 
-  describe('toggleExpand', () => {
-    it('updates the state', () => {
-      const instance = ReactTestRenderer.create(<SettingsRow />).getInstance()
-      instance.toggleExpand()
-      expect(instance.state.expanded).toEqual(true)
-    })
+  it('works with Comment', () => {
+    const renderer = new ReactShallowRenderer()
+    const props = {
+      ...defaultProps,
+      searchResult: {
+        type: 'Comment',
+        content: {id: 1}
+      }
+    }
+
+    renderer.render(<SearchResult {...props} />)
+    const actual = renderer.getRenderOutput()
+
+    expect(actual).toMatchSnapshot()
   })
 })
 
-describe('SettingsIcon', () => {
+describe('PersonCard', () => {
   it('matches the last snapshot', () => {
     const renderer = new ReactShallowRenderer()
     const props = {
-      settingKey: 'sendEmail',
-      settings: {
-        sendEmail: true
+      person: {
+        id: 1,
+        name: 'Jo',
+        avatarUrl: 'jo.png',
+        location: 'Spain'
       },
-      name: 'FooRow',
-      update: () => {}
+      goToPerson: () => {}
     }
 
-    renderer.render(<SettingsIcon {...props} />)
+    renderer.render(<PersonCard {...props} />)
+    const actual = renderer.getRenderOutput()
+
+    expect(actual).toMatchSnapshot()
+  })
+})
+
+describe('PostCard', () => {
+  it('matches the last snapshot', () => {
+    const renderer = new ReactShallowRenderer()
+    const props = {
+      post: {
+        id: 1,
+        creator: {
+          id: 2
+        }
+      },
+      goToPost: () => {}
+    }
+
+    renderer.render(<PostCard {...props} />)
+    const actual = renderer.getRenderOutput()
+
+    expect(actual).toMatchSnapshot()
+  })
+})
+
+describe('CommentCard', () => {
+  it('matches the last snapshot', () => {
+    const renderer = new ReactShallowRenderer()
+    const props = {
+      comment: {
+        id: 1,
+        post: {
+          id: 2,
+          creator: {
+            id: 3
+          },
+          createdAt: 123,
+          type: 'singalong',
+          pinned: false,
+          announcement: false,
+          title: 'Yallow'
+        }
+      },
+      goToPost: () => {}
+    }
+
+    renderer.render(<CommentCard {...props} />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
