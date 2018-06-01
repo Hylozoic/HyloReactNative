@@ -1,6 +1,6 @@
 import React from 'react'
 import { FlatList, Text, View } from 'react-native'
-import { propsChanged } from 'util/index'
+import { didPropsChange } from 'util/index'
 import styles from './FeedList.styles'
 import PostRow from './PostRow'
 import Loading from '../Loading'
@@ -20,7 +20,7 @@ export default class FeedList extends React.Component {
   }
 
   shouldComponentUpdate (nextProps) {
-    return nextProps.isFocused && propsChanged(this.props, nextProps)
+    return nextProps.isFocused && didPropsChange(this.props, nextProps)
   }
 
   componentDidUpdate (prevProps) {

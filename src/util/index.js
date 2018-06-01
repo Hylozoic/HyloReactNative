@@ -43,14 +43,14 @@ export function basename (url) {
  * EXAMPLE:
  *
  * shouldComponentUpdate (nextProps) {
- *   return nextProps.isFocused && propsChanged(this.props, nextProps)
+ *   return nextProps.isFocused && didPropsChange(this.props, nextProps)
  * }
  *
  * @param props
  * @param nextProps
  * @returns {*}
  */
-export function propsChanged (props, nextProps) {
+export function didPropsChange (props, nextProps) {
   if (props === nextProps) {
     return false
   }

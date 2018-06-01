@@ -1,4 +1,4 @@
-import { noncircular, propsChanged } from './index'
+import { noncircular, didPropsChange } from './index'
 
 describe('noncircular', () => {
   it('works as expected', () => {
@@ -10,7 +10,7 @@ describe('noncircular', () => {
   })
 })
 
-describe('propsChanged', () => {
+describe('didPropsChange', () => {
   it('return true for different props', () => {
     const props = {
       a: 1,
@@ -21,7 +21,7 @@ describe('propsChanged', () => {
       b: 2
     }
 
-    expect(propsChanged(props, nextProps)).toBeTruthy()
+    expect(didPropsChange(props, nextProps)).toBeTruthy()
   })
 
   it('returns false for same props', () => {
@@ -37,7 +37,7 @@ describe('propsChanged', () => {
       c: obj
     }
 
-    expect(propsChanged(props, nextProps)).toBeFalsy()
+    expect(didPropsChange(props, nextProps)).toBeFalsy()
   })
 
   it('returns true for same props different object reference', () => {
@@ -54,7 +54,7 @@ describe('propsChanged', () => {
       c: obj2
     }
 
-    expect(propsChanged(props, nextProps)).toBeTruthy()
+    expect(didPropsChange(props, nextProps)).toBeTruthy()
   })
 
   it('return false for same object', () => {
@@ -64,7 +64,7 @@ describe('propsChanged', () => {
     }
     const nextProps = props
 
-    expect(propsChanged(props, nextProps)).toBeFalsy()
+    expect(didPropsChange(props, nextProps)).toBeFalsy()
   })
 
   it('return true for same props but different keys', () => {
@@ -78,7 +78,7 @@ describe('propsChanged', () => {
       c: 3
     }
 
-    expect(propsChanged(props, nextProps)).toBeTruthy()
+    expect(didPropsChange(props, nextProps)).toBeTruthy()
   })
 
   it('return true for same props but different keys (inverse)', () => {
@@ -92,6 +92,6 @@ describe('propsChanged', () => {
       b: 2
     }
 
-    expect(propsChanged(props, nextProps)).toBeTruthy()
+    expect(didPropsChange(props, nextProps)).toBeTruthy()
   })
 })
