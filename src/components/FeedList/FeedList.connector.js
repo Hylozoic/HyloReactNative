@@ -13,6 +13,7 @@ import {
 import { ALL_COMMUNITIES_ID } from '../../store/models/Community'
 import fetchPosts, { FETCH_POSTS } from '../../store/actions/fetchPosts'
 import resetNewPostCount from '../../store/actions/resetNewPostCount'
+import { createSelector } from 'reselect'
 
 function makeFetchOpts (props) {
   const { community, network, topicName } = props
@@ -34,12 +35,26 @@ function makeFetchOpts (props) {
   })
 }
 
+const getQueryProps = createSelector(
+  (state, props) => props.community,
+  (state, props) => props.network,
+  (state, props) => props.sortBy,
+  (state, props) => props.filter,
+  (state, props) => props.topic,
+  (state, props) => props.topicName,
+  (community, network, sortBy, filter, topic, topicName) => {
+    return makeFetchOpts({
+      community, network, sortBy, filter, topic, topicName
+    })
+  }
+)
+
 export function mapStateToProps (state, props) {
   const sortBy = getSort(state, props)
   const filter = getFilter(state, props)
   const { community, network, topicName } = props
-  const queryProps = makeFetchOpts({
-    community,
+  const queryProps = getQueryProps(state, {
+    community: community,
     network,
     sortBy,
     filter,
@@ -87,7 +102,7 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
   }
 
   return {
-    ...omit(['queryProps'], stateProps),
+    ...stateProps,
     ...dispatchProps,
     ...ownProps,
     fetchPosts: () => fetchPostsAndResetCount(queryProps),

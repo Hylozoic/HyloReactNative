@@ -66,25 +66,9 @@ export default class FeedList extends React.Component {
 
   keyExtractor = (item) => `post${item}`
 
-  renderHeader = () => <View>
-    {this.props.header}
-    <ListControls
-      filter={this.props.filter}
-      sortBy={this.props.sortBy}
-      setFilter={this.setFilter}
-      setSort={this.setSort}
-      pending={this.props.pending}
-    />
-  </View>
-
-  renderFooter = () => this.props.pending
-    ? <Loading style={styles.loading} />
-    : null
-
   render () {
     const {
       postIds,
-      pending,
       pendingRefresh
     } = this.props
 
@@ -94,11 +78,21 @@ export default class FeedList extends React.Component {
         renderItem={this.renderItem}
         onRefresh={this.refreshPosts}
         refreshing={!!pendingRefresh}
-        extraData={!!pending}
         keyExtractor={this.keyExtractor}
         onEndReached={this.fetchMorePosts}
-        ListHeaderComponent={this.renderHeader}
-        ListFooterComponent={this.renderFooter} />
+        ListHeaderComponent={<View>
+          {this.props.header}
+          <ListControls
+            filter={this.props.filter}
+            sortBy={this.props.sortBy}
+            setFilter={this.setFilter}
+            setSort={this.setSort}
+            pending={this.props.pending}
+          />
+        </View>}
+        ListFooterComponent={this.props.pending
+          ? <Loading style={styles.loading} />
+          : null} />
     </View>
   }
 }
