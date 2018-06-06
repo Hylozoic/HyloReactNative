@@ -64,7 +64,14 @@ export default class MemberFeed extends React.Component {
 export function ContentRow ({ item, itemType, showPost }) {
   var content
   if (itemType === 'post') {
-    content = <PostCard post={item} />
+    content = <PostCard
+      post={item}
+      creator={item.creator}
+      commenters={item.commenters}
+      communities={item.communities}
+      topics={item.topics}
+
+    />
   } else {
     content = <Comment comment={item} displayPostTitle />
   }

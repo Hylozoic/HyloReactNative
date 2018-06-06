@@ -8,9 +8,9 @@ export default function urlHandler (url, showMember, showTopic, slug) {
   const [ prefix, suffix ] = variableRoute.split('/')
   switch (prefix) {
     case 'm':
-      return showMember(suffix)
+      return showMember && showMember(suffix)
     case 'tag':
-      return showTopic(suffix)
+      return showTopic && showTopic(suffix)
     default:
       Linking.openURL(url)
   }

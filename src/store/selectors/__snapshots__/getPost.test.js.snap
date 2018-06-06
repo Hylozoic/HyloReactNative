@@ -3,12 +3,7 @@
 exports[`getPost returns the post 1`] = `
 SessionBoundModel {
   "_fields": Object {
-    "commenters": undefined,
-    "communities": undefined,
-    "followers": undefined,
     "id": 31,
-    "postMemberships": undefined,
-    "topics": undefined,
   },
 }
 `;
@@ -17,10 +12,11 @@ exports[`presentPost matches the snapshot: true 1`] = `
 Object {
   "commenters": Array [],
   "communities": Array [],
-  "creator": undefined,
+  "creator": Object {
+    "id": "10",
+  },
   "fileAttachments": Array [],
   "fileUrls": Array [],
-  "followers": undefined,
   "id": 324,
   "imageUrls": Array [],
   "linkPreview": undefined,

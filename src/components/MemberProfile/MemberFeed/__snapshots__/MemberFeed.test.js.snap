@@ -25,11 +25,15 @@ exports[`ContentRow shows a PostCard when itemType is post 1`] = `
 >
   <View>
     <PostCard
+      commenters={undefined}
+      communities={undefined}
+      creator={undefined}
       post={
         Object {
           "id": 2,
         }
       }
+      topics={undefined}
     />
   </View>
 </TouchableOpacity>

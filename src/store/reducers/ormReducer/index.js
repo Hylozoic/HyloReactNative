@@ -62,8 +62,12 @@ export default function ormReducer (state = {}, action) {
   switch (type) {
     case CREATE_COMMENT:
       post = session.Post.safeGet({id: meta.postId})
+      me = session.Me.first()
+
       if (!post) break
+      post.updateAppending({commenters: [me.id]})
       post.update({commentsTotal: (post.commentsTotal || 0) + 1})
+
       break
 
     case CREATE_MESSAGE_PENDING:

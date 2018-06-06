@@ -30,7 +30,7 @@ describe('mapStateToProps', () => {
 
   it('returns empty posts and default query props if no results exist', () => {
     expect(mapStateToProps(state, {id: 'bar'})).toEqual({
-      posts: [],
+      postIds: [],
       hasMore: undefined,
       pending: false,
       pendingRefresh: false,
@@ -45,14 +45,16 @@ describe('mapStateToProps', () => {
   })
 
   it('returns posts in the correct order', () => {
-    expect(mapStateToProps(state, {community: {slug: 'foo'}})).toEqual({
-      posts: [
-        expect.objectContaining({id: '1'}),
-        expect.objectContaining({id: '3'}),
-        expect.objectContaining({id: '2'})
+    expect(mapStateToProps(state, {community: {slug: 'foo', id: 10}})).toEqual({
+      postIds: [
+        '1',
+        '3',
+        '2'
       ],
       hasMore: true,
       pending: false,
+      communityId: 10,
+      networkId: undefined,
       pendingRefresh: false,
       filter: defaultState.filter,
       sortBy: defaultState.sortBy,
@@ -66,10 +68,10 @@ describe('mapStateToProps', () => {
 
   it('returns posts for a network ', () => {
     expect(mapStateToProps(state, {community: {slug: 'foo'}})).toEqual({
-      posts: [
-        expect.objectContaining({id: '1'}),
-        expect.objectContaining({id: '3'}),
-        expect.objectContaining({id: '2'})
+      postIds: [
+        '1',
+        '3',
+        '2'
       ],
       hasMore: true,
       pending: false,
@@ -159,7 +161,7 @@ describe('mergeProps', () => {
       sortBy: 'latest',
       filter: 'request',
       hasMore: true,
-      posts: [1, 2, 3, 4],
+      postIds: [1, 2, 3, 4],
       queryProps: {
         subject: 'community',
         slug: 'food',

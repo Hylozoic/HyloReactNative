@@ -6,7 +6,7 @@ import Loading from '../Loading'
 import { func, array } from 'prop-types'
 import styles from './Comments.styles'
 
-export default class Comments extends React.Component {
+export default class Comments extends React.PureComponent {
   static propTypes = {
     comments: array,
     fetchComments: func

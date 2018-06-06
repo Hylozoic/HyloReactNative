@@ -8,7 +8,7 @@ import styles from './PeopleTyping.styles'
 // the amount to delay before deciding that someone is no longer typing
 const MAX_TYPING_PAUSE = 5000
 
-export default class PeopleTyping extends React.Component {
+export default class PeopleTyping extends React.PureComponent {
   static propTypes = {
     clearUserTyping: func.isRequired,
     peopleTyping: shape({})
