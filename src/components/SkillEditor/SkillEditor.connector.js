@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import {
-  setSkill, getSkill, getUserSkills, getSkillsFromOrm, addSkill, removeSkill, setUserSkills
+  setSkill, getSkill, getUserSkills, getMySkillsFromOrm, addSkill, removeSkill, setUserSkills
 } from './SkillEditor.store.js'
 import { isEmpty, includes } from 'lodash/fp'
 
@@ -32,7 +32,7 @@ export function remainingSkills (skillFilter, userSkills, allSkills = defaultSki
 export function mapStateToProps (state, props) {
   const skill = getSkill(state)
   const userSkills = getUserSkills(state)
-  const storedSkills = getSkillsFromOrm(state)
+  const storedSkills = getMySkillsFromOrm(state)
   return {
     skill,
     userSkills,
