@@ -1,4 +1,4 @@
-import { ALL_COMMUNITIES_ID } from 'src/store/models/Community'
+import { ALL_COMMUNITIES_ID } from '../../store/models/Community'
 import { makeGetQueryResults } from '../../store/reducers/queryResults'
 import { FETCH_POSTS } from '../../store/actions/fetchPosts'
 import { createSelector } from 'reselect'
