@@ -1,7 +1,9 @@
+import { ALL_COMMUNITIES_ID } from 'src/store/models/Community'
 import { makeGetQueryResults } from '../../store/reducers/queryResults'
 import { FETCH_POSTS } from '../../store/actions/fetchPosts'
 import { createSelector } from 'reselect'
-import { get, isEmpty } from 'lodash/fp'
+import { get, isEmpty, isNull, isUndefined, omitBy } from 'lodash/fp'
+import createCachedSelector from 're-reselect'
 
 export const MODULE_NAME = 'FeedList'
 
@@ -66,3 +68,33 @@ export const getPostIds = createSelector(
 )
 
 export const getHasMorePosts = createSelector(getPostResults, get('hasMore'))
+
+// Create a cached selector since we don't want multiple onscreen feedlists to clobber the cache between each other.
+export const getQueryProps = createCachedSelector(
+  (state, props) => props.community,
+  (state, props) => props.network,
+  (state, props) => props.sortBy,
+  (state, props) => props.filter,
+  (state, props) => props.topicName,
+  (community, network, sortBy, filter, topicName) => {
+    var subject
+
+    if (community) {
+      subject = 'community'
+    } else if (network) {
+      subject = 'network'
+    } else {
+      subject = 'all-communities'
+    }
+    return omitBy(x => isNull(x) || isUndefined(x), {
+      sortBy,
+      filter,
+      subject,
+      slug: get('slug', community) || (!network && ALL_COMMUNITIES_ID),
+      networkSlug: get('slug', network),
+      topic: topicName
+    })
+  }
+)(
+  (state, props) => `${get('community.id', props)}:${get('network.id', props)}:${get('topicName', props)}`
+)

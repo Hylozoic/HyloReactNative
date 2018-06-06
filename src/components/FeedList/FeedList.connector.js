@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { get, isNull, isUndefined, omit, omitBy } from 'lodash/fp'
+import { get } from 'lodash/fp'
 
 import {
   getSort,
@@ -8,46 +8,11 @@ import {
   setFilter,
   getPostIds,
   getHasMorePosts,
-  defaultSortBy
+  defaultSortBy,
+  getQueryProps
 } from './FeedList.store'
-import { ALL_COMMUNITIES_ID } from '../../store/models/Community'
 import fetchPosts, { FETCH_POSTS } from '../../store/actions/fetchPosts'
 import resetNewPostCount from '../../store/actions/resetNewPostCount'
-import { createSelector } from 'reselect'
-
-function makeFetchOpts (props) {
-  const { community, network, topicName } = props
-  var subject
-
-  if (community) {
-    subject = 'community'
-  } else if (network) {
-    subject = 'network'
-  } else {
-    subject = 'all-communities'
-  }
-  return omitBy(x => isNull(x) || isUndefined(x), {
-    ...omit(['community', 'network', 'topicName'], props),
-    subject,
-    slug: get('slug', community) || (!network && ALL_COMMUNITIES_ID),
-    networkSlug: get('slug', network),
-    topic: topicName
-  })
-}
-
-const getQueryProps = createSelector(
-  (state, props) => props.community,
-  (state, props) => props.network,
-  (state, props) => props.sortBy,
-  (state, props) => props.filter,
-  (state, props) => props.topic,
-  (state, props) => props.topicName,
-  (community, network, sortBy, filter, topic, topicName) => {
-    return makeFetchOpts({
-      community, network, sortBy, filter, topic, topicName
-    })
-  }
-)
 
 export function mapStateToProps (state, props) {
   const sortBy = getSort(state, props)
@@ -58,10 +23,6 @@ export function mapStateToProps (state, props) {
     network,
     sortBy,
     filter,
-
-    // TODO: Establish whether `topic` is necessary here?
-    // Removing `topicName` breaks topic feeds.
-    topic: topicName,
     topicName
   })
   const pending = state.pending[FETCH_POSTS]
