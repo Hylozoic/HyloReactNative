@@ -186,7 +186,7 @@ exports[`PostDetails renders correctly 1`] = `
           slug="foom"
           title="Hi"
         />
-        <Connect(PostCommunities)
+        <PostCommunities
           communities={
             Array [
               Object {

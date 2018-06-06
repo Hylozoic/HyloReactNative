@@ -40,7 +40,6 @@ exports[`PostRow only displays communities in the selected network 1`] = `
             "id": 1,
           }
         }
-        selectedNetworkId={1}
         showMember={undefined}
         showTopic={undefined}
         topics={undefined}
@@ -70,7 +69,6 @@ exports[`PostRow renders correctly 1`] = `
             "id": 1,
           }
         }
-        selectedNetworkId={undefined}
         showMember={undefined}
         showTopic={undefined}
         topics={undefined}
