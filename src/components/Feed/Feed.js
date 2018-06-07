@@ -43,7 +43,6 @@ export default class Feed extends React.Component {
       network,
       currentUser,
       navigation,
-      newPost,
       showPost,
       screenProps,
       topicName,
