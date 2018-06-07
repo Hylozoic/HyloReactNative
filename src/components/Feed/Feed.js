@@ -35,6 +35,7 @@ export default class Feed extends React.Component {
   handleShowMember = (...args) => this.props.showMember(...args)
   handleGoToCommunity = (...args) => this.props.goToCommunity(...args)
   handleSetTopicSubscribe = (...args) => this.props.setTopicSubscribe(...args)
+  handleNewPost = (...args) => this.props.newPost(...args)
 
   render () {
     const {
@@ -70,7 +71,7 @@ export default class Feed extends React.Component {
             network={network}
             currentUser={currentUser}
             all={!community && !topicName}
-            newPost={newPost}
+            newPost={this.handleNewPost}
             topicName={topicName}
             postsTotal={postsTotal}
             followersTotal={followersTotal}
