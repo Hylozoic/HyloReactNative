@@ -1,6 +1,9 @@
 import React from 'react'
 import { InteractionManager, Linking } from 'react-native'
-import { parse } from 'url'
+// import { URL } from 'url'
+import * as url from 'url'
+
+
 import {
   isInvitationLink, redirectAfterLogin, resetToRoute, resetToMainRoute
 } from 'util/navigation'
@@ -57,11 +60,13 @@ export default class DeepLinkHandler extends React.Component {
     return redirectAfterLogin({currentUser, navigation: navigator, action})
   }
 
-  handleUrl (url) {
-    if (!url) return
+  handleUrl (requestUrl) {
+    if (!requestUrl) return
 
     const { storeNavigationAction, currentUser } = this.props
-    const { path } = parse(url)
+
+    const path = requestUrl.match(/^http/) ? url.parse(requestUrl).path : url.parse(requestUrl, 'hyloapp://test').path
+
     const action = convertDeepLinkToAction(path)
     if (!action) return
     const nextAction = action.params && action.params.nextURL

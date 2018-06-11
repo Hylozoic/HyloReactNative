@@ -44,6 +44,7 @@
             <data android:scheme="https" android:host="hylo.com" />
             <data android:scheme="http" android:host="www.hylo.com" />
             <data android:scheme="https" android:host="www.hylo.com" />
+            <data android:scheme="HyloApp" android:host="test" />
         </intent-filter>
       </activity>
       <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
