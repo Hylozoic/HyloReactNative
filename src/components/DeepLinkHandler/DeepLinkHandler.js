@@ -65,14 +65,14 @@ export default class DeepLinkHandler extends React.Component {
 
     const { storeNavigationAction, currentUser } = this.props
 
-    const path = requestUrl.match(/^http/) ? url.parse(requestUrl).path : url.parse(requestUrl, 'hyloapp://test').path
+    const path = requestUrl.match(/^http/) ? url.parse(requestUrl).path : `${url.parse(requestUrl, 'hyloapp://').host}${url.parse(requestUrl, 'hyloapp://').path}`
 
     const action = convertDeepLinkToAction(path)
     if (!action) return
     const nextAction = action.params && action.params.nextURL
       ? convertDeepLinkToAction(decodeURIComponent(action.params.nextURL))
       : action
-    if (isDev) console.log(`handling deep link "${path}" with action:`, action)
+    if (isDev) console.log(`handling aaaaaaadeep link "${path}" with action:`, action)
     if (!currentUser) {
       storeNavigationAction(nextAction)
       if (action.params && action.params.nextURL) {
