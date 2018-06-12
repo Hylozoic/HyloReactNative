@@ -115,7 +115,9 @@ export function TabBar ({ filter, setSearchFilter }) {
 }
 
 export function Tab ({ id, label, filter, setSearchFilter }) {
-  return <TouchableOpacity onPress={() => setSearchFilter(id)}>
+  return <TouchableOpacity
+    onPress={() => setSearchFilter(id)}
+    hitSlop={{top: 10, bottom: 15, left: 15, right: 15}}>
     <Text style={[styles.tab, (filter === id) && styles.active]}>{label}</Text>
   </TouchableOpacity>
 }
