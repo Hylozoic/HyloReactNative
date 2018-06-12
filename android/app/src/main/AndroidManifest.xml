@@ -43,7 +43,6 @@
             <data android:scheme="https" android:host="hylo.com" />
             <data android:scheme="http" android:host="www.hylo.com" />
             <data android:scheme="https" android:host="www.hylo.com" />
-            <data android:scheme="hyloapp" android:host="test" />
             <data android:scheme="hyloapp" android:host="home" />
             <data android:scheme="hyloapp" />
         </intent-filter>
