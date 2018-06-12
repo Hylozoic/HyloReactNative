@@ -65,9 +65,9 @@ export default class InlineEditor extends React.PureComponent {
 
     const { showPicker, isFocused, pickerType } = this.state
 
-    return <KeyboardFriendlyView style={{flex: 1}} behavior={'padding'} enabled>
-      <ScrollView keyboardShouldPersistTaps={'handled'} keyboardDismissMode='on-drag'
-        contentContainerStyle={styles.container} >
+    return <ScrollView keyboardShouldPersistTaps={'handled'} keyboardDismissMode='on-drag'
+      contentContainerStyle={styles.container} >
+      <KeyboardFriendlyView style={{flex: 1}}>
         <View style={[styles.toolbar, isFocused && styles.activeToolbar]}>
           <TouchableOpacity hitSlop={{top: 7, bottom: 7, left: 7, right: 7}} onPress={() => this.startPicker(INSERT_MENTION)}>
             <Text style={styles.toolbarButton}>@</Text>
@@ -95,21 +95,20 @@ export default class InlineEditor extends React.PureComponent {
             <EntypoIcon name='chevron-with-circle-right' style={[styles.sendButton, isFocused && styles.activeButton]} />
           </TouchableOpacity>}
         </View>
-        <Modal
-          animationType='slide'
-          style={styles.picker}
-          transparent={false}
-          visible={showPicker}
-          onRequestClose={() => {
-            this.setState({showPicker: false})
-          }}>
-          <Search style={styles.search} type={pickerType}
-            communityId={communityId}
-            onSelect={this.insertPicked}
-            onCancel={this.cancelPicker} />
-        </Modal>
-      </ScrollView>
-    </KeyboardFriendlyView>
+      </KeyboardFriendlyView>
+      <Modal
+        animationType='slide'
+        transparent={false}
+        visible={showPicker}
+        onRequestClose={() => {
+          this.setState({showPicker: false})
+        }}>
+        <Search style={styles.search} type={pickerType}
+          communityId={communityId}
+          onSelect={this.insertPicked}
+          onCancel={this.cancelPicker} />
+      </Modal>
+    </ScrollView>
   }
 }
 

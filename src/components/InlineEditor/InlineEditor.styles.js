@@ -40,7 +40,7 @@ export default {
     fontSize: 20,
     fontWeight: '700'
   },
-  picker: {
+  search: {
     ...Platform.select({
       ios: {
         paddingTop: 20
