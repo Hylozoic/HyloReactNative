@@ -35,7 +35,7 @@ export default class Comments extends React.PureComponent {
       pending,
       total,
       hasMore,
-      fetchComments,
+      fetchComments
     } = this.props
 
     const headerComponent = <View>

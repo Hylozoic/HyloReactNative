@@ -1,11 +1,12 @@
 import React from 'react'
-import { Text, View, TextInput, TouchableOpacity, Modal, ScrollView } from 'react-native'
-import KeyboardFriendlyView from '../KeyboardFriendlyView'
+import { Text, View, TextInput, TouchableOpacity, Modal, ScrollView, KeyboardAvoidingView } from 'react-native'
 import Search, { SearchType } from '../Search'
 import styles from './InlineEditor.styles'
 import { rhino30 } from 'style/colors'
-import { trim, size } from 'lodash/fp'
+import { trim, size, isEmpty } from 'lodash/fp'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
+import { htmlEncode } from 'js-htmlencode'
+import { MENTION_ENTITY_TYPE, TOPIC_ENTITY_TYPE } from 'hylo-utils/constants'
 
 const INSERT_MENTION = 'Hylo/INSERT_MENTION'
 const INSERT_TOPIC = 'Hylo/INSERT_TOPIC'
@@ -47,7 +48,10 @@ export default class InlineEditor extends React.PureComponent {
   }
 
   handleInputFocus = () => this.setState({ isFocused: true })
-  handleInputBlur = () => this.setState({ isFocused: false })
+  handleInputBlur = () => {
+    if (isEmpty(trim(this.props.value))) this.props.onChange('')
+    this.setState({ isFocused: false })
+  }
 
   handleSubmit = () => {
     this.editorInput.blur()
@@ -60,25 +64,18 @@ export default class InlineEditor extends React.PureComponent {
       editable = true,
       value,
       communityId,
-      onChange
+      onChange,
+      submitting = false
     } = this.props
 
     const { showPicker, isFocused, pickerType } = this.state
 
     return <ScrollView keyboardShouldPersistTaps={'handled'} keyboardDismissMode='on-drag'
       contentContainerStyle={styles.container} >
-      <KeyboardFriendlyView style={{flex: 1}}>
-        <View style={[styles.toolbar, isFocused && styles.activeToolbar]}>
-          <TouchableOpacity hitSlop={{top: 7, bottom: 7, left: 7, right: 7}} onPress={() => this.startPicker(INSERT_MENTION)}>
-            <Text style={styles.toolbarButton}>@</Text>
-          </TouchableOpacity>
-          <TouchableOpacity hitSlop={{top: 7, bottom: 7, left: 7, right: 7}} onPress={() => this.startPicker(INSERT_TOPIC)}>
-            <Text style={styles.toolbarButton}>#</Text>
-          </TouchableOpacity>
-        </View>
+      <KeyboardAvoidingView behavior={'padding'} enabled style={{flex: 1}}>
         <View style={styles.wrapper}>
           <TextInput
-            editable={!!editable}
+            editable={!!editable && !submitting}
             onChangeText={onChange}
             multiline
             blurOnSubmit={false}
@@ -91,11 +88,21 @@ export default class InlineEditor extends React.PureComponent {
             onFocus={this.handleInputFocus}
             onBlur={this.handleInputBlur}
           />
-          {this.props.onSubmit && <TouchableOpacity onPress={this.handleSubmit}>
+        </View>
+        <View style={[styles.toolbar, isFocused && styles.activeToolbar]}>
+          <View style={{flex: 1, flexDirection: 'row'}}>
+            <TouchableOpacity hitSlop={{top: 7, bottom: 7, left: 7, right: 7}} onPress={() => this.startPicker(INSERT_MENTION)}>
+              <Text style={styles.toolbarButton}>@</Text>
+            </TouchableOpacity>
+            <TouchableOpacity hitSlop={{top: 7, bottom: 7, left: 7, right: 7}} onPress={() => this.startPicker(INSERT_TOPIC)}>
+              <Text style={styles.toolbarButton}>#</Text>
+            </TouchableOpacity>
+          </View>
+          {this.props.onSubmit && <TouchableOpacity style={{width: 30}} onPress={this.handleSubmit}>
             <EntypoIcon name='chevron-with-circle-right' style={[styles.sendButton, isFocused && styles.activeButton]} />
           </TouchableOpacity>}
         </View>
-      </KeyboardFriendlyView>
+      </KeyboardAvoidingView>
       <Modal
         animationType='slide'
         transparent={false}
@@ -129,4 +136,16 @@ export function getMarkup (action, choice) {
       break
   }
   return markup
+}
+
+export const mentionsToHtml = (text) => {
+  const re = /\[(.+):(\d)+\]/gi
+  const replace = `<a href="#" data-entity-type="${MENTION_ENTITY_TYPE}" data-user-id="$2">$1</a>`
+  return text.replace(re, replace)
+}
+
+export function toHtml (text) {
+  const encodedText = mentionsToHtml(htmlEncode(trim(text)))
+
+  return encodedText
 }

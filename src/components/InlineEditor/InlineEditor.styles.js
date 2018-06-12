@@ -14,26 +14,25 @@ export default {
     flexDirection: 'row'
   },
   textInput: {
-    flex: 1
+    flex: 1,
+    paddingBottom: 40
   },
   sendButton: {
     fontSize: 20,
-    fontWeight: '400',
-    paddingTop: 15,
-    marginLeft: 10,
-    width: 40
+    fontWeight: '400'
   },
   activeButton: {
     color: azureRadiance
   },
   toolbar: {
     flex: 1,
-    paddingTop: 7,
+    top: -28,
+    alignItems: 'flex-end',
     height: 0,
     flexDirection: 'row'
   },
   activeToolbar: {
-    height: 37
+    height: 20
   },
   toolbarButton: {
     paddingRight: 20,

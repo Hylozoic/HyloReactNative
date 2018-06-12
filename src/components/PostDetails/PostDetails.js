@@ -1,9 +1,8 @@
 /* eslint-disable camelcase */
 import React from 'react'
 import { Linking, View, Text, TouchableOpacity } from 'react-native'
-import { get, isEmpty, trim } from 'lodash/fp'
+import { get, isEmpty } from 'lodash/fp'
 import { shape, any, object, string, func, array, bool } from 'prop-types'
-import { htmlEncode } from 'js-htmlencode'
 import Comments from '../Comments'
 import PostBody from '../PostCard/PostBody'
 import PostCommunities from '../PostCard/PostCommunities'
@@ -14,7 +13,7 @@ import { LoadingScreen } from '../Loading'
 import SocketSubscriber from '../SocketSubscriber'
 import styles from './PostDetails.styles'
 import { FileLabel } from '../PostEditor/FileSelector'
-import InlineEditor from '../InlineEditor'
+import InlineEditor, { toHtml } from '../InlineEditor'
 
 export default class PostDetails extends React.Component {
   static propTypes = {
@@ -57,13 +56,14 @@ export default class PostDetails extends React.Component {
   handleGoToCommunity = (communityId) => this.props.goToCommunity(communityId)
 
   handleCreateComment = (commentText) => {
-    const encodedCommentText = htmlEncode(trim(commentText))
+    const commentTextAsHtml = toHtml(commentText)
 
-    if (!isEmpty(encodedCommentText)) {
-      this.props.createComment(encodedCommentText)
+    if (!isEmpty(commentTextAsHtml)) {
+      this.props.createComment(commentTextAsHtml).then((response) => {
+        this.setState({commentText: '', submitting: false})
+      })
+      this.setState({submitting: true})
     }
-
-    this.setState({commentText: ''})
   }
 
   handleCommentOnChange = (commentText) => {
@@ -79,7 +79,8 @@ export default class PostDetails extends React.Component {
     } = this.props
 
     const {
-      commentText
+      commentText,
+      submitting
     } = this.state
 
     if (!post || !post.creator || !post.title) return <LoadingScreen />
@@ -135,6 +136,7 @@ export default class PostDetails extends React.Component {
         footer={<CommentPrompt
           currentUser={currentUser}
           communityId={communityId}
+          submitting={submitting}
           onChange={this.handleCommentOnChange}
           onSubmit={this.handleCreateComment}
           commentText={commentText} />
@@ -149,7 +151,7 @@ export default class PostDetails extends React.Component {
   }
 }
 
-export function CommentPrompt ({ currentUser, onChange, onSubmit, commentText, communityId }) {
+export function CommentPrompt ({ currentUser, onChange, onSubmit, submitting, commentText, communityId }) {
   if (!currentUser) return null
 
   return <View style={styles.commentPrompt}>
@@ -157,6 +159,7 @@ export function CommentPrompt ({ currentUser, onChange, onSubmit, commentText, c
       onChange={onChange}
       onSubmit={onSubmit}
       value={commentText}
+      submitting={submitting}
       placeholder={`${currentUser.firstName()}, how can you help?`}
       communityId={communityId}
     />

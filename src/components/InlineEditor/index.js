@@ -1,2 +1,1 @@
-import component from './InlineEditor'
-export default component
+export { default, toHtml } from './InlineEditor'
