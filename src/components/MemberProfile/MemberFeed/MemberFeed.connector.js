@@ -1,4 +1,6 @@
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+
 import {
   setChoice,
   getChoice,
@@ -50,11 +52,16 @@ export function mapStateToProps (state, props) {
   }
 }
 
-export const mapDispatchToProps = {
-  setChoice,
-  fetchMemberPosts,
-  fetchMemberComments,
-  fetchMemberUpvotes
+export function mapDispatchToProps (dispatch, { navigation }) {
+  return {
+    ...bindActionCreators({
+      setChoice,
+      fetchMemberPosts,
+      fetchMemberComments,
+      fetchMemberUpvotes
+    }, dispatch),
+    showPost: id => navigation.navigate({routeName: 'PostDetails', params: {id}, key: 'PostDetails'})
+  }
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {

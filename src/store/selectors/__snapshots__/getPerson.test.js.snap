@@ -4,8 +4,6 @@ exports[`getPerson returns the person 1`] = `
 SessionBoundModel {
   "_fields": Object {
     "id": 31,
-    "memberships": undefined,
-    "skills": undefined,
   },
 }
 `;

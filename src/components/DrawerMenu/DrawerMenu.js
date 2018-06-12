@@ -12,10 +12,13 @@ import { ALL_COMMUNITIES_ID } from '../../store/models/Community'
 const allCommunitiesImage = require('../../assets/All_Communities2.png')
 
 export default class DrawerMenu extends React.PureComponent {
+  handleGoToCommunity = (community) => this.props.goToCommunity(community)
+  handleGoToNetwork = (network) => this.props.goToNetwork(network)
+
   render () {
     const {
-      name, avatarUrl, goToCommunity, goToNetwork, goToMyProfile,
-      showSettings, networks, communities, currentCommunity, currentContext,
+      name, avatarUrl, goToMyProfile,
+      showSettings, networks, communities, currentContext,
       currentNetworkId, currentCommunityId, canModerateCurrentCommunity,
       goToCreateCommunityName, goToCommunitySettingsMenu
     } = this.props
@@ -26,8 +29,8 @@ export default class DrawerMenu extends React.PureComponent {
         label: 'Networked Communities',
         renderItem: ({ item }) => <NetworkRow
           network={item}
-          goToCommunity={goToCommunity}
-          goToNetwork={goToNetwork}
+          goToCommunity={this.handleGoToCommunity}
+          goToNetwork={this.handleGoToNetwork}
           currentNetworkId={currentNetworkId}
           currentCommunityId={!currentNetworkId && currentCommunityId} />,
         keyExtractor: item => 'n' + item.id
@@ -37,7 +40,7 @@ export default class DrawerMenu extends React.PureComponent {
         label: 'Independent Communities',
         renderItem: ({ item }) => <CommunityRow
           community={item}
-          goToCommunity={goToCommunity}
+          goToCommunity={this.handleGoToCommunity}
           currentCommunityId={!currentNetworkId && currentCommunityId}
           addPadding />,
         keyExtractor: item => 'c' + item.id
@@ -100,12 +103,12 @@ export function SectionHeader ({ section }) {
   </View>
 }
 
-export class NetworkRow extends React.Component {
+export class NetworkRow extends React.PureComponent {
   constructor (props) {
     super(props)
     const expanded = props.network.communities.reduce((acc, community) =>
       acc || !!community.newPostCount,
-      false)
+    false)
     this.state = {
       expanded,
       seeAllExpanded: false

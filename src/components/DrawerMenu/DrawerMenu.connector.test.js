@@ -10,6 +10,7 @@ it('mapStateToProps matches the latest snapshot', () => {
   const session = orm.session(orm.getEmptyState())
   session.Me.create({id: '33', name: 'meUser'})
   session.Community.create({id: '7', avatarUrl: 'someUrl', name: 'someName'})
+
   const state = {
     session: {
       loggedIn: true,

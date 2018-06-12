@@ -33,7 +33,6 @@ describe('HeaderButton', () => {
 
     expect(actual).toMatchSnapshot()
   })
-
   it('sets state.disabled to match props', () => {
     const props = {
       ...defaultProps,
@@ -62,6 +61,17 @@ describe('HeaderButton', () => {
       instance.onPress()
       expect(instance.state.disabled).toEqual(true)
       expect(props.onPress).toHaveBeenCalled()
+    })
+
+    it('does not set state.disabled to true if disableOnClick is true and calls props.onPress', () => {
+      const props = {
+        ...defaultProps,
+        onPress: jest.fn(),
+        disableOnClick: false
+      }
+      const instance = ReactTestRenderer.create(<HeaderButton {...props} />).getInstance()
+      instance.onPress()
+      expect(instance.state.disabled).toEqual(false)
     })
   })
 })

@@ -48,17 +48,22 @@ export default class PostDetails extends React.Component {
     return nextProps.isFocused
   }
 
+  handleShowMember = (memberId) => this.props.showMember(memberId)
+  handleShowTopic = (topicId) => this.props.showTopic(topicId)
+  handleGoToCommunity = (communityId) => this.props.goToCommunity(communityId)
+
+  handleNewComment = () => {
+    this.props.newComment(get('communities.0.id', this.props.post))
+  }
+
   render () {
     const {
       post,
       currentUser,
       editPost,
       pending,
-      showMember,
-      showTopic,
       newComment,
-      commentEdit,
-      goToCommunity
+      commentEdit
     } = this.props
 
     if (!post || !post.creator || !post.title) return <LoadingScreen />
@@ -76,23 +81,23 @@ export default class PostDetails extends React.Component {
         slug={slug}
         pinned={post.pinned}
         topics={post.topics}
-        showTopic={showTopic}
+        showTopic={this.handleShowTopic}
         postId={post.id}
-        showMember={showMember}
-        goToCommunity={goToCommunity}
+        showMember={this.handleShowMember}
+        goToCommunity={this.handleGoToCommunity}
         announcement={post.announcement}
       />
-      <PostImage postId={post.id} linked />
+      <PostImage imageUrls={post.imageUrls} linked />
       <PostBody title={post.title}
         details={post.details}
         linkPreview={post.linkPreview}
         slug={slug}
-        showMember={showMember}
-        showTopic={showTopic} />
+        showMember={this.handleShowMember}
+        showTopic={this.handleShowTopic} />
       <PostCommunities
         communities={post.communities}
         slug={slug}
-        goToCommunity={goToCommunity} />
+        goToCommunity={this.handleGoToCommunity} />
       {!!location && <View style={[styles.infoRow, styles.bottomInfoRow]}>
         <Text style={styles.infoRowLabel}>Location:</Text>
         <Text style={styles.infoRowinfo}>{location}</Text>
@@ -113,8 +118,8 @@ export default class PostDetails extends React.Component {
         footer={<CommentPrompt {...{currentUser, newComment, commentEdit}} />}
         postId={post.id}
         postPending={pending}
-        showMember={showMember}
-        showTopic={showTopic}
+        showMember={this.handleShowMember}
+        showTopic={this.handleShowTopic}
         slug={slug} />
       <SocketSubscriber type='post' id={post.id} />
     </View>

@@ -6,49 +6,50 @@ import Icon from '../../Icon'
 import {
   caribbeanGreen, rhino30, rhino80, slateGrey80
 } from '../../../style/colors'
-import { string, array, number, func, object } from 'prop-types'
+import { string, array, number, func } from 'prop-types'
 
-export default function PostFooter ({
-  id,
-  currentUser,
-  commenters,
-  commentsTotal,
-  votesTotal,
-  myVote,
-  vote,
-  showActivityLabel
-}) {
-  const voteStyle = myVote ? styles.votes.active : styles.votes.inactive
-  const commentsText = commentsTotal
-    ? `${commentsTotal} comment${commentsTotal === 1 ? '' : 's'}`
-    : 'No comments'
+export default class PostFooter extends React.PureComponent {
+  static propTypes = {
+    id: string,
+    commenters: array,
+    commentersTotal: number,
+    votesTotal: number,
+    vote: func
+  }
 
-  return <View style={styles.container}>
-    {showActivityLabel && <Text style={styles.activityLabel}>Activity</Text>}
-    <View style={styles.comments}>
-      {slice(0, 3, commenters).map((c, index) => {
-        return <Avatar key={index}
-          avatarUrl={c.avatarUrl}
-          size='small'
-          hasBorder
-          hasOverlap={index > 0}
-          zIndex={3 - index} />
-      })}
-      <Text style={styles.commentsText}>{commentsText}</Text>
+  render () {
+    const {
+      commenters,
+      commentsTotal,
+      votesTotal,
+      myVote,
+      vote,
+      showActivityLabel
+    } = this.props
+    const voteStyle = myVote ? styles.votes.active : styles.votes.inactive
+    const commentsText = commentsTotal
+      ? `${commentsTotal} comment${commentsTotal === 1 ? '' : 's'}`
+      : 'No comments'
+
+    return <View style={styles.container}>
+      {showActivityLabel && <Text style={styles.activityLabel}>Activity</Text>}
+      <View style={styles.comments}>
+        {slice(0, 3, commenters).map((c, index) => {
+          return <Avatar key={index}
+            avatarUrl={c.avatarUrl}
+            size='small'
+            hasBorder
+            hasOverlap={index > 0}
+            zIndex={3 - index} />
+        })}
+        <Text style={styles.commentsText}>{commentsText}</Text>
+      </View>
+      <TouchableOpacity style={styles.votes.container} onPress={vote}>
+        <Icon name='ArrowUp' style={[styles.votes.icon, voteStyle]} />
+        <Text style={[styles.votes.text, voteStyle]}>{votesTotal}</Text>
+      </TouchableOpacity>
     </View>
-    <TouchableOpacity style={styles.votes.container} onPress={vote}>
-      <Icon name='ArrowUp' style={[styles.votes.icon, voteStyle]} />
-      <Text style={[styles.votes.text, voteStyle]}>{votesTotal}</Text>
-    </TouchableOpacity>
-  </View>
-}
-PostFooter.propTypes = {
-  id: string,
-  commenters: array,
-  commentersTotal: number,
-  votesTotal: number,
-  vote: func,
-  currentUser: object
+  }
 }
 
 const styles = {

@@ -72,8 +72,10 @@ const getPartitionCommunities = createSelector(
 
 export function mapStateToProps (state, props) {
   const { networks, communities } = getPartitionCommunities(state)
+
   const currentContext = getCurrentNetwork(state) || getCurrentCommunity(state)
   const currentNetworkId = getCurrentNetworkId(state, props)
+
   const currentUser = getMe(state)
   return {
     currentUser: getMe(state),

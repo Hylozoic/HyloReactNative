@@ -3,7 +3,7 @@ import { getSocket, socketUrl } from 'util/websockets'
 import { isDev } from 'util/testing'
 import { isEqual } from 'lodash'
 
-export default class SocketListener extends React.Component {
+export default class SocketListener extends React.PureComponent {
   constructor (props) {
     super(props)
     this.handlers = {

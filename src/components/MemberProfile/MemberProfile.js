@@ -42,7 +42,8 @@ export default class MemberProfile extends React.Component {
       isMe,
       onPressMessages,
       person,
-      updateUserSettings
+      updateUserSettings,
+      navigation
     } = this.props
     const { flaggingVisible } = this.state
     if (!person) return <Loading />
@@ -81,7 +82,7 @@ export default class MemberProfile extends React.Component {
       }
     </View>
 
-    return <MemberFeed id={id} header={header} />
+    return <MemberFeed id={id} header={header} navigation={navigation} />
   }
 }
 

@@ -5,9 +5,7 @@ Object {
   "avatarUrl": "m.png",
   "id": 123,
   "location": "Spain",
-  "memberships": undefined,
   "name": "Maurice",
-  "skills": undefined,
 }
 `;
 
@@ -15,15 +13,10 @@ exports[`on UPDATE_USER_SETTINGS_PENDING updates Me and the Person 1`] = `
 Object {
   "id": 123,
   "location": "Japan",
-  "memberships": undefined,
-  "messageThreads": undefined,
-  "notifications": undefined,
-  "posts": undefined,
   "settings": Object {
     "setting1": 1,
     "setting2": 3,
   },
-  "skills": undefined,
   "tagline": "lalala",
 }
 `;
@@ -32,12 +25,10 @@ exports[`on UPDATE_USER_SETTINGS_PENDING updates Me and the Person 2`] = `
 Object {
   "id": 123,
   "location": "Japan",
-  "memberships": undefined,
   "settings": Object {
     "setting1": 1,
     "setting2": 3,
   },
-  "skills": undefined,
   "tagline": "lalala",
 }
 `;

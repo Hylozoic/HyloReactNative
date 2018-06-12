@@ -170,8 +170,9 @@ export const getMemberPosts = makeQueryResultsModelSelector(
   post => ({
     ...post.ref,
     creator: post.creator,
-    commenters: post.commenters.toModelArray(),
-    communities: post.communities.toModelArray()
+    commenters: post.commenters.toRefArray(),
+    communities: post.communities.toRefArray(),
+    topics: post.topics.toRefArray()
   })
 )
 

@@ -12,9 +12,9 @@ describe('mapStateToProps', () => {
   it('handles a null navigation object', () => {
     const props = {}
     expect(mapStateToProps(state, props)).toEqual({
-      community: null,
+      community: undefined,
       currentUser: undefined,
-      network: false,
+      network: null,
       topic: undefined,
       topicSubscribed: undefined,
       topicName: undefined,
@@ -39,17 +39,34 @@ describe('mapStateToProps', () => {
         }
       }
     }
-    expect(mapStateToProps(state, props)).toEqual({
-      community,
+
+    const secondProps = {
+      navigation: {
+        state: {
+          params: {
+            topicName: 'logistics',
+            communitySlugFromLink: 'world'
+          }
+        }
+      }
+    }
+
+    const firstMapping = mapStateToProps(state, props)
+    const secondMapping = mapStateToProps(state, secondProps)
+
+    expect(firstMapping).toEqual({
+      community: community.ref,
       currentUser,
-      network: false,
+      network: null,
       followersTotal: 10,
       postsTotal: 20,
-      topic,
+      topic: topic.ref,
       topicName: 'logistics',
       topicSubscribed: false,
       currentUserHasMemberships: false
     })
+
+    expect(firstMapping.community === secondMapping.community).toBeTruthy()
   })
 
   it('has topicSubscribed=true when subscribed', () => {

@@ -6,9 +6,6 @@ Object {
     "_fields": Object {
       "id": "99",
       "inviteLink": "/38adslkjlkj3",
-      "members": undefined,
-      "moderators": undefined,
-      "posts": undefined,
       "slug": "foo",
     },
     "inviteLink": "/38adslkjlkj3",
@@ -181,9 +178,6 @@ Object {
     "_fields": Object {
       "id": "99",
       "inviteLink": "/38adslkjlkj3",
-      "members": undefined,
-      "moderators": undefined,
-      "posts": undefined,
       "slug": "foo",
     },
     "inviteLink": "/38adslkjlkj3",

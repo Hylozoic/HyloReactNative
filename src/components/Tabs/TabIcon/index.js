@@ -7,6 +7,7 @@ export default function TabIcon ({ focused, name }) {
   return <Icon
     name={name}
     size={28}
-    style={[icon, focused ? activeTab : inactiveTab]}
+    color={focused ? activeTab.color : inactiveTab.color}
+    style={icon}
   />
 }

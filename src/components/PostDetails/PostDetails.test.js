@@ -14,7 +14,7 @@ const post = {
   },
   communities: [{slug: 'foom'}],
   createdAt: '2017-05-19T23:24:58Z',
-  imageUrl: 'foom.png',
+  imageUrls: ['foom.png'],
   title: 'Hi',
   details: 'Lo',
   linkPreview: {

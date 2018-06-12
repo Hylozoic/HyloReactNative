@@ -16,10 +16,12 @@ export default class ThreadList extends Component {
     header(navigation, {
       left: 'close',
       title: 'Messages',
-      right: {text: 'New', onPress: () => navigation.navigate({routeName: 'NewMessage', key: 'NewMessage'})}
+      right: {text: 'New', onPress: () => navigation.navigate({routeName: 'NewMessage', key: 'NewMessage'})},
+      disableOnClick: false
     })
 
   componentDidMount () {
+    this.props.updateLastViewed()
     this.fetchOrShowCached()
     getSocket().then(socket => socket.on('reconnect', this.props.refreshThreads))
   }

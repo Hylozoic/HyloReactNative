@@ -5,7 +5,6 @@ import { getPerson, fetchPerson } from './MemberProfile.store'
 import makeGoToCommunity from '../../store/actions/makeGoToCommunity'
 import getMe from '../../store/selectors/getMe'
 import updateUserSettings from '../../store/actions/updateUserSettings'
-import { getSkillsFromOrm as getSkills } from '../SkillEditor/SkillEditor.store'
 import { mapWhenFocused, mergeWhenFocused } from 'util/connector'
 
 export function mapStateToProps (state, props) {
@@ -17,8 +16,9 @@ export function mapStateToProps (state, props) {
   const goToEdit = () => props.navigation.navigate({routeName: 'MemberDetails', params: {id, editing: true}, key: 'MemberDetails'})
   const goToSkills = () => props.navigation.navigate({routeName: 'MemberSkillEditor', params: {id}, key: 'MemberSkillEditor'})
   const currentUser = getMe(state, props)
-  const skills = getSkills(state, props)
+  const skills = person ? person.skills : []
   const isMe = Number(get('id', currentUser)) === Number(id)
+  const navigation = props.navigation
 
   return {
     id,
@@ -29,7 +29,8 @@ export function mapStateToProps (state, props) {
     goToDetails,
     goToEdit,
     goToSkills,
-    isMe
+    isMe,
+    navigation
   }
 }
 

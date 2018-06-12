@@ -16,6 +16,7 @@ Array [
   Array [
     Object {
       "headerRight": <HeaderButton
+        disableOnClick={true}
         onPress={[Function]}
         text="Mark as read"
       />,

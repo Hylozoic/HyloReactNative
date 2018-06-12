@@ -25,10 +25,5 @@ export default {
   downArrow: {
     top: isIOS ? 2 : 4,
     marginLeft: 4
-  },
-  postRow: {
-    paddingBottom: 15,
-    marginRight: feedMargin,
-    marginLeft: feedMargin
   }
 }

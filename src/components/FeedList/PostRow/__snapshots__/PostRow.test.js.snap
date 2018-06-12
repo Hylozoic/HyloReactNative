@@ -1,0 +1,79 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PostRow only displays communities in the selected network 1`] = `
+<View>
+  <TouchableOpacity
+    activeOpacity={0.6}
+    delayPressIn={50}
+    onPress={[Function]}
+  >
+    <View>
+      <PostCard
+        commenters={undefined}
+        communities={undefined}
+        creator={undefined}
+        goToCommunity={[Function]}
+        imageUrls={undefined}
+        isPinned={undefined}
+        post={
+          Object {
+            "communities": Array [
+              Object {
+                "name": "community1",
+                "network": Object {
+                  "id": 1,
+                },
+              },
+              Object {
+                "name": "community2",
+                "network": Object {
+                  "id": 2,
+                },
+              },
+              Object {
+                "name": "community3",
+                "network": Object {
+                  "id": 1,
+                },
+              },
+            ],
+            "id": 1,
+          }
+        }
+        showMember={undefined}
+        showTopic={undefined}
+        topics={undefined}
+      />
+    </View>
+  </TouchableOpacity>
+</View>
+`;
+
+exports[`PostRow renders correctly 1`] = `
+<View>
+  <TouchableOpacity
+    activeOpacity={0.6}
+    delayPressIn={50}
+    onPress={[Function]}
+  >
+    <View>
+      <PostCard
+        commenters={undefined}
+        communities={undefined}
+        creator={undefined}
+        goToCommunity={[Function]}
+        imageUrls={undefined}
+        isPinned={undefined}
+        post={
+          Object {
+            "id": 1,
+          }
+        }
+        showMember={undefined}
+        showTopic={undefined}
+        topics={undefined}
+      />
+    </View>
+  </TouchableOpacity>
+</View>
+`;
