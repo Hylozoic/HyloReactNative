@@ -45,14 +45,16 @@ const props = {
   currentUser,
   editPost: jest.fn(),
   pending: false,
+  fetchPost: jest.fn(),
   showMember: jest.fn(),
   showTopic: jest.fn(),
-  createComment: jest.fn(),
+  createComment: jest.fn(() => Promise.resolve()),
   goToCommunity: jest.fn()
 }
 
 const state = {
   orm: orm.getEmptyState(),
+
   queryResults: {},
   pending: {}
 }
@@ -66,10 +68,35 @@ describe('PostDetails', () => {
     expect(actual).toMatchSnapshot()
   })
 
-  it('handleCreateComment', () => {
-    //const instance = TestRenderer.create(<Provider store={createMockStore(state)}><PostDetails {...props} /></Provider>).getInstance()
-    //instance.handleCreateComment('some text [amention:3332] #topic <some encoded stuff>')
-    //expect(instance.state.submitting).toBeTruthy()
+  it('handleCreateComment', async () => {
+    const renderer = TestRenderer.create(<Provider store={createMockStore(state)}><PostDetails {...props} /></Provider>)
+    const instance = renderer.root.findByType(PostDetails).instance
+    const commentText = 'some text [amention:0] #topic <some encoded stuff>'
+    instance.setState({commentText})
+
+    const promise = instance.handleCreateComment('some text [amention:3332] #topic <some encoded stuff>')
+    expect(instance.state.submitting).toBeTruthy()
+    expect(props.createComment).toHaveBeenCalledWith(`some text <a href="#" data-entity-type="mention" data-user-id="3332">amention</a> #topic &lt;some encoded stuff&gt;`)
+    await promise
+    expect(instance.state.submitting).toBeFalsy()
+    expect(instance.state.commentText).toBe('')
+  })
+
+  it('handleCreateComment rejection', async () => {
+    const rejectionProps = {
+      ...props
+    }
+
+    const renderer = TestRenderer.create(<Provider store={createMockStore(state)}><PostDetails {...rejectionProps} /></Provider>)
+    const instance = renderer.root.findByType(PostDetails).instance
+    const commentText = 'some text [amention:0] #topic <some encoded stuff>'
+    instance.setState({commentText})
+
+    const promise = instance.handleCreateComment(commentText)
+    expect(instance.state.submitting).toBeTruthy()
+    await promise
+    expect(instance.state.submitting).toBeFalsy()
+    expect(instance.state.commentText).toBe(commentText)
   })
 })
 

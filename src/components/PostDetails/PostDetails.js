@@ -60,7 +60,7 @@ export default class PostDetails extends React.Component {
 
     if (!isEmpty(commentTextAsHtml)) {
       this.setState({submitting: true})
-      this.props.createComment(commentTextAsHtml)
+      return this.props.createComment(commentTextAsHtml)
         .then(({ error }) => {
           if (error) {
             Alert.alert("Your comment couldn't be saved; please try again.")
