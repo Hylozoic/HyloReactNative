@@ -139,7 +139,7 @@ exports[`SearchPage matches the last snapshot 1`] = `
             <TextInput
               allowFontScaling={true}
               onChangeText={[Function]}
-              underlineColorAndroid={undefined}
+              underlineColorAndroid="transparent"
               value="how"
             />
           </View>
@@ -218,6 +218,14 @@ exports[`SearchResult works with Post 1`] = `
 exports[`Tab matches the last snapshot 1`] = `
 <TouchableOpacity
   activeOpacity={0.2}
+  hitSlop={
+    Object {
+      "bottom": 15,
+      "left": 15,
+      "right": 15,
+      "top": 10,
+    }
+  }
   onPress={[Function]}
 >
   <Text
