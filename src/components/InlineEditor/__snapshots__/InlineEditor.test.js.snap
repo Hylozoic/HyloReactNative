@@ -1,0 +1,100 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders as expected 1`] = `
+<ScrollView
+  contentContainerStyle={
+    Object {
+      "backgroundColor": "white",
+      "borderTopColor": "#c0c6cd",
+      "borderTopWidth": 0.25,
+      "flex": 1,
+      "justifyContent": "flex-start",
+      "paddingHorizontal": 10,
+    }
+  }
+  keyboardDismissMode="on-drag"
+  keyboardShouldPersistTaps="handled"
+>
+  <View>
+    <TouchableOpacity
+      activeOpacity={0.2}
+      hitSlop={
+        Object {
+          "bottom": 7,
+          "left": 7,
+          "right": 7,
+          "top": 7,
+        }
+      }
+      onPress={[Function]}
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+      >
+        @
+      </Text>
+    </TouchableOpacity>
+    <TouchableOpacity
+      activeOpacity={0.2}
+      hitSlop={
+        Object {
+          "bottom": 7,
+          "left": 7,
+          "right": 7,
+          "top": 7,
+        }
+      }
+      onPress={[Function]}
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+      >
+        #
+      </Text>
+    </TouchableOpacity>
+  </View>
+  <View>
+    <TextInput
+      allowFontScaling={true}
+      blurOnSubmit={false}
+      editable={true}
+      multiline={true}
+      onBlur={[Function]}
+      onChangeText={[Function]}
+      onFocus={[Function]}
+      placeholder="Place Holder"
+      placeholderTextColor="#c0c6cd"
+      underlineColorAndroid="transparent"
+      value="some text"
+    />
+    <TouchableOpacity
+      activeOpacity={0.2}
+      onPress={[Function]}
+    >
+      <Icon
+        allowFontScaling={false}
+        name="chevron-with-circle-right"
+        size={12}
+      />
+    </TouchableOpacity>
+  </View>
+  <Component
+    animationType="slide"
+    hardwareAccelerated={false}
+    onRequestClose={[Function]}
+    transparent={false}
+    visible={false}
+  >
+    <Connect(Search)
+      communityId={10}
+      onCancel={[Function]}
+      onSelect={[Function]}
+      type={null}
+    />
+  </Component>
+</ScrollView>
+`;

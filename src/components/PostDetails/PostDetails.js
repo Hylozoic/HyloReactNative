@@ -1,10 +1,9 @@
 /* eslint-disable camelcase */
 import React from 'react'
 import { Linking, View, Text, TouchableOpacity } from 'react-native'
-import { get, isEmpty } from 'lodash/fp'
+import { get, isEmpty, trim } from 'lodash/fp'
 import { shape, any, object, string, func, array, bool } from 'prop-types'
-import striptags from 'striptags'
-import Avatar from '../Avatar'
+import { htmlEncode } from 'js-htmlencode'
 import Comments from '../Comments'
 import PostBody from '../PostCard/PostBody'
 import PostCommunities from '../PostCard/PostCommunities'
@@ -15,6 +14,7 @@ import { LoadingScreen } from '../Loading'
 import SocketSubscriber from '../SocketSubscriber'
 import styles from './PostDetails.styles'
 import { FileLabel } from '../PostEditor/FileSelector'
+import InlineEditor from '../InlineEditor'
 
 export default class PostDetails extends React.Component {
   static propTypes = {
@@ -40,6 +40,10 @@ export default class PostDetails extends React.Component {
     showTopic: func
   }
 
+  state = {
+    commentText: ''
+  }
+
   componentDidMount () {
     this.props.fetchPost()
   }
@@ -52,8 +56,18 @@ export default class PostDetails extends React.Component {
   handleShowTopic = (topicId) => this.props.showTopic(topicId)
   handleGoToCommunity = (communityId) => this.props.goToCommunity(communityId)
 
-  handleNewComment = () => {
-    this.props.newComment(get('communities.0.id', this.props.post))
+  handleCreateComment = (commentText) => {
+    const encodedCommentText = htmlEncode(trim(commentText))
+
+    if (!isEmpty(encodedCommentText)) {
+      this.props.createComment(encodedCommentText)
+    }
+
+    this.setState({commentText: ''})
+  }
+
+  handleCommentOnChange = (commentText) => {
+    this.setState({commentText})
   }
 
   render () {
@@ -61,14 +75,17 @@ export default class PostDetails extends React.Component {
       post,
       currentUser,
       editPost,
-      pending,
-      newComment,
-      commentEdit
+      pending
     } = this.props
+
+    const {
+      commentText
+    } = this.state
 
     if (!post || !post.creator || !post.title) return <LoadingScreen />
 
-    const slug = get('0.slug', post.communities)
+    const slug = get('communities.0.slug', post)
+    const communityId = get('communities.0.id', post)
 
     const { location } = post
 
@@ -115,7 +132,13 @@ export default class PostDetails extends React.Component {
     return <View style={styles.container}>
       <Comments
         header={postCard}
-        footer={<CommentPrompt {...{currentUser, newComment, commentEdit}} />}
+        footer={<CommentPrompt
+          currentUser={currentUser}
+          communityId={communityId}
+          onChange={this.handleCommentOnChange}
+          onSubmit={this.handleCreateComment}
+          commentText={commentText} />
+        }
         postId={post.id}
         postPending={pending}
         showMember={this.handleShowMember}
@@ -126,23 +149,17 @@ export default class PostDetails extends React.Component {
   }
 }
 
-export function CommentPrompt ({ currentUser, newComment, commentEdit }) {
+export function CommentPrompt ({ currentUser, onChange, onSubmit, commentText, communityId }) {
   if (!currentUser) return null
-  const { avatarUrl } = currentUser
-
-  const commentExcerpt = commentEdit && striptags(commentEdit, [], ' ').substring(0, 35)
-
-  const promptText = commentExcerpt || `${currentUser.firstName()}, how can you help?`
-  const promptTextStyle = [
-    styles.promptText,
-    commentEdit ? null : styles.placeholder
-  ]
 
   return <View style={styles.commentPrompt}>
-    <TouchableOpacity onPress={newComment} style={styles.promptButton}>
-      <Avatar avatarUrl={avatarUrl} style={styles.avatar} />
-      <Text style={promptTextStyle}>{promptText}</Text>
-    </TouchableOpacity>
+    <InlineEditor
+      onChange={onChange}
+      onSubmit={onSubmit}
+      value={commentText}
+      placeholder={`${currentUser.firstName()}, how can you help?`}
+      communityId={communityId}
+    />
   </View>
 }
 

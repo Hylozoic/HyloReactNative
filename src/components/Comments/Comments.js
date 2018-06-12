@@ -40,6 +40,7 @@ export default class Comments extends React.PureComponent {
     </View>
 
     return <FlatList
+      keyboardShouldPersistTaps={'handled'}
       data={comments}
       renderItem={({ item }) => <Comment
         comment={item}

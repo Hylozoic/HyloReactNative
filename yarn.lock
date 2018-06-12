@@ -4365,6 +4365,10 @@ jquery@>=1.9.0:
   version "3.3.1"
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.3.1.tgz#958ce29e81c9790f31be7792df5d4d95fc57fbca"
 
+js-htmlencode@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/js-htmlencode/-/js-htmlencode-0.3.0.tgz#b1ce293df94e96f8a8a08b1f3368f977bd255731"
+
 js-tokens@^3.0.0, js-tokens@^3.0.2:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-3.0.2.tgz#9866df395102130e38f7f996bceb65443209c25b"

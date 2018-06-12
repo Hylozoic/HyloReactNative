@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 
-import fetchPost, { FETCH_POST } from '../../store/actions/fetchPost'
-import { getCommentEdits } from './CommentEditor/CommentEditor.store'
+import fetchPost from '../../store/actions/fetchPost'
+import { getCommentEdits, createComment } from './CommentEditor/CommentEditor.store'
 import { getPresentedPost } from '../../store/selectors/getPost'
 import getCurrentCommunityId from '../../store/selectors/getCurrentCommunityId'
 import getMe from '../../store/selectors/getMe'
@@ -32,12 +32,7 @@ export function mapDispatchToProps (dispatch, props) {
     editPost: () => props.navigation.navigate({routeName: 'PostEditor', params: {id}, key: 'PostEditor'}),
     showMember: id => props.navigation.navigate({routeName: 'MemberProfile', params: {id}, key: 'MemberProfile'}),
     showTopic: topicName => props.navigation.navigate({routeName: 'Feed', params: {topicName}, key: 'Feed'}),
-    newComment: communityId => {
-      return props.navigation.navigate('CommentEditor', {
-        postId: id,
-        communityId
-      })
-    },
+    createComment: value => dispatch(createComment(id, value)),
     goToCommunity: makeGoToCommunity(dispatch, props.navigation)
   }
 }
