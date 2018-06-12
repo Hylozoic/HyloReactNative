@@ -62,19 +62,7 @@ describe('CommentPrompt', () => {
   it('renders correctly', () => {
     const renderer = new ReactShallowRenderer()
     renderer.render(<CommentPrompt
-      currentUser={currentUser}
-      newComment={() => {}} />)
-    const actual = renderer.getRenderOutput()
-
-    expect(actual).toMatchSnapshot()
-  })
-
-  it('renders with comment text', () => {
-    const renderer = new ReactShallowRenderer()
-    renderer.render(<CommentPrompt
-      currentUser={currentUser}
-      newComment={() => {}}
-      commentEdit='A long enough comment that it will be truncated' />)
+      currentUser={currentUser} />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()

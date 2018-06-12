@@ -1,9 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Comments renders correctly 1`] = `
-<FlatList
-  ListFooterComponent={
-    <View>
+<View>
+  <FlatList
+    ListFooterComponent={
       <Text
         accessible={true}
         allowFontScaling={true}
@@ -11,51 +11,54 @@ exports[`Comments renders correctly 1`] = `
       >
         Some More Code
       </Text>
-    </View>
-  }
-  ListHeaderComponent={
-    <View>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-      >
-        Some React Code
-      </Text>
-      <Loading />
-      <ShowMore
-        commentsLength={3}
-        fetchComments={[Function]}
-        hasMore={true}
-        total={17}
-      />
-    </View>
-  }
-  data={
-    Array [
-      Object {
-        "id": 1,
-      },
-      Object {
-        "id": 2,
-      },
-      Object {
-        "id": 3,
-      },
-    ]
-  }
-  disableVirtualization={false}
-  horizontal={false}
-  initialNumToRender={10}
-  keyExtractor={[Function]}
-  maxToRenderPerBatch={10}
-  numColumns={1}
-  onEndReachedThreshold={2}
-  renderItem={[Function]}
-  scrollEventThrottle={50}
-  updateCellsBatchingPeriod={50}
-  windowSize={21}
-/>
+    }
+    ListHeaderComponent={
+      <View>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+        >
+          Some React Code
+        </Text>
+        <ShowMore
+          commentsLength={3}
+          fetchComments={[Function]}
+          hasMore={true}
+          total={17}
+        />
+        <View>
+          <Loading />
+        </View>
+      </View>
+    }
+    data={
+      Array [
+        Object {
+          "id": 1,
+        },
+        Object {
+          "id": 2,
+        },
+        Object {
+          "id": 3,
+        },
+      ]
+    }
+    disableVirtualization={false}
+    horizontal={false}
+    initialNumToRender={10}
+    keyExtractor={[Function]}
+    keyboardShouldPersistTaps="handled"
+    maxToRenderPerBatch={10}
+    numColumns={1}
+    onEndReachedThreshold={2}
+    renderItem={[Function]}
+    scrollEventThrottle={50}
+    updateCellsBatchingPeriod={50}
+    windowSize={21}
+  />
+</View>
 `;
 
 exports[`ShowMore renders correctly 1`] = `

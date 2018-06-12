@@ -15,73 +15,81 @@ exports[`renders as expected 1`] = `
   keyboardDismissMode="on-drag"
   keyboardShouldPersistTaps="handled"
 >
-  <View>
-    <TouchableOpacity
-      activeOpacity={0.2}
-      hitSlop={
-        Object {
-          "bottom": 7,
-          "left": 7,
-          "right": 7,
-          "top": 7,
-        }
-      }
-      onPress={[Function]}
-    >
-      <Text
-        accessible={true}
+  <KeyboardAvoidingView
+    behavior="padding"
+    enabled={true}
+    keyboardVerticalOffset={0}
+  >
+    <View>
+      <TextInput
         allowFontScaling={true}
-        ellipsizeMode="tail"
-      >
-        @
-      </Text>
-    </TouchableOpacity>
-    <TouchableOpacity
-      activeOpacity={0.2}
-      hitSlop={
-        Object {
-          "bottom": 7,
-          "left": 7,
-          "right": 7,
-          "top": 7,
-        }
-      }
-      onPress={[Function]}
-    >
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-      >
-        #
-      </Text>
-    </TouchableOpacity>
-  </View>
-  <View>
-    <TextInput
-      allowFontScaling={true}
-      blurOnSubmit={false}
-      editable={true}
-      multiline={true}
-      onBlur={[Function]}
-      onChangeText={[Function]}
-      onFocus={[Function]}
-      placeholder="Place Holder"
-      placeholderTextColor="#c0c6cd"
-      underlineColorAndroid="transparent"
-      value="some text"
-    />
-    <TouchableOpacity
-      activeOpacity={0.2}
-      onPress={[Function]}
-    >
-      <Icon
-        allowFontScaling={false}
-        name="chevron-with-circle-right"
-        size={12}
+        blurOnSubmit={false}
+        editable={true}
+        multiline={true}
+        onBlur={[Function]}
+        onChangeText={[Function]}
+        onFocus={[Function]}
+        placeholder="Place Holder"
+        placeholderTextColor="#c0c6cd"
+        underlineColorAndroid="transparent"
+        value="some text"
       />
-    </TouchableOpacity>
-  </View>
+    </View>
+    <View>
+      <View>
+        <TouchableOpacity
+          activeOpacity={0.2}
+          hitSlop={
+            Object {
+              "bottom": 7,
+              "left": 7,
+              "right": 7,
+              "top": 7,
+            }
+          }
+          onPress={[Function]}
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+          >
+            @
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          activeOpacity={0.2}
+          hitSlop={
+            Object {
+              "bottom": 7,
+              "left": 7,
+              "right": 7,
+              "top": 7,
+            }
+          }
+          onPress={[Function]}
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+          >
+            #
+          </Text>
+        </TouchableOpacity>
+      </View>
+      <TouchableOpacity
+        activeOpacity={0.2}
+        onPress={[Function]}
+      >
+        <Icon
+          allowFontScaling={false}
+          name="chevron-with-circle-right"
+          size={12}
+        />
+      </TouchableOpacity>
+    </View>
+  </KeyboardAvoidingView>
   <Component
     animationType="slide"
     hardwareAccelerated={false}

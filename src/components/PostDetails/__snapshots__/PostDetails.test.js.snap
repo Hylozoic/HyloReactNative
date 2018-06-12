@@ -2,41 +2,14 @@
 
 exports[`CommentPrompt renders correctly 1`] = `
 <View>
-  <TouchableOpacity
-    activeOpacity={0.2}
-    onPress={[Function]}
-  >
-    <Avatar
-      avatarUrl="me.png"
-    />
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
-      Joe, how can you help?
-    </Text>
-  </TouchableOpacity>
-</View>
-`;
-
-exports[`CommentPrompt renders with comment text 1`] = `
-<View>
-  <TouchableOpacity
-    activeOpacity={0.2}
-    onPress={[Function]}
-  >
-    <Avatar
-      avatarUrl="me.png"
-    />
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
-      A long enough comment that it will 
-    </Text>
-  </TouchableOpacity>
+  <InlineEditor
+    communityId={undefined}
+    onChange={undefined}
+    onSubmit={undefined}
+    placeholder="Joe, how can you help?"
+    submitting={undefined}
+    value={undefined}
+  />
 </View>
 `;
 
@@ -120,7 +93,8 @@ exports[`PostDetails renders correctly 1`] = `
   <Connect(Comments)
     footer={
       <CommentPrompt
-        commentEdit={undefined}
+        commentText=""
+        communityId={undefined}
         currentUser={
           Object {
             "avatarUrl": "me.png",
@@ -128,7 +102,9 @@ exports[`PostDetails renders correctly 1`] = `
             "id": 123,
           }
         }
-        newComment={undefined}
+        onChange={[Function]}
+        onSubmit={[Function]}
+        submitting={undefined}
       />
     }
     header={

@@ -2,10 +2,10 @@
 
 exports[`mapsDispatchToProps 1`] = `
 Object {
+  "createComment": [Function],
   "editPost": [Function],
   "fetchPost": [Function],
   "goToCommunity": [Function],
-  "newComment": [Function],
   "showMember": [Function],
   "showTopic": [Function],
 }
