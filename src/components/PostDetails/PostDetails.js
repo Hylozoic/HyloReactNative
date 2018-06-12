@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 import React from 'react'
-import { Linking, View, Text, TouchableOpacity } from 'react-native'
+import { Linking, View, Text, TouchableOpacity, Alert } from 'react-native'
 import { get, isEmpty } from 'lodash/fp'
 import { shape, any, object, string, func, array, bool } from 'prop-types'
 import Comments from '../Comments'
@@ -59,10 +59,16 @@ export default class PostDetails extends React.Component {
     const commentTextAsHtml = toHtml(commentText)
 
     if (!isEmpty(commentTextAsHtml)) {
-      this.props.createComment(commentTextAsHtml).then((response) => {
-        this.setState({commentText: '', submitting: false})
-      })
       this.setState({submitting: true})
+      this.props.createComment(commentTextAsHtml)
+        .then(({ error }) => {
+          if (error) {
+            Alert.alert("Your comment couldn't be saved; please try again.")
+          } else {
+            this.setState({commentText: '', submitting: false})
+          }
+        })
+        .catch(() => Alert.alert("Your comment couldn't be saved. Please try again."))
     }
   }
 

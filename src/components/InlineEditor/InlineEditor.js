@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, View, TextInput, TouchableOpacity, Modal, ScrollView, KeyboardAvoidingView } from 'react-native'
+import { Text, View, TextInput, TouchableOpacity, Modal, ScrollView, KeyboardAvoidingView, ActivityIndicator } from 'react-native'
 import Search, { SearchType } from '../Search'
 import styles from './InlineEditor.styles'
 import { rhino30 } from 'style/colors'
@@ -98,7 +98,8 @@ export default class InlineEditor extends React.PureComponent {
               <Text style={styles.toolbarButton}>#</Text>
             </TouchableOpacity>
           </View>
-          {this.props.onSubmit && <TouchableOpacity style={{width: 30}} onPress={this.handleSubmit}>
+          {this.props.onSubmit && submitting && <View style={{width: 30}}><ActivityIndicator /></View>}
+          {this.props.onSubmit && !submitting && <TouchableOpacity style={{width: 30}} onPress={this.handleSubmit}>
             <EntypoIcon name='chevron-with-circle-right' style={[styles.sendButton, isFocused && styles.activeButton]} />
           </TouchableOpacity>}
         </View>
