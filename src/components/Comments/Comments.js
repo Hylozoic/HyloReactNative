@@ -12,6 +12,21 @@ export default class Comments extends React.PureComponent {
     fetchComments: func
   }
 
+  keyExtractor = (item) => item.id
+
+  renderItem = ({item}) => {
+    const {
+      showMember,
+      showTopic,
+      slug
+    } = this.props
+    return <Comment
+      comment={item}
+      showMember={showMember}
+      showTopic={showTopic}
+      slug={slug} />
+  }
+
   render () {
     const {
       comments,
@@ -21,36 +36,29 @@ export default class Comments extends React.PureComponent {
       total,
       hasMore,
       fetchComments,
-      showMember,
-      showTopic,
-      slug
     } = this.props
 
-    const listHeaderComponent = <View>
+    const headerComponent = <View>
       {header}
-      {pending && <Loading style={styles.loading} />}
       <ShowMore commentsLength={comments.length}
         total={total}
         hasMore={hasMore}
         fetchComments={fetchComments} />
+      {pending && <View style={styles.loadingContainer}>
+        <Loading style={styles.loading} />
+      </View>}
     </View>
 
-    const listFooterComponent = <View style={styles.footer}>
-      {footer}
+    return <View>
+      <FlatList
+        keyboardShouldPersistTaps={'handled'}
+        data={comments}
+        renderItem={this.renderItem}
+        keyExtractor={this.keyExtractor}
+        ListHeaderComponent={headerComponent}
+        ListFooterComponent={footer}
+      />
     </View>
-
-    return <FlatList
-      keyboardShouldPersistTaps={'handled'}
-      data={comments}
-      renderItem={({ item }) => <Comment
-        comment={item}
-        showMember={showMember}
-        showTopic={showTopic}
-        slug={slug} />}
-      keyExtractor={(item, index) => item.id}
-      ListHeaderComponent={listHeaderComponent}
-      ListFooterComponent={listFooterComponent}
-    />
   }
 }
 
