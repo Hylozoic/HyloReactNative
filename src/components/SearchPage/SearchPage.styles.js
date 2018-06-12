@@ -38,7 +38,8 @@ export default {
     marginHorizontal: 5
   },
   textInput: {
-    flex: 1
+    flex: 1,
+    height: 50
   },
   tabBar: {
     flexDirection: 'row',

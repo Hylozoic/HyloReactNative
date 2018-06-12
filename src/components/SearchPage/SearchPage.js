@@ -68,7 +68,7 @@ export default class SearchPage extends React.Component {
             value={searchTerm}
             onChangeText={text => setSearchTerm(text)}
             style={styles.textInput}
-            underlineColorAndroid={styles.androidInvisibleUnderline} />
+            underlineColorAndroid='transparent' />
         </View>
       </View>
       <TabBar filter={filter} setSearchFilter={setSearchFilter} />
