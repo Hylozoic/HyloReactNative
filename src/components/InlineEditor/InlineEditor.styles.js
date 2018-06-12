@@ -32,7 +32,7 @@ export default {
     flexDirection: 'row'
   },
   activeToolbar: {
-    height: 20
+    height: 24
   },
   toolbarButton: {
     paddingRight: 20,

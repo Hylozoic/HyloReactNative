@@ -104,7 +104,7 @@ export default class InlineEditor extends React.PureComponent {
           </TouchableOpacity>}
         </View>
       </KeyboardAvoidingView>
-      <Modal
+      {showPicker && <Modal
         animationType='slide'
         transparent={false}
         visible={showPicker}
@@ -115,7 +115,7 @@ export default class InlineEditor extends React.PureComponent {
           communityId={communityId}
           onSelect={this.insertPicked}
           onCancel={this.cancelPicker} />
-      </Modal>
+      </Modal>}
     </ScrollView>
   }
 }
