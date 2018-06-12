@@ -64,11 +64,15 @@ export default class PostDetails extends React.Component {
         .then(({ error }) => {
           if (error) {
             Alert.alert("Your comment couldn't be saved; please try again.")
+            this.setState({submitting: false})
           } else {
             this.setState({commentText: '', submitting: false})
           }
         })
-        .catch(() => Alert.alert("Your comment couldn't be saved. Please try again."))
+        .catch(() => {
+          Alert.alert("Your comment couldn't be saved. Please try again.")
+          this.setState({submitting: false})
+        })
     }
   }
 
