@@ -140,7 +140,7 @@ export function getMarkup (action, choice) {
 }
 
 export const mentionsToHtml = (text) => {
-  const re = /\[(.+):(\d+)\]/gi
+  const re = /\[([^[]+):(\d+)\]/gi
   const replace = `<a href="#" data-entity-type="${MENTION_ENTITY_TYPE}" data-user-id="$2">$1</a>`
   return text.replace(re, replace)
 }

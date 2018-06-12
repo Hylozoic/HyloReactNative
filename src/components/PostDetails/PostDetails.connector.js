@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 
 import fetchPost from '../../store/actions/fetchPost'
-import { getCommentEdits, createComment } from './CommentEditor/CommentEditor.store'
+import { createComment } from './CommentEditor/CommentEditor.store'
 import { getPresentedPost } from '../../store/selectors/getPost'
 import getCurrentCommunityId from '../../store/selectors/getCurrentCommunityId'
 import getMe from '../../store/selectors/getMe'
@@ -14,13 +14,11 @@ function getPostId (state, props) {
 export function mapStateToProps (state, props) {
   const id = getPostId(state, props)
   const currentUser = getMe(state, props)
-  const commentEdit = getCommentEdits(state, {postId: id})
   const communityId = getCurrentCommunityId(state, props)
 
   return {
     post: getPresentedPost(state, {id, communityId}),
-    currentUser,
-    commentEdit
+    currentUser
   }
 }
 

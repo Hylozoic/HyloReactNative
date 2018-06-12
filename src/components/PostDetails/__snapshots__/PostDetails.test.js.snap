@@ -125,7 +125,7 @@ exports[`PostDetails renders correctly 1`] = `
             }
           }
           date="2017-05-19T23:24:58Z"
-          editPost={[Function]}
+          editPost={[MockFunction]}
           goToCommunity={[Function]}
           pinned={true}
           postId="91"
@@ -152,11 +152,7 @@ exports[`PostDetails renders correctly 1`] = `
         />
         <PostBody
           details="Lo"
-          linkPreview={
-            Object {
-              "id": "34",
-            }
-          }
+          linkPreview={undefined}
           showMember={[Function]}
           showTopic={[Function]}
           slug="foom"
