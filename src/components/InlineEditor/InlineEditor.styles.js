@@ -1,5 +1,5 @@
 import { rhino30, azureRadiance } from 'style/colors'
-
+import { Platform } from 'react-native'
 export default {
   container: {
     flex: 1,
@@ -39,5 +39,15 @@ export default {
     paddingRight: 20,
     fontSize: 20,
     fontWeight: '700'
+  },
+  picker: {
+    ...Platform.select({
+      ios: {
+        paddingTop: 20
+      },
+      android: {
+        paddingTop: 0
+      }
+    })
   }
 }
