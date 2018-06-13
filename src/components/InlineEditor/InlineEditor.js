@@ -73,10 +73,11 @@ export default class InlineEditor extends React.PureComponent {
     } = this.props
 
     const { showPicker, isFocused, pickerType, height } = this.state
+
     // Calculates a height based on textInput content size with the following constraint: 40 < height < 190
     const calculatedHeight = Math.round(Math.min(Math.max((isEmpty(value) ? minTextInputHeight : height) + (isFocused ? 45 : 0), minTextInputHeight), 190))
 
-    return <View style={[styles.container, {maxHeight: calculatedHeight}]}>
+    return <View style={[styles.container, {height: calculatedHeight}]}>
       <View style={styles.wrapper}>
         <TextInput
           editable={!!editable && !submitting}
