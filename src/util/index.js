@@ -36,19 +36,12 @@ export function basename (url) {
 }
 
 /**
- * Useful for testing if props have changed in React.Components shouldComponentUpdate
- * method.  You should use React.PureComponent if possible, but if you can't (like if you want to
- * use react-navigations nextProps.isFocused, you can use this to prevent further updates.
- *
-<<<<<<< HEAD
-=======
- * EXAMPLE:
+  * EXAMPLE:
  *
  * shouldComponentUpdate (nextProps) {
  *   return nextProps.isFocused && didPropsChange(this.props, nextProps)
  * }
  *
->>>>>>> master
  * @param props
  * @param nextProps
  * @returns {*}
