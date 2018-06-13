@@ -16,7 +16,7 @@ export default class InlineEditor extends React.PureComponent {
     showPicker: false,
     isFocused: false,
     pickerType: null,
-    height: 30
+    height: 40
   }
 
   startPicker = action => {
@@ -71,7 +71,9 @@ export default class InlineEditor extends React.PureComponent {
     } = this.props
 
     const { showPicker, isFocused, pickerType, height } = this.state
-    const calculatedHeight = Math.min(height + (isFocused ? 45 : 0), 190)
+    // Calculates a height based on textInput content size with the following constraint: 40 < height < 190
+    const calculatedHeight = Math.round(Math.min(Math.max(height + (isFocused ? 45 : 0), 40), 190))
+    console.log('*********CALCULATED HEIGHT', height, calculatedHeight)
 
     return <View style={[styles.container, {height: calculatedHeight}]}>
       <View style={styles.wrapper}>
@@ -82,7 +84,7 @@ export default class InlineEditor extends React.PureComponent {
           blurOnSubmit={false}
           onContentSizeChange={(event) => {
             console.log('*********ContentSizeChange', height, calculatedHeight, event.nativeEvent.contentSize.height)
-            this.setState({height: event.nativeEvent.contentSize.height})
+            this.setState({height: Math.round(event.nativeEvent.contentSize.height)})
           }}
           placeholder={placeholder}
           placeholderTextColor={rhino30}
