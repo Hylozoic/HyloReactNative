@@ -14,7 +14,7 @@ import SocketSubscriber from '../SocketSubscriber'
 import styles from './PostDetails.styles'
 import { FileLabel } from '../PostEditor/FileSelector'
 import InlineEditor, { toHtml } from '../InlineEditor'
-
+import KeyboardFriendlyView from '../KeyboardFriendlyView'
 export default class PostDetails extends React.Component {
   static propTypes = {
     post: shape({
@@ -137,7 +137,7 @@ export default class PostDetails extends React.Component {
         showActivityLabel />
     </View>
 
-    return <View style={styles.container}>
+    return <KeyboardFriendlyView style={styles.container} behavior="position">
       <Comments
         ref='comments'
         header={postCard}
@@ -155,7 +155,7 @@ export default class PostDetails extends React.Component {
         showTopic={this.handleShowTopic}
         slug={slug} />
       <SocketSubscriber type='post' id={post.id} />
-    </View>
+   </KeyboardFriendlyView>
   }
 }
 

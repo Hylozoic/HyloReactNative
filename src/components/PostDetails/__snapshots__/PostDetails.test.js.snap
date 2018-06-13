@@ -87,7 +87,9 @@ exports[`Files renders correctly 1`] = `
 `;
 
 exports[`PostDetails renders correctly 1`] = `
-<View>
+<Unknown
+  behavior="position"
+>
   <Connect(Comments)
     footer={
       <CommentPrompt
@@ -211,5 +213,5 @@ exports[`PostDetails renders correctly 1`] = `
     id="91"
     type="post"
   />
-</View>
+</Unknown>
 `;
