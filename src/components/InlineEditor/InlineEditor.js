@@ -16,7 +16,7 @@ export default class InlineEditor extends React.PureComponent {
     showPicker: false,
     isFocused: false,
     pickerType: null,
-    height: 100
+    height: 30
   }
 
   startPicker = action => {
