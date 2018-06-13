@@ -41,7 +41,10 @@ export default class PostHeader extends React.PureComponent {
       pinPost,
       topics,
       announcement,
-      canEdit
+      canEdit,
+      hideMenu,
+      hideDateRow,
+      smallAvatar
     } = this.props
     const { flaggingVisible } = this.state
 
@@ -80,7 +83,7 @@ export default class PostHeader extends React.PureComponent {
     return <View style={styles.container}>
       <View style={styles.avatarSpacing}>
         <TouchableOpacity onPress={this.showMember}>
-          {avatarUrl && <Avatar avatarUrl={avatarUrl} />}
+          {avatarUrl && <Avatar avatarUrl={avatarUrl} dimension={smallAvatar && 20} />}
         </TouchableOpacity>
       </View>
       <View style={styles.meta}>
@@ -88,7 +91,7 @@ export default class PostHeader extends React.PureComponent {
           {name && <Text style={styles.username}>{name}</Text>}
           {!!tagline && <Text style={styles.metaText}>{tagline}</Text>}
         </TouchableOpacity>
-        <View style={styles.dateRow}>
+        {!hideDateRow && <View style={styles.dateRow}>
           <Text style={styles.metaText}>{humanDate(date)}</Text>
           {!!showTopics && <FlatList
             data={topics}
@@ -97,19 +100,19 @@ export default class PostHeader extends React.PureComponent {
             keyExtractor={this.topicKeyExtractor}
             showsHorizontalScrollIndicator={false}
             renderItem={this.renderTopic} />}
-        </View>
+        </View>}
       </View>
       <View style={styles.upperRight}>
         {pinned && <Icon name='Pin' style={styles.pinIcon} />}
         {announcement && <Icon name='Announcement' style={styles.announcementIcon} />}
         {type && <PostLabel type={type} />}
-        <PostMenu
+        {!hideMenu && <PostMenu
           removePost={removePostWithConfirm}
           deletePost={deletePostWithConfirm}
           editPost={canEdit && this.handleEditPost}
           flagPost={flagPost}
           pinPost={pinPost}
-          pinned={pinned} />
+          pinned={pinned} />}
         {flaggingVisible && <FlagContent type='post'
           linkData={linkData}
           onClose={() => this.setState({flaggingVisible: false})} />
@@ -167,17 +170,24 @@ const styles = {
   meta: {
     paddingTop: 7 + 9,
     paddingRight: 7,
-    flex: 1
+    flex: 1,
+    justifyContent: 'space-around'
   },
   avatarSpacing: {
     paddingTop: 7 + 9,
     paddingLeft: 7 + 5,
     paddingRight: 7
   },
+  avatarNudge: {
+    paddingTop: 18
+  },
   username: {
     fontSize: 14,
     color: '#363D3C',
     fontFamily: 'Circular-Bold'
+  },
+  usernameNudge: {
+    top: 10
   },
   dateRow: {
     flexDirection: 'row',

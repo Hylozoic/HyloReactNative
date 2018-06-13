@@ -31,7 +31,7 @@ export default class PostBody extends React.PureComponent {
     )
 
     return <View style={styles.container}>
-      <Text style={styles.title}>{decodedTitle}</Text>
+      <PostTitle title={decodedTitle} />
       <HTMLView
         onLinkPress={this.handleLinkPress}
         addLineBreaks={false}
@@ -41,6 +41,11 @@ export default class PostBody extends React.PureComponent {
       {linkPreview && <LinkPreview {...linkPreview} />}
     </View>
   }
+}
+
+export function PostTitle ({ title, style }) {
+  const decodedTitle = decode(title)
+  return <Text style={[styles.title, style]}>{decodedTitle}</Text>
 }
 
 const styles = StyleSheet.create({

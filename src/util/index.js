@@ -2,7 +2,7 @@
  * @providesModule util/index
  */
 
-import { last, some, eq, omitBy } from 'lodash'
+import { last, eq, omitBy } from 'lodash'
 
 export function isPromise (value) {
   return value && typeof value.then === 'function'
@@ -36,11 +36,7 @@ export function basename (url) {
 }
 
 /**
- * Useful for testing if props have changed in React.Components shouldComponentUpdate
- * method.  You should use React.PureComponent if possible, but if you can't (like if you want to
- * use react-navigations nextProps.isFocused, you can use this to prevent further updates.
- *
- * EXAMPLE:
+  * EXAMPLE:
  *
  * shouldComponentUpdate (nextProps) {
  *   return nextProps.isFocused && didPropsChange(this.props, nextProps)
@@ -50,6 +46,7 @@ export function basename (url) {
  * @param nextProps
  * @returns {*}
  */
+
 export function didPropsChange (props, nextProps) {
   if (props === nextProps) {
     return false
@@ -92,6 +89,7 @@ export function didPropsChange (props, nextProps) {
  * @param prevProps
  * @param componentName a String identifying your component
  */
+
 export function whatPropsChanged (props, prevProps, componentName = '') {
   console.log(`***** WHAT PROPS CHANGED ${componentName} ******`, omitBy(props, (value, key) => eq(prevProps[key], value)))
 }

@@ -20,7 +20,8 @@ export default function Comment ({
   style,
   displayPostTitle,
   deleteComment,
-  removeComment
+  removeComment,
+  hideMenu
 }) {
   const {creator, text, createdAt, post} = comment
   const presentedText = present(sanitize(text), {slug})
@@ -59,7 +60,7 @@ export default function Comment ({
           <Text style={styles.date}>on "{postTitle}"</Text>}
         </View>
         <View style={styles.headerRight}>
-          <CommentMenu deleteComment={deleteCommentWithConfirm} removeComment={removeCommentWithConfirm} />
+          {!hideMenu && <CommentMenu deleteComment={deleteCommentWithConfirm} removeComment={removeCommentWithConfirm} />}
         </View>
 
       </View>

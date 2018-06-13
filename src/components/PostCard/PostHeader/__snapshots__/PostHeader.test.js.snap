@@ -127,6 +127,7 @@ exports[`renders correctly when showCommunity is true 1`] = `
     >
       <Avatar
         avatarUrl="foo.png"
+        dimension={undefined}
       />
     </TouchableOpacity>
   </View>
@@ -182,6 +183,7 @@ exports[`renders correctly with all=true, and no community or user 1`] = `
     >
       <Avatar
         avatarUrl="foo.png"
+        dimension={undefined}
       />
     </TouchableOpacity>
   </View>
@@ -264,6 +266,7 @@ exports[`renders correctly with no flagging 1`] = `
     >
       <Avatar
         avatarUrl="foo.png"
+        dimension={undefined}
       />
     </TouchableOpacity>
   </View>
