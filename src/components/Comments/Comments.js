@@ -12,15 +12,15 @@ export default class Comments extends React.PureComponent {
     fetchComments: func
   }
 
-  renderItem = (item) => {
+  renderComment = (comment) => {
     const {
       showMember,
       showTopic,
       slug
     } = this.props
     return <Comment
-      comment={item}
-      key={item.id}
+      comment={comment}
+      key={comment.id}
       showMember={showMember}
       showTopic={showTopic}
       slug={slug} />
@@ -51,7 +51,7 @@ export default class Comments extends React.PureComponent {
         {pending && <View style={styles.loadingContainer}>
           <Loading style={styles.loading} />
         </View>}
-        {comments.map(this.renderItem)}
+        {comments.map(this.renderComment)}
       </ScrollView>
       {footer}
     </View>

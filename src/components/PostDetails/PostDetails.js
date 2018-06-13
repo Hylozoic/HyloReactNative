@@ -67,6 +67,7 @@ export default class PostDetails extends React.Component {
             this.setState({submitting: false})
           } else {
             this.setState({commentText: '', submitting: false})
+            // Scrolls to the last comment (the one that was created)
             this.refs.comments.getWrappedInstance().scrollToEnd()
           }
         })
@@ -137,7 +138,7 @@ export default class PostDetails extends React.Component {
         showActivityLabel />
     </View>
 
-    return <KeyboardFriendlyView style={styles.container} behavior="position">
+    return <KeyboardFriendlyView style={styles.container}>
       <Comments
         ref='comments'
         header={postCard}
@@ -155,7 +156,7 @@ export default class PostDetails extends React.Component {
         showTopic={this.handleShowTopic}
         slug={slug} />
       <SocketSubscriber type='post' id={post.id} />
-   </KeyboardFriendlyView>
+    </KeyboardFriendlyView>
   }
 }
 

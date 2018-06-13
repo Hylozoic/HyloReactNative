@@ -1,12 +1,12 @@
 import React from 'react'
-import { Text, View, TextInput, TouchableOpacity, Modal, ScrollView, KeyboardAvoidingView, ActivityIndicator } from 'react-native'
+import { Text, View, TextInput, TouchableOpacity, Modal, ActivityIndicator } from 'react-native'
 import Search, { SearchType } from '../Search'
 import styles from './InlineEditor.styles'
 import { rhino30 } from 'style/colors'
 import { trim, size, isEmpty } from 'lodash/fp'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
 import { htmlEncode } from 'js-htmlencode'
-import { MENTION_ENTITY_TYPE, TOPIC_ENTITY_TYPE } from 'hylo-utils/constants'
+import { MENTION_ENTITY_TYPE } from 'hylo-utils/constants'
 
 const INSERT_MENTION = 'Hylo/INSERT_MENTION'
 const INSERT_TOPIC = 'Hylo/INSERT_TOPIC'
@@ -71,15 +71,19 @@ export default class InlineEditor extends React.PureComponent {
     } = this.props
 
     const { showPicker, isFocused, pickerType, height } = this.state
+    const calculatedHeight = Math.min(height + (isFocused ? 45 : 0), 190)
 
-    return <View style={[styles.container, {height: Math.min(height + (isFocused ? 45 : 0), 190)}]}>
+    return <View style={[styles.container, {height: calculatedHeight}]}>
       <View style={styles.wrapper}>
         <TextInput
           editable={!!editable && !submitting}
           onChangeText={onChange}
           multiline
           blurOnSubmit={false}
-          onContentSizeChange={(event) => this.setState({height: event.nativeEvent.contentSize.height})}
+          onContentSizeChange={(event) => {
+            console.log('*********ContentSizeChange', height, calculatedHeight, event.nativeEvent.contentSize.height)
+            this.setState({height: event.nativeEvent.contentSize.height})
+          }}
           placeholder={placeholder}
           placeholderTextColor={rhino30}
           style={styles.textInput}
