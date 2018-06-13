@@ -35,10 +35,6 @@ export default {
     color: mineralGreen,
     fontFamily: 'Circular-Regular'
   },
-  commentPrompt: {
-    flex: 1,
-    backgroundColor: 'white'
-  },
   files: {
     marginHorizontal: 12
   }

@@ -2,7 +2,6 @@ import { rhino30, azureRadiance } from 'style/colors'
 import { Platform } from 'react-native'
 export default {
   container: {
-    flex: 1,
     backgroundColor: 'white',
     paddingHorizontal: 10,
     justifyContent: 'flex-start',
@@ -11,11 +10,11 @@ export default {
   },
   wrapper: {
     flex: 1,
+    alignItems: 'center',
     flexDirection: 'row'
   },
   textInput: {
-    flex: 1,
-    paddingBottom: 40
+    flex: 1
   },
   sendButton: {
     fontSize: 20,
@@ -25,14 +24,9 @@ export default {
     color: azureRadiance
   },
   toolbar: {
-    flex: 1,
-    top: -28,
     alignItems: 'flex-end',
-    height: 0,
+    paddingBottom: 10,
     flexDirection: 'row'
-  },
-  activeToolbar: {
-    height: 24
   },
   toolbarButton: {
     paddingRight: 20,

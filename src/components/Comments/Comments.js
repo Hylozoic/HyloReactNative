@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 import React from 'react'
-import { Text, TouchableOpacity, View, FlatList } from 'react-native'
+import { Text, TouchableOpacity, View, ScrollView } from 'react-native'
 import Comment from '../Comment'
 import Loading from '../Loading'
 import { func, array } from 'prop-types'
@@ -12,9 +12,7 @@ export default class Comments extends React.PureComponent {
     fetchComments: func
   }
 
-  keyExtractor = (item) => item.id
-
-  renderItem = ({item}) => {
+  renderItem = (item) => {
     const {
       showMember,
       showTopic,
@@ -22,9 +20,14 @@ export default class Comments extends React.PureComponent {
     } = this.props
     return <Comment
       comment={item}
+      key={item.id}
       showMember={showMember}
       showTopic={showTopic}
       slug={slug} />
+  }
+
+  scrollToEnd (animated = true) {
+    this.scrollView.scrollToEnd({animated})
   }
 
   render () {
@@ -38,26 +41,19 @@ export default class Comments extends React.PureComponent {
       fetchComments
     } = this.props
 
-    const headerComponent = <View>
-      {header}
-      <ShowMore commentsLength={comments.length}
-        total={total}
-        hasMore={hasMore}
-        fetchComments={fetchComments} />
-      {pending && <View style={styles.loadingContainer}>
-        <Loading style={styles.loading} />
-      </View>}
-    </View>
-
-    return <View>
-      <FlatList
-        keyboardShouldPersistTaps={'handled'}
-        data={comments}
-        renderItem={this.renderItem}
-        keyExtractor={this.keyExtractor}
-        ListHeaderComponent={headerComponent}
-        ListFooterComponent={footer}
-      />
+    return <View style={{flex: 1}}>
+      <ScrollView ref={ref => { this.scrollView = ref }}>
+        {header}
+        <ShowMore commentsLength={comments.length}
+          total={total}
+          hasMore={hasMore}
+          fetchComments={fetchComments} />
+        {pending && <View style={styles.loadingContainer}>
+          <Loading style={styles.loading} />
+        </View>}
+        {comments.map(this.renderItem)}
+      </ScrollView>
+      {footer}
     </View>
   }
 }

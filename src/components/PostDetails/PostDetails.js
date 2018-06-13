@@ -67,11 +67,8 @@ export default class PostDetails extends React.Component {
             this.setState({submitting: false})
           } else {
             this.setState({commentText: '', submitting: false})
+            this.refs.comments.getWrappedInstance().scrollToEnd()
           }
-        })
-        .catch(() => {
-          Alert.alert("Your comment couldn't be saved. Please try again.")
-          this.setState({submitting: false})
         })
     }
   }
@@ -142,6 +139,7 @@ export default class PostDetails extends React.Component {
 
     return <View style={styles.container}>
       <Comments
+        ref='comments'
         header={postCard}
         footer={<CommentPrompt
           currentUser={currentUser}
@@ -164,16 +162,14 @@ export default class PostDetails extends React.Component {
 export function CommentPrompt ({ currentUser, onChange, onSubmit, submitting, commentText, communityId }) {
   if (!currentUser) return null
 
-  return <View style={styles.commentPrompt}>
-    <InlineEditor
-      onChange={onChange}
-      onSubmit={onSubmit}
-      value={commentText}
-      submitting={submitting}
-      placeholder={`${currentUser.firstName()}, how can you help?`}
-      communityId={communityId}
-    />
-  </View>
+  return <InlineEditor
+    onChange={onChange}
+    onSubmit={onSubmit}
+    value={commentText}
+    submitting={submitting}
+    placeholder={`${currentUser.firstName()}, how can you help?`}
+    communityId={communityId}
+  />
 }
 
 export function Files ({ urls }) {

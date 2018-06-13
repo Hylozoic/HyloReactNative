@@ -15,7 +15,8 @@ export default class InlineEditor extends React.PureComponent {
   state = {
     showPicker: false,
     isFocused: false,
-    pickerType: null
+    pickerType: null,
+    height: 100
   }
 
   startPicker = action => {
@@ -65,45 +66,42 @@ export default class InlineEditor extends React.PureComponent {
       value,
       communityId,
       onChange,
+      onSubmit,
       submitting = false
     } = this.props
 
-    const { showPicker, isFocused, pickerType } = this.state
+    const { showPicker, isFocused, pickerType, height } = this.state
 
-    return <ScrollView keyboardShouldPersistTaps={'handled'} keyboardDismissMode='on-drag'
-      contentContainerStyle={styles.container} >
-      <KeyboardAvoidingView behavior={'padding'} enabled style={{flex: 1}}>
-        <View style={styles.wrapper}>
-          <TextInput
-            editable={!!editable && !submitting}
-            onChangeText={onChange}
-            multiline
-            blurOnSubmit={false}
-            placeholder={placeholder}
-            placeholderTextColor={rhino30}
-            style={styles.textInput}
-            underlineColorAndroid='transparent'
-            value={value}
-            ref={(input) => { this.editorInput = input }}
-            onFocus={this.handleInputFocus}
-            onBlur={this.handleInputBlur}
-          />
+    return <View style={[styles.container, {height: Math.min(height + (isFocused ? 45 : 0), 190)}]}>
+      <View style={styles.wrapper}>
+        <TextInput
+          editable={!!editable && !submitting}
+          onChangeText={onChange}
+          multiline
+          blurOnSubmit={false}
+          onContentSizeChange={(event) => this.setState({height: event.nativeEvent.contentSize.height})}
+          placeholder={placeholder}
+          placeholderTextColor={rhino30}
+          style={styles.textInput}
+          underlineColorAndroid='transparent'
+          value={value}
+          ref={(input) => { this.editorInput = input }}
+          onFocus={this.handleInputFocus}
+          onBlur={this.handleInputBlur}
+        />
+        {onSubmit && !isFocused && <SubmitButton submitting={submitting} active={!!isFocused} handleSubmit={this.handleSubmit} />}
+      </View>
+      {isFocused && <View style={styles.toolbar}>
+        <View style={{flex: 1, flexDirection: 'row'}}>
+          <TouchableOpacity hitSlop={{top: 7, bottom: 7, left: 7, right: 7}} onPress={() => this.startPicker(INSERT_MENTION)}>
+            <Text style={styles.toolbarButton}>@</Text>
+          </TouchableOpacity>
+          <TouchableOpacity hitSlop={{top: 7, bottom: 7, left: 7, right: 7}} onPress={() => this.startPicker(INSERT_TOPIC)}>
+            <Text style={styles.toolbarButton}>#</Text>
+          </TouchableOpacity>
         </View>
-        <View style={[styles.toolbar, isFocused && styles.activeToolbar]}>
-          <View style={{flex: 1, flexDirection: 'row'}}>
-            <TouchableOpacity hitSlop={{top: 7, bottom: 7, left: 7, right: 7}} onPress={() => this.startPicker(INSERT_MENTION)}>
-              <Text style={styles.toolbarButton}>@</Text>
-            </TouchableOpacity>
-            <TouchableOpacity hitSlop={{top: 7, bottom: 7, left: 7, right: 7}} onPress={() => this.startPicker(INSERT_TOPIC)}>
-              <Text style={styles.toolbarButton}>#</Text>
-            </TouchableOpacity>
-          </View>
-          {this.props.onSubmit && submitting && <View style={{width: 30}}><ActivityIndicator /></View>}
-          {this.props.onSubmit && !submitting && <TouchableOpacity style={{width: 30}} onPress={this.handleSubmit}>
-            <EntypoIcon name='chevron-with-circle-right' style={[styles.sendButton, isFocused && styles.activeButton]} />
-          </TouchableOpacity>}
-        </View>
-      </KeyboardAvoidingView>
+        {onSubmit && <SubmitButton submitting={submitting} active={!!isFocused} handleSubmit={this.handleSubmit} />}
+      </View>}
       {showPicker && <Modal
         animationType='slide'
         transparent={false}
@@ -116,7 +114,17 @@ export default class InlineEditor extends React.PureComponent {
           onSelect={this.insertPicked}
           onCancel={this.cancelPicker} />
       </Modal>}
-    </ScrollView>
+    </View>
+  }
+}
+
+export function SubmitButton ({submitting, active, handleSubmit}) {
+  if (submitting) {
+    return <View style={{width: 30}}><ActivityIndicator /></View>
+  } else {
+    return <TouchableOpacity style={{width: 30}} onPress={handleSubmit}>
+      <EntypoIcon name='chevron-with-circle-right' style={[styles.sendButton, active && styles.activeButton]} />
+    </TouchableOpacity>
   }
 }
 

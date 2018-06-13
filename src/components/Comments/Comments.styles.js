@@ -13,9 +13,6 @@ export default {
   loading: {
     marginBottom: 15
   },
-  footer: {
-    marginBottom: 30
-  },
   showMore: {
     marginLeft: 12,
     marginRight: 12,
