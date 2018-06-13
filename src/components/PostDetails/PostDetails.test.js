@@ -98,6 +98,16 @@ describe('PostDetails', () => {
     expect(instance.state.submitting).toBeFalsy()
     expect(instance.state.commentText).toBe(commentText)
   })
+
+  it('handleCommentOnChange', () => {
+    const renderer = TestRenderer.create(<Provider store={createMockStore(state)}><PostDetails {...props} /></Provider>)
+    const instance = renderer.root.findByType(PostDetails).instance
+    const commentText = 'some text [amention:0] #topic <some encoded stuff>'
+    instance.setState({commentText})
+
+    instance.handleCommentOnChange('something or nothing')
+    expect(instance.state.commentText).toEqual('something or nothing')
+  })
 })
 
 describe('CommentPrompt', () => {
