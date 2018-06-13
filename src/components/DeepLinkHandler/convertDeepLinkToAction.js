@@ -12,7 +12,7 @@ export function reformatPath (path) {
   let { query, pathname } = url.parse(path)
 
   // LEJ: For the case of already path reformatted
-  // nextURLs in token auth'dlinks
+  // nextURLs in token auth'd links
   pathname = pathname[0] === '/' ? pathname : `/${pathname}`
 
   const params = qs.parse(query)
