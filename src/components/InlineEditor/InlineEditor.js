@@ -3,7 +3,7 @@ import { Text, View, TextInput, TouchableOpacity, Modal, ActivityIndicator } fro
 import Search, { SearchType } from '../Search'
 import styles from './InlineEditor.styles'
 import { rhino30 } from 'style/colors'
-import { trim, size, isEmpty } from 'lodash/fp'
+import { trim, isEmpty, get, size } from 'lodash/fp'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import { htmlEncode } from 'js-htmlencode'
 import { MENTION_ENTITY_TYPE } from 'hylo-utils/constants'
@@ -14,11 +14,18 @@ const INSERT_TOPIC = 'Hylo/INSERT_TOPIC'
 const minTextInputHeight = 40
 
 export default class InlineEditor extends React.PureComponent {
-  state = {
-    showPicker: false,
-    isFocused: false,
-    pickerType: null,
-    height: minTextInputHeight
+  constructor (props) {
+    super(props)
+    this.state = {
+      showPicker: false,
+      isFocused: false,
+      pickerType: null,
+      height: minTextInputHeight,
+      selection: {
+        start: size(this.props.value),
+        end: size(this.props.value)
+      }
+    }
   }
 
   startPicker = action => {
@@ -43,11 +50,28 @@ export default class InlineEditor extends React.PureComponent {
 
   insertPicked = choice => {
     const markup = getMarkup(this.state.pickerType, choice)
-    const value = trim(this.props.value)
-    const newValue = value + (size(value) > 0 ? ' ' : '') + markup + ' '
+    const value = this.props.value || ''
+    const position = get('selection.start', this.state) || 0
+
+    // This will insert the markup at the current cursors position while padding the markup with spaces.
+    const firstSlice = value.slice(0, position)
+    const secondSlice = value.slice(position)
+    const prePadding = firstSlice.length > 0 && !/\s$/.test(firstSlice) ? ' ' : ''
+    let newValue = [firstSlice, prePadding, markup, ' '].join('')
+
+    // gets the position directly after the inserted markup
+    const newSelectionStart = newValue.length
+
+    // Append the second part of the value (after the cursor)
+    newValue += secondSlice
+
     this.props.onChange(newValue)
-    this.setState({showPicker: false})
-    this.editorInput.focus()
+
+    // We use a timeout since the onChange needs to propagate the new value change before setting the new selection
+    setTimeout(() => {
+      this.setState({showPicker: false, selection: {start: newSelectionStart, end: newSelectionStart}})
+      this.editorInput.focus()
+    }, 100)
   }
 
   handleInputFocus = () => this.setState({ isFocused: true })
@@ -61,6 +85,8 @@ export default class InlineEditor extends React.PureComponent {
     this.props.onSubmit(this.props.value)
   }
 
+  handleSelectionChange = ({ nativeEvent: { selection } }) => this.setState({ selection })
+
   render () {
     const {
       placeholder = 'Details',
@@ -72,7 +98,7 @@ export default class InlineEditor extends React.PureComponent {
       submitting = false
     } = this.props
 
-    const { showPicker, isFocused, pickerType, height } = this.state
+    const { showPicker, isFocused, pickerType, height, selection } = this.state
 
     // Calculates a height based on textInput content size with the following constraint: 40 < height < 190
     const calculatedHeight = Math.round(Math.min(Math.max((isEmpty(value) ? minTextInputHeight : height) + (isFocused ? 45 : 0), minTextInputHeight), 190))
@@ -85,6 +111,8 @@ export default class InlineEditor extends React.PureComponent {
           multiline
           blurOnSubmit={false}
           onContentSizeChange={(event) => this.setState({height: Math.round(event.nativeEvent.contentSize.height)})}
+          selection={selection}
+          onSelectionChange={this.handleSelectionChange}
           placeholder={placeholder}
           placeholderTextColor={rhino30}
           style={styles.textInput}
