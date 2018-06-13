@@ -1,98 +1,27 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`getMarkup 1`] = `"[tom:30]"`;
-
 exports[`renders as expected 1`] = `
-<ScrollView
-  contentContainerStyle={
-    Object {
-      "backgroundColor": "white",
-      "borderTopColor": "#c0c6cd",
-      "borderTopWidth": 0.25,
-      "flex": 1,
-      "justifyContent": "flex-start",
-      "paddingHorizontal": 10,
-    }
-  }
-  keyboardDismissMode="on-drag"
-  keyboardShouldPersistTaps="handled"
->
-  <KeyboardAvoidingView
-    behavior="padding"
-    enabled={true}
-    keyboardVerticalOffset={0}
-  >
-    <View>
-      <TextInput
-        allowFontScaling={true}
-        blurOnSubmit={false}
-        editable={true}
-        multiline={true}
-        onBlur={[Function]}
-        onChangeText={[MockFunction]}
-        onFocus={[Function]}
-        placeholder="Place Holder"
-        placeholderTextColor="#c0c6cd"
-        underlineColorAndroid="transparent"
-        value="some text"
-      />
-    </View>
-    <View>
-      <View>
-        <TouchableOpacity
-          activeOpacity={0.2}
-          hitSlop={
-            Object {
-              "bottom": 7,
-              "left": 7,
-              "right": 7,
-              "top": 7,
-            }
-          }
-          onPress={[Function]}
-        >
-          <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
-          >
-            @
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          activeOpacity={0.2}
-          hitSlop={
-            Object {
-              "bottom": 7,
-              "left": 7,
-              "right": 7,
-              "top": 7,
-            }
-          }
-          onPress={[Function]}
-        >
-          <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
-          >
-            #
-          </Text>
-        </TouchableOpacity>
-      </View>
-      <TouchableOpacity
-        activeOpacity={0.2}
-        onPress={[Function]}
-      >
-        <Icon
-          allowFontScaling={false}
-          name="chevron-with-circle-right"
-          size={12}
-        />
-      </TouchableOpacity>
-    </View>
-  </KeyboardAvoidingView>
-</ScrollView>
+<View>
+  <View>
+    <TextInput
+      allowFontScaling={true}
+      blurOnSubmit={false}
+      editable={true}
+      multiline={true}
+      onBlur={[Function]}
+      onChangeText={[MockFunction]}
+      onContentSizeChange={[Function]}
+      onFocus={[Function]}
+      placeholder="Place Holder"
+      placeholderTextColor="#c0c6cd"
+      underlineColorAndroid="transparent"
+      value="some text"
+    />
+    <SubmitButton
+      active={false}
+      handleSubmit={[Function]}
+      submitting={false}
+    />
+  </View>
+</View>
 `;
-
-exports[`toHtml 1`] = `"hello world <a href=\\"#\\" data-entity-type=\\"mention\\" data-user-id=\\"3344\\">tom</a> #adlkjdf here&#39;s"`;

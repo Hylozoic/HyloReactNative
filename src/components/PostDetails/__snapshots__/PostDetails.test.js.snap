@@ -1,16 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`CommentPrompt renders correctly 1`] = `
-<View>
-  <InlineEditor
-    communityId={undefined}
-    onChange={undefined}
-    onSubmit={undefined}
-    placeholder="Joe, how can you help?"
-    submitting={undefined}
-    value={undefined}
-  />
-</View>
+<InlineEditor
+  communityId={undefined}
+  onChange={undefined}
+  onSubmit={undefined}
+  placeholder="Joe, how can you help?"
+  submitting={undefined}
+  value={undefined}
+/>
 `;
 
 exports[`Files renders correctly 1`] = `

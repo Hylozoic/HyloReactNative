@@ -98,24 +98,6 @@ describe('PostDetails', () => {
     expect(instance.state.submitting).toBeFalsy()
     expect(instance.state.commentText).toBe(commentText)
   })
-
-  it('handleCreateComment rejection2', async () => {
-    const rejectionProps = {
-      ...props,
-      createComment: jest.fn(() => Promise.reject(new Error('blah')))
-    }
-
-    const renderer = TestRenderer.create(<Provider store={createMockStore(state)}><PostDetails {...rejectionProps} /></Provider>)
-    const instance = renderer.root.findByType(PostDetails).instance
-    const commentText = 'some text [amention:0] #topic <some encoded stuff>'
-    instance.setState({commentText})
-
-    const promise = instance.handleCreateComment(commentText)
-    expect(instance.state.submitting).toBeTruthy()
-    await promise
-    expect(instance.state.submitting).toBeFalsy()
-    expect(instance.state.commentText).toBe(commentText)
-  })
 })
 
 describe('CommentPrompt', () => {
