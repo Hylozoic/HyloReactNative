@@ -33,8 +33,7 @@ export function mapStateToProps (state, props) {
   const communitySearchObject = getCommunitySearchObject(communityId, communitySlugFromLink)
 
   const topicName = props.topicName || params.topicName || getNavigationParam('topicName', state, props)
-  const community = !networkId && getCommunity(state, communitySearchObject)
-
+  const community = !networkId && get('ref', getCommunity(state, communitySearchObject))
   const communitySlug = get('slug', community)
 
   const networkSlug = getNavigationParam('networkSlug', state, props)
@@ -45,7 +44,7 @@ export function mapStateToProps (state, props) {
   const communityTopic = topicName && community &&
     getCommunityTopic(state, {topicName, slug: community.slug})
   const topicSubscribed = topicName && communityTopic && communityTopic.isSubscribed
-  const topic = get('topic', communityTopic)
+  const topic = get('topic.ref', communityTopic)
   const currentUserHasMemberships = !isEmpty(getMemberships(state))
 
   return {

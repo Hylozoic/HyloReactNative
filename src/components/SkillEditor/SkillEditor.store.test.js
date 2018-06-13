@@ -8,7 +8,7 @@ import reducer, {
   addSkill,
   removeSkill,
   setUserSkills,
-  getSkillsFromOrm,
+  getMySkillsFromOrm,
   getUserSkills,
   getSkill
 } from './SkillEditor.store'
@@ -103,7 +103,7 @@ describe('action generators', () => {
   })
 })
 
-describe('getSkillsFromOrm', () => {
+describe('getMySkillsFromOrm', () => {
   const session = orm.session(orm.getEmptyState())
   session.Me.create({skills: [
     session.Skill.create({id: 1, name: 'one'}),
@@ -115,7 +115,7 @@ describe('getSkillsFromOrm', () => {
     const state = {
       orm: session.state
     }
-    expect(getSkillsFromOrm(state).map(s => s.name))
+    expect(getMySkillsFromOrm(state).map(s => s.name))
     .toEqual(['one', 'two'])
   })
 })

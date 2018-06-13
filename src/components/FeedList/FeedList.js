@@ -1,6 +1,6 @@
 import React from 'react'
 import { FlatList, Text, View } from 'react-native'
-import { propsChanged } from 'util/index'
+import { didPropsChange } from 'util/index'
 import styles from './FeedList.styles'
 import PostRow from './PostRow'
 import Loading from '../Loading'
@@ -20,7 +20,7 @@ export default class FeedList extends React.Component {
   }
 
   shouldComponentUpdate (nextProps) {
-    return nextProps.isFocused && propsChanged(this.props, nextProps)
+    return nextProps.isFocused && didPropsChange(this.props, nextProps)
   }
 
   componentDidUpdate (prevProps) {
@@ -62,30 +62,13 @@ export default class FeedList extends React.Component {
     showPost={this.showPost}
     showMember={this.showMember}
     showTopic={this.showTopic}
-    goToCommunity={this.goToCommunity}
-    selectedNetworkId={this.props.networkId} />
+    goToCommunity={this.goToCommunity} />
 
   keyExtractor = (item) => `post${item}`
-
-  renderHeader = () => <View>
-    {this.props.header}
-    <ListControls
-      filter={this.props.filter}
-      sortBy={this.props.sortBy}
-      setFilter={this.setFilter}
-      setSort={this.setSort}
-      pending={this.props.pending}
-    />
-  </View>
-
-  renderFooter = () => this.props.pending
-    ? <Loading style={styles.loading} />
-    : null
 
   render () {
     const {
       postIds,
-      pending,
       pendingRefresh
     } = this.props
 
@@ -95,11 +78,21 @@ export default class FeedList extends React.Component {
         renderItem={this.renderItem}
         onRefresh={this.refreshPosts}
         refreshing={!!pendingRefresh}
-        extraData={!!pending}
         keyExtractor={this.keyExtractor}
         onEndReached={this.fetchMorePosts}
-        ListHeaderComponent={this.renderHeader}
-        ListFooterComponent={this.renderFooter} />
+        ListHeaderComponent={<View>
+          {this.props.header}
+          <ListControls
+            filter={this.props.filter}
+            sortBy={this.props.sortBy}
+            setFilter={this.setFilter}
+            setSort={this.setSort}
+            pending={this.props.pending}
+          />
+        </View>}
+        ListFooterComponent={this.props.pending
+          ? <Loading style={styles.loading} />
+          : null} />
     </View>
   }
 }
