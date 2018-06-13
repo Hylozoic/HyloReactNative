@@ -87,9 +87,7 @@ exports[`Files renders correctly 1`] = `
 `;
 
 exports[`PostDetails renders correctly 1`] = `
-<Unknown
-  behavior="position"
->
+<Unknown>
   <Connect(Comments)
     footer={
       <CommentPrompt

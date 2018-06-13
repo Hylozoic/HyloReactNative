@@ -11,12 +11,14 @@ import { MENTION_ENTITY_TYPE } from 'hylo-utils/constants'
 const INSERT_MENTION = 'Hylo/INSERT_MENTION'
 const INSERT_TOPIC = 'Hylo/INSERT_TOPIC'
 
+const minTextInputHeight = 40
+
 export default class InlineEditor extends React.PureComponent {
   state = {
     showPicker: false,
     isFocused: false,
     pickerType: null,
-    height: 40
+    height: minTextInputHeight
   }
 
   startPicker = action => {
@@ -72,20 +74,16 @@ export default class InlineEditor extends React.PureComponent {
 
     const { showPicker, isFocused, pickerType, height } = this.state
     // Calculates a height based on textInput content size with the following constraint: 40 < height < 190
-    const calculatedHeight = Math.round(Math.min(Math.max(height + (isFocused ? 45 : 0), 40), 190))
-    console.log('*********CALCULATED HEIGHT', height, calculatedHeight)
+    const calculatedHeight = Math.round(Math.min(Math.max((isEmpty(value) ? minTextInputHeight : height) + (isFocused ? 45 : 0), minTextInputHeight), 190))
 
-    return <View style={[styles.container, {height: calculatedHeight}]}>
+    return <View style={[styles.container, {maxHeight: calculatedHeight}]}>
       <View style={styles.wrapper}>
         <TextInput
           editable={!!editable && !submitting}
           onChangeText={onChange}
           multiline
           blurOnSubmit={false}
-          onContentSizeChange={(event) => {
-            console.log('*********ContentSizeChange', height, calculatedHeight, event.nativeEvent.contentSize.height)
-            this.setState({height: Math.round(event.nativeEvent.contentSize.height)})
-          }}
+          onContentSizeChange={(event) => this.setState({height: Math.round(event.nativeEvent.contentSize.height)})}
           placeholder={placeholder}
           placeholderTextColor={rhino30}
           style={styles.textInput}
