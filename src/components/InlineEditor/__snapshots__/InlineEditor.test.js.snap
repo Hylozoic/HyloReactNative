@@ -28,8 +28,8 @@ exports[`renders as expected 1`] = `
       placeholderTextColor="#c0c6cd"
       selection={
         Object {
-          "end": 0,
-          "start": 0,
+          "end": 9,
+          "start": 9,
         }
       }
       underlineColorAndroid="transparent"
