@@ -1,5 +1,5 @@
 import React from 'react'
-import InlineEditor, { mentionsToHtml, createMentionTag, createTopicTag, getMarkup, toHtml } from './InlineEditor'
+import InlineEditor, { SubmitButton, mentionsToHtml, createMentionTag, createTopicTag, getMarkup, toHtml } from './InlineEditor'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import { SearchType } from '../Search'
 import TestRenderer from 'react-test-renderer'
@@ -32,6 +32,30 @@ it('insertPicked', () => {
   expect(instance.state.showPicker).toBeFalsy()
 })
 
+it('handleInputFocus', () => {
+  const instance = TestRenderer.create(<InlineEditor {...props} />).getInstance()
+  instance.handleInputFocus()
+  expect(instance.state.isFocused).toBeTruthy()
+})
+
+it('handleInputFocus', () => {
+  const instance = TestRenderer.create(<InlineEditor {...props} />).getInstance()
+  instance.cancelPicker()
+  expect(instance.state.showPicker).toBeFalsy()
+})
+
+it('handleInputBlur', () => {
+  const newProps = {
+    ...props,
+    value: '   '
+  }
+  const instance = TestRenderer.create(<InlineEditor {...newProps} />).getInstance()
+  instance.setState({isFocused: true})
+  instance.handleInputBlur()
+  expect(instance.state.isFocused).toBeFalsy()
+  expect(props.onChange).toHaveBeenCalledWith('')
+})
+
 it('toHtml', () => {
   const text = "hello world [tom:3344] [:5] #adlkjdf here's"
   expect(toHtml(text)).toEqual(`hello world <a href="#" data-entity-type="mention" data-user-id="3344">tom</a> [:5] #adlkjdf here&#39;s`)
@@ -52,4 +76,10 @@ it('createMentionTag', () => {
 
 it('mentionsToHtml', () => {
   expect(mentionsToHtml('hello [tom:333] [two:233] world [three:3332]')).toEqual(`hello <a href="#" data-entity-type="mention" data-user-id="333">tom</a> <a href="#" data-entity-type="mention" data-user-id="233">two</a> world <a href="#" data-entity-type="mention" data-user-id="3332">three</a>`)
+})
+
+it('renders SubmitButton when submitting', () => {
+  const renderer = new ReactShallowRenderer()
+  renderer.render(<SubmitButton submitting />)
+  expect(renderer.getRenderOutput()).toMatchSnapshot()
 })
