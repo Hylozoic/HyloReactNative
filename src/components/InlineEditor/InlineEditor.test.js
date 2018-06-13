@@ -2,15 +2,34 @@ import React from 'react'
 import InlineEditor, { mentionsToHtml, createMentionTag, createTopicTag, getMarkup, toHtml } from './InlineEditor'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import { SearchType } from '../Search'
+import TestRenderer from 'react-test-renderer'
+
+const props = {
+  onChange: jest.fn(),
+  onSubmit: jest.fn(),
+  value: 'some text',
+  placeholder: `Place Holder`,
+  communityId: 10
+}
 
 it('renders as expected', () => {
   const renderer = new ReactShallowRenderer()
-  renderer.render(<InlineEditor onChange={() => jest.fn()}
-    onSubmit={() => jest.fn()}
-    value={'some text'}
-    placeholder={`Place Holder`}
-    communityId={10} />)
+  renderer.render(<InlineEditor {...props} />)
   expect(renderer.getRenderOutput()).toMatchSnapshot()
+})
+
+it('handleSubmit', () => {
+  const instance = TestRenderer.create(<InlineEditor {...props} />).getInstance()
+  instance.handleSubmit()
+  expect(props.onSubmit).toHaveBeenCalledWith(props.value)
+})
+
+it('insertPicked', () => {
+  const instance = TestRenderer.create(<InlineEditor {...props} />).getInstance()
+  instance.setState({pickerType: SearchType.PERSON})
+  instance.insertPicked({id: 333, name: 'sdfdfz'})
+  expect(props.onChange).toHaveBeenCalledWith('some text [sdfdfz:333] ')
+  expect(instance.state.showPicker).toBeFalsy()
 })
 
 it('toHtml', () => {

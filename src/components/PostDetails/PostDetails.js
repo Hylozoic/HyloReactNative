@@ -48,7 +48,7 @@ export default class PostDetails extends React.Component {
   }
 
   shouldComponentUpdate (nextProps) {
-    return nextProps.isFocused
+    return !!nextProps.isFocused
   }
 
   handleShowMember = (memberId) => this.props.showMember(memberId)

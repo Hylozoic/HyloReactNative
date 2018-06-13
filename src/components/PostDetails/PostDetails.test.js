@@ -48,13 +48,12 @@ const props = {
   fetchPost: jest.fn(),
   showMember: jest.fn(),
   showTopic: jest.fn(),
-  createComment: jest.fn(() => Promise.resolve()),
+  createComment: jest.fn(() => Promise.resolve({success: true})),
   goToCommunity: jest.fn()
 }
 
 const state = {
   orm: orm.getEmptyState(),
-
   queryResults: {},
   pending: {}
 }
@@ -68,7 +67,7 @@ describe('PostDetails', () => {
     expect(actual).toMatchSnapshot()
   })
 
-  it('handleCreateComment', async () => {
+  it('handleCreateComment success', async () => {
     const renderer = TestRenderer.create(<Provider store={createMockStore(state)}><PostDetails {...props} /></Provider>)
     const instance = renderer.root.findByType(PostDetails).instance
     const commentText = 'some text [amention:0] #topic <some encoded stuff>'
@@ -84,7 +83,26 @@ describe('PostDetails', () => {
 
   it('handleCreateComment rejection', async () => {
     const rejectionProps = {
-      ...props
+      ...props,
+      createComment: jest.fn(() => Promise.resolve({error: new Error('blah')}))
+    }
+
+    const renderer = TestRenderer.create(<Provider store={createMockStore(state)}><PostDetails {...rejectionProps} /></Provider>)
+    const instance = renderer.root.findByType(PostDetails).instance
+    const commentText = 'some text [amention:0] #topic <some encoded stuff>'
+    instance.setState({commentText})
+
+    const promise = instance.handleCreateComment(commentText)
+    expect(instance.state.submitting).toBeTruthy()
+    await promise
+    expect(instance.state.submitting).toBeFalsy()
+    expect(instance.state.commentText).toBe(commentText)
+  })
+
+  it('handleCreateComment rejection2', async () => {
+    const rejectionProps = {
+      ...props,
+      createComment: jest.fn(() => Promise.reject(new Error('blah')))
     }
 
     const renderer = TestRenderer.create(<Provider store={createMockStore(state)}><PostDetails {...rejectionProps} /></Provider>)
