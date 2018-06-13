@@ -136,6 +136,9 @@ Object {
     openDrawer={[Function]}
   />,
   "headerRight": <View>
+    <SearchIcon
+      showSearch={[Function]}
+    />
     <Connect(MessagesIcon)
       showMessages={[Function]}
     />

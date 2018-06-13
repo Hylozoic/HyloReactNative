@@ -22,6 +22,7 @@ import SocketListener from '../../components/SocketListener/SocketListener.store
 import TabBar from '../../components/RootNavigator/TabBar/TabBar.store'
 import Topics from '../../components/Tabs/Topics/Topics.store'
 import CreateCommunityFlow from '../../components/CreateCommunityFlow/CreateCommunityFlow.store'
+import SearchPage from '../../components/SearchPage/SearchPage.store'
 
 export const combinedReducers = combineReducers({
   orm: ormReducer,
@@ -40,6 +41,7 @@ export const combinedReducers = combineReducers({
   PeopleTyping,
   PostEditor,
   Search,
+  SearchPage,
   SignupFlow,
   SkillEditor,
   SocketListener,

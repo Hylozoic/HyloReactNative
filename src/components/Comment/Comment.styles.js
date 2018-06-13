@@ -44,6 +44,11 @@ export default {
   text: {
     color: nevada,
     fontFamily: 'Circular-Book',
-    fontSize: 14
+    fontSize: 14,
+    // not sure why this works. Setting height to 0 here should collapse all
+    // comment text, but instead it just gets rid of extra spacing in comments.
+    // Tested and it seems fine, but if comment layout looks word somewhere, try
+    // removing this line.
+    height: 0
   }
 }

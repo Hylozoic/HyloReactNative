@@ -1,6 +1,6 @@
 import React from 'react'
 import { InteractionManager, Linking } from 'react-native'
-import { parse } from 'url'
+import * as url from 'url'
 import {
   isInvitationLink, redirectAfterLogin, resetToRoute, resetToMainRoute
 } from 'util/navigation'
@@ -57,17 +57,19 @@ export default class DeepLinkHandler extends React.Component {
     return redirectAfterLogin({currentUser, navigation: navigator, action})
   }
 
-  handleUrl (url) {
-    if (!url) return
+  handleUrl (requestUrl) {
+    if (!requestUrl) return
 
     const { storeNavigationAction, currentUser } = this.props
-    const { path } = parse(url)
+
+    const path = url.parse(requestUrl).path || '/'
+
     const action = convertDeepLinkToAction(path)
     if (!action) return
     const nextAction = action.params && action.params.nextURL
       ? convertDeepLinkToAction(decodeURIComponent(action.params.nextURL))
       : action
-    if (isDev) console.log(`handling deep link "${path}" with action:`, action)
+    if (isDev) console.log(`handling a deep link "${path}" with action:`, action)
     if (!currentUser) {
       storeNavigationAction(nextAction)
       if (action.params && action.params.nextURL) {

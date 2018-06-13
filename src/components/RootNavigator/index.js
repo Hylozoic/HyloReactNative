@@ -31,6 +31,7 @@ import TopicSupportComingSoon from '../TopicSupportComingSoon'
 import MemberDetails from '../MemberProfile/MemberDetails'
 import MemberSkillEditor from '../MemberProfile/MemberSkillEditor'
 import UserSettings from '../UserSettings'
+import SearchPage from '../SearchPage'
 import SignupFlow1 from '../SignupFlow/SignupFlow1'
 import SignupFlow2 from '../SignupFlow/SignupFlow2'
 import SignupFlow3 from '../SignupFlow/SignupFlow3'
@@ -134,7 +135,8 @@ const screensInStack = {
   CreateCommunityName: {screen: CreateCommunityName},
   CreateCommunityUrl: {screen: CreateCommunityUrl},
   CreateCommunityReview: {screen: CreateCommunityReview},
-  NotificationSettings: {screen: NotificationSettings}
+  NotificationSettings: {screen: NotificationSettings},
+  SearchPage: {screen: SearchPage}
 }
 
 const RootNavigator = StackNavigator(
