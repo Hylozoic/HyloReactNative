@@ -4,7 +4,7 @@ import Search, { SearchType } from '../Search'
 import styles from './InlineEditor.styles'
 import { rhino30 } from 'style/colors'
 import { trim, size, isEmpty } from 'lodash/fp'
-import EntypoIcon from 'react-native-vector-icons/Entypo'
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import { htmlEncode } from 'js-htmlencode'
 import { MENTION_ENTITY_TYPE } from 'hylo-utils/constants'
 
@@ -126,8 +126,8 @@ export function SubmitButton ({submitting, active, handleSubmit}) {
   if (submitting) {
     return <View style={{width: 30}}><ActivityIndicator /></View>
   } else {
-    return <TouchableOpacity style={{width: 30}} onPress={handleSubmit}>
-      <EntypoIcon name='chevron-with-circle-right' style={[styles.sendButton, active && styles.activeButton]} />
+    return <TouchableOpacity style={{width: 30}} hitSlop={{top: 5, bottom: 10, left: 10, right: 10}} onPress={handleSubmit}>
+      <MaterialIcon name='send' size={23} style={active && styles.activeButton} />
     </TouchableOpacity>
   }
 }

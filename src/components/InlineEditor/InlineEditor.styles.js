@@ -16,10 +16,6 @@ export default {
   textInput: {
     flex: 1
   },
-  sendButton: {
-    fontSize: 20,
-    fontWeight: '400'
-  },
   activeButton: {
     color: azureRadiance
   },
