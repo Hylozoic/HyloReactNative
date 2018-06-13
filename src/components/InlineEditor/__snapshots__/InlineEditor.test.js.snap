@@ -29,7 +29,7 @@ exports[`renders as expected 1`] = `
         editable={true}
         multiline={true}
         onBlur={[Function]}
-        onChangeText={[Function]}
+        onChangeText={[MockFunction]}
         onFocus={[Function]}
         placeholder="Place Holder"
         placeholderTextColor="#c0c6cd"
@@ -92,20 +92,6 @@ exports[`renders as expected 1`] = `
       </TouchableOpacity>
     </View>
   </KeyboardAvoidingView>
-  <Component
-    animationType="slide"
-    hardwareAccelerated={false}
-    onRequestClose={[Function]}
-    transparent={false}
-    visible={false}
-  >
-    <Connect(Search)
-      communityId={10}
-      onCancel={[Function]}
-      onSelect={[Function]}
-      type={null}
-    />
-  </Component>
 </ScrollView>
 `;
 
