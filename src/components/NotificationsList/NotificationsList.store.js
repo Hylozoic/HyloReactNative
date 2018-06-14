@@ -7,6 +7,7 @@ import striptags from 'striptags'
 
 import orm from '../../store/models'
 import { makeGetQueryResults } from '../../store/reducers/queryResults'
+import { getPostFieldsFragment } from '../../store/actions/fetchPost'
 import {
   ACTION_NEW_COMMENT,
   ACTION_TOPIC,
@@ -50,9 +51,7 @@ export function fetchNotifications (first = 20, offset = 0) {
                 text
               }
               post {
-                id
-                title
-                details
+                ${getPostFieldsFragment(true)}
               }
               community {
                 id
