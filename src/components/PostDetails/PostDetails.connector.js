@@ -16,7 +16,6 @@ export function mapStateToProps (state, props) {
   const currentUser = getMe(state, props)
   const commentEdit = getCommentEdits(state, {postId: id})
   const communityId = getCurrentCommunityId(state, props)
-
   return {
     post: getPresentedPost(state, {id, communityId}),
     currentUser,
