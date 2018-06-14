@@ -1,8 +1,11 @@
 import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import TestRenderer from 'react-test-renderer'
+import { Provider } from 'react-redux'
 import PostDetails, { CommentPrompt, Files } from './PostDetails'
 import { Linking, TouchableOpacity } from 'react-native'
+import { createMockStore } from 'util/testing'
+import orm from 'store/models'
 
 jest.mock('react-native-device-info')
 
@@ -17,9 +20,6 @@ const post = {
   imageUrls: ['foom.png'],
   title: 'Hi',
   details: 'Lo',
-  linkPreview: {
-    id: '34'
-  },
   commenters: [{id: 9}, {id: 7}],
   commentsTotal: 12,
   votesTotal: 8,
@@ -40,21 +40,73 @@ const currentUser = {
   firstName: () => 'Joe'
 }
 
+const props = {
+  post,
+  currentUser,
+  editPost: jest.fn(),
+  pending: false,
+  fetchPost: jest.fn(),
+  showMember: jest.fn(),
+  showTopic: jest.fn(),
+  createComment: jest.fn(() => Promise.resolve({success: true})),
+  goToCommunity: jest.fn()
+}
+
+const state = {
+  orm: orm.getEmptyState(),
+  queryResults: {},
+  pending: {}
+}
+
 describe('PostDetails', () => {
   it('renders correctly', () => {
     const renderer = new ReactShallowRenderer()
-    renderer.render(<PostDetails
-      post={post}
-      currentUser={currentUser}
-      editPost={() => {}}
-      pending={false}
-      showMember={() => {}}
-      showTopic={() => {}}
-      goToCommunity={() => {}} />)
-
+    renderer.render(<PostDetails {...props} />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
+  })
+
+  it('handleCreateComment success', async () => {
+    const renderer = TestRenderer.create(<Provider store={createMockStore(state)}><PostDetails {...props} /></Provider>)
+    const instance = renderer.root.findByType(PostDetails).instance
+    const commentText = 'some text [amention:0] #topic <some encoded stuff>'
+    instance.setState({commentText})
+
+    const promise = instance.handleCreateComment('some text [amention:3332] #topic <some encoded stuff>')
+    expect(instance.state.submitting).toBeTruthy()
+    expect(props.createComment).toHaveBeenCalledWith(`some text <a href="#" data-entity-type="mention" data-user-id="3332">amention</a> #topic &lt;some encoded stuff&gt;`)
+    await promise
+    expect(instance.state.submitting).toBeFalsy()
+    expect(instance.state.commentText).toBe('')
+  })
+
+  it('handleCreateComment rejection', async () => {
+    const rejectionProps = {
+      ...props,
+      createComment: jest.fn(() => Promise.resolve({error: new Error('blah')}))
+    }
+
+    const renderer = TestRenderer.create(<Provider store={createMockStore(state)}><PostDetails {...rejectionProps} /></Provider>)
+    const instance = renderer.root.findByType(PostDetails).instance
+    const commentText = 'some text [amention:0] #topic <some encoded stuff>'
+    instance.setState({commentText})
+
+    const promise = instance.handleCreateComment(commentText)
+    expect(instance.state.submitting).toBeTruthy()
+    await promise
+    expect(instance.state.submitting).toBeFalsy()
+    expect(instance.state.commentText).toBe(commentText)
+  })
+
+  it('handleCommentOnChange', () => {
+    const renderer = TestRenderer.create(<Provider store={createMockStore(state)}><PostDetails {...props} /></Provider>)
+    const instance = renderer.root.findByType(PostDetails).instance
+    const commentText = 'some text [amention:0] #topic <some encoded stuff>'
+    instance.setState({commentText})
+
+    instance.handleCommentOnChange('something or nothing')
+    expect(instance.state.commentText).toEqual('something or nothing')
   })
 })
 
@@ -62,19 +114,7 @@ describe('CommentPrompt', () => {
   it('renders correctly', () => {
     const renderer = new ReactShallowRenderer()
     renderer.render(<CommentPrompt
-      currentUser={currentUser}
-      newComment={() => {}} />)
-    const actual = renderer.getRenderOutput()
-
-    expect(actual).toMatchSnapshot()
-  })
-
-  it('renders with comment text', () => {
-    const renderer = new ReactShallowRenderer()
-    renderer.render(<CommentPrompt
-      currentUser={currentUser}
-      newComment={() => {}}
-      commentEdit='A long enough comment that it will be truncated' />)
+      currentUser={currentUser} />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()

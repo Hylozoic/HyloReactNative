@@ -59,7 +59,6 @@ it('renders correctly if currentUserHasMemberships is false', () => {
   expect(actual).toMatchSnapshot()
 })
 
-
 it('sets the title to the community if there is a topic', () => {
   const navigation = {
     state: {
@@ -76,7 +75,6 @@ it('sets the title to the community if there is a topic', () => {
 })
 
 it('calls fetchCommunityTopic on componentDidMount', () => {
-  const fetchCommunityTopic = jest.fn()
   const state = {
     orm: orm.getEmptyState(),
     FeedList: {},
@@ -84,13 +82,33 @@ it('calls fetchCommunityTopic on componentDidMount', () => {
     pending: {}
   }
 
+  const props = {
+    navigation: { state: { key: 1 } },
+    fetchCommunityTopic: jest.fn(),
+    showTopic: jest.fn(),
+    showMember: jest.fn(),
+    goToCommunity: jest.fn(),
+    setTopicSubscribe: jest.fn(),
+    newPost: jest.fn()
+  }
+
   const renderer = TestRenderer.create(
     <Provider store={createMockStore(state)}>
-      <Feed fetchCommunityTopic={fetchCommunityTopic} navigation={{ state: { key: 1 } }} />
+      <Feed {...props} />
     </Provider>
   )
 
   const feed = renderer.root.findByType(Feed).instance
   feed.componentDidMount()
-  expect(fetchCommunityTopic).toBeCalled()
+  expect(props.fetchCommunityTopic).toBeCalled()
+  feed.handleShowTopic('topicName')
+  expect(props.showTopic).toHaveBeenCalledWith('topicName')
+  feed.handleShowMember(1)
+  expect(props.showMember).toHaveBeenCalledWith(1)
+  feed.handleGoToCommunity('community1')
+  expect(props.goToCommunity).toHaveBeenCalledWith('community1')
+  feed.handleSetTopicSubscribe(3, 4, 5)
+  expect(props.setTopicSubscribe).toHaveBeenCalledWith(3, 4, 5)
+  feed.handleNewPost(1, 2, 3)
+  expect(props.newPost).toHaveBeenCalledWith(1, 2, 3)
 })

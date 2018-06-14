@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 import React from 'react'
-import { Text, TouchableOpacity, View, FlatList } from 'react-native'
+import { Text, TouchableOpacity, View, ScrollView } from 'react-native'
 import Comment from '../Comment'
 import Loading from '../Loading'
 import { func, array } from 'prop-types'
@@ -12,44 +12,49 @@ export default class Comments extends React.PureComponent {
     fetchComments: func
   }
 
+  renderComment = (comment) => {
+    const {
+      showMember,
+      showTopic,
+      slug
+    } = this.props
+    return <Comment
+      comment={comment}
+      key={comment.id}
+      showMember={showMember}
+      showTopic={showTopic}
+      slug={slug} />
+  }
+
+  scrollToEnd (animated = true) {
+    this.scrollView.scrollToEnd({animated})
+  }
+
   render () {
     const {
-      comments,
+      comments = [],
       header,
       footer,
       pending,
       total,
       hasMore,
-      fetchComments,
-      showMember,
-      showTopic,
-      slug
+      fetchComments
     } = this.props
 
-    const listHeaderComponent = <View>
-      {header}
-      {pending && <Loading style={styles.loading} />}
-      <ShowMore commentsLength={comments.length}
-        total={total}
-        hasMore={hasMore}
-        fetchComments={fetchComments} />
-    </View>
-
-    const listFooterComponent = <View style={styles.footer}>
+    return <View style={{flex: 1}}>
+      <ScrollView ref={ref => { this.scrollView = ref }}>
+        {header}
+        <ShowMore commentsLength={comments.length}
+          total={total}
+          hasMore={hasMore}
+          fetchComments={fetchComments} />
+        {pending && <View style={styles.loadingContainer}>
+          <Loading style={styles.loading} />
+        </View>}
+        {comments.map(this.renderComment)}
+      </ScrollView>
       {footer}
     </View>
-
-    return <FlatList
-      data={comments}
-      renderItem={({ item }) => <Comment
-        comment={item}
-        showMember={showMember}
-        showTopic={showTopic}
-        slug={slug} />}
-      keyExtractor={(item, index) => item.id}
-      ListHeaderComponent={listHeaderComponent}
-      ListFooterComponent={listFooterComponent}
-    />
   }
 }
 

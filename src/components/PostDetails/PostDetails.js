@@ -1,10 +1,8 @@
 /* eslint-disable camelcase */
 import React from 'react'
-import { Linking, View, Text, TouchableOpacity } from 'react-native'
+import { Linking, View, Text, TouchableOpacity, Alert } from 'react-native'
 import { get, isEmpty } from 'lodash/fp'
 import { shape, any, object, string, func, array, bool } from 'prop-types'
-import striptags from 'striptags'
-import Avatar from '../Avatar'
 import Comments from '../Comments'
 import PostBody from '../PostCard/PostBody'
 import PostCommunities from '../PostCard/PostCommunities'
@@ -15,7 +13,8 @@ import { LoadingScreen } from '../Loading'
 import SocketSubscriber from '../SocketSubscriber'
 import styles from './PostDetails.styles'
 import { FileLabel } from '../PostEditor/FileSelector'
-
+import InlineEditor, { toHtml } from '../InlineEditor'
+import KeyboardFriendlyView from '../KeyboardFriendlyView'
 export default class PostDetails extends React.Component {
   static propTypes = {
     post: shape({
@@ -40,20 +39,43 @@ export default class PostDetails extends React.Component {
     showTopic: func
   }
 
+  state = {
+    commentText: ''
+  }
+
   componentDidMount () {
     this.props.fetchPost()
   }
 
   shouldComponentUpdate (nextProps) {
-    return nextProps.isFocused
+    return !!nextProps.isFocused
   }
 
   handleShowMember = (memberId) => this.props.showMember(memberId)
   handleShowTopic = (topicId) => this.props.showTopic(topicId)
   handleGoToCommunity = (communityId) => this.props.goToCommunity(communityId)
 
-  handleNewComment = () => {
-    this.props.newComment(get('communities.0.id', this.props.post))
+  handleCreateComment = (commentText) => {
+    const commentTextAsHtml = toHtml(commentText)
+
+    if (!isEmpty(commentTextAsHtml)) {
+      this.setState({submitting: true})
+      return this.props.createComment(commentTextAsHtml)
+        .then(({ error }) => {
+          if (error) {
+            Alert.alert("Your comment couldn't be saved; please try again.")
+            this.setState({submitting: false})
+          } else {
+            this.setState({commentText: '', submitting: false})
+            // Scrolls to the last comment (the one that was created)
+            this.refs.comments.getWrappedInstance().scrollToEnd()
+          }
+        })
+    }
+  }
+
+  handleCommentOnChange = (commentText) => {
+    this.setState({commentText})
   }
 
   render () {
@@ -61,14 +83,18 @@ export default class PostDetails extends React.Component {
       post,
       currentUser,
       editPost,
-      pending,
-      newComment,
-      commentEdit
+      pending
     } = this.props
+
+    const {
+      commentText,
+      submitting
+    } = this.state
 
     if (!post || !post.creator || !post.title) return <LoadingScreen />
 
-    const slug = get('0.slug', post.communities)
+    const slug = get('communities.0.slug', post)
+    const communityId = get('communities.0.id', post)
 
     const { location } = post
 
@@ -112,38 +138,39 @@ export default class PostDetails extends React.Component {
         showActivityLabel />
     </View>
 
-    return <View style={styles.container}>
+    return <KeyboardFriendlyView style={styles.container}>
       <Comments
+        ref='comments'
         header={postCard}
-        footer={<CommentPrompt {...{currentUser, newComment, commentEdit}} />}
+        footer={<CommentPrompt
+          currentUser={currentUser}
+          communityId={communityId}
+          submitting={submitting}
+          onChange={this.handleCommentOnChange}
+          onSubmit={this.handleCreateComment}
+          commentText={commentText} />
+        }
         postId={post.id}
         postPending={pending}
         showMember={this.handleShowMember}
         showTopic={this.handleShowTopic}
         slug={slug} />
       <SocketSubscriber type='post' id={post.id} />
-    </View>
+    </KeyboardFriendlyView>
   }
 }
 
-export function CommentPrompt ({ currentUser, newComment, commentEdit }) {
+export function CommentPrompt ({ currentUser, onChange, onSubmit, submitting, commentText, communityId }) {
   if (!currentUser) return null
-  const { avatarUrl } = currentUser
 
-  const commentExcerpt = commentEdit && striptags(commentEdit, [], ' ').substring(0, 35)
-
-  const promptText = commentExcerpt || `${currentUser.firstName()}, how can you help?`
-  const promptTextStyle = [
-    styles.promptText,
-    commentEdit ? null : styles.placeholder
-  ]
-
-  return <View style={styles.commentPrompt}>
-    <TouchableOpacity onPress={newComment} style={styles.promptButton}>
-      <Avatar avatarUrl={avatarUrl} style={styles.avatar} />
-      <Text style={promptTextStyle}>{promptText}</Text>
-    </TouchableOpacity>
-  </View>
+  return <InlineEditor
+    onChange={onChange}
+    onSubmit={onSubmit}
+    value={commentText}
+    submitting={submitting}
+    placeholder={`${currentUser.firstName()}, how can you help?`}
+    communityId={communityId}
+  />
 }
 
 export function Files ({ urls }) {

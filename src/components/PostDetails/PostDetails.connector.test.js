@@ -1,7 +1,6 @@
 import {
   mapStateToProps,
-  mapDispatchToProps,
-  mergeProps
+  mapDispatchToProps
 } from './PostDetails.connector'
 import orm from 'store/models'
 
@@ -50,5 +49,10 @@ it('mapsStateToProps', () => {
 })
 
 it('mapsDispatchToProps', () => {
-  expect(mapDispatchToProps(dispatch, props)).toMatchSnapshot()
+  const dispatchProps = mapDispatchToProps(dispatch, props)
+  expect(dispatchProps).toMatchSnapshot()
+  expect(dispatchProps.createComment('some comment')).toMatchSnapshot()
+  expect(dispatchProps.showTopic('mytopicname')).toMatchSnapshot()
+  expect(dispatchProps.showMember(1)).toMatchSnapshot()
+  expect(dispatchProps.editPost()).toMatchSnapshot()
 })
