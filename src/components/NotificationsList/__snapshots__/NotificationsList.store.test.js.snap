@@ -22,9 +22,73 @@ Object {
                 text
               }
               post {
-                id
-                title
-                details
+                
+  id
+  title
+  details
+  type
+  location
+  announcement
+  creator {
+    id
+    name
+    avatarUrl
+    tagline
+  }
+  createdAt
+  updatedAt
+  commenters(first: 3) {
+    id
+    name
+    avatarUrl
+  }
+  commentersTotal
+  commentsTotal
+  comments(first: 10, order: \\"desc\\") {
+    items {
+      id
+      text
+      creator {
+        id
+        name
+        avatarUrl
+      }
+      createdAt
+    }
+    total
+    hasMore
+  }
+  linkPreview {
+    title
+    url
+    imageUrl
+  }
+  votesTotal
+  myVote
+  communities {
+    id
+    name
+    slug
+  }
+  attachments {
+    id
+    position
+    type
+    url
+  }
+  postMemberships {
+    id
+    pinned
+    community {
+      id
+    }
+  }
+  topics {
+    id
+    name
+    postsTotal
+    followersTotal
+  }
               }
               community {
                 id
