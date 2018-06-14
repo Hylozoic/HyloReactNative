@@ -92,7 +92,7 @@ function prependIdForCreate (state, type, params, id) {
   return {
     ...state,
     [key]: {
-      ids: [id].concat(state[key].ids),
+      ids: uniq([id].concat(state[key].ids)),
       total: state[key].total + 1,
       hasMore: state[key].hasMore
     }

@@ -49,12 +49,23 @@ export function createPost (post) {
           title
           details
           announcement
+          commenters(first: 3) {
+            id
+            name
+            avatarUrl
+          }
           commentersTotal
+          createdAt
           updatedAt
           communities {
             id
             name
             slug
+          }
+          linkPreview {
+            title
+            url
+            imageUrl
           }
           creator {
             id
@@ -64,6 +75,13 @@ export function createPost (post) {
             position
             type
             url
+          }
+          postMemberships {
+            id
+            pinned
+            community {
+              id
+            }
           }
           topics {
             id
