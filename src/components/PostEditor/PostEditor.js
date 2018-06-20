@@ -266,6 +266,8 @@ export default class PostEditor extends React.Component {
       showFilePicker: this._showFilePicker
     }
 
+    const communityId = get('[0]', communityIds)
+
     return <KeyboardFriendlyView style={styles.container} {...kavProps}>
       <ScrollView keyboardShouldPersistTaps='handled' style={styles.scrollContainer}>
         <View style={styles.scrollContent}>
@@ -297,7 +299,7 @@ export default class PostEditor extends React.Component {
             placeholder={detailsPlaceholder}
             inputStyle={styles.detailsEditorInput}
             containerStyle={styles.detailsEditorContainer}
-            communityId={communityIds[0]}
+            communityId={communityId}
             autoGrow={false}
             onFocusToggle={(isFocused) => this.setState({detailsFocused: isFocused})}
           />
@@ -344,7 +346,7 @@ export default class PostEditor extends React.Component {
           this.setState({showPicker: false})
         }}>
         <Search style={styles.search}
-          communityId={communityIds[0]}
+          communityId={communityId}
           onCancel={this.cancelTopicPicker}
           onSelect={this.insertPickerTopic}
           type={SearchType.TOPIC} />

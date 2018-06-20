@@ -26,12 +26,7 @@ exports[`renders as expected 1`] = `
       onSelectionChange={[Function]}
       placeholder="Place Holder"
       placeholderTextColor="#c0c6cd"
-      selection={
-        Object {
-          "end": 9,
-          "start": 9,
-        }
-      }
+      selection={undefined}
       underlineColorAndroid="transparent"
       value="some text"
     />

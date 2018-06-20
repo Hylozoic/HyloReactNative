@@ -3,6 +3,13 @@
 exports[`CommentPrompt renders correctly 1`] = `
 <InlineEditor
   communityId={undefined}
+  containerStyle={
+    Object {
+      "borderTopColor": "#c0c6cd",
+      "borderTopWidth": 0.25,
+      "paddingHorizontal": 10,
+    }
+  }
   onChange={undefined}
   onSubmit={undefined}
   placeholder="Joe, how can you help?"

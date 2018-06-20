@@ -30,6 +30,7 @@ describe('PostEditor mapStateToProps', () => {
     })
     state = {
       orm: session.state,
+      pending: {},
       PostEditor: {
         details
       }
@@ -47,12 +48,12 @@ describe('PostEditor mapStateToProps', () => {
     }
   })
 
-  it('returns communityIds', () => {
-    expect(mapStateToProps(state, props).communityIds).toEqual([community1.id, community2.id])
+  it('maps', () => {
+    expect(mapStateToProps(state, props)).toMatchSnapshot()
   })
 
-  it('returns details', () => {
-    expect(mapStateToProps(state, props).details).toBe(details)
+  it('returns communityIds', () => {
+    expect(mapStateToProps(state, props).communityIds).toEqual([community1.id, community2.id])
   })
 
   it('returns a post', () => {
@@ -69,16 +70,37 @@ describe('PostEditor mapStateToProps', () => {
 describe('PostEditor mapDispatchToProps', () => {
   it('maps the action generators', () => {
     const dispatch = jest.fn(val => val)
+    const props = {
+      navigation: {
+        goBack: jest.fn(),
+        state: {
+          params: {
+            communityId,
+            id
+          }
+        }
+      }
+    }
     const dispatchProps = mapDispatchToProps(dispatch, props)
     expect(dispatchProps).toMatchSnapshot()
-    dispatchProps.setDetails('details')
+    dispatchProps.fetchDetailsText(1)
     expect(dispatch).toHaveBeenCalled()
     expect(dispatch.mock.calls).toMatchSnapshot()
   })
 
   it('calls save correctly', async () => {
     expect.assertions(6)
-
+    const props = {
+      navigation: {
+        goBack: jest.fn(),
+        state: {
+          params: {
+            communityId,
+            id
+          }
+        }
+      }
+    }
     const dispatch = jest.fn(val => Promise.resolve(val))
     const dispatchProps = mapDispatchToProps(dispatch, props)
     expect(dispatchProps).toMatchSnapshot()

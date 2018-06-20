@@ -14,7 +14,6 @@ import DrawerMenu from '../DrawerMenu'
 import { Home, Members, Topics } from '../Tabs' // eslint-disable-line no-unused-vars
 import stacksInTabsFactory from './stacksInTabsFactory'
 import PostEditor from '../PostEditor'
-import DetailsEditor from '../PostEditor/DetailsEditor'
 import PostDetails from '../PostDetails'
 import MemberProfile from '../MemberProfile'
 import NotificationSettings from '../NotificationSettings'
@@ -106,7 +105,6 @@ const screensInStack = {
   NewMessage: {screen: NewMessage},
   PostDetails: {screen: PostDetails, path: 'post/:id'},
   PostEditor: {screen: PostEditor},
-  DetailsEditor: {screen: DetailsEditor},
   UserSettings: {screen: UserSettings},
   InvitePeople: {screen: InvitePeople},
   ModeratorSettings: {screen: ModeratorSettings},

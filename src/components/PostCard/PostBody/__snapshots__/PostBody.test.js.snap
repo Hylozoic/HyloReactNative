@@ -73,6 +73,9 @@ exports[`matches the last snapshot 1`] = `
       >
          mention.
       </Text>
+      
+
+
     </Text>
     <Text
       accessible={true}
@@ -97,6 +100,9 @@ exports[`matches the last snapshot 1`] = `
       >
         Then a break.
       </Text>
+      
+
+
     </Text>
     <Text
       accessible={true}
@@ -161,6 +167,9 @@ exports[`matches the last snapshot 1`] = `
       >
          
       </Text>
+      
+
+
     </Text>
     <Text
       accessible={true}
@@ -209,6 +218,9 @@ exports[`matches the last snapshot 1`] = `
       >
          
       </Text>
+      
+
+
     </Text>
     <Text
       accessible={true}
