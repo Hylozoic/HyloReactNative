@@ -1,12 +1,11 @@
 import { get } from 'lodash/fp'
 import { divToP } from 'hylo-utils/text'
+import { getPostFieldsFragment } from '../../store/actions/fetchPost'
 
 export const MODULE_NAME = 'PostEditor'
 export const CREATE_POST = `${MODULE_NAME}/CREATE_POST`
 export const UPDATE_POST = `${MODULE_NAME}/UPDATE_POST`
 export const UPDATE_POST_PENDING = UPDATE_POST + '_PENDING'
-export const SET_DETAILS = `${MODULE_NAME}/SET_DETAILS`
-export const CLEAR_DETAILS = `${MODULE_NAME}/CLEAR_DETAILS`
 
 export function createPost (post) {
   const {
@@ -44,49 +43,7 @@ export function createPost (post) {
           announcement: $announcement
           topicNames: $topicNames
         }) {
-          id
-          type
-          title
-          details
-          announcement
-          commenters(first: 3) {
-            id
-            name
-            avatarUrl
-          }
-          commentersTotal
-          createdAt
-          updatedAt
-          communities {
-            id
-            name
-            slug
-          }
-          linkPreview {
-            title
-            url
-            imageUrl
-          }
-          creator {
-            id
-          }
-          attachments {
-            id
-            position
-            type
-            url
-          }
-          postMemberships {
-            id
-            pinned
-            community {
-              id
-            }
-          }
-          topics {
-            id
-            name
-          }
+          ${getPostFieldsFragment(false)}
         }
       }`,
       variables: {
@@ -138,27 +95,7 @@ export function updatePost (post) {
           fileUrls: $fileUrls
           topicNames: $topicNames
         }) {
-          id
-          type
-          title
-          details
-          updatedAt
-          announcement
-          communities {
-            id
-            name
-            slug
-          }
-          attachments {
-            id
-            position
-            type
-            url
-          }
-          topics {
-            id
-            name
-          }
+          ${getPostFieldsFragment(true)}
         }
       }`,
       variables: {
@@ -182,17 +119,8 @@ export function updatePost (post) {
   }
 }
 
-export function setDetails (details) {
-  return {
-    type: SET_DETAILS,
-    payload: details
-  }
-}
-
 export default function reducer (state = {}, action) {
   switch (action.type) {
-    case SET_DETAILS:
-      return {...state, details: action.payload}
   }
   return state
 }

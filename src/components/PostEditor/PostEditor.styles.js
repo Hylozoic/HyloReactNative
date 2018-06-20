@@ -42,6 +42,13 @@ export default {
     paddingBottom: 4,
     color: rhino30
   },
+  detailsEditorInput: {
+    fontFamily: 'Circular-Book'
+  },
+  detailsEditorContainer: {
+    borderBottomColor: rhino30,
+    borderBottomWidth: StyleSheet.hairlineWidth
+  },
   details: {
     paddingTop: isIOS ? null : 15
   },
@@ -98,6 +105,7 @@ export default {
   topics: {
     justifyContent: 'center',
     display: 'flex',
+    marginTop: 15,
     flexDirection: 'column',
     marginBottom: 10
   },

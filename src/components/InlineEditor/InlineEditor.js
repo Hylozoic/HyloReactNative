@@ -3,7 +3,7 @@ import { Text, View, TextInput, TouchableOpacity, Modal, ActivityIndicator } fro
 import Search, { SearchType } from '../Search'
 import styles from './InlineEditor.styles'
 import { rhino30 } from 'style/colors'
-import { trim, isEmpty, get, size } from 'lodash/fp'
+import { trim, isEmpty, get, flow } from 'lodash/fp'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import { htmlEncode } from 'js-htmlencode'
 import { MENTION_ENTITY_TYPE } from 'hylo-utils/constants'
@@ -20,11 +20,7 @@ export default class InlineEditor extends React.PureComponent {
       showPicker: false,
       isFocused: false,
       pickerType: null,
-      height: minTextInputHeight,
-      selection: {
-        start: size(this.props.value),
-        end: size(this.props.value)
-      }
+      height: minTextInputHeight
     }
   }
 
@@ -74,10 +70,14 @@ export default class InlineEditor extends React.PureComponent {
     }, 100)
   }
 
-  handleInputFocus = () => this.setState({ isFocused: true })
+  handleInputFocus = () => {
+    this.setState({ isFocused: true })
+    this.props.onFocusToggle && this.props.onFocusToggle(true)
+  }
   handleInputBlur = () => {
     if (isEmpty(trim(this.props.value))) this.props.onChange('')
     this.setState({ isFocused: false })
+    this.props.onFocusToggle && this.props.onFocusToggle(false)
   }
 
   handleSubmit = () => {
@@ -95,15 +95,17 @@ export default class InlineEditor extends React.PureComponent {
       communityId,
       onChange,
       onSubmit,
-      submitting = false
+      submitting = false,
+      containerStyle,
+      inputStyle
     } = this.props
 
     const { showPicker, isFocused, pickerType, height, selection } = this.state
 
-    // Calculates a height based on textInput content size with the following constraint: 40 < height < 190
+    // Calculates a height based on textInput content size with the following constraint: 40 < height < maxHeight
     const calculatedHeight = Math.round(Math.min(Math.max((isEmpty(value) ? minTextInputHeight : height) + (isFocused ? 45 : 0), minTextInputHeight), 190))
 
-    return <View style={[styles.container, {height: calculatedHeight}]}>
+    return <View style={[styles.container, containerStyle, {height: calculatedHeight}]}>
       <View style={styles.wrapper}>
         <TextInput
           editable={!!editable && !submitting}
@@ -115,7 +117,7 @@ export default class InlineEditor extends React.PureComponent {
           onSelectionChange={this.handleSelectionChange}
           placeholder={placeholder}
           placeholderTextColor={rhino30}
-          style={styles.textInput}
+          style={[styles.textInput, inputStyle]}
           underlineColorAndroid='transparent'
           value={value}
           ref={(input) => { this.editorInput = input }}
@@ -186,8 +188,10 @@ export const mentionsToHtml = (text) => {
   return text.replace(re, replace)
 }
 
-export function toHtml (text) {
-  const encodedText = mentionsToHtml(htmlEncode(trim(text)))
-
-  return encodedText
+export const newLinesToBr = (text) => {
+  const re = /[\r\n|\r|\n]/gi
+  const replace = `<br>`
+  return text.replace(re, replace)
 }
+
+export const toHtml = flow([trim, htmlEncode, mentionsToHtml, newLinesToBr])

@@ -1,4 +1,4 @@
-import { capeCod10, mineralGreen } from '../../style/colors'
+import { capeCod10, mineralGreen, rhino30 } from '../../style/colors'
 
 export default {
   postCard: {
@@ -34,6 +34,11 @@ export default {
     fontSize: 14,
     color: mineralGreen,
     fontFamily: 'Circular-Regular'
+  },
+  inlineEditor: {
+    paddingHorizontal: 10,
+    borderTopColor: rhino30,
+    borderTopWidth: 0.25
   },
   files: {
     marginHorizontal: 12
