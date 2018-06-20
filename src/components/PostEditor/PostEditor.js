@@ -261,7 +261,9 @@ export default class PostEditor extends React.Component {
       filePickerPending,
       imagePickerPending,
       announcementEnabled,
-      toggleAnnoucement: this.toggleAnnoucement
+      toggleAnnoucement: this.toggleAnnoucement,
+      showImagePicker: this._showFilePicker,
+      showFilePicker: this._showFilePicker
     }
 
     return <KeyboardFriendlyView style={styles.container} {...kavProps}>
@@ -361,11 +363,11 @@ const detailsPlaceholder = 'What else should we know?'
 
 const topicsPlaceholder = 'Add topics.'
 
-export function Toolbar ({post, canModerate, filePickerPending, imagePickerPending, announcementEnabled, toggleAnnoucement}) {
+export function Toolbar ({post, canModerate, filePickerPending, imagePickerPending, announcementEnabled, toggleAnnoucement, showFilePicker, showImagePicker}) {
   return <View style={styles.bottomBar}>
     <View style={styles.bottomBarIcons}>
-      <TouchableOpacity onPress={this._showFilePicker}><Icon name={filePickerPending ? 'Clock' : 'Paperclip'} style={styles.bottomBarIcon} /></TouchableOpacity>
-      <TouchableOpacity onPress={this._showImagePicker}><Icon name={imagePickerPending ? 'Clock' : 'AddImage'} style={styles.bottomBarIcon} /></TouchableOpacity>
+      <TouchableOpacity onPress={showFilePicker}><Icon name={filePickerPending ? 'Clock' : 'Paperclip'} style={styles.bottomBarIcon} /></TouchableOpacity>
+      <TouchableOpacity onPress={showImagePicker}><Icon name={imagePickerPending ? 'Clock' : 'AddImage'} style={styles.bottomBarIcon} /></TouchableOpacity>
       {isEmpty(post) && canModerate && <TouchableOpacity onPress={toggleAnnoucement}><Icon name={'Announcement'} style={styles.annoucementIcon} color={announcementEnabled ? 'caribbeanGreen' : 'rhino30'} /></TouchableOpacity>}
     </View>
     {/* <TouchableOpacity> */}
