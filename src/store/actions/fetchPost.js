@@ -7,7 +7,6 @@ export function getPostFieldsFragment (withComments = true) {
   id
   title
   details
-  detailsText
   type
   location
   announcement

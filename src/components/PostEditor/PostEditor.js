@@ -8,16 +8,13 @@ import {
   Alert,
   Modal
 } from 'react-native'
-import { decode } from 'ent'
 import { validateTopicName } from 'hylo-utils/validators'
 import { get, uniq, uniqBy, isEmpty } from 'lodash/fp'
 import PropTypes from 'prop-types'
-import striptags from 'striptags'
 
 import Icon from '../../components/Icon'
 import header from 'util/header'
 import KeyboardFriendlyView from '../KeyboardFriendlyView'
-import Loading from '../Loading'
 import Search from '../Search'
 import { SearchType } from '../Search/Search.store'
 import FileSelector, { showFilePicker } from './FileSelector'
@@ -44,6 +41,27 @@ export default class PostEditor extends React.Component {
     })
   }
 
+  componentDidMount () {
+    const { navigation, isNewPost } = this.props
+    navigation.setParams({
+      headerTitle: isNewPost ? 'New Post' : 'Edit Post',
+      save: this.save
+    })
+    if (!isNewPost) {
+      this.props.fetchDetailsText()
+    }
+  }
+
+  shouldComponentUpdate (nextProps, nextState) {
+    return nextProps.isFocused
+  }
+
+  componentDidUpdate (prevProps) {
+    if (get('post.detailsText', this.props) !== get('post.detailsText', prevProps)) {
+      this.setState({detailsText: get('post.detailsText', this.props)})
+    }
+  }
+
   constructor (props) {
     super(props)
     const { post, communityIds, imageUrls, fileUrls } = props
@@ -58,21 +76,21 @@ export default class PostEditor extends React.Component {
       topicsPicked: false,
       announcementEnabled: false,
       detailsFocused: false,
-      details: get('detailsText', post) || ''
+      detailsText: get('detailsText', post) || ''
     }
   }
 
-  handleDetailsOnChange = (details) => {
-    this.setState({details})
+  handleDetailsOnChange = (detailsText) => {
+    this.setState({detailsText})
   }
 
   _doSave = () => {
     const { navigation, save } = this.props
-    const { communityIds, fileUrls, imageUrls, title, details, topics, type, announcementEnabled } = this.state
+    const { communityIds, fileUrls, imageUrls, title, detailsText, topics, type, announcementEnabled } = this.state
 
     const postData = {
       communities: communityIds.map(id => ({id})),
-      details: toHtml(details),
+      details: toHtml(detailsText),
       fileUrls,
       imageUrls,
       title,
@@ -111,18 +129,6 @@ export default class PostEditor extends React.Component {
     } else {
       this._doSave()
     }
-  }
-
-  componentDidMount () {
-    const { post, navigation } = this.props
-    navigation.setParams({
-      headerTitle: isEmpty(post) ? 'New Post' : 'Edit Post',
-      save: this.save
-    })
-  }
-
-  shouldComponentUpdate (nextProps) {
-    return nextProps.isFocused
   }
 
   addImage = ({ local, remote }) => {
@@ -215,7 +221,7 @@ export default class PostEditor extends React.Component {
     showFilePicker({
       upload: this.props.upload,
       type: 'post',
-      id: this.props.postId,
+      id: get('post.id', this.props),
       onAdd: this.addFile,
       onError: this.showAlert,
       onComplete: () => this.setState({filePickerPending: false})
@@ -227,7 +233,7 @@ export default class PostEditor extends React.Component {
     showImagePicker({
       upload: this.props.upload,
       type: 'post',
-      id: this.props.postId,
+      id: get('post.id', this.props),
       onChoice: this.addImage,
       onError: this.showAlert,
       onCancel: () => this.setState({imagePickerPending: false}),
@@ -242,10 +248,10 @@ export default class PostEditor extends React.Component {
   }
 
   render () {
-    const { communityIds, postId, canModerate, post } = this.props
+    const { communityIds, canModerate, post, pendingDetailsText } = this.props
 
     const { fileUrls, imageUrls, isSaving, showPicker,
-      topics, title, details, type, filePickerPending, imagePickerPending,
+      topics, title, detailsText, type, filePickerPending, imagePickerPending,
       announcementEnabled, detailsFocused
     } = this.state
 
@@ -257,8 +263,6 @@ export default class PostEditor extends React.Component {
       announcementEnabled,
       toggleAnnoucement: this.toggleAnnoucement
     }
-
-    if (postId) return <Loading />
 
     return <KeyboardFriendlyView style={styles.container} {...kavProps}>
       <ScrollView keyboardShouldPersistTaps='handled' style={styles.scrollContainer}>
@@ -285,7 +289,8 @@ export default class PostEditor extends React.Component {
           <SectionLabel>Details</SectionLabel>
           <InlineEditor
             onChange={this.handleDetailsOnChange}
-            value={details}
+            value={detailsText}
+            editable={!pendingDetailsText}
             submitting={isSaving}
             placeholder={detailsPlaceholder}
             inputStyle={styles.detailsEditorInput}
@@ -316,8 +321,7 @@ export default class PostEditor extends React.Component {
               onRemove={this.removeImage}
               imageUrls={imageUrls}
               style={styles.imageSelector}
-              type='post'
-              id={postId} />
+              type='post' />
           </View>}
 
           {!isEmpty(fileUrls) && <View>
@@ -377,12 +381,6 @@ export function SectionLabel ({ children }) {
   </Text>
 }
 
-export function Details ({details, placeholder}) {
-  const style = details ? styles.textInput : styles.textInputPlaceholder
-  const body = excerptDetails(details) || placeholder
-  return <Text style={style}>{body}</Text>
-}
-
 export function Topics ({ onPress, topics, placeholder }) {
   if (topics.length > 0) {
     return <ScrollView horizontal style={styles.topicPillBox}>
@@ -407,10 +405,4 @@ export function TypeButton ({ type, selected, onPress }) {
       {type.toUpperCase()}
     </Text>
   </TouchableOpacity>
-}
-
-function excerptDetails (details) {
-  return decode(striptags(details, [], ' '))
-    .replace(/\s+/g, ' ')
-    .substring(0, 100)
 }

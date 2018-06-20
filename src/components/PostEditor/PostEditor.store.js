@@ -4,8 +4,11 @@ import { getPostFieldsFragment } from '../../store/actions/fetchPost'
 
 export const MODULE_NAME = 'PostEditor'
 export const CREATE_POST = `${MODULE_NAME}/CREATE_POST`
+
 export const UPDATE_POST = `${MODULE_NAME}/UPDATE_POST`
-export const UPDATE_POST_PENDING = UPDATE_POST + '_PENDING'
+export const UPDATE_POST_PENDING = `${UPDATE_POST}_PENDING`
+
+export const FETCH_DETAILS_TEXT = `${MODULE_NAME}/FETCH_DETAILS_TEXT`
 
 export function createPost (post) {
   const {
@@ -115,6 +118,26 @@ export function updatePost (post) {
         getRoot: get('updatePost'),
         append: false
       }
+    }
+  }
+}
+
+export function fetchPostDetailsText (id) {
+  return {
+    type: FETCH_DETAILS_TEXT,
+    graphql: {
+      query: `query ($id: ID) {
+        post(id: $id) {
+          id
+          detailsText
+        }
+      }`,
+      variables: {
+        id
+      }
+    },
+    meta: {
+      extractModel: 'Post'
     }
   }
 }
