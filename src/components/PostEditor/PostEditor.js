@@ -372,10 +372,6 @@ export function Toolbar ({post, canModerate, filePickerPending, imagePickerPendi
       <TouchableOpacity onPress={showImagePicker}><Icon name={imagePickerPending ? 'Clock' : 'AddImage'} style={styles.bottomBarIcon} /></TouchableOpacity>
       {isEmpty(post) && canModerate && <TouchableOpacity onPress={toggleAnnoucement}><Icon name={'Announcement'} style={styles.annoucementIcon} color={announcementEnabled ? 'caribbeanGreen' : 'rhino30'} /></TouchableOpacity>}
     </View>
-    {/* <TouchableOpacity> */}
-    {/* <Text>Public</Text> */}
-    {/* </TouchableOpacity> */}
-
   </View>
 }
 
