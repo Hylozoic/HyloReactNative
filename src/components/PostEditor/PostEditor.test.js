@@ -50,7 +50,6 @@ describe('PostEditor', () => {
     const renderer = new ReactShallowRenderer()
     renderer.render(<PostEditor
       save={save}
-      editDetails={jest.fn()}
     />)
     const actual = renderer.getRenderOutput()
     expect(actual).toMatchSnapshot()
@@ -70,16 +69,14 @@ describe('PostEditor', () => {
 
   it('presses buttons', () => {
     const save = jest.fn(() => Promise.resolve())
-    const editDetails = jest.fn()
     const renderer = TestRenderer.create(
       <Provider store={createMockStore()}>
         <PostEditor
-          editDetails={editDetails}
           isFocused
+          fetchDetailsText={jest.fn()}
           navigation={navigation}
           post={mockPost}
-          save={save}
-          setDetails={jest.fn()} />
+          save={save} />
       </Provider>)
 
     const root = renderer.root.findByType(PostEditor)
@@ -95,11 +92,6 @@ describe('PostEditor', () => {
     // Offer type button
     root.findAllByType(TypeButton)[2].props.onPress()
     expect(root.instance.state.type).toBe('offer')
-
-    // details section
-    expect(editDetails).not.toHaveBeenCalled()
-    root.findAllByType(TouchableOpacity)[3].props.onPress()
-    expect(editDetails).toHaveBeenCalled()
   })
 
   it('has navigation options', () => {
@@ -118,9 +110,8 @@ describe('PostEditor', () => {
     const renderer = TestRenderer.create(
       <Provider store={createMockStore()}>
         <PostEditor
-          editDetails={jest.fn()}
+          fetchDetailsText={jest.fn()}
           isFocused
-          setDetails={jest.fn()}
           save={save}
           communityIds={[1]}
           navigation={navigation}
@@ -145,9 +136,8 @@ describe('PostEditor', () => {
     const renderer = TestRenderer.create(
       <Provider store={createMockStore()}>
         <PostEditor
-          editDetails={jest.fn()}
+          fetchDetailsText={jest.fn()}
           isFocused
-          setDetails={jest.fn()}
           save={save}
           communityIds={[1]}
           navigation={navigation}
@@ -168,9 +158,8 @@ describe('PostEditor', () => {
     const renderer = TestRenderer.create(
       <Provider store={createMockStore()}>
         <PostEditor
-          editDetails={jest.fn()}
           isFocused
-          setDetails={jest.fn()}
+          fetchDetailsText={jest.fn()}
           save={save}
           communityIds={[1]}
           navigation={navigation}
@@ -195,9 +184,8 @@ describe('PostEditor', () => {
     const renderer = TestRenderer.create(
       <Provider store={createMockStore()}>
         <PostEditor
-          editDetails={jest.fn()}
           isFocused
-          setDetails={jest.fn()}
+          fetchDetailsText={jest.fn()}
           save={save}
           communityIds={[1]}
           navigation={navigation}
@@ -215,9 +203,8 @@ describe('PostEditor', () => {
     const renderer = TestRenderer.create(
       <Provider store={createMockStore()}>
         <PostEditor
-          editDetails={jest.fn()}
           isFocused
-          setDetails={jest.fn()}
+          fetchDetailsText={jest.fn()}
           navigation={navigation}
           imageUrls={['http://foo.com/foo.png']}
           post={mockPost} />
@@ -240,9 +227,8 @@ describe('PostEditor', () => {
     const renderer = TestRenderer.create(
       <Provider store={createMockStore()}>
         <PostEditor
-          editDetails={jest.fn()}
           isFocused
-          setDetails={jest.fn()}
+          fetchDetailsText={jest.fn()}
           navigation={navigation}
           imageUrls={['http://foo.com/foo.png']}
           post={mockPost} />
@@ -262,10 +248,9 @@ describe('PostEditor', () => {
     const renderer = TestRenderer.create(
       <Provider store={createMockStore()}>
         <PostEditor
-          editDetails={jest.fn()}
           isFocused
-          setDetails={jest.fn()}
           upload={upload}
+          fetchDetailsText={jest.fn()}
           fileUrls={[]}
           navigation={navigation}
           imageUrls={['http://foo.com/foo.png']}
@@ -295,11 +280,10 @@ describe('PostEditor', () => {
     const renderer = TestRenderer.create(
       <Provider store={createMockStore()}>
         <PostEditor
-          editDetails={jest.fn()}
           isFocused
-          setDetails={jest.fn()}
           upload={upload}
           fileUrls={[]}
+          fetchDetailsText={jest.fn()}
           navigation={navigation}
           imageUrls={['http://foo.com/foo.png']}
           post={mockPost} />
@@ -322,9 +306,8 @@ describe('PostEditor', () => {
     const renderer = TestRenderer.create(
       <Provider store={createMockStore()}>
         <PostEditor
-          editDetails={jest.fn()}
           isFocused
-          setDetails={jest.fn()}
+          fetchDetailsText={jest.fn()}
           navigation={navigation}
           postId={mockPost.id}
           fileUrls={['http://foo.com/foo.pdf']}

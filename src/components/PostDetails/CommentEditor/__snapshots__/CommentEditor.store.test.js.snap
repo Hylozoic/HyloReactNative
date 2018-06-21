@@ -38,7 +38,7 @@ Object {
     "postId": "1",
     "text": "So much comment.",
   },
-  "type": "CommentEditor/SET_DETAILS",
+  "type": "CommentEditor/SET_COMMENT_EDITS",
 }
 `;
 

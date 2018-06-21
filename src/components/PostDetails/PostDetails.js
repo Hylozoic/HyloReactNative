@@ -167,6 +167,7 @@ export function CommentPrompt ({ currentUser, onChange, onSubmit, submitting, co
     onChange={onChange}
     onSubmit={onSubmit}
     value={commentText}
+    containerStyle={styles.inlineEditor}
     submitting={submitting}
     placeholder={`${currentUser.firstName()}, how can you help?`}
     communityId={communityId}

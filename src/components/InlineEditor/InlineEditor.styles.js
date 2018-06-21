@@ -1,12 +1,9 @@
-import { rhino30, azureRadiance } from 'style/colors'
+import { azureRadiance } from 'style/colors'
 import { Platform } from 'react-native'
 export default {
   container: {
     backgroundColor: 'white',
-    paddingHorizontal: 10,
-    justifyContent: 'flex-start',
-    borderTopColor: rhino30,
-    borderTopWidth: 0.25
+    justifyContent: 'flex-start'
   },
   wrapper: {
     flex: 1,

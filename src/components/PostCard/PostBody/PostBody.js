@@ -34,7 +34,7 @@ export default class PostBody extends React.PureComponent {
       <PostTitle title={decodedTitle} />
       <HTMLView
         onLinkPress={this.handleLinkPress}
-        addLineBreaks={false}
+        addLineBreaks
         stylesheet={richTextStyles}
         textComponentProps={{ style: styles.details }}
         value={presentedDetails} />

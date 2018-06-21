@@ -2,7 +2,7 @@ import { uniqueId } from 'lodash/fp'
 import { divToP } from 'hylo-utils/text'
 
 export const MODULE_NAME = 'CommentEditor'
-export const SET_COMMENT_EDITS = `${MODULE_NAME}/SET_DETAILS`
+export const SET_COMMENT_EDITS = `${MODULE_NAME}/SET_COMMENT_EDITS`
 export const CREATE_COMMENT = `${MODULE_NAME}/CREATE_COMMENT`
 
 export function setCommentEdits (postId, text) {

@@ -10,8 +10,6 @@ import styles from './Feed.styles'
 import { didPropsChange } from 'util/index'
 
 export default class Feed extends React.Component {
-  state = {showNotification: false}
-
   static navigationOptions = ({ navigation }) => {
     const topicName = get('state.params.topicName', navigation)
     const communityName = get('state.params.communityName', navigation)

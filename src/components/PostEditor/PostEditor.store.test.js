@@ -23,9 +23,8 @@ describe('updatePost', () => {
   })
 })
 
-describe('setDetails', () => {
-  const details = 'details'
+describe('fetchDetailsText', () => {
   it('should match the last snapshot', () => {
-    expect(store.setDetails(details)).toMatchSnapshot()
+    expect(store.fetchPostDetailsText(1)).toMatchSnapshot()
   })
 })

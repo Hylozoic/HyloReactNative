@@ -5,24 +5,23 @@ import {
   TextInput,
   TouchableOpacity,
   View,
-  Alert
+  Alert,
+  Modal
 } from 'react-native'
-import { decode } from 'ent'
 import { validateTopicName } from 'hylo-utils/validators'
 import { get, uniq, uniqBy, isEmpty } from 'lodash/fp'
 import PropTypes from 'prop-types'
-import striptags from 'striptags'
 
 import Icon from '../../components/Icon'
 import header from 'util/header'
 import KeyboardFriendlyView from '../KeyboardFriendlyView'
-import Loading from '../Loading'
 import Search from '../Search'
 import { SearchType } from '../Search/Search.store'
 import FileSelector, { showFilePicker } from './FileSelector'
 import { showImagePicker } from '../ImagePicker'
 import ImageSelector from './ImageSelector'
 import { keyboardAvoidingViewProps as kavProps } from 'util/viewHelpers'
+import InlineEditor, { toHtml } from '../InlineEditor'
 
 import styles from './PostEditor.styles'
 import { rhino30 } from 'style/colors'
@@ -42,6 +41,27 @@ export default class PostEditor extends React.Component {
     })
   }
 
+  componentDidMount () {
+    const { navigation, isNewPost } = this.props
+    navigation.setParams({
+      headerTitle: isNewPost ? 'New Post' : 'Edit Post',
+      save: this.save
+    })
+    if (!isNewPost) {
+      this.props.fetchDetailsText()
+    }
+  }
+
+  shouldComponentUpdate (nextProps, nextState) {
+    return nextProps.isFocused
+  }
+
+  componentDidUpdate (prevProps) {
+    if (get('post.detailsText', this.props) !== get('post.detailsText', prevProps)) {
+      this.setState({detailsText: get('post.detailsText', this.props)})
+    }
+  }
+
   constructor (props) {
     super(props)
     const { post, communityIds, imageUrls, fileUrls } = props
@@ -54,17 +74,23 @@ export default class PostEditor extends React.Component {
       showPicker: false,
       topics: get('topics', post) || [],
       topicsPicked: false,
-      announcementEnabled: false
+      announcementEnabled: false,
+      detailsFocused: false,
+      detailsText: get('detailsText', post) || ''
     }
   }
 
+  handleDetailsOnChange = (detailsText) => {
+    this.setState({detailsText})
+  }
+
   _doSave = () => {
-    const { navigation, save, details } = this.props
-    const { communityIds, fileUrls, imageUrls, title, topics, type, announcementEnabled } = this.state
+    const { navigation, save } = this.props
+    const { communityIds, fileUrls, imageUrls, title, detailsText, topics, type, announcementEnabled } = this.state
 
     const postData = {
       communities: communityIds.map(id => ({id})),
-      details: details,
+      details: toHtml(detailsText),
       fileUrls,
       imageUrls,
       title,
@@ -103,19 +129,6 @@ export default class PostEditor extends React.Component {
     } else {
       this._doSave()
     }
-  }
-
-  componentDidMount () {
-    const { post, navigation, setDetails } = this.props
-    setDetails(get('details', post))
-    navigation.setParams({
-      headerTitle: isEmpty(post) ? 'New Post' : 'Edit Post',
-      save: this.save
-    })
-  }
-
-  shouldComponentUpdate (nextProps) {
-    return nextProps.isFocused
   }
 
   addImage = ({ local, remote }) => {
@@ -208,7 +221,7 @@ export default class PostEditor extends React.Component {
     showFilePicker({
       upload: this.props.upload,
       type: 'post',
-      id: this.props.postId,
+      id: get('post.id', this.props),
       onAdd: this.addFile,
       onError: this.showAlert,
       onComplete: () => this.setState({filePickerPending: false})
@@ -220,7 +233,7 @@ export default class PostEditor extends React.Component {
     showImagePicker({
       upload: this.props.upload,
       type: 'post',
-      id: this.props.postId,
+      id: get('post.id', this.props),
       onChoice: this.addImage,
       onError: this.showAlert,
       onCancel: () => this.setState({imagePickerPending: false}),
@@ -235,25 +248,28 @@ export default class PostEditor extends React.Component {
   }
 
   render () {
-    const { communityIds, details, editDetails, postId, canModerate, post } = this.props
+    const { communityIds, canModerate, post, pendingDetailsText } = this.props
 
     const { fileUrls, imageUrls, isSaving, showPicker,
-      topics, title, type, filePickerPending, imagePickerPending,
-      announcementEnabled
+      topics, title, detailsText, type, filePickerPending, imagePickerPending,
+      announcementEnabled, detailsFocused
     } = this.state
 
-    if (postId && !details) return <Loading />
-
-    if (showPicker) {
-      return <Search style={styles.search}
-        communityId={communityIds[0]}
-        onCancel={this.cancelTopicPicker}
-        onSelect={this.insertPickerTopic}
-        type={SearchType.TOPIC} />
+    const toolbarProps = {
+      post,
+      canModerate,
+      filePickerPending,
+      imagePickerPending,
+      announcementEnabled,
+      toggleAnnoucement: this.toggleAnnoucement,
+      showImagePicker: this._showFilePicker,
+      showFilePicker: this._showFilePicker
     }
 
+    const communityId = get('[0]', communityIds)
+
     return <KeyboardFriendlyView style={styles.container} {...kavProps}>
-      <ScrollView style={styles.scrollContainer}>
+      <ScrollView keyboardShouldPersistTaps='handled' style={styles.scrollContainer}>
         <View style={styles.scrollContent}>
           <SectionLabel>What are you posting today?</SectionLabel>
           <View style={[styles.typeButtonRow, styles.section]}>
@@ -275,15 +291,18 @@ export default class PostEditor extends React.Component {
           </View>
 
           <SectionLabel>Details</SectionLabel>
-          <TouchableOpacity
-            style={[
-              styles.textInputWrapper,
-              styles.section,
-              styles.details
-            ]}
-            onPress={() => !isSaving && editDetails(this.insertEditorTopics)}>
-            <Details details={details} placeholder={detailsPlaceholder} />
-          </TouchableOpacity>
+          <InlineEditor
+            onChange={this.handleDetailsOnChange}
+            value={detailsText}
+            editable={!pendingDetailsText}
+            submitting={isSaving}
+            placeholder={detailsPlaceholder}
+            inputStyle={styles.detailsEditorInput}
+            containerStyle={styles.detailsEditorContainer}
+            communityId={communityId}
+            autoGrow={false}
+            onFocusToggle={(isFocused) => this.setState({detailsFocused: isFocused})}
+          />
 
           <TouchableOpacity
             style={[
@@ -306,8 +325,7 @@ export default class PostEditor extends React.Component {
               onRemove={this.removeImage}
               imageUrls={imageUrls}
               style={styles.imageSelector}
-              type='post'
-              id={postId} />
+              type='post' />
           </View>}
 
           {!isEmpty(fileUrls) && <View>
@@ -317,18 +335,22 @@ export default class PostEditor extends React.Component {
               fileUrls={fileUrls} />
           </View>}
         </View>
+        {detailsFocused && <Toolbar {...toolbarProps} />}
       </ScrollView>
-      <View style={styles.bottomBar}>
-        <View style={styles.bottomBarIcons}>
-          <TouchableOpacity onPress={this._showFilePicker}><Icon name={filePickerPending ? 'Clock' : 'Paperclip'} style={styles.bottomBarIcon} /></TouchableOpacity>
-          <TouchableOpacity onPress={this._showImagePicker}><Icon name={imagePickerPending ? 'Clock' : 'AddImage'} style={styles.bottomBarIcon} /></TouchableOpacity>
-          {isEmpty(post) && canModerate && <TouchableOpacity onPress={this.toggleAnnoucement}><Icon name={'Announcement'} style={styles.annoucementIcon} color={announcementEnabled ? 'caribbeanGreen' : 'rhino30'} /></TouchableOpacity>}
-        </View>
-        {/* <TouchableOpacity> */}
-        {/* <Text>Public</Text> */}
-        {/* </TouchableOpacity> */}
-
-      </View>
+      {!detailsFocused && <Toolbar {...toolbarProps} />}
+      {showPicker && <Modal
+        animationType='slide'
+        transparent={false}
+        visible={showPicker}
+        onRequestClose={() => {
+          this.setState({showPicker: false})
+        }}>
+        <Search style={styles.search}
+          communityId={communityId}
+          onCancel={this.cancelTopicPicker}
+          onSelect={this.insertPickerTopic}
+          type={SearchType.TOPIC} />
+      </Modal>}
     </KeyboardFriendlyView>
   }
 }
@@ -343,16 +365,20 @@ const detailsPlaceholder = 'What else should we know?'
 
 const topicsPlaceholder = 'Add topics.'
 
+export function Toolbar ({post, canModerate, filePickerPending, imagePickerPending, announcementEnabled, toggleAnnoucement, showFilePicker, showImagePicker}) {
+  return <View style={styles.bottomBar}>
+    <View style={styles.bottomBarIcons}>
+      <TouchableOpacity onPress={showFilePicker}><Icon name={filePickerPending ? 'Clock' : 'Paperclip'} style={styles.bottomBarIcon} /></TouchableOpacity>
+      <TouchableOpacity onPress={showImagePicker}><Icon name={imagePickerPending ? 'Clock' : 'AddImage'} style={styles.bottomBarIcon} /></TouchableOpacity>
+      {isEmpty(post) && canModerate && <TouchableOpacity onPress={toggleAnnoucement}><Icon name={'Announcement'} style={styles.annoucementIcon} color={announcementEnabled ? 'caribbeanGreen' : 'rhino30'} /></TouchableOpacity>}
+    </View>
+  </View>
+}
+
 export function SectionLabel ({ children }) {
   return <Text style={styles.sectionLabel}>
     {children}
   </Text>
-}
-
-export function Details ({details, placeholder}) {
-  const style = details ? styles.textInput : styles.textInputPlaceholder
-  const body = excerptDetails(details) || placeholder
-  return <Text style={style}>{body}</Text>
 }
 
 export function Topics ({ onPress, topics, placeholder }) {
@@ -379,10 +405,4 @@ export function TypeButton ({ type, selected, onPress }) {
       {type.toUpperCase()}
     </Text>
   </TouchableOpacity>
-}
-
-function excerptDetails (details) {
-  return decode(striptags(details, [], ' '))
-    .replace(/\s+/g, ' ')
-    .substring(0, 100)
 }

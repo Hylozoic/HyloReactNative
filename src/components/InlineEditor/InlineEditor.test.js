@@ -27,8 +27,9 @@ it('handleSubmit', () => {
 it('insertPicked', () => {
   const instance = TestRenderer.create(<InlineEditor {...props} />).getInstance()
   instance.setState({pickerType: SearchType.PERSON})
+  instance.handleSelectionChange({ nativeEvent: { selection: {start: 5, end: 5} } })
   instance.insertPicked({id: 333, name: 'sdfdfz'})
-  expect(props.onChange).toHaveBeenCalledWith('some text [sdfdfz:333] ')
+  expect(props.onChange).toHaveBeenCalledWith('some [sdfdfz:333] text')
   expect(instance.state.showPicker).toBeFalsy()
 })
 
