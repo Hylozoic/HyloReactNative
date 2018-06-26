@@ -32,8 +32,7 @@ export default class InvitePeople extends Component {
     routes: [
       {key: '0', title: 'Send Invites'},
       {key: '1', title: 'Pending Invites'}
-    ],
-    communityMembersCanInvite: false
+    ]
   }
 
   componentDidMount () {
@@ -104,7 +103,8 @@ export class SendInvitesPage extends PureComponent {
     this.state = {
       emails: '',
       copied: false,
-      inputText: `Hey! Here's an invite to the ${this.props.communityName} community on Hylo.`
+      inputText: `Hey! Here's an invite to the ${this.props.communityName} community on Hylo.`,
+      communityMembersCanInvite: false
     }
   }
 
@@ -159,7 +159,6 @@ export class SendInvitesPage extends PureComponent {
   }
 
   toggleAllowCommunityInvites = (communityId) => {
-    console.log('communityId', communityId)
     const { communityMembersCanInvite } = this.state
     this.props.allowCommunityInvites(communityId, communityMembersCanInvite)
       .then(({error}) => {
