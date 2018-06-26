@@ -28,6 +28,7 @@ export function fetchCommunitySettings (communityId) {
           name
           slug
           invitePath
+          allowCommunityInvites
           pendingInvitations (first: 100) {
             hasMore
             items {

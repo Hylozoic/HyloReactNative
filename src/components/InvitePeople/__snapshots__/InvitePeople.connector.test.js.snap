@@ -35,6 +35,7 @@ Object {
           name
           slug
           invitePath
+          allowCommunityInvites
           pendingInvitations (first: 100) {
             hasMore
             items {
