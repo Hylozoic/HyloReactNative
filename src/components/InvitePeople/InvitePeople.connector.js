@@ -9,7 +9,8 @@ import {
   getPendingInvites,
   expireInvitation,
   resendInvitation,
-  reinviteAll
+  reinviteAll,
+  allowCommunityInvites
 } from './InvitePeople.store'
 
 export function mapStateToProps (state, props) {
@@ -37,7 +38,8 @@ export function mapDispatchToProps (dispatch, props) {
     createInvitationsMaker: communityId => (emails, message) => dispatch(createInvitations(communityId, emails, message)),
     expireInvitation: (invitationToken) => dispatch(expireInvitation(invitationToken)),
     resendInvitation: (invitationToken) => dispatch(resendInvitation(invitationToken)),
-    reinviteAllMaker: communityId => () => dispatch(reinviteAll(communityId))
+    reinviteAllMaker: communityId => () => dispatch(reinviteAll(communityId)),
+    allowCommunityInvites: (communityId, setAllow) => dispatch(allowCommunityInvites(communityId, setAllow))
   }
 }
 

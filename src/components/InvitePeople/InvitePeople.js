@@ -32,7 +32,8 @@ export default class InvitePeople extends Component {
     routes: [
       {key: '0', title: 'Send Invites'},
       {key: '1', title: 'Pending Invites'}
-    ]
+    ],
+    communityMembersCanInvite: false
   }
 
   componentDidMount () {
@@ -62,14 +63,16 @@ export default class InvitePeople extends Component {
 
   _renderScene = ({route}) => {
     if (this.props.pending) return <Text>Loading...</Text>
-
+    console.log('community', this.props.community)
     switch (route.key) {
       case '0':
         return <SendInvitesPage inviteLink={this.props.inviteLink}
           pendingCreate={this.props.pendingCreate}
           communityName={this.props.community.name}
+          communityId={this.props.community.id}
           createInvitations={this.props.createInvitations}
-          regenerateAccessCode={this.props.regenerateAccessCode} />
+          regenerateAccessCode={this.props.regenerateAccessCode}
+          allowCommunityInvites={this.props.allowCommunityInvites} />
       case '1':
         return <PendingInvitesPage
           invites={this.props.invites}
@@ -155,6 +158,18 @@ export class SendInvitesPage extends PureComponent {
     })
   }
 
+  toggleAllowCommunityInvites = (communityId) => {
+    console.log('communityId', communityId)
+    const { communityMembersCanInvite } = this.state
+    this.props.allowCommunityInvites(communityId, communityMembersCanInvite)
+      .then(({error}) => {
+        if (error) {
+          this.setState({communityMembersCanInvite})
+        }
+      })
+    this.setState({communityMembersCanInvite: !communityMembersCanInvite})
+  }
+
   render () {
     const {
       emails,
@@ -162,14 +177,15 @@ export class SendInvitesPage extends PureComponent {
       copied,
       successMessage,
       errorMessage,
-      sending
+      sending,
+      communityMembersCanInvite
     } = this.state
 
     const {
       inviteLink,
-      pendingCreate
+      pendingCreate,
+      communityId
     } = this.props
-
     const disableSendBtn = !!(isEmpty(emails) || pendingCreate || sending)
 
     return (
@@ -179,8 +195,8 @@ export class SendInvitesPage extends PureComponent {
             <View style={styles.allowCommunityInvites}>
               <Text>Let anyone in this community send invites</Text>
               <Switch
-                onValueChange={() => {}}
-                value={true}
+                onValueChange={() => this.toggleAllowCommunityInvites(communityId)}
+                value={communityMembersCanInvite}
               />
             </View>
             <Text style={styles.joinCommunityText}>Anyone with this link can join the community</Text>
