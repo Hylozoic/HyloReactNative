@@ -24,6 +24,8 @@ exports[`InvitePeople handles tab-view functions 1`] = `
 
 exports[`InvitePeople handles tab-view functions 2`] = `
 <SendInvitesPage
+  allowCommunityInvites={undefined}
+  communityId={undefined}
   communityName={undefined}
   createInvitations={undefined}
   inviteLink={undefined}
@@ -60,7 +62,7 @@ Object {
     "paddingHorizontal": 10,
   },
   "headerTintColor": "#808c9b",
-  "headerTitle": "Invite People",
+  "headerTitle": "Invite Members",
   "headerTitleStyle": Object {
     "color": "black",
     "fontFamily": "Circular-Bold",
@@ -191,6 +193,20 @@ exports[`InvitePeople renders SendInvitesPage 1`] = `
 <ScrollView>
   <KeyboardFriendlyView>
     <View>
+      <View>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+        >
+          Let anyone in this community send invites
+        </Text>
+        <Switch
+          disabled={false}
+          onValueChange={[Function]}
+          value={false}
+        />
+      </View>
       <Text
         accessible={true}
         allowFontScaling={true}
