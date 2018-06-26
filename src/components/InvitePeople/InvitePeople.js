@@ -1,5 +1,5 @@
 import React, { Component, PureComponent } from 'react'
-import { Clipboard, Dimensions, Text, View, TextInput, TouchableOpacity, ScrollView } from 'react-native'
+import { Clipboard, Dimensions, Text, View, TextInput, TouchableOpacity, ScrollView, Switch } from 'react-native'
 import { TabViewAnimated, TabBar } from 'react-native-tab-view'
 import KeyboardFriendlyView from '../KeyboardFriendlyView'
 import Button from '../Button'
@@ -23,7 +23,7 @@ export const parseEmailList = emails =>
 
 export default class InvitePeople extends Component {
   static navigationOptions = ({navigation}) => header(navigation, {
-    title: 'Invite People',
+    title: 'Invite Members',
     headerBackButton: () => navigation.goBack()
   })
 
@@ -176,6 +176,13 @@ export class SendInvitesPage extends PureComponent {
       <ScrollView>
         <KeyboardFriendlyView style={styles.keyboardFriendlyContainer}>
           <View style={styles.container}>
+            <View style={styles.allowCommunityInvites}>
+              <Text>Let anyone in this community send invites</Text>
+              <Switch
+                onValueChange={() => {}}
+                value={true}
+              />
+            </View>
             <Text style={styles.joinCommunityText}>Anyone with this link can join the community</Text>
             {inviteLink && <Text style={styles.joinCommunityLink}>{inviteLink}</Text>}
             {!inviteLink && <Text>No link has been set yet</Text>}
