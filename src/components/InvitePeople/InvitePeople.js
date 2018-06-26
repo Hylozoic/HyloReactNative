@@ -62,7 +62,6 @@ export default class InvitePeople extends Component {
 
   _renderScene = ({route}) => {
     if (this.props.pending) return <Text>Loading...</Text>
-    console.log('community', this.props.community)
     switch (route.key) {
       case '0':
         return <SendInvitesPage inviteLink={this.props.inviteLink}
