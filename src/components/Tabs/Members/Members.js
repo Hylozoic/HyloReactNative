@@ -2,7 +2,7 @@ import React from 'react'
 import {
   View, FlatList, Text, TouchableOpacity, TextInput, Image
 } from 'react-native'
-import { some, values, keys, isEmpty, debounce, size } from 'lodash/fp'
+import { some, values, keys, isEmpty, debounce, size, get } from 'lodash/fp'
 
 import Avatar from '../../Avatar'
 import { DEFAULT_BANNER } from '../../../store/models/Community'
@@ -59,13 +59,13 @@ export default class Members extends React.Component {
     const onSearch = debounce(300, text => this.props.setSearch(text))
 
     const actions = values(sortKeys).map((value, index) => [value, () => setSort(keys(sortKeys)[index])])
-
+    const showInviteButton = get('allowCommunityInvites', community) || canModerate
     // sort of a hack since members need to be even since it's rows of 2.  fixes flexbox
     if (size(members) % 2 > 0) members.push({id: -1})
 
     const header = <View>
       <Banner community={community} network={network} all={isAll} />
-      {canModerate && <Button
+      {showInviteButton && <Button
         text='Invite People'
         style={styles.button}
         iconName={'Invite'}
