@@ -201,11 +201,13 @@ exports[`InvitePeople renders SendInvitesPage 1`] = `
         >
           Let anyone in this community send invites
         </Text>
-        <Switch
-          disabled={false}
-          onValueChange={[Function]}
-          value={false}
-        />
+        <View>
+          <Switch
+            disabled={false}
+            onValueChange={[Function]}
+            value={false}
+          />
+        </View>
       </View>
       <Text
         accessible={true}

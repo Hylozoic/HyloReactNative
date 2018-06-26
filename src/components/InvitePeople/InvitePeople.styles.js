@@ -145,10 +145,15 @@ export default {
   allowCommunityInvites: {
     backgroundColor: rhino10,
     display: 'flex',
+    flexDirection: 'row',
     flex: 1,
     paddingLeft: 18,
     paddingTop: 20,
-    paddingBottom: 20
+    paddingBottom: 15
+  },
+  allowCommunityInvitesSwitch: {
+    paddingLeft: 14,
+    marginTop: -6
   },
   androidInvisibleUnderline: 'rgba(0,0,0,0)'
 }

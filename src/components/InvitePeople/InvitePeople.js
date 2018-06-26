@@ -192,10 +192,12 @@ export class SendInvitesPage extends PureComponent {
           <View style={styles.container}>
             <View style={styles.allowCommunityInvites}>
               <Text>Let anyone in this community send invites</Text>
-              <Switch
-                onValueChange={() => this.toggleAllowCommunityInvites(communityId)}
-                value={communityMembersCanInvite}
-              />
+              <View style={styles.allowCommunityInvitesSwitch}>
+                <Switch
+                  onValueChange={() => this.toggleAllowCommunityInvites(communityId)}
+                  value={communityMembersCanInvite}
+                />
+              </View>
             </View>
             <Text style={styles.joinCommunityText}>Anyone with this link can join the community</Text>
             {inviteLink && <Text style={styles.joinCommunityLink}>{inviteLink}</Text>}
