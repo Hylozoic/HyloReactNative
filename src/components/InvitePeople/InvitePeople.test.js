@@ -170,10 +170,8 @@ describe('InvitePeople', () => {
   it('has toggleAllowCommunityInvites and calls the function to make the request on the server', () => {
     const allowCommunityInvites = jest.fn(() => new Promise(() => {}))
     const props = {
-      community: {
-        id: 1,
-        name: 'Hylo'
-      },
+      communityId: 1,
+      communityMembersCanInvite: false,
       allowCommunityInvites,
       fetchCommunitySettings: jest.fn(() => new Promise(() => {}))
     }

@@ -158,12 +158,14 @@ export class SendInvitesPage extends PureComponent {
     })
   }
 
-  toggleAllowCommunityInvites = (communityId) => {
+  toggleAllowCommunityInvites = () => {
     const { communityMembersCanInvite } = this.state
+    const { communityId } = this.props
     this.setState({communityMembersCanInvite: !communityMembersCanInvite})
     this.props.allowCommunityInvites(communityId, !communityMembersCanInvite)
       .then(({error}) => {
         if (error) {
+          console.log('error', error, communityMembersCanInvite)
           this.setState({communityMembersCanInvite})
         }
       })
@@ -182,8 +184,7 @@ export class SendInvitesPage extends PureComponent {
 
     const {
       inviteLink,
-      pendingCreate,
-      communityId
+      pendingCreate
     } = this.props
     const disableSendBtn = !!(isEmpty(emails) || pendingCreate || sending)
 
@@ -195,7 +196,7 @@ export class SendInvitesPage extends PureComponent {
               <Text>Let anyone in this community send invites</Text>
               <View style={styles.allowCommunityInvitesSwitch}>
                 <Switch
-                  onValueChange={() => this.toggleAllowCommunityInvites(communityId)}
+                  onValueChange={this.toggleAllowCommunityInvites}
                   value={communityMembersCanInvite}
                 />
               </View>
