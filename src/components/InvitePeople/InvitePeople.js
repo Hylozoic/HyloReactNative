@@ -164,10 +164,7 @@ export class SendInvitesPage extends PureComponent {
     this.setState({communityMembersCanInvite: !communityMembersCanInvite})
     this.props.allowCommunityInvites(communityId, !communityMembersCanInvite)
       .then(({error}) => {
-        if (error) {
-          console.log('error', error, communityMembersCanInvite)
-          this.setState({communityMembersCanInvite})
-        }
+        if (error) this.setState({communityMembersCanInvite})
       })
   }
 
