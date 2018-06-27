@@ -119,13 +119,6 @@ Object {
 }
 `;
 
-exports[`setDetails should match the last snapshot 1`] = `
-Object {
-  "payload": "details",
-  "type": "PostEditor/SET_DETAILS",
-}
-`;
-
 exports[`updatePost should match the last snapshot 1`] = `
 Object {
   "graphql": Object {

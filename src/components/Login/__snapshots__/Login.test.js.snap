@@ -79,6 +79,7 @@ exports[`Login renders correctly 1`] = `
       <View>
         <TextInput
           allowFontScaling={true}
+          autoCapitalize="none"
           onChangeText={[Function]}
           onSubmitEditing={[Function]}
           returnKeyType="go"
@@ -211,6 +212,7 @@ exports[`Login renders error message 1`] = `
       <View>
         <TextInput
           allowFontScaling={true}
+          autoCapitalize="none"
           onChangeText={[Function]}
           onSubmitEditing={[Function]}
           returnKeyType="go"
@@ -343,6 +345,7 @@ exports[`Login renders with a signup link 1`] = `
       <View>
         <TextInput
           allowFontScaling={true}
+          autoCapitalize="none"
           onChangeText={[Function]}
           onSubmitEditing={[Function]}
           returnKeyType="go"
@@ -478,6 +481,7 @@ exports[`Login renders with no network connection error 1`] = `
       <View>
         <TextInput
           allowFontScaling={true}
+          autoCapitalize="none"
           onChangeText={[Function]}
           onSubmitEditing={[Function]}
           returnKeyType="go"
@@ -617,6 +621,7 @@ exports[`Login renders with pending banner 1`] = `
       <View>
         <TextInput
           allowFontScaling={true}
+          autoCapitalize="none"
           onChangeText={[Function]}
           onSubmitEditing={[Function]}
           returnKeyType="go"
@@ -749,6 +754,7 @@ exports[`Login renders without a signup link 1`] = `
       <View>
         <TextInput
           allowFontScaling={true}
+          autoCapitalize="none"
           onChangeText={[Function]}
           onSubmitEditing={[Function]}
           returnKeyType="go"
