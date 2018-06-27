@@ -68,6 +68,7 @@ export default class InvitePeople extends Component {
           pendingCreate={this.props.pendingCreate}
           communityName={this.props.community.name}
           communityId={this.props.community.id}
+          communityMembersCanInvite={this.props.community.allowCommunityInvites}
           createInvitations={this.props.createInvitations}
           regenerateAccessCode={this.props.regenerateAccessCode}
           allowCommunityInvites={this.props.allowCommunityInvites} />
@@ -103,7 +104,7 @@ export class SendInvitesPage extends PureComponent {
       emails: '',
       copied: false,
       inputText: `Hey! Here's an invite to the ${this.props.communityName} community on Hylo.`,
-      communityMembersCanInvite: false
+      communityMembersCanInvite: get('communityMembersCanInvite', props)
     }
   }
 
@@ -159,13 +160,13 @@ export class SendInvitesPage extends PureComponent {
 
   toggleAllowCommunityInvites = (communityId) => {
     const { communityMembersCanInvite } = this.state
-    this.props.allowCommunityInvites(communityId, communityMembersCanInvite)
+    this.setState({communityMembersCanInvite: !communityMembersCanInvite})
+    this.props.allowCommunityInvites(communityId, !communityMembersCanInvite)
       .then(({error}) => {
         if (error) {
           this.setState({communityMembersCanInvite})
         }
       })
-    this.setState({communityMembersCanInvite: !communityMembersCanInvite})
   }
 
   render () {

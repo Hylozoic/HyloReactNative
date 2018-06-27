@@ -26,6 +26,7 @@ exports[`InvitePeople handles tab-view functions 2`] = `
 <SendInvitesPage
   allowCommunityInvites={undefined}
   communityId={undefined}
+  communityMembersCanInvite={undefined}
   communityName={undefined}
   createInvitations={undefined}
   inviteLink={undefined}

@@ -166,4 +166,20 @@ describe('InvitePeople', () => {
 
     expect(actual).toMatchSnapshot()
   })
+
+  it('has toggleAllowCommunityInvites and calls the function to make the request on the server', () => {
+    const allowCommunityInvites = jest.fn(() => new Promise(() => {}))
+    const props = {
+      community: {
+        id: 1,
+        name: 'Hylo'
+      },
+      allowCommunityInvites,
+      fetchCommunitySettings: jest.fn(() => new Promise(() => {}))
+    }
+    const instance = ReactTestRenderer.create(<SendInvitesPage {...props} />).getInstance()
+    instance.toggleAllowCommunityInvites()
+    expect(allowCommunityInvites).toBeCalled()
+    expect(instance.state.communityMembersCanInvite).toBeTruthy()
+  })
 })
