@@ -41,7 +41,10 @@ describe('PostEditor', () => {
   let navigation
 
   beforeEach(() => {
-    navigation = {setParams: jest.fn()}
+    navigation = {
+      setParams: jest.fn(),
+      getParam: jest.fn()
+    }
   })
 
   it('renders a new editor correctly', () => {
@@ -49,6 +52,7 @@ describe('PostEditor', () => {
 
     const renderer = new ReactShallowRenderer()
     renderer.render(<PostEditor
+      navigation={navigation}
       save={save}
     />)
     const actual = renderer.getRenderOutput()
@@ -58,6 +62,7 @@ describe('PostEditor', () => {
   it('renders with a post', () => {
     const renderer = new ReactShallowRenderer()
     renderer.render(<PostEditor
+      navigation={navigation}
       post={mockPost}
       imageUrls={[
         'http://foo.com/foo.png',
@@ -97,6 +102,8 @@ describe('PostEditor', () => {
   it('has navigation options', () => {
     const props = {
       navigation: {
+        setParams: jest.fn(),
+        getParam: jest.fn(),
         state: {
           params: {headerTitle: 'a title', save: jest.fn(), isSaving: false}
         }
@@ -195,8 +202,8 @@ describe('PostEditor', () => {
     const instance = renderer.root.findByType(PostEditor).instance
 
     await instance.save()
-    expect(navigation.setParams.mock.calls[1][0]).toHaveProperty('isSaving', true)
-    expect(navigation.setParams.mock.calls[2][0]).toHaveProperty('isSaving', false)
+    expect(navigation.setParams.mock.calls[2][0]).toHaveProperty('isSaving', true)
+    expect(navigation.setParams.mock.calls[3][0]).toHaveProperty('isSaving', false)
   })
 
   it('has image methods', () => {

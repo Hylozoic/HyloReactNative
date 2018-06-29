@@ -31,13 +31,14 @@ export default class PostEditor extends React.Component {
   static contextTypes = {navigate: PropTypes.func}
 
   static navigationOptions = ({ navigation }) => {
-    const { headerTitle, save, isSaving, showPicker } = get('state.params', navigation) || {}
+    const { headerTitle, save, isSaving, confirmLeave, showPicker } = get('state.params', navigation) || {}
     const title = isSaving ? 'Saving...' : 'Save'
     const def = () => {}
 
     return header(navigation, {
       title: headerTitle,
-      right: { disabled: showPicker || isSaving, text: title, onPress: save || def }
+      right: { disabled: showPicker || isSaving, text: title, onPress: save || def },
+      headerBackButton: () => confirmLeave(navigation.goBack)
     })
   }
 
@@ -65,6 +66,10 @@ export default class PostEditor extends React.Component {
   constructor (props) {
     super(props)
     const { post, communityIds, imageUrls, fileUrls } = props
+    this.props.navigation.setParams({
+      confirmLeave: this.confirmLeave,
+      saveChanges: this.saveChanges
+    })
     this.state = {
       title: get('title', post) || '',
       type: 'discussion',
@@ -78,6 +83,16 @@ export default class PostEditor extends React.Component {
       detailsFocused: false,
       detailsText: get('detailsText', post) || ''
     }
+  }
+
+  confirmLeave = (onLeave) => {
+    Alert.alert(
+      'You may have unsaved changes',
+      'Are you sure you want to discard your changes?',
+      [
+        {text: 'Discard', onPress: onLeave},
+        {text: 'Continue Editing', style: 'cancel'}
+      ])
   }
 
   handleDetailsOnChange = (detailsText) => {
