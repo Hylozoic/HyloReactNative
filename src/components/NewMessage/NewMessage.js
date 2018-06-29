@@ -1,13 +1,11 @@
 import React from 'react'
 import {
-  Dimensions,
   ScrollView,
   SectionList,
   Text,
   TouchableOpacity,
   TextInput,
-  View,
-  StyleSheet
+  View
 } from 'react-native'
 import Avatar from '../Avatar'
 import Icon from '../Icon'
@@ -87,6 +85,7 @@ export default class NewMessage extends React.Component {
         stickySectionHeadersEnabled={false} />
       <MessageInput
         style={styles.messageInput}
+        multiline
         onSubmit={createMessage}
         onBlur={this.onBlurMessageInput}
         placeholder='Type your message here' />
