@@ -62,7 +62,7 @@ export const getPerson = ormCreateSelector(
     return {
       ...person.ref,
       skills: person.skills.toRefArray(),
-      memberships: person.memberships.toRefArray()
+      memberships: person.memberships.toModelArray()
     }
   }
 )
