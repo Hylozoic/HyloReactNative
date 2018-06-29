@@ -129,6 +129,7 @@ export default class Login extends React.Component {
           <View style={styles.leftInputView}>
             <TextInput style={styles.textInput}
               secureTextEntry={this.state.securePassword}
+              autoCapitalize='none'
               ref={ref => { this.passwordInput = ref }}
               onChangeText={password => this.setInput('password', password)}
               returnKeyType='go'
