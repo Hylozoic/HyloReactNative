@@ -7,6 +7,7 @@ import header from 'util/header'
 import { get, isEmpty, compact } from 'lodash/fp'
 import { humanDate } from 'hylo-utils/text'
 import styles from './InvitePeople.styles'
+import { caribbeanGreen } from 'style/colors'
 
 const initialLayout = {
   height: 0,
@@ -195,6 +196,7 @@ export class SendInvitesPage extends PureComponent {
                 <Switch
                   onValueChange={this.toggleAllowCommunityInvites}
                   value={communityMembersCanInvite}
+                  onTintColor={caribbeanGreen}
                 />
               </View>
             </View>
