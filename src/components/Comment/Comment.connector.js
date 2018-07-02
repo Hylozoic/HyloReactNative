@@ -1,5 +1,6 @@
 import { connect } from 'react-redux'
 import { deleteComment } from './Comment.store'
+import { setCommentEdits } from '../PostDetails/CommentEditor/CommentEditor.store'
 import getCommunity from '../../store/selectors/getCommunity'
 import getMe from '../../store/selectors/getMe'
 
@@ -16,8 +17,11 @@ export function mapStateToProps (state, props) {
   }
 }
 
-export const mapDispatchToProps = {
-  deleteComment
+function mapDispatchToProps (dispatch, props) {
+  return {
+    editComment: (postId, text, commentId) => dispatch(setCommentEdits(postId, text, commentId)),
+    deleteComment: id => dispatch(deleteComment(id))
+  }
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
@@ -26,13 +30,15 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
 
   const deleteComment = isCreator ? () => dispatchProps.deleteComment(comment.id) : null
   const removeComment = !isCreator && canModerate ? () => dispatchProps.deleteComment(comment.id) : null
+  const editComment = isCreator ? () => dispatchProps.editComment(comment.post.id, comment.text, comment.id) : null
 
   return {
     ...stateProps,
     ...dispatchProps,
     ...ownProps,
     deleteComment,
-    removeComment
+    removeComment,
+    editComment
   }
 }
 

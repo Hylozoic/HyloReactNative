@@ -13,6 +13,7 @@ function getPostId (state, props) {
 
 export function mapStateToProps (state, props) {
   const id = getPostId(state, props)
+  console.log('postId', id)
   const currentUser = getMe(state, props)
   const communityId = getCurrentCommunityId(state, props)
   return {
