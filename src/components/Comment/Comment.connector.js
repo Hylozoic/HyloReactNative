@@ -30,7 +30,8 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
 
   const deleteComment = isCreator ? () => dispatchProps.deleteComment(comment.id) : null
   const removeComment = !isCreator && canModerate ? () => dispatchProps.deleteComment(comment.id) : null
-  const editComment = isCreator ? () => dispatchProps.editComment(comment.post.id, comment.text, comment.id) : null
+  // TODO replace the first null below with an appropriate function call to enable comment editing.
+  const editComment = isCreator ? null : null
 
   return {
     ...stateProps,
