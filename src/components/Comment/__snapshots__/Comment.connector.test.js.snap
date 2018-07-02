@@ -7,6 +7,7 @@ Object {
     "id": 34,
   },
   "deleteComment": [Function],
+  "editComment": null,
   "isCreator": true,
   "removeComment": null,
 }
@@ -19,6 +20,7 @@ Object {
     "id": 34,
   },
   "deleteComment": null,
+  "editComment": null,
   "isCreator": false,
   "removeComment": null,
 }
@@ -31,6 +33,7 @@ Object {
     "id": 34,
   },
   "deleteComment": null,
+  "editComment": null,
   "removeComment": [Function],
 }
 `;

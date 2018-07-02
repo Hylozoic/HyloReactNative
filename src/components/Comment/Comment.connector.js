@@ -16,7 +16,7 @@ export function mapStateToProps (state, props) {
   }
 }
 
-const mapDispatchToProps = {
+export const mapDispatchToProps = {
   deleteComment
 }
 
