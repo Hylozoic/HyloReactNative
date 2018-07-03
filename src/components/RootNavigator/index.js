@@ -18,7 +18,6 @@ import PostDetails from '../PostDetails'
 import MemberProfile from '../MemberProfile'
 import NotificationSettings from '../NotificationSettings'
 import NotificationsList from '../NotificationsList'
-import CommentEditor from '../PostDetails/CommentEditor'
 import InvitePeople from '../InvitePeople'
 import tabStyles from '../Tabs/Tabs.styles'
 import NewMessage from '../NewMessage'
@@ -101,7 +100,6 @@ const screensInStack = {
   MemberProfile: {screen: MemberProfile, path: 'people/:id'},
   MemberDetails: {screen: MemberDetails},
   MemberSkillEditor: {screen: MemberSkillEditor},
-  CommentEditor: {screen: CommentEditor},
   NewMessage: {screen: NewMessage},
   PostDetails: {screen: PostDetails, path: 'post/:id'},
   PostEditor: {screen: PostEditor},

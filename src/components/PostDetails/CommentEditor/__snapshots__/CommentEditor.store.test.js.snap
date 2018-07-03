@@ -35,6 +35,7 @@ Object {
 exports[`matches the last snapshot for setCommentEdits 1`] = `
 Object {
   "payload": Object {
+    "commentId": undefined,
     "postId": "1",
     "text": "So much comment.",
   },
@@ -50,6 +51,9 @@ Object {
 
 exports[`reducer matches the last snapshot for SET_COMMENT_EDITS 1`] = `
 Object {
-  "1": "Foo",
+  "1": Object {
+    "id": undefined,
+    "text": "Foo",
+  },
 }
 `;

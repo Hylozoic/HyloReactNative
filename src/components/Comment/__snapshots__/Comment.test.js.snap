@@ -5,7 +5,7 @@ exports[`commentMenu renders correctly 1`] = `
   actions={
     Array [
       Array [
-        "Delete this Comment",
+        "Delete Comment",
         [MockFunction],
       ],
     ]
@@ -31,7 +31,7 @@ exports[`commentMenu returns removeComment 1`] = `
   actions={
     Array [
       Array [
-        "Remove this Comment",
+        "Remove Comment",
         [MockFunction],
       ],
     ]
@@ -78,6 +78,7 @@ exports[`renders correctly 1`] = `
       <View>
         <CommentMenu
           deleteComment={[Function]}
+          editComment={undefined}
           removeComment={null}
         />
       </View>
@@ -150,6 +151,7 @@ exports[`shows the post title when displayPostTitle is true 1`] = `
       <View>
         <CommentMenu
           deleteComment={null}
+          editComment={undefined}
           removeComment={null}
         />
       </View>
