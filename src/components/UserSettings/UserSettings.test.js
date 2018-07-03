@@ -225,6 +225,29 @@ describe('UserSettings', () => {
           expect(Toast.show).toHaveBeenCalled()
         })
     })
+    it('shows error toast on error', () => {
+      jest.spyOn(Toast, 'show')
+      const updateUserSettings = jest.fn(() => Promise.resolve({error: true}))
+      const instance = ReactTestRenderer.create(
+        <UserSettings updateUserSettings={updateUserSettings} />).getInstance()
+      const edits = {
+        email: 'rara@rara.com',
+        password: 'abcabcabc',
+        confirmPassword: 'abcabcabc'
+      }
+      instance.setState({
+        changed: true,
+        editingPassword: true,
+        edits
+      })
+      return instance.saveChanges()
+        .then(() => {
+          expect(updateUserSettings).toHaveBeenCalledWith(omit('confirmPassword', edits))
+          expect(instance.state.changed).toEqual(false)
+          expect(instance.state.editingPassword).toEqual(false)
+          expect(Toast.show).toHaveBeenCalled()
+        })
+    })
   })
 
   describe('confirmLeave', () => {

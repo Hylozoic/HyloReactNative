@@ -125,7 +125,7 @@ export default class UserSettings extends React.Component {
           if (error) {
             showToast('Error saving password. Try again later.')
           } else {
-            showToast('Password updated')
+            showToast('Password Updated')
           }
         })
     }
