@@ -11,6 +11,7 @@ import SettingControl from '../SettingControl'
 import { permissions } from '../Login/FbLoginButton'
 import styles from './UserSettings.styles'
 import { any, values, isNil } from 'lodash/fp'
+import { showToast, hideToast } from 'util/toast'
 
 export default class UserSettings extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -119,7 +120,14 @@ export default class UserSettings extends React.Component {
         changed: false,
         editingPassword: false
       })
-      this.props.updateUserSettings(settings)
+      return this.props.updateUserSettings(settings)
+        .then(({error}) => {
+          if (error) {
+            showToast('Error saving password. Try again later.')
+          } else {
+            showToast('Password updated')
+          }
+        })
     }
   }
 
