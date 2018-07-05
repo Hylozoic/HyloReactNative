@@ -178,14 +178,27 @@ export default function reducer (state = defaultState, action) {
         }
       }
       break
+    case SET_MESSAGE:
+      return {
+        ...state,
+        message: payload
+      }
     case CREATE_MESSAGE:
       return {
         ...state,
         input: '',
+        message: '',
         participants: []
       }
   }
   return state
+}
+
+export function setMessage (input) {
+  return {
+    type: SET_MESSAGE,
+    payload: input
+  }
 }
 
 export function setParticipantInput (input) {
@@ -214,6 +227,10 @@ export function removeParticipant (id) {
     type: REMOVE_PARTICIPANT,
     payload: id
   }
+}
+
+export function getMessage (state) {
+  return state[MODULE_NAME].message
 }
 
 export function getInputText (state) {
