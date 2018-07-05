@@ -6,7 +6,8 @@ import {
   TouchableOpacity,
   View,
   Alert,
-  Modal
+  Modal,
+  FlatList
 } from 'react-native'
 import { validateTopicName } from 'hylo-utils/validators'
 import { get, uniq, uniqBy, isEmpty } from 'lodash/fp'
@@ -360,11 +361,26 @@ export default class PostEditor extends React.Component {
         onRequestClose={() => {
           this.setState({showPicker: false})
         }}>
-        <Search style={styles.search}
-          communityId={communityId}
-          onCancel={this.cancelTopicPicker}
-          onSelect={this.insertPickerTopic}
-          type={SearchType.TOPIC} />
+        <View style={nstyles.dialog}>
+          <View style={nstyles.dialogOverlay} />
+          <View style={nstyles.spacer} />
+          <View style={nstyles.dialogContent}>
+            <View style={nstyles.title}>
+              <Text style={nstyles.titleText}>
+                FLAG THIS piece
+              </Text>
+              <TouchableOpacity onPress={() => this.closeModal()}>
+                <Icon name='Ex' style={nstyles.icon} />
+              </TouchableOpacity>
+            </View>
+            <FlatList
+              data={options}
+              renderItem={({item}) => <FlagOption id={item.id} title={item.title} onPress={() => this.showPrompt(item.id)} />}
+              keyExtractor={item => item.id}
+            />
+          </View>
+        </View>
+
       </Modal>}
     </KeyboardFriendlyView>
   }
@@ -421,3 +437,88 @@ export function TypeButton ({ type, selected, onPress }) {
     </Text>
   </TouchableOpacity>
 }
+
+
+const nstyles = {
+  dialog: {
+    flex: 1
+  },
+  dialogOverlay: {
+    backgroundColor: 'rgba(44, 64, 90, 0.7)',
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0
+  },
+  spacer: {
+    flex: 1
+  },
+  dialogContent: {
+    height: 362,
+    justifyContent: 'flex-end',
+    flexDirection: 'column',
+    backgroundColor: 'white',
+    borderTopLeftRadius: 8,
+    borderTopRightRadius: 8,
+    borderWidth: 1,
+    borderColor: '#CCD1D7',
+    overflow: 'hidden'
+  },
+  title: {
+    paddingHorizontal: 20,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 60,
+    borderColor: '#AAA',
+    borderBottomWidth: 0.5
+  },
+  titleText: {
+    fontFamily: 'Circular-Bold',
+    color: '#959FAC',
+    fontSize: 12,
+    flex: 1
+  },
+  icon: {
+    width: 20,
+    color: '#959FAC',
+    fontSize: 22,
+    marginRight: 4
+  },
+  actionButton: {
+    height: 60,
+    justifyContent: 'center',
+    paddingHorizontal: 20,
+    borderTopWidth: 0.5,
+    borderBottomWidth: 0.5,
+    borderColor: '#CCD1D7'
+  },
+  actionText: {
+    fontFamily: 'Circular-Book',
+    color: '#2C405A',
+    fontSize: 16
+  }
+}
+
+const options = [
+  {title: 'Inappropriate Content', id: 'inappropriate'},
+  {title: 'Spam', id: 'spam'},
+  {title: 'Offensive', id: 'offensive'},
+  {title: 'Illegal', id: 'illegal'},
+  {title: 'Other', id: 'other'}
+]
+
+export function FlagOption ({id, title, onPress}) {
+  return <TouchableOpacity style={styles.actionButton} onPress={onPress}>
+    <Text style={styles.actionText}>{title}</Text>
+  </TouchableOpacity>
+}
+
+/*
+<Search style={styles.search}
+  communityId={communityId}
+  onCancel={this.cancelTopicPicker}
+  onSelect={this.insertPickerTopic}
+  type={SearchType.TOPIC} />
+*/

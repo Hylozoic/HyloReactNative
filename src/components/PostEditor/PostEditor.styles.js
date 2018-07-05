@@ -178,5 +178,8 @@ export default {
   },
   annoucementIcon: {
     fontSize: 46
+  },
+  search: {
+    backgroundColor: 'transparent'
   }
 }
