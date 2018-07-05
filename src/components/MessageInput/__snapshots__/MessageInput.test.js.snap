@@ -20,7 +20,7 @@ exports[`matches the last snapshot 1`] = `
       }
     }
     underlineColorAndroid="transparent"
-    value=""
+    value={undefined}
   />
   <TouchableOpacity
     activeOpacity={0.2}
