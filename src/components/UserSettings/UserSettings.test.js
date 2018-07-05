@@ -5,6 +5,7 @@ import ReactTestRenderer from 'react-test-renderer'
 import UserSettings, { SocialAccounts, SocialControl, Footer } from './UserSettings'
 import { omit } from 'lodash/fp'
 import { LoginManager, AccessToken } from 'react-native-fbsdk'
+import Toast from 'react-native-root-toast'
 
 jest.mock('react-native-fbsdk', () => ({
   LoginManager: {
@@ -113,7 +114,10 @@ describe('UserSettings', () => {
 
   describe('editPassword', () => {
     it('sets the state', () => {
-      const instance = ReactTestRenderer.create(<UserSettings />).getInstance()
+      const props = {
+        updateUserSettings: jest.fn(() => Promise.resolve({}))
+      }
+      const instance = ReactTestRenderer.create(<UserSettings {...props} />).getInstance()
       instance.editPassword()
       expect(instance.state.editingPassword).toEqual(true)
     })
@@ -199,7 +203,8 @@ describe('UserSettings', () => {
 
   describe('saveChanges', () => {
     it('sets the state and calls updateUserSettings', () => {
-      const updateUserSettings = jest.fn()
+      jest.spyOn(Toast, 'show')
+      const updateUserSettings = jest.fn(() => Promise.resolve({}))
       const instance = ReactTestRenderer.create(
         <UserSettings updateUserSettings={updateUserSettings} />).getInstance()
       const edits = {
@@ -212,10 +217,36 @@ describe('UserSettings', () => {
         editingPassword: true,
         edits
       })
-      instance.saveChanges()
-      expect(updateUserSettings).toHaveBeenCalledWith(omit('confirmPassword', edits))
-      expect(instance.state.changed).toEqual(false)
-      expect(instance.state.editingPassword).toEqual(false)
+      return instance.saveChanges()
+        .then(() => {
+          expect(updateUserSettings).toHaveBeenCalledWith(omit('confirmPassword', edits))
+          expect(instance.state.changed).toEqual(false)
+          expect(instance.state.editingPassword).toEqual(false)
+          expect(Toast.show).toHaveBeenCalled()
+        })
+    })
+    it('shows error toast on error', () => {
+      jest.spyOn(Toast, 'show')
+      const updateUserSettings = jest.fn(() => Promise.resolve({error: true}))
+      const instance = ReactTestRenderer.create(
+        <UserSettings updateUserSettings={updateUserSettings} />).getInstance()
+      const edits = {
+        email: 'rara@rara.com',
+        password: 'abcabcabc',
+        confirmPassword: 'abcabcabc'
+      }
+      instance.setState({
+        changed: true,
+        editingPassword: true,
+        edits
+      })
+      return instance.saveChanges()
+        .then(() => {
+          expect(updateUserSettings).toHaveBeenCalledWith(omit('confirmPassword', edits))
+          expect(instance.state.changed).toEqual(false)
+          expect(instance.state.editingPassword).toEqual(false)
+          expect(Toast.show).toHaveBeenCalled()
+        })
     })
   })
 
