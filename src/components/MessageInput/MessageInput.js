@@ -24,42 +24,43 @@ export default class extends React.PureComponent {
     super()
     this.state = {
       inputheight: MIN_INPUT_HEIGHT,
-      submittable: false,
-      text: ''
+      submittable: false
     }
   }
 
   componentDidMount () {
-    const text = this.props.value || ''
+    const { value, setMessage } = this.props
+    if (value) setMessage(value)
+    const message = value || ''
     this.setState({
-      submittable: text.trim().length > 0,
-      text
+      submittable: message.trim().length > 0
     })
   }
 
   clear = () => {
     this.setState({
-      text: '',
       submittable: false
     })
+    this.props.setMessage('')
     this.textInput.clear()
   }
 
   handleChange = text => {
     this.startTyping()
     this.setState({
-      submittable: text.trim().length > 0,
-      text
+      submittable: text.trim().length > 0
     })
+    this.props.setMessage(text)
   }
 
   handleContentSizeChange = ({ nativeEvent }) =>
     this.setState({ inputHeight: nativeEvent.contentSize.height })
 
   handleSubmit = () => {
-    const { text, submittable } = this.state
+    const { submittable } = this.state
+    const { message } = this.props
     // NOTE: The calling code is responsible for sanitisation.
-    if (submittable) this.props.onSubmit(text)
+    if (submittable) this.props.onSubmit(message)
     this.clear()
   }
 
@@ -74,7 +75,7 @@ export default class extends React.PureComponent {
     const inputProps = {
       // Can be overridden by setting on component
       placeholderTextColor: rhino30,
-      value: this.state.text,
+      value: this.props.message,
       ...this.props,
 
       // Cannot be overridden
