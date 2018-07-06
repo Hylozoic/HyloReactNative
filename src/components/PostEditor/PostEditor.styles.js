@@ -180,6 +180,6 @@ export default {
     fontSize: 46
   },
   search: {
-    backgroundColor: 'transparent'
+    marginTop: 20
   }
 }
