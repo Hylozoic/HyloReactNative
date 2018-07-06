@@ -1,2 +1,3 @@
 import component from './MessageInput'
-export default component
+import connector from './MessageInput.connector'
+export default connector(component)
