@@ -6,8 +6,7 @@ import {
   TouchableOpacity,
   View,
   Alert,
-  Modal,
-  FlatList
+  Modal
 } from 'react-native'
 import { validateTopicName } from 'hylo-utils/validators'
 import { get, uniq, uniqBy, isEmpty } from 'lodash/fp'
