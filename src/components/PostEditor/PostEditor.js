@@ -17,6 +17,9 @@ import header from 'util/header'
 import KeyboardFriendlyView from '../KeyboardFriendlyView'
 import Search from '../Search'
 import { SearchType } from '../Search/Search.store'
+import {
+  MAX_TITLE_COUNT
+} from './PostEditor.store'
 import FileSelector, { showFilePicker } from './FileSelector'
 import { showImagePicker } from '../ImagePicker'
 import ImageSelector from './ImageSelector'
@@ -264,8 +267,7 @@ export default class PostEditor extends React.Component {
   }
 
   updateTitle = (title) => {
-    const maxLength = 10
-    switch (title.length >= maxLength) {
+    switch (title.length >= MAX_TITLE_COUNT) {
       case true:
         this.setState({titleLengthError: true})
         break

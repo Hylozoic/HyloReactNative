@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import {
   createPost, FETCH_DETAILS_TEXT,
   fetchPostDetailsText,
-  updatePost
+  updatePost, MAX_TITLE_COUNT
 } from './PostEditor.store'
 import { createTopicTag } from '../Editor/Editor'
 import { get, isEmpty } from 'lodash/fp'
@@ -46,6 +46,10 @@ export function mapDispatchToProps (dispatch, props) {
     save: postData => {
       if (!postData.title) {
         return Promise.reject(new Error('Title cannot be blank'))
+      }
+
+      if (postData.title.length >= MAX_TITLE_COUNT) {
+        return Promise.reject(new Error(`Title cannot be more than ${MAX_TITLE_COUNT} characters`))
       }
 
       if (isEmpty(postData.communities)) {
