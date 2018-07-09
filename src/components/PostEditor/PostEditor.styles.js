@@ -181,5 +181,15 @@ export default {
   },
   search: {
     marginTop: 20
+  },
+  errorView: {
+    marginTop: -18
+  },
+  errorBubble: {
+    color: 'white',
+    backgroundColor: 'red'
+  },
+  errorRow: {
+    backgroundColor: 'red'
   }
 }

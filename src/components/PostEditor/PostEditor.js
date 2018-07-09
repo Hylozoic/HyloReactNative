@@ -264,9 +264,12 @@ export default class PostEditor extends React.Component {
   }
 
   updateText = (title) => {
-    if (title.length >= 10) {
-      console.log('title >= 10')
+    const maxLength = 10
+    if (title.length >= maxLength) {
       this.setState({titleLengthError: true})
+    }
+    if (title.length < maxLength) {
+      this.setState({titleLengthError: false})
     }
     this.setState({title})
   }
@@ -313,7 +316,7 @@ export default class PostEditor extends React.Component {
               underlineColorAndroid='transparent'
               value={title} />
           </View>
-          {titleLengthError && <View style={styles.errorBubble}><ErrorBubble text={"Title can't have more than 100 characters."} topArrow /></View>}
+          {titleLengthError && <View style={styles.errorView}><ErrorBubble customStyles={styles.errorBubble} errorRowStyle={styles.errorRow} text={"Title can't have more than 100 characters."} topArrow /></View>}
 
           <SectionLabel>Details</SectionLabel>
           <InlineEditor
