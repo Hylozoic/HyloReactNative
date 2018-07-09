@@ -32,7 +32,6 @@ export default class PostEditor extends React.Component {
 
   static navigationOptions = ({ navigation }) => {
     const { headerTitle, save, isSaving, confirmLeave, showPicker } = get('state.params', navigation) || {}
-    console.log('save', save)
     const title = isSaving ? 'Saving...' : 'Save'
     const def = () => {}
 
@@ -266,11 +265,13 @@ export default class PostEditor extends React.Component {
 
   updateTitle = (title) => {
     const maxLength = 10
-    if (title.length >= maxLength) {
-      this.setState({titleLengthError: true})
-    }
-    if (title.length < maxLength) {
-      this.setState({titleLengthError: false})
+    switch (title.length >= maxLength) {
+      case true:
+        this.setState({titleLengthError: true})
+        break
+      case false:
+        this.setState({titleLengthError: false})
+        break
     }
     this.setState({title})
   }
