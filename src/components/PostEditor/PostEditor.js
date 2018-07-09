@@ -22,7 +22,7 @@ import { showImagePicker } from '../ImagePicker'
 import ImageSelector from './ImageSelector'
 import { keyboardAvoidingViewProps as kavProps } from 'util/viewHelpers'
 import InlineEditor, { toHtml } from '../InlineEditor'
-
+import ErrorBubble from '../ErrorBubble'
 import styles from './PostEditor.styles'
 import { rhino30 } from 'style/colors'
 import { showToast, hideToast } from 'util/toast'
@@ -81,7 +81,8 @@ export default class PostEditor extends React.Component {
       topicsPicked: false,
       announcementEnabled: false,
       detailsFocused: false,
-      detailsText: get('detailsText', post) || ''
+      detailsText: get('detailsText', post) || '',
+      titleLengthError: false
     }
   }
 
@@ -262,12 +263,20 @@ export default class PostEditor extends React.Component {
     this.setState({announcementEnabled: !this.state.announcementEnabled})
   }
 
+  updateText = (title) => {
+    if (title.length >= 10) {
+      console.log('title >= 10')
+      this.setState({titleLengthError: true})
+    }
+    this.setState({title})
+  }
+
   render () {
     const { communityIds, canModerate, post, pendingDetailsText } = this.props
 
     const { fileUrls, imageUrls, isSaving, showPicker,
       topics, title, detailsText, type, filePickerPending, imagePickerPending,
-      announcementEnabled, detailsFocused
+      announcementEnabled, detailsFocused, titleLengthError
     } = this.state
 
     const toolbarProps = {
@@ -297,13 +306,14 @@ export default class PostEditor extends React.Component {
           <View style={[styles.textInputWrapper, styles.section]}>
             <TextInput
               editable={!isSaving}
-              onChangeText={title => this.setState({title})}
+              onChangeText={this.updateText}
               placeholder={titlePlaceholders[type]}
               placeholderTextColor={rhino30}
               style={styles.textInput}
               underlineColorAndroid='transparent'
               value={title} />
           </View>
+          {titleLengthError && <View style={styles.errorBubble}><ErrorBubble text={"Title can't have more than 100 characters."} topArrow /></View>}
 
           <SectionLabel>Details</SectionLabel>
           <InlineEditor
