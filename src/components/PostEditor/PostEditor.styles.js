@@ -183,7 +183,9 @@ export default {
     marginTop: 20
   },
   errorView: {
-    marginTop: -18
+    marginTop: -18,
+    marginBottom: -23,
+    zIndex: 999
   },
   errorBubble: {
     color: 'white',

@@ -7,6 +7,7 @@ import { get } from 'lodash/fp'
 export default function ErrorBubble ({
   text,
   topArrow,
+  topRightArrow,
   bottomArrow,
   customStyles,
   errorRowStyle
@@ -14,6 +15,8 @@ export default function ErrorBubble ({
   const backgroundColor = get('backgroundColor', customStyles)
   return <View>
     {topArrow && <ErrorPointer style={styles.topArrow} color={backgroundColor} direction={'up'} />}
+    {topRightArrow && <ErrorPointer style={styles.topRightArrow} color={backgroundColor} direction={'up'} />}
+
     <View style={[styles.row, errorRowStyle]}>
       <Text style={[styles.errorText, customStyles]}>{text}</Text>
     </View>
@@ -36,13 +39,18 @@ const styles = {
     marginLeft: 30,
     marginBottom: -1
   },
+  topRightArrow: {
+    marginLeft: 270,
+    marginBottom: -1
+  },
   bottomArrow: {
     marginLeft: 30,
     marginTop: -1
   },
   errorText: {
     color: 'red',
-    textAlign: 'center'
+    textAlign: 'center',
+    fontWeight: 'bold'
   },
   row: {
     alignSelf: 'stretch',

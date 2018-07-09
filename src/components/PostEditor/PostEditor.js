@@ -32,6 +32,7 @@ export default class PostEditor extends React.Component {
 
   static navigationOptions = ({ navigation }) => {
     const { headerTitle, save, isSaving, confirmLeave, showPicker } = get('state.params', navigation) || {}
+    console.log('save', save)
     const title = isSaving ? 'Saving...' : 'Save'
     const def = () => {}
 
@@ -263,7 +264,7 @@ export default class PostEditor extends React.Component {
     this.setState({announcementEnabled: !this.state.announcementEnabled})
   }
 
-  updateText = (title) => {
+  updateTitle = (title) => {
     const maxLength = 10
     if (title.length >= maxLength) {
       this.setState({titleLengthError: true})
@@ -309,14 +310,14 @@ export default class PostEditor extends React.Component {
           <View style={[styles.textInputWrapper, styles.section]}>
             <TextInput
               editable={!isSaving}
-              onChangeText={this.updateText}
+              onChangeText={this.updateTitle}
               placeholder={titlePlaceholders[type]}
               placeholderTextColor={rhino30}
               style={styles.textInput}
               underlineColorAndroid='transparent'
               value={title} />
           </View>
-          {titleLengthError && <View style={styles.errorView}><ErrorBubble customStyles={styles.errorBubble} errorRowStyle={styles.errorRow} text={"Title can't have more than 100 characters."} topArrow /></View>}
+          {titleLengthError && <View style={styles.errorView}><ErrorBubble customStyles={styles.errorBubble} errorRowStyle={styles.errorRow} text={"Title can't have more than 100 characters."} topRightArrow /></View>}
 
           <SectionLabel>Details</SectionLabel>
           <InlineEditor
