@@ -10,7 +10,7 @@ export const UPDATE_POST_PENDING = `${UPDATE_POST}_PENDING`
 
 export const FETCH_DETAILS_TEXT = `${MODULE_NAME}/FETCH_DETAILS_TEXT`
 
-export const MAX_TITLE_COUNT = 10
+export const MAX_TITLE_LENGTH = 100
 
 export function createPost (post) {
   const {

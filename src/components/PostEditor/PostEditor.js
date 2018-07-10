@@ -18,7 +18,7 @@ import KeyboardFriendlyView from '../KeyboardFriendlyView'
 import Search from '../Search'
 import { SearchType } from '../Search/Search.store'
 import {
-  MAX_TITLE_COUNT
+  MAX_TITLE_LENGTH
 } from './PostEditor.store'
 import FileSelector, { showFilePicker } from './FileSelector'
 import { showImagePicker } from '../ImagePicker'
@@ -267,7 +267,7 @@ export default class PostEditor extends React.Component {
   }
 
   updateTitle = (title) => {
-    switch (title.length >= MAX_TITLE_COUNT) {
+    switch (title.length >= MAX_TITLE_LENGTH) {
       case true:
         this.setState({titleLengthError: true})
         break
