@@ -72,6 +72,7 @@ exports[`PostEditor renders a new editor correctly 1`] = `
         <TextInput
           allowFontScaling={true}
           editable={true}
+          maxLength={100}
           onChangeText={[Function]}
           placeholder="What do you want to discuss?"
           placeholderTextColor="#c0c6cd"
@@ -253,6 +254,7 @@ exports[`PostEditor renders correctly while saving 1`] = `
           <TextInput
             allowFontScaling={true}
             editable={true}
+            maxLength={100}
             onChangeText={[Function]}
             placeholder="What do you want to discuss?"
             placeholderTextColor="#c0c6cd"
@@ -505,6 +507,7 @@ exports[`PostEditor renders correctly while saving 2`] = `
           <TextInput
             allowFontScaling={true}
             editable={false}
+            maxLength={100}
             onChangeText={[Function]}
             placeholder="What do you need help with?"
             placeholderTextColor="#c0c6cd"
@@ -678,6 +681,7 @@ exports[`PostEditor renders with a post 1`] = `
         <TextInput
           allowFontScaling={true}
           editable={true}
+          maxLength={100}
           onChangeText={[Function]}
           placeholder="What do you want to discuss?"
           placeholderTextColor="#c0c6cd"

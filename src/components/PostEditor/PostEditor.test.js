@@ -371,7 +371,6 @@ describe('PostEditor', () => {
     const instance = renderer.root.findByType(PostEditor).instance
     const longTitle = 'longTitlelongTitlelongTitlelongTitlelongTitlelongTitlelongTitlelongTitlelongTitlelongTitlelongTitlelongTitle'
     instance.updateTitle(longTitle)
-    expect(instance.state.title).toEqual(longTitle)
     expect(instance.state.titleLengthError).toBeTruthy()
   })
 })
