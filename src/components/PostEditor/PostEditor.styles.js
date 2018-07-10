@@ -180,6 +180,18 @@ export default {
     fontSize: 46
   },
   search: {
-    marginTop: isIOS ? 20 : null,
+    marginTop: isIOS ? 20 : null
+  },
+  errorView: {
+    marginTop: -18,
+    marginBottom: -23,
+    zIndex: 999
+  },
+  errorBubble: {
+    color: 'white',
+    backgroundColor: 'red'
+  },
+  errorRow: {
+    backgroundColor: 'red'
   }
 }

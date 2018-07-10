@@ -17,12 +17,15 @@ import header from 'util/header'
 import KeyboardFriendlyView from '../KeyboardFriendlyView'
 import Search from '../Search'
 import { SearchType } from '../Search/Search.store'
+import {
+  MAX_TITLE_LENGTH
+} from './PostEditor.store'
 import FileSelector, { showFilePicker } from './FileSelector'
 import { showImagePicker } from '../ImagePicker'
 import ImageSelector from './ImageSelector'
 import { keyboardAvoidingViewProps as kavProps } from 'util/viewHelpers'
 import InlineEditor, { toHtml } from '../InlineEditor'
-
+import ErrorBubble from '../ErrorBubble'
 import styles from './PostEditor.styles'
 import { rhino30 } from 'style/colors'
 import { showToast, hideToast } from 'util/toast'
@@ -81,7 +84,8 @@ export default class PostEditor extends React.Component {
       topicsPicked: false,
       announcementEnabled: false,
       detailsFocused: false,
-      detailsText: get('detailsText', post) || ''
+      detailsText: get('detailsText', post) || '',
+      titleLengthError: false
     }
   }
 
@@ -262,12 +266,24 @@ export default class PostEditor extends React.Component {
     this.setState({announcementEnabled: !this.state.announcementEnabled})
   }
 
+  updateTitle = (title) => {
+    switch (title.length >= MAX_TITLE_LENGTH) {
+      case true:
+        this.setState({titleLengthError: true})
+        break
+      case false:
+        this.setState({titleLengthError: false})
+        break
+    }
+    this.setState({title})
+  }
+
   render () {
     const { communityIds, canModerate, post, pendingDetailsText } = this.props
 
     const { fileUrls, imageUrls, isSaving, showPicker,
       topics, title, detailsText, type, filePickerPending, imagePickerPending,
-      announcementEnabled, detailsFocused
+      announcementEnabled, detailsFocused, titleLengthError
     } = this.state
 
     const toolbarProps = {
@@ -297,13 +313,14 @@ export default class PostEditor extends React.Component {
           <View style={[styles.textInputWrapper, styles.section]}>
             <TextInput
               editable={!isSaving}
-              onChangeText={title => this.setState({title})}
+              onChangeText={this.updateTitle}
               placeholder={titlePlaceholders[type]}
               placeholderTextColor={rhino30}
               style={styles.textInput}
               underlineColorAndroid='transparent'
               value={title} />
           </View>
+          {titleLengthError && <View style={styles.errorView}><ErrorBubble customStyles={styles.errorBubble} errorRowStyle={styles.errorRow} text={"Title can't have more than 100 characters."} topRightArrow /></View>}
 
           <SectionLabel>Details</SectionLabel>
           <InlineEditor
