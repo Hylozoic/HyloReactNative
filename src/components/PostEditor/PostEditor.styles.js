@@ -180,6 +180,6 @@ export default {
     fontSize: 46
   },
   search: {
-    marginTop: 20
+    marginTop: isIOS ? 20 : null,
   }
 }
