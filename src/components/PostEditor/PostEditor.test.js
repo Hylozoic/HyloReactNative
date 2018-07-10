@@ -334,6 +334,46 @@ describe('PostEditor', () => {
       'http://bar.com/bar.pdf'
     ])
   })
+
+  it('updates the title', () => {
+    const save = jest.fn(() => Promise.resolve())
+    const renderer = TestRenderer.create(
+      <Provider store={createMockStore()}>
+        <PostEditor
+          fetchDetailsText={jest.fn()}
+          isFocused
+          save={save}
+          communityIds={[1]}
+          navigation={navigation}
+          post={mockPost} />
+      </Provider>)
+
+    const instance = renderer.root.findByType(PostEditor).instance
+    const someTitle = 'some title'
+    instance.updateTitle(someTitle)
+    expect(instance.state.title).toEqual(someTitle)
+    expect(instance.state.titleLengthError).toBeFalsy()
+  })
+
+  it('displays an error if the title is too long', () => {
+    const save = jest.fn(() => Promise.resolve())
+    const renderer = TestRenderer.create(
+      <Provider store={createMockStore()}>
+        <PostEditor
+          fetchDetailsText={jest.fn()}
+          isFocused
+          save={save}
+          communityIds={[1]}
+          navigation={navigation}
+          post={mockPost} />
+      </Provider>)
+
+    const instance = renderer.root.findByType(PostEditor).instance
+    const longTitle = 'longTitlelongTitlelongTitlelongTitlelongTitlelongTitlelongTitlelongTitlelongTitlelongTitlelongTitlelongTitle'
+    instance.updateTitle(longTitle)
+    expect(instance.state.title).toEqual(longTitle)
+    expect(instance.state.titleLengthError).toBeTruthy()
+  })
 })
 
 describe('SectionLabel', () => {
