@@ -12,7 +12,7 @@ exports[`CommentPrompt renders correctly 1`] = `
   }
   onChange={undefined}
   onSubmit={undefined}
-  placeholder="Joe, how can you help?"
+  placeholder="Write a comment..."
   submitting={undefined}
   value={undefined}
 />
