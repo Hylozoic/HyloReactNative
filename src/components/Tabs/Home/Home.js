@@ -8,10 +8,6 @@ export default class Home extends React.Component {
   static navigationOptions = ({ navigation, screenProps }) => {
     return Header(navigation, screenProps.currentTabName)
   }
-  
-  componentDidMount () {
-    this.props.navigation.navigate('Members')
-  }
 
   shouldComponentUpdate (nextProps) {
     return nextProps.isFocused
