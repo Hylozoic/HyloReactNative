@@ -42,6 +42,7 @@ export default {
     height: 50
   },
   tabBar: {
+    paddingTop: 10,
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginHorizontal: 35,
