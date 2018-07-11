@@ -37,6 +37,8 @@ export default class PostHeader extends React.PureComponent {
       canFlag,
       removePost,
       deletePost,
+      deletePostAndClose,
+      closeOnDelete,
       pinned,
       pinPost,
       topics,
@@ -49,7 +51,6 @@ export default class PostHeader extends React.PureComponent {
     const { flaggingVisible } = this.state
 
     const showTopics = !isEmpty(topics)
-
     // Used to generate a link to this post from the backend.
     const linkData = {
       slug,
@@ -68,7 +69,7 @@ export default class PostHeader extends React.PureComponent {
       'Confirm Delete',
       'Are you sure you want to delete this post?',
       [
-        {text: 'Yes', onPress: () => deletePost()},
+        {text: 'Yes', onPress: () => closeOnDelete ? deletePostAndClose() : deletePost()},
         {text: 'Cancel', style: 'cancel'}
       ]) : null
 

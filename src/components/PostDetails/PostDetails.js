@@ -112,6 +112,7 @@ export default class PostDetails extends React.Component {
         showMember={this.handleShowMember}
         goToCommunity={this.handleGoToCommunity}
         announcement={post.announcement}
+        closeOnDelete
       />
       <PostImage imageUrls={post.imageUrls} linked />
       <PostBody title={post.title}
