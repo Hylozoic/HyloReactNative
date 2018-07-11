@@ -37,6 +37,12 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     ...dispatchProps,
     editPost: id => navigation.navigate({routeName: 'PostEditor', params: {id}, key: 'PostEditor'}),
     deletePost: canEdit ? () => deletePost(postId) : null,
+    deletePostAndClose: () => {
+      if (canEdit) {
+        deletePost(postId)
+        navigation.goBack()
+      }
+    },
     removePost: !isCreator && canModerate ? () => removePost(postId, slug) : null,
     pinPost: canModerate && community ? () => pinPost(postId, community.id) : null
   }
