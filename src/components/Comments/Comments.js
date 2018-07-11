@@ -40,7 +40,7 @@ export default class Comments extends React.PureComponent {
     return <View style={{flex: 1}}>
       <ScrollView
         ref={ref => { this.scrollView = ref }}
-        onContentSizeChange={(contentWidth, contentHeight) => { this.scrollView.scrollToEnd({animated: true}) }}
+        onContentSizeChange={() => { this.scrollView.scrollToEnd({animated: true}) }}
       >
         {header}
         <ShowMore commentsLength={comments.length}
