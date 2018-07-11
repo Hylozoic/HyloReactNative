@@ -42,7 +42,10 @@ export default class Comments extends React.PureComponent {
     } = this.props
 
     return <View style={{flex: 1}}>
-      <ScrollView ref={ref => { this.scrollView = ref }}>
+      <ScrollView
+        ref={ref => { this.scrollView = ref }}
+        onContentSizeChange={(contentWidth, contentHeight) => { this.scrollToEnd() }}
+      >
         {header}
         <ShowMore commentsLength={comments.length}
           total={total}
