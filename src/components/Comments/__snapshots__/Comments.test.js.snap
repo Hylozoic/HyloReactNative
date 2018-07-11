@@ -2,7 +2,9 @@
 
 exports[`Comments renders correctly 1`] = `
 <View>
-  <ScrollView>
+  <ScrollView
+    onContentSizeChange={[Function]}
+  >
     <Text
       accessible={true}
       allowFontScaling={true}
