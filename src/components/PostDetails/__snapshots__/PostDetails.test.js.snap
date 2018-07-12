@@ -116,6 +116,7 @@ exports[`PostDetails renders correctly 1`] = `
       <View>
         <withNavigation(Connect(PostHeader))
           announcement={undefined}
+          closeOnDelete={true}
           communities={
             Array [
               Object {

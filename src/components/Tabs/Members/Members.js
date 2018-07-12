@@ -103,7 +103,7 @@ export default class Members extends React.Component {
         onEndReached={fetchMoreMembers}
         keyExtractor={(item, index) => item.id}
         ListHeaderComponent={header}
-        ListFooterComponent={pending ? <Loading /> : null}
+        ListFooterComponent={pending ? <Loading style={{paddingTop: 10}} /> : null}
       />
     </View>
   }
