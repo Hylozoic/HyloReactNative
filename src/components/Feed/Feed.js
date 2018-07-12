@@ -56,18 +56,22 @@ export default class Feed extends React.Component {
         text={'No posts here, try creating your own Community!'}
       />
     }
+
+    const all = !community && !topicName
+
     return <View style={styles.container}>
       <FeedList
         community={community}
         network={network}
         showPost={showPost}
+        all={all}
         goToCommunity={this.handleGoToCommunity}
         header={
           <FeedBanner
             community={community}
             network={network}
             currentUser={currentUser}
-            all={!community && !topicName}
+            all={all}
             newPost={this.handleNewPost}
             topicName={topicName}
             postsTotal={postsTotal}

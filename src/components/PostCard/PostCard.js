@@ -53,7 +53,8 @@ export default class PostCard extends React.PureComponent {
       goToCommunity,
       selectedNetworkId,
       hideMenu,
-      hideDetails
+      hideDetails,
+      shouldShowCommunities
     } = this.props
 
     const slug = get('0.slug', communities)
@@ -81,6 +82,7 @@ export default class PostCard extends React.PureComponent {
         shouldTruncate
         hideDetails={hideDetails} />
       <PostCommunities
+        shouldShowCommunities={shouldShowCommunities}
         communities={communities}
         slug={slug}
         selectedNetworkId={selectedNetworkId}
