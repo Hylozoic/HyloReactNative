@@ -171,7 +171,7 @@ export function CommentPrompt ({ currentUser, onChange, onSubmit, submitting, co
     value={commentText}
     containerStyle={styles.inlineEditor}
     submitting={submitting}
-    placeholder={`${currentUser.firstName()}, how can you help?`}
+    placeholder={'Write a comment...'}
     communityId={communityId}
   />
 }

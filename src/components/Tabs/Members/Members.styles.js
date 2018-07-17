@@ -10,7 +10,8 @@ const bannerHeight = 132
 
 export default {
   container: {
-    backgroundColor: '#FFF'
+    backgroundColor: '#FFF',
+    flex: 1
   },
   bannerContainer: {
     zIndex: 10,
