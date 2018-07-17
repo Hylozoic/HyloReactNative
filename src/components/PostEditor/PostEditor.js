@@ -285,7 +285,7 @@ export default class PostEditor extends React.Component {
       imagePickerPending,
       announcementEnabled,
       toggleAnnoucement: this.toggleAnnoucement,
-      showImagePicker: this._showFilePicker,
+      showImagePicker: this._showImagePicker,
       showFilePicker: this._showFilePicker
     }
 

@@ -86,6 +86,7 @@ exports[`PostCard matches the last snapshot 1`] = `
   onPress={[Function]}
 >
   <PostCard
+    communities={undefined}
     creator={
       Object {
         "id": 2,
@@ -102,6 +103,7 @@ exports[`PostCard matches the last snapshot 1`] = `
         "id": 1,
       }
     }
+    shouldShowCommunities={true}
     showDetails={[Function]}
     showMember={[Function]}
   />
