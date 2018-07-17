@@ -326,7 +326,7 @@ export default class PostEditor extends React.Component {
             communityId={communityId}
             autoGrow={false}
             onFocusToggle={(isFocused) => this.setState({detailsFocused: isFocused})}
-            onAddTopic={this.insertEditorTopic}
+            onInsertTopic={this.insertEditorTopic}
           />
 
           <TouchableOpacity
