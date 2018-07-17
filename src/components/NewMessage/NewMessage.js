@@ -15,6 +15,7 @@ import KeyboardFriendlyView from '../KeyboardFriendlyView'
 import styles from './NewMessage.styles'
 import { isEmpty } from 'lodash/fp'
 import { keyboardAvoidingViewProps as kavProps } from 'util/viewHelpers'
+import { isIOS } from 'util/platform'
 
 export default class NewMessage extends React.Component {
   constructor (props) {
@@ -105,7 +106,7 @@ export function ParticipantInput ({ participants, onChangeText, removeParticipan
         onChangeText={onChangeText}
         underlineColorAndroid='transparent'
         placeholder={placeholderText}
-        style={styles.participantTextInput} />
+        style={isIOS ? null : styles.participantTextInput} />
     </ScrollView>
   </View>
 }

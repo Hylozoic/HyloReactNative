@@ -9,6 +9,8 @@ export default {
     minHeight: 100
   },
   listControls: {
+    paddingTop: 12,
+    paddingBottom: 4,
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginBottom: 10,
