@@ -196,19 +196,11 @@ export default class PostEditor extends React.Component {
     this.cancelTopicPicker()
   }
 
-  insertEditorTopics = topicNames => {
+  insertEditorTopic = topics => {
     // If topic picker has been used, don't override it with the details editor
     if (this.state.topicsPicked) return
 
-    const validTopics = topicNames
-      .map(t => {
-        const name = this.ignoreHash(t)
-
-        // Temporary id for topics without one (note that some may be existing
-        // topics, we just don't have their id after processing from markup
-        return { id: name, name }
-      })
-      .filter(({ name }) => validateTopicName(name) === null)
+    const validTopics = topics.filter(({ name }) => validateTopicName(name) === null)
     this.insertUniqueTopics(validTopics, false)
   }
 
@@ -334,6 +326,7 @@ export default class PostEditor extends React.Component {
             communityId={communityId}
             autoGrow={false}
             onFocusToggle={(isFocused) => this.setState({detailsFocused: isFocused})}
+            onAddTopic={this.insertEditorTopic}
           />
 
           <TouchableOpacity

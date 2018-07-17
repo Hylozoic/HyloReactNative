@@ -63,6 +63,10 @@ export default class InlineEditor extends React.PureComponent {
 
     this.props.onChange(newValue)
 
+    if (this.state.pickerType === SearchType.TOPIC) {
+      this.props.onAddTopic([choice])
+    }
+
     // We use a timeout since the onChange needs to propagate the new value change before setting the new selection
     setTimeout(() => {
       this.setState({showPicker: false, selection: {start: newSelectionStart, end: newSelectionStart}})
