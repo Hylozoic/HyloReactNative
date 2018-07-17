@@ -62,6 +62,7 @@ export default class FeedList extends React.Component {
     showPost={this.showPost}
     showMember={this.showMember}
     showTopic={this.showTopic}
+    shouldShowCommunities={this.props.all}
     goToCommunity={this.goToCommunity} />
 
   keyExtractor = (item) => `post${item}`

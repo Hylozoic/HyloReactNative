@@ -173,6 +173,7 @@ exports[`PostDetails renders correctly 1`] = `
             ]
           }
           goToCommunity={[Function]}
+          shouldShowCommunities={true}
           slug="foom"
         />
         <Files

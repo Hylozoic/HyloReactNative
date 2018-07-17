@@ -1,5 +1,5 @@
 import React from 'react'
-import { get, isEmpty, chunk } from 'lodash/fp'
+import { isEmpty, chunk } from 'lodash/fp'
 import Icon from '../../Icon'
 import { Text, View, TouchableOpacity, Image } from 'react-native'
 import { DEFAULT_AVATAR } from '../../../store/models/Community'
@@ -24,10 +24,12 @@ export default class PostCommunities extends React.PureComponent {
   }
 
   render () {
-    const { communities, slug, goToCommunity } = this.props
+    const { communities, goToCommunity, shouldShowCommunities } = this.props
 
-    // don't show if there are no communities or this isn't cross posted
-    if (isEmpty(communities) || (communities.length === 1 && get('0.slug', communities) === slug)) return null
+    // don't show if there are no communities or there is exactly 1 community and the flag isn't set
+    if (isEmpty(communities) || (communities.length === 1 && !shouldShowCommunities)) {
+      return null
+    }
 
     const { expanded } = this.state
 
