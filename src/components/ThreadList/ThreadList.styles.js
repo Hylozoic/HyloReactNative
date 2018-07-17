@@ -1,6 +1,7 @@
 export default {
   center: {
-    textAlign: 'center'
+    textAlign: 'center',
+    paddingTop: 10
   },
   threadList: {
     backgroundColor: 'white',
