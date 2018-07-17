@@ -124,7 +124,8 @@ export default class PostDetails extends React.Component {
       <PostCommunities
         communities={post.communities}
         slug={slug}
-        goToCommunity={this.handleGoToCommunity} />
+        goToCommunity={this.handleGoToCommunity}
+        shouldShowCommunities />
       {!!location && <View style={[styles.infoRow, styles.bottomInfoRow]}>
         <Text style={styles.infoRowLabel}>Location:</Text>
         <Text style={styles.infoRowinfo}>{location}</Text>
