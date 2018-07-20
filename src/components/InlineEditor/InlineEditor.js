@@ -62,6 +62,14 @@ export default class InlineEditor extends React.PureComponent {
     newValue += secondSlice
 
     this.props.onChange(newValue)
+    console.log('in insertPicked')
+    console.log('does equal', this.state.pickerType === SearchType.TOPIC)
+    console.log('this.state.pickerType', this.state.pickerType)
+    console.log('SearchType.TOPIC', SearchType.TOPIC)
+    if (this.state.pickerType === SearchType.TOPIC) {
+      console.log('calling onInsertTopic')
+      this.props.onInsertTopic([choice])
+    }
 
     // We use a timeout since the onChange needs to propagate the new value change before setting the new selection
     setTimeout(() => {
