@@ -1,5 +1,5 @@
 import React from 'react'
-import { TextInput, TouchableOpacity, View } from 'react-native'
+import { TextInput, TouchableOpacity, View, Alert } from 'react-native'
 import { bool, func, string } from 'prop-types'
 import { throttle } from 'lodash'
 
@@ -58,12 +58,22 @@ export default class extends React.PureComponent {
 
   handleSubmit = () => {
     const { submittable } = this.state
-    const { message, disabled } = this.props
+    const { message, emptyParticipants } = this.props
     const canSend = submittable || message.length > 0
     // NOTE: The calling code is responsible for sanitisation.
-    if (canSend && !disabled) {
+    if (canSend && !emptyParticipants) {
       this.props.onSubmit(message)
       this.clear()
+    }
+    if (emptyParticipants) {
+      Alert.alert(
+        'Missing message recipient!',
+        'Click on a user name or user the search bar.',
+        [
+          {text: 'OK', onPress: () => console.log('OK Pressed')}
+        ],
+        { cancelable: true }
+      )
     }
   }
 

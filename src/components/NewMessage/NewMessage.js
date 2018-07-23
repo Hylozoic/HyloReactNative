@@ -90,7 +90,7 @@ export default class NewMessage extends React.Component {
         onSubmit={createMessage}
         onBlur={this.onBlurMessageInput}
         placeholder='Type your message here'
-        disabled={emptyParticipantsList}
+        emptyParticipants={emptyParticipantsList}
       />
     </KeyboardFriendlyView>
   }
