@@ -58,10 +58,13 @@ export default class extends React.PureComponent {
 
   handleSubmit = () => {
     const { submittable } = this.state
-    const { message } = this.props
+    const { message, disabled } = this.props
+    const canSend = submittable || message.length > 0
     // NOTE: The calling code is responsible for sanitisation.
-    if (submittable) this.props.onSubmit(message)
-    this.clear()
+    if (canSend && !disabled) {
+      this.props.onSubmit(message)
+      this.clear()
+    }
   }
 
   restrictedHeight = () => Math.min(
