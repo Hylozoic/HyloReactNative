@@ -70,7 +70,7 @@ export default class extends React.PureComponent {
         'Missing message recipient!',
         'Click on a user name or user the search bar.',
         [
-          {text: 'OK', onPress: () => console.log('OK Pressed')}
+          {text: 'OK'}
         ],
         { cancelable: true }
       )
