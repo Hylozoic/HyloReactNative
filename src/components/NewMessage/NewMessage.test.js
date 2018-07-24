@@ -34,7 +34,6 @@ describe('NewMessage', () => {
       setParticipantInput={() => {}}
       participantInputText={participantInputText}
       createMessage={() => {}}
-      setMessage={() => {}}
       pending={pending}
       />)
     const actual = renderer.getRenderOutput()
@@ -53,7 +52,6 @@ describe('NewMessage', () => {
       setParticipantInput={() => {}}
       participantInputText={participantInputText2}
       createMessage={() => {}}
-      setMessage={() => {}}
       pending={pending}
       />)
 

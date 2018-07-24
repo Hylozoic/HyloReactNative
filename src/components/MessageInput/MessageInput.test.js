@@ -23,3 +23,31 @@ describe('handleChange', () => {
     expect(props.setMessage).toHaveBeenCalledWith(text)
   })
 })
+
+describe('handleSubmit', () => {
+  it('calls onSumbit appropriately', () => {
+    const props = {
+      onSubmit: jest.fn(),
+      setMessage: jest.fn()
+    }
+    const instance = ReactTestRenderer.create(<MessageInput {...props} />).getInstance()
+    instance.startTyping = jest.fn()
+    const text = 'hi there'
+    instance.handleChange(text)
+    instance.handleSubmit()
+    expect(props.onSubmit).toHaveBeenCalled()
+  })
+  it('calls Alert appropriately', () => {
+    const props = {
+      onSubmit: jest.fn(),
+      setMessage: jest.fn(),
+      emptyParticipants: true
+    }
+    const instance = ReactTestRenderer.create(<MessageInput {...props} />).getInstance()
+    instance.startTyping = jest.fn()
+    const text = 'hi there'
+    instance.handleChange(text)
+    instance.handleSubmit()
+    expect(props.onSubmit).not.toHaveBeenCalled()
+  })
+})
