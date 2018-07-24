@@ -10,7 +10,7 @@ import { SearchType } from '../Search/Search.store'
 import Search from '../Search'
 
 import styles from './ModeratorSettings.styles'
-
+//
 export default class ModeratorSettings extends Component {
   static navigationOptions = ({navigation}) => header(navigation, {
     headerBackButton: () => navigation.goBack(),
