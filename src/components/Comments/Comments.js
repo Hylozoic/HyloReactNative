@@ -26,10 +26,6 @@ export default class Comments extends React.PureComponent {
       slug={slug} />
   }
 
-  scrollToEnd (animated = true) {
-    this.scrollView.scrollToEnd({animated})
-  }
-
   render () {
     const {
       comments = [],
@@ -42,7 +38,10 @@ export default class Comments extends React.PureComponent {
     } = this.props
 
     return <View style={{flex: 1}}>
-      <ScrollView ref={ref => { this.scrollView = ref }}>
+      <ScrollView
+        ref={ref => { this.scrollView = ref }}
+        onContentSizeChange={() => { this.scrollView.scrollToEnd({animated: true}) }}
+      >
         {header}
         <ShowMore commentsLength={comments.length}
           total={total}
