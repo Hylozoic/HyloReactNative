@@ -1,5 +1,10 @@
 import React from 'react'
-import { TextInput, TouchableOpacity, View, Alert } from 'react-native'
+import {
+  TextInput,
+  TouchableOpacity,
+  View,
+  Alert
+} from 'react-native'
 import { bool, func, string } from 'prop-types'
 import { throttle } from 'lodash'
 
