@@ -59,8 +59,6 @@ export default class PostCard extends React.PureComponent {
 
     const slug = get('0.slug', communities)
 
-    console.log('shouldShowCommunities', shouldShowCommunities)
-
     return <View style={styles.container}>
       <PostHeader creator={creator}
         date={post.createdAt}
