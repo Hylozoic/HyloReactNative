@@ -99,6 +99,7 @@ exports[`PostEditor renders a new editor correctly 1`] = `
         }
         onChange={[Function]}
         onFocusToggle={[Function]}
+        onInsertTopic={[Function]}
         placeholder="What else should we know?"
         submitting={undefined}
         value=""
@@ -705,6 +706,7 @@ exports[`PostEditor renders with a post 1`] = `
         }
         onChange={[Function]}
         onFocusToggle={[Function]}
+        onInsertTopic={[Function]}
         placeholder="What else should we know?"
         submitting={undefined}
         value=""

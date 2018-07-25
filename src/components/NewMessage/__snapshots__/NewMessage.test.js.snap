@@ -86,6 +86,7 @@ exports[`NewMessage renders correctly 1`] = `
     windowSize={21}
   />
   <MessageInput
+    emptyParticipants={false}
     multiline={true}
     onBlur={[Function]}
     onSubmit={[Function]}
@@ -158,6 +159,7 @@ exports[`NewMessage renders correctly 2`] = `
     windowSize={21}
   />
   <MessageInput
+    emptyParticipants={false}
     multiline={true}
     onBlur={[Function]}
     onSubmit={[Function]}
