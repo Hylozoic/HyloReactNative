@@ -76,7 +76,7 @@ const communityQuery = `query (
   $topic: ID,
   $first: Int
 ) {
-  community(slug: $slug) {
+  community(slug: $slug, updateLastViewed: true) {
     id
     slug
     name
