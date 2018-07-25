@@ -55,7 +55,7 @@ export default class NewMessage extends React.Component {
     } = this.props
 
     const showSuggestions = !isEmpty(participantInputText)
-
+    const emptyParticipantsList = participants.length === 0
     var listSections = []
     if (showSuggestions) {
       listSections = [
@@ -89,7 +89,9 @@ export default class NewMessage extends React.Component {
         multiline
         onSubmit={createMessage}
         onBlur={this.onBlurMessageInput}
-        placeholder='Type your message here' />
+        placeholder='Type your message here'
+        emptyParticipants={emptyParticipantsList}
+      />
     </KeyboardFriendlyView>
   }
 }

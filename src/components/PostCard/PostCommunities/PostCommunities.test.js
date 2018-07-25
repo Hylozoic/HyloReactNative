@@ -49,8 +49,7 @@ describe('PostCommunities', () => {
           name: 'Three',
           slug: 'three'
         }
-      ],
-      slug: 'hylo'
+      ]
     }
 
     const renderer = ReactTestRenderer.create(<PostCommunities {...props} />)
@@ -58,7 +57,7 @@ describe('PostCommunities', () => {
     expect(renderer).toMatchSnapshot()
   })
 
-  it('returns null when in the only community', () => {
+  it('renders when in one community and shouldShowCommunities is true', () => {
     const props = {
       communities: [
         {
@@ -67,7 +66,23 @@ describe('PostCommunities', () => {
           slug: 'one'
         }
       ],
-      slug: 'one'
+      shouldShowCommunities: true
+    }
+
+    const renderer = ReactTestRenderer.create(<PostCommunities {...props} />)
+    expect(renderer).toMatchSnapshot()
+  })
+
+  it('returns null when in one community and shouldShowCommunities is false', () => {
+    const props = {
+      communities: [
+        {
+          id: 1,
+          name: 'One',
+          slug: 'one'
+        }
+      ],
+      shouldShowCommunities: false
     }
 
     const renderer = ReactTestRenderer.create(<PostCommunities {...props} />)

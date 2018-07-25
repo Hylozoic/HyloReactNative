@@ -53,10 +53,12 @@ export default class PostCard extends React.PureComponent {
       goToCommunity,
       selectedNetworkId,
       hideMenu,
-      hideDetails
+      hideDetails,
+      shouldShowCommunities
     } = this.props
 
     const slug = get('0.slug', communities)
+
     return <View style={styles.container}>
       <PostHeader creator={creator}
         date={post.createdAt}
@@ -81,6 +83,7 @@ export default class PostCard extends React.PureComponent {
         shouldTruncate
         hideDetails={hideDetails} />
       <PostCommunities
+        shouldShowCommunities={shouldShowCommunities}
         communities={communities}
         slug={slug}
         selectedNetworkId={selectedNetworkId}

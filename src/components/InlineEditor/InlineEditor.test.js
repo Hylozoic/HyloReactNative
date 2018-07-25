@@ -24,13 +24,24 @@ it('handleSubmit', () => {
   expect(props.onSubmit).toHaveBeenCalledWith(props.value)
 })
 
-it('insertPicked', () => {
-  const instance = TestRenderer.create(<InlineEditor {...props} />).getInstance()
-  instance.setState({pickerType: SearchType.PERSON})
-  instance.handleSelectionChange({ nativeEvent: { selection: {start: 5, end: 5} } })
-  instance.insertPicked({id: 333, name: 'sdfdfz'})
-  expect(props.onChange).toHaveBeenCalledWith('some [sdfdfz:333] text')
-  expect(instance.state.showPicker).toBeFalsy()
+describe('insertPicked', () => {
+  it('inserts the markup for a person', () => {
+    const instance = TestRenderer.create(<InlineEditor {...props} />).getInstance()
+    instance.setState({pickerType: SearchType.PERSON})
+    instance.handleSelectionChange({ nativeEvent: { selection: {start: 5, end: 5} } })
+    instance.insertPicked({id: 333, name: 'sdfdfz'})
+    expect(props.onChange).toHaveBeenCalledWith('some [sdfdfz:333] text')
+    expect(instance.state.showPicker).toBeFalsy()
+  })
+
+  it('calls onInsertTopic for a topic', () => {
+    const onInsertTopic = jest.fn()
+    const instance = TestRenderer.create(<InlineEditor {...props} onInsertTopic={onInsertTopic} />).getInstance()
+    const topic = {id: 333, name: 'sdfdfz'}
+    instance.setState({pickerType: SearchType.TOPIC})
+    instance.insertPicked(topic)
+    expect(onInsertTopic).toHaveBeenCalledWith([topic])
+  })
 })
 
 it('handleInputFocus', () => {
