@@ -11,7 +11,7 @@ import { has } from 'lodash/fp'
 import { updateFocus } from 'react-navigation-is-focused-hoc'
 import hoistStatics from 'hoist-non-react-statics'
 
-const tabNames = ['Home', 'Members', 'Topics']
+const tabNames = ['Home', 'Members', 'Topics', 'Projects']
 
 export default function trackCurrentTab (Component) {
   class Wrapper extends React.Component {

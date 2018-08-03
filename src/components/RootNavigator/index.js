@@ -11,7 +11,7 @@ import JoinCommunity from '../JoinCommunity'
 import CommunitySettingsMenu from '../CommunitySettingsMenu'
 import CommunitySettings from '../CommunitySettings'
 import DrawerMenu from '../DrawerMenu'
-import { Home, Members, Topics } from '../Tabs' // eslint-disable-line no-unused-vars
+import { Home, Members, Topics, Projects } from '../Tabs' // eslint-disable-line no-unused-vars
 import stacksInTabsFactory from './stacksInTabsFactory'
 import PostEditor from '../PostEditor'
 import PostDetails from '../PostDetails'
@@ -52,7 +52,8 @@ import extendRouter from './extendRouter'
 const tabs = {
   Home: {screen: Home, path: ''},
   Members: {screen: Members, path: 'people'},
-  Topics: {screen: Topics, path: 'topics'}
+  Topics: {screen: Topics, path: 'topics'},
+  Projects: {screen: Projects, path: 'projects'}
 }
 
 // Screens that can be shown in any tab (the same tab icon stays highlighted)

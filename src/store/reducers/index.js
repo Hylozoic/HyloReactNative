@@ -15,6 +15,7 @@ import ModeratorSettings from '../../components/ModeratorSettings/ModeratorSetti
 import NewMessage from '../../components/NewMessage/NewMessage.store'
 import PeopleTyping from '../../components/PeopleTyping/PeopleTyping.store'
 import PostEditor from '../../components/PostEditor/PostEditor.store'
+import Projects from '../../components/Tabs/Projects/Projects.store'
 import Search from '../../components/Search/Search.store'
 import SkillEditor from '../../components/SkillEditor/SkillEditor.store'
 import SignupFlow from '../../components/SignupFlow/SignupFlow.store'
@@ -40,6 +41,7 @@ export const combinedReducers = combineReducers({
   NewMessage,
   PeopleTyping,
   PostEditor,
+  Projects,
   Search,
   SearchPage,
   SignupFlow,
