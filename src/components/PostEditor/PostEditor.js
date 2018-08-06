@@ -265,9 +265,9 @@ export default class PostEditor extends React.Component {
         break
       case false:
         this.setState({titleLengthError: false})
+        this.setState({title})
         break
     }
-    this.setState({title})
   }
 
   render () {
@@ -310,9 +310,10 @@ export default class PostEditor extends React.Component {
               placeholderTextColor={rhino30}
               style={styles.textInput}
               underlineColorAndroid='transparent'
-              value={title} />
+              value={title}
+              maxLength={MAX_TITLE_LENGTH} />
           </View>
-          {titleLengthError && <View style={styles.errorView}><ErrorBubble customStyles={styles.errorBubble} errorRowStyle={styles.errorRow} text={"Title can't have more than 100 characters."} topRightArrow /></View>}
+          {titleLengthError && <View style={styles.errorView}><ErrorBubble customStyles={styles.errorBubble} errorRowStyle={styles.errorRow} text={`Title can't have more than ${MAX_TITLE_LENGTH} characters.`} topRightArrow /></View>}
 
           <SectionLabel>Details</SectionLabel>
           <InlineEditor
