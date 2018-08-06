@@ -35,14 +35,13 @@ export default class TopicSupportComingSoon extends React.Component {
       </View>
       <View style={styles.paddedRow}>
         <Text style={styles.bodyText}>
-          In the meantime, click a #topic from an individual
-          community to see posts from that community.
+          In the meantime, click a #topic from an individual community to see posts from that community.
         </Text>
       </View>
-      <Image style={styles.image} resizeMode='stretch' source={axolotlImage} />
+      <Image style={styles.image} resizeMode='contain' source={axolotlImage} />
       <View style={styles.paddedRow}>
-        <TouchableOpacity onPress={goBack(navigation)} style={styles.gotBackButton}>
-          <Text style={styles.gotBackButtonText}>Go Back</Text>
+        <TouchableOpacity onPress={goBack(navigation)} style={styles.goBackButton}>
+          <Text style={styles.goBackButtonText}>Go Back</Text>
         </TouchableOpacity>
       </View>
     </View>

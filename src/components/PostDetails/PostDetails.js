@@ -52,7 +52,7 @@ export default class PostDetails extends React.Component {
   }
 
   handleShowMember = (memberId) => this.props.showMember(memberId)
-  handleShowTopic = (topicId) => this.props.showTopic(topicId)
+  handleShowTopic = (topicId) => this.props.showTopic(topicId, get('post.communities.0.id', this.props))
   handleGoToCommunity = (communityId) => this.props.goToCommunity(communityId)
 
   handleCreateComment = (commentText) => {
