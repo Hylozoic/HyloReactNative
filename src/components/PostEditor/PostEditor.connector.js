@@ -18,12 +18,16 @@ function getPostId (state, props) {
 export function mapStateToProps (state, props) {
   const communityId = get('navigation.state.params.communityId', props)
   const selectedTopicName = get('navigation.state.params.topicName', props)
+  const isProject = get('navigation.state.params.isProject', props)
   const selectedTopicTag = createTopicTag({name: selectedTopicName})
   const defaultPost = selectedTopicName
     ? {detailsText: selectedTopicTag, communityIds: [communityId]}
     : {}
   const postId = getPostId(state, props)
   const post = getPresentedPost(state, {id: postId})
+
+  const shouldShowTypeChooser = !isProject
+
   return {
     post: post || defaultPost,
     canModerate: getCanModerate(state),
@@ -33,7 +37,9 @@ export function mapStateToProps (state, props) {
     imageUrls: post ? post.imageUrls : [],
     fileUrls: post ? post.fileUrls : [],
     isNewPost: isEmpty(postId),
-    pendingDetailsText: state.pending[FETCH_DETAILS_TEXT]
+    isProject,
+    pendingDetailsText: state.pending[FETCH_DETAILS_TEXT],
+    shouldShowTypeChooser
   }
 }
 

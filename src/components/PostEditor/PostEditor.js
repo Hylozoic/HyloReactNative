@@ -11,6 +11,7 @@ import {
 import { validateTopicName } from 'hylo-utils/validators'
 import { get, uniq, uniqBy, isEmpty } from 'lodash/fp'
 import PropTypes from 'prop-types'
+import ProjectRoleEditor from '../ProjectRoleEditor'
 
 import Icon from '../../components/Icon'
 import header from 'util/header'
@@ -34,13 +35,13 @@ export default class PostEditor extends React.Component {
   static contextTypes = {navigate: PropTypes.func}
 
   static navigationOptions = ({ navigation }) => {
-    const { headerTitle, save, isSaving, confirmLeave, showPicker } = get('state.params', navigation) || {}
+    const { headerTitle, save, isSaving, confirmLeave, showTopicPicker, showRoleEditor } = get('state.params', navigation) || {}
     const title = isSaving ? 'Saving...' : 'Save'
     const def = () => {}
 
     return header(navigation, {
       title: headerTitle,
-      right: { disabled: showPicker || isSaving, text: title, onPress: save || def },
+      right: { disabled: showTopicPicker || isSaving, text: title, onPress: save || def },
       headerBackButton: () => confirmLeave(navigation.goBack)
     })
   }
@@ -48,12 +49,18 @@ export default class PostEditor extends React.Component {
   componentDidMount () {
     const { navigation, isNewPost } = this.props
     navigation.setParams({
-      headerTitle: isNewPost ? 'New Post' : 'Edit Post',
+      headerTitle: this.headerTitle(),
       save: this.save
     })
     if (!isNewPost) {
       this.props.fetchDetailsText()
     }
+  }
+
+  headerTitle () {
+    const { isNewPost, isProject } = this.props
+    const objectName = isProject ? 'Project' : 'Post'
+    return isNewPost ? `New ${objectName}` : `Edit ${objectName}`
   }
 
   shouldComponentUpdate (nextProps, nextState) {
@@ -79,8 +86,9 @@ export default class PostEditor extends React.Component {
       communityIds,
       imageUrls,
       fileUrls,
-      showPicker: false,
+      showTopicPicker: false,
       topics: get('topics', post) || [],
+      roles: get('projectRoles', post) || [],
       topicsPicked: false,
       announcementEnabled: false,
       detailsFocused: false,
@@ -178,8 +186,13 @@ export default class PostEditor extends React.Component {
   showAlert = (msg) => Alert.alert(msg)
 
   cancelTopicPicker = () => {
-    this.setState({ showPicker: false })
-    this.props.navigation.setParams({ showPicker: false })
+    this.setState({ showTopicPicker: false })
+    this.props.navigation.setParams({ showTopicPicker: false })
+  }
+
+  cancelRoleEditor = () => {
+    this.setState({ cancelRoleEditor: false })
+    this.props.navigation.setParams({ cancelRoleEditor: false })
   }
 
   ignoreHash = name => name[0] === '#' ? name.slice(1) : name
@@ -222,9 +235,18 @@ export default class PostEditor extends React.Component {
     topicsPicked: true
   })
 
+  removeRole = roleName => () => this.setState({
+    roles: this.state.roles.filter(t => t !== roleName)
+  })
+
   showTopicPicker = () => {
-    this.setState({ showPicker: true })
-    this.props.navigation.setParams({ showPicker: true })
+    this.setState({ showTopicPicker: true })
+    this.props.navigation.setParams({ showTopicPicker: true })
+  }
+
+  showRoleEditor = () => {
+    this.setState({ showRoleEditor: true })
+    this.props.navigation.setParams({ showRoleEditor: true })
   }
 
   _showFilePicker = () => {
@@ -271,11 +293,11 @@ export default class PostEditor extends React.Component {
   }
 
   render () {
-    const { communityIds, canModerate, post, pendingDetailsText } = this.props
+    const { communityIds, canModerate, post, pendingDetailsText, shouldShowTypeChooser } = this.props
 
-    const { fileUrls, imageUrls, isSaving, showPicker,
+    const { fileUrls, imageUrls, isSaving, showTopicPicker,
       topics, title, detailsText, type, filePickerPending, imagePickerPending,
-      announcementEnabled, detailsFocused, titleLengthError
+      announcementEnabled, detailsFocused, titleLengthError, roles
     } = this.state
 
     const toolbarProps = {
@@ -294,13 +316,12 @@ export default class PostEditor extends React.Component {
     return <KeyboardFriendlyView style={styles.container} {...kavProps}>
       <ScrollView keyboardShouldPersistTaps='handled' style={styles.scrollContainer}>
         <View style={styles.scrollContent}>
-          <SectionLabel>What are you posting today?</SectionLabel>
-          <View style={[styles.typeButtonRow, styles.section]}>
+          {shouldShowTypeChooser && <SectionLabel>What are you posting today?</SectionLabel>}
+          {shouldShowTypeChooser && <View style={[styles.typeButtonRow, styles.section]}>
             {['discussion', 'request', 'offer'].map(t =>
               <TypeButton type={t} key={t} selected={t === type}
                 onPress={() => !isSaving && this.setState({type: t})} />)}
-          </View>
-
+          </View>}
           <SectionLabel>Title</SectionLabel>
           <View style={[styles.textInputWrapper, styles.section]}>
             <TextInput
@@ -343,6 +364,19 @@ export default class PostEditor extends React.Component {
             <Topics onPress={this.removeTopic} topics={topics} placeholder={topicsPlaceholder} />
           </TouchableOpacity>
 
+          <TouchableOpacity
+            style={[
+              styles.section,
+              styles.textInputWrapper
+            ]}
+            onPress={this.showRoleCreator}>
+            <View style={styles.topicLabel}>
+              <SectionLabel>Roles</SectionLabel>
+              <View style={styles.topicAddBorder}><Icon name='Plus' style={styles.topicAdd} /></View>
+            </View>
+            <Topics onPress={this.removeRole} topics={roles} placeholder={rolesPlaceholder} />
+          </TouchableOpacity>
+
           {!isEmpty(imageUrls) && <View>
             <SectionLabel>Images</SectionLabel>
             <ImageSelector
@@ -363,17 +397,30 @@ export default class PostEditor extends React.Component {
         {detailsFocused && <Toolbar {...toolbarProps} />}
       </ScrollView>
       {!detailsFocused && <Toolbar {...toolbarProps} />}
-      {showPicker && <Modal
+      {showTopicPicker && <Modal
         animationType='slide'
         transparent={false}
-        visible={showPicker}
+        visible={showTopicPicker}
         onRequestClose={() => {
-          this.setState({showPicker: false})
+          this.setState({showTopicPicker: false})
         }}>
         <Search style={styles.search}
           communityId={communityId}
           onCancel={this.cancelTopicPicker}
           onSelect={this.insertPickerTopic}
+          type={SearchType.TOPIC} />
+      </Modal>}
+      {showRoleEditor && <Modal
+        animationType='slide'
+        transparent={false}
+        visible={showRoleEditor}
+        onRequestClose={() => {
+          this.setState({showRoleEditor: false})
+        }}>
+        <ProjectRoleEditor
+          roles={roles}
+          onCancel={this.cancelRoleEditor}
+          onSelect={choice => console.log('chose role')}
           type={SearchType.TOPIC} />
       </Modal>}
     </KeyboardFriendlyView>
@@ -389,6 +436,8 @@ const titlePlaceholders = {
 const detailsPlaceholder = 'What else should we know?'
 
 const topicsPlaceholder = 'Add topics.'
+
+const rolesPlaceholder = 'What roles do people play in your project?'
 
 export function Toolbar ({post, canModerate, filePickerPending, imagePickerPending, announcementEnabled, toggleAnnoucement, showFilePicker, showImagePicker}) {
   return <View style={styles.bottomBar}>
