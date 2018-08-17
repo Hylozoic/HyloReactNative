@@ -22,9 +22,10 @@
   "dependencies": {
     "cheerio": "0.22.0",
     "ent": "^2.2.0",
-    "hylo-utils": "Hylozoic/hylo-utils#c4db0b4",
+    "hylo-utils": "Hylozoic/hylo-utils#a1f23db",
     "js-htmlencode": "^0.3.0",
     "lodash": "^4.17.4",
+    "mixpanel-browser": "^2.22.4",
     "parse": "^1.9.2",
     "path-match": "^1.2.4",
     "path-to-regexp": "^2.0.0",

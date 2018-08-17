@@ -1,5 +1,6 @@
 import { get } from 'lodash/fp'
-import { divToP } from 'hylo-utils/text'
+import { divToP, textLength } from 'hylo-utils/text'
+import { AnalyticsEvents } from 'hylo-utils/constants'
 import { getPostFieldsFragment } from '../../store/actions/fetchPost'
 
 export const MODULE_NAME = 'PostEditor'
@@ -62,7 +63,14 @@ export function createPost (post) {
         topicNames
       }
     },
-    meta: {extractModel: 'Post'}
+    meta: {
+      extractModel: 'Post',
+      analytics:{
+        eventName: AnalyticsEvents.POST_CREATED,
+        detailsLength: textLength(preprocessedDetails),
+        isAnnouncement: announcement
+      }
+    }
   }
 }
 
@@ -119,7 +127,10 @@ export function updatePost (post) {
         modelName: 'Post',
         getRoot: get('updatePost'),
         append: false
-      }
+      },
+      analytics: {
+        eventName: AnalyticsEvents.POST_UPDATED,
+        detailsLength: textLength(preprocessedDetails)
     }
   }
 }

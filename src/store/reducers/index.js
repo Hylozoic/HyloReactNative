@@ -47,7 +47,8 @@ export const combinedReducers = combineReducers({
   SocketListener,
   TabBar,
   Topics,
-  CreateCommunityFlow
+  CreateCommunityFlow,
+  mixpanel: (state = {}) => state
 })
 
 const composeReducers = (...reducers) => (state, action) =>

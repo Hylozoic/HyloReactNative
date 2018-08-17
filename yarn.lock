@@ -3378,9 +3378,9 @@ https-proxy-agent@^2.1.1:
     agent-base "^4.1.0"
     debug "^3.1.0"
 
-hylo-utils@Hylozoic/hylo-utils#c4db0b4:
+hylo-utils@Hylozoic/hylo-utils#a1f23db:
   version "1.2.4"
-  resolved "https://codeload.github.com/Hylozoic/hylo-utils/tar.gz/c4db0b4f205c2f07043f42761e5984f891721602"
+  resolved "https://codeload.github.com/Hylozoic/hylo-utils/tar.gz/a1f23dbfbf0ceba636cf68d3d30f0161ecbc4706"
   dependencies:
     buffer "^5.0.6"
     cheerio "^0.22.0"
@@ -5114,6 +5114,10 @@ mixin-deep@^1.2.0:
     for-in "^1.0.2"
     is-extendable "^1.0.1"
 
+mixpanel-browser@^2.22.4:
+  version "2.22.4"
+  resolved "https://registry.yarnpkg.com/mixpanel-browser/-/mixpanel-browser-2.22.4.tgz#f1d57a2c2f50801f57357fb16f38288bcee3cc7d"
+
 "mkdirp@>=0.5 0", mkdirp@^0.5.1:
   version "0.5.1"
   resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-0.5.1.tgz#30057438eac6cf7f8c4767f38648d6697d75c903"
@@ -6019,12 +6023,19 @@ react-native-webview-bridge-updated@Hylozoic/react-native-webview-bridge#62f520e
     keymirror "0.1.1"
     prop-types "15.6.0"
 
+react-native-webview-bridge-updated@^1.0.0:
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/react-native-webview-bridge-updated/-/react-native-webview-bridge-updated-1.0.9.tgz#930b4e6444f4a2b5f3151607c6eb6eba8deda08f"
+  dependencies:
+    invariant "2.2.0"
+    keymirror "0.1.1"
+
 react-native-zss-rich-text-editor@Hylozoic/react-native-zss-rich-text-editor#7c1b9c5:
   version "1.0.3"
   resolved "https://codeload.github.com/Hylozoic/react-native-zss-rich-text-editor/tar.gz/7c1b9c5d4d947420d2a890a29d5c3b04ea6a3617"
   dependencies:
     prop-types "^15.6.0"
-    react-native-webview-bridge-updated Hylozoic/react-native-webview-bridge#62f520e
+    react-native-webview-bridge-updated "^1.0.0"
 
 react-native@0.54.4:
   version "0.54.4"

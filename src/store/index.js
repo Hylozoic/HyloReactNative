@@ -1,7 +1,11 @@
 import { applyMiddleware, createStore, compose } from 'redux'
+import mixpanel from 'mixpanel-browser'
 import orm from './models'
 import rootReducer, { combinedReducers } from './reducers'
+
 import middleware from './middleware'
+
+mixpanel.init(process.env.MIXPANEL_KEY)
 
 export default function getStore () {
   const emptyState = getEmptyState()
@@ -41,5 +45,10 @@ export default function getStore () {
 // }
 
 export function getEmptyState () {
-  return combinedReducers({orm: orm.getEmptyState()}, {type: ''})
+  return combinedReducers({
+    orm: orm.getEmptyState(),
+    mixpanel
+  }, {
+    type: ''
+  })
 }
