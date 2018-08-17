@@ -59,6 +59,12 @@ Object {
     "communityId": null,
     "networkId": null,
   },
+  "mixpanel": Promise {
+    "_40": 0,
+    "_55": null,
+    "_65": 0,
+    "_72": null,
+  },
   "orm": Object {
     "Activity": Object {
       "items": Array [],

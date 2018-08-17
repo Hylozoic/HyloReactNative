@@ -68,7 +68,7 @@ export function createPost (post) {
       analytics:{
         eventName: AnalyticsEvents.POST_CREATED,
         detailsLength: textLength(preprocessedDetails),
-        isAnnouncement: announcement
+        isAnnouncement: sendAnnouncement
       }
     }
   }
@@ -131,6 +131,7 @@ export function updatePost (post) {
       analytics: {
         eventName: AnalyticsEvents.POST_UPDATED,
         detailsLength: textLength(preprocessedDetails)
+      }
     }
   }
 }
