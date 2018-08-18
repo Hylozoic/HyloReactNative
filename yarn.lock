@@ -5114,10 +5114,6 @@ mixin-deep@^1.2.0:
     for-in "^1.0.2"
     is-extendable "^1.0.1"
 
-mixpanel-browser@^2.22.4:
-  version "2.22.4"
-  resolved "https://registry.yarnpkg.com/mixpanel-browser/-/mixpanel-browser-2.22.4.tgz#f1d57a2c2f50801f57357fb16f38288bcee3cc7d"
-
 "mkdirp@>=0.5 0", mkdirp@^0.5.1:
   version "0.5.1"
   resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-0.5.1.tgz#30057438eac6cf7f8c4767f38648d6697d75c903"
@@ -5939,6 +5935,10 @@ react-native-linear-gradient@^2.3.0:
   dependencies:
     prop-types "^15.5.10"
 
+react-native-mixpanel@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/react-native-mixpanel/-/react-native-mixpanel-1.1.0.tgz#3da375f4059af4ac7836d377d408d6c3cd1f7d1e"
+
 react-native-onesignal@^3.1.0:
   version "3.1.4"
   resolved "https://registry.yarnpkg.com/react-native-onesignal/-/react-native-onesignal-3.1.4.tgz#ecaa4c22597d2d76420b922110d28cdaf76ffe7d"
@@ -6035,7 +6035,7 @@ react-native-zss-rich-text-editor@Hylozoic/react-native-zss-rich-text-editor#7c1
   resolved "https://codeload.github.com/Hylozoic/react-native-zss-rich-text-editor/tar.gz/7c1b9c5d4d947420d2a890a29d5c3b04ea6a3617"
   dependencies:
     prop-types "^15.6.0"
-    react-native-webview-bridge-updated "^1.0.0"
+    react-native-webview-bridge-updated Hylozoic/react-native-webview-bridge#62f520e
 
 react-native@0.54.4:
   version "0.54.4"
