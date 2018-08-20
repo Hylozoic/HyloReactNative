@@ -10,9 +10,10 @@ import {
 } from 'react-native'
 
 import Icon from '../Icon'
-import styles from './Search.styles'
+// import styles from './Search.styles'
+const styles = {}
 
-export default class ProjectRoleEditor extends React.Component {
+export default class ProjectMemberPiccker extends React.Component {
   componentWillUnmount () {
     const emptyString = ''
     this.props.updateSearch(emptyString)

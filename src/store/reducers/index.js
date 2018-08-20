@@ -14,6 +14,7 @@ import Members from '../../components/Tabs/Members/Members.store'
 import ModeratorSettings from '../../components/ModeratorSettings/ModeratorSettings.store'
 import NewMessage from '../../components/NewMessage/NewMessage.store'
 import PeopleTyping from '../../components/PeopleTyping/PeopleTyping.store'
+import PersonPicker from '../../components/PersonPicker/PersonPicker.store'
 import PostEditor from '../../components/PostEditor/PostEditor.store'
 import Projects from '../../components/Tabs/Projects/Projects.store'
 import Search from '../../components/Search/Search.store'
@@ -40,6 +41,7 @@ export const combinedReducers = combineReducers({
   ModeratorSettings,
   NewMessage,
   PeopleTyping,
+  PersonPicker,
   PostEditor,
   Projects,
   Search,
