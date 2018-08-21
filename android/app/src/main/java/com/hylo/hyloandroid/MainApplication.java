@@ -4,6 +4,7 @@ import android.app.Application;
 import android.util.Log;
 
 import com.facebook.react.ReactApplication;
+import com.kevinejohn.RNMixpanel.RNMixpanel;
 import io.sentry.RNSentryPackage;
 import com.avishayil.rnrestart.ReactNativeRestartPackage;
 import co.apptailor.googlesignin.RNGoogleSigninPackage;
@@ -56,6 +57,7 @@ public class MainApplication extends Application implements ReactApplication {
             new LinearGradientPackage(),
             new BackgroundTimerPackage(),
             new ReactNativeOneSignalPackage(),
+            new RNMixpanel(),
           new ImagePickerPackage(),
           new FBSDKPackage(mCallbackManager),
           new VectorIconsPackage(),

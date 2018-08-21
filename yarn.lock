@@ -5935,9 +5935,9 @@ react-native-linear-gradient@^2.3.0:
   dependencies:
     prop-types "^15.5.10"
 
-react-native-mixpanel@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/react-native-mixpanel/-/react-native-mixpanel-1.1.0.tgz#3da375f4059af4ac7836d377d408d6c3cd1f7d1e"
+"react-native-mixpanel@https://github.com/Kabangi/react-native-mixpanel":
+  version "1.0.2"
+  resolved "https://github.com/Kabangi/react-native-mixpanel#701b1f8eabb682b334182273e11c1d01c5561bc5"
 
 react-native-onesignal@^3.1.0:
   version "3.1.4"
@@ -6022,13 +6022,6 @@ react-native-webview-bridge-updated@Hylozoic/react-native-webview-bridge#62f520e
     invariant "2.2.0"
     keymirror "0.1.1"
     prop-types "15.6.0"
-
-react-native-webview-bridge-updated@^1.0.0:
-  version "1.0.9"
-  resolved "https://registry.yarnpkg.com/react-native-webview-bridge-updated/-/react-native-webview-bridge-updated-1.0.9.tgz#930b4e6444f4a2b5f3151607c6eb6eba8deda08f"
-  dependencies:
-    invariant "2.2.0"
-    keymirror "0.1.1"
 
 react-native-zss-rich-text-editor@Hylozoic/react-native-zss-rich-text-editor#7c1b9c5:
   version "1.0.3"
