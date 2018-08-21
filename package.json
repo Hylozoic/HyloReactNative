@@ -85,6 +85,10 @@
     "validator": "^8.0.0",
     "why-did-you-update": "^0.1.1"
   },
+  "engines": {
+    "node": "8.6.0",
+    "yarn": "^1.1.0"
+  },
   "jest": {
     "preset": "react-native",
     "setupFiles": [
