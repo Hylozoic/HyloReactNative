@@ -1,17 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`mapsDispatchToProps 1`] = `
-Object {
-  "createComment": [Function],
-  "editPost": [Function],
-  "fetchPost": [Function],
-  "goToCommunity": [Function],
-  "showMember": [Function],
-  "showTopic": [Function],
-}
-`;
-
-exports[`mapsDispatchToProps 2`] = `
+exports[`mapsDispatchToProps createComment 1`] = `
 Array [
   "dispatch",
   Array [
@@ -49,22 +38,33 @@ Array [
 ]
 `;
 
-exports[`mapsDispatchToProps 3`] = `
+exports[`mapsDispatchToProps editPost 1`] = `
 Array [
   "navigate",
   Array [
     Object {
-      "key": "Feed",
+      "key": "PostEditor",
       "params": Object {
-        "topicName": "mytopicname",
+        "id": "1",
       },
-      "routeName": "Feed",
+      "routeName": "PostEditor",
     },
   ],
 ]
 `;
 
-exports[`mapsDispatchToProps 4`] = `
+exports[`mapsDispatchToProps maps 1`] = `
+Object {
+  "createComment": [Function],
+  "editPost": [Function],
+  "fetchPost": [Function],
+  "goToCommunity": [Function],
+  "showMember": [Function],
+  "showTopic": [Function],
+}
+`;
+
+exports[`mapsDispatchToProps showMember 1`] = `
 Array [
   "navigate",
   Array [
@@ -79,16 +79,17 @@ Array [
 ]
 `;
 
-exports[`mapsDispatchToProps 5`] = `
+exports[`mapsDispatchToProps showTopic 1`] = `
 Array [
   "navigate",
   Array [
     Object {
-      "key": "PostEditor",
+      "key": "Feed",
       "params": Object {
-        "id": "1",
+        "communityId": 4,
+        "topicName": "mytopicname",
       },
-      "routeName": "PostEditor",
+      "routeName": "Feed",
     },
   ],
 ]

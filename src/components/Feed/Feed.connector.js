@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { get } from 'lodash/fp'
-import { isEmpty } from 'lodash'
+import { isEmpty, isNull, isUndefined } from 'lodash'
 
 import getMe from '../../store/selectors/getMe'
 import getNetwork from '../../store/selectors/getNetwork'
@@ -68,7 +68,7 @@ export function mapDispatchToProps (dispatch, { navigation }) {
     showTopic: (communityId, networkId) => topicName => {
       // All Communities and Network feed to topic nav
       // currently not supported
-      if (networkId || communityId === ALL_COMMUNITIES_ID) {
+      if (networkId || communityId === ALL_COMMUNITIES_ID || (isNull(communityId) || isUndefined(communityId))) {
         navigation.navigate({routeName: 'TopicSupportComingSoon', key: 'TopicSupportComingSoon'})
       } else {
         navigation.navigate({routeName: 'Feed', params: {communityId, topicName}, key: 'Feed'})

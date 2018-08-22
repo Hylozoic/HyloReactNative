@@ -3,30 +3,16 @@ import {
   rhino60,
   caribbeanGreen
 } from '../../style/colors'
-import { isIOS } from 'util/platform'
-
-const mixins = {
-  paddedRow: {
-    paddingRight: 15,
-    paddingLeft: 15,
-    marginBottom: 10,
-    flex: 1,
-    flexDirection: 'row',
-    zIndex: 0
-  }
-}
 
 export default {
   container: {
     backgroundColor: 'white',
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingTop: 50
+    flexDirection: 'column'
   },
   header: {
-    alignItems: 'center',
-    paddingHorizontal: 52
+    marginTop: 25
   },
   headerText: {
     color: capeCod,
@@ -39,33 +25,30 @@ export default {
     color: rhino60,
     fontSize: 16,
     fontFamily: 'Circular-Bold',
-    textAlign: 'center',
-    marginBottom: 25
+    textAlign: 'center'
   },
   image: {
-    width: 288,
-    height: 309,
-    marginBottom: 25
+    flex: 1
   },
-  gotBackButton: {
-    flex: 1,
+  goBackButton: {
     flexDirection: 'row',
     backgroundColor: caribbeanGreen,
     height: 36,
+    width: 200,
     borderRadius: 50,
     justifyContent: 'center'
   },
-  gotBackButtonText: {
+  goBackButtonText: {
     color: 'white',
     backgroundColor: 'transparent',
     textAlign: 'center',
     fontFamily: 'Circular-Book',
     fontSize: 18,
-    lineHeight: isIOS ? 32 : 28
+    lineHeight: 32
   },
-  paddedRow: mixins.paddedRow,
-  paddedRowWithOpacity: {
-    ...mixins.paddedRow,
-    opacity: 0.7
+  paddedRow: {
+    paddingRight: 15,
+    paddingLeft: 15,
+    marginBottom: 15
   }
 }
