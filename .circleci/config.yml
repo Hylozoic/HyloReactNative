@@ -77,8 +77,8 @@ jobs:
         - v1-dep-
     # This is based on your 1.0 configuration file or project settings
     - run: npm install -g codecov
-    # Install yarn so it's up to date    
-    - run: npm install -g yarn
+    # Install yarn so it's up to date
+    - run: apt-get update && apt-get install yarn
     # This is based on your 1.0 configuration file or project settings
     - run: yarn
     # Save dependency cache
