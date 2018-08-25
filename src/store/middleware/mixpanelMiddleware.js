@@ -12,7 +12,8 @@ export default function mixpanelMiddleware (store) {
       // with data that will be attached to the event sent to mixpanel (eventName being
       // a required key).
       //
-      // NOTE: the mixpanel object is initialized in initialState of the store creation
+      // NOTE: the mixpanel object is created during initialization of the mixpanel
+      // reducer
       const state = store.getState()
       const isLoggedIn = getIsLoggedIn(state)
       const mixpanel = getMixpanel(state)
