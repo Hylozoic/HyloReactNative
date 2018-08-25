@@ -10,8 +10,6 @@ jest.mock('react-native-onesignal', () => ({
   inFocusDisplaying: jest.fn()
 }))
 
-jest.mock('react-native-device-info')
-
 const props = {}
 
 describe('mapStateToProps', () => {

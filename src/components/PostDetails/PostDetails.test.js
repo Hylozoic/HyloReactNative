@@ -7,8 +7,6 @@ import { Linking, TouchableOpacity } from 'react-native'
 import { createMockStore } from 'util/testing'
 import orm from 'store/models'
 
-jest.mock('react-native-device-info')
-
 const post = {
   id: '91',
   creator: {

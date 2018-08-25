@@ -6,7 +6,6 @@ import MemberProfile, { MemberBanner, EditButton, ReadMoreButton } from './Membe
 import ImagePicker from '../ImagePicker'
 import defaultBanner from '../../assets/default-user-banner.jpg'
 
-jest.mock('react-native-device-info')
 jest.mock('../ImagePicker', props => 'ImagePicker')
 jest.mock('./MemberFeed', () => 'MemberFeed')
 

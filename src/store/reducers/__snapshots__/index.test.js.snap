@@ -87,6 +87,7 @@ Object {
     "track": [MockFunction],
     "trackCharge": [MockFunction],
     "trackChargeWithProperties": [MockFunction],
+    "union": [MockFunction],
   },
   "orm": Object {},
   "pending": Object {},

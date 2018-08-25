@@ -1,9 +1,6 @@
 import getStore, {getEmptyState } from './index'
 import { MixpanelInstance } from 'react-native-mixpanel'
 
-jest.mock('react-native-google-signin', () => {})
-jest.mock('react-native-device-info')
-jest.mock('react-native-mixpanel')
 jest.mock('react-native-onesignal', () => ({
   addEventListener: jest.fn()
 }))

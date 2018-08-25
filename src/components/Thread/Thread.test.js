@@ -5,7 +5,6 @@ import ReactTestRenderer from 'react-test-renderer'
 import Thread from './Thread'
 
 jest.mock('../MessageInput', () => 'MessageInput')
-jest.mock('react-native-device-info')
 
 describe('Thread', () => {
   let props

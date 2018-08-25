@@ -3,13 +3,11 @@ import ReactShallowRenderer from 'react-test-renderer/shallow'
 import TestRenderer from 'react-test-renderer'
 import Login, { FormError, SignupLink } from './Login'
 
-jest.mock('react-native-google-signin')
 jest.mock('NetInfo', () => ({
   isConnected: {
     addEventListener: jest.fn()
   }
 }))
-jest.mock('react-native-device-info')
 
 describe('Login', () => {
   it('renders correctly', () => {

@@ -2,8 +2,6 @@ import upload from 'store/actions/upload'
 import apiHost from 'util/apiHost'
 import Request from 'util/Request'
 
-jest.mock('react-native-device-info')
-
 const file = {
   uri: 'file:///tmp/foo.jpg',
   name: 'foo.jpg'

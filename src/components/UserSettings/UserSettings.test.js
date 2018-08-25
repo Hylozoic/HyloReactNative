@@ -15,7 +15,6 @@ jest.mock('react-native-fbsdk', () => ({
     getCurrentAccessToken: jest.fn()
   }
 }))
-jest.mock('react-native-device-info')
 
 jest.mock('../SettingControl', () => 'SettingControl')
 

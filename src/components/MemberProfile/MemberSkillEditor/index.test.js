@@ -4,7 +4,6 @@ import ReactShallowRenderer from 'react-test-renderer/shallow'
 import ReactTestRenderer from 'react-test-renderer'
 import MemberSkillEditor from './index'
 
-jest.mock('react-native-device-info')
 jest.mock('../../SkillEditor', () => 'SkillEditor')
 
 it('matches the last snapshot', () => {
