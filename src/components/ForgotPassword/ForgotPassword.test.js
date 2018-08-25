@@ -3,8 +3,6 @@ import ReactShallowRenderer from 'react-test-renderer/shallow'
 import TestRenderer from 'react-test-renderer'
 import ForgotPassword, { FormError } from './ForgotPassword'
 
-jest.mock('react-native-device-info')
-
 function defaultProps (props) {
   return {
     error: '',

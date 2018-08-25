@@ -5,8 +5,6 @@ import ReactTestRenderer from 'react-test-renderer'
 import DrawerMenu, { SectionHeader, NetworkRow, CommunityRow, TextButton } from './DrawerMenu'
 import { ALL_COMMUNITIES_ID } from '../../store/models/Community'
 
-jest.mock('react-native-device-info')
-
 describe('DrawerMenu', () => {
   const minProps = {
     name: 'Roy Rogers',

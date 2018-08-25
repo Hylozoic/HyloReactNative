@@ -1,6 +1,7 @@
 import { applyMiddleware, createStore, compose } from 'redux'
 import orm from './models'
 import rootReducer, { combinedReducers } from './reducers'
+
 import middleware from './middleware'
 
 export default function getStore () {

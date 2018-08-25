@@ -4,8 +4,6 @@ import ReactTestRenderer from 'react-test-renderer'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import Topics, { SearchBar, TopicList, TopicRow, SubscribeStar } from './Topics'
 
-jest.mock('react-native-device-info')
-
 describe('Topics', () => {
   it('renders correctly a community and topics', () => {
     const renderer = new ReactShallowRenderer()

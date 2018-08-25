@@ -1,6 +1,7 @@
 import { pick, get, isEmpty, includes, uniqueId } from 'lodash/fp'
 import orm from 'store/models'
 import { createSelector as ormCreateSelector } from 'redux-orm'
+import { AnalyticsEvents } from 'hylo-utils/constants'
 import { makeGetQueryResults } from 'store/reducers/queryResults'
 
 export const MODULE_NAME = 'NewMessage'
@@ -140,7 +141,8 @@ export function createMessage (messageThreadId, text, forNewThread) {
       tempId: uniqueId(`messageThread${messageThreadId}_`),
       messageThreadId,
       text,
-      forNewThread
+      forNewThread,
+      analytics: AnalyticsEvents.DIRECT_MESSAGE_SENT
     }
   }
 }

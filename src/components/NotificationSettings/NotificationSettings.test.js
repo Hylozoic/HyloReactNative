@@ -3,8 +3,6 @@ import ReactShallowRenderer from 'react-test-renderer/shallow'
 import ReactTestRenderer from 'react-test-renderer'
 import NotificationSettings, { MessageSettingsRow, AllCommunitiesSettingsRow, MembershipSettingsRow, SettingsRow, SettingsIcon } from './NotificationSettings'
 
-jest.mock('react-native-device-info')
-
 describe('NotificationSettings', () => {
   it('matches the last snapshot', () => {
     const renderer = new ReactShallowRenderer()

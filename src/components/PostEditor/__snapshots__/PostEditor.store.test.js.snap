@@ -93,6 +93,11 @@ Object {
     },
   },
   "meta": Object {
+    "analytics": Object {
+      "detailsLength": 7,
+      "eventName": "Post Created",
+      "isAnnouncement": undefined,
+    },
     "extractModel": "Post",
   },
   "type": "PostEditor/CREATE_POST",
@@ -223,6 +228,10 @@ Object {
     },
   },
   "meta": Object {
+    "analytics": Object {
+      "detailsLength": 7,
+      "eventName": "Post Updated",
+    },
     "extractModel": Object {
       "append": false,
       "getRoot": [Function],

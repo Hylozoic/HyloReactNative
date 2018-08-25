@@ -3,8 +3,6 @@ import ReactShallowRenderer from 'react-test-renderer/shallow'
 import ReactTestRenderer from 'react-test-renderer'
 import SearchPage, { TabBar, Tab, SearchResult, PersonCard, PostCard, CommentCard } from './SearchPage'
 
-jest.mock('react-native-device-info')
-
 describe('SearchPage', () => {
   it('matches the last snapshot', () => {
     const renderer = new ReactShallowRenderer()

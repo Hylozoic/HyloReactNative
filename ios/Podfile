@@ -7,5 +7,5 @@ target 'HyloReactNative' do
   pod 'FBSDKCoreKit'
   pod 'FBSDKShareKit'
   pod 'FBSDKLoginKit'
-
+  pod 'Mixpanel'
 end

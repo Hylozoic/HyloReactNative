@@ -114,6 +114,10 @@ Array [
         },
       },
       "meta": Object {
+        "analytics": Object {
+          "detailsLength": 0,
+          "eventName": "Post Updated",
+        },
         "extractModel": Object {
           "append": false,
           "getRoot": [Function],

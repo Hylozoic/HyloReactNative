@@ -23,6 +23,7 @@ Array [
         },
       },
       "meta": Object {
+        "analytics": "Voted on Post",
         "isUpvote": false,
         "optimistic": true,
         "postId": 10,

@@ -61,6 +61,7 @@ Object {
     },
   },
   "meta": Object {
+    "analytics": "Community Created",
     "extractModel": "Membership",
     "name": "community name",
     "slug": "community_name",
