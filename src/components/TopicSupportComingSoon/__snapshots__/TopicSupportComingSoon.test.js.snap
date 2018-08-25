@@ -21,7 +21,7 @@ exports[`matches last snapshot 1`] = `
     </Text>
   </View>
   <Image
-    resizeMode="stretch"
+    resizeMode="contain"
     source={
       Object {
         "testUri": "../../../src/assets/Axolotyl_Digging.png",

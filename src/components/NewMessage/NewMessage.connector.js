@@ -70,14 +70,14 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
   const createMessage = text => {
     showLoadingModal(true)
     return findOrCreateThread(participantIds)
-    .then(resp => {
-      const messageThreadId = get('payload.data.findOrCreateThread.id', resp)
-      dispatchProps.createMessage(messageThreadId, text, true)
-      .then(({ error }) => {
-        if (!error) navigation.navigate({routeName: 'Thread', params: {id: messageThreadId}, key: 'Thread'})
-        showLoadingModal(false)
+      .then(resp => {
+        const messageThreadId = get('payload.data.findOrCreateThread.id', resp)
+        dispatchProps.createMessage(messageThreadId, text, true)
+          .then(({ error }) => {
+            if (!error) navigation.navigate({routeName: 'Thread', params: {id: messageThreadId}, key: 'Thread'})
+            showLoadingModal(false)
+          })
       })
-    })
   }
 
   const participantsFromParams = get('state.params.participants', navigation)

@@ -23,31 +23,60 @@ Object {
           announcement: $announcement
           topicNames: $topicNames
         }) {
-          id
-          type
-          title
-          details
-          announcement
-          commentersTotal
-          updatedAt
-          communities {
-            id
-            name
-            slug
-          }
-          creator {
-            id
-          }
-          attachments {
-            id
-            position
-            type
-            url
-          }
-          topics {
-            id
-            name
-          }
+          
+  id
+  title
+  details
+  type
+  location
+  announcement
+  creator {
+    id
+    name
+    avatarUrl
+    tagline
+  }
+  createdAt
+  updatedAt
+  commenters(first: 3) {
+    id
+    name
+    avatarUrl
+  }
+  commentersTotal
+  commentsTotal
+  
+  linkPreview {
+    title
+    url
+    imageUrl
+  }
+  votesTotal
+  myVote
+  communities {
+    id
+    name
+    slug
+  }
+  attachments {
+    id
+    position
+    type
+    url
+  }
+  postMemberships {
+    id
+    pinned
+    community {
+      id
+    }
+  }
+  topics {
+    id
+    name
+    postsTotal
+    followersTotal
+  }
         }
       }",
     "variables": Object {
@@ -70,10 +99,23 @@ Object {
 }
 `;
 
-exports[`setDetails should match the last snapshot 1`] = `
+exports[`fetchDetailsText should match the last snapshot 1`] = `
 Object {
-  "payload": "details",
-  "type": "PostEditor/SET_DETAILS",
+  "graphql": Object {
+    "query": "query ($id: ID) {
+        post(id: $id) {
+          id
+          detailsText
+        }
+      }",
+    "variables": Object {
+      "id": 1,
+    },
+  },
+  "meta": Object {
+    "extractModel": "Post",
+  },
+  "type": "PostEditor/FETCH_DETAILS_TEXT",
 }
 `;
 
@@ -98,27 +140,73 @@ Object {
           fileUrls: $fileUrls
           topicNames: $topicNames
         }) {
-          id
-          type
-          title
-          details
-          updatedAt
-          announcement
-          communities {
-            id
-            name
-            slug
-          }
-          attachments {
-            id
-            position
-            type
-            url
-          }
-          topics {
-            id
-            name
-          }
+          
+  id
+  title
+  details
+  type
+  location
+  announcement
+  creator {
+    id
+    name
+    avatarUrl
+    tagline
+  }
+  createdAt
+  updatedAt
+  commenters(first: 3) {
+    id
+    name
+    avatarUrl
+  }
+  commentersTotal
+  commentsTotal
+  comments(first: 10, order: \\"desc\\") {
+    items {
+      id
+      text
+      creator {
+        id
+        name
+        avatarUrl
+      }
+      createdAt
+    }
+    total
+    hasMore
+  }
+  linkPreview {
+    title
+    url
+    imageUrl
+  }
+  votesTotal
+  myVote
+  communities {
+    id
+    name
+    slug
+  }
+  attachments {
+    id
+    position
+    type
+    url
+  }
+  postMemberships {
+    id
+    pinned
+    community {
+      id
+    }
+  }
+  topics {
+    id
+    name
+    postsTotal
+    followersTotal
+  }
         }
       }",
     "variables": Object {

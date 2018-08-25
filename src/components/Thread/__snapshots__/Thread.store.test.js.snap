@@ -82,7 +82,6 @@ exports[`getThread should match the last snapshot 1`] = `
 SessionBoundModel {
   "_fields": Object {
     "id": "1",
-    "participants": undefined,
   },
 }
 `;

@@ -16,23 +16,21 @@ export default class PostCard extends React.PureComponent {
     post: shape({
       id: any,
       type: string,
-      creator: object,
       imageUrl: string,
       name: string,
       details: string,
-      commenters: array,
       upVotes: string,
-      updatedAt: string
+      updatedAt: string,
+      linkPreview: object
     }),
-    currentUser: shape({
-      id: any,
-      name: string,
-      avatarUrl: string
-    }),
+    creator: object,
+    isPinned: bool,
+    commenters: array,
+    communities: array,
+    imageUrls: array,
+    topics: array,
     fetchPost: func,
     expanded: bool,
-    showDetails: func,
-    showCommunity: bool,
     showMember: func,
     showTopic: func
   }
@@ -44,30 +42,37 @@ export default class PostCard extends React.PureComponent {
   render () {
     const {
       post,
-      showCommunity,
-      currentUser,
+      creator,
+      commenters,
+      communities,
+      imageUrls,
+      isPinned,
+      topics,
       showMember,
       showTopic,
-      goToCommunity
+      goToCommunity,
+      selectedNetworkId,
+      hideMenu,
+      hideDetails,
+      shouldShowCommunities
     } = this.props
 
-    const slug = get('0.slug', post.communities)
+    const slug = get('0.slug', communities)
+
     return <View style={styles.container}>
-      <PostHeader creator={post.creator}
+      <PostHeader creator={creator}
         date={post.createdAt}
         type={post.type}
-        showCommunity={showCommunity}
-        topics={post.topics}
-        communities={post.communities}
+        topics={topics}
         slug={slug}
-        pinned={post.pinned}
+        pinned={isPinned}
         postId={post.id}
         showMember={showMember}
         showTopic={showTopic}
-        goToCommunity={goToCommunity}
         announcement={post.announcement}
+        hideMenu={hideMenu}
       />
-      <PostImage postId={post.id} />
+      <PostImage imageUrls={imageUrls} />
       <PostBody
         title={post.title}
         details={post.details}
@@ -75,14 +80,16 @@ export default class PostCard extends React.PureComponent {
         slug={slug}
         showMember={showMember}
         showTopic={showTopic}
-        shouldTruncate />
+        shouldTruncate
+        hideDetails={hideDetails} />
       <PostCommunities
-        communities={post.communities}
+        shouldShowCommunities={shouldShowCommunities}
+        communities={communities}
         slug={slug}
+        selectedNetworkId={selectedNetworkId}
         goToCommunity={goToCommunity} />
       <PostFooter id={post.id}
-        currentUser={currentUser}
-        commenters={post.commenters}
+        commenters={commenters}
         commentsTotal={post.commentsTotal}
         votesTotal={post.votesTotal}
         myVote={post.myVote} />

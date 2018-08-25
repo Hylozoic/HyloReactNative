@@ -1,5 +1,10 @@
 import React from 'react'
-import { TextInput, TouchableOpacity, View } from 'react-native'
+import {
+  TextInput,
+  TouchableOpacity,
+  View,
+  Alert
+} from 'react-native'
 import { bool, func, string } from 'prop-types'
 import { throttle } from 'lodash'
 
@@ -24,43 +29,57 @@ export default class extends React.PureComponent {
     super()
     this.state = {
       inputheight: MIN_INPUT_HEIGHT,
-      submittable: false,
-      text: ''
+      submittable: false
     }
   }
 
   componentDidMount () {
-    const text = this.props.value || ''
+    const { value, setMessage } = this.props
+    if (value) setMessage(value)
+    const message = value || ''
     this.setState({
-      submittable: text.trim().length > 0,
-      text
+      submittable: message.trim().length > 0
     })
   }
 
   clear = () => {
     this.setState({
-      text: '',
       submittable: false
     })
+    this.props.setMessage('')
     this.textInput.clear()
   }
 
   handleChange = text => {
     this.startTyping()
     this.setState({
-      submittable: text.trim().length > 0,
-      text
+      submittable: text.trim().length > 0
     })
+    this.props.setMessage(text)
   }
 
   handleContentSizeChange = ({ nativeEvent }) =>
     this.setState({ inputHeight: nativeEvent.contentSize.height })
 
   handleSubmit = () => {
-    const { text, submittable } = this.state
+    const { submittable } = this.state
+    const { message, emptyParticipants } = this.props
+    const canSend = submittable || message.length > 0
     // NOTE: The calling code is responsible for sanitisation.
-    if (submittable) this.props.onSubmit(text)
-    this.clear()
+    if (canSend && !emptyParticipants) {
+      this.props.onSubmit(message)
+      this.clear()
+    }
+    if (emptyParticipants) {
+      Alert.alert(
+        'Missing message recipient!',
+        'Click on a user name or user the search bar.',
+        [
+          {text: 'OK'}
+        ],
+        { cancelable: true }
+      )
+    }
   }
 
   restrictedHeight = () => Math.min(
@@ -74,7 +93,7 @@ export default class extends React.PureComponent {
     const inputProps = {
       // Can be overridden by setting on component
       placeholderTextColor: rhino30,
-      value: this.state.text,
+      value: this.props.message,
       ...this.props,
 
       // Cannot be overridden

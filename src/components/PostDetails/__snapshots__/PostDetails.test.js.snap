@@ -1,43 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`CommentPrompt renders correctly 1`] = `
-<View>
-  <TouchableOpacity
-    activeOpacity={0.2}
-    onPress={[Function]}
-  >
-    <Avatar
-      avatarUrl="me.png"
-    />
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
-      Joe, how can you help?
-    </Text>
-  </TouchableOpacity>
-</View>
-`;
-
-exports[`CommentPrompt renders with comment text 1`] = `
-<View>
-  <TouchableOpacity
-    activeOpacity={0.2}
-    onPress={[Function]}
-  >
-    <Avatar
-      avatarUrl="me.png"
-    />
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
-      A long enough comment that it will 
-    </Text>
-  </TouchableOpacity>
-</View>
+<InlineEditor
+  communityId={undefined}
+  containerStyle={
+    Object {
+      "borderTopColor": "#c0c6cd",
+      "borderTopWidth": 0.25,
+      "paddingHorizontal": 10,
+    }
+  }
+  onChange={undefined}
+  onSubmit={undefined}
+  placeholder="Write a comment..."
+  submitting={undefined}
+  value={undefined}
+/>
 `;
 
 exports[`Files renders correctly 1`] = `
@@ -116,11 +94,12 @@ exports[`Files renders correctly 1`] = `
 `;
 
 exports[`PostDetails renders correctly 1`] = `
-<View>
+<Unknown>
   <Connect(Comments)
     footer={
       <CommentPrompt
-        commentEdit={undefined}
+        commentText=""
+        communityId={undefined}
         currentUser={
           Object {
             "avatarUrl": "me.png",
@@ -128,13 +107,16 @@ exports[`PostDetails renders correctly 1`] = `
             "id": 123,
           }
         }
-        newComment={undefined}
+        onChange={[Function]}
+        onSubmit={[Function]}
+        submitting={undefined}
       />
     }
     header={
       <View>
         <withNavigation(Connect(PostHeader))
           announcement={undefined}
+          closeOnDelete={true}
           communities={
             Array [
               Object {
@@ -149,7 +131,7 @@ exports[`PostDetails renders correctly 1`] = `
             }
           }
           date="2017-05-19T23:24:58Z"
-          editPost={[Function]}
+          editPost={[MockFunction]}
           goToCommunity={[Function]}
           pinned={true}
           postId="91"
@@ -166,17 +148,17 @@ exports[`PostDetails renders correctly 1`] = `
           }
           type="request"
         />
-        <Connect(PostImage)
+        <PostImage
+          imageUrls={
+            Array [
+              "foom.png",
+            ]
+          }
           linked={true}
-          postId="91"
         />
         <PostBody
           details="Lo"
-          linkPreview={
-            Object {
-              "id": "34",
-            }
-          }
+          linkPreview={undefined}
           showMember={[Function]}
           showTopic={[Function]}
           slug="foom"
@@ -191,6 +173,7 @@ exports[`PostDetails renders correctly 1`] = `
             ]
           }
           goToCommunity={[Function]}
+          shouldShowCommunities={true}
           slug="foom"
         />
         <Files
@@ -237,5 +220,5 @@ exports[`PostDetails renders correctly 1`] = `
     id="91"
     type="post"
   />
-</View>
+</Unknown>
 `;

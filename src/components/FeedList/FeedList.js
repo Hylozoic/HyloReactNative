@@ -1,22 +1,26 @@
 import React from 'react'
-import { FlatList, Text, TouchableOpacity, View } from 'react-native'
+import { FlatList, Text, View } from 'react-native'
+import { didPropsChange } from 'util/index'
 import styles from './FeedList.styles'
-import PostCard from '../PostCard'
+import PostRow from './PostRow'
 import Loading from '../Loading'
 import Icon from '../Icon'
 import PopupMenuButton from '../PopupMenuButton'
-import { find, get, isEmpty, filter } from 'lodash/fp'
-
-export default class FeedList extends React.PureComponent {
+import { find, get, isEmpty } from 'lodash/fp'
+export default class FeedList extends React.Component {
   fetchOrShowCached () {
-    const { hasMore, posts, fetchPosts, pending } = this.props
-    if (fetchPosts && isEmpty(posts) && hasMore !== false && !pending) {
+    const { hasMore, postIds, fetchPosts, pending } = this.props
+    if (fetchPosts && isEmpty(postIds) && hasMore !== false && !pending) {
       fetchPosts()
     }
   }
 
   componentDidMount () {
     this.fetchOrShowCached()
+  }
+
+  shouldComponentUpdate (nextProps) {
+    return nextProps.isFocused && didPropsChange(this.props, nextProps)
   }
 
   componentDidUpdate (prevProps) {
@@ -41,55 +45,55 @@ export default class FeedList extends React.PureComponent {
     }
   }
 
+  refreshPosts = (...args) => this.props.refreshPosts(...args)
+  fetchMorePosts = (...args) => this.props.fetchMorePosts(...args)
+
+  showPost = (...args) => this.props.showPost(...args)
+  showMember = (...args) => this.props.showMember(...args)
+  showTopic = (...args) => this.props.showTopic(...args)
+  goToCommunity = (...args) => this.props.goToCommunity(...args)
+
+  setFilter = (...args) => this.props.setFilter(...args)
+  setSort = (...args) => this.props.setSort(...args)
+
+  renderItem = ({ item }) => <PostRow
+    postId={item}
+    communityId={this.props.communityId}
+    showPost={this.showPost}
+    showMember={this.showMember}
+    showTopic={this.showTopic}
+    shouldShowCommunities={this.props.all}
+    goToCommunity={this.goToCommunity} />
+
+  keyExtractor = (item) => `post${item}`
+
   render () {
     const {
-      posts,
-      networkId,
-      filter: listFilter,
-      sortBy,
-      setFilter,
-      setSort,
-      pending,
-      header,
-      showPost,
-      showMember,
-      showTopic,
-      showCommunities,
-      goToCommunity
+      postIds,
+      pendingRefresh
     } = this.props
-    const listHeaderComponent = <View>
-      {header}
-      <ListControls
-        filter={listFilter}
-        sortBy={sortBy}
-        setFilter={setFilter}
-        setSort={setSort}
-        pending={pending}
-      />
-    </View>
-
-    const listFooterComponent = pending
-      ? <Loading style={styles.loading} />
-      : null
 
     return <View style={styles.container}>
       <FlatList
-        data={posts}
-        renderItem={({ item }) =>
-          <PostRow
-            post={item}
-            showPost={showPost}
-            showMember={showMember}
-            showTopic={showTopic}
-            showCommunity={showCommunities}
-            goToCommunity={goToCommunity}
-            selectedNetworkId={networkId} />}
-        onRefresh={this.props.refreshPosts}
-        refreshing={!!this.props.pendingRefresh}
-        keyExtractor={(item, index) => item.id}
-        onEndReached={this.props.fetchMorePosts}
-        ListHeaderComponent={listHeaderComponent}
-        ListFooterComponent={listFooterComponent} />
+        data={postIds}
+        renderItem={this.renderItem}
+        onRefresh={this.refreshPosts}
+        refreshing={!!pendingRefresh}
+        keyExtractor={this.keyExtractor}
+        onEndReached={this.fetchMorePosts}
+        ListHeaderComponent={<View>
+          {this.props.header}
+          <ListControls
+            filter={this.props.filter}
+            sortBy={this.props.sortBy}
+            setFilter={this.setFilter}
+            setSort={this.setSort}
+            pending={this.props.pending}
+          />
+        </View>}
+        ListFooterComponent={this.props.pending
+          ? <Loading style={styles.loading} />
+          : null} />
     </View>
   }
 }
@@ -130,34 +134,4 @@ export function ListControl ({ selected, options, onChange }) {
     <Text style={styles.optionText}>{optionText(selected, options)}</Text>
     <Icon name='ArrowDown' style={[styles.optionText, styles.downArrow]} />
   </PopupMenuButton>
-}
-
-export function PostRow ({
-  post, showPost, showMember, showTopic,
-  showCommunity, goToCommunity, selectedNetworkId
-}) {
-  // TODO: Move to Post model instance method...
-  // When a network is selected only show communities
-  // in the that network in the header
-  var filteredPost = post
-  if (selectedNetworkId) {
-    filteredPost = {
-      ...post,
-      communities: filter(
-        community => get('network.id', community) === selectedNetworkId,
-        post.communities
-      )
-    }
-  }
-  return <View style={styles.postRow}>
-    <TouchableOpacity delayPressIn={50} activeOpacity={0.6} onPress={() => showPost(post.id)}>
-      <View>
-        <PostCard post={filteredPost}
-          showMember={showMember}
-          showTopic={showTopic}
-          showCommunity={showCommunity}
-          goToCommunity={goToCommunity} />
-      </View>
-    </TouchableOpacity>
-  </View>
 }

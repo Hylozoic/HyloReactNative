@@ -14,12 +14,10 @@ import DrawerMenu from '../DrawerMenu'
 import { Home, Members, Topics } from '../Tabs' // eslint-disable-line no-unused-vars
 import stacksInTabsFactory from './stacksInTabsFactory'
 import PostEditor from '../PostEditor'
-import DetailsEditor from '../PostEditor/DetailsEditor'
 import PostDetails from '../PostDetails'
 import MemberProfile from '../MemberProfile'
 import NotificationSettings from '../NotificationSettings'
 import NotificationsList from '../NotificationsList'
-import CommentEditor from '../PostDetails/CommentEditor'
 import InvitePeople from '../InvitePeople'
 import tabStyles from '../Tabs/Tabs.styles'
 import NewMessage from '../NewMessage'
@@ -31,6 +29,7 @@ import TopicSupportComingSoon from '../TopicSupportComingSoon'
 import MemberDetails from '../MemberProfile/MemberDetails'
 import MemberSkillEditor from '../MemberProfile/MemberSkillEditor'
 import UserSettings from '../UserSettings'
+import SearchPage from '../SearchPage'
 import SignupFlow1 from '../SignupFlow/SignupFlow1'
 import SignupFlow2 from '../SignupFlow/SignupFlow2'
 import SignupFlow3 from '../SignupFlow/SignupFlow3'
@@ -101,11 +100,9 @@ const screensInStack = {
   MemberProfile: {screen: MemberProfile, path: 'people/:id'},
   MemberDetails: {screen: MemberDetails},
   MemberSkillEditor: {screen: MemberSkillEditor},
-  CommentEditor: {screen: CommentEditor},
   NewMessage: {screen: NewMessage},
   PostDetails: {screen: PostDetails, path: 'post/:id'},
   PostEditor: {screen: PostEditor},
-  DetailsEditor: {screen: DetailsEditor},
   UserSettings: {screen: UserSettings},
   InvitePeople: {screen: InvitePeople},
   ModeratorSettings: {screen: ModeratorSettings},
@@ -134,7 +131,8 @@ const screensInStack = {
   CreateCommunityName: {screen: CreateCommunityName},
   CreateCommunityUrl: {screen: CreateCommunityUrl},
   CreateCommunityReview: {screen: CreateCommunityReview},
-  NotificationSettings: {screen: NotificationSettings}
+  NotificationSettings: {screen: NotificationSettings},
+  SearchPage: {screen: SearchPage}
 }
 
 const RootNavigator = StackNavigator(

@@ -6,9 +6,6 @@ Object {
     "_fields": Object {
       "id": "99",
       "inviteLink": "/38adslkjlkj3",
-      "members": undefined,
-      "moderators": undefined,
-      "posts": undefined,
       "slug": "foo",
     },
     "inviteLink": "/38adslkjlkj3",
@@ -38,6 +35,7 @@ Object {
           name
           slug
           invitePath
+          allowCommunityInvites
           pendingInvitations (first: 100) {
             hasMore
             items {
@@ -177,13 +175,32 @@ Object {
 
 exports[`mergeProps merges the props 7`] = `
 Object {
+  "graphql": Object {
+    "query": "mutation ($communityId: ID, $data: Boolean) {
+        allowCommunityInvites(communityId: $communityId, data: $data) {
+          id
+        }
+      }",
+    "variables": Object {
+      "communityId": 1,
+      "data": true,
+    },
+  },
+  "meta": Object {
+    "communityId": 1,
+    "optimistic": true,
+  },
+  "type": "InvitePeople/ALLOW_COMMUNITY_INVITES",
+}
+`;
+
+exports[`mergeProps merges the props 8`] = `
+Object {
+  "allowCommunityInvites": [Function],
   "community": SessionBoundModel {
     "_fields": Object {
       "id": "99",
       "inviteLink": "/38adslkjlkj3",
-      "members": undefined,
-      "moderators": undefined,
-      "posts": undefined,
       "slug": "foo",
     },
     "inviteLink": "/38adslkjlkj3",

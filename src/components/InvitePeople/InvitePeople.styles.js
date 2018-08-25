@@ -1,5 +1,5 @@
 import { StyleSheet, Dimensions } from 'react-native'
-import { caribbeanGreen, white, capeCod40, amaranth, rhino20, white60onCaribbeanGreen } from 'style/colors'
+import { caribbeanGreen, white, capeCod40, amaranth, rhino1020, white60onCaribbeanGreen, rhino10 } from 'style/colors'
 const screenWidth = Dimensions.get('window').width
 const screenHeight = Dimensions.get('window').height
 
@@ -87,13 +87,13 @@ export default {
     height: 36,
     backgroundColor: white,
     width: 110,
-    borderColor: rhino20,
-    color: rhino20,
+    borderColor: rhino1020,
+    color: rhino1020,
     fontSize: 14,
     marginRight: 14
   },
   textInput: {
-    borderColor: rhino20,
+    borderColor: rhino1020,
     borderWidth: 2,
     marginLeft: 18,
     marginRight: 18,
@@ -134,13 +134,26 @@ export default {
     marginLeft: 'auto'
   },
   timeAgoText: {
-    color: rhino20
+    color: rhino1020
   },
   keyboardFriendlyContainer: {
     display: 'flex',
     flex: 1,
     alignItems: 'stretch',
     minHeight: screenHeight
+  },
+  allowCommunityInvites: {
+    backgroundColor: rhino10,
+    display: 'flex',
+    flexDirection: 'row',
+    flex: 1,
+    paddingLeft: 18,
+    paddingTop: 20,
+    paddingBottom: 15
+  },
+  allowCommunityInvitesSwitch: {
+    paddingLeft: 14,
+    marginTop: -6
   },
   androidInvisibleUnderline: 'rgba(0,0,0,0)'
 }

@@ -28,6 +28,10 @@ Object {
   "PeopleTyping": Object {},
   "PostEditor": Object {},
   "Search": Object {},
+  "SearchPage": Object {
+    "filter": "all",
+    "search": "",
+  },
   "SignupFlow": Object {
     "errors": Object {},
     "userSettings": Object {

@@ -41,7 +41,10 @@ describe('PostEditor', () => {
   let navigation
 
   beforeEach(() => {
-    navigation = {setParams: jest.fn()}
+    navigation = {
+      setParams: jest.fn(),
+      getParam: jest.fn()
+    }
   })
 
   it('renders a new editor correctly', () => {
@@ -49,8 +52,8 @@ describe('PostEditor', () => {
 
     const renderer = new ReactShallowRenderer()
     renderer.render(<PostEditor
+      navigation={navigation}
       save={save}
-      editDetails={jest.fn()}
     />)
     const actual = renderer.getRenderOutput()
     expect(actual).toMatchSnapshot()
@@ -59,6 +62,7 @@ describe('PostEditor', () => {
   it('renders with a post', () => {
     const renderer = new ReactShallowRenderer()
     renderer.render(<PostEditor
+      navigation={navigation}
       post={mockPost}
       imageUrls={[
         'http://foo.com/foo.png',
@@ -70,16 +74,14 @@ describe('PostEditor', () => {
 
   it('presses buttons', () => {
     const save = jest.fn(() => Promise.resolve())
-    const editDetails = jest.fn()
     const renderer = TestRenderer.create(
       <Provider store={createMockStore()}>
         <PostEditor
-          editDetails={editDetails}
           isFocused
+          fetchDetailsText={jest.fn()}
           navigation={navigation}
           post={mockPost}
-          save={save}
-          setDetails={jest.fn()} />
+          save={save} />
       </Provider>)
 
     const root = renderer.root.findByType(PostEditor)
@@ -95,16 +97,13 @@ describe('PostEditor', () => {
     // Offer type button
     root.findAllByType(TypeButton)[2].props.onPress()
     expect(root.instance.state.type).toBe('offer')
-
-    // details section
-    expect(editDetails).not.toHaveBeenCalled()
-    root.findAllByType(TouchableOpacity)[3].props.onPress()
-    expect(editDetails).toHaveBeenCalled()
   })
 
   it('has navigation options', () => {
     const props = {
       navigation: {
+        setParams: jest.fn(),
+        getParam: jest.fn(),
         state: {
           params: {headerTitle: 'a title', save: jest.fn(), isSaving: false}
         }
@@ -118,9 +117,8 @@ describe('PostEditor', () => {
     const renderer = TestRenderer.create(
       <Provider store={createMockStore()}>
         <PostEditor
-          editDetails={jest.fn()}
+          fetchDetailsText={jest.fn()}
           isFocused
-          setDetails={jest.fn()}
           save={save}
           communityIds={[1]}
           navigation={navigation}
@@ -145,9 +143,8 @@ describe('PostEditor', () => {
     const renderer = TestRenderer.create(
       <Provider store={createMockStore()}>
         <PostEditor
-          editDetails={jest.fn()}
+          fetchDetailsText={jest.fn()}
           isFocused
-          setDetails={jest.fn()}
           save={save}
           communityIds={[1]}
           navigation={navigation}
@@ -168,9 +165,8 @@ describe('PostEditor', () => {
     const renderer = TestRenderer.create(
       <Provider store={createMockStore()}>
         <PostEditor
-          editDetails={jest.fn()}
           isFocused
-          setDetails={jest.fn()}
+          fetchDetailsText={jest.fn()}
           save={save}
           communityIds={[1]}
           navigation={navigation}
@@ -195,9 +191,8 @@ describe('PostEditor', () => {
     const renderer = TestRenderer.create(
       <Provider store={createMockStore()}>
         <PostEditor
-          editDetails={jest.fn()}
           isFocused
-          setDetails={jest.fn()}
+          fetchDetailsText={jest.fn()}
           save={save}
           communityIds={[1]}
           navigation={navigation}
@@ -207,17 +202,16 @@ describe('PostEditor', () => {
     const instance = renderer.root.findByType(PostEditor).instance
 
     await instance.save()
-    expect(navigation.setParams.mock.calls[1][0]).toHaveProperty('isSaving', true)
-    expect(navigation.setParams.mock.calls[2][0]).toHaveProperty('isSaving', false)
+    expect(navigation.setParams.mock.calls[2][0]).toHaveProperty('isSaving', true)
+    expect(navigation.setParams.mock.calls[3][0]).toHaveProperty('isSaving', false)
   })
 
   it('has image methods', () => {
     const renderer = TestRenderer.create(
       <Provider store={createMockStore()}>
         <PostEditor
-          editDetails={jest.fn()}
           isFocused
-          setDetails={jest.fn()}
+          fetchDetailsText={jest.fn()}
           navigation={navigation}
           imageUrls={['http://foo.com/foo.png']}
           post={mockPost} />
@@ -240,9 +234,8 @@ describe('PostEditor', () => {
     const renderer = TestRenderer.create(
       <Provider store={createMockStore()}>
         <PostEditor
-          editDetails={jest.fn()}
           isFocused
-          setDetails={jest.fn()}
+          fetchDetailsText={jest.fn()}
           navigation={navigation}
           imageUrls={['http://foo.com/foo.png']}
           post={mockPost} />
@@ -262,10 +255,9 @@ describe('PostEditor', () => {
     const renderer = TestRenderer.create(
       <Provider store={createMockStore()}>
         <PostEditor
-          editDetails={jest.fn()}
           isFocused
-          setDetails={jest.fn()}
           upload={upload}
+          fetchDetailsText={jest.fn()}
           fileUrls={[]}
           navigation={navigation}
           imageUrls={['http://foo.com/foo.png']}
@@ -295,11 +287,10 @@ describe('PostEditor', () => {
     const renderer = TestRenderer.create(
       <Provider store={createMockStore()}>
         <PostEditor
-          editDetails={jest.fn()}
           isFocused
-          setDetails={jest.fn()}
           upload={upload}
           fileUrls={[]}
+          fetchDetailsText={jest.fn()}
           navigation={navigation}
           imageUrls={['http://foo.com/foo.png']}
           post={mockPost} />
@@ -322,9 +313,8 @@ describe('PostEditor', () => {
     const renderer = TestRenderer.create(
       <Provider store={createMockStore()}>
         <PostEditor
-          editDetails={jest.fn()}
           isFocused
-          setDetails={jest.fn()}
+          fetchDetailsText={jest.fn()}
           navigation={navigation}
           postId={mockPost.id}
           fileUrls={['http://foo.com/foo.pdf']}
@@ -343,6 +333,45 @@ describe('PostEditor', () => {
     expect(instance.state.fileUrls).toEqual([
       'http://bar.com/bar.pdf'
     ])
+  })
+
+  it('updates the title', () => {
+    const save = jest.fn(() => Promise.resolve())
+    const renderer = TestRenderer.create(
+      <Provider store={createMockStore()}>
+        <PostEditor
+          fetchDetailsText={jest.fn()}
+          isFocused
+          save={save}
+          communityIds={[1]}
+          navigation={navigation}
+          post={mockPost} />
+      </Provider>)
+
+    const instance = renderer.root.findByType(PostEditor).instance
+    const someTitle = 'some title'
+    instance.updateTitle(someTitle)
+    expect(instance.state.title).toEqual(someTitle)
+    expect(instance.state.titleLengthError).toBeFalsy()
+  })
+
+  it('displays an error if the title is too long', () => {
+    const save = jest.fn(() => Promise.resolve())
+    const renderer = TestRenderer.create(
+      <Provider store={createMockStore()}>
+        <PostEditor
+          fetchDetailsText={jest.fn()}
+          isFocused
+          save={save}
+          communityIds={[1]}
+          navigation={navigation}
+          post={mockPost} />
+      </Provider>)
+
+    const instance = renderer.root.findByType(PostEditor).instance
+    const longTitle = 'longTitlelongTitlelongTitlelongTitlelongTitlelongTitlelongTitlelongTitlelongTitlelongTitlelongTitlelongTitle'
+    instance.updateTitle(longTitle)
+    expect(instance.state.titleLengthError).toBeTruthy()
   })
 })
 

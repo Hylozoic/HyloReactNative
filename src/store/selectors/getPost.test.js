@@ -22,8 +22,9 @@ describe('presentPost', () => {
   const session = orm.session(orm.getEmptyState())
 
   const community = session.Community.create({id: communityId})
+  session.Person.create({id: '10'})
   const postMembership = session.PostMembership.create({community, pinned: true})
-  session.Post.create({id: postId, postMemberships: [postMembership]})
+  session.Post.create({id: postId, postMemberships: [postMembership], creator: '10'})
 
   it('matches the snapshot', () => {
     const post = session.Post.withId(postId)

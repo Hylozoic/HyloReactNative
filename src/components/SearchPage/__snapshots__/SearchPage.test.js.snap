@@ -1,0 +1,270 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CommentCard matches the last snapshot 1`] = `
+<TouchableOpacity
+  activeOpacity={0.2}
+  onPress={[Function]}
+>
+  <View>
+    <withNavigation(Connect(PostHeader))
+      announcement={false}
+      creator={
+        Object {
+          "id": 3,
+        }
+      }
+      date={123}
+      goToCommunity={[Function]}
+      hideMenu={true}
+      pinned={false}
+      postId={2}
+      showMember={[Function]}
+      showTopic={[Function]}
+      smallAvatar={true}
+      type="singalong"
+    />
+    <PostTitle
+      title="Yallow"
+    />
+  </View>
+  <View />
+  <Connect(Comment)
+    comment={
+      Object {
+        "id": 1,
+        "post": Object {
+          "announcement": false,
+          "createdAt": 123,
+          "creator": Object {
+            "id": 3,
+          },
+          "id": 2,
+          "pinned": false,
+          "title": "Yallow",
+          "type": "singalong",
+        },
+      }
+    }
+    showMember={[Function]}
+    showTopic={[Function]}
+  />
+</TouchableOpacity>
+`;
+
+exports[`PersonCard matches the last snapshot 1`] = `
+<TouchableOpacity
+  activeOpacity={0.2}
+  onPress={[Function]}
+>
+  <View>
+    <Avatar
+      avatarUrl="jo.png"
+    />
+    <View>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+      >
+        Jo
+      </Text>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+      >
+        Spain
+      </Text>
+    </View>
+  </View>
+</TouchableOpacity>
+`;
+
+exports[`PostCard matches the last snapshot 1`] = `
+<TouchableOpacity
+  activeOpacity={0.2}
+  onPress={[Function]}
+>
+  <PostCard
+    communities={undefined}
+    creator={
+      Object {
+        "id": 2,
+      }
+    }
+    goToCommunity={[Function]}
+    hideDetails={true}
+    hideMenu={true}
+    post={
+      Object {
+        "creator": Object {
+          "id": 2,
+        },
+        "id": 1,
+      }
+    }
+    shouldShowCommunities={true}
+    showDetails={[Function]}
+    showMember={[Function]}
+  />
+</TouchableOpacity>
+`;
+
+exports[`SearchPage has navigationOptions 1`] = `
+Object {
+  "headerBackTitle": null,
+  "headerStyle": Object {
+    "backgroundColor": "white",
+    "paddingHorizontal": 10,
+  },
+  "headerTintColor": "#808c9b",
+  "headerTitle": "Search",
+  "headerTitleStyle": Object {
+    "color": "black",
+    "fontFamily": "Circular-Bold",
+    "fontSize": 17,
+  },
+}
+`;
+
+exports[`SearchPage matches the last snapshot 1`] = `
+<View>
+  <FlatList
+    ListFooterComponent={<Loading />}
+    ListHeaderComponent={
+      <View>
+        <View>
+          <View>
+            <Icon
+              name="Search"
+            />
+            <TextInput
+              allowFontScaling={true}
+              onChangeText={[Function]}
+              underlineColorAndroid="transparent"
+              value="how"
+            />
+          </View>
+        </View>
+        <TabBar
+          filter="post"
+          setSearchFilter={[Function]}
+        />
+      </View>
+    }
+    data={
+      Array [
+        1,
+        2,
+        3,
+      ]
+    }
+    disableVirtualization={false}
+    horizontal={false}
+    initialNumToRender={10}
+    keyExtractor={[Function]}
+    maxToRenderPerBatch={10}
+    numColumns={1}
+    onEndReached={[Function]}
+    onEndReachedThreshold={2}
+    onRefresh={[Function]}
+    refreshing={false}
+    renderItem={[Function]}
+    scrollEventThrottle={50}
+    updateCellsBatchingPeriod={50}
+    windowSize={21}
+  />
+</View>
+`;
+
+exports[`SearchResult works with Comment 1`] = `
+<View>
+  <CommentCard
+    comment={
+      Object {
+        "id": 1,
+      }
+    }
+    expanded={false}
+    goToPost={[Function]}
+  />
+</View>
+`;
+
+exports[`SearchResult works with Person 1`] = `
+<View>
+  <PersonCard
+    goToPerson={[Function]}
+    person={
+      Object {
+        "id": 1,
+      }
+    }
+  />
+</View>
+`;
+
+exports[`SearchResult works with Post 1`] = `
+<View>
+  <PostCard
+    goToPost={[Function]}
+    post={
+      Object {
+        "id": 1,
+      }
+    }
+  />
+</View>
+`;
+
+exports[`Tab matches the last snapshot 1`] = `
+<TouchableOpacity
+  activeOpacity={0.2}
+  hitSlop={
+    Object {
+      "bottom": 15,
+      "left": 15,
+      "right": 15,
+      "top": 10,
+    }
+  }
+  onPress={[Function]}
+>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+  >
+    Discussions
+  </Text>
+</TouchableOpacity>
+`;
+
+exports[`TabBar matches the last snapshot 1`] = `
+<View>
+  <Tab
+    filter="post"
+    id="all"
+    label="All"
+    setSearchFilter={[Function]}
+  />
+  <Tab
+    filter="post"
+    id="post"
+    label="Discussions"
+    setSearchFilter={[Function]}
+  />
+  <Tab
+    filter="post"
+    id="person"
+    label="People"
+    setSearchFilter={[Function]}
+  />
+  <Tab
+    filter="post"
+    id="comment"
+    label="Comments"
+    setSearchFilter={[Function]}
+  />
+</View>
+`;

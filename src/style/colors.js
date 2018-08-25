@@ -48,11 +48,19 @@ export const rhino60 = fakeAlpha(rhino, 0.6)
 export const rhino80 = fakeAlpha(rhino, 0.8)
 export const black10onRhino = fakeAlpha('#000000', 0.1, rhino)
 export const slateGrey80 = '#8490a1'
+
 export const white = '#FFFFFF'
 export const white80onCaribbeanGreen = fakeAlpha('#FFFFFF', 0.8, caribbeanGreen)
 export const white60onCaribbeanGreen = fakeAlpha('#FFFFFF', 0.6, caribbeanGreen)
 export const white40onCaribbeanGreen = fakeAlpha('#FFFFFF', 0.4, caribbeanGreen)
 export const black10OnCaribbeanGreen = fakeAlpha('#000000', 0.1, caribbeanGreen)
+
+export const bannerlinearGradientColors = [
+  'rgba(0, 0, 0, 0)',
+  'rgba(0, 0, 0, 0.1)',
+  'rgba(0, 0, 0, 0.3)',
+  'rgba(0, 0, 0, 0.6)'
+]
 
 export function fakeAlpha (color, alpha, background = '#ffffff') {
   const fg = tinycolor(color).toRgb()

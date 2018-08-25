@@ -1,28 +1,42 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ContentRow shows a Comment when itemType is comment 1`] = `
-<View>
-  <Connect(Comment)
-    comment={
-      Object {
-        "id": 2,
+<TouchableOpacity
+  activeOpacity={0.2}
+  onPress={[Function]}
+>
+  <View>
+    <Connect(Comment)
+      comment={
+        Object {
+          "id": 2,
+        }
       }
-    }
-    displayPostTitle={true}
-  />
-</View>
+      displayPostTitle={true}
+    />
+  </View>
+</TouchableOpacity>
 `;
 
 exports[`ContentRow shows a PostCard when itemType is post 1`] = `
-<View>
-  <PostCard
-    post={
-      Object {
-        "id": 2,
+<TouchableOpacity
+  activeOpacity={0.2}
+  onPress={[Function]}
+>
+  <View>
+    <PostCard
+      commenters={undefined}
+      communities={undefined}
+      creator={undefined}
+      post={
+        Object {
+          "id": 2,
+        }
       }
-    }
-  />
-</View>
+      topics={undefined}
+    />
+  </View>
+</TouchableOpacity>
 `;
 
 exports[`FeedTab matches the last snapshot 1`] = `

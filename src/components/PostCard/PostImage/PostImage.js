@@ -10,37 +10,41 @@ import {
   View
 } from 'react-native'
 
-// maybe this will help improve performance by avoiding creating new functions
-const makeOpenURL = memoize(url => () => Linking.openURL(url))
+export default class PostImage extends React.PureComponent {
+  // maybe this will help improve performance by avoiding creating new functions
+  makeOpenURL = memoize(url => () => Linking.openURL(url))
 
-export default function PostImage ({ imageUrls, linked }) {
-  if (isEmpty(imageUrls)) return null
+  render () {
+    const { imageUrls, linked } = this.props
 
-  if (linked) {
-    return <View>
-      <TouchableOpacity onPress={makeOpenURL(imageUrls[0])}>
-        <ImageBackground
-          style={[styles.background, styles.container]}
-          imageStyle={styles.backgroundImage}
-          source={{uri: imageUrls[0]}}>
-          {imageUrls.length > 0 && imageUrls.slice(1).map(uri =>
-            <TouchableHighlight onPress={makeOpenURL(uri)} key={uri}
-              style={styles.thumbnailWrapper}>
-              <Image source={{uri}} style={styles.thumbnail} />
-            </TouchableHighlight>)}
-        </ImageBackground>
-      </TouchableOpacity>
-    </View>
+    if (isEmpty(imageUrls)) return null
+
+    if (linked) {
+      return <View>
+        <TouchableOpacity onPress={this.makeOpenURL(imageUrls[0])}>
+          <ImageBackground
+            style={[styles.background, styles.container]}
+            imageStyle={styles.backgroundImage}
+            source={{uri: imageUrls[0]}}>
+            {imageUrls.length > 0 && imageUrls.slice(1).map(uri =>
+              <TouchableHighlight onPress={this.makeOpenURL(uri)} key={uri}
+                style={styles.thumbnailWrapper}>
+                <Image source={{uri}} style={styles.thumbnail} />
+              </TouchableHighlight>)}
+          </ImageBackground>
+        </TouchableOpacity>
+      </View>
+    }
+
+    return <ImageBackground
+      style={styles.background}
+      imageStyle={styles.backgroundImage}
+      source={{uri: imageUrls[0]}}>
+      {imageUrls.length > 0 && imageUrls.slice(1).map(uri =>
+        <Image key={uri} source={{uri}}
+          style={[styles.thumbnail, styles.thumbnailWrapper]} />)}
+    </ImageBackground>
   }
-
-  return <ImageBackground
-    style={styles.background}
-    imageStyle={styles.backgroundImage}
-    source={{uri: imageUrls[0]}}>
-    {imageUrls.length > 0 && imageUrls.slice(1).map(uri =>
-      <Image key={uri} source={{uri}}
-        style={[styles.thumbnail, styles.thumbnailWrapper]} />)}
-  </ImageBackground>
 }
 
 // this is from fudging and looking at how it turns out. since it's fixed, the

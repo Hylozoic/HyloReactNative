@@ -1,13 +1,11 @@
 import React from 'react'
 import {
-  Dimensions,
   ScrollView,
   SectionList,
   Text,
   TouchableOpacity,
   TextInput,
-  View,
-  StyleSheet
+  View
 } from 'react-native'
 import Avatar from '../Avatar'
 import Icon from '../Icon'
@@ -17,6 +15,7 @@ import KeyboardFriendlyView from '../KeyboardFriendlyView'
 import styles from './NewMessage.styles'
 import { isEmpty } from 'lodash/fp'
 import { keyboardAvoidingViewProps as kavProps } from 'util/viewHelpers'
+import { isIOS } from 'util/platform'
 
 export default class NewMessage extends React.Component {
   constructor (props) {
@@ -56,7 +55,7 @@ export default class NewMessage extends React.Component {
     } = this.props
 
     const showSuggestions = !isEmpty(participantInputText)
-
+    const emptyParticipantsList = participants.length === 0
     var listSections = []
     if (showSuggestions) {
       listSections = [
@@ -87,9 +86,12 @@ export default class NewMessage extends React.Component {
         stickySectionHeadersEnabled={false} />
       <MessageInput
         style={styles.messageInput}
+        multiline
         onSubmit={createMessage}
         onBlur={this.onBlurMessageInput}
-        placeholder='Type your message here' />
+        placeholder='Type your message here'
+        emptyParticipants={emptyParticipantsList}
+      />
     </KeyboardFriendlyView>
   }
 }
@@ -106,7 +108,7 @@ export function ParticipantInput ({ participants, onChangeText, removeParticipan
         onChangeText={onChangeText}
         underlineColorAndroid='transparent'
         placeholder={placeholderText}
-        style={styles.participantTextInput} />
+        style={isIOS ? null : styles.participantTextInput} />
     </ScrollView>
   </View>
 }

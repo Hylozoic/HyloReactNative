@@ -5,7 +5,8 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  View
+  View,
+  ScrollView
 } from 'react-native'
 
 import Icon from '../Icon'
@@ -26,7 +27,8 @@ export default class Search extends React.Component {
     const renderItem = ({ item }) =>
       <SearchResult item={item} type={type} onPress={() => onSelect(item)} />
 
-    return <View style={[styles.container, style]}>
+    return <ScrollView keyboardShouldPersistTaps='handled'
+      contentContainerStyle={[styles.container, style]}>
       <View style={styles.inputWrapper}>
         <Icon name='Search' style={styles.inputIcon} />
         <TextInput
@@ -49,7 +51,7 @@ export default class Search extends React.Component {
             keyExtractor={item => item.id}
             keyboardShouldPersistTaps='handled' />}
       </View>
-    </View>
+    </ScrollView>
   }
 }
 

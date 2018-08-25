@@ -1,61 +1,65 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Comments renders correctly 1`] = `
-<FlatList
-  ListFooterComponent={
+<View>
+  <ScrollView
+    onContentSizeChange={[Function]}
+  >
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+    >
+      Some React Code
+    </Text>
+    <ShowMore
+      commentsLength={3}
+      fetchComments={[Function]}
+      hasMore={true}
+      total={17}
+    />
     <View>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-      >
-        Some More Code
-      </Text>
-    </View>
-  }
-  ListHeaderComponent={
-    <View>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-      >
-        Some React Code
-      </Text>
       <Loading />
-      <ShowMore
-        commentsLength={3}
-        fetchComments={[Function]}
-        hasMore={true}
-        total={17}
-      />
     </View>
-  }
-  data={
-    Array [
-      Object {
-        "id": 1,
-      },
-      Object {
-        "id": 2,
-      },
-      Object {
-        "id": 3,
-      },
-    ]
-  }
-  disableVirtualization={false}
-  horizontal={false}
-  initialNumToRender={10}
-  keyExtractor={[Function]}
-  maxToRenderPerBatch={10}
-  numColumns={1}
-  onEndReachedThreshold={2}
-  renderItem={[Function]}
-  scrollEventThrottle={50}
-  updateCellsBatchingPeriod={50}
-  windowSize={21}
-/>
+    <Connect(Comment)
+      comment={
+        Object {
+          "id": 1,
+        }
+      }
+      showMember={undefined}
+      showTopic={undefined}
+      slug={undefined}
+    />
+    <Connect(Comment)
+      comment={
+        Object {
+          "id": 2,
+        }
+      }
+      showMember={undefined}
+      showTopic={undefined}
+      slug={undefined}
+    />
+    <Connect(Comment)
+      comment={
+        Object {
+          "id": 3,
+        }
+      }
+      showMember={undefined}
+      showTopic={undefined}
+      slug={undefined}
+    />
+  </ScrollView>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+  >
+    Some More Code
+  </Text>
+</View>
 `;
 
 exports[`ShowMore renders correctly 1`] = `

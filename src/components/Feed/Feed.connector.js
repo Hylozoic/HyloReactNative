@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { get } from 'lodash/fp'
-import { isEmpty } from 'lodash'
+import { isEmpty, isNull, isUndefined } from 'lodash'
 
 import getMe from '../../store/selectors/getMe'
 import getNetwork from '../../store/selectors/getNetwork'
@@ -17,7 +17,6 @@ import {
   getCommunitySearchObject,
   getNetworkSearchObject
 } from './Feed.store'
-import { mapWhenFocused, mergeWhenFocused } from 'util/connector'
 import getMemberships from '../../store/selectors/getMemberships'
 import getNavigationParam from '../../store/selectors/getNavigationParam'
 
@@ -34,8 +33,7 @@ export function mapStateToProps (state, props) {
   const communitySearchObject = getCommunitySearchObject(communityId, communitySlugFromLink)
 
   const topicName = props.topicName || params.topicName || getNavigationParam('topicName', state, props)
-  const community = !networkId && getCommunity(state, communitySearchObject)
-
+  const community = !networkId && get('ref', getCommunity(state, communitySearchObject))
   const communitySlug = get('slug', community)
 
   const networkSlug = getNavigationParam('networkSlug', state, props)
@@ -46,7 +44,7 @@ export function mapStateToProps (state, props) {
   const communityTopic = topicName && community &&
     getCommunityTopic(state, {topicName, slug: community.slug})
   const topicSubscribed = topicName && communityTopic && communityTopic.isSubscribed
-  const topic = get('topic', communityTopic)
+  const topic = get('topic.ref', communityTopic)
   const currentUserHasMemberships = !isEmpty(getMemberships(state))
 
   return {
@@ -70,7 +68,7 @@ export function mapDispatchToProps (dispatch, { navigation }) {
     showTopic: (communityId, networkId) => topicName => {
       // All Communities and Network feed to topic nav
       // currently not supported
-      if (networkId || communityId === ALL_COMMUNITIES_ID) {
+      if (networkId || communityId === ALL_COMMUNITIES_ID || (isNull(communityId) || isUndefined(communityId))) {
         navigation.navigate({routeName: 'TopicSupportComingSoon', key: 'TopicSupportComingSoon'})
       } else {
         navigation.navigate({routeName: 'Feed', params: {communityId, topicName}, key: 'Feed'})
@@ -107,8 +105,4 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
   }
 }
 
-export default connect(
-  mapWhenFocused(mapStateToProps),
-  mapWhenFocused(mapDispatchToProps),
-  mergeWhenFocused(mergeProps)
-)
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps)

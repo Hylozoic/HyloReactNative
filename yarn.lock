@@ -4365,6 +4365,10 @@ jquery@>=1.9.0:
   version "3.3.1"
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.3.1.tgz#958ce29e81c9790f31be7792df5d4d95fc57fbca"
 
+js-htmlencode@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/js-htmlencode/-/js-htmlencode-0.3.0.tgz#b1ce293df94e96f8a8a08b1f3368f977bd255731"
+
 js-tokens@^3.0.0, js-tokens@^3.0.2:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-3.0.2.tgz#9866df395102130e38f7f996bceb65443209c25b"
@@ -6010,7 +6014,7 @@ react-native-vector-icons@^4.5.0:
     prop-types "^15.5.10"
     yargs "^8.0.2"
 
-react-native-webview-bridge-updated@Hylozoic/react-native-webview-bridge#62f520e8:
+react-native-webview-bridge-updated@Hylozoic/react-native-webview-bridge#62f520e:
   version "1.0.8"
   resolved "https://codeload.github.com/Hylozoic/react-native-webview-bridge/tar.gz/62f520e883576bdda08530a80ec8af01a25d156e"
   dependencies:
@@ -6019,19 +6023,12 @@ react-native-webview-bridge-updated@Hylozoic/react-native-webview-bridge#62f520e
     keymirror "0.1.1"
     prop-types "15.6.0"
 
-react-native-webview-bridge-updated@^1.0.0:
-  version "1.0.9"
-  resolved "https://registry.yarnpkg.com/react-native-webview-bridge-updated/-/react-native-webview-bridge-updated-1.0.9.tgz#930b4e6444f4a2b5f3151607c6eb6eba8deda08f"
-  dependencies:
-    invariant "2.2.0"
-    keymirror "0.1.1"
-
-react-native-zss-rich-text-editor@Hylozoic/react-native-zss-rich-text-editor#6cb3038e:
+react-native-zss-rich-text-editor@Hylozoic/react-native-zss-rich-text-editor#7c1b9c5:
   version "1.0.3"
-  resolved "https://codeload.github.com/Hylozoic/react-native-zss-rich-text-editor/tar.gz/6cb3038e04161408b5b9b5adb4d55c0553daac2e"
+  resolved "https://codeload.github.com/Hylozoic/react-native-zss-rich-text-editor/tar.gz/7c1b9c5d4d947420d2a890a29d5c3b04ea6a3617"
   dependencies:
     prop-types "^15.6.0"
-    react-native-webview-bridge-updated "^1.0.0"
+    react-native-webview-bridge-updated Hylozoic/react-native-webview-bridge#62f520e
 
 react-native@0.54.4:
   version "0.54.4"
@@ -6239,14 +6236,14 @@ redux-logger@^3.0.6:
   dependencies:
     deep-diff "^0.3.5"
 
-redux-orm@Hylozoic/redux-orm#model-createClass-dist:
-  version "0.9.0-rc.3"
-  resolved "https://codeload.github.com/Hylozoic/redux-orm/tar.gz/ef12967163e79b492df76449874c42fd01559459"
+redux-orm@Hylozoic/redux-orm#createclass2-dist:
+  version "0.9.4"
+  resolved "https://codeload.github.com/Hylozoic/redux-orm/tar.gz/02d4cb60b7b2c70c090c54a0ac38c887874f18e5"
   dependencies:
     babel-runtime "^6.6.1"
     immutable-ops "^0.5.2"
     lodash "^4.12.0"
-    reselect "^2.0.1"
+    reselect "^2.5.4"
 
 redux-promise@^0.5.3:
   version "0.5.3"
@@ -6454,7 +6451,7 @@ reselect-tools@^0.0.6:
   dependencies:
     reselect "^3.0.1"
 
-reselect@^2.0.1:
+reselect@^2.5.4:
   version "2.5.4"
   resolved "https://registry.yarnpkg.com/reselect/-/reselect-2.5.4.tgz#b7d23fdf00b83fa7ad0279546f8dbbbd765c7047"
 

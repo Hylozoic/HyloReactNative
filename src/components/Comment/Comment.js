@@ -3,7 +3,7 @@ import React from 'react'
 import { StyleSheet, Text, View, Alert } from 'react-native'
 import HTMLView from 'react-native-htmlview'
 import { present, sanitize, humanDate } from 'hylo-utils/text'
-import { get, isEmpty, filter } from 'lodash/fp'
+import { get, isEmpty, filter, findLastIndex } from 'lodash/fp'
 
 import Avatar from '../Avatar'
 import PopupMenuButton from '../PopupMenuButton'
@@ -20,7 +20,9 @@ export default function Comment ({
   style,
   displayPostTitle,
   deleteComment,
-  removeComment
+  removeComment,
+  editComment,
+  hideMenu
 }) {
   const {creator, text, createdAt, post} = comment
   const presentedText = present(sanitize(text), {slug})
@@ -59,7 +61,10 @@ export default function Comment ({
           <Text style={styles.date}>on "{postTitle}"</Text>}
         </View>
         <View style={styles.headerRight}>
-          <CommentMenu deleteComment={deleteCommentWithConfirm} removeComment={removeCommentWithConfirm} />
+          {!hideMenu && <CommentMenu
+            deleteComment={deleteCommentWithConfirm}
+            removeComment={removeCommentWithConfirm}
+            editComment={editComment} />}
         </View>
 
       </View>
@@ -73,12 +78,14 @@ export default function Comment ({
   </View>
 }
 
-export function CommentMenu ({deleteComment, removeComment}) {
+export function CommentMenu ({deleteComment, removeComment, editComment}) {
   // If the function is defined, than it's a valid action
-  const removeLabel = 'Remove this Comment'
-  const deleteLabel = 'Delete this Comment'
+  const removeLabel = 'Remove Comment'
+  const deleteLabel = 'Delete Comment'
+  const editLabel = 'Edit Comment'
 
   const actions = filter(x => x[1], [
+    [editLabel, editComment],
     [deleteLabel, deleteComment],
     [removeLabel, removeComment]
   ])
@@ -86,7 +93,7 @@ export function CommentMenu ({deleteComment, removeComment}) {
   if (isEmpty(actions)) return null
 
   const destructiveLabels = [deleteLabel, removeLabel]
-  const destructiveButtonIndex = destructiveLabels.includes(actions[0][0]) ? 0 : -1
+  const destructiveButtonIndex = findLastIndex(action => destructiveLabels.includes(action[0]), actions)
 
   return <PopupMenuButton actions={actions}
     hitSlop={{top: 20, bottom: 10, left: 10, right: 15}}

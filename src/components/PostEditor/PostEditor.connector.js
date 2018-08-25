@@ -1,8 +1,12 @@
 import { connect } from 'react-redux'
-import { createPost, updatePost, setDetails } from './PostEditor.store'
+import {
+  createPost, FETCH_DETAILS_TEXT,
+  fetchPostDetailsText,
+  updatePost, MAX_TITLE_LENGTH
+} from './PostEditor.store'
 import { createTopicTag } from '../Editor/Editor'
 import { get, isEmpty } from 'lodash/fp'
-import getPost, { presentPost } from '../../store/selectors/getPost'
+import { getPresentedPost } from '../../store/selectors/getPost'
 import getCanModerate from '../../store/selectors/getCanModerate'
 import { mapWhenFocused } from 'util/connector'
 import upload from 'store/actions/upload'
@@ -16,19 +20,20 @@ export function mapStateToProps (state, props) {
   const selectedTopicName = get('navigation.state.params.topicName', props)
   const selectedTopicTag = createTopicTag({name: selectedTopicName})
   const defaultPost = selectedTopicName
-    ? {details: selectedTopicTag, communityIds: [communityId]}
+    ? {detailsText: selectedTopicTag, communityIds: [communityId]}
     : {}
-  const postModel = getPost(state, {id: getPostId(state, props)})
-  const post = presentPost(postModel)
+  const postId = getPostId(state, props)
+  const post = getPresentedPost(state, {id: postId})
   return {
-    details: state.PostEditor.details,
     post: post || defaultPost,
     canModerate: getCanModerate(state),
     communityIds: post
       ? post.communities.map(x => x.id)
       : [communityId],
-    imageUrls: post ? postModel.getImageUrls() : [],
-    fileUrls: post ? postModel.getFileUrls() : []
+    imageUrls: post ? post.imageUrls : [],
+    fileUrls: post ? post.fileUrls : [],
+    isNewPost: isEmpty(postId),
+    pendingDetailsText: state.pending[FETCH_DETAILS_TEXT]
   }
 }
 
@@ -36,12 +41,15 @@ export function mapDispatchToProps (dispatch, props) {
   const { navigation } = props
   const postId = getPostId(null, props)
   const saveAction = postId ? updatePost : createPost
-  const communityId = get('navigation.state.params.communityId', props)
 
   return {
     save: postData => {
       if (!postData.title) {
         return Promise.reject(new Error('Title cannot be blank'))
+      }
+
+      if (postData.title.length >= MAX_TITLE_LENGTH) {
+        return Promise.reject(new Error(`Title cannot be more than ${MAX_TITLE_LENGTH} characters`))
       }
 
       if (isEmpty(postData.communities)) {
@@ -60,9 +68,8 @@ export function mapDispatchToProps (dispatch, props) {
           return Promise.resolve({})
         })
     },
-    editDetails: setTopics => navigation.navigate({routeName: 'DetailsEditor', params: {communityId, setTopics}, key: 'DetailsEditor'}),
-    setDetails: content => dispatch(setDetails(content)),
-    upload: (type, id, file) => dispatch(upload(type, id, file))
+    upload: (type, id, file) => dispatch(upload(type, id, file)),
+    fetchDetailsText: () => dispatch(fetchPostDetailsText(postId))
   }
 }
 

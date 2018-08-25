@@ -17,10 +17,7 @@ Object {
     "_fields": Object {
       "avatarUrl": "someUrl",
       "id": "7",
-      "members": undefined,
-      "moderators": undefined,
       "name": "someName",
-      "posts": undefined,
     },
     "avatarUrl": "someUrl",
   },
@@ -29,10 +26,7 @@ Object {
     "_fields": Object {
       "avatarUrl": "someUrl",
       "id": "7",
-      "members": undefined,
-      "moderators": undefined,
       "name": "someName",
-      "posts": undefined,
     },
     "avatarUrl": "someUrl",
   },
@@ -40,12 +34,7 @@ Object {
   "currentUser": SessionBoundModel {
     "_fields": Object {
       "id": "33",
-      "memberships": undefined,
-      "messageThreads": undefined,
       "name": "meUser",
-      "notifications": undefined,
-      "posts": undefined,
-      "skills": undefined,
     },
     "id": "33",
   },

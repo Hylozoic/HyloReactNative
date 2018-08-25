@@ -49,7 +49,7 @@ exports[`Thread matches the last snapshot 1`] = `
       refreshing={false}
       renderItem={[Function]}
     />
-    <_class
+    <MessageInput
       blurOnSubmit={false}
       multiline={true}
       onSubmit={[Function]}

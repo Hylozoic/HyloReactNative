@@ -3,6 +3,17 @@
 exports[`PostEditor has navigation options 1`] = `
 Object {
   "headerBackTitle": null,
+  "headerLeft": <HeaderBackButton
+    buttonImage={
+      Object {
+        "testUri": "../../react-navigation/src/views/assets/back-icon.png",
+      }
+    }
+    onPress={[Function]}
+    pressColorAndroid="rgba(0, 0, 0, .32)"
+    tintColor="#808c9b"
+    truncatedTitle="Back"
+  />,
   "headerRight": <HeaderButton
     disableOnClick={true}
     disabled={false}
@@ -30,7 +41,9 @@ exports[`PostEditor renders a new editor correctly 1`] = `
   behavior="padding"
   keyboardVerticalOffset={64}
 >
-  <ScrollView>
+  <ScrollView
+    keyboardShouldPersistTaps="handled"
+  >
     <View>
       <SectionLabel>
         What are you posting today?
@@ -59,6 +72,7 @@ exports[`PostEditor renders a new editor correctly 1`] = `
         <TextInput
           allowFontScaling={true}
           editable={true}
+          maxLength={100}
           onChangeText={[Function]}
           placeholder="What do you want to discuss?"
           placeholderTextColor="#c0c6cd"
@@ -69,15 +83,28 @@ exports[`PostEditor renders a new editor correctly 1`] = `
       <SectionLabel>
         Details
       </SectionLabel>
-      <TouchableOpacity
-        activeOpacity={0.2}
-        onPress={[Function]}
-      >
-        <Details
-          details={undefined}
-          placeholder="What else should we know?"
-        />
-      </TouchableOpacity>
+      <InlineEditor
+        autoGrow={false}
+        communityId={undefined}
+        containerStyle={
+          Object {
+            "borderBottomColor": "#c0c6cd",
+            "borderBottomWidth": 0.5,
+          }
+        }
+        editable={true}
+        inputStyle={
+          Object {
+            "fontFamily": "Circular-Book",
+          }
+        }
+        onChange={[Function]}
+        onFocusToggle={[Function]}
+        onInsertTopic={[Function]}
+        placeholder="What else should we know?"
+        submitting={undefined}
+        value=""
+      />
       <TouchableOpacity
         activeOpacity={0.2}
         onPress={[Function]}
@@ -100,26 +127,16 @@ exports[`PostEditor renders a new editor correctly 1`] = `
       </TouchableOpacity>
     </View>
   </ScrollView>
-  <View>
-    <View>
-      <TouchableOpacity
-        activeOpacity={0.2}
-        onPress={[Function]}
-      >
-        <Icon
-          name="Paperclip"
-        />
-      </TouchableOpacity>
-      <TouchableOpacity
-        activeOpacity={0.2}
-        onPress={[Function]}
-      >
-        <Icon
-          name="AddImage"
-        />
-      </TouchableOpacity>
-    </View>
-  </View>
+  <Toolbar
+    announcementEnabled={false}
+    canModerate={undefined}
+    filePickerPending={undefined}
+    imagePickerPending={undefined}
+    post={undefined}
+    showFilePicker={[Function]}
+    showImagePicker={[Function]}
+    toggleAnnoucement={[Function]}
+  />
 </Unknown>
 `;
 
@@ -129,7 +146,9 @@ exports[`PostEditor renders correctly while saving 1`] = `
   keyboardVerticalOffset={64}
   onLayout={[Function]}
 >
-  <RCTScrollView>
+  <RCTScrollView
+    keyboardShouldPersistTaps="handled"
+  >
     <View>
       <View>
         <Text
@@ -236,6 +255,7 @@ exports[`PostEditor renders correctly while saving 1`] = `
           <TextInput
             allowFontScaling={true}
             editable={true}
+            maxLength={100}
             onChangeText={[Function]}
             placeholder="What do you want to discuss?"
             placeholderTextColor="#c0c6cd"
@@ -250,33 +270,25 @@ exports[`PostEditor renders correctly while saving 1`] = `
         >
           Details
         </Text>
-        <View
-          accessibilityComponentType={undefined}
-          accessibilityLabel={undefined}
-          accessibilityTraits={undefined}
-          accessible={true}
-          collapsable={undefined}
-          hasTVPreferredFocus={undefined}
-          hitSlop={undefined}
-          isTVSelectable={true}
-          nativeID={undefined}
-          onLayout={undefined}
-          onResponderGrant={[Function]}
-          onResponderMove={[Function]}
-          onResponderRelease={[Function]}
-          onResponderTerminate={[Function]}
-          onResponderTerminationRequest={[Function]}
-          onStartShouldSetResponder={[Function]}
-          testID={undefined}
-          tvParallaxProperties={undefined}
-        >
-          <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
-          >
-            What else should we know?
-          </Text>
+        <View>
+          <View>
+            <TextInput
+              allowFontScaling={true}
+              blurOnSubmit={false}
+              editable={true}
+              multiline={true}
+              onBlur={[Function]}
+              onChangeText={[Function]}
+              onContentSizeChange={[Function]}
+              onFocus={[Function]}
+              onSelectionChange={[Function]}
+              placeholder="What else should we know?"
+              placeholderTextColor="#c0c6cd"
+              selection={undefined}
+              underlineColorAndroid="transparent"
+              value=""
+            />
+          </View>
         </View>
         <View
           accessibilityComponentType={undefined}
@@ -387,7 +399,9 @@ exports[`PostEditor renders correctly while saving 2`] = `
   keyboardVerticalOffset={64}
   onLayout={[Function]}
 >
-  <RCTScrollView>
+  <RCTScrollView
+    keyboardShouldPersistTaps="handled"
+  >
     <View>
       <View>
         <Text
@@ -494,6 +508,7 @@ exports[`PostEditor renders correctly while saving 2`] = `
           <TextInput
             allowFontScaling={true}
             editable={false}
+            maxLength={100}
             onChangeText={[Function]}
             placeholder="What do you need help with?"
             placeholderTextColor="#c0c6cd"
@@ -508,33 +523,25 @@ exports[`PostEditor renders correctly while saving 2`] = `
         >
           Details
         </Text>
-        <View
-          accessibilityComponentType={undefined}
-          accessibilityLabel={undefined}
-          accessibilityTraits={undefined}
-          accessible={true}
-          collapsable={undefined}
-          hasTVPreferredFocus={undefined}
-          hitSlop={undefined}
-          isTVSelectable={true}
-          nativeID={undefined}
-          onLayout={undefined}
-          onResponderGrant={[Function]}
-          onResponderMove={[Function]}
-          onResponderRelease={[Function]}
-          onResponderTerminate={[Function]}
-          onResponderTerminationRequest={[Function]}
-          onStartShouldSetResponder={[Function]}
-          testID={undefined}
-          tvParallaxProperties={undefined}
-        >
-          <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
-          >
-            What else should we know?
-          </Text>
+        <View>
+          <View>
+            <TextInput
+              allowFontScaling={true}
+              blurOnSubmit={false}
+              editable={false}
+              multiline={true}
+              onBlur={[Function]}
+              onChangeText={[Function]}
+              onContentSizeChange={[Function]}
+              onFocus={[Function]}
+              onSelectionChange={[Function]}
+              placeholder="What else should we know?"
+              placeholderTextColor="#c0c6cd"
+              selection={undefined}
+              underlineColorAndroid="transparent"
+              value=""
+            />
+          </View>
         </View>
         <View
           accessibilityComponentType={undefined}
@@ -644,7 +651,9 @@ exports[`PostEditor renders with a post 1`] = `
   behavior="padding"
   keyboardVerticalOffset={64}
 >
-  <ScrollView>
+  <ScrollView
+    keyboardShouldPersistTaps="handled"
+  >
     <View>
       <SectionLabel>
         What are you posting today?
@@ -673,6 +682,7 @@ exports[`PostEditor renders with a post 1`] = `
         <TextInput
           allowFontScaling={true}
           editable={true}
+          maxLength={100}
           onChangeText={[Function]}
           placeholder="What do you want to discuss?"
           placeholderTextColor="#c0c6cd"
@@ -683,15 +693,28 @@ exports[`PostEditor renders with a post 1`] = `
       <SectionLabel>
         Details
       </SectionLabel>
-      <TouchableOpacity
-        activeOpacity={0.2}
-        onPress={[Function]}
-      >
-        <Details
-          details={undefined}
-          placeholder="What else should we know?"
-        />
-      </TouchableOpacity>
+      <InlineEditor
+        autoGrow={false}
+        communityId={undefined}
+        containerStyle={
+          Object {
+            "borderBottomColor": "#c0c6cd",
+            "borderBottomWidth": 0.5,
+          }
+        }
+        editable={true}
+        inputStyle={
+          Object {
+            "fontFamily": "Circular-Book",
+          }
+        }
+        onChange={[Function]}
+        onFocusToggle={[Function]}
+        onInsertTopic={[Function]}
+        placeholder="What else should we know?"
+        submitting={undefined}
+        value=""
+      />
       <TouchableOpacity
         activeOpacity={0.2}
         onPress={[Function]}
@@ -717,7 +740,6 @@ exports[`PostEditor renders with a post 1`] = `
           Images
         </SectionLabel>
         <ImageSelector
-          id={undefined}
           imageUrls={
             Array [
               "http://foo.com/foo.png",
@@ -731,26 +753,20 @@ exports[`PostEditor renders with a post 1`] = `
       </View>
     </View>
   </ScrollView>
-  <View>
-    <View>
-      <TouchableOpacity
-        activeOpacity={0.2}
-        onPress={[Function]}
-      >
-        <Icon
-          name="Paperclip"
-        />
-      </TouchableOpacity>
-      <TouchableOpacity
-        activeOpacity={0.2}
-        onPress={[Function]}
-      >
-        <Icon
-          name="AddImage"
-        />
-      </TouchableOpacity>
-    </View>
-  </View>
+  <Toolbar
+    announcementEnabled={false}
+    canModerate={undefined}
+    filePickerPending={undefined}
+    imagePickerPending={undefined}
+    post={
+      Object {
+        "details": "myDetails",
+      }
+    }
+    showFilePicker={[Function]}
+    showImagePicker={[Function]}
+    toggleAnnoucement={[Function]}
+  />
 </Unknown>
 `;
 

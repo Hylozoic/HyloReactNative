@@ -4,6 +4,7 @@ import ReactShallowRenderer from 'react-test-renderer/shallow'
 import ReactTestRenderer from 'react-test-renderer'
 import Thread from './Thread'
 
+jest.mock('../MessageInput', () => 'MessageInput')
 jest.mock('react-native-device-info')
 
 describe('Thread', () => {
@@ -47,7 +48,7 @@ describe('Thread', () => {
 
   it('matches the last snapshot', () => {
     const renderer = new ReactShallowRenderer()
-    renderer.render(<Thread { ...props } />)
+    renderer.render(<Thread {...props} />)
     expect(renderer.getRenderOutput()).toMatchSnapshot()
   })
 
@@ -55,7 +56,7 @@ describe('Thread', () => {
     let root
 
     beforeEach(() => {
-      root = ReactTestRenderer.create(<Thread { ...props } />).root
+      root = ReactTestRenderer.create(<Thread {...props} />).root
     })
 
     it('scrolls on new message from anyone', () => {
@@ -78,7 +79,7 @@ describe('Thread', () => {
     let root
 
     beforeEach(() => {
-      root = ReactTestRenderer.create(<Thread { ...props } />).root
+      root = ReactTestRenderer.create(<Thread {...props} />).root
       root.instance.atBottom = () => false
     })
 

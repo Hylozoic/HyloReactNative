@@ -7,7 +7,7 @@ import {
   defaultUserSettings
 } from '../SignupFlow.store.js'
 import {
-  getSkillsFromOrm
+  getMySkillsFromOrm
 } from '../../SkillEditor/SkillEditor.store'
 import { isEmpty } from 'lodash/fp'
 import { redirectAfterLogin, resetToMainRoute } from 'util/navigation'
@@ -15,7 +15,7 @@ import { getNavigationAction } from '../../DeepLinkHandler/DeepLinkHandler.store
 
 export function mapStateToProps (state, props) {
   const { name, email, password, confirmPassword, location, avatarUrl } = getUserSettings(state)
-  const skills = getSkillsFromOrm(state).map(s => s.name)
+  const skills = getMySkillsFromOrm(state).map(s => s.name)
   const showPasswordField = !isEmpty(password)
 
   return {

@@ -1,13 +1,13 @@
 import { connect } from 'react-redux'
-import { get } from 'lodash/fp'
+import { ALL_COMMUNITIES_ID } from '../../store/models/Community'
 
 import fetchPost from '../../store/actions/fetchPost'
-import { getCommentEdits } from './CommentEditor/CommentEditor.store'
-import getPost, { presentPost } from '../../store/selectors/getPost'
+import { createComment } from './CommentEditor/CommentEditor.store'
+import { getPresentedPost } from '../../store/selectors/getPost'
 import getCurrentCommunityId from '../../store/selectors/getCurrentCommunityId'
 import getMe from '../../store/selectors/getMe'
 import makeGoToCommunity from '../../store/actions/makeGoToCommunity'
-import { mapWhenFocused, mergeWhenFocused } from 'util/connector'
+import { isNull, isUndefined } from 'lodash/fp'
 
 function getPostId (state, props) {
   return props.navigation.state.params.id
@@ -16,15 +16,10 @@ function getPostId (state, props) {
 export function mapStateToProps (state, props) {
   const id = getPostId(state, props)
   const currentUser = getMe(state, props)
-  const commentEdit = getCommentEdits(state, {postId: id})
   const communityId = getCurrentCommunityId(state, props)
-  let post = presentPost(getPost(state, {id}), communityId)
-
   return {
-    post,
-    currentUser,
-    commentEdit,
-    isFocused: props.isFocused
+    post: getPresentedPost(state, {id, communityId}),
+    currentUser
   }
 }
 
@@ -35,29 +30,18 @@ export function mapDispatchToProps (dispatch, props) {
     fetchPost: () => dispatch(fetchPost(id)),
     editPost: () => props.navigation.navigate({routeName: 'PostEditor', params: {id}, key: 'PostEditor'}),
     showMember: id => props.navigation.navigate({routeName: 'MemberProfile', params: {id}, key: 'MemberProfile'}),
-    showTopic: topicName => props.navigation.navigate({routeName: 'Feed', params: {topicName}, key: 'Feed'}),
-    newComment: communityId => {
-      return props.navigation.navigate('CommentEditor', {
-        postId: id,
-        communityId
-      })
+    showTopic: (topicName, communityId) => {
+      // All Communities and Network feed to topic nav
+      // currently not supported
+      if (communityId === ALL_COMMUNITIES_ID || (isNull(communityId) || isUndefined(communityId))) {
+        return props.navigation.navigate({routeName: 'TopicSupportComingSoon', key: 'TopicSupportComingSoon'})
+      } else {
+        return props.navigation.navigate({routeName: 'Feed', params: {communityId, topicName}, key: 'Feed'})
+      }
     },
+    createComment: value => dispatch(createComment(id, value)),
     goToCommunity: makeGoToCommunity(dispatch, props.navigation)
   }
 }
 
-export function mergeProps (stateProps, dispatchProps, ownProps) {
-  // TODO: handle posts in multiple communities
-  const communityId = get('communities.0.id', stateProps.post)
-  return {
-    ...stateProps,
-    ...dispatchProps,
-    newComment: () => dispatchProps.newComment(communityId)
-  }
-}
-
-export default connect(
-  mapWhenFocused(mapStateToProps),
-  mapWhenFocused(mapDispatchToProps),
-  mergeWhenFocused(mergeProps)
-)
+export default connect(mapStateToProps, mapDispatchToProps)

@@ -102,7 +102,7 @@ export function setUserSkills (userSkills) {
   }
 }
 
-export const getSkillsFromOrm = ormCreateSelector(
+export const getMySkillsFromOrm = ormCreateSelector(
   orm,
   state => state.orm,
   ({ Me }) => {

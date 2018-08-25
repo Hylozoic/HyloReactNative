@@ -45,6 +45,7 @@ describe('mergeProps', () => {
     expect(mergedProps.reinviteAll()).toMatchSnapshot()
     expect(mergedProps.expireInvitation(10)).toMatchSnapshot()
     expect(mergedProps.resendInvitation(10)).toMatchSnapshot()
+    expect(mergedProps.allowCommunityInvites(1, true)).toMatchSnapshot()
     expect(mergedProps).toMatchSnapshot()
   })
 })

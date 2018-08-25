@@ -1,5 +1,5 @@
 import React, { Component, PureComponent } from 'react'
-import { Clipboard, Dimensions, Text, View, TextInput, TouchableOpacity, ScrollView } from 'react-native'
+import { Clipboard, Dimensions, Text, View, TextInput, TouchableOpacity, ScrollView, Switch } from 'react-native'
 import { TabViewAnimated, TabBar } from 'react-native-tab-view'
 import KeyboardFriendlyView from '../KeyboardFriendlyView'
 import Button from '../Button'
@@ -7,6 +7,7 @@ import header from 'util/header'
 import { get, isEmpty, compact } from 'lodash/fp'
 import { humanDate } from 'hylo-utils/text'
 import styles from './InvitePeople.styles'
+import { caribbeanGreen } from 'style/colors'
 
 const initialLayout = {
   height: 0,
@@ -23,7 +24,7 @@ export const parseEmailList = emails =>
 
 export default class InvitePeople extends Component {
   static navigationOptions = ({navigation}) => header(navigation, {
-    title: 'Invite People',
+    title: 'Invite Members',
     headerBackButton: () => navigation.goBack()
   })
 
@@ -62,14 +63,16 @@ export default class InvitePeople extends Component {
 
   _renderScene = ({route}) => {
     if (this.props.pending) return <Text>Loading...</Text>
-
     switch (route.key) {
       case '0':
         return <SendInvitesPage inviteLink={this.props.inviteLink}
           pendingCreate={this.props.pendingCreate}
           communityName={this.props.community.name}
+          communityId={this.props.community.id}
+          communityMembersCanInvite={this.props.community.allowCommunityInvites}
           createInvitations={this.props.createInvitations}
-          regenerateAccessCode={this.props.regenerateAccessCode} />
+          regenerateAccessCode={this.props.regenerateAccessCode}
+          allowCommunityInvites={this.props.allowCommunityInvites} />
       case '1':
         return <PendingInvitesPage
           invites={this.props.invites}
@@ -101,7 +104,8 @@ export class SendInvitesPage extends PureComponent {
     this.state = {
       emails: '',
       copied: false,
-      inputText: `Hey! Here's an invite to the ${this.props.communityName} community on Hylo.`
+      inputText: `Hey! Here's an invite to the ${this.props.communityName} community on Hylo.`,
+      communityMembersCanInvite: get('communityMembersCanInvite', props)
     }
   }
 
@@ -155,6 +159,16 @@ export class SendInvitesPage extends PureComponent {
     })
   }
 
+  toggleAllowCommunityInvites = () => {
+    const { communityMembersCanInvite } = this.state
+    const { communityId } = this.props
+    this.setState({communityMembersCanInvite: !communityMembersCanInvite})
+    this.props.allowCommunityInvites(communityId, !communityMembersCanInvite)
+      .then(({error}) => {
+        if (error) this.setState({communityMembersCanInvite})
+      })
+  }
+
   render () {
     const {
       emails,
@@ -162,20 +176,30 @@ export class SendInvitesPage extends PureComponent {
       copied,
       successMessage,
       errorMessage,
-      sending
+      sending,
+      communityMembersCanInvite
     } = this.state
 
     const {
       inviteLink,
       pendingCreate
     } = this.props
-
     const disableSendBtn = !!(isEmpty(emails) || pendingCreate || sending)
 
     return (
       <ScrollView>
         <KeyboardFriendlyView style={styles.keyboardFriendlyContainer}>
           <View style={styles.container}>
+            <View style={styles.allowCommunityInvites}>
+              <Text>Let anyone in this community send invites</Text>
+              <View style={styles.allowCommunityInvitesSwitch}>
+                <Switch
+                  onValueChange={this.toggleAllowCommunityInvites}
+                  value={communityMembersCanInvite}
+                  onTintColor={caribbeanGreen}
+                />
+              </View>
+            </View>
             <Text style={styles.joinCommunityText}>Anyone with this link can join the community</Text>
             {inviteLink && <Text style={styles.joinCommunityLink}>{inviteLink}</Text>}
             {!inviteLink && <Text>No link has been set yet</Text>}

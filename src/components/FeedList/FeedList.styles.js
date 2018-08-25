@@ -9,6 +9,8 @@ export default {
     minHeight: 100
   },
   listControls: {
+    paddingTop: 12,
+    paddingBottom: 4,
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginBottom: 10,
@@ -25,10 +27,5 @@ export default {
   downArrow: {
     top: isIOS ? 2 : 4,
     marginLeft: 4
-  },
-  postRow: {
-    paddingBottom: 15,
-    marginRight: feedMargin,
-    marginLeft: feedMargin
   }
 }

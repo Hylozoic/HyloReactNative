@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import { get, isEmpty, chunk } from 'lodash/fp'
+import React from 'react'
+import { isEmpty, chunk } from 'lodash/fp'
 import Icon from '../../Icon'
 import { Text, View, TouchableOpacity, Image } from 'react-native'
 import { DEFAULT_AVATAR } from '../../../store/models/Community'
@@ -7,7 +7,7 @@ import {
   capeCod10, rhino30, caribbeanGreen
 } from '../../../style/colors'
 
-export default class PostCommunities extends Component {
+export default class PostCommunities extends React.PureComponent {
   static defaultState = {
     expanded: false
   }
@@ -24,11 +24,12 @@ export default class PostCommunities extends Component {
   }
 
   render () {
-    const { communities, slug, goToCommunity } = this.props
+    const { communities, goToCommunity, shouldShowCommunities } = this.props
 
-    // don't show if there are no communities or this isn't cross posted
-
-    if (isEmpty(communities) || (communities.length === 1 && get('0.slug', communities) === slug)) return null
+    // don't show if there are no communities or there is exactly 1 community and the flag isn't set
+    if (isEmpty(communities) || (communities.length === 1 && !shouldShowCommunities)) {
+      return null
+    }
 
     const { expanded } = this.state
 
@@ -60,7 +61,7 @@ export function CommunityList ({communities, goToCommunity, expandFunc}) {
   const moreCommunities = communities.length > 1
   const othersText = n => n === 1 ? '1 other' : `${n} others`
   return <View style={[styles.communityList, styles.row]}>
-    <TouchableOpacity onPress={() => goToCommunity(communities[0].id)} style={{flex: -1}}><Text style={styles.linkText} numberOfLines={1}>{communities[0].name}</Text></TouchableOpacity>
+    <TouchableOpacity onPress={() => goToCommunity && goToCommunity(communities[0].id)} style={{flex: -1}}><Text style={styles.linkText} numberOfLines={1}>{communities[0].name}</Text></TouchableOpacity>
     {moreCommunities && <View style={[styles.row, {flex: 0}]}>
       <Text style={[styles.reminderText]}> and </Text>
       <TouchableOpacity onPress={expandFunc}><Text style={styles.linkText}>{othersText(communities.length - 1)}</Text></TouchableOpacity>
@@ -78,7 +79,7 @@ export function CommunityCell ({ community, goToCommunity }) {
   const { name, avatarUrl } = community
   const imageSource = {uri: avatarUrl || DEFAULT_AVATAR}
 
-  return <TouchableOpacity style={[styles.communityCell, styles.row]} onPress={() => goToCommunity(community.id)}>
+  return <TouchableOpacity style={[styles.communityCell, styles.row]} onPress={() => goToCommunity && goToCommunity(community.id)}>
     <Image source={imageSource} style={styles.communityAvatar} />
     <Text style={[styles.linkText, styles.communityCell]} numberOfLines={1}>{name}</Text>
   </TouchableOpacity>
