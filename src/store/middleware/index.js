@@ -16,7 +16,7 @@ const middleware = compact([
   optimisticMiddleware,
   pendingMiddleware,
   promiseMiddleware,
-  mixpanelMiddleware,
+  !isDev && mixpanelMiddleware,
   isDev && createLogger({
     collapsed: (getState, action, logEntry) => !logEntry.error
   })

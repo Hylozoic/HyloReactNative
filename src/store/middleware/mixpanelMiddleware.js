@@ -1,5 +1,4 @@
 import { get, isString, isObject, omit } from 'lodash/fp'
-import { isDev } from 'util/testing'
 import getMixpanel from '../selectors/getMixpanel'
 import getIsLoggedIn from '../selectors/getIsLoggedIn'
 import getMe from '../selectors/getMe'
@@ -7,7 +6,7 @@ import getMe from '../selectors/getMe'
 export default function mixpanelMiddleware (store) {
   return next => action => {
     const { type, meta } = action
-    if (!isDev && !type.match(/_PENDING$/) && meta && meta.analytics) {
+    if (!type.match(/_PENDING$/) && meta && meta.analytics) {
       // meta.analytics can be either simply true, a string (name of event) or a hash
       // with data that will be attached to the event sent to mixpanel (eventName being
       // a required key).
@@ -21,7 +20,7 @@ export default function mixpanelMiddleware (store) {
       const trackingEventName = get('eventName', analytics) ||
         (isString(analytics) && analytics) ||
         type
-      const analyticsData = isObject(analytics) ? omit('eventName', analytics) : null
+      const analyticsData = isObject(analytics) ? omit('eventName', analytics) : {}
       if (isLoggedIn) mixpanel.identify(getMe(state).id)
       mixpanel.track(trackingEventName, analyticsData)
     }
