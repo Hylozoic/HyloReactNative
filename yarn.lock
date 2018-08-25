@@ -5935,9 +5935,9 @@ react-native-linear-gradient@^2.3.0:
   dependencies:
     prop-types "^15.5.10"
 
-"react-native-mixpanel@https://github.com/Kabangi/react-native-mixpanel":
-  version "1.0.2"
-  resolved "https://github.com/Kabangi/react-native-mixpanel#701b1f8eabb682b334182273e11c1d01c5561bc5"
+react-native-mixpanel@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/react-native-mixpanel/-/react-native-mixpanel-1.1.1.tgz#012580fb1b42b6c0ee35d0af0a24af68cfa79b89"
 
 react-native-onesignal@^3.1.0:
   version "3.1.4"
