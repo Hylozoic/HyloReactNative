@@ -8,4 +8,6 @@ target 'HyloReactNative' do
   pod 'FBSDKShareKit'
   pod 'FBSDKLoginKit'
 
+  pod 'react-native-intercom', :path => '../node_modules/react-native-intercom'
+
 end

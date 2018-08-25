@@ -7,6 +7,7 @@ import LoadingModal from '../LoadingModal'
 import RootNavigator from '../RootNavigator'
 import SessionCheck from '../SessionCheck'
 import VersionCheck from '../VersionCheck'
+import IntercomInit from '../IntercomInit'
 import receivePushNotification from '../../store/actions/receivePushNotification'
 
 export default class RootView extends React.Component {
@@ -59,6 +60,7 @@ export default class RootView extends React.Component {
         <DeepLinkHandler
           navigator={this.navigator}
           onesignalNotification={onesignalNotification} />
+        <IntercomInit />
       </SessionCheck>
       <LoadingModal />
       <RootNavigator ref={this.setNavigator} />

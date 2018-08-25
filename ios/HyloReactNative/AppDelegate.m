@@ -19,6 +19,7 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <RNGoogleSignin/RNGoogleSignin.h>
 #import <React/RCTLinkingManager.h>
+#import "Intercom/intercom.h"
 
 @implementation AppDelegate
 @synthesize oneSignal = _oneSignal;
@@ -78,6 +79,9 @@ RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
                                                         kOSSettingsKeyAutoPrompt: @false
                                                       }];
 
+  // Initialize Intercom
+  [Intercom setApiKey:@"<#ios_sdk-...#>" forAppId:@"wwelodje"];                                                      
+                                                      
   return YES;
 }
 
