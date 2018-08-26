@@ -1,7 +1,5 @@
 import { get, isString, isObject, omit } from 'lodash/fp'
 import getMixpanel from '../selectors/getMixpanel'
-import getIsLoggedIn from '../selectors/getIsLoggedIn'
-import getMe from '../selectors/getMe'
 
 export default function mixpanelMiddleware (store) {
   return next => action => {
@@ -14,14 +12,12 @@ export default function mixpanelMiddleware (store) {
       // NOTE: the mixpanel object is created during initialization of the mixpanel
       // reducer
       const state = store.getState()
-      const isLoggedIn = getIsLoggedIn(state)
       const mixpanel = getMixpanel(state)
       const { analytics } = meta
       const trackingEventName = get('eventName', analytics) ||
         (isString(analytics) && analytics) ||
         type
       const analyticsData = isObject(analytics) ? omit('eventName', analytics) : {}
-      if (isLoggedIn) mixpanel.identify(getMe(state).id)
       mixpanel.track(trackingEventName, analyticsData)
     }
     return next(action)

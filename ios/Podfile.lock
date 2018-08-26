@@ -12,18 +12,18 @@ PODS:
   - FBSDKShareKit (4.23.0):
     - FBSDKCoreKit
   - GoogleSignIn (4.0.2):
-    - "GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)"
-    - "GoogleToolboxForMac/NSString+URLArguments (~> 2.1)"
+    - GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)
+    - GoogleToolboxForMac/NSString+URLArguments (~> 2.1)
     - GTMOAuth2 (~> 1.0)
     - GTMSessionFetcher/Core (~> 1.1)
   - GoogleToolboxForMac/DebugUtils (2.1.1):
     - GoogleToolboxForMac/Defines (= 2.1.1)
   - GoogleToolboxForMac/Defines (2.1.1)
-  - "GoogleToolboxForMac/NSDictionary+URLArguments (2.1.1)":
+  - GoogleToolboxForMac/NSDictionary+URLArguments (2.1.1):
     - GoogleToolboxForMac/DebugUtils (= 2.1.1)
     - GoogleToolboxForMac/Defines (= 2.1.1)
-    - "GoogleToolboxForMac/NSString+URLArguments (= 2.1.1)"
-  - "GoogleToolboxForMac/NSString+URLArguments (2.1.1)"
+    - GoogleToolboxForMac/NSString+URLArguments (= 2.1.1)
+  - GoogleToolboxForMac/NSString+URLArguments (2.1.1)
   - GTMOAuth2 (1.1.4):
     - GTMSessionFetcher (~> 1.1)
   - GTMSessionFetcher (1.1.10):
@@ -42,19 +42,6 @@ DEPENDENCIES:
   - Intercom
   - Mixpanel
 
-SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
-    - Bolts
-    - FBSDKCoreKit
-    - FBSDKLoginKit
-    - FBSDKShareKit
-    - GoogleSignIn
-    - GoogleToolboxForMac
-    - GTMOAuth2
-    - GTMSessionFetcher
-    - Intercom
-    - Mixpanel
-
 SPEC CHECKSUMS:
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   FBSDKCoreKit: d7829f5a69901cd7296105328e4c3c3fc7da6518
@@ -69,4 +56,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 6414057851ce01c7a435305807ef290d964ddd60
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.3.1

@@ -6,7 +6,7 @@ import graphQLMiddleware from './graphQL'
 import optimisticMiddleware from './optimistic'
 import pendingMiddleware from './pending'
 import promiseMiddleware from 'redux-promise'
-import intercomMiddleware from './intercomMiddleware'
+import userFetchedMiddleware from './userFetchedMiddleware'
 import mixpanelMiddleware from './mixpanelMiddleware'
 import { isDev } from 'util/testing'
 
@@ -17,7 +17,7 @@ const middleware = compact([
   optimisticMiddleware,
   pendingMiddleware,
   promiseMiddleware,
-  intercomMiddleware,
+  userFetchedMiddleware,
   !isDev && mixpanelMiddleware,
   isDev && createLogger({
     collapsed: (getState, action, logEntry) => !logEntry.error
