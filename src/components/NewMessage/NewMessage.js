@@ -97,7 +97,7 @@ export default class NewMessage extends React.Component {
 }
 
 export function ParticipantInput ({ participants, onChangeText, removeParticipant, text }) {
-  const placeholderText = isEmpty(participants) ? 'Type in the names of people to message' : ''
+  const placeholderText = 'Type in the names of people to message'
   return <View style={styles.scrollViewWrapper}>
     <ScrollView
       contentContainerStyle={styles.participantInputContainer}
