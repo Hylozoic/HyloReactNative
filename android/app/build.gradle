@@ -162,6 +162,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-intercom')
     compile project(':react-native-mixpanel')
     compile project(':react-native-sentry')
     compile project(':react-native-restart')

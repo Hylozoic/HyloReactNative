@@ -19,6 +19,7 @@ export default function fetchCurrentUser () {
           twitterName
           newNotificationCount
           unseenThreadCount
+          intercomHash
           memberships {
             id
             lastViewedAt

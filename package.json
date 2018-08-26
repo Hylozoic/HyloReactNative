@@ -42,6 +42,7 @@
     "react-native-google-signin": "https://github.com/njt1982/react-native-google-signin#1c99bcf",
     "react-native-htmlview": "^0.12.0",
     "react-native-image-picker": "^0.26.7",
+    "react-native-intercom": "^12.0.0",
     "react-native-linear-gradient": "^2.3.0",
     "react-native-mixpanel": "^1.1.1",
     "react-native-onesignal": "^3.1.0",
