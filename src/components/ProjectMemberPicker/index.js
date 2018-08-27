@@ -9,27 +9,32 @@ import {
   ScrollView
 } from 'react-native'
 
+import PeopleChooser from '../PeopleChooser'
+
 import Icon from '../Icon'
-// import styles from './Search.styles'
-const styles = {}
 
 export default class ProjectMemberPiccker extends React.Component {
-  componentWillUnmount () {
-    const emptyString = ''
-    this.props.updateSearch(emptyString)
-  }
-
   render () {
-    const { style, type, results, onSelect, updateSearch, onCancel } = this.props
-
-    const renderItem = ({ item }) =>
-      <SearchResult item={item} type={type} onPress={() => onSelect(item)} />
+    const { style, onCancel, updateMembers, members } = this.props
 
     return <ScrollView keyboardShouldPersistTaps='handled'
       contentContainerStyle={[styles.container, style]}>
-      <View style={styles.inputWrapper}>
-        <Text>Roles</Text>
-      </View>
+      <TouchableOpacity onPress={onCancel}>
+        <Icon name='Ex' style={styles.cancelButton} />
+      </TouchableOpacity>
+      <PeopleChooser updatePeople={updateMembers} people={members} showRecentContacts />
     </ScrollView>
+  }
+}
+
+const styles = {
+  container: {
+    backgroundColor: 'white',
+    flex: 1
+  },
+  cancelButton: {
+    fontSize: 20,
+    paddingVertical: 5,
+    paddingHorizontal: 10
   }
 }

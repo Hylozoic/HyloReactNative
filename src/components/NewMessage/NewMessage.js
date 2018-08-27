@@ -1,7 +1,7 @@
 import React from 'react'
 import MessageInput from '../MessageInput'
 import KeyboardFriendlyView from '../KeyboardFriendlyView'
-import PersonPicker from '../PersonPicker'
+import PeopleChooser from '../PeopleChooser'
 import styles from './NewMessage.styles'
 import { keyboardAvoidingViewProps as kavProps } from 'util/viewHelpers'
 
@@ -19,9 +19,20 @@ export default class NewMessage extends React.Component {
     this.setState({viewKey: viewKey + 1})
   }
 
+  createMessage = text => {
+    const { participants } = this.state
+    const participantIds = participants.map(p => p.id)
+    this.props.createMessage(text, participantIds)
+  }
+
+  updateParticipants = participants => {
+    this.setState({
+      participants
+    })
+  }
+
   render () {
     const {
-      createMessage,
       mockViewKey // just for testing
     } = this.props
 
@@ -32,11 +43,11 @@ export default class NewMessage extends React.Component {
       style={styles.container}
       {...{...kavProps, behavior: 'height'}}
       key={mockViewKey || this.state.viewKey}>
-      <PersonPicker updatePeople={updated => console.log('updatedPeople', updated)} {...this.props} />
+      <PeopleChooser updatePeople={this.updateParticipants} {...this.props} showRecentContacts />
       <MessageInput
         style={styles.messageInput}
         multiline
-        onSubmit={createMessage}
+        onSubmit={this.createMessage}
         onBlur={this.onBlurMessageInput}
         placeholder='Type your message here'
         emptyParticipants={emptyParticipantsList}

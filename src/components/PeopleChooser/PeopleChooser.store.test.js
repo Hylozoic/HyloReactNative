@@ -1,6 +1,6 @@
 import reducer, {
   setParticipants, setMessage, SET_PARTICIPANTS, REMOVE_PARTICIPANT, CREATE_MESSAGE, SET_MESSAGE
-} from './PersonPicker.store'
+} from './PeopleChooser.store'
 
 describe('reducer', () => {
   describe('on SET_PARTICIPANTS', () => {

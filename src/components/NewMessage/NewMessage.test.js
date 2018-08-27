@@ -22,7 +22,7 @@ describe('NewMessage', () => {
       recent: true,
       suggestions: true
     }
-    const participantInputText = ''
+    const personInputText = ''
 
     renderer.render(<NewMessage
       recentContacts={recentContacts}
@@ -32,7 +32,7 @@ describe('NewMessage', () => {
       addParticipant={() => {}}
       removeParticipant={() => {}}
       setParticipantInput={() => {}}
-      participantInputText={participantInputText}
+      personInputText={personInputText}
       createMessage={() => {}}
       pending={pending}
       />)
@@ -40,7 +40,7 @@ describe('NewMessage', () => {
 
     expect(actual).toMatchSnapshot()
 
-    const participantInputText2 = 'Jon'
+    const personInputText2 = 'Jon'
 
     renderer.render(<NewMessage
       recentContacts={recentContacts}
@@ -50,7 +50,7 @@ describe('NewMessage', () => {
       addParticipant={() => {}}
       removeParticipant={() => {}}
       setParticipantInput={() => {}}
-      participantInputText={participantInputText2}
+      personInputText={personInputText2}
       createMessage={() => {}}
       pending={pending}
       />)

@@ -32,7 +32,7 @@ describe('mergeProps', () => {
   it('sets up fetchSuggestions', () => {
     const stateProps = {
       ...defaultStateProps,
-      participantInputText: 'not empty',
+      personInputText: 'not empty',
       suggestions: []
     }
     const dispatchProps = {

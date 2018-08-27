@@ -236,10 +236,6 @@ export default class PostEditor extends React.Component {
     topicsPicked: true
   })
 
-  removeRole = roleName => () => this.setState({
-    roles: this.state.roles.filter(t => t !== roleName)
-  })
-
   showTopicPicker = () => {
     this.setState({ showTopicPicker: true })
     this.props.navigation.setParams({ showTopicPicker: true })
@@ -291,6 +287,17 @@ export default class PostEditor extends React.Component {
         break
     }
     this.setState({title})
+  }
+
+  updateMembers = members => {
+    this.setState({
+      members
+    })
+  }
+
+  removeMember = member => () => {
+    const { members } = this.state
+    this.updateMembers(members.filter(m => m.id != member.id))
   }
 
   render () {
@@ -372,7 +379,7 @@ export default class PostEditor extends React.Component {
             ]}
             onPress={this.showMemberPicker}>
             <View style={styles.topicLabel}>
-              <SectionLabel>Roles</SectionLabel>
+              <SectionLabel>Members</SectionLabel>
               <View style={styles.topicAddBorder}><Icon name='Plus' style={styles.topicAdd} /></View>
             </View>
             <Topics onPress={this.removeMember} topics={members} placeholder={membersPlaceholder} />
@@ -421,7 +428,7 @@ export default class PostEditor extends React.Component {
         <ProjectMemberPicker
           members={members}
           onCancel={this.cancelMemberPicker}
-          onSelect={choices => console.log('picked members', choices)} />
+          updateMembers={this.updateMembers} />
       </Modal>}
     </KeyboardFriendlyView>
   }

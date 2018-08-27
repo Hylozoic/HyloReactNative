@@ -33,7 +33,7 @@ export default {
   scrollViewWrapper: {
     height: 60
   },
-  participantInputContainer: {
+  personInputContainer: {
     height: 60,
     flexDirection: 'row',
     alignItems: 'center',
@@ -42,10 +42,10 @@ export default {
     borderBottomColor: capeCod20,
     minWidth: screenWidth
   },
-  participantTextInput: {
+  personTextInput: {
     minWidth: screenWidth
   },
-  participant: {
+  person: {
     borderWidth: 1,
     borderColor: capeCod20,
     borderRadius: 4,
@@ -56,7 +56,7 @@ export default {
     paddingLeft: 5,
     paddingRight: 10
   },
-  participantAvatar: {
+  personAvatar: {
     marginRight: 10
   },
   closeIcon: {

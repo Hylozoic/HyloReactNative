@@ -1,5 +1,5 @@
-import { mapStateToProps, mapDispatchToProps, mergeProps } from './PersonPicker.connector'
-import { MODULE_NAME, defaultState, FETCH_SUGGESTIONS, FETCH_CONTACTS, FETCH_RECENT_CONTACTS } from './PersonPicker.store.js'
+import { mapStateToProps, mapDispatchToProps, mergeProps } from './PeopleChooser.connector'
+import { MODULE_NAME, defaultState, FETCH_SUGGESTIONS, FETCH_CONTACTS, FETCH_RECENT_CONTACTS } from './PeopleChooser.store.js'
 
 describe('mapStateToProps', () => {
   it('returns the right keys and gets the pending values', () => {
@@ -32,7 +32,7 @@ describe('mergeProps', () => {
   it('sets up fetchSuggestions', () => {
     const stateProps = {
       ...defaultStateProps,
-      participantInputText: 'not empty',
+      personInputText: 'not empty',
       suggestions: []
     }
     const dispatchProps = {

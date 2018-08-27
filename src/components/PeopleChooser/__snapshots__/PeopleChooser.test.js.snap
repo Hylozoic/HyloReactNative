@@ -1,0 +1,107 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ContactRow renders correctly 1`] = `
+<TouchableOpacity
+  activeOpacity={0.2}
+  onPress={[Function]}
+>
+  <View>
+    <Avatar
+      avatarUrl="cone.png"
+      dimension={30}
+    />
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+    >
+      Contact One
+    </Text>
+  </View>
+</TouchableOpacity>
+`;
+
+exports[`PeopleChooser renders correctly 1`] = `
+<View>
+  <PersonInput
+    onChangeText={undefined}
+    people={Array []}
+    removePerson={[Function]}
+    text=""
+  />
+  <SectionList
+    contentContainerStyle={
+      Object {
+        "borderTopColor": "#d7d8d8",
+        "borderTopWidth": 0,
+        "paddingHorizontal": 12,
+      }
+    }
+    data={Array []}
+    disableVirtualization={false}
+    horizontal={false}
+    initialNumToRender={10}
+    keyExtractor={[Function]}
+    maxToRenderPerBatch={10}
+    onEndReachedThreshold={0.3}
+    renderItem={[Function]}
+    renderSectionHeader={[Function]}
+    scrollEventThrottle={50}
+    sections={Array []}
+    stickySectionHeadersEnabled={false}
+    updateCellsBatchingPeriod={50}
+    windowSize={21}
+  />
+</View>
+`;
+
+exports[`PeopleChooser renders correctly 2`] = `
+<View>
+  <PersonInput
+    onChangeText={undefined}
+    people={Array []}
+    removePerson={[Function]}
+    text="Jon"
+  />
+  <SectionList
+    contentContainerStyle={
+      Object {
+        "borderTopColor": "#d7d8d8",
+        "borderTopWidth": 0,
+        "paddingHorizontal": 12,
+      }
+    }
+    data={Array []}
+    disableVirtualization={false}
+    horizontal={false}
+    initialNumToRender={10}
+    keyExtractor={[Function]}
+    maxToRenderPerBatch={10}
+    onEndReachedThreshold={0.3}
+    renderItem={[Function]}
+    renderSectionHeader={[Function]}
+    scrollEventThrottle={50}
+    sections={
+      Array [
+        Object {
+          "data": Array [
+            Object {
+              "id": 7,
+            },
+            Object {
+              "id": 8,
+            },
+            Object {
+              "id": 9,
+            },
+          ],
+          "loading": true,
+        },
+      ]
+    }
+    stickySectionHeadersEnabled={false}
+    updateCellsBatchingPeriod={50}
+    windowSize={21}
+  />
+</View>
+`;

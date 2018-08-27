@@ -3,14 +3,14 @@ import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import ReactTestRenderer from 'react-test-renderer'
 import
-  PersonPicker, { ParticipantInput, Participant, ContactRow }
-from './PersonPicker'
+  PeopleChooser, { ParticipantInput, Participant, ContactRow }
+from './PeopleChooser'
 
 jest.mock('react-native-device-info')
 jest.mock('../MessageInput', () => 'MessageInput')
 jest.mock('../KeyboardFriendlyView', () => 'KeyboardFriendlyView')
 
-describe('PersonPicker', () => {
+describe('PeopleChooser', () => {
   it('renders correctly', () => {
     const renderer = new ReactShallowRenderer()
     const recentContacts = [{id: 1}, {id: 2}, {id: 3}]
@@ -22,9 +22,9 @@ describe('PersonPicker', () => {
       recent: true,
       suggestions: true
     }
-    const participantInputText = ''
+    const personInputText = ''
 
-    renderer.render(<PersonPicker
+    renderer.render(<PeopleChooser
       recentContacts={recentContacts}
       suggestions={suggestions}
       currentUser={currentUser}
@@ -32,7 +32,7 @@ describe('PersonPicker', () => {
       addParticipant={() => {}}
       removeParticipant={() => {}}
       setParticipantInput={() => {}}
-      participantInputText={participantInputText}
+      personInputText={personInputText}
       createMessage={() => {}}
       pending={pending}
       />)
@@ -40,9 +40,9 @@ describe('PersonPicker', () => {
 
     expect(actual).toMatchSnapshot()
 
-    const participantInputText2 = 'Jon'
+    const personInputText2 = 'Jon'
 
-    renderer.render(<PersonPicker
+    renderer.render(<PeopleChooser
       recentContacts={recentContacts}
       suggestions={suggestions}
       currentUser={currentUser}
@@ -50,7 +50,7 @@ describe('PersonPicker', () => {
       addParticipant={() => {}}
       removeParticipant={() => {}}
       setParticipantInput={() => {}}
-      participantInputText={participantInputText2}
+      personInputText={personInputText2}
       createMessage={() => {}}
       pending={pending}
       />)
@@ -69,7 +69,7 @@ describe('PersonPicker', () => {
       recentContacts: [],
       suggestions: []
     }
-    ReactTestRenderer.create(<PersonPicker {...props} />).getInstance()
+    ReactTestRenderer.create(<PeopleChooser {...props} />).getInstance()
     expect(props.fetchRecentContacts).toHaveBeenCalled()
     expect(props.loadParticipantsFromParams).toHaveBeenCalled()
   })
@@ -85,7 +85,7 @@ describe('PersonPicker', () => {
       mockViewKey: 1
     }
     it('increments the view key', () => {
-      const instance = ReactTestRenderer.create(<PersonPicker {...props} />).getInstance()
+      const instance = ReactTestRenderer.create(<PeopleChooser {...props} />).getInstance()
       instance.setState({viewKey: 2})
       instance.onBlurMessageInput()
       expect(instance.state.viewKey).toEqual(3)
