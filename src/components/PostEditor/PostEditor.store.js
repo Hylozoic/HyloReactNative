@@ -21,6 +21,7 @@ export function createPost (post) {
     imageUrls = [],
     fileUrls = [],
     topicNames = [],
+    memberIds = [],
     sendAnnouncement
   } = post
   const communityIds = communities.map(c => c.id)
@@ -37,6 +38,7 @@ export function createPost (post) {
         $fileUrls: [String]
         $announcement: Boolean
         $topicNames: [String]
+        $memberIds: [ID]        
       ) {
         createPost(data: {
           type: $type
@@ -47,6 +49,7 @@ export function createPost (post) {
           fileUrls: $fileUrls
           announcement: $announcement
           topicNames: $topicNames
+          memberIds: $memberIds
         }) {
           ${getPostFieldsFragment(false)}
         }
@@ -59,7 +62,8 @@ export function createPost (post) {
         imageUrls,
         fileUrls,
         announcement: sendAnnouncement,
-        topicNames
+        topicNames,
+        memberIds
       }
     },
     meta: {extractModel: 'Post'}

@@ -114,7 +114,7 @@ export default class PostEditor extends React.Component {
 
   _doSave = () => {
     const { navigation, save } = this.props
-    const { communityIds, fileUrls, imageUrls, title, detailsText, topics, type, announcementEnabled } = this.state
+    const { communityIds, fileUrls, imageUrls, title, detailsText, topics, type, announcementEnabled, members } = this.state
 
     const postData = {
       communities: communityIds.map(id => ({id})),
@@ -124,7 +124,8 @@ export default class PostEditor extends React.Component {
       title,
       sendAnnouncement: announcementEnabled,
       topicNames: topics.map(t => t.name),
-      type
+      type,
+      memberIds: members.map(m => m.id)
     }
 
     return save(postData)
