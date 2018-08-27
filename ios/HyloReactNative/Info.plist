@@ -93,13 +93,13 @@
 		</dict>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>This app requires access to the camera.</string>
+	<string>Hylo would like to access your camera for your profile photo upload. Your photos wont be shared without your permission.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>This requires access to the microphone.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>This app requires access to the photo library.</string>
+	<string>Hylo would like to access your photo gallery for your profile photo upload. Your photos wont be shared without your permission.</string>
 	<key>OneSignalAppID</key>
 	<string>${ONESIGNAL_APP_ID}</string>
 	<key>UIAppFonts</key>
