@@ -53,7 +53,7 @@ export default class PostEditor extends React.Component {
       save: this.save
     })
     if (!isNewPost) {
-      this.props.fetchDetailsText()
+      this.props.fetchDetailsAndMembers()
     }
   }
 
@@ -70,6 +70,9 @@ export default class PostEditor extends React.Component {
   componentDidUpdate (prevProps) {
     if (get('post.detailsText', this.props) !== get('post.detailsText', prevProps)) {
       this.setState({detailsText: get('post.detailsText', this.props)})
+    }
+    if (get('post.members', this.props) !== get('post.members', prevProps)) {
+      this.setState({members: get('post.members', this.props)})
     }
   }
 
@@ -88,8 +91,7 @@ export default class PostEditor extends React.Component {
       fileUrls,
       showTopicPicker: false,
       topics: get('topics', post) || [],
-      // FIXME: populate members properly
-      members: get('somekeyformembers', post) || [],
+      members: get('members', post) || [],
       topicsPicked: false,
       announcementEnabled: false,
       detailsFocused: false,

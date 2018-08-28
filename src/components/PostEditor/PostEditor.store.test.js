@@ -23,8 +23,8 @@ describe('updatePost', () => {
   })
 })
 
-describe('fetchDetailsText', () => {
+describe('fetchDetailsAndMembers', () => {
   it('should match the last snapshot', () => {
-    expect(store.fetchPostDetailsText(1)).toMatchSnapshot()
+    expect(store.fetchPostDetailsAndMembers(1)).toMatchSnapshot()
   })
 })

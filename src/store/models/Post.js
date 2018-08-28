@@ -16,6 +16,13 @@ PostCommenter.fields = {
   commenter: fk('Person', 'postcommenters')
 }
 
+export const ProjectMember = Model.createClass({})
+ProjectMember.modelName = 'ProjectMember'
+ProjectMember.fields = {
+  post: fk('Post', 'projectmembers'),
+  member: fk('Person', 'projectmembers')
+}
+
 const Post = Model.createClass({
   toString () {
     return `Post: ${this.name}`
@@ -61,6 +68,12 @@ Post.fields = {
     relatedName: 'postsCommented',
     through: 'PostCommenter',
     throughFields: [ 'post', 'commenter' ]
+  }),
+  members: many({
+    to: 'Person',
+    relatedName: 'projectsJoined',
+    through: 'ProjectMember',
+    throughFields: [ 'post', 'member' ]
   }),
   commentersTotal: attr(),
   commentsTotal: attr(),

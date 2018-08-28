@@ -99,7 +99,7 @@ Object {
 }
 `;
 
-exports[`fetchDetailsText should match the last snapshot 1`] = `
+exports[`fetchDetailsAndMembers should match the last snapshot 1`] = `
 Object {
   "graphql": Object {
     "query": "query ($id: ID) {
@@ -115,7 +115,7 @@ Object {
   "meta": Object {
     "extractModel": "Post",
   },
-  "type": "PostEditor/FETCH_DETAILS_TEXT",
+  "type": "PostEditor/FETCH_DETAILS_AND_MEMBERS",
 }
 `;
 

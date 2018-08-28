@@ -1,11 +1,6 @@
 import React from 'react'
 import {
-  FlatList,
-  Image,
-  Text,
-  TextInput,
   TouchableOpacity,
-  View,
   ScrollView
 } from 'react-native'
 
