@@ -5,7 +5,7 @@ import {
   isInvitationLink, redirectAfterLogin, resetToRoute, resetToMainRoute
 } from 'util/navigation'
 import convertDeepLinkToAction from './convertDeepLinkToAction'
-import { isDev } from 'util/testing'
+import { isDev } from '../../config'
 
 export default class DeepLinkHandler extends React.Component {
   async componentDidMount () {
