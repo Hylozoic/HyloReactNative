@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.facebook.react.ReactApplication;
 import com.robinpowered.react.Intercom.IntercomPackage;
+import io.intercom.android.sdk.Intercom;
 import com.kevinejohn.RNMixpanel.RNMixpanel;
 import io.sentry.RNSentryPackage;
 import com.avishayil.rnrestart.ReactNativeRestartPackage;
@@ -61,6 +62,7 @@ public class MainApplication extends Application implements ReactApplication {
             new ReactNativeOneSignalPackage(),
             new RNMixpanel(),
           new ImagePickerPackage(),
+          new IntercomPackage(),
           new FBSDKPackage(mCallbackManager),
           new VectorIconsPackage(),
           new WebViewBridgePackage()
@@ -81,6 +83,7 @@ public class MainApplication extends Application implements ReactApplication {
   @Override
   public void onCreate() {
     super.onCreate();
+    Intercom.initialize(this, "dG9rOmE1MDFjNDIyXzJiZmJfNDkxZV9hNjlkXzNlYmFkODZiNTVlMToxOjA=", "wwelodje");
     FacebookSdk.sdkInitialize(getApplicationContext());
 
     SoLoader.init(this, /* native exopackage */ false);
