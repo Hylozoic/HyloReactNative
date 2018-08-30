@@ -1,6 +1,6 @@
 import { findNodeHandle } from 'react-native'
 import TextInputState from 'react-native/lib/TextInputState'
-import { isDev } from 'util/testing'
+import { isDev } from '../config'
 
 // via: http://stackoverflow.com/a/40837333/56817
 export function focus (ref) {

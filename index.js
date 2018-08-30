@@ -6,7 +6,7 @@ import { AppRegistry, Platform } from 'react-native'
 import Timer from 'react-native-background-timer'
 import { Sentry } from 'react-native-sentry'
 import ErrorBoundary from './src/components/ErrorBoundary'
-import { isDev } from 'util/testing'
+import { isDev } from './src/config'
 import getStore from './src/store'
 
 let store = getStore()

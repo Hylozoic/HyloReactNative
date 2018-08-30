@@ -88,8 +88,8 @@ def enableSeparateBuildPerCPUArchitecture = false
 def enableProguardInReleaseBuilds = false
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion '25.0.2'
+    compileSdkVersion 26
+    buildToolsVersion '26.0.2'
 
     defaultConfig {
         applicationId "com.hylo.hyloandroid"
@@ -97,6 +97,8 @@ android {
         targetSdkVersion 26
         versionCode 87
         versionName "2.3"
+        // Enabling multidex support.
+        multiDexEnabled true
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
@@ -162,6 +164,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-intercom')
     compile project(':react-native-mixpanel')
     compile project(':react-native-sentry')
     compile project(':react-native-restart')
@@ -174,7 +177,7 @@ dependencies {
     compile project(':react-native-webview-bridge')
     compile project(':react-native-image-picker')
 
-    compile "com.android.support:appcompat-v7:23.0.1"
+    compile "com.android.support:appcompat-v7:26.0.2"
     compile "com.facebook.react:react-native:+"
     compile 'com.facebook.android:facebook-android-sdk:[4.22.1)'
     compile fileTree(dir: "libs", include: ["*.jar"])

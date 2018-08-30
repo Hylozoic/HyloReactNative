@@ -1,5 +1,5 @@
 import React from 'react'
-import { isDev } from 'util/testing'
+import { isDev } from '../../config'
 
 export default class VersionCheck extends React.PureComponent {
   componentDidMount () {
