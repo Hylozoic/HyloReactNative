@@ -4,7 +4,6 @@ import {
   LOGIN_WITH_GOOGLE
 } from '../../components/Login/actions'
 import { SIGNUP } from '../../components/SignupFlow/SignupFlow.store'
-import { CHECK_INVITATION } from '../../components/JoinCommunity/JoinCommunity.store'
 import {
   CHECK_SESSION
 } from '../../components/SessionCheck/SessionCheck.store'
@@ -43,8 +42,6 @@ export default function sessionReducer (state = {}, action) {
       return {...state, loggedIn: payload}
     case SIGNUP:
       return {...state, loggedIn: true}
-    case CHECK_INVITATION:
-      return {...state, hasSignupLink: true}
   }
 
   return state

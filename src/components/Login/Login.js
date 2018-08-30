@@ -85,7 +85,7 @@ export default class Login extends React.Component {
   render () {
     const {
       loginWithGoogle, formError, loginWithFacebook, pending,
-      goToResetPassword, goToSignup, hasSignupLink, bannerMessage
+      goToResetPassword, goToSignup, bannerMessage
     } = this.props
     const { ssoError, emailIsValid, isConnected } = this.state
     return <ScrollView contentContainerStyle={styles.login} style={styles.container}>
@@ -167,9 +167,9 @@ export default class Login extends React.Component {
         <GoogleLoginButton
           onLoginFinished={loginWithGoogle}
           createErrorNotification={this.createErrorNotification}
-          />
+        />
       </View>
-      {hasSignupLink && <SignupLink goToSignup={goToSignup} /> }
+      <SignupLink goToSignup={goToSignup} />
     </ScrollView>
   }
 }

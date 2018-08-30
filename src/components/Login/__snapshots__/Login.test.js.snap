@@ -145,143 +145,13 @@ exports[`Login renders correctly 1`] = `
       onLoginFinished={undefined}
     />
   </View>
+  <SignupLink
+    goToSignup={[Function]}
+  />
 </ScrollView>
 `;
 
 exports[`Login renders error message 1`] = `
-<ScrollView
-  contentContainerStyle={
-    Object {
-      "alignItems": "center",
-      "backgroundColor": "white",
-      "justifyContent": "center",
-    }
-  }
->
-  <Image
-    source={
-      Object {
-        "testUri": "../../../src/assets/merkaba-green-on-white.png",
-      }
-    }
-  />
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-  >
-    Log in to Hylo
-  </Text>
-  <View>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
-      Your email address
-    </Text>
-  </View>
-  <View>
-    <View>
-      <View>
-        <TextInput
-          allowFontScaling={true}
-          autoCapitalize="none"
-          autoCorrect={false}
-          keyboardType="email-address"
-          onChangeText={[Function]}
-          onSubmitEditing={[Function]}
-          returnKeyType="next"
-          underlineColorAndroid="rgba(0,0,0,0)"
-        />
-      </View>
-      <View />
-    </View>
-  </View>
-  <View>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
-      Password
-    </Text>
-  </View>
-  <View>
-    <View>
-      <View>
-        <TextInput
-          allowFontScaling={true}
-          autoCapitalize="none"
-          onChangeText={[Function]}
-          onSubmitEditing={[Function]}
-          returnKeyType="go"
-          secureTextEntry={true}
-          selectTextOnFocus={true}
-          underlineColorAndroid="rgba(0,0,0,0)"
-        />
-      </View>
-      <View>
-        <Icon
-          allowFontScaling={false}
-          name="eye"
-          onPress={[Function]}
-          size={12}
-        />
-      </View>
-    </View>
-  </View>
-  <View>
-    <TouchableOpacity
-      activeOpacity={0.2}
-      onPress={undefined}
-    >
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-      >
-        Forgot your password?
-      </Text>
-    </TouchableOpacity>
-  </View>
-  <View>
-    <TouchableOpacity
-      activeOpacity={0.2}
-      onPress={[Function]}
-    >
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-      >
-        Log In
-      </Text>
-    </TouchableOpacity>
-  </View>
-  <View>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
-      Or connect with:
-    </Text>
-  </View>
-  <View>
-    <FbLoginButton
-      createErrorNotification={[Function]}
-      onLoginFinished={undefined}
-    />
-    <GoogleLoginButton
-      createErrorNotification={[Function]}
-      onLoginFinished={undefined}
-    />
-  </View>
-</ScrollView>
-`;
-
-exports[`Login renders with a signup link 1`] = `
 <ScrollView
   contentContainerStyle={
     Object {
@@ -547,6 +417,9 @@ exports[`Login renders with no network connection error 1`] = `
       onLoginFinished={undefined}
     />
   </View>
+  <SignupLink
+    goToSignup={undefined}
+  />
 </ScrollView>
 `;
 
@@ -687,139 +560,9 @@ exports[`Login renders with pending banner 1`] = `
       onLoginFinished={undefined}
     />
   </View>
-</ScrollView>
-`;
-
-exports[`Login renders without a signup link 1`] = `
-<ScrollView
-  contentContainerStyle={
-    Object {
-      "alignItems": "center",
-      "backgroundColor": "white",
-      "justifyContent": "center",
-    }
-  }
->
-  <Image
-    source={
-      Object {
-        "testUri": "../../../src/assets/merkaba-green-on-white.png",
-      }
-    }
+  <SignupLink
+    goToSignup={undefined}
   />
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-  >
-    Log in to Hylo
-  </Text>
-  <View>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
-      Your email address
-    </Text>
-  </View>
-  <View>
-    <View>
-      <View>
-        <TextInput
-          allowFontScaling={true}
-          autoCapitalize="none"
-          autoCorrect={false}
-          keyboardType="email-address"
-          onChangeText={[Function]}
-          onSubmitEditing={[Function]}
-          returnKeyType="next"
-          underlineColorAndroid="rgba(0,0,0,0)"
-        />
-      </View>
-      <View />
-    </View>
-  </View>
-  <View>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
-      Password
-    </Text>
-  </View>
-  <View>
-    <View>
-      <View>
-        <TextInput
-          allowFontScaling={true}
-          autoCapitalize="none"
-          onChangeText={[Function]}
-          onSubmitEditing={[Function]}
-          returnKeyType="go"
-          secureTextEntry={true}
-          selectTextOnFocus={true}
-          underlineColorAndroid="rgba(0,0,0,0)"
-        />
-      </View>
-      <View>
-        <Icon
-          allowFontScaling={false}
-          name="eye"
-          onPress={[Function]}
-          size={12}
-        />
-      </View>
-    </View>
-  </View>
-  <View>
-    <TouchableOpacity
-      activeOpacity={0.2}
-      onPress={undefined}
-    >
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-      >
-        Forgot your password?
-      </Text>
-    </TouchableOpacity>
-  </View>
-  <View>
-    <TouchableOpacity
-      activeOpacity={0.2}
-      onPress={[Function]}
-    >
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-      >
-        Log In
-      </Text>
-    </TouchableOpacity>
-  </View>
-  <View>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
-      Or connect with:
-    </Text>
-  </View>
-  <View>
-    <FbLoginButton
-      createErrorNotification={[Function]}
-      onLoginFinished={undefined}
-    />
-    <GoogleLoginButton
-      createErrorNotification={[Function]}
-      onLoginFinished={undefined}
-    />
-  </View>
 </ScrollView>
 `;
 
