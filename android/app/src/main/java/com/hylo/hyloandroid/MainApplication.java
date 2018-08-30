@@ -50,19 +50,18 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new IntercomPackage(),
-            new RNGoogleSigninPackage(),
-            new RNSentryPackage(MainApplication.this),
-            new ReactNativeRestartPackage(),
-            new ReactNativeDocumentPicker(),
-            new RNPromptPackage(),
-            new RNDeviceInfo(),
-            new LinearGradientPackage(),
-            new BackgroundTimerPackage(),
-            new ReactNativeOneSignalPackage(),
-            new RNMixpanel(),
-          new ImagePickerPackage(),
+          new RNGoogleSigninPackage(),
+          new RNSentryPackage(MainApplication.this),
+          new ReactNativeRestartPackage(),
+          new ReactNativeDocumentPicker(),
+          new RNPromptPackage(),
+          new RNDeviceInfo(),
+          new LinearGradientPackage(),
+          new BackgroundTimerPackage(),
+          new ReactNativeOneSignalPackage(),
           new IntercomPackage(),
+          new RNMixpanel(),
+          new ImagePickerPackage(),
           new FBSDKPackage(mCallbackManager),
           new VectorIconsPackage(),
           new WebViewBridgePackage()
@@ -83,7 +82,7 @@ public class MainApplication extends Application implements ReactApplication {
   @Override
   public void onCreate() {
     super.onCreate();
-    Intercom.initialize(this, "dG9rOmE1MDFjNDIyXzJiZmJfNDkxZV9hNjlkXzNlYmFkODZiNTVlMToxOjA=", "wwelodje");
+    Intercom.initialize(this, "android_sdk-0aa2608fb3b46dd9efcb74339fc87073a6ed0ba9", "wwelodje");
     FacebookSdk.sdkInitialize(getApplicationContext());
 
     SoLoader.init(this, /* native exopackage */ false);
