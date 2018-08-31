@@ -43,24 +43,6 @@ describe('Login', () => {
     expect(actual).toMatchSnapshot()
   })
 
-  it('renders without a signup link', () => {
-    const renderer = new ReactShallowRenderer()
-    renderer.render(<Login
-      hasSignupLink={false}
-    />)
-    const actual = renderer.getRenderOutput()
-    expect(actual).toMatchSnapshot()
-  })
-
-  it('renders with a signup link', () => {
-    const renderer = new ReactShallowRenderer()
-    renderer.render(<Login
-      hasSignupLink
-    />)
-    const actual = renderer.getRenderOutput()
-    expect(actual).toMatchSnapshot()
-  })
-
   it('calls login successfully', () => {
     const login = jest.fn()
     const instance = TestRenderer.create(<Login
