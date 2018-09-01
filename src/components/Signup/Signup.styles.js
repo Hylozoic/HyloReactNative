@@ -62,6 +62,13 @@ export default {
     opacity: 0.7,
     marginBottom: 30
   },
+  disclaimerText: {
+    ...loginStyles.subTitle,
+    color: '#3F536E'
+  },
+  disclaimerLink: {
+    ...loginStyles.subTitle
+  },
   login: {
     flexDirection: 'row',
     justifyContent: 'center'

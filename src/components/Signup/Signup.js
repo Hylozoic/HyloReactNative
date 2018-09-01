@@ -2,6 +2,7 @@ import React from 'react'
 import {
   View,
   Text,
+  Linking,
   Image,
   ImageBackground,
   TouchableOpacity,
@@ -46,6 +47,15 @@ export default class Signup extends React.Component {
         <Text style={styles.title}>Sign up to get started with Hylo</Text>
         {error && <View style={styles.errorWrapper}><Text style={styles.error}>{error}</Text></View>}
         <Text style={styles.subTitle}>Stay connected, organized and engaged with your community.</Text>
+
+        <Text style={styles.disclaimerText}>
+          Your data is safe with Hylo. By clicking the "Signup" button below you are agreeing to these terms:
+        </Text>
+        <TouchableOpacity style={styles.disclaimerLink}
+          onPress={() => openURL('https://www.hylo.com/terms')}>
+          <Text style={styles.subTitle}>https://www.hylo.com/terms</Text>
+        </TouchableOpacity>
+
         <Button text='Sign Up' style={styles.signupButton} onPress={goToSignupFlow} />
         <Text style={styles.connectWith}>Or connect with:</Text>
         <View style={styles.socialButtons}>
@@ -62,4 +72,8 @@ export default class Signup extends React.Component {
       </View>
     </ScrollView>
   }
+}
+
+export function openURL (url) {
+  return Linking.canOpenURL(url).then(supported => supported && Linking.openURL(url))
 }
