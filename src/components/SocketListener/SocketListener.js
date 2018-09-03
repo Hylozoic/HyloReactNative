@@ -1,6 +1,6 @@
 import React from 'react'
 import { getSocket, socketUrl } from 'util/websockets'
-import { isDev } from 'util/testing'
+import { isDev } from '../../config'
 import { isEqual } from 'lodash'
 
 export default class SocketListener extends React.PureComponent {

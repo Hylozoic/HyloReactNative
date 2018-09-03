@@ -3,16 +3,6 @@ import { CHECK_INVITATION } from '../../components/JoinCommunity/JoinCommunity.s
 import { CHECK_SESSION } from '../../components/SessionCheck/SessionCheck.store'
 import { LOGIN } from '../../components/Login/actions'
 
-describe('on CHECK_INVITATION', () => {
-  it('returns the payload', () => {
-    const state = {}
-    const action = {
-      type: CHECK_INVITATION
-    }
-    expect(sessionReducer(state, action)).toEqual({hasSignupLink: true})
-  })
-})
-
 describe('on CHECK_SESSION', () => {
   it('stores the payload', () => {
     const action = {

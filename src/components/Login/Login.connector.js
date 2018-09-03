@@ -26,7 +26,6 @@ export function mapStateToProps (state, props) {
     defaultEmail: state.session.defaultLoginEmail,
     goToSignup,
     goToResetPassword,
-    hasSignupLink: !!state.session.hasSignupLink,
     loginToken: decodeURIComponent(get('navigation.state.params.loginToken', props)),
     loginTokenUserId: get('navigation.state.params.userId', props),
     deepLinkAction: getNavigationAction(state)

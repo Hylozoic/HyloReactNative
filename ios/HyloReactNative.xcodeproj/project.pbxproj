@@ -41,6 +41,7 @@
 		57859702B413478A8B272853 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C5672ACA397455C9B9FA940 /* SystemConfiguration.framework */; };
 		59582AB5127847F4B8351B2D /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0CB25F82AC1949C7AC5AA8C3 /* MaterialCommunityIcons.ttf */; };
 		5C33DAF72129FA8600C1D40D /* libRNMixpanel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C2AE6B12128E4980066B30C /* libRNMixpanel.a */; };
+		5C51CAD62132BCF6003036B0 /* libRNIntercom.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C51CAD12132BCA9003036B0 /* libRNIntercom.a */; };
 		5C687825203F8560008A6621 /* libRNSentry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C687823203F84DD008A6621 /* libRNSentry.a */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		622DC7EEADF7461D93933819 /* libRNDocumentPicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 911CA012D21D42968AAC80C7 /* libRNDocumentPicker.a */; };
@@ -399,6 +400,13 @@
 			remoteGlobalIDString = 5EAEEA411F0555B100C6FED8;
 			remoteInfo = "RNMixpanel-tvOS";
 		};
+		5C51CAD02132BCA9003036B0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5C51CA9A2132BCA9003036B0 /* RNIntercom.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 112EE36D1CC0AB8A00BF6BB8;
+			remoteInfo = RNIntercom;
+		};
 		5C687822203F84DD008A6621 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5C6877EC203F84DD008A6621 /* RNSentry.xcodeproj */;
@@ -519,6 +527,7 @@
 		4D3FA7F0E1504BFAA5795C32 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
 		5AF97D1AA7A06ED99997C525 /* Pods-HyloReactNative.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HyloReactNative.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HyloReactNative/Pods-HyloReactNative.debug.xcconfig"; sourceTree = "<group>"; };
 		5C2AE6AB2128E4980066B30C /* RNMixpanel.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNMixpanel.xcodeproj; path = "../node_modules/react-native-mixpanel/RNMixpanel.xcodeproj"; sourceTree = "<group>"; };
+		5C51CA9A2132BCA9003036B0 /* RNIntercom.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNIntercom.xcodeproj; path = "../node_modules/react-native-intercom/iOS/RNIntercom.xcodeproj"; sourceTree = "<group>"; };
 		5C6877EC203F84DD008A6621 /* RNSentry.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNSentry.xcodeproj; path = "../node_modules/react-native-sentry/ios/RNSentry.xcodeproj"; sourceTree = "<group>"; };
 		5CF26E721F415BCA00CC02E1 /* HyloReactNative.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = HyloReactNative.entitlements; path = HyloReactNative/HyloReactNative.entitlements; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
@@ -582,6 +591,7 @@
 				133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */,
 				00C302E91ABCBA2D00DB3ED1 /* libRCTNetwork.a in Frameworks */,
 				139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */,
+				5C51CAD62132BCF6003036B0 /* libRNIntercom.a in Frameworks */,
 				5C33DAF72129FA8600C1D40D /* libRNMixpanel.a in Frameworks */,
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
@@ -843,6 +853,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		5C51CA9B2132BCA9003036B0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5C51CAD12132BCA9003036B0 /* libRNIntercom.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		5C6877ED203F84DD008A6621 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -895,6 +913,7 @@
 				8C2E9E063C6C4C18B5D4F6D7 /* BVLinearGradient.xcodeproj */,
 				7867CE4E143049AF8A38008E /* RNDocumentPicker.xcodeproj */,
 				07FD3184C284458ABA535F27 /* RCTRestart.xcodeproj */,
+				5C51CA9A2132BCA9003036B0 /* RNIntercom.xcodeproj */,
 				5C2AE6AB2128E4980066B30C /* RNMixpanel.xcodeproj */,
 			);
 			name = Libraries;
@@ -1180,6 +1199,10 @@
 				{
 					ProductGroup = B726CF8F1F34ECE100CA78B5 /* Products */;
 					ProjectRef = B726CF8E1F34ECE100CA78B5 /* RNImagePicker.xcodeproj */;
+				},
+				{
+					ProductGroup = 5C51CA9B2132BCA9003036B0 /* Products */;
+					ProjectRef = 5C51CA9A2132BCA9003036B0 /* RNIntercom.xcodeproj */;
 				},
 				{
 					ProductGroup = 5C2AE6AC2128E4980066B30C /* Products */;
@@ -1525,6 +1548,13 @@
 			remoteRef = 5C2AE6B22128E4980066B30C /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		5C51CAD12132BCA9003036B0 /* libRNIntercom.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNIntercom.a;
+			remoteRef = 5C51CAD02132BCA9003036B0 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		5C687823203F84DD008A6621 /* libRNSentry.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1678,6 +1708,8 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-HyloReactNative/Pods-HyloReactNative-resources.sh",
 				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
+				"${PODS_ROOT}/Intercom/Intercom/Intercom.framework/Versions/A/Resources/Intercom.bundle",
+				"${PODS_ROOT}/Intercom/Intercom/Intercom.framework/Versions/A/Resources/IntercomTranslations.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
