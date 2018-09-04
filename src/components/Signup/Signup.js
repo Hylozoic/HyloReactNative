@@ -62,7 +62,7 @@ export default class Signup extends React.Component {
         </View>
         <View style={styles.terms}>
           <Text style={{...styles.haveAccount, ...styles.termsText}}>
-            Your data is safe with Hylo. By clicking the "Signup" button above you are agreeing to these terms:
+            Your data is safe with Hylo. By clicking the "Sign Up" button above you are agreeing to these terms:
           </Text>
           <TouchableOpacity
             onPress={() => openURL('https://www.hylo.com/terms')}>
