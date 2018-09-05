@@ -73,5 +73,12 @@ export default {
     ...loginStyles.helpText,
     color: caribbeanGreen,
     fontFamily: 'Circular-Book'
+  },
+  terms: {
+    paddingTop: 20,
+    paddingHorizontal: 20
+  },
+  termsText: {
+    fontSize: 12
   }
 }

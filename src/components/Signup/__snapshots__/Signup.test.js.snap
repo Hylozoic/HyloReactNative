@@ -87,6 +87,27 @@ exports[`matches last snapshot 1`] = `
         </Text>
       </TouchableOpacity>
     </View>
+    <View>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+      >
+        Your data is safe with Hylo. By clicking the "Sign Up" button above you are agreeing to these terms:
+      </Text>
+      <TouchableOpacity
+        activeOpacity={0.2}
+        onPress={[Function]}
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+        >
+          https://www.hylo.com/terms
+        </Text>
+      </TouchableOpacity>
+    </View>
   </View>
 </ScrollView>
 `;
