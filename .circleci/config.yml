@@ -54,11 +54,11 @@ jobs:
     - restore_cache:
         keys:
         # This branch if available
-        - v1-dep-{{ .Branch }}-
+        - v1-dep-{{ .Branch }}-{{ checksum "yarn.lock" }}
         # Default branch if not
-        - v1-dep-master-
+        - v1-dep-master-{{ checksum "yarn.lock" }}
         # Any branch if there are none on the default branch - this should be unnecessary if you have your default branch configured correctly
-        - v1-dep-
+        - v1-dep-{{ checksum "yarn.lock" }}
     # This is based on your 1.0 configuration file or project settings
     - run: yarn global add codecov
     # # Install yarn so it's up to date
@@ -67,7 +67,7 @@ jobs:
     - run: yarn
     # Save dependency cache
     - save_cache:
-        key: v1-dep-{{ .Branch }}-{{ epoch }}
+        key: v1-dep-{{ .Branch }}-{{ checksum "yarn.lock" }}-{{ epoch }}
         paths:
         # This is a broad list of cache paths to include many possible development environments
         # You can probably delete some of these entries
