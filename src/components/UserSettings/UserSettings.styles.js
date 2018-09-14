@@ -64,6 +64,19 @@ export default {
     marginTop: 50,
     alignItems: 'center'
   },
+  blockedUsersWrapper: {
+    marginTop: 50,
+    alignItems: 'center'
+  },
+  blockedUsers: {
+    height: 43,
+    width: 205,
+    fontSize: 16,
+    marginBottom: 5,
+    color: caribbeanGreen,
+    borderColor: caribbeanGreen,
+    backgroundColor: white
+  },
   notificationSettings: {
     height: 43,
     width: 205,

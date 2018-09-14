@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mapDispatchToProps matches last snapshot 1`] = `
+Object {
+  "updateAllMemberships": [Function],
+  "updateMembershipSettings": [Function],
+  "updateUserSettings": [Function],
+}
+`;
+
+exports[`mapStateToProps matches last snapshot 1`] = `
+Object {
+  "allCommunitiesSettings": Object {
+    "sendEmail": true,
+    "sendPushNotifications": true,
+  },
+  "memberships": Array [],
+  "messageSettings": undefined,
+}
+`;
