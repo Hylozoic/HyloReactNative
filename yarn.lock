@@ -3378,9 +3378,9 @@ https-proxy-agent@^2.1.1:
     agent-base "^4.1.0"
     debug "^3.1.0"
 
-hylo-utils@Hylozoic/hylo-utils#c4db0b4:
+hylo-utils@Hylozoic/hylo-utils#a1f23db:
   version "1.2.4"
-  resolved "https://codeload.github.com/Hylozoic/hylo-utils/tar.gz/c4db0b4f205c2f07043f42761e5984f891721602"
+  resolved "https://codeload.github.com/Hylozoic/hylo-utils/tar.gz/a1f23dbfbf0ceba636cf68d3d30f0161ecbc4706"
   dependencies:
     buffer "^5.0.6"
     cheerio "^0.22.0"
@@ -5929,11 +5929,19 @@ react-native-image-picker@^0.26.7:
   version "0.26.7"
   resolved "https://registry.yarnpkg.com/react-native-image-picker/-/react-native-image-picker-0.26.7.tgz#ad2ee957f7f6cc01396893ea03d84cb2adb2e376"
 
+react-native-intercom@^12.0.0:
+  version "12.0.0"
+  resolved "https://registry.yarnpkg.com/react-native-intercom/-/react-native-intercom-12.0.0.tgz#c1e5445730250f6430c4737f39c386758f106d24"
+
 react-native-linear-gradient@^2.3.0:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/react-native-linear-gradient/-/react-native-linear-gradient-2.4.0.tgz#51d8ea12bb72a59bede9edc87b694b16b64cf435"
   dependencies:
     prop-types "^15.5.10"
+
+react-native-mixpanel@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/react-native-mixpanel/-/react-native-mixpanel-1.1.1.tgz#012580fb1b42b6c0ee35d0af0a24af68cfa79b89"
 
 react-native-onesignal@^3.1.0:
   version "3.1.4"

@@ -16,6 +16,11 @@ rm -rf $TMPDIR/react-*
 echo "Remove tmp/npm: 'rm -rf $TMPDIR/npm-*'"
 rm -rf $TMPDIR/npm-*
 
+echo "'yarn cache clean'"
+yarn cache clean
+echo "'yarn install'"
+yarn install
+
 if [[ $* == *--no-pod* ]]
 then
   echo "skipping cocoapods rebuild"
@@ -27,11 +32,6 @@ else
   pod repo update && pod install
   cd ../
 fi
-
-echo "'yarn cache clean'"
-yarn cache clean
-echo "'yarn install'"
-yarn install
 
 echo "'./android/gradlew clean -p ./android/'"
 ./android/gradlew clean -p ./android/

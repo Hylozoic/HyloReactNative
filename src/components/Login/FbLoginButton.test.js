@@ -2,8 +2,6 @@ import FbLoginButton from './FbLoginButton'
 import ReactTestRenderer from 'react-test-renderer'
 import React from 'react'
 
-jest.mock('react-native-device-info')
-
 const mocks = {
   LoginManager: {
     logInWithReadPermissions: jest.fn(() => Promise.resolve({foo: 'bar'}))

@@ -48,11 +48,30 @@ it('mapsStateToProps', () => {
   expect(mapStateToProps(state, props)).toMatchSnapshot()
 })
 
-it('mapsDispatchToProps', () => {
-  const dispatchProps = mapDispatchToProps(dispatch, props)
-  expect(dispatchProps).toMatchSnapshot()
-  expect(dispatchProps.createComment('some comment')).toMatchSnapshot()
-  expect(dispatchProps.showTopic('mytopicname')).toMatchSnapshot()
-  expect(dispatchProps.showMember(1)).toMatchSnapshot()
-  expect(dispatchProps.editPost()).toMatchSnapshot()
+describe('mapsDispatchToProps', () => {
+  let dispatchProps
+
+  beforeAll(() => {
+    dispatchProps = mapDispatchToProps(dispatch, props)
+  })
+
+  it('maps', () => {
+    expect(dispatchProps).toMatchSnapshot()
+  })
+
+  it('createComment', () => {
+    expect(dispatchProps.createComment('some comment')).toMatchSnapshot()
+  })
+
+  it('showTopic', () => {
+    expect(dispatchProps.showTopic('mytopicname', 4)).toMatchSnapshot()
+  })
+
+  it('showMember', () => {
+    expect(dispatchProps.showMember(1)).toMatchSnapshot()
+  })
+
+  it('editPost', () => {
+    expect(dispatchProps.editPost()).toMatchSnapshot()
+  })
 })

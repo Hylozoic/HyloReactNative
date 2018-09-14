@@ -5,7 +5,6 @@ import FeedBanner, { PostPrompt } from './FeedBanner'
 import { TouchableOpacity } from 'react-native'
 
 jest.mock('react-native-linear-gradient')
-jest.mock('react-native-device-info')
 
 const community = {
   id: '1',

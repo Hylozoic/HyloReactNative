@@ -11,11 +11,8 @@
 
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
-#if __has_include(<React/RNSentry.h>)
+#import <Intercom/intercom.h>
 #import <React/RNSentry.h> // This is used for versions of react >= 0.40
-#else
-#import "RNSentry.h" // This is used for versions of react < 0.40
-#endif
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <RNGoogleSignin/RNGoogleSignin.h>
 #import <React/RCTLinkingManager.h>
@@ -50,6 +47,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+  [Intercom setApiKey:@"ios_sdk-b11cb526589263a9890b895d40b934bffa876c43" forAppId:@"wwelodje"];
+
   [[FBSDKApplicationDelegate sharedInstance] application:application
                            didFinishLaunchingWithOptions:launchOptions];
   NSURL *jsCodeLocation;
@@ -79,6 +78,11 @@ RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
                                                       }];
 
   return YES;
+}
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    // Intercom
+    [Intercom setDeviceToken:deviceToken];
 }
 
 // Universal Linking

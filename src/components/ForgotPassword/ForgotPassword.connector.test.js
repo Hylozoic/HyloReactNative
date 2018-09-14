@@ -1,7 +1,5 @@
 import { mapDispatchToProps, mergeProps } from './ForgotPassword.connector'
 
-jest.mock('react-native-device-info')
-
 describe('mergeProps', () => {
   test('goToLogin', () => {
     const dispatchProps = mapDispatchToProps

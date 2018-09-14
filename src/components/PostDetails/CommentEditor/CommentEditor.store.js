@@ -1,5 +1,6 @@
 import { uniqueId } from 'lodash/fp'
 import { divToP } from 'hylo-utils/text'
+import { AnalyticsEvents } from 'hylo-utils/constants'
 
 export const MODULE_NAME = 'CommentEditor'
 export const SET_COMMENT_EDITS = `${MODULE_NAME}/SET_COMMENT_EDITS`
@@ -57,7 +58,8 @@ export function createComment (postId, text) {
       extractModel: 'Comment',
       tempId: uniqueId(`post${postId}_`),
       postId,
-      text: preprocessedText
+      text: preprocessedText,
+      analytics: AnalyticsEvents.COMMENT_CREATED
     }
   }
 }

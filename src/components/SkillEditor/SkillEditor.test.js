@@ -4,8 +4,6 @@ import ReactShallowRenderer from 'react-test-renderer/shallow'
 import ReactTestRenderer from 'react-test-renderer'
 import SkillEditor, { SkillCloud, SkillPill } from './SkillEditor'
 
-jest.mock('react-native-device-info')
-
 describe('SkillEditor', () => {
   it('matches last snapshot', () => {
     const renderer = new ReactShallowRenderer()

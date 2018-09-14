@@ -25,10 +25,12 @@ global.FormData = jest.fn(() => {
   return []
 })
 
+// Mock this globally @see https://github.com/l-urence/react-native-autocomplete-input#known-issues
+jest.mock('react-native-autocomplete-input', () => 'Autocomplete')
+jest.mock('react-native-mixpanel')
 jest.mock('react-native-device-info')
+jest.mock('react-native-intercom', () => {}, { virtual: true });
 
 global.XMLHttpRequest = jest.fn()
 global.window = {}
 
-// Mock this globally @see https://github.com/l-urence/react-native-autocomplete-input#known-issues
-jest.mock('react-native-autocomplete-input', () => 'Autocomplete')

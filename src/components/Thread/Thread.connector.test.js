@@ -1,8 +1,6 @@
 import { mapStateToProps, mapDispatchToProps, mergeProps } from './Thread.connector'
 import { ALL_COMMUNITIES_ID } from '../../store/models/Community'
 
-jest.mock('react-native-device-info')
-
 describe('mapStateToProps', () => {
   it('returns the right keys', () => {
     const state = {

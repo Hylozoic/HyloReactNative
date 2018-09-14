@@ -4,7 +4,6 @@ import ReactShallowRenderer from 'react-test-renderer/shallow'
 import ReactTestRenderer from 'react-test-renderer'
 import SignupFlow2 from './SignupFlow2'
 
-jest.mock('react-native-device-info')
 jest.mock('../../ImagePicker', () => 'ImagePicker')
 
 it('matches last snapshot', () => {

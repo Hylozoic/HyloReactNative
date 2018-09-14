@@ -1,3 +1,5 @@
+import { AnalyticsEvents } from 'hylo-utils/constants'
+
 export const MODULE_NAME = `CreateCommunityFlow`
 export const SAVE_COMMUNITY_NAME = `${MODULE_NAME}/SAVE_COMMUNITY_NAME`
 export const SAVE_COMMUNITY_URL = `${MODULE_NAME}/SAVE_COMMUNITY_URL`
@@ -60,7 +62,8 @@ export function createCommunity (name, slug) {
     meta: {
       extractModel: 'Membership',
       slug,
-      name
+      name,
+      analytics: AnalyticsEvents.COMMUNITY_CREATED
     }
   }
 }

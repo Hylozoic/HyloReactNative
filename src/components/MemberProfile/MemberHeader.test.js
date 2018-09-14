@@ -4,8 +4,6 @@ import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import ReactTestRenderer from 'react-test-renderer'
 
-jest.mock('react-native-device-info')
-
 describe('MemberHeader', () => {
   it('matches the last snapshot', () => {
     const person = {

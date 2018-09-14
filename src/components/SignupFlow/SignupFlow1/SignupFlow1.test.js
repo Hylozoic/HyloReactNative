@@ -5,7 +5,6 @@ import ReactTestRenderer from 'react-test-renderer'
 import SignupFlow1 from './SignupFlow1'
 
 jest.mock('../../KeyboardFriendlyView', () => 'KeyboardFriendlyView')
-jest.mock('react-native-device-info')
 
 it('matches last snapshot', () => {
   const renderer = new ReactShallowRenderer()

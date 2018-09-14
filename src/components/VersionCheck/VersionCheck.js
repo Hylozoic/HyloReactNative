@@ -1,8 +1,9 @@
 import React from 'react'
+import { isDev } from '../../config'
 
 export default class VersionCheck extends React.PureComponent {
   componentDidMount () {
-    this.props.checkVersion()
+    !isDev && this.props.checkVersion()
   }
 
   render () {

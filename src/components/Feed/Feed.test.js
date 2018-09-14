@@ -7,8 +7,6 @@ import { Provider } from 'react-redux'
 import orm from 'store/models'
 import { createMockStore } from 'util/testing'
 
-jest.mock('react-native-device-info')
-
 it('renders correctly if currentUserHasMemberships', () => {
   const community = {
     id: '1'

@@ -58,7 +58,8 @@ export function createMessage (messageThreadId, text, forNewThread) {
       tempId: uniqueId(`messageThread${messageThreadId}_`),
       messageThreadId,
       text,
-      forNewThread
+      forNewThread,
+      analytics: AnalyticsEvents.DIRECT_MESSAGE_SENT
     }
   }
 }

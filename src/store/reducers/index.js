@@ -5,6 +5,7 @@ import pending from './pending'
 import queryResults from './queryResults'
 import currentNetworkAndCommunity from './currentNetworkAndCommunity'
 import sessionReducer from './sessionReducer'
+import mixpanelReducer from './mixpanel'
 import CommentEditor from '../../components/PostDetails/CommentEditor/CommentEditor.store'
 import DeepLinkHandler from '../../components/DeepLinkHandler/DeepLinkHandler.store'
 import FeedList from '../../components/FeedList/FeedList.store'
@@ -32,6 +33,7 @@ export const combinedReducers = combineReducers({
   queryResults,
   currentNetworkAndCommunity,
   session: sessionReducer,
+  mixpanel: mixpanelReducer,
   CommentEditor,
   DeepLinkHandler,
   FeedList,

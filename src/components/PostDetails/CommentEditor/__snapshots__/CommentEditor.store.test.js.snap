@@ -22,6 +22,7 @@ Object {
     },
   },
   "meta": Object {
+    "analytics": "Comment Created",
     "extractModel": "Comment",
     "optimistic": true,
     "postId": "1",

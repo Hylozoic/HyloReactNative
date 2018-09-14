@@ -2,6 +2,7 @@ import React from 'react'
 import {
   View,
   Text,
+  Linking,
   Image,
   ImageBackground,
   TouchableOpacity,
@@ -59,7 +60,20 @@ export default class Signup extends React.Component {
           <Text style={styles.haveAccount}>Already have an account? </Text>
           <TouchableOpacity onPress={goToLogin}><Text style={styles.loginButton}>Log in now</Text></TouchableOpacity>
         </View>
+        <View style={styles.terms}>
+          <Text style={{...styles.haveAccount, ...styles.termsText}}>
+            Your data is safe with Hylo. By clicking the "Sign Up" button above you are agreeing to these terms:
+          </Text>
+          <TouchableOpacity
+            onPress={() => openURL('https://www.hylo.com/terms')}>
+            <Text style={{...styles.loginButton, ...styles.termsText}}>https://www.hylo.com/terms</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </ScrollView>
   }
+}
+
+export function openURL (url) {
+  return Linking.canOpenURL(url).then(supported => supported && Linking.openURL(url))
 }

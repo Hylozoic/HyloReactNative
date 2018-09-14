@@ -4,8 +4,6 @@ import TestRenderer from 'react-test-renderer'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import ThreadList, { MessageRow } from './ThreadList'
 
-jest.mock('react-native-device-info')
-
 describe('ThreadList', () => {
   it('renders correctly', () => {
     const threads = [{id: 1, participants: [{id: 1, avatarUrl: 'blah'}], lastMessage: {id: 1}}]

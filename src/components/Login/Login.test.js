@@ -3,13 +3,11 @@ import ReactShallowRenderer from 'react-test-renderer/shallow'
 import TestRenderer from 'react-test-renderer'
 import Login, { FormError, SignupLink } from './Login'
 
-jest.mock('react-native-google-signin')
 jest.mock('NetInfo', () => ({
   isConnected: {
     addEventListener: jest.fn()
   }
 }))
-jest.mock('react-native-device-info')
 
 describe('Login', () => {
   it('renders correctly', () => {
@@ -40,24 +38,6 @@ describe('Login', () => {
     const renderer = new ReactShallowRenderer()
     renderer.render(<Login
       isConnected={false}
-    />)
-    const actual = renderer.getRenderOutput()
-    expect(actual).toMatchSnapshot()
-  })
-
-  it('renders without a signup link', () => {
-    const renderer = new ReactShallowRenderer()
-    renderer.render(<Login
-      hasSignupLink={false}
-    />)
-    const actual = renderer.getRenderOutput()
-    expect(actual).toMatchSnapshot()
-  })
-
-  it('renders with a signup link', () => {
-    const renderer = new ReactShallowRenderer()
-    renderer.render(<Login
-      hasSignupLink
     />)
     const actual = renderer.getRenderOutput()
     expect(actual).toMatchSnapshot()

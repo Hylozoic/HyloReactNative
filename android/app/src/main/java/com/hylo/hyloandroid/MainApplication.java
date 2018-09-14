@@ -4,6 +4,9 @@ import android.app.Application;
 import android.util.Log;
 
 import com.facebook.react.ReactApplication;
+import com.robinpowered.react.Intercom.IntercomPackage;
+import io.intercom.android.sdk.Intercom;
+import com.kevinejohn.RNMixpanel.RNMixpanel;
 import io.sentry.RNSentryPackage;
 import com.avishayil.rnrestart.ReactNativeRestartPackage;
 import co.apptailor.googlesignin.RNGoogleSigninPackage;
@@ -47,15 +50,17 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new RNGoogleSigninPackage(),
-            new RNSentryPackage(MainApplication.this),
-            new ReactNativeRestartPackage(),
-            new ReactNativeDocumentPicker(),
-            new RNPromptPackage(),
-            new RNDeviceInfo(),
-            new LinearGradientPackage(),
-            new BackgroundTimerPackage(),
-            new ReactNativeOneSignalPackage(),
+          new RNGoogleSigninPackage(),
+          new RNSentryPackage(MainApplication.this),
+          new ReactNativeRestartPackage(),
+          new ReactNativeDocumentPicker(),
+          new RNPromptPackage(),
+          new RNDeviceInfo(),
+          new LinearGradientPackage(),
+          new BackgroundTimerPackage(),
+          new ReactNativeOneSignalPackage(),
+          new IntercomPackage(),
+          new RNMixpanel(),
           new ImagePickerPackage(),
           new FBSDKPackage(mCallbackManager),
           new VectorIconsPackage(),
@@ -77,6 +82,7 @@ public class MainApplication extends Application implements ReactApplication {
   @Override
   public void onCreate() {
     super.onCreate();
+    Intercom.initialize(this, "android_sdk-0aa2608fb3b46dd9efcb74339fc87073a6ed0ba9", "wwelodje");
     FacebookSdk.sdkInitialize(getApplicationContext());
 
     SoLoader.init(this, /* native exopackage */ false);

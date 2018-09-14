@@ -33,6 +33,7 @@ Array [
         },
       },
       "meta": Object {
+        "analytics": "Community Created",
         "extractModel": "Membership",
         "name": "name",
         "slug": "my-url",
