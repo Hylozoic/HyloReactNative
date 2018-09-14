@@ -15,7 +15,8 @@ export default function MemberHeader ({
   editable,
   updateSetting = () => {},
   saveChanges,
-  errors = {}
+  errors = {},
+  blockUser
 }) {
   if (!person) return null
 
@@ -34,7 +35,7 @@ export default function MemberHeader ({
         <TouchableOpacity onPress={onPressMessages}>
           <Icon name='Messages' style={styles.icon} />
         </TouchableOpacity>
-        <MemberMenu {... {flagMember, isMe, editProfile, saveChanges, editable}} />
+        <MemberMenu {... {flagMember, isMe, editProfile, saveChanges, editable, blockUser}} />
       </View>
     </View>
     <Control
@@ -85,12 +86,13 @@ export class Control extends React.Component {
   }
 }
 
-export function MemberMenu ({flagMember, isMe, editProfile, saveChanges, editable}) {
+export function MemberMenu ({flagMember, isMe, blockUser, editProfile, saveChanges, editable}) {
   // If the function is defined, than it's a valid action
   const actions = filter(x => x[1], [
     ['Edit', isMe && !editable && editProfile],
     ['Save Changes', isMe && editable && saveChanges],
-    ['Flag This Member', !isMe && flagMember]
+    ['Flag This Member', !isMe && flagMember],
+    ['Block This Member', !isMe && blockUser]
   ])
 
   if (isEmpty(actions)) return null

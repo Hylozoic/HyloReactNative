@@ -32,6 +32,12 @@ export default class MemberProfile extends React.Component {
     return nextProps.isFocused
   }
 
+  blockUser = () => {
+    const { person, blockUser } = this.props
+    blockUser(person.id)        
+      .then(() => this.props.navigation.goBack())
+  }
+
   render () {
     const {
       canFlag,
@@ -71,6 +77,7 @@ export default class MemberProfile extends React.Component {
         <MemberHeader
           person={person}
           flagMember={flagMember}
+          blockUser={this.blockUser}
           onPressMessages={onPressMessages}
           isMe={isMe}
           editProfile={goToEdit} />

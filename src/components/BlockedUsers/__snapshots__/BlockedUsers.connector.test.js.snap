@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mapDispatchToProps matches last snapshot 1`] = `
+Object {
+  "fetchCurrentUser": [Function],
+  "unBlockUser": [Function],
+}
+`;
+
+exports[`mapStateToProps matches last snapshot 1`] = `
+Object {
+  "blockedUsers": Array [],
+}
+`;

@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { get } from 'lodash/fp'
-import { getPerson, fetchPerson } from './MemberProfile.store'
+import { getPerson, fetchPerson, blockUser } from './MemberProfile.store'
 import makeGoToCommunity from '../../store/actions/makeGoToCommunity'
 import getMe from '../../store/selectors/getMe'
 import updateUserSettings from '../../store/actions/updateUserSettings'
@@ -39,7 +39,8 @@ export function mapDispatchToProps (dispatch, props) {
     goToCommunity: makeGoToCommunity(dispatch, props.navigation),
     ...bindActionCreators({
       fetchPerson,
-      updateUserSettings
+      updateUserSettings,
+      blockUser
     }, dispatch)
   }
 }

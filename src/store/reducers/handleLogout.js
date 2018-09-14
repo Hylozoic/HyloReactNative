@@ -1,6 +1,7 @@
 import { getEmptyState } from '../index'
 import { LOGOUT } from '../../components/Login/actions'
 import { UNBLOCK_USER } from '../../components/BlockedUsers/BlockedUsers.store'
+import { BLOCK_USER } from '../../components/MemberProfile/MemberProfile.store'
 import { reset } from './persistence'
 
 export default function (state, action) {
@@ -14,7 +15,7 @@ export default function (state, action) {
     }
   }
 
-  if (action.type === UNBLOCK_USER && !action.error) {
+  if ((action.type === UNBLOCK_USER || action.type === BLOCK_USER) && !action.error) {
     reset() // this is an async action with side effects! TODO move to logout action
     return {
       ...getEmptyState(),
