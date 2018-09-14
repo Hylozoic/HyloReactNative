@@ -1,41 +1,24 @@
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { createSelector } from 'reselect'
+import { get } from 'lodash/fp'
 import getMe from '../../store/selectors/getMe'
-import { updateMembershipSettings, updateAllMemberships, getMemberships } from './BlockedUsers.store'
-import updateUserSettings from '../../store/actions/updateUserSettings'
-import { every, includes } from 'lodash/fp'
-
-export const getMessageSettings = createSelector(
-  getMe,
-  me => me && ({
-    sendEmail: includes(me.settings.dmNotifications, ['email', 'both']),
-    sendPushNotifications: includes(me.settings.dmNotifications, ['push', 'both'])
-  })
-)
-
-export const getAllCommunitiesSettings = createSelector(
-  getMemberships,
-  memberships => ({
-    sendEmail: every(m => m.settings.sendEmail, memberships),
-    sendPushNotifications: every(m => m.settings.sendPushNotifications, memberships)
-  })
-)
+import fetchCurrentUser from '../../store/actions/fetchCurrentUser'
+import { unBlockUser, getBlockedUsers } from './BlockedUsers.store'
 
 export function mapStateToProps (state, props) {
+  const blockedUsers = get('blockedUsers', getMe(state))
+
   return {
-    messageSettings: getMessageSettings(state, props),
-    memberships: getMemberships(state, props),
-    allCommunitiesSettings: getAllCommunitiesSettings(state, props)
+    blockedUsers: blockedUsers ? blockedUsers.toRefArray() : []
   }
 }
 
 export function mapDispatchToProps (dispatch, props) {
   return {
     ...bindActionCreators({
-      updateUserSettings,
-      updateMembershipSettings,
-      updateAllMemberships
+      unBlockUser,
+      fetchCurrentUser
     }, dispatch)
   }
 }

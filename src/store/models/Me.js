@@ -38,5 +38,6 @@ Me.fields = {
   memberships: many('Membership'),
   messageThreads: many('MessageThread'),
   notifications: many('Notification'),
-  skills: many('Skill')
+  skills: many('Skill'),
+  blockedUsers: many('Person')
 }
