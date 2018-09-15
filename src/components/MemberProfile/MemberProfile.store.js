@@ -3,7 +3,6 @@ import orm from 'store/models'
 
 export const MODULE_NAME = 'MemberProfile'
 export const FETCH_PERSON = `${MODULE_NAME}/FETCH_PERSON`
-export const BLOCK_USER = `${MODULE_NAME}/BLOCK_USER`
 
 export function fetchPerson (id) {
   return {
@@ -49,22 +48,6 @@ export function fetchPerson (id) {
     meta: {
       afterInteractions: true,
       extractModel: 'Person'
-    }
-  }
-}
-
-export function blockUser (blockedUserId) {
-  return {
-    type: BLOCK_USER,
-    graphql: {
-      query: `mutation ($blockedUserId: ID) {
-        blockUser (blockedUserId: $blockedUserId) {
-          success
-        }
-      }`,
-      variables: {
-        blockedUserId
-      }
     }
   }
 }

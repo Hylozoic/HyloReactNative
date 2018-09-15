@@ -1,26 +1,24 @@
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 import { createSelector } from 'reselect'
 import { get } from 'lodash/fp'
+import { FETCH_CURRENT_USER } from '../../store/constants'
 import getMe from '../../store/selectors/getMe'
-import fetchCurrentUser from '../../store/actions/fetchCurrentUser'
-import { unBlockUser, getBlockedUsers } from './BlockedUsers.store'
+import unBlockUser from '../../store/actions/unBlockUser'
+
+export const getBlockedUsers = createSelector(
+  getMe,
+  me => get('blockedUsers', me) ? get('blockedUsers', me).toRefArray() : []
+)
 
 export function mapStateToProps (state, props) {
-  const blockedUsers = get('blockedUsers', getMe(state))
-
   return {
-    blockedUsers: blockedUsers ? blockedUsers.toRefArray() : []
+    blockedUsers: getBlockedUsers(state),
+    loading: !getMe(state)
   }
 }
 
-export function mapDispatchToProps (dispatch, props) {
-  return {
-    ...bindActionCreators({
-      unBlockUser,
-      fetchCurrentUser
-    }, dispatch)
-  }
+const mapDispatchToProps = {
+  unBlockUser
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)

@@ -4,10 +4,6 @@ import Loading from '../Loading'
 import styles from './BlockedUsers.styles'
 import header from 'util/header'
 
-// const blockedUsers = [
-//   {id: 1, name: 'Narcissitic Ex-girlfriend'},
-//   {id: 2, name: 'Abusive User'}
-// ]
 export default class BlockedUsers extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return header(navigation, {
@@ -18,17 +14,16 @@ export default class BlockedUsers extends React.Component {
     })
   }
 
-  unBlockUser = user => () => {
-    this.props.unBlockUser(user).then(() => this.props.fetchCurrentUser())
-  }
+  unBlockUser = userId => () => this.props.unBlockUser(userId)
 
   render () {    
-    const { blockedUsers, unBlockUser  } = this.props
-    // if (!messageSettings) return <Loading />
+    const { blockedUsers, loading } = this.props
+
+    if (loading) return <Loading />
 
     return <ScrollView contentContainerStyle={styles.scrollContainer}>
       {blockedUsers.map(blockedUser =>
-        <BlockedUserRow key={blockedUser.id} user={blockedUser} unBlockUser={this.unBlockUser(blockedUser.id)} />)}
+        <BlockedUserRow user={blockedUser} unBlockUser={this.unBlockUser(blockedUser.id)} key={blockedUser.id} />)}
     </ScrollView>
   }
 }

@@ -1,7 +1,6 @@
-export const MODULE_NAME = 'BlockedUsers'
-export const UNBLOCK_USER = `UNBLOCK_USER`
+import { UNBLOCK_USER } from '../constants'
 
-export function unBlockUser (blockedUserId) {
+export default function unBlockUser (blockedUserId) {
   return {
     type: UNBLOCK_USER,
     graphql: {
