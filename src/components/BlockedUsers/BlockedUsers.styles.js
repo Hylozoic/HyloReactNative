@@ -16,9 +16,16 @@ export default {
   settingsRow: {
     marginHorizontal: 17
   },
+  unBlockButton: {
+    marginLeft: 'auto'
+  },
   unBlockButtonText: {
     color: amaranth,
     fontFamily: 'Circular-Book'
+  },
+  noBlockedUsersMessage: {
+    color: rhino30,
+    marginLeft: 20
   },
   nameRow: {
     ...row,
@@ -29,10 +36,6 @@ export default {
     color: rhino30,
     marginRight: 5
   },
-  // name: {
-  //   fontFamily: 'Circular-Book',
-  //   fontSize: 17
-  // },
   icon: {
     fontSize: 46,
     marginRight: 25,

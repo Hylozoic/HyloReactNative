@@ -1,5 +1,11 @@
 import React from 'react'
-import { View, TouchableOpacity, TextInput, Text } from 'react-native'
+import {
+  View,
+  TouchableOpacity,
+  TextInput,
+  Text,
+  Alert
+} from 'react-native'
 import Icon from '../Icon'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
 import PopupMenuButton from '../PopupMenuButton'
@@ -16,11 +22,13 @@ export default function MemberHeader ({
   updateSetting = () => {},
   saveChanges,
   errors = {},
-  blockUser
+  ...props
 }) {
   if (!person) return null
 
   const { name, location, tagline } = person
+  const blockUser = blockUserWithConfirmationFun(props.blockUser, name)
+
   return <View style={styles.header}>
     <View style={styles.nameRow}>
       <Control
@@ -55,6 +63,21 @@ export default function MemberHeader ({
   </View>
 }
 
+export function blockUserWithConfirmationFun (blockUserFun, name) {
+  return function () {
+    return Alert.alert(
+      `Are you sure you want to block ${name}?`,
+      `You will no longer see ${name}\'s activity
+      and they won't see yours.
+      
+      You can unblock this member at anytime.
+      Go to Settings > Blocked Users.`,
+      [
+        {text: `Block ${name}`, onPress: (blockedUserId) => blockUserFun(blockedUserId)},
+        {text: 'Cancel', style: 'cancel'}
+      ])
+    }
+}
 export class Control extends React.Component {
   focus = () => this.input && this.input.focus()
 
@@ -97,7 +120,7 @@ export function MemberMenu ({flagMember, isMe, blockUser, editProfile, saveChang
 
   if (isEmpty(actions)) return null
 
-  const destructiveButtonIndex = actions[0][0] === 'Flag This Member' ? 0 : -1
+  const destructiveButtonIndex = actions[1][0] === 'Block This Member' ? 1 : -1
 
   return <PopupMenuButton actions={actions}
     destructiveButtonIndex={destructiveButtonIndex}>

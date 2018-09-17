@@ -18,8 +18,14 @@ export default class BlockedUsers extends React.Component {
 
   render () {    
     const { blockedUsers, loading } = this.props
+    
+    if (loading) return <ScrollView contentContainerStyle={styles.scrollContainer}>
+      <Loading />
+    </ScrollView>
 
-    if (loading) return <Loading />
+    if (!blockedUsers || blockedUsers.length < 1) return <ScrollView contentContainerStyle={styles.scrollContainer}>
+      <Text style={styles.noBlockedUsersMessage}>No members currently blocked.</Text>
+    </ScrollView>
 
     return <ScrollView contentContainerStyle={styles.scrollContainer}>
       {blockedUsers.map(blockedUser =>
@@ -32,7 +38,7 @@ export function BlockedUserRow ({ user, unBlockUser }) {
   return <View style={styles.settingsRow}>
     <View style={styles.nameRow}>
       <Text style={styles.linkText}>{user.name}</Text>
-      <TouchableOpacity onPress={unBlockUser}>
+      <TouchableOpacity onPress={unBlockUser} style={styles.unBlockButton}>
         <Text style={styles.unBlockButtonText}>Unblock</Text>
       </TouchableOpacity>  
     </View>

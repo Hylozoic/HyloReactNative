@@ -61,11 +61,11 @@ export default {
     borderColor: caribbeanGreen
   },
   notificationSettingsWrapper: {
-    marginTop: 50,
+    marginTop: 15,
     alignItems: 'center'
   },
   blockedUsersWrapper: {
-    marginTop: 50,
+    marginTop: 15,
     alignItems: 'center'
   },
   blockedUsers: {
