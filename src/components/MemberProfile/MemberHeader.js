@@ -9,8 +9,9 @@ import {
 import Icon from '../Icon'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
 import PopupMenuButton from '../PopupMenuButton'
-import { filter, isEmpty } from 'lodash/fp'
+import { filter, get, isEmpty } from 'lodash/fp'
 import styles from './MemberHeader.styles'
+import { AXOLOTL_ID } from '../../store/models/Person'
 
 export default function MemberHeader ({
   person,
@@ -28,6 +29,7 @@ export default function MemberHeader ({
 
   const { name, location, tagline } = person
   const blockUser = blockUserWithConfirmationFun(props.blockUser, name)
+  const isAxolotl = AXOLOTL_ID === get('id', person)
 
   return <View style={styles.header}>
     <View style={styles.nameRow}>
@@ -43,7 +45,7 @@ export default function MemberHeader ({
         <TouchableOpacity onPress={onPressMessages}>
           <Icon name='Messages' style={styles.icon} />
         </TouchableOpacity>
-        <MemberMenu {... {flagMember, isMe, editProfile, saveChanges, editable, blockUser}} />
+        <MemberMenu {... {flagMember, isMe, editProfile, saveChanges, editable, blockUser, isAxolotl}} />
       </View>
     </View>
     <Control
@@ -109,18 +111,19 @@ export class Control extends React.Component {
   }
 }
 
-export function MemberMenu ({flagMember, isMe, blockUser, editProfile, saveChanges, editable}) {
+export function MemberMenu ({flagMember, isMe, blockUser, editProfile, saveChanges, editable, isAxolotl}) {
   // If the function is defined, than it's a valid action
+
   const actions = filter(x => x[1], [
     ['Edit', isMe && !editable && editProfile],
     ['Save Changes', isMe && editable && saveChanges],
     ['Flag This Member', !isMe && flagMember],
-    ['Block This Member', !isMe && blockUser]
+    ['Block This Member', !isMe && !isAxolotl && blockUser]
   ])
 
   if (isEmpty(actions)) return null
 
-  const destructiveButtonIndex = actions[1][0] === 'Block This Member' ? 1 : -1
+  const destructiveButtonIndex = get('1.0', actions) === 'Block This Member' ? 1 : -1
 
   return <PopupMenuButton actions={actions}
     destructiveButtonIndex={destructiveButtonIndex}>
