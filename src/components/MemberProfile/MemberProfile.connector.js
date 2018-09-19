@@ -5,6 +5,7 @@ import { getPerson, fetchPerson } from './MemberProfile.store'
 import blockUser from '../../store/actions/blockUser'
 import makeGoToCommunity from '../../store/actions/makeGoToCommunity'
 import getMe from '../../store/selectors/getMe'
+import getBlockedUsers from '../../store/selectors/getBlockedUsers'
 import updateUserSettings from '../../store/actions/updateUserSettings'
 import { mapWhenFocused, mergeWhenFocused } from 'util/connector'
 
@@ -12,6 +13,7 @@ export function mapStateToProps (state, props) {
   const id = get('navigation.state.params.id', props)
   const editing = get('navigation.state.params.editing', props)
 
+  const isBlocked = !!getBlockedUsers(state).find(i => get('id', i) === id)
   const person = getPerson(state, {id})
   const goToDetails = () => props.navigation.navigate({routeName: 'MemberDetails', params: {id}, key: 'MemberDetails'})
   const goToEdit = () => props.navigation.navigate({routeName: 'MemberDetails', params: {id, editing: true}, key: 'MemberDetails'})
@@ -22,6 +24,7 @@ export function mapStateToProps (state, props) {
   const navigation = props.navigation
 
   return {
+    isBlocked,
     id,
     editing,
     person,

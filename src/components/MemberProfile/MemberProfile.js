@@ -40,6 +40,7 @@ export default class MemberProfile extends React.Component {
 
   render () {
     const {
+      isBlocked,
       canFlag,
       goToDetails,
       goToEdit,
@@ -52,7 +53,10 @@ export default class MemberProfile extends React.Component {
       navigation
     } = this.props
     const { flaggingVisible } = this.state
+
     if (!person) return <Loading />
+
+    if (isBlocked) return navigation.goBack()
 
     let flagMember
     if (canFlag) {
