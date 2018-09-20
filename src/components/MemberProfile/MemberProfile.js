@@ -19,6 +19,7 @@ export default class MemberProfile extends React.Component {
   }
 
   componentDidMount () {
+    if (this.props.isBlocked) return this.props.navigation.goBack()
     this.props.fetchPerson()
   }
 
@@ -55,8 +56,6 @@ export default class MemberProfile extends React.Component {
     const { flaggingVisible } = this.state
 
     if (!person) return <Loading />
-
-    if (isBlocked) return navigation.goBack()
 
     let flagMember
     if (canFlag) {
