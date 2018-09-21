@@ -63,6 +63,10 @@ export default function fetchCurrentUser () {
               name
             }
           }
+          blockedUsers {
+            id
+            name
+          }
           settings {
             signupInProgress
             dmNotifications

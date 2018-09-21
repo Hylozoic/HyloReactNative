@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BlockedUsers matches the last snapshot 1`] = `
+<ScrollView
+  contentContainerStyle={
+    Object {
+      "flex": 1,
+      "marginTop": 15,
+      "padding": 10,
+      "paddingBottom": 100,
+    }
+  }
+>
+  <BlockedUserRow
+    unBlockUser={[Function]}
+    user={
+      Object {
+        "id": 1,
+        "name": "Blocker User 1",
+      }
+    }
+  />
+  <BlockedUserRow
+    unBlockUser={[Function]}
+    user={
+      Object {
+        "id": 2,
+        "name": "Blocker User 2",
+      }
+    }
+  />
+</ScrollView>
+`;

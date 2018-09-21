@@ -1,4 +1,4 @@
-import handleLogout from './handleLogout'
+import resetStore from './resetStore'
 import { LOGOUT } from '../../components/Login/actions'
 
 it('resets the whole app state', () => {
@@ -7,9 +7,12 @@ it('resets the whole app state', () => {
     baz: 'bonk'
   }
 
+
+  
+
   const action = {
     type: LOGOUT
   }
-  expect(handleLogout(state, action))
+  expect(resetStore(state, action))
   .toMatchSnapshot()
 })

@@ -17,6 +17,7 @@ import PostEditor from '../PostEditor'
 import PostDetails from '../PostDetails'
 import MemberProfile from '../MemberProfile'
 import NotificationSettings from '../NotificationSettings'
+import BlockedUsers from '../BlockedUsers'
 import NotificationsList from '../NotificationsList'
 import InvitePeople from '../InvitePeople'
 import tabStyles from '../Tabs/Tabs.styles'
@@ -132,6 +133,7 @@ const screensInStack = {
   CreateCommunityUrl: {screen: CreateCommunityUrl},
   CreateCommunityReview: {screen: CreateCommunityReview},
   NotificationSettings: {screen: NotificationSettings},
+  BlockedUsers: {screen: BlockedUsers},
   SearchPage: {screen: SearchPage}
 }
 
