@@ -1,3 +1,4 @@
+import { AnalyticsEvents } from 'hylo-utils/constants'
 import { BLOCK_USER } from '../constants'
 
 export default function blockUser (blockedUserId) {
@@ -12,6 +13,9 @@ export default function blockUser (blockedUserId) {
       variables: {
         blockedUserId
       }
+    },
+    meta: {
+      analytics: AnalyticsEvents.BLOCK_USER
     }
   }
 }
