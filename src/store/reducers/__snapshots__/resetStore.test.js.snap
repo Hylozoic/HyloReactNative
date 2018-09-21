@@ -140,6 +140,11 @@ Object {
       "itemsById": Object {},
       "meta": Object {},
     },
+    "MeBlockedUsers": Object {
+      "items": Array [],
+      "itemsById": Object {},
+      "meta": Object {},
+    },
     "MeMemberships": Object {
       "items": Array [],
       "itemsById": Object {},

@@ -16,11 +16,15 @@ export function mapStateToProps (state, props) {
   const goToNotificationSettings = () =>
     props.navigation.navigate('NotificationSettings')
 
+  const goToBlockedUsers = () =>
+    props.navigation.navigate('BlockedUsers')
+
   return {
     currentUser: getMe(state, props),
     resettingPassword,
     cancel,
-    goToNotificationSettings
+    goToNotificationSettings,
+    goToBlockedUsers
   }
 }
 

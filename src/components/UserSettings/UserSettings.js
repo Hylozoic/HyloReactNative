@@ -181,7 +181,7 @@ export default class UserSettings extends React.Component {
   }
 
   render () {
-    const { currentUser, updateUserSettings, unlinkAccount, goToNotificationSettings } = this.props
+    const { currentUser, updateUserSettings, unlinkAccount, goToNotificationSettings, goToBlockedUsers } = this.props
     const { editingPassword, edits: { email, password, confirmPassword, facebookUrl, twitterName }, errors, changed } = this.state
     if (!currentUser) return <Loading />
     return <KeyboardFriendlyView style={styles.container}>
@@ -230,6 +230,9 @@ export default class UserSettings extends React.Component {
           updateUserSettings={updateUserSettings}
           updateField={this.updateField}
           unlinkAccount={unlinkAccount} />
+        <View style={styles.blockedUsersWrapper}>
+          <Button text='Blocked Users' onPress={goToBlockedUsers} style={styles.blockedUsers} />
+        </View>
         <View style={styles.notificationSettingsWrapper}>
           <Button text='Notification Settings' onPress={goToNotificationSettings} style={styles.notificationSettings} />
         </View>

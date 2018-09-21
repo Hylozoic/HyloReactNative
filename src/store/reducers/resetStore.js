@@ -1,5 +1,7 @@
-import { getEmptyState } from '../index'
+import { pick } from 'lodash/fp'
+import { getEmptyState } from '..'
 import { LOGOUT } from '../../components/Login/actions'
+import { RESET_STORE } from '../constants'
 import { reset } from './persistence'
 
 export default function (state, action) {
@@ -9,6 +11,17 @@ export default function (state, action) {
       ...getEmptyState(),
       session: {
         loggedIn: false
+      }
+    }
+  }
+
+  if (action.type === RESET_STORE && !action.error) {
+    reset() // this is an async action with side effects!
+    return {
+      ...getEmptyState(),
+      ...pick(['currentNetworkAndCommunity'], state),
+      session: {
+        loggedIn: true
       }
     }
   }

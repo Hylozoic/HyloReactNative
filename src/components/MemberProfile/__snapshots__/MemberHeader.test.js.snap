@@ -48,9 +48,11 @@ exports[`MemberHeader matches the last snapshot 1`] = `
         />
       </TouchableOpacity>
       <MemberMenu
+        blockUser={[Function]}
         editProfile={undefined}
         editable={undefined}
         flagMember={[Function]}
+        isAxolotl={false}
         isMe={true}
         saveChanges={undefined}
       />
@@ -83,7 +85,7 @@ exports[`MemberMenu returns a popupmenu when flagging allowed 1`] = `
       ],
     ]
   }
-  destructiveButtonIndex={0}
+  destructiveButtonIndex={-1}
 >
   <Icon
     name="More"

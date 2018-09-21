@@ -7,6 +7,7 @@ import optimisticMiddleware from './optimistic'
 import pendingMiddleware from './pending'
 import promiseMiddleware from 'redux-promise'
 import userFetchedMiddleware from './userFetchedMiddleware'
+import userBlockingMiddleware from './userBlockingMiddleware'
 import mixpanelMiddleware from './mixpanelMiddleware'
 import { isDev, isProduction } from '../../config'
 
@@ -18,6 +19,7 @@ const middleware = compact([
   pendingMiddleware,
   promiseMiddleware,
   userFetchedMiddleware,
+  userBlockingMiddleware,
   isProduction && mixpanelMiddleware,
   isDev && createLogger({
     collapsed: (getState, action, logEntry) => !logEntry.error
