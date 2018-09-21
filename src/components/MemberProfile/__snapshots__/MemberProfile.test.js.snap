@@ -90,6 +90,7 @@ exports[`MemberProfile doesnt have the flag content option 1`] = `
       />
       <View>
         <MemberHeader
+          blockUser={[Function]}
           editProfile={undefined}
           flagMember={undefined}
           isMe={undefined}
@@ -127,6 +128,7 @@ exports[`MemberProfile matches the last snapshot 1`] = `
       />
       <View>
         <MemberHeader
+          blockUser={[Function]}
           editProfile={undefined}
           flagMember={[Function]}
           isMe={undefined}

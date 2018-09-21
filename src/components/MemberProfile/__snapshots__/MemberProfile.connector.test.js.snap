@@ -2,6 +2,7 @@
 
 exports[`mapDispatchToProps returns the right keys 1`] = `
 Object {
+  "blockUser": [Function],
   "fetchPerson": [Function],
   "goToCommunity": [Function],
   "updateUserSettings": [Function],
@@ -16,6 +17,7 @@ Object {
   "goToEdit": [Function],
   "goToSkills": [Function],
   "id": 123,
+  "isBlocked": false,
   "isMe": false,
   "navigation": Object {
     "navigate": [MockFunction],

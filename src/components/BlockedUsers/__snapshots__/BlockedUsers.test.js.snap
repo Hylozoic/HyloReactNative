@@ -1,18 +1,33 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`BlockedUsers has navigationOptions 1`] = `
-Object {
-  "headerBackTitle": null,
-  "headerStyle": Object {
-    "backgroundColor": "white",
-    "paddingHorizontal": 10,
-  },
-  "headerTintColor": "#808c9b",
-  "headerTitle": "Blocked Users",
-  "headerTitleStyle": Object {
-    "color": "black",
-    "fontFamily": "Circular-Bold",
-    "fontSize": 17,
-  },
-}
+exports[`BlockedUsers matches the last snapshot 1`] = `
+<ScrollView
+  contentContainerStyle={
+    Object {
+      "flex": 1,
+      "marginTop": 15,
+      "padding": 10,
+      "paddingBottom": 100,
+    }
+  }
+>
+  <BlockedUserRow
+    unBlockUser={[Function]}
+    user={
+      Object {
+        "id": 1,
+        "name": "Blocker User 1",
+      }
+    }
+  />
+  <BlockedUserRow
+    unBlockUser={[Function]}
+    user={
+      Object {
+        "id": 2,
+        "name": "Blocker User 2",
+      }
+    }
+  />
+</ScrollView>
 `;
