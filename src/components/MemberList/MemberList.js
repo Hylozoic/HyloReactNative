@@ -4,13 +4,12 @@ import {
 } from 'react-native'
 import { some, values, keys, isEmpty, debounce, size } from 'lodash/fp'
 
-import Avatar from '../../Avatar'
-import { focus } from '../../../util/textInput'
-import Header from '../Header'
-import Icon from '../../Icon'
-import Loading from '../../Loading'
-import PopupMenuButton from '../../PopupMenuButton'
-import styles from './Members.styles'
+import Avatar from '../Avatar'
+import { focus } from '../../util/textInput'
+import Icon from '../Icon'
+import Loading from '../Loading'
+import PopupMenuButton from '../PopupMenuButton'
+import styles from './MemberList.styles'
 
 export default class MemberList extends React.Component {
   fetchOrShowCached () {

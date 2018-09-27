@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { omit, get } from 'lodash/fp'
 
-import { ALL_COMMUNITIES_ID } from '../../../store/models/Community'
+import { ALL_COMMUNITIES_ID } from '../../store/models/Community'
 import {
   FETCH_MEMBERS,
   fetchMembers,
@@ -12,9 +12,9 @@ import {
   setSearch,
   setSort
 } from './MemberList.store'
-import getMe from '../../../store/selectors/getMe'
-import getCurrentCommunity from '../../../store/selectors/getCurrentCommunity'
-import getCurrentNetwork from '../../../store/selectors/getCurrentNetwork'
+import getMe from '../../store/selectors/getMe'
+import getCurrentCommunity from '../../store/selectors/getCurrentCommunity'
+import getCurrentNetwork from '../../store/selectors/getCurrentNetwork'
 
 export function makeFetchOpts (props) {
   const { community, network, sortBy } = props

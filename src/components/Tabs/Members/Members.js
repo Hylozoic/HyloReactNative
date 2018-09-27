@@ -32,7 +32,7 @@ export default class Members extends React.Component {
     // sort of a hack since members need to be even since it's rows of 2.  fixes flexbox
 
     return <View style={styles.container}>
-      <MemberList subject={subject}>
+      <MemberList subject={subject} screenProps={this.props.screenProps}>
         <Banner community={community} network={network} all={isAll} />
         {showInviteButton && <Button
           text='Invite People'
