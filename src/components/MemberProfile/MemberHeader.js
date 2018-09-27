@@ -72,7 +72,7 @@ export function blockUserWithConfirmationFun (blockUserFun, name) {
       `You will no longer see ${name}\'s activity
       and they won't see yours.
       
-      You can unblock this member at anytime.
+      You can unblock this member at any time.
       Go to Settings > Blocked Users.`,
       [
         {text: `Block ${name}`, onPress: (blockedUserId) => blockUserFun(blockedUserId)},
