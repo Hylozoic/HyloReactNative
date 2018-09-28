@@ -19,10 +19,11 @@ export default function (state, action) {
     reset() // this is an async action with side effects!
     return {
       ...getEmptyState(),
-      ...pick(['currentNetworkAndCommunity'], state),
-      session: {
-        loggedIn: true
-      }
+      ...pick([
+        'session',
+        'currentNetworkAndCommunity',
+        'SocketListener'
+      ], state)
     }
   }
 
