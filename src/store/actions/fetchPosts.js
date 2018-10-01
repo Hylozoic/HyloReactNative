@@ -7,6 +7,7 @@ export default function fetchPosts (
   { subject, slug, networkSlug, sortBy, offset, search, filter, topic },
   { reset } = {}
 ) {
+
   var query, extractModel, getItems, projectFilter
 
   if (subject === 'community') {

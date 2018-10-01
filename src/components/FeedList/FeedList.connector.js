@@ -22,7 +22,7 @@ export function mapStateToProps (state, props) {
     community: community,
     network,
     sortBy,
-    filter,
+    filter: isProjectFeed ? 'project' : filter,
     topicName,
     isProjectFeed
   })
