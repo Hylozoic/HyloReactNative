@@ -14,18 +14,6 @@ export const FETCH_DETAILS_AND_MEMBERS = `${MODULE_NAME}/FETCH_DETAILS_AND_MEMBE
 
 export const MAX_TITLE_LENGTH = 100
 
-export const postEndpointFragment = `createPost(data: {
-  type: $type
-  title: $title
-  details: $details
-  communityIds: $communityIds
-  imageUrls: $imageUrls
-  fileUrls: $fileUrls
-  announcement: $announcement
-  topicNames: $topicNames
-  memberIds: $memberIds
-})`
-
 export const projectEndpointFragment = `createProject(data: {
   title: $title
   details: $details
@@ -37,7 +25,7 @@ export const projectEndpointFragment = `createProject(data: {
   memberIds: $memberIds
 })`
 
-export function createPost (post, actionType = CREATE_POST, endpointFragment = postEndpointFragment) {
+export function createPost (post) {
   const {
     type,
     title,
@@ -52,7 +40,7 @@ export function createPost (post, actionType = CREATE_POST, endpointFragment = p
   const communityIds = communities.map(c => c.id)
   const preprocessedDetails = divToP(details)
   return {
-    type: actionType,
+    type: CREATE_POST,
     graphql: {
       query: `mutation (
         $type: String
@@ -65,7 +53,17 @@ export function createPost (post, actionType = CREATE_POST, endpointFragment = p
         $topicNames: [String]
         $memberIds: [ID]        
       ) {
-        ${endpointFragment} {
+        createPost(data: {
+          type: $type
+          title: $title
+          details: $details
+          communityIds: $communityIds
+          imageUrls: $imageUrls
+          fileUrls: $fileUrls
+          announcement: $announcement
+          topicNames: $topicNames
+          memberIds: $memberIds
+        }) {
           ${getPostFieldsFragment(false)}
         }
       }`,
@@ -93,7 +91,64 @@ export function createPost (post, actionType = CREATE_POST, endpointFragment = p
 }
 
 export function createProject (post) {
-  return createPost(post, CREATE_PROJECT, projectEndpointFragment)
+  const {
+    title,
+    details,
+    communities,
+    imageUrls = [],
+    fileUrls = [],
+    topicNames = [],
+    memberIds = [],
+    sendAnnouncement
+  } = post
+  const communityIds = communities.map(c => c.id)
+  const preprocessedDetails = divToP(details)
+  return {
+    type: CREATE_PROJECT,
+    graphql: {
+      query: `mutation (
+        $title: String
+        $details: String
+        $communityIds: [String]
+        $imageUrls: [String]
+        $fileUrls: [String]
+        $announcement: Boolean
+        $topicNames: [String]
+        $memberIds: [ID]        
+      ) {
+        createProject(data: {
+          title: $title
+          details: $details
+          communityIds: $communityIds
+          imageUrls: $imageUrls
+          fileUrls: $fileUrls
+          announcement: $announcement
+          topicNames: $topicNames
+          memberIds: $memberIds
+        }) {
+          ${getPostFieldsFragment(false)}
+        }
+      }`,
+      variables: {
+        title,
+        details: preprocessedDetails,
+        communityIds,
+        imageUrls,
+        fileUrls,
+        announcement: sendAnnouncement,
+        topicNames,
+        memberIds
+      }
+    },
+    meta: {
+      extractModel: 'Post',
+      analytics: {
+        eventName: AnalyticsEvents.POST_CREATED,
+        detailsLength: textLength(preprocessedDetails),
+        isAnnouncement: sendAnnouncement
+      }
+    }
+  }
 }
 
 export function updatePost (post) {

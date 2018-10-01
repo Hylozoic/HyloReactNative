@@ -14,7 +14,7 @@ import {
   FETCH_POSTS
 } from '../actions/fetchPosts'
 import {
-  CREATE_POST
+  CREATE_POST, CREATE_PROJECT
 } from '../../components/PostEditor/PostEditor.store'
 import {
   RECEIVE_POST
@@ -48,6 +48,10 @@ export default function (state = {}, action) {
   switch (type) {
     case CREATE_POST:
       root = payload.data.createPost
+      return matchNewPostIntoQueryResults(state, root)
+
+    case CREATE_PROJECT:
+      root = payload.data.createProject
       return matchNewPostIntoQueryResults(state, root)
 
     case RECEIVE_POST:
