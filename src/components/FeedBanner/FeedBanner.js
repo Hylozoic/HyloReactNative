@@ -29,7 +29,7 @@ export default class FeedBanner extends React.PureComponent {
   render () {
     const {
       all, community, network, newPost, currentUser, topicSubscribed, topicName,
-      postsTotal, followersTotal
+      postsTotal, followersTotal, hidePostPrompt
     } = this.props
 
     let bannerUrl, name, image
@@ -52,6 +52,7 @@ export default class FeedBanner extends React.PureComponent {
 
     const pluralFollowers = (followersTotal !== 1)
     const pluralPosts = (postsTotal !== 1)
+    const showPostPrompt = !all && !hidePostPrompt
 
     return <View style={styles.container}>
       <Image source={image} style={styles.image} />
@@ -75,8 +76,8 @@ export default class FeedBanner extends React.PureComponent {
         {!isUndefined(topicSubscribed) && <SubscribeButton
           active={topicSubscribed} onPress={this.toggleSubscribe} />}
       </View>
-      {!all && <PostPrompt currentUser={currentUser} newPost={newPost} />}
-      {!!currentUser && !all && <View style={styles.promptShadow} />}
+      {showPostPrompt && <PostPrompt currentUser={currentUser} newPost={newPost} />}
+      {!!currentUser && showPostPrompt && <View style={styles.promptShadow} />}
       {!!this.state.overlayMessage &&
         <NotificationOverlay message={this.state.overlayMessage}
           type='info'

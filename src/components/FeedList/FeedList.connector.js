@@ -17,13 +17,14 @@ import resetNewPostCount from '../../store/actions/resetNewPostCount'
 export function mapStateToProps (state, props) {
   const sortBy = getSort(state, props)
   const filter = getFilter(state, props)
-  const { community, network, topicName } = props
+  const { community, network, topicName, isProjectFeed } = props
   const queryProps = getQueryProps(state, {
     community: community,
     network,
     sortBy,
     filter,
-    topicName
+    topicName,
+    isProjectFeed
   })
   const pending = state.pending[FETCH_POSTS]
   const communityId = get('community.id', props)

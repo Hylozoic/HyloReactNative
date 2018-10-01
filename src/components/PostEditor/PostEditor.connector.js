@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import {
-  createPost, FETCH_DETAILS_AND_MEMBERS,
+  createPost, createProject, FETCH_DETAILS_AND_MEMBERS,
   fetchPostDetailsAndMembers,
   updatePost, MAX_TITLE_LENGTH
 } from './PostEditor.store'
@@ -25,9 +25,7 @@ export function mapStateToProps (state, props) {
     : {}
   const postId = getPostId(state, props)
   const post = getPresentedPost(state, {id: postId})
-
-  console.log('post.members', post.members)
-
+  
   const shouldShowTypeChooser = !isProject
 
   return {
@@ -46,9 +44,11 @@ export function mapStateToProps (state, props) {
 }
 
 export function mapDispatchToProps (dispatch, props) {
-  const { navigation } = props
+  const { navigation, isProject } = props
   const postId = getPostId(null, props)
-  const saveAction = postId ? updatePost : createPost
+  const saveAction = postId
+    ? updatePost
+    : isProject ? createPost : createProject
 
   return {
     save: postData => {

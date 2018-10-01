@@ -5,6 +5,7 @@ import { getPostFieldsFragment } from '../../store/actions/fetchPost'
 
 export const MODULE_NAME = 'PostEditor'
 export const CREATE_POST = `${MODULE_NAME}/CREATE_POST`
+export const CREATE_PROJECT = `${MODULE_NAME}/CREATE_PROJECT`
 
 export const UPDATE_POST = `${MODULE_NAME}/UPDATE_POST`
 export const UPDATE_POST_PENDING = `${UPDATE_POST}_PENDING`
@@ -13,7 +14,30 @@ export const FETCH_DETAILS_AND_MEMBERS = `${MODULE_NAME}/FETCH_DETAILS_AND_MEMBE
 
 export const MAX_TITLE_LENGTH = 100
 
-export function createPost (post) {
+export const postEndpointFragment = `createPost(data: {
+  type: $type
+  title: $title
+  details: $details
+  communityIds: $communityIds
+  imageUrls: $imageUrls
+  fileUrls: $fileUrls
+  announcement: $announcement
+  topicNames: $topicNames
+  memberIds: $memberIds
+})`
+
+export const projectEndpointFragment = `createProject(data: {
+  title: $title
+  details: $details
+  communityIds: $communityIds
+  imageUrls: $imageUrls
+  fileUrls: $fileUrls
+  announcement: $announcement
+  topicNames: $topicNames
+  memberIds: $memberIds
+})`
+
+export function createPost (post, actionType = CREATE_POST, endpointFragment = postEndpointFragment) {
   const {
     type,
     title,
@@ -28,7 +52,7 @@ export function createPost (post) {
   const communityIds = communities.map(c => c.id)
   const preprocessedDetails = divToP(details)
   return {
-    type: CREATE_POST,
+    type: actionType,
     graphql: {
       query: `mutation (
         $type: String
@@ -41,17 +65,7 @@ export function createPost (post) {
         $topicNames: [String]
         $memberIds: [ID]        
       ) {
-        createPost(data: {
-          type: $type
-          title: $title
-          details: $details
-          communityIds: $communityIds
-          imageUrls: $imageUrls
-          fileUrls: $fileUrls
-          announcement: $announcement
-          topicNames: $topicNames
-          memberIds: $memberIds
-        }) {
+        ${endpointFragment} {
           ${getPostFieldsFragment(false)}
         }
       }`,
@@ -76,6 +90,10 @@ export function createPost (post) {
       }
     }
   }
+}
+
+export function createProject (post) {
+  return createPost(post, CREATE_PROJECT, projectEndpointFragment)
 }
 
 export function updatePost (post) {

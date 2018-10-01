@@ -119,5 +119,13 @@ export default {
       color: caribbeanGreen,
       backgroundColor: 'transparent'
     }
+  },
+  button: {
+    width: 185,
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    height: 40,
+    marginTop: 12,
+    fontSize: 14
   }
 }

@@ -11,6 +11,7 @@ export default class Home extends React.Component {
 
   componentDidMount () {
     // this.props.navigation.navigate('PostEditor', {communityId: 29, isProject: true})
+    this.props.navigation.navigate('Projects')
   }
 
   shouldComponentUpdate (nextProps) {

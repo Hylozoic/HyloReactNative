@@ -304,7 +304,7 @@ export default class PostEditor extends React.Component {
   }
 
   render () {
-    const { communityIds, canModerate, post, pendingDetailsText, shouldShowTypeChooser } = this.props
+    const { communityIds, canModerate, post, pendingDetailsText, shouldShowTypeChooser, isProject } = this.props
 
     const { fileUrls, imageUrls, isSaving, showTopicPicker, showMemberPicker,
       topics, title, detailsText, type, filePickerPending, imagePickerPending,
@@ -376,7 +376,7 @@ export default class PostEditor extends React.Component {
             <Topics onPress={this.removeTopic} topics={topics} placeholder={topicsPlaceholder} />
           </TouchableOpacity>
 
-          <TouchableOpacity
+          {isProject && <TouchableOpacity
             style={[
               styles.section,
               styles.textInputWrapper
@@ -387,7 +387,7 @@ export default class PostEditor extends React.Component {
               <View style={styles.topicAddBorder}><Icon name='Plus' style={styles.topicAdd} /></View>
             </View>
             <Topics onPress={this.removeMember} topics={members} placeholder={membersPlaceholder} />
-          </TouchableOpacity>
+          </TouchableOpacity>}
 
           {!isEmpty(imageUrls) && <View>
             <SectionLabel>Images</SectionLabel>

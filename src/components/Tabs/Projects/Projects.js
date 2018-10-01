@@ -3,6 +3,7 @@ import { Text, View, TouchableOpacity, TextInput } from 'react-native'
 import Loading from '../../Loading'
 import StarIcon from '../../StarIcon'
 import Badge from '../../Badge'
+import Button from '../../Button'
 import Icon from '../../Icon'
 import Header from '../Header'
 import styles from './Projects.styles'
@@ -19,6 +20,11 @@ export default class Projects extends React.Component {
     return nextProps.isFocused
   }
 
+  goToCreateProject = () => {
+    const { communityId } = this.props
+    this.props.navigation.navigate('PostEditor', {communityId: communityId, isProject: true})
+  }
+
   render () {
     const { communityId, currentUser, navigation, networkId } = this.props
     if (!currentUser) return <Loading style={{flex: 1}} />
@@ -26,9 +32,21 @@ export default class Projects extends React.Component {
       communityId={communityId}
       navigation={navigation}
       networkId={networkId}
-      screenProps={this.props.screenProps} />
+      screenProps={this.props.screenProps}
+      belowBannerComponent={<CreateProjectButton createProject={this.goToCreateProject}/>}
+      hidePostPrompt
+      isProjectFeed />
   }
 }
+
+export function CreateProjectButton ({ createProject }) {
+  return <Button
+    style={styles.button}
+    text='Create Project'
+    onPress={createProject} />
+}
+
+// TODO: remove all of this stuff and related styles in the stylesheet
 
 export function SearchBar ({ term, setTerm }) {
   return <View style={styles.searchBar}>
