@@ -18,14 +18,15 @@ function getPostId (state, props) {
 export function mapStateToProps (state, props) {
   const communityId = get('navigation.state.params.communityId', props)
   const selectedTopicName = get('navigation.state.params.topicName', props)
-  const isProject = get('navigation.state.params.isProject', props)
   const selectedTopicTag = createTopicTag({name: selectedTopicName})
   const defaultPost = selectedTopicName
     ? {detailsText: selectedTopicTag, communityIds: [communityId]}
     : {}
   const postId = getPostId(state, props)
   const post = getPresentedPost(state, {id: postId})
-  
+  const isProject = get('navigation.state.params.isProject', props) ||
+    get('type', post) === 'project'
+
   const shouldShowTypeChooser = !isProject
 
   return {

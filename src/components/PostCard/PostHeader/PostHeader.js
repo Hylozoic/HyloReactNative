@@ -2,7 +2,7 @@ import React from 'react'
 import { View, Text, TouchableOpacity, Alert, FlatList } from 'react-native'
 import Avatar from '../../Avatar'
 import Icon from '../../Icon'
-import { rhino30, rhino50, caribbeanGreen } from 'style/colors'
+import { rhino30, rhino50, caribbeanGreen, prim, fuchsiaPink } from 'style/colors'
 import { humanDate } from 'hylo-utils/text'
 import PopupMenuButton from '../../PopupMenuButton'
 import { get, filter, isEmpty } from 'lodash/fp'
@@ -289,10 +289,10 @@ const labelStyles = {
   },
   project: {
     box: {
-      backgroundColor: '#F1DFEE'
+      backgroundColor: prim
     },
     text: {
-      color: '#BB60A8'
+      color: fuchsiaPink
     }
   },
   event: {

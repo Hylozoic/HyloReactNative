@@ -10,6 +10,7 @@ import PostImage from '../PostCard/PostImage'
 import PostFooter from '../PostCard/PostFooter'
 import PostHeader from '../PostCard/PostHeader'
 import { LoadingScreen } from '../Loading'
+import Button from '../Button'
 import SocketSubscriber from '../SocketSubscriber'
 import styles from './PostDetails.styles'
 import { FileLabel } from '../PostEditor/FileSelector'
@@ -83,7 +84,8 @@ export default class PostDetails extends React.Component {
       post,
       currentUser,
       editPost,
-      pending
+      pending,
+      isProject
     } = this.props
 
     const {
@@ -121,6 +123,7 @@ export default class PostDetails extends React.Component {
         slug={slug}
         showMember={this.handleShowMember}
         showTopic={this.handleShowTopic} />
+      {isProject && <ProjectMembers count={post.members.length} />}
       <PostCommunities
         communities={post.communities}
         slug={slug}
@@ -131,6 +134,7 @@ export default class PostDetails extends React.Component {
         <Text style={styles.infoRowinfo}>{location}</Text>
       </View>}
       {!isEmpty(post.fileUrls) && <Files urls={post.fileUrls} />}
+      {isProject && <JoinProjectButton />}
       <PostFooter id={post.id}
         currentUser={currentUser}
         commenters={post.commenters}
@@ -186,3 +190,18 @@ export function Files ({ urls }) {
 
 const openUrlFn = url => () =>
   Linking.canOpenURL(url).then(ok => ok && Linking.openURL(url))
+
+export function JoinProjectButton () {
+  return <Button
+    style={styles.joinButton}
+    text='Join Project'
+    onPress={() => console.log('Joining Project')} />
+}
+
+export function ProjectMembers ({ count }) {
+  return <View style={styles.projectMembersContainer}>
+    <TouchableOpacity onPress={() => console.log('go to members')}>
+      <Text style={styles.memberCount}>{count} members</Text>
+    </TouchableOpacity>
+  </View>
+}

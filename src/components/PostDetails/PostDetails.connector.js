@@ -7,7 +7,7 @@ import { getPresentedPost } from '../../store/selectors/getPost'
 import getCurrentCommunityId from '../../store/selectors/getCurrentCommunityId'
 import getMe from '../../store/selectors/getMe'
 import makeGoToCommunity from '../../store/actions/makeGoToCommunity'
-import { isNull, isUndefined } from 'lodash/fp'
+import { isNull, isUndefined, get } from 'lodash/fp'
 
 function getPostId (state, props) {
   return props.navigation.state.params.id
@@ -17,8 +17,11 @@ export function mapStateToProps (state, props) {
   const id = getPostId(state, props)
   const currentUser = getMe(state, props)
   const communityId = getCurrentCommunityId(state, props)
+  const post = getPresentedPost(state, {id, communityId})
+  const isProject = get('type', post) === 'project'
   return {
-    post: getPresentedPost(state, {id, communityId}),
+    post,
+    isProject,
     currentUser
   }
 }

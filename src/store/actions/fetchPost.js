@@ -70,7 +70,7 @@ export function getPostFieldsFragment (withComments = true) {
     postsTotal
     followersTotal
   }
-  members (first: 1) {
+  members {
     items {
       id
       name
