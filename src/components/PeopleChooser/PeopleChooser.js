@@ -107,7 +107,7 @@ export default class PeopleChooser extends React.Component {
 }
 
 export function PersonInput ({ people, onChangeText, removePerson, text }) {
-  const placeholderText = isEmpty(people) ? 'Type in the names of people to message' : ''
+  const placeholderText = 'Type in the names of people to message'
   return <View style={styles.scrollViewWrapper}>
     <ScrollView
       contentContainerStyle={styles.personInputContainer}

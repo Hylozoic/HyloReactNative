@@ -32,6 +32,7 @@ export function mapDispatchToProps (dispatch, props) {
   return {
     fetchPost: () => dispatch(fetchPost(id)),
     editPost: () => props.navigation.navigate({routeName: 'PostEditor', params: {id}, key: 'PostEditor'}),
+    goToMembers: () => props.navigation.navigate({routeName: 'ProjectMembers', params: {id}, key: 'ProjectMembers'}),
     showMember: id => props.navigation.navigate({routeName: 'MemberProfile', params: {id}, key: 'MemberProfile'}),
     showTopic: (topicName, communityId) => {
       // All Communities and Network feed to topic nav

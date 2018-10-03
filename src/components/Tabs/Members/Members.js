@@ -2,7 +2,7 @@ import React from 'react'
 import {
   View, Text, TouchableOpacity, Image
 } from 'react-native'
-import { some, isEmpty, get } from 'lodash/fp'
+import { get } from 'lodash/fp'
 
 import { DEFAULT_BANNER } from '../../../store/models/Community'
 import Header from '../Header'

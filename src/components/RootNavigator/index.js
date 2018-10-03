@@ -15,6 +15,7 @@ import { Home, Members, Topics, Projects } from '../Tabs' // eslint-disable-line
 import stacksInTabsFactory from './stacksInTabsFactory'
 import PostEditor from '../PostEditor'
 import PostDetails from '../PostDetails'
+import ProjectMembers from '../ProjectMembers'
 import MemberProfile from '../MemberProfile'
 import NotificationSettings from '../NotificationSettings'
 import NotificationsList from '../NotificationsList'
@@ -104,6 +105,7 @@ const screensInStack = {
   NewMessage: {screen: NewMessage},
   PostDetails: {screen: PostDetails, path: 'post/:id'},
   PostEditor: {screen: PostEditor},
+  ProjectMembers: {screen: ProjectMembers},
   UserSettings: {screen: UserSettings},
   InvitePeople: {screen: InvitePeople},
   ModeratorSettings: {screen: ModeratorSettings},

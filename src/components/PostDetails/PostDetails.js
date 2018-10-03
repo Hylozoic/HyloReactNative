@@ -85,7 +85,8 @@ export default class PostDetails extends React.Component {
       currentUser,
       editPost,
       pending,
-      isProject
+      isProject,
+      goToMembers
     } = this.props
 
     const {
@@ -123,7 +124,7 @@ export default class PostDetails extends React.Component {
         slug={slug}
         showMember={this.handleShowMember}
         showTopic={this.handleShowTopic} />
-      {isProject && <ProjectMembers count={post.members.length} />}
+      {isProject && <ProjectMembers count={post.members.length} goToMembers={goToMembers} />}
       <PostCommunities
         communities={post.communities}
         slug={slug}
@@ -198,9 +199,9 @@ export function JoinProjectButton () {
     onPress={() => console.log('Joining Project')} />
 }
 
-export function ProjectMembers ({ count }) {
+export function ProjectMembers ({ count, goToMembers }) {
   return <View style={styles.projectMembersContainer}>
-    <TouchableOpacity onPress={() => console.log('go to members')}>
+    <TouchableOpacity onPress={goToMembers}>
       <Text style={styles.memberCount}>{count} members</Text>
     </TouchableOpacity>
   </View>
