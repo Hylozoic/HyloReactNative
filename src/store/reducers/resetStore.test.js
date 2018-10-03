@@ -1,18 +1,31 @@
-import resetStore from './resetStore'
+import resetStore, { KEYS_PRESERVED_ON_RESET } from './resetStore'
+import { getEmptyState } from '..'
 import { LOGOUT } from '../../components/Login/actions'
+import { RESET_STORE } from '../constants'
 
-it('resets the whole app state', () => {
-  const state = {
-    foo: 'bar',
-    baz: 'bonk'
-  }
+describe('resetStore', () => {
+  it('resets to initial state on logout', () => {
+    const fullInitialState = resetStore(getEmptyState(), {})
+    const state = {foo: 'bar'}
+    const action = {type: LOGOUT}
+    const newState = resetStore(state, action)
+    expect(newState).toEqual(fullInitialState)
+  })
 
-
-  
-
-  const action = {
-    type: LOGOUT
-  }
-  expect(resetStore(state, action))
-  .toMatchSnapshot()
+  it('preserves necessary state on reset', () => {
+    const fullInitialState = resetStore(getEmptyState(), {})
+    const preservedState = {[KEYS_PRESERVED_ON_RESET[0]]: 'foo'}
+    const notPreservedState = {'randomkey': 'foo'}
+    const action = {type: RESET_STORE}
+    const newState = resetStore({
+      ...preservedState,
+      ...notPreservedState
+    }, action)
+    expect(newState).toMatchObject(preservedState)
+    expect(newState).not.toMatchObject(notPreservedState)
+    expect(newState).toEqual({
+      ...fullInitialState,
+      ...preservedState
+    })
+  })
 })
