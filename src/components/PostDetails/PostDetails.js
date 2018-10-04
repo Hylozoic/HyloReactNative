@@ -100,7 +100,8 @@ export default class PostDetails extends React.Component {
 
     const slug = get('communities.0.slug', post)
     const communityId = get('communities.0.id', post)
-    const isFollower = find(follower => follower.id === currentUser.id, post.followers)
+    console.log('!!! project members:', post)
+    const isMember = find(member => member.id === currentUser.id, post.members)
 
     const { location } = post
 
@@ -138,7 +139,7 @@ export default class PostDetails extends React.Component {
         <Text style={styles.infoRowinfo}>{location}</Text>
       </View>}
       {!isEmpty(post.fileUrls) && <Files urls={post.fileUrls} />}
-      {isProject && !isFollower && <JoinProjectButton onPress={joinProject} />}
+      {isProject && <JoinProjectButton onPress={isMember ? leaveProject : joinProject} leaving={isMember} />}
       <PostFooter id={post.id}
         currentUser={currentUser}
         commenters={post.commenters}
@@ -195,10 +196,11 @@ export function Files ({ urls }) {
 const openUrlFn = url => () =>
   Linking.canOpenURL(url).then(ok => ok && Linking.openURL(url))
 
-export function JoinProjectButton ({ onPress }) {
+export function JoinProjectButton ({ onPress, leaving }) {
+  const text = leaving ? 'Leave Project' : 'Join Project'
   return <Button
     style={styles.joinButton}
-    text='Join Project'
+    text={text}
     onPress={onPress} />
 }
 

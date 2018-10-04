@@ -12,6 +12,9 @@ export default function (id) {
       variables: {
         id
       }
+    },
+    meta: {
+      id
     }
   }
 }
