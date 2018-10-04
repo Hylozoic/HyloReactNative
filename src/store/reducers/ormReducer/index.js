@@ -210,6 +210,20 @@ export default function ormReducer (state = {}, action) {
       me.updateAppending({memberships: [payload.data.createCommunity.id]})
       break
 
+    case JOIN_PROJECT_PENDING:
+      post = session.Post.withId(meta.id)
+      // this line is to clear the selector memoization
+      post.update({_invalidate: (post._invalidate || 0) + 1})
+      // Optimistically Add Post follow
+      break
+
+    case LEAVE_PROJECT_PENDING:
+      post = session.Post.withId(meta.id)
+      // this line is to clear the selector memoization
+      post.update({_invalidate: (post._invalidate || 0) + 1})
+      // Optimistically Remove Post follow
+      break
+
     case UPDATE_THREAD_READ_TIME_PENDING:
       thread = session.MessageThread.safeWithId(meta.id)
       if (thread) thread.update({lastReadAt: new Date().toString()})
