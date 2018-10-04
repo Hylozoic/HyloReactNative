@@ -41,7 +41,7 @@ export default {
   },
   searchWrapper: {
     marginTop: 10,
-    marginLeft: 8,
+    marginHorizontal: 8,
     marginBottom: 5,
     flex: 1,
     flexDirection: 'row',

@@ -41,7 +41,7 @@ export default class MemberList extends React.Component {
 
   render () {
     let {
-      children, members, subject, sortBy, setSort, fetchMoreMembers, pending
+      children, members, subject, sortBy, setSort, fetchMoreMembers, pending, hideSortOptions
     } = this.props
     const sortKeys = sortKeysFactory(subject)
     const onSearch = debounce(300, text => this.props.setSearch(text))
@@ -62,12 +62,12 @@ export default class MemberList extends React.Component {
             underlineColorAndroid='transparent' style={styles.searchInput} />
         </View>
 
-        <PopupMenuButton actions={actions}>
+        {!hideSortOptions && <PopupMenuButton actions={actions}>
           <View style={styles.sortBy}>
             <Text style={styles.sortByText}>{sortKeys[sortBy]}</Text>
             <Icon name='ArrowDown' style={styles.downArrow} />
           </View>
-        </PopupMenuButton>
+        </PopupMenuButton>}
       </View>
     </View>
 

@@ -1,34 +1,36 @@
 import { connect } from 'react-redux'
-
-const avatarUrl = 'http://digitalspyuk.cdnds.net/17/25/980x490/landscape-1498216547-avatar-neytiri.jpg'
-
-const members = [
-  {
-    id: 1,
-    name: 'Robbie Carlton',
-    avatarUrl
-  },
-  {
-    id: 1,
-    name: 'Jonas Blume',
-    avatarUrl
-  },
-  {
-    id: 1,
-    name: 'Michael Jackson',
-    avatarUrl
-  },
-  {
-    id: 1,
-    name: 'Ken Wilber',
-    avatarUrl
-  }
-]
+import {
+  getSearch,
+  setSearch
+} from '../MemberList/MemberList.store'
+import { getPresentedPost } from '../../store/selectors/getPost'
+import { get } from 'lodash/fp'
 
 export function mapStateToProps (state, props) {
+  const { id } = props
+  const search = getSearch(state, props)
+
+  const project = getPresentedPost(state, {id})
+
+  console.log('unfiltered members', get('members', project))
+
+  const members = (get('members', project) || []).filter(m => m.name.toLowerCase().includes(search.toLowerCase()))
+
+  console.log('filtered members', members)
+
   return {
     members
   }
 }
 
-export default connect(mapStateToProps)
+export function mapDispatchToProps (dispatch, props) {
+  return {
+    setSearch: search => dispatch(setSearch(search)),
+    // these two are no-ops, just their because the component expects them
+    setSort: () => {},
+    fetchMembers: () => {}
+
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)

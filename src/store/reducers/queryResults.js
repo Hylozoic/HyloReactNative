@@ -128,9 +128,6 @@ export function makeGetQueryResults (actionType) {
     // cases?
     const key = buildKey(actionType, props)
 
-    console.log('key', key)
-    console.log(Object.keys(state.queryResults))
-
     return state.queryResults[key]
   }
 }
