@@ -1,12 +1,13 @@
 import { connect } from 'react-redux'
 import { ALL_COMMUNITIES_ID } from '../../store/models/Community'
-
 import fetchPost from '../../store/actions/fetchPost'
 import { createComment } from './CommentEditor/CommentEditor.store'
 import { getPresentedPost } from '../../store/selectors/getPost'
 import getCurrentCommunityId from '../../store/selectors/getCurrentCommunityId'
 import getMe from '../../store/selectors/getMe'
 import makeGoToCommunity from '../../store/actions/makeGoToCommunity'
+import joinProject from '../../store/actions/joinProject'
+import leaveProject from '../../store/actions/leaveProject'
 import { isNull, isUndefined, get } from 'lodash/fp'
 
 function getPostId (state, props) {
@@ -44,6 +45,8 @@ export function mapDispatchToProps (dispatch, props) {
       }
     },
     createComment: value => dispatch(createComment(id, value)),
+    joinProject: () => dispatch(joinProject(id)),
+    leaveProject: () => dispatch(leaveProject(id)),
     goToCommunity: makeGoToCommunity(dispatch, props.navigation)
   }
 }
