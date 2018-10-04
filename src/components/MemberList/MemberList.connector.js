@@ -6,26 +6,20 @@ import {
   FETCH_MEMBERS,
   fetchMembers,
   getHasMoreMembers,
-  getMembers,
-  getSearch,
-  getSort,
-  setSearch,
-  setSort
+  getMembers
 } from './MemberList.store'
 import getMe from '../../store/selectors/getMe'
 import getCurrentCommunity from '../../store/selectors/getCurrentCommunity'
 import getCurrentNetwork from '../../store/selectors/getCurrentNetwork'
 
 export function makeFetchOpts (props) {
-  const { community, network, sortBy } = props
+  const { community, network } = props
 
-  var subject, slug, sortByName
+  var subject, slug
 
   if (network) {
     subject = 'network'
     slug = get('slug', network)
-    // can't sort network members by join date
-    if (sortBy === 'join') sortByName = 'name'
   } else if (community) {
     subject = 'community'
     slug = get('slug', community)
@@ -35,8 +29,7 @@ export function makeFetchOpts (props) {
   }
 
   return {
-    ...omit(['community', 'network', 'sortBy'], props),
-    sortBy: sortByName || sortBy,
+    ...omit(['community', 'network'], props),
     subject,
     slug
   }
@@ -48,14 +41,16 @@ export function mapStateToProps (state, props) {
   const network = getCurrentNetwork(state, props)
 
   const canModerate = currentUser && currentUser.canModerate(community)
-  const search = getSearch(state)
-  const sortBy = getSort(state)
 
-  const fetchOpts = makeFetchOpts({community, network, sortBy, search})
+  const fetchOpts = makeFetchOpts({community, network})
   const { slug, subject } = fetchOpts
 
   const getOpts = omit('subject', fetchOpts)
   getOpts.memberSubject = fetchOpts.subject
+
+  const members = getMembers(state, getOpts)
+
+  console.log('members', members)
 
   return {
     fetchOpts,
@@ -64,35 +59,38 @@ export function mapStateToProps (state, props) {
     network,
     canModerate,
     hasMore: getHasMoreMembers(state, getOpts),
-    members: getMembers(state, getOpts),
+    members,
     pending: state.pending[FETCH_MEMBERS],
-    search,
     slug,
     subject,
-    // Use the sortBy that has been adjusted in the case of networks (see makeFetchOpts)
-    sortBy: fetchOpts.sortBy,
     isAll: slug === ALL_COMMUNITIES_ID
   }
 }
 
 export function mapDispatchToProps (dispatch, { navigation }) {
   return {
-    setSort: sort => dispatch(setSort(sort)),
-    setSearch: search => dispatch(setSearch(search)),
     fetchMembers: opts => dispatch(fetchMembers(opts)),
     showMember: id => navigation.navigate({routeName: 'MemberProfile', params: {id}, key: 'MemberProfile'}),
     updateBadges: badgeFlags => navigation.setParams(badgeFlags)
   }
 }
 
+export function getSortByParam (sort, fetchOpts) {
+  // can't sort network members by join date
+  if (fetchOpts.subject === 'network' && sort === 'join') {
+    return 'name'
+  }
+  return sort
+}
+
 export function mergeProps (stateProps, dispatchProps, ownProps) {
   const { hasMore, pending, members, fetchOpts, community, network } = stateProps
   const fetchMembers = (community || network)
-    ? () => dispatchProps.fetchMembers(fetchOpts)
+    ? (search, sort) => dispatchProps.fetchMembers({...fetchOpts, ...{search, sort: getSortByParam(sort, fetchOpts)}})
     : () => {}
   const offset = members.length
   const fetchMoreMembers = hasMore && !pending
-    ? () => dispatchProps.fetchMembers({ ...fetchOpts, offset })
+    ? (search, sort) => dispatchProps.fetchMembers({ ...fetchOpts, ...{search, sort: getSortByParam(sort, fetchOpts)}, offset })
     : () => {}
 
   return {

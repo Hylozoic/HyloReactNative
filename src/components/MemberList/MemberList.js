@@ -12,9 +12,20 @@ import PopupMenuButton from '../PopupMenuButton'
 import styles from './MemberList.styles'
 
 export default class MemberList extends React.Component {
+
+  state = {
+    search: '',
+    sortBy: 'join'
+  }
+
   fetchOrShowCached () {
-    const { hasMore, members, fetchMembers } = this.props
-    if (isEmpty(members) && hasMore !== false) fetchMembers()
+    const { hasMore, members } = this.props
+    if (isEmpty(members) && hasMore !== false) this.fetchMembers()
+  }
+
+  fetchMembers () {
+    const { search, sortBy } = this.state
+    this.props.fetchMembers(search, sortBy)
   }
 
   goToInvitePeople = () => this.props.navigation.navigate({routeName: 'InvitePeople', key: 'InvitePeople'})
@@ -23,28 +34,34 @@ export default class MemberList extends React.Component {
     this.fetchOrShowCached()
   }
 
-  componentDidUpdate (prevProps) {
+  componentDidUpdate (prevProps, prevState) {
     if (this.props.screenProps.currentTabName !== 'Members') return
     if (!prevProps || prevProps.screenProps.currentTabName !== 'Members') {
       return this.fetchOrShowCached()
     }
 
-    if (some(key => this.props[key] !== prevProps[key], [
+    const shouldFetch = some(key => this.props[key] !== prevProps[key], [
       'slug',
-      'networkSlug',
-      'sortBy',
-      'search'
-    ])) {
+      'networkSlug'
+    ]) || some(key => this.state[key] !== prevState[key], [
+        'sortBy',
+        'search'
+      ])
+
+    if (shouldFetch) {
       this.fetchOrShowCached()
     }
   }
 
   render () {
     let {
-      children, members, subject, sortBy, setSort, fetchMoreMembers, pending
+      children, members, subject, fetchMoreMembers, pending
     } = this.props
+
+    const { sortBy } = this.state
     const sortKeys = sortKeysFactory(subject)
-    const onSearch = debounce(300, text => this.props.setSearch(text))
+    const onSearch = debounce(300, search => this.setState({search}))
+    const setSort = sortBy => this.setState({sortBy})
 
     const actions = values(sortKeys).map((value, index) => [value, () => setSort(keys(sortKeys)[index])])
     // sort of a hack since members need to be even since it's rows of 2.  fixes flexbox

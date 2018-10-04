@@ -2,7 +2,7 @@
 import React from 'react'
 import { View } from 'react-native'
 import styles from './ProjectMembers.styles'
-import MemberList from '../MemberList'
+import ProjectMemberList from '../MemberList/ProjectMemberList'
 import header from 'util/header'
 
 export default class ProjectMembers extends React.Component {
@@ -10,7 +10,7 @@ export default class ProjectMembers extends React.Component {
 
   render () {
     return <View style={styles.container}>
-      <MemberList subject='project' screenProps={this.props.screenProps} />
+      <ProjectMemberList subject='project' screenProps={this.props.screenProps} />
     </View>
   }
 }
