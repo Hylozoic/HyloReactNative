@@ -41,6 +41,10 @@ import {
 } from '../../../components/NotificationSettings/NotificationSettings.store'
 
 import { RESET_NEW_POST_COUNT_PENDING } from '../../actions/resetNewPostCount'
+import {
+  JOIN_PROJECT_PENDING,
+  LEAVE_PROJECT_PENDING
+} from 'store/constants'
 import { PIN_POST_PENDING } from '../../../components/PostCard/PostHeader/PostHeader.store'
 import { FETCH_CURRENT_USER } from 'store/actions/fetchCurrentUser'
 import orm from 'store/models'
@@ -208,6 +212,19 @@ export default function ormReducer (state = {}, action) {
     case CREATE_COMMUNITY:
       me = session.Me.first()
       me.updateAppending({memberships: [payload.data.createCommunity.id]})
+      break
+
+    case JOIN_PROJECT_PENDING:
+      me = session.Me.first()
+      // post = session.Post.withId(meta.id)
+      session.ProjectMember.create({post: meta.id, member: me.id})
+      break
+
+    case LEAVE_PROJECT_PENDING:
+      me = session.Me.first()
+      // session.ProjectMember.create({post: meta.id, member: me.id})
+      console.log('!!! LEAVE_PROJECT_PENDING:', session.ProjectMember.all())
+      // .filter(pm => console.log(pm, pm.member, pm.post))
       break
 
     case UPDATE_THREAD_READ_TIME_PENDING:

@@ -13,7 +13,8 @@ export default class Home extends React.Component {
     // this.props.navigation.navigate('PostEditor', {communityId: 29, isProject: true})
     // this.props.navigation.navigate('Projects')
     // this.props.navigation.navigate('PostDetails', {id: 27007})
-    this.props.navigation.navigate('ProjectMembers', {id: 27007})
+    // this.props.navigation.navigate('ProjectMembers', {id: 27007})
+    // this.props.navigation.navigate('PostDetails', {id: 25671})
   }
 
   shouldComponentUpdate (nextProps) {

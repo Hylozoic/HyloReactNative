@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 import React from 'react'
 import { Linking, View, Text, TouchableOpacity, Alert } from 'react-native'
-import { get, isEmpty } from 'lodash/fp'
+import { get, isEmpty, find } from 'lodash/fp'
 import { shape, any, object, string, func, array, bool } from 'prop-types'
 import Comments from '../Comments'
 import PostBody from '../PostCard/PostBody'
@@ -86,6 +86,8 @@ export default class PostDetails extends React.Component {
       editPost,
       pending,
       isProject,
+      joinProject,
+      leaveProject,
       goToMembers
     } = this.props
 
@@ -98,6 +100,8 @@ export default class PostDetails extends React.Component {
 
     const slug = get('communities.0.slug', post)
     const communityId = get('communities.0.id', post)
+    console.log('!!! project members:', post)
+    const isMember = find(member => member.id === currentUser.id, post.members)
 
     const { location } = post
 
@@ -135,7 +139,7 @@ export default class PostDetails extends React.Component {
         <Text style={styles.infoRowinfo}>{location}</Text>
       </View>}
       {!isEmpty(post.fileUrls) && <Files urls={post.fileUrls} />}
-      {isProject && <JoinProjectButton />}
+      {isProject && <JoinProjectButton onPress={isMember ? leaveProject : joinProject} leaving={isMember} />}
       <PostFooter id={post.id}
         currentUser={currentUser}
         commenters={post.commenters}
@@ -192,11 +196,12 @@ export function Files ({ urls }) {
 const openUrlFn = url => () =>
   Linking.canOpenURL(url).then(ok => ok && Linking.openURL(url))
 
-export function JoinProjectButton () {
+export function JoinProjectButton ({ onPress, leaving }) {
+  const text = leaving ? 'Leave Project' : 'Join Project'
   return <Button
     style={styles.joinButton}
-    text='Join Project'
-    onPress={() => console.log('Joining Project')} />
+    text={text}
+    onPress={onPress} />
 }
 
 export function ProjectMembers ({ count, goToMembers }) {
