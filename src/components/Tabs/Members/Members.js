@@ -37,18 +37,18 @@ export default class Members extends React.Component {
     return <View style={styles.container}>
       <MemberList isServerSearch
         {...pick([
-        'screenProps',
-        'hasMore',
-        'members',
-        'pending',
-        'slug',
-        'search',
-        'sortKeys',
-        'sortBy',
-        'setSort',
-        'setSearch',
-        'fetchMembers',
-        'fetchMoreMembers'], this.props)}
+          'screenProps',
+          'hasMore',
+          'members',
+          'pending',
+          'slug',
+          'search',
+          'sortKeys',
+          'sortBy',
+          'setSort',
+          'setSearch',
+          'fetchMembers',
+          'fetchMoreMembers'], this.props)}
       >
         <Banner community={community} network={network} all={isAll} />
         {showInviteButton && <Button
