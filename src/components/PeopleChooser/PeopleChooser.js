@@ -11,7 +11,7 @@ import Avatar from '../Avatar'
 import Icon from '../Icon'
 import Loading from '../Loading'
 import styles from './PeopleChooser.styles'
-import { isEmpty } from 'lodash/fp'
+import { isEmpty, compact } from 'lodash/fp'
 import { isIOS } from 'util/platform'
 
 export default class PeopleChooser extends React.Component {
@@ -34,7 +34,6 @@ export default class PeopleChooser extends React.Component {
   }
 
   addPerson = person => {
-    console.log('adding person', person)
     const { people } = this.state
     const updatedPeople = people.concat(person)
     this.setState({
@@ -60,7 +59,7 @@ export default class PeopleChooser extends React.Component {
   filterChosenPeople = list => {
     const { people } = this.state
     const peopleIds = people.map(p => p.id)
-    return list.filter(p => !peopleIds.includes(p.id))
+    return compact(list).filter(p => !peopleIds.includes(p.id))
   }
 
   render () {
@@ -74,6 +73,7 @@ export default class PeopleChooser extends React.Component {
     } = this.props
 
     const { people } = this.state
+    console.log('people', people)
 
     const showSuggestions = !isEmpty(personInputText)
 

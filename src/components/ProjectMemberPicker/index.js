@@ -8,7 +8,7 @@ import PeopleChooser from '../PeopleChooser'
 
 import Icon from '../Icon'
 
-export default class ProjectMemberPiccker extends React.Component {
+export default class ProjectMemberPicker extends React.Component {
   render () {
     const { style, onCancel, updateMembers, members } = this.props
 
