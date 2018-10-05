@@ -12,6 +12,12 @@ import PopupMenuButton from '../PopupMenuButton'
 import styles from './MemberList.styles'
 
 export default class MemberList extends React.Component {
+  static defaultProps = {
+    fetchMembers: () => {},
+    fetchMoreMembers: () => {},
+    setSort: () => {}
+  }
+
   fetchOrShowCached () {
     const { hasMore, members, fetchMembers } = this.props
     if (isEmpty(members) && hasMore !== false) fetchMembers()

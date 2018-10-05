@@ -26,10 +26,6 @@ export function mapStateToProps (state, props) {
 export function mapDispatchToProps (dispatch, props) {
   return {
     setSearch: search => dispatch(setSearch(search)),
-    // these two are no-ops, just their because the component expects them
-    setSort: () => {},
-    fetchMembers: () => {}
-
   }
 }
 

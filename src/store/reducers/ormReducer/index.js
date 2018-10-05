@@ -214,18 +214,19 @@ export default function ormReducer (state = {}, action) {
       me.updateAppending({memberships: [payload.data.createCommunity.id]})
       break
 
-    case JOIN_PROJECT_PENDING:
-      me = session.Me.first()
-      // post = session.Post.withId(meta.id)
-      session.ProjectMember.create({post: meta.id, member: me.id})
-      break
+    // case JOIN_PROJECT_PENDING:
+    //   me = session.Me.first()
+    //   // post = session.Post.withId(meta.id)
+    //   session.ProjectMember.create({post: meta.id, member: me.id})
+    //   break
 
-    case LEAVE_PROJECT_PENDING:
-      me = session.Me.first()
-      // session.ProjectMember.create({post: meta.id, member: me.id})
-      console.log('!!! LEAVE_PROJECT_PENDING:', session.ProjectMember.all())
-      // .filter(pm => console.log(pm, pm.member, pm.post))
-      break
+    // case LEAVE_PROJECT_PENDING:
+    //   me = session.Me.first()
+    //   post = session.Post.withId(meta.id)
+    //   // session.ProjectMember.create({post: meta.id, member: me.id})
+    //   console.log('!!! LEAVE_PROJECT_PENDING:', post.members)
+    //   console.log(post.members.filter(pm => pm.member === me.id))
+    //   break
 
     case UPDATE_THREAD_READ_TIME_PENDING:
       thread = session.MessageThread.safeWithId(meta.id)
