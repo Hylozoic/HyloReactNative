@@ -86,7 +86,7 @@ export default class PostEditor extends React.Component {
     })
     this.state = {
       title: get('title', post) || '',
-      type: 'discussion',
+      type: get('type', post) || 'discussion',
       communityIds,
       imageUrls,
       fileUrls,
