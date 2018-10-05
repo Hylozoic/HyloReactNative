@@ -73,7 +73,6 @@ export default class PeopleChooser extends React.Component {
     } = this.props
 
     const { people } = this.state
-    console.log('people', people)
 
     const showSuggestions = !isEmpty(personInputText)
 

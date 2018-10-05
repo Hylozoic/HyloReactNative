@@ -9,7 +9,7 @@ import {
   Modal
 } from 'react-native'
 import { validateTopicName } from 'hylo-utils/validators'
-import { get, uniq, uniqBy, isEmpty } from 'lodash/fp'
+import { get, uniq, uniqBy, isEmpty, isEqual } from 'lodash/fp'
 import PropTypes from 'prop-types'
 import ProjectMemberPicker from '../ProjectMemberPicker'
 
@@ -71,7 +71,8 @@ export default class PostEditor extends React.Component {
     if (get('post.detailsText', this.props) !== get('post.detailsText', prevProps)) {
       this.setState({detailsText: get('post.detailsText', this.props)})
     }
-    if (get('post.members', this.props) !== get('post.members', prevProps)) {
+
+    if (!isEqual(get('post.members', this.props), get('post.members', prevProps))) {
       this.setState({members: get('post.members', this.props)})
     }
   }
@@ -300,7 +301,7 @@ export default class PostEditor extends React.Component {
 
   removeMember = member => () => {
     const { members } = this.state
-    this.updateMembers(members.filter(m => m.id != member.id))
+    this.updateMembers(members.filter(m => m.id !== member.id))
   }
 
   render () {
