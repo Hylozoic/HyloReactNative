@@ -9,6 +9,7 @@ import getMe from '../../store/selectors/getMe'
 import makeGoToCommunity from '../../store/actions/makeGoToCommunity'
 import joinProject from '../../store/actions/joinProject'
 import leaveProject from '../../store/actions/leaveProject'
+import goToMemberMaker from '../../store/actions/goToMemberMaker'
 import { isNull, isUndefined, get } from 'lodash/fp'
 
 function getPostId (state, props) {
@@ -29,11 +30,10 @@ export function mapStateToProps (state, props) {
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
-  const { post, navigation } = stateProps
+  const { post } = stateProps
   const { dispatch } = dispatchProps
-  const { navigation: { navigate } } = ownProps
+  const { navigation, navigation: { navigate } } = ownProps
   const id = getPostId(null, stateProps)
-  // const { id, members } = post
 
   return {
     fetchPost: () => dispatch(fetchPost(id)),
@@ -42,8 +42,8 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     leaveProject: () => dispatch(leaveProject(id)),
     goToCommunity: makeGoToCommunity(dispatch, navigation),
     editPost: () => navigate({routeName: 'PostEditor', params: {id}, key: 'PostEditor'}),
-    goToMembers: () => navigate({routeName: 'ProjectMembers', params: {id, members: get('members', post)}, key: 'ProjectMembers'}),
-    showMember: userId => navigate({routeName: 'MemberProfile', params: {userId}, key: 'MemberProfile'}),
+    goToMembers: () => navigate({routeName: 'ProjectMembers', params: {id, members: get('members', post),}, key: 'ProjectMembers'}),
+    showMember: goToMemberMaker({navigate}),
     showTopic: (topicName, communityId) => {
       // All Communities and Network feed to topic nav
       // currently not supported

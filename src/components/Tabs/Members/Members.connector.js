@@ -91,7 +91,7 @@ export function mapDispatchToProps (dispatch, props) {
     showMember: id => props.navigation.navigate({routeName: 'MemberProfile', params: {id}, key: 'MemberProfile'}),
     setSort: sort => dispatch(setSort(sort)),
     setSearch: search => dispatch(setSearch(search)),
-    fetchMembers: opts => dispatch(fetchMembers(opts)),
+    fetchMembers: opts => dispatch(fetchMembers(opts))
   }
 }
 

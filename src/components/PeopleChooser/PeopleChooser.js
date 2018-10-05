@@ -69,7 +69,8 @@ export default class PeopleChooser extends React.Component {
       setPersonInput,
       personInputText,
       pending,
-      showRecentContacts
+      showRecentContacts,
+      placeholderText
     } = this.props
 
     const { people } = this.state
@@ -92,7 +93,8 @@ export default class PeopleChooser extends React.Component {
         people={people}
         removePerson={this.removePerson}
         onChangeText={setPersonInput}
-        text={personInputText} />
+        text={personInputText}
+        placeholderText={placeholderText} />
       <SectionList
         contentContainerStyle={styles.sectionList}
         renderItem={renderContact(this.addPerson)}
@@ -105,8 +107,12 @@ export default class PeopleChooser extends React.Component {
   }
 }
 
-export function PersonInput ({ people, onChangeText, removePerson, text }) {
-  const placeholderText = 'Type in the names of people to message'
+export function PersonInput ({
+  people,
+  onChangeText,
+  removePerson,
+  text,
+  placeholderText = 'Type in the names of people to message' }) {
   return <View style={styles.scrollViewWrapper}>
     <ScrollView
       contentContainerStyle={styles.personInputContainer}

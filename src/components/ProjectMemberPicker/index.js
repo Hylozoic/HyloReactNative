@@ -1,12 +1,10 @@
 import React from 'react'
 import {
-  TouchableOpacity,
   ScrollView
 } from 'react-native'
 
 import PeopleChooser from '../PeopleChooser'
-
-import Icon from '../Icon'
+import Button from '../Button'
 
 export default class ProjectMemberPicker extends React.Component {
   render () {
@@ -14,10 +12,14 @@ export default class ProjectMemberPicker extends React.Component {
 
     return <ScrollView keyboardShouldPersistTaps='handled'
       contentContainerStyle={[styles.container, style]}>
-      <TouchableOpacity onPress={onCancel}>
-        <Icon name='Ex' style={styles.cancelButton} />
-      </TouchableOpacity>
-      <PeopleChooser updatePeople={updateMembers} people={members} showRecentContacts />
+      <PeopleChooser
+        updatePeople={updateMembers}
+        placeholderText='Type in the names of people to add to project'
+        people={members} />
+      <Button
+        style={styles.doneButton}
+        text='Done'
+        onPress={onCancel} />
     </ScrollView>
   }
 }
@@ -25,11 +27,19 @@ export default class ProjectMemberPicker extends React.Component {
 const styles = {
   container: {
     backgroundColor: 'white',
-    flex: 1
+    flex: 1,
+    paddingTop: 50
   },
   cancelButton: {
     fontSize: 20,
     paddingVertical: 5,
     paddingHorizontal: 10
+  },
+  doneButton: {
+    width: 100,
+    marginLeft: 'auto',
+    marginRight: 25,
+    marginTop: 'auto',
+    marginBottom: 25
   }
 }

@@ -60,7 +60,7 @@ export default class MemberList extends React.Component {
   }
 
   componentDidUpdate (prevProps) {
-    if (this.props.members.length !== prevProps.members.length) {
+    if (this.props.members && (this.props.members.length !== prevProps.members.length)) {
       this.setState({
         members: this.props.members
       })

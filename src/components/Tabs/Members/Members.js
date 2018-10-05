@@ -1,8 +1,8 @@
 import React from 'react'
 import {
-  View, Text, TouchableOpacity, Image
+  View, Text, Image
 } from 'react-native'
-import { get } from 'lodash/fp'
+import { get, pick } from 'lodash/fp'
 
 import { DEFAULT_BANNER } from '../../../store/models/Community'
 import Header from '../Header'
@@ -48,6 +48,7 @@ export default class Members extends React.Component {
           'setSort',
           'setSearch',
           'fetchMembers',
+          'showMember',
           'fetchMoreMembers'], this.props)}
       >
         <Banner community={community} network={network} all={isAll} />
