@@ -52,6 +52,12 @@ export default class PostDetails extends React.Component {
     return !!nextProps.isFocused
   }
 
+  componentDidUpdate (prevProps) {
+    if (this.props.post.members.length !== prevProps.post.members.length) {
+
+    }
+  }
+
   handleShowMember = (memberId) => this.props.showMember(memberId)
   handleShowTopic = (topicId) => this.props.showTopic(topicId, get('post.communities.0.id', this.props))
   handleGoToCommunity = (communityId) => this.props.goToCommunity(communityId)
@@ -100,7 +106,6 @@ export default class PostDetails extends React.Component {
 
     const slug = get('communities.0.slug', post)
     const communityId = get('communities.0.id', post)
-    console.log('!!! project members:', post)
     const isMember = find(member => member.id === currentUser.id, post.members)
 
     const { location } = post
@@ -128,7 +133,7 @@ export default class PostDetails extends React.Component {
         slug={slug}
         showMember={this.handleShowMember}
         showTopic={this.handleShowTopic} />
-      {isProject && <ProjectMembers count={post.members.length} goToMembers={goToMembers} />}
+      {isProject && <ProjectMembers members={post.members} count={post.members.length} goToMembers={goToMembers} />}
       <PostCommunities
         communities={post.communities}
         slug={slug}

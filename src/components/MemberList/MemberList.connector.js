@@ -63,25 +63,27 @@ export function mapStateToProps (state, props) {
     community,
     network,
     canModerate,
+    isAll: slug === ALL_COMMUNITIES_ID,
+    subject,
+    // required by component
     hasMore: getHasMoreMembers(state, getOpts),
     members: getMembers(state, getOpts),
     pending: state.pending[FETCH_MEMBERS],
     search,
     slug,
-    subject,
+    sortKeys: sortKeysFactory(subject),
     // Use the sortBy that has been adjusted in the case of networks (see makeFetchOpts)
-    sortBy: fetchOpts.sortBy,
-    isAll: slug === ALL_COMMUNITIES_ID
+    sortBy: fetchOpts.sortBy
   }
 }
 
-export function mapDispatchToProps (dispatch, { navigation }) {
+export function mapDispatchToProps (dispatch, props) {
   return {
+    showMember: id => props.navigation.navigate({routeName: 'MemberProfile', params: {id}, key: 'MemberProfile'}),
+    // required by component
     setSort: sort => dispatch(setSort(sort)),
     setSearch: search => dispatch(setSearch(search)),
     fetchMembers: opts => dispatch(fetchMembers(opts)),
-    showMember: id => navigation.navigate({routeName: 'MemberProfile', params: {id}, key: 'MemberProfile'}),
-    updateBadges: badgeFlags => navigation.setParams(badgeFlags)
   }
 }
 
@@ -99,6 +101,7 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     ...stateProps,
     ...dispatchProps,
     ...ownProps,
+    // required by component
     fetchMoreMembers,
     fetchMembers
   }
@@ -109,3 +112,27 @@ export default connect(
   mapDispatchToProps,
   mergeProps
 )
+
+
+// these keys must match the values that hylo-node can handle
+export function sortKeysFactory (subject) {
+  const sortKeys = {
+    name: 'Name',
+    location: 'Location'
+  }
+  if (subject !== 'network') sortKeys['join'] = 'Newest'
+  return sortKeys
+}
+
+
+// hasMore
+// members
+// pending
+// slug
+// search
+// sortKeys
+// sortBy
+// setSort
+// setSearch
+// fetchMembers
+// fetchMoreMembers

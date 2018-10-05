@@ -4,6 +4,7 @@ import fetchPost from '../../store/actions/fetchPost'
 import { createComment } from './CommentEditor/CommentEditor.store'
 import { getPresentedPost } from '../../store/selectors/getPost'
 import getCurrentCommunityId from '../../store/selectors/getCurrentCommunityId'
+import getNavigationParam from '../../store/selectors/getNavigationParam'
 import getMe from '../../store/selectors/getMe'
 import makeGoToCommunity from '../../store/actions/makeGoToCommunity'
 import joinProject from '../../store/actions/joinProject'
@@ -11,7 +12,7 @@ import leaveProject from '../../store/actions/leaveProject'
 import { isNull, isUndefined, get } from 'lodash/fp'
 
 function getPostId (state, props) {
-  return props.navigation.state.params.id
+  return getNavigationParam('id', state, props)
 }
 
 export function mapStateToProps (state, props) {
@@ -27,28 +28,35 @@ export function mapStateToProps (state, props) {
   }
 }
 
-export function mapDispatchToProps (dispatch, props) {
-  const id = getPostId(null, props)
+export function mergeProps (stateProps, dispatchProps, ownProps) {
+  const { post, navigation } = stateProps
+  const { dispatch } = dispatchProps
+  const { navigation: { navigate } } = ownProps
+  const id = getPostId(null, stateProps)
+  // const { id, members } = post
 
   return {
     fetchPost: () => dispatch(fetchPost(id)),
-    editPost: () => props.navigation.navigate({routeName: 'PostEditor', params: {id}, key: 'PostEditor'}),
-    goToMembers: () => props.navigation.navigate({routeName: 'ProjectMembers', params: {id}, key: 'ProjectMembers'}),
-    showMember: id => props.navigation.navigate({routeName: 'MemberProfile', params: {id}, key: 'MemberProfile'}),
+    createComment: value => dispatch(createComment(id, value)),
+    joinProject: () => dispatch(joinProject(id)),
+    leaveProject: () => dispatch(leaveProject(id)),
+    goToCommunity: makeGoToCommunity(dispatch, navigation),
+    editPost: () => navigate({routeName: 'PostEditor', params: {id}, key: 'PostEditor'}),
+    goToMembers: () => navigate({routeName: 'ProjectMembers', params: {id, members: get('members', post)}, key: 'ProjectMembers'}),
+    showMember: userId => navigate({routeName: 'MemberProfile', params: {userId}, key: 'MemberProfile'}),
     showTopic: (topicName, communityId) => {
       // All Communities and Network feed to topic nav
       // currently not supported
       if (communityId === ALL_COMMUNITIES_ID || (isNull(communityId) || isUndefined(communityId))) {
-        return props.navigation.navigate({routeName: 'TopicSupportComingSoon', key: 'TopicSupportComingSoon'})
+        return navigate({routeName: 'TopicSupportComingSoon', key: 'TopicSupportComingSoon'})
       } else {
-        return props.navigation.navigate({routeName: 'Feed', params: {communityId, topicName}, key: 'Feed'})
+        return navigate({routeName: 'Feed', params: {communityId, topicName}, key: 'Feed'})
       }
     },
-    createComment: value => dispatch(createComment(id, value)),
-    joinProject: () => dispatch(joinProject(id)),
-    leaveProject: () => dispatch(leaveProject(id)),
-    goToCommunity: makeGoToCommunity(dispatch, props.navigation)
+    ...ownProps,
+    ...stateProps,
+    ...dispatchProps
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)
+export default connect(mapStateToProps, null, mergeProps)

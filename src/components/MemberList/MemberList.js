@@ -1,4 +1,5 @@
 import React from 'react'
+import { isFunction, isDefined, filter } from 'lodash/fp'
 import {
   View, FlatList, Text, TouchableOpacity, TextInput
 } from 'react-native'
@@ -11,50 +12,89 @@ import Loading from '../Loading'
 import PopupMenuButton from '../PopupMenuButton'
 import styles from './MemberList.styles'
 
+// Required props for all instances
+// members
+// pending
+// search
+// sortKeys
+// sortBy
+// 
+// Add'l required props for isServerSearch
+// 
+// fetchMembers (existence determines whether server search or not)
+// fetchMoreMembers
+// slug
+// hasMore
+// setSort
+// setSearch
+
 export default class MemberList extends React.Component {
   static defaultProps = {
-    fetchMembers: () => {},
-    fetchMoreMembers: () => {},
-    setSort: () => {}
+    fetchMoreMembers: () => {}
+  }
+
+  constructor (props) {
+    super(props)
+    this.state = {
+      isServerSearch: isFunction(props.fetchMembers),
+      members: props.members
+    }
   }
 
   fetchOrShowCached () {
-    const { hasMore, members, fetchMembers } = this.props
-    if (isEmpty(members) && hasMore !== false) fetchMembers()
+    const { members, fetchMembers, hasMore } = this.props
+    if (this.state.isServerSearch && isEmpty(members) && hasMore !== false) fetchMembers()
   }
 
-  goToInvitePeople = () => this.props.navigation.navigate({routeName: 'InvitePeople', key: 'InvitePeople'})
+  search (searchString) {
+    if (this.state.isServerSearch) {
+      this.props.setSearch(searchString)
+    } else {
+      const membersFilter = (m) => m.name.toLowerCase().includes(searchString.toLowerCase())
+      this.setState({members: filter(membersFilter, this.props.members)})
+    }
+  }
 
   componentDidMount () {
     this.fetchOrShowCached()
   }
 
   componentDidUpdate (prevProps) {
-    if (this.props.screenProps.currentTabName !== 'Members') return
-    if (!prevProps || prevProps.screenProps.currentTabName !== 'Members') {
-      return this.fetchOrShowCached()
+    if (this.props.members.length !== prevProps.members.length) {
+      this.setState({
+        members: this.props.members
+      })
     }
-
-    if (some(key => this.props[key] !== prevProps[key], [
-      'slug',
-      'networkSlug',
-      'sortBy',
-      'search'
-    ])) {
-      this.fetchOrShowCached()
+    // Why necessary? componentShouldUpdate? Is this a react-navigation screens in background thing?
+    // if (this.props.screenProps.currentTabName !== 'Members') return
+    if (this.state.isServerSearch) {
+      if (!prevProps || prevProps.screenProps.currentTabName !== 'Members') {
+        return this.fetchOrShowCached()
+      }
+      if (some(key => this.props[key] !== prevProps[key], [
+        'slug',
+        'networkSlug',
+        'sortBy',
+        'search'
+      ])) {
+        this.fetchOrShowCached()
+      }
     }
   }
 
   render () {
+    const { members, isServerSearch } = this.state
     let {
-      children, members, subject, sortBy, setSort, fetchMoreMembers, pending, hideSortOptions
+      children, sortKeys, sortBy, setSort, fetchMoreMembers, pending, hideSortOptions
     } = this.props
-    const sortKeys = sortKeysFactory(subject)
-    const onSearch = debounce(300, text => this.props.setSearch(text))
-
-    const actions = values(sortKeys).map((value, index) => [value, () => setSort(keys(sortKeys)[index])])
+    const onSearch = debounce(300, text => this.search(text))
+    const actions = isServerSearch
+      ? values(sortKeys).map((value, index) => [value, () => setSort(keys(sortKeys)[index])])
+      : []
     // sort of a hack since members need to be even since it's rows of 2.  fixes flexbox
-    if (size(members) % 2 > 0) members.push({id: -1})
+    const membersForFlatList = (size(members) % 2 > 0)
+      ? members.concat([{id: -1}])
+      : members
 
     const header = <View>
       {children}
@@ -78,7 +118,7 @@ export default class MemberList extends React.Component {
     </View>
 
     return <FlatList
-      data={members}
+      data={membersForFlatList}
       numColumns='2'
       renderItem={({item}) => {
         if (item.name) {
@@ -87,7 +127,7 @@ export default class MemberList extends React.Component {
           return <View style={styles.cell} />
         }
       }}
-      onEndReached={fetchMoreMembers}
+      onEndReached={isServerSearch && fetchMoreMembers}
       keyExtractor={(item, index) => item.id}
       ListHeaderComponent={header}
       ListFooterComponent={pending ? <Loading style={{paddingTop: 10}} /> : null}
@@ -96,7 +136,7 @@ export default class MemberList extends React.Component {
 }
 
 export function Member ({ member, showMember }) {
-  return <TouchableOpacity onPress={() => showMember(member.id)}
+  return <TouchableOpacity onPress={() => isFunction(showMember) && showMember(member.id)}
     style={[styles.cell, styles.memberCell]} >
     <View style={styles.avatarSpacing}>
       <Avatar avatarUrl={member.avatarUrl} dimension={72} />
@@ -108,14 +148,4 @@ export function Member ({ member, showMember }) {
       {member.bio}
     </Text>
   </TouchableOpacity>
-}
-
-// these keys must match the values that hylo-node can handle
-function sortKeysFactory (subject) {
-  const sortKeys = {
-    name: 'Name',
-    location: 'Location'
-  }
-  if (subject !== 'network') sortKeys['join'] = 'Newest'
-  return sortKeys
 }
