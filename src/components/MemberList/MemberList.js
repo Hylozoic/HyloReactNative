@@ -12,15 +12,14 @@ import Loading from '../Loading'
 import PopupMenuButton from '../PopupMenuButton'
 import styles from './MemberList.styles'
 
-// Required props for all instances
+// props used for any instances:
 // members
 // pending
 // search
 // sortKeys
 // sortBy
 // 
-// Add'l required props for isServerSearch
-// 
+// add'l props for server searches:
 // fetchMembers (existence determines whether server search or not)
 // fetchMoreMembers
 // slug
@@ -30,13 +29,14 @@ import styles from './MemberList.styles'
 
 export default class MemberList extends React.Component {
   static defaultProps = {
-    fetchMoreMembers: () => {}
+    fetchMoreMembers: () => {},
+    isServerSearch: false
   }
 
   constructor (props) {
     super(props)
     this.state = {
-      isServerSearch: isFunction(props.fetchMembers),
+      isServerSearch: props.isServerSearch,
       members: props.members
     }
   }

@@ -25,14 +25,31 @@ export default class Members extends React.Component {
 
   render () {
     let {
-      community, canModerate, network, subject, isAll
+      community,
+      network,
+      canModerate,
+      isAll
     } = this.props
 
     const showInviteButton = get('allowCommunityInvites', community) || canModerate
     // sort of a hack since members need to be even since it's rows of 2.  fixes flexbox
 
     return <View style={styles.container}>
-      <MemberList subject={subject} screenProps={this.props.screenProps}>
+      <MemberList isServerSearch
+        {...pick([
+        'screenProps',
+        'hasMore',
+        'members',
+        'pending',
+        'slug',
+        'search',
+        'sortKeys',
+        'sortBy',
+        'setSort',
+        'setSearch',
+        'fetchMembers',
+        'fetchMoreMembers'], this.props)}
+      >
         <Banner community={community} network={network} all={isAll} />
         {showInviteButton && <Button
           text='Invite People'
