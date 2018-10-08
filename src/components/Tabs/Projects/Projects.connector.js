@@ -1,5 +1,4 @@
 import { connect } from 'react-redux'
-import { get } from 'lodash/fp'
 
 import getMe from '../../../store/selectors/getMe'
 import getCurrentCommunityId from '../../../store/selectors/getCurrentCommunityId'

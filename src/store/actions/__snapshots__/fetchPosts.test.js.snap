@@ -67,6 +67,10 @@ posts(
     type
     url
   }
+  followers {
+    id
+    name
+  }
   postMemberships {
     id
     pinned
@@ -79,6 +83,14 @@ posts(
     name
     postsTotal
     followersTotal
+  }
+  members {
+    items {
+      id
+      name
+      avatarUrl
+    }
+    total
   }
   }
 }
@@ -179,6 +191,10 @@ posts(
     type
     url
   }
+  followers {
+    id
+    name
+  }
   postMemberships {
     id
     pinned
@@ -191,6 +207,14 @@ posts(
     name
     postsTotal
     followersTotal
+  }
+  members {
+    items {
+      id
+      name
+      avatarUrl
+    }
+    total
   }
   }
 }

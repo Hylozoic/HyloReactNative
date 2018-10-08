@@ -12,6 +12,7 @@ Object {
         $fileUrls: [String]
         $announcement: Boolean
         $topicNames: [String]
+        $memberIds: [ID]        
       ) {
         createPost(data: {
           type: $type
@@ -22,6 +23,7 @@ Object {
           fileUrls: $fileUrls
           announcement: $announcement
           topicNames: $topicNames
+          memberIds: $memberIds
         }) {
           
   id
@@ -64,6 +66,10 @@ Object {
     type
     url
   }
+  followers {
+    id
+    name
+  }
   postMemberships {
     id
     pinned
@@ -77,6 +83,14 @@ Object {
     postsTotal
     followersTotal
   }
+  members {
+    items {
+      id
+      name
+      avatarUrl
+    }
+    total
+  }
         }
       }",
     "variables": Object {
@@ -87,6 +101,7 @@ Object {
       "details": "details",
       "fileUrls": Array [],
       "imageUrls": Array [],
+      "memberIds": Array [],
       "title": "title",
       "topicNames": Array [],
       "type": "post",
@@ -111,6 +126,15 @@ Object {
         post(id: $id) {
           id
           detailsText
+          members {
+            total
+            hasMore
+            items {
+              id
+              name
+              avatarUrl
+            }
+          }
         }
       }",
     "variables": Object {
@@ -135,6 +159,7 @@ Object {
         $imageUrls: [String]
         $fileUrls: [String]
         $topicNames: [String]
+        $memberIds: [ID]        
       ) {
         updatePost(id: $id, data: {
           type: $type
@@ -144,6 +169,7 @@ Object {
           imageUrls: $imageUrls
           fileUrls: $fileUrls
           topicNames: $topicNames
+          memberIds: $memberIds
         }) {
           
   id
@@ -199,6 +225,10 @@ Object {
     type
     url
   }
+  followers {
+    id
+    name
+  }
   postMemberships {
     id
     pinned
@@ -212,6 +242,14 @@ Object {
     postsTotal
     followersTotal
   }
+  members {
+    items {
+      id
+      name
+      avatarUrl
+    }
+    total
+  }
         }
       }",
     "variables": Object {
@@ -222,6 +260,7 @@ Object {
       "fileUrls": Array [],
       "id": 1,
       "imageUrls": Array [],
+      "memberIds": Array [],
       "title": "title",
       "topicNames": Array [],
       "type": "post",

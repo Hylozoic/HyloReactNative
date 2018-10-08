@@ -21,12 +21,16 @@ Object {
   },
   "ModeratorSettings": Array [],
   "NewMessage": Object {
-    "input": "",
     "message": "",
-    "participants": Array [],
+  },
+  "PeopleChooser": Object {
+    "input": "",
   },
   "PeopleTyping": Object {},
   "PostEditor": Object {},
+  "Projects": Object {
+    "term": "",
+  },
   "Search": Object {},
   "SearchPage": Object {
     "filter": "all",
@@ -261,6 +265,11 @@ Object {
       "meta": Object {},
     },
     "PostTopics": Object {
+      "items": Array [],
+      "itemsById": Object {},
+      "meta": Object {},
+    },
+    "ProjectMember": Object {
       "items": Array [],
       "itemsById": Object {},
       "meta": Object {},

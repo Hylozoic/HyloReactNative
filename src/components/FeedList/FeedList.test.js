@@ -28,7 +28,7 @@ describe('FeedList', () => {
       fetchPosts={fetchPosts} />)
 
     instance.componentDidUpdate({screenProps: {currentTabName: 'Members'}})
-    expect(fetchPosts).toHaveBeenCalledTimes(2)
+    expect(fetchPosts).toHaveBeenCalledTimes(1)
   })
 
   it('does not fetch if the Home tab is not visible', () => {

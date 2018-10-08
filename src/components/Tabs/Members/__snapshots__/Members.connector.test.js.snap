@@ -57,6 +57,11 @@ Object {
   "search": undefined,
   "slug": "tom",
   "sortBy": undefined,
+  "sortKeys": Object {
+    "join": "Newest",
+    "location": "Location",
+    "name": "Name",
+  },
   "subject": "community",
 }
 `;
