@@ -529,7 +529,6 @@ describe('on UPDATE_ALL_MEMBERSHIP_SETTINGS_PENDING', () => {
 
 describe('handles JOIN_PROJECT_PENDING', () => {
   it('should add project member', () => {
-    // console.log(ProjectMember.filter(pm => pm.post === meta.id && pm.member === me.id).toModelArray()[0])
     const session = orm.mutableSession(orm.getEmptyState())
     const projectMemberId = 'projectMemberId'
     const postId = '10'
@@ -552,7 +551,6 @@ describe('handles JOIN_PROJECT_PENDING', () => {
 
 describe('handles LEAVE_PROJECT_PENDING', () => {
   it('should remove project member', () => {
-    // console.log(ProjectMember.filter(pm => pm.post === meta.id && pm.member === me.id).toModelArray()[0])
     const session = orm.mutableSession(orm.getEmptyState())
     const projectMemberId = 'projectMemberId'
     const postId = '10'
