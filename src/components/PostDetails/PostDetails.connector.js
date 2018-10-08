@@ -23,6 +23,7 @@ export function mapStateToProps (state, props) {
   const post = getPresentedPost(state, {id, communityId})
   const isProject = get('type', post) === 'project'
   return {
+    id,
     post,
     isProject,
     currentUser
@@ -30,12 +31,14 @@ export function mapStateToProps (state, props) {
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
-  const { post } = stateProps
+  const { id, post } = stateProps
   const { dispatch } = dispatchProps
   const { navigation, navigation: { navigate } } = ownProps
-  const id = getPostId(null, stateProps)
 
   return {
+    ...stateProps,
+    ...dispatchProps,
+    ...ownProps,
     fetchPost: () => dispatch(fetchPost(id)),
     createComment: value => dispatch(createComment(id, value)),
     joinProject: () => dispatch(joinProject(id)),
@@ -52,10 +55,7 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
       } else {
         return navigate({routeName: 'Feed', params: {communityId, topicName}, key: 'Feed'})
       }
-    },
-    ...ownProps,
-    ...stateProps,
-    ...dispatchProps
+    }
   }
 }
 

@@ -16,6 +16,7 @@ import styles from './PostDetails.styles'
 import { FileLabel } from '../PostEditor/FileSelector'
 import InlineEditor, { toHtml } from '../InlineEditor'
 import KeyboardFriendlyView from '../KeyboardFriendlyView'
+
 export default class PostDetails extends React.Component {
   static propTypes = {
     post: shape({
@@ -53,6 +54,7 @@ export default class PostDetails extends React.Component {
   }
 
   componentDidUpdate (prevProps) {
+    console.log('componentDidUpdate / this.props.post.members, prevProps.post.members:', this.props.post.members, prevProps.post.members)
     if (this.props.post.members.length !== prevProps.post.members.length) {
 
     }

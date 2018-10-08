@@ -40,6 +40,10 @@ import { FETCH_CURRENT_USER } from 'store/actions/fetchCurrentUser'
 import {
   UPDATE_MEMBERSHIP_SETTINGS_PENDING, UPDATE_ALL_MEMBERSHIP_SETTINGS_PENDING
 } from '../../../components/NotificationSettings/NotificationSettings.store'
+import {
+  JOIN_PROJECT_PENDING,
+  LEAVE_PROJECT_PENDING
+} from '../../constants'
 
 it('responds to an action with meta.extractModel', () => {
   const state = orm.getEmptyState()
@@ -522,3 +526,52 @@ describe('on UPDATE_ALL_MEMBERSHIP_SETTINGS_PENDING', () => {
     })
   })
 })
+
+describe('handles JOIN_PROJECT_PENDING', () => {
+  it('should add project member', () => {
+    // console.log(ProjectMember.filter(pm => pm.post === meta.id && pm.member === me.id).toModelArray()[0])
+    const session = orm.mutableSession(orm.getEmptyState())
+    const projectMemberId = 'projectMemberId'
+    const postId = '10'
+    session.Me.create({id: projectMemberId})
+    session.Post.create({
+      id: postId,
+      type: 'project'
+    })
+    expect(session.ProjectMember.all().count()).toEqual(0)
+    const action = {
+      type: JOIN_PROJECT_PENDING,
+      meta: {
+        id: postId
+      }
+    }
+    const newSession = orm.session(ormReducer(session.state, action))
+    expect(newSession.ProjectMember.all().count()).toEqual(1)
+  })
+})
+
+describe('handles LEAVE_PROJECT_PENDING', () => {
+  it('should remove project member', () => {
+    // console.log(ProjectMember.filter(pm => pm.post === meta.id && pm.member === me.id).toModelArray()[0])
+    const session = orm.mutableSession(orm.getEmptyState())
+    const projectMemberId = 'projectMemberId'
+    const postId = '10'
+    session.Me.create({id: projectMemberId})
+    session.Post.create({
+      id: postId,
+      type: 'project'
+    })
+    session.ProjectMember.create({post: postId, member: projectMemberId})
+    expect(session.ProjectMember.all().count()).toEqual(1)
+    const action = {
+      type: LEAVE_PROJECT_PENDING,
+      meta: {
+        id: postId
+      }
+    }
+    const newSession = orm.session(ormReducer(session.state, action))
+    const projectMembershipsAfterAction = newSession.ProjectMember.all().toRefArray()
+    expect(newSession.ProjectMember.all().count()).toEqual(0)
+  })
+})
+
