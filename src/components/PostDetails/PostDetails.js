@@ -53,15 +53,10 @@ export default class PostDetails extends React.Component {
     return !!nextProps.isFocused
   }
 
-  componentDidUpdate (prevProps) {
-    console.log('componentDidUpdate / this.props.post.members, prevProps.post.members:', this.props.post.members, prevProps.post.members)
-    if (this.props.post.members.length !== prevProps.post.members.length) {
-
-    }
-  }
-
   handleShowMember = (memberId) => this.props.showMember(memberId)
+
   handleShowTopic = (topicId) => this.props.showTopic(topicId, get('post.communities.0.id', this.props))
+
   handleGoToCommunity = (communityId) => this.props.goToCommunity(communityId)
 
   handleCreateComment = (commentText) => {
