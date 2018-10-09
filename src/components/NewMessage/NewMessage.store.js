@@ -85,10 +85,10 @@ export default function reducer (state = defaultState, action) {
   return state
 }
 
-export function setMessage (input) {
+export function setMessage (message) {
   return {
     type: SET_MESSAGE,
-    payload: input
+    payload: message
   }
 }
 

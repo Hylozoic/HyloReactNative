@@ -105,7 +105,7 @@ export function setPersonInput (input) {
 }
 
 export function getInputText (state) {
-  return state[MODULE_NAME].input
+  return get('input', state[MODULE_NAME])
 }
 
 const getRecentContactsResults = makeGetQueryResults(FETCH_RECENT_CONTACTS)
