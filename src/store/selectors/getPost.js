@@ -25,7 +25,6 @@ export const presentPost = (post, communityId) => {
     communities: post.communities.toRefArray(),
     fileAttachments: post.attachments.filter(a => a.type === 'file').toRefArray(),
     fileUrls: post.getFileUrls(),
-    followers: post.followers.toRefArray(),
     imageUrls: post.getImageUrls(),
     pinned,
     topics: post.topics.toRefArray(),
