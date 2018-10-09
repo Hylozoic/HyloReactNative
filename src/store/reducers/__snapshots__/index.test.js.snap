@@ -28,9 +28,6 @@ Object {
   },
   "PeopleTyping": Object {},
   "PostEditor": Object {},
-  "Projects": Object {
-    "term": "",
-  },
   "Search": Object {},
   "SearchPage": Object {
     "filter": "all",

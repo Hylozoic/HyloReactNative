@@ -53,16 +53,7 @@ Array [
 ]
 `;
 
-exports[`mapsDispatchToProps maps 1`] = `
-Object {
-  "createComment": [Function],
-  "editPost": [Function],
-  "fetchPost": [Function],
-  "goToCommunity": [Function],
-  "showMember": [Function],
-  "showTopic": [Function],
-}
-`;
+exports[`mapsDispatchToProps maps 1`] = `undefined`;
 
 exports[`mapsDispatchToProps showMember 1`] = `
 Array [
@@ -98,6 +89,8 @@ Array [
 exports[`mapsStateToProps 1`] = `
 Object {
   "currentUser": undefined,
+  "id": "1",
+  "isProject": false,
   "post": Object {
     "commenters": Array [],
     "communities": Array [
@@ -125,6 +118,7 @@ Object {
       "http://foo.com/bar.png",
     ],
     "linkPreview": undefined,
+    "members": Array [],
     "pinned": undefined,
     "topics": Array [],
   },

@@ -67,10 +67,6 @@ posts(
     type
     url
   }
-  followers {
-    id
-    name
-  }
   postMemberships {
     id
     pinned
@@ -190,10 +186,6 @@ posts(
     position
     type
     url
-  }
-  followers {
-    id
-    name
   }
   postMemberships {
     id

@@ -14,17 +14,4 @@ Object {
 }
 `;
 
-exports[`mapStateToProps returns the right keys and gets the pending values 1`] = `
-Object {
-  "participantIds": Array [],
-  "personInputText": "",
-  "participants": Array [],
-  "pending": Object {
-    "all": "contacts",
-    "recent": "recent",
-    "suggestions": "suggestions",
-  },
-  "recentContacts": Array [],
-  "suggestions": Array [],
-}
-`;
+exports[`mapStateToProps returns the right keys and gets the pending values 1`] = `Object {}`;

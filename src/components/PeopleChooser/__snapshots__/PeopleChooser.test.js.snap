@@ -26,6 +26,7 @@ exports[`PeopleChooser renders correctly 1`] = `
   <PersonInput
     onChangeText={undefined}
     people={Array []}
+    placeholderText={undefined}
     removePerson={[Function]}
     text=""
   />
@@ -60,6 +61,7 @@ exports[`PeopleChooser renders correctly 2`] = `
   <PersonInput
     onChangeText={undefined}
     people={Array []}
+    placeholderText={undefined}
     removePerson={[Function]}
     text="Jon"
   />
