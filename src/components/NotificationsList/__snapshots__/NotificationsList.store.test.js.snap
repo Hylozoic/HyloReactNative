@@ -89,6 +89,14 @@ Object {
     postsTotal
     followersTotal
   }
+  members {
+    items {
+      id
+      name
+      avatarUrl
+    }
+    total
+  }
               }
               community {
                 id

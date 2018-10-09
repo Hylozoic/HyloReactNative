@@ -1,114 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Projects renders correctly a community and topics 1`] = `<Loading />`;
+exports[`Projects renders Loading without a user 1`] = `<Loading />`;
 
-exports[`Projects renders correctly with pending=true 1`] = `<Loading />`;
-
-exports[`SearchBar matches last snapshot 1`] = `
-<View>
-  <Icon
-    name="Search"
-  />
-  <TextInput
-    allowFontScaling={true}
-    autoCorrect={false}
-    editable={true}
-    onChangeText={[Function]}
-    placeholder="Search Topics"
-    underlineColorAndroid="transparent"
-    value="searching"
-  />
-</View>
-`;
-
-exports[`SubscribeStar matches last snapshot 1`] = `
-<TouchableOpacity
-  activeOpacity={0.2}
-  hitSlop={
-    Object {
-      "bottom": 10,
-      "left": 15,
-      "right": 15,
-      "top": 10,
-    }
-  }
-  onPress={[Function]}
->
-  <StarIcon
-    theme={
-      Object {
-        "icon": Object {
-          "backgroundColor": "transparent",
-          "color": "#0DC39F",
-          "fontSize": 30,
-        },
-      }
-    }
-  />
-</TouchableOpacity>
-`;
-
-exports[`TopicList matches last snapshot 1`] = `
-<View>
-  <TopicRow
-    first={true}
-    goToTopic={[Function]}
-    setTopicSubscribe={[Function]}
-    topic={1}
-  />
-  <TopicRow
-    first={false}
-    goToTopic={[Function]}
-    setTopicSubscribe={[Function]}
-    topic={2}
-  />
-  <TopicRow
-    first={false}
-    goToTopic={[Function]}
-    setTopicSubscribe={[Function]}
-    topic={3}
-  />
-</View>
-`;
-
-exports[`TopicList matches last snapshot with empty list 1`] = `
-<View>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-  >
-    No topics match your search
-  </Text>
-</View>
-`;
-
-exports[`TopicRow matches last snapshot 1`] = `
-<TouchableOpacity
-  activeOpacity={0.2}
-  onPress={[Function]}
->
-  <SubscribeStar
-    isSubscribed={true}
-    onPress={[Function]}
-  />
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-  >
-    #
-    theTopic
-  </Text>
-  <View>
-    <Badge
-      count={4}
-    />
-    <Icon
-      allowFontScaling={false}
-      name="chevron-right"
-      size={12}
-    />
-  </View>
-</TouchableOpacity>
+exports[`Projects renders correctly 1`] = `
+<withNavigationFocus(Connect(Feed))
+  belowBannerComponent={false}
+  communityId={undefined}
+  hidePostPrompt={true}
+  isProjectFeed={true}
+  navigation={undefined}
+  networkId={1}
+  screenProps={undefined}
+/>
 `;

@@ -65,10 +65,6 @@ Object {
     type
     url
   }
-  followers {
-    id
-    name
-  }
   postMemberships {
     id
     pinned

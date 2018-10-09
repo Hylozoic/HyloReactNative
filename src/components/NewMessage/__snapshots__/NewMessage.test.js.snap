@@ -26,8 +26,14 @@ exports[`NewMessage renders correctly 1`] = `
   behavior="height"
   keyboardVerticalOffset={64}
 >
-  <ParticipantInput
-    onChangeText={[Function]}
+  <Connect(PeopleChooser)
+    addParticipant={[Function]}
+    createMessage={[Function]}
+    currentUser={
+      Object {
+        "id": 1,
+      }
+    }
     participants={
       Array [
         Object {
@@ -41,52 +47,47 @@ exports[`NewMessage renders correctly 1`] = `
         },
       ]
     }
-    removeParticipant={[Function]}
-    text=""
-  />
-  <SectionList
-    contentContainerStyle={
+    pending={
       Object {
-        "borderTopColor": "#d7d8d8",
-        "borderTopWidth": 0,
-        "paddingHorizontal": 12,
+        "all": false,
+        "recent": true,
+        "suggestions": true,
       }
     }
-    data={Array []}
-    disableVirtualization={false}
-    horizontal={false}
-    initialNumToRender={10}
-    keyExtractor={[Function]}
-    maxToRenderPerBatch={10}
-    onEndReachedThreshold={0.3}
-    renderItem={[Function]}
-    renderSectionHeader={[Function]}
-    scrollEventThrottle={50}
-    sections={
+    personInputText=""
+    recentContacts={
       Array [
         Object {
-          "data": Array [
-            Object {
-              "id": 1,
-            },
-            Object {
-              "id": 2,
-            },
-            Object {
-              "id": 3,
-            },
-          ],
-          "label": "Recent",
-          "loading": true,
+          "id": 1,
+        },
+        Object {
+          "id": 2,
+        },
+        Object {
+          "id": 3,
         },
       ]
     }
-    stickySectionHeadersEnabled={false}
-    updateCellsBatchingPeriod={50}
-    windowSize={21}
+    removeParticipant={[Function]}
+    setParticipantInput={[Function]}
+    showRecentContacts={true}
+    suggestions={
+      Array [
+        Object {
+          "id": 7,
+        },
+        Object {
+          "id": 8,
+        },
+        Object {
+          "id": 9,
+        },
+      ]
+    }
+    updatePeople={[Function]}
   />
   <MessageInput
-    emptyParticipants={false}
+    emptyParticipants={true}
     multiline={true}
     onBlur={[Function]}
     onSubmit={[Function]}
@@ -100,8 +101,14 @@ exports[`NewMessage renders correctly 2`] = `
   behavior="height"
   keyboardVerticalOffset={64}
 >
-  <ParticipantInput
-    onChangeText={[Function]}
+  <Connect(PeopleChooser)
+    addParticipant={[Function]}
+    createMessage={[Function]}
+    currentUser={
+      Object {
+        "id": 1,
+      }
+    }
     participants={
       Array [
         Object {
@@ -115,51 +122,47 @@ exports[`NewMessage renders correctly 2`] = `
         },
       ]
     }
-    removeParticipant={[Function]}
-    text="Jon"
-  />
-  <SectionList
-    contentContainerStyle={
+    pending={
       Object {
-        "borderTopColor": "#d7d8d8",
-        "borderTopWidth": 0,
-        "paddingHorizontal": 12,
+        "all": false,
+        "recent": true,
+        "suggestions": true,
       }
     }
-    data={Array []}
-    disableVirtualization={false}
-    horizontal={false}
-    initialNumToRender={10}
-    keyExtractor={[Function]}
-    maxToRenderPerBatch={10}
-    onEndReachedThreshold={0.3}
-    renderItem={[Function]}
-    renderSectionHeader={[Function]}
-    scrollEventThrottle={50}
-    sections={
+    personInputText="Jon"
+    recentContacts={
       Array [
         Object {
-          "data": Array [
-            Object {
-              "id": 7,
-            },
-            Object {
-              "id": 8,
-            },
-            Object {
-              "id": 9,
-            },
-          ],
-          "loading": true,
+          "id": 1,
+        },
+        Object {
+          "id": 2,
+        },
+        Object {
+          "id": 3,
         },
       ]
     }
-    stickySectionHeadersEnabled={false}
-    updateCellsBatchingPeriod={50}
-    windowSize={21}
+    removeParticipant={[Function]}
+    setParticipantInput={[Function]}
+    showRecentContacts={true}
+    suggestions={
+      Array [
+        Object {
+          "id": 7,
+        },
+        Object {
+          "id": 8,
+        },
+        Object {
+          "id": 9,
+        },
+      ]
+    }
+    updatePeople={[Function]}
   />
   <MessageInput
-    emptyParticipants={false}
+    emptyParticipants={true}
     multiline={true}
     onBlur={[Function]}
     onSubmit={[Function]}
