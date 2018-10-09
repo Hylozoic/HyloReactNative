@@ -2,14 +2,8 @@
 
 exports[`mapDispatchToProps matches the last snapshot 1`] = `
 Object {
-  "addParticipant": [Function],
   "createMessage": [Function],
-  "fetchRecentContacts": [Function],
-  "fetchSuggestions": [Function],
   "findOrCreateThread": [Function],
-  "removeParticipant": [Function],
-  "setParticipantInput": [Function],
-  "setParticipants": [Function],
   "showLoadingModal": [Function],
 }
 `;
