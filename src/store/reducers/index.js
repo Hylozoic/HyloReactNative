@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import handleLogout from './handleLogout'
+import resetStore from './resetStore'
 import ormReducer from './ormReducer'
 import pending from './pending'
 import queryResults from './queryResults'
@@ -61,5 +61,5 @@ const composeReducers = (...reducers) => (state, action) =>
 
 export default composeReducers(
   combinedReducers,
-  handleLogout
+  resetStore
 )

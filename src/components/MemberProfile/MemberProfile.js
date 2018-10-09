@@ -19,6 +19,7 @@ export default class MemberProfile extends React.Component {
   }
 
   componentDidMount () {
+    if (this.props.isBlocked) return this.props.navigation.goBack()
     this.props.fetchPerson()
   }
 
@@ -32,8 +33,15 @@ export default class MemberProfile extends React.Component {
     return nextProps.isFocused
   }
 
+  blockUser = () => {
+    const { person, blockUser } = this.props
+    blockUser(person.id)        
+      .then(() => this.props.navigation.goBack())
+  }
+
   render () {
     const {
+      isBlocked,
       canFlag,
       goToDetails,
       goToEdit,
@@ -46,6 +54,7 @@ export default class MemberProfile extends React.Component {
       navigation
     } = this.props
     const { flaggingVisible } = this.state
+
     if (!person) return <Loading />
 
     let flagMember
@@ -71,6 +80,7 @@ export default class MemberProfile extends React.Component {
         <MemberHeader
           person={person}
           flagMember={flagMember}
+          blockUser={this.blockUser}
           onPressMessages={onPressMessages}
           isMe={isMe}
           editProfile={goToEdit} />

@@ -1,10 +1,17 @@
 import React from 'react'
-import { View, TouchableOpacity, TextInput, Text } from 'react-native'
+import {
+  View,
+  TouchableOpacity,
+  TextInput,
+  Text,
+  Alert
+} from 'react-native'
 import Icon from '../Icon'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
 import PopupMenuButton from '../PopupMenuButton'
-import { filter, isEmpty } from 'lodash/fp'
+import { filter, get, isEmpty } from 'lodash/fp'
 import styles from './MemberHeader.styles'
+import { AXOLOTL_ID } from '../../store/models/Person'
 
 export default function MemberHeader ({
   person,
@@ -15,11 +22,15 @@ export default function MemberHeader ({
   editable,
   updateSetting = () => {},
   saveChanges,
-  errors = {}
+  errors = {},
+  ...props
 }) {
   if (!person) return null
 
   const { name, location, tagline } = person
+  const blockUser = blockUserWithConfirmationFun(props.blockUser, name)
+  const isAxolotl = AXOLOTL_ID === get('id', person)
+
   return <View style={styles.header}>
     <View style={styles.nameRow}>
       <Control
@@ -34,7 +45,7 @@ export default function MemberHeader ({
         <TouchableOpacity onPress={onPressMessages}>
           <Icon name='Messages' style={styles.icon} />
         </TouchableOpacity>
-        <MemberMenu {... {flagMember, isMe, editProfile, saveChanges, editable}} />
+        <MemberMenu {... {flagMember, isMe, editProfile, saveChanges, editable, blockUser, isAxolotl}} />
       </View>
     </View>
     <Control
@@ -54,6 +65,21 @@ export default function MemberHeader ({
   </View>
 }
 
+export function blockUserWithConfirmationFun (blockUserFun, name) {
+  return function () {
+    return Alert.alert(
+      `Are you sure you want to block ${name}?`,
+      `You will no longer see ${name}\'s activity
+      and they won't see yours.
+      
+      You can unblock this member at any time.
+      Go to Settings > Blocked Users.`,
+      [
+        {text: `Block ${name}`, onPress: (blockedUserId) => blockUserFun(blockedUserId)},
+        {text: 'Cancel', style: 'cancel'}
+      ])
+    }
+}
 export class Control extends React.Component {
   focus = () => this.input && this.input.focus()
 
@@ -85,17 +111,19 @@ export class Control extends React.Component {
   }
 }
 
-export function MemberMenu ({flagMember, isMe, editProfile, saveChanges, editable}) {
+export function MemberMenu ({flagMember, isMe, blockUser, editProfile, saveChanges, editable, isAxolotl}) {
   // If the function is defined, than it's a valid action
+
   const actions = filter(x => x[1], [
     ['Edit', isMe && !editable && editProfile],
     ['Save Changes', isMe && editable && saveChanges],
-    ['Flag This Member', !isMe && flagMember]
+    ['Flag This Member', !isMe && flagMember],
+    ['Block This Member', !isMe && !isAxolotl && blockUser]
   ])
 
   if (isEmpty(actions)) return null
 
-  const destructiveButtonIndex = actions[0][0] === 'Flag This Member' ? 0 : -1
+  const destructiveButtonIndex = get('1.0', actions) === 'Block This Member' ? 1 : -1
 
   return <PopupMenuButton actions={actions}
     destructiveButtonIndex={destructiveButtonIndex}>
