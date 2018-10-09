@@ -9,12 +9,6 @@ export default class Home extends React.Component {
     return Header(navigation, screenProps.currentTabName)
   }
 
-  componentDidMount () {
-    // this.props.navigation.navigate('Projects')
-    // this.props.navigation.navigate('ProjectMembers', {id: 27009})
-    // this.props.navigation.navigate('PostDetails', {id: 25671})
-  }
-
   shouldComponentUpdate (nextProps) {
     return nextProps.isFocused
   }

@@ -41,6 +41,9 @@ export default class FeedList extends React.Component {
     if (!prevProps || isAFeedTab(prevProps)) {
       return this.fetchOrShowCached()
     }
+    if (!prevProps.isFocused && this.props.isFocused) {
+      return this.fetchOrShowCached()
+    }
     if (prevProps.sortBy !== this.props.sortBy ||
         prevProps.filter !== this.props.filter ||
         get('id', prevProps.community) !== get('id', this.props.community) ||

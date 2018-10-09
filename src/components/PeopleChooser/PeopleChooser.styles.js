@@ -17,21 +17,10 @@ const defaultPadding = {
 }
 
 export default {
-  container: {
-    backgroundColor: 'white',
-    position: 'relative',
-    flex: 1
-  },
   sectionList: {
     ...defaultPadding,
     borderTopWidth: isIOS ? 0 : 1,
     borderTopColor: capeCod20
-  },
-  messageInput: {
-    marginBottom: 20
-  },
-  scrollViewWrapper: {
-    height: 60
   },
   personInputContainer: {
     height: 60,
@@ -87,50 +76,5 @@ export default {
   },
   contactName: {
     fontFamily: 'Circular-Bold'
-  },
-  promptContainer: {
-    position: 'absolute',
-    bottom: 10,
-    left: 6,
-    right: 6
-  },
-  messagePrompt: {
-    ...messagePromptShape,
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingLeft: 6,
-    paddingRight: 12,
-    paddingVertical: 8,
-    backgroundColor: 'white',
-    borderWidth: isIOS ? 0 : 1,
-    borderColor: capeCod10
-  },
-  promptShadow: {
-    ...messagePromptShape,
-    position: 'absolute',
-    backgroundColor: 'white',
-    shadowOffset: {width: 0, height: 4},
-    shadowRadius: 5,
-    shadowOpacity: 1.0,
-    shadowColor: capeCod20,
-    zIndex: -10
-  },
-  promptButton: {
-    flexDirection: 'row',
-    alignItems: 'center'
-  },
-  promptAvatar: {
-    marginRight: 10
-  },
-  promptTextInput: {
-    color: capeCod,
-    fontSize: 14,
-    flex: 1
-  },
-  sendButton: {
-    color: caribbeanGreen
-  },
-  grayButton: {
-    color: capeCod40
   }
 }

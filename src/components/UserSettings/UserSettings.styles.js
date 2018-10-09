@@ -61,8 +61,21 @@ export default {
     borderColor: caribbeanGreen
   },
   notificationSettingsWrapper: {
-    marginTop: 50,
+    marginTop: 15,
     alignItems: 'center'
+  },
+  blockedUsersWrapper: {
+    marginTop: 15,
+    alignItems: 'center'
+  },
+  blockedUsers: {
+    height: 43,
+    width: 205,
+    fontSize: 16,
+    marginBottom: 5,
+    color: caribbeanGreen,
+    borderColor: caribbeanGreen,
+    backgroundColor: white
   },
   notificationSettings: {
     height: 43,

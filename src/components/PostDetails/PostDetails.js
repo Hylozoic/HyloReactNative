@@ -16,6 +16,7 @@ import styles from './PostDetails.styles'
 import { FileLabel } from '../PostEditor/FileSelector'
 import InlineEditor, { toHtml } from '../InlineEditor'
 import KeyboardFriendlyView from '../KeyboardFriendlyView'
+
 export default class PostDetails extends React.Component {
   static propTypes = {
     post: shape({
@@ -52,14 +53,10 @@ export default class PostDetails extends React.Component {
     return !!nextProps.isFocused
   }
 
-  componentDidUpdate (prevProps) {
-    if (this.props.post.members.length !== prevProps.post.members.length) {
-
-    }
-  }
-
   handleShowMember = (memberId) => this.props.showMember(memberId)
+
   handleShowTopic = (topicId) => this.props.showTopic(topicId, get('post.communities.0.id', this.props))
+
   handleGoToCommunity = (communityId) => this.props.goToCommunity(communityId)
 
   handleCreateComment = (commentText) => {

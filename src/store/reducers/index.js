@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import handleLogout from './handleLogout'
+import resetStore from './resetStore'
 import ormReducer from './ormReducer'
 import pending from './pending'
 import queryResults from './queryResults'
@@ -17,7 +17,6 @@ import NewMessage from '../../components/NewMessage/NewMessage.store'
 import PeopleTyping from '../../components/PeopleTyping/PeopleTyping.store'
 import PeopleChooser from '../../components/PeopleChooser/PeopleChooser.store'
 import PostEditor from '../../components/PostEditor/PostEditor.store'
-import Projects from '../../components/Tabs/Projects/Projects.store'
 import Search from '../../components/Search/Search.store'
 import SkillEditor from '../../components/SkillEditor/SkillEditor.store'
 import SignupFlow from '../../components/SignupFlow/SignupFlow.store'
@@ -45,7 +44,6 @@ export const combinedReducers = combineReducers({
   PeopleTyping,
   PeopleChooser,
   PostEditor,
-  Projects,
   Search,
   SearchPage,
   SignupFlow,
@@ -61,5 +59,5 @@ const composeReducers = (...reducers) => (state, action) =>
 
 export default composeReducers(
   combinedReducers,
-  handleLogout
+  resetStore
 )

@@ -1,5 +1,10 @@
 import * as sessionReducers from './sessionReducers'
 import { values, pick } from 'lodash/fp'
+import orm from 'store/models'
+import ModelExtractor from '../ModelExtractor'
+import extractModelsFromAction from '../ModelExtractor/extractModelsFromAction'
+import clearCacheFor from './clearCacheFor'
+import { isPromise, } from 'util/index'
 import {
   UPDATE_COMMUNITY_SETTINGS_PENDING
 } from '../../../components/CommunitySettings/CommunitySettings.store'
@@ -47,10 +52,6 @@ import {
 } from 'store/constants'
 import { PIN_POST_PENDING } from '../../../components/PostCard/PostHeader/PostHeader.store'
 import { FETCH_CURRENT_USER } from 'store/actions/fetchCurrentUser'
-import orm from 'store/models'
-import ModelExtractor from '../ModelExtractor'
-import extractModelsFromAction from '../ModelExtractor/extractModelsFromAction'
-import { isPromise } from 'util/index'
 
 export default function ormReducer (state = {}, action) {
   const session = orm.session(state)
@@ -214,19 +215,24 @@ export default function ormReducer (state = {}, action) {
       me.updateAppending({memberships: [payload.data.createCommunity.id]})
       break
 
-    // case JOIN_PROJECT_PENDING:
-    //   me = session.Me.first()
-    //   // post = session.Post.withId(meta.id)
-    //   session.ProjectMember.create({post: meta.id, member: me.id})
-    //   break
+    case JOIN_PROJECT_PENDING:
+      me = session.Me.first()
+      session.ProjectMember.create({post: meta.id, member: me.id})
+      clearCacheFor(session.Post, meta.id)
+      break
 
-    // case LEAVE_PROJECT_PENDING:
-    //   me = session.Me.first()
-    //   post = session.Post.withId(meta.id)
-    //   // session.ProjectMember.create({post: meta.id, member: me.id})
-    //   console.log('!!! LEAVE_PROJECT_PENDING:', post.members)
-    //   console.log(post.members.filter(pm => pm.member === me.id))
-    //   break
+    case LEAVE_PROJECT_PENDING:
+      me = session.Me.first()
+      session
+        .ProjectMember
+        .filter(member => 
+          String(member.member) === String(me.id) &&
+          String(member.post) === String(meta.id)
+        )
+        .toModelArray()
+        .forEach(member => member.delete())
+      clearCacheFor(session.Post, meta.id)
+      break
 
     case UPDATE_THREAD_READ_TIME_PENDING:
       thread = session.MessageThread.safeWithId(meta.id)

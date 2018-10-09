@@ -57,10 +57,6 @@ export function getPostFieldsFragment (withComments = true) {
     type
     url
   }
-  followers {
-    id
-    name
-  }
   postMemberships {
     id
     pinned

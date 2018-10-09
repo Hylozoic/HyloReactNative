@@ -23,7 +23,7 @@
   "dependencies": {
     "cheerio": "0.22.0",
     "ent": "^2.2.0",
-    "hylo-utils": "Hylozoic/hylo-utils#a1f23db",
+    "hylo-utils": "Hylozoic/hylo-utils#20cd2c8",
     "js-htmlencode": "^0.3.0",
     "lodash": "^4.17.4",
     "parse": "^1.9.2",
@@ -43,7 +43,7 @@
     "react-native-htmlview": "^0.12.0",
     "react-native-image-picker": "^0.26.7",
     "react-native-intercom": "^12.0.0",
-    "react-native-linear-gradient": "^2.3.0",
+    "react-native-linear-gradient": "2.4.0",
     "react-native-mixpanel": "^1.1.1",
     "react-native-onesignal": "^3.1.0",
     "react-native-prompt-android": "^0.3.1",
