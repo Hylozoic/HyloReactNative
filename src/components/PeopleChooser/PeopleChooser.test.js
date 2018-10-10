@@ -74,6 +74,38 @@ describe('PeopleChooser', () => {
     ReactTestRenderer.create(<PeopleChooser {...props} />).getInstance()
     expect(props.fetchRecentContacts).toHaveBeenCalled()
   })
+
+  describe('addPerson', () => {
+    it('adds a person, calling updatePeople', () => {
+      const props = {
+        fetchRecentContacts: () => {},
+        setPersonInput: () => {},
+        updatePeople: jest.fn()
+      }
+      const instance = ReactTestRenderer.create(<PeopleChooser {...props} />).getInstance()
+      const people = [{id: 1}, {id: 2}]
+      instance.setState({people})
+      instance.addPerson({id: 3})
+      expect(instance.state.people.map(p => p.id)).toEqual([1, 2, 3])
+      expect(props.updatePeople).toHaveBeenCalledWith([{id: 1}, {id: 2}, {id: 3}])
+    })
+  })
+
+  describe('removePerson', () => {
+    it('adds a person, calling updatePeople', () => {
+      const props = {
+        fetchRecentContacts: () => {},
+        setPersonInput: () => {},
+        updatePeople: jest.fn()
+      }
+      const instance = ReactTestRenderer.create(<PeopleChooser {...props} />).getInstance()
+      const people = [{id: 1}, {id: 2}, {id: 3}]
+      instance.setState({people})
+      instance.removePerson({id: 2})
+      expect(instance.state.people.map(p => p.id)).toEqual([1, 3])
+      expect(props.updatePeople).toHaveBeenCalledWith([{id: 1}, {id: 3}])
+    })
+  })
 })
 
 describe('PersonInput', () => {
@@ -103,7 +135,7 @@ describe('Person', () => {
     }
 
     renderer.render(<Person
-      person={Person}
+      person={person}
       remove={() => {}} />)
 
     const actual = renderer.getRenderOutput()

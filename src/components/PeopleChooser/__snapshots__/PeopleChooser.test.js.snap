@@ -111,7 +111,7 @@ exports[`PeopleChooser renders correctly 2`] = `
 exports[`Person renders correctly 1`] = `
 <View>
   <Avatar
-    avatarUrl={undefined}
+    avatarUrl="pone.png"
     dimension={24}
   />
   <Text
@@ -119,7 +119,7 @@ exports[`Person renders correctly 1`] = `
     allowFontScaling={true}
     ellipsizeMode="tail"
   >
-    Person
+    Person One
   </Text>
   <TouchableOpacity
     activeOpacity={0.2}

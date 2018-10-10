@@ -115,6 +115,126 @@ posts(
 }
 `;
 
+exports[`constructs a project fetchPosts action 1`] = `
+Object {
+  "graphql": Object {
+    "query": "query (
+  $slug: String,
+  $sortBy: String,
+  $offset: Int,
+  $search: String,
+  $filter: String,
+  $topic: ID,
+  $first: Int
+) {
+  community(slug: $slug, updateLastViewed: true) {
+    id
+    slug
+    name
+    avatarUrl
+    bannerUrl
+    postCount
+    
+posts(
+  first: $first,
+  offset: $offset,
+  sortBy: $sortBy,
+  search: $search,
+  filter: $filter,
+  topic: $topic,
+  order: \\"desc\\"
+) {
+  hasMore
+  items {
+    
+  id
+  title
+  details
+  type
+  location
+  announcement
+  creator {
+    id
+    name
+    avatarUrl
+    tagline
+  }
+  createdAt
+  updatedAt
+  commenters(first: 3) {
+    id
+    name
+    avatarUrl
+  }
+  commentersTotal
+  commentsTotal
+  
+  linkPreview {
+    title
+    url
+    imageUrl
+  }
+  votesTotal
+  myVote
+  communities {
+    id
+    name
+    slug
+  }
+  attachments {
+    id
+    position
+    type
+    url
+  }
+  postMemberships {
+    id
+    pinned
+    community {
+      id
+    }
+  }
+  topics {
+    id
+    name
+    postsTotal
+    followersTotal
+  }
+  members {
+    items {
+      id
+      name
+      avatarUrl
+    }
+    total
+  }
+  }
+}
+  }
+}",
+    "variables": Object {
+      "filter": "project",
+      "first": 20,
+      "networkSlug": undefined,
+      "offset": undefined,
+      "search": undefined,
+      "slug": undefined,
+      "sortBy": undefined,
+      "topic": undefined,
+    },
+  },
+  "meta": Object {
+    "afterInteractions": true,
+    "extractModel": "Community",
+    "extractQueryResults": Object {
+      "getItems": [Function],
+      "reset": undefined,
+    },
+  },
+  "type": "FETCH_POSTS",
+}
+`;
+
 exports[`sets updateLastViewed to true when fetching for a community 1`] = `
 Object {
   "graphql": Object {

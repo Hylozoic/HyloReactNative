@@ -1,5 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`CreateProjectButton renders correctly 1`] = `
+<Button
+  onPress={[Function]}
+  text="Create Project"
+/>
+`;
+
 exports[`Projects renders Loading without a user 1`] = `<Loading />`;
 
 exports[`Projects renders correctly 1`] = `

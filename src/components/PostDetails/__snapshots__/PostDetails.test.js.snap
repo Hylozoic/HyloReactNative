@@ -93,6 +93,20 @@ exports[`Files renders correctly 1`] = `
 </View>
 `;
 
+exports[`JoinProjectButton renders as expected 1`] = `
+<Button
+  onPress={[Function]}
+  text="Join Project"
+/>
+`;
+
+exports[`JoinProjectButton renders as expected when leaving 1`] = `
+<Button
+  onPress={[Function]}
+  text="Leave Project"
+/>
+`;
+
 exports[`PostDetails renders correctly 1`] = `
 <Unknown>
   <Connect(Comments)
@@ -221,4 +235,29 @@ exports[`PostDetails renders correctly 1`] = `
     type="post"
   />
 </Unknown>
+`;
+
+exports[`ProjectMembers renders as expected 1`] = `
+<View>
+  <TouchableOpacity
+    activeOpacity={0.2}
+    onPress={[Function]}
+  >
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+    >
+      5
+       members
+    </Text>
+  </TouchableOpacity>
+</View>
+`;
+
+exports[`ProjectMembers renders as expected when leaving 1`] = `
+<Button
+  onPress={[Function]}
+  text="Leave Project"
+/>
 `;
