@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders as expected 1`] = `
+<View>
+  <MemberList
+    fetchMoreMembers={[Function]}
+    hideSortOptions={true}
+    isServerSearch={false}
+    members={
+      Array [
+        Object {
+          "id": "member1",
+        },
+        Object {
+          "id": "member2",
+        },
+      ]
+    }
+    screenProps={undefined}
+    showMember={[Function]}
+  />
+</View>
+`;
