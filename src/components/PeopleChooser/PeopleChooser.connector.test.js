@@ -42,56 +42,5 @@ describe('mergeProps', () => {
     mergedProps.fetchSuggestions()
     expect(dispatchProps.fetchSuggestions).toHaveBeenCalled()
   })
-
-  it('sets up the createMessage function', () => {
-    const id = 122
-    const findOrCreateThreadResp = {
-      payload: {
-        data: {
-          findOrCreateThread: {
-            id
-          }
-        }
-      }
-    }
-    const stateProps = {
-      ...defaultStateProps,
-      message: 'not empty'
-    }
-    const dispatchProps = {
-      findOrCreateThread: jest.fn(() => Promise.resolve(findOrCreateThreadResp)),
-      createMessage: jest.fn(() => Promise.resolve({})),
-      showLoadingModal: jest.fn()
-    }
-    const ownProps = {
-      navigation: {
-        navigate: jest.fn()
-      }
-    }
-    const mergedProps = mergeProps(stateProps, dispatchProps, ownProps)
-    return mergedProps.createMessage('hello')
-    .then(() => {
-      expect(dispatchProps.createMessage).toHaveBeenCalledWith(122, 'hello', true)
-      expect(ownProps.navigation.navigate).toHaveBeenCalledWith({
-        'key': 'Thread',
-        'params': {'id': id},
-        'routeName': 'Thread'
-      })
-    })
-  })
-
-  it('sets up loadParticipantsFromParams', () => {
-    const dispatchProps = {
-      setParticipants: jest.fn()
-    }
-    const participants = [3, 1, 2]
-    const ownProps = {
-      navigation: {
-        state: {params: {participants}}
-      }
-    }
-    const mergedProps = mergeProps(defaultStateProps, dispatchProps, ownProps)
-    mergedProps.loadParticipantsFromParams()
-    expect(dispatchProps.setParticipants).toHaveBeenCalledWith(participants)
-  })
 })
+

@@ -78,6 +78,7 @@ describe('PostEditor', () => {
       <Provider store={createMockStore()}>
         <PostEditor
           isFocused
+          shouldShowTypeChooser
           fetchDetailsAndMembers={jest.fn()}
           navigation={navigation}
           post={mockPost}
@@ -340,7 +341,7 @@ describe('PostEditor', () => {
     const renderer = TestRenderer.create(
       <Provider store={createMockStore()}>
         <PostEditor
-          fetchDetailsText={jest.fn()}
+          fetchDetailsAndMembers={jest.fn()}
           isFocused
           save={save}
           communityIds={[1]}
@@ -360,7 +361,7 @@ describe('PostEditor', () => {
     const renderer = TestRenderer.create(
       <Provider store={createMockStore()}>
         <PostEditor
-          fetchDetailsText={jest.fn()}
+          fetchDetailsAndMembers={jest.fn()}
           isFocused
           save={save}
           communityIds={[1]}

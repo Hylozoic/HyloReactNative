@@ -110,7 +110,7 @@ export default class MemberList extends React.Component {
 
         {!hideSortOptions && <PopupMenuButton actions={actions}>
           <View style={styles.sortBy}>
-            <Text style={styles.sortByText}>{sortKeys[sortBy]}</Text>
+            <Text style={styles.sortByText}>{sortKeys && sortKeys[sortBy]}</Text>
             <Icon name='ArrowDown' style={styles.downArrow} />
           </View>
         </PopupMenuButton>}

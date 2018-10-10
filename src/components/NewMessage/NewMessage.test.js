@@ -65,7 +65,6 @@ describe('NewMessage', () => {
   describe('onBlurMessageInput', () => {
     const props = {
       fetchRecentContacts: () => {},
-      loadParticipantsFromParams: () => {},
       pending: {},
       participants: [],
       recentContacts: [],

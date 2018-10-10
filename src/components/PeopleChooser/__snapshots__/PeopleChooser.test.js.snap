@@ -26,7 +26,7 @@ exports[`PeopleChooser renders correctly 1`] = `
   <PersonInput
     onChangeText={undefined}
     people={Array []}
-    placeholderText={undefined}
+    placeholderText="Testing Placeholder text"
     removePerson={[Function]}
     text=""
   />
@@ -61,7 +61,7 @@ exports[`PeopleChooser renders correctly 2`] = `
   <PersonInput
     onChangeText={undefined}
     people={Array []}
-    placeholderText={undefined}
+    placeholderText="Testing Placeholder text"
     removePerson={[Function]}
     text="Jon"
   />
@@ -105,5 +105,80 @@ exports[`PeopleChooser renders correctly 2`] = `
     updateCellsBatchingPeriod={50}
     windowSize={21}
   />
+</View>
+`;
+
+exports[`Person renders correctly 1`] = `
+<View>
+  <Avatar
+    avatarUrl={undefined}
+    dimension={24}
+  />
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+  >
+    Person
+  </Text>
+  <TouchableOpacity
+    activeOpacity={0.2}
+    onPress={[Function]}
+  >
+    <Icon
+      name="Ex"
+    />
+  </TouchableOpacity>
+</View>
+`;
+
+exports[`PersonInput renders correctly 1`] = `
+<View>
+  <ScrollView
+    contentContainerStyle={
+      Object {
+        "alignItems": "center",
+        "borderBottomColor": "#d7d8d8",
+        "borderBottomWidth": 1,
+        "flexDirection": "row",
+        "height": 60,
+        "minWidth": 750,
+        "paddingHorizontal": 15,
+      }
+    }
+    horizontal={true}
+  >
+    <Person
+      person={
+        Object {
+          "id": 10,
+        }
+      }
+      remove={undefined}
+    />
+    <Person
+      person={
+        Object {
+          "id": 11,
+        }
+      }
+      remove={undefined}
+    />
+    <Person
+      person={
+        Object {
+          "id": 12,
+        }
+      }
+      remove={undefined}
+    />
+    <TextInput
+      allowFontScaling={true}
+      onChangeText={[Function]}
+      placeholder="Type in the names of people to message"
+      underlineColorAndroid="transparent"
+      value="Jon"
+    />
+  </ScrollView>
 </View>
 `;
