@@ -14,24 +14,22 @@ import {
 import { isEmpty, get, debounce } from 'lodash/fp'
 
 export function mapStateToProps (state, props) {
+  const recentContacts = getRecentContacts(state, props)
   const personInputText = getInputText(state, props)
-
+  const suggestions = getSuggestions(state, {...props, autocomplete: personInputText})
+  const people = get('state.params.participants', props.navigation) || props.people || []
   const pending = {
     suggestions: state.pending[FETCH_SUGGESTIONS],
     recent: state.pending[FETCH_RECENT_CONTACTS],
     all: state.pending[FETCH_CONTACTS]
   }
 
-  const suggestions = getSuggestions(state, {...props, autocomplete: personInputText})
-
-  const peopleFromParams = get('state.params.participants', props.navigation) || props.people || []
-
   return {
-    recentContacts: getRecentContacts(state, props),
-    suggestions: suggestions,
+    recentContacts,
     personInputText,
     pending,
-    peopleFromParams
+    people,
+    suggestions
   }
 }
 

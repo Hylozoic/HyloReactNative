@@ -15,7 +15,7 @@ Object {
     "recent": "recent",
     "suggestions": "suggestions",
   },
-  "peopleFromParams": Array [],
+  "people": Array [],
   "personInputText": "",
   "recentContacts": Array [],
   "suggestions": Array [],

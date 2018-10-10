@@ -22,7 +22,7 @@ export default class PeopleChooser extends React.Component {
   componentDidMount () {
     this.props.fetchRecentContacts()
     this.setState({
-      people: this.props.peopleFromParams || []
+      people: this.props.people || []
     })
   }
 

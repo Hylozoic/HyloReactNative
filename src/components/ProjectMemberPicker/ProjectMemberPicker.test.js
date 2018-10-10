@@ -1,7 +1,7 @@
 import 'react-native'
 import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
-import ProjectMemberPicker from './index'
+import ProjectMemberPicker from './ProjectMemberPicker'
 
 it('renders as expected', () => {
   const props = {
