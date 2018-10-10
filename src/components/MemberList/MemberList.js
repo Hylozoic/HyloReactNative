@@ -12,21 +12,6 @@ import Loading from '../Loading'
 import PopupMenuButton from '../PopupMenuButton'
 import styles from './MemberList.styles'
 
-// props used for any instances:
-// members
-// pending
-// search
-// sortKeys
-// sortBy
-// 
-// add'l props for server searches:
-// fetchMembers (existence determines whether server search or not)
-// fetchMoreMembers
-// slug
-// hasMore
-// setSort
-// setSearch
-
 export default class MemberList extends React.Component {
   static defaultProps = {
     fetchMoreMembers: () => {},

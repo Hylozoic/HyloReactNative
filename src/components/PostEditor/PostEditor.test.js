@@ -2,12 +2,11 @@ import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import TestRenderer from 'react-test-renderer'
 import PostEditor, { SectionLabel, TypeButton } from './PostEditor'
-import { TouchableOpacity, Alert } from 'react-native'
+import { Alert } from 'react-native'
 import { Provider } from 'react-redux'
 import { createMockStore } from 'util/testing'
 import { DocumentPicker } from 'react-native-document-picker'
 import RNImagePicker from 'react-native-image-picker'
-import { showToast, hideToast } from 'util/toast'
 
 jest.mock('Alert', () => {
   return {
