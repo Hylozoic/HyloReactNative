@@ -1,10 +1,10 @@
 import {
   mapStateToProps,
-  mapDispatchToProps
+  mergeProps
 } from './PostDetails.connector'
 import orm from 'store/models'
 
-let props, dispatch, state
+let props, stateProps, dispatchProps
 
 beforeAll(() => {
   const session = orm.session(orm.getEmptyState())
@@ -41,37 +41,46 @@ beforeAll(() => {
     }
   }
 
-  dispatch = jest.fn((...args) => ['dispatch', args])
+  stateProps = {
+    id: 'testpost',
+    post: {id: 'testpost'},
+    isProject: false,
+    currentUser: {id: 'currentuser'}
+  }
+
+  dispatchProps = {
+    dispatch: jest.fn((...args) => ['dispatch', args])
+  }
 })
 
 it('mapsStateToProps', () => {
   expect(mapStateToProps(state, props)).toMatchSnapshot()
 })
 
-describe('mapsDispatchToProps', () => {
-  let dispatchProps
+describe('mergeProps', () => {
+  let mergedProps
 
   beforeAll(() => {
-    dispatchProps = mapDispatchToProps(dispatch, props)
+    mergedProps = mergeProps(stateProps, dispatchProps, props)
   })
 
   it('maps', () => {
-    expect(dispatchProps).toMatchSnapshot()
+    expect(mergedProps).toMatchSnapshot()
   })
 
   it('createComment', () => {
-    expect(dispatchProps.createComment('some comment')).toMatchSnapshot()
+    expect(mergedProps.createComment('some comment')).toMatchSnapshot()
   })
 
   it('showTopic', () => {
-    expect(dispatchProps.showTopic('mytopicname', 4)).toMatchSnapshot()
+    expect(mergedProps.showTopic('mytopicname', 4)).toMatchSnapshot()
   })
 
   it('showMember', () => {
-    expect(dispatchProps.showMember(1)).toMatchSnapshot()
+    expect(mergedProps.showMember(1)).toMatchSnapshot()
   })
 
   it('editPost', () => {
-    expect(dispatchProps.editPost()).toMatchSnapshot()
+    expect(mergedProps.editPost()).toMatchSnapshot()
   })
 })
