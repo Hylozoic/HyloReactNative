@@ -14,8 +14,26 @@ import styles from './MemberList.styles'
 
 export default class MemberList extends React.Component {
   static defaultProps = {
+    // For all
+    screenProps: {
+      currentTabName: ''
+    },
+    members: [],
+    search: null,
+    children: '',
+    pending: false,
+    hideSortOptions: false,
+    sortBy: null,
+    // For server-based searches only
+    isServerSearch: false,
+    sortKeys: null,
+    hasMore: null,
+    setSearch: () => {},
+    setSort: () => {},
+    fetchMembers: () => {},
     fetchMoreMembers: () => {},
-    isServerSearch: false
+    slug: '',
+    networkSlug: ''
   }
 
   constructor (props) {
@@ -26,7 +44,7 @@ export default class MemberList extends React.Component {
     }
   }
 
-  fetchOrShowCached () {
+  fetchMembers () {
     const { members, fetchMembers, hasMore } = this.props
     if (this.state.isServerSearch && isEmpty(members) && hasMore !== false) fetchMembers()
   }
@@ -41,7 +59,7 @@ export default class MemberList extends React.Component {
   }
 
   componentDidMount () {
-    this.fetchOrShowCached()
+    this.fetchMembers()
   }
 
   componentDidUpdate (prevProps) {
@@ -54,7 +72,7 @@ export default class MemberList extends React.Component {
     // if (this.props.screenProps.currentTabName !== 'Members') return
     if (this.state.isServerSearch) {
       if (!prevProps || prevProps.screenProps.currentTabName !== 'Members') {
-        return this.fetchOrShowCached()
+        return this.fetchMembers()
       }
       if (some(key => this.props[key] !== prevProps[key], [
         'slug',
@@ -62,7 +80,7 @@ export default class MemberList extends React.Component {
         'sortBy',
         'search'
       ])) {
-        this.fetchOrShowCached()
+        this.fetchMembers()
       }
     }
   }

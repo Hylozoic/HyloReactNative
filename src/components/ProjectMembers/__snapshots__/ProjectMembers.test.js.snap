@@ -3,7 +3,9 @@
 exports[`renders as expected 1`] = `
 <View>
   <MemberList
+    fetchMembers={[Function]}
     fetchMoreMembers={[Function]}
+    hasMore={null}
     hideSortOptions={true}
     isServerSearch={false}
     members={
@@ -16,8 +18,22 @@ exports[`renders as expected 1`] = `
         },
       ]
     }
-    screenProps={undefined}
+    networkSlug=""
+    pending={false}
+    screenProps={
+      Object {
+        "currentTabName": "",
+      }
+    }
+    search={null}
+    setSearch={[Function]}
+    setSort={[Function]}
     showMember={[Function]}
-  />
+    slug=""
+    sortBy={null}
+    sortKeys={null}
+  >
+    
+  </MemberList>
 </View>
 `;

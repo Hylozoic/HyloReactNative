@@ -1,0 +1,129 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MemberList renders with default props and server search 1`] = `
+<FlatList
+  ListFooterComponent={null}
+  ListHeaderComponent={
+    <View>
+      
+      <View>
+        <View>
+          <Icon
+            name="Search"
+            onPress={[Function]}
+            size={30}
+          />
+          <TextInput
+            allowFontScaling={true}
+            onChangeText={[Function]}
+            placeholder="Search Members"
+            underlineColorAndroid="transparent"
+          />
+        </View>
+        <PopupMenuButton
+          actions={Array []}
+        >
+          <View>
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+            />
+            <Icon
+              name="ArrowDown"
+            />
+          </View>
+        </PopupMenuButton>
+      </View>
+    </View>
+  }
+  data={
+    Array [
+      Object {
+        "id": "1",
+        "name": "Loren",
+      },
+      Object {
+        "id": "2",
+        "name": "Robbie",
+      },
+    ]
+  }
+  disableVirtualization={false}
+  horizontal={false}
+  initialNumToRender={10}
+  keyExtractor={[Function]}
+  maxToRenderPerBatch={10}
+  numColumns="2"
+  onEndReached={[Function]}
+  onEndReachedThreshold={2}
+  renderItem={[Function]}
+  scrollEventThrottle={50}
+  updateCellsBatchingPeriod={50}
+  windowSize={21}
+/>
+`;
+
+exports[`MemberList renders with default props with default non-server search 1`] = `
+<FlatList
+  ListFooterComponent={null}
+  ListHeaderComponent={
+    <View>
+      
+      <View>
+        <View>
+          <Icon
+            name="Search"
+            onPress={[Function]}
+            size={30}
+          />
+          <TextInput
+            allowFontScaling={true}
+            onChangeText={[Function]}
+            placeholder="Search Members"
+            underlineColorAndroid="transparent"
+          />
+        </View>
+        <PopupMenuButton
+          actions={Array []}
+        >
+          <View>
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+            />
+            <Icon
+              name="ArrowDown"
+            />
+          </View>
+        </PopupMenuButton>
+      </View>
+    </View>
+  }
+  data={
+    Array [
+      Object {
+        "id": "1",
+        "name": "Loren",
+      },
+      Object {
+        "id": "2",
+        "name": "Robbie",
+      },
+    ]
+  }
+  disableVirtualization={false}
+  horizontal={false}
+  initialNumToRender={10}
+  keyExtractor={[Function]}
+  maxToRenderPerBatch={10}
+  numColumns="2"
+  onEndReached={false}
+  onEndReachedThreshold={2}
+  renderItem={[Function]}
+  scrollEventThrottle={50}
+  updateCellsBatchingPeriod={50}
+  windowSize={21}
+/>
+`;
