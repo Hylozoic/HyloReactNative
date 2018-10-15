@@ -1,10 +1,11 @@
 import React from 'react'
-import { get, isFunction, isEqual, filter } from 'lodash/fp'
+import {
+  get, isFunction, isEqual, filter, some, values,
+  keys, isEmpty, debounce, size
+} from 'lodash/fp'
 import {
   View, FlatList, Text, TouchableOpacity, TextInput
 } from 'react-native'
-import { some, values, keys, isEmpty, debounce, size } from 'lodash/fp'
-
 import Avatar from '../Avatar'
 import { focus } from '../../util/textInput'
 import Icon from '../Icon'
@@ -63,16 +64,13 @@ export default class MemberList extends React.Component {
   }
 
   componentDidUpdate (prevProps) {
-    // if (!isEqual(get('members', this.props), get('members', prevProps))) {
-    if (this.props.members && (this.props.members.length !== prevProps.members.length)) {
-      console.log('!!! here')
+    if (!isEqual(get('members', this.props), get('members', prevProps))) {
       this.setState({
         members: this.props.members
       })
     }
-    // Why necessary? componentShouldUpdate? Is this a react-navigation screens in background thing?
-    // if (this.props.screenProps.currentTabName !== 'Members') return
     if (this.state.isServerSearch) {
+      // QUESTION: Why is this necessary?
       if (!prevProps || prevProps.screenProps.currentTabName !== 'Members') {
         return this.fetchMembers()
       }
@@ -82,7 +80,7 @@ export default class MemberList extends React.Component {
         'sortBy',
         'search'
       ])) {
-        this.fetchMembers()
+        return this.fetchMembers()
       }
     }
   }
