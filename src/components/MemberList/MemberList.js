@@ -1,5 +1,5 @@
 import React from 'react'
-import { isFunction, isDefined, filter } from 'lodash/fp'
+import { get, isFunction, isEqual, filter } from 'lodash/fp'
 import {
   View, FlatList, Text, TouchableOpacity, TextInput
 } from 'react-native'
@@ -63,7 +63,9 @@ export default class MemberList extends React.Component {
   }
 
   componentDidUpdate (prevProps) {
+    // if (!isEqual(get('members', this.props), get('members', prevProps))) {
     if (this.props.members && (this.props.members.length !== prevProps.members.length)) {
+      console.log('!!! here')
       this.setState({
         members: this.props.members
       })

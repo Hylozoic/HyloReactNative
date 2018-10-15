@@ -1,6 +1,70 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MemberList renders with default props and server search 1`] = `
+exports[`MemberList renders with default props with default non-server search 1`] = `
+<FlatList
+  ListFooterComponent={null}
+  ListHeaderComponent={
+    <View>
+      
+      <View>
+        <View>
+          <Icon
+            name="Search"
+            onPress={[Function]}
+            size={30}
+          />
+          <TextInput
+            allowFontScaling={true}
+            onChangeText={[Function]}
+            placeholder="Search Members"
+            underlineColorAndroid="transparent"
+          />
+        </View>
+        <PopupMenuButton
+          actions={Array []}
+        >
+          <View>
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+            />
+            <Icon
+              name="ArrowDown"
+            />
+          </View>
+        </PopupMenuButton>
+      </View>
+    </View>
+  }
+  data={
+    Array [
+      Object {
+        "id": "1",
+        "name": "Loren",
+      },
+      Object {
+        "id": "2",
+        "name": "Robbie",
+      },
+    ]
+  }
+  disableVirtualization={false}
+  horizontal={false}
+  initialNumToRender={10}
+  keyExtractor={[Function]}
+  maxToRenderPerBatch={10}
+  numColumns="2"
+  onEndReached={false}
+  onEndReachedThreshold={2}
+  renderItem={[Function]}
+  scrollEventThrottle={50}
+  updateCellsBatchingPeriod={50}
+  windowSize={21}
+/>
+`;
+
+exports[`MemberList runs call for new results if server search 1`] = `
 <FlatList
   ListFooterComponent={null}
   ListHeaderComponent={
@@ -64,8 +128,8 @@ exports[`MemberList renders with default props and server search 1`] = `
 />
 `;
 
-exports[`MemberList renders with default props with default non-server search 1`] = `
-<FlatList
+exports[`MemberList server search fetches new results when search provided 1`] = `
+<RCTScrollView
   ListFooterComponent={null}
   ListHeaderComponent={
     <View>
@@ -101,29 +165,94 @@ exports[`MemberList renders with default props with default non-server search 1`
       </View>
     </View>
   }
-  data={
-    Array [
-      Object {
-        "id": "1",
-        "name": "Loren",
-      },
-      Object {
-        "id": "2",
-        "name": "Robbie",
-      },
-    ]
-  }
+  data={Array []}
   disableVirtualization={false}
+  getItem={[Function]}
+  getItemCount={[Function]}
   horizontal={false}
   initialNumToRender={10}
+  invertStickyHeaders={undefined}
   keyExtractor={[Function]}
   maxToRenderPerBatch={10}
   numColumns="2"
-  onEndReached={false}
+  onContentSizeChange={[Function]}
+  onEndReached={[Function]}
   onEndReachedThreshold={2}
+  onLayout={[Function]}
+  onMomentumScrollEnd={[Function]}
+  onScroll={[Function]}
+  onScrollBeginDrag={[Function]}
+  onScrollEndDrag={[Function]}
   renderItem={[Function]}
   scrollEventThrottle={50}
+  stickyHeaderIndices={Array []}
   updateCellsBatchingPeriod={50}
+  viewabilityConfigCallbackPairs={Array []}
   windowSize={21}
-/>
+>
+  <View>
+    <View
+      onLayout={[Function]}
+    >
+      <View>
+        
+        <View>
+          <View>
+            <Icon
+              color={undefined}
+              name="Search"
+              onPress={[Function]}
+              size={30}
+            />
+            <TextInput
+              allowFontScaling={true}
+              onChangeText={[Function]}
+              placeholder="Search Members"
+              underlineColorAndroid="transparent"
+            />
+          </View>
+          <View
+            accessibilityComponentType={undefined}
+            accessibilityLabel={undefined}
+            accessibilityTraits={undefined}
+            accessible={true}
+            collapsable={undefined}
+            hasTVPreferredFocus={undefined}
+            hitSlop={
+              Object {
+                "bottom": 5,
+                "left": 5,
+                "right": 5,
+                "top": 5,
+              }
+            }
+            isTVSelectable={true}
+            nativeID={undefined}
+            onLayout={undefined}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            testID={undefined}
+            tvParallaxProperties={undefined}
+          >
+            <View>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+              />
+              <Icon
+                color={undefined}
+                name="ArrowDown"
+              />
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
+  </View>
+</RCTScrollView>
 `;
