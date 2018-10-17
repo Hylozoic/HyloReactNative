@@ -1,103 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`mapsDispatchToProps createComment 1`] = `
-Array [
-  "dispatch",
-  Array [
-    Object {
-      "graphql": Object {
-        "query": "mutation ($postId: String, $text: String) {
-        createComment(data: {postId: $postId, text: $text}) {
-          id
-          text
-          post {
-            id
-          }
-          createdAt
-          creator {
-            id
-          }
-        }
-      }",
-        "variables": Object {
-          "postId": "1",
-          "text": "some comment",
-        },
-      },
-      "meta": Object {
-        "analytics": "Comment Created",
-        "extractModel": "Comment",
-        "optimistic": true,
-        "postId": "1",
-        "tempId": "post1_1",
-        "text": "some comment",
-      },
-      "type": "CommentEditor/CREATE_COMMENT",
-    },
-  ],
-]
-`;
-
-exports[`mapsDispatchToProps editPost 1`] = `
-Array [
-  "navigate",
-  Array [
-    Object {
-      "key": "PostEditor",
-      "params": Object {
-        "id": "1",
-      },
-      "routeName": "PostEditor",
-    },
-  ],
-]
-`;
-
-exports[`mapsDispatchToProps maps 1`] = `
-Object {
-  "createComment": [Function],
-  "editPost": [Function],
-  "fetchPost": [Function],
-  "goToCommunity": [Function],
-  "showMember": [Function],
-  "showTopic": [Function],
-}
-`;
-
-exports[`mapsDispatchToProps showMember 1`] = `
-Array [
-  "navigate",
-  Array [
-    Object {
-      "key": "MemberProfile",
-      "params": Object {
-        "id": 1,
-      },
-      "routeName": "MemberProfile",
-    },
-  ],
-]
-`;
-
-exports[`mapsDispatchToProps showTopic 1`] = `
-Array [
-  "navigate",
-  Array [
-    Object {
-      "key": "Feed",
-      "params": Object {
-        "communityId": 4,
-        "topicName": "mytopicname",
-      },
-      "routeName": "Feed",
-    },
-  ],
-]
-`;
-
 exports[`mapsStateToProps 1`] = `
 Object {
   "currentUser": undefined,
+  "id": "1",
+  "isProject": false,
   "post": Object {
     "commenters": Array [],
     "communities": Array [
@@ -125,8 +32,125 @@ Object {
       "http://foo.com/bar.png",
     ],
     "linkPreview": undefined,
+    "members": Array [],
     "pinned": undefined,
     "topics": Array [],
   },
 }
+`;
+
+exports[`mergeProps createComment 1`] = `
+Array [
+  "dispatch",
+  Array [
+    Object {
+      "graphql": Object {
+        "query": "mutation ($postId: String, $text: String) {
+        createComment(data: {postId: $postId, text: $text}) {
+          id
+          text
+          post {
+            id
+          }
+          createdAt
+          creator {
+            id
+          }
+        }
+      }",
+        "variables": Object {
+          "postId": "testpost",
+          "text": "some comment",
+        },
+      },
+      "meta": Object {
+        "analytics": "Comment Created",
+        "extractModel": "Comment",
+        "optimistic": true,
+        "postId": "testpost",
+        "tempId": "posttestpost_1",
+        "text": "some comment",
+      },
+      "type": "CommentEditor/CREATE_COMMENT",
+    },
+  ],
+]
+`;
+
+exports[`mergeProps editPost 1`] = `
+Array [
+  "navigate",
+  Array [
+    Object {
+      "key": "PostEditor",
+      "params": Object {
+        "id": "testpost",
+      },
+      "routeName": "PostEditor",
+    },
+  ],
+]
+`;
+
+exports[`mergeProps maps 1`] = `
+Object {
+  "createComment": [Function],
+  "currentUser": Object {
+    "id": "currentuser",
+  },
+  "dispatch": [MockFunction],
+  "editPost": [Function],
+  "fetchPost": [Function],
+  "goToCommunity": [Function],
+  "goToMembers": [Function],
+  "id": "testpost",
+  "isFocused": true,
+  "isProject": false,
+  "joinProject": [Function],
+  "leaveProject": [Function],
+  "navigation": Object {
+    "navigate": [MockFunction],
+    "state": Object {
+      "params": Object {
+        "id": "1",
+      },
+    },
+  },
+  "post": Object {
+    "id": "testpost",
+  },
+  "showMember": [Function],
+  "showTopic": [Function],
+}
+`;
+
+exports[`mergeProps showMember 1`] = `
+Array [
+  "navigate",
+  Array [
+    Object {
+      "key": "MemberProfile",
+      "params": Object {
+        "id": 1,
+      },
+      "routeName": "MemberProfile",
+    },
+  ],
+]
+`;
+
+exports[`mergeProps showTopic 1`] = `
+Array [
+  "navigate",
+  Array [
+    Object {
+      "key": "Feed",
+      "params": Object {
+        "communityId": 4,
+        "topicName": "mytopicname",
+      },
+      "routeName": "Feed",
+    },
+  ],
+]
 `;

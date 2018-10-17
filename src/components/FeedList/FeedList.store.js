@@ -71,11 +71,11 @@ export const getHasMorePosts = createSelector(getPostResults, get('hasMore'))
 
 // Create a cached selector since we don't want multiple onscreen feedlists to clobber the cache between each other.
 export const getQueryProps = createCachedSelector(
-  (state, props) => props.community,
-  (state, props) => props.network,
-  (state, props) => props.sortBy,
-  (state, props) => props.filter,
-  (state, props) => props.topicName,
+  (_, props) => props.community,
+  (_, props) => props.network,
+  (_, props) => props.sortBy,
+  (_, props) => props.filter,
+  (_, props) => props.topicName,
   (community, network, sortBy, filter, topicName) => {
     var subject
 
@@ -86,6 +86,7 @@ export const getQueryProps = createCachedSelector(
     } else {
       subject = 'all-communities'
     }
+
     return omitBy(x => isNull(x) || isUndefined(x), {
       sortBy,
       filter,

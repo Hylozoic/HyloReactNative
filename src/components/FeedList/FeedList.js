@@ -6,7 +6,7 @@ import PostRow from './PostRow'
 import Loading from '../Loading'
 import Icon from '../Icon'
 import PopupMenuButton from '../PopupMenuButton'
-import { find, get, isEmpty } from 'lodash/fp'
+import { find, get, isEmpty, includes } from 'lodash/fp'
 export default class FeedList extends React.Component {
   fetchOrShowCached () {
     const { hasMore, postIds, fetchPosts, pending } = this.props
@@ -31,10 +31,14 @@ export default class FeedList extends React.Component {
     // the Home tab, both by hard-coding the tab name and by using screenProps,
     // which we had to pass down from the Home component through Feed. This will
     // have to be reworked to allow opening topic feeds in the Topic tab, e.g.
-    if (this.props.screenProps.currentTabName !== 'Home') {
+    const isAFeedTab = props => {
+      return includes(['Home', 'Projects'], props.screenProps.currentTabName)
+    }
+
+    if (!isAFeedTab(this.props)) {
       return
     }
-    if (!prevProps || prevProps.screenProps.currentTabName !== 'Home') {
+    if (!prevProps || isAFeedTab(prevProps)) {
       return this.fetchOrShowCached()
     }
     if (!prevProps.isFocused && this.props.isFocused) {

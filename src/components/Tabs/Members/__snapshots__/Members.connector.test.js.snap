@@ -27,6 +27,15 @@ Object {
 }
 `;
 
+exports[`mapDispatchToProps returns the right keys 1`] = `
+Object {
+  "fetchMembers": [Function],
+  "setSearch": [Function],
+  "setSort": [Function],
+  "showMember": [Function],
+}
+`;
+
 exports[`mapStateToProps handles null value for lastViewedCommunity 1`] = `
 Object {
   "canModerate": true,
@@ -57,6 +66,11 @@ Object {
   "search": undefined,
   "slug": "tom",
   "sortBy": undefined,
+  "sortKeys": Object {
+    "join": "Newest",
+    "location": "Location",
+    "name": "Name",
+  },
   "subject": "community",
 }
 `;

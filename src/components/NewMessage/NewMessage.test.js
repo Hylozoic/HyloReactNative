@@ -2,6 +2,9 @@ import 'react-native'
 import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import ReactTestRenderer from 'react-test-renderer'
+import { Provider } from 'react-redux'
+import { createMockStore } from 'util/testing'
+import orm from 'store/models'
 import
   NewMessage, { ParticipantInput, Participant, ContactRow }
 from './NewMessage'
@@ -21,7 +24,7 @@ describe('NewMessage', () => {
       recent: true,
       suggestions: true
     }
-    const participantInputText = ''
+    const personInputText = ''
 
     renderer.render(<NewMessage
       recentContacts={recentContacts}
@@ -31,7 +34,7 @@ describe('NewMessage', () => {
       addParticipant={() => {}}
       removeParticipant={() => {}}
       setParticipantInput={() => {}}
-      participantInputText={participantInputText}
+      personInputText={personInputText}
       createMessage={() => {}}
       pending={pending}
       />)
@@ -39,7 +42,7 @@ describe('NewMessage', () => {
 
     expect(actual).toMatchSnapshot()
 
-    const participantInputText2 = 'Jon'
+    const personInputText2 = 'Jon'
 
     renderer.render(<NewMessage
       recentContacts={recentContacts}
@@ -49,7 +52,7 @@ describe('NewMessage', () => {
       addParticipant={() => {}}
       removeParticipant={() => {}}
       setParticipantInput={() => {}}
-      participantInputText={participantInputText2}
+      personInputText={personInputText2}
       createMessage={() => {}}
       pending={pending}
       />)
@@ -59,89 +62,30 @@ describe('NewMessage', () => {
     expect(actual2).toMatchSnapshot()
   })
 
-  it('calls the right functions on mount', () => {
-    const props = {
-      fetchRecentContacts: jest.fn(),
-      loadParticipantsFromParams: jest.fn(),
-      pending: {},
-      participants: [],
-      recentContacts: [],
-      suggestions: []
-    }
-    ReactTestRenderer.create(<NewMessage {...props} />).getInstance()
-    expect(props.fetchRecentContacts).toHaveBeenCalled()
-    expect(props.loadParticipantsFromParams).toHaveBeenCalled()
-  })
-
   describe('onBlurMessageInput', () => {
     const props = {
       fetchRecentContacts: () => {},
-      loadParticipantsFromParams: () => {},
       pending: {},
       participants: [],
       recentContacts: [],
       suggestions: [],
       mockViewKey: 1
     }
+    const state = {
+      orm: orm.getEmptyState(),
+      queryResults: {},
+      pending: {}
+    }
+ 
     it('increments the view key', () => {
-      const instance = ReactTestRenderer.create(<NewMessage {...props} />).getInstance()
+      const instance = ReactTestRenderer.create(
+        <Provider store={createMockStore(state)}>
+          <NewMessage {...props} />
+        </Provider>
+      ).root.findByType(NewMessage).instance
       instance.setState({viewKey: 2})
       instance.onBlurMessageInput()
       expect(instance.state.viewKey).toEqual(3)
     })
-  })
-})
-
-describe('ParticipantInput', () => {
-  it('renders correctly', () => {
-    const renderer = new ReactShallowRenderer()
-    const participants = [{id: 10}, {id: 11}, {id: 12}]
-    const text = 'Jon'
-
-    renderer.render(<ParticipantInput
-      participants={participants}
-      text={text}
-      onChangeText={() => {}}
-      removeParticipant={() => {}} />)
-    const actual = renderer.getRenderOutput()
-
-    expect(actual).toMatchSnapshot()
-  })
-})
-
-describe('Participant', () => {
-  it('renders correctly', () => {
-    const renderer = new ReactShallowRenderer()
-    const participant = {
-      id: 1,
-      name: 'Participant One',
-      avatarUrl: 'pone.png'
-    }
-
-    renderer.render(<Participant
-      participant={participant}
-      remove={() => {}} />)
-
-    const actual = renderer.getRenderOutput()
-
-    expect(actual).toMatchSnapshot()
-  })
-})
-
-describe('ContactRow', () => {
-  it('renders correctly', () => {
-    const renderer = new ReactShallowRenderer()
-    const contact = {
-      id: 1,
-      name: 'Contact One',
-      avatarUrl: 'cone.png'
-    }
-    renderer.render(<ContactRow
-      contact={contact}
-      grayed
-      add={() => {}} />)
-    const actual = renderer.getRenderOutput()
-
-    expect(actual).toMatchSnapshot()
   })
 })

@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders as expected 1`] = `
+<ScrollView
+  contentContainerStyle={
+    Array [
+      Object {
+        "backgroundColor": "white",
+        "flex": 1,
+        "paddingTop": 50,
+      },
+      Object {
+        "styleProp": 1,
+      },
+    ]
+  }
+  keyboardShouldPersistTaps="handled"
+>
+  <Connect(PeopleChooser)
+    people={
+      Array [
+        Object {
+          "id": "member1",
+        },
+        Object {
+          "id": "member2",
+        },
+      ]
+    }
+    placeholderText="Type in the names of people to add to project"
+    updatePeople={[Function]}
+  />
+  <Button
+    onPress={[Function]}
+    text="Done"
+  />
+</ScrollView>
+`;

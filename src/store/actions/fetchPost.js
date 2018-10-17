@@ -69,6 +69,14 @@ export function getPostFieldsFragment (withComments = true) {
     name
     postsTotal
     followersTotal
+  }
+  members {
+    items {
+      id
+      name
+      avatarUrl
+    }
+    total
   }`
 }
 

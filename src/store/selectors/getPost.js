@@ -27,7 +27,8 @@ export const presentPost = (post, communityId) => {
     fileUrls: post.getFileUrls(),
     imageUrls: post.getImageUrls(),
     pinned,
-    topics: post.topics.toRefArray()
+    topics: post.topics.toRefArray(),
+    members: post.members.toRefArray()
   }
 }
 

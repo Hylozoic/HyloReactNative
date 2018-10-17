@@ -20,6 +20,7 @@ Object {
   "id": 324,
   "imageUrls": Array [],
   "linkPreview": undefined,
+  "members": Array [],
   "pinned": true,
   "topics": Array [],
 }

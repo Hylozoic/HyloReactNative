@@ -2,7 +2,7 @@ import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import TestRenderer from 'react-test-renderer'
 import { Provider } from 'react-redux'
-import PostDetails, { CommentPrompt, Files } from './PostDetails'
+import PostDetails, { CommentPrompt, Files, JoinProjectButton, ProjectMembers } from './PostDetails'
 import { Linking, TouchableOpacity } from 'react-native'
 import { createMockStore } from 'util/testing'
 import orm from 'store/models'
@@ -130,5 +130,49 @@ describe('Files', () => {
     await renderer.root.findAllByType(TouchableOpacity)[0].props.onPress()
     expect(Linking.canOpenURL).toHaveBeenCalledWith('http://foo.com/foo.pdf')
     expect(Linking.openURL).toHaveBeenCalledWith('http://foo.com/foo.pdf')
+  })
+})
+
+describe('JoinProjectButton', () => {
+  it('renders as expected', () => {
+    const renderer = new ReactShallowRenderer()
+    renderer.render(
+      <JoinProjectButton onPress={() => {}} />
+    )
+    const actual = renderer.getRenderOutput()
+    expect(actual).toMatchSnapshot()
+  })
+
+  it('renders as expected when leaving', () => {
+    const renderer = new ReactShallowRenderer()
+    renderer.render(
+      <JoinProjectButton onPress={() => {}} leaving />
+    )
+    const actual = renderer.getRenderOutput()
+    expect(actual).toMatchSnapshot()
+  })
+})
+
+describe('ProjectMembers', () => {
+  it('renders as expected', () => {
+    const props = {
+      count: 5,
+      goToMembers: () => {}
+    }
+    const renderer = new ReactShallowRenderer()
+    renderer.render(
+      <ProjectMembers {...props} />
+    )
+    const actual = renderer.getRenderOutput()
+    expect(actual).toMatchSnapshot()
+  })
+
+  it('renders as expected when leaving', () => {
+    const renderer = new ReactShallowRenderer()
+    renderer.render(
+      <JoinProjectButton onPress={() => {}} leaving />
+    )
+    const actual = renderer.getRenderOutput()
+    expect(actual).toMatchSnapshot()
   })
 })

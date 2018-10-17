@@ -1,4 +1,4 @@
-import { mapStateToProps, mergeProps, makeFetchOpts } from './Members.connector'
+import { mapStateToProps, mapDispatchToProps, mergeProps, makeFetchOpts } from './Members.connector'
 import { MODULE_NAME } from './Members.store'
 import orm from '../../../store/models'
 
@@ -59,6 +59,12 @@ describe('mapStateToProps', () => {
     }
     session.Community.create({})
     expect(mapStateToProps(state)).toMatchSnapshot()
+  })
+})
+
+describe('mapDispatchToProps', () => {
+  it('returns the right keys', () => {
+    expect(mapDispatchToProps(() => {})).toMatchSnapshot()
   })
 })
 

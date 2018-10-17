@@ -13,14 +13,14 @@ describe('mapStateToProps', () => {
       queryResults: {}
     }
     expect(mapStateToProps(state, {}))
-    .toMatchSnapshot()
+      .toMatchSnapshot()
   })
 })
 
 describe('mapDispatchToProps', () => {
   it('matches the last snapshot', () => {
-    expect(mapDispatchToProps(() => {}, {}))
-    .toMatchSnapshot()
+    expect(mapDispatchToProps)
+      .toMatchSnapshot()
   })
 })
 
@@ -32,7 +32,7 @@ describe('mergeProps', () => {
   it('sets up fetchSuggestions', () => {
     const stateProps = {
       ...defaultStateProps,
-      participantInputText: 'not empty',
+      personInputText: 'not empty',
       suggestions: []
     }
     const dispatchProps = {
@@ -70,28 +70,13 @@ describe('mergeProps', () => {
     }
     const mergedProps = mergeProps(stateProps, dispatchProps, ownProps)
     return mergedProps.createMessage('hello')
-    .then(() => {
-      expect(dispatchProps.createMessage).toHaveBeenCalledWith(122, 'hello', true)
-      expect(ownProps.navigation.navigate).toHaveBeenCalledWith({
-        'key': 'Thread',
-        'params': {'id': id},
-        'routeName': 'Thread'
+      .then(() => {
+        expect(dispatchProps.createMessage).toHaveBeenCalledWith(122, 'hello', true)
+        expect(ownProps.navigation.navigate).toHaveBeenCalledWith({
+          'key': 'Thread',
+          'params': {'id': id},
+          'routeName': 'Thread'
+        })
       })
-    })
-  })
-
-  it('sets up loadParticipantsFromParams', () => {
-    const dispatchProps = {
-      setParticipants: jest.fn()
-    }
-    const participants = [3, 1, 2]
-    const ownProps = {
-      navigation: {
-        state: {params: {participants}}
-      }
-    }
-    const mergedProps = mergeProps(defaultStateProps, dispatchProps, ownProps)
-    mergedProps.loadParticipantsFromParams()
-    expect(dispatchProps.setParticipants).toHaveBeenCalledWith(participants)
   })
 })

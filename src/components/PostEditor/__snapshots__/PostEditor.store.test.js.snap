@@ -12,6 +12,7 @@ Object {
         $fileUrls: [String]
         $announcement: Boolean
         $topicNames: [String]
+        $memberIds: [ID]        
       ) {
         createPost(data: {
           type: $type
@@ -22,6 +23,7 @@ Object {
           fileUrls: $fileUrls
           announcement: $announcement
           topicNames: $topicNames
+          memberIds: $memberIds
         }) {
           
   id
@@ -77,6 +79,14 @@ Object {
     postsTotal
     followersTotal
   }
+  members {
+    items {
+      id
+      name
+      avatarUrl
+    }
+    total
+  }
         }
       }",
     "variables": Object {
@@ -87,6 +97,7 @@ Object {
       "details": "details",
       "fileUrls": Array [],
       "imageUrls": Array [],
+      "memberIds": Array [],
       "title": "title",
       "topicNames": Array [],
       "type": "post",
@@ -104,13 +115,141 @@ Object {
 }
 `;
 
-exports[`fetchDetailsText should match the last snapshot 1`] = `
+exports[`createProject should match the last snapshot 1`] = `
+Object {
+  "graphql": Object {
+    "query": "mutation (
+        $type: String
+        $title: String
+        $details: String
+        $communityIds: [String]
+        $imageUrls: [String]
+        $fileUrls: [String]
+        $announcement: Boolean
+        $topicNames: [String]
+        $memberIds: [ID]        
+      ) {
+        createPost(data: {
+          type: $type
+          title: $title
+          details: $details
+          communityIds: $communityIds
+          imageUrls: $imageUrls
+          fileUrls: $fileUrls
+          announcement: $announcement
+          topicNames: $topicNames
+          memberIds: $memberIds
+        }) {
+          
+  id
+  title
+  details
+  type
+  location
+  announcement
+  creator {
+    id
+    name
+    avatarUrl
+    tagline
+  }
+  createdAt
+  updatedAt
+  commenters(first: 3) {
+    id
+    name
+    avatarUrl
+  }
+  commentersTotal
+  commentsTotal
+  
+  linkPreview {
+    title
+    url
+    imageUrl
+  }
+  votesTotal
+  myVote
+  communities {
+    id
+    name
+    slug
+  }
+  attachments {
+    id
+    position
+    type
+    url
+  }
+  postMemberships {
+    id
+    pinned
+    community {
+      id
+    }
+  }
+  topics {
+    id
+    name
+    postsTotal
+    followersTotal
+  }
+  members {
+    items {
+      id
+      name
+      avatarUrl
+    }
+    total
+  }
+        }
+      }",
+    "variables": Object {
+      "announcement": undefined,
+      "communityIds": Array [
+        undefined,
+      ],
+      "details": "details",
+      "fileUrls": Array [],
+      "imageUrls": Array [],
+      "memberIds": Array [
+        1,
+        2,
+        3,
+      ],
+      "title": "title",
+      "topicNames": Array [],
+      "type": "post",
+    },
+  },
+  "meta": Object {
+    "analytics": Object {
+      "detailsLength": 7,
+      "eventName": "Post Created",
+      "isAnnouncement": undefined,
+    },
+    "extractModel": "Post",
+  },
+  "type": "PostEditor/CREATE_POST",
+}
+`;
+
+exports[`fetchDetailsAndMembers should match the last snapshot 1`] = `
 Object {
   "graphql": Object {
     "query": "query ($id: ID) {
         post(id: $id) {
           id
           detailsText
+          members {
+            total
+            hasMore
+            items {
+              id
+              name
+              avatarUrl
+            }
+          }
         }
       }",
     "variables": Object {
@@ -120,7 +259,7 @@ Object {
   "meta": Object {
     "extractModel": "Post",
   },
-  "type": "PostEditor/FETCH_DETAILS_TEXT",
+  "type": "PostEditor/FETCH_DETAILS_AND_MEMBERS",
 }
 `;
 
@@ -135,6 +274,7 @@ Object {
         $imageUrls: [String]
         $fileUrls: [String]
         $topicNames: [String]
+        $memberIds: [ID]        
       ) {
         updatePost(id: $id, data: {
           type: $type
@@ -144,6 +284,7 @@ Object {
           imageUrls: $imageUrls
           fileUrls: $fileUrls
           topicNames: $topicNames
+          memberIds: $memberIds
         }) {
           
   id
@@ -212,6 +353,14 @@ Object {
     postsTotal
     followersTotal
   }
+  members {
+    items {
+      id
+      name
+      avatarUrl
+    }
+    total
+  }
         }
       }",
     "variables": Object {
@@ -222,6 +371,7 @@ Object {
       "fileUrls": Array [],
       "id": 1,
       "imageUrls": Array [],
+      "memberIds": Array [],
       "title": "title",
       "topicNames": Array [],
       "type": "post",

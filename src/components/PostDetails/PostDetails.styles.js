@@ -1,4 +1,4 @@
-import { capeCod10, mineralGreen, rhino30 } from '../../style/colors'
+import { capeCod10, mineralGreen, rhino30, fuchsiaPink, prim, caribbeanGreen } from '../../style/colors'
 
 export default {
   postCard: {
@@ -42,5 +42,21 @@ export default {
   },
   files: {
     marginHorizontal: 12
+  },
+  joinButton: {
+    backgroundColor: prim,
+    color: fuchsiaPink,
+    marginHorizontal: 12,
+    marginVertical: 25
+  },
+  projectMembersContainer: {
+    borderTopWidth: 1,
+    borderBottomWidth: 1,
+    borderColor: capeCod10,
+    paddingHorizontal: 12,
+    paddingVertical: 10
+  },
+  memberCount: {
+    color: caribbeanGreen
   }
 }

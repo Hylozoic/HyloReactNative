@@ -2,7 +2,7 @@
 
 exports[`PostEditor mapDispatchToProps calls save correctly 1`] = `
 Object {
-  "fetchDetailsText": [Function],
+  "fetchDetailsAndMembers": [Function],
   "save": [Function],
   "upload": [Function],
 }
@@ -21,6 +21,7 @@ Array [
         $imageUrls: [String]
         $fileUrls: [String]
         $topicNames: [String]
+        $memberIds: [ID]        
       ) {
         updatePost(id: $id, data: {
           type: $type
@@ -30,6 +31,7 @@ Array [
           imageUrls: $imageUrls
           fileUrls: $fileUrls
           topicNames: $topicNames
+          memberIds: $memberIds
         }) {
           
   id
@@ -98,6 +100,14 @@ Array [
     postsTotal
     followersTotal
   }
+  members {
+    items {
+      id
+      name
+      avatarUrl
+    }
+    total
+  }
         }
       }",
         "variables": Object {
@@ -108,6 +118,7 @@ Array [
           "fileUrls": Array [],
           "id": 1,
           "imageUrls": Array [],
+          "memberIds": Array [],
           "title": "a title",
           "topicNames": Array [],
           "type": undefined,
@@ -132,7 +143,7 @@ Array [
 
 exports[`PostEditor mapDispatchToProps maps the action generators 1`] = `
 Object {
-  "fetchDetailsText": [Function],
+  "fetchDetailsAndMembers": [Function],
   "save": [Function],
   "upload": [Function],
 }
@@ -147,6 +158,15 @@ Array [
         post(id: $id) {
           id
           detailsText
+          members {
+            total
+            hasMore
+            items {
+              id
+              name
+              avatarUrl
+            }
+          }
         }
       }",
         "variables": Object {
@@ -156,7 +176,7 @@ Array [
       "meta": Object {
         "extractModel": "Post",
       },
-      "type": "PostEditor/FETCH_DETAILS_TEXT",
+      "type": "PostEditor/FETCH_DETAILS_AND_MEMBERS",
     },
   ],
 ]
@@ -175,6 +195,7 @@ Object {
     "foo.png",
   ],
   "isNewPost": true,
+  "isProject": false,
   "pendingDetailsText": undefined,
   "post": Object {
     "commenters": Array [],
@@ -197,8 +218,10 @@ Object {
       "foo.png",
     ],
     "linkPreview": undefined,
+    "members": Array [],
     "pinned": undefined,
     "topics": Array [],
   },
+  "shouldShowTypeChooser": true,
 }
 `;

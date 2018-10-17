@@ -9,8 +9,9 @@ import {
   Modal
 } from 'react-native'
 import { validateTopicName } from 'hylo-utils/validators'
-import { get, uniq, uniqBy, isEmpty } from 'lodash/fp'
+import { get, uniq, uniqBy, isEmpty, isEqual } from 'lodash/fp'
 import PropTypes from 'prop-types'
+import ProjectMemberPicker from '../ProjectMemberPicker'
 
 import Icon from '../../components/Icon'
 import header from 'util/header'
@@ -34,13 +35,13 @@ export default class PostEditor extends React.Component {
   static contextTypes = {navigate: PropTypes.func}
 
   static navigationOptions = ({ navigation }) => {
-    const { headerTitle, save, isSaving, confirmLeave, showPicker } = get('state.params', navigation) || {}
+    const { headerTitle, save, isSaving, confirmLeave, showTopicPicker, showMemberPicker } = get('state.params', navigation) || {}
     const title = isSaving ? 'Saving...' : 'Save'
     const def = () => {}
 
     return header(navigation, {
       title: headerTitle,
-      right: { disabled: showPicker || isSaving, text: title, onPress: save || def },
+      right: { disabled: showTopicPicker || showMemberPicker || isSaving, text: title, onPress: save || def },
       headerBackButton: () => confirmLeave(navigation.goBack)
     })
   }
@@ -48,12 +49,18 @@ export default class PostEditor extends React.Component {
   componentDidMount () {
     const { navigation, isNewPost } = this.props
     navigation.setParams({
-      headerTitle: isNewPost ? 'New Post' : 'Edit Post',
+      headerTitle: this.headerTitle(),
       save: this.save
     })
     if (!isNewPost) {
-      this.props.fetchDetailsText()
+      this.props.fetchDetailsAndMembers()
     }
+  }
+
+  headerTitle () {
+    const { isNewPost, isProject } = this.props
+    const objectName = isProject ? 'Project' : 'Post'
+    return isNewPost ? `New ${objectName}` : `Edit ${objectName}`
   }
 
   shouldComponentUpdate (nextProps, nextState) {
@@ -63,6 +70,10 @@ export default class PostEditor extends React.Component {
   componentDidUpdate (prevProps) {
     if (get('post.detailsText', this.props) !== get('post.detailsText', prevProps)) {
       this.setState({detailsText: get('post.detailsText', this.props)})
+    }
+
+    if (!isEqual(get('post.members', this.props), get('post.members', prevProps))) {
+      this.setState({members: get('post.members', this.props)})
     }
   }
 
@@ -75,12 +86,13 @@ export default class PostEditor extends React.Component {
     })
     this.state = {
       title: get('title', post) || '',
-      type: 'discussion',
+      type: get('type', post) || 'discussion',
       communityIds,
       imageUrls,
       fileUrls,
-      showPicker: false,
+      showTopicPicker: false,
       topics: get('topics', post) || [],
+      members: get('members', post) || [],
       topicsPicked: false,
       announcementEnabled: false,
       detailsFocused: false,
@@ -105,7 +117,7 @@ export default class PostEditor extends React.Component {
 
   _doSave = () => {
     const { navigation, save } = this.props
-    const { communityIds, fileUrls, imageUrls, title, detailsText, topics, type, announcementEnabled } = this.state
+    const { communityIds, fileUrls, imageUrls, title, detailsText, topics, type, announcementEnabled, members } = this.state
 
     const postData = {
       communities: communityIds.map(id => ({id})),
@@ -115,7 +127,8 @@ export default class PostEditor extends React.Component {
       title,
       sendAnnouncement: announcementEnabled,
       topicNames: topics.map(t => t.name),
-      type
+      type,
+      memberIds: members.map(m => m.id)
     }
 
     return save(postData)
@@ -178,8 +191,13 @@ export default class PostEditor extends React.Component {
   showAlert = (msg) => Alert.alert(msg)
 
   cancelTopicPicker = () => {
-    this.setState({ showPicker: false })
-    this.props.navigation.setParams({ showPicker: false })
+    this.setState({ showTopicPicker: false })
+    this.props.navigation.setParams({ showTopicPicker: false })
+  }
+
+  cancelMemberPicker = () => {
+    this.setState({ showMemberPicker: false })
+    this.props.navigation.setParams({ showMemberPicker: false })
   }
 
   ignoreHash = name => name[0] === '#' ? name.slice(1) : name
@@ -223,8 +241,13 @@ export default class PostEditor extends React.Component {
   })
 
   showTopicPicker = () => {
-    this.setState({ showPicker: true })
-    this.props.navigation.setParams({ showPicker: true })
+    this.setState({ showTopicPicker: true })
+    this.props.navigation.setParams({ showTopicPicker: true })
+  }
+
+  showMemberPicker = () => {
+    this.setState({ showMemberPicker: true })
+    this.props.navigation.setParams({ showMemberPicker: true })
   }
 
   _showFilePicker = () => {
@@ -270,12 +293,23 @@ export default class PostEditor extends React.Component {
     }
   }
 
-  render () {
-    const { communityIds, canModerate, post, pendingDetailsText } = this.props
+  updateMembers = members => {
+    this.setState({
+      members
+    })
+  }
 
-    const { fileUrls, imageUrls, isSaving, showPicker,
+  removeMember = member => () => {
+    const { members } = this.state
+    this.updateMembers(members.filter(m => m.id !== member.id))
+  }
+
+  render () {
+    const { communityIds, canModerate, post, pendingDetailsText, shouldShowTypeChooser, isProject } = this.props
+
+    const { fileUrls, imageUrls, isSaving, showTopicPicker, showMemberPicker,
       topics, title, detailsText, type, filePickerPending, imagePickerPending,
-      announcementEnabled, detailsFocused, titleLengthError
+      announcementEnabled, detailsFocused, titleLengthError, members
     } = this.state
 
     const toolbarProps = {
@@ -294,13 +328,12 @@ export default class PostEditor extends React.Component {
     return <KeyboardFriendlyView style={styles.container} {...kavProps}>
       <ScrollView keyboardShouldPersistTaps='handled' style={styles.scrollContainer}>
         <View style={styles.scrollContent}>
-          <SectionLabel>What are you posting today?</SectionLabel>
-          <View style={[styles.typeButtonRow, styles.section]}>
+          {shouldShowTypeChooser && <SectionLabel>What are you posting today?</SectionLabel>}
+          {shouldShowTypeChooser && <View style={[styles.typeButtonRow, styles.section]}>
             {['discussion', 'request', 'offer'].map(t =>
               <TypeButton type={t} key={t} selected={t === type}
                 onPress={() => !isSaving && this.setState({type: t})} />)}
-          </View>
-
+          </View>}
           <SectionLabel>Title</SectionLabel>
           <View style={[styles.textInputWrapper, styles.section]}>
             <TextInput
@@ -344,6 +377,19 @@ export default class PostEditor extends React.Component {
             <Topics onPress={this.removeTopic} topics={topics} placeholder={topicsPlaceholder} />
           </TouchableOpacity>
 
+          {isProject && <TouchableOpacity
+            style={[
+              styles.section,
+              styles.textInputWrapper
+            ]}
+            onPress={this.showMemberPicker}>
+            <View style={styles.topicLabel}>
+              <SectionLabel>Members</SectionLabel>
+              <View style={styles.topicAddBorder}><Icon name='Plus' style={styles.topicAdd} /></View>
+            </View>
+            <Topics onPress={this.removeMember} topics={members} placeholder={membersPlaceholder} />
+          </TouchableOpacity>}
+
           {!isEmpty(imageUrls) && <View>
             <SectionLabel>Images</SectionLabel>
             <ImageSelector
@@ -364,18 +410,30 @@ export default class PostEditor extends React.Component {
         {detailsFocused && <Toolbar {...toolbarProps} />}
       </ScrollView>
       {!detailsFocused && <Toolbar {...toolbarProps} />}
-      {showPicker && <Modal
+      {showTopicPicker && <Modal
         animationType='slide'
         transparent={false}
-        visible={showPicker}
+        visible={showTopicPicker}
         onRequestClose={() => {
-          this.setState({showPicker: false})
+          this.setState({showTopicPicker: false})
         }}>
         <Search style={styles.search}
           communityId={communityId}
           onCancel={this.cancelTopicPicker}
           onSelect={this.insertPickerTopic}
           type={SearchType.TOPIC} />
+      </Modal>}
+      {showMemberPicker && <Modal
+        animationType='slide'
+        transparent={false}
+        visible={showMemberPicker}
+        onRequestClose={() => {
+          this.setState({showMemberPicker: false})
+        }}>
+        <ProjectMemberPicker
+          members={members}
+          onCancel={this.cancelMemberPicker}
+          updateMembers={this.updateMembers} />
       </Modal>}
     </KeyboardFriendlyView>
   }
@@ -390,6 +448,8 @@ const titlePlaceholders = {
 const detailsPlaceholder = 'What else should we know?'
 
 const topicsPlaceholder = 'Add topics.'
+
+const membersPlaceholder = 'Who is a part of this project?'
 
 export function Toolbar ({post, canModerate, filePickerPending, imagePickerPending, announcementEnabled, toggleAnnoucement, showFilePicker, showImagePicker}) {
   return <View style={styles.bottomBar}>

@@ -48,7 +48,9 @@ export default class Feed extends React.Component {
       postsTotal,
       followersTotal,
       goToCreateCommunityName,
-      currentUserHasMemberships
+      currentUserHasMemberships,
+      hidePostPrompt,
+      isProjectFeed
     } = this.props
     if (!currentUserHasMemberships) {
       return <CreateCommunityNotice
@@ -67,22 +69,27 @@ export default class Feed extends React.Component {
         all={all}
         goToCommunity={this.handleGoToCommunity}
         header={
-          <FeedBanner
-            community={community}
-            network={network}
-            currentUser={currentUser}
-            all={all}
-            newPost={this.handleNewPost}
-            topicName={topicName}
-            postsTotal={postsTotal}
-            followersTotal={followersTotal}
-            topicSubscribed={topicSubscribed}
-            setTopicSubscribe={this.handleSetTopicSubscribe} />}
+          <View>
+            <FeedBanner
+              community={community}
+              network={network}
+              currentUser={currentUser}
+              all={all}
+              newPost={this.handleNewPost}
+              topicName={topicName}
+              postsTotal={postsTotal}
+              followersTotal={followersTotal}
+              topicSubscribed={topicSubscribed}
+              setTopicSubscribe={this.handleSetTopicSubscribe}
+              hidePostPrompt={hidePostPrompt} />
+            {this.props.belowBannerComponent}
+          </View>}
         navigation={navigation}
         screenProps={screenProps}
         showMember={this.handleShowMember}
         showTopic={this.handleShowTopic}
-        topicName={topicName} />
+        topicName={topicName} 
+        isProjectFeed={isProjectFeed} />
       {!topicName && community && <SocketSubscriber type='community' id={community.id} />}
     </View>
   }

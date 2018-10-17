@@ -83,7 +83,7 @@ describe('PostEditor mapDispatchToProps', () => {
     }
     const dispatchProps = mapDispatchToProps(dispatch, props)
     expect(dispatchProps).toMatchSnapshot()
-    dispatchProps.fetchDetailsText(1)
+    dispatchProps.fetchDetailsAndMembers(1)
     expect(dispatch).toHaveBeenCalled()
     expect(dispatch.mock.calls).toMatchSnapshot()
   })

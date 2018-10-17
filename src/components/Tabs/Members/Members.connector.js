@@ -1,6 +1,9 @@
 import { connect } from 'react-redux'
 import { omit, get } from 'lodash/fp'
-
+// import { mapWhenFocused } from 'util/connector'
+import getMe from '../../../store/selectors/getMe'
+import getCurrentCommunity from '../../../store/selectors/getCurrentCommunity'
+import getCurrentNetwork from '../../../store/selectors/getCurrentNetwork'
 import { ALL_COMMUNITIES_ID } from '../../../store/models/Community'
 import {
   FETCH_MEMBERS,
@@ -12,10 +15,6 @@ import {
   setSearch,
   setSort
 } from './Members.store'
-import getMe from '../../../store/selectors/getMe'
-import { mapWhenFocused, mergeWhenFocused } from 'util/connector'
-import getCurrentCommunity from '../../../store/selectors/getCurrentCommunity'
-import getCurrentNetwork from '../../../store/selectors/getCurrentNetwork'
 
 export function makeFetchOpts (props) {
   const { community, network, sortBy } = props
@@ -43,6 +42,16 @@ export function makeFetchOpts (props) {
   }
 }
 
+// these keys must match the values that hylo-node can handle
+export function sortKeysFactory (subject) {
+  const sortKeys = {
+    name: 'Name',
+    location: 'Location'
+  }
+  if (subject !== 'network') sortKeys['join'] = 'Newest'
+  return sortKeys
+}
+
 export function mapStateToProps (state, props) {
   const currentUser = getMe(state, props)
   const community = getCurrentCommunity(state, props)
@@ -59,30 +68,30 @@ export function mapStateToProps (state, props) {
   getOpts.memberSubject = fetchOpts.subject
 
   return {
-    fetchOpts,
     currentUser,
     community,
     network,
     canModerate,
+    isAll: slug === ALL_COMMUNITIES_ID,
+    subject,
+    fetchOpts,
     hasMore: getHasMoreMembers(state, getOpts),
     members: getMembers(state, getOpts),
     pending: state.pending[FETCH_MEMBERS],
     search,
     slug,
-    subject,
+    sortKeys: sortKeysFactory(subject),
     // Use the sortBy that has been adjusted in the case of networks (see makeFetchOpts)
-    sortBy: fetchOpts.sortBy,
-    isAll: slug === ALL_COMMUNITIES_ID
+    sortBy: fetchOpts.sortBy
   }
 }
 
-export function mapDispatchToProps (dispatch, { navigation }) {
+export function mapDispatchToProps (dispatch, props) {
   return {
+    showMember: id => props.navigation.navigate({routeName: 'MemberProfile', params: {id}, key: 'MemberProfile'}),
     setSort: sort => dispatch(setSort(sort)),
     setSearch: search => dispatch(setSearch(search)),
-    fetchMembers: opts => dispatch(fetchMembers(opts)),
-    showMember: id => navigation.navigate({routeName: 'MemberProfile', params: {id}, key: 'MemberProfile'}),
-    updateBadges: badgeFlags => navigation.setParams(badgeFlags)
+    fetchMembers: opts => dispatch(fetchMembers(opts))
   }
 }
 
@@ -105,8 +114,4 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
   }
 }
 
-export default connect(
-  mapWhenFocused(mapStateToProps),
-  mapDispatchToProps,
-  mergeWhenFocused(mergeProps)
-)
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps)

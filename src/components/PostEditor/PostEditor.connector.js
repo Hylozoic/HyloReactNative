@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import {
-  createPost, FETCH_DETAILS_TEXT,
-  fetchPostDetailsText,
+  createPost, createProject, FETCH_DETAILS_AND_MEMBERS,
+  fetchPostDetailsAndMembers,
   updatePost, MAX_TITLE_LENGTH
 } from './PostEditor.store'
 import { createTopicTag } from '../Editor/Editor'
@@ -24,6 +24,11 @@ export function mapStateToProps (state, props) {
     : {}
   const postId = getPostId(state, props)
   const post = getPresentedPost(state, {id: postId})
+  const isProject = get('navigation.state.params.isProject', props) ||
+    get('type', post) === 'project'
+
+  const shouldShowTypeChooser = !isProject
+
   return {
     post: post || defaultPost,
     canModerate: getCanModerate(state),
@@ -33,14 +38,18 @@ export function mapStateToProps (state, props) {
     imageUrls: post ? post.imageUrls : [],
     fileUrls: post ? post.fileUrls : [],
     isNewPost: isEmpty(postId),
-    pendingDetailsText: state.pending[FETCH_DETAILS_TEXT]
+    isProject,
+    pendingDetailsText: state.pending[FETCH_DETAILS_AND_MEMBERS],
+    shouldShowTypeChooser
   }
 }
 
 export function mapDispatchToProps (dispatch, props) {
-  const { navigation } = props
+  const { navigation, isProject } = props
   const postId = getPostId(null, props)
-  const saveAction = postId ? updatePost : createPost
+  const saveAction = postId
+    ? updatePost
+    : isProject ? createPost : createProject
 
   return {
     save: postData => {
@@ -69,7 +78,7 @@ export function mapDispatchToProps (dispatch, props) {
         })
     },
     upload: (type, id, file) => dispatch(upload(type, id, file)),
-    fetchDetailsText: () => dispatch(fetchPostDetailsText(postId))
+    fetchDetailsAndMembers: () => dispatch(fetchPostDetailsAndMembers(postId))
   }
 }
 

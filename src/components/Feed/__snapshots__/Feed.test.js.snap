@@ -11,27 +11,31 @@ exports[`renders correctly if currentUserHasMemberships 1`] = `
     }
     goToCommunity={[Function]}
     header={
-      <FeedBanner
-        all={false}
-        community={
-          Object {
-            "id": "1",
+      <View>
+        <FeedBanner
+          all={false}
+          community={
+            Object {
+              "id": "1",
+            }
           }
-        }
-        currentUser={
-          Object {
-            "id": "2",
+          currentUser={
+            Object {
+              "id": "2",
+            }
           }
-        }
-        followersTotal={undefined}
-        network={undefined}
-        newPost={[Function]}
-        postsTotal={undefined}
-        setTopicSubscribe={[Function]}
-        topicName="amazing"
-        topicSubscribed={undefined}
-      />
+          followersTotal={undefined}
+          hidePostPrompt={undefined}
+          network={undefined}
+          newPost={[Function]}
+          postsTotal={undefined}
+          setTopicSubscribe={[Function]}
+          topicName="amazing"
+          topicSubscribed={undefined}
+        />
+      </View>
     }
+    isProjectFeed={undefined}
     navigation={Object {}}
     network={undefined}
     screenProps={undefined}

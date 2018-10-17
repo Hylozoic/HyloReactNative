@@ -7,7 +7,8 @@ export default function fetchPosts (
   { subject, slug, networkSlug, sortBy, offset, search, filter, topic },
   { reset } = {}
 ) {
-  var query, extractModel, getItems
+
+  var query, extractModel, getItems, projectFilter
 
   if (subject === 'community') {
     query = communityQuery
@@ -21,6 +22,11 @@ export default function fetchPosts (
     query = allCommunitiesQuery
     extractModel = 'Post'
     getItems = get('payload.data.posts')
+  } else if (subject === 'project') {
+    query = communityQuery
+    extractModel = 'Community'
+    getItems = get('payload.data.community.posts')
+    projectFilter = 'project'
   } else {
     throw new Error(`FETCH_POSTS with subject=${subject} is not implemented`)
   }
@@ -35,7 +41,7 @@ export default function fetchPosts (
         sortBy,
         offset,
         search,
-        filter,
+        filter: projectFilter || filter,
         first: 20,
         topic
       }

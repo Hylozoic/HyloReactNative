@@ -5,13 +5,25 @@ import { getPostFieldsFragment } from '../../store/actions/fetchPost'
 
 export const MODULE_NAME = 'PostEditor'
 export const CREATE_POST = `${MODULE_NAME}/CREATE_POST`
+export const CREATE_PROJECT = `${MODULE_NAME}/CREATE_PROJECT`
 
 export const UPDATE_POST = `${MODULE_NAME}/UPDATE_POST`
 export const UPDATE_POST_PENDING = `${UPDATE_POST}_PENDING`
 
-export const FETCH_DETAILS_TEXT = `${MODULE_NAME}/FETCH_DETAILS_TEXT`
+export const FETCH_DETAILS_AND_MEMBERS = `${MODULE_NAME}/FETCH_DETAILS_AND_MEMBERS`
 
 export const MAX_TITLE_LENGTH = 100
+
+export const projectEndpointFragment = `createProject(data: {
+  title: $title
+  details: $details
+  communityIds: $communityIds
+  imageUrls: $imageUrls
+  fileUrls: $fileUrls
+  announcement: $announcement
+  topicNames: $topicNames
+  memberIds: $memberIds
+})`
 
 export function createPost (post) {
   const {
@@ -22,6 +34,7 @@ export function createPost (post) {
     imageUrls = [],
     fileUrls = [],
     topicNames = [],
+    memberIds = [],
     sendAnnouncement
   } = post
   const communityIds = communities.map(c => c.id)
@@ -38,6 +51,7 @@ export function createPost (post) {
         $fileUrls: [String]
         $announcement: Boolean
         $topicNames: [String]
+        $memberIds: [ID]        
       ) {
         createPost(data: {
           type: $type
@@ -48,6 +62,7 @@ export function createPost (post) {
           fileUrls: $fileUrls
           announcement: $announcement
           topicNames: $topicNames
+          memberIds: $memberIds
         }) {
           ${getPostFieldsFragment(false)}
         }
@@ -60,12 +75,74 @@ export function createPost (post) {
         imageUrls,
         fileUrls,
         announcement: sendAnnouncement,
-        topicNames
+        topicNames,
+        memberIds
       }
     },
     meta: {
       extractModel: 'Post',
       analytics:{
+        eventName: AnalyticsEvents.POST_CREATED,
+        detailsLength: textLength(preprocessedDetails),
+        isAnnouncement: sendAnnouncement
+      }
+    }
+  }
+}
+
+export function createProject (post) {
+  const {
+    title,
+    details,
+    communities,
+    imageUrls = [],
+    fileUrls = [],
+    topicNames = [],
+    memberIds = [],
+    sendAnnouncement
+  } = post
+  const communityIds = communities.map(c => c.id)
+  const preprocessedDetails = divToP(details)
+  return {
+    type: CREATE_PROJECT,
+    graphql: {
+      query: `mutation (
+        $title: String
+        $details: String
+        $communityIds: [String]
+        $imageUrls: [String]
+        $fileUrls: [String]
+        $announcement: Boolean
+        $topicNames: [String]
+        $memberIds: [ID]        
+      ) {
+        createProject(data: {
+          title: $title
+          details: $details
+          communityIds: $communityIds
+          imageUrls: $imageUrls
+          fileUrls: $fileUrls
+          announcement: $announcement
+          topicNames: $topicNames
+          memberIds: $memberIds
+        }) {
+          ${getPostFieldsFragment(false)}
+        }
+      }`,
+      variables: {
+        title,
+        details: preprocessedDetails,
+        communityIds,
+        imageUrls,
+        fileUrls,
+        announcement: sendAnnouncement,
+        topicNames,
+        memberIds
+      }
+    },
+    meta: {
+      extractModel: 'Post',
+      analytics: {
         eventName: AnalyticsEvents.POST_CREATED,
         detailsLength: textLength(preprocessedDetails),
         isAnnouncement: sendAnnouncement
@@ -83,7 +160,8 @@ export function updatePost (post) {
     communities,
     imageUrls = [],
     fileUrls = [],
-    topicNames = []
+    topicNames = [],
+    memberIds = []
   } = post
   const communityIds = communities.map(c => c.id)
   const preprocessedDetails = divToP(details)
@@ -98,6 +176,7 @@ export function updatePost (post) {
         $imageUrls: [String]
         $fileUrls: [String]
         $topicNames: [String]
+        $memberIds: [ID]        
       ) {
         updatePost(id: $id, data: {
           type: $type
@@ -107,6 +186,7 @@ export function updatePost (post) {
           imageUrls: $imageUrls
           fileUrls: $fileUrls
           topicNames: $topicNames
+          memberIds: $memberIds
         }) {
           ${getPostFieldsFragment(true)}
         }
@@ -119,7 +199,8 @@ export function updatePost (post) {
         communityIds,
         imageUrls,
         fileUrls,
-        topicNames
+        topicNames,
+        memberIds
       }
     },
     meta: {
@@ -136,14 +217,23 @@ export function updatePost (post) {
   }
 }
 
-export function fetchPostDetailsText (id) {
+export function fetchPostDetailsAndMembers (id) {
   return {
-    type: FETCH_DETAILS_TEXT,
+    type: FETCH_DETAILS_AND_MEMBERS,
     graphql: {
       query: `query ($id: ID) {
         post(id: $id) {
           id
           detailsText
+          members {
+            total
+            hasMore
+            items {
+              id
+              name
+              avatarUrl
+            }
+          }
         }
       }`,
       variables: {

@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 import React from 'react'
 import { Linking, View, Text, TouchableOpacity, Alert } from 'react-native'
-import { get, isEmpty } from 'lodash/fp'
+import { get, isEmpty, find } from 'lodash/fp'
 import { shape, any, object, string, func, array, bool } from 'prop-types'
 import Comments from '../Comments'
 import PostBody from '../PostCard/PostBody'
@@ -10,11 +10,13 @@ import PostImage from '../PostCard/PostImage'
 import PostFooter from '../PostCard/PostFooter'
 import PostHeader from '../PostCard/PostHeader'
 import { LoadingScreen } from '../Loading'
+import Button from '../Button'
 import SocketSubscriber from '../SocketSubscriber'
 import styles from './PostDetails.styles'
 import { FileLabel } from '../PostEditor/FileSelector'
 import InlineEditor, { toHtml } from '../InlineEditor'
 import KeyboardFriendlyView from '../KeyboardFriendlyView'
+
 export default class PostDetails extends React.Component {
   static propTypes = {
     post: shape({
@@ -52,7 +54,9 @@ export default class PostDetails extends React.Component {
   }
 
   handleShowMember = (memberId) => this.props.showMember(memberId)
+
   handleShowTopic = (topicId) => this.props.showTopic(topicId, get('post.communities.0.id', this.props))
+
   handleGoToCommunity = (communityId) => this.props.goToCommunity(communityId)
 
   handleCreateComment = (commentText) => {
@@ -83,7 +87,11 @@ export default class PostDetails extends React.Component {
       post,
       currentUser,
       editPost,
-      pending
+      pending,
+      isProject,
+      joinProject,
+      leaveProject,
+      goToMembers
     } = this.props
 
     const {
@@ -95,6 +103,7 @@ export default class PostDetails extends React.Component {
 
     const slug = get('communities.0.slug', post)
     const communityId = get('communities.0.id', post)
+    const isMember = find(member => member.id === currentUser.id, post.members)
 
     const { location } = post
 
@@ -121,6 +130,11 @@ export default class PostDetails extends React.Component {
         slug={slug}
         showMember={this.handleShowMember}
         showTopic={this.handleShowTopic} />
+      {isProject && <ProjectMembers 
+        members={post.members} 
+        count={post.members.length} 
+        goToMembers={goToMembers} 
+        />}
       <PostCommunities
         communities={post.communities}
         slug={slug}
@@ -131,6 +145,7 @@ export default class PostDetails extends React.Component {
         <Text style={styles.infoRowinfo}>{location}</Text>
       </View>}
       {!isEmpty(post.fileUrls) && <Files urls={post.fileUrls} />}
+      {isProject && <JoinProjectButton onPress={isMember ? leaveProject : joinProject} leaving={isMember} />}
       <PostFooter id={post.id}
         currentUser={currentUser}
         commenters={post.commenters}
@@ -186,3 +201,19 @@ export function Files ({ urls }) {
 
 const openUrlFn = url => () =>
   Linking.canOpenURL(url).then(ok => ok && Linking.openURL(url))
+
+export function JoinProjectButton ({ onPress, leaving }) {
+  const text = leaving ? 'Leave Project' : 'Join Project'
+  return <Button
+    style={styles.joinButton}
+    text={text}
+    onPress={onPress} />
+}
+
+export function ProjectMembers ({ count, goToMembers }) {
+  return <View style={styles.projectMembersContainer}>
+    <TouchableOpacity onPress={goToMembers}>
+      <Text style={styles.memberCount}>{count} members</Text>
+    </TouchableOpacity>
+  </View>
+}

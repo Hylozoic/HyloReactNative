@@ -18,7 +18,7 @@ import Message from './Message'
 import MessageThread from './MessageThread'
 import Network from './Network'
 import Notification from './Notification'
-import Post, { PostFollower, PostCommenter } from './Post'
+import Post, { PostFollower, PostCommenter, ProjectMember } from './Post'
 import PostMembership from './PostMembership'
 import SearchResult from './SearchResult'
 import Skill from './Skill'
@@ -46,6 +46,7 @@ orm.register(
   PostFollower,
   PostCommenter,
   PostMembership,
+  ProjectMember,
   SearchResult,
   Skill,
   Topic,
