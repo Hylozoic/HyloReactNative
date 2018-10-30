@@ -148,6 +148,11 @@ export default {
     display: 'flex',
     flexDirection: 'row'
   },
+  memberPillBox: {
+    display: 'flex',
+    flexDirection: 'row',
+    paddingBottom: 8
+  },
   topicRemove: {
     color: rhino30,
     fontSize: 16,

@@ -128,6 +128,7 @@ export function PersonInput ({
   </View>
 }
 
+// This component is also used by PostEditor
 export function Person ({ person, remove }) {
   return <View style={styles.person}>
     <Avatar avatarUrl={person.avatarUrl} style={styles.personAvatar} dimension={24} />

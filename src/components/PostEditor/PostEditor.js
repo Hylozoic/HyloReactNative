@@ -12,7 +12,7 @@ import { validateTopicName } from 'hylo-utils/validators'
 import { get, uniq, uniqBy, isEmpty, isEqual } from 'lodash/fp'
 import PropTypes from 'prop-types'
 import ProjectMemberPicker from '../ProjectMemberPicker'
-
+import { Person } from '../PeopleChooser/PeopleChooser.js'
 import Icon from '../../components/Icon'
 import header from 'util/header'
 import KeyboardFriendlyView from '../KeyboardFriendlyView'
@@ -387,7 +387,7 @@ export default class PostEditor extends React.Component {
               <SectionLabel>Members</SectionLabel>
               <View style={styles.topicAddBorder}><Icon name='Plus' style={styles.topicAdd} /></View>
             </View>
-            <Topics onPress={this.removeMember} topics={members} placeholder={membersPlaceholder} />
+            <Members onPress={this.removeMember} members={members} placeholder={membersPlaceholder} />
           </TouchableOpacity>}
 
           {!isEmpty(imageUrls) && <View>
@@ -471,6 +471,15 @@ export function Topics ({ onPress, topics, placeholder }) {
   if (topics.length > 0) {
     return <ScrollView horizontal style={styles.topicPillBox}>
       {topics.map((t, i) => <TopicPill key={i} topic={t} onPress={onPress(t)} />)}
+    </ScrollView>
+  }
+  return <Text style={styles.textInputPlaceholder}>{placeholder}</Text>
+}
+
+export function Members ({ onPress, members, placeholder }) {
+  if (members.length > 0) {
+    return <ScrollView horizontal style={styles.memberPillBox}>
+      {members.map((p, i) => <Person key={i} person={p} remove={onPress(p)} />)}
     </ScrollView>
   }
   return <Text style={styles.textInputPlaceholder}>{placeholder}</Text>
