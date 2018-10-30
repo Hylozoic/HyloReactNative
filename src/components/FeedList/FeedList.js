@@ -9,7 +9,7 @@ import PopupMenuButton from '../PopupMenuButton'
 import { find, get, isEmpty, includes } from 'lodash/fp'
 export default class FeedList extends React.Component {
   fetchOrShowCached () {
-    console.log('fetchOrShowCached')
+    console.log('fetchOrShowCached 1 FETCH_POSTS COMING UP!!!! ********** VVVVVVVV')
     const { hasMore, postIds, fetchPosts, pending } = this.props
     if (fetchPosts && isEmpty(postIds) && hasMore !== false && !pending) {
       fetchPosts()
@@ -17,6 +17,7 @@ export default class FeedList extends React.Component {
   }
 
   componentDidMount () {
+    console.log('INSTEAD IT IS MOUNTING, STEADILY')
     this.fetchOrShowCached()
   }
 
@@ -34,10 +35,12 @@ export default class FeedList extends React.Component {
     // have to be reworked to allow opening topic feeds in the Topic tab, e.g.
     console.log('FEEDLIST - componentDidUpdate')
     const isAFeedTab = props => {
-      return includes(['Home', 'Projects'], props.screenProps.currentTabName)
+      return includes(props.screenProps.currentTabName, ['Home', 'Projects'])
     }
 
     console.log('1')
+
+    console.log('currentTabName', this.props.screenProps.currentTabName)
 
     if (!isAFeedTab(this.props)) {
       console.log('not a feed tab')
