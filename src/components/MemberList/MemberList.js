@@ -1,10 +1,11 @@
 import React from 'react'
-import { isFunction, isDefined, filter } from 'lodash/fp'
+import {
+  get, isFunction, isEqual, filter, some, values,
+  keys, isEmpty, debounce, size
+} from 'lodash/fp'
 import {
   View, FlatList, Text, TouchableOpacity, TextInput
 } from 'react-native'
-import { some, values, keys, isEmpty, debounce, size } from 'lodash/fp'
-
 import Avatar from '../Avatar'
 import { focus } from '../../util/textInput'
 import Icon from '../Icon'
@@ -14,8 +15,26 @@ import styles from './MemberList.styles'
 
 export default class MemberList extends React.Component {
   static defaultProps = {
+    // For all
+    screenProps: {
+      currentTabName: ''
+    },
+    members: [],
+    search: null,
+    children: '',
+    pending: false,
+    hideSortOptions: false,
+    sortBy: null,
+    // For server-based searches only
+    isServerSearch: false,
+    sortKeys: null,
+    hasMore: null,
+    setSearch: () => {},
+    setSort: () => {},
+    fetchMembers: () => {},
     fetchMoreMembers: () => {},
-    isServerSearch: false
+    slug: '',
+    networkSlug: ''
   }
 
   constructor (props) {
@@ -26,7 +45,7 @@ export default class MemberList extends React.Component {
     }
   }
 
-  fetchOrShowCached () {
+  fetchMembers () {
     const { members, fetchMembers, hasMore } = this.props
     if (this.state.isServerSearch && isEmpty(members) && hasMore !== false) fetchMembers()
   }
@@ -41,20 +60,19 @@ export default class MemberList extends React.Component {
   }
 
   componentDidMount () {
-    this.fetchOrShowCached()
+    this.fetchMembers()
   }
 
   componentDidUpdate (prevProps) {
-    if (this.props.members && (this.props.members.length !== prevProps.members.length)) {
+    if (!isEqual(get('members', this.props), get('members', prevProps))) {
       this.setState({
         members: this.props.members
       })
     }
-    // Why necessary? componentShouldUpdate? Is this a react-navigation screens in background thing?
-    // if (this.props.screenProps.currentTabName !== 'Members') return
     if (this.state.isServerSearch) {
+      // QUESTION: Why is this necessary?
       if (!prevProps || prevProps.screenProps.currentTabName !== 'Members') {
-        return this.fetchOrShowCached()
+        return this.fetchMembers()
       }
       if (some(key => this.props[key] !== prevProps[key], [
         'slug',
@@ -62,7 +80,7 @@ export default class MemberList extends React.Component {
         'sortBy',
         'search'
       ])) {
-        this.fetchOrShowCached()
+        return this.fetchMembers()
       }
     }
   }
