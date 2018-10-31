@@ -9,7 +9,6 @@ import PopupMenuButton from '../PopupMenuButton'
 import { find, get, isEmpty, includes } from 'lodash/fp'
 export default class FeedList extends React.Component {
   fetchOrShowCached () {
-    console.log('fetchOrShowCached 1 FETCH_POSTS COMING UP!!!! ********** VVVVVVVV')
     const { hasMore, postIds, fetchPosts, pending } = this.props
     if (fetchPosts && isEmpty(postIds) && hasMore !== false && !pending) {
       fetchPosts()
@@ -17,7 +16,6 @@ export default class FeedList extends React.Component {
   }
 
   componentDidMount () {
-    console.log('INSTEAD IT IS MOUNTING, STEADILY')
     this.fetchOrShowCached()
   }
 
@@ -33,37 +31,26 @@ export default class FeedList extends React.Component {
     // the Home tab, both by hard-coding the tab name and by using screenProps,
     // which we had to pass down from the Home component through Feed. This will
     // have to be reworked to allow opening topic feeds in the Topic tab, e.g.
-    console.log('FEEDLIST - componentDidUpdate')
     const isAFeedTab = props => {
       return includes(props.screenProps.currentTabName, ['Home', 'Projects'])
     }
 
-    console.log('1')
-
-    console.log('currentTabName', this.props.screenProps.currentTabName)
-
     if (!isAFeedTab(this.props)) {
-      console.log('not a feed tab')
       return
     }
-    console.log('but kept going')
-    if (!prevProps || isAFeedTab(prevProps)) {
-      return this.fetchOrShowCached()
-    }
+
     if (!prevProps.isFocused && this.props.isFocused) {
       return this.fetchOrShowCached()
     }
 
+
     const hasChanged = this.hasChangedFeed(prevProps)
-    console.log('hasChanged', hasChanged)
     if (hasChanged) {
       return this.fetchOrShowCached()
     }
   }
 
   hasChangedFeed (prevProps) {
-    console.log('hasChangedFeed props', this.props)
-    console.log('hasChangedFeed prevProps', prevProps)    
     if (prevProps.sortBy !== this.props.sortBy) return true
     if (prevProps.filter !== this.props.filter) return true
     if (get('id', prevProps.community) !== get('id', this.props.community)) return true
