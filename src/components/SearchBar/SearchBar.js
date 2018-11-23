@@ -4,10 +4,11 @@ import { TextInput, TouchableOpacity, View } from 'react-native'
 import Icon from '../Icon'
 import styles from './SearchBar.styles'
 
-export function SearchBar ({
+export default function SearchBar ({
   term,
   setTerm,
   type = 'topics',
+  placeholder = undefined,
   onCancel = undefined
 }) {
   return <View style={styles.searchBar}>
@@ -16,7 +17,7 @@ export function SearchBar ({
       style={styles.searchInput}
       value={term}
       onChangeText={setTerm} // updateSearch
-      placeholder={setPlaceholder(type)}
+      placeholder={placeholder || setPlaceholder(type)}
       underlineColorAndroid='transparent'
       autoCorrect={false}
       editable />

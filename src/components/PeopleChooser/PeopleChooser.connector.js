@@ -1,5 +1,6 @@
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import isPendingFor from '../../store/selectors/isPendingFor'
 import {
   setPersonInput,
   fetchSuggestions,
@@ -18,18 +19,14 @@ export function mapStateToProps (state, props) {
   const personInputText = getInputText(state, props)
   const suggestions = getSuggestions(state, {...props, autocomplete: personInputText})
   const people = get('state.params.participants', props.navigation) || props.people || []
-  const pending = {
-    suggestions: state.pending[FETCH_SUGGESTIONS],
-    recent: state.pending[FETCH_RECENT_CONTACTS],
-    all: state.pending[FETCH_CONTACTS]
-  }
 
   return {
-    recentContacts,
     personInputText,
-    pending,
-    people,
-    suggestions
+    suggestions,
+    loadingSuggestions: isPendingFor(FETCH_SUGGESTIONS, state),
+    recentContacts,
+    loadingRecentContacts: isPendingFor(FETCH_RECENT_CONTACTS, state),
+    people
   }
 }
 

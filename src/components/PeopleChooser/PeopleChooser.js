@@ -1,20 +1,44 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import {
   ScrollView,
   SectionList,
+  FlatList,
   Text,
   TouchableOpacity,
   TextInput,
   View
 } from 'react-native'
+import { caribbeanGreen } from 'style/colors'
+import SearchBar from '../SearchBar'
 import Avatar from '../Avatar'
 import Icon from '../Icon'
+import RoundCheckbox from 'rn-round-checkbox'
 import Loading from '../Loading'
 import styles from './PeopleChooser.styles'
 import { isEmpty, compact } from 'lodash/fp'
 import { isIOS } from 'util/platform'
 
 export default class PeopleChooser extends React.Component {
+  static propTypes = {
+    people: PropTypes.array,
+    setPersonInput: PropTypes.func.isRequired,
+    personInputText: PropTypes.string,
+    suggestions: PropTypes.array,
+    fetchSuggestions: PropTypes.func.isRequired,
+    loadingSuggestions: PropTypes.bool,
+    fetchRecentContacts: PropTypes.func,
+    loadingRecentContacts: PropTypes.bool,
+    placeholderText: PropTypes.string,
+    recentContacts: PropTypes.array,
+    showRecentContacts: PropTypes.bool,
+    horizontal: PropTypes.bool
+  }
+
+  static defaultProps = {
+    people: []
+  }
+
   state = {
     people: []
   }
@@ -22,7 +46,7 @@ export default class PeopleChooser extends React.Component {
   componentDidMount () {
     this.props.fetchRecentContacts()
     this.setState({
-      people: this.props.people || []
+      people: this.props.people
     })
   }
 
@@ -66,9 +90,10 @@ export default class PeopleChooser extends React.Component {
     const {
       recentContacts,
       suggestions,
+      loadingSuggestions,
+      loadingRecentContacts,
       setPersonInput,
       personInputText,
-      pending,
       showRecentContacts,
       placeholderText
     } = this.props
@@ -80,29 +105,34 @@ export default class PeopleChooser extends React.Component {
     var listSections = []
     if (showSuggestions) {
       listSections = [
-        {data: this.filterChosenPeople(suggestions), loading: pending.suggestions}
+        {data: this.filterChosenPeople(suggestions), loading: loadingSuggestions}
       ]
     } else if (showRecentContacts) {
       listSections = [
-        {data: this.filterChosenPeople(recentContacts), label: 'Recent', loading: pending.recent}
+        {data: this.filterChosenPeople(recentContacts), label: 'Recent', loading: loadingRecentContacts}
       ]
     }
 
+    console.log('!!!!', people)
+    // removePerson={this.removePerson}
+
     return <View>
-      <PersonInput
-        people={people}
-        removePerson={this.removePerson}
-        onChangeText={setPersonInput}
-        text={personInputText}
-        placeholderText={placeholderText} />
+      <SearchBar term={personInputText} setTerm={setPersonInput} placeholder={placeholderText} />
       <SectionList
+        sections={listSections}
+        renderItem={item =>
+          <ContactRow contact={item} onCheck={this.addPerson} style={styles.contactRow} />}        
         contentContainerStyle={styles.sectionList}
-        renderItem={renderContact(this.addPerson)}
         renderSectionHeader={SectionHeader}
         keyExtractor={item => item.id}
-        sections={listSections}
         onEndReachedThreshold={0.3}
         stickySectionHeadersEnabled={false} />
+      <FlatList
+        data={people}
+        renderItem={item =>
+          <ContactRow contact={item.item} onCheck={this.addPerson} style={styles.contactRow} />}
+        contentContainerStyle={styles.sectionList}
+        keyExtractor={item => item.id} />
     </View>
   }
 }
@@ -128,6 +158,32 @@ export function PersonInput ({
   </View>
 }
 
+export function ContactRow ({
+  contact,
+  grayed,
+  onCheck = undefined,
+  onPress = undefined
+}) {
+  return <TouchableOpacity onPress={onPress}>
+    <View style={[styles.contactRow, grayed && styles.grayed]}>
+      <Avatar avatarUrl={contact.avatarUrl} style={styles.contactAvatar} dimension={30} />
+      <Text style={styles.contactName}>{contact.name}</Text>
+      {onCheck &&
+        <RoundCheckbox checked backgroundColor={caribbeanGreen} onValueChange={() => onCheck(contact)} />}
+    </View>
+  </TouchableOpacity>
+}
+// Props for RoundCheckbox:
+//
+// onValueChange: PropTypes.func,
+// icon: PropTypes.string,
+// size: PropTypes.number,
+// backgroundColor: PropTypes.string,
+// iconColor: PropTypes.string,
+// borderColor: PropTypes.string,
+// checked: PropTypes.bool
+//
+
 export function Person ({ person, remove }) {
   return <View style={styles.person}>
     <Avatar avatarUrl={person.avatarUrl} style={styles.personAvatar} dimension={24} />
@@ -138,23 +194,10 @@ export function Person ({ person, remove }) {
   </View>
 }
 
-export function renderContact (addPerson) {
-  return ({ item }) => <ContactRow style={styles.contactRow} contact={item} add={addPerson} />
-}
-
 export function SectionHeader ({ section }) {
   const { label, loading } = section
   return <View style={styles.sectionHeader}>
     {label && <Text style={styles.listLabel}>{label}</Text>}
     {loading && <Loading />}
   </View>
-}
-
-export function ContactRow ({ contact, grayed, add }) {
-  return <TouchableOpacity onPress={() => add(contact)}>
-    <View style={[styles.contactRow, grayed && styles.grayed]}>
-      <Avatar avatarUrl={contact.avatarUrl} style={styles.contactAvatar} dimension={30} />
-      <Text style={styles.contactName}>{contact.name}</Text>
-    </View>
-  </TouchableOpacity>
 }

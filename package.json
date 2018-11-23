@@ -63,6 +63,7 @@
     "redux-logger": "^3.0.6",
     "redux-orm": "Hylozoic/redux-orm#createclass2-dist",
     "redux-promise": "^0.5.3",
+    "rn-round-checkbox": "^0.3.4",
     "sails.io.js": "1.1.10",
     "socket.io-client": "^2.0.3",
     "striptags": "~2",
