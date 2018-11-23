@@ -1,12 +1,14 @@
 import { connect } from 'react-redux'
 import {
-  createPost, createProject, FETCH_DETAILS_AND_MEMBERS,
-  fetchPostDetailsAndMembers,
+  createPost, createProject,
   updatePost, MAX_TITLE_LENGTH
 } from './PostEditor.store'
 import { createTopicTag } from '../Editor/Editor'
 import { get, isEmpty } from 'lodash/fp'
+import fetchPost from '../../store/actions/fetchPost'
 import { getPresentedPost } from '../../store/selectors/getPost'
+import isPendingFor from '../../store/selectors/isPendingFor'
+import { FETCH_POST } from '../../store/constants'
 import getCanModerate from '../../store/selectors/getCanModerate'
 import { mapWhenFocused } from 'util/connector'
 import upload from 'store/actions/upload'
@@ -39,7 +41,7 @@ export function mapStateToProps (state, props) {
     fileUrls: post ? post.fileUrls : [],
     isNewPost: isEmpty(postId),
     isProject,
-    pendingDetailsText: state.pending[FETCH_DETAILS_AND_MEMBERS],
+    pendingDetailsText: isPendingFor(FETCH_POST, state),
     shouldShowTypeChooser
   }
 }
@@ -78,7 +80,7 @@ export function mapDispatchToProps (dispatch, props) {
         })
     },
     upload: (type, id, file) => dispatch(upload(type, id, file)),
-    fetchDetailsAndMembers: () => dispatch(fetchPostDetailsAndMembers(postId))
+    fetchPost: () => dispatch(fetchPost(postId))
   }
 }
 

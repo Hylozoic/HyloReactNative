@@ -53,7 +53,7 @@ export default class PostEditor extends React.Component {
       save: this.save
     })
     if (!isNewPost) {
-      this.props.fetchDetailsAndMembers()
+      this.props.fetchPost()
     }
   }
 
