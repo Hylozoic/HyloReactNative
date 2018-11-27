@@ -2,19 +2,12 @@ import { rhino50, ghost } from 'style/colors'
 import { isIOS } from 'util/platform'
 
 export default {
-  cancelButton: {
-    fontSize: 20,
-    paddingVertical: 5,
-    paddingHorizontal: 10
-  },
   searchBar: {
     flexDirection: 'row',
-    borderColor: ghost,
+    borderColor: rhino50,
     borderWidth: 1,
     borderRadius: 32,
-    marginHorizontal: 8,
-    marginTop: 10,
-    marginBottom: 10,
+    margin: 8,
     height: 38
   },
   searchIcon: {
@@ -29,5 +22,10 @@ export default {
     position: 'relative',
     top: isIOS ? 0 : 1,
     fontFamily: 'Circular-Book'
+  },
+  cancelButton: {
+    fontSize: 20,
+    paddingVertical: 5,
+    paddingHorizontal: 10
   }
 }

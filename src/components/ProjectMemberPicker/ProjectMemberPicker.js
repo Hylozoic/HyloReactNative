@@ -32,8 +32,7 @@ export default function ProjectMemberPicker ({
 const styles = {
   container: {
     backgroundColor: 'white',
-    flex: 1,
-    paddingTop: 50
+    flex: 1
   },
   cancelButton: {
     fontSize: 20,

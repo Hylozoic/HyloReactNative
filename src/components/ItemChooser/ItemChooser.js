@@ -3,7 +3,9 @@ import PropTypes from 'prop-types'
 import {
   FlatList,
   Text,
-  View
+  View,
+  SafeAreaView,
+  TouchableOpacity
 } from 'react-native'
 import { debounce } from 'lodash/fp'
 import SearchBar from '../SearchBar'
@@ -93,12 +95,20 @@ export default class ItemChooser extends React.Component {
   clearSearch = () => this.props.setSearchText()
 
   // item list rendering
-
   renderListHeader = () => {
     const { searchTerm } = this.props
-    return searchTerm
-      ? <Text>Search Results</Text>
-      : <Text>All Project Members</Text>
+    const normalHeaderText = 'Current Project Members'
+    const searchingHeaderText = `People matching "${searchTerm}"`
+    const headerText = searchTerm ? searchingHeaderText : normalHeaderText
+
+    return <View style={styles.listHeader}>
+      <Text style={styles.listHeaderText}>
+        <Text>{headerText}</Text>
+      </Text>
+      {searchTerm && <TouchableOpacity onPress={this.clearSearch}>
+        <Text style={styles.listHeaderClear}>Clear Search</Text>
+      </TouchableOpacity>}
+    </View>
   }
 
   renderListRowItem = ({ item }) => {
@@ -117,12 +127,11 @@ export default class ItemChooser extends React.Component {
     const { searchTerm, searchPlaceholder } = this.props
     const items = this.setupItems(this.props.suggestedItems)
 
-    return <View>
+    return <SafeAreaView>
       <SearchBar
         value={searchTerm}
         onChangeText={this.setSearchAndFetchSuggestions}
-        placeholder={searchPlaceholder}
-        onCancel={this.clearSearch} />
+        placeholder={searchPlaceholder} />
       <FlatList
         data={items}
         stickyHeaderIndices={[0]}
@@ -131,7 +140,7 @@ export default class ItemChooser extends React.Component {
         ListFooterComponent={this.renderListFooter}
         keyExtractor={item => item.id}
         keyboardShouldPersistTaps='handled' />
-    </View>
+    </SafeAreaView>
   }
 }
 

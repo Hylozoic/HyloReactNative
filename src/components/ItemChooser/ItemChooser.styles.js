@@ -1,4 +1,4 @@
-import { caribbeanGreen, capeCod, capeCod10, capeCod20, capeCod40, rhino80, rhino50 } from '../../style/colors'
+import { caribbeanGreen, havelockBlue, capeCod, capeCod10, capeCod20, capeCod40, ghost, rhino80, rhino50 } from '../../style/colors'
 import { Dimensions } from 'react-native'
 import { isIOS } from 'util/platform'
 
@@ -31,28 +31,6 @@ export default {
     borderBottomColor: capeCod20,
     minWidth: screenWidth
   },
-  personTextInput: {
-    minWidth: screenWidth
-  },
-  person: {
-    borderWidth: 1,
-    borderColor: capeCod20,
-    borderRadius: 4,
-    flexDirection: 'row',
-    alignItems: 'center',
-    height: 38,
-    marginRight: 9,
-    paddingLeft: 5,
-    paddingRight: 10
-  },
-  personAvatar: {
-    marginRight: 10
-  },
-  closeIcon: {
-    paddingLeft: 15,
-    fontSize: 20,
-    color: rhino50
-  },
   sectionHeader: {
     marginTop: 20
   },
@@ -61,5 +39,25 @@ export default {
     fontSize: 18,
     fontFamily: 'Circular-Book',
     marginBottom: 20
+  },
+  listHeader: {
+    padding: 10,
+    paddingTop: 0,
+    paddingBottom: 0,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center'
+  },
+  listHeaderText: {
+    fontWeight: 'bold',
+    color: rhino80,
+    flex: 1
+  },
+  listHeaderClear: {
+    marginLeft: 'auto',
+    fontWeight: 'bold',
+    fontSize: 14,
+    color: havelockBlue
   }
 }

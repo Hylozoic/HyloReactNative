@@ -4,7 +4,10 @@ import {
   TouchableOpacity,
   View
 } from 'react-native'
-import { caribbeanGreen } from 'style/colors'
+import {
+  caribbeanGreen,
+  ghost
+} from 'style/colors'
 import Avatar from '../Avatar'
 import RoundCheckbox from 'rn-round-checkbox'
 
@@ -17,28 +20,35 @@ export default function ProjectMemberItemChooserRow ({
 }) {
   return <TouchableOpacity onPress={onPress} activeOpacity={1}>
     <View style={[styles.personRow, grayed && styles.grayed]}>
-      <Avatar avatarUrl={person.avatarUrl} style={styles.personAvatar} dimension={30} />
+      <Avatar style={styles.personAvatar} avatarUrl={person.avatarUrl} dimension={30} />
       <Text style={styles.personName}>{person.name}</Text>
-      <RoundCheckbox checked={selected} backgroundColor={caribbeanGreen} onValueChange={() => onCheck(person)} />
+      <RoundCheckbox style={styles.checkbox} checked={selected} backgroundColor={caribbeanGreen} onValueChange={() => onCheck(person)} />
     </View>
   </TouchableOpacity>
 }
 
 const styles = {
   personRow: {
-    height: 40,
+    padding: 15,
+    paddingBottom: 0,
     flexDirection: 'row',
     alignItems: 'center',
-    maxWidth: 225
+    justifyContent: 'flex-start'
+  },
+  personAvatar: {
+    marginRight: 20,
+    width: 20
+  },
+  personName: {
+    fontFamily: 'Circular-Bold',
+    flex: 1
+  },
+  checkbox: {
+    marginLeft: 'auto',
+    width: 50
   },
   grayed: {
     opacity: 0.2
-  },
-  personAvatar: {
-    marginRight: 20
-  },
-  personName: {
-    fontFamily: 'Circular-Bold'
   }
 }
 
