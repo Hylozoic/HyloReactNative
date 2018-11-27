@@ -9,13 +9,13 @@ import mixpanelReducer from './mixpanel'
 import CommentEditor from '../../components/PostDetails/CommentEditor/CommentEditor.store'
 import DeepLinkHandler from '../../components/DeepLinkHandler/DeepLinkHandler.store'
 import FeedList from '../../components/FeedList/FeedList.store'
+import ItemChooser from '../../components/ItemChooser/ItemChooser.store'
 import LoadingModal from '../../components/LoadingModal/LoadingModal.store'
 import MemberFeed from '../../components/MemberProfile/MemberFeed/MemberFeed.store'
 import Members from '../../components/Tabs/Members/Members.store'
 import ModeratorSettings from '../../components/ModeratorSettings/ModeratorSettings.store'
 import NewMessage from '../../components/NewMessage/NewMessage.store'
 import PeopleTyping from '../../components/PeopleTyping/PeopleTyping.store'
-import PeopleChooser from '../../components/PeopleChooser/PeopleChooser.store'
 import PostEditor from '../../components/PostEditor/PostEditor.store'
 import Search from '../../components/Search/Search.store'
 import SkillEditor from '../../components/SkillEditor/SkillEditor.store'
@@ -36,13 +36,13 @@ export const combinedReducers = combineReducers({
   CommentEditor,
   DeepLinkHandler,
   FeedList,
+  ItemChooser,
   LoadingModal,
   MemberFeed,
   Members,
   ModeratorSettings,
   NewMessage,
   PeopleTyping,
-  PeopleChooser,
   PostEditor,
   Search,
   SearchPage,

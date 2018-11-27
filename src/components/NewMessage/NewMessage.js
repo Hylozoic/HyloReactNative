@@ -1,7 +1,7 @@
 import React from 'react'
 import MessageInput from '../MessageInput'
 import KeyboardFriendlyView from '../KeyboardFriendlyView'
-import PeopleChooser from '../PeopleChooser'
+// import PeopleChooser from '../PeopleChooser'
 import styles from './NewMessage.styles'
 import { keyboardAvoidingViewProps as kavProps } from 'util/viewHelpers'
 
@@ -43,7 +43,7 @@ export default class NewMessage extends React.Component {
       style={styles.container}
       {...{...kavProps, behavior: 'height'}}
       key={mockViewKey || this.state.viewKey}>
-      <PeopleChooser updatePeople={this.updateParticipants} {...this.props} showRecentContacts />
+      {/* <PeopleChooser horizonal showRecentContacts updatePeople={this.updateParticipants} {...this.props} /> */}
       <MessageInput
         style={styles.messageInput}
         multiline

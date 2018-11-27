@@ -2,26 +2,33 @@ import React from 'react'
 import {
   ScrollView
 } from 'react-native'
-
-import PeopleChooser from '../PeopleChooser'
+import getPeopleAutocomplete from '../../store/selectors/getPeopleAutocomplete'
+import fetchPeopleAutocomplete from '../../store/actions/fetchPeopleAutocomplete'
 import Button from '../Button'
+import ItemChooser from '../ItemChooser'
+import ProjectMemberItemChooserRow from './ProjectMemberItemChooserRow'
 
-export default class ProjectMemberPicker extends React.Component {
-  render () {
-    const { style, onCancel, updateMembers, members } = this.props
-
-    return <ScrollView keyboardShouldPersistTaps='handled'
-      contentContainerStyle={[styles.container, style]}>
-      <PeopleChooser
-        updatePeople={updateMembers}
-        placeholderText='Type in the names of people to add to project'
-        people={members} />
-      <Button
-        style={styles.doneButton}
-        text='Done'
-        onPress={onCancel} />
-    </ScrollView>
-  }
+export default function ProjectMemberPicker ({
+  style,
+  onCancel,
+  updateMembers,
+  members
+}) {
+  return <ScrollView keyboardShouldPersistTaps='handled'
+    contentContainerStyle={[styles.container, style]}>
+    <ItemChooser
+      chosenItems={members}
+      fetchSearchSuggestions={fetchPeopleAutocomplete}
+      getSearchSuggestions={getPeopleAutocomplete}
+      searchPlaceholder='Type in the names of people to add to project'
+      updateItems={updateMembers}
+      ItemRowComponent={ProjectMemberItemChooserRow}
+      queryScope='ProjectMembers' />
+    <Button
+      style={styles.doneButton}
+      text='Done'
+      onPress={onCancel} />
+  </ScrollView>
 }
 
 const styles = {

@@ -5,8 +5,8 @@ import Icon from '../Icon'
 import styles from './SearchBar.styles'
 
 export default function SearchBar ({
-  term,
-  setTerm,
+  value,
+  onChangeText,
   type = 'topics',
   placeholder = undefined,
   onCancel = undefined
@@ -15,8 +15,8 @@ export default function SearchBar ({
     <Icon style={styles.searchIcon} name='Search' />
     <TextInput
       style={styles.searchInput}
-      value={term}
-      onChangeText={setTerm} // updateSearch
+      value={value}
+      onChangeText={onChangeText} // updateSearch
       placeholder={placeholder || setPlaceholder(type)}
       underlineColorAndroid='transparent'
       autoCorrect={false}

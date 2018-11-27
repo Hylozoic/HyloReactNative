@@ -61,20 +61,5 @@ export default {
     fontSize: 18,
     fontFamily: 'Circular-Book',
     marginBottom: 20
-  },
-  contactRow: {
-    height: 40,
-    flexDirection: 'row',
-    alignItems: 'center',
-    maxWidth: 225
-  },
-  grayed: {
-    opacity: 0.2
-  },
-  contactAvatar: {
-    marginRight: 20
-  },
-  contactName: {
-    fontFamily: 'Circular-Bold'
   }
 }
