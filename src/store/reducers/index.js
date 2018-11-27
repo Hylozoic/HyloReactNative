@@ -3,13 +3,13 @@ import resetStore from './resetStore'
 import ormReducer from './ormReducer'
 import pending from './pending'
 import queryResults from './queryResults'
+import querySearchTerms from './querySearchTerms'
 import currentNetworkAndCommunity from './currentNetworkAndCommunity'
 import sessionReducer from './sessionReducer'
 import mixpanelReducer from './mixpanel'
 import CommentEditor from '../../components/PostDetails/CommentEditor/CommentEditor.store'
 import DeepLinkHandler from '../../components/DeepLinkHandler/DeepLinkHandler.store'
 import FeedList from '../../components/FeedList/FeedList.store'
-import ItemChooser from '../../components/ItemChooser/ItemChooser.store'
 import LoadingModal from '../../components/LoadingModal/LoadingModal.store'
 import MemberFeed from '../../components/MemberProfile/MemberFeed/MemberFeed.store'
 import Members from '../../components/Tabs/Members/Members.store'
@@ -30,13 +30,13 @@ export const combinedReducers = combineReducers({
   orm: ormReducer,
   pending,
   queryResults,
+  querySearchTerms,
   currentNetworkAndCommunity,
   session: sessionReducer,
   mixpanel: mixpanelReducer,
   CommentEditor,
   DeepLinkHandler,
   FeedList,
-  ItemChooser,
   LoadingModal,
   MemberFeed,
   Members,

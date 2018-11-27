@@ -1,12 +1,12 @@
 import React from 'react'
-import {
-  ScrollView
-} from 'react-native'
-import getPeopleAutocomplete from '../../store/selectors/getPeopleAutocomplete'
-import fetchPeopleAutocomplete from '../../store/actions/fetchPeopleAutocomplete'
+import { ScrollView } from 'react-native'
+import { scopedFetchPeopleAutocomplete } from '../../store/actions/fetchPeopleAutocomplete'
+import { scopedGetPeopleAutocomplete } from '../../store/selectors/getPeopleAutocomplete'
 import Button from '../Button'
 import ItemChooser from '../ItemChooser'
 import ProjectMemberItemChooserRow from './ProjectMemberItemChooserRow'
+
+const QUERY_SCOPE = 'ProjectMemberPicker'
 
 export default function ProjectMemberPicker ({
   style,
@@ -14,16 +14,14 @@ export default function ProjectMemberPicker ({
   updateMembers,
   members
 }) {
-  return <ScrollView keyboardShouldPersistTaps='handled'
-    contentContainerStyle={[styles.container, style]}>
+  return <ScrollView contentContainerStyle={[styles.container, style]} keyboardShouldPersistTaps='handled'>
     <ItemChooser
-      chosenItems={members}
-      fetchSearchSuggestions={fetchPeopleAutocomplete}
-      getSearchSuggestions={getPeopleAutocomplete}
       searchPlaceholder='Type in the names of people to add to project'
+      chosenItems={members}
       updateItems={updateMembers}
       ItemRowComponent={ProjectMemberItemChooserRow}
-      queryScope='ProjectMembers' />
+      fetchSearchSuggestions={scopedFetchPeopleAutocomplete(QUERY_SCOPE)}
+      getSearchSuggestions={scopedGetPeopleAutocomplete(QUERY_SCOPE)} />
     <Button
       style={styles.doneButton}
       text='Done'

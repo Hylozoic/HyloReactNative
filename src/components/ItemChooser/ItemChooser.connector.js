@@ -1,26 +1,31 @@
 import { connect } from 'react-redux'
 import isPendingFor from '../../store/selectors/isPendingFor'
-import {
-  setSearchText,
-  getSearchText
-} from './ItemChooser.store.js'
-import { debounce } from 'lodash/fp'
+import setQuerySearchTermForScope from '../../store/actions/setQuerySearchTermForScope'
+import getQuerySearchTermForScope from '../../store/selectors/getQuerySearchTermForScope'
 
 export function mapStateToProps (state, props) {
+  const {
+    getSearchSuggestions,
+    fetchSearchSuggestions
+  } = props
+  const fetchSuggestionsActionType = fetchSearchSuggestions(undefined).type
+  const searchTerm = getQuerySearchTermForScope(state, { scope: fetchSuggestionsActionType })
   // const chosenItems = get('state.params.participants', props.navigation) || props.people || []
-  const searchText = getSearchText(state, props)
 
   return {
-    searchText,
-    suggestedItems: props.getSearchSuggestions(state, { autocomplete: searchText }),
-    loading: isPendingFor(props.fetchSearchSuggestions, state)
+    searchTerm,
+    suggestedItems: getSearchSuggestions(state, { autocomplete: searchTerm }),
+    loading: isPendingFor(fetchSuggestionsActionType, state)
   }
 }
 
 export function mapDispatchToProps (dispatch, props) {
+  const { fetchSearchSuggestions } = props
+  const fetchSuggestionsActionType = fetchSearchSuggestions(undefined).type
+
   return {
-    fetchSearchSuggestions: debounce(400, searchText => dispatch(props.fetchSearchSuggestions(searchText))),
-    setSearchText: searchText => dispatch(setSearchText(searchText))
+    fetchSearchSuggestions: searchTerm => dispatch(fetchSearchSuggestions(searchTerm)),
+    setSearchText: searchTerm => dispatch(setQuerySearchTermForScope(searchTerm, fetchSuggestionsActionType))
   }
 }
 

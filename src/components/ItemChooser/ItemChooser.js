@@ -1,33 +1,36 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { isEmpty } from 'lodash/fp'
 import {
   FlatList,
   Text,
   View
 } from 'react-native'
+import { debounce } from 'lodash/fp'
 import SearchBar from '../SearchBar'
 import Loading from '../Loading'
 import styles from './ItemChooser.styles'
 
 export default class ItemChooser extends React.Component {
   static propTypes = {
+    // Required for connector
+    fetchSearchSuggestions: PropTypes.func.isRequired,
+    getSearchSuggestions: PropTypes.func.isRequired,
+    // Used in component
+    updateItems: PropTypes.func.isRequired,
+    setSearchText: PropTypes.func.isRequired,
+    ItemRowComponent: PropTypes.func.isRequired,
     chosenItems: PropTypes.array,
-    searchText: PropTypes.string,
+    searchTerm: PropTypes.oneOfType([
+      PropTypes.undefined,
+      PropTypes.string
+    ]),
     suggestedItems: PropTypes.array,
     loading: PropTypes.bool,
-    searchPlaceholder: PropTypes.string,
-    updateItems: PropTypes.func.isRequired,
-    fetchSearchSuggestions: PropTypes.func.isRequired,
-    // Required for connector
-    getSearchSuggestions: PropTypes.func.isRequired,
-    setSearchText: PropTypes.func.isRequired,
-    queryScope: PropTypes.string,
-    ItemRowComponent: PropTypes.func.isRequired
+    searchPlaceholder: PropTypes.string
   }
 
   static defaultProps = {
-    searchText: undefined,
+    searchTerm: undefined,
     chosenItems: [],
     suggestedItems: [],
     searchPlaceholder: 'Type here to begin searching'
@@ -49,18 +52,13 @@ export default class ItemChooser extends React.Component {
     this.clearSearch()
   }
 
-  updateSearchText = searchText => {
-    this.props.setSearchText(searchText)
-    this.props.fetchSearchSuggestions(searchText)
-  }
-
   addItem = item => {
     const { chosenItems } = this.state
     const updatedItems = chosenItems.concat(item)
     this.setState({
       chosenItems: chosenItems.concat(item)
     })
-    this.updateItems(updatedItems)
+    this.props.updateItems(updatedItems)
   }
 
   removeItem = item => {
@@ -69,17 +67,13 @@ export default class ItemChooser extends React.Component {
     this.setState({
       chosenItems: updatedItems
     })
-    this.updateItems(updatedItems)
-  }
-
-  updateItems = chosenItems => {
-    this.props.updateItems(chosenItems)
+    this.props.updateItems(updatedItems)
   }
 
   setupItems = suggestedItems => {
     const { chosenItems } = this.state
-    const { searchText } = this.props
-    const items = searchText ? suggestedItems : chosenItems
+    const { searchTerm } = this.props
+    const items = searchTerm ? suggestedItems : chosenItems
     const chosenItemIds = chosenItems.map(p => p.id)
 
     return items.map(item => ({
@@ -88,46 +82,53 @@ export default class ItemChooser extends React.Component {
     }))
   }
 
+  setSearchAndFetchSuggestions = searchTerm => {
+    this.props.setSearchText(searchTerm)
+    this.fetchSearchSuggestions(searchTerm)
+  }
+
+  fetchSearchSuggestions = debounce(400, searchTerm =>
+    this.props.fetchSearchSuggestions(searchTerm))
+
   clearSearch = () => this.props.setSearchText()
 
-  // rendering
+  // item list rendering
 
-  renderHeader = () => {
-    const { loading, searchText, searchPlaceholder } = this.props
-    // value={searchText}
-    // onChangeText={this.updateSearchText}
-    // placeholder={searchPlaceholder}
-    // onCancel={this.clearSearch} 
-    return searchText
+  renderListHeader = () => {
+    const { searchTerm } = this.props
+    return searchTerm
       ? <Text>Search Results</Text>
       : <Text>All Project Members</Text>
   }
 
-  renderRowItem = ({ item }) => <this.props.ItemRowComponent
-    item={item}
-    selected={item.selected}
-    onCheck={item.selected ? this.removeItem : this.addItem} />
+  renderListRowItem = ({ item }) => {
+    const { ItemRowComponent } = this.props
+    return <ItemRowComponent
+      item={item}
+      selected={item.selected}
+      onCheck={item.selected ? this.removeItem : this.addItem} />
+  }
 
-  renderFooter = () => this.props.loading
+  renderListFooter = () => this.props.loading
     ? <Loading style={styles.loading} />
     : null
 
   render () {
-    const { searchText, searchPlaceholder } = this.props
+    const { searchTerm, searchPlaceholder } = this.props
     const items = this.setupItems(this.props.suggestedItems)
 
     return <View>
       <SearchBar
-        value={searchText}
-        onChangeText={this.updateSearchText}
+        value={searchTerm}
+        onChangeText={this.setSearchAndFetchSuggestions}
         placeholder={searchPlaceholder}
         onCancel={this.clearSearch} />
       <FlatList
         data={items}
         stickyHeaderIndices={[0]}
-        ListHeaderComponent={this.renderHeader}
-        renderItem={this.renderRowItem}
-        ListFooterComponent={this.renderFooter}
+        ListHeaderComponent={this.renderListHeader}
+        renderItem={this.renderListRowItem}
+        ListFooterComponent={this.renderListFooter}
         keyExtractor={item => item.id}
         keyboardShouldPersistTaps='handled' />
     </View>
@@ -165,7 +166,7 @@ export default class ItemChooser extends React.Component {
   stickySectionHeadersEnabled={false}
   keyExtractor={item => item.id} />} */
 // <View>
-// <SearchBar term={searchText} setTerm={this.updateSearchText} placeholder={placeholderText} />
+// <SearchBar term={searchTerm} setTerm={this.updateSearchText} placeholder={placeholderText} />
 // <FlatList
 //  data={peopleSuggestions}
 //  renderItem={item =>
