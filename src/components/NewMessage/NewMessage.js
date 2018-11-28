@@ -43,7 +43,11 @@ export default class NewMessage extends React.Component {
       style={styles.container}
       {...{...kavProps, behavior: 'height'}}
       key={mockViewKey || this.state.viewKey}>
-      {/* <PeopleChooser horizonal showRecentContacts updatePeople={this.updateParticipants} {...this.props} /> */}
+      {/* <ItemChooser
+        horizontal
+        showRecentContacts
+        updateItems={this.updateParticipants} 
+        {...this.props} */}
       <MessageInput
         style={styles.messageInput}
         multiline

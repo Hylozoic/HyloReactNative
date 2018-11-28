@@ -4,14 +4,20 @@ import {
   SectionList,
   Text,
   View,
-  ScrollView,
   SafeAreaView,
   TouchableOpacity
 } from 'react-native'
 import { debounce } from 'lodash/fp'
 import SearchBar from '../SearchBar'
-import Loading from '../Loading'
 import styles from './ItemChooser.styles'
+
+export const propTypesForItemRowComponent = {
+  item: PropTypes.object.isRequired,
+  chosen: PropTypes.bool.isRequired,
+  toggleChosen: PropTypes.func,
+  chooseItem: PropTypes.func,
+  unChooseItem: PropTypes.func
+}
 
 export default class ItemChooser extends React.Component {
   static propTypes = {
@@ -19,14 +25,15 @@ export default class ItemChooser extends React.Component {
     fetchSearchSuggestions: PropTypes.func.isRequired,
     getSearchSuggestions: PropTypes.func.isRequired,
     // Used in component
-    updateItems: PropTypes.func.isRequired,
     setSearchText: PropTypes.func.isRequired,
+    updateItems: PropTypes.func.isRequired,
+    initialItems: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.isRequired
+      })
+    ),
     ItemRowComponent: PropTypes.func.isRequired,
-    initialItems: PropTypes.array,
-    searchTerm: PropTypes.oneOfType([
-      PropTypes.undefined,
-      PropTypes.string
-    ]),
+    searchTerm: PropTypes.string,
     suggestedItems: PropTypes.array,
     loading: PropTypes.bool,
     searchPlaceholder: PropTypes.string
@@ -76,7 +83,7 @@ export default class ItemChooser extends React.Component {
     const chosenItemIds = chosenItems.map(p => p.id)
     const addSelected = items => items.map(item => ({
       ...item,
-      selected: chosenItemIds.includes(item.id)
+      chosen: chosenItemIds.includes(item.id)
     }))
     if (this.props.searchTerm) return [{ data: addSelected(suggestedItems) }]
     const sections = []
@@ -117,11 +124,15 @@ export default class ItemChooser extends React.Component {
 
   renderListRowItem = ({ item }) => {
     const { ItemRowComponent } = this.props
-    const onCheck = item.selected ? this.removeItem : this.addItem
+    const toggleChosen = item.chosen ? this.removeItem : this.addItem
+    const chooseItem = () => this.addItem(item)
+    const unChooseItem = () => this.removeItem(item)
     return <ItemRowComponent
       item={item}
-      selected={item.selected}
-      onCheck={onCheck} />
+      chosen={item.chosen}
+      chooseItem={chooseItem}
+      toggleChosen={toggleChosen}
+      unChooseItem={unChooseItem} />
   }
 
   render () {
@@ -140,8 +151,8 @@ export default class ItemChooser extends React.Component {
         renderSectionHeader={SectionHeader}
         renderItem={this.renderListRowItem}
         // ListFooterComponent={<ItemChooserListFooter {...this.props} />}
-        stickySectionHeadersEnabled={false}
         keyExtractor={item => item.id}
+        stickySectionHeadersEnabled={false}
         keyboardShouldPersistTaps='handled' />
     </SafeAreaView>
   }
@@ -181,14 +192,3 @@ export function ItemChooserListHeader ({
     </View>}
   </View>
 }
-
-// export function ItemChooserListFooter ({ loading }) {
-//   return loading
-//     ? <Loading style={styles.loading} />
-//     : null
-// }
-// for flatlist:
-// } else {
-//   const items = uniqBy('id', [...initialItems, ...chosenItems])
-//   return addSelected(items)
-// }

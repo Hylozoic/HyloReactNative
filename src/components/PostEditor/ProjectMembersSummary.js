@@ -27,7 +27,8 @@ const styles = {
   membersSummary: {
     flex: 1,
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
+    marginleft: 10
   },
   membersText: {
     paddingLeft: 6,
