@@ -1,30 +1,14 @@
-import { caribbeanGreen, havelockBlue, capeCod, capeCod10, capeCod20, capeCod40, ghost, rhino80, rhino50, white } from '../../style/colors'
-import { Dimensions } from 'react-native'
-import { isIOS } from 'util/platform'
-
-const screenWidth = Dimensions.get('window').width
-
-const messagePromptShape = {
-  height: 52,
-  borderRadius: 4,
-  left: 0,
-  right: 0,
-  flex: 1
-}
-
-const defaultPadding = {
-  paddingHorizontal: 12
-}
+import { havelockBlue, rhino80, rhino50, white } from '../../style/colors'
 
 export default {
   sectionHeader: {
-    marginTop: 20
+    paddingHorizontal: 10,
+    marginTop: 10
   },
-  listLabel: {
-    color: rhino80,
-    fontSize: 18,
+  sectionHeaderText: {
+    color: rhino50,
     fontFamily: 'Circular-Book',
-    marginBottom: 20
+    fontSize: 12
   },
   listHeader: {
     backgroundColor: white

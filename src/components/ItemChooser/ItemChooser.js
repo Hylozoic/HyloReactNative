@@ -2,13 +2,14 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {
   FlatList,
+  SectionList,
+  H1,
   Text,
   View,
   SafeAreaView,
   TouchableOpacity
 } from 'react-native'
-import Button from '../Button'
-import { debounce } from 'lodash/fp'
+import { debounce, uniqBy } from 'lodash/fp'
 import SearchBar from '../SearchBar'
 import Loading from '../Loading'
 import styles from './ItemChooser.styles'
@@ -19,7 +20,7 @@ export default class ItemChooser extends React.Component {
     fetchSearchSuggestions: PropTypes.func.isRequired,
     getSearchSuggestions: PropTypes.func.isRequired,
     // Used in component
-    done: PropTypes.func.isRequired,
+    updateItems: PropTypes.func.isRequired,
     setSearchText: PropTypes.func.isRequired,
     ItemRowComponent: PropTypes.func.isRequired,
     initialItems: PropTypes.array,
@@ -36,7 +37,7 @@ export default class ItemChooser extends React.Component {
     searchTerm: undefined,
     initialItems: [],
     suggestedItems: [],
-    searchPlaceholder: 'Type here to begin searching'
+    searchPlaceholder: 'Type to begin searching'
   }
 
   state = {
@@ -47,7 +48,8 @@ export default class ItemChooser extends React.Component {
     super(props)
 
     this.state = {
-      chosenItems: this.props.initialItems
+      chosenItems: this.props.initialItems,
+      initialItems: this.props.initialItems
     }
   }
 
@@ -55,64 +57,63 @@ export default class ItemChooser extends React.Component {
     this.clearSearch()
   }
 
-  addItem = item => {
-    const { chosenItems } = this.state
-    const updatedItems = chosenItems.concat(item)
-    this.setState({
-      chosenItems: updatedItems
-    })
+  addItem = (item) => {
+    const updatedItems = this.state.chosenItems.concat(item)
+    this.updateItems(updatedItems)
   }
 
-  removeItem = item => {
-    const { chosenItems } = this.state
-    const updatedItems = chosenItems.filter(p => p.id !== item.id)
-    this.setState({
-      chosenItems: updatedItems
-    })
+  removeItem = (item) => {
+    const updatedItems = this.state.chosenItems.filter(p => p.id !== item.id)
+    this.updateItems(updatedItems)
   }
 
-  done = () => this.props.done(this.state.chosenItems)
+  updateItems (updatedItems) {
+    this.setState(state => ({ chosenItems: updatedItems }))
+    this.props.updateItems(updatedItems)
+  }
 
-  setupItems = suggestedItems => {
-    const { chosenItems } = this.state
-    const { searchTerm } = this.props
-    const items = searchTerm ? suggestedItems : chosenItems
+  setupItemSections = (suggestedItems) => {
+    const { chosenItems, initialItems } = this.state
     const chosenItemIds = chosenItems.map(p => p.id)
-
-    return items.map(item => ({
+    const addSelected = items => items.map(item => ({
       ...item,
       selected: chosenItemIds.includes(item.id)
     }))
+    if (this.props.searchTerm) return [{ data: addSelected(suggestedItems) }]
+    const sections = []
+    const initialItemIds = initialItems.map(p => p.id)
+    const addedItems = chosenItems.filter(item => !initialItemIds.includes(item.id))
+    if (initialItems.length > 0) {
+      const label = addedItems.length > 0 ? 'Original' : undefined
+      sections.push({ label, data: addSelected(initialItems) })
+    }
+    if (addedItems.length > 0) {
+      sections.push({ label: 'Added', data: addSelected(addedItems) })
+    }
+    return sections
   }
 
-  setSearchAndFetchSuggestions = searchTerm => {
+  setSearchAndFetchSuggestions = (searchTerm) => {
     this.props.setSearchText(searchTerm)
     this.fetchSearchSuggestions(searchTerm)
   }
 
-  fetchSearchSuggestions = debounce(400, searchTerm =>
+  fetchSearchSuggestions = debounce(400, (searchTerm) =>
     this.props.fetchSearchSuggestions(searchTerm))
 
   clearSearch = () => this.props.setSearchText()
 
-  // item list rendering
+  // Rendering
 
   renderListHeader = () => {
-    const {
-      searchTerm,
-      searchPlaceholder,
-      loading
-    } = this.props
-    const normalHeaderText = 'Current Project Members'
-    const searchingHeaderText = `Matching "${searchTerm}"`
-    const headerText = searchTerm ? searchingHeaderText : normalHeaderText
+    const { searchTerm } = this.props
+    const headerText = searchTerm ? `Matching "${searchTerm}"` : undefined
+
     return <ItemChooserListHeader
-      searchPlaceholder={searchPlaceholder}
-      searchTerm={searchTerm}
+      {...this.props}
       headerText={headerText}
       setSearchAndFetchSuggestions={this.setSearchAndFetchSuggestions}
-      clearSearch={this.clearSearch}
-      loading={loading} />
+      clearSearch={this.clearSearch} />
   }
 
   renderListRowItem = ({ item }) => {
@@ -125,20 +126,27 @@ export default class ItemChooser extends React.Component {
   }
 
   render () {
-    const items = this.setupItems(this.props.suggestedItems)
+    const sections = this.setupItemSections(this.props.suggestedItems)
 
     return <SafeAreaView>
-      <Button onPress={this.done} />
-      <FlatList
-        data={items}
-        stickyHeaderIndices={[0]}
+      <SectionList
         ListHeaderComponent={this.renderListHeader}
+        sections={sections}
+        renderSectionHeader={SectionHeader}
         renderItem={this.renderListRowItem}
-        ListFooterComponent={<ItemChooserListFooter {...this.props} />}
+        stickyHeaderIndices={[0]}
+        // ListFooterComponent={<ItemChooserListFooter {...this.props} />}
         keyExtractor={item => item.id}
         keyboardShouldPersistTaps='handled' />
     </SafeAreaView>
   }
+}
+
+export function SectionHeader ({ section: { label } }) {
+  if (!label) return null
+  return <View style={styles.sectionHeader}>
+    <Text style={styles.sectionHeaderText}>{label.toUpperCase()}</Text>
+  </View>
 }
 
 export function ItemChooserListHeader ({
@@ -154,78 +162,28 @@ export function ItemChooserListHeader ({
       value={searchTerm}
       onChangeText={setSearchAndFetchSuggestions}
       placeholder={searchPlaceholder}
-      onCancel={clearSearch}
-      onCancelText='Clear'
+      // onCancel={clearSearch}
+      // onCancelText='Clear'
       loading={loading}
     />
-    <View style={styles.listHeaderStatus}>
+    {searchTerm && <View style={styles.listHeaderStatus}>
       <Text style={styles.listHeaderText}>
         <Text>{headerText}</Text>
       </Text>
-      {searchTerm && <TouchableOpacity onPress={clearSearch}>
+      <TouchableOpacity onPress={clearSearch}>
         <Text style={styles.listHeaderClear}>Clear Search</Text>
-      </TouchableOpacity>}
-    </View>
+      </TouchableOpacity>
+    </View>}
   </View>
 }
 
-export function ItemChooserListFooter ({ loading }) {
-  return loading
-    ? <Loading style={styles.loading} />
-    : null
-}
-
-// contentContainerStyle={styles.sectionList}
-// onEndReachedThreshold={0.3}
-// stickySectionHeadersEnabled={false}
-
-// return compact(suggestedItems).filter(p => !chosenItemIds.includes(p.id))
-// const suggestedItems = this.filterChosenItemsById(this.props.suggestedItems)
-
-// filterChosenItemsById = suggestedItems => {
-//   const { chosenItems } = this.state
-//   const chosenItemIds = chosenItems.map(p => p.id)
-//   // return compact(suggestedItems).filter(p => !chosenItemIds.includes(p.id))
-//   return compact(suggestedItems).map(item => ({
-//     ...item,
-//     selected: chosenItemIds.includes(item.id)
-//   }))
+// export function ItemChooserListFooter ({ loading }) {
+//   return loading
+//     ? <Loading style={styles.loading} />
+//     : null
 // }
-
-/* <Text>Chosen Items Below</Text>
-{suggestedItems.length < 1 && <FlatList
-  data={chosenItems}
-  renderItem={item =>
-    <ItemRowComponent
-      person={item.item}
-      selected
-      onCheck={this.removeItem}
-      style={styles.contactRow} />}
-  contentContainerStyle={styles.sectionList}
-  onEndReachedThreshold={0.3}
-  stickySectionHeadersEnabled={false}
-  keyExtractor={item => item.id} />} */
-// <View>
-// <SearchBar term={searchTerm} setTerm={this.updateSearchText} placeholder={placeholderText} />
-// <FlatList
-//  data={peopleSuggestions}
-//  renderItem={item =>
-//    <ContactRow
-//      contact={item.item}
-//       selected={item.selected}
-//       onPress={this.addPerson}
-//       style={styles.contactRow} />}
-//   onEndReachedThreshold={0.3}
-//   stickySectionHeadersEnabled={false} />
-// <Text>test</Text>
-// <FlatList
-//   data={chosenPeople}
-//   renderItem={item =>
-//     <ContactRow
-//       contact={item.item}
-//       selected={item.selected}
-//       onPress={this.removePerson}
-//       style={styles.contactRow} />}
-//   contentContainerStyle={styles.sectionList}
-//  keyExtractor={item => item.id} />
-// </View>
+// for flatlist:
+// } else {
+//   const items = uniqBy('id', [...initialItems, ...chosenItems])
+//   return addSelected(items)
+// }

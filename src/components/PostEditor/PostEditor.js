@@ -283,9 +283,7 @@ export default class PostEditor extends React.Component {
     }
   }
 
-  updateMembers = members => {
-    this.setState(state => ({ ...state, members }))
-  }
+  updateMembers = members => this.setState(state => ({ members }))
 
   removeMember = member => () => {
     const { members } = this.state
