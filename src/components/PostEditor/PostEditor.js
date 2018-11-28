@@ -17,6 +17,12 @@ import { keyboardAvoidingViewProps as kavProps } from 'util/viewHelpers'
 import header from 'util/header'
 import { MAX_TITLE_LENGTH } from './PostEditor.store'
 import { SearchType } from '../Search/Search.store'
+// ProjectMembers
+import { scopedFetchPeopleAutocomplete } from '../../store/actions/fetchPeopleAutocomplete'
+import { scopedGetPeopleAutocomplete } from '../../store/selectors/getPeopleAutocomplete'
+import ProjectMemberItemChooserRow from './ProjectMemberItemChooserRow'
+import ProjectMembersSummary from './ProjectMembersSummary'
+//
 import KeyboardFriendlyView from '../KeyboardFriendlyView'
 import Icon from '../Icon'
 import Search from '../Search'
@@ -25,7 +31,6 @@ import { showImagePicker } from '../ImagePicker'
 import ImageSelector from './ImageSelector'
 import InlineEditor, { toHtml } from '../InlineEditor'
 import ErrorBubble from '../ErrorBubble'
-import ProjectMembersSummary from './ProjectMembersSummary'
 import styles from './PostEditor.styles'
 
 export default class PostEditor extends React.Component {
@@ -289,12 +294,18 @@ export default class PostEditor extends React.Component {
     this.updateMembers(members.filter(m => m.id !== member.id))
   }
 
-  goToProjectMembersEditor = () => {
+  openProjectMembersEditor = () => {
     const { navigation } = this.props
     const { members } = this.state
-    navigation.navigate('ProjectMembersEditor', {
-      members,
-      updateMembers: this.updateMembers
+    const screenTitle = 'Project Members'
+    navigation.navigate('ItemChooserScreen', {
+      screenTitle,
+      ItemRowComponent: ProjectMemberItemChooserRow,
+      initialItems: members,
+      updateItems: this.updateMembers,
+      searchPlaceholder: 'Type in the names of people to add to project',
+      fetchSearchSuggestions: scopedFetchPeopleAutocomplete(screenTitle),
+      getSearchSuggestions: scopedGetPeopleAutocomplete(screenTitle)
     })
   }
 
@@ -376,7 +387,7 @@ export default class PostEditor extends React.Component {
               styles.section,
               styles.textInputWrapper
             ]}
-            onPress={this.goToProjectMembersEditor}>
+            onPress={this.openProjectMembersEditor}>
             <View style={styles.members}>
               <SectionLabel>Members</SectionLabel>
               <View style={styles.topicAddBorder}><Icon name='Plus' style={styles.topicAdd} /></View>

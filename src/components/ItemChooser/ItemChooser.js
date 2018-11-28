@@ -36,14 +36,15 @@ export default class ItemChooser extends React.Component {
     searchTerm: PropTypes.string,
     suggestedItems: PropTypes.array,
     loading: PropTypes.bool,
-    searchPlaceholder: PropTypes.string
+    searchPlaceholder: PropTypes.string,
+    style: PropTypes.object
   }
 
   static defaultProps = {
     searchTerm: undefined,
     initialItems: [],
     suggestedItems: [],
-    searchPlaceholder: 'Type to begin searching'
+    searchPlaceholder: 'Begin type to searching'
   }
 
   state = {
@@ -136,11 +137,11 @@ export default class ItemChooser extends React.Component {
   }
 
   render () {
-    const { searchTerm } = this.props
+    const { searchTerm, style } = this.props
     const headerText = searchTerm ? `Matching "${searchTerm}"` : undefined
     const sections = this.setupItemSections(this.props.suggestedItems)
 
-    return <SafeAreaView>
+    return <SafeAreaView style={style}>
       <ItemChooserListHeader
         {...this.props}
         headerText={headerText}

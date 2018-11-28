@@ -1,7 +1,7 @@
 import 'react-native'
 import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
-import ProjectMemberPicker from './ProjectMemberPicker'
+import ItemChooserScreen from './ItemChooserScreen'
 
 it('renders as expected', () => {
   const props = {
@@ -13,7 +13,7 @@ it('renders as expected', () => {
 
   const renderer = new ReactShallowRenderer()
   renderer.render(
-    <ProjectMemberPicker {...props} />
+    <ItemChooserScreen {...props} />
   )
   const actual = renderer.getRenderOutput()
 
