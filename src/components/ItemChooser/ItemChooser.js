@@ -1,15 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {
-  FlatList,
   SectionList,
-  H1,
   Text,
   View,
+  ScrollView,
   SafeAreaView,
   TouchableOpacity
 } from 'react-native'
-import { debounce, uniqBy } from 'lodash/fp'
+import { debounce } from 'lodash/fp'
 import SearchBar from '../SearchBar'
 import Loading from '../Loading'
 import styles from './ItemChooser.styles'
@@ -126,16 +125,22 @@ export default class ItemChooser extends React.Component {
   }
 
   render () {
+    const { searchTerm } = this.props
+    const headerText = searchTerm ? `Matching "${searchTerm}"` : undefined
     const sections = this.setupItemSections(this.props.suggestedItems)
 
     return <SafeAreaView>
+      <ItemChooserListHeader
+        {...this.props}
+        headerText={headerText}
+        setSearchAndFetchSuggestions={this.setSearchAndFetchSuggestions}
+        clearSearch={this.clearSearch} />
       <SectionList
-        ListHeaderComponent={this.renderListHeader}
         sections={sections}
         renderSectionHeader={SectionHeader}
         renderItem={this.renderListRowItem}
-        stickyHeaderIndices={[0]}
         // ListFooterComponent={<ItemChooserListFooter {...this.props} />}
+        stickySectionHeadersEnabled={false}
         keyExtractor={item => item.id}
         keyboardShouldPersistTaps='handled' />
     </SafeAreaView>

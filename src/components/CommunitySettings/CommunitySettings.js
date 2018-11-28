@@ -159,8 +159,8 @@ export default class CommunitySettings extends React.Component {
           value={location}
           onChangeText={this.updateField('location')}
           underlineColorAndroid='transparent' />
-        </KeyboardFriendlyView>
-      </ScrollView>
+      </KeyboardFriendlyView>
+    </ScrollView>
   }
 }
 

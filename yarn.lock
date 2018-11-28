@@ -3378,9 +3378,9 @@ https-proxy-agent@^2.1.1:
     agent-base "^4.1.0"
     debug "^3.1.0"
 
-hylo-utils@Hylozoic/hylo-utils#20cd2c8:
+"hylo-utils@https://github.com/Hylozoic/hylo-utils#a1f23db":
   version "1.2.4"
-  resolved "https://codeload.github.com/Hylozoic/hylo-utils/tar.gz/20cd2c8cd23f79a511772d121b81f2b033c3c7c6"
+  resolved "https://github.com/Hylozoic/hylo-utils#a1f23dbfbf0ceba636cf68d3d30f0161ecbc4706"
   dependencies:
     buffer "^5.0.6"
     cheerio "^0.22.0"

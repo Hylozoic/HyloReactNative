@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { View, Alert } from 'react-native'
 import { isEqual } from 'lodash/fp'
 import header from 'util/header'
@@ -7,9 +8,21 @@ import { scopedGetPeopleAutocomplete } from '../../store/selectors/getPeopleAuto
 import ItemChooser from '../ItemChooser'
 import ProjectMemberItemChooserRow from './ProjectMemberItemChooserRow'
 
-const QUERY_SCOPE = 'ProjectMemberPicker'
+const QUERY_SCOPE = 'ProjectMembersEditor'
 
-export default class ProjectMemberPicker extends React.Component {
+export default class ProjectMembersEditor extends React.Component {
+  static propTypes = {
+    style: PropTypes.object,
+    navigation: PropTypes.shape({
+      state: PropTypes.shape({
+        params: PropTypes.shape({
+          updateMembers: PropTypes.func.isRequired,
+          members: PropTypes.array.isRequired
+        })
+      })
+    })
+  }
+
   static navigationOptions = ({ navigation }) => {
     const updateMembers = navigation.getParam('updateMembers', undefined)
     const members = navigation.getParam('members', undefined)
@@ -50,7 +63,7 @@ export default class ProjectMemberPicker extends React.Component {
     const { style, navigation } = this.props
     const { members } = navigation.state.params
 
-    return <View style={style} keyboardShouldPersistTaps='handled'>
+    return <View style={style}>
       <ItemChooser
         searchPlaceholder='Type in the names of people to add to project'
         initialItems={members}

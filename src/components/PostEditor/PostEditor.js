@@ -8,26 +8,25 @@ import {
   Alert,
   Modal
 } from 'react-native'
+import { get, uniq, uniqBy, isEmpty } from 'lodash/fp'
 import { validateTopicName } from 'hylo-utils/validators'
-import { get, uniq, uniqBy, isEmpty, isEqual } from 'lodash/fp'
 import PropTypes from 'prop-types'
-import Icon from '../../components/Icon'
+import { rhino30 } from 'style/colors'
+import { showToast, hideToast } from 'util/toast'
+import { keyboardAvoidingViewProps as kavProps } from 'util/viewHelpers'
 import header from 'util/header'
-import KeyboardFriendlyView from '../KeyboardFriendlyView'
-import Search from '../Search'
+import { MAX_TITLE_LENGTH } from './PostEditor.store'
 import { SearchType } from '../Search/Search.store'
-import {
-  MAX_TITLE_LENGTH
-} from './PostEditor.store'
+import KeyboardFriendlyView from '../KeyboardFriendlyView'
+import Icon from '../Icon'
+import Search from '../Search'
 import FileSelector, { showFilePicker } from './FileSelector'
 import { showImagePicker } from '../ImagePicker'
 import ImageSelector from './ImageSelector'
-import { keyboardAvoidingViewProps as kavProps } from 'util/viewHelpers'
 import InlineEditor, { toHtml } from '../InlineEditor'
 import ErrorBubble from '../ErrorBubble'
+import ProjectMembersSummary from './ProjectMembersSummary'
 import styles from './PostEditor.styles'
-import { rhino30 } from 'style/colors'
-import { showToast, hideToast } from 'util/toast'
 
 export default class PostEditor extends React.Component {
   static contextTypes = {navigate: PropTypes.func}
@@ -378,11 +377,11 @@ export default class PostEditor extends React.Component {
               styles.textInputWrapper
             ]}
             onPress={this.goToProjectMembersEditor}>
-            <View style={styles.topicLabel}>
+            <View style={styles.members}>
               <SectionLabel>Members</SectionLabel>
               <View style={styles.topicAddBorder}><Icon name='Plus' style={styles.topicAdd} /></View>
+              <ProjectMembersSummary members={members} />
             </View>
-            <Topics onPress={this.removeMember} topics={members} placeholder={membersPlaceholder} />
           </TouchableOpacity>}
 
           {!isEmpty(imageUrls) && <View>

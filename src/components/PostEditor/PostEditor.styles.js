@@ -158,6 +158,12 @@ export default {
     fontFamily: 'Circular-Bold',
     fontSize: 16
   },
+  members: {
+    alignItems: 'center',
+    display: 'flex',
+    flexDirection: 'row',
+    marginBottom: 10
+  },
   imageSelector: {
     marginBottom: 10
   },
