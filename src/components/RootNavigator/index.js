@@ -16,6 +16,7 @@ import stacksInTabsFactory from './stacksInTabsFactory'
 import PostEditor from '../PostEditor'
 import PostDetails from '../PostDetails'
 import ProjectMembers from '../ProjectMembers'
+import ProjectMembersEditor from '../ProjectMembersEditor'
 import MemberProfile from '../MemberProfile'
 import NotificationSettings from '../NotificationSettings'
 import BlockedUsers from '../BlockedUsers'
@@ -107,6 +108,7 @@ const screensInStack = {
   PostDetails: {screen: PostDetails, path: 'post/:id'},
   PostEditor: {screen: PostEditor},
   ProjectMembers: {screen: ProjectMembers},
+  ProjectMembersEditor: {screen: ProjectMembersEditor},
   UserSettings: {screen: UserSettings},
   InvitePeople: {screen: InvitePeople},
   ModeratorSettings: {screen: ModeratorSettings},

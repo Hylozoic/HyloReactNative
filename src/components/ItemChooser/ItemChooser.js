@@ -19,7 +19,7 @@ export default class ItemChooser extends React.Component {
     fetchSearchSuggestions: PropTypes.func.isRequired,
     getSearchSuggestions: PropTypes.func.isRequired,
     // Used in component
-    updateItems: PropTypes.func.isRequired,
+    done: PropTypes.func.isRequired,
     setSearchText: PropTypes.func.isRequired,
     ItemRowComponent: PropTypes.func.isRequired,
     initialItems: PropTypes.array,
@@ -59,9 +59,8 @@ export default class ItemChooser extends React.Component {
     const { chosenItems } = this.state
     const updatedItems = chosenItems.concat(item)
     this.setState({
-      chosenItems: chosenItems.concat(item)
+      chosenItems: updatedItems
     })
-    this.props.updateItems(updatedItems)
   }
 
   removeItem = item => {
@@ -70,8 +69,9 @@ export default class ItemChooser extends React.Component {
     this.setState({
       chosenItems: updatedItems
     })
-    this.props.updateItems(updatedItems)
   }
+
+  done = () => this.props.done(this.state.chosenItems)
 
   setupItems = suggestedItems => {
     const { chosenItems } = this.state
@@ -128,6 +128,7 @@ export default class ItemChooser extends React.Component {
     const items = this.setupItems(this.props.suggestedItems)
 
     return <SafeAreaView>
+      <Button onPress={this.done} />
       <FlatList
         data={items}
         stickyHeaderIndices={[0]}
