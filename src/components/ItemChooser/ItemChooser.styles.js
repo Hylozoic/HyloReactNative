@@ -1,4 +1,4 @@
-import { caribbeanGreen, havelockBlue, capeCod, capeCod10, capeCod20, capeCod40, ghost, rhino80, rhino50 } from '../../style/colors'
+import { caribbeanGreen, havelockBlue, capeCod, capeCod10, capeCod20, capeCod40, ghost, rhino80, rhino50, white } from '../../style/colors'
 import { Dimensions } from 'react-native'
 import { isIOS } from 'util/platform'
 
@@ -17,20 +17,6 @@ const defaultPadding = {
 }
 
 export default {
-  sectionList: {
-    ...defaultPadding,
-    borderTopWidth: isIOS ? 0 : 1,
-    borderTopColor: capeCod20
-  },
-  personInputContainer: {
-    height: 60,
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: 15,
-    borderBottomWidth: 1,
-    borderBottomColor: capeCod20,
-    minWidth: screenWidth
-  },
   sectionHeader: {
     marginTop: 20
   },
@@ -41,9 +27,10 @@ export default {
     marginBottom: 20
   },
   listHeader: {
-    padding: 10,
-    paddingTop: 0,
-    paddingBottom: 0,
+    backgroundColor: white
+  },
+  listHeaderStatus: {
+    paddingHorizontal: 10,
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'flex-start',

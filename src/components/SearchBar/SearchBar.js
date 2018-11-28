@@ -1,16 +1,27 @@
 import React from 'react'
-import { TextInput, TouchableOpacity, View } from 'react-native'
-
+import {
+  View,
+  TouchableOpacity,
+  TextInput,
+  Text
+} from 'react-native'
 import Icon from '../Icon'
 import styles from './SearchBar.styles'
+import Loading from '../Loading'
 
 export default function SearchBar ({
-  value,
+  value = '',
   onChangeText,
   type = 'topics',
   placeholder = undefined,
-  onCancel = undefined
+  onCancel = undefined,
+  onCancelText = undefined,
+  loading = undefined
 }) {
+  const Cancel = () => onCancelText
+    ? <Text style={styles.cancelText}>{onCancelText}</Text>
+    : <Icon name='Ex' style={styles.cancelButton} />
+
   return <View style={styles.searchBar}>
     <Icon style={styles.searchIcon} name='Search' />
     <TextInput
@@ -21,8 +32,9 @@ export default function SearchBar ({
       underlineColorAndroid='transparent'
       autoCorrect={false}
       editable />
-    {onCancel && <TouchableOpacity onPress={onCancel}>
-      <Icon name='Ex' style={styles.cancelButton} />
+    {loading && <Loading style={styles.loading} />}
+    {!loading && value.length > 0 && onCancel && <TouchableOpacity style={styles.cancel} onPress={onCancel}>
+      <Cancel />
     </TouchableOpacity>}
   </View>
 }

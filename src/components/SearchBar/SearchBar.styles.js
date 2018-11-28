@@ -1,4 +1,4 @@
-import { rhino50, ghost } from 'style/colors'
+import { rhino50, havelockBlue } from 'style/colors'
 import { isIOS } from 'util/platform'
 
 export default {
@@ -23,9 +23,22 @@ export default {
     top: isIOS ? 0 : 1,
     fontFamily: 'Circular-Book'
   },
-  cancelButton: {
-    fontSize: 20,
-    paddingVertical: 5,
+  loading: {
     paddingHorizontal: 10
+  },
+  cancel: {
+    display: 'flex',
+    alignItems: 'center',
+    flexDirection: 'row',
+    paddingHorizontal: 10
+  },
+  cancelButton: {
+    fontSize: 20
+  },
+  cancelText: {
+    marginLeft: 'auto',
+    fontWeight: 'bold',
+    fontSize: 14,
+    color: havelockBlue
   }
 }

@@ -7,6 +7,7 @@ import {
   SafeAreaView,
   TouchableOpacity
 } from 'react-native'
+import Button from '../Button'
 import { debounce } from 'lodash/fp'
 import SearchBar from '../SearchBar'
 import Loading from '../Loading'
@@ -21,7 +22,7 @@ export default class ItemChooser extends React.Component {
     updateItems: PropTypes.func.isRequired,
     setSearchText: PropTypes.func.isRequired,
     ItemRowComponent: PropTypes.func.isRequired,
-    chosenItems: PropTypes.array,
+    initialItems: PropTypes.array,
     searchTerm: PropTypes.oneOfType([
       PropTypes.undefined,
       PropTypes.string
@@ -33,7 +34,7 @@ export default class ItemChooser extends React.Component {
 
   static defaultProps = {
     searchTerm: undefined,
-    chosenItems: [],
+    initialItems: [],
     suggestedItems: [],
     searchPlaceholder: 'Type here to begin searching'
   }
@@ -46,7 +47,7 @@ export default class ItemChooser extends React.Component {
     super(props)
 
     this.state = {
-      chosenItems: this.props.chosenItems
+      chosenItems: this.props.initialItems
     }
   }
 
@@ -95,53 +96,82 @@ export default class ItemChooser extends React.Component {
   clearSearch = () => this.props.setSearchText()
 
   // item list rendering
-  renderListHeader = () => {
-    const { searchTerm } = this.props
-    const normalHeaderText = 'Current Project Members'
-    const searchingHeaderText = `People matching "${searchTerm}"`
-    const headerText = searchTerm ? searchingHeaderText : normalHeaderText
 
-    return <View style={styles.listHeader}>
-      <Text style={styles.listHeaderText}>
-        <Text>{headerText}</Text>
-      </Text>
-      {searchTerm && <TouchableOpacity onPress={this.clearSearch}>
-        <Text style={styles.listHeaderClear}>Clear Search</Text>
-      </TouchableOpacity>}
-    </View>
+  renderListHeader = () => {
+    const {
+      searchTerm,
+      searchPlaceholder,
+      loading
+    } = this.props
+    const normalHeaderText = 'Current Project Members'
+    const searchingHeaderText = `Matching "${searchTerm}"`
+    const headerText = searchTerm ? searchingHeaderText : normalHeaderText
+    return <ItemChooserListHeader
+      searchPlaceholder={searchPlaceholder}
+      searchTerm={searchTerm}
+      headerText={headerText}
+      setSearchAndFetchSuggestions={this.setSearchAndFetchSuggestions}
+      clearSearch={this.clearSearch}
+      loading={loading} />
   }
 
   renderListRowItem = ({ item }) => {
     const { ItemRowComponent } = this.props
+    const onCheck = item.selected ? this.removeItem : this.addItem
     return <ItemRowComponent
       item={item}
       selected={item.selected}
-      onCheck={item.selected ? this.removeItem : this.addItem} />
+      onCheck={onCheck} />
   }
 
-  renderListFooter = () => this.props.loading
-    ? <Loading style={styles.loading} />
-    : null
-
   render () {
-    const { searchTerm, searchPlaceholder } = this.props
     const items = this.setupItems(this.props.suggestedItems)
 
     return <SafeAreaView>
-      <SearchBar
-        value={searchTerm}
-        onChangeText={this.setSearchAndFetchSuggestions}
-        placeholder={searchPlaceholder} />
       <FlatList
         data={items}
         stickyHeaderIndices={[0]}
         ListHeaderComponent={this.renderListHeader}
         renderItem={this.renderListRowItem}
-        ListFooterComponent={this.renderListFooter}
+        ListFooterComponent={<ItemChooserListFooter {...this.props} />}
         keyExtractor={item => item.id}
         keyboardShouldPersistTaps='handled' />
     </SafeAreaView>
   }
+}
+
+export function ItemChooserListHeader ({
+  searchTerm,
+  headerText,
+  setSearchAndFetchSuggestions,
+  clearSearch,
+  searchPlaceholder,
+  loading
+}) {
+  return <View style={styles.listHeader}>
+    <SearchBar
+      value={searchTerm}
+      onChangeText={setSearchAndFetchSuggestions}
+      placeholder={searchPlaceholder}
+      onCancel={clearSearch}
+      onCancelText='Clear'
+      loading={loading}
+    />
+    <View style={styles.listHeaderStatus}>
+      <Text style={styles.listHeaderText}>
+        <Text>{headerText}</Text>
+      </Text>
+      {searchTerm && <TouchableOpacity onPress={clearSearch}>
+        <Text style={styles.listHeaderClear}>Clear Search</Text>
+      </TouchableOpacity>}
+    </View>
+  </View>
+}
+
+export function ItemChooserListFooter ({ loading }) {
+  return loading
+    ? <Loading style={styles.loading} />
+    : null
 }
 
 // contentContainerStyle={styles.sectionList}
