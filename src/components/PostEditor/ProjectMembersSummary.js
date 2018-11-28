@@ -13,6 +13,7 @@ export default function ProjectMembersSummary ({ members }) {
   return <View style={styles.membersSummary}>
     {slice(0, 3, members).map((c, index) => {
       return <Avatar key={index}
+        dimension={43}
         avatarUrl={c.avatarUrl}
         hasBorder
         hasOverlap={index > 0}
