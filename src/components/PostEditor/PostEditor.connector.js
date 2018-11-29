@@ -8,7 +8,6 @@ import { get, isEmpty } from 'lodash/fp'
 import fetchPost from '../../store/actions/fetchPost'
 import { getPresentedPost } from '../../store/selectors/getPost'
 import isPendingFor from '../../store/selectors/isPendingFor'
-import { FETCH_POST } from '../../store/constants'
 import getCanModerate from '../../store/selectors/getCanModerate'
 import { mapWhenFocused } from 'util/connector'
 import upload from 'store/actions/upload'
@@ -41,7 +40,7 @@ export function mapStateToProps (state, props) {
     fileUrls: post ? post.fileUrls : [],
     isNewPost: isEmpty(postId),
     isProject,
-    pendingDetailsText: isPendingFor(FETCH_POST, state),
+    pendingDetailsText: isPendingFor(fetchPost, state),
     shouldShowTypeChooser
   }
 }
