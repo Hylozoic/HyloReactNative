@@ -442,8 +442,6 @@ const detailsPlaceholder = 'What else should we know?'
 
 const topicsPlaceholder = 'Add topics.'
 
-const membersPlaceholder = 'Who is a part of this project?'
-
 export function Toolbar ({post, canModerate, filePickerPending, imagePickerPending, announcementEnabled, toggleAnnoucement, showFilePicker, showImagePicker}) {
   return <View style={styles.bottomBar}>
     <View style={styles.bottomBarIcons}>

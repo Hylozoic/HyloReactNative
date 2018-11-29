@@ -8,7 +8,7 @@ export default function ProjectMembersSummary ({ members }) {
   const membersTotal = members.length
   const membersText = membersTotal
     ? `${membersTotal} member${membersTotal === 1 ? '' : 's'}`
-    : 'No members'
+    : 'Who is a part of this project?'
 
   return <View style={styles.membersSummary}>
     {slice(0, 3, members).map((c, index) => {
@@ -27,8 +27,7 @@ const styles = {
   membersSummary: {
     flex: 1,
     flexDirection: 'row',
-    alignItems: 'center',
-    marginLeft: 10
+    alignItems: 'center'
   },
   membersText: {
     paddingLeft: 6,
