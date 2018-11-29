@@ -23,6 +23,11 @@ import { scopedGetPeopleAutocomplete } from '../../store/selectors/getPeopleAuto
 import ProjectMemberItemChooserRow from './ProjectMemberItemChooserRow'
 import ProjectMembersSummary from './ProjectMembersSummary'
 //
+// // TopicsSearch
+// import fetchTopicsForCommunityId from '../../store/actions/fetchTopicsForCommunityId'
+// import getTopics from '../../store/selectors/getTopics'
+// import TopicRow from '../TopicList/TopicRow'
+// //
 import KeyboardFriendlyView from '../KeyboardFriendlyView'
 import Icon from '../Icon'
 import Search from '../Search'
@@ -308,6 +313,19 @@ export default class PostEditor extends React.Component {
       getSearchSuggestions: scopedGetPeopleAutocomplete(screenTitle)
     })
   }
+
+  // openTopicsPicker = () => {
+  //   const { navigation } = this.props
+  //   const screenTitle = 'Pick a Topic'
+  //   navigation.navigate('ItemChooserScreen', {
+  //     screenTitle,
+  //     ItemRowComponent: TopicRow,
+  //     pickItem: topic => this.insertPickerTopic(topic),
+  //     searchPlaceholder: 'Search for a topic by name',
+  //     fetchSearchSuggestions: findTopicsForCommunityId(get('[0]', this.props.communityIds)),
+  //     getSearchSuggestions: getTopics
+  //   })
+  // }
 
   render () {
     const { communityIds, canModerate, post, pendingDetailsText, shouldShowTypeChooser, isProject } = this.props
