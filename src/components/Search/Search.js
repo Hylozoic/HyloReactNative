@@ -8,7 +8,6 @@ import {
   View,
   ScrollView
 } from 'react-native'
-
 import Icon from '../Icon'
 import TopicList from '../TopicList'
 import { SearchType } from './Search.store'

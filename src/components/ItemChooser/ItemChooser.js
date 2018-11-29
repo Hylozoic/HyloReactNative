@@ -26,7 +26,9 @@ export default class ItemChooser extends React.Component {
     getSearchSuggestions: PropTypes.func.isRequired,
     // Used in component
     setSearchText: PropTypes.func.isRequired,
-    updateItems: PropTypes.func.isRequired,
+    pickItem: PropTypes.func,
+    done: PropTypes.func,
+    updateItems: PropTypes.func,
     initialItems: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.isRequired
@@ -79,6 +81,8 @@ export default class ItemChooser extends React.Component {
     this.props.updateItems(updatedItems)
   }
 
+  pickItem = (item) => this.props.pickItem(item)
+
   setupItemSections = (suggestedItems) => {
     const { chosenItems, initialItems } = this.state
     const chosenItemIds = chosenItems.map(p => p.id)
@@ -128,12 +132,15 @@ export default class ItemChooser extends React.Component {
     const toggleChosen = item.chosen ? this.removeItem : this.addItem
     const chooseItem = () => this.addItem(item)
     const unChooseItem = () => this.removeItem(item)
+    const pickItem = () => this.pickItem(item)
+
     return <ItemRowComponent
       item={item}
       chosen={item.chosen}
       chooseItem={chooseItem}
       toggleChosen={toggleChosen}
-      unChooseItem={unChooseItem} />
+      unChooseItem={unChooseItem}
+      onPress={pickItem} />
   }
 
   render () {
