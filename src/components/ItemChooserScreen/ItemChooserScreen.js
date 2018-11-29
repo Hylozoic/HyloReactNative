@@ -13,7 +13,7 @@ export default class ItemChooserScreen extends React.Component {
         params: PropTypes.shape({
           screenTitle: PropTypes.string.isRequied,
           ItemRowComponent: PropTypes.func.isRequired,
-          initialItems: PropTypes.array.isRequired,
+          initialItems: PropTypes.array,
           updateItems: PropTypes.func.isRequired,
           searchPlaceholder: PropTypes.string.isRequired,
           fetchSearchSuggestions: PropTypes.func.isRequired,
