@@ -176,6 +176,7 @@ export function ItemChooserListHeader ({
 }) {
   return <View style={styles.listHeader}>
     <SearchBar
+      autoFocus
       value={searchTerm}
       onChangeText={setSearchAndFetchSuggestions}
       placeholder={searchPlaceholder}

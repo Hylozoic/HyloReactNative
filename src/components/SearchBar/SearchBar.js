@@ -16,7 +16,8 @@ export default function SearchBar ({
   placeholder = undefined,
   onCancel = undefined,
   onCancelText = undefined,
-  loading = undefined
+  loading = undefined,
+  autoFocus = false
 }) {
   const Cancel = () => onCancelText
     ? <Text style={styles.cancelText}>{onCancelText}</Text>
@@ -25,6 +26,7 @@ export default function SearchBar ({
   return <View style={styles.searchBar}>
     <Icon style={styles.searchIcon} name='Search' />
     <TextInput
+      autoFocus={autoFocus}
       style={styles.searchInput}
       value={value}
       onChangeText={onChangeText} // updateSearch
