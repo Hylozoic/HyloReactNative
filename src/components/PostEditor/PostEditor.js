@@ -79,14 +79,14 @@ export default class PostEditor extends React.Component {
 
   constructor (props) {
     super(props)
-    const { post, communityIds, imageUrls, fileUrls } = props
+    const { post, communityIds, imageUrls, fileUrls, isProject } = props
     this.props.navigation.setParams({
       confirmLeave: this.confirmLeave,
       saveChanges: this.saveChanges
     })
     this.state = {
       title: get('title', post) || '',
-      type: get('type', post) || 'discussion',
+      type: get('type', post) || (isProject ? 'project' : 'discussion'),
       communityIds,
       imageUrls,
       fileUrls,
@@ -442,7 +442,8 @@ export default class PostEditor extends React.Component {
 const titlePlaceholders = {
   discussion: 'What do you want to discuss?',
   request: 'What do you need help with?',
-  offer: 'How do you want to help?'
+  offer: 'How do you want to help?',
+  project: 'What is your project called?'
 }
 
 const detailsPlaceholder = 'What else should we know?'
