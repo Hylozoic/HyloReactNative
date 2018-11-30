@@ -31,8 +31,9 @@ export default function SearchBar ({
       value={value}
       onChangeText={onChangeText} // updateSearch
       placeholder={placeholder || setPlaceholder(type)}
-      underlineColorAndroid='transparent'
+      autoCapitalize='none'
       autoCorrect={false}
+      underlineColorAndroid='transparent'
       editable />
     {loading && <Loading style={styles.loading} />}
     {!loading && value.length > 0 && onCancel && <TouchableOpacity style={styles.cancel} onPress={onCancel}>

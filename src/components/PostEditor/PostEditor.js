@@ -22,12 +22,11 @@ import { scopedFetchPeopleAutocomplete } from '../../store/actions/fetchPeopleAu
 import { scopedGetPeopleAutocomplete } from '../../store/selectors/getPeopleAutocomplete'
 import ProjectMemberItemChooserRow from './ProjectMemberItemChooserRow'
 import ProjectMembersSummary from './ProjectMembersSummary'
+// TopicsSearch
+import fetchTopicsForCommunityId from '../../store/actions/fetchTopicsForCommunityId'
+import getTopicsForAutocompleteWithNew from '../../store/selectors/getTopicsForAutocompleteWithNew'
+import TopicRow from '../TopicList/TopicRow'
 //
-// // TopicsSearch
-// import fetchTopicsForCommunityId from '../../store/actions/fetchTopicsForCommunityId'
-// import getTopics from '../../store/selectors/getTopics'
-// import TopicRow from '../TopicList/TopicRow'
-// //
 import KeyboardFriendlyView from '../KeyboardFriendlyView'
 import Icon from '../Icon'
 import Search from '../Search'
@@ -314,18 +313,18 @@ export default class PostEditor extends React.Component {
     })
   }
 
-  // openTopicsPicker = () => {
-  //   const { navigation } = this.props
-  //   const screenTitle = 'Pick a Topic'
-  //   navigation.navigate('ItemChooserScreen', {
-  //     screenTitle,
-  //     ItemRowComponent: TopicRow,
-  //     pickItem: topic => this.insertPickerTopic(topic),
-  //     searchPlaceholder: 'Search for a topic by name',
-  //     fetchSearchSuggestions: findTopicsForCommunityId(get('[0]', this.props.communityIds)),
-  //     getSearchSuggestions: getTopics
-  //   })
-  // }
+  openTopicsPicker = () => {
+    const { navigation } = this.props
+    const screenTitle = 'Pick a Topic'
+    navigation.navigate('ItemChooserScreen', {
+      screenTitle,
+      ItemRowComponent: TopicRow,
+      pickItem: topic => this.insertPickerTopic(topic),
+      searchPlaceholder: 'Search for a topic by name',
+      fetchSearchSuggestions: fetchTopicsForCommunityId(get('[0]', this.props.communityIds)),
+      getSearchSuggestions: getTopicsForAutocompleteWithNew
+    })
+  }
 
   render () {
     const { communityIds, canModerate, post, pendingDetailsText, shouldShowTypeChooser, isProject } = this.props
@@ -385,14 +384,14 @@ export default class PostEditor extends React.Component {
             onFocusToggle={(isFocused) => this.setState({detailsFocused: isFocused})}
             onInsertTopic={this.insertEditorTopic}
           />
-
           <TouchableOpacity
             style={[
               styles.section,
               styles.textInputWrapper,
               styles.topics
             ]}
-            onPress={this.showTopicPicker}>
+            onPress={this.openTopicsPicker}>
+            {/* showTopicPicker */}
             <View style={styles.topicLabel}>
               <SectionLabel>Topics</SectionLabel>
               <View style={styles.topicAddBorder}><Icon name='Plus' style={styles.topicAdd} /></View>

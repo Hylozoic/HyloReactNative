@@ -2,16 +2,16 @@ import { FETCH_TOPICS_FOR_COMMUNITY_ID } from '../constants'
 
 // TODO make this work for all communities & multiple specific communities
 export default function fetchTopicsForCommunityId (communityId) {
-  return function (term) {
+  return function (searchTerm) {
     const collectTopics = results =>
       results.community.communityTopics.items.map(item => item.topic)
 
     return {
       type: FETCH_TOPICS_FOR_COMMUNITY_ID,
       graphql: {
-        query: `query ($term: String, $communityId: ID) {
+        query: `query ($searchTerm: String, $communityId: ID) {
           community(id: $communityId) {
-            communityTopics(autocomplete: $term, first: 20) {
+            communityTopics(autocomplete: $searchTerm, first: 20) {
               items {
                 topic {
                   id
@@ -24,7 +24,7 @@ export default function fetchTopicsForCommunityId (communityId) {
           }
         }`,
         variables: {
-          term,
+          searchTerm,
           communityId
         }
       },
