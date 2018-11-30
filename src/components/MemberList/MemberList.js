@@ -100,7 +100,7 @@ export default class MemberList extends React.Component {
       : members
 
     const header = <View>
-      {children}
+      {children || null}
       <View style={styles.listControls}>
         <View style={styles.searchWrapper}>
           <Icon style={styles.searchIcon} name='Search' size={30}
