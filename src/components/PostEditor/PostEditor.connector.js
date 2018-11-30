@@ -45,44 +45,61 @@ export function mapStateToProps (state, props) {
 }
 
 export function mapDispatchToProps (dispatch, props) {
-  const { navigation, isProject } = props
   const postId = getPostId(null, props)
-  const saveAction = postId
-    ? updatePost
-    : isProject ? createPost : createProject
 
   return {
-    save: postData => {
-      if (!postData.title) {
-        return Promise.reject(new Error('Title cannot be blank'))
-      }
-
-      if (postData.title.length >= MAX_TITLE_LENGTH) {
-        return Promise.reject(new Error(`Title cannot be more than ${MAX_TITLE_LENGTH} characters`))
-      }
-
-      if (isEmpty(postData.communities)) {
-        return Promise.reject(new Error('You must select a community'))
-      }
-
-      if (postId) postData.id = postId
-
-      return dispatch(saveAction(postData))
-        .then(({ error, payload }) => {
-          if (error) {
-            // TODO: handle API errors more appropriately
-            throw new Error('Error submitting post')
-          }
-          navigation.goBack()
-          return Promise.resolve({})
-        })
-    },
+    updatePost: postData => dispatch(updatePost(postData)),
+    createProject: postData => dispatch(createProject(postData)),
+    createPost: postData => dispatch(createPost(postData)),
     upload: (type, id, file) => dispatch(upload(type, id, file)),
     fetchDetailsAndMembers: () => dispatch(fetchPostDetailsAndMembers(postId))
   }
 }
 
+export function mergeProps (stateProps, dispatchProps, ownProps) {
+  const { navigation } = ownProps
+  const { postId, isProject } = stateProps
+
+  const saveAction = postId
+    ? dispatchProps.updatePost
+    : isProject ? dispatchProps.createProject : dispatchProps.createPost
+
+  const save = postData => {
+    if (!postData.title) {
+      return Promise.reject(new Error('Title cannot be blank'))
+    }
+
+    if (postData.title.length >= MAX_TITLE_LENGTH) {
+      return Promise.reject(new Error(`Title cannot be more than ${MAX_TITLE_LENGTH} characters`))
+    }
+
+    if (isEmpty(postData.communities)) {
+      return Promise.reject(new Error('You must select a community'))
+    }
+
+    if (postId) postData.id = postId
+
+    return saveAction(postData)
+      .then(({ error, payload }) => {
+        if (error) {
+          // TODO: handle API errors more appropriately
+          throw new Error('Error submitting post')
+        }
+        navigation.goBack()
+        return Promise.resolve({})
+      })
+  }
+
+  return {
+    ...stateProps,
+    ...dispatchProps,
+    ...ownProps,
+    save
+  }
+}
+
 export default connect(
   mapWhenFocused(mapStateToProps),
-  mapWhenFocused(mapDispatchToProps)
+  mapWhenFocused(mapDispatchToProps),
+  mergeProps
 )

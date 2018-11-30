@@ -12,7 +12,7 @@ import { validateTopicName } from 'hylo-utils/validators'
 import { get, uniq, uniqBy, isEmpty, isEqual } from 'lodash/fp'
 import PropTypes from 'prop-types'
 import ProjectMemberPicker from '../ProjectMemberPicker'
-
+import { Person } from '../PeopleChooser/PeopleChooser.js'
 import Icon from '../../components/Icon'
 import header from 'util/header'
 import KeyboardFriendlyView from '../KeyboardFriendlyView'
@@ -79,14 +79,14 @@ export default class PostEditor extends React.Component {
 
   constructor (props) {
     super(props)
-    const { post, communityIds, imageUrls, fileUrls } = props
+    const { post, communityIds, imageUrls, fileUrls, isProject } = props
     this.props.navigation.setParams({
       confirmLeave: this.confirmLeave,
       saveChanges: this.saveChanges
     })
     this.state = {
       title: get('title', post) || '',
-      type: get('type', post) || 'discussion',
+      type: get('type', post) || isProject ? 'project' : 'discussion',
       communityIds,
       imageUrls,
       fileUrls,
@@ -387,7 +387,7 @@ export default class PostEditor extends React.Component {
               <SectionLabel>Members</SectionLabel>
               <View style={styles.topicAddBorder}><Icon name='Plus' style={styles.topicAdd} /></View>
             </View>
-            <Topics onPress={this.removeMember} topics={members} placeholder={membersPlaceholder} />
+            <Members onPress={this.removeMember} members={members} placeholder={membersPlaceholder} />
           </TouchableOpacity>}
 
           {!isEmpty(imageUrls) && <View>
@@ -442,7 +442,8 @@ export default class PostEditor extends React.Component {
 const titlePlaceholders = {
   discussion: 'What do you want to discuss?',
   request: 'What do you need help with?',
-  offer: 'How do you want to help?'
+  offer: 'How do you want to help?',
+  project: 'What is your Project called?'
 }
 
 const detailsPlaceholder = 'What else should we know?'
@@ -471,6 +472,15 @@ export function Topics ({ onPress, topics, placeholder }) {
   if (topics.length > 0) {
     return <ScrollView horizontal style={styles.topicPillBox}>
       {topics.map((t, i) => <TopicPill key={i} topic={t} onPress={onPress(t)} />)}
+    </ScrollView>
+  }
+  return <Text style={styles.textInputPlaceholder}>{placeholder}</Text>
+}
+
+export function Members ({ onPress, members, placeholder }) {
+  if (members.length > 0) {
+    return <ScrollView horizontal style={styles.memberPillBox}>
+      {members.map((p, i) => <Person key={i} person={p} remove={onPress(p)} />)}
     </ScrollView>
   }
   return <Text style={styles.textInputPlaceholder}>{placeholder}</Text>

@@ -32,24 +32,31 @@ export default class FeedList extends React.Component {
     // which we had to pass down from the Home component through Feed. This will
     // have to be reworked to allow opening topic feeds in the Topic tab, e.g.
     const isAFeedTab = props => {
-      return includes(['Home', 'Projects'], props.screenProps.currentTabName)
+      return includes(props.screenProps.currentTabName, ['Home', 'Projects'])
     }
 
     if (!isAFeedTab(this.props)) {
       return
     }
-    if (!prevProps || isAFeedTab(prevProps)) {
-      return this.fetchOrShowCached()
-    }
+
     if (!prevProps.isFocused && this.props.isFocused) {
       return this.fetchOrShowCached()
     }
-    if (prevProps.sortBy !== this.props.sortBy ||
-        prevProps.filter !== this.props.filter ||
-        get('id', prevProps.community) !== get('id', this.props.community) ||
-        get('id', prevProps.network) !== get('id', this.props.network)) {
-      this.fetchOrShowCached()
+
+
+    const hasChanged = this.hasChangedFeed(prevProps)
+    if (hasChanged) {
+      return this.fetchOrShowCached()
     }
+  }
+
+  hasChangedFeed (prevProps) {
+    if (prevProps.sortBy !== this.props.sortBy) return true
+    if (prevProps.filter !== this.props.filter) return true
+    if (get('id', prevProps.community) !== get('id', this.props.community)) return true
+    if (get('id', prevProps.network) !== get('id', this.props.network)) return true
+    if (get('screenProps.currentTabName', prevProps) !== get('screenProps.currentTabName', this.props)) return true
+    return false
   }
 
   refreshPosts = (...args) => this.props.refreshPosts(...args)

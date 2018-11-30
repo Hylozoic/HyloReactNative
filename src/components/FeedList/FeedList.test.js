@@ -26,7 +26,8 @@ describe('FeedList', () => {
     const { root: { instance } } = TestRenderer.create(<FeedList
       screenProps={{currentTabName: 'Home'}}
       fetchPosts={fetchPosts} />)
-
+    
+    fetchPosts.mockClear()
     instance.componentDidUpdate({screenProps: {currentTabName: 'Members'}})
     expect(fetchPosts).toHaveBeenCalledTimes(1)
   })

@@ -1,4 +1,4 @@
-import { mapStateToProps, mapDispatchToProps } from './PostEditor.connector'
+import { mapStateToProps, mapDispatchToProps, mergeProps } from './PostEditor.connector'
 import orm from 'store/models'
 
 const communityId = 1
@@ -87,10 +87,12 @@ describe('PostEditor mapDispatchToProps', () => {
     expect(dispatch).toHaveBeenCalled()
     expect(dispatch.mock.calls).toMatchSnapshot()
   })
+})
 
+describe('PostEditor mergeProps', () => {
   it('calls save correctly', async () => {
-    expect.assertions(6)
-    const props = {
+    expect.assertions(4)
+    const ownProps = {
       navigation: {
         goBack: jest.fn(),
         state: {
@@ -101,24 +103,32 @@ describe('PostEditor mapDispatchToProps', () => {
         }
       }
     }
-    const dispatch = jest.fn(val => Promise.resolve(val))
-    const dispatchProps = mapDispatchToProps(dispatch, props)
-    expect(dispatchProps).toMatchSnapshot()
+    const stateProps = {
+      postId: 1
+    }
+    const updatePost = jest.fn()
+    const dispatchProps = {
+      updatePost: () => {
+        updatePost()
+        return Promise.resolve({})
+      }
+    }
+
+    const mergedProps = mergeProps(stateProps, dispatchProps, ownProps)
+    expect(mergedProps).toMatchSnapshot()
 
     let postData = {
       title: '',
       communities: []
     }
 
-    await expect(dispatchProps.save(postData)).rejects.toHaveProperty('message', 'Title cannot be blank')
+    await expect(mergedProps.save(postData)).rejects.toHaveProperty('message', 'Title cannot be blank')
 
     postData.title = 'a title'
-    await expect(dispatchProps.save(postData)).rejects.toHaveProperty('message', 'You must select a community')
+    await expect(mergedProps.save(postData)).rejects.toHaveProperty('message', 'You must select a community')
 
     postData.communities = [{id: 1}]
-    await expect(dispatchProps.save(postData)).resolves.toBeDefined()
-
-    expect(dispatch).toHaveBeenCalled()
-    expect(dispatch.mock.calls).toMatchSnapshot()
+    await mergedProps.save(postData)
+    expect(updatePost).toHaveBeenCalled()
   })
 })
