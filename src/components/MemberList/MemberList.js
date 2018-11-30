@@ -98,8 +98,6 @@ export default class MemberList extends React.Component {
     const membersForFlatList = (size(members) % 2 > 0)
       ? members.concat([{id: -1}])
       : members
-
-    console.log('!!!', children)
     const header = <View>
       {children || null}
       <View style={styles.listControls}>
