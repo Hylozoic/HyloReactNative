@@ -25,7 +25,7 @@ export function mapDispatchToProps (dispatch, props) {
 
   return {
     fetchSearchSuggestions: searchTerm => dispatch(fetchSearchSuggestions(searchTerm)),
-    setSearchText: searchTerm => dispatch(setQuerySearchTermForScope(searchTerm, fetchSuggestionsActionType))
+    setSearchTerm: searchTerm => dispatch(setQuerySearchTermForScope(searchTerm, fetchSuggestionsActionType))
   }
 }
 

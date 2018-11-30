@@ -10,11 +10,11 @@ export default class ItemChooserScreen extends React.Component {
     navigation: PropTypes.shape({
       state: PropTypes.shape({
         params: PropTypes.shape({
-          pickItem: PropTypes.func,
           updateItems: PropTypes.func,
-          initialItems: PropTypes.array,
+          pickItem: PropTypes.func,
           screenTitle: PropTypes.string.isRequired,
-          // Required by ItemChooser component
+          // Passed to ItemChooser
+          initialItems: PropTypes.array,
           ItemRowComponent: PropTypes.func.isRequired,
           searchPlaceholder: PropTypes.string.isRequired,
           fetchSearchSuggestions: PropTypes.func.isRequired,

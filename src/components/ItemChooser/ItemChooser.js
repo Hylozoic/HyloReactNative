@@ -16,16 +16,15 @@ export const propTypesForItemRowComponent = {
   chosen: PropTypes.bool.isRequired,
   toggleChosen: PropTypes.func,
   chooseItem: PropTypes.func,
-  unChooseItem: PropTypes.func
+  unChooseItem: PropTypes.func,
+  pickItem: PropTypes.func
 }
 
 export default class ItemChooser extends React.Component {
   static propTypes = {
-    // Required for connector
     fetchSearchSuggestions: PropTypes.func.isRequired,
     getSearchSuggestions: PropTypes.func.isRequired,
-    // Used in component
-    setSearchText: PropTypes.func.isRequired,
+    setSearchTerm: PropTypes.func.isRequired,
     pickItem: PropTypes.func,
     done: PropTypes.func,
     updateItems: PropTypes.func,
@@ -63,7 +62,7 @@ export default class ItemChooser extends React.Component {
   }
 
   componentWillUnmount () {
-    this.clearSearch()
+    this.clearSearchTerm()
   }
 
   addItem = (item) => {
@@ -104,30 +103,17 @@ export default class ItemChooser extends React.Component {
     return sections
   }
 
-  setSearchAndFetchSuggestions = (searchTerm) => {
-    this.props.setSearchText(searchTerm)
+  setSearchTerm = (searchTerm) => {
+    this.props.setSearchTerm(searchTerm)
     this.fetchSearchSuggestions(searchTerm)
   }
 
   fetchSearchSuggestions = debounce(400, (searchTerm) =>
     this.props.fetchSearchSuggestions(searchTerm))
 
-  clearSearch = () => this.props.setSearchText()
+  clearSearchTerm = () => this.props.setSearchTerm()
 
-  // Rendering
-
-  renderListHeader = () => {
-    const { searchTerm } = this.props
-    const headerText = searchTerm ? `Matching "${searchTerm}"` : undefined
-
-    return <ItemChooserListHeader
-      {...this.props}
-      headerText={headerText}
-      setSearchAndFetchSuggestions={this.setSearchAndFetchSuggestions}
-      clearSearch={this.clearSearch} />
-  }
-
-  renderListRowItem = ({ item }) => {
+  renderItemRowComponent = ({ item }) => {
     const { ItemRowComponent } = this.props
     const toggleChosen = item.chosen ? this.removeItem : this.addItem
     const chooseItem = () => this.addItem(item)
@@ -152,12 +138,12 @@ export default class ItemChooser extends React.Component {
       <ItemChooserListHeader
         {...this.props}
         headerText={headerText}
-        setSearchAndFetchSuggestions={this.setSearchAndFetchSuggestions}
-        clearSearch={this.clearSearch} />
+        setSearchTerm={this.setSearchTerm}
+        clearSearchTerm={this.clearSearchTerm} />
       <SectionList
         sections={sections}
         renderSectionHeader={SectionHeader}
-        renderItem={this.renderListRowItem}
+        renderItem={this.renderItemRowComponent}
         // ListFooterComponent={<ItemChooserListFooter {...this.props} />}
         keyExtractor={item => item.id}
         stickySectionHeadersEnabled={false}
@@ -176,8 +162,8 @@ export function SectionHeader ({ section: { label } }) {
 export function ItemChooserListHeader ({
   searchTerm,
   headerText,
-  setSearchAndFetchSuggestions,
-  clearSearch,
+  setSearchTerm,
+  clearSearchTerm,
   searchPlaceholder,
   loading
 }) {
@@ -185,9 +171,9 @@ export function ItemChooserListHeader ({
     <SearchBar
       autoFocus
       value={searchTerm}
-      onChangeText={setSearchAndFetchSuggestions}
+      onChangeText={setSearchTerm}
       placeholder={searchPlaceholder}
-      // onCancel={clearSearch}
+      // onCancel={clearSearchTerm}
       // onCancelText='Clear'
       loading={loading}
     />
@@ -195,7 +181,7 @@ export function ItemChooserListHeader ({
       <Text style={styles.listHeaderText}>
         <Text>{headerText}</Text>
       </Text>
-      <TouchableOpacity onPress={clearSearch}>
+      <TouchableOpacity onPress={clearSearchTerm}>
         <Text style={styles.listHeaderClear}>Clear Search</Text>
       </TouchableOpacity>
     </View>}
