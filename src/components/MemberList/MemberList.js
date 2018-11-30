@@ -99,8 +99,9 @@ export default class MemberList extends React.Component {
       ? members.concat([{id: -1}])
       : members
 
+    console.log('!!!', children)
     const header = <View>
-      {children}
+      {children || null}
       <View style={styles.listControls}>
         <View style={styles.searchWrapper}>
           <Icon style={styles.searchIcon} name='Search' size={30}
@@ -110,7 +111,6 @@ export default class MemberList extends React.Component {
             onChangeText={onSearch}
             underlineColorAndroid='transparent' style={styles.searchInput} />
         </View>
-
         {!hideSortOptions && <PopupMenuButton actions={actions}>
           <View style={styles.sortBy}>
             <Text style={styles.sortByText}>{sortKeys && sortKeys[sortBy]}</Text>

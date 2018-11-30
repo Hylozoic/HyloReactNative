@@ -5929,9 +5929,9 @@ react-native-image-picker@^0.26.7:
   version "0.26.7"
   resolved "https://registry.yarnpkg.com/react-native-image-picker/-/react-native-image-picker-0.26.7.tgz#ad2ee957f7f6cc01396893ea03d84cb2adb2e376"
 
-react-native-intercom@^12.0.0:
-  version "12.0.0"
-  resolved "https://registry.yarnpkg.com/react-native-intercom/-/react-native-intercom-12.0.0.tgz#c1e5445730250f6430c4737f39c386758f106d24"
+react-native-intercom@10.2.0:
+  version "10.2.0"
+  resolved "http://registry.npmjs.org/react-native-intercom/-/react-native-intercom-10.2.0.tgz#e8ae125518c6c7509e8b9aff512d4e0bf4571ae3"
 
 react-native-linear-gradient@2.4.0:
   version "2.4.0"

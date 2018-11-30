@@ -134,7 +134,7 @@ export default class PostDetails extends React.Component {
         members={post.members} 
         count={post.members.length} 
         goToMembers={goToMembers} 
-        />}
+      />}
       <PostCommunities
         communities={post.communities}
         slug={slug}
