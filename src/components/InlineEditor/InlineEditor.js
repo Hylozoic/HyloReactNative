@@ -61,7 +61,7 @@ export default class InlineEditor extends React.PureComponent {
     // Append the second part of the value (after the cursor)
     newValue += secondSlice
 
-    this.props.onChange(newValue)    
+    this.props.onChange(newValue)
 
     if (this.state.pickerType === SearchType.TOPIC) {
       this.props.onInsertTopic([choice])

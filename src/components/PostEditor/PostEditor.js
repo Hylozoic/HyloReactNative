@@ -17,6 +17,8 @@ import { keyboardAvoidingViewProps as kavProps } from 'util/viewHelpers'
 import header from 'util/header'
 import { MAX_TITLE_LENGTH } from './PostEditor.store'
 import { SearchType } from '../Search/Search.store'
+import ItemChooser from '../ItemChooser'
+import ItemChooserModal from '../ItemChooserModal'
 // ProjectMembers
 import { scopedFetchPeopleAutocomplete } from '../../store/actions/fetchPeopleAutocomplete'
 import { scopedGetPeopleAutocomplete } from '../../store/selectors/getPeopleAutocomplete'
@@ -319,7 +321,7 @@ export default class PostEditor extends React.Component {
     navigation.navigate('ItemChooserScreen', {
       screenTitle,
       ItemRowComponent: TopicRow,
-      pickItem: topic => this.insertPickerTopic(topic),
+      pickItem: this.insertPickerTopic,
       searchPlaceholder: 'Search for a topic by name',
       fetchSearchSuggestions: fetchTopicsForCommunityId(get('[0]', this.props.communityIds)),
       getSearchSuggestions: getTopicsForAutocompleteWithNew
@@ -390,7 +392,7 @@ export default class PostEditor extends React.Component {
               styles.textInputWrapper,
               styles.topics
             ]}
-            onPress={this.openTopicsPicker}>
+            onPress={this.showTopicPicker}>
             {/* showTopicPicker */}
             <View style={styles.topicLabel}>
               <SectionLabel>Topics</SectionLabel>
@@ -399,18 +401,21 @@ export default class PostEditor extends React.Component {
             <Topics onPress={this.removeTopic} topics={topics} placeholder={topicsPlaceholder} />
           </TouchableOpacity>
 
-          {isProject && <TouchableOpacity
-            style={[
-              styles.section,
-              styles.textInputWrapper
-            ]}
-            onPress={this.openProjectMembersEditor}>
+          {isProject && <ItemChooserModal
+            openerStyle={[ styles.section, styles.textInputWrapper ]}
+            modalTitle='Project Members'
+            ItemRowComponent={ProjectMemberItemChooserRow}
+            initialItems={members}
+            updateItems={this.updateMembers}
+            searchPlaceholder='Type in the names of people to add to project'
+            fetchSearchSuggestions={scopedFetchPeopleAutocomplete('ProjectMembersModal')}
+            getSearchSuggestions={scopedGetPeopleAutocomplete('ProjectMembersModal')}>
             <View style={styles.members}>
               <SectionLabel>Members</SectionLabel>
               <View style={styles.topicAddBorder}><Icon name='Plus' style={styles.topicAdd} /></View>
               <ProjectMembersSummary members={members} />
             </View>
-          </TouchableOpacity>}
+          </ItemChooserModal>}
 
           {!isEmpty(imageUrls) && <View>
             <SectionLabel>Images</SectionLabel>
@@ -439,11 +444,17 @@ export default class PostEditor extends React.Component {
         onRequestClose={() => {
           this.setState({showTopicPicker: false})
         }}>
-        <Search style={styles.search}
+        <ItemChooser
+          ItemRowComponent={TopicRow}
+          pickItem={this.insertPickerTopic}
+          searchPlaceholder='Search for a topic by name'
+          fetchSearchSuggestions={fetchTopicsForCommunityId(communityId)}
+          getSearchSuggestions={getTopicsForAutocompleteWithNew} />
+        {/* <Search style={styles.search}
           communityId={communityId}
           onCancel={this.cancelTopicPicker}
           onSelect={this.insertPickerTopic}
-          type={SearchType.TOPIC} />
+          type={SearchType.TOPIC} /> */}
       </Modal>}
     </KeyboardFriendlyView>
   }
