@@ -5,7 +5,6 @@ exports[`MemberList renders with default props with default non-server search 1`
   ListFooterComponent={null}
   ListHeaderComponent={
     <View>
-      
       <View>
         <View>
           <Icon
@@ -69,7 +68,6 @@ exports[`MemberList runs call for new results if server search 1`] = `
   ListFooterComponent={null}
   ListHeaderComponent={
     <View>
-      
       <View>
         <View>
           <Icon
@@ -133,7 +131,6 @@ exports[`MemberList server search fetches new results when search provided 1`] =
   ListFooterComponent={null}
   ListHeaderComponent={
     <View>
-      
       <View>
         <View>
           <Icon
@@ -195,7 +192,6 @@ exports[`MemberList server search fetches new results when search provided 1`] =
       onLayout={[Function]}
     >
       <View>
-        
         <View>
           <View>
             <Icon
