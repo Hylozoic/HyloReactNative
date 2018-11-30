@@ -30,6 +30,7 @@ exports[`renders correctly if currentUserHasMemberships 1`] = `
           newPost={[Function]}
           postsTotal={undefined}
           setTopicSubscribe={[Function]}
+          theme={Object {}}
           topicName="amazing"
           topicSubscribed={undefined}
         />
