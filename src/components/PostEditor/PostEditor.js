@@ -401,7 +401,7 @@ export default class PostEditor extends React.Component {
             <Topics onPress={this.removeTopic} topics={topics} placeholder={topicsPlaceholder} />
           </TouchableOpacity>
 
-          {isProject && <ItemChooserModal
+          {/* {isProject && <ItemChooserModal
             openerStyle={[ styles.section, styles.textInputWrapper ]}
             modalTitle='Project Members'
             ItemRowComponent={ProjectMemberItemChooserRow}
@@ -415,7 +415,20 @@ export default class PostEditor extends React.Component {
               <View style={styles.topicAddBorder}><Icon name='Plus' style={styles.topicAdd} /></View>
               <ProjectMembersSummary members={members} />
             </View>
-          </ItemChooserModal>}
+          </ItemChooserModal>} */}
+
+          {isProject && <TouchableOpacity
+            style={[
+              styles.section,
+              styles.textInputWrapper
+            ]}
+            onPress={this.openProjectMembersEditor}>
+            <View style={styles.members}>
+              <SectionLabel>Members</SectionLabel>
+              <View style={styles.topicAddBorder}><Icon name='Plus' style={styles.topicAdd} /></View>
+              <ProjectMembersSummary members={members} />
+            </View>
+          </TouchableOpacity>}
 
           {!isEmpty(imageUrls) && <View>
             <SectionLabel>Images</SectionLabel>
