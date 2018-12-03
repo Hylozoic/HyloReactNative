@@ -61,6 +61,10 @@ export default class Feed extends React.Component {
 
     const all = !community && !topicName
 
+    const theme = this.props.belowBannerComponent
+      ? {container: {marginBottom: 0}}
+      : {}
+
     return <View style={styles.container}>
       <FeedList
         community={community}
@@ -81,7 +85,8 @@ export default class Feed extends React.Component {
               followersTotal={followersTotal}
               topicSubscribed={topicSubscribed}
               setTopicSubscribe={this.handleSetTopicSubscribe}
-              hidePostPrompt={hidePostPrompt} />
+              hidePostPrompt={hidePostPrompt} 
+              theme={theme} />
             {this.props.belowBannerComponent}
           </View>}
         navigation={navigation}

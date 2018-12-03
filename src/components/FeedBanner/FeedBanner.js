@@ -29,8 +29,11 @@ export default class FeedBanner extends React.PureComponent {
   render () {
     const {
       all, community, network, newPost, currentUser, topicSubscribed, topicName,
-      postsTotal, followersTotal, hidePostPrompt
+      postsTotal, followersTotal, hidePostPrompt, theme
     } = this.props
+
+    console.log('theme', theme)
+    console.log('final styles', )
 
     let bannerUrl, name, image
     if (community && all) {
@@ -54,7 +57,7 @@ export default class FeedBanner extends React.PureComponent {
     const pluralPosts = (postsTotal !== 1)
     const showPostPrompt = !all && !hidePostPrompt
 
-    return <View style={styles.container}>
+    return <View style={{...styles.container, ...theme.container}}>
       <Image source={image} style={styles.image} />
       <LinearGradient style={styles.gradient} colors={bannerlinearGradientColors} />
       <View style={styles.titleRow}>
