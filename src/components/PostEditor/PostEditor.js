@@ -5,8 +5,7 @@ import {
   TextInput,
   TouchableOpacity,
   View,
-  Alert,
-  Modal
+  Alert
 } from 'react-native'
 import { get, uniq, uniqBy, isEmpty } from 'lodash/fp'
 import { validateTopicName } from 'hylo-utils/validators'
@@ -16,9 +15,6 @@ import { showToast, hideToast } from 'util/toast'
 import { keyboardAvoidingViewProps as kavProps } from 'util/viewHelpers'
 import header from 'util/header'
 import { MAX_TITLE_LENGTH } from './PostEditor.store'
-import { SearchType } from '../Search/Search.store'
-import ItemChooser from '../ItemChooser'
-import ItemChooserModal from '../ItemChooserModal'
 // ProjectMembers
 import { scopedFetchPeopleAutocomplete } from '../../store/actions/fetchPeopleAutocomplete'
 import { scopedGetPeopleAutocomplete } from '../../store/selectors/getPeopleAutocomplete'
@@ -31,7 +27,6 @@ import TopicRow from '../TopicList/TopicRow'
 //
 import KeyboardFriendlyView from '../KeyboardFriendlyView'
 import Icon from '../Icon'
-import Search from '../Search'
 import FileSelector, { showFilePicker } from './FileSelector'
 import { showImagePicker } from '../ImagePicker'
 import ImageSelector from './ImageSelector'
@@ -43,13 +38,13 @@ export default class PostEditor extends React.Component {
   static contextTypes = {navigate: PropTypes.func}
 
   static navigationOptions = ({ navigation }) => {
-    const { headerTitle, save, isSaving, confirmLeave, showTopicPicker } = get('state.params', navigation) || {}
+    const { headerTitle, save, isSaving, confirmLeave } = get('state.params', navigation) || {}
     const title = isSaving ? 'Saving...' : 'Save'
     const def = () => {}
 
     return header(navigation, {
       title: headerTitle,
-      right: { disabled: showTopicPicker || isSaving, text: title, onPress: save || def },
+      right: { disabled: isSaving, text: title, onPress: save || def },
       headerBackButton: () => confirmLeave(navigation.goBack)
     })
   }
@@ -88,7 +83,6 @@ export default class PostEditor extends React.Component {
       communityIds,
       imageUrls,
       fileUrls,
-      showTopicPicker: false,
       topics: get('topics', post) || [],
       members: get('members', post) || [],
       topicsPicked: false,
@@ -188,11 +182,6 @@ export default class PostEditor extends React.Component {
 
   showAlert = (msg) => Alert.alert(msg)
 
-  cancelTopicPicker = () => {
-    this.setState({ showTopicPicker: false })
-    this.props.navigation.setParams({ showTopicPicker: false })
-  }
-
   ignoreHash = name => name[0] === '#' ? name.slice(1) : name
 
   insertPickerTopic = topic => {
@@ -232,11 +221,6 @@ export default class PostEditor extends React.Component {
     topics: this.state.topics.filter(t => t !== topicName),
     topicsPicked: true
   })
-
-  showTopicPicker = () => {
-    this.setState({ showTopicPicker: true })
-    this.props.navigation.setParams({ showTopicPicker: true })
-  }
 
   _showFilePicker = () => {
     this.setState({filePickerPending: true})
@@ -319,9 +303,10 @@ export default class PostEditor extends React.Component {
   render () {
     const { communityIds, canModerate, post, pendingDetailsText, shouldShowTypeChooser, isProject } = this.props
 
-    const { fileUrls, imageUrls, isSaving, showTopicPicker,
-      topics, title, detailsText, type, filePickerPending, imagePickerPending,
-      announcementEnabled, detailsFocused, titleLengthError, members
+    const {
+      fileUrls, imageUrls, isSaving, topics, title, detailsText, type,
+      filePickerPending, imagePickerPending, announcementEnabled,
+      detailsFocused, titleLengthError, members
     } = this.state
 
     const toolbarProps = {
@@ -380,30 +365,13 @@ export default class PostEditor extends React.Component {
               styles.textInputWrapper,
               styles.topics
             ]}
-            onPress={this.showTopicPicker}>
-            {/* showTopicPicker */}
+            onPress={this.openTopicsPicker}>
             <View style={styles.topicLabel}>
               <SectionLabel>Topics</SectionLabel>
               <View style={styles.topicAddBorder}><Icon name='Plus' style={styles.topicAdd} /></View>
             </View>
             <Topics onPress={this.removeTopic} topics={topics} placeholder={topicsPlaceholder} />
           </TouchableOpacity>
-
-          {/* {isProject && <ItemChooserModal
-            openerStyle={[ styles.section, styles.textInputWrapper ]}
-            modalTitle='Project Members'
-            ItemRowComponent={ProjectMemberItemChooserRow}
-            initialItems={members}
-            updateItems={this.updateMembers}
-            searchPlaceholder='Type in the names of people to add to project'
-            fetchSearchSuggestions={scopedFetchPeopleAutocomplete('ProjectMembersModal')}
-            getSearchSuggestions={scopedGetPeopleAutocomplete('ProjectMembersModal')}>
-            <View style={styles.members}>
-              <SectionLabel>Members</SectionLabel>
-              <View style={styles.topicAddBorder}><Icon name='Plus' style={styles.topicAdd} /></View>
-              <ProjectMembersSummary members={members} />
-            </View>
-          </ItemChooserModal>} */}
 
           {isProject && <TouchableOpacity
             style={[
@@ -438,25 +406,6 @@ export default class PostEditor extends React.Component {
         {detailsFocused && <Toolbar {...toolbarProps} />}
       </ScrollView>
       {!detailsFocused && <Toolbar {...toolbarProps} />}
-      {showTopicPicker && <Modal
-        animationType='slide'
-        transparent={false}
-        visible={showTopicPicker}
-        onRequestClose={() => {
-          this.setState({showTopicPicker: false})
-        }}>
-        <ItemChooser
-          ItemRowComponent={TopicRow}
-          pickItem={this.insertPickerTopic}
-          searchPlaceholder='Search for a topic by name'
-          fetchSearchSuggestions={fetchTopicsForCommunityId(communityId)}
-          getSearchSuggestions={getTopicsForAutocompleteWithNew} />
-        {/* <Search style={styles.search}
-          communityId={communityId}
-          onCancel={this.cancelTopicPicker}
-          onSelect={this.insertPickerTopic}
-          type={SearchType.TOPIC} /> */}
-      </Modal>}
     </KeyboardFriendlyView>
   }
 }

@@ -130,7 +130,7 @@ export default class ItemChooser extends React.Component {
   }
 
   render () {
-    const { searchTerm, style } = this.props
+    const { searchTerm, style, initialItems } = this.props
     const headerText = searchTerm ? `Matching "${searchTerm}"` : undefined
     const sections = this.setupItemSections(this.props.suggestedItems)
 
@@ -138,6 +138,7 @@ export default class ItemChooser extends React.Component {
       <ItemChooserListHeader
         {...this.props}
         headerText={headerText}
+        showClearSearch={initialItems.length > 0}
         setSearchTerm={this.setSearchTerm}
         clearSearchTerm={this.clearSearchTerm} />
       <SectionList
@@ -165,6 +166,7 @@ export function ItemChooserListHeader ({
   setSearchTerm,
   clearSearchTerm,
   searchPlaceholder,
+  showClearSearch,
   loading
 }) {
   return <View style={styles.listHeader}>
@@ -181,9 +183,9 @@ export function ItemChooserListHeader ({
       <Text style={styles.listHeaderText}>
         <Text>{headerText}</Text>
       </Text>
-      <TouchableOpacity onPress={clearSearchTerm}>
+      {showClearSearch && <TouchableOpacity onPress={clearSearchTerm}>
         <Text style={styles.listHeaderClear}>Clear Search</Text>
-      </TouchableOpacity>
+      </TouchableOpacity>}
     </View>}
   </View>
 }
