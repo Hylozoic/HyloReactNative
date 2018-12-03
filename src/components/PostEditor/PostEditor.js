@@ -75,18 +75,6 @@ export default class PostEditor extends React.Component {
     return nextProps.isFocused
   }
 
-  componentDidUpdate (prevProps) {
-    if (get('post.detailsText', this.props) !== get('post.detailsText', prevProps)) {
-      this.setState({detailsText: get('post.detailsText', this.props)})
-    }
-    // TODO: Check with Robbie:
-    //   Shouldn't reload from props if we're managing the members in component state until save?
-    //   Fixes my issue to remove it
-    // if (!isEqual(get('post.members', this.props), get('post.members', prevProps))) {
-    //   this.setState({members: get('post.members', this.props)})
-    // }
-  }
-
   constructor (props) {
     super(props)
     const { post, communityIds, imageUrls, fileUrls } = props
