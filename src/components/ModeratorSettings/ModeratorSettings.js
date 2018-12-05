@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 import { Alert, FlatList, Text, View, TouchableOpacity } from 'react-native'
 import { get, isEmpty } from 'lodash/fp'
-
 import header from 'util/header'
 import Avatar from '../Avatar'
 import Icon from '../Icon'
 import LoadingScreen from '../Loading'
-import { SearchType } from '../Search/Search.store'
-import Search from '../Search'
-
+// Person picker
+import scopedFetchPeopleAutocomplete from '../../store/actions/scopedFetchPeopleAutocomplete'
+import scopedGetPeopleAutocomplete from '../../store/selectors/scopedGetPeopleAutocomplete'
+import PersonPickerItemRow from '../ItemChooser/PersonPickerItemRow'
 import styles from './ModeratorSettings.styles'
 
 export default class ModeratorSettings extends Component {
@@ -16,10 +16,6 @@ export default class ModeratorSettings extends Component {
     headerBackButton: () => navigation.goBack(),
     title: 'Community Moderators'
   })
-
-  state = {
-    showPicker: false
-  }
 
   componentDidMount () {
     this.props.fetchModerators()
@@ -43,12 +39,7 @@ export default class ModeratorSettings extends Component {
     )
   }
 
-  addModerator = ({ id }) => {
-    this.props.addModerator(id)
-    this.cancelPersonPicker()
-  }
-
-  cancelPersonPicker = () => this.setState({ showPicker: false })
+  addModerator = ({ id }) => this.props.addModerator(id)
 
   isMe = (id) => this.props.currentUser.id === id
 
@@ -57,22 +48,24 @@ export default class ModeratorSettings extends Component {
     showMember={this.props.showMember}
     removeModerator={this.isMe(item.id) ? null : this.removeModerator} />
 
-  showPersonPicker = () => this.setState({ showPicker: true })
+  openPersonPicker = () => {
+    const { navigation } = this.props
+    const screenTitle = 'Mention'
+    navigation.navigate('ItemChooserScreen', {
+      screenTitle,
+      ItemRowComponent: PersonPickerItemRow,
+      pickItem: this.addModerator,
+      searchPlaceholder: 'Type here to search for people',
+      fetchSearchSuggestions: scopedFetchPeopleAutocomplete(screenTitle),
+      getSearchSuggestions: scopedGetPeopleAutocomplete(screenTitle)
+    })
+  }
 
   render () {
     const { community, moderators } = this.props
-    const { showPicker } = this.state
 
     if (isEmpty(moderators)) {
       return <LoadingScreen />
-    }
-
-    if (showPicker) {
-      return <Search style={styles.search}
-        communityId={community.id}
-        onCancel={this.cancelPersonPicker}
-        onSelect={this.addModerator}
-        type={SearchType.PERSON} />
     }
 
     return <FlatList
@@ -84,7 +77,7 @@ export default class ModeratorSettings extends Component {
       ListHeaderComponent={<View style={styles.headerContainer}>
         <Text style={styles.headerText}>{community.name}</Text>
         <View style={styles.addNewContainer}>
-          <TouchableOpacity onPress={this.showPersonPicker}>
+          <TouchableOpacity onPress={this.openPersonPicker}>
             <Text style={styles.addNewButton}><Icon name='Plus' green /> Add New</Text>
           </TouchableOpacity>
         </View>

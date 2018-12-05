@@ -4,7 +4,7 @@ import {
 } from 'store/reducers/queryResults'
 import { FETCH_PEOPLE_AUTOCOMPLETE } from 'store/constants'
 
-export function scopedGetPeopleAutocomplete (scope) {
+export default function scopedGetPeopleAutocomplete (scope) {
   const queryResultsScope = scope
     ? `${scope}/${FETCH_PEOPLE_AUTOCOMPLETE}`
     : FETCH_PEOPLE_AUTOCOMPLETE
@@ -16,5 +16,3 @@ export function scopedGetPeopleAutocomplete (scope) {
     person => person.ref
   )
 }
-
-export default scopedGetPeopleAutocomplete()

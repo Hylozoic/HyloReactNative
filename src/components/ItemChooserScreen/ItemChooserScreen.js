@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Alert } from 'react-native'
-import { isEqual } from 'lodash/fp'
+import { isEqual, isFunction } from 'lodash/fp'
 import header from 'util/header'
 import ItemChooser from '../ItemChooser'
 
@@ -27,16 +27,20 @@ export default class ItemChooserScreen extends React.Component {
 
   static navigationOptions = ({ navigation }) => {
     const done = navigation.getParam('done', () => {})
+    const updateItems = navigation.getParam('updateItems')
     const cancel = navigation.getParam('cancel', () => {})
     const screenTitle = navigation.getParam('screenTitle')
-    return header(navigation, {
+    const headerParams = {
       title: screenTitle,
-      headerBackButton: cancel,
-      right: {
+      headerBackButton: cancel
+    }
+    if (isFunction(updateItems)) {
+      headerParams.right = {
         text: 'Done',
         onPress: done
       }
-    })
+    }
+    return header(navigation, headerParams)
   }
 
   constructor (props) {

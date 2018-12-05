@@ -16,8 +16,8 @@ import { keyboardAvoidingViewProps as kavProps } from 'util/viewHelpers'
 import header from 'util/header'
 import { MAX_TITLE_LENGTH } from './PostEditor.store'
 // ProjectMembers
-import { scopedFetchPeopleAutocomplete } from '../../store/actions/fetchPeopleAutocomplete'
-import { scopedGetPeopleAutocomplete } from '../../store/selectors/getPeopleAutocomplete'
+import scopedFetchPeopleAutocomplete from '../../store/actions/scopedFetchPeopleAutocomplete'
+import scopedGetPeopleAutocomplete from '../../store/selectors/scopedGetPeopleAutocomplete'
 import ProjectMemberItemChooserRow from './ProjectMemberItemChooserRow'
 import ProjectMembersSummary from './ProjectMembersSummary'
 // TopicsSearch
@@ -185,15 +185,9 @@ export default class PostEditor extends React.Component {
   ignoreHash = name => name[0] === '#' ? name.slice(1) : name
 
   insertPickerTopic = topic => {
-    const t = {
-      ...topic,
-      name: this.ignoreHash(topic.name)
-    }
+    const t = { ...topic, name: this.ignoreHash(topic.name) }
 
-    if (validateTopicName(t.name) === null) {
-      this.insertUniqueTopics([ t ], true)
-    }
-    this.cancelTopicPicker()
+    if (validateTopicName(t.name) === null) this.insertUniqueTopics([ t ], true)
   }
 
   insertEditorTopic = topics => {

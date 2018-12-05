@@ -19,7 +19,7 @@ export const fetchPeopleAutocompleteQuery =
   }
 }`
 
-export function scopedFetchPeopleAutocomplete (scope) {
+export default function scopedFetchPeopleAutocomplete (scope) {
   const queryResultsScopedType = scope
     ? `${scope}/${FETCH_PEOPLE_AUTOCOMPLETE}`
     : FETCH_PEOPLE_AUTOCOMPLETE
@@ -44,5 +44,3 @@ export function scopedFetchPeopleAutocomplete (scope) {
     }
   }
 }
-
-export default scopedFetchPeopleAutocomplete()

@@ -8,9 +8,6 @@ jest.mock('Alert', () => ({
   alert: jest.fn()
 }))
 
-jest.mock('../Search', () => 'Search')
-
-
 describe('ModeratorSettings', () => {
   let props = {
     moderators: [{id: 10, name: 'John Current', avatarUrl: 'http://aurl.com'}, {id: 11, name: 'John Other', avatarUrl: 'http://aurl.com'}],

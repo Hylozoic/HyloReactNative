@@ -3,8 +3,8 @@ import {
   createPost, createProject,
   updatePost, MAX_TITLE_LENGTH
 } from './PostEditor.store'
-import { createTopicTag } from '../Editor/Editor'
 import { get, isEmpty } from 'lodash/fp'
+import { createTopicTag } from '../InlineEditor/InlineEditor'
 import fetchPost from '../../store/actions/fetchPost'
 import { getPresentedPost } from '../../store/selectors/getPost'
 import isPendingFor from '../../store/selectors/isPendingFor'
@@ -21,7 +21,7 @@ export function mapStateToProps (state, props) {
   const selectedTopicName = get('navigation.state.params.topicName', props)
   const selectedTopicTag = createTopicTag({name: selectedTopicName})
   const defaultPost = selectedTopicName
-    ? {detailsText: selectedTopicTag, communityIds: [communityId]}
+    ? {detailsText: selectedTopicTag + ' ', communityIds: [communityId]}
     : {}
   const postId = getPostId(state, props)
   const post = getPresentedPost(state, {id: postId})
