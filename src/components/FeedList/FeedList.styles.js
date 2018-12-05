@@ -17,6 +17,9 @@ export default {
     marginRight: feedMargin,
     marginLeft: feedMargin
   },
+  listControlsSingleItem: {
+    justifyContent: 'flex-end'
+  },
   listControl: {
     flexDirection: 'row'
   },

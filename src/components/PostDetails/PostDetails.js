@@ -46,6 +46,12 @@ export default class PostDetails extends React.Component {
     commentText: ''
   }
 
+  static navigationOptions = ({ navigation }) => {
+    return {
+      headerTitle: 'Detail'
+    }
+  }
+
   componentDidMount () {
     this.props.fetchPost()
   }
