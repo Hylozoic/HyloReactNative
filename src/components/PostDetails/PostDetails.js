@@ -9,13 +9,14 @@ import PostCommunities from '../PostCard/PostCommunities'
 import PostImage from '../PostCard/PostImage'
 import PostFooter from '../PostCard/PostFooter'
 import PostHeader from '../PostCard/PostHeader'
+import ProjectMembersSummary from '../ProjectMembersSummary'
 import { LoadingScreen } from '../Loading'
 import Button from '../Button'
 import SocketSubscriber from '../SocketSubscriber'
-import styles from './PostDetails.styles'
 import { FileLabel } from '../PostEditor/FileSelector'
 import InlineEditor, { toHtml } from '../InlineEditor'
 import KeyboardFriendlyView from '../KeyboardFriendlyView'
+import styles from './PostDetails.styles'
 
 export default class PostDetails extends React.Component {
   static propTypes = {
@@ -104,7 +105,6 @@ export default class PostDetails extends React.Component {
     const slug = get('communities.0.slug', post)
     const communityId = get('communities.0.id', post)
     const isMember = find(member => member.id === currentUser.id, post.members)
-
     const { location } = post
 
     const postCard = <View style={styles.postCard}>
@@ -130,11 +130,12 @@ export default class PostDetails extends React.Component {
         slug={slug}
         showMember={this.handleShowMember}
         showTopic={this.handleShowTopic} />
-      {isProject && <ProjectMembers 
-        members={post.members} 
-        count={post.members.length} 
-        goToMembers={goToMembers} 
-        />}
+      {isProject &&
+        <ProjectMembersSummary
+          members={post.members}
+          onPress={goToMembers}
+          dimension={34}
+          style={styles.projectMembersContainer} />}
       <PostCommunities
         communities={post.communities}
         slug={slug}
@@ -208,12 +209,4 @@ export function JoinProjectButton ({ onPress, leaving }) {
     style={styles.joinButton}
     text={text}
     onPress={onPress} />
-}
-
-export function ProjectMembers ({ count, goToMembers }) {
-  return <View style={styles.projectMembersContainer}>
-    <TouchableOpacity onPress={goToMembers}>
-      <Text style={styles.memberCount}>{count} members</Text>
-    </TouchableOpacity>
-  </View>
 }

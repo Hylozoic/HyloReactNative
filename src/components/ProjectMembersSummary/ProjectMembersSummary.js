@@ -1,26 +1,27 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { Text, View, TouchableOpacity } from 'react-native'
 import { slice } from 'lodash/fp'
 import Avatar from '../Avatar'
 import { rhino30 } from '../../style/colors'
 
-export default function ProjectMembersSummary ({ members }) {
+export default function ProjectMembersSummary ({ members, style, onPress = undefined, dimension = 43 }) {
   const membersTotal = members.length
   const membersText = membersTotal
     ? `${membersTotal} member${membersTotal === 1 ? '' : 's'}`
     : 'Who is a part of this project?'
+  const RootElement = onPress ? TouchableOpacity : View
 
-  return <View style={styles.membersSummary}>
+  return <RootElement onPress={onPress} style={[style, styles.membersSummary]}>
     {slice(0, 3, members).map((c, index) => {
       return <Avatar key={index}
-        dimension={43}
+        dimension={dimension}
         avatarUrl={c.avatarUrl}
         hasBorder
         hasOverlap={index > 0}
         zIndex={3 - index} />
     })}
     <Text style={styles.membersText}>{membersText}</Text>
-  </View>
+  </RootElement>
 }
 
 const styles = {

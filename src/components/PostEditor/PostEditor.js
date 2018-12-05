@@ -15,16 +15,16 @@ import { showToast, hideToast } from 'util/toast'
 import { keyboardAvoidingViewProps as kavProps } from 'util/viewHelpers'
 import header from 'util/header'
 import { MAX_TITLE_LENGTH } from './PostEditor.store'
-// ProjectMembers
+// ProjectMembers Chooser
 import scopedFetchPeopleAutocomplete from '../../store/actions/scopedFetchPeopleAutocomplete'
 import scopedGetPeopleAutocomplete from '../../store/selectors/scopedGetPeopleAutocomplete'
 import ProjectMemberItemChooserRow from './ProjectMemberItemChooserRow'
-import ProjectMembersSummary from './ProjectMembersSummary'
-// TopicsSearch
+// Topics Picker
 import fetchTopicsForCommunityId from '../../store/actions/fetchTopicsForCommunityId'
 import getTopicsForAutocompleteWithNew from '../../store/selectors/getTopicsForAutocompleteWithNew'
 import TopicRow from '../TopicList/TopicRow'
 //
+import ProjectMembersSummary from '../ProjectMembersSummary'
 import KeyboardFriendlyView from '../KeyboardFriendlyView'
 import Icon from '../Icon'
 import FileSelector, { showFilePicker } from './FileSelector'
