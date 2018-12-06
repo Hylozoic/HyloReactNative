@@ -18,7 +18,7 @@ import { MAX_TITLE_LENGTH } from './PostEditor.store'
 // ProjectMembers Chooser
 import scopedFetchPeopleAutocomplete from '../../store/actions/scopedFetchPeopleAutocomplete'
 import scopedGetPeopleAutocomplete from '../../store/selectors/scopedGetPeopleAutocomplete'
-import ProjectMemberItemChooserRow from './ProjectMemberItemChooserRow'
+import ProjectMemberItemChooserRow from '../ItemChooser/ProjectMemberItemChooserRow'
 // Topics Picker
 import fetchTopicsForCommunityId from '../../store/actions/fetchTopicsForCommunityId'
 import getTopicsForAutocompleteWithNew from '../../store/selectors/getTopicsForAutocompleteWithNew'
