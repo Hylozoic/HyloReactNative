@@ -9,7 +9,7 @@ import {
 import Avatar from '../Avatar'
 import Icon from '../Icon'
 import { keyboardAvoidingViewProps as kavProps } from '../../util/viewHelpers'
-import Loading from '../Loading'
+import { LoadingScreen } from '../Loading'
 import Button from '../Button'
 import MessageInput from '../MessageInput'
 import KeyboardFriendlyView from '../KeyboardFriendlyView'
@@ -84,7 +84,7 @@ export default class NewMessage extends React.Component {
       mockViewKey // just for testing
     } = this.props
 
-    if (pending) return <Loading style={{marginTop: 40}} />
+    if (pending) return <LoadingScreen />
 
     const { participants } = this.state
     const emptyParticipantsList = participants.length === 0
