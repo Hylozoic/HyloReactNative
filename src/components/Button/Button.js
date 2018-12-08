@@ -7,10 +7,11 @@ import { omit } from 'lodash/fp'
 export default function Button ({
   style = {},
   text,
+  children,
   onPress,
   iconName,
   disabled
- }) {
+}) {
   const {
     color = white,
     borderColor = white,
@@ -37,7 +38,7 @@ export default function Button ({
       <View style={buttonStyle}>
         <View style={styles.buttonInner}>
           {iconName && <Icon name={iconName} style={iconStyle} />}
-          <Text style={textStyle}>{text}</Text>
+          <Text style={textStyle}>{text || children}</Text>
         </View>
       </View>
     </TouchableOpacity>

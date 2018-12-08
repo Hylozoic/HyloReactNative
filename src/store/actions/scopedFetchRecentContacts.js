@@ -24,10 +24,10 @@ const fetchRecentContactsQuery =
   }
 }`
 
-export function fetchRecentContactsForScope (scope) {
+export default function scopedFetchRecentContacts (scope) {
   if (!scope) throw new Error('`scope` param is required for setting a querySearchTerm')
 
-  const queryResultsScope = scope
+  const queryResultsScopedType = scope
     ? `${scope}/${FETCH_RECENT_CONTACTS}`
     : FETCH_RECENT_CONTACTS
 
@@ -36,7 +36,7 @@ export function fetchRecentContactsForScope (scope) {
     query = fetchRecentContactsQuery
   ) {
     return {
-      type: queryResultsScope,
+      type: queryResultsScopedType,
       graphql: {
         query,
         variables: { first }
@@ -50,5 +50,3 @@ export function fetchRecentContactsForScope (scope) {
     }
   }
 }
-
-export default fetchRecentContactsForScope()

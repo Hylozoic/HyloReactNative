@@ -1,19 +1,29 @@
 import { connect } from 'react-redux'
+import { get } from 'lodash/fp'
+import isPendingFor from '../../store/selectors/isPendingFor'
+import scopedFetchRecentContacts from '../../store/actions/scopedFetchRecentContacts'
+import scopedGetRecentContacts from '../../store/selectors/scopedGetRecentContacts'
+import { showLoadingModal } from '../LoadingModal/LoadingModal.store'
 import {
   createMessage,
-  findOrCreateThread
+  findOrCreateThread,
+  MODULE_NAME
 } from './NewMessage.store.js'
-import { showLoadingModal } from '../LoadingModal/LoadingModal.store'
-import { get } from 'lodash/fp'
 
 export function mapStateToProps (state, props) {
-  return {}
+  const getRecentContacts = scopedGetRecentContacts(null, { scope: MODULE_NAME })
+
+  return {
+    recentContacts: getRecentContacts(state, props),
+    pending: isPendingFor(scopedFetchRecentContacts(MODULE_NAME), state)
+  }
 }
 
 export const mapDispatchToProps = {
   createMessage,
   findOrCreateThread,
-  showLoadingModal
+  showLoadingModal,
+  fetchRecentContacts: scopedFetchRecentContacts(MODULE_NAME)
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {

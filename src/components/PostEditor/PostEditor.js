@@ -18,7 +18,7 @@ import { MAX_TITLE_LENGTH } from './PostEditor.store'
 // ProjectMembers Chooser
 import scopedFetchPeopleAutocomplete from '../../store/actions/scopedFetchPeopleAutocomplete'
 import scopedGetPeopleAutocomplete from '../../store/selectors/scopedGetPeopleAutocomplete'
-import ProjectMemberItemChooserRow from '../ItemChooser/ProjectMemberItemChooserRow'
+import ProjectMemberItemRow from '../ItemChooser/ProjectMemberItemRow'
 // Topics Picker
 import fetchTopicsForCommunityId from '../../store/actions/fetchTopicsForCommunityId'
 import getTopicsForAutocompleteWithNew from '../../store/selectors/getTopicsForAutocompleteWithNew'
@@ -109,7 +109,10 @@ export default class PostEditor extends React.Component {
 
   _doSave = () => {
     const { navigation, save } = this.props
-    const { communityIds, fileUrls, imageUrls, title, detailsText, topics, type, announcementEnabled, members } = this.state
+    const {
+      communityIds, fileUrls, imageUrls, title, detailsText,
+      topics, type, announcementEnabled, members
+    } = this.state
 
     const postData = {
       communities: communityIds.map(id => ({id})),
@@ -272,7 +275,7 @@ export default class PostEditor extends React.Component {
     const screenTitle = 'Project Members'
     navigation.navigate('ItemChooserScreen', {
       screenTitle,
-      ItemRowComponent: ProjectMemberItemChooserRow,
+      ItemRowComponent: ProjectMemberItemRow,
       initialItems: members,
       updateItems: this.updateMembers,
       searchPlaceholder: 'Type in the names of people to add to project',

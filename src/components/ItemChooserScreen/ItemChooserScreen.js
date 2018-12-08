@@ -16,7 +16,7 @@ export default class ItemChooserScreen extends React.Component {
           // Passed to ItemChooser
           initialItems: PropTypes.array,
           ItemRowComponent: PropTypes.func.isRequired,
-          searchPlaceholder: PropTypes.string.isRequired,
+          searchPlaceholder: PropTypes.string,
           fetchSearchSuggestions: PropTypes.func.isRequired,
           getSearchSuggestions: PropTypes.func.isRequired,
           style: PropTypes.object
@@ -87,9 +87,12 @@ export default class ItemChooserScreen extends React.Component {
     this.props.navigation.setParams({ chosenItems })
 
   render () {
+    const pickItem = this.props.navigation.getParam('pickItem')
+    const updateItems = this.props.navigation.getParam('updateItems')
+
     return <ItemChooser
       {...this.props.navigation.state.params}
-      pickItem={this.pickItem}
-      updateItems={this.updateItems} />
+      pickItem={pickItem ? this.pickItem : undefined}
+      updateItems={updateItems ? this.updateItems : undefined} />
   }
 }

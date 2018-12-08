@@ -33,6 +33,12 @@ export default class ItemChooser extends React.Component {
         id: PropTypes.isRequired
       })
     ),
+    defaultItems: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.isRequired
+      })
+    ),
+    defaultItemsLabel: PropTypes.string,
     ItemRowComponent: PropTypes.func.isRequired,
     searchTerm: PropTypes.string,
     suggestedItems: PropTypes.array,
@@ -83,22 +89,42 @@ export default class ItemChooser extends React.Component {
   pickItem = (item) => this.props.pickItem(item)
 
   setupItemSections = (suggestedItems) => {
+    const { searchTerm, defaultItems, defaultItemsLabel, updateItems } = this.props
     const { chosenItems, initialItems } = this.state
     const chosenItemIds = chosenItems.map(p => p.id)
+    const initialItemIds = initialItems.map(item => item.id)
     const addSelected = items => items.map(item => ({
       ...item,
       chosen: chosenItemIds.includes(item.id)
     }))
-    if (this.props.searchTerm) return [{ data: addSelected(suggestedItems) }]
     const sections = []
-    const initialItemIds = initialItems.map(p => p.id)
     const addedItems = chosenItems.filter(item => !initialItemIds.includes(item.id))
-    if (initialItems.length > 0) {
-      const label = addedItems.length > 0 ? 'Original' : undefined
-      sections.push({ label, data: addSelected(initialItems) })
-    }
-    if (addedItems.length > 0) {
-      sections.push({ label: 'Added', data: addSelected(addedItems) })
+    // chooser
+    if (updateItems) {
+      if (searchTerm) return [{ data: addSelected(suggestedItems) }]
+      if (initialItems.length > 0) {
+        const label = addedItems.length > 0 ? 'Current Selection' : undefined
+        sections.push({ label, data: addSelected(initialItems) })
+      }
+      if (addedItems.length > 0) {
+        sections.push({ label: 'Added', data: addSelected(addedItems) })
+      }
+    // picker
+    } else {
+      if (searchTerm) {
+        const filteredSuggestedItems = suggestedItems.filter(item => !initialItemIds.includes(item.id))
+        return [{ data: filteredSuggestedItems }]
+      }
+      if (defaultItems && defaultItemsLabel) {
+        const addedItemIds = addedItems.filter(item => item.id)
+        const label = defaultItems.length > 0 ? defaultItemsLabel : undefined
+        let filteredDefaultItems = defaultItems
+          .filter(item => !initialItemIds.includes(item.id))
+          .filter(item => !addedItemIds.includes(item.id))
+        if (defaultItems.length > 0) {
+          sections.push({ label, data: addSelected(filteredDefaultItems) })
+        }
+      }
     }
     return sections
   }
@@ -130,7 +156,7 @@ export default class ItemChooser extends React.Component {
   }
 
   render () {
-    const { searchTerm, style, initialItems } = this.props
+    const { searchTerm, style } = this.props
     const headerText = searchTerm ? `Matching "${searchTerm}"` : undefined
     const sections = this.setupItemSections(this.props.suggestedItems)
 
@@ -138,7 +164,6 @@ export default class ItemChooser extends React.Component {
       <ItemChooserListHeader
         {...this.props}
         headerText={headerText}
-        showClearSearch={initialItems.length > 0}
         setSearchTerm={this.setSearchTerm}
         clearSearchTerm={this.clearSearchTerm} />
       <SectionList
@@ -166,7 +191,6 @@ export function ItemChooserListHeader ({
   setSearchTerm,
   clearSearchTerm,
   searchPlaceholder,
-  showClearSearch,
   loading
 }) {
   return <View style={styles.listHeader}>
@@ -183,9 +207,9 @@ export function ItemChooserListHeader ({
       <Text style={styles.listHeaderText}>
         <Text>{headerText}</Text>
       </Text>
-      {showClearSearch && <TouchableOpacity onPress={clearSearchTerm}>
+      <TouchableOpacity onPress={clearSearchTerm}>
         <Text style={styles.listHeaderClear}>Clear Search</Text>
-      </TouchableOpacity>}
+      </TouchableOpacity>
     </View>}
   </View>
 }
