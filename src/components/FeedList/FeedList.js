@@ -114,10 +114,10 @@ export const filterOptions = [
   {id: 'offer', label: 'Offers'}
 ]
 
-const sortOptions = [
-  {id: 'updated', label: 'Latest'},
-  {id: 'votes', label: 'Popular'}
-]
+// const sortOptions = [
+//   {id: 'updated', label: 'Latest'},
+//   {id: 'votes', label: 'Popular'}
+// ]
 
 const optionText = (id, options) => {
   const option = find(o => o.id === id, options) || options[0]
@@ -128,7 +128,8 @@ export function ListControls ({ filter: listFilter, sortBy, setFilter, setSort, 
   return <View style={[styles.listControls, hideListFilter ? styles.listControlsSingleItem : {}]}>
     {!hideListFilter &&
       <ListControl selected={listFilter} onChange={setFilter} options={filterOptions} />}
-    <ListControl selected={sortBy} onChange={setSort} options={sortOptions} />
+    {/* TODO: disabled  */}
+    {/* <ListControl selected={sortBy} onChange={setSort} options={sortOptions} /> */}
   </View>
 }
 
