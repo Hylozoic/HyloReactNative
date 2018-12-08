@@ -1,6 +1,7 @@
 import React from 'react'
-import { Alert, Text, View, Image, TouchableOpacity, TextInput, ScrollView } from 'react-native'
+import { Text, View, Image, TouchableOpacity, TextInput, ScrollView } from 'react-native'
 import Loading from '../Loading'
+import confirmDiscardChanges from '../../util/confirmDiscardChanges'
 import styles from './CommunitySettings.styles'
 import ImagePicker from '../ImagePicker'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
@@ -41,17 +42,10 @@ export default class CommunitySettings extends React.Component {
   }
 
   confirmLeave = (onLeave) => {
-    if (this.state.changed) {
-      Alert.alert(
-        'You have unsaved changes',
-        'Are you sure you want to discard your changes?',
-        [
-          {text: 'Discard', onPress: onLeave},
-          {text: 'Continue Editing', style: 'cancel'}
-        ])
-    } else {
-      onLeave()
-    }
+    confirmDiscardChanges({
+      hasChanges: this.state.changed,
+      onDiscard: onLeave
+    })
   }
 
   componentDidMount () {

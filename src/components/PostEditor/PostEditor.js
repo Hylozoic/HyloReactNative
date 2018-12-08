@@ -14,6 +14,7 @@ import { rhino30 } from 'style/colors'
 import { showToast, hideToast } from 'util/toast'
 import { keyboardAvoidingViewProps as kavProps } from 'util/viewHelpers'
 import header from 'util/header'
+import confirmDiscardChanges from '../../util/confirmDiscardChanges'
 import { MAX_TITLE_LENGTH } from './PostEditor.store'
 // ProjectMembers Chooser
 import scopedFetchPeopleAutocomplete from '../../store/actions/scopedFetchPeopleAutocomplete'
@@ -94,13 +95,7 @@ export default class PostEditor extends React.Component {
   }
 
   confirmLeave = (onLeave) => {
-    Alert.alert(
-      'You may have unsaved changes',
-      'Are you sure you want to discard your changes?',
-      [
-        {text: 'Discard', onPress: onLeave},
-        {text: 'Continue Editing', style: 'cancel'}
-      ])
+    confirmDiscardChanges({ onDiscard: onLeave })
   }
 
   handleDetailsOnChange = (detailsText) => {

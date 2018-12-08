@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Alert } from 'react-native'
 import { isEqual, isFunction } from 'lodash/fp'
+import confirmDiscardChanges from '../../util/confirmDiscardChanges'
 import header from 'util/header'
 import ItemChooser from '../ItemChooser'
 
@@ -56,17 +56,10 @@ export default class ItemChooserScreen extends React.Component {
     const { navigation } = this.props
     const { initialItems, chosenItems } = navigation.state.params
     const changed = !isEqual(chosenItems, initialItems)
-    if (changed) {
-      Alert.alert(
-        'You have unsaved changes',
-        'Are you sure you want to discard your changes?',
-        [
-          {text: 'Discard', onPress: navigation.goBack},
-          {text: 'Continue Editing', style: 'cancel'}
-        ])
-    } else {
-      navigation.goBack()
-    }
+    confirmDiscardChanges({
+      hasChanges: changed,
+      onDiscard: navigation.goBack
+    })
   }
 
   done = () => {

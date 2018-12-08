@@ -3,12 +3,13 @@ import {
   View,
   ScrollView,
   Text,
-  TouchableOpacity,
-  ActivityIndicator
+  TouchableOpacity
 } from 'react-native'
 import Avatar from '../Avatar'
 import Icon from '../Icon'
 import { keyboardAvoidingViewProps as kavProps } from '../../util/viewHelpers'
+import header, { HeaderButton } from 'util/header'
+import confirmDiscardChanges from '../../util/confirmDiscardChanges'
 import { LoadingScreen } from '../Loading'
 import Button from '../Button'
 import MessageInput from '../MessageInput'
@@ -20,13 +21,18 @@ import styles from './NewMessage.styles'
 
 export default class NewMessage extends React.Component {
   static navigationOptions = ({ navigation }) => {
-    return {
-      headerTitle: 'New Message'
-    }
+    const confirmLeave = navigation.getParam('confirmLeave', () => {})
+    return header(navigation, {
+      headerBackButton: () => confirmLeave(navigation.goBack),
+      title: 'New Message'
+    })
   }
 
   constructor (props) {
     super(props)
+    this.props.navigation.setParams({
+      confirmLeave: this.confirmLeave
+    })
     this.state = {
       viewKey: 0,
       participants: []
@@ -39,7 +45,7 @@ export default class NewMessage extends React.Component {
 
   onBlurMessageInput = () => {
     const { viewKey } = this.state
-    this.setState({viewKey: viewKey + 1})
+    this.setState({ viewKey: viewKey + 1 })
   }
 
   createMessage = text => {
@@ -78,6 +84,10 @@ export default class NewMessage extends React.Component {
     this.props.navigation.navigate('ItemChooserScreen', chooserProps)
   }
 
+  confirmLeave = (onLeave) => {
+    confirmDiscardChanges({ onDiscard: onLeave })
+  }
+
   render () {
     const {
       pending,
@@ -110,7 +120,6 @@ export default class NewMessage extends React.Component {
       <MessageInput
         style={styles.messageInput}
         multiline
-        blurOnSubmit={false}
         onSubmit={this.createMessage}
         onBlur={this.onBlurMessageInput}
         placeholder='Type your message here'
