@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`CommentPrompt renders correctly 1`] = `
-<InlineEditor
+<withNavigation(InlineEditor)
   communityId={undefined}
   containerStyle={
     Object {
@@ -101,6 +101,13 @@ exports[`JoinProjectButton renders as expected 1`] = `
 `;
 
 exports[`JoinProjectButton renders as expected when leaving 1`] = `
+<Button
+  onPress={[Function]}
+  text="Leave Project"
+/>
+`;
+
+exports[`JoinProjectButton renders as expected when leaving 2`] = `
 <Button
   onPress={[Function]}
   text="Leave Project"
@@ -235,29 +242,4 @@ exports[`PostDetails renders correctly 1`] = `
     type="post"
   />
 </Unknown>
-`;
-
-exports[`ProjectMembers renders as expected 1`] = `
-<View>
-  <TouchableOpacity
-    activeOpacity={0.2}
-    onPress={[Function]}
-  >
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
-      5
-       members
-    </Text>
-  </TouchableOpacity>
-</View>
-`;
-
-exports[`ProjectMembers renders as expected when leaving 1`] = `
-<Button
-  onPress={[Function]}
-  text="Leave Project"
-/>
 `;

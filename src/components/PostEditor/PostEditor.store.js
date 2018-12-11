@@ -79,7 +79,7 @@ export function createPost (post) {
     },
     meta: {
       extractModel: 'Post',
-      analytics:{
+      analytics: {
         eventName: AnalyticsEvents.POST_CREATED,
         detailsLength: textLength(preprocessedDetails),
         isAnnouncement: sendAnnouncement

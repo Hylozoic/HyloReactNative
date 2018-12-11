@@ -8,6 +8,7 @@ exports[`FeedList renders correctly 1`] = `
       <View>
         <ListControls
           filter="all"
+          hideListFilter={undefined}
           pending={true}
           setFilter={[Function]}
           setSort={[Function]}
@@ -101,22 +102,6 @@ exports[`ListControls renders correctly 1`] = `
       ]
     }
     selected="all"
-  />
-  <ListControl
-    onChange={[Function]}
-    options={
-      Array [
-        Object {
-          "id": "updated",
-          "label": "Latest",
-        },
-        Object {
-          "id": "votes",
-          "label": "Popular",
-        },
-      ]
-    }
-    selected="latest"
   />
 </View>
 `;

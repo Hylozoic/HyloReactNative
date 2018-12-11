@@ -2,12 +2,10 @@ import 'react-native'
 import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import ReactTestRenderer from 'react-test-renderer'
+import orm from 'store/models'
 import { Provider } from 'react-redux'
 import { createMockStore } from 'util/testing'
-import orm from 'store/models'
-import
-  NewMessage, { ParticipantInput, Participant, ContactRow }
-from './NewMessage'
+import NewMessage from './NewMessage'
 
 jest.mock('../MessageInput', () => 'MessageInput')
 jest.mock('../KeyboardFriendlyView', () => 'KeyboardFriendlyView')
@@ -19,11 +17,7 @@ describe('NewMessage', () => {
     const suggestions = [{id: 7}, {id: 8}, {id: 9}]
     const participants = [{id: 10}, {id: 11}, {id: 12}]
     const currentUser = {id: 1}
-    const pending = {
-      all: false,
-      recent: true,
-      suggestions: true
-    }
+    const pending = false
     const personInputText = ''
 
     renderer.render(<NewMessage
@@ -36,7 +30,9 @@ describe('NewMessage', () => {
       setParticipantInput={() => {}}
       personInputText={personInputText}
       createMessage={() => {}}
+      navigation={{ setParams: () => {} }}
       pending={pending}
+      fetchRecentContacts={() => {}}
       />)
     const actual = renderer.getRenderOutput()
 
@@ -54,6 +50,7 @@ describe('NewMessage', () => {
       setParticipantInput={() => {}}
       personInputText={personInputText2}
       createMessage={() => {}}
+      navigation={{ setParams: () => {} }}
       pending={pending}
       />)
 
@@ -69,7 +66,12 @@ describe('NewMessage', () => {
       participants: [],
       recentContacts: [],
       suggestions: [],
-      mockViewKey: 1
+      mockViewKey: 1,
+      navigation: {
+        setParams: jest.fn(),
+        state: {params: {}},
+        getParam: jest.fn()
+      }
     }
     const state = {
       orm: orm.getEmptyState(),

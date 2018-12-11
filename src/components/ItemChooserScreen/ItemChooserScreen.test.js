@@ -4,11 +4,24 @@ import ReactShallowRenderer from 'react-test-renderer/shallow'
 import ItemChooserScreen from './ItemChooserScreen'
 
 it('renders as expected', () => {
+  const items = [{ id: 'member1' }, { id: 'member2' }]
   const props = {
-    members: [{id: 'member1'}, {id: 'member2'}],
     style: {styleProp: 1},
     updateMembers: () => {},
-    onCancel: () => {}
+    onCancel: () => {},
+    navigation: {
+      state: {
+        params: {
+          screenTitle: 'Screen Title',
+          initialItems: items,
+          ItemRowComponent: item => item.id,
+          fetchSearchSuggestions: () => {},
+          getSearchSuggestions: () => {}
+        }
+      },
+      setParams: jest.fn(),
+      getParam: jest.fn()
+    }
   }
 
   const renderer = new ReactShallowRenderer()

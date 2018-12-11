@@ -13,7 +13,6 @@ describe('createPost', () => {
   })
 })
 
-
 describe('createProject', () => {
   it('should match the last snapshot', () => {
     const project = {
@@ -31,11 +30,5 @@ describe('updatePost', () => {
       id: 1
     }
     expect(store.updatePost(updatePost)).toMatchSnapshot()
-  })
-})
-
-describe('fetchDetailsAndMembers', () => {
-  it('should match the last snapshot', () => {
-    expect(store.fetchPostDetailsAndMembers(1)).toMatchSnapshot()
   })
 })

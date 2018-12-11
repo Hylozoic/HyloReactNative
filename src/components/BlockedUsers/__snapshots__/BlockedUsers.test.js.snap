@@ -2,14 +2,7 @@
 
 exports[`BlockedUsers matches the last snapshot 1`] = `
 <ScrollView
-  contentContainerStyle={
-    Object {
-      "flex": 1,
-      "marginTop": 15,
-      "padding": 10,
-      "paddingBottom": 100,
-    }
-  }
+  contentContainerStyle={undefined}
 >
   <BlockedUserRow
     unBlockUser={[Function]}

@@ -8,7 +8,7 @@ import {
 import Avatar from '../Avatar'
 import Icon from '../Icon'
 import { keyboardAvoidingViewProps as kavProps } from '../../util/viewHelpers'
-import header, { HeaderButton } from 'util/header'
+import header from 'util/header'
 import confirmDiscardChanges from '../../util/confirmDiscardChanges'
 import { LoadingScreen } from '../Loading'
 import Button from '../Button'

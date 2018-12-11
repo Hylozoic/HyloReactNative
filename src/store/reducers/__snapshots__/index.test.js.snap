@@ -23,12 +23,8 @@ Object {
   "NewMessage": Object {
     "message": "",
   },
-  "PeopleChooser": Object {
-    "input": "",
-  },
   "PeopleTyping": Object {},
   "PostEditor": Object {},
-  "Search": Object {},
   "SearchPage": Object {
     "filter": "all",
     "search": "",
@@ -93,6 +89,7 @@ Object {
   "orm": Object {},
   "pending": Object {},
   "queryResults": Object {},
+  "querySearchTerms": Object {},
   "session": Object {},
 }
 `;

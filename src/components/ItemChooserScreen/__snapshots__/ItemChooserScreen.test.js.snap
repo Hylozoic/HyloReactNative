@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders as expected 1`] = `
+<Connect(ItemChooser)
+  ItemRowComponent={[Function]}
+  fetchSearchSuggestions={[Function]}
+  getSearchSuggestions={[Function]}
+  initialItems={
+    Array [
+      Object {
+        "id": "member1",
+      },
+      Object {
+        "id": "member2",
+      },
+    ]
+  }
+  pickItem={undefined}
+  screenTitle="Screen Title"
+  updateItems={undefined}
+/>
+`;

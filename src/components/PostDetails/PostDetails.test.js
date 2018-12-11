@@ -47,7 +47,12 @@ const props = {
   showMember: jest.fn(),
   showTopic: jest.fn(),
   createComment: jest.fn(() => Promise.resolve({success: true})),
-  goToCommunity: jest.fn()
+  goToCommunity: jest.fn(),
+  navigation: {
+    setParams: jest.fn(),
+    state: {params: {}},
+    getParam: jest.fn()
+  }
 }
 
 const state = {
@@ -153,20 +158,7 @@ describe('JoinProjectButton', () => {
   })
 })
 
-describe('ProjectMembers', () => {
-  it('renders as expected', () => {
-    const props = {
-      count: 5,
-      goToMembers: () => {}
-    }
-    const renderer = new ReactShallowRenderer()
-    renderer.render(
-      <ProjectMembers {...props} />
-    )
-    const actual = renderer.getRenderOutput()
-    expect(actual).toMatchSnapshot()
-  })
-
+describe('JoinProjectButton', () => {
   it('renders as expected when leaving', () => {
     const renderer = new ReactShallowRenderer()
     renderer.render(

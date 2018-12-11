@@ -234,35 +234,6 @@ Object {
 }
 `;
 
-exports[`fetchDetailsAndMembers should match the last snapshot 1`] = `
-Object {
-  "graphql": Object {
-    "query": "query ($id: ID) {
-        post(id: $id) {
-          id
-          detailsText
-          members {
-            total
-            hasMore
-            items {
-              id
-              name
-              avatarUrl
-            }
-          }
-        }
-      }",
-    "variables": Object {
-      "id": 1,
-    },
-  },
-  "meta": Object {
-    "extractModel": "Post",
-  },
-  "type": "PostEditor/FETCH_DETAILS_AND_MEMBERS",
-}
-`;
-
 exports[`updatePost should match the last snapshot 1`] = `
 Object {
   "graphql": Object {
