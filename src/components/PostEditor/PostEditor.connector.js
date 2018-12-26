@@ -49,7 +49,7 @@ export function mapDispatchToProps (dispatch, props) {
   const postId = getPostId(null, props)
   const saveAction = postId
     ? updatePost
-    : isProject ? createPost : createProject
+    : isProject ? createProject : createPost
 
   return {
     save: postData => {
