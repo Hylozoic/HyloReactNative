@@ -2,13 +2,18 @@ import { havelockBlue, rhino80, rhino50, white } from '../../style/colors'
 
 export default {
   sectionHeader: {
+    backgroundColor: 'white',
     paddingHorizontal: 10,
-    marginTop: 10
+    paddingTop: 10,
+    paddingBottom: 10
   },
   sectionHeaderText: {
     color: rhino50,
     fontFamily: 'Circular-Book',
     fontSize: 12
+  },
+  sectionFooter: {
+    marginBottom: 40
   },
   listHeader: {
     backgroundColor: white

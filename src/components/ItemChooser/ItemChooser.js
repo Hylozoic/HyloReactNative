@@ -5,11 +5,13 @@ import {
   Text,
   View,
   SafeAreaView,
-  TouchableOpacity
+  TouchableOpacity,
+  Keyboard
 } from 'react-native'
 import { debounce } from 'lodash/fp'
 import SearchBar from '../SearchBar'
 import styles from './ItemChooser.styles'
+import KeyboardFriendlyView from '../KeyboardFriendlyView';
 
 export const propTypesForItemRowComponent = {
   item: PropTypes.object.isRequired,
@@ -55,7 +57,8 @@ export default class ItemChooser extends React.Component {
   }
 
   state = {
-    chosenItems: []
+    chosenItems: [],
+    choosing: false
   }
 
   constructor (props) {
@@ -82,7 +85,10 @@ export default class ItemChooser extends React.Component {
   }
 
   updateItems (updatedItems) {
-    this.setState(state => ({ chosenItems: updatedItems }))
+    this.setState(state => ({
+      chosenItems: updatedItems,
+      choosing: true
+    }))
     this.props.updateItems(updatedItems)
   }
 
@@ -155,25 +161,35 @@ export default class ItemChooser extends React.Component {
       onPress={pickItem} />
   }
 
+  setSearching = () => {
+    this.setState({ choosing: false })
+  }
+
   render () {
     const { searchTerm, style } = this.props
+    const { choosing } = this.state
     const headerText = searchTerm ? `Matching "${searchTerm}"` : undefined
     const sections = this.setupItemSections(this.props.suggestedItems)
 
     return <SafeAreaView style={style}>
-      <ItemChooserListHeader
-        {...this.props}
-        headerText={headerText}
-        setSearchTerm={this.setSearchTerm}
-        clearSearchTerm={this.clearSearchTerm} />
-      <SectionList
-        sections={sections}
-        renderSectionHeader={SectionHeader}
-        renderItem={this.renderItemRowComponent}
-        // ListFooterComponent={<ItemChooserListFooter {...this.props} />}
-        keyExtractor={item => item.id}
-        stickySectionHeadersEnabled={false}
-        keyboardShouldPersistTaps='handled' />
+      <KeyboardFriendlyView>
+        <SectionList
+          style={styles.itemList}
+          ListHeaderComponent={() => <ItemChooserListHeader
+            {...this.props}
+            onFocus={choosing ? this.setSearching : undefined}
+            autoFocus={!choosing}
+            headerText={headerText}
+            setSearchTerm={this.setSearchTerm}
+            clearSearchTerm={this.clearSearchTerm} />}
+          sections={sections}
+          renderSectionHeader={SectionHeader}
+          renderItem={this.renderItemRowComponent}
+          ListFooterComponent={<View style={styles.sectionFooter} />}
+          keyExtractor={item => item.id}
+          stickySectionHeadersEnabled
+          keyboardShouldPersistTaps='handled' />
+      </KeyboardFriendlyView>
     </SafeAreaView>
   }
 }
@@ -185,31 +201,37 @@ export function SectionHeader ({ section: { label } }) {
   </View>
 }
 
-export function ItemChooserListHeader ({
-  searchTerm,
-  headerText,
-  setSearchTerm,
-  clearSearchTerm,
-  searchPlaceholder,
-  loading
-}) {
-  return <View style={styles.listHeader}>
-    <SearchBar
-      autoFocus
-      value={searchTerm}
-      onChangeText={setSearchTerm}
-      placeholder={searchPlaceholder}
-      // onCancel={clearSearchTerm}
-      // onCancelText='Clear'
-      loading={loading}
-    />
-    {searchTerm && <View style={styles.listHeaderStatus}>
-      <Text style={styles.listHeaderText}>
-        <Text>{headerText}</Text>
-      </Text>
-      <TouchableOpacity onPress={clearSearchTerm}>
-        <Text style={styles.listHeaderClear}>Clear Search</Text>
-      </TouchableOpacity>
-    </View>}
-  </View>
+export class ItemChooserListHeader extends React.Component {
+  render () {
+    const {
+      searchTerm,
+      headerText,
+      setSearchTerm,
+      clearSearchTerm,
+      searchPlaceholder,
+      autoFocus,
+      onFocus,
+      loading
+    } = this.props
+    return <View style={styles.listHeader}>
+      <SearchBar
+        autoFocus={autoFocus}
+        onFocus={onFocus}
+        value={searchTerm}
+        onChangeText={setSearchTerm}
+        placeholder={searchPlaceholder}
+        // onCancel={clearSearchTerm}
+        // onCancelText='Clear'
+        loading={loading}
+      />
+      {searchTerm && <View style={styles.listHeaderStatus}>
+        <Text style={styles.listHeaderText}>
+          <Text>{headerText}</Text>
+        </Text>
+        <TouchableOpacity onPress={clearSearchTerm}>
+          <Text style={styles.listHeaderClear}>Clear Search</Text>
+        </TouchableOpacity>
+      </View>}
+    </View>
+  }
 }

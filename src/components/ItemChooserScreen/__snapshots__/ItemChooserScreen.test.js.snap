@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders as expected 1`] = `
+exports[`ItemChooserScreen renders as expected 1`] = `
 <Connect(ItemChooser)
   ItemRowComponent={[Function]}
   fetchSearchSuggestions={[Function]}

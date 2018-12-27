@@ -1,34 +1,65 @@
 import 'react-native'
 import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
+import TestRenderer from 'react-test-renderer'
 import ItemChooserScreen from './ItemChooserScreen'
+import { Provider } from 'react-redux'
+import { createMockStore } from 'util/testing'
 
-it('renders as expected', () => {
-  const items = [{ id: 'member1' }, { id: 'member2' }]
-  const props = {
-    style: {styleProp: 1},
-    updateMembers: () => {},
-    onCancel: () => {},
-    navigation: {
-      state: {
-        params: {
-          screenTitle: 'Screen Title',
-          initialItems: items,
-          ItemRowComponent: item => item.id,
-          fetchSearchSuggestions: () => {},
-          getSearchSuggestions: () => {}
-        }
-      },
-      setParams: jest.fn(),
-      getParam: jest.fn()
-    }
+const state = {
+  querySearchTerms: {}
+}
+
+const items = [
+  { id: 'member1' },
+  { id: 'member2' }
+]
+
+const testProps = {
+  updateMembers: () => {},
+  onCancel: () => {},
+  navigation: {
+    state: {
+      params: {
+        screenTitle: 'Screen Title',
+        initialItems: items,
+        ItemRowComponent: item => item.id,
+        fetchSearchSuggestions: () => {
+          return { type: 'test-search' } 
+        },
+        getSearchSuggestions: () => items,
+        updateItems: jest.fn()
+      }
+    },
+    setParams: jest.fn(),
+    getParam: jest.fn()
   }
+}
 
-  const renderer = new ReactShallowRenderer()
-  renderer.render(
-    <ItemChooserScreen {...props} />
-  )
-  const actual = renderer.getRenderOutput()
+describe('ItemChooserScreen', () => {
+  it('renders as expected', () => {
 
-  expect(actual).toMatchSnapshot()
+    // const renderer = TestRenderer.create(
+    //   <ItemChooserScreen {...testProps} />
+    // )
+
+    // const itemChooserScreen = renderer.root.findByType(ItemChooserScreen).instance
+    // itemChooserScreen.componentDidMount()
+    // const renderer = new ReactShallowRenderer()
+    const renderer = TestRenderer.create(
+      <Provider store={createMockStore(state)}>
+        <ItemChooserScreen {...testProps} />
+      </Provider>
+    )
+    expect(renderer.toJSON()).toMatchSnapshot()
+
+    // const instance = renderer.root.findByType(ItemChooserScreen).instance
+  })
 })
+
+// snapshot test difference between render of pick vs choose itemschooser?
+// test for updateItems
+// test that done for update Items and cancel do what are expected
+// test that cancel does what is expected for pickItem
+// test pickItem
+// test that
