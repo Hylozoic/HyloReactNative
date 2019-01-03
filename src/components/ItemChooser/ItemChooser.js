@@ -5,13 +5,11 @@ import {
   Text,
   View,
   SafeAreaView,
-  TouchableOpacity,
-  Keyboard
+  TouchableOpacity
 } from 'react-native'
 import { debounce } from 'lodash/fp'
 import SearchBar from '../SearchBar'
 import styles from './ItemChooser.styles'
-import KeyboardFriendlyView from '../KeyboardFriendlyView';
 
 export const propTypesForItemRowComponent = {
   item: PropTypes.object.isRequired,
@@ -172,24 +170,21 @@ export default class ItemChooser extends React.Component {
     const sections = this.setupItemSections(this.props.suggestedItems)
 
     return <SafeAreaView style={style}>
-      <KeyboardFriendlyView>
-        <SectionList
-          style={styles.itemList}
-          ListHeaderComponent={() => <ItemChooserListHeader
-            {...this.props}
-            onFocus={choosing ? this.setSearching : undefined}
-            autoFocus={!choosing}
-            headerText={headerText}
-            setSearchTerm={this.setSearchTerm}
-            clearSearchTerm={this.clearSearchTerm} />}
-          sections={sections}
-          renderSectionHeader={SectionHeader}
-          renderItem={this.renderItemRowComponent}
-          ListFooterComponent={<View style={styles.sectionFooter} />}
-          keyExtractor={item => item.id}
-          stickySectionHeadersEnabled
-          keyboardShouldPersistTaps='handled' />
-      </KeyboardFriendlyView>
+      <ItemChooserListHeader
+        {...this.props}
+        autoFocus
+        headerText={headerText}
+        setSearchTerm={this.setSearchTerm}
+        clearSearchTerm={this.clearSearchTerm} />
+      <SectionList
+        style={styles.itemList}
+        sections={sections}
+        renderSectionHeader={SectionHeader}
+        renderItem={this.renderItemRowComponent}
+        ListFooterComponent={<View style={styles.sectionFooter} />}
+        keyExtractor={item => item.id}
+        stickySectionHeadersEnabled
+        keyboardShouldPersistTaps='handled' />
     </SafeAreaView>
   }
 }

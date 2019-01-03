@@ -4,8 +4,7 @@ export default {
   sectionHeader: {
     backgroundColor: 'white',
     paddingHorizontal: 10,
-    paddingTop: 10,
-    paddingBottom: 10
+    paddingTop: 10
   },
   sectionHeaderText: {
     color: rhino50,
@@ -35,5 +34,8 @@ export default {
     fontWeight: 'bold',
     fontSize: 14,
     color: havelockBlue
+  },
+  itemList: {
+    marginBottom: 50
   }
 }

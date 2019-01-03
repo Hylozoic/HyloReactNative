@@ -27,8 +27,8 @@ export default function SearchBar ({
   return <View style={styles.searchBar}>
     <Icon style={styles.searchIcon} name='Search' />
     <TextInput
-      // autoFocus={autoFocus}
-      // onFocus={onFocus}
+      autoFocus={autoFocus}
+      onFocus={onFocus}
       style={styles.searchInput}
       value={value}
       onChangeText={onChangeText} // updateSearch
