@@ -11,8 +11,7 @@ import Loading from '../Loading'
 
 export default function SearchBar ({
   value = '',
-  onChangeText,
-  type = 'topics',
+  onChangeText = undefined,
   placeholder = undefined,
   onCancel = undefined,
   onCancelText = undefined,
@@ -31,8 +30,8 @@ export default function SearchBar ({
       onFocus={onFocus}
       style={styles.searchInput}
       value={value}
-      onChangeText={onChangeText} // updateSearch
-      placeholder={placeholder || setPlaceholder(type)}
+      onChangeText={onChangeText}
+      placeholder={placeholder}
       autoCapitalize='none'
       autoCorrect={false}
       underlineColorAndroid='transparent'
@@ -42,13 +41,4 @@ export default function SearchBar ({
       <Cancel />
     </TouchableOpacity>}
   </View>
-}
-
-export function setPlaceholder (type) {
-  switch (type) {
-    case 'topics':
-      return 'Search Topics'
-    default:
-      return `Search for a ${type} by name`
-  }
 }

@@ -1,22 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`SearchBar matches last snapshot 1`] = `
-<View>
-  <Icon
-    name="Search"
-  />
-  <TextInput
-    allowFontScaling={true}
-    autoCorrect={false}
-    editable={true}
-    onChangeText={[Function]}
-    placeholder="Search Topics"
-    underlineColorAndroid="transparent"
-    value="searching"
-  />
-</View>
-`;
-
 exports[`SubscribeStar matches last snapshot 1`] = `
 <TouchableOpacity
   activeOpacity={0.2}
@@ -145,8 +128,9 @@ exports[`Topics renders correctly a community and topics 1`] = `
       </Text>
     </View>
     <SearchBar
-      setTerm={undefined}
-      term={undefined}
+      onChangeText={undefined}
+      placeholder="Search Topics"
+      value={undefined}
     />
     <TopicList
       goToTopic={[Function]}
@@ -199,8 +183,9 @@ exports[`Topics renders correctly with pending=true 1`] = `
       </Text>
     </View>
     <SearchBar
-      setTerm={undefined}
-      term={undefined}
+      onChangeText={undefined}
+      placeholder="Search Topics"
+      value={undefined}
     />
     <TopicList
       goToTopic={[Function]}

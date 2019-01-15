@@ -78,8 +78,8 @@ export default class NewMessage extends React.Component {
       initialItems: participants,
       pickItem: this.addParticipant,
       ItemRowComponent: PersonPickerItemRow,
-      defaultItemsLabel: 'Recent Contacts',
-      defaultItems: recentContacts
+      defaultSuggestedItemsLabel: 'Recent Contacts',
+      defaultSuggestedItems: recentContacts
     }
     this.props.navigation.navigate('ItemChooserScreen', chooserProps)
   }

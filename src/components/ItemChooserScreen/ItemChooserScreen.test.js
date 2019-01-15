@@ -1,7 +1,7 @@
 import 'react-native'
 import React from 'react'
-import ReactShallowRenderer from 'react-test-renderer/shallow'
 import TestRenderer from 'react-test-renderer'
+import '../../../config/jest/textInputWithAutoFocusMock'
 import ItemChooserScreen from './ItemChooserScreen'
 import { Provider } from 'react-redux'
 import { createMockStore } from 'util/testing'
@@ -36,30 +36,19 @@ const testProps = {
   }
 }
 
+// snapshot test difference between render of pick vs choose itemschooser?
+// test for updateItems
+// test that done for update Items and cancel do what are expected
+// test that cancel does what is expected for pickItem
+// test pickItem
+
 describe('ItemChooserScreen', () => {
   it('renders as expected', () => {
-
-    // const renderer = TestRenderer.create(
-    //   <ItemChooserScreen {...testProps} />
-    // )
-
-    // const itemChooserScreen = renderer.root.findByType(ItemChooserScreen).instance
-    // itemChooserScreen.componentDidMount()
-    // const renderer = new ReactShallowRenderer()
     const renderer = TestRenderer.create(
       <Provider store={createMockStore(state)}>
         <ItemChooserScreen {...testProps} />
       </Provider>
     )
     expect(renderer.toJSON()).toMatchSnapshot()
-
-    // const instance = renderer.root.findByType(ItemChooserScreen).instance
   })
 })
-
-// snapshot test difference between render of pick vs choose itemschooser?
-// test for updateItems
-// test that done for update Items and cancel do what are expected
-// test that cancel does what is expected for pickItem
-// test pickItem
-// test that

@@ -2,7 +2,7 @@ import 'react-native'
 import React from 'react'
 import ReactTestRenderer from 'react-test-renderer'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
-import Topics, { SearchBar, TopicList, TopicRow, SubscribeStar } from './Topics'
+import Topics, { TopicList, TopicRow, SubscribeStar } from './Topics'
 
 describe('Topics', () => {
   it('renders correctly a community and topics', () => {
@@ -177,19 +177,6 @@ describe('Topics', () => {
       expect(props.goToComingSoon).not.toBeCalled()
       expect(props.fetchCommunityTopics).toBeCalled()
     })
-  })
-})
-
-describe('SearchBar', () => {
-  it('matches last snapshot', () => {
-    const props = {
-      term: 'searching',
-      setTerm: () => {}
-    }
-    const renderer = new ReactShallowRenderer()
-    renderer.render(<SearchBar {...props} />)
-    const actual = renderer.getRenderOutput()
-    expect(actual).toMatchSnapshot()
   })
 })
 

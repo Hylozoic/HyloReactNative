@@ -6,6 +6,7 @@ import StarIcon from '../../StarIcon'
 import Badge from '../../Badge'
 import Icon from '../../Icon'
 import Header from '../Header'
+import SearchBar from '../../SearchBar'
 import styles from './Topics.styles'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
 import LinearGradient from 'react-native-linear-gradient'
@@ -53,7 +54,10 @@ export default class Topics extends React.Component {
           <LinearGradient style={styles.gradient} colors={bannerlinearGradientColors} />
           <Text style={styles.title}>{name}</Text>
         </View>
-        <SearchBar term={term} setTerm={setTerm} />
+        <SearchBar
+          value={term}
+          onChangeText={setTerm}
+          placeholder='Search Topics' />
         {pending && isEmpty(topics)
           ? <Loading />
           : <TopicList topics={topics}
@@ -63,21 +67,6 @@ export default class Topics extends React.Component {
     </KeyboardFriendlyView>
   }
 }
-
-export function SearchBar ({ term, setTerm }) {
-  return <View style={styles.searchBar}>
-    <Icon style={styles.searchIcon} name='Search' />
-    <TextInput
-      style={styles.searchInput}
-      value={term}
-      onChangeText={setTerm}
-      placeholder='Search Topics'
-      underlineColorAndroid='transparent'
-      autoCorrect={false}
-      editable />
-  </View>
-}
-
 export class TopicList extends React.Component {
   render () {
     const { topics, setTopicSubscribe, goToTopic } = this.props

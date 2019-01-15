@@ -25,6 +25,7 @@ export default class ItemChooser extends React.Component {
     fetchSearchSuggestions: PropTypes.func.isRequired,
     getSearchSuggestions: PropTypes.func.isRequired,
     setSearchTerm: PropTypes.func.isRequired,
+    ItemRowComponent: PropTypes.func.isRequired,
     pickItem: PropTypes.func,
     done: PropTypes.func,
     updateItems: PropTypes.func,
@@ -33,13 +34,12 @@ export default class ItemChooser extends React.Component {
         id: PropTypes.isRequired
       })
     ),
-    defaultItems: PropTypes.arrayOf(
+    defaultSuggestedItems: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.isRequired
       })
     ),
-    defaultItemsLabel: PropTypes.string,
-    ItemRowComponent: PropTypes.func.isRequired,
+    defaultSuggestedItemsLabel: PropTypes.string,
     searchTerm: PropTypes.string,
     suggestedItems: PropTypes.array,
     loading: PropTypes.bool,
@@ -55,8 +55,7 @@ export default class ItemChooser extends React.Component {
   }
 
   state = {
-    chosenItems: [],
-    choosing: false
+    chosenItems: []
   }
 
   constructor (props) {
@@ -84,8 +83,7 @@ export default class ItemChooser extends React.Component {
 
   updateItems (updatedItems) {
     this.setState(state => ({
-      chosenItems: updatedItems,
-      choosing: true
+      chosenItems: updatedItems
     }))
     this.props.updateItems(updatedItems)
   }
@@ -93,7 +91,7 @@ export default class ItemChooser extends React.Component {
   pickItem = (item) => this.props.pickItem(item)
 
   setupItemSections = (suggestedItems) => {
-    const { searchTerm, defaultItems, defaultItemsLabel, updateItems } = this.props
+    const { searchTerm, defaultSuggestedItems, defaultSuggestedItemsLabel, updateItems } = this.props
     const { chosenItems, initialItems } = this.state
     const chosenItemIds = chosenItems.map(p => p.id)
     const initialItemIds = initialItems.map(item => item.id)
@@ -119,13 +117,13 @@ export default class ItemChooser extends React.Component {
         const filteredSuggestedItems = suggestedItems.filter(item => !initialItemIds.includes(item.id))
         return [{ data: filteredSuggestedItems }]
       }
-      if (defaultItems && defaultItemsLabel) {
+      if (defaultSuggestedItems && defaultSuggestedItemsLabel) {
         const addedItemIds = addedItems.filter(item => item.id)
-        const label = defaultItems.length > 0 ? defaultItemsLabel : undefined
-        let filteredDefaultItems = defaultItems
+        const label = defaultSuggestedItems.length > 0 ? defaultSuggestedItemsLabel : undefined
+        let filteredDefaultItems = defaultSuggestedItems
           .filter(item => !initialItemIds.includes(item.id))
           .filter(item => !addedItemIds.includes(item.id))
-        if (defaultItems.length > 0) {
+        if (defaultSuggestedItems.length > 0) {
           sections.push({ label, data: addSelected(filteredDefaultItems) })
         }
       }
@@ -159,13 +157,8 @@ export default class ItemChooser extends React.Component {
       onPress={pickItem} />
   }
 
-  setSearching = () => {
-    this.setState({ choosing: false })
-  }
-
   render () {
     const { searchTerm, style } = this.props
-    const { choosing } = this.state
     const headerText = searchTerm ? `Matching "${searchTerm}"` : undefined
     const sections = this.setupItemSections(this.props.suggestedItems)
 
