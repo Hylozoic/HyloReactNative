@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ItemChooserScreen #setupItemSections for chooser renders current selection if intialItems is defined (no headers) 1`] = `
+exports[`ItemChooser #setupItemSections for chooser renders current selection if intialItems is defined (no headers) 1`] = `
 Array [
   Object {
     "data": Array [
@@ -22,7 +22,7 @@ Array [
 ]
 `;
 
-exports[`ItemChooserScreen #setupItemSections for chooser renders current selection with header if initialItems and addedItems are defined  1`] = `
+exports[`ItemChooser #setupItemSections for chooser renders current selection with header if initialItems and addedItems are defined  1`] = `
 Array [
   Object {
     "data": Array [
@@ -49,7 +49,7 @@ Array [
 ]
 `;
 
-exports[`ItemChooserScreen #setupItemSections for chooser renders sections 1`] = `
+exports[`ItemChooser #setupItemSections for chooser renders sections 1`] = `
 Array [
   Object {
     "data": Array [
@@ -80,7 +80,7 @@ Array [
 ]
 `;
 
-exports[`ItemChooserScreen #setupItemSections for chooser renders suggested items when search term supplied 1`] = `
+exports[`ItemChooser #setupItemSections for chooser renders suggested items when search term supplied 1`] = `
 Array [
   Object {
     "data": Array [
@@ -101,7 +101,7 @@ Array [
 ]
 `;
 
-exports[`ItemChooserScreen #setupItemSections for chooser renders suggested items when search term supplied 2`] = `
+exports[`ItemChooser #setupItemSections for chooser renders suggested items when search term supplied 2`] = `
 Array [
   Object {
     "data": Array [
@@ -122,7 +122,7 @@ Array [
 ]
 `;
 
-exports[`ItemChooserScreen #setupItemSections for picker renders default suggested items 1`] = `
+exports[`ItemChooser #setupItemSections for picker renders default suggested items 1`] = `
 Array [
   Object {
     "data": Array [
@@ -144,9 +144,9 @@ Array [
 ]
 `;
 
-exports[`ItemChooserScreen #setupItemSections for picker renders sections 1`] = `Array []`;
+exports[`ItemChooser #setupItemSections for picker renders sections 1`] = `Array []`;
 
-exports[`ItemChooserScreen #setupItemSections for picker renders suggested items when search term supplied 1`] = `
+exports[`ItemChooser #setupItemSections for picker renders suggested items when search term supplied 1`] = `
 Array [
   Object {
     "data": Array [
@@ -161,7 +161,7 @@ Array [
 ]
 `;
 
-exports[`ItemChooserScreen full renders as expected 1`] = `
+exports[`ItemChooser full renders as expected 1`] = `
 <RCTSafeAreaView>
   <View>
     <View>
@@ -223,7 +223,7 @@ exports[`ItemChooserScreen full renders as expected 1`] = `
 </RCTSafeAreaView>
 `;
 
-exports[`ItemChooserScreen shallow renders as expected 1`] = `
+exports[`ItemChooser shallow renders as expected 1`] = `
 <SafeAreaView>
   <ItemChooserListHeader
     ItemRowComponent={[Function]}

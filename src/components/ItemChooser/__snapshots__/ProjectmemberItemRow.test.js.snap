@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders as expected 1`] = `
+<View>
+  <Avatar
+    avatarUrl={undefined}
+    dimension={30}
+  />
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+  />
+  <RoundCheckbox
+    backgroundColor="#0DC39F"
+    borderColor="grey"
+    checked={false}
+    icon="ios-checkmark"
+    iconColor="white"
+    onValueChange={[Function]}
+    size={24}
+  />
+</View>
+`;

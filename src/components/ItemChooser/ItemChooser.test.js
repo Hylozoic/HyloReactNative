@@ -22,7 +22,7 @@ const testProps = {
   initialItems: []
 }
 
-describe('ItemChooserScreen', () => {
+describe('ItemChooser', () => {
   it('shallow renders as expected', () => {
     const renderer = new ReactShallowRenderer()
     renderer.render(<ItemChooser {...testProps} />)
