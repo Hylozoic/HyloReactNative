@@ -3,9 +3,15 @@
 exports[`mapDispatchToProps matches the last snapshot 1`] = `
 Object {
   "createMessage": [Function],
+  "fetchRecentContacts": [Function],
   "findOrCreateThread": [Function],
   "showLoadingModal": [Function],
 }
 `;
 
-exports[`mapStateToProps returns the right keys and gets the pending values 1`] = `Object {}`;
+exports[`mapStateToProps returns the right keys and gets the pending values 1`] = `
+Object {
+  "pending": false,
+  "recentContacts": Array [],
+}
+`;

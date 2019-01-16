@@ -6,12 +6,6 @@ const row = {
 }
 
 export default {
-  scrollContainer: {
-    marginTop: 15,
-    paddingBottom: 100,
-    flex: 1,
-    padding: 10
-  },
   row,
   settingsRow: {
     marginHorizontal: 17
@@ -25,6 +19,7 @@ export default {
   },
   noBlockedUsersMessage: {
     color: rhino30,
+    marginTop: 10,
     marginLeft: 20
   },
   nameRow: {

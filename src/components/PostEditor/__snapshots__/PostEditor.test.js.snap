@@ -63,7 +63,7 @@ exports[`PostEditor renders a new editor correctly 1`] = `
       <SectionLabel>
         Details
       </SectionLabel>
-      <InlineEditor
+      <withNavigation(InlineEditor)
         autoGrow={false}
         communityId={undefined}
         containerStyle={
@@ -467,7 +467,7 @@ exports[`PostEditor renders with a post 1`] = `
       <SectionLabel>
         Details
       </SectionLabel>
-      <InlineEditor
+      <withNavigation(InlineEditor)
         autoGrow={false}
         communityId={undefined}
         containerStyle={

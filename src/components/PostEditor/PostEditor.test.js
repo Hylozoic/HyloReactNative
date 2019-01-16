@@ -78,7 +78,7 @@ describe('PostEditor', () => {
         <PostEditor
           isFocused
           shouldShowTypeChooser
-          fetchDetailsAndMembers={jest.fn()}
+          fetchPost={jest.fn()}
           navigation={navigation}
           post={mockPost}
           save={save} />
@@ -117,7 +117,7 @@ describe('PostEditor', () => {
     const renderer = TestRenderer.create(
       <Provider store={createMockStore()}>
         <PostEditor
-          fetchDetailsAndMembers={jest.fn()}
+          fetchPost={jest.fn()}
           isFocused
           save={save}
           communityIds={[1]}
@@ -143,7 +143,7 @@ describe('PostEditor', () => {
     const renderer = TestRenderer.create(
       <Provider store={createMockStore()}>
         <PostEditor
-          fetchDetailsAndMembers={jest.fn()}
+          fetchPost={jest.fn()}
           isFocused
           save={save}
           communityIds={[1]}
@@ -166,7 +166,7 @@ describe('PostEditor', () => {
       <Provider store={createMockStore()}>
         <PostEditor
           isFocused
-          fetchDetailsAndMembers={jest.fn()}
+          fetchPost={jest.fn()}
           save={save}
           communityIds={[1]}
           navigation={navigation}
@@ -192,7 +192,7 @@ describe('PostEditor', () => {
       <Provider store={createMockStore()}>
         <PostEditor
           isFocused
-          fetchDetailsAndMembers={jest.fn()}
+          fetchPost={jest.fn()}
           save={save}
           communityIds={[1]}
           navigation={navigation}
@@ -211,7 +211,7 @@ describe('PostEditor', () => {
       <Provider store={createMockStore()}>
         <PostEditor
           isFocused
-          fetchDetailsAndMembers={jest.fn()}
+          fetchPost={jest.fn()}
           navigation={navigation}
           imageUrls={['http://foo.com/foo.png']}
           post={mockPost} />
@@ -235,7 +235,7 @@ describe('PostEditor', () => {
       <Provider store={createMockStore()}>
         <PostEditor
           isFocused
-          fetchDetailsAndMembers={jest.fn()}
+          fetchPost={jest.fn()}
           navigation={navigation}
           imageUrls={['http://foo.com/foo.png']}
           post={mockPost} />
@@ -257,7 +257,7 @@ describe('PostEditor', () => {
         <PostEditor
           isFocused
           upload={upload}
-          fetchDetailsAndMembers={jest.fn()}
+          fetchPost={jest.fn()}
           fileUrls={[]}
           navigation={navigation}
           imageUrls={['http://foo.com/foo.png']}
@@ -290,7 +290,7 @@ describe('PostEditor', () => {
           isFocused
           upload={upload}
           fileUrls={[]}
-          fetchDetailsAndMembers={jest.fn()}
+          fetchPost={jest.fn()}
           navigation={navigation}
           imageUrls={['http://foo.com/foo.png']}
           post={mockPost} />
@@ -314,7 +314,7 @@ describe('PostEditor', () => {
       <Provider store={createMockStore()}>
         <PostEditor
           isFocused
-          fetchDetailsAndMembers={jest.fn()}
+          fetchPost={jest.fn()}
           navigation={navigation}
           postId={mockPost.id}
           fileUrls={['http://foo.com/foo.pdf']}
@@ -340,7 +340,7 @@ describe('PostEditor', () => {
     const renderer = TestRenderer.create(
       <Provider store={createMockStore()}>
         <PostEditor
-          fetchDetailsAndMembers={jest.fn()}
+          fetchPost={jest.fn()}
           isFocused
           save={save}
           communityIds={[1]}
@@ -360,7 +360,7 @@ describe('PostEditor', () => {
     const renderer = TestRenderer.create(
       <Provider store={createMockStore()}>
         <PostEditor
-          fetchDetailsAndMembers={jest.fn()}
+          fetchPost={jest.fn()}
           isFocused
           save={save}
           communityIds={[1]}

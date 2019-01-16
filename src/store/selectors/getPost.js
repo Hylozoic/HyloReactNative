@@ -19,7 +19,7 @@ export const presentPost = (post, communityId) => {
   const pinned = postMembership && postMembership.pinned
   return {
     ...post.ref,
-    creator: post.creator.ref,
+    creator: post.creator && post.creator.ref,
     linkPreview: post.linkPreview,
     commenters: post.commenters.toRefArray(),
     communities: post.communities.toRefArray(),

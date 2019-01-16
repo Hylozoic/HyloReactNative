@@ -1,6 +1,6 @@
 import React from 'react'
-import { Image, View, Text, ScrollView, TouchableOpacity, Alert } from 'react-native'
-import Loading from '../Loading'
+import { View, Text, ScrollView, TouchableOpacity, Alert } from 'react-native'
+import { LoadingScreen } from '../Loading'
 import styles from './BlockedUsers.styles'
 import header from 'util/header'
 
@@ -16,16 +16,16 @@ export default class BlockedUsers extends React.Component {
 
   unBlockUser = userId => () => this.props.unBlockUser(userId)
 
-  render () {    
+  render () {
     const { blockedUsers, loading } = this.props
-    
-    if (loading) return <ScrollView contentContainerStyle={styles.scrollContainer}>
-      <Loading />
-    </ScrollView>
 
-    if (!blockedUsers || blockedUsers.length < 1) return <ScrollView contentContainerStyle={styles.scrollContainer}>
-      <Text style={styles.noBlockedUsersMessage}>No members currently blocked.</Text>
-    </ScrollView>
+    if (loading) return <LoadingScreen />
+
+    if (!blockedUsers || blockedUsers.length < 1) {
+      return <ScrollView contentContainerStyle={styles.scrollContainer}>
+        <Text style={styles.noBlockedUsersMessage}>No members currently blocked.</Text>
+      </ScrollView>
+    }
 
     return <ScrollView contentContainerStyle={styles.scrollContainer}>
       {blockedUsers.map(blockedUser =>

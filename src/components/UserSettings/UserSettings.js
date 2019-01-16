@@ -5,6 +5,7 @@ import validator from 'validator'
 import prompt from 'react-native-prompt-android'
 import { LoginManager, AccessToken } from 'react-native-fbsdk'
 import KeyboardFriendlyView from '../KeyboardFriendlyView'
+import confirmDiscardChanges from '../../util/confirmDiscardChanges'
 import Loading from '../Loading'
 import Button from '../Button'
 import SettingControl from '../SettingControl'
@@ -132,17 +133,10 @@ export default class UserSettings extends React.Component {
   }
 
   confirmLeave = (onLeave) => {
-    if (this.state.changed) {
-      Alert.alert(
-        'You have unsaved changes',
-        'Are you sure you want to discard your changes?',
-        [
-          {text: 'Discard', onPress: onLeave},
-          {text: 'Continue Editing', style: 'cancel'}
-        ])
-    } else {
-      onLeave()
-    }
+    confirmDiscardChanges({
+      hasChanges: this.state.changed,
+      onDiscard: onLeave
+    })
   }
 
   cancel = () => {
@@ -169,15 +163,15 @@ export default class UserSettings extends React.Component {
   loginWithFacebook = onLogin => {
     const { loginWithFacebook } = this.props
     return LoginManager.logInWithReadPermissions(permissions)
-    .then(result => {
-      if (result.isCancelled) return onLogin(false)
-      return AccessToken.getCurrentAccessToken()
-      .then(data => loginWithFacebook(data.accessToken.toString()))
-      .then(() => onLogin(true))
-    })
-    .catch(() => {
-      onLogin(false)
-    })
+      .then(result => {
+        if (result.isCancelled) return onLogin(false)
+        return AccessToken.getCurrentAccessToken()
+          .then(data => loginWithFacebook(data.accessToken.toString()))
+          .then(() => onLogin(true))
+      })
+      .catch(() => {
+        onLogin(false)
+      })
   }
 
   render () {

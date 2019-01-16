@@ -1,15 +1,26 @@
 import React from 'react'
-import InlineEditor, { SubmitButton, mentionsToHtml, createMentionTag, createTopicTag, getMarkup, toHtml } from './InlineEditor'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
-import { SearchType } from '../Search'
 import TestRenderer from 'react-test-renderer'
+import {
+  InlineEditor,
+  SubmitButton,
+  mentionsToHtml,
+  createMentionTag,
+  createTopicTag,
+  toHtml
+} from './InlineEditor'
 
 const props = {
   onChange: jest.fn(),
   onSubmit: jest.fn(),
   value: 'some text',
   placeholder: `Place Holder`,
-  communityId: 10
+  communityId: 10,
+  navigation: {
+    setParams: jest.fn(),
+    state: {params: {}},
+    getParam: jest.fn()
+  }
 }
 
 it('renders as expected', () => {
@@ -24,23 +35,20 @@ it('handleSubmit', () => {
   expect(props.onSubmit).toHaveBeenCalledWith(props.value)
 })
 
-describe('insertPicked', () => {
-  it('inserts the markup for a person', () => {
+describe('mentions and topics', () => {
+  it('inserts the markup for a mention', () => {
     const instance = TestRenderer.create(<InlineEditor {...props} />).getInstance()
-    instance.setState({pickerType: SearchType.PERSON})
     instance.handleSelectionChange({ nativeEvent: { selection: {start: 5, end: 5} } })
-    instance.insertPicked({id: 333, name: 'sdfdfz'})
+    instance.insertMention({ id: 333, name: 'sdfdfz' })
     expect(props.onChange).toHaveBeenCalledWith('some [sdfdfz:333] text')
-    expect(instance.state.showPicker).toBeFalsy()
   })
 
-  it('calls onInsertTopic for a topic', () => {
+  it('inserts the markup for a topic', () => {
     const onInsertTopic = jest.fn()
     const instance = TestRenderer.create(<InlineEditor {...props} onInsertTopic={onInsertTopic} />).getInstance()
     const topic = {id: 333, name: 'sdfdfz'}
-    instance.setState({pickerType: SearchType.TOPIC})
-    instance.insertPicked(topic)
-    expect(onInsertTopic).toHaveBeenCalledWith([topic])
+    instance.insertTopic(topic)
+    expect(props.onChange).toHaveBeenCalledWith('#sdfdfz some text')
   })
 })
 
@@ -48,12 +56,6 @@ it('handleInputFocus', () => {
   const instance = TestRenderer.create(<InlineEditor {...props} />).getInstance()
   instance.handleInputFocus()
   expect(instance.state.isFocused).toBeTruthy()
-})
-
-it('handleInputFocus', () => {
-  const instance = TestRenderer.create(<InlineEditor {...props} />).getInstance()
-  instance.cancelPicker()
-  expect(instance.state.showPicker).toBeFalsy()
 })
 
 it('handleInputBlur', () => {
@@ -71,11 +73,6 @@ it('handleInputBlur', () => {
 it('toHtml', () => {
   const text = "hello world [tom:3344] [:5] #adlkjdf here's"
   expect(toHtml(text)).toEqual(`hello world <a href="#" data-entity-type="mention" data-user-id="3344">tom</a> [:5] #adlkjdf here&#39;s`)
-})
-
-it('getMarkup', () => {
-  expect(getMarkup(SearchType.PERSON, {id: 30, name: 'tom'})).toEqual('[tom:30]')
-  expect(getMarkup(SearchType.TOPIC, {name: 'mytopic'})).toEqual('#mytopic')
 })
 
 it('createTopicTag', () => {

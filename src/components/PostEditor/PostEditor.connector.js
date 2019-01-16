@@ -1,12 +1,13 @@
 import { connect } from 'react-redux'
 import {
-  createPost, createProject, FETCH_DETAILS_AND_MEMBERS,
-  fetchPostDetailsAndMembers,
+  createPost, createProject,
   updatePost, MAX_TITLE_LENGTH
 } from './PostEditor.store'
-import { createTopicTag } from '../Editor/Editor'
 import { get, isEmpty } from 'lodash/fp'
+import { createTopicTag } from '../InlineEditor/InlineEditor'
+import fetchPost from '../../store/actions/fetchPost'
 import { getPresentedPost } from '../../store/selectors/getPost'
+import isPendingFor from '../../store/selectors/isPendingFor'
 import getCanModerate from '../../store/selectors/getCanModerate'
 import { mapWhenFocused } from 'util/connector'
 import upload from 'store/actions/upload'
@@ -20,7 +21,7 @@ export function mapStateToProps (state, props) {
   const selectedTopicName = get('navigation.state.params.topicName', props)
   const selectedTopicTag = createTopicTag({name: selectedTopicName})
   const defaultPost = selectedTopicName
-    ? {detailsText: selectedTopicTag, communityIds: [communityId]}
+    ? {detailsText: selectedTopicTag + ' ', communityIds: [communityId]}
     : {}
   const postId = getPostId(state, props)
   const post = getPresentedPost(state, {id: postId})
@@ -39,7 +40,7 @@ export function mapStateToProps (state, props) {
     fileUrls: post ? post.fileUrls : [],
     isNewPost: isEmpty(postId),
     isProject,
-    pendingDetailsText: state.pending[FETCH_DETAILS_AND_MEMBERS],
+    pendingDetailsText: isPendingFor(fetchPost, state),
     shouldShowTypeChooser
   }
 }
@@ -78,7 +79,7 @@ export function mapDispatchToProps (dispatch, props) {
         })
     },
     upload: (type, id, file) => dispatch(upload(type, id, file)),
-    fetchDetailsAndMembers: () => dispatch(fetchPostDetailsAndMembers(postId))
+    fetchPost: () => dispatch(fetchPost(postId))
   }
 }
 

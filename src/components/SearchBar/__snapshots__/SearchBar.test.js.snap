@@ -1,0 +1,82 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ItemChooserScreen renders as expected (without value) 1`] = `
+<View>
+  <Icon
+    name="Search"
+  />
+  <TextInput
+    allowFontScaling={true}
+    autoCapitalize="none"
+    autoCorrect={false}
+    autoFocus={false}
+    editable={true}
+    onChangeText={undefined}
+    onFocus={undefined}
+    placeholder={undefined}
+    underlineColorAndroid="transparent"
+    value=""
+  />
+</View>
+`;
+
+exports[`ItemChooserScreen renders as expected when loading 1`] = `
+<View>
+  <Icon
+    name="Search"
+  />
+  <TextInput
+    allowFontScaling={true}
+    autoCapitalize="none"
+    autoCorrect={false}
+    autoFocus={false}
+    editable={true}
+    onChangeText={undefined}
+    onFocus={undefined}
+    placeholder={undefined}
+    underlineColorAndroid="transparent"
+    value=""
+  />
+  <Loading />
+</View>
+`;
+
+exports[`ItemChooserScreen renders as expected with value 1`] = `
+<View>
+  <Icon
+    name="Search"
+  />
+  <TextInput
+    allowFontScaling={true}
+    autoCapitalize="none"
+    autoCorrect={false}
+    autoFocus={false}
+    editable={true}
+    onChangeText={undefined}
+    onFocus={undefined}
+    placeholder={undefined}
+    underlineColorAndroid="transparent"
+    value="Anything"
+  />
+</View>
+`;
+
+exports[`ItemChooserScreen renders with placeholder 1`] = `
+<View>
+  <Icon
+    name="Search"
+  />
+  <TextInput
+    allowFontScaling={true}
+    autoCapitalize="none"
+    autoCorrect={false}
+    autoFocus={false}
+    editable={true}
+    onChangeText={undefined}
+    onFocus={undefined}
+    placeholder="Search anything"
+    underlineColorAndroid="transparent"
+    value=""
+  />
+</View>
+`;

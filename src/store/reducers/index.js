@@ -3,6 +3,7 @@ import resetStore from './resetStore'
 import ormReducer from './ormReducer'
 import pending from './pending'
 import queryResults from './queryResults'
+import querySearchTerms from './querySearchTerms'
 import currentNetworkAndCommunity from './currentNetworkAndCommunity'
 import sessionReducer from './sessionReducer'
 import mixpanelReducer from './mixpanel'
@@ -15,9 +16,7 @@ import Members from '../../components/Tabs/Members/Members.store'
 import ModeratorSettings from '../../components/ModeratorSettings/ModeratorSettings.store'
 import NewMessage from '../../components/NewMessage/NewMessage.store'
 import PeopleTyping from '../../components/PeopleTyping/PeopleTyping.store'
-import PeopleChooser from '../../components/PeopleChooser/PeopleChooser.store'
 import PostEditor from '../../components/PostEditor/PostEditor.store'
-import Search from '../../components/Search/Search.store'
 import SkillEditor from '../../components/SkillEditor/SkillEditor.store'
 import SignupFlow from '../../components/SignupFlow/SignupFlow.store'
 import SocketListener from '../../components/SocketListener/SocketListener.store'
@@ -30,6 +29,7 @@ export const combinedReducers = combineReducers({
   orm: ormReducer,
   pending,
   queryResults,
+  querySearchTerms,
   currentNetworkAndCommunity,
   session: sessionReducer,
   mixpanel: mixpanelReducer,
@@ -42,9 +42,7 @@ export const combinedReducers = combineReducers({
   ModeratorSettings,
   NewMessage,
   PeopleTyping,
-  PeopleChooser,
   PostEditor,
-  Search,
   SearchPage,
   SignupFlow,
   SkillEditor,

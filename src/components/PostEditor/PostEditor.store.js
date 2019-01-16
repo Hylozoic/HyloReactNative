@@ -10,8 +10,6 @@ export const CREATE_PROJECT = `${MODULE_NAME}/CREATE_PROJECT`
 export const UPDATE_POST = `${MODULE_NAME}/UPDATE_POST`
 export const UPDATE_POST_PENDING = `${UPDATE_POST}_PENDING`
 
-export const FETCH_DETAILS_AND_MEMBERS = `${MODULE_NAME}/FETCH_DETAILS_AND_MEMBERS`
-
 export const MAX_TITLE_LENGTH = 100
 
 export const projectEndpointFragment = `createProject(data: {
@@ -81,7 +79,7 @@ export function createPost (post) {
     },
     meta: {
       extractModel: 'Post',
-      analytics:{
+      analytics: {
         eventName: AnalyticsEvents.POST_CREATED,
         detailsLength: textLength(preprocessedDetails),
         isAnnouncement: sendAnnouncement
@@ -213,35 +211,6 @@ export function updatePost (post) {
         eventName: AnalyticsEvents.POST_UPDATED,
         detailsLength: textLength(preprocessedDetails)
       }
-    }
-  }
-}
-
-export function fetchPostDetailsAndMembers (id) {
-  return {
-    type: FETCH_DETAILS_AND_MEMBERS,
-    graphql: {
-      query: `query ($id: ID) {
-        post(id: $id) {
-          id
-          detailsText
-          members {
-            total
-            hasMore
-            items {
-              id
-              name
-              avatarUrl
-            }
-          }
-        }
-      }`,
-      variables: {
-        id
-      }
-    },
-    meta: {
-      extractModel: 'Post'
     }
   }
 }

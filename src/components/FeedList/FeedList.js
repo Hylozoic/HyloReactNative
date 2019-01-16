@@ -1,12 +1,12 @@
 import React from 'react'
 import { FlatList, Text, View } from 'react-native'
+import { find, get, isEmpty, isFunction, includes } from 'lodash/fp'
 import { didPropsChange } from 'util/index'
 import styles from './FeedList.styles'
 import PostRow from './PostRow'
 import Loading from '../Loading'
 import Icon from '../Icon'
 import PopupMenuButton from '../PopupMenuButton'
-import { find, get, isEmpty, includes } from 'lodash/fp'
 export default class FeedList extends React.Component {
   fetchOrShowCached () {
     const { hasMore, postIds, fetchPosts, pending } = this.props
@@ -77,7 +77,8 @@ export default class FeedList extends React.Component {
   render () {
     const {
       postIds,
-      pendingRefresh
+      pendingRefresh,
+      isProjectFeed
     } = this.props
 
     return <View style={styles.container}>
@@ -96,6 +97,7 @@ export default class FeedList extends React.Component {
             setFilter={this.setFilter}
             setSort={this.setSort}
             pending={this.props.pending}
+            hideListFilter={isProjectFeed}
           />
         </View>}
         ListFooterComponent={this.props.pending
@@ -112,20 +114,22 @@ export const filterOptions = [
   {id: 'offer', label: 'Offers'}
 ]
 
-const sortOptions = [
-  {id: 'updated', label: 'Latest'},
-  {id: 'votes', label: 'Popular'}
-]
+// const sortOptions = [
+//   {id: 'updated', label: 'Latest'},
+//   {id: 'votes', label: 'Popular'}
+// ]
 
 const optionText = (id, options) => {
   const option = find(o => o.id === id, options) || options[0]
   return option.label
 }
 
-export function ListControls ({ filter: listFilter, sortBy, setFilter, setSort }) {
-  return <View style={styles.listControls}>
-    <ListControl selected={listFilter} onChange={setFilter} options={filterOptions} />
-    <ListControl selected={sortBy} onChange={setSort} options={sortOptions} />
+export function ListControls ({ filter: listFilter, sortBy, setFilter, setSort, hideListFilter }) {
+  return <View style={[styles.listControls, hideListFilter ? styles.listControlsSingleItem : {}]}>
+    {!hideListFilter &&
+      <ListControl selected={listFilter} onChange={setFilter} options={filterOptions} />}
+    {/* TODO: disabled  */}
+    {/* <ListControl selected={sortBy} onChange={setSort} options={sortOptions} /> */}
   </View>
 }
 

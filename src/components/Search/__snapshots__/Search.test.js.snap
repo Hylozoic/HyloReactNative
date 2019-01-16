@@ -1,3 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`correctly sets a placeholder 1`] = `"Search for a someType by name"`;

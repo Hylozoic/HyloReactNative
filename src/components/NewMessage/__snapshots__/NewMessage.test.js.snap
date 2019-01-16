@@ -2,69 +2,22 @@
 
 exports[`NewMessage renders correctly 1`] = `
 <KeyboardFriendlyView
-  behavior="height"
+  behavior="padding"
   keyboardVerticalOffset={64}
 >
-  <Connect(PeopleChooser)
-    addParticipant={[Function]}
-    createMessage={[Function]}
-    currentUser={
-      Object {
-        "id": 1,
-      }
-    }
-    participants={
-      Array [
-        Object {
-          "id": 10,
-        },
-        Object {
-          "id": 11,
-        },
-        Object {
-          "id": 12,
-        },
-      ]
-    }
-    pending={
-      Object {
-        "all": false,
-        "recent": true,
-        "suggestions": true,
-      }
-    }
-    personInputText=""
-    recentContacts={
-      Array [
-        Object {
-          "id": 1,
-        },
-        Object {
-          "id": 2,
-        },
-        Object {
-          "id": 3,
-        },
-      ]
-    }
-    removeParticipant={[Function]}
-    setParticipantInput={[Function]}
-    showRecentContacts={true}
-    suggestions={
-      Array [
-        Object {
-          "id": 7,
-        },
-        Object {
-          "id": 8,
-        },
-        Object {
-          "id": 9,
-        },
-      ]
-    }
-    updatePeople={[Function]}
-  />
+  <ScrollView>
+    <TouchableOpacity
+      activeOpacity={0.2}
+      onPress={[Function]}
+    />
+    <View>
+      <Button
+        onPress={[Function]}
+      >
+        Add Participant
+      </Button>
+    </View>
+  </ScrollView>
   <MessageInput
     emptyParticipants={true}
     multiline={true}
@@ -77,69 +30,22 @@ exports[`NewMessage renders correctly 1`] = `
 
 exports[`NewMessage renders correctly 2`] = `
 <KeyboardFriendlyView
-  behavior="height"
+  behavior="padding"
   keyboardVerticalOffset={64}
 >
-  <Connect(PeopleChooser)
-    addParticipant={[Function]}
-    createMessage={[Function]}
-    currentUser={
-      Object {
-        "id": 1,
-      }
-    }
-    participants={
-      Array [
-        Object {
-          "id": 10,
-        },
-        Object {
-          "id": 11,
-        },
-        Object {
-          "id": 12,
-        },
-      ]
-    }
-    pending={
-      Object {
-        "all": false,
-        "recent": true,
-        "suggestions": true,
-      }
-    }
-    personInputText="Jon"
-    recentContacts={
-      Array [
-        Object {
-          "id": 1,
-        },
-        Object {
-          "id": 2,
-        },
-        Object {
-          "id": 3,
-        },
-      ]
-    }
-    removeParticipant={[Function]}
-    setParticipantInput={[Function]}
-    showRecentContacts={true}
-    suggestions={
-      Array [
-        Object {
-          "id": 7,
-        },
-        Object {
-          "id": 8,
-        },
-        Object {
-          "id": 9,
-        },
-      ]
-    }
-    updatePeople={[Function]}
-  />
+  <ScrollView>
+    <TouchableOpacity
+      activeOpacity={0.2}
+      onPress={[Function]}
+    />
+    <View>
+      <Button
+        onPress={[Function]}
+      >
+        Add Participant
+      </Button>
+    </View>
+  </ScrollView>
   <MessageInput
     emptyParticipants={true}
     multiline={true}

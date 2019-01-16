@@ -1,51 +1,50 @@
 import React from 'react'
-import { Text, View, TextInput, TouchableOpacity, Modal, ActivityIndicator } from 'react-native'
-import Search, { SearchType } from '../Search'
-import styles from './InlineEditor.styles'
-import { rhino30 } from 'style/colors'
+import {
+  Text,
+  View,
+  TextInput,
+  TouchableOpacity,
+  ActivityIndicator
+} from 'react-native'
+import { withNavigation } from 'react-navigation'
 import { trim, isEmpty, get, flow } from 'lodash/fp'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import { htmlEncode } from 'js-htmlencode'
+import { rhino30 } from 'style/colors'
+import styles from './InlineEditor.styles'
+// Mentions
 import { MENTION_ENTITY_TYPE } from 'hylo-utils/constants'
-
-const INSERT_MENTION = 'Hylo/INSERT_MENTION'
-const INSERT_TOPIC = 'Hylo/INSERT_TOPIC'
+import scopedFetchPeopleAutocomplete from '../../store/actions/scopedFetchPeopleAutocomplete'
+import scopedGetPeopleAutocomplete from '../../store/selectors/scopedGetPeopleAutocomplete'
+import PersonPickerItemRow from '../ItemChooser/PersonPickerItemRow'
+// Topics
+import fetchTopicsForCommunityId from '../../store/actions/fetchTopicsForCommunityId'
+import getTopicsForAutocompleteWithNew from '../../store/selectors/getTopicsForAutocompleteWithNew'
+import TopicRow from '../TopicList/TopicRow'
 
 const minTextInputHeight = 40
 
-export default class InlineEditor extends React.PureComponent {
+export class InlineEditor extends React.PureComponent {
   constructor (props) {
     super(props)
     this.state = {
-      showPicker: false,
       isFocused: false,
       pickerType: null,
       height: minTextInputHeight
     }
   }
 
-  startPicker = action => {
-    let pickerType = false
-    switch (action) {
-      case INSERT_MENTION:
-        pickerType = SearchType.PERSON
-        break
-      case INSERT_TOPIC:
-        pickerType = SearchType.TOPIC
-        break
-    }
-
-    if (pickerType) {
-      this.setState({ showPicker: true, pickerType })
-    }
+  insertTopic = topic => {
+    const markup = createTopicTag(topic)
+    return this.insertPicked(topic, markup, this.props.onInsertTopic)
   }
 
-  cancelPicker = () => {
-    this.setState({showPicker: false})
+  insertMention = person => {
+    const markup = createMentionTag(person)
+    return this.insertPicked(person, markup)
   }
 
-  insertPicked = choice => {
-    const markup = getMarkup(this.state.pickerType, choice)
+  insertPicked = (choice, markup, onInsertCallback = undefined) => {
     const value = this.props.value || ''
     const position = get('selection.start', this.state) || 0
 
@@ -61,15 +60,13 @@ export default class InlineEditor extends React.PureComponent {
     // Append the second part of the value (after the cursor)
     newValue += secondSlice
 
-    this.props.onChange(newValue)    
+    this.props.onChange(newValue)
 
-    if (this.state.pickerType === SearchType.TOPIC) {
-      this.props.onInsertTopic([choice])
-    }
+    if (onInsertCallback) onInsertCallback([choice])
 
     // We use a timeout since the onChange needs to propagate the new value change before setting the new selection
     setTimeout(() => {
-      this.setState({showPicker: false, selection: {start: newSelectionStart, end: newSelectionStart}})
+      this.setState({selection: {start: newSelectionStart, end: newSelectionStart}})
       this.editorInput.focus()
     }, 100)
   }
@@ -91,21 +88,45 @@ export default class InlineEditor extends React.PureComponent {
 
   handleSelectionChange = ({ nativeEvent: { selection } }) => this.setState({ selection })
 
+  openPersonPicker = () => {
+    const { navigation } = this.props
+    const screenTitle = 'Mention'
+    navigation.navigate('ItemChooserScreen', {
+      screenTitle,
+      ItemRowComponent: PersonPickerItemRow,
+      pickItem: this.insertMention,
+      searchPlaceholder: 'Type here to search for people',
+      fetchSearchSuggestions: scopedFetchPeopleAutocomplete(screenTitle),
+      getSearchSuggestions: scopedGetPeopleAutocomplete(screenTitle)
+    })
+  }
+
+  openTopicsPicker = () => {
+    const { navigation } = this.props
+    const screenTitle = 'Pick a Topic'
+    navigation.navigate('ItemChooserScreen', {
+      screenTitle,
+      ItemRowComponent: TopicRow,
+      pickItem: this.insertTopic,
+      searchPlaceholder: 'Search for a topic by name',
+      fetchSearchSuggestions: fetchTopicsForCommunityId(this.props.communityId),
+      getSearchSuggestions: getTopicsForAutocompleteWithNew
+    })
+  }
+
   render () {
     const {
       placeholder = 'Details',
       editable = true,
       value,
-      communityId,
       onChange,
       onSubmit,
       submitting = false,
       containerStyle,
       inputStyle
     } = this.props
-
-    const { showPicker, isFocused, pickerType, height, selection } = this.state
-
+    const { isFocused, height, selection } = this.state
+    const hitSlop = { top: 7, bottom: 7, left: 7, right: 7 }
     // Calculates a height based on textInput content size with the following constraint: 40 < height < maxHeight
     const calculatedHeight = Math.round(Math.min(Math.max((isEmpty(value) ? minTextInputHeight : height) + (isFocused ? 45 : 0), minTextInputHeight), 190))
 
@@ -132,30 +153,20 @@ export default class InlineEditor extends React.PureComponent {
       </View>
       {isFocused && <View style={styles.toolbar}>
         <View style={{flex: 1, flexDirection: 'row'}}>
-          <TouchableOpacity hitSlop={{top: 7, bottom: 7, left: 7, right: 7}} onPress={() => this.startPicker(INSERT_MENTION)}>
+          <TouchableOpacity hitSlop={hitSlop} onPress={this.openPersonPicker}>
             <Text style={styles.toolbarButton}>@</Text>
           </TouchableOpacity>
-          <TouchableOpacity hitSlop={{top: 7, bottom: 7, left: 7, right: 7}} onPress={() => this.startPicker(INSERT_TOPIC)}>
+          <TouchableOpacity hitSlop={hitSlop} onPress={this.openTopicsPicker}>
             <Text style={styles.toolbarButton}>#</Text>
           </TouchableOpacity>
         </View>
         {onSubmit && <SubmitButton submitting={submitting} active={!!isFocused} handleSubmit={this.handleSubmit} />}
       </View>}
-      {showPicker && <Modal
-        animationType='slide'
-        transparent={false}
-        visible={showPicker}
-        onRequestClose={() => {
-          this.setState({showPicker: false})
-        }}>
-        <Search style={styles.search} type={pickerType}
-          communityId={communityId}
-          onSelect={this.insertPicked}
-          onCancel={this.cancelPicker} />
-      </Modal>}
     </View>
   }
 }
+
+export default withNavigation(InlineEditor)
 
 export function SubmitButton ({submitting, active, handleSubmit}) {
   if (submitting) {
@@ -172,19 +183,6 @@ export const createMentionTag = ({ id, name }) =>
 
 export const createTopicTag = topic =>
   `#${topic.name}`
-
-export function getMarkup (action, choice) {
-  let markup
-  switch (action) {
-    case SearchType.PERSON:
-      markup = createMentionTag(choice)
-      break
-    case SearchType.TOPIC:
-      markup = createTopicTag(choice)
-      break
-  }
-  return markup
-}
 
 export const mentionsToHtml = (text) => {
   const re = /\[([^[]+):(\d+)\]/gi
