@@ -40,7 +40,7 @@ export function BlockedUserRow ({ user, unBlockUser }) {
       <Text style={styles.linkText}>{user.name}</Text>
       <TouchableOpacity onPress={unBlockUser} style={styles.unBlockButton}>
         <Text style={styles.unBlockButtonText}>Unblock</Text>
-      </TouchableOpacity>  
+      </TouchableOpacity>
     </View>
   </View>
 }

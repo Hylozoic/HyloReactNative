@@ -26,8 +26,7 @@ const styles = {
     justifyContent: 'flex-start'
   },
   personAvatar: {
-    marginRight: 20,
-    width: 20
+    marginRight: 12
   },
   personName: {
     fontFamily: 'Circular-Bold',
