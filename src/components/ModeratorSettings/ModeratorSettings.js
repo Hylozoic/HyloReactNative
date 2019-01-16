@@ -50,7 +50,7 @@ export default class ModeratorSettings extends Component {
 
   openPersonPicker = () => {
     const { navigation } = this.props
-    const screenTitle = 'Mention'
+    const screenTitle = 'Add Moderator'
     navigation.navigate('ItemChooserScreen', {
       screenTitle,
       ItemRowComponent: PersonPickerItemRow,
