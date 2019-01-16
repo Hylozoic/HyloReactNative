@@ -10,7 +10,6 @@ export function mapStateToProps (state, props) {
   } = props
   const fetchSuggestionsActionType = fetchSearchSuggestions(undefined).type
   const searchTerm = getQuerySearchTermForScope(state, { scope: fetchSuggestionsActionType })
-  // const chosenItems = get('state.params.participants', props.navigation) || props.people || []
 
   return {
     searchTerm,
