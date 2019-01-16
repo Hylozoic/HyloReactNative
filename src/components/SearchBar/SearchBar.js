@@ -11,13 +11,13 @@ import Loading from '../Loading'
 
 export default function SearchBar ({
   value = '',
-  onChangeText = undefined,
-  placeholder = undefined,
-  onCancel = undefined,
-  onCancelText = undefined,
-  onFocus = undefined,
+  onChangeText,
+  placeholder,
+  onCancel,
+  onCancelText,
+  onFocus,
   autoFocus = false,
-  loading = undefined
+  loading
 }) {
   const Cancel = () => onCancelText
     ? <Text style={styles.cancelText}>{onCancelText}</Text>
