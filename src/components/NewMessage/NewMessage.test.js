@@ -33,7 +33,7 @@ describe('NewMessage', () => {
       navigation={{ setParams: () => {} }}
       pending={pending}
       fetchRecentContacts={() => {}}
-      />)
+    />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
@@ -52,7 +52,7 @@ describe('NewMessage', () => {
       createMessage={() => {}}
       navigation={{ setParams: () => {} }}
       pending={pending}
-      />)
+    />)
 
     const actual2 = renderer.getRenderOutput()
 
@@ -78,7 +78,7 @@ describe('NewMessage', () => {
       queryResults: {},
       pending: {}
     }
- 
+
     it('increments the view key', () => {
       const instance = ReactTestRenderer.create(
         <Provider store={createMockStore(state)}>
