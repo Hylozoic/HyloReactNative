@@ -22,9 +22,7 @@ export const fetchPeopleAutocompleteQuery =
 export default function scopedFetchPeopleAutocomplete (scope) {
   if (!scope) throw new Error('`scope` param is required for setting a querySearchTerm')
 
-  const queryResultsScopedType = scope
-    ? `${scope}/${FETCH_PEOPLE_AUTOCOMPLETE}`
-    : FETCH_PEOPLE_AUTOCOMPLETE
+  const queryResultsScopedType = `${scope}/${FETCH_PEOPLE_AUTOCOMPLETE}`
 
   return function (
     autocomplete,
