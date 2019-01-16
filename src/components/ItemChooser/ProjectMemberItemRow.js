@@ -8,7 +8,7 @@ import { propTypesForItemRowComponent } from '../ItemChooser'
 import Avatar from '../Avatar'
 import RoundCheckbox from 'rn-round-checkbox'
 
-export default function ProjectMemberItemChooserRow ({
+export default function ProjectMemberItemRow ({
   item: person,
   chosen = undefined,
   toggleChosen = undefined
@@ -23,7 +23,7 @@ export default function ProjectMemberItemChooserRow ({
       onValueChange={() => toggleChosen(person)} />
   </View>
 }
-ProjectMemberItemChooserRow.propTypes = propTypesForItemRowComponent
+ProjectMemberItemRow.propTypes = propTypesForItemRowComponent
 
 const styles = {
   personRow: {
