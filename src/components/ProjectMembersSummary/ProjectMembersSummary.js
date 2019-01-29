@@ -2,16 +2,16 @@ import React from 'react'
 import { Text, View, TouchableOpacity } from 'react-native'
 import { slice } from 'lodash/fp'
 import Avatar from '../Avatar'
-import { rhino30 } from '../../style/colors'
 
-export default function ProjectMembersSummary ({ members, style, onPress = undefined, dimension = 43 }) {
+export default function ProjectMembersSummary ({ members, textStyle, onPress = undefined, dimension = 43 }) {
   const membersTotal = members.length
-  const membersText = membersTotal
-    ? `${membersTotal} member${membersTotal === 1 ? '' : 's'}`
-    : 'Who is a part of this project?'
+
+  if (membersTotal < 1) return null
+
+  const membersText = `${membersTotal} member${membersTotal === 1 ? '' : 's'}`
   const RootElement = onPress ? TouchableOpacity : View
 
-  return <RootElement onPress={onPress} style={[style, styles.membersSummary]}>
+  return <RootElement onPress={onPress} style={[styles.membersSummary]}>
     {slice(0, 3, members).map((c, index) => {
       return <Avatar key={index}
         dimension={dimension}
@@ -20,7 +20,7 @@ export default function ProjectMembersSummary ({ members, style, onPress = undef
         hasOverlap={index > 0}
         zIndex={3 - index} />
     })}
-    <Text style={styles.membersText}>{membersText}</Text>
+    <Text style={textStyle}>{membersText}</Text>
   </RootElement>
 }
 
@@ -29,11 +29,5 @@ const styles = {
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center'
-  },
-  membersText: {
-    paddingLeft: 6,
-    color: rhino30,
-    fontSize: 13,
-    fontFamily: 'Circular-Book'
   }
 }

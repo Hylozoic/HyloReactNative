@@ -24,7 +24,10 @@ import ProjectMemberItemRow from '../ItemChooser/ProjectMemberItemRow'
 import fetchTopicsForCommunityId from '../../store/actions/fetchTopicsForCommunityId'
 import getTopicsForAutocompleteWithNew from '../../store/selectors/getTopicsForAutocompleteWithNew'
 import TopicRow from '../TopicList/TopicRow'
+// Community Chooser
+import CommunityChooserItemRow from '../ItemChooser/CommunityChooserItemRow'
 //
+import CommunitiesList from '../CommunitiesList'
 import ProjectMembersSummary from '../ProjectMembersSummary'
 import KeyboardFriendlyView from '../KeyboardFriendlyView'
 import Icon from '../Icon'
@@ -73,7 +76,7 @@ export default class PostEditor extends React.Component {
 
   constructor (props) {
     super(props)
-    const { post, communityIds, imageUrls, fileUrls, isProject } = props
+    const { post, imageUrls, fileUrls, isProject } = props
     this.props.navigation.setParams({
       confirmLeave: this.confirmLeave,
       saveChanges: this.saveChanges
@@ -81,7 +84,7 @@ export default class PostEditor extends React.Component {
     this.state = {
       title: get('title', post) || '',
       type: get('type', post) || (isProject ? 'project' : 'discussion'),
-      communityIds,
+      communities: get('communities', post),
       imageUrls,
       fileUrls,
       topics: get('topics', post) || [],
@@ -105,20 +108,21 @@ export default class PostEditor extends React.Component {
   _doSave = () => {
     const { navigation, save } = this.props
     const {
-      communityIds, fileUrls, imageUrls, title, detailsText,
-      topics, type, announcementEnabled, members
+      fileUrls, imageUrls, title, detailsText,
+      topics, type, announcementEnabled, members,
+      communities
     } = this.state
 
     const postData = {
-      communities: communityIds.map(id => ({id})),
+      type,
       details: toHtml(detailsText),
+      communities,
+      memberIds: members.map(m => m.id),
       fileUrls,
       imageUrls,
       title,
       sendAnnouncement: announcementEnabled,
-      topicNames: topics.map(t => t.name),
-      type,
-      memberIds: members.map(m => m.id)
+      topicNames: topics.map(t => t.name)
     }
 
     return save(postData)
@@ -170,6 +174,21 @@ export default class PostEditor extends React.Component {
     this.setState({
       fileUrls: uniq(this.state.fileUrls.concat(remote))
     })
+  }
+
+  addCommunity = community => {
+    this.setState(state => ({
+      communities: uniqBy(
+        c => c.id,
+        [...this.state.communities, community]
+      )
+    }))
+  }
+
+  removeCommunity = communityId => {
+    this.setState(state => ({
+      communities: this.state.communities.filter(c => c.id !== communityId)
+    }))
   }
 
   removeFile = url => {
@@ -287,20 +306,35 @@ export default class PostEditor extends React.Component {
       ItemRowComponent: TopicRow,
       pickItem: this.insertPickerTopic,
       searchPlaceholder: 'Search for a topic by name',
-      fetchSearchSuggestions: fetchTopicsForCommunityId(get('[0]', this.props.communityIds)),
+      // FIX: Will only find topics for first community
+      fetchSearchSuggestions: fetchTopicsForCommunityId(get('[0].id', this.state.communities)),
       getSearchSuggestions: getTopicsForAutocompleteWithNew
     })
   }
 
-  render () {
-    const { communityIds, canModerate, post, pendingDetailsText, shouldShowTypeChooser, isProject } = this.props
+  openCommunitiesEditor = () => {
+    const { navigation, communityOptions } = this.props
+    const screenTitle = 'Post in Communities'
+    navigation.navigate('ItemChooserScreen', {
+      screenTitle,
+      ItemRowComponent: CommunityChooserItemRow,
+      defaultSuggestedItems: communityOptions,
+      defaultSuggestedItemsLabel: 'Your Communities',
+      pickItem: this.addCommunity,
+      searchPlaceholder: 'Search for community by name',
+      fetchSearchSuggestions: () => ({ type: 'none' }),
+      getSearchSuggestions: (state, { autocomplete: searchTerm }) =>
+        communityOptions.filter(c => c.name.match(searchTerm))
+    })
+  }
 
+  render () {
+    const { currentCommunity, canModerate, post, pendingDetailsText, isProject } = this.props
     const {
       fileUrls, imageUrls, isSaving, topics, title, detailsText, type,
       filePickerPending, imagePickerPending, announcementEnabled,
-      detailsFocused, titleLengthError, members
+      detailsFocused, titleLengthError, members, communities
     } = this.state
-
     const toolbarProps = {
       post,
       canModerate,
@@ -312,19 +346,20 @@ export default class PostEditor extends React.Component {
       showFilePicker: this._showFilePicker
     }
 
-    const communityId = get('[0]', communityIds)
-
     return <KeyboardFriendlyView style={styles.container} {...kavProps}>
       <ScrollView keyboardShouldPersistTaps='handled' style={styles.scrollContainer}>
         <View style={styles.scrollContent}>
-          {shouldShowTypeChooser && <SectionLabel>What are you posting today?</SectionLabel>}
-          {shouldShowTypeChooser && <View style={[styles.typeButtonRow, styles.section]}>
+          {!isProject && <SectionLabel>What are you posting today?</SectionLabel>}
+          {!isProject && <View style={[styles.typeButtonRow, styles.section]}>
             {['discussion', 'request', 'offer'].map(t =>
               <TypeButton type={t} key={t} selected={t === type}
                 onPress={() => !isSaving && this.setState({type: t})} />)}
           </View>}
+
           <SectionLabel>Title</SectionLabel>
-          <View style={[styles.textInputWrapper, styles.section]}>
+          <View style={[
+            styles.section
+          ]}>
             <TextInput
               editable={!isSaving}
               onChangeText={this.updateTitle}
@@ -335,7 +370,12 @@ export default class PostEditor extends React.Component {
               value={title}
               maxLength={MAX_TITLE_LENGTH} />
           </View>
-          {titleLengthError && <View style={styles.errorView}><ErrorBubble customStyles={styles.errorBubble} errorRowStyle={styles.errorRow} text={`Title can't have more than ${MAX_TITLE_LENGTH} characters.`} topRightArrow /></View>}
+          {titleLengthError && <View style={styles.errorView}>
+            <ErrorBubble
+              customStyles={styles.errorBubble}
+              errorRowStyle={styles.errorRow} text={`Title can't have more than ${MAX_TITLE_LENGTH} characters.`}
+              topRightArrow />
+          </View>}
 
           <SectionLabel>Details</SectionLabel>
           <InlineEditor
@@ -346,11 +386,12 @@ export default class PostEditor extends React.Component {
             placeholder={detailsPlaceholder}
             inputStyle={styles.detailsEditorInput}
             containerStyle={styles.detailsEditorContainer}
-            communityId={communityId}
+            communityId={get('id', currentCommunity)}
             autoGrow={false}
             onFocusToggle={(isFocused) => this.setState({detailsFocused: isFocused})}
             onInsertTopic={this.insertEditorTopic}
           />
+
           <TouchableOpacity
             style={[
               styles.section,
@@ -362,21 +403,48 @@ export default class PostEditor extends React.Component {
               <SectionLabel>Topics</SectionLabel>
               <View style={styles.topicAddBorder}><Icon name='Plus' style={styles.topicAdd} /></View>
             </View>
-            <Topics onPress={this.removeTopic} topics={topics} placeholder={topicsPlaceholder} />
+            <Topics onPress={this.removeTopic} topics={topics} />
+            {topics.length < 1 &&
+              <Text style={styles.textInputPlaceholder}>{topicsPlaceholder}</Text>}
           </TouchableOpacity>
 
           {isProject && <TouchableOpacity
             style={[
               styles.section,
-              styles.textInputWrapper
+              styles.textInputWrapper,
+              styles.topics
             ]}
             onPress={this.openProjectMembersEditor}>
-            <View style={styles.members}>
+            <View style={styles.topicLabel}>
               <SectionLabel>Members</SectionLabel>
               <View style={styles.topicAddBorder}><Icon name='Plus' style={styles.topicAdd} /></View>
-              <ProjectMembersSummary members={members} />
             </View>
+            {members.length > 0 &&
+              <ProjectMembersSummary members={members} textStyle={styles.textInputPlaceholder} />}
+            {members.length < 1 &&
+              <Text style={styles.textInputPlaceholder}>Who is a part of this project?</Text>}
           </TouchableOpacity>}
+
+          <TouchableOpacity
+            style={[
+              styles.section,
+              styles.textInputWrapper,
+              { borderBottomWidth: 0 }
+            ]}
+            onPress={this.openCommunitiesEditor}>
+            <View style={styles.members}>
+              <SectionLabel>Post In</SectionLabel>
+              <View style={styles.topicAddBorder}><Icon name='Plus' style={styles.topicAdd} /></View>
+            </View>
+            <CommunitiesList
+              communities={communities}
+              columns={1}
+              onPress={this.removeCommunity}
+              RightIcon={iconProps =>
+                <Icon name='Ex' style={styles.communityRemoveIcon} {...iconProps} />} />
+            {communities.length < 1 &&
+              <Text style={styles.textInputPlaceholder}>Select which communities to post in.</Text>}
+          </TouchableOpacity>
 
           {!isEmpty(imageUrls) && <View>
             <SectionLabel>Images</SectionLabel>
@@ -429,13 +497,23 @@ export function SectionLabel ({ children }) {
   </Text>
 }
 
-export function Topics ({ onPress, topics, placeholder }) {
-  if (topics.length > 0) {
-    return <ScrollView horizontal style={styles.topicPillBox}>
-      {topics.map((t, i) => <TopicPill key={i} topic={t} onPress={onPress(t)} />)}
-    </ScrollView>
+export function Communities ({ onPress, communities, placeholder }) {
+  if (communities.length > 0) {
+    return communities.map((community, index) =>
+      <TouchableOpacity onPress={onPress} style={styles.topicPill}>
+        <Text style={styles.topicText}>#{community.name}</Text>
+        <Icon name='Ex' style={styles.removeCommunity} />
+      </TouchableOpacity>
+    )
   }
   return <Text style={styles.textInputPlaceholder}>{placeholder}</Text>
+}
+
+export function Topics ({ onPress, topics, placeholder }) {
+  if (topics.length < 1) return null
+  return <ScrollView horizontal style={styles.topicPillBox}>
+    {topics.map((t, i) => <TopicPill key={i} topic={t} onPress={onPress(t)} />)}
+  </ScrollView>
 }
 
 export function TopicPill ({ topic, topic: { name }, onPress }) {

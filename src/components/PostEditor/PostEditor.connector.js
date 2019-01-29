@@ -1,47 +1,53 @@
 import { connect } from 'react-redux'
-import {
-  createPost, createProject,
-  updatePost, MAX_TITLE_LENGTH
-} from './PostEditor.store'
 import { get, isEmpty } from 'lodash/fp'
-import { createTopicTag } from '../InlineEditor/InlineEditor'
-import fetchPost from '../../store/actions/fetchPost'
+import { mapWhenFocused } from 'util/connector'
 import { getPresentedPost } from '../../store/selectors/getPost'
 import isPendingFor from '../../store/selectors/isPendingFor'
 import getCanModerate from '../../store/selectors/getCanModerate'
-import { mapWhenFocused } from 'util/connector'
-import upload from 'store/actions/upload'
+import getCurrentCommunity from '../../store/selectors/getCurrentCommunity'
+import getMe from '../../store/selectors/getMe'
+import upload from '../../store/actions/upload'
+import fetchPost from '../../store/actions/fetchPost'
+import { createTopicTag } from '../InlineEditor/InlineEditor'
+import {
+  createPost,
+  createProject,
+  updatePost,
+  MAX_TITLE_LENGTH
+} from './PostEditor.store'
 
 function getPostId (state, props) {
   return props.navigation.state.params.id
 }
 
 export function mapStateToProps (state, props) {
-  const communityId = get('navigation.state.params.communityId', props)
+  const currentCommunity = get('ref', getCurrentCommunity(state))
+  const currentUser = getMe(state, props)
+  const communityOptions = props.communityOptions ||
+    (currentUser && currentUser.memberships.toModelArray().map(m => m.community.ref))
   const selectedTopicName = get('navigation.state.params.topicName', props)
   const selectedTopicTag = createTopicTag({name: selectedTopicName})
   const defaultPost = selectedTopicName
-    ? {detailsText: selectedTopicTag + ' ', communityIds: [communityId]}
-    : {}
+    ? {
+      detailsText: selectedTopicTag + ' ',
+      communities: [currentCommunity]
+    } : {
+      communities: [currentCommunity]
+    }
   const postId = getPostId(state, props)
   const post = getPresentedPost(state, {id: postId})
   const isProject = get('navigation.state.params.isProject', props) ||
     get('type', post) === 'project'
 
-  const shouldShowTypeChooser = !isProject
-
   return {
     post: post || defaultPost,
-    canModerate: getCanModerate(state),
-    communityIds: post
-      ? post.communities.map(x => x.id)
-      : [communityId],
+    communityOptions,
     imageUrls: post ? post.imageUrls : [],
     fileUrls: post ? post.fileUrls : [],
     isNewPost: isEmpty(postId),
     isProject,
-    pendingDetailsText: isPendingFor(fetchPost, state),
-    shouldShowTypeChooser
+    canModerate: getCanModerate(state),
+    pendingDetailsText: isPendingFor(fetchPost, state)
   }
 }
 

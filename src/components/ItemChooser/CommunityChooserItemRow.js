@@ -6,29 +6,29 @@ import {
 import { propTypesForItemRowComponent } from '../ItemChooser'
 import Avatar from '../Avatar'
 
-export default function PersonPickerItemRow ({
+export default function CommunityChooserItemRow ({
   item,
   onPress
 }) {
-  return <TouchableOpacity style={styles.personRow} onPress={() => onPress(item)}>
-    <Avatar style={styles.personAvatar} avatarUrl={item.avatarUrl} dimension={30} />
-    <Text style={styles.personName}>{item.name}</Text>
+  return <TouchableOpacity style={styles.communityRow} onPress={() => onPress(item)}>
+    <Avatar style={styles.communityAvatar} avatarUrl={item.avatarUrl} dimension={30} />
+    <Text style={styles.communityName}>{item.name}</Text>
   </TouchableOpacity>
 }
-PersonPickerItemRow.propTypes = propTypesForItemRowComponent
+CommunityChooserItemRow.propTypes = propTypesForItemRowComponent
 
 const styles = {
-  personRow: {
+  communityRow: {
     padding: 15,
     paddingBottom: 0,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'flex-start'
   },
-  personAvatar: {
+  communityAvatar: {
     marginRight: 12
   },
-  personName: {
+  communityName: {
     fontFamily: 'Circular-Bold',
     flex: 1
   }

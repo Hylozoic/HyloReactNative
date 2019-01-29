@@ -1,7 +1,7 @@
 import React from 'react'
 import {
   Text,
-  View
+  TouchableOpacity
 } from 'react-native'
 import { caribbeanGreen } from 'style/colors'
 import { propTypesForItemRowComponent } from '../ItemChooser'
@@ -10,10 +10,10 @@ import RoundCheckbox from 'rn-round-checkbox'
 
 export default function ProjectMemberItemRow ({
   item: person,
-  chosen = undefined,
-  toggleChosen = undefined
+  chosen,
+  toggleChosen
 }) {
-  return <View style={styles.personRow}>
+  return <TouchableOpacity style={styles.personRow} onPress={() => toggleChosen(person)}>
     <Avatar style={styles.personAvatar} avatarUrl={person.avatarUrl} dimension={30} />
     <Text style={styles.personName}>{person.name}</Text>
     <RoundCheckbox
@@ -21,7 +21,7 @@ export default function ProjectMemberItemRow ({
       checked={chosen}
       backgroundColor={caribbeanGreen}
       onValueChange={() => toggleChosen(person)} />
-  </View>
+  </TouchableOpacity>
 }
 ProjectMemberItemRow.propTypes = propTypesForItemRowComponent
 
