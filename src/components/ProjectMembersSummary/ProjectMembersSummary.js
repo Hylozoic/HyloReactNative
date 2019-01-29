@@ -3,7 +3,7 @@ import { Text, View, TouchableOpacity } from 'react-native'
 import { slice } from 'lodash/fp'
 import Avatar from '../Avatar'
 
-export default function ProjectMembersSummary ({ members, textStyle, onPress = undefined, dimension = 43 }) {
+export default function ProjectMembersSummary ({ members, textStyle, onPress, dimension = 43 }) {
   const membersTotal = members.length
 
   if (membersTotal < 1) return null

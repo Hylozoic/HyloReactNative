@@ -1,7 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders as expected 1`] = `
-<View>
+<TouchableOpacity
+  activeOpacity={0.2}
+  onPress={[Function]}
+>
   <Avatar
     avatarUrl={undefined}
     dimension={30}
@@ -20,5 +23,5 @@ exports[`renders as expected 1`] = `
     onValueChange={[Function]}
     size={24}
   />
-</View>
+</TouchableOpacity>
 `;

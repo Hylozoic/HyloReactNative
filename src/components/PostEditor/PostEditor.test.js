@@ -33,7 +33,10 @@ jest.mock('react-native-document-picker', () => {
 jest.mock('react-native-image-picker')
 
 const mockPost = {
-  details: 'myDetails'
+  details: 'myDetails',
+  communities: [
+    {id: 1, name: 'Community 1'}
+  ]
 }
 
 describe('PostEditor', () => {
@@ -120,7 +123,6 @@ describe('PostEditor', () => {
           fetchPost={jest.fn()}
           isFocused
           save={save}
-          communityIds={[1]}
           navigation={navigation}
           post={mockPost} />
       </Provider>)
@@ -146,7 +148,6 @@ describe('PostEditor', () => {
           fetchPost={jest.fn()}
           isFocused
           save={save}
-          communityIds={[1]}
           navigation={navigation}
           post={mockPost} />
       </Provider>)
@@ -168,7 +169,6 @@ describe('PostEditor', () => {
           isFocused
           fetchPost={jest.fn()}
           save={save}
-          communityIds={[1]}
           navigation={navigation}
           post={mockPost} />
       </Provider>)
@@ -194,7 +194,6 @@ describe('PostEditor', () => {
           isFocused
           fetchPost={jest.fn()}
           save={save}
-          communityIds={[1]}
           navigation={navigation}
           post={mockPost} />
       </Provider>)
@@ -343,7 +342,6 @@ describe('PostEditor', () => {
           fetchPost={jest.fn()}
           isFocused
           save={save}
-          communityIds={[1]}
           navigation={navigation}
           post={mockPost} />
       </Provider>)
@@ -363,7 +361,6 @@ describe('PostEditor', () => {
           fetchPost={jest.fn()}
           isFocused
           save={save}
-          communityIds={[1]}
           navigation={navigation}
           post={mockPost} />
       </Provider>)
