@@ -2,8 +2,9 @@ import React from 'react'
 import { Text, View, TouchableOpacity } from 'react-native'
 import { slice } from 'lodash/fp'
 import Avatar from '../Avatar'
+import { rhino30 } from 'style/colors'
 
-export default function ProjectMembersSummary ({ members, textStyle, onPress, dimension = 43 }) {
+export default function ProjectMembersSummary ({ members, onPress, dimension = 43 }) {
   const membersTotal = members.length
 
   if (membersTotal < 1) return null
@@ -20,7 +21,7 @@ export default function ProjectMembersSummary ({ members, textStyle, onPress, di
         hasOverlap={index > 0}
         zIndex={3 - index} />
     })}
-    <Text style={textStyle}>{membersText}</Text>
+    <Text style={styles.membersText}>{membersText}</Text>
   </RootElement>
 }
 
@@ -28,6 +29,13 @@ const styles = {
   membersSummary: {
     flex: 1,
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
+    padding: 10
+  },
+  membersText: {
+    paddingLeft: 6,
+    color: rhino30,
+    fontSize: 13,
+    fontFamily: 'Circular-Book'
   }
 }

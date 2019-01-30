@@ -420,7 +420,7 @@ export default class PostEditor extends React.Component {
               <View style={styles.topicAddBorder}><Icon name='Plus' style={styles.topicAdd} /></View>
             </View>
             {members.length > 0 &&
-              <ProjectMembersSummary members={members} textStyle={styles.textInputPlaceholder} />}
+              <ProjectMembersSummary members={members} />}
             {members.length < 1 &&
               <Text style={styles.textInputPlaceholder}>Who is a part of this project?</Text>}
           </TouchableOpacity>}
