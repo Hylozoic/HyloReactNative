@@ -1,8 +1,8 @@
 import React from 'react'
-import { isEmpty, chunk } from 'lodash/fp'
+import { isEmpty } from 'lodash/fp'
 import Icon from '../../Icon'
-import { Text, View, TouchableOpacity, Image } from 'react-native'
-import { DEFAULT_AVATAR } from '../../../store/models/Community'
+import CommunitiesList from '../../CommunitiesList'
+import { Text, View, TouchableOpacity } from 'react-native'
 import {
   capeCod10, rhino30, caribbeanGreen
 } from '../../../style/colors'
@@ -41,11 +41,11 @@ export default class PostCommunities extends React.PureComponent {
             <Icon name='ArrowUp' style={styles.arrowIcon} />
           </TouchableOpacity>
         </View>
-        {chunk(2, communities).map(pair => <CommunityRow communities={pair} key={pair[0].id} goToCommunity={goToCommunity} />)}
+        <CommunitiesList communities={communities} onPress={goToCommunity} />
       </View>
       : <View style={styles.row}>
         <Text style={styles.reminderText}>Posted In: </Text>
-        <CommunityList communities={communities} expandFunc={this.toggleExpanded} goToCommunity={goToCommunity} />
+        <CommunitiesListSummary communities={communities} expandFunc={this.toggleExpanded} goToCommunity={goToCommunity} />
         <TouchableOpacity onPress={this.toggleExpanded} style={styles.arrowButton}>
           <Icon name='ArrowDown' style={styles.arrowIcon} />
         </TouchableOpacity>
@@ -57,7 +57,7 @@ export default class PostCommunities extends React.PureComponent {
   }
 }
 
-export function CommunityList ({communities, goToCommunity, expandFunc}) {
+export function CommunitiesListSummary ({communities, goToCommunity, expandFunc}) {
   const moreCommunities = communities.length > 1
   const othersText = n => n === 1 ? '1 other' : `${n} others`
   return <View style={[styles.communityList, styles.row]}>
@@ -67,22 +67,6 @@ export function CommunityList ({communities, goToCommunity, expandFunc}) {
       <TouchableOpacity onPress={expandFunc}><Text style={styles.linkText}>{othersText(communities.length - 1)}</Text></TouchableOpacity>
     </View>}
   </View>
-}
-
-export function CommunityRow ({ communities, goToCommunity }) {
-  return <View style={[styles.communityRow, styles.row]}>
-    {communities.map(community => <CommunityCell key={community.id} community={community} goToCommunity={goToCommunity} />)}
-  </View>
-}
-
-export function CommunityCell ({ community, goToCommunity }) {
-  const { name, avatarUrl } = community
-  const imageSource = {uri: avatarUrl || DEFAULT_AVATAR}
-
-  return <TouchableOpacity style={[styles.communityCell, styles.row]} onPress={() => goToCommunity && goToCommunity(community.id)}>
-    <Image source={imageSource} style={styles.communityAvatar} />
-    <Text style={[styles.linkText, styles.communityCell]} numberOfLines={1}>{name}</Text>
-  </TouchableOpacity>
 }
 
 const styles = {
@@ -101,6 +85,11 @@ const styles = {
     height: 40,
     justifyContent: 'flex-start'
   },
+  linkText: {
+    color: caribbeanGreen,
+    fontSize: 13,
+    fontFamily: 'Circular-Book'
+  },
   arrowButton: {
     marginLeft: 'auto'
   },
@@ -113,25 +102,8 @@ const styles = {
     fontSize: 13,
     fontFamily: 'Circular-Book'
   },
-  linkText: {
-    color: caribbeanGreen,
-    fontSize: 13,
-    fontFamily: 'Circular-Book'
-  },
   expandedSection: {
     paddingTop: 11,
     paddingBottom: 5
-  },
-  communityRow: {
-    paddingVertical: 8
-  },
-  communityCell: {
-    paddingRight: 15
-  },
-  communityAvatar: {
-    height: 20,
-    width: 20,
-    borderRadius: 4,
-    marginRight: 9
   }
 }

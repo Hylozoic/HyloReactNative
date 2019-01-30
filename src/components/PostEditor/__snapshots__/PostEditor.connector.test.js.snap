@@ -254,9 +254,10 @@ Array [
 exports[`PostEditor mapStateToProps maps 1`] = `
 Object {
   "canModerate": true,
-  "communityIds": Array [
-    "7",
-    "8",
+  "communityOptions": Array [
+    Object {
+      "id": "7",
+    },
   ],
   "fileUrls": Array [],
   "imageUrls": Array [
@@ -291,6 +292,5 @@ Object {
     "pinned": undefined,
     "topics": Array [],
   },
-  "shouldShowTypeChooser": true,
 }
 `;

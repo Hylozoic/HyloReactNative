@@ -33,7 +33,8 @@ export default {
     height: isIOS ? 22 : null,
     fontSize: 14,
     fontFamily: 'Circular-Book',
-    paddingBottom: 4
+    paddingBottom: 4,
+    marginBottom: 4
   },
   textInputPlaceholder: {
     height: isIOS ? 22 : null,
@@ -46,6 +47,8 @@ export default {
     fontFamily: 'Circular-Book'
   },
   detailsEditorContainer: {
+    paddingBottom: 10,
+    marginBottom: 10,
     borderBottomColor: rhino30,
     borderBottomWidth: StyleSheet.hairlineWidth
   },
@@ -54,7 +57,8 @@ export default {
   },
   typeButtonRow: {
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    paddingBottom: 10
   },
   typeButton: {
     box: {
@@ -96,7 +100,7 @@ export default {
     }
   },
   section: {
-    marginBottom: 20
+    marginBottom: 8
   },
   sectionLabel: {
     marginBottom: 8,
@@ -105,9 +109,8 @@ export default {
   topics: {
     justifyContent: 'center',
     display: 'flex',
-    marginTop: 15,
     flexDirection: 'column',
-    marginBottom: 10
+    paddingBottom: 5
   },
   topicAddBorder: {
     borderColor: caribbeanGreen,
@@ -129,8 +132,7 @@ export default {
   topicLabel: {
     alignItems: 'center',
     display: 'flex',
-    flexDirection: 'row',
-    marginBottom: 10
+    flexDirection: 'row'
   },
   topicPill: {
     display: 'flex',
@@ -162,7 +164,12 @@ export default {
     alignItems: 'center',
     display: 'flex',
     flexDirection: 'row',
-    marginBottom: 10
+    marginBottom: 0
+  },
+  communityRemoveIcon: {
+    color: rhino30,
+    fontSize: 16,
+    marginLeft: 10
   },
   imageSelector: {
     marginBottom: 10

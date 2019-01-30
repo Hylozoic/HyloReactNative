@@ -52,17 +52,17 @@ describe('PostEditor mapStateToProps', () => {
     expect(mapStateToProps(state, props)).toMatchSnapshot()
   })
 
-  it('returns communityIds', () => {
-    expect(mapStateToProps(state, props).communityIds).toEqual([community1.id, community2.id])
+  it('returns communities', () => {
+    expect(mapStateToProps(state, props).post.communities).toEqual([community1.ref, community2.ref])
   })
 
   it('returns a post', () => {
     expect(mapStateToProps(state, props).post).toBeDefined()
   })
 
-  it('sets communityIds and imageUrls from post', () => {
+  it('sets communities and imageUrls from post', () => {
     const stateProps = mapStateToProps(state, props)
-    expect(stateProps.communityIds).toEqual([community1.id, community2.id])
+    expect(stateProps.post.communities).toEqual([community1.ref, community2.ref])
     expect(stateProps.imageUrls).toEqual(['bar.png', 'foo.png'])
   })
 })

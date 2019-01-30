@@ -1,4 +1,5 @@
 import { connect } from 'react-redux'
+import { get } from 'lodash/fp'
 import isPendingFor from '../../store/selectors/isPendingFor'
 import setQuerySearchTermForScope from '../../store/actions/setQuerySearchTermForScope'
 import getQuerySearchTermForScope from '../../store/selectors/getQuerySearchTermForScope'
@@ -8,7 +9,7 @@ export function mapStateToProps (state, props) {
     getSearchSuggestions,
     fetchSearchSuggestions
   } = props
-  const fetchSuggestionsActionType = fetchSearchSuggestions(undefined).type
+  const fetchSuggestionsActionType = get('type', fetchSearchSuggestions(undefined))
   const searchTerm = getQuerySearchTermForScope(state, { scope: fetchSuggestionsActionType })
 
   return {
@@ -20,7 +21,7 @@ export function mapStateToProps (state, props) {
 
 export function mapDispatchToProps (dispatch, props) {
   const { fetchSearchSuggestions } = props
-  const fetchSuggestionsActionType = fetchSearchSuggestions(undefined).type
+  const fetchSuggestionsActionType = get('type', fetchSearchSuggestions(undefined))
 
   return {
     fetchSearchSuggestions: searchTerm => dispatch(fetchSearchSuggestions(searchTerm)),

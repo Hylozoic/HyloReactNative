@@ -46,6 +46,26 @@ exports[`PostEditor renders a new editor correctly 1`] = `
   >
     <View>
       <SectionLabel>
+        What are you posting today?
+      </SectionLabel>
+      <View>
+        <TypeButton
+          onPress={[Function]}
+          selected={true}
+          type="discussion"
+        />
+        <TypeButton
+          onPress={[Function]}
+          selected={false}
+          type="request"
+        />
+        <TypeButton
+          onPress={[Function]}
+          selected={false}
+          type="offer"
+        />
+      </View>
+      <SectionLabel>
         Title
       </SectionLabel>
       <View>
@@ -70,6 +90,8 @@ exports[`PostEditor renders a new editor correctly 1`] = `
           Object {
             "borderBottomColor": "#c0c6cd",
             "borderBottomWidth": 0.5,
+            "marginBottom": 10,
+            "paddingBottom": 10,
           }
         }
         editable={true}
@@ -101,9 +123,43 @@ exports[`PostEditor renders a new editor correctly 1`] = `
         </View>
         <Topics
           onPress={[Function]}
-          placeholder="Add topics."
           topics={Array []}
         />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+        >
+          Add topics.
+        </Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        activeOpacity={0.2}
+        onPress={[Function]}
+      >
+        <View>
+          <SectionLabel>
+            Post In
+          </SectionLabel>
+          <View>
+            <Icon
+              name="Plus"
+            />
+          </View>
+        </View>
+        <CommunitiesList
+          RightIcon={[Function]}
+          columns={1}
+          communities={Array []}
+          onPress={[Function]}
+        />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+        >
+          Select which communities to post in.
+        </Text>
       </TouchableOpacity>
     </View>
   </ScrollView>
@@ -131,6 +187,99 @@ exports[`PostEditor renders correctly while saving 1`] = `
   >
     <View>
       <View>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+        >
+          What are you posting today?
+        </Text>
+        <View>
+          <View
+            accessibilityComponentType={undefined}
+            accessibilityLabel={undefined}
+            accessibilityTraits={undefined}
+            accessible={true}
+            collapsable={undefined}
+            hasTVPreferredFocus={undefined}
+            hitSlop={undefined}
+            isTVSelectable={true}
+            nativeID={undefined}
+            onLayout={undefined}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            testID={undefined}
+            tvParallaxProperties={undefined}
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+            >
+              DISCUSSION
+            </Text>
+          </View>
+          <View
+            accessibilityComponentType={undefined}
+            accessibilityLabel={undefined}
+            accessibilityTraits={undefined}
+            accessible={true}
+            collapsable={undefined}
+            hasTVPreferredFocus={undefined}
+            hitSlop={undefined}
+            isTVSelectable={true}
+            nativeID={undefined}
+            onLayout={undefined}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            testID={undefined}
+            tvParallaxProperties={undefined}
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+            >
+              REQUEST
+            </Text>
+          </View>
+          <View
+            accessibilityComponentType={undefined}
+            accessibilityLabel={undefined}
+            accessibilityTraits={undefined}
+            accessible={true}
+            collapsable={undefined}
+            hasTVPreferredFocus={undefined}
+            hitSlop={undefined}
+            isTVSelectable={true}
+            nativeID={undefined}
+            onLayout={undefined}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            testID={undefined}
+            tvParallaxProperties={undefined}
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+            >
+              OFFER
+            </Text>
+          </View>
+        </View>
         <Text
           accessible={true}
           allowFontScaling={true}
@@ -220,6 +369,84 @@ exports[`PostEditor renders correctly while saving 1`] = `
             Add topics.
           </Text>
         </View>
+        <View
+          accessibilityComponentType={undefined}
+          accessibilityLabel={undefined}
+          accessibilityTraits={undefined}
+          accessible={true}
+          collapsable={undefined}
+          hasTVPreferredFocus={undefined}
+          hitSlop={undefined}
+          isTVSelectable={true}
+          nativeID={undefined}
+          onLayout={undefined}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          testID={undefined}
+          tvParallaxProperties={undefined}
+        >
+          <View>
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+            >
+              Post In
+            </Text>
+            <View>
+              <Icon
+                color={undefined}
+                name="Plus"
+              />
+            </View>
+          </View>
+          <View>
+            <View
+              accessibilityComponentType={undefined}
+              accessibilityLabel={undefined}
+              accessibilityTraits={undefined}
+              accessible={true}
+              collapsable={undefined}
+              hasTVPreferredFocus={undefined}
+              hitSlop={undefined}
+              isTVSelectable={true}
+              nativeID={undefined}
+              onLayout={undefined}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              testID={undefined}
+              tvParallaxProperties={undefined}
+            >
+              <Image
+                source={
+                  Object {
+                    "uri": "https://d3ngex8q79bk55.cloudfront.net/misc/default_community_avatar.png",
+                  }
+                }
+              />
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                numberOfLines={1}
+              >
+                Community 1
+              </Text>
+              <Icon
+                color={undefined}
+                name="Ex"
+              />
+            </View>
+          </View>
+        </View>
       </View>
     </View>
   </RCTScrollView>
@@ -291,6 +518,99 @@ exports[`PostEditor renders correctly while saving 2`] = `
   >
     <View>
       <View>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+        >
+          What are you posting today?
+        </Text>
+        <View>
+          <View
+            accessibilityComponentType={undefined}
+            accessibilityLabel={undefined}
+            accessibilityTraits={undefined}
+            accessible={true}
+            collapsable={undefined}
+            hasTVPreferredFocus={undefined}
+            hitSlop={undefined}
+            isTVSelectable={true}
+            nativeID={undefined}
+            onLayout={undefined}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            testID={undefined}
+            tvParallaxProperties={undefined}
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+            >
+              DISCUSSION
+            </Text>
+          </View>
+          <View
+            accessibilityComponentType={undefined}
+            accessibilityLabel={undefined}
+            accessibilityTraits={undefined}
+            accessible={true}
+            collapsable={undefined}
+            hasTVPreferredFocus={undefined}
+            hitSlop={undefined}
+            isTVSelectable={true}
+            nativeID={undefined}
+            onLayout={undefined}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            testID={undefined}
+            tvParallaxProperties={undefined}
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+            >
+              REQUEST
+            </Text>
+          </View>
+          <View
+            accessibilityComponentType={undefined}
+            accessibilityLabel={undefined}
+            accessibilityTraits={undefined}
+            accessible={true}
+            collapsable={undefined}
+            hasTVPreferredFocus={undefined}
+            hitSlop={undefined}
+            isTVSelectable={true}
+            nativeID={undefined}
+            onLayout={undefined}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            testID={undefined}
+            tvParallaxProperties={undefined}
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+            >
+              OFFER
+            </Text>
+          </View>
+        </View>
         <Text
           accessible={true}
           allowFontScaling={true}
@@ -380,6 +700,84 @@ exports[`PostEditor renders correctly while saving 2`] = `
             Add topics.
           </Text>
         </View>
+        <View
+          accessibilityComponentType={undefined}
+          accessibilityLabel={undefined}
+          accessibilityTraits={undefined}
+          accessible={true}
+          collapsable={undefined}
+          hasTVPreferredFocus={undefined}
+          hitSlop={undefined}
+          isTVSelectable={true}
+          nativeID={undefined}
+          onLayout={undefined}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          testID={undefined}
+          tvParallaxProperties={undefined}
+        >
+          <View>
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+            >
+              Post In
+            </Text>
+            <View>
+              <Icon
+                color={undefined}
+                name="Plus"
+              />
+            </View>
+          </View>
+          <View>
+            <View
+              accessibilityComponentType={undefined}
+              accessibilityLabel={undefined}
+              accessibilityTraits={undefined}
+              accessible={true}
+              collapsable={undefined}
+              hasTVPreferredFocus={undefined}
+              hitSlop={undefined}
+              isTVSelectable={true}
+              nativeID={undefined}
+              onLayout={undefined}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              testID={undefined}
+              tvParallaxProperties={undefined}
+            >
+              <Image
+                source={
+                  Object {
+                    "uri": "https://d3ngex8q79bk55.cloudfront.net/misc/default_community_avatar.png",
+                  }
+                }
+              />
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                numberOfLines={1}
+              >
+                Community 1
+              </Text>
+              <Icon
+                color={undefined}
+                name="Ex"
+              />
+            </View>
+          </View>
+        </View>
       </View>
     </View>
   </RCTScrollView>
@@ -450,6 +848,26 @@ exports[`PostEditor renders with a post 1`] = `
   >
     <View>
       <SectionLabel>
+        What are you posting today?
+      </SectionLabel>
+      <View>
+        <TypeButton
+          onPress={[Function]}
+          selected={true}
+          type="discussion"
+        />
+        <TypeButton
+          onPress={[Function]}
+          selected={false}
+          type="request"
+        />
+        <TypeButton
+          onPress={[Function]}
+          selected={false}
+          type="offer"
+        />
+      </View>
+      <SectionLabel>
         Title
       </SectionLabel>
       <View>
@@ -474,6 +892,8 @@ exports[`PostEditor renders with a post 1`] = `
           Object {
             "borderBottomColor": "#c0c6cd",
             "borderBottomWidth": 0.5,
+            "marginBottom": 10,
+            "paddingBottom": 10,
           }
         }
         editable={true}
@@ -505,8 +925,42 @@ exports[`PostEditor renders with a post 1`] = `
         </View>
         <Topics
           onPress={[Function]}
-          placeholder="Add topics."
           topics={Array []}
+        />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+        >
+          Add topics.
+        </Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        activeOpacity={0.2}
+        onPress={[Function]}
+      >
+        <View>
+          <SectionLabel>
+            Post In
+          </SectionLabel>
+          <View>
+            <Icon
+              name="Plus"
+            />
+          </View>
+        </View>
+        <CommunitiesList
+          RightIcon={[Function]}
+          columns={1}
+          communities={
+            Array [
+              Object {
+                "id": 1,
+                "name": "Community 1",
+              },
+            ]
+          }
+          onPress={[Function]}
         />
       </TouchableOpacity>
       <View>
@@ -534,6 +988,12 @@ exports[`PostEditor renders with a post 1`] = `
     imagePickerPending={undefined}
     post={
       Object {
+        "communities": Array [
+          Object {
+            "id": 1,
+            "name": "Community 1",
+          },
+        ],
         "details": "myDetails",
       }
     }

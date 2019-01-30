@@ -7,7 +7,7 @@ export default {
   },
   wrapper: {
     flex: 1,
-    alignItems: 'center',
+    alignItems: 'flex-start',
     flexDirection: 'row'
   },
   textInput: {
@@ -18,7 +18,7 @@ export default {
   },
   toolbar: {
     alignItems: 'flex-end',
-    paddingBottom: 10,
+    paddingTop: 5,
     flexDirection: 'row'
   },
   toolbarButton: {

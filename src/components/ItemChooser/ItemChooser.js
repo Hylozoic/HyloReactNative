@@ -118,8 +118,8 @@ export default class ItemChooser extends React.Component {
         return [{ data: filteredSuggestedItems }]
       }
       if (defaultSuggestedItems && defaultSuggestedItemsLabel) {
-        const addedItemIds = addedItems.filter(item => item.id)
         const label = defaultSuggestedItems.length > 0 ? defaultSuggestedItemsLabel : undefined
+        const addedItemIds = addedItems.filter(item => item.id)
         let filteredDefaultItems = defaultSuggestedItems
           .filter(item => !initialItemIds.includes(item.id))
           .filter(item => !addedItemIds.includes(item.id))

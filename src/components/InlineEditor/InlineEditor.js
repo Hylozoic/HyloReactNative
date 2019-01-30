@@ -22,7 +22,7 @@ import fetchTopicsForCommunityId from '../../store/actions/fetchTopicsForCommuni
 import getTopicsForAutocompleteWithNew from '../../store/selectors/getTopicsForAutocompleteWithNew'
 import TopicRow from '../TopicList/TopicRow'
 
-const minTextInputHeight = 40
+const minTextInputHeight = 18
 
 export class InlineEditor extends React.PureComponent {
   constructor (props) {
@@ -130,7 +130,7 @@ export class InlineEditor extends React.PureComponent {
     // Calculates a height based on textInput content size with the following constraint: 40 < height < maxHeight
     const calculatedHeight = Math.round(Math.min(Math.max((isEmpty(value) ? minTextInputHeight : height) + (isFocused ? 45 : 0), minTextInputHeight), 190))
 
-    return <View style={[styles.container, containerStyle, {height: calculatedHeight}]}>
+    return <View style={[styles.container, containerStyle]}>
       <View style={styles.wrapper}>
         <TextInput
           editable={!!editable && !submitting}
