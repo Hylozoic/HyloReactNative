@@ -32,9 +32,6 @@ export default class FeedBanner extends React.PureComponent {
       postsTotal, followersTotal, hidePostPrompt, theme
     } = this.props
 
-    console.log('theme', theme)
-    console.log('final styles', )
-
     let bannerUrl, name, image
     if (community && all) {
       name = 'All Communities'

@@ -1,16 +1,17 @@
 import React from 'react'
 import { FlatList, Text, View } from 'react-native'
-import { find, get, isEmpty, isFunction, includes } from 'lodash/fp'
+import { find, get, isEmpty, includes } from 'lodash/fp'
 import { didPropsChange } from 'util/index'
 import styles from './FeedList.styles'
 import PostRow from './PostRow'
 import Loading from '../Loading'
 import Icon from '../Icon'
 import PopupMenuButton from '../PopupMenuButton'
+
 export default class FeedList extends React.Component {
   fetchOrShowCached () {
-    const { hasMore, postIds, fetchPosts, pending } = this.props
-    if (fetchPosts && isEmpty(postIds) && hasMore !== false && !pending) {
+    const { hasMore, postIds, fetchPosts } = this.props
+    if (fetchPosts && isEmpty(postIds) && hasMore !== false) {
       fetchPosts()
     }
   }
@@ -32,18 +33,16 @@ export default class FeedList extends React.Component {
     // which we had to pass down from the Home component through Feed. This will
     // have to be reworked to allow opening topic feeds in the Topic tab, e.g.
     const isAFeedTab = props => {
-      return includes(['Home', 'Projects'], props.screenProps.currentTabName)
+      return includes(props.screenProps.currentTabName, ['Home', 'Projects'])
     }
 
     if (!isAFeedTab(this.props)) {
       return
     }
-    if (!prevProps || isAFeedTab(prevProps)) {
-      return this.fetchOrShowCached()
-    }
     if (!prevProps.isFocused && this.props.isFocused) {
       return this.fetchOrShowCached()
     }
+
     if (prevProps.sortBy !== this.props.sortBy ||
         prevProps.filter !== this.props.filter ||
         get('id', prevProps.community) !== get('id', this.props.community) ||
