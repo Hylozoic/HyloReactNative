@@ -111,16 +111,6 @@ export default class ItemChooser extends React.Component {
       if (addedItems.length > 0) {
         sections.push({ label: 'Added', data: addSelected(addedItems) })
       }
-      // if (defaultSuggestedItems && defaultSuggestedItemsLabel) {
-      //   const label = defaultSuggestedItems.length > 0 ? defaultSuggestedItemsLabel : undefined
-      //   const addedItemIds = addedItems.filter(item => item.id)
-      //   let filteredDefaultItems = defaultSuggestedItems
-      //     .filter(item => !initialItemIds.includes(item.id))
-      //     .filter(item => !addedItemIds.includes(item.id))
-      //   if (defaultSuggestedItems.length > 0) {
-      //     sections.push({ label, data: addSelected(filteredDefaultItems) })
-      //   }
-      // }
     // picker
     } else {
       if (searchTerm) {

@@ -3,7 +3,6 @@ import { chunk } from 'lodash/fp'
 import { TouchableOpacity, Text, Image, View } from 'react-native'
 import { DEFAULT_AVATAR } from '../../store/models/Community'
 import { caribbeanGreen, rhino30 } from '../../style/colors'
-// goToCommunity(community.id)
 
 export default function CommunitiesList ({
   communities = [],
