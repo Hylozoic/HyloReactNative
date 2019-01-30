@@ -11,8 +11,8 @@ import {
   defaultSortBy,
   getQueryProps
 } from './FeedList.store'
-import fetchPosts, { FETCH_POSTS } from '../../store/actions/fetchPosts'
-import fetchProjects, { FETCH_PROJECTS } from '../../store/actions/fetchProjects'
+import fetchPosts, { FETCH_POSTS, FETCH_PROJECTS } from '../../store/actions/fetchPosts'
+// import fetchProjects, {  } from '../../store/actions/fetchProjects'
 
 import resetNewPostCount from '../../store/actions/resetNewPostCount'
 
@@ -20,8 +20,7 @@ export function mapStateToProps (state, props) {
   const sortBy = getSort(state, props)
   const filter = getFilter(state, props)
   const { community, network, topicName, isProjectFeed } = props
-  console.log('mapStateToProps - isProjectFeed', isProjectFeed)
-
+  console.log('MSTP, isProjectFeed', isProjectFeed)
   const queryProps = getQueryProps(state, {
     community: community,
     network,
@@ -30,7 +29,7 @@ export function mapStateToProps (state, props) {
     topicName,
     isProjectFeed
   })
-  const pending = isProjectFeed ? state.pending[FETCH_PROJECTS] : state.pending[FETCH_POSTS] 
+  const pending = isProjectFeed ? state.pending[FETCH_PROJECTS] : state.pending[FETCH_POSTS]
   const communityId = get('community.id', props)
 
   return {
@@ -42,30 +41,25 @@ export function mapStateToProps (state, props) {
     pending: !!pending,
     networkId: get('id', network),
     pendingRefresh: !!(pending && pending.extractQueryResults.reset),
-    queryProps // this is just here so mergeProps can use it,
-    isProjectFeed
+    queryProps // this is just here so mergeProps can use it
   }
 }
 
-const mapDispatchToProps = {setFilter, setSort, fetchPosts, fetchProjects, resetNewPostCount}
+const mapDispatchToProps = {setFilter, setSort, fetchPosts, resetNewPostCount}
 
 export function shouldResetNewPostCount ({subject, sortBy, filter, topic}) {
   return subject === 'community' && !topic && sortBy === defaultSortBy && !filter
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
-  const { hasMore, pending, postIds, queryProps, isProjectFeed } = stateProps
+  const { hasMore, pending, postIds, queryProps } = stateProps
   const { community } = ownProps
 
-  console.log('mergeProps - isProjectFeed', isProjectFeed)
-
-  const fetchPostsOrProjects = isProjectFeed ? dispatchProps.fetchProjects : dispatchProps.fetchPosts
-
   const fetchMorePosts = hasMore && !pending
-    ? () => fetchPostsOrProjects({...queryProps, offset: postIds.length})
+    ? () => dispatchProps.fetchPosts({...queryProps, offset: postIds.length})
     : () => {}
   const fetchPostsAndResetCount = (params, opts) => {
-    const promises = [fetchPostsOrProjects(params, opts)]
+    const promises = [dispatchProps.fetchPosts(params, opts)]
     const communityID = get('id', community)
     if (shouldResetNewPostCount(queryProps)) {
       promises.push(dispatchProps.resetNewPostCount(communityID, 'Membership'))
