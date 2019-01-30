@@ -22,7 +22,6 @@ export function mapStateToProps (state, props) {
   const sortBy = getSort(state, props)
   const filter = getFilter(state, props)
   const { community, network, topicName, isProjectFeed } = props
-  console.log('mapStateToProps - isProjectFeed', isProjectFeed)
 
   const queryProps = getQueryProps(state, {
     community: community,
@@ -61,8 +60,6 @@ export function shouldResetNewPostCount ({subject, sortBy, filter, topic}) {
 export function mergeProps (stateProps, dispatchProps, ownProps) {
   const { hasMore, pending, postIds, queryProps, isProjectFeed } = stateProps
   const { community } = ownProps
-
-  console.log('mergeProps - isProjectFeed', isProjectFeed)
 
   const fetchPostsOrProjects = isProjectFeed ? dispatchProps.fetchProjects : dispatchProps.fetchPosts
 
