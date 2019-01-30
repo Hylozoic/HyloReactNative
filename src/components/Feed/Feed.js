@@ -65,6 +65,8 @@ export default class Feed extends React.Component {
       ? {container: {marginBottom: 0}}
       : {}
 
+    console.log('FEED - isProjectFeed', isProjectFeed)
+
     return <View style={styles.container}>
       <FeedList
         community={community}
