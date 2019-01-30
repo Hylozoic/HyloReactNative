@@ -11,13 +11,16 @@ import {
   defaultSortBy,
   getQueryProps
 } from './FeedList.store'
-import fetchPosts, { FETCH_POSTS } from '../../store/actions/fetchPosts'
+import fetchPosts, { FETCH_POSTS, FETCH_PROJECTS } from '../../store/actions/fetchPosts'
+// import fetchProjects, {  } from '../../store/actions/fetchProjects'
+
 import resetNewPostCount from '../../store/actions/resetNewPostCount'
 
 export function mapStateToProps (state, props) {
   const sortBy = getSort(state, props)
   const filter = getFilter(state, props)
   const { community, network, topicName, isProjectFeed } = props
+  console.log('MSTP, isProjectFeed', isProjectFeed)
   const queryProps = getQueryProps(state, {
     community: community,
     network,
@@ -26,7 +29,7 @@ export function mapStateToProps (state, props) {
     topicName,
     isProjectFeed
   })
-  const pending = state.pending[FETCH_POSTS]
+  const pending = isProjectFeed ? state.pending[FETCH_PROJECTS] : state.pending[FETCH_POSTS]
   const communityId = get('community.id', props)
 
   return {
@@ -51,6 +54,7 @@ export function shouldResetNewPostCount ({subject, sortBy, filter, topic}) {
 export function mergeProps (stateProps, dispatchProps, ownProps) {
   const { hasMore, pending, postIds, queryProps } = stateProps
   const { community } = ownProps
+
   const fetchMorePosts = hasMore && !pending
     ? () => dispatchProps.fetchPosts({...queryProps, offset: postIds.length})
     : () => {}

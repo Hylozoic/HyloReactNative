@@ -1,14 +1,18 @@
 import { getPostFieldsFragment } from './fetchPost'
 import { get } from 'lodash/fp'
+// import { FETCH_PROJECTS } from './fetchProjects'
 
 export const FETCH_POSTS = `FETCH_POSTS`
+export const FETCH_PROJECTS = 'FETCH_PROJECTS'
 
 export default function fetchPosts (
   { subject, slug, networkSlug, sortBy, offset, search, filter, topic },
   { reset } = {}
 ) {
-
   var query, extractModel, getItems, projectFilter
+  var type = FETCH_POSTS
+
+  console.log('fetchingPosts, subject', subject)
 
   if (subject === 'community') {
     query = communityQuery
@@ -27,12 +31,13 @@ export default function fetchPosts (
     extractModel = 'Community'
     getItems = get('payload.data.community.posts')
     projectFilter = 'project'
+    type = FETCH_PROJECTS
   } else {
     throw new Error(`FETCH_POSTS with subject=${subject} is not implemented`)
   }
 
   return {
-    type: FETCH_POSTS,
+    type,
     graphql: {
       query,
       variables: {
