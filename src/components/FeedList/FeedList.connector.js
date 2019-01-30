@@ -8,6 +8,8 @@ import {
   setFilter,
   getPostIds,
   getHasMorePosts,
+  getProjectIds,
+  getHasMoreProjects,
   defaultSortBy,
   getQueryProps
 } from './FeedList.store'
@@ -33,16 +35,19 @@ export function mapStateToProps (state, props) {
   const pending = isProjectFeed ? state.pending[FETCH_PROJECTS] : state.pending[FETCH_POSTS] 
   const communityId = get('community.id', props)
 
+  const postIds = isProjectFeed ? getProjectIds(state, queryProps) : getPostIds(state, queryProps)
+  const hasMore = isProjectFeed ? getHasMoreProjects(state, queryProps) : getHasMorePosts(state, queryProps)
+
   return {
-    postIds: getPostIds(state, queryProps),
+    postIds,
     communityId,
     sortBy,
     filter,
-    hasMore: getHasMorePosts(state, queryProps),
+    hasMore,
     pending: !!pending,
     networkId: get('id', network),
     pendingRefresh: !!(pending && pending.extractQueryResults.reset),
-    queryProps // this is just here so mergeProps can use it,
+    queryProps, // this is just here so mergeProps can use it,
     isProjectFeed
   }
 }

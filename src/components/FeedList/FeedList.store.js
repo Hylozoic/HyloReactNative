@@ -1,6 +1,7 @@
 import { ALL_COMMUNITIES_ID } from '../../store/models/Community'
 import { makeGetQueryResults } from '../../store/reducers/queryResults'
 import { FETCH_POSTS } from '../../store/actions/fetchPosts'
+import { FETCH_PROJECTS } from '../../store/actions/fetchProjects'
 import { createSelector } from 'reselect'
 import { get, isEmpty, isNull, isUndefined, omitBy } from 'lodash/fp'
 import createCachedSelector from 're-reselect'
@@ -68,6 +69,15 @@ export const getPostIds = createSelector(
 )
 
 export const getHasMorePosts = createSelector(getPostResults, get('hasMore'))
+
+const getProjectResults = makeGetQueryResults(FETCH_PROJECTS)
+
+export const getProjectIds = createSelector(
+  getProjectResults,
+  results => isEmpty(results) ? [] : results.ids
+)
+
+export const getHasMoreProjects = createSelector(getProjectResults, get('hasMore'))
 
 // Create a cached selector since we don't want multiple onscreen feedlists to clobber the cache between each other.
 export const getQueryProps = createCachedSelector(
