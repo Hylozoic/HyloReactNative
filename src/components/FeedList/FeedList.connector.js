@@ -46,8 +46,7 @@ export function mapStateToProps (state, props) {
     pending: !!pending,
     networkId: get('id', network),
     pendingRefresh: !!(pending && pending.extractQueryResults.reset),
-    queryProps, // this is just here so mergeProps can use it,
-    isProjectFeed
+    queryProps // this is just here so mergeProps can use it,
   }
 }
 
@@ -58,8 +57,8 @@ export function shouldResetNewPostCount ({subject, sortBy, filter, topic}) {
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
-  const { hasMore, pending, postIds, queryProps, isProjectFeed } = stateProps
-  const { community } = ownProps
+  const { hasMore, pending, postIds, queryProps } = stateProps
+  const { community, isProjectFeed } = ownProps
 
   const fetchPostsOrProjects = isProjectFeed ? dispatchProps.fetchProjects : dispatchProps.fetchPosts
 
