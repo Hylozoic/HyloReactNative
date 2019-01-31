@@ -4,7 +4,7 @@ import { slice } from 'lodash/fp'
 import Avatar from '../Avatar'
 import { rhino30 } from 'style/colors'
 
-export default function ProjectMembersSummary ({ members, onPress, dimension = 43 }) {
+export default function ProjectMembersSummary ({ members, onPress, style, dimension = 43 }) {
   const membersTotal = members.length
 
   if (membersTotal < 1) return null
@@ -12,7 +12,7 @@ export default function ProjectMembersSummary ({ members, onPress, dimension = 4
   const membersText = `${membersTotal} member${membersTotal === 1 ? '' : 's'}`
   const RootElement = onPress ? TouchableOpacity : View
 
-  return <RootElement onPress={onPress} style={[styles.membersSummary]}>
+  return <RootElement onPress={onPress} style={[styles.membersSummary, style]}>
     {slice(0, 3, members).map((c, index) => {
       return <Avatar key={index}
         dimension={dimension}
