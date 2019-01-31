@@ -2,7 +2,7 @@ import React from 'react'
 import { chunk } from 'lodash/fp'
 import { TouchableOpacity, Text, Image, View } from 'react-native'
 import { DEFAULT_AVATAR } from '../../store/models/Community'
-import { caribbeanGreen, rhino30 } from '../../style/colors'
+import { caribbeanGreen } from '../../style/colors'
 
 export default function CommunitiesList ({
   communities = [],
