@@ -5,9 +5,10 @@ export const FETCH_POSTS = `FETCH_POSTS`
 
 export default function fetchPosts (
   { subject, slug, networkSlug, sortBy, offset, search, filter, topic },
-  { reset } = {}
+  { reset } = {},
+  // fetchProjects uses this action generator but provides a different type
+  type = FETCH_POSTS
 ) {
-
   var query, extractModel, getItems, projectFilter
 
   if (subject === 'community') {
@@ -32,7 +33,7 @@ export default function fetchPosts (
   }
 
   return {
-    type: FETCH_POSTS,
+    type,
     graphql: {
       query,
       variables: {

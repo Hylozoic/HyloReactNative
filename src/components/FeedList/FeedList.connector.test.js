@@ -228,6 +228,44 @@ describe('mergeProps', () => {
     merged2.fetchMorePosts()
     expect(fetchPosts).not.toHaveBeenCalled()
   })
+
+  it('calls fetchProjects when isProjectFeed', () => {
+    const stateProps = {
+      sortBy: 'latest',
+      filter: 'request',
+      hasMore: true,
+      postIds: [1, 2, 3, 4],
+      queryProps: {
+        subject: 'community',
+        slug: 'food',
+        sortBy: 'latest',
+        filter: 'request',
+        topic: 'eggs'
+      }
+    }
+
+    const ownProps = {
+      community: {
+        id: 1
+      },
+      isProjectFeed: true
+    }
+    const fetchPosts = jest.fn()
+    const fetchProjects = jest.fn()
+
+    const dispatchProps = {fetchPosts, fetchProjects}
+    const merged = mergeProps(stateProps, dispatchProps, ownProps)
+
+    merged.fetchPosts()
+    expect(fetchProjects).toHaveBeenCalledWith({
+      filter: stateProps.filter,
+      sortBy: stateProps.sortBy,
+      slug: 'food',
+      subject: 'community',
+      topic: 'eggs'
+    }, undefined)
+    expect(fetchPosts).not.toHaveBeenCalled()
+  })
 })
 
 describe('shouldResetNewPostCount', () => {
