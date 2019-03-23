@@ -36,6 +36,7 @@ export default {
     fontFamily: 'Circular-Regular'
   },
   inlineEditor: {
+    marginBottom: 10,
     paddingHorizontal: 10,
     borderTopColor: rhino30,
     borderTopWidth: 0.25

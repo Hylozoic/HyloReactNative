@@ -1,12 +1,12 @@
 import { azureRadiance } from 'style/colors'
 import { Platform } from 'react-native'
+
 export default {
   container: {
     backgroundColor: 'white',
     justifyContent: 'flex-start'
   },
   wrapper: {
-    flex: 1,
     alignItems: 'flex-start',
     flexDirection: 'row'
   },

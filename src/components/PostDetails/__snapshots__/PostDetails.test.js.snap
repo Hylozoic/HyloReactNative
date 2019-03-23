@@ -7,6 +7,7 @@ exports[`CommentPrompt renders correctly 1`] = `
     Object {
       "borderTopColor": "#c0c6cd",
       "borderTopWidth": 0.25,
+      "marginBottom": 10,
       "paddingHorizontal": 10,
     }
   }
