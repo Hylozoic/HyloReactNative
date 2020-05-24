@@ -1,7 +1,7 @@
 import React from 'react'
 import { Text, View, Button, Image } from 'react-native'
 import RNRestart from 'react-native-restart'
-import Sentry from 'react-native-sentry'
+import * as Sentry from '@sentry/react-native'
 
 import { isDev } from '../../config'
 

@@ -1,4 +1,4 @@
-platform :ios, '9.0'
+platform :ios, '10.0'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
 
 target 'HyloReactNative' do
@@ -27,6 +27,10 @@ target 'HyloReactNative' do
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
+  # Added
+  pod 'Intercom'
+  pod 'Mixpanel'
+
   target 'HyloReactNativeTests' do
     inherit! :search_paths
     # Pods for testing
@@ -43,4 +47,12 @@ target 'HyloReactNative-tvOS' do
     # Pods for testing
   end
 
+end
+
+post_install do |pi|
+  pi.pods_project.targets.each do |t|
+    t.build_configurations.each do |config|
+      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '10.0'
+    end
+  end
 end

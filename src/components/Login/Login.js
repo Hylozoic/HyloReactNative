@@ -6,9 +6,9 @@ import {
   TextInput,
   View,
   TouchableOpacity,
-  Image,
-  NetInfo
+  Image
 } from 'react-native'
+import NetInfo from "@react-native-community/netinfo";
 import validator from 'validator'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
 import FbLoginButton from './FbLoginButton'
@@ -71,15 +71,15 @@ export default class Login extends React.Component {
   }
 
   componentDidMount () {
-    NetInfo.isConnected.addEventListener('connectionChange', this.handleConnectivityChange)
+    this.unsubscribeNetInfo = NetInfo.addEventListener(this.handleConnectivityChange)
   }
 
   componentWillUnmount () {
-    NetInfo.isConnected.removeEventListener('connectionChange', this.handleConnectivityChange)
+    this.unsubscribeNetInfo()
   }
 
-  handleConnectivityChange = isConnected => {
-    if (isConnected !== this.state.isConnected) this.setState({ isConnected })
+  handleConnectivityChange = connectionState => {
+    if (connectionState.isConnected !== this.state.isConnected) this.setState({ isConnected })
   }
 
   render () {

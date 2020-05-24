@@ -1,6 +1,6 @@
 import { clearSessionCookie } from '../../util/session'
 import { LoginManager } from 'react-native-fbsdk'
-import { GoogleSignin } from 'react-native-google-signin'
+import { GoogleSignin } from '@react-native-community/google-signin'
 import { isEmpty } from 'lodash'
 
 export const LOGIN = 'LOGIN'

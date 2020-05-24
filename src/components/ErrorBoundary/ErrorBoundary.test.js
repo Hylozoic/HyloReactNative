@@ -2,9 +2,9 @@ import { Text, Image, View } from 'react-native'
 import React from 'react'
 import ReactTestRenderer from 'react-test-renderer'
 import ErrorBoundary from './ErrorBoundary'
-import Sentry from 'react-native-sentry'
+import * as Sentry from '@sentry/react-native'
 
-jest.mock('react-native-sentry', () => ({captureException: jest.fn()}))
+jest.mock('@sentry/react-native', () => ({captureException: jest.fn()}))
 
 beforeEach(() => {
   Sentry.captureException.mockReset()
