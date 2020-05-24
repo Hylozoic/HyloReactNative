@@ -65,3 +65,9 @@ GoogleService-Info.plist
 vendor/*
 *.code-workspace
 .vscode
+
+# Bundle artifact
+*.jsbundle
+
+# CocoaPods
+/ios/Pods/

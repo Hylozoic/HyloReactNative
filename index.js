@@ -8,6 +8,7 @@ import { Sentry } from 'react-native-sentry'
 import ErrorBoundary from './src/components/ErrorBoundary'
 import { isDev } from './src/config'
 import getStore from './src/store'
+import { name as appName } from './app.json'
 
 let store = getStore()
 
@@ -26,7 +27,7 @@ if (Platform.OS === 'android') {
   clearInterval = (fn, ms = 0) => Timer.clearInterval(fn, ms)
 }
 
-AppRegistry.registerComponent('HyloReactNative', () => AppContainer)
+AppRegistry.registerComponent(appName, () => AppContainer)
 
 // Uncomment this in order to debug un-performant code: https://github.com/maicki/why-did-you-update
 // if (process.env.NODE_ENV !== 'production') {
