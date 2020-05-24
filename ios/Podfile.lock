@@ -5,7 +5,7 @@ PODS:
   - AppAuth/Core (1.3.0)
   - AppAuth/ExternalUserAgent (1.3.0)
   - boost-for-react-native (1.63.0)
-  - BVLinearGradient (2.4.0):
+  - BVLinearGradient (2.5.6):
     - React
   - DoubleConversion (1.1.6)
   - FBSDKCoreKit (5.8.0):
@@ -150,7 +150,7 @@ PODS:
     - React-Core (= 0.60.6)
   - RNDeviceInfo (0.21.5):
     - React
-  - RNGestureHandler (1.0.0-alpha.42):
+  - RNGestureHandler (1.6.1):
     - React
   - RNGoogleSignin (4.0.3):
     - GoogleSignIn (~> 5.0.0)
@@ -199,7 +199,7 @@ DEPENDENCIES:
   - React-RCTVibration (from `../node_modules/react-native/Libraries/Vibration`)
   - React-RCTWebSocket (from `../node_modules/react-native/Libraries/WebSocket`)
   - RNDeviceInfo (from `../node_modules/react-native-device-info`)
-  - RNGestureHandler (from `../node_modules/react-native-gesture-handler/ios`)
+  - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - "RNGoogleSignin (from `../node_modules/@react-native-community/google-signin`)"
   - "RNSentry (from `../node_modules/@sentry/react-native`)"
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
@@ -284,7 +284,7 @@ EXTERNAL SOURCES:
   RNDeviceInfo:
     :path: "../node_modules/react-native-device-info"
   RNGestureHandler:
-    :path: "../node_modules/react-native-gesture-handler/ios"
+    :path: "../node_modules/react-native-gesture-handler"
   RNGoogleSignin:
     :path: "../node_modules/@react-native-community/google-signin"
   RNSentry:
@@ -297,7 +297,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   AppAuth: 73574f3013a1e65b9601a3ddc8b3158cce68c09d
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
-  BVLinearGradient: 8913bd8fdc47b85abc801ae8bae007bbfb6b4ce5
+  BVLinearGradient: e3aad03778a456d77928f594a649e96995f1c872
   DoubleConversion: 5805e889d232975c086db112ece9ed034df7a0b2
   FBSDKCoreKit: e7dcac0aabcfb09d0166998edd95fe3b05a0ce5d
   FBSDKLoginKit: 1b0cf04df0370b37404213157b060d6666ede814
@@ -337,7 +337,7 @@ SPEC CHECKSUMS:
   React-RCTVibration: 7655d72dfb919dd6d8e135ca108a5a2bd9fcd7b4
   React-RCTWebSocket: 7cd2c8d0f8ddd680dc76404defba7ab1f56b83af
   RNDeviceInfo: e7c5fcde13d40e161d8a27f6c5dc69c638936002
-  RNGestureHandler: c3119e67e0e196d20d68a22d6ca2dde2742c32fa
+  RNGestureHandler: 8f09cd560f8d533eb36da5a6c5a843af9f056b38
   RNGoogleSignin: ccf71ee4b6cfd324fd788a41e457e2043838c0d9
   RNSentry: 9c9783b13fb5cba387fff55f085cc1da3854ce71
   RNVectorIcons: 0bb4def82230be1333ddaeee9fcba45f0b288ed4

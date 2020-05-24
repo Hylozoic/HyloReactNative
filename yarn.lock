@@ -721,6 +721,13 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
+"@egjs/hammerjs@^2.0.17":
+  version "2.0.17"
+  resolved "https://registry.yarnpkg.com/@egjs/hammerjs/-/hammerjs-2.0.17.tgz#5dc02af75a6a06e4c2db0202cae38c9263895124"
+  integrity sha512-XQsZgjm2EcVUiZQf11UBJQfmZeEmOW8DpI1gsFeln6w0ae0ii4dMQEQ0kjl6DspdWX1aGY1/loyXnP0JS06e/A==
+  dependencies:
+    "@types/hammerjs" "^2.0.36"
+
 "@hapi/address@2.x.x":
   version "2.1.4"
   resolved "https://registry.yarnpkg.com/@hapi/address/-/address-2.1.4.tgz#5d67ed43f3fd41a69d4b9ff7b56e7c0d1d0a81e5"
@@ -1248,6 +1255,11 @@
   integrity sha512-AiHRaEB50LQg0pZmm659vNBb9f4SJ0qrAnteuzhSeAUcJKxoYgEnprg/83kppCnc2zvtCKbdZry1a5pVY3lOTQ==
   dependencies:
     "@types/node" "*"
+
+"@types/hammerjs@^2.0.36":
+  version "2.0.36"
+  resolved "https://registry.yarnpkg.com/@types/hammerjs/-/hammerjs-2.0.36.tgz#17ce0a235e9ffbcdcdf5095646b374c2bf615a4c"
+  integrity sha512-7TUK/k2/QGpEAv/BCwSHlYu3NXZhQ9ZwBYpzr9tjlPIL2C5BeGhH3DmVavRx3ZNyELX5TLC91JTz/cen6AAtIQ==
 
 "@types/istanbul-lib-coverage@*", "@types/istanbul-lib-coverage@^2.0.0", "@types/istanbul-lib-coverage@^2.0.1":
   version "2.0.2"
@@ -8177,13 +8189,15 @@ react-native-fbsdk@^1.0.0:
   resolved "https://registry.yarnpkg.com/react-native-fbsdk/-/react-native-fbsdk-1.1.2.tgz#4264903add869d05b84ef55ade9ff720c2957781"
   integrity sha512-Sp+oja868QVsB5vpEFbwZkEcCJOSBuZgh7UGJzUhaoTCs/zwSUHA6b4QichM7GiTxtQyKfT/F31DtvLj2N/qAQ==
 
-react-native-gesture-handler@^1.0.0-alpha.41:
-  version "1.0.0-alpha.42"
-  resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-1.0.0-alpha.42.tgz#0618c140b269da3c55637e235cd0c51be641121c"
+react-native-gesture-handler@^1.6.1:
+  version "1.6.1"
+  resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-1.6.1.tgz#678e2dce250ed66e93af409759be22cd6375dd17"
+  integrity sha512-gQgIKhDiYf754yzhhliagLuLupvGb6ZyBdzYzr7aus3Fyi87TLOw63ers+r4kGw0h26oAWTAdHd34JnF4NeL6Q==
   dependencies:
+    "@egjs/hammerjs" "^2.0.17"
     hoist-non-react-statics "^2.3.1"
-    invariant "^2.2.2"
-    prop-types "^15.5.10"
+    invariant "^2.2.4"
+    prop-types "^15.7.2"
 
 react-native-htmlview@^0.12.0:
   version "0.12.1"
@@ -8202,11 +8216,10 @@ react-native-intercom@^15.0.0:
   resolved "https://registry.yarnpkg.com/react-native-intercom/-/react-native-intercom-15.0.0.tgz#570b64f33420d580deff274fb185533808c65e09"
   integrity sha512-P+cIF3OADvlfg2S217SBGh4eKYd3OE7vr7q1irawMoKygOFZ6KyoSsPTjihgoZWFSSoHbyaIIRzTrjV5hylZ+w==
 
-react-native-linear-gradient@2.4.0:
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/react-native-linear-gradient/-/react-native-linear-gradient-2.4.0.tgz#51d8ea12bb72a59bede9edc87b694b16b64cf435"
-  dependencies:
-    prop-types "^15.5.10"
+react-native-linear-gradient@^2.5.6:
+  version "2.5.6"
+  resolved "https://registry.yarnpkg.com/react-native-linear-gradient/-/react-native-linear-gradient-2.5.6.tgz#96215cbc5ec7a01247a20890888aa75b834d44a0"
+  integrity sha512-HDwEaXcQIuXXCV70O+bK1rizFong3wj+5Q/jSyifKFLg0VWF95xh8XQgfzXwtq0NggL9vNjPKXa016KuFu+VFg==
 
 react-native-mixpanel@^1.2.0:
   version "1.2.0"

@@ -49,10 +49,10 @@
     "react-native-webview-bridge-updated": "Hylozoic/react-native-webview-bridge#62f520e",
     "react-native-zss-rich-text-editor": "Hylozoic/react-native-zss-rich-text-editor#7c1b9c5",
 
-    "react-native-gesture-handler": "^1.0.0-alpha.41",
+    "react-native-gesture-handler": "^1.6.1",
     "react-native-htmlview": "^0.12.0",
     "react-native-image-picker": "^1.1.0",
-    "react-native-linear-gradient": "2.4.0",
+    "react-native-linear-gradient": "^2.5.6",
     "react-native-prompt-android": "^1.0.0",
     "react-native-restart": "^0.0.17",
     "react-native-root-toast": "^3.0.1",
