@@ -69,7 +69,7 @@ describe('Thread', () => {
           ...props.messages
         ]
       }
-      root.instance.componentWillUpdate(nextProps)
+      root.instance.UNSAFE_componentWillUpdate(nextProps)
       expect(root.instance.shouldScroll).toBe(true)
     })
   })
@@ -93,7 +93,7 @@ describe('Thread', () => {
           }
         ]
       }
-      root.instance.componentWillUpdate(nextProps)
+      root.instance.UNSAFE_componentWillUpdate(nextProps)
       expect(root.instance.shouldScroll).toBe(false)
     })
 
@@ -108,7 +108,7 @@ describe('Thread', () => {
           ...props.messages
         ]
       }
-      root.instance.componentWillUpdate(nextProps)
+      root.instance.UNSAFE_componentWillUpdate(nextProps)
       expect(root.instance.shouldScroll).toBe(false)
     })
 
@@ -123,7 +123,7 @@ describe('Thread', () => {
           ...props.messages
         ]
       }
-      root.instance.componentWillUpdate(nextProps)
+      root.instance.UNSAFE_componentWillUpdate(nextProps)
       expect(root.instance.shouldScroll).toBe(true)
     })
   })

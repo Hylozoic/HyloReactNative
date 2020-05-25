@@ -18,7 +18,7 @@ export default class RootView extends React.Component {
     }
   }
 
-  componentWillMount () {
+  UNSAFE_componentWillMount () {
     OneSignal.addEventListener('opened', this._handleOpenedPushNotification)
     OneSignal.addEventListener('received', receivePushNotification)
     OneSignal.inFocusDisplaying(0)

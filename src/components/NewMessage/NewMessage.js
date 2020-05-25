@@ -39,7 +39,7 @@ export default class NewMessage extends React.Component {
     }
   }
 
-  componentWillMount () {
+  UNSAFE_componentWillMount () {
     this.props.fetchRecentContacts()
   }
 

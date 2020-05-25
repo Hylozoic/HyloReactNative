@@ -18,7 +18,7 @@ export default class TabBar extends React.PureComponent {
     }
   }
 
-  componentWillMount () {
+  UNSAFE_componentWillMount () {
     if (isIOS) return
     this.keyboardWillShowSub = Keyboard.addListener('keyboardDidShow', this.keyboardWillShow)
     this.keyboardWillHideSub = Keyboard.addListener('keyboardDidHide', this.keyboardWillHide)

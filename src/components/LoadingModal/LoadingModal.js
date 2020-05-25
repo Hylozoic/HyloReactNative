@@ -11,7 +11,7 @@ export default class LoadingModal extends React.Component {
     visible: false
   }
 
-  componentWillReceiveProps (nextProps) {
+  UNSAFE_componentWillReceiveProps (nextProps) {
     const { shouldDisplay } = nextProps
     if (shouldDisplay) {
       this.setState({ visible: true })

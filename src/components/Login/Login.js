@@ -60,7 +60,7 @@ export default class Login extends React.Component {
     }
   }
 
-  async componentWillMount () {
+  async UNSAFE_componentWillMount () {
     const { loginToken, loginByToken } = this.props
     if (loginToken) {
       const loginByTokenResponse = await loginByToken()

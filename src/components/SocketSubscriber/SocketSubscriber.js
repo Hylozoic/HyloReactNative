@@ -20,7 +20,7 @@ export default class SocketSubscriber extends React.PureComponent {
     this.setup()
   }
 
-  componentWillReceiveProps (nextProps) {
+  UNSAFE_componentWillReceiveProps (nextProps) {
     if (this.props.id !== nextProps.id) this.teardown()
   }
 

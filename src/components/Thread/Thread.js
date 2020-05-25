@@ -68,7 +68,7 @@ export default class Thread extends React.Component {
     this.markAsRead()
   }
 
-  componentWillUpdate (nextProps) {
+  UNSAFE_componentWillUpdate (nextProps) {
     const { currentUserId, messages } = nextProps
 
     const oldMessages = this.props.messages

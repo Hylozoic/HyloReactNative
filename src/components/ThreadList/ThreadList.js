@@ -26,7 +26,7 @@ export default class ThreadList extends Component {
     getSocket().then(socket => socket.on('reconnect', this.props.refreshThreads))
   }
 
-  componentWillReceiveProps (nextProps) {
+  UNSAFE_componentWillReceiveProps (nextProps) {
     if (!this.props.pending && nextProps.pending) {
       this.setState({ ready: true })
     }

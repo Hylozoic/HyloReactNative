@@ -24,7 +24,7 @@ export default class NotificationsList extends Component {
     updateNewNotificationCount()
   }
 
-  componentWillReceiveProps (nextProps) {
+  UNSAFE_componentWillReceiveProps (nextProps) {
     if (!this.props.pending && nextProps.pending) {
       this.setState({ ready: true })
     }
