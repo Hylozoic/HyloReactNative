@@ -7,7 +7,6 @@ import {
   View, FlatList, Text, TouchableOpacity, TextInput
 } from 'react-native'
 import Avatar from '../Avatar'
-import { focus } from '../../util/textInput'
 import Icon from '../Icon'
 import Loading from '../Loading'
 import PopupMenuButton from '../PopupMenuButton'
@@ -104,7 +103,9 @@ export default class MemberList extends React.Component {
       <View style={styles.listControls}>
         <View style={styles.searchWrapper}>
           <Icon style={styles.searchIcon} name='Search' size={30}
-            onPress={() => focus(this.searchRef)} />
+            // UPGRADE TODO: Fix with this: https://stackoverflow.com/a/59626713
+            // onPress={() => focus(this.searchRef)}            
+          />
           <TextInput placeholder='Search Members'
             ref={ref => { this.searchRef = ref }}
             onChangeText={onSearch}

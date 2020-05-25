@@ -8,7 +8,6 @@ import {
 } from 'react-native'
 import validator from 'validator'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
-// import { focus } from '../../util/textInput'
 import styles from './ForgotPassword.styles'
 
 export default class ForgotPassword extends React.Component {

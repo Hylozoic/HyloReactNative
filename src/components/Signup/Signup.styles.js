@@ -1,6 +1,7 @@
-import Dimensions from 'Dimensions'
+import { Dimensions } from 'react-native'
 import loginStyles from '../Login/Login.styles'
 import { caribbeanGreen } from 'style/colors'
+
 const bgImageWidth = Dimensions.get('window').width
 const bgImageHeight = bgImageWidth * 0.78
 

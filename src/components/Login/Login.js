@@ -13,7 +13,6 @@ import validator from 'validator'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
 import FbLoginButton from './FbLoginButton'
 import GoogleLoginButton from './GoogleLoginButton'
-import { focus } from '../../util/textInput'
 import styles from './Login.styles'
 
 export default class Login extends React.Component {
@@ -111,7 +110,8 @@ export default class Login extends React.Component {
               autoCapitalize='none'
               autoCorrect={false}
               keyboardType='email-address'
-              onSubmitEditing={() => focus(this.passwordInput)}
+              // UPRADE TODO: Fix with this: https://stackoverflow.com/a/59626713
+              // onSubmitEditing={() => focus(this.passwordInput)}
               underlineColorAndroid={styles.androidInvisibleUnderline} />
           </View>
           <View style={styles.rightIconView}>

@@ -51,6 +51,7 @@ buck-out/
 \.buckd/
 android/app/libs
 *.keystore
+!debug.keystore
 .env
 .env.development
 .env.production
