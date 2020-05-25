@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* HyloReactNativeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* HyloReactNativeTests.m */; };
 		026202985F894FECBEB14483 /* Circular-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 424B542986F0407EBC606DAD /* Circular-Bold.ttf */; };
+		0427C3FC247B8D3600C5E188 /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 0427C3FB247B8D3600C5E188 /* main.jsbundle */; };
 		07B4558381D3B66A271C5065 /* libPods-HyloReactNativeTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5805D037F08FDFD30A465CC8 /* libPods-HyloReactNativeTests.a */; };
 		12DF135DDA5240B3BE9C9ED5 /* Circular-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AEEE5B8B897F4DCBBC0452B0 /* Circular-MediumItalic.ttf */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
@@ -49,11 +50,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
 		00E356EE1AD99517003FC87E /* HyloReactNativeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HyloReactNativeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* HyloReactNativeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HyloReactNativeTests.m; sourceTree = "<group>"; };
 		020FBB255010482BBBDDC4C2 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = ../assets/fonts/FontAwesome.ttf; sourceTree = "<group>"; };
+		0427C3FB247B8D3600C5E188 /* main.jsbundle */ = {isa = PBXFileReference; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
 		132848DAF02E4203BC2960D5 /* Circular-Book.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Circular-Book.ttf"; path = "../assets/fonts/Circular-Book.ttf"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* HyloReactNative.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HyloReactNative.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = HyloReactNative/AppDelegate.h; sourceTree = "<group>"; };
@@ -159,7 +160,7 @@
 		13B07FAE1A68108700A75B9A /* HyloReactNative */ = {
 			isa = PBXGroup;
 			children = (
-				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
+				0427C3FB247B8D3600C5E188 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -411,6 +412,7 @@
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				2A804B4D29AB42A8945C7445 /* Circular-Black.ttf in Resources */,
+				0427C3FC247B8D3600C5E188 /* main.jsbundle in Resources */,
 				6473B41DA7624F5D8B9BA1E2 /* Circular-BlackItalic.ttf in Resources */,
 				026202985F894FECBEB14483 /* Circular-Bold.ttf in Resources */,
 				A7707633807C4690B665AFD9 /* Circular-BoldItalic.ttf in Resources */,

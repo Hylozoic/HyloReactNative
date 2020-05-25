@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Hylo</string>
     <string name="link_schema">HyloApp</string>
+    <string name="facebook_app_id">Facebook App ID</string>
 </resources>

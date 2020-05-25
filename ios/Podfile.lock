@@ -125,6 +125,8 @@ PODS:
     - React (< 1.0.0, >= 0.13.0)
   - react-native-restart (0.0.17):
     - React
+  - react-native-webview (9.4.0):
+    - React
   - React-RCTActionSheet (0.60.6):
     - React-Core (= 0.60.6)
   - React-RCTAnimation (0.60.6):
@@ -148,6 +150,8 @@ PODS:
     - React-Core (= 0.60.6)
   - React-RCTWebSocket (0.60.6):
     - React-Core (= 0.60.6)
+  - RNCAsyncStorage (1.10.3):
+    - React
   - RNDeviceInfo (0.21.5):
     - React
   - RNGestureHandler (1.6.1):
@@ -188,6 +192,7 @@ DEPENDENCIES:
   - "react-native-netinfo (from `../node_modules/@react-native-community/netinfo`)"
   - react-native-onesignal (from `../node_modules/react-native-onesignal`)
   - react-native-restart (from `../node_modules/react-native-restart`)
+  - react-native-webview (from `../node_modules/react-native-webview`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
   - React-RCTAnimation (from `../node_modules/react-native/Libraries/NativeAnimation`)
   - React-RCTBlob (from `../node_modules/react-native/Libraries/Blob`)
@@ -198,6 +203,7 @@ DEPENDENCIES:
   - React-RCTText (from `../node_modules/react-native/Libraries/Text`)
   - React-RCTVibration (from `../node_modules/react-native/Libraries/Vibration`)
   - React-RCTWebSocket (from `../node_modules/react-native/Libraries/WebSocket`)
+  - "RNCAsyncStorage (from `../node_modules/@react-native-community/async-storage`)"
   - RNDeviceInfo (from `../node_modules/react-native-device-info`)
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - "RNGoogleSignin (from `../node_modules/@react-native-community/google-signin`)"
@@ -261,6 +267,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-onesignal"
   react-native-restart:
     :path: "../node_modules/react-native-restart"
+  react-native-webview:
+    :path: "../node_modules/react-native-webview"
   React-RCTActionSheet:
     :path: "../node_modules/react-native/Libraries/ActionSheetIOS"
   React-RCTAnimation:
@@ -281,6 +289,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/Libraries/Vibration"
   React-RCTWebSocket:
     :path: "../node_modules/react-native/Libraries/WebSocket"
+  RNCAsyncStorage:
+    :path: "../node_modules/@react-native-community/async-storage"
   RNDeviceInfo:
     :path: "../node_modules/react-native-device-info"
   RNGestureHandler:
@@ -326,6 +336,7 @@ SPEC CHECKSUMS:
   react-native-netinfo: 7b3c53674ea611b26a7788821f137c6d9d3a038b
   react-native-onesignal: 417b2ae5c3148a47a6ef70b6af443186048b2022
   react-native-restart: d19a0f8d053d065fe64cd2baebb6487111c77149
+  react-native-webview: cf5527893252b3b036eea024a1da6996f7344c74
   React-RCTActionSheet: 49f6a67a7efa6688f637296383d453b97ef13645
   React-RCTAnimation: e8047438b2927ebbe630bbf600c7309374075df3
   React-RCTBlob: 2c4b28daca5b3e6e356706d8e0c7436a0e8ef492
@@ -336,6 +347,7 @@ SPEC CHECKSUMS:
   React-RCTText: d91537e29e38dc69cf09cbca0875cf5dc7402da6
   React-RCTVibration: 7655d72dfb919dd6d8e135ca108a5a2bd9fcd7b4
   React-RCTWebSocket: 7cd2c8d0f8ddd680dc76404defba7ab1f56b83af
+  RNCAsyncStorage: cd7234ff15c010723ed7c499ae4eedc605eac1fd
   RNDeviceInfo: e7c5fcde13d40e161d8a27f6c5dc69c638936002
   RNGestureHandler: 8f09cd560f8d533eb36da5a6c5a843af9f056b38
   RNGoogleSignin: ccf71ee4b6cfd324fd788a41e457e2043838c0d9
