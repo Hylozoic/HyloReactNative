@@ -1,6 +1,6 @@
 import { persist } from './persistence'
 import { LOGOUT } from '../../components/Login/actions'
-import { AsyncStorage } from 'react-native'
+import AsyncStorage from '@react-native-community/async-storage'
 
 jest.mock('react-native-fbsdk')
 jest.mock('react-native', () => ({

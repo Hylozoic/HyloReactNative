@@ -1,4 +1,4 @@
-import { AsyncStorage } from 'react-native'
+import AsyncStorage from '@react-native-community/async-storage'
 import { isNull, isUndefined, omitBy, reduce } from 'lodash'
 
 const SESSION_COOKIE_KEY = 'session-cookie-v2'
