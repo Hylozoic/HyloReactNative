@@ -2,6 +2,13 @@ module.exports = {
   presets: ['module:metro-react-native-babel-preset'],
   plugins: [
     [
+      'inline-dotenv',
+      {
+        silent: true
+      }
+    ],
+    'transform-inline-environment-variables',
+    [
       'module-resolver',
       {
         extensions: [
@@ -17,5 +24,17 @@ module.exports = {
         root: ['./src']
       }
     ]
-  ]
+  ],
+  env: {
+    test: {
+      plugins: [
+        'remove-style'
+      ]
+    },
+    production: {
+      plugins: [
+        'transform-remove-console'
+      ]
+    }
+  }
 }
