@@ -13,8 +13,7 @@ import { name as appName } from './app.json'
 let store = getStore()
 
 if (!isDev) {
-  Sentry.config(process.env.SENTRY_CONFIG_URL)
-  Sentry.install()
+  Sentry.init({ dsn: process.env.SENTRY_DSN_URL })
 }
 
 if (Platform.OS === 'android') {

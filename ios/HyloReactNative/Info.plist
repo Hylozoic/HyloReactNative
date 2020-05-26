@@ -83,5 +83,13 @@
 		<string>FontAwesome5_Solid.ttf</string>
 		<string>Fontisto.ttf</string>
 	</array>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
+	</array>
+	<key>FacebookAutoLogAppEventsEnabled</key>
+	<false/>
+	<key>FacebookAdvertiserIDCollectionEnabled</key>
+	<false/>
 </dict>
 </plist>
