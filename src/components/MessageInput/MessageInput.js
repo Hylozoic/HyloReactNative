@@ -28,7 +28,7 @@ export default class extends React.PureComponent {
   constructor () {
     super()
     this.state = {
-      inputheight: MIN_INPUT_HEIGHT,
+      inputHeight: MIN_INPUT_HEIGHT,
       submittable: false
     }
   }
