@@ -1,4 +1,5 @@
 import { uniqueId } from 'lodash/fp'
+import { AnalyticsEvents } from 'hylo-utils/constants'
 
 export const MODULE_NAME = 'NewMessage'
 export const SET_MESSAGE = `${MODULE_NAME}/SET_MESSAGE`
