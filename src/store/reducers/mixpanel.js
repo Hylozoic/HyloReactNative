@@ -1,5 +1,5 @@
-import Mixpanel from 'react-native-mixpanel'
+import { MixpanelInstance } from 'react-native-mixpanel'
 
-const mixpanel = Mixpanel.sharedInstanceWithToken("0c3b277514b71b3520723f87fea9c6ad")
+const mixpanel = new MixpanelInstance(process.env['MIXPANEL_TOKEN'])
 
 export default (state = mixpanel, action) => state

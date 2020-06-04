@@ -4,7 +4,7 @@ import Intercom from 'react-native-intercom'
 import { isProduction } from '../../config'
 
 export default function userFetchedMiddleware ({ getState }) {
-  return next => action => {
+  return next => async action => {
     const wasMe = getMe(getState())
     const result = next(action)
     const isMe = getMe(getState())
@@ -12,16 +12,17 @@ export default function userFetchedMiddleware ({ getState }) {
     if (userFetched) {
       const state = getState()
       // Do these things with the currentUser the first time it's fetched in a session
-      isProduction && identifyMixpanelUser(state)
+      isProduction && await identifyMixpanelUser(state)
       isProduction && registerIntercomUser(state)
     }
     return result
   }
 }
 
-function identifyMixpanelUser (state) {
+async function identifyMixpanelUser (state) {
   const user = getMe(state)
   const mixpanel = getMixpanel(state)
+  await mixpanel.initialize()
   mixpanel.identify(user.id)
   mixpanel.set({
     '$name': user.name,
