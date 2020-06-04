@@ -151,7 +151,7 @@ export function PersonCard ({ person, goToPerson }) {
       <Avatar avatarUrl={avatarUrl} style={styles.avatar} />
       <View style={styles.nameAndLocation}>
         <Text style={styles.name}>{name}</Text>
-        {location && <Text style={styles.location}>{location}</Text>}
+        {location.length > 0 && <Text style={styles.location}>{location}</Text>}
       </View>
     </View>
   </TouchableOpacity>
