@@ -133,13 +133,12 @@ android {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 87
-        versionName "2.3"
+        versionName "2.3.0"
         // // Enabling multidex support.
         // multiDexEnabled true
         // ndk {
         //     abiFilters "armeabi-v7a", "x86"
         // }
-
     }
     splits {
         abi {

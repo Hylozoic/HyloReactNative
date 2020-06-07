@@ -1,6 +1,6 @@
 {
   "name": "HyloReactNative",
-  "version": "0.0.1",
+  "version": "2.3",
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
@@ -18,7 +18,8 @@
     "coverage:diff": "node ../jest-diff-coverage && open coverage/lcov-report/index.html",
     "clean-start": "./scripts/clean-rebuild.sh",
     "configure": "./scripts/configure.sh",
-    "postinstall": "(find node_modules -type f -name .babelrc | grep -v /react-native/ | xargs rm) || true"
+    "postinstall": "(find node_modules -type f -name .babelrc | grep -v /react-native/ | xargs rm) || true",
+    "postversion": "react-native-version"
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.10.3",
@@ -34,7 +35,6 @@
     "path-match": "^1.2.4",
     "path-to-regexp": "^2.0.0",
     "prop-types": "^15.6.0",
-    "reselect": "^2.5.4",
     "re-reselect": "^2.3.0",
     "react": "16.9.0",
     "react-native": "0.61.5",
@@ -66,6 +66,7 @@
     "redux-logger": "^3.0.6",
     "redux-orm": "Hylozoic/redux-orm#createclass2-dist",
     "redux-promise": "^0.5.3",
+    "reselect": "^2.5.4",
     "rn-round-checkbox": "^0.3.4",
     "sails.io.js": "1.1.10",
     "socket.io-client": "^2.0.3",
@@ -89,6 +90,7 @@
     "jest": "^24.9.0",
     "jest-simple-reporter": "^0.1.0",
     "metro-react-native-babel-preset": "^0.56.0",
+    "react-native-version": "^4.0.0",
     "react-test-renderer": "16.9.0",
     "remote-redux-devtools": "^0.5.12",
     "reselect-tools": "^0.0.6",
