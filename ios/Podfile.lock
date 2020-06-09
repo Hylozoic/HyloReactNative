@@ -297,14 +297,14 @@ PODS:
   - RNGoogleSignin (4.0.3):
     - GoogleSignIn (~> 5.0.0)
     - React
-  - RNSentry (1.3.9):
+  - RNSentry (1.4.5):
     - React
-    - Sentry (~> 4.4.0)
+    - Sentry (~> 5.1.4)
   - RNVectorIcons (6.6.0):
     - React
-  - Sentry (4.4.3):
-    - Sentry/Core (= 4.4.3)
-  - Sentry/Core (4.4.3)
+  - Sentry (5.1.4):
+    - Sentry/Core (= 5.1.4)
+  - Sentry/Core (5.1.4)
   - Yoga (1.14.0)
 
 DEPENDENCIES:
@@ -508,11 +508,11 @@ SPEC CHECKSUMS:
   RNDeviceInfo: e7c5fcde13d40e161d8a27f6c5dc69c638936002
   RNGestureHandler: 8f09cd560f8d533eb36da5a6c5a843af9f056b38
   RNGoogleSignin: ccf71ee4b6cfd324fd788a41e457e2043838c0d9
-  RNSentry: 9c9783b13fb5cba387fff55f085cc1da3854ce71
+  RNSentry: 0a70359ddacbfb9b1cbbb0971e54065b9f70ac57
   RNVectorIcons: 0bb4def82230be1333ddaeee9fcba45f0b288ed4
-  Sentry: 14bdd673870e8cf64932b149fad5bbbf39a9b390
+  Sentry: 74f2ad93a20a5567a1badaedf5b3f60b142ad082
   Yoga: f2a7cd4280bfe2cca5a7aed98ba0eb3d1310f18b
 
-PODFILE CHECKSUM: 2f1974eb1c5e321b4057b28ea2451e73fa11cff3
+PODFILE CHECKSUM: 59016a3270680b157efacbfdb1df88c8768e2d7c
 
 COCOAPODS: 1.9.3

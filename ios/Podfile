@@ -56,6 +56,7 @@ target 'HyloReactNative-tvOS' do
 
 end
 
+# Added to support react-native-interom, can likel be removed in later updates
 post_install do |pi|
   pi.pods_project.targets.each do |t|
     t.build_configurations.each do |config|
