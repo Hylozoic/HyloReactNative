@@ -46,6 +46,10 @@ target 'HyloReactNative' do
   use_native_modules!
 end
 
+target 'OneSignalNotificationServiceExtension' do
+  pod 'OneSignal', '>= 2.9.3', '< 3.0'
+end
+
 target 'HyloReactNative-tvOS' do
   # Pods for HyloReactNative-tvOS
 

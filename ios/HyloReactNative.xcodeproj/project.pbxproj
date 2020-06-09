@@ -10,6 +10,8 @@
 		00E356F31AD99517003FC87E /* HyloReactNativeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* HyloReactNativeTests.m */; };
 		026202985F894FECBEB14483 /* Circular-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 424B542986F0407EBC606DAD /* Circular-Bold.ttf */; };
 		0427C3FC247B8D3600C5E188 /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 0427C3FB247B8D3600C5E188 /* main.jsbundle */; };
+		04BF1DE1248F357F00ECC3A2 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BF1DE0248F357F00ECC3A2 /* NotificationService.swift */; };
+		04BF1DE5248F357F00ECC3A2 /* OneSignalNotificationServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 04BF1DDE248F357F00ECC3A2 /* OneSignalNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		07B4558381D3B66A271C5065 /* libPods-HyloReactNativeTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5805D037F08FDFD30A465CC8 /* libPods-HyloReactNativeTests.a */; };
 		12DF135DDA5240B3BE9C9ED5 /* Circular-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AEEE5B8B897F4DCBBC0452B0 /* Circular-MediumItalic.ttf */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
@@ -24,6 +26,7 @@
 		2DCD954D1E0B4F2C00145EB5 /* HyloReactNativeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* HyloReactNativeTests.m */; };
 		3DBCEDB571264869809C3C05 /* Circular-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 995AC51966ED47B09EBC10A5 /* Circular-Medium.ttf */; };
 		43EE6D6E598A4552B6062E3A /* hylo-evo-icons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8761286F5FF34598A810C0A7 /* hylo-evo-icons.ttf */; };
+		5EAD0A256C0024CF82A5360B /* libPods-OneSignalNotificationServiceExtension.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 99294FE6D3A1BBEB5B6120BC /* libPods-OneSignalNotificationServiceExtension.a */; };
 		6473B41DA7624F5D8B9BA1E2 /* Circular-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C4D93958F51D4D5FBA5AB7C4 /* Circular-BlackItalic.ttf */; };
 		8341E437AD087222FABCF861 /* libPods-HyloReactNative-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 307D9845CF77121E28E11E23 /* libPods-HyloReactNative-tvOSTests.a */; };
 		871D668B360442ED964EE3D2 /* Circular-Book.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 132848DAF02E4203BC2960D5 /* Circular-Book.ttf */; };
@@ -40,6 +43,13 @@
 			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
 			remoteInfo = HyloReactNative;
 		};
+		04BF1DE3248F357F00ECC3A2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 04BF1DDD248F357F00ECC3A2;
+			remoteInfo = OneSignalNotificationServiceExtension;
+		};
 		2D02E4911E0B4A5D006451C7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
@@ -49,6 +59,20 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		04BF1DE6248F357F00ECC3A2 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				04BF1DE5248F357F00ECC3A2 /* OneSignalNotificationServiceExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		00E356EE1AD99517003FC87E /* HyloReactNativeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HyloReactNativeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -57,6 +81,10 @@
 		0401F47A248F311C002E45AC /* HyloReactNativeRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = HyloReactNativeRelease.entitlements; path = HyloReactNative/HyloReactNativeRelease.entitlements; sourceTree = "<group>"; };
 		0401F47B248F312A002E45AC /* HyloReactNative.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = HyloReactNative.entitlements; path = HyloReactNative/HyloReactNative.entitlements; sourceTree = "<group>"; };
 		0427C3FB247B8D3600C5E188 /* main.jsbundle */ = {isa = PBXFileReference; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
+		04BF1DDE248F357F00ECC3A2 /* OneSignalNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = OneSignalNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		04BF1DE0248F357F00ECC3A2 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		04BF1DE2248F357F00ECC3A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0E9A6587B2AA39FF40675021 /* Pods-OneSignalNotificationServiceExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.release.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.release.xcconfig"; sourceTree = "<group>"; };
 		132848DAF02E4203BC2960D5 /* Circular-Book.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Circular-Book.ttf"; path = "../assets/fonts/Circular-Book.ttf"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* HyloReactNative.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HyloReactNative.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = HyloReactNative/AppDelegate.h; sourceTree = "<group>"; };
@@ -88,6 +116,7 @@
 		7CEE52DC60CD58BB35E84E22 /* Pods-HyloReactNativeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HyloReactNativeTests.release.xcconfig"; path = "Target Support Files/Pods-HyloReactNativeTests/Pods-HyloReactNativeTests.release.xcconfig"; sourceTree = "<group>"; };
 		8761286F5FF34598A810C0A7 /* hylo-evo-icons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "hylo-evo-icons.ttf"; path = "../assets/fonts/hylo-evo-icons.ttf"; sourceTree = "<group>"; };
 		8CA9549025514EB1BF681585 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = ../assets/fonts/SimpleLineIcons.ttf; sourceTree = "<group>"; };
+		99294FE6D3A1BBEB5B6120BC /* libPods-OneSignalNotificationServiceExtension.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-OneSignalNotificationServiceExtension.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		995AC51966ED47B09EBC10A5 /* Circular-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Circular-Medium.ttf"; path = "../assets/fonts/Circular-Medium.ttf"; sourceTree = "<group>"; };
 		A7256AEF0CA44302B949BF57 /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
 		AEEE5B8B897F4DCBBC0452B0 /* Circular-MediumItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Circular-MediumItalic.ttf"; path = "../assets/fonts/Circular-MediumItalic.ttf"; sourceTree = "<group>"; };
@@ -103,6 +132,7 @@
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 		F3ACB10FF738470A830BFED1 /* Circular-BookItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Circular-BookItalic.ttf"; path = "../assets/fonts/Circular-BookItalic.ttf"; sourceTree = "<group>"; };
 		F7AB7DDF61374AE58096FCE8 /* Circular-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Circular-Black.ttf"; path = "../assets/fonts/Circular-Black.ttf"; sourceTree = "<group>"; };
+		F92594AF51839B473DEE5CDB /* Pods-OneSignalNotificationServiceExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.debug.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.debug.xcconfig"; sourceTree = "<group>"; };
 		FC93D800161BFC56B841D0B8 /* Pods-HyloReactNative.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HyloReactNative.debug.xcconfig"; path = "Target Support Files/Pods-HyloReactNative/Pods-HyloReactNative.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -112,6 +142,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				07B4558381D3B66A271C5065 /* libPods-HyloReactNativeTests.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		04BF1DDB248F357F00ECC3A2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5EAD0A256C0024CF82A5360B /* libPods-OneSignalNotificationServiceExtension.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -159,6 +197,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		04BF1DDF248F357F00ECC3A2 /* OneSignalNotificationServiceExtension */ = {
+			isa = PBXGroup;
+			children = (
+				04BF1DE0248F357F00ECC3A2 /* NotificationService.swift */,
+				04BF1DE2248F357F00ECC3A2 /* Info.plist */,
+			);
+			path = OneSignalNotificationServiceExtension;
+			sourceTree = "<group>";
+		};
 		13B07FAE1A68108700A75B9A /* HyloReactNative */ = {
 			isa = PBXGroup;
 			children = (
@@ -186,6 +233,8 @@
 				672D8D5D1B92A09861E37FB9 /* Pods-HyloReactNative-tvOSTests.release.xcconfig */,
 				1F6A2DF8C7155F3A5770ABF2 /* Pods-HyloReactNativeTests.debug.xcconfig */,
 				7CEE52DC60CD58BB35E84E22 /* Pods-HyloReactNativeTests.release.xcconfig */,
+				F92594AF51839B473DEE5CDB /* Pods-OneSignalNotificationServiceExtension.debug.xcconfig */,
+				0E9A6587B2AA39FF40675021 /* Pods-OneSignalNotificationServiceExtension.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -199,6 +248,7 @@
 				41DFA9F8FAAFF4AD5B0B4CB2 /* libPods-HyloReactNative-tvOS.a */,
 				307D9845CF77121E28E11E23 /* libPods-HyloReactNative-tvOSTests.a */,
 				5805D037F08FDFD30A465CC8 /* libPods-HyloReactNativeTests.a */,
+				99294FE6D3A1BBEB5B6120BC /* libPods-OneSignalNotificationServiceExtension.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -216,6 +266,7 @@
 				13B07FAE1A68108700A75B9A /* HyloReactNative */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* HyloReactNativeTests */,
+				04BF1DDF248F357F00ECC3A2 /* OneSignalNotificationServiceExtension */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				1626E6AB2BC44E4E2D32CB96 /* Pods */,
@@ -233,6 +284,7 @@
 				00E356EE1AD99517003FC87E /* HyloReactNativeTests.xctest */,
 				2D02E47B1E0B4A5D006451C7 /* HyloReactNative-tvOS.app */,
 				2D02E4901E0B4A5D006451C7 /* HyloReactNative-tvOSTests.xctest */,
+				04BF1DDE248F357F00ECC3A2 /* OneSignalNotificationServiceExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -291,6 +343,24 @@
 			productReference = 00E356EE1AD99517003FC87E /* HyloReactNativeTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		04BF1DDD248F357F00ECC3A2 /* OneSignalNotificationServiceExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 04BF1DE9248F357F00ECC3A2 /* Build configuration list for PBXNativeTarget "OneSignalNotificationServiceExtension" */;
+			buildPhases = (
+				F42B5235DC208946820510D7 /* [CP] Check Pods Manifest.lock */,
+				04BF1DDA248F357F00ECC3A2 /* Sources */,
+				04BF1DDB248F357F00ECC3A2 /* Frameworks */,
+				04BF1DDC248F357F00ECC3A2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OneSignalNotificationServiceExtension;
+			productName = OneSignalNotificationServiceExtension;
+			productReference = 04BF1DDE248F357F00ECC3A2 /* OneSignalNotificationServiceExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		13B07F861A680F5B00A75B9A /* HyloReactNative */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "HyloReactNative" */;
@@ -303,10 +373,12 @@
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				CC2374E65E2B085FB209311A /* [CP] Copy Pods Resources */,
 				92F5E1BF9CAB4A989AA6E47F /* Upload Debug Symbols to Sentry */,
+				04BF1DE6248F357F00ECC3A2 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				04BF1DE4248F357F00ECC3A2 /* PBXTargetDependency */,
 			);
 			name = HyloReactNative;
 			productName = HyloReactNative;
@@ -358,12 +430,18 @@
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 1150;
 				LastUpgradeCheck = 940;
 				ORGANIZATIONNAME = Facebook;
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
+					};
+					04BF1DDD248F357F00ECC3A2 = {
+						CreatedOnToolsVersion = 11.5;
+						DevelopmentTeam = L4KZBPS2F3;
+						ProvisioningStyle = Automatic;
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = L4KZBPS2F3;
@@ -398,12 +476,20 @@
 				00E356ED1AD99517003FC87E /* HyloReactNativeTests */,
 				2D02E47A1E0B4A5D006451C7 /* HyloReactNative-tvOS */,
 				2D02E48F1E0B4A5D006451C7 /* HyloReactNative-tvOSTests */,
+				04BF1DDD248F357F00ECC3A2 /* OneSignalNotificationServiceExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		00E356EC1AD99517003FC87E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		04BF1DDC248F357F00ECC3A2 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -667,6 +753,28 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		F42B5235DC208946820510D7 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-OneSignalNotificationServiceExtension-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		FD10A7F022414F080027D42C /* Start Packager */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -716,6 +824,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		04BF1DDA248F357F00ECC3A2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04BF1DE1248F357F00ECC3A2 /* NotificationService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		13B07F871A680F5B00A75B9A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -749,6 +865,11 @@
 			isa = PBXTargetDependency;
 			target = 13B07F861A680F5B00A75B9A /* HyloReactNative */;
 			targetProxy = 00E356F41AD99517003FC87E /* PBXContainerItemProxy */;
+		};
+		04BF1DE4248F357F00ECC3A2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 04BF1DDD248F357F00ECC3A2 /* OneSignalNotificationServiceExtension */;
+			targetProxy = 04BF1DE3248F357F00ECC3A2 /* PBXContainerItemProxy */;
 		};
 		2D02E4921E0B4A5D006451C7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -813,10 +934,69 @@
 			};
 			name = Release;
 		};
+		04BF1DE7248F357F00ECC3A2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F92594AF51839B473DEE5CDB /* Pods-OneSignalNotificationServiceExtension.debug.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = L4KZBPS2F3;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hylo.HyloA.OneSignalNotificationServiceExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		04BF1DE8248F357F00ECC3A2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0E9A6587B2AA39FF40675021 /* Pods-OneSignalNotificationServiceExtension.release.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = L4KZBPS2F3;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hylo.HyloA.OneSignalNotificationServiceExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FC93D800161BFC56B841D0B8 /* Pods-HyloReactNative.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = HyloReactNative/HyloReactNative.entitlements;
 				CODE_SIGN_IDENTITY = "";
@@ -843,6 +1023,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 62DB978F460EEA595B963B77 /* Pods-HyloReactNative.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = HyloReactNative/HyloReactNativeRelease.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
@@ -1081,6 +1262,15 @@
 			buildConfigurations = (
 				00E356F61AD99517003FC87E /* Debug */,
 				00E356F71AD99517003FC87E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		04BF1DE9248F357F00ECC3A2 /* Build configuration list for PBXNativeTarget "OneSignalNotificationServiceExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				04BF1DE7248F357F00ECC3A2 /* Debug */,
+				04BF1DE8248F357F00ECC3A2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
