@@ -15,6 +15,15 @@ platform :ios do
     scan
   end
 
+  desc "Create OneSignal notification extension profile."
+  lane :createOneSignalProfile do
+    produce(
+        app_identifier: "com.hylo.HyloA.OneSignalNotificationServiceExtension",
+        app_name: "hylo OneSignalNotificationServiceExtension",
+        skip_itc: true
+    )
+  end
+
   desc "Submit a new Beta Build to Apple TestFlight."
   desc "This will also make sure the profile is up to date."
   lane :beta do |options|
@@ -22,6 +31,10 @@ platform :ios do
       type: "appstore",
       force_for_new_devices: true,
       readonly: true
+    )
+    match(
+      app_identifier: ["com.hylo.HyloA", "com.hylo.HyloA.OneSignalNotificationServiceExtension"],
+      type: "appstore",
     )
     if !options[:ci]
       increment_build_number(
