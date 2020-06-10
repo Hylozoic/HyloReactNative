@@ -72,3 +72,5 @@ vendor/*
 
 # CocoaPods
 /ios/Pods/
+
+ios/codesigndoc_exports
