@@ -316,7 +316,7 @@ DEPENDENCIES:
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
   - Intercom
   - Mixpanel
-  - OneSignal (< 3.0, >= 2.9.3)
+  - OneSignal (< 3.0, >= 2.11.2)
   - RCTRequired (from `../node_modules/react-native/Libraries/RCTRequired`)
   - RCTTypeSafety (from `../node_modules/react-native/Libraries/TypeSafety`)
   - React (from `../node_modules/react-native/`)
@@ -514,6 +514,6 @@ SPEC CHECKSUMS:
   Sentry: 74f2ad93a20a5567a1badaedf5b3f60b142ad082
   Yoga: f2a7cd4280bfe2cca5a7aed98ba0eb3d1310f18b
 
-PODFILE CHECKSUM: afa3157755973fea0334780028700a3f9eefff66
+PODFILE CHECKSUM: 77894a14a55157a6fd8db5083e657a562a4113c9
 
 COCOAPODS: 1.9.3

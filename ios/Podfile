@@ -37,6 +37,7 @@ target 'HyloReactNative' do
   # Added
   pod 'Intercom'
   pod 'Mixpanel'
+  pod 'OneSignal', '>= 2.11.2', '< 3.0'
 
   target 'HyloReactNativeTests' do
     inherit! :search_paths
@@ -47,7 +48,7 @@ target 'HyloReactNative' do
 end
 
 target 'OneSignalNotificationServiceExtension' do
-  pod 'OneSignal', '>= 2.9.3', '< 3.0'
+  pod 'OneSignal', '>= 2.11.2', '< 3.0'
 end
 
 target 'HyloReactNative-tvOS' do
