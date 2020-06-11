@@ -20,19 +20,13 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		1FC1D83F47654BAFB0C9B45E /* Circular-BookItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F3ACB10FF738470A830BFED1 /* Circular-BookItalic.ttf */; };
 		2A804B4D29AB42A8945C7445 /* Circular-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F7AB7DDF61374AE58096FCE8 /* Circular-Black.ttf */; };
-		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
-		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
-		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		2DCD954D1E0B4F2C00145EB5 /* HyloReactNativeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* HyloReactNativeTests.m */; };
 		3DBCEDB571264869809C3C05 /* Circular-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 995AC51966ED47B09EBC10A5 /* Circular-Medium.ttf */; };
 		43EE6D6E598A4552B6062E3A /* hylo-evo-icons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8761286F5FF34598A810C0A7 /* hylo-evo-icons.ttf */; };
 		5EAD0A256C0024CF82A5360B /* libPods-OneSignalNotificationServiceExtension.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 99294FE6D3A1BBEB5B6120BC /* libPods-OneSignalNotificationServiceExtension.a */; };
 		6473B41DA7624F5D8B9BA1E2 /* Circular-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C4D93958F51D4D5FBA5AB7C4 /* Circular-BlackItalic.ttf */; };
-		8341E437AD087222FABCF861 /* libPods-HyloReactNative-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 307D9845CF77121E28E11E23 /* libPods-HyloReactNative-tvOSTests.a */; };
 		871D668B360442ED964EE3D2 /* Circular-Book.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 132848DAF02E4203BC2960D5 /* Circular-Book.ttf */; };
 		A7707633807C4690B665AFD9 /* Circular-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 38F55B6534E24B54AA299F61 /* Circular-BoldItalic.ttf */; };
 		D3B34320F879E0F3DCC87DB4 /* libPods-HyloReactNative.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5418BEEA89C50862009EEAB1 /* libPods-HyloReactNative.a */; };
-		F1EB679B3CA83FEA13C56967 /* libPods-HyloReactNative-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 41DFA9F8FAAFF4AD5B0B4CB2 /* libPods-HyloReactNative-tvOS.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,13 +43,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 04BF1DDD248F357F00ECC3A2;
 			remoteInfo = OneSignalNotificationServiceExtension;
-		};
-		2D02E4911E0B4A5D006451C7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 2D02E47A1E0B4A5D006451C7;
-			remoteInfo = "HyloReactNative-tvOS";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -96,13 +83,8 @@
 		1F472486BCA1418E868E82C2 /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Regular.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
 		1F6A2DF8C7155F3A5770ABF2 /* Pods-HyloReactNativeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HyloReactNativeTests.debug.xcconfig"; path = "Target Support Files/Pods-HyloReactNativeTests/Pods-HyloReactNativeTests.debug.xcconfig"; sourceTree = "<group>"; };
 		235ABA21FA7F4FAAA9CF862A /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = ../assets/fonts/MaterialIcons.ttf; sourceTree = "<group>"; };
-		2D02E47B1E0B4A5D006451C7 /* HyloReactNative-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "HyloReactNative-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2D02E4901E0B4A5D006451C7 /* HyloReactNative-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "HyloReactNative-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		307D9845CF77121E28E11E23 /* libPods-HyloReactNative-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HyloReactNative-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		389B5901FDEF459F91F4CFE4 /* Pods-HyloReactNative-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HyloReactNative-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-HyloReactNative-tvOSTests/Pods-HyloReactNative-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		38F55B6534E24B54AA299F61 /* Circular-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Circular-BoldItalic.ttf"; path = "../assets/fonts/Circular-BoldItalic.ttf"; sourceTree = "<group>"; };
 		399E54B6ABC54C91AA36D03B /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = ../assets/fonts/Feather.ttf; sourceTree = "<group>"; };
-		41DFA9F8FAAFF4AD5B0B4CB2 /* libPods-HyloReactNative-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HyloReactNative-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		424B542986F0407EBC606DAD /* Circular-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Circular-Bold.ttf"; path = "../assets/fonts/Circular-Bold.ttf"; sourceTree = "<group>"; };
 		45868A47B7534CC69DAE81F8 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = ../assets/fonts/MaterialCommunityIcons.ttf; sourceTree = "<group>"; };
 		4CC5B89951114076879B1C07 /* Fontisto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Fontisto.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf"; sourceTree = "<group>"; };
@@ -110,8 +92,6 @@
 		5805D037F08FDFD30A465CC8 /* libPods-HyloReactNativeTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HyloReactNativeTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		62DB978F460EEA595B963B77 /* Pods-HyloReactNative.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HyloReactNative.release.xcconfig"; path = "Target Support Files/Pods-HyloReactNative/Pods-HyloReactNative.release.xcconfig"; sourceTree = "<group>"; };
 		66B892497C954574886DBD13 /* AntDesign.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AntDesign.ttf; path = "../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf"; sourceTree = "<group>"; };
-		672D8D5D1B92A09861E37FB9 /* Pods-HyloReactNative-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HyloReactNative-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-HyloReactNative-tvOSTests/Pods-HyloReactNative-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
-		72AAE9C1DD94997E81A9DDC9 /* Pods-HyloReactNative-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HyloReactNative-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-HyloReactNative-tvOS/Pods-HyloReactNative-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		74B41D4024D34ADC81198EFB /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
 		7CEE52DC60CD58BB35E84E22 /* Pods-HyloReactNativeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HyloReactNativeTests.release.xcconfig"; path = "Target Support Files/Pods-HyloReactNativeTests/Pods-HyloReactNativeTests.release.xcconfig"; sourceTree = "<group>"; };
 		8761286F5FF34598A810C0A7 /* hylo-evo-icons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "hylo-evo-icons.ttf"; path = "../assets/fonts/hylo-evo-icons.ttf"; sourceTree = "<group>"; };
@@ -126,7 +106,6 @@
 		C49A433D83C6448A9E45D6D7 /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = ../assets/fonts/EvilIcons.ttf; sourceTree = "<group>"; };
 		C4D93958F51D4D5FBA5AB7C4 /* Circular-BlackItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Circular-BlackItalic.ttf"; path = "../assets/fonts/Circular-BlackItalic.ttf"; sourceTree = "<group>"; };
 		D7F9F56B416841F59EB18D68 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = ../assets/fonts/Ionicons.ttf; sourceTree = "<group>"; };
-		D8A9A0F5F2EB37196DC62257 /* Pods-HyloReactNative-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HyloReactNative-tvOS.release.xcconfig"; path = "Target Support Files/Pods-HyloReactNative-tvOS/Pods-HyloReactNative-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		EC1A1FAA5BE04FE0BBD7E198 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = ../assets/fonts/Octicons.ttf; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
@@ -158,22 +137,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D3B34320F879E0F3DCC87DB4 /* libPods-HyloReactNative.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		2D02E4781E0B4A5D006451C7 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				F1EB679B3CA83FEA13C56967 /* libPods-HyloReactNative-tvOS.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		2D02E48D1E0B4A5D006451C7 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				8341E437AD087222FABCF861 /* libPods-HyloReactNative-tvOSTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -227,10 +190,6 @@
 			children = (
 				FC93D800161BFC56B841D0B8 /* Pods-HyloReactNative.debug.xcconfig */,
 				62DB978F460EEA595B963B77 /* Pods-HyloReactNative.release.xcconfig */,
-				72AAE9C1DD94997E81A9DDC9 /* Pods-HyloReactNative-tvOS.debug.xcconfig */,
-				D8A9A0F5F2EB37196DC62257 /* Pods-HyloReactNative-tvOS.release.xcconfig */,
-				389B5901FDEF459F91F4CFE4 /* Pods-HyloReactNative-tvOSTests.debug.xcconfig */,
-				672D8D5D1B92A09861E37FB9 /* Pods-HyloReactNative-tvOSTests.release.xcconfig */,
 				1F6A2DF8C7155F3A5770ABF2 /* Pods-HyloReactNativeTests.debug.xcconfig */,
 				7CEE52DC60CD58BB35E84E22 /* Pods-HyloReactNativeTests.release.xcconfig */,
 				F92594AF51839B473DEE5CDB /* Pods-OneSignalNotificationServiceExtension.debug.xcconfig */,
@@ -245,8 +204,6 @@
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
 				5418BEEA89C50862009EEAB1 /* libPods-HyloReactNative.a */,
-				41DFA9F8FAAFF4AD5B0B4CB2 /* libPods-HyloReactNative-tvOS.a */,
-				307D9845CF77121E28E11E23 /* libPods-HyloReactNative-tvOSTests.a */,
 				5805D037F08FDFD30A465CC8 /* libPods-HyloReactNativeTests.a */,
 				99294FE6D3A1BBEB5B6120BC /* libPods-OneSignalNotificationServiceExtension.a */,
 			);
@@ -282,8 +239,6 @@
 			children = (
 				13B07F961A680F5B00A75B9A /* HyloReactNative.app */,
 				00E356EE1AD99517003FC87E /* HyloReactNativeTests.xctest */,
-				2D02E47B1E0B4A5D006451C7 /* HyloReactNative-tvOS.app */,
-				2D02E4901E0B4A5D006451C7 /* HyloReactNative-tvOSTests.xctest */,
 				04BF1DDE248F357F00ECC3A2 /* OneSignalNotificationServiceExtension.appex */,
 			);
 			name = Products;
@@ -385,45 +340,6 @@
 			productReference = 13B07F961A680F5B00A75B9A /* HyloReactNative.app */;
 			productType = "com.apple.product-type.application";
 		};
-		2D02E47A1E0B4A5D006451C7 /* HyloReactNative-tvOS */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "HyloReactNative-tvOS" */;
-			buildPhases = (
-				9613A8AFED3AD2BE9D1A9297 /* [CP] Check Pods Manifest.lock */,
-				FD10A7F122414F3F0027D42C /* Start Packager */,
-				2D02E4771E0B4A5D006451C7 /* Sources */,
-				2D02E4781E0B4A5D006451C7 /* Frameworks */,
-				2D02E4791E0B4A5D006451C7 /* Resources */,
-				2D02E4CB1E0B4B27006451C7 /* Bundle React Native Code And Images */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "HyloReactNative-tvOS";
-			productName = "HyloReactNative-tvOS";
-			productReference = 2D02E47B1E0B4A5D006451C7 /* HyloReactNative-tvOS.app */;
-			productType = "com.apple.product-type.application";
-		};
-		2D02E48F1E0B4A5D006451C7 /* HyloReactNative-tvOSTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "HyloReactNative-tvOSTests" */;
-			buildPhases = (
-				E229B696469C4A67F45CAD1E /* [CP] Check Pods Manifest.lock */,
-				2D02E48C1E0B4A5D006451C7 /* Sources */,
-				2D02E48D1E0B4A5D006451C7 /* Frameworks */,
-				2D02E48E1E0B4A5D006451C7 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				2D02E4921E0B4A5D006451C7 /* PBXTargetDependency */,
-			);
-			name = "HyloReactNative-tvOSTests";
-			productName = "HyloReactNative-tvOSTests";
-			productReference = 2D02E4901E0B4A5D006451C7 /* HyloReactNative-tvOSTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -447,15 +363,6 @@
 						DevelopmentTeam = L4KZBPS2F3;
 						ProvisioningStyle = Manual;
 					};
-					2D02E47A1E0B4A5D006451C7 = {
-						CreatedOnToolsVersion = 8.2.1;
-						ProvisioningStyle = Automatic;
-					};
-					2D02E48F1E0B4A5D006451C7 = {
-						CreatedOnToolsVersion = 8.2.1;
-						ProvisioningStyle = Automatic;
-						TestTargetID = 2D02E47A1E0B4A5D006451C7;
-					};
 				};
 			};
 			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "HyloReactNative" */;
@@ -474,8 +381,6 @@
 			targets = (
 				13B07F861A680F5B00A75B9A /* HyloReactNative */,
 				00E356ED1AD99517003FC87E /* HyloReactNativeTests */,
-				2D02E47A1E0B4A5D006451C7 /* HyloReactNative-tvOS */,
-				2D02E48F1E0B4A5D006451C7 /* HyloReactNative-tvOSTests */,
 				04BF1DDD248F357F00ECC3A2 /* OneSignalNotificationServiceExtension */,
 			);
 		};
@@ -512,21 +417,6 @@
 				3DBCEDB571264869809C3C05 /* Circular-Medium.ttf in Resources */,
 				12DF135DDA5240B3BE9C9ED5 /* Circular-MediumItalic.ttf in Resources */,
 				43EE6D6E598A4552B6062E3A /* hylo-evo-icons.ttf in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		2D02E4791E0B4A5D006451C7 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		2D02E48E1E0B4A5D006451C7 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -569,20 +459,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		2D02E4CB1E0B4B27006451C7 /* Bundle React Native Code And Images */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Bundle React Native Code And Images";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "export SENTRY_PROPERTIES=sentry.properties\nexport EXTRA_PACKAGER_ARGS=\"--sourcemap-output $DERIVED_FILE_DIR/main.jsbundle.map\"\nexport NODE_BINARY=$(which node)\n../node_modules/@sentry/cli/bin/sentry-cli react-native xcode \n../node_modules/react-native/scripts/react-native-xcode.sh\n";
-		};
 		92F5E1BF9CAB4A989AA6E47F /* Upload Debug Symbols to Sentry */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -596,28 +472,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "export SENTRY_PROPERTIES=sentry.properties\n../node_modules/@sentry/cli/bin/sentry-cli upload-dsym\n";
-		};
-		9613A8AFED3AD2BE9D1A9297 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-HyloReactNative-tvOS-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
 		};
 		CC2374E65E2B085FB209311A /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -709,28 +563,6 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HyloReactNative/Pods-HyloReactNative-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E229B696469C4A67F45CAD1E /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-HyloReactNative-tvOSTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 		F185CD44E801B4AB5A6453C1 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -794,25 +626,6 @@
 			shellScript = "export RCT_METRO_PORT=\"${RCT_METRO_PORT:=8081}\"\necho \"export RCT_METRO_PORT=${RCT_METRO_PORT}\" > \"${SRCROOT}/../node_modules/react-native/scripts/.packager.env\"\nif [ -z \"${RCT_NO_LAUNCH_PACKAGER+xxx}\" ] ; then\n  if nc -w 5 -z localhost ${RCT_METRO_PORT} ; then\n    if ! curl -s \"http://localhost:${RCT_METRO_PORT}/status\" | grep -q \"packager-status:running\" ; then\n      echo \"Port ${RCT_METRO_PORT} already in use, packager is either not running or not running correctly\"\n      exit 2\n    fi\n  else\n    open \"$SRCROOT/../node_modules/react-native/scripts/launchPackager.command\" || echo \"Can't start packager automatically\"\n  fi\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		FD10A7F122414F3F0027D42C /* Start Packager */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Start Packager";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "export RCT_METRO_PORT=\"${RCT_METRO_PORT:=8081}\"\necho \"export RCT_METRO_PORT=${RCT_METRO_PORT}\" > \"${SRCROOT}/../node_modules/react-native/scripts/.packager.env\"\nif [ -z \"${RCT_NO_LAUNCH_PACKAGER+xxx}\" ] ; then\n  if nc -w 5 -z localhost ${RCT_METRO_PORT} ; then\n    if ! curl -s \"http://localhost:${RCT_METRO_PORT}/status\" | grep -q \"packager-status:running\" ; then\n      echo \"Port ${RCT_METRO_PORT} already in use, packager is either not running or not running correctly\"\n      exit 2\n    fi\n  else\n    open \"$SRCROOT/../node_modules/react-native/scripts/launchPackager.command\" || echo \"Can't start packager automatically\"\n  fi\nfi\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -841,23 +654,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		2D02E4771E0B4A5D006451C7 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */,
-				2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		2D02E48C1E0B4A5D006451C7 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				2DCD954D1E0B4F2C00145EB5 /* HyloReactNativeTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -870,11 +666,6 @@
 			isa = PBXTargetDependency;
 			target = 04BF1DDD248F357F00ECC3A2 /* OneSignalNotificationServiceExtension */;
 			targetProxy = 04BF1DE3248F357F00ECC3A2 /* PBXContainerItemProxy */;
-		};
-		2D02E4921E0B4A5D006451C7 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 2D02E47A1E0B4A5D006451C7 /* HyloReactNative-tvOS */;
-			targetProxy = 2D02E4911E0B4A5D006451C7 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -911,6 +702,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HyloReactNative.app/HyloReactNative";
+				TVOS_DEPLOYMENT_TARGET = "";
 			};
 			name = Debug;
 		};
@@ -931,6 +723,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HyloReactNative.app/HyloReactNative";
+				TVOS_DEPLOYMENT_TARGET = "";
 			};
 			name = Release;
 		};
@@ -962,6 +755,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				TVOS_DEPLOYMENT_TARGET = "";
 			};
 			name = Debug;
 		};
@@ -992,6 +786,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				TVOS_DEPLOYMENT_TARGET = "";
 			};
 			name = Release;
 		};
@@ -1018,6 +813,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.hylo.HyloA;
 				PRODUCT_NAME = HyloReactNative;
 				PROVISIONING_PROFILE_SPECIFIER = "match Development com.hylo.HyloA";
+				TVOS_DEPLOYMENT_TARGET = "";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1044,117 +840,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.hylo.HyloA;
 				PRODUCT_NAME = HyloReactNative;
 				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.hylo.HyloA";
+				TVOS_DEPLOYMENT_TARGET = "";
 				VERSIONING_SYSTEM = "apple-generic";
-			};
-			name = Release;
-		};
-		2D02E4971E0B4A5E006451C7 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 72AAE9C1DD94997E81A9DDC9 /* Pods-HyloReactNative-tvOS.debug.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				ENABLE_TESTABILITY = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "HyloReactNative-tvOS/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-ObjC",
-					"-lc++",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.HyloReactNative-tvOS";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = appletvos;
-				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 9.2;
-			};
-			name = Debug;
-		};
-		2D02E4981E0B4A5E006451C7 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = D8A9A0F5F2EB37196DC62257 /* Pods-HyloReactNative-tvOS.release.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "HyloReactNative-tvOS/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-ObjC",
-					"-lc++",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.HyloReactNative-tvOS";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = appletvos;
-				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 9.2;
-			};
-			name = Release;
-		};
-		2D02E4991E0B4A5E006451C7 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 389B5901FDEF459F91F4CFE4 /* Pods-HyloReactNative-tvOSTests.debug.xcconfig */;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				ENABLE_TESTABILITY = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "HyloReactNative-tvOSTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-ObjC",
-					"-lc++",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.HyloReactNative-tvOSTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = appletvos;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HyloReactNative-tvOS.app/HyloReactNative-tvOS";
-				TVOS_DEPLOYMENT_TARGET = 10.1;
-			};
-			name = Debug;
-		};
-		2D02E49A1E0B4A5E006451C7 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 672D8D5D1B92A09861E37FB9 /* Pods-HyloReactNative-tvOSTests.release.xcconfig */;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "HyloReactNative-tvOSTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-ObjC",
-					"-lc++",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.HyloReactNative-tvOSTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = appletvos;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HyloReactNative-tvOS.app/HyloReactNative-tvOS";
-				TVOS_DEPLOYMENT_TARGET = 10.1;
 			};
 			name = Release;
 		};
@@ -1283,24 +970,6 @@
 			buildConfigurations = (
 				13B07F941A680F5B00A75B9A /* Debug */,
 				13B07F951A680F5B00A75B9A /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "HyloReactNative-tvOS" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				2D02E4971E0B4A5E006451C7 /* Debug */,
-				2D02E4981E0B4A5E006451C7 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "HyloReactNative-tvOSTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				2D02E4991E0B4A5E006451C7 /* Debug */,
-				2D02E49A1E0B4A5E006451C7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

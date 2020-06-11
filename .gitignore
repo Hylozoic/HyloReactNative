@@ -69,6 +69,7 @@ vendor/*
 
 # Bundle artifact
 *.jsbundle
+*.jsbundle.map
 
 # CocoaPods
 /ios/Pods/

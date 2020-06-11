@@ -51,16 +51,6 @@ target 'OneSignalNotificationServiceExtension' do
   pod 'OneSignal', '>= 2.11.2', '< 3.0'
 end
 
-target 'HyloReactNative-tvOS' do
-  # Pods for HyloReactNative-tvOS
-
-  target 'HyloReactNative-tvOSTests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
-
-end
-
 # Added to support react-native-interom, can likel be removed in later updates
 post_install do |pi|
   pi.pods_project.targets.each do |t|
