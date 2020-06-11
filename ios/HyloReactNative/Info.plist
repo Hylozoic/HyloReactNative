@@ -43,8 +43,8 @@
 			</dict>
 		</dict>
 	</dict>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>We would like to access your location to provide notifications of nearby resources.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Send photos to help resolve app issues</string>
 	<key>UIAppFonts</key>
