@@ -75,3 +75,4 @@ vendor/*
 /ios/Pods/
 
 ios/codesigndoc_exports
+.bitrise.secrets.yml
