@@ -29,10 +29,14 @@ jobs:
     docker:
     - image: circleci/node:10.20.1
     steps:
-    # Machine Setup
+    # use a --login shell so our "set Ruby version" command gets picked up for later steps
+    shell: /bin/bash --login -o pipefail
     #   If you break your build into multiple jobs with workflows, you will probably want to do the parts of this that are relevant in each
     # The following `checkout` command checks out your code to your working directory. In 1.0 we did this implicitly. In 2.0 you can choose where in the course of a job your code should be checked out.
     - checkout
+    - run:
+        name: set Ruby version
+        command:  echo "ruby-2.4" > ~/.ruby-version    # Machine Setup
     # setup self referential env vars
     - run: echo $HOME
     - run: echo $CIRCLE_PROJECT_REPONAME
@@ -57,6 +61,9 @@ jobs:
         - v1-dep-master-{{ checksum "yarn.lock" }}
         # Any branch if there are none on the default branch - this should be unnecessary if you have your default branch configured correctly
         - v1-dep-{{ checksum "yarn.lock" }}
+    - run:
+        command: bundle install
+        working_directory: ios
     # This is based on your 1.0 configuration file or project settings
     # # Install yarn so it's up to date
     # - run: sudo apt-get update && sudo apt-get install yarn
