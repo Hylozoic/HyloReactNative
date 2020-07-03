@@ -152,25 +152,6 @@ describe('Thread', () => {
   })
 })
 
-// Mocks get hoisted. Currently cannot get this to work with manual __mocks__
-// folders and our Redux container setup... pointers welcome!
-//
-// Workaround for no refs in react-test-renderer, extrapolated from
-// https://github.com/facebook/react-native/issues/15000#issuecomment-315250887
-// If used more than once, this could be extracted to a more general location
-jest.mock('react-native/Libraries/Lists/FlatList', () => {
-  const React = require('React')
-  class FlatList extends React.Component {
-    _listRef = { scrollToOffset: jest.fn() }
-    scrollToOffset = jest.fn()
-
-    render () {
-      return React.createElement('FlatList', this.props, this.props.children)
-    }
-  }
-  return FlatList
-})
-
 // Can actually get away with `jest.mock('../SocketSubscriber')` here, but it
 // generates warnings because `undefined` isn't exactly a React component...
 jest.mock('../SocketSubscriber', () => {

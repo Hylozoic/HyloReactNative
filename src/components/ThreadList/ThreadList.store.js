@@ -39,13 +39,16 @@ export const getThreads = ormCreateSelector(
   orm,
   get('orm'),
   ({ MessageThread }) =>
-    MessageThread.all().orderBy(thread => -new Date(thread.updatedAt))
-    .toModelArray().map(thread => ({
-      ...thread.ref,
-      unread: thread.isUnread(),
-      participants: thread.participants.toRefArray(),
-      latestMessage: thread.messages.orderBy(m => -new Date(m.createdAt)).first()
-    }))
+    MessageThread
+      .all()
+      .orderBy(thread => -new Date(thread.updatedAt))
+      .toModelArray().map(thread => ({
+          ...thread.ref,
+          unread: thread.isUnread(),
+          participants: thread.participants.toRefArray(),
+          latestMessage: thread.messages.orderBy(m => -new Date(m.createdAt)).first()
+        })
+      )
 )
 
 export const getThreadsHasMore = createSelector(getThreadResults, get('hasMore'))
