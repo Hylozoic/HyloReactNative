@@ -27,18 +27,13 @@ jobs:
     # To see the list of pre-built images that CircleCI provides for most common languages see
     # https://circleci.com/docs/2.0/circleci-images/
     docker:
-    - image: circleci/node:10.20.1
+    - image: circleci/ruby:2.6.3-stretch
+    # - image: circleci/node:10.20.1
     # use a --login shell so our "set Ruby version" command gets picked up for later steps
     steps:
     #   If you break your build into multiple jobs with workflows, you will probably want to do the parts of this that are relevant in each
     # The following `checkout` command checks out your code to your working directory. In 1.0 we did this implicitly. In 2.0 you can choose where in the course of a job your code should be checked out.
     - checkout
-    - run:
-        name: set Ruby version
-        command:  echo "ruby-2.4" > ~/.ruby-version    # Machine Setup
-    - run:
-        name: Install Ruby
-        command: apk add ruby ruby-io-console ruby-bundler
     - run:
         name: install Bundler Ruby GEM
         command: gem install bundler
