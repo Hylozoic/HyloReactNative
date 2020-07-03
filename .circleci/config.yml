@@ -37,6 +37,9 @@ jobs:
     - run:
         name: install Bundler Ruby GEM
         command: gem install bundler
+    - run:
+        name: install CocoaPods
+        command: sudo gem install cocoapods
     # setup self referential env vars
     - run: echo $HOME
     - run: echo $CIRCLE_PROJECT_REPONAME
