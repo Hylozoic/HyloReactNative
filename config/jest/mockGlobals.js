@@ -42,6 +42,10 @@ jest.mock('react-native-mixpanel')
 jest.mock('react-native-device-info')
 jest.mock('react-native-intercom', () => {}, { virtual: true });
 jest.mock('react-native/Libraries/Animated/src/NativeAnimatedHelper')
+jest.mock('react-native-background-timer', () => {})
+jest.mock('@sentry/react-native', () => ({
+  init: jest.fn()
+}))
 
 global.XMLHttpRequest = jest.fn()
 global.window = {}

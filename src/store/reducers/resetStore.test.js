@@ -1,5 +1,5 @@
 import resetStore, { KEYS_PRESERVED_ON_RESET } from './resetStore'
-import { getEmptyState } from '..'
+import { getEmptyState } from 'store'
 import { LOGOUT } from '../../components/Login/actions'
 import { RESET_STORE } from '../constants'
 
