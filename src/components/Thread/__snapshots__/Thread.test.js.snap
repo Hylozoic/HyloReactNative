@@ -54,7 +54,6 @@ exports[`Thread matches the last snapshot 1`] = `
       multiline={true}
       onSubmit={[Function]}
       placeholder="Write something..."
-      sendIsTyping={undefined}
     />
     <PeopleTyping />
     <SocketSubscriber

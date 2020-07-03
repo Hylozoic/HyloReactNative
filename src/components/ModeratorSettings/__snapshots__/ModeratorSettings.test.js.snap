@@ -32,11 +32,7 @@ exports[`ModeratorSettings matches the last snapshot 1`] = `
 <FlatList
   ListHeaderComponent={
     <View>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-      >
+      <Text>
         Community Time
       </Text>
       <View>
@@ -44,11 +40,7 @@ exports[`ModeratorSettings matches the last snapshot 1`] = `
           activeOpacity={0.2}
           onPress={[Function]}
         >
-          <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
-          >
+          <Text>
             <Icon
               green={true}
               name="Plus"
@@ -81,6 +73,7 @@ exports[`ModeratorSettings matches the last snapshot 1`] = `
   maxToRenderPerBatch={10}
   numColumns={1}
   onEndReachedThreshold={2}
+  removeClippedSubviews={false}
   renderItem={[Function]}
   scrollEventThrottle={50}
   updateCellsBatchingPeriod={50}
@@ -96,11 +89,7 @@ exports[`ModeratorSettings renders ModeratorRow 1`] = `
   <Avatar
     avatarUrl="http://aurl.com"
   />
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-  >
+  <Text>
     John Current
   </Text>
   <TouchableOpacity
@@ -115,11 +104,7 @@ exports[`ModeratorSettings renders ModeratorRow 1`] = `
     }
     onPress={[Function]}
   >
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
+    <Text>
       Remove
     </Text>
   </TouchableOpacity>
@@ -134,11 +119,7 @@ exports[`ModeratorSettings renders ModeratorRow without removeModerator 1`] = `
   <Avatar
     avatarUrl="http://aurl.com"
   />
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-  >
+  <Text>
     John Current
   </Text>
 </TouchableOpacity>
@@ -148,11 +129,7 @@ exports[`ModeratorSettings shows the Search component appropriately 1`] = `
 <RCTScrollView
   ListHeaderComponent={
     <View>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-      >
+      <Text>
         Community Time
       </Text>
       <View>
@@ -160,11 +137,7 @@ exports[`ModeratorSettings shows the Search component appropriately 1`] = `
           activeOpacity={0.2}
           onPress={[Function]}
         >
-          <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
-          >
+          <Text>
             <Icon
               green={true}
               name="Plus"
@@ -194,7 +167,6 @@ exports[`ModeratorSettings shows the Search component appropriately 1`] = `
   getItemCount={[Function]}
   horizontal={false}
   initialNumToRender={10}
-  invertStickyHeaders={undefined}
   keyExtractor={[Function]}
   keyboardShouldPersistTaps="always"
   maxToRenderPerBatch={10}
@@ -206,6 +178,7 @@ exports[`ModeratorSettings shows the Search component appropriately 1`] = `
   onScroll={[Function]}
   onScrollBeginDrag={[Function]}
   onScrollEndDrag={[Function]}
+  removeClippedSubviews={false}
   renderItem={[Function]}
   scrollEventThrottle={50}
   stickyHeaderIndices={Array []}
@@ -218,41 +191,24 @@ exports[`ModeratorSettings shows the Search component appropriately 1`] = `
       onLayout={[Function]}
     >
       <View>
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-        >
+        <Text>
           Community Time
         </Text>
         <View>
           <View
-            accessibilityComponentType={undefined}
-            accessibilityLabel={undefined}
-            accessibilityTraits={undefined}
             accessible={true}
-            collapsable={undefined}
-            hasTVPreferredFocus={undefined}
-            hitSlop={undefined}
+            focusable={true}
             isTVSelectable={true}
-            nativeID={undefined}
-            onLayout={undefined}
+            onClick={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
             onResponderRelease={[Function]}
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
-            testID={undefined}
-            tvParallaxProperties={undefined}
           >
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-            >
+            <Text>
               <Icon
-                color={undefined}
                 green={true}
                 name="Plus"
               />
@@ -266,24 +222,16 @@ exports[`ModeratorSettings shows the Search component appropriately 1`] = `
       onLayout={[Function]}
     >
       <View
-        accessibilityComponentType={undefined}
-        accessibilityLabel={undefined}
-        accessibilityTraits={undefined}
         accessible={true}
-        collapsable={undefined}
-        hasTVPreferredFocus={undefined}
-        hitSlop={undefined}
+        focusable={true}
         isTVSelectable={true}
-        nativeID={undefined}
-        onLayout={undefined}
+        onClick={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
         onResponderTerminate={[Function]}
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
-        testID={undefined}
-        tvParallaxProperties={undefined}
       >
         <View>
           <Image
@@ -294,11 +242,7 @@ exports[`ModeratorSettings shows the Search component appropriately 1`] = `
             }
           />
         </View>
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-        >
+        <Text>
           John Current
         </Text>
       </View>
@@ -307,24 +251,16 @@ exports[`ModeratorSettings shows the Search component appropriately 1`] = `
       onLayout={[Function]}
     >
       <View
-        accessibilityComponentType={undefined}
-        accessibilityLabel={undefined}
-        accessibilityTraits={undefined}
         accessible={true}
-        collapsable={undefined}
-        hasTVPreferredFocus={undefined}
-        hitSlop={undefined}
+        focusable={true}
         isTVSelectable={true}
-        nativeID={undefined}
-        onLayout={undefined}
+        onClick={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
         onResponderTerminate={[Function]}
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
-        testID={undefined}
-        tvParallaxProperties={undefined}
       >
         <View>
           <Image
@@ -335,20 +271,12 @@ exports[`ModeratorSettings shows the Search component appropriately 1`] = `
             }
           />
         </View>
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-        >
+        <Text>
           John Other
         </Text>
         <View
-          accessibilityComponentType={undefined}
-          accessibilityLabel={undefined}
-          accessibilityTraits={undefined}
           accessible={true}
-          collapsable={undefined}
-          hasTVPreferredFocus={undefined}
+          focusable={true}
           hitSlop={
             Object {
               "bottom": 15,
@@ -358,22 +286,15 @@ exports[`ModeratorSettings shows the Search component appropriately 1`] = `
             }
           }
           isTVSelectable={true}
-          nativeID={undefined}
-          onLayout={undefined}
+          onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
           onResponderTerminate={[Function]}
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
-          testID={undefined}
-          tvParallaxProperties={undefined}
         >
-          <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
-          >
+          <Text>
             Remove
           </Text>
         </View>

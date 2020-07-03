@@ -158,7 +158,7 @@ describe('Thread', () => {
 // Workaround for no refs in react-test-renderer, extrapolated from
 // https://github.com/facebook/react-native/issues/15000#issuecomment-315250887
 // If used more than once, this could be extracted to a more general location
-jest.mock('FlatList', () => {
+jest.mock('react-native/Libraries/Lists/FlatList', () => {
   const React = require('React')
   class FlatList extends React.Component {
     _listRef = { scrollToOffset: jest.fn() }

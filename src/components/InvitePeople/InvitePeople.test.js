@@ -4,7 +4,7 @@ import ReactShallowRenderer from 'react-test-renderer/shallow'
 import InvitePeople, { PendingInvitesPage, SendInvitesPage, PendingInviteRow, parseEmailList } from './InvitePeople'
 import ReactTestRenderer from 'react-test-renderer'
 
-jest.mock('Clipboard', () => ({
+jest.mock('react-native/Libraries/Components/Clipboard/Clipboard', () => ({
   setString: jest.fn()
 }))
 
