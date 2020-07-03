@@ -36,6 +36,9 @@ jobs:
     - run:
         name: set Ruby version
         command:  echo "ruby-2.4" > ~/.ruby-version    # Machine Setup
+    - run:
+        name: install Bundler Ruby GEM
+        command: gem install bundler
     # setup self referential env vars
     - run: echo $HOME
     - run: echo $CIRCLE_PROJECT_REPONAME
