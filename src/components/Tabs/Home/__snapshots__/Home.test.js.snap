@@ -10,8 +10,6 @@ exports[`shows Feed with a community and user 1`] = `
       },
     }
   }
-  networkId={undefined}
-  screenProps={undefined}
 />
 `;
 

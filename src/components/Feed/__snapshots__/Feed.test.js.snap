@@ -24,22 +24,14 @@ exports[`renders correctly if currentUserHasMemberships 1`] = `
               "id": "2",
             }
           }
-          followersTotal={undefined}
-          hidePostPrompt={undefined}
-          network={undefined}
           newPost={[Function]}
-          postsTotal={undefined}
           setTopicSubscribe={[Function]}
           theme={Object {}}
           topicName="amazing"
-          topicSubscribed={undefined}
         />
       </View>
     }
-    isProjectFeed={undefined}
     navigation={Object {}}
-    network={undefined}
-    screenProps={undefined}
     showMember={[Function]}
     showPost={[Function]}
     showTopic={[Function]}
@@ -50,7 +42,6 @@ exports[`renders correctly if currentUserHasMemberships 1`] = `
 
 exports[`renders correctly if currentUserHasMemberships is false 1`] = `
 <CreateCommunityNotice
-  goToCreateCommunityName={undefined}
   text="No posts here, try creating your own Community!"
 />
 `;

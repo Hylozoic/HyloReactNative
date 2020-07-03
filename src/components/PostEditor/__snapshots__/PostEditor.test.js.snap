@@ -37,11 +37,11 @@ Object {
 `;
 
 exports[`PostEditor renders a new editor correctly 1`] = `
-<Unknown
+<_default
   behavior="padding"
   keyboardVerticalOffset={64}
 >
-  <ScrollView
+  <ScrollViewMock
     keyboardShouldPersistTaps="handled"
   >
     <View>
@@ -76,6 +76,7 @@ exports[`PostEditor renders a new editor correctly 1`] = `
           onChangeText={[Function]}
           placeholder="What do you want to discuss?"
           placeholderTextColor="#c0c6cd"
+          rejectResponderTermination={true}
           underlineColorAndroid="transparent"
           value=""
         />
@@ -85,7 +86,6 @@ exports[`PostEditor renders a new editor correctly 1`] = `
       </SectionLabel>
       <withNavigation(InlineEditor)
         autoGrow={false}
-        communityId={undefined}
         containerStyle={
           Object {
             "borderBottomColor": "#c0c6cd",
@@ -104,7 +104,6 @@ exports[`PostEditor renders a new editor correctly 1`] = `
         onFocusToggle={[Function]}
         onInsertTopic={[Function]}
         placeholder="What else should we know?"
-        submitting={undefined}
         value=""
       />
       <TouchableOpacity
@@ -125,11 +124,7 @@ exports[`PostEditor renders a new editor correctly 1`] = `
           onPress={[Function]}
           topics={Array []}
         />
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-        >
+        <Text>
           Add topics.
         </Text>
       </TouchableOpacity>
@@ -153,33 +148,23 @@ exports[`PostEditor renders a new editor correctly 1`] = `
           communities={Array []}
           onPress={[Function]}
         />
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-        >
+        <Text>
           Select which communities to post in.
         </Text>
       </TouchableOpacity>
     </View>
-  </ScrollView>
+  </ScrollViewMock>
   <Toolbar
     announcementEnabled={false}
-    canModerate={undefined}
-    filePickerPending={undefined}
-    imagePickerPending={undefined}
-    post={undefined}
     showFilePicker={[Function]}
     showImagePicker={[Function]}
     toggleAnnoucement={[Function]}
   />
-</Unknown>
+</_default>
 `;
 
 exports[`PostEditor renders correctly while saving 1`] = `
 <View
-  enabled={true}
-  keyboardVerticalOffset={64}
   onLayout={[Function]}
 >
   <RCTScrollView
@@ -187,104 +172,60 @@ exports[`PostEditor renders correctly while saving 1`] = `
   >
     <View>
       <View>
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-        >
+        <Text>
           What are you posting today?
         </Text>
         <View>
           <View
-            accessibilityComponentType={undefined}
-            accessibilityLabel={undefined}
-            accessibilityTraits={undefined}
             accessible={true}
-            collapsable={undefined}
-            hasTVPreferredFocus={undefined}
-            hitSlop={undefined}
+            focusable={true}
             isTVSelectable={true}
-            nativeID={undefined}
-            onLayout={undefined}
+            onClick={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
             onResponderRelease={[Function]}
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
-            testID={undefined}
-            tvParallaxProperties={undefined}
           >
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-            >
+            <Text>
               DISCUSSION
             </Text>
           </View>
           <View
-            accessibilityComponentType={undefined}
-            accessibilityLabel={undefined}
-            accessibilityTraits={undefined}
             accessible={true}
-            collapsable={undefined}
-            hasTVPreferredFocus={undefined}
-            hitSlop={undefined}
+            focusable={true}
             isTVSelectable={true}
-            nativeID={undefined}
-            onLayout={undefined}
+            onClick={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
             onResponderRelease={[Function]}
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
-            testID={undefined}
-            tvParallaxProperties={undefined}
           >
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-            >
+            <Text>
               REQUEST
             </Text>
           </View>
           <View
-            accessibilityComponentType={undefined}
-            accessibilityLabel={undefined}
-            accessibilityTraits={undefined}
             accessible={true}
-            collapsable={undefined}
-            hasTVPreferredFocus={undefined}
-            hitSlop={undefined}
+            focusable={true}
             isTVSelectable={true}
-            nativeID={undefined}
-            onLayout={undefined}
+            onClick={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
             onResponderRelease={[Function]}
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
-            testID={undefined}
-            tvParallaxProperties={undefined}
           >
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-            >
+            <Text>
               OFFER
             </Text>
           </View>
         </View>
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-        >
+        <Text>
           Title
         </Text>
         <View>
@@ -295,15 +236,12 @@ exports[`PostEditor renders correctly while saving 1`] = `
             onChangeText={[Function]}
             placeholder="What do you want to discuss?"
             placeholderTextColor="#c0c6cd"
+            rejectResponderTermination={true}
             underlineColorAndroid="transparent"
             value=""
           />
         </View>
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-        >
+        <Text>
           Details
         </Text>
         <View>
@@ -320,110 +258,72 @@ exports[`PostEditor renders correctly while saving 1`] = `
               onSelectionChange={[Function]}
               placeholder="What else should we know?"
               placeholderTextColor="#c0c6cd"
-              selection={undefined}
+              rejectResponderTermination={true}
               underlineColorAndroid="transparent"
               value=""
             />
           </View>
         </View>
         <View
-          accessibilityComponentType={undefined}
-          accessibilityLabel={undefined}
-          accessibilityTraits={undefined}
           accessible={true}
-          collapsable={undefined}
-          hasTVPreferredFocus={undefined}
-          hitSlop={undefined}
+          focusable={true}
           isTVSelectable={true}
-          nativeID={undefined}
-          onLayout={undefined}
+          onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
           onResponderTerminate={[Function]}
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
-          testID={undefined}
-          tvParallaxProperties={undefined}
         >
           <View>
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-            >
+            <Text>
               Topics
             </Text>
             <View>
               <Icon
-                color={undefined}
                 name="Plus"
               />
             </View>
           </View>
-          <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
-          >
+          <Text>
             Add topics.
           </Text>
         </View>
         <View
-          accessibilityComponentType={undefined}
-          accessibilityLabel={undefined}
-          accessibilityTraits={undefined}
           accessible={true}
-          collapsable={undefined}
-          hasTVPreferredFocus={undefined}
-          hitSlop={undefined}
+          focusable={true}
           isTVSelectable={true}
-          nativeID={undefined}
-          onLayout={undefined}
+          onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
           onResponderTerminate={[Function]}
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
-          testID={undefined}
-          tvParallaxProperties={undefined}
         >
           <View>
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-            >
+            <Text>
               Post In
             </Text>
             <View>
               <Icon
-                color={undefined}
                 name="Plus"
               />
             </View>
           </View>
           <View>
             <View
-              accessibilityComponentType={undefined}
-              accessibilityLabel={undefined}
-              accessibilityTraits={undefined}
               accessible={true}
-              collapsable={undefined}
-              hasTVPreferredFocus={undefined}
-              hitSlop={undefined}
+              focusable={true}
               isTVSelectable={true}
-              nativeID={undefined}
-              onLayout={undefined}
+              onClick={[Function]}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
               onResponderRelease={[Function]}
               onResponderTerminate={[Function]}
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
-              testID={undefined}
-              tvParallaxProperties={undefined}
             >
               <Image
                 source={
@@ -433,15 +333,11 @@ exports[`PostEditor renders correctly while saving 1`] = `
                 }
               />
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 numberOfLines={1}
               >
                 Community 1
               </Text>
               <Icon
-                color={undefined}
                 name="Ex"
               />
             </View>
@@ -453,52 +349,34 @@ exports[`PostEditor renders correctly while saving 1`] = `
   <View>
     <View>
       <View
-        accessibilityComponentType={undefined}
-        accessibilityLabel={undefined}
-        accessibilityTraits={undefined}
         accessible={true}
-        collapsable={undefined}
-        hasTVPreferredFocus={undefined}
-        hitSlop={undefined}
+        focusable={true}
         isTVSelectable={true}
-        nativeID={undefined}
-        onLayout={undefined}
+        onClick={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
         onResponderTerminate={[Function]}
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
-        testID={undefined}
-        tvParallaxProperties={undefined}
       >
         <Icon
-          color={undefined}
           name="Paperclip"
         />
       </View>
       <View
-        accessibilityComponentType={undefined}
-        accessibilityLabel={undefined}
-        accessibilityTraits={undefined}
         accessible={true}
-        collapsable={undefined}
-        hasTVPreferredFocus={undefined}
-        hitSlop={undefined}
+        focusable={true}
         isTVSelectable={true}
-        nativeID={undefined}
-        onLayout={undefined}
+        onClick={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
         onResponderTerminate={[Function]}
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
-        testID={undefined}
-        tvParallaxProperties={undefined}
       >
         <Icon
-          color={undefined}
           name="AddImage"
         />
       </View>
@@ -509,8 +387,6 @@ exports[`PostEditor renders correctly while saving 1`] = `
 
 exports[`PostEditor renders correctly while saving 2`] = `
 <View
-  enabled={true}
-  keyboardVerticalOffset={64}
   onLayout={[Function]}
 >
   <RCTScrollView
@@ -518,104 +394,60 @@ exports[`PostEditor renders correctly while saving 2`] = `
   >
     <View>
       <View>
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-        >
+        <Text>
           What are you posting today?
         </Text>
         <View>
           <View
-            accessibilityComponentType={undefined}
-            accessibilityLabel={undefined}
-            accessibilityTraits={undefined}
             accessible={true}
-            collapsable={undefined}
-            hasTVPreferredFocus={undefined}
-            hitSlop={undefined}
+            focusable={true}
             isTVSelectable={true}
-            nativeID={undefined}
-            onLayout={undefined}
+            onClick={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
             onResponderRelease={[Function]}
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
-            testID={undefined}
-            tvParallaxProperties={undefined}
           >
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-            >
+            <Text>
               DISCUSSION
             </Text>
           </View>
           <View
-            accessibilityComponentType={undefined}
-            accessibilityLabel={undefined}
-            accessibilityTraits={undefined}
             accessible={true}
-            collapsable={undefined}
-            hasTVPreferredFocus={undefined}
-            hitSlop={undefined}
+            focusable={true}
             isTVSelectable={true}
-            nativeID={undefined}
-            onLayout={undefined}
+            onClick={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
             onResponderRelease={[Function]}
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
-            testID={undefined}
-            tvParallaxProperties={undefined}
           >
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-            >
+            <Text>
               REQUEST
             </Text>
           </View>
           <View
-            accessibilityComponentType={undefined}
-            accessibilityLabel={undefined}
-            accessibilityTraits={undefined}
             accessible={true}
-            collapsable={undefined}
-            hasTVPreferredFocus={undefined}
-            hitSlop={undefined}
+            focusable={true}
             isTVSelectable={true}
-            nativeID={undefined}
-            onLayout={undefined}
+            onClick={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
             onResponderRelease={[Function]}
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
-            testID={undefined}
-            tvParallaxProperties={undefined}
           >
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-            >
+            <Text>
               OFFER
             </Text>
           </View>
         </View>
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-        >
+        <Text>
           Title
         </Text>
         <View>
@@ -626,15 +458,12 @@ exports[`PostEditor renders correctly while saving 2`] = `
             onChangeText={[Function]}
             placeholder="What do you need help with?"
             placeholderTextColor="#c0c6cd"
+            rejectResponderTermination={true}
             underlineColorAndroid="transparent"
             value=""
           />
         </View>
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-        >
+        <Text>
           Details
         </Text>
         <View>
@@ -651,110 +480,72 @@ exports[`PostEditor renders correctly while saving 2`] = `
               onSelectionChange={[Function]}
               placeholder="What else should we know?"
               placeholderTextColor="#c0c6cd"
-              selection={undefined}
+              rejectResponderTermination={true}
               underlineColorAndroid="transparent"
               value=""
             />
           </View>
         </View>
         <View
-          accessibilityComponentType={undefined}
-          accessibilityLabel={undefined}
-          accessibilityTraits={undefined}
           accessible={true}
-          collapsable={undefined}
-          hasTVPreferredFocus={undefined}
-          hitSlop={undefined}
+          focusable={true}
           isTVSelectable={true}
-          nativeID={undefined}
-          onLayout={undefined}
+          onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
           onResponderTerminate={[Function]}
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
-          testID={undefined}
-          tvParallaxProperties={undefined}
         >
           <View>
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-            >
+            <Text>
               Topics
             </Text>
             <View>
               <Icon
-                color={undefined}
                 name="Plus"
               />
             </View>
           </View>
-          <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
-          >
+          <Text>
             Add topics.
           </Text>
         </View>
         <View
-          accessibilityComponentType={undefined}
-          accessibilityLabel={undefined}
-          accessibilityTraits={undefined}
           accessible={true}
-          collapsable={undefined}
-          hasTVPreferredFocus={undefined}
-          hitSlop={undefined}
+          focusable={true}
           isTVSelectable={true}
-          nativeID={undefined}
-          onLayout={undefined}
+          onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
           onResponderTerminate={[Function]}
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
-          testID={undefined}
-          tvParallaxProperties={undefined}
         >
           <View>
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-            >
+            <Text>
               Post In
             </Text>
             <View>
               <Icon
-                color={undefined}
                 name="Plus"
               />
             </View>
           </View>
           <View>
             <View
-              accessibilityComponentType={undefined}
-              accessibilityLabel={undefined}
-              accessibilityTraits={undefined}
               accessible={true}
-              collapsable={undefined}
-              hasTVPreferredFocus={undefined}
-              hitSlop={undefined}
+              focusable={true}
               isTVSelectable={true}
-              nativeID={undefined}
-              onLayout={undefined}
+              onClick={[Function]}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
               onResponderRelease={[Function]}
               onResponderTerminate={[Function]}
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
-              testID={undefined}
-              tvParallaxProperties={undefined}
             >
               <Image
                 source={
@@ -764,15 +555,11 @@ exports[`PostEditor renders correctly while saving 2`] = `
                 }
               />
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 numberOfLines={1}
               >
                 Community 1
               </Text>
               <Icon
-                color={undefined}
                 name="Ex"
               />
             </View>
@@ -784,52 +571,34 @@ exports[`PostEditor renders correctly while saving 2`] = `
   <View>
     <View>
       <View
-        accessibilityComponentType={undefined}
-        accessibilityLabel={undefined}
-        accessibilityTraits={undefined}
         accessible={true}
-        collapsable={undefined}
-        hasTVPreferredFocus={undefined}
-        hitSlop={undefined}
+        focusable={true}
         isTVSelectable={true}
-        nativeID={undefined}
-        onLayout={undefined}
+        onClick={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
         onResponderTerminate={[Function]}
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
-        testID={undefined}
-        tvParallaxProperties={undefined}
       >
         <Icon
-          color={undefined}
           name="Paperclip"
         />
       </View>
       <View
-        accessibilityComponentType={undefined}
-        accessibilityLabel={undefined}
-        accessibilityTraits={undefined}
         accessible={true}
-        collapsable={undefined}
-        hasTVPreferredFocus={undefined}
-        hitSlop={undefined}
+        focusable={true}
         isTVSelectable={true}
-        nativeID={undefined}
-        onLayout={undefined}
+        onClick={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
         onResponderTerminate={[Function]}
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
-        testID={undefined}
-        tvParallaxProperties={undefined}
       >
         <Icon
-          color={undefined}
           name="AddImage"
         />
       </View>
@@ -839,11 +608,11 @@ exports[`PostEditor renders correctly while saving 2`] = `
 `;
 
 exports[`PostEditor renders with a post 1`] = `
-<Unknown
+<_default
   behavior="padding"
   keyboardVerticalOffset={64}
 >
-  <ScrollView
+  <ScrollViewMock
     keyboardShouldPersistTaps="handled"
   >
     <View>
@@ -878,6 +647,7 @@ exports[`PostEditor renders with a post 1`] = `
           onChangeText={[Function]}
           placeholder="What do you want to discuss?"
           placeholderTextColor="#c0c6cd"
+          rejectResponderTermination={true}
           underlineColorAndroid="transparent"
           value=""
         />
@@ -887,7 +657,6 @@ exports[`PostEditor renders with a post 1`] = `
       </SectionLabel>
       <withNavigation(InlineEditor)
         autoGrow={false}
-        communityId={undefined}
         containerStyle={
           Object {
             "borderBottomColor": "#c0c6cd",
@@ -906,7 +675,6 @@ exports[`PostEditor renders with a post 1`] = `
         onFocusToggle={[Function]}
         onInsertTopic={[Function]}
         placeholder="What else should we know?"
-        submitting={undefined}
         value=""
       />
       <TouchableOpacity
@@ -927,11 +695,7 @@ exports[`PostEditor renders with a post 1`] = `
           onPress={[Function]}
           topics={Array []}
         />
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-        >
+        <Text>
           Add topics.
         </Text>
       </TouchableOpacity>
@@ -980,12 +744,9 @@ exports[`PostEditor renders with a post 1`] = `
         />
       </View>
     </View>
-  </ScrollView>
+  </ScrollViewMock>
   <Toolbar
     announcementEnabled={false}
-    canModerate={undefined}
-    filePickerPending={undefined}
-    imagePickerPending={undefined}
     post={
       Object {
         "communities": Array [
@@ -1001,15 +762,11 @@ exports[`PostEditor renders with a post 1`] = `
     showImagePicker={[Function]}
     toggleAnnoucement={[Function]}
   />
-</Unknown>
+</_default>
 `;
 
 exports[`SectionLabel renders correctly 1`] = `
-<Text
-  accessible={true}
-  allowFontScaling={true}
-  ellipsizeMode="tail"
->
+<Text>
   Label
 </Text>
 `;
@@ -1019,11 +776,7 @@ exports[`TypeButton renders correctly 1`] = `
   activeOpacity={0.2}
   onPress={[MockFunction]}
 >
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-  >
+  <Text>
     DISCUSSION
   </Text>
 </TouchableOpacity>

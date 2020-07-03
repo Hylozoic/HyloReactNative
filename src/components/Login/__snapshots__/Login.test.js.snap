@@ -3,11 +3,7 @@
 exports[`FormError renders correctly 1`] = `
 <View>
   <View>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
+    <Text>
       Username or Password was incorrect
     </Text>
   </View>
@@ -16,7 +12,7 @@ exports[`FormError renders correctly 1`] = `
 `;
 
 exports[`Login renders correctly 1`] = `
-<ScrollView
+<ScrollViewMock
   contentContainerStyle={
     Object {
       "alignItems": "center",
@@ -32,19 +28,11 @@ exports[`Login renders correctly 1`] = `
       }
     }
   />
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-  >
+  <Text>
     Log in to Hylo
   </Text>
   <View>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
+    <Text>
       Your email address
     </Text>
   </View>
@@ -57,7 +45,7 @@ exports[`Login renders correctly 1`] = `
           autoCorrect={false}
           keyboardType="email-address"
           onChangeText={[Function]}
-          onSubmitEditing={[Function]}
+          rejectResponderTermination={true}
           returnKeyType="next"
           underlineColorAndroid="rgba(0,0,0,0)"
         />
@@ -66,11 +54,7 @@ exports[`Login renders correctly 1`] = `
     </View>
   </View>
   <View>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
+    <Text>
       Password
     </Text>
   </View>
@@ -82,6 +66,7 @@ exports[`Login renders correctly 1`] = `
           autoCapitalize="none"
           onChangeText={[Function]}
           onSubmitEditing={[Function]}
+          rejectResponderTermination={true}
           returnKeyType="go"
           secureTextEntry={true}
           selectTextOnFocus={true}
@@ -101,13 +86,8 @@ exports[`Login renders correctly 1`] = `
   <View>
     <TouchableOpacity
       activeOpacity={0.2}
-      onPress={undefined}
     >
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-      >
+      <Text>
         Forgot your password?
       </Text>
     </TouchableOpacity>
@@ -117,42 +97,32 @@ exports[`Login renders correctly 1`] = `
       activeOpacity={0.2}
       onPress={[Function]}
     >
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-      >
+      <Text>
         Log In
       </Text>
     </TouchableOpacity>
   </View>
   <View>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
+    <Text>
       Or connect with:
     </Text>
   </View>
   <View>
     <FbLoginButton
       createErrorNotification={[Function]}
-      onLoginFinished={undefined}
     />
     <GoogleLoginButton
       createErrorNotification={[Function]}
-      onLoginFinished={undefined}
     />
   </View>
   <SignupLink
     goToSignup={[Function]}
   />
-</ScrollView>
+</ScrollViewMock>
 `;
 
 exports[`Login renders error message 1`] = `
-<ScrollView
+<ScrollViewMock
   contentContainerStyle={
     Object {
       "alignItems": "center",
@@ -168,19 +138,11 @@ exports[`Login renders error message 1`] = `
       }
     }
   />
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-  >
+  <Text>
     Log in to Hylo
   </Text>
   <View>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
+    <Text>
       Your email address
     </Text>
   </View>
@@ -193,7 +155,7 @@ exports[`Login renders error message 1`] = `
           autoCorrect={false}
           keyboardType="email-address"
           onChangeText={[Function]}
-          onSubmitEditing={[Function]}
+          rejectResponderTermination={true}
           returnKeyType="next"
           underlineColorAndroid="rgba(0,0,0,0)"
         />
@@ -202,11 +164,7 @@ exports[`Login renders error message 1`] = `
     </View>
   </View>
   <View>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
+    <Text>
       Password
     </Text>
   </View>
@@ -218,6 +176,7 @@ exports[`Login renders error message 1`] = `
           autoCapitalize="none"
           onChangeText={[Function]}
           onSubmitEditing={[Function]}
+          rejectResponderTermination={true}
           returnKeyType="go"
           secureTextEntry={true}
           selectTextOnFocus={true}
@@ -237,13 +196,8 @@ exports[`Login renders error message 1`] = `
   <View>
     <TouchableOpacity
       activeOpacity={0.2}
-      onPress={undefined}
     >
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-      >
+      <Text>
         Forgot your password?
       </Text>
     </TouchableOpacity>
@@ -253,42 +207,30 @@ exports[`Login renders error message 1`] = `
       activeOpacity={0.2}
       onPress={[Function]}
     >
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-      >
+      <Text>
         Log In
       </Text>
     </TouchableOpacity>
   </View>
   <View>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
+    <Text>
       Or connect with:
     </Text>
   </View>
   <View>
     <FbLoginButton
       createErrorNotification={[Function]}
-      onLoginFinished={undefined}
     />
     <GoogleLoginButton
       createErrorNotification={[Function]}
-      onLoginFinished={undefined}
     />
   </View>
-  <SignupLink
-    goToSignup={undefined}
-  />
-</ScrollView>
+  <SignupLink />
+</ScrollViewMock>
 `;
 
 exports[`Login renders with no network connection error 1`] = `
-<ScrollView
+<ScrollViewMock
   contentContainerStyle={
     Object {
       "alignItems": "center",
@@ -304,19 +246,11 @@ exports[`Login renders with no network connection error 1`] = `
       }
     }
   />
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-  >
+  <Text>
     Log in to Hylo
   </Text>
   <View>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
+    <Text>
       Your email address
     </Text>
   </View>
@@ -329,7 +263,7 @@ exports[`Login renders with no network connection error 1`] = `
           autoCorrect={false}
           keyboardType="email-address"
           onChangeText={[Function]}
-          onSubmitEditing={[Function]}
+          rejectResponderTermination={true}
           returnKeyType="next"
           underlineColorAndroid="rgba(0,0,0,0)"
         />
@@ -338,11 +272,7 @@ exports[`Login renders with no network connection error 1`] = `
     </View>
   </View>
   <View>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
+    <Text>
       Password
     </Text>
   </View>
@@ -354,6 +284,7 @@ exports[`Login renders with no network connection error 1`] = `
           autoCapitalize="none"
           onChangeText={[Function]}
           onSubmitEditing={[Function]}
+          rejectResponderTermination={true}
           returnKeyType="go"
           secureTextEntry={true}
           selectTextOnFocus={true}
@@ -373,13 +304,8 @@ exports[`Login renders with no network connection error 1`] = `
   <View>
     <TouchableOpacity
       activeOpacity={0.2}
-      onPress={undefined}
     >
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-      >
+      <Text>
         Forgot your password?
       </Text>
     </TouchableOpacity>
@@ -389,42 +315,30 @@ exports[`Login renders with no network connection error 1`] = `
       activeOpacity={0.2}
       onPress={[Function]}
     >
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-      >
+      <Text>
         Log In
       </Text>
     </TouchableOpacity>
   </View>
   <View>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
+    <Text>
       Or connect with:
     </Text>
   </View>
   <View>
     <FbLoginButton
       createErrorNotification={[Function]}
-      onLoginFinished={undefined}
     />
     <GoogleLoginButton
       createErrorNotification={[Function]}
-      onLoginFinished={undefined}
     />
   </View>
-  <SignupLink
-    goToSignup={undefined}
-  />
-</ScrollView>
+  <SignupLink />
+</ScrollViewMock>
 `;
 
 exports[`Login renders with pending banner 1`] = `
-<ScrollView
+<ScrollViewMock
   contentContainerStyle={
     Object {
       "alignItems": "center",
@@ -433,11 +347,7 @@ exports[`Login renders with pending banner 1`] = `
     }
   }
 >
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-  >
+  <Text>
     LOGGING IN...
   </Text>
   <Image
@@ -447,19 +357,11 @@ exports[`Login renders with pending banner 1`] = `
       }
     }
   />
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-  >
+  <Text>
     Log in to Hylo
   </Text>
   <View>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
+    <Text>
       Your email address
     </Text>
   </View>
@@ -472,7 +374,7 @@ exports[`Login renders with pending banner 1`] = `
           autoCorrect={false}
           keyboardType="email-address"
           onChangeText={[Function]}
-          onSubmitEditing={[Function]}
+          rejectResponderTermination={true}
           returnKeyType="next"
           underlineColorAndroid="rgba(0,0,0,0)"
         />
@@ -481,11 +383,7 @@ exports[`Login renders with pending banner 1`] = `
     </View>
   </View>
   <View>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
+    <Text>
       Password
     </Text>
   </View>
@@ -497,6 +395,7 @@ exports[`Login renders with pending banner 1`] = `
           autoCapitalize="none"
           onChangeText={[Function]}
           onSubmitEditing={[Function]}
+          rejectResponderTermination={true}
           returnKeyType="go"
           secureTextEntry={true}
           selectTextOnFocus={true}
@@ -516,13 +415,8 @@ exports[`Login renders with pending banner 1`] = `
   <View>
     <TouchableOpacity
       activeOpacity={0.2}
-      onPress={undefined}
     >
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-      >
+      <Text>
         Forgot your password?
       </Text>
     </TouchableOpacity>
@@ -532,58 +426,38 @@ exports[`Login renders with pending banner 1`] = `
       activeOpacity={0.2}
       onPress={[Function]}
     >
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-      >
+      <Text>
         Log In
       </Text>
     </TouchableOpacity>
   </View>
   <View>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
+    <Text>
       Or connect with:
     </Text>
   </View>
   <View>
     <FbLoginButton
       createErrorNotification={[Function]}
-      onLoginFinished={undefined}
     />
     <GoogleLoginButton
       createErrorNotification={[Function]}
-      onLoginFinished={undefined}
     />
   </View>
-  <SignupLink
-    goToSignup={undefined}
-  />
-</ScrollView>
+  <SignupLink />
+</ScrollViewMock>
 `;
 
 exports[`SignupLink renders correctly 1`] = `
 <View>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-  >
+  <Text>
     Dont have an account? 
   </Text>
   <TouchableOpacity
     activeOpacity={0.2}
     onPress={[MockFunction]}
   >
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
+    <Text>
       Sign up now
     </Text>
   </TouchableOpacity>

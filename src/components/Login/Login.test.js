@@ -3,12 +3,6 @@ import ReactShallowRenderer from 'react-test-renderer/shallow'
 import TestRenderer from 'react-test-renderer'
 import Login, { FormError, SignupLink } from './Login'
 
-jest.mock('NetInfo', () => ({
-  isConnected: {
-    addEventListener: jest.fn()
-  }
-}))
-
 describe('Login', () => {
   it('renders correctly', () => {
     const renderer = new ReactShallowRenderer()

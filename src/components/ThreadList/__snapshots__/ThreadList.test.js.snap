@@ -3,24 +3,16 @@
 exports[`MessageRow calls showThread 1`] = `
 <View>
   <View
-    accessibilityComponentType={undefined}
-    accessibilityLabel={undefined}
-    accessibilityTraits={undefined}
     accessible={true}
-    collapsable={undefined}
-    hasTVPreferredFocus={undefined}
-    hitSlop={undefined}
+    focusable={true}
     isTVSelectable={true}
-    nativeID={undefined}
-    onLayout={undefined}
+    onClick={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
     onResponderTerminate={[Function]}
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
-    testID={undefined}
-    tvParallaxProperties={undefined}
   >
     <View>
       <View>
@@ -35,27 +27,16 @@ exports[`MessageRow calls showThread 1`] = `
         </View>
       </View>
       <View>
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-        >
+        <Text>
           Test User
         </Text>
         <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
           numberOfLines={2}
         >
           
           This is a message.
         </Text>
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-        >
+        <Text>
           
         </Text>
       </View>
@@ -71,8 +52,6 @@ exports[`MessageRow renders correctly 1`] = `
     onPress={[Function]}
   >
     <ThreadCard
-      currentUser={undefined}
-      isLast={undefined}
       message={
         Array [
           Object {
@@ -90,18 +69,13 @@ exports[`MessageRow renders correctly 1`] = `
           },
         ]
       }
-      unread={undefined}
     />
   </TouchableOpacity>
 </View>
 `;
 
 exports[`ThreadList fetches threads initially when empty 1`] = `
-<Text
-  accessible={true}
-  allowFontScaling={true}
-  ellipsizeMode="tail"
->
+<Text>
   No active conversations
 </Text>
 `;
@@ -121,20 +95,17 @@ exports[`ThreadList handles pending correctly with threads 1`] = `
     getItemCount={[Function]}
     horizontal={false}
     initialNumToRender={10}
-    invertStickyHeaders={undefined}
     keyExtractor={[Function]}
     maxToRenderPerBatch={10}
     numColumns={1}
     onContentSizeChange={[Function]}
-    onEndReached={undefined}
     onEndReachedThreshold={2}
     onLayout={[Function]}
     onMomentumScrollEnd={[Function]}
-    onRefresh={undefined}
     onScroll={[Function]}
     onScrollBeginDrag={[Function]}
     onScrollEndDrag={[Function]}
-    refreshing={undefined}
+    removeClippedSubviews={false}
     renderItem={[Function]}
     scrollEventThrottle={50}
     stickyHeaderIndices={Array []}
@@ -148,57 +119,35 @@ exports[`ThreadList handles pending correctly with threads 1`] = `
       >
         <View>
           <View
-            accessibilityComponentType={undefined}
-            accessibilityLabel={undefined}
-            accessibilityTraits={undefined}
             accessible={true}
-            collapsable={undefined}
-            hasTVPreferredFocus={undefined}
-            hitSlop={undefined}
+            focusable={true}
             isTVSelectable={true}
-            nativeID={undefined}
-            onLayout={undefined}
+            onClick={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
             onResponderRelease={[Function]}
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
-            testID={undefined}
-            tvParallaxProperties={undefined}
           />
         </View>
       </View>
     </View>
   </RCTScrollView>
-  <View
-    collapsable={undefined}
-  >
+  <View>
     <View
-      accessibilityComponentType={undefined}
-      accessibilityLabel={undefined}
-      accessibilityTraits={undefined}
       accessible={true}
-      collapsable={undefined}
-      hasTVPreferredFocus={undefined}
-      hitSlop={undefined}
+      focusable={false}
       isTVSelectable={true}
-      nativeID={undefined}
-      onLayout={undefined}
+      onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
-      testID={undefined}
-      tvParallaxProperties={undefined}
     >
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-      >
+      <Text>
         RECONNECTING...
       </Text>
     </View>
@@ -209,11 +158,7 @@ exports[`ThreadList handles pending correctly with threads 1`] = `
 exports[`ThreadList handles pending correctly without threads 1`] = `<LoadingScreen />`;
 
 exports[`ThreadList handles when there are no threads correctly 1`] = `
-<Text
-  accessible={true}
-  allowFontScaling={true}
-  ellipsizeMode="tail"
->
+<Text>
   No active conversations
 </Text>
 `;
@@ -242,20 +187,17 @@ exports[`ThreadList renders correctly 1`] = `
     getItemCount={[Function]}
     horizontal={false}
     initialNumToRender={10}
-    invertStickyHeaders={undefined}
     keyExtractor={[Function]}
     maxToRenderPerBatch={10}
     numColumns={1}
     onContentSizeChange={[Function]}
-    onEndReached={undefined}
     onEndReachedThreshold={2}
     onLayout={[Function]}
     onMomentumScrollEnd={[Function]}
-    onRefresh={undefined}
     onScroll={[Function]}
     onScrollBeginDrag={[Function]}
     onScrollEndDrag={[Function]}
-    refreshing={undefined}
+    removeClippedSubviews={false}
     renderItem={[Function]}
     scrollEventThrottle={50}
     stickyHeaderIndices={Array []}
@@ -269,57 +211,35 @@ exports[`ThreadList renders correctly 1`] = `
       >
         <View>
           <View
-            accessibilityComponentType={undefined}
-            accessibilityLabel={undefined}
-            accessibilityTraits={undefined}
             accessible={true}
-            collapsable={undefined}
-            hasTVPreferredFocus={undefined}
-            hitSlop={undefined}
+            focusable={true}
             isTVSelectable={true}
-            nativeID={undefined}
-            onLayout={undefined}
+            onClick={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
             onResponderRelease={[Function]}
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
-            testID={undefined}
-            tvParallaxProperties={undefined}
           />
         </View>
       </View>
     </View>
   </RCTScrollView>
-  <View
-    collapsable={undefined}
-  >
+  <View>
     <View
-      accessibilityComponentType={undefined}
-      accessibilityLabel={undefined}
-      accessibilityTraits={undefined}
       accessible={true}
-      collapsable={undefined}
-      hasTVPreferredFocus={undefined}
-      hitSlop={undefined}
+      focusable={false}
       isTVSelectable={true}
-      nativeID={undefined}
-      onLayout={undefined}
+      onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
-      testID={undefined}
-      tvParallaxProperties={undefined}
     >
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-      >
+      <Text>
         RECONNECTING...
       </Text>
     </View>

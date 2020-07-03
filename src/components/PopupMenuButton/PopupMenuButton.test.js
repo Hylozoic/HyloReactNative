@@ -4,7 +4,7 @@ import PopupMenuButtonAndroid from './PopupMenuButton.android'
 import PopupMenuButtonIos from './PopupMenuButton.ios'
 import TestRenderer from 'react-test-renderer'
 
-jest.mock('ActionSheetIOS', () => ({
+jest.mock('react-native/Libraries/ActionSheetIOS/ActionSheetIOS', () => ({
   showActionSheetWithOptions: jest.fn()
 }))
 

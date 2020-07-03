@@ -2,7 +2,6 @@ import 'react-native'
 import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import ReactTestRenderer from 'react-test-renderer'
-import '../../../config/jest/textInputWithAutoFocusMock'
 import ItemChooser from './ItemChooser'
 
 const items = [

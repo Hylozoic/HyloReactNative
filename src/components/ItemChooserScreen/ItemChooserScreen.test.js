@@ -1,7 +1,6 @@
 import 'react-native'
 import React from 'react'
 import TestRenderer from 'react-test-renderer'
-import '../../../config/jest/textInputWithAutoFocusMock'
 import ItemChooserScreen from './ItemChooserScreen'
 import { Provider } from 'react-redux'
 import { createMockStore } from 'util/testing'

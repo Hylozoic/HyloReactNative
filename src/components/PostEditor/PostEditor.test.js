@@ -8,7 +8,7 @@ import { createMockStore } from 'util/testing'
 import { DocumentPicker } from 'react-native-document-picker'
 import RNImagePicker from 'react-native-image-picker'
 
-jest.mock('Alert', () => {
+jest.mock('react-native/Libraries/Alert/Alert', () => {
   return {
     alert: jest.fn()
   }

@@ -16,6 +16,7 @@ jest.mock('react-native-fbsdk', () => ({
   }
 }))
 
+jest.mock('react-native/Libraries/Animated/src/NativeAnimatedHelper')
 jest.mock('../SettingControl', () => 'SettingControl')
 
 describe('UserSettings', () => {
