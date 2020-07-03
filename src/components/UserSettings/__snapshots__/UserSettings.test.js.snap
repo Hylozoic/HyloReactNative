@@ -4,18 +4,13 @@ exports[`Footer matches the last snapshot without saveChanges 1`] = `
 <View>
   <Button
     disabled={true}
-    onPress={undefined}
     text="Save Changes"
   />
   <TouchableOpacity
     activeOpacity={0.2}
     onPress={[Function]}
   >
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
+    <Text>
       Cancel
     </Text>
   </TouchableOpacity>
@@ -37,11 +32,7 @@ exports[`Footer matches the last snapshot without saveChanges 2`] = `
     activeOpacity={0.2}
     onPress={[Function]}
   >
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
+    <Text>
       Cancel
     </Text>
   </TouchableOpacity>
@@ -54,11 +45,7 @@ exports[`Footer matches the last snapshot without saveChanges 2`] = `
 
 exports[`SocialAccounts matches the last snapshot 1`] = `
 <View>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-  >
+  <Text>
     SOCIAL ACCOUNTS
   </Text>
   <SocialControl
@@ -83,20 +70,12 @@ exports[`SocialAccounts matches the last snapshot 1`] = `
 
 exports[`SocialControl matches the last snapshot linked 1`] = `
 <View>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-  />
+  <Text />
   <TouchableOpacity
     activeOpacity={0.2}
     onPress={[Function]}
   >
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
+    <Text>
       Unlink
     </Text>
   </TouchableOpacity>
@@ -105,16 +84,8 @@ exports[`SocialControl matches the last snapshot linked 1`] = `
 
 exports[`SocialControl matches the last snapshot loading 1`] = `
 <View>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-  />
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-  >
+  <Text />
+  <Text>
     Loading
   </Text>
 </View>
@@ -122,20 +93,12 @@ exports[`SocialControl matches the last snapshot loading 1`] = `
 
 exports[`SocialControl matches the last snapshot unlinked 1`] = `
 <View>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-  />
+  <Text />
   <TouchableOpacity
     activeOpacity={0.2}
     onPress={[Function]}
   >
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
+    <Text>
       Link
     </Text>
   </TouchableOpacity>
@@ -212,8 +175,6 @@ Object {
 
 exports[`UserSettings matches snapshot with state set 1`] = `
 <View
-  enabled={true}
-  keyboardVerticalOffset={64}
   onLayout={[Function]}
 >
   <RCTScrollView
@@ -327,111 +288,63 @@ exports[`UserSettings matches snapshot with state set 1`] = `
         value="fkldsflkjdf"
       />
       <View
-        accessibilityComponentType={undefined}
-        accessibilityLabel={undefined}
-        accessibilityTraits={undefined}
         accessible={true}
-        collapsable={undefined}
-        hasTVPreferredFocus={undefined}
-        hitSlop={undefined}
+        focusable={true}
         isTVSelectable={true}
-        nativeID={undefined}
-        onLayout={undefined}
+        onClick={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
         onResponderTerminate={[Function]}
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
-        testID={undefined}
-        tvParallaxProperties={undefined}
       >
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-        >
+        <Text>
           Cancel Password Change
         </Text>
       </View>
       <View>
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-        >
+        <Text>
           SOCIAL ACCOUNTS
         </Text>
         <View>
-          <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
-          >
+          <Text>
             Facebook
           </Text>
           <View
-            accessibilityComponentType={undefined}
-            accessibilityLabel={undefined}
-            accessibilityTraits={undefined}
             accessible={true}
-            collapsable={undefined}
-            hasTVPreferredFocus={undefined}
-            hitSlop={undefined}
+            focusable={true}
             isTVSelectable={true}
-            nativeID={undefined}
-            onLayout={undefined}
+            onClick={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
             onResponderRelease={[Function]}
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
-            testID={undefined}
-            tvParallaxProperties={undefined}
           >
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-            >
+            <Text>
               Unlink
             </Text>
           </View>
         </View>
         <View>
-          <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
-          >
+          <Text>
             Twitter
           </Text>
           <View
-            accessibilityComponentType={undefined}
-            accessibilityLabel={undefined}
-            accessibilityTraits={undefined}
             accessible={true}
-            collapsable={undefined}
-            hasTVPreferredFocus={undefined}
-            hitSlop={undefined}
+            focusable={true}
             isTVSelectable={true}
-            nativeID={undefined}
-            onLayout={undefined}
+            onClick={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
             onResponderRelease={[Function]}
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
-            testID={undefined}
-            tvParallaxProperties={undefined}
           >
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-            >
+            <Text>
               Unlink
             </Text>
           </View>
@@ -440,32 +353,20 @@ exports[`UserSettings matches snapshot with state set 1`] = `
       <View>
         <View>
           <View
-            accessibilityComponentType={undefined}
-            accessibilityLabel={undefined}
-            accessibilityTraits={undefined}
             accessible={true}
-            collapsable={undefined}
-            hasTVPreferredFocus={undefined}
-            hitSlop={undefined}
+            focusable={false}
             isTVSelectable={true}
-            nativeID={undefined}
-            onLayout={undefined}
+            onClick={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
             onResponderRelease={[Function]}
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
-            testID={undefined}
-            tvParallaxProperties={undefined}
           >
             <View>
               <View>
-                <Text
-                  accessible={true}
-                  allowFontScaling={true}
-                  ellipsizeMode="tail"
-                >
+                <Text>
                   Blocked Users
                 </Text>
               </View>
@@ -476,32 +377,20 @@ exports[`UserSettings matches snapshot with state set 1`] = `
       <View>
         <View>
           <View
-            accessibilityComponentType={undefined}
-            accessibilityLabel={undefined}
-            accessibilityTraits={undefined}
             accessible={true}
-            collapsable={undefined}
-            hasTVPreferredFocus={undefined}
-            hitSlop={undefined}
+            focusable={false}
             isTVSelectable={true}
-            nativeID={undefined}
-            onLayout={undefined}
+            onClick={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
             onResponderRelease={[Function]}
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
-            testID={undefined}
-            tvParallaxProperties={undefined}
           >
             <View>
               <View>
-                <Text
-                  accessible={true}
-                  allowFontScaling={true}
-                  ellipsizeMode="tail"
-                >
+                <Text>
                   Notification Settings
                 </Text>
               </View>
@@ -512,32 +401,20 @@ exports[`UserSettings matches snapshot with state set 1`] = `
       <View>
         <View>
           <View
-            accessibilityComponentType={undefined}
-            accessibilityLabel={undefined}
-            accessibilityTraits={undefined}
             accessible={true}
-            collapsable={undefined}
-            hasTVPreferredFocus={undefined}
-            hitSlop={undefined}
+            focusable={true}
             isTVSelectable={true}
-            nativeID={undefined}
-            onLayout={undefined}
+            onClick={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
             onResponderRelease={[Function]}
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
-            testID={undefined}
-            tvParallaxProperties={undefined}
           >
             <View>
               <View>
-                <Text
-                  accessible={true}
-                  allowFontScaling={true}
-                  ellipsizeMode="tail"
-                >
+                <Text>
                   Save Changes
                 </Text>
               </View>
@@ -545,61 +422,37 @@ exports[`UserSettings matches snapshot with state set 1`] = `
           </View>
         </View>
         <View
-          accessibilityComponentType={undefined}
-          accessibilityLabel={undefined}
-          accessibilityTraits={undefined}
           accessible={true}
-          collapsable={undefined}
-          hasTVPreferredFocus={undefined}
-          hitSlop={undefined}
+          focusable={true}
           isTVSelectable={true}
-          nativeID={undefined}
-          onLayout={undefined}
+          onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
           onResponderTerminate={[Function]}
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
-          testID={undefined}
-          tvParallaxProperties={undefined}
         >
-          <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
-          >
+          <Text>
             Cancel
           </Text>
         </View>
         <View>
           <View
-            accessibilityComponentType={undefined}
-            accessibilityLabel={undefined}
-            accessibilityTraits={undefined}
             accessible={true}
-            collapsable={undefined}
-            hasTVPreferredFocus={undefined}
-            hitSlop={undefined}
+            focusable={true}
             isTVSelectable={true}
-            nativeID={undefined}
-            onLayout={undefined}
+            onClick={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
             onResponderRelease={[Function]}
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
-            testID={undefined}
-            tvParallaxProperties={undefined}
           >
             <View>
               <View>
-                <Text
-                  accessible={true}
-                  allowFontScaling={true}
-                  ellipsizeMode="tail"
-                >
+                <Text>
                   Logout
                 </Text>
               </View>
@@ -613,8 +466,8 @@ exports[`UserSettings matches snapshot with state set 1`] = `
 `;
 
 exports[`UserSettings matches the last snapshot 1`] = `
-<Unknown>
-  <ScrollView
+<_default>
+  <ScrollViewMock
     contentContainerStyle={
       Object {
         "flexGrow": 1,
@@ -624,7 +477,6 @@ exports[`UserSettings matches the last snapshot 1`] = `
     <SettingControl
       autoCapitalize="none"
       autoCorrect={false}
-      error={undefined}
       keyboardType="email-address"
       label="EMAIL"
       onChange={[Function]}
@@ -656,30 +508,20 @@ exports[`UserSettings matches the last snapshot 1`] = `
       value=""
     />
     <View>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-      >
+      <Text>
         PASSWORD
       </Text>
       <TouchableOpacity
         activeOpacity={0.2}
         onPress={[Function]}
       >
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-        >
+        <Text>
           Change Password
         </Text>
       </TouchableOpacity>
     </View>
     <SocialAccounts
-      facebookUrl={undefined}
       loginWithFacebook={[Function]}
-      twitterName={undefined}
       twitterPrompt={[Function]}
       unlinkAccount={[Function]}
       updateField={[Function]}
@@ -687,13 +529,11 @@ exports[`UserSettings matches the last snapshot 1`] = `
     />
     <View>
       <Button
-        onPress={undefined}
         text="Blocked Users"
       />
     </View>
     <View>
       <Button
-        onPress={undefined}
         text="Notification Settings"
       />
     </View>
@@ -702,8 +542,8 @@ exports[`UserSettings matches the last snapshot 1`] = `
       logout={[Function]}
       saveChanges={false}
     />
-  </ScrollView>
-</Unknown>
+  </ScrollViewMock>
+</_default>
 `;
 
 exports[`UserSettings updateField sets the state 1`] = `

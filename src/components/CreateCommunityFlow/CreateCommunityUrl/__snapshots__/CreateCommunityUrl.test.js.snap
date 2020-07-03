@@ -25,39 +25,23 @@ Object {
     },
     "shadowRadius": 0,
   },
-  "title": <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-  >
+  "title": <Text>
     STEP 2/3
   </Text>,
 }
 `;
 
 exports[`matches last snapshot 1`] = `
-<ScrollView>
+<ScrollViewMock>
   <KeyboardFriendlyView>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
+    <Text>
       Choose an address for your community
     </Text>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
+    <Text>
       Your URL is the address that members will use to access your community online. The shorter the better!
     </Text>
     <View>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-      >
+      <Text>
         What's the address for your community?
       </Text>
       <TextInput
@@ -65,9 +49,9 @@ exports[`matches last snapshot 1`] = `
         autoCapitalize="none"
         autoCorrect={false}
         onChangeText={[Function]}
+        rejectResponderTermination={true}
         returnKeyType="next"
         underlineColorAndroid="rgba(0,0,0,0)"
-        value={undefined}
       />
     </View>
     <Button
@@ -76,33 +60,21 @@ exports[`matches last snapshot 1`] = `
       text="Continue"
     />
   </KeyboardFriendlyView>
-</ScrollView>
+</ScrollViewMock>
 `;
 
 exports[`matches last snapshot when there is an error 1`] = `
 <RCTScrollView>
   <View>
     <KeyboardFriendlyView>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-      >
+      <Text>
         Choose an address for your community
       </Text>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-      >
+      <Text>
         Your URL is the address that members will use to access your community online. The shorter the better!
       </Text>
       <View>
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-        >
+        <Text>
           What's the address for your community?
         </Text>
         <TextInput
@@ -110,20 +82,16 @@ exports[`matches last snapshot when there is an error 1`] = `
           autoCapitalize="none"
           autoCorrect={false}
           onChangeText={[Function]}
+          rejectResponderTermination={true}
           returnKeyType="next"
           underlineColorAndroid="rgba(0,0,0,0)"
-          value={undefined}
         />
       </View>
       <View>
         <View>
           <View />
           <View>
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-            >
+            <Text>
               This is an error
             </Text>
           </View>
@@ -131,32 +99,20 @@ exports[`matches last snapshot when there is an error 1`] = `
       </View>
       <View>
         <View
-          accessibilityComponentType={undefined}
-          accessibilityLabel={undefined}
-          accessibilityTraits={undefined}
           accessible={true}
-          collapsable={undefined}
-          hasTVPreferredFocus={undefined}
-          hitSlop={undefined}
+          focusable={true}
           isTVSelectable={true}
-          nativeID={undefined}
-          onLayout={undefined}
+          onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
           onResponderTerminate={[Function]}
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
-          testID={undefined}
-          tvParallaxProperties={undefined}
         >
           <View>
             <View>
-              <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
-              >
+              <Text>
                 Continue
               </Text>
             </View>
@@ -172,26 +128,14 @@ exports[`validates the url 1`] = `
 <RCTScrollView>
   <View>
     <KeyboardFriendlyView>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-      >
+      <Text>
         Choose an address for your community
       </Text>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-      >
+      <Text>
         Your URL is the address that members will use to access your community online. The shorter the better!
       </Text>
       <View>
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-        >
+        <Text>
           What's the address for your community?
         </Text>
         <TextInput
@@ -199,20 +143,16 @@ exports[`validates the url 1`] = `
           autoCapitalize="none"
           autoCorrect={false}
           onChangeText={[Function]}
+          rejectResponderTermination={true}
           returnKeyType="next"
           underlineColorAndroid="rgba(0,0,0,0)"
-          value={undefined}
         />
       </View>
       <View>
         <View>
           <View />
           <View>
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-            >
+            <Text>
               Please enter a URL
             </Text>
           </View>
@@ -220,32 +160,20 @@ exports[`validates the url 1`] = `
       </View>
       <View>
         <View
-          accessibilityComponentType={undefined}
-          accessibilityLabel={undefined}
-          accessibilityTraits={undefined}
           accessible={true}
-          collapsable={undefined}
-          hasTVPreferredFocus={undefined}
-          hitSlop={undefined}
+          focusable={true}
           isTVSelectable={true}
-          nativeID={undefined}
-          onLayout={undefined}
+          onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
           onResponderTerminate={[Function]}
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
-          testID={undefined}
-          tvParallaxProperties={undefined}
         >
           <View>
             <View>
-              <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
-              >
+              <Text>
                 Continue
               </Text>
             </View>
@@ -261,26 +189,14 @@ exports[`validates the url 2`] = `
 <RCTScrollView>
   <View>
     <KeyboardFriendlyView>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-      >
+      <Text>
         Choose an address for your community
       </Text>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-      >
+      <Text>
         Your URL is the address that members will use to access your community online. The shorter the better!
       </Text>
       <View>
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-        >
+        <Text>
           What's the address for your community?
         </Text>
         <TextInput
@@ -288,20 +204,16 @@ exports[`validates the url 2`] = `
           autoCapitalize="none"
           autoCorrect={false}
           onChangeText={[Function]}
+          rejectResponderTermination={true}
           returnKeyType="next"
           underlineColorAndroid="rgba(0,0,0,0)"
-          value={undefined}
         />
       </View>
       <View>
         <View>
           <View />
           <View>
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-            >
+            <Text>
               URLs must have between 2 and 40 characters, and can only have lower case letters, numbers, and dashes.
             </Text>
           </View>
@@ -309,32 +221,20 @@ exports[`validates the url 2`] = `
       </View>
       <View>
         <View
-          accessibilityComponentType={undefined}
-          accessibilityLabel={undefined}
-          accessibilityTraits={undefined}
           accessible={true}
-          collapsable={undefined}
-          hasTVPreferredFocus={undefined}
-          hitSlop={undefined}
+          focusable={true}
           isTVSelectable={true}
-          nativeID={undefined}
-          onLayout={undefined}
+          onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
           onResponderTerminate={[Function]}
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
-          testID={undefined}
-          tvParallaxProperties={undefined}
         >
           <View>
             <View>
-              <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
-              >
+              <Text>
                 Continue
               </Text>
             </View>

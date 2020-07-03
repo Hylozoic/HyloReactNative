@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders multiple images 1`] = `
-<View>
+<View
+  accessibilityIgnoresInvertColors={true}
+>
   <Image
     source={
       Object {
@@ -36,26 +38,20 @@ exports[`renders multiple images 1`] = `
 exports[`renders multiple images that can be tapped to open in browser 1`] = `
 <View>
   <View
-    accessibilityComponentType={undefined}
-    accessibilityLabel={undefined}
-    accessibilityTraits={undefined}
     accessible={true}
-    collapsable={undefined}
-    hasTVPreferredFocus={undefined}
-    hitSlop={undefined}
+    focusable={true}
     isTVSelectable={true}
-    nativeID={undefined}
-    onLayout={undefined}
+    onClick={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
     onResponderTerminate={[Function]}
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
-    testID={undefined}
-    tvParallaxProperties={undefined}
   >
-    <View>
+    <View
+      accessibilityIgnoresInvertColors={true}
+    >
       <Image
         source={
           Object {
@@ -64,23 +60,16 @@ exports[`renders multiple images that can be tapped to open in browser 1`] = `
         }
       />
       <View
-        accessibilityComponentType={undefined}
-        accessibilityLabel={undefined}
-        accessibilityTraits={undefined}
         accessible={true}
-        hasTVPreferredFocus={undefined}
-        hitSlop={undefined}
+        focusable={true}
         isTVSelectable={true}
-        nativeID={undefined}
-        onLayout={undefined}
+        onClick={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
         onResponderTerminate={[Function]}
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
-        testID={undefined}
-        tvParallaxProperties={undefined}
       >
         <Image
           source={
@@ -92,23 +81,16 @@ exports[`renders multiple images that can be tapped to open in browser 1`] = `
         />
       </View>
       <View
-        accessibilityComponentType={undefined}
-        accessibilityLabel={undefined}
-        accessibilityTraits={undefined}
         accessible={true}
-        hasTVPreferredFocus={undefined}
-        hitSlop={undefined}
+        focusable={true}
         isTVSelectable={true}
-        nativeID={undefined}
-        onLayout={undefined}
+        onClick={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
         onResponderTerminate={[Function]}
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
-        testID={undefined}
-        tvParallaxProperties={undefined}
       >
         <Image
           source={
@@ -120,23 +102,16 @@ exports[`renders multiple images that can be tapped to open in browser 1`] = `
         />
       </View>
       <View
-        accessibilityComponentType={undefined}
-        accessibilityLabel={undefined}
-        accessibilityTraits={undefined}
         accessible={true}
-        hasTVPreferredFocus={undefined}
-        hitSlop={undefined}
+        focusable={true}
         isTVSelectable={true}
-        nativeID={undefined}
-        onLayout={undefined}
+        onClick={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
         onResponderTerminate={[Function]}
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
-        testID={undefined}
-        tvParallaxProperties={undefined}
       >
         <Image
           source={
@@ -153,7 +128,9 @@ exports[`renders multiple images that can be tapped to open in browser 1`] = `
 `;
 
 exports[`returns ImageBackground 1`] = `
-<View>
+<View
+  accessibilityIgnoresInvertColors={true}
+>
   <Image
     source={
       Object {

@@ -5,11 +5,7 @@ exports[`KeyboardFriendlyViewAndroid matches last snapshot 1`] = `
   behavior="padding"
   testID="123"
 >
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-  >
+  <Text>
     Children
   </Text>
 </View>
@@ -22,11 +18,7 @@ exports[`KeyboardFriendlyViewiOS matches last snapshot 1`] = `
   keyboardVerticalOffset={64}
   testID="123"
 >
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-  >
+  <Text>
     Children
   </Text>
 </KeyboardAvoidingView>

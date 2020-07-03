@@ -2,25 +2,15 @@
 
 exports[`matches the last snapshot 1`] = `
 <View>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-  >
+  <Text>
     Combined breaks and links
   </Text>
   <View>
     <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
       onLongPress={null}
       onPress={null}
     >
       <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
         style={
           Object {
             "color": "#5D757A",
@@ -34,16 +24,10 @@ exports[`matches the last snapshot 1`] = `
         This post has a 
       </Text>
       <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
         onLongPress={null}
         onPress={[Function]}
       >
         <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
           style={
             Object {
               "color": "#5D757A",
@@ -58,9 +42,6 @@ exports[`matches the last snapshot 1`] = `
         </Text>
       </Text>
       <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
         style={
           Object {
             "color": "#5D757A",
@@ -78,16 +59,10 @@ exports[`matches the last snapshot 1`] = `
 
     </Text>
     <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
       onLongPress={null}
       onPress={null}
     >
       <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
         style={
           Object {
             "color": "#5D757A",
@@ -105,16 +80,10 @@ exports[`matches the last snapshot 1`] = `
 
     </Text>
     <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
       onLongPress={null}
       onPress={null}
     >
       <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
         style={
           Object {
             "color": "#5D757A",
@@ -128,16 +97,10 @@ exports[`matches the last snapshot 1`] = `
         Then a para ending with a mention 
       </Text>
       <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
         onLongPress={null}
         onPress={[Function]}
       >
         <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
           style={
             Object {
               "color": "#5D757A",
@@ -152,9 +115,6 @@ exports[`matches the last snapshot 1`] = `
         </Text>
       </Text>
       <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
         style={
           Object {
             "color": "#5D757A",
@@ -172,23 +132,14 @@ exports[`matches the last snapshot 1`] = `
 
     </Text>
     <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
       onLongPress={null}
       onPress={null}
     >
       <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
         onLongPress={null}
         onPress={[Function]}
       >
         <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
           style={
             Object {
               "color": "#5D757A",
@@ -203,9 +154,6 @@ exports[`matches the last snapshot 1`] = `
         </Text>
       </Text>
       <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
         style={
           Object {
             "color": "#5D757A",
@@ -223,16 +171,10 @@ exports[`matches the last snapshot 1`] = `
 
     </Text>
     <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
       onLongPress={null}
       onPress={null}
     >
       <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
         style={
           Object {
             "color": "#5D757A",

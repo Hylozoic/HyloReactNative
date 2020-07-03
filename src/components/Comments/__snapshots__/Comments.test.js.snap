@@ -2,14 +2,10 @@
 
 exports[`Comments renders correctly 1`] = `
 <View>
-  <ScrollView
+  <ScrollViewMock
     onContentSizeChange={[Function]}
   >
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
+    <Text>
       Some React Code
     </Text>
     <ShowMore
@@ -27,9 +23,6 @@ exports[`Comments renders correctly 1`] = `
           "id": 1,
         }
       }
-      showMember={undefined}
-      showTopic={undefined}
-      slug={undefined}
     />
     <Connect(Comment)
       comment={
@@ -37,9 +30,6 @@ exports[`Comments renders correctly 1`] = `
           "id": 2,
         }
       }
-      showMember={undefined}
-      showTopic={undefined}
-      slug={undefined}
     />
     <Connect(Comment)
       comment={
@@ -47,16 +37,9 @@ exports[`Comments renders correctly 1`] = `
           "id": 3,
         }
       }
-      showMember={undefined}
-      showTopic={undefined}
-      slug={undefined}
     />
-  </ScrollView>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-  >
+  </ScrollViewMock>
+  <Text>
     Some More Code
   </Text>
 </View>
@@ -67,9 +50,6 @@ exports[`ShowMore renders correctly 1`] = `
   activeOpacity={0.2}
 >
   <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
     onPress={[Function]}
   >
     View 

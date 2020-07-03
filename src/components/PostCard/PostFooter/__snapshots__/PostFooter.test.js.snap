@@ -24,11 +24,7 @@ exports[`renders as expected 1`] = `
       size="small"
       zIndex={1}
     />
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
+    <Text>
       36 comments
     </Text>
   </View>
@@ -39,11 +35,7 @@ exports[`renders as expected 1`] = `
     <Icon
       name="ArrowUp"
     />
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
+    <Text>
       71
     </Text>
   </TouchableOpacity>

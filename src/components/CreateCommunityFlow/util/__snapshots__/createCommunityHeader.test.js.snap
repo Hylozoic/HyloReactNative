@@ -25,11 +25,7 @@ Object {
     },
     "shadowRadius": 0,
   },
-  "title": <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-  >
+  "title": <Text>
     header title
   </Text>,
 }

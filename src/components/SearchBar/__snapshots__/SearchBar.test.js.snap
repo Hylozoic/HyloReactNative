@@ -11,9 +11,7 @@ exports[`ItemChooserScreen renders as expected (without value) 1`] = `
     autoCorrect={false}
     autoFocus={false}
     editable={true}
-    onChangeText={undefined}
-    onFocus={undefined}
-    placeholder={undefined}
+    rejectResponderTermination={true}
     underlineColorAndroid="transparent"
     value=""
   />
@@ -31,9 +29,7 @@ exports[`ItemChooserScreen renders as expected when loading 1`] = `
     autoCorrect={false}
     autoFocus={false}
     editable={true}
-    onChangeText={undefined}
-    onFocus={undefined}
-    placeholder={undefined}
+    rejectResponderTermination={true}
     underlineColorAndroid="transparent"
     value=""
   />
@@ -52,9 +48,7 @@ exports[`ItemChooserScreen renders as expected with value 1`] = `
     autoCorrect={false}
     autoFocus={false}
     editable={true}
-    onChangeText={undefined}
-    onFocus={undefined}
-    placeholder={undefined}
+    rejectResponderTermination={true}
     underlineColorAndroid="transparent"
     value="Anything"
   />
@@ -72,9 +66,8 @@ exports[`ItemChooserScreen renders with placeholder 1`] = `
     autoCorrect={false}
     autoFocus={false}
     editable={true}
-    onChangeText={undefined}
-    onFocus={undefined}
     placeholder="Search anything"
+    rejectResponderTermination={true}
     underlineColorAndroid="transparent"
     value=""
   />

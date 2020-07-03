@@ -26,7 +26,7 @@ exports[`renders as expected 1`] = `
       onSelectionChange={[Function]}
       placeholder="Place Holder"
       placeholderTextColor="#c0c6cd"
-      selection={undefined}
+      rejectResponderTermination={true}
       underlineColorAndroid="transparent"
       value="some text"
     />

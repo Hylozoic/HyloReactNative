@@ -9,13 +9,13 @@ exports[`MemberList renders with default props with default non-server search 1`
         <View>
           <Icon
             name="Search"
-            onPress={[Function]}
             size={30}
           />
           <TextInput
             allowFontScaling={true}
             onChangeText={[Function]}
             placeholder="Search Members"
+            rejectResponderTermination={true}
             underlineColorAndroid="transparent"
           />
         </View>
@@ -23,11 +23,7 @@ exports[`MemberList renders with default props with default non-server search 1`
           actions={Array []}
         >
           <View>
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-            />
+            <Text />
             <Icon
               name="ArrowDown"
             />
@@ -56,6 +52,7 @@ exports[`MemberList renders with default props with default non-server search 1`
   numColumns="2"
   onEndReached={false}
   onEndReachedThreshold={2}
+  removeClippedSubviews={false}
   renderItem={[Function]}
   scrollEventThrottle={50}
   updateCellsBatchingPeriod={50}
@@ -72,13 +69,13 @@ exports[`MemberList runs call for new results if server search 1`] = `
         <View>
           <Icon
             name="Search"
-            onPress={[Function]}
             size={30}
           />
           <TextInput
             allowFontScaling={true}
             onChangeText={[Function]}
             placeholder="Search Members"
+            rejectResponderTermination={true}
             underlineColorAndroid="transparent"
           />
         </View>
@@ -86,11 +83,7 @@ exports[`MemberList runs call for new results if server search 1`] = `
           actions={Array []}
         >
           <View>
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-            />
+            <Text />
             <Icon
               name="ArrowDown"
             />
@@ -119,6 +112,7 @@ exports[`MemberList runs call for new results if server search 1`] = `
   numColumns="2"
   onEndReached={[Function]}
   onEndReachedThreshold={2}
+  removeClippedSubviews={false}
   renderItem={[Function]}
   scrollEventThrottle={50}
   updateCellsBatchingPeriod={50}
@@ -135,13 +129,13 @@ exports[`MemberList server search fetches new results when search provided 1`] =
         <View>
           <Icon
             name="Search"
-            onPress={[Function]}
             size={30}
           />
           <TextInput
             allowFontScaling={true}
             onChangeText={[Function]}
             placeholder="Search Members"
+            rejectResponderTermination={true}
             underlineColorAndroid="transparent"
           />
         </View>
@@ -149,11 +143,7 @@ exports[`MemberList server search fetches new results when search provided 1`] =
           actions={Array []}
         >
           <View>
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-            />
+            <Text />
             <Icon
               name="ArrowDown"
             />
@@ -168,7 +158,6 @@ exports[`MemberList server search fetches new results when search provided 1`] =
   getItemCount={[Function]}
   horizontal={false}
   initialNumToRender={10}
-  invertStickyHeaders={undefined}
   keyExtractor={[Function]}
   maxToRenderPerBatch={10}
   numColumns="2"
@@ -180,6 +169,7 @@ exports[`MemberList server search fetches new results when search provided 1`] =
   onScroll={[Function]}
   onScrollBeginDrag={[Function]}
   onScrollEndDrag={[Function]}
+  removeClippedSubviews={false}
   renderItem={[Function]}
   scrollEventThrottle={50}
   stickyHeaderIndices={Array []}
@@ -195,25 +185,20 @@ exports[`MemberList server search fetches new results when search provided 1`] =
         <View>
           <View>
             <Icon
-              color={undefined}
               name="Search"
-              onPress={[Function]}
               size={30}
             />
             <TextInput
               allowFontScaling={true}
               onChangeText={[Function]}
               placeholder="Search Members"
+              rejectResponderTermination={true}
               underlineColorAndroid="transparent"
             />
           </View>
           <View
-            accessibilityComponentType={undefined}
-            accessibilityLabel={undefined}
-            accessibilityTraits={undefined}
             accessible={true}
-            collapsable={undefined}
-            hasTVPreferredFocus={undefined}
+            focusable={true}
             hitSlop={
               Object {
                 "bottom": 5,
@@ -223,25 +208,17 @@ exports[`MemberList server search fetches new results when search provided 1`] =
               }
             }
             isTVSelectable={true}
-            nativeID={undefined}
-            onLayout={undefined}
+            onClick={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
             onResponderRelease={[Function]}
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
-            testID={undefined}
-            tvParallaxProperties={undefined}
           >
             <View>
-              <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
-              />
+              <Text />
               <Icon
-                color={undefined}
                 name="ArrowDown"
               />
             </View>

@@ -8,8 +8,8 @@ exports[`Control matches the last snapshot 1`] = `
       editable={true}
       multiline={true}
       numberOfLines={8}
-      onChangeText={undefined}
       placeholder="b"
+      rejectResponderTermination={true}
       underlineColorAndroid="transparent"
       value="a"
     />
@@ -31,8 +31,6 @@ exports[`MemberHeader matches the last snapshot 1`] = `
 <View>
   <View>
     <Control
-      editable={undefined}
-      error={undefined}
       isMe={true}
       onChangeText={[Function]}
       placeholder="Name"
@@ -41,7 +39,6 @@ exports[`MemberHeader matches the last snapshot 1`] = `
     <View>
       <TouchableOpacity
         activeOpacity={0.2}
-        onPress={undefined}
       >
         <Icon
           name="Messages"
@@ -49,24 +46,19 @@ exports[`MemberHeader matches the last snapshot 1`] = `
       </TouchableOpacity>
       <MemberMenu
         blockUser={[Function]}
-        editProfile={undefined}
-        editable={undefined}
         flagMember={[Function]}
         isAxolotl={false}
         isMe={true}
-        saveChanges={undefined}
       />
     </View>
   </View>
   <Control
-    editable={undefined}
     isMe={true}
     onChangeText={[Function]}
     placeholder="Location"
     value="whale"
   />
   <Control
-    editable={undefined}
     isMe={true}
     onChangeText={[Function]}
     placeholder="Short Description"

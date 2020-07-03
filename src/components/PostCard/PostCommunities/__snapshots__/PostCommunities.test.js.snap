@@ -3,103 +3,63 @@
 exports[`PostCommunities matches last snapshot 1`] = `
 <View>
   <View>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
+    <Text>
       Posted In: 
     </Text>
     <View>
       <View
-        accessibilityComponentType={undefined}
-        accessibilityLabel={undefined}
-        accessibilityTraits={undefined}
         accessible={true}
-        collapsable={undefined}
-        hasTVPreferredFocus={undefined}
-        hitSlop={undefined}
+        focusable={true}
         isTVSelectable={true}
-        nativeID={undefined}
-        onLayout={undefined}
+        onClick={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
         onResponderTerminate={[Function]}
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
-        testID={undefined}
-        tvParallaxProperties={undefined}
       >
         <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
           numberOfLines={1}
         >
           One
         </Text>
       </View>
       <View>
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-        >
+        <Text>
            and 
         </Text>
         <View
-          accessibilityComponentType={undefined}
-          accessibilityLabel={undefined}
-          accessibilityTraits={undefined}
           accessible={true}
-          collapsable={undefined}
-          hasTVPreferredFocus={undefined}
-          hitSlop={undefined}
+          focusable={true}
           isTVSelectable={true}
-          nativeID={undefined}
-          onLayout={undefined}
+          onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
           onResponderTerminate={[Function]}
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
-          testID={undefined}
-          tvParallaxProperties={undefined}
         >
-          <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
-          >
+          <Text>
             2 others
           </Text>
         </View>
       </View>
     </View>
     <View
-      accessibilityComponentType={undefined}
-      accessibilityLabel={undefined}
-      accessibilityTraits={undefined}
       accessible={true}
-      collapsable={undefined}
-      hasTVPreferredFocus={undefined}
-      hitSlop={undefined}
+      focusable={true}
       isTVSelectable={true}
-      nativeID={undefined}
-      onLayout={undefined}
+      onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
-      testID={undefined}
-      tvParallaxProperties={undefined}
     >
       <Icon
-        color={undefined}
         name="ArrowDown"
       />
     </View>
@@ -111,59 +71,38 @@ exports[`PostCommunities matches last snapshot when expanded 1`] = `
 <View>
   <View>
     <View>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-      >
+      <Text>
         Posted In: 
       </Text>
       <View
-        accessibilityComponentType={undefined}
-        accessibilityLabel={undefined}
-        accessibilityTraits={undefined}
         accessible={true}
-        collapsable={undefined}
-        hasTVPreferredFocus={undefined}
-        hitSlop={undefined}
+        focusable={true}
         isTVSelectable={true}
-        nativeID={undefined}
-        onLayout={undefined}
+        onClick={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
         onResponderTerminate={[Function]}
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
-        testID={undefined}
-        tvParallaxProperties={undefined}
       >
         <Icon
-          color={undefined}
           name="ArrowUp"
         />
       </View>
     </View>
     <View>
       <View
-        accessibilityComponentType={undefined}
-        accessibilityLabel={undefined}
-        accessibilityTraits={undefined}
         accessible={true}
-        collapsable={undefined}
-        hasTVPreferredFocus={undefined}
-        hitSlop={undefined}
+        focusable={true}
         isTVSelectable={true}
-        nativeID={undefined}
-        onLayout={undefined}
+        onClick={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
         onResponderTerminate={[Function]}
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
-        testID={undefined}
-        tvParallaxProperties={undefined}
       >
         <Image
           source={
@@ -173,33 +112,22 @@ exports[`PostCommunities matches last snapshot when expanded 1`] = `
           }
         />
         <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
           numberOfLines={1}
         >
           One
         </Text>
       </View>
       <View
-        accessibilityComponentType={undefined}
-        accessibilityLabel={undefined}
-        accessibilityTraits={undefined}
         accessible={true}
-        collapsable={undefined}
-        hasTVPreferredFocus={undefined}
-        hitSlop={undefined}
+        focusable={true}
         isTVSelectable={true}
-        nativeID={undefined}
-        onLayout={undefined}
+        onClick={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
         onResponderTerminate={[Function]}
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
-        testID={undefined}
-        tvParallaxProperties={undefined}
       >
         <Image
           source={
@@ -209,9 +137,6 @@ exports[`PostCommunities matches last snapshot when expanded 1`] = `
           }
         />
         <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
           numberOfLines={1}
         >
           Two
@@ -220,24 +145,16 @@ exports[`PostCommunities matches last snapshot when expanded 1`] = `
     </View>
     <View>
       <View
-        accessibilityComponentType={undefined}
-        accessibilityLabel={undefined}
-        accessibilityTraits={undefined}
         accessible={true}
-        collapsable={undefined}
-        hasTVPreferredFocus={undefined}
-        hitSlop={undefined}
+        focusable={true}
         isTVSelectable={true}
-        nativeID={undefined}
-        onLayout={undefined}
+        onClick={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
         onResponderTerminate={[Function]}
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
-        testID={undefined}
-        tvParallaxProperties={undefined}
       >
         <Image
           source={
@@ -247,9 +164,6 @@ exports[`PostCommunities matches last snapshot when expanded 1`] = `
           }
         />
         <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
           numberOfLines={1}
         >
           Three
@@ -263,38 +177,23 @@ exports[`PostCommunities matches last snapshot when expanded 1`] = `
 exports[`PostCommunities renders when in one community and shouldShowCommunities is true 1`] = `
 <View>
   <View>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
+    <Text>
       Posted In: 
     </Text>
     <View>
       <View
-        accessibilityComponentType={undefined}
-        accessibilityLabel={undefined}
-        accessibilityTraits={undefined}
         accessible={true}
-        collapsable={undefined}
-        hasTVPreferredFocus={undefined}
-        hitSlop={undefined}
+        focusable={true}
         isTVSelectable={true}
-        nativeID={undefined}
-        onLayout={undefined}
+        onClick={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
         onResponderTerminate={[Function]}
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
-        testID={undefined}
-        tvParallaxProperties={undefined}
       >
         <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
           numberOfLines={1}
         >
           One
@@ -302,27 +201,18 @@ exports[`PostCommunities renders when in one community and shouldShowCommunities
       </View>
     </View>
     <View
-      accessibilityComponentType={undefined}
-      accessibilityLabel={undefined}
-      accessibilityTraits={undefined}
       accessible={true}
-      collapsable={undefined}
-      hasTVPreferredFocus={undefined}
-      hitSlop={undefined}
+      focusable={true}
       isTVSelectable={true}
-      nativeID={undefined}
-      onLayout={undefined}
+      onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
-      testID={undefined}
-      tvParallaxProperties={undefined}
     >
       <Icon
-        color={undefined}
         name="ArrowDown"
       />
     </View>

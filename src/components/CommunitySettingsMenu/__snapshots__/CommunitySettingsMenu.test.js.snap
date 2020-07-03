@@ -21,11 +21,7 @@ exports[`CommunitySettingsMenu matches the last snapshot 1`] = `
 <FlatList
   ListHeaderComponent={
     <View>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-      >
+      <Text>
         foo
       </Text>
     </View>
@@ -53,6 +49,7 @@ exports[`CommunitySettingsMenu matches the last snapshot 1`] = `
   maxToRenderPerBatch={10}
   numColumns={1}
   onEndReachedThreshold={2}
+  removeClippedSubviews={false}
   renderItem={[Function]}
   scrollEventThrottle={50}
   updateCellsBatchingPeriod={50}

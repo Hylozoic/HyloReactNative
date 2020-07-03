@@ -14,7 +14,7 @@
     "ios:devices": "cd ios && bundle exec fastlane devices",
     "ios:testflight": "cd ios && bundle exec fastlane beta",
     "ios:qa": "cd ios && bundle exec fastlane qa",
-    "test": "jest",
+    "test": "jest --watch",
     "coverage:diff": "node ../jest-diff-coverage && open coverage/lcov-report/index.html",
     "clean-start": "./scripts/clean-rebuild.sh",
     "configure": "./scripts/configure.sh",
@@ -97,7 +97,8 @@
     "standard": "^11.0.1",
     "timezone-mock": "^0.0.6",
     "validator": "^8.0.0",
-    "why-did-you-update": "^0.1.1"
+    "why-did-you-update": "^0.1.1",
+    "babel-plugin-syntax-jsx": "^6.18.0"
   },
   "jest": {
     "preset": "react-native",

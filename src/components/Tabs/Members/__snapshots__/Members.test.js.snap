@@ -20,11 +20,7 @@ exports[`Banner matches snapshot when all is true 1`] = `
     }
   />
   <View>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
+    <Text>
       All Communities
     </Text>
   </View>
@@ -51,11 +47,7 @@ exports[`Banner matches snapshot with community 1`] = `
     }
   />
   <View>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
+    <Text>
       Foomunity
     </Text>
   </View>
@@ -82,11 +74,7 @@ exports[`Banner matches snapshot with network 1`] = `
     }
   />
   <View>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
+    <Text>
       Foom Network
     </Text>
   </View>
@@ -131,20 +119,18 @@ exports[`renders correctly with no community and isAll 1`] = `
       <View>
         <Banner
           all={true}
-          community={undefined}
-          network={undefined}
         />
         <View>
           <View>
             <Icon
               name="Search"
-              onPress={[Function]}
               size={30}
             />
             <TextInput
               allowFontScaling={true}
               onChangeText={[Function]}
               placeholder="Search Members"
+              rejectResponderTermination={true}
               underlineColorAndroid="transparent"
             />
           </View>
@@ -152,11 +138,7 @@ exports[`renders correctly with no community and isAll 1`] = `
             actions={Array []}
           >
             <View>
-              <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
-              />
+              <Text />
               <Icon
                 name="ArrowDown"
               />
@@ -206,7 +188,6 @@ exports[`renders correctly with no community and isAll 1`] = `
     getItemCount={[Function]}
     horizontal={false}
     initialNumToRender={10}
-    invertStickyHeaders={undefined}
     keyExtractor={[Function]}
     maxToRenderPerBatch={10}
     numColumns="2"
@@ -218,6 +199,7 @@ exports[`renders correctly with no community and isAll 1`] = `
     onScroll={[Function]}
     onScrollBeginDrag={[Function]}
     onScrollEndDrag={[Function]}
+    removeClippedSubviews={false}
     renderItem={[Function]}
     scrollEventThrottle={50}
     stickyHeaderIndices={Array []}
@@ -251,11 +233,7 @@ exports[`renders correctly with no community and isAll 1`] = `
               MockLinearGradient
             </div>
             <View>
-              <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
-              >
+              <Text>
                 All Communities
               </Text>
             </View>
@@ -263,25 +241,20 @@ exports[`renders correctly with no community and isAll 1`] = `
           <View>
             <View>
               <Icon
-                color={undefined}
                 name="Search"
-                onPress={[Function]}
                 size={30}
               />
               <TextInput
                 allowFontScaling={true}
                 onChangeText={[Function]}
                 placeholder="Search Members"
+                rejectResponderTermination={true}
                 underlineColorAndroid="transparent"
               />
             </View>
             <View
-              accessibilityComponentType={undefined}
-              accessibilityLabel={undefined}
-              accessibilityTraits={undefined}
               accessible={true}
-              collapsable={undefined}
-              hasTVPreferredFocus={undefined}
+              focusable={true}
               hitSlop={
                 Object {
                   "bottom": 5,
@@ -291,25 +264,17 @@ exports[`renders correctly with no community and isAll 1`] = `
                 }
               }
               isTVSelectable={true}
-              nativeID={undefined}
-              onLayout={undefined}
+              onClick={[Function]}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
               onResponderRelease={[Function]}
               onResponderTerminate={[Function]}
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
-              testID={undefined}
-              tvParallaxProperties={undefined}
             >
               <View>
-                <Text
-                  accessible={true}
-                  allowFontScaling={true}
-                  ellipsizeMode="tail"
-                />
+                <Text />
                 <Icon
-                  color={undefined}
                   name="ArrowDown"
                 />
               </View>
@@ -322,24 +287,16 @@ exports[`renders correctly with no community and isAll 1`] = `
       >
         <View>
           <View
-            accessibilityComponentType={undefined}
-            accessibilityLabel={undefined}
-            accessibilityTraits={undefined}
             accessible={true}
-            collapsable={undefined}
-            hasTVPreferredFocus={undefined}
-            hitSlop={undefined}
+            focusable={true}
             isTVSelectable={true}
-            nativeID={undefined}
-            onLayout={undefined}
+            onClick={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
             onResponderRelease={[Function]}
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
-            testID={undefined}
-            tvParallaxProperties={undefined}
           >
             <View>
               <View>
@@ -352,48 +309,29 @@ exports[`renders correctly with no community and isAll 1`] = `
                 />
               </View>
             </View>
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-            >
+            <Text>
               Foo Lane
             </Text>
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-            >
+            <Text>
               here
             </Text>
             <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
               numberOfLines={4}
             >
               Hello!
             </Text>
           </View>
           <View
-            accessibilityComponentType={undefined}
-            accessibilityLabel={undefined}
-            accessibilityTraits={undefined}
             accessible={true}
-            collapsable={undefined}
-            hasTVPreferredFocus={undefined}
-            hitSlop={undefined}
+            focusable={true}
             isTVSelectable={true}
-            nativeID={undefined}
-            onLayout={undefined}
+            onClick={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
             onResponderRelease={[Function]}
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
-            testID={undefined}
-            tvParallaxProperties={undefined}
           >
             <View>
               <View>
@@ -406,24 +344,13 @@ exports[`renders correctly with no community and isAll 1`] = `
                 />
               </View>
             </View>
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-            >
+            <Text>
               Bar Jones
             </Text>
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-            >
+            <Text>
               there
             </Text>
             <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
               numberOfLines={4}
             >
               Not a stork
@@ -436,24 +363,16 @@ exports[`renders correctly with no community and isAll 1`] = `
       >
         <View>
           <View
-            accessibilityComponentType={undefined}
-            accessibilityLabel={undefined}
-            accessibilityTraits={undefined}
             accessible={true}
-            collapsable={undefined}
-            hasTVPreferredFocus={undefined}
-            hitSlop={undefined}
+            focusable={true}
             isTVSelectable={true}
-            nativeID={undefined}
-            onLayout={undefined}
+            onClick={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
             onResponderRelease={[Function]}
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
-            testID={undefined}
-            tvParallaxProperties={undefined}
           >
             <View>
               <View>
@@ -466,41 +385,26 @@ exports[`renders correctly with no community and isAll 1`] = `
                 />
               </View>
             </View>
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-            >
+            <Text>
               Baz Chu
             </Text>
             <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
               numberOfLines={4}
             >
               Could be
             </Text>
           </View>
           <View
-            accessibilityComponentType={undefined}
-            accessibilityLabel={undefined}
-            accessibilityTraits={undefined}
             accessible={true}
-            collapsable={undefined}
-            hasTVPreferredFocus={undefined}
-            hitSlop={undefined}
+            focusable={true}
             isTVSelectable={true}
-            nativeID={undefined}
-            onLayout={undefined}
+            onClick={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
             onResponderRelease={[Function]}
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
-            testID={undefined}
-            tvParallaxProperties={undefined}
           >
             <View>
               <View>
@@ -513,17 +417,10 @@ exports[`renders correctly with no community and isAll 1`] = `
                 />
               </View>
             </View>
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-            >
+            <Text>
               Bonk Gundsdottir
             </Text>
             <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
               numberOfLines={4}
             />
           </View>
@@ -550,8 +447,6 @@ exports[`renders with invite button when a moderator 1`] = `
       <View>
         <Banner
           all={true}
-          community={undefined}
-          network={undefined}
         />
         <Button
           iconName="Invite"
@@ -562,13 +457,13 @@ exports[`renders with invite button when a moderator 1`] = `
           <View>
             <Icon
               name="Search"
-              onPress={[Function]}
               size={30}
             />
             <TextInput
               allowFontScaling={true}
               onChangeText={[Function]}
               placeholder="Search Members"
+              rejectResponderTermination={true}
               underlineColorAndroid="transparent"
             />
           </View>
@@ -576,11 +471,7 @@ exports[`renders with invite button when a moderator 1`] = `
             actions={Array []}
           >
             <View>
-              <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
-              />
+              <Text />
               <Icon
                 name="ArrowDown"
               />
@@ -630,7 +521,6 @@ exports[`renders with invite button when a moderator 1`] = `
     getItemCount={[Function]}
     horizontal={false}
     initialNumToRender={10}
-    invertStickyHeaders={undefined}
     keyExtractor={[Function]}
     maxToRenderPerBatch={10}
     numColumns="2"
@@ -642,6 +532,7 @@ exports[`renders with invite button when a moderator 1`] = `
     onScroll={[Function]}
     onScrollBeginDrag={[Function]}
     onScrollEndDrag={[Function]}
+    removeClippedSubviews={false}
     renderItem={[Function]}
     scrollEventThrottle={50}
     stickyHeaderIndices={Array []}
@@ -675,47 +566,30 @@ exports[`renders with invite button when a moderator 1`] = `
               MockLinearGradient
             </div>
             <View>
-              <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
-              >
+              <Text>
                 All Communities
               </Text>
             </View>
           </View>
           <View>
             <View
-              accessibilityComponentType={undefined}
-              accessibilityLabel={undefined}
-              accessibilityTraits={undefined}
               accessible={true}
-              collapsable={undefined}
-              hasTVPreferredFocus={undefined}
-              hitSlop={undefined}
+              focusable={true}
               isTVSelectable={true}
-              nativeID={undefined}
-              onLayout={undefined}
+              onClick={[Function]}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
               onResponderRelease={[Function]}
               onResponderTerminate={[Function]}
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
-              testID={undefined}
-              tvParallaxProperties={undefined}
             >
               <View>
                 <View>
                   <Icon
-                    color={undefined}
                     name="Invite"
                   />
-                  <Text
-                    accessible={true}
-                    allowFontScaling={true}
-                    ellipsizeMode="tail"
-                  >
+                  <Text>
                     Invite People
                   </Text>
                 </View>
@@ -725,25 +599,20 @@ exports[`renders with invite button when a moderator 1`] = `
           <View>
             <View>
               <Icon
-                color={undefined}
                 name="Search"
-                onPress={[Function]}
                 size={30}
               />
               <TextInput
                 allowFontScaling={true}
                 onChangeText={[Function]}
                 placeholder="Search Members"
+                rejectResponderTermination={true}
                 underlineColorAndroid="transparent"
               />
             </View>
             <View
-              accessibilityComponentType={undefined}
-              accessibilityLabel={undefined}
-              accessibilityTraits={undefined}
               accessible={true}
-              collapsable={undefined}
-              hasTVPreferredFocus={undefined}
+              focusable={true}
               hitSlop={
                 Object {
                   "bottom": 5,
@@ -753,25 +622,17 @@ exports[`renders with invite button when a moderator 1`] = `
                 }
               }
               isTVSelectable={true}
-              nativeID={undefined}
-              onLayout={undefined}
+              onClick={[Function]}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
               onResponderRelease={[Function]}
               onResponderTerminate={[Function]}
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
-              testID={undefined}
-              tvParallaxProperties={undefined}
             >
               <View>
-                <Text
-                  accessible={true}
-                  allowFontScaling={true}
-                  ellipsizeMode="tail"
-                />
+                <Text />
                 <Icon
-                  color={undefined}
                   name="ArrowDown"
                 />
               </View>
@@ -784,24 +645,16 @@ exports[`renders with invite button when a moderator 1`] = `
       >
         <View>
           <View
-            accessibilityComponentType={undefined}
-            accessibilityLabel={undefined}
-            accessibilityTraits={undefined}
             accessible={true}
-            collapsable={undefined}
-            hasTVPreferredFocus={undefined}
-            hitSlop={undefined}
+            focusable={true}
             isTVSelectable={true}
-            nativeID={undefined}
-            onLayout={undefined}
+            onClick={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
             onResponderRelease={[Function]}
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
-            testID={undefined}
-            tvParallaxProperties={undefined}
           >
             <View>
               <View>
@@ -814,48 +667,29 @@ exports[`renders with invite button when a moderator 1`] = `
                 />
               </View>
             </View>
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-            >
+            <Text>
               Foo Lane
             </Text>
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-            >
+            <Text>
               here
             </Text>
             <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
               numberOfLines={4}
             >
               Hello!
             </Text>
           </View>
           <View
-            accessibilityComponentType={undefined}
-            accessibilityLabel={undefined}
-            accessibilityTraits={undefined}
             accessible={true}
-            collapsable={undefined}
-            hasTVPreferredFocus={undefined}
-            hitSlop={undefined}
+            focusable={true}
             isTVSelectable={true}
-            nativeID={undefined}
-            onLayout={undefined}
+            onClick={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
             onResponderRelease={[Function]}
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
-            testID={undefined}
-            tvParallaxProperties={undefined}
           >
             <View>
               <View>
@@ -868,24 +702,13 @@ exports[`renders with invite button when a moderator 1`] = `
                 />
               </View>
             </View>
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-            >
+            <Text>
               Bar Jones
             </Text>
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-            >
+            <Text>
               there
             </Text>
             <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
               numberOfLines={4}
             >
               Not a stork
@@ -898,24 +721,16 @@ exports[`renders with invite button when a moderator 1`] = `
       >
         <View>
           <View
-            accessibilityComponentType={undefined}
-            accessibilityLabel={undefined}
-            accessibilityTraits={undefined}
             accessible={true}
-            collapsable={undefined}
-            hasTVPreferredFocus={undefined}
-            hitSlop={undefined}
+            focusable={true}
             isTVSelectable={true}
-            nativeID={undefined}
-            onLayout={undefined}
+            onClick={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
             onResponderRelease={[Function]}
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
-            testID={undefined}
-            tvParallaxProperties={undefined}
           >
             <View>
               <View>
@@ -928,41 +743,26 @@ exports[`renders with invite button when a moderator 1`] = `
                 />
               </View>
             </View>
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-            >
+            <Text>
               Baz Chu
             </Text>
             <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
               numberOfLines={4}
             >
               Could be
             </Text>
           </View>
           <View
-            accessibilityComponentType={undefined}
-            accessibilityLabel={undefined}
-            accessibilityTraits={undefined}
             accessible={true}
-            collapsable={undefined}
-            hasTVPreferredFocus={undefined}
-            hitSlop={undefined}
+            focusable={true}
             isTVSelectable={true}
-            nativeID={undefined}
-            onLayout={undefined}
+            onClick={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
             onResponderRelease={[Function]}
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
-            testID={undefined}
-            tvParallaxProperties={undefined}
           >
             <View>
               <View>
@@ -975,17 +775,10 @@ exports[`renders with invite button when a moderator 1`] = `
                 />
               </View>
             </View>
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-            >
+            <Text>
               Bonk Gundsdottir
             </Text>
             <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
               numberOfLines={4}
             />
           </View>
