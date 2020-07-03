@@ -37,6 +37,9 @@ jobs:
         name: set Ruby version
         command:  echo "ruby-2.4" > ~/.ruby-version    # Machine Setup
     - run:
+        name: Install Ruby
+        command: apk add ruby ruby-io-console ruby-bundler
+    - run:
         name: install Bundler Ruby GEM
         command: gem install bundler
     # setup self referential env vars
