@@ -1,93 +1,85 @@
+# This configuration was automatically generated from a CircleCI 1.0 config.
+# It should include any build commands you had along with commands that CircleCI
+# inferred from your project structure. We strongly recommend you read all the
+# comments in this file to understand the structure of CircleCI 2.0, as the idiom
+# for configuration has changed substantially in 2.0 to allow arbitrary jobs rather
+# than the prescribed lifecycle of 1.0. In general, we recommend using this generated
+# configuration as a reference rather than using it in production, though in most
+# cases it should duplicate the execution of your original 1.0 config.
 version: 2
 jobs:
-...
-  ios:
-    macos:
-      xcode: "10.2.1"
-    working_directory: ~/app
-
-    # use a --login shell so our "set Ruby version" command gets picked up for later steps
-    shell: /bin/bash --login -o pipefail
-
+  build:
+    working_directory: ~/Hylozoic/HyloReactNative
+    parallelism: 1
+    shell: /bin/bash --login
+    # CircleCI 2.0 does not support environment variables that refer to each other the same way as 1.0 did.
+    # If any of these refer to each other, rewrite them so that they don't or see https://circleci.com/docs/2.0/env-vars/#interpolating-environment-variables-to-set-other-environment-variables .
+    environment:
+      CIRCLE_ARTIFACTS: /tmp/circleci-artifacts
+      CIRCLE_TEST_REPORTS: /tmp/circleci-test-results
+    # In CircleCI 1.0 we used a pre-configured image with a large number of languages and other packages.
+    # In CircleCI 2.0 you can now specify your own image, or use one of our pre-configured images.
+    # The following configuration line tells CircleCI to use the specified docker image as the runtime environment for you job.
+    # We have selected a pre-built image that mirrors the build environment we use on
+    # the 1.0 platform, but we recommend you choose an image more tailored to the needs
+    # of each job. For more information on choosing an image (or alternatively using a
+    # VM instead of a container) see https://circleci.com/docs/2.0/executor-types/
+    # To see the list of pre-built images that CircleCI provides for most common languages see
+    # https://circleci.com/docs/2.0/circleci-images/
+    docker:
+    - image: circleci/node:10.20.1
     steps:
-      - checkout
-
-      - run:
-          name: Upgrade Yarn
-          command: |
-            curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash -s -- --no-use
-            echo 'export NVM_DIR=$HOME/.nvm' >> $BASH_ENV
-            echo 'source $NVM_DIR/nvm.sh' >> $BASH_ENV
-            echo 'nvm install v12.6.0' >> $BASH_ENV
-            echo 'nvm alias default v12.6.0' >> $BASH_ENV
-            curl -o- https://yarnpkg.com/install.sh | bash -s
-            echo 'export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"' >> $BASH_ENV
-
-      - run:
-          name: set Ruby version
-          command:  echo "ruby-2.4" > ~/.ruby-version
-
-      - restore_cache:
-          key: yarn-v1-{{ checksum "yarn.lock" }}-{{ arch }}
-
-      - restore_cache:
-          key: node-v1-{{ checksum "package.json" }}-{{ arch }}
-
-      # not using a workspace here as Node and Yarn versions
-      # differ between our macOS executor image and the Docker containers above
-      - run: yarn install
-
-      - save_cache:
-          key: yarn-v1-{{ checksum "yarn.lock" }}-{{ arch }}
-          paths:
-            - ~/.cache/yarn
-
-      - save_cache:
-          key: node-v1-{{ checksum "package.json" }}-{{ arch }}
-          paths:
-            - node_modules
-
-      - restore_cache:
-          key: bundle-v1-{{ checksum "ios/Gemfile.lock" }}-{{ arch }}
-
-      - run:
-          command: bundle install
-          working_directory: ios
-
-      - save_cache:
-          key: bundle-v1-{{ checksum "ios/Gemfile.lock" }}-{{ arch }}
-          paths:
-            - vendor/bundle
-
-      - restore_cache:
-          key: pods-v1-{{ checksum "ios/Podfile.lock" }}-{{ arch }}
-
-      - run:
-          name: show versions
-          working_directory: ios
-          command: |
-            node -v
-            ruby -v
-            bundle exec pod --version
-            yarn --version
-            bundle --version
-
-      - run:
-          name: Install CocoaPods
-          command: bundle exec pod install --verbose
-          working_directory: ios
-
-      - save_cache:
-          key: pods-v1-{{ checksum "ios/Podfile.lock" }}-{{ arch }}
-          paths:
-            - ios/Pods
-
-      - run:
-          command: yarn test -- --coverage --runInBand
-
-      - run:
-          command: yarn run codecov
-
+    # Machine Setup
+    #   If you break your build into multiple jobs with workflows, you will probably want to do the parts of this that are relevant in each
+    # The following `checkout` command checks out your code to your working directory. In 1.0 we did this implicitly. In 2.0 you can choose where in the course of a job your code should be checked out.
+    - checkout
+    # setup self referential env vars
+    - run: echo $HOME
+    - run: echo $CIRCLE_PROJECT_REPONAME
+    - run: echo $PATH
+    - run:
+        name: Update PATH Environment Variable at Runtime
+        command: |
+          export PATH=$PATH:$HOME/$CIRCLE_PROJECT_REPONAME/node_modules/.bin
+    # Prepare for artifact and test results  collection equivalent to how it was done on 1.0.
+    # In many cases you can simplify this from what is generated here.
+    # 'See docs on artifact collection here https://circleci.com/docs/2.0/artifacts/'
+    - run: mkdir -p $CIRCLE_ARTIFACTS $CIRCLE_TEST_REPORTS
+    # This is based on your 1.0 configuration file or project settings
+    # Dependencies
+    #   This would typically go in either a build or a build-and-test job when using workflows
+    # Restore the dependency cache
+    - restore_cache:
+        keys:
+        # This branch if available
+        - v1-dep-{{ .Branch }}-{{ checksum "yarn.lock" }}
+        # Default branch if not
+        - v1-dep-master-{{ checksum "yarn.lock" }}
+        # Any branch if there are none on the default branch - this should be unnecessary if you have your default branch configured correctly
+        - v1-dep-{{ checksum "yarn.lock" }}
+    # This is based on your 1.0 configuration file or project settings
+    # # Install yarn so it's up to date
+    # - run: sudo apt-get update && sudo apt-get install yarn
+    # This is based on your 1.0 configuration file or project settings
+    - run: yarn
+    - run: cd ios && bundle && pod install && cd ..
+    # Save dependency cache
+    - save_cache:
+        key: v1-dep-{{ .Branch }}-{{ checksum "yarn.lock" }}-{{ epoch }}
+        paths:
+        # This is a broad list of cache paths to include many possible development environments
+        # You can probably delete some of these entries
+        - vendor/bundle
+        - ~/virtualenvs
+        - ~/.m2
+        - ~/.ivy2
+        - ~/.bundle
+        - ~/.go_workspace
+        - ~/.gradle
+        - ~/.cache/bower
+        # These cache paths were specified in the 1.0 config
+        - ~/.cache/yarn
+        - ./node_modules
     # Test
     #   This would typically be a build job when using workflows, possibly combined with build
     # This is based on your 1.0 configuration file or project settings
@@ -106,106 +98,3 @@ jobs:
         path: coverage
     - store_artifacts:
         path: /tmp/circleci-test-results
-
-
-
-# # This configuration was automatically generated from a CircleCI 1.0 config.
-# # It should include any build commands you had along with commands that CircleCI
-# # inferred from your project structure. We strongly recommend you read all the
-# # comments in this file to understand the structure of CircleCI 2.0, as the idiom
-# # for configuration has changed substantially in 2.0 to allow arbitrary jobs rather
-# # than the prescribed lifecycle of 1.0. In general, we recommend using this generated
-# # configuration as a reference rather than using it in production, though in most
-# # cases it should duplicate the execution of your original 1.0 config.
-# version: 2
-# jobs:
-#   build:
-#     working_directory: ~/Hylozoic/HyloReactNative
-#     parallelism: 1
-#     shell: /bin/bash --login
-#     # CircleCI 2.0 does not support environment variables that refer to each other the same way as 1.0 did.
-#     # If any of these refer to each other, rewrite them so that they don't or see https://circleci.com/docs/2.0/env-vars/#interpolating-environment-variables-to-set-other-environment-variables .
-#     environment:
-#       CIRCLE_ARTIFACTS: /tmp/circleci-artifacts
-#       CIRCLE_TEST_REPORTS: /tmp/circleci-test-results
-#     # In CircleCI 1.0 we used a pre-configured image with a large number of languages and other packages.
-#     # In CircleCI 2.0 you can now specify your own image, or use one of our pre-configured images.
-#     # The following configuration line tells CircleCI to use the specified docker image as the runtime environment for you job.
-#     # We have selected a pre-built image that mirrors the build environment we use on
-#     # the 1.0 platform, but we recommend you choose an image more tailored to the needs
-#     # of each job. For more information on choosing an image (or alternatively using a
-#     # VM instead of a container) see https://circleci.com/docs/2.0/executor-types/
-#     # To see the list of pre-built images that CircleCI provides for most common languages see
-#     # https://circleci.com/docs/2.0/circleci-images/
-#     docker:
-#     - image: circleci/node:10.20.1
-#     steps:
-#     # Machine Setup
-#     #   If you break your build into multiple jobs with workflows, you will probably want to do the parts of this that are relevant in each
-#     # The following `checkout` command checks out your code to your working directory. In 1.0 we did this implicitly. In 2.0 you can choose where in the course of a job your code should be checked out.
-#     - checkout
-#     # setup self referential env vars
-#     - run: echo $HOME
-#     - run: echo $CIRCLE_PROJECT_REPONAME
-#     - run: echo $PATH
-#     - run:
-#         name: Update PATH Environment Variable at Runtime
-#         command: |
-#           export PATH=$PATH:$HOME/$CIRCLE_PROJECT_REPONAME/node_modules/.bin
-#     # Prepare for artifact and test results  collection equivalent to how it was done on 1.0.
-#     # In many cases you can simplify this from what is generated here.
-#     # 'See docs on artifact collection here https://circleci.com/docs/2.0/artifacts/'
-#     - run: mkdir -p $CIRCLE_ARTIFACTS $CIRCLE_TEST_REPORTS
-#     # This is based on your 1.0 configuration file or project settings
-#     # Dependencies
-#     #   This would typically go in either a build or a build-and-test job when using workflows
-#     # Restore the dependency cache
-#     - restore_cache:
-#         keys:
-#         # This branch if available
-#         - v1-dep-{{ .Branch }}-{{ checksum "yarn.lock" }}
-#         # Default branch if not
-#         - v1-dep-master-{{ checksum "yarn.lock" }}
-#         # Any branch if there are none on the default branch - this should be unnecessary if you have your default branch configured correctly
-#         - v1-dep-{{ checksum "yarn.lock" }}
-#     # This is based on your 1.0 configuration file or project settings
-#     # # Install yarn so it's up to date
-#     # - run: sudo apt-get update && sudo apt-get install yarn
-#     # This is based on your 1.0 configuration file or project settings
-#     - run: yarn
-#     - run: cd ios && bundle && pod install && cd ..
-#     # Save dependency cache
-#     - save_cache:
-#         key: v1-dep-{{ .Branch }}-{{ checksum "yarn.lock" }}-{{ epoch }}
-#         paths:
-#         # This is a broad list of cache paths to include many possible development environments
-#         # You can probably delete some of these entries
-#         - vendor/bundle
-#         - ~/virtualenvs
-#         - ~/.m2
-#         - ~/.ivy2
-#         - ~/.bundle
-#         - ~/.go_workspace
-#         - ~/.gradle
-#         - ~/.cache/bower
-#         # These cache paths were specified in the 1.0 config
-#         - ~/.cache/yarn
-#         - ./node_modules
-#     # Test
-#     #   This would typically be a build job when using workflows, possibly combined with build
-#     # This is based on your 1.0 configuration file or project settings
-#     - run: yarn test -- --coverage --runInBand
-#     # This is based on your 1.0 configuration file or project settings
-#     - run: yarn run codecov
-#     # Teardown
-#     #   If you break your build into multiple jobs with workflows, you will probably want to do the parts of this that are relevant in each
-#     # Save test results
-#     - store_test_results:
-#         path: /tmp/circleci-test-results
-#     # Save artifacts
-#     - store_artifacts:
-#         path: /tmp/circleci-artifacts
-#     - store_artifacts:
-#         path: coverage
-#     - store_artifacts:
-#         path: /tmp/circleci-test-results
