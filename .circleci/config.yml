@@ -67,9 +67,10 @@ jobs:
     - run:
         command: bundle install
         working_directory: ios
-    - run:
-        command: pod install
-        working_directory: ios
+    # INCLUDING PODS IN REPO
+    # - run:
+    #     command: pod install
+    #     working_directory: ios
     # This is based on your 1.0 configuration file or project settings
     # # Install yarn so it's up to date
     # - run: sudo apt-get update && sudo apt-get install yarn
