@@ -14,7 +14,7 @@
     "ios:devices": "cd ios && bundle exec fastlane devices",
     "ios:testflight": "cd ios && bundle exec fastlane beta",
     "ios:qa": "cd ios && bundle exec fastlane qa",
-    "test": "jest --watch",
+    "test": "jest",
     "coverage:diff": "node ../jest-diff-coverage && open coverage/lcov-report/index.html",
     "clean-start": "./scripts/clean-rebuild.sh",
     "configure": "./scripts/configure.sh",
