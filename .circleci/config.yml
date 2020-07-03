@@ -27,7 +27,7 @@ jobs:
     # To see the list of pre-built images that CircleCI provides for most common languages see
     # https://circleci.com/docs/2.0/circleci-images/
     docker:
-    - image: circleci/ruby:2.6.3-stretch
+    - image: circleci/ruby:stretch-node
     # - image: circleci/node:10.20.1
     # use a --login shell so our "set Ruby version" command gets picked up for later steps
     steps:
@@ -35,10 +35,10 @@ jobs:
     # The following `checkout` command checks out your code to your working directory. In 1.0 we did this implicitly. In 2.0 you can choose where in the course of a job your code should be checked out.
     - checkout
     - run:
-        name: install Bundler Ruby GEM
+        name: Install bundler
         command: gem install bundler
     - run:
-        name: install CocoaPods
+        name: Install cocoapods
         command: sudo gem install cocoapods
     # setup self referential env vars
     - run: echo $HOME
