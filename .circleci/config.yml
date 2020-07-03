@@ -58,11 +58,11 @@ jobs:
         # Any branch if there are none on the default branch - this should be unnecessary if you have your default branch configured correctly
         - v1-dep-{{ checksum "yarn.lock" }}
     # This is based on your 1.0 configuration file or project settings
-    - run: yarn global add codecov
     # # Install yarn so it's up to date
     # - run: sudo apt-get update && sudo apt-get install yarn
     # This is based on your 1.0 configuration file or project settings
     - run: yarn
+    - run: cd ios && bundle && pod install && cd ..
     # Save dependency cache
     - save_cache:
         key: v1-dep-{{ .Branch }}-{{ checksum "yarn.lock" }}-{{ epoch }}
