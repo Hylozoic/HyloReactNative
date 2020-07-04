@@ -155,7 +155,7 @@ describe('Thread', () => {
 // Can actually get away with `jest.mock('../SocketSubscriber')` here, but it
 // generates warnings because `undefined` isn't exactly a React component...
 jest.mock('../SocketSubscriber', () => {
-  const React = require('React')
+  const React = require('react')
   class SocketSubscriber extends React.Component {
     render () {
       return React.createElement('SocketSubscriber', this.props, this.props.children)
@@ -165,7 +165,7 @@ jest.mock('../SocketSubscriber', () => {
 })
 
 jest.mock('../PeopleTyping', () => {
-  const React = require('React')
+  const React = require('react')
   class PeopleTyping extends React.Component {
     render () {
       return React.createElement('PeopleTyping', this.props, this.props.children)
