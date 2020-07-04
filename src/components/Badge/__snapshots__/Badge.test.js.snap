@@ -2,11 +2,7 @@
 
 exports[`BadgedIcon matches snapshot when count is not zero 1`] = `
 <View>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-  >
+  <Text>
     7
   </Text>
 </View>

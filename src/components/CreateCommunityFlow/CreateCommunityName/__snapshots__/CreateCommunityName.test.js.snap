@@ -4,26 +4,14 @@ exports[`displays an error message without a community name with checkAndSubmit 
 <RCTScrollView>
   <View>
     <KeyboardFriendlyView>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-      >
+      <Text>
         Let's get started!
       </Text>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-      >
+      <Text>
         All good things start somewhere! Let's kick things off with a catchy name for your community.
       </Text>
       <View>
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-        >
+        <Text>
           What's the name of your community?
         </Text>
         <TextInput
@@ -31,6 +19,7 @@ exports[`displays an error message without a community name with checkAndSubmit 
           autoCapitalize="none"
           autoCorrect={false}
           onChangeText={[Function]}
+          rejectResponderTermination={true}
           returnKeyType="next"
           underlineColorAndroid="rgba(0,0,0,0)"
           value=""
@@ -40,11 +29,7 @@ exports[`displays an error message without a community name with checkAndSubmit 
         <View>
           <View />
           <View>
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-            >
+            <Text>
               Please enter a community name
             </Text>
           </View>
@@ -52,32 +37,20 @@ exports[`displays an error message without a community name with checkAndSubmit 
       </View>
       <View>
         <View
-          accessibilityComponentType={undefined}
-          accessibilityLabel={undefined}
-          accessibilityTraits={undefined}
           accessible={true}
-          collapsable={undefined}
-          hasTVPreferredFocus={undefined}
-          hitSlop={undefined}
+          focusable={true}
           isTVSelectable={true}
-          nativeID={undefined}
-          onLayout={undefined}
+          onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
           onResponderTerminate={[Function]}
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
-          testID={undefined}
-          tvParallaxProperties={undefined}
         >
           <View>
             <View>
-              <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
-              >
+              <Text>
                 Continue
               </Text>
             </View>
@@ -114,39 +87,23 @@ Object {
     },
     "shadowRadius": 0,
   },
-  "title": <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-  >
+  "title": <Text>
     STEP 1/3
   </Text>,
 }
 `;
 
 exports[`matches last snapshot 1`] = `
-<ScrollView>
+<ScrollViewMock>
   <KeyboardFriendlyView>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
+    <Text>
       Let's get started!
     </Text>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
+    <Text>
       All good things start somewhere! Let's kick things off with a catchy name for your community.
     </Text>
     <View>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-      >
+      <Text>
         What's the name of your community?
       </Text>
       <TextInput
@@ -154,9 +111,9 @@ exports[`matches last snapshot 1`] = `
         autoCapitalize="none"
         autoCorrect={false}
         onChangeText={[Function]}
+        rejectResponderTermination={true}
         returnKeyType="next"
         underlineColorAndroid="rgba(0,0,0,0)"
-        value={undefined}
       />
     </View>
     <Button
@@ -164,5 +121,5 @@ exports[`matches last snapshot 1`] = `
       text="Continue"
     />
   </KeyboardFriendlyView>
-</ScrollView>
+</ScrollViewMock>
 `;

@@ -22,27 +22,9 @@ exports[`InvitePeople handles tab-view functions 1`] = `
 />
 `;
 
-exports[`InvitePeople handles tab-view functions 2`] = `
-<SendInvitesPage
-  allowCommunityInvites={undefined}
-  communityId={undefined}
-  communityMembersCanInvite={undefined}
-  communityName={undefined}
-  createInvitations={undefined}
-  inviteLink={undefined}
-  pendingCreate={undefined}
-  regenerateAccessCode={undefined}
-/>
-`;
+exports[`InvitePeople handles tab-view functions 2`] = `<SendInvitesPage />`;
 
-exports[`InvitePeople handles tab-view functions 3`] = `
-<PendingInvitesPage
-  expireInvitation={undefined}
-  invites={undefined}
-  reinviteAll={undefined}
-  resendInvitation={undefined}
-/>
-`;
+exports[`InvitePeople handles tab-view functions 3`] = `<PendingInvitesPage />`;
 
 exports[`InvitePeople has navigation options 1`] = `
 Object {
@@ -107,20 +89,12 @@ exports[`InvitePeople matches the last snapshot 1`] = `
 exports[`InvitePeople renders PendingInviteRow 1`] = `
 <View>
   <View>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
+    <Text>
       john@doe.com
     </Text>
   </View>
   <View>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
+    <Text>
       just now
     </Text>
     <View>
@@ -136,11 +110,7 @@ exports[`InvitePeople renders PendingInviteRow 1`] = `
         }
         onPress={[Function]}
       >
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-        >
+        <Text>
           Expire
         </Text>
       </TouchableOpacity>
@@ -156,11 +126,7 @@ exports[`InvitePeople renders PendingInviteRow 1`] = `
         }
         onPress={[Function]}
       >
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-        >
+        <Text>
           Resend
         </Text>
       </TouchableOpacity>
@@ -170,7 +136,7 @@ exports[`InvitePeople renders PendingInviteRow 1`] = `
 `;
 
 exports[`InvitePeople renders PendingInvitesPage 1`] = `
-<ScrollView>
+<ScrollViewMock>
   <Button
     onPress={[MockFunction]}
     text="Resend All"
@@ -187,42 +153,28 @@ exports[`InvitePeople renders PendingInvitesPage 1`] = `
     }
     resendInvitation={[MockFunction]}
   />
-</ScrollView>
+</ScrollViewMock>
 `;
 
 exports[`InvitePeople renders SendInvitesPage 1`] = `
-<ScrollView>
+<ScrollViewMock>
   <KeyboardFriendlyView>
     <View>
       <View>
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-        >
+        <Text>
           Let anyone in this community send invites
         </Text>
         <View>
           <Switch
-            disabled={false}
             onTintColor="#0DC39F"
             onValueChange={[Function]}
-            value={false}
           />
         </View>
       </View>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-      >
+      <Text>
         Anyone with this link can join the community
       </Text>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-      >
+      <Text>
         https://hylo.com/invitepathhere
       </Text>
       <View>
@@ -239,6 +191,7 @@ exports[`InvitePeople renders SendInvitesPage 1`] = `
         allowFontScaling={true}
         onChangeText={[Function]}
         placeholder="Type email addresses"
+        rejectResponderTermination={true}
         underlineColorAndroid="rgba(0,0,0,0)"
         value=""
       />
@@ -247,6 +200,7 @@ exports[`InvitePeople renders SendInvitesPage 1`] = `
         multiline={true}
         numberOfLines={5}
         onChangeText={[Function]}
+        rejectResponderTermination={true}
         underlineColorAndroid="rgba(0,0,0,0)"
         value="Hey! Here's an invite to the Axolotle community on Hylo."
       />
@@ -257,5 +211,5 @@ exports[`InvitePeople renders SendInvitesPage 1`] = `
       />
     </View>
   </KeyboardFriendlyView>
-</ScrollView>
+</ScrollViewMock>
 `;

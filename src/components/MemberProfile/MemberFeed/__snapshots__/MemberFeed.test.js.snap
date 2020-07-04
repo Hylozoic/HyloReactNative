@@ -25,15 +25,11 @@ exports[`ContentRow shows a PostCard when itemType is post 1`] = `
 >
   <View>
     <PostCard
-      commenters={undefined}
-      communities={undefined}
-      creator={undefined}
       post={
         Object {
           "id": 2,
         }
       }
-      topics={undefined}
     />
   </View>
 </TouchableOpacity>
@@ -44,11 +40,7 @@ exports[`FeedTab matches the last snapshot 1`] = `
   activeOpacity={0.2}
   onPress={[Function]}
 >
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-  >
+  <Text>
     Posts
   </Text>
 </TouchableOpacity>
@@ -64,11 +56,7 @@ exports[`MemberProfile matches the last snapshot 1`] = `
     }
     ListHeaderComponent={
       <View>
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-        >
+        <Text>
           header
         </Text>
         <View>
@@ -116,6 +104,7 @@ exports[`MemberProfile matches the last snapshot 1`] = `
     numColumns={1}
     onEndReached={[Function]}
     onEndReachedThreshold={2}
+    removeClippedSubviews={false}
     renderItem={[Function]}
     scrollEventThrottle={50}
     updateCellsBatchingPeriod={50}

@@ -9,11 +9,7 @@ exports[`handles ThreadAvatars correctly handles when there are more than three 
     avatarUrl="http://avatar.url"
   />
   <View>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
+    <Text>
       +
       2
     </Text>
@@ -61,27 +57,16 @@ exports[`renders correctly 1`] = `
     }
   />
   <View>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
+    <Text>
       You
     </Text>
     <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
       numberOfLines={2}
     >
       You: 
       Hey, just checking in. Test, test, test.
     </Text>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
+    <Text>
       
     </Text>
   </View>

@@ -8,7 +8,7 @@ SessionBoundModel {
 }
 `;
 
-exports[`presentPost matches the snapshot: true 1`] = `
+exports[`presentPost matches the snapshot 1`] = `
 Object {
   "commenters": Array [],
   "communities": Array [],

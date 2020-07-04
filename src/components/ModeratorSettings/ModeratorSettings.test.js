@@ -4,7 +4,7 @@ import ReactShallowRenderer from 'react-test-renderer/shallow'
 import ModeratorSettings, { ModeratorRow } from './ModeratorSettings'
 import ReactTestRenderer from 'react-test-renderer'
 
-jest.mock('Alert', () => ({
+jest.mock('react-native/Libraries/Alert/Alert', () => ({
   alert: jest.fn()
 }))
 

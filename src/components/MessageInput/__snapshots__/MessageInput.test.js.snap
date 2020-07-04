@@ -9,18 +9,18 @@ exports[`matches the last snapshot 1`] = `
     onSubmit={[Function]}
     placeholder="Wombats..."
     placeholderTextColor="#c0c6cd"
+    rejectResponderTermination={true}
     style={
       Object {
         "flex": 2,
         "fontFamily": "Circular-Book",
         "fontSize": 14,
-        "height": NaN,
+        "height": 22,
         "lineHeight": 18,
         "marginLeft": 5,
       }
     }
     underlineColorAndroid="transparent"
-    value={undefined}
   />
   <TouchableOpacity
     activeOpacity={0.2}

@@ -5,22 +5,13 @@ exports[`CommunityRow handles high member count and moderator role 1`] = `
   <StarIcon />
   <TouchableOpacity
     activeOpacity={0.2}
-    disabled={undefined}
     onPress={[Function]}
   >
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
+    <Text>
       Greater Place
     </Text>
   </TouchableOpacity>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-  >
+  <Text>
     24.5k
   </Text>
   <Icon
@@ -33,22 +24,13 @@ exports[`CommunityRow matches the last snapshot 1`] = `
 <View>
   <TouchableOpacity
     activeOpacity={0.2}
-    disabled={undefined}
     onPress={[Function]}
   >
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
+    <Text>
       Great Place
     </Text>
   </TouchableOpacity>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-  >
+  <Text>
     432
   </Text>
   <Icon
@@ -60,16 +42,11 @@ exports[`CommunityRow matches the last snapshot 1`] = `
 exports[`MemberBio matches the last snapshot 1`] = `
 <View>
   <View>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
+    <Text>
       About Me
     </Text>
   </View>
   <Control
-    editable={undefined}
     hideEditIcon={true}
     isMe={true}
     multiline={true}
@@ -82,16 +59,10 @@ exports[`MemberBio matches the last snapshot 1`] = `
 
 exports[`MemberCommunities matches the last snapshot 1`] = `
 <View>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-  >
+  <Text>
     My Hylo Communities
   </Text>
   <CommunityRow
-    editing={undefined}
-    goToCommunity={undefined}
     membership={
       Object {
         "id": 1,
@@ -99,8 +70,6 @@ exports[`MemberCommunities matches the last snapshot 1`] = `
     }
   />
   <CommunityRow
-    editing={undefined}
-    goToCommunity={undefined}
     membership={
       Object {
         "id": 2,
@@ -108,8 +77,6 @@ exports[`MemberCommunities matches the last snapshot 1`] = `
     }
   />
   <CommunityRow
-    editing={undefined}
-    goToCommunity={undefined}
     membership={
       Object {
         "id": 3,
@@ -143,39 +110,22 @@ exports[`MemberDetails returns Loading when there's no person 1`] = `<Loading />
 exports[`MemberSkills matches the last snapshot 1`] = `
 <View>
   <View>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
+    <Text>
       My Skills
     </Text>
   </View>
   <TouchableOpacity
     activeOpacity={0.2}
     disabled={true}
-    onPress={undefined}
   >
     <View>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-      >
+      <Text>
         RUN
       </Text>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-      >
+      <Text>
         ALL
       </Text>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-      >
+      <Text>
         DAY
       </Text>
     </View>

@@ -13,36 +13,23 @@ exports[`FlagContent calls submit successfully with category:other 1`] = `
       <View />
       <View>
         <View>
-          <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
-          >
+          <Text>
             FLAG THIS 
             POST
           </Text>
           <View
-            accessibilityComponentType={undefined}
-            accessibilityLabel={undefined}
-            accessibilityTraits={undefined}
             accessible={true}
-            collapsable={undefined}
-            hasTVPreferredFocus={undefined}
-            hitSlop={undefined}
+            focusable={true}
             isTVSelectable={true}
-            nativeID={undefined}
-            onLayout={undefined}
+            onClick={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
             onResponderRelease={[Function]}
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
-            testID={undefined}
-            tvParallaxProperties={undefined}
           >
             <Icon
-              color={undefined}
               name="Ex"
             />
           </View>
@@ -77,7 +64,6 @@ exports[`FlagContent calls submit successfully with category:other 1`] = `
           getItemCount={[Function]}
           horizontal={false}
           initialNumToRender={10}
-          invertStickyHeaders={undefined}
           keyExtractor={[Function]}
           maxToRenderPerBatch={10}
           numColumns={1}
@@ -88,6 +74,7 @@ exports[`FlagContent calls submit successfully with category:other 1`] = `
           onScroll={[Function]}
           onScrollBeginDrag={[Function]}
           onScrollEndDrag={[Function]}
+          removeClippedSubviews={false}
           renderItem={[Function]}
           scrollEventThrottle={50}
           stickyHeaderIndices={Array []}
@@ -100,30 +87,18 @@ exports[`FlagContent calls submit successfully with category:other 1`] = `
               onLayout={[Function]}
             >
               <View
-                accessibilityComponentType={undefined}
-                accessibilityLabel={undefined}
-                accessibilityTraits={undefined}
                 accessible={true}
-                collapsable={undefined}
-                hasTVPreferredFocus={undefined}
-                hitSlop={undefined}
+                focusable={true}
                 isTVSelectable={true}
-                nativeID={undefined}
-                onLayout={undefined}
+                onClick={[Function]}
                 onResponderGrant={[Function]}
                 onResponderMove={[Function]}
                 onResponderRelease={[Function]}
                 onResponderTerminate={[Function]}
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
-                testID={undefined}
-                tvParallaxProperties={undefined}
               >
-                <Text
-                  accessible={true}
-                  allowFontScaling={true}
-                  ellipsizeMode="tail"
-                >
+                <Text>
                   Inappropriate Content
                 </Text>
               </View>
@@ -132,30 +107,18 @@ exports[`FlagContent calls submit successfully with category:other 1`] = `
               onLayout={[Function]}
             >
               <View
-                accessibilityComponentType={undefined}
-                accessibilityLabel={undefined}
-                accessibilityTraits={undefined}
                 accessible={true}
-                collapsable={undefined}
-                hasTVPreferredFocus={undefined}
-                hitSlop={undefined}
+                focusable={true}
                 isTVSelectable={true}
-                nativeID={undefined}
-                onLayout={undefined}
+                onClick={[Function]}
                 onResponderGrant={[Function]}
                 onResponderMove={[Function]}
                 onResponderRelease={[Function]}
                 onResponderTerminate={[Function]}
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
-                testID={undefined}
-                tvParallaxProperties={undefined}
               >
-                <Text
-                  accessible={true}
-                  allowFontScaling={true}
-                  ellipsizeMode="tail"
-                >
+                <Text>
                   Spam
                 </Text>
               </View>
@@ -164,30 +127,18 @@ exports[`FlagContent calls submit successfully with category:other 1`] = `
               onLayout={[Function]}
             >
               <View
-                accessibilityComponentType={undefined}
-                accessibilityLabel={undefined}
-                accessibilityTraits={undefined}
                 accessible={true}
-                collapsable={undefined}
-                hasTVPreferredFocus={undefined}
-                hitSlop={undefined}
+                focusable={true}
                 isTVSelectable={true}
-                nativeID={undefined}
-                onLayout={undefined}
+                onClick={[Function]}
                 onResponderGrant={[Function]}
                 onResponderMove={[Function]}
                 onResponderRelease={[Function]}
                 onResponderTerminate={[Function]}
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
-                testID={undefined}
-                tvParallaxProperties={undefined}
               >
-                <Text
-                  accessible={true}
-                  allowFontScaling={true}
-                  ellipsizeMode="tail"
-                >
+                <Text>
                   Offensive
                 </Text>
               </View>
@@ -196,30 +147,18 @@ exports[`FlagContent calls submit successfully with category:other 1`] = `
               onLayout={[Function]}
             >
               <View
-                accessibilityComponentType={undefined}
-                accessibilityLabel={undefined}
-                accessibilityTraits={undefined}
                 accessible={true}
-                collapsable={undefined}
-                hasTVPreferredFocus={undefined}
-                hitSlop={undefined}
+                focusable={true}
                 isTVSelectable={true}
-                nativeID={undefined}
-                onLayout={undefined}
+                onClick={[Function]}
                 onResponderGrant={[Function]}
                 onResponderMove={[Function]}
                 onResponderRelease={[Function]}
                 onResponderTerminate={[Function]}
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
-                testID={undefined}
-                tvParallaxProperties={undefined}
               >
-                <Text
-                  accessible={true}
-                  allowFontScaling={true}
-                  ellipsizeMode="tail"
-                >
+                <Text>
                   Illegal
                 </Text>
               </View>
@@ -228,30 +167,18 @@ exports[`FlagContent calls submit successfully with category:other 1`] = `
               onLayout={[Function]}
             >
               <View
-                accessibilityComponentType={undefined}
-                accessibilityLabel={undefined}
-                accessibilityTraits={undefined}
                 accessible={true}
-                collapsable={undefined}
-                hasTVPreferredFocus={undefined}
-                hitSlop={undefined}
+                focusable={true}
                 isTVSelectable={true}
-                nativeID={undefined}
-                onLayout={undefined}
+                onClick={[Function]}
                 onResponderGrant={[Function]}
                 onResponderMove={[Function]}
                 onResponderRelease={[Function]}
                 onResponderTerminate={[Function]}
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
-                testID={undefined}
-                tvParallaxProperties={undefined}
               >
-                <Text
-                  accessible={true}
-                  allowFontScaling={true}
-                  ellipsizeMode="tail"
-                >
+                <Text>
                   Other
                 </Text>
               </View>
@@ -277,11 +204,7 @@ exports[`FlagContent changes title based on type 1`] = `
       <View />
       <View>
         <View>
-          <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
-          >
+          <Text>
             FLAG THIS 
             POST
           </Text>
@@ -326,6 +249,7 @@ exports[`FlagContent changes title based on type 1`] = `
           maxToRenderPerBatch={10}
           numColumns={1}
           onEndReachedThreshold={2}
+          removeClippedSubviews={false}
           renderItem={[Function]}
           scrollEventThrottle={50}
           updateCellsBatchingPeriod={50}
@@ -350,11 +274,7 @@ exports[`FlagContent matches the last snapshot 1`] = `
       <View />
       <View>
         <View>
-          <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
-          >
+          <Text>
             FLAG THIS 
             CONTENT
           </Text>
@@ -399,6 +319,7 @@ exports[`FlagContent matches the last snapshot 1`] = `
           maxToRenderPerBatch={10}
           numColumns={1}
           onEndReachedThreshold={2}
+          removeClippedSubviews={false}
           renderItem={[Function]}
           scrollEventThrottle={50}
           updateCellsBatchingPeriod={50}

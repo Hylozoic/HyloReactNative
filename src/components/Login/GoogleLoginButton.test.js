@@ -2,13 +2,6 @@ import GoogleLoginButton from './GoogleLoginButton'
 import ReactTestRenderer from 'react-test-renderer'
 import React from 'react'
 
-const mocks = {
-  GoogleSignin: {
-    signIn: jest.fn(() => Promise.resolve({foo: 'bar'})),
-    configure: jest.fn()
-  }
-}
-
 const errorMocks = {
   GoogleSignin: {
     signIn: jest.fn(() => Promise.reject()),
@@ -21,7 +14,6 @@ it('handles a tap', () => {
 
   const node = ReactTestRenderer.create(
     <GoogleLoginButton
-      mocks={mocks}
       onLoginFinished={onLoginFinished}
     />)
 

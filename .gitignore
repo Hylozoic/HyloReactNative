@@ -72,7 +72,7 @@ vendor/*
 *.jsbundle.map
 
 # CocoaPods
-/ios/Pods/
+# /ios/Pods/
 
 ios/codesigndoc_exports
 .bitrise.secrets.yml

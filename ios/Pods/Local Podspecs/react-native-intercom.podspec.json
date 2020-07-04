@@ -1,0 +1,39 @@
+{
+  "name": "react-native-intercom",
+  "version": "15.0.0",
+  "license": {
+    "type": "MIT"
+  },
+  "homepage": "https://github.com/tinycreative/react-native-intercom",
+  "authors": [
+    {
+      "Asa Miller": "asa@tinycreative.com"
+    },
+    {
+      "Franklyn Tackitt": "frank@comanage.com"
+    },
+    {
+      "Jason Brown": "browniefed@gmail.com"
+    }
+  ],
+  "summary": "A React Native client for Intercom.io",
+  "source": {
+    "git": "git+https://github.com/tinycreative/react-native-intercom.git"
+  },
+  "source_files": "iOS/*.{h,m}",
+  "platforms": {
+    "ios": "10.0"
+  },
+  "frameworks": [
+    "Intercom"
+  ],
+  "static_framework": true,
+  "dependencies": {
+    "React": [
+
+    ],
+    "Intercom": [
+      "~> 6.0.0"
+    ]
+  }
+}

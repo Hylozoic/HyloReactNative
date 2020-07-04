@@ -6,14 +6,9 @@ exports[`renders as expected 1`] = `
   onPress={[Function]}
 >
   <Avatar
-    avatarUrl={undefined}
     dimension={30}
   />
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-  />
+  <Text />
   <RoundCheckbox
     backgroundColor="#0DC39F"
     borderColor="grey"

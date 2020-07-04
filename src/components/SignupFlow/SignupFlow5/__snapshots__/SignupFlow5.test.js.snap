@@ -18,27 +18,18 @@ Object {
 `;
 
 exports[`hides image when no url and password when no password 1`] = `
-<Unknown
+<_default
   behavior="padding"
   keyboardVerticalOffset={64}
 >
-  <ScrollView>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
+  <ScrollViewMock>
+    <Text>
       Everything looking good?
     </Text>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
+    <Text>
       You can always come back and change your details at any time.
     </Text>
     <SettingControl
-      error={undefined}
       label="Your Full Name"
       onChange={[Function]}
       onSubmitEditing={[Function]}
@@ -48,7 +39,6 @@ exports[`hides image when no url and password when no password 1`] = `
     <SettingControl
       autoCapitalize="none"
       autoCorrect={false}
-      error={undefined}
       keyboardType="email-address"
       label="Email Address"
       onChange={[Function]}
@@ -65,17 +55,11 @@ exports[`hides image when no url and password when no password 1`] = `
     />
     <TouchableOpacity
       activeOpacity={0.2}
-      onPress={undefined}
     >
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-      >
+      <Text>
         Skills
       </Text>
       <SkillCloud
-        onPress={undefined}
         skills={
           Array [
             "One",
@@ -94,34 +78,25 @@ exports[`hides image when no url and password when no password 1`] = `
         text="Finish"
       />
     </View>
-  </ScrollView>
-</Unknown>
+  </ScrollViewMock>
+</_default>
 `;
 
 exports[`matches last snapshot 1`] = `
-<Unknown
+<_default
   behavior="padding"
   keyboardVerticalOffset={64}
 >
-  <ScrollView>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
+  <ScrollViewMock>
+    <Text>
       Everything looking good?
     </Text>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
+    <Text>
       You can always come back and change your details at any time.
     </Text>
     <View>
       <TouchableOpacity
         activeOpacity={0.2}
-        onPress={undefined}
       >
         <Image
           source={
@@ -133,7 +108,6 @@ exports[`matches last snapshot 1`] = `
       </TouchableOpacity>
     </View>
     <SettingControl
-      error={undefined}
       label="Your Full Name"
       onChange={[Function]}
       onSubmitEditing={[Function]}
@@ -143,7 +117,6 @@ exports[`matches last snapshot 1`] = `
     <SettingControl
       autoCapitalize="none"
       autoCorrect={false}
-      error={undefined}
       keyboardType="email-address"
       label="Email Address"
       onChange={[Function]}
@@ -160,17 +133,11 @@ exports[`matches last snapshot 1`] = `
     />
     <TouchableOpacity
       activeOpacity={0.2}
-      onPress={undefined}
     >
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-      >
+      <Text>
         Skills
       </Text>
       <SkillCloud
-        onPress={undefined}
         skills={
           Array [
             "One",
@@ -189,8 +156,8 @@ exports[`matches last snapshot 1`] = `
         text="Finish"
       />
     </View>
-  </ScrollView>
-</Unknown>
+  </ScrollViewMock>
+</_default>
 `;
 
 exports[`validate returns false and populates state when the props are bad 1`] = `

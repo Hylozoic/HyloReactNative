@@ -63,8 +63,6 @@ Object {
   />,
   "headerRight": <HeaderButton
     disableOnClick={true}
-    disabled={undefined}
-    onPress={undefined}
     text="Save"
   />,
   "headerStyle": Object {
@@ -82,7 +80,7 @@ Object {
 `;
 
 exports[`CommunitySettings matches the last snapshot 1`] = `
-<ScrollView
+<ScrollViewMock
   contentContainerStyle={
     Object {
       "backgroundColor": "#FFFFFF",
@@ -91,12 +89,12 @@ exports[`CommunitySettings matches the last snapshot 1`] = `
     }
   }
 >
-  <Unknown>
+  <_default>
     <TextInput
       allowFontScaling={true}
       onChangeText={[Function]}
+      rejectResponderTermination={true}
       underlineColorAndroid="transparent"
-      value={undefined}
     />
     <CommunityBanner
       community={
@@ -111,11 +109,7 @@ exports[`CommunitySettings matches the last snapshot 1`] = `
       isFocused={true}
       updateCommunitySettings={[MockFunction]}
     />
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
+    <Text>
       DESCRIPTION
     </Text>
     <TextInput
@@ -123,22 +117,18 @@ exports[`CommunitySettings matches the last snapshot 1`] = `
       multiline={true}
       numberOfLines={5}
       onChangeText={[Function]}
+      rejectResponderTermination={true}
       underlineColorAndroid="transparent"
-      value={undefined}
     />
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
+    <Text>
       LOCATION
     </Text>
     <TextInput
       allowFontScaling={true}
       onChangeText={[Function]}
+      rejectResponderTermination={true}
       underlineColorAndroid="transparent"
-      value={undefined}
     />
-  </Unknown>
-</ScrollView>
+  </_default>
+</ScrollViewMock>
 `;
