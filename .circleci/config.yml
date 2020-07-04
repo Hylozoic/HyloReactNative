@@ -33,6 +33,7 @@ jobs:
         - v1-dep-master-{{ checksum "yarn.lock" }}
         # Any branch if there are none on the default branch - this should be unnecessary if you have your default branch configured correctly
         - v1-dep-{{ checksum "yarn.lock" }}
+    - run: yarn global add codecov
     - run: yarn
     - save_cache:
         key: v1-dep-{{ .Branch }}-{{ checksum "yarn.lock" }}-{{ epoch }}
