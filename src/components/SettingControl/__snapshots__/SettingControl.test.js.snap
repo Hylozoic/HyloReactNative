@@ -2,11 +2,7 @@
 
 exports[`matches last snapshot 1`] = `
 <View>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-  >
+  <Text>
     Name
   </Text>
   <TextInput
@@ -17,8 +13,10 @@ exports[`matches last snapshot 1`] = `
     keyboardType="email-address"
     onChangeText={[Function]}
     onSubmitEditing={[Function]}
+    rejectResponderTermination={true}
     returnKeyType="next"
     secureTextEntry={true}
+    underlineColorAndroid="transparent"
     value="Joe Bloggs"
   />
   <View>
@@ -69,11 +67,7 @@ exports[`matches last snapshot 1`] = `
       width={10}
     />
     <View>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-      >
+      <Text>
         This is not a real name
       </Text>
     </View>

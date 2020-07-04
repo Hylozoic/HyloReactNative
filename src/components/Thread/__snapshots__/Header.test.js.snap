@@ -15,11 +15,7 @@ exports[`Title matches the last snapshot 1`] = `
   activeOpacity={0.2}
   onPress={[Function]}
 >
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-  >
+  <Text>
     Header Title
   </Text>
 </TouchableOpacity>

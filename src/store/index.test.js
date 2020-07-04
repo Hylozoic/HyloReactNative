@@ -1,5 +1,4 @@
 import getStore, {getEmptyState } from './index'
-import { MixpanelInstance } from 'react-native-mixpanel'
 
 jest.mock('react-native-onesignal', () => ({
   addEventListener: jest.fn()

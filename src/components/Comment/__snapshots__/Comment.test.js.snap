@@ -60,25 +60,16 @@ exports[`renders correctly 1`] = `
   <View>
     <View>
       <View>
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-        >
+        <Text>
           Ishamel
         </Text>
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-        >
+        <Text>
           
         </Text>
       </View>
       <View>
         <CommentMenu
           deleteComment={[Function]}
-          editComment={undefined}
           removeComment={null}
         />
       </View>
@@ -124,25 +115,13 @@ exports[`shows the post title when displayPostTitle is true 1`] = `
   <View>
     <View>
       <View>
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-        >
+        <Text>
           Ishamel
         </Text>
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-        >
+        <Text>
           
         </Text>
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-        >
+        <Text>
           on "
           What's good? A long enough post title to...
           "
@@ -151,7 +130,6 @@ exports[`shows the post title when displayPostTitle is true 1`] = `
       <View>
         <CommentMenu
           deleteComment={null}
-          editComment={undefined}
           removeComment={null}
         />
       </View>

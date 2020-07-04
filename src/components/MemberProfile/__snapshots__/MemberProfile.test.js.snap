@@ -8,11 +8,7 @@ exports[`EditButton matches the last snapshot when isLoading is false 1`] = `
       name="edit"
       size={12}
     />
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
+    <Text>
       edit
     </Text>
   </View>
@@ -21,11 +17,7 @@ exports[`EditButton matches the last snapshot when isLoading is false 1`] = `
 
 exports[`EditButton matches the last snapshot when isLoading is true 1`] = `
 <View>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-  >
+  <Text>
     loading
   </Text>
 </View>
@@ -80,35 +72,26 @@ exports[`MemberProfile doesnt have the flag content option 1`] = `
     <View>
       <MemberBanner
         isFocused={true}
-        isMe={undefined}
         person={
           Object {
             "id": 1,
           }
         }
-        updateUserSettings={undefined}
       />
       <View>
         <MemberHeader
           blockUser={[Function]}
-          editProfile={undefined}
-          flagMember={undefined}
-          isMe={undefined}
-          onPressMessages={undefined}
           person={
             Object {
               "id": 1,
             }
           }
         />
-        <ReadMoreButton
-          goToDetails={undefined}
-        />
+        <ReadMoreButton />
       </View>
     </View>
   }
   id={1}
-  navigation={undefined}
 />
 `;
 
@@ -118,35 +101,27 @@ exports[`MemberProfile matches the last snapshot 1`] = `
     <View>
       <MemberBanner
         isFocused={true}
-        isMe={undefined}
         person={
           Object {
             "id": 1,
           }
         }
-        updateUserSettings={undefined}
       />
       <View>
         <MemberHeader
           blockUser={[Function]}
-          editProfile={undefined}
           flagMember={[Function]}
-          isMe={undefined}
-          onPressMessages={undefined}
           person={
             Object {
               "id": 1,
             }
           }
         />
-        <ReadMoreButton
-          goToDetails={undefined}
-        />
+        <ReadMoreButton />
       </View>
     </View>
   }
   id={1}
-  navigation={undefined}
 />
 `;
 
@@ -159,11 +134,7 @@ exports[`ReadMoreButton matches the last snapshot 1`] = `
     onPress={[Function]}
   >
     <View>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-      >
+      <Text>
         Read More
       </Text>
     </View>

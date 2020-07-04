@@ -1,5 +1,4 @@
 import sessionReducer from './sessionReducer'
-import { CHECK_INVITATION } from '../../components/JoinCommunity/JoinCommunity.store'
 import { CHECK_SESSION } from '../../components/SessionCheck/SessionCheck.store'
 import { LOGIN } from '../../components/Login/actions'
 

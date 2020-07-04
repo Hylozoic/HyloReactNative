@@ -8,7 +8,6 @@ exports[`FeedList renders correctly 1`] = `
       <View>
         <ListControls
           filter="all"
-          hideListFilter={undefined}
           pending={true}
           setFilter={[Function]}
           setSort={[Function]}
@@ -33,6 +32,7 @@ exports[`FeedList renders correctly 1`] = `
     onEndReachedThreshold={2}
     onRefresh={[Function]}
     refreshing={false}
+    removeClippedSubviews={false}
     renderItem={[Function]}
     scrollEventThrottle={50}
     updateCellsBatchingPeriod={50}
@@ -64,11 +64,7 @@ exports[`ListControl renders correctly 1`] = `
     ]
   }
 >
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-  >
+  <Text>
     Discussions
   </Text>
   <Icon

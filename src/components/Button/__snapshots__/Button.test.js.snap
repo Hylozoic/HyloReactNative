@@ -9,11 +9,7 @@ exports[`disables 1`] = `
   >
     <View>
       <View>
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-        >
+        <Text>
           Push Me
         </Text>
       </View>
@@ -31,11 +27,7 @@ exports[`matches last snapshot 1`] = `
   >
     <View>
       <View>
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-        >
+        <Text>
           Push Me
         </Text>
       </View>

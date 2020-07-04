@@ -52,11 +52,7 @@ exports[`TopicList matches last snapshot 1`] = `
 
 exports[`TopicList matches last snapshot with empty list 1`] = `
 <View>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-  >
+  <Text>
     No topics match your search
   </Text>
 </View>
@@ -71,11 +67,7 @@ exports[`TopicRow matches last snapshot 1`] = `
     isSubscribed={true}
     onPress={[Function]}
   />
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-  >
+  <Text>
     #
     theTopic
   </Text>
@@ -93,8 +85,8 @@ exports[`TopicRow matches last snapshot 1`] = `
 `;
 
 exports[`Topics renders correctly a community and topics 1`] = `
-<Unknown>
-  <ScrollView
+<_default>
+  <ScrollViewMock
     contentContainerStyle={
       Object {
         "flexGrow": 1,
@@ -119,18 +111,12 @@ exports[`Topics renders correctly a community and topics 1`] = `
           ]
         }
       />
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-      >
+      <Text>
         Foomunity
       </Text>
     </View>
     <SearchBar
-      onChangeText={undefined}
       placeholder="Search Topics"
-      value={undefined}
     />
     <TopicList
       goToTopic={[Function]}
@@ -143,13 +129,13 @@ exports[`Topics renders correctly a community and topics 1`] = `
         ]
       }
     />
-  </ScrollView>
-</Unknown>
+  </ScrollViewMock>
+</_default>
 `;
 
 exports[`Topics renders correctly with pending=true 1`] = `
-<Unknown>
-  <ScrollView
+<_default>
+  <ScrollViewMock
     contentContainerStyle={
       Object {
         "flexGrow": 1,
@@ -174,18 +160,12 @@ exports[`Topics renders correctly with pending=true 1`] = `
           ]
         }
       />
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-      >
+      <Text>
         Foomunity
       </Text>
     </View>
     <SearchBar
-      onChangeText={undefined}
       placeholder="Search Topics"
-      value={undefined}
     />
     <TopicList
       goToTopic={[Function]}
@@ -198,6 +178,6 @@ exports[`Topics renders correctly with pending=true 1`] = `
         ]
       }
     />
-  </ScrollView>
-</Unknown>
+  </ScrollViewMock>
+</_default>
 `;

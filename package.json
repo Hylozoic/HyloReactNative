@@ -32,7 +32,7 @@
     "js-htmlencode": "^0.3.0",
     "lodash": "^4.17.13",
     "parse": "^1.9.2",
-    "path-match": "^1.2.4",
+    "path-match": "1.2.3",
     "path-to-regexp": "^2.0.0",
     "prop-types": "^15.6.0",
     "re-reselect": "^2.3.0",
@@ -97,7 +97,8 @@
     "standard": "^11.0.1",
     "timezone-mock": "^0.0.6",
     "validator": "^8.0.0",
-    "why-did-you-update": "^0.1.1"
+    "why-did-you-update": "^0.1.1",
+    "babel-plugin-syntax-jsx": "^6.18.0"
   },
   "jest": {
     "preset": "react-native",

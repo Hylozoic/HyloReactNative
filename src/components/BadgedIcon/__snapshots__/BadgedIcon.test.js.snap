@@ -3,7 +3,6 @@
 exports[`BadgedIcon matches the last snapshot with the badge 1`] = `
 <TouchableOpacity
   activeOpacity={0.2}
-  onPress={undefined}
 >
   <Icon
     name="Notifications"
@@ -19,7 +18,6 @@ exports[`BadgedIcon matches the last snapshot with the badge 1`] = `
 exports[`BadgedIcon matches the last snapshot without the badge 1`] = `
 <TouchableOpacity
   activeOpacity={0.2}
-  onPress={undefined}
 >
   <Icon
     name="Notifications"

@@ -2,20 +2,12 @@
 
 exports[`displays a custom error when a child component throws an error 1`] = `
 Array [
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-  >
+  <Text>
     Happy Child
   </Text>,
   <View>
     <Image />
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
+    <Text>
       Custom Error Message
     </Text>
   </View>,
@@ -24,11 +16,7 @@ Array [
 
 exports[`displays an error when a child component throws an error 1`] = `
 <View>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-  >
+  <Text>
     Oops. Something Went Wrong
   </Text>
   <Image
@@ -39,36 +27,21 @@ exports[`displays an error when a child component throws an error 1`] = `
     }
   />
   <View
-    accessibilityComponentType="button"
-    accessibilityLabel={undefined}
-    accessibilityTraits={
-      Array [
-        "button",
-      ]
-    }
+    accessibilityRole="button"
+    accessibilityStates={Array []}
     accessible={true}
-    collapsable={undefined}
-    hasTVPreferredFocus={undefined}
-    hitSlop={undefined}
+    focusable={true}
     isTVSelectable={true}
-    nativeID={undefined}
-    onLayout={undefined}
+    onClick={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
     onResponderTerminate={[Function]}
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
-    testID={undefined}
-    tvParallaxProperties={undefined}
   >
     <View>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        disabled={undefined}
-        ellipsizeMode="tail"
-      >
+      <Text>
         Restart Hylo
       </Text>
     </View>
@@ -77,11 +50,7 @@ exports[`displays an error when a child component throws an error 1`] = `
 `;
 
 exports[`matches last snapshot 1`] = `
-<Text
-  accessible={true}
-  allowFontScaling={true}
-  ellipsizeMode="tail"
->
+<Text>
   Happy Child
 </Text>
 `;

@@ -1,9 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`matches last snapshot when visible is true 1`] = `
-<View
-  collapsable={undefined}
->
+<View>
   <View>
     <ActivityIndicator
       animating={true}

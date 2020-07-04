@@ -26,43 +26,27 @@ exports[`handles localUri 1`] = `
       />
     </ImagePicker>
     <View>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-      >
+      <Text>
         Upload a Photo
       </Text>
     </View>
   </View>
   <View>
     <View
-      accessibilityComponentType={undefined}
-      accessibilityLabel={undefined}
-      accessibilityTraits={undefined}
       accessible={true}
-      collapsable={undefined}
-      hasTVPreferredFocus={undefined}
-      hitSlop={undefined}
+      focusable={true}
       isTVSelectable={true}
-      nativeID={undefined}
-      onLayout={undefined}
+      onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
-      testID={undefined}
-      tvParallaxProperties={undefined}
     >
       <View>
         <View>
-          <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
-          >
+          <Text>
             Continue
           </Text>
         </View>
@@ -89,11 +73,7 @@ exports[`handles no image 1`] = `
       </View>
     </ImagePicker>
     <View>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-      >
+      <Text>
         Upload a Photo
       </Text>
     </View>
@@ -141,11 +121,7 @@ exports[`matches last snapshot 1`] = `
       />
     </ImagePicker>
     <View>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-      >
+      <Text>
         Upload a Photo
       </Text>
     </View>

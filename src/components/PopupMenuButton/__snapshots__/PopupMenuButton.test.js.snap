@@ -19,28 +19,22 @@ Array [
 
 exports[`PopupMenuButton matches the last snapshot on android 1`] = `
 <View
-  accessibilityComponentType={undefined}
   accessibilityLabel="A View Props Label"
-  accessibilityTraits={undefined}
   accessible={true}
-  collapsable={undefined}
-  hasTVPreferredFocus={undefined}
+  focusable={true}
   hitSlop={
     Object {
       "top": 10,
     }
   }
   isTVSelectable={true}
-  nativeID={undefined}
-  onLayout={undefined}
+  onClick={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
   onResponderTerminate={[Function]}
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
-  testID={undefined}
-  tvParallaxProperties={undefined}
 >
   Hello World
 </View>
@@ -48,28 +42,22 @@ exports[`PopupMenuButton matches the last snapshot on android 1`] = `
 
 exports[`PopupMenuButton matches the last snapshot on ios 1`] = `
 <View
-  accessibilityComponentType={undefined}
   accessibilityLabel="A View Props Label"
-  accessibilityTraits={undefined}
   accessible={true}
-  collapsable={undefined}
-  hasTVPreferredFocus={undefined}
+  focusable={true}
   hitSlop={
     Object {
       "top": 10,
     }
   }
   isTVSelectable={true}
-  nativeID={undefined}
-  onLayout={undefined}
+  onClick={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
   onResponderTerminate={[Function]}
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
-  testID={undefined}
-  tvParallaxProperties={undefined}
 >
   Hello World
 </View>

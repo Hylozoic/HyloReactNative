@@ -1,6 +1,5 @@
 import orm from 'store/models'
 import { getThreads, updateLastViewed } from './ThreadList.store'
-import { omit } from 'lodash/fp'
 
 const session = orm.session(orm.getEmptyState())
 
@@ -31,7 +30,8 @@ const specs = [
     values: {
       id: 1,
       unreadCount: 1,
-      participants: [1, 2]
+      participants: [1, 2],
+      updatedAt: 1
     }
   },
   {
@@ -39,7 +39,8 @@ const specs = [
     values: {
       id: 2,
       unreadCount: 1,
-      participants: [2, 3]
+      participants: [2, 3],
+      updatedAt: 2
     }
   },
   {
@@ -47,7 +48,8 @@ const specs = [
     values: {
       id: 1,
       text: 'First message',
-      messageThread: 1
+      messageThread: 1,
+      createdAt: 1
     }
   },
   {
@@ -55,7 +57,8 @@ const specs = [
     values: {
       id: 2,
       text: 'Second message',
-      messageThread: 1
+      messageThread: 1,
+      createdAt: 2
     }
   },
   {
@@ -63,7 +66,8 @@ const specs = [
     values: {
       id: 3,
       text: 'Third message',
-      messageThread: 2
+      messageThread: 2,
+      createdAt: 3
     }
   }
 ]

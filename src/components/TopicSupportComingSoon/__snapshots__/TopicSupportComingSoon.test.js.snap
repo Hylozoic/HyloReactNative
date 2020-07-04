@@ -3,20 +3,12 @@
 exports[`matches last snapshot 1`] = `
 <View>
   <View>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
+    <Text>
       We're working on expanding #topics to more places.
     </Text>
   </View>
   <View>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
+    <Text>
       In the meantime, click a #topic from an individual community to see posts from that community.
     </Text>
   </View>
@@ -33,11 +25,7 @@ exports[`matches last snapshot 1`] = `
       activeOpacity={0.2}
       onPress={[Function]}
     >
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-      >
+      <Text>
         Go Back
       </Text>
     </TouchableOpacity>

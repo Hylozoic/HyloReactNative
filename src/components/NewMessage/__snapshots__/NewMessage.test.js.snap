@@ -5,7 +5,7 @@ exports[`NewMessage renders correctly 1`] = `
   behavior="padding"
   keyboardVerticalOffset={64}
 >
-  <ScrollView>
+  <ScrollViewMock>
     <TouchableOpacity
       activeOpacity={0.2}
       onPress={[Function]}
@@ -17,7 +17,7 @@ exports[`NewMessage renders correctly 1`] = `
         Add Participant
       </Button>
     </View>
-  </ScrollView>
+  </ScrollViewMock>
   <MessageInput
     emptyParticipants={true}
     multiline={true}
@@ -33,7 +33,7 @@ exports[`NewMessage renders correctly 2`] = `
   behavior="padding"
   keyboardVerticalOffset={64}
 >
-  <ScrollView>
+  <ScrollViewMock>
     <TouchableOpacity
       activeOpacity={0.2}
       onPress={[Function]}
@@ -45,7 +45,7 @@ exports[`NewMessage renders correctly 2`] = `
         Add Participant
       </Button>
     </View>
-  </ScrollView>
+  </ScrollViewMock>
   <MessageInput
     emptyParticipants={true}
     multiline={true}

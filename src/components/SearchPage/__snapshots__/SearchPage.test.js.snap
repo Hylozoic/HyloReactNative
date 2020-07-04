@@ -61,18 +61,10 @@ exports[`PersonCard matches the last snapshot 1`] = `
       avatarUrl="jo.png"
     />
     <View>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-      >
+      <Text>
         Jo
       </Text>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-      >
+      <Text>
         Spain
       </Text>
     </View>
@@ -86,7 +78,6 @@ exports[`PostCard matches the last snapshot 1`] = `
   onPress={[Function]}
 >
   <PostCard
-    communities={undefined}
     creator={
       Object {
         "id": 2,
@@ -141,6 +132,7 @@ exports[`SearchPage matches the last snapshot 1`] = `
             <TextInput
               allowFontScaling={true}
               onChangeText={[Function]}
+              rejectResponderTermination={true}
               underlineColorAndroid="transparent"
               value="how"
             />
@@ -169,6 +161,7 @@ exports[`SearchPage matches the last snapshot 1`] = `
     onEndReachedThreshold={2}
     onRefresh={[Function]}
     refreshing={false}
+    removeClippedSubviews={false}
     renderItem={[Function]}
     scrollEventThrottle={50}
     updateCellsBatchingPeriod={50}
@@ -230,11 +223,7 @@ exports[`Tab matches the last snapshot 1`] = `
   }
   onPress={[Function]}
 >
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-  >
+  <Text>
     Discussions
   </Text>
 </TouchableOpacity>

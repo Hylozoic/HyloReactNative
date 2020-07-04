@@ -5,8 +5,6 @@ import ReactTestRenderer from 'react-test-renderer'
 import MemberDetails, { MemberBio, MemberSkills, MemberCommunities, CommunityRow } from './MemberDetails'
 import { pick } from 'lodash/fp'
 
-jest.mock('TextInput', () => 'TextInput')
-
 // Ugly, but seems to be necessary to dodge issues with debounce and timers
 // (see https://github.com/facebook/jest/issues/3465)
 jest.unmock('lodash')

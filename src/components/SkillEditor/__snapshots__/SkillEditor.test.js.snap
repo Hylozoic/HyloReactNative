@@ -18,27 +18,15 @@ exports[`SkillCloud matches last snapshot 1`] = `
 exports[`SkillEditor matches last snapshot 1`] = `
 <View>
   <View>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
+    <Text>
       Share your unique super powers!
     </Text>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
+    <Text>
       What skills are you known for? The more skills you add, the more relevant the content. Its like magic.
     </Text>
   </View>
   <View>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
+    <Text>
       Your Skills
     </Text>
     <SkillCloud
@@ -55,7 +43,6 @@ exports[`SkillEditor matches last snapshot 1`] = `
   <SettingControl
     label="How can you help?"
     onChange={[Function]}
-    theme={undefined}
     value="Pop"
   />
   <SkillCloud
@@ -81,11 +68,7 @@ exports[`SkillPill matches last snapshot 1`] = `
   activeOpacity={0.2}
   onPress={[Function]}
 >
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-  >
+  <Text>
     SNAP
   </Text>
 </TouchableOpacity>

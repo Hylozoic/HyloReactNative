@@ -2,7 +2,6 @@
 
 exports[`CommentPrompt renders correctly 1`] = `
 <withNavigation(InlineEditor)
-  communityId={undefined}
   containerStyle={
     Object {
       "borderTopColor": "#c0c6cd",
@@ -11,45 +10,29 @@ exports[`CommentPrompt renders correctly 1`] = `
       "paddingHorizontal": 10,
     }
   }
-  onChange={undefined}
-  onSubmit={undefined}
   placeholder="Write a comment..."
-  submitting={undefined}
-  value={undefined}
 />
 `;
 
 exports[`Files renders correctly 1`] = `
 <View>
   <View
-    accessibilityComponentType={undefined}
-    accessibilityLabel={undefined}
-    accessibilityTraits={undefined}
     accessible={true}
-    collapsable={undefined}
-    hasTVPreferredFocus={undefined}
-    hitSlop={undefined}
+    focusable={true}
     isTVSelectable={true}
-    nativeID={undefined}
-    onLayout={undefined}
+    onClick={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
     onResponderTerminate={[Function]}
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
-    testID={undefined}
-    tvParallaxProperties={undefined}
   >
     <View>
       <Icon
-        color={undefined}
         name="Document"
       />
       <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
         numberOfLines={2}
       >
         foo.pdf
@@ -57,34 +40,22 @@ exports[`Files renders correctly 1`] = `
     </View>
   </View>
   <View
-    accessibilityComponentType={undefined}
-    accessibilityLabel={undefined}
-    accessibilityTraits={undefined}
     accessible={true}
-    collapsable={undefined}
-    hasTVPreferredFocus={undefined}
-    hitSlop={undefined}
+    focusable={true}
     isTVSelectable={true}
-    nativeID={undefined}
-    onLayout={undefined}
+    onClick={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
     onResponderTerminate={[Function]}
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
-    testID={undefined}
-    tvParallaxProperties={undefined}
   >
     <View>
       <Icon
-        color={undefined}
         name="Document"
       />
       <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
         numberOfLines={2}
       >
         bar.zip
@@ -116,12 +87,11 @@ exports[`JoinProjectButton renders as expected when leaving 2`] = `
 `;
 
 exports[`PostDetails renders correctly 1`] = `
-<Unknown>
+<_default>
   <Connect(Comments)
     footer={
       <CommentPrompt
         commentText=""
-        communityId={undefined}
         currentUser={
           Object {
             "avatarUrl": "me.png",
@@ -131,13 +101,11 @@ exports[`PostDetails renders correctly 1`] = `
         }
         onChange={[Function]}
         onSubmit={[Function]}
-        submitting={undefined}
       />
     }
     header={
       <View>
         <withNavigation(Connect(PostHeader))
-          announcement={undefined}
           closeOnDelete={true}
           communities={
             Array [
@@ -180,7 +148,6 @@ exports[`PostDetails renders correctly 1`] = `
         />
         <PostBody
           details="Lo"
-          linkPreview={undefined}
           showMember={[Function]}
           showTopic={[Function]}
           slug="foom"
@@ -242,5 +209,5 @@ exports[`PostDetails renders correctly 1`] = `
     id="91"
     type="post"
   />
-</Unknown>
+</_default>
 `;

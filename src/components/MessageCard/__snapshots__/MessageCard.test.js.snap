@@ -6,11 +6,7 @@ exports[`matches the last snapshot 1`] = `
     avatarUrl="https://wombat.com/test.jpg"
   />
   <View>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    />
+    <Text />
     <HtmlView
       RootComponent={[Function]}
       addLineBreaks={false}
@@ -38,11 +34,7 @@ exports[`matches the last snapshot 1`] = `
       }
       value="<p>Hi</p>"
     />
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
+    <Text>
       1 mo ago
     </Text>
   </View>

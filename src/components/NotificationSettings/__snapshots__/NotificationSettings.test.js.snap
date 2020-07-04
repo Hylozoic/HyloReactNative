@@ -61,7 +61,7 @@ Object {
 `;
 
 exports[`NotificationSettings matches the last snapshot 1`] = `
-<ScrollView
+<ScrollViewMock
   contentContainerStyle={
     Object {
       "marginTop": 30,
@@ -119,7 +119,7 @@ exports[`NotificationSettings matches the last snapshot 1`] = `
     }
     updateMembershipSettings={[Function]}
   />
-</ScrollView>
+</ScrollViewMock>
 `;
 
 exports[`SettingsIcon matches the last snapshot 1`] = `
@@ -144,87 +144,57 @@ exports[`SettingsRow matches snapshot when expanded 1`] = `
       }
     />
     <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
       numberOfLines={1}
     >
       Foo Row
     </Text>
     <View
-      accessibilityComponentType={undefined}
-      accessibilityLabel={undefined}
-      accessibilityTraits={undefined}
       accessible={true}
-      collapsable={undefined}
-      hasTVPreferredFocus={undefined}
-      hitSlop={undefined}
+      focusable={true}
       isTVSelectable={true}
-      nativeID={undefined}
-      onLayout={undefined}
+      onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
-      testID={undefined}
-      tvParallaxProperties={undefined}
     >
       <Icon
-        color={undefined}
         name="ArrowUp"
       />
     </View>
   </View>
   <View>
     <View
-      accessibilityComponentType={undefined}
-      accessibilityLabel={undefined}
-      accessibilityTraits={undefined}
       accessible={true}
-      collapsable={undefined}
-      hasTVPreferredFocus={undefined}
-      hitSlop={undefined}
+      focusable={true}
       isTVSelectable={true}
-      nativeID={undefined}
-      onLayout={undefined}
+      onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
-      testID={undefined}
-      tvParallaxProperties={undefined}
     >
       <Icon
-        color={undefined}
         name="PushNotification"
       />
     </View>
     <View
-      accessibilityComponentType={undefined}
-      accessibilityLabel={undefined}
-      accessibilityTraits={undefined}
       accessible={true}
-      collapsable={undefined}
-      hasTVPreferredFocus={undefined}
-      hitSlop={undefined}
+      focusable={true}
       isTVSelectable={true}
-      nativeID={undefined}
-      onLayout={undefined}
+      onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
-      testID={undefined}
-      tvParallaxProperties={undefined}
     >
       <Icon
-        color={undefined}
         name="EmailNotification"
       />
     </View>
@@ -243,9 +213,6 @@ exports[`SettingsRow matches the last snapshot 1`] = `
       }
     />
     <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
       numberOfLines={1}
     >
       Foo Row
@@ -269,9 +236,6 @@ exports[`SettingsRow matches the last snapshot with iconName 1`] = `
       name="iconname"
     />
     <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
       numberOfLines={1}
     >
       Foo Row

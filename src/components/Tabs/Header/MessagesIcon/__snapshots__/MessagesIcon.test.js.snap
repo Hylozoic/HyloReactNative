@@ -4,6 +4,5 @@ exports[`MessagesIcon renders correctly 1`] = `
 <BadgedIcon
   action={[MockFunction]}
   name="Messages"
-  showBadge={undefined}
 />
 `;

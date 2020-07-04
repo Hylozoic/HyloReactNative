@@ -23,24 +23,15 @@ exports[`matches last snapshot 1`] = `
   keyboardVerticalOffset={64}
 >
   <View>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
+    <Text>
       Add your location
     </Text>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
+    <Text>
       Add your location to see more relevant content and find people and projects near you.
     </Text>
   </View>
   <SettingControl
     label="Where do you call home"
-    onChange={undefined}
     value="Hull"
   />
   <Button

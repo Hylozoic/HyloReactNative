@@ -14,8 +14,6 @@ exports[`CommunityRow hides badge when no newPostCount 1`] = `
       }
     />
     <Text
-      accessible={true}
-      allowFontScaling={true}
       ellipsizeMode="tail"
       numberOfLines={1}
     >
@@ -39,8 +37,6 @@ exports[`CommunityRow highlights when matching currentCommunityId 1`] = `
       }
     />
     <Text
-      accessible={true}
-      allowFontScaling={true}
       ellipsizeMode="tail"
       numberOfLines={1}
     >
@@ -64,19 +60,13 @@ exports[`CommunityRow matches the last snapshot 1`] = `
       }
     />
     <Text
-      accessible={true}
-      allowFontScaling={true}
       ellipsizeMode="tail"
       numberOfLines={1}
     >
       Foom
     </Text>
     <View>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-      >
+      <Text>
         7
       </Text>
     </View>
@@ -94,11 +84,7 @@ exports[`DrawerMenu matches the last snapshot 1`] = `
         }
       }
     />
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
+    <Text>
       foo
     </Text>
     <TouchableOpacity
@@ -116,11 +102,7 @@ exports[`DrawerMenu matches the last snapshot 1`] = `
       <Icon
         name="Settings"
       />
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-      >
+      <Text>
         Settings
       </Text>
     </TouchableOpacity>
@@ -166,7 +148,6 @@ exports[`DrawerMenu matches the last snapshot 1`] = `
     windowSize={21}
   />
   <Button
-    onPress={undefined}
     text="Create a Community"
   />
   <View>
@@ -184,9 +165,6 @@ exports[`DrawerMenu matches the last snapshot 1`] = `
     </TouchableOpacity>
     <View>
       <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
         numberOfLines={1}
       >
         Hello, 
@@ -212,8 +190,6 @@ exports[`NetworkRow hides image when no avatarUrl 1`] = `
     onPress={[Function]}
   >
     <Text
-      accessible={true}
-      allowFontScaling={true}
       ellipsizeMode="tail"
       numberOfLines={1}
     >
@@ -261,8 +237,6 @@ exports[`NetworkRow matches the last snapshot 1`] = `
       }
     />
     <Text
-      accessible={true}
-      allowFontScaling={true}
       ellipsizeMode="tail"
       numberOfLines={1}
     >
@@ -310,8 +284,6 @@ exports[`NetworkRow renders correctly with nonMemberCommunities 1`] = `
       }
     />
     <Text
-      accessible={true}
-      allowFontScaling={true}
       ellipsizeMode="tail"
       numberOfLines={1}
     >
@@ -345,11 +317,7 @@ exports[`NetworkRow renders correctly with nonMemberCommunities 1`] = `
       activeOpacity={0.2}
       onPress={[Function]}
     >
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-      >
+      <Text>
         See all
       </Text>
     </TouchableOpacity>
@@ -371,8 +339,6 @@ exports[`NetworkRow shows all communities link 1`] = `
       }
     />
     <Text
-      accessible={true}
-      allowFontScaling={true}
       ellipsizeMode="tail"
       numberOfLines={1}
     >
@@ -384,11 +350,7 @@ exports[`NetworkRow shows all communities link 1`] = `
 
 exports[`SectionHeader matches the last snapshot 1`] = `
 <View>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-  >
+  <Text>
     NETWORKED COMMUNITIES
   </Text>
 </View>
@@ -407,11 +369,7 @@ exports[`TextButton renders 1`] = `
   }
   onPress={[Function]}
 >
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-  >
+  <Text>
     anything
   </Text>
 </TouchableOpacity>

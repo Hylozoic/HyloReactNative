@@ -6,13 +6,8 @@ exports[`renders as expected 1`] = `
   onPress={[Function]}
 >
   <Avatar
-    avatarUrl={undefined}
     dimension={30}
   />
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-  />
+  <Text />
 </TouchableOpacity>
 `;

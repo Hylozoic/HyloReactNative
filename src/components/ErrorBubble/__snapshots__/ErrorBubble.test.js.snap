@@ -3,11 +3,7 @@
 exports[`matches last snapshot 1`] = `
 <View>
   <View>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
+    <Text>
       Some error message
     </Text>
   </View>

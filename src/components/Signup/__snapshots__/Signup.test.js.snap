@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`matches last snapshot 1`] = `
-<ScrollView
+<ScrollViewMock
   contentContainerStyle={
     Object {
       "backgroundColor": "white",
@@ -31,83 +31,53 @@ exports[`matches last snapshot 1`] = `
     />
   </ImageBackground>
   <View>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
+    <Text>
       Sign up to get started with Hylo
     </Text>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
+    <Text>
       Stay connected, organized and engaged with your community.
     </Text>
     <Button
       onPress={[Function]}
       text="Sign Up"
     />
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
+    <Text>
       Or connect with:
     </Text>
     <View>
       <FbLoginButton
         createErrorNotification={[Function]}
-        onLoginFinished={undefined}
       />
       <GoogleLoginButton
         createErrorNotification={[Function]}
-        onLoginFinished={undefined}
       />
     </View>
     <View>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-      >
+      <Text>
         Already have an account? 
       </Text>
       <TouchableOpacity
         activeOpacity={0.2}
         onPress={[Function]}
       >
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-        >
+        <Text>
           Log in now
         </Text>
       </TouchableOpacity>
     </View>
     <View>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-      >
+      <Text>
         Your data is safe with Hylo. By clicking the "Sign Up" button above you are agreeing to these terms:
       </Text>
       <TouchableOpacity
         activeOpacity={0.2}
         onPress={[Function]}
       >
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-        >
+        <Text>
           https://www.hylo.com/terms
         </Text>
       </TouchableOpacity>
     </View>
   </View>
-</ScrollView>
+</ScrollViewMock>
 `;

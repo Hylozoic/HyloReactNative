@@ -30,6 +30,7 @@ Array [
     "id": 2,
     "latestMessage": SessionBoundModel {
       "_fields": Object {
+        "createdAt": 3,
         "id": 3,
         "messageThread": 2,
         "text": "Third message",
@@ -47,11 +48,13 @@ Array [
     ],
     "unread": false,
     "unreadCount": 1,
+    "updatedAt": 2,
   },
   Object {
     "id": 1,
     "latestMessage": SessionBoundModel {
       "_fields": Object {
+        "createdAt": 2,
         "id": 2,
         "messageThread": 1,
         "text": "Second message",
@@ -69,6 +72,7 @@ Array [
     ],
     "unread": false,
     "unreadCount": 1,
+    "updatedAt": 1,
   },
 ]
 `;

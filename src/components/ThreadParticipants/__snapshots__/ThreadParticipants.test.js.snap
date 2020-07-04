@@ -8,18 +8,14 @@ exports[`ParticipantRow matches the last snapshot 1`] = `
   <Avatar
     avatarUrl="foo.png"
   />
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-  >
+  <Text>
     Bob
   </Text>
 </TouchableOpacity>
 `;
 
 exports[`ThreadParticipants matches the last snapshot 1`] = `
-<ScrollView
+<ScrollViewMock
   contentContainerStyle={
     Object {
       "backgroundColor": "white",
@@ -45,7 +41,7 @@ exports[`ThreadParticipants matches the last snapshot 1`] = `
       }
     }
   />
-</ScrollView>
+</ScrollViewMock>
 `;
 
 exports[`ThreadParticipants returns loading if no participants 1`] = `
