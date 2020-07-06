@@ -70,6 +70,7 @@ platform :ios do
   desc "Be aware that this will hit the live API."
   lane :qa do
     match(
+      app_identifier: ["com.hylo.HyloA", "com.hylo.HyloA.OneSignalNotificationServiceExtension"],
       type: "adhoc",
       force_for_new_devices: true,
       readonly: true
