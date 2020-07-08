@@ -21,8 +21,7 @@ export default function mixpanelMiddleware (store) {
         (isString(analytics) && analytics) ||
         type
       const analyticsData = isObject(analytics) ? omit('eventName', analytics) : {}
-      const test = await mixpanel.track(trackingEventName, analyticsData)
-      console.log('!!! mixpanel after', test, trackingEventName, analyticsData)
+      await mixpanel.track(trackingEventName, analyticsData)
     }
     return next(action)
   }

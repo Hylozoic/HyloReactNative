@@ -9,6 +9,6 @@ if (isDev && process.env.MIXPANEL_TOKEN_DEV) {
   mixpanel = new MixpanelInstance(process.env.MIXPANEL_TOKEN)
 }
 
-mixpanel.initialize()
+mixpanel && mixpanel.initialize()
 
 export default (state = mixpanel, action) => state

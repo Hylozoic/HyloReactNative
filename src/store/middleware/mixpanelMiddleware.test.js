@@ -20,7 +20,7 @@ describe('mixpanelMiddleware', () => {
     mixpanelMiddlewareInstance = mixpanelMiddleware(store)(next)
   })
 
-  test('when meta.analytics is a string sends tracking event by that name', () => {
+  test('when meta.analytics is a string sends tracking event by that name', async () => {
     const eventName = 'Event Name'
     const analyticsAction = {
       type: 'Anything',
@@ -28,11 +28,11 @@ describe('mixpanelMiddleware', () => {
         analytics: eventName
       }
     }
-    mixpanelMiddlewareInstance(analyticsAction)
+    await mixpanelMiddlewareInstance(analyticsAction)
     expect(mixpanel.track).toHaveBeenCalledWith(eventName, {})
   })
 
-  test('when meta.analytics is an object with an eventName sends eventName and data', () => {
+  test('when meta.analytics is an object with an eventName sends eventName and data', async () => {
     const eventName = 'Event Name From Object'
     const eventData = {
       somedata: 'anything'
@@ -46,11 +46,11 @@ describe('mixpanelMiddleware', () => {
         }
       }
     }
-    mixpanelMiddlewareInstance(analyticsAction)
+    await mixpanelMiddlewareInstance(analyticsAction)
     expect(mixpanel.track).toHaveBeenCalledWith(eventName, eventData)
   })
 
-  test('when meta.analytics is an object without an eventName uses action.type and data', () => {
+  test('when meta.analytics is an object without an eventName uses action.type and data', async () => {
     const actionType = 'Action Type Name'
     const eventData = {
       somedata: 'anything',
@@ -64,7 +64,7 @@ describe('mixpanelMiddleware', () => {
         }
       }
     }
-    mixpanelMiddlewareInstance(analyticsAction)
+    await mixpanelMiddlewareInstance(analyticsAction)
     expect(mixpanel.track).toHaveBeenCalledWith(actionType, eventData)
   })
 })
