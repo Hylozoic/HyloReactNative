@@ -9,7 +9,7 @@ import promiseMiddleware from 'redux-promise'
 import userFetchedMiddleware from './userFetchedMiddleware'
 import userBlockingMiddleware from './userBlockingMiddleware'
 import mixpanelMiddleware from './mixpanelMiddleware'
-import { isDev, isProduction } from '../../config'
+import { isDev } from '../../config'
 
 const middleware = compact([
   graphQLMiddleware,
@@ -20,7 +20,7 @@ const middleware = compact([
   promiseMiddleware,
   userFetchedMiddleware,
   userBlockingMiddleware,
-  isProduction && mixpanelMiddleware,
+  mixpanelMiddleware,
   isDev && createLogger({
     collapsed: (getState, action, logEntry) => !logEntry.error
   })
