@@ -2,7 +2,18 @@ import React from 'react'
 import { View, Text, TouchableOpacity, Alert, FlatList } from 'react-native'
 import Avatar from '../../Avatar'
 import Icon from '../../Icon'
-import { rhino30, rhino50, caribbeanGreen, prim, fuchsiaPink } from 'style/colors'
+import {
+  rhino30,
+  rhino50,
+  caribbeanGreen,
+  prim,
+  fuchsiaPink,
+  mangoYellow,
+  havelockBlue,
+  westSide,
+  jade,
+  fakeAlpha
+} from 'style/colors'
 import { humanDate } from 'hylo-utils/text'
 import PopupMenuButton from '../../PopupMenuButton'
 import { get, filter, isEmpty } from 'lodash/fp'
@@ -263,28 +274,36 @@ const labelStyles = {
     fontFamily: 'Circular-Bold',
     letterSpacing: 0.8
   },
-  request: {
-    box: {
-      backgroundColor: '#FFEFDA'
-    },
-    text: {
-      color: '#FF9711'
-    }
-  },
   discussion: {
     box: {
-      backgroundColor: '#D9ECF8'
+      backgroundColor: fakeAlpha(havelockBlue, 0.2)
     },
     text: {
-      color: '#40A1DD'
+      color: havelockBlue
+    }
+  },
+  request: {
+    box: {
+      backgroundColor: fakeAlpha(westSide, 0.2)
+    },
+    text: {
+      color: westSide
     }
   },
   offer: {
     box: {
-      backgroundColor: '#D3F5E6'
+      backgroundColor: fakeAlpha(jade, 0.2)
     },
     text: {
-      color: '#05C570'
+      color: jade
+    }
+  },
+  resource: {
+    box: {
+      backgroundColor: fakeAlpha(mangoYellow, 0.2)
+    },
+    text: {
+      color: mangoYellow
     }
   },
   project: {
