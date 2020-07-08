@@ -6,6 +6,7 @@ import {
   havelockBlue,
   jade,
   limedSpruce,
+  mangoYellow,
   rhino10,
   rhino30,
   westSide,
@@ -65,7 +66,7 @@ export default {
       borderRadius: 4,
       backgroundColor: rhino10,
       paddingVertical: 10,
-      width: '31%'
+      width: '23%'
     },
     text: {
       color: limedSpruce,
@@ -96,6 +97,14 @@ export default {
       },
       text: {
         color: jade
+      }
+    },
+    resource: {
+      box: {
+        backgroundColor: fakeAlpha(mangoYellow, 0.2)
+      },
+      text: {
+        color: mangoYellow
       }
     }
   },

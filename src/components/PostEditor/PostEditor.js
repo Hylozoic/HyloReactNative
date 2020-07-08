@@ -351,7 +351,7 @@ export default class PostEditor extends React.Component {
         <View style={styles.scrollContent}>
           {!isProject && <SectionLabel>What are you posting today?</SectionLabel>}
           {!isProject && <View style={[styles.typeButtonRow, styles.section]}>
-            {['discussion', 'request', 'offer'].map(t =>
+            {['discussion', 'request', 'offer', 'resource'].map(t =>
               <TypeButton type={t} key={t} selected={t === type}
                 onPress={() => !isSaving && this.setState({type: t})} />)}
           </View>}
@@ -474,6 +474,7 @@ const titlePlaceholders = {
   discussion: 'What do you want to discuss?',
   request: 'What do you need help with?',
   offer: 'How do you want to help?',
+  resource: 'What resource is available?',
   project: 'What is your project called?'
 }
 

@@ -13,6 +13,7 @@ export const ghost = '#CCD1D7'
 export const havelockBlue = '#41A1DC' // discussion
 export const jade = '#06C470' // offer
 export const limedSpruce = '#38474A'
+export const mangoYellow = '#FDD549' // resource
 export const mineralGreen = '#304843'
 export const mirage = '#1F2C3D'
 export const nevada = '#5D757A'

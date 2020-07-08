@@ -64,6 +64,11 @@ exports[`PostEditor renders a new editor correctly 1`] = `
           selected={false}
           type="offer"
         />
+        <TypeButton
+          onPress={[Function]}
+          selected={false}
+          type="resource"
+        />
       </View>
       <SectionLabel>
         Title
@@ -222,6 +227,22 @@ exports[`PostEditor renders correctly while saving 1`] = `
           >
             <Text>
               OFFER
+            </Text>
+          </View>
+          <View
+            accessible={true}
+            focusable={true}
+            isTVSelectable={true}
+            onClick={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+          >
+            <Text>
+              RESOURCE
             </Text>
           </View>
         </View>
@@ -446,6 +467,22 @@ exports[`PostEditor renders correctly while saving 2`] = `
               OFFER
             </Text>
           </View>
+          <View
+            accessible={true}
+            focusable={true}
+            isTVSelectable={true}
+            onClick={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+          >
+            <Text>
+              RESOURCE
+            </Text>
+          </View>
         </View>
         <Text>
           Title
@@ -634,6 +671,11 @@ exports[`PostEditor renders with a post 1`] = `
           onPress={[Function]}
           selected={false}
           type="offer"
+        />
+        <TypeButton
+          onPress={[Function]}
+          selected={false}
+          type="resource"
         />
       </View>
       <SectionLabel>
