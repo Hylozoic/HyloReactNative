@@ -8,6 +8,8 @@ import {
   Alert
 } from 'react-native'
 import { get, uniq, uniqBy, isEmpty } from 'lodash/fp'
+import moment from 'moment'
+import DatePicker from 'react-native-date-picker'
 import { validateTopicName } from 'hylo-utils/validators'
 import PropTypes from 'prop-types'
 import { rhino30 } from 'style/colors'
@@ -335,6 +337,9 @@ export default class PostEditor extends React.Component {
       filePickerPending, imagePickerPending, announcementEnabled,
       detailsFocused, titleLengthError, members, communities
     } = this.state
+    const canHaveTimeframe = type !== 'discussion'
+    const startTime =  new Date() // moment('06/12/2016', 'DD/MM/YYYY', true)
+    const endTime = new Date() // moment('08/12/2020', 'DD/MM/YYYY', true)
     const toolbarProps = {
       post,
       canModerate,
@@ -407,6 +412,19 @@ export default class PostEditor extends React.Component {
             {topics.length < 1 &&
               <Text style={styles.textInputPlaceholder}>{topicsPlaceholder}</Text>}
           </TouchableOpacity>
+          {canHaveTimeframe && <DatePicker
+            // testID='startTime'
+            // timeZoneOffsetInMinutes={0}
+            // minuteInterval={interval}
+            date={startTime}
+            mode={'datetime'}
+            onDateChange={d => console.log(d)}
+            // is24Hour
+            // display={display}
+            // onChange={onChange}
+            // style={styles.iOsPicker}
+            // textColor={color || undefined}
+          />}
 
           {isProject && <TouchableOpacity
             style={[
