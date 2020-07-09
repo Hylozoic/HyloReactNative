@@ -2,10 +2,12 @@ import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import HTMLView from 'react-native-htmlview'
 import { decode } from 'ent'
+import moment from 'moment'
 import { present, sanitize } from 'hylo-utils/text'
-import urlHandler from '../../../util/urlHandler'
+import urlHandler from 'util/urlHandler'
 import LinkPreview from '../LinkPreview'
-import richTextStyles from '../../../style/richTextStyles'
+import { caribbeanGreen } from 'style/colors'
+import richTextStyles from 'style/richTextStyles'
 
 const MAX_DETAILS_LENGTH = 144
 
@@ -19,6 +21,7 @@ export default class PostBody extends React.PureComponent {
     const {
       title,
       details,
+      endTime,
       linkPreview,
       slug,
       shouldTruncate
@@ -29,8 +32,11 @@ export default class PostBody extends React.PureComponent {
       sanitize(details).replace(/\n/g, '').replace('<p>&nbsp;</p>', ''),
       {slug, maxlength: shouldTruncate && MAX_DETAILS_LENGTH}
     )
+    const presentedEndTime = endTime && moment(endTime).format('MMM D YYYY')
 
     return <View style={styles.container}>
+      {presentedEndTime &&
+        <Text style={styles.resourceEndsAt}>Resource ends {presentedEndTime}</Text>}
       <PostTitle title={decodedTitle} />
       <HTMLView
         onLinkPress={this.handleLinkPress}
@@ -52,6 +58,11 @@ const styles = StyleSheet.create({
   container: {
     marginHorizontal: 12,
     marginBottom: 20
+  },
+  resourceEndsAt: {
+    color: caribbeanGreen,
+    fontSize: 10,
+    textTransform: 'uppercase'
   },
   title: {
     color: '#363D3C',

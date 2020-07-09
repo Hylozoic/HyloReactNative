@@ -18,6 +18,11 @@ export function getPostFieldsFragment (withComments = true) {
   }
   createdAt
   updatedAt
+  isPublic
+  fulfilledAt
+  startTime
+  endTime
+  myEventResponse
   commenters(first: 3) {
     id
     name

@@ -132,6 +132,7 @@ export default class PostDetails extends React.Component {
       <PostImage imageUrls={post.imageUrls} linked />
       <PostBody title={post.title}
         details={post.details}
+        endTime={post.endTime}
         linkPreview={post.linkPreview}
         slug={slug}
         showMember={this.handleShowMember}

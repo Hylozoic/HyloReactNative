@@ -76,6 +76,7 @@ export default class PostCard extends React.PureComponent {
       <PostBody
         title={post.title}
         details={post.details}
+        endTime={post.endTime}
         linkPreview={post.linkPreview}
         slug={slug}
         showMember={showMember}
