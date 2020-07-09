@@ -88,6 +88,7 @@ export default class Login extends React.Component {
       goToResetPassword, goToSignup, bannerMessage
     } = this.props
     const { ssoError, emailIsValid, isConnected } = this.state
+
     return <ScrollView contentContainerStyle={styles.login} style={styles.container}>
       {ssoError && <Text style={styles.errorBanner}>{ssoError}</Text>}
       {!isConnected && <Text style={styles.errorBanner}>OFFLINE; TRYING TO RECONNECT...</Text>}
