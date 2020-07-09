@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   Image
 } from 'react-native'
+import { isIOS } from 'util/platform'
 import NetInfo from "@react-native-community/netinfo";
 import validator from 'validator'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
@@ -155,20 +156,21 @@ export default class Login extends React.Component {
           <Text style={styles.loginText}>Log In</Text>
         </TouchableOpacity>
       </View>
-
-      <View style={styles.connectWith}>
-        <Text style={styles.helpText}>Or connect with:</Text>
-      </View>
-      <View style={styles.paddedRowWithOpacity}>
-        <FbLoginButton
-          onLoginFinished={loginWithFacebook}
-          createErrorNotification={this.createErrorNotification}
-        />
-        <GoogleLoginButton
-          onLoginFinished={loginWithGoogle}
-          createErrorNotification={this.createErrorNotification}
-        />
-      </View>
+      {!isIOS && <React.Fragment>
+        <View style={styles.connectWith}>
+          <Text style={styles.helpText}>Or connect with:</Text>
+        </View>
+        <View style={styles.paddedRowWithOpacity}>
+          <FbLoginButton
+            onLoginFinished={loginWithFacebook}
+            createErrorNotification={this.createErrorNotification}
+          />
+          <GoogleLoginButton
+            onLoginFinished={loginWithGoogle}
+            createErrorNotification={this.createErrorNotification}
+          />
+        </View>
+      </React.Fragment>}
       <SignupLink goToSignup={goToSignup} />
     </ScrollView>
   }
