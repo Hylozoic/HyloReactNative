@@ -3,6 +3,8 @@ import ReactShallowRenderer from 'react-test-renderer/shallow'
 import TestRenderer from 'react-test-renderer'
 import Login, { FormError, SignupLink } from './Login'
 
+jest.mock('util/platform', () => ({isIOS: false}))
+
 describe('Login', () => {
   it('renders correctly', () => {
     const renderer = new ReactShallowRenderer()

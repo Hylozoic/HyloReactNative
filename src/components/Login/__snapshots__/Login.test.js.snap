@@ -102,19 +102,21 @@ exports[`Login renders correctly 1`] = `
       </Text>
     </TouchableOpacity>
   </View>
-  <View>
-    <Text>
-      Or connect with:
-    </Text>
-  </View>
-  <View>
-    <FbLoginButton
-      createErrorNotification={[Function]}
-    />
-    <GoogleLoginButton
-      createErrorNotification={[Function]}
-    />
-  </View>
+  <React.Fragment>
+    <View>
+      <Text>
+        Or connect with:
+      </Text>
+    </View>
+    <View>
+      <FbLoginButton
+        createErrorNotification={[Function]}
+      />
+      <GoogleLoginButton
+        createErrorNotification={[Function]}
+      />
+    </View>
+  </React.Fragment>
   <SignupLink
     goToSignup={[Function]}
   />
@@ -212,19 +214,21 @@ exports[`Login renders error message 1`] = `
       </Text>
     </TouchableOpacity>
   </View>
-  <View>
-    <Text>
-      Or connect with:
-    </Text>
-  </View>
-  <View>
-    <FbLoginButton
-      createErrorNotification={[Function]}
-    />
-    <GoogleLoginButton
-      createErrorNotification={[Function]}
-    />
-  </View>
+  <React.Fragment>
+    <View>
+      <Text>
+        Or connect with:
+      </Text>
+    </View>
+    <View>
+      <FbLoginButton
+        createErrorNotification={[Function]}
+      />
+      <GoogleLoginButton
+        createErrorNotification={[Function]}
+      />
+    </View>
+  </React.Fragment>
   <SignupLink />
 </ScrollViewMock>
 `;
@@ -320,19 +324,21 @@ exports[`Login renders with no network connection error 1`] = `
       </Text>
     </TouchableOpacity>
   </View>
-  <View>
-    <Text>
-      Or connect with:
-    </Text>
-  </View>
-  <View>
-    <FbLoginButton
-      createErrorNotification={[Function]}
-    />
-    <GoogleLoginButton
-      createErrorNotification={[Function]}
-    />
-  </View>
+  <React.Fragment>
+    <View>
+      <Text>
+        Or connect with:
+      </Text>
+    </View>
+    <View>
+      <FbLoginButton
+        createErrorNotification={[Function]}
+      />
+      <GoogleLoginButton
+        createErrorNotification={[Function]}
+      />
+    </View>
+  </React.Fragment>
   <SignupLink />
 </ScrollViewMock>
 `;
@@ -431,19 +437,21 @@ exports[`Login renders with pending banner 1`] = `
       </Text>
     </TouchableOpacity>
   </View>
-  <View>
-    <Text>
-      Or connect with:
-    </Text>
-  </View>
-  <View>
-    <FbLoginButton
-      createErrorNotification={[Function]}
-    />
-    <GoogleLoginButton
-      createErrorNotification={[Function]}
-    />
-  </View>
+  <React.Fragment>
+    <View>
+      <Text>
+        Or connect with:
+      </Text>
+    </View>
+    <View>
+      <FbLoginButton
+        createErrorNotification={[Function]}
+      />
+      <GoogleLoginButton
+        createErrorNotification={[Function]}
+      />
+    </View>
+  </React.Fragment>
   <SignupLink />
 </ScrollViewMock>
 `;
