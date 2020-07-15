@@ -52,10 +52,11 @@
     "react-native-mixpanel": "^1.2.0",
     "react-native-onesignal": "^3.7.3",
     "react-native-prompt-android": "^1.0.0",
+    "react-native-reanimated": "^1.9.0",
     "react-native-restart": "^0.0.17",
     "react-native-root-toast": "^3.0.1",
     "react-native-tab-navigator": "^0.3.4",
-    "react-native-tab-view": "^0.0.74",
+    "react-native-tab-view": "^2.15.0",
     "react-native-triangle": "^0.0.9",
     "react-native-vector-icons": "^6.6.0",
     "react-native-webview": "^9.4.0",
@@ -105,7 +106,8 @@
     "preset": "react-native",
     "setupFiles": [
       "<rootDir>/config/jest/mockGlobals.js",
-      "<rootDir>/config/jest/mockError.js"
+      "<rootDir>/config/jest/mockError.js",
+      "./node_modules/react-native-gesture-handler/jestSetup.js"
     ],
     "collectCoverageFrom": [
       "src/**/*.{js,jsx}"

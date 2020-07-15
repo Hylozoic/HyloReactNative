@@ -2,7 +2,10 @@
 
 exports[`InvitePeople handles tab-view functions 1`] = `
 <TabBar
+  getAccessibilityLabel={[Function]}
+  getAccessible={[Function]}
   getLabelText={[Function]}
+  getTestID={[Function]}
   indicatorStyle={
     Object {
       "backgroundColor": "#0DC39F",
@@ -14,6 +17,7 @@ exports[`InvitePeople handles tab-view functions 1`] = `
       "fontFamily": "Circular-Book",
     }
   }
+  renderIndicator={[Function]}
   tabStyle={
     Object {
       "width": 375,
@@ -55,14 +59,17 @@ Object {
 `;
 
 exports[`InvitePeople matches the last snapshot 1`] = `
-<TabViewAnimated
-  canJumpToTab={[Function]}
+<TabView
+  gestureHandlerProps={Object {}}
   initialLayout={
     Object {
       "height": 0,
       "width": 750,
     }
   }
+  keyboardDismissMode="auto"
+  lazy={false}
+  lazyPreloadDistance={0}
   navigationState={
     Object {
       "index": 0,
@@ -79,10 +86,15 @@ exports[`InvitePeople matches the last snapshot 1`] = `
     }
   }
   onIndexChange={[Function]}
-  renderHeader={[Function]}
+  removeClippedSubviews={false}
+  renderLazyPlaceholder={[Function]}
   renderPager={[Function]}
   renderScene={[Function]}
-  useNativeDriver={false}
+  renderTabBar={[Function]}
+  springConfig={Object {}}
+  swipeEnabled={true}
+  tabBarPosition="top"
+  timingConfig={Object {}}
 />
 `;
 

@@ -1,6 +1,6 @@
 import React, { Component, PureComponent } from 'react'
 import { Clipboard, Dimensions, Text, View, TextInput, TouchableOpacity, ScrollView, Switch } from 'react-native'
-import { TabViewAnimated, TabBar } from 'react-native-tab-view'
+import { TabView, TabBar } from 'react-native-tab-view'
 import KeyboardFriendlyView from '../KeyboardFriendlyView'
 import Button from '../Button'
 import header from 'util/header'
@@ -8,7 +8,7 @@ import { get, isEmpty, compact } from 'lodash/fp'
 import { humanDate } from 'hylo-utils/text'
 import styles from './InvitePeople.styles'
 import { caribbeanGreen } from 'style/colors'
-
+// https://github.com/react-native-community/react-native-tab-view/issues/547
 const initialLayout = {
   height: 0,
   width: Dimensions.get('window').width
@@ -51,7 +51,7 @@ export default class InvitePeople extends Component {
       index
     })
 
-  _renderHeader = props => (
+  _renderTabBar = props => (
     <TabBar
       {...props}
       indicatorStyle={styles.indicator}
@@ -86,11 +86,11 @@ export default class InvitePeople extends Component {
 
   render () {
     return (
-      <TabViewAnimated
+      <TabView
         style={[styles.container, this.props.style]}
         navigationState={this.state}
         renderScene={this._renderScene}
-        renderHeader={this._renderHeader}
+        renderTabBar={this._renderTabBar}
         onIndexChange={this._handleIndexChange}
         initialLayout={initialLayout}
       />
