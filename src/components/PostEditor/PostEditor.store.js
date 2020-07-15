@@ -29,6 +29,8 @@ export function createPost (post) {
     title,
     details,
     communities,
+    startTime,
+    endTime,
     imageUrls = [],
     fileUrls = [],
     topicNames = [],
@@ -45,6 +47,8 @@ export function createPost (post) {
         $title: String
         $details: String
         $communityIds: [String]
+        $startTime: String
+        $endTime: String
         $imageUrls: [String]
         $fileUrls: [String]
         $announcement: Boolean
@@ -56,6 +60,8 @@ export function createPost (post) {
           title: $title
           details: $details
           communityIds: $communityIds
+          startTime: $startTime
+          endTime: $endTime
           imageUrls: $imageUrls
           fileUrls: $fileUrls
           announcement: $announcement
@@ -70,6 +76,8 @@ export function createPost (post) {
         title,
         details: preprocessedDetails,
         communityIds,
+        startTime,
+        endTime,
         imageUrls,
         fileUrls,
         announcement: sendAnnouncement,
@@ -93,6 +101,8 @@ export function createProject (post) {
     title,
     details,
     communities,
+    startTime,
+    endTime,
     imageUrls = [],
     fileUrls = [],
     topicNames = [],
@@ -108,6 +118,8 @@ export function createProject (post) {
         $title: String
         $details: String
         $communityIds: [String]
+        $startTime: String
+        $endTime: String
         $imageUrls: [String]
         $fileUrls: [String]
         $announcement: Boolean
@@ -118,6 +130,8 @@ export function createProject (post) {
           title: $title
           details: $details
           communityIds: $communityIds
+          startTime: $startTime
+          endTime: $endTime
           imageUrls: $imageUrls
           fileUrls: $fileUrls
           announcement: $announcement
@@ -131,6 +145,8 @@ export function createProject (post) {
         title,
         details: preprocessedDetails,
         communityIds,
+        startTime,
+        endTime,
         imageUrls,
         fileUrls,
         announcement: sendAnnouncement,
@@ -156,6 +172,8 @@ export function updatePost (post) {
     title,
     details,
     communities,
+    startTime,
+    endTime,
     imageUrls = [],
     fileUrls = [],
     topicNames = [],
@@ -171,6 +189,8 @@ export function updatePost (post) {
         $title: String
         $details: String
         $communityIds: [String]
+        $startTime: String
+        $endTime: String
         $imageUrls: [String]
         $fileUrls: [String]
         $topicNames: [String]
@@ -181,6 +201,8 @@ export function updatePost (post) {
           title: $title
           details: $details
           communityIds: $communityIds
+          startTime: $startTime
+          endTime: $endTime
           imageUrls: $imageUrls
           fileUrls: $fileUrls
           topicNames: $topicNames
@@ -195,6 +217,8 @@ export function updatePost (post) {
         title,
         details: preprocessedDetails,
         communityIds,
+        startTime,
+        endTime,
         imageUrls,
         fileUrls,
         topicNames,

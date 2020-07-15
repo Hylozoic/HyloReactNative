@@ -8,6 +8,8 @@ Object {
         $title: String
         $details: String
         $communityIds: [String]
+        $startTime: String
+        $endTime: String
         $imageUrls: [String]
         $fileUrls: [String]
         $announcement: Boolean
@@ -19,6 +21,8 @@ Object {
           title: $title
           details: $details
           communityIds: $communityIds
+          startTime: $startTime
+          endTime: $endTime
           imageUrls: $imageUrls
           fileUrls: $fileUrls
           announcement: $announcement
@@ -100,9 +104,11 @@ Object {
         undefined,
       ],
       "details": "details",
+      "endTime": "endTime",
       "fileUrls": Array [],
       "imageUrls": Array [],
       "memberIds": Array [],
+      "startTime": "startTime",
       "title": "title",
       "topicNames": Array [],
       "type": "post",
@@ -128,6 +134,8 @@ Object {
         $title: String
         $details: String
         $communityIds: [String]
+        $startTime: String
+        $endTime: String
         $imageUrls: [String]
         $fileUrls: [String]
         $announcement: Boolean
@@ -139,6 +147,8 @@ Object {
           title: $title
           details: $details
           communityIds: $communityIds
+          startTime: $startTime
+          endTime: $endTime
           imageUrls: $imageUrls
           fileUrls: $fileUrls
           announcement: $announcement
@@ -220,6 +230,7 @@ Object {
         undefined,
       ],
       "details": "details",
+      "endTime": "endTime",
       "fileUrls": Array [],
       "imageUrls": Array [],
       "memberIds": Array [
@@ -227,6 +238,7 @@ Object {
         2,
         3,
       ],
+      "startTime": "startTime",
       "title": "title",
       "topicNames": Array [],
       "type": "post",
@@ -252,6 +264,8 @@ Object {
         $title: String
         $details: String
         $communityIds: [String]
+        $startTime: String
+        $endTime: String
         $imageUrls: [String]
         $fileUrls: [String]
         $topicNames: [String]
@@ -262,6 +276,8 @@ Object {
           title: $title
           details: $details
           communityIds: $communityIds
+          startTime: $startTime
+          endTime: $endTime
           imageUrls: $imageUrls
           fileUrls: $fileUrls
           topicNames: $topicNames
@@ -354,10 +370,12 @@ Object {
         undefined,
       ],
       "details": "details",
+      "endTime": "endTime",
       "fileUrls": Array [],
       "id": 1,
       "imageUrls": Array [],
       "memberIds": Array [],
+      "startTime": "startTime",
       "title": "title",
       "topicNames": Array [],
       "type": "post",

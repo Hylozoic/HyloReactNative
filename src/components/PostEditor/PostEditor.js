@@ -8,10 +8,9 @@ import {
   Alert
 } from 'react-native'
 import { get, uniq, uniqBy, isEmpty } from 'lodash/fp'
-import moment from 'moment'
-import DatePicker from 'react-native-date-picker'
 import { validateTopicName } from 'hylo-utils/validators'
 import PropTypes from 'prop-types'
+import Moment from 'moment'
 import { rhino30 } from 'style/colors'
 import { showToast, hideToast } from 'util/toast'
 import { keyboardAvoidingViewProps as kavProps } from 'util/viewHelpers'
@@ -34,6 +33,7 @@ import ProjectMembersSummary from '../ProjectMembersSummary'
 import KeyboardFriendlyView from '../KeyboardFriendlyView'
 import Icon from '../Icon'
 import FileSelector, { showFilePicker } from './FileSelector'
+import DatePicker from 'components/DatePicker'
 import { showImagePicker } from '../ImagePicker'
 import ImageSelector from './ImageSelector'
 import InlineEditor, { toHtml } from '../InlineEditor'
@@ -83,6 +83,7 @@ export default class PostEditor extends React.Component {
       confirmLeave: this.confirmLeave,
       saveChanges: this.saveChanges
     })
+
     this.state = {
       title: get('title', post) || '',
       type: get('type', post) || (isProject ? 'project' : 'discussion'),
@@ -95,7 +96,11 @@ export default class PostEditor extends React.Component {
       announcementEnabled: false,
       detailsFocused: false,
       detailsText: get('detailsText', post) || '',
-      titleLengthError: false
+      startTime: get('startTime', post),
+      endTime: get('endTime', post),
+      titleLengthError: false,
+      startTimeExpanded: false,
+      endTimeExpanded: false
     }
   }
 
@@ -112,7 +117,7 @@ export default class PostEditor extends React.Component {
     const {
       fileUrls, imageUrls, title, detailsText,
       topics, type, announcementEnabled, members,
-      communities
+      communities, startTime, endTime
     } = this.state
 
     const postData = {
@@ -124,7 +129,9 @@ export default class PostEditor extends React.Component {
       imageUrls,
       title,
       sendAnnouncement: announcementEnabled,
-      topicNames: topics.map(t => t.name)
+      topicNames: topics.map(t => t.name),
+      startTime: startTime && startTime.getTime(),
+      endTime: endTime && endTime.getTime()
     }
 
     return save(postData)
@@ -335,11 +342,10 @@ export default class PostEditor extends React.Component {
     const {
       fileUrls, imageUrls, isSaving, topics, title, detailsText, type,
       filePickerPending, imagePickerPending, announcementEnabled,
-      detailsFocused, titleLengthError, members, communities
+      detailsFocused, titleLengthError, members, communities,
+      startTime, endTime
     } = this.state
     const canHaveTimeframe = type !== 'discussion'
-    const startTime =  new Date() // moment('06/12/2016', 'DD/MM/YYYY', true)
-    const endTime = new Date() // moment('08/12/2020', 'DD/MM/YYYY', true)
     const toolbarProps = {
       post,
       canModerate,
@@ -412,19 +418,39 @@ export default class PostEditor extends React.Component {
             {topics.length < 1 &&
               <Text style={styles.textInputPlaceholder}>{topicsPlaceholder}</Text>}
           </TouchableOpacity>
-          {canHaveTimeframe && <DatePicker
-            // testID='startTime'
-            // timeZoneOffsetInMinutes={0}
-            // minuteInterval={interval}
-            date={startTime}
-            mode={'datetime'}
-            onDateChange={d => console.log(d)}
-            // is24Hour
-            // display={display}
-            // onChange={onChange}
-            // style={styles.iOsPicker}
-            // textColor={color || undefined}
-          />}
+
+          {canHaveTimeframe && <React.Fragment>
+            <TouchableOpacity
+              style={[
+                styles.section
+              ]}
+              onPress={() => this.setState({ startTimeExpanded: !this.state.startTimeExpanded })}>
+              <View style={styles.topicLabel}>
+                <SectionLabel>Start Time</SectionLabel>
+              </View>
+              <Text>{startTime && startTime.toString()}</Text>
+            </TouchableOpacity>
+            <DatePicker
+              value={startTime}
+              expanded={this.state.startTimeExpanded}
+              onChange={startTime => this.setState({ startTime })} 
+              style={styles.textInput} />
+            <TouchableOpacity
+              style={[
+                styles.section
+              ]}
+              onPress={() => this.setState({ endTimeExpanded: !this.state.endTimeExpanded })}>
+              <View style={styles.topicLabel}>
+                <SectionLabel>End Time</SectionLabel>
+              </View>
+              <Text>{endTime && endTime.toString()}</Text>
+            </TouchableOpacity>
+            <DatePicker
+              value={endTime}
+              expanded={this.state.endTimeExpanded}
+              onChange={endTime => this.setState({ endTime })}
+              style={styles.textInput} />
+          </React.Fragment>}
 
           {isProject && <TouchableOpacity
             style={[
