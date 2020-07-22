@@ -1,5 +1,7 @@
 import convertDeepLinkToAction, { reformatPath } from './convertDeepLinkToAction'
 
+jest.mock('react-native-reanimated', () => require('react-native-reanimated/mock'))
+
 it('handles an invitation link', () => {
   expect(convertDeepLinkToAction('/h/use-invitation?token=foo'))
     .toEqual({

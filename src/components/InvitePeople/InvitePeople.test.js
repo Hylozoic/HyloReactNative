@@ -7,7 +7,7 @@ import ReactTestRenderer from 'react-test-renderer'
 jest.mock('react-native/Libraries/Components/Clipboard/Clipboard', () => ({
   setString: jest.fn()
 }))
-
+jest.mock('react-native-reanimated', () => require('react-native-reanimated/mock'))
 jest.mock('../KeyboardFriendlyView', () => 'KeyboardFriendlyView')
 
 describe('InvitePeople', () => {
@@ -59,7 +59,7 @@ describe('InvitePeople', () => {
     instance._handleIndexChange(1)
     expect(instance.state.index).toEqual(1)
 
-    expect(instance._renderHeader({})).toMatchSnapshot()
+    expect(instance._renderTabBar({})).toMatchSnapshot()
 
     expect(instance._renderScene({route: {key: '0'}})).toMatchSnapshot()
     expect(instance._renderScene({route: {key: '1'}})).toMatchSnapshot()

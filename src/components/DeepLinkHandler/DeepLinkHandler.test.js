@@ -7,6 +7,7 @@ jest.mock('react-native-htmlview', () => {})
 jest.mock('react-native-onesignal', () => ({
   addEventListener: jest.fn()
 }))
+jest.mock('react-native-reanimated', () => require('react-native-reanimated/mock'))
 jest.useFakeTimers()
 
 const user = {id: '1'}
