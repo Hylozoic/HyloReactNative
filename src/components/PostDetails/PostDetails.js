@@ -70,14 +70,14 @@ export default class PostDetails extends React.Component {
     const commentTextAsHtml = toHtml(commentText)
 
     if (!isEmpty(commentTextAsHtml)) {
-      this.setState({submitting: true})
+      this.setState(() => ({ submitting: true }))
       return this.props.createComment(commentTextAsHtml)
         .then(({ error }) => {
           if (error) {
             Alert.alert("Your comment couldn't be saved; please try again.")
-            this.setState({submitting: false})
+            this.setState(() => ({ submitting: false }))
           } else {
-            this.setState({commentText: '', submitting: false})
+            this.setState(() => ({ commentText: '', submitting: false }))
             // Scrolls to the last comment (the one that was created)
             this.refs.comments.getWrappedInstance().scrollToEnd()
           }
@@ -86,7 +86,7 @@ export default class PostDetails extends React.Component {
   }
 
   handleCommentOnChange = (commentText) => {
-    this.setState({commentText})
+    this.setState(() => ({ commentText }))
   }
 
   render () {
@@ -201,9 +201,11 @@ export function CommentPrompt ({ currentUser, onChange, onSubmit, submitting, co
 
 export function Files ({ urls }) {
   return <View style={styles.files}>
-    {urls.map(url => <TouchableOpacity key={url} onPress={openUrlFn(url)}>
-      <FileLabel url={url} />
-    </TouchableOpacity>)}
+    {urls.map(url =>
+      <TouchableOpacity key={url} onPress={openUrlFn(url)}>
+        <FileLabel url={url} />
+      </TouchableOpacity>
+    )}
   </View>
 }
 

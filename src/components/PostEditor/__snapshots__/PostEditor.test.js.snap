@@ -259,6 +259,12 @@ exports[`PostEditor renders correctly while saving 1`] = `
               placeholder="What else should we know?"
               placeholderTextColor="#c0c6cd"
               rejectResponderTermination={true}
+              selection={
+                Object {
+                  "end": 0,
+                  "start": 0,
+                }
+              }
               underlineColorAndroid="transparent"
               value=""
             />
@@ -481,6 +487,12 @@ exports[`PostEditor renders correctly while saving 2`] = `
               placeholder="What else should we know?"
               placeholderTextColor="#c0c6cd"
               rejectResponderTermination={true}
+              selection={
+                Object {
+                  "end": 0,
+                  "start": 0,
+                }
+              }
               underlineColorAndroid="transparent"
               value=""
             />

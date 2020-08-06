@@ -38,7 +38,7 @@ it('handleSubmit', () => {
 describe('mentions and topics', () => {
   it('inserts the markup for a mention', () => {
     const instance = TestRenderer.create(<InlineEditor {...props} />).getInstance()
-    instance.handleSelectionChange({ nativeEvent: { selection: {start: 5, end: 5} } })
+    instance._onSelectionChange({ nativeEvent: { selection: {start: 5, end: 5} } })
     instance.insertMention({ id: 333, name: 'sdfdfz' })
     expect(props.onChange).toHaveBeenCalledWith('some [sdfdfz:333] text')
   })
@@ -52,20 +52,20 @@ describe('mentions and topics', () => {
   })
 })
 
-it('handleInputFocus', () => {
+it('_onFocus', () => {
   const instance = TestRenderer.create(<InlineEditor {...props} />).getInstance()
-  instance.handleInputFocus()
+  instance._onFocus()
   expect(instance.state.isFocused).toBeTruthy()
 })
 
-it('handleInputBlur', () => {
+it('_onBlur', () => {
   const newProps = {
     ...props,
     value: '   '
   }
   const instance = TestRenderer.create(<InlineEditor {...newProps} />).getInstance()
   instance.setState({isFocused: true})
-  instance.handleInputBlur()
+  instance._onBlur()
   expect(instance.state.isFocused).toBeFalsy()
   expect(props.onChange).toHaveBeenCalledWith('')
 })

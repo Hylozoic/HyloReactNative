@@ -64,29 +64,18 @@ export class InlineEditor extends React.PureComponent {
 
     if (onInsertCallback) onInsertCallback([choice])
 
-    // We use a timeout since the onChange needs to propagate the new value change before setting the new selection
+    // We use a timeout since the onChange needs to propagate
+    // the new value change before setting the new selection
     setTimeout(() => {
-      this.setState({selection: {start: newSelectionStart, end: newSelectionStart}})
+      this.setState(() => ({
+        selection: {
+          start: newSelectionStart,
+          end: newSelectionStart
+        }
+      }))
       this.editorInput.focus()
     }, 100)
   }
-
-  handleInputFocus = () => {
-    this.setState({ isFocused: true })
-    this.props.onFocusToggle && this.props.onFocusToggle(true)
-  }
-  handleInputBlur = () => {
-    if (isEmpty(trim(this.props.value))) this.props.onChange('')
-    this.setState({ isFocused: false })
-    this.props.onFocusToggle && this.props.onFocusToggle(false)
-  }
-
-  handleSubmit = () => {
-    this.editorInput.blur()
-    this.props.onSubmit(this.props.value)
-  }
-
-  handleSelectionChange = ({ nativeEvent: { selection } }) => this.setState({ selection })
 
   openPersonPicker = () => {
     const { navigation } = this.props
@@ -113,6 +102,38 @@ export class InlineEditor extends React.PureComponent {
       getSearchSuggestions: getTopicsForAutocompleteWithNew
     })
   }
+ 
+  // Workaround to TextInput issues on Android: https://github.com/facebook/react-native/issues/17236
+  _selection () {
+    if (this.state.isFocused)
+      return this.props.selection
+
+    return { start: 0, end: 0 }
+  }
+
+  _onFocus = () => {
+    this.setState(() => ({
+      isFocused: true,
+      selection: { start: 1, end: 1 }
+    }))
+    this.props.onFocusToggle && this.props.onFocusToggle(true)
+  }
+
+  _onBlur = () => {
+    if (isEmpty(trim(this.props.value))) this.props.onChange('')
+    this.setState(() => ({ isFocused: false }))
+    this.props.onFocusToggle && this.props.onFocusToggle(false)
+  }
+
+  _onSelectionChange = ({ nativeEvent: { selection } }) => {
+    this.setState(() => ({ selection }))
+  }
+
+  handleSubmit = () => {
+    this.setState(() => ({ selection: { start: 0, end: 0 } }))
+    this.editorInput.blur()
+    this.props.onSubmit(this.props.value)
+  }
 
   render () {
     const {
@@ -125,7 +146,7 @@ export class InlineEditor extends React.PureComponent {
       containerStyle,
       inputStyle
     } = this.props
-    const { isFocused, height, selection } = this.state
+    const { isFocused, height } = this.state
     const hitSlop = { top: 7, bottom: 7, left: 7, right: 7 }
     // Calculates a height based on textInput content size with the following constraint: 40 < height < maxHeight
     // const calculatedHeight = Math.round(Math.min(Math.max((isEmpty(value) ? minTextInputHeight : height) + (isFocused ? 45 : 0), minTextInputHeight), 190))
@@ -133,21 +154,21 @@ export class InlineEditor extends React.PureComponent {
     return <View style={[styles.container, containerStyle]}>
       <View style={styles.wrapper}>
         <TextInput
+          multiline
           editable={!!editable && !submitting}
           onChangeText={onChange}
-          multiline
           blurOnSubmit={false}
-          onContentSizeChange={(event) => this.setState({height: Math.round(event.nativeEvent.contentSize.height)})}
-          selection={selection}
-          onSelectionChange={this.handleSelectionChange}
+          onContentSizeChange={event => this.setState({ height: Math.round(event.nativeEvent.contentSize.height) })}
+          selection={this._selection()}
+          onSelectionChange={this._onSelectionChange}
           placeholder={placeholder}
           placeholderTextColor={rhino30}
           style={[styles.textInput, inputStyle]}
           underlineColorAndroid='transparent'
           value={value}
           ref={(input) => { this.editorInput = input }}
-          onFocus={this.handleInputFocus}
-          onBlur={this.handleInputBlur}
+          onFocus={this._onFocus}
+          onBlur={this._onBlur}
         />
         {onSubmit && !isFocused && <SubmitButton submitting={submitting} active={!!isFocused} handleSubmit={this.handleSubmit} />}
       </View>
