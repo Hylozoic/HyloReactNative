@@ -826,6 +826,7 @@
 				PRODUCT_NAME = HyloReactNative;
 				PROVISIONING_PROFILE_SPECIFIER = "match Development com.hylo.HyloA";
 				TVOS_DEPLOYMENT_TARGET = "";
+				VALID_ARCHS = "$(ARCHS_STANDARD)";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -853,6 +854,7 @@
 				PRODUCT_NAME = HyloReactNative;
 				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.hylo.HyloA";
 				TVOS_DEPLOYMENT_TARGET = "";
+				VALID_ARCHS = "$(ARCHS_STANDARD)";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;

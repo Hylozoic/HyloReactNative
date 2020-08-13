@@ -2,6 +2,7 @@ import { connect } from 'react-redux'
 import { get } from 'lodash/fp'
 import {
   login,
+  loginWithApple,
   loginWithFacebook,
   loginWithGoogle,
   loginByToken
@@ -34,6 +35,7 @@ export function mapStateToProps (state, props) {
 
 export const mapDispatchToProps = {
   registerDevice,
+  loginWithApple,
   loginWithFacebook,
   loginWithGoogle,
   login,

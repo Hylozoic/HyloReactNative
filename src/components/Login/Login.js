@@ -12,6 +12,7 @@ import { isIOS } from 'util/platform'
 import NetInfo from "@react-native-community/netinfo";
 import validator from 'validator'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
+import AppleLoginButton from './AppleLoginButton'
 import FbLoginButton from './FbLoginButton'
 import GoogleLoginButton from './GoogleLoginButton'
 import styles from './Login.styles'
@@ -84,8 +85,9 @@ export default class Login extends React.Component {
 
   render () {
     const {
-      loginWithGoogle, formError, loginWithFacebook, pending,
-      goToResetPassword, goToSignup, bannerMessage
+      loginWithApple, loginWithFacebook, loginWithGoogle,
+      formError, pending, goToResetPassword, goToSignup,
+      bannerMessage
     } = this.props
     const { ssoError, emailIsValid, isConnected } = this.state
 
@@ -157,11 +159,15 @@ export default class Login extends React.Component {
           <Text style={styles.loginText}>Log In</Text>
         </TouchableOpacity>
       </View>
-      {!isIOS && <React.Fragment>
+      <React.Fragment>
         <View style={styles.connectWith}>
           <Text style={styles.helpText}>Or connect with:</Text>
         </View>
         <View style={styles.paddedRowWithOpacity}>
+          <AppleLoginButton
+            onLoginFinished={loginWithApple}
+            createErrorNotification={this.createErrorNotification}
+          />
           <FbLoginButton
             onLoginFinished={loginWithFacebook}
             createErrorNotification={this.createErrorNotification}
@@ -171,7 +177,7 @@ export default class Login extends React.Component {
             createErrorNotification={this.createErrorNotification}
           />
         </View>
-      </React.Fragment>}
+      </React.Fragment>
       <SignupLink goToSignup={goToSignup} />
     </ScrollView>
   }

@@ -5,6 +5,7 @@ import { isEmpty } from 'lodash'
 
 export const LOGIN = 'LOGIN'
 export const LOGIN_BY_TOKEN = 'LOGIN_BY_TOKEN'
+export const LOGIN_WITH_APPLE = 'LOGIN_WITH_APPLE'
 export const LOGIN_WITH_FACEBOOK = 'LOGIN_WITH_FACEBOOK'
 export const LOGIN_WITH_GOOGLE = 'LOGIN_WITH_GOOGLE'
 export const LOGOUT = 'LOGOUT'
@@ -24,6 +25,15 @@ export function loginByToken (userId, loginToken) {
     type: LOGIN_BY_TOKEN,
     payload: {
       api: {method: 'post', path: '/noo/login/token', params: {u: userId, t: loginToken}}
+    }
+  }
+}
+
+export function loginWithApple (accessToken) {
+  return {
+    type: LOGIN_WITH_APPLE,
+    payload: {
+      api: {method: 'post', path: `/noo/login/apple-token/oauth?access_token=${accessToken}`}
     }
   }
 }
