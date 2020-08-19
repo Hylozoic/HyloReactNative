@@ -46,13 +46,13 @@ export const mapDispatchToProps = {
 export function mergeProps (stateProps, dispatchProps, ownProps) {
   const {
     registerDevice,
+    loginWithApple,
     loginWithGoogle,
     loginWithFacebook,
     login,
     loginByToken,
     fetchCurrentUser
   } = dispatchProps
-
   const finishLogin = async (action) => {
     if (action.error) {
       const errorMessage = get('payload.response.body', action)
@@ -70,6 +70,9 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
   return {
     ...ownProps,
     ...stateProps,
+    ...dispatchProps,
+    loginWithApple: (token) =>
+      loginWithApple(token).then(finishLogin),
     loginWithFacebook: (token) =>
       loginWithFacebook(token).then(finishLogin),
     loginWithGoogle: (token) =>

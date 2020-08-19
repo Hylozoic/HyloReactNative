@@ -164,10 +164,10 @@ export default class Login extends React.Component {
           <Text style={styles.helpText}>Or connect with:</Text>
         </View>
         <View style={styles.paddedRowWithOpacity}>
-          <AppleLoginButton
+          {isIOS && <AppleLoginButton
             onLoginFinished={loginWithApple}
             createErrorNotification={this.createErrorNotification}
-          />
+          />}
           <FbLoginButton
             onLoginFinished={loginWithFacebook}
             createErrorNotification={this.createErrorNotification}

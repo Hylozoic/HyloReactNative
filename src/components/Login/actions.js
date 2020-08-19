@@ -29,11 +29,11 @@ export function loginByToken (userId, loginToken) {
   }
 }
 
-export function loginWithApple (accessToken) {
+export function loginWithApple (params) {
   return {
     type: LOGIN_WITH_APPLE,
     payload: {
-      api: {method: 'post', path: `/noo/login/apple-token/oauth?access_token=${accessToken}`}
+      api: {method: 'post', path: `/noo/login/apple/oauth`, params}
     }
   }
 }
