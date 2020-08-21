@@ -20,13 +20,12 @@ export async function onAppleButtonPress(authorizedCallback) {
     // 
     // get current authentication state for user
     // /!\ This method must be tested on a real device. On the iOS simulator it always throws an error.
-    // const credentialState = await appleAuth.getCredentialStateForUser(appleAuthRequestResponse.user)
-
+    const credentialState = await appleAuth.getCredentialStateForUser(appleAuthRequestResponse.user)
     // use credentialState response to ensure the user is authenticated
-    // if (credentialState === AppleAuthCredentialState.AUTHORIZED) {
+    if (credentialState === AppleAuthCredentialState.AUTHORIZED) {
       // user is authenticated
       authorizedCallback(appleAuthRequestResponse)
-    // }
+    }
   } catch (error) {
     console.log('!!!! error in onAppleButtonPress:', error)
   }
