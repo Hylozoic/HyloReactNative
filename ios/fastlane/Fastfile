@@ -18,9 +18,9 @@ platform :ios do
   desc "Create OneSignal notification extension profile."
   lane :createOneSignalProfile do
     produce(
-        app_identifier: "com.hylo.HyloA.OneSignalNotificationServiceExtension",
-        app_name: "hylo OneSignalNotificationServiceExtension",
-        skip_itc: true
+      app_identifier: "com.hylo.HyloA.OneSignalNotificationServiceExtension",
+      app_name: "hylo OneSignalNotificationServiceExtension",
+      skip_itc: true
     )
   end
 
@@ -28,13 +28,10 @@ platform :ios do
   desc "This will also make sure the profile is up to date."
   lane :beta do |options|
     match(
+      app_identifier: ["com.hylo.HyloA", "com.hylo.HyloA.OneSignalNotificationServiceExtension"],
       type: "appstore",
       force_for_new_devices: true,
       readonly: true
-    )
-    match(
-      app_identifier: ["com.hylo.HyloA", "com.hylo.HyloA.OneSignalNotificationServiceExtension"],
-      type: "appstore",
     )
     if !options[:ci]
       increment_build_number(
@@ -55,8 +52,8 @@ platform :ios do
   desc "This builds using the connection with metro running in terminal."
   lane :dev do
     match(
-      type: "development",
-      readonly: true
+      app_identifier: ["com.hylo.HyloA", "com.hylo.HyloA.OneSignalNotificationServiceExtension"],
+      type: "development"
     )
     gym(
      scheme: "HyloReactNative",
