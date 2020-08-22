@@ -1,9 +1,6 @@
 import React from 'react'
-import { TouchableOpacity, Text } from 'react-native'
 import { GoogleSignin } from '@react-native-community/google-signin'
 import Button from 'components/Button'
-import Icon from '../Icon'
-import styles from './Login.styles'
 
 export default class GoogleLoginButton extends React.Component {
   constructor (props) {

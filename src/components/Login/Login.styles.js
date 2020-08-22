@@ -94,7 +94,7 @@ export default {
     textAlign: 'center',
     fontFamily: 'Circular-Book',
     fontSize: 18,
-    lineHeight: isIOS ? 32 : 28
+    lineHeight: 34
   },
   
   // Connect with:
@@ -163,7 +163,7 @@ export default {
     flexDirection: 'row',
     borderWidth: StyleSheet.hairlineWidth,
     borderRadius: 5,
-    minHeight: 40
+    minHeight: 45
   },
   loginButton: {
     flex: 1,

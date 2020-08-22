@@ -1,10 +1,6 @@
 import React from 'react'
-import { TouchableOpacity, Text } from 'react-native'
 import { AccessToken, LoginManager } from 'react-native-fbsdk'
 import Button from 'components/Button'
-
-import Icon from '../Icon'
-import styles from './Login.styles'
 
 export const permissions = ['public_profile', 'user_friends', 'email']
 
@@ -31,7 +27,7 @@ export default class FbLoginButton extends React.Component {
   }
 
   signIn = () => {
-    return this.LoginManager.logInWithReadPermissions(permissions)
+    return this.LoginManager.logInWithPermissions(permissions)
     .then(
       result => result.isCancelled || this.handleResult(null, result)
     )
