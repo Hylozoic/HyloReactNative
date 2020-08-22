@@ -3,7 +3,7 @@ import loginStyles from '../Login/Login.styles'
 import { caribbeanGreen } from 'style/colors'
 
 const bgImageWidth = Dimensions.get('window').width
-const bgImageHeight = bgImageWidth * 0.78
+const bgImageHeight = bgImageWidth * 0.6
 
 export default {
   container: {
@@ -52,20 +52,18 @@ export default {
     fontSize: 16,
     marginBottom: 10
   },
-  connectWith: {
-    ...loginStyles.helpText,
-    textAlign: 'center',
-    marginBottom: 16
-  },
-  socialButtons: {
-    flex: 1,
-    flexDirection: 'row',
-    opacity: 0.7,
-    marginBottom: 30
-  },
+  
+  // Connect with
+  connectWith: loginStyles.connectWith,
+  connectWithText: loginStyles.connectWithText,
+  appleLoginButton: loginStyles.appleLoginButton,
+  facebookLoginButton: loginStyles.facebookLoginButton,
+  googleLoginButton: loginStyles.googleLoginButton,
+
   login: {
     flexDirection: 'row',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    marginTop: 20
   },
   haveAccount: {
     ...loginStyles.helpText

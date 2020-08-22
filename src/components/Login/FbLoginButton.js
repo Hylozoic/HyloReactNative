@@ -1,6 +1,7 @@
 import React from 'react'
 import { TouchableOpacity, Text } from 'react-native'
 import { AccessToken, LoginManager } from 'react-native-fbsdk'
+import Button from 'components/Button'
 
 import Icon from '../Icon'
 import styles from './Login.styles'
@@ -40,11 +41,22 @@ export default class FbLoginButton extends React.Component {
   }
 
   render () {
-    return <TouchableOpacity style={styles.facebookLoginContainer}
-      onPress={this.signIn}>
-      <Text style={styles.heavyText}>
-        <Icon name='Facebook' size={12} />  Facebook
-      </Text>
-    </TouchableOpacity>
+    const style = {
+      fontSize: 16,
+      width: 160,
+      height: 35,
+      backgroundColor: '#1877F2',
+      ...this.props.style
+  }
+    const iconStyle = {
+      fontSize: 13,
+      ...this.props.iconStyle
+    }
+
+    return <Button
+      onPress={this.signIn}
+      iconName='Facebook'
+      style={style}
+      iconStyle={iconStyle}>Facebook</Button>
   }
 }

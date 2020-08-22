@@ -114,7 +114,7 @@ export default class Login extends React.Component {
               autoCapitalize='none'
               autoCorrect={false}
               keyboardType='email-address'
-              // UPRADE TODO: Fix with this: https://stackoverflow.com/a/59626713
+              // UPGRADE TODO: Fix with this: https://stackoverflow.com/a/59626713
               // onSubmitEditing={() => focus(this.passwordInput)}
               underlineColorAndroid={styles.androidInvisibleUnderline} />
           </View>
@@ -127,6 +127,9 @@ export default class Login extends React.Component {
 
       <View style={styles.labelRow}>
         <Text style={styles.labelText}>Password</Text>
+        <TouchableOpacity onPress={goToResetPassword}>
+          <Text style={styles.forgotPasswordText}>Forgot your password?</Text>
+        </TouchableOpacity>
       </View>
       <View style={styles.paddedRow}>
         <View style={styles.paddedBorder}>
@@ -149,35 +152,29 @@ export default class Login extends React.Component {
           </View>
         </View>
       </View>
-      <View style={styles.labelRow}>
-        <TouchableOpacity onPress={goToResetPassword}>
-          <Text style={styles.forgotPasswordText}>Forgot your password?</Text>
-        </TouchableOpacity>
-      </View>
       <View style={styles.paddedRow}>
         <TouchableOpacity onPress={this.login} style={styles.loginButton}>
           <Text style={styles.loginText}>Log In</Text>
         </TouchableOpacity>
       </View>
-      <React.Fragment>
-        <View style={styles.connectWith}>
-          <Text style={styles.helpText}>Or connect with:</Text>
-        </View>
-        <View style={styles.paddedRowWithOpacity}>
-          {isIOS && <AppleLoginButton
-            onLoginFinished={loginWithApple}
-            createErrorNotification={this.createErrorNotification}
-          />}
-          <FbLoginButton
-            onLoginFinished={loginWithFacebook}
-            createErrorNotification={this.createErrorNotification}
-          />
-          <GoogleLoginButton
-            onLoginFinished={loginWithGoogle}
-            createErrorNotification={this.createErrorNotification}
-          />
-        </View>
-      </React.Fragment>
+      <View style={styles.connectWith}>
+        <Text style={styles.connectWithText}>Or connect with:</Text>
+        {isIOS && <AppleLoginButton
+          style={styles.appleLoginButton}
+          onLoginFinished={loginWithApple}
+          createErrorNotification={this.createErrorNotification}
+        />}
+        <FbLoginButton
+          style={styles.facebookLoginButton}
+          onLoginFinished={loginWithFacebook}
+          createErrorNotification={this.createErrorNotification}
+        />
+        <GoogleLoginButton
+          style={styles.googleLoginButton}
+          onLoginFinished={loginWithGoogle}
+          createErrorNotification={this.createErrorNotification}
+        />
+      </View>
       <SignupLink goToSignup={goToSignup} />
     </ScrollView>
   }
@@ -185,9 +182,9 @@ export default class Login extends React.Component {
 
 export function SignupLink ({goToSignup}) {
   return <View style={styles.signup}>
-    <Text style={styles.helpText}>Dont have an account? </Text>
+    <Text style={styles.signupText}>Dont have an account? </Text>
     <TouchableOpacity onPress={goToSignup}>
-      <Text style={styles.signupText}>Sign up now</Text>
+      <Text style={styles.signupLink}>Sign up now</Text>
     </TouchableOpacity>
   </View>
 }

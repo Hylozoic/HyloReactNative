@@ -32,7 +32,8 @@ export async function onAppleButtonPress(authorizedCallback) {
 }
 
 export default function AppleLoginButton({
-  onLoginFinished
+  onLoginFinished,
+  style: providedStyle
 }) {
   useEffect(() => {
     // onCredentialRevoked returns a function that will remove the event listener. useEffect will call this function when the component unmounts
@@ -41,13 +42,16 @@ export default function AppleLoginButton({
     });
   }, []) // passing in an empty array as the second argument ensures this is only ran once when component mounts initially.
 
+  const style = {
+    width: 140,
+    height: 35,
+    ...providedStyle
+  }
+
   return <AppleButton
     buttonStyle={AppleButton.Style.BLACK}
     buttonType={AppleButton.Type.SIGN_IN}
     cornerRadius={20}
-    style={{
-      width: 120,
-      height: 35,
-    }}
+    style={style}
     onPress={() => onAppleButtonPress(onLoginFinished)} />
 }

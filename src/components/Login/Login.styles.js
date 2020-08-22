@@ -6,13 +6,10 @@ const screenHeight = Dimensions.get('window').height
 const smallScreenFudge = screenHeight < 550 ? 0.6 : 1
 
 const mixins = {
-  loginContainer: {
-    height: 36,
-    backgroundColor: 'lightgray',
-    justifyContent: 'center',
-    alignItems: 'center',
-    opacity: 0.5,
-    marginLeft: 1
+  helpText: {
+    fontFamily: 'Circular-Book',
+    fontSize: 14,
+    color: rhino60
   },
   icon: {
     fontSize: 20,
@@ -64,7 +61,7 @@ export default {
   logo: {
     height: 80,
     width: 80,
-    marginTop: (screenHeight - 480) * 0.6,
+    marginTop: (screenHeight - 550) * 0.6,
     marginBottom: 10
   },
   title: {
@@ -86,26 +83,10 @@ export default {
     justifyContent: 'center',
     alignItems: 'center'
   },
-  facebookLoginContainer: {
-    ...mixins.loginContainer,
-    borderTopLeftRadius: 50,
-    borderBottomLeftRadius: 50,
-    flex: 0.5
-  },
-  googleLoginContainer: {
-    ...mixins.loginContainer,
-    borderTopRightRadius: 50,
-    borderBottomRightRadius: 50,
-    flex: 0.5
-  },
-  signup: {
-    marginTop: 10,
-    marginBottom: 20,
-    flexDirection: 'row'
-  },
-  signupText: {
-    color: caribbeanGreen,
-    fontFamily: 'Circular-Bold'
+  forgotPasswordText: {
+    fontFamily: 'Circular-Book',
+    fontSize: 14,
+    color: caribbeanGreen
   },
   loginText: {
     color: 'white',
@@ -115,20 +96,58 @@ export default {
     fontSize: 18,
     lineHeight: isIOS ? 32 : 28
   },
+  
+  // Connect with:
   connectWith: {
-    marginTop: 4 * smallScreenFudge,
-    marginBottom: 14 * smallScreenFudge
+    marginTop: 10,
+    display: 'flex',
+    flexWrap: 'wrap',
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    paddingLeft: 30,
+    paddingRight: 30
   },
-  forgotPasswordText: {
-    fontFamily: 'Circular-Book',
-    fontSize: 14,
-    color: caribbeanGreen
+  connectWithText: {
+    ...mixins.helpText,
+    flexBasis: '100%',
+    textAlign: 'center',
+    marginBottom: 15
   },
-  helpText: {
-    fontFamily: 'Circular-Book',
-    fontSize: 14,
-    color: rhino60
+  appleLoginButton: {
+    flexBasis: '60%',
+    height: 40,
+    textAlign: 'center',
+    marginBottom: 10
   },
+  facebookLoginButton: {
+    height: 40,
+    width: '60%',
+    marginBottom: 10
+  },
+  googleLoginButton: {
+    height: 40,
+    width: '60%'
+  },
+
+  // Signup
+  signupText: {
+    ...mixins.helpText,
+    fontSize: 16
+  },
+  signup: {
+    marginTop: 50,
+    marginBottom: 20,
+    flexDirection: 'row'
+  },
+  signupLink: {
+    fontSize: 16,
+    color: caribbeanGreen,
+    fontFamily: 'Circular-Bold'
+  },
+
+  // Misc
+  helpText: mixins.helpText,
   paddedRow: mixins.paddedRow,
   paddedRowWithOpacity: {
     ...mixins.paddedRow,
@@ -153,7 +172,7 @@ export default {
     height: 36,
     borderRadius: 50,
     justifyContent: 'center',
-    marginTop: 22
+    marginTop: 5
   },
   paddedBorderValid: {
     flex: 1,

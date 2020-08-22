@@ -1,6 +1,7 @@
 import React from 'react'
 import { TouchableOpacity, Text } from 'react-native'
 import { GoogleSignin } from '@react-native-community/google-signin'
+import Button from 'components/Button'
 import Icon from '../Icon'
 import styles from './Login.styles'
 
@@ -9,6 +10,7 @@ export default class GoogleLoginButton extends React.Component {
     super(props)
     this.GoogleSignin = props.mocks ? props.mocks.GoogleSignin : GoogleSignin
   }
+
   componentDidMount () {
     this.GoogleSignin.configure({
       iosClientId: process.env.IOS_GOOGLE_CLIENT_ID,
@@ -26,10 +28,22 @@ export default class GoogleLoginButton extends React.Component {
   }
 
   render () {
-    return <TouchableOpacity style={styles.googleLoginContainer} onPress={this.signIn}>
-      <Text style={styles.heavyText}>
-        <Icon name='Google' size={12} />  Google
-      </Text>
-    </TouchableOpacity>
+    const style = {
+      fontSize: 16,
+      width: 160,
+      height: 35,
+      backgroundColor: '#dd4b39',
+      ...this.props.style
+    }
+    const iconStyle = {
+      fontSize: 13,
+      ...this.props.iconStyle
+    }
+
+    return <Button
+      onPress={this.signIn}
+      iconName='Google'
+      style={style}
+      iconStyle={iconStyle}>Google</Button>
   }
 }

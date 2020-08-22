@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { loginWithFacebook, loginWithGoogle } from '../Login/actions'
+import { loginWithApple, loginWithFacebook, loginWithGoogle } from '../Login/actions'
 import { getPending } from '../Login/Login.store'
 
 export function mapStateToProps (state, props) {
@@ -14,7 +14,7 @@ export function mapStateToProps (state, props) {
 }
 
 export const mapDispatchToProps = {
-  loginWithFacebook, loginWithGoogle
+  loginWithApple, loginWithFacebook, loginWithGoogle
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)

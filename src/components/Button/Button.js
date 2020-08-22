@@ -6,6 +6,7 @@ import { omit } from 'lodash/fp'
 
 export default function Button ({
   style = {},
+  iconStyle: providedIconStyle = {},
   text,
   children,
   onPress,
@@ -28,10 +29,9 @@ export default function Button ({
   const backgroundColor = (disabled
     ? style.disabledBackgroundColor
     : style.backgroundColor) || caribbeanGreen
-
   const buttonStyle = {...styles.button, backgroundColor, height, borderColor}
   const textStyle = {...styles.text, color, fontSize}
-  const iconStyle = {...styles.icon, color}
+  const iconStyle = {...styles.icon, color, ...providedIconStyle}
 
   return <View style={containerStyle}>
     <TouchableOpacity disabled={disabled} onPress={disabled ? () => {} : onPress} style={styles.wrapper}>
