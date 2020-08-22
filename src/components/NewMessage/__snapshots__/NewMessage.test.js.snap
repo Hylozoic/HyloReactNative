@@ -13,9 +13,8 @@ exports[`NewMessage renders correctly 1`] = `
     <View>
       <Button
         onPress={[Function]}
-      >
-        Add Participant
-      </Button>
+        text='Add Participant'
+      />
     </View>
   </ScrollViewMock>
   <MessageInput
@@ -41,9 +40,8 @@ exports[`NewMessage renders correctly 2`] = `
     <View>
       <Button
         onPress={[Function]}
-      >
-        Add Participant
-      </Button>
+        text='Add Participant'
+      />
     </View>
   </ScrollViewMock>
   <MessageInput

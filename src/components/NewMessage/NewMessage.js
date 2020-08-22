@@ -112,9 +112,10 @@ export default class NewMessage extends React.Component {
               key={index} />)}
         </TouchableOpacity>
         <View style={styles.addParticipantButtonWrapper}>
-          <Button style={styles.addParticipantButton} onPress={() => this.openParticipantChooser()}>
-            Add Participant
-          </Button>
+          <Button
+            text='Add Participant' 
+            style={styles.addParticipantButton}
+            onPress={() => this.openParticipantChooser()} />
         </View>
       </ScrollView>
       <MessageInput

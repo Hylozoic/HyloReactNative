@@ -4,15 +4,16 @@ import { caribbeanGreen, white } from 'style/colors'
 import Icon from '../Icon'
 import { omit } from 'lodash/fp'
 
-export default function Button ({
-  style = {},
-  iconStyle: providedIconStyle = {},
-  text,
-  children,
-  onPress,
-  iconName,
-  disabled
-}) {
+export default function Button (props) {
+  const {
+    style = {},
+    iconStyle: providedIconStyle = {},
+    text,
+    customIconRender,
+    onPress,
+    iconName,
+    disabled
+  } = props
   const {
     color = white,
     borderColor = white,
@@ -37,8 +38,9 @@ export default function Button ({
     <TouchableOpacity disabled={disabled} onPress={disabled ? () => {} : onPress} style={styles.wrapper}>
       <View style={buttonStyle}>
         <View style={styles.buttonInner}>
-          {iconName && <Icon name={iconName} style={iconStyle} />}
-          <Text style={textStyle}>{text || children}</Text>
+          {customIconRender && customIconRender({...props, name: iconName, style: iconStyle})}
+          {!customIconRender && iconName && <Icon name={iconName} style={iconStyle} />}
+          <Text style={textStyle}>{text}</Text>
         </View>
       </View>
     </TouchableOpacity>

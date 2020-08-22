@@ -41,6 +41,7 @@ export default class GoogleLoginButton extends React.Component {
       onPress={this.signIn}
       iconName='Google'
       style={style}
-      iconStyle={iconStyle}>Google</Button>
+      iconStyle={iconStyle}
+      text='Sign in with Google' />
   }
 }

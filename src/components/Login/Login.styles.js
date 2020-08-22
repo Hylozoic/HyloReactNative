@@ -51,6 +51,10 @@ const mixins = {
     right: 0,
     marginTop: isIOS ? 20 : 0,
     zIndex: 2
+  },
+  socialButton: {
+    height: 40,
+    width: '70%'
   }
 }
 
@@ -115,20 +119,14 @@ export default {
     marginBottom: 15
   },
   appleLoginButton: {
-    flexBasis: '60%',
-    height: 40,
-    textAlign: 'center',
+    ...mixins.socialButton,
     marginBottom: 10
   },
   facebookLoginButton: {
-    height: 40,
-    width: '60%',
+    ...mixins.socialButton,
     marginBottom: 10
   },
-  googleLoginButton: {
-    height: 40,
-    width: '60%'
-  },
+  googleLoginButton: mixins.socialButton,
 
   // Signup
   signupText: {
