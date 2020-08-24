@@ -28,20 +28,21 @@ export default class GoogleLoginButton extends React.Component {
     const style = {
       fontSize: 16,
       width: 160,
-      height: 35,
+      height: 40,
+      borderRadius: 5,
       backgroundColor: '#dd4b39',
-      ...this.props.style
-    }
-    const iconStyle = {
-      fontSize: 13,
-      ...this.props.iconStyle
+      ...this.props.style,
+      icon: {
+        fontSize: 18,
+        marginRight: 3,
+        ...this.props.style.icon,
+      }
     }
 
     return <Button
       onPress={this.signIn}
       iconName='Google'
       style={style}
-      iconStyle={iconStyle}
       text='Sign in with Google' />
   }
 }

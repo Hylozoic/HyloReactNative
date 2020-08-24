@@ -44,14 +44,14 @@ export default function AppleLoginButton({
 
   const style = {
     width: 140,
-    height: 35,
-    ...providedStyle
+    height: 40,
+    ...providedStyle,
   }
 
   return <AppleButton
     buttonStyle={AppleButton.Style.BLACK}
     buttonType={AppleButton.Type.SIGN_IN}
-    cornerRadius={20}
+    cornerRadius={5}
     style={style}
     onPress={() => onAppleButtonPress(onLoginFinished)} />
 }

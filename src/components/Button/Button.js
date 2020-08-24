@@ -6,8 +6,7 @@ import { omit } from 'lodash/fp'
 
 export default function Button (props) {
   const {
-    style = {},
-    iconStyle: providedIconStyle = {},
+    style: providedStyles = {},
     text,
     customIconRender,
     onPress,
@@ -16,23 +15,28 @@ export default function Button (props) {
   } = props
   const {
     color = white,
+    borderRadius = 100,
     borderColor = white,
     fontSize = 13,
     height = 30
-  } = style
+  } = providedStyles
 
   const containerStyle = {
     ...styles.container,
     ...omit([
-      'color', 'backgroundColor', 'disabledBackgroundColor', 'fontSize', 'height'
-    ], style)}
+      'color',
+      'backgroundColor',
+      'disabledBackgroundColor',
+      'fontSize',
+      'height'
+    ], providedStyles)}
 
   const backgroundColor = (disabled
-    ? style.disabledBackgroundColor
-    : style.backgroundColor) || caribbeanGreen
-  const buttonStyle = {...styles.button, backgroundColor, height, borderColor}
+    ? providedStyles.disabledBackgroundColor
+    : providedStyles.backgroundColor) || caribbeanGreen
+  const buttonStyle = {...styles.button, backgroundColor, height, borderRadius, borderColor}
   const textStyle = {...styles.text, color, fontSize}
-  const iconStyle = {...styles.icon, color, ...providedIconStyle}
+  const iconStyle = {...styles.icon, color, ...providedStyles.icon}
 
   return <View style={containerStyle}>
     <TouchableOpacity disabled={disabled} onPress={disabled ? () => {} : onPress} style={styles.wrapper}>
@@ -58,7 +62,6 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center',
     flex: 1,
-    borderRadius: 100,
     borderWidth: 1
   },
   buttonInner: {

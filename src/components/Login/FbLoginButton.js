@@ -1,5 +1,5 @@
 import React from 'react'
-import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons'
+import MaterialCommunityIcon from 'react-native-vector-icons/FontAwesome5'
 import { AccessToken, LoginManager } from 'react-native-fbsdk'
 import Button from 'components/Button'
 
@@ -41,18 +41,19 @@ export default class FbLoginButton extends React.Component {
     const style = {
       fontSize: 16,
       width: 160,
-      height: 35,
+      height: 40,
+      borderRadius: 5,
       backgroundColor: '#1877F2',
-      ...this.props.style
-  }
-    const iconStyle = {
-      fontSize: 13,
-      ...this.props.iconStyle
+      ...this.props.style,
+      icon: {
+        fontSize: 20,
+        marginRight: 5,
+        ...this.props.style.icon,
+      }
     }
 
     return <Button
-      text='Login with Facebook'
-      iconStyle={iconStyle}
+      text='Log In With Facebook'
       customIconRender={renderProps =>
         <MaterialCommunityIcon {...renderProps} name='facebook' />
       }

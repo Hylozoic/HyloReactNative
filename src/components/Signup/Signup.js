@@ -51,12 +51,7 @@ export default class Signup extends React.Component {
         <Text style={styles.subTitle}>Stay connected, organized and engaged with your community.</Text>
         <Button text='Sign Up' style={styles.signupButton} onPress={goToSignupFlow} />
         <View style={styles.connectWith}>
-          <Text style={styles.connectWithText}>Or connect with:</Text>
-          {isIOS && <AppleLoginButton
-            style={styles.appleLoginButton}
-            onLoginFinished={loginWithApple}
-            createErrorNotification={this.createErrorNotification}
-          />}
+          <Text style={styles.connectWithText}>Or sign-up using:</Text>
           <FbLoginButton
             style={styles.facebookLoginButton}
             onLoginFinished={loginWithFacebook}
@@ -67,6 +62,11 @@ export default class Signup extends React.Component {
             onLoginFinished={loginWithGoogle}
             createErrorNotification={this.createErrorNotification}
           />
+          {isIOS && <AppleLoginButton
+            style={styles.appleLoginButton}
+            onLoginFinished={loginWithApple}
+            createErrorNotification={this.createErrorNotification}
+          />}
         </View>
         <View style={styles.login}>
           <Text style={styles.haveAccount}>Already have an account? </Text>

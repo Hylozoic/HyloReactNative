@@ -52,9 +52,9 @@ const mixins = {
     marginTop: isIOS ? 20 : 0,
     zIndex: 2
   },
-  socialButton: {
-    height: 40,
-    width: '70%'
+  socialLoginButton: {
+    width: '70%',
+    marginBottom: 10
   }
 }
 
@@ -118,15 +118,9 @@ export default {
     textAlign: 'center',
     marginBottom: 15
   },
-  appleLoginButton: {
-    ...mixins.socialButton,
-    marginBottom: 10
-  },
-  facebookLoginButton: {
-    ...mixins.socialButton,
-    marginBottom: 10
-  },
-  googleLoginButton: mixins.socialButton,
+  appleLoginButton: mixins.socialLoginButton,
+  facebookLoginButton: mixins.socialLoginButton,
+  googleLoginButton: mixins.socialLoginButton,
 
   // Signup
   signupText: {
@@ -134,7 +128,7 @@ export default {
     fontSize: 16
   },
   signup: {
-    marginTop: 50,
+    marginTop: 30,
     marginBottom: 20,
     flexDirection: 'row'
   },
