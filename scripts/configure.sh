@@ -31,7 +31,6 @@ trap 'rm -rf "$mytmpdir"' EXIT
 echo "creating ios/debug.xcconfig"
 
 cat > ios/debug.xcconfig <<EOL
-#include "./Pods/Target Support Files/Pods-HyloReactNative/Pods-HyloReactNative.debug.xcconfig"
 FACEBOOK_APP_ID = $FACEBOOK_APP_ID_DEBUG
 ONESIGNAL_APP_ID = $ONESIGNAL_APP_ID_DEBUG
 
@@ -40,7 +39,6 @@ EOL
 echo "creating ios/release.xcconfig"
 
 cat > ios/release.xcconfig <<EOL
-#include "./Pods/Target Support Files/Pods-HyloReactNative/Pods-HyloReactNative.release.xcconfig"
 FACEBOOK_APP_ID = $FACEBOOK_APP_ID_RELEASE
 ONESIGNAL_APP_ID = $ONESIGNAL_APP_ID_RELEASE
 
