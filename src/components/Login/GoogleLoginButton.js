@@ -15,13 +15,15 @@ export default class GoogleLoginButton extends React.Component {
     })
   }
 
-  signIn = () => {
-    const { onLoginFinished } = this.props
-    return this.GoogleSignin.signIn()
-    .then(user => onLoginFinished(user.accessToken))
-    .catch(() => {
+  signIn = async () => {
+    try {
+      await this.GoogleSignin.signIn()
+      const { accessToken } = await this.GoogleSignin.getTokens()
+
+      this.props.onLoginFinished(accessToken)
+    } catch (error) {
       this.props.createErrorNotification('COULD NOT SIGN IN WITH YOUR GOOGLE ACCOUNT')
-    })
+    }
   }
 
   render () {
@@ -33,7 +35,7 @@ export default class GoogleLoginButton extends React.Component {
       backgroundColor: '#dd4b39',
       ...this.props.style,
       icon: {
-        fontSize: 18,
+        fontSize: 16,
         marginRight: 3,
         ...this.props.style.icon,
       }

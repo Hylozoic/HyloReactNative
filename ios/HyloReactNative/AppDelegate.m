@@ -10,6 +10,7 @@
 #import <React/RCTBridge.h>
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
+#import <RNGoogleSignin/RNGoogleSignin.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <Intercom/Intercom.h>
 
@@ -30,6 +31,10 @@
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
 
+  //  For Facebook SDK
+  [[FBSDKApplicationDelegate sharedInstance] application:application
+                           didFinishLaunchingWithOptions:launchOptions];
+
   // For Intercom
   [Intercom
     setApiKey:@"ios_sdk-b11cb526589263a9890b895d40b934bffa876c43"
@@ -38,6 +43,32 @@
 
   return YES;
 }
+
+
+// AppDelegate.m
+- (BOOL)application:(UIApplication *)application
+            openURL:(nonnull NSURL *)url
+            options:(nonnull NSDictionary<NSString *,id> *)options {
+  return [
+    [FBSDKApplicationDelegate sharedInstance] application:application
+                                                  openURL:url
+                                                  options:options]
+    ||
+    [RNGoogleSignin application:application
+                        openURL:url
+                        options:options];
+}
+
+
+// - (BOOL)application:(UIApplication *)application
+//             openURL:(NSURL *)url
+//             options:(nonnull NSDictionary<UIApplicationOpenURLOptionsKey, id> *)options
+// {
+//   [[FBSDKApplicationDelegate sharedInstance] application:application
+//                                                  openURL:url
+//                                                  options:options];
+//   return YES;
+// }
 
 - (NSURL *)sourceURLForBridge:(RCTBridge *)bridge {
 #if DEBUG

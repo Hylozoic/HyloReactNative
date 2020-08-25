@@ -1,0 +1,6 @@
+module Pods_HyloReactNative {
+  umbrella header "Pods-HyloReactNative-umbrella.h"
+
+  export *
+  module * { export * }
+}

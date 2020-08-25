@@ -63,9 +63,10 @@ SentryHttpTransport ()
 
     NSError *requestError = nil;
     // TODO: We do multiple serializations here, we can improve this
-    NSURLRequest *request = [[SentryNSURLRequest alloc] initStoreRequestWithDsn:self.options.dsn
-                                                                       andEvent:event
-                                                               didFailWithError:&requestError];
+    NSURLRequest *request =
+        [[SentryNSURLRequest alloc] initStoreRequestWithDsn:self.options.parsedDsn
+                                                   andEvent:event
+                                           didFailWithError:&requestError];
 
     if (nil != requestError) {
         [SentryLog logWithMessage:requestError.localizedDescription andLevel:kSentryLogLevelError];
@@ -147,10 +148,8 @@ SentryHttpTransport ()
                        didFailWithError:(NSError *_Nullable)error
 {
     return [[SentryNSURLRequest alloc]
-        initEnvelopeRequestWithDsn:self.options.dsn
-                           andData:[SentrySerialization dataWithEnvelope:envelope
-                                                                 options:0
-                                                                   error:&error]
+        initEnvelopeRequestWithDsn:self.options.parsedDsn
+                           andData:[SentrySerialization dataWithEnvelope:envelope error:&error]
                   didFailWithError:&error];
 }
 
@@ -236,7 +235,7 @@ SentryHttpTransport ()
             [self.fileManager removeFileAtPath:fileContents.path];
         } else {
             NSURLRequest *request =
-                [[SentryNSURLRequest alloc] initStoreRequestWithDsn:self.options.dsn
+                [[SentryNSURLRequest alloc] initStoreRequestWithDsn:self.options.parsedDsn
                                                             andData:fileContents.contents
                                                    didFailWithError:nil];
 

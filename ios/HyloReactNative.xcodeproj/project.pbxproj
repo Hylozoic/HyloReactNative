@@ -12,6 +12,9 @@
 		047E7D7724F4C77C00A9668E /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 047E7D7624F4C77C00A9668E /* Default-568h@2x.png */; };
 		04BF1DE1248F357F00ECC3A2 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BF1DE0248F357F00ECC3A2 /* NotificationService.swift */; };
 		04BF1DE5248F357F00ECC3A2 /* OneSignalNotificationServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 04BF1DDE248F357F00ECC3A2 /* OneSignalNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		04F54BA224F4D59500031D32 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F54BA124F4D59500031D32 /* File.swift */; };
+		04F54BA524F4DA9600031D32 /* release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 04F54BA324F4DA9600031D32 /* release.xcconfig */; };
+		04F54BA624F4DA9600031D32 /* debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 04F54BA424F4DA9600031D32 /* debug.xcconfig */; };
 		07B4558381D3B66A271C5065 /* libPods-HyloReactNativeTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5805D037F08FDFD30A465CC8 /* libPods-HyloReactNativeTests.a */; };
 		12DF135DDA5240B3BE9C9ED5 /* Circular-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AEEE5B8B897F4DCBBC0452B0 /* Circular-MediumItalic.ttf */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
@@ -72,6 +75,10 @@
 		04BF1DDE248F357F00ECC3A2 /* OneSignalNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = OneSignalNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		04BF1DE0248F357F00ECC3A2 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		04BF1DE2248F357F00ECC3A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		04F54BA024F4D59400031D32 /* HyloReactNative-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HyloReactNative-Bridging-Header.h"; sourceTree = "<group>"; };
+		04F54BA124F4D59500031D32 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
+		04F54BA324F4DA9600031D32 /* release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = release.xcconfig; sourceTree = "<group>"; };
+		04F54BA424F4DA9600031D32 /* debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = debug.xcconfig; sourceTree = "<group>"; };
 		0E9A6587B2AA39FF40675021 /* Pods-OneSignalNotificationServiceExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.release.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.release.xcconfig"; sourceTree = "<group>"; };
 		132848DAF02E4203BC2960D5 /* Circular-Book.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Circular-Book.ttf"; path = "../assets/fonts/Circular-Book.ttf"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* HyloReactNative.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HyloReactNative.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -173,6 +180,8 @@
 		13B07FAE1A68108700A75B9A /* HyloReactNative */ = {
 			isa = PBXGroup;
 			children = (
+				04F54BA424F4DA9600031D32 /* debug.xcconfig */,
+				04F54BA324F4DA9600031D32 /* release.xcconfig */,
 				0401F47B248F312A002E45AC /* HyloReactNative.entitlements */,
 				0401F47A248F311C002E45AC /* HyloReactNativeRelease.entitlements */,
 				0427C3FB247B8D3600C5E188 /* main.jsbundle */,
@@ -182,6 +191,8 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				04F54BA124F4D59500031D32 /* File.swift */,
+				04F54BA024F4D59400031D32 /* HyloReactNative-Bridging-Header.h */,
 			);
 			name = HyloReactNative;
 			sourceTree = "<group>";
@@ -338,6 +349,8 @@
 				04BF1DE4248F357F00ECC3A2 /* PBXTargetDependency */,
 			);
 			name = HyloReactNative;
+			packageProductDependencies = (
+			);
 			productName = HyloReactNative;
 			productReference = 13B07F961A680F5B00A75B9A /* HyloReactNative.app */;
 			productType = "com.apple.product-type.application";
@@ -365,6 +378,7 @@
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = L4KZBPS2F3;
+						LastSwiftMigration = 1160;
 						ProvisioningStyle = Manual;
 					};
 				};
@@ -379,6 +393,8 @@
 				Base,
 			);
 			mainGroup = 83CBB9F61A601CBA00E9B192;
+			packageReferences = (
+			);
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -410,6 +426,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				04F54BA524F4DA9600031D32 /* release.xcconfig in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				2A804B4D29AB42A8945C7445 /* Circular-Black.ttf in Resources */,
 				6473B41DA7624F5D8B9BA1E2 /* Circular-BlackItalic.ttf in Resources */,
@@ -418,6 +435,7 @@
 				A7707633807C4690B665AFD9 /* Circular-BoldItalic.ttf in Resources */,
 				871D668B360442ED964EE3D2 /* Circular-Book.ttf in Resources */,
 				1FC1D83F47654BAFB0C9B45E /* Circular-BookItalic.ttf in Resources */,
+				04F54BA624F4DA9600031D32 /* debug.xcconfig in Resources */,
 				3DBCEDB571264869809C3C05 /* Circular-Medium.ttf in Resources */,
 				12DF135DDA5240B3BE9C9ED5 /* Circular-MediumItalic.ttf in Resources */,
 				43EE6D6E598A4552B6062E3A /* hylo-evo-icons.ttf in Resources */,
@@ -654,6 +672,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
+				04F54BA224F4D59500031D32 /* File.swift in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -690,6 +709,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 1F6A2DF8C7155F3A5770ABF2 /* Pods-HyloReactNativeTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
@@ -720,6 +740,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7CEE52DC60CD58BB35E84E22 /* Pods-HyloReactNativeTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
@@ -812,6 +833,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = HyloReactNative/HyloReactNative.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
@@ -829,6 +851,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.hylo.HyloA;
 				PRODUCT_NAME = HyloReactNative;
 				PROVISIONING_PROFILE_SPECIFIER = "match Development com.hylo.HyloA";
+				SWIFT_OBJC_BRIDGING_HEADER = "HyloReactNative-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				TVOS_DEPLOYMENT_TARGET = "";
 				VALID_ARCHS = "$(ARCHS_STANDARD)";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -841,6 +866,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = HyloReactNative/HyloReactNativeRelease.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
@@ -857,6 +883,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.hylo.HyloA;
 				PRODUCT_NAME = HyloReactNative;
 				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.hylo.HyloA";
+				SWIFT_OBJC_BRIDGING_HEADER = "HyloReactNative-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 				TVOS_DEPLOYMENT_TARGET = "";
 				VALID_ARCHS = "$(ARCHS_STANDARD)";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -865,6 +893,7 @@
 		};
 		83CBBA201A601CBA00E9B192 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 04F54BA424F4DA9600031D32 /* debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -918,6 +947,7 @@
 		};
 		83CBBA211A601CBA00E9B192 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 04F54BA324F4DA9600031D32 /* release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";

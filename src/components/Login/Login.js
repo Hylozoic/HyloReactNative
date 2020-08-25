@@ -159,21 +159,21 @@ export default class Login extends React.Component {
       </View>
       <View style={styles.connectWith}>
         <Text style={styles.connectWithText}>Or connect with:</Text>
-        <FbLoginButton
-          style={styles.facebookLoginButton}
-          onLoginFinished={loginWithFacebook}
-          createErrorNotification={this.createErrorNotification}
-        />
-        <GoogleLoginButton
-          style={styles.googleLoginButton}
-          onLoginFinished={loginWithGoogle}
-          createErrorNotification={this.createErrorNotification}
-        />
         {isIOS && <AppleLoginButton
           style={styles.appleLoginButton}
           onLoginFinished={loginWithApple}
           createErrorNotification={this.createErrorNotification}
         />}
+        <GoogleLoginButton
+          style={styles.googleLoginButton}
+          onLoginFinished={loginWithGoogle}
+          createErrorNotification={this.createErrorNotification}
+        />
+        <FbLoginButton
+          style={styles.facebookLoginButton}
+          onLoginFinished={loginWithFacebook}
+          createErrorNotification={this.createErrorNotification}
+        />
       </View>
       <SignupLink goToSignup={goToSignup} />
     </ScrollView>

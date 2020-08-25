@@ -118,9 +118,15 @@ export default {
     textAlign: 'center',
     marginBottom: 15
   },
-  appleLoginButton: mixins.socialLoginButton,
-  facebookLoginButton: mixins.socialLoginButton,
-  googleLoginButton: mixins.socialLoginButton,
+  appleLoginButton: {
+    ...mixins.socialLoginButton
+  },
+  googleLoginButton: {
+    ...mixins.socialLoginButton
+  },
+  facebookLoginButton: {
+    ...mixins.socialLoginButton,
+  },
 
   // Signup
   signupText: {

@@ -53,7 +53,7 @@ export default class FbLoginButton extends React.Component {
     }
     const text = this.props.signup
       ? 'Continue with Facebook'
-      : 'Login with Facebook'
+      : 'Continue with Facebook'
 
     return <Button
       text={text}

@@ -60,12 +60,12 @@ export default {
     ...loginStyles.appleLoginButton,
     width: '80%'
   },
-  facebookLoginButton: {
-    ...loginStyles.facebookLoginButton,
-    width: '80%'
-  },
   googleLoginButton: {
     ...loginStyles.googleLoginButton,
+    width: '80%'
+  },
+  facebookLoginButton: {
+    ...loginStyles.facebookLoginButton,
     width: '80%'
   },
 

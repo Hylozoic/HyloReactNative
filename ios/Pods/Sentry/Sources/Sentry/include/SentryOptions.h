@@ -7,7 +7,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 NS_SWIFT_NAME(Options)
 @interface SentryOptions : NSObject
-SENTRY_NO_INIT
 
 /**
  * Init SentryOptions.
@@ -18,9 +17,15 @@ SENTRY_NO_INIT
                       didFailWithError:(NSError *_Nullable *_Nullable)error;
 
 /**
- * The Dsn passed in the options.
+ * The DSN tells the SDK where to send the events to. If this value is not provided, the SDK will
+ * not send any events.
  */
-@property (nonatomic, strong) SentryDsn *dsn;
+@property (nonatomic, strong) NSString *_Nullable dsn;
+
+/**
+ * The parsed internal DSN.
+ */
+@property (nonatomic, strong) SentryDsn *_Nullable parsedDsn;
 
 /**
  * debug [mode] sets a more verbose log level. Default is @NO. If set to @YES
@@ -102,8 +107,11 @@ SENTRY_NO_INIT
 @property (nonatomic, assign) NSUInteger sessionTrackingIntervalMillis;
 
 /**
- * WIP! This feature is not finished yet. The plan is to attach the stack trace to all threads when
- * logging events. When enabling this currently only the debug meta data is attached to events.
+ * When enabled, stack traces are automatically attached to all messages logged. Stack traces are
+ * always attached to exceptions but when this is set stack traces are also sent with messages.
+ * Stack traces are only attached for the current thread.
+ *
+ * This feature is disabled by default.
  */
 @property (nonatomic, copy) NSNumber *attachStacktrace;
 

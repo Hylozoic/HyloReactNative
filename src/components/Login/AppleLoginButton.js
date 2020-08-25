@@ -44,7 +44,6 @@ export default function AppleLoginButton({
   }, []) // passing in an empty array as the second argument ensures this is only ran once when component mounts initially.
 
   const style = {
-    width: 140,
     height: 40,
     ...providedStyle,
   }

@@ -38,6 +38,7 @@ target 'HyloReactNative' do
   pod 'Intercom'
   pod 'Mixpanel'
   pod 'OneSignal', '>= 2.11.2', '< 3.0'
+  pod 'GoogleSignIn', '~> 5.0.2'
 
   target 'HyloReactNativeTests' do
     inherit! :search_paths
