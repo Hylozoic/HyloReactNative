@@ -10,13 +10,13 @@
 #import <React/RCTBridge.h>
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
-// #import <FBSDKCoreKit/FBSDKCoreKit.h>
-#import <Intercom/intercom.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <Intercom/Intercom.h>
 
 @implementation AppDelegate
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
+- (BOOL)application:(UIApplication *)application
+    didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:launchOptions];
   RCTRootView *rootView = [[RCTRootView alloc] initWithBridge:bridge
                                                    moduleName:@"HyloReactNative"
@@ -36,19 +36,10 @@
     forAppId:@"wwelodje"
   ];
 
-  // // For Facebook SDK
-  // [FBSDKApplicationDelegate sharedInstance]
-  //   application:application
-  //   openURL:url
-  //   sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]
-  //   annotation:options[UIApplicationOpenURLOptionsAnnotationKey]
-  // ];
-
   return YES;
 }
 
-- (NSURL *)sourceURLForBridge:(RCTBridge *)bridge
-{
+- (NSURL *)sourceURLForBridge:(RCTBridge *)bridge {
 #if DEBUG
   return [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
 #else
