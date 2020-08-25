@@ -17,6 +17,7 @@ export default class GoogleLoginButton extends React.Component {
 
   signIn = async () => {
     try {
+      await GoogleSignin.hasPlayServices()
       await this.GoogleSignin.signIn()
       const { accessToken } = await this.GoogleSignin.getTokens()
 
