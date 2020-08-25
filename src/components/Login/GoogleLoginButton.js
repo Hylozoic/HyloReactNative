@@ -3,6 +3,10 @@ import { GoogleSignin } from '@react-native-community/google-signin'
 import Button from 'components/Button'
 
 export default class GoogleLoginButton extends React.Component {
+  static defaultProps = {
+    style: {}
+  }
+
   constructor (props) {
     super(props)
     this.GoogleSignin = props.mocks ? props.mocks.GoogleSignin : GoogleSignin
@@ -17,7 +21,7 @@ export default class GoogleLoginButton extends React.Component {
 
   signIn = async () => {
     try {
-      await GoogleSignin.hasPlayServices()
+      await this.GoogleSignin.hasPlayServices()
       await this.GoogleSignin.signIn()
       const { accessToken } = await this.GoogleSignin.getTokens()
 
@@ -39,7 +43,7 @@ export default class GoogleLoginButton extends React.Component {
       icon: {
         fontSize: 16,
         marginRight: 3,
-        ...this.props.style.icon,
+        ...this.props.style.icon ? this.props.style.icon : {}
       }
     }
     const text = this.props.signup

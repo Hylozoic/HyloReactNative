@@ -11,7 +11,7 @@ exports[`matches last snapshot 1`] = `
   <ImageBackground
     imageStyle={
       Object {
-        "height": 585,
+        "height": 450,
         "resizeMode": "cover",
         "width": 750,
       }
@@ -41,15 +41,23 @@ exports[`matches last snapshot 1`] = `
       onPress={[Function]}
       text="Sign Up"
     />
-    <Text>
-      Or connect with:
-    </Text>
     <View>
-      <FbLoginButton
+      <Text>
+        Or sign up using:
+      </Text>
+      <AppleLoginButton
         createErrorNotification={[Function]}
+        signup={true}
       />
       <GoogleLoginButton
         createErrorNotification={[Function]}
+        signup={true}
+        style={Object {}}
+      />
+      <FbLoginButton
+        createErrorNotification={[Function]}
+        signup={true}
+        style={Object {}}
       />
     </View>
     <View>

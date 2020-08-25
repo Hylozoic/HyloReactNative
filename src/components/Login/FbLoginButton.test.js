@@ -4,7 +4,7 @@ import React from 'react'
 
 const mocks = {
   LoginManager: {
-    logInWithReadPermissions: jest.fn(() => Promise.resolve({foo: 'bar'}))
+    logInWithPermissions: jest.fn(() => Promise.resolve({foo: 'bar'}))
   },
   AccessToken: {
     getCurrentAccessToken: jest.fn(() => Promise.resolve({
@@ -18,7 +18,7 @@ const mocks = {
 const errorMocks = {
   ...mocks,
   LoginManager: {
-    logInWithReadPermissions: jest.fn(() => Promise.reject())
+    logInWithPermissions: jest.fn(() => Promise.reject())
   }
 }
 

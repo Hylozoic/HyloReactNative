@@ -13,7 +13,7 @@ exports[`NewMessage renders correctly 1`] = `
     <View>
       <Button
         onPress={[Function]}
-        text='Add Participant'
+        text="Add Participant"
       />
     </View>
   </ScrollViewMock>
@@ -40,7 +40,7 @@ exports[`NewMessage renders correctly 2`] = `
     <View>
       <Button
         onPress={[Function]}
-        text='Add Participant'
+        text="Add Participant"
       />
     </View>
   </ScrollViewMock>

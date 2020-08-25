@@ -6,6 +6,10 @@ import Button from 'components/Button'
 export const permissions = ['public_profile', 'user_friends', 'email']
 
 export default class FbLoginButton extends React.Component {
+  static defaultProps = {
+    style: {}
+  }
+
   constructor (props) {
     super(props)
     if (props.mocks) {
@@ -48,7 +52,7 @@ export default class FbLoginButton extends React.Component {
       icon: {
         fontSize: 20,
         marginRight: 5,
-        ...this.props.style.icon,
+        ...this.props.style.icon ? this.props.style.icon : {}
       }
     }
     const text = this.props.signup

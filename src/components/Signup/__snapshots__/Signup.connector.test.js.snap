@@ -2,6 +2,7 @@
 
 exports[`mapDispatchToProps matches the last snapshot 1`] = `
 Object {
+  "loginWithApple": [Function],
   "loginWithFacebook": [Function],
   "loginWithGoogle": [Function],
 }
