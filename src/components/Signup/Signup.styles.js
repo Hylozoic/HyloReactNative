@@ -56,9 +56,18 @@ export default {
   // Connect with
   connectWith: loginStyles.connectWith,
   connectWithText: loginStyles.connectWithText,
-  appleLoginButton: loginStyles.appleLoginButton,
-  facebookLoginButton: loginStyles.facebookLoginButton,
-  googleLoginButton: loginStyles.googleLoginButton,
+  appleLoginButton: {
+    ...loginStyles.appleLoginButton,
+    width: '80%'
+  },
+  facebookLoginButton: {
+    ...loginStyles.facebookLoginButton,
+    width: '80%'
+  },
+  googleLoginButton: {
+    ...loginStyles.googleLoginButton,
+    width: '80%'
+  },
 
   login: {
     flexDirection: 'row',

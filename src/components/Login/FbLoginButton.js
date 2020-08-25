@@ -51,9 +51,12 @@ export default class FbLoginButton extends React.Component {
         ...this.props.style.icon,
       }
     }
+    const text = this.props.signup
+      ? 'Continue with Facebook'
+      : 'Login with Facebook'
 
     return <Button
-      text='Log In With Facebook'
+      text={text}
       customIconRender={renderProps =>
         <MaterialCommunityIcon {...renderProps} name='facebook' />
       }

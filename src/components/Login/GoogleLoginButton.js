@@ -38,11 +38,14 @@ export default class GoogleLoginButton extends React.Component {
         ...this.props.style.icon,
       }
     }
+    const text = this.props.signup
+      ? 'Sign up with Google'
+      : 'Sign in with Google'
 
     return <Button
       onPress={this.signIn}
       iconName='Google'
       style={style}
-      text='Sign in with Google' />
+      text={text} />
   }
 }

@@ -33,7 +33,8 @@ export async function onAppleButtonPress(authorizedCallback) {
 
 export default function AppleLoginButton({
   onLoginFinished,
-  style: providedStyle
+  style: providedStyle,
+  signup
 }) {
   useEffect(() => {
     // onCredentialRevoked returns a function that will remove the event listener. useEffect will call this function when the component unmounts
@@ -50,7 +51,10 @@ export default function AppleLoginButton({
 
   return <AppleButton
     buttonStyle={AppleButton.Style.BLACK}
-    buttonType={AppleButton.Type.SIGN_IN}
+    buttonType={signup
+      ? AppleButton.Type.SIGN_UP
+      : AppleButton.Type.SIGN_IN
+    }
     cornerRadius={5}
     style={style}
     onPress={() => onAppleButtonPress(onLoginFinished)} />

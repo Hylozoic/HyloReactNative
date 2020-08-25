@@ -51,18 +51,21 @@ export default class Signup extends React.Component {
         <Text style={styles.subTitle}>Stay connected, organized and engaged with your community.</Text>
         <Button text='Sign Up' style={styles.signupButton} onPress={goToSignupFlow} />
         <View style={styles.connectWith}>
-          <Text style={styles.connectWithText}>Or sign-up using:</Text>
+          <Text style={styles.connectWithText}>Or sign up using:</Text>
           <FbLoginButton
+            signup
             style={styles.facebookLoginButton}
             onLoginFinished={loginWithFacebook}
             createErrorNotification={this.createErrorNotification}
           />
           <GoogleLoginButton
+            signup
             style={styles.googleLoginButton}
             onLoginFinished={loginWithGoogle}
             createErrorNotification={this.createErrorNotification}
           />
           {isIOS && <AppleLoginButton
+            signup
             style={styles.appleLoginButton}
             onLoginFinished={loginWithApple}
             createErrorNotification={this.createErrorNotification}
