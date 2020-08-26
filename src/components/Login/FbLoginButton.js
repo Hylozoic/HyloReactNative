@@ -3,7 +3,7 @@ import MaterialCommunityIcon from 'react-native-vector-icons/FontAwesome5'
 import { AccessToken, LoginManager } from 'react-native-fbsdk'
 import Button from 'components/Button'
 
-export const permissions = ['public_profile', 'user_friends', 'email']
+export const permissions = ['public_profile', 'email']
 
 export default class FbLoginButton extends React.Component {
   static defaultProps = {
