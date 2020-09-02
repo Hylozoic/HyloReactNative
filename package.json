@@ -42,6 +42,7 @@
     "react-native": "0.61.5",
     "react-native-autocomplete-input": "^3.5.0",
     "react-native-background-timer": "^2.2.0",
+    "react-native-date-picker": "^2.7.12",
     "react-native-device-info": "^0.29.1",
     "react-native-document-picker": "^2.0.0",
     "react-native-fbsdk": "^2.0.0",

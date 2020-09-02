@@ -4,6 +4,8 @@ const post = {
   type: 'post',
   title: 'title',
   details: 'details',
+  startTime: 'startTime',
+  endTime: 'endTime',
   communities: [1]
 }
 
