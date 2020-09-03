@@ -7,10 +7,10 @@ import {
   View,
   Alert
 } from 'react-native'
-import { get, uniq, uniqBy, isEmpty } from 'lodash/fp'
-import { validateTopicName } from 'hylo-utils/validators'
 import PropTypes from 'prop-types'
-import Moment from 'moment'
+import { get, uniq, uniqBy, isEmpty } from 'lodash/fp'
+import moment from 'moment'
+import { validateTopicName } from 'hylo-utils/validators'
 import { rhino30 } from 'style/colors'
 import { showToast, hideToast } from 'util/toast'
 import { keyboardAvoidingViewProps as kavProps } from 'util/viewHelpers'
@@ -39,6 +39,8 @@ import ImageSelector from './ImageSelector'
 import InlineEditor, { toHtml } from '../InlineEditor'
 import ErrorBubble from '../ErrorBubble'
 import styles from './PostEditor.styles'
+
+const TIME_STRING_FORMAT = 'MM/DD/YYYY LT'
 
 export default class PostEditor extends React.Component {
   static contextTypes = {navigate: PropTypes.func}
@@ -418,39 +420,6 @@ export default class PostEditor extends React.Component {
               <Text style={styles.textInputPlaceholder}>{topicsPlaceholder}</Text>}
           </TouchableOpacity>
 
-          {canHaveTimeframe && <React.Fragment>
-            <TouchableOpacity
-              style={[
-                styles.section
-              ]}
-              onPress={() => this.setState({ startTimeExpanded: !this.state.startTimeExpanded })}>
-              <View style={styles.topicLabel}>
-                <SectionLabel>Start Time</SectionLabel>
-              </View>
-              <Text>{startTime && startTime.toString()}</Text>
-            </TouchableOpacity>
-            <DatePicker
-              value={startTime}
-              expanded={this.state.startTimeExpanded}
-              onChange={startTime => this.setState({ startTime })} 
-              style={styles.textInput} />
-            <TouchableOpacity
-              style={[
-                styles.section
-              ]}
-              onPress={() => this.setState({ endTimeExpanded: !this.state.endTimeExpanded })}>
-              <View style={styles.topicLabel}>
-                <SectionLabel>End Time</SectionLabel>
-              </View>
-              <Text>{endTime && endTime.toString()}</Text>
-            </TouchableOpacity>
-            <DatePicker
-              value={endTime}
-              expanded={this.state.endTimeExpanded}
-              onChange={endTime => this.setState({ endTime })}
-              style={styles.textInput} />
-          </React.Fragment>}
-
           {isProject && <TouchableOpacity
             style={[
               styles.section,
@@ -472,10 +441,10 @@ export default class PostEditor extends React.Component {
             style={[
               styles.section,
               styles.textInputWrapper,
-              { borderBottomWidth: 0 }
+              styles.topics
             ]}
             onPress={this.openCommunitiesEditor}>
-            <View style={styles.members}>
+            <View style={styles.topicLabel}>
               <SectionLabel>Post In</SectionLabel>
               <View style={styles.topicAddBorder}><Icon name='Plus' style={styles.topicAdd} /></View>
             </View>
@@ -488,6 +457,50 @@ export default class PostEditor extends React.Component {
             {communities.length < 1 &&
               <Text style={styles.textInputPlaceholder}>Select which communities to post in.</Text>}
           </TouchableOpacity>
+
+          {canHaveTimeframe && <React.Fragment>
+            <TouchableOpacity
+              style={[
+                styles.section,
+                styles.textInputWrapper,
+                styles.topics  
+              ]}
+              onPress={() => this.setState({ startTimeExpanded: !this.state.startTimeExpanded })}>
+              <View style={styles.topicLabel}>
+                <SectionLabel>Start Time</SectionLabel>
+                <View style={styles.topicAddBorder}><Icon name={this.state.startTimeExpanded ? 'ArrowUp' : 'ArrowDown'} style={styles.topicAdd} /></View>
+              </View>
+              {startTime && !this.state.startTimeExpanded &&
+                <Text>{moment(startTime).format(TIME_STRING_FORMAT)}</Text>}
+              {!startTime && !this.state.startTimeExpanded &&
+                <Text style={styles.textInputPlaceholder}>When does it start?</Text>}
+              <DatePicker
+                value={startTime}
+                expanded={this.state.startTimeExpanded}
+                onChange={startTime => this.setState({ startTime })} />
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[
+                styles.section,
+                styles.textInputWrapper,
+                styles.topics
+              ]}
+              onPress={() => this.setState({ endTimeExpanded: !this.state.endTimeExpanded })}>
+              <View style={styles.members}>
+                <SectionLabel>End Time</SectionLabel>
+                <View style={styles.topicAddBorder}><Icon name='ArrowDown' style={styles.topicAdd} /></View>
+              </View>
+              {endTime && !this.state.endTimeExpanded &&
+                <Text>{moment(endTime).format(TIME_STRING_FORMAT)}</Text>}
+              {!endTime && !this.state.endTimeExpanded &&
+                <Text style={styles.textInputPlaceholder}>When does it end?</Text>}
+              <DatePicker
+                value={endTime}
+                expanded={this.state.endTimeExpanded}
+                onChange={endTime => this.setState({ endTime })}
+                style={styles.textInput} />
+            </TouchableOpacity>
+          </React.Fragment>}
 
           {!isEmpty(imageUrls) && <View>
             <SectionLabel>Images</SectionLabel>
