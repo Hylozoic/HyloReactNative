@@ -74,8 +74,10 @@ export default class PostCard extends React.PureComponent {
       />
       <PostImage imageUrls={imageUrls} />
       <PostBody
+        type={post.type}
         title={post.title}
         details={post.details}
+        startTime={post.startTime}
         endTime={post.endTime}
         linkPreview={post.linkPreview}
         slug={slug}

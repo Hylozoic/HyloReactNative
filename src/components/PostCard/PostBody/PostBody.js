@@ -11,6 +11,27 @@ import richTextStyles from 'style/richTextStyles'
 
 const MAX_DETAILS_LENGTH = 144
 
+const formatStartDate = (startTime) => {
+  const current = moment()
+  let start = ''
+  if (moment(startTime).isAfter(current)) {
+    start = moment(startTime).format('MMM D YYYY')
+  }
+  return start
+}
+
+const formatEndDate = (endTime) => {
+  const current = moment()
+  let end = ''
+  const endFormatted = moment(endTime).format('MMM D YYYY')
+  if (moment(endTime).isAfter(current)) {
+    end = `ends ${endFormatted}`
+  } else if (current.isAfter(moment(endTime))) {
+    end = `ended ${endFormatted}`
+  }
+  return end
+}
+
 export default class PostBody extends React.PureComponent {
   handleLinkPress = (url) => {
     const { slug, showMember, showTopic } = this.props
@@ -19,24 +40,36 @@ export default class PostBody extends React.PureComponent {
 
   render () {
     const {
+      type,
       title,
       details,
+      startTime,
       endTime,
       linkPreview,
       slug,
       shouldTruncate
     } = this.props
-
     const decodedTitle = decode(title)
     const presentedDetails = present(
       sanitize(details).replace(/\n/g, '').replace('<p>&nbsp;</p>', ''),
       {slug, maxlength: shouldTruncate && MAX_DETAILS_LENGTH}
     )
-    const presentedEndTime = endTime && moment(endTime).format('MMM D YYYY')
+    const canHaveTimes = type === 'offer' || type === 'request' || type === 'resource'
+    const startDate = startTime && formatStartDate(startTime)
+    const endDate = endTime && formatEndDate(endTime)
+    let timeWindow = ''
+    
+    if (startDate && endDate) {
+      timeWindow = `${type} starts ${startDate} and ${endDate}`
+    } else if (endDate) {
+      timeWindow = `${type} ${endDate}`
+    } else if (startDate) {
+      timeWindow = `${type} starts ${startDate}`
+    }
 
     return <View style={styles.container}>
-      {presentedEndTime &&
-        <Text style={styles.resourceEndsAt}>Resource ends {presentedEndTime}</Text>}
+      {canHaveTimes &&
+        <Text style={styles.resourceEndsAt}>{timeWindow}</Text>}
       <PostTitle title={decodedTitle} />
       <HTMLView
         onLinkPress={this.handleLinkPress}

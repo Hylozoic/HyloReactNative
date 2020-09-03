@@ -114,7 +114,8 @@ export default class PostDetails extends React.Component {
     const { location } = post
 
     const postCard = <View style={styles.postCard}>
-      <PostHeader creator={post.creator}
+      <PostHeader
+        creator={post.creator}
         date={post.createdAt}
         type={post.type}
         editPost={editPost}
@@ -130,8 +131,11 @@ export default class PostDetails extends React.Component {
         closeOnDelete
       />
       <PostImage imageUrls={post.imageUrls} linked />
-      <PostBody title={post.title}
+      <PostBody
+        type={post.type}
+        title={post.title}
         details={post.details}
+        startTime={post.startTime}
         endTime={post.endTime}
         linkPreview={post.linkPreview}
         slug={slug}
