@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* HyloReactNativeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* HyloReactNativeTests.m */; };
 		026202985F894FECBEB14483 /* Circular-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 424B542986F0407EBC606DAD /* Circular-Bold.ttf */; };
+		0407DD5F25005EC500C570E9 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		047E7D7724F4C77C00A9668E /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 047E7D7624F4C77C00A9668E /* Default-568h@2x.png */; };
 		04BF1DE1248F357F00ECC3A2 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BF1DE0248F357F00ECC3A2 /* NotificationService.swift */; };
 		04BF1DE5248F357F00ECC3A2 /* OneSignalNotificationServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 04BF1DDE248F357F00ECC3A2 /* OneSignalNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -18,7 +19,6 @@
 		07B4558381D3B66A271C5065 /* libPods-HyloReactNativeTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5805D037F08FDFD30A465CC8 /* libPods-HyloReactNativeTests.a */; };
 		12DF135DDA5240B3BE9C9ED5 /* Circular-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AEEE5B8B897F4DCBBC0452B0 /* Circular-MediumItalic.ttf */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
-		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		1FC1D83F47654BAFB0C9B45E /* Circular-BookItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F3ACB10FF738470A830BFED1 /* Circular-BookItalic.ttf */; };
@@ -427,7 +427,6 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				04F54BA524F4DA9600031D32 /* release.xcconfig in Resources */,
-				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				2A804B4D29AB42A8945C7445 /* Circular-Black.ttf in Resources */,
 				6473B41DA7624F5D8B9BA1E2 /* Circular-BlackItalic.ttf in Resources */,
 				026202985F894FECBEB14483 /* Circular-Bold.ttf in Resources */,
@@ -436,6 +435,7 @@
 				871D668B360442ED964EE3D2 /* Circular-Book.ttf in Resources */,
 				1FC1D83F47654BAFB0C9B45E /* Circular-BookItalic.ttf in Resources */,
 				04F54BA624F4DA9600031D32 /* debug.xcconfig in Resources */,
+				0407DD5F25005EC500C570E9 /* LaunchScreen.xib in Resources */,
 				3DBCEDB571264869809C3C05 /* Circular-Medium.ttf in Resources */,
 				12DF135DDA5240B3BE9C9ED5 /* Circular-MediumItalic.ttf in Resources */,
 				43EE6D6E598A4552B6062E3A /* hylo-evo-icons.ttf in Resources */,
