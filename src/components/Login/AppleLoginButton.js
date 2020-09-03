@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-import { Text } from 'react-native'
 import appleAuth, {
   AppleButton,
   AppleAuthRequestOperation,
@@ -7,7 +6,10 @@ import appleAuth, {
   AppleAuthCredentialState,
 } from '@invertase/react-native-apple-authentication'
 
-export async function onAppleButtonPress(authorizedCallback) {
+export async function onAppleButtonPress({
+  authorizedCallback,
+  createErrorNotification
+}) {
   // performs login request
   try {
     const appleAuthRequestResponse = await appleAuth.performRequest({
@@ -28,11 +30,13 @@ export async function onAppleButtonPress(authorizedCallback) {
     }
   } catch (error) {
     console.log('!!!! error in onAppleButtonPress:', error)
+    createErrorNotification('COULD NOT SIGN IN WITH YOUR APPLE ACCOUNT')
   }
 }
 
 export default function AppleLoginButton({
   onLoginFinished,
+  createErrorNotification,
   style: providedStyle,
   signup
 }) {
@@ -56,5 +60,8 @@ export default function AppleLoginButton({
     }
     cornerRadius={5}
     style={style}
-    onPress={() => onAppleButtonPress(onLoginFinished)} />
+    onPress={() => onAppleButtonPress({
+      authorizedCallback: onLoginFinished,
+      createErrorNotification
+    })} />
 }
