@@ -1,5 +1,6 @@
 import {
   LOGIN,
+  LOGIN_WITH_APPLE,
   LOGIN_WITH_FACEBOOK,
   LOGIN_WITH_GOOGLE
 } from './actions'
@@ -9,6 +10,7 @@ import {
 
 export function getPending (state) {
   return state.pending[LOGIN] ||
+    state.pending[LOGIN_WITH_APPLE] ||
     state.pending[LOGIN_WITH_FACEBOOK] ||
     state.pending[LOGIN_WITH_GOOGLE] ||
     state.pending[FETCH_CURRENT_USER]
