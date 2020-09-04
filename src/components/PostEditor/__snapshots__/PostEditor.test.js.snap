@@ -64,6 +64,11 @@ exports[`PostEditor renders a new editor correctly 1`] = `
           selected={false}
           type="offer"
         />
+        <TypeButton
+          onPress={[Function]}
+          selected={false}
+          type="resource"
+        />
       </View>
       <SectionLabel>
         Title
@@ -222,6 +227,22 @@ exports[`PostEditor renders correctly while saving 1`] = `
           >
             <Text>
               OFFER
+            </Text>
+          </View>
+          <View
+            accessible={true}
+            focusable={true}
+            isTVSelectable={true}
+            onClick={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+          >
+            <Text>
+              RESOURCE
             </Text>
           </View>
         </View>
@@ -452,6 +473,22 @@ exports[`PostEditor renders correctly while saving 2`] = `
               OFFER
             </Text>
           </View>
+          <View
+            accessible={true}
+            focusable={true}
+            isTVSelectable={true}
+            onClick={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+          >
+            <Text>
+              RESOURCE
+            </Text>
+          </View>
         </View>
         <Text>
           Title
@@ -577,6 +614,60 @@ exports[`PostEditor renders correctly while saving 2`] = `
             </View>
           </View>
         </View>
+        <View
+          accessible={true}
+          focusable={true}
+          isTVSelectable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+        >
+          <View>
+            <Text>
+              Start Time
+            </Text>
+            <View>
+              <Icon
+                name="ArrowDown"
+              />
+            </View>
+          </View>
+          <Text>
+            When does it start?
+          </Text>
+          <View />
+        </View>
+        <View
+          accessible={true}
+          focusable={true}
+          isTVSelectable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+        >
+          <View>
+            <Text>
+              End Time
+            </Text>
+            <View>
+              <Icon
+                name="ArrowDown"
+              />
+            </View>
+          </View>
+          <Text>
+            When does it end?
+          </Text>
+          <View />
+        </View>
       </View>
     </View>
   </RCTScrollView>
@@ -646,6 +737,11 @@ exports[`PostEditor renders with a post 1`] = `
           onPress={[Function]}
           selected={false}
           type="offer"
+        />
+        <TypeButton
+          onPress={[Function]}
+          selected={false}
+          type="resource"
         />
       </View>
       <SectionLabel>

@@ -18,6 +18,8 @@ Array [
         $title: String
         $details: String
         $communityIds: [String]
+        $startTime: String
+        $endTime: String
         $imageUrls: [String]
         $fileUrls: [String]
         $topicNames: [String]
@@ -28,6 +30,8 @@ Array [
           title: $title
           details: $details
           communityIds: $communityIds
+          startTime: $startTime
+          endTime: $endTime
           imageUrls: $imageUrls
           fileUrls: $fileUrls
           topicNames: $topicNames
@@ -120,10 +124,12 @@ Array [
             1,
           ],
           "details": "",
+          "endTime": undefined,
           "fileUrls": Array [],
           "id": 1,
           "imageUrls": Array [],
           "memberIds": Array [],
+          "startTime": undefined,
           "title": "a title",
           "topicNames": Array [],
           "type": undefined,

@@ -9,13 +9,15 @@ import { isDev } from '../../config'
 
 export default class DeepLinkHandler extends React.Component {
   async componentDidMount () {
+    const { currentUser, navigator } = this.props
+
     Linking.addEventListener('url', this.handleLinkingEvent)
 
     // even if there is a deep link, we still have to change the initial route
     // to one of these. otherwise, the back button on the deep-linked screen
     // will just take you back to a permanent loading screen.
-    if (this.props.currentUser) {
-      resetToMainRoute(this.props.navigator)
+    if (currentUser) {
+      redirectAfterLogin({ currentUser, navigation: navigator })
     } else {
       resetToRoute(this.props.navigator, 'Login')
     }

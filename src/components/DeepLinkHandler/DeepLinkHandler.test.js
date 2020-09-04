@@ -11,6 +11,7 @@ jest.mock('react-native-reanimated', () => require('react-native-reanimated/mock
 jest.useFakeTimers()
 
 const user = {id: '1'}
+const signupInProgressUser = {id: '1', settings: { signupInProgress: true }}
 const initialUrl = '/t/17'
 const navigateAction = {
   type: 'Navigation/NAVIGATE',
@@ -37,6 +38,12 @@ function expectResetToRoute (routeName) {
     type: 'Navigation/RESET'
   })
 }
+
+it('sends a logged-in user with sign-up in progress back to sign-up', () => {
+  TestRenderer.create(<DeepLinkHandler currentUser={signupInProgressUser}
+    navigator={mockNavigator} />)
+  expectResetToRoute('SignupFlow1')
+})
 
 it('sends a logged-in user to Main', () => {
   TestRenderer.create(<DeepLinkHandler currentUser={user}

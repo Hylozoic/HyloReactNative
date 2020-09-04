@@ -65,7 +65,7 @@ export default class DrawerMenu extends React.PureComponent {
       <Button text='Create a Community' onPress={goToCreateCommunityName} style={styles.createCommunityButton} />
       <View style={styles.footer}>
         <TouchableOpacity onPress={goToMyProfile} style={styles.avatar}>
-          <Image source={{uri: avatarUrl}} style={styles.avatar} />
+          <Image source={avatarUrl ? {uri: avatarUrl} : null} style={styles.avatar} />
         </TouchableOpacity>
         <View style={styles.footerContent}>
           <Text style={styles.footerTopText} numberOfLines={1}>

@@ -152,6 +152,7 @@ exports[`PostDetails renders correctly 1`] = `
           showTopic={[Function]}
           slug="foom"
           title="Hi"
+          type="request"
         />
         <PostCommunities
           communities={
