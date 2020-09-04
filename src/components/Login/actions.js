@@ -66,8 +66,8 @@ export function logout () {
         transform: () =>
           clearSessionCookie()
           .then(() => LoginManager.logOut())
-          .then(() => {
-            if (!isEmpty(GoogleSignin.currentUser())) {
+          .then(async () => {
+            if (!isEmpty(await GoogleSignin.getCurrentUser())) {
               return GoogleSignin.signOut()
             }
           })
