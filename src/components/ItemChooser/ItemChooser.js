@@ -4,9 +4,9 @@ import {
   SectionList,
   Text,
   View,
-  SafeAreaView,
   TouchableOpacity
 } from 'react-native'
+import { SafeAreaView } from 'react-navigation'
 import { debounce } from 'lodash/fp'
 import SearchBar from '../SearchBar'
 import styles from './ItemChooser.styles'

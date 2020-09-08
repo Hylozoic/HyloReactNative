@@ -17,10 +17,10 @@ import {
 export default {
   container: {
     flex: 1,
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+    paddingHorizontal: 16,
   },
   scrollContainer: {
-    paddingHorizontal: 16,
     flex: 1
   },
   scrollContent: {

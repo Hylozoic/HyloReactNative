@@ -731,7 +731,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HyloReactNative.app/HyloReactNative";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Hylo.app/Hylo";
 				TVOS_DEPLOYMENT_TARGET = "";
 			};
 			name = Debug;
@@ -759,7 +759,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HyloReactNative.app/HyloReactNative";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Hylo.app/Hylo";
 				TVOS_DEPLOYMENT_TARGET = "";
 			};
 			name = Release;

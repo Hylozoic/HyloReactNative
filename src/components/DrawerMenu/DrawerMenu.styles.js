@@ -1,8 +1,9 @@
+import { StyleSheet } from 'react-native'
+import { isIOS } from 'util/platform'
 import mixins from '../../style/mixins'
 import {
   bigStone, mirage, rhino, rhino50, persimmon, rhino40, black10onRhino, white
 } from '../../style/colors'
-import { StyleSheet } from 'react-native'
 
 const defaultPadding = {
   paddingHorizontal: 15
@@ -46,7 +47,7 @@ export default {
   footer: {
     backgroundColor: bigStone,
     padding: 10,
-    height: 64,
+    paddingBottom: isIOS ? 30 : 10,
     flexDirection: 'row',
     alignItems: 'stretch'
   },

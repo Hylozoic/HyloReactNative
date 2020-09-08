@@ -1,5 +1,6 @@
 import React from 'react'
 import { View, Text, ScrollView, TouchableOpacity, Alert } from 'react-native'
+import { SafeAreaView } from 'react-navigation'
 import { validateUser } from 'hylo-utils/validators'
 import validator from 'validator'
 import prompt from 'react-native-prompt-android'
@@ -178,61 +179,63 @@ export default class UserSettings extends React.Component {
     const { currentUser, updateUserSettings, unlinkAccount, goToNotificationSettings, goToBlockedUsers } = this.props
     const { editingPassword, edits: { email, password, confirmPassword, facebookUrl, twitterName }, errors, changed } = this.state
     if (!currentUser) return <Loading />
-    return <KeyboardFriendlyView style={styles.container}>
-      <ScrollView contentContainerStyle={styles.scrollContainer}>
-        <SettingControl
-          label='EMAIL'
-          value={email}
-          keyboardType={'email-address'}
-          autoCapitalize='none'
-          autoCorrect={false}
-          onChange={value => this.updateField('email', value)}
-          error={errors.email}
-          theme={styles.settingControl} />
-        {!editingPassword && <View style={styles.setting}>
-          <Text style={styles.settingLabel}>PASSWORD</Text>
-          <TouchableOpacity onPress={this.editPassword}>
-            <Text style={styles.linkText} ref={ref => { this.passwordInput = ref }}>Change Password</Text>
-          </TouchableOpacity>
-        </View>}
-        {editingPassword && <SettingControl
-          label='PASSWORD'
-          value={password}
-          toggleSecureTextEntry
-          autoCapitalize='none'
-          autoCorrect={false}
-          onChange={value => this.updateField('password', value)}
-          error={errors.password}
-          theme={styles.settingControl} />}
-        {editingPassword && <SettingControl
-          label='CONFIRM PASSWORD'
-          value={confirmPassword}
-          toggleSecureTextEntry
-          autoCapitalize='none'
-          autoCorrect={false}
-          onChange={value => this.updateField('confirmPassword', value)}
-          error={errors.confirmPassword}
-          theme={styles.settingControl} />}
-        {editingPassword && <TouchableOpacity style={styles.cancelPassword} onPress={this.cancelPassword}>
-          <Text style={styles.linkText}>Cancel Password Change</Text>
-        </TouchableOpacity>}
-        <SocialAccounts
-          facebookUrl={facebookUrl}
-          twitterName={twitterName}
-          twitterPrompt={this.twitterPrompt}
-          loginWithFacebook={this.loginWithFacebook}
-          updateUserSettings={updateUserSettings}
-          updateField={this.updateField}
-          unlinkAccount={unlinkAccount} />
-        <View style={styles.blockedUsersWrapper}>
-          <Button text='Blocked Users' onPress={goToBlockedUsers} style={styles.blockedUsers} />
-        </View>
-        <View style={styles.notificationSettingsWrapper}>
-          <Button text='Notification Settings' onPress={goToNotificationSettings} style={styles.notificationSettings} />
-        </View>
-        <Footer saveChanges={changed && this.saveChanges} cancel={this.cancel} logout={this.logout} />
-      </ScrollView>
-    </KeyboardFriendlyView>
+    return <SafeAreaView style={{flex: 1}}>
+      <KeyboardFriendlyView style={styles.container}>
+        <ScrollView contentContainerStyle={styles.scrollContainer}>
+          <SettingControl
+            label='EMAIL'
+            value={email}
+            keyboardType={'email-address'}
+            autoCapitalize='none'
+            autoCorrect={false}
+            onChange={value => this.updateField('email', value)}
+            error={errors.email}
+            theme={styles.settingControl} />
+          {!editingPassword && <View style={styles.setting}>
+            <Text style={styles.settingLabel}>PASSWORD</Text>
+            <TouchableOpacity onPress={this.editPassword}>
+              <Text style={styles.linkText} ref={ref => { this.passwordInput = ref }}>Change Password</Text>
+            </TouchableOpacity>
+          </View>}
+          {editingPassword && <SettingControl
+            label='PASSWORD'
+            value={password}
+            toggleSecureTextEntry
+            autoCapitalize='none'
+            autoCorrect={false}
+            onChange={value => this.updateField('password', value)}
+            error={errors.password}
+            theme={styles.settingControl} />}
+          {editingPassword && <SettingControl
+            label='CONFIRM PASSWORD'
+            value={confirmPassword}
+            toggleSecureTextEntry
+            autoCapitalize='none'
+            autoCorrect={false}
+            onChange={value => this.updateField('confirmPassword', value)}
+            error={errors.confirmPassword}
+            theme={styles.settingControl} />}
+          {editingPassword && <TouchableOpacity style={styles.cancelPassword} onPress={this.cancelPassword}>
+            <Text style={styles.linkText}>Cancel Password Change</Text>
+          </TouchableOpacity>}
+          <SocialAccounts
+            facebookUrl={facebookUrl}
+            twitterName={twitterName}
+            twitterPrompt={this.twitterPrompt}
+            loginWithFacebook={this.loginWithFacebook}
+            updateUserSettings={updateUserSettings}
+            updateField={this.updateField}
+            unlinkAccount={unlinkAccount} />
+          <View style={styles.blockedUsersWrapper}>
+            <Button text='Blocked Users' onPress={goToBlockedUsers} style={styles.blockedUsers} />
+          </View>
+          <View style={styles.notificationSettingsWrapper}>
+            <Button text='Notification Settings' onPress={goToNotificationSettings} style={styles.notificationSettings} />
+          </View>
+          <Footer saveChanges={changed && this.saveChanges} cancel={this.cancel} logout={this.logout} />
+        </ScrollView>
+      </KeyboardFriendlyView>
+    </SafeAreaView>
   }
 }
 

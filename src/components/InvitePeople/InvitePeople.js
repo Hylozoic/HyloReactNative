@@ -196,7 +196,7 @@ export class SendInvitesPage extends PureComponent {
                 <Switch
                   onValueChange={this.toggleAllowCommunityInvites}
                   value={communityMembersCanInvite}
-                  onTintColor={caribbeanGreen}
+                  trackColor={{true: caribbeanGreen}}
                 />
               </View>
             </View>

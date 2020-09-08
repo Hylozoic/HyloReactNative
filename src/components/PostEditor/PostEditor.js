@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   ScrollView,
   Text,
@@ -13,7 +13,6 @@ import moment from 'moment'
 import { validateTopicName } from 'hylo-utils/validators'
 import { rhino30 } from 'style/colors'
 import { showToast, hideToast } from 'util/toast'
-import { keyboardAvoidingViewProps as kavProps } from 'util/viewHelpers'
 import header from 'util/header'
 import confirmDiscardChanges from '../../util/confirmDiscardChanges'
 import { MAX_TITLE_LENGTH } from './PostEditor.store'
@@ -39,8 +38,6 @@ import ImageSelector from './ImageSelector'
 import InlineEditor, { toHtml } from '../InlineEditor'
 import ErrorBubble from '../ErrorBubble'
 import styles from './PostEditor.styles'
-
-const TIME_STRING_FORMAT = 'MM/DD/YYYY LT'
 
 export default class PostEditor extends React.Component {
   static contextTypes = {navigate: PropTypes.func}
@@ -85,7 +82,9 @@ export default class PostEditor extends React.Component {
       confirmLeave: this.confirmLeave,
       saveChanges: this.saveChanges
     })
+    this.scrollView = React.createRef()
     this.state = {
+      scrollViewHeight: 0,
       title: get('title', post) || '',
       type: get('type', post) || (isProject ? 'project' : 'discussion'),
       communities: get('communities', post) || [],
@@ -338,6 +337,14 @@ export default class PostEditor extends React.Component {
     })
   }
 
+  onContentSizeChange = (width, height) => {
+    this.setState({ scrollViewHeight: height })
+  }
+
+  onDatePickerExpand = () => {
+    this.scrollView.current.scrollToEnd()
+  }
+
   render () {
     const { currentCommunity, canModerate, post, pendingDetailsText, isProject } = this.props
     const {
@@ -358,8 +365,14 @@ export default class PostEditor extends React.Component {
       showFilePicker: this._showFilePicker
     }
 
-    return <KeyboardFriendlyView style={styles.container} {...kavProps}>
-      <ScrollView keyboardShouldPersistTaps='handled' style={styles.scrollContainer}>
+    return <KeyboardFriendlyView style={styles.container}>
+      <ScrollView
+        ref={this.scrollView}
+        keyboardShouldPersistTaps='handled'
+        style={styles.scrollContainer}
+        onContentSizeChange={this.onContentSizeChange}
+        keyboardDismissMode='on-drag'
+      >
         <View style={styles.scrollContent}>
           {!isProject && <SectionLabel>What are you posting today?</SectionLabel>}
           {!isProject && <View style={[styles.typeButtonRow, styles.section]}>
@@ -400,7 +413,7 @@ export default class PostEditor extends React.Component {
             containerStyle={styles.detailsEditorContainer}
             communityId={get('id', currentCommunity)}
             autoGrow={false}
-            onFocusToggle={(isFocused) => this.setState({detailsFocused: isFocused})}
+            onFocusToggle={isFocused => this.setState({detailsFocused: isFocused})}
             onInsertTopic={this.insertEditorTopic}
           />
 
@@ -459,47 +472,22 @@ export default class PostEditor extends React.Component {
           </TouchableOpacity>
 
           {canHaveTimeframe && <React.Fragment>
-            <TouchableOpacity
-              style={[
-                styles.section,
-                styles.textInputWrapper,
-                styles.topics  
-              ]}
-              onPress={() => this.setState({ startTimeExpanded: !this.state.startTimeExpanded })}>
-              <View style={styles.topicLabel}>
-                <SectionLabel>Start Time</SectionLabel>
-                <View style={styles.topicAddBorder}><Icon name={this.state.startTimeExpanded ? 'ArrowUp' : 'ArrowDown'} style={styles.topicAdd} /></View>
-              </View>
-              {startTime && !this.state.startTimeExpanded &&
-                <Text>{moment(startTime).format(TIME_STRING_FORMAT)}</Text>}
-              {!startTime && !this.state.startTimeExpanded &&
-                <Text style={styles.textInputPlaceholder}>When does it start?</Text>}
-              <DatePicker
-                value={startTime}
-                expanded={this.state.startTimeExpanded}
-                onChange={startTime => this.setState({ startTime })} />
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={[
-                styles.section,
-                styles.textInputWrapper,
-                styles.topics
-              ]}
-              onPress={() => this.setState({ endTimeExpanded: !this.state.endTimeExpanded })}>
-              <View style={styles.members}>
-                <SectionLabel>End Time</SectionLabel>
-                <View style={styles.topicAddBorder}><Icon name='ArrowDown' style={styles.topicAdd} /></View>
-              </View>
-              {endTime && !this.state.endTimeExpanded &&
-                <Text>{moment(endTime).format(TIME_STRING_FORMAT)}</Text>}
-              {!endTime && !this.state.endTimeExpanded &&
-                <Text style={styles.textInputPlaceholder}>When does it end?</Text>}
-              <DatePicker
-                value={endTime}
-                expanded={this.state.endTimeExpanded}
-                onChange={endTime => this.setState({ endTime })}
-                style={styles.textInput} />
-            </TouchableOpacity>
+            <DatePickerWithLabel
+              label='Start Time'
+              placeholder='When does it start?'
+              date={startTime}
+              minimumDate={new Date()}
+              onChange={date => this.setState({ startTime: date })}
+              onExpand={this.onDatePickerExpand}
+            />
+            <DatePickerWithLabel
+              label='End Time'
+              placeholder='When does it end?'
+              date={endTime}
+              minimumDate={startTime || new Date()}
+              onChange={date => this.setState({ endTime: date })}
+              onExpand={this.onDatePickerExpand}
+            />
           </React.Fragment>}
 
           {!isEmpty(imageUrls) && <View>
@@ -521,7 +509,7 @@ export default class PostEditor extends React.Component {
         </View>
         {detailsFocused && <Toolbar {...toolbarProps} />}
       </ScrollView>
-      {!detailsFocused && <Toolbar {...toolbarProps} />}
+      <Toolbar {...toolbarProps} />
     </KeyboardFriendlyView>
   }
 }
@@ -587,5 +575,60 @@ export function TypeButton ({ type, selected, onPress }) {
     <Text style={[s.text, selected && s[type].text]}>
       {type.toUpperCase()}
     </Text>
+  </TouchableOpacity>
+}
+
+export function DatePickerWithLabel ({
+  date,
+  minimumDate,
+  label,
+  placeholder,
+  expanded: initialExpanded = false,
+  onChange,
+  onExpand,
+  styleTemplate = {
+    wrapper: [
+      styles.section,
+      styles.textInputWrapper,
+      styles.topics  
+    ],
+    labelWrapper: styles.topicLabel,
+    labelText: styles.sectionLabel,
+    expandIconWrapper: styles.topicAddBorder,
+    expandIcon: styles.topicAdd,
+    valueText: {},
+    placeholderText: styles.textInputPlaceholder
+  },
+  dateFormat = 'MM/DD/YYYY LT'
+}) {
+  const [expanded, setExpanded] = useState(initialExpanded)
+  const onPress = () => {
+    if (!expanded) onExpand()
+    setExpanded(!expanded)
+  }
+
+  return <TouchableOpacity
+    style={styleTemplate.wrapper}
+    onPress={onPress}
+  >
+    <View style={styleTemplate.labelWrapper}>
+      <Text style={styleTemplate.labelText}>
+        {label}
+      </Text>
+      <View style={styleTemplate.expandIconWrapper}>
+        <Icon name={expanded ? 'ArrowUp' : 'ArrowDown'} style={styleTemplate.expandIcon} />
+      </View>
+    </View>
+    {date && !expanded &&
+      <Text style={styleTemplate.valueText}>{moment(date).format(dateFormat)}</Text>}
+    {!date && !expanded &&
+      <Text style={styleTemplate.placeholderText}>{placeholder}</Text>}
+    {expanded && <View style={{ flex: 1, alignItems: 'center' }}>
+      <DatePicker
+        date={date}
+        minimumDate={minimumDate}
+        onChange={onChange}
+      />
+    </View>}
   </TouchableOpacity>
 }
