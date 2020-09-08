@@ -37,12 +37,11 @@ Object {
 `;
 
 exports[`PostEditor renders a new editor correctly 1`] = `
-<_default
-  behavior="padding"
-  keyboardVerticalOffset={64}
->
+<_default>
   <ScrollViewMock
+    keyboardDismissMode="on-drag"
     keyboardShouldPersistTaps="handled"
+    onContentSizeChange={[Function]}
   >
     <View>
       <SectionLabel>
@@ -173,7 +172,9 @@ exports[`PostEditor renders correctly while saving 1`] = `
   onLayout={[Function]}
 >
   <RCTScrollView
+    keyboardDismissMode="on-drag"
     keyboardShouldPersistTaps="handled"
+    onContentSizeChange={[Function]}
   >
     <View>
       <View>
@@ -417,7 +418,9 @@ exports[`PostEditor renders correctly while saving 2`] = `
   onLayout={[Function]}
 >
   <RCTScrollView
+    keyboardDismissMode="on-drag"
     keyboardShouldPersistTaps="handled"
+    onContentSizeChange={[Function]}
   >
     <View>
       <View>
@@ -639,7 +642,6 @@ exports[`PostEditor renders correctly while saving 2`] = `
           <Text>
             When does it start?
           </Text>
-          <View />
         </View>
         <View
           accessible={true}
@@ -666,7 +668,6 @@ exports[`PostEditor renders correctly while saving 2`] = `
           <Text>
             When does it end?
           </Text>
-          <View />
         </View>
       </View>
     </View>
@@ -711,12 +712,11 @@ exports[`PostEditor renders correctly while saving 2`] = `
 `;
 
 exports[`PostEditor renders with a post 1`] = `
-<_default
-  behavior="padding"
-  keyboardVerticalOffset={64}
->
+<_default>
   <ScrollViewMock
+    keyboardDismissMode="on-drag"
     keyboardShouldPersistTaps="handled"
+    onContentSizeChange={[Function]}
   >
     <View>
       <SectionLabel>

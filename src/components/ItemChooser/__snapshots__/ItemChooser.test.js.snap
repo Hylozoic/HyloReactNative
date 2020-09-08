@@ -162,8 +162,9 @@ Array [
 `;
 
 exports[`ItemChooser full renders as expected 1`] = `
-<RCTSafeAreaView
-  emulateUnlessSupported={true}
+<View
+  onLayout={[Function]}
+  pointerEvents="box-none"
 >
   <View>
     <View>
@@ -220,11 +221,11 @@ exports[`ItemChooser full renders as expected 1`] = `
       </View>
     </View>
   </RCTScrollView>
-</RCTSafeAreaView>
+</View>
 `;
 
 exports[`ItemChooser shallow renders as expected 1`] = `
-<ForwardRef(_SafeAreaView)>
+<withOrientation>
   <ItemChooserListHeader
     ItemRowComponent={[Function]}
     autoFocus={true}
@@ -255,5 +256,5 @@ exports[`ItemChooser shallow renders as expected 1`] = `
     updateCellsBatchingPeriod={50}
     windowSize={21}
   />
-</ForwardRef(_SafeAreaView)>
+</withOrientation>
 `;

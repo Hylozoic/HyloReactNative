@@ -12,432 +12,440 @@ exports[`FormError renders correctly 1`] = `
 `;
 
 exports[`Login renders correctly 1`] = `
-<ScrollViewMock
-  contentContainerStyle={
-    Object {
-      "alignItems": "center",
-      "backgroundColor": "white",
-      "justifyContent": "center",
-    }
-  }
->
-  <Image
-    source={
+<withOrientation>
+  <ScrollViewMock
+    contentContainerStyle={
       Object {
-        "testUri": "../../../src/assets/merkaba-green-on-white.png",
+        "alignItems": "center",
+        "backgroundColor": "white",
+        "justifyContent": "center",
       }
     }
-  />
-  <Text>
-    Log in to Hylo
-  </Text>
-  <View>
+  >
+    <Image
+      source={
+        Object {
+          "testUri": "../../../src/assets/merkaba-green-on-white.png",
+        }
+      }
+    />
     <Text>
-      Your email address
+      Log in to Hylo
     </Text>
-  </View>
-  <View>
+    <View>
+      <Text>
+        Your email address
+      </Text>
+    </View>
     <View>
       <View>
-        <TextInput
-          allowFontScaling={true}
-          autoCapitalize="none"
-          autoCorrect={false}
-          keyboardType="email-address"
-          onChangeText={[Function]}
-          rejectResponderTermination={true}
-          returnKeyType="next"
-          underlineColorAndroid="rgba(0,0,0,0)"
-        />
+        <View>
+          <TextInput
+            allowFontScaling={true}
+            autoCapitalize="none"
+            autoCorrect={false}
+            keyboardType="email-address"
+            onChangeText={[Function]}
+            rejectResponderTermination={true}
+            returnKeyType="next"
+            underlineColorAndroid="rgba(0,0,0,0)"
+          />
+        </View>
+        <View />
       </View>
-      <View />
     </View>
-  </View>
-  <View>
-    <Text>
-      Password
-    </Text>
-    <TouchableOpacity
-      activeOpacity={0.2}
-    >
+    <View>
       <Text>
-        Forgot your password?
+        Password
       </Text>
-    </TouchableOpacity>
-  </View>
-  <View>
+      <TouchableOpacity
+        activeOpacity={0.2}
+      >
+        <Text>
+          Forgot your password?
+        </Text>
+      </TouchableOpacity>
+    </View>
     <View>
       <View>
-        <TextInput
-          allowFontScaling={true}
-          autoCapitalize="none"
-          onChangeText={[Function]}
-          onSubmitEditing={[Function]}
-          rejectResponderTermination={true}
-          returnKeyType="go"
-          secureTextEntry={true}
-          selectTextOnFocus={true}
-          underlineColorAndroid="rgba(0,0,0,0)"
-        />
-      </View>
-      <View>
-        <Icon
-          allowFontScaling={false}
-          name="eye"
-          onPress={[Function]}
-          size={12}
-        />
+        <View>
+          <TextInput
+            allowFontScaling={true}
+            autoCapitalize="none"
+            onChangeText={[Function]}
+            onSubmitEditing={[Function]}
+            rejectResponderTermination={true}
+            returnKeyType="go"
+            secureTextEntry={true}
+            selectTextOnFocus={true}
+            underlineColorAndroid="rgba(0,0,0,0)"
+          />
+        </View>
+        <View>
+          <Icon
+            allowFontScaling={false}
+            name="eye"
+            onPress={[Function]}
+            size={12}
+          />
+        </View>
       </View>
     </View>
-  </View>
-  <View>
-    <TouchableOpacity
-      activeOpacity={0.2}
-      onPress={[Function]}
-    >
+    <View>
+      <TouchableOpacity
+        activeOpacity={0.2}
+        onPress={[Function]}
+      >
+        <Text>
+          Log In
+        </Text>
+      </TouchableOpacity>
+    </View>
+    <View>
       <Text>
-        Log In
+        Or connect with:
       </Text>
-    </TouchableOpacity>
-  </View>
-  <View>
-    <Text>
-      Or connect with:
-    </Text>
-    <GoogleLoginButton
-      createErrorNotification={[Function]}
-      style={Object {}}
+      <GoogleLoginButton
+        createErrorNotification={[Function]}
+        style={Object {}}
+      />
+      <FbLoginButton
+        createErrorNotification={[Function]}
+        style={Object {}}
+      />
+    </View>
+    <SignupLink
+      goToSignup={[Function]}
     />
-    <FbLoginButton
-      createErrorNotification={[Function]}
-      style={Object {}}
-    />
-  </View>
-  <SignupLink
-    goToSignup={[Function]}
-  />
-</ScrollViewMock>
+  </ScrollViewMock>
+</withOrientation>
 `;
 
 exports[`Login renders error message 1`] = `
-<ScrollViewMock
-  contentContainerStyle={
-    Object {
-      "alignItems": "center",
-      "backgroundColor": "white",
-      "justifyContent": "center",
-    }
-  }
->
-  <Image
-    source={
+<withOrientation>
+  <ScrollViewMock
+    contentContainerStyle={
       Object {
-        "testUri": "../../../src/assets/merkaba-green-on-white.png",
+        "alignItems": "center",
+        "backgroundColor": "white",
+        "justifyContent": "center",
       }
     }
-  />
-  <Text>
-    Log in to Hylo
-  </Text>
-  <View>
+  >
+    <Image
+      source={
+        Object {
+          "testUri": "../../../src/assets/merkaba-green-on-white.png",
+        }
+      }
+    />
     <Text>
-      Your email address
+      Log in to Hylo
     </Text>
-  </View>
-  <View>
+    <View>
+      <Text>
+        Your email address
+      </Text>
+    </View>
     <View>
       <View>
-        <TextInput
-          allowFontScaling={true}
-          autoCapitalize="none"
-          autoCorrect={false}
-          keyboardType="email-address"
-          onChangeText={[Function]}
-          rejectResponderTermination={true}
-          returnKeyType="next"
-          underlineColorAndroid="rgba(0,0,0,0)"
-        />
+        <View>
+          <TextInput
+            allowFontScaling={true}
+            autoCapitalize="none"
+            autoCorrect={false}
+            keyboardType="email-address"
+            onChangeText={[Function]}
+            rejectResponderTermination={true}
+            returnKeyType="next"
+            underlineColorAndroid="rgba(0,0,0,0)"
+          />
+        </View>
+        <View />
       </View>
-      <View />
     </View>
-  </View>
-  <View>
-    <Text>
-      Password
-    </Text>
-    <TouchableOpacity
-      activeOpacity={0.2}
-    >
+    <View>
       <Text>
-        Forgot your password?
+        Password
       </Text>
-    </TouchableOpacity>
-  </View>
-  <View>
+      <TouchableOpacity
+        activeOpacity={0.2}
+      >
+        <Text>
+          Forgot your password?
+        </Text>
+      </TouchableOpacity>
+    </View>
     <View>
       <View>
-        <TextInput
-          allowFontScaling={true}
-          autoCapitalize="none"
-          onChangeText={[Function]}
-          onSubmitEditing={[Function]}
-          rejectResponderTermination={true}
-          returnKeyType="go"
-          secureTextEntry={true}
-          selectTextOnFocus={true}
-          underlineColorAndroid="rgba(0,0,0,0)"
-        />
-      </View>
-      <View>
-        <Icon
-          allowFontScaling={false}
-          name="eye"
-          onPress={[Function]}
-          size={12}
-        />
+        <View>
+          <TextInput
+            allowFontScaling={true}
+            autoCapitalize="none"
+            onChangeText={[Function]}
+            onSubmitEditing={[Function]}
+            rejectResponderTermination={true}
+            returnKeyType="go"
+            secureTextEntry={true}
+            selectTextOnFocus={true}
+            underlineColorAndroid="rgba(0,0,0,0)"
+          />
+        </View>
+        <View>
+          <Icon
+            allowFontScaling={false}
+            name="eye"
+            onPress={[Function]}
+            size={12}
+          />
+        </View>
       </View>
     </View>
-  </View>
-  <View>
-    <TouchableOpacity
-      activeOpacity={0.2}
-      onPress={[Function]}
-    >
+    <View>
+      <TouchableOpacity
+        activeOpacity={0.2}
+        onPress={[Function]}
+      >
+        <Text>
+          Log In
+        </Text>
+      </TouchableOpacity>
+    </View>
+    <View>
       <Text>
-        Log In
+        Or connect with:
       </Text>
-    </TouchableOpacity>
-  </View>
-  <View>
-    <Text>
-      Or connect with:
-    </Text>
-    <GoogleLoginButton
-      createErrorNotification={[Function]}
-      style={Object {}}
-    />
-    <FbLoginButton
-      createErrorNotification={[Function]}
-      style={Object {}}
-    />
-  </View>
-  <SignupLink />
-</ScrollViewMock>
+      <GoogleLoginButton
+        createErrorNotification={[Function]}
+        style={Object {}}
+      />
+      <FbLoginButton
+        createErrorNotification={[Function]}
+        style={Object {}}
+      />
+    </View>
+    <SignupLink />
+  </ScrollViewMock>
+</withOrientation>
 `;
 
 exports[`Login renders with no network connection error 1`] = `
-<ScrollViewMock
-  contentContainerStyle={
-    Object {
-      "alignItems": "center",
-      "backgroundColor": "white",
-      "justifyContent": "center",
-    }
-  }
->
-  <Image
-    source={
+<withOrientation>
+  <ScrollViewMock
+    contentContainerStyle={
       Object {
-        "testUri": "../../../src/assets/merkaba-green-on-white.png",
+        "alignItems": "center",
+        "backgroundColor": "white",
+        "justifyContent": "center",
       }
     }
-  />
-  <Text>
-    Log in to Hylo
-  </Text>
-  <View>
+  >
+    <Image
+      source={
+        Object {
+          "testUri": "../../../src/assets/merkaba-green-on-white.png",
+        }
+      }
+    />
     <Text>
-      Your email address
+      Log in to Hylo
     </Text>
-  </View>
-  <View>
+    <View>
+      <Text>
+        Your email address
+      </Text>
+    </View>
     <View>
       <View>
-        <TextInput
-          allowFontScaling={true}
-          autoCapitalize="none"
-          autoCorrect={false}
-          keyboardType="email-address"
-          onChangeText={[Function]}
-          rejectResponderTermination={true}
-          returnKeyType="next"
-          underlineColorAndroid="rgba(0,0,0,0)"
-        />
+        <View>
+          <TextInput
+            allowFontScaling={true}
+            autoCapitalize="none"
+            autoCorrect={false}
+            keyboardType="email-address"
+            onChangeText={[Function]}
+            rejectResponderTermination={true}
+            returnKeyType="next"
+            underlineColorAndroid="rgba(0,0,0,0)"
+          />
+        </View>
+        <View />
       </View>
-      <View />
     </View>
-  </View>
-  <View>
-    <Text>
-      Password
-    </Text>
-    <TouchableOpacity
-      activeOpacity={0.2}
-    >
+    <View>
       <Text>
-        Forgot your password?
+        Password
       </Text>
-    </TouchableOpacity>
-  </View>
-  <View>
+      <TouchableOpacity
+        activeOpacity={0.2}
+      >
+        <Text>
+          Forgot your password?
+        </Text>
+      </TouchableOpacity>
+    </View>
     <View>
       <View>
-        <TextInput
-          allowFontScaling={true}
-          autoCapitalize="none"
-          onChangeText={[Function]}
-          onSubmitEditing={[Function]}
-          rejectResponderTermination={true}
-          returnKeyType="go"
-          secureTextEntry={true}
-          selectTextOnFocus={true}
-          underlineColorAndroid="rgba(0,0,0,0)"
-        />
-      </View>
-      <View>
-        <Icon
-          allowFontScaling={false}
-          name="eye"
-          onPress={[Function]}
-          size={12}
-        />
+        <View>
+          <TextInput
+            allowFontScaling={true}
+            autoCapitalize="none"
+            onChangeText={[Function]}
+            onSubmitEditing={[Function]}
+            rejectResponderTermination={true}
+            returnKeyType="go"
+            secureTextEntry={true}
+            selectTextOnFocus={true}
+            underlineColorAndroid="rgba(0,0,0,0)"
+          />
+        </View>
+        <View>
+          <Icon
+            allowFontScaling={false}
+            name="eye"
+            onPress={[Function]}
+            size={12}
+          />
+        </View>
       </View>
     </View>
-  </View>
-  <View>
-    <TouchableOpacity
-      activeOpacity={0.2}
-      onPress={[Function]}
-    >
+    <View>
+      <TouchableOpacity
+        activeOpacity={0.2}
+        onPress={[Function]}
+      >
+        <Text>
+          Log In
+        </Text>
+      </TouchableOpacity>
+    </View>
+    <View>
       <Text>
-        Log In
+        Or connect with:
       </Text>
-    </TouchableOpacity>
-  </View>
-  <View>
-    <Text>
-      Or connect with:
-    </Text>
-    <GoogleLoginButton
-      createErrorNotification={[Function]}
-      style={Object {}}
-    />
-    <FbLoginButton
-      createErrorNotification={[Function]}
-      style={Object {}}
-    />
-  </View>
-  <SignupLink />
-</ScrollViewMock>
+      <GoogleLoginButton
+        createErrorNotification={[Function]}
+        style={Object {}}
+      />
+      <FbLoginButton
+        createErrorNotification={[Function]}
+        style={Object {}}
+      />
+    </View>
+    <SignupLink />
+  </ScrollViewMock>
+</withOrientation>
 `;
 
 exports[`Login renders with pending banner 1`] = `
-<ScrollViewMock
-  contentContainerStyle={
-    Object {
-      "alignItems": "center",
-      "backgroundColor": "white",
-      "justifyContent": "center",
-    }
-  }
->
-  <Text>
-    LOGGING IN...
-  </Text>
-  <Image
-    source={
+<withOrientation>
+  <ScrollViewMock
+    contentContainerStyle={
       Object {
-        "testUri": "../../../src/assets/merkaba-green-on-white.png",
+        "alignItems": "center",
+        "backgroundColor": "white",
+        "justifyContent": "center",
       }
     }
-  />
-  <Text>
-    Log in to Hylo
-  </Text>
-  <View>
+  >
     <Text>
-      Your email address
+      LOGGING IN...
     </Text>
-  </View>
-  <View>
+    <Image
+      source={
+        Object {
+          "testUri": "../../../src/assets/merkaba-green-on-white.png",
+        }
+      }
+    />
+    <Text>
+      Log in to Hylo
+    </Text>
+    <View>
+      <Text>
+        Your email address
+      </Text>
+    </View>
     <View>
       <View>
-        <TextInput
-          allowFontScaling={true}
-          autoCapitalize="none"
-          autoCorrect={false}
-          keyboardType="email-address"
-          onChangeText={[Function]}
-          rejectResponderTermination={true}
-          returnKeyType="next"
-          underlineColorAndroid="rgba(0,0,0,0)"
-        />
+        <View>
+          <TextInput
+            allowFontScaling={true}
+            autoCapitalize="none"
+            autoCorrect={false}
+            keyboardType="email-address"
+            onChangeText={[Function]}
+            rejectResponderTermination={true}
+            returnKeyType="next"
+            underlineColorAndroid="rgba(0,0,0,0)"
+          />
+        </View>
+        <View />
       </View>
-      <View />
     </View>
-  </View>
-  <View>
-    <Text>
-      Password
-    </Text>
-    <TouchableOpacity
-      activeOpacity={0.2}
-    >
+    <View>
       <Text>
-        Forgot your password?
+        Password
       </Text>
-    </TouchableOpacity>
-  </View>
-  <View>
+      <TouchableOpacity
+        activeOpacity={0.2}
+      >
+        <Text>
+          Forgot your password?
+        </Text>
+      </TouchableOpacity>
+    </View>
     <View>
       <View>
-        <TextInput
-          allowFontScaling={true}
-          autoCapitalize="none"
-          onChangeText={[Function]}
-          onSubmitEditing={[Function]}
-          rejectResponderTermination={true}
-          returnKeyType="go"
-          secureTextEntry={true}
-          selectTextOnFocus={true}
-          underlineColorAndroid="rgba(0,0,0,0)"
-        />
-      </View>
-      <View>
-        <Icon
-          allowFontScaling={false}
-          name="eye"
-          onPress={[Function]}
-          size={12}
-        />
+        <View>
+          <TextInput
+            allowFontScaling={true}
+            autoCapitalize="none"
+            onChangeText={[Function]}
+            onSubmitEditing={[Function]}
+            rejectResponderTermination={true}
+            returnKeyType="go"
+            secureTextEntry={true}
+            selectTextOnFocus={true}
+            underlineColorAndroid="rgba(0,0,0,0)"
+          />
+        </View>
+        <View>
+          <Icon
+            allowFontScaling={false}
+            name="eye"
+            onPress={[Function]}
+            size={12}
+          />
+        </View>
       </View>
     </View>
-  </View>
-  <View>
-    <TouchableOpacity
-      activeOpacity={0.2}
-      onPress={[Function]}
-    >
+    <View>
+      <TouchableOpacity
+        activeOpacity={0.2}
+        onPress={[Function]}
+      >
+        <Text>
+          Log In
+        </Text>
+      </TouchableOpacity>
+    </View>
+    <View>
       <Text>
-        Log In
+        Or connect with:
       </Text>
-    </TouchableOpacity>
-  </View>
-  <View>
-    <Text>
-      Or connect with:
-    </Text>
-    <GoogleLoginButton
-      createErrorNotification={[Function]}
-      style={Object {}}
-    />
-    <FbLoginButton
-      createErrorNotification={[Function]}
-      style={Object {}}
-    />
-  </View>
-  <SignupLink />
-</ScrollViewMock>
+      <GoogleLoginButton
+        createErrorNotification={[Function]}
+        style={Object {}}
+      />
+      <FbLoginButton
+        createErrorNotification={[Function]}
+        style={Object {}}
+      />
+    </View>
+    <SignupLink />
+  </ScrollViewMock>
+</withOrientation>
 `;
 
 exports[`SignupLink renders correctly 1`] = `

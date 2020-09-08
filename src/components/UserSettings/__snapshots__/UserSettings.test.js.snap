@@ -176,19 +176,313 @@ Object {
 exports[`UserSettings matches snapshot with state set 1`] = `
 <View
   onLayout={[Function]}
+  pointerEvents="box-none"
 >
-  <RCTScrollView
-    contentContainerStyle={
-      Object {
-        "flexGrow": 1,
-      }
-    }
+  <View
+    onLayout={[Function]}
   >
-    <View>
+    <RCTScrollView
+      contentContainerStyle={
+        Object {
+          "flexGrow": 1,
+        }
+      }
+    >
+      <View>
+        <SettingControl
+          autoCapitalize="none"
+          autoCorrect={false}
+          error="bad email"
+          keyboardType="email-address"
+          label="EMAIL"
+          onChange={[Function]}
+          theme={
+            Object {
+              "control": Object {
+                "marginBottom": 3,
+              },
+              "error": Object {
+                "paddingBottom": 10,
+                "paddingVertical": 0,
+              },
+              "hideErrorTriangle": true,
+              "label": Object {
+                "color": "#c0c6cd",
+                "fontFamily": "Circular-Bold",
+                "fontSize": 10,
+                "marginBottom": 10,
+              },
+              "textInput": Object {
+                "borderBottomColor": "#c0c6cd",
+                "borderBottomWidth": 0.5,
+                "color": "#56667a",
+                "fontFamily": "Circular-Book",
+                "fontSize": 16,
+              },
+            }
+          }
+          value="aa@bbb.com"
+        />
+        <SettingControl
+          autoCapitalize="none"
+          autoCorrect={false}
+          error="needs to be longer"
+          label="PASSWORD"
+          onChange={[Function]}
+          theme={
+            Object {
+              "control": Object {
+                "marginBottom": 3,
+              },
+              "error": Object {
+                "paddingBottom": 10,
+                "paddingVertical": 0,
+              },
+              "hideErrorTriangle": true,
+              "label": Object {
+                "color": "#c0c6cd",
+                "fontFamily": "Circular-Bold",
+                "fontSize": 10,
+                "marginBottom": 10,
+              },
+              "textInput": Object {
+                "borderBottomColor": "#c0c6cd",
+                "borderBottomWidth": 0.5,
+                "color": "#56667a",
+                "fontFamily": "Circular-Book",
+                "fontSize": 16,
+              },
+            }
+          }
+          toggleSecureTextEntry={true}
+          value="hunkjnkjn"
+        />
+        <SettingControl
+          autoCapitalize="none"
+          autoCorrect={false}
+          error="needs to match"
+          label="CONFIRM PASSWORD"
+          onChange={[Function]}
+          theme={
+            Object {
+              "control": Object {
+                "marginBottom": 3,
+              },
+              "error": Object {
+                "paddingBottom": 10,
+                "paddingVertical": 0,
+              },
+              "hideErrorTriangle": true,
+              "label": Object {
+                "color": "#c0c6cd",
+                "fontFamily": "Circular-Bold",
+                "fontSize": 10,
+                "marginBottom": 10,
+              },
+              "textInput": Object {
+                "borderBottomColor": "#c0c6cd",
+                "borderBottomWidth": 0.5,
+                "color": "#56667a",
+                "fontFamily": "Circular-Book",
+                "fontSize": 16,
+              },
+            }
+          }
+          toggleSecureTextEntry={true}
+          value="fkldsflkjdf"
+        />
+        <View
+          accessible={true}
+          focusable={true}
+          isTVSelectable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+        >
+          <Text>
+            Cancel Password Change
+          </Text>
+        </View>
+        <View>
+          <Text>
+            SOCIAL ACCOUNTS
+          </Text>
+          <View>
+            <Text>
+              Facebook
+            </Text>
+            <View
+              accessible={true}
+              focusable={true}
+              isTVSelectable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+            >
+              <Text>
+                Unlink
+              </Text>
+            </View>
+          </View>
+          <View>
+            <Text>
+              Twitter
+            </Text>
+            <View
+              accessible={true}
+              focusable={true}
+              isTVSelectable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+            >
+              <Text>
+                Unlink
+              </Text>
+            </View>
+          </View>
+        </View>
+        <View>
+          <View>
+            <View
+              accessible={true}
+              focusable={false}
+              isTVSelectable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+            >
+              <View>
+                <View>
+                  <Text>
+                    Blocked Users
+                  </Text>
+                </View>
+              </View>
+            </View>
+          </View>
+        </View>
+        <View>
+          <View>
+            <View
+              accessible={true}
+              focusable={false}
+              isTVSelectable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+            >
+              <View>
+                <View>
+                  <Text>
+                    Notification Settings
+                  </Text>
+                </View>
+              </View>
+            </View>
+          </View>
+        </View>
+        <View>
+          <View>
+            <View
+              accessible={true}
+              focusable={true}
+              isTVSelectable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+            >
+              <View>
+                <View>
+                  <Text>
+                    Save Changes
+                  </Text>
+                </View>
+              </View>
+            </View>
+          </View>
+          <View
+            accessible={true}
+            focusable={true}
+            isTVSelectable={true}
+            onClick={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+          >
+            <Text>
+              Cancel
+            </Text>
+          </View>
+          <View>
+            <View
+              accessible={true}
+              focusable={true}
+              isTVSelectable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+            >
+              <View>
+                <View>
+                  <Text>
+                    Logout
+                  </Text>
+                </View>
+              </View>
+            </View>
+          </View>
+        </View>
+      </View>
+    </RCTScrollView>
+  </View>
+</View>
+`;
+
+exports[`UserSettings matches the last snapshot 1`] = `
+<withOrientation>
+  <_default>
+    <ScrollViewMock
+      contentContainerStyle={
+        Object {
+          "flexGrow": 1,
+        }
+      }
+    >
       <SettingControl
         autoCapitalize="none"
         autoCorrect={false}
-        error="bad email"
         keyboardType="email-address"
         label="EMAIL"
         onChange={[Function]}
@@ -217,333 +511,46 @@ exports[`UserSettings matches snapshot with state set 1`] = `
             },
           }
         }
-        value="aa@bbb.com"
+        value=""
       />
-      <SettingControl
-        autoCapitalize="none"
-        autoCorrect={false}
-        error="needs to be longer"
-        label="PASSWORD"
-        onChange={[Function]}
-        theme={
-          Object {
-            "control": Object {
-              "marginBottom": 3,
-            },
-            "error": Object {
-              "paddingBottom": 10,
-              "paddingVertical": 0,
-            },
-            "hideErrorTriangle": true,
-            "label": Object {
-              "color": "#c0c6cd",
-              "fontFamily": "Circular-Bold",
-              "fontSize": 10,
-              "marginBottom": 10,
-            },
-            "textInput": Object {
-              "borderBottomColor": "#c0c6cd",
-              "borderBottomWidth": 0.5,
-              "color": "#56667a",
-              "fontFamily": "Circular-Book",
-              "fontSize": 16,
-            },
-          }
-        }
-        toggleSecureTextEntry={true}
-        value="hunkjnkjn"
-      />
-      <SettingControl
-        autoCapitalize="none"
-        autoCorrect={false}
-        error="needs to match"
-        label="CONFIRM PASSWORD"
-        onChange={[Function]}
-        theme={
-          Object {
-            "control": Object {
-              "marginBottom": 3,
-            },
-            "error": Object {
-              "paddingBottom": 10,
-              "paddingVertical": 0,
-            },
-            "hideErrorTriangle": true,
-            "label": Object {
-              "color": "#c0c6cd",
-              "fontFamily": "Circular-Bold",
-              "fontSize": 10,
-              "marginBottom": 10,
-            },
-            "textInput": Object {
-              "borderBottomColor": "#c0c6cd",
-              "borderBottomWidth": 0.5,
-              "color": "#56667a",
-              "fontFamily": "Circular-Book",
-              "fontSize": 16,
-            },
-          }
-        }
-        toggleSecureTextEntry={true}
-        value="fkldsflkjdf"
-      />
-      <View
-        accessible={true}
-        focusable={true}
-        isTVSelectable={true}
-        onClick={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
-      >
-        <Text>
-          Cancel Password Change
-        </Text>
-      </View>
       <View>
         <Text>
-          SOCIAL ACCOUNTS
+          PASSWORD
         </Text>
-        <View>
-          <Text>
-            Facebook
-          </Text>
-          <View
-            accessible={true}
-            focusable={true}
-            isTVSelectable={true}
-            onClick={[Function]}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
-          >
-            <Text>
-              Unlink
-            </Text>
-          </View>
-        </View>
-        <View>
-          <Text>
-            Twitter
-          </Text>
-          <View
-            accessible={true}
-            focusable={true}
-            isTVSelectable={true}
-            onClick={[Function]}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
-          >
-            <Text>
-              Unlink
-            </Text>
-          </View>
-        </View>
-      </View>
-      <View>
-        <View>
-          <View
-            accessible={true}
-            focusable={false}
-            isTVSelectable={true}
-            onClick={[Function]}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
-          >
-            <View>
-              <View>
-                <Text>
-                  Blocked Users
-                </Text>
-              </View>
-            </View>
-          </View>
-        </View>
-      </View>
-      <View>
-        <View>
-          <View
-            accessible={true}
-            focusable={false}
-            isTVSelectable={true}
-            onClick={[Function]}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
-          >
-            <View>
-              <View>
-                <Text>
-                  Notification Settings
-                </Text>
-              </View>
-            </View>
-          </View>
-        </View>
-      </View>
-      <View>
-        <View>
-          <View
-            accessible={true}
-            focusable={true}
-            isTVSelectable={true}
-            onClick={[Function]}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
-          >
-            <View>
-              <View>
-                <Text>
-                  Save Changes
-                </Text>
-              </View>
-            </View>
-          </View>
-        </View>
-        <View
-          accessible={true}
-          focusable={true}
-          isTVSelectable={true}
-          onClick={[Function]}
-          onResponderGrant={[Function]}
-          onResponderMove={[Function]}
-          onResponderRelease={[Function]}
-          onResponderTerminate={[Function]}
-          onResponderTerminationRequest={[Function]}
-          onStartShouldSetResponder={[Function]}
+        <TouchableOpacity
+          activeOpacity={0.2}
+          onPress={[Function]}
         >
           <Text>
-            Cancel
+            Change Password
           </Text>
-        </View>
-        <View>
-          <View
-            accessible={true}
-            focusable={true}
-            isTVSelectable={true}
-            onClick={[Function]}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
-          >
-            <View>
-              <View>
-                <Text>
-                  Logout
-                </Text>
-              </View>
-            </View>
-          </View>
-        </View>
+        </TouchableOpacity>
       </View>
-    </View>
-  </RCTScrollView>
-</View>
-`;
-
-exports[`UserSettings matches the last snapshot 1`] = `
-<_default>
-  <ScrollViewMock
-    contentContainerStyle={
-      Object {
-        "flexGrow": 1,
-      }
-    }
-  >
-    <SettingControl
-      autoCapitalize="none"
-      autoCorrect={false}
-      keyboardType="email-address"
-      label="EMAIL"
-      onChange={[Function]}
-      theme={
-        Object {
-          "control": Object {
-            "marginBottom": 3,
-          },
-          "error": Object {
-            "paddingBottom": 10,
-            "paddingVertical": 0,
-          },
-          "hideErrorTriangle": true,
-          "label": Object {
-            "color": "#c0c6cd",
-            "fontFamily": "Circular-Bold",
-            "fontSize": 10,
-            "marginBottom": 10,
-          },
-          "textInput": Object {
-            "borderBottomColor": "#c0c6cd",
-            "borderBottomWidth": 0.5,
-            "color": "#56667a",
-            "fontFamily": "Circular-Book",
-            "fontSize": 16,
-          },
-        }
-      }
-      value=""
-    />
-    <View>
-      <Text>
-        PASSWORD
-      </Text>
-      <TouchableOpacity
-        activeOpacity={0.2}
-        onPress={[Function]}
-      >
-        <Text>
-          Change Password
-        </Text>
-      </TouchableOpacity>
-    </View>
-    <SocialAccounts
-      loginWithFacebook={[Function]}
-      twitterPrompt={[Function]}
-      unlinkAccount={[Function]}
-      updateField={[Function]}
-      updateUserSettings={[Function]}
-    />
-    <View>
-      <Button
-        text="Blocked Users"
+      <SocialAccounts
+        loginWithFacebook={[Function]}
+        twitterPrompt={[Function]}
+        unlinkAccount={[Function]}
+        updateField={[Function]}
+        updateUserSettings={[Function]}
       />
-    </View>
-    <View>
-      <Button
-        text="Notification Settings"
+      <View>
+        <Button
+          text="Blocked Users"
+        />
+      </View>
+      <View>
+        <Button
+          text="Notification Settings"
+        />
+      </View>
+      <Footer
+        cancel={[Function]}
+        logout={[Function]}
+        saveChanges={false}
       />
-    </View>
-    <Footer
-      cancel={[Function]}
-      logout={[Function]}
-      saveChanges={false}
-    />
-  </ScrollViewMock>
-</_default>
+    </ScrollViewMock>
+  </_default>
+</withOrientation>
 `;
 
 exports[`UserSettings updateField sets the state 1`] = `

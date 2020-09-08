@@ -178,8 +178,12 @@ exports[`InvitePeople renders SendInvitesPage 1`] = `
         </Text>
         <View>
           <Switch
-            onTintColor="#0DC39F"
             onValueChange={[Function]}
+            trackColor={
+              Object {
+                "true": "#0DC39F",
+              }
+            }
           />
         </View>
       </View>
