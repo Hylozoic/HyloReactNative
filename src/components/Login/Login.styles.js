@@ -65,7 +65,7 @@ export default {
   logo: {
     height: 80,
     width: 80,
-    marginTop: (screenHeight - 550) * 0.6,
+    marginTop: (screenHeight - 580) * 0.6,
     marginBottom: 10
   },
   title: {
