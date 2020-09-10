@@ -4,8 +4,7 @@
 
 import apiHost from 'util/apiHost'
 import Request from 'util/Request'
-
-const UPLOAD = 'UPLOAD'
+import { UPLOAD } from 'store/constants'
 
 export default function upload (type, id, file) {
   const url = apiHost + '/noo/upload'

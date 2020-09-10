@@ -103,6 +103,11 @@ Object {
       "itemsById": Object {},
       "meta": Object {},
     },
+    "Location": Object {
+      "items": Array [],
+      "itemsById": Object {},
+      "meta": Object {},
+    },
     "Me": Object {
       "items": Array [],
       "itemsById": Object {},
@@ -189,11 +194,6 @@ Object {
       "meta": Object {},
     },
     "PersonConnection": Object {
-      "items": Array [],
-      "itemsById": Object {},
-      "meta": Object {},
-    },
-    "PersonMemberships": Object {
       "items": Array [],
       "itemsById": Object {},
       "meta": Object {},

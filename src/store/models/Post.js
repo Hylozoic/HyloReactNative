@@ -59,7 +59,6 @@ Post.fields = {
     as: 'locationObject'
   }),
   details: attr(),
-  linkPreview: fk('LinkPreview', 'posts'),
   creator: fk('Person', 'posts'),
   followers: many({
     to: 'Person',
