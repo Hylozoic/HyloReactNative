@@ -14,6 +14,25 @@ export default function fetchCurrentUser () {
           name
           email
           location
+          locationObject {
+            id
+            addressNumber
+            addressStreet
+            bbox {
+              lat
+              lng
+            }
+            center {
+              lat
+              lng
+            }
+            city
+            country
+            fullText
+            locality
+            neighborhood
+            region
+          }
           avatarUrl
           facebookUrl
           twitterName

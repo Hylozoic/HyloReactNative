@@ -33,6 +33,25 @@ query ($slug: String, $first: Int, $sortBy: String, $offset: Int, $search: Strin
         bio
         avatarUrl
         location
+        locationObject {
+          id
+          addressNumber
+          addressStreet
+          bbox {
+            lat
+            lng
+          }
+          center {
+            lat
+            lng
+          }
+          city
+          country
+          fullText
+          locality
+          neighborhood
+          region
+        }
         tagline
         skills {
           hasMore
@@ -63,6 +82,25 @@ query ($slug: String, $first: Int, $sortBy: String, $offset: Int, $search: Strin
         bio
         avatarUrl
         location
+        locationObject {
+          id
+          addressNumber
+          addressStreet
+          bbox {
+            lat
+            lng
+          }
+          center {
+            lat
+            lng
+          }
+          city
+          country
+          fullText
+          locality
+          neighborhood
+          region
+        }
         tagline
         skills {
           hasMore

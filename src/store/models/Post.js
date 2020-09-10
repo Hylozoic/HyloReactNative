@@ -1,6 +1,7 @@
 import { attr, fk, many, Model } from 'redux-orm'
 import Attachment from './Attachment'
 import { get } from 'lodash/fp'
+import PropTypes from 'prop-types'
 
 export const PostFollower = Model.createClass({})
 PostFollower.modelName = 'PostFollower'
@@ -52,7 +53,13 @@ Post.fields = {
   id: attr(),
   title: attr(),
   type: attr(),
+  location: attr(),
+  locationId: fk({
+    to: 'Location',
+    as: 'locationObject'
+  }),
   details: attr(),
+  linkPreview: fk('LinkPreview', 'posts'),
   creator: fk('Person', 'posts'),
   followers: many({
     to: 'Person',
@@ -76,12 +83,64 @@ Post.fields = {
     throughFields: [ 'post', 'member' ]
   }),
   commentersTotal: attr(),
-  commentsTotal: attr(),
   createdAt: attr(),
   startsAt: attr(),
   endsAt: attr(),
   fulfilledAt: attr(),
   votesTotal: attr(),
   myVote: attr(),
-  topics: many('Topic')
+  topics: many('Topic'),
+  isPublic: attr()
+}
+
+export const POST_TYPES = {
+  'discussion': {
+    primaryColor: 'rgba(0, 163, 227, 1)', // $color-picton-blue
+    backgroundColor: 'rgba(0, 163, 227, .2)', // $color-link-water
+    map: false
+  },
+  'event': {
+    primaryColor: 'rgba(254, 72, 80, 1)', // $color-medium-purple
+    backgroundColor: 'rgba(254, 72, 80, .2)', // $color-moon-raker
+    map: true
+  },
+  'offer': {
+    primaryColor: 'rgba(0, 199, 157, 1)', // $color-caribbean-green
+    backgroundColor: 'rgba(0, 199, 157, .2)', // $color-iceberg;
+    map: true
+  },
+  'resource': {
+    primaryColor: 'rgba(255, 212, 3, 1)', // $color-mango-yellow;
+    backgroundColor: 'rgba(255, 212, 3, .2)',
+    map: true
+  },
+  'project': {
+    primaryColor: 'rgba(252, 128, 0, 1)', // $color-fuchsia-pink;
+    backgroundColor: 'rgba(252, 128, 0, .2)', // $color-prim;
+    map: false
+  },
+  'request': {
+    primaryColor: 'rgba(102, 75, 165, 1)', // $color-persimmon;
+    backgroundColor: 'rgba(102, 75, 165, .2)', // $color-peach-schnapps;
+    map: true
+  }
+}
+
+export const POST_PROP_TYPES = {
+  id: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number
+  ]),
+  type: PropTypes.string,
+  title: PropTypes.string,
+  details: PropTypes.string,
+  location: PropTypes.string,
+  locationObject: PropTypes.object,
+  name: PropTypes.string,
+  upVotes: PropTypes.string,
+  updatedAt: PropTypes.string,
+  imageUrl: PropTypes.string,
+  linkPreview: PropTypes.object,
+  communities: PropTypes.array,
+  isPublic: PropTypes.boolean
 }

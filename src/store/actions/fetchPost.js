@@ -9,6 +9,25 @@ export function getPostFieldsFragment (withComments = true) {
   details
   type
   location
+  locationObject {
+    id
+    addressNumber
+    addressStreet
+    bbox {
+      lat
+      lng
+    }
+    center {
+      lat
+      lng
+    }
+    city
+    country
+    fullText
+    locality
+    neighborhood
+    region
+  }
   announcement
   creator {
     id

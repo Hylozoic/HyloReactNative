@@ -16,6 +16,25 @@ export function fetchCommunitySettings (id) {
           bannerUrl
           description
           location
+          locationObject {
+            id
+            addressNumber
+            addressStreet
+            bbox {
+              lat
+              lng
+            }
+            center {
+              lat
+              lng
+            }
+            city
+            country
+            fullText
+            locality
+            neighborhood
+            region
+          }
           settings
           invitePath
           hidden

@@ -10,6 +10,7 @@ import Comment from './Comment'
 import Community, { CommunityModerator } from './Community'
 import CommunityTopic from './CommunityTopic'
 import Invitation from './Invitation'
+import Location from './Location'
 import Me from './Me'
 import Membership from './Membership'
 import Person from './Person'
@@ -34,6 +35,7 @@ orm.register(
   CommunityModerator,
   CommunityTopic,
   Invitation,
+  Location,
   Me,
   Membership,
   Message,
