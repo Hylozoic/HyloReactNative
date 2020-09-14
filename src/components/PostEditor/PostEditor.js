@@ -26,7 +26,10 @@ import getTopicsForAutocompleteWithNew from '../../store/selectors/getTopicsForA
 import TopicRow from '../TopicList/TopicRow'
 // Community Chooser
 import CommunityChooserItemRow from '../ItemChooser/CommunityChooserItemRow'
-//
+// Location Picker
+import locationSearch from '../../store/actions/locationSearch'
+import LocationPickerItemRow from '../ItemChooser/LocationPickerItemRow'
+// 
 import CommunitiesList from '../CommunitiesList'
 import ProjectMembersSummary from '../ProjectMembersSummary'
 import KeyboardFriendlyView from '../KeyboardFriendlyView'
@@ -210,7 +213,7 @@ export default class PostEditor extends React.Component {
 
   ignoreHash = name => name[0] === '#' ? name.slice(1) : name
 
-  insertPickerTopic = topic => {
+  insertTopicFromPicker = topic => {
     const t = { ...topic, name: this.ignoreHash(topic.name) }
 
     if (validateTopicName(t.name) === null) this.insertUniqueTopics([ t ], true)
@@ -242,31 +245,6 @@ export default class PostEditor extends React.Component {
     topicsPicked: true
   })
 
-  _showFilePicker = () => {
-    this.setState({filePickerPending: true})
-    showFilePicker({
-      upload: this.props.upload,
-      type: 'post',
-      id: get('post.id', this.props),
-      onAdd: this.addFile,
-      onError: this.showAlert,
-      onComplete: () => this.setState({filePickerPending: false})
-    })
-  }
-
-  _showImagePicker = () => {
-    this.setState({imagePickerPending: true})
-    showImagePicker({
-      upload: this.props.upload,
-      type: 'post',
-      id: get('post.id', this.props),
-      onChoice: this.addImage,
-      onError: this.showAlert,
-      onCancel: () => this.setState({imagePickerPending: false}),
-      onComplete: () => this.setState({imagePickerPending: false})
-    })
-  }
-
   toggleAnnoucement = () => {
     this.toast && hideToast(this.toast)
     this.toast = showToast(`announcement ${!this.state.announcementEnabled ? 'on' : 'off'}`, {isError: this.state.announcementEnabled})
@@ -292,7 +270,15 @@ export default class PostEditor extends React.Component {
     this.updateMembers(members.filter(m => m.id !== member.id))
   }
 
-  openProjectMembersEditor = () => {
+  onContentSizeChange = (width, height) => {
+    this.setState({ scrollViewHeight: height })
+  }
+
+  onDatePickerExpand = () => {
+    this.scrollView.current.scrollToEnd()
+  }
+
+  _showProjectMembersEditor = () => {
     const { navigation } = this.props
     const { members } = this.state
     const screenTitle = 'Project Members'
@@ -307,13 +293,13 @@ export default class PostEditor extends React.Component {
     })
   }
 
-  openTopicsPicker = () => {
+  _showTopicsPicker = () => {
     const { navigation } = this.props
     const screenTitle = 'Pick a Topic'
     navigation.navigate('ItemChooserScreen', {
       screenTitle,
       ItemRowComponent: TopicRow,
-      pickItem: this.insertPickerTopic,
+      pickItem: this.insertTopicFromPicker,
       searchPlaceholder: 'Search for a topic by name',
       // FIX: Will only find topics for first community
       fetchSearchSuggestions: fetchTopicsForCommunityId(get('[0].id', this.state.communities)),
@@ -321,7 +307,7 @@ export default class PostEditor extends React.Component {
     })
   }
 
-  openCommunitiesEditor = () => {
+  _showCommunitiesEditor = () => {
     const { navigation, communityOptions } = this.props
     const screenTitle = 'Post in Communities'
     navigation.navigate('ItemChooserScreen', {
@@ -337,12 +323,44 @@ export default class PostEditor extends React.Component {
     })
   }
 
-  onContentSizeChange = (width, height) => {
-    this.setState({ scrollViewHeight: height })
+  _showLocationEditor = () => {
+    const { navigation, communityOptions } = this.props
+    const screenTitle = 'Choose a Location'
+    navigation.navigate('ItemChooserScreen', {
+      screenTitle,
+      ItemRowComponent: LocationPickerItemRow,
+      // TODO: make setLocation function
+      pickItem: this.addCommunity,
+      searchPlaceholder: 'Search for your location',
+      fetchSearchSuggestions: searchTerm => locationSearch(searchTerm),
+      getSearchSuggestions: (state, { autocomplete: searchTerm }) =>
+        communityOptions.filter(c => c.name.match('test'))
+    })
   }
 
-  onDatePickerExpand = () => {
-    this.scrollView.current.scrollToEnd()
+  _showFilePicker = () => {
+    this.setState({filePickerPending: true})
+    showFilePicker({
+      upload: this.props.upload,
+      type: 'post',
+      id: get('post.id', this.props),
+      onAdd: this.addFile,
+      onError: this.showAlert,
+      onComplete: () => this.setState({filePickerPending: false})
+    })
+  }
+
+  _showImagePicker = () => {
+    this.setState({imagePickerPending: true})
+    showImagePicker({
+      upload: this.props.upload,
+      type: 'post',
+      id: get('post.id', this.props),
+      onChoice: this.addImage,
+      onError: this.showAlert,
+      onCancel: () => this.setState({imagePickerPending: false}),
+      onComplete: () => this.setState({imagePickerPending: false})
+    })
   }
 
   render () {
@@ -351,7 +369,7 @@ export default class PostEditor extends React.Component {
       fileUrls, imageUrls, isSaving, topics, title, detailsText, type,
       filePickerPending, imagePickerPending, announcementEnabled,
       detailsFocused, titleLengthError, members, communities,
-      startTime, endTime
+      startTime, endTime, locationObject
     } = this.state
     const canHaveTimeframe = type !== 'discussion'
     const toolbarProps = {
@@ -364,6 +382,8 @@ export default class PostEditor extends React.Component {
       showImagePicker: this._showImagePicker,
       showFilePicker: this._showFilePicker
     }
+    // Not yet used
+    // const curLocation = locationObject || get('0.locationObject', communities) || get('locationObject', currentUser)
 
     return <KeyboardFriendlyView style={styles.container}>
       <ScrollView
@@ -423,7 +443,7 @@ export default class PostEditor extends React.Component {
               styles.textInputWrapper,
               styles.topics
             ]}
-            onPress={this.openTopicsPicker}>
+            onPress={this._showTopicsPicker}>
             <View style={styles.topicLabel}>
               <SectionLabel>Topics</SectionLabel>
               <View style={styles.topicAddBorder}><Icon name='Plus' style={styles.topicAdd} /></View>
@@ -439,7 +459,7 @@ export default class PostEditor extends React.Component {
               styles.textInputWrapper,
               styles.topics
             ]}
-            onPress={this.openProjectMembersEditor}>
+            onPress={this._showProjectMembersEditor}>
             <View style={styles.topicLabel}>
               <SectionLabel>Members</SectionLabel>
               <View style={styles.topicAddBorder}><Icon name='Plus' style={styles.topicAdd} /></View>
@@ -456,7 +476,7 @@ export default class PostEditor extends React.Component {
               styles.textInputWrapper,
               styles.topics
             ]}
-            onPress={this.openCommunitiesEditor}>
+            onPress={this._showCommunitiesEditor}>
             <View style={styles.topicLabel}>
               <SectionLabel>Post In</SectionLabel>
               <View style={styles.topicAddBorder}><Icon name='Plus' style={styles.topicAdd} /></View>
@@ -507,6 +527,18 @@ export default class PostEditor extends React.Component {
               fileUrls={fileUrls} />
           </View>}
         </View>
+        <TouchableOpacity
+          style={[
+            styles.section,
+            styles.textInputWrapper,
+            styles.topics
+          ]}
+          onPress={this._showLocationEditor}>
+          <View style={styles.topicLabel}>
+            <SectionLabel>Location</SectionLabel>
+            <View style={styles.topicAddBorder}><Icon name='Plus' style={styles.topicAdd} /></View>
+          </View>
+        </TouchableOpacity>
         {detailsFocused && <Toolbar {...toolbarProps} />}
       </ScrollView>
       <Toolbar {...toolbarProps} />
