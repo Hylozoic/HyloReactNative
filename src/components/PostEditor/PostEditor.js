@@ -27,7 +27,7 @@ import TopicRow from '../TopicList/TopicRow'
 // Community Chooser
 import CommunityChooserItemRow from '../ItemChooser/CommunityChooserItemRow'
 // Location Picker
-import locationSearch from '../../store/actions/locationSearch'
+import { locationSearch } from '../ItemChooser/ItemChooser.store'
 import LocationPickerItemRow from '../ItemChooser/LocationPickerItemRow'
 // 
 import CommunitiesList from '../CommunitiesList'
@@ -278,7 +278,7 @@ export default class PostEditor extends React.Component {
     this.scrollView.current.scrollToEnd()
   }
 
-  _showProjectMembersEditor = () => {
+  showProjectMembersEditor = () => {
     const { navigation } = this.props
     const { members } = this.state
     const screenTitle = 'Project Members'
@@ -293,7 +293,7 @@ export default class PostEditor extends React.Component {
     })
   }
 
-  _showTopicsPicker = () => {
+  showTopicsPicker = () => {
     const { navigation } = this.props
     const screenTitle = 'Pick a Topic'
     navigation.navigate('ItemChooserScreen', {
@@ -307,7 +307,7 @@ export default class PostEditor extends React.Component {
     })
   }
 
-  _showCommunitiesEditor = () => {
+  showCommunitiesEditor = () => {
     const { navigation, communityOptions } = this.props
     const screenTitle = 'Post in Communities'
     navigation.navigate('ItemChooserScreen', {
@@ -323,8 +323,8 @@ export default class PostEditor extends React.Component {
     })
   }
 
-  _showLocationEditor = () => {
-    const { navigation, communityOptions } = this.props
+  showLocationEditor = () => {
+    const { navigation } = this.props
     const screenTitle = 'Choose a Location'
     navigation.navigate('ItemChooserScreen', {
       screenTitle,
@@ -332,13 +332,11 @@ export default class PostEditor extends React.Component {
       // TODO: make setLocation function
       pickItem: this.addCommunity,
       searchPlaceholder: 'Search for your location',
-      fetchSearchSuggestions: searchTerm => locationSearch(searchTerm),
-      getSearchSuggestions: (state, { autocomplete: searchTerm }) =>
-        communityOptions.filter(c => c.name.match('test'))
+      fetchSearchSuggestions: locationSearch
     })
   }
 
-  _showFilePicker = () => {
+  showFilePicker = () => {
     this.setState({filePickerPending: true})
     showFilePicker({
       upload: this.props.upload,
@@ -350,7 +348,7 @@ export default class PostEditor extends React.Component {
     })
   }
 
-  _showImagePicker = () => {
+  showImagePicker = () => {
     this.setState({imagePickerPending: true})
     showImagePicker({
       upload: this.props.upload,
@@ -379,8 +377,8 @@ export default class PostEditor extends React.Component {
       imagePickerPending,
       announcementEnabled,
       toggleAnnoucement: this.toggleAnnoucement,
-      showImagePicker: this._showImagePicker,
-      showFilePicker: this._showFilePicker
+      showImagePicker: this.showImagePicker,
+      showFilePicker: this.showFilePicker
     }
     // Not yet used
     // const curLocation = locationObject || get('0.locationObject', communities) || get('locationObject', currentUser)
@@ -443,7 +441,7 @@ export default class PostEditor extends React.Component {
               styles.textInputWrapper,
               styles.topics
             ]}
-            onPress={this._showTopicsPicker}>
+            onPress={this.showTopicsPicker}>
             <View style={styles.topicLabel}>
               <SectionLabel>Topics</SectionLabel>
               <View style={styles.topicAddBorder}><Icon name='Plus' style={styles.topicAdd} /></View>
@@ -459,7 +457,7 @@ export default class PostEditor extends React.Component {
               styles.textInputWrapper,
               styles.topics
             ]}
-            onPress={this._showProjectMembersEditor}>
+            onPress={this.showProjectMembersEditor}>
             <View style={styles.topicLabel}>
               <SectionLabel>Members</SectionLabel>
               <View style={styles.topicAddBorder}><Icon name='Plus' style={styles.topicAdd} /></View>
@@ -476,7 +474,7 @@ export default class PostEditor extends React.Component {
               styles.textInputWrapper,
               styles.topics
             ]}
-            onPress={this._showCommunitiesEditor}>
+            onPress={this.showCommunitiesEditor}>
             <View style={styles.topicLabel}>
               <SectionLabel>Post In</SectionLabel>
               <View style={styles.topicAddBorder}><Icon name='Plus' style={styles.topicAdd} /></View>
@@ -533,7 +531,7 @@ export default class PostEditor extends React.Component {
             styles.textInputWrapper,
             styles.topics
           ]}
-          onPress={this._showLocationEditor}>
+          onPress={this.showLocationEditor}>
           <View style={styles.topicLabel}>
             <SectionLabel>Location</SectionLabel>
             <View style={styles.topicAddBorder}><Icon name='Plus' style={styles.topicAdd} /></View>

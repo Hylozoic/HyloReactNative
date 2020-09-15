@@ -9,24 +9,21 @@ export default function LocationPickerItemRow ({
   item,
   onPress
 }) {
-  return <TouchableOpacity style={styles.communityRow} onPress={() => onPress(item)}>
-    <Text style={styles.communityName}>Anything</Text>
+  return <TouchableOpacity style={styles.locationRow} onPress={() => onPress(item)}>
+    <Text style={styles.locationText}>{item.fullText}</Text>
   </TouchableOpacity>
 }
 LocationPickerItemRow.propTypes = propTypesForItemRowComponent
 
 const styles = {
-  communityRow: {
+  locationRow: {
     padding: 15,
     paddingBottom: 0,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'flex-start'
   },
-  communityAvatar: {
-    marginRight: 12
-  },
-  communityName: {
+  locationText: {
     fontFamily: 'Circular-Bold',
     flex: 1
   }

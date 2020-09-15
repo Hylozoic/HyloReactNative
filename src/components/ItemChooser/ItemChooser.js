@@ -23,7 +23,7 @@ export const propTypesForItemRowComponent = {
 export default class ItemChooser extends React.Component {
   static propTypes = {
     fetchSearchSuggestions: PropTypes.func.isRequired,
-    getSearchSuggestions: PropTypes.func.isRequired,
+    getSearchSuggestions: PropTypes.func,
     setSearchTerm: PropTypes.func.isRequired,
     ItemRowComponent: PropTypes.func.isRequired,
     pickItem: PropTypes.func,

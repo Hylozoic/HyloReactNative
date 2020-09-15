@@ -18,7 +18,7 @@ export default class ItemChooserScreen extends React.Component {
           ItemRowComponent: PropTypes.func.isRequired,
           searchPlaceholder: PropTypes.string,
           fetchSearchSuggestions: PropTypes.func.isRequired,
-          getSearchSuggestions: PropTypes.func.isRequired,
+          getSearchSuggestions: PropTypes.func,
           style: PropTypes.object
         })
       })

@@ -6,7 +6,7 @@ import { Provider } from 'react-redux'
 import { createMockStore } from 'util/testing'
 
 const state = {
-  querySearchTerms: {}
+  ItemChooser: {}
 }
 
 const items = [
