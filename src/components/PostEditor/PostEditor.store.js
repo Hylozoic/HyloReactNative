@@ -31,6 +31,7 @@ export function createPost (post) {
     communities,
     startTime,
     endTime,
+    locationId,
     imageUrls = [],
     fileUrls = [],
     topicNames = [],
@@ -49,6 +50,7 @@ export function createPost (post) {
         $communityIds: [String]
         $startTime: String
         $endTime: String
+        $locationId: ID
         $imageUrls: [String]
         $fileUrls: [String]
         $announcement: Boolean
@@ -62,6 +64,7 @@ export function createPost (post) {
           communityIds: $communityIds
           startTime: $startTime
           endTime: $endTime
+          locationId: $locationId
           imageUrls: $imageUrls
           fileUrls: $fileUrls
           announcement: $announcement
@@ -78,6 +81,7 @@ export function createPost (post) {
         communityIds,
         startTime,
         endTime,
+        locationId,
         imageUrls,
         fileUrls,
         announcement: sendAnnouncement,
@@ -103,6 +107,7 @@ export function createProject (post) {
     communities,
     startTime,
     endTime,
+    locationId,
     imageUrls = [],
     fileUrls = [],
     topicNames = [],
@@ -120,6 +125,7 @@ export function createProject (post) {
         $communityIds: [String]
         $startTime: String
         $endTime: String
+        $locationId: ID
         $imageUrls: [String]
         $fileUrls: [String]
         $announcement: Boolean
@@ -132,6 +138,7 @@ export function createProject (post) {
           communityIds: $communityIds
           startTime: $startTime
           endTime: $endTime
+          locationId: $locationId
           imageUrls: $imageUrls
           fileUrls: $fileUrls
           announcement: $announcement
@@ -147,6 +154,7 @@ export function createProject (post) {
         communityIds,
         startTime,
         endTime,
+        locationId,
         imageUrls,
         fileUrls,
         announcement: sendAnnouncement,
@@ -174,6 +182,7 @@ export function updatePost (post) {
     communities,
     startTime,
     endTime,
+    locationId,
     imageUrls = [],
     fileUrls = [],
     topicNames = [],
@@ -191,6 +200,7 @@ export function updatePost (post) {
         $communityIds: [String]
         $startTime: String
         $endTime: String
+        $locationId: ID
         $imageUrls: [String]
         $fileUrls: [String]
         $topicNames: [String]
@@ -203,6 +213,7 @@ export function updatePost (post) {
           communityIds: $communityIds
           startTime: $startTime
           endTime: $endTime
+          locationId: $locationId
           imageUrls: $imageUrls
           fileUrls: $fileUrls
           topicNames: $topicNames
@@ -219,6 +230,7 @@ export function updatePost (post) {
         communityIds,
         startTime,
         endTime,
+        locationId,
         imageUrls,
         fileUrls,
         topicNames,

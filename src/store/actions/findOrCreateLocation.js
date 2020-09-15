@@ -71,7 +71,7 @@ export default function findOrCreateLocation (data, query = FindOrCreateLocation
   }
 }
 
-export function pollingfindOrCreateLocation (dispatch, locationData, callback) {
+export function pollingFindOrCreateLocation (dispatch, locationData, callback) {
   const poll = (url, delay) => {
     if (delay > 4) return
     dispatch(findOrCreateLocation(locationData)).then(value => {

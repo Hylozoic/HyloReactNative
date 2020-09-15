@@ -58,9 +58,10 @@ export default class PostEditor extends React.Component {
   }
 
   componentDidMount () {
-    const { navigation, isNewPost } = this.props
+    const { navigation, isNewPost, pollingFindOrCreateLocation } = this.props
     navigation.setParams({
       headerTitle: this.headerTitle(),
+      pollingFindOrCreateLocation,
       save: this.save
     })
     if (!isNewPost) {
@@ -102,6 +103,7 @@ export default class PostEditor extends React.Component {
       titleLengthError: false,
       startTime: get('startTime', post),
       endTime: get('endTime', post),
+      locationObject: get('locationObject', post),
       startTimeExpanded: false,
       endTimeExpanded: false
     }
@@ -120,9 +122,8 @@ export default class PostEditor extends React.Component {
     const {
       fileUrls, imageUrls, title, detailsText,
       topics, type, announcementEnabled, members,
-      communities, startTime, endTime
+      communities, startTime, endTime, locationObject
     } = this.state
-
     const postData = {
       type,
       details: toHtml(detailsText),
@@ -134,7 +135,8 @@ export default class PostEditor extends React.Component {
       sendAnnouncement: announcementEnabled,
       topicNames: topics.map(t => t.name),
       startTime: startTime && startTime.getTime(),
-      endTime: endTime && endTime.getTime()
+      endTime: endTime && endTime.getTime(),
+      locationId: locationObject && locationObject.id
     }
 
     return save(postData)
@@ -202,6 +204,17 @@ export default class PostEditor extends React.Component {
       communities: this.state.communities.filter(c => c.id !== communityId)
     }))
   }
+
+  setLocation = locationData => {
+    const { pollingFindOrCreateLocation } = get('state.params', this.props.navigation)
+
+    pollingFindOrCreateLocation(
+      locationData,
+      locationObject => this.setState(state => ({ locationObject })
+    ))
+  }
+
+  removeLocation = () => this.setState(state => ({ locationObject: null }))
 
   removeFile = url => {
     this.setState({
@@ -329,8 +342,7 @@ export default class PostEditor extends React.Component {
     navigation.navigate('ItemChooserScreen', {
       screenTitle,
       ItemRowComponent: LocationPickerItemRow,
-      // TODO: make setLocation function
-      pickItem: this.addCommunity,
+      pickItem: this.setLocation,
       searchPlaceholder: 'Search for your location',
       fetchSearchSuggestions: locationSearch
     })
@@ -536,6 +548,7 @@ export default class PostEditor extends React.Component {
             <SectionLabel>Location</SectionLabel>
             <View style={styles.topicAddBorder}><Icon name='Plus' style={styles.topicAdd} /></View>
           </View>
+          <Text>{locationObject && locationObject.fullText}</Text>
         </TouchableOpacity>
         {detailsFocused && <Toolbar {...toolbarProps} />}
       </ScrollView>
