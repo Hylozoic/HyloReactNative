@@ -5,6 +5,7 @@ import {
   Text,
   TouchableOpacity
 } from 'react-native'
+import { SafeAreaView } from 'react-navigation'
 import Avatar from '../Avatar'
 import Icon from '../Icon'
 import { keyboardAvoidingViewProps as kavProps } from '../../util/viewHelpers'
@@ -71,10 +72,11 @@ export default class NewMessage extends React.Component {
   openParticipantChooser = () => {
     const { recentContacts } = this.props
     const { participants } = this.state
+    const screenTitle = 'Add Participant'
     const chooserProps = {
-      screenTitle: 'Add Participant',
-      fetchSearchSuggestions: scopedFetchPeopleAutocomplete('NewMessage'),
-      getSearchSuggestions: scopedGetPeopleAutocomplete('NewMessage'),
+      screenTitle,
+      fetchSearchSuggestions: scopedFetchPeopleAutocomplete,
+      getSearchSuggestions: scopedGetPeopleAutocomplete(screenTitle),
       initialItems: participants,
       pickItem: this.addParticipant,
       ItemRowComponent: PersonPickerItemRow,
@@ -99,34 +101,36 @@ export default class NewMessage extends React.Component {
     const { participants } = this.state
     const emptyParticipantsList = participants.length === 0
 
-    return <KeyboardFriendlyView
-      style={styles.container}
-      {...{...kavProps, behavior: 'padding'}} // is the default
-      key={mockViewKey || this.state.viewKey}>
-      <ScrollView>
-        <TouchableOpacity onPress={() => this.openParticipantChooser()} style={styles.participants}>
-          {participants.map((participant, index) =>
-            <Participant
-              participant={participant}
-              onPress={this.removeParticipant}
-              key={index} />)}
-        </TouchableOpacity>
-        <View style={styles.addParticipantButtonWrapper}>
-          <Button
-            text='Add Participant' 
-            style={styles.addParticipantButton}
-            onPress={() => this.openParticipantChooser()} />
-        </View>
-      </ScrollView>
-      <MessageInput
-        style={styles.messageInput}
-        multiline
-        onSubmit={this.createMessage}
-        onBlur={this.onBlurMessageInput}
-        placeholder='Type your message here'
-        emptyParticipants={emptyParticipantsList}
-      />
-    </KeyboardFriendlyView>
+    return <SafeAreaView style={{flex: 1}}>
+      <KeyboardFriendlyView
+        style={styles.container}
+        {...{...kavProps, behavior: 'padding'}} // is the default
+        key={mockViewKey || this.state.viewKey}>
+        <ScrollView>
+          <TouchableOpacity onPress={() => this.openParticipantChooser()} style={styles.participants}>
+            {participants.map((participant, index) =>
+              <Participant
+                participant={participant}
+                onPress={this.removeParticipant}
+                key={index} />)}
+          </TouchableOpacity>
+          <View style={styles.addParticipantButtonWrapper}>
+            <Button
+              text='Add Participant' 
+              style={styles.addParticipantButton}
+              onPress={() => this.openParticipantChooser()} />
+          </View>
+        </ScrollView>
+        <MessageInput
+          style={styles.messageInput}
+          multiline
+          onSubmit={this.createMessage}
+          onBlur={this.onBlurMessageInput}
+          placeholder='Type your message here'
+          emptyParticipants={emptyParticipantsList}
+        />
+      </KeyboardFriendlyView>
+    </SafeAreaView>
   }
 }
 

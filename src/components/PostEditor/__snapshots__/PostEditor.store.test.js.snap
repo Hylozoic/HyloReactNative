@@ -10,6 +10,7 @@ Object {
         $communityIds: [String]
         $startTime: String
         $endTime: String
+        $locationId: ID
         $imageUrls: [String]
         $fileUrls: [String]
         $announcement: Boolean
@@ -23,6 +24,7 @@ Object {
           communityIds: $communityIds
           startTime: $startTime
           endTime: $endTime
+          locationId: $locationId
           imageUrls: $imageUrls
           fileUrls: $fileUrls
           announcement: $announcement
@@ -126,6 +128,7 @@ Object {
       "endTime": "endTime",
       "fileUrls": Array [],
       "imageUrls": Array [],
+      "locationId": undefined,
       "memberIds": Array [],
       "startTime": "startTime",
       "title": "title",
@@ -155,6 +158,7 @@ Object {
         $communityIds: [String]
         $startTime: String
         $endTime: String
+        $locationId: ID
         $imageUrls: [String]
         $fileUrls: [String]
         $announcement: Boolean
@@ -168,6 +172,7 @@ Object {
           communityIds: $communityIds
           startTime: $startTime
           endTime: $endTime
+          locationId: $locationId
           imageUrls: $imageUrls
           fileUrls: $fileUrls
           announcement: $announcement
@@ -271,6 +276,7 @@ Object {
       "endTime": "endTime",
       "fileUrls": Array [],
       "imageUrls": Array [],
+      "locationId": undefined,
       "memberIds": Array [
         1,
         2,
@@ -304,6 +310,7 @@ Object {
         $communityIds: [String]
         $startTime: String
         $endTime: String
+        $locationId: ID
         $imageUrls: [String]
         $fileUrls: [String]
         $topicNames: [String]
@@ -316,6 +323,7 @@ Object {
           communityIds: $communityIds
           startTime: $startTime
           endTime: $endTime
+          locationId: $locationId
           imageUrls: $imageUrls
           fileUrls: $fileUrls
           topicNames: $topicNames
@@ -431,6 +439,7 @@ Object {
       "fileUrls": Array [],
       "id": 1,
       "imageUrls": Array [],
+      "locationId": undefined,
       "memberIds": Array [],
       "startTime": "startTime",
       "title": "title",

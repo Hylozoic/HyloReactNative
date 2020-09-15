@@ -1,42 +1,43 @@
-import { capeCod10, mineralGreen, rhino30, fuchsiaPink, prim, caribbeanGreen } from '../../style/colors'
+import { capeCod10, rhino60, rhino30, fuchsiaPink, prim, caribbeanGreen } from '../../style/colors'
 
 export default {
   postCard: {
-    marginBottom: 16
+    marginBottom: 16,
   },
   container: {
     flex: 1,
     backgroundColor: 'white'
   },
+  postFooter: {
+    borderTopColor: capeCod10,
+    borderTopWidth: 1,
+    paddingTop: 10
+  },
   imageMargin: {
     marginBottom: 12
   },
   infoRow: {
-    marginLeft: 12,
-    marginRight: 12,
+    marginHorizontal: 12,
+    paddingVertical: 10,
     borderTopWidth: 1,
     borderColor: capeCod10,
-    height: 46,
     flexDirection: 'row',
     alignItems: 'center'
   },
-  bottomInfoRow: {
-    marginBottom: 15,
-    borderBottomWidth: 1
-  },
   infoRowLabel: {
-    fontSize: 14,
-    color: mineralGreen,
-    fontFamily: 'Circular-Bold',
-    marginRight: 10
+    fontSize: 13,
+    color: rhino30,
+    fontFamily: 'Circular-Book',
+    marginRight: 3
   },
   infoRowInfo: {
-    fontSize: 14,
-    color: mineralGreen,
-    fontFamily: 'Circular-Regular'
+    fontSize: 13,
+    color: rhino60,
+    fontFamily: 'Circular-Book'
   },
   inlineEditor: {
-    marginBottom: 10,
+    marginBottom: 35,
+    paddingTop: 10,
     paddingHorizontal: 10,
     borderTopColor: rhino30,
     borderTopWidth: 0.25
@@ -48,7 +49,7 @@ export default {
     backgroundColor: prim,
     color: fuchsiaPink,
     marginHorizontal: 12,
-    marginVertical: 25
+    marginBottom: 10
   },
   projectMembersContainer: {
     borderTopWidth: 1,

@@ -26,6 +26,8 @@ Person.fields = {
     to: 'Location',
     as: 'locationObject'
   }),
+  memberships: many('Membership'),
+  membershipsTotal: attr(),
   skills: many('Skill'),
   postsTotal: attr(),
   votesTotal: attr()

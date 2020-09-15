@@ -24,17 +24,24 @@ export default class PostCommunities extends React.PureComponent {
   }
 
   render () {
-    const { communities, goToCommunity, shouldShowCommunities } = this.props
+    const { communities, goToCommunity, shouldShowCommunities, style } = this.props
+    const { expanded } = this.state
 
     // don't show if there are no communities or there is exactly 1 community and the flag isn't set
     if (isEmpty(communities) || (communities.length === 1 && !shouldShowCommunities)) {
       return null
     }
 
-    const { expanded } = this.state
-
-    const content = expanded
-      ? <View style={styles.expandedSection}>
+    const content =
+      <View style={styles.row}>
+        <Text style={styles.reminderText}>Posted In: </Text>
+        <CommunitiesListSummary communities={communities} expandFunc={this.toggleExpanded} goToCommunity={goToCommunity} />
+        <TouchableOpacity onPress={this.toggleExpanded} style={styles.arrowButton}>
+          <Icon name='ArrowDown' style={styles.arrowIcon} />
+        </TouchableOpacity>
+      </View>
+    const expandedContent =
+      <React.Fragment>
         <View style={styles.row}>
           <Text style={styles.reminderText}>Posted In: </Text>
           <TouchableOpacity onPress={this.toggleExpanded} style={styles.arrowButton}>
@@ -42,17 +49,10 @@ export default class PostCommunities extends React.PureComponent {
           </TouchableOpacity>
         </View>
         <CommunitiesList communities={communities} onPress={goToCommunity} />
-      </View>
-      : <View style={styles.row}>
-        <Text style={styles.reminderText}>Posted In: </Text>
-        <CommunitiesListSummary communities={communities} expandFunc={this.toggleExpanded} goToCommunity={goToCommunity} />
-        <TouchableOpacity onPress={this.toggleExpanded} style={styles.arrowButton}>
-          <Icon name='ArrowDown' style={styles.arrowIcon} />
-        </TouchableOpacity>
-      </View>
+      </React.Fragment>
 
-    return <View style={[styles.communities, expanded && styles.expanded]}>
-      {content}
+    return <View style={[style, expanded && styles.expanded]}>
+      {expanded ? expandedContent : content}
     </View>
   }
 }
@@ -70,11 +70,9 @@ export function CommunitiesListSummary ({communities, goToCommunity, expandFunc}
 }
 
 const styles = {
-  communities: {
-    borderTopWidth: 1,
-    borderBottomWidth: 1,
-    borderColor: capeCod10,
-    paddingHorizontal: 12
+  expanded: {
+    flexDirection: 'column',
+    alignItems: 'stretch'
   },
   row: {
     flex: 1,
@@ -82,7 +80,6 @@ const styles = {
     alignItems: 'center'
   },
   communityList: {
-    height: 40,
     justifyContent: 'flex-start'
   },
   linkText: {
@@ -101,9 +98,5 @@ const styles = {
     color: rhino30,
     fontSize: 13,
     fontFamily: 'Circular-Book'
-  },
-  expandedSection: {
-    paddingTop: 11,
-    paddingBottom: 5
   }
 }

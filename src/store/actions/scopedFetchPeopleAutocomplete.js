@@ -19,27 +19,26 @@ export const fetchPeopleAutocompleteQuery =
   }
 }`
 
-export default function scopedFetchPeopleAutocomplete (scope) {
+export default function scopedFetchPeopleAutocomplete (
+  scope,
+  autocomplete,
+  first = 10,
+  query = fetchPeopleAutocompleteQuery
+) {
   if (!scope) throw new Error('`scope` param is required for setting a querySearchTerm')
 
   const queryResultsScopedType = `${scope}/${FETCH_PEOPLE_AUTOCOMPLETE}`
 
-  return function (
-    autocomplete,
-    first = 10,
-    query = fetchPeopleAutocompleteQuery
-  ) {
-    return {
-      type: queryResultsScopedType,
-      graphql: {
-        query,
-        variables: { autocomplete, first }
-      },
-      meta: {
-        extractModel: 'Person',
-        extractQueryResults: {
-          getItems: get('payload.data.people')
-        }
+  return {
+    type: queryResultsScopedType,
+    graphql: {
+      query,
+      variables: { autocomplete, first }
+    },
+    meta: {
+      extractModel: 'Person',
+      extractQueryResults: {
+        getItems: get('payload.data.people')
       }
     }
   }

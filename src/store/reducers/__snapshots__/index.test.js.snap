@@ -9,6 +9,7 @@ Object {
     "filter": null,
     "sortBy": "updated",
   },
+  "ItemChooser": Object {},
   "LoadingModal": Object {
     "shouldDisplay": false,
   },
@@ -60,7 +61,6 @@ Object {
   "orm": Object {},
   "pending": Object {},
   "queryResults": Object {},
-  "querySearchTerms": Object {},
   "session": Object {},
 }
 `;

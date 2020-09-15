@@ -56,7 +56,7 @@ export default class ModeratorSettings extends Component {
       ItemRowComponent: PersonPickerItemRow,
       pickItem: this.addModerator,
       searchPlaceholder: 'Type here to search for people',
-      fetchSearchSuggestions: scopedFetchPeopleAutocomplete(screenTitle),
+      fetchSearchSuggestions: scopedFetchPeopleAutocomplete,
       getSearchSuggestions: scopedGetPeopleAutocomplete(screenTitle)
     })
   }

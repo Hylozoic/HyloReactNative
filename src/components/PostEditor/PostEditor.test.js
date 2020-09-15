@@ -245,7 +245,7 @@ describe('PostEditor', () => {
     expect(Alert.alert).toHaveBeenCalledWith('alert message')
   })
 
-  it('_showFilePicker', async () => {
+  it('showFilePicker', async () => {
     const upload = jest.fn(() => Promise.resolve({
       payload: {
         url: 'https:/storage.hylo.com/foo.pdf'
@@ -265,7 +265,7 @@ describe('PostEditor', () => {
 
     const instance = renderer.root.findByType(PostEditor).instance
     jest.spyOn(instance, 'addFile')
-    instance._showFilePicker()
+    instance.showFilePicker()
     expect(instance.state.filePickerPending).toBeTruthy()
     await DocumentPicker.finishShow(null, {
       uri: 'file:///somewhere/foo.pdf',
@@ -277,7 +277,7 @@ describe('PostEditor', () => {
     expect(instance.addFile).toHaveBeenCalledWith({'local': 'file:///somewhere/foo.pdf', 'remote': 'https:/storage.hylo.com/foo.pdf'})
   })
 
-  it('_showImagePicker', async () => {
+  it('showImagePicker', async () => {
     const upload = jest.fn(() => Promise.resolve({
       payload: {
         url: 'https:/storage.hylo.com/foo.pdf'
@@ -297,7 +297,7 @@ describe('PostEditor', () => {
 
     const instance = renderer.root.findByType(PostEditor).instance
     jest.spyOn(instance, 'addImage')
-    instance._showImagePicker()
+    instance.showImagePicker()
     expect(instance.state.imagePickerPending).toBeTruthy()
     await RNImagePicker.finishImagePicker({
       uri: 'file:///tmp/bar.jpg',

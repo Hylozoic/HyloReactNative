@@ -49,21 +49,24 @@ export default class MemberFeed extends React.Component {
       {pending && <Loading />}
     </View>
 
-    return <View style={styles.superContainer}><FlatList
-      data={items}
-      renderItem={({ item }) => <ContentRow item={item} itemType={itemType} showPost={showPost} />}
-      keyExtractor={item => item.id}
-      onEndReached={fetchMoreItems}
-      ListHeaderComponent={listHeaderComponent}
-      ListFooterComponent={listFooterComponent}
-      contentContainerStyle={styles.container} />
+    return <View style={styles.superContainer}>
+      <FlatList
+        data={items}
+        renderItem={({ item }) =>
+          <ContentRow item={item} itemType={itemType} showPost={showPost} />}
+        keyExtractor={item => item.id}
+        onEndReached={fetchMoreItems}
+        ListHeaderComponent={listHeaderComponent}
+        ListFooterComponent={listFooterComponent}
+        contentContainerStyle={styles.container} />
     </View>
   }
 }
 
 export function ContentRow ({ item, itemType, showPost }) {
-  var content
+  var content, postId
   if (itemType === 'post') {
+    postId = item.id
     content = <PostCard
       post={item}
       creator={item.creator}
@@ -73,9 +76,10 @@ export function ContentRow ({ item, itemType, showPost }) {
 
     />
   } else {
+    postId = item.post.id
     content = <Comment comment={item} displayPostTitle />
   }
-  return <TouchableOpacity onPress={() => showPost(item.id)}>
+  return <TouchableOpacity onPress={() => showPost(postId)}>
     <View style={styles.contentRow}>
       {content}
     </View>

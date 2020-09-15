@@ -25,12 +25,12 @@ describe('MemberProfile', () => {
 })
 
 describe('ContentRow', () => {
-  const item = {id: 2}
 
   it('shows a PostCard when itemType is post', () => {
+    const postItem = {id: 2}
     const renderer = new ReactShallowRenderer()
     renderer.render(<ContentRow
-      item={item}
+      item={postItem}
       itemType='post' />)
     const actual = renderer.getRenderOutput()
 
@@ -38,9 +38,10 @@ describe('ContentRow', () => {
   })
 
   it('shows a Comment when itemType is comment', () => {
+    const commentItem = {post: { id: 2 }}
     const renderer = new ReactShallowRenderer()
     renderer.render(<ContentRow
-      item={item}
+      item={commentItem}
       itemType='comment' />)
     const actual = renderer.getRenderOutput()
 

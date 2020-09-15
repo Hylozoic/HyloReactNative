@@ -70,105 +70,103 @@ exports[`PostCommunities matches last snapshot 1`] = `
 exports[`PostCommunities matches last snapshot when expanded 1`] = `
 <View>
   <View>
-    <View>
-      <Text>
-        Posted In: 
+    <Text>
+      Posted In: 
+    </Text>
+    <View
+      accessible={true}
+      focusable={true}
+      isTVSelectable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+    >
+      <Icon
+        name="ArrowUp"
+      />
+    </View>
+  </View>
+  <View>
+    <View
+      accessible={true}
+      focusable={true}
+      isTVSelectable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+    >
+      <Image
+        source={
+          Object {
+            "uri": "foo.png",
+          }
+        }
+      />
+      <Text
+        numberOfLines={1}
+      >
+        One
       </Text>
-      <View
-        accessible={true}
-        focusable={true}
-        isTVSelectable={true}
-        onClick={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
-      >
-        <Icon
-          name="ArrowUp"
-        />
-      </View>
     </View>
-    <View>
-      <View
-        accessible={true}
-        focusable={true}
-        isTVSelectable={true}
-        onClick={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
-      >
-        <Image
-          source={
-            Object {
-              "uri": "foo.png",
-            }
+    <View
+      accessible={true}
+      focusable={true}
+      isTVSelectable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+    >
+      <Image
+        source={
+          Object {
+            "uri": "https://d3ngex8q79bk55.cloudfront.net/misc/default_community_avatar.png",
           }
-        />
-        <Text
-          numberOfLines={1}
-        >
-          One
-        </Text>
-      </View>
-      <View
-        accessible={true}
-        focusable={true}
-        isTVSelectable={true}
-        onClick={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
+        }
+      />
+      <Text
+        numberOfLines={1}
       >
-        <Image
-          source={
-            Object {
-              "uri": "https://d3ngex8q79bk55.cloudfront.net/misc/default_community_avatar.png",
-            }
-          }
-        />
-        <Text
-          numberOfLines={1}
-        >
-          Two
-        </Text>
-      </View>
+        Two
+      </Text>
     </View>
-    <View>
-      <View
-        accessible={true}
-        focusable={true}
-        isTVSelectable={true}
-        onClick={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
-      >
-        <Image
-          source={
-            Object {
-              "uri": "https://d3ngex8q79bk55.cloudfront.net/misc/default_community_avatar.png",
-            }
+  </View>
+  <View>
+    <View
+      accessible={true}
+      focusable={true}
+      isTVSelectable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+    >
+      <Image
+        source={
+          Object {
+            "uri": "https://d3ngex8q79bk55.cloudfront.net/misc/default_community_avatar.png",
           }
-        />
-        <Text
-          numberOfLines={1}
-        >
-          Three
-        </Text>
-      </View>
+        }
+      />
+      <Text
+        numberOfLines={1}
+      >
+        Three
+      </Text>
     </View>
   </View>
 </View>

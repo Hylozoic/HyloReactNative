@@ -1,55 +1,59 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`NewMessage renders correctly 1`] = `
-<KeyboardFriendlyView
-  behavior="padding"
-  keyboardVerticalOffset={64}
->
-  <ScrollViewMock>
-    <TouchableOpacity
-      activeOpacity={0.2}
-      onPress={[Function]}
-    />
-    <View>
-      <Button
+<withOrientation>
+  <KeyboardFriendlyView
+    behavior="padding"
+    keyboardVerticalOffset={64}
+  >
+    <ScrollViewMock>
+      <TouchableOpacity
+        activeOpacity={0.2}
         onPress={[Function]}
-        text="Add Participant"
       />
-    </View>
-  </ScrollViewMock>
-  <MessageInput
-    emptyParticipants={true}
-    multiline={true}
-    onBlur={[Function]}
-    onSubmit={[Function]}
-    placeholder="Type your message here"
-  />
-</KeyboardFriendlyView>
+      <View>
+        <Button
+          onPress={[Function]}
+          text="Add Participant"
+        />
+      </View>
+    </ScrollViewMock>
+    <MessageInput
+      emptyParticipants={true}
+      multiline={true}
+      onBlur={[Function]}
+      onSubmit={[Function]}
+      placeholder="Type your message here"
+    />
+  </KeyboardFriendlyView>
+</withOrientation>
 `;
 
 exports[`NewMessage renders correctly 2`] = `
-<KeyboardFriendlyView
-  behavior="padding"
-  keyboardVerticalOffset={64}
->
-  <ScrollViewMock>
-    <TouchableOpacity
-      activeOpacity={0.2}
-      onPress={[Function]}
-    />
-    <View>
-      <Button
+<withOrientation>
+  <KeyboardFriendlyView
+    behavior="padding"
+    keyboardVerticalOffset={64}
+  >
+    <ScrollViewMock>
+      <TouchableOpacity
+        activeOpacity={0.2}
         onPress={[Function]}
-        text="Add Participant"
       />
-    </View>
-  </ScrollViewMock>
-  <MessageInput
-    emptyParticipants={true}
-    multiline={true}
-    onBlur={[Function]}
-    onSubmit={[Function]}
-    placeholder="Type your message here"
-  />
-</KeyboardFriendlyView>
+      <View>
+        <Button
+          onPress={[Function]}
+          text="Add Participant"
+        />
+      </View>
+    </ScrollViewMock>
+    <MessageInput
+      emptyParticipants={true}
+      multiline={true}
+      onBlur={[Function]}
+      onSubmit={[Function]}
+      placeholder="Type your message here"
+    />
+  </KeyboardFriendlyView>
+</withOrientation>
 `;

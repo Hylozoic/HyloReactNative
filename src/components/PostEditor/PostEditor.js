@@ -101,8 +101,8 @@ export default class PostEditor extends React.Component {
       detailsFocused: false,
       detailsText: get('detailsText', post) || '',
       titleLengthError: false,
-      startTime: get('startTime', post),
-      endTime: get('endTime', post),
+      startTime: get('startTime', post) ? (new Date(get('startTime', post))) : null,
+      endTime: get('endTime', post) ? (new Date(get('endTime', post))) : null,
       locationObject: get('locationObject', post),
       startTimeExpanded: false,
       endTimeExpanded: false
@@ -301,7 +301,7 @@ export default class PostEditor extends React.Component {
       initialItems: members,
       updateItems: this.updateMembers,
       searchPlaceholder: 'Type in the names of people to add to project',
-      fetchSearchSuggestions: scopedFetchPeopleAutocomplete(screenTitle),
+      fetchSearchSuggestions: scopedFetchPeopleAutocomplete,
       getSearchSuggestions: scopedGetPeopleAutocomplete(screenTitle)
     })
   }

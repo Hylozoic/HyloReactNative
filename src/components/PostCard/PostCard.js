@@ -86,6 +86,7 @@ export default class PostCard extends React.PureComponent {
         shouldTruncate
         hideDetails={hideDetails} />
       <PostCommunities
+        style={styles.communities}
         shouldShowCommunities={shouldShowCommunities}
         communities={communities}
         slug={slug}
@@ -106,6 +107,9 @@ const styles = {
     borderColor: capeCod10,
     borderRadius: 4,
     backgroundColor: 'white'
+  },
+  communities: {
+    paddingHorizontal: 12
   },
   imageMargin: {
     marginBottom: 12

@@ -3,6 +3,7 @@
 exports[`PostEditor mapDispatchToProps calls save correctly 1`] = `
 Object {
   "fetchPost": [Function],
+  "pollingFindOrCreateLocation": [Function],
   "save": [Function],
   "upload": [Function],
 }
@@ -20,6 +21,7 @@ Array [
         $communityIds: [String]
         $startTime: String
         $endTime: String
+        $locationId: ID
         $imageUrls: [String]
         $fileUrls: [String]
         $topicNames: [String]
@@ -32,6 +34,7 @@ Array [
           communityIds: $communityIds
           startTime: $startTime
           endTime: $endTime
+          locationId: $locationId
           imageUrls: $imageUrls
           fileUrls: $fileUrls
           topicNames: $topicNames
@@ -147,6 +150,7 @@ Array [
           "fileUrls": Array [],
           "id": 1,
           "imageUrls": Array [],
+          "locationId": undefined,
           "memberIds": Array [],
           "startTime": undefined,
           "title": "a title",
@@ -174,6 +178,7 @@ Array [
 exports[`PostEditor mapDispatchToProps maps the action generators 1`] = `
 Object {
   "fetchPost": [Function],
+  "pollingFindOrCreateLocation": [Function],
   "save": [Function],
   "upload": [Function],
 }

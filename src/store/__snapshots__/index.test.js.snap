@@ -9,6 +9,7 @@ Object {
     "filter": null,
     "sortBy": "updated",
   },
+  "ItemChooser": Object {},
   "LoadingModal": Object {
     "shouldDisplay": false,
   },
@@ -198,6 +199,11 @@ Object {
       "itemsById": Object {},
       "meta": Object {},
     },
+    "PersonMemberships": Object {
+      "items": Array [],
+      "itemsById": Object {},
+      "meta": Object {},
+    },
     "PersonSkills": Object {
       "items": Array [],
       "itemsById": Object {},
@@ -266,7 +272,6 @@ Object {
   },
   "pending": Object {},
   "queryResults": Object {},
-  "querySearchTerms": Object {},
   "session": Object {},
 }
 `;

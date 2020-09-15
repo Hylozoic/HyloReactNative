@@ -6,7 +6,7 @@ import moment from 'moment'
 import { present, sanitize } from 'hylo-utils/text'
 import urlHandler from 'util/urlHandler'
 import LinkPreview from '../LinkPreview'
-import { caribbeanGreen } from 'style/colors'
+import { white20onCaribbeanGreen } from 'style/colors'
 import richTextStyles from 'style/richTextStyles'
 
 const MAX_DETAILS_LENGTH = 144
@@ -93,7 +93,9 @@ const styles = StyleSheet.create({
     marginBottom: 20
   },
   resourceEndsAt: {
-    color: caribbeanGreen,
+    marginTop: 6,
+    marginBottom: 6,
+    color: white20onCaribbeanGreen,
     fontSize: 10,
     textTransform: 'uppercase'
   },

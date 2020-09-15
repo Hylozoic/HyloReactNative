@@ -85,7 +85,7 @@ export class InlineEditor extends React.PureComponent {
       ItemRowComponent: PersonPickerItemRow,
       pickItem: this.insertMention,
       searchPlaceholder: 'Type here to search for people',
-      fetchSearchSuggestions: scopedFetchPeopleAutocomplete(screenTitle),
+      fetchSearchSuggestions: scopedFetchPeopleAutocomplete,
       getSearchSuggestions: scopedGetPeopleAutocomplete(screenTitle)
     })
   }

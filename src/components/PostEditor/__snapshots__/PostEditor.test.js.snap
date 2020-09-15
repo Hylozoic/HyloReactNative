@@ -157,6 +157,24 @@ exports[`PostEditor renders a new editor correctly 1`] = `
         </Text>
       </TouchableOpacity>
     </View>
+    <TouchableOpacity
+      activeOpacity={0.2}
+      onPress={[Function]}
+    >
+      <View>
+        <SectionLabel>
+          Location
+        </SectionLabel>
+        <View>
+          <Icon
+            name="Plus"
+          />
+        </View>
+      </View>
+      <Text>
+        Select a Location
+      </Text>
+    </TouchableOpacity>
   </ScrollViewMock>
   <Toolbar
     announcementEnabled={false}
@@ -371,6 +389,32 @@ exports[`PostEditor renders correctly while saving 1`] = `
             </View>
           </View>
         </View>
+      </View>
+      <View
+        accessible={true}
+        focusable={true}
+        isTVSelectable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+      >
+        <View>
+          <Text>
+            Location
+          </Text>
+          <View>
+            <Icon
+              name="Plus"
+            />
+          </View>
+        </View>
+        <Text>
+          Select a Location
+        </Text>
       </View>
     </View>
   </RCTScrollView>
@@ -670,6 +714,32 @@ exports[`PostEditor renders correctly while saving 2`] = `
           </Text>
         </View>
       </View>
+      <View
+        accessible={true}
+        focusable={true}
+        isTVSelectable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+      >
+        <View>
+          <Text>
+            Location
+          </Text>
+          <View>
+            <Icon
+              name="Plus"
+            />
+          </View>
+        </View>
+        <Text>
+          Select a Location
+        </Text>
+      </View>
     </View>
   </RCTScrollView>
   <View>
@@ -852,6 +922,24 @@ exports[`PostEditor renders with a post 1`] = `
         />
       </View>
     </View>
+    <TouchableOpacity
+      activeOpacity={0.2}
+      onPress={[Function]}
+    >
+      <View>
+        <SectionLabel>
+          Location
+        </SectionLabel>
+        <View>
+          <Icon
+            name="Plus"
+          />
+        </View>
+      </View>
+      <Text>
+        Select a Location
+      </Text>
+    </TouchableOpacity>
   </ScrollViewMock>
   <Toolbar
     announcementEnabled={false}

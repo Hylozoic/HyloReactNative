@@ -10,20 +10,6 @@ exports[`renders as expected 1`] = `
       size="small"
       zIndex={3}
     />
-    <Avatar
-      avatarUrl="b.png"
-      hasBorder={true}
-      hasOverlap={true}
-      size="small"
-      zIndex={2}
-    />
-    <Avatar
-      avatarUrl="c.png"
-      hasBorder={true}
-      hasOverlap={true}
-      size="small"
-      zIndex={1}
-    />
     <Text>
       36 comments
     </Text>

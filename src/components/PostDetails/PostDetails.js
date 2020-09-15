@@ -1,6 +1,7 @@
 /* eslint-disable camelcase */
 import React from 'react'
 import { Linking, View, Text, TouchableOpacity, Alert } from 'react-native'
+import { SafeAreaView } from 'react-navigation'
 import { get, isEmpty, find } from 'lodash/fp'
 import { shape, any, object, string, func, array, bool } from 'prop-types'
 import Comments from '../Comments'
@@ -147,18 +148,25 @@ export default class PostDetails extends React.Component {
           onPress={goToMembers}
           dimension={34}
           style={styles.projectMembersContainer} />}
+      {!!location && <View style={[styles.infoRow]}>
+        <Text style={styles.infoRowLabel}>Location:</Text>
+        <Text style={styles.infoRowInfo}>{location}</Text>
+      </View>}
+      {!isEmpty(post.fileUrls) && <Files urls={post.fileUrls} />}
+      {isProject && <JoinProjectButton
+        style={styles.joinButton}
+        leaving={isMember}
+        onPress={isMember ? leaveProject : joinProject}
+      />}
       <PostCommunities
         communities={post.communities}
         slug={slug}
+        style={[styles.infoRow]}
         goToCommunity={this.handleGoToCommunity}
         shouldShowCommunities />
-      {!!location && <View style={[styles.infoRow, styles.bottomInfoRow]}>
-        <Text style={styles.infoRowLabel}>Location:</Text>
-        <Text style={styles.infoRowinfo}>{location}</Text>
-      </View>}
-      {!isEmpty(post.fileUrls) && <Files urls={post.fileUrls} />}
-      {isProject && <JoinProjectButton onPress={isMember ? leaveProject : joinProject} leaving={isMember} />}
-      <PostFooter id={post.id}
+      <PostFooter
+        style={styles.postFooter}
+        id={post.id}
         currentUser={currentUser}
         commenters={post.commenters}
         commentsTotal={post.commentsTotal}
@@ -167,25 +175,27 @@ export default class PostDetails extends React.Component {
         showActivityLabel />
     </View>
 
-    return <KeyboardFriendlyView style={styles.container}>
-      <Comments
-        ref='comments'
-        header={postCard}
-        footer={<CommentPrompt
-          currentUser={currentUser}
-          communityId={communityId}
-          submitting={submitting}
-          onChange={this.handleCommentOnChange}
-          onSubmit={this.handleCreateComment}
-          commentText={commentText} />
-        }
-        postId={post.id}
-        postPending={pending}
-        showMember={this.handleShowMember}
-        showTopic={this.handleShowTopic}
-        slug={slug} />
-      <SocketSubscriber type='post' id={post.id} />
-    </KeyboardFriendlyView>
+    return <SafeAreaView style={{flex: 1}}>
+      <KeyboardFriendlyView style={styles.container}>
+        <Comments
+          ref='comments'
+          header={postCard}
+          footer={<CommentPrompt
+            currentUser={currentUser}
+            communityId={communityId}
+            submitting={submitting}
+            onChange={this.handleCommentOnChange}
+            onSubmit={this.handleCreateComment}
+            commentText={commentText} />
+          }
+          postId={post.id}
+          postPending={pending}
+          showMember={this.handleShowMember}
+          showTopic={this.handleShowTopic}
+          slug={slug} />
+        <SocketSubscriber type='post' id={post.id} />
+      </KeyboardFriendlyView>
+    </SafeAreaView>
   }
 }
 
@@ -216,10 +226,10 @@ export function Files ({ urls }) {
 const openUrlFn = url => () =>
   Linking.canOpenURL(url).then(ok => ok && Linking.openURL(url))
 
-export function JoinProjectButton ({ onPress, leaving }) {
+export function JoinProjectButton ({ style, onPress, leaving }) {
   const text = leaving ? 'Leave Project' : 'Join Project'
   return <Button
-    style={styles.joinButton}
+    style={style}
     text={text}
     onPress={onPress} />
 }

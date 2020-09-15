@@ -6,8 +6,9 @@ exports[`CommentPrompt renders correctly 1`] = `
     Object {
       "borderTopColor": "#c0c6cd",
       "borderTopWidth": 0.25,
-      "marginBottom": 10,
+      "marginBottom": 35,
       "paddingHorizontal": 10,
+      "paddingTop": 10,
     }
   }
   placeholder="Write a comment..."
@@ -87,105 +88,12 @@ exports[`JoinProjectButton renders as expected when leaving 2`] = `
 `;
 
 exports[`PostDetails renders correctly 1`] = `
-<_default>
-  <Connect(Comments)
-    footer={
-      <CommentPrompt
-        commentText=""
-        currentUser={
-          Object {
-            "avatarUrl": "me.png",
-            "firstName": [Function],
-            "id": 123,
-          }
-        }
-        onChange={[Function]}
-        onSubmit={[Function]}
-      />
-    }
-    header={
-      <View>
-        <withNavigation(Connect(PostHeader))
-          closeOnDelete={true}
-          communities={
-            Array [
-              Object {
-                "slug": "foom",
-              },
-            ]
-          }
-          creator={
-            Object {
-              "id": "77",
-              "name": "Houdini",
-            }
-          }
-          date="2017-05-19T23:24:58Z"
-          editPost={[MockFunction]}
-          goToCommunity={[Function]}
-          pinned={true}
-          postId="91"
-          showMember={[Function]}
-          showTopic={[Function]}
-          slug="foom"
-          topics={
-            Array [
-              Object {
-                "id": 1,
-                "name": "topic1",
-              },
-            ]
-          }
-          type="request"
-        />
-        <PostImage
-          imageUrls={
-            Array [
-              "foom.png",
-            ]
-          }
-          linked={true}
-        />
-        <PostBody
-          details="Lo"
-          showMember={[Function]}
-          showTopic={[Function]}
-          slug="foom"
-          title="Hi"
-          type="request"
-        />
-        <PostCommunities
-          communities={
-            Array [
-              Object {
-                "slug": "foom",
-              },
-            ]
-          }
-          goToCommunity={[Function]}
-          shouldShowCommunities={true}
-          slug="foom"
-        />
-        <Files
-          urls={
-            Array [
-              "http://foo.com/foo.pdf",
-              "http://foo.com/bar.zip",
-            ]
-          }
-        />
-        <Connect(PostFooter)
-          commenters={
-            Array [
-              Object {
-                "id": 9,
-              },
-              Object {
-                "id": 7,
-              },
-            ]
-          }
-          commentsTotal={12}
+<withOrientation>
+  <_default>
+    <Connect(Comments)
+      footer={
+        <CommentPrompt
+          commentText=""
           currentUser={
             Object {
               "avatarUrl": "me.png",
@@ -193,22 +101,117 @@ exports[`PostDetails renders correctly 1`] = `
               "id": 123,
             }
           }
-          id="91"
-          myVote={true}
-          showActivityLabel={true}
-          votesTotal={8}
+          onChange={[Function]}
+          onSubmit={[Function]}
         />
-      </View>
-    }
-    postId="91"
-    postPending={false}
-    showMember={[Function]}
-    showTopic={[Function]}
-    slug="foom"
-  />
-  <Connect(SocketSubscriber)
-    id="91"
-    type="post"
-  />
-</_default>
+      }
+      header={
+        <View>
+          <withNavigation(Connect(PostHeader))
+            closeOnDelete={true}
+            communities={
+              Array [
+                Object {
+                  "slug": "foom",
+                },
+              ]
+            }
+            creator={
+              Object {
+                "id": "77",
+                "name": "Houdini",
+              }
+            }
+            date="2017-05-19T23:24:58Z"
+            editPost={[MockFunction]}
+            goToCommunity={[Function]}
+            pinned={true}
+            postId="91"
+            showMember={[Function]}
+            showTopic={[Function]}
+            slug="foom"
+            topics={
+              Array [
+                Object {
+                  "id": 1,
+                  "name": "topic1",
+                },
+              ]
+            }
+            type="request"
+          />
+          <PostImage
+            imageUrls={
+              Array [
+                "foom.png",
+              ]
+            }
+            linked={true}
+          />
+          <PostBody
+            details="Lo"
+            showMember={[Function]}
+            showTopic={[Function]}
+            slug="foom"
+            title="Hi"
+            type="request"
+          />
+          <Files
+            urls={
+              Array [
+                "http://foo.com/foo.pdf",
+                "http://foo.com/bar.zip",
+              ]
+            }
+          />
+          <PostCommunities
+            communities={
+              Array [
+                Object {
+                  "slug": "foom",
+                },
+              ]
+            }
+            goToCommunity={[Function]}
+            shouldShowCommunities={true}
+            slug="foom"
+          />
+          <Connect(PostFooter)
+            commenters={
+              Array [
+                Object {
+                  "id": 9,
+                },
+                Object {
+                  "id": 7,
+                },
+              ]
+            }
+            commentsTotal={12}
+            currentUser={
+              Object {
+                "avatarUrl": "me.png",
+                "firstName": [Function],
+                "id": 123,
+              }
+            }
+            id="91"
+            myVote={true}
+            showActivityLabel={true}
+            votesTotal={8}
+          />
+        </View>
+      }
+      postId="91"
+      postPending={false}
+      showMember={[Function]}
+      showTopic={[Function]}
+      slug="foom"
+    />
+    <Connect(SocketSubscriber)
+      id="91"
+      type="post"
+    />
+  </_default>
+</withOrientation>
 `;

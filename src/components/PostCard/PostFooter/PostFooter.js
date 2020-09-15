@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, Text, TouchableOpacity } from 'react-native'
-import { slice } from 'lodash/fp'
+import { slice, uniqBy } from 'lodash/fp'
 import Avatar from '../../Avatar'
 import Icon from '../../Icon'
 import {
@@ -19,6 +19,7 @@ export default class PostFooter extends React.PureComponent {
 
   render () {
     const {
+      style,
       commenters,
       commentsTotal,
       votesTotal,
@@ -31,10 +32,10 @@ export default class PostFooter extends React.PureComponent {
       ? `${commentsTotal} comment${commentsTotal === 1 ? '' : 's'}`
       : 'No comments'
 
-    return <View style={styles.container}>
+    return <View style={[styles.container, style]}>
       {showActivityLabel && <Text style={styles.activityLabel}>Activity</Text>}
       <View style={styles.comments}>
-        {slice(0, 3, commenters).map((c, index) => {
+        {slice(0, 3, uniqBy('id', commenters)).map((c, index) => {
           return <Avatar key={index}
             avatarUrl={c.avatarUrl}
             size='small'
