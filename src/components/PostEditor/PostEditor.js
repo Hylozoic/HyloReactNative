@@ -548,7 +548,8 @@ export default class PostEditor extends React.Component {
             <SectionLabel>Location</SectionLabel>
             <View style={styles.topicAddBorder}><Icon name='Plus' style={styles.topicAdd} /></View>
           </View>
-          <Text>{locationObject && locationObject.fullText}</Text>
+          {!locationObject && <Text style={styles.textInputPlaceholder}>Select a Location</Text>}
+          {locationObject && <Text>{locationObject.fullText}</Text>}
         </TouchableOpacity>
         {detailsFocused && <Toolbar {...toolbarProps} />}
       </ScrollView>
