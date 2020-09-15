@@ -111,7 +111,7 @@ export default class PostDetails extends React.Component {
     const slug = get('communities.0.slug', post)
     const communityId = get('communities.0.id', post)
     const isMember = find(member => member.id === currentUser.id, post.members)
-    const { location } = post
+    const location = post.location || (post.locationObject && post.locationObject.fullText)
 
     const postCard = <View style={styles.postCard}>
       <PostHeader
