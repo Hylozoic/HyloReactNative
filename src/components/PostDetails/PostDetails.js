@@ -142,22 +142,22 @@ export default class PostDetails extends React.Component {
         slug={slug}
         showMember={this.handleShowMember}
         showTopic={this.handleShowTopic} />
+      {!isEmpty(post.fileUrls) && <Files urls={post.fileUrls} />}
       {isProject &&
         <ProjectMembersSummary
           members={post.members}
           onPress={goToMembers}
           dimension={34}
           style={styles.projectMembersContainer} />}
-      {!!location && <View style={[styles.infoRow]}>
-        <Text style={styles.infoRowLabel}>Location:</Text>
-        <Text style={styles.infoRowInfo}>{location}</Text>
-      </View>}
-      {!isEmpty(post.fileUrls) && <Files urls={post.fileUrls} />}
       {isProject && <JoinProjectButton
         style={styles.joinButton}
         leaving={isMember}
         onPress={isMember ? leaveProject : joinProject}
       />}
+      {!!location && <View style={[styles.infoRow]}>
+        <Text style={styles.infoRowLabel}>Location:</Text>
+        <Text style={styles.infoRowInfo}>{location}</Text>
+      </View>}
       <PostCommunities
         communities={post.communities}
         slug={slug}

@@ -1,3 +1,4 @@
+import { isIOS } from 'util/platform'
 import { capeCod10, rhino60, rhino30, fuchsiaPink, prim, caribbeanGreen } from '../../style/colors'
 
 export default {
@@ -36,14 +37,15 @@ export default {
     fontFamily: 'Circular-Book'
   },
   inlineEditor: {
-    marginBottom: 35,
+    marginBottom: isIOS ? 35 : 10,
     paddingTop: 10,
     paddingHorizontal: 10,
     borderTopColor: rhino30,
     borderTopWidth: 0.25
   },
   files: {
-    marginHorizontal: 12
+    marginHorizontal: 18,
+    marginBottom: 18
   },
   joinButton: {
     backgroundColor: prim,

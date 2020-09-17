@@ -90,7 +90,7 @@ export function PostTitle ({ title, style }) {
 const styles = StyleSheet.create({
   container: {
     marginHorizontal: 12,
-    marginBottom: 20
+    marginBottom: 18
   },
   resourceEndsAt: {
     marginTop: 6,
