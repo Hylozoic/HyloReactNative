@@ -23,7 +23,6 @@ const styles = {
     borderRadius: 2,
     borderColor: '#EAEBEB',
     borderWidth: 1,
-    marginTop: 19,
     marginBottom: 6
   },
   linkTitle: {

@@ -51,13 +51,19 @@ export default class PostBody extends React.PureComponent {
     } = this.props
     const decodedTitle = decode(title)
     const presentedDetails = present(
-      sanitize(details).replace(/\n/g, '').replace('<p>&nbsp;</p>', ''),
-      {slug, maxlength: shouldTruncate && MAX_DETAILS_LENGTH}
+      sanitize(details)
+        .replace(/\n/g, '')
+        .replace(/(<p>\s*<\/p>)+/g, '')
+        .replace('<p>&nbsp;</p>', ''),
+      {
+        slug,
+        maxlength: shouldTruncate && MAX_DETAILS_LENGTH,
+        noP: true
+      }
     )
-    const canHaveTimes = type === 'offer' || type === 'request' || type === 'resource'
     const startDate = startTime && formatStartDate(startTime)
     const endDate = endTime && formatEndDate(endTime)
-    let timeWindow = ''
+    let timeWindow
     
     if (startDate && endDate) {
       timeWindow = `${type} starts ${startDate} and ${endDate}`
@@ -68,12 +74,12 @@ export default class PostBody extends React.PureComponent {
     }
 
     return <View style={styles.container}>
-      {canHaveTimes &&
+      {timeWindow &&
         <Text style={styles.resourceEndsAt}>{timeWindow}</Text>}
       <PostTitle title={decodedTitle} />
       <HTMLView
         onLinkPress={this.handleLinkPress}
-        addLineBreaks
+        addLineBreaks={false}
         stylesheet={richTextStyles}
         textComponentProps={{ style: styles.details }}
         value={presentedDetails} />

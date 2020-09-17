@@ -18,6 +18,9 @@ exports[`matches the last snapshot 1`] = `
           "a": Object {
             "color": "#0DC39F",
           },
+          "p": Object {
+            "marginBottom": 12,
+          },
         }
       }
       textComponentProps={
