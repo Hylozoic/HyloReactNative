@@ -382,6 +382,7 @@ export default class PostEditor extends React.Component {
       startTime, endTime, locationObject
     } = this.state
     const canHaveTimeframe = type !== 'discussion'
+    const canHaveLocation = type !== 'discussion'
     const toolbarProps = {
       post,
       canModerate,
@@ -537,7 +538,7 @@ export default class PostEditor extends React.Component {
               fileUrls={fileUrls} />
           </View>}
         </View>
-        <TouchableOpacity
+        {canHaveLocation && <TouchableOpacity
           style={[
             styles.section,
             styles.textInputWrapper,
@@ -550,7 +551,7 @@ export default class PostEditor extends React.Component {
           </View>
           {!locationObject && <Text style={styles.textInputPlaceholder}>Select a Location</Text>}
           {locationObject && <Text>{locationObject.fullText}</Text>}
-        </TouchableOpacity>
+        </TouchableOpacity>}
         {detailsFocused && <Toolbar {...toolbarProps} />}
       </ScrollView>
       <Toolbar {...toolbarProps} />
