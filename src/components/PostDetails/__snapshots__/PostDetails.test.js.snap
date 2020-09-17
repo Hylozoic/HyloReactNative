@@ -2,15 +2,6 @@
 
 exports[`CommentPrompt renders correctly 1`] = `
 <withNavigation(InlineEditor)
-  containerStyle={
-    Object {
-      "borderTopColor": "#c0c6cd",
-      "borderTopWidth": 0.25,
-      "marginBottom": 35,
-      "paddingHorizontal": 10,
-      "paddingTop": 10,
-    }
-  }
   placeholder="Write a comment..."
 />
 `;

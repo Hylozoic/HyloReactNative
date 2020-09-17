@@ -205,7 +205,7 @@ export function CommentPrompt ({ currentUser, onChange, onSubmit, submitting, co
     onChange={onChange}
     onSubmit={onSubmit}
     value={commentText}
-    containerStyle={styles.inlineEditor}
+    style={styles.inlineEditor}
     submitting={submitting}
     placeholder={'Write a comment...'}
     communityId={communityId}

@@ -44,9 +44,9 @@ exports[`PostEditor renders a new editor correctly 1`] = `
     onContentSizeChange={[Function]}
   >
     <View>
-      <SectionLabel>
+      <Text>
         What are you posting today?
-      </SectionLabel>
+      </Text>
       <View>
         <TypeButton
           onPress={[Function]}
@@ -69,9 +69,9 @@ exports[`PostEditor renders a new editor correctly 1`] = `
           type="resource"
         />
       </View>
-      <SectionLabel>
+      <Text>
         Title
-      </SectionLabel>
+      </Text>
       <View>
         <TextInput
           allowFontScaling={true}
@@ -85,23 +85,18 @@ exports[`PostEditor renders a new editor correctly 1`] = `
           value=""
         />
       </View>
-      <SectionLabel>
+      <Text>
         Details
-      </SectionLabel>
+      </Text>
       <withNavigation(InlineEditor)
         autoGrow={false}
-        containerStyle={
-          Object {
-            "borderBottomColor": "#c0c6cd",
-            "borderBottomWidth": 0.5,
-            "marginBottom": 10,
-            "paddingBottom": 10,
-          }
-        }
         editable={true}
         inputStyle={
           Object {
             "fontFamily": "Circular-Book",
+            "fontSize": 14,
+            "margin": 0,
+            "padding": 0,
           }
         }
         onChange={[Function]}
@@ -115,9 +110,9 @@ exports[`PostEditor renders a new editor correctly 1`] = `
         onPress={[Function]}
       >
         <View>
-          <SectionLabel>
+          <Text>
             Topics
-          </SectionLabel>
+          </Text>
           <View>
             <Icon
               name="Plus"
@@ -137,9 +132,9 @@ exports[`PostEditor renders a new editor correctly 1`] = `
         onPress={[Function]}
       >
         <View>
-          <SectionLabel>
+          <Text>
             Post In
-          </SectionLabel>
+          </Text>
           <View>
             <Icon
               name="Plus"
@@ -578,6 +573,84 @@ exports[`PostEditor renders correctly while saving 2`] = `
         >
           <View>
             <Text>
+              Start Time
+            </Text>
+            <View>
+              <Icon
+                name="ArrowDown"
+              />
+            </View>
+          </View>
+          <Text>
+            When does it start?
+          </Text>
+        </View>
+        <View
+          accessible={true}
+          focusable={true}
+          isTVSelectable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+        >
+          <View>
+            <Text>
+              End Time
+            </Text>
+            <View>
+              <Icon
+                name="ArrowDown"
+              />
+            </View>
+          </View>
+          <Text>
+            When does it end?
+          </Text>
+        </View>
+        <View
+          accessible={true}
+          focusable={true}
+          isTVSelectable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+        >
+          <View>
+            <Text>
+              Location
+            </Text>
+            <View>
+              <Icon
+                name="Plus"
+              />
+            </View>
+          </View>
+          <Text>
+            Select a Location
+          </Text>
+        </View>
+        <View
+          accessible={true}
+          focusable={true}
+          isTVSelectable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+        >
+          <View>
+            <Text>
               Post In
             </Text>
             <View>
@@ -617,84 +690,6 @@ exports[`PostEditor renders correctly while saving 2`] = `
             </View>
           </View>
         </View>
-        <View
-          accessible={true}
-          focusable={true}
-          isTVSelectable={true}
-          onClick={[Function]}
-          onResponderGrant={[Function]}
-          onResponderMove={[Function]}
-          onResponderRelease={[Function]}
-          onResponderTerminate={[Function]}
-          onResponderTerminationRequest={[Function]}
-          onStartShouldSetResponder={[Function]}
-        >
-          <View>
-            <Text>
-              Start Time
-            </Text>
-            <View>
-              <Icon
-                name="ArrowDown"
-              />
-            </View>
-          </View>
-          <Text>
-            When does it start?
-          </Text>
-        </View>
-        <View
-          accessible={true}
-          focusable={true}
-          isTVSelectable={true}
-          onClick={[Function]}
-          onResponderGrant={[Function]}
-          onResponderMove={[Function]}
-          onResponderRelease={[Function]}
-          onResponderTerminate={[Function]}
-          onResponderTerminationRequest={[Function]}
-          onStartShouldSetResponder={[Function]}
-        >
-          <View>
-            <Text>
-              End Time
-            </Text>
-            <View>
-              <Icon
-                name="ArrowDown"
-              />
-            </View>
-          </View>
-          <Text>
-            When does it end?
-          </Text>
-        </View>
-      </View>
-      <View
-        accessible={true}
-        focusable={true}
-        isTVSelectable={true}
-        onClick={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
-      >
-        <View>
-          <Text>
-            Location
-          </Text>
-          <View>
-            <Icon
-              name="Plus"
-            />
-          </View>
-        </View>
-        <Text>
-          Select a Location
-        </Text>
       </View>
     </View>
   </RCTScrollView>
@@ -745,9 +740,9 @@ exports[`PostEditor renders with a post 1`] = `
     onContentSizeChange={[Function]}
   >
     <View>
-      <SectionLabel>
+      <Text>
         What are you posting today?
-      </SectionLabel>
+      </Text>
       <View>
         <TypeButton
           onPress={[Function]}
@@ -770,9 +765,9 @@ exports[`PostEditor renders with a post 1`] = `
           type="resource"
         />
       </View>
-      <SectionLabel>
+      <Text>
         Title
-      </SectionLabel>
+      </Text>
       <View>
         <TextInput
           allowFontScaling={true}
@@ -786,23 +781,18 @@ exports[`PostEditor renders with a post 1`] = `
           value=""
         />
       </View>
-      <SectionLabel>
+      <Text>
         Details
-      </SectionLabel>
+      </Text>
       <withNavigation(InlineEditor)
         autoGrow={false}
-        containerStyle={
-          Object {
-            "borderBottomColor": "#c0c6cd",
-            "borderBottomWidth": 0.5,
-            "marginBottom": 10,
-            "paddingBottom": 10,
-          }
-        }
         editable={true}
         inputStyle={
           Object {
             "fontFamily": "Circular-Book",
+            "fontSize": 14,
+            "margin": 0,
+            "padding": 0,
           }
         }
         onChange={[Function]}
@@ -816,9 +806,9 @@ exports[`PostEditor renders with a post 1`] = `
         onPress={[Function]}
       >
         <View>
-          <SectionLabel>
+          <Text>
             Topics
-          </SectionLabel>
+          </Text>
           <View>
             <Icon
               name="Plus"
@@ -838,9 +828,9 @@ exports[`PostEditor renders with a post 1`] = `
         onPress={[Function]}
       >
         <View>
-          <SectionLabel>
+          <Text>
             Post In
-          </SectionLabel>
+          </Text>
           <View>
             <Icon
               name="Plus"
@@ -862,9 +852,9 @@ exports[`PostEditor renders with a post 1`] = `
         />
       </TouchableOpacity>
       <View>
-        <SectionLabel>
+        <Text>
           Images
-        </SectionLabel>
+        </Text>
         <ImageSelector
           imageUrls={
             Array [
@@ -897,12 +887,6 @@ exports[`PostEditor renders with a post 1`] = `
     toggleAnnoucement={[Function]}
   />
 </_default>
-`;
-
-exports[`SectionLabel renders correctly 1`] = `
-<Text>
-  Label
-</Text>
 `;
 
 exports[`TypeButton renders correctly 1`] = `

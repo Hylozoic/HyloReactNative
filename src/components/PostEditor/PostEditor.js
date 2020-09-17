@@ -405,23 +405,24 @@ export default class PostEditor extends React.Component {
         keyboardDismissMode='on-drag'
       >
         <View style={styles.scrollContent}>
-          {!isProject && <SectionLabel>What are you posting today?</SectionLabel>}
+          {!isProject && <Text style={styles.sectionLabel}>What are you posting today?</Text>}
           {!isProject && <View style={[styles.typeButtonRow, styles.section]}>
             {['discussion', 'request', 'offer', 'resource'].map(t =>
               <TypeButton type={t} key={t} selected={t === type}
                 onPress={() => !isSaving && this.setState({type: t})} />)}
           </View>}
 
-          <SectionLabel>Title</SectionLabel>
+          <Text style={styles.sectionLabel}>Title</Text>
           <View style={[
-            styles.section
+            styles.section,
+            styles.textInputWrapper
           ]}>
             <TextInput
+              style={styles.textInput}
               editable={!isSaving}
               onChangeText={this.updateTitle}
               placeholder={titlePlaceholders[type]}
               placeholderTextColor={rhino30}
-              style={styles.textInput}
               underlineColorAndroid='transparent'
               value={title}
               maxLength={MAX_TITLE_LENGTH} />
@@ -433,15 +434,18 @@ export default class PostEditor extends React.Component {
               topRightArrow />
           </View>}
 
-          <SectionLabel>Details</SectionLabel>
+          <Text style={styles.sectionLabel}>Details</Text>
           <InlineEditor
+            style={[
+              styles.section,
+              styles.textInputWrapper
+            ]}
+            inputStyle={styles.textInput}
             onChange={this.handleDetailsOnChange}
             value={detailsText}
             editable={!pendingDetailsText}
             submitting={isSaving}
             placeholder={detailsPlaceholder}
-            inputStyle={styles.detailsEditorInput}
-            containerStyle={styles.detailsEditorContainer}
             communityId={get('id', currentCommunity)}
             autoGrow={false}
             onFocusToggle={isFocused => this.setState({detailsFocused: isFocused})}
@@ -456,7 +460,7 @@ export default class PostEditor extends React.Component {
             ]}
             onPress={this.showTopicsPicker}>
             <View style={styles.topicLabel}>
-              <SectionLabel>Topics</SectionLabel>
+              <Text style={styles.sectionLabel}>Topics</Text>
               <View style={styles.topicAddBorder}><Icon name='Plus' style={styles.topicAdd} /></View>
             </View>
             <Topics onPress={this.removeTopic} topics={topics} />
@@ -467,12 +471,11 @@ export default class PostEditor extends React.Component {
           {isProject && <TouchableOpacity
             style={[
               styles.section,
-              styles.textInputWrapper,
-              styles.topics
+              styles.textInputWrapper
             ]}
             onPress={this.showProjectMembersEditor}>
             <View style={styles.topicLabel}>
-              <SectionLabel>Members</SectionLabel>
+              <Text style={styles.sectionLabel}>Members</Text>
               <View style={styles.topicAddBorder}><Icon name='Plus' style={styles.topicAdd} /></View>
             </View>
             {members.length > 0 &&
@@ -480,27 +483,6 @@ export default class PostEditor extends React.Component {
             {members.length < 1 &&
               <Text style={styles.textInputPlaceholder}>Who is a part of this project?</Text>}
           </TouchableOpacity>}
-
-          <TouchableOpacity
-            style={[
-              styles.section,
-              styles.textInputWrapper,
-              styles.topics
-            ]}
-            onPress={this.showCommunitiesEditor}>
-            <View style={styles.topicLabel}>
-              <SectionLabel>Post In</SectionLabel>
-              <View style={styles.topicAddBorder}><Icon name='Plus' style={styles.topicAdd} /></View>
-            </View>
-            <CommunitiesList
-              communities={communities}
-              columns={1}
-              onPress={this.removeCommunity}
-              RightIcon={iconProps =>
-                <Icon name='Ex' style={styles.communityRemoveIcon} {...iconProps} />} />
-            {communities.length < 1 &&
-              <Text style={styles.textInputPlaceholder}>Select which communities to post in.</Text>}
-          </TouchableOpacity>
 
           {canHaveTimeframe && <React.Fragment>
             <DatePickerWithLabel
@@ -521,8 +503,43 @@ export default class PostEditor extends React.Component {
             />
           </React.Fragment>}
 
+          {canHaveLocation && <TouchableOpacity
+            style={[
+              styles.section,
+              styles.textInputWrapper,
+              styles.topics
+            ]}
+            onPress={this.showLocationEditor}>
+            <View style={styles.topicLabel}>
+              <Text style={styles.sectionLabel}>Location</Text>
+              <View style={styles.topicAddBorder}><Icon name='Plus' style={styles.topicAdd} /></View>
+            </View>
+            {!locationObject && <Text style={styles.textInputPlaceholder}>Select a Location</Text>}
+            {locationObject && <Text>{locationObject.fullText}</Text>}
+          </TouchableOpacity>}
+
+          <TouchableOpacity
+            style={[
+              styles.section,
+              styles.textInputWrapper
+            ]}
+            onPress={this.showCommunitiesEditor}>
+            <View style={styles.topicLabel}>
+              <Text style={styles.sectionLabel}>Post In</Text>
+              <View style={styles.topicAddBorder}><Icon name='Plus' style={styles.topicAdd} /></View>
+            </View>
+            <CommunitiesList
+              communities={communities}
+              columns={1}
+              onPress={this.removeCommunity}
+              RightIcon={iconProps =>
+                <Icon name='Ex' style={styles.communityRemoveIcon} {...iconProps} />} />
+            {communities.length < 1 &&
+              <Text style={styles.textInputPlaceholder}>Select which communities to post in.</Text>}
+          </TouchableOpacity>
+
           {!isEmpty(imageUrls) && <View>
-            <SectionLabel>Images</SectionLabel>
+            <Text style={styles.sectionLabel}>Images</Text>
             <ImageSelector
               onAdd={this.addImage}
               onRemove={this.removeImage}
@@ -532,29 +549,15 @@ export default class PostEditor extends React.Component {
           </View>}
 
           {!isEmpty(fileUrls) && <View>
-            <SectionLabel>Files</SectionLabel>
+            <Text style={styles.sectionLabel}>Files</Text>
             <FileSelector
               onRemove={this.removeFile}
               fileUrls={fileUrls} />
           </View>}
+          {detailsFocused && <Toolbar {...toolbarProps} />}
         </View>
-        {canHaveLocation && <TouchableOpacity
-          style={[
-            styles.section,
-            styles.textInputWrapper,
-            styles.topics
-          ]}
-          onPress={this.showLocationEditor}>
-          <View style={styles.topicLabel}>
-            <SectionLabel>Location</SectionLabel>
-            <View style={styles.topicAddBorder}><Icon name='Plus' style={styles.topicAdd} /></View>
-          </View>
-          {!locationObject && <Text style={styles.textInputPlaceholder}>Select a Location</Text>}
-          {locationObject && <Text>{locationObject.fullText}</Text>}
-        </TouchableOpacity>}
-        {detailsFocused && <Toolbar {...toolbarProps} />}
       </ScrollView>
-      <Toolbar {...toolbarProps} />
+      {!detailsFocused && <Toolbar {...toolbarProps} />}
     </KeyboardFriendlyView>
   }
 }
@@ -579,12 +582,6 @@ export function Toolbar ({post, canModerate, filePickerPending, imagePickerPendi
       {isEmpty(post) && canModerate && <TouchableOpacity onPress={toggleAnnoucement}><Icon name={'Announcement'} style={styles.annoucementIcon} color={announcementEnabled ? 'caribbeanGreen' : 'rhino30'} /></TouchableOpacity>}
     </View>
   </View>
-}
-
-export function SectionLabel ({ children }) {
-  return <Text style={styles.sectionLabel}>
-    {children}
-  </Text>
 }
 
 export function Communities ({ onPress, communities, placeholder }) {
@@ -634,8 +631,7 @@ export function DatePickerWithLabel ({
   styleTemplate = {
     wrapper: [
       styles.section,
-      styles.textInputWrapper,
-      styles.topics  
+      styles.textInputWrapper
     ],
     labelWrapper: styles.topicLabel,
     labelText: styles.sectionLabel,

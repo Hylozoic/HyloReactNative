@@ -143,7 +143,7 @@ export class InlineEditor extends React.PureComponent {
       onChange,
       onSubmit,
       submitting = false,
-      containerStyle,
+      style,
       inputStyle
     } = this.props
     const { isFocused, height } = this.state
@@ -151,7 +151,7 @@ export class InlineEditor extends React.PureComponent {
     // Calculates a height based on textInput content size with the following constraint: 40 < height < maxHeight
     // const calculatedHeight = Math.round(Math.min(Math.max((isEmpty(value) ? minTextInputHeight : height) + (isFocused ? 45 : 0), minTextInputHeight), 190))
 
-    return <View style={[styles.container, containerStyle]}>
+    return <View style={[styles.container, style]}>
       <View style={styles.wrapper}>
         <TextInput
           multiline

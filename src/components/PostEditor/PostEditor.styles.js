@@ -31,30 +31,23 @@ export default {
     borderColor: rhino30
   },
   textInput: {
-    height: isIOS ? 22 : null,
     fontSize: 14,
     fontFamily: 'Circular-Book',
-    paddingBottom: 4,
-    marginBottom: 4
+    margin: 0,
+    padding: 0,
   },
   textInputPlaceholder: {
     height: isIOS ? 22 : null,
     fontSize: 14,
     fontFamily: 'Circular-Book',
-    paddingBottom: 4,
     color: rhino30
   },
   detailsEditorInput: {
-    fontFamily: 'Circular-Book'
+    fontFamily: 'Circular-Book',
+    padding: 0,
+    margin: 0
   },
   detailsEditorContainer: {
-    paddingBottom: 10,
-    marginBottom: 10,
-    borderBottomColor: rhino30,
-    borderBottomWidth: StyleSheet.hairlineWidth
-  },
-  details: {
-    paddingTop: isIOS ? null : 15
   },
   typeButtonRow: {
     flexDirection: 'row',
@@ -109,30 +102,27 @@ export default {
     }
   },
   section: {
-    marginBottom: 8
+    marginBottom: 8,
+    paddingBottom: 8
   },
   sectionLabel: {
-    marginBottom: 8,
     fontFamily: 'Circular-Bold'
   },
   topics: {
     justifyContent: 'center',
     display: 'flex',
-    flexDirection: 'column',
-    paddingBottom: 5
+    flexDirection: 'column'
   },
   topicAddBorder: {
+    height: 25,
+    width: 25,
+    marginHorizontal: 10,
     borderColor: caribbeanGreen,
     borderRadius: 100,
     borderWidth: 1,
     display: 'flex',
     alignItems: 'center',
-    height: 25,
-    justifyContent: 'center',
-    padding: 3,
-    marginBottom: 8,
-    marginHorizontal: 10,
-    width: 25
+    justifyContent: 'center'
   },
   topicAdd: {
     color: caribbeanGreen,
@@ -150,10 +140,10 @@ export default {
     borderRadius: 4,
     borderWidth: 1,
     borderColor: rhino30,
-    paddingVertical: 10,
-    paddingHorizontal: 10,
-    marginRight: 8,
-    marginBottom: 8
+    marginVertical: 10,
+    marginRight: 5,
+    paddingVertical: 5,
+    paddingHorizontal: 8
   },
   topicPillBox: {
     display: 'flex',

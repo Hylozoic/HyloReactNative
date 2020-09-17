@@ -372,15 +372,6 @@ describe('PostEditor', () => {
   })
 })
 
-describe('SectionLabel', () => {
-  it('renders correctly', () => {
-    const renderer = new ReactShallowRenderer()
-    renderer.render(<SectionLabel>Label</SectionLabel>)
-    const actual = renderer.getRenderOutput()
-    expect(actual).toMatchSnapshot()
-  })
-})
-
 describe('TypeButton', () => {
   it('renders correctly', () => {
     const renderer = new ReactShallowRenderer()

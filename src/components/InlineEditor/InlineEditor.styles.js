@@ -11,7 +11,9 @@ export default {
     flexDirection: 'row'
   },
   textInput: {
-    flex: 1
+    flex: 1,
+    padding: 0,
+    margin: 0
   },
   activeButton: {
     color: azureRadiance
