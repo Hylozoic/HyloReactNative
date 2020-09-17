@@ -61,11 +61,7 @@ export default class PostDetails extends React.Component {
     return !!nextProps.isFocused
   }
 
-  handleShowMember = (memberId) => this.props.showMember(memberId)
-
   handleShowTopic = (topicId) => this.props.showTopic(topicId, get('post.communities.0.id', this.props))
-
-  handleGoToCommunity = (communityId) => this.props.goToCommunity(communityId)
 
   handleCreateComment = (commentText) => {
     const commentTextAsHtml = toHtml(commentText)
@@ -99,7 +95,9 @@ export default class PostDetails extends React.Component {
       isProject,
       joinProject,
       leaveProject,
-      goToMembers
+      showMember,
+      goToMembers,
+      goToCommunity
     } = this.props
 
     const {
@@ -126,8 +124,8 @@ export default class PostDetails extends React.Component {
         topics={post.topics}
         showTopic={this.handleShowTopic}
         postId={post.id}
-        showMember={this.handleShowMember}
-        goToCommunity={this.handleGoToCommunity}
+        showMember={showMember}
+        goToCommunity={goToCommunity}
         announcement={post.announcement}
         closeOnDelete
       />
@@ -140,7 +138,7 @@ export default class PostDetails extends React.Component {
         endTime={post.endTime}
         linkPreview={post.linkPreview}
         slug={slug}
-        showMember={this.handleShowMember}
+        showMember={showMember}
         showTopic={this.handleShowTopic} />
       {!isEmpty(post.fileUrls) && <Files urls={post.fileUrls} />}
       {isProject &&
@@ -160,9 +158,10 @@ export default class PostDetails extends React.Component {
       </View>}
       <PostCommunities
         communities={post.communities}
+        includePublic={post.isPublic}
         slug={slug}
         style={[styles.infoRow]}
-        goToCommunity={this.handleGoToCommunity}
+        goToCommunity={goToCommunity}
         shouldShowCommunities />
       <PostFooter
         style={styles.postFooter}
@@ -190,7 +189,7 @@ export default class PostDetails extends React.Component {
           }
           postId={post.id}
           postPending={pending}
-          showMember={this.handleShowMember}
+          showMember={showMember}
           showTopic={this.handleShowTopic}
           slug={slug} />
         <SocketSubscriber type='post' id={post.id} />

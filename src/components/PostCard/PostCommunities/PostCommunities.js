@@ -7,6 +7,11 @@ import {
   capeCod10, rhino30, caribbeanGreen
 } from '../../../style/colors'
 
+export const PUBLIC_COMMUNITY = {
+  id: 'PUBLIC',
+  name: 'Public'
+}
+
 export default class PostCommunities extends React.PureComponent {
   static defaultState = {
     expanded: false
@@ -23,9 +28,16 @@ export default class PostCommunities extends React.PureComponent {
     })
   }
 
+  goToCommunityWithPublic = communityId => communityId == PUBLIC_COMMUNITY.id
+    ? null
+    : this.props.goToCommunity(communityId)
+
   render () {
-    const { communities, goToCommunity, shouldShowCommunities, style } = this.props
+    const { communities: providedCommunities, includePublic, shouldShowCommunities, style } = this.props
     const { expanded } = this.state
+    const communities = includePublic
+      ? [ ...providedCommunities, PUBLIC_COMMUNITY ]
+      : providedCommunities
 
     // don't show if there are no communities or there is exactly 1 community and the flag isn't set
     if (isEmpty(communities) || (communities.length === 1 && !shouldShowCommunities)) {
@@ -35,7 +47,7 @@ export default class PostCommunities extends React.PureComponent {
     const content =
       <View style={styles.row}>
         <Text style={styles.reminderText}>Posted In: </Text>
-        <CommunitiesListSummary communities={communities} expandFunc={this.toggleExpanded} goToCommunity={goToCommunity} />
+        <CommunitiesListSummary communities={communities} expandFunc={this.toggleExpanded} goToCommunity={this.goToCommunityWithPublic} />
         <TouchableOpacity onPress={this.toggleExpanded} style={styles.arrowButton}>
           <Icon name='ArrowDown' style={styles.arrowIcon} />
         </TouchableOpacity>
@@ -48,7 +60,7 @@ export default class PostCommunities extends React.PureComponent {
             <Icon name='ArrowUp' style={styles.arrowIcon} />
           </TouchableOpacity>
         </View>
-        <CommunitiesList communities={communities} onPress={goToCommunity} />
+        <CommunitiesList communities={communities} onPress={this.goToCommunityWithPublic} />
       </React.Fragment>
 
     return <View style={[style, expanded && styles.expanded]}>

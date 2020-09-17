@@ -73,7 +73,6 @@ export function ContentRow ({ item, itemType, showPost }) {
       commenters={item.commenters}
       communities={item.communities}
       topics={item.topics}
-
     />
   } else {
     postId = item.post.id

@@ -89,6 +89,7 @@ export default class PostCard extends React.PureComponent {
         style={styles.communities}
         shouldShowCommunities={shouldShowCommunities}
         communities={communities}
+        includePublic={post.isPublic}
         slug={slug}
         selectedNetworkId={selectedNetworkId}
         goToCommunity={goToCommunity} />

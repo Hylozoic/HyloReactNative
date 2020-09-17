@@ -124,10 +124,10 @@ exports[`PostDetails renders correctly 1`] = `
             }
             date="2017-05-19T23:24:58Z"
             editPost={[MockFunction]}
-            goToCommunity={[Function]}
+            goToCommunity={[MockFunction]}
             pinned={true}
             postId="91"
-            showMember={[Function]}
+            showMember={[MockFunction]}
             showTopic={[Function]}
             slug="foom"
             topics={
@@ -150,7 +150,7 @@ exports[`PostDetails renders correctly 1`] = `
           />
           <PostBody
             details="Lo"
-            showMember={[Function]}
+            showMember={[MockFunction]}
             showTopic={[Function]}
             slug="foom"
             title="Hi"
@@ -172,7 +172,7 @@ exports[`PostDetails renders correctly 1`] = `
                 },
               ]
             }
-            goToCommunity={[Function]}
+            goToCommunity={[MockFunction]}
             shouldShowCommunities={true}
             slug="foom"
           />
@@ -204,7 +204,7 @@ exports[`PostDetails renders correctly 1`] = `
       }
       postId="91"
       postPending={false}
-      showMember={[Function]}
+      showMember={[MockFunction]}
       showTopic={[Function]}
       slug="foom"
     />
