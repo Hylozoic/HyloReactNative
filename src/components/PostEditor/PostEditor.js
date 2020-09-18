@@ -103,6 +103,7 @@ export default class PostEditor extends React.Component {
       titleLengthError: false,
       startTime: get('startTime', post) ? (new Date(get('startTime', post))) : null,
       endTime: get('endTime', post) ? (new Date(get('endTime', post))) : null,
+      location: get('location', post),
       locationObject: get('locationObject', post),
       startTimeExpanded: false,
       endTimeExpanded: false
@@ -122,7 +123,8 @@ export default class PostEditor extends React.Component {
     const {
       fileUrls, imageUrls, title, detailsText,
       topics, type, announcementEnabled, members,
-      communities, startTime, endTime, locationObject
+      communities, startTime, endTime, location,
+      locationObject
     } = this.state
     const postData = {
       type,
@@ -136,6 +138,7 @@ export default class PostEditor extends React.Component {
       topicNames: topics.map(t => t.name),
       startTime: startTime && startTime.getTime(),
       endTime: endTime && endTime.getTime(),
+      location: location,
       locationId: locationObject && locationObject.id
     }
 
@@ -206,12 +209,18 @@ export default class PostEditor extends React.Component {
   }
 
   setLocation = locationData => {
-    const { pollingFindOrCreateLocation } = get('state.params', this.props.navigation)
+    const pollingFindOrCreateLocation = this.props.navigation.getParam('pollingFindOrCreateLocation')
+    const isPlainTextResult = (get('id', locationData) === 'NEW')
 
-    pollingFindOrCreateLocation(
-      locationData,
-      locationObject => this.setState(state => ({ locationObject })
-    ))
+    if (isPlainTextResult) {
+      this.setState(() => ({ location: locationData.fullText }))
+    } else {
+      this.setState(() => ({ location: null }))
+      pollingFindOrCreateLocation(
+        locationData,
+        locationObject => this.setState(() => ({ locationObject })
+      ))
+    }
   }
 
   removeLocation = () => this.setState(state => ({ locationObject: null }))
@@ -297,10 +306,10 @@ export default class PostEditor extends React.Component {
     const screenTitle = 'Project Members'
     navigation.navigate('ItemChooserScreen', {
       screenTitle,
+      searchPlaceholder: 'Type in the names of people to add to project',
       ItemRowComponent: ProjectMemberItemRow,
       initialItems: members,
       updateItems: this.updateMembers,
-      searchPlaceholder: 'Type in the names of people to add to project',
       fetchSearchSuggestions: scopedFetchPeopleAutocomplete,
       getSearchSuggestions: scopedGetPeopleAutocomplete(screenTitle)
     })
@@ -311,9 +320,9 @@ export default class PostEditor extends React.Component {
     const screenTitle = 'Pick a Topic'
     navigation.navigate('ItemChooserScreen', {
       screenTitle,
+      searchPlaceholder: 'Search for a topic by name',
       ItemRowComponent: TopicRow,
       pickItem: this.insertTopicFromPicker,
-      searchPlaceholder: 'Search for a topic by name',
       // FIX: Will only find topics for first community
       fetchSearchSuggestions: fetchTopicsForCommunityId(get('[0].id', this.state.communities)),
       getSearchSuggestions: getTopicsForAutocompleteWithNew
@@ -325,13 +334,13 @@ export default class PostEditor extends React.Component {
     const screenTitle = 'Post in Communities'
     navigation.navigate('ItemChooserScreen', {
       screenTitle,
-      ItemRowComponent: CommunityChooserItemRow,
-      defaultSuggestedItems: communityOptions,
-      defaultSuggestedItemsLabel: 'Your Communities',
-      pickItem: this.addCommunity,
       searchPlaceholder: 'Search for community by name',
+      defaultSuggestedItemsLabel: 'Your Communities',
+      defaultSuggestedItems: communityOptions,
+      ItemRowComponent: CommunityChooserItemRow,
+      pickItem: this.addCommunity,
       fetchSearchSuggestions: () => ({ type: 'none' }),
-      getSearchSuggestions: (state, { autocomplete: searchTerm }) =>
+      getSearchSuggestions: (_, { autocomplete: searchTerm }) =>
         communityOptions.filter(c => c.name.match(searchTerm))
     })
   }
@@ -339,11 +348,16 @@ export default class PostEditor extends React.Component {
   showLocationEditor = () => {
     const { navigation } = this.props
     const screenTitle = 'Choose a Location'
+    const initialSearchTerm = get('location', this.state) || get('locationObject.fullText', this.state)
+    // TODO: Get current location to send as proximity for location search
+    // const curLocation = locationObject || get('0.locationObject', communities) || get('locationObject', currentUser)
     navigation.navigate('ItemChooserScreen', {
       screenTitle,
+      searchPlaceholder: 'Search for your location',
+      initialSearchTerm,
       ItemRowComponent: LocationPickerItemRow,
       pickItem: this.setLocation,
-      searchPlaceholder: 'Search for your location',
+      searchTermFilter: searchTerm => searchTerm,
       fetchSearchSuggestions: locationSearch
     })
   }
@@ -379,7 +393,7 @@ export default class PostEditor extends React.Component {
       fileUrls, imageUrls, isSaving, topics, title, detailsText, type,
       filePickerPending, imagePickerPending, announcementEnabled,
       detailsFocused, titleLengthError, members, communities,
-      startTime, endTime, locationObject
+      startTime, endTime, location, locationObject
     } = this.state
     const canHaveTimeframe = type !== 'discussion'
     const canHaveLocation = type !== 'discussion'
@@ -393,8 +407,6 @@ export default class PostEditor extends React.Component {
       showImagePicker: this.showImagePicker,
       showFilePicker: this.showFilePicker
     }
-    // Not yet used
-    // const curLocation = locationObject || get('0.locationObject', communities) || get('locationObject', currentUser)
 
     return <KeyboardFriendlyView style={styles.container}>
       <ScrollView
@@ -514,8 +526,8 @@ export default class PostEditor extends React.Component {
               <Text style={styles.sectionLabel}>Location</Text>
               <View style={styles.topicAddBorder}><Icon name='Plus' style={styles.topicAdd} /></View>
             </View>
-            {!locationObject && <Text style={styles.textInputPlaceholder}>Select a Location</Text>}
-            {locationObject && <Text>{locationObject.fullText}</Text>}
+            {!location && !locationObject && <Text style={styles.textInputPlaceholder}>Select a Location</Text>}
+            {(location || locationObject) && <Text>{location || locationObject.fullText}</Text>}
           </TouchableOpacity>}
 
           <TouchableOpacity

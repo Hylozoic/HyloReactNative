@@ -31,6 +31,7 @@ export function createPost (post) {
     communities,
     startTime,
     endTime,
+    location,
     locationId,
     imageUrls = [],
     fileUrls = [],
@@ -50,6 +51,7 @@ export function createPost (post) {
         $communityIds: [String]
         $startTime: String
         $endTime: String
+        $location: String
         $locationId: ID
         $imageUrls: [String]
         $fileUrls: [String]
@@ -64,6 +66,7 @@ export function createPost (post) {
           communityIds: $communityIds
           startTime: $startTime
           endTime: $endTime
+          location: $location
           locationId: $locationId
           imageUrls: $imageUrls
           fileUrls: $fileUrls
@@ -81,6 +84,7 @@ export function createPost (post) {
         communityIds,
         startTime,
         endTime,
+        location,
         locationId,
         imageUrls,
         fileUrls,
@@ -107,6 +111,7 @@ export function createProject (post) {
     communities,
     startTime,
     endTime,
+    location,
     locationId,
     imageUrls = [],
     fileUrls = [],
@@ -125,6 +130,7 @@ export function createProject (post) {
         $communityIds: [String]
         $startTime: String
         $endTime: String
+        $location: String
         $locationId: ID
         $imageUrls: [String]
         $fileUrls: [String]
@@ -138,6 +144,7 @@ export function createProject (post) {
           communityIds: $communityIds
           startTime: $startTime
           endTime: $endTime
+          location: $location
           locationId: $locationId
           imageUrls: $imageUrls
           fileUrls: $fileUrls
@@ -154,6 +161,7 @@ export function createProject (post) {
         communityIds,
         startTime,
         endTime,
+        location,
         locationId,
         imageUrls,
         fileUrls,
@@ -182,6 +190,7 @@ export function updatePost (post) {
     communities,
     startTime,
     endTime,
+    location,
     locationId,
     imageUrls = [],
     fileUrls = [],
@@ -200,6 +209,7 @@ export function updatePost (post) {
         $communityIds: [String]
         $startTime: String
         $endTime: String
+        $location: String
         $locationId: ID
         $imageUrls: [String]
         $fileUrls: [String]
@@ -213,6 +223,7 @@ export function updatePost (post) {
           communityIds: $communityIds
           startTime: $startTime
           endTime: $endTime
+          location: $location
           locationId: $locationId
           imageUrls: $imageUrls
           fileUrls: $fileUrls
@@ -230,6 +241,7 @@ export function updatePost (post) {
         communityIds,
         startTime,
         endTime,
+        location,
         locationId,
         imageUrls,
         fileUrls,

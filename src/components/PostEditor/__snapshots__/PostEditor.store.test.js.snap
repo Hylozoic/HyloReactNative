@@ -10,6 +10,7 @@ Object {
         $communityIds: [String]
         $startTime: String
         $endTime: String
+        $location: String
         $locationId: ID
         $imageUrls: [String]
         $fileUrls: [String]
@@ -24,6 +25,7 @@ Object {
           communityIds: $communityIds
           startTime: $startTime
           endTime: $endTime
+          location: $location
           locationId: $locationId
           imageUrls: $imageUrls
           fileUrls: $fileUrls
@@ -128,6 +130,7 @@ Object {
       "endTime": "endTime",
       "fileUrls": Array [],
       "imageUrls": Array [],
+      "location": undefined,
       "locationId": undefined,
       "memberIds": Array [],
       "startTime": "startTime",
@@ -158,6 +161,7 @@ Object {
         $communityIds: [String]
         $startTime: String
         $endTime: String
+        $location: String
         $locationId: ID
         $imageUrls: [String]
         $fileUrls: [String]
@@ -172,6 +176,7 @@ Object {
           communityIds: $communityIds
           startTime: $startTime
           endTime: $endTime
+          location: $location
           locationId: $locationId
           imageUrls: $imageUrls
           fileUrls: $fileUrls
@@ -276,6 +281,7 @@ Object {
       "endTime": "endTime",
       "fileUrls": Array [],
       "imageUrls": Array [],
+      "location": undefined,
       "locationId": undefined,
       "memberIds": Array [
         1,
@@ -310,6 +316,7 @@ Object {
         $communityIds: [String]
         $startTime: String
         $endTime: String
+        $location: String
         $locationId: ID
         $imageUrls: [String]
         $fileUrls: [String]
@@ -323,6 +330,7 @@ Object {
           communityIds: $communityIds
           startTime: $startTime
           endTime: $endTime
+          location: $location
           locationId: $locationId
           imageUrls: $imageUrls
           fileUrls: $fileUrls
@@ -439,6 +447,7 @@ Object {
       "fileUrls": Array [],
       "id": 1,
       "imageUrls": Array [],
+      "location": undefined,
       "locationId": undefined,
       "memberIds": Array [],
       "startTime": "startTime",

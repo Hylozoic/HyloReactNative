@@ -22,6 +22,7 @@ export const propTypesForItemRowComponent = {
 
 export default class ItemChooser extends React.Component {
   static propTypes = {
+    scope: PropTypes.string.isRequired,
     fetchSearchSuggestions: PropTypes.func.isRequired,
     getSearchSuggestions: PropTypes.func,
     setSearchTerm: PropTypes.func.isRequired,
@@ -65,6 +66,11 @@ export default class ItemChooser extends React.Component {
       chosenItems: this.props.initialItems,
       initialItems: this.props.initialItems
     }
+  }
+  
+  componentDidMount () {
+    const { initialSearchTerm } = this.props
+    if (initialSearchTerm) this.setSearchTerm(initialSearchTerm)
   }
 
   componentWillUnmount () {

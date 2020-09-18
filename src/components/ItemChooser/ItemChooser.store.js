@@ -1,4 +1,4 @@
-import { get, trim } from 'lodash/fp'
+import { get, replace } from 'lodash/fp'
 import { createSelector } from 'reselect'
 import { fetchMapboxLocations } from 'services/mapbox'
 import convertMapboxToLocation from 'util/convertMapboxToLocation'
@@ -23,18 +23,22 @@ export const getSearchSuggestions = createSelector(
   (module, scope) => get([scope, 'searchSuggestions'], module)
 )
 
-export function setSearchTerm (scope, searchTerm = '') {
+export function setSearchTerm (scope, searchTerm = '', opts = {}) {
   if (!scope) throw new Error('`scope` param is required')
 
-  const searchTermTrimmed = trim(searchTerm) !== ''
-    ? trim(searchTerm)
-    : undefined
+  const defaultSearchTermFilter = replace(/\s/g , '')
+  const searchTermFilter = opts.searchTermFilter || defaultSearchTermFilter
+  let filteredSearchTerm = searchTermFilter(searchTerm)
 
+  filteredSearchTerm = filteredSearchTerm !== ''
+    ? filteredSearchTerm
+    : undefined
+  
   return {
     type: SET_SEARCH_TERM,
     payload: {
       scope,
-      searchTerm: searchTermTrimmed
+      searchTerm: filteredSearchTerm
     }
   }
 }
@@ -54,13 +58,17 @@ export function setSearchSuggestions (scope, searchSuggestions = []) {
 
 export async function locationSearch (scope, searchTerm, proximity) {
   const mapboxLocations = await fetchMapboxLocations(searchTerm, { proximity })
-  const locations = mapboxLocations
+  let locations = mapboxLocations
     .features
     .map(feature => ({
       ...convertMapboxToLocation(feature),
       id: feature.id
     }))
-
+  locations = [
+    { id: 'NEW', fullText: searchTerm },
+    ...locations
+  ]
+  
   return {
     type: SET_SEARCH_SUGGESTIONS,
     payload: {
