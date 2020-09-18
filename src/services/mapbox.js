@@ -1,4 +1,3 @@
-const MAPBOX_TOKEN = 'pk.eyJ1IjoidGVycmFuY29sbGVjdGl2ZSIsImEiOiJjazlnOHZ5ZjcwYXNsM2VsaWsycjhtbm96In0.j6kV3G71HfHkuIjFKE2dLA'
 const MAPBOX_GEOCODING_API_URL = 'https://api.tiles.mapbox.com/geocoding/v5/mapbox.places'
 
 export async function fetchMapboxLocations (searchTerm, {
@@ -10,7 +9,7 @@ export async function fetchMapboxLocations (searchTerm, {
     + '/'
     + encodeURIComponent(searchTerm)
     + '.json?access_token='
-    + MAPBOX_TOKEN
+    + process.env.MAPBOX_TOKEN
     // used to center map, send the existing location you're editing or current location
     + (proximity ? '&proximity=' + proximity : '')
     + (bbox ? '&bbox=' + bbox : '')

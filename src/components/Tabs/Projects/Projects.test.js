@@ -3,8 +3,6 @@ import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import Projects, { CreateProjectButton } from './Projects'
 
-jest.mock('react-native-device-info')
-
 describe('Projects', () => {
   it('renders correctly', () => {
     const renderer = new ReactShallowRenderer()
