@@ -1,6 +1,5 @@
 import 'react-native'
 import React from 'react'
-import ReactTestRenderer from 'react-test-renderer'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import Projects, { CreateProjectButton } from './Projects'
 
