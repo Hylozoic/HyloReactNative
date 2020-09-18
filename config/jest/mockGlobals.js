@@ -39,7 +39,11 @@ global.FormData = jest.fn(() => {
 // Mock this globally @see https://github.com/l-urence/react-native-autocomplete-input#known-issues
 jest.mock('react-native-autocomplete-input', () => 'Autocomplete')
 jest.mock('react-native-mixpanel')
-jest.mock('react-native-device-info')
+jest.mock('react-native-device-info', () => {
+  return {
+    getVersion: jest.fn()
+  }
+})
 jest.mock('react-native-intercom', () => {}, { virtual: true });
 jest.mock('react-native/Libraries/Animated/src/NativeAnimatedHelper')
 jest.mock('react-native-background-timer', () => {})
