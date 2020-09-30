@@ -7,6 +7,7 @@ import defaultAvatar from '../../assets/default-user-avatar.png'
 export default function Avatar ({ size, hasBorder, hasOverlap, avatarUrl, zIndex, style, dimension }) {
   const styles = generateStyles({ size, hasBorder, hasOverlap, dimension })
   const source = avatarUrl ? {uri: avatarUrl} : defaultAvatar
+
   return <View style={[styles.container, {zIndex}, style]}>
     <Image style={styles.image} source={source} />
   </View>
