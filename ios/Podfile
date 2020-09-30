@@ -52,7 +52,7 @@ target 'OneSignalNotificationServiceExtension' do
   pod 'OneSignal', '>= 2.11.2', '< 3.0'
 end
 
-# Added to support react-native-interom, can likel be removed in later updates
+# Added to support react-native-intercom (~v15), can likely be removed in later updates
 post_install do |pi|
   pi.pods_project.targets.each do |t|
     t.build_configurations.each do |config|
