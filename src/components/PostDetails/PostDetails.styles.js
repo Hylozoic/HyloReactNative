@@ -18,7 +18,7 @@ export default {
     marginBottom: 12
   },
   infoRow: {
-    marginHorizontal: 12,
+    paddingHorizontal: 12,
     paddingVertical: 10,
     borderTopWidth: 1,
     borderColor: capeCod10,
@@ -29,7 +29,10 @@ export default {
     fontSize: 13,
     color: rhino30,
     fontFamily: 'Circular-Book',
-    marginRight: 3
+    marginRight: 5
+  },
+  locationIcon: {
+    marginRight: 5
   },
   infoRowInfo: {
     fontSize: 13,

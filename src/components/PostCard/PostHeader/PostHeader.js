@@ -95,7 +95,7 @@ export default class PostHeader extends React.PureComponent {
     return <View style={styles.container}>
       <View style={styles.avatarSpacing}>
         <TouchableOpacity onPress={this.showMember}>
-          {avatarUrl && <Avatar avatarUrl={avatarUrl} dimension={smallAvatar && 20} />}
+          {!!avatarUrl && <Avatar avatarUrl={avatarUrl} dimension={smallAvatar && 20} />}
         </TouchableOpacity>
       </View>
       <View style={styles.meta}>

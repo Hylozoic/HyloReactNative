@@ -15,6 +15,7 @@ import { LoadingScreen } from '../Loading'
 import Button from '../Button'
 import SocketSubscriber from '../SocketSubscriber'
 import { FileLabel } from '../PostEditor/FileSelector'
+import Icon from '../Icon'
 import InlineEditor, { toHtml } from '../InlineEditor'
 import KeyboardFriendlyView from '../KeyboardFriendlyView'
 import styles from './PostDetails.styles'
@@ -152,9 +153,9 @@ export default class PostDetails extends React.Component {
         leaving={isMember}
         onPress={isMember ? leaveProject : joinProject}
       />}
-      {!!location && <View style={[styles.infoRow]}>
-        <Text style={styles.infoRowLabel}>Location:</Text>
-        <Text style={styles.infoRowInfo}>{location}</Text>
+      {!!location && <View style={styles.infoRow}>
+        <Icon style={styles.locationIcon} name='Location' />
+        <Text style={styles.infoRowInfo} selectable>{location}</Text>
       </View>}
       <PostCommunities
         communities={post.communities}
