@@ -49,8 +49,8 @@ export function createPost (post) {
         $title: String
         $details: String
         $communityIds: [String]
-        $startTime: String
-        $endTime: String
+        $startTime: Date
+        $endTime: Date
         $location: String
         $locationId: ID
         $imageUrls: [String]
@@ -128,8 +128,8 @@ export function createProject (post) {
         $title: String
         $details: String
         $communityIds: [String]
-        $startTime: String
-        $endTime: String
+        $startTime: Date
+        $endTime: Date
         $location: String
         $locationId: ID
         $imageUrls: [String]
@@ -207,8 +207,8 @@ export function updatePost (post) {
         $title: String
         $details: String
         $communityIds: [String]
-        $startTime: String
-        $endTime: String
+        $startTime: Date
+        $endTime: Date
         $location: String
         $locationId: ID
         $imageUrls: [String]
