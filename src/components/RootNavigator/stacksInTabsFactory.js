@@ -1,4 +1,4 @@
-import { StackNavigator } from 'react-navigation'
+import { createStackNavigator } from 'react-navigation'
 import React from 'react'
 import TabIcon from '../Tabs/TabIcon'
 import TabLabel from '../Tabs/TabLabel'
@@ -22,7 +22,7 @@ function stackNavigatorFactory (tabObject, otherScreens, tabName) {
     initialRouteName: tabName
   }
 
-  const stackNavigator = StackNavigator(
+  const stackNavigator = createStackNavigator(
     paths,
     config
   )
@@ -33,8 +33,8 @@ function stackNavigatorFactory (tabObject, otherScreens, tabName) {
 export default function stacksInTabsFactory (tabs, screens) {
   // merge tabs and scenes
   // add configuration options for each scene
-  // create a StackNavigator for each tab
-  // return an object that can be passed into TabNavigator
+  // create a createStackNavigator for each tab
+  // return an object that can be passed into createBottomTabNavigator
   const routeConfigs = {}
   for (const key of Object.keys(tabs)) {
     const obj = {}

@@ -1,7 +1,7 @@
 import {
-  DrawerNavigator,
-  TabNavigator,
-  StackNavigator
+  createDrawerNavigator,
+  createBottomTabNavigator,
+  createStackNavigator
 } from 'react-navigation'
 import { Dimensions } from 'react-native'
 import { LoadingScreen } from '../Loading'
@@ -70,7 +70,7 @@ const screensInTabs = {
 Object.freeze(tabs)
 Object.freeze(screensInTabs)
 
-const TabNavigatorWithBar = TabNavigator(
+const TabNavigatorWithBar = createBottomTabNavigator(
   stacksInTabsFactory(tabs, screensInTabs),
   {
     initialRouteName: 'Home',
@@ -88,7 +88,7 @@ const TabNavigatorWithBar = TabNavigator(
   }
 )
 
-const DrawerAndTabsNavigator = DrawerNavigator(
+const DrawerAndTabsNavigator = createDrawerNavigator(
   {
     DrawerHome: {screen: TabNavigatorWithBar}
   },
@@ -142,7 +142,7 @@ const screensInStack = {
   SearchPage: {screen: SearchPage}
 }
 
-const RootNavigator = StackNavigator(
+const RootNavigator = createStackNavigator(
   {
     [MAIN_ROUTE_NAME]: {
       screen: DrawerAndTabsNavigator,

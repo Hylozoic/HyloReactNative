@@ -2,7 +2,7 @@
  * @providesModule util/navigation
  */
 
-import { NavigationActions } from 'react-navigation'
+import { NavigationActions, StackActions } from 'react-navigation'
 import url from 'url'
 import pathMatch from 'path-match'
 import { get } from 'lodash/fp'
@@ -15,11 +15,12 @@ export function resetToRoute (navigation, routeName) {
   //
   // https://github.com/react-navigation/react-navigation/issues/1127
   try {
-    return navigation.dispatch(NavigationActions.reset({
-      index: 0,
-      key: null,
-      actions: [NavigationActions.navigate({routeName})]
-    }))
+    const resetAction = StackActions.reset({
+        index: 0,
+        key: null,
+        actions: [NavigationActions.navigate({ routeName })]
+    })
+    return navigation.dispatch(resetAction)
   } catch (err) {
     console.log('!! failed to navigate:', err)
     return false

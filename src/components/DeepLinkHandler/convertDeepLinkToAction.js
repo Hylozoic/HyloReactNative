@@ -21,7 +21,7 @@ export function reformatPath (path) {
     routeMatchers.networkPost(pathname) ||
     routeMatchers.allCommunitiesPost(pathname)
   // we have to prepend the main route's path segment because PostDetails is
-  // in a nested navigator, not the top-level StackNavigator.
+  // in a nested navigator, not the top-level createStackNavigator.
   if (match) return `post/${match.id}`
 
   match = routeMatchers.allCommunities(pathname)

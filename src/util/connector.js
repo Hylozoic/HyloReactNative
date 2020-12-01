@@ -5,7 +5,7 @@
 // Selectively call either `mapStateToProps` or `mapDispatchToProps` if
 // `isFocused` is set. This allows us to avoid potentially expensive selector
 // calls and other preprocessing tasks for screens that are currently
-// backgrounded in StackNavigator/TabNavigator.  Note that this will not always
+// backgrounded in createStackNavigator/createBottomTabNavigator.  Note that this will not always
 // be necessary, and shouldn't be used by default. Sometimes it's going to be
 // faster (particularly in the case of mapDispatchToProps) to just call the
 // connector function without wrapping it.
