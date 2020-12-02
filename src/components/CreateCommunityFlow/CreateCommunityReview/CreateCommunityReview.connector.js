@@ -40,7 +40,7 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
       navigation.navigate({routeName: 'CreateCommunityUrl', key: 'CreateCommunityUrl'})
     },
     goToCommunity: community => {
-      navigation.navigate('DrawerClose')
+      navigation.closeDrawer()
       const { id } = community
       dispatchProps.selectCommunity(id)
     }

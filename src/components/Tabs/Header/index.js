@@ -8,7 +8,7 @@ import NotificationsIcon from './NotificationsIcon'
 import styles from './Header.styles'
 
 export default function Header (navigation, title) {
-  const openDrawer = () => navigation.navigate('DrawerOpen')
+  const openDrawer = () => navigation.openDrawer()
   const showSearch = () => navigation.navigate('SearchPage')
   const showMessages = () => navigation.navigate({routeName: 'ThreadList', key: 'ThreadList'})
   const showNotifications = () => navigation.navigate({routeName: 'NotificationsList', key: 'NotificationsList'})
