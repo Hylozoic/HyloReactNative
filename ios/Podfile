@@ -26,6 +26,7 @@ target 'HyloReactNative' do
   use_flipper!
   post_install do |installer|
     flipper_post_install(installer)
+    # Added to support react-native-intercom (~v15), can likely be removed in later updates
     installer.pods_project.targets.each do |t|
       t.build_configurations.each do |config|
         config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '10.0'
@@ -37,7 +38,3 @@ end
 target 'OneSignalNotificationServiceExtension' do
   pod 'OneSignal', '>= 2.11.2', '< 3.0'
 end
-
-# # Added to support react-native-intercom (~v15), can likely be removed in later updates
-# post_install do |installer|
-# end
