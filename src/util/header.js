@@ -42,7 +42,7 @@ export class HeaderButton extends PureComponent {
     const { disabled } = this.state
 
     if (typeof onPress !== 'function') throw new Error('HeaderButton: onPress is not a function.')
-    return <TouchableOpacity onPress={this.onPress} hitSlop={{top: 7, bottom: 7, left: 7, right: 7}} disabled={disabled} >
+    return <TouchableOpacity style={{ marginRight: 12 }} onPress={this.onPress} hitSlop={{top: 7, bottom: 7, left: 7, right: 7}} disabled={disabled} >
       {text === 'Close'
         ? <Icon name='Ex' style={styles.exIcon} />
         : <Text style={[styles.button, disabled && styles.disabled]}>{text}</Text>}

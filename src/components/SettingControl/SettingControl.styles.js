@@ -55,7 +55,6 @@ export default {
     marginBottom: 10
   },
   error: {
-    paddingHorizontal: 10,
     paddingVertical: 17,
     backgroundColor: 'white',
     justifyContent: 'center',
