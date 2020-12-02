@@ -1,10 +1,3 @@
-/**
- * Copyright (c) Facebook, Inc. and its affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
 
@@ -40,6 +33,7 @@
   BOOL foundElement = NO;
 
   __block NSString *redboxError = nil;
+
 #ifdef DEBUG
   RCTSetLogFunction(^(RCTLogLevel level, RCTLogSource source, NSString *fileName, NSNumber *lineNumber, NSString *message) {
     if (level >= RCTLogLevelError) {

@@ -1,0 +1,6 @@
+module Pods_HyloReactNative_HyloReactNativeTests {
+  umbrella header "Pods-HyloReactNative-HyloReactNativeTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
