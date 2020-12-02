@@ -2,7 +2,8 @@ import React from 'react'
 import {
   createDrawerNavigator,
   createBottomTabNavigator,
-  createStackNavigator
+  createStackNavigator,
+  createAppContainer
 } from 'react-navigation'
 import { Dimensions } from 'react-native'
 import { LoadingScreen } from '../Loading'
@@ -203,4 +204,4 @@ extendRouter(RootNavigator.router)
 // trackCurrentTab must be on the top-level navigator, because it uses a prop
 // for listening to navigation change events that can only be assigned to a
 // top-level navigator
-export default trackCurrentTab(RootNavigator)
+export default trackCurrentTab(createAppContainer(RootNavigator))

@@ -1,7 +1,6 @@
 import React from 'react'
 import { View, AppState } from 'react-native'
 import OneSignal from 'react-native-onesignal'
-
 import DeepLinkHandler from '../DeepLinkHandler'
 import LoadingModal from '../LoadingModal'
 import RootNavigator from '../RootNavigator'
