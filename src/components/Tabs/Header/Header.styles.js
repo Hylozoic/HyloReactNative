@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native'
 
-export default StyleSheet.create({
+export const styles = StyleSheet.create({
   controls: {
     flex: 1,
     flexDirection: 'row',
@@ -22,3 +22,5 @@ export default StyleSheet.create({
     marginRight: 12
   }
 })
+
+export default styles

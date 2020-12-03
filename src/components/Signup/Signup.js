@@ -19,8 +19,7 @@ const merkabaImage = require('../../assets/merkaba_white.png')
 
 export default class Signup extends React.Component {
   static navigationOptions = {
-    header: null,
-    headerBackTitle: null
+    headerShown: false
   }
 
   state = {

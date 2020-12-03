@@ -3,8 +3,7 @@ import { FlatList, KeyboardAvoidingView, View } from 'react-native'
 import { any, arrayOf, bool, func, shape, string } from 'prop-types'
 import { throttle, debounce } from 'lodash'
 import { get } from 'lodash/fp'
-
-import Header from './Header'
+import createNavigationOptionsForHeader from 'components/Tabs/Header/createNavigationOptionsForHeader'
 import Loading from '../Loading'
 import MessageCard from '../MessageCard'
 import MessageInput from '../MessageInput'
@@ -44,7 +43,7 @@ export default class Thread extends React.Component {
     updateThreadReadTime: func.isRequired
   }
 
-  static navigationOptions = ({ navigation }) => Header(navigation)
+  static navigationOptions = ({ navigation }) => createNavigationOptionsForHeader(navigation)
 
   constructor (props) {
     super(props)

@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   Image
 } from 'react-native'
-import { SafeAreaView } from 'react-navigation'
+import SafeAreaView from 'react-native-safe-area-view'
 import { isIOS } from 'util/platform'
 import NetInfo from "@react-native-community/netinfo";
 import validator from 'validator'
@@ -20,7 +20,7 @@ import styles from './Login.styles'
 
 export default class Login extends React.Component {
   static navigationOptions = {
-    header: null
+    headerShown: false
   }
 
   constructor (props) {

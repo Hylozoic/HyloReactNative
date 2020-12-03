@@ -21,10 +21,11 @@ export default class CommunitySettings extends React.Component {
       title: 'Community Information',
       options: {
         headerBackTitle: null,
-        headerRight: <HeaderButton
-          disabled={pendingSave}
-          onPress={saveChanges}
-          text={pendingSave ? 'Saving' : 'Save'} />
+        headerRight: () =>
+          <HeaderButton
+            disabled={pendingSave}
+            onPress={saveChanges}
+            text={pendingSave ? 'Saving' : 'Save'} />
       }
     })
   }

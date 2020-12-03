@@ -7,9 +7,8 @@ import SocketListener from '../SocketListener'
 import Button from '../Button'
 import Icon from '../Icon'
 import { isEmpty } from 'lodash/fp'
-
 import { ALL_COMMUNITIES_ID } from '../../store/models/Community'
-import { SafeAreaView } from 'react-navigation'
+
 const allCommunitiesImage = require('../../assets/All_Communities2.png')
 
 export default class DrawerMenu extends React.PureComponent {

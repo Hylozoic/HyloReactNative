@@ -10,7 +10,6 @@ import { isDev } from '../../config'
 export default class DeepLinkHandler extends React.Component {
   async componentDidMount () {
     const { currentUser, navigator } = this.props
-
     Linking.addEventListener('url', this.handleLinkingEvent)
 
     // even if there is a deep link, we still have to change the initial route

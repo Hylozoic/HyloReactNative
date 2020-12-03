@@ -5,7 +5,7 @@ import Loading from '../../Loading'
 import StarIcon from '../../StarIcon'
 import Badge from '../../Badge'
 import Icon from '../../Icon'
-import Header from '../Header'
+import createNavigationOptionsForHeader from 'components/Tabs/Header/createNavigationOptionsForHeader'
 import SearchBar from '../../SearchBar'
 import styles from './Topics.styles'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
@@ -16,7 +16,7 @@ import { bannerlinearGradientColors } from 'style/colors'
 const title = 'Topics'
 
 export default class Topics extends React.Component {
-  static navigationOptions = ({navigation}) => (Header(navigation, title))
+  // static navigationOptions = ({navigation}) => (createNavigationOptionsForHeader(navigation, title))
 
   componentDidMount () {
     if (this.props.shouldRedirect) {

@@ -1,5 +1,6 @@
 import React from 'react'
 import { View, Text, TextInput, FlatList, TouchableOpacity } from 'react-native'
+import SafeAreaView from 'react-native-safe-area-view'
 import Loading from '../Loading'
 import Avatar from '../Avatar'
 import styles from './SearchPage.styles'
@@ -78,7 +79,7 @@ export default class SearchPage extends React.Component {
       ? <Loading style={styles.loading} />
       : null
 
-    return <View style={styles.flatListContainer}>
+    return <SafeAreaView style={styles.flatListContainer}>
       <FlatList
         data={searchResults}
         renderItem={({ item }) =>
@@ -92,7 +93,7 @@ export default class SearchPage extends React.Component {
         onEndReached={() => this.fetchMore()}
         ListHeaderComponent={listHeaderComponent}
         ListFooterComponent={listFooterComponent} />
-    </View>
+    </SafeAreaView>
   }
 }
 

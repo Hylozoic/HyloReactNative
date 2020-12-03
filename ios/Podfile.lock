@@ -307,6 +307,8 @@ PODS:
     - React (< 1.0.0, >= 0.13.0)
   - react-native-restart (0.0.17):
     - React
+  - react-native-safe-area-context (3.1.9):
+    - React-Core
   - react-native-webview (9.4.0):
     - React
   - React-RCTActionSheet (0.63.4):
@@ -372,6 +374,8 @@ PODS:
   - RNAppleAuthentication (1.1.2):
     - React
   - RNCAsyncStorage (1.10.3):
+    - React
+  - RNCMaskedView (0.1.10):
     - React
   - RNDeviceInfo (6.0.3):
     - React-Core
@@ -448,6 +452,7 @@ DEPENDENCIES:
   - "react-native-netinfo (from `../node_modules/@react-native-community/netinfo`)"
   - react-native-onesignal (from `../node_modules/react-native-onesignal`)
   - react-native-restart (from `../node_modules/react-native-restart`)
+  - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - react-native-webview (from `../node_modules/react-native-webview`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
   - React-RCTAnimation (from `../node_modules/react-native/Libraries/NativeAnimation`)
@@ -461,6 +466,7 @@ DEPENDENCIES:
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - "RNAppleAuthentication (from `../node_modules/@invertase/react-native-apple-authentication`)"
   - "RNCAsyncStorage (from `../node_modules/@react-native-community/async-storage`)"
+  - "RNCMaskedView (from `../node_modules/@react-native-community/masked-view`)"
   - RNDeviceInfo (from `../node_modules/react-native-device-info`)
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - "RNGoogleSignin (from `../node_modules/@react-native-community/google-signin`)"
@@ -549,6 +555,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-onesignal"
   react-native-restart:
     :path: "../node_modules/react-native-restart"
+  react-native-safe-area-context:
+    :path: "../node_modules/react-native-safe-area-context"
   react-native-webview:
     :path: "../node_modules/react-native-webview"
   React-RCTActionSheet:
@@ -575,6 +583,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@invertase/react-native-apple-authentication"
   RNCAsyncStorage:
     :path: "../node_modules/@react-native-community/async-storage"
+  RNCMaskedView:
+    :path: "../node_modules/@react-native-community/masked-view"
   RNDeviceInfo:
     :path: "../node_modules/react-native-device-info"
   RNGestureHandler:
@@ -640,6 +650,7 @@ SPEC CHECKSUMS:
   react-native-netinfo: 7b3c53674ea611b26a7788821f137c6d9d3a038b
   react-native-onesignal: 417b2ae5c3148a47a6ef70b6af443186048b2022
   react-native-restart: d19a0f8d053d065fe64cd2baebb6487111c77149
+  react-native-safe-area-context: b6e0e284002381d2ff29fa4fff42b4d8282e3c94
   react-native-webview: cf5527893252b3b036eea024a1da6996f7344c74
   React-RCTActionSheet: 89a0ca9f4a06c1f93c26067af074ccdce0f40336
   React-RCTAnimation: 1bde3ecc0c104c55df246eda516e0deb03c4e49b
@@ -653,6 +664,7 @@ SPEC CHECKSUMS:
   ReactCommon: 73d79c7039f473b76db6ff7c6b159c478acbbb3b
   RNAppleAuthentication: 473b2c076f1a48a537610580a168c1fb6d0a90c6
   RNCAsyncStorage: cd7234ff15c010723ed7c499ae4eedc605eac1fd
+  RNCMaskedView: 5a8ec07677aa885546a0d98da336457e2bea557f
   RNDeviceInfo: 2621e166cd79c771f30902521a1a356d886347be
   RNGestureHandler: 9b7e605a741412e20e13c512738a31bd1611759b
   RNGoogleSignin: ccf71ee4b6cfd324fd788a41e457e2043838c0d9
@@ -664,6 +676,6 @@ SPEC CHECKSUMS:
   Yoga: 4bd86afe9883422a7c4028c00e34790f560923d6
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: 5208f55a7575ece2301464ecd01b40f59299fea7
+PODFILE CHECKSUM: 91a22659d3de09840723206d01eb44d80e789349
 
 COCOAPODS: 1.9.3

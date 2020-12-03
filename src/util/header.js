@@ -3,7 +3,7 @@
  */
 import React, { PureComponent } from 'react'
 import { StyleSheet, Text, TouchableOpacity } from 'react-native'
-import { HeaderBackButton } from 'react-navigation'
+import { HeaderBackButton } from 'react-navigation-stack'
 import { rhino60, rhino20, havelockBlue } from 'style/colors'
 import Icon from '../components/Icon'
 import { get } from 'lodash/fp'

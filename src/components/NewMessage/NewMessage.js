@@ -5,7 +5,7 @@ import {
   Text,
   TouchableOpacity
 } from 'react-native'
-import { SafeAreaView } from 'react-navigation'
+import SafeAreaView from 'react-native-safe-area-view'
 import Avatar from '../Avatar'
 import Icon from '../Icon'
 import { keyboardAvoidingViewProps as kavProps } from '../../util/viewHelpers'

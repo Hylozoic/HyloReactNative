@@ -10,7 +10,7 @@ export default function Loading ({ style }) {
 export function LoadingScreen () {
   return <Loading style={{flex: 1}} />
 }
-LoadingScreen.navigationOptions = {header: null}
+LoadingScreen.navigationOptions = { headerShown: false }
 
 const styles = {
   container: {

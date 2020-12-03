@@ -2,7 +2,7 @@ import React from 'react'
 import {
   Text
 } from 'react-native'
-import { HeaderBackButton } from 'react-navigation'
+import { HeaderBackButton } from 'react-navigation-stack'
 import { caribbeanGreen, white, white60onCaribbeanGreen } from 'style/colors'
 
 export default function createCommunityHeader (title, navigation) {
@@ -20,7 +20,8 @@ export default function createCommunityHeader (title, navigation) {
       elevation: 0
     },
     headerBackgroundColor: caribbeanGreen,
-    headerLeft: <HeaderBackButton onPress={() => navigation.goBack()} tintColor={white60onCaribbeanGreen} />
+    headerLeft: () =>
+      <HeaderBackButton onPress={() => navigation.goBack()} tintColor={white60onCaribbeanGreen} />
   }
 }
 

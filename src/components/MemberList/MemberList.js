@@ -69,10 +69,6 @@ export default class MemberList extends React.Component {
       })
     }
     if (this.state.isServerSearch) {
-      // QUESTION: Why is this necessary?
-      if (!prevProps || prevProps.screenProps.currentTabName !== 'Members') {
-        return this.fetchMembers()
-      }
       if (some(key => this.props[key] !== prevProps[key], [
         'slug',
         'networkSlug',

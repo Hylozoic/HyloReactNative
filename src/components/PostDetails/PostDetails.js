@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 import React from 'react'
 import { Linking, View, Text, TouchableOpacity, Alert } from 'react-native'
-import { SafeAreaView } from 'react-navigation'
+import SafeAreaView from 'react-native-safe-area-view'
 import { get, isEmpty, find } from 'lodash/fp'
 import { shape, any, object, string, func, array, bool } from 'prop-types'
 import Comments from '../Comments'

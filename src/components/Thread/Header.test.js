@@ -13,7 +13,7 @@ describe('Header', () => {
         }
       }
     }
-    const result = Header(navigation)
+    const result = createNavigationOptionsForHeader(navigation)
     expect(result).toMatchSnapshot()
   })
 })

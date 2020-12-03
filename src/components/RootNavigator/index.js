@@ -1,13 +1,11 @@
 import React from 'react'
-import {
-  createDrawerNavigator,
-  createBottomTabNavigator,
-  createStackNavigator,
-  createAppContainer
-} from 'react-navigation'
-import { Dimensions } from 'react-native'
+import { createAppContainer } from 'react-navigation'
+import { createStackNavigator } from 'react-navigation-stack'
+import { createDrawerNavigator } from 'react-navigation-drawer'
+import { createBottomTabNavigator } from 'react-navigation-tabs'
+import { Dimensions, Text } from 'react-native'
 import { LoadingScreen } from '../Loading'
-import Header from 'components/Tabs/Header'
+import createNavigationOptionsForHeader from 'components/Tabs/Header/createNavigationOptionsForHeader'
 import TabIcon from '../Tabs/TabIcon'
 import TabLabel from '../Tabs/TabLabel'
 import SessionCheck from '../SessionCheck'
@@ -17,7 +15,6 @@ import CommunitySettingsMenu from '../CommunitySettingsMenu'
 import CommunitySettings from '../CommunitySettings'
 import DrawerMenu from '../DrawerMenu'
 import { Home, Members, Topics, Projects } from '../Tabs' // eslint-disable-line no-unused-vars
-import stacksInTabsFactory from './stacksInTabsFactory'
 import PostEditor from '../PostEditor'
 import PostDetails from '../PostDetails'
 import ProjectMembers from '../ProjectMembers'
@@ -56,100 +53,53 @@ import { MAIN_ROUTE_NAME, MAIN_ROUTE_PATH } from 'util/navigation'
 import extendRouter from './extendRouter'
 
 const HomeStack = createStackNavigator({
-  // screensInTabs
-  // Screens that can be shown in any tab (the same tab icon stays highlighted)
   Home: {screen: Home, path: ''},
   Feed: {screen: Feed, path: 'feed/:communityId'},
   TopicFeed: {screen: Feed, path: 'c/:communitySlugFromLink/topicFeed/:topicName'},
   CommunityFeed: {screen: Feed, path: 'communityFeed/:communitySlugFromLink'},
   NetworkFeed: {screen: Feed, path: 'networkFeed/:networkSlug'}
+}, {
+  defaultNavigationOptions: {
+    headerShown: false
+  }
 })
 
 const BottomTabs = createBottomTabNavigator({
-  Home: {
-    screen: HomeStack,
-    navigationOptions: {
-      tabBarIcon: ({ focused }) => (
-        <TabIcon name='Home' focused={focused} />
-      ),
-      tabBarLabel: ({ focused }) => (
-        <TabLabel name='Home' focused={focused} />
-      )
-    }
-  },
-  Members: {
-    screen: Members,
-    path: 'people',
-    navigationOptions: {
-      tabBarIcon: ({ focused }) => (
-        <TabIcon name='Members' focused={focused} />
-      ),
-      tabBarLabel: ({ focused }) => (
-        <TabLabel name='Members' focused={focused} />
-      )
-    }
-  },
-  Topics: {
-    screen: Topics,
-    path: 'topics',
-    navigationOptions: {
-      tabBarIcon: ({ focused }) => (
-        <TabIcon name='Topics' focused={focused} />
-      ),
-      tabBarLabel: ({ focused }) => (
-        <TabLabel name='Topics' focused={focused} />
-      )
-    }
-  },
-  Projects: {
-    screen: Projects,
-    path: 'projects',
-    navigationOptions: {
-      tabBarIcon: ({ focused }) => (
-        <TabIcon name='Projects' focused={focused} />
-      ),
-      tabBarLabel: ({ focused }) => (
-        <TabLabel name='Projects' focused={focused} />
-      )
-    }
-  }
-},
-{
-  initialRouteName: 'Home',
-  tabBarPosition: 'bottom',
-  animationEnabled: false,
-  swipeEnabled: false,
-  lazy: true,
+  Home: { screen: HomeStack },
+  Members: { screen: Members, path: 'people' },
+  Topics: { screen: Topics, path: 'topics' },
+  Projects: { screen: Projects, path: 'projects' }
+}, {
+  defaultNavigationOptions: ({ navigation: { state: { routeName } } }) => ({
+    tabBarIcon: ({ focused }) =>
+      <TabIcon name={routeName} focused={focused} />,
+    tabBarLabel: ({ focused }) =>
+      <TabLabel name={routeName} focused={focused} />
+  }),
   tabBarOptions: {
     showIcon: true,
-    pressColor: '#DCDCDC',
     showLabel: true,
+    pressColor: '#DCDCDC',
     indicatorStyle: {backgroundColor: 'white'},
     style: isIOS ? tabStyles.tabNavigatorIOS : tabStyles.tabNavigatorAndroid
   },
-  defaultNavigationOptions: ({ navigation }) => ({
-    title: 'teststelkjalskdjflsk'
-  })
+  initialRouteName: 'Home',
+  animationEnabled: false,
+  swipeEnabled: false,
+  lazy: true
 })
 
-const DrawerAndBottomTabs = createDrawerNavigator(
-  {
-    DrawerHome: BottomTabs
-  },
-  {
-    contentComponent: DrawerMenu,
-    initialRouteName: 'DrawerHome',
-    // hideStatusBar: true,
-    // drawerType: 'front',
-    drawerWidth: Dimensions.get('window').width * 0.9
-  }
-)
-
-const RootNavigator = createStackNavigator(
+const AllScreens = createStackNavigator(
   {
     [MAIN_ROUTE_NAME]: {
-      screen: DrawerAndBottomTabs,
+      screen: BottomTabs,
       path: MAIN_ROUTE_PATH,
+      // defaultNavigationOptions: {
+      //   headerShown: false
+      // },
+      navigationOptions: ({ navigation, ...params }) => ({
+        ...createNavigationOptionsForHeader(navigation, 'Home')
+      })
     },
     // Screens that appear outside of tabs: Settings, Messages, etc.
     MemberProfile: {screen: MemberProfile, path: 'people/:id'},
@@ -193,11 +143,26 @@ const RootNavigator = createStackNavigator(
     SearchPage
   },
   {
-    cardStyle: {backgroundColor: '#FFF'},
+    defaultNavigationOptions: {
+      cardStyle: { backgroundColor: '#FFF' }
+    },
+    navigationOptions: {
+      headerShown: false
+    },
     mode: 'modal',
-    initialRouteName: 'Loading'
+    initialRouteName: MAIN_ROUTE_NAME
   }
 )
+
+const RootNavigator = createDrawerNavigator({
+  DrawerHome: AllScreens
+}, {
+  contentComponent: DrawerMenu,
+  initialRouteName: 'DrawerHome',
+  hideStatusBar: true,
+  drawerType: 'front',
+  drawerWidth: Dimensions.get('window').width * 0.9
+})
 
 extendRouter(RootNavigator.router)
 

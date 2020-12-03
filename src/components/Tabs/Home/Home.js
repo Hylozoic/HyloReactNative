@@ -1,13 +1,13 @@
 import React from 'react'
 
 import Feed from '../../Feed'
-import Header from '../Header'
+import createNavigationOptionsForHeader from 'components/Tabs/Header/createNavigationOptionsForHeader'
 import Loading from '../../Loading'
 
 export default class Home extends React.Component {
-  static navigationOptions = ({ navigation, screenProps }) => {
-    return Header(navigation, screenProps.currentTabName)
-  }
+  // static navigationOptions = ({ navigation, screenProps }) => {
+  //   return createNavigationOptionsForHeader(navigation, screenProps.currentTabName)
+  // }
 
   shouldComponentUpdate (nextProps) {
     return nextProps.isFocused

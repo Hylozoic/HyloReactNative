@@ -6,7 +6,7 @@ import {
   View,
   TouchableOpacity
 } from 'react-native'
-import { SafeAreaView } from 'react-navigation'
+import SafeAreaView from 'react-native-safe-area-view'
 import { debounce } from 'lodash/fp'
 import SearchBar from '../SearchBar'
 import styles from './ItemChooser.styles'

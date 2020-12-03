@@ -11,8 +11,7 @@ const axolotlImage = require('../../assets/Axel_Fretting.png')
 
 export default class InviteExpired extends React.Component {
   static navigationOptions = {
-    header: null,
-    headerBackTitle: null
+    headerShown: false
   }
 
   goToLogin = () => this.props.navigation.navigate({routeName: 'Login', key: 'Login'})

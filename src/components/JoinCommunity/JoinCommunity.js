@@ -4,7 +4,7 @@ import { LoadingScreen } from '../Loading'
 
 export default class JoinCommunity extends Component {
   static navigationOptions = {
-    header: null
+    headerShown: false
   }
 
   static propTypes = {
