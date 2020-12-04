@@ -332,6 +332,10 @@ typedef void (^NSURLSessionAsyncCompletion)(
           NSClassFromString([@[ @"__", @"NSC", @"FURLS", @"ession", @"Task" ]
               componentsJoinedByString:@""]);
     }
+    if(className == NULL){
+        className = NSClassFromString([@[ @"__", @"NSC", @"FLocalS", @"ession", @"Task" ]
+            componentsJoinedByString:@""]);
+    }
     SEL selector = @selector(resume);
     SEL swizzledSelector = [FLEXUtility swizzledSelectorForSelector:selector];
 
