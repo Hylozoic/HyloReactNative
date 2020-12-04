@@ -1,14 +1,8 @@
 import React from 'react'
-
 import Feed from '../../Feed'
-import createNavigationOptionsForHeader from 'components/Tabs/Header/createNavigationOptionsForHeader'
 import Loading from '../../Loading'
 
 export default class Home extends React.Component {
-  // static navigationOptions = ({ navigation, screenProps }) => {
-  //   return createNavigationOptionsForHeader(navigation, screenProps.currentTabName)
-  // }
-
   shouldComponentUpdate (nextProps) {
     return nextProps.isFocused
   }
@@ -16,6 +10,7 @@ export default class Home extends React.Component {
   render () {
     const { communityId, currentUser, navigation, networkId } = this.props
     if (!currentUser) return <Loading style={{flex: 1}} />
+
     return <Feed
       communityId={communityId}
       navigation={navigation}

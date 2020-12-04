@@ -110,8 +110,7 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     ...dispatchProps,
     ...ownProps,
     goToCommunity: community => {
-      if (community.id === ALL_COMMUNITIES_ID &&
-        ownProps.screenProps.currentTabName !== 'Home') {
+      if (community.id === ALL_COMMUNITIES_ID) {
         navigation.navigate({routeName: 'Home', key: 'Home'})
       } else {
         navigation.closeDrawer()

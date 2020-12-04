@@ -32,13 +32,13 @@ export default class FeedList extends React.Component {
     // the Home tab, both by hard-coding the tab name and by using screenProps,
     // which we had to pass down from the Home component through Feed. This will
     // have to be reworked to allow opening topic feeds in the Topic tab, e.g.
-    const isAFeedTab = props => {
-      return includes(props.screenProps.currentTabName, ['Home', 'Projects'])
-    }
+    // const isAFeedTab = props => {
+    //   return includes(props.screenProps.currentTabName, ['Home', 'Projects'])
+    // }
 
-    if (!isAFeedTab(this.props)) {
-      return
-    }
+    // if (!isAFeedTab(this.props)) {
+    //   return
+    // }
     if (!prevProps.isFocused && this.props.isFocused) {
       return this.fetchOrShowCached()
     }

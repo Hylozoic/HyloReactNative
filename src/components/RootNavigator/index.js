@@ -4,6 +4,11 @@ import { createStackNavigator } from 'react-navigation-stack'
 import { createDrawerNavigator } from 'react-navigation-drawer'
 import { createBottomTabNavigator } from 'react-navigation-tabs'
 import { Dimensions, Text } from 'react-native'
+import { get } from 'lodash/fp'
+import { isIOS } from 'util/platform'
+import { MAIN_ROUTE_NAME, MAIN_ROUTE_PATH } from 'util/navigation'
+// import extendRouter from './extendRouter'
+// import trackCurrentTab from './trackCurrentTab'
 import { LoadingScreen } from '../Loading'
 import createNavigationOptionsForHeader from 'components/Tabs/Header/createNavigationOptionsForHeader'
 import TabIcon from '../Tabs/TabIcon'
@@ -47,29 +52,24 @@ import CreateCommunityUrl from '../CreateCommunityFlow/CreateCommunityUrl'
 import CreateCommunityReview from '../CreateCommunityFlow/CreateCommunityReview'
 import InviteExpired from '../InviteExpired'
 import Signup from '../Signup'
-import trackCurrentTab from './trackCurrentTab'
-import { isIOS } from 'util/platform'
-import { MAIN_ROUTE_NAME, MAIN_ROUTE_PATH } from 'util/navigation'
-import extendRouter from './extendRouter'
 
-const HomeStack = createStackNavigator({
-  Home: {screen: Home, path: ''},
-  Feed: {screen: Feed, path: 'feed/:communityId'},
-  TopicFeed: {screen: Feed, path: 'c/:communitySlugFromLink/topicFeed/:topicName'},
-  CommunityFeed: {screen: Feed, path: 'communityFeed/:communitySlugFromLink'},
-  NetworkFeed: {screen: Feed, path: 'networkFeed/:networkSlug'}
-}, {
-  defaultNavigationOptions: {
-    headerShown: false
-  }
-})
-
-const BottomTabs = createBottomTabNavigator({
-  Home: { screen: HomeStack },
+const TabsNavigator = createBottomTabNavigator({
+  Home: createStackNavigator({
+    // Once deep linking is re-done Flatten these into a single scren that handles the routing?
+    Home: { screen: Home, path: '', navigationOptions: { headerShown: false } },
+    CommunityFeed: { screen: Feed, path: 'communityFeed/:communitySlugFromLink' },
+    NetworkFeed: { screen: Feed, path: 'networkFeed/:networkSlug' }
+  }),
   Members: { screen: Members, path: 'people' },
   Topics: { screen: Topics, path: 'topics' },
   Projects: { screen: Projects, path: 'projects' }
 }, {
+  navigationOptions: ({ navigation }) => ({
+    ...createNavigationOptionsForHeader(
+      navigation,
+      navigation.state.routes[navigation.state.index].key
+    )
+  }),
   defaultNavigationOptions: ({ navigation: { state: { routeName } } }) => ({
     tabBarIcon: ({ focused }) =>
       <TabIcon name={routeName} focused={focused} />,
@@ -89,24 +89,32 @@ const BottomTabs = createBottomTabNavigator({
   lazy: true
 })
 
-const AllScreens = createStackNavigator(
+const StackNavigator = createStackNavigator(
   {
-    [MAIN_ROUTE_NAME]: {
-      screen: BottomTabs,
-      path: MAIN_ROUTE_PATH,
-      // defaultNavigationOptions: {
-      //   headerShown: false
-      // },
-      navigationOptions: ({ navigation, ...params }) => ({
-        ...createNavigationOptionsForHeader(navigation, 'Home')
+    [MAIN_ROUTE_NAME]: { screen: TabsNavigator, path: MAIN_ROUTE_PATH },
+    TopicFeed: {
+      screen: Feed,
+      path: 'c/:communitySlugFromLink/topicFeed/:topicName',
+      navigationOptions: ({ navigation }) => ({
+        title: get('state.params.communityName', navigation)
       })
     },
-    // Screens that appear outside of tabs: Settings, Messages, etc.
-    MemberProfile: {screen: MemberProfile, path: 'people/:id'},
+    Feed: {
+      screen: Feed,
+      path: 'feed/:communityId',
+      navigationOptions: ({ navigation }) => ({
+        // Don't allow opening feed of current community or network in this modal?
+        // Back button title should simply say Back?
+        title: ''
+      })
+    },
+
+    // Screens that appear outside of tabs: Settings, Messages, etc.  
+    MemberProfile: { screen: MemberProfile, path: 'people/:id' },
     MemberDetails,
     MemberSkillEditor,
     NewMessage,
-    PostDetails: {screen: PostDetails, path: 'post/:id'},
+    PostDetails: { screen: PostDetails, path: 'post/:id' },
     PostEditor,
     ProjectMembers,
     ItemChooserScreen,
@@ -115,7 +123,7 @@ const AllScreens = createStackNavigator(
     ModeratorSettings,
     CommunitySettingsMenu,
     CommunitySettings,
-    PasswordReset: {screen: UserSettings, path: 'settings/password'},
+    PasswordReset: { screen: UserSettings, path: 'settings/password' },
     NotificationsList,
     ThreadList,
     ThreadParticipants,
@@ -128,12 +136,12 @@ const AllScreens = createStackNavigator(
     SignupFlow3,
     SignupFlow4,
     SignupFlow5,
-    Login: {screen: Login, path: 'login'},
-    LoginByPasswordResetToken: {screen: Login, path: 'passwordResetTokenLogin/:userId/:loginToken/:nextURL'},
-    ForgotPassword: {screen: ForgotPassword, path: 'reset-password'},
-    Thread: {screen: Thread, path: 'thread/:id'},
-    UseInvitation: {screen: JoinCommunity, path: 'useInvitation/:token'},
-    UseAccessCode: {screen: JoinCommunity, path: 'useAccessCode/:slug/:accessCode'},
+    Login: { screen: Login, path: 'login' },
+    LoginByPasswordResetToken: { screen: Login, path: 'passwordResetTokenLogin/:userId/:loginToken/:nextURL' },
+    ForgotPassword: { screen: ForgotPassword, path: 'reset-password' },
+    Thread: { screen: Thread, path: 'thread/:id' },
+    UseInvitation: { screen: JoinCommunity, path: 'useInvitation/:token' },
+    UseAccessCode: { screen: JoinCommunity, path: 'useAccessCode/:slug/:accessCode' },
     Loading: LoadingScreen,
     CreateCommunityName,
     CreateCommunityUrl,
@@ -143,19 +151,16 @@ const AllScreens = createStackNavigator(
     SearchPage
   },
   {
-    defaultNavigationOptions: {
+    defaultNavigationOptions: ({ navigation }) => ({
       cardStyle: { backgroundColor: '#FFF' }
-    },
-    navigationOptions: {
-      headerShown: false
-    },
+    }),
     mode: 'modal',
     initialRouteName: MAIN_ROUTE_NAME
   }
 )
 
 const RootNavigator = createDrawerNavigator({
-  DrawerHome: AllScreens
+  DrawerHome: StackNavigator
 }, {
   contentComponent: DrawerMenu,
   initialRouteName: 'DrawerHome',
@@ -164,9 +169,5 @@ const RootNavigator = createDrawerNavigator({
   drawerWidth: Dimensions.get('window').width * 0.9
 })
 
-extendRouter(RootNavigator.router)
-
-// trackCurrentTab must be on the top-level navigator, because it uses a prop
-// for listening to navigation change events that can only be assigned to a
-// top-level navigator
-export default trackCurrentTab(createAppContainer(RootNavigator))
+// extendRouter(RootNavigator.router)
+export default createAppContainer(RootNavigator)

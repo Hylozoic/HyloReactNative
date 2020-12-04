@@ -5,7 +5,7 @@ import {
 import { get, pick } from 'lodash/fp'
 
 import { DEFAULT_BANNER } from '../../../store/models/Community'
-import createNavigationOptionsForHeader from 'components/Tabs/Header/createNavigationOptionsForHeader'
+// import createNavigationOptionsForHeader from 'components/Tabs/Header/createNavigationOptionsForHeader'
 import LinearGradient from 'react-native-linear-gradient'
 import styles from './Members.styles'
 import Button from '../../Button'
@@ -13,9 +13,9 @@ import { bannerlinearGradientColors } from 'style/colors'
 import MemberList from '../../MemberList'
 
 export default class Members extends React.Component {
-  static navigationOptions = ({ navigation, screenProps }) => {
-    return createNavigationOptionsForHeader(navigation, screenProps.currentTabName)
-  }
+  // static navigationOptions = ({ navigation, screenProps }) => {
+  //   return createNavigationOptionsForHeader(navigation, screenProps.currentTabName)
+  // }
 
   goToInvitePeople = () => this.props.navigation.navigate({routeName: 'InvitePeople', key: 'InvitePeople'})
 

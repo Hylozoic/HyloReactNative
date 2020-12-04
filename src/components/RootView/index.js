@@ -7,6 +7,7 @@ import RootNavigator from '../RootNavigator'
 import SessionCheck from '../SessionCheck'
 import VersionCheck from '../VersionCheck'
 import receivePushNotification from '../../store/actions/receivePushNotification'
+import Loading from '../Loading'
 
 export default class RootView extends React.Component {
   constructor (props) {
@@ -45,8 +46,8 @@ export default class RootView extends React.Component {
 
   setNavigator = ref => {
     if (!ref) return
-    this.navigator = ref.getWrappedInstance()
-    this.forceUpdate() // so that DeepLinkHandler gets the navigator
+    // this.navigator = ref.getWrappedInstance()
+    // this.forceUpdate() // so that DeepLinkHandler gets the navigator
   }
 
   render () {
@@ -55,9 +56,10 @@ export default class RootView extends React.Component {
     return <View style={{flex: 1}}>
       <VersionCheck />
       <SessionCheck>
-        <DeepLinkHandler
+        <Loading />
+        {/* <DeepLinkHandler
           navigator={this.navigator}
-          onesignalNotification={onesignalNotification} />
+          onesignalNotification={onesignalNotification} /> */}
       </SessionCheck>
       <LoadingModal />
       <RootNavigator ref={this.setNavigator} />

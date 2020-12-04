@@ -1,15 +1,10 @@
 import React from 'react'
 import Loading from '../../Loading'
 import Button from '../../Button'
-import createNavigationOptionsForHeader from 'components/Tabs/Header/createNavigationOptionsForHeader'
 import styles from './Projects.styles'
 import Feed from '../../Feed'
 
-const title = 'Projects'
-
 export default class Projects extends React.Component {
-  static navigationOptions = ({navigation}) => (createNavigationOptionsForHeader(navigation, title))
-
   shouldComponentUpdate (nextProps) {
     return nextProps.isFocused
   }

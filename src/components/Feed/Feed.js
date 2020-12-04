@@ -1,7 +1,5 @@
 import React from 'react'
 import { View } from 'react-native'
-import { get } from 'lodash/fp'
-
 import CreateCommunityNotice from '../CreateCommunityNotice'
 import FeedList from '../FeedList'
 import FeedBanner from '../FeedBanner'
@@ -10,14 +8,6 @@ import styles from './Feed.styles'
 import { didPropsChange } from 'util/index'
 
 export default class Feed extends React.Component {
-  static navigationOptions = ({ navigation }) => {
-    const topicName = get('state.params.topicName', navigation)
-    const communityName = get('state.params.communityName', navigation)
-    return {
-      headerTitle: topicName ? communityName : 'Home'
-    }
-  }
-
   componentDidMount () {
     const { community, navigation } = this.props
     if (community) navigation.setParams({communityName: this.props.community.name})
