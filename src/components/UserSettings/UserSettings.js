@@ -1,6 +1,6 @@
 import React from 'react'
-import { View, Text, ScrollView, TouchableOpacity, Alert } from 'react-native'
-import { SafeAreaView } from 'react-navigation'
+import { View, Text, ScrollView, TouchableOpacity } from 'react-native'
+import SafeAreaView from 'react-native-safe-area-view'
 import { validateUser } from 'hylo-utils/validators'
 import validator from 'validator'
 import prompt from 'react-native-prompt-android'
