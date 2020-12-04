@@ -42,4 +42,4 @@ export const mergeProps = (stateProps, dispatchProps, ownProps) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps, mergeProps, { withRef: true })
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps, { forwardRef: true })

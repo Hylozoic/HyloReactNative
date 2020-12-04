@@ -292,6 +292,8 @@ PODS:
   - react-native-fbsdk/Share (2.0.0):
     - FBSDKShareKit (~> 7.0)
     - React
+  - react-native-flipper (0.68.0):
+    - React
   - react-native-image-picker (1.1.0):
     - React
   - react-native-intercom (15.0.0):
@@ -446,6 +448,7 @@ DEPENDENCIES:
   - react-native-date-picker (from `../node_modules/react-native-date-picker`)
   - react-native-document-picker (from `../node_modules/react-native-document-picker`)
   - react-native-fbsdk (from `../node_modules/react-native-fbsdk`)
+  - react-native-flipper (from `../node_modules/react-native-flipper`)
   - react-native-image-picker (from `../node_modules/react-native-image-picker`)
   - react-native-intercom (from `../node_modules/react-native-intercom`)
   - react-native-mixpanel (from `../node_modules/react-native-mixpanel`)
@@ -543,6 +546,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-document-picker"
   react-native-fbsdk:
     :path: "../node_modules/react-native-fbsdk"
+  react-native-flipper:
+    :path: "../node_modules/react-native-flipper"
   react-native-image-picker:
     :path: "../node_modules/react-native-image-picker"
   react-native-intercom:
@@ -644,6 +649,7 @@ SPEC CHECKSUMS:
   react-native-date-picker: 4468aeac8de6a6e351b56be0014d4fd35476de4c
   react-native-document-picker: 8508bfda34be6c24a2cbecbe515b15108658c183
   react-native-fbsdk: 00c15d138bba6d4efa628670886fc58cec858c19
+  react-native-flipper: 7077153889f54d57e1f61c579da23426f0bb5e39
   react-native-image-picker: 7a85cf7b0a53845f03ae52fb4592a2748ded069b
   react-native-intercom: ddc3a81f883b9089649dbaf4c02e3b3ad271b6d1
   react-native-mixpanel: d644efe1ca33d2646d5cba29e24a13ebc9b37209
