@@ -5,7 +5,7 @@ import getMe from '../../store/selectors/getMe'
 import makeGoToCommunity from '../../store/actions/makeGoToCommunity'
 import getNavigationParam from '../../store/selectors/getNavigationParam'
 import { checkInvitation, useInvitation } from './JoinCommunity.store'
-import { resetToRoute, resetToMainRoute } from 'util/navigation'
+import { resetToAppRoute, resetToMainRoute } from 'util/navigation'
 
 export function mapStateToProps (state, props) {
   const { navigation } = props
@@ -16,8 +16,8 @@ export function mapStateToProps (state, props) {
         getNavigationParam('invitationToken', state, props),
       accessCode: getNavigationParam('accessCode', state, props)
     },
-    navToSignup: () => resetToRoute(navigation, 'Signup'),
-    navToInviteExpired: () => resetToRoute(navigation, 'InviteExpired'),
+    navToSignup: () => resetToAppRoute(navigation, 'Signup'),
+    navToInviteExpired: () => resetToAppRoute(navigation, 'InviteExpired'),
     goToHome: () => resetToMainRoute(navigation)
   }
 }

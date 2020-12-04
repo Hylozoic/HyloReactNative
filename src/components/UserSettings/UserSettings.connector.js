@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { get } from 'lodash/fp'
-import { resetToRoute, resetToMainRoute } from 'util/navigation'
+import { resetToAuthRoute, resetToMainRoute } from 'util/navigation'
 import { logout, loginWithFacebook } from '../Login/actions'
 import updateUserSettings from '../../store/actions/updateUserSettings'
 import { unlinkAccount } from './UserSettings.store'
@@ -31,7 +31,7 @@ export function mapStateToProps (state, props) {
 export function mapDispatchToProps (dispatch, props) {
   return {
     logout: () => {
-      resetToRoute(props.navigation, 'Login')
+      resetToAuthRoute(props.navigation, 'Login')
       return dispatch(logout())
     },
     ...bindActionCreators({

@@ -7,31 +7,33 @@ import url from 'url'
 import pathMatch from 'path-match'
 import { get } from 'lodash/fp'
 
-export function resetToRoute (navigation, routeName) {
-  // Setting key to null to handle "There is no route defined for..." exceptions
-  // on nested navigation reference
-  // NOTE: "key: null" solution works in iOS but not Android, hence the try/catch
-  //
-  //
-  // https://github.com/react-navigation/react-navigation/issues/1127
-  try {
-    const resetAction = StackActions.reset({
-        index: 0,
-        key: null,
-        actions: [NavigationActions.navigate({ routeName })]
-    })
-    return navigation.dispatch(resetAction)
-  } catch (err) {
-    console.log('!! failed to navigate:', err)
-    return false
-  }
-}
-
 export const MAIN_ROUTE_NAME = 'Main'
 export const MAIN_ROUTE_PATH = 'main'
 
+export function resetToAuthRoute (navigation, routeName) {
+  return navigation.dispatch({
+    type: 'Navigation/NAVIGATE',
+    routeName: 'AuthNavigator',
+    action: {
+      type: 'Navigation/NAVIGATE',
+      routeName: routeName
+    }
+  })
+}
+
+export function resetToAppRoute (navigation, routeName) {
+  return navigation.dispatch({
+    type: 'Navigation/NAVIGATE',
+    routeName: 'AppNavigator',
+    action: {
+      type: 'Navigation/NAVIGATE',
+      routeName: routeName
+    }
+  })
+}
+
 export function resetToMainRoute (navigation) {
-  return resetToRoute(navigation, MAIN_ROUTE_NAME)
+  return resetToAppRoute(navigation, MAIN_ROUTE_NAME)
 }
 
 export function isInvitationLink (path) {
@@ -60,7 +62,7 @@ export const routeMatchers = {
 
 export function redirectAfterLogin ({ currentUser, navigation, action }) {
   if (get('settings.signupInProgress', currentUser)) {
-    resetToRoute(navigation, 'SignupFlow1')
+    resetToAppRoute(navigation, 'SignupFlow1')
   } else if (action) {
     navigation.dispatch(action)
   } else {

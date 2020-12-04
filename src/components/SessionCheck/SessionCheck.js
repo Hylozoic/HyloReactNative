@@ -1,22 +1,16 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 
-export default class SessionCheck extends React.PureComponent {
-  static navigationOptions = {
-    headerShown: false
+export default class AuthLoadingScreen extends React.Component {
+  componentDidMount() {
+    this._bootstrapAsync()
   }
 
-  static propTypes = {
-    checkSession: PropTypes.func.isRequired
+  _bootstrapAsync = async () => {
+    const signedIn = await this.props.checkSession()
+    this.props.navigation.navigate(signedIn ? 'AppNavigator' : 'AuthNavigator')
   }
 
-  state = {}
-
-  componentDidMount () {
-    this.props.checkSession().then(() => this.setState({checked: true}))
-  }
-
-  render () {
-    return this.state.checked ? this.props.children : null
+  render() {
+    return null
   }
 }

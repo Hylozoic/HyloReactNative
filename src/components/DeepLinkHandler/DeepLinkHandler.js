@@ -2,7 +2,7 @@ import React from 'react'
 import { InteractionManager, Linking } from 'react-native'
 import * as url from 'url'
 import {
-  isInvitationLink, redirectAfterLogin, resetToRoute, resetToMainRoute
+  isInvitationLink, redirectAfterLogin, resetToAppRoute, resetToMainRoute
 } from 'util/navigation'
 import convertDeepLinkToAction from './convertDeepLinkToAction'
 import { isDev } from '../../config'
@@ -18,7 +18,7 @@ export default class DeepLinkHandler extends React.Component {
     if (currentUser) {
       redirectAfterLogin({ currentUser, navigation: navigator })
     } else {
-      resetToRoute(this.props.navigator, 'Login')
+      resetToAppRoute(this.props.navigator, 'Login')
     }
 
     const pushNotification = this.props.onesignalNotification

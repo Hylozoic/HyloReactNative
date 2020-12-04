@@ -1,5 +1,5 @@
 import React from 'react'
-import { createAppContainer } from 'react-navigation'
+import { createAppContainer, createSwitchNavigator } from 'react-navigation'
 import { createStackNavigator } from 'react-navigation-stack'
 import { createDrawerNavigator } from 'react-navigation-drawer'
 import { createBottomTabNavigator } from 'react-navigation-tabs'
@@ -8,7 +8,6 @@ import { get } from 'lodash/fp'
 import { isIOS } from 'util/platform'
 import { MAIN_ROUTE_NAME, MAIN_ROUTE_PATH } from 'util/navigation'
 // import extendRouter from './extendRouter'
-// import trackCurrentTab from './trackCurrentTab'
 import { LoadingScreen } from '../Loading'
 import createNavigationOptionsForHeader from 'components/Tabs/Header/createNavigationOptionsForHeader'
 import TabIcon from '../Tabs/TabIcon'
@@ -89,7 +88,7 @@ const TabsNavigator = createBottomTabNavigator({
   lazy: true
 })
 
-const StackNavigator = createStackNavigator(
+const AppScreensNavigator = createStackNavigator(
   {
     [MAIN_ROUTE_NAME]: { screen: TabsNavigator, path: MAIN_ROUTE_PATH },
     TopicFeed: {
@@ -136,9 +135,6 @@ const StackNavigator = createStackNavigator(
     SignupFlow3,
     SignupFlow4,
     SignupFlow5,
-    Login: { screen: Login, path: 'login' },
-    LoginByPasswordResetToken: { screen: Login, path: 'passwordResetTokenLogin/:userId/:loginToken/:nextURL' },
-    ForgotPassword: { screen: ForgotPassword, path: 'reset-password' },
     Thread: { screen: Thread, path: 'thread/:id' },
     UseInvitation: { screen: JoinCommunity, path: 'useInvitation/:token' },
     UseAccessCode: { screen: JoinCommunity, path: 'useAccessCode/:slug/:accessCode' },
@@ -159,8 +155,8 @@ const StackNavigator = createStackNavigator(
   }
 )
 
-const RootNavigator = createDrawerNavigator({
-  DrawerHome: StackNavigator
+const AppNavigator = createDrawerNavigator({
+  DrawerHome: AppScreensNavigator
 }, {
   contentComponent: DrawerMenu,
   initialRouteName: 'DrawerHome',
@@ -169,5 +165,19 @@ const RootNavigator = createDrawerNavigator({
   drawerWidth: Dimensions.get('window').width * 0.9
 })
 
+const AuthNavigator = createStackNavigator({
+  Login: { screen: Login, path: 'login' },
+  LoginByPasswordResetToken: { screen: Login, path: 'passwordResetTokenLogin/:userId/:loginToken/:nextURL' },
+  ForgotPassword: { screen: ForgotPassword, path: 'reset-password' }
+}, {
+  initialRouteName: 'Login'
+})
+
 // extendRouter(RootNavigator.router)
-export default createAppContainer(RootNavigator)
+export default createAppContainer(createSwitchNavigator({
+  SessionCheck,
+  AuthNavigator,
+  AppNavigator
+}, {
+  initialRouteName: 'SessionCheck'
+}))

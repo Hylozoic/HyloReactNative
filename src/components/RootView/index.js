@@ -55,12 +55,12 @@ export default class RootView extends React.Component {
 
     return <View style={{flex: 1}}>
       <VersionCheck />
-      <SessionCheck>
-        <Loading />
+      {/* <SessionCheck> */}
+        {/* <Loading /> */}
         {/* <DeepLinkHandler
           navigator={this.navigator}
           onesignalNotification={onesignalNotification} /> */}
-      </SessionCheck>
+      {/* </SessionCheck> */}
       <LoadingModal />
       <RootNavigator ref={this.setNavigator} />
     </View>
