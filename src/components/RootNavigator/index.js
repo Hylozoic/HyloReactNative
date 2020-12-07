@@ -1,8 +1,15 @@
-import React from 'react'
-import { createAppContainer, createSwitchNavigator } from 'react-navigation'
-import { createStackNavigator } from 'react-navigation-stack'
-import { createDrawerNavigator } from 'react-navigation-drawer'
-import { createBottomTabNavigator } from 'react-navigation-tabs'
+import * as React from 'react'
+import 'react-native-gesture-handler' // is this necessary?
+import { Text, View } from 'react-native'
+// import { createAppContainer, createSwitchNavigator } from 'react-navigation'
+import { NavigationContainer } from '@react-navigation/native'
+// import { createBottomTabNavigator } from 'react-navigation-tabs'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+// import { createDrawerNavigator } from 'react-navigation-drawer'
+import { createDrawerNavigator } from '@react-navigation/drawer'
+// import { createStackNavigator  } from 'react-navigation-stack'
+import { createStackNavigator } from '@react-navigation/stack'
+
 import { Dimensions, Text } from 'react-native'
 import { get } from 'lodash/fp'
 import { isIOS } from 'util/platform'
@@ -51,6 +58,23 @@ import CreateCommunityUrl from '../CreateCommunityFlow/CreateCommunityUrl'
 import CreateCommunityReview from '../CreateCommunityFlow/CreateCommunityReview'
 import InviteExpired from '../InviteExpired'
 import Signup from '../Signup'
+
+const TabsNavigator = createBottomTabNavigator()
+
+<TabsNavigator.Navigator
+  screenOptions={({ route }) => ({
+    ...createNavigationOptionsForHeader(
+      route,
+      route.state.routes[route.state.index].key
+    )
+  })}
+  tabBarOptions={{
+    showIcon: true,
+    showLabel: true,
+    pressColor: '#DCDCDC',
+    indicatorStyle: {backgroundColor: 'white'},
+    style: isIOS ? tabStyles.tabNavigatorIOS : tabStyles.tabNavigatorAndroid
+  }}
 
 const TabsNavigator = createBottomTabNavigator({
   Home: createStackNavigator({
