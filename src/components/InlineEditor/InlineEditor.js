@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   ActivityIndicator
 } from 'react-native'
-import { withNavigation } from 'react-navigation'
+import { withNavigation } from '@react-navigation/compat'
 import { trim, isEmpty, get, flow } from 'lodash/fp'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import { htmlEncode } from 'js-htmlencode'

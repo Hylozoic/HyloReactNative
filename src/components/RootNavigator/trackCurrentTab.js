@@ -8,7 +8,7 @@
 
 import React from 'react'
 import { has } from 'lodash/fp'
-import { updateFocus } from 'react-navigation-is-focused-hoc'
+import { updateFocus } from '@react-navigation/compat'
 import hoistStatics from 'hoist-non-react-statics'
 
 const tabNames = ['Home', 'Members', 'Topics', 'Projects']

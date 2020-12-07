@@ -1,4 +1,4 @@
-import { withNavigationFocus } from 'react-navigation-is-focused-hoc'
+import { withNavigationFocus } from '@react-navigation/compat'
 
 import component from './ModeratorSettings'
 import connector from './ModeratorSettings.connector'

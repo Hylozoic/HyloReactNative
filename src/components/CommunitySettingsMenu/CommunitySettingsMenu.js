@@ -32,7 +32,7 @@ export default class PostImage extends PureComponent {
       data={menuItems}
       ListHeaderComponent={<View style={styles.headerContainer}><Text style={styles.headerText}>{communityName}</Text></View>}
       keyExtractor={(item, index) => index.toString()}
-      renderItem={({item}) => <TouchableOpacity onPress={() => this.navigate({routeName: item.navigate, key: item.navigate})} style={styles.item} >
+      renderItem={({item}) => <TouchableOpacity onPress={() => this.navigate(item.navigate)} style={styles.item} >
         <Text style={styles.text}>{item.name}</Text>
         <EntypoIcon style={styles.chevron} name={'chevron-right'} />
       </TouchableOpacity>} />)

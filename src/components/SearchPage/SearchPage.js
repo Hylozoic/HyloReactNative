@@ -72,7 +72,7 @@ export default class SearchPage extends React.Component {
             underlineColorAndroid='transparent' />
         </View>
       </View>
-      <TabBar filter={filter} setSearchFilter={setSearchFilter} />
+      {/* <TabBar filter={filter} setSearchFilter={setSearchFilter} /> */}
     </View>
 
     const listFooterComponent = pending

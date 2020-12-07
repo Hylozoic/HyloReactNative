@@ -44,25 +44,14 @@ export default class RootView extends React.Component {
   _handleOpenedPushNotification = ({ notification: { payload } }) =>
     this.setState({ onesignalNotification: payload })
 
-  setNavigator = ref => {
-    if (!ref) return
-    // this.navigator = ref.getWrappedInstance()
-    // this.forceUpdate() // so that DeepLinkHandler gets the navigator
-  }
-
   render () {
-    const { onesignalNotification } = this.state
+    // TODO: Deeplink handling...
+    // const { onesignalNotification } = this.state
 
     return <View style={{flex: 1}}>
-      <VersionCheck />
-      {/* <SessionCheck> */}
-        {/* <Loading /> */}
-        {/* <DeepLinkHandler
-          navigator={this.navigator}
-          onesignalNotification={onesignalNotification} /> */}
-      {/* </SessionCheck> */}
-      <LoadingModal />
-      <RootNavigator ref={this.setNavigator} />
+      {/* <VersionCheck />
+      <LoadingModal /> */}
+      <RootNavigator />
     </View>
   }
 }

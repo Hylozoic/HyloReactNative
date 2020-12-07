@@ -2,7 +2,7 @@ import React from 'react'
 import {
   Text
 } from 'react-native'
-import { HeaderBackButton } from 'react-navigation-stack'
+import { HeaderBackButton } from '@react-navigation/stack'
 import { caribbeanGreen, white, white60onCaribbeanGreen } from 'style/colors'
 
 export default function createCommunityHeader (title, navigation) {

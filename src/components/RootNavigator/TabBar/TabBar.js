@@ -1,6 +1,6 @@
 import React from 'react'
 import { Keyboard } from 'react-native'
-import { TabBarBottom } from 'react-navigation'
+// import { TabBarBottom } from 'react-navigation'
 import { isIOS } from 'util/platform'
 
 // This is a workaround for android to get the tabbar to hide when keyboard is shown.
@@ -43,8 +43,8 @@ export default class TabBar extends React.PureComponent {
   }
 
   render () {
-    return this.state.isVisible && this.props.isVisible
-      ? <TabBarBottom {...this.props} />
-      : null
+    return null // this.state.isVisible && this.props.isVisible
+      // ? <TabBarBottom {...this.props} />
+      // : null
   }
 }

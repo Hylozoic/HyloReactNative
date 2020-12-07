@@ -1,4 +1,6 @@
 import * as React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useAsync } from 'react-async-hook'
 import 'react-native-gesture-handler' // is this necessary?
 import { Dimensions } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native'
@@ -8,7 +10,8 @@ import { createStackNavigator } from '@react-navigation/stack'
 import { get } from 'lodash/fp'
 import { isIOS } from 'util/platform'
 import { MAIN_ROUTE_NAME, MAIN_ROUTE_PATH } from 'util/navigation'
-import { LoadingScreen } from '../Loading'
+import Loading, { LoadingScreen } from '../Loading'
+import LoadingModal from '../LoadingModal'
 import createNavigationOptionsForHeader from 'components/Tabs/Header/createNavigationOptionsForHeader'
 import TabIcon from '../Tabs/TabIcon'
 import TabLabel from '../Tabs/TabLabel'
@@ -65,9 +68,9 @@ const Tabs = createBottomTabNavigator()
 function TabsNavigator () {
   const screenOptions = ({ route }) => ({
     tabBarIcon: ({ focused }) =>
-      <TabIcon name={route.state.routeName} focused={focused} />,
+      <TabIcon name={route.name} focused={focused} />,
     tabBarLabel: ({ focused }) =>
-      <TabLabel name={route.state.routeName} focused={focused} />
+      <TabLabel name={route.name} focused={focused} />
   })
   const tabBarOptions = {
     showIcon: true,
@@ -78,13 +81,12 @@ function TabsNavigator () {
   }
 
   return <Tabs.Navigator
-    initialRouteName='Home'
     screenOptions={screenOptions}
     tabBarOptions={tabBarOptions}>
     <Tabs.Screen name='Home' component={HomeStackNavigator} path='/' />
-    <Tabs.Screen component='Members' path='people' />
-    <Tabs.Screen component='Topics' path='topics' />
-    <Tabs.Screen component='Projects' path='projects' />
+    <Tabs.Screen name='Members' component={Members} path='people' />
+    <Tabs.Screen name='Topics' component={Topics} path='topics' />
+    <Tabs.Screen name='Projects' component={Projects} path='projects' />
   </Tabs.Navigator>
 }
 
@@ -93,22 +95,26 @@ function AppNavigator () {
   const screenOptions = ({ route }) => ({
     cardStyle: { backgroundColor: '#FFF' }
   })
-  
+
   return <App.Navigator
     screenOptions={screenOptions}
     initialRouteName={MAIN_ROUTE_NAME}
-    mode='modal'>
+    mode='modal'
+    headerMode='screen'>
     <App.Screen
       name={MAIN_ROUTE_NAME}
       component={TabsNavigator}
       path={MAIN_ROUTE_PATH}
       // used to be navigationOptions on the tabbar
-      options={({ route }) => ({
-        ...createNavigationOptionsForHeader(
-          route,
-          route.state.routes[route.state.index].key
-        )
-      })}
+      options={({ route, params }) => {
+        console.log('!!!! route:', route.state) // route.state.routeNames[])
+        return {
+          ...createNavigationOptionsForHeader(
+            route,
+            'test'
+          )
+        }
+      }}
     /> 
     <App.Screen
       name='TopicFeed'
@@ -140,7 +146,7 @@ function AppNavigator () {
       })}
     />
     <App.Screen name='MemberDetails' component={MemberDetails} />
-    <App.Screen name='MemberSkillEditor,' component={MemberSkillEditor,} />    
+    <App.Screen name='MemberSkillEditor,' component={MemberSkillEditor} />
     <App.Screen name='NewMessage' component={NewMessage} />
     <App.Screen name='PostDetails' component={PostDetails} path='post/:id' />
     <App.Screen name='ProjectMembers' component={ProjectMembers} />
@@ -155,7 +161,6 @@ function AppNavigator () {
     <App.Screen name='ThreadList' component={ThreadList} />
     <App.Screen name='ThreadParticipants' component={ThreadParticipants} />
     <App.Screen name='TopicSupportComingSoon' component={TopicSupportComingSoon} />
-    <App.Screen name='SessionCheck' component={SessionCheck} />
     <App.Screen name='InviteExpired' component={InviteExpired} />
     <App.Screen name='Signup' component={Signup} />
     <App.Screen name='SignupFlow1' component={SignupFlow1} />
@@ -179,9 +184,8 @@ function AppNavigator () {
 const AppWithDrawer = createDrawerNavigator()
 function AppWithDrawerNavigator () {
   return <AppWithDrawer.Navigator
-    initialRouteName='DrawerHome'
-    contentComponent={DrawerMenu}
-    hideStatusBar={true}
+    drawerContent={props => <DrawerMenu {...props} />}
+    hideStatusBar
     drawerType='front'
     drawerWidth={Dimensions.get('window').width * 0.9}>
     <AppWithDrawer.Screen name='DrawerHome' component={AppNavigator} />
@@ -189,20 +193,50 @@ function AppWithDrawerNavigator () {
 }
 
 const Auth = createStackNavigator()
-function AuthNavigator () =>
+function AuthNavigator () {
   return <Auth.Navigator initialRouteName='Login'>
     <Auth.Screen name='Login' component={Login} path='login' />
-    {/* <Auth.Screen name='LoginByPasswordResetToken' component='Login' path='passwordResetTokenLogin/:userId/:loginToken/:nextURL' /> */}
+    {/* <Auth.Screen name='LoginByPasswordResetToken' component={Login} path='passwordResetTokenLogin/:userId/:loginToken/:nextURL' /> */}
     <Auth.Screen name='ForgotPassword' component={ForgotPassword} path='reset-password' />
   </Auth.Navigator>
 }
 
-export default function () {
-  const signedIn = false // do SessionCheck here
+
+import { getSessionCookie } from '../../util/session'
+
+export const CHECK_SESSION = 'CHECK_SESSION'
+
+export function checkSession () {
+  return {
+    type: CHECK_SESSION,
+    // there's a harmless but confusing bug due to this promise payload that
+    // returns an api payload: CHECK_SESSION_PENDING will get fired twice
+    payload: getSessionCookie().then(cookie => {
+      if (!cookie) return false
+
+      return {
+        api: {
+          path: '/noo/user/status',
+          transform: json => !!json.signedIn
+        }
+      }
+    })
+  }
+}
+
+export async function sessionCheck (dispatch) {
+  return dispatch[0](checkSession)
+}
+
+export default function RootNavigator () {
+  const { loading } = useAsync(sessionCheck, [useDispatch()])
+  const hasSession = useSelector(state => state.session.loggedIn)
+
+  if (loading) return <LoadingModal />
 
   return <NavigationContainer>
-    {signedIn
-      ? <AppWithDrawer />
+    {hasSession
+      ? <AppWithDrawerNavigator />
       : <AuthNavigator />}
   </NavigationContainer>
 }

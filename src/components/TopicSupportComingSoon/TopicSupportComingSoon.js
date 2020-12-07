@@ -2,7 +2,7 @@ import React from 'react'
 import { View, Text, Image, TouchableOpacity } from 'react-native'
 import styles from './TopicSupportComingSoon.styles'
 import header, { tintColor } from 'util/header'
-import { HeaderBackButton } from 'react-navigation-stack'
+import { HeaderBackButton } from '@react-navigation/stack'
 import { get } from 'lodash/fp'
 
 const axolotlImage = require('../../assets/Axolotyl_Digging.png')

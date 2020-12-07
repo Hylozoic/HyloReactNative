@@ -62,16 +62,16 @@ export function mapStateToProps (state, props) {
 
 export function mapDispatchToProps (dispatch, { navigation }) {
   return {
-    newPost: (communityId, topicName) => navigation.navigate({routeName: 'PostEditor', params: {communityId, topicName}, key: 'PostEditor'}),
-    showPost: id => navigation.navigate({routeName: 'PostDetails', params: {id}, key: 'PostDetails'}),
-    showMember: id => navigation.navigate({routeName: 'MemberProfile', params: {id}, key: 'MemberProfile'}),
+    newPost: (communityId, topicName) => navigation.navigate('PostEditor', {communityId, topicName}),
+    showPost: id => navigation.navigate('PostDetails', { id }),
+    showMember: id => navigation.navigate('MemberProfile', { id }),
     showTopic: (communityId, networkId) => topicName => {
       // All Communities and Network feed to topic nav
       // currently not supported
       if (networkId || communityId === ALL_COMMUNITIES_ID || (isNull(communityId) || isUndefined(communityId))) {
-        navigation.navigate({routeName: 'TopicSupportComingSoon', key: 'TopicSupportComingSoon'})
+        navigation.navigate('TopicSupportComingSoon')
       } else {
-        navigation.navigate({routeName: 'Feed', params: {communityId, topicName}, key: 'Feed'})
+        navigation.navigate('Feed', { communityId, topicName })
       }
     },
     goToCommunity: makeGoToCommunity(dispatch, navigation),

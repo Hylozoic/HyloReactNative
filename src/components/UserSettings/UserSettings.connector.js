@@ -30,10 +30,7 @@ export function mapStateToProps (state, props) {
 
 export function mapDispatchToProps (dispatch, props) {
   return {
-    logout: () => {
-      resetToAuthRoute(props.navigation, 'Login')
-      return dispatch(logout())
-    },
+    logout: () => dispatch(logout()),
     ...bindActionCreators({
       updateUserSettings,
       unlinkAccount,
