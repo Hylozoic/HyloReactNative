@@ -11,7 +11,7 @@ export default class Projects extends React.Component {
 
   goToCreateProject = () => {
     const { communityId } = this.props
-    this.props.navigation.navigate('PostEditor', {communityId: communityId, isProject: true})
+    this.props.navigation.navigate('PostEditor', { communityId: communityId, isProject: true })
   }
 
   render () {

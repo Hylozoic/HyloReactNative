@@ -16,8 +16,8 @@ import { any, values, isNil } from 'lodash/fp'
 import { showToast } from 'util/toast'
 
 export default class UserSettings extends React.Component {
-  static navigationOptions = ({ navigation }) => {
-    const resettingPassword = navigation.state.routeName === 'PasswordReset'
+  static navigationOptions = ({ route }) => {
+    const resettingPassword = route.name === 'PasswordReset'
     let options = {
       title: 'Edit Account Info',
       headerStyle: styles.header,

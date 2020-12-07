@@ -22,13 +22,13 @@ export function mapStateToProps (state, props) {
   return {
     loggedIn: state.session.loggedIn,
     formError,
-    bannerMessage: get('navigation.state.params.bannerMessage', props),
+    bannerMessage: get('route.params.bannerMessage', props),
     pending,
     defaultEmail: state.session.defaultLoginEmail,
     goToSignup,
     goToResetPassword,
-    loginToken: decodeURIComponent(get('navigation.state.params.loginToken', props)),
-    loginTokenUserId: get('navigation.state.params.userId', props),
+    loginToken: decodeURIComponent(get('route.params.loginToken', props)),
+    loginTokenUserId: get('route.params.userId', props),
     deepLinkAction: getNavigationAction(state)
   }
 }

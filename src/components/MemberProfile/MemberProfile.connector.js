@@ -10,8 +10,8 @@ import updateUserSettings from '../../store/actions/updateUserSettings'
 import { mapWhenFocused, mergeWhenFocused } from 'util/connector'
 
 export function mapStateToProps (state, props) {
-  const id = get('navigation.state.params.id', props)
-  const editing = get('navigation.state.params.editing', props)
+  const id = get('route.params.id', props)
+  const editing = get('route.params.editing', props)
 
   const isBlocked = !!getBlockedUsers(state).find(i => get('id', i) === id)
   const person = getPerson(state, {id})

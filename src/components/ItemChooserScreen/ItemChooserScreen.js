@@ -55,7 +55,7 @@ export default class ItemChooserScreen extends React.Component {
 
   cancel = () => {
     const { navigation } = this.props
-    const { initialItems, chosenItems } = navigation.state.params
+    const { initialItems, chosenItems } = route.params
     const changed = !isEqual(chosenItems, initialItems)
     confirmDiscardChanges({
       hasChanges: changed,
@@ -65,14 +65,14 @@ export default class ItemChooserScreen extends React.Component {
 
   done = () => {
     const { navigation } = this.props
-    const { updateItems, chosenItems } = navigation.state.params
+    const { updateItems, chosenItems } = route.params
     updateItems && updateItems(chosenItems)
     navigation.goBack()
   }
 
   pickItem = pickedItem => {
     const { navigation } = this.props
-    const { pickItem } = navigation.state.params
+    const { pickItem } = route.params
     pickItem(pickedItem)
     navigation.goBack()
   }
@@ -86,7 +86,7 @@ export default class ItemChooserScreen extends React.Component {
     const updateItems = this.props.navigation.getParam('updateItems')
 
     return <ItemChooser
-      {...this.props.navigation.state.params}
+      {...this.props.route.params}
       scope={screenTitle}
       pickItem={pickItem ? this.pickItem : undefined}
       updateItems={updateItems ? this.updateItems : undefined} />

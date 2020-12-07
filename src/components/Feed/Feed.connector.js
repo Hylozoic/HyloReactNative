@@ -21,6 +21,7 @@ import getMemberships from '../../store/selectors/getMemberships'
 import getNavigationParam from '../../store/selectors/getNavigationParam'
 
 export function mapStateToProps (state, props) {
+  console.log('!!! Feed.connector:', props)
   const params = get('state.params', props.navigation) || {}
   // NOTE: networkId is only received as a prop (currently via Home)
   const networkId = getCurrentNetworkId(state, props)
@@ -62,7 +63,7 @@ export function mapStateToProps (state, props) {
 
 export function mapDispatchToProps (dispatch, { navigation }) {
   return {
-    newPost: (communityId, topicName) => navigation.navigate('PostEditor', {communityId, topicName}),
+    newPost: (communityId, topicName) => navigation.navigate('PostEditor', { communityId, topicName }),
     showPost: id => navigation.navigate('PostDetails', { id }),
     showMember: id => navigation.navigate('MemberProfile', { id }),
     showTopic: (communityId, networkId) => topicName => {

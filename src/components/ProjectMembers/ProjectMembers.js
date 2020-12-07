@@ -10,7 +10,7 @@ export default class ProjectMembers extends React.Component {
   static navigationOptions = ({navigation}) => header(navigation, {title: 'Project Members'})
 
   render () {
-    const { members } = this.props.navigation.state.params
+    const { members } = this.props.route.params
     const showMember = goToMemberMaker(this.props.navigation)
 
     return <View style={styles.container}>

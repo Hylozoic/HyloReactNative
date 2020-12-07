@@ -8,7 +8,7 @@ import { unlinkAccount } from './UserSettings.store'
 import getMe from '../../store/selectors/getMe'
 
 export function mapStateToProps (state, props) {
-  const resettingPassword = get('navigation.state.routeName', props) === 'PasswordReset'
+  const resettingPassword = get('route.name', props) === 'PasswordReset'
   const cancel = () => resettingPassword
     ? resetToMainRoute(props.navigation)
     : props.navigation.goBack()

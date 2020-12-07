@@ -39,10 +39,10 @@ export default function trackCurrentTab (Component) {
       if (!has('index', tabNav)) return
 
       const route = tabNav.routes[tabNav.index]
-      if (!route || !tabNames.includes(route.routeName)) return
+      if (!route || !tabNames.includes(route.name)) return
 
-      if (route.routeName !== this.state.currentTabName) {
-        this.setState({currentTabName: route.routeName})
+      if (route.name !== this.state.currentTabName) {
+        this.setState({currentTabName: route.name})
       }
     }
 

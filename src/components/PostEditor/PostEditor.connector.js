@@ -18,7 +18,7 @@ import {
 } from './PostEditor.store'
 
 function getPostId (state, props) {
-  return props.navigation.state.params.id
+  return props.route.params.id
 }
 
 export function mapStateToProps (state, props) {
@@ -26,7 +26,7 @@ export function mapStateToProps (state, props) {
   const currentUser = getMe(state, props)
   const communityOptions = props.communityOptions ||
     (currentUser && currentUser.memberships.toModelArray().map(m => m.community.ref))
-  const selectedTopicName = get('navigation.state.params.topicName', props)
+  const selectedTopicName = get('route.params.topicName', props)
   const selectedTopicTag = createTopicTag({name: selectedTopicName})
   const defaultPost = selectedTopicName
     ? {
@@ -37,7 +37,7 @@ export function mapStateToProps (state, props) {
     }
   const postId = getPostId(state, props)
   const post = getPresentedPost(state, {id: postId})
-  const isProject = get('navigation.state.params.isProject', props) ||
+  const isProject = get('route.params.isProject', props) ||
     get('type', post) === 'project'
 
   return {

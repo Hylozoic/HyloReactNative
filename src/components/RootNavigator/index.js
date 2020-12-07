@@ -90,22 +90,6 @@ function TabsNavigator () {
   </Tabs.Navigator>
 }
 
-function getHeaderTitle(route) {
-  // If the focused route is not found, we need to assume it's the initial screen
-  // This can happen during if there hasn't been any navigation inside the screen
-  // In our case, it's "Feed" as that's the first screen inside the navigator
-  const routeName = getFocusedRouteNameFromRoute(route) ?? 'Feed';
-
-  switch (routeName) {
-    case 'Feed':
-      return 'News feed';
-    case 'Profile':
-      return 'My profile';
-    case 'Account':
-      return 'My account';
-  }
-}
-
 const App = createStackNavigator()
 function AppNavigator () {
   const screenOptions = ({ route }) => ({
@@ -121,8 +105,8 @@ function AppNavigator () {
       name={MAIN_ROUTE_NAME}
       component={TabsNavigator}
       path={MAIN_ROUTE_PATH}
-      options={({ route, params }) => ({
-        ...createNavigationOptionsForHeader(route, getFocusedRouteNameFromRoute(route))
+      options={({ navigation, route, params }) => ({
+        ...createNavigationOptionsForHeader(navigation, getFocusedRouteNameFromRoute(route))
       })}
     /> 
     <App.Screen
@@ -157,6 +141,7 @@ function AppNavigator () {
     <App.Screen name='MemberDetails' component={MemberDetails} />
     <App.Screen name='MemberSkillEditor,' component={MemberSkillEditor} />
     <App.Screen name='NewMessage' component={NewMessage} />
+    <App.Screen name='PostEditor' component={PostEditor} path='post/:id' />
     <App.Screen name='PostDetails' component={PostDetails} path='post/:id' />
     <App.Screen name='ProjectMembers' component={ProjectMembers} />
     <App.Screen name='ItemChooserScreen' component={ItemChooserScreen} />

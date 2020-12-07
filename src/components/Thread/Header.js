@@ -4,7 +4,7 @@ import { StyleSheet, Text, TouchableOpacity } from 'react-native'
 import { rhino60 } from 'style/colors'
 
 export default function Header (navigation) {
-  const { title, onPressTitle } = navigation.state.params
+  const { title, onPressTitle } = route.params
   return {
     headerTintColor: rhino60,
     headerTitle: <Title title={title} onPress={onPressTitle} />

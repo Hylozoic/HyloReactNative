@@ -36,14 +36,14 @@ export function mapStateToProps (state, props) {
 }
 
 export function mapDispatchToProps (dispatch, { navigation }) {
-  const threadId = navigation.state.params.id
+  const threadId = route.params.id
   return {
     createMessage: text => dispatch(createMessage(threadId, sanitize(text))),
     fetchMessages: cursor => dispatch(fetchMessages(threadId, { cursor })),
     reconnectFetchMessages: () => dispatch(fetchMessages(threadId, {reset: true})),
     sendIsTyping: () => sendIsTyping(threadId, true),
     updateThreadReadTime: () => dispatch(updateThreadReadTime(threadId)),
-    showMember: id => navigation.navigate('MemberProfile' { id }),
+    showMember: id => navigation.navigate('MemberProfile', { id }),
     showTopic: (communityId, networkId) => topicName => {
       // All Communities and Network feed to topic nav
       // currently not supported

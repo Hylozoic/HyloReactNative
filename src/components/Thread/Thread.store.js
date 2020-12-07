@@ -152,14 +152,14 @@ const firstName = person => person.name.split(' ')[0]
 export const getThread = ormCreateSelector(
   orm,
   state => state.orm,
-  (_, { navigation }) => navigation.state.params.id,
+  (_, { navigation }) => route.params.id,
   ({ MessageThread }, id) => MessageThread.safeWithId(id)
 )
 
 export const getAndPresentMessages = ormCreateSelector(
   orm,
   state => state.orm,
-  (_, { navigation }) => navigation.state.params.id,
+  (_, { navigation }) => route.params.id,
   ({ Message }, id) =>
     Message.filter(m => m.messageThread === id)
     .orderBy(m => Number(m.id), 'desc')
