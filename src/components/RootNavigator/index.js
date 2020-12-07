@@ -1,20 +1,13 @@
 import * as React from 'react'
 import 'react-native-gesture-handler' // is this necessary?
-import { Text, View } from 'react-native'
-// import { createAppContainer, createSwitchNavigator } from 'react-navigation'
+import { Dimensions } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native'
-// import { createBottomTabNavigator } from 'react-navigation-tabs'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-// import { createDrawerNavigator } from 'react-navigation-drawer'
 import { createDrawerNavigator } from '@react-navigation/drawer'
-// import { createStackNavigator  } from 'react-navigation-stack'
 import { createStackNavigator } from '@react-navigation/stack'
-
-import { Dimensions, Text } from 'react-native'
 import { get } from 'lodash/fp'
 import { isIOS } from 'util/platform'
 import { MAIN_ROUTE_NAME, MAIN_ROUTE_PATH } from 'util/navigation'
-// import extendRouter from './extendRouter'
 import { LoadingScreen } from '../Loading'
 import createNavigationOptionsForHeader from 'components/Tabs/Header/createNavigationOptionsForHeader'
 import TabIcon from '../Tabs/TabIcon'
@@ -59,149 +52,157 @@ import CreateCommunityReview from '../CreateCommunityFlow/CreateCommunityReview'
 import InviteExpired from '../InviteExpired'
 import Signup from '../Signup'
 
-const TabsNavigator = createBottomTabNavigator()
+const HomeStack = createStackNavigator()
+function HomeStackNavigator () {
+  return <HomeStack.Navigator>
+    <HomeStack.Screen name='Home' component={Home} options={{ headerShown: false }} path='/' />
+    <HomeStack.Screen name='Feed' component={Feed} path='communityFeed/:communitySlugFromLink' />
+    {/* <HomeStack.Screen name='Feed' component={Feed} path='networkFeed/:networkSlug' /> */}
+  </HomeStack.Navigator>
+}
 
-<TabsNavigator.Navigator
-  screenOptions={({ route }) => ({
-    ...createNavigationOptionsForHeader(
-      route,
-      route.state.routes[route.state.index].key
-    )
-  })}
-  tabBarOptions={{
-    showIcon: true,
-    showLabel: true,
-    pressColor: '#DCDCDC',
-    indicatorStyle: {backgroundColor: 'white'},
-    style: isIOS ? tabStyles.tabNavigatorIOS : tabStyles.tabNavigatorAndroid
-  }}
-
-const TabsNavigator = createBottomTabNavigator({
-  Home: createStackNavigator({
-    // Once deep linking is re-done Flatten these into a single scren that handles the routing?
-    Home: { screen: Home, path: '', navigationOptions: { headerShown: false } },
-    CommunityFeed: { screen: Feed, path: 'communityFeed/:communitySlugFromLink' },
-    NetworkFeed: { screen: Feed, path: 'networkFeed/:networkSlug' }
-  }),
-  Members: { screen: Members, path: 'people' },
-  Topics: { screen: Topics, path: 'topics' },
-  Projects: { screen: Projects, path: 'projects' }
-}, {
-  navigationOptions: ({ navigation }) => ({
-    ...createNavigationOptionsForHeader(
-      navigation,
-      navigation.state.routes[navigation.state.index].key
-    )
-  }),
-  defaultNavigationOptions: ({ navigation: { state: { routeName } } }) => ({
+const Tabs = createBottomTabNavigator()
+function TabsNavigator () {
+  const screenOptions = ({ route }) => ({
     tabBarIcon: ({ focused }) =>
-      <TabIcon name={routeName} focused={focused} />,
+      <TabIcon name={route.state.routeName} focused={focused} />,
     tabBarLabel: ({ focused }) =>
-      <TabLabel name={routeName} focused={focused} />
-  }),
-  tabBarOptions: {
+      <TabLabel name={route.state.routeName} focused={focused} />
+  })
+  const tabBarOptions = {
     showIcon: true,
     showLabel: true,
     pressColor: '#DCDCDC',
     indicatorStyle: {backgroundColor: 'white'},
     style: isIOS ? tabStyles.tabNavigatorIOS : tabStyles.tabNavigatorAndroid
-  },
-  initialRouteName: 'Home',
-  animationEnabled: false,
-  swipeEnabled: false,
-  lazy: true
-})
+  }
 
-const AppScreensNavigator = createStackNavigator(
-  {
-    [MAIN_ROUTE_NAME]: { screen: TabsNavigator, path: MAIN_ROUTE_PATH },
-    TopicFeed: {
-      screen: Feed,
-      path: 'c/:communitySlugFromLink/topicFeed/:topicName',
-      navigationOptions: ({ navigation }) => ({
-        title: get('state.params.communityName', navigation)
-      })
-    },
-    Feed: {
-      screen: Feed,
-      path: 'feed/:communityId',
-      navigationOptions: ({ navigation }) => ({
+  return <Tabs.Navigator
+    initialRouteName='Home'
+    screenOptions={screenOptions}
+    tabBarOptions={tabBarOptions}>
+    <Tabs.Screen name='Home' component={HomeStackNavigator} path='/' />
+    <Tabs.Screen component='Members' path='people' />
+    <Tabs.Screen component='Topics' path='topics' />
+    <Tabs.Screen component='Projects' path='projects' />
+  </Tabs.Navigator>
+}
+
+const App = createStackNavigator()
+function AppNavigator () {
+  const screenOptions = ({ route }) => ({
+    cardStyle: { backgroundColor: '#FFF' }
+  })
+  
+  return <App.Navigator
+    screenOptions={screenOptions}
+    initialRouteName={MAIN_ROUTE_NAME}
+    mode='modal'>
+    <App.Screen
+      name={MAIN_ROUTE_NAME}
+      component={TabsNavigator}
+      path={MAIN_ROUTE_PATH}
+      // used to be navigationOptions on the tabbar
+      options={({ route }) => ({
+        ...createNavigationOptionsForHeader(
+          route,
+          route.state.routes[route.state.index].key
+        )
+      })}
+    /> 
+    <App.Screen
+      name='TopicFeed'
+      component={Feed}
+      path='c/:communitySlugFromLink/topicFeed/:topicName'
+      options={({ route }) => ({
+        title: get('state.params.communityName', route)
+      })}
+    />
+    <App.Screen
+      name='Feed'
+      component={Feed}
+      path='feed/:communityId'
+      options={({ route }) => ({
         // Don't allow opening feed of current community or network in this modal?
         // Back button title should simply say Back?
         title: ''
-      })
-    },
+      })}
+    />
+    {/* Screens that appear outside of tabs: Settings, Messages, etc.   */}
+    <App.Screen
+      name='MemberProfile'
+      component={MemberProfile}
+      path='people/:id'
+      options={({ route }) => ({
+        // Don't allow opening feed of current community or network in this modal?
+        // Back button title should simply say Back?
+        title: ''
+      })}
+    />
+    <App.Screen name='MemberDetails' component={MemberDetails} />
+    <App.Screen name='MemberSkillEditor,' component={MemberSkillEditor,} />    
+    <App.Screen name='NewMessage' component={NewMessage} />
+    <App.Screen name='PostDetails' component={PostDetails} path='post/:id' />
+    <App.Screen name='ProjectMembers' component={ProjectMembers} />
+    <App.Screen name='ItemChooserScreen' component={ItemChooserScreen} />
+    <App.Screen name='UserSettings' component={UserSettings} />
+    <App.Screen name='InvitePeople' component={InvitePeople} />
+    <App.Screen name='ModeratorSettings' component={ModeratorSettings} />
+    <App.Screen name='CommunitySettingsMenu' component={CommunitySettingsMenu} />
+    <App.Screen name='CommunitySettings' component={CommunitySettings} />
+    <App.Screen name='PasswordReset' component={UserSettings} path='settings/password' />
+    <App.Screen name='NotificationsList' component={NotificationsList} />
+    <App.Screen name='ThreadList' component={ThreadList} />
+    <App.Screen name='ThreadParticipants' component={ThreadParticipants} />
+    <App.Screen name='TopicSupportComingSoon' component={TopicSupportComingSoon} />
+    <App.Screen name='SessionCheck' component={SessionCheck} />
+    <App.Screen name='InviteExpired' component={InviteExpired} />
+    <App.Screen name='Signup' component={Signup} />
+    <App.Screen name='SignupFlow1' component={SignupFlow1} />
+    <App.Screen name='SignupFlow2' component={SignupFlow2} />
+    <App.Screen name='SignupFlow3' component={SignupFlow3} />
+    <App.Screen name='SignupFlow4' component={SignupFlow4} />
+    <App.Screen name='SignupFlow5' component={SignupFlow5} />
+    <App.Screen name='Thread' component={Thread} path='thread/:id' />
+    <App.Screen name='UseInvitation' component={JoinCommunity} path='useInvitation/:token' />
+    {/* <App.Screen name='UseAccessCode' component={JoinCommunity} path='useAccessCode/:slug/:accessCode' /> */}
+    <App.Screen name='Loading' component={LoadingScreen} />
+    <App.Screen name='CreateCommunityName' component={CreateCommunityName} />
+    <App.Screen name='CreateCommunityUrl' component={CreateCommunityUrl} />
+    <App.Screen name='CreateCommunityReview' component={CreateCommunityReview} />
+    <App.Screen name='NotificationSettings' component={NotificationSettings} />
+    <App.Screen name='BlockedUsers' component={BlockedUsers} />
+    <App.Screen name='SearchPage' component={SearchPage} />
+  </App.Navigator>
+}
 
-    // Screens that appear outside of tabs: Settings, Messages, etc.  
-    MemberProfile: { screen: MemberProfile, path: 'people/:id' },
-    MemberDetails,
-    MemberSkillEditor,
-    NewMessage,
-    PostDetails: { screen: PostDetails, path: 'post/:id' },
-    PostEditor,
-    ProjectMembers,
-    ItemChooserScreen,
-    UserSettings,
-    InvitePeople,
-    ModeratorSettings,
-    CommunitySettingsMenu,
-    CommunitySettings,
-    PasswordReset: { screen: UserSettings, path: 'settings/password' },
-    NotificationsList,
-    ThreadList,
-    ThreadParticipants,
-    TopicSupportComingSoon,
-    SessionCheck,
-    InviteExpired,
-    Signup,
-    SignupFlow1,
-    SignupFlow2,
-    SignupFlow3,
-    SignupFlow4,
-    SignupFlow5,
-    Thread: { screen: Thread, path: 'thread/:id' },
-    UseInvitation: { screen: JoinCommunity, path: 'useInvitation/:token' },
-    UseAccessCode: { screen: JoinCommunity, path: 'useAccessCode/:slug/:accessCode' },
-    Loading: LoadingScreen,
-    CreateCommunityName,
-    CreateCommunityUrl,
-    CreateCommunityReview,
-    NotificationSettings,
-    BlockedUsers,
-    SearchPage
-  },
-  {
-    defaultNavigationOptions: ({ navigation }) => ({
-      cardStyle: { backgroundColor: '#FFF' }
-    }),
-    mode: 'modal',
-    initialRouteName: MAIN_ROUTE_NAME
-  }
-)
+const AppWithDrawer = createDrawerNavigator()
+function AppWithDrawerNavigator () {
+  return <AppWithDrawer.Navigator
+    initialRouteName='DrawerHome'
+    contentComponent={DrawerMenu}
+    hideStatusBar={true}
+    drawerType='front'
+    drawerWidth={Dimensions.get('window').width * 0.9}>
+    <AppWithDrawer.Screen name='DrawerHome' component={AppNavigator} />
+  </AppWithDrawer.Navigator>
+}
 
-const AppNavigator = createDrawerNavigator({
-  DrawerHome: AppScreensNavigator
-}, {
-  contentComponent: DrawerMenu,
-  initialRouteName: 'DrawerHome',
-  hideStatusBar: true,
-  drawerType: 'front',
-  drawerWidth: Dimensions.get('window').width * 0.9
-})
+const Auth = createStackNavigator()
+function AuthNavigator () =>
+  return <Auth.Navigator initialRouteName='Login'>
+    <Auth.Screen name='Login' component={Login} path='login' />
+    {/* <Auth.Screen name='LoginByPasswordResetToken' component='Login' path='passwordResetTokenLogin/:userId/:loginToken/:nextURL' /> */}
+    <Auth.Screen name='ForgotPassword' component={ForgotPassword} path='reset-password' />
+  </Auth.Navigator>
+}
 
-const AuthNavigator = createStackNavigator({
-  Login: { screen: Login, path: 'login' },
-  LoginByPasswordResetToken: { screen: Login, path: 'passwordResetTokenLogin/:userId/:loginToken/:nextURL' },
-  ForgotPassword: { screen: ForgotPassword, path: 'reset-password' }
-}, {
-  initialRouteName: 'Login'
-})
+export default function () {
+  const signedIn = false // do SessionCheck here
 
-// extendRouter(RootNavigator.router)
-export default createAppContainer(createSwitchNavigator({
-  SessionCheck,
-  AuthNavigator,
-  AppNavigator
-}, {
-  initialRouteName: 'SessionCheck'
-}))
+  return <NavigationContainer>
+    {signedIn
+      ? <AppWithDrawer />
+      : <AuthNavigator />}
+  </NavigationContainer>
+}
