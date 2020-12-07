@@ -15,9 +15,9 @@ export function mapStateToProps (state, props) {
 
   const isBlocked = !!getBlockedUsers(state).find(i => get('id', i) === id)
   const person = getPerson(state, {id})
-  const goToDetails = () => props.navigation.navigate({routeName: 'MemberDetails', params: {id}, key: 'MemberDetails'})
-  const goToEdit = () => props.navigation.navigate({routeName: 'MemberDetails', params: {id, editing: true}, key: 'MemberDetails'})
-  const goToSkills = () => props.navigation.navigate({routeName: 'MemberSkillEditor', params: {id}, key: 'MemberSkillEditor'})
+  const goToDetails = () => props.navigation.navigate('MemberDetails', { id })
+  const goToEdit = () => props.navigation.navigate('MemberDetails', { id, editing: true })
+  const goToSkills = () => props.navigation.navigate('MemberSkillEditor', { id } )
   const currentUser = getMe(state, props)
   const skills = person ? person.skills : []
   const isMe = Number(get('id', currentUser)) === Number(id)
@@ -50,10 +50,10 @@ export function mapDispatchToProps (dispatch, props) {
 }
 
 export function makeOnPressMessages (currentUser, person, navigation) {
-  if (!person || currentUser.id === person.id) return () => navigation.navigate({routeName: 'ThreadList', key: 'ThreadList'})
+  if (!person || currentUser.id === person.id) return () => navigation.navigate('ThreadList')
   const { messageThreadId } = person
-  if (messageThreadId) return () => navigation.navigate({routeName: 'Thread', params: {id: messageThreadId}, key: 'Thread'})
-  return () => navigation.navigate({routeName: 'NewMessage', params: {participants: [person.id]}, key: 'NewMessage'})
+  if (messageThreadId) return () => navigation.navigate('Thread', { id: messageThreadId })
+  return () => navigation.navigate('NewMessage',{ participants: [person.id] })
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
@@ -71,7 +71,7 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
   // settings)
   const updateUserSettings = isMe ? dispatchProps.updateUserSettings : () => {}
 
-  const goToMemberProfile = () => navigation.navigate({routeName: 'MemberProfile', params: {id}, key: 'MemberProfile'})
+  const goToMemberProfile = () => navigation.navigate('MemberProfile', { id })
 
   return {
     ...stateProps,

@@ -37,7 +37,7 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
         const messageThreadId = get('payload.data.findOrCreateThread.id', resp)
         dispatchProps.createMessage(messageThreadId, text, true)
           .then(({ error }) => {
-            if (!error) navigation.navigate({routeName: 'Thread', params: {id: messageThreadId}, key: 'Thread'})
+            if (!error) navigation.navigate('Thread', { id: messageThreadId })
             showLoadingModal(false)
           })
       })

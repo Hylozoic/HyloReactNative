@@ -147,7 +147,7 @@ export function refineActivity ({ action, actor, comment, community, post, meta 
         body: `wrote: ${presentedText(comment.text)}`,
         header: `mentioned you in a comment on`,
         nameInHeader: true,
-        onPress: () => navigate({routeName: 'PostDetails', params: { id: post.id }, key: 'PostDetails'}),
+        onPress: () => navigate('PostDetails', { id: post.id }),
         title: post.title
       }
 
@@ -155,7 +155,7 @@ export function refineActivity ({ action, actor, comment, community, post, meta 
       return {
         body: `wrote: ${presentedText(comment.text)}`,
         header: `New Comment on`,
-        onPress: () => navigate({routeName: 'PostDetails', params: { id: post.id }, key: 'PostDetails'}),
+        onPress: () => navigate('PostDetails', { id: post.id }),
         title: post.title
       }
 
@@ -163,7 +163,7 @@ export function refineActivity ({ action, actor, comment, community, post, meta 
       return {
         body: `wrote: ${presentedText(post.details)}`,
         header: `mentioned you`,
-        onPress: () => navigate({routeName: 'PostDetails', params: { id: post.id }, key: 'PostDetails'}),
+        onPress: () => navigate('PostDetails', { id: post.id }),
         nameInHeader: true
       }
 
@@ -173,7 +173,7 @@ export function refineActivity ({ action, actor, comment, community, post, meta 
       return {
         body: `wrote: ${presentedText(post.details)}`,
         header: `New Post in`,
-        onPress: () => navigate({routeName: 'PostDetails', params: { id: post.id }, key: 'PostDetails'}),
+        onPress: () => navigate('PostDetails', { id: post.id }),
         topic
       }
 
@@ -183,7 +183,7 @@ export function refineActivity ({ action, actor, comment, community, post, meta 
         community: community.name,
         header: `New join request`,
         nameInHeader: true,
-        onPress: () => navigate({routeName: 'Settings', key: 'Settings'})
+        onPress: () => navigate('Settings')
       }
 
     case ACTION_APPROVED_JOIN_REQUEST:
@@ -191,13 +191,13 @@ export function refineActivity ({ action, actor, comment, community, post, meta 
         body: `approved your request to join`,
         community: community.name,
         header: `Join Request Approved`,
-        onPress: () => navigate({routeName: 'Feed', params: { communityId: community.id }, key: 'Feed'})
+        onPress: () => navigate('Feed', { communityId: community.id })
       }
     case ACTION_ANNOUNCEMENT:
       return {
         body: `wrote: ${presentedText(post.title)}`,
         header: `posted an announcement`,
-        onPress: () => navigate({routeName: 'PostDetails', params: { id: post.id }, key: 'PostDetails'}),
+        onPress: () => navigate('PostDetails', { id: post.id }),
         nameInHeader: true
       }
   }

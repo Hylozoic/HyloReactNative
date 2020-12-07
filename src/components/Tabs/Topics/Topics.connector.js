@@ -63,18 +63,18 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
 
   const setTopicSubscribe = (topicId, isSubscribing) =>
     dispatchProps.setTopicSubscribe(topicId, communityId, isSubscribing)
-  const goToTopic = topicName => navigation.navigate({routeName: 'Feed', params: {topicName}, key: 'Feed'})
+  const goToTopic = topicName => navigation.navigate('Feed',{ topicName })
 
   // previous communityId gets passed here so we can get out of
   // network/all communities
   // this is a hack to handle the fact that we have pseudo navigation events (changing community/network)
   // which don't go on the router navigation stack
   const onBackFromComingSoon = () => {
-    navigation.navigate({routeName: 'Home', key: 'Home'})
+    navigation.navigate('Home')
   }
 
   const goToComingSoon = () => {
-    navigation.navigate({routeName: 'TopicSupportComingSoon', params: {onBack: onBackFromComingSoon}, key: 'TopicSupportComingSoon'})
+    navigation.navigate('TopicSupportComingSoon',{ onBack: onBackFromComingSoon })
   }
 
   const shouldRedirect = !!networkId

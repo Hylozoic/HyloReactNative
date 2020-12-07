@@ -17,7 +17,7 @@ export default class Members extends React.Component {
   //   return createNavigationOptionsForHeader(navigation, screenProps.currentTabName)
   // }
 
-  goToInvitePeople = () => this.props.navigation.navigate({routeName: 'InvitePeople', key: 'InvitePeople'})
+  goToInvitePeople = () => this.props.navigation.navigate('InvitePeople')
 
   shouldComponentUpdate (nextProps) {
     // TODO: test if children render...

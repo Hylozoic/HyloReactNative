@@ -37,7 +37,7 @@ export function mapDispatchToProps (dispatch, { navigation }) {
     addModeratorMaker: (id, communityId) => dispatch(addModerator(id, communityId)),
     removeModeratorMaker: (id, isRemoveFromCommunity, communityId) => dispatch(removeModerator(id, communityId, isRemoveFromCommunity)),
     fetchModeratorsMaker: communitySlug => () => dispatch(fetchModerators(communitySlug)),
-    showMember: id => navigation.navigate({routeName: 'MemberProfile', params: {id}, key: 'MemberProfile'}),
+    showMember: id => navigation.navigate('MemberProfile', { id }),
     fetchModeratorSuggestionsMaker: (communityId, autocomplete) => dispatch(fetchModeratorSuggestions(communityId, autocomplete)),
     clearModeratorSuggestions: () => dispatch(clearModeratorSuggestions())
   }

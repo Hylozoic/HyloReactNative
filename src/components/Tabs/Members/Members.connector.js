@@ -88,7 +88,7 @@ export function mapStateToProps (state, props) {
 
 export function mapDispatchToProps (dispatch, props) {
   return {
-    showMember: id => props.navigation.navigate({routeName: 'MemberProfile', params: {id}, key: 'MemberProfile'}),
+    showMember: id => props.navigation.navigate('MemberProfile', { id }),
     setSort: sort => dispatch(setSort(sort)),
     setSearch: search => dispatch(setSearch(search)),
     fetchMembers: opts => dispatch(fetchMembers(opts))

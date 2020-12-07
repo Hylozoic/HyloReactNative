@@ -9,8 +9,8 @@ import styles from './Header.styles'
 export default function createNavigationOptionsForHeader (navigation, title) {
   const openDrawer = () => navigation.openDrawer()
   const showSearch = () => navigation.navigate('SearchPage')
-  const showMessages = () => navigation.navigate({routeName: 'ThreadList', key: 'ThreadList'})
-  const showNotifications = () => navigation.navigate({routeName: 'NotificationsList', key: 'NotificationsList'})
+  const showMessages = () => navigation.navigate('ThreadList')
+  const showNotifications = () => navigation.navigate('NotificationsList')
 
   return {
     headerBackTitle: null,

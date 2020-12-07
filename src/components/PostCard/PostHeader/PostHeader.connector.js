@@ -35,7 +35,7 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     ...ownProps,
     ...stateProps,
     ...dispatchProps,
-    editPost: id => navigation.navigate({routeName: 'PostEditor', params: {id}, key: 'PostEditor'}),
+    editPost: id => navigation.navigate('PostEditor', { id }),
     deletePost: canEdit ? () => deletePost(postId) : null,
     deletePostAndClose: () => {
       if (canEdit) {

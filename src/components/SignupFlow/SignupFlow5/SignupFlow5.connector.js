@@ -51,9 +51,9 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
   }
   const updateSetting = (key, value) => updateUserSettings({[key]: value})
   const updateLocalSetting = (key, value) => updateLocalUserSettings({[key]: value})
-  const makeChanges = () => navigation.navigate({routeName: 'SignupFlow1', key: 'SignupFlow1'})
-  const goToImage = () => navigation.navigate({routeName: 'SignupFlow2', key: 'SignupFlow2'})
-  const goToSkills = () => navigation.navigate({routeName: 'SignupFlow4', key: 'SignupFlow4'})
+  const makeChanges = () => navigation.navigate('SignupFlow1')
+  const goToImage = () => navigation.navigate('SignupFlow2')
+  const goToSkills = () => navigation.navigate('SignupFlow4')
 
   return {
     ...stateProps,

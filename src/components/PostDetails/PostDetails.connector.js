@@ -44,16 +44,16 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     joinProject: () => dispatch(joinProject(id)),
     leaveProject: () => dispatch(leaveProject(id)),
     goToCommunity: makeGoToCommunity(dispatch, navigation),
-    editPost: () => navigate({routeName: 'PostEditor', params: {id}, key: 'PostEditor'}),
-    goToMembers: () => navigate({routeName: 'ProjectMembers', params: {id, members: get('members', post),}, key: 'ProjectMembers'}),
+    editPost: () => navigate('PostEditor', { id }),
+    goToMembers: () => navigate('ProjectMembers', { id, members: get('members', post) }),
     showMember: goToMemberMaker({navigate}),
     showTopic: (topicName, communityId) => {
       // All Communities and Network feed to topic nav
       // currently not supported
       if (communityId === ALL_COMMUNITIES_ID || (isNull(communityId) || isUndefined(communityId))) {
-        return navigate({routeName: 'TopicSupportComingSoon', key: 'TopicSupportComingSoon'})
+        return navigate('TopicSupportComingSoon')
       } else {
-        return navigate({routeName: 'Feed', params: {communityId, topicName}, key: 'Feed'})
+        return navigate('Feed', { communityId, topicName })
       }
     }
   }

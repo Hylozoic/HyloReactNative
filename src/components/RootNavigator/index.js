@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useAsync } from 'react-async-hook'
 import 'react-native-gesture-handler' // is this necessary?
 import { Dimensions } from 'react-native'
-import { NavigationContainer } from '@react-navigation/native'
+import { NavigationContainer, getFocusedRouteNameFromRoute } from '@react-navigation/native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { createDrawerNavigator } from '@react-navigation/drawer'
 import { createStackNavigator } from '@react-navigation/stack'
@@ -90,6 +90,22 @@ function TabsNavigator () {
   </Tabs.Navigator>
 }
 
+function getHeaderTitle(route) {
+  // If the focused route is not found, we need to assume it's the initial screen
+  // This can happen during if there hasn't been any navigation inside the screen
+  // In our case, it's "Feed" as that's the first screen inside the navigator
+  const routeName = getFocusedRouteNameFromRoute(route) ?? 'Feed';
+
+  switch (routeName) {
+    case 'Feed':
+      return 'News feed';
+    case 'Profile':
+      return 'My profile';
+    case 'Account':
+      return 'My account';
+  }
+}
+
 const App = createStackNavigator()
 function AppNavigator () {
   const screenOptions = ({ route }) => ({
@@ -105,16 +121,9 @@ function AppNavigator () {
       name={MAIN_ROUTE_NAME}
       component={TabsNavigator}
       path={MAIN_ROUTE_PATH}
-      // used to be navigationOptions on the tabbar
-      options={({ route, params }) => {
-        console.log('!!!! route:', route.state) // route.state.routeNames[])
-        return {
-          ...createNavigationOptionsForHeader(
-            route,
-            'test'
-          )
-        }
-      }}
+      options={({ route, params }) => ({
+        ...createNavigationOptionsForHeader(route, getFocusedRouteNameFromRoute(route))
+      })}
     /> 
     <App.Screen
       name='TopicFeed'

@@ -60,7 +60,7 @@ export function mapDispatchToProps (dispatch, { navigation }) {
       fetchMemberComments,
       fetchMemberUpvotes
     }, dispatch),
-    showPost: id => navigation.navigate({routeName: 'PostDetails', params: {id}, key: 'PostDetails'})
+    showPost: id => navigation.navigate('PostDetails', { id })
   }
 }
 
