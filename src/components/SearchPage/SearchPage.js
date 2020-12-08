@@ -12,8 +12,8 @@ import { PostTitle } from '../PostCard/PostBody/PostBody'
 import UnwrappedCommentCard from '../Comment'
 
 export default class SearchPage extends React.Component {
-  static navigationOptions = ({ navigation }) => {
-    return header(navigation, {
+  static navigationOptions = ({ navigation, route }) => {
+    return header(navigation, route, {
       title: 'Search',
       options: {
         headerBackTitle: null

@@ -26,11 +26,11 @@ export default class ItemChooserScreen extends React.Component {
     })
   }
 
-  static navigationOptions = ({ navigation }) => {
-    const done = navigation.getParam('done', () => {})
-    const updateItems = navigation.getParam('updateItems')
-    const cancel = navigation.getParam('cancel', () => {})
-    const screenTitle = navigation.getParam('screenTitle')
+  static navigationOptions = ({ navigation, route }) => {
+    const done = route.params.done || (() => {})
+    const updateItems = route.params.updateItems
+    const cancel = route.params.cancel || (() => {})
+    const screenTitle = route.params.screenTitle
     const headerParams = {
       title: screenTitle,
       headerBackButton: cancel
@@ -41,7 +41,7 @@ export default class ItemChooserScreen extends React.Component {
         onPress: done
       }
     }
-    return header(navigation, headerParams)
+    return header(navigation, route, headerParams)
   }
 
   constructor (props) {
@@ -49,12 +49,12 @@ export default class ItemChooserScreen extends React.Component {
     this.props.navigation.setParams({
       done: this.done,
       cancel: this.cancel,
-      chosenItems: this.props.navigation.getParam('initialItems')
+      chosenItems: this.props.route.params.initialItems
     })
   }
 
   cancel = () => {
-    const { navigation } = this.props
+    const { route, navigation } = this.props
     const { initialItems, chosenItems } = route.params
     const changed = !isEqual(chosenItems, initialItems)
     confirmDiscardChanges({
@@ -71,7 +71,7 @@ export default class ItemChooserScreen extends React.Component {
   }
 
   pickItem = pickedItem => {
-    const { navigation } = this.props
+    const { route, navigation } = this.props
     const { pickItem } = route.params
     pickItem(pickedItem)
     navigation.goBack()
@@ -81,9 +81,9 @@ export default class ItemChooserScreen extends React.Component {
     this.props.navigation.setParams({ chosenItems })
 
   render () {
-    const screenTitle = this.props.navigation.getParam('screenTitle')
-    const pickItem = this.props.navigation.getParam('pickItem')
-    const updateItems = this.props.navigation.getParam('updateItems')
+    const screenTitle = this.props.route.params.screenTitle
+    const pickItem = this.props.route.params.pickItem
+    const updateItems = this.props.route.params.updateItems
 
     return <ItemChooser
       {...this.props.route.params}

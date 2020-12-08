@@ -21,13 +21,13 @@ export function editableFields (person) {
 }
 
 export default class MemberDetails extends React.Component {
-  static navigationOptions = ({ navigation }) => {
-    const editing = navigation.getParam('editing', false)
-    const isMe = navigation.getParam('isMe', false)
+  static navigationOptions = ({ navigation, route }) => {
+    const editing = route.params.editing
+    const isMe = route.params.isMe
 
     const subject = !editing && isMe ? 'You' : 'This Member'
     const title = !editing ? `About ${subject}` : 'Edit Your Profile'
-    return header(navigation, { title })
+    return header(navigation, route, { title })
   }
 
   constructor (props) {

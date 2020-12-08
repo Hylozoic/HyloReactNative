@@ -11,8 +11,8 @@ import styles from './NotificationsList.styles'
 export default class NotificationsList extends Component {
   state = {ready: false}
 
-  static navigationOptions = ({ navigation }) =>
-    header(navigation, {
+  static navigationOptions = ({ navigation, route }) =>
+    header(navigation, route, {
       left: 'close',
       title: 'Notifications'
     })

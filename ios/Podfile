@@ -7,7 +7,7 @@ target 'HyloReactNative' do
   # Added
   pod 'Intercom'
   pod 'Mixpanel'
-  pod 'OneSignal', '>= 2.11.2', '< 3.0'
+  # pod 'OneSignal', '>= 2.11.2', '< 3.0'
   pod 'GoogleSignIn', '~> 5.0.2'
 
   config = use_native_modules!
@@ -27,11 +27,11 @@ target 'HyloReactNative' do
   post_install do |installer|
     flipper_post_install(installer)
     # Added to support react-native-intercom (~v15), can likely be removed in later updates
-    installer.pods_project.targets.each do |t|
-      t.build_configurations.each do |config|
-        config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '10.0'
-      end
-    end
+    # installer.pods_project.targets.each do |t|
+    #   t.build_configurations.each do |config|
+    #     config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '10.0'
+    #   end
+    # end
   end
 end
 

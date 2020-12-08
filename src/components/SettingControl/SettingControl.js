@@ -84,6 +84,7 @@ export default class SettingControl extends React.Component {
         onChangeText={onChange}
         value={value}
         secureTextEntry={toggleSecureTextEntry && securePassword}
+        textContentType='oneTimeCode'
         autoCapitalize={autoCapitalize}
         autoCorrect={autoCorrect}
         keyboardType={keyboardType}

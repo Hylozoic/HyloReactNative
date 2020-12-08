@@ -1,3 +1,7 @@
+// THIS COMPONENT IS CURRENTLY BEING BYPASSED (SEE RENDER METHOD)
+
+
+
 import React from 'react'
 import { Keyboard } from 'react-native'
 // import { TabBarBottom } from 'react-navigation'

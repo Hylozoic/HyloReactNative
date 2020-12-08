@@ -7,8 +7,8 @@ import header from 'util/header'
 import styles from './ThreadParticipants.styles'
 
 export default class ThreadParticipants extends React.Component {
-  static navigationOptions = ({ navigation }) =>
-    header(navigation, {
+  static navigationOptions = ({ navigation, route }) =>
+    header(navigation, route, {
       title: 'Participants',
       options: {
         headerBackTitle: null

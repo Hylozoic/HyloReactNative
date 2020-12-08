@@ -11,8 +11,8 @@ import defaultBanner from '../../assets/default-user-banner.jpg'
 import header from 'util/header'
 
 export default class MemberProfile extends React.Component {
-  static navigationOptions = ({ navigation }) =>
-    header(navigation, { title: 'Member' })
+  static navigationOptions = ({ navigation, route }) =>
+    header(navigation, route, { title: 'Member' })
 
   state = {
     flaggingVisible: false

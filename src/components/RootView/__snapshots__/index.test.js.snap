@@ -3,11 +3,6 @@
 exports[`RootView matches the last snapshot 1`] = `
 <View>
   <VersionCheck />
-  <SessionCheck>
-    <DeepLinkHandler
-      onesignalNotification={null}
-    />
-  </SessionCheck>
   <LoadingModal />
   <RootNavigator />
 </View>

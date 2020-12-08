@@ -45,12 +45,12 @@ import styles from './PostEditor.styles'
 export default class PostEditor extends React.Component {
   static contextTypes = {navigate: PropTypes.func}
 
-  static navigationOptions = ({ navigation }) => {
-    const { headerTitle, save, isSaving, confirmLeave } = get('state.params', navigation) || {}
+  static navigationOptions = ({ navigation, route }) => {
+    const { headerTitle, save, isSaving, confirmLeave } = get('params', route) || {}
     const title = isSaving ? 'Saving...' : 'Save'
     const def = () => {}
 
-    return header(navigation, {
+    return header(navigation, route, {
       title: headerTitle,
       right: { disabled: isSaving, text: title, onPress: save || def },
       headerBackButton: () => confirmLeave(navigation.goBack)
@@ -209,7 +209,7 @@ export default class PostEditor extends React.Component {
   }
 
   setLocation = locationData => {
-    const pollingFindOrCreateLocation = this.props.navigation.getParam('pollingFindOrCreateLocation')
+    const pollingFindOrCreateLocation = this.props.route.params.pollingFindOrCreateLocation
     const isPlainTextResult = (get('id', locationData) === 'NEW')
 
     if (isPlainTextResult) {

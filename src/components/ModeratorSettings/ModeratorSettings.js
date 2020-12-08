@@ -12,7 +12,7 @@ import PersonPickerItemRow from '../ItemChooser/PersonPickerItemRow'
 import styles from './ModeratorSettings.styles'
 
 export default class ModeratorSettings extends Component {
-  static navigationOptions = ({navigation}) => header(navigation, {
+  static navigationOptions = ({ navigation, route }) => header(navigation, route, {
     headerBackButton: () => navigation.goBack(),
     title: 'Community Moderators'
   })

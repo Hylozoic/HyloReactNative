@@ -10,7 +10,8 @@ import header from 'util/header'
 import styles from './CommunitySettingsMenu.style'
 
 export default class PostImage extends PureComponent {
-  static navigationOptions = ({navigation}) => header(navigation, {title: 'Community Settings'})
+  static navigationOptions = ({ navigation, route }) =>
+    header(navigation, route, {title: 'Community Settings'})
 
   navigate = (screen) => this.props.navigation.navigate(screen)
 

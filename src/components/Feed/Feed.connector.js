@@ -21,8 +21,7 @@ import getMemberships from '../../store/selectors/getMemberships'
 import getNavigationParam from '../../store/selectors/getNavigationParam'
 
 export function mapStateToProps (state, props) {
-  console.log('!!! Feed.connector:', props)
-  const params = get('state.params', props.navigation) || {}
+  const params = get('params', props.route) || {}
   // NOTE: networkId is only received as a prop (currently via Home)
   const networkId = getCurrentNetworkId(state, props)
   // NOTE: communityId is is received either as a prop (via Home) or as a

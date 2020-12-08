@@ -1,12 +1,12 @@
 import {
+  CHECK_SESSION_AND_SET_SIGNED_IN
+} from 'store/constants'
+import {
   LOGIN,
   LOGIN_WITH_FACEBOOK,
   LOGIN_WITH_GOOGLE
 } from '../../components/Login/actions'
 import { SIGNUP } from '../../components/SignupFlow/SignupFlow.store'
-import {
-  CHECK_SESSION
-} from '../../components/SessionCheck/SessionCheck.store'
 import { omit } from 'lodash/fp'
 
 export default function sessionReducer (state = {}, action) {
@@ -29,19 +29,19 @@ export default function sessionReducer (state = {}, action) {
     case LOGIN:
       return {
         ...omit('loginError', state),
-        loggedIn: true,
+        signedIn: true,
         defaultLoginEmail: meta.email
       }
     case LOGIN_WITH_FACEBOOK:
     case LOGIN_WITH_GOOGLE:
       return {
         ...omit('loginError', state),
-        loggedIn: true
+        signedIn: true
       }
-    case CHECK_SESSION:
-      return {...state, loggedIn: payload}
+    case CHECK_SESSION_AND_SET_SIGNED_IN:
+      return {...state, signedIn: payload}
     case SIGNUP:
-      return {...state, loggedIn: true}
+      return {...state, signedIn: true}
   }
 
   return state

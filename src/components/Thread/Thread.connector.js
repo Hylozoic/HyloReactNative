@@ -35,7 +35,7 @@ export function mapStateToProps (state, props) {
   }
 }
 
-export function mapDispatchToProps (dispatch, { navigation }) {
+export function mapDispatchToProps (dispatch, { navigation, route }) {
   const threadId = route.params.id
   return {
     createMessage: text => dispatch(createMessage(threadId, sanitize(text))),

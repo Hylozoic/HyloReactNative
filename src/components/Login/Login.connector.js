@@ -20,7 +20,7 @@ export function mapStateToProps (state, props) {
   const goToSignup = () => props.navigation.navigate('Signup')
   const goToResetPassword = () => props.navigation.navigate('ForgotPassword')
   return {
-    loggedIn: state.session.loggedIn,
+    signedIn: state.session.signedIn,
     formError,
     bannerMessage: get('route.params.bannerMessage', props),
     pending,

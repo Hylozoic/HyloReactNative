@@ -1,7 +1,5 @@
-import * as React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { useAsync } from 'react-async-hook'
 import 'react-native-gesture-handler' // is this necessary?
+import * as React from 'react'
 import { Dimensions } from 'react-native'
 import { NavigationContainer, getFocusedRouteNameFromRoute } from '@react-navigation/native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
@@ -10,12 +8,10 @@ import { createStackNavigator } from '@react-navigation/stack'
 import { get } from 'lodash/fp'
 import { isIOS } from 'util/platform'
 import { MAIN_ROUTE_NAME, MAIN_ROUTE_PATH } from 'util/navigation'
-import Loading, { LoadingScreen } from '../Loading'
-import LoadingModal from '../LoadingModal'
+import { LoadingScreen } from '../Loading'
 import createNavigationOptionsForHeader from 'components/Tabs/Header/createNavigationOptionsForHeader'
 import TabIcon from '../Tabs/TabIcon'
 import TabLabel from '../Tabs/TabLabel'
-import SessionCheck from '../SessionCheck'
 import Feed from '../Feed'
 import JoinCommunity from '../JoinCommunity'
 import CommunitySettingsMenu from '../CommunitySettingsMenu'
@@ -114,7 +110,7 @@ function AppNavigator () {
       component={Feed}
       path='c/:communitySlugFromLink/topicFeed/:topicName'
       options={({ route }) => ({
-        title: get('state.params.communityName', route)
+        title: get('params.communityName', route)
       })}
     />
     <App.Screen
@@ -156,8 +152,6 @@ function AppNavigator () {
     <App.Screen name='ThreadParticipants' component={ThreadParticipants} />
     <App.Screen name='TopicSupportComingSoon' component={TopicSupportComingSoon} />
     <App.Screen name='InviteExpired' component={InviteExpired} />
-    <App.Screen name='Signup' component={Signup} />
-    <App.Screen name='SignupFlow1' component={SignupFlow1} />
     <App.Screen name='SignupFlow2' component={SignupFlow2} />
     <App.Screen name='SignupFlow3' component={SignupFlow3} />
     <App.Screen name='SignupFlow4' component={SignupFlow4} />
@@ -170,7 +164,7 @@ function AppNavigator () {
     <App.Screen name='CreateCommunityUrl' component={CreateCommunityUrl} />
     <App.Screen name='CreateCommunityReview' component={CreateCommunityReview} />
     <App.Screen name='NotificationSettings' component={NotificationSettings} />
-    <App.Screen name='BlockedUsers' component={BlockedUsers} />
+    <App.Screen name='BlockedUsers' component={BlockedUsers} options={BlockedUsers.navigationOptions} />
     <App.Screen name='SearchPage' component={SearchPage} />
   </App.Navigator>
 }
@@ -188,48 +182,18 @@ function AppWithDrawerNavigator () {
 
 const Auth = createStackNavigator()
 function AuthNavigator () {
-  return <Auth.Navigator initialRouteName='Login'>
+  return <Auth.Navigator initialRouteName='Login' headerMode='screen'>
     <Auth.Screen name='Login' component={Login} path='login' />
     {/* <Auth.Screen name='LoginByPasswordResetToken' component={Login} path='passwordResetTokenLogin/:userId/:loginToken/:nextURL' /> */}
     <Auth.Screen name='ForgotPassword' component={ForgotPassword} path='reset-password' />
+    <App.Screen name='Signup' component={Signup} options={{ headerMode: 'screen' }} />
+    <App.Screen name='SignupFlow1' component={SignupFlow1} />
   </Auth.Navigator>
 }
 
-
-import { getSessionCookie } from '../../util/session'
-
-export const CHECK_SESSION = 'CHECK_SESSION'
-
-export function checkSession () {
-  return {
-    type: CHECK_SESSION,
-    // there's a harmless but confusing bug due to this promise payload that
-    // returns an api payload: CHECK_SESSION_PENDING will get fired twice
-    payload: getSessionCookie().then(cookie => {
-      if (!cookie) return false
-
-      return {
-        api: {
-          path: '/noo/user/status',
-          transform: json => !!json.signedIn
-        }
-      }
-    })
-  }
-}
-
-export async function sessionCheck (dispatch) {
-  return dispatch[0](checkSession)
-}
-
-export default function RootNavigator () {
-  const { loading } = useAsync(sessionCheck, [useDispatch()])
-  const hasSession = useSelector(state => state.session.loggedIn)
-
-  if (loading) return <LoadingModal />
-
+export default function RootNavigator ({ isSignedIn }) {
   return <NavigationContainer>
-    {hasSession
+    {isSignedIn
       ? <AppWithDrawerNavigator />
       : <AuthNavigator />}
   </NavigationContainer>

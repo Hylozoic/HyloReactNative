@@ -12,8 +12,8 @@ import ThreadCard from '../ThreadCard'
 export default class ThreadList extends Component {
   state = {ready: false}
 
-  static navigationOptions = ({ navigation }) =>
-    header(navigation, {
+  static navigationOptions = ({ navigation, route }) =>
+    header(navigation, route, {
       left: 'close',
       title: 'Messages',
       right: {text: 'New', onPress: () => navigation.navigate('NewMessage')},

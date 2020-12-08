@@ -48,7 +48,7 @@ export default class PostDetails extends React.Component {
     commentText: ''
   }
 
-  static navigationOptions = ({ navigation }) => {
+  static navigationOptions = ({ navigation, route }) => {
     return {
       headerTitle: 'Detail'
     }

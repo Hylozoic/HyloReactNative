@@ -13,7 +13,7 @@ import createCommunityHeader from '../util/createCommunityHeader'
 import styles from '../CreateCommunityFlow.styles'
 
 export default class CreateCommunityReview extends React.Component {
-  static navigationOptions = ({ navigation }) => {
+  static navigationOptions = ({ navigation, route }) => {
     const title = 'STEP 3/3'
     return createCommunityHeader(title, navigation)
   }

@@ -7,16 +7,16 @@ import { get } from 'lodash/fp'
 
 const axolotlImage = require('../../assets/Axolotyl_Digging.png')
 
-const goBack = navigation => () => {
-  const onBack = get('state.params.onBack', navigation)
+const goBack = ({ navigation, route }) => () => {
+  const onBack = get('params.onBack', route)
   navigation.goBack()
   onBack && onBack()
 }
 
 export default class TopicSupportComingSoon extends React.Component {
-  static navigationOptions = ({ navigation }) => {
-    const onPress = goBack(navigation)
-    return header(navigation, {
+  static navigationOptions = ({ navigation, route }) => {
+    const onPress = goBack(navigation, route)
+    return header(navigation, route, {
       options: {
         headerLeft: () =>
           <HeaderBackButton onPress={onPress} tintColor={tintColor} />,

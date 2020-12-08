@@ -7,8 +7,8 @@ import header from 'util/header'
 const allCommunitiesLogo = require('../../assets/hylo-merkaba.png')
 
 export default class NotificationSettings extends React.Component {
-  static navigationOptions = ({ navigation }) => {
-    return header(navigation, {
+  static navigationOptions = ({ navigation, route }) => {
+    return header(navigation, route, {
       title: 'Notification Settings',
       options: {
         headerBackTitle: null

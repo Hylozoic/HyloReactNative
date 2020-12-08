@@ -65,7 +65,7 @@ const headerClose = goBack => <HeaderButton onPress={() => goBack()} text='Close
 //   }
 //
 //   export default class WombatDirectory extends Component {
-//     static navigationOptions = ({ navigation }) => header(navigation, headerOptions)
+//     static navigationOptions = ({ navigation, route }) => header(navigation, route, headerOptions)
 //
 // left can either be an object or the string 'close' which will render a close
 // button with onPress={() => goBack()}.
@@ -88,12 +88,12 @@ const headerClose = goBack => <HeaderButton onPress={() => goBack()} text='Close
 // This can all be placed in the connector and passed via mapDispatchToProps.
 // Of course, if you need even more customisation than this, don't use the
 // helper (or override parts of it using setParams in the component).
-export default function header ({ goBack, state }, { headerBackButton, left, right, title, options, disableOnClick } = {}) {
+export default function header ({ goBack }, { params }, { headerBackButton, left, right, title, options, disableOnClick } = {}) {
   const headerOptions = {
-    ...state.params,
+    ...params,
     headerStyle: styles.header,
     headerTintColor: tintColor,
-    headerTitle: title || get('params.title', state),
+    headerTitle: title || get('title', params),
     headerTitleStyle: styles.title,
     headerBackTitle: null,
     ...options

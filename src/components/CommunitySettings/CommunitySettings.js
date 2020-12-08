@@ -12,11 +12,11 @@ import { some } from 'lodash/fp'
 import { showToast } from 'util/toast'
 
 export default class CommunitySettings extends React.Component {
-  static navigationOptions = ({ navigation }) => {
-    const saveChanges = navigation.getParam('saveChanges', () => {})
-    const pendingSave = navigation.getParam('pendingSave', false)
-    const confirmLeave = navigation.getParam('confirmLeave', () => {})
-    return header(navigation, {
+  static navigationOptions = ({ navigation, route }) => {
+    const saveChanges = route.params.saveChanges || (() => {})
+    const pendingSave = route.params.pendingSave
+    const confirmLeave = route.params.confirmLeave || (() => {})
+    return header(navigation, route, {
       headerBackButton: () => confirmLeave(navigation.goBack),
       title: 'Community Information',
       options: {

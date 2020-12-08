@@ -15,9 +15,6 @@ import styles from './MemberList.styles'
 export default class MemberList extends React.Component {
   static defaultProps = {
     // For all
-    screenProps: {
-      currentTabName: ''
-    },
     members: [],
     search: null,
     children: '',

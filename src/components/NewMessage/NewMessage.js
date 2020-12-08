@@ -21,9 +21,9 @@ import PersonPickerItemRow from '../ItemChooser/PersonPickerItemRow'
 import styles from './NewMessage.styles'
 
 export default class NewMessage extends React.Component {
-  static navigationOptions = ({ navigation }) => {
-    const confirmLeave = navigation.getParam('confirmLeave', () => {})
-    return header(navigation, {
+  static navigationOptions = ({ navigation, route }) => {
+    const confirmLeave = route.params.confirmLeave || (() => {})
+    return header(navigation, route, {
       headerBackButton: () => confirmLeave(navigation.goBack),
       title: 'New Message'
     })

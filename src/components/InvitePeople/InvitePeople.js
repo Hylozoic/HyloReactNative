@@ -23,7 +23,7 @@ export const parseEmailList = emails =>
   }))
 
 export default class InvitePeople extends Component {
-  static navigationOptions = ({navigation}) => header(navigation, {
+  static navigationOptions = ({ navigation, route }) => header(navigation, route, {
     title: 'Invite Members',
     headerBackButton: () => navigation.goBack()
   })

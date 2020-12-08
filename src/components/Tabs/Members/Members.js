@@ -13,10 +13,6 @@ import { bannerlinearGradientColors } from 'style/colors'
 import MemberList from '../../MemberList'
 
 export default class Members extends React.Component {
-  // static navigationOptions = ({ navigation, screenProps }) => {
-  //   return createNavigationOptionsForHeader(navigation, screenProps.currentTabName)
-  // }
-
   goToInvitePeople = () => this.props.navigation.navigate('InvitePeople')
 
   shouldComponentUpdate (nextProps) {

@@ -5,8 +5,8 @@ import styles from './BlockedUsers.styles'
 import header from 'util/header'
 
 export default class BlockedUsers extends React.Component {
-  static navigationOptions = ({ navigation }) => {
-    return header(navigation, {
+  static navigationOptions = ({ navigation, route }) => {
+    return header(navigation, route, {
       title: 'Blocked Users',
       options: {
         headerBackTitle: null

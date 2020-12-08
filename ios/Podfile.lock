@@ -102,7 +102,7 @@ PODS:
     - GTMSessionFetcher/Core (= 1.4.0)
   - Intercom (6.0.2)
   - Mixpanel (3.6.2)
-  - OneSignal (2.13.1)
+  - OneSignal (2.16.1)
   - OpenSSL-Universal (1.0.2.20):
     - OpenSSL-Universal/Static (= 1.0.2.20)
   - OpenSSL-Universal/Static (1.0.2.20)
@@ -304,8 +304,8 @@ PODS:
     - React
   - react-native-netinfo (5.9.0):
     - React
-  - react-native-onesignal (3.7.3):
-    - OneSignal (= 2.13.1)
+  - react-native-onesignal (3.9.3):
+    - OneSignal (= 2.16.1)
     - React (< 1.0.0, >= 0.13.0)
   - react-native-restart (0.0.17):
     - React
@@ -633,7 +633,7 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 6f5c8abbab8a9bce4bb3f057e317728ec6182b10
   Intercom: 523417d82ed1a8c635cc7f97b266eb8bd0bd9d85
   Mixpanel: 0a78141d1a073308201f76c55c3e629535e72b47
-  OneSignal: fa98eaa90372bb367b6a4a1c1622ffb9832c7600
+  OneSignal: 5f6514ec2b931306eb067acb124afbb2e49970af
   OpenSSL-Universal: ff34003318d5e1163e9529b08470708e389ffcdd
   RCTRequired: 082f10cd3f905d6c124597fd1c14f6f2655ff65e
   RCTTypeSafety: 8c9c544ecbf20337d069e4ae7fd9a377aadf504b
@@ -654,7 +654,7 @@ SPEC CHECKSUMS:
   react-native-intercom: ddc3a81f883b9089649dbaf4c02e3b3ad271b6d1
   react-native-mixpanel: d644efe1ca33d2646d5cba29e24a13ebc9b37209
   react-native-netinfo: 7b3c53674ea611b26a7788821f137c6d9d3a038b
-  react-native-onesignal: 417b2ae5c3148a47a6ef70b6af443186048b2022
+  react-native-onesignal: f92b6fae16388422f1b5d73b2c31e7000f481ae8
   react-native-restart: d19a0f8d053d065fe64cd2baebb6487111c77149
   react-native-safe-area-context: b6e0e284002381d2ff29fa4fff42b4d8282e3c94
   react-native-webview: cf5527893252b3b036eea024a1da6996f7344c74
@@ -682,6 +682,6 @@ SPEC CHECKSUMS:
   Yoga: 4bd86afe9883422a7c4028c00e34790f560923d6
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: 91a22659d3de09840723206d01eb44d80e789349
+PODFILE CHECKSUM: ea7fc269a7eb0dd232c2b90d42287cfc1f053c6d
 
 COCOAPODS: 1.9.3
