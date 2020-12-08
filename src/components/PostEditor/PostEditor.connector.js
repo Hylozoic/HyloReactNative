@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { get, isEmpty } from 'lodash/fp'
-import { mapWhenFocused } from 'util/connector'
+import { mapWhenFocused } from 'utilnavigation/util/redux
 import { getPresentedPost } from '../../store/selectors/getPost'
 import isPendingFor from '../../store/selectors/isPendingFor'
 import getCanModerate from '../../store/selectors/getCanModerate'

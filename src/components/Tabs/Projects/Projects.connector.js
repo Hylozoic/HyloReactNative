@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import getMe from '../../../store/selectors/getMe'
 import getCurrentCommunityId from '../../../store/selectors/getCurrentCommunityId'
 import getCurrentNetworkId from '../../../store/selectors/getCurrentNetworkId'
-import { mapWhenFocused } from 'util/connector'
+import { mapWhenFocused } from 'utilnavigation/util/redux
 
 export function mapStateToProps (state, props) {
   return {

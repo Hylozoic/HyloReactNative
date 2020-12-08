@@ -7,7 +7,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer'
 import { createStackNavigator } from '@react-navigation/stack'
 import { get } from 'lodash/fp'
 import { isIOS } from 'util/platform'
-import { MAIN_ROUTE_NAME, MAIN_ROUTE_PATH } from 'navigation/routing'
+import { MAIN_ROUTE_NAME, MAIN_ROUTE_PATH } from navigation/util/routing
 import { LoadingScreen } from 'components/Loading'
 import createNavigationOptionsForHeader from 'components/Tabs/Header/createNavigationOptionsForHeader'
 import TabIcon from 'components/Tabs/TabIcon'

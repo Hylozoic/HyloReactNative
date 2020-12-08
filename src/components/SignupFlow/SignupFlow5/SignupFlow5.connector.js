@@ -10,7 +10,7 @@ import {
   getMySkillsFromOrm
 } from '../../SkillEditor/SkillEditor.store'
 import { isEmpty } from 'lodash/fp'
-import { redirectAfterLogin, resetToMainRoute } from 'navigation/routing'
+import { redirectAfterLogin, resetToMainRoute } from navigation/util/routing
 import { getNavigationAction } from '../../DeepLinkHandler/DeepLinkHandler.store'
 
 export function mapStateToProps (state, props) {

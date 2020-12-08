@@ -8,7 +8,7 @@ import { get, isEmpty, filter, findLastIndex } from 'lodash/fp'
 import Avatar from '../Avatar'
 import PopupMenuButton from '../PopupMenuButton'
 import Icon from '../Icon'
-import urlHandler from 'navigation/routing/urlHandler'
+import urlHandler from 'navigation/util/urlHandler'
 import styles from './Comment.styles'
 import { caribbeanGreen } from 'style/colors'
 

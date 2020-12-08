@@ -3,7 +3,7 @@ import HTMLView from 'react-native-htmlview'
 import { Text, View } from 'react-native'
 import { present, sanitize } from 'hylo-utils/text'
 import { any, bool, shape, string } from 'prop-types'
-import urlHandler from 'navigation/routing/urlHandler'
+import urlHandler from 'navigation/util/urlHandler'
 import richTextStyles from '../../style/richTextStyles'
 
 import Avatar from '../Avatar'

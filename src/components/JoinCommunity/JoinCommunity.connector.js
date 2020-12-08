@@ -5,7 +5,7 @@ import getMe from '../../store/selectors/getMe'
 import makeGoToCommunity from '../../store/actions/makeGoToCommunity'
 import getNavigationParam from '../../store/selectors/getNavigationParam'
 import { checkInvitation, useInvitation } from './JoinCommunity.store'
-import { resetToAppRoute, resetToMainRoute } from 'navigation/routing'
+import { resetToAppRoute, resetToMainRoute } from navigation/util/routing
 
 export function mapStateToProps (state, props) {
   const { navigation } = props

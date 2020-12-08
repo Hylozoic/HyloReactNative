@@ -12,7 +12,7 @@ import {
 } from './NotificationsList.store'
 import getMemberships from '../../store/selectors/getMemberships'
 import { HeaderButton } from 'navigation/header'
-import { mapWhenFocused } from 'util/connector'
+import { mapWhenFocused } from 'utilnavigation/util/redux
 
 const NOTIFICATIONS_PAGE_SIZE = 20
 

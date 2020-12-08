@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { omit, get } from 'lodash/fp'
-// import { mapWhenFocused } from 'util/connector'
+// import { mapWhenFocused } from 'utilnavigation/util/redux
 import getMe from '../../../store/selectors/getMe'
 import getCurrentCommunity from '../../../store/selectors/getCurrentCommunity'
 import getCurrentNetwork from '../../../store/selectors/getCurrentNetwork'

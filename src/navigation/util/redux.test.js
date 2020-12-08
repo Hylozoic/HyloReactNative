@@ -1,4 +1,4 @@
-import { mapWhenFocused, mergeWhenFocused } from './connector'
+import { mapWhenFocused, mergeWhenFocused } from './redux'
 
 describe('connector utils', () => {
   let props, func

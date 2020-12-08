@@ -7,7 +7,7 @@ import makeGoToCommunity from '../../store/actions/makeGoToCommunity'
 import getMe from '../../store/selectors/getMe'
 import getBlockedUsers from '../../store/selectors/getBlockedUsers'
 import updateUserSettings from '../../store/actions/updateUserSettings'
-import { mapWhenFocused, mergeWhenFocused } from 'util/connector'
+import { mapWhenFocused, mergeWhenFocused } from 'utilnavigation/util/redux
 
 export function mapStateToProps (state, props) {
   const id = get('route.params.id', props)
