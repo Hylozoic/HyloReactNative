@@ -11,7 +11,7 @@ import {
 } from '../../SkillEditor/SkillEditor.store'
 import { isEmpty } from 'lodash/fp'
 import { redirectAfterLogin, resetToMainRoute } from 'navigation/util/routing'
-import { getNavigationAction } from '../../DeepLinkHandler/DeepLinkHandler.store'
+import { getNavigationAction } from 'navigation/DeepLinkHandler/DeepLinkHandler.store'
 
 export function mapStateToProps (state, props) {
   const { name, email, password, confirmPassword, location, avatarUrl } = getUserSettings(state)

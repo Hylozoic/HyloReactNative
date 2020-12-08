@@ -12,7 +12,7 @@ import { register as registerOneSignal } from 'util/onesignal'
 import registerDevice from '../../store/actions/registerDevice'
 import fetchCurrentUser from 'store/actions/fetchCurrentUser'
 import { redirectAfterLogin } from 'navigation/util/routing'
-import { getNavigationAction } from '../DeepLinkHandler/DeepLinkHandler.store'
+import { getNavigationAction } from 'navigation/DeepLinkHandler/DeepLinkHandler.store'
 
 export function mapStateToProps (state, props) {
   const formError = state.session.loginError
