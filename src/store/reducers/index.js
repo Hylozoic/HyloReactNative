@@ -20,7 +20,6 @@ import PostEditor from '../../components/PostEditor/PostEditor.store'
 import SkillEditor from '../../components/SkillEditor/SkillEditor.store'
 import SignupFlow from '../../components/SignupFlow/SignupFlow.store'
 import SocketListener from '../../components/SocketListener/SocketListener.store'
-import TabBar from '../../navigation/TabBar/TabBar.store'
 import Topics from '../../components/Tabs/Topics/Topics.store'
 import CreateCommunityFlow from '../../components/CreateCommunityFlow/CreateCommunityFlow.store'
 import SearchPage from '../../components/SearchPage/SearchPage.store'
@@ -47,7 +46,6 @@ export const combinedReducers = combineReducers({
   SignupFlow,
   SkillEditor,
   SocketListener,
-  TabBar,
   Topics,
   CreateCommunityFlow
 })
