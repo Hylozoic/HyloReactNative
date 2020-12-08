@@ -1,7 +1,7 @@
 import url from 'url'
 import { routeMatchers, getPathFromURL, MAIN_ROUTE_PATH } from 'util/navigation'
 import qs from 'querystring'
-import RootNavigator from '../RootNavigator'
+import RootNavigator from 'navigation'
 
 export default function convertDeepLinkToAction (path) {
   return RootNavigator.router.getActionForPathAndParams(reformatPath(path))

@@ -1,6 +1,6 @@
 import reducer from './TabBar.store'
 import { SELECT_COMMUNITY, SELECT_NETWORK } from 'store/constants'
-import { ALL_COMMUNITIES_ID } from '../../../store/models/Community'
+import { ALL_COMMUNITIES_ID } from 'store/models/Community'
 
 it('sets isVisible to false if changing to All Communities', () => {
   const action = {

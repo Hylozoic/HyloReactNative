@@ -8,48 +8,48 @@ import { createStackNavigator } from '@react-navigation/stack'
 import { get } from 'lodash/fp'
 import { isIOS } from 'util/platform'
 import { MAIN_ROUTE_NAME, MAIN_ROUTE_PATH } from 'util/navigation'
-import { LoadingScreen } from '../Loading'
+import { LoadingScreen } from 'components/Loading'
 import createNavigationOptionsForHeader from 'components/Tabs/Header/createNavigationOptionsForHeader'
-import TabIcon from '../Tabs/TabIcon'
-import TabLabel from '../Tabs/TabLabel'
-import Feed from '../Feed'
-import JoinCommunity from '../JoinCommunity'
-import CommunitySettingsMenu from '../CommunitySettingsMenu'
-import CommunitySettings from '../CommunitySettings'
-import DrawerMenu from '../DrawerMenu'
-import { Home, Members, Topics, Projects } from '../Tabs' // eslint-disable-line no-unused-vars
-import PostEditor from '../PostEditor'
-import PostDetails from '../PostDetails'
-import ProjectMembers from '../ProjectMembers'
-import ItemChooserScreen from '../ItemChooserScreen'
-import MemberProfile from '../MemberProfile'
-import NotificationSettings from '../NotificationSettings'
-import BlockedUsers from '../BlockedUsers'
-import NotificationsList from '../NotificationsList'
-import InvitePeople from '../InvitePeople'
-import tabStyles from '../Tabs/Tabs.styles'
-import NewMessage from '../NewMessage'
-import ModeratorSettings from '../ModeratorSettings'
-import Thread from '../Thread'
-import ThreadList from '../ThreadList'
-import ThreadParticipants from '../ThreadParticipants'
-import TopicSupportComingSoon from '../TopicSupportComingSoon'
-import MemberDetails from '../MemberProfile/MemberDetails'
-import MemberSkillEditor from '../MemberProfile/MemberSkillEditor'
-import UserSettings from '../UserSettings'
-import SearchPage from '../SearchPage'
-import SignupFlow1 from '../SignupFlow/SignupFlow1'
-import SignupFlow2 from '../SignupFlow/SignupFlow2'
-import SignupFlow3 from '../SignupFlow/SignupFlow3'
-import SignupFlow4 from '../SignupFlow/SignupFlow4'
-import SignupFlow5 from '../SignupFlow/SignupFlow5'
-import Login from '../Login'
-import ForgotPassword from '../ForgotPassword'
-import CreateCommunityName from '../CreateCommunityFlow/CreateCommunityName'
-import CreateCommunityUrl from '../CreateCommunityFlow/CreateCommunityUrl'
-import CreateCommunityReview from '../CreateCommunityFlow/CreateCommunityReview'
-import InviteExpired from '../InviteExpired'
-import Signup from '../Signup'
+import TabIcon from 'components/Tabs/TabIcon'
+import TabLabel from 'components/Tabs/TabLabel'
+import Feed from 'components/Feed'
+import JoinCommunity from 'components/JoinCommunity'
+import CommunitySettingsMenu from 'components/CommunitySettingsMenu'
+import CommunitySettings from 'components/CommunitySettings'
+import DrawerMenu from 'components/DrawerMenu'
+import { Home, Members, Topics, Projects } from 'components/Tabs' // eslint-disable-line no-unused-vars
+import PostEditor from 'components/PostEditor'
+import PostDetails from 'components/PostDetails'
+import ProjectMembers from 'components/ProjectMembers'
+import ItemChooserScreen from 'components/ItemChooserScreen'
+import MemberProfile from 'components/MemberProfile'
+import NotificationSettings from 'components/NotificationSettings'
+import BlockedUsers from 'components/BlockedUsers'
+import NotificationsList from 'components/NotificationsList'
+import InvitePeople from 'components/InvitePeople'
+import tabStyles from 'components/Tabs/Tabs.styles'
+import NewMessage from 'components/NewMessage'
+import ModeratorSettings from 'components/ModeratorSettings'
+import Thread from 'components/Thread'
+import ThreadList from 'components/ThreadList'
+import ThreadParticipants from 'components/ThreadParticipants'
+import TopicSupportComingSoon from 'components/TopicSupportComingSoon'
+import MemberDetails from 'components/MemberProfile/MemberDetails'
+import MemberSkillEditor from 'components/MemberProfile/MemberSkillEditor'
+import UserSettings from 'components/UserSettings'
+import SearchPage from 'components/SearchPage'
+import SignupFlow1 from 'components/SignupFlow/SignupFlow1'
+import SignupFlow2 from 'components/SignupFlow/SignupFlow2'
+import SignupFlow3 from 'components/SignupFlow/SignupFlow3'
+import SignupFlow4 from 'components/SignupFlow/SignupFlow4'
+import SignupFlow5 from 'components/SignupFlow/SignupFlow5'
+import Login from 'components/Login'
+import ForgotPassword from 'components/ForgotPassword'
+import CreateCommunityName from 'components/CreateCommunityFlow/CreateCommunityName'
+import CreateCommunityUrl from 'components/CreateCommunityFlow/CreateCommunityUrl'
+import CreateCommunityReview from 'components/CreateCommunityFlow/CreateCommunityReview'
+import InviteExpired from 'components/InviteExpired'
+import Signup from 'components/Signup'
 
 const HomeStack = createStackNavigator()
 function HomeStackNavigator () {
@@ -138,7 +138,7 @@ function AppNavigator () {
     <App.Screen name='MemberSkillEditor,' component={MemberSkillEditor} />
     <App.Screen name='NewMessage' component={NewMessage} />
     <App.Screen name='PostEditor' component={PostEditor} path='post/:id' />
-    <App.Screen name='PostDetails' component={PostDetails} path='post/:id' />
+    <App.Screen name='PostDetails' component={PostDetails} options={{ title: 'Detail' }} path='post/:id' />
     <App.Screen name='ProjectMembers' component={ProjectMembers} />
     <App.Screen name='ItemChooserScreen' component={ItemChooserScreen} />
     <App.Screen name='UserSettings' component={UserSettings} />
@@ -148,7 +148,7 @@ function AppNavigator () {
     <App.Screen name='CommunitySettings' component={CommunitySettings} />
     <App.Screen name='PasswordReset' component={UserSettings} path='settings/password' />
     <App.Screen name='NotificationsList' component={NotificationsList} />
-    <App.Screen name='ThreadList' component={ThreadList} />
+    <App.Screen name='ThreadList' component={ThreadList} options={ThreadList.navigationOptions} />
     <App.Screen name='ThreadParticipants' component={ThreadParticipants} />
     <App.Screen name='TopicSupportComingSoon' component={TopicSupportComingSoon} />
     <App.Screen name='InviteExpired' component={InviteExpired} />

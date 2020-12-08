@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { View } from 'react-native'
 // import DeepLinkHandler from '../DeepLinkHandler'
 import LoadingModal from '../LoadingModal'
-import RootNavigator from '../RootNavigator'
+import RootNavigator from 'navigation'
 import VersionCheck from '../VersionCheck'
 
 export default function RootView ({

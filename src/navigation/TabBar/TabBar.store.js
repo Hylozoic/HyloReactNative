@@ -1,5 +1,5 @@
 import { SELECT_COMMUNITY, SELECT_NETWORK } from 'store/constants'
-import { ALL_COMMUNITIES_ID } from '../../../store/models/Community'
+import { ALL_COMMUNITIES_ID } from 'store/models/Community'
 
 export default function reducer (state = {isVisible: true}, action) {
   if (action.type === SELECT_COMMUNITY) {
