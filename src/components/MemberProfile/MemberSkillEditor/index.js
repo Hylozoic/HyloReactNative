@@ -6,7 +6,7 @@ import KeyboardFriendlyView from '../../KeyboardFriendlyView'
 import SkillEditor from '../../SkillEditor'
 import styles from './MemberSkillEditor.styles'
 import { keyboardAvoidingViewProps as kavProps } from 'util/viewHelpers'
-import header from 'util/header'
+import header from 'navigation/header'
 
 export default class SignupFlow4 extends React.Component {
   static navigationOptions = ({ navigation, route }) =>

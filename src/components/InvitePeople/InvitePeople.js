@@ -3,7 +3,7 @@ import { Clipboard, Dimensions, Text, View, TextInput, TouchableOpacity, ScrollV
 import { TabView, TabBar } from 'react-native-tab-view'
 import KeyboardFriendlyView from '../KeyboardFriendlyView'
 import Button from '../Button'
-import header from 'util/header'
+import header from 'navigation/header'
 import { get, isEmpty, compact } from 'lodash/fp'
 import { humanDate } from 'hylo-utils/text'
 import styles from './InvitePeople.styles'

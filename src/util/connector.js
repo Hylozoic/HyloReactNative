@@ -1,7 +1,3 @@
-/**
- * @providesModule util/connector
- */
-
 // Selectively call either `mapStateToProps` or `mapDispatchToProps` if
 // `isFocused` is set. This allows us to avoid potentially expensive selector
 // calls and other preprocessing tasks for screens that are currently

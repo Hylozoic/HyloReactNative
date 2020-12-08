@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { FlatList, TouchableOpacity, View, Text } from 'react-native'
 
-import header from 'util/header'
+import header from 'navigation/header'
 import { LoadingScreen } from '../Loading'
 import NotificationCard from '../NotificationCard'
 import CreateCommunityNotice from '../CreateCommunityNotice'

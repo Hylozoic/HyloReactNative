@@ -3,7 +3,7 @@ import { InteractionManager, Linking } from 'react-native'
 import * as url from 'url'
 import {
   isInvitationLink, redirectAfterLogin, resetToAppRoute, resetToMainRoute
-} from 'util/navigation'
+} from 'navigation/routing'
 import convertDeepLinkToAction from './convertDeepLinkToAction'
 import { isDev } from '../../config'
 

@@ -1,7 +1,3 @@
-/**
- * @providesModule store/reducers/queryResults
- */
-
 // The purpose of this reducer is to provide a general-purpose store for keeping
 // track of the ordering of lists of data fetched from the API.
 //

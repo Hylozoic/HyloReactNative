@@ -1,7 +1,3 @@
-/**
- * @providesModule store/actions/upload
- */
-
 import apiHost from 'util/apiHost'
 import Request from 'util/Request'
 import { UPLOAD } from 'store/constants'

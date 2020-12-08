@@ -1,7 +1,3 @@
-/**
- * @providesModule util/apiHost
- */
-
 import { isIOS } from 'util/platform'
 import { isDev } from '../config'
 

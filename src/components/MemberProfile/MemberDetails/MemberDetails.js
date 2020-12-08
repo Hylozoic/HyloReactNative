@@ -13,7 +13,7 @@ import Icon from '../../Icon'
 import Loading from '../../Loading'
 import MemberHeader, { Control } from '../MemberHeader'
 import StarIcon from '../../StarIcon'
-import header, { HeaderButton } from 'util/header'
+import header, { HeaderButton } from 'navigation/header'
 import styles from './MemberDetails.styles'
 
 export function editableFields (person) {

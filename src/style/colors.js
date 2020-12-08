@@ -1,7 +1,3 @@
-/**
- * @providesModule style/colors
- */
-
 import tinycolor from 'tinycolor2'
 
 // when adding a color, use http://chir.ag/projects/name-that-color/ to name it.

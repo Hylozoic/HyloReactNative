@@ -13,7 +13,7 @@ import moment from 'moment'
 import { validateTopicName } from 'hylo-utils/validators'
 import { rhino30 } from 'style/colors'
 import { showToast, hideToast } from 'util/toast'
-import header from 'util/header'
+import header from 'navigation/header'
 import confirmDiscardChanges from '../../util/confirmDiscardChanges'
 import { MAX_TITLE_LENGTH } from './PostEditor.store'
 // ProjectMembers Chooser

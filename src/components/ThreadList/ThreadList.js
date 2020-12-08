@@ -3,7 +3,7 @@ import { FlatList, TouchableOpacity, View, Text } from 'react-native'
 import { isEmpty } from 'lodash/fp'
 
 import { getSocket } from 'util/websockets'
-import header from 'util/header'
+import header from 'navigation/header'
 import NotificationOverlay from '../NotificationOverlay'
 import { LoadingScreen } from '../Loading'
 import styles from './ThreadList.styles'

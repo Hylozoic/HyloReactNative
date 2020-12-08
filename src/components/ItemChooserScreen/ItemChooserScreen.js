@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { isEqual, isFunction } from 'lodash/fp'
 import confirmDiscardChanges from '../../util/confirmDiscardChanges'
-import header from 'util/header'
+import header from 'navigation/header'
 import ItemChooser from '../ItemChooser'
 
 export default class ItemChooserScreen extends React.Component {

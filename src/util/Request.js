@@ -1,7 +1,3 @@
-/**
- * @providesModule util/Request
- */
-
 // adapted from https://raw.githubusercontent.com/benjreinhart/react-native-aws3/master/src/Request.js
 // https://github.com/benjreinhart/react-native-aws3/blob/master/LICENSE.txt
 

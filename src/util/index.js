@@ -1,7 +1,3 @@
-/**
- * @providesModule util/index
- */
-
 import { last, eq, omitBy } from 'lodash'
 
 export function isPromise (value) {

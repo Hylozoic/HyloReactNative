@@ -1,7 +1,3 @@
-/**
- * @providesModule util/websockets
- */
-
 import socketIo from 'socket.io-client'
 import sailsIo from 'sails.io.js'
 import apiHost from '../apiHost'

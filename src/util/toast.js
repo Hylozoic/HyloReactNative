@@ -1,6 +1,3 @@
-/**
- * @providesModule util/toast
- */
 import Toast from 'react-native-root-toast'
 import { StyleSheet } from 'react-native'
 import { defaults } from 'lodash'

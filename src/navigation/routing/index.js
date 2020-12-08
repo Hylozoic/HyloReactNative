@@ -1,7 +1,3 @@
-/**
- * @providesModule util/navigation
- */
-
 import url from 'url'
 import pathMatch from 'path-match'
 import { get } from 'lodash/fp'

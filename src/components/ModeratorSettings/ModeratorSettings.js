@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Alert, FlatList, Text, View, TouchableOpacity } from 'react-native'
 import { get, isEmpty } from 'lodash/fp'
-import header from 'util/header'
+import header from 'navigation/header'
 import Avatar from '../Avatar'
 import Icon from '../Icon'
 import LoadingScreen from '../Loading'

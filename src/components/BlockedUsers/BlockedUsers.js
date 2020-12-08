@@ -2,7 +2,7 @@ import React from 'react'
 import { View, Text, ScrollView, TouchableOpacity, Alert } from 'react-native'
 import { LoadingScreen } from '../Loading'
 import styles from './BlockedUsers.styles'
-import header from 'util/header'
+import header from 'navigation/header'
 
 export default class BlockedUsers extends React.Component {
   static navigationOptions = ({ navigation, route }) => {

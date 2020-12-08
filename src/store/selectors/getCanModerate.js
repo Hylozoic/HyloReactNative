@@ -1,6 +1,3 @@
-/**
- * @providesModule store/selectors/getCanModerate
- */
 import getMe from './getMe'
 import getCurrentCommunity from './getCurrentCommunity'
 

@@ -1,7 +1,3 @@
-/**
- * @providesModule store/constants
- */
-
 export const BLOCK_USER = 'BLOCK_USER'
 export const CHECK_SESSION_AND_SET_SIGNED_IN = 'CHECK_SESSION_AND_SET_SIGNED_IN'
 export const EXTRACT_MODEL = 'EXTRACT_MODEL'

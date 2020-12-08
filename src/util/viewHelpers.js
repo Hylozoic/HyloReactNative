@@ -1,7 +1,3 @@
-/**
- * @providesModule util/viewHelpers
- */
-
 import { isIOS } from './platform'
 
 export const keyboardAvoidingViewProps = {

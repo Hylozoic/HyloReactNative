@@ -3,7 +3,7 @@ import React from 'react'
 import { View } from 'react-native'
 import styles from './ProjectMembers.styles'
 import MemberList from '../MemberList/MemberList'
-import header from 'util/header'
+import header from 'navigation/header'
 import goToMemberMaker from '../../store/actions/goToMemberMaker'
 
 export default class ProjectMembers extends React.Component {

@@ -3,7 +3,7 @@ import { View, ScrollView, Text, TouchableOpacity } from 'react-native'
 import Loading from '../Loading'
 import Avatar from '../Avatar'
 import { isEmpty } from 'lodash/fp'
-import header from 'util/header'
+import header from 'navigation/header'
 import styles from './ThreadParticipants.styles'
 
 export default class ThreadParticipants extends React.Component {

@@ -1,6 +1,3 @@
-/**
- * @providesModule util/header
- */
 import React, { PureComponent } from 'react'
 import { StyleSheet, Text, TouchableOpacity } from 'react-native'
 import { HeaderBackButton } from '@react-navigation/stack'

@@ -1,7 +1,3 @@
-/**
- * @providesModule util/onesignal
- */
-
 import OneSignal from 'react-native-onesignal'
 import { isIOS } from 'util/platform'
 

@@ -6,7 +6,7 @@ import {
   View
 } from 'react-native'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
-import header from 'util/header'
+import header from 'navigation/header'
 import styles from './CommunitySettingsMenu.style'
 
 export default class PostImage extends PureComponent {

@@ -1,5 +1,5 @@
 import url from 'url'
-import { routeMatchers, getPathFromURL, MAIN_ROUTE_PATH } from 'util/navigation'
+import { routeMatchers, getPathFromURL, MAIN_ROUTE_PATH } from 'navigation/routing'
 import qs from 'querystring'
 import RootNavigator from 'navigation'
 

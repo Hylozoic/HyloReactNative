@@ -1,7 +1,3 @@
-/**
- * @providesModule util/testing
- */
-
 // Temporary brain-dead test event simulation, until either Enzyme or
 // react-dom/test-utils decides to make React Native a first-class citizen
 //

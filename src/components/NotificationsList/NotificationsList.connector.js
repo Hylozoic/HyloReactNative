@@ -11,7 +11,7 @@ import {
   updateNewNotificationCount
 } from './NotificationsList.store'
 import getMemberships from '../../store/selectors/getMemberships'
-import { HeaderButton } from 'util/header'
+import { HeaderButton } from 'navigation/header'
 import { mapWhenFocused } from 'util/connector'
 
 const NOTIFICATIONS_PAGE_SIZE = 20
