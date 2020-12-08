@@ -11,7 +11,7 @@ import { getPending } from './Login.store'
 import { register as registerOneSignal } from 'util/onesignal'
 import registerDevice from '../../store/actions/registerDevice'
 import fetchCurrentUser from 'store/actions/fetchCurrentUser'
-import { redirectAfterLogin } from navigation/util/routing
+import { redirectAfterLogin } from 'navigation/util/routing'
 import { getNavigationAction } from '../DeepLinkHandler/DeepLinkHandler.store'
 
 export function mapStateToProps (state, props) {

@@ -4,7 +4,7 @@ import { get } from 'lodash/fp'
 import getMe from '../../../store/selectors/getMe'
 import getCurrentCommunityId from '../../../store/selectors/getCurrentCommunityId'
 import getCurrentNetworkId from '../../../store/selectors/getCurrentNetworkId'
-import { mapWhenFocused } from 'utilnavigation/util/redux
+import { mapWhenFocused } from 'navigation/util/redux'
 
 export function mapStateToProps (state, props) {
   return {

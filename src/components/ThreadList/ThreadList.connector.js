@@ -5,7 +5,7 @@ import { get } from 'lodash/fp'
 import fetchThreads, { FETCH_THREADS } from '../../store/actions/fetchThreads'
 import getMe from '../../store/selectors/getMe'
 import { getThreads, getThreadsHasMore, updateLastViewed } from './ThreadList.store'
-import { mapWhenFocused, mergeWhenFocused } from 'utilnavigation/util/redux
+import { mapWhenFocused, mergeWhenFocused } from 'navigation/util/redux'
 
 export function mapStateToProps (state, props) {
   const threads = getThreads(state, props)

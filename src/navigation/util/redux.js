@@ -8,7 +8,7 @@
 //
 // Use:
 //
-//   import { mapWhenFocused } from 'utilnavigation/util/redux
+//   import { mapWhenFocused } from 'navigation/util/redux'
 //
 //   // ...
 //
