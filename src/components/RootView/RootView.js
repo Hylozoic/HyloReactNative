@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
 import { View } from 'react-native'
-// import DeepLinkHandler from '../DeepLinkHandler'
-import LoadingModal from '../LoadingModal'
 import RootNavigator from 'navigation'
+// import DeepLinkHandler from 'navigation/DeepLinkHandler'
+import LoadingModal from '../LoadingModal'
 import VersionCheck from '../VersionCheck'
 
 export default function RootView ({
