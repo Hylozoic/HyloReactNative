@@ -9,7 +9,7 @@ export default async function checkSessionAndSetSignedIn () {
       transform: json => !!json.signedIn
     }
   } : false
-  
+
   return {
     type: CHECK_SESSION_AND_SET_SIGNED_IN,
     payload

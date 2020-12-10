@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useMemo } from 'react'
 import { View } from 'react-native'
 import RootNavigator from 'navigation'
 // import DeepLinkHandler from 'navigation/DeepLinkHandler'
@@ -11,14 +11,14 @@ export default function RootView ({
   setupSessionWithRetry,
   openedPushNotification
 }) {
-  useEffect(() => { setupSessionWithRetry() }, [])
+  useMemo(() => { setupSessionWithRetry() }, [])
 
   if (loading) return <LoadingModal />
-  
+
   // TODO: Deeplink handling using openedPushNotification
 
   return <View style={{flex: 1}}>
     <VersionCheck />
-    <RootNavigator isSignedIn={signedIn} />  
+    <RootNavigator isSignedIn={signedIn} />
   </View>
 }

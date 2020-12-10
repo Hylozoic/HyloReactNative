@@ -1,4 +1,5 @@
 import React from 'react'
+import NetInfo from '@react-native-community/netinfo'
 import { get } from 'lodash/fp'
 import {
   ScrollView,
@@ -10,7 +11,6 @@ import {
 } from 'react-native'
 import SafeAreaView from 'react-native-safe-area-view'
 import { isIOS } from 'util/platform'
-import NetInfo from "@react-native-community/netinfo";
 import validator from 'validator'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
 import AppleLoginButton from './AppleLoginButton'
@@ -80,8 +80,8 @@ export default class Login extends React.Component {
     this.unsubscribeNetInfo()
   }
 
-  handleConnectivityChange = connectionState => {
-    if (connectionState.isConnected !== this.state.isConnected) this.setState({ isConnected })
+  handleConnectivityChange = ({ isConnected }) => {
+    if (isConnected !== this.state.isConnected) this.setState({ isConnected })
   }
 
   render () {

@@ -29,7 +29,7 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
       // automatically retry -- this prevents us from getting stuck with
       // nothing to interact with if we start the app while temporarily offline
       return new Promise(resolve =>
-        setTimeout(() => resolve(checkSessionWithRetry()), 1000))
+        setTimeout(() => resolve(setupSessionWithRetry()), 1000))
     } else if (signedIn) {
       return dispatchProps.fetchCurrentUser()
     }

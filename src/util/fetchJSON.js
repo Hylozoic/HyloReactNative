@@ -12,8 +12,7 @@ export default function fetchJSON (path, params, options = {}) {
     },
     body: JSON.stringify(params),
     withCredentials: true
-  })
-  .then(resp => {
+  }).then(resp => {
     let { status, statusText, url } = resp
     if (status === 200) {
       // FIXME: this doesn't need to happen every time
