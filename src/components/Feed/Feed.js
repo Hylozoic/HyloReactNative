@@ -30,6 +30,7 @@ export default class Feed extends React.Component {
       community,
       network,
       currentUser,
+      route,
       navigation,
       showPost,
       screenProps,
@@ -79,6 +80,7 @@ export default class Feed extends React.Component {
               theme={theme} />
             {this.props.belowBannerComponent}
           </View>}
+        route={route}
         navigation={navigation}
         screenProps={screenProps}
         showMember={this.handleShowMember}
