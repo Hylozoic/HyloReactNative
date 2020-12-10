@@ -17,7 +17,6 @@ export default class ProjectMembers extends React.Component {
     return <View style={styles.container}>
       <MemberList
         members={members}
-        screenProps={this.props.screenProps}
         hideSortOptions
         showMember={showMember}
       />

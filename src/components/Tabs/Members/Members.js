@@ -34,7 +34,6 @@ export default class Members extends React.Component {
     return <View style={styles.container}>
       <MemberList isServerSearch
         {...pick([
-          'screenProps',
           'hasMore',
           'members',
           'pending',
