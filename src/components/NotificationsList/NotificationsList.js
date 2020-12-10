@@ -9,13 +9,7 @@ import CreateCommunityNotice from '../CreateCommunityNotice'
 import styles from './NotificationsList.styles'
 
 export default class NotificationsList extends Component {
-  state = {ready: false}
-
-  static navigationOptions = ({ navigation, route }) =>
-    header(navigation, route, {
-      left: 'close',
-      title: 'Notifications'
-    })
+  state = { ready: false }
 
   componentDidMount () {
     const { fetchNotifications, setRightButton, updateNewNotificationCount } = this.props

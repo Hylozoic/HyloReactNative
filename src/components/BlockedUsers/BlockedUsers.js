@@ -5,15 +5,6 @@ import styles from './BlockedUsers.styles'
 import header from 'navigation/header'
 
 export default class BlockedUsers extends React.Component {
-  static navigationOptions = ({ navigation, route }) => {
-    return header(navigation, route, {
-      title: 'Blocked Users',
-      options: {
-        headerBackTitle: null
-      }
-    })
-  }
-
   unBlockUser = userId => () => this.props.unBlockUser(userId)
 
   render () {

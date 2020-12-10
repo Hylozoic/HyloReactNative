@@ -10,6 +10,7 @@ import { isIOS } from 'util/platform'
 import { MAIN_ROUTE_NAME, MAIN_ROUTE_PATH } from 'navigation/util/routing'
 import { LoadingScreen } from 'components/Loading'
 import createNavigationOptionsForHeader from 'components/Tabs/Header/createNavigationOptionsForHeader'
+import header from 'navigation/header'
 import TabIcon from 'components/Tabs/TabIcon'
 import TabLabel from 'components/Tabs/TabLabel'
 import Feed from 'components/Feed'
@@ -147,7 +148,8 @@ function AppNavigator () {
     <App.Screen name='CommunitySettingsMenu' component={CommunitySettingsMenu} />
     <App.Screen name='CommunitySettings' component={CommunitySettings} />
     <App.Screen name='PasswordReset' component={UserSettings} path='settings/password' />
-    <App.Screen name='NotificationsList' component={NotificationsList} />
+    <App.Screen name='NotificationsList' component={NotificationsList} options={({ navigation, route }) =>
+      header(navigation, route, { left: 'close', title: 'Notifications' })} />
     <App.Screen name='ThreadList' component={ThreadList} options={ThreadList.navigationOptions} />
     <App.Screen name='ThreadParticipants' component={ThreadParticipants} />
     <App.Screen name='TopicSupportComingSoon' component={TopicSupportComingSoon} />
@@ -163,8 +165,8 @@ function AppNavigator () {
     <App.Screen name='CreateCommunityName' component={CreateCommunityName} />
     <App.Screen name='CreateCommunityUrl' component={CreateCommunityUrl} />
     <App.Screen name='CreateCommunityReview' component={CreateCommunityReview} />
-    <App.Screen name='NotificationSettings' component={NotificationSettings} />
-    <App.Screen name='BlockedUsers' component={BlockedUsers} options={BlockedUsers.navigationOptions} />
+    <App.Screen name='NotificationSettings' component={NotificationSettings} options={{ title: 'Notification Settings'}} />
+    <App.Screen name='BlockedUsers' component={BlockedUsers} options={{ title: 'Blocked Users'}} />
     <App.Screen name='SearchPage' component={SearchPage} />
   </App.Navigator>
 }
@@ -175,7 +177,9 @@ function AppWithDrawerNavigator () {
     drawerContent={props => <DrawerMenu {...props} />}
     hideStatusBar
     drawerType='front'
-    drawerWidth={Dimensions.get('window').width * 0.9}>
+    drawerStyle={{
+      width: Dimensions.get('window').width * 0.9
+    }}>
     <AppWithDrawer.Screen name='DrawerHome' component={AppNavigator} />
   </AppWithDrawer.Navigator>
 }

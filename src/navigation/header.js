@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 import { StyleSheet, Text, TouchableOpacity } from 'react-native'
 import { HeaderBackButton } from '@react-navigation/stack'
 import { rhino60, rhino20, havelockBlue } from 'style/colors'
-import Icon from '../components/Icon'
+import Icon from 'components/Icon'
 import { get } from 'lodash/fp'
 
 export const tintColor = rhino60
@@ -90,19 +90,25 @@ export default function header ({ goBack }, { params }, { headerBackButton, left
     ...params,
     headerStyle: styles.header,
     headerTintColor: tintColor,
-    headerTitle: title || get('title', params),
+    title: title || get('title', params),
     headerTitleStyle: styles.title,
+    // Defaults
     headerBackTitle: null,
+    headerLeft: null,
+    headerRight: null,
     ...options
   }
   if (left) {
-    headerOptions.headerLeft = left === 'close' ? headerClose(goBack) : <HeaderButton {...left} disableOnClick={disableOnClick} />
+    headerOptions.headerLeft = () => 
+      left === 'close'
+        ? headerClose(goBack)
+        : <HeaderButton {...left} disableOnClick={disableOnClick} />
     headerOptions.headerTitleStyle = [ styles.title, styles.center ]
   }
-  if (right) headerOptions.headerRight = <HeaderButton {...right} disableOnClick={disableOnClick} />
+  if (right) headerOptions.headerRight = () => <HeaderButton {...right} disableOnClick={disableOnClick} />
 
   if (headerBackButton) {
-    headerOptions.headerLeft = <HeaderBackButton
+    headerOptions.headerLeft = () => <HeaderBackButton
       onPress={headerBackButton}
       tintColor={tintColor} />
   }
