@@ -31,7 +31,7 @@ export default class LoadingModal extends React.Component {
 
     if (!visible) return null
 
-    return <Animated.View style={{
+    return <Animated.View useNativeDriver style={{
       ...styles.container,
       opacity: opacityAnim
     }}>
