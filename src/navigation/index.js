@@ -95,7 +95,6 @@ function AppNavigator () {
 
   return <App.Navigator
     screenOptions={screenOptions}
-    initialRouteName={MAIN_ROUTE_NAME}
     mode='modal'
     headerMode='screen'>
     <App.Screen
@@ -186,8 +185,8 @@ function AppWithDrawerNavigator () {
 
 const Auth = createStackNavigator()
 function AuthNavigator () {
-  return <Auth.Navigator initialRouteName='Login' headerMode='screen'>
-    <Auth.Screen name='Login' component={Login} path='login' />
+  return <Auth.Navigator headerMode='screen'>
+    <Auth.Screen name='Login' component={Login} path='login' options={{animationEnabled: false}} />
     {/* <Auth.Screen name='LoginByPasswordResetToken' component={Login} path='passwordResetTokenLogin/:userId/:loginToken/:nextURL' /> */}
     <Auth.Screen name='ForgotPassword' component={ForgotPassword} path='reset-password' />
     <App.Screen name='Signup' component={Signup} options={{ headerMode: 'screen' }} />

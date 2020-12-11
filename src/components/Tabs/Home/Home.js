@@ -15,7 +15,6 @@ export default class Home extends React.Component {
       communityId={communityId}
       route={route}
       navigation={navigation}
-      networkId={networkId}
-      screenProps={this.props.screenProps} />
+      networkId={networkId} />
   }
 }

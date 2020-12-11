@@ -33,7 +33,6 @@ export default class Feed extends React.Component {
       route,
       navigation,
       showPost,
-      screenProps,
       topicName,
       topicSubscribed,
       postsTotal,
@@ -82,7 +81,6 @@ export default class Feed extends React.Component {
           </View>}
         route={route}
         navigation={navigation}
-        screenProps={screenProps}
         showMember={this.handleShowMember}
         showTopic={this.handleShowTopic}
         topicName={topicName} 

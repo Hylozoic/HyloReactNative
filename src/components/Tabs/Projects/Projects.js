@@ -15,16 +15,16 @@ export default class Projects extends React.Component {
   }
 
   render () {
-    const { communityId, currentUser, navigation, networkId } = this.props
+    const { communityId, currentUser, route, navigation, networkId } = this.props
 
     const isNetwork = !!networkId
 
     if (!currentUser) return <Loading style={{flex: 1}} />
     return <Feed
       communityId={communityId}
+      route={route}
       navigation={navigation}
       networkId={networkId}
-      screenProps={this.props.screenProps}
       belowBannerComponent={!isNetwork && <CreateProjectButton createProject={this.goToCreateProject} />}
       hidePostPrompt
       isProjectFeed />

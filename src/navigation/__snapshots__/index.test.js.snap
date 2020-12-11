@@ -3,11 +3,6 @@
 exports[`matches snapshot 1`] = `
 <NavigationContainer
   onNavigationStateChange={[Function]}
-  screenProps={
-    Object {
-      "currentTabName": "Home",
-    }
-  }
   uriPrefix="lala"
 />
 `;

@@ -1,5 +1,6 @@
 import React from 'react'
 import { FlatList, Text, View } from 'react-native'
+import { getFocusedRouteNameFromRoute } from '@react-navigation/native'
 import { find, get, isEmpty, includes } from 'lodash/fp'
 import { didPropsChange } from 'util/index'
 import styles from './FeedList.styles'
@@ -29,16 +30,12 @@ export default class FeedList extends React.Component {
     // tab is actually visible.
     //
     // This implementation causes a pretty strong coupling between FeedList and
-    // the Home tab, both by hard-coding the tab name and by using screenProps,
-    // which we had to pass down from the Home component through Feed. This will
-    // have to be reworked to allow opening topic feeds in the Topic tab, e.g.
-    // const isAFeedTab = props => {
-    //   return includes(props.screenProps.currentTabName, ['Home', 'Projects'])
-    // }
-
-    // if (!isAFeedTab(this.props)) {
-    //   return
-    // }
+    // the Home tab by hard-coding the tab name. This will have to be reworked to
+    // allow opening topic feeds in the Topic tab, e.g.
+    const isAFeedTab = props => includes(props.route.name, ['Home', 'Projects'])
+    if (!isAFeedTab(this.props)) {
+      return
+    }
     if (!prevProps.isFocused && this.props.isFocused) {
       return this.fetchOrShowCached()
     }
