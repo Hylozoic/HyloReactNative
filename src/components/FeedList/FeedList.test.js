@@ -24,7 +24,7 @@ describe('FeedList', () => {
   it('fetches if the Home tab has just become visible', () => {
     const fetchPosts = jest.fn()
     const { root: { instance } } = TestRenderer.create(<FeedList
-      screenProps={{currentTabName: 'Home'}}
+      route={{ name: 'Home' }}
       fetchPosts={fetchPosts} />)
 
     instance.componentDidUpdate({screenProps: {currentTabName: 'Members'}})
@@ -34,7 +34,7 @@ describe('FeedList', () => {
   it('does not fetch if the Home tab is not visible', () => {
     const fetchPosts = jest.fn()
     const { root: { instance } } = TestRenderer.create(<FeedList
-      screenProps={{currentTabName: 'Members'}}
+      route={{ name: 'Members' }}
       fetchPosts={fetchPosts} />)
 
     instance.componentDidUpdate({screenProps: {}})
@@ -44,10 +44,10 @@ describe('FeedList', () => {
   it('does not fetch if the Home tab is and was visible', () => {
     const fetchPosts = jest.fn()
     const { root: { instance } } = TestRenderer.create(<FeedList
-      screenProps={{currentTabName: 'Home'}}
+      route={{ name: 'Home' }}
       fetchPosts={fetchPosts} />)
 
-    instance.componentDidUpdate({screenProps: {currentTabName: 'Home'}})
+    instance.componentDidUpdate({route: { name: 'Home' }})
     expect(fetchPosts).toHaveBeenCalledTimes(1)
   })
 })

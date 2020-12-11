@@ -26,7 +26,9 @@ beforeAll(() => {
 describe('mapStateToProps', () => {
   it('returns the right keys', () => {
     const props = {
-      navigation: {state: {params: {id: 1}}}
+      route: {
+        params: {id: 1}
+      }
     }
     expect(mapStateToProps(state, props)).toMatchSnapshot()
   })
@@ -36,7 +38,7 @@ describe('mergeProps', () => {
   it('merges the props', () => {
     const dispatch = x => x
     const ownProps = {}
-    const stateProps = mapStateToProps(state, {navigation: {state: {params: {id: 1}}}})
+    const stateProps = mapStateToProps(state, {route: {params: {id: 1}}})
     const dispatchProps = mapDispatchToProps(dispatch, stateProps)
     const mergedProps = mergeProps(stateProps, dispatchProps, ownProps)
     expect(mergedProps.fetchCommunitySettings()).toMatchSnapshot()

@@ -36,14 +36,14 @@ describe('PostEditor mapStateToProps', () => {
       }
     }
     props = {
-      navigation: {
-        goBack: jest.fn(),
-        state: {
-          params: {
-            communityId,
-            id
-          }
+      route: {
+        params: {
+          communityId,
+          id
         }
+      },
+      navigation: {
+        goBack: jest.fn()
       }
     }
   })
@@ -71,14 +71,14 @@ describe('PostEditor mapDispatchToProps', () => {
   it('maps the action generators', () => {
     const dispatch = jest.fn(val => val)
     const props = {
+      route: {
+        params: {
+          communityId,
+          id
+        }
+      },
       navigation: {
         goBack: jest.fn(),
-        state: {
-          params: {
-            communityId,
-            id
-          }
-        }
       }
     }
     const dispatchProps = mapDispatchToProps(dispatch, props)
@@ -91,14 +91,14 @@ describe('PostEditor mapDispatchToProps', () => {
   it('calls save correctly', async () => {
     expect.assertions(6)
     const props = {
+      route: {
+        params: {
+          communityId,
+          id
+        }
+      },
       navigation: {
         goBack: jest.fn(),
-        state: {
-          params: {
-            communityId,
-            id
-          }
-        }
       }
     }
     const dispatch = jest.fn(val => Promise.resolve(val))

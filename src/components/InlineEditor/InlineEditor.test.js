@@ -16,9 +16,11 @@ const props = {
   value: 'some text',
   placeholder: `Place Holder`,
   communityId: 10,
+  route: {
+    params: {}
+  },
   navigation: {
     setParams: jest.fn(),
-    state: {params: {}},
     getParam: jest.fn()
   }
 }

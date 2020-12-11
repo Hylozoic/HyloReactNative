@@ -75,6 +75,7 @@ Object {
   "goToCreateCommunityName": [Function],
   "goToCreateCommunityUrl": [Function],
   "navigation": Object {
+    "closeDrawer": [MockFunction],
     "navigate": [MockFunction],
   },
   "pending": Object {

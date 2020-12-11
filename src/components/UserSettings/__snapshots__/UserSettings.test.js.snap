@@ -170,10 +170,7 @@ Object {
 `;
 
 exports[`UserSettings matches snapshot with state set 1`] = `
-<View
-  onLayout={[Function]}
-  pointerEvents="box-none"
->
+<SafeAreaView>
   <View
     onLayout={[Function]}
   >
@@ -290,7 +287,6 @@ exports[`UserSettings matches snapshot with state set 1`] = `
         <View
           accessible={true}
           focusable={true}
-          isTVSelectable={true}
           onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
@@ -314,7 +310,6 @@ exports[`UserSettings matches snapshot with state set 1`] = `
             <View
               accessible={true}
               focusable={true}
-              isTVSelectable={true}
               onClick={[Function]}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
@@ -335,7 +330,6 @@ exports[`UserSettings matches snapshot with state set 1`] = `
             <View
               accessible={true}
               focusable={true}
-              isTVSelectable={true}
               onClick={[Function]}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
@@ -355,7 +349,6 @@ exports[`UserSettings matches snapshot with state set 1`] = `
             <View
               accessible={true}
               focusable={false}
-              isTVSelectable={true}
               onClick={[Function]}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
@@ -379,7 +372,6 @@ exports[`UserSettings matches snapshot with state set 1`] = `
             <View
               accessible={true}
               focusable={false}
-              isTVSelectable={true}
               onClick={[Function]}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
@@ -403,7 +395,6 @@ exports[`UserSettings matches snapshot with state set 1`] = `
             <View
               accessible={true}
               focusable={true}
-              isTVSelectable={true}
               onClick={[Function]}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
@@ -424,7 +415,6 @@ exports[`UserSettings matches snapshot with state set 1`] = `
           <View
             accessible={true}
             focusable={true}
-            isTVSelectable={true}
             onClick={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
@@ -441,7 +431,6 @@ exports[`UserSettings matches snapshot with state set 1`] = `
             <View
               accessible={true}
               focusable={true}
-              isTVSelectable={true}
               onClick={[Function]}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
@@ -463,11 +452,11 @@ exports[`UserSettings matches snapshot with state set 1`] = `
       </View>
     </RCTScrollView>
   </View>
-</View>
+</SafeAreaView>
 `;
 
 exports[`UserSettings matches the last snapshot 1`] = `
-<SafeAreaView>
+<SafeAreaViewMock>
   <_default>
     <ScrollView
       contentContainerStyle={
@@ -545,7 +534,7 @@ exports[`UserSettings matches the last snapshot 1`] = `
       />
     </ScrollView>
   </_default>
-</SafeAreaView>
+</SafeAreaViewMock>
 `;
 
 exports[`UserSettings updateField sets the state 1`] = `

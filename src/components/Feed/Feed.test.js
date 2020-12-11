@@ -58,16 +58,14 @@ it('renders correctly if currentUserHasMemberships is false', () => {
 })
 
 it('sets the title to the community if there is a topic', () => {
-  const navigation = {
-    state: {
-      params: {
-        communityName: 'test community',
-        topicName: 'math'
-      }
+  const route = {
+    params: {
+      communityName: 'test community',
+      topicName: 'math'
     }
   }
 
-  expect(Feed.navigationOptions({ navigation })).toEqual({
+  expect(Feed.navigationOptions({ route })).toEqual({
     headerTitle: 'test community'
   })
 })

@@ -67,9 +67,11 @@ describe('NewMessage', () => {
       recentContacts: [],
       suggestions: [],
       mockViewKey: 1,
+      route: {
+        params: {},
+      },
       navigation: {
         setParams: jest.fn(),
-        state: {params: {}},
         getParam: jest.fn()
       }
     }

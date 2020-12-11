@@ -4,11 +4,9 @@ describe('getNavigationParam', () => {
   it('returns the expected result', () => {
     const myParam = 'testaccesscode'
     const testProps = {
-      navigation: {
-        state: {
-          params: {
-            myParam
-          }
+      route: {
+        params: {
+          myParam
         }
       }
     }

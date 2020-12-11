@@ -23,13 +23,13 @@ describe('getThread', () => {
   })
 
   it('should match the last snapshot', () => {
-    const props = { navigation: { state: { params: { id: '1' } } } }
+    const props = { route: { params: { id: '1' } } }
     const state = { orm: session.state }
     expect(store.getThread(state, props)).toMatchSnapshot()
   })
 
   it('should return null if the messageThread is not found', () => {
-    const props = { navigation: { state: { params: { id: '9999' } } } }
+    const props = { route: { params: { id: '9999' } } }
     const state = { orm: session.state }
     const actual = store.getThread(state, props)
     expect(actual).toBe(null)
@@ -51,14 +51,14 @@ describe('presentation', () => {
   })
 
   it('orders by id (descending) for the inverted list', () => {
-    const props = { navigation: { state: { params: { id: '1' } } } }
+    const props = { route: { params: { id: '1' } } }
     const state = { orm: session.state }
     const messages = store.getAndPresentMessages(state, props)
     expect(messages.map(m => m.id)).toEqual(['200', '10', '4', '1'])
   })
 
   it('removes currentUser from title', () => {
-    const props = { navigation: { state: { params: { id: '1' } } } }
+    const props = { route: { params: { id: '1' } } }
     const state = { orm: session.state }
     const thread = store.getThread(state, props)
     const presented = store.presentThread(thread, '8')
@@ -68,7 +68,7 @@ describe('presentation', () => {
   it('adds "You" as title if there are no other participants', () => {
     session.MessageThread.create({ id: '2', participants: ['8'] })
 
-    const props = { navigation: { state: { params: { id: '2' } } } }
+    const props = { route: { params: { id: '2' } } }
     const state = { orm: session.state }
     const thread = store.getThread(state, props)
     const presented = store.presentThread(thread, '8')

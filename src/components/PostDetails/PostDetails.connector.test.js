@@ -33,10 +33,10 @@ beforeAll(() => {
 
   props = {
     isFocused: true,
+    route: {
+      params: { id: '1' }
+    },
     navigation: {
-      state: {
-        params: {id: '1'}
-      },
       navigate: jest.fn((...args) => ['navigate', args])
     }
   }

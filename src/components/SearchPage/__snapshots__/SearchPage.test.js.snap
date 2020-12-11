@@ -116,7 +116,7 @@ Object {
 `;
 
 exports[`SearchPage matches the last snapshot 1`] = `
-<SafeAreaView>
+<SafeAreaViewMock>
   <FlatList
     ListFooterComponent={<Loading />}
     ListHeaderComponent={
@@ -164,7 +164,7 @@ exports[`SearchPage matches the last snapshot 1`] = `
     updateCellsBatchingPeriod={50}
     windowSize={21}
   />
-</SafeAreaView>
+</SafeAreaViewMock>
 `;
 
 exports[`SearchResult works with Comment 1`] = `

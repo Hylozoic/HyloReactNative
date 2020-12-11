@@ -4,12 +4,12 @@ import { FETCH_PERSON } from './MemberProfile.store'
 describe('mapStateToProps', () => {
   it('maps the state to the props', () => {
     const id = 123
+    const route = { params: {id} }
     const navigation = {
-      state: {params: {id}},
       navigate: jest.fn()
     }
     const state = { pending: { [FETCH_PERSON]: null } }
-    const props = mapStateToProps(state, {navigation})
+    const props = mapStateToProps(state, { route, navigation })
     expect(props).toMatchSnapshot()
     props.goToDetails()
     expect(navigation.navigate).toHaveBeenCalledWith('MemberDetails', { id })

@@ -162,10 +162,7 @@ Array [
 `;
 
 exports[`ItemChooser full renders as expected 1`] = `
-<View
-  onLayout={[Function]}
-  pointerEvents="box-none"
->
+<SafeAreaView>
   <View>
     <View>
       <Icon
@@ -205,11 +202,8 @@ exports[`ItemChooser full renders as expected 1`] = `
     onScrollBeginDrag={[Function]}
     onScrollEndDrag={[Function]}
     renderItem={[Function]}
-    renderSectionHeader={[Function]}
     scrollEventThrottle={50}
-    sections={Array []}
     stickyHeaderIndices={Array []}
-    stickySectionHeadersEnabled={true}
     updateCellsBatchingPeriod={50}
     windowSize={21}
   >
@@ -221,11 +215,11 @@ exports[`ItemChooser full renders as expected 1`] = `
       </View>
     </View>
   </RCTScrollView>
-</View>
+</SafeAreaView>
 `;
 
 exports[`ItemChooser shallow renders as expected 1`] = `
-<SafeAreaView>
+<SafeAreaViewMock>
   <ItemChooserListHeader
     ItemRowComponent={[Function]}
     autoFocus={true}
@@ -256,5 +250,5 @@ exports[`ItemChooser shallow renders as expected 1`] = `
     updateCellsBatchingPeriod={50}
     windowSize={21}
   />
-</SafeAreaView>
+</SafeAreaViewMock>
 `;

@@ -17,19 +17,17 @@ beforeEach(() => {
 describe('mapStateToProps', () => {
   it('gets props from navigation object', () => {
     const testProps = {
-      navigation: {
-        state: {
-          params: {
-            token: 'anytoken',
-            invitationToken: 'anyinvitationtoken',
-            accessCode: 'anyaccesscode'
-          }
+      route: {
+        params: {
+          token: 'anytoken',
+          invitationToken: 'anyinvitationtoken',
+          accessCode: 'anyaccesscode'
         }
       }
     }
     expect(mapStateToProps(defaultState, testProps).invitationCodes).toEqual({
-      invitationToken: testProps.navigation.state.params.token,
-      accessCode: testProps.navigation.state.params.accessCode
+      invitationToken: testProps.route.params.token,
+      accessCode: testProps.route.params.accessCode
     })
   })
 })
@@ -108,13 +106,11 @@ test('mergeProps', () => {
     useInvitation: jest.fn()
   }
   const ownProps = {
-    navigation: {
-      state: {
-        params: {
-          token: 'anytoken',
-          invitationToken: 'anyinvitationtoken',
-          accessCode: 'anyaccesscode'
-        }
+    route: {
+      params: {
+        token: 'anytoken',
+        invitationToken: 'anyinvitationtoken',
+        accessCode: 'anyaccesscode'
       }
     }
   }

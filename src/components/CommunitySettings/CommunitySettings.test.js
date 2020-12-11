@@ -18,9 +18,11 @@ describe('CommunitySettings', () => {
       avatarUrl: 'someAvatarUrl.com',
       bannerUrl: 'someBannerUrl.com'
     },
+    route: {
+      params: {}
+    },
     navigation: {
       setParams: jest.fn(),
-      state: {params: {}},
       getParam: jest.fn()
     },
     isFocused: true,

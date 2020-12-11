@@ -94,8 +94,8 @@ describe('NotificationSettings', () => {
   })
 
   it('has navigationOptions', () => {
-    const navigation = {state: {routeName: 'test'}}
-    expect(NotificationSettings.navigationOptions({ navigation })).toMatchSnapshot()
+    const route = {name: 'test'}
+    expect(NotificationSettings.navigationOptions({ route })).toMatchSnapshot()
   })
 })
 

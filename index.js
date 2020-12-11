@@ -2,6 +2,7 @@
 import React, { Component } from 'react'
 import { Provider } from 'react-redux'
 import { AppRegistry, Platform, AppState } from 'react-native'
+import { SafeAreaProvider } from 'react-native-safe-area-context'
 import Timer from 'react-native-background-timer'
 import * as Sentry from '@sentry/react-native'
 import OneSignal from 'react-native-onesignal'
@@ -77,7 +78,9 @@ export default class AppContainer extends Component {
 
     return <ErrorBoundary>
       <Provider store={store}>
-        <RootView openedPushNotification={openedPushNotification} />
+        <SafeAreaProvider>
+          <RootView openedPushNotification={openedPushNotification} />
+        </SafeAreaProvider>
       </Provider>
     </ErrorBoundary>
   }

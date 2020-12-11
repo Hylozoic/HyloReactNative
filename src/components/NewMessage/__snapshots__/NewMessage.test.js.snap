@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`NewMessage renders correctly 1`] = `
-<SafeAreaView>
+<SafeAreaViewMock>
   <KeyboardFriendlyView
     behavior="padding"
     keyboardVerticalOffset={64}
@@ -25,11 +25,11 @@ exports[`NewMessage renders correctly 1`] = `
       placeholder="Type your message here"
     />
   </KeyboardFriendlyView>
-</SafeAreaView>
+</SafeAreaViewMock>
 `;
 
 exports[`NewMessage renders correctly 2`] = `
-<SafeAreaView>
+<SafeAreaViewMock>
   <KeyboardFriendlyView
     behavior="padding"
     keyboardVerticalOffset={64}
@@ -53,5 +53,5 @@ exports[`NewMessage renders correctly 2`] = `
       placeholder="Type your message here"
     />
   </KeyboardFriendlyView>
-</SafeAreaView>
+</SafeAreaViewMock>
 `;

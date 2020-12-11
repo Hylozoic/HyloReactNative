@@ -1,14 +1,14 @@
 import sessionReducer from './sessionReducer'
-import { CHECK_SESSION } from '../../components/SessionCheck/SessionCheck.store'
+import { CHECK_SESSION_AND_SET_SIGNED_IN } from 'store/constants'
 import { LOGIN } from '../../components/Login/actions'
 
-describe('on CHECK_SESSION', () => {
+describe('on CHECK_SESSION_AND_SET_SIGNED_IN', () => {
   it('stores the payload', () => {
     const action = {
-      type: CHECK_SESSION,
+      type: CHECK_SESSION_AND_SET_SIGNED_IN,
       payload: true
     }
-    expect(sessionReducer({}, action)).toEqual({loggedIn: true})
+    expect(sessionReducer({}, action)).toEqual({signedIn: true})
   })
 })
 
@@ -24,7 +24,7 @@ describe('on LOGIN', () => {
     })
   })
 
-  it('sets loggedIn and resets errors', () => {
+  it('sets signedIn and resets errors', () => {
     const action = {
       type: LOGIN,
       payload: {id: '7'},
@@ -33,7 +33,7 @@ describe('on LOGIN', () => {
       }
     }
     expect(sessionReducer({loginError: 'oh noes!'}, action)).toEqual({
-      loggedIn: true,
+      signedIn: true,
       defaultLoginEmail: 'foo@bar.com'
     })
   })

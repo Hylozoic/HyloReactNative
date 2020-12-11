@@ -16,16 +16,11 @@ Object {
   "goToDetails": [Function],
   "goToEdit": [Function],
   "goToSkills": [Function],
-  "id": undefined,
+  "id": 123,
   "isBlocked": false,
   "isMe": false,
   "navigation": Object {
     "navigate": [MockFunction],
-    "state": Object {
-      "params": Object {
-        "id": 123,
-      },
-    },
   },
   "person": null,
   "skills": Array [],

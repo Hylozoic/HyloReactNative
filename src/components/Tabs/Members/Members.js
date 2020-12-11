@@ -5,7 +5,6 @@ import {
 import { get, pick } from 'lodash/fp'
 
 import { DEFAULT_BANNER } from '../../../store/models/Community'
-// import createNavigationOptionsForHeader from 'components/Tabs/Header/createNavigationOptionsForHeader'
 import LinearGradient from 'react-native-linear-gradient'
 import styles from './Members.styles'
 import Button from '../../Button'

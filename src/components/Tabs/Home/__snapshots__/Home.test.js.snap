@@ -3,13 +3,6 @@
 exports[`shows Feed with a community and user 1`] = `
 <withNavigationFocus(Connect(Feed))
   communityId="1"
-  navigation={
-    Object {
-      "state": Object {
-        "params": Object {},
-      },
-    }
-  }
 />
 `;
 

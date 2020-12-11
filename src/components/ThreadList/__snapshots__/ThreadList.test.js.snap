@@ -5,7 +5,6 @@ exports[`MessageRow calls showThread 1`] = `
   <View
     accessible={true}
     focusable={true}
-    isTVSelectable={true}
     onClick={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
@@ -47,8 +46,7 @@ exports[`MessageRow calls showThread 1`] = `
 
 exports[`MessageRow renders correctly 1`] = `
 <View>
-  <TouchableOpacity
-    activeOpacity={0.2}
+  <ForwardRef
     onPress={[Function]}
   >
     <ThreadCard
@@ -70,7 +68,7 @@ exports[`MessageRow renders correctly 1`] = `
         ]
       }
     />
-  </TouchableOpacity>
+  </ForwardRef>
 </View>
 `;
 
@@ -97,7 +95,6 @@ exports[`ThreadList handles pending correctly with threads 1`] = `
     initialNumToRender={10}
     keyExtractor={[Function]}
     maxToRenderPerBatch={10}
-    numColumns={1}
     onContentSizeChange={[Function]}
     onEndReachedThreshold={2}
     onLayout={[Function]}
@@ -121,7 +118,6 @@ exports[`ThreadList handles pending correctly with threads 1`] = `
           <View
             accessible={true}
             focusable={true}
-            isTVSelectable={true}
             onClick={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
@@ -138,7 +134,6 @@ exports[`ThreadList handles pending correctly with threads 1`] = `
     <View
       accessible={true}
       focusable={false}
-      isTVSelectable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
@@ -189,7 +184,6 @@ exports[`ThreadList renders correctly 1`] = `
     initialNumToRender={10}
     keyExtractor={[Function]}
     maxToRenderPerBatch={10}
-    numColumns={1}
     onContentSizeChange={[Function]}
     onEndReachedThreshold={2}
     onLayout={[Function]}
@@ -213,7 +207,6 @@ exports[`ThreadList renders correctly 1`] = `
           <View
             accessible={true}
             focusable={true}
-            isTVSelectable={true}
             onClick={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
@@ -230,7 +223,6 @@ exports[`ThreadList renders correctly 1`] = `
     <View
       accessible={true}
       focusable={false}
-      isTVSelectable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}

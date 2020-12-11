@@ -47,9 +47,6 @@ Object {
     "userSkills": Array [],
   },
   "SocketListener": Object {},
-  "TabBar": Object {
-    "isVisible": true,
-  },
   "Topics": Object {
     "term": "",
   },

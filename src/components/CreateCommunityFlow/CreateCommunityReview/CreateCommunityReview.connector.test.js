@@ -46,7 +46,8 @@ describe('mergeProps', () => {
 
     const ownProps = {
       navigation: {
-        navigate: jest.fn()
+        navigate: jest.fn(),
+        closeDrawer: jest.fn()
       }
     }
 

@@ -48,8 +48,8 @@ describe('SearchPage', () => {
   })
 
   it('has navigationOptions', () => {
-    const navigation = {state: {routeName: 'test'}}
-    expect(SearchPage.navigationOptions({ navigation })).toMatchSnapshot()
+    const route = { name: 'test' }
+    expect(SearchPage.navigationOptions({ route })).toMatchSnapshot()
   })
 })
 

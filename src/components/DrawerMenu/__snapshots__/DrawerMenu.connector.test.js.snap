@@ -62,6 +62,7 @@ Object {
   "goToNetwork": [Function],
   "name": "Roy Rogers",
   "navigation": Object {
+    "closeDrawer": [MockFunction],
     "navigate": [MockFunction],
   },
   "selectCommunity": [MockFunction],
@@ -83,6 +84,7 @@ Object {
   "goToNetwork": [Function],
   "name": "Roy Rogers",
   "navigation": Object {
+    "closeDrawer": [MockFunction],
     "navigate": [MockFunction],
   },
   "selectCommunity": [MockFunction],

@@ -29,10 +29,6 @@ it('renders with invite button when a moderator', () => {
   expect(renderer).toMatchSnapshot()
 })
 
-it('matches the last header snapshot', () => {
-  expect(Members.navigationOptions({ navigation: { state: {} }, screenProps: { currentTabName: 'Members' } })).toMatchSnapshot()
-})
-
 describe('Banner', () => {
   it('returns null if community, netowrk and all are all falsy', () => {
     expect(Banner({})).toBe(null)

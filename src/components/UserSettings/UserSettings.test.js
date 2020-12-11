@@ -338,8 +338,8 @@ describe('UserSettings', () => {
   })
 
   it('has navigationOptions', () => {
-    const navigation = {state: {routeName: 'test'}}
-    expect(UserSettings.navigationOptions({ navigation })).toMatchSnapshot()
+    const route = {name: 'test'}
+    expect(UserSettings.navigationOptions({ route })).toMatchSnapshot()
   })
 })
 

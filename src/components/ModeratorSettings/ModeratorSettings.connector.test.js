@@ -53,8 +53,10 @@ describe('mapDispatchToProps', () => {
   it('creates actions', () => {
     const dispatch = jest.fn()
     const props = {
+      route: {
+        params: { id: 77 }
+      },
       navigation: {
-        state: {params: {id: 77}},
         navigate: jest.fn()
       }
     }

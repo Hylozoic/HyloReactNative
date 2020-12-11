@@ -5,15 +5,13 @@ import Header, { Title } from './Header'
 
 describe('Header', () => {
   it('matches the last snapshot', () => {
-    const navigation = {
-      state: {
-        params: {
-          title: 'Header Title',
-          onPressTitle: () => {}
-        }
+    const route = {
+      params: {
+        title: 'Header Title',
+        onPressTitle: () => {}
       }
     }
-    const result = createNavigationOptionsForHeader(navigation)
+    const result = Header(route)
     expect(result).toMatchSnapshot()
   })
 })

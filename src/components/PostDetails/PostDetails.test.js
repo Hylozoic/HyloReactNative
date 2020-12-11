@@ -50,7 +50,6 @@ const props = {
   goToCommunity: jest.fn(),
   navigation: {
     setParams: jest.fn(),
-    state: {params: {}},
     getParam: jest.fn()
   }
 }

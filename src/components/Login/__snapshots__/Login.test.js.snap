@@ -12,7 +12,7 @@ exports[`FormError renders correctly 1`] = `
 `;
 
 exports[`Login renders correctly 1`] = `
-<SafeAreaView>
+<SafeAreaViewMock>
   <ScrollView
     contentContainerStyle={
       Object {
@@ -115,11 +115,11 @@ exports[`Login renders correctly 1`] = `
       goToSignup={[Function]}
     />
   </ScrollView>
-</SafeAreaView>
+</SafeAreaViewMock>
 `;
 
 exports[`Login renders error message 1`] = `
-<SafeAreaView>
+<SafeAreaViewMock>
   <ScrollView
     contentContainerStyle={
       Object {
@@ -220,11 +220,11 @@ exports[`Login renders error message 1`] = `
     </View>
     <SignupLink />
   </ScrollView>
-</SafeAreaView>
+</SafeAreaViewMock>
 `;
 
 exports[`Login renders with no network connection error 1`] = `
-<SafeAreaView>
+<SafeAreaViewMock>
   <ScrollView
     contentContainerStyle={
       Object {
@@ -325,11 +325,11 @@ exports[`Login renders with no network connection error 1`] = `
     </View>
     <SignupLink />
   </ScrollView>
-</SafeAreaView>
+</SafeAreaViewMock>
 `;
 
 exports[`Login renders with pending banner 1`] = `
-<SafeAreaView>
+<SafeAreaViewMock>
   <ScrollView
     contentContainerStyle={
       Object {
@@ -433,7 +433,7 @@ exports[`Login renders with pending banner 1`] = `
     </View>
     <SignupLink />
   </ScrollView>
-</SafeAreaView>
+</SafeAreaViewMock>
 `;
 
 exports[`SignupLink renders correctly 1`] = `

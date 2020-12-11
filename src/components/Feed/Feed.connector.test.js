@@ -30,23 +30,19 @@ describe('mapStateToProps', () => {
     session.CommunityTopic.create({community: '7', topic: '111', isSubscribed: false, followersTotal: 10, postsTotal: 20})
     const currentUser = session.Me.create({name: 'me'})
     const props = {
-      navigation: {
-        state: {
-          params: {
-            topicName: 'logistics',
-            communityId: '7'
-          }
+      route: {
+        params: {
+          topicName: 'logistics',
+          communityId: '7'
         }
       }
     }
 
     const secondProps = {
-      navigation: {
-        state: {
-          params: {
-            topicName: 'logistics',
-            communitySlugFromLink: 'world'
-          }
+      route: {
+        params: {
+          topicName: 'logistics',
+          communitySlugFromLink: 'world'
         }
       }
     }
@@ -75,11 +71,9 @@ describe('mapStateToProps', () => {
     session.CommunityTopic.create({community: '7', topic: '1', isSubscribed: true})
     const props = {
       topicName: 'foo',
-      navigation: {
-        state: {
-          params: {
-            communityId: '7'
-          }
+      route: {
+        params: {
+          communityId: '7'
         }
       }
     }
@@ -108,11 +102,11 @@ describe('mergeProps', () => {
 
     props.newPost()
     expect(navigation.navigate)
-      .toBeCalledWith({'key': 'PostEditor', 'params': {'communityId': '12', 'topicName': undefined}, 'routeName': 'PostEditor'})
+      .toBeCalledWith('PostEditor',{ communityId: '12', topicName: undefined })
 
     props.showTopic('disarmament')
     expect(navigation.navigate)
-      .toBeCalledWith({'key': 'Feed', 'params': {'communityId': '12', 'topicName': 'disarmament'}, 'routeName': 'Feed'})
+      .toBeCalledWith('Feed', { communityId: '12', topicName: 'disarmament' })
   })
 
   it('binds networkId to showTopic from dispatchProps', () => {
@@ -127,7 +121,7 @@ describe('mergeProps', () => {
     )
 
     props.showTopic('anything')
-    expect(navigation.navigate).toBeCalledWith({'key': 'TopicSupportComingSoon', 'routeName': 'TopicSupportComingSoon'})
+    expect(navigation.navigate).toBeCalledWith('TopicSupportComingSoon')
   })
 
   it('sets up fetchCommunityTopic', () => {

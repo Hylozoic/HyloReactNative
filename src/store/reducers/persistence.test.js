@@ -1,19 +1,15 @@
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import { persist } from './persistence'
 import { LOGOUT } from '../../components/Login/actions'
-import AsyncStorage from '@react-native-community/async-storage'
 
 jest.mock('react-native-fbsdk')
-jest.mock('react-native', () => ({
-  AsyncStorage: {
-    setItem: jest.fn()
-  }
-}))
-
 jest.mock('lodash', () => ({
   debounce: (fn, timeout) => fn
 }))
 
 it('returns unchanged state when action is LOGOUT', () => {
+  // await asyncOperationOnAsyncStorage();
+
   const reducer = (state, action) => ({foo: 'bar'})
   const state = {}
   const action = {type: LOGOUT}

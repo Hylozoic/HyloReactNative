@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import TestRenderer from 'react-test-renderer'
-import PostEditor, { SectionLabel, TypeButton } from './PostEditor'
+import PostEditor, { TypeButton } from './PostEditor'
 import { Alert } from 'react-native'
 import { Provider } from 'react-redux'
 import { createMockStore } from 'util/testing'
@@ -43,7 +43,11 @@ describe('PostEditor', () => {
   let navigation
 
   beforeEach(() => {
+    route = {
+      name: 'anything'
+    },
     navigation = {
+      isFocused: jest.fn(),
       setParams: jest.fn(),
       getParam: jest.fn()
     }
@@ -55,6 +59,7 @@ describe('PostEditor', () => {
     const renderer = new ReactShallowRenderer()
     renderer.render(<PostEditor
       navigation={navigation}
+      route={route}
       save={save}
     />)
     const actual = renderer.getRenderOutput()
@@ -65,6 +70,7 @@ describe('PostEditor', () => {
     const renderer = new ReactShallowRenderer()
     renderer.render(<PostEditor
       navigation={navigation}
+      route={route}
       post={mockPost}
       imageUrls={[
         'http://foo.com/foo.png',
@@ -78,13 +84,17 @@ describe('PostEditor', () => {
     const save = jest.fn(() => Promise.resolve())
     const renderer = TestRenderer.create(
       <Provider store={createMockStore()}>
-        <PostEditor
-          isFocused
-          shouldShowTypeChooser
-          fetchPost={jest.fn()}
-          navigation={navigation}
-          post={mockPost}
-          save={save} />
+        <NavigationContainer>
+          {/* TODO need to make this a screen in a stack navigator and continue from there */}
+          <PostEditor
+            isFocused
+            shouldShowTypeChooser
+            fetchPost={jest.fn()}
+            route={route}
+            navigation={navigation}
+            post={mockPost}
+            save={save} />
+          </NavigationContainer>
       </Provider>)
 
     const root = renderer.root.findByType(PostEditor)
@@ -111,6 +121,7 @@ describe('PostEditor', () => {
           isFocused
           save={save}
           navigation={navigation}
+          route={route}
           post={mockPost} />
       </Provider>)
 
@@ -136,6 +147,7 @@ describe('PostEditor', () => {
           isFocused
           save={save}
           navigation={navigation}
+          route={route}
           post={mockPost} />
       </Provider>)
 
@@ -157,6 +169,7 @@ describe('PostEditor', () => {
           fetchPost={jest.fn()}
           save={save}
           navigation={navigation}
+          route={route}
           post={mockPost} />
       </Provider>)
     jest.mock('util/toast', () => ({
@@ -182,6 +195,7 @@ describe('PostEditor', () => {
           fetchPost={jest.fn()}
           save={save}
           navigation={navigation}
+          route={route}
           post={mockPost} />
       </Provider>)
 
@@ -199,6 +213,7 @@ describe('PostEditor', () => {
           isFocused
           fetchPost={jest.fn()}
           navigation={navigation}
+          route={route}
           imageUrls={['http://foo.com/foo.png']}
           post={mockPost} />
       </Provider>)
@@ -223,6 +238,7 @@ describe('PostEditor', () => {
           isFocused
           fetchPost={jest.fn()}
           navigation={navigation}
+          route={route}
           imageUrls={['http://foo.com/foo.png']}
           post={mockPost} />
       </Provider>)
@@ -246,6 +262,7 @@ describe('PostEditor', () => {
           fetchPost={jest.fn()}
           fileUrls={[]}
           navigation={navigation}
+          route={route}
           imageUrls={['http://foo.com/foo.png']}
           post={mockPost} />
       </Provider>)
@@ -278,6 +295,7 @@ describe('PostEditor', () => {
           fileUrls={[]}
           fetchPost={jest.fn()}
           navigation={navigation}
+          route={route}
           imageUrls={['http://foo.com/foo.png']}
           post={mockPost} />
       </Provider>)
@@ -302,6 +320,7 @@ describe('PostEditor', () => {
           isFocused
           fetchPost={jest.fn()}
           navigation={navigation}
+          route={route}
           postId={mockPost.id}
           fileUrls={['http://foo.com/foo.pdf']}
           post={mockPost} />
@@ -330,6 +349,7 @@ describe('PostEditor', () => {
           isFocused
           save={save}
           navigation={navigation}
+          route={route}
           post={mockPost} />
       </Provider>)
 
@@ -349,6 +369,7 @@ describe('PostEditor', () => {
           isFocused
           save={save}
           navigation={navigation}
+          route={route}
           post={mockPost} />
       </Provider>)
 

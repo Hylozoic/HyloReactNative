@@ -17,19 +17,19 @@ const items = [
 const testProps = {
   updateMembers: () => {},
   onCancel: () => {},
+  route: {
+    params: {
+      screenTitle: 'Screen Title',
+      initialItems: items,
+      ItemRowComponent: item => item.id,
+      fetchSearchSuggestions: () => {
+        return { type: 'test-search' } 
+      },
+      getSearchSuggestions: () => items,
+      updateItems: jest.fn()
+    }
+  },
   navigation: {
-    state: {
-      params: {
-        screenTitle: 'Screen Title',
-        initialItems: items,
-        ItemRowComponent: item => item.id,
-        fetchSearchSuggestions: () => {
-          return { type: 'test-search' } 
-        },
-        getSearchSuggestions: () => items,
-        updateItems: jest.fn()
-      }
-    },
     setParams: jest.fn(),
     getParam: jest.fn()
   }

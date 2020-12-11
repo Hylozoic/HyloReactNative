@@ -3,8 +3,10 @@ import { mapStateToProps } from './ThreadParticipants.connector'
 describe('mapStateToProps', () => {
   it('returns the right keys', () => {
     const props = {
+      route: {
+        params: { id: 1 }
+      },
       navigation: {
-        state: {params: {id: 1}},
         navigate: jest.fn()
       }
     }

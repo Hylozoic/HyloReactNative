@@ -81,36 +81,6 @@ exports[`Banner matches snapshot with network 1`] = `
 </View>
 `;
 
-exports[`matches the last header snapshot 1`] = `
-Object {
-  "headerBackTitle": null,
-  "headerLeft": <Connect(MenuButton)
-    openDrawer={[Function]}
-  />,
-  "headerRight": <View>
-    <SearchIcon
-      showSearch={[Function]}
-    />
-    <Connect(MessagesIcon)
-      showMessages={[Function]}
-    />
-    <Connect(NotificationsIcon)
-      showNotifications={[Function]}
-    />
-  </View>,
-  "headerTitle": "Members",
-  "headerTitleStyle": Object {
-    "alignSelf": "center",
-    "color": "black",
-    "flex": 1,
-    "fontFamily": "Circular-Bold",
-    "fontSize": 18,
-    "fontWeight": "200",
-    "textAlign": "center",
-  },
-}
-`;
-
 exports[`renders correctly with no community and isAll 1`] = `
 <View>
   <RCTScrollView

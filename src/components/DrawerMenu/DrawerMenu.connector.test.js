@@ -13,7 +13,7 @@ it('mapStateToProps matches the latest snapshot', () => {
 
   const state = {
     session: {
-      loggedIn: true,
+      signedIn: true,
       entryUrl: 'http://www.hylo.com/a/path'
     },
     pending: {},
@@ -44,7 +44,8 @@ describe('mergeProps', () => {
     }
     ownProps = {
       navigation: {
-        navigate: jest.fn(x => x)
+        navigate: jest.fn(x => x),
+        closeDrawer: jest.fn()
       }
     }
     props = mergeProps(stateProps, dispatchProps, ownProps)

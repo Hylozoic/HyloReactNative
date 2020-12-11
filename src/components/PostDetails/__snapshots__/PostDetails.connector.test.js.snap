@@ -3,9 +3,39 @@
 exports[`mapsStateToProps 1`] = `
 Object {
   "currentUser": undefined,
-  "id": undefined,
+  "id": "1",
   "isProject": false,
-  "post": null,
+  "post": Object {
+    "commenters": Array [],
+    "communities": Array [
+      Object {
+        "id": "2",
+        "name": "Home",
+      },
+    ],
+    "creator": Object {
+      "id": "10",
+    },
+    "fileAttachments": Array [
+      Object {
+        "id": "1",
+        "post": "1",
+        "type": "file",
+        "url": "http://foo.com/foo.pdf",
+      },
+    ],
+    "fileUrls": Array [
+      "http://foo.com/foo.pdf",
+    ],
+    "id": "1",
+    "imageUrls": Array [
+      "http://foo.com/bar.png",
+    ],
+    "linkPreview": undefined,
+    "members": Array [],
+    "pinned": undefined,
+    "topics": Array [],
+  },
 }
 `;
 
@@ -77,14 +107,14 @@ Object {
   "leaveProject": [Function],
   "navigation": Object {
     "navigate": [MockFunction],
-    "state": Object {
-      "params": Object {
-        "id": "1",
-      },
-    },
   },
   "post": Object {
     "id": "testpost",
+  },
+  "route": Object {
+    "params": Object {
+      "id": "1",
+    },
   },
   "showMember": [Function],
   "showTopic": [Function],

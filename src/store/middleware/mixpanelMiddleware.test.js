@@ -9,7 +9,7 @@ describe('mixpanelMiddleware', () => {
     }
     const state = {
       session: {
-        loggedIn: false
+        signedIn: false
       },
       mixpanel
     }

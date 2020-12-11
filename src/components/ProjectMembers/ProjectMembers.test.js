@@ -6,12 +6,12 @@ import ProjectMembers from './ProjectMembers'
 it('renders as expected', () => {
   const members = [{id: 'member1'}, {id: 'member2'}]
   const props = {
+    route: {
+      params: {
+        members
+      }
+    },
     navigation: {
-      state: {
-        params: {
-          members
-        }
-      },
       navigate: () => {}
     }
   }

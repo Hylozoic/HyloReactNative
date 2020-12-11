@@ -9,7 +9,10 @@ describe('mapStateToProps', () => {
       SocketListener: {}
     }
     const props = {
-      navigation: {state: {params: {id: 1}}}
+      route: {
+        params: {id: 1}
+      },
+      navigation: {}
     }
     const stateProps = mapStateToProps(state, props)
     expect(stateProps).toMatchSnapshot()
@@ -20,8 +23,10 @@ describe('mapDispatchToProps', () => {
   it('creates actions', () => {
     const dispatch = jest.fn()
     const props = {
+      route: {
+        params: { id: 77 }
+      },
       navigation: {
-        state: {params: {id: 77}},
         navigate: jest.fn()
       }
     }
@@ -67,10 +72,6 @@ describe('mergeProps', () => {
     const { title, onPressTitle } = setParams.mock.calls[0][0]
     expect(title).toEqual(stateProps.title)
     onPressTitle()
-    expect(navigate).toHaveBeenCalledWith({
-      'key': 'ThreadParticipants',
-      'params': {'id': stateProps.id},
-      'routeName': 'ThreadParticipants'
-    })
+    expect(navigate).toHaveBeenCalledWith('ThreadParticipants', { id: stateProps.id })
   })
 })
