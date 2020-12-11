@@ -133,8 +133,11 @@ export function refineMessage ({ id, createdAt, creator, text }, i, messages) {
 // NOTE: descending order to accommodate inverted FlatList
 export function presentThread (thread, currentUserId) {
   if (!thread) return null
-  const otherParticipants = thread.participants.filter(p => p.id !== currentUserId)
-  .toRefArray().map(firstName)
+  const otherParticipants = thread
+    .participants
+    .filter(p => p.id !== currentUserId)
+    .toRefArray()
+    .map(firstName)
   var title
   if (isEmpty(otherParticipants)) {
     title = 'You'

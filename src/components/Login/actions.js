@@ -65,12 +65,14 @@ export function logout () {
         path: '/noo/session',
         transform: () =>
           clearSessionCookie()
-          .then(() => LoginManager.logOut())
-          .then(async () => {
-            if (!isEmpty(await GoogleSignin.getCurrentUser())) {
-              return GoogleSignin.signOut()
-            }
-          })
+            .then(() =>
+              LoginManager.logOut()
+            )
+            .then(async () => {
+              if (!isEmpty(await GoogleSignin.getCurrentUser())) {
+                return GoogleSignin.signOut()
+              }
+            })
       }
     }
   }
