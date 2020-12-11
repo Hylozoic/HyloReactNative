@@ -70,10 +70,7 @@ describe('ThreadList', () => {
     const navigationOptions = ThreadList.navigationOptions({navigation})
     expect(navigationOptions).toMatchSnapshot()
     navigationOptions.headerRight.props.onPress()
-    expect(navigation.navigate).toHaveBeenCalledWith({
-      'key': 'NewMessage',
-      'routeName': 'NewMessage'
-    })
+    expect(navigation.navigate).toHaveBeenCalledWith('NewMessage')
   })
 })
 

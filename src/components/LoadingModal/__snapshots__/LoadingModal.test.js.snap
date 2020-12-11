@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`matches last snapshot when visible is true 1`] = `
-<View>
+<View
+  useNativeDriver={true}
+>
   <View>
     <ActivityIndicator
       animating={true}

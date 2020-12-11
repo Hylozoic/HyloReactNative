@@ -22,7 +22,7 @@ exports[`hides image when no url and password when no password 1`] = `
   behavior="padding"
   keyboardVerticalOffset={64}
 >
-  <ScrollViewMock>
+  <ScrollView>
     <Text>
       Everything looking good?
     </Text>
@@ -53,9 +53,7 @@ exports[`hides image when no url and password when no password 1`] = `
       toggleEditable={true}
       value="hill"
     />
-    <TouchableOpacity
-      activeOpacity={0.2}
-    >
+    <ForwardRef>
       <Text>
         Skills
       </Text>
@@ -67,7 +65,7 @@ exports[`hides image when no url and password when no password 1`] = `
           ]
         }
       />
-    </TouchableOpacity>
+    </ForwardRef>
     <View>
       <Button
         onPress={[Function]}
@@ -78,7 +76,7 @@ exports[`hides image when no url and password when no password 1`] = `
         text="Finish"
       />
     </View>
-  </ScrollViewMock>
+  </ScrollView>
 </_default>
 `;
 
@@ -87,7 +85,7 @@ exports[`matches last snapshot 1`] = `
   behavior="padding"
   keyboardVerticalOffset={64}
 >
-  <ScrollViewMock>
+  <ScrollView>
     <Text>
       Everything looking good?
     </Text>
@@ -95,9 +93,7 @@ exports[`matches last snapshot 1`] = `
       You can always come back and change your details at any time.
     </Text>
     <View>
-      <TouchableOpacity
-        activeOpacity={0.2}
-      >
+      <ForwardRef>
         <Image
           source={
             Object {
@@ -105,7 +101,7 @@ exports[`matches last snapshot 1`] = `
             }
           }
         />
-      </TouchableOpacity>
+      </ForwardRef>
     </View>
     <SettingControl
       label="Your Full Name"
@@ -131,9 +127,7 @@ exports[`matches last snapshot 1`] = `
       toggleEditable={true}
       value="hill"
     />
-    <TouchableOpacity
-      activeOpacity={0.2}
-    >
+    <ForwardRef>
       <Text>
         Skills
       </Text>
@@ -145,7 +139,7 @@ exports[`matches last snapshot 1`] = `
           ]
         }
       />
-    </TouchableOpacity>
+    </ForwardRef>
     <View>
       <Button
         onPress={[Function]}
@@ -156,7 +150,7 @@ exports[`matches last snapshot 1`] = `
         text="Finish"
       />
     </View>
-  </ScrollViewMock>
+  </ScrollView>
 </_default>
 `;
 

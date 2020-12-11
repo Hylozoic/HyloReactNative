@@ -22,7 +22,7 @@ exports[`hides password, and changes button when pending  1`] = `
   behavior="padding"
   keyboardVerticalOffset={64}
 >
-  <ScrollViewMock>
+  <ScrollView>
     <Text>
       Hi there stranger!
     </Text>
@@ -53,7 +53,7 @@ exports[`hides password, and changes button when pending  1`] = `
       onPress={[Function]}
       text="Saving..."
     />
-  </ScrollViewMock>
+  </ScrollView>
 </KeyboardFriendlyView>
 `;
 
@@ -78,7 +78,7 @@ exports[`matches last snapshot 1`] = `
   behavior="padding"
   keyboardVerticalOffset={64}
 >
-  <ScrollViewMock>
+  <ScrollView>
     <Text>
       Hi there stranger!
     </Text>
@@ -125,7 +125,7 @@ exports[`matches last snapshot 1`] = `
       onPress={[Function]}
       text="Continue"
     />
-  </ScrollViewMock>
+  </ScrollView>
 </KeyboardFriendlyView>
 `;
 

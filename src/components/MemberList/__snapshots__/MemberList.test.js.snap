@@ -11,7 +11,7 @@ exports[`MemberList renders with default props with default non-server search 1`
             name="Search"
             size={30}
           />
-          <TextInput
+          <Component
             allowFontScaling={true}
             onChangeText={[Function]}
             placeholder="Search Members"
@@ -71,7 +71,7 @@ exports[`MemberList runs call for new results if server search 1`] = `
             name="Search"
             size={30}
           />
-          <TextInput
+          <Component
             allowFontScaling={true}
             onChangeText={[Function]}
             placeholder="Search Members"
@@ -131,7 +131,7 @@ exports[`MemberList server search fetches new results when search provided 1`] =
             name="Search"
             size={30}
           />
-          <TextInput
+          <Component
             allowFontScaling={true}
             onChangeText={[Function]}
             placeholder="Search Members"
@@ -160,7 +160,6 @@ exports[`MemberList server search fetches new results when search provided 1`] =
   initialNumToRender={10}
   keyExtractor={[Function]}
   maxToRenderPerBatch={10}
-  numColumns="2"
   onContentSizeChange={[Function]}
   onEndReached={[Function]}
   onEndReachedThreshold={2}
@@ -207,7 +206,6 @@ exports[`MemberList server search fetches new results when search provided 1`] =
                 "top": 5,
               }
             }
-            isTVSelectable={true}
             onClick={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}

@@ -1,8 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`HeaderButton matches last Close icon snapshot 1`] = `
-<TouchableOpacity
-  activeOpacity={0.2}
+<ForwardRef
   disabled={false}
   hitSlop={
     Object {
@@ -17,12 +16,11 @@ exports[`HeaderButton matches last Close icon snapshot 1`] = `
   <Icon
     name="Ex"
   />
-</TouchableOpacity>
+</ForwardRef>
 `;
 
 exports[`HeaderButton matches last snapshot 1`] = `
-<TouchableOpacity
-  activeOpacity={0.2}
+<ForwardRef
   disabled={false}
   hitSlop={
     Object {
@@ -37,5 +35,5 @@ exports[`HeaderButton matches last snapshot 1`] = `
   <Text>
     Press Me!
   </Text>
-</TouchableOpacity>
+</ForwardRef>
 `;

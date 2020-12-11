@@ -1,13 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`matches last snapshot 1`] = `
-<TouchableOpacity
-  activeOpacity={0.2}
+<ForwardRef
   disabled={true}
   onPress={[Function]}
 >
   <Text>
     Children
   </Text>
-</TouchableOpacity>
+</ForwardRef>
 `;

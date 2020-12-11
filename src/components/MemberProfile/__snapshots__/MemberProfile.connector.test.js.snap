@@ -16,7 +16,7 @@ Object {
   "goToDetails": [Function],
   "goToEdit": [Function],
   "goToSkills": [Function],
-  "id": 123,
+  "id": undefined,
   "isBlocked": false,
   "isMe": false,
   "navigation": Object {

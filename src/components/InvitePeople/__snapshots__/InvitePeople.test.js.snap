@@ -30,34 +30,6 @@ exports[`InvitePeople handles tab-view functions 2`] = `<SendInvitesPage />`;
 
 exports[`InvitePeople handles tab-view functions 3`] = `<PendingInvitesPage />`;
 
-exports[`InvitePeople has navigation options 1`] = `
-Object {
-  "headerBackTitle": null,
-  "headerLeft": <HeaderBackButton
-    buttonImage={
-      Object {
-        "testUri": "../../react-navigation/src/views/assets/back-icon.png",
-      }
-    }
-    onPress={[Function]}
-    pressColorAndroid="rgba(0, 0, 0, .32)"
-    tintColor="#808c9b"
-    truncatedTitle="Back"
-  />,
-  "headerStyle": Object {
-    "backgroundColor": "white",
-    "paddingHorizontal": 10,
-  },
-  "headerTintColor": "#808c9b",
-  "headerTitle": "Invite Members",
-  "headerTitleStyle": Object {
-    "color": "black",
-    "fontFamily": "Circular-Bold",
-    "fontSize": 17,
-  },
-}
-`;
-
 exports[`InvitePeople matches the last snapshot 1`] = `
 <TabView
   gestureHandlerProps={Object {}}
@@ -110,8 +82,7 @@ exports[`InvitePeople renders PendingInviteRow 1`] = `
       just now
     </Text>
     <View>
-      <TouchableOpacity
-        activeOpacity={0.2}
+      <ForwardRef
         hitSlop={
           Object {
             "bottom": 10,
@@ -125,9 +96,8 @@ exports[`InvitePeople renders PendingInviteRow 1`] = `
         <Text>
           Expire
         </Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        activeOpacity={0.2}
+      </ForwardRef>
+      <ForwardRef
         hitSlop={
           Object {
             "bottom": 10,
@@ -141,14 +111,14 @@ exports[`InvitePeople renders PendingInviteRow 1`] = `
         <Text>
           Resend
         </Text>
-      </TouchableOpacity>
+      </ForwardRef>
     </View>
   </View>
 </View>
 `;
 
 exports[`InvitePeople renders PendingInvitesPage 1`] = `
-<ScrollViewMock>
+<ScrollView>
   <Button
     onPress={[MockFunction]}
     text="Resend All"
@@ -165,11 +135,11 @@ exports[`InvitePeople renders PendingInvitesPage 1`] = `
     }
     resendInvitation={[MockFunction]}
   />
-</ScrollViewMock>
+</ScrollView>
 `;
 
 exports[`InvitePeople renders SendInvitesPage 1`] = `
-<ScrollViewMock>
+<ScrollView>
   <KeyboardFriendlyView>
     <View>
       <View>
@@ -203,7 +173,7 @@ exports[`InvitePeople renders SendInvitesPage 1`] = `
           text="Copy Link"
         />
       </View>
-      <TextInput
+      <Component
         allowFontScaling={true}
         onChangeText={[Function]}
         placeholder="Type email addresses"
@@ -211,7 +181,7 @@ exports[`InvitePeople renders SendInvitesPage 1`] = `
         underlineColorAndroid="rgba(0,0,0,0)"
         value=""
       />
-      <TextInput
+      <Component
         allowFontScaling={true}
         multiline={true}
         numberOfLines={5}
@@ -227,5 +197,5 @@ exports[`InvitePeople renders SendInvitesPage 1`] = `
       />
     </View>
   </KeyboardFriendlyView>
-</ScrollViewMock>
+</ScrollView>
 `;

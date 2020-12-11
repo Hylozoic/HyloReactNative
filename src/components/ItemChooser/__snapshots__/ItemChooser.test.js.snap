@@ -225,7 +225,7 @@ exports[`ItemChooser full renders as expected 1`] = `
 `;
 
 exports[`ItemChooser shallow renders as expected 1`] = `
-<withOrientation>
+<SafeAreaView>
   <ItemChooserListHeader
     ItemRowComponent={[Function]}
     autoFocus={true}
@@ -256,5 +256,5 @@ exports[`ItemChooser shallow renders as expected 1`] = `
     updateCellsBatchingPeriod={50}
     windowSize={21}
   />
-</withOrientation>
+</SafeAreaView>
 `;

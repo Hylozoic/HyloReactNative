@@ -6,7 +6,7 @@ import ReactTestRenderer from 'react-test-renderer'
 import { simulate } from 'util/testing'
 import MemberList from './MemberList'
 
-const lodash = require.requireActual('lodash/fp')
+const lodash = jest.requireActual('lodash/fp')
 lodash.debounce = (_, fn) => fn
 
 describe('MemberList', () => {

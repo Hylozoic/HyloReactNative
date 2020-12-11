@@ -11,12 +11,11 @@ Object {
 `;
 
 exports[`Title matches the last snapshot 1`] = `
-<TouchableOpacity
-  activeOpacity={0.2}
+<ForwardRef
   onPress={[Function]}
 >
   <Text>
     Header Title
   </Text>
-</TouchableOpacity>
+</ForwardRef>
 `;

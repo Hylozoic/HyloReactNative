@@ -6,14 +6,13 @@ exports[`Footer matches the last snapshot without saveChanges 1`] = `
     disabled={true}
     text="Save Changes"
   />
-  <TouchableOpacity
-    activeOpacity={0.2}
+  <ForwardRef
     onPress={[Function]}
   >
     <Text>
       Cancel
     </Text>
-  </TouchableOpacity>
+  </ForwardRef>
   <Button
     onPress={[Function]}
     text="Logout"
@@ -28,14 +27,13 @@ exports[`Footer matches the last snapshot without saveChanges 2`] = `
     onPress={[Function]}
     text="Save Changes"
   />
-  <TouchableOpacity
-    activeOpacity={0.2}
+  <ForwardRef
     onPress={[Function]}
   >
     <Text>
       Cancel
     </Text>
-  </TouchableOpacity>
+  </ForwardRef>
   <Button
     onPress={[Function]}
     text="Logout"
@@ -71,14 +69,13 @@ exports[`SocialAccounts matches the last snapshot 1`] = `
 exports[`SocialControl matches the last snapshot linked 1`] = `
 <View>
   <Text />
-  <TouchableOpacity
-    activeOpacity={0.2}
+  <ForwardRef
     onPress={[Function]}
   >
     <Text>
       Unlink
     </Text>
-  </TouchableOpacity>
+  </ForwardRef>
 </View>
 `;
 
@@ -94,14 +91,13 @@ exports[`SocialControl matches the last snapshot loading 1`] = `
 exports[`SocialControl matches the last snapshot unlinked 1`] = `
 <View>
   <Text />
-  <TouchableOpacity
-    activeOpacity={0.2}
+  <ForwardRef
     onPress={[Function]}
   >
     <Text>
       Link
     </Text>
-  </TouchableOpacity>
+  </ForwardRef>
 </View>
 `;
 
@@ -471,9 +467,9 @@ exports[`UserSettings matches snapshot with state set 1`] = `
 `;
 
 exports[`UserSettings matches the last snapshot 1`] = `
-<withOrientation>
+<SafeAreaView>
   <_default>
-    <ScrollViewMock
+    <ScrollView
       contentContainerStyle={
         Object {
           "flexGrow": 1,
@@ -517,14 +513,13 @@ exports[`UserSettings matches the last snapshot 1`] = `
         <Text>
           PASSWORD
         </Text>
-        <TouchableOpacity
-          activeOpacity={0.2}
+        <ForwardRef
           onPress={[Function]}
         >
           <Text>
             Change Password
           </Text>
-        </TouchableOpacity>
+        </ForwardRef>
       </View>
       <SocialAccounts
         loginWithFacebook={[Function]}
@@ -548,9 +543,9 @@ exports[`UserSettings matches the last snapshot 1`] = `
         logout={[Function]}
         saveChanges={false}
       />
-    </ScrollViewMock>
+    </ScrollView>
   </_default>
-</withOrientation>
+</SafeAreaView>
 `;
 
 exports[`UserSettings updateField sets the state 1`] = `

@@ -2,7 +2,7 @@
 
 exports[`matches the last snapshot 1`] = `
 <View>
-  <TextInput
+  <Component
     allowFontScaling={true}
     onChangeText={[Function]}
     onContentSizeChange={[Function]}
@@ -22,13 +22,12 @@ exports[`matches the last snapshot 1`] = `
     }
     underlineColorAndroid="transparent"
   />
-  <TouchableOpacity
-    activeOpacity={0.2}
+  <ForwardRef
     onPress={[Function]}
   >
     <Icon
       name="Send"
     />
-  </TouchableOpacity>
+  </ForwardRef>
 </View>
 `;

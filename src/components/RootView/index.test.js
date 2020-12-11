@@ -14,9 +14,9 @@ jest.mock('react-native-onesignal', () => ({
   removeEventListener: jest.fn()
 }))
 
-jest.mock('../DeepLinkHandler', () => 'DeepLinkHandler')
+jest.mock('../../navigation/DeepLinkHandler', () => 'DeepLinkHandler')
 jest.mock('../LoadingModal', () => 'LoadingModal')
-jest.mock('../RootNavigator', () => 'RootNavigator')
+jest.mock('../../navigation', () => 'RootNavigator')
 jest.mock('../SessionCheck', () => 'SessionCheck')
 jest.mock('../VersionCheck', () => 'VersionCheck')
 

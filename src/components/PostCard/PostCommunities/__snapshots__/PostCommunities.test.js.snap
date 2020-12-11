@@ -10,7 +10,6 @@ exports[`PostCommunities matches last snapshot 1`] = `
       <View
         accessible={true}
         focusable={true}
-        isTVSelectable={true}
         onClick={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
@@ -32,7 +31,6 @@ exports[`PostCommunities matches last snapshot 1`] = `
         <View
           accessible={true}
           focusable={true}
-          isTVSelectable={true}
           onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
@@ -50,7 +48,6 @@ exports[`PostCommunities matches last snapshot 1`] = `
     <View
       accessible={true}
       focusable={true}
-      isTVSelectable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
@@ -76,7 +73,6 @@ exports[`PostCommunities matches last snapshot when expanded 1`] = `
     <View
       accessible={true}
       focusable={true}
-      isTVSelectable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
@@ -94,7 +90,6 @@ exports[`PostCommunities matches last snapshot when expanded 1`] = `
     <View
       accessible={true}
       focusable={true}
-      isTVSelectable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
@@ -119,7 +114,6 @@ exports[`PostCommunities matches last snapshot when expanded 1`] = `
     <View
       accessible={true}
       focusable={true}
-      isTVSelectable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
@@ -146,7 +140,6 @@ exports[`PostCommunities matches last snapshot when expanded 1`] = `
     <View
       accessible={true}
       focusable={true}
-      isTVSelectable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
@@ -182,7 +175,6 @@ exports[`PostCommunities renders when in one community and shouldShowCommunities
       <View
         accessible={true}
         focusable={true}
-        isTVSelectable={true}
         onClick={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
@@ -201,7 +193,6 @@ exports[`PostCommunities renders when in one community and shouldShowCommunities
     <View
       accessible={true}
       focusable={true}
-      isTVSelectable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}

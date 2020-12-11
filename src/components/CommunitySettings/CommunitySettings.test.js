@@ -37,10 +37,6 @@ describe('CommunitySettings', () => {
     expect(actual).toMatchSnapshot()
   })
 
-  it('has navigation options', () => {
-    expect(CommunitySettings.navigationOptions(props)).toMatchSnapshot()
-  })
-
   it('fetches settings on update', () => {
     const prevPropsSameId = {
       communityId: 10,

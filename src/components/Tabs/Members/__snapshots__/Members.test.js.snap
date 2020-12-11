@@ -126,7 +126,7 @@ exports[`renders correctly with no community and isAll 1`] = `
               name="Search"
               size={30}
             />
-            <TextInput
+            <Component
               allowFontScaling={true}
               onChangeText={[Function]}
               placeholder="Search Members"
@@ -190,7 +190,6 @@ exports[`renders correctly with no community and isAll 1`] = `
     initialNumToRender={10}
     keyExtractor={[Function]}
     maxToRenderPerBatch={10}
-    numColumns="2"
     onContentSizeChange={[Function]}
     onEndReached={[Function]}
     onEndReachedThreshold={2}
@@ -263,7 +262,6 @@ exports[`renders correctly with no community and isAll 1`] = `
                   "top": 5,
                 }
               }
-              isTVSelectable={true}
               onClick={[Function]}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
@@ -289,7 +287,6 @@ exports[`renders correctly with no community and isAll 1`] = `
           <View
             accessible={true}
             focusable={true}
-            isTVSelectable={true}
             onClick={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
@@ -324,7 +321,6 @@ exports[`renders correctly with no community and isAll 1`] = `
           <View
             accessible={true}
             focusable={true}
-            isTVSelectable={true}
             onClick={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
@@ -365,7 +361,6 @@ exports[`renders correctly with no community and isAll 1`] = `
           <View
             accessible={true}
             focusable={true}
-            isTVSelectable={true}
             onClick={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
@@ -397,7 +392,6 @@ exports[`renders correctly with no community and isAll 1`] = `
           <View
             accessible={true}
             focusable={true}
-            isTVSelectable={true}
             onClick={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
@@ -459,7 +453,7 @@ exports[`renders with invite button when a moderator 1`] = `
               name="Search"
               size={30}
             />
-            <TextInput
+            <Component
               allowFontScaling={true}
               onChangeText={[Function]}
               placeholder="Search Members"
@@ -523,7 +517,6 @@ exports[`renders with invite button when a moderator 1`] = `
     initialNumToRender={10}
     keyExtractor={[Function]}
     maxToRenderPerBatch={10}
-    numColumns="2"
     onContentSizeChange={[Function]}
     onEndReached={[Function]}
     onEndReachedThreshold={2}
@@ -575,7 +568,6 @@ exports[`renders with invite button when a moderator 1`] = `
             <View
               accessible={true}
               focusable={true}
-              isTVSelectable={true}
               onClick={[Function]}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
@@ -621,7 +613,6 @@ exports[`renders with invite button when a moderator 1`] = `
                   "top": 5,
                 }
               }
-              isTVSelectable={true}
               onClick={[Function]}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
@@ -647,7 +638,6 @@ exports[`renders with invite button when a moderator 1`] = `
           <View
             accessible={true}
             focusable={true}
-            isTVSelectable={true}
             onClick={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
@@ -682,7 +672,6 @@ exports[`renders with invite button when a moderator 1`] = `
           <View
             accessible={true}
             focusable={true}
-            isTVSelectable={true}
             onClick={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
@@ -723,7 +712,6 @@ exports[`renders with invite button when a moderator 1`] = `
           <View
             accessible={true}
             focusable={true}
-            isTVSelectable={true}
             onClick={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
@@ -755,7 +743,6 @@ exports[`renders with invite button when a moderator 1`] = `
           <View
             accessible={true}
             focusable={true}
-            isTVSelectable={true}
             onClick={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}

@@ -5,17 +5,7 @@ Object {
   "color": "#FFFFFF",
   "fontSize": 10,
   "headerBackgroundColor": "#0DC39F",
-  "headerLeft": <HeaderBackButton
-    buttonImage={
-      Object {
-        "testUri": "../../react-navigation/src/views/assets/back-icon.png",
-      }
-    }
-    onPress={[Function]}
-    pressColorAndroid="rgba(0, 0, 0, .32)"
-    tintColor="#9ee7d9"
-    truncatedTitle="Back"
-  />,
+  "headerLeft": [Function],
   "headerStyle": Object {
     "backgroundColor": "#0DC39F",
     "borderBottomWidth": 0,
@@ -32,7 +22,7 @@ Object {
 `;
 
 exports[`matches last snapshot 1`] = `
-<ScrollViewMock>
+<ScrollView>
   <KeyboardFriendlyView>
     <Text>
       Everything look good?
@@ -45,19 +35,17 @@ exports[`matches last snapshot 1`] = `
         What's the name of your community?
       </Text>
       <View>
-        <TextInput
+        <Component
           allowFontScaling={true}
           disabled={true}
           rejectResponderTermination={true}
           underlineColorAndroid="rgba(0,0,0,0)"
         />
-        <TouchableOpacity
-          activeOpacity={0.2}
-        >
+        <ForwardRef>
           <Text>
             Edit
           </Text>
-        </TouchableOpacity>
+        </ForwardRef>
       </View>
     </View>
     <View>
@@ -65,19 +53,17 @@ exports[`matches last snapshot 1`] = `
         What's the url of your community?
       </Text>
       <View>
-        <TextInput
+        <Component
           allowFontScaling={true}
           disabled={true}
           rejectResponderTermination={true}
           underlineColorAndroid="rgba(0,0,0,0)"
         />
-        <TouchableOpacity
-          activeOpacity={0.2}
-        >
+        <ForwardRef>
           <Text>
             Edit
           </Text>
-        </TouchableOpacity>
+        </ForwardRef>
       </View>
     </View>
     <Button
@@ -86,7 +72,7 @@ exports[`matches last snapshot 1`] = `
       text="Let's Do This!"
     />
   </KeyboardFriendlyView>
-</ScrollViewMock>
+</ScrollView>
 `;
 
 exports[`matches last snapshot when visible is true 1`] = `
@@ -113,7 +99,6 @@ exports[`matches last snapshot when visible is true 1`] = `
           <View
             accessible={true}
             focusable={false}
-            isTVSelectable={true}
             onClick={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
@@ -142,7 +127,6 @@ exports[`matches last snapshot when visible is true 1`] = `
           <View
             accessible={true}
             focusable={false}
-            isTVSelectable={true}
             onClick={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
@@ -170,7 +154,6 @@ exports[`matches last snapshot when visible is true 1`] = `
         <View
           accessible={true}
           focusable={true}
-          isTVSelectable={true}
           onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}

@@ -26,7 +26,6 @@ exports[`NotificationsList matches the last snapshot 1`] = `
     initialNumToRender={10}
     keyExtractor={[Function]}
     maxToRenderPerBatch={10}
-    numColumns={1}
     onContentSizeChange={[Function]}
     onEndReached={[Function]}
     onEndReachedThreshold={2}
@@ -51,7 +50,6 @@ exports[`NotificationsList matches the last snapshot 1`] = `
           <View
             accessible={true}
             focusable={true}
-            isTVSelectable={true}
             onClick={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
@@ -100,8 +98,7 @@ exports[`NotificationsList matches the last snapshot 1`] = `
 
 exports[`NotificationsList matches the last snapshot for NotificationRow 1`] = `
 <View>
-  <TouchableOpacity
-    activeOpacity={0.2}
+  <ForwardRef
     onPress={[Function]}
   >
     <NotificationCard
@@ -120,7 +117,7 @@ exports[`NotificationsList matches the last snapshot for NotificationRow 1`] = `
         }
       }
     />
-  </TouchableOpacity>
+  </ForwardRef>
 </View>
 `;
 
@@ -140,7 +137,6 @@ exports[`NotificationsList matches the renders CreateCommunityNotice if user doe
     <View
       accessible={true}
       focusable={false}
-      isTVSelectable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}

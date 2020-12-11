@@ -22,12 +22,12 @@ exports[`PopupMenuButton matches the last snapshot on android 1`] = `
   accessibilityLabel="A View Props Label"
   accessible={true}
   focusable={true}
+  forwardedRef={[Function]}
   hitSlop={
     Object {
       "top": 10,
     }
   }
-  isTVSelectable={true}
   onClick={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
@@ -50,7 +50,6 @@ exports[`PopupMenuButton matches the last snapshot on ios 1`] = `
       "top": 10,
     }
   }
-  isTVSelectable={true}
   onClick={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}

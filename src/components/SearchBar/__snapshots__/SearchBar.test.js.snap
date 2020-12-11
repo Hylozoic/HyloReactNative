@@ -5,7 +5,7 @@ exports[`ItemChooserScreen renders as expected (without value) 1`] = `
   <Icon
     name="Search"
   />
-  <TextInput
+  <Component
     allowFontScaling={true}
     autoCapitalize="none"
     autoCorrect={false}
@@ -23,7 +23,7 @@ exports[`ItemChooserScreen renders as expected when loading 1`] = `
   <Icon
     name="Search"
   />
-  <TextInput
+  <Component
     allowFontScaling={true}
     autoCapitalize="none"
     autoCorrect={false}
@@ -42,7 +42,7 @@ exports[`ItemChooserScreen renders as expected with value 1`] = `
   <Icon
     name="Search"
   />
-  <TextInput
+  <Component
     allowFontScaling={true}
     autoCapitalize="none"
     autoCorrect={false}
@@ -60,7 +60,7 @@ exports[`ItemChooserScreen renders with placeholder 1`] = `
   <Icon
     name="Search"
   />
-  <TextInput
+  <Component
     allowFontScaling={true}
     autoCapitalize="none"
     autoCorrect={false}

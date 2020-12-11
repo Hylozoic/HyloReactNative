@@ -102,19 +102,6 @@ describe('PostEditor', () => {
     expect(root.instance.state.type).toBe('offer')
   })
 
-  it('has navigation options', () => {
-    const props = {
-      navigation: {
-        setParams: jest.fn(),
-        getParam: jest.fn(),
-        state: {
-          params: {headerTitle: 'a title', save: jest.fn(), isSaving: false}
-        }
-      }
-    }
-    expect(PostEditor.navigationOptions(props)).toMatchSnapshot()
-  })
-
   it('renders correctly while saving', () => {
     const save = jest.fn(() => Promise.resolve())
     const renderer = TestRenderer.create(

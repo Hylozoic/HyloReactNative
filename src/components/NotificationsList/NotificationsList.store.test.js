@@ -104,11 +104,7 @@ describe('selectors/refiners', () => {
       const notification = session.Notification.withId('1')
       const actual = store.refineActivity(notification.activity, navigation)
       actual.onPress()
-      expect(navigation.navigate).toHaveBeenCalledWith({
-        'key': 'PostDetails',
-        'params': {'id': '333'},
-        'routeName': 'PostDetails'
-      })
+      expect(navigation.navigate).toHaveBeenCalledWith('PostDetails', { id: '333' })
     })
 
     it('matches the previous ACTION_COMMENT_MENTION snapshot', () => {
@@ -121,11 +117,7 @@ describe('selectors/refiners', () => {
       const notification = session.Notification.withId('1')
       const actual = store.refineActivity(notification.activity, navigation)
       actual.onPress()
-      expect(navigation.navigate).toHaveBeenCalledWith({
-        'key': 'PostDetails',
-        'params': {'id': '333'},
-        'routeName': 'PostDetails'
-      })
+      expect(navigation.navigate).toHaveBeenCalledWith('PostDetails', { id: '333' })
     })
 
     it('matches the previous ACTION_MENTION snapshot', () => {
@@ -140,11 +132,7 @@ describe('selectors/refiners', () => {
       const notification = session.Notification.withId('1')
       const actual = store.refineActivity(notification.activity, navigation)
       actual.onPress()
-      expect(navigation.navigate).toHaveBeenCalledWith({
-        'key': 'PostDetails',
-        'params': {'id': '333'},
-        'routeName': 'PostDetails'
-      })
+      expect(navigation.navigate).toHaveBeenCalledWith('PostDetails', { id: '333' })
     })
 
     it('matches the previous ACTION_TOPIC snapshot', () => {
@@ -159,11 +147,7 @@ describe('selectors/refiners', () => {
       const notification = session.Notification.withId('1')
       const actual = store.refineActivity(notification.activity, navigation)
       actual.onPress()
-      expect(navigation.navigate).toHaveBeenCalledWith({
-        'key': 'PostDetails',
-        'params': {'id': '333'},
-        'routeName': 'PostDetails'
-      })
+      expect(navigation.navigate).toHaveBeenCalledWith('PostDetails', { id: '333' })
     })
 
     it('matches the previous ACTION_JOIN_REQUEST snapshot', () => {
@@ -178,10 +162,7 @@ describe('selectors/refiners', () => {
       const notification = session.Notification.withId('1')
       const actual = store.refineActivity(notification.activity, navigation)
       actual.onPress()
-      expect(navigation.navigate).toHaveBeenCalledWith({
-        'key': 'Settings',
-        'routeName': 'Settings'
-      })
+      expect(navigation.navigate).toHaveBeenCalledWith('Settings')
     })
 
     it('matches the previous ACTION_APPROVED_JOIN_REQUEST snapshot', () => {
@@ -196,11 +177,7 @@ describe('selectors/refiners', () => {
       const notification = session.Notification.withId('1')
       const actual = store.refineActivity(notification.activity, navigation)
       actual.onPress()
-      expect(navigation.navigate).toHaveBeenCalledWith({
-        'key': 'Feed',
-        'params': {'communityId': '222'},
-        'routeName': 'Feed'
-      })
+      expect(navigation.navigate).toHaveBeenCalledWith('Feed', { communityId: '222'})
     })
 
     it('matches the previous ACTION_ANNOUNCEMENT snapshot', () => {
@@ -215,11 +192,7 @@ describe('selectors/refiners', () => {
       const notification = session.Notification.withId('1')
       const actual = store.refineActivity(notification.activity, navigation)
       actual.onPress()
-      expect(navigation.navigate).toHaveBeenCalledWith({
-        'key': 'PostDetails',
-        'params': {'id': '333'},
-        'routeName': 'PostDetails'
-      })
+      expect(navigation.navigate).toHaveBeenCalledWith('PostDetails', { id: '333' })
     })
   })
 

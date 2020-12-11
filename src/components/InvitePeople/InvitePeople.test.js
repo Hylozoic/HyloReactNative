@@ -19,11 +19,6 @@ describe('InvitePeople', () => {
     expect(actual).toMatchSnapshot()
   })
 
-  it('has navigation options', () => {
-    const props = {navigation: {state: {params: {}}}}
-    expect(InvitePeople.navigationOptions(props)).toMatchSnapshot()
-  })
-
   it('fetches communities on update', () => {
     const props = {
       community: { slug: 'foo' },

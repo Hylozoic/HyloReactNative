@@ -39,7 +39,6 @@ exports[`displays an error message without a community name with checkAndSubmit 
         <View
           accessible={true}
           focusable={true}
-          isTVSelectable={true}
           onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
@@ -67,17 +66,7 @@ Object {
   "color": "#FFFFFF",
   "fontSize": 10,
   "headerBackgroundColor": "#0DC39F",
-  "headerLeft": <HeaderBackButton
-    buttonImage={
-      Object {
-        "testUri": "../../react-navigation/src/views/assets/back-icon.png",
-      }
-    }
-    onPress={[Function]}
-    pressColorAndroid="rgba(0, 0, 0, .32)"
-    tintColor="#9ee7d9"
-    truncatedTitle="Back"
-  />,
+  "headerLeft": [Function],
   "headerStyle": Object {
     "backgroundColor": "#0DC39F",
     "borderBottomWidth": 0,
@@ -94,7 +83,7 @@ Object {
 `;
 
 exports[`matches last snapshot 1`] = `
-<ScrollViewMock>
+<ScrollView>
   <KeyboardFriendlyView>
     <Text>
       Let's get started!
@@ -106,7 +95,7 @@ exports[`matches last snapshot 1`] = `
       <Text>
         What's the name of your community?
       </Text>
-      <TextInput
+      <Component
         allowFontScaling={true}
         autoCapitalize="none"
         autoCorrect={false}
@@ -121,5 +110,5 @@ exports[`matches last snapshot 1`] = `
       text="Continue"
     />
   </KeyboardFriendlyView>
-</ScrollViewMock>
+</ScrollView>
 `;

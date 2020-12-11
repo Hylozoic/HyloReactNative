@@ -66,10 +66,7 @@ describe('mergeProps', () => {
       expect(dispatchProps.updateUserSettings).toHaveBeenCalled()
       expect(dispatchProps.updateUserSettings.mock.calls)
       .toMatchSnapshot()
-      expect(ownProps.navigation.navigate).toHaveBeenCalledWith({
-        'key': 'SignupFlow2',
-        'routeName': 'SignupFlow2'
-      })
+      expect(ownProps.navigation.navigate).toHaveBeenCalledWith('SignupFlow2')
     })
   })
 })

@@ -1,8 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ProjectMembersSummary renders as expected 1`] = `
-<TouchableOpacity
-  activeOpacity={0.2}
+<ForwardRef
   onPress={[Function]}
 >
   <Avatar
@@ -14,7 +13,7 @@ exports[`ProjectMembersSummary renders as expected 1`] = `
   <Text>
     1 member
   </Text>
-</TouchableOpacity>
+</ForwardRef>
 `;
 
 exports[`ProjectMembersSummary renders as expected without an onPress handler 1`] = `

@@ -29,11 +29,6 @@ describe('ModeratorSettings', () => {
     expect(actual).toMatchSnapshot()
   })
 
-  it('has navigation options', () => {
-    const props = {navigation: {state: {params: {}}}}
-    expect(ModeratorSettings.navigationOptions(props)).toMatchSnapshot()
-  })
-
   it('fetches molderators on update', () => {
     const props = {
       community: { slug: 'foo' },

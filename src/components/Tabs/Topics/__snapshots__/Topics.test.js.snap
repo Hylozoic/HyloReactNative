@@ -1,8 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`SubscribeStar matches last snapshot 1`] = `
-<TouchableOpacity
-  activeOpacity={0.2}
+<ForwardRef
   hitSlop={
     Object {
       "bottom": 10,
@@ -24,7 +23,7 @@ exports[`SubscribeStar matches last snapshot 1`] = `
       }
     }
   />
-</TouchableOpacity>
+</ForwardRef>
 `;
 
 exports[`TopicList matches last snapshot 1`] = `
@@ -59,8 +58,7 @@ exports[`TopicList matches last snapshot with empty list 1`] = `
 `;
 
 exports[`TopicRow matches last snapshot 1`] = `
-<TouchableOpacity
-  activeOpacity={0.2}
+<ForwardRef
   onPress={[Function]}
 >
   <SubscribeStar
@@ -81,12 +79,12 @@ exports[`TopicRow matches last snapshot 1`] = `
       size={12}
     />
   </View>
-</TouchableOpacity>
+</ForwardRef>
 `;
 
 exports[`Topics renders correctly a community and topics 1`] = `
 <_default>
-  <ScrollViewMock
+  <ScrollView
     contentContainerStyle={
       Object {
         "flexGrow": 1,
@@ -129,13 +127,13 @@ exports[`Topics renders correctly a community and topics 1`] = `
         ]
       }
     />
-  </ScrollViewMock>
+  </ScrollView>
 </_default>
 `;
 
 exports[`Topics renders correctly with pending=true 1`] = `
 <_default>
-  <ScrollViewMock
+  <ScrollView
     contentContainerStyle={
       Object {
         "flexGrow": 1,
@@ -178,6 +176,6 @@ exports[`Topics renders correctly with pending=true 1`] = `
         ]
       }
     />
-  </ScrollViewMock>
+  </ScrollView>
 </_default>
 `;

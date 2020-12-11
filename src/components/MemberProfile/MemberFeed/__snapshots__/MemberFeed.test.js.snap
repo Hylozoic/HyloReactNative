@@ -1,12 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ContentRow shows a Comment when itemType is comment 1`] = `
-<TouchableOpacity
-  activeOpacity={0.2}
+<ForwardRef
   onPress={[Function]}
 >
   <View>
-    <Connect(Comment)
+    <Memo(Connect(Comment))
       comment={
         Object {
           "post": Object {
@@ -17,12 +16,11 @@ exports[`ContentRow shows a Comment when itemType is comment 1`] = `
       displayPostTitle={true}
     />
   </View>
-</TouchableOpacity>
+</ForwardRef>
 `;
 
 exports[`ContentRow shows a PostCard when itemType is post 1`] = `
-<TouchableOpacity
-  activeOpacity={0.2}
+<ForwardRef
   onPress={[Function]}
 >
   <View>
@@ -34,18 +32,17 @@ exports[`ContentRow shows a PostCard when itemType is post 1`] = `
       }
     />
   </View>
-</TouchableOpacity>
+</ForwardRef>
 `;
 
 exports[`FeedTab matches the last snapshot 1`] = `
-<TouchableOpacity
-  activeOpacity={0.2}
+<ForwardRef
   onPress={[Function]}
 >
   <Text>
     Posts
   </Text>
-</TouchableOpacity>
+</ForwardRef>
 `;
 
 exports[`MemberProfile matches the last snapshot 1`] = `

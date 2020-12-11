@@ -1,8 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`MenuButton renders correctly 1`] = `
-<TouchableOpacity
-  activeOpacity={0.2}
+<ForwardRef
   onPress={[MockFunction]}
 >
   <Image
@@ -12,5 +11,5 @@ exports[`MenuButton renders correctly 1`] = `
       }
     }
   />
-</TouchableOpacity>
+</ForwardRef>
 `;

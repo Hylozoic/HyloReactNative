@@ -1,44 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`PostEditor has navigation options 1`] = `
-Object {
-  "headerBackTitle": null,
-  "headerLeft": <HeaderBackButton
-    buttonImage={
-      Object {
-        "testUri": "../../react-navigation/src/views/assets/back-icon.png",
-      }
-    }
-    onPress={[Function]}
-    pressColorAndroid="rgba(0, 0, 0, .32)"
-    tintColor="#808c9b"
-    truncatedTitle="Back"
-  />,
-  "headerRight": <HeaderButton
-    disableOnClick={true}
-    disabled={false}
-    onPress={[MockFunction]}
-    text="Save"
-  />,
-  "headerStyle": Object {
-    "backgroundColor": "white",
-    "paddingHorizontal": 10,
-  },
-  "headerTintColor": "#808c9b",
-  "headerTitle": "a title",
-  "headerTitleStyle": Object {
-    "color": "black",
-    "fontFamily": "Circular-Bold",
-    "fontSize": 17,
-  },
-  "isSaving": false,
-  "save": [MockFunction],
-}
-`;
-
 exports[`PostEditor renders a new editor correctly 1`] = `
 <_default>
-  <ScrollViewMock
+  <ScrollView
     keyboardDismissMode="on-drag"
     keyboardShouldPersistTaps="handled"
     onContentSizeChange={[Function]}
@@ -73,7 +37,7 @@ exports[`PostEditor renders a new editor correctly 1`] = `
         Title
       </Text>
       <View>
-        <TextInput
+        <Component
           allowFontScaling={true}
           editable={true}
           maxLength={100}
@@ -105,8 +69,7 @@ exports[`PostEditor renders a new editor correctly 1`] = `
         placeholder="What else should we know?"
         value=""
       />
-      <TouchableOpacity
-        activeOpacity={0.2}
+      <ForwardRef
         onPress={[Function]}
       >
         <View>
@@ -126,9 +89,8 @@ exports[`PostEditor renders a new editor correctly 1`] = `
         <Text>
           Add topics.
         </Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        activeOpacity={0.2}
+      </ForwardRef>
+      <ForwardRef
         onPress={[Function]}
       >
         <View>
@@ -150,9 +112,9 @@ exports[`PostEditor renders a new editor correctly 1`] = `
         <Text>
           Select which communities to post in.
         </Text>
-      </TouchableOpacity>
+      </ForwardRef>
     </View>
-  </ScrollViewMock>
+  </ScrollView>
   <Toolbar
     announcementEnabled={false}
     showFilePicker={[Function]}
@@ -734,7 +696,7 @@ exports[`PostEditor renders correctly while saving 2`] = `
 
 exports[`PostEditor renders with a post 1`] = `
 <_default>
-  <ScrollViewMock
+  <ScrollView
     keyboardDismissMode="on-drag"
     keyboardShouldPersistTaps="handled"
     onContentSizeChange={[Function]}
@@ -769,7 +731,7 @@ exports[`PostEditor renders with a post 1`] = `
         Title
       </Text>
       <View>
-        <TextInput
+        <Component
           allowFontScaling={true}
           editable={true}
           maxLength={100}
@@ -801,8 +763,7 @@ exports[`PostEditor renders with a post 1`] = `
         placeholder="What else should we know?"
         value=""
       />
-      <TouchableOpacity
-        activeOpacity={0.2}
+      <ForwardRef
         onPress={[Function]}
       >
         <View>
@@ -822,9 +783,8 @@ exports[`PostEditor renders with a post 1`] = `
         <Text>
           Add topics.
         </Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        activeOpacity={0.2}
+      </ForwardRef>
+      <ForwardRef
         onPress={[Function]}
       >
         <View>
@@ -850,7 +810,7 @@ exports[`PostEditor renders with a post 1`] = `
           }
           onPress={[Function]}
         />
-      </TouchableOpacity>
+      </ForwardRef>
       <View>
         <Text>
           Images
@@ -868,7 +828,7 @@ exports[`PostEditor renders with a post 1`] = `
         />
       </View>
     </View>
-  </ScrollViewMock>
+  </ScrollView>
   <Toolbar
     announcementEnabled={false}
     post={
@@ -890,12 +850,11 @@ exports[`PostEditor renders with a post 1`] = `
 `;
 
 exports[`TypeButton renders correctly 1`] = `
-<TouchableOpacity
-  activeOpacity={0.2}
+<ForwardRef
   onPress={[MockFunction]}
 >
   <Text>
     DISCUSSION
   </Text>
-</TouchableOpacity>
+</ForwardRef>
 `;

@@ -64,12 +64,11 @@ exports[`SkillEditor matches last snapshot 1`] = `
 `;
 
 exports[`SkillPill matches last snapshot 1`] = `
-<TouchableOpacity
-  activeOpacity={0.2}
+<ForwardRef
   onPress={[Function]}
 >
   <Text>
     SNAP
   </Text>
-</TouchableOpacity>
+</ForwardRef>
 `;

@@ -14,7 +14,7 @@ exports[`renders SubmitButton when submitting 1`] = `
 exports[`renders as expected 1`] = `
 <View>
   <View>
-    <TextInput
+    <Component
       allowFontScaling={true}
       blurOnSubmit={false}
       editable={true}

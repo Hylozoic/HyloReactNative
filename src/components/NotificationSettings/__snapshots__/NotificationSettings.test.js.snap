@@ -61,7 +61,7 @@ Object {
 `;
 
 exports[`NotificationSettings matches the last snapshot 1`] = `
-<ScrollViewMock
+<ScrollView
   contentContainerStyle={
     Object {
       "marginTop": 30,
@@ -119,18 +119,17 @@ exports[`NotificationSettings matches the last snapshot 1`] = `
     }
     updateMembershipSettings={[Function]}
   />
-</ScrollViewMock>
+</ScrollView>
 `;
 
 exports[`SettingsIcon matches the last snapshot 1`] = `
-<TouchableOpacity
-  activeOpacity={0.2}
+<ForwardRef
   onPress={[Function]}
 >
   <Icon
     name="FooRow"
   />
-</TouchableOpacity>
+</ForwardRef>
 `;
 
 exports[`SettingsRow matches snapshot when expanded 1`] = `
@@ -151,7 +150,6 @@ exports[`SettingsRow matches snapshot when expanded 1`] = `
     <View
       accessible={true}
       focusable={true}
-      isTVSelectable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
@@ -169,7 +167,6 @@ exports[`SettingsRow matches snapshot when expanded 1`] = `
     <View
       accessible={true}
       focusable={true}
-      isTVSelectable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
@@ -185,7 +182,6 @@ exports[`SettingsRow matches snapshot when expanded 1`] = `
     <View
       accessible={true}
       focusable={true}
-      isTVSelectable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
@@ -217,14 +213,13 @@ exports[`SettingsRow matches the last snapshot 1`] = `
     >
       Foo Row
     </Text>
-    <TouchableOpacity
-      activeOpacity={0.2}
+    <ForwardRef
       onPress={[Function]}
     >
       <Icon
         name="ArrowDown"
       />
-    </TouchableOpacity>
+    </ForwardRef>
   </View>
 </View>
 `;
@@ -240,14 +235,13 @@ exports[`SettingsRow matches the last snapshot with iconName 1`] = `
     >
       Foo Row
     </Text>
-    <TouchableOpacity
-      activeOpacity={0.2}
+    <ForwardRef
       onPress={[Function]}
     >
       <Icon
         name="ArrowDown"
       />
-    </TouchableOpacity>
+    </ForwardRef>
   </View>
 </View>
 `;

@@ -117,18 +117,16 @@ exports[`PostMenu returns null when no actions 1`] = `null`;
 exports[`renders correctly when showCommunity is true 1`] = `
 <View>
   <View>
-    <TouchableOpacity
-      activeOpacity={0.2}
+    <ForwardRef
       onPress={[Function]}
     >
       <Avatar
         avatarUrl="foo.png"
       />
-    </TouchableOpacity>
+    </ForwardRef>
   </View>
   <View>
-    <TouchableOpacity
-      activeOpacity={0.2}
+    <ForwardRef
       onPress={[Function]}
     >
       <Text>
@@ -137,7 +135,7 @@ exports[`renders correctly when showCommunity is true 1`] = `
       <Text>
         Go!
       </Text>
-    </TouchableOpacity>
+    </ForwardRef>
     <View>
       <Text>
         10m ago
@@ -159,18 +157,16 @@ exports[`renders correctly when showCommunity is true 1`] = `
 exports[`renders correctly with all=true, and no community or user 1`] = `
 <View>
   <View>
-    <TouchableOpacity
-      activeOpacity={0.2}
+    <ForwardRef
       onPress={[Function]}
     >
       <Avatar
         avatarUrl="foo.png"
       />
-    </TouchableOpacity>
+    </ForwardRef>
   </View>
   <View>
-    <TouchableOpacity
-      activeOpacity={0.2}
+    <ForwardRef
       onPress={[Function]}
     >
       <Text>
@@ -179,7 +175,7 @@ exports[`renders correctly with all=true, and no community or user 1`] = `
       <Text>
         Go!
       </Text>
-    </TouchableOpacity>
+    </ForwardRef>
     <View>
       <Text>
         10m ago
@@ -229,18 +225,16 @@ exports[`renders correctly with all=true, and no community or user 1`] = `
 exports[`renders correctly with no flagging 1`] = `
 <View>
   <View>
-    <TouchableOpacity
-      activeOpacity={0.2}
+    <ForwardRef
       onPress={[Function]}
     >
       <Avatar
         avatarUrl="foo.png"
       />
-    </TouchableOpacity>
+    </ForwardRef>
   </View>
   <View>
-    <TouchableOpacity
-      activeOpacity={0.2}
+    <ForwardRef
       onPress={[Function]}
     >
       <Text>
@@ -249,7 +243,7 @@ exports[`renders correctly with no flagging 1`] = `
       <Text>
         Go!
       </Text>
-    </TouchableOpacity>
+    </ForwardRef>
     <View>
       <Text>
         10m ago

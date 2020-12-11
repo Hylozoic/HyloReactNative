@@ -8,7 +8,7 @@ import { pick } from 'lodash/fp'
 // Ugly, but seems to be necessary to dodge issues with debounce and timers
 // (see https://github.com/facebook/jest/issues/3465)
 jest.unmock('lodash')
-const lodash = require.requireActual('lodash/fp')
+const lodash = jest.requireActual('lodash/fp')
 lodash.debounce = (_, fn) => fn
 
 describe('MemberDetails', () => {
@@ -33,14 +33,6 @@ describe('MemberDetails', () => {
 
     expect(actual).toMatchSnapshot()
   })
-
-  it('has navigation options', () =>
-    expect(MemberDetails.navigationOptions({
-      navigation: {
-        state: {params: {}},
-        getParam: jest.fn()
-      }
-    })).toMatchSnapshot())
 
   describe('componentDidMount', () => {
     it('sets the state when person changes', () => {

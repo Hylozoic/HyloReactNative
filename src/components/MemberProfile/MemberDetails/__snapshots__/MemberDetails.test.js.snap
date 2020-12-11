@@ -3,14 +3,13 @@
 exports[`CommunityRow handles high member count and moderator role 1`] = `
 <View>
   <StarIcon />
-  <TouchableOpacity
-    activeOpacity={0.2}
+  <ForwardRef
     onPress={[Function]}
   >
     <Text>
       Greater Place
     </Text>
-  </TouchableOpacity>
+  </ForwardRef>
   <Text>
     24.5k
   </Text>
@@ -22,14 +21,13 @@ exports[`CommunityRow handles high member count and moderator role 1`] = `
 
 exports[`CommunityRow matches the last snapshot 1`] = `
 <View>
-  <TouchableOpacity
-    activeOpacity={0.2}
+  <ForwardRef
     onPress={[Function]}
   >
     <Text>
       Great Place
     </Text>
-  </TouchableOpacity>
+  </ForwardRef>
   <Text>
     432
   </Text>
@@ -86,23 +84,6 @@ exports[`MemberCommunities matches the last snapshot 1`] = `
 </View>
 `;
 
-exports[`MemberDetails has navigation options 1`] = `
-Object {
-  "headerBackTitle": null,
-  "headerStyle": Object {
-    "backgroundColor": "white",
-    "paddingHorizontal": 10,
-  },
-  "headerTintColor": "#808c9b",
-  "headerTitle": "About This Member",
-  "headerTitleStyle": Object {
-    "color": "black",
-    "fontFamily": "Circular-Bold",
-    "fontSize": 17,
-  },
-}
-`;
-
 exports[`MemberDetails matches the last snapshot 1`] = `<Loading />`;
 
 exports[`MemberDetails returns Loading when there's no person 1`] = `<Loading />`;
@@ -114,8 +95,7 @@ exports[`MemberSkills matches the last snapshot 1`] = `
       My Skills
     </Text>
   </View>
-  <TouchableOpacity
-    activeOpacity={0.2}
+  <ForwardRef
     disabled={true}
   >
     <View>
@@ -129,6 +109,6 @@ exports[`MemberSkills matches the last snapshot 1`] = `
         DAY
       </Text>
     </View>
-  </TouchableOpacity>
+  </ForwardRef>
 </View>
 `;

@@ -2,7 +2,7 @@
 
 exports[`Comments renders correctly 1`] = `
 <View>
-  <ScrollViewMock
+  <ScrollView
     onContentSizeChange={[Function]}
   >
     <Text>
@@ -17,28 +17,28 @@ exports[`Comments renders correctly 1`] = `
     <View>
       <Loading />
     </View>
-    <Connect(Comment)
+    <Memo(Connect(Comment))
       comment={
         Object {
           "id": 1,
         }
       }
     />
-    <Connect(Comment)
+    <Memo(Connect(Comment))
       comment={
         Object {
           "id": 2,
         }
       }
     />
-    <Connect(Comment)
+    <Memo(Connect(Comment))
       comment={
         Object {
           "id": 3,
         }
       }
     />
-  </ScrollViewMock>
+  </ScrollView>
   <Text>
     Some More Code
   </Text>
@@ -46,9 +46,7 @@ exports[`Comments renders correctly 1`] = `
 `;
 
 exports[`ShowMore renders correctly 1`] = `
-<TouchableOpacity
-  activeOpacity={0.2}
->
+<ForwardRef>
   <Text
     onPress={[Function]}
   >
@@ -57,5 +55,5 @@ exports[`ShowMore renders correctly 1`] = `
      previous comment
     s
   </Text>
-</TouchableOpacity>
+</ForwardRef>
 `;

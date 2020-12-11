@@ -14,8 +14,7 @@ exports[`renders as expected 1`] = `
       36 comments
     </Text>
   </View>
-  <TouchableOpacity
-    activeOpacity={0.2}
+  <ForwardRef
     onPress={[Function]}
   >
     <Icon
@@ -24,6 +23,6 @@ exports[`renders as expected 1`] = `
     <Text>
       71
     </Text>
-  </TouchableOpacity>
+  </ForwardRef>
 </View>
 `;

@@ -3,7 +3,7 @@
 exports[`Control matches the last snapshot 1`] = `
 <View>
   <View>
-    <TextInput
+    <Component
       allowFontScaling={true}
       editable={true}
       multiline={true}
@@ -13,8 +13,7 @@ exports[`Control matches the last snapshot 1`] = `
       underlineColorAndroid="transparent"
       value="a"
     />
-    <TouchableOpacity
-      activeOpacity={0.2}
+    <ForwardRef
       onPress={[Function]}
     >
       <Icon
@@ -22,7 +21,7 @@ exports[`Control matches the last snapshot 1`] = `
         name="edit"
         size={12}
       />
-    </TouchableOpacity>
+    </ForwardRef>
   </View>
 </View>
 `;
@@ -37,13 +36,11 @@ exports[`MemberHeader matches the last snapshot 1`] = `
       value="Jonas"
     />
     <View>
-      <TouchableOpacity
-        activeOpacity={0.2}
-      >
+      <ForwardRef>
         <Icon
           name="Messages"
         />
-      </TouchableOpacity>
+      </ForwardRef>
       <MemberMenu
         blockUser={[Function]}
         flagMember={[Function]}

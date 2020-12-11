@@ -12,11 +12,6 @@ describe('CommunitySettingsMenu', () => {
     expect(actual).toMatchSnapshot()
   })
 
-  it('has navigation options', () => {
-    const props = {navigation: {state: {params: {}}}}
-    expect(CommunitySettingsMenu.navigationOptions(props)).toMatchSnapshot()
-  })
-
   it('navigates', () => {
     const props = {navigation: {navigate: jest.fn()}}
 

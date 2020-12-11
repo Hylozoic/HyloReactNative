@@ -12,8 +12,8 @@ exports[`FormError renders correctly 1`] = `
 `;
 
 exports[`Login renders correctly 1`] = `
-<withOrientation>
-  <ScrollViewMock
+<SafeAreaView>
+  <ScrollView
     contentContainerStyle={
       Object {
         "alignItems": "center",
@@ -40,7 +40,7 @@ exports[`Login renders correctly 1`] = `
     <View>
       <View>
         <View>
-          <TextInput
+          <Component
             allowFontScaling={true}
             autoCapitalize="none"
             autoCorrect={false}
@@ -58,18 +58,16 @@ exports[`Login renders correctly 1`] = `
       <Text>
         Password
       </Text>
-      <TouchableOpacity
-        activeOpacity={0.2}
-      >
+      <ForwardRef>
         <Text>
           Forgot your password?
         </Text>
-      </TouchableOpacity>
+      </ForwardRef>
     </View>
     <View>
       <View>
         <View>
-          <TextInput
+          <Component
             allowFontScaling={true}
             autoCapitalize="none"
             onChangeText={[Function]}
@@ -92,14 +90,13 @@ exports[`Login renders correctly 1`] = `
       </View>
     </View>
     <View>
-      <TouchableOpacity
-        activeOpacity={0.2}
+      <ForwardRef
         onPress={[Function]}
       >
         <Text>
           Log In
         </Text>
-      </TouchableOpacity>
+      </ForwardRef>
     </View>
     <View>
       <Text>
@@ -117,13 +114,13 @@ exports[`Login renders correctly 1`] = `
     <SignupLink
       goToSignup={[Function]}
     />
-  </ScrollViewMock>
-</withOrientation>
+  </ScrollView>
+</SafeAreaView>
 `;
 
 exports[`Login renders error message 1`] = `
-<withOrientation>
-  <ScrollViewMock
+<SafeAreaView>
+  <ScrollView
     contentContainerStyle={
       Object {
         "alignItems": "center",
@@ -150,7 +147,7 @@ exports[`Login renders error message 1`] = `
     <View>
       <View>
         <View>
-          <TextInput
+          <Component
             allowFontScaling={true}
             autoCapitalize="none"
             autoCorrect={false}
@@ -168,18 +165,16 @@ exports[`Login renders error message 1`] = `
       <Text>
         Password
       </Text>
-      <TouchableOpacity
-        activeOpacity={0.2}
-      >
+      <ForwardRef>
         <Text>
           Forgot your password?
         </Text>
-      </TouchableOpacity>
+      </ForwardRef>
     </View>
     <View>
       <View>
         <View>
-          <TextInput
+          <Component
             allowFontScaling={true}
             autoCapitalize="none"
             onChangeText={[Function]}
@@ -202,14 +197,13 @@ exports[`Login renders error message 1`] = `
       </View>
     </View>
     <View>
-      <TouchableOpacity
-        activeOpacity={0.2}
+      <ForwardRef
         onPress={[Function]}
       >
         <Text>
           Log In
         </Text>
-      </TouchableOpacity>
+      </ForwardRef>
     </View>
     <View>
       <Text>
@@ -225,13 +219,13 @@ exports[`Login renders error message 1`] = `
       />
     </View>
     <SignupLink />
-  </ScrollViewMock>
-</withOrientation>
+  </ScrollView>
+</SafeAreaView>
 `;
 
 exports[`Login renders with no network connection error 1`] = `
-<withOrientation>
-  <ScrollViewMock
+<SafeAreaView>
+  <ScrollView
     contentContainerStyle={
       Object {
         "alignItems": "center",
@@ -258,7 +252,7 @@ exports[`Login renders with no network connection error 1`] = `
     <View>
       <View>
         <View>
-          <TextInput
+          <Component
             allowFontScaling={true}
             autoCapitalize="none"
             autoCorrect={false}
@@ -276,18 +270,16 @@ exports[`Login renders with no network connection error 1`] = `
       <Text>
         Password
       </Text>
-      <TouchableOpacity
-        activeOpacity={0.2}
-      >
+      <ForwardRef>
         <Text>
           Forgot your password?
         </Text>
-      </TouchableOpacity>
+      </ForwardRef>
     </View>
     <View>
       <View>
         <View>
-          <TextInput
+          <Component
             allowFontScaling={true}
             autoCapitalize="none"
             onChangeText={[Function]}
@@ -310,14 +302,13 @@ exports[`Login renders with no network connection error 1`] = `
       </View>
     </View>
     <View>
-      <TouchableOpacity
-        activeOpacity={0.2}
+      <ForwardRef
         onPress={[Function]}
       >
         <Text>
           Log In
         </Text>
-      </TouchableOpacity>
+      </ForwardRef>
     </View>
     <View>
       <Text>
@@ -333,13 +324,13 @@ exports[`Login renders with no network connection error 1`] = `
       />
     </View>
     <SignupLink />
-  </ScrollViewMock>
-</withOrientation>
+  </ScrollView>
+</SafeAreaView>
 `;
 
 exports[`Login renders with pending banner 1`] = `
-<withOrientation>
-  <ScrollViewMock
+<SafeAreaView>
+  <ScrollView
     contentContainerStyle={
       Object {
         "alignItems": "center",
@@ -369,7 +360,7 @@ exports[`Login renders with pending banner 1`] = `
     <View>
       <View>
         <View>
-          <TextInput
+          <Component
             allowFontScaling={true}
             autoCapitalize="none"
             autoCorrect={false}
@@ -387,18 +378,16 @@ exports[`Login renders with pending banner 1`] = `
       <Text>
         Password
       </Text>
-      <TouchableOpacity
-        activeOpacity={0.2}
-      >
+      <ForwardRef>
         <Text>
           Forgot your password?
         </Text>
-      </TouchableOpacity>
+      </ForwardRef>
     </View>
     <View>
       <View>
         <View>
-          <TextInput
+          <Component
             allowFontScaling={true}
             autoCapitalize="none"
             onChangeText={[Function]}
@@ -421,14 +410,13 @@ exports[`Login renders with pending banner 1`] = `
       </View>
     </View>
     <View>
-      <TouchableOpacity
-        activeOpacity={0.2}
+      <ForwardRef
         onPress={[Function]}
       >
         <Text>
           Log In
         </Text>
-      </TouchableOpacity>
+      </ForwardRef>
     </View>
     <View>
       <Text>
@@ -444,8 +432,8 @@ exports[`Login renders with pending banner 1`] = `
       />
     </View>
     <SignupLink />
-  </ScrollViewMock>
-</withOrientation>
+  </ScrollView>
+</SafeAreaView>
 `;
 
 exports[`SignupLink renders correctly 1`] = `
@@ -453,13 +441,12 @@ exports[`SignupLink renders correctly 1`] = `
   <Text>
     Dont have an account? 
   </Text>
-  <TouchableOpacity
-    activeOpacity={0.2}
+  <ForwardRef
     onPress={[MockFunction]}
   >
     <Text>
       Sign up now
     </Text>
-  </TouchableOpacity>
+  </ForwardRef>
 </View>
 `;

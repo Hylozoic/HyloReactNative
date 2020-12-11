@@ -5,7 +5,7 @@ exports[`matches the last snapshot 1`] = `
   behavior="padding"
   keyboardVerticalOffset={64}
 >
-  <ScrollViewMock>
+  <ScrollView>
     <SkillEditor
       done={[Function]}
       doneLabel="Done"
@@ -63,6 +63,6 @@ exports[`matches the last snapshot 1`] = `
         }
       }
     />
-  </ScrollViewMock>
+  </ScrollView>
 </_default>
 `;

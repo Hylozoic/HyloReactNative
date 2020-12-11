@@ -27,7 +27,6 @@ exports[`FeedBanner has a topic subscribe toggle button 1`] = `
       <View
         accessible={true}
         focusable={true}
-        isTVSelectable={true}
         onClick={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
@@ -167,8 +166,7 @@ exports[`FeedBanner renders correctly with all=true, and no community or user 1`
 
 exports[`PostPrompt renders correctly with a user 1`] = `
 <View>
-  <TouchableOpacity
-    activeOpacity={0.2}
+  <ForwardRef
     onPress={[Function]}
   >
     <Avatar
@@ -178,6 +176,6 @@ exports[`PostPrompt renders correctly with a user 1`] = `
       John
       , what's on your mind?
     </Text>
-  </TouchableOpacity>
+  </ForwardRef>
 </View>
 `;

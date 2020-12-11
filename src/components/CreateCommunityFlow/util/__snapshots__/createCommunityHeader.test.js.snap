@@ -5,17 +5,7 @@ Object {
   "color": "#FFFFFF",
   "fontSize": 10,
   "headerBackgroundColor": "#0DC39F",
-  "headerLeft": <HeaderBackButton
-    buttonImage={
-      Object {
-        "testUri": "../../react-navigation/src/views/assets/back-icon.png",
-      }
-    }
-    onPress={[Function]}
-    pressColorAndroid="rgba(0, 0, 0, .32)"
-    tintColor="#9ee7d9"
-    truncatedTitle="Back"
-  />,
+  "headerLeft": [Function],
   "headerStyle": Object {
     "backgroundColor": "#0DC39F",
     "borderBottomWidth": 0,

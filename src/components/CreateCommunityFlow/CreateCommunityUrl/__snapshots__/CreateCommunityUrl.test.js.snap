@@ -5,17 +5,7 @@ Object {
   "color": "#FFFFFF",
   "fontSize": 10,
   "headerBackgroundColor": "#0DC39F",
-  "headerLeft": <HeaderBackButton
-    buttonImage={
-      Object {
-        "testUri": "../../react-navigation/src/views/assets/back-icon.png",
-      }
-    }
-    onPress={[Function]}
-    pressColorAndroid="rgba(0, 0, 0, .32)"
-    tintColor="#9ee7d9"
-    truncatedTitle="Back"
-  />,
+  "headerLeft": [Function],
   "headerStyle": Object {
     "backgroundColor": "#0DC39F",
     "borderBottomWidth": 0,
@@ -32,7 +22,7 @@ Object {
 `;
 
 exports[`matches last snapshot 1`] = `
-<ScrollViewMock>
+<ScrollView>
   <KeyboardFriendlyView>
     <Text>
       Choose an address for your community
@@ -44,7 +34,7 @@ exports[`matches last snapshot 1`] = `
       <Text>
         What's the address for your community?
       </Text>
-      <TextInput
+      <Component
         allowFontScaling={true}
         autoCapitalize="none"
         autoCorrect={false}
@@ -60,7 +50,7 @@ exports[`matches last snapshot 1`] = `
       text="Continue"
     />
   </KeyboardFriendlyView>
-</ScrollViewMock>
+</ScrollView>
 `;
 
 exports[`matches last snapshot when there is an error 1`] = `
@@ -101,7 +91,6 @@ exports[`matches last snapshot when there is an error 1`] = `
         <View
           accessible={true}
           focusable={true}
-          isTVSelectable={true}
           onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
@@ -162,7 +151,6 @@ exports[`validates the url 1`] = `
         <View
           accessible={true}
           focusable={true}
-          isTVSelectable={true}
           onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
@@ -223,7 +211,6 @@ exports[`validates the url 2`] = `
         <View
           accessible={true}
           focusable={true}
-          isTVSelectable={true}
           onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}

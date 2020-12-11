@@ -1,8 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`CommentCard matches the last snapshot 1`] = `
-<TouchableOpacity
-  activeOpacity={0.2}
+<ForwardRef
   onPress={[Function]}
 >
   <View>
@@ -28,7 +27,7 @@ exports[`CommentCard matches the last snapshot 1`] = `
     />
   </View>
   <View />
-  <Connect(Comment)
+  <Memo(Connect(Comment))
     comment={
       Object {
         "id": 1,
@@ -48,12 +47,11 @@ exports[`CommentCard matches the last snapshot 1`] = `
     showMember={[Function]}
     showTopic={[Function]}
   />
-</TouchableOpacity>
+</ForwardRef>
 `;
 
 exports[`PersonCard matches the last snapshot 1`] = `
-<TouchableOpacity
-  activeOpacity={0.2}
+<ForwardRef
   onPress={[Function]}
 >
   <View>
@@ -69,12 +67,11 @@ exports[`PersonCard matches the last snapshot 1`] = `
       </Text>
     </View>
   </View>
-</TouchableOpacity>
+</ForwardRef>
 `;
 
 exports[`PostCard matches the last snapshot 1`] = `
-<TouchableOpacity
-  activeOpacity={0.2}
+<ForwardRef
   onPress={[Function]}
 >
   <PostCard
@@ -98,7 +95,7 @@ exports[`PostCard matches the last snapshot 1`] = `
     showDetails={[Function]}
     showMember={[Function]}
   />
-</TouchableOpacity>
+</ForwardRef>
 `;
 
 exports[`SearchPage has navigationOptions 1`] = `
@@ -119,7 +116,7 @@ Object {
 `;
 
 exports[`SearchPage matches the last snapshot 1`] = `
-<View>
+<SafeAreaView>
   <FlatList
     ListFooterComponent={<Loading />}
     ListHeaderComponent={
@@ -129,7 +126,7 @@ exports[`SearchPage matches the last snapshot 1`] = `
             <Icon
               name="Search"
             />
-            <TextInput
+            <Component
               allowFontScaling={true}
               onChangeText={[Function]}
               rejectResponderTermination={true}
@@ -167,7 +164,7 @@ exports[`SearchPage matches the last snapshot 1`] = `
     updateCellsBatchingPeriod={50}
     windowSize={21}
   />
-</View>
+</SafeAreaView>
 `;
 
 exports[`SearchResult works with Comment 1`] = `
@@ -211,8 +208,7 @@ exports[`SearchResult works with Post 1`] = `
 `;
 
 exports[`Tab matches the last snapshot 1`] = `
-<TouchableOpacity
-  activeOpacity={0.2}
+<ForwardRef
   hitSlop={
     Object {
       "bottom": 15,
@@ -226,7 +222,7 @@ exports[`Tab matches the last snapshot 1`] = `
   <Text>
     Discussions
   </Text>
-</TouchableOpacity>
+</ForwardRef>
 `;
 
 exports[`TabBar matches the last snapshot 1`] = `

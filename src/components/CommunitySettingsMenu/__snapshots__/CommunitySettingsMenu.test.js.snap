@@ -1,22 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`CommunitySettingsMenu has navigation options 1`] = `
-Object {
-  "headerBackTitle": null,
-  "headerStyle": Object {
-    "backgroundColor": "white",
-    "paddingHorizontal": 10,
-  },
-  "headerTintColor": "#808c9b",
-  "headerTitle": "Community Settings",
-  "headerTitleStyle": Object {
-    "color": "black",
-    "fontFamily": "Circular-Bold",
-    "fontSize": 17,
-  },
-}
-`;
-
 exports[`CommunitySettingsMenu matches the last snapshot 1`] = `
 <FlatList
   ListHeaderComponent={

@@ -109,12 +109,9 @@ Array [
 exports[`mapDispatchToProps creates actions 3`] = `
 Array [
   Array [
+    "MemberProfile",
     Object {
-      "key": "MemberProfile",
-      "params": Object {
-        "id": 22,
-      },
-      "routeName": "MemberProfile",
+      "id": 22,
     },
   ],
 ]

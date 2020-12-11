@@ -22,8 +22,8 @@ exports[`SignupFlow4 matches last snapshot 1`] = `
   behavior="padding"
   keyboardVerticalOffset={64}
 >
-  <ScrollViewMock>
-    <Connect(SkillEditor)
+  <ScrollView>
+    <Memo(Connect(SkillEditor))
       doneLabel="Continue"
       theme={
         Object {
@@ -80,6 +80,6 @@ exports[`SignupFlow4 matches last snapshot 1`] = `
         }
       }
     />
-  </ScrollViewMock>
+  </ScrollView>
 </KeyboardFriendlyView>
 `;

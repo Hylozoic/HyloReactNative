@@ -40,7 +40,6 @@ exports[`renders multiple images that can be tapped to open in browser 1`] = `
   <View
     accessible={true}
     focusable={true}
-    isTVSelectable={true}
     onClick={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
@@ -62,7 +61,6 @@ exports[`renders multiple images that can be tapped to open in browser 1`] = `
       <View
         accessible={true}
         focusable={true}
-        isTVSelectable={true}
         onClick={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
@@ -77,13 +75,11 @@ exports[`renders multiple images that can be tapped to open in browser 1`] = `
               "uri": "http://foo.com/baz.png",
             }
           }
-          style={null}
         />
       </View>
       <View
         accessible={true}
         focusable={true}
-        isTVSelectable={true}
         onClick={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
@@ -98,13 +94,11 @@ exports[`renders multiple images that can be tapped to open in browser 1`] = `
               "uri": "http://foo.com/quz.png",
             }
           }
-          style={null}
         />
       </View>
       <View
         accessible={true}
         focusable={true}
-        isTVSelectable={true}
         onClick={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
@@ -119,7 +113,6 @@ exports[`renders multiple images that can be tapped to open in browser 1`] = `
               "uri": "http://foo.com/qux.png",
             }
           }
-          style={null}
         />
       </View>
     </View>

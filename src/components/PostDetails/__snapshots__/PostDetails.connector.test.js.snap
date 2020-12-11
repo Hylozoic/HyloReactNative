@@ -3,39 +3,9 @@
 exports[`mapsStateToProps 1`] = `
 Object {
   "currentUser": undefined,
-  "id": "1",
+  "id": undefined,
   "isProject": false,
-  "post": Object {
-    "commenters": Array [],
-    "communities": Array [
-      Object {
-        "id": "2",
-        "name": "Home",
-      },
-    ],
-    "creator": Object {
-      "id": "10",
-    },
-    "fileAttachments": Array [
-      Object {
-        "id": "1",
-        "post": "1",
-        "type": "file",
-        "url": "http://foo.com/foo.pdf",
-      },
-    ],
-    "fileUrls": Array [
-      "http://foo.com/foo.pdf",
-    ],
-    "id": "1",
-    "imageUrls": Array [
-      "http://foo.com/bar.png",
-    ],
-    "linkPreview": undefined,
-    "members": Array [],
-    "pinned": undefined,
-    "topics": Array [],
-  },
+  "post": null,
 }
 `;
 
@@ -81,12 +51,9 @@ exports[`mergeProps editPost 1`] = `
 Array [
   "navigate",
   Array [
+    "PostEditor",
     Object {
-      "key": "PostEditor",
-      "params": Object {
-        "id": "testpost",
-      },
-      "routeName": "PostEditor",
+      "id": "testpost",
     },
   ],
 ]
@@ -128,12 +95,9 @@ exports[`mergeProps showMember 1`] = `
 Array [
   "navigate",
   Array [
+    "MemberProfile",
     Object {
-      "key": "MemberProfile",
-      "params": Object {
-        "id": 1,
-      },
-      "routeName": "MemberProfile",
+      "id": 1,
     },
   ],
 ]
@@ -143,13 +107,10 @@ exports[`mergeProps showTopic 1`] = `
 Array [
   "navigate",
   Array [
+    "Feed",
     Object {
-      "key": "Feed",
-      "params": Object {
-        "communityId": 4,
-        "topicName": "mytopicname",
-      },
-      "routeName": "Feed",
+      "communityId": 4,
+      "topicName": "mytopicname",
     },
   ],
 ]

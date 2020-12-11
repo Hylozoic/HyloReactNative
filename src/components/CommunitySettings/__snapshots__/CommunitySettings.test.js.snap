@@ -47,40 +47,8 @@ exports[`CommunitySettings CommunityBanner matches the last snapshot 1`] = `
 
 exports[`CommunitySettings CommunityBanner shows local images if present 1`] = `undefined`;
 
-exports[`CommunitySettings has navigation options 1`] = `
-Object {
-  "headerBackTitle": null,
-  "headerLeft": <HeaderBackButton
-    buttonImage={
-      Object {
-        "testUri": "../../react-navigation/src/views/assets/back-icon.png",
-      }
-    }
-    onPress={[Function]}
-    pressColorAndroid="rgba(0, 0, 0, .32)"
-    tintColor="#808c9b"
-    truncatedTitle="Back"
-  />,
-  "headerRight": <HeaderButton
-    disableOnClick={true}
-    text="Save"
-  />,
-  "headerStyle": Object {
-    "backgroundColor": "white",
-    "paddingHorizontal": 10,
-  },
-  "headerTintColor": "#808c9b",
-  "headerTitle": "Community Information",
-  "headerTitleStyle": Object {
-    "color": "black",
-    "fontFamily": "Circular-Bold",
-    "fontSize": 17,
-  },
-}
-`;
-
 exports[`CommunitySettings matches the last snapshot 1`] = `
-<ScrollViewMock
+<ScrollView
   contentContainerStyle={
     Object {
       "backgroundColor": "#FFFFFF",
@@ -90,7 +58,7 @@ exports[`CommunitySettings matches the last snapshot 1`] = `
   }
 >
   <_default>
-    <TextInput
+    <Component
       allowFontScaling={true}
       onChangeText={[Function]}
       rejectResponderTermination={true}
@@ -112,7 +80,7 @@ exports[`CommunitySettings matches the last snapshot 1`] = `
     <Text>
       DESCRIPTION
     </Text>
-    <TextInput
+    <Component
       allowFontScaling={true}
       multiline={true}
       numberOfLines={5}
@@ -123,12 +91,12 @@ exports[`CommunitySettings matches the last snapshot 1`] = `
     <Text>
       LOCATION
     </Text>
-    <TextInput
+    <Component
       allowFontScaling={true}
       onChangeText={[Function]}
       rejectResponderTermination={true}
       underlineColorAndroid="transparent"
     />
   </_default>
-</ScrollViewMock>
+</ScrollView>
 `;

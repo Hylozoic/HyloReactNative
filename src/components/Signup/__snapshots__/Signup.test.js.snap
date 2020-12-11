@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`matches last snapshot 1`] = `
-<ScrollViewMock
+<ScrollView
   contentContainerStyle={
     Object {
       "backgroundColor": "white",
@@ -64,28 +64,26 @@ exports[`matches last snapshot 1`] = `
       <Text>
         Already have an account? 
       </Text>
-      <TouchableOpacity
-        activeOpacity={0.2}
+      <ForwardRef
         onPress={[Function]}
       >
         <Text>
           Log in now
         </Text>
-      </TouchableOpacity>
+      </ForwardRef>
     </View>
     <View>
       <Text>
         Your data is safe with Hylo. By clicking the "Sign Up" button above you are agreeing to these terms:
       </Text>
-      <TouchableOpacity
-        activeOpacity={0.2}
+      <ForwardRef
         onPress={[Function]}
       >
         <Text>
           https://www.hylo.com/terms
         </Text>
-      </TouchableOpacity>
+      </ForwardRef>
     </View>
   </View>
-</ScrollViewMock>
+</ScrollView>
 `;

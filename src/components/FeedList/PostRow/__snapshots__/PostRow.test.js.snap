@@ -2,7 +2,7 @@
 
 exports[`PostRow only displays communities in the selected network 1`] = `
 <View>
-  <TouchableOpacity
+  <ForwardRef
     activeOpacity={0.6}
     delayPressIn={50}
     onPress={[Function]}
@@ -37,13 +37,13 @@ exports[`PostRow only displays communities in the selected network 1`] = `
         }
       />
     </View>
-  </TouchableOpacity>
+  </ForwardRef>
 </View>
 `;
 
 exports[`PostRow renders correctly 1`] = `
 <View>
-  <TouchableOpacity
+  <ForwardRef
     activeOpacity={0.6}
     delayPressIn={50}
     onPress={[Function]}
@@ -58,6 +58,6 @@ exports[`PostRow renders correctly 1`] = `
         }
       />
     </View>
-  </TouchableOpacity>
+  </ForwardRef>
 </View>
 `;

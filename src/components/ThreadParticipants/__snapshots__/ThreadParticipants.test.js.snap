@@ -1,8 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ParticipantRow matches the last snapshot 1`] = `
-<TouchableOpacity
-  activeOpacity={0.2}
+<ForwardRef
   onPress={[Function]}
 >
   <Avatar
@@ -11,11 +10,11 @@ exports[`ParticipantRow matches the last snapshot 1`] = `
   <Text>
     Bob
   </Text>
-</TouchableOpacity>
+</ForwardRef>
 `;
 
 exports[`ThreadParticipants matches the last snapshot 1`] = `
-<ScrollViewMock
+<ScrollView
   contentContainerStyle={
     Object {
       "backgroundColor": "white",
@@ -41,7 +40,7 @@ exports[`ThreadParticipants matches the last snapshot 1`] = `
       }
     }
   />
-</ScrollViewMock>
+</ScrollView>
 `;
 
 exports[`ThreadParticipants returns loading if no participants 1`] = `

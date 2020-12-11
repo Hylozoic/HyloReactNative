@@ -1,14 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`NewMessage renders correctly 1`] = `
-<withOrientation>
+<SafeAreaView>
   <KeyboardFriendlyView
     behavior="padding"
     keyboardVerticalOffset={64}
   >
-    <ScrollViewMock>
-      <TouchableOpacity
-        activeOpacity={0.2}
+    <ScrollView>
+      <ForwardRef
         onPress={[Function]}
       />
       <View>
@@ -17,7 +16,7 @@ exports[`NewMessage renders correctly 1`] = `
           text="Add Participant"
         />
       </View>
-    </ScrollViewMock>
+    </ScrollView>
     <MessageInput
       emptyParticipants={true}
       multiline={true}
@@ -26,18 +25,17 @@ exports[`NewMessage renders correctly 1`] = `
       placeholder="Type your message here"
     />
   </KeyboardFriendlyView>
-</withOrientation>
+</SafeAreaView>
 `;
 
 exports[`NewMessage renders correctly 2`] = `
-<withOrientation>
+<SafeAreaView>
   <KeyboardFriendlyView
     behavior="padding"
     keyboardVerticalOffset={64}
   >
-    <ScrollViewMock>
-      <TouchableOpacity
-        activeOpacity={0.2}
+    <ScrollView>
+      <ForwardRef
         onPress={[Function]}
       />
       <View>
@@ -46,7 +44,7 @@ exports[`NewMessage renders correctly 2`] = `
           text="Add Participant"
         />
       </View>
-    </ScrollViewMock>
+    </ScrollView>
     <MessageInput
       emptyParticipants={true}
       multiline={true}
@@ -55,5 +53,5 @@ exports[`NewMessage renders correctly 2`] = `
       placeholder="Type your message here"
     />
   </KeyboardFriendlyView>
-</withOrientation>
+</SafeAreaView>
 `;
