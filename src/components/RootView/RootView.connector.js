@@ -1,4 +1,5 @@
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import checkSessionAndSetSignedIn from 'store/actions/checkSessionAndSetSignedIn'
 import fetchCurrentUser from 'store/actions/fetchCurrentUser'
 import getMe from 'store/selectors/getMe'
@@ -17,31 +18,27 @@ export function mapStateToProps (state, props) {
 }
 
 export function mapDispatchToProps (dispatch) {
-  return {
-    checkSessionAndSetSignedIn: () => dispatch(checkSessionAndSetSignedIn()),
-    fetchCurrentUser: () => dispatch(fetchCurrentUser())
-  }
+  return bindActionCreators({
+    checkSessionAndSetSignedIn,
+    fetchCurrentUser
+  }, dispatch)
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
-  const handleResult = ({ error, payload: signedIn }) => {
-    if (error) {
-      // automatically retry -- this prevents us from getting stuck with
-      // nothing to interact with if we start the app while temporarily offline
-      return new Promise(resolve =>
-        setTimeout(() => resolve(setupSessionWithRetry()), 1000))
-    } else if (signedIn) {
-      return dispatchProps.fetchCurrentUser()
-    }
-  }
-
-  const setupSessionWithRetry = () =>
-    dispatchProps.checkSessionAndSetSignedIn().then(handleResult)
+  const loadCurrentUserSession = () =>
+    dispatchProps
+      .checkSessionAndSetSignedIn()
+      .then(({ payload: signedIn }) => {
+        if (signedIn) {
+          return dispatchProps.fetchCurrentUser()
+        }
+      })
 
   return {
     ...ownProps,
     ...stateProps,
-    setupSessionWithRetry
+    ...dispatchProps,
+    loadCurrentUserSession
   }
 }
 

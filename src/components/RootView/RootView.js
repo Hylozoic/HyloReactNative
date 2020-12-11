@@ -1,24 +1,43 @@
 import React, { useMemo } from 'react'
 import { View } from 'react-native'
+import Loading from '../Loading'
 import RootNavigator from 'navigation'
 // import DeepLinkHandler from 'navigation/DeepLinkHandler'
-import LoadingModal from '../LoadingModal'
 import VersionCheck from '../VersionCheck'
 
 export default function RootView ({
   loading,
   signedIn,
-  setupSessionWithRetry,
+  loadCurrentUserSession,
   openedPushNotification
 }) {
-  useMemo(() => { setupSessionWithRetry() }, [])
+  useMemo(() => { loadCurrentUserSession() }, [])
 
-  if (loading) return <LoadingModal />
-
+  if (loading) {
+    return <View style={styles.loadingContainer}>
+      <Loading style={styles.loading} />
+    </View>
+  }
+  
   // TODO: Deeplink handling using openedPushNotification
 
   return <View style={{flex: 1}}>
     <VersionCheck />
     <RootNavigator isSignedIn={signedIn} />
   </View>
+}
+
+const styles = {
+  loadingContainer: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  loading: {
+    marginBottom: 15
+  }
 }

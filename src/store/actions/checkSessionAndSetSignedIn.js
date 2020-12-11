@@ -6,10 +6,8 @@ export default async function checkSessionAndSetSignedIn () {
   const payload = cookie ? {
     api: {
       path: '/noo/user/status',
-      transform: json => {
-        console.log('!!!! json in checkSessionAndSetSignedIn:', json)
-        return !!json.signedIn
-      } 
+      transform: json => !!json.signedIn,
+      retry: true
     }
   } : false
 

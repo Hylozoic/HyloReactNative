@@ -1,10 +1,10 @@
-import { setSessionCookie } from './session'
+import { getSessionCookie, setSessionCookie } from './session'
 import apiHost from './apiHost'
 
-export default function fetchJSON (path, params, options = {}) {
+export default async function fetchJSON (path, params, options = {}) {
   const { host, method } = options
-  const url = (host || apiHost) + path
-  return fetch(url, {
+  const requestUrl = (host || apiHost) + path
+  const response = await fetch(requestUrl, {
     method: method || 'get',
     headers: {
       'Accept': 'application/json',
@@ -12,16 +12,17 @@ export default function fetchJSON (path, params, options = {}) {
     },
     body: JSON.stringify(params),
     withCredentials: true
-  }).then(resp => {
-    let { status, statusText, url } = resp
-    if (status === 200) {
-      // FIXME: this doesn't need to happen every time
-      return setSessionCookie(resp).then(() => resp.json())
-    }
-    return resp.text().then(body => {
-      const error = new Error(body)
-      error.response = {status, statusText, url, body}
-      throw error
-    })
+  })
+  const { status, statusText, url } = response
+
+  if (status === 200) {
+    await setSessionCookie(response)
+    return response.json()
+  }
+
+  return response.text().then(body => {
+    const error = new Error(body)
+    error.response = {status, statusText, url, body}
+    throw error
   })
 }

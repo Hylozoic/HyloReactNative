@@ -7,15 +7,23 @@ export default function apiMiddleware (store) {
 
     if (!payload || !payload.api) return next(action)
 
-    const { path, params, method, transform } = payload.api
-
-    let promise = new Promise((resolve, reject) => {
-      InteractionManager.runAfterInteractions(() => {
-        fetchJSON(path, params, {method})
+    const { path, params, method, transform, retry } = payload.api
+    const fetcher = (resolve, reject) => {
+      InteractionManager.runAfterInteractions(() => 
+        fetchJSON(path, params, { method })
           .then(json => resolve(transform ? transform(json) : json))
-          .catch(reject)
-      })
-    })
+          .catch(handleError(resolve, reject))
+      )
+    }
+    const handleError = (resolve, reject) => error => {
+      if (retry) {
+        // TODO: Add exponential backoff
+        setTimeout(() => fetcher(resolve, reject), 1000)
+      } else {
+        reject(error)
+      }
+    }
+    let promise = new Promise(fetcher)
 
     if (meta && meta.then) {
       promise = promise.then(meta.then)
