@@ -92,16 +92,16 @@ PODS:
     - AppAuth (~> 1.2)
     - GTMAppAuth (~> 1.0)
     - GTMSessionFetcher/Core (~> 1.1)
-  - GTMAppAuth (1.0.0):
-    - AppAuth/Core (~> 1.0)
-    - GTMSessionFetcher (~> 1.1)
-  - GTMSessionFetcher (1.4.0):
-    - GTMSessionFetcher/Full (= 1.4.0)
-  - GTMSessionFetcher/Core (1.4.0)
-  - GTMSessionFetcher/Full (1.4.0):
-    - GTMSessionFetcher/Core (= 1.4.0)
+  - GTMAppAuth (1.1.0):
+    - AppAuth/Core (~> 1.4)
+    - GTMSessionFetcher (~> 1.4)
+  - GTMSessionFetcher (1.5.0):
+    - GTMSessionFetcher/Full (= 1.5.0)
+  - GTMSessionFetcher/Core (1.5.0)
+  - GTMSessionFetcher/Full (1.5.0):
+    - GTMSessionFetcher/Core (= 1.5.0)
   - Intercom (6.0.2)
-  - Mixpanel (3.6.2)
+  - Mixpanel (3.6.3)
   - OneSignal (2.16.1)
   - OpenSSL-Universal (1.0.2.20):
     - OpenSSL-Universal/Static (= 1.0.2.20)
@@ -272,8 +272,8 @@ PODS:
     - React-cxxreact (= 0.63.4)
     - React-jsi (= 0.63.4)
   - React-jsinspector (0.63.4)
-  - react-native-background-timer (2.2.0):
-    - React
+  - react-native-background-timer (2.4.1):
+    - React-Core
   - react-native-date-picker (2.7.13):
     - React
   - react-native-document-picker (2.3.0):
@@ -299,11 +299,11 @@ PODS:
   - react-native-intercom (15.0.0):
     - Intercom (~> 6.0.0)
     - React
-  - react-native-mixpanel (1.2.0):
+  - react-native-mixpanel (1.2.5):
     - Mixpanel (~> 3.6.0)
     - React
-  - react-native-netinfo (5.9.0):
-    - React
+  - react-native-netinfo (5.9.9):
+    - React-Core
   - react-native-onesignal (3.9.3):
     - OneSignal (= 2.16.1)
     - React (< 1.0.0, >= 0.13.0)
@@ -373,13 +373,13 @@ PODS:
     - React-Core (= 0.63.4)
     - React-cxxreact (= 0.63.4)
     - React-jsi (= 0.63.4)
-  - RNAppleAuthentication (1.1.2):
-    - React
-  - RNCAsyncStorage (1.12.1):
+  - RNAppleAuthentication (2.1.0):
     - React-Core
+  - RNCAsyncStorage (1.13.2):
+    - React
   - RNCMaskedView (0.1.10):
     - React
-  - RNDeviceInfo (6.0.3):
+  - RNDeviceInfo (6.2.1):
     - React-Core
   - RNGestureHandler (1.9.0):
     - React-Core
@@ -388,16 +388,16 @@ PODS:
     - React
   - RNReanimated (1.13.2):
     - React-Core
-  - RNScreens (2.15.0):
+  - RNScreens (2.16.1):
     - React-Core
-  - RNSentry (1.4.5):
+  - RNSentry (2.1.0):
+    - React-Core
+    - Sentry (= 6.0.9)
+  - RNVectorIcons (7.1.0):
     - React
-    - Sentry (~> 5.1.4)
-  - RNVectorIcons (6.6.0):
-    - React
-  - Sentry (5.1.10):
-    - Sentry/Core (= 5.1.10)
-  - Sentry/Core (5.1.10)
+  - Sentry (6.0.9):
+    - Sentry/Core (= 6.0.9)
+  - Sentry/Core (6.0.9)
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
     - Yoga (~> 1.14)
@@ -468,7 +468,7 @@ DEPENDENCIES:
   - React-RCTVibration (from `../node_modules/react-native/Libraries/Vibration`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - "RNAppleAuthentication (from `../node_modules/@invertase/react-native-apple-authentication`)"
-  - "RNCAsyncStorage (from `../node_modules/@react-native-community/async-storage`)"
+  - "RNCAsyncStorage (from `../node_modules/@react-native-async-storage/async-storage`)"
   - "RNCMaskedView (from `../node_modules/@react-native-community/masked-view`)"
   - RNDeviceInfo (from `../node_modules/react-native-device-info`)
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
@@ -587,7 +587,7 @@ EXTERNAL SOURCES:
   RNAppleAuthentication:
     :path: "../node_modules/@invertase/react-native-apple-authentication"
   RNCAsyncStorage:
-    :path: "../node_modules/@react-native-community/async-storage"
+    :path: "../node_modules/@react-native-async-storage/async-storage"
   RNCMaskedView:
     :path: "../node_modules/@react-native-community/masked-view"
   RNDeviceInfo:
@@ -629,10 +629,10 @@ SPEC CHECKSUMS:
   Folly: b73c3869541e86821df3c387eb0af5f65addfab4
   glog: 40a13f7840415b9a77023fbcae0f1e6f43192af3
   GoogleSignIn: 7137d297ddc022a7e0aa4619c86d72c909fa7213
-  GTMAppAuth: 4deac854479704f348309e7b66189e604cf5e01e
-  GTMSessionFetcher: 6f5c8abbab8a9bce4bb3f057e317728ec6182b10
+  GTMAppAuth: 197a8dabfea5d665224aa00d17f164fc2248dab9
+  GTMSessionFetcher: b3503b20a988c4e20cc189aa798fd18220133f52
   Intercom: 523417d82ed1a8c635cc7f97b266eb8bd0bd9d85
-  Mixpanel: 0a78141d1a073308201f76c55c3e629535e72b47
+  Mixpanel: 0e9d50ecc6398e1082e690ddedf6968e57e81935
   OneSignal: 5f6514ec2b931306eb067acb124afbb2e49970af
   OpenSSL-Universal: ff34003318d5e1163e9529b08470708e389ffcdd
   RCTRequired: 082f10cd3f905d6c124597fd1c14f6f2655ff65e
@@ -645,15 +645,15 @@ SPEC CHECKSUMS:
   React-jsi: a0418934cf48f25b485631deb27c64dc40fb4c31
   React-jsiexecutor: 93bd528844ad21dc07aab1c67cb10abae6df6949
   React-jsinspector: 58aef7155bc9a9683f5b60b35eccea8722a4f53a
-  react-native-background-timer: 1f7d560647b40e6a60b01c452ba29c54bf581fc4
+  react-native-background-timer: 17ea5e06803401a379ebf1f20505b793ac44d0fe
   react-native-date-picker: 4468aeac8de6a6e351b56be0014d4fd35476de4c
   react-native-document-picker: 8508bfda34be6c24a2cbecbe515b15108658c183
   react-native-fbsdk: 00c15d138bba6d4efa628670886fc58cec858c19
   react-native-flipper: 7077153889f54d57e1f61c579da23426f0bb5e39
   react-native-image-picker: 7a85cf7b0a53845f03ae52fb4592a2748ded069b
   react-native-intercom: ddc3a81f883b9089649dbaf4c02e3b3ad271b6d1
-  react-native-mixpanel: d644efe1ca33d2646d5cba29e24a13ebc9b37209
-  react-native-netinfo: 7b3c53674ea611b26a7788821f137c6d9d3a038b
+  react-native-mixpanel: 5d0bcea791fd938c35138be2d00e50e19b9de601
+  react-native-netinfo: 0212ce8604e88edf686f1481b925b17a42a52449
   react-native-onesignal: f92b6fae16388422f1b5d73b2c31e7000f481ae8
   react-native-restart: d19a0f8d053d065fe64cd2baebb6487111c77149
   react-native-safe-area-context: b6e0e284002381d2ff29fa4fff42b4d8282e3c94
@@ -668,17 +668,17 @@ SPEC CHECKSUMS:
   React-RCTText: 5c51df3f08cb9dedc6e790161195d12bac06101c
   React-RCTVibration: ae4f914cfe8de7d4de95ae1ea6cc8f6315d73d9d
   ReactCommon: 73d79c7039f473b76db6ff7c6b159c478acbbb3b
-  RNAppleAuthentication: 473b2c076f1a48a537610580a168c1fb6d0a90c6
-  RNCAsyncStorage: b03032fdbdb725bea0bd9e5ec5a7272865ae7398
+  RNAppleAuthentication: 46cbc67739bae83ca229497f9b0038f3f5431443
+  RNCAsyncStorage: 05bae7ecfab1cbd5441993f1ca098f7c3b3f8d0e
   RNCMaskedView: 5a8ec07677aa885546a0d98da336457e2bea557f
-  RNDeviceInfo: 2621e166cd79c771f30902521a1a356d886347be
+  RNDeviceInfo: 9b6aba9ffaed69ecb72bd13c7bcb0debf277bc9f
   RNGestureHandler: 9b7e605a741412e20e13c512738a31bd1611759b
   RNGoogleSignin: ccf71ee4b6cfd324fd788a41e457e2043838c0d9
   RNReanimated: e03f7425cb7a38dcf1b644d680d1bfc91c3337ad
-  RNScreens: 2ad555d4d9fa10b91bb765ca07fe9b29d59573f0
-  RNSentry: 0a70359ddacbfb9b1cbbb0971e54065b9f70ac57
-  RNVectorIcons: 0bb4def82230be1333ddaeee9fcba45f0b288ed4
-  Sentry: 8715e88b813bde9ad37aead365d5b04ac7302153
+  RNScreens: 45c457af3d2ee9e08fc01e70da87e653d46b1198
+  RNSentry: 51972e3fe50e2fb38ae459af8c87d61f63f364db
+  RNVectorIcons: bc69e6a278b14842063605de32bec61f0b251a59
+  Sentry: 388c9dc093b2fd3a264466a5c5b21e25959610a9
   Yoga: 4bd86afe9883422a7c4028c00e34790f560923d6
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
