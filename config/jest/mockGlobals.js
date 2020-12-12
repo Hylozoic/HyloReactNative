@@ -13,6 +13,9 @@
 // https://blog.callstack.io/unit-testing-react-native-with-the-new-jest-ii-redux-snapshots-for-your-actions-and-reducers-8559f6f8050b
 
 // Mocking the global.fetch included in React Native
+// https://reactnavigation.org/docs/testing/
+import 'react-native-gesture-handler/jestSetup'
+
 global.fetch = jest.fn() // eslint-disable-line no-undef
 
 // Helper to mock a success response (only once)
@@ -36,9 +39,6 @@ global.FormData = jest.fn(() => {
   return []
 })
 
-// https://reactnavigation.org/docs/testing/
-import 'react-native-gesture-handler/jestSetup'
-
 jest.mock('react-native-reanimated', () => {
   const Reanimated = require('react-native-reanimated/mock')
 
@@ -47,11 +47,10 @@ jest.mock('react-native-reanimated', () => {
   Reanimated.default.call = () => {}
 
   return Reanimated
-});
+})
 
 // Silence the warning: Animated: `useNativeDriver` is not supported because the native animated module is missing
 jest.mock('react-native/Libraries/Animated/src/NativeAnimatedHelper')
-
 
 // Mock this globally @see https://github.com/l-urence/react-native-autocomplete-input#known-issues
 jest.mock('react-native-autocomplete-input', () => 'Autocomplete')
@@ -61,12 +60,14 @@ jest.mock('react-native-device-info', () => {
     getVersion: jest.fn()
   }
 })
-jest.mock('react-native-intercom', () => {}, { virtual: true });
+jest.mock('react-native-intercom', () => {}, { virtual: true })
 jest.mock('react-native/Libraries/Animated/src/NativeAnimatedHelper')
 jest.mock('react-native-background-timer', () => {})
 jest.mock('@sentry/react-native', () => ({
   init: jest.fn()
 }))
+import mockRNCNetInfo from '@react-native-community/netinfo/jest/netinfo-mock.js'
+jest.mock('@react-native-community/netinfo', () => mockRNCNetInfo)
 
 global.XMLHttpRequest = jest.fn()
 global.window = {}

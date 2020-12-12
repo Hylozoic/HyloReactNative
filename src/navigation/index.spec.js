@@ -3,7 +3,7 @@ import { Provider } from 'react-redux'
 import orm from 'store/models'
 import { act } from 'react-test-renderer'
 import { render, cleanup } from '@testing-library/react-native'
-import RootNavigator from '../../navigation'
+import RootNavigator from 'navigation'
 import { createMockStore } from 'util/testing'
 import ErrorBoundary from 'components/ErrorBoundary'
 
@@ -12,10 +12,10 @@ import ErrorBoundary from 'components/ErrorBoundary'
 // due to a current bug with an await/timeout error when using any of the other
 // async methods. Tracking this:
 //   https://github.com/callstack/react-native-testing-library/issues/379
-describe('Login', () => {
+describe('Navigation Specification', () => {
   afterEach(cleanup)
 
-  test('It renders when isSignedIn false', async () => {
+  test('It renders Login when isSignedIn false', async () => {
     const state = {
       orm: orm.getEmptyState(),
       FeedList: {},
