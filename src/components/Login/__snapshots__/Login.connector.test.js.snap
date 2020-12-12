@@ -2,8 +2,9 @@
 
 exports[`mapDispatchToProps has login 1`] = `
 Promise {
-  "_40": 0,
-  "_55": Object {
+  "_U": 0,
+  "_V": 1,
+  "_W": Object {
     "meta": Object {
       "email": "name",
     },
@@ -19,15 +20,15 @@ Promise {
     },
     "type": "LOGIN",
   },
-  "_65": 1,
-  "_72": null,
+  "_X": null,
 }
 `;
 
 exports[`mapDispatchToProps has loginWithFacebook 1`] = `
 Promise {
-  "_40": 0,
-  "_55": Object {
+  "_U": 0,
+  "_V": 1,
+  "_W": Object {
     "payload": Object {
       "api": Object {
         "method": "post",
@@ -36,15 +37,15 @@ Promise {
     },
     "type": "LOGIN_WITH_FACEBOOK",
   },
-  "_65": 1,
-  "_72": null,
+  "_X": null,
 }
 `;
 
 exports[`mapDispatchToProps has loginWithGoogle 1`] = `
 Promise {
-  "_40": 0,
-  "_55": Object {
+  "_U": 0,
+  "_V": 1,
+  "_W": Object {
     "payload": Object {
       "api": Object {
         "method": "post",
@@ -53,8 +54,7 @@ Promise {
     },
     "type": "LOGIN_WITH_GOOGLE",
   },
-  "_65": 1,
-  "_72": null,
+  "_X": null,
 }
 `;
 

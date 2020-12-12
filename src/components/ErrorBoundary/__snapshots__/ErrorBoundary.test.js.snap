@@ -28,10 +28,9 @@ exports[`displays an error when a child component throws an error 1`] = `
   />
   <View
     accessibilityRole="button"
-    accessibilityStates={Array []}
+    accessibilityState={Object {}}
     accessible={true}
     focusable={true}
-    isTVSelectable={true}
     onClick={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}

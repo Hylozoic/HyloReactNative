@@ -69,19 +69,19 @@ Object {
   commentersTotal
   commentsTotal
   comments(first: 10, order: \\"desc\\") {
-    items {
-      id
-      text
-      creator {
-        id
-        name
-        avatarUrl
+        items {
+          id
+          text
+          creator {
+            id
+            name
+            avatarUrl
+          }
+          createdAt
+        }
+        total
+        hasMore
       }
-      createdAt
-    }
-    total
-    hasMore
-  }
   linkPreview {
     title
     url
