@@ -8,7 +8,8 @@ it('matches last snapshot', () => {
 
   renderer.render(<Signup
     goToSignupFlow={() => {}}
-    goToLogin={() => {}} />)
+    goToLogin={() => {}}
+                  />)
   const actual = renderer.getRenderOutput()
 
   expect(actual).toMatchSnapshot()

@@ -29,7 +29,7 @@ import CommunityChooserItemRow from '../ItemChooser/CommunityChooserItemRow'
 // Location Picker
 import { locationSearch } from '../ItemChooser/ItemChooser.store'
 import LocationPickerItemRow from '../ItemChooser/LocationPickerItemRow'
-// 
+//
 import CommunitiesList from '../CommunitiesList'
 import ProjectMembersSummary from '../ProjectMembersSummary'
 import KeyboardFriendlyView from '../KeyboardFriendlyView'
@@ -43,7 +43,7 @@ import ErrorBubble from '../ErrorBubble'
 import styles from './PostEditor.styles'
 
 export default class PostEditor extends React.Component {
-  static contextTypes = {navigate: PropTypes.func}
+  static contextTypes = { navigate: PropTypes.func }
 
   static navigationOptions = ({ navigation, route }) => {
     const { headerTitle, save, isSaving, confirmLeave } = get('params', route) || {}
@@ -115,7 +115,7 @@ export default class PostEditor extends React.Component {
   }
 
   handleDetailsOnChange = (detailsText) => {
-    this.setState({detailsText})
+    this.setState({ detailsText })
   }
 
   _doSave = () => {
@@ -144,8 +144,8 @@ export default class PostEditor extends React.Component {
 
     return save(postData)
       .catch(e => {
-        this.setState({isSaving: false})
-        navigation.setParams({isSaving: false})
+        this.setState({ isSaving: false })
+        navigation.setParams({ isSaving: false })
       })
   }
 
@@ -153,21 +153,23 @@ export default class PostEditor extends React.Component {
     const { navigation } = this.props
     const { announcementEnabled } = this.state
 
-    this.setState({isSaving: true})
-    navigation.setParams({isSaving: true})
+    this.setState({ isSaving: true })
+    navigation.setParams({ isSaving: true })
 
     if (announcementEnabled) {
       Alert.alert(
         'MAKE AN ANNOUNCEMENT',
         'This means that all members of this community will receive an instant email and push notification about this Post. \n(This feature is available to moderators only.)',
         [
-          {text: 'Send It', onPress: this._doSave},
-          {text: 'Go Back',
+          { text: 'Send It', onPress: this._doSave },
+          {
+            text: 'Go Back',
             style: 'cancel',
             onPress: () => {
-              this.setState({isSaving: false})
-              navigation.setParams({isSaving: false})
-            }}
+              this.setState({ isSaving: false })
+              navigation.setParams({ isSaving: false })
+            }
+          }
         ])
     } else {
       this._doSave()
@@ -219,7 +221,7 @@ export default class PostEditor extends React.Component {
       pollingFindOrCreateLocation(
         locationData,
         locationObject => this.setState(() => ({ locationObject })
-      ))
+        ))
     }
   }
 
@@ -238,7 +240,7 @@ export default class PostEditor extends React.Component {
   insertTopicFromPicker = topic => {
     const t = { ...topic, name: this.ignoreHash(topic.name) }
 
-    if (validateTopicName(t.name) === null) this.insertUniqueTopics([ t ], true)
+    if (validateTopicName(t.name) === null) this.insertUniqueTopics([t], true)
   }
 
   insertEditorTopic = topics => {
@@ -257,7 +259,7 @@ export default class PostEditor extends React.Component {
   insertUniqueTopics = (topicCandidates, topicsPicked) => {
     const topics = uniqBy(
       t => t.name,
-      [ ...this.state.topics, ...topicCandidates ]
+      [...this.state.topics, ...topicCandidates]
     ).slice(0, 3)
     this.setState({ topics, topicsPicked })
   }
@@ -269,18 +271,18 @@ export default class PostEditor extends React.Component {
 
   toggleAnnoucement = () => {
     this.toast && hideToast(this.toast)
-    this.toast = showToast(`announcement ${!this.state.announcementEnabled ? 'on' : 'off'}`, {isError: this.state.announcementEnabled})
-    this.setState({announcementEnabled: !this.state.announcementEnabled})
+    this.toast = showToast(`announcement ${!this.state.announcementEnabled ? 'on' : 'off'}`, { isError: this.state.announcementEnabled })
+    this.setState({ announcementEnabled: !this.state.announcementEnabled })
   }
 
   updateTitle = (title) => {
     switch (title.length >= MAX_TITLE_LENGTH) {
       case true:
-        this.setState({titleLengthError: true})
+        this.setState({ titleLengthError: true })
         break
       case false:
-        this.setState({titleLengthError: false})
-        this.setState({title})
+        this.setState({ titleLengthError: false })
+        this.setState({ title })
         break
     }
   }
@@ -363,27 +365,27 @@ export default class PostEditor extends React.Component {
   }
 
   showFilePicker = () => {
-    this.setState({filePickerPending: true})
+    this.setState({ filePickerPending: true })
     showFilePicker({
       upload: this.props.upload,
       type: 'post',
       id: get('post.id', this.props),
       onAdd: this.addFile,
       onError: this.showAlert,
-      onComplete: () => this.setState({filePickerPending: false})
+      onComplete: () => this.setState({ filePickerPending: false })
     })
   }
 
   showImagePicker = () => {
-    this.setState({imagePickerPending: true})
+    this.setState({ imagePickerPending: true })
     showImagePicker({
       upload: this.props.upload,
       type: 'post',
       id: get('post.id', this.props),
       onChoice: this.addImage,
       onError: this.showAlert,
-      onCancel: () => this.setState({imagePickerPending: false}),
-      onComplete: () => this.setState({imagePickerPending: false})
+      onCancel: () => this.setState({ imagePickerPending: false }),
+      onComplete: () => this.setState({ imagePickerPending: false })
     })
   }
 
@@ -408,169 +410,183 @@ export default class PostEditor extends React.Component {
       showFilePicker: this.showFilePicker
     }
 
-    return <KeyboardFriendlyView style={styles.container}>
-      <ScrollView
-        ref={this.scrollView}
-        keyboardShouldPersistTaps='handled'
-        style={styles.scrollContainer}
-        onContentSizeChange={this.onContentSizeChange}
-        keyboardDismissMode='on-drag'
-      >
-        <View style={styles.scrollContent}>
-          {!isProject && <Text style={styles.sectionLabel}>What are you posting today?</Text>}
-          {!isProject && <View style={[styles.typeButtonRow, styles.section]}>
-            {['discussion', 'request', 'offer', 'resource'].map(t =>
-              <TypeButton type={t} key={t} selected={t === type}
-                onPress={() => !isSaving && this.setState({type: t})} />)}
-          </View>}
+    return (
+      <KeyboardFriendlyView style={styles.container}>
+        <ScrollView
+          ref={this.scrollView}
+          keyboardShouldPersistTaps='handled'
+          style={styles.scrollContainer}
+          onContentSizeChange={this.onContentSizeChange}
+          keyboardDismissMode='on-drag'
+        >
+          <View style={styles.scrollContent}>
+            {!isProject && <Text style={styles.sectionLabel}>What are you posting today?</Text>}
+            {!isProject && <View style={[styles.typeButtonRow, styles.section]}>
+              {['discussion', 'request', 'offer', 'resource'].map(t =>
+                <TypeButton
+                  type={t} key={t} selected={t === type}
+                  onPress={() => !isSaving && this.setState({ type: t })}
+                />)}
+                           </View>}
 
-          <Text style={styles.sectionLabel}>Title</Text>
-          <View style={[
-            styles.section,
-            styles.textInputWrapper
-          ]}>
-            <TextInput
-              style={styles.textInput}
-              editable={!isSaving}
-              onChangeText={this.updateTitle}
-              placeholder={titlePlaceholders[type]}
-              placeholderTextColor={rhino30}
-              underlineColorAndroid='transparent'
-              value={title}
-              maxLength={MAX_TITLE_LENGTH} />
+            <Text style={styles.sectionLabel}>Title</Text>
+            <View style={[
+              styles.section,
+              styles.textInputWrapper
+            ]}
+            >
+              <TextInput
+                style={styles.textInput}
+                editable={!isSaving}
+                onChangeText={this.updateTitle}
+                placeholder={titlePlaceholders[type]}
+                placeholderTextColor={rhino30}
+                underlineColorAndroid='transparent'
+                value={title}
+                maxLength={MAX_TITLE_LENGTH}
+              />
+            </View>
+            {titleLengthError && <View style={styles.errorView}>
+              <ErrorBubble
+                customStyles={styles.errorBubble}
+                errorRowStyle={styles.errorRow} text={`Title can't have more than ${MAX_TITLE_LENGTH} characters.`}
+                topRightArrow
+              />
+                                 </View>}
+
+            <Text style={styles.sectionLabel}>Details</Text>
+            <InlineEditor
+              style={[
+                styles.section,
+                styles.textInputWrapper
+              ]}
+              inputStyle={styles.textInput}
+              onChange={this.handleDetailsOnChange}
+              value={detailsText}
+              editable={!pendingDetailsText}
+              submitting={isSaving}
+              placeholder={detailsPlaceholder}
+              communityId={get('id', currentCommunity)}
+              autoGrow={false}
+              onFocusToggle={isFocused => this.setState({ detailsFocused: isFocused })}
+              onInsertTopic={this.insertEditorTopic}
+            />
+
+            <TouchableOpacity
+              style={[
+                styles.section,
+                styles.textInputWrapper,
+                styles.topics
+              ]}
+              onPress={this.showTopicsPicker}
+            >
+              <View style={styles.topicLabel}>
+                <Text style={styles.sectionLabel}>Topics</Text>
+                <View style={styles.topicAddBorder}><Icon name='Plus' style={styles.topicAdd} /></View>
+              </View>
+              <Topics onPress={this.removeTopic} topics={topics} />
+              {topics.length < 1 &&
+                <Text style={styles.textInputPlaceholder}>{topicsPlaceholder}</Text>}
+            </TouchableOpacity>
+
+            {isProject && <TouchableOpacity
+              style={[
+                styles.section,
+                styles.textInputWrapper
+              ]}
+              onPress={this.showProjectMembersEditor}
+                          >
+              <View style={styles.topicLabel}>
+                <Text style={styles.sectionLabel}>Members</Text>
+                <View style={styles.topicAddBorder}><Icon name='Plus' style={styles.topicAdd} /></View>
+              </View>
+              {members.length > 0 &&
+                <ProjectMembersSummary members={members} />}
+              {members.length < 1 &&
+                <Text style={styles.textInputPlaceholder}>Who is a part of this project?</Text>}
+                          </TouchableOpacity>}
+
+            {canHaveTimeframe && <>
+              <DatePickerWithLabel
+                label='Start Time'
+                placeholder='When does it start?'
+                date={startTime}
+                minimumDate={new Date()}
+                onChange={date => this.setState({ startTime: date })}
+                onExpand={this.onDatePickerExpand}
+              />
+              <DatePickerWithLabel
+                label='End Time'
+                placeholder='When does it end?'
+                date={endTime}
+                minimumDate={startTime || new Date()}
+                onChange={date => this.setState({ endTime: date })}
+                onExpand={this.onDatePickerExpand}
+              />
+                                 </>}
+
+            {canHaveLocation && <TouchableOpacity
+              style={[
+                styles.section,
+                styles.textInputWrapper,
+                styles.topics
+              ]}
+              onPress={this.showLocationEditor}
+                                >
+              <View style={styles.topicLabel}>
+                <Text style={styles.sectionLabel}>Location</Text>
+                <View style={styles.topicAddBorder}><Icon name='Plus' style={styles.topicAdd} /></View>
+              </View>
+              {!location && !locationObject && <Text style={styles.textInputPlaceholder}>Select a Location</Text>}
+              {(location || locationObject) && <Text>{location || locationObject.fullText}</Text>}
+                                </TouchableOpacity>}
+
+            <TouchableOpacity
+              style={[
+                styles.section,
+                styles.textInputWrapper
+              ]}
+              onPress={this.showCommunitiesEditor}
+            >
+              <View style={styles.topicLabel}>
+                <Text style={styles.sectionLabel}>Post In</Text>
+                <View style={styles.topicAddBorder}><Icon name='Plus' style={styles.topicAdd} /></View>
+              </View>
+              <CommunitiesList
+                communities={communities}
+                columns={1}
+                onPress={this.removeCommunity}
+                RightIcon={iconProps =>
+                  <Icon name='Ex' style={styles.communityRemoveIcon} {...iconProps} />}
+              />
+              {communities.length < 1 &&
+                <Text style={styles.textInputPlaceholder}>Select which communities to post in.</Text>}
+            </TouchableOpacity>
+
+            {!isEmpty(imageUrls) && <View>
+              <Text style={styles.sectionLabel}>Images</Text>
+              <ImageSelector
+                onAdd={this.addImage}
+                onRemove={this.removeImage}
+                imageUrls={imageUrls}
+                style={styles.imageSelector}
+                type='post'
+              />
+                                    </View>}
+
+            {!isEmpty(fileUrls) && <View>
+              <Text style={styles.sectionLabel}>Files</Text>
+              <FileSelector
+                onRemove={this.removeFile}
+                fileUrls={fileUrls}
+              />
+                                   </View>}
+            {detailsFocused && <Toolbar {...toolbarProps} />}
           </View>
-          {titleLengthError && <View style={styles.errorView}>
-            <ErrorBubble
-              customStyles={styles.errorBubble}
-              errorRowStyle={styles.errorRow} text={`Title can't have more than ${MAX_TITLE_LENGTH} characters.`}
-              topRightArrow />
-          </View>}
-
-          <Text style={styles.sectionLabel}>Details</Text>
-          <InlineEditor
-            style={[
-              styles.section,
-              styles.textInputWrapper
-            ]}
-            inputStyle={styles.textInput}
-            onChange={this.handleDetailsOnChange}
-            value={detailsText}
-            editable={!pendingDetailsText}
-            submitting={isSaving}
-            placeholder={detailsPlaceholder}
-            communityId={get('id', currentCommunity)}
-            autoGrow={false}
-            onFocusToggle={isFocused => this.setState({detailsFocused: isFocused})}
-            onInsertTopic={this.insertEditorTopic}
-          />
-
-          <TouchableOpacity
-            style={[
-              styles.section,
-              styles.textInputWrapper,
-              styles.topics
-            ]}
-            onPress={this.showTopicsPicker}>
-            <View style={styles.topicLabel}>
-              <Text style={styles.sectionLabel}>Topics</Text>
-              <View style={styles.topicAddBorder}><Icon name='Plus' style={styles.topicAdd} /></View>
-            </View>
-            <Topics onPress={this.removeTopic} topics={topics} />
-            {topics.length < 1 &&
-              <Text style={styles.textInputPlaceholder}>{topicsPlaceholder}</Text>}
-          </TouchableOpacity>
-
-          {isProject && <TouchableOpacity
-            style={[
-              styles.section,
-              styles.textInputWrapper
-            ]}
-            onPress={this.showProjectMembersEditor}>
-            <View style={styles.topicLabel}>
-              <Text style={styles.sectionLabel}>Members</Text>
-              <View style={styles.topicAddBorder}><Icon name='Plus' style={styles.topicAdd} /></View>
-            </View>
-            {members.length > 0 &&
-              <ProjectMembersSummary members={members} />}
-            {members.length < 1 &&
-              <Text style={styles.textInputPlaceholder}>Who is a part of this project?</Text>}
-          </TouchableOpacity>}
-
-          {canHaveTimeframe && <React.Fragment>
-            <DatePickerWithLabel
-              label='Start Time'
-              placeholder='When does it start?'
-              date={startTime}
-              minimumDate={new Date()}
-              onChange={date => this.setState({ startTime: date })}
-              onExpand={this.onDatePickerExpand}
-            />
-            <DatePickerWithLabel
-              label='End Time'
-              placeholder='When does it end?'
-              date={endTime}
-              minimumDate={startTime || new Date()}
-              onChange={date => this.setState({ endTime: date })}
-              onExpand={this.onDatePickerExpand}
-            />
-          </React.Fragment>}
-
-          {canHaveLocation && <TouchableOpacity
-            style={[
-              styles.section,
-              styles.textInputWrapper,
-              styles.topics
-            ]}
-            onPress={this.showLocationEditor}>
-            <View style={styles.topicLabel}>
-              <Text style={styles.sectionLabel}>Location</Text>
-              <View style={styles.topicAddBorder}><Icon name='Plus' style={styles.topicAdd} /></View>
-            </View>
-            {!location && !locationObject && <Text style={styles.textInputPlaceholder}>Select a Location</Text>}
-            {(location || locationObject) && <Text>{location || locationObject.fullText}</Text>}
-          </TouchableOpacity>}
-
-          <TouchableOpacity
-            style={[
-              styles.section,
-              styles.textInputWrapper
-            ]}
-            onPress={this.showCommunitiesEditor}>
-            <View style={styles.topicLabel}>
-              <Text style={styles.sectionLabel}>Post In</Text>
-              <View style={styles.topicAddBorder}><Icon name='Plus' style={styles.topicAdd} /></View>
-            </View>
-            <CommunitiesList
-              communities={communities}
-              columns={1}
-              onPress={this.removeCommunity}
-              RightIcon={iconProps =>
-                <Icon name='Ex' style={styles.communityRemoveIcon} {...iconProps} />} />
-            {communities.length < 1 &&
-              <Text style={styles.textInputPlaceholder}>Select which communities to post in.</Text>}
-          </TouchableOpacity>
-
-          {!isEmpty(imageUrls) && <View>
-            <Text style={styles.sectionLabel}>Images</Text>
-            <ImageSelector
-              onAdd={this.addImage}
-              onRemove={this.removeImage}
-              imageUrls={imageUrls}
-              style={styles.imageSelector}
-              type='post' />
-          </View>}
-
-          {!isEmpty(fileUrls) && <View>
-            <Text style={styles.sectionLabel}>Files</Text>
-            <FileSelector
-              onRemove={this.removeFile}
-              fileUrls={fileUrls} />
-          </View>}
-          {detailsFocused && <Toolbar {...toolbarProps} />}
-        </View>
-      </ScrollView>
-      {!detailsFocused && <Toolbar {...toolbarProps} />}
-    </KeyboardFriendlyView>
+        </ScrollView>
+        {!detailsFocused && <Toolbar {...toolbarProps} />}
+      </KeyboardFriendlyView>
+    )
   }
 }
 
@@ -586,14 +602,16 @@ const detailsPlaceholder = 'What else should we know?'
 
 const topicsPlaceholder = 'Add topics.'
 
-export function Toolbar ({post, canModerate, filePickerPending, imagePickerPending, announcementEnabled, toggleAnnoucement, showFilePicker, showImagePicker}) {
-  return <View style={styles.bottomBar}>
-    <View style={styles.bottomBarIcons}>
-      <TouchableOpacity onPress={showFilePicker}><Icon name={filePickerPending ? 'Clock' : 'Paperclip'} style={styles.bottomBarIcon} /></TouchableOpacity>
-      <TouchableOpacity onPress={showImagePicker}><Icon name={imagePickerPending ? 'Clock' : 'AddImage'} style={styles.bottomBarIcon} /></TouchableOpacity>
-      {isEmpty(post) && canModerate && <TouchableOpacity onPress={toggleAnnoucement}><Icon name={'Announcement'} style={styles.annoucementIcon} color={announcementEnabled ? 'caribbeanGreen' : 'rhino30'} /></TouchableOpacity>}
+export function Toolbar ({ post, canModerate, filePickerPending, imagePickerPending, announcementEnabled, toggleAnnoucement, showFilePicker, showImagePicker }) {
+  return (
+    <View style={styles.bottomBar}>
+      <View style={styles.bottomBarIcons}>
+        <TouchableOpacity onPress={showFilePicker}><Icon name={filePickerPending ? 'Clock' : 'Paperclip'} style={styles.bottomBarIcon} /></TouchableOpacity>
+        <TouchableOpacity onPress={showImagePicker}><Icon name={imagePickerPending ? 'Clock' : 'AddImage'} style={styles.bottomBarIcon} /></TouchableOpacity>
+        {isEmpty(post) && canModerate && <TouchableOpacity onPress={toggleAnnoucement}><Icon name='Announcement' style={styles.annoucementIcon} color={announcementEnabled ? 'caribbeanGreen' : 'rhino30'} /></TouchableOpacity>}
+      </View>
     </View>
-  </View>
+  )
 }
 
 export function Communities ({ onPress, communities, placeholder }) {
@@ -610,26 +628,34 @@ export function Communities ({ onPress, communities, placeholder }) {
 
 export function Topics ({ onPress, topics, placeholder }) {
   if (topics.length < 1) return null
-  return <ScrollView horizontal style={styles.topicPillBox}>
-    {topics.map((t, i) => <TopicPill key={i} topic={t} onPress={onPress(t)} />)}
-  </ScrollView>
+  return (
+    <ScrollView horizontal style={styles.topicPillBox}>
+      {topics.map((t, i) => <TopicPill key={i} topic={t} onPress={onPress(t)} />)}
+    </ScrollView>
+  )
 }
 
 export function TopicPill ({ topic, topic: { name }, onPress }) {
-  return <TouchableOpacity onPress={onPress} style={styles.topicPill}>
-    <Text style={styles.topicText}>#{name.toLowerCase()}</Text>
-    <Icon name='Ex' style={styles.topicRemove} />
-  </TouchableOpacity>
+  return (
+    <TouchableOpacity onPress={onPress} style={styles.topicPill}>
+      <Text style={styles.topicText}>#{name.toLowerCase()}</Text>
+      <Icon name='Ex' style={styles.topicRemove} />
+    </TouchableOpacity>
+  )
 }
 
 export function TypeButton ({ type, selected, onPress }) {
   const s = styles.typeButton
-  return <TouchableOpacity onPress={onPress}
-    style={[s.box, selected && s[type].box]}>
-    <Text style={[s.text, selected && s[type].text]}>
-      {type.toUpperCase()}
-    </Text>
-  </TouchableOpacity>
+  return (
+    <TouchableOpacity
+      onPress={onPress}
+      style={[s.box, selected && s[type].box]}
+    >
+      <Text style={[s.text, selected && s[type].text]}>
+        {type.toUpperCase()}
+      </Text>
+    </TouchableOpacity>
+  )
 }
 
 export function DatePickerWithLabel ({
@@ -660,28 +686,30 @@ export function DatePickerWithLabel ({
     setExpanded(!expanded)
   }
 
-  return <TouchableOpacity
-    style={styleTemplate.wrapper}
-    onPress={onPress}
-  >
-    <View style={styleTemplate.labelWrapper}>
-      <Text style={styleTemplate.labelText}>
-        {label}
-      </Text>
-      <View style={styleTemplate.expandIconWrapper}>
-        <Icon name={expanded ? 'ArrowUp' : 'ArrowDown'} style={styleTemplate.expandIcon} />
+  return (
+    <TouchableOpacity
+      style={styleTemplate.wrapper}
+      onPress={onPress}
+    >
+      <View style={styleTemplate.labelWrapper}>
+        <Text style={styleTemplate.labelText}>
+          {label}
+        </Text>
+        <View style={styleTemplate.expandIconWrapper}>
+          <Icon name={expanded ? 'ArrowUp' : 'ArrowDown'} style={styleTemplate.expandIcon} />
+        </View>
       </View>
-    </View>
-    {date && !expanded &&
-      <Text style={styleTemplate.valueText}>{moment(date).format(dateFormat)}</Text>}
-    {!date && !expanded &&
-      <Text style={styleTemplate.placeholderText}>{placeholder}</Text>}
-    {expanded && <View style={{ flex: 1, alignItems: 'center' }}>
-      <DatePicker
-        date={date}
-        minimumDate={minimumDate}
-        onChange={onChange}
-      />
-    </View>}
-  </TouchableOpacity>
+      {date && !expanded &&
+        <Text style={styleTemplate.valueText}>{moment(date).format(dateFormat)}</Text>}
+      {!date && !expanded &&
+        <Text style={styleTemplate.placeholderText}>{placeholder}</Text>}
+      {expanded && <View style={{ flex: 1, alignItems: 'center' }}>
+        <DatePicker
+          date={date}
+          minimumDate={minimumDate}
+          onChange={onChange}
+        />
+                   </View>}
+    </TouchableOpacity>
+  )
 }

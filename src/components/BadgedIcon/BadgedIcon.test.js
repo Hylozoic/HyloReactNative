@@ -16,7 +16,7 @@ describe('BadgedIcon', () => {
 
   it('matches the last snapshot with the badge', () => {
     const renderer = new ShallowRenderer()
-    renderer.render(<BadgedIcon name='Notifications' onPress={() => {}} showBadge={true} />)
+    renderer.render(<BadgedIcon name='Notifications' onPress={() => {}} showBadge />)
     expect(renderer.getRenderOutput()).toMatchSnapshot()
   })
 

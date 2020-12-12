@@ -15,8 +15,8 @@ const MessageThread = Model.createClass({
 
   newMessageReceived (bumpUnreadCount) {
     const update = bumpUnreadCount
-      ? {unreadCount: this.unreadCount + 1, updatedAt: new Date().toString()}
-      : {updatedAt: new Date().toString()}
+      ? { unreadCount: this.unreadCount + 1, updatedAt: new Date().toString() }
+      : { updatedAt: new Date().toString() }
     this.update(update)
     return this
   },

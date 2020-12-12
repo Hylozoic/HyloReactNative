@@ -18,7 +18,7 @@ function topicsResultsWithNew (session, autocomplete) {
   const validNewTopic = !results.find(t => t.name === searchTerm) &&
     !validateTopicName(searchTerm)
   return validNewTopic
-    ? [ { id: searchTerm, name: searchTerm }, ...results ]
+    ? [{ id: searchTerm, name: searchTerm }, ...results]
     : results
 }
 

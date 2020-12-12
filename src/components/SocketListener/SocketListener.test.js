@@ -17,7 +17,8 @@ jest.mock('util/websockets', () => {
 
 it('sets up reconnection behavior', async () => {
   const renderer = await TestRenderer.create(<SocketListener
-    setupCoreEventHandlers={() => {}} />)
+    setupCoreEventHandlers={() => {}}
+                                             />)
 
   const socket = await getSocket()
 
@@ -32,7 +33,7 @@ it('sets up reconnection behavior', async () => {
   ])
 
   expect(socket.on.mock.calls.find(x => x[0] === 'reconnect')[1])
-  .toEqual(renderer.root.instance.reconnect)
+    .toEqual(renderer.root.instance.reconnect)
 
   expect(socket.post).toHaveBeenCalledWith('sockethost/noo/threads/subscribe', expect.any(Function))
 })

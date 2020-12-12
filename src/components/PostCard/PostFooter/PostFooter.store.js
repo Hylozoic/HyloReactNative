@@ -1,6 +1,6 @@
 import { AnalyticsEvents } from 'hylo-utils/constants'
 
-export const MODULE_NAME = `POST_FOOTER`
+export const MODULE_NAME = 'POST_FOOTER'
 export const VOTE_ON_POST = `${MODULE_NAME}_VOTE_ON_POST`
 export const VOTE_ON_POST_PENDING = `${VOTE_ON_POST}_PENDING`
 
@@ -14,7 +14,7 @@ export function voteOnPost (postId, isUpvote) {
           votesTotal
         }
       }`,
-      variables: {postId, isUpvote}
+      variables: { postId, isUpvote }
     },
     meta: {
       postId,

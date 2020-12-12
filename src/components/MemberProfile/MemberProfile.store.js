@@ -57,7 +57,7 @@ export const getPerson = ormCreateSelector(
   state => state.orm,
   (_, { id }) => id,
   (session, id) => {
-    const person = session.Person.safeGet({id})
+    const person = session.Person.safeGet({ id })
     if (!person) return null
     return {
       ...person.ref,

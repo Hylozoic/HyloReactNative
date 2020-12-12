@@ -64,7 +64,7 @@ export default class PostBody extends React.PureComponent {
     const startDate = startTime && formatStartDate(startTime)
     const endDate = endTime && formatEndDate(endTime)
     let timeWindow
-    
+
     if (startDate && endDate) {
       timeWindow = `${type} starts ${startDate} and ${endDate}`
     } else if (endDate) {
@@ -73,18 +73,21 @@ export default class PostBody extends React.PureComponent {
       timeWindow = `${type} starts ${startDate}`
     }
 
-    return <View style={styles.container}>
-      {timeWindow &&
-        <Text style={styles.resourceEndsAt}>{timeWindow}</Text>}
-      <PostTitle title={decodedTitle} />
-      <HTMLView
-        onLinkPress={this.handleLinkPress}
-        addLineBreaks={false}
-        stylesheet={richTextStyles}
-        textComponentProps={{ style: styles.details }}
-        value={presentedDetails} />
-      {linkPreview && <LinkPreview {...linkPreview} />}
-    </View>
+    return (
+      <View style={styles.container}>
+        {timeWindow &&
+          <Text style={styles.resourceEndsAt}>{timeWindow}</Text>}
+        <PostTitle title={decodedTitle} />
+        <HTMLView
+          onLinkPress={this.handleLinkPress}
+          addLineBreaks={false}
+          stylesheet={richTextStyles}
+          textComponentProps={{ style: styles.details }}
+          value={presentedDetails}
+        />
+        {linkPreview && <LinkPreview {...linkPreview} />}
+      </View>
+    )
   }
 }
 

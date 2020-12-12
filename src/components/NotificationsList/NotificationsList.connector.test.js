@@ -3,7 +3,7 @@ import { mapStateToProps, mapDispatchToProps } from './NotificationsList.connect
 import { FETCH_NOTIFICATIONS } from './NotificationsList.store'
 import { buildKey } from '../../store/reducers/queryResults'
 
-jest.mock('util/platform', () => ({isIOS: true}))
+jest.mock('util/platform', () => ({ isIOS: true }))
 
 it('matches the last snapshot for mapStateToProps', () => {
   const session = orm.mutableSession(orm.getEmptyState())
@@ -25,8 +25,8 @@ it('matches the last snapshot for mapStateToProps', () => {
   const key = buildKey(FETCH_NOTIFICATIONS)
   const state = {
     orm: session.state,
-    pending: { [ FETCH_NOTIFICATIONS ]: false },
-    queryResults: { [ key ]: { hasMore: false } }
+    pending: { [FETCH_NOTIFICATIONS]: false },
+    queryResults: { [key]: { hasMore: false } }
   }
   const props = { navigation: { navigate: () => {} } }
 

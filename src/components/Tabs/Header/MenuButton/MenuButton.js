@@ -13,12 +13,14 @@ export default function MenuButton (props) {
 
   const imageSource = ((id && id === ALL_COMMUNITIES_ID) || !avatarUrl)
     ? allCommunitiesLogo
-    : {uri: avatarUrl}
+    : { uri: avatarUrl }
 
-  return <TouchableOpacity onPress={openDrawer}>
-    <Image
-      source={imageSource}
-      style={styles.avatar}
-    />
-  </TouchableOpacity>
+  return (
+    <TouchableOpacity onPress={openDrawer}>
+      <Image
+        source={imageSource}
+        style={styles.avatar}
+      />
+    </TouchableOpacity>
+  )
 }

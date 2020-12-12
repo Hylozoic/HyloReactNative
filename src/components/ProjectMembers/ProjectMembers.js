@@ -14,12 +14,14 @@ export default class ProjectMembers extends React.Component {
     const { members } = this.props.route.params
     const showMember = goToMemberMaker(this.props.navigation)
 
-    return <View style={styles.container}>
-      <MemberList
-        members={members}
-        hideSortOptions
-        showMember={showMember}
-      />
-    </View>
+    return (
+      <View style={styles.container}>
+        <MemberList
+          members={members}
+          hideSortOptions
+          showMember={showMember}
+        />
+      </View>
+    )
   }
 }

@@ -49,7 +49,7 @@ describe('RootView', () => {
     it('changes state.appState', () => {
       const active = 'active'
       const inactive = 'inactive'
-      instance.setState({appState: active})
+      instance.setState({ appState: active })
       instance._handleAppStateChange(inactive)
       expect(instance.state.appState).toEqual(inactive)
     })
@@ -57,7 +57,7 @@ describe('RootView', () => {
     it('changes appState from inactive to background', () => {
       const background = 'background'
       const active = 'active'
-      instance.setState({appState: background})
+      instance.setState({ appState: background })
       instance._handleAppStateChange(active)
       expect(instance.state.appState).toEqual(active)
       expect(OneSignal.clearOneSignalNotifications).toHaveBeenCalled()

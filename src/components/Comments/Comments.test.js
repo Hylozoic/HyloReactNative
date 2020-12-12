@@ -8,9 +8,9 @@ describe('Comments', () => {
     const header = <Text>Some React Code</Text>
     const footer = <Text>Some More Code</Text>
     const comments = [
-      {id: 1},
-      {id: 2},
-      {id: 3}
+      { id: 1 },
+      { id: 2 },
+      { id: 3 }
     ]
 
     const renderer = new ReactShallowRenderer()
@@ -21,7 +21,8 @@ describe('Comments', () => {
       total={17}
       fetchComments={() => {}}
       hasMore
-      pending />)
+      pending
+                    />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
@@ -35,7 +36,8 @@ describe('ShowMore', () => {
     renderer.render(<ShowMore
       total={17}
       fetchComments={() => {}}
-      hasMore />)
+      hasMore
+                    />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()

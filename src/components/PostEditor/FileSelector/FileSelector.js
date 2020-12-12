@@ -7,13 +7,15 @@ import styles from './FileSelector.styles'
 import { cleanName } from '../../../store/models/Attachment'
 
 export default function FileSelector (props) {
-  const {fileUrls = [], onRemove} = props
-  return <View>
-    {fileUrls.map((url, index) => renderFileButton(url, index, onRemove))}
-  </View>
+  const { fileUrls = [], onRemove } = props
+  return (
+    <View>
+      {fileUrls.map((url, index) => renderFileButton(url, index, onRemove))}
+    </View>
+  )
 }
 
-export function showFilePicker ({upload, type, id, onAdd, onError, onComplete}) {
+export function showFilePicker ({ upload, type, id, onAdd, onError, onComplete }) {
   DocumentPicker.show({
     filetype: [DocumentPickerUtil.allFiles()]
   }, (err, result) => {
@@ -32,27 +34,34 @@ export function showFilePicker ({upload, type, id, onAdd, onError, onComplete}) 
         if (error) {
           return onError && onError(message)
         } else {
-          onAdd({local: result.uri, remote: url})
+          onAdd({ local: result.uri, remote: url })
         }
       })
   })
 }
 
 function renderFileButton (url, buttonIndex, onRemove) {
-  return <PopupMenuButton
-    key={url}
-    actions={[['Remove image', () => onRemove(url)]]}
-    destructiveButtonIndex={0}>
-    <FileLabel url={url} />
-  </PopupMenuButton>
+  return (
+    <PopupMenuButton
+      key={url}
+      actions={[['Remove image', () => onRemove(url)]]}
+      destructiveButtonIndex={0}
+    >
+      <FileLabel url={url} />
+    </PopupMenuButton>
+  )
 }
 
 export function FileLabel ({ url }) {
-  return <View style={styles.fileLabel}>
-    <Icon name='Document' style={styles.fileIcon} />
-    <Text style={styles.fileLabelText}
-      numberOfLines={2}>
-      {cleanName(url)}
-    </Text>
-  </View>
+  return (
+    <View style={styles.fileLabel}>
+      <Icon name='Document' style={styles.fileIcon} />
+      <Text
+        style={styles.fileLabelText}
+        numberOfLines={2}
+      >
+        {cleanName(url)}
+      </Text>
+    </View>
+  )
 }

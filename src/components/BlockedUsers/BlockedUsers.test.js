@@ -8,8 +8,8 @@ describe('BlockedUsers', () => {
     const renderer = new ReactShallowRenderer()
     const props = {
       blockedUsers: [
-        {id: 1, name: 'Blocker User 1'},
-        {id: 2, name: 'Blocker User 2'}
+        { id: 1, name: 'Blocker User 1' },
+        { id: 2, name: 'Blocker User 2' }
       ]
     }
 

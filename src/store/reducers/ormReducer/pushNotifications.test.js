@@ -4,7 +4,7 @@ import { RECEIVE_PUSH_NOTIFICATION } from '../../actions/receivePushNotification
 
 it('toggles the messages badge for a thread-related PN', () => {
   const session = orm.session(orm.getEmptyState())
-  session.Me.create({id: '1'})
+  session.Me.create({ id: '1' })
 
   const action = {
     type: RECEIVE_PUSH_NOTIFICATION,
@@ -23,7 +23,7 @@ it('toggles the messages badge for a thread-related PN', () => {
 
 it('does nothing yet for a non-thread-related PN', () => {
   const session = orm.session(orm.getEmptyState())
-  session.Me.create({id: '1'})
+  session.Me.create({ id: '1' })
 
   const action = {
     type: RECEIVE_PUSH_NOTIFICATION,

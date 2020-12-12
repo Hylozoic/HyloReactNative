@@ -35,17 +35,17 @@ jest.mock('react-native-image-picker')
 const mockPost = {
   details: 'myDetails',
   communities: [
-    {id: 1, name: 'Community 1'}
+    { id: 1, name: 'Community 1' }
   ]
 }
 
 describe('PostEditor', () => {
-  let navigation
+  let route, navigation
 
   beforeEach(() => {
     route = {
       name: 'anything'
-    },
+    }
     navigation = {
       isFocused: jest.fn(),
       setParams: jest.fn(),
@@ -61,7 +61,7 @@ describe('PostEditor', () => {
       navigation={navigation}
       route={route}
       save={save}
-    />)
+                    />)
     const actual = renderer.getRenderOutput()
     expect(actual).toMatchSnapshot()
   })
@@ -75,7 +75,8 @@ describe('PostEditor', () => {
       imageUrls={[
         'http://foo.com/foo.png',
         'http://baz.com/baz.png'
-      ]} />)
+      ]}
+                    />)
     const actual = renderer.getRenderOutput()
     expect(actual).toMatchSnapshot()
   })
@@ -93,8 +94,9 @@ describe('PostEditor', () => {
             route={route}
             navigation={navigation}
             post={mockPost}
-            save={save} />
-          </NavigationContainer>
+            save={save}
+          />
+        </NavigationContainer>
       </Provider>)
 
     const root = renderer.root.findByType(PostEditor)
@@ -122,16 +124,17 @@ describe('PostEditor', () => {
           save={save}
           navigation={navigation}
           route={route}
-          post={mockPost} />
+          post={mockPost}
+        />
       </Provider>)
 
     expect(renderer.toJSON()).toMatchSnapshot()
 
     const instance = renderer.root.findByType(PostEditor).instance
-    instance.setState({type: 'request'})
+    instance.setState({ type: 'request' })
     instance.save()
 
-    expect(navigation.setParams).toHaveBeenCalledWith({isSaving: true})
+    expect(navigation.setParams).toHaveBeenCalledWith({ isSaving: true })
     expect(save).toHaveBeenCalled()
     expect(instance.state.isSaving).toBeTruthy()
 
@@ -148,11 +151,12 @@ describe('PostEditor', () => {
           save={save}
           navigation={navigation}
           route={route}
-          post={mockPost} />
+          post={mockPost}
+        />
       </Provider>)
 
     const instance = renderer.root.findByType(PostEditor).instance
-    instance.setState({type: 'request', announcementEnabled: true})
+    instance.setState({ type: 'request', announcementEnabled: true })
     instance.save()
 
     expect(Alert.alert).toHaveBeenCalled()
@@ -170,7 +174,8 @@ describe('PostEditor', () => {
           save={save}
           navigation={navigation}
           route={route}
-          post={mockPost} />
+          post={mockPost}
+        />
       </Provider>)
     jest.mock('util/toast', () => ({
       showToast: jest.fn(),
@@ -196,7 +201,8 @@ describe('PostEditor', () => {
           save={save}
           navigation={navigation}
           route={route}
-          post={mockPost} />
+          post={mockPost}
+        />
       </Provider>)
 
     const instance = renderer.root.findByType(PostEditor).instance
@@ -215,11 +221,12 @@ describe('PostEditor', () => {
           navigation={navigation}
           route={route}
           imageUrls={['http://foo.com/foo.png']}
-          post={mockPost} />
+          post={mockPost}
+        />
       </Provider>)
 
     const instance = renderer.root.findByType(PostEditor).instance
-    instance.addImage({remote: 'http://bar.com/bar.png'})
+    instance.addImage({ remote: 'http://bar.com/bar.png' })
     expect(instance.state.imageUrls).toEqual([
       'http://foo.com/foo.png',
       'http://bar.com/bar.png'
@@ -240,7 +247,8 @@ describe('PostEditor', () => {
           navigation={navigation}
           route={route}
           imageUrls={['http://foo.com/foo.png']}
-          post={mockPost} />
+          post={mockPost}
+        />
       </Provider>)
 
     const instance = renderer.root.findByType(PostEditor).instance
@@ -264,7 +272,8 @@ describe('PostEditor', () => {
           navigation={navigation}
           route={route}
           imageUrls={['http://foo.com/foo.png']}
-          post={mockPost} />
+          post={mockPost}
+        />
       </Provider>)
 
     const instance = renderer.root.findByType(PostEditor).instance
@@ -278,7 +287,7 @@ describe('PostEditor', () => {
     })
     expect(instance.state.filePickerPending).toBeFalsy()
     expect(upload).toHaveBeenCalled()
-    expect(instance.addFile).toHaveBeenCalledWith({'local': 'file:///somewhere/foo.pdf', 'remote': 'https:/storage.hylo.com/foo.pdf'})
+    expect(instance.addFile).toHaveBeenCalledWith({ local: 'file:///somewhere/foo.pdf', remote: 'https:/storage.hylo.com/foo.pdf' })
   })
 
   it('showImagePicker', async () => {
@@ -297,7 +306,8 @@ describe('PostEditor', () => {
           navigation={navigation}
           route={route}
           imageUrls={['http://foo.com/foo.png']}
-          post={mockPost} />
+          post={mockPost}
+        />
       </Provider>)
 
     const instance = renderer.root.findByType(PostEditor).instance
@@ -310,7 +320,7 @@ describe('PostEditor', () => {
     })
     expect(instance.state.imagePickerPending).toBeFalsy()
     expect(upload).toHaveBeenCalled()
-    expect(instance.addImage).toHaveBeenCalledWith({'local': 'file:///tmp/bar.jpg', 'remote': 'https:/storage.hylo.com/foo.pdf'})
+    expect(instance.addImage).toHaveBeenCalledWith({ local: 'file:///tmp/bar.jpg', remote: 'https:/storage.hylo.com/foo.pdf' })
   })
 
   it('has file methods', () => {
@@ -323,12 +333,13 @@ describe('PostEditor', () => {
           route={route}
           postId={mockPost.id}
           fileUrls={['http://foo.com/foo.pdf']}
-          post={mockPost} />
+          post={mockPost}
+        />
       </Provider>)
 
     const instance = renderer.root.findByType(PostEditor).instance
 
-    instance.addFile({remote: 'http://bar.com/bar.pdf'})
+    instance.addFile({ remote: 'http://bar.com/bar.pdf' })
     expect(instance.state.fileUrls).toEqual([
       'http://foo.com/foo.pdf',
       'http://bar.com/bar.pdf'
@@ -350,7 +361,8 @@ describe('PostEditor', () => {
           save={save}
           navigation={navigation}
           route={route}
-          post={mockPost} />
+          post={mockPost}
+        />
       </Provider>)
 
     const instance = renderer.root.findByType(PostEditor).instance
@@ -370,7 +382,8 @@ describe('PostEditor', () => {
           save={save}
           navigation={navigation}
           route={route}
-          post={mockPost} />
+          post={mockPost}
+        />
       </Provider>)
 
     const instance = renderer.root.findByType(PostEditor).instance
@@ -388,7 +401,7 @@ describe('TypeButton', () => {
       type={type}
       key={type}
       onPress={jest.fn()}
-    />)
+                    />)
     const actual = renderer.getRenderOutput()
     expect(actual).toMatchSnapshot()
   })

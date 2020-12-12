@@ -11,7 +11,7 @@ export const FETCH_MEMBER_POSTS = `${MODULE_NAME}/FETCH_MEMBER_POSTS`
 export const FETCH_MEMBER_COMMENTS = `${MODULE_NAME}/FETCH_MEMBER_COMMENTS`
 export const FETCH_MEMBER_UPVOTES = `${MODULE_NAME}/FETCH_MEMBER_UPVOTES`
 
-export function fetchMemberPosts ({id, first = 10, offset}) {
+export function fetchMemberPosts ({ id, first = 10, offset }) {
   return {
     type: FETCH_MEMBER_POSTS,
     graphql: {
@@ -29,7 +29,7 @@ export function fetchMemberPosts ({id, first = 10, offset}) {
           ${postsQueryFragment}
         }
       }`,
-      variables: {id, first, offset}
+      variables: { id, first, offset }
     },
     meta: {
       afterInteractions: true,
@@ -41,7 +41,7 @@ export function fetchMemberPosts ({id, first = 10, offset}) {
   }
 }
 
-export function fetchMemberComments ({id, first = 20, offset}) {
+export function fetchMemberComments ({ id, first = 20, offset }) {
   return {
     type: FETCH_MEMBER_COMMENTS,
     graphql: {
@@ -77,7 +77,7 @@ export function fetchMemberComments ({id, first = 20, offset}) {
   }
 }
 
-export function fetchMemberUpvotes ({id, first = 20, offset}) {
+export function fetchMemberUpvotes ({ id, first = 20, offset }) {
   return {
     type: FETCH_MEMBER_UPVOTES,
     graphql: {

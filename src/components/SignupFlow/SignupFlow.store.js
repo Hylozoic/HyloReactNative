@@ -1,6 +1,6 @@
 export
-  { default as updateUserSettings, UPDATE_USER_SETTINGS, UPDATE_USER_SETTINGS_PENDING }
-from '../../store/actions/updateUserSettings'
+{ default as updateUserSettings, UPDATE_USER_SETTINGS, UPDATE_USER_SETTINGS_PENDING }
+  from '../../store/actions/updateUserSettings'
 
 export const MODULE_NAME = 'SignupFlow'
 export const UPDATE_LOCAL_USER_SETTINGS = `${MODULE_NAME}/UPDATE_LOCAL_USER_SETTINGS`
@@ -63,11 +63,11 @@ export default function reducer (state = defaultState, action) {
 }
 
 export function signup ({ name, email, password }) {
-  let params = {name, email, password, resp: 'user', login: true}
+  const params = { name, email, password, resp: 'user', login: true }
   return {
     type: SIGNUP,
     payload: {
-      api: {method: 'post', path: '/noo/user', params}
+      api: { method: 'post', path: '/noo/user', params }
     }
   }
 }

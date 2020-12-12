@@ -5,7 +5,7 @@ jest.mock('react-native-reanimated', () => require('react-native-reanimated/mock
 it('handles an invitation link', () => {
   expect(convertDeepLinkToAction('/h/use-invitation?token=foo'))
     .toEqual({
-      params: {token: 'foo'},
+      params: { token: 'foo' },
       routeName: 'UseInvitation',
       type: 'Navigation/NAVIGATE'
     })
@@ -14,7 +14,7 @@ it('handles an invitation link', () => {
 it('handles a community join link', () => {
   expect(convertDeepLinkToAction('/c/sandbox/join/foo'))
     .toEqual({
-      params: {accessCode: 'foo', slug: 'sandbox'},
+      params: { accessCode: 'foo', slug: 'sandbox' },
       routeName: 'UseAccessCode',
       type: 'Navigation/NAVIGATE'
     })
@@ -74,7 +74,7 @@ it('handles a link without a preceding slash (for tokenAuth nextURL handling)', 
 
 it('handles a message thread link', () => {
   expect(convertDeepLinkToAction('/t/247')).toEqual({
-    params: {id: '247'},
+    params: { id: '247' },
     routeName: 'Thread',
     type: 'Navigation/NAVIGATE'
   })

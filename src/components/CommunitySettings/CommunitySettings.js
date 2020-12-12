@@ -25,7 +25,8 @@ export default class CommunitySettings extends React.Component {
           <HeaderButton
             disabled={pendingSave}
             onPress={saveChanges}
-            text={pendingSave ? 'Saving' : 'Save'} />
+            text={pendingSave ? 'Saving' : 'Save'}
+          />
       }
     })
   }
@@ -101,13 +102,13 @@ export default class CommunitySettings extends React.Component {
     })
 
     return this.props.updateCommunitySettings(this.state.edits)
-      .then(({error}) => {
+      .then(({ error }) => {
         this.props.navigation.setParams({
           pendingSave: this.props.pendingSave
         })
 
         if (error) {
-          showToast('Error Saving Changes', {isError: true})
+          showToast('Error Saving Changes', { isError: true })
         } else {
           this.setState({
             changed: false
@@ -127,35 +128,41 @@ export default class CommunitySettings extends React.Component {
 
     const { name, description, location } = this.state.edits
 
-    return <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-      <KeyboardFriendlyView style={styles.keyboardFriendlyContainer}>
-        <TextInput
-          style={styles.nameInput}
-          onChangeText={this.updateField('name')}
-          value={name}
-          underlineColorAndroid='transparent' />
-        <CommunityBanner
-          isFocused={isFocused}
-          community={community}
-          updateCommunitySettings={updateCommunitySettings} />
-        <Text style={styles.label}>DESCRIPTION</Text>
-        <TextInput
-          ref={i => { this.input = i }}
-          style={styles.input}
-          value={description}
-          onChangeText={this.updateField('description')}
-          multiline
-          numberOfLines={5}
-          underlineColorAndroid='transparent' />
-        <Text style={styles.label}>LOCATION</Text>
-        <TextInput
-          ref={i => { this.input = i }}
-          style={styles.input}
-          value={location}
-          onChangeText={this.updateField('location')}
-          underlineColorAndroid='transparent' />
-      </KeyboardFriendlyView>
-    </ScrollView>
+    return (
+      <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+        <KeyboardFriendlyView style={styles.keyboardFriendlyContainer}>
+          <TextInput
+            style={styles.nameInput}
+            onChangeText={this.updateField('name')}
+            value={name}
+            underlineColorAndroid='transparent'
+          />
+          <CommunityBanner
+            isFocused={isFocused}
+            community={community}
+            updateCommunitySettings={updateCommunitySettings}
+          />
+          <Text style={styles.label}>DESCRIPTION</Text>
+          <TextInput
+            ref={i => { this.input = i }}
+            style={styles.input}
+            value={description}
+            onChangeText={this.updateField('description')}
+            multiline
+            numberOfLines={5}
+            underlineColorAndroid='transparent'
+          />
+          <Text style={styles.label}>LOCATION</Text>
+          <TextInput
+            ref={i => { this.input = i }}
+            style={styles.input}
+            value={location}
+            onChangeText={this.updateField('location')}
+            underlineColorAndroid='transparent'
+          />
+        </KeyboardFriendlyView>
+      </ScrollView>
+    )
   }
 }
 
@@ -174,7 +181,7 @@ export class CommunityBanner extends React.Component {
       [localKey]: local
     })
 
-    this.props.updateCommunitySettings({[remoteKey]: remote})
+    this.props.updateCommunitySettings({ [remoteKey]: remote })
   }
 
   render () {
@@ -182,8 +189,8 @@ export class CommunityBanner extends React.Component {
     const { avatarPickerPending, bannerPickerPending, avatarLocalUri, bannerLocalUri } = this.state
 
     const avatarSource = avatarLocalUri
-      ? {uri: avatarLocalUri}
-      : avatarUrl && {uri: avatarUrl}
+      ? { uri: avatarLocalUri }
+      : avatarUrl && { uri: avatarUrl }
 
     // This is a suprisingly annoying piece of logic. Basically, prefer
     // displaying `bannerLocalUri`, then `bannerUrl`, then `defaultBanner`.
@@ -199,52 +206,60 @@ export class CommunityBanner extends React.Component {
       bannerSource = defaultBanner
     }
 
-    return <View>
-      <ImagePicker
-        title='Change Banner'
-        type='communityBanner'
-        style={styles.bannerImagePicker}
-        id={id}
-        onChoice={choice => this.onChoice(choice, 'banner')}
-        onPendingChange={pending => this.setState({bannerPickerPending: pending})}>
-        <Image source={bannerSource} style={styles.bannerImage} />
-        <EditButton isLoading={bannerPickerPending} style={styles.bannerEditButton} />
-      </ImagePicker>
-      <View style={styles.avatarW3}>
+    return (
+      <View>
         <ImagePicker
-          style={styles.avatarWrapperWrapper}
-          title='Change Avatar'
-          type='communityAvatar'
+          title='Change Banner'
+          type='communityBanner'
+          style={styles.bannerImagePicker}
           id={id}
-          onChoice={choice => this.onChoice(choice, 'avatar')}
-          onPendingChange={pending => this.setState({avatarPickerPending: pending})}>
-          <View style={styles.avatarWrapper}>
-            <Image source={avatarSource} style={styles.avatarImage} />
-            <EditButton isLoading={avatarPickerPending} style={styles.avatarEditButton} />
-          </View>
+          onChoice={choice => this.onChoice(choice, 'banner')}
+          onPendingChange={pending => this.setState({ bannerPickerPending: pending })}
+        >
+          <Image source={bannerSource} style={styles.bannerImage} />
+          <EditButton isLoading={bannerPickerPending} style={styles.bannerEditButton} />
         </ImagePicker>
+        <View style={styles.avatarW3}>
+          <ImagePicker
+            style={styles.avatarWrapperWrapper}
+            title='Change Avatar'
+            type='communityAvatar'
+            id={id}
+            onChoice={choice => this.onChoice(choice, 'avatar')}
+            onPendingChange={pending => this.setState({ avatarPickerPending: pending })}
+          >
+            <View style={styles.avatarWrapper}>
+              <Image source={avatarSource} style={styles.avatarImage} />
+              <EditButton isLoading={avatarPickerPending} style={styles.avatarEditButton} />
+            </View>
+          </ImagePicker>
+        </View>
       </View>
-    </View>
+    )
   }
 }
 
 export function EditButton ({ isLoading, style }) {
-  return <View style={[styles.editButton, style]}>
-    {isLoading
-      ? <Text style={styles.editButtonText}>loading</Text>
-      : <View style={{flexDirection: 'row'}}>
-        <EntypoIcon name='edit' style={styles.editIcon} />
-        <Text style={styles.editButtonText}>edit</Text>
-      </View>}
-  </View>
+  return (
+    <View style={[styles.editButton, style]}>
+      {isLoading
+        ? <Text style={styles.editButtonText}>loading</Text>
+        : <View style={{ flexDirection: 'row' }}>
+          <EntypoIcon name='edit' style={styles.editIcon} />
+          <Text style={styles.editButtonText}>edit</Text>
+        </View>}
+    </View>
+  )
 }
 
 export function ReadMoreButton ({ goToDetails }) {
-  return <View style={styles.buttonContainer}>
-    <TouchableOpacity onPress={goToDetails} style={styles.buttonWrapper}>
-      <View style={styles.button}>
-        <Text style={styles.buttonText}>Read More</Text>
-      </View>
-    </TouchableOpacity>
-  </View>
+  return (
+    <View style={styles.buttonContainer}>
+      <TouchableOpacity onPress={goToDetails} style={styles.buttonWrapper}>
+        <View style={styles.button}>
+          <Text style={styles.buttonText}>Read More</Text>
+        </View>
+      </TouchableOpacity>
+    </View>
+  )
 }

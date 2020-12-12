@@ -3,7 +3,7 @@ import ReactShallowRenderer from 'react-test-renderer/shallow'
 import TestRenderer from 'react-test-renderer'
 import Login, { FormError, SignupLink } from './Login'
 
-jest.mock('util/platform', () => ({isIOS: false}))
+jest.mock('util/platform', () => ({ isIOS: false }))
 
 describe('Login', () => {
   it('renders correctly', () => {
@@ -25,7 +25,7 @@ describe('Login', () => {
     const renderer = new ReactShallowRenderer()
     renderer.render(<Login
       error={errorMessage}
-    />)
+                    />)
     const actual = renderer.getRenderOutput()
     expect(actual).toMatchSnapshot()
   })
@@ -34,7 +34,7 @@ describe('Login', () => {
     const renderer = new ReactShallowRenderer()
     renderer.render(<Login
       isConnected={false}
-    />)
+                    />)
     const actual = renderer.getRenderOutput()
     expect(actual).toMatchSnapshot()
   })
@@ -43,7 +43,7 @@ describe('Login', () => {
     const login = jest.fn()
     const instance = TestRenderer.create(<Login
       login={login}
-    />
+                                         />
     ).root.instance
 
     instance.login()
@@ -54,8 +54,8 @@ describe('Login', () => {
     const validEmail = 'test@email.com'
     const invalidEmail = 'test'
     const instance = TestRenderer.create(<Login
-      error={''}
-     />
+      error=''
+                                         />
     ).root.instance
 
     instance.validateEmail(validEmail)

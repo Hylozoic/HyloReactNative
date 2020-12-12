@@ -1,4 +1,4 @@
-export default {  
+export default {
   button: {
     width: 185,
     marginLeft: 'auto',

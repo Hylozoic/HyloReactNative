@@ -4,7 +4,7 @@ import ReactTestRenderer from 'react-test-renderer'
 import ErrorBoundary from './ErrorBoundary'
 import * as Sentry from '@sentry/react-native'
 
-jest.mock('@sentry/react-native', () => ({captureException: jest.fn()}))
+jest.mock('@sentry/react-native', () => ({ captureException: jest.fn() }))
 
 beforeEach(() => {
   Sentry.captureException.mockReset()
@@ -14,9 +14,11 @@ const buggyError = new Error('I Crashed')
 
 it('matches last snapshot', () => {
   const logError = jest.fn()
-  const renderer = ReactTestRenderer.create(<ErrorBoundary logError={logError}>
-    <Text>Happy Child</Text>
-  </ErrorBoundary>)
+  const renderer = ReactTestRenderer.create(
+    <ErrorBoundary logError={logError}>
+      <Text>Happy Child</Text>
+    </ErrorBoundary>
+  )
   expect(renderer.toJSON()).toMatchSnapshot()
 })
 
@@ -26,7 +28,7 @@ it('displays an error when a child component throws an error', () => {
     <BuggyComponent />
   </ErrorBoundary>)
 
-  const stack = {'extra': {'componentStack': '\n    in BuggyComponent\n    in ErrorBoundary'}}
+  const stack = { extra: { componentStack: '\n    in BuggyComponent\n    in ErrorBoundary' } }
 
   expect(Sentry.captureException).toHaveBeenCalledWith(buggyError, stack)
   expect(renderer.toJSON()).toMatchSnapshot()
@@ -41,7 +43,7 @@ it('displays a custom error when a child component throws an error', () => {
     </ErrorBoundary>
   </ErrorBoundary>)
 
-  const stack = {'extra': {'componentStack': '\n    in BuggyComponent\n    in ErrorBoundary\n    in ErrorBoundary'}}
+  const stack = { extra: { componentStack: '\n    in BuggyComponent\n    in ErrorBoundary\n    in ErrorBoundary' } }
 
   expect(Sentry.captureException).toHaveBeenCalledWith(buggyError, stack)
   expect(renderer.toJSON()).toMatchSnapshot()
@@ -52,8 +54,10 @@ function BuggyComponent () {
 }
 
 function CustomErrorComponent () {
-  return <View>
-    <Image />
-    <Text>Custom Error Message</Text>
-  </View>
+  return (
+    <View>
+      <Image />
+      <Text>Custom Error Message</Text>
+    </View>
+  )
 }

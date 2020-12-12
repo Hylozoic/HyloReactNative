@@ -14,10 +14,10 @@ export function mapStateToProps (state, props) {
   const editing = get('route.params.editing', props)
 
   const isBlocked = !!getBlockedUsers(state).find(i => get('id', i) === id)
-  const person = getPerson(state, {id})
+  const person = getPerson(state, { id })
   const goToDetails = () => props.navigation.navigate('MemberDetails', { id })
   const goToEdit = () => props.navigation.navigate('MemberDetails', { id, editing: true })
-  const goToSkills = () => props.navigation.navigate('MemberSkillEditor', { id } )
+  const goToSkills = () => props.navigation.navigate('MemberSkillEditor', { id })
   const currentUser = getMe(state, props)
   const skills = person ? person.skills : []
   const isMe = Number(get('id', currentUser)) === Number(id)
@@ -53,7 +53,7 @@ export function makeOnPressMessages (currentUser, person, navigation) {
   if (!person || currentUser.id === person.id) return () => navigation.navigate('ThreadList')
   const { messageThreadId } = person
   if (messageThreadId) return () => navigation.navigate('Thread', { id: messageThreadId })
-  return () => navigation.navigate('NewMessage',{ participants: [person.id] })
+  return () => navigation.navigate('NewMessage', { participants: [person.id] })
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {

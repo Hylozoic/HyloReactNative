@@ -39,7 +39,7 @@ export function partitionCommunities (memberships) {
         return acc
       }
     } else {
-      acc['independent'] = acc['independent'].concat([community])
+      acc.independent = acc.independent.concat([community])
       return acc
     }
   }, {

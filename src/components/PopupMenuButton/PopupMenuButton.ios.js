@@ -7,7 +7,7 @@ export default function PopupMenuButton ({
   children,
   viewProps,
   style,
-  hitSlop = {top: 5, bottom: 5, left: 5, right: 5}
+  hitSlop = { top: 5, bottom: 5, left: 5, right: 5 }
 }) {
   const onSelect = index => actions[index][1]()
 
@@ -20,7 +20,9 @@ export default function PopupMenuButton ({
     }, index => index !== cancelButtonIndex && onSelect(index))
   }
 
-  return <TouchableOpacity onPress={onPress} style={style} hitSlop={hitSlop} {...viewProps}>
-    {children}
-  </TouchableOpacity>
+  return (
+    <TouchableOpacity onPress={onPress} style={style} hitSlop={hitSlop} {...viewProps}>
+      {children}
+    </TouchableOpacity>
+  )
 }

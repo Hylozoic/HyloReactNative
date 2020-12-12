@@ -55,7 +55,7 @@ export default class DeepLinkHandler extends React.Component {
 
   redirectNow (action) {
     const { currentUser, navigator } = this.props
-    return redirectAfterLogin({currentUser, navigation: navigator, action})
+    return redirectAfterLogin({ currentUser, navigation: navigator, action })
   }
 
   handleUrl (requestUrl) {

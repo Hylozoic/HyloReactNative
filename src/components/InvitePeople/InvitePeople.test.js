@@ -56,9 +56,9 @@ describe('InvitePeople', () => {
 
     expect(instance._renderTabBar({})).toMatchSnapshot()
 
-    expect(instance._renderScene({route: {key: '0'}})).toMatchSnapshot()
-    expect(instance._renderScene({route: {key: '1'}})).toMatchSnapshot()
-    expect(instance._renderScene({route: {key: '2'}})).toEqual(null)
+    expect(instance._renderScene({ route: { key: '0' } })).toMatchSnapshot()
+    expect(instance._renderScene({ route: { key: '1' } })).toMatchSnapshot()
+    expect(instance._renderScene({ route: { key: '2' } })).toEqual(null)
   })
 
   it('parses emails correctly', () => {
@@ -77,7 +77,7 @@ describe('InvitePeople', () => {
 
   it('renders SendInvitesPage', () => {
     const renderer = new ReactShallowRenderer()
-    renderer.render(<SendInvitesPage inviteLink={'https://hylo.com/invitepathhere'} communityName='Axolotle' />)
+    renderer.render(<SendInvitesPage inviteLink='https://hylo.com/invitepathhere' communityName='Axolotle' />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
@@ -111,7 +111,7 @@ describe('InvitePeople', () => {
         payload: {
           data: {
             createInvitation: {
-              invitations: [{email: 'john@doe.com'}, {email: 'peaceout@way.deep'}]
+              invitations: [{ email: 'john@doe.com' }, { email: 'peaceout@way.deep' }]
             }
           }
         }
@@ -140,7 +140,7 @@ describe('InvitePeople', () => {
     const reinviteAll = jest.fn()
 
     const renderer = new ReactShallowRenderer()
-    renderer.render(<PendingInvitesPage invites={invites} expireInvitation={jest.fn()} resendInvitation={jest.fn()} reinviteAll={reinviteAll}/>)
+    renderer.render(<PendingInvitesPage invites={invites} expireInvitation={jest.fn()} resendInvitation={jest.fn()} reinviteAll={reinviteAll} />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()

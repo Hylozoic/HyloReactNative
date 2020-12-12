@@ -79,49 +79,52 @@ export default class CreateCommunityUrl extends React.Component {
 
   render () {
     const { error, communityUrl } = this.state
-    return <ScrollView>
-      <KeyboardFriendlyView style={styles.container}>
-        <Text style={styles.header}>Choose an address for your community</Text>
-        <Text style={styles.description}>Your URL is the address that members will use to access your community online. The shorter the better!</Text>
-        <View style={styles.urlTextInputContainer}>
-          <Text style={styles.textInputLabel}>What's the address for your community?</Text>
-          <TextInput
-            style={styles.textInput}
-            onChangeText={communityUrl => this.setInput('communityUrl', removeUrlFromDomain(communityUrl))}
-            returnKeyType='next'
-            autoCapitalize='none'
-            value={formatDomainWithUrl(communityUrl)}
-            autoCorrect={false}
-            underlineColorAndroid={styles.androidInvisibleUnderline} />
-        </View>
-        {error && <View style={styles.errorBubble}><ErrorBubble text={error} topArrow /></View> }
-        <Button text='Continue' onPress={this.checkAndSubmit} style={styles.button} disabled={!!this.props.fetchUrlPending} />
-      </KeyboardFriendlyView>
-    </ScrollView>
+    return (
+      <ScrollView>
+        <KeyboardFriendlyView style={styles.container}>
+          <Text style={styles.header}>Choose an address for your community</Text>
+          <Text style={styles.description}>Your URL is the address that members will use to access your community online. The shorter the better!</Text>
+          <View style={styles.urlTextInputContainer}>
+            <Text style={styles.textInputLabel}>What's the address for your community?</Text>
+            <TextInput
+              style={styles.textInput}
+              onChangeText={communityUrl => this.setInput('communityUrl', removeUrlFromDomain(communityUrl))}
+              returnKeyType='next'
+              autoCapitalize='none'
+              value={formatDomainWithUrl(communityUrl)}
+              autoCorrect={false}
+              underlineColorAndroid={styles.androidInvisibleUnderline}
+            />
+          </View>
+          {error && <View style={styles.errorBubble}><ErrorBubble text={error} topArrow /></View>}
+          <Button text='Continue' onPress={this.checkAndSubmit} style={styles.button} disabled={!!this.props.fetchUrlPending} />
+        </KeyboardFriendlyView>
+      </ScrollView>
+    )
   }
 }
 
 export function checkCommunityUrlThenRedirect (communityUrl, fetchCommunityExists, setErrorMessage, saveCommunityUrl, goToCreateCommunityReview) {
   return fetchCommunityExists(communityUrl)
-  .then((data) => {
-    const error = get('error', data)
-    const communityExists = get('payload.data.communityExists.exists', data)
-    if (error) {
+    .then((data) => {
+      const error = get('error', data)
+      const communityExists = get('payload.data.communityExists.exists', data)
+      if (error) {
+        setErrorMessage('There was an error, please try again.')
+        return
+      }
+      if (communityExists) {
+        setErrorMessage('This url already exists. Please choose another one.')
+        return
+      }
+      if (communityExists === false) {
+        saveCommunityUrl(communityUrl)
+        goToCreateCommunityReview()
+        return
+      }
+      // if there is no error or communityExists variable, assume some other error
       setErrorMessage('There was an error, please try again.')
-      return
-    }
-    if (communityExists) {
-      setErrorMessage('This url already exists. Please choose another one.')
-      return
-    }
-    if (communityExists === false) {
-      saveCommunityUrl(communityUrl)
-      goToCreateCommunityReview()
-      return
-    }
-    // if there is no error or communityExists variable, assume some other error
-    setErrorMessage('There was an error, please try again.')
-  }, () => {
-    setErrorMessage('There was an error, please try again.')
-  })
+    }, () => {
+      setErrorMessage('There was an error, please try again.')
+    })
 }

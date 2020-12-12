@@ -12,7 +12,7 @@ it('matches last snapshot', () => {
     avatarUrl: 'foo.png',
     saveAndNext: () => {},
     changeSetting: () => {},
-    currentUser: {id: '1'}
+    currentUser: { id: '1' }
   }
 
   renderer.render(<SignupFlow2 {...props} />)
@@ -26,7 +26,7 @@ it('handles no image', () => {
   const props = {
     saveAndNext: () => {},
     changeSetting: () => {},
-    currentUser: {id: '1'}
+    currentUser: { id: '1' }
   }
 
   renderer.render(<SignupFlow2 {...props} />)
@@ -39,11 +39,11 @@ it('handles localUri', () => {
   const props = {
     saveAndNext: () => {},
     changeSetting: () => {},
-    currentUser: {id: '1'}
+    currentUser: { id: '1' }
   }
 
   const renderer = ReactTestRenderer.create(<SignupFlow2 {...props} />)
-  renderer.root.instance.setState({localUri: 'foo.png'})
+  renderer.root.instance.setState({ localUri: 'foo.png' })
   expect(renderer.toJSON()).toMatchSnapshot()
 })
 
@@ -51,7 +51,7 @@ it('handles choice', () => {
   const props = {
     saveAndNext: () => {},
     changeSetting: jest.fn(() => () => {}),
-    currentUser: {id: '1'}
+    currentUser: { id: '1' }
   }
 
   const instance = ReactTestRenderer.create(<SignupFlow2 {...props} />).root.instance

@@ -17,7 +17,7 @@ it('matches last snapshot', () => {
     autoCorrect: true,
     onSubmitEditing: () => {},
     returnKeyType: 'next',
-    style: {color: 'red'},
+    style: { color: 'red' },
     error: 'This is not a real name'
   }
 
@@ -35,7 +35,7 @@ it('toggles the password', () => {
 })
 
 it('sets editable to false if toggleEditable', () => {
-  var instance = ReactTestRenderer.create(<SettingControl />).root.instance
+  let instance = ReactTestRenderer.create(<SettingControl />).root.instance
   instance.componentDidMount()
   expect(instance.state.editable).toEqual(true)
 
@@ -47,7 +47,7 @@ it('sets editable to false if toggleEditable', () => {
 describe('on toggleEditable', () => {
   it('toggles the state', () => {
     const instance = ReactTestRenderer.create(<SettingControl toggleEditable />).root.instance
-    instance.setState({editable: true})
+    instance.setState({ editable: true })
     instance.toggleEditable()
     expect(instance.state.editable).toEqual(false)
     instance.toggleEditable()
@@ -76,7 +76,7 @@ describe('on blur', () => {
 describe('on makeEditable', () => {
   it('sets the state', () => {
     const instance = ReactTestRenderer.create(<SettingControl toggleEditable />).root.instance
-    instance.setState({editable: false})
+    instance.setState({ editable: false })
     instance.makeEditable()
     expect(instance.state.editable).toEqual(true)
   })
@@ -85,9 +85,9 @@ describe('on makeEditable', () => {
 describe('on isEditable', () => {
   it('returns the state', () => {
     const instance = ReactTestRenderer.create(<SettingControl toggleEditable />).root.instance
-    instance.setState({editable: false})
+    instance.setState({ editable: false })
     expect(instance.isEditable()).toEqual(false)
-    instance.setState({editable: true})
+    instance.setState({ editable: true })
     expect(instance.isEditable()).toEqual(true)
   })
 })
@@ -99,7 +99,7 @@ describe('on onSubmitEditing', () => {
       onSubmitEditing: jest.fn()
     }
     const instance = ReactTestRenderer.create(<SettingControl {...props} />).root.instance
-    instance.setState({highlight: true})
+    instance.setState({ highlight: true })
     instance.onSubmitEditing()
     expect(instance.state.editable).toEqual(false)
     expect(props.onSubmitEditing).toHaveBeenCalled()

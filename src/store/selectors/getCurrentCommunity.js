@@ -6,6 +6,6 @@ const getCurrentCommunity = ormCreateSelector(
   orm,
   state => state.orm,
   getCurrentCommunityId,
-  (session, id) => session.Community.safeGet({id})
+  (session, id) => session.Community.safeGet({ id })
 )
 export default getCurrentCommunity

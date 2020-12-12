@@ -17,21 +17,24 @@ export default function MessageCard ({ message }) {
   const presentedText = present(
     sanitize(text).replace(/\n/g, '').replace('<p>&nbsp;</p>', ''))
 
-  const textStyles = [ styles.text, suppressCreator && styles.marginTopNoCreator ]
+  const textStyles = [styles.text, suppressCreator && styles.marginTopNoCreator]
 
-  return <View style={[ styles.container, suppressCreator && styles.padLeftNoAvatar ]}>
-    {!suppressCreator && <Avatar avatarUrl={creator.avatarUrl} />}
-    <View style={[ styles.body, suppressCreator && styles.padTopNoCreator ]}>
-      {!suppressCreator && <Text style={styles.name}>{creator.name}</Text>}
-      <HTMLView
-        onLinkPress={url => urlHandler(url, showMember, showTopic)}
-        addLineBreaks={false}
-        stylesheet={richTextStyles}
-        textComponentProps={{ style: textStyles }}
-        value={presentedText} />
-      {!suppressDate && <Text style={styles.date}>{createdAt}</Text>}
+  return (
+    <View style={[styles.container, suppressCreator && styles.padLeftNoAvatar]}>
+      {!suppressCreator && <Avatar avatarUrl={creator.avatarUrl} />}
+      <View style={[styles.body, suppressCreator && styles.padTopNoCreator]}>
+        {!suppressCreator && <Text style={styles.name}>{creator.name}</Text>}
+        <HTMLView
+          onLinkPress={url => urlHandler(url, showMember, showTopic)}
+          addLineBreaks={false}
+          stylesheet={richTextStyles}
+          textComponentProps={{ style: textStyles }}
+          value={presentedText}
+        />
+        {!suppressDate && <Text style={styles.date}>{createdAt}</Text>}
+      </View>
     </View>
-  </View>
+  )
 }
 
 MessageCard.propTypes = {

@@ -27,18 +27,18 @@ export default class FbLoginButton extends React.Component {
       this.props.createErrorNotification('COULD NOT SIGN IN WITH YOUR FACEBOOK ACCOUNT')
     } else {
       return this.AccessToken.getCurrentAccessToken()
-      .then(data => onLoginFinished(data.accessToken.toString()))
+        .then(data => onLoginFinished(data.accessToken.toString()))
     }
   }
 
   signIn = () => {
     return this.LoginManager.logInWithPermissions(permissions)
-    .then(
-      result => result.isCancelled || this.handleResult(null, result)
-    )
-    .catch(() => {
-      this.props.createErrorNotification('COULD NOT SIGN IN WITH YOUR FACEBOOK ACCOUNT')
-    })
+      .then(
+        result => result.isCancelled || this.handleResult(null, result)
+      )
+      .catch(() => {
+        this.props.createErrorNotification('COULD NOT SIGN IN WITH YOUR FACEBOOK ACCOUNT')
+      })
   }
 
   render () {
@@ -59,13 +59,14 @@ export default class FbLoginButton extends React.Component {
       ? 'Continue with Facebook'
       : 'Continue with Facebook'
 
-    return <Button
-      text={text}
-      customIconRender={renderProps =>
-        <MaterialCommunityIcon {...renderProps} name='facebook' />
-      }
-      style={style}
-      onPress={this.signIn}
-    />
+    return (
+      <Button
+        text={text}
+        customIconRender={renderProps =>
+          <MaterialCommunityIcon {...renderProps} name='facebook' />}
+        style={style}
+        onPress={this.signIn}
+      />
+    )
   }
 }

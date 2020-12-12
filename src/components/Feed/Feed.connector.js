@@ -42,7 +42,7 @@ export function mapStateToProps (state, props) {
   const network = getNetwork(state, networkSearchObject)
   const currentUser = getMe(state)
   const communityTopic = topicName && community &&
-    getCommunityTopic(state, {topicName, slug: community.slug})
+    getCommunityTopic(state, { topicName, slug: community.slug })
   const topicSubscribed = topicName && communityTopic && communityTopic.isSubscribed
   const topic = get('topic.ref', communityTopic)
   const currentUserHasMemberships = !isEmpty(getMemberships(state))

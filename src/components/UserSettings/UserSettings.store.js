@@ -10,7 +10,7 @@ export function unlinkAccount (provider) {
           success
         }
       }`,
-      variables: {provider}
+      variables: { provider }
     }
   }
 }

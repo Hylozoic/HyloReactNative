@@ -107,114 +107,127 @@ export default class PostDetails extends React.Component {
     const isMember = find(member => member.id === currentUser.id, post.members)
     const location = post.location || (post.locationObject && post.locationObject.fullText)
 
-    const postCard = <View style={styles.postCard}>
-      <PostHeader
-        creator={post.creator}
-        date={post.createdAt}
-        type={post.type}
-        editPost={editPost}
-        communities={post.communities}
-        slug={slug}
-        pinned={post.pinned}
-        topics={post.topics}
-        showTopic={this.handleShowTopic}
-        postId={post.id}
-        showMember={showMember}
-        goToCommunity={goToCommunity}
-        announcement={post.announcement}
-        closeOnDelete
-      />
-      <PostImage imageUrls={post.imageUrls} linked />
-      <PostBody
-        type={post.type}
-        title={post.title}
-        details={post.details}
-        startTime={post.startTime}
-        endTime={post.endTime}
-        linkPreview={post.linkPreview}
-        slug={slug}
-        showMember={showMember}
-        showTopic={this.handleShowTopic} />
-      {!isEmpty(post.fileUrls) && <Files urls={post.fileUrls} />}
-      {isProject &&
-        <ProjectMembersSummary
-          members={post.members}
-          onPress={goToMembers}
-          dimension={34}
-          style={styles.projectMembersContainer} />}
-      {isProject && <JoinProjectButton
-        style={styles.joinButton}
-        leaving={isMember}
-        onPress={isMember ? leaveProject : joinProject}
-      />}
-      {!!location && <View style={styles.infoRow}>
-        <Icon style={styles.locationIcon} name='Location' />
-        <Text style={styles.infoRowInfo} selectable>{location}</Text>
-      </View>}
-      <PostCommunities
-        communities={post.communities}
-        includePublic={post.isPublic}
-        slug={slug}
-        style={[styles.infoRow]}
-        goToCommunity={goToCommunity}
-        shouldShowCommunities />
-      <PostFooter
-        style={styles.postFooter}
-        id={post.id}
-        currentUser={currentUser}
-        commenters={post.commenters}
-        commentsTotal={post.commentsTotal}
-        votesTotal={post.votesTotal}
-        myVote={post.myVote}
-        showActivityLabel />
-    </View>
-
-    return <SafeAreaView style={{flex: 1}}>
-      <KeyboardFriendlyView style={styles.container}>
-        <Comments
-          ref='comments'
-          header={postCard}
-          footer={<CommentPrompt
-            currentUser={currentUser}
-            communityId={communityId}
-            submitting={submitting}
-            onChange={this.handleCommentOnChange}
-            onSubmit={this.handleCreateComment}
-            commentText={commentText} />
-          }
+    const postCard = (
+      <View style={styles.postCard}>
+        <PostHeader
+          creator={post.creator}
+          date={post.createdAt}
+          type={post.type}
+          editPost={editPost}
+          communities={post.communities}
+          slug={slug}
+          pinned={post.pinned}
+          topics={post.topics}
+          showTopic={this.handleShowTopic}
           postId={post.id}
-          postPending={pending}
+          showMember={showMember}
+          goToCommunity={goToCommunity}
+          announcement={post.announcement}
+          closeOnDelete
+        />
+        <PostImage imageUrls={post.imageUrls} linked />
+        <PostBody
+          type={post.type}
+          title={post.title}
+          details={post.details}
+          startTime={post.startTime}
+          endTime={post.endTime}
+          linkPreview={post.linkPreview}
+          slug={slug}
           showMember={showMember}
           showTopic={this.handleShowTopic}
-          slug={slug} />
-        <SocketSubscriber type='post' id={post.id} />
-      </KeyboardFriendlyView>
-    </SafeAreaView>
+        />
+        {!isEmpty(post.fileUrls) && <Files urls={post.fileUrls} />}
+        {isProject &&
+          <ProjectMembersSummary
+            members={post.members}
+            onPress={goToMembers}
+            dimension={34}
+            style={styles.projectMembersContainer}
+          />}
+        {isProject && <JoinProjectButton
+          style={styles.joinButton}
+          leaving={isMember}
+          onPress={isMember ? leaveProject : joinProject}
+                      />}
+        {!!location && <View style={styles.infoRow}>
+          <Icon style={styles.locationIcon} name='Location' />
+          <Text style={styles.infoRowInfo} selectable>{location}</Text>
+                       </View>}
+        <PostCommunities
+          communities={post.communities}
+          includePublic={post.isPublic}
+          slug={slug}
+          style={[styles.infoRow]}
+          goToCommunity={goToCommunity}
+          shouldShowCommunities
+        />
+        <PostFooter
+          style={styles.postFooter}
+          id={post.id}
+          currentUser={currentUser}
+          commenters={post.commenters}
+          commentsTotal={post.commentsTotal}
+          votesTotal={post.votesTotal}
+          myVote={post.myVote}
+          showActivityLabel
+        />
+      </View>
+    )
+
+    return (
+      <SafeAreaView style={{ flex: 1 }}>
+        <KeyboardFriendlyView style={styles.container}>
+          <Comments
+            ref='comments'
+            header={postCard}
+            footer={<CommentPrompt
+              currentUser={currentUser}
+              communityId={communityId}
+              submitting={submitting}
+              onChange={this.handleCommentOnChange}
+              onSubmit={this.handleCreateComment}
+              commentText={commentText}
+                    />}
+            postId={post.id}
+            postPending={pending}
+            showMember={showMember}
+            showTopic={this.handleShowTopic}
+            slug={slug}
+          />
+          <SocketSubscriber type='post' id={post.id} />
+        </KeyboardFriendlyView>
+      </SafeAreaView>
+    )
   }
 }
 
 export function CommentPrompt ({ currentUser, onChange, onSubmit, submitting, commentText, communityId }) {
   if (!currentUser) return null
 
-  return <InlineEditor
-    onChange={onChange}
-    onSubmit={onSubmit}
-    value={commentText}
-    style={styles.inlineEditor}
-    submitting={submitting}
-    placeholder={'Write a comment...'}
-    communityId={communityId}
-  />
+  return (
+    <InlineEditor
+      onChange={onChange}
+      onSubmit={onSubmit}
+      value={commentText}
+      style={styles.inlineEditor}
+      submitting={submitting}
+      placeholder='Write a comment...'
+      communityId={communityId}
+    />
+  )
 }
 
 export function Files ({ urls }) {
-  return <View style={styles.files}>
-    {urls.map(url =>
-      <TouchableOpacity key={url} onPress={openUrlFn(url)}>
-        <FileLabel url={url} />
-      </TouchableOpacity>
-    )}
-  </View>
+  return (
+    <View style={styles.files}>
+      {urls.map(url =>
+        <TouchableOpacity key={url} onPress={openUrlFn(url)}>
+          <FileLabel url={url} />
+        </TouchableOpacity>
+      )}
+    </View>
+  )
 }
 
 const openUrlFn = url => () =>
@@ -222,8 +235,11 @@ const openUrlFn = url => () =>
 
 export function JoinProjectButton ({ style, onPress, leaving }) {
   const text = leaving ? 'Leave Project' : 'Join Project'
-  return <Button
-    style={style}
-    text={text}
-    onPress={onPress} />
+  return (
+    <Button
+      style={style}
+      text={text}
+      onPress={onPress}
+    />
+  )
 }

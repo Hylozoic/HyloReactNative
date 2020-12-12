@@ -16,9 +16,9 @@ const initialLayout = {
 
 export const parseEmailList = emails =>
   compact((emails || '').split(/,|\n/).map(email => {
-    var trimmed = email.trim()
+    const trimmed = email.trim()
     // use only the email portion of a "Joe Bloggs <joe@bloggs.org>" line
-    var match = trimmed.match(/.*<(.*)>/)
+    const match = trimmed.match(/.*<(.*)>/)
     return match ? match[1] : trimmed
   }))
 
@@ -31,8 +31,8 @@ export default class InvitePeople extends Component {
   state = {
     index: 0,
     routes: [
-      {key: '0', title: 'Send Invites'},
-      {key: '1', title: 'Pending Invites'}
+      { key: '0', title: 'Send Invites' },
+      { key: '1', title: 'Pending Invites' }
     ]
   }
 
@@ -61,24 +61,31 @@ export default class InvitePeople extends Component {
     />
   )
 
-  _renderScene = ({route}) => {
+  _renderScene = ({ route }) => {
     if (this.props.pending) return <Text>Loading...</Text>
     switch (route.key) {
       case '0':
-        return <SendInvitesPage inviteLink={this.props.inviteLink}
-          pendingCreate={this.props.pendingCreate}
-          communityName={this.props.community.name}
-          communityId={this.props.community.id}
-          communityMembersCanInvite={this.props.community.allowCommunityInvites}
-          createInvitations={this.props.createInvitations}
-          regenerateAccessCode={this.props.regenerateAccessCode}
-          allowCommunityInvites={this.props.allowCommunityInvites} />
+        return (
+          <SendInvitesPage
+            inviteLink={this.props.inviteLink}
+            pendingCreate={this.props.pendingCreate}
+            communityName={this.props.community.name}
+            communityId={this.props.community.id}
+            communityMembersCanInvite={this.props.community.allowCommunityInvites}
+            createInvitations={this.props.createInvitations}
+            regenerateAccessCode={this.props.regenerateAccessCode}
+            allowCommunityInvites={this.props.allowCommunityInvites}
+          />
+        )
       case '1':
-        return <PendingInvitesPage
-          invites={this.props.invites}
-          expireInvitation={this.props.expireInvitation}
-          resendInvitation={this.props.resendInvitation}
-          reinviteAll={this.props.reinviteAll} />
+        return (
+          <PendingInvitesPage
+            invites={this.props.invites}
+            expireInvitation={this.props.expireInvitation}
+            resendInvitation={this.props.resendInvitation}
+            reinviteAll={this.props.reinviteAll}
+          />
+        )
       default:
         return null
     }
@@ -110,12 +117,12 @@ export class SendInvitesPage extends PureComponent {
   }
 
   copyToClipboard = () => {
-    this.setState({copied: true})
+    this.setState({ copied: true })
 
     Clipboard.setString(this.props.inviteLink)
 
     setTimeout(() => {
-      this.setState({copied: false})
+      this.setState({ copied: false })
     }, 3000)
   }
 
@@ -130,42 +137,42 @@ export class SendInvitesPage extends PureComponent {
 
     if (sending) return
 
-    this.setState({sending: true})
+    this.setState({ sending: true })
 
     return createInvitations(parseEmailList(emails), message)
-    .then(res => {
-      const { invitations } = res.payload.data.createInvitation
-      const badEmails = invitations.filter(email => email.error).map(e => e.email)
+      .then(res => {
+        const { invitations } = res.payload.data.createInvitation
+        const badEmails = invitations.filter(email => email.error).map(e => e.email)
 
-      const numBad = badEmails.length
-      let errorMessage
-      if (numBad === 1) {
-        errorMessage = 'The address below is invalid.'
-      } else if (numBad > 1) {
-        errorMessage = `The ${numBad} addresses below are invalid.`
-      }
+        const numBad = badEmails.length
+        let errorMessage
+        if (numBad === 1) {
+          errorMessage = 'The address below is invalid.'
+        } else if (numBad > 1) {
+          errorMessage = `The ${numBad} addresses below are invalid.`
+        }
 
-      const numGood = invitations.length - badEmails.length
-      const successMessage = numGood > 0
-      ? `Sent ${numGood} ${numGood === 1 ? 'email' : 'emails'}.`
-      : null
+        const numGood = invitations.length - badEmails.length
+        const successMessage = numGood > 0
+          ? `Sent ${numGood} ${numGood === 1 ? 'email' : 'emails'}.`
+          : null
 
-      this.setState({
-        emails: badEmails.join('\n'),
-        errorMessage,
-        successMessage,
-        sending: false
+        this.setState({
+          emails: badEmails.join('\n'),
+          errorMessage,
+          successMessage,
+          sending: false
+        })
       })
-    })
   }
 
   toggleAllowCommunityInvites = () => {
     const { communityMembersCanInvite } = this.state
     const { communityId } = this.props
-    this.setState({communityMembersCanInvite: !communityMembersCanInvite})
+    this.setState({ communityMembersCanInvite: !communityMembersCanInvite })
     this.props.allowCommunityInvites(communityId, !communityMembersCanInvite)
-      .then(({error}) => {
-        if (error) this.setState({communityMembersCanInvite})
+      .then(({ error }) => {
+        if (error) this.setState({ communityMembersCanInvite })
       })
   }
 
@@ -196,7 +203,7 @@ export class SendInvitesPage extends PureComponent {
                 <Switch
                   onValueChange={this.toggleAllowCommunityInvites}
                   value={communityMembersCanInvite}
-                  trackColor={{true: caribbeanGreen}}
+                  trackColor={{ true: caribbeanGreen }}
                 />
               </View>
             </View>
@@ -215,7 +222,7 @@ export class SendInvitesPage extends PureComponent {
             <TextInput
               value={emails}
               placeholder='Type email addresses'
-              onChangeText={(text) => this.setState({emails: text})}
+              onChangeText={(text) => this.setState({ emails: text })}
               style={styles.textInput}
               underlineColorAndroid={styles.androidInvisibleUnderline}
             />
@@ -225,7 +232,7 @@ export class SendInvitesPage extends PureComponent {
               numberOfLines={5}
               underlineColorAndroid={styles.androidInvisibleUnderline}
               style={styles.textInput}
-              onChangeText={(text) => this.setState({inputText: text})}
+              onChangeText={(text) => this.setState({ inputText: text })}
             />
 
             <Button
@@ -237,42 +244,51 @@ export class SendInvitesPage extends PureComponent {
 
           </View>
         </KeyboardFriendlyView>
-      </ScrollView>)
+      </ScrollView>
+    )
   }
 }
 
-export function PendingInvitesPage ({invites, expireInvitation, resendInvitation, reinviteAll}) {
-  return <ScrollView style={styles.pendingInvitesList}>
-    <Button text='Resend All' onPress={reinviteAll} style={styles.resendAllButton} />
-    {isEmpty(invites)
-    ? <Text style={styles.emptyList}>No pending invites</Text>
-    : invites.map((invite, i) =>
-      <PendingInviteRow invite={invite} key={i} first={i === 0}
-        expireInvitation={expireInvitation}
-        resendInvitation={resendInvitation} />)}
-  </ScrollView>
+export function PendingInvitesPage ({ invites, expireInvitation, resendInvitation, reinviteAll }) {
+  return (
+    <ScrollView style={styles.pendingInvitesList}>
+      <Button text='Resend All' onPress={reinviteAll} style={styles.resendAllButton} />
+      {isEmpty(invites)
+        ? <Text style={styles.emptyList}>No pending invites</Text>
+        : invites.map((invite, i) =>
+          <PendingInviteRow
+            invite={invite} key={i} first={i === 0}
+            expireInvitation={expireInvitation}
+            resendInvitation={resendInvitation}
+          />)}
+    </ScrollView>
+  )
 }
 
 export function PendingInviteRow ({ invite, first, expireInvitation, resendInvitation }) {
   const { id, email, lastSentAt } = invite
-  return <View style={styles.rowContainer}>
-    <View style={styles.nameRow}>
-      <Text style={styles.pendingInviteEmail}>{email}</Text>
-    </View>
-    <View style={styles.actionRow}>
-      <Text style={styles.timeAgoText}>{humanDate(lastSentAt)}</Text>
-      <View style={styles.actionItems}>
-        <TouchableOpacity
-          onPress={() => expireInvitation(id)}
-          hitSlop={{top: 10, bottom: 10, left: 10, right: 10}}>
-          <Text style={styles.expireText}>Expire</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => !invite.resent && resendInvitation(id)}
-          hitSlop={{top: 10, bottom: 10, left: 10, right: 10}}>
-          <Text style={styles.resendText}>{invite.resent ? 'Sent' : 'Resend'}</Text>
-        </TouchableOpacity>
+  return (
+    <View style={styles.rowContainer}>
+      <View style={styles.nameRow}>
+        <Text style={styles.pendingInviteEmail}>{email}</Text>
+      </View>
+      <View style={styles.actionRow}>
+        <Text style={styles.timeAgoText}>{humanDate(lastSentAt)}</Text>
+        <View style={styles.actionItems}>
+          <TouchableOpacity
+            onPress={() => expireInvitation(id)}
+            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+          >
+            <Text style={styles.expireText}>Expire</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => !invite.resent && resendInvitation(id)}
+            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+          >
+            <Text style={styles.resendText}>{invite.resent ? 'Sent' : 'Resend'}</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
-  </View>
+  )
 }

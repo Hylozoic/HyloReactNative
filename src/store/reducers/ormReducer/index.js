@@ -4,7 +4,7 @@ import orm from 'store/models'
 import ModelExtractor from '../ModelExtractor'
 import extractModelsFromAction from '../ModelExtractor/extractModelsFromAction'
 import clearCacheFor from './clearCacheFor'
-import { isPromise, } from 'util/index'
+import { isPromise } from 'util/index'
 import {
   UPDATE_COMMUNITY_SETTINGS_PENDING
 } from '../../../components/CommunitySettings/CommunitySettings.store'
@@ -66,12 +66,12 @@ export default function ormReducer (state = {}, action) {
 
   switch (type) {
     case CREATE_COMMENT:
-      post = session.Post.safeGet({id: meta.postId})
+      post = session.Post.safeGet({ id: meta.postId })
       me = session.Me.first()
 
       if (!post) break
-      post.updateAppending({commenters: [me.id]})
-      post.update({commentsTotal: (post.commentsTotal || 0) + 1})
+      post.updateAppending({ commenters: [me.id] })
+      post.update({ commentsTotal: (post.commentsTotal || 0) + 1 })
 
       break
 
@@ -111,12 +111,12 @@ export default function ormReducer (state = {}, action) {
     case ADD_SKILL:
       me = session.Me.first()
       skill = session.Skill.create(payload.data.addSkill)
-      me.updateAppending({skills: [skill]})
+      me.updateAppending({ skills: [skill] })
       break
 
     case REMOVE_SKILL:
       me = session.Me.first()
-      skill = session.Skill.safeGet({name: meta.name})
+      skill = session.Skill.safeGet({ name: meta.name })
       if (skill) {
         me.skills.remove(skill.id)
       }
@@ -125,9 +125,9 @@ export default function ormReducer (state = {}, action) {
     case VOTE_ON_POST_PENDING:
       post = session.Post.withId(meta.postId)
       if (post.myVote) {
-        !meta.isUpvote && post.update({myVote: false, votesTotal: (post.votesTotal || 1) - 1})
+        !meta.isUpvote && post.update({ myVote: false, votesTotal: (post.votesTotal || 1) - 1 })
       } else {
-        meta.isUpvote && post.update({myVote: true, votesTotal: (post.votesTotal || 0) + 1})
+        meta.isUpvote && post.update({ myVote: true, votesTotal: (post.votesTotal || 0) + 1 })
       }
       break
 
@@ -150,7 +150,7 @@ export default function ormReducer (state = {}, action) {
       community = session.Community.withId(meta.id)
       community.update(meta.changes)
 
-      membership = session.Membership.safeGet({community: meta.id}).update({forceUpdate: new Date()})
+      membership = session.Membership.safeGet({ community: meta.id }).update({ forceUpdate: new Date() })
       break
 
     case SET_TOPIC_SUBSCRIBE_PENDING:
@@ -165,7 +165,7 @@ export default function ormReducer (state = {}, action) {
 
     case USE_INVITATION:
       me = session.Me.first()
-      me.updateAppending({memberships: [payload.data.useInvitation.membership.id]})
+      me.updateAppending({ memberships: [payload.data.useInvitation.membership.id] })
       break
 
     case DELETE_COMMENT_PENDING:
@@ -191,18 +191,18 @@ export default function ormReducer (state = {}, action) {
 
     case RESET_NEW_POST_COUNT_PENDING:
       const { id } = meta.graphql.variables
-      membership = session.Membership.safeGet({community: id})
+      membership = session.Membership.safeGet({ community: id })
       if (!membership) break
-      membership.update({newPostCount: 0})
+      membership.update({ newPostCount: 0 })
       break
 
     case PIN_POST_PENDING:
       post = session.Post.withId(meta.postId)
       // this line is to clear the selector memoization
-      post.update({_invalidate: (post._invalidate || 0) + 1})
-      let postMembership = post.postMemberships.filter(p =>
+      post.update({ _invalidate: (post._invalidate || 0) + 1 })
+      const postMembership = post.postMemberships.filter(p =>
         Number(p.community) === Number(meta.communityId)).toModelArray()[0]
-      postMembership && postMembership.update({pinned: !postMembership.pinned})
+      postMembership && postMembership.update({ pinned: !postMembership.pinned })
       break
 
     case FETCH_CURRENT_USER:
@@ -212,12 +212,12 @@ export default function ormReducer (state = {}, action) {
 
     case CREATE_COMMUNITY:
       me = session.Me.first()
-      me.updateAppending({memberships: [payload.data.createCommunity.id]})
+      me.updateAppending({ memberships: [payload.data.createCommunity.id] })
       break
 
     case JOIN_PROJECT_PENDING:
       me = session.Me.first()
-      session.ProjectMember.create({post: meta.id, member: me.id})
+      session.ProjectMember.create({ post: meta.id, member: me.id })
       clearCacheFor(session.Post, meta.id)
       break
 
@@ -225,7 +225,7 @@ export default function ormReducer (state = {}, action) {
       me = session.Me.first()
       session
         .ProjectMember
-        .filter(member => 
+        .filter(member =>
           String(member.member) === String(me.id) &&
           String(member.post) === String(meta.id)
         )
@@ -236,11 +236,11 @@ export default function ormReducer (state = {}, action) {
 
     case UPDATE_THREAD_READ_TIME_PENDING:
       thread = session.MessageThread.safeWithId(meta.id)
-      if (thread) thread.update({lastReadAt: new Date().toString()})
+      if (thread) thread.update({ lastReadAt: new Date().toString() })
       break
 
     case UPDATE_MEMBERSHIP_SETTINGS_PENDING:
-      membership = session.Membership.safeGet({community: meta.communityId})
+      membership = session.Membership.safeGet({ community: meta.communityId })
       if (!membership) break
       membership.update({
         settings: {

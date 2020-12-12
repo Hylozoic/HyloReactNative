@@ -39,62 +39,79 @@ export default class Topics extends React.Component {
     } = this.props
     const bannerUrl = get('bannerUrl', community)
     const name = get('name', community)
-    const image = {uri: bannerUrl}
+    const image = { uri: bannerUrl }
 
-    return <KeyboardFriendlyView style={styles.container}>
-      <ScrollView contentContainerStyle={styles.scrollContainer}>
-        <View style={styles.bannerContainer}>
-          {image && <Image source={image} style={styles.image} />}
-          <LinearGradient style={styles.gradient} colors={bannerlinearGradientColors} />
-          <Text style={styles.title}>{name}</Text>
-        </View>
-        <SearchBar
-          value={term}
-          onChangeText={setTerm}
-          placeholder='Search Topics' />
-        {pending && isEmpty(topics)
-          ? <Loading />
-          : <TopicList topics={topics}
-            setTopicSubscribe={setTopicSubscribe}
-            goToTopic={goToTopic} />}
-      </ScrollView>
-    </KeyboardFriendlyView>
+    return (
+      <KeyboardFriendlyView style={styles.container}>
+        <ScrollView contentContainerStyle={styles.scrollContainer}>
+          <View style={styles.bannerContainer}>
+            {image && <Image source={image} style={styles.image} />}
+            <LinearGradient style={styles.gradient} colors={bannerlinearGradientColors} />
+            <Text style={styles.title}>{name}</Text>
+          </View>
+          <SearchBar
+            value={term}
+            onChangeText={setTerm}
+            placeholder='Search Topics'
+          />
+          {pending && isEmpty(topics)
+            ? <Loading />
+            : <TopicList
+                topics={topics}
+                setTopicSubscribe={setTopicSubscribe}
+                goToTopic={goToTopic}
+              />}
+        </ScrollView>
+      </KeyboardFriendlyView>
+    )
   }
 }
 export class TopicList extends React.Component {
   render () {
     const { topics, setTopicSubscribe, goToTopic } = this.props
-    return <View style={styles.topicList}>
-      {isEmpty(topics)
-        ? <Text style={styles.emptyList}>No topics match your search</Text>
-        : topics.map((topic, i) =>
-          <TopicRow topic={topic} key={i} first={i === 0}
-            setTopicSubscribe={setTopicSubscribe}
-            goToTopic={goToTopic} />)}
-    </View>
+    return (
+      <View style={styles.topicList}>
+        {isEmpty(topics)
+          ? <Text style={styles.emptyList}>No topics match your search</Text>
+          : topics.map((topic, i) =>
+            <TopicRow
+              topic={topic} key={i} first={i === 0}
+              setTopicSubscribe={setTopicSubscribe}
+              goToTopic={goToTopic}
+            />)}
+      </View>
+    )
   }
 }
 
 export function TopicRow ({ topic, first, setTopicSubscribe, goToTopic }) {
   const { name, newPostCount, isSubscribed } = topic
-  return <TouchableOpacity style={[styles.topicRow, first && styles.firstRow]}
-    onPress={() => goToTopic(topic.name)}>
-    <SubscribeStar isSubscribed={isSubscribed} onPress={() => setTopicSubscribe(topic.id, !isSubscribed)} />
-    <Text style={styles.topicName}>#{name}</Text>
-    <View style={styles.rightItems}>
-      <Badge style={styles.badge} count={newPostCount} />
-      <EntypoIcon style={styles.chevron} name={'chevron-right'} />
-    </View>
-  </TouchableOpacity>
+  return (
+    <TouchableOpacity
+      style={[styles.topicRow, first && styles.firstRow]}
+      onPress={() => goToTopic(topic.name)}
+    >
+      <SubscribeStar isSubscribed={isSubscribed} onPress={() => setTopicSubscribe(topic.id, !isSubscribed)} />
+      <Text style={styles.topicName}>#{name}</Text>
+      <View style={styles.rightItems}>
+        <Badge style={styles.badge} count={newPostCount} />
+        <EntypoIcon style={styles.chevron} name='chevron-right' />
+      </View>
+    </TouchableOpacity>
+  )
 }
 
 export function SubscribeStar ({ isSubscribed, onPress }) {
   const theme = isSubscribed
     ? styles.subscribedStar
     : styles.unSubscribedStar
-  return <TouchableOpacity style={styles.star}
-    onPress={() => onPress(!isSubscribed)}
-    hitSlop={{top: 10, bottom: 10, left: 15, right: 15}}>
-    <StarIcon theme={theme} />
-  </TouchableOpacity>
+  return (
+    <TouchableOpacity
+      style={styles.star}
+      onPress={() => onPress(!isSubscribed)}
+      hitSlop={{ top: 10, bottom: 10, left: 15, right: 15 }}
+    >
+      <StarIcon theme={theme} />
+    </TouchableOpacity>
+  )
 }

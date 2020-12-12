@@ -11,7 +11,7 @@ let session, defaultState
 
 beforeEach(() => {
   session = orm.mutableSession(orm.getEmptyState())
-  defaultState = {orm: session.state}
+  defaultState = { orm: session.state }
 })
 
 describe('mapStateToProps', () => {
@@ -43,7 +43,7 @@ test('mapDispatchToProps', () => {
 describe('makeJoinCommunity', () => {
   const currentCommunityId = 'defaultcommunityid'
   const stateProps = {
-    currentUser: {id: 'currentuser'},
+    currentUser: { id: 'currentuser' },
     currentCommunityId,
     invitationCodes: {
       invitationToken: 'invitationtoken',
@@ -73,10 +73,10 @@ describe('makeJoinCommunity', () => {
       dispatch: jest.fn()
     }
     return makeJoinCommunity(stateProps, dispatchProps)()
-    .then(result => {
-      expect(dispatchProps.goToCommunity).toHaveBeenCalledWith(joinedCommunityId)
-      return expect(dispatchProps.useInvitation).toHaveBeenCalled(result)
-    })
+      .then(result => {
+        expect(dispatchProps.goToCommunity).toHaveBeenCalledWith(joinedCommunityId)
+        return expect(dispatchProps.useInvitation).toHaveBeenCalled(result)
+      })
   })
 
   it('should forward to the current community when a joined community is not returned', () => {
@@ -87,15 +87,15 @@ describe('makeJoinCommunity', () => {
       dispatch: jest.fn()
     }
     return makeJoinCommunity(stateProps, dispatchProps)()
-    .then(result => {
-      expect(stateProps.goToHome).toHaveBeenCalled()
-      return expect(dispatchProps.useInvitation).toHaveBeenCalled(result)
-    })
+      .then(result => {
+        expect(stateProps.goToHome).toHaveBeenCalled()
+        return expect(dispatchProps.useInvitation).toHaveBeenCalled(result)
+      })
   })
 })
 
 test('mergeProps', () => {
-  const currentUserPOJO = {name: 'me'}
+  const currentUserPOJO = { name: 'me' }
   const stateProps = {
     communityId: 'anything',
     currentUser: currentUserPOJO,
@@ -140,10 +140,10 @@ describe('makeCheckInvitation', () => {
         Promise.resolve(checkInvitationResponse(true))
     }
     return makeCheckInvitation(stateProps, dispatchProps)()
-    .then(() => {
-      expect(stateProps.navToInviteExpired).not.toHaveBeenCalled()
-      return expect(stateProps.navToSignup).toHaveBeenCalled()
-    })
+      .then(() => {
+        expect(stateProps.navToInviteExpired).not.toHaveBeenCalled()
+        return expect(stateProps.navToSignup).toHaveBeenCalled()
+      })
   })
 
   it('should forward to invite expired page if invite is invalid', () => {
@@ -157,10 +157,10 @@ describe('makeCheckInvitation', () => {
         Promise.resolve(checkInvitationResponse(false))
     }
     return makeCheckInvitation(stateProps, dispatchProps)()
-    .then(() => {
-      expect(stateProps.navToSignup).not.toHaveBeenCalled()
-      return expect(stateProps.navToInviteExpired).toHaveBeenCalled()
-    })
+      .then(() => {
+        expect(stateProps.navToSignup).not.toHaveBeenCalled()
+        return expect(stateProps.navToInviteExpired).toHaveBeenCalled()
+      })
   })
 
   it('should forward to signup page if an error occurs in checking the invite', () => {
@@ -173,9 +173,9 @@ describe('makeCheckInvitation', () => {
       checkInvitation: () => Promise.reject(new Error('anything'))
     }
     return makeCheckInvitation(stateProps, dispatchProps)()
-    .then(() => {
-      expect(stateProps.navToInviteExpired).not.toHaveBeenCalled()
-      return expect(stateProps.navToSignup).toHaveBeenCalled()
-    })
+      .then(() => {
+        expect(stateProps.navToInviteExpired).not.toHaveBeenCalled()
+        return expect(stateProps.navToSignup).toHaveBeenCalled()
+      })
   })
 })

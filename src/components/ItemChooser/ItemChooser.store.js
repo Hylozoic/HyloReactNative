@@ -26,14 +26,14 @@ export const getSearchSuggestions = createSelector(
 export function setSearchTerm (scope, searchTerm = '', opts = {}) {
   if (!scope) throw new Error('`scope` param is required')
 
-  const defaultSearchTermFilter = replace(/\s/g , '')
+  const defaultSearchTermFilter = replace(/\s/g, '')
   const searchTermFilter = opts.searchTermFilter || defaultSearchTermFilter
   let filteredSearchTerm = searchTermFilter(searchTerm)
 
   filteredSearchTerm = filteredSearchTerm !== ''
     ? filteredSearchTerm
     : undefined
-  
+
   return {
     type: SET_SEARCH_TERM,
     payload: {
@@ -68,7 +68,7 @@ export async function locationSearch (scope, searchTerm, proximity) {
     { id: 'NEW', fullText: searchTerm },
     ...locations
   ]
-  
+
   return {
     type: SET_SEARCH_SUGGESTIONS,
     payload: {

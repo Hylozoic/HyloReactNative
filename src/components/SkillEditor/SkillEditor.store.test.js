@@ -27,10 +27,10 @@ describe('reducer', () => {
 
     it('sets the skill', () => {
       expect(reducer(state, action))
-      .toEqual({
-        skill: 'yaml',
-        errors: {}
-      })
+        .toEqual({
+          skill: 'yaml',
+          errors: {}
+        })
     })
   })
 
@@ -40,12 +40,12 @@ describe('reducer', () => {
     }
     const action = {
       type: ADD_SKILL_PENDING,
-      meta: {name: 'threeing'}
+      meta: { name: 'threeing' }
     }
 
     it('adds a skill', () => {
       expect(reducer(state, action))
-      .toMatchSnapshot()
+        .toMatchSnapshot()
     })
   })
 
@@ -55,12 +55,12 @@ describe('reducer', () => {
     }
     const action = {
       type: REMOVE_SKILL_PENDING,
-      meta: {name: 'twoing'}
+      meta: { name: 'twoing' }
     }
 
     it('removes a skill', () => {
       expect(reducer(state, action))
-      .toMatchSnapshot()
+        .toMatchSnapshot()
     })
   })
 
@@ -76,10 +76,10 @@ describe('reducer', () => {
 
     it('sets the skills', () => {
       expect(reducer(state, action))
-      .toEqual({
-        skill: state.skill,
-        userSkills: action.payload
-      })
+        .toEqual({
+          skill: state.skill,
+          userSkills: action.payload
+        })
     })
   })
 })
@@ -105,18 +105,20 @@ describe('action generators', () => {
 
 describe('getMySkillsFromOrm', () => {
   const session = orm.session(orm.getEmptyState())
-  session.Me.create({skills: [
-    session.Skill.create({id: 1, name: 'one'}),
-    session.Skill.create({id: 2, name: 'two'})
-  ]})
-  session.Skill.create({id: 3, name: 'three'})
+  session.Me.create({
+    skills: [
+      session.Skill.create({ id: 1, name: 'one' }),
+      session.Skill.create({ id: 2, name: 'two' })
+    ]
+  })
+  session.Skill.create({ id: 3, name: 'three' })
 
   it('returns the skills on Me', () => {
     const state = {
       orm: session.state
     }
     expect(getMySkillsFromOrm(state).map(s => s.name))
-    .toEqual(['one', 'two'])
+      .toEqual(['one', 'two'])
   })
 })
 
@@ -131,14 +133,14 @@ describe('pseudo selectors', () => {
   describe('getSkill', () => {
     it('returns the skill', () => {
       expect(getSkill(state))
-      .toEqual(state[MODULE_NAME].skill)
+        .toEqual(state[MODULE_NAME].skill)
     })
   })
 
   describe('getUserSkills', () => {
     it('returns the userSkills', () => {
       expect(getUserSkills(state))
-      .toEqual(state[MODULE_NAME].userSkills)
+        .toEqual(state[MODULE_NAME].userSkills)
     })
   })
 })

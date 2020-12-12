@@ -4,7 +4,7 @@ import PersonPickerItemRow from './PersonPickerItemRow'
 
 it('renders as expected', () => {
   const props = {
-    item: {id: 1},
+    item: { id: 1 },
     onPress: () => {}
   }
   const renderer = new ReactShallowRenderer()

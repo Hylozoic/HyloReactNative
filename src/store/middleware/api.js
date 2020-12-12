@@ -9,7 +9,7 @@ export default function apiMiddleware (store) {
 
     const { path, params, method, transform, retry } = payload.api
     const fetcher = (resolve, reject) => {
-      InteractionManager.runAfterInteractions(() => 
+      InteractionManager.runAfterInteractions(() =>
         fetchJSON(path, params, { method })
           .then(json => resolve(transform ? transform(json) : json))
           .catch(handleError(resolve, reject))
@@ -29,6 +29,6 @@ export default function apiMiddleware (store) {
       promise = promise.then(meta.then)
     }
 
-    return next({...action, payload: promise})
+    return next({ ...action, payload: promise })
   }
 }

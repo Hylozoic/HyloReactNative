@@ -15,7 +15,7 @@ describe('getPending', () => {
       ...defaultPending,
       control: true
     }
-    expect(getPending({pending})).toEqual(false)
+    expect(getPending({ pending })).toEqual(false)
   })
 
   it('returns true when LOGIN is pending', () => {
@@ -23,7 +23,7 @@ describe('getPending', () => {
       ...defaultPending,
       [LOGIN]: true
     }
-    expect(getPending({pending})).toEqual(true)
+    expect(getPending({ pending })).toEqual(true)
   })
 
   it('returns true when LOGIN_WITH_FACEBOOK is pending', () => {
@@ -31,7 +31,7 @@ describe('getPending', () => {
       ...defaultPending,
       [LOGIN_WITH_FACEBOOK]: true
     }
-    expect(getPending({pending})).toEqual(true)
+    expect(getPending({ pending })).toEqual(true)
   })
 
   it('returns true when LOGIN_WITH_FACEBOOK is pending', () => {
@@ -39,7 +39,7 @@ describe('getPending', () => {
       ...defaultPending,
       [LOGIN_WITH_FACEBOOK]: true
     }
-    expect(getPending({pending})).toEqual(true)
+    expect(getPending({ pending })).toEqual(true)
   })
 
   it('returns true when LOGIN_WITH_GOOGLE is pending', () => {
@@ -47,6 +47,6 @@ describe('getPending', () => {
       ...defaultPending,
       [LOGIN_WITH_GOOGLE]: true
     }
-    expect(getPending({pending})).toEqual(true)
+    expect(getPending({ pending })).toEqual(true)
   })
 })

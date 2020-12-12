@@ -27,7 +27,7 @@ export default class Signup extends React.Component {
   }
 
   createErrorNotification = error => {
-    this.setState({ssoError: error})
+    this.setState({ ssoError: error })
   }
 
   render () {
@@ -35,56 +35,60 @@ export default class Signup extends React.Component {
       goToSignupFlow, goToLogin, error, loginWithApple, loginWithFacebook, loginWithGoogle, pending
     } = this.props
     const { ssoError } = this.state
-    return <ScrollView contentContainerStyle={styles.container}>
-      {pending && <Text style={styles.banner}>SIGNING UP...</Text>}
-      {ssoError && <Text style={styles.errorBanner}>{ssoError}</Text>}
-      <ImageBackground
-        source={backgroundImage}
-        style={styles.background}
-        imageStyle={styles.backgroundImage}>
-        <Image source={merkabaImage} style={styles.merkabaImage} />
-      </ImageBackground>
-      <View style={styles.paddedContainer}>
-        <Text style={styles.title}>Sign up to get started with Hylo</Text>
-        {error && <View style={styles.errorWrapper}><Text style={styles.error}>{error}</Text></View>}
-        <Text style={styles.subTitle}>Stay connected, organized and engaged with your community.</Text>
-        <Button text='Sign Up' style={styles.signupButton} onPress={goToSignupFlow} />
-        <View style={styles.connectWith}>
-          <Text style={styles.connectWithText}>Or sign up using:</Text>
-          {isIOS && <AppleLoginButton
-            signup
-            style={styles.appleLoginButton}
-            onLoginFinished={loginWithApple}
-            createErrorNotification={this.createErrorNotification}
-          />}
-          <GoogleLoginButton
-            signup
-            style={styles.googleLoginButton}
-            onLoginFinished={loginWithGoogle}
-            createErrorNotification={this.createErrorNotification}
-          />
-          <FbLoginButton
-            signup
-            style={styles.facebookLoginButton}
-            onLoginFinished={loginWithFacebook}
-            createErrorNotification={this.createErrorNotification}
-          />
+    return (
+      <ScrollView contentContainerStyle={styles.container}>
+        {pending && <Text style={styles.banner}>SIGNING UP...</Text>}
+        {ssoError && <Text style={styles.errorBanner}>{ssoError}</Text>}
+        <ImageBackground
+          source={backgroundImage}
+          style={styles.background}
+          imageStyle={styles.backgroundImage}
+        >
+          <Image source={merkabaImage} style={styles.merkabaImage} />
+        </ImageBackground>
+        <View style={styles.paddedContainer}>
+          <Text style={styles.title}>Sign up to get started with Hylo</Text>
+          {error && <View style={styles.errorWrapper}><Text style={styles.error}>{error}</Text></View>}
+          <Text style={styles.subTitle}>Stay connected, organized and engaged with your community.</Text>
+          <Button text='Sign Up' style={styles.signupButton} onPress={goToSignupFlow} />
+          <View style={styles.connectWith}>
+            <Text style={styles.connectWithText}>Or sign up using:</Text>
+            {isIOS && <AppleLoginButton
+              signup
+              style={styles.appleLoginButton}
+              onLoginFinished={loginWithApple}
+              createErrorNotification={this.createErrorNotification}
+                      />}
+            <GoogleLoginButton
+              signup
+              style={styles.googleLoginButton}
+              onLoginFinished={loginWithGoogle}
+              createErrorNotification={this.createErrorNotification}
+            />
+            <FbLoginButton
+              signup
+              style={styles.facebookLoginButton}
+              onLoginFinished={loginWithFacebook}
+              createErrorNotification={this.createErrorNotification}
+            />
+          </View>
+          <View style={styles.login}>
+            <Text style={styles.haveAccount}>Already have an account? </Text>
+            <TouchableOpacity onPress={goToLogin}><Text style={styles.loginButton}>Log in now</Text></TouchableOpacity>
+          </View>
+          <View style={styles.terms}>
+            <Text style={{ ...styles.haveAccount, ...styles.termsText }}>
+              Your data is safe with Hylo. By clicking the "Sign Up" button above you are agreeing to these terms:
+            </Text>
+            <TouchableOpacity
+              onPress={() => openURL('https://www.hylo.com/terms')}
+            >
+              <Text style={{ ...styles.loginButton, ...styles.termsText }}>https://www.hylo.com/terms</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-        <View style={styles.login}>
-          <Text style={styles.haveAccount}>Already have an account? </Text>
-          <TouchableOpacity onPress={goToLogin}><Text style={styles.loginButton}>Log in now</Text></TouchableOpacity>
-        </View>
-        <View style={styles.terms}>
-          <Text style={{...styles.haveAccount, ...styles.termsText}}>
-            Your data is safe with Hylo. By clicking the "Sign Up" button above you are agreeing to these terms:
-          </Text>
-          <TouchableOpacity
-            onPress={() => openURL('https://www.hylo.com/terms')}>
-            <Text style={{...styles.loginButton, ...styles.termsText}}>https://www.hylo.com/terms</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-    </ScrollView>
+      </ScrollView>
+    )
   }
 }
 

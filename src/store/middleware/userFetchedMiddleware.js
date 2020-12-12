@@ -25,9 +25,9 @@ async function identifyMixpanelUser (state) {
   await mixpanel.initialize()
   mixpanel.identify(user.id)
   mixpanel.set({
-    '$name': user.name,
-    '$email': user.email,
-    '$location': user.location
+    $name: user.name,
+    $email: user.email,
+    $location: user.location
   })
 }
 

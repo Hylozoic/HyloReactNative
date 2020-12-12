@@ -23,19 +23,22 @@ it('renders multiple images', () => {
       'http://foo.com/baz.png',
       'http://foo.com/quz.png',
       'http://foo.com/qux.png'
-    ]} />
+    ]}
+    />
   )
   expect(renderer.toJSON()).toMatchSnapshot()
 })
 
 it('renders multiple images that can be tapped to open in browser', () => {
   const renderer = TestRenderer.create(
-    <PostImage linked imageUrls={[
-      'http://foo.com/bar.png',
-      'http://foo.com/baz.png',
-      'http://foo.com/quz.png',
-      'http://foo.com/qux.png'
-    ]} />
+    <PostImage
+      linked imageUrls={[
+        'http://foo.com/bar.png',
+        'http://foo.com/baz.png',
+        'http://foo.com/quz.png',
+        'http://foo.com/qux.png'
+      ]}
+    />
   )
   expect(renderer.toJSON()).toMatchSnapshot()
 })

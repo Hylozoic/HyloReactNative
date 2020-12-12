@@ -19,13 +19,13 @@ describe('mapStateToProps', () => {
 
 describe('mapDispatchToProps', () => {
   it('creates showThread and updateLastViewed functions', () => {
-    const navigation = {navigate: jest.fn()}
+    const navigation = { navigate: jest.fn() }
     const dispatch = jest.fn()
-    const { showThread, updateLastViewed } = mapDispatchToProps(dispatch, {navigation})
+    const { showThread, updateLastViewed } = mapDispatchToProps(dispatch, { navigation })
     showThread(1)
-    expect(navigation.navigate).toBeCalledWith('Thread', {id: 1})
-    showThread({id: 2})
-    expect(navigation.navigate).toBeCalledWith('Thread', {id: 2})
+    expect(navigation.navigate).toBeCalledWith('Thread', { id: 1 })
+    showThread({ id: 2 })
+    expect(navigation.navigate).toBeCalledWith('Thread', { id: 2 })
     updateLastViewed()
     expect(dispatch.mock.calls[0][0].type).toEqual(UPDATE_LAST_VIEWED)
   })

@@ -39,9 +39,9 @@ export default function sessionReducer (state = {}, action) {
         signedIn: true
       }
     case CHECK_SESSION_AND_SET_SIGNED_IN:
-      return {...state, signedIn: payload}
+      return { ...state, signedIn: payload }
     case SIGNUP:
-      return {...state, signedIn: true}
+      return { ...state, signedIn: true }
   }
 
   return state

@@ -1,4 +1,4 @@
-import { getSessionCookie, setSessionCookie } from './session'
+import { setSessionCookie } from './session'
 import apiHost from './apiHost'
 
 export default async function fetchJSON (path, params, options = {}) {
@@ -7,7 +7,7 @@ export default async function fetchJSON (path, params, options = {}) {
   const response = await fetch(requestUrl, {
     method: method || 'get',
     headers: {
-      'Accept': 'application/json',
+      Accept: 'application/json',
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(params),
@@ -22,7 +22,7 @@ export default async function fetchJSON (path, params, options = {}) {
 
   return response.text().then(body => {
     const error = new Error(body)
-    error.response = {status, statusText, url, body}
+    error.response = { status, statusText, url, body }
     throw error
   })
 }

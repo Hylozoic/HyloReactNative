@@ -35,7 +35,7 @@ export default class MemberProfile extends React.Component {
 
   blockUser = () => {
     const { person, blockUser } = this.props
-    blockUser(person.id)        
+    blockUser(person.id)
       .then(() => this.props.navigation.goBack())
   }
 
@@ -60,7 +60,7 @@ export default class MemberProfile extends React.Component {
     let flagMember
     if (canFlag) {
       flagMember = () => {
-        this.setState({flaggingVisible: true})
+        this.setState({ flaggingVisible: true })
       }
     }
 
@@ -70,27 +70,32 @@ export default class MemberProfile extends React.Component {
       type: 'member'
     }
 
-    const header = <View>
-      <MemberBanner
-        isFocused={isFocused}
-        isMe={isMe}
-        person={person}
-        updateUserSettings={updateUserSettings} />
-      <View style={styles.marginContainer}>
-        <MemberHeader
-          person={person}
-          flagMember={flagMember}
-          blockUser={this.blockUser}
-          onPressMessages={onPressMessages}
+    const header = (
+      <View>
+        <MemberBanner
+          isFocused={isFocused}
           isMe={isMe}
-          editProfile={goToEdit} />
-        <ReadMoreButton goToDetails={goToDetails} />
+          person={person}
+          updateUserSettings={updateUserSettings}
+        />
+        <View style={styles.marginContainer}>
+          <MemberHeader
+            person={person}
+            flagMember={flagMember}
+            blockUser={this.blockUser}
+            onPressMessages={onPressMessages}
+            isMe={isMe}
+            editProfile={goToEdit}
+          />
+          <ReadMoreButton goToDetails={goToDetails} />
+        </View>
+        {flaggingVisible && <FlagContent
+          type='member'
+          linkData={linkData}
+          onClose={() => this.setState({ flaggingVisible: false })}
+                            />}
       </View>
-      {flaggingVisible && <FlagContent type='member'
-        linkData={linkData}
-        onClose={() => this.setState({flaggingVisible: false})} />
-      }
-    </View>
+    )
 
     return <MemberFeed id={id} header={header} navigation={navigation} />
   }
@@ -111,7 +116,7 @@ export class MemberBanner extends React.Component {
       [localKey]: local
     })
 
-    this.props.updateUserSettings({[remoteKey]: remote})
+    this.props.updateUserSettings({ [remoteKey]: remote })
   }
 
   render () {
@@ -119,8 +124,8 @@ export class MemberBanner extends React.Component {
     const { avatarPickerPending, bannerPickerPending, avatarLocalUri, bannerLocalUri } = this.state
 
     const avatarSource = avatarLocalUri
-      ? {uri: avatarLocalUri}
-      : avatarUrl && {uri: avatarUrl}
+      ? { uri: avatarLocalUri }
+      : avatarUrl && { uri: avatarUrl }
 
     // This is a suprisingly annoying piece of logic. Basically, prefer
     // displaying `bannerLocalUri`, then `bannerUrl`, then `defaultBanner`.
@@ -136,54 +141,62 @@ export class MemberBanner extends React.Component {
       bannerSource = defaultBanner
     }
 
-    return <View>
-      <ImagePicker
-        title='Change Banner'
-        type='userBanner'
-        style={styles.bannerImagePicker}
-        id={id}
-        onChoice={choice => this.onChoice(choice, 'banner')}
-        onPendingChange={pending => this.setState({bannerPickerPending: pending})}
-        disabled={!isMe}>
-        <Image source={bannerSource} style={styles.bannerImage} />
-        {isMe && <EditButton isLoading={bannerPickerPending} style={styles.bannerEditButton} />}
-      </ImagePicker>
-      <View style={styles.avatarW3}>
+    return (
+      <View>
         <ImagePicker
-          style={styles.avatarWrapperWrapper}
-          title='Change Avatar'
-          type='userAvatar'
+          title='Change Banner'
+          type='userBanner'
+          style={styles.bannerImagePicker}
           id={id}
-          onChoice={choice => this.onChoice(choice, 'avatar')}
-          onPendingChange={pending => this.setState({avatarPickerPending: pending})}
-          disabled={!isMe}>
-          <View style={styles.avatarWrapper}>
-            <Image source={avatarSource} style={styles.avatarImage} />
-            {isMe && <EditButton isLoading={avatarPickerPending} style={styles.avatarEditButton} />}
-          </View>
+          onChoice={choice => this.onChoice(choice, 'banner')}
+          onPendingChange={pending => this.setState({ bannerPickerPending: pending })}
+          disabled={!isMe}
+        >
+          <Image source={bannerSource} style={styles.bannerImage} />
+          {isMe && <EditButton isLoading={bannerPickerPending} style={styles.bannerEditButton} />}
         </ImagePicker>
+        <View style={styles.avatarW3}>
+          <ImagePicker
+            style={styles.avatarWrapperWrapper}
+            title='Change Avatar'
+            type='userAvatar'
+            id={id}
+            onChoice={choice => this.onChoice(choice, 'avatar')}
+            onPendingChange={pending => this.setState({ avatarPickerPending: pending })}
+            disabled={!isMe}
+          >
+            <View style={styles.avatarWrapper}>
+              <Image source={avatarSource} style={styles.avatarImage} />
+              {isMe && <EditButton isLoading={avatarPickerPending} style={styles.avatarEditButton} />}
+            </View>
+          </ImagePicker>
+        </View>
       </View>
-    </View>
+    )
   }
 }
 
 export function EditButton ({ isLoading, style }) {
-  return <View style={[styles.editButton, style]}>
-    {isLoading
-      ? <Text style={styles.editButtonText}>loading</Text>
-      : <View style={{flexDirection: 'row'}}>
-        <EntypoIcon name='edit' style={styles.editIcon} />
-        <Text style={styles.editButtonText}>edit</Text>
-      </View>}
-  </View>
+  return (
+    <View style={[styles.editButton, style]}>
+      {isLoading
+        ? <Text style={styles.editButtonText}>loading</Text>
+        : <View style={{ flexDirection: 'row' }}>
+          <EntypoIcon name='edit' style={styles.editIcon} />
+          <Text style={styles.editButtonText}>edit</Text>
+        </View>}
+    </View>
+  )
 }
 
 export function ReadMoreButton ({ goToDetails }) {
-  return <View style={styles.buttonContainer}>
-    <TouchableOpacity onPress={goToDetails} style={styles.buttonWrapper}>
-      <View style={styles.button}>
-        <Text style={styles.buttonText}>Read More</Text>
-      </View>
-    </TouchableOpacity>
-  </View>
+  return (
+    <View style={styles.buttonContainer}>
+      <TouchableOpacity onPress={goToDetails} style={styles.buttonWrapper}>
+        <View style={styles.button}>
+          <Text style={styles.buttonText}>Read More</Text>
+        </View>
+      </TouchableOpacity>
+    </View>
+  )
 }

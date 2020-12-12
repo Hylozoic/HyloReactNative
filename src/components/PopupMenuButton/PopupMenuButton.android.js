@@ -7,12 +7,12 @@ export default class PopupMenuButton extends React.PureComponent {
   }
 
   onError (e) {
-    this.setState({open: false})
+    this.setState({ open: false })
     throw new Error('Error opening popup')
   }
 
   onSelect = (action, index) => {
-    this.setState({open: false})
+    this.setState({ open: false })
     if (action === 'itemSelected') {
       this.props.actions[index][1]()
     }
@@ -30,7 +30,7 @@ export default class PopupMenuButton extends React.PureComponent {
   }
 
   render () {
-    const hitSlop = this.props.hitSlop || {top: 5, bottom: 5, left: 5, right: 5}
+    const hitSlop = this.props.hitSlop || { top: 5, bottom: 5, left: 5, right: 5 }
 
     return (
       <TouchableOpacity
@@ -38,7 +38,8 @@ export default class PopupMenuButton extends React.PureComponent {
         style={this.props.style}
         hitSlop={hitSlop}
         onPress={this.onPress}
-        ref={this.onRef}>
+        ref={this.onRef}
+      >
         {this.props.children}
       </TouchableOpacity>
     )

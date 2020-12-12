@@ -19,10 +19,12 @@ export default class SignupFlow4 extends React.Component {
   render () {
     const { goToNext } = this.props
 
-    return <KeyboardFriendlyView style={styles.container} {...kavProps}>
-      <ScrollView>
-        <SkillEditor done={goToNext} doneLabel='Continue' theme={styles.skillEditor} />
-      </ScrollView>
-    </KeyboardFriendlyView>
+    return (
+      <KeyboardFriendlyView style={styles.container} {...kavProps}>
+        <ScrollView>
+          <SkillEditor done={goToNext} doneLabel='Continue' theme={styles.skillEditor} />
+        </ScrollView>
+      </KeyboardFriendlyView>
+    )
   }
 }

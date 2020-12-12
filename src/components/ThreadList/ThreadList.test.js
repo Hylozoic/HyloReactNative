@@ -6,7 +6,7 @@ import ThreadList, { MessageRow } from './ThreadList'
 
 describe('ThreadList', () => {
   it('renders correctly', () => {
-    const threads = [{id: 1, participants: [{id: 1, avatarUrl: 'blah'}], lastMessage: {id: 1}}]
+    const threads = [{ id: 1, participants: [{ id: 1, avatarUrl: 'blah' }], lastMessage: { id: 1 } }]
     const renderer = TestRenderer.create(<ThreadList isFocused threads={threads} updateLastViewed={jest.fn()} />)
 
     expect(renderer.toJSON()).toMatchSnapshot()
@@ -21,7 +21,8 @@ describe('ThreadList', () => {
         isFocused
         updateLastViewed={jest.fn()}
         pending={false}
-        threads={[]} />
+        threads={[]}
+      />
     )
     expect(fetchThreads).toHaveBeenCalled()
     renderer.getInstance().setState({ ready: true })
@@ -44,7 +45,8 @@ describe('ThreadList', () => {
         isFocused
         updateLastViewed={jest.fn()}
         pending
-        threads={[{ id: 1 }]} />
+        threads={[{ id: 1 }]}
+      />
     )
     expect(renderer.toJSON()).toMatchSnapshot()
   })
@@ -56,7 +58,8 @@ describe('ThreadList', () => {
         isFocused
         updateLastViewed={jest.fn()}
         pending={false}
-        threads={[]} />
+        threads={[]}
+      />
     )
     renderer.getInstance().setState({ ready: true })
     expect(renderer.toJSON()).toMatchSnapshot()
@@ -67,7 +70,7 @@ describe('ThreadList', () => {
       navigate: jest.fn(),
       state: {}
     }
-    const navigationOptions = ThreadList.navigationOptions({navigation})
+    const navigationOptions = ThreadList.navigationOptions({ navigation })
     expect(navigationOptions).toMatchSnapshot()
     navigationOptions.headerRight.props.onPress()
     expect(navigation.navigate).toHaveBeenCalledWith('NewMessage')
@@ -84,11 +87,12 @@ describe('MessageRow', () => {
         }
       }
     ]
-    const participants = [{id: 2}]
+    const participants = [{ id: 2 }]
     const renderer = new ReactShallowRenderer()
     renderer.render(<MessageRow
       message={message}
-      participants={participants} />)
+      participants={participants}
+                    />)
     const actual = renderer.getRenderOutput()
     expect(actual).toMatchSnapshot()
   })
@@ -97,16 +101,16 @@ describe('MessageRow', () => {
     const name = 'Test User'
     const text = 'This is a message.'
     const showThread = jest.fn()
-    const currentUser = {id: 1}
+    const currentUser = { id: 1 }
     const message = {
       id: 1,
-      creator: {id: 2},
+      creator: { id: 2 },
       text
     }
 
     const participants = [
-      {id: 1, avatarUrl: 'me', name: 'me'},
-      {id: 2, avatarUrl: 'blah', name}
+      { id: 1, avatarUrl: 'me', name: 'me' },
+      { id: 2, avatarUrl: 'blah', name }
     ]
 
     const renderer = TestRenderer.create(
@@ -115,7 +119,7 @@ describe('MessageRow', () => {
         message={message}
         participants={participants}
         currentUser={currentUser}
-         />
+      />
     )
 
     expect(renderer.toJSON()).toMatchSnapshot()

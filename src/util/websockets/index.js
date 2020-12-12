@@ -27,7 +27,7 @@ function setupSocketPromise () {
     // cookie already stored from a previous HTTP request.
     io.sails.useCORSRouteToGetCookie = false
 
-    io.sails.headers = {cookie}
+    io.sails.headers = { cookie }
     socket = io.sails.connect(socketHost)
 
     // shim socket.request to include cookie
@@ -53,7 +53,7 @@ export function socketUrl (path) {
 
 export const sendIsTyping = curry((postId, isTyping) => {
   const url = socketUrl(`/noo/post/${postId}/typing`)
-  getSocket().then(socket => socket.post(url, {isTyping}))
+  getSocket().then(socket => socket.post(url, { isTyping }))
 })
 
 // for testing

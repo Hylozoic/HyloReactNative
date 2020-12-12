@@ -59,46 +59,53 @@ export default class PostCard extends React.PureComponent {
 
     const slug = get('0.slug', communities)
 
-    return <View style={styles.container}>
-      <PostHeader creator={creator}
-        date={post.createdAt}
-        type={post.type}
-        topics={topics}
-        slug={slug}
-        pinned={isPinned}
-        postId={post.id}
-        showMember={showMember}
-        showTopic={showTopic}
-        announcement={post.announcement}
-        hideMenu={hideMenu}
-      />
-      <PostImage imageUrls={imageUrls} />
-      <PostBody
-        type={post.type}
-        title={post.title}
-        details={post.details}
-        startTime={post.startTime}
-        endTime={post.endTime}
-        linkPreview={post.linkPreview}
-        slug={slug}
-        showMember={showMember}
-        showTopic={showTopic}
-        shouldTruncate
-        hideDetails={hideDetails} />
-      <PostCommunities
-        style={styles.communities}
-        shouldShowCommunities={shouldShowCommunities}
-        communities={communities}
-        includePublic={post.isPublic}
-        slug={slug}
-        selectedNetworkId={selectedNetworkId}
-        goToCommunity={goToCommunity} />
-      <PostFooter id={post.id}
-        commenters={commenters}
-        commentsTotal={post.commentsTotal}
-        votesTotal={post.votesTotal}
-        myVote={post.myVote} />
-    </View>
+    return (
+      <View style={styles.container}>
+        <PostHeader
+          creator={creator}
+          date={post.createdAt}
+          type={post.type}
+          topics={topics}
+          slug={slug}
+          pinned={isPinned}
+          postId={post.id}
+          showMember={showMember}
+          showTopic={showTopic}
+          announcement={post.announcement}
+          hideMenu={hideMenu}
+        />
+        <PostImage imageUrls={imageUrls} />
+        <PostBody
+          type={post.type}
+          title={post.title}
+          details={post.details}
+          startTime={post.startTime}
+          endTime={post.endTime}
+          linkPreview={post.linkPreview}
+          slug={slug}
+          showMember={showMember}
+          showTopic={showTopic}
+          shouldTruncate
+          hideDetails={hideDetails}
+        />
+        <PostCommunities
+          style={styles.communities}
+          shouldShowCommunities={shouldShowCommunities}
+          communities={communities}
+          includePublic={post.isPublic}
+          slug={slug}
+          selectedNetworkId={selectedNetworkId}
+          goToCommunity={goToCommunity}
+        />
+        <PostFooter
+          id={post.id}
+          commenters={commenters}
+          commentsTotal={post.commentsTotal}
+          votesTotal={post.votesTotal}
+          myVote={post.myVote}
+        />
+      </View>
+    )
   }
 }
 

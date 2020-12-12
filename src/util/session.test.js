@@ -7,12 +7,12 @@ const testString = 'heroku-session-affinity=AECDaANoA24IARbTS53///8_; ' +
 
 it('handles a broken multiple-cookie format', () => {
   expect(parseCookies(testString)).toEqual({
-    'Domain': '.hylo.com',
-    'Expires': 'Mon, 25 Sep 2017 18:20:27 GMT',
-    'HttpOnly': 'undefined',
+    Domain: '.hylo.com',
+    Expires: 'Mon, 25 Sep 2017 18:20:27 GMT',
+    HttpOnly: 'undefined',
     'Max-Age': '86400',
-    'Path': '/',
-    'Version': '1',
+    Path: '/',
+    Version: '1',
     'heroku-session-affinity': 'AECDaANoA24IARbTS53///8_',
     'hylo.sid.1': 's:vIVEtOta7AMVJyF5PzJ7r6.f7'
   })

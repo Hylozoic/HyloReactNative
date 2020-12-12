@@ -24,7 +24,7 @@ export default class UserSettings extends React.Component {
       headerTintColor: styles.headerTintColor,
       headerTitleStyle: styles.headerTitleStyle
     }
-    if (resettingPassword) options = {...options, headerLeft: (<Text />)}
+    if (resettingPassword) options = { ...options, headerLeft: (<Text />) }
     return options
   }
 
@@ -66,7 +66,7 @@ export default class UserSettings extends React.Component {
     // TODO: Currently not setting focus perhaps because it needs to happen
     // after field is shown?
     // this.passwordInput.focus()
-    this.setState({editingPassword: true})
+    this.setState({ editingPassword: true })
   }
 
   cancelPassword = () => {
@@ -109,21 +109,21 @@ export default class UserSettings extends React.Component {
       password: !isNil(password) && validateUser.password(password),
       confirmPassword: password !== confirmPassword && 'Passwords must match'
     }
-    this.setState({errors})
+    this.setState({ errors })
     return !any(i => i, values(errors))
   }
 
   saveChanges = () => {
     if (this.validate()) {
       const { email, password } = this.state.edits
-      const settings = {email}
+      const settings = { email }
       if (!isNil(password)) settings.password = password
       this.setState({
         changed: false,
         editingPassword: false
       })
       return this.props.updateUserSettings(settings)
-        .then(({error}) => {
+        .then(({ error }) => {
           if (error) {
             showToast('Error saving password. Try again later.')
           } else {
@@ -153,8 +153,8 @@ export default class UserSettings extends React.Component {
       'Enter Twitter Name',
       'Please enter your twitter name to link your account.',
       [
-        {text: 'Cancel', onPress: () => onPress(false), style: 'cancel'},
-        {text: 'OK', onPress: twitterName => onPress(twitterName)}
+        { text: 'Cancel', onPress: () => onPress(false), style: 'cancel' },
+        { text: 'OK', onPress: twitterName => onPress(twitterName) }
       ],
       {
         cancelable: false
@@ -179,87 +179,97 @@ export default class UserSettings extends React.Component {
     const { currentUser, updateUserSettings, unlinkAccount, goToNotificationSettings, goToBlockedUsers } = this.props
     const { editingPassword, edits: { email, password, confirmPassword, facebookUrl, twitterName }, errors, changed } = this.state
     if (!currentUser) return <Loading />
-    return <SafeAreaView style={{flex: 1}}>
-      <KeyboardFriendlyView style={styles.container}>
-        <ScrollView contentContainerStyle={styles.scrollContainer}>
-          <SettingControl
-            label='EMAIL'
-            value={email}
-            keyboardType={'email-address'}
-            autoCapitalize='none'
-            autoCorrect={false}
-            onChange={value => this.updateField('email', value)}
-            error={errors.email}
-            theme={styles.settingControl} />
-          {!editingPassword && <View style={styles.setting}>
-            <Text style={styles.settingLabel}>PASSWORD</Text>
-            <TouchableOpacity onPress={this.editPassword}>
-              <Text style={styles.linkText} ref={ref => { this.passwordInput = ref }}>Change Password</Text>
-            </TouchableOpacity>
-          </View>}
-          {editingPassword && <SettingControl
-            label='PASSWORD'
-            value={password}
-            toggleSecureTextEntry
-            autoCapitalize='none'
-            autoCorrect={false}
-            onChange={value => this.updateField('password', value)}
-            error={errors.password}
-            theme={styles.settingControl} />}
-          {editingPassword && <SettingControl
-            label='CONFIRM PASSWORD'
-            value={confirmPassword}
-            toggleSecureTextEntry
-            autoCapitalize='none'
-            autoCorrect={false}
-            onChange={value => this.updateField('confirmPassword', value)}
-            error={errors.confirmPassword}
-            theme={styles.settingControl} />}
-          {editingPassword && <TouchableOpacity style={styles.cancelPassword} onPress={this.cancelPassword}>
-            <Text style={styles.linkText}>Cancel Password Change</Text>
-          </TouchableOpacity>}
-          <SocialAccounts
-            facebookUrl={facebookUrl}
-            twitterName={twitterName}
-            twitterPrompt={this.twitterPrompt}
-            loginWithFacebook={this.loginWithFacebook}
-            updateUserSettings={updateUserSettings}
-            updateField={this.updateField}
-            unlinkAccount={unlinkAccount} />
-          <View style={styles.blockedUsersWrapper}>
-            <Button text='Blocked Users' onPress={goToBlockedUsers} style={styles.blockedUsers} />
-          </View>
-          <View style={styles.notificationSettingsWrapper}>
-            <Button text='Notification Settings' onPress={goToNotificationSettings} style={styles.notificationSettings} />
-          </View>
-          <Footer saveChanges={changed && this.saveChanges} cancel={this.cancel} logout={this.logout} />
-        </ScrollView>
-      </KeyboardFriendlyView>
-    </SafeAreaView>
+    return (
+      <SafeAreaView style={{ flex: 1 }}>
+        <KeyboardFriendlyView style={styles.container}>
+          <ScrollView contentContainerStyle={styles.scrollContainer}>
+            <SettingControl
+              label='EMAIL'
+              value={email}
+              keyboardType='email-address'
+              autoCapitalize='none'
+              autoCorrect={false}
+              onChange={value => this.updateField('email', value)}
+              error={errors.email}
+              theme={styles.settingControl}
+            />
+            {!editingPassword && <View style={styles.setting}>
+              <Text style={styles.settingLabel}>PASSWORD</Text>
+              <TouchableOpacity onPress={this.editPassword}>
+                <Text style={styles.linkText} ref={ref => { this.passwordInput = ref }}>Change Password</Text>
+              </TouchableOpacity>
+                                 </View>}
+            {editingPassword && <SettingControl
+              label='PASSWORD'
+              value={password}
+              toggleSecureTextEntry
+              autoCapitalize='none'
+              autoCorrect={false}
+              onChange={value => this.updateField('password', value)}
+              error={errors.password}
+              theme={styles.settingControl}
+                                />}
+            {editingPassword && <SettingControl
+              label='CONFIRM PASSWORD'
+              value={confirmPassword}
+              toggleSecureTextEntry
+              autoCapitalize='none'
+              autoCorrect={false}
+              onChange={value => this.updateField('confirmPassword', value)}
+              error={errors.confirmPassword}
+              theme={styles.settingControl}
+                                />}
+            {editingPassword && <TouchableOpacity style={styles.cancelPassword} onPress={this.cancelPassword}>
+              <Text style={styles.linkText}>Cancel Password Change</Text>
+                                </TouchableOpacity>}
+            <SocialAccounts
+              facebookUrl={facebookUrl}
+              twitterName={twitterName}
+              twitterPrompt={this.twitterPrompt}
+              loginWithFacebook={this.loginWithFacebook}
+              updateUserSettings={updateUserSettings}
+              updateField={this.updateField}
+              unlinkAccount={unlinkAccount}
+            />
+            <View style={styles.blockedUsersWrapper}>
+              <Button text='Blocked Users' onPress={goToBlockedUsers} style={styles.blockedUsers} />
+            </View>
+            <View style={styles.notificationSettingsWrapper}>
+              <Button text='Notification Settings' onPress={goToNotificationSettings} style={styles.notificationSettings} />
+            </View>
+            <Footer saveChanges={changed && this.saveChanges} cancel={this.cancel} logout={this.logout} />
+          </ScrollView>
+        </KeyboardFriendlyView>
+      </SafeAreaView>
+    )
   }
 }
 
 export function SocialAccounts ({
   twitterPrompt, facebookUrl, twitterName, loginWithFacebook, updateUserSettings, unlinkAccount, updateField
 }) {
-  return <View style={styles.socialAccounts}>
-    <Text style={[styles.settingLabel, styles.socialAccountsLabel]}>SOCIAL ACCOUNTS</Text>
-    <SocialControl
-      label='Facebook'
-      onLink={loginWithFacebook}
-      onChange={value => updateField('facebookUrl', value, false)}
-      unlinkAccount={unlinkAccount}
-      provider='facebook'
-      value={facebookUrl} />
-    <SocialControl
-      label='Twitter'
-      onLink={twitterPrompt}
-      onChange={value => updateField('twitterName', value, false)}
-      unlinkAccount={unlinkAccount}
-      provider='twitter'
-      value={twitterName}
-      updateUserSettings={updateUserSettings} />
-  </View>
+  return (
+    <View style={styles.socialAccounts}>
+      <Text style={[styles.settingLabel, styles.socialAccountsLabel]}>SOCIAL ACCOUNTS</Text>
+      <SocialControl
+        label='Facebook'
+        onLink={loginWithFacebook}
+        onChange={value => updateField('facebookUrl', value, false)}
+        unlinkAccount={unlinkAccount}
+        provider='facebook'
+        value={facebookUrl}
+      />
+      <SocialControl
+        label='Twitter'
+        onLink={twitterPrompt}
+        onChange={value => updateField('twitterName', value, false)}
+        unlinkAccount={unlinkAccount}
+        provider='twitter'
+        value={twitterName}
+        updateUserSettings={updateUserSettings}
+      />
+    </View>
+  )
 }
 
 export class SocialControl extends React.Component {
@@ -273,13 +283,13 @@ export class SocialControl extends React.Component {
     if (provider === 'twitter') {
       onLink(twitterName => {
         if (!twitterName) return onChange(false)
-        updateUserSettings({twitterName})
+        updateUserSettings({ twitterName })
         return onChange(true)
       })
     } else {
-      this.setState({loading: true})
+      this.setState({ loading: true })
       return onLink(onChange)
-      .then(() => this.setState({loading: false}))
+        .then(() => this.setState({ loading: false }))
     }
   }
 
@@ -294,22 +304,26 @@ export class SocialControl extends React.Component {
     const { loading } = this.state
     const linked = !!value
 
-    return <View style={[styles.socialControl, linked && styles.linked]}>
-      <Text style={styles.settingText}>{label}</Text>
-      {loading && <Text style={styles.loadingText}>Loading</Text>}
-      {!loading && <TouchableOpacity onPress={linked ? () => this.unlinkClicked() : () => this.linkClicked()}>
-        <Text style={styles.linkText}>{linked ? 'Unlink' : 'Link'}</Text>
-      </TouchableOpacity>}
-    </View>
+    return (
+      <View style={[styles.socialControl, linked && styles.linked]}>
+        <Text style={styles.settingText}>{label}</Text>
+        {loading && <Text style={styles.loadingText}>Loading</Text>}
+        {!loading && <TouchableOpacity onPress={linked ? () => this.unlinkClicked() : () => this.linkClicked()}>
+          <Text style={styles.linkText}>{linked ? 'Unlink' : 'Link'}</Text>
+                     </TouchableOpacity>}
+      </View>
+    )
   }
 }
 
 export function Footer ({ saveChanges, cancel, logout }) {
-  return <View style={styles.footer}>
-    <Button text='Save Changes' onPress={saveChanges} style={styles.save} disabled={!saveChanges} />
-    <TouchableOpacity onPress={cancel}>
-      <Text style={styles.cancel}>Cancel</Text>
-    </TouchableOpacity>
-    <Button text='Logout' onPress={logout} style={styles.logoutButton} />
-  </View>
+  return (
+    <View style={styles.footer}>
+      <Button text='Save Changes' onPress={saveChanges} style={styles.save} disabled={!saveChanges} />
+      <TouchableOpacity onPress={cancel}>
+        <Text style={styles.cancel}>Cancel</Text>
+      </TouchableOpacity>
+      <Button text='Logout' onPress={logout} style={styles.logoutButton} />
+    </View>
+  )
 }

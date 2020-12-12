@@ -8,9 +8,9 @@ describe('makeMapStateToProps', () => {
     const session = orm.session(orm.getEmptyState())
     const postId = '10'
 
-    session.Community.create({id: '1'})
-    session.Topic.create({id: '2', slug: 'slugger', name: 'namer'})
-    session.Person.create({id: '3', avatarUrl: 'someUrl', name: 'foo'})
+    session.Community.create({ id: '1' })
+    session.Topic.create({ id: '2', slug: 'slugger', name: 'namer' })
+    session.Person.create({ id: '3', avatarUrl: 'someUrl', name: 'foo' })
     session.Attachment.create({
       post: postId,
       id: '33',
@@ -39,30 +39,30 @@ describe('makeMapStateToProps', () => {
 
   it('returns null when postId not defined in ORM', () => {
     const mapStateToProps = makeMapStateToProps()
-    expect(mapStateToProps(state, {postId: 100000})).toEqual(
+    expect(mapStateToProps(state, { postId: 100000 })).toEqual(
       {
-        'commenters': null,
-        'communities': null,
-        'creator': null,
-        'imageUrls': null,
-        'isPinned': null,
-        'post': null,
-        'topics': null
+        commenters: null,
+        communities: null,
+        creator: null,
+        imageUrls: null,
+        isPinned: null,
+        post: null,
+        topics: null
       }
     )
   })
 
   it('returns post and attributes', () => {
     const mapStateToProps = makeMapStateToProps()
-    expect(mapStateToProps(state, {postId: 10, communityId: 1})).toEqual(
+    expect(mapStateToProps(state, { postId: 10, communityId: 1 })).toEqual(
       {
-        'commenters': [{'avatarUrl': 'someUrl', 'id': '3', 'name': 'foo'}],
-        'communities': [{'id': '1'}],
-        'creator': {'avatarUrl': 'someUrl', 'id': '3', 'name': 'foo'},
-        'isPinned': true,
-        'imageUrls': ['someImageUrl'],
-        'post': {'creator': '3', 'id': '10'},
-        'topics': [{'id': '2', 'name': 'namer', 'slug': 'slugger'}]
+        commenters: [{ avatarUrl: 'someUrl', id: '3', name: 'foo' }],
+        communities: [{ id: '1' }],
+        creator: { avatarUrl: 'someUrl', id: '3', name: 'foo' },
+        isPinned: true,
+        imageUrls: ['someImageUrl'],
+        post: { creator: '3', id: '10' },
+        topics: [{ id: '2', name: 'namer', slug: 'slugger' }]
       }
     )
   })

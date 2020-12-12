@@ -4,9 +4,9 @@ import orm from 'store/models'
 let state
 beforeAll(() => {
   const session = orm.session(orm.getEmptyState())
-  const community = session.Community.create({id: '99', slug: 'foo', inviteLink: '/38adslkjlkj3'})
-  session.Community.create({id: '88', slug: 'bar', inviteLink: '/dfaseadfd'})
-  session.Invitation.create({id: '33', email: 'john@doe.com', community: community.id})
+  const community = session.Community.create({ id: '99', slug: 'foo', inviteLink: '/38adslkjlkj3' })
+  session.Community.create({ id: '88', slug: 'bar', inviteLink: '/dfaseadfd' })
+  session.Invitation.create({ id: '33', email: 'john@doe.com', community: community.id })
 
   session.Me.create({
     id: '1',
@@ -27,7 +27,7 @@ describe('mapStateToProps', () => {
   it('returns the right keys', () => {
     const props = {
       route: {
-        params: {id: 1}
+        params: { id: 1 }
       }
     }
     expect(mapStateToProps(state, props)).toMatchSnapshot()
@@ -38,7 +38,7 @@ describe('mergeProps', () => {
   it('merges the props', () => {
     const dispatch = x => x
     const ownProps = {}
-    const stateProps = mapStateToProps(state, {route: {params: {id: 1}}})
+    const stateProps = mapStateToProps(state, { route: { params: { id: 1 } } })
     const dispatchProps = mapDispatchToProps(dispatch, stateProps)
     const mergedProps = mergeProps(stateProps, dispatchProps, ownProps)
     expect(mergedProps.fetchCommunitySettings()).toMatchSnapshot()

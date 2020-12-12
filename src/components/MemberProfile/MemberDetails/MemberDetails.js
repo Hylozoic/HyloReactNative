@@ -109,7 +109,8 @@ export default class MemberDetails extends React.Component {
   saveButton = valid => <HeaderButton
     disabled={!valid}
     onPress={this.saveChanges}
-    text='Save' />
+    text='Save'
+                        />
 
   saveChanges = () => {
     if (this.isValid()) {
@@ -131,29 +132,36 @@ export default class MemberDetails extends React.Component {
 
     if (isEmpty(personEdits)) return <Loading />
 
-    return <ScrollView contentContainerStyle={styles.container}>
-      <MemberHeader
-        person={personEdits}
-        isMe={isMe}
-        onPressMessages={onPressMessages}
-        editProfile={this.editProfile}
-        saveChanges={this.saveChanges}
-        editable={editing}
-        updateSetting={this.updateSetting}
-        errors={errors} />
-      <MemberBio person={personEdits}
-        editable={editing}
-        updateSetting={this.updateSetting}
-        isMe={isMe} />
-      <MemberSkills
-        skills={skills}
-        editable={editing}
-        goToSkills={goToSkills} />
-      <MemberCommunities
-        person={person}
-        goToCommunity={goToCommunity}
-        editing={editing} />
-    </ScrollView>
+    return (
+      <ScrollView contentContainerStyle={styles.container}>
+        <MemberHeader
+          person={personEdits}
+          isMe={isMe}
+          onPressMessages={onPressMessages}
+          editProfile={this.editProfile}
+          saveChanges={this.saveChanges}
+          editable={editing}
+          updateSetting={this.updateSetting}
+          errors={errors}
+        />
+        <MemberBio
+          person={personEdits}
+          editable={editing}
+          updateSetting={this.updateSetting}
+          isMe={isMe}
+        />
+        <MemberSkills
+          skills={skills}
+          editable={editing}
+          goToSkills={goToSkills}
+        />
+        <MemberCommunities
+          person={person}
+          goToCommunity={goToCommunity}
+          editing={editing}
+        />
+      </ScrollView>
+    )
   }
 }
 
@@ -165,53 +173,60 @@ export class MemberBio extends React.Component {
   render () {
     const { person: { bio }, editable, updateSetting, isMe } = this.props
     if (isEmpty(bio) && !editable) return null
-    return <View style={styles.bioContainer}>
-      <View style={styles.labelWrapper}>
-        <Text style={styles.sectionLabel}>About Me</Text>
-        {editable && <TouchableOpacity onPress={this.focus}>
-          <EntypoIcon name='edit' style={styles.editIcon} />
-        </TouchableOpacity>}
+    return (
+      <View style={styles.bioContainer}>
+        <View style={styles.labelWrapper}>
+          <Text style={styles.sectionLabel}>About Me</Text>
+          {editable && <TouchableOpacity onPress={this.focus}>
+            <EntypoIcon name='edit' style={styles.editIcon} />
+          </TouchableOpacity>}
+        </View>
+        <Control
+          ref={c => { this.control = c }}
+          style={styles.bio}
+          value={bio}
+          placeholder='Description'
+          editable={editable}
+          onChangeText={updateSetting('bio')}
+          isMe={isMe}
+          multiline
+          hideEditIcon
+        />
       </View>
-      <Control
-        ref={c => { this.control = c }}
-        style={styles.bio}
-        value={bio}
-        placeholder='Description'
-        editable={editable}
-        onChangeText={updateSetting('bio')}
-        isMe={isMe}
-        multiline
-        hideEditIcon />
-    </View>
+    )
   }
 }
 
 export function MemberSkills ({ skills, editable, goToSkills }) {
   if (isEmpty(skills)) return null
 
-  return <View style={styles.skillsContainer}>
-    <View style={styles.labelWrapper}>
-      <Text style={styles.sectionLabel}>My Skills</Text>
-      {editable && <TouchableOpacity onPress={goToSkills}>
-        <EntypoIcon name='edit' style={styles.editIcon} />
-      </TouchableOpacity>}
-    </View>
-    <TouchableOpacity onPress={goToSkills} disabled={!editable}>
-      <View style={styles.skills}>{skills.map(skill =>
-        <Text style={styles.skill} key={skill.id}>{skill.name.toUpperCase()}</Text>)}
+  return (
+    <View style={styles.skillsContainer}>
+      <View style={styles.labelWrapper}>
+        <Text style={styles.sectionLabel}>My Skills</Text>
+        {editable && <TouchableOpacity onPress={goToSkills}>
+          <EntypoIcon name='edit' style={styles.editIcon} />
+        </TouchableOpacity>}
       </View>
-    </TouchableOpacity>
-  </View>
+      <TouchableOpacity onPress={goToSkills} disabled={!editable}>
+        <View style={styles.skills}>{skills.map(skill =>
+          <Text style={styles.skill} key={skill.id}>{skill.name.toUpperCase()}</Text>)}
+        </View>
+      </TouchableOpacity>
+    </View>
+  )
 }
 
 export function MemberCommunities ({ person: { memberships }, goToCommunity, editing }) {
   if (isEmpty(memberships)) return null
 
-  return <View style={styles.communitiesContainer}>
-    <Text style={styles.sectionLabel}>My Hylo Communities</Text>
-    {memberships.map(membership =>
-      <CommunityRow membership={membership} key={membership.id} goToCommunity={goToCommunity} editing={editing} />)}
-  </View>
+  return (
+    <View style={styles.communitiesContainer}>
+      <Text style={styles.sectionLabel}>My Hylo Communities</Text>
+      {memberships.map(membership =>
+        <CommunityRow membership={membership} key={membership.id} goToCommunity={goToCommunity} editing={editing} />)}
+    </View>
+  )
 }
 
 export function CommunityRow ({ membership, goToCommunity, editing }) {
@@ -222,12 +237,14 @@ export function CommunityRow ({ membership, goToCommunity, editing }) {
     return `${Number(count / 1000).toFixed(1)}k`
   }
   const memberCount = formatCount(community.memberCount)
-  return <View style={styles.communityRow}>
-    {hasModeratorRole && <StarIcon style={styles.starIcon} />}
-    <TouchableOpacity onPress={() => goToCommunity(community.id)} disabled={editing}>
-      <Text style={styles.communityName}>{community.name}</Text>
-    </TouchableOpacity>
-    <Text style={styles.memberCount}>{memberCount}</Text>
-    <Icon name='Members' style={styles.memberIcon} />
-  </View>
+  return (
+    <View style={styles.communityRow}>
+      {hasModeratorRole && <StarIcon style={styles.starIcon} />}
+      <TouchableOpacity onPress={() => goToCommunity(community.id)} disabled={editing}>
+        <Text style={styles.communityName}>{community.name}</Text>
+      </TouchableOpacity>
+      <Text style={styles.memberCount}>{memberCount}</Text>
+      <Icon name='Members' style={styles.memberIcon} />
+    </View>
+  )
 }

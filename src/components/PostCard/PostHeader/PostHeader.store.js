@@ -80,10 +80,10 @@ export function ormSessionReducer ({ Post }, { type, meta }) {
       break
 
     case REMOVE_POST_PENDING:
-      let post = Post.withId(meta.postId)
+      const post = Post.withId(meta.postId)
       const communities = post.communities.filter(c =>
         c.slug !== meta.slug).toModelArray()
-      post.update({communities})
+      post.update({ communities })
       break
   }
 }

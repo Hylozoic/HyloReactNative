@@ -25,7 +25,7 @@ export function findOrCreateThread (participantIds) {
     type: FIND_OR_CREATE_THREAD,
     graphql: {
       query: findOrCreateThreadQuery,
-      variables: {participantIds}
+      variables: { participantIds }
     },
     meta: { extractModel: 'MessageThread' }
   }

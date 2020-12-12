@@ -1,4 +1,4 @@
-import {Text} from 'react-native'
+import { Text } from 'react-native'
 import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import KeyboardFriendlyViewiOS from './KeyboardFriendlyView.ios'
@@ -9,8 +9,9 @@ describe('KeyboardFriendlyViewiOS', () => {
     const renderer = new ReactShallowRenderer()
 
     renderer.render(<KeyboardFriendlyViewiOS
-      behavior={'padding'}
-      testID={'123'}>
+      behavior='padding'
+      testID='123'
+                    >
       <Text>Children</Text>
     </KeyboardFriendlyViewiOS>)
     const actual = renderer.getRenderOutput()
@@ -24,8 +25,9 @@ describe('KeyboardFriendlyViewAndroid', () => {
     const renderer = new ReactShallowRenderer()
 
     renderer.render(<KeyboardFriendlyViewAndroid
-      behavior={'padding'}
-      testID={'123'}>
+      behavior='padding'
+      testID='123'
+                    >
       <Text>Children</Text>
     </KeyboardFriendlyViewAndroid>)
     const actual = renderer.getRenderOutput()

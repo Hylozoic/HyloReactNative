@@ -13,8 +13,8 @@ export default function confirmDiscardChanges ({
       title,
       confirmationMessage,
       [
-        {text: disgardButtonText, onPress: onDiscard},
-        {text: continueButtonText, style: 'cancel'}
+        { text: disgardButtonText, onPress: onDiscard },
+        { text: continueButtonText, style: 'cancel' }
       ])
   } else {
     onDiscard()

@@ -10,11 +10,11 @@ describe('ormSessionReducer', () => {
   let session
   beforeEach(() => {
     session = orm.session(orm.getEmptyState())
-    session.Me.create({id: '1'})
+    session.Me.create({ id: '1' })
   })
 
   it('handles RECEIVE_MESSAGE', () => {
-    session.MessageThread.create({id: '1'})
+    session.MessageThread.create({ id: '1' })
 
     const date = new Date()
     const action = {
@@ -43,7 +43,7 @@ describe('ormSessionReducer', () => {
   })
 
   it('handles RECEIVE_NOTIFICATION', () => {
-    session.Post.create({id: '2'})
+    session.Post.create({ id: '2' })
 
     const action = {
       type: RECEIVE_NOTIFICATION,

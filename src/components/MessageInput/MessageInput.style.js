@@ -11,7 +11,7 @@ export default {
     paddingHorizontal: 8,
     paddingVertical: 5,
     shadowColor: mercury,
-    shadowOffset: {width: 0, height: 5},
+    shadowOffset: { width: 0, height: 5 },
     shadowRadius: 10,
     shadowOpacity: 0.1,
 

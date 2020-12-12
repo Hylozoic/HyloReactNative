@@ -8,5 +8,5 @@ it('fetchCommunitySettings', () => {
 })
 
 it('updateCommunitySettings', () => {
-  expect(updateCommunitySettings(123, {name: 'blah', description: 'some desc'})).toMatchSnapshot()
+  expect(updateCommunitySettings(123, { name: 'blah', description: 'some desc' })).toMatchSnapshot()
 })

@@ -15,22 +15,26 @@ export default class PostRow extends React.PureComponent {
 
     if (!post) return null
 
-    return <View style={styles.postRow}>
-      <TouchableOpacity delayPressIn={50} activeOpacity={0.6} onPress={this.showPost}>
-        <View>
-          <PostCard post={post}
-            commenters={commenters}
-            communities={communities}
-            topics={topics}
-            creator={creator}
-            imageUrls={imageUrls}
-            isPinned={isPinned}
-            showMember={showMember}
-            showTopic={showTopic}
-            goToCommunity={goToCommunity}
-            shouldShowCommunities={shouldShowCommunities} />
-        </View>
-      </TouchableOpacity>
-    </View>
+    return (
+      <View style={styles.postRow}>
+        <TouchableOpacity delayPressIn={50} activeOpacity={0.6} onPress={this.showPost}>
+          <View>
+            <PostCard
+              post={post}
+              commenters={commenters}
+              communities={communities}
+              topics={topics}
+              creator={creator}
+              imageUrls={imageUrls}
+              isPinned={isPinned}
+              showMember={showMember}
+              showTopic={showTopic}
+              goToCommunity={goToCommunity}
+              shouldShowCommunities={shouldShowCommunities}
+            />
+          </View>
+        </TouchableOpacity>
+      </View>
+    )
   }
 }

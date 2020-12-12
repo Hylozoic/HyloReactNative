@@ -1,7 +1,7 @@
 import {
   ormSessionReducer,
   DELETE_POST_PENDING,
-  REMOVE_POST_PENDING,
+  REMOVE_POST_PENDING
 } from './PostHeader.store'
 import orm from 'store/models'
 
@@ -9,11 +9,11 @@ describe('ormSessionReducer', () => {
   let session, community
   beforeEach(() => {
     session = orm.session(orm.getEmptyState())
-    community = session.Community.create({id: 20, slug: 'postheadertest'})
+    community = session.Community.create({ id: 20, slug: 'postheadertest' })
   })
 
   it('handles DELETE_POST', () => {
-    session.Post.create({id: '1'})
+    session.Post.create({ id: '1' })
 
     const action = {
       type: DELETE_POST_PENDING,
@@ -28,7 +28,7 @@ describe('ormSessionReducer', () => {
   })
 
   it('handles REMOVE_POST', () => {
-    session.Post.create({id: '11', communities: [community]})
+    session.Post.create({ id: '11', communities: [community] })
 
     const action = {
       type: REMOVE_POST_PENDING,

@@ -12,17 +12,19 @@ export default class SignupFlow4 extends React.Component {
   static navigationOptions = ({ navigation, route }) =>
     header(navigation, route, {
       title: 'Edit Skills'
-    })  
+    })
 
   goBack = () => {
     this.props.navigation.goBack()
   }
 
   render () {
-    return <KeyboardFriendlyView style={styles.container} {...kavProps}>
-      <ScrollView>
-        <SkillEditor done={this.goBack} doneLabel='Done' theme={styles.skillEditor} />
-      </ScrollView>
-    </KeyboardFriendlyView>
+    return (
+      <KeyboardFriendlyView style={styles.container} {...kavProps}>
+        <ScrollView>
+          <SkillEditor done={this.goBack} doneLabel='Done' theme={styles.skillEditor} />
+        </ScrollView>
+      </KeyboardFriendlyView>
+    )
   }
 }

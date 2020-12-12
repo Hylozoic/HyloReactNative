@@ -20,7 +20,7 @@ export function mapStateToProps (state, props) {
   const id = getPostId(state, props)
   const currentUser = getMe(state, props)
   const communityId = getCurrentCommunityId(state, props)
-  const post = getPresentedPost(state, {id, communityId})
+  const post = getPresentedPost(state, { id, communityId })
   const isProject = get('type', post) === 'project'
   return {
     id,
@@ -46,7 +46,7 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     goToCommunity: makeGoToCommunity(dispatch, navigation),
     editPost: () => navigate('PostEditor', { id }),
     goToMembers: () => navigate('ProjectMembers', { id, members: get('members', post) }),
-    showMember: goToMemberMaker({navigate}),
+    showMember: goToMemberMaker({ navigate }),
     showTopic: (topicName, communityId) => {
       // All Communities and Network feed to topic nav
       // currently not supported

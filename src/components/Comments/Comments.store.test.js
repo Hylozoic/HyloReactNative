@@ -35,6 +35,6 @@ describe('getComments', () => {
   it('should return comments ordered by id', () => {
     const { comments } = getComments(state, { postId: '1' })
     const ids = comments.map(c => c.id)
-    expect(ids).toEqual([ '1', '2', '3', '4', '5' ])
+    expect(ids).toEqual(['1', '2', '3', '4', '5'])
   })
 })

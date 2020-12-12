@@ -57,7 +57,7 @@ export default class SignupFlow1 extends React.Component {
       password: showPasswordField && validateUser.password(password),
       confirmPassword: password !== confirmPassword && 'Passwords must match'
     }
-    this.setState({errors})
+    this.setState({ errors })
     return !any(i => i, values(errors))
   }
 
@@ -85,54 +85,61 @@ export default class SignupFlow1 extends React.Component {
       ? () => {}
       : this.submit
 
-    return <KeyboardFriendlyView style={styles.container} {...kavProps}>
-      <ScrollView>
-        <Text style={styles.title}>Hi there stranger!</Text>
-        <Text style={styles.subTitle}>
-          To kick things off, tell us a bit more about yourself and get your account off the ground.
-        </Text>
-        <SettingControl
-          label='Your Full Name'
-          value={name}
-          onChange={value => this.updateField('name', value)}
-          error={errors.name}
-          returnKeyType='next'
-          onSubmitEditing={() => this.emailControl.focus()} />
-        <SettingControl
-          ref={c => { this.emailControl = c }}
-          label='Email Address'
-          value={email}
-          keyboardType={'email-address'}
-          autoCapitalize='none'
-          autoCorrect={false}
-          onChange={value => this.updateField('email', value)}
-          error={errors.email}
-          returnKeyType='next'
-          onSubmitEditing={() => this.passwordControl.focus()} />
-        {showPasswordField && <SettingControl
-          ref={c => { this.passwordControl = c }}
-          label='Password'
-          value={password}
-          onChange={value => this.updateField('password', value)}
-          toggleSecureTextEntry
-          error={errors.password}
-          returnKeyType='next'
-          onSubmitEditing={() => this.confirmPasswordControl.focus()} />}
-        {showPasswordField && <SettingControl
-          ref={c => { this.confirmPasswordControl = c }}
-          label='Confirm Password'
-          value={confirmPassword}
-          onChange={value => this.updateField('confirmPassword', value)}
-          toggleSecureTextEntry
-          error={errors.confirmPassword}
-          returnKeyType='go'
-          onSubmitEditing={submitUnlessPending} />}
-        <Button
-          style={styles.continueButton}
-          text={pending ? 'Saving...' : 'Continue'}
-          onPress={submitUnlessPending}
-          disabled={!!pending} />
-      </ScrollView>
-    </KeyboardFriendlyView>
+    return (
+      <KeyboardFriendlyView style={styles.container} {...kavProps}>
+        <ScrollView>
+          <Text style={styles.title}>Hi there stranger!</Text>
+          <Text style={styles.subTitle}>
+            To kick things off, tell us a bit more about yourself and get your account off the ground.
+          </Text>
+          <SettingControl
+            label='Your Full Name'
+            value={name}
+            onChange={value => this.updateField('name', value)}
+            error={errors.name}
+            returnKeyType='next'
+            onSubmitEditing={() => this.emailControl.focus()}
+          />
+          <SettingControl
+            ref={c => { this.emailControl = c }}
+            label='Email Address'
+            value={email}
+            keyboardType='email-address'
+            autoCapitalize='none'
+            autoCorrect={false}
+            onChange={value => this.updateField('email', value)}
+            error={errors.email}
+            returnKeyType='next'
+            onSubmitEditing={() => this.passwordControl.focus()}
+          />
+          {showPasswordField && <SettingControl
+            ref={c => { this.passwordControl = c }}
+            label='Password'
+            value={password}
+            onChange={value => this.updateField('password', value)}
+            toggleSecureTextEntry
+            error={errors.password}
+            returnKeyType='next'
+            onSubmitEditing={() => this.confirmPasswordControl.focus()}
+                                />}
+          {showPasswordField && <SettingControl
+            ref={c => { this.confirmPasswordControl = c }}
+            label='Confirm Password'
+            value={confirmPassword}
+            onChange={value => this.updateField('confirmPassword', value)}
+            toggleSecureTextEntry
+            error={errors.confirmPassword}
+            returnKeyType='go'
+            onSubmitEditing={submitUnlessPending}
+                                />}
+          <Button
+            style={styles.continueButton}
+            text={pending ? 'Saving...' : 'Continue'}
+            onPress={submitUnlessPending}
+            disabled={!!pending}
+          />
+        </ScrollView>
+      </KeyboardFriendlyView>
+    )
   }
 }

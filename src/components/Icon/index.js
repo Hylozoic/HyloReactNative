@@ -17,7 +17,7 @@ function Icon ({ color, ...otherProps }) {
       throw new Error(`unrecognized color name: "${color}"`)
     }
   }
-  return <RawIcon {...{color, ...otherProps}} />
+  return <RawIcon {...{ color, ...otherProps }} />
 }
 
 Icon.TabBarItemIOS = RawIcon.TabBarItemIOS

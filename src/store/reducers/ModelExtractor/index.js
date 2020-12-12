@@ -39,7 +39,7 @@ export default class ModelExtractor {
     }
 
     const normalized = omitBy(isUndefined, mapValues(node, (value, key) => {
-      var type = model.fields[key]
+      let type = model.fields[key]
 
       if (value && value.__typename) {
         const polymorphicChildId = this._walkOne(value, value.__typename)
@@ -65,7 +65,7 @@ export default class ModelExtractor {
         if (type instanceof ForeignKey) {
           // each of the related values needs to have a foreign key back to
           // the current value...
-          this._walkMany(value, type.toModelName, {[type.relatedName]: node.id})
+          this._walkMany(value, type.toModelName, { [type.relatedName]: node.id })
 
           // ...and because the related values store the foreign key, the
           // current value does not need to record anything about the relation,

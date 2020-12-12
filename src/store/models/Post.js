@@ -64,7 +64,7 @@ Post.fields = {
     to: 'Person',
     relatedName: 'postsFollowing',
     through: 'PostFollower',
-    throughFields: [ 'post', 'follower' ]
+    throughFields: ['post', 'follower']
   }),
   communities: many('Community'),
   postMemberships: many('PostMembership'),
@@ -73,13 +73,13 @@ Post.fields = {
     to: 'Person',
     relatedName: 'postsCommented',
     through: 'PostCommenter',
-    throughFields: [ 'post', 'commenter' ]
+    throughFields: ['post', 'commenter']
   }),
   members: many({
     to: 'Person',
     relatedName: 'projectsJoined',
     through: 'ProjectMember',
-    throughFields: [ 'post', 'member' ]
+    throughFields: ['post', 'member']
   }),
   commentersTotal: attr(),
   createdAt: attr(),
@@ -93,32 +93,32 @@ Post.fields = {
 }
 
 export const POST_TYPES = {
-  'discussion': {
+  discussion: {
     primaryColor: 'rgba(0, 163, 227, 1)', // $color-picton-blue
     backgroundColor: 'rgba(0, 163, 227, .2)', // $color-link-water
     map: false
   },
-  'event': {
+  event: {
     primaryColor: 'rgba(254, 72, 80, 1)', // $color-medium-purple
     backgroundColor: 'rgba(254, 72, 80, .2)', // $color-moon-raker
     map: true
   },
-  'offer': {
+  offer: {
     primaryColor: 'rgba(0, 199, 157, 1)', // $color-caribbean-green
     backgroundColor: 'rgba(0, 199, 157, .2)', // $color-iceberg;
     map: true
   },
-  'resource': {
+  resource: {
     primaryColor: 'rgba(255, 212, 3, 1)', // $color-mango-yellow;
     backgroundColor: 'rgba(255, 212, 3, .2)',
     map: true
   },
-  'project': {
+  project: {
     primaryColor: 'rgba(252, 128, 0, 1)', // $color-fuchsia-pink;
     backgroundColor: 'rgba(252, 128, 0, .2)', // $color-prim;
     map: false
   },
-  'request': {
+  request: {
     primaryColor: 'rgba(102, 75, 165, 1)', // $color-persimmon;
     backgroundColor: 'rgba(102, 75, 165, .2)', // $color-peach-schnapps;
     map: true

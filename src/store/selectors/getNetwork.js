@@ -10,6 +10,6 @@ const getNetwork = ormCreateSelector(
   state => state.orm,
   (state, props) => get('id', props),
   (state, props) => get('slug', props),
-  ({ Network }, id, slug) => Network.safeGet({id, slug})
+  ({ Network }, id, slug) => Network.safeGet({ id, slug })
 )
 export default getNetwork

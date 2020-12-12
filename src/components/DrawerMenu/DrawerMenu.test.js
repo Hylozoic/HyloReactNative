@@ -17,8 +17,8 @@ describe('DrawerMenu', () => {
     canModerateCurrentCommunity: true,
     networks: [],
     goToCommunitySettingsMenu: jest.fn(),
-    currentCommunity: {name: 'foo', avatarUrl: 'someurl'},
-    currentContext: {name: 'foo', avatarUrl: 'someurl'},
+    currentCommunity: { name: 'foo', avatarUrl: 'someurl' },
+    currentContext: { name: 'foo', avatarUrl: 'someurl' },
     communities: []
   }
 
@@ -43,7 +43,7 @@ describe('DrawerMenu', () => {
 describe('SectionHeader', () => {
   it('matches the last snapshot', () => {
     const renderer = new ReactShallowRenderer()
-    renderer.render(<SectionHeader section={{label: 'Networked Communities'}} />)
+    renderer.render(<SectionHeader section={{ label: 'Networked Communities' }} />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
@@ -67,7 +67,8 @@ describe('NetworkRow', () => {
     renderer.render(<NetworkRow
       network={network}
       goToCommunity={() => {}}
-      currentCommunityId={1} />)
+      currentCommunityId={1}
+                    />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
@@ -95,7 +96,8 @@ describe('NetworkRow', () => {
     renderer.render(<NetworkRow
       network={network}
       goToCommunity={() => {}}
-      currentCommunityId={1} />)
+      currentCommunityId={1}
+                    />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
@@ -116,7 +118,8 @@ describe('NetworkRow', () => {
     renderer.render(<NetworkRow
       network={network}
       goToCommunity={() => {}}
-      currentCommunityId={1} />)
+      currentCommunityId={1}
+                    />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
@@ -132,7 +135,8 @@ describe('NetworkRow', () => {
     renderer.render(<NetworkRow
       network={network}
       goToCommunity={() => {}}
-      currentCommunityId={1} />)
+      currentCommunityId={1}
+                    />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
@@ -144,8 +148,8 @@ describe('NetworkRow', () => {
         name: '',
         avatarUrl: '',
         communities: [
-          {id: 1, newPostCount: 0},
-          {id: 2, newPostCount: 0}
+          { id: 1, newPostCount: 0 },
+          { id: 2, newPostCount: 0 }
         ]
       }
     }
@@ -159,8 +163,8 @@ describe('NetworkRow', () => {
         name: '',
         avatarUrl: '',
         communities: [
-          {id: 1, newPostCount: 1},
-          {id: 2, newPostCount: 0}
+          { id: 1, newPostCount: 1 },
+          { id: 2, newPostCount: 0 }
         ]
       }
     }
@@ -198,7 +202,8 @@ describe('CommunityRow', () => {
     renderer.render(<CommunityRow
       community={community}
       goToCommunity={() => {}}
-      currentCommunityId={2} />)
+      currentCommunityId={2}
+                    />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
@@ -214,7 +219,8 @@ describe('CommunityRow', () => {
     renderer.render(<CommunityRow
       community={community}
       goToCommunity={() => {}}
-      currentCommunityId={2} />)
+      currentCommunityId={2}
+                    />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
@@ -230,7 +236,8 @@ describe('CommunityRow', () => {
     renderer.render(<CommunityRow
       community={community}
       goToCommunity={() => {}}
-      currentCommunityId={community.id} />)
+      currentCommunityId={community.id}
+                    />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()

@@ -31,7 +31,7 @@ export function mapStateToProps (state, props) {
     topicName,
     isProjectFeed
   })
-  const pending = isProjectFeed ? state.pending[FETCH_PROJECTS] : state.pending[FETCH_POSTS] 
+  const pending = isProjectFeed ? state.pending[FETCH_PROJECTS] : state.pending[FETCH_POSTS]
   const communityId = get('community.id', props)
 
   const postIds = isProjectFeed ? getProjectIds(state, queryProps) : getPostIds(state, queryProps)
@@ -50,9 +50,9 @@ export function mapStateToProps (state, props) {
   }
 }
 
-const mapDispatchToProps = {setFilter, setSort, fetchPosts, fetchProjects, resetNewPostCount}
+const mapDispatchToProps = { setFilter, setSort, fetchPosts, fetchProjects, resetNewPostCount }
 
-export function shouldResetNewPostCount ({subject, sortBy, filter, topic}) {
+export function shouldResetNewPostCount ({ subject, sortBy, filter, topic }) {
   return subject === 'community' && !topic && sortBy === defaultSortBy && !filter
 }
 
@@ -63,7 +63,7 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
   const fetchPostsOrProjects = isProjectFeed ? dispatchProps.fetchProjects : dispatchProps.fetchPosts
 
   const fetchMorePosts = hasMore && !pending
-    ? () => fetchPostsOrProjects({...queryProps, offset: postIds.length})
+    ? () => fetchPostsOrProjects({ ...queryProps, offset: postIds.length })
     : () => {}
   const fetchPostsAndResetCount = (params, opts) => {
     const promises = [fetchPostsOrProjects(params, opts)]
@@ -79,7 +79,7 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     ...dispatchProps,
     ...ownProps,
     fetchPosts: () => fetchPostsAndResetCount(queryProps),
-    refreshPosts: () => fetchPostsAndResetCount(queryProps, {reset: true}),
+    refreshPosts: () => fetchPostsAndResetCount(queryProps, { reset: true }),
     fetchMorePosts
   }
 }

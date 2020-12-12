@@ -75,7 +75,7 @@ export default {
     ...messagePromptShape,
     position: 'absolute',
     backgroundColor: 'white',
-    shadowOffset: {width: 0, height: 4},
+    shadowOffset: { width: 0, height: 4 },
     shadowRadius: 5,
     shadowOpacity: 1.0,
     shadowColor: capeCod20,

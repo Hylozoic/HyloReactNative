@@ -10,11 +10,11 @@ const axelFretting = require('../../assets/Axel_Fretting.png')
 export default class ErrorBoundary extends React.Component {
   constructor (props) {
     super(props)
-    this.state = {hasError: false}
+    this.state = { hasError: false }
   }
 
   componentDidCatch (error, info) {
-    this.setState({hasError: true})
+    this.setState({ hasError: true })
 
     !isDev && Sentry.captureException(error, { extra: info })
   }
@@ -29,11 +29,13 @@ export default class ErrorBoundary extends React.Component {
 }
 
 function DefaultErrorMessage () {
-  return <View style={styles.container}>
-    <Text style={styles.titleText}>Oops. Something Went Wrong</Text>
-    <Image source={axelFretting} style={styles.merkabaImage} />
-    <Button title='Restart Hylo' style={styles.button} onPress={() => RNRestart.Restart()} />
-  </View>
+  return (
+    <View style={styles.container}>
+      <Text style={styles.titleText}>Oops. Something Went Wrong</Text>
+      <Image source={axelFretting} style={styles.merkabaImage} />
+      <Button title='Restart Hylo' style={styles.button} onPress={() => RNRestart.Restart()} />
+    </View>
+  )
 }
 
 const styles = {

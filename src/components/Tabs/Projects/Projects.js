@@ -19,21 +19,27 @@ export default class Projects extends React.Component {
 
     const isNetwork = !!networkId
 
-    if (!currentUser) return <Loading style={{flex: 1}} />
-    return <Feed
-      communityId={communityId}
-      route={route}
-      navigation={navigation}
-      networkId={networkId}
-      belowBannerComponent={!isNetwork && <CreateProjectButton createProject={this.goToCreateProject} />}
-      hidePostPrompt
-      isProjectFeed />
+    if (!currentUser) return <Loading style={{ flex: 1 }} />
+    return (
+      <Feed
+        communityId={communityId}
+        route={route}
+        navigation={navigation}
+        networkId={networkId}
+        belowBannerComponent={!isNetwork && <CreateProjectButton createProject={this.goToCreateProject} />}
+        hidePostPrompt
+        isProjectFeed
+      />
+    )
   }
 }
 
 export function CreateProjectButton ({ createProject }) {
-  return <Button
-    style={styles.button}
-    text='Create Project'
-    onPress={createProject} />
+  return (
+    <Button
+      style={styles.button}
+      text='Create Project'
+      onPress={createProject}
+    />
+  )
 }

@@ -78,19 +78,19 @@ it('responds to an action with meta.extractModel', () => {
   expect(newState).toMatchObject({
     Community: {
       items: ['1'],
-      itemsById: {'1': {id: '1', name: 'Neighborhood'}}
+      itemsById: { 1: { id: '1', name: 'Neighborhood' } }
     },
     Person: {
       items: ['2'],
-      itemsById: {'2': {id: '2', name: 'Greg'}}
+      itemsById: { 2: { id: '2', name: 'Greg' } }
     },
     Post: {
       items: ['1'],
-      itemsById: {'1': {id: '1', title: 'Cat on the loose', creator: '2'}}
+      itemsById: { 1: { id: '1', title: 'Cat on the loose', creator: '2' } }
     },
     PostCommunities: {
       items: [0],
-      itemsById: {'0': {fromPostId: '1', toCommunityId: '1', id: 0}}
+      itemsById: { 0: { fromPostId: '1', toCommunityId: '1', id: 0 } }
     }
   })
 })
@@ -118,7 +118,7 @@ it('handles CREATE_COMMENT', () => {
   session.Me.create({
     id: '3322'
   })
-  session.Person.create({id: '3322'})
+  session.Person.create({ id: '3322' })
 
   const action = {
     type: CREATE_COMMENT,
@@ -130,7 +130,7 @@ it('handles CREATE_COMMENT', () => {
   const newState = ormReducer(session.state, action)
   const newSession = orm.session(newState)
   expect(newSession.Post.withId('10').commentsTotal).toEqual(1)
-  expect(newSession.Post.withId('10').commenters.toRefArray()).toEqual([{id: '3322'}])
+  expect(newSession.Post.withId('10').commenters.toRefArray()).toEqual([{ id: '3322' }])
 })
 
 it('handles SET_TOPIC_SUBSCRIBE_PENDING', () => {
@@ -203,11 +203,11 @@ describe('handles USE_INVITATION', () => {
     const membership1Id = 'membership1Id'
     const membership2Id = 'membership2Id'
 
-    session.Me.create({id: meId})
-    session.Community.create({id: community1Id, name: 'community 1'})
-    session.Community.create({id: community2Id, name: 'community 2'})
-    session.Membership.create({id: membership1Id, community: community1Id, person: meId})
-    session.Membership.create({id: membership2Id, community: community2Id, person: meId})    // const me = session.Me.first()
+    session.Me.create({ id: meId })
+    session.Community.create({ id: community1Id, name: 'community 1' })
+    session.Community.create({ id: community2Id, name: 'community 2' })
+    session.Membership.create({ id: membership1Id, community: community1Id, person: meId })
+    session.Membership.create({ id: membership2Id, community: community2Id, person: meId }) // const me = session.Me.first()
 
     const action = {
       type: USE_INVITATION,
@@ -313,9 +313,9 @@ describe('on RESET_NEW_POST_COUNT_PENDING', () => {
   }
 
   const session = orm.session(orm.getEmptyState())
-  session.Me.create({id: 1})
-  session.Community.create({id: 1, name: 'community 1'})
-  session.Membership.create({id: 1, community: 1, person: 1})
+  session.Me.create({ id: 1 })
+  session.Community.create({ id: 1, name: 'community 1' })
+  session.Membership.create({ id: 1, community: 1, person: 1 })
   expect(session.Membership.first().newPostCount).toEqual(undefined)
   const newSession = orm.session(ormReducer(session.state, action))
   expect(newSession.Membership.first().newPostCount).toEqual(0)
@@ -391,7 +391,7 @@ describe('on FETCH_CURRENT_USER', () => {
 
 describe('on PIN_POST_PENDING', () => {
   const session = orm.session(orm.getEmptyState())
-  const community = session.Community.create({id: '1', slug: 'foo'})
+  const community = session.Community.create({ id: '1', slug: 'foo' })
   const postId = 123
   const postMembership = session.PostMembership.create({
     pinned: false,
@@ -452,9 +452,9 @@ describe('handles CREATE_COMMUNITY', () => {
     const meId = 'meId'
     const communityId = 'communityId'
     const membershipId = 'membershipId'
-    session.Me.create({id: meId})
-    session.Community.create({id: communityId, name: 'community 1'})
-    session.Membership.create({id: membershipId, community: communityId, person: meId})
+    session.Me.create({ id: meId })
+    session.Community.create({ id: communityId, name: 'community 1' })
+    session.Membership.create({ id: membershipId, community: communityId, person: meId })
 
     const action = {
       type: CREATE_COMMUNITY,
@@ -481,9 +481,9 @@ describe('on UPDATE_MEMBERSHIP_SETTINGS_PENDING', () => {
     const meId = 'meId'
     const communityId = 'communityId'
     const membershipId = 'membershipId'
-    session.Me.create({id: meId})
-    session.Community.create({id: communityId, name: 'community 1'})
-    session.Membership.create({id: membershipId, community: communityId, person: meId, settings: {}})
+    session.Me.create({ id: meId })
+    session.Community.create({ id: communityId, name: 'community 1' })
+    session.Membership.create({ id: membershipId, community: communityId, person: meId, settings: {} })
 
     const action = {
       type: UPDATE_MEMBERSHIP_SETTINGS_PENDING,
@@ -505,10 +505,10 @@ describe('on UPDATE_ALL_MEMBERSHIP_SETTINGS_PENDING', () => {
   it('should update all the memberships settings', () => {
     const session = orm.mutableSession(orm.getEmptyState())
     const meId = 'meId'
-    session.Me.create({id: meId})
-    session.Membership.create({person: meId, settings: {}})
-    session.Membership.create({person: meId, settings: {}})
-    session.Membership.create({person: meId, settings: {}})
+    session.Me.create({ id: meId })
+    session.Membership.create({ person: meId, settings: {} })
+    session.Membership.create({ person: meId, settings: {} })
+    session.Membership.create({ person: meId, settings: {} })
 
     const action = {
       type: UPDATE_ALL_MEMBERSHIP_SETTINGS_PENDING,
@@ -532,7 +532,7 @@ describe('handles JOIN_PROJECT_PENDING', () => {
     const session = orm.mutableSession(orm.getEmptyState())
     const projectMemberId = 'projectMemberId'
     const postId = '10'
-    session.Me.create({id: projectMemberId})
+    session.Me.create({ id: projectMemberId })
     session.Post.create({
       id: postId,
       type: 'project'
@@ -554,12 +554,12 @@ describe('handles LEAVE_PROJECT_PENDING', () => {
     const session = orm.mutableSession(orm.getEmptyState())
     const projectMemberId = 'projectMemberId'
     const postId = '10'
-    session.Me.create({id: projectMemberId})
+    session.Me.create({ id: projectMemberId })
     session.Post.create({
       id: postId,
       type: 'project'
     })
-    session.ProjectMember.create({post: postId, member: projectMemberId})
+    session.ProjectMember.create({ post: postId, member: projectMemberId })
     expect(session.ProjectMember.all().count()).toEqual(1)
     const action = {
       type: LEAVE_PROJECT_PENDING,
@@ -568,8 +568,7 @@ describe('handles LEAVE_PROJECT_PENDING', () => {
       }
     }
     const newSession = orm.session(ormReducer(session.state, action))
-    const projectMembershipsAfterAction = newSession.ProjectMember.all().toRefArray()
+    // const projectMembershipsAfterAction = newSession.ProjectMember.all().toRefArray()
     expect(newSession.ProjectMember.all().count()).toEqual(0)
   })
 })
-

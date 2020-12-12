@@ -14,9 +14,9 @@ export function login (email, password) {
   return {
     type: LOGIN,
     payload: {
-      api: {method: 'post', path: '/noo/login', params: {email, password}}
+      api: { method: 'post', path: '/noo/login', params: { email, password } }
     },
-    meta: {email}
+    meta: { email }
   }
 }
 
@@ -24,7 +24,7 @@ export function loginByToken (userId, loginToken) {
   return {
     type: LOGIN_BY_TOKEN,
     payload: {
-      api: {method: 'post', path: '/noo/login/token', params: {u: userId, t: loginToken}}
+      api: { method: 'post', path: '/noo/login/token', params: { u: userId, t: loginToken } }
     }
   }
 }
@@ -33,7 +33,7 @@ export function loginWithApple (params) {
   return {
     type: LOGIN_WITH_APPLE,
     payload: {
-      api: {method: 'post', path: `/noo/login/apple/oauth`, params}
+      api: { method: 'post', path: '/noo/login/apple/oauth', params }
     }
   }
 }
@@ -42,7 +42,7 @@ export function loginWithFacebook (accessToken) {
   return {
     type: LOGIN_WITH_FACEBOOK,
     payload: {
-      api: {method: 'post', path: `/noo/login/facebook-token/oauth?access_token=${accessToken}`}
+      api: { method: 'post', path: `/noo/login/facebook-token/oauth?access_token=${accessToken}` }
     }
   }
 }
@@ -51,7 +51,7 @@ export function loginWithGoogle (accessToken) {
   return {
     type: LOGIN_WITH_GOOGLE,
     payload: {
-      api: {method: 'post', path: `/noo/login/google-token/oauth?access_token=${accessToken}`}
+      api: { method: 'post', path: `/noo/login/google-token/oauth?access_token=${accessToken}` }
     }
   }
 }

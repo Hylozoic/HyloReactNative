@@ -6,7 +6,7 @@ import getMe from '../../store/selectors/getMe'
 export function mapStateToProps (state, props) {
   const { comment } = props
   const currentUser = getMe(state, props)
-  const community = getCommunity(state, {slug: props.slug})
+  const community = getCommunity(state, { slug: props.slug })
   const isCreator = currentUser && comment.creator.id === currentUser.id
   const canModerate = currentUser && currentUser.canModerate(community)
 

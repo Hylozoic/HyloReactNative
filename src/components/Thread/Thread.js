@@ -165,32 +165,38 @@ export default class Thread extends React.Component {
       ? 'RECONNECTING...'
       : `${newMessages} NEW MESSAGE${newMessages > 1 ? 'S' : ''}`
 
-    return <View style={styles.container}>
-      {pending && <Loading />}
-      <FlatList style={styles.messageList}
-        data={messages}
-        keyExtractor={item => item.id}
-        onEndReached={() => this.fetchMore()}
-        onEndReachedThreshold={0.3}
-        onScroll={this.scrollHandler}
-        ref={flatList => { this.messageList = flatList }}
-        refreshing={!!pending}
-        renderItem={this.renderItem} />
-      <MessageInput
-        blurOnSubmit={false}
-        multiline
-        onSubmit={this.createMessage}
-        sendIsTyping={sendIsTyping}
-        placeholder='Write something...' />
-      <PeopleTyping />
-      {showNotificationOverlay && <NotificationOverlay
-        position='bottom'
-        type={isConnected ? 'info' : 'error'}
-        permanent={!isConnected}
-        message={overlayMessage}
-        onPress={this.scrollToBottom} />}
-      <SocketSubscriber type='post' id={id} />
-    </View>
+    return (
+      <View style={styles.container}>
+        {pending && <Loading />}
+        <FlatList
+          style={styles.messageList}
+          data={messages}
+          keyExtractor={item => item.id}
+          onEndReached={() => this.fetchMore()}
+          onEndReachedThreshold={0.3}
+          onScroll={this.scrollHandler}
+          ref={flatList => { this.messageList = flatList }}
+          refreshing={!!pending}
+          renderItem={this.renderItem}
+        />
+        <MessageInput
+          blurOnSubmit={false}
+          multiline
+          onSubmit={this.createMessage}
+          sendIsTyping={sendIsTyping}
+          placeholder='Write something...'
+        />
+        <PeopleTyping />
+        {showNotificationOverlay && <NotificationOverlay
+          position='bottom'
+          type={isConnected ? 'info' : 'error'}
+          permanent={!isConnected}
+          message={overlayMessage}
+          onPress={this.scrollToBottom}
+                                    />}
+        <SocketSubscriber type='post' id={id} />
+      </View>
+    )
   }
 
   render () {

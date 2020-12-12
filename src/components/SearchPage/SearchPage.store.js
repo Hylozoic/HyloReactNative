@@ -58,7 +58,7 @@ export function getSearchFilter (state) {
   return state[MODULE_NAME].filter
 }
 
-export function fetchSearchResults ({search, offset = 0, filter}) {
+export function fetchSearchResults ({ search, offset = 0, filter }) {
   return {
     type: FETCH_SEARCH,
     graphql: {
@@ -151,7 +151,7 @@ export function presentSearchResult (searchResult, session) {
   const contentRaw = searchResult.getContent(session)
   const type = contentRaw.constructor.modelName
 
-  var content = contentRaw
+  let content = contentRaw
 
   if (type === 'Post') {
     content = {

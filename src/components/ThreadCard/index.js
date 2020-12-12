@@ -16,14 +16,16 @@ export default function ThreadCard (props) {
     ? [get('avatarUrl', currentUser)]
     : map('avatarUrl', otherParticipants)
 
-  return <View style={[styles.threadCard, unread && styles.highlight]}>
-    <ThreadAvatars avatarUrls={avatarUrls} />
-    <View style={[styles.messageContent, isLast && styles.lastCard]}>
-      <Text style={styles.header}>{names}</Text>
-      <Text style={styles.body} numberOfLines={2}>{messageCreatorPrepend}{message.text}</Text>
-      <Text style={styles.date}>{humanDate(get('createdAt', message))}</Text>
+  return (
+    <View style={[styles.threadCard, unread && styles.highlight]}>
+      <ThreadAvatars avatarUrls={avatarUrls} />
+      <View style={[styles.messageContent, isLast && styles.lastCard]}>
+        <Text style={styles.header}>{names}</Text>
+        <Text style={styles.body} numberOfLines={2}>{messageCreatorPrepend}{message.text}</Text>
+        <Text style={styles.date}>{humanDate(get('createdAt', message))}</Text>
+      </View>
     </View>
-  </View>
+  )
 }
 
 export function lastMessageCreator (message, currentUser, participants) {
@@ -45,13 +47,15 @@ export function threadNames (names) {
   }
 }
 
-export function ThreadAvatars ({avatarUrls}) {
+export function ThreadAvatars ({ avatarUrls }) {
   const count = avatarUrls.length
-  return <View style={styles.threadAvatars}>
-    {(count <= 2) && <Avatar avatarUrl={avatarUrls[0]} style={styles.firstThreadAvatar} />}
-    {count === 2 && <Avatar avatarUrl={avatarUrls[1]} style={styles.restThreadAvatars} />}
-    {count > 2 && <Avatar avatarUrl={avatarUrls[0]} style={styles.firstThreadAvatar} />}
-    {count > 2 && <Avatar avatarUrl={avatarUrls[1]} style={styles.restThreadAvatars} />}
-    {count > 3 && <View style={styles.count}><Text style={styles.countText}>+{count - 2}</Text></View>}
-  </View>
+  return (
+    <View style={styles.threadAvatars}>
+      {(count <= 2) && <Avatar avatarUrl={avatarUrls[0]} style={styles.firstThreadAvatar} />}
+      {count === 2 && <Avatar avatarUrl={avatarUrls[1]} style={styles.restThreadAvatars} />}
+      {count > 2 && <Avatar avatarUrl={avatarUrls[0]} style={styles.firstThreadAvatar} />}
+      {count > 2 && <Avatar avatarUrl={avatarUrls[1]} style={styles.restThreadAvatars} />}
+      {count > 3 && <View style={styles.count}><Text style={styles.countText}>+{count - 2}</Text></View>}
+    </View>
+  )
 }

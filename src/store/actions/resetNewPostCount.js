@@ -1,5 +1,5 @@
-export const RESET_NEW_POST_COUNT = `RESET_NEW_POST_COUNT`
-export const RESET_NEW_POST_COUNT_PENDING = `RESET_NEW_POST_COUNT_PENDING`
+export const RESET_NEW_POST_COUNT = 'RESET_NEW_POST_COUNT'
+export const RESET_NEW_POST_COUNT_PENDING = 'RESET_NEW_POST_COUNT_PENDING'
 
 export default function resetNewPostCount (id, type) {
   if (!['CommunityTopic', 'Membership'].includes(type)) {
@@ -17,7 +17,7 @@ export default function resetNewPostCount (id, type) {
         }
       }
     },
-    meta: {id, type, optimistic: true}
+    meta: { id, type, optimistic: true }
   }
 }
 

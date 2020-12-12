@@ -1,7 +1,7 @@
 import 'react-native'
 import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
-import Comment, {CommentMenu} from './Comment'
+import Comment, { CommentMenu } from './Comment'
 
 it('renders correctly', () => {
   const comment = {
@@ -49,7 +49,8 @@ it('shows the post title when displayPostTitle is true', () => {
   renderer.render(<Comment
     comment={comment}
     style={style}
-    displayPostTitle />)
+    displayPostTitle
+                  />)
   const actual = renderer.getRenderOutput()
 
   expect(actual).toMatchSnapshot()
@@ -60,7 +61,8 @@ describe('commentMenu', () => {
     const deleteComment = jest.fn()
     const renderer = new ReactShallowRenderer()
     renderer.render(<CommentMenu
-      deleteComment={deleteComment} />)
+      deleteComment={deleteComment}
+                    />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()

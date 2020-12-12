@@ -22,9 +22,9 @@ describe('reducer', () => {
 
     it('clears errors', () => {
       expect(reducer(state, action))
-      .toEqual({
-        errors: {}
-      })
+        .toEqual({
+          errors: {}
+        })
     })
   })
 
@@ -46,11 +46,11 @@ describe('reducer', () => {
 
     it('sets the email error', () => {
       expect(reducer(state, action))
-      .toEqual({
-        errors: {
-          email: 'That address is already in use. Try logging in instead.'
-        }
-      })
+        .toEqual({
+          errors: {
+            email: 'That address is already in use. Try logging in instead.'
+          }
+        })
     })
   })
 
@@ -71,13 +71,13 @@ describe('reducer', () => {
 
     it('updates those settings', () => {
       expect(reducer(state, action))
-      .toEqual({
-        userSettings: {
-          name: 'Jones',
-          email: 'zeus@olympus.com',
-          location: 'home'
-        }
-      })
+        .toEqual({
+          userSettings: {
+            name: 'Jones',
+            email: 'zeus@olympus.com',
+            location: 'home'
+          }
+        })
     })
   })
 })
@@ -120,14 +120,14 @@ describe('pseudo selectors', () => {
   describe('getUserSettings', () => {
     it('returns the userSettings', () => {
       expect(getUserSettings(state))
-      .toEqual(state[MODULE_NAME].userSettings)
+        .toEqual(state[MODULE_NAME].userSettings)
     })
   })
 
   describe('getSignupErrors', () => {
     it('returns the errors', () => {
       expect(getSignupErrors(state))
-      .toEqual(state[MODULE_NAME].errors)
+        .toEqual(state[MODULE_NAME].errors)
     })
   })
 })

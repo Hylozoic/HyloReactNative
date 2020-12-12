@@ -10,7 +10,7 @@ export function mapStateToProps (state, props) {
 
 export function mapDispatchToProps (dispatch, props) {
   return {
-    changeSetting: setting => value => dispatch(updateLocalUserSettings({[setting]: value})),
+    changeSetting: setting => value => dispatch(updateLocalUserSettings({ [setting]: value })),
     updateUserSettings: settings => dispatch(updateUserSettings(settings))
   }
 }
@@ -19,11 +19,11 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
   const goToNext = () => ownProps.navigation.navigate('SignupFlow4')
   const { location } = stateProps
   const saveAndNext = () => {
-    dispatchProps.updateUserSettings({location})
-    .then(({ error }) => {
-      if (error) return
-      return goToNext()
-    })
+    dispatchProps.updateUserSettings({ location })
+      .then(({ error }) => {
+        if (error) return
+        return goToNext()
+      })
   }
 
   return {

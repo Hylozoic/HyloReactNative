@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native'
 import { defaults } from 'lodash'
 import { white40onCaribbeanGreen, white, amaranth } from 'style/colors'
 
-let styles = StyleSheet.create({
+const styles = StyleSheet.create({
   containerStyle: {
     padding: 10,
     backgroundColor: '#000',

@@ -1,7 +1,7 @@
 import { getPostFieldsFragment } from './fetchPost'
 import { get } from 'lodash/fp'
 
-export const FETCH_POSTS = `FETCH_POSTS`
+export const FETCH_POSTS = 'FETCH_POSTS'
 
 export default function fetchPosts (
   { subject, slug, networkSlug, sortBy, offset, search, filter, topic },
@@ -9,7 +9,7 @@ export default function fetchPosts (
   // fetchProjects uses this action generator but provides a different type
   type = FETCH_POSTS
 ) {
-  var query, extractModel, getItems, projectFilter
+  let query, extractModel, getItems, projectFilter
 
   if (subject === 'community') {
     query = communityQuery

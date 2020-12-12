@@ -31,7 +31,7 @@ describe('SearchPage', () => {
         pending: false
       }
       const instance = ReactTestRenderer.create(<SearchPage {...props} />).getInstance()
-      instance.fetchMore({sendPushNotifications: true})
+      instance.fetchMore({ sendPushNotifications: true })
       expect(props.fetchMoreSearchResults).toHaveBeenCalled()
     })
 
@@ -42,7 +42,7 @@ describe('SearchPage', () => {
         pending: true
       }
       const instance = ReactTestRenderer.create(<SearchPage {...props} />).getInstance()
-      instance.fetchMore({sendPushNotifications: true})
+      instance.fetchMore({ sendPushNotifications: true })
       expect(props.fetchMoreSearchResults).not.toHaveBeenCalled()
     })
   })
@@ -97,7 +97,7 @@ describe('SearchResult', () => {
       ...defaultProps,
       searchResult: {
         type: 'Person',
-        content: {id: 1}
+        content: { id: 1 }
       }
     }
 
@@ -113,7 +113,7 @@ describe('SearchResult', () => {
       ...defaultProps,
       searchResult: {
         type: 'Post',
-        content: {id: 1}
+        content: { id: 1 }
       }
     }
 
@@ -129,7 +129,7 @@ describe('SearchResult', () => {
       ...defaultProps,
       searchResult: {
         type: 'Comment',
-        content: {id: 1}
+        content: { id: 1 }
       }
     }
 

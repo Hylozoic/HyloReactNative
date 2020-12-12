@@ -70,7 +70,7 @@ describe('showFilePicker', () => {
 
   it('handles picker error', async () => {
     showFilePicker(props)
-    await DocumentPicker.finishShow({message: 'Zounds!'})
+    await DocumentPicker.finishShow({ message: 'Zounds!' })
 
     expect(props.upload).not.toHaveBeenCalled()
     expect(props.onComplete).toHaveBeenCalledWith('Zounds!')

@@ -19,7 +19,7 @@ import {
 export function makeFetchOpts (props) {
   const { community, network, sortBy } = props
 
-  var subject, slug, sortByName
+  let subject, slug, sortByName
 
   if (network) {
     subject = 'network'
@@ -48,7 +48,7 @@ export function sortKeysFactory (subject) {
     name: 'Name',
     location: 'Location'
   }
-  if (subject !== 'network') sortKeys['join'] = 'Newest'
+  if (subject !== 'network') sortKeys.join = 'Newest'
   return sortKeys
 }
 
@@ -61,7 +61,7 @@ export function mapStateToProps (state, props) {
   const search = getSearch(state)
   const sortBy = getSort(state)
 
-  const fetchOpts = makeFetchOpts({community, network, sortBy, search})
+  const fetchOpts = makeFetchOpts({ community, network, sortBy, search })
   const { slug, subject } = fetchOpts
 
   const getOpts = omit('subject', fetchOpts)

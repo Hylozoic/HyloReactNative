@@ -10,10 +10,12 @@ export default function CommunityChooserItemRow ({
   item,
   onPress
 }) {
-  return <TouchableOpacity style={styles.communityRow} onPress={() => onPress(item)}>
-    <Avatar style={styles.communityAvatar} avatarUrl={item.avatarUrl} dimension={30} />
-    <Text style={styles.communityName}>{item.name}</Text>
-  </TouchableOpacity>
+  return (
+    <TouchableOpacity style={styles.communityRow} onPress={() => onPress(item)}>
+      <Avatar style={styles.communityAvatar} avatarUrl={item.avatarUrl} dimension={30} />
+      <Text style={styles.communityName}>{item.name}</Text>
+    </TouchableOpacity>
+  )
 }
 CommunityChooserItemRow.propTypes = propTypesForItemRowComponent
 

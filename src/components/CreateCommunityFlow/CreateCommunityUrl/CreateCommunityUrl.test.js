@@ -17,7 +17,7 @@ it('matches last snapshot', () => {
 it('matches last snapshot when there is an error', () => {
   const renderer = ReactTestRenderer.create(<CreateCommunityUrl />)
   const instance = renderer.getInstance()
-  instance.setState({error: 'This is an error'})
+  instance.setState({ error: 'This is an error' })
   expect(renderer.toJSON()).toMatchSnapshot()
 })
 
@@ -25,7 +25,7 @@ it('clears error from state with clearErrors', () => {
   const renderer = ReactTestRenderer.create(<CreateCommunityUrl />)
   const instance = renderer.getInstance()
   const error = 'some error'
-  instance.setState({error})
+  instance.setState({ error })
   instance.clearErrors()
   expect(instance.state.error).toBeNull()
 })

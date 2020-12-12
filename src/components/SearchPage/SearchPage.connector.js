@@ -16,14 +16,14 @@ export function mapStateToProps (state, props) {
   const searchTerm = getSearchTerm(state, props)
   const filter = getSearchFilter(state, props)
 
-  const queryResultProps = {search: searchTerm, type: filter}
+  const queryResultProps = { search: searchTerm, type: filter }
 
   const searchResults = getSearchResults(state, queryResultProps)
   const hasMore = getHasMoreSearchResults(state, queryResultProps)
   const pending = !!state.pending[FETCH_SEARCH]
 
-  const goToPost = id => props.navigation.navigate('PostDetails', {id})
-  const goToPerson = id => props.navigation.navigate('MemberProfile', {id})
+  const goToPost = id => props.navigation.navigate('PostDetails', { id })
+  const goToPerson = id => props.navigation.navigate('MemberProfile', { id })
 
   return {
     searchTerm,
@@ -50,10 +50,10 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
   const { searchTerm, filter, searchResults, hasMore } = stateProps
 
   const fetchSearchResults = () =>
-    dispatchProps.fetchSearchResults({search: searchTerm, filter})
+    dispatchProps.fetchSearchResults({ search: searchTerm, filter })
 
   const fetchMoreSearchResults = () => hasMore
-    ? dispatchProps.fetchSearchResults({search: searchTerm, offset: searchResults.length, filter})
+    ? dispatchProps.fetchSearchResults({ search: searchTerm, offset: searchResults.length, filter })
     : () => {}
 
   return {

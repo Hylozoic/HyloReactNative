@@ -3,7 +3,7 @@ import { capeCod10, rhino60, rhino30, fuchsiaPink, prim, caribbeanGreen } from '
 
 export default {
   postCard: {
-    marginBottom: 16,
+    marginBottom: 16
   },
   container: {
     flex: 1,

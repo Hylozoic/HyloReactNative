@@ -16,14 +16,14 @@ it('returns null when display is false', () => {
 it('matches last snapshot when visible is true', () => {
   const renderer = ReactTestRenderer.create(<LoadingModal />)
   const instance = renderer.getInstance()
-  instance.setState({visible: true})
+  instance.setState({ visible: true })
   expect(renderer.toJSON()).toMatchSnapshot()
 })
 
 describe('componentWillReceiveProps', () => {
   it('sets visible to true when display is true', () => {
     const instance = ReactTestRenderer.create(<LoadingModal />).getInstance()
-    instance.UNSAFE_componentWillReceiveProps({shouldDisplay: true})
+    instance.UNSAFE_componentWillReceiveProps({ shouldDisplay: true })
     expect(instance.state.visible).toEqual(true)
   })
 })

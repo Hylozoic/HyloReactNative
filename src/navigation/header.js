@@ -23,27 +23,30 @@ export class HeaderButton extends PureComponent {
   componentDidUpdate (prevProps) {
     const { disabled } = this.props
     if (disabled !== prevProps.disabled) {
-      this.setState({disabled})
+      this.setState({ disabled })
     }
   }
 
   onPress = () => {
     const { disableOnClick } = this.props
     if (disableOnClick === true) {
-      this.setState({disabled: true})
+      this.setState({ disabled: true })
     }
     this.props.onPress()
   }
+
   render () {
     const { onPress, text } = this.props
     const { disabled } = this.state
 
     if (typeof onPress !== 'function') throw new Error('HeaderButton: onPress is not a function.')
-    return <TouchableOpacity style={{ marginRight: 12 }} onPress={this.onPress} hitSlop={{top: 7, bottom: 7, left: 7, right: 7}} disabled={disabled} >
-      {text === 'Close'
-        ? <Icon name='Ex' style={styles.exIcon} />
-        : <Text style={[styles.button, disabled && styles.disabled]}>{text}</Text>}
-    </TouchableOpacity>
+    return (
+      <TouchableOpacity style={{ marginRight: 12 }} onPress={this.onPress} hitSlop={{ top: 7, bottom: 7, left: 7, right: 7 }} disabled={disabled}>
+        {text === 'Close'
+          ? <Icon name='Ex' style={styles.exIcon} />
+          : <Text style={[styles.button, disabled && styles.disabled]}>{text}</Text>}
+      </TouchableOpacity>
+    )
   }
 }
 
@@ -99,18 +102,19 @@ export default function header ({ goBack }, { params }, { headerBackButton, left
     ...options
   }
   if (left) {
-    headerOptions.headerLeft = () => 
+    headerOptions.headerLeft = () =>
       left === 'close'
         ? headerClose(goBack)
         : <HeaderButton {...left} disableOnClick={disableOnClick} />
-    headerOptions.headerTitleStyle = [ styles.title, styles.center ]
+    headerOptions.headerTitleStyle = [styles.title, styles.center]
   }
   if (right) headerOptions.headerRight = () => <HeaderButton {...right} disableOnClick={disableOnClick} />
 
   if (headerBackButton) {
     headerOptions.headerLeft = () => <HeaderBackButton
       onPress={headerBackButton}
-      tintColor={tintColor} />
+      tintColor={tintColor}
+                                     />
   }
 
   return headerOptions

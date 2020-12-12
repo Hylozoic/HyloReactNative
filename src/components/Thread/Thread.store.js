@@ -95,8 +95,8 @@ export function createMessage (messageThreadId, text) {
 export function updateThreadReadTime (id) {
   return {
     type: UPDATE_THREAD_READ_TIME,
-    payload: {api: {path: `/noo/post/${id}/update-last-read`, method: 'POST'}},
-    meta: {id}
+    payload: { api: { path: `/noo/post/${id}/update-last-read`, method: 'POST' } },
+    meta: { id }
   }
 }
 
@@ -106,7 +106,7 @@ export function isWithinBatchLimit (d1, d2) {
 }
 
 export function refineMessage ({ id, createdAt, creator, text }, i, messages) {
-  const creatorFields = pick([ 'id', 'name', 'avatarUrl' ], creator.ref)
+  const creatorFields = pick(['id', 'name', 'avatarUrl'], creator.ref)
 
   // This might seem counter-intuitive, because the list is reversed. These
   // values handle compact display of consecutive messages by the same creator
@@ -138,7 +138,7 @@ export function presentThread (thread, currentUserId) {
     .filter(p => p.id !== currentUserId)
     .toRefArray()
     .map(firstName)
-  var title
+  let title
   if (isEmpty(otherParticipants)) {
     title = 'You'
   } else {
@@ -165,9 +165,9 @@ export const getAndPresentMessages = ormCreateSelector(
   (_, { route }) => route.params.id,
   ({ Message }, id) =>
     Message.filter(m => m.messageThread === id)
-    .orderBy(m => Number(m.id), 'desc')
-    .toModelArray()
-    .map(refineMessage)
+      .orderBy(m => Number(m.id), 'desc')
+      .toModelArray()
+      .map(refineMessage)
 )
 
 const getMessageResults = makeGetQueryResults(FETCH_MESSAGES)

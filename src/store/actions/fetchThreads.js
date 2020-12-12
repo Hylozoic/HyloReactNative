@@ -1,6 +1,6 @@
 import { get } from 'lodash/fp'
 
-export const FETCH_THREADS = `FETCH_THREADS`
+export const FETCH_THREADS = 'FETCH_THREADS'
 
 export default function fetchThreads (first = 10, offset = 0, reset) {
   return {

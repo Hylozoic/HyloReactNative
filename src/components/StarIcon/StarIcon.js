@@ -1,15 +1,17 @@
 import React from 'react'
 import { View } from 'react-native'
 import {
-    rhino80, linkWater
+  rhino80, linkWater
 } from 'style/colors'
 import Icon from '../Icon'
 
 export default function StarIcon ({ style, theme = {} }) {
-  return <View style={[styles.wrapper, style, theme.wrapper]}>
-    <View style={[styles.background, theme.background]} />
-    <Icon name='Star' style={[styles.icon, theme.icon]} />
-  </View>
+  return (
+    <View style={[styles.wrapper, style, theme.wrapper]}>
+      <View style={[styles.background, theme.background]} />
+      <Icon name='Star' style={[styles.icon, theme.icon]} />
+    </View>
+  )
 }
 
 const styles = {

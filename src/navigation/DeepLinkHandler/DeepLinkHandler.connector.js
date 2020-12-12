@@ -8,6 +8,6 @@ function mapStateToProps (state, props) {
   }
 }
 
-const mapDispatchToProps = {storeNavigationAction}
+const mapDispatchToProps = { storeNavigationAction }
 
 export default connect(mapStateToProps, mapDispatchToProps)

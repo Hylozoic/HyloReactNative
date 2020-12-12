@@ -6,7 +6,7 @@ describe('ProjectMembersSummary', () => {
   it('renders as expected', () => {
     const props = {
       count: 5,
-      members: [{id: 1}],
+      members: [{ id: 1 }],
       onPress: () => {}
     }
     const renderer = new ReactShallowRenderer()
@@ -20,7 +20,7 @@ describe('ProjectMembersSummary', () => {
   it('renders as expected without an onPress handler', () => {
     const props = {
       count: 5,
-      members: [{id: 1}]
+      members: [{ id: 1 }]
     }
     const renderer = new ReactShallowRenderer()
     renderer.render(

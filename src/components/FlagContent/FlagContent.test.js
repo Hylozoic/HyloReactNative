@@ -7,8 +7,10 @@ import FlagContent from './FlagContent'
 describe('FlagContent', () => {
   it('matches the last snapshot', () => {
     const renderer = new ReactShallowRenderer()
-    renderer.render(<FlagContent visible
-      onClose={() => { }} />
+    renderer.render(<FlagContent
+      visible
+      onClose={() => { }}
+                    />
     )
     const actual = renderer.getRenderOutput()
 
@@ -17,9 +19,11 @@ describe('FlagContent', () => {
 
   it('changes title based on type', () => {
     const renderer = new ReactShallowRenderer()
-    renderer.render(<FlagContent visible
+    renderer.render(<FlagContent
+      visible
       type='post'
-      onClose={() => { }} />
+      onClose={() => { }}
+                    />
     )
     const actual = renderer.getRenderOutput()
 
@@ -28,9 +32,11 @@ describe('FlagContent', () => {
 
   it('calls onClose successfully', () => {
     const onClose = jest.fn()
-    const instance = TestRenderer.create(<FlagContent visible
+    const instance = TestRenderer.create(<FlagContent
+      visible
       type='post'
-      onClose={onClose} />
+      onClose={onClose}
+                                         />
     ).root.instance
 
     instance.closeModal()
@@ -42,15 +48,17 @@ describe('FlagContent', () => {
     const onClose = jest.fn()
     const submitFlagContent = jest.fn()
 
-    const linkData = {id: 33, type: 'post'}
-    const instance = TestRenderer.create(<FlagContent visible
+    const linkData = { id: 33, type: 'post' }
+    const instance = TestRenderer.create(<FlagContent
+      visible
       type='post'
       linkData={linkData}
       submitFlagContent={submitFlagContent}
-      onClose={onClose} />
+      onClose={onClose}
+                                         />
     ).root.instance
 
-    instance.setState({selectedCategory: 'inappropriate'})
+    instance.setState({ selectedCategory: 'inappropriate' })
 
     instance.submit('  my reason  ')
 
@@ -64,19 +72,21 @@ describe('FlagContent', () => {
     const onClose = jest.fn()
     const submitFlagContent = jest.fn()
 
-    const linkData = {id: 33, type: 'post'}
-    const renderer = TestRenderer.create(<FlagContent visible
+    const linkData = { id: 33, type: 'post' }
+    const renderer = TestRenderer.create(<FlagContent
+      visible
       type='post'
       linkData={linkData}
       submitFlagContent={submitFlagContent}
-      onClose={onClose} />
+      onClose={onClose}
+                                         />
     )
 
     expect(renderer.toJSON()).toMatchSnapshot()
 
     const instance = renderer.getInstance()
 
-    instance.setState({selectedCategory: 'other'})
+    instance.setState({ selectedCategory: 'other' })
 
     expect(instance.isOptionalExplanation()).toBeFalsy()
     expect(instance.state.highlightRequired).toBeFalsy()

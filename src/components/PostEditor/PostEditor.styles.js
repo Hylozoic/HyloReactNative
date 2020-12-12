@@ -18,7 +18,7 @@ export default {
   container: {
     flex: 1,
     backgroundColor: 'white',
-    paddingHorizontal: 16,
+    paddingHorizontal: 16
   },
   scrollContainer: {
     flex: 1
@@ -34,7 +34,7 @@ export default {
     fontSize: 14,
     fontFamily: 'Circular-Book',
     margin: 0,
-    padding: 0,
+    padding: 0
   },
   textInputPlaceholder: {
     height: isIOS ? 22 : null,

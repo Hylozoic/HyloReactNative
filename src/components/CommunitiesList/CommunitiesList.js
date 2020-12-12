@@ -15,30 +15,36 @@ export default function CommunitiesList ({
       communities={communitiesRow}
       onPress={onPress}
       RightIcon={RightIcon}
-      key={communitiesRow[0].id} />)
+      key={communitiesRow[0].id}
+    />)
 }
 
 export function CommunityRow ({ communities, goToCommunity, onPress, RightIcon }) {
-  return <View style={[styles.communityRow, styles.row]}>
-    {communities.map(community =>
-      <CommunityCell
-        community={community}
-        goToCommunity={goToCommunity}
-        onPress={onPress}
-        key={community.id}
-        RightIcon={RightIcon} />)}
-  </View>
+  return (
+    <View style={[styles.communityRow, styles.row]}>
+      {communities.map(community =>
+        <CommunityCell
+          community={community}
+          goToCommunity={goToCommunity}
+          onPress={onPress}
+          key={community.id}
+          RightIcon={RightIcon}
+        />)}
+    </View>
+  )
 }
 
 export function CommunityCell ({ community, onPress, RightIcon }) {
   const { name, avatarUrl } = community
-  const imageSource = {uri: avatarUrl || DEFAULT_AVATAR}
+  const imageSource = { uri: avatarUrl || DEFAULT_AVATAR }
 
-  return <TouchableOpacity style={[styles.communityCell, styles.row]} onPress={() => onPress && onPress(community.id)}>
-    <Image source={imageSource} style={styles.communityAvatar} />
-    <Text style={[styles.linkText, styles.communityCell]} numberOfLines={1}>{name}</Text>
-    {RightIcon && <RightIcon />}
-  </TouchableOpacity>
+  return (
+    <TouchableOpacity style={[styles.communityCell, styles.row]} onPress={() => onPress && onPress(community.id)}>
+      <Image source={imageSource} style={styles.communityAvatar} />
+      <Text style={[styles.linkText, styles.communityCell]} numberOfLines={1}>{name}</Text>
+      {RightIcon && <RightIcon />}
+    </TouchableOpacity>
+  )
 }
 
 const styles = {

@@ -6,7 +6,7 @@ import {
 import { get } from 'lodash/fp'
 import orm from 'store/models'
 
-const variables = {slug: 'foo', sortBy: 'name'}
+const variables = { slug: 'foo', sortBy: 'name' }
 
 const key = JSON.stringify({
   type: FETCH_POSTS,
@@ -22,14 +22,14 @@ it('adds data to empty state', () => {
         community: {
           posts: {
             total: 22,
-            items: [{id: 7}, {id: 8}, {id: 9}],
+            items: [{ id: 7 }, { id: 8 }, { id: 9 }],
             hasMore: true
           }
         }
       }
     },
     meta: {
-      graphql: {variables},
+      graphql: { variables },
       extractQueryResults: {
         getItems: get('payload.data.community.posts')
       }
@@ -61,14 +61,14 @@ it('appends to existing data, ignoring duplicates', () => {
         community: {
           posts: {
             total: 22,
-            items: [{id: 7}, {id: 8}, {id: 9}],
+            items: [{ id: 7 }, { id: 8 }, { id: 9 }],
             hasMore: false
           }
         }
       }
     },
     meta: {
-      graphql: {variables},
+      graphql: { variables },
       extractQueryResults: {
         getItems: get('payload.data.community.posts')
       }
@@ -136,14 +136,14 @@ it('replaces existing data when the "reset" option is set', () => {
         community: {
           posts: {
             total: 22,
-            items: [{id: 7}, {id: 8}, {id: 9}],
+            items: [{ id: 7 }, { id: 8 }, { id: 9 }],
             hasMore: false
           }
         }
       }
     },
     meta: {
-      graphql: {variables},
+      graphql: { variables },
       extractQueryResults: {
         getItems: get('payload.data.community.posts'),
         reset: true
@@ -169,7 +169,7 @@ it('uses getType and getParams from extractQueryResults', () => {
         community: {
           posts: {
             total: 22,
-            items: [{id: 7}, {id: 8}, {id: 9}],
+            items: [{ id: 7 }, { id: 8 }, { id: 9 }],
             hasMore: true
           }
         }
@@ -199,8 +199,8 @@ it('uses getType and getParams from extractQueryResults', () => {
 
 describe('buildKey', () => {
   it('omits blank parameters', () => {
-    expect(buildKey('actionType', {slug: 'foo', search: null}))
-    .toEqual('{"type":"actionType","params":{"slug":"foo"}}')
+    expect(buildKey('actionType', { slug: 'foo', search: null }))
+      .toEqual('{"type":"actionType","params":{"slug":"foo"}}')
   })
 })
 

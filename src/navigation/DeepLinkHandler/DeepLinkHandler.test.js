@@ -2,7 +2,7 @@ import DeepLinkHandler from './DeepLinkHandler'
 import TestRenderer from 'react-test-renderer'
 import React from 'react'
 
-jest.mock('util/platform', () => ({isIOS: true}))
+jest.mock('util/platform', () => ({ isIOS: true }))
 jest.mock('react-native-htmlview', () => {})
 jest.mock('react-native-onesignal', () => ({
   addEventListener: jest.fn()
@@ -10,13 +10,13 @@ jest.mock('react-native-onesignal', () => ({
 jest.mock('react-native-reanimated', () => require('react-native-reanimated/mock'))
 jest.useFakeTimers()
 
-const user = {id: '1'}
-const signupInProgressUser = {id: '1', settings: { signupInProgress: true }}
+const user = { id: '1' }
+const signupInProgressUser = { id: '1', settings: { signupInProgress: true } }
 const initialUrl = '/t/17'
 const navigateAction = {
   type: 'Navigation/NAVIGATE',
   routeName: 'Thread',
-  params: {id: '17'}
+  params: { id: '17' }
 }
 
 let mockNavigator
@@ -31,7 +31,7 @@ beforeEach(() => {
 function expectResetToRoute (routeName) {
   expect(mockNavigator.dispatch).toHaveBeenCalledWith({
     actions: [
-      {routeName, type: 'Navigation/NAVIGATE'}
+      { routeName, type: 'Navigation/NAVIGATE' }
     ],
     index: 0,
     key: null,
@@ -40,14 +40,18 @@ function expectResetToRoute (routeName) {
 }
 
 it('sends a logged-in user with sign-up in progress back to sign-up', () => {
-  TestRenderer.create(<DeepLinkHandler currentUser={signupInProgressUser}
-    navigator={mockNavigator} />)
+  TestRenderer.create(<DeepLinkHandler
+    currentUser={signupInProgressUser}
+    navigator={mockNavigator}
+                      />)
   expectResetToRoute('SignupFlow1')
 })
 
 it('sends a logged-in user to Main', () => {
-  TestRenderer.create(<DeepLinkHandler currentUser={user}
-    navigator={mockNavigator} />)
+  TestRenderer.create(<DeepLinkHandler
+    currentUser={user}
+    navigator={mockNavigator}
+                      />)
   expectResetToRoute('Main')
 })
 
@@ -63,9 +67,11 @@ it('handles an initial push notification event', () => {
     }
   }
 
-  TestRenderer.create(<DeepLinkHandler currentUser={user}
+  TestRenderer.create(<DeepLinkHandler
+    currentUser={user}
     navigator={mockNavigator}
-    onesignalNotification={notification} />)
+    onesignalNotification={notification}
+                      />)
 
   jest.runAllTimers()
 
@@ -76,7 +82,8 @@ it('handles an initial url', () => {
   TestRenderer.create(<DeepLinkHandler
     currentUser={user}
     initialUrl={initialUrl}
-    navigator={mockNavigator} />)
+    navigator={mockNavigator}
+                      />)
 
   jest.runAllTimers()
   expect(mockNavigator.dispatch).toHaveBeenLastCalledWith(navigateAction)
@@ -88,7 +95,8 @@ it('stores the action for a logged-out user', () => {
   TestRenderer.create(<DeepLinkHandler
     initialUrl={initialUrl}
     storeNavigationAction={storeNavigationAction}
-    navigator={mockNavigator} />)
+    navigator={mockNavigator}
+                      />)
 
   jest.runAllTimers()
 
@@ -111,7 +119,8 @@ it('redirects to an invitation link for a logged-out user', () => {
   TestRenderer.create(<DeepLinkHandler
     initialUrl={invitationUrl}
     storeNavigationAction={storeNavigationAction}
-    navigator={mockNavigator} />)
+    navigator={mockNavigator}
+                      />)
 
   jest.runAllTimers()
 

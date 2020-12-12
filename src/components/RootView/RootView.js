@@ -14,20 +14,27 @@ export default function RootView ({
   useMemo(() => { loadCurrentUserSession() }, [])
 
   if (loading) {
-    return <View style={styles.loadingContainer}>
-      <Loading style={styles.loading} />
-    </View>
+    return (
+      <View style={styles.loadingContainer}>
+        <Loading style={styles.loading} />
+      </View>
+    )
   }
-  
+
   // TODO: Deeplink handling using openedPushNotification
 
-  return <View style={{flex: 1}}>
-    <VersionCheck />
-    <RootNavigator isSignedIn={signedIn} />
-  </View>
+  return (
+    <View style={styles.rootContainer}>
+      <VersionCheck />
+      <RootNavigator isSignedIn={signedIn} />
+    </View>
+  )
 }
 
 const styles = {
+  rootContainer: {
+    flex: 1
+  },
   loadingContainer: {
     position: 'absolute',
     top: 0,

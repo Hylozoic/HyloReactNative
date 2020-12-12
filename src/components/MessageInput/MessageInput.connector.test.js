@@ -3,7 +3,7 @@ import { MODULE_NAME } from '../NewMessage/NewMessage.store'
 
 describe('mapStateToProps', () => {
   it('returns the right keys', () => {
-    expect(mapStateToProps({[MODULE_NAME]: {}}, {})).toMatchSnapshot()
+    expect(mapStateToProps({ [MODULE_NAME]: {} }, {})).toMatchSnapshot()
   })
 })
 

@@ -11,7 +11,7 @@ const items = [
 
 const testProps = {
   fetchSearchSuggestions: () => {
-    return { type: 'test-search' } 
+    return { type: 'test-search' }
   },
   getSearchSuggestions: () => items,
   setSearchTerm: jest.fn(),
@@ -35,20 +35,19 @@ describe('ItemChooser', () => {
   })
 
   describe('#setupItemSections', () => {
-
     describe('for picker', () => {
       it('renders sections', () => {
         const props = {
           ...testProps,
           initialItems: [
-            {id: 1},
-            {id: 2},
-            {id: 3}
+            { id: 1 },
+            { id: 2 },
+            { id: 3 }
           ]
         }
         const renderer = ReactTestRenderer.create(<ItemChooser {...props} />)
         const instance = renderer.getInstance()
-        instance.setState({ chosenItems: [{id: 5}] })
+        instance.setState({ chosenItems: [{ id: 5 }] })
 
         expect(instance.setupItemSections([])).toMatchSnapshot()
       })
@@ -58,15 +57,15 @@ describe('ItemChooser', () => {
           ...testProps,
           searchTerm: 'test',
           initialItems: [
-            {id: 1}
+            { id: 1 }
           ]
         }
         const renderer = ReactTestRenderer.create(<ItemChooser {...props} />)
         const instance = renderer.getInstance()
         const suggestedItems = [
-          {id: 1},
-          {id: 2},
-          {id: 3}
+          { id: 1 },
+          { id: 2 },
+          { id: 3 }
         ]
         expect(instance.setupItemSections(suggestedItems)).toMatchSnapshot()
       })
@@ -76,9 +75,9 @@ describe('ItemChooser', () => {
           ...testProps,
           defaultSuggestedItemsLabel: 'Recent Items',
           defaultSuggestedItems: [
-            {id: 1},
-            {id: 2},
-            {id: 3}
+            { id: 1 },
+            { id: 2 },
+            { id: 3 }
           ]
         }
         const renderer = ReactTestRenderer.create(<ItemChooser {...props} />)
@@ -94,15 +93,15 @@ describe('ItemChooser', () => {
           updateItems: jest.fn(),
           searchTerm: 'test',
           initialItems: [
-            {id: 1}
+            { id: 1 }
           ]
         }
         const renderer = ReactTestRenderer.create(<ItemChooser {...props} />)
         const instance = renderer.getInstance()
         const suggestedItems = [
-          {id: 1},
-          {id: 2},
-          {id: 3}
+          { id: 1 },
+          { id: 2 },
+          { id: 3 }
         ]
         expect(instance.setupItemSections(suggestedItems)).toMatchSnapshot()
       })
@@ -112,9 +111,9 @@ describe('ItemChooser', () => {
           ...testProps,
           updateItems: jest.fn(),
           initialItems: [
-            {id: 1},
-            {id: 2},
-            {id: 3}
+            { id: 1 },
+            { id: 2 },
+            { id: 3 }
           ]
         }
         const renderer = ReactTestRenderer.create(<ItemChooser {...props} />)
@@ -128,15 +127,15 @@ describe('ItemChooser', () => {
           updateItems: jest.fn(),
           searchTerm: 'test',
           initialItems: [
-            {id: 1}
+            { id: 1 }
           ]
         }
         const renderer = ReactTestRenderer.create(<ItemChooser {...props} />)
         const instance = renderer.getInstance()
         const suggestedItems = [
-          {id: 1},
-          {id: 2},
-          {id: 3}
+          { id: 1 },
+          { id: 2 },
+          { id: 3 }
         ]
         expect(instance.setupItemSections(suggestedItems)).toMatchSnapshot()
       })
@@ -146,14 +145,14 @@ describe('ItemChooser', () => {
           ...testProps,
           updateItems: jest.fn(),
           initialItems: [
-            {id: 1}
+            { id: 1 }
           ]
         }
         const renderer = ReactTestRenderer.create(<ItemChooser {...props} />)
         const instance = renderer.getInstance()
         const chosenItems = [
-          {id: 2},
-          {id: 3}
+          { id: 2 },
+          { id: 3 }
         ]
         instance.setState({ chosenItems })
         expect(instance.setupItemSections([])).toMatchSnapshot()
@@ -164,14 +163,14 @@ describe('ItemChooser', () => {
           ...testProps,
           updateItems: jest.fn(),
           initialItems: [
-            {id: 1},
-            {id: 2},
-            {id: 3}
+            { id: 1 },
+            { id: 2 },
+            { id: 3 }
           ]
         }
         const renderer = ReactTestRenderer.create(<ItemChooser {...props} />)
         const instance = renderer.getInstance()
-        instance.setState({ chosenItems: [{id: 5}] })
+        instance.setState({ chosenItems: [{ id: 5 }] })
 
         expect(instance.setupItemSections([])).toMatchSnapshot()
       })

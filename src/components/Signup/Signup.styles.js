@@ -52,7 +52,7 @@ export default {
     fontSize: 16,
     marginBottom: 10
   },
-  
+
   // Connect with
   connectWith: loginStyles.connectWith,
   connectWithText: loginStyles.connectWithText,

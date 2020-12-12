@@ -56,10 +56,10 @@ export default class NewMessage extends React.Component {
   }
 
   addParticipant = participant => {
-    this.updateParticipants([ ...this.state.participants, participant ])
+    this.updateParticipants([...this.state.participants, participant])
   }
 
-  removeParticipant = participant => {
+  handleRemoveParticipant = participant => {
     const { participants } = this.state
     const updatedParticipants = participants.filter(p => p.id !== participant.id)
     this.updateParticipants(updatedParticipants)
@@ -101,45 +101,52 @@ export default class NewMessage extends React.Component {
     const { participants } = this.state
     const emptyParticipantsList = participants.length === 0
 
-    return <SafeAreaView style={{flex: 1}}>
-      <KeyboardFriendlyView
-        style={styles.container}
-        {...{...kavProps, behavior: 'padding'}} // is the default
-        key={mockViewKey || this.state.viewKey}>
-        <ScrollView>
-          <TouchableOpacity onPress={() => this.openParticipantChooser()} style={styles.participants}>
-            {participants.map((participant, index) =>
-              <Participant
-                participant={participant}
-                onPress={this.removeParticipant}
-                key={index} />)}
-          </TouchableOpacity>
-          <View style={styles.addParticipantButtonWrapper}>
-            <Button
-              text='Add Participant' 
-              style={styles.addParticipantButton}
-              onPress={() => this.openParticipantChooser()} />
-          </View>
-        </ScrollView>
-        <MessageInput
-          style={styles.messageInput}
-          multiline
-          onSubmit={this.createMessage}
-          onBlur={this.onBlurMessageInput}
-          placeholder='Type your message here'
-          emptyParticipants={emptyParticipantsList}
-        />
-      </KeyboardFriendlyView>
-    </SafeAreaView>
+    return (
+      <SafeAreaView style={{ flex: 1 }}>
+        <KeyboardFriendlyView
+          style={styles.container}
+          {...{ ...kavProps, behavior: 'padding' }} // is the default
+          key={mockViewKey || this.state.viewKey}
+        >
+          <ScrollView>
+            <TouchableOpacity onPress={() => this.openParticipantChooser()} style={styles.participants}>
+              {participants.map((participant, index) =>
+                <Participant
+                  participant={participant}
+                  onPress={this.handleRemoveParticipant}
+                  key={index}
+                />)}
+            </TouchableOpacity>
+            <View style={styles.addParticipantButtonWrapper}>
+              <Button
+                text='Add Participant'
+                style={styles.addParticipantButton}
+                onPress={() => this.openParticipantChooser()}
+              />
+            </View>
+          </ScrollView>
+          <MessageInput
+            style={styles.messageInput}
+            multiline
+            onSubmit={this.createMessage}
+            onBlur={this.onBlurMessageInput}
+            placeholder='Type your message here'
+            emptyParticipants={emptyParticipantsList}
+          />
+        </KeyboardFriendlyView>
+      </SafeAreaView>
+    )
   }
 }
 
 export function Participant ({ participant, onPress }) {
-  return <View style={[styles.participant]}>
-    <Avatar avatarUrl={participant.avatarUrl} style={styles.personAvatar} dimension={24} />
-    <Text numberOfLines={1} ellipsizeMode='tail' style={styles.participantName}>{participant.name}</Text>
-    <TouchableOpacity onPress={() => { onPress(participant) }}>
-      <Icon name='Ex' style={styles.participantRemoveIcon} />
-    </TouchableOpacity>
-  </View>
+  return (
+    <View style={[styles.participant]}>
+      <Avatar avatarUrl={participant.avatarUrl} style={styles.personAvatar} dimension={24} />
+      <Text numberOfLines={1} ellipsizeMode='tail' style={styles.participantName}>{participant.name}</Text>
+      <TouchableOpacity onPress={() => { onPress(participant) }}>
+        <Icon name='Ex' style={styles.participantRemoveIcon} />
+      </TouchableOpacity>
+    </View>
+  )
 }

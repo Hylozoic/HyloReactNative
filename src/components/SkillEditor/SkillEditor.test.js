@@ -47,7 +47,7 @@ describe('SkillEditor', () => {
       }
       const skill = 'jump'
       const instance = ReactTestRenderer.create(<SkillEditor {...props} />).getInstance()
-      instance.setState({showOther: false})
+      instance.setState({ showOther: false })
       instance.addSkill(skill)
       expect(instance.state.showOther).toEqual(true)
       expect(props.addSkill).toHaveBeenCalledWith(skill)
@@ -62,7 +62,7 @@ describe('SkillEditor', () => {
       }
       const skill = 'jump'
       const instance = ReactTestRenderer.create(<SkillEditor {...props} />).getInstance()
-      instance.setState({showOther: false})
+      instance.setState({ showOther: false })
       instance.removeSkill(skill)
       expect(instance.state.showOther).toEqual(true)
       expect(props.removeSkill).toHaveBeenCalledWith(skill)
@@ -72,7 +72,7 @@ describe('SkillEditor', () => {
   describe('onPressOther', () => {
     it('calls the prop and sets state', () => {
       const instance = ReactTestRenderer.create(<SkillEditor {...defaultProps} />).getInstance()
-      instance.setState({showOther: true})
+      instance.setState({ showOther: true })
       instance.control.focus = jest.fn()
       instance.onPressOther()
       expect(instance.state.showOther).toEqual(false)
@@ -87,7 +87,7 @@ describe('SkillCloud', () => {
     const props = {
       skills: ['Snap', 'Crackle'],
       onPress: () => {},
-      style: {color: 'red'}
+      style: { color: 'red' }
     }
 
     renderer.render(<SkillCloud {...props} />)

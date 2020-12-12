@@ -11,7 +11,7 @@ import styles from './CommunitySettingsMenu.style'
 
 export default class PostImage extends PureComponent {
   static navigationOptions = ({ navigation, route }) =>
-    header(navigation, route, {title: 'Community Settings'})
+    header(navigation, route, { title: 'Community Settings' })
 
   navigate = (screen) => this.props.navigation.navigate(screen)
 
@@ -29,13 +29,17 @@ export default class PostImage extends PureComponent {
       navigate: 'InvitePeople'
     }]
 
-    return (<FlatList style={styles.container}
-      data={menuItems}
-      ListHeaderComponent={<View style={styles.headerContainer}><Text style={styles.headerText}>{communityName}</Text></View>}
-      keyExtractor={(item, index) => index.toString()}
-      renderItem={({item}) => <TouchableOpacity onPress={() => this.navigate(item.navigate)} style={styles.item} >
-        <Text style={styles.text}>{item.name}</Text>
-        <EntypoIcon style={styles.chevron} name={'chevron-right'} />
-      </TouchableOpacity>} />)
+    return (
+      <FlatList
+        style={styles.container}
+        data={menuItems}
+        ListHeaderComponent={<View style={styles.headerContainer}><Text style={styles.headerText}>{communityName}</Text></View>}
+        keyExtractor={(item, index) => index.toString()}
+        renderItem={({ item }) => <TouchableOpacity onPress={() => this.navigate(item.navigate)} style={styles.item}>
+          <Text style={styles.text}>{item.name}</Text>
+          <EntypoIcon style={styles.chevron} name='chevron-right' />
+                                  </TouchableOpacity>}
+      />
+    )
   }
 }

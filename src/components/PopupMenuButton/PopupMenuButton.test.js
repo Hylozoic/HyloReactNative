@@ -23,8 +23,8 @@ describe('PopupMenuButton', () => {
         actions: actions.map(x => x[0]),
         onSelect: jest.fn(),
         destructiveButtonIndex: 0,
-        hitSlop: {top: 10},
-        viewProps: {accessibilityLabel: 'A View Props Label'}
+        hitSlop: { top: 10 },
+        viewProps: { accessibilityLabel: 'A View Props Label' }
       }
       const renderer = TestRenderer.create(<PopupMenuButton {...props}>
         Hello World
@@ -32,7 +32,7 @@ describe('PopupMenuButton', () => {
 
       const instance = renderer.root
 
-      const theView = instance.findByProps({accessibilityLabel: 'A View Props Label'})
+      const theView = instance.findByProps({ accessibilityLabel: 'A View Props Label' })
 
       expect(theView).toBeTruthy()
 

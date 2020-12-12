@@ -120,13 +120,13 @@ export function fetchNetworkMembers (slug, sortBy, offset, search) {
     type: FETCH_MEMBERS,
     graphql: {
       query: networkMembersQuery,
-      variables: {slug, first: 20, offset, sortBy, search}
+      variables: { slug, first: 20, offset, sortBy, search }
     },
     meta: {
       extractModel: 'Network',
       extractQueryResults: {
         getItems: get('payload.data.network.members'),
-        getParams: (action) => ({...get('meta.graphql.variables', action), memberSubject: 'network'})
+        getParams: (action) => ({ ...get('meta.graphql.variables', action), memberSubject: 'network' })
       }
     }
   }
@@ -137,13 +137,13 @@ export function fetchCommunityMembers (slug, sortBy, offset, search) {
     type: FETCH_MEMBERS,
     graphql: {
       query: communityMembersQuery,
-      variables: {slug, first: 20, offset, sortBy, search}
+      variables: { slug, first: 20, offset, sortBy, search }
     },
     meta: {
       extractModel: 'Community',
       extractQueryResults: {
         getItems: get('payload.data.community.members'),
-        getParams: (action) => ({...get('meta.graphql.variables', action), memberSubject: 'community'})
+        getParams: (action) => ({ ...get('meta.graphql.variables', action), memberSubject: 'community' })
       }
     }
   }
@@ -217,13 +217,13 @@ export const getMembersOld = ormCreateSelector(
     if (isEmpty(results) || isEmpty(results.ids)) return []
 
     return Person.all()
-    .filter(x => includes(x.id, results.ids))
-    .orderBy(x => results.ids.indexOf(x.id))
-    .toModelArray()
-    .map(person => ({
-      ...person.ref,
-      skills: person.skills && person.skills.toModelArray()
-    }))
+      .filter(x => includes(x.id, results.ids))
+      .orderBy(x => results.ids.indexOf(x.id))
+      .toModelArray()
+      .map(person => ({
+        ...person.ref,
+        skills: person.skills && person.skills.toModelArray()
+      }))
   }
 )
 

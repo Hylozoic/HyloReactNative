@@ -12,7 +12,7 @@ describe('mapStateToProps', () => {
     const session = orm.session(orm.getEmptyState())
 
     times(i => {
-      session.Post.create({id: i.toString(), communities: ['1']})
+      session.Post.create({ id: i.toString(), communities: ['1'] })
     }, 5)
 
     state = {
@@ -20,7 +20,7 @@ describe('mapStateToProps', () => {
       pending: {},
       [MODULE_NAME]: defaultState,
       queryResults: {
-        [buildKey(FETCH_POSTS, {...defaultState, slug: 'foo'})]: {
+        [buildKey(FETCH_POSTS, { ...defaultState, slug: 'foo' })]: {
           ids: ['1', '3', '2'],
           hasMore: true
         }
@@ -29,7 +29,7 @@ describe('mapStateToProps', () => {
   })
 
   it('returns empty posts and default query props if no results exist', () => {
-    expect(mapStateToProps(state, {id: 'bar'})).toEqual({
+    expect(mapStateToProps(state, { id: 'bar' })).toEqual({
       postIds: [],
       hasMore: undefined,
       pending: false,
@@ -45,7 +45,7 @@ describe('mapStateToProps', () => {
   })
 
   it('returns posts in the correct order', () => {
-    expect(mapStateToProps(state, {community: {slug: 'foo', id: 10}})).toEqual({
+    expect(mapStateToProps(state, { community: { slug: 'foo', id: 10 } })).toEqual({
       postIds: [
         '1',
         '3',
@@ -67,7 +67,7 @@ describe('mapStateToProps', () => {
   })
 
   it('returns posts for a network ', () => {
-    expect(mapStateToProps(state, {community: {slug: 'foo'}})).toEqual({
+    expect(mapStateToProps(state, { community: { slug: 'foo' } })).toEqual({
       postIds: [
         '1',
         '3',
@@ -89,10 +89,10 @@ describe('mapStateToProps', () => {
   it('checks if FETCH_POSTS is pending', () => {
     state = {
       ...state,
-      pending: {[FETCH_POSTS]: {extractQueryResults: {}}}
+      pending: { [FETCH_POSTS]: { extractQueryResults: {} } }
     }
-    const result = mapStateToProps(state, {id: 'foo'})
-    expect(result).toMatchObject({pending: true})
+    const result = mapStateToProps(state, { id: 'foo' })
+    expect(result).toMatchObject({ pending: true })
   })
 })
 
@@ -118,12 +118,12 @@ describe('mergeProps', () => {
 
     const merged = mergeProps(stateProps, dispatchProps, ownProps)
     return merged.fetchPosts()
-    .then(() => {
-      expect(dispatchProps.fetchPosts).toHaveBeenCalledWith({
-        sortBy: 'updated', subject: 'community'
-      }, undefined)
-      expect(dispatchProps.resetNewPostCount).toHaveBeenCalledWith(ownProps.community.id, 'Membership')
-    })
+      .then(() => {
+        expect(dispatchProps.fetchPosts).toHaveBeenCalledWith({
+          sortBy: 'updated', subject: 'community'
+        }, undefined)
+        expect(dispatchProps.resetNewPostCount).toHaveBeenCalledWith(ownProps.community.id, 'Membership')
+      })
   })
 
   it('sets up fetchPostsAndResetCount without calling resetNewPostCount', () => {
@@ -148,12 +148,12 @@ describe('mergeProps', () => {
 
     const merged = mergeProps(stateProps, dispatchProps, ownProps)
     return merged.fetchPosts()
-    .then(() => {
-      expect(dispatchProps.fetchPosts).toHaveBeenCalledWith({
-        sortBy: 'updated', subject: 'community', filter: 'some filter'
-      }, undefined)
-      expect(dispatchProps.resetNewPostCount).not.toHaveBeenCalled()
-    })
+      .then(() => {
+        expect(dispatchProps.fetchPosts).toHaveBeenCalledWith({
+          sortBy: 'updated', subject: 'community', filter: 'some filter'
+        }, undefined)
+        expect(dispatchProps.resetNewPostCount).not.toHaveBeenCalled()
+      })
   })
 
   it('binds the correct values to fetchPosts', () => {
@@ -177,7 +177,7 @@ describe('mergeProps', () => {
       }
     }
     const fetchPosts = jest.fn()
-    const dispatchProps = {fetchPosts}
+    const dispatchProps = { fetchPosts }
     const merged = mergeProps(stateProps, dispatchProps, ownProps)
 
     merged.fetchPosts()
@@ -253,7 +253,7 @@ describe('mergeProps', () => {
     const fetchPosts = jest.fn()
     const fetchProjects = jest.fn()
 
-    const dispatchProps = {fetchPosts, fetchProjects}
+    const dispatchProps = { fetchPosts, fetchProjects }
     const merged = mergeProps(stateProps, dispatchProps, ownProps)
 
     merged.fetchPosts()
@@ -277,21 +277,21 @@ describe('shouldResetNewPostCount', () => {
     expect(shouldResetNewPostCount(props)).toEqual(true)
   })
   it('returns false with a subject that does not equal "community"', () => {
-    let props = {
+    const props = {
       subject: 'all communities',
       sortBy: defaultSortBy
     }
     expect(shouldResetNewPostCount(props)).toEqual(false)
   })
   it('returns false with a non-default sortBy', () => {
-    let props = {
+    const props = {
       subject: 'community',
       sortBy: 'non-default'
     }
     expect(shouldResetNewPostCount(props)).toEqual(false)
   })
   it('returns false with a filter', () => {
-    let props = {
+    const props = {
       subject: 'community',
       sortBy: defaultSortBy,
       filter: 'any filter'
@@ -299,7 +299,7 @@ describe('shouldResetNewPostCount', () => {
     expect(shouldResetNewPostCount(props)).toEqual(false)
   })
   it('returns false with a topic', () => {
-    let props = {
+    const props = {
       subject: 'community',
       sortBy: defaultSortBy,
       topic: 'any topic'

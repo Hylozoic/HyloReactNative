@@ -15,7 +15,7 @@ import {
 
 export function mapStateToProps (state, props) {
   const communityId = getCurrentCommunityId(state, props)
-  const community = getCommunity(state, {id: communityId})
+  const community = getCommunity(state, { id: communityId })
   const pending = state.pending[FETCH_COMMUNITY_SETTINGS]
   const pendingCreate = state.pending[CREATE_INVITATIONS]
 

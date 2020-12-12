@@ -18,11 +18,11 @@ if you don't pass any children, icons of an image and a clock will be shown for
 non-pending and pending states respectively
 */
 export default class ImagePicker extends Component {
-  state = {pending: false}
+  state = { pending: false }
 
   setPending (pending) {
     const { onPendingChange } = this.props
-    this.setState({pending})
+    this.setState({ pending })
     onPendingChange && onPendingChange(pending)
   }
 
@@ -45,12 +45,15 @@ export default class ImagePicker extends Component {
         : <Icon name='AddImage' style={[styles.icon, iconStyle]} />
     }
 
-    return <TouchableOpacity
-      style={style}
-      onPress={() => !pending && this.showPicker()}
-      disabled={disabled}>
-      {children}
-    </TouchableOpacity>
+    return (
+      <TouchableOpacity
+        style={style}
+        onPress={() => !pending && this.showPicker()}
+        disabled={disabled}
+      >
+        {children}
+      </TouchableOpacity>
+    )
   }
 }
 
@@ -91,7 +94,7 @@ export function showImagePicker ({
           if (error) {
             onError && onError(payload.message)
           } else {
-            onChoice({local: result.uri, remote: payload.url})
+            onChoice({ local: result.uri, remote: payload.url })
           }
           onComplete && onComplete()
         })

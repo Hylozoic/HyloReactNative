@@ -11,7 +11,7 @@ export function setSessionCookie (resp) {
 
   return getSessionCookie().then(str => {
     const oldCookies = parseCookies(str)
-    const merged = omitBy({...oldCookies, ...newCookies}, invalidPair)
+    const merged = omitBy({ ...oldCookies, ...newCookies }, invalidPair)
     return AsyncStorage.setItem(SESSION_COOKIE_KEY, serializeCookie(merged))
   })
 }
@@ -43,7 +43,7 @@ export function parseCookies (cookieStr) {
     // if value contains ', ' and the key is not Expires, then this pair is
     // actually two pairs, which should be parsed and handled separately
     if (value && value.includes(', ') && key !== 'Expires') {
-      const [ value1, key2 ] = value.split(', ')
+      const [value1, key2] = value.split(', ')
       const value2 = splits[2]
       m[decodeURIComponent(key)] = decodeURIComponent(value1)
       m[decodeURIComponent(key2)] = decodeURIComponent(value2)

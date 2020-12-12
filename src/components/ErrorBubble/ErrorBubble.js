@@ -13,25 +13,29 @@ export default function ErrorBubble ({
   errorRowStyle
 }) {
   const backgroundColor = get('backgroundColor', customStyles)
-  return <View>
-    {topArrow && <ErrorPointer style={styles.topArrow} color={backgroundColor} direction={'up'} />}
-    {topRightArrow && <ErrorPointer style={styles.topRightArrow} color={backgroundColor} direction={'up'} />}
+  return (
+    <View>
+      {topArrow && <ErrorPointer style={styles.topArrow} color={backgroundColor} direction='up' />}
+      {topRightArrow && <ErrorPointer style={styles.topRightArrow} color={backgroundColor} direction='up' />}
 
-    <View style={[styles.row, errorRowStyle]}>
-      <Text style={[styles.errorText, customStyles]}>{text}</Text>
+      <View style={[styles.row, errorRowStyle]}>
+        <Text style={[styles.errorText, customStyles]}>{text}</Text>
+      </View>
+      {bottomArrow && <ErrorPointer style={styles.bottomArrow} color={backgroundColor} direction='down' />}
     </View>
-    {bottomArrow && <ErrorPointer style={styles.bottomArrow} color={backgroundColor} direction={'down'} />}
-  </View>
+  )
 }
 
-export function ErrorPointer ({style, direction, color}) {
-  return <Triangle
-    width={10}
-    height={5}
-    style={style}
-    direction={direction}
-    color={color}
-  />
+export function ErrorPointer ({ style, direction, color }) {
+  return (
+    <Triangle
+      width={10}
+      height={5}
+      style={style}
+      direction={direction}
+      color={color}
+    />
+  )
 }
 
 const styles = {

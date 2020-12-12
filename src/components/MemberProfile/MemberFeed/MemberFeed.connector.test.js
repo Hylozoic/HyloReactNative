@@ -32,7 +32,7 @@ describe('mapStateToProps', () => {
         choice: 'Comments'
       }
     }
-    var { itemType, pending } = mapStateToProps(state)
+    const { itemType, pending } = mapStateToProps(state)
     expect(itemType).toEqual('comment')
     expect(pending).toEqual('pending comments')
   })
@@ -63,15 +63,15 @@ describe('mergeProps', () => {
       items: [1, 2, 3],
       hasMore: true
     }
-    const ownProps = {id: 34}
+    const ownProps = { id: 34 }
     const { fetchItems, fetchMoreItems } = mergeProps(stateProps, dispatchProps, ownProps)
 
     fetchItems()
-    expect(dispatchProps.fetchMemberPosts).toHaveBeenCalledWith({id: 34})
+    expect(dispatchProps.fetchMemberPosts).toHaveBeenCalledWith({ id: 34 })
     dispatchProps.fetchMemberPosts.mockClear()
 
     fetchMoreItems()
-    expect(dispatchProps.fetchMemberPosts).toHaveBeenCalledWith({id: 34, offset: 3})
+    expect(dispatchProps.fetchMemberPosts).toHaveBeenCalledWith({ id: 34, offset: 3 })
   })
 
   it('uses the fetchMemberComments when choice is Comments', () => {
@@ -80,15 +80,15 @@ describe('mergeProps', () => {
       items: [1, 2, 3],
       hasMore: true
     }
-    const ownProps = {id: 34}
+    const ownProps = { id: 34 }
     const { fetchItems, fetchMoreItems } = mergeProps(stateProps, dispatchProps, ownProps)
 
     fetchItems()
-    expect(dispatchProps.fetchMemberComments).toHaveBeenCalledWith({id: 34})
+    expect(dispatchProps.fetchMemberComments).toHaveBeenCalledWith({ id: 34 })
     dispatchProps.fetchMemberComments.mockClear()
 
     fetchMoreItems()
-    expect(dispatchProps.fetchMemberComments).toHaveBeenCalledWith({id: 34, offset: 3})
+    expect(dispatchProps.fetchMemberComments).toHaveBeenCalledWith({ id: 34, offset: 3 })
   })
 
   it('uses the fetchMemberUpvotes when choice is Posts', () => {
@@ -97,15 +97,15 @@ describe('mergeProps', () => {
       items: [1, 2, 3],
       hasMore: true
     }
-    const ownProps = {id: 34}
+    const ownProps = { id: 34 }
     const { fetchItems, fetchMoreItems } = mergeProps(stateProps, dispatchProps, ownProps)
 
     fetchItems()
-    expect(dispatchProps.fetchMemberUpvotes).toHaveBeenCalledWith({id: 34})
+    expect(dispatchProps.fetchMemberUpvotes).toHaveBeenCalledWith({ id: 34 })
     dispatchProps.fetchMemberUpvotes.mockClear()
 
     fetchMoreItems()
-    expect(dispatchProps.fetchMemberUpvotes).toHaveBeenCalledWith({id: 34, offset: 3})
+    expect(dispatchProps.fetchMemberUpvotes).toHaveBeenCalledWith({ id: 34, offset: 3 })
   })
 })
 

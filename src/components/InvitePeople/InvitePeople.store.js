@@ -189,8 +189,8 @@ export const getPendingInvites = ormCreateSelector(
   (state, props) => props.communityId,
   ({ Invitation }, id) =>
     Invitation.filter(i => i.community === id)
-    .orderBy(i => -new Date(i.createdAt))
-    .toModelArray()
+      .orderBy(i => -new Date(i.createdAt))
+      .toModelArray()
 )
 
 export function ormSessionReducer (session, { type, meta, payload }) {
@@ -213,7 +213,7 @@ export function ormSessionReducer (session, { type, meta, payload }) {
     case RESEND_INVITATION_PENDING:
       invite = Invitation.withId(meta.invitationToken)
       if (!invite) break
-      invite.update({resent: true, lastSentAt: new Date()})
+      invite.update({ resent: true, lastSentAt: new Date() })
       break
 
     case EXPIRE_INVITATION_PENDING:
@@ -223,7 +223,7 @@ export function ormSessionReducer (session, { type, meta, payload }) {
 
     case REINVITE_ALL_PENDING:
       community = Community.withId(meta.communityId)
-      community.pendingInvitations.update({resent: true, lastSentAt: new Date()})
+      community.pendingInvitations.update({ resent: true, lastSentAt: new Date() })
       break
   }
 }

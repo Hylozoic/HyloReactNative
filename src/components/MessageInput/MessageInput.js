@@ -75,7 +75,7 @@ export default class extends React.PureComponent {
         'Missing message recipient!',
         'Click on a user name or user the search bar.',
         [
-          {text: 'OK'}
+          { text: 'OK' }
         ],
         { cancelable: true }
       )
@@ -107,11 +107,13 @@ export default class extends React.PureComponent {
     const { submittable } = this.state
     const iconStyle = { ...styles.sendButton, color: submittable ? jade : rhino30 }
 
-    return <View style={[styles.container, style]}>
-      <TextInput {...inputProps} />
-      <TouchableOpacity onPress={this.handleSubmit}>
-        <Icon name='Send' style={iconStyle} />
-      </TouchableOpacity>
-    </View>
+    return (
+      <View style={[styles.container, style]}>
+        <TextInput {...inputProps} />
+        <TouchableOpacity onPress={this.handleSubmit}>
+          <Icon name='Send' style={iconStyle} />
+        </TouchableOpacity>
+      </View>
+    )
   }
 }

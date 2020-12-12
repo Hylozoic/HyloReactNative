@@ -22,7 +22,7 @@ describe('UserSettings', () => {
   it('matches the last snapshot', () => {
     const renderer = new ReactShallowRenderer()
     const props = {
-      currentUser: {id: 1},
+      currentUser: { id: 1 },
       updateUserSettings: () => {},
       unlinkAccount: () => {}
     }
@@ -35,7 +35,7 @@ describe('UserSettings', () => {
 
   it('matches snapshot with state set', () => {
     const props = {
-      currentUser: {id: 1},
+      currentUser: { id: 1 },
       updateUserSettings: () => {},
       unlinkAccount: () => {}
     }
@@ -79,7 +79,7 @@ describe('UserSettings', () => {
         currentUser: null
       }
       const props = {
-        currentUser: {id: 1}
+        currentUser: { id: 1 }
       }
       const instance = ReactTestRenderer.create(<UserSettings {...props} />).getInstance()
       instance.setEditState = jest.fn()
@@ -124,7 +124,7 @@ describe('UserSettings', () => {
 
   describe('cancelPassword', () => {
     it('sets the state, setting changed to true when email has changed', () => {
-      const currentUser = {email: 'moo@moo.com'}
+      const currentUser = { email: 'moo@moo.com' }
       const instance = ReactTestRenderer.create(
         <UserSettings currentUser={currentUser} />).getInstance()
       instance.setState({
@@ -145,7 +145,7 @@ describe('UserSettings', () => {
     })
 
     it('sets the state, setting changed to false when email has not changed', () => {
-      const currentUser = {email: 'moo@moo.com'}
+      const currentUser = { email: 'moo@moo.com' }
       const instance = ReactTestRenderer.create(
         <UserSettings currentUser={currentUser} />).getInstance()
       instance.setState({
@@ -226,7 +226,7 @@ describe('UserSettings', () => {
     })
     it('shows error toast on error', () => {
       jest.spyOn(Toast, 'show')
-      const updateUserSettings = jest.fn(() => Promise.resolve({error: true}))
+      const updateUserSettings = jest.fn(() => Promise.resolve({ error: true }))
       const instance = ReactTestRenderer.create(
         <UserSettings updateUserSettings={updateUserSettings} />).getInstance()
       const edits = {
@@ -304,16 +304,16 @@ describe('UserSettings', () => {
       })
 
       it('calls onLogin with false', () => {
-        LoginManager.logInWithReadPermissions.mockImplementation(() => Promise.resolve({isCancelled: true}))
+        LoginManager.logInWithReadPermissions.mockImplementation(() => Promise.resolve({ isCancelled: true }))
         const onLogin = jest.fn()
         const loginWithFacebook = jest.fn()
         const instance = ReactTestRenderer.create(
           <UserSettings loginWithFacebook={loginWithFacebook} />).getInstance()
         expect.assertions(1)
         return instance.loginWithFacebook(onLogin)
-        .then(() => {
-          expect(onLogin).toHaveBeenCalledWith(false)
-        })
+          .then(() => {
+            expect(onLogin).toHaveBeenCalledWith(false)
+          })
       })
     })
 
@@ -329,16 +329,16 @@ describe('UserSettings', () => {
           <UserSettings loginWithFacebook={loginWithFacebook} />).getInstance()
         expect.assertions(2)
         return instance.loginWithFacebook(onLogin)
-        .then(() => {
-          expect(onLogin).toHaveBeenCalledWith(true)
-          expect(loginWithFacebook).toHaveBeenCalledWith('atoken')
-        })
+          .then(() => {
+            expect(onLogin).toHaveBeenCalledWith(true)
+            expect(loginWithFacebook).toHaveBeenCalledWith('atoken')
+          })
       })
     })
   })
 
   it('has navigationOptions', () => {
-    const route = {name: 'test'}
+    const route = { name: 'test' }
     expect(UserSettings.navigationOptions({ route })).toMatchSnapshot()
   })
 })
@@ -393,7 +393,7 @@ describe('SocialControl', () => {
   it('matches the last snapshot loading', () => {
     const renderer = ReactTestRenderer.create(<SocialControl {...props} />)
     const instance = renderer.getInstance()
-    instance.setState({loading: true})
+    instance.setState({ loading: true })
 
     expect(renderer.toJSON()).toMatchSnapshot()
   })
@@ -430,7 +430,7 @@ describe('SocialControl', () => {
         instance.linkClicked()
         expect(props.onLink).toHaveBeenCalled()
         expect(props.updateUserSettings)
-        .toHaveBeenCalledWith({twitterName})
+          .toHaveBeenCalledWith({ twitterName })
         expect(props.onChange).toHaveBeenCalledWith(true)
       })
     })
@@ -448,11 +448,11 @@ describe('SocialControl', () => {
         const instance = ReactTestRenderer.create(
           <SocialControl {...props} />).getInstance()
         return instance.linkClicked()
-        .then(() => {
-          expect(props.onLink).toHaveBeenCalled()
-          expect(props.onChange).toHaveBeenCalledWith(true)
-          expect(instance.state.loading).toEqual(false)
-        })
+          .then(() => {
+            expect(props.onLink).toHaveBeenCalled()
+            expect(props.onChange).toHaveBeenCalledWith(true)
+            expect(instance.state.loading).toEqual(false)
+          })
       })
     })
   })

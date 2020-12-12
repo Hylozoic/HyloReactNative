@@ -11,7 +11,7 @@ export const UPDATE_COMMENT = `${MODULE_NAME}/UPDATE_COMMENT_PENDING`
 export function setCommentEdits (postId, text, commentId) {
   return {
     type: SET_COMMENT_EDITS,
-    payload: {text, postId, commentId}
+    payload: { text, postId, commentId }
   }
 }
 
@@ -19,9 +19,9 @@ export default function reducer (state = {}, action) {
   const { type, payload, meta } = action
   switch (type) {
     case SET_COMMENT_EDITS:
-      return {...state, [payload.postId]: {text: payload.text, id: payload.commentId}}
+      return { ...state, [payload.postId]: { text: payload.text, id: payload.commentId } }
     case CREATE_COMMENT:
-      return {...state, [meta.postId]: null}
+      return { ...state, [meta.postId]: null }
   }
   return state
 }

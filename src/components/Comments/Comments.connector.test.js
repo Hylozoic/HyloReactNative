@@ -11,14 +11,14 @@ describe('mapStateToProps', () => {
       queryResults: {}
     }
     expect(mapStateToProps(props, {}).pending).toEqual(undefined)
-    expect(mapStateToProps(props, {postPending: true}).pending).toEqual(true)
+    expect(mapStateToProps(props, { postPending: true }).pending).toEqual(true)
     expect(mapStateToProps({
       ...props,
-      pending: {[FETCH_COMMENTS]: true}
+      pending: { [FETCH_COMMENTS]: true }
     }, {}).pending).toEqual(true)
     expect(mapStateToProps({
       ...props,
-      pending: {[FETCH_POST]: true}
+      pending: { [FETCH_POST]: true }
     }, {}).pending).toEqual(true)
   })
 })

@@ -20,8 +20,8 @@ import {
 
 export function mapStateToProps (state, props) {
   const choice = getChoice(state, props)
-  var items = []
-  var itemType, hasMore, pending
+  let items = []
+  let itemType, hasMore, pending
 
   switch (choice) {
     case 'Posts':
@@ -68,16 +68,16 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
   const { choice, hasMore, items } = stateProps
   const { id } = ownProps
   const fetchFunction = {
-    'Posts': dispatchProps.fetchMemberPosts,
-    'Comments': dispatchProps.fetchMemberComments,
-    'Upvotes': dispatchProps.fetchMemberUpvotes
+    Posts: dispatchProps.fetchMemberPosts,
+    Comments: dispatchProps.fetchMemberComments,
+    Upvotes: dispatchProps.fetchMemberUpvotes
   }[choice]
 
   const offset = items.length
 
-  const fetchItems = () => fetchFunction({id})
+  const fetchItems = () => fetchFunction({ id })
   const fetchMoreItems = hasMore
-    ? () => fetchFunction({id, offset})
+    ? () => fetchFunction({ id, offset })
     : () => {}
 
   return {

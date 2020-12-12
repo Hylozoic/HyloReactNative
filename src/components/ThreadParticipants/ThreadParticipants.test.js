@@ -7,7 +7,7 @@ describe('ThreadParticipants', () => {
   it('matches the last snapshot', () => {
     const renderer = new ReactShallowRenderer()
     const props = {
-      participants: [{id: 1}, {id: 2}],
+      participants: [{ id: 1 }, { id: 2 }],
       goToParticipant: () => {}
     }
     renderer.render(<ThreadParticipants {...props} />)
@@ -28,7 +28,7 @@ describe('ParticipantRow', () => {
   it('matches the last snapshot', () => {
     const renderer = new ReactShallowRenderer()
     const props = {
-      participant: {name: 'Bob', avatarUrl: 'foo.png'},
+      participant: { name: 'Bob', avatarUrl: 'foo.png' },
       goToParticipant: () => {}
     }
     renderer.render(<ParticipantRow {...props} />)

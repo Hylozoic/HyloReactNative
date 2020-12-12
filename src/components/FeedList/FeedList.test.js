@@ -15,7 +15,8 @@ describe('FeedList', () => {
       setSort={() => {}}
       fetchMorePosts={() => {}}
       pending
-      refreshPosts={() => {}} />)
+      refreshPosts={() => {}}
+                    />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
@@ -25,9 +26,10 @@ describe('FeedList', () => {
     const fetchPosts = jest.fn()
     const { root: { instance } } = TestRenderer.create(<FeedList
       route={{ name: 'Home' }}
-      fetchPosts={fetchPosts} />)
+      fetchPosts={fetchPosts}
+                                                       />)
 
-    instance.componentDidUpdate({screenProps: {currentTabName: 'Members'}})
+    instance.componentDidUpdate({ screenProps: { currentTabName: 'Members' } })
     expect(fetchPosts).toHaveBeenCalledTimes(1)
   })
 
@@ -35,9 +37,10 @@ describe('FeedList', () => {
     const fetchPosts = jest.fn()
     const { root: { instance } } = TestRenderer.create(<FeedList
       route={{ name: 'Members' }}
-      fetchPosts={fetchPosts} />)
+      fetchPosts={fetchPosts}
+                                                       />)
 
-    instance.componentDidUpdate({screenProps: {}})
+    instance.componentDidUpdate({ screenProps: {} })
     expect(fetchPosts).toHaveBeenCalledTimes(1)
   })
 
@@ -45,9 +48,10 @@ describe('FeedList', () => {
     const fetchPosts = jest.fn()
     const { root: { instance } } = TestRenderer.create(<FeedList
       route={{ name: 'Home' }}
-      fetchPosts={fetchPosts} />)
+      fetchPosts={fetchPosts}
+                                                       />)
 
-    instance.componentDidUpdate({route: { name: 'Home' }})
+    instance.componentDidUpdate({ route: { name: 'Home' } })
     expect(fetchPosts).toHaveBeenCalledTimes(1)
   })
 })
@@ -59,7 +63,8 @@ describe('ListControls', () => {
       filter='all'
       sortBy='latest'
       setFilter={() => {}}
-      setSort={() => {}} />)
+      setSort={() => {}}
+                    />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
@@ -72,7 +77,8 @@ describe('ListControl', () => {
     renderer.render(<ListControl
       selected='discussion'
       options={filterOptions}
-      onChange={() => {}} />)
+      onChange={() => {}}
+                    />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()

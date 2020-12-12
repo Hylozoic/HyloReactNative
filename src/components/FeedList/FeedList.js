@@ -66,7 +66,8 @@ export default class FeedList extends React.Component {
     showMember={this.showMember}
     showTopic={this.showTopic}
     shouldShowCommunities={this.props.all}
-    goToCommunity={this.goToCommunity} />
+    goToCommunity={this.goToCommunity}
+                             />
 
   keyExtractor = (item) => `post${item}`
 
@@ -77,37 +78,40 @@ export default class FeedList extends React.Component {
       isProjectFeed
     } = this.props
 
-    return <View style={styles.container}>
-      <FlatList
-        data={postIds}
-        renderItem={this.renderItem}
-        onRefresh={this.refreshPosts}
-        refreshing={!!pendingRefresh}
-        keyExtractor={this.keyExtractor}
-        onEndReached={this.fetchMorePosts}
-        ListHeaderComponent={<View>
-          {this.props.header}
-          <ListControls
-            filter={this.props.filter}
-            sortBy={this.props.sortBy}
-            setFilter={this.setFilter}
-            setSort={this.setSort}
-            pending={this.props.pending}
-            hideListFilter={isProjectFeed}
-          />
-        </View>}
-        ListFooterComponent={this.props.pending
-          ? <Loading style={styles.loading} />
-          : null} />
-    </View>
+    return (
+      <View style={styles.container}>
+        <FlatList
+          data={postIds}
+          renderItem={this.renderItem}
+          onRefresh={this.refreshPosts}
+          refreshing={!!pendingRefresh}
+          keyExtractor={this.keyExtractor}
+          onEndReached={this.fetchMorePosts}
+          ListHeaderComponent={<View>
+            {this.props.header}
+            <ListControls
+              filter={this.props.filter}
+              sortBy={this.props.sortBy}
+              setFilter={this.setFilter}
+              setSort={this.setSort}
+              pending={this.props.pending}
+              hideListFilter={isProjectFeed}
+            />
+          </View>}
+          ListFooterComponent={this.props.pending
+            ? <Loading style={styles.loading} />
+            : null}
+        />
+      </View>
+    )
   }
 }
 
 export const filterOptions = [
-  {id: null, label: 'All Posts'},
-  {id: 'discussion', label: 'Discussions'},
-  {id: 'request', label: 'Requests'},
-  {id: 'offer', label: 'Offers'}
+  { id: null, label: 'All Posts' },
+  { id: 'discussion', label: 'Discussions' },
+  { id: 'request', label: 'Requests' },
+  { id: 'offer', label: 'Offers' }
 ]
 
 // const sortOptions = [
@@ -121,12 +125,14 @@ const optionText = (id, options) => {
 }
 
 export function ListControls ({ filter: listFilter, sortBy, setFilter, setSort, hideListFilter }) {
-  return <View style={[styles.listControls, hideListFilter ? styles.listControlsSingleItem : {}]}>
-    {!hideListFilter &&
-      <ListControl selected={listFilter} onChange={setFilter} options={filterOptions} />}
-    {/* TODO: disabled  */}
-    {/* <ListControl selected={sortBy} onChange={setSort} options={sortOptions} /> */}
-  </View>
+  return (
+    <View style={[styles.listControls, hideListFilter ? styles.listControlsSingleItem : {}]}>
+      {!hideListFilter &&
+        <ListControl selected={listFilter} onChange={setFilter} options={filterOptions} />}
+      {/* TODO: disabled  */}
+      {/* <ListControl selected={sortBy} onChange={setSort} options={sortOptions} /> */}
+    </View>
+  )
 }
 
 export function ListControl ({ selected, options, onChange }) {
@@ -135,10 +141,13 @@ export function ListControl ({ selected, options, onChange }) {
     () => onChange(option.id)
   ])
 
-  return <PopupMenuButton
-    actions={actions}
-    style={styles.listControl}>
-    <Text style={styles.optionText}>{optionText(selected, options)}</Text>
-    <Icon name='ArrowDown' style={[styles.optionText, styles.downArrow]} />
-  </PopupMenuButton>
+  return (
+    <PopupMenuButton
+      actions={actions}
+      style={styles.listControl}
+    >
+      <Text style={styles.optionText}>{optionText(selected, options)}</Text>
+      <Icon name='ArrowDown' style={[styles.optionText, styles.downArrow]} />
+    </PopupMenuButton>
+  )
 }

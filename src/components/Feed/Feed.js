@@ -10,7 +10,7 @@ import { didPropsChange } from 'util/index'
 export default class Feed extends React.Component {
   componentDidMount () {
     const { community, navigation } = this.props
-    if (community) navigation.setParams({communityName: this.props.community.name})
+    if (community) navigation.setParams({ communityName: this.props.community.name })
     const { fetchCommunityTopic } = this.props
     if (fetchCommunityTopic) fetchCommunityTopic()
   }
@@ -19,11 +19,11 @@ export default class Feed extends React.Component {
     return nextProps.isFocused && didPropsChange(this.props, nextProps)
   }
 
-  handleShowTopic = (...args) => this.props.showTopic(...args)
-  handleShowMember = (...args) => this.props.showMember(...args)
-  handleGoToCommunity = (...args) => this.props.goToCommunity(...args)
-  handleSetTopicSubscribe = (...args) => this.props.setTopicSubscribe(...args)
-  handleNewPost = (...args) => this.props.newPost(...args)
+  onShowTopic = (...args) => this.props.showTopic(...args)
+  onShowMember = (...args) => this.props.showMember(...args)
+  onGoToCommunity = (...args) => this.props.goToCommunity(...args)
+  onSetTopicSubscribe = (...args) => this.props.setTopicSubscribe(...args)
+  onNewPost = (...args) => this.props.newPost(...args)
 
   render () {
     const {
@@ -43,49 +43,56 @@ export default class Feed extends React.Component {
       isProjectFeed
     } = this.props
     if (!currentUserHasMemberships) {
-      return <CreateCommunityNotice
-        goToCreateCommunityName={goToCreateCommunityName}
-        text={'No posts here, try creating your own Community!'}
-      />
+      return (
+        <CreateCommunityNotice
+          goToCreateCommunityName={goToCreateCommunityName}
+          text='No posts here, try creating your own Community!'
+        />
+      )
     }
 
     const all = !community && !topicName
 
     const theme = this.props.belowBannerComponent
-      ? {container: {marginBottom: 0}}
+      ? { container: { marginBottom: 0 } }
       : {}
 
-    return <View style={styles.container}>
-      <FeedList
-        community={community}
-        network={network}
-        showPost={showPost}
-        all={all}
-        goToCommunity={this.handleGoToCommunity}
-        header={
-          <View>
-            <FeedBanner
-              community={community}
-              network={network}
-              currentUser={currentUser}
-              all={all}
-              newPost={this.handleNewPost}
-              topicName={topicName}
-              postsTotal={postsTotal}
-              followersTotal={followersTotal}
-              topicSubscribed={topicSubscribed}
-              setTopicSubscribe={this.handleSetTopicSubscribe}
-              hidePostPrompt={hidePostPrompt} 
-              theme={theme} />
-            {this.props.belowBannerComponent}
-          </View>}
-        route={route}
-        navigation={navigation}
-        showMember={this.handleShowMember}
-        showTopic={this.handleShowTopic}
-        topicName={topicName} 
-        isProjectFeed={isProjectFeed} />
-      {!topicName && community && <SocketSubscriber type='community' id={community.id} />}
-    </View>
+    return (
+      <View style={styles.container}>
+        <FeedList
+          community={community}
+          network={network}
+          showPost={showPost}
+          all={all}
+          goToCommunity={this.onGoToCommunity}
+          header={
+            <View>
+              <FeedBanner
+                community={community}
+                network={network}
+                currentUser={currentUser}
+                all={all}
+                newPost={this.onNewPost}
+                topicName={topicName}
+                postsTotal={postsTotal}
+                followersTotal={followersTotal}
+                topicSubscribed={topicSubscribed}
+                setTopicSubscribe={this.onSetTopicSubscribe}
+                hidePostPrompt={hidePostPrompt}
+                theme={theme}
+              />
+              {this.props.belowBannerComponent}
+            </View>
+}
+          route={route}
+          navigation={navigation}
+          showMember={this.onShowMember}
+          showTopic={this.onShowTopic}
+          topicName={topicName}
+          isProjectFeed={isProjectFeed}
+        />
+        {!topicName && community && <SocketSubscriber type='community' id={community.id} />}
+      </View>
+    )
   }
 }

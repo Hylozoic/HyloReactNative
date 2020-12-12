@@ -32,10 +32,10 @@ export default class ModeratorSettings extends Component {
       'Remove Moderator',
       '',
       [
-        {text: 'No', onPress: () => {}, style: 'No'},
-        {text: 'Yes', onPress: () => this.props.removeModerator(id, false)}
+        { text: 'No', onPress: () => {}, style: 'No' },
+        { text: 'Yes', onPress: () => this.props.removeModerator(id, false) }
       ],
-      {cancelable: false}
+      { cancelable: false }
     )
   }
 
@@ -43,10 +43,11 @@ export default class ModeratorSettings extends Component {
 
   isMe = (id) => this.props.currentUser.id === id
 
-  _renderModeratorRow = ({item}) => <ModeratorRow
+  _renderModeratorRow = ({ item }) => <ModeratorRow
     moderator={item}
     showMember={this.props.showMember}
-    removeModerator={this.isMe(item.id) ? null : this.removeModerator} />
+    removeModerator={this.isMe(item.id) ? null : this.removeModerator}
+                                      />
 
   openPersonPicker = () => {
     const { navigation } = this.props
@@ -68,29 +69,34 @@ export default class ModeratorSettings extends Component {
       return <LoadingScreen />
     }
 
-    return <FlatList
-      style={styles.container}
-      data={moderators}
-      keyboardShouldPersistTaps='always'
-      keyExtractor={item => item.id.toString()}
-      renderItem={this._renderModeratorRow}
-      ListHeaderComponent={<View style={styles.headerContainer}>
-        <Text style={styles.headerText}>{community.name}</Text>
-        <View style={styles.addNewContainer}>
-          <TouchableOpacity onPress={this.openPersonPicker}>
-            <Text style={styles.addNewButton}><Icon name='Plus' green /> Add New</Text>
-          </TouchableOpacity>
-        </View>
-      </View>} />
+    return (
+      <FlatList
+        style={styles.container}
+        data={moderators}
+        keyboardShouldPersistTaps='always'
+        keyExtractor={item => item.id.toString()}
+        renderItem={this._renderModeratorRow}
+        ListHeaderComponent={<View style={styles.headerContainer}>
+          <Text style={styles.headerText}>{community.name}</Text>
+          <View style={styles.addNewContainer}>
+            <TouchableOpacity onPress={this.openPersonPicker}>
+              <Text style={styles.addNewButton}><Icon name='Plus' green /> Add New</Text>
+            </TouchableOpacity>
+          </View>
+                             </View>}
+      />
+    )
   }
 }
 
-export function ModeratorRow ({moderator, showMember, removeModerator}) {
-  return <TouchableOpacity style={styles.row} onPress={() => showMember(moderator.id)}>
-    {moderator.avatarUrl && <Avatar style={{width: 50}} avatarUrl={moderator.avatarUrl} />}
-    <Text style={styles.moderatorName}>{moderator.name}</Text>
-    {removeModerator && <TouchableOpacity hitSlop={{top: 15, bottom: 15, left: 10, right: 10}} onPress={() => removeModerator(moderator.id)}>
-      <Text style={styles.removeButton}>Remove</Text>
-    </TouchableOpacity>}
-  </TouchableOpacity>
+export function ModeratorRow ({ moderator, showMember, removeModerator }) {
+  return (
+    <TouchableOpacity style={styles.row} onPress={() => showMember(moderator.id)}>
+      {moderator.avatarUrl && <Avatar style={{ width: 50 }} avatarUrl={moderator.avatarUrl} />}
+      <Text style={styles.moderatorName}>{moderator.name}</Text>
+      {removeModerator && <TouchableOpacity hitSlop={{ top: 15, bottom: 15, left: 10, right: 10 }} onPress={() => removeModerator(moderator.id)}>
+        <Text style={styles.removeButton}>Remove</Text>
+                          </TouchableOpacity>}
+    </TouchableOpacity>
+  )
 }

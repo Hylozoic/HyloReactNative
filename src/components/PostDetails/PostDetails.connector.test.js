@@ -4,13 +4,13 @@ import {
 } from './PostDetails.connector'
 import orm from 'store/models'
 
-let props, stateProps, dispatchProps
+let state, props, stateProps, dispatchProps
 
 beforeAll(() => {
   const session = orm.session(orm.getEmptyState())
-  session.Community.create({id: '2', name: 'Home'})
-  session.Person.create({id: '10'})
-  session.Post.create({id: '1', communities: ['2'], creator: '10'})
+  session.Community.create({ id: '2', name: 'Home' })
+  session.Person.create({ id: '10' })
+  session.Post.create({ id: '1', communities: ['2'], creator: '10' })
   session.Attachment.create({
     id: '1',
     post: '1',
@@ -27,7 +27,7 @@ beforeAll(() => {
   state = {
     orm: session.state,
     CommentEditor: {
-      '1': 'draft comment text'
+      1: 'draft comment text'
     }
   }
 
@@ -43,9 +43,9 @@ beforeAll(() => {
 
   stateProps = {
     id: 'testpost',
-    post: {id: 'testpost'},
+    post: { id: 'testpost' },
     isProject: false,
-    currentUser: {id: 'currentuser'}
+    currentUser: { id: 'currentuser' }
   }
 
   dispatchProps = {

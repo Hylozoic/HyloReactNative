@@ -1,15 +1,15 @@
 import reducer,
-  {
-    createCommunity,
-    fetchCommunityExists,
-    saveCommunityUrl,
-    saveCommunityName,
-    clearNameAndUrlFromStore,
-    SAVE_COMMUNITY_NAME,
-    SAVE_COMMUNITY_URL,
-    CLEAR_NAME_AND_URL_FROM_STORE,
-    FETCH_URL_EXISTS
-  }
+{
+  createCommunity,
+  fetchCommunityExists,
+  saveCommunityUrl,
+  saveCommunityName,
+  clearNameAndUrlFromStore,
+  SAVE_COMMUNITY_NAME,
+  SAVE_COMMUNITY_URL,
+  CLEAR_NAME_AND_URL_FROM_STORE,
+  FETCH_URL_EXISTS
+}
   from './CreateCommunityFlow.store'
 
 const name = 'community name'

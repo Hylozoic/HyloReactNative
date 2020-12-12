@@ -67,7 +67,7 @@ export default class ItemChooser extends React.Component {
       initialItems: this.props.initialItems
     }
   }
-  
+
   componentDidMount () {
     const { initialSearchTerm } = this.props
     if (initialSearchTerm) this.setSearchTerm(initialSearchTerm)
@@ -126,7 +126,7 @@ export default class ItemChooser extends React.Component {
       if (defaultSuggestedItems && defaultSuggestedItemsLabel) {
         const label = defaultSuggestedItems.length > 0 ? defaultSuggestedItemsLabel : undefined
         const addedItemIds = addedItems.filter(item => item.id)
-        let filteredDefaultItems = defaultSuggestedItems
+        const filteredDefaultItems = defaultSuggestedItems
           .filter(item => !initialItemIds.includes(item.id))
           .filter(item => !addedItemIds.includes(item.id))
         if (defaultSuggestedItems.length > 0) {
@@ -154,13 +154,16 @@ export default class ItemChooser extends React.Component {
     const unChooseItem = () => this.removeItem(item)
     const pickItem = () => this.pickItem(item)
 
-    return <ItemRowComponent
-      item={item}
-      chosen={item.chosen}
-      chooseItem={chooseItem}
-      toggleChosen={toggleChosen}
-      unChooseItem={unChooseItem}
-      onPress={pickItem} />
+    return (
+      <ItemRowComponent
+        item={item}
+        chosen={item.chosen}
+        chooseItem={chooseItem}
+        toggleChosen={toggleChosen}
+        unChooseItem={unChooseItem}
+        onPress={pickItem}
+      />
+    )
   }
 
   render () {
@@ -168,31 +171,37 @@ export default class ItemChooser extends React.Component {
     const headerText = searchTerm ? `Matching "${searchTerm}"` : undefined
     const sections = this.setupItemSections(this.props.suggestedItems)
 
-    return <SafeAreaView style={style}>
-      <ItemChooserListHeader
-        {...this.props}
-        autoFocus
-        headerText={headerText}
-        setSearchTerm={this.setSearchTerm}
-        clearSearchTerm={this.clearSearchTerm} />
-      <SectionList
-        style={styles.itemList}
-        sections={sections}
-        renderSectionHeader={SectionHeader}
-        renderItem={this.renderItemRowComponent}
-        ListFooterComponent={<View style={styles.sectionFooter} />}
-        keyExtractor={item => item.id}
-        stickySectionHeadersEnabled
-        keyboardShouldPersistTaps='handled' />
-    </SafeAreaView>
+    return (
+      <SafeAreaView style={style}>
+        <ItemChooserListHeader
+          {...this.props}
+          autoFocus
+          headerText={headerText}
+          setSearchTerm={this.setSearchTerm}
+          clearSearchTerm={this.clearSearchTerm}
+        />
+        <SectionList
+          style={styles.itemList}
+          sections={sections}
+          renderSectionHeader={SectionHeader}
+          renderItem={this.renderItemRowComponent}
+          ListFooterComponent={<View style={styles.sectionFooter} />}
+          keyExtractor={item => item.id}
+          stickySectionHeadersEnabled
+          keyboardShouldPersistTaps='handled'
+        />
+      </SafeAreaView>
+    )
   }
 }
 
 export function SectionHeader ({ section: { label } }) {
   if (!label) return null
-  return <View style={styles.sectionHeader}>
-    <Text style={styles.sectionHeaderText}>{label.toUpperCase()}</Text>
-  </View>
+  return (
+    <View style={styles.sectionHeader}>
+      <Text style={styles.sectionHeaderText}>{label.toUpperCase()}</Text>
+    </View>
+  )
 }
 
 export class ItemChooserListHeader extends React.Component {
@@ -207,25 +216,27 @@ export class ItemChooserListHeader extends React.Component {
       onFocus,
       loading
     } = this.props
-    return <View style={styles.listHeader}>
-      <SearchBar
-        autoFocus={autoFocus}
-        onFocus={onFocus}
-        value={searchTerm}
-        onChangeText={setSearchTerm}
-        placeholder={searchPlaceholder}
+    return (
+      <View style={styles.listHeader}>
+        <SearchBar
+          autoFocus={autoFocus}
+          onFocus={onFocus}
+          value={searchTerm}
+          onChangeText={setSearchTerm}
+          placeholder={searchPlaceholder}
         // onCancel={clearSearchTerm}
         // onCancelText='Clear'
-        loading={loading}
-      />
-      {searchTerm && <View style={styles.listHeaderStatus}>
-        <Text style={styles.listHeaderText}>
-          <Text>{headerText}</Text>
-        </Text>
-        <TouchableOpacity onPress={clearSearchTerm}>
-          <Text style={styles.listHeaderClear}>Clear Search</Text>
-        </TouchableOpacity>
-      </View>}
-    </View>
+          loading={loading}
+        />
+        {searchTerm && <View style={styles.listHeaderStatus}>
+          <Text style={styles.listHeaderText}>
+            <Text>{headerText}</Text>
+          </Text>
+          <TouchableOpacity onPress={clearSearchTerm}>
+            <Text style={styles.listHeaderClear}>Clear Search</Text>
+          </TouchableOpacity>
+                       </View>}
+      </View>
+    )
   }
 }

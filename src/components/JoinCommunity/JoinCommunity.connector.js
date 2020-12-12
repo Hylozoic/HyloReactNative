@@ -39,14 +39,14 @@ export function makeCheckInvitation (stateProps, dispatchProps) {
 
   return () =>
     checkInvitation(invitationCodes)
-    .then(result => {
-      const isValidInvite = getInviteValid(result)
-      // NOTE: Not currently clearing the entryUrl on a failed check
-      // such that join will still be tried upon login. If the invite code
-      // is invalid (not just already used) then the user will be forwarded
-      // to the community associated with the already claimed invite.
-      isValidInvite ? navToSignup() : navToInviteExpired()
-    })
+      .then(result => {
+        const isValidInvite = getInviteValid(result)
+        // NOTE: Not currently clearing the entryUrl on a failed check
+        // such that join will still be tried upon login. If the invite code
+        // is invalid (not just already used) then the user will be forwarded
+        // to the community associated with the already claimed invite.
+        isValidInvite ? navToSignup() : navToInviteExpired()
+      })
     // NOTE: if something fails in the process of checking the
     // invitation the user will be forwarded on to the Signup
     // page given that we don't know if there is an issue (expired)
@@ -54,7 +54,7 @@ export function makeCheckInvitation (stateProps, dispatchProps) {
     // SO in this case the user will still be prompted to
     // continue to signup (or login) and JoinCommunity will
     // be tried again upon signing in.
-    .catch(err => err && navToSignup())
+      .catch(err => err && navToSignup())
 }
 
 export function makeJoinCommunity (stateProps, dispatchProps) {
@@ -63,10 +63,10 @@ export function makeJoinCommunity (stateProps, dispatchProps) {
   const getCommunityId = get('payload.data.useInvitation.membership.community.id')
   return () =>
     useInvitation(currentUser, invitationCodes)
-    .then(result => {
-      const communityId = getCommunityId(result)
-      communityId ? goToCommunity(communityId) : goToHome()
-    })
+      .then(result => {
+        const communityId = getCommunityId(result)
+        communityId ? goToCommunity(communityId) : goToHome()
+      })
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {

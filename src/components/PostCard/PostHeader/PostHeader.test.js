@@ -11,16 +11,18 @@ it('renders correctly with all=true, and no community or user', () => {
     avatarUrl: 'foo.png'
   }
   const renderer = new ReactShallowRenderer()
-  renderer.render(<PostHeader creator={creator}
+  renderer.render(<PostHeader
+    creator={creator}
     deletePost={() => {}}
     postId={22}
     canFlag
     pinned
     removePost={() => {}}
-    topics={[{name: 'topic1'}, {name: 'topic2'}]}
+    topics={[{ name: 'topic1' }, { name: 'topic2' }]}
     editPost={() => {}}
     pinPost={() => {}}
-    date={new Date(new Date().getTime() - 60000 * 10)} />)
+    date={new Date(new Date().getTime() - 60000 * 10)}
+                  />)
   const actual = renderer.getRenderOutput()
 
   expect(actual).toMatchSnapshot()
@@ -50,7 +52,8 @@ it('renders correctly when showCommunity is true', () => {
     deletePost={() => {}}
     editPost={() => {}}
     pinPost={() => {}}
-    date={new Date(new Date().getTime() - 60000 * 10)} />)
+    date={new Date(new Date().getTime() - 60000 * 10)}
+                  />)
   const actual = renderer.getRenderOutput()
 
   expect(actual).toMatchSnapshot()
@@ -80,7 +83,8 @@ it('renders correctly with no flagging', () => {
     deletePost={() => {}}
     editPost={() => {}}
     pinPost={() => {}}
-    date={new Date(new Date().getTime() - 60000 * 10)} />)
+    date={new Date(new Date().getTime() - 60000 * 10)}
+                  />)
   const actual = renderer.getRenderOutput()
 
   expect(actual).toMatchSnapshot()
@@ -89,7 +93,7 @@ it('renders correctly with no flagging', () => {
 describe('PostLabel', () => {
   it('renders', () => {
     const renderer = new ReactShallowRenderer()
-    renderer.render(<PostLabel type={'request'} />)
+    renderer.render(<PostLabel type='request' />)
 
     const actual = renderer.getRenderOutput()
 

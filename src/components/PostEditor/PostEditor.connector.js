@@ -27,16 +27,16 @@ export function mapStateToProps (state, props) {
   const communityOptions = props.communityOptions ||
     (currentUser && currentUser.memberships.toModelArray().map(m => m.community.ref))
   const selectedTopicName = get('route.params.topicName', props)
-  const selectedTopicTag = createTopicTag({name: selectedTopicName})
+  const selectedTopicTag = createTopicTag({ name: selectedTopicName })
   const defaultPost = selectedTopicName
     ? {
-      detailsText: selectedTopicTag + ' ',
-      communities: [currentCommunity]
-    } : {
-      communities: [currentCommunity]
-    }
+        detailsText: selectedTopicTag + ' ',
+        communities: [currentCommunity]
+      } : {
+        communities: [currentCommunity]
+      }
   const postId = getPostId(state, props)
-  const post = getPresentedPost(state, {id: postId})
+  const post = getPresentedPost(state, { id: postId })
   const isProject = get('route.params.isProject', props) ||
     get('type', post) === 'project'
 

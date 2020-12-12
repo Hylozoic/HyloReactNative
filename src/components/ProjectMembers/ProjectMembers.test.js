@@ -4,7 +4,7 @@ import ReactShallowRenderer from 'react-test-renderer/shallow'
 import ProjectMembers from './ProjectMembers'
 
 it('renders as expected', () => {
-  const members = [{id: 'member1'}, {id: 'member2'}]
+  const members = [{ id: 'member1' }, { id: 'member2' }]
   const props = {
     route: {
       params: {

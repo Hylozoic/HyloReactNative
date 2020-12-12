@@ -29,7 +29,7 @@ export function mapDispatchToProps (dispatch) {
   return {
     checkVersion: () =>
       dispatch(checkVersion(platformName, appVersion))
-      .then(({ error, payload }) => !error && showAlert(payload))
+        .then(({ error, payload }) => !error && showAlert(payload))
   }
 }
 

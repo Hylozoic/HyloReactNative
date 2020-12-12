@@ -1,6 +1,6 @@
 import { AnalyticsEvents } from 'hylo-utils/constants'
 
-export const MODULE_NAME = `CreateCommunityFlow`
+export const MODULE_NAME = 'CreateCommunityFlow'
 export const SAVE_COMMUNITY_NAME = `${MODULE_NAME}/SAVE_COMMUNITY_NAME`
 export const SAVE_COMMUNITY_URL = `${MODULE_NAME}/SAVE_COMMUNITY_URL`
 export const FETCH_URL_EXISTS = `${MODULE_NAME}/FETCH_URL_EXISTS`

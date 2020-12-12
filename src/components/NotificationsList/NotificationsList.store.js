@@ -89,7 +89,7 @@ export function markActivityRead (id) {
           id
         }
       }`,
-      variables: {id}
+      variables: { id }
     },
     meta: {
       id,
@@ -145,7 +145,7 @@ export function refineActivity ({ action, actor, comment, community, post, meta 
     case ACTION_COMMENT_MENTION:
       return {
         body: `wrote: ${presentedText(comment.text)}`,
-        header: `mentioned you in a comment on`,
+        header: 'mentioned you in a comment on',
         nameInHeader: true,
         onPress: () => navigate('PostDetails', { id: post.id }),
         title: post.title
@@ -154,7 +154,7 @@ export function refineActivity ({ action, actor, comment, community, post, meta 
     case ACTION_NEW_COMMENT:
       return {
         body: `wrote: ${presentedText(comment.text)}`,
-        header: `New Comment on`,
+        header: 'New Comment on',
         onPress: () => navigate('PostDetails', { id: post.id }),
         title: post.title
       }
@@ -162,7 +162,7 @@ export function refineActivity ({ action, actor, comment, community, post, meta 
     case ACTION_MENTION:
       return {
         body: `wrote: ${presentedText(post.details)}`,
-        header: `mentioned you`,
+        header: 'mentioned you',
         onPress: () => navigate('PostDetails', { id: post.id }),
         nameInHeader: true
       }
@@ -172,31 +172,31 @@ export function refineActivity ({ action, actor, comment, community, post, meta 
       const topic = topicReason.split(': ')[1]
       return {
         body: `wrote: ${presentedText(post.details)}`,
-        header: `New Post in`,
+        header: 'New Post in',
         onPress: () => navigate('PostDetails', { id: post.id }),
         topic
       }
 
     case ACTION_JOIN_REQUEST:
       return {
-        body: `asked to join`,
+        body: 'asked to join',
         community: community.name,
-        header: `New join request`,
+        header: 'New join request',
         nameInHeader: true,
         onPress: () => navigate('Settings')
       }
 
     case ACTION_APPROVED_JOIN_REQUEST:
       return {
-        body: `approved your request to join`,
+        body: 'approved your request to join',
         community: community.name,
-        header: `Join Request Approved`,
+        header: 'Join Request Approved',
         onPress: () => navigate('Feed', { communityId: community.id })
       }
     case ACTION_ANNOUNCEMENT:
       return {
         body: `wrote: ${presentedText(post.title)}`,
-        header: `posted an announcement`,
+        header: 'posted an announcement',
         onPress: () => navigate('PostDetails', { id: post.id }),
         nameInHeader: true
       }
@@ -215,7 +215,7 @@ export function refineNotification (navigation) {
     return {
       id,
       activityId: activity.id,
-      actor: pick([ 'avatarUrl', 'name' ], actor),
+      actor: pick(['avatarUrl', 'name'], actor),
       avatarSeparator,
       createdAt: humanDate(createdAt),
       ...refineActivity(activity, navigation),

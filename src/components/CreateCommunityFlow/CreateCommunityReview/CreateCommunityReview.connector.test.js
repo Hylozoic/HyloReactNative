@@ -31,7 +31,7 @@ describe('mapDispatchToProps', () => {
     expect(dispatchProps).toMatchSnapshot()
     dispatchProps.createCommunity(communityName, communityUrl)
     dispatchProps.clearNameAndUrlFromStore()
-    dispatchProps.selectCommunity({id: 1})
+    dispatchProps.selectCommunity({ id: 1 })
     expect(dispatch).toHaveBeenCalled()
     expect(dispatch.mock.calls).toMatchSnapshot()
   })

@@ -48,17 +48,20 @@ export default class NotificationOverlay extends React.Component {
   render () {
     const { position = 'top', type = 'error', onPress, message } = this.props
 
-    return <Animated.View style={[
-      styles.container,
-      styles[position + 'Position'],
-      {height: this.state.heightAnim}
-    ]}>
-      <TouchableOpacity onPress={onPress}>
-        <Text style={[styles.message, styles[type]]}>
-          {message}
-        </Text>
-      </TouchableOpacity>
-    </Animated.View>
+    return (
+      <Animated.View style={[
+        styles.container,
+        styles[position + 'Position'],
+        { height: this.state.heightAnim }
+      ]}
+      >
+        <TouchableOpacity onPress={onPress}>
+          <Text style={[styles.message, styles[type]]}>
+            {message}
+          </Text>
+        </TouchableOpacity>
+      </Animated.View>
+    )
   }
 }
 

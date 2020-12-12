@@ -58,7 +58,7 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
       const errorMessage = get('payload.response.body', action)
       return errorMessage ? { errorMessage } : null
     }
-    registerOneSignal({registerDevice})
+    registerOneSignal({ registerDevice })
     const { error, payload } = await fetchCurrentUser()
     return !error && redirectAfterLogin({
       navigation: ownProps.navigation,
@@ -80,7 +80,7 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     loginByToken: () => {
       const { loginTokenUserId, loginToken } = stateProps
       return loginTokenUserId && loginByToken(loginTokenUserId, loginToken)
-      .then(finishLogin)
+        .then(finishLogin)
     },
     login: (email, password) =>
       login(email, password).then(finishLogin)

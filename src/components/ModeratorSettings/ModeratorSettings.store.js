@@ -22,14 +22,14 @@ export function ormSessionReducer (session, { type, meta, payload }) {
     case REMOVE_MODERATOR_PENDING:
       community = Community.withId(meta.communityId)
       const moderators = community.moderators.filter(m =>
-      m.id !== meta.personId)
-      .toModelArray()
-      community.update({moderators})
+        m.id !== meta.personId)
+        .toModelArray()
+      community.update({ moderators })
       break
 
     case ADD_MODERATOR_PENDING:
       person = Person.withId(meta.personId)
-      Community.withId(meta.communityId).updateAppending({moderators: [person]})
+      Community.withId(meta.communityId).updateAppending({ moderators: [person] })
       break
   }
 }
@@ -126,7 +126,7 @@ export function addModerator (personId, communityId) {
           }
         }
       }`,
-      variables: {personId, communityId}
+      variables: { personId, communityId }
     },
     meta: {
       personId,
@@ -152,7 +152,7 @@ export function removeModerator (personId, communityId, isRemoveFromCommunity) {
           }
         }
       }`,
-      variables: {personId, communityId, isRemoveFromCommunity}
+      variables: { personId, communityId, isRemoveFromCommunity }
     },
     meta: {
       personId,
@@ -165,12 +165,12 @@ export function removeModerator (personId, communityId, isRemoveFromCommunity) {
 
 // expects props to be of the form {communityId}
 export const getModerators = ormCreateSelector(
-orm,
-state => state.orm,
-(state, props) => props.communityId,
-({ Community }, id) => {
-  const community = Community.safeGet({id})
-  if (!community) return []
-  return community.moderators.toModelArray()
-}
+  orm,
+  state => state.orm,
+  (state, props) => props.communityId,
+  ({ Community }, id) => {
+    const community = Community.safeGet({ id })
+    if (!community) return []
+    return community.moderators.toModelArray()
+  }
 )

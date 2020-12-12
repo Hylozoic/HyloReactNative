@@ -26,7 +26,7 @@ export function fetchCommunityTopic (topicName, communitySlug) {
           }
         }
       }`,
-      variables: {topicName, communitySlug}
+      variables: { topicName, communitySlug }
     },
     meta: {
       afterInteractions: true,
@@ -65,8 +65,8 @@ export const getCommunityTopic = ormCreateSelector(
   (state, props) => props.topicName,
   (state, props) => props.slug,
   (session, topicName, slug) => {
-    const topic = session.Topic.safeGet({name: topicName})
-    const community = session.Community.safeGet({slug})
+    const topic = session.Topic.safeGet({ name: topicName })
+    const community = session.Community.safeGet({ slug })
     if (!topic || !community) return false
 
     return session.CommunityTopic.filter({
@@ -76,11 +76,11 @@ export const getCommunityTopic = ormCreateSelector(
 )
 
 export function getCommunitySearchObject (communityId, communitySlugFromLink) {
-  if (communitySlugFromLink) return {slug: communitySlugFromLink}
-  if (communityId) return {id: communityId}
+  if (communitySlugFromLink) return { slug: communitySlugFromLink }
+  if (communityId) return { id: communityId }
 }
 
 export function getNetworkSearchObject (networkId, networkSlug) {
-  if (networkSlug) return {slug: networkSlug}
-  if (networkId) return {id: networkId}
+  if (networkSlug) return { slug: networkSlug }
+  if (networkId) return { id: networkId }
 }

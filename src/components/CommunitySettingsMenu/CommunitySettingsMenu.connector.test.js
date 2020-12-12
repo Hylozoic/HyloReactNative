@@ -6,7 +6,7 @@ import orm from 'store/models'
 
 it('mapStateToProps matches the latest snapshot', () => {
   const session = orm.session(orm.getEmptyState())
-  const community = session.Community.create({id: '99', name: 'bar', slug: 'foo'})
+  const community = session.Community.create({ id: '99', name: 'bar', slug: 'foo' })
 
   session.Me.create({
     id: '1',

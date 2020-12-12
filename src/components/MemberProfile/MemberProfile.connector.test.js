@@ -4,7 +4,7 @@ import { FETCH_PERSON } from './MemberProfile.store'
 describe('mapStateToProps', () => {
   it('maps the state to the props', () => {
     const id = 123
-    const route = { params: {id} }
+    const route = { params: { id } }
     const navigation = {
       navigate: jest.fn()
     }
@@ -22,14 +22,14 @@ describe('mapStateToProps', () => {
 describe('mapDispatchToProps', () => {
   it('returns the right keys', () => {
     const props = {
-      navigation: {navigate: jest.fn()}
+      navigation: { navigate: jest.fn() }
     }
     expect(mapDispatchToProps({}, props)).toMatchSnapshot()
   })
 })
 
 describe('makeOnPressMessages', () => {
-  var navigation
+  let navigation
 
   beforeEach(() => {
     navigation = {
@@ -38,23 +38,23 @@ describe('makeOnPressMessages', () => {
   })
 
   it("navigates to thread list when it's your profile", () => {
-    const onPressMessages = makeOnPressMessages({id: 1}, {id: 1}, navigation)
+    const onPressMessages = makeOnPressMessages({ id: 1 }, { id: 1 }, navigation)
     onPressMessages()
     expect(navigation.navigate).toHaveBeenCalledWith('ThreadList')
   })
 
   it('navigates to existing thread when there is one', () => {
     const messageThreadId = 99
-    const onPressMessages = makeOnPressMessages({id: 1}, {id: 2, messageThreadId}, navigation)
+    const onPressMessages = makeOnPressMessages({ id: 1 }, { id: 2, messageThreadId }, navigation)
     onPressMessages()
     expect(navigation.navigate).toHaveBeenCalledWith('Thread', { id: messageThreadId })
   })
 
   it('navigates to new message page when there is no existing thread', () => {
     const otherPersonId = 2
-    const onPressMessages = makeOnPressMessages({id: 1}, {id: otherPersonId}, navigation)
+    const onPressMessages = makeOnPressMessages({ id: 1 }, { id: otherPersonId }, navigation)
     onPressMessages()
-    expect(navigation.navigate).toHaveBeenCalledWith('NewMessage', { 'participants': [otherPersonId] })
+    expect(navigation.navigate).toHaveBeenCalledWith('NewMessage', { participants: [otherPersonId] })
   })
 })
 
@@ -62,8 +62,8 @@ describe('mergeProps', () => {
   it('returns the right keys', () => {
     const id = 78
     const stateProps = {
-      currentUser: {id: 1},
-      person: {id},
+      currentUser: { id: 1 },
+      person: { id },
       id,
       isMe: true
     }
@@ -80,7 +80,7 @@ describe('mergeProps', () => {
     expect(mergedProps).toMatchSnapshot()
     mergedProps.fetchPerson()
     expect(dispatchProps.fetchPerson).toHaveBeenCalledWith(id)
-    const changes = {name: 'bob'}
+    const changes = { name: 'bob' }
     mergedProps.updateUserSettings(changes)
     expect(dispatchProps.updateUserSettings).toHaveBeenCalledWith(changes)
   })
@@ -93,7 +93,7 @@ describe('mergeProps', () => {
       updateUserSettings: jest.fn()
     }
     const mergedProps = mergeProps(stateProps, dispatchProps, {})
-    const changes = {name: 'bob'}
+    const changes = { name: 'bob' }
     mergedProps.updateUserSettings(changes)
     expect(dispatchProps.updateUserSettings).not.toHaveBeenCalledWith(changes)
   })

@@ -12,7 +12,7 @@ import { name as appName } from './app.json'
 import ErrorBoundary from 'components/ErrorBoundary'
 import RootView from 'components/RootView'
 
-let store = getStore()
+const store = getStore()
 
 if (!isDev) {
   Sentry.init({ dsn: process.env.SENTRY_DSN_URL })
@@ -42,11 +42,11 @@ export default class AppContainer extends Component {
     OneSignal.init(isDev
       ? process.env.ONESIGNAL_APP_ID_DEBUG
       : process.env.ONESIGNAL_APP_ID_RELEASE,
-        {
-          kOSSettingsKeyAutoPrompt : false,
-          kOSSettingsKeyInAppLaunchURL: false,
-          kOSSettingsKeyInFocusDisplayOption:2
-        }
+    {
+      kOSSettingsKeyAutoPrompt: false,
+      kOSSettingsKeyInAppLaunchURL: false,
+      kOSSettingsKeyInFocusDisplayOption: 2
+    }
     )
     OneSignal.addEventListener('opened', this.handleOpenedPushNotification)
     // Controls what should happen if a notification is received while the app is open. 2 means that the notification will go directly to the device's notification center.
@@ -76,12 +76,14 @@ export default class AppContainer extends Component {
   render () {
     const { openedPushNotification } = this.state
 
-    return <ErrorBoundary>
-      <Provider store={store}>
-        <SafeAreaProvider>
-          <RootView openedPushNotification={openedPushNotification} />
-        </SafeAreaProvider>
-      </Provider>
-    </ErrorBoundary>
+    return (
+      <ErrorBoundary>
+        <Provider store={store}>
+          <SafeAreaProvider>
+            <RootView openedPushNotification={openedPushNotification} />
+          </SafeAreaProvider>
+        </Provider>
+      </ErrorBoundary>
+    )
   }
 }

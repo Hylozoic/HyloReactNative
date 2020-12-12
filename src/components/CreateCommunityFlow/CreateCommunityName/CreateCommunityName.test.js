@@ -17,7 +17,7 @@ it('displays an error message without a community name with checkAndSubmit', () 
   const renderer = ReactTestRenderer.create(<CreateCommunityName />)
   const instance = renderer.getInstance()
   const communityName = ''
-  instance.setState({communityName})
+  instance.setState({ communityName })
   instance.checkAndSubmit()
   expect(renderer.toJSON()).toMatchSnapshot()
 })
@@ -30,7 +30,7 @@ it('stores the community name and redirects with a community name with checkAndS
   const communityName = 'communityName'
   const renderer = ReactTestRenderer.create(<CreateCommunityName {...props} />)
   const instance = renderer.getInstance()
-  instance.setState({communityName})
+  instance.setState({ communityName })
   instance.checkAndSubmit()
   expect(props.saveCommunityName).toHaveBeenCalledWith(communityName)
   expect(props.goToCreateCommunityUrl).toHaveBeenCalled()
@@ -40,7 +40,7 @@ it('clears error from state with clearErrors', () => {
   const renderer = ReactTestRenderer.create(<CreateCommunityName />)
   const instance = renderer.getInstance()
   const error = 'some error'
-  instance.setState({error})
+  instance.setState({ error })
   instance.clearErrors()
   expect(instance.state.error).toBeNull()
 })

@@ -11,9 +11,9 @@ jest.mock('react-native', () => ({
       return Promise.resolve()
     },
     getItem: key => Promise.resolve(mockStorage[key]),
-    Platform: {OS: 'ios'}
+    Platform: { OS: 'ios' }
   },
-  Platform: {OS: 'ios'},
+  Platform: { OS: 'ios' },
   NativeModules: {
     RNDeviceInfo: {}
   }
@@ -22,7 +22,7 @@ jest.mock('react-native', () => ({
 jest.mock('sails.io.js', () => {
   return (socketConstructor) => ({
     sails: {
-      connect: host => socketConstructor(host, {autoConnect: false})
+      connect: host => socketConstructor(host, { autoConnect: false })
     }
   })
 })
@@ -42,38 +42,38 @@ let singletonSocket
 it('throws an error without a session cookie', () => {
   expect.assertions(1)
   return getSocket()
-  .catch(err => expect(err.message).toMatch(/must have a session cookie/))
+    .catch(err => expect(err.message).toMatch(/must have a session cookie/))
 })
 
 it('uses the session cookie', () => {
   clearSingletons()
   return setSessionCookie(mockResp)
-  .then(() => getSocket())
-  .then(socket => {
-    expect(socket).toBeTruthy()
-    singletonSocket = socket
-    socket.__originalRequest = jest.fn()
-    const callback = () => {}
-    socket.request({}, callback)
-    expect(socket.__originalRequest)
-    .toBeCalledWith({headers: {Cookie: 'foo=bar'}}, callback)
-  })
+    .then(() => getSocket())
+    .then(socket => {
+      expect(socket).toBeTruthy()
+      singletonSocket = socket
+      socket.__originalRequest = jest.fn()
+      const callback = () => {}
+      socket.request({}, callback)
+      expect(socket.__originalRequest)
+        .toBeCalledWith({ headers: { Cookie: 'foo=bar' } }, callback)
+    })
 })
 
 it('returns the singleton', () => {
   return getSocket()
-  .then(socket => expect(socket).toEqual(singletonSocket))
+    .then(socket => expect(socket).toEqual(singletonSocket))
 })
 
 it('uses a singleton promise to avoid race conditions', () => {
   clearSingletons()
   expect.assertions(19)
   return setSessionCookie(mockResp)
-  .then(() => Promise.all(times(20, () => getSocket())))
-  .then(sockets => {
-    const socket = sockets[0]
-    for (let i = 1; i < sockets.length; i++) {
-      expect(socket).toEqual(sockets[i])
-    }
-  })
+    .then(() => Promise.all(times(20, () => getSocket())))
+    .then(sockets => {
+      const socket = sockets[0]
+      for (let i = 1; i < sockets.length; i++) {
+        expect(socket).toEqual(sockets[i])
+      }
+    })
 })

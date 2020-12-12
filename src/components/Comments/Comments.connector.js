@@ -17,7 +17,7 @@ export function mapStateToProps (state, props) {
   return {
     comments,
     total,
-    hasMore: getHasMoreComments(state, {id: props.postId}),
+    hasMore: getHasMoreComments(state, { id: props.postId }),
     currentUser: getMe(state),
     pending
   }
@@ -26,7 +26,7 @@ export function mapStateToProps (state, props) {
 export const mapDispatchToProps = (dispatch, props) => {
   const { postId } = props
   return {
-    fetchCommentsMaker: cursor => () => dispatch(fetchComments(postId, {cursor}))
+    fetchCommentsMaker: cursor => () => dispatch(fetchComments(postId, { cursor }))
   }
 }
 

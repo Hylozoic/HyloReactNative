@@ -12,17 +12,23 @@ export default function ProjectMembersSummary ({ members, onPress, style, dimens
   const membersText = `${membersTotal} member${membersTotal === 1 ? '' : 's'}`
   const RootElement = onPress ? TouchableOpacity : View
 
-  return <RootElement onPress={onPress} style={[styles.membersSummary, style]}>
-    {slice(0, 3, members).map((c, index) => {
-      return <Avatar key={index}
-        dimension={dimension}
-        avatarUrl={c.avatarUrl}
-        hasBorder
-        hasOverlap={index > 0}
-        zIndex={3 - index} />
-    })}
-    <Text style={styles.membersText}>{membersText}</Text>
-  </RootElement>
+  return (
+    <RootElement onPress={onPress} style={[styles.membersSummary, style]}>
+      {slice(0, 3, members).map((c, index) => {
+        return (
+          <Avatar
+            key={index}
+            dimension={dimension}
+            avatarUrl={c.avatarUrl}
+            hasBorder
+            hasOverlap={index > 0}
+            zIndex={3 - index}
+          />
+        )
+      })}
+      <Text style={styles.membersText}>{membersText}</Text>
+    </RootElement>
+  )
 }
 
 const styles = {

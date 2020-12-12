@@ -17,7 +17,8 @@ describe('MemberHeader', () => {
       flagMember={() => {}}
       person={person}
       updateSetting={() => () => {}}
-      isMe />)
+      isMe
+                    />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()

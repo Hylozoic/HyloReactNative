@@ -21,13 +21,13 @@ describe('mapStateToProps', () => {
     newProps.goToLogin()
     expect(props.navigation.navigate).toHaveBeenCalled()
     expect(props.navigation.navigate.mock.calls)
-    .toMatchSnapshot()
+      .toMatchSnapshot()
   })
 })
 
 describe('mapDispatchToProps', () => {
   it('matches the last snapshot', () => {
     expect(mapDispatchToProps)
-    .toMatchSnapshot()
+      .toMatchSnapshot()
   })
 })

@@ -10,18 +10,19 @@ let props, state
 describe('PostEditor mapStateToProps', () => {
   beforeEach(() => {
     const session = orm.session(orm.getEmptyState())
-    community1 = session.Community.create({id: '7'})
+    community1 = session.Community.create({ id: '7' })
     session.Me.create({
       id: '10',
       memberships: [session.Membership.create({
         id: '345',
         community: community1.id,
         hasModeratorRole: true
-      })]})
-    session.Person.create({id: '10'})
+      })]
+    })
+    session.Person.create({ id: '10' })
 
-    community2 = session.Community.create({id: '8'})
-    session.Post.create({id: '1', communities: [community1.id, '8'], creator: '10'})
+    community2 = session.Community.create({ id: '8' })
+    session.Post.create({ id: '1', communities: [community1.id, '8'], creator: '10' })
     session.Attachment.create({
       id: '2', post: '1', type: 'image', url: 'foo.png', position: 1
     })
@@ -78,7 +79,7 @@ describe('PostEditor mapDispatchToProps', () => {
         }
       },
       navigation: {
-        goBack: jest.fn(),
+        goBack: jest.fn()
       }
     }
     const dispatchProps = mapDispatchToProps(dispatch, props)
@@ -98,14 +99,14 @@ describe('PostEditor mapDispatchToProps', () => {
         }
       },
       navigation: {
-        goBack: jest.fn(),
+        goBack: jest.fn()
       }
     }
     const dispatch = jest.fn(val => Promise.resolve(val))
     const dispatchProps = mapDispatchToProps(dispatch, props)
     expect(dispatchProps).toMatchSnapshot()
 
-    let postData = {
+    const postData = {
       title: '',
       communities: []
     }
@@ -115,7 +116,7 @@ describe('PostEditor mapDispatchToProps', () => {
     postData.title = 'a title'
     await expect(dispatchProps.save(postData)).rejects.toHaveProperty('message', 'You must select a community')
 
-    postData.communities = [{id: 1}]
+    postData.communities = [{ id: 1 }]
     await expect(dispatchProps.save(postData)).resolves.toBeDefined()
 
     expect(dispatch).toHaveBeenCalled()

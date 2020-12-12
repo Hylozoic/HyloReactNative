@@ -14,7 +14,7 @@ const postPromptShape = {
 
 const hasTextShadow = {
   textShadowColor: 'rgba(0, 0, 0, 0.25)',
-  textShadowOffset: {width: 0, height: 2},
+  textShadowOffset: { width: 0, height: 2 },
   textShadowRadius: 7
 }
 
@@ -77,7 +77,7 @@ export default {
   promptShadow: {
     ...postPromptShape,
     backgroundColor: white,
-    shadowOffset: {width: 0, height: 4},
+    shadowOffset: { width: 0, height: 4 },
     shadowRadius: 5,
     shadowOpacity: 1.0,
     shadowColor: capeCod10,

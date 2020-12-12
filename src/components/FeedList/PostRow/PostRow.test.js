@@ -12,7 +12,8 @@ describe('PostRow', () => {
     renderer.render(<PostRow
       post={post}
       navigate={() => {}}
-      goToCommunity={() => {}} />)
+      goToCommunity={() => {}}
+                    />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
@@ -20,9 +21,9 @@ describe('PostRow', () => {
 
   it('only displays communities in the selected network', () => {
     const communities = [
-      {name: 'community1', network: {id: 1}},
-      {name: 'community2', network: {id: 2}},
-      {name: 'community3', network: {id: 1}}
+      { name: 'community1', network: { id: 1 } },
+      { name: 'community2', network: { id: 2 } },
+      { name: 'community3', network: { id: 1 } }
     ]
     const selectedNetworkId = 1
     const post = {
@@ -34,7 +35,8 @@ describe('PostRow', () => {
       post={post}
       selectedNetworkId={selectedNetworkId}
       navigate={() => {}}
-      goToCommunity={() => {}} />)
+      goToCommunity={() => {}}
+                    />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()

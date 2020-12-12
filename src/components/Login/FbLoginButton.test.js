@@ -4,7 +4,7 @@ import React from 'react'
 
 const mocks = {
   LoginManager: {
-    logInWithPermissions: jest.fn(() => Promise.resolve({foo: 'bar'}))
+    logInWithPermissions: jest.fn(() => Promise.resolve({ foo: 'bar' }))
   },
   AccessToken: {
     getCurrentAccessToken: jest.fn(() => Promise.resolve({
@@ -32,12 +32,11 @@ it('handles a tap', () => {
   jest.spyOn(instance, 'handleResult')
 
   return instance.signIn().then(() => {
-    expect(instance.handleResult).toBeCalledWith(null, {foo: 'bar'})
+    expect(instance.handleResult).toBeCalledWith(null, { foo: 'bar' })
     expect(mocks.AccessToken.getCurrentAccessToken).toBeCalled()
     expect(onLoginFinished).toBeCalledWith('token')
   })
 })
-
 
 it('calls createErrorNotification on error', () => {
   const onLoginFinished = jest.fn()

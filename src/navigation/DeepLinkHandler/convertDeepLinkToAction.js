@@ -38,7 +38,7 @@ export function reformatPath (path) {
 
   match = routeMatchers.passwordResetTokenLogin(pathname)
   if (match) {
-    const {u: userId, t: loginToken, n: nextURL} = params
+    const { u: userId, t: loginToken, n: nextURL } = params
     const nextPath = getPathFromURL(nextURL)
 
     return `passwordResetTokenLogin/${userId}/${encodeURIComponent(loginToken)}/${encodeURIComponent(nextPath)}`

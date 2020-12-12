@@ -7,7 +7,7 @@ import Avatar from '../Avatar'
 import styles from './NotificationCard.styles'
 
 const renderCommunity = community => community
-  ? <Text style={styles.community}>${` community`}</Text>
+  ? <Text style={styles.community}>${' community'}</Text>
   : null
 
 const renderFirstName = ({ name }) =>
@@ -40,26 +40,28 @@ export default function NotificationCard ({ notification }) {
   } = notification
   const highlight = unread ? styles.highlight : null
 
-  return <View style={[ styles.container, highlight ]}>
-    <View style={avatarSeparator ? styles.separator : null}>
-      <Avatar avatarUrl={actor.avatarUrl} style={styles.avatar} />
+  return (
+    <View style={[styles.container, highlight]}>
+      <View style={avatarSeparator ? styles.separator : null}>
+        <Avatar avatarUrl={actor.avatarUrl} style={styles.avatar} />
+      </View>
+      <View style={styles.content}>
+        <Text numberOfLines={2} style={styles.header}>
+          {unread && <Text style={styles.badge}>● </Text>}
+          {renderName(notification)}
+          <Text style={[styles.text, styles.emphasize]}>{header}</Text>
+          {renderTitle(title)}
+          {renderTopic(topic)}
+        </Text>
+        <Text style={styles.text} numberOfLines={2}>
+          {renderFirstName(actor)}
+          {body}
+          {renderCommunity(community)}
+        </Text>
+        <Text style={styles.date}>{createdAt}</Text>
+      </View>
     </View>
-    <View style={styles.content}>
-      <Text numberOfLines={2} style={styles.header}>
-        {unread && <Text style={styles.badge}>● </Text>}
-        {renderName(notification)}
-        <Text style={[styles.text, styles.emphasize]}>{header}</Text>
-        {renderTitle(title)}
-        {renderTopic(topic)}
-      </Text>
-      <Text style={styles.text} numberOfLines={2}>
-        {renderFirstName(actor)}
-        {body}
-        {renderCommunity(community)}
-      </Text>
-      <Text style={styles.date}>{createdAt}</Text>
-    </View>
-  </View>
+  )
 }
 
 NotificationCard.propTypes = {

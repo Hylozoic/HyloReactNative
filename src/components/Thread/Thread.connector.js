@@ -40,7 +40,7 @@ export function mapDispatchToProps (dispatch, { navigation, route }) {
   return {
     createMessage: text => dispatch(createMessage(threadId, sanitize(text))),
     fetchMessages: cursor => dispatch(fetchMessages(threadId, { cursor })),
-    reconnectFetchMessages: () => dispatch(fetchMessages(threadId, {reset: true})),
+    reconnectFetchMessages: () => dispatch(fetchMessages(threadId, { reset: true })),
     sendIsTyping: () => sendIsTyping(threadId, true),
     updateThreadReadTime: () => dispatch(updateThreadReadTime(threadId)),
     showMember: id => navigation.navigate('MemberProfile', { id }),
@@ -50,7 +50,7 @@ export function mapDispatchToProps (dispatch, { navigation, route }) {
       if (networkId || communityId === ALL_COMMUNITIES_ID) {
         navigation.navigate('TopicSupportComingSoon')
       } else {
-        navigation.navigate('Feed',{ communityId, topicName })
+        navigation.navigate('Feed', { communityId, topicName })
       }
     }
   }
@@ -61,9 +61,9 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
   const { id, title, communityId, networkId } = stateProps
   const setNavParams = title
     ? () => navigation.setParams({
-      title,
-      onPressTitle: () => navigation.navigate('ThreadParticipants', { id })
-    })
+        title,
+        onPressTitle: () => navigation.navigate('ThreadParticipants', { id })
+      })
     : () => {}
   return {
     ...ownProps,

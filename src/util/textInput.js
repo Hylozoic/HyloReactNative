@@ -2,7 +2,7 @@
 // import TextInputState from 'react-native/lib/TextInputState'
 // import { isDev } from '../config'
 
-// UPRADE TODO: This file can be removed, it's not longer used. 
+// UPRADE TODO: This file can be removed, it's not longer used.
 //    See: https://stackoverflow.com/a/59626713
 
 // // via: http://stackoverflow.com/a/40837333/56817

@@ -50,10 +50,13 @@ export default class GoogleLoginButton extends React.Component {
       ? 'Sign up with Google'
       : 'Sign in with Google'
 
-    return <Button
-      onPress={this.signIn}
-      iconName='Google'
-      style={style}
-      text={text} />
+    return (
+      <Button
+        onPress={this.signIn}
+        iconName='Google'
+        style={style}
+        text={text}
+      />
+    )
   }
 }

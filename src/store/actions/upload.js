@@ -12,7 +12,7 @@ export default function upload (type, id, file) {
 
   const payload = request.send()
     .then(resp => {
-      let { status, text } = resp
+      const { status, text } = resp
       if (status === 200) return JSON.parse(text)
 
       let error
@@ -22,7 +22,7 @@ export default function upload (type, id, file) {
         error = new Error(text)
       }
 
-      error.response = {status}
+      error.response = { status }
       throw error
     })
     .catch(err => {
@@ -33,5 +33,5 @@ export default function upload (type, id, file) {
       throw err
     })
 
-  return {type: UPLOAD, payload, meta: {type, id}}
+  return { type: UPLOAD, payload, meta: { type, id } }
 }

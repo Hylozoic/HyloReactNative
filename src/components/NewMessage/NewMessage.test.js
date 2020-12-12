@@ -13,10 +13,10 @@ jest.mock('../KeyboardFriendlyView', () => 'KeyboardFriendlyView')
 describe('NewMessage', () => {
   it('renders correctly', () => {
     const renderer = new ReactShallowRenderer()
-    const recentContacts = [{id: 1}, {id: 2}, {id: 3}]
-    const suggestions = [{id: 7}, {id: 8}, {id: 9}]
-    const participants = [{id: 10}, {id: 11}, {id: 12}]
-    const currentUser = {id: 1}
+    const recentContacts = [{ id: 1 }, { id: 2 }, { id: 3 }]
+    const suggestions = [{ id: 7 }, { id: 8 }, { id: 9 }]
+    const participants = [{ id: 10 }, { id: 11 }, { id: 12 }]
+    const currentUser = { id: 1 }
     const pending = false
     const personInputText = ''
 
@@ -33,7 +33,7 @@ describe('NewMessage', () => {
       navigation={{ setParams: () => {} }}
       pending={pending}
       fetchRecentContacts={() => {}}
-    />)
+                    />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
@@ -52,7 +52,7 @@ describe('NewMessage', () => {
       createMessage={() => {}}
       navigation={{ setParams: () => {} }}
       pending={pending}
-    />)
+                    />)
 
     const actual2 = renderer.getRenderOutput()
 
@@ -68,7 +68,7 @@ describe('NewMessage', () => {
       suggestions: [],
       mockViewKey: 1,
       route: {
-        params: {},
+        params: {}
       },
       navigation: {
         setParams: jest.fn(),
@@ -87,7 +87,7 @@ describe('NewMessage', () => {
           <NewMessage {...props} />
         </Provider>
       ).root.findByType(NewMessage).instance
-      instance.setState({viewKey: 2})
+      instance.setState({ viewKey: 2 })
       instance.onBlurMessageInput()
       expect(instance.state.viewKey).toEqual(3)
     })

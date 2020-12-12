@@ -6,7 +6,7 @@ import selectCommunity from '../../../store/actions/selectCommunity'
 import fetchCommunityTopics, { FETCH_COMMUNITY_TOPICS } from '../../../store/actions/fetchCommunityTopics'
 import {
   getCommunityTopics, presentCommunityTopic, setTopicSubscribe, getTerm, setTerm
- } from './Topics.store'
+} from './Topics.store'
 import { get } from 'lodash/fp'
 
 export function mapStateToProps (state, props) {
@@ -59,11 +59,11 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
   const { navigation } = ownProps
   const communityId = get('id', community)
   const fetchCommunityTopics = () =>
-    dispatchProps.fetchCommunityTopics(communityId, {first: null})
+    dispatchProps.fetchCommunityTopics(communityId, { first: null })
 
   const setTopicSubscribe = (topicId, isSubscribing) =>
     dispatchProps.setTopicSubscribe(topicId, communityId, isSubscribing)
-  const goToTopic = topicName => navigation.navigate('Feed',{ topicName })
+  const goToTopic = topicName => navigation.navigate('Feed', { topicName })
 
   // previous communityId gets passed here so we can get out of
   // network/all communities
@@ -74,7 +74,7 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
   }
 
   const goToComingSoon = () => {
-    navigation.navigate('TopicSupportComingSoon',{ onBack: onBackFromComingSoon })
+    navigation.navigate('TopicSupportComingSoon', { onBack: onBackFromComingSoon })
   }
 
   const shouldRedirect = !!networkId

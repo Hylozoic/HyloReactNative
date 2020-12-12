@@ -52,7 +52,7 @@ describe('updateField', () => {
       updateLocalSetting: jest.fn()
     }
     const instance = ReactTestRenderer.create(<SignupFlow5 {...props} />).root.instance
-    instance.setState({errors: {email: 'problem'}})
+    instance.setState({ errors: { email: 'problem' } })
     instance.updateField('email', 'a@b.c')
     expect(instance.state.errors.email).toEqual(null)
     expect(props.updateLocalSetting).toHaveBeenCalledWith('email', 'a@b.c')

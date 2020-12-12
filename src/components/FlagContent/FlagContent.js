@@ -16,7 +16,7 @@ export default class FlagContent extends React.PureComponent {
   }
 
   closeModal = () => {
-    this.setState({promptVisible: false, highlightRequired: false})
+    this.setState({ promptVisible: false, highlightRequired: false })
     if (this.props.onClose) {
       this.props.onClose()
     }
@@ -30,7 +30,7 @@ export default class FlagContent extends React.PureComponent {
     const { selectedCategory } = this.state
 
     if (!this.isOptionalExplanation() && isEmpty(trim(value))) {
-      this.setState({highlightRequired: true})
+      this.setState({ highlightRequired: true })
       this.showPrompt(selectedCategory)
     } else {
       submitFlagContent(selectedCategory, trim(value), linkData)
@@ -46,11 +46,11 @@ export default class FlagContent extends React.PureComponent {
   }
 
   showPrompt (selectedCategory) {
-    this.setState({selectedCategory})
+    this.setState({ selectedCategory })
     const { type = 'content' } = this.props
     const { highlightRequired } = this.state
 
-    var subtitle = `Why was this ${type} '${selectedCategory}'`
+    let subtitle = `Why was this ${type} '${selectedCategory}'`
     if (!this.isOptionalExplanation(selectedCategory) && highlightRequired) {
       subtitle += ' (explanation required)'
     }
@@ -59,8 +59,8 @@ export default class FlagContent extends React.PureComponent {
       'Flag',
       subtitle,
       [
-        {text: 'Cancel', onPress: this.cancel, style: 'cancel'},
-        {text: 'Submit', onPress: value => this.submit(value)}
+        { text: 'Cancel', onPress: this.cancel, style: 'cancel' },
+        { text: 'Submit', onPress: value => this.submit(value) }
       ],
       {
         cancelable: false
@@ -70,11 +70,11 @@ export default class FlagContent extends React.PureComponent {
 
   render () {
     const options = [
-      {title: 'Inappropriate Content', id: 'inappropriate'},
-      {title: 'Spam', id: 'spam'},
-      {title: 'Offensive', id: 'offensive'},
-      {title: 'Illegal', id: 'illegal'},
-      {title: 'Other', id: 'other'}
+      { title: 'Inappropriate Content', id: 'inappropriate' },
+      { title: 'Spam', id: 'spam' },
+      { title: 'Offensive', id: 'offensive' },
+      { title: 'Illegal', id: 'illegal' },
+      { title: 'Other', id: 'other' }
     ]
 
     const { type = 'content' } = this.props
@@ -84,7 +84,8 @@ export default class FlagContent extends React.PureComponent {
         <Modal
           transparent
           visible
-          onRequestClose={() => this.closeModal()} >
+          onRequestClose={() => this.closeModal()}
+        >
           <View style={styles.dialog}>
             <View style={styles.dialogOverlay} />
             <View style={styles.spacer} />
@@ -99,7 +100,7 @@ export default class FlagContent extends React.PureComponent {
               </View>
               <FlatList
                 data={options}
-                renderItem={({item}) => <FlagOption id={item.id} title={item.title} onPress={() => this.showPrompt(item.id)} />}
+                renderItem={({ item }) => <FlagOption id={item.id} title={item.title} onPress={() => this.showPrompt(item.id)} />}
                 keyExtractor={item => item.id}
               />
             </View>
@@ -110,10 +111,12 @@ export default class FlagContent extends React.PureComponent {
   }
 }
 
-export function FlagOption ({id, title, onPress}) {
-  return <TouchableOpacity style={styles.actionButton} onPress={onPress}>
-    <Text style={styles.actionText}>{title}</Text>
-  </TouchableOpacity>
+export function FlagOption ({ id, title, onPress }) {
+  return (
+    <TouchableOpacity style={styles.actionButton} onPress={onPress}>
+      <Text style={styles.actionText}>{title}</Text>
+    </TouchableOpacity>
+  )
 }
 
 const styles = {

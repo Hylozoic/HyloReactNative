@@ -1,7 +1,7 @@
 import orm from './index' // this initializes redux-orm
 
 it('can be created', () => {
-  const invitation = {id: '1'}
+  const invitation = { id: '1' }
   const session = orm.session(orm.getEmptyState())
   session.Invitation.create(invitation)
 

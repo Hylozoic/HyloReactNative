@@ -26,7 +26,9 @@ const styles = StyleSheet.create({
 })
 
 export function Title ({ title, onPress }) {
-  return <TouchableOpacity onPress={onPress}>
-    <Text style={styles.title}>{title}</Text>
-  </TouchableOpacity>
+  return (
+    <TouchableOpacity onPress={onPress}>
+      <Text style={styles.title}>{title}</Text>
+    </TouchableOpacity>
+  )
 }

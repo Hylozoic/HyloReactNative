@@ -32,5 +32,5 @@ Model.prototype.updateAppending = function (attrs) {
 }
 
 Model.prototype.increment = function (attr, delta = 1) {
-  return this.update({[attr]: (this[attr] || 0) + delta})
+  return this.update({ [attr]: (this[attr] || 0) + delta })
 }

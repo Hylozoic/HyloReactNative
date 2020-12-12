@@ -26,7 +26,8 @@ it('renders correctly if currentUserHasMemberships', () => {
     showPost={() => {}}
     editPost={() => {}}
     goToCommunity={() => {}}
-    topicName={'amazing'} />)
+    topicName='amazing'
+                  />)
   const actual = renderer.getRenderOutput()
 
   expect(actual).toMatchSnapshot()
@@ -51,7 +52,8 @@ it('renders correctly if currentUserHasMemberships is false', () => {
     showPost={() => {}}
     editPost={() => {}}
     goToCommunity={() => {}}
-    topicName={'amazing'} />)
+    topicName='amazing'
+                  />)
   const actual = renderer.getRenderOutput()
 
   expect(actual).toMatchSnapshot()

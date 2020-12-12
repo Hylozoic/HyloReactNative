@@ -10,6 +10,6 @@ const getCommunity = ormCreateSelector(
   state => state.orm,
   (state, props) => get('id', props),
   (state, props) => get('slug', props),
-  ({ Community }, id, slug) => Community.safeGet({id, slug})
+  ({ Community }, id, slug) => Community.safeGet({ id, slug })
 )
 export default getCommunity

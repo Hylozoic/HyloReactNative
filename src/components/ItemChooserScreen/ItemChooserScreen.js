@@ -85,10 +85,13 @@ export default class ItemChooserScreen extends React.Component {
     const pickItem = this.props.route.params.pickItem
     const updateItems = this.props.route.params.updateItems
 
-    return <ItemChooser
-      {...this.props.route.params}
-      scope={screenTitle}
-      pickItem={pickItem ? this.pickItem : undefined}
-      updateItems={updateItems ? this.updateItems : undefined} />
+    return (
+      <ItemChooser
+        {...this.props.route.params}
+        scope={screenTitle}
+        pickItem={pickItem ? this.pickItem : undefined}
+        updateItems={updateItems ? this.updateItems : undefined}
+      />
+    )
   }
 }

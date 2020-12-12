@@ -14,7 +14,7 @@ export const makeGetPost = () => {
     state => state.orm,
     (state, props) => props.id,
     ({ Post }, id) => {
-      const post = Post.safeGet({id})
+      const post = Post.safeGet({ id })
       return post && post.ref
     }
   )
@@ -50,7 +50,7 @@ export const makeGetPostCommenters = () => {
     orm,
     state => state.orm,
     (state, props) => props.id,
-    ({ Post }, id) => Post.safeGet({id}).commenters.toRefArray()
+    ({ Post }, id) => Post.safeGet({ id }).commenters.toRefArray()
   ))
 }
 
@@ -59,7 +59,7 @@ export const makeGetPostCommunities = () => {
     orm,
     state => state.orm,
     (state, props) => props.id,
-    ({ Post }, id) => Post.safeGet({id}).communities.toRefArray()
+    ({ Post }, id) => Post.safeGet({ id }).communities.toRefArray()
   ))
 }
 
@@ -68,7 +68,7 @@ export const makeGetPostTopics = () => {
     orm,
     state => state.orm,
     (state, props) => props.id,
-    ({ Post }, id) => Post.safeGet({id}).topics.toRefArray()
+    ({ Post }, id) => Post.safeGet({ id }).topics.toRefArray()
   ))
 }
 
@@ -77,7 +77,7 @@ export const makeGetPostImageUrls = () => {
     orm,
     state => state.orm,
     (state, props) => props.id,
-    ({ Post }, id) => Post.safeGet({id}).images().orderBy(get('position')).toRefArray()
+    ({ Post }, id) => Post.safeGet({ id }).images().orderBy(get('position')).toRefArray()
   )
   return createArrayRefEqualSelector(
     selector,
@@ -92,7 +92,7 @@ export const makeGetPostIsPinned = () => {
     (state, props) => props.id,
     (state, props) => props.communityId,
     ({ Post }, id, communityId) => {
-      const postMembership = Post.safeGet({id}).postMemberships.filter(p =>
+      const postMembership = Post.safeGet({ id }).postMemberships.filter(p =>
         Number(p.community) === Number(communityId)).toRefArray()[0]
       return postMembership && !!postMembership.pinned
     }
@@ -104,6 +104,6 @@ export const makeGetPostCreator = () => {
     orm,
     state => state.orm,
     (state, props) => props.id,
-    ({ Post }, id) => Post.safeGet({id}).creator.ref
+    ({ Post }, id) => Post.safeGet({ id }).creator.ref
   )
 }

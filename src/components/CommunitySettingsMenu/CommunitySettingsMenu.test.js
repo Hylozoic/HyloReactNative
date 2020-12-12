@@ -13,7 +13,7 @@ describe('CommunitySettingsMenu', () => {
   })
 
   it('navigates', () => {
-    const props = {navigation: {navigate: jest.fn()}}
+    const props = { navigation: { navigate: jest.fn() } }
 
     const instance = ReactTestRenderer.create(<CommunitySettingsMenu {...props} />).getInstance()
 

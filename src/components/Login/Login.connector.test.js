@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux'
 
 jest.mock('react-native-onesignal', () => ({
   // eslint-disable-next-line standard/no-callback-literal
-  getPermissionSubscriptionState: jest.fn(callback => callback({userId: 5})),
+  getPermissionSubscriptionState: jest.fn(callback => callback({ userId: 5 })),
   addEventListener: jest.fn(),
   registerForPushNotifications: jest.fn(),
   inFocusDisplaying: jest.fn()
@@ -77,26 +77,26 @@ describe('mergeProps', () => {
       Promise.resolve({
         payload: {
           data: {
-            me: {id: 1}
+            me: { id: 1 }
           }
         }
       }))
 
     const stateProps = {
-      deepLinkAction: {type: 'foo', params: {id: 'bar'}}
+      deepLinkAction: { type: 'foo', params: { id: 'bar' } }
     }
 
     const ownProps = {
-      navigation: {dispatch: jest.fn()}
+      navigation: { dispatch: jest.fn() }
     }
 
     const mergedProps = mergeProps(stateProps, dispatchProps, ownProps)
     return mergedProps.loginWithFacebook('token')
-    .then(() => {
-      expect(dispatch).toHaveBeenCalled()
-      expect(dispatch.mock.calls).toMatchSnapshot()
-      expect(OneSignal.registerForPushNotifications).toBeCalled()
-      expect(ownProps.navigation.dispatch).toHaveBeenCalledWith(stateProps.deepLinkAction)
-    })
+      .then(() => {
+        expect(dispatch).toHaveBeenCalled()
+        expect(dispatch.mock.calls).toMatchSnapshot()
+        expect(OneSignal.registerForPushNotifications).toBeCalled()
+        expect(ownProps.navigation.dispatch).toHaveBeenCalledWith(stateProps.deepLinkAction)
+      })
   })
 })

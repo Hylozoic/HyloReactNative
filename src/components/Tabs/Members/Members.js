@@ -20,7 +20,7 @@ export default class Members extends React.Component {
   }
 
   render () {
-    let {
+    const {
       community,
       network,
       canModerate,
@@ -30,30 +30,34 @@ export default class Members extends React.Component {
     const showInviteButton = get('allowCommunityInvites', community) || canModerate
     // sort of a hack since members need to be even since it's rows of 2.  fixes flexbox
 
-    return <View style={styles.container}>
-      <MemberList isServerSearch
-        {...pick([
-          'hasMore',
-          'members',
-          'pending',
-          'slug',
-          'search',
-          'sortKeys',
-          'sortBy',
-          'setSort',
-          'setSearch',
-          'fetchMembers',
-          'showMember',
-          'fetchMoreMembers'], this.props)}
-      >
-        <Banner community={community} network={network} all={isAll} />
-        {showInviteButton && <Button
-          text='Invite People'
-          style={styles.button}
-          iconName={'Invite'}
-          onPress={this.goToInvitePeople} />}
-      </MemberList>
-    </View>
+    return (
+      <View style={styles.container}>
+        <MemberList
+          isServerSearch
+          {...pick([
+            'hasMore',
+            'members',
+            'pending',
+            'slug',
+            'search',
+            'sortKeys',
+            'sortBy',
+            'setSort',
+            'setSearch',
+            'fetchMembers',
+            'showMember',
+            'fetchMoreMembers'], this.props)}
+        >
+          <Banner community={community} network={network} all={isAll} />
+          {showInviteButton && <Button
+            text='Invite People'
+            style={styles.button}
+            iconName='Invite'
+            onPress={this.goToInvitePeople}
+                               />}
+        </MemberList>
+      </View>
+    )
   }
 }
 
@@ -71,11 +75,13 @@ export function Banner ({ community, network, all }) {
     return null
   }
 
-  return <View style={styles.bannerContainer}>
-    <Image source={{uri: bannerUrl}} style={styles.image} />
-    <LinearGradient style={styles.gradient} colors={bannerlinearGradientColors} />
-    <View style={styles.titleRow}>
-      <Text style={styles.name}>{name}</Text>
+  return (
+    <View style={styles.bannerContainer}>
+      <Image source={{ uri: bannerUrl }} style={styles.image} />
+      <LinearGradient style={styles.gradient} colors={bannerlinearGradientColors} />
+      <View style={styles.titleRow}>
+        <Text style={styles.name}>{name}</Text>
+      </View>
     </View>
-  </View>
+  )
 }

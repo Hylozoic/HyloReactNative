@@ -13,12 +13,12 @@ const post = {
     id: '77',
     name: 'Houdini'
   },
-  communities: [{slug: 'foom'}],
+  communities: [{ slug: 'foom' }],
   createdAt: '2017-05-19T23:24:58Z',
   imageUrls: ['foom.png'],
   title: 'Hi',
   details: 'Lo',
-  commenters: [{id: 9}, {id: 7}],
+  commenters: [{ id: 9 }, { id: 7 }],
   commentsTotal: 12,
   votesTotal: 8,
   myVote: true,
@@ -29,7 +29,7 @@ const post = {
   ],
   pinned: true,
   topics: [
-    {name: 'topic1', id: 1}
+    { name: 'topic1', id: 1 }
   ]
 }
 const currentUser = {
@@ -46,7 +46,7 @@ const props = {
   fetchPost: jest.fn(),
   showMember: jest.fn(),
   showTopic: jest.fn(),
-  createComment: jest.fn(() => Promise.resolve({success: true})),
+  createComment: jest.fn(() => Promise.resolve({ success: true })),
   goToCommunity: jest.fn(),
   navigation: {
     setParams: jest.fn(),
@@ -73,11 +73,11 @@ describe('PostDetails', () => {
     const renderer = TestRenderer.create(<Provider store={createMockStore(state)}><PostDetails {...props} /></Provider>)
     const instance = renderer.root.findByType(PostDetails).instance
     const commentText = 'some text [amention:0] #topic <some encoded stuff>'
-    instance.setState({commentText})
+    instance.setState({ commentText })
 
     const promise = instance.handleCreateComment('some text [amention:3332] #topic <some encoded stuff>')
     expect(instance.state.submitting).toBeTruthy()
-    expect(props.createComment).toHaveBeenCalledWith(`some text <a href="#" data-entity-type="mention" data-user-id="3332">amention</a> #topic &lt;some encoded stuff&gt;`)
+    expect(props.createComment).toHaveBeenCalledWith('some text <a href="#" data-entity-type="mention" data-user-id="3332">amention</a> #topic &lt;some encoded stuff&gt;')
     await promise
     expect(instance.state.submitting).toBeFalsy()
     expect(instance.state.commentText).toBe('')
@@ -86,13 +86,13 @@ describe('PostDetails', () => {
   it('handleCreateComment rejection', async () => {
     const rejectionProps = {
       ...props,
-      createComment: jest.fn(() => Promise.resolve({error: new Error('blah')}))
+      createComment: jest.fn(() => Promise.resolve({ error: new Error('blah') }))
     }
 
     const renderer = TestRenderer.create(<Provider store={createMockStore(state)}><PostDetails {...rejectionProps} /></Provider>)
     const instance = renderer.root.findByType(PostDetails).instance
     const commentText = 'some text [amention:0] #topic <some encoded stuff>'
-    instance.setState({commentText})
+    instance.setState({ commentText })
 
     const promise = instance.handleCreateComment(commentText)
     expect(instance.state.submitting).toBeTruthy()
@@ -105,7 +105,7 @@ describe('PostDetails', () => {
     const renderer = TestRenderer.create(<Provider store={createMockStore(state)}><PostDetails {...props} /></Provider>)
     const instance = renderer.root.findByType(PostDetails).instance
     const commentText = 'some text [amention:0] #topic <some encoded stuff>'
-    instance.setState({commentText})
+    instance.setState({ commentText })
 
     instance.handleCommentOnChange('something or nothing')
     expect(instance.state.commentText).toEqual('something or nothing')
@@ -116,7 +116,8 @@ describe('CommentPrompt', () => {
   it('renders correctly', () => {
     const renderer = new ReactShallowRenderer()
     renderer.render(<CommentPrompt
-      currentUser={currentUser} />)
+      currentUser={currentUser}
+                    />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
@@ -128,7 +129,8 @@ describe('Files', () => {
     const renderer = TestRenderer.create(<Files urls={[
       'http://foo.com/foo.pdf',
       'http://foo.com/bar.zip'
-    ]} />)
+    ]}
+                                         />)
     expect(renderer).toMatchSnapshot()
 
     await renderer.root.findAllByType(TouchableOpacity)[0].props.onPress()

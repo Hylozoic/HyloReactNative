@@ -22,7 +22,7 @@ afterEach(() => {
 function mockDispatch (updateType) {
   return jest.fn(action => {
     expect(action.type).toEqual(CHECK_VERSION)
-    return Promise.resolve({payload: updateType})
+    return Promise.resolve({ payload: updateType })
   })
 }
 

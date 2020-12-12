@@ -1,4 +1,4 @@
-export const UPDATE_USER_SETTINGS = `UPDATE_USER_SETTINGS`
+export const UPDATE_USER_SETTINGS = 'UPDATE_USER_SETTINGS'
 export const UPDATE_USER_SETTINGS_PENDING = `${UPDATE_USER_SETTINGS}_PENDING`
 
 export default function updateUserSettings (changes) {

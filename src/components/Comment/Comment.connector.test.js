@@ -5,12 +5,12 @@ let session, state
 
 beforeEach(() => {
   session = orm.mutableSession(orm.getEmptyState())
-  state = {orm: session.state}
+  state = { orm: session.state }
 })
 
 describe('mapStateToProps', () => {
   it('maps', () => {
-    const community = session.Community.create({id: '7', slug: 'world'})
+    const community = session.Community.create({ id: '7', slug: 'world' })
     session.Me.create({
       name: 'me',
       id: 10,
@@ -18,7 +18,8 @@ describe('mapStateToProps', () => {
         id: '345',
         community: community.id,
         hasModeratorRole: true
-      })]})
+      })]
+    })
 
     const props = {
       slug: community.slug,
@@ -45,7 +46,7 @@ describe('mergeProps', () => {
     const stateProps = {
       canModerate: true
     }
-    const ownProps = {comment: {id: 34}}
+    const ownProps = { comment: { id: 34 } }
 
     const mprops = mergeProps(stateProps, dispatchProps, ownProps)
     expect(mprops).toMatchSnapshot()
@@ -59,7 +60,7 @@ describe('mergeProps', () => {
       isCreator: true,
       canModerate: true
     }
-    const ownProps = {comment: {id: 34}}
+    const ownProps = { comment: { id: 34 } }
 
     const mprops = mergeProps(stateProps, dispatchProps, ownProps)
     expect(mprops).toMatchSnapshot()
@@ -73,7 +74,7 @@ describe('mergeProps', () => {
       canModerate: false,
       isCreator: false
     }
-    const ownProps = {comment: {id: 34}}
+    const ownProps = { comment: { id: 34 } }
 
     const mprops = mergeProps(stateProps, dispatchProps, ownProps)
     expect(mprops).toMatchSnapshot()

@@ -39,35 +39,44 @@ export default class NotificationsList extends Component {
       return <LoadingScreen />
     }
     if (!currentUserHasMemberships) {
-      return <CreateCommunityNotice
-        goToCreateCommunityName={goToCreateCommunityName}
-        text={'No notifications here, try creating your own Community!'}
-      />
+      return (
+        <CreateCommunityNotice
+          goToCreateCommunityName={goToCreateCommunityName}
+          text='No notifications here, try creating your own Community!'
+        />
+      )
     }
     if (ready && !pending && notifications.length === 0) {
       return <Text style={styles.center}>Nothing new for you!</Text>
     }
 
-    return <View style={styles.notificationsList}>
-      <FlatList
-        data={notifications}
-        keyExtractor={this.keyExtractor}
-        onEndReached={hasMore ? () => this.fetchMore(notifications.length) : null}
-        renderItem={({ item }) =>
-          <NotificationRow
-            markActivityRead={markActivityRead}
-            notification={item} />} />
-    </View>
+    return (
+      <View style={styles.notificationsList}>
+        <FlatList
+          data={notifications}
+          keyExtractor={this.keyExtractor}
+          onEndReached={hasMore ? () => this.fetchMore(notifications.length) : null}
+          renderItem={({ item }) =>
+            <NotificationRow
+              markActivityRead={markActivityRead}
+              notification={item}
+            />}
+        />
+      </View>
+    )
   }
 }
 
 export function NotificationRow ({ markActivityRead, notification }) {
-  return <View>
-    <TouchableOpacity onPress={() => {
-      if (notification.unread) markActivityRead(notification.activityId)
-      notification.onPress()
-    }}>
-      <NotificationCard notification={notification} />
-    </TouchableOpacity>
-  </View>
+  return (
+    <View>
+      <TouchableOpacity onPress={() => {
+        if (notification.unread) markActivityRead(notification.activityId)
+        notification.onPress()
+      }}
+      >
+        <NotificationCard notification={notification} />
+      </TouchableOpacity>
+    </View>
+  )
 }

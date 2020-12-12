@@ -29,7 +29,7 @@ export default class SignupFlow2 extends React.Component {
 
   onChoice ({ local, remote }) {
     this.props.changeSetting('avatarUrl')(remote)
-    this.setState({localUri: local})
+    this.setState({ localUri: local })
   }
 
   render () {
@@ -37,30 +37,37 @@ export default class SignupFlow2 extends React.Component {
     const { localUri, imagePickerPending } = this.state
 
     const imageSource = localUri
-      ? {uri: localUri}
-      : avatarUrl && {uri: avatarUrl}
+      ? { uri: localUri }
+      : avatarUrl && { uri: avatarUrl }
 
     const imagePickerChildren = imageSource && !imagePickerPending
       ? <Image style={styles.image} source={imageSource} />
-      : <View style={styles.imagePickerBackground}>
-        {imagePickerPending ? <Loading /> : <Icon name='AddImage' style={styles.cameraIcon} />}
-      </View>
+      : (
+        <View style={styles.imagePickerBackground}>
+          {imagePickerPending ? <Loading /> : <Icon name='AddImage' style={styles.cameraIcon} />}
+        </View>
+        )
 
-    return <View style={styles.container}>
-      <View style={styles.pickerContainer}>
-        <ImagePicker title='Upload a Photo'
-          type='userAvatar'
-          id={currentUser.id}
-          onChoice={choice => this.onChoice(choice)}
-          onPendingChange={pending => this.setState({imagePickerPending: pending})}>
-          {imagePickerChildren}
-        </ImagePicker>
-        <View><Text style={styles.title}>Upload a Photo</Text></View>
+    return (
+      <View style={styles.container}>
+        <View style={styles.pickerContainer}>
+          <ImagePicker
+            title='Upload a Photo'
+            type='userAvatar'
+            id={currentUser.id}
+            onChoice={choice => this.onChoice(choice)}
+            onPendingChange={pending => this.setState({ imagePickerPending: pending })}
+          >
+            {imagePickerChildren}
+          </ImagePicker>
+          <View><Text style={styles.title}>Upload a Photo</Text></View>
+        </View>
+        <Button
+          style={styles.continueButton}
+          text='Continue'
+          onPress={saveAndNext}
+        />
       </View>
-      <Button
-        style={styles.continueButton}
-        text='Continue'
-        onPress={saveAndNext} />
-    </View>
+    )
   }
 }

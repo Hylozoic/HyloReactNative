@@ -275,6 +275,6 @@ export function ormSessionReducer (session, action) {
     // deleting all attachments and topics here because we restore them from the result of the UPDATE_POST action
     const post = session.Post.withId(meta.graphql.variables.id)
     post.attachments.delete()
-    post.update({topics: []})
+    post.update({ topics: [] })
   }
 }

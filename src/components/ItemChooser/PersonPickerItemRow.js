@@ -10,10 +10,12 @@ export default function PersonPickerItemRow ({
   item,
   onPress
 }) {
-  return <TouchableOpacity style={styles.personRow} onPress={() => onPress(item)}>
-    <Avatar style={styles.personAvatar} avatarUrl={item.avatarUrl} dimension={30} />
-    <Text style={styles.personName}>{item.name}</Text>
-  </TouchableOpacity>
+  return (
+    <TouchableOpacity style={styles.personRow} onPress={() => onPress(item)}>
+      <Avatar style={styles.personAvatar} avatarUrl={item.avatarUrl} dimension={30} />
+      <Text style={styles.personName}>{item.name}</Text>
+    </TouchableOpacity>
+  )
 }
 PersonPickerItemRow.propTypes = propTypesForItemRowComponent
 

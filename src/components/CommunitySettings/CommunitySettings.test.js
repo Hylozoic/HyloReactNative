@@ -9,7 +9,7 @@ import Toast from 'react-native-root-toast'
 jest.mock('../ImagePicker', props => 'ImagePicker')
 
 describe('CommunitySettings', () => {
-  let props = {
+  const props = {
     communityId: 10,
     community: {
       id: 10,
@@ -111,10 +111,10 @@ describe('CommunitySettings', () => {
   })
 
   it('shows error toast when updates failed', () => {
-    props.updateCommunitySettings = jest.fn(() => Promise.resolve({error: true}))
+    props.updateCommunitySettings = jest.fn(() => Promise.resolve({ error: true }))
     const instance = ReactTestRenderer.create(<CommunitySettings {...props} />).getInstance()
     jest.spyOn(Toast, 'show')
-    instance.setState({changed: true})
+    instance.setState({ changed: true })
     return instance.saveChanges()
       .then((response) => {
         expect(Toast.show).toHaveBeenCalled()
@@ -174,9 +174,9 @@ describe('CommunitySettings', () => {
       const local = 'local.uri'
       const remote = 'remote.uri'
       const instance = ReactTestRenderer.create(<CommunityBanner {...props} />).getInstance()
-      instance.onChoice({local, remote}, 'banner')
+      instance.onChoice({ local, remote }, 'banner')
       expect(instance.state.bannerLocalUri).toEqual(local)
-      expect(props.updateCommunitySettings).toHaveBeenCalledWith({bannerUrl: remote})
+      expect(props.updateCommunitySettings).toHaveBeenCalledWith({ bannerUrl: remote })
     })
 
     it('shows a default banner if community has not set one', () => {

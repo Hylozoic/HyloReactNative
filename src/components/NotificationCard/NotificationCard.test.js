@@ -37,7 +37,7 @@ describe('NotificationCard', () => {
     const notification = {
       ...notificationBase,
       body: 'wrote: a fairly long comment that in theory should get truncated by the line limit, and end in elipsis',
-      header: `mentioned you in a comment on`,
+      header: 'mentioned you in a comment on',
       nameInHeader: true,
       title: 'A post to end all other posts, having an extremely long post title that just seems to go on and on and on and on'
     }

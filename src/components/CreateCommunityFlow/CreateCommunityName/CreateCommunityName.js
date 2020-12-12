@@ -55,24 +55,27 @@ export default class CreateCommunityName extends React.Component {
 
   render () {
     const { error, communityName } = this.state
-    return <ScrollView>
-      <KeyboardFriendlyView style={styles.container}>
-        <Text style={styles.header}>Let's get started!</Text>
-        <Text style={styles.description}>All good things start somewhere! Let's kick things off with a catchy name for your community.</Text>
-        <View style={styles.textInputContainer}>
-          <Text style={styles.textInputLabel}>What's the name of your community?</Text>
-          <TextInput
-            style={styles.textInput}
-            onChangeText={communityName => this.setInput('communityName', communityName)}
-            returnKeyType='next'
-            autoCapitalize='none'
-            value={communityName}
-            autoCorrect={false}
-            underlineColorAndroid={styles.androidInvisibleUnderline} />
-        </View>
-        {error && <View style={styles.errorBubble}><ErrorBubble text={error} topArrow /></View>}
-        <Button text='Continue' onPress={this.checkAndSubmit} style={styles.button} />
-      </KeyboardFriendlyView>
-    </ScrollView>
+    return (
+      <ScrollView>
+        <KeyboardFriendlyView style={styles.container}>
+          <Text style={styles.header}>Let's get started!</Text>
+          <Text style={styles.description}>All good things start somewhere! Let's kick things off with a catchy name for your community.</Text>
+          <View style={styles.textInputContainer}>
+            <Text style={styles.textInputLabel}>What's the name of your community?</Text>
+            <TextInput
+              style={styles.textInput}
+              onChangeText={communityName => this.setInput('communityName', communityName)}
+              returnKeyType='next'
+              autoCapitalize='none'
+              value={communityName}
+              autoCorrect={false}
+              underlineColorAndroid={styles.androidInvisibleUnderline}
+            />
+          </View>
+          {error && <View style={styles.errorBubble}><ErrorBubble text={error} topArrow /></View>}
+          <Button text='Continue' onPress={this.checkAndSubmit} style={styles.button} />
+        </KeyboardFriendlyView>
+      </ScrollView>
+    )
   }
 }

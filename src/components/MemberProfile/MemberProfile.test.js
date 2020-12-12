@@ -109,9 +109,9 @@ describe('MemberBanner', () => {
     const local = 'local.uri'
     const remote = 'remote.uri'
     const instance = ReactTestRenderer.create(<MemberBanner {...props} />).getInstance()
-    instance.onChoice({local, remote}, 'banner')
+    instance.onChoice({ local, remote }, 'banner')
     expect(instance.state.bannerLocalUri).toEqual(local)
-    expect(props.updateUserSettings).toHaveBeenCalledWith({bannerUrl: remote})
+    expect(props.updateUserSettings).toHaveBeenCalledWith({ bannerUrl: remote })
   })
 
   it('shows a default banner if user has not set one', () => {
@@ -178,7 +178,8 @@ describe('ReadMoreButton', () => {
   it('matches the last snapshot', () => {
     const renderer = new ReactShallowRenderer()
     renderer.render(<ReadMoreButton
-      goToDetails={() => {}} />)
+      goToDetails={() => {}}
+                    />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()

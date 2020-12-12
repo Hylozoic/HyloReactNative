@@ -9,10 +9,10 @@ jest.mock('react-native/Libraries/Alert/Alert', () => ({
 }))
 
 describe('ModeratorSettings', () => {
-  let props = {
-    moderators: [{id: 10, name: 'John Current', avatarUrl: 'http://aurl.com'}, {id: 11, name: 'John Other', avatarUrl: 'http://aurl.com'}],
-    currentUser: {id: 10},
-    community: {name: 'Community Time'},
+  const props = {
+    moderators: [{ id: 10, name: 'John Current', avatarUrl: 'http://aurl.com' }, { id: 11, name: 'John Other', avatarUrl: 'http://aurl.com' }],
+    currentUser: { id: 10 },
+    community: { name: 'Community Time' },
     fetchModerators: jest.fn(),
     addModerator: jest.fn(),
     moderatorSuggestions: [],
@@ -56,7 +56,7 @@ describe('ModeratorSettings', () => {
   it('renders ModeratorRow', () => {
     const renderer = new ReactShallowRenderer()
     const props = {
-      moderator: {id: 10, name: 'John Current', avatarUrl: 'http://aurl.com'},
+      moderator: { id: 10, name: 'John Current', avatarUrl: 'http://aurl.com' },
       showMember: jest.fn(),
       removeModerator: jest.fn()
     }
@@ -69,7 +69,7 @@ describe('ModeratorSettings', () => {
   it('renders ModeratorRow without removeModerator', () => {
     const renderer = new ReactShallowRenderer()
     const props = {
-      moderator: {id: 10, name: 'John Current', avatarUrl: 'http://aurl.com'},
+      moderator: { id: 10, name: 'John Current', avatarUrl: 'http://aurl.com' },
       showMember: jest.fn(),
       removeModerator: null
     }
@@ -89,7 +89,7 @@ describe('ModeratorSettings', () => {
   it('addModerator', () => {
     const instance = ReactTestRenderer.create(<ModeratorSettings {...props} />).getInstance()
     const moderatorId = 12
-    instance.addModerator({id: moderatorId})
+    instance.addModerator({ id: moderatorId })
     expect(props.addModerator).toHaveBeenCalledWith(moderatorId)
   })
 

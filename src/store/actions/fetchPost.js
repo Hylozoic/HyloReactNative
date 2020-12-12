@@ -1,6 +1,6 @@
 import { get } from 'lodash/fp'
 import { FETCH_COMMENTS } from '../../components/Comments/Comments.store'
-export const FETCH_POST = `FETCH_POST`
+export const FETCH_POST = 'FETCH_POST'
 
 export function getPostFieldsFragment (withComments = true) {
   return `
@@ -49,20 +49,22 @@ export function getPostFieldsFragment (withComments = true) {
   }
   commentersTotal
   commentsTotal
-  ${withComments ? `comments(first: 10, order: "desc") {
-    items {
-      id
-      text
-      creator {
-        id
-        name
-        avatarUrl
-      }
-      createdAt
-    }
-    total
-    hasMore
-  }` : ''}
+  ${withComments
+    ? `comments(first: 10, order: "desc") {
+        items {
+          id
+          text
+          creator {
+            id
+            name
+            avatarUrl
+          }
+          createdAt
+        }
+        total
+        hasMore
+      }`
+  : ''}
   linkPreview {
     title
     url

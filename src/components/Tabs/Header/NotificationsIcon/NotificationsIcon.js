@@ -4,10 +4,12 @@ import BadgedIcon from '../../../BadgedIcon'
 import styles from '../Header.styles'
 
 export default function NotificationsIcon ({ showBadge, showNotifications }) {
-  return <BadgedIcon
-    name='Notifications'
-    action={showNotifications}
-    showBadge={showBadge}
-    style={styles.icon}
-  />
+  return (
+    <BadgedIcon
+      name='Notifications'
+      action={showNotifications}
+      showBadge={showBadge}
+      style={styles.icon}
+    />
+  )
 }

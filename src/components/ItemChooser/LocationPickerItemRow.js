@@ -12,17 +12,19 @@ export default function LocationPickerItemRow ({
   onPress
 }) {
   const isGeocoded = item.id !== 'NEW'
-  
-  return <TouchableOpacity style={styles.locationRow} onPress={() => onPress(item)}>
-    {!isGeocoded && <React.Fragment>
-      <Icon name='Back' color={rhino80} style={styles.locationIcon} />
-      <Text style={[styles.locationText, styles.notGeocodedRow]}>Use "{item.fullText}" (without mapping)</Text>
-    </React.Fragment>}
-    {isGeocoded && <React.Fragment>
-      <Icon name='Location' color={caribbeanGreen} style={styles.locationIcon} />
-      <Text style={styles.locationText}>{item.fullText}</Text>
-    </React.Fragment>}
-  </TouchableOpacity>
+
+  return (
+    <TouchableOpacity style={styles.locationRow} onPress={() => onPress(item)}>
+      {!isGeocoded && <>
+        <Icon name='Back' color={rhino80} style={styles.locationIcon} />
+        <Text style={[styles.locationText, styles.notGeocodedRow]}>Use "{item.fullText}" (without mapping)</Text>
+                      </>}
+      {isGeocoded && <>
+        <Icon name='Location' color={caribbeanGreen} style={styles.locationIcon} />
+        <Text style={styles.locationText}>{item.fullText}</Text>
+                     </>}
+    </TouchableOpacity>
+  )
 }
 LocationPickerItemRow.propTypes = propTypesForItemRowComponent
 

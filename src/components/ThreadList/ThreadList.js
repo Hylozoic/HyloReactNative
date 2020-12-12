@@ -10,12 +10,12 @@ import styles from './ThreadList.styles'
 import ThreadCard from '../ThreadCard'
 
 export default class ThreadList extends Component {
-  state = {ready: false}
+  state = { ready: false }
 
   static navigationOptions = ({ navigation, route }) => header(navigation, route, {
     left: 'close',
     title: 'Messages',
-    right: {text: 'New', onPress: () => navigation.navigate('NewMessage')},
+    right: { text: 'New', onPress: () => navigation.navigate('NewMessage') },
     disableOnClick: false
   })
 
@@ -61,45 +61,49 @@ export default class ThreadList extends Component {
       return <Text style={styles.center}>No active conversations</Text>
     }
 
-    return <View style={styles.threadList}>
-      <FlatList
-        data={threads}
-        keyExtractor={this._keyExtractor}
-        onEndReached={fetchMoreThreads}
-        onRefresh={refreshThreads}
-        refreshing={pendingRefresh}
-        renderItem={({ item, index }) => <MessageRow
-          participants={item.participants}
-          message={item.latestMessage}
-          unread={item.unread}
-          currentUser={currentUser}
-          isLast={index === threads.length - 1}
-          showThread={showThread}
-        />}
-      />
-      {!pending && threads.length === 0 &&
-        <Text style={styles.center}>No active conversations</Text>
-      }
-      {!isConnected && <NotificationOverlay
-        position='bottom'
-        type='error'
-        permanent
-        message='RECONNECTING...'
-        onPress={this.scrollToBottom} />}
-    </View>
+    return (
+      <View style={styles.threadList}>
+        <FlatList
+          data={threads}
+          keyExtractor={this._keyExtractor}
+          onEndReached={fetchMoreThreads}
+          onRefresh={refreshThreads}
+          refreshing={pendingRefresh}
+          renderItem={({ item, index }) => <MessageRow
+            participants={item.participants}
+            message={item.latestMessage}
+            unread={item.unread}
+            currentUser={currentUser}
+            isLast={index === threads.length - 1}
+            showThread={showThread}
+                                           />}
+        />
+        {!pending && threads.length === 0 &&
+          <Text style={styles.center}>No active conversations</Text>}
+        {!isConnected && <NotificationOverlay
+          position='bottom'
+          type='error'
+          permanent
+          message='RECONNECTING...'
+          onPress={this.scrollToBottom}
+                         />}
+      </View>
+    )
   }
 }
 
-export function MessageRow ({message, participants, currentUser, showThread, isLast, unread}) {
-  return <View>
-    <TouchableOpacity onPress={() => showThread(message.messageThread)}>
-      <ThreadCard
-        unread={unread}
-        message={message}
-        participants={participants}
-        currentUser={currentUser}
-        isLast={isLast}
-      />
-    </TouchableOpacity>
-  </View>
+export function MessageRow ({ message, participants, currentUser, showThread, isLast, unread }) {
+  return (
+    <View>
+      <TouchableOpacity onPress={() => showThread(message.messageThread)}>
+        <ThreadCard
+          unread={unread}
+          message={message}
+          participants={participants}
+          currentUser={currentUser}
+          isLast={isLast}
+        />
+      </TouchableOpacity>
+    </View>
+  )
 }

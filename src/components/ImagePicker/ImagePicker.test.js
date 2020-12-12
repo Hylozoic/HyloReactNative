@@ -41,12 +41,13 @@ it('uploads the picked image', async () => {
     type='userAvatar'
     id='7'
     title='Choose yer image bub'
-    onChoice={onChoice} />)
+    onChoice={onChoice}
+                                                     />)
   instance.showPicker()
 
   expect(RNImagePicker.showImagePicker).toBeCalledWith({
     title: 'Choose yer image bub',
-    storageOptions: {skipBackup: true, path: 'images'},
+    storageOptions: { skipBackup: true, path: 'images' },
     takePhotoButtonTitle: null
   }, expect.any(Function))
 
@@ -71,7 +72,8 @@ it('uploads the picked image', async () => {
 it('calls onError if there is an error during picking', async () => {
   const onError = jest.fn()
   const { root: { instance } } = TestRenderer.create(<ImagePicker
-    onError={onError} />)
+    onError={onError}
+                                                     />)
   instance.showPicker()
 
   await RNImagePicker.finishImagePicker({
@@ -89,7 +91,8 @@ it('calls onError if there is an error during upload', async () => {
   }))
   const { root: { instance } } = TestRenderer.create(<ImagePicker
     onError={onError}
-    upload={upload} />)
+    upload={upload}
+                                                     />)
   instance.showPicker()
 
   await RNImagePicker.finishImagePicker({

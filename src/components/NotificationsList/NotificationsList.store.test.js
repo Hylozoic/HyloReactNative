@@ -74,7 +74,7 @@ describe('selectors/refiners', () => {
     })
     session.Comment.create({
       id: '1',
-      text: '<a href=\"#\" data-entity-type=\"mention\" data-user-id=\"86895\">Rich Churcher</a>'
+      text: '<a href="#" data-entity-type="mention" data-user-id="86895">Rich Churcher</a>'
     })
     session.Community.create({ id: '222', name: 'Aardvarks Alert' })
     session.Notification.create({ id: '1', activity: '1' })
@@ -136,14 +136,14 @@ describe('selectors/refiners', () => {
     })
 
     it('matches the previous ACTION_TOPIC snapshot', () => {
-      session.Activity.withId('1').update({ action: 'tag', meta: { reasons: [ 'tag: aardvark' ] } })
+      session.Activity.withId('1').update({ action: 'tag', meta: { reasons: ['tag: aardvark'] } })
       const notification = session.Notification.withId('1')
       const actual = store.refineActivity(notification.activity, navigation)
       expect(actual).toMatchSnapshot()
     })
 
     it('navigates to Post Detail for ACTION_TOPIC', () => {
-      session.Activity.withId('1').update({ action: 'tag', meta: { reasons: [ 'tag: aardvark' ] } })
+      session.Activity.withId('1').update({ action: 'tag', meta: { reasons: ['tag: aardvark'] } })
       const notification = session.Notification.withId('1')
       const actual = store.refineActivity(notification.activity, navigation)
       actual.onPress()
@@ -177,7 +177,7 @@ describe('selectors/refiners', () => {
       const notification = session.Notification.withId('1')
       const actual = store.refineActivity(notification.activity, navigation)
       actual.onPress()
-      expect(navigation.navigate).toHaveBeenCalledWith('Feed', { communityId: '222'})
+      expect(navigation.navigate).toHaveBeenCalledWith('Feed', { communityId: '222' })
     })
 
     it('matches the previous ACTION_ANNOUNCEMENT snapshot', () => {

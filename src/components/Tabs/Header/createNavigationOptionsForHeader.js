@@ -16,16 +16,19 @@ export default function createNavigationOptionsForHeader (navigation, title) {
     headerBackTitle: null,
     headerTitle: title,
     headerTitleStyle: styles.headerTitle,
-    headerLeft: () => 
+    headerLeft: () =>
       <MenuButton openDrawer={openDrawer} />,
-    headerRight: () => 
+    headerRight: () =>
       <View style={styles.controls}>
         <SearchIcon
-          showSearch={showSearch} />
+          showSearch={showSearch}
+        />
         <MessagesIcon
-          showMessages={showMessages} />
+          showMessages={showMessages}
+        />
         <NotificationsIcon
-          showNotifications={showNotifications} />
+          showNotifications={showNotifications}
+        />
       </View>
   }
 }

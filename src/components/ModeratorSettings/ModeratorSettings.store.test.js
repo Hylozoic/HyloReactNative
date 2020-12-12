@@ -50,8 +50,8 @@ describe('reducer', () => {
           community: {
             members: {
               items: [
-                {id: 11},
-                {id: 12}
+                { id: 11 },
+                { id: 12 }
               ]
             }
           }
@@ -69,8 +69,8 @@ describe('ModeratorSettings.store.ormSessionReducer', () => {
   })
 
   it('responds to ADD_MODERATOR_PENDING', () => {
-    session.Community.create({id: '5'})
-    session.Person.create({id: '10', name: 'John Smith'})
+    session.Community.create({ id: '5' })
+    session.Person.create({ id: '10', name: 'John Smith' })
 
     const action = {
       type: ADD_MODERATOR_PENDING,
@@ -81,7 +81,7 @@ describe('ModeratorSettings.store.ormSessionReducer', () => {
           }
         }
       },
-      meta: {personId: 10, communityId: '5'}
+      meta: { personId: 10, communityId: '5' }
     }
 
     ormSessionReducer(session, action)
@@ -91,13 +91,13 @@ describe('ModeratorSettings.store.ormSessionReducer', () => {
   })
 
   it('responds to REMOVE_MODERATOR_PENDING', () => {
-    const community = session.Community.create({id: '5'})
-    const person = session.Person.create({id: '10', name: 'John Smith'})
-    community.updateAppending({moderators: [person]})
+    const community = session.Community.create({ id: '5' })
+    const person = session.Person.create({ id: '10', name: 'John Smith' })
+    community.updateAppending({ moderators: [person] })
 
     const action = {
       type: REMOVE_MODERATOR_PENDING,
-      meta: {communityId: '5', personId: '10'}
+      meta: { communityId: '5', personId: '10' }
     }
 
     expect(session.Community.withId('5').moderators.toRefArray()).toHaveLength(1)

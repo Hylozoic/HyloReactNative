@@ -10,7 +10,7 @@ describe('mapStateToProps', () => {
     }
     const props = {
       route: {
-        params: {id: 1}
+        params: { id: 1 }
       },
       navigation: {}
     }

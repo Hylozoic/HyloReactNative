@@ -54,11 +54,13 @@ import Signup from 'components/Signup'
 
 const HomeStack = createStackNavigator()
 function HomeStackNavigator () {
-  return <HomeStack.Navigator>
-    <HomeStack.Screen name='Home' component={Home} options={{ headerShown: false }} path='/' />
-    <HomeStack.Screen name='Feed' component={Feed} path='communityFeed/:communitySlugFromLink' />
-    {/* <HomeStack.Screen name='Feed' component={Feed} path='networkFeed/:networkSlug' /> */}
-  </HomeStack.Navigator>
+  return (
+    <HomeStack.Navigator>
+      <HomeStack.Screen name='Home' component={Home} options={{ headerShown: false }} path='/' />
+      <HomeStack.Screen name='Feed' component={Feed} path='communityFeed/:communitySlugFromLink' />
+      {/* <HomeStack.Screen name='Feed' component={Feed} path='networkFeed/:networkSlug' /> */}
+    </HomeStack.Navigator>
+  )
 }
 
 const Tabs = createBottomTabNavigator()
@@ -73,18 +75,21 @@ function TabsNavigator () {
     showIcon: true,
     showLabel: true,
     pressColor: '#DCDCDC',
-    indicatorStyle: {backgroundColor: 'white'},
+    indicatorStyle: { backgroundColor: 'white' },
     style: isIOS ? tabStyles.tabNavigatorIOS : tabStyles.tabNavigatorAndroid
   }
 
-  return <Tabs.Navigator
-    screenOptions={screenOptions}
-    tabBarOptions={tabBarOptions}>
-    <Tabs.Screen name='Home' component={HomeStackNavigator} path='/' />
-    <Tabs.Screen name='Members' component={Members} path='people' />
-    <Tabs.Screen name='Topics' component={Topics} path='topics' />
-    <Tabs.Screen name='Projects' component={Projects} path='projects' />
-  </Tabs.Navigator>
+  return (
+    <Tabs.Navigator
+      screenOptions={screenOptions}
+      tabBarOptions={tabBarOptions}
+    >
+      <Tabs.Screen name='Home' component={HomeStackNavigator} path='/' />
+      <Tabs.Screen name='Members' component={Members} path='people' />
+      <Tabs.Screen name='Topics' component={Topics} path='topics' />
+      <Tabs.Screen name='Projects' component={Projects} path='projects' />
+    </Tabs.Navigator>
+  )
 }
 
 const App = createStackNavigator()
@@ -93,111 +98,123 @@ function AppNavigator () {
     cardStyle: { backgroundColor: '#FFF' }
   })
 
-  return <App.Navigator
-    screenOptions={screenOptions}
-    mode='modal'
-    headerMode='screen'>
-    <App.Screen
-      name={MAIN_ROUTE_NAME}
-      component={TabsNavigator}
-      path={MAIN_ROUTE_PATH}
-      options={({ navigation, route, params }) => ({
-        ...createNavigationOptionsForHeader(navigation, getFocusedRouteNameFromRoute(route))
-      })}
-    /> 
-    <App.Screen
-      name='TopicFeed'
-      component={Feed}
-      path='c/:communitySlugFromLink/topicFeed/:topicName'
-      options={({ route }) => ({
-        title: get('params.communityName', route)
-      })}
-    />
-    <App.Screen
-      name='Feed'
-      component={Feed}
-      path='feed/:communityId'
-      options={({ route }) => ({
-        // Don't allow opening feed of current community or network in this modal?
-        // Back button title should simply say Back?
-        title: ''
-      })}
-    />
-    {/* Screens that appear outside of tabs: Settings, Messages, etc.   */}
-    <App.Screen
-      name='MemberProfile'
-      component={MemberProfile}
-      path='people/:id'
-      options={({ route }) => ({
-        // Don't allow opening feed of current community or network in this modal?
-        // Back button title should simply say Back?
-        title: ''
-      })}
-    />
-    <App.Screen name='MemberDetails' component={MemberDetails} />
-    <App.Screen name='MemberSkillEditor,' component={MemberSkillEditor} />
-    <App.Screen name='NewMessage' component={NewMessage} />
-    <App.Screen name='PostEditor' component={PostEditor} path='post/:id' />
-    <App.Screen name='PostDetails' component={PostDetails} options={{ title: 'Detail' }} path='post/:id' />
-    <App.Screen name='ProjectMembers' component={ProjectMembers} />
-    <App.Screen name='ItemChooserScreen' component={ItemChooserScreen} />
-    <App.Screen name='UserSettings' component={UserSettings} />
-    <App.Screen name='InvitePeople' component={InvitePeople} />
-    <App.Screen name='ModeratorSettings' component={ModeratorSettings} />
-    <App.Screen name='CommunitySettingsMenu' component={CommunitySettingsMenu} />
-    <App.Screen name='CommunitySettings' component={CommunitySettings} />
-    <App.Screen name='PasswordReset' component={UserSettings} path='settings/password' />
-    <App.Screen name='NotificationsList' component={NotificationsList} options={({ navigation, route }) =>
-      header(navigation, route, { left: 'close', title: 'Notifications' })} />
-    <App.Screen name='ThreadList' component={ThreadList} options={ThreadList.navigationOptions} />
-    <App.Screen name='ThreadParticipants' component={ThreadParticipants} />
-    <App.Screen name='TopicSupportComingSoon' component={TopicSupportComingSoon} />
-    <App.Screen name='InviteExpired' component={InviteExpired} />
-    <App.Screen name='SignupFlow2' component={SignupFlow2} />
-    <App.Screen name='SignupFlow3' component={SignupFlow3} />
-    <App.Screen name='SignupFlow4' component={SignupFlow4} />
-    <App.Screen name='SignupFlow5' component={SignupFlow5} />
-    <App.Screen name='Thread' component={Thread} path='thread/:id' />
-    <App.Screen name='UseInvitation' component={JoinCommunity} path='useInvitation/:token' />
-    {/* <App.Screen name='UseAccessCode' component={JoinCommunity} path='useAccessCode/:slug/:accessCode' /> */}
-    <App.Screen name='Loading' component={LoadingScreen} />
-    <App.Screen name='CreateCommunityName' component={CreateCommunityName} />
-    <App.Screen name='CreateCommunityUrl' component={CreateCommunityUrl} />
-    <App.Screen name='CreateCommunityReview' component={CreateCommunityReview} />
-    <App.Screen name='NotificationSettings' component={NotificationSettings} options={{ title: 'Notification Settings'}} />
-    <App.Screen name='BlockedUsers' component={BlockedUsers} options={{ title: 'Blocked Users'}} />
-    <App.Screen name='SearchPage' component={SearchPage} />
-  </App.Navigator>
+  return (
+    <App.Navigator
+      screenOptions={screenOptions}
+      mode='modal'
+      headerMode='screen'
+    >
+      <App.Screen
+        name={MAIN_ROUTE_NAME}
+        component={TabsNavigator}
+        path={MAIN_ROUTE_PATH}
+        options={({ navigation, route, params }) => ({
+          ...createNavigationOptionsForHeader(navigation, getFocusedRouteNameFromRoute(route))
+        })}
+      />
+      <App.Screen
+        name='TopicFeed'
+        component={Feed}
+        path='c/:communitySlugFromLink/topicFeed/:topicName'
+        options={({ route }) => ({
+          title: get('params.communityName', route)
+        })}
+      />
+      <App.Screen
+        name='Feed'
+        component={Feed}
+        path='feed/:communityId'
+        options={({ route }) => ({
+          // Don't allow opening feed of current community or network in this modal?
+          // Back button title should simply say Back?
+          title: ''
+        })}
+      />
+      {/* Screens that appear outside of tabs: Settings, Messages, etc.   */}
+      <App.Screen
+        name='MemberProfile'
+        component={MemberProfile}
+        path='people/:id'
+        options={({ route }) => ({
+          // Don't allow opening feed of current community or network in this modal?
+          // Back button title should simply say Back?
+          title: ''
+        })}
+      />
+      <App.Screen name='MemberDetails' component={MemberDetails} />
+      <App.Screen name='MemberSkillEditor,' component={MemberSkillEditor} />
+      <App.Screen name='NewMessage' component={NewMessage} />
+      <App.Screen name='PostEditor' component={PostEditor} path='post/:id' />
+      <App.Screen name='PostDetails' component={PostDetails} options={{ title: 'Detail' }} path='post/:id' />
+      <App.Screen name='ProjectMembers' component={ProjectMembers} />
+      <App.Screen name='ItemChooserScreen' component={ItemChooserScreen} />
+      <App.Screen name='UserSettings' component={UserSettings} />
+      <App.Screen name='InvitePeople' component={InvitePeople} />
+      <App.Screen name='ModeratorSettings' component={ModeratorSettings} />
+      <App.Screen name='CommunitySettingsMenu' component={CommunitySettingsMenu} />
+      <App.Screen name='CommunitySettings' component={CommunitySettings} />
+      <App.Screen name='PasswordReset' component={UserSettings} path='settings/password' />
+      <App.Screen
+        name='NotificationsList' component={NotificationsList} options={({ navigation, route }) =>
+          header(navigation, route, { left: 'close', title: 'Notifications' })}
+      />
+      <App.Screen name='ThreadList' component={ThreadList} options={ThreadList.navigationOptions} />
+      <App.Screen name='ThreadParticipants' component={ThreadParticipants} />
+      <App.Screen name='TopicSupportComingSoon' component={TopicSupportComingSoon} />
+      <App.Screen name='InviteExpired' component={InviteExpired} />
+      <App.Screen name='SignupFlow2' component={SignupFlow2} />
+      <App.Screen name='SignupFlow3' component={SignupFlow3} />
+      <App.Screen name='SignupFlow4' component={SignupFlow4} />
+      <App.Screen name='SignupFlow5' component={SignupFlow5} />
+      <App.Screen name='Thread' component={Thread} path='thread/:id' />
+      <App.Screen name='UseInvitation' component={JoinCommunity} path='useInvitation/:token' />
+      {/* <App.Screen name='UseAccessCode' component={JoinCommunity} path='useAccessCode/:slug/:accessCode' /> */}
+      <App.Screen name='Loading' component={LoadingScreen} />
+      <App.Screen name='CreateCommunityName' component={CreateCommunityName} />
+      <App.Screen name='CreateCommunityUrl' component={CreateCommunityUrl} />
+      <App.Screen name='CreateCommunityReview' component={CreateCommunityReview} />
+      <App.Screen name='NotificationSettings' component={NotificationSettings} options={{ title: 'Notification Settings' }} />
+      <App.Screen name='BlockedUsers' component={BlockedUsers} options={{ title: 'Blocked Users' }} />
+      <App.Screen name='SearchPage' component={SearchPage} />
+    </App.Navigator>
+  )
 }
 
 const AppWithDrawer = createDrawerNavigator()
 function AppWithDrawerNavigator () {
-  return <AppWithDrawer.Navigator
-    drawerContent={props => <DrawerMenu {...props} />}
-    hideStatusBar
-    drawerType='front'
-    drawerStyle={{
-      width: Dimensions.get('window').width * 0.9
-    }}>
-    <AppWithDrawer.Screen name='DrawerHome' component={AppNavigator} />
-  </AppWithDrawer.Navigator>
+  return (
+    <AppWithDrawer.Navigator
+      drawerContent={props => <DrawerMenu {...props} />}
+      hideStatusBar
+      drawerType='front'
+      drawerStyle={{
+        width: Dimensions.get('window').width * 0.9
+      }}
+    >
+      <AppWithDrawer.Screen name='DrawerHome' component={AppNavigator} />
+    </AppWithDrawer.Navigator>
+  )
 }
 
 const Auth = createStackNavigator()
 function AuthNavigator () {
-  return <Auth.Navigator headerMode='screen'>
-    <Auth.Screen name='Login' component={Login} path='login' options={{animationEnabled: false}} />
-    {/* <Auth.Screen name='LoginByPasswordResetToken' component={Login} path='passwordResetTokenLogin/:userId/:loginToken/:nextURL' /> */}
-    <Auth.Screen name='ForgotPassword' component={ForgotPassword} path='reset-password' />
-    <App.Screen name='Signup' component={Signup} options={{ headerMode: 'screen' }} />
-    <App.Screen name='SignupFlow1' component={SignupFlow1} />
-  </Auth.Navigator>
+  return (
+    <Auth.Navigator headerMode='screen'>
+      <Auth.Screen name='Login' component={Login} path='login' options={{ animationEnabled: false }} />
+      {/* <Auth.Screen name='LoginByPasswordResetToken' component={Login} path='passwordResetTokenLogin/:userId/:loginToken/:nextURL' /> */}
+      <Auth.Screen name='ForgotPassword' component={ForgotPassword} path='reset-password' />
+      <App.Screen name='Signup' component={Signup} options={{ headerMode: 'screen' }} />
+      <App.Screen name='SignupFlow1' component={SignupFlow1} />
+    </Auth.Navigator>
+  )
 }
 
 export default function RootNavigator ({ isSignedIn }) {
-  return <NavigationContainer>
-    {isSignedIn
-      ? <AppWithDrawerNavigator />
-      : <AuthNavigator />}
-  </NavigationContainer>
+  return (
+    <NavigationContainer>
+      {isSignedIn
+        ? <AppWithDrawerNavigator />
+        : <AuthNavigator />}
+    </NavigationContainer>
+  )
 }

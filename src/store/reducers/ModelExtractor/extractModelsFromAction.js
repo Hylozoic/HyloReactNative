@@ -4,7 +4,7 @@ import ModelExtractor from './index'
 // extract immediately instead of creating new actions
 export default function extractModelsFromAction (action, session) {
   getRoots(action).forEach(({ payload, modelName, append }) =>
-    ModelExtractor.addAll({session, root: payload, modelName, append}))
+    ModelExtractor.addAll({ session, root: payload, modelName, append }))
 }
 
 export function getRoots (action) {

@@ -48,7 +48,7 @@ export default class SignupFlow5 extends React.Component {
     const {
       name, email, password, confirmPassword, showPasswordField
     } = this.props
-    var error, passwordError, confirmError
+    let error, passwordError, confirmError
     switch (key) {
       case 'name':
         error = validateUser.name(name)
@@ -92,76 +92,85 @@ export default class SignupFlow5 extends React.Component {
       makeChanges, showPasswordField, goToImage, goToSkills
     } = this.props
     const { errors } = this.state
-    return <KeyboardFriendlyView style={styles.container} {...kavProps}>
-      <ScrollView>
-        <Text style={styles.title}>Everything looking good?</Text>
-        <Text style={styles.subTitle}>
-          You can always come back and change your details at any time.
-        </Text>
-        {!isEmpty(avatarUrl) && <View style={styles.imageWrapper}>
-          <TouchableOpacity onPress={goToImage}>
-            <Image style={styles.image} source={{uri: avatarUrl}} />
+    return (
+      <KeyboardFriendlyView style={styles.container} {...kavProps}>
+        <ScrollView>
+          <Text style={styles.title}>Everything looking good?</Text>
+          <Text style={styles.subTitle}>
+            You can always come back and change your details at any time.
+          </Text>
+          {!isEmpty(avatarUrl) && <View style={styles.imageWrapper}>
+            <TouchableOpacity onPress={goToImage}>
+              <Image style={styles.image} source={{ uri: avatarUrl }} />
+            </TouchableOpacity>
+          </View>}
+          <SettingControl
+            ref={c => { this.controls.name = c }}
+            label='Your Full Name'
+            value={name}
+            toggleEditable
+            error={errors.name}
+            onChange={value => this.updateField('name', value)}
+            onSubmitEditing={() => this.updateSetting('name', name)}
+          />
+          <SettingControl
+            ref={c => { this.controls.email = c }}
+            label='Email Address'
+            value={email}
+            keyboardType='email-address'
+            autoCapitalize='none'
+            autoCorrect={false}
+            toggleEditable
+            error={errors.email}
+            onChange={value => this.updateField('email', value)}
+            onSubmitEditing={() => this.updateSetting('email', email)}
+          />
+          {showPasswordField && <SettingControl
+            ref={c => { this.controls.password = c }}
+            label='Password'
+            value={password}
+            toggleSecureTextEntry
+            toggleEditable
+            error={errors.password}
+            onChange={value => this.updateField('password', value)}
+            onSubmitEditing={() => this.updateSetting('password', password)}
+                                />}
+          {showPasswordField && <SettingControl
+            ref={c => { this.controls.confirmPassword = c }}
+            label='Confirm Password'
+            value={confirmPassword}
+            toggleSecureTextEntry
+            toggleEditable
+            error={errors.confirmPassword}
+            onChange={value => this.updateField('confirmPassword', value)}
+            onSubmitEditing={() => this.updateSetting('password', password, 'confirmPassword')}
+                                />}
+          <SettingControl
+            ref={c => { this.controls.location = c }}
+            label='Location'
+            value={location}
+            toggleEditable
+            onChange={value => this.updateField('location', value)}
+            onSubmitEditing={() => this.updateSetting('location', location)}
+          />
+          <TouchableOpacity onPress={goToSkills}>
+            <Text style={styles.skillsLabel}>Skills</Text>
+            <SkillCloud skills={skills} style={styles.skillCloud} onPress={goToSkills} />
           </TouchableOpacity>
-        </View>}
-        <SettingControl
-          ref={c => { this.controls.name = c }}
-          label='Your Full Name'
-          value={name}
-          toggleEditable
-          error={errors.name}
-          onChange={value => this.updateField('name', value)}
-          onSubmitEditing={() => this.updateSetting('name', name)} />
-        <SettingControl
-          ref={c => { this.controls.email = c }}
-          label='Email Address'
-          value={email}
-          keyboardType={'email-address'}
-          autoCapitalize='none'
-          autoCorrect={false}
-          toggleEditable
-          error={errors.email}
-          onChange={value => this.updateField('email', value)}
-          onSubmitEditing={() => this.updateSetting('email', email)} />
-        {showPasswordField && <SettingControl
-          ref={c => { this.controls.password = c }}
-          label='Password'
-          value={password}
-          toggleSecureTextEntry
-          toggleEditable
-          error={errors.password}
-          onChange={value => this.updateField('password', value)}
-          onSubmitEditing={() => this.updateSetting('password', password)} />}
-        {showPasswordField && <SettingControl
-          ref={c => { this.controls.confirmPassword = c }}
-          label='Confirm Password'
-          value={confirmPassword}
-          toggleSecureTextEntry
-          toggleEditable
-          error={errors.confirmPassword}
-          onChange={value => this.updateField('confirmPassword', value)}
-          onSubmitEditing={() => this.updateSetting('password', password, 'confirmPassword')} />}
-        <SettingControl
-          ref={c => { this.controls.location = c }}
-          label='Location'
-          value={location}
-          toggleEditable
-          onChange={value => this.updateField('location', value)}
-          onSubmitEditing={() => this.updateSetting('location', location)} />
-        <TouchableOpacity onPress={goToSkills}>
-          <Text style={styles.skillsLabel}>Skills</Text>
-          <SkillCloud skills={skills} style={styles.skillCloud} onPress={goToSkills} />
-        </TouchableOpacity>
-        <View style={styles.buttonRow}>
-          <Button
-            style={styles.changesButton}
-            text='Make Changes'
-            onPress={makeChanges} />
-          <Button
-            style={styles.continueButton}
-            text='Finish'
-            onPress={this.finishSignup} />
-        </View>
-      </ScrollView>
-    </KeyboardFriendlyView>
+          <View style={styles.buttonRow}>
+            <Button
+              style={styles.changesButton}
+              text='Make Changes'
+              onPress={makeChanges}
+            />
+            <Button
+              style={styles.continueButton}
+              text='Finish'
+              onPress={this.finishSignup}
+            />
+          </View>
+        </ScrollView>
+      </KeyboardFriendlyView>
+    )
   }
 }

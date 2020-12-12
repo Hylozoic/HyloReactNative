@@ -2,7 +2,7 @@ import { capeCod, rhino, rhino50, ghost, white } from '../../../style/colors'
 
 const hasTextShadow = {
   textShadowColor: 'rgba(0, 0, 0, 0.25)',
-  textShadowOffset: {width: 0, height: 2},
+  textShadowOffset: { width: 0, height: 2 },
   textShadowRadius: 7
 }
 

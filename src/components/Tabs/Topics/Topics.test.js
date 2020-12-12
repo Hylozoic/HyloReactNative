@@ -162,13 +162,13 @@ describe('Topics', () => {
         shouldRedirect: false,
         goToComingSoon: jest.fn(),
         fetchCommunityTopics: jest.fn(),
-        community: {id: 123},
+        community: { id: 123 },
         topics: []
       }
 
       const prevProps = {
         shouldRedirect: false,
-        community: {id: 543}
+        community: { id: 543 }
       }
 
       const instance = ReactTestRenderer.create(<Topics {...props} />).getInstance()

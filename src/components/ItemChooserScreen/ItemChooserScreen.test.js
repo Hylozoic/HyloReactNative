@@ -23,7 +23,7 @@ const testProps = {
       initialItems: items,
       ItemRowComponent: item => item.id,
       fetchSearchSuggestions: () => {
-        return { type: 'test-search' } 
+        return { type: 'test-search' }
       },
       getSearchSuggestions: () => items,
       updateItems: jest.fn()

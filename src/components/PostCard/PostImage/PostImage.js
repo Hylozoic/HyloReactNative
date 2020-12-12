@@ -20,30 +20,40 @@ export default class PostImage extends React.PureComponent {
     if (isEmpty(imageUrls)) return null
 
     if (linked) {
-      return <View>
-        <TouchableOpacity onPress={this.makeOpenURL(imageUrls[0])}>
-          <ImageBackground
-            style={[styles.background, styles.container]}
-            imageStyle={styles.backgroundImage}
-            source={{uri: imageUrls[0]}}>
-            {imageUrls.length > 0 && imageUrls.slice(1).map(uri =>
-              <TouchableHighlight onPress={this.makeOpenURL(uri)} key={uri}
-                style={styles.thumbnailWrapper}>
-                <Image source={{uri}} style={styles.thumbnail} />
-              </TouchableHighlight>)}
-          </ImageBackground>
-        </TouchableOpacity>
-      </View>
+      return (
+        <View>
+          <TouchableOpacity onPress={this.makeOpenURL(imageUrls[0])}>
+            <ImageBackground
+              style={[styles.background, styles.container]}
+              imageStyle={styles.backgroundImage}
+              source={{ uri: imageUrls[0] }}
+            >
+              {imageUrls.length > 0 && imageUrls.slice(1).map(uri =>
+                <TouchableHighlight
+                  onPress={this.makeOpenURL(uri)} key={uri}
+                  style={styles.thumbnailWrapper}
+                >
+                  <Image source={{ uri }} style={styles.thumbnail} />
+                </TouchableHighlight>)}
+            </ImageBackground>
+          </TouchableOpacity>
+        </View>
+      )
     }
 
-    return <ImageBackground
-      style={styles.background}
-      imageStyle={styles.backgroundImage}
-      source={{uri: imageUrls[0]}}>
-      {imageUrls.length > 0 && imageUrls.slice(1).map(uri =>
-        <Image key={uri} source={{uri}}
-          style={[styles.thumbnail, styles.thumbnailWrapper]} />)}
-    </ImageBackground>
+    return (
+      <ImageBackground
+        style={styles.background}
+        imageStyle={styles.backgroundImage}
+        source={{ uri: imageUrls[0] }}
+      >
+        {imageUrls.length > 0 && imageUrls.slice(1).map(uri =>
+          <Image
+            key={uri} source={{ uri }}
+            style={[styles.thumbnail, styles.thumbnailWrapper]}
+          />)}
+      </ImageBackground>
+    )
   }
 }
 

@@ -17,7 +17,7 @@ it('matches last snapshot', () => {
 it('matches last snapshot when visible is true', () => {
   const renderer = ReactTestRenderer.create(<CreateCommunityReview />)
   const instance = renderer.getInstance()
-  instance.setState({error: 'This is an error'})
+  instance.setState({ error: 'This is an error' })
   expect(renderer.toJSON()).toMatchSnapshot()
 })
 
@@ -48,11 +48,11 @@ it('calls createCommunity on submit', () => {
     communityUrl
   })
   return instance.submit()
-  .then(() => {
-    expect(props.createCommunity).toHaveBeenCalledWith(communityName, communityUrl)
-    expect(props.clearNameAndUrlFromStore).toHaveBeenCalled()
-    expect(props.goToCommunity).toHaveBeenCalledWith(result.payload.data.createCommunity.community)
-  })
+    .then(() => {
+      expect(props.createCommunity).toHaveBeenCalledWith(communityName, communityUrl)
+      expect(props.clearNameAndUrlFromStore).toHaveBeenCalled()
+      expect(props.goToCommunity).toHaveBeenCalledWith(result.payload.data.createCommunity.community)
+    })
 })
 
 it('creates an error on submit if an error is returned', () => {
@@ -73,9 +73,9 @@ it('creates an error on submit if an error is returned', () => {
     communityUrl
   })
   return instance.submit()
-  .then(() => {
-    expect(instance.state.error).toBeTruthy()
-  })
+    .then(() => {
+      expect(instance.state.error).toBeTruthy()
+    })
 })
 
 it('creates an error on submit if the promise is rejected', () => {
@@ -93,9 +93,9 @@ it('creates an error on submit if the promise is rejected', () => {
     communityUrl
   })
   return instance.submit()
-  .then(() => {
-    expect(instance.state.error).toBeTruthy()
-  })
+    .then(() => {
+      expect(instance.state.error).toBeTruthy()
+    })
 })
 
 it('has navigationOptions', () => {

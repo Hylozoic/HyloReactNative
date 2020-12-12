@@ -6,7 +6,7 @@ export default function convertMapboxToLocation (mapboxResult) {
   const regionObject = context && context.find(c => c.id.includes('region'))
   const countryObject = context && context.find(c => c.id.includes('country'))
 
-  let city = placeObject ? placeObject.text : mapboxResult.place_type[0] === 'place' ? mapboxResult.text : ''
+  const city = placeObject ? placeObject.text : mapboxResult.place_type[0] === 'place' ? mapboxResult.text : ''
 
   let addressNumber = ''
   let addressStreet = ''

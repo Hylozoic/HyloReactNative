@@ -79,8 +79,8 @@ function convertToThread (data) {
     id,
     createdAt: new Date(created_at).toString(),
     updatedAt: new Date(updated_at).toString(),
-    participants: people.map(({id, name, avatar_url}) => ({id, name, avatarUrl: avatar_url})),
-    messages: comments.map(c => convertToMessage({message: c, postId: id})),
+    participants: people.map(({ id, name, avatar_url }) => ({ id, name, avatarUrl: avatar_url })),
+    messages: comments.map(c => convertToMessage({ message: c, postId: id })),
     unreadCount: 1
   }
 }

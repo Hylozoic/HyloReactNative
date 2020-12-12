@@ -1,6 +1,6 @@
 import { formatDomainWithUrl, removeUrlFromDomain } from './index'
 
-const url = `foo`
+const url = 'foo'
 const formattedUrl = `hylo.com/c/${url}`
 
 describe('formatDomainWithUrl', () => {

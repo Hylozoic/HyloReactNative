@@ -67,5 +67,5 @@ export function fakeAlpha (color, alpha, background = '#ffffff') {
   const r = fg.r * alpha + bg.r * (1 - alpha)
   const g = fg.g * alpha + bg.g * (1 - alpha)
   const b = fg.b * alpha + bg.b * (1 - alpha)
-  return tinycolor({r, g, b}).toHexString()
+  return tinycolor({ r, g, b }).toHexString()
 }

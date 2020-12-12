@@ -18,20 +18,23 @@ export default class Comments extends React.PureComponent {
       showTopic,
       slug
     } = this.props
-    return <Comment
-      comment={comment}
-      key={comment.id}
-      showMember={showMember}
-      showTopic={showTopic}
-      slug={slug} />
+    return (
+      <Comment
+        comment={comment}
+        key={comment.id}
+        showMember={showMember}
+        showTopic={showTopic}
+        slug={slug}
+      />
+    )
   }
 
   scrollToEnd = (animated = true) => {
-    this.scrollView.scrollToEnd({animated})
+    this.scrollView.scrollToEnd({ animated })
   }
 
   componentDidMount () {
-    this.scrollView.scrollToEnd({animated: true})
+    this.scrollView.scrollToEnd({ animated: true })
   }
 
   render () {
@@ -45,34 +48,40 @@ export default class Comments extends React.PureComponent {
       fetchComments
     } = this.props
 
-    return <View style={{flex: 1}}>
-      <ScrollView
-        ref={ref => { this.scrollView = ref }}
-        onContentSizeChange={this.scrollToEnd}
-      >
-        {header}
-        <ShowMore commentsLength={comments.length}
-          total={total}
-          hasMore={hasMore}
-          fetchComments={fetchComments} />
-        {pending && <View style={styles.loadingContainer}>
-          <Loading style={styles.loading} />
-        </View>}
-        {comments.map(this.renderComment)}
-      </ScrollView>
-      {footer}
-    </View>
+    return (
+      <View style={{ flex: 1 }}>
+        <ScrollView
+          ref={ref => { this.scrollView = ref }}
+          onContentSizeChange={this.scrollToEnd}
+        >
+          {header}
+          <ShowMore
+            commentsLength={comments.length}
+            total={total}
+            hasMore={hasMore}
+            fetchComments={fetchComments}
+          />
+          {pending && <View style={styles.loadingContainer}>
+            <Loading style={styles.loading} />
+          </View>}
+          {comments.map(this.renderComment)}
+        </ScrollView>
+        {footer}
+      </View>
+    )
   }
 }
 
-export function ShowMore ({total, hasMore, fetchComments}) {
+export function ShowMore ({ total, hasMore, fetchComments }) {
   if (!hasMore) return null
 
   const extra = total - 10
 
-  return <TouchableOpacity>
-    <Text style={styles.showMore} onPress={fetchComments}>
-    View {extra} previous comment{extra > 1 ? 's' : ''}
-    </Text>
-  </TouchableOpacity>
+  return (
+    <TouchableOpacity>
+      <Text style={styles.showMore} onPress={fetchComments}>
+        View {extra} previous comment{extra > 1 ? 's' : ''}
+      </Text>
+    </TouchableOpacity>
+  )
 }

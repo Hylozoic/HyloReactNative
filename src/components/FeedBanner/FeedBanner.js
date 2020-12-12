@@ -23,7 +23,7 @@ export default class FeedBanner extends React.PureComponent {
   }
 
   resetOverlayMessage = () => {
-    this.setState({overlayMessage: null})
+    this.setState({ overlayMessage: null })
   }
 
   render () {
@@ -38,10 +38,10 @@ export default class FeedBanner extends React.PureComponent {
       image = bannerImage
     } else if (network) {
       ({ bannerUrl, name } = network)
-      if (bannerUrl) image = {uri: bannerUrl}
+      if (bannerUrl) image = { uri: bannerUrl }
     } else if (community) {
       ({ bannerUrl, name } = community)
-      if (bannerUrl) image = {uri: bannerUrl}
+      if (bannerUrl) image = { uri: bannerUrl }
     } else {
       return null
     }
@@ -54,47 +54,56 @@ export default class FeedBanner extends React.PureComponent {
     const pluralPosts = (postsTotal !== 1)
     const showPostPrompt = !all && !hidePostPrompt
 
-    return <View style={{...styles.container, ...theme.container}}>
-      <Image source={image} style={styles.image} />
-      <LinearGradient style={styles.gradient} colors={bannerlinearGradientColors} />
-      <View style={styles.titleRow}>
-        <View style={styles.title}>
-          <Text style={styles.name}
-            numberOfLines={3}>
-            {name}
-          </Text>
-          {topicName &&
-            <View style={styles.topicInfo}>
-              <Text style={styles.subName}>
-                <Icon name='Star' /> {followersTotal} subscriber{pluralFollowers && 's'}
-              </Text>
-              <Text style={styles.subName}>
-                <Icon name='Post' /> {postsTotal} post{pluralPosts && 's'}
-              </Text>
-            </View>}
+    return (
+      <View style={{ ...styles.container, ...theme.container }}>
+        <Image source={image} style={styles.image} />
+        <LinearGradient style={styles.gradient} colors={bannerlinearGradientColors} />
+        <View style={styles.titleRow}>
+          <View style={styles.title}>
+            <Text
+              style={styles.name}
+              numberOfLines={3}
+            >
+              {name}
+            </Text>
+            {topicName &&
+              <View style={styles.topicInfo}>
+                <Text style={styles.subName}>
+                  <Icon name='Star' /> {followersTotal} subscriber{pluralFollowers && 's'}
+                </Text>
+                <Text style={styles.subName}>
+                  <Icon name='Post' /> {postsTotal} post{pluralPosts && 's'}
+                </Text>
+              </View>}
+          </View>
+          {!isUndefined(topicSubscribed) && <SubscribeButton
+            active={topicSubscribed} onPress={this.toggleSubscribe}
+                                            />}
         </View>
-        {!isUndefined(topicSubscribed) && <SubscribeButton
-          active={topicSubscribed} onPress={this.toggleSubscribe} />}
+        {showPostPrompt && <PostPrompt currentUser={currentUser} newPost={newPost} />}
+        {!!currentUser && showPostPrompt && <View style={styles.promptShadow} />}
+        {!!this.state.overlayMessage &&
+          <NotificationOverlay
+            message={this.state.overlayMessage}
+            type='info'
+            onComplete={this.resetOverlayMessage}
+          />}
       </View>
-      {showPostPrompt && <PostPrompt currentUser={currentUser} newPost={newPost} />}
-      {!!currentUser && showPostPrompt && <View style={styles.promptShadow} />}
-      {!!this.state.overlayMessage &&
-        <NotificationOverlay message={this.state.overlayMessage}
-          type='info'
-          onComplete={this.resetOverlayMessage} />}
-    </View>
+    )
   }
 }
 
 export function PostPrompt ({ currentUser, newPost }) {
   if (!currentUser) return null
   const { avatarUrl } = currentUser
-  return <View style={styles.postPrompt}>
-    <TouchableOpacity onPress={newPost} style={styles.promptButton}>
-      <Avatar avatarUrl={avatarUrl} style={styles.avatar} />
-      <Text style={styles.promptText}>{currentUser.firstName()}, what's on your mind?</Text>
-    </TouchableOpacity>
-  </View>
+  return (
+    <View style={styles.postPrompt}>
+      <TouchableOpacity onPress={newPost} style={styles.promptButton}>
+        <Avatar avatarUrl={avatarUrl} style={styles.avatar} />
+        <Text style={styles.promptText}>{currentUser.firstName()}, what's on your mind?</Text>
+      </TouchableOpacity>
+    </View>
+  )
 }
 
 function SubscribeButton ({ active, onPress }) {

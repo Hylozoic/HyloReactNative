@@ -1,4 +1,4 @@
-import getStore, {getEmptyState } from './index'
+import getStore, { getEmptyState } from './index'
 
 jest.mock('react-native-onesignal', () => ({
   addEventListener: jest.fn()
@@ -19,18 +19,18 @@ describe('getStore', () => {
   })
 
   it('has api middleware', async () => {
-    fetch.mockResponseSuccess({message: 'ok'})
+    fetch.mockResponseSuccess({ message: 'ok' })
 
     const action = {
       type: 'TEST',
       payload: {
-        api: {path: '/foo'}
+        api: { path: '/foo' }
       }
     }
 
     expect(await store.dispatch(action)).toEqual({
       type: 'TEST',
-      payload: {message: 'ok'}
+      payload: { message: 'ok' }
     })
   })
 

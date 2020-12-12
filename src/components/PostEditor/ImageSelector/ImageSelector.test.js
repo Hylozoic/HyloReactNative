@@ -5,7 +5,7 @@ import { Provider } from 'react-redux'
 import { createMockStore } from 'util/testing'
 import PopupMenuButton from '../../PopupMenuButton'
 
-jest.mock('util/platform', () => ({isIOS: true}))
+jest.mock('util/platform', () => ({ isIOS: true }))
 jest.mock('../../PopupMenuButton', () => 'PopupMenuButtonMock')
 
 let store
@@ -27,7 +27,8 @@ it('renders with images', () => {
       'http://foo.com/foo.png',
       'http://bar.com/bar.png',
       'http://baz.com/baz.png'
-    ]} />
+    ]}
+    />
   </Provider>)
   expect(node).toMatchSnapshot()
 })
@@ -35,8 +36,10 @@ it('renders with images', () => {
 it('has an onRemove prop', () => {
   const onRemove = jest.fn()
   const node = TestRenderer.create(<Provider store={store}>
-    <ImageSelector imageUrls={['http://foo.com/foo.png']}
-      onRemove={onRemove} />
+    <ImageSelector
+      imageUrls={['http://foo.com/foo.png']}
+      onRemove={onRemove}
+    />
   </Provider>)
 
   node.root.findByType(PopupMenuButton).props.actions[0][1]()

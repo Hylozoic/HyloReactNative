@@ -18,8 +18,8 @@ afterAll(() => timezoneMock.unregister())
 
 it('returns the expected value', () => {
   const session = orm.session(orm.getEmptyState())
-  session.Community.create({id: '7'})
-  const state = {currentNetworkAndCommunity: {communityId: '7'}, orm: session.state}
+  session.Community.create({ id: '7' })
+  const state = { currentNetworkAndCommunity: { communityId: '7' }, orm: session.state }
   const props = {}
   const stateProps = mapStateToProps(state, props)
   const dispatch = jest.fn(value => value)
@@ -40,10 +40,10 @@ it('returns the expected value', () => {
 
   expect(addUserTyping('11', 'Joe')).toMatchSnapshot()
   expect(clearUserTyping('11')).toMatchSnapshot()
-  expect(receiveComment({id: '1', text: 'hi'})).toMatchSnapshot()
+  expect(receiveComment({ id: '1', text: 'hi' })).toMatchSnapshot()
   expect(receiveMessage(message)).toMatchSnapshot()
-  expect(receiveNotification({id: '1', text: 'hi'})).toMatchSnapshot()
-  expect(receivePost({id: '1', title: 'hi'})).toMatchSnapshot()
+  expect(receiveNotification({ id: '1', text: 'hi' })).toMatchSnapshot()
+  expect(receivePost({ id: '1', title: 'hi' })).toMatchSnapshot()
   expect(receiveThread({
     id: '1',
     createdAt,

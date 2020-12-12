@@ -66,11 +66,11 @@ it('works as expected', async () => {
   expect(append.mock.calls).toEqual([
     ['type', 'userAvatar'],
     ['id', '11'],
-    ['file', {uri: 'file:///tmp/foo.jpg', name: 'foo.jpg'}]
+    ['file', { uri: 'file:///tmp/foo.jpg', name: 'foo.jpg' }]
   ])
 
   const result = await action.payload
-  expect(result).toEqual({url: 'https://images.hylo.com/bar.jpg'})
+  expect(result).toEqual({ url: 'https://images.hylo.com/bar.jpg' })
 })
 
 it('handles failure', async () => {

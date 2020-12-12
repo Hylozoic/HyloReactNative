@@ -40,7 +40,7 @@ it('hides password, and changes button when pending ', () => {
 
 it('calls functions on mount', () => {
   const props = {
-    currentUser: {id: 1},
+    currentUser: { id: 1 },
     loadUserSettings: jest.fn()
   }
   ReactTestRenderer.create(<SignupFlow1 {...props} />)
@@ -49,7 +49,7 @@ it('calls functions on mount', () => {
 
 it('loads user settings and updates errors on update when appropriate', () => {
   const props = {
-    currentUser: {id: 1},
+    currentUser: { id: 1 },
     errors: {
       email: 'one error'
     },

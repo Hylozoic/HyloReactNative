@@ -27,7 +27,7 @@ describe('reducer', () => {
       const newState = reducer(state, action)
       expect(newState).toEqual({
         ...state,
-        message: '',
+        message: ''
       })
     })
   })

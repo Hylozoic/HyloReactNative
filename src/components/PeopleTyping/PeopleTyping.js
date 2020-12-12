@@ -34,8 +34,10 @@ export default class PeopleTyping extends React.PureComponent {
     if (names.length === 1) message = `${names[0]} is typing...`
     if (names.length > 1) message = 'Multiple people are typing...'
 
-    return <View style={styles.container}>
-      <Text style={styles.message}>{message}</Text>
-    </View>
+    return (
+      <View style={styles.container}>
+        <Text style={styles.message}>{message}</Text>
+      </View>
+    )
   }
 }

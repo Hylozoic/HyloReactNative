@@ -23,7 +23,7 @@ describe('mergeProps', () => {
     const deepLinkAction = {
       type: 'Navigation/NAVIGATE',
       routeName: 'UseAccessCode',
-      params: {accessCode: 'foo', slug: 'sandbox'}
+      params: { accessCode: 'foo', slug: 'sandbox' }
     }
     const stateProps = {
       storedSkills: ['a', 'b', 'c'],
@@ -44,10 +44,10 @@ describe('mergeProps', () => {
     mergedProps.finishSignup()
     expect(dispatchProps.updateUserSettings).toHaveBeenCalled()
     expect(dispatchProps.updateUserSettings.mock.calls)
-    .toMatchSnapshot()
+      .toMatchSnapshot()
     expect(dispatchProps.updateLocalUserSettings).toHaveBeenCalled()
     expect(dispatchProps.updateLocalUserSettings.mock.calls)
-    .toMatchSnapshot()
+      .toMatchSnapshot()
     expect(ownProps.navigation.dispatch).toHaveBeenCalledWith(deepLinkAction)
   })
 })

@@ -15,7 +15,7 @@ describe('on SELECT_COMMUNITY', () => {
       }
     }
     expect(currentNetworkAndCommunity(state, action))
-    .toMatchSnapshot()
+      .toMatchSnapshot()
   })
 })
 
@@ -41,7 +41,7 @@ describe('on FETCH_CURRENT_USER', () => {
       }
     }
     expect(currentNetworkAndCommunity(state, action))
-    .toMatchSnapshot()
+      .toMatchSnapshot()
   })
 
   it('handles a user with no memberships', () => {
@@ -59,6 +59,6 @@ describe('on FETCH_CURRENT_USER', () => {
       }
     }
     expect(currentNetworkAndCommunity(state, action))
-    .toMatchSnapshot()
+      .toMatchSnapshot()
   })
 })

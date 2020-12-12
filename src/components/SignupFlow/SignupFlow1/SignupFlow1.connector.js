@@ -34,7 +34,7 @@ export function mapStateToProps (state, props) {
 export function mapDispatchToProps (dispatch, props) {
   return {
     signup: params => dispatch(signup(params)),
-    changeSetting: (setting, value) => dispatch(updateLocalUserSettings({[setting]: value})),
+    changeSetting: (setting, value) => dispatch(updateLocalUserSettings({ [setting]: value })),
     ...bindActionCreators({
       updateLocalUserSettings,
       updateUserSettings,
@@ -52,17 +52,17 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
   const saveFunc = currentUser ? updateUserSettings : signup
 
   const loadUserSettings = currentUser
-   ? () => updateLocalUserSettings(pick([
-     'name', 'email', 'location', 'avatarUrl', 'settings'
-   ], currentUser.ref))
-   : () => {}
+    ? () => updateLocalUserSettings(pick([
+        'name', 'email', 'location', 'avatarUrl', 'settings'
+      ], currentUser.ref))
+    : () => {}
 
   const signupOrUpdate = () => saveFunc(omitBy(isNil, {
     name,
     email,
     password: showPasswordField ? password : null
   }))
-  .then(({ error }) => !error && fetchCurrentUser().then(() => goToNext()))
+    .then(({ error }) => !error && fetchCurrentUser().then(() => goToNext()))
 
   return {
     ...stateProps,

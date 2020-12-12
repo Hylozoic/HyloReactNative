@@ -88,7 +88,7 @@ export function handleEvent (name, value) {
   }
   return {
     type: HANDLE_EVENT,
-    payload: {name, value: noncircular(value)}
+    payload: { name, value: noncircular(value) }
   }
 }
 
@@ -145,7 +145,7 @@ export function ormSessionReducer (session, action) {
     case RECEIVE_MESSAGE:
       const { message: { messageThread, createdAt } } = payload.data
       if (MessageThread.hasId(messageThread)) {
-        MessageThread.withId(messageThread).update({updatedAt: createdAt})
+        MessageThread.withId(messageThread).update({ updatedAt: createdAt })
       }
 
       showMessagesBadge(session)

@@ -4,13 +4,13 @@ import { SET_STATE } from '../constants'
 
 export default function optimisticMiddleware (store) {
   return next => action => {
-    let { payload, meta } = action
+    const { payload, meta } = action
     if (get('optimistic', meta) && isPromise(payload)) {
       const prevState = store.getState()
       action.payload = action.payload.then(
         result => result,
         error => {
-          store.dispatch({type: SET_STATE, payload: prevState, meta: {error}})
+          store.dispatch({ type: SET_STATE, payload: prevState, meta: { error } })
           return Promise.reject(error)
         }
       )

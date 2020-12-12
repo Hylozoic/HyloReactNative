@@ -51,7 +51,7 @@ export default class MemberList extends React.Component {
       this.props.setSearch(searchString)
     } else {
       const membersFilter = (m) => m.name.toLowerCase().includes(searchString.toLowerCase())
-      this.setState({members: filter(membersFilter, this.props.members)})
+      this.setState({ members: filter(membersFilter, this.props.members) })
     }
   }
 
@@ -79,7 +79,7 @@ export default class MemberList extends React.Component {
 
   render () {
     const { members, isServerSearch } = this.state
-    let {
+    const {
       children, sortKeys, sortBy, setSort, fetchMoreMembers, pending, hideSortOptions
     } = this.props
     const onSearch = debounce(300, text => this.search(text))
@@ -88,61 +88,70 @@ export default class MemberList extends React.Component {
       : []
     // sort of a hack since members need to be even since it's rows of 2.  fixes flexbox
     const membersForFlatList = (size(members) % 2 > 0)
-      ? members.concat([{id: -1}])
+      ? members.concat([{ id: -1 }])
       : members
 
-    const header = <View>
-      {children || null}
-      <View style={styles.listControls}>
-        <View style={styles.searchWrapper}>
-          <Icon style={styles.searchIcon} name='Search' size={30}
-            // UPGRADE TODO: Fix with this: https://stackoverflow.com/a/59626713
-            // onPress={() => focus(this.searchRef)}            
-          />
-          <TextInput placeholder='Search Members'
-            ref={ref => { this.searchRef = ref }}
-            onChangeText={onSearch}
-            underlineColorAndroid='transparent' style={styles.searchInput} />
-        </View>
-
-        {!hideSortOptions && <PopupMenuButton actions={actions}>
-          <View style={styles.sortBy}>
-            <Text style={styles.sortByText}>{sortKeys && sortKeys[sortBy]}</Text>
-            <Icon name='ArrowDown' style={styles.downArrow} />
+    const header = (
+      <View>
+        {children || null}
+        <View style={styles.listControls}>
+          <View style={styles.searchWrapper}>
+            <Icon
+              style={styles.searchIcon} name='Search' size={30}
+            />
+            <TextInput
+              placeholder='Search Members'
+              ref={ref => { this.searchRef = ref }}
+              onChangeText={onSearch}
+              underlineColorAndroid='transparent' style={styles.searchInput}
+            />
           </View>
-        </PopupMenuButton>}
-      </View>
-    </View>
 
-    return <FlatList
-      data={membersForFlatList}
-      numColumns='2'
-      renderItem={({item}) => {
-        if (item.name) {
-          return <Member member={item} showMember={this.props.showMember} />
-        } else {
-          return <View style={styles.cell} />
-        }
-      }}
-      onEndReached={isServerSearch && fetchMoreMembers}
-      keyExtractor={(item, index) => item.id}
-      ListHeaderComponent={header}
-      ListFooterComponent={pending ? <Loading style={{paddingTop: 10}} /> : null}
-    />
+          {!hideSortOptions && <PopupMenuButton actions={actions}>
+            <View style={styles.sortBy}>
+              <Text style={styles.sortByText}>{sortKeys && sortKeys[sortBy]}</Text>
+              <Icon name='ArrowDown' style={styles.downArrow} />
+            </View>
+          </PopupMenuButton>}
+        </View>
+      </View>
+    )
+
+    return (
+      <FlatList
+        data={membersForFlatList}
+        numColumns='2'
+        renderItem={({ item }) => {
+          if (item.name) {
+            return <Member member={item} showMember={this.props.showMember} />
+          } else {
+            return <View style={styles.cell} />
+          }
+        }}
+        onEndReached={isServerSearch && fetchMoreMembers}
+        keyExtractor={(item, index) => item.id}
+        ListHeaderComponent={header}
+        ListFooterComponent={pending ? <Loading style={{ paddingTop: 10 }} /> : null}
+      />
+    )
   }
 }
 
 export function Member ({ member, showMember }) {
-  return <TouchableOpacity onPress={() => isFunction(showMember) && showMember(member.id)}
-    style={[styles.cell, styles.memberCell]} >
-    <View style={styles.avatarSpacing}>
-      <Avatar avatarUrl={member.avatarUrl} dimension={72} />
-    </View>
-    <Text style={styles.memberName}>{member.name}</Text>
-    {!!member.location &&
-      <Text style={styles.memberLocation}>{member.location}</Text>}
-    <Text style={styles.memberBio} numberOfLines={4}>
-      {member.bio}
-    </Text>
-  </TouchableOpacity>
+  return (
+    <TouchableOpacity
+      onPress={() => isFunction(showMember) && showMember(member.id)}
+      style={[styles.cell, styles.memberCell]}
+    >
+      <View style={styles.avatarSpacing}>
+        <Avatar avatarUrl={member.avatarUrl} dimension={72} />
+      </View>
+      <Text style={styles.memberName}>{member.name}</Text>
+      {!!member.location &&
+        <Text style={styles.memberLocation}>{member.location}</Text>}
+      <Text style={styles.memberBio} numberOfLines={4}>
+        {member.bio}
+      </Text>
+    </TouchableOpacity>
+  )
 }

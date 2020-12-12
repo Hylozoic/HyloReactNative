@@ -7,7 +7,7 @@ import { simulate } from 'util/testing'
 import { LoadingScreen } from '../Loading'
 import NotificationsList, { NotificationRow } from './NotificationsList'
 
-jest.mock('util/platform', () => ({isIOS: true}))
+jest.mock('util/platform', () => ({ isIOS: true }))
 
 describe('NotificationsList', () => {
   let props = null
@@ -90,12 +90,13 @@ describe('NotificationsList', () => {
   it('matches the last snapshot for NotificationRow', () => {
     shallowRenderer.render(<NotificationRow
       markActivityRead={props.markActivityRead}
-      notification={props.notifications[0]} />)
+      notification={props.notifications[0]}
+                           />)
     expect(shallowRenderer.getRenderOutput()).toMatchSnapshot()
   })
 
   it('matches the renders CreateCommunityNotice if user does not have memberships', () => {
-    props['currentUserHasMemberships'] = false
+    props.currentUserHasMemberships = false
     const renderer = TestRenderer.create(<NotificationsList {...props} />)
     renderer.getInstance().setState({ ready: true })
     expect(renderer.toJSON()).toMatchSnapshot()

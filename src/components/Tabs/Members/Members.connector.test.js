@@ -41,7 +41,7 @@ describe('makeFetchOpts', () => {
 describe('mapStateToProps', () => {
   it('handles null value for lastViewedCommunity', () => {
     const session = orm.session(orm.getEmptyState())
-    const community = session.Community.create({id: 10, slug: 'tom'})
+    const community = session.Community.create({ id: 10, slug: 'tom' })
     session.Me.create({
       id: 123,
       memberships: [session.Membership.create({
@@ -90,7 +90,7 @@ describe('mergeProps', () => {
   })
 
   it('calls fetchMembers with the correct offset when fetchMoreMembers is called', () => {
-    stateProps.members = [ 'so', 'many', 'members' ]
+    stateProps.members = ['so', 'many', 'members']
     const actual = mergeProps(stateProps, dispatchProps)
     actual.fetchMoreMembers()
     expect(dispatchProps.fetchMembers.mock.calls[0][0].offset).toBe(stateProps.members.length)

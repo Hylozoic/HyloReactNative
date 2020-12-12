@@ -13,15 +13,18 @@ export default function ProjectMemberItemRow ({
   chosen,
   toggleChosen
 }) {
-  return <TouchableOpacity style={styles.personRow} onPress={() => toggleChosen(person)}>
-    <Avatar style={styles.personAvatar} avatarUrl={person.avatarUrl} dimension={30} />
-    <Text style={styles.personName}>{person.name}</Text>
-    <RoundCheckbox
-      style={styles.checkbox}
-      checked={chosen}
-      backgroundColor={caribbeanGreen}
-      onValueChange={() => toggleChosen(person)} />
-  </TouchableOpacity>
+  return (
+    <TouchableOpacity style={styles.personRow} onPress={() => toggleChosen(person)}>
+      <Avatar style={styles.personAvatar} avatarUrl={person.avatarUrl} dimension={30} />
+      <Text style={styles.personName}>{person.name}</Text>
+      <RoundCheckbox
+        style={styles.checkbox}
+        checked={chosen}
+        backgroundColor={caribbeanGreen}
+        onValueChange={() => toggleChosen(person)}
+      />
+    </TouchableOpacity>
+  )
 }
 ProjectMemberItemRow.propTypes = propTypesForItemRowComponent
 

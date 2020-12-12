@@ -31,7 +31,7 @@ describe('mapDispatchToProps', () => {
       index: 0,
       key: null,
       actions: [
-        {routeName: 'Login', type: 'Navigation/NAVIGATE'}
+        { routeName: 'Login', type: 'Navigation/NAVIGATE' }
       ]
     })
     expect(dispatch).toBeCalled()

@@ -5,7 +5,7 @@ export default function urlHandler (url, showMember, showTopic, slug) {
   // hylo links and redirects them internally. See MBL-377
   const communityRoute = `/c/${slug}/`
   const variableRoute = url.substring(communityRoute.length)
-  const [ prefix, suffix ] = variableRoute.split('/')
+  const [prefix, suffix] = variableRoute.split('/')
   switch (prefix) {
     case 'm':
       return showMember && showMember(suffix)

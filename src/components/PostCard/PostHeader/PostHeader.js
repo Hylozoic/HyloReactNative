@@ -34,13 +34,13 @@ export default class PostHeader extends React.PureComponent {
 
   showMember = () => this.props.showMember && this.props.showMember(this.props.creator.id)
   topicKeyExtractor = (item) => item.id
-  renderTopic = ({item}) => <TouchableOpacity onPress={() => this.props.showTopic && this.props.showTopic(item.name)}>
+  renderTopic = ({ item }) => <TouchableOpacity onPress={() => this.props.showTopic && this.props.showTopic(item.name)}>
     <Text style={styles.topicLabel}>#{item.name}</Text>
   </TouchableOpacity>
 
   render () {
     const {
-      creator: {avatarUrl, name, tagline},
+      creator: { avatarUrl, name, tagline },
       date,
       type,
       postId,
@@ -72,7 +72,7 @@ export default class PostHeader extends React.PureComponent {
     let flagPost
     if (canFlag) {
       flagPost = () => {
-        this.setState({flaggingVisible: true})
+        this.setState({ flaggingVisible: true })
       }
     }
 
@@ -80,61 +80,66 @@ export default class PostHeader extends React.PureComponent {
       'Confirm Delete',
       'Are you sure you want to delete this post?',
       [
-        {text: 'Yes', onPress: () => closeOnDelete ? deletePostAndClose() : deletePost()},
-        {text: 'Cancel', style: 'cancel'}
+        { text: 'Yes', onPress: () => closeOnDelete ? deletePostAndClose() : deletePost() },
+        { text: 'Cancel', style: 'cancel' }
       ]) : null
 
     const removePostWithConfirm = removePost ? () => Alert.alert(
       'Confirm Removal',
       'Are you sure you want to remove this post from this community?',
       [
-        {text: 'Yes', onPress: () => removePost()},
-        {text: 'Cancel', style: 'cancel'}
+        { text: 'Yes', onPress: () => removePost() },
+        { text: 'Cancel', style: 'cancel' }
       ]) : null
 
-    return <View style={styles.container}>
-      <View style={styles.avatarSpacing}>
-        <TouchableOpacity onPress={this.showMember}>
-          {!!avatarUrl && <Avatar avatarUrl={avatarUrl} dimension={smallAvatar && 20} />}
-        </TouchableOpacity>
+    return (
+      <View style={styles.container}>
+        <View style={styles.avatarSpacing}>
+          <TouchableOpacity onPress={this.showMember}>
+            {!!avatarUrl && <Avatar avatarUrl={avatarUrl} dimension={smallAvatar && 20} />}
+          </TouchableOpacity>
+        </View>
+        <View style={styles.meta}>
+          <TouchableOpacity onPress={this.showMember}>
+            {name && <Text style={styles.username}>{name}</Text>}
+            {!!tagline && <Text style={styles.metaText}>{tagline}</Text>}
+          </TouchableOpacity>
+          {!hideDateRow && <View style={styles.dateRow}>
+            <Text style={styles.metaText}>{humanDate(date)}</Text>
+            {!!showTopics && <FlatList
+              data={topics}
+              style={styles.topicList}
+              horizontal
+              keyExtractor={this.topicKeyExtractor}
+              showsHorizontalScrollIndicator={false}
+              renderItem={this.renderTopic}
+                             />}
+          </View>}
+        </View>
+        <View style={styles.upperRight}>
+          {pinned && <Icon name='Pin' style={styles.pinIcon} />}
+          {announcement && <Icon name='Announcement' style={styles.announcementIcon} />}
+          {type && <PostLabel type={type} />}
+          {!hideMenu && <PostMenu
+            removePost={removePostWithConfirm}
+            deletePost={deletePostWithConfirm}
+            editPost={canEdit && this.handleEditPost}
+            flagPost={flagPost}
+            pinPost={pinPost}
+            pinned={pinned}
+                        />}
+          {flaggingVisible && <FlagContent
+            type='post'
+            linkData={linkData}
+            onClose={() => this.setState({ flaggingVisible: false })}
+                              />}
+        </View>
       </View>
-      <View style={styles.meta}>
-        <TouchableOpacity onPress={this.showMember}>
-          {name && <Text style={styles.username}>{name}</Text>}
-          {!!tagline && <Text style={styles.metaText}>{tagline}</Text>}
-        </TouchableOpacity>
-        {!hideDateRow && <View style={styles.dateRow}>
-          <Text style={styles.metaText}>{humanDate(date)}</Text>
-          {!!showTopics && <FlatList
-            data={topics}
-            style={styles.topicList}
-            horizontal
-            keyExtractor={this.topicKeyExtractor}
-            showsHorizontalScrollIndicator={false}
-            renderItem={this.renderTopic} />}
-        </View>}
-      </View>
-      <View style={styles.upperRight}>
-        {pinned && <Icon name='Pin' style={styles.pinIcon} />}
-        {announcement && <Icon name='Announcement' style={styles.announcementIcon} />}
-        {type && <PostLabel type={type} />}
-        {!hideMenu && <PostMenu
-          removePost={removePostWithConfirm}
-          deletePost={deletePostWithConfirm}
-          editPost={canEdit && this.handleEditPost}
-          flagPost={flagPost}
-          pinPost={pinPost}
-          pinned={pinned} />}
-        {flaggingVisible && <FlagContent type='post'
-          linkData={linkData}
-          onClose={() => this.setState({flaggingVisible: false})} />
-        }
-      </View>
-    </View>
+    )
   }
 }
 
-export function PostMenu ({deletePost, editPost, flagPost, removePost, pinPost, pinned}) {
+export function PostMenu ({ deletePost, editPost, flagPost, removePost, pinPost, pinned }) {
   // If the function is defined, than it's a valid action
   const flagLabel = 'Flag This Post'
   const deleteLabel = 'Delete This Post'
@@ -154,11 +159,15 @@ export function PostMenu ({deletePost, editPost, flagPost, removePost, pinPost, 
   const destructiveLabels = [flagLabel, deleteLabel, removeLabel]
   const destructiveButtonIndex = destructiveLabels.includes(actions[0][0]) ? 0 : -1
 
-  return <PopupMenuButton actions={actions}
-    hitSlop={{top: 20, bottom: 10, left: 10, right: 15}}
-    destructiveButtonIndex={destructiveButtonIndex}>
-    <Icon name='More' style={styles.menuIcon} />
-  </PopupMenuButton>
+  return (
+    <PopupMenuButton
+      actions={actions}
+      hitSlop={{ top: 20, bottom: 10, left: 10, right: 15 }}
+      destructiveButtonIndex={destructiveButtonIndex}
+    >
+      <Icon name='More' style={styles.menuIcon} />
+    </PopupMenuButton>
+  )
 }
 
 export function PostLabel ({ type }) {
@@ -167,11 +176,13 @@ export function PostLabel ({ type }) {
   const labelTypeStyle = get(type, labelStyles) || labelStyles.discussion
   const boxStyle = [labelStyles.box, labelTypeStyle.box]
   const textStyle = [labelStyles.text, labelTypeStyle.text]
-  return <View style={boxStyle}>
-    <Text style={textStyle}>
-      {type.toUpperCase()}
-    </Text>
-  </View>
+  return (
+    <View style={boxStyle}>
+      <Text style={textStyle}>
+        {type.toUpperCase()}
+      </Text>
+    </View>
+  )
 }
 
 const styles = {

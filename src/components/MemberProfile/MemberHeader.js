@@ -31,38 +31,43 @@ export default function MemberHeader ({
   const blockUser = blockUserWithConfirmationFun(props.blockUser, name)
   const isAxolotl = AXOLOTL_ID === get('id', person)
 
-  return <View style={styles.header}>
-    <View style={styles.nameRow}>
-      <Control
-        style={styles.name}
-        value={name}
-        placeholder='Name'
-        editable={editable}
-        onChangeText={updateSetting('name')}
-        error={errors.name}
-        isMe={isMe} />
-      <View style={styles.icons}>
-        <TouchableOpacity onPress={onPressMessages}>
-          <Icon name='Messages' style={styles.icon} />
-        </TouchableOpacity>
-        <MemberMenu {... {flagMember, isMe, editProfile, saveChanges, editable, blockUser, isAxolotl}} />
+  return (
+    <View style={styles.header}>
+      <View style={styles.nameRow}>
+        <Control
+          style={styles.name}
+          value={name}
+          placeholder='Name'
+          editable={editable}
+          onChangeText={updateSetting('name')}
+          error={errors.name}
+          isMe={isMe}
+        />
+        <View style={styles.icons}>
+          <TouchableOpacity onPress={onPressMessages}>
+            <Icon name='Messages' style={styles.icon} />
+          </TouchableOpacity>
+          <MemberMenu {... { flagMember, isMe, editProfile, saveChanges, editable, blockUser, isAxolotl }} />
+        </View>
       </View>
+      <Control
+        style={styles.location}
+        value={location}
+        placeholder='Location'
+        editable={editable}
+        onChangeText={updateSetting('location')}
+        isMe={isMe}
+      />
+      <Control
+        style={styles.tagline}
+        value={tagline}
+        placeholder='Short Description'
+        editable={editable}
+        onChangeText={updateSetting('tagline')}
+        isMe={isMe}
+      />
     </View>
-    <Control
-      style={styles.location}
-      value={location}
-      placeholder='Location'
-      editable={editable}
-      onChangeText={updateSetting('location')}
-      isMe={isMe} />
-    <Control
-      style={styles.tagline}
-      value={tagline}
-      placeholder='Short Description'
-      editable={editable}
-      onChangeText={updateSetting('tagline')}
-      isMe={isMe} />
-  </View>
+  )
 }
 
 export function blockUserWithConfirmationFun (blockUserFun, name) {
@@ -75,10 +80,10 @@ export function blockUserWithConfirmationFun (blockUserFun, name) {
       You can unblock this member at any time.
       Go to Settings > Blocked Users.`,
       [
-        {text: `Block ${name}`, onPress: (blockedUserId) => blockUserFun(blockedUserId)},
-        {text: 'Cancel', style: 'cancel'}
+        { text: `Block ${name}`, onPress: (blockedUserId) => blockUserFun(blockedUserId) },
+        { text: 'Cancel', style: 'cancel' }
       ])
-    }
+  }
 }
 export class Control extends React.Component {
   focus = () => this.input && this.input.focus()
@@ -88,30 +93,33 @@ export class Control extends React.Component {
       value, onChangeText, editable = false, style, multiline,
       hideEditIcon, error, placeholder, isMe
     } = this.props
-    return <View style={[styles.control, editable && styles.editableControl]}>
-      <View style={styles.controlInputRow}>
-        {editable || !multiline
-          ? <TextInput
-            ref={i => { this.input = i }}
-            style={[styles.controlInput, style]}
-            value={value}
-            onChangeText={onChangeText}
-            editable={editable}
-            placeholder={isMe ? placeholder : ''}
-            multiline={multiline}
-            numberOfLines={multiline ? 8 : 1}
-            underlineColorAndroid='transparent' />
-          : <Text>{value}</Text>}
-        {editable && !hideEditIcon && <TouchableOpacity onPress={this.focus} style={styles.editIconWrapper}>
-          <EntypoIcon name='edit' style={styles.editIcon} />
-        </TouchableOpacity>}
+    return (
+      <View style={[styles.control, editable && styles.editableControl]}>
+        <View style={styles.controlInputRow}>
+          {editable || !multiline
+            ? <TextInput
+                ref={i => { this.input = i }}
+                style={[styles.controlInput, style]}
+                value={value}
+                onChangeText={onChangeText}
+                editable={editable}
+                placeholder={isMe ? placeholder : ''}
+                multiline={multiline}
+                numberOfLines={multiline ? 8 : 1}
+                underlineColorAndroid='transparent'
+              />
+            : <Text>{value}</Text>}
+          {editable && !hideEditIcon && <TouchableOpacity onPress={this.focus} style={styles.editIconWrapper}>
+            <EntypoIcon name='edit' style={styles.editIcon} />
+          </TouchableOpacity>}
+        </View>
+        {!!error && <View style={styles.controlError}><Text style={styles.controlErrorText}>{error}</Text></View>}
       </View>
-      {!!error && <View style={styles.controlError}><Text style={styles.controlErrorText}>{error}</Text></View>}
-    </View>
+    )
   }
 }
 
-export function MemberMenu ({flagMember, isMe, blockUser, editProfile, saveChanges, editable, isAxolotl}) {
+export function MemberMenu ({ flagMember, isMe, blockUser, editProfile, saveChanges, editable, isAxolotl }) {
   // If the function is defined, than it's a valid action
 
   const actions = filter(x => x[1], [
@@ -125,8 +133,12 @@ export function MemberMenu ({flagMember, isMe, blockUser, editProfile, saveChang
 
   const destructiveButtonIndex = get('1.0', actions) === 'Block This Member' ? 1 : -1
 
-  return <PopupMenuButton actions={actions}
-    destructiveButtonIndex={destructiveButtonIndex}>
-    <Icon name='More' style={styles.lastIcon} />
-  </PopupMenuButton>
+  return (
+    <PopupMenuButton
+      actions={actions}
+      destructiveButtonIndex={destructiveButtonIndex}
+    >
+      <Icon name='More' style={styles.lastIcon} />
+    </PopupMenuButton>
+  )
 }

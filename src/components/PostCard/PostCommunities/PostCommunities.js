@@ -36,7 +36,7 @@ export default class PostCommunities extends React.PureComponent {
     const { communities: providedCommunities, includePublic, shouldShowCommunities, style } = this.props
     const { expanded } = this.state
     const communities = includePublic
-      ? [ ...providedCommunities, PUBLIC_COMMUNITY ]
+      ? [...providedCommunities, PUBLIC_COMMUNITY]
       : providedCommunities
 
     // don't show if there are no communities or there is exactly 1 community and the flag isn't set
@@ -44,7 +44,7 @@ export default class PostCommunities extends React.PureComponent {
       return null
     }
 
-    const content =
+    const content = (
       <View style={styles.row}>
         <Text style={styles.reminderText}>Posted In: </Text>
         <CommunitiesListSummary communities={communities} expandFunc={this.toggleExpanded} goToCommunity={this.goToCommunityWithPublic} />
@@ -52,8 +52,9 @@ export default class PostCommunities extends React.PureComponent {
           <Icon name='ArrowDown' style={styles.arrowIcon} />
         </TouchableOpacity>
       </View>
-    const expandedContent =
-      <React.Fragment>
+    )
+    const expandedContent = (
+      <>
         <View style={styles.row}>
           <Text style={styles.reminderText}>Posted In: </Text>
           <TouchableOpacity onPress={this.toggleExpanded} style={styles.arrowButton}>
@@ -61,24 +62,29 @@ export default class PostCommunities extends React.PureComponent {
           </TouchableOpacity>
         </View>
         <CommunitiesList communities={communities} onPress={this.goToCommunityWithPublic} />
-      </React.Fragment>
+      </>
+    )
 
-    return <View style={[style, expanded && styles.expanded]}>
-      {expanded ? expandedContent : content}
-    </View>
+    return (
+      <View style={[style, expanded && styles.expanded]}>
+        {expanded ? expandedContent : content}
+      </View>
+    )
   }
 }
 
-export function CommunitiesListSummary ({communities, goToCommunity, expandFunc}) {
+export function CommunitiesListSummary ({ communities, goToCommunity, expandFunc }) {
   const moreCommunities = communities.length > 1
   const othersText = n => n === 1 ? '1 other' : `${n} others`
-  return <View style={[styles.communityList, styles.row]}>
-    <TouchableOpacity onPress={() => goToCommunity && goToCommunity(communities[0].id)} style={{flex: -1}}><Text style={styles.linkText} numberOfLines={1}>{communities[0].name}</Text></TouchableOpacity>
-    {moreCommunities && <View style={[styles.row, {flex: 0}]}>
-      <Text style={[styles.reminderText]}> and </Text>
-      <TouchableOpacity onPress={expandFunc}><Text style={styles.linkText}>{othersText(communities.length - 1)}</Text></TouchableOpacity>
-    </View>}
-  </View>
+  return (
+    <View style={[styles.communityList, styles.row]}>
+      <TouchableOpacity onPress={() => goToCommunity && goToCommunity(communities[0].id)} style={{ flex: -1 }}><Text style={styles.linkText} numberOfLines={1}>{communities[0].name}</Text></TouchableOpacity>
+      {moreCommunities && <View style={[styles.row, { flex: 0 }]}>
+        <Text style={[styles.reminderText]}> and </Text>
+        <TouchableOpacity onPress={expandFunc}><Text style={styles.linkText}>{othersText(communities.length - 1)}</Text></TouchableOpacity>
+                          </View>}
+    </View>
+  )
 }
 
 const styles = {

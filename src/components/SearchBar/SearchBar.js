@@ -23,22 +23,25 @@ export default function SearchBar ({
     ? <Text style={styles.cancelText}>{onCancelText}</Text>
     : <Icon name='Ex' style={styles.cancelButton} />
 
-  return <View style={styles.searchBar}>
-    <Icon style={styles.searchIcon} name='Search' />
-    <TextInput
-      autoFocus={autoFocus}
-      onFocus={onFocus}
-      style={styles.searchInput}
-      value={value}
-      onChangeText={onChangeText}
-      placeholder={placeholder}
-      autoCapitalize='none'
-      autoCorrect={false}
-      underlineColorAndroid='transparent'
-      editable />
-    {loading && <Loading style={styles.loading} />}
-    {!loading && value.length > 0 && onCancel && <TouchableOpacity style={styles.cancel} onPress={onCancel}>
-      <Cancel />
-    </TouchableOpacity>}
-  </View>
+  return (
+    <View style={styles.searchBar}>
+      <Icon style={styles.searchIcon} name='Search' />
+      <TextInput
+        autoFocus={autoFocus}
+        onFocus={onFocus}
+        style={styles.searchInput}
+        value={value}
+        onChangeText={onChangeText}
+        placeholder={placeholder}
+        autoCapitalize='none'
+        autoCorrect={false}
+        underlineColorAndroid='transparent'
+        editable
+      />
+      {loading && <Loading style={styles.loading} />}
+      {!loading && value.length > 0 && onCancel && <TouchableOpacity style={styles.cancel} onPress={onCancel}>
+        <Cancel />
+                                                   </TouchableOpacity>}
+    </View>
+  )
 }

@@ -8,8 +8,8 @@ import orm from '../../store/models'
 
 it('mapStateToProps matches the latest snapshot', () => {
   const session = orm.session(orm.getEmptyState())
-  session.Me.create({id: '33', name: 'meUser'})
-  session.Community.create({id: '7', avatarUrl: 'someUrl', name: 'someName'})
+  session.Me.create({ id: '33', name: 'meUser' })
+  session.Community.create({ id: '7', avatarUrl: 'someUrl', name: 'someName' })
 
   const state = {
     session: {
@@ -17,7 +17,7 @@ it('mapStateToProps matches the latest snapshot', () => {
       entryUrl: 'http://www.hylo.com/a/path'
     },
     pending: {},
-    currentNetworkAndCommunity: {communityId: '7'},
+    currentNetworkAndCommunity: { communityId: '7' },
     orm: session.state
   }
   const props = {
@@ -34,7 +34,7 @@ describe('mergeProps', () => {
   let stateProps, dispatchProps, ownProps, props
   beforeEach(() => {
     stateProps = {
-      currentUser: {id: 'anyid'},
+      currentUser: { id: 'anyid' },
       canModerateCurrentCommunity: true,
       name: 'Roy Rogers'
     }
@@ -63,14 +63,14 @@ describe('mergeProps', () => {
 
   describe('canModerate functions are bound', () => {
     it('goToCommunity', () => {
-      const community = {id: 'testcommunity'}
+      const community = { id: 'testcommunity' }
       props.goToCommunity(community)
       expect(dispatchProps.selectCommunity).toHaveBeenCalled()
       expect(ownProps.navigation.navigate).toHaveBeenCalledTimes(2)
     })
 
     it('goToNetwork', () => {
-      const network = {id: 'testnetwork'}
+      const network = { id: 'testnetwork' }
       props.goToNetwork(network)
       expect(dispatchProps.selectNetwork).toHaveBeenCalledTimes(1)
       expect(ownProps.navigation.navigate).toHaveBeenCalledTimes(2)
@@ -135,9 +135,9 @@ describe('partitionCommunities', () => {
               name: 'networkTwo',
               communities: {
                 toRefArray: () => [
-                  {id: '1', name: 'one'},
-                  {id: '2', name: 'two'},
-                  {id: '3', name: 'three'}
+                  { id: '1', name: 'one' },
+                  { id: '2', name: 'two' },
+                  { id: '3', name: 'three' }
                 ]
               }
             }

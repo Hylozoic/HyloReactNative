@@ -29,7 +29,7 @@ describe('CommunitySettings.connector', () => {
       id: '1'
     })
 
-    community.update({moderators: ['1']})
+    community.update({ moderators: ['1'] })
 
     state = {
       orm: session.state,
@@ -60,8 +60,8 @@ describe('CommunitySettings.connector', () => {
       mergedProps.fetchCommunitySettings()
       expect(dispatchProps.fetchCommunitySettings).toHaveBeenCalledWith(communityId)
 
-      mergedProps.updateCommunitySettings({name: 'changedName'})
-      expect(dispatchProps.updateCommunitySettings).toHaveBeenCalledWith(communityId, {name: 'changedName'})
+      mergedProps.updateCommunitySettings({ name: 'changedName' })
+      expect(dispatchProps.updateCommunitySettings).toHaveBeenCalledWith(communityId, { name: 'changedName' })
     })
   })
 })

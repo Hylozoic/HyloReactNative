@@ -16,14 +16,17 @@ export default class TopicList extends React.Component {
   render () {
     const { topics } = this.props
 
-    return <View style={styles.topicList}>
-      {isEmpty(topics)
-        ? <Text style={styles.emptyList}>No topics match your search</Text>
-        : <FlatList
-          data={topics}
-          renderItem={this.renderTopicRow}
-          keyboardShouldPersistTaps='handled'
-          keyExtractor={i => i.id} />}
-    </View>
+    return (
+      <View style={styles.topicList}>
+        {isEmpty(topics)
+          ? <Text style={styles.emptyList}>No topics match your search</Text>
+          : <FlatList
+              data={topics}
+              renderItem={this.renderTopicRow}
+              keyboardShouldPersistTaps='handled'
+              keyExtractor={i => i.id}
+            />}
+      </View>
+    )
   }
 }

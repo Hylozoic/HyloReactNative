@@ -32,13 +32,13 @@ export default class SpaceFillingImage extends React.PureComponent {
     const { imageUrl } = this.props
     imageUrl && Image.getSize(imageUrl, (imageWidth, imageHeight) => {
       if (this.unmounted) return
-      this.setState({imageWidth, imageHeight})
+      this.setState({ imageWidth, imageHeight })
     })
   }
 
-  setContainerWidth = event => {
+  handleSetContainerWidth = event => {
     if (this.unmounted) return
-    this.setState({containerWidth: event.nativeEvent.layout.width})
+    this.setState({ containerWidth: event.nativeEvent.layout.width })
   }
 
   render () {
@@ -56,12 +56,16 @@ export default class SpaceFillingImage extends React.PureComponent {
         height: imageHeight * (containerWidth / imageWidth)
       }
     }
-    return <View onLayout={this.setContainerWidth} style={[style, styles.container]}>
-      {imageWidth < containerWidth && <Image style={blurredImageStyle}
-        blurRadius={2}
-        source={{uri: imageUrl}} />}
-      <Image style={imageStyle} source={{uri: imageUrl}} />
-    </View>
+    return (
+      <View onLayout={this.handleSetContainerWidth} style={[style, styles.container]}>
+        {imageWidth < containerWidth && <Image
+          style={blurredImageStyle}
+          blurRadius={2}
+          source={{ uri: imageUrl }}
+                                        />}
+        <Image style={imageStyle} source={{ uri: imageUrl }} />
+      </View>
+    )
   }
 }
 

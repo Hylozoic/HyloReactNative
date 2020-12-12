@@ -28,8 +28,9 @@ describe('FeedBanner', () => {
     const renderer = new ReactShallowRenderer()
     renderer.render(<FeedBanner
       all
-      community={{id: 'anything'}}
-      newPost={newPost} />)
+      community={{ id: 'anything' }}
+      newPost={newPost}
+                    />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
@@ -40,7 +41,8 @@ describe('FeedBanner', () => {
     renderer.render(<FeedBanner
       community={community}
       currentUser={currentUser}
-      newPost={newPost} />)
+      newPost={newPost}
+                    />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
@@ -51,7 +53,8 @@ describe('FeedBanner', () => {
     renderer.render(<FeedBanner
       network={network}
       currentUser={currentUser}
-      newPost={newPost} />)
+      newPost={newPost}
+                    />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
@@ -60,9 +63,11 @@ describe('FeedBanner', () => {
   it('has a topic subscribe toggle button', () => {
     const setTopicSubscribe = jest.fn()
     const renderer = TestRenderer.create(
-      <FeedBanner community={{name: 'Earth'}}
+      <FeedBanner
+        community={{ name: 'Earth' }}
         topicSubscribed={false}
-        setTopicSubscribe={setTopicSubscribe} />
+        setTopicSubscribe={setTopicSubscribe}
+      />
     )
 
     expect(renderer.toJSON()).toMatchSnapshot()
@@ -77,7 +82,8 @@ describe('PostPrompt', () => {
   it('renders null with no user', () => {
     const renderer = new ReactShallowRenderer()
     renderer.render(<PostPrompt
-      newPost={newPost} />)
+      newPost={newPost}
+                    />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toEqual(null)
@@ -87,7 +93,8 @@ describe('PostPrompt', () => {
     const renderer = new ReactShallowRenderer()
     renderer.render(<PostPrompt
       currentUser={currentUser}
-      newPost={newPost} />)
+      newPost={newPost}
+                    />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()

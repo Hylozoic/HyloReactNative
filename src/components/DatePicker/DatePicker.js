@@ -23,15 +23,17 @@ export default function DatePicker ({
 
   const [date, setDate] = useState(value)
   const onDateChange = newDate => {
-    setDate(newDate)  
+    setDate(newDate)
     onChange(newDate)
   }
 
-  return <DatePickerComponent
-    minimumDate={minimumDate}
-    minuteInterval={minuteInterval}
-    date={date}
-    mode={mode}
-    onDateChange={onDateChange}
-  />
+  return (
+    <DatePickerComponent
+      minimumDate={minimumDate}
+      minuteInterval={minuteInterval}
+      date={date}
+      mode={mode}
+      onDateChange={onDateChange}
+    />
+  )
 }

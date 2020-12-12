@@ -4,7 +4,7 @@ const MODULE_NAME = 'DeepLinkHandler'
 const STORE_NAVIGATION_ACTION = `${MODULE_NAME}/STORE_NAVIGATION_ACTION`
 
 export function storeNavigationAction (payload) {
-  return {type: STORE_NAVIGATION_ACTION, payload}
+  return { type: STORE_NAVIGATION_ACTION, payload }
 }
 
 export default function reducer (state = {}, action) {
@@ -13,7 +13,7 @@ export default function reducer (state = {}, action) {
 
   switch (type) {
     case STORE_NAVIGATION_ACTION:
-      return {navigationAction: payload}
+      return { navigationAction: payload }
   }
 
   return state

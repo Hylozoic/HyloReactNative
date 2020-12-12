@@ -22,8 +22,8 @@ export default class LoadingModal extends React.Component {
         toValue: shouldDisplay ? 0.8 : 0,
         duration: 700
       }).start(() => {
-        this.setState({visible: nextProps.shouldDisplay})
-      })
+      this.setState({ visible: nextProps.shouldDisplay })
+    })
   }
 
   render () {
@@ -31,11 +31,15 @@ export default class LoadingModal extends React.Component {
 
     if (!visible) return null
 
-    return <Animated.View useNativeDriver style={{
-      ...styles.container,
-      opacity: opacityAnim
-    }}>
-      <Loading />
-    </Animated.View>
+    return (
+      <Animated.View
+        useNativeDriver style={{
+          ...styles.container,
+          opacity: opacityAnim
+        }}
+      >
+        <Loading />
+      </Animated.View>
+    )
   }
 }

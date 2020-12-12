@@ -12,15 +12,16 @@ const lodash = jest.requireActual('lodash/fp')
 lodash.debounce = (_, fn) => fn
 
 describe('MemberDetails', () => {
-  const navigation = {setParams: () => {}}
+  const navigation = { setParams: () => {} }
   it('matches the last snapshot', () => {
     const renderer = new ReactShallowRenderer()
     renderer.render(<MemberDetails
       isFocused
-      person={{id: 1}}
+      person={{ id: 1 }}
       goToCommunity={() => {}}
       skills={['One']}
-      navigation={navigation} />)
+      navigation={navigation}
+                    />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
@@ -57,7 +58,7 @@ describe('MemberDetails', () => {
       }
 
       const instance = ReactTestRenderer.create(<MemberDetails {...props} />).getInstance()
-      instance.setState({person: {}})
+      instance.setState({ person: {} })
       instance.componentDidUpdate(prevProps, {})
       expect(instance.state.person).toEqual(pick(['name', 'location', 'tagline', 'bio'], props.person))
     })
@@ -74,7 +75,7 @@ describe('MemberDetails', () => {
 
       const instance = ReactTestRenderer.create(<MemberDetails {...props} />).getInstance()
       instance.setState({
-        person: {name: 'Sue'}
+        person: { name: 'Sue' }
       })
       instance.validate()
       expect(instance.state.errors.name).toEqual(null)
@@ -90,7 +91,7 @@ describe('MemberDetails', () => {
 
       const instance = ReactTestRenderer.create(<MemberDetails {...props} />).getInstance()
       instance.setState({
-        person: {name: ''}
+        person: { name: '' }
       })
       instance.validate()
       expect(instance.state.errors.name).toEqual('Name must not consist solely of whitespace.')
@@ -183,7 +184,8 @@ describe('MemberBio', () => {
     renderer.render(<MemberBio
       person={person}
       updateSetting={() => () => {}}
-      isMe />)
+      isMe
+                    />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
@@ -196,7 +198,8 @@ describe('MemberBio', () => {
 
     const renderer = new ReactShallowRenderer()
     renderer.render(<MemberBio
-      person={person} />)
+      person={person}
+                    />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toBeNull()
@@ -217,14 +220,15 @@ describe('MemberBio', () => {
 describe('MemberSkills', () => {
   it('matches the last snapshot', () => {
     const skills = [
-      {id: 1, name: 'run'},
-      {id: 2, name: 'all'},
-      {id: 3, name: 'day'}
+      { id: 1, name: 'run' },
+      { id: 2, name: 'all' },
+      { id: 3, name: 'day' }
     ]
 
     const renderer = new ReactShallowRenderer()
     renderer.render(<MemberSkills
-      skills={skills} />)
+      skills={skills}
+                    />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
@@ -237,7 +241,8 @@ describe('MemberSkills', () => {
 
     const renderer = new ReactShallowRenderer()
     renderer.render(<MemberSkills
-      person={person} />)
+      person={person}
+                    />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toBeNull()
@@ -248,15 +253,16 @@ describe('MemberCommunities', () => {
   it('matches the last snapshot', () => {
     const person = {
       memberships: [
-        {id: 1},
-        {id: 2},
-        {id: 3}
+        { id: 1 },
+        { id: 2 },
+        { id: 3 }
       ]
     }
 
     const renderer = new ReactShallowRenderer()
     renderer.render(<MemberCommunities
-      person={person} />)
+      person={person}
+                    />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
@@ -269,7 +275,8 @@ describe('MemberCommunities', () => {
 
     const renderer = new ReactShallowRenderer()
     renderer.render(<MemberCommunities
-      person={person} />)
+      person={person}
+                    />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toBeNull()
@@ -289,7 +296,8 @@ describe('CommunityRow', () => {
 
     const renderer = new ReactShallowRenderer()
     renderer.render(<CommunityRow
-      membership={membership} />)
+      membership={membership}
+                    />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
@@ -307,7 +315,8 @@ describe('CommunityRow', () => {
 
     const renderer = new ReactShallowRenderer()
     renderer.render(<CommunityRow
-      membership={membership} />)
+      membership={membership}
+                    />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()

@@ -14,7 +14,7 @@ const parseHeaders = (xhr) => {
     .split(/\r?\n/)
     .filter(notBlank)
     .reduce((headers, headerString) => {
-      let header = headerString.split(':')[0]
+      const header = headerString.split(':')[0]
       headers[header] = xhr.getResponseHeader(header)
       return headers
     }, {})
@@ -34,7 +34,7 @@ const buildResponseObject = (xhr) => {
 
 const buildResponseHandler = (xhr, resolve, reject) => {
   return () => {
-    let fn = xhr.status === 0 ? reject : resolve
+    const fn = xhr.status === 0 ? reject : resolve
     fn(buildResponseObject(xhr))
   }
 }

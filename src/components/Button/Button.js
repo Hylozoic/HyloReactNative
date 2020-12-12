@@ -29,26 +29,29 @@ export default function Button (props) {
       'disabledBackgroundColor',
       'fontSize',
       'height'
-    ], providedStyles)}
+    ], providedStyles)
+  }
 
   const backgroundColor = (disabled
     ? providedStyles.disabledBackgroundColor
     : providedStyles.backgroundColor) || caribbeanGreen
-  const buttonStyle = {...styles.button, backgroundColor, height, borderRadius, borderColor}
-  const textStyle = {...styles.text, color, fontSize}
-  const iconStyle = {...styles.icon, color, ...providedStyles.icon}
+  const buttonStyle = { ...styles.button, backgroundColor, height, borderRadius, borderColor }
+  const textStyle = { ...styles.text, color, fontSize }
+  const iconStyle = { ...styles.icon, color, ...providedStyles.icon }
 
-  return <View style={containerStyle}>
-    <TouchableOpacity disabled={disabled} onPress={disabled ? () => {} : onPress} style={styles.wrapper}>
-      <View style={buttonStyle}>
-        <View style={styles.buttonInner}>
-          {customIconRender && customIconRender({...props, name: iconName, style: iconStyle})}
-          {!customIconRender && iconName && <Icon name={iconName} style={iconStyle} />}
-          <Text style={textStyle}>{text}</Text>
+  return (
+    <View style={containerStyle}>
+      <TouchableOpacity disabled={disabled} onPress={disabled ? () => {} : onPress} style={styles.wrapper}>
+        <View style={buttonStyle}>
+          <View style={styles.buttonInner}>
+            {customIconRender && customIconRender({ ...props, name: iconName, style: iconStyle })}
+            {!customIconRender && iconName && <Icon name={iconName} style={iconStyle} />}
+            <Text style={textStyle}>{text}</Text>
+          </View>
         </View>
-      </View>
-    </TouchableOpacity>
-  </View>
+      </TouchableOpacity>
+    </View>
+  )
 }
 
 const styles = {

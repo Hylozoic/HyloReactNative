@@ -87,7 +87,7 @@ export const getQueryProps = createCachedSelector(
   (_, props) => props.filter,
   (_, props) => props.topicName,
   (community, network, sortBy, filter, topicName, isProjectFeed) => {
-    var subject
+    let subject
 
     if (isProjectFeed) {
       subject = 'project'

@@ -8,8 +8,8 @@ const getCurrentNetwork = ormCreateSelector(
   state => state.orm,
   getCurrentNetworkId,
   (session, id) => {
-    if (id === ALL_COMMUNITIES_ID) return {id: ALL_COMMUNITIES_ID}
-    return session.Network.safeGet({id})
+    if (id === ALL_COMMUNITIES_ID) return { id: ALL_COMMUNITIES_ID }
+    return session.Network.safeGet({ id })
   }
 )
 

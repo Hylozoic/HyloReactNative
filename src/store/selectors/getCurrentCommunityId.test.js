@@ -27,9 +27,10 @@ describe('getCurrentCommunityId', () => {
         community: community1.id,
         lastViewedAt: new Date(),
         hasModeratorRole: true
-      })]})
+      })]
+    })
 
-    const state = {orm: session.state}
+    const state = { orm: session.state }
     const communityId = getCurrentCommunityId(state)
     expect(communityId).toBe(community1.id)
   })

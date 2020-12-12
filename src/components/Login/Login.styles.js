@@ -100,7 +100,7 @@ export default {
     fontSize: 18,
     lineHeight: 34
   },
-  
+
   // Connect with:
   connectWith: {
     marginTop: 10,
@@ -125,7 +125,7 @@ export default {
     ...mixins.socialLoginButton
   },
   facebookLoginButton: {
-    ...mixins.socialLoginButton,
+    ...mixins.socialLoginButton
   },
 
   // Signup

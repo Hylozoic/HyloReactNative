@@ -16,12 +16,12 @@ import { includes } from 'lodash/fp'
 
 export function mapStateToProps (state, props) {
   const communityId = getCurrentCommunityId(state, props)
-  const community = getCommunity(state, {id: communityId})
-  const moderators = getModerators(state, {communityId})
+  const community = getCommunity(state, { id: communityId })
+  const moderators = getModerators(state, { communityId })
   const moderatorIds = moderators.map(m => m.id)
   const moderatorSuggestions = state.ModeratorSettings
-  .filter(personId => !includes(personId, moderatorIds))
-  .map(personId => getPerson(state, {personId}))
+    .filter(personId => !includes(personId, moderatorIds))
+    .map(personId => getPerson(state, { personId }))
   const currentUser = getMe(state, props)
 
   return {

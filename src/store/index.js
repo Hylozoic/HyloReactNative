@@ -42,5 +42,5 @@ export default function getStore () {
 // }
 
 export function getEmptyState () {
-  return combinedReducers({orm: orm.getEmptyState()}, {type: ''})
+  return combinedReducers({ orm: orm.getEmptyState() }, { type: '' })
 }

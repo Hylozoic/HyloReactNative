@@ -6,7 +6,7 @@ const imageHeight = 132
 
 const hasTextShadow = {
   textShadowColor: 'rgba(0, 0, 0, 0.25)',
-  textShadowOffset: {width: 0, height: 2},
+  textShadowOffset: { width: 0, height: 2 },
   textShadowRadius: 7
 }
 

@@ -102,11 +102,10 @@ export class InlineEditor extends React.PureComponent {
       getSearchSuggestions: getTopicsForAutocompleteWithNew
     })
   }
- 
+
   // Workaround to TextInput issues on Android: https://github.com/facebook/react-native/issues/17236
   _selection () {
-    if (this.state.isFocused)
-      return this.props.selection
+    if (this.state.isFocused) { return this.props.selection }
 
     return { start: 0, end: 0 }
   }
@@ -151,51 +150,55 @@ export class InlineEditor extends React.PureComponent {
     // Calculates a height based on textInput content size with the following constraint: 40 < height < maxHeight
     // const calculatedHeight = Math.round(Math.min(Math.max((isEmpty(value) ? minTextInputHeight : height) + (isFocused ? 45 : 0), minTextInputHeight), 190))
 
-    return <View style={[styles.container, style]}>
-      <View style={styles.wrapper}>
-        <TextInput
-          multiline
-          editable={!!editable && !submitting}
-          onChangeText={onChange}
-          blurOnSubmit={false}
-          onContentSizeChange={event => this.setState({ height: Math.round(event.nativeEvent.contentSize.height) })}
-          selection={this._selection()}
-          onSelectionChange={this._onSelectionChange}
-          placeholder={placeholder}
-          placeholderTextColor={rhino30}
-          style={[styles.textInput, inputStyle]}
-          underlineColorAndroid='transparent'
-          value={value}
-          ref={(input) => { this.editorInput = input }}
-          onFocus={this._onFocus}
-          onBlur={this._onBlur}
-        />
-        {onSubmit && !isFocused && <SubmitButton submitting={submitting} active={!!isFocused} handleSubmit={this.handleSubmit} />}
-      </View>
-      {isFocused && <View style={styles.toolbar}>
-        <View style={{flex: 1, flexDirection: 'row'}}>
-          <TouchableOpacity hitSlop={hitSlop} onPress={this.openPersonPicker}>
-            <Text style={styles.toolbarButton}>@</Text>
-          </TouchableOpacity>
-          <TouchableOpacity hitSlop={hitSlop} onPress={this.openTopicsPicker}>
-            <Text style={styles.toolbarButton}>#</Text>
-          </TouchableOpacity>
+    return (
+      <View style={[styles.container, style]}>
+        <View style={styles.wrapper}>
+          <TextInput
+            multiline
+            editable={!!editable && !submitting}
+            onChangeText={onChange}
+            blurOnSubmit={false}
+            onContentSizeChange={event => this.setState({ height: Math.round(event.nativeEvent.contentSize.height) })}
+            selection={this._selection()}
+            onSelectionChange={this._onSelectionChange}
+            placeholder={placeholder}
+            placeholderTextColor={rhino30}
+            style={[styles.textInput, inputStyle]}
+            underlineColorAndroid='transparent'
+            value={value}
+            ref={(input) => { this.editorInput = input }}
+            onFocus={this._onFocus}
+            onBlur={this._onBlur}
+          />
+          {onSubmit && !isFocused && <SubmitButton submitting={submitting} active={!!isFocused} handleSubmit={this.handleSubmit} />}
         </View>
-        {onSubmit && <SubmitButton submitting={submitting} active={!!isFocused} handleSubmit={this.handleSubmit} />}
-      </View>}
-    </View>
+        {isFocused && <View style={styles.toolbar}>
+          <View style={{ flex: 1, flexDirection: 'row' }}>
+            <TouchableOpacity hitSlop={hitSlop} onPress={this.openPersonPicker}>
+              <Text style={styles.toolbarButton}>@</Text>
+            </TouchableOpacity>
+            <TouchableOpacity hitSlop={hitSlop} onPress={this.openTopicsPicker}>
+              <Text style={styles.toolbarButton}>#</Text>
+            </TouchableOpacity>
+          </View>
+          {onSubmit && <SubmitButton submitting={submitting} active={!!isFocused} handleSubmit={this.handleSubmit} />}
+                      </View>}
+      </View>
+    )
   }
 }
 
 export default withNavigation(InlineEditor)
 
-export function SubmitButton ({submitting, active, handleSubmit}) {
+export function SubmitButton ({ submitting, active, handleSubmit }) {
   if (submitting) {
-    return <View style={{width: 30}}><ActivityIndicator /></View>
+    return <View style={{ width: 30 }}><ActivityIndicator /></View>
   } else {
-    return <TouchableOpacity style={{width: 30}} hitSlop={{top: 5, bottom: 10, left: 10, right: 10}} onPress={handleSubmit}>
-      <MaterialIcon name='send' size={23} style={active && styles.activeButton} />
-    </TouchableOpacity>
+    return (
+      <TouchableOpacity style={{ width: 30 }} hitSlop={{ top: 5, bottom: 10, left: 10, right: 10 }} onPress={handleSubmit}>
+        <MaterialIcon name='send' size={23} style={active && styles.activeButton} />
+      </TouchableOpacity>
+    )
   }
 }
 
@@ -213,7 +216,7 @@ export const mentionsToHtml = (text) => {
 
 export const newLinesToBr = (text) => {
   const re = /[\r\n|\r|\n]/gi
-  const replace = `<br>`
+  const replace = '<br>'
   return text.replace(re, replace)
 }
 
