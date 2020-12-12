@@ -48,6 +48,8 @@ export default class PostDetails extends React.Component {
     commentText: ''
   }
 
+  commentsRef = React.createRef()
+
   componentDidMount () {
     this.props.fetchPost()
   }
@@ -71,7 +73,7 @@ export default class PostDetails extends React.Component {
           } else {
             this.setState(() => ({ commentText: '', submitting: false }))
             // Scrolls to the last comment (the one that was created)
-            this.refs.comments.getWrappedInstance().scrollToEnd()
+            this.commentsRef.current.scrollToEnd()
           }
         })
     }
@@ -179,7 +181,7 @@ export default class PostDetails extends React.Component {
       <SafeAreaView style={{ flex: 1 }}>
         <KeyboardFriendlyView style={styles.container}>
           <Comments
-            ref='comments'
+            ref={this.commentsRef}
             header={postCard}
             footer={<CommentPrompt
               currentUser={currentUser}

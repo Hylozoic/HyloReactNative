@@ -5,6 +5,7 @@ import PostEditor, { TypeButton } from './PostEditor'
 import { Alert } from 'react-native'
 import { Provider } from 'react-redux'
 import { createMockStore } from 'util/testing'
+import MockedScreen from 'util/testing/MockedScreen'
 import { DocumentPicker } from 'react-native-document-picker'
 import RNImagePicker from 'react-native-image-picker'
 
@@ -85,8 +86,7 @@ describe('PostEditor', () => {
     const save = jest.fn(() => Promise.resolve())
     const renderer = TestRenderer.create(
       <Provider store={createMockStore()}>
-        <NavigationContainer>
-          {/* TODO need to make this a screen in a stack navigator and continue from there */}
+        <MockedScreen>
           <PostEditor
             isFocused
             shouldShowTypeChooser
@@ -96,8 +96,9 @@ describe('PostEditor', () => {
             post={mockPost}
             save={save}
           />
-        </NavigationContainer>
-      </Provider>)
+        </MockedScreen>
+      </Provider>
+    )
 
     const root = renderer.root.findByType(PostEditor)
 
@@ -118,14 +119,16 @@ describe('PostEditor', () => {
     const save = jest.fn(() => Promise.resolve())
     const renderer = TestRenderer.create(
       <Provider store={createMockStore()}>
-        <PostEditor
-          fetchPost={jest.fn()}
-          isFocused
-          save={save}
-          navigation={navigation}
-          route={route}
-          post={mockPost}
-        />
+        <MockedScreen>
+          <PostEditor
+            fetchPost={jest.fn()}
+            isFocused
+            save={save}
+            navigation={navigation}
+            route={route}
+            post={mockPost}
+          />
+        </MockedScreen>
       </Provider>)
 
     expect(renderer.toJSON()).toMatchSnapshot()
@@ -145,14 +148,16 @@ describe('PostEditor', () => {
     const save = jest.fn(() => Promise.resolve())
     const renderer = TestRenderer.create(
       <Provider store={createMockStore()}>
-        <PostEditor
-          fetchPost={jest.fn()}
-          isFocused
-          save={save}
-          navigation={navigation}
-          route={route}
-          post={mockPost}
-        />
+        <MockedScreen>
+          <PostEditor
+            fetchPost={jest.fn()}
+            isFocused
+            save={save}
+            navigation={navigation}
+            route={route}
+            post={mockPost}
+          />
+        </MockedScreen>
       </Provider>)
 
     const instance = renderer.root.findByType(PostEditor).instance
@@ -168,14 +173,16 @@ describe('PostEditor', () => {
     const save = jest.fn(() => Promise.resolve())
     const renderer = TestRenderer.create(
       <Provider store={createMockStore()}>
-        <PostEditor
-          isFocused
-          fetchPost={jest.fn()}
-          save={save}
-          navigation={navigation}
-          route={route}
-          post={mockPost}
-        />
+        <MockedScreen>
+          <PostEditor
+            isFocused
+            fetchPost={jest.fn()}
+            save={save}
+            navigation={navigation}
+            route={route}
+            post={mockPost}
+          />
+        </MockedScreen>
       </Provider>)
     jest.mock('util/toast', () => ({
       showToast: jest.fn(),
@@ -195,14 +202,16 @@ describe('PostEditor', () => {
     const save = jest.fn(() => Promise.reject(new Error('invalid')))
     const renderer = TestRenderer.create(
       <Provider store={createMockStore()}>
-        <PostEditor
-          isFocused
-          fetchPost={jest.fn()}
-          save={save}
-          navigation={navigation}
-          route={route}
-          post={mockPost}
-        />
+        <MockedScreen>
+          <PostEditor
+            isFocused
+            fetchPost={jest.fn()}
+            save={save}
+            navigation={navigation}
+            route={route}
+            post={mockPost}
+          />
+        </MockedScreen>
       </Provider>)
 
     const instance = renderer.root.findByType(PostEditor).instance
@@ -215,14 +224,16 @@ describe('PostEditor', () => {
   it('has image methods', () => {
     const renderer = TestRenderer.create(
       <Provider store={createMockStore()}>
-        <PostEditor
-          isFocused
-          fetchPost={jest.fn()}
-          navigation={navigation}
-          route={route}
-          imageUrls={['http://foo.com/foo.png']}
-          post={mockPost}
-        />
+        <MockedScreen>
+          <PostEditor
+            isFocused
+            fetchPost={jest.fn()}
+            navigation={navigation}
+            route={route}
+            imageUrls={['http://foo.com/foo.png']}
+            post={mockPost}
+          />
+        </MockedScreen>
       </Provider>)
 
     const instance = renderer.root.findByType(PostEditor).instance
@@ -241,14 +252,16 @@ describe('PostEditor', () => {
   it('showsAlert', () => {
     const renderer = TestRenderer.create(
       <Provider store={createMockStore()}>
-        <PostEditor
-          isFocused
-          fetchPost={jest.fn()}
-          navigation={navigation}
-          route={route}
-          imageUrls={['http://foo.com/foo.png']}
-          post={mockPost}
-        />
+        <MockedScreen>
+          <PostEditor
+            isFocused
+            fetchPost={jest.fn()}
+            navigation={navigation}
+            route={route}
+            imageUrls={['http://foo.com/foo.png']}
+            post={mockPost}
+          />
+        </MockedScreen>
       </Provider>)
 
     const instance = renderer.root.findByType(PostEditor).instance
@@ -264,16 +277,18 @@ describe('PostEditor', () => {
     }))
     const renderer = TestRenderer.create(
       <Provider store={createMockStore()}>
-        <PostEditor
-          isFocused
-          upload={upload}
-          fetchPost={jest.fn()}
-          fileUrls={[]}
-          navigation={navigation}
-          route={route}
-          imageUrls={['http://foo.com/foo.png']}
-          post={mockPost}
-        />
+        <MockedScreen>
+          <PostEditor
+            isFocused
+            upload={upload}
+            fetchPost={jest.fn()}
+            fileUrls={[]}
+            navigation={navigation}
+            route={route}
+            imageUrls={['http://foo.com/foo.png']}
+            post={mockPost}
+          />
+        </MockedScreen>
       </Provider>)
 
     const instance = renderer.root.findByType(PostEditor).instance
@@ -298,16 +313,18 @@ describe('PostEditor', () => {
     }))
     const renderer = TestRenderer.create(
       <Provider store={createMockStore()}>
-        <PostEditor
-          isFocused
-          upload={upload}
-          fileUrls={[]}
-          fetchPost={jest.fn()}
-          navigation={navigation}
-          route={route}
-          imageUrls={['http://foo.com/foo.png']}
-          post={mockPost}
-        />
+        <MockedScreen>
+          <PostEditor
+            isFocused
+            upload={upload}
+            fileUrls={[]}
+            fetchPost={jest.fn()}
+            navigation={navigation}
+            route={route}
+            imageUrls={['http://foo.com/foo.png']}
+            post={mockPost}
+          />
+        </MockedScreen>
       </Provider>)
 
     const instance = renderer.root.findByType(PostEditor).instance
@@ -326,15 +343,17 @@ describe('PostEditor', () => {
   it('has file methods', () => {
     const renderer = TestRenderer.create(
       <Provider store={createMockStore()}>
-        <PostEditor
-          isFocused
-          fetchPost={jest.fn()}
-          navigation={navigation}
-          route={route}
-          postId={mockPost.id}
-          fileUrls={['http://foo.com/foo.pdf']}
-          post={mockPost}
-        />
+        <MockedScreen>          
+          <PostEditor
+            isFocused
+            fetchPost={jest.fn()}
+            navigation={navigation}
+            route={route}
+            postId={mockPost.id}
+            fileUrls={['http://foo.com/foo.pdf']}
+            post={mockPost}
+          />
+        </MockedScreen>
       </Provider>)
 
     const instance = renderer.root.findByType(PostEditor).instance
@@ -355,14 +374,16 @@ describe('PostEditor', () => {
     const save = jest.fn(() => Promise.resolve())
     const renderer = TestRenderer.create(
       <Provider store={createMockStore()}>
-        <PostEditor
-          fetchPost={jest.fn()}
-          isFocused
-          save={save}
-          navigation={navigation}
-          route={route}
-          post={mockPost}
-        />
+        <MockedScreen>
+          <PostEditor
+            fetchPost={jest.fn()}
+            isFocused
+            save={save}
+            navigation={navigation}
+            route={route}
+            post={mockPost}
+          />
+        </MockedScreen>
       </Provider>)
 
     const instance = renderer.root.findByType(PostEditor).instance
@@ -376,14 +397,16 @@ describe('PostEditor', () => {
     const save = jest.fn(() => Promise.resolve())
     const renderer = TestRenderer.create(
       <Provider store={createMockStore()}>
-        <PostEditor
-          fetchPost={jest.fn()}
-          isFocused
-          save={save}
-          navigation={navigation}
-          route={route}
-          post={mockPost}
-        />
+        <MockedScreen>
+          <PostEditor
+            fetchPost={jest.fn()}
+            isFocused
+            save={save}
+            navigation={navigation}
+            route={route}
+            post={mockPost}
+          />
+        </MockedScreen>
       </Provider>)
 
     const instance = renderer.root.findByType(PostEditor).instance

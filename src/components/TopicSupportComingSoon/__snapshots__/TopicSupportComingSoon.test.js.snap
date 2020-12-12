@@ -21,14 +21,13 @@ exports[`matches last snapshot 1`] = `
     }
   />
   <View>
-    <TouchableOpacity
-      activeOpacity={0.2}
+    <ForwardRef
       onPress={[Function]}
     >
       <Text>
         Go Back
       </Text>
-    </TouchableOpacity>
+    </ForwardRef>
   </View>
 </View>
 `;

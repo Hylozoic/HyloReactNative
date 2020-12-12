@@ -59,4 +59,4 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
   }
 }
 
-export default connect(mapStateToProps, null, mergeProps)
+export default connect(mapStateToProps, null, mergeProps, { forwardRef: true })

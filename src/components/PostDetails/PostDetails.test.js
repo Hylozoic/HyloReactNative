@@ -5,6 +5,7 @@ import { Provider } from 'react-redux'
 import PostDetails, { CommentPrompt, Files, JoinProjectButton, ProjectMembers } from './PostDetails'
 import { Linking, TouchableOpacity } from 'react-native'
 import { createMockStore } from 'util/testing'
+import MockedScreen from 'util/testing/MockedScreen'
 import orm from 'store/models'
 
 const post = {
@@ -70,7 +71,13 @@ describe('PostDetails', () => {
   })
 
   it('handleCreateComment success', async () => {
-    const renderer = TestRenderer.create(<Provider store={createMockStore(state)}><PostDetails {...props} /></Provider>)
+    const renderer = TestRenderer.create(
+      <Provider store={createMockStore(state)}>
+        <MockedScreen>
+          <PostDetails {...props} />
+        </MockedScreen>
+      </Provider>
+    )
     const instance = renderer.root.findByType(PostDetails).instance
     const commentText = 'some text [amention:0] #topic <some encoded stuff>'
     instance.setState({ commentText })
@@ -89,7 +96,13 @@ describe('PostDetails', () => {
       createComment: jest.fn(() => Promise.resolve({ error: new Error('blah') }))
     }
 
-    const renderer = TestRenderer.create(<Provider store={createMockStore(state)}><PostDetails {...rejectionProps} /></Provider>)
+    const renderer = TestRenderer.create(
+      <Provider store={createMockStore(state)}>
+        <MockedScreen>
+          <PostDetails {...rejectionProps} />
+        </MockedScreen>
+      </Provider>
+    )
     const instance = renderer.root.findByType(PostDetails).instance
     const commentText = 'some text [amention:0] #topic <some encoded stuff>'
     instance.setState({ commentText })
@@ -102,7 +115,13 @@ describe('PostDetails', () => {
   })
 
   it('handleCommentOnChange', () => {
-    const renderer = TestRenderer.create(<Provider store={createMockStore(state)}><PostDetails {...props} /></Provider>)
+    const renderer = TestRenderer.create(
+      <Provider store={createMockStore(state)}>
+        <MockedScreen>
+          <PostDetails {...props} />
+        </MockedScreen>
+      </Provider>
+    )
     const instance = renderer.root.findByType(PostDetails).instance
     const commentText = 'some text [amention:0] #topic <some encoded stuff>'
     instance.setState({ commentText })
@@ -149,17 +168,6 @@ describe('JoinProjectButton', () => {
     expect(actual).toMatchSnapshot()
   })
 
-  it('renders as expected when leaving', () => {
-    const renderer = new ReactShallowRenderer()
-    renderer.render(
-      <JoinProjectButton onPress={() => {}} leaving />
-    )
-    const actual = renderer.getRenderOutput()
-    expect(actual).toMatchSnapshot()
-  })
-})
-
-describe('JoinProjectButton', () => {
   it('renders as expected when leaving', () => {
     const renderer = new ReactShallowRenderer()
     renderer.render(

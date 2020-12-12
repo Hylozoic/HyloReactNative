@@ -21,7 +21,7 @@ const testProps = {
     params: {
       screenTitle: 'Screen Title',
       initialItems: items,
-      ItemRowComponent: item => item.id,
+      ItemRowComponent: item => null,
       fetchSearchSuggestions: () => {
         return { type: 'test-search' }
       },

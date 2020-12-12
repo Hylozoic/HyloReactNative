@@ -24,16 +24,5 @@ describe('mapDispatchToProps', () => {
     }
     const dispatchProps = mapDispatchToProps(dispatch, props)
     expect(dispatchProps).toMatchSnapshot()
-
-    dispatchProps.logout()
-    expect(props.navigation.dispatch).toHaveBeenCalledWith({
-      type: 'Navigation/RESET',
-      index: 0,
-      key: null,
-      actions: [
-        { routeName: 'Login', type: 'Navigation/NAVIGATE' }
-      ]
-    })
-    expect(dispatch).toBeCalled()
   })
 })

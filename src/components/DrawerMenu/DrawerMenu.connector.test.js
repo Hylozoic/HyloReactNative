@@ -66,14 +66,14 @@ describe('mergeProps', () => {
       const community = { id: 'testcommunity' }
       props.goToCommunity(community)
       expect(dispatchProps.selectCommunity).toHaveBeenCalled()
-      expect(ownProps.navigation.navigate).toHaveBeenCalledTimes(2)
+      expect(ownProps.navigation.navigate).toHaveBeenCalledTimes(1)
     })
 
     it('goToNetwork', () => {
       const network = { id: 'testnetwork' }
       props.goToNetwork(network)
       expect(dispatchProps.selectNetwork).toHaveBeenCalledTimes(1)
-      expect(ownProps.navigation.navigate).toHaveBeenCalledTimes(2)
+      expect(ownProps.navigation.navigate).toHaveBeenCalledTimes(1)
     })
 
     it('should showSetting', () => {

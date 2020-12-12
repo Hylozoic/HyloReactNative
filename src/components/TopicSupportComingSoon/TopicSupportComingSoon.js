@@ -26,7 +26,7 @@ export default class TopicSupportComingSoon extends React.Component {
   }
 
   render () {
-    const { style, navigation } = this.props
+    const { style, route, navigation } = this.props
 
     return (
       <View style={[style, styles.container]}>
@@ -42,7 +42,7 @@ export default class TopicSupportComingSoon extends React.Component {
         </View>
         <Image style={styles.image} resizeMode='contain' source={axolotlImage} />
         <View style={styles.paddedRow}>
-          <TouchableOpacity onPress={goBack(navigation)} style={styles.goBackButton}>
+          <TouchableOpacity onPress={goBack({ route, navigation })} style={styles.goBackButton}>
             <Text style={styles.goBackButtonText}>Go Back</Text>
           </TouchableOpacity>
         </View>

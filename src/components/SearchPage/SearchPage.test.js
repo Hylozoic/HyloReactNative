@@ -46,11 +46,6 @@ describe('SearchPage', () => {
       expect(props.fetchMoreSearchResults).not.toHaveBeenCalled()
     })
   })
-
-  it('has navigationOptions', () => {
-    const route = { name: 'test' }
-    expect(SearchPage.navigationOptions({ route })).toMatchSnapshot()
-  })
 })
 
 describe('TabBar', () => {

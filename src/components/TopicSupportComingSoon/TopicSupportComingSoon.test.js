@@ -9,7 +9,17 @@ it('matches last snapshot', () => {
       some: 'styles'
     }
   }
-  renderer.render(<TopicSupportComingSoon style={styles} />)
+  const route = {
+    params: {
+      onBack: jest.fn()
+    }
+  }
+  const navigation = {
+    goBack: jest.fn()
+  }
+  renderer.render(
+    <TopicSupportComingSoon style={styles} route={route} navigation={navigation} />
+  )
   const actual = renderer.getRenderOutput()
   expect(actual).toMatchSnapshot()
 })

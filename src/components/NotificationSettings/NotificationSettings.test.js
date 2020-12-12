@@ -92,11 +92,6 @@ describe('NotificationSettings', () => {
       expect(props.updateAllMemberships).toHaveBeenCalledWith([1, 2], { sendPushNotifications: true })
     })
   })
-
-  it('has navigationOptions', () => {
-    const route = { name: 'test' }
-    expect(NotificationSettings.navigationOptions({ route })).toMatchSnapshot()
-  })
 })
 
 describe('MessageSettingsRow', () => {
