@@ -14,7 +14,7 @@
     "ios:devices": "cd ios && bundle exec fastlane devices",
     "ios:testflight": "cd ios && bundle exec fastlane beta",
     "ios:qa": "cd ios && bundle exec fastlane qa",
-    "test": "jest",
+    "test": "standard && jest",
     "coverage:diff": "node ../jest-diff-coverage && open coverage/lcov-report/index.html",
     "clean-start": "./scripts/clean-rebuild.sh",
     "configure": "./scripts/configure.sh",
@@ -91,6 +91,8 @@
     "@babel/core": "^7.8.4",
     "@babel/runtime": "^7.8.4",
     "@react-native-community/eslint-config": "^1.1.0",
+    "@testing-library/jest-native": "^3.4.3",
+    "@testing-library/react-native": "^7.1.0",
     "babel-jest": "^26.6.3",
     "babel-plugin-inline-dotenv": "^1.5.0",
     "babel-plugin-module-resolver": "^4.0.0",
@@ -120,6 +122,9 @@
       "<rootDir>/config/jest/mockError.js",
       "./node_modules/react-native-gesture-handler/jestSetup.js"
     ],
+    "setupFilesAfterEnv": [
+      "@testing-library/jest-native/extend-expect"
+    ],
     "collectCoverageFrom": [
       "src/**/*.{js,jsx}"
     ],
@@ -127,9 +132,13 @@
       "json",
       "lcov"
     ],
+    "moduleDirectories": [
+      "node_modules",
+      "src"
+    ],
     "timers": "fake",
     "transformIgnorePatterns": [
-      "/!node_modules\\/react-navigation"
+      "node_modules/(?!(jest-)?react-native|@react-native-community|@react-navigation|rn-round-checkbox|@invertase)"
     ]
   },
   "standard": {
