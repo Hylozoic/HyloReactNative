@@ -1,9 +1,111 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`RootView matches the last snapshot (loading) 1`] = `
+<Context.Provider
+  value={
+    Object {
+      "store": Object {
+        "dispatch": [MockFunction],
+        "getState": [MockFunction] {
+          "calls": Array [
+            Array [],
+          ],
+          "results": Array [
+            Object {
+              "type": "return",
+              "value": Object {
+                "pending": Object {},
+              },
+            },
+          ],
+        },
+        "subscribe": [MockFunction],
+      },
+      "subscription": Subscription {
+        "handleChangeWrapper": [Function],
+        "listeners": Object {
+          "notify": [Function],
+        },
+        "onStateChange": [Function],
+        "parentSub": undefined,
+        "store": Object {
+          "dispatch": [MockFunction],
+          "getState": [MockFunction] {
+            "calls": Array [
+              Array [],
+            ],
+            "results": Array [
+              Object {
+                "type": "return",
+                "value": Object {
+                  "pending": Object {},
+                },
+              },
+            ],
+          },
+          "subscribe": [MockFunction],
+        },
+        "unsubscribe": null,
+      },
+    }
+  }
+>
+  <Memo(Connect(RootView))
+    loading={true}
+  />
+</Context.Provider>
+`;
+
 exports[`RootView matches the last snapshot 1`] = `
-<View>
-  <VersionCheck />
-  <LoadingModal />
-  <RootNavigator />
-</View>
+<Context.Provider
+  value={
+    Object {
+      "store": Object {
+        "dispatch": [MockFunction],
+        "getState": [MockFunction] {
+          "calls": Array [
+            Array [],
+          ],
+          "results": Array [
+            Object {
+              "type": "return",
+              "value": Object {
+                "pending": Object {},
+              },
+            },
+          ],
+        },
+        "subscribe": [MockFunction],
+      },
+      "subscription": Subscription {
+        "handleChangeWrapper": [Function],
+        "listeners": Object {
+          "notify": [Function],
+        },
+        "onStateChange": [Function],
+        "parentSub": undefined,
+        "store": Object {
+          "dispatch": [MockFunction],
+          "getState": [MockFunction] {
+            "calls": Array [
+              Array [],
+            ],
+            "results": Array [
+              Object {
+                "type": "return",
+                "value": Object {
+                  "pending": Object {},
+                },
+              },
+            ],
+          },
+          "subscribe": [MockFunction],
+        },
+        "unsubscribe": null,
+      },
+    }
+  }
+>
+  <Memo(Connect(RootView)) />
+</Context.Provider>
 `;
