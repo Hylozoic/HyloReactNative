@@ -22,7 +22,6 @@ export default function RootView ({
   }
 
   // TODO: Deeplink handling using openedPushNotification
-
   return (
     <View style={styles.rootContainer}>
       <VersionCheck />

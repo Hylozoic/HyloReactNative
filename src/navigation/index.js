@@ -8,6 +8,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import { get } from 'lodash/fp'
 import { isIOS } from 'util/platform'
 import { MAIN_ROUTE_NAME, MAIN_ROUTE_PATH } from 'navigation/util/routing'
+import linking from 'navigation/linking'
 import { LoadingScreen } from 'components/Loading'
 import createNavigationOptionsForHeader from 'components/Tabs/Header/createNavigationOptionsForHeader'
 import header from 'navigation/header'
@@ -84,10 +85,10 @@ function TabsNavigator () {
       screenOptions={screenOptions}
       tabBarOptions={tabBarOptions}
     >
-      <Tabs.Screen name='Home' component={HomeStackNavigator} path='/' />
-      <Tabs.Screen name='Members' component={Members} path='people' />
-      <Tabs.Screen name='Topics' component={Topics} path='topics' />
-      <Tabs.Screen name='Projects' component={Projects} path='projects' />
+      <Tabs.Screen name='Home' component={HomeStackNavigator} />
+      <Tabs.Screen name='Members' component={Members} />
+      <Tabs.Screen name='Topics' component={Topics} />
+      <Tabs.Screen name='Projects' component={Projects} />
     </Tabs.Navigator>
   )
 }
@@ -104,6 +105,7 @@ function AppNavigator () {
       mode='modal'
       headerMode='screen'
     >
+      {/* Tabs */}
       <App.Screen
         name={MAIN_ROUTE_NAME}
         component={TabsNavigator}
@@ -112,10 +114,10 @@ function AppNavigator () {
           ...createNavigationOptionsForHeader(navigation, getFocusedRouteNameFromRoute(route))
         })}
       />
+      {/* Screens as modals outside of Tabs */}
       <App.Screen
         name='TopicFeed'
         component={Feed}
-        path='c/:communitySlugFromLink/topicFeed/:topicName'
         options={({ route }) => ({
           title: get('params.communityName', route)
         })}
@@ -123,18 +125,15 @@ function AppNavigator () {
       <App.Screen
         name='Feed'
         component={Feed}
-        path='feed/:communityId'
         options={({ route }) => ({
           // Don't allow opening feed of current community or network in this modal?
           // Back button title should simply say Back?
           title: ''
         })}
       />
-      {/* Screens that appear outside of tabs: Settings, Messages, etc.   */}
       <App.Screen
         name='MemberProfile'
         component={MemberProfile}
-        path='people/:id'
         options={({ route }) => ({
           // Don't allow opening feed of current community or network in this modal?
           // Back button title should simply say Back?
@@ -144,8 +143,8 @@ function AppNavigator () {
       <App.Screen name='MemberDetails' component={MemberDetails} />
       <App.Screen name='MemberSkillEditor,' component={MemberSkillEditor} />
       <App.Screen name='NewMessage' component={NewMessage} />
-      <App.Screen name='PostEditor' component={PostEditor} path='post/:id' />
-      <App.Screen name='PostDetails' component={PostDetails} options={{ title: 'Detail' }} path='post/:id' />
+      <App.Screen name='PostEditor' component={PostEditor} />
+      <App.Screen name='PostDetails' component={PostDetails} options={{ title: 'Detail' }} />
       <App.Screen name='ProjectMembers' component={ProjectMembers} />
       <App.Screen name='ItemChooserScreen' component={ItemChooserScreen} />
       <App.Screen name='UserSettings' component={UserSettings} />
@@ -153,7 +152,6 @@ function AppNavigator () {
       <App.Screen name='ModeratorSettings' component={ModeratorSettings} />
       <App.Screen name='CommunitySettingsMenu' component={CommunitySettingsMenu} />
       <App.Screen name='CommunitySettings' component={CommunitySettings} />
-      <App.Screen name='PasswordReset' component={UserSettings} path='settings/password' />
       <App.Screen
         name='NotificationsList' component={NotificationsList} options={({ navigation, route }) =>
           header(navigation, route, { left: 'close', title: 'Notifications' })}
@@ -190,6 +188,7 @@ function AppWithDrawerNavigator () {
       drawerStyle={{
         width: Dimensions.get('window').width * 0.9
       }}
+      initialRouteName='DrawerHome'
     >
       <AppWithDrawer.Screen name='DrawerHome' component={AppNavigator} />
     </AppWithDrawer.Navigator>
@@ -200,7 +199,7 @@ const Auth = createStackNavigator()
 function AuthNavigator () {
   return (
     <Auth.Navigator headerMode='screen'>
-      <Auth.Screen name='Login' component={Login} path='login' options={{ animationEnabled: false }} />
+      <Auth.Screen name='Login' component={Login} options={{ animationEnabled: false }} />
       {/* <Auth.Screen name='LoginByPasswordResetToken' component={Login} path='passwordResetTokenLogin/:userId/:loginToken/:nextURL' /> */}
       <Auth.Screen name='ForgotPassword' component={ForgotPassword} path='reset-password' />
       <App.Screen name='Signup' component={Signup} options={{ headerMode: 'screen' }} />
@@ -211,7 +210,7 @@ function AuthNavigator () {
 
 export default function RootNavigator ({ isSignedIn }) {
   return (
-    <NavigationContainer>
+    <NavigationContainer linking={linking}>
       {isSignedIn
         ? <AppWithDrawerNavigator />
         : <AuthNavigator />}

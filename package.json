@@ -114,6 +114,7 @@
     "reselect-tools": "^0.0.6",
     "standard": "^16.0.3",
     "timezone-mock": "^0.0.6",
+    "uri-scheme": "^1.0.57",
     "validator": "^8.0.0"
   },
   "jest": {

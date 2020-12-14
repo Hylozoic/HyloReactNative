@@ -1,12 +1,11 @@
 #import "AppDelegate.h"
-
 #import <React/RCTBridge.h>
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
+#import <React/RCTLinkingManager.h>
 #import <RNGoogleSignin/RNGoogleSignin.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <Intercom/Intercom.h>
-
 #ifdef FB_SONARKIT_ENABLED
 #import <FlipperKit/FlipperClient.h>
 #import <FlipperKitLayoutPlugin/FlipperKitLayoutPlugin.h>
@@ -28,28 +27,38 @@ static void InitializeFlipper(UIApplication *application) {
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application
-    didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+  didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
 #ifdef FB_SONARKIT_ENABLED
   InitializeFlipper(application);
 #endif
-
-  RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:launchOptions];
-  RCTRootView *rootView = [[RCTRootView alloc] initWithBridge:bridge
-                                                   moduleName:@"HyloReactNative"
-                                            initialProperties:nil];
-
-  rootView.backgroundColor = [[UIColor alloc] initWithRed:1.0f green:1.0f blue:1.0f alpha:1];
-
-  self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+  RCTBridge *bridge = [[RCTBridge alloc]
+    initWithDelegate:self
+    launchOptions:launchOptions
+  ];
+  RCTRootView *rootView = [[RCTRootView alloc]
+    initWithBridge:bridge
+    moduleName:@"HyloReactNative"
+    initialProperties:nil
+  ];
+  rootView.backgroundColor = [[UIColor alloc]
+    initWithRed:1.0f
+    green:1.0f
+    blue:1.0f
+    alpha:1
+  ];
+  self.window = [[UIWindow alloc]
+    initWithFrame:[UIScreen mainScreen].bounds
+  ];
   UIViewController *rootViewController = [UIViewController new];
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
-
   //  For Facebook SDK
-  [[FBSDKApplicationDelegate sharedInstance] application:application
-                           didFinishLaunchingWithOptions:launchOptions];
-
+  [[FBSDKApplicationDelegate sharedInstance]
+    application:application
+    didFinishLaunchingWithOptions:launchOptions
+  ];
   // For Intercom
   [Intercom
     setApiKey:@"ios_sdk-b11cb526589263a9890b895d40b934bffa876c43"
@@ -59,31 +68,39 @@ static void InitializeFlipper(UIApplication *application) {
   return YES;
 }
 
-
-// AppDelegate.m
 - (BOOL)application:(UIApplication *)application
-            openURL:(nonnull NSURL *)url
-            options:(nonnull NSDictionary<NSString *,id> *)options {
-  return [
-    [FBSDKApplicationDelegate sharedInstance] application:application
-                                                  openURL:url
-                                                  options:options]
-    ||
-    [RNGoogleSignin application:application
-                        openURL:url
-                        options:options];
+  openURL:(NSURL *)url
+  options:(nonnull NSDictionary<NSString *,id> *)options
+{
+  BOOL handledFB = [[FBSDKApplicationDelegate sharedInstance]
+    application:application
+    openURL:url
+    options:options
+  ];
+  BOOL handledGG = [RNGoogleSignin
+    application:application
+    openURL:url
+    options:options
+  ];
+  BOOL handledRCT = [RCTLinkingManager
+    application:application
+    openURL:url
+    options:options
+  ];
+
+  return handledFB || handledGG || handledRCT;
 }
 
-
-// - (BOOL)application:(UIApplication *)application
-//             openURL:(NSURL *)url
-//             options:(nonnull NSDictionary<UIApplicationOpenURLOptionsKey, id> *)options
-// {
-//   [[FBSDKApplicationDelegate sharedInstance] application:application
-//                                                  openURL:url
-//                                                  options:options];
-//   return YES;
-// }
+- (BOOL)application:(UIApplication *)application
+  continueUserActivity:(nonnull NSUserActivity *)userActivity
+  restorationHandler:(nonnull void (^)(NSArray<id<UIUserActivityRestoring>> * _Nullable))restorationHandler
+{
+ return [RCTLinkingManager
+    application:application
+    continueUserActivity:userActivity
+    restorationHandler:restorationHandler
+  ];
+}
 
 - (NSURL *)sourceURLForBridge:(RCTBridge *)bridge {
 #if DEBUG

@@ -17,7 +17,7 @@ import { showToast } from 'util/toast'
 
 export default class UserSettings extends React.Component {
   static navigationOptions = ({ route }) => {
-    const resettingPassword = route.name === 'PasswordReset'
+    const resettingPassword = get('params.section', route) === 'PasswordReset'
     let options = {
       title: 'Edit Account Info',
       headerStyle: styles.header,
