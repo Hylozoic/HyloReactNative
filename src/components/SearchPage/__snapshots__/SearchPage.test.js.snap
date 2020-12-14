@@ -98,23 +98,6 @@ exports[`PostCard matches the last snapshot 1`] = `
 </ForwardRef>
 `;
 
-exports[`SearchPage has navigationOptions 1`] = `
-Object {
-  "headerBackTitle": null,
-  "headerStyle": Object {
-    "backgroundColor": "white",
-    "paddingHorizontal": 10,
-  },
-  "headerTintColor": "#808c9b",
-  "headerTitle": "Search",
-  "headerTitleStyle": Object {
-    "color": "black",
-    "fontFamily": "Circular-Bold",
-    "fontSize": 17,
-  },
-}
-`;
-
 exports[`SearchPage matches the last snapshot 1`] = `
 <SafeAreaViewMock>
   <FlatList

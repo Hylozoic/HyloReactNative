@@ -18,7 +18,8 @@ const testProps = {
   ItemRowComponent: item => null,
   onFocus: jest.fn(),
   autoFocus: true,
-  initialItems: []
+  initialItems: [],
+  scope: 'test'
 }
 
 describe('ItemChooser', () => {

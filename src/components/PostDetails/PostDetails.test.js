@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
-import TestRenderer from 'react-test-renderer'
+import TestRenderer, { act } from 'react-test-renderer'
 import { Provider } from 'react-redux'
 import PostDetails, { CommentPrompt, Files, JoinProjectButton, ProjectMembers } from './PostDetails'
 import { Linking, TouchableOpacity } from 'react-native'
@@ -30,7 +30,7 @@ const post = {
   ],
   pinned: true,
   topics: [
-    { name: 'topic1', id: 1 }
+    { name: 'topic1', id: '1' }
   ]
 }
 const currentUser = {
@@ -81,11 +81,12 @@ describe('PostDetails', () => {
     const instance = renderer.root.findByType(PostDetails).instance
     const commentText = 'some text [amention:0] #topic <some encoded stuff>'
     instance.setState({ commentText })
-
     const promise = instance.handleCreateComment('some text [amention:3332] #topic <some encoded stuff>')
     expect(instance.state.submitting).toBeTruthy()
     expect(props.createComment).toHaveBeenCalledWith('some text <a href="#" data-entity-type="mention" data-user-id="3332">amention</a> #topic &lt;some encoded stuff&gt;')
-    await promise
+    await act(async () => {
+      await promise
+    })
     expect(instance.state.submitting).toBeFalsy()
     expect(instance.state.commentText).toBe('')
   })

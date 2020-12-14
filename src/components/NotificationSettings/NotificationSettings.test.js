@@ -79,15 +79,17 @@ describe('NotificationSettings', () => {
         updateAllMemberships: jest.fn(),
         memberships: [{
           community: {
-            id: 1
+            id: '1'
           }
         }, {
           community: {
-            id: 2
+            id: '2'
           }
         }]
       }
-      const instance = ReactTestRenderer.create(<NotificationSettings {...props} />).getInstance()
+      const instance = ReactTestRenderer.create(
+        <NotificationSettings {...props} />
+      ).getInstance()
       instance.updateAllCommunities({ sendPushNotifications: true })
       expect(props.updateAllMemberships).toHaveBeenCalledWith([1, 2], { sendPushNotifications: true })
     })

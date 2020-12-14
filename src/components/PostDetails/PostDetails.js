@@ -58,7 +58,7 @@ export default class PostDetails extends React.Component {
     return !!nextProps.isFocused
   }
 
-  handleShowTopic = (topicId) => this.props.showTopic(topicId, get('post.communities.0.id', this.props))
+  onShowTopic = (topicId) => this.props.showTopic(topicId, get('post.communities.0.id', this.props))
 
   handleCreateComment = (commentText) => {
     const commentTextAsHtml = toHtml(commentText)
@@ -120,7 +120,7 @@ export default class PostDetails extends React.Component {
           slug={slug}
           pinned={post.pinned}
           topics={post.topics}
-          showTopic={this.handleShowTopic}
+          showTopic={this.onShowTopic}
           postId={post.id}
           showMember={showMember}
           goToCommunity={goToCommunity}
@@ -137,7 +137,7 @@ export default class PostDetails extends React.Component {
           linkPreview={post.linkPreview}
           slug={slug}
           showMember={showMember}
-          showTopic={this.handleShowTopic}
+          showTopic={this.onShowTopic}
         />
         {!isEmpty(post.fileUrls) && <Files urls={post.fileUrls} />}
         {isProject &&
@@ -152,10 +152,12 @@ export default class PostDetails extends React.Component {
           leaving={isMember}
           onPress={isMember ? leaveProject : joinProject}
                       />}
-        {!!location && <View style={styles.infoRow}>
-          <Icon style={styles.locationIcon} name='Location' />
-          <Text style={styles.infoRowInfo} selectable>{location}</Text>
-                       </View>}
+        {!!location && (
+          <View style={styles.infoRow}>
+            <Icon style={styles.locationIcon} name='Location' />
+            <Text style={styles.infoRowInfo} selectable>{location}</Text>
+          </View>
+        )}
         <PostCommunities
           communities={post.communities}
           includePublic={post.isPublic}
@@ -194,7 +196,7 @@ export default class PostDetails extends React.Component {
             postId={post.id}
             postPending={pending}
             showMember={showMember}
-            showTopic={this.handleShowTopic}
+            showTopic={this.onShowTopic}
             slug={slug}
           />
           <SocketSubscriber type='post' id={post.id} />

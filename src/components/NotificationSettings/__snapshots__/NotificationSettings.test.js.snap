@@ -43,23 +43,6 @@ exports[`MessageSettingsRow matches the last snapshot 1`] = `
 />
 `;
 
-exports[`NotificationSettings has navigationOptions 1`] = `
-Object {
-  "headerBackTitle": null,
-  "headerStyle": Object {
-    "backgroundColor": "white",
-    "paddingHorizontal": 10,
-  },
-  "headerTintColor": "#808c9b",
-  "headerTitle": "Notification Settings",
-  "headerTitleStyle": Object {
-    "color": "black",
-    "fontFamily": "Circular-Bold",
-    "fontSize": 17,
-  },
-}
-`;
-
 exports[`NotificationSettings matches the last snapshot 1`] = `
 <ScrollView
   contentContainerStyle={

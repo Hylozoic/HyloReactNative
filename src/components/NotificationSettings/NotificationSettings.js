@@ -65,11 +65,15 @@ export default class NotificationSettings extends React.Component {
           settings={allCommunitiesSettings}
           updateAllCommunities={this.updateAllCommunitiesAlert}
         />
-        {memberships.map(membership => <MembershipSettingsRow
-          key={membership.id}
-          membership={membership}
-          updateMembershipSettings={changes => updateMembershipSettings(membership.community.id, changes)}
-                                       />)}
+        {memberships.map(
+          membership => (
+            <MembershipSettingsRow
+              key={membership.id}
+              membership={membership}
+              updateMembershipSettings={changes => updateMembershipSettings(membership.community.id, changes)}
+            />
+          )
+        )}
       </ScrollView>
     )
   }
@@ -135,10 +139,12 @@ export class SettingsRow extends React.Component {
             {expanded ? <Icon name='ArrowUp' style={styles.arrowIcon} /> : <Icon name='ArrowDown' style={styles.arrowIcon} />}
           </TouchableOpacity>
         </View>
-        {expanded && <View style={styles.iconRow}>
-          <SettingsIcon settingKey='sendPushNotifications' name='PushNotification' settings={settings} update={update} />
-          <SettingsIcon settingKey='sendEmail' name='EmailNotification' settings={settings} update={update} />
-                     </View>}
+        {expanded && (
+          <View style={styles.iconRow}>
+            <SettingsIcon settingKey='sendPushNotifications' name='PushNotification' settings={settings} update={update} />
+            <SettingsIcon settingKey='sendEmail' name='EmailNotification' settings={settings} update={update} />
+          </View>
+        )}
       </View>
     )
   }

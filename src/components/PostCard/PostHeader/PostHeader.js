@@ -32,11 +32,13 @@ export default class PostHeader extends React.PureComponent {
     this.props.editPost(this.props.postId)
   }
 
-  showMember = () => this.props.showMember && this.props.showMember(this.props.creator.id)
-  topicKeyExtractor = (item) => item.id
-  renderTopic = ({ item }) => <TouchableOpacity onPress={() => this.props.showTopic && this.props.showTopic(item.name)}>
-    <Text style={styles.topicLabel}>#{item.name}</Text>
-  </TouchableOpacity>
+  handleShowMember = () => this.props.handleShowMember && this.props.handleShowMember(this.props.creator.id)
+  topicKeyExtractor = item => item.id
+  renderTopic = ({ item }) => (
+    <TouchableOpacity onPress={() => this.props.showTopic && this.props.showTopic(item.name)}>
+      <Text style={styles.topicLabel}>#{item.name}</Text>
+    </TouchableOpacity>
+  )
 
   render () {
     const {
@@ -60,7 +62,6 @@ export default class PostHeader extends React.PureComponent {
       smallAvatar
     } = this.props
     const { flaggingVisible } = this.state
-
     const showTopics = !isEmpty(topics)
     // Used to generate a link to this post from the backend.
     const linkData = {
@@ -76,45 +77,59 @@ export default class PostHeader extends React.PureComponent {
       }
     }
 
-    const deletePostWithConfirm = deletePost ? () => Alert.alert(
-      'Confirm Delete',
-      'Are you sure you want to delete this post?',
-      [
-        { text: 'Yes', onPress: () => closeOnDelete ? deletePostAndClose() : deletePost() },
-        { text: 'Cancel', style: 'cancel' }
-      ]) : null
+    const deletePostWithConfirm = deletePost
+      ? () => Alert.alert(
+          'Confirm Delete',
+          'Are you sure you want to delete this post?',
+          [
+            {
+              text: 'Yes',
+              onPress: () => closeOnDelete
+                ? deletePostAndClose()
+                : deletePost()
+            },
+            { text: 'Cancel', style: 'cancel' }
+          ]
+        )
+      : null
 
-    const removePostWithConfirm = removePost ? () => Alert.alert(
-      'Confirm Removal',
-      'Are you sure you want to remove this post from this community?',
-      [
-        { text: 'Yes', onPress: () => removePost() },
-        { text: 'Cancel', style: 'cancel' }
-      ]) : null
+    const removePostWithConfirm = removePost
+      ? () => Alert.alert(
+          'Confirm Removal',
+          'Are you sure you want to remove this post from this community?',
+          [
+            { text: 'Yes', onPress: () => removePost() },
+            { text: 'Cancel', style: 'cancel' }
+          ])
+      : null
 
     return (
       <View style={styles.container}>
         <View style={styles.avatarSpacing}>
-          <TouchableOpacity onPress={this.showMember}>
+          <TouchableOpacity onPress={this.handleShowMember}>
             {!!avatarUrl && <Avatar avatarUrl={avatarUrl} dimension={smallAvatar && 20} />}
           </TouchableOpacity>
         </View>
         <View style={styles.meta}>
-          <TouchableOpacity onPress={this.showMember}>
+          <TouchableOpacity onPress={this.handleShowMember}>
             {name && <Text style={styles.username}>{name}</Text>}
             {!!tagline && <Text style={styles.metaText}>{tagline}</Text>}
           </TouchableOpacity>
-          {!hideDateRow && <View style={styles.dateRow}>
-            <Text style={styles.metaText}>{humanDate(date)}</Text>
-            {!!showTopics && <FlatList
-              data={topics}
-              style={styles.topicList}
-              horizontal
-              keyExtractor={this.topicKeyExtractor}
-              showsHorizontalScrollIndicator={false}
-              renderItem={this.renderTopic}
-                             />}
-          </View>}
+          {!hideDateRow && (
+            <View style={styles.dateRow}>
+              <Text style={styles.metaText}>{humanDate(date)}</Text>
+              {!!showTopics && (
+                <FlatList
+                  data={topics}
+                  style={styles.topicList}
+                  horizontal
+                  keyExtractor={this.topicKeyExtractor}
+                  showsHorizontalScrollIndicator={false}
+                  renderItem={this.renderTopic}
+                />
+              )}
+            </View>
+          )}
         </View>
         <View style={styles.upperRight}>
           {pinned && <Icon name='Pin' style={styles.pinIcon} />}
