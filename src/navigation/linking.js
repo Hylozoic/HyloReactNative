@@ -1,26 +1,25 @@
-import { MAIN_ROUTE_NAME, MAIN_ROUTE_PATH } from 'navigation/util/routing'
+import { MAIN_ROUTE_NAME } from 'navigation/util/routing'
 
+/* configuration for matching screens with paths */
 const config = {
-  /* configuration for matching screens with paths */
   screens: {
     DrawerHome: {
       screens: {
+        MemberProfile: 'people/:id',
+        PostDetails: 'post/:id',
+        PostEditor: 'post/edit/:id',
+        UserSettings: 'settings/:section?',
+        // TODO: I don't see a great reason that this is still a constant
         [MAIN_ROUTE_NAME]: {
-          path: MAIN_ROUTE_PATH,
           screens: {
             Members: 'people',
             Feed: 'feed/:communityId',
             TopicFeed: 'c/:communitySlugFromLink/topicFeed/:topicName'
-          },
-          MemberProfile: 'people/:id',
-          PostDetails: 'post/:id',
-          PostEditor: 'post/edit/:id',
-          UserSettings: 'settings/:section?',
+          }
         }
       }
     }
-  },
-  // AuthNavigator: 'login'
+  }
 }
 
 const linking = {

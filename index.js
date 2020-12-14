@@ -1,6 +1,7 @@
 /* eslint-disable no-global-assign */
 import React, { Component } from 'react'
 import { Provider } from 'react-redux'
+import { NavigationContainer } from '@react-navigation/native'
 import { AppRegistry, Platform, AppState } from 'react-native'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import Timer from 'react-native-background-timer'
@@ -11,6 +12,7 @@ import getStore from './src/store'
 import { name as appName } from './app.json'
 import ErrorBoundary from 'components/ErrorBoundary'
 import RootView from 'components/RootView'
+import linking from 'navigation/linking'
 
 const store = getStore()
 
@@ -80,7 +82,9 @@ export default class AppContainer extends Component {
       <ErrorBoundary>
         <Provider store={store}>
           <SafeAreaProvider>
-            <RootView openedPushNotification={openedPushNotification} />
+            <NavigationContainer linking={linking}>
+              <RootView openedPushNotification={openedPushNotification} />
+            </NavigationContainer>
           </SafeAreaProvider>
         </Provider>
       </ErrorBoundary>

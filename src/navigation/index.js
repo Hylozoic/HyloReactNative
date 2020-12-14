@@ -209,11 +209,7 @@ function AuthNavigator () {
 }
 
 export default function RootNavigator ({ isSignedIn }) {
-  return (
-    <NavigationContainer linking={linking}>
-      {isSignedIn
-        ? <AppWithDrawerNavigator />
-        : <AuthNavigator />}
-    </NavigationContainer>
-  )
+  return isSignedIn
+    ? <AppWithDrawerNavigator />
+    : <AuthNavigator />
 }
