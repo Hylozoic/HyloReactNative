@@ -1,14 +1,12 @@
 import 'react-native-gesture-handler' // is this necessary?
 import * as React from 'react'
 import { Dimensions } from 'react-native'
-import { NavigationContainer, getFocusedRouteNameFromRoute } from '@react-navigation/native'
+import { getFocusedRouteNameFromRoute } from '@react-navigation/native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { createDrawerNavigator } from '@react-navigation/drawer'
 import { createStackNavigator } from '@react-navigation/stack'
 import { get } from 'lodash/fp'
 import { isIOS } from 'util/platform'
-import { MAIN_ROUTE_NAME, MAIN_ROUTE_PATH } from 'navigation/util/routing'
-import linking from 'navigation/linking'
 import { LoadingScreen } from 'components/Loading'
 import createNavigationOptionsForHeader from 'components/Tabs/Header/createNavigationOptionsForHeader'
 import header from 'navigation/header'
@@ -107,9 +105,8 @@ function AppNavigator () {
     >
       {/* Tabs */}
       <App.Screen
-        name={MAIN_ROUTE_NAME}
+        name='Main'
         component={TabsNavigator}
-        path={MAIN_ROUTE_PATH}
         options={({ navigation, route, params }) => ({
           ...createNavigationOptionsForHeader(navigation, getFocusedRouteNameFromRoute(route))
         })}

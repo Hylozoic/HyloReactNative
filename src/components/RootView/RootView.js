@@ -1,9 +1,11 @@
 import React, { useMemo } from 'react'
 import { View } from 'react-native'
+import { NavigationContainer } from '@react-navigation/native'
+import { SafeAreaProvider } from 'react-native-safe-area-context'
 import Loading from '../Loading'
-import RootNavigator from 'navigation'
-// import DeepLinkHandler from 'navigation/DeepLinkHandler'
 import VersionCheck from '../VersionCheck'
+import RootNavigator from 'navigation'
+import linking from 'navigation/linking'
 
 export default function RootView ({
   loading,
@@ -24,8 +26,12 @@ export default function RootView ({
   // TODO: Deeplink handling using openedPushNotification
   return (
     <View style={styles.rootContainer}>
-      <VersionCheck />
-      <RootNavigator isSignedIn={signedIn} />
+      <SafeAreaProvider>
+        <VersionCheck />
+        <NavigationContainer linking={linking}>
+          <RootNavigator isSignedIn={signedIn} />
+        </NavigationContainer>
+      </SafeAreaProvider>
     </View>
   )
 }

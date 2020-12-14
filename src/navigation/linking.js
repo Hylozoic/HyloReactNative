@@ -1,20 +1,38 @@
 import { MAIN_ROUTE_NAME } from 'navigation/util/routing'
 
+// invitation: route('/h/use-invitation'),
+// accessLink: route('/c/:slug/join/:accessCode'),
+// passwordResetTokenLogin: route('/noo/login/token'),
+// post: route('/c/:slug/p/:id'),
+// networkPost: route('/n/:slug/p/:id'),
+// allCommunitiesPost: route('/all/p/:id'),
+// thread: route('/t/:id'),
+// allCommunities: route('/all'),
+// membersIndex: route('/c/:communityName/members'),
+// showTopic: route('/c/:communityName/:topicName'),
+// showMember: route('/m/:memberId'),
+// showCommunity: route('/c/:communitySlug'),
+// showNetwork: route('/n/:networkSlug')
+
+
 /* configuration for matching screens with paths */
 const config = {
+  initialRouteName: 'Main',
   screens: {
     DrawerHome: {
       screens: {
-        MemberProfile: 'people/:id',
-        PostDetails: 'post/:id',
-        PostEditor: 'post/edit/:id',
+        MemberProfile: 'm/:id',
+        PostDetails: 'p/:id',
+        PostEditor: 'p/:id/edit',
         UserSettings: 'settings/:section?',
+        Thread: '/t/:id',
+        ThreadList: '/t',
         // TODO: I don't see a great reason that this is still a constant
-        [MAIN_ROUTE_NAME]: {
+        Main: {
           screens: {
-            Members: 'people',
             Feed: 'feed/:communityId',
-            TopicFeed: 'c/:communitySlugFromLink/topicFeed/:topicName'
+            Members: 'members',
+            TopicFeed: 'c/:communitySlug/topicFeed/:topicName'
           }
         }
       }
