@@ -1,5 +1,5 @@
 import url from 'url'
-import pathMatch from 'path-match'
+import { match } from 'path-to-regexp'
 import { get } from 'lodash/fp'
 
 export const MAIN_ROUTE_NAME = 'Main'
@@ -37,22 +37,20 @@ export function isInvitationLink (path) {
   return !!(invitation(pathname) || accessLink(pathname))
 }
 
-const route = pathMatch()
-
 export const routeMatchers = {
-  invitation: route('/h/use-invitation'),
-  accessLink: route('/c/:slug/join/:accessCode'),
-  passwordResetTokenLogin: route('/noo/login/token'),
-  post: route('/c/:slug/p/:id'),
-  networkPost: route('/n/:slug/p/:id'),
-  allCommunitiesPost: route('/all/p/:id'),
-  thread: route('/t/:id'),
-  allCommunities: route('/all'),
-  membersIndex: route('/c/:communityName/members'),
-  showTopic: route('/c/:communityName/:topicName'),
-  showMember: route('/m/:memberId'),
-  showCommunity: route('/c/:communitySlug'),
-  showNetwork: route('/n/:networkSlug')
+  invitation: match('/h/use-invitation'),
+  accessLink: match('/c/:slug/join/:accessCode'),
+  passwordResetTokenLogin: match('/noo/login/token'),
+  post: match('/c/:slug/p/:id'),
+  networkPost: match('/n/:slug/p/:id'),
+  allCommunitiesPost: match('/all/p/:id'),
+  thread: match('/t/:id'),
+  allCommunities: match('/all'),
+  membersIndex: match('/c/:communityName/members'),
+  showTopic: match('/c/:communityName/:topicName'),
+  showMember: match('/m/:memberId'),
+  showCommunity: match('/c/:communitySlug'),
+  showNetwork: match('/n/:networkSlug')
 }
 
 export function redirectAfterLogin ({ currentUser, navigation, action }) {

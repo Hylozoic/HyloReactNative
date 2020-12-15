@@ -26,12 +26,14 @@ export function mapStateToProps (state, props) {
   // NOTE: communityId is is received either as a prop (via Home) or as a
   // navigation parameter. In case of nav params the screen will load with a
   // back button and be added to the stack.
-  const communityId = getNavigationParam('communityId', state, props) ||
-                        getCurrentCommunityId(state, props)
+  const communityId = getNavigationParam('communityId', state, props)
+    || getNavigationParam('contextId', state, props)
+    || getCurrentCommunityId(state, props)
   const communitySlugFromLink = getNavigationParam('communitySlugFromLink', state, props)
   const communitySearchObject = getCommunitySearchObject(communityId, communitySlugFromLink)
-
-  const topicName = props.topicName || params.topicName || getNavigationParam('topicName', state, props)
+  const topicName = props.topicName
+    || params.topicName
+    || getNavigationParam('topicName', state, props)
   const community = !networkId && get('ref', getCommunity(state, communitySearchObject))
   const communitySlug = get('slug', community)
 
