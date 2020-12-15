@@ -6,31 +6,11 @@ import styles from './CommunitySettings.styles'
 import ImagePicker from 'components/ImagePicker'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
 import defaultBanner from 'assets/default-user-banner.jpg'
-import header, { HeaderButton } from 'navigation/header'
 import KeyboardFriendlyView from 'navigation/KeyboardFriendlyView'
 import { some } from 'lodash/fp'
 import { showToast } from 'util/toast'
 
 export default class CommunitySettings extends React.Component {
-  static navigationOptions = ({ navigation, route }) => {
-    const saveChanges = route.params.saveChanges || (() => {})
-    const pendingSave = route.params.pendingSave
-    const confirmLeave = route.params.confirmLeave || (() => {})
-    return header(navigation, route, {
-      headerBackButton: () => confirmLeave(navigation.goBack),
-      title: 'Community Information',
-      options: {
-        headerBackTitle: null,
-        headerRight: () =>
-          <HeaderButton
-            disabled={pendingSave}
-            onPress={saveChanges}
-            text={pendingSave ? 'Saving' : 'Save'}
-          />
-      }
-    })
-  }
-
   constructor (props) {
     super(props)
     this.state = {

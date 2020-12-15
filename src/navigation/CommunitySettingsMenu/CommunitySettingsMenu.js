@@ -6,13 +6,9 @@ import {
   View
 } from 'react-native'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
-import header from 'navigation/header'
 import styles from './CommunitySettingsMenu.style'
 
-export default class PostImage extends PureComponent {
-  static navigationOptions = ({ navigation, route }) =>
-    header(navigation, route, { title: 'Community Settings' })
-
+export default class CommunitySettingsMenu extends PureComponent {
   navigate = (screen) => this.props.navigation.navigate(screen)
 
   render () {
@@ -35,10 +31,12 @@ export default class PostImage extends PureComponent {
         data={menuItems}
         ListHeaderComponent={<View style={styles.headerContainer}><Text style={styles.headerText}>{communityName}</Text></View>}
         keyExtractor={(item, index) => index.toString()}
-        renderItem={({ item }) => <TouchableOpacity onPress={() => this.navigate(item.navigate)} style={styles.item}>
-          <Text style={styles.text}>{item.name}</Text>
-          <EntypoIcon style={styles.chevron} name='chevron-right' />
-                                  </TouchableOpacity>}
+        renderItem={({ item }) => (
+          <TouchableOpacity onPress={() => this.navigate(item.navigate)} style={styles.item}>
+            <Text style={styles.text}>{item.name}</Text>
+            <EntypoIcon style={styles.chevron} name='chevron-right' />
+          </TouchableOpacity>
+        )}
       />
     )
   }

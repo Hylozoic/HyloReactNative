@@ -40,8 +40,14 @@ export class HeaderButton extends PureComponent {
     const { disabled } = this.state
 
     if (typeof onPress !== 'function') throw new Error('HeaderButton: onPress is not a function.')
+    
     return (
-      <TouchableOpacity style={{ marginRight: 12 }} onPress={this.onPress} hitSlop={{ top: 7, bottom: 7, left: 7, right: 7 }} disabled={disabled}>
+      <TouchableOpacity
+        style={{ marginRight: 12 }}
+        onPress={this.onPress}
+        hitSlop={{ top: 7, bottom: 7, left: 7, right: 7 }}
+        disabled={disabled}
+      >
         {text === 'Close'
           ? <Icon name='Ex' style={styles.exIcon} />
           : <Text style={[styles.button, disabled && styles.disabled]}>{text}</Text>}
@@ -91,30 +97,29 @@ const headerClose = goBack => <HeaderButton onPress={() => goBack()} text='Close
 export default function header ({ goBack }, { params }, { headerBackButton, left, right, title, options, disableOnClick } = {}) {
   const headerOptions = {
     ...params,
-    headerStyle: styles.header,
+    headerStyle: styles.headerStyle,
     headerTintColor: tintColor,
     title: title || get('title', params),
-    headerTitleStyle: styles.title,
+    headerTitleStyle: styles.headerTitleStyle,
     // Defaults
     headerBackTitle: null,
     headerLeft: null,
     headerRight: null,
     ...options
   }
+  if (right) headerOptions.headerRight = () => (
+    <HeaderButton {...right} disableOnClick={disableOnClick} />
+  )
   if (left) {
     headerOptions.headerLeft = () =>
       left === 'close'
         ? headerClose(goBack)
         : <HeaderButton {...left} disableOnClick={disableOnClick} />
-    headerOptions.headerTitleStyle = [styles.title, styles.center]
   }
-  if (right) headerOptions.headerRight = () => <HeaderButton {...right} disableOnClick={disableOnClick} />
-
   if (headerBackButton) {
-    headerOptions.headerLeft = () => <HeaderBackButton
-      onPress={headerBackButton}
-      tintColor={tintColor}
-                                     />
+    headerOptions.headerLeft = () => (
+      <HeaderBackButton onPress={headerBackButton} tintColor={tintColor} />
+    )
   }
 
   return headerOptions
@@ -131,16 +136,10 @@ const styles = StyleSheet.create({
   disabled: {
     color: rhino20
   },
-  center: {
-    alignSelf: 'center',
-    flex: 1,
-    textAlign: 'center'
-  },
-  header: {
-    paddingHorizontal: 10,
+  headerStyle: {
     backgroundColor: 'white'
   },
-  title: {
+  headerTitleStyle: {
     color: 'black',
     fontFamily: 'Circular-Bold',
     fontSize: 17

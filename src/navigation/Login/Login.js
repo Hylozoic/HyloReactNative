@@ -19,10 +19,6 @@ import GoogleLoginButton from './GoogleLoginButton'
 import styles from './Login.styles'
 
 export default class Login extends React.Component {
-  static navigationOptions = {
-    headerShown: false
-  }
-
   constructor (props) {
     super(props)
     this.state = {

@@ -32,7 +32,7 @@ export default class PostHeader extends React.PureComponent {
     this.props.editPost(this.props.postId)
   }
 
-  handleShowMember = () => this.props.handleShowMember && this.props.handleShowMember(this.props.creator.id)
+  handleShowMember = () => this.props.showMember && this.props.showMember(this.props.creator.id)
   topicKeyExtractor = item => item.id
   renderTopic = ({ item }) => (
     <TouchableOpacity onPress={() => this.props.showTopic && this.props.showTopic(item.name)}>

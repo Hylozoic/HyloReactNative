@@ -11,13 +11,6 @@ import styles from './ThreadList.styles'
 export default class ThreadList extends Component {
   state = { ready: false }
 
-  static navigationOptions = ({ navigation, route }) => header(navigation, route, {
-    left: 'close',
-    title: 'Messages',
-    right: { text: 'New', onPress: () => navigation.navigate('NewMessage') },
-    disableOnClick: false
-  })
-
   componentDidMount () {
     this.props.updateLastViewed()
     this.fetchOrShowCached()

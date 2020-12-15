@@ -10,10 +10,6 @@ import styles from './InviteExpired.styles'
 const axolotlImage = require('../../assets/Axel_Fretting.png')
 
 export default class InviteExpired extends React.Component {
-  static navigationOptions = {
-    headerShown: false
-  }
-
   goToLogin = () => this.props.navigation.navigate('Login')
 
   render () {

@@ -18,10 +18,6 @@ const backgroundImage = require('../../assets/signin_background.png')
 const merkabaImage = require('../../assets/merkaba_white.png')
 
 export default class Signup extends React.Component {
-  static navigationOptions = {
-    headerShown: false
-  }
-
   state = {
     ssoError: false
   }

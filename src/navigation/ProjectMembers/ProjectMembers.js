@@ -7,9 +7,6 @@ import header from 'navigation/header'
 import goToMemberMaker from 'store/actions/goToMemberMaker'
 
 export default class ProjectMembers extends React.Component {
-  static navigationOptions = ({ navigation, route }) =>
-    header(navigation, route, { title: 'Project Members' })
-
   render () {
     const { members } = this.props.route.params
     const showMember = goToMemberMaker(this.props.navigation)

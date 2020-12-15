@@ -43,8 +43,6 @@ export default class Thread extends React.Component {
     updateThreadReadTime: func.isRequired
   }
 
-  static navigationOptions = ({ navigation, route }) => createNavigationOptionsForHeader(navigation)
-
   constructor (props) {
     super(props)
     this.state = {

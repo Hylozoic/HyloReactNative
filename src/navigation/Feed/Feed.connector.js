@@ -59,7 +59,8 @@ export function mapStateToProps (state, props) {
 
 export function mapDispatchToProps (dispatch, { navigation }) {
   return {
-    newPost: (communityId, topicName) => navigation.navigate('PostEditor', { communityId, topicName }),
+    newPost: (communityId, topicName) =>
+      navigation.navigate('PostEditor', { communityId, topicName }),
     showPost: id => navigation.navigate('PostDetails', { id }),
     showMember: id => navigation.navigate('MemberProfile', { id }),
     showTopic: (communityId, networkId) => topicName => {

@@ -56,7 +56,6 @@ export default class PostCard extends React.PureComponent {
       hideDetails,
       shouldShowCommunities
     } = this.props
-
     const slug = get('0.slug', communities)
 
     return (

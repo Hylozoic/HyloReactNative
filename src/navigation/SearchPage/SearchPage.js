@@ -12,15 +12,6 @@ import { PostTitle } from 'components/PostCard/PostBody/PostBody'
 import UnwrappedCommentCard from 'components/Comment'
 
 export default class SearchPage extends React.Component {
-  static navigationOptions = ({ navigation, route }) => {
-    return header(navigation, route, {
-      title: 'Search',
-      options: {
-        headerBackTitle: null
-      }
-    })
-  }
-
   state = {
     refreshing: false
   }

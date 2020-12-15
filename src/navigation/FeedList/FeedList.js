@@ -48,26 +48,29 @@ export default class FeedList extends React.Component {
     }
   }
 
-  refreshPosts = (...args) => this.props.refreshPosts(...args)
-  fetchMorePosts = (...args) => this.props.fetchMorePosts(...args)
 
-  showPost = (...args) => this.props.showPost(...args)
-  showMember = (...args) => this.props.showMember(...args)
-  showTopic = (...args) => this.props.showTopic(...args)
-  goToCommunity = (...args) => this.props.goToCommunity(...args)
+  renderItem = ({ item }) => {
+    const {
+      communityId,
+      all,
+      showPost,
+      showMember,
+      showTopic,
+      goToCommunity
+    } = this.props
 
-  setFilter = (...args) => this.props.setFilter(...args)
-  setSort = (...args) => this.props.setSort(...args)
-
-  renderItem = ({ item }) => <PostRow
-    postId={item}
-    communityId={this.props.communityId}
-    showPost={this.showPost}
-    showMember={this.showMember}
-    showTopic={this.showTopic}
-    shouldShowCommunities={this.props.all}
-    goToCommunity={this.goToCommunity}
-                             />
+    return (
+      <PostRow
+        postId={item}
+        communityId={communityId}
+        shouldShowCommunities={all}
+        showPost={showPost}
+        showMember={showMember}
+        showTopic={showTopic}
+        goToCommunity={goToCommunity}
+      />
+    )
+  }
 
   keyExtractor = (item) => `post${item}`
 
@@ -75,7 +78,11 @@ export default class FeedList extends React.Component {
     const {
       postIds,
       pendingRefresh,
-      isProjectFeed
+      isProjectFeed,
+      refreshPosts,
+      fetchMorePosts,
+      setFilter,
+      setSort
     } = this.props
 
     return (
@@ -83,24 +90,28 @@ export default class FeedList extends React.Component {
         <FlatList
           data={postIds}
           renderItem={this.renderItem}
-          onRefresh={this.refreshPosts}
+          onRefresh={refreshPosts}
           refreshing={!!pendingRefresh}
           keyExtractor={this.keyExtractor}
-          onEndReached={this.fetchMorePosts}
-          ListHeaderComponent={<View>
-            {this.props.header}
-            <ListControls
-              filter={this.props.filter}
-              sortBy={this.props.sortBy}
-              setFilter={this.setFilter}
-              setSort={this.setSort}
-              pending={this.props.pending}
-              hideListFilter={isProjectFeed}
-            />
-          </View>}
-          ListFooterComponent={this.props.pending
-            ? <Loading style={styles.loading} />
-            : null}
+          onEndReached={fetchMorePosts}
+          ListHeaderComponent={
+            <View>
+              {this.props.header}
+              <ListControls
+                filter={this.props.filter}
+                sortBy={this.props.sortBy}
+                setFilter={setFilter}
+                setSort={setSort}
+                pending={this.props.pending}
+                hideListFilter={isProjectFeed}
+              />
+            </View>
+          }
+          ListFooterComponent={
+            this.props.pending
+              ? <Loading style={styles.loading} />
+              : null
+          }
         />
       </View>
     )

@@ -21,7 +21,6 @@ export default class Feed extends React.Component {
   }
 
   onShowTopic = (...args) => this.props.showTopic(...args)
-  onShowMember = (...args) => this.props.showMember(...args)
   onGoToCommunity = (...args) => this.props.goToCommunity(...args)
   onSetTopicSubscribe = (...args) => this.props.setTopicSubscribe(...args)
   onNewPost = (...args) => this.props.newPost(...args)
@@ -34,6 +33,7 @@ export default class Feed extends React.Component {
       route,
       navigation,
       showPost,
+      showMember,
       topicName,
       topicSubscribed,
       postsTotal,
@@ -87,10 +87,10 @@ export default class Feed extends React.Component {
               />
               {this.props.belowBannerComponent}
             </View>
-}
+          }
           route={route}
           navigation={navigation}
-          showMember={this.onShowMember}
+          showMember={showMember}
           showTopic={this.onShowTopic}
           topicName={topicName}
           isProjectFeed={isProjectFeed}

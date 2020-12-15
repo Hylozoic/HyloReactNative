@@ -13,7 +13,7 @@ export default function createNavigationOptionsForHeader (navigation, title) {
   const showNotifications = () => navigation.navigate('NotificationsList')
 
   return {
-    headerBackTitle: null,
+    headerBackTitleVisible: false,
     headerTitle: title,
     headerTitleStyle: styles.headerTitle,
     headerLeft: () =>

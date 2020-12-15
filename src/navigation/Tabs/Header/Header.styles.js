@@ -7,13 +7,10 @@ export const styles = StyleSheet.create({
     alignItems: 'center'
   },
   headerTitle: {
-    alignSelf: 'center',
     color: 'black',
-    flex: 1,
     fontFamily: 'Circular-Bold',
     fontSize: 18,
     fontWeight: '200',
-    textAlign: 'center'
   },
   icon: {
     opacity: 0.75,

@@ -53,15 +53,6 @@ export default {
   container: {
     backgroundColor: 'white'
   },
-  header: {
-    backgroundColor: 'white'
-  },
-  headerTitleStyle: {
-    fontSize: 17,
-    color: 'black',
-    fontFamily: 'Circular-Bold'
-  },
-  headerTintColor: gunsmoke,
   title: {
     fontSize: 24,
     color: caribbeanGreen,

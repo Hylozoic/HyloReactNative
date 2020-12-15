@@ -8,12 +8,7 @@ import styles from './MemberSkillEditor.styles'
 import { keyboardAvoidingViewProps as kavProps } from 'util/viewHelpers'
 import header from 'navigation/header'
 
-export default class SignupFlow4 extends React.Component {
-  static navigationOptions = ({ navigation, route }) =>
-    header(navigation, route, {
-      title: 'Edit Skills'
-    })
-
+export default class MemberSkillEditor extends React.Component {
   goBack = () => {
     this.props.navigation.goBack()
   }

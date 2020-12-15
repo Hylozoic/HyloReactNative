@@ -11,13 +11,6 @@ import EntypoIcon from 'react-native-vector-icons/Entypo'
 import styles from './ForgotPassword.styles'
 
 export default class ForgotPassword extends React.Component {
-  static navigationOptions = {
-    title: 'Reset Your Password',
-    headerStyle: styles.header,
-    headerTintColor: styles.headerTintColor,
-    headerTitleStyle: styles.headerTitleStyle
-  }
-
   constructor (props) {
     super(props)
     this.state = {

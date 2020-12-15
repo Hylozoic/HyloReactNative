@@ -43,20 +43,6 @@ import ErrorBubble from 'components/ErrorBubble'
 import styles from './PostEditor.styles'
 
 export default class PostEditor extends React.Component {
-  static contextTypes = { navigate: PropTypes.func }
-
-  static navigationOptions = ({ navigation, route }) => {
-    const { headerTitle, save, isSaving, confirmLeave } = get('params', route) || {}
-    const title = isSaving ? 'Saving...' : 'Save'
-    const def = () => {}
-
-    return header(navigation, route, {
-      title: headerTitle,
-      right: { disabled: isSaving, text: title, onPress: save || def },
-      headerBackButton: () => confirmLeave(navigation.goBack)
-    })
-  }
-
   componentDidMount () {
     const { navigation, isNewPost, pollingFindOrCreateLocation } = this.props
     navigation.setParams({
