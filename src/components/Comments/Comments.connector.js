@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import getMe from '../../store/selectors/getMe'
+import getMe from 'store/selectors/getMe'
 import { isEmpty } from 'lodash/fp'
 import {
   fetchComments,
@@ -7,7 +7,7 @@ import {
   getComments,
   FETCH_COMMENTS
 } from './Comments.store'
-import { FETCH_POST } from '../../store/actions/fetchPost'
+import { FETCH_POST } from 'store/actions/fetchPost'
 
 export function mapStateToProps (state, props) {
   const pending = props.postPending ||

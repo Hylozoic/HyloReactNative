@@ -4,7 +4,7 @@ import ShallowRenderer from 'react-test-renderer/shallow'
 import TestRenderer from 'react-test-renderer'
 
 import BadgedIcon from './'
-import Icon from '../Icon'
+import Icon from 'components/Icon'
 import { simulate } from 'util/testing'
 
 describe('BadgedIcon', () => {

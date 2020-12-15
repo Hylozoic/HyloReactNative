@@ -2,48 +2,48 @@ import orm from 'store/models'
 import ormReducer from './index'
 import {
   SET_TOPIC_SUBSCRIBE_PENDING
-} from '../../../components/Feed/Feed.store'
+} from 'navigation/Feed/Feed.store'
 import {
   VOTE_ON_POST_PENDING
-} from '../../../components/PostCard/PostFooter/PostFooter.store'
+} from 'components/PostCard/PostFooter/PostFooter.store'
 import {
   CREATE_COMMENT
-} from '../../../components/PostDetails/CommentEditor/CommentEditor.store'
+} from 'navigation/PostDetails/CommentEditor/CommentEditor.store'
 import {
   USE_INVITATION
-} from '../../../components/JoinCommunity/JoinCommunity.store'
+} from 'navigation/JoinCommunity/JoinCommunity.store'
 import {
   DELETE_COMMENT_PENDING
-} from '../../../components/Comment/Comment.store'
+} from 'components/Comment/Comment.store'
 import {
   UPDATE_THREAD_READ_TIME_PENDING
-} from '../../../components/Thread/Thread.store'
+} from 'navigation/Thread/Thread.store'
 import {
   UPDATE_LAST_VIEWED_PENDING
-} from '../../../components/ThreadList/ThreadList.store'
+} from 'navigation/ThreadList/ThreadList.store'
 import {
   UPDATE_NEW_NOTIFICATION_COUNT_PENDING
-} from '../../../components/NotificationsList/NotificationsList.store'
+} from 'navigation/NotificationsList/NotificationsList.store'
 import {
   RESET_NEW_POST_COUNT_PENDING
-} from '../../actions/resetNewPostCount'
+} from 'store/actions/resetNewPostCount'
 import {
   UPDATE_USER_SETTINGS_PENDING
-} from '../../actions/updateUserSettings'
+} from 'store/actions/updateUserSettings'
 import {
   PIN_POST_PENDING
-} from '../../../components/PostCard/PostHeader/PostHeader.store'
+} from 'components/PostCard/PostHeader/PostHeader.store'
 import {
   CREATE_COMMUNITY
-} from '../../../components/CreateCommunityFlow/CreateCommunityFlow.store'
+} from 'navigation/CreateCommunityFlow/CreateCommunityFlow.store'
 import { FETCH_CURRENT_USER } from 'store/actions/fetchCurrentUser'
 import {
   UPDATE_MEMBERSHIP_SETTINGS_PENDING, UPDATE_ALL_MEMBERSHIP_SETTINGS_PENDING
-} from '../../../components/NotificationSettings/NotificationSettings.store'
+} from 'navigation/NotificationSettings/NotificationSettings.store'
 import {
   JOIN_PROJECT_PENDING,
   LEAVE_PROJECT_PENDING
-} from '../../constants'
+} from 'store/constants'
 
 it('responds to an action with meta.extractModel', () => {
   const state = orm.getEmptyState()

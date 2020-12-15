@@ -1,5 +1,5 @@
 import { isIOS } from 'util/platform'
-import { isDev } from '../config'
+import { isDev } from 'config'
 
 const androidHost = isDev && !isIOS &&
   (process.env.API_HOST_ANDROID || process.env.API_HOST_ANDROID_EMULATOR)

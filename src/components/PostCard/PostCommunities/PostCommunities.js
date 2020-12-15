@@ -1,11 +1,9 @@
 import React from 'react'
 import { isEmpty } from 'lodash/fp'
-import Icon from '../../Icon'
-import CommunitiesList from '../../CommunitiesList'
+import Icon from 'components/Icon'
+import CommunitiesList from 'components/CommunitiesList'
 import { Text, View, TouchableOpacity } from 'react-native'
-import {
-  capeCod10, rhino30, caribbeanGreen
-} from '../../../style/colors'
+import { rhino30, caribbeanGreen } from 'style/colors'
 
 export const PUBLIC_COMMUNITY = {
   id: 'PUBLIC',

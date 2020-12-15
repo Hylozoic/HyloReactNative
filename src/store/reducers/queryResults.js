@@ -8,16 +8,16 @@
 
 import {
   FETCH_POSTS
-} from '../actions/fetchPosts'
+} from 'store/actions/fetchPosts'
 import {
   CREATE_POST, CREATE_PROJECT
-} from '../../components/PostEditor/PostEditor.store'
+} from 'navigation/PostEditor/PostEditor.store'
 import {
   RECEIVE_POST
-} from '../../components/SocketListener/SocketListener.store'
+} from 'components/SocketListener/SocketListener.store'
 import {
   REMOVE_POST_PENDING
-} from '../../components/PostCard/PostHeader/PostHeader.store'
+} from 'components/PostCard/PostHeader/PostHeader.store'
 
 import { get, isNull, omitBy, pick, reduce, uniq, isEmpty, includes } from 'lodash/fp'
 import { createSelector as ormCreateSelector } from 'redux-orm'

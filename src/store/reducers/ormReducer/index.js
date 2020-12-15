@@ -7,50 +7,51 @@ import clearCacheFor from './clearCacheFor'
 import { isPromise } from 'util/index'
 import {
   UPDATE_COMMUNITY_SETTINGS_PENDING
-} from '../../../components/CommunitySettings/CommunitySettings.store'
+} from 'navigation/CommunitySettings/CommunitySettings.store'
 import {
   UPDATE_USER_SETTINGS_PENDING
-} from '../../actions/updateUserSettings'
+} from 'store/actions/updateUserSettings'
 import {
   ADD_SKILL, REMOVE_SKILL
-} from '../../../components/SkillEditor/SkillEditor.store'
+} from 'components/SkillEditor/SkillEditor.store'
 import {
   CREATE_COMMENT
-} from '../../../components/PostDetails/CommentEditor/CommentEditor.store'
+} from 'navigation/PostDetails/CommentEditor/CommentEditor.store'
 import {
   SET_TOPIC_SUBSCRIBE_PENDING
-} from '../../../components/Feed/Feed.store'
+} from 'navigation/Feed/Feed.store'
 import {
   MARK_ACTIVITY_READ, MARK_ALL_ACTIVITIES_READ, UPDATE_NEW_NOTIFICATION_COUNT_PENDING
-} from '../../../components/NotificationsList/NotificationsList.store'
+} from 'navigation/NotificationsList/NotificationsList.store'
 import {
   CREATE_MESSAGE, CREATE_MESSAGE_PENDING, UPDATE_THREAD_READ_TIME_PENDING
-} from '../../../components/Thread/Thread.store'
+} from 'navigation/Thread/Thread.store'
 import {
   VOTE_ON_POST_PENDING
-} from '../../../components/PostCard/PostFooter/PostFooter.store'
+} from 'components/PostCard/PostFooter/PostFooter.store'
 import {
   USE_INVITATION
-} from '../../../components/JoinCommunity/JoinCommunity.store'
+} from 'navigation/JoinCommunity/JoinCommunity.store'
 import {
   DELETE_COMMENT_PENDING
-} from '../../../components/Comment/Comment.store'
+} from 'components/Comment/Comment.store'
 import {
   UPDATE_LAST_VIEWED_PENDING
-} from '../../../components/ThreadList/ThreadList.store'
+} from 'navigation/ThreadList/ThreadList.store'
 import {
   CREATE_COMMUNITY
-} from '../../../components/CreateCommunityFlow/CreateCommunityFlow.store'
+} from 'navigation/CreateCommunityFlow/CreateCommunityFlow.store'
 import {
   UPDATE_MEMBERSHIP_SETTINGS_PENDING, UPDATE_ALL_MEMBERSHIP_SETTINGS_PENDING
-} from '../../../components/NotificationSettings/NotificationSettings.store'
-
-import { RESET_NEW_POST_COUNT_PENDING } from '../../actions/resetNewPostCount'
+} from 'navigation/NotificationSettings/NotificationSettings.store'
+import {
+  RESET_NEW_POST_COUNT_PENDING
+} from '../../actions/resetNewPostCount'
 import {
   JOIN_PROJECT_PENDING,
   LEAVE_PROJECT_PENDING
 } from 'store/constants'
-import { PIN_POST_PENDING } from '../../../components/PostCard/PostHeader/PostHeader.store'
+import { PIN_POST_PENDING } from 'components/PostCard/PostHeader/PostHeader.store'
 import { FETCH_CURRENT_USER } from 'store/actions/fetchCurrentUser'
 
 export default function ormReducer (state = {}, action) {

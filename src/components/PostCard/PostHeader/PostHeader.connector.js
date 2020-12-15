@@ -1,8 +1,8 @@
 import { connect } from 'react-redux'
-import getMe from '../../../store/selectors/getMe'
-import getCurrentCommunity from '../../../store/selectors/getCurrentCommunity'
+import getMe from 'store/selectors/getMe'
+import getCurrentCommunity from 'store/selectors/getCurrentCommunity'
 import { removePost, deletePost, pinPost } from './PostHeader.store'
-import getCanModerate from '../../../store/selectors/getCanModerate'
+import getCanModerate from 'store/selectors/getCanModerate'
 
 export function mapStateToProps (state, props) {
   const community = getCurrentCommunity(state, props)

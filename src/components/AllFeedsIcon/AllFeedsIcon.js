@@ -1,6 +1,6 @@
 import React from 'react'
 import { View } from 'react-native'
-import Icon from '../Icon'
+import Icon from 'components/Icon'
 import styles from './AllFeedsIcon.styles'
 
 export default function AllFeedsIcon ({ style }) {

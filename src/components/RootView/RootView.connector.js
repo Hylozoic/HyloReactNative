@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux'
 import checkSessionAndSetSignedIn from 'store/actions/checkSessionAndSetSignedIn'
 import fetchCurrentUser from 'store/actions/fetchCurrentUser'
 import getMe from 'store/selectors/getMe'
-import { CHECK_SESSION_AND_SET_SIGNED_IN, FETCH_CURRENT_USER } from '../../store/constants'
+import { CHECK_SESSION_AND_SET_SIGNED_IN, FETCH_CURRENT_USER } from 'store/constants'
 
 export function mapStateToProps (state, props) {
   const currentUser = getMe(state, props)

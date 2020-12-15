@@ -3,7 +3,7 @@ import sailsIo from 'sails.io.js'
 import apiHost from '../apiHost'
 import { getSessionCookie } from '../session'
 import { curry } from 'lodash/fp'
-import { isDev } from '../../config'
+import { isDev } from 'config'
 
 // NOTE: SOCKET_HOST now disabled in production to avoid slip-ups!
 // In other words, API_HOST is the only value that matters in prod.

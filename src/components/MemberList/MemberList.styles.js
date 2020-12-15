@@ -1,4 +1,4 @@
-import { capeCod, rhino, rhino50, ghost } from '../../style/colors'
+import { capeCod, rhino, rhino50, ghost } from 'style/colors'
 
 export default {
   cell: {

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Text, View, TouchableOpacity } from 'react-native'
 import { slice } from 'lodash/fp'
-import Avatar from '../Avatar'
+import Avatar from 'components/Avatar'
 import { rhino30 } from 'style/colors'
 
 export default function ProjectMembersSummary ({ members, onPress, style, dimension = 43 }) {

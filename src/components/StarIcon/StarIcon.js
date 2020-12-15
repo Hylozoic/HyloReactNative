@@ -3,7 +3,7 @@ import { View } from 'react-native'
 import {
   rhino80, linkWater
 } from 'style/colors'
-import Icon from '../Icon'
+import Icon from 'components/Icon'
 
 export default function StarIcon ({ style, theme = {} }) {
   return (

@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Text, TouchableOpacity, Alert, FlatList } from 'react-native'
-import Avatar from '../../Avatar'
-import Icon from '../../Icon'
+import { get, filter, isEmpty } from 'lodash/fp'
+import { humanDate } from 'hylo-utils/text'
 import {
   rhino30,
   rhino50,
@@ -14,10 +14,10 @@ import {
   jade,
   fakeAlpha
 } from 'style/colors'
-import { humanDate } from 'hylo-utils/text'
-import PopupMenuButton from '../../PopupMenuButton'
-import { get, filter, isEmpty } from 'lodash/fp'
-import FlagContent from '../../FlagContent'
+import Avatar from 'components/Avatar'
+import Icon from 'components/Icon'
+import PopupMenuButton from 'components/PopupMenuButton'
+import FlagContent from 'components/FlagContent'
 
 export default class PostHeader extends React.PureComponent {
   constructor (props) {

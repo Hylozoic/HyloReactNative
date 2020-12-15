@@ -1,4 +1,4 @@
-import { limedSpruce, slateGrey80, nevada, rhino50 } from '../../style/colors'
+import { limedSpruce, slateGrey80, nevada, rhino50 } from 'style/colors'
 
 export default {
   container: {

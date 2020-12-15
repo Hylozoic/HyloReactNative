@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Image, View } from 'react-native'
 import { memoize } from 'lodash'
-import defaultAvatar from '../../assets/default-user-avatar.png'
+import defaultAvatar from 'assets/default-user-avatar.png'
 
 export default function Avatar ({ size, hasBorder, hasOverlap, avatarUrl, zIndex, style, dimension }) {
   const styles = generateStyles({ size, hasBorder, hasOverlap, dimension })

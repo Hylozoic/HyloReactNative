@@ -1,4 +1,4 @@
-import { capeCod40, capeCod10, caribbeanGreen, white } from '../../style/colors'
+import { capeCod40, capeCod10, caribbeanGreen, white } from 'style/colors'
 import { isIOS } from 'util/platform'
 
 const postPromptShape = {

@@ -12,8 +12,8 @@ import {
 import {
   addUserTyping,
   clearUserTyping
-} from '../PeopleTyping/PeopleTyping.store'
-import getCurrentCommunity from '../../store/selectors/getCurrentCommunity'
+} from 'components/PeopleTyping/PeopleTyping.store'
+import getCurrentCommunity from 'store/selectors/getCurrentCommunity'
 
 export function mapStateToProps (state, props) {
   return {

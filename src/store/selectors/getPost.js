@@ -1,5 +1,5 @@
 import { createSelector as ormCreateSelector } from 'redux-orm'
-import orm from '../../store/models'
+import orm from 'store/models'
 import { createSelector } from 'reselect'
 import { get } from 'lodash/fp'
 

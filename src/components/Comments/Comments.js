@@ -1,8 +1,8 @@
 /* eslint-disable camelcase */
 import React from 'react'
 import { Text, TouchableOpacity, View, ScrollView } from 'react-native'
-import Comment from '../Comment'
-import Loading from '../Loading'
+import Comment from 'components/Comment'
+import Loading from 'components/Loading'
 import { func, array } from 'prop-types'
 import styles from './Comments.styles'
 

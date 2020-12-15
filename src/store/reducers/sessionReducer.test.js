@@ -1,6 +1,6 @@
 import sessionReducer from './sessionReducer'
 import { CHECK_SESSION_AND_SET_SIGNED_IN } from 'store/constants'
-import { LOGIN } from '../../components/Login/actions'
+import { LOGIN } from 'navigation/Login/actions'
 
 describe('on CHECK_SESSION_AND_SET_SIGNED_IN', () => {
   it('stores the payload', () => {

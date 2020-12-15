@@ -1,11 +1,11 @@
 import React from 'react'
 import { View, Text, TouchableOpacity } from 'react-native'
 import { slice, uniqBy } from 'lodash/fp'
-import Avatar from '../../Avatar'
-import Icon from '../../Icon'
+import Avatar from 'components/Avatar'
+import Icon from 'components/Icon'
 import {
   caribbeanGreen, rhino30, rhino80, slateGrey80
-} from '../../../style/colors'
+} from 'style/colors'
 import { string, array, number, func } from 'prop-types'
 
 export default class PostFooter extends React.PureComponent {

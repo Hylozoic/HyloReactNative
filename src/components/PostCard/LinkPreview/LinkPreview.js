@@ -1,7 +1,7 @@
 import React from 'react'
 import { TouchableOpacity, Text, Linking } from 'react-native'
 import { parse } from 'url'
-import SpaceFillingImage from '../../SpaceFillingImage'
+import SpaceFillingImage from 'components/SpaceFillingImage'
 
 export function openURL (url) {
   return Linking.canOpenURL(url).then(supported => supported && Linking.openURL(url))

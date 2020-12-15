@@ -1,8 +1,8 @@
 import { get } from 'lodash/fp'
 import { createSelector } from 'reselect'
 import { createSelector as ormCreateSelector } from 'redux-orm'
-import { makeGetQueryResults } from '../../store/reducers/queryResults'
-import orm from '../../store/models'
+import { makeGetQueryResults } from 'store/reducers/queryResults'
+import orm from 'store/models'
 
 export const MODULE_NAME = 'Comments'
 export const FETCH_COMMENTS = `${MODULE_NAME}/FETCH_COMMENTS`

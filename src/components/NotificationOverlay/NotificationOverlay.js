@@ -1,7 +1,7 @@
 import React from 'react'
 import { Animated, StyleSheet, Text, TouchableOpacity } from 'react-native'
 import { func, string } from 'prop-types'
-import { amaranth, persimmon } from '../../style/colors'
+import { amaranth, persimmon } from 'style/colors'
 import { compact } from 'lodash'
 
 export default class NotificationOverlay extends React.Component {

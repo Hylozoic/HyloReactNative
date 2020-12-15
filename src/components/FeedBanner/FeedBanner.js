@@ -1,12 +1,12 @@
 import React from 'react'
 import { Image, View, Text, TouchableOpacity } from 'react-native'
 import styles from './FeedBanner.styles'
-import Avatar from '../Avatar'
-import Icon from '../Icon'
-import NotificationOverlay from '../NotificationOverlay'
+import Avatar from 'components/Avatar'
+import Icon from 'components/Icon'
+import NotificationOverlay from 'components/NotificationOverlay'
 import LinearGradient from 'react-native-linear-gradient'
 import { isUndefined } from 'lodash'
-import Button from '../Button'
+import Button from 'components/Button'
 import { bannerlinearGradientColors } from 'style/colors'
 const bannerImage = require('../../assets/all-communities-banner.png')
 

@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { persist } from './persistence'
-import { LOGOUT } from '../../components/Login/actions'
+import { LOGOUT } from 'navigation/Login/actions'
 
 jest.mock('react-native-fbsdk')
 jest.mock('lodash', () => ({

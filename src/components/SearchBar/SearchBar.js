@@ -5,9 +5,9 @@ import {
   TextInput,
   Text
 } from 'react-native'
-import Icon from '../Icon'
+import Icon from 'components/Icon'
 import styles from './SearchBar.styles'
-import Loading from '../Loading'
+import Loading from 'components/Loading'
 
 export default function SearchBar ({
   value = '',

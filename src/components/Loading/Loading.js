@@ -9,11 +9,6 @@ export default function Loading ({ style }) {
   )
 }
 
-export function LoadingScreen () {
-  return <Loading style={{ flex: 1 }} />
-}
-LoadingScreen.navigationOptions = { headerShown: false }
-
 const styles = {
   container: {
     justifyContent: 'space-around'

@@ -1,8 +1,8 @@
 import React from 'react'
 import { chunk } from 'lodash/fp'
 import { TouchableOpacity, Text, Image, View } from 'react-native'
-import { DEFAULT_AVATAR } from '../../store/models/Community'
-import { caribbeanGreen } from '../../style/colors'
+import { DEFAULT_AVATAR } from 'store/models/Community'
+import { caribbeanGreen } from 'style/colors'
 
 export default function CommunitiesList ({
   communities = [],

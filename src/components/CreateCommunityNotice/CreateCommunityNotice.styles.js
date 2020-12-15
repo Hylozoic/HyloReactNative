@@ -1,4 +1,4 @@
-import { rhino50 } from '../../style/colors'
+import { rhino50 } from 'style/colors'
 
 export default {
   container: {

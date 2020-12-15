@@ -4,8 +4,8 @@ import {
   Text,
   TouchableOpacity
 } from 'react-native'
-import SettingControl from '../SettingControl'
-import Button from '../Button'
+import SettingControl from 'components/SettingControl'
+import Button from 'components/Button'
 import styles from './SkillEditor.styles'
 import { isEmpty } from 'lodash/fp'
 

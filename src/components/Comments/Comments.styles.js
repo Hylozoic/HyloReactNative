@@ -1,4 +1,4 @@
-import { caribbeanGreen } from '../../style/colors'
+import { caribbeanGreen } from 'style/colors'
 
 export default {
   loadingContainer: {

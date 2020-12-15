@@ -2,7 +2,7 @@ import React from 'react'
 import { View, Text } from 'react-native'
 import { filter, get, map, find, isEmpty } from 'lodash/fp'
 
-import Avatar from '../Avatar'
+import Avatar from 'components/Avatar'
 import styles from './ThreadCard.styles'
 import { humanDate } from 'hylo-utils/text'
 

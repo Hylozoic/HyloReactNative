@@ -9,7 +9,7 @@ import promiseMiddleware from 'redux-promise'
 import userFetchedMiddleware from './userFetchedMiddleware'
 import userBlockingMiddleware from './userBlockingMiddleware'
 import mixpanelMiddleware from './mixpanelMiddleware'
-import { isDev } from '../../config'
+import { isDev } from 'config'
 
 const middleware = compact([
   graphQLMiddleware,

@@ -2,7 +2,7 @@ import React from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { any, bool, func, shape, string } from 'prop-types'
 
-import Avatar from '../Avatar'
+import Avatar from 'components/Avatar'
 
 import styles from './NotificationCard.styles'
 

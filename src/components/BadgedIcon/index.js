@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, TouchableOpacity } from 'react-native'
-import Icon from '../Icon'
+import Icon from 'components/Icon'
 import styles from './BadgedIcon.styles'
 
 export default function BadgedIcon (props) {

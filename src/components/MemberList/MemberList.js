@@ -6,10 +6,10 @@ import {
 import {
   View, FlatList, Text, TouchableOpacity, TextInput
 } from 'react-native'
-import Avatar from '../Avatar'
-import Icon from '../Icon'
-import Loading from '../Loading'
-import PopupMenuButton from '../PopupMenuButton'
+import Avatar from 'components/Avatar'
+import Icon from 'components/Icon'
+import Loading from 'components/Loading'
+import PopupMenuButton from 'components/PopupMenuButton'
 import styles from './MemberList.styles'
 
 export default class MemberList extends React.Component {

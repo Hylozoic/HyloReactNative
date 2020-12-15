@@ -1,4 +1,4 @@
-import { MAIN_ROUTE_NAME } from 'navigation/util/routing'
+import { MAIN_ROUTE_NAME } from 'routing/helpers'
 
 // invitation: route('/h/use-invitation'),
 // accessLink: route('/c/:slug/join/:accessCode'),

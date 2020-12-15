@@ -1,6 +1,6 @@
 import React from 'react'
 import { Modal, Text, TouchableOpacity, View, FlatList } from 'react-native'
-import Icon from '../Icon'
+import Icon from 'components/Icon'
 import { toUpper, isEmpty, trim } from 'lodash'
 import prompt from 'react-native-prompt-android'
 

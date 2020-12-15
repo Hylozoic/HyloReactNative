@@ -1,7 +1,7 @@
 import React from 'react'
 import { Text, View, TouchableOpacity } from 'react-native'
 import { caribbeanGreen, white } from 'style/colors'
-import Icon from '../Icon'
+import Icon from 'components/Icon'
 import { omit } from 'lodash/fp'
 
 export default function Button (props) {

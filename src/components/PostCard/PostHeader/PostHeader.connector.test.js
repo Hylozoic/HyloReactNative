@@ -1,5 +1,5 @@
 import { mapStateToProps, mapDispatchToProps, mergeProps } from './PostHeader.connector'
-import orm from '../../../store/models'
+import orm from 'store/models'
 
 describe('mapStateToProps', () => {
   it('maps', () => {

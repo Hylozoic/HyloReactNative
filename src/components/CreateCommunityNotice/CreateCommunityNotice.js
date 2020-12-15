@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, Text, Image } from 'react-native'
-import Button from '../Button'
+import Button from 'components/Button'
 import styles from './CreateCommunityNotice.styles'
 const axolotlImage = require('../../assets/hey-axolotl.png')
 

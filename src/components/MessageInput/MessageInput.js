@@ -8,8 +8,8 @@ import {
 import { bool, func, string } from 'prop-types'
 import { throttle } from 'lodash'
 
-import Icon from '../Icon'
-import { jade, rhino30 } from '../../style/colors'
+import Icon from 'components/Icon'
+import { jade, rhino30 } from 'style/colors'
 import styles from './MessageInput.style'
 
 const IS_TYPING_THROTTLE = 3000

@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { deleteComment } from './Comment.store'
-import getCommunity from '../../store/selectors/getCommunity'
-import getMe from '../../store/selectors/getMe'
+import getCommunity from 'store/selectors/getCommunity'
+import getMe from 'store/selectors/getMe'
 
 export function mapStateToProps (state, props) {
   const { comment } = props

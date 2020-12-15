@@ -3,7 +3,7 @@ import { Text, View, Button, Image } from 'react-native'
 import RNRestart from 'react-native-restart'
 import * as Sentry from '@sentry/react-native'
 
-import { isDev } from '../../config'
+import { isDev } from 'config'
 
 const axelFretting = require('../../assets/Axel_Fretting.png')
 

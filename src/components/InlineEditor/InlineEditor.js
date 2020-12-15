@@ -14,13 +14,13 @@ import { rhino30 } from 'style/colors'
 import styles from './InlineEditor.styles'
 // Mentions
 import { MENTION_ENTITY_TYPE } from 'hylo-utils/constants'
-import scopedFetchPeopleAutocomplete from '../../store/actions/scopedFetchPeopleAutocomplete'
-import scopedGetPeopleAutocomplete from '../../store/selectors/scopedGetPeopleAutocomplete'
-import PersonPickerItemRow from '../ItemChooser/PersonPickerItemRow'
+import scopedFetchPeopleAutocomplete from 'store/actions/scopedFetchPeopleAutocomplete'
+import scopedGetPeopleAutocomplete from 'store/selectors/scopedGetPeopleAutocomplete'
+import PersonPickerItemRow from 'navigation/ItemChooser/PersonPickerItemRow'
 // Topics
-import fetchTopicsForCommunityId from '../../store/actions/fetchTopicsForCommunityId'
-import getTopicsForAutocompleteWithNew from '../../store/selectors/getTopicsForAutocompleteWithNew'
-import TopicRow from '../TopicList/TopicRow'
+import fetchTopicsForCommunityId from 'store/actions/fetchTopicsForCommunityId'
+import getTopicsForAutocompleteWithNew from 'store/selectors/getTopicsForAutocompleteWithNew'
+import TopicRow from 'navigation/TopicList/TopicRow'
 
 const minTextInputHeight = 18
 

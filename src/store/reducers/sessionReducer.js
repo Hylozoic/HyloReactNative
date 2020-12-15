@@ -5,8 +5,8 @@ import {
   LOGIN,
   LOGIN_WITH_FACEBOOK,
   LOGIN_WITH_GOOGLE
-} from '../../components/Login/actions'
-import { SIGNUP } from '../../components/SignupFlow/SignupFlow.store'
+} from 'navigation/Login/actions'
+import { SIGNUP } from 'navigation/SignupFlow/SignupFlow.store'
 import { omit } from 'lodash/fp'
 
 export default function sessionReducer (state = {}, action) {

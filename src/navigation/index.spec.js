@@ -6,6 +6,7 @@ import { render, cleanup } from '@testing-library/react-native'
 import RootNavigator from 'navigation'
 import { createMockStore } from 'util/testing'
 import ErrorBoundary from 'components/ErrorBoundary'
+import { NavigationContainer } from '@react-navigation/native'
 
 // TODO: This is a first pass at using testing-library/react-native
 // and I was able to make it work for a basic snapshot test, but nothing else
@@ -26,7 +27,9 @@ describe('Navigation Specification', () => {
     const component = (
       <ErrorBoundary>
         <Provider store={createMockStore(state)}>
-          <RootNavigator isSignedIn={false} />
+          <NavigationContainer>
+            <RootNavigator isSignedIn={false} />
+          </NavigationContainer>
         </Provider>
       </ErrorBoundary>
     )
