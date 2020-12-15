@@ -11,22 +11,24 @@ export const prefixes = [
 
 // Matched params are returned to the matched screen in `route.params`
 export const routesConfig = {
-  ':context(c|n|all)/:contextId?':             'DrawerHome/Main/Home',
-  ':context(c|n|all)/:contextId/members':      'DrawerHome/Main/Members',
-  ':context(c|n)/:contextId/:topicName':       'DrawerHome/TopicFeed',
-  'm/:id':                                     'DrawerHome/MemberProfile',
-  ':context(c|n)/:contextId/m/:id':            'DrawerHome/MemberProfile',
-  ':context(all)/p/:id':                       'DrawerHome/PostDetails',
-  ':context(c|n)/:contextId/p/:id':            'DrawerHome/PostDetails',
-  'p/:id':                                     'DrawerHome/PostDetails',
-  'p/:id/edit':                                'DrawerHome/PostEditor',
-  ':context(c|n)/:contextId/p/:id/edit':       'DrawerHome/PostEditor',
-  'settings/:section?':                        'DrawerHome/UserSettings',
-  't/:id':                                     'DrawerHome/Thread',
-  // TODO: I don't see a great reason that this is still a constant
-  't':                                         'DrawerHome/ThreadList',
-  'c/:slug/join/:accessCode':                  'DrawerHome/JoinCommunity',
-  'h/use-invitation':                          'DrawerHome/UseInvitation'
+  ':context(c|n|all)/:contextId?':                          'AppNavigator/Main/Home',
+  ':context(c|n|all)/:contextId/members':                   'AppNavigator/Main/Members',
+  ':context(c|n)/:contextId/:topicName':                    'AppNavigator/TopicFeed',
+  'm/:id':                                                  'AppNavigator/MemberProfile',
+  ':context(c|n)/:contextId/m/:id':                         'AppNavigator/MemberProfile',
+  ':context(all)/p/:id':                                    'AppNavigator/PostDetails',
+  ':context(c|n)/:contextId/p/:id':                         'AppNavigator/PostDetails',
+  'p/:id':                                                  'AppNavigator/PostDetails',
+  'p/:id/edit':                                             'AppNavigator/PostEditor',
+  ':context(c|n)/:contextId/p/:id/edit':                    'AppNavigator/PostEditor',
+  'settings/:section?':                                     'AppNavigator/UserSettings',
+  't/:id':                                                  'AppNavigator/Thread',
+  // TODO: I don't see a great reason that this              is still a constant
+  't':                                                      'AppNavigator/ThreadList',
+  'c/:slug/join/:accessCode':                               'AppNavigator/JoinCommunity',
+  'h/use-invitation/:token':                                'AppNavigator/JoinCommunity'
+  // AuthNavigator route...             
+  // 'passwordResetTokenLogin/:userId/:loginToken/:nextURL':   'Login'
 }
 
 export const routing = {

@@ -1,6 +1,7 @@
 import React from 'react'
 import { View } from 'react-native'
 import { didPropsChange } from 'util/index'
+import Loading from 'components/Loading'
 import CreateCommunityNotice from 'components/CreateCommunityNotice'
 import FeedList from 'navigation/FeedList'
 import FeedBanner from 'components/FeedBanner'
@@ -42,6 +43,9 @@ export default class Feed extends React.Component {
       hidePostPrompt,
       isProjectFeed
     } = this.props
+    
+    if (!currentUser) return <Loading style={{ flex: 1 }} />
+
     if (!currentUserHasMemberships) {
       return (
         <CreateCommunityNotice

@@ -2,14 +2,13 @@ import React from 'react'
 import {
   View, Text, Image
 } from 'react-native'
-import { get, pick } from 'lodash/fp'
-
-import { DEFAULT_BANNER } from 'store/models/Community'
 import LinearGradient from 'react-native-linear-gradient'
+import { get, pick } from 'lodash/fp'
+import { DEFAULT_BANNER } from 'store/models/Community'
 import styles from './Members.styles'
 import Button from 'components/Button'
-import { bannerlinearGradientColors } from 'style/colors'
 import MemberList from 'components/MemberList'
+import { bannerlinearGradientColors } from 'style/colors'
 
 export default class Members extends React.Component {
   goToInvitePeople = () => this.props.navigation.navigate('InvitePeople')

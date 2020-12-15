@@ -7,83 +7,75 @@ import { createDrawerNavigator } from '@react-navigation/drawer'
 import { createStackNavigator } from '@react-navigation/stack'
 import { get } from 'lodash/fp'
 import { isIOS } from 'util/platform'
+// Helpers
 import createNavigationOptionsForHeader from 'navigation/Tabs/Header/createNavigationOptionsForHeader'
 import header from 'navigation/header'
 import TabIcon from 'navigation/Tabs/TabIcon'
 import TabLabel from 'navigation/Tabs/TabLabel'
-import LoadingScreen from 'navigation/LoadingScreen'
-import Feed from 'navigation/Feed'
-import JoinCommunity from 'navigation/JoinCommunity'
+import tabStyles from 'navigation/Tabs/Tabs.styles'
+// Screens
+import BlockedUsers from 'navigation/BlockedUsers'
 import CommunitySettingsMenu from 'navigation/CommunitySettingsMenu'
 import CommunitySettings from 'navigation/CommunitySettings'
+import CreateCommunityName from 'navigation/CreateCommunityFlow/CreateCommunityName'
+import CreateCommunityReview from 'navigation/CreateCommunityFlow/CreateCommunityReview'
+import CreateCommunityUrl from 'navigation/CreateCommunityFlow/CreateCommunityUrl'
 import DrawerMenu from 'navigation/DrawerMenu'
-import { Home, Members, Topics, Projects } from 'navigation/Tabs'
-import PostEditor from 'navigation/PostEditor'
-import PostDetails from 'navigation/PostDetails'
-import ProjectMembers from 'navigation/ProjectMembers'
-import ItemChooserScreen from 'navigation/ItemChooserScreen'
-import MemberProfile from 'navigation/MemberProfile'
-import NotificationSettings from 'navigation/NotificationSettings'
-import BlockedUsers from 'navigation/BlockedUsers'
-import NotificationsList from 'navigation/NotificationsList'
+import Feed from 'navigation/Feed'
+import ForgotPassword from 'navigation/ForgotPassword'
+import InviteExpired from 'navigation/InviteExpired'
 import InvitePeople from 'navigation/InvitePeople'
-import tabStyles from 'navigation/Tabs/Tabs.styles'
-import NewMessage from 'navigation/NewMessage'
+import ItemChooserScreen from 'navigation/ItemChooserScreen'
+import JoinCommunity from 'navigation/JoinCommunity'
+import LoadingScreen from 'navigation/LoadingScreen'
+import Login from 'navigation/Login'
+import MemberProfile from 'navigation/MemberProfile'
+import MemberDetails from 'navigation/MemberProfile/MemberDetails'
+import Members from 'navigation'
+import MemberSkillEditor from 'navigation/MemberProfile/MemberSkillEditor'
 import ModeratorSettings from 'navigation/ModeratorSettings'
+import NotificationSettings from 'navigation/NotificationSettings'
+import NotificationsList from 'navigation/NotificationsList'
+import NewMessage from 'navigation/NewMessage'
+import PostDetails from 'navigation/PostDetails'
+import PostEditor from 'navigation/PostEditor'
+import ProjectMembers from 'navigation/ProjectMembers'
+import Projects from 'navigation'
 import Thread from 'navigation/Thread'
 import ThreadList from 'navigation/ThreadList'
 import ThreadParticipants from 'navigation/ThreadParticipants'
+import Topics from 'navigation'
 import TopicSupportComingSoon from 'navigation/TopicSupportComingSoon'
-import MemberDetails from 'navigation/MemberProfile/MemberDetails'
-import MemberSkillEditor from 'navigation/MemberProfile/MemberSkillEditor'
-import UserSettings from 'navigation/UserSettings'
 import SearchPage from 'navigation/SearchPage'
+import Signup from 'navigation/Signup'
 import SignupFlow1 from 'navigation/SignupFlow/SignupFlow1'
 import SignupFlow2 from 'navigation/SignupFlow/SignupFlow2'
 import SignupFlow3 from 'navigation/SignupFlow/SignupFlow3'
 import SignupFlow4 from 'navigation/SignupFlow/SignupFlow4'
 import SignupFlow5 from 'navigation/SignupFlow/SignupFlow5'
-import Login from 'navigation/Login'
-import ForgotPassword from 'navigation/ForgotPassword'
-import CreateCommunityName from 'navigation/CreateCommunityFlow/CreateCommunityName'
-import CreateCommunityUrl from 'navigation/CreateCommunityFlow/CreateCommunityUrl'
-import CreateCommunityReview from 'navigation/CreateCommunityFlow/CreateCommunityReview'
-import InviteExpired from 'navigation/InviteExpired'
-import Signup from 'navigation/Signup'
-
-const HomeStack = createStackNavigator()
-function HomeStackNavigator () {
-  return (
-    <HomeStack.Navigator>
-      <HomeStack.Screen name='Home' component={Home} options={{ headerShown: false }} path='/' />
-      <HomeStack.Screen name='Feed' component={Feed} path='communityFeed/:communitySlugFromLink' />
-      {/* <HomeStack.Screen name='Feed' component={Feed} path='networkFeed/:networkSlug' /> */}
-    </HomeStack.Navigator>
-  )
-}
+import UserSettings from 'navigation/UserSettings'
 
 const Tabs = createBottomTabNavigator()
 function TabsNavigator () {
-  const screenOptions = ({ route }) => ({
-    tabBarIcon: ({ focused }) =>
-      <TabIcon name={route.name} focused={focused} />,
-    tabBarLabel: ({ focused }) =>
-      <TabLabel name={route.name} focused={focused} />
-  })
-  const tabBarOptions = {
-    showIcon: true,
-    showLabel: true,
-    pressColor: '#DCDCDC',
-    indicatorStyle: { backgroundColor: 'white' },
-    style: isIOS ? tabStyles.tabNavigatorIOS : tabStyles.tabNavigatorAndroid
+  const navigatorProps = {
+    tabBarOptions: {
+      showIcon: true,
+      showLabel: true,
+      pressColor: '#DCDCDC',
+      indicatorStyle: { backgroundColor: 'white' },
+      style: isIOS ? tabStyles.tabNavigatorIOS : tabStyles.tabNavigatorAndroid
+    },
+    screenOptions: ({ route }) => ({
+      tabBarIcon: ({ focused }) =>
+        <TabIcon name={route.name} focused={focused} />,
+      tabBarLabel: ({ focused }) =>
+        <TabLabel name={route.name} focused={focused} />
+    })
   }
 
   return (
-    <Tabs.Navigator
-      screenOptions={screenOptions}
-      tabBarOptions={tabBarOptions}
-    >
-      <Tabs.Screen name='Home' component={HomeStackNavigator} />
+    <Tabs.Navigator {...navigatorProps}>
+      <Tabs.Screen name='Home' component={Feed} />
       <Tabs.Screen name='Members' component={Members} />
       <Tabs.Screen name='Topics' component={Topics} />
       <Tabs.Screen name='Projects' component={Projects} />
@@ -93,17 +85,16 @@ function TabsNavigator () {
 
 const App = createStackNavigator()
 function AppNavigator () {
-  const screenOptions = ({ route }) => ({
-    cardStyle: { backgroundColor: '#FFF' }
-  })
+  const navigatorProps = {
+    mode: 'modal',
+    headerMode: 'screen',
+    screenOptions: ({ route }) => ({
+      cardStyle: { backgroundColor: '#FFF' }
+    })
+  }
 
   return (
-    <App.Navigator
-      screenOptions={screenOptions}
-      mode='modal'
-      headerMode='screen'
-    >
-      {/* Tabs */}
+    <App.Navigator {...navigatorProps}>
       <App.Screen
         name='Main'
         component={TabsNavigator}
@@ -150,7 +141,9 @@ function AppNavigator () {
       <App.Screen name='CommunitySettingsMenu' component={CommunitySettingsMenu} />
       <App.Screen name='CommunitySettings' component={CommunitySettings} />
       <App.Screen
-        name='NotificationsList' component={NotificationsList} options={({ navigation, route }) =>
+        name='NotificationsList'
+        component={NotificationsList}
+        options={({ navigation, route }) =>
           header(navigation, route, { left: 'close', title: 'Notifications' })}
       />
       <App.Screen name='ThreadList' component={ThreadList} options={ThreadList.navigationOptions} />
@@ -162,8 +155,7 @@ function AppNavigator () {
       <App.Screen name='SignupFlow4' component={SignupFlow4} />
       <App.Screen name='SignupFlow5' component={SignupFlow5} />
       <App.Screen name='Thread' component={Thread} path='thread/:id' />
-      <App.Screen name='UseInvitation' component={JoinCommunity} path='useInvitation/:token' />
-      {/* <App.Screen name='UseAccessCode' component={JoinCommunity} path='useAccessCode/:slug/:accessCode' /> */}
+      <App.Screen name='JoinCommunity' component={JoinCommunity} />
       <App.Screen name='Loading' component={LoadingScreen} />
       <App.Screen name='CreateCommunityName' component={CreateCommunityName} />
       <App.Screen name='CreateCommunityUrl' component={CreateCommunityUrl} />
@@ -177,17 +169,18 @@ function AppNavigator () {
 
 const AppWithDrawer = createDrawerNavigator()
 function AppWithDrawerNavigator () {
+  const navigatorProps = {
+    hideStatusBar: true,
+    drawerType: 'front',
+    drawerStyle: {
+      width: Dimensions.get('window').width * 0.9
+    },
+    drawerContent: props => <DrawerMenu {...props} />
+  }
+
   return (
-    <AppWithDrawer.Navigator
-      drawerContent={props => <DrawerMenu {...props} />}
-      hideStatusBar
-      drawerType='front'
-      drawerStyle={{
-        width: Dimensions.get('window').width * 0.9
-      }}
-      initialRouteName='DrawerHome'
-    >
-      <AppWithDrawer.Screen name='DrawerHome' component={AppNavigator} />
+    <AppWithDrawer.Navigator {...navigatorProps}>
+      <AppWithDrawer.Screen name='AppNavigator' component={AppNavigator} />
     </AppWithDrawer.Navigator>
   )
 }
@@ -197,7 +190,6 @@ function AuthNavigator () {
   return (
     <Auth.Navigator headerMode='screen'>
       <Auth.Screen name='Login' component={Login} options={{ animationEnabled: false }} />
-      {/* <Auth.Screen name='LoginByPasswordResetToken' component={Login} path='passwordResetTokenLogin/:userId/:loginToken/:nextURL' /> */}
       <Auth.Screen name='ForgotPassword' component={ForgotPassword} path='reset-password' />
       <App.Screen name='Signup' component={Signup} options={{ headerMode: 'screen' }} />
       <App.Screen name='SignupFlow1' component={SignupFlow1} />

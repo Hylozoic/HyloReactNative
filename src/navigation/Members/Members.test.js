@@ -1,6 +1,5 @@
 import 'react-native'
 import React from 'react'
-import ShallowRenderer from 'react-test-renderer/shallow'
 import TestRenderer from 'react-test-renderer'
 import Members, { Banner, Member } from './Members'
 

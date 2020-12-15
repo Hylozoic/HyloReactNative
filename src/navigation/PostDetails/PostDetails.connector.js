@@ -4,7 +4,7 @@ import fetchPost from 'store/actions/fetchPost'
 import { createComment } from './CommentEditor/CommentEditor.store'
 import { getPresentedPost } from 'store/selectors/getPost'
 import getCurrentCommunityId from 'store/selectors/getCurrentCommunityId'
-import getNavigationParam from 'store/selectors/getNavigationParam'
+import getRouteParam from 'store/selectors/getRouteParam'
 import getMe from 'store/selectors/getMe'
 import makeGoToCommunity from 'store/actions/makeGoToCommunity'
 import joinProject from 'store/actions/joinProject'
@@ -13,7 +13,7 @@ import goToMemberMaker from 'store/actions/goToMemberMaker'
 import { isNull, isUndefined, get } from 'lodash/fp'
 
 function getPostId (state, props) {
-  return getNavigationParam('id', state, props)
+  return getRouteParam('id', props.route)
 }
 
 export function mapStateToProps (state, props) {

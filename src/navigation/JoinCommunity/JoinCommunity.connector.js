@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux'
 import { get } from 'lodash/fp'
 import getMe from 'store/selectors/getMe'
 import makeGoToCommunity from 'store/actions/makeGoToCommunity'
-import getNavigationParam from 'store/selectors/getNavigationParam'
+import getRouteParam from 'store/selectors/getRouteParam'
 import { checkInvitation, useInvitation } from './JoinCommunity.store'
 import { resetToAppRoute, resetToMainRoute } from 'routing/helpers'
 
@@ -12,9 +12,9 @@ export function mapStateToProps (state, props) {
   return {
     currentUser: getMe(state),
     invitationCodes: {
-      invitationToken: getNavigationParam('token', state, props) ||
-        getNavigationParam('invitationToken', state, props),
-      accessCode: getNavigationParam('accessCode', state, props)
+      invitationToken: getRouteParam('token', props.route) ||
+        getRouteParam('invitationToken', props.route),
+      accessCode: getRouteParam('accessCode', props.route)
     },
     navToSignup: () => resetToAppRoute(navigation, 'Signup'),
     navToInviteExpired: () => resetToAppRoute(navigation, 'InviteExpired'),

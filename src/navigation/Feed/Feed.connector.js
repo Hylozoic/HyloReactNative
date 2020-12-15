@@ -17,29 +17,25 @@ import {
   getNetworkSearchObject
 } from './Feed.store'
 import getMemberships from 'store/selectors/getMemberships'
-import getNavigationParam from 'store/selectors/getNavigationParam'
+import getRouteParam from 'store/selectors/getRouteParam'
 
 export function mapStateToProps (state, props) {
-  const params = get('params', props.route) || {}
   // NOTE: networkId is only received as a prop (currently via Home)
   const networkId = getCurrentNetworkId(state, props)
   // NOTE: communityId is is received either as a prop (via Home) or as a
   // navigation parameter. In case of nav params the screen will load with a
   // back button and be added to the stack.
-  const communityId = getNavigationParam('communityId', state, props)
-    || getNavigationParam('contextId', state, props)
+  const communityId = getRouteParam('communityId', props.route)
+    || getRouteParam('contextId', props.route)
     || getCurrentCommunityId(state, props)
-  const communitySlugFromLink = getNavigationParam('communitySlugFromLink', state, props)
+  const communitySlugFromLink = getRouteParam('communitySlugFromLink', props.route)
   const communitySearchObject = getCommunitySearchObject(communityId, communitySlugFromLink)
   const topicName = props.topicName
-    || params.topicName
-    || getNavigationParam('topicName', state, props)
+    || getRouteParam('topicName', props.route)
   const community = !networkId && get('ref', getCommunity(state, communitySearchObject))
   const communitySlug = get('slug', community)
-
-  const networkSlug = getNavigationParam('networkSlug', state, props)
+  const networkSlug = getRouteParam('networkSlug', props.route)
   const networkSearchObject = getNetworkSearchObject(networkId, networkSlug)
-
   const network = getNetwork(state, networkSearchObject)
   const currentUser = getMe(state)
   const communityTopic = topicName && community &&
