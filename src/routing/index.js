@@ -17,7 +17,6 @@ import { MAIN_ROUTE_NAME } from 'routing/helpers'
 
 /* configuration for matching screens with paths */
 const config = {
-  initialRouteName: 'Main',
   screens: {
     DrawerHome: {
       screens: {
@@ -40,7 +39,7 @@ const config = {
   }
 }
 
-const linking = {
+const routing = {
   prefixes: [
     'http://hylo.com',
     'http://www.hylo.com',
@@ -51,4 +50,4 @@ const linking = {
   config
 }
 
-export default linking
+export default routing

@@ -5,7 +5,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context'
 import Loading from 'components/Loading'
 import VersionCheck from 'navigation/VersionCheck'
 import RootNavigator from 'navigation'
-import linking from 'navigation/linking'
+import routing from 'routing'
 
 export default function RootView ({
   loading,
@@ -28,7 +28,7 @@ export default function RootView ({
     <View style={styles.rootContainer}>
       <SafeAreaProvider>
         <VersionCheck />
-        <NavigationContainer linking={linking}>
+        <NavigationContainer linking={routing}>
           <RootNavigator isSignedIn={signedIn} />
         </NavigationContainer>
       </SafeAreaProvider>
