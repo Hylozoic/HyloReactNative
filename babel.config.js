@@ -21,7 +21,10 @@ module.exports = {
           '.ios.js',
           '.ios.tsx'
         ],
-        root: ['./src']
+        root: ['./src'],
+        alias: {
+          'config': './config'
+        }
       }
     ]
   ],
