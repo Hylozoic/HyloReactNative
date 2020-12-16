@@ -49,13 +49,13 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     signup, updateUserSettings, updateLocalUserSettings, fetchCurrentUser
   } = dispatchProps
   
-  const loadUserSettings = () => (
+  const loadUserSettings = async () => (
     updateLocalUserSettings(pick([
       'name', 'email', 'location', 'avatarUrl', 'settings'
     ], currentUser.ref))
   )
 
-  const signupOrUpdate = () => {
+  const signupOrUpdate = async() => {
     const params = omitBy(isNil, {
       name,
       email,
@@ -63,15 +63,18 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
         ? password
         : null
     })
-    const saveFunc = currentUser
-      ? updateUserSettings
-      : signup
 
-    // TODO: Still need to load currentuser (or capture from the api return?) when this is signup
-    return saveFunc(params)
-      .then(({ error }) => (
-        !error && ownProps.navigation.navigate('SignupFlow2')
-      ))
+    try {
+      if (currentUser) {
+        await updateUserSettings(params)
+      } else {
+        await signup(params)
+        await fetchCurrentUser()
+      }
+      ownProps.navigation.navigate('SignupFlow2')
+    } catch (error) {
+      return error
+    }
   }
 
   return {

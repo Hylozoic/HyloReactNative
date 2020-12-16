@@ -8,8 +8,8 @@ import { CHECK_SESSION_AND_SET_SIGNED_IN, FETCH_CURRENT_USER } from 'store/const
 
 export function mapStateToProps (state, props) {
   const currentUser = getMe(state, props)
-  const signedIn = state.session.signedIn
-  const signupInProgress = get('settings.signupInProgress', currentUser)
+  const signedIn = get('session.signedIn', state)
+  const signupInProgress = get('session.signupInProgress', state)
   const loading = props.loading
     || state.pending[CHECK_SESSION_AND_SET_SIGNED_IN]
     || (state.pending[FETCH_CURRENT_USER] && !signupInProgress)

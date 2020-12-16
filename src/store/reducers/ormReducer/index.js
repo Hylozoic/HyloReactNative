@@ -48,6 +48,9 @@ import {
   RESET_NEW_POST_COUNT_PENDING
 } from '../../actions/resetNewPostCount'
 import {
+  UPDATE_USER_SETTINGS
+} from 'navigation/SignupFlow/SignupFlow.store'
+import {
   FETCH_CURRENT_USER,
   JOIN_PROJECT_PENDING,
   LEAVE_PROJECT_PENDING
@@ -206,10 +209,17 @@ export default function ormReducer (state = {}, action) {
       postMembership && postMembership.update({ pinned: !postMembership.pinned })
       break
 
-    case FETCH_CURRENT_USER:
+    case FETCH_CURRENT_USER: {
       const attrs = pick(['id', 'avatarUrl', 'name', 'location'], payload.data.me)
       session.Person.create(attrs)
       break
+    }
+
+    case UPDATE_USER_SETTINGS: {
+      const attrs = pick(['id', 'avatarUrl', 'name', 'location'], payload.data.updateMe)
+      session.Person.create(attrs)
+      break
+    }
 
     case CREATE_COMMUNITY:
       me = session.Me.first()
