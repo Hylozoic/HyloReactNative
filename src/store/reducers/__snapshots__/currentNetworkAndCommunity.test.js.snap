@@ -14,7 +14,7 @@ Object {
 
 exports[`on SELECT_COMMUNITY returns the payload 1`] = `
 Object {
-  "id": 1,
-  "name": "moon",
+  "communityId": "123",
+  "networkId": null,
 }
 `;

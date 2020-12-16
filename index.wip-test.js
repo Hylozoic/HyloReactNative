@@ -1,3 +1,10 @@
+// jest.mock('react-native-onesignal', () => ({
+//   addEventListener: jest.fn(),
+//   inFocusDisplaying: jest.fn(),
+//   clearOneSignalNotifications: jest.fn(),
+//   removeEventListener: jest.fn()
+// }))
+
 
 //   it('tidies up event handlers', () => {
 //     AppState.removeEventListener = jest.fn()

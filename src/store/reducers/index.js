@@ -7,7 +7,8 @@ import currentNetworkAndCommunity from './currentNetworkAndCommunity'
 import sessionReducer from './sessionReducer'
 import mixpanelReducer from './mixpanel'
 import CommentEditor from 'navigation/PostDetails/CommentEditor/CommentEditor.store'
-import DeepLinkHandler from 'routing/DeepLinkHandler/DeepLinkHandler.store'
+// TODO: May bring back
+// import DeepLinkHandler from 'routing/DeepLinkHandler/DeepLinkHandler.store'
 import FeedList from 'navigation/FeedList/FeedList.store'
 import ItemChooser from 'navigation/ItemChooser/ItemChooser.store'
 import LoadingModal from 'navigation/LoadingModal/LoadingModal.store'
@@ -32,7 +33,7 @@ export const combinedReducers = combineReducers({
   session: sessionReducer,
   mixpanel: mixpanelReducer,
   CommentEditor,
-  DeepLinkHandler,
+  // DeepLinkHandler,
   FeedList,
   ItemChooser,
   LoadingModal,

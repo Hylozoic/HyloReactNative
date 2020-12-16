@@ -1,111 +1,62 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`RootView matches the last snapshot (loading) 1`] = `
-<Context.Provider
-  value={
-    Object {
-      "store": Object {
-        "dispatch": [MockFunction],
-        "getState": [MockFunction] {
-          "calls": Array [
-            Array [],
-          ],
-          "results": Array [
-            Object {
-              "type": "return",
-              "value": Object {
-                "pending": Object {},
-              },
-            },
-          ],
+exports[`RootView loading with signupInProgress - matches snapshot 1`] = `
+<View>
+  <RNCSafeAreaProvider
+    onInsetsChange={[Function]}
+    style={
+      Array [
+        Object {
+          "flex": 1,
         },
-        "subscribe": [MockFunction],
-      },
-      "subscription": Subscription {
-        "handleChangeWrapper": [Function],
-        "listeners": Object {
-          "notify": [Function],
-        },
-        "onStateChange": [Function],
-        "parentSub": undefined,
-        "store": Object {
-          "dispatch": [MockFunction],
-          "getState": [MockFunction] {
-            "calls": Array [
-              Array [],
-            ],
-            "results": Array [
-              Object {
-                "type": "return",
-                "value": Object {
-                  "pending": Object {},
-                },
-              },
-            ],
-          },
-          "subscribe": [MockFunction],
-        },
-        "unsubscribe": null,
-      },
+        undefined,
+      ]
     }
-  }
->
-  <Memo(Connect(RootView))
-    loading={true}
   />
-</Context.Provider>
+</View>
 `;
 
-exports[`RootView matches the last snapshot 1`] = `
-<Context.Provider
-  value={
-    Object {
-      "store": Object {
-        "dispatch": [MockFunction],
-        "getState": [MockFunction] {
-          "calls": Array [
-            Array [],
-          ],
-          "results": Array [
-            Object {
-              "type": "return",
-              "value": Object {
-                "pending": Object {},
-              },
-            },
-          ],
+exports[`RootView loading without signupInProgress - matches snapshot 1`] = `
+<View>
+  <View>
+    <ActivityIndicator
+      animating={true}
+      color="#999999"
+      hidesWhenStopped={true}
+      size="small"
+    />
+  </View>
+</View>
+`;
+
+exports[`RootView signedIn and signupInProgress matches snapshot 1`] = `
+<View>
+  <RNCSafeAreaProvider
+    onInsetsChange={[Function]}
+    style={
+      Array [
+        Object {
+          "flex": 1,
         },
-        "subscribe": [MockFunction],
-      },
-      "subscription": Subscription {
-        "handleChangeWrapper": [Function],
-        "listeners": Object {
-          "notify": [Function],
-        },
-        "onStateChange": [Function],
-        "parentSub": undefined,
-        "store": Object {
-          "dispatch": [MockFunction],
-          "getState": [MockFunction] {
-            "calls": Array [
-              Array [],
-            ],
-            "results": Array [
-              Object {
-                "type": "return",
-                "value": Object {
-                  "pending": Object {},
-                },
-              },
-            ],
-          },
-          "subscribe": [MockFunction],
-        },
-        "unsubscribe": null,
-      },
+        undefined,
+      ]
     }
-  }
->
-  <Memo(Connect(RootView)) />
-</Context.Provider>
+  />
+</View>
+`;
+
+exports[`RootView signedIn but not signupInProgress matches snapshot 1`] = `
+<View>
+  <RNCSafeAreaProvider
+    onInsetsChange={[Function]}
+    style={
+      Array [
+        Object {
+          "flex": 1,
+        },
+        undefined,
+      ]
+    }
+  />
+</View>
 `;

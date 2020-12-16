@@ -12,7 +12,6 @@ exports[`mapStateToProps returns the right keys 1`] = `
 Object {
   "avatarUrl": undefined,
   "confirmPassword": undefined,
-  "deepLinkAction": undefined,
   "email": undefined,
   "location": undefined,
   "name": undefined,

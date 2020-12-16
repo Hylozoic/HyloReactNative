@@ -9,7 +9,8 @@ import {
 import { getMySkillsFromOrm } from 'components/SkillEditor/SkillEditor.store'
 import { isEmpty } from 'lodash/fp'
 import { redirectAfterLogin, resetToMainRoute } from 'routing/helpers'
-import { getNavigationAction } from 'routing/DeepLinkHandler/DeepLinkHandler.store'
+// TODO: May bring back DeepLinkHandler...
+// import { getNavigationAction } from 'routing/DeepLinkHandler/DeepLinkHandler.store'
 
 export function mapStateToProps (state, props) {
   const { name, email, password, confirmPassword, location, avatarUrl } = getUserSettings(state)
@@ -25,7 +26,7 @@ export function mapStateToProps (state, props) {
     avatarUrl,
     skills,
     showPasswordField,
-    deepLinkAction: getNavigationAction(state)
+    // deepLinkAction: getNavigationAction(state)
   }
 }
 

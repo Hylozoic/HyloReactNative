@@ -12,7 +12,7 @@ import { register as registerOneSignal } from 'util/onesignal'
 import registerDevice from 'store/actions/registerDevice'
 import fetchCurrentUser from 'store/actions/fetchCurrentUser'
 import { redirectAfterLogin } from 'routing/helpers'
-import { getNavigationAction } from 'routing/DeepLinkHandler/DeepLinkHandler.store'
+// import { getNavigationAction } from 'routing/DeepLinkHandler/DeepLinkHandler.store'
 
 export function mapStateToProps (state, props) {
   const formError = state.session.loginError
@@ -29,8 +29,8 @@ export function mapStateToProps (state, props) {
     goToResetPassword,
     loginToken: decodeURIComponent(get('route.params.loginToken', props)),
     loginTokenUserId: get('route.params.userId', props),
-    // TODO: Still use this?
-    deepLinkAction: getNavigationAction(state)
+    // TODO: May bring back DeepLink
+    // deepLinkAction: getNavigationAction(state)
   }
 }
 

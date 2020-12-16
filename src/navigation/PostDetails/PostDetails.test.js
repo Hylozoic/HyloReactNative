@@ -8,6 +8,10 @@ import { createMockStore } from 'util/testing'
 import MockedScreen from 'util/testing/MockedScreen'
 import orm from 'store/models'
 
+jest.mock('util/websockets', () => ({
+  getSocket: Promise.resolve
+}))
+
 const post = {
   id: '91',
   creator: {
@@ -58,7 +62,8 @@ const props = {
 const state = {
   orm: orm.getEmptyState(),
   queryResults: {},
-  pending: {}
+  pending: {},
+  session: {}
 }
 
 describe('PostDetails', () => {

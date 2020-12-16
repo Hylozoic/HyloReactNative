@@ -1,43 +1,49 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`hides password, and changes button when pending  1`] = `
-<KeyboardFriendlyView
-  behavior="padding"
-  keyboardVerticalOffset={64}
->
-  <ScrollView>
-    <Text>
-      Hi there stranger!
-    </Text>
-    <Text>
-      To kick things off, tell us a bit more about yourself and get your account off the ground.
-    </Text>
-    <SettingControl
-      error={null}
-      label="Your Full Name"
-      onChange={[Function]}
-      onSubmitEditing={[Function]}
-      returnKeyType="next"
-      value="Ra"
-    />
-    <SettingControl
-      autoCapitalize="none"
-      autoCorrect={false}
-      error={null}
-      keyboardType="email-address"
-      label="Email Address"
-      onChange={[Function]}
-      onSubmitEditing={[Function]}
-      returnKeyType="next"
-      value="ra@ra.com"
-    />
-    <Button
-      disabled={true}
-      onPress={[Function]}
-      text="Saving..."
-    />
-  </ScrollView>
-</KeyboardFriendlyView>
+<SafeAreaViewMock>
+  <KeyboardFriendlyView
+    behavior="padding"
+    keyboardVerticalOffset={64}
+  >
+    <View>
+      <Text>
+        Hi there stranger!
+      </Text>
+      <Text>
+        To kick things off, tell us a bit more about yourself and get your account off the ground.
+      </Text>
+    </View>
+    <View>
+      <SettingControl
+        error={null}
+        label="Your Full Name"
+        onChange={[Function]}
+        onSubmitEditing={[Function]}
+        returnKeyType="next"
+        value="Ra"
+      />
+      <SettingControl
+        autoCapitalize="none"
+        autoCorrect={false}
+        error={null}
+        keyboardType="email-address"
+        label="Email Address"
+        onChange={[Function]}
+        onSubmitEditing={[Function]}
+        returnKeyType="next"
+        value="ra@ra.com"
+      />
+    </View>
+    <View>
+      <Button
+        disabled={true}
+        onPress={[Function]}
+        text="Saving..."
+      />
+    </View>
+  </KeyboardFriendlyView>
+</SafeAreaViewMock>
 `;
 
 exports[`loads user settings and updates errors on update when appropriate 1`] = `
@@ -57,59 +63,65 @@ Object {
 `;
 
 exports[`matches last snapshot 1`] = `
-<KeyboardFriendlyView
-  behavior="padding"
-  keyboardVerticalOffset={64}
->
-  <ScrollView>
-    <Text>
-      Hi there stranger!
-    </Text>
-    <Text>
-      To kick things off, tell us a bit more about yourself and get your account off the ground.
-    </Text>
-    <SettingControl
-      error={null}
-      label="Your Full Name"
-      onChange={[Function]}
-      onSubmitEditing={[Function]}
-      returnKeyType="next"
-      value="Ra"
-    />
-    <SettingControl
-      autoCapitalize="none"
-      autoCorrect={false}
-      error={null}
-      keyboardType="email-address"
-      label="Email Address"
-      onChange={[Function]}
-      onSubmitEditing={[Function]}
-      returnKeyType="next"
-      value="ra@ra.com"
-    />
-    <SettingControl
-      error={null}
-      label="Password"
-      onChange={[Function]}
-      onSubmitEditing={[Function]}
-      returnKeyType="next"
-      toggleSecureTextEntry={true}
-      value="rarara"
-    />
-    <SettingControl
-      label="Confirm Password"
-      onChange={[Function]}
-      onSubmitEditing={[Function]}
-      returnKeyType="go"
-      toggleSecureTextEntry={true}
-    />
-    <Button
-      disabled={false}
-      onPress={[Function]}
-      text="Continue"
-    />
-  </ScrollView>
-</KeyboardFriendlyView>
+<SafeAreaViewMock>
+  <KeyboardFriendlyView
+    behavior="padding"
+    keyboardVerticalOffset={64}
+  >
+    <View>
+      <Text>
+        Hi there stranger!
+      </Text>
+      <Text>
+        To kick things off, tell us a bit more about yourself and get your account off the ground.
+      </Text>
+    </View>
+    <View>
+      <SettingControl
+        error={null}
+        label="Your Full Name"
+        onChange={[Function]}
+        onSubmitEditing={[Function]}
+        returnKeyType="next"
+        value="Ra"
+      />
+      <SettingControl
+        autoCapitalize="none"
+        autoCorrect={false}
+        error={null}
+        keyboardType="email-address"
+        label="Email Address"
+        onChange={[Function]}
+        onSubmitEditing={[Function]}
+        returnKeyType="next"
+        value="ra@ra.com"
+      />
+      <SettingControl
+        error={null}
+        label="Password"
+        onChange={[Function]}
+        onSubmitEditing={[Function]}
+        returnKeyType="next"
+        toggleSecureTextEntry={true}
+        value="rarara"
+      />
+      <SettingControl
+        label="Confirm Password"
+        onChange={[Function]}
+        onSubmitEditing={[Function]}
+        returnKeyType="go"
+        toggleSecureTextEntry={true}
+      />
+    </View>
+    <View>
+      <Button
+        disabled={false}
+        onPress={[Function]}
+        text="Continue"
+      />
+    </View>
+  </KeyboardFriendlyView>
+</SafeAreaViewMock>
 `;
 
 exports[`validates its fields 1`] = `

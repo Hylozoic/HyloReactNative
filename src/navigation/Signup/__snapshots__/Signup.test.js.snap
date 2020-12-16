@@ -5,6 +5,7 @@ exports[`matches last snapshot 1`] = `
   contentContainerStyle={
     Object {
       "backgroundColor": "white",
+      "flex": 1,
     }
   }
 >

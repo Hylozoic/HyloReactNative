@@ -15,8 +15,7 @@ export default function RootView ({
   openedPushNotification
 }) {
   useMemo(() => { loadCurrentUserSession() }, [])
-
-  if (loading) {
+  if (loading && !signupInProgress) {
     return (
       <View style={styles.loadingContainer}>
         <Loading style={styles.loading} />

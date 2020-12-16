@@ -4,15 +4,10 @@ import { FETCH_CURRENT_USER, SELECT_COMMUNITY } from 'store/constants'
 describe('on SELECT_COMMUNITY', () => {
   it('returns the payload', () => {
     const state = {
-      id: 1,
-      name: 'moon'
     }
     const action = {
       type: SELECT_COMMUNITY,
-      payload: {
-        id: 123,
-        name: 'foom'
-      }
+      payload: '123',
     }
     expect(currentNetworkAndCommunity(state, action))
       .toMatchSnapshot()

@@ -12,428 +12,420 @@ exports[`FormError renders correctly 1`] = `
 `;
 
 exports[`Login renders correctly 1`] = `
-<SafeAreaViewMock>
-  <ScrollView
-    contentContainerStyle={
+<ScrollView
+  contentContainerStyle={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "white",
+      "justifyContent": "center",
+    }
+  }
+>
+  <Image
+    source={
       Object {
-        "alignItems": "center",
-        "backgroundColor": "white",
-        "justifyContent": "center",
+        "testUri": "../../../src/assets/merkaba-green-on-white.png",
       }
     }
-  >
-    <Image
-      source={
-        Object {
-          "testUri": "../../../src/assets/merkaba-green-on-white.png",
-        }
-      }
-    />
+  />
+  <Text>
+    Log in to Hylo
+  </Text>
+  <View>
     <Text>
-      Log in to Hylo
+      Your email address
     </Text>
-    <View>
-      <Text>
-        Your email address
-      </Text>
-    </View>
+  </View>
+  <View>
     <View>
       <View>
-        <View>
-          <Component
-            allowFontScaling={true}
-            autoCapitalize="none"
-            autoCorrect={false}
-            keyboardType="email-address"
-            onChangeText={[Function]}
-            rejectResponderTermination={true}
-            returnKeyType="next"
-            underlineColorAndroid="rgba(0,0,0,0)"
-          />
-        </View>
-        <View />
+        <Component
+          allowFontScaling={true}
+          autoCapitalize="none"
+          autoCorrect={false}
+          keyboardType="email-address"
+          onChangeText={[Function]}
+          rejectResponderTermination={true}
+          returnKeyType="next"
+          underlineColorAndroid="rgba(0,0,0,0)"
+        />
       </View>
+      <View />
     </View>
-    <View>
+  </View>
+  <View>
+    <Text>
+      Password
+    </Text>
+    <ForwardRef>
       <Text>
-        Password
+        Forgot your password?
       </Text>
-      <ForwardRef>
-        <Text>
-          Forgot your password?
-        </Text>
-      </ForwardRef>
-    </View>
+    </ForwardRef>
+  </View>
+  <View>
     <View>
       <View>
-        <View>
-          <Component
-            allowFontScaling={true}
-            autoCapitalize="none"
-            onChangeText={[Function]}
-            onSubmitEditing={[Function]}
-            rejectResponderTermination={true}
-            returnKeyType="go"
-            secureTextEntry={true}
-            selectTextOnFocus={true}
-            underlineColorAndroid="rgba(0,0,0,0)"
-          />
-        </View>
-        <View>
-          <Icon
-            allowFontScaling={false}
-            name="eye"
-            onPress={[Function]}
-            size={12}
-          />
-        </View>
+        <Component
+          allowFontScaling={true}
+          autoCapitalize="none"
+          onChangeText={[Function]}
+          onSubmitEditing={[Function]}
+          rejectResponderTermination={true}
+          returnKeyType="go"
+          secureTextEntry={true}
+          selectTextOnFocus={true}
+          underlineColorAndroid="rgba(0,0,0,0)"
+        />
+      </View>
+      <View>
+        <Icon
+          allowFontScaling={false}
+          name="eye"
+          onPress={[Function]}
+          size={12}
+        />
       </View>
     </View>
-    <View>
-      <ForwardRef
-        onPress={[Function]}
-      >
-        <Text>
-          Log In
-        </Text>
-      </ForwardRef>
-    </View>
-    <View>
+  </View>
+  <View>
+    <ForwardRef
+      onPress={[Function]}
+    >
       <Text>
-        Or connect with:
+        Log In
       </Text>
-      <GoogleLoginButton
-        createErrorNotification={[Function]}
-        style={Object {}}
-      />
-      <FbLoginButton
-        createErrorNotification={[Function]}
-        style={Object {}}
-      />
-    </View>
-    <SignupLink
-      goToSignup={[Function]}
+    </ForwardRef>
+  </View>
+  <View>
+    <Text>
+      Or connect with:
+    </Text>
+    <GoogleLoginButton
+      createErrorNotification={[Function]}
+      style={Object {}}
     />
-  </ScrollView>
-</SafeAreaViewMock>
+    <FbLoginButton
+      createErrorNotification={[Function]}
+      style={Object {}}
+    />
+  </View>
+  <SignupLink
+    goToSignup={[Function]}
+  />
+</ScrollView>
 `;
 
 exports[`Login renders error message 1`] = `
-<SafeAreaViewMock>
-  <ScrollView
-    contentContainerStyle={
+<ScrollView
+  contentContainerStyle={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "white",
+      "justifyContent": "center",
+    }
+  }
+>
+  <Image
+    source={
       Object {
-        "alignItems": "center",
-        "backgroundColor": "white",
-        "justifyContent": "center",
+        "testUri": "../../../src/assets/merkaba-green-on-white.png",
       }
     }
-  >
-    <Image
-      source={
-        Object {
-          "testUri": "../../../src/assets/merkaba-green-on-white.png",
-        }
-      }
-    />
+  />
+  <Text>
+    Log in to Hylo
+  </Text>
+  <View>
     <Text>
-      Log in to Hylo
+      Your email address
     </Text>
-    <View>
-      <Text>
-        Your email address
-      </Text>
-    </View>
+  </View>
+  <View>
     <View>
       <View>
-        <View>
-          <Component
-            allowFontScaling={true}
-            autoCapitalize="none"
-            autoCorrect={false}
-            keyboardType="email-address"
-            onChangeText={[Function]}
-            rejectResponderTermination={true}
-            returnKeyType="next"
-            underlineColorAndroid="rgba(0,0,0,0)"
-          />
-        </View>
-        <View />
+        <Component
+          allowFontScaling={true}
+          autoCapitalize="none"
+          autoCorrect={false}
+          keyboardType="email-address"
+          onChangeText={[Function]}
+          rejectResponderTermination={true}
+          returnKeyType="next"
+          underlineColorAndroid="rgba(0,0,0,0)"
+        />
       </View>
+      <View />
     </View>
-    <View>
+  </View>
+  <View>
+    <Text>
+      Password
+    </Text>
+    <ForwardRef>
       <Text>
-        Password
+        Forgot your password?
       </Text>
-      <ForwardRef>
-        <Text>
-          Forgot your password?
-        </Text>
-      </ForwardRef>
-    </View>
+    </ForwardRef>
+  </View>
+  <View>
     <View>
       <View>
-        <View>
-          <Component
-            allowFontScaling={true}
-            autoCapitalize="none"
-            onChangeText={[Function]}
-            onSubmitEditing={[Function]}
-            rejectResponderTermination={true}
-            returnKeyType="go"
-            secureTextEntry={true}
-            selectTextOnFocus={true}
-            underlineColorAndroid="rgba(0,0,0,0)"
-          />
-        </View>
-        <View>
-          <Icon
-            allowFontScaling={false}
-            name="eye"
-            onPress={[Function]}
-            size={12}
-          />
-        </View>
+        <Component
+          allowFontScaling={true}
+          autoCapitalize="none"
+          onChangeText={[Function]}
+          onSubmitEditing={[Function]}
+          rejectResponderTermination={true}
+          returnKeyType="go"
+          secureTextEntry={true}
+          selectTextOnFocus={true}
+          underlineColorAndroid="rgba(0,0,0,0)"
+        />
+      </View>
+      <View>
+        <Icon
+          allowFontScaling={false}
+          name="eye"
+          onPress={[Function]}
+          size={12}
+        />
       </View>
     </View>
-    <View>
-      <ForwardRef
-        onPress={[Function]}
-      >
-        <Text>
-          Log In
-        </Text>
-      </ForwardRef>
-    </View>
-    <View>
+  </View>
+  <View>
+    <ForwardRef
+      onPress={[Function]}
+    >
       <Text>
-        Or connect with:
+        Log In
       </Text>
-      <GoogleLoginButton
-        createErrorNotification={[Function]}
-        style={Object {}}
-      />
-      <FbLoginButton
-        createErrorNotification={[Function]}
-        style={Object {}}
-      />
-    </View>
-    <SignupLink />
-  </ScrollView>
-</SafeAreaViewMock>
+    </ForwardRef>
+  </View>
+  <View>
+    <Text>
+      Or connect with:
+    </Text>
+    <GoogleLoginButton
+      createErrorNotification={[Function]}
+      style={Object {}}
+    />
+    <FbLoginButton
+      createErrorNotification={[Function]}
+      style={Object {}}
+    />
+  </View>
+  <SignupLink />
+</ScrollView>
 `;
 
 exports[`Login renders with no network connection error 1`] = `
-<SafeAreaViewMock>
-  <ScrollView
-    contentContainerStyle={
+<ScrollView
+  contentContainerStyle={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "white",
+      "justifyContent": "center",
+    }
+  }
+>
+  <Image
+    source={
       Object {
-        "alignItems": "center",
-        "backgroundColor": "white",
-        "justifyContent": "center",
+        "testUri": "../../../src/assets/merkaba-green-on-white.png",
       }
     }
-  >
-    <Image
-      source={
-        Object {
-          "testUri": "../../../src/assets/merkaba-green-on-white.png",
-        }
-      }
-    />
+  />
+  <Text>
+    Log in to Hylo
+  </Text>
+  <View>
     <Text>
-      Log in to Hylo
+      Your email address
     </Text>
-    <View>
-      <Text>
-        Your email address
-      </Text>
-    </View>
+  </View>
+  <View>
     <View>
       <View>
-        <View>
-          <Component
-            allowFontScaling={true}
-            autoCapitalize="none"
-            autoCorrect={false}
-            keyboardType="email-address"
-            onChangeText={[Function]}
-            rejectResponderTermination={true}
-            returnKeyType="next"
-            underlineColorAndroid="rgba(0,0,0,0)"
-          />
-        </View>
-        <View />
+        <Component
+          allowFontScaling={true}
+          autoCapitalize="none"
+          autoCorrect={false}
+          keyboardType="email-address"
+          onChangeText={[Function]}
+          rejectResponderTermination={true}
+          returnKeyType="next"
+          underlineColorAndroid="rgba(0,0,0,0)"
+        />
       </View>
+      <View />
     </View>
-    <View>
+  </View>
+  <View>
+    <Text>
+      Password
+    </Text>
+    <ForwardRef>
       <Text>
-        Password
+        Forgot your password?
       </Text>
-      <ForwardRef>
-        <Text>
-          Forgot your password?
-        </Text>
-      </ForwardRef>
-    </View>
+    </ForwardRef>
+  </View>
+  <View>
     <View>
       <View>
-        <View>
-          <Component
-            allowFontScaling={true}
-            autoCapitalize="none"
-            onChangeText={[Function]}
-            onSubmitEditing={[Function]}
-            rejectResponderTermination={true}
-            returnKeyType="go"
-            secureTextEntry={true}
-            selectTextOnFocus={true}
-            underlineColorAndroid="rgba(0,0,0,0)"
-          />
-        </View>
-        <View>
-          <Icon
-            allowFontScaling={false}
-            name="eye"
-            onPress={[Function]}
-            size={12}
-          />
-        </View>
+        <Component
+          allowFontScaling={true}
+          autoCapitalize="none"
+          onChangeText={[Function]}
+          onSubmitEditing={[Function]}
+          rejectResponderTermination={true}
+          returnKeyType="go"
+          secureTextEntry={true}
+          selectTextOnFocus={true}
+          underlineColorAndroid="rgba(0,0,0,0)"
+        />
+      </View>
+      <View>
+        <Icon
+          allowFontScaling={false}
+          name="eye"
+          onPress={[Function]}
+          size={12}
+        />
       </View>
     </View>
-    <View>
-      <ForwardRef
-        onPress={[Function]}
-      >
-        <Text>
-          Log In
-        </Text>
-      </ForwardRef>
-    </View>
-    <View>
+  </View>
+  <View>
+    <ForwardRef
+      onPress={[Function]}
+    >
       <Text>
-        Or connect with:
+        Log In
       </Text>
-      <GoogleLoginButton
-        createErrorNotification={[Function]}
-        style={Object {}}
-      />
-      <FbLoginButton
-        createErrorNotification={[Function]}
-        style={Object {}}
-      />
-    </View>
-    <SignupLink />
-  </ScrollView>
-</SafeAreaViewMock>
+    </ForwardRef>
+  </View>
+  <View>
+    <Text>
+      Or connect with:
+    </Text>
+    <GoogleLoginButton
+      createErrorNotification={[Function]}
+      style={Object {}}
+    />
+    <FbLoginButton
+      createErrorNotification={[Function]}
+      style={Object {}}
+    />
+  </View>
+  <SignupLink />
+</ScrollView>
 `;
 
 exports[`Login renders with pending banner 1`] = `
-<SafeAreaViewMock>
-  <ScrollView
-    contentContainerStyle={
+<ScrollView
+  contentContainerStyle={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "white",
+      "justifyContent": "center",
+    }
+  }
+>
+  <Text>
+    LOGGING IN...
+  </Text>
+  <Image
+    source={
       Object {
-        "alignItems": "center",
-        "backgroundColor": "white",
-        "justifyContent": "center",
+        "testUri": "../../../src/assets/merkaba-green-on-white.png",
       }
     }
-  >
+  />
+  <Text>
+    Log in to Hylo
+  </Text>
+  <View>
     <Text>
-      LOGGING IN...
+      Your email address
     </Text>
-    <Image
-      source={
-        Object {
-          "testUri": "../../../src/assets/merkaba-green-on-white.png",
-        }
-      }
+  </View>
+  <View>
+    <View>
+      <View>
+        <Component
+          allowFontScaling={true}
+          autoCapitalize="none"
+          autoCorrect={false}
+          keyboardType="email-address"
+          onChangeText={[Function]}
+          rejectResponderTermination={true}
+          returnKeyType="next"
+          underlineColorAndroid="rgba(0,0,0,0)"
+        />
+      </View>
+      <View />
+    </View>
+  </View>
+  <View>
+    <Text>
+      Password
+    </Text>
+    <ForwardRef>
+      <Text>
+        Forgot your password?
+      </Text>
+    </ForwardRef>
+  </View>
+  <View>
+    <View>
+      <View>
+        <Component
+          allowFontScaling={true}
+          autoCapitalize="none"
+          onChangeText={[Function]}
+          onSubmitEditing={[Function]}
+          rejectResponderTermination={true}
+          returnKeyType="go"
+          secureTextEntry={true}
+          selectTextOnFocus={true}
+          underlineColorAndroid="rgba(0,0,0,0)"
+        />
+      </View>
+      <View>
+        <Icon
+          allowFontScaling={false}
+          name="eye"
+          onPress={[Function]}
+          size={12}
+        />
+      </View>
+    </View>
+  </View>
+  <View>
+    <ForwardRef
+      onPress={[Function]}
+    >
+      <Text>
+        Log In
+      </Text>
+    </ForwardRef>
+  </View>
+  <View>
+    <Text>
+      Or connect with:
+    </Text>
+    <GoogleLoginButton
+      createErrorNotification={[Function]}
+      style={Object {}}
     />
-    <Text>
-      Log in to Hylo
-    </Text>
-    <View>
-      <Text>
-        Your email address
-      </Text>
-    </View>
-    <View>
-      <View>
-        <View>
-          <Component
-            allowFontScaling={true}
-            autoCapitalize="none"
-            autoCorrect={false}
-            keyboardType="email-address"
-            onChangeText={[Function]}
-            rejectResponderTermination={true}
-            returnKeyType="next"
-            underlineColorAndroid="rgba(0,0,0,0)"
-          />
-        </View>
-        <View />
-      </View>
-    </View>
-    <View>
-      <Text>
-        Password
-      </Text>
-      <ForwardRef>
-        <Text>
-          Forgot your password?
-        </Text>
-      </ForwardRef>
-    </View>
-    <View>
-      <View>
-        <View>
-          <Component
-            allowFontScaling={true}
-            autoCapitalize="none"
-            onChangeText={[Function]}
-            onSubmitEditing={[Function]}
-            rejectResponderTermination={true}
-            returnKeyType="go"
-            secureTextEntry={true}
-            selectTextOnFocus={true}
-            underlineColorAndroid="rgba(0,0,0,0)"
-          />
-        </View>
-        <View>
-          <Icon
-            allowFontScaling={false}
-            name="eye"
-            onPress={[Function]}
-            size={12}
-          />
-        </View>
-      </View>
-    </View>
-    <View>
-      <ForwardRef
-        onPress={[Function]}
-      >
-        <Text>
-          Log In
-        </Text>
-      </ForwardRef>
-    </View>
-    <View>
-      <Text>
-        Or connect with:
-      </Text>
-      <GoogleLoginButton
-        createErrorNotification={[Function]}
-        style={Object {}}
-      />
-      <FbLoginButton
-        createErrorNotification={[Function]}
-        style={Object {}}
-      />
-    </View>
-    <SignupLink />
-  </ScrollView>
-</SafeAreaViewMock>
+    <FbLoginButton
+      createErrorNotification={[Function]}
+      style={Object {}}
+    />
+  </View>
+  <SignupLink />
+</ScrollView>
 `;
 
 exports[`SignupLink renders correctly 1`] = `

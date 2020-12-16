@@ -1,22 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`has navigationOptions 1`] = `
-Object {
-  "headerBackTitle": null,
-  "headerStyle": Object {
-    "backgroundColor": "#0DC39F",
-    "shadowColor": "transparent",
-  },
-  "headerTintColor": "#9ee7d9",
-  "headerTitle": "STEP 5/5",
-  "headerTitleStyle": Object {
-    "color": "white",
-    "fontFamily": "Circular-Bold",
-    "fontSize": 12,
-  },
-}
-`;
-
 exports[`hides image when no url and password when no password 1`] = `
 <_default
   behavior="padding"

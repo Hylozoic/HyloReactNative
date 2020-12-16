@@ -11,13 +11,4 @@ describe('CommunitySettingsMenu', () => {
 
     expect(actual).toMatchSnapshot()
   })
-
-  it('navigates', () => {
-    const props = { navigation: { navigate: jest.fn() } }
-
-    const instance = ReactTestRenderer.create(<CommunitySettingsMenu {...props} />).getInstance()
-
-    instance.navigate('somePath')
-    expect(props.navigation.navigate).toHaveBeenCalledWith('somePath')
-  })
 })

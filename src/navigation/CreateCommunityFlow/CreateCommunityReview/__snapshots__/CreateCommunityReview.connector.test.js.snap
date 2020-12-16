@@ -48,9 +48,7 @@ Array [
   ],
   Array [
     Object {
-      "payload": Object {
-        "id": 1,
-      },
+      "payload": "community-id",
       "type": "SELECT_COMMUNITY",
     },
   ],

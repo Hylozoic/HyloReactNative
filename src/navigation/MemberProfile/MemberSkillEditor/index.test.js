@@ -14,16 +14,3 @@ it('matches the last snapshot', () => {
 
   expect(actual).toMatchSnapshot()
 })
-
-describe('goBack', () => {
-  it('calls navigation.goBack', () => {
-    const props = {
-      navigation: {
-        goBack: jest.fn()
-      }
-    }
-    const instance = ReactTestRenderer.create(<MemberSkillEditor {...props} />).getInstance()
-    instance.goBack()
-    expect(props.navigation.goBack).toHaveBeenCalled()
-  })
-})

@@ -1,38 +1,48 @@
 import React from 'react'
 import { Provider } from 'react-redux'
 import { createMockStore } from 'util/testing'
-import ReactShallowRenderer from 'react-test-renderer/shallow'
+import { render } from '@testing-library/react-native'
 import RootView from 'components/RootView'
-
-jest.mock('react-native-onesignal', () => ({
-  addEventListener: jest.fn(),
-  inFocusDisplaying: jest.fn(),
-  clearOneSignalNotifications: jest.fn(),
-  removeEventListener: jest.fn()
-}))
+import { CHECK_SESSION_AND_SET_SIGNED_IN } from 'store/constants'
 
 describe('RootView', () => {
-  const state = {
-    pending: {}
-  }
-
-  it('matches the last snapshot (loading)', () => {
-    const renderer = new ReactShallowRenderer()
-    renderer.render(
-      <Provider store={createMockStore(state)}>
-        <RootView loading />
-      </Provider>
-    )
-    expect(renderer.getRenderOutput()).toMatchSnapshot()
-  })
-
-  it('matches the last snapshot', () => {
-    const renderer = new ReactShallowRenderer()
-    renderer.render(
+  const renderSnapshot = state => (
+    render(
       <Provider store={createMockStore(state)}>
         <RootView />
       </Provider>
-    )
-    expect(renderer.getRenderOutput()).toMatchSnapshot()
+    ).toJSON()
+  )
+  
+  it('loading without signupInProgress - matches snapshot', () => {
+    const state = {
+      pending: { CHECK_SESSION_AND_SET_SIGNED_IN },
+      session: { signupInProgress: false }
+    }
+    expect(renderSnapshot(state)).toMatchSnapshot()
+  })
+
+  it('loading with signupInProgress - matches snapshot', () => {
+    const state = {
+      pending: { CHECK_SESSION_AND_SET_SIGNED_IN },
+      session: { signupInProgress: true }
+    }
+    expect(renderSnapshot(state)).toMatchSnapshot()
+  })
+
+  it('signedIn and signupInProgress matches snapshot', () => {
+    const state = {
+      pending: {},
+      session: { signedIn: true, signupInProgress: true }
+    }
+    expect(renderSnapshot(state)).toMatchSnapshot()
+  })
+
+  it('signedIn but not signupInProgress matches snapshot', () => {
+    const state = {
+      pending: {},
+      session: { signedIn: true }
+    }
+    expect(renderSnapshot(state)).toMatchSnapshot()
   })
 })

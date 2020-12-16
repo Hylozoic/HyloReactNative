@@ -2,7 +2,7 @@ import React from 'react'
 import { Provider } from 'react-redux'
 import orm from 'store/models'
 import { act } from 'react-test-renderer'
-import { render, cleanup } from '@testing-library/react-native'
+import { render } from '@testing-library/react-native'
 import RootNavigator from 'navigation'
 import { createMockStore } from 'util/testing'
 import ErrorBoundary from 'components/ErrorBoundary'
@@ -14,8 +14,6 @@ import { NavigationContainer } from '@react-navigation/native'
 // async methods. Tracking this:
 //   https://github.com/callstack/react-native-testing-library/issues/379
 describe('Navigation Specification', () => {
-  afterEach(cleanup)
-
   test('It renders Login when signedIn false', async () => {
     const state = {
       orm: orm.getEmptyState(),

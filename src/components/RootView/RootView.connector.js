@@ -10,9 +10,8 @@ export function mapStateToProps (state, props) {
   const currentUser = getMe(state, props)
   const signedIn = get('session.signedIn', state)
   const signupInProgress = get('session.signupInProgress', state)
-  const loading = props.loading
-    || state.pending[CHECK_SESSION_AND_SET_SIGNED_IN]
-    || (state.pending[FETCH_CURRENT_USER] && !signupInProgress)
+  const loading = state.pending[CHECK_SESSION_AND_SET_SIGNED_IN]
+    || state.pending[FETCH_CURRENT_USER]
 
   return {
     loading,
@@ -22,22 +21,16 @@ export function mapStateToProps (state, props) {
   }
 }
 
-export function mapDispatchToProps (dispatch) {
-  return bindActionCreators({
-    checkSessionAndSetSignedIn,
-    fetchCurrentUser
-  }, dispatch)
+export const mapDispatchToProps = {
+  checkSessionAndSetSignedIn,
+  fetchCurrentUser
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
-  const loadCurrentUserSession = () =>
-    dispatchProps
-      .checkSessionAndSetSignedIn()
-      .then(({ payload: signedIn }) => {
-        if (signedIn) {
-          return dispatchProps.fetchCurrentUser()
-        }
-      })
+  const loadCurrentUserSession = async () => {
+    const { payload: signedIn } = await dispatchProps.checkSessionAndSetSignedIn()
+    if (signedIn) await dispatchProps.fetchCurrentUser()
+  }
 
   return {
     ...ownProps,

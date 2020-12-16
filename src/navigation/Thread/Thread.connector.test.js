@@ -1,6 +1,10 @@
 import { mapStateToProps, mapDispatchToProps, mergeProps } from './Thread.connector'
 import { ALL_COMMUNITIES_ID } from 'store/models/Community'
 
+jest.mock('util/websockets', () => ({
+  sendIsTyping: jest.fn()
+}))
+
 describe('mapStateToProps', () => {
   it('returns the right keys', () => {
     const state = {
