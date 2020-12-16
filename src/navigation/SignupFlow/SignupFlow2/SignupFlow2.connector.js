@@ -19,21 +19,19 @@ export function mapDispatchToProps (dispatch, props) {
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
-  const goToNext = () => ownProps.navigation.navigate('SignupFlow3')
   const { avatarUrl } = stateProps
-  const saveAndNext = () => {
-    dispatchProps.updateUserSettings({ avatarUrl })
-      .then(({ error }) => {
-        if (error) return
-        return goToNext()
-      })
-  }
 
   return {
     ...stateProps,
     ...dispatchProps,
     ...ownProps,
-    saveAndNext
+    saveAndNext: () => {
+      dispatchProps.updateUserSettings({ avatarUrl })
+        .then(({ error }) => {
+          if (error) return
+          return ownProps.navigation.navigate('SignupFlow3')
+        })
+    }
   }
 }
 

@@ -36,13 +36,13 @@ import {
 import {
   CREATE_COMMUNITY
 } from 'navigation/CreateCommunityFlow/CreateCommunityFlow.store'
-import { FETCH_CURRENT_USER } from 'store/actions/fetchCurrentUser'
 import {
   UPDATE_MEMBERSHIP_SETTINGS_PENDING, UPDATE_ALL_MEMBERSHIP_SETTINGS_PENDING
 } from 'navigation/NotificationSettings/NotificationSettings.store'
 import {
   JOIN_PROJECT_PENDING,
-  LEAVE_PROJECT_PENDING
+  LEAVE_PROJECT_PENDING,
+  FETCH_CURRENT_USER
 } from 'store/constants'
 
 it('responds to an action with meta.extractModel', () => {

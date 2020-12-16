@@ -10,6 +10,7 @@ import routing from 'routing'
 export default function RootView ({
   loading,
   signedIn,
+  signupInProgress,
   loadCurrentUserSession,
   openedPushNotification
 }) {
@@ -29,7 +30,10 @@ export default function RootView ({
       <SafeAreaProvider>
         <VersionCheck />
         <NavigationContainer linking={routing}>
-          <RootNavigator isSignedIn={signedIn} />
+          <RootNavigator
+            signedIn={signedIn}
+            signupInProgress={signupInProgress}
+          />
         </NavigationContainer>
       </SafeAreaProvider>
     </View>

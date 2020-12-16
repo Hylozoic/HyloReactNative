@@ -55,7 +55,10 @@ export const routeMatchers = {
 
 export function redirectAfterLogin ({ currentUser, navigation, action }) {
   if (get('settings.signupInProgress', currentUser)) {
-    resetToAppRoute(navigation, 'SignupFlow1')
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'SignupFlow1' }]
+    })
   } else if (action) {
     navigation.dispatch(action)
   } else {

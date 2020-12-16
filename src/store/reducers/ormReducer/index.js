@@ -48,11 +48,11 @@ import {
   RESET_NEW_POST_COUNT_PENDING
 } from '../../actions/resetNewPostCount'
 import {
+  FETCH_CURRENT_USER,
   JOIN_PROJECT_PENDING,
   LEAVE_PROJECT_PENDING
 } from 'store/constants'
 import { PIN_POST_PENDING } from 'components/PostCard/PostHeader/PostHeader.store'
-import { FETCH_CURRENT_USER } from 'store/actions/fetchCurrentUser'
 
 export default function ormReducer (state = {}, action) {
   const session = orm.session(state)

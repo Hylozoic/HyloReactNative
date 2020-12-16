@@ -16,7 +16,7 @@ import { NavigationContainer } from '@react-navigation/native'
 describe('Navigation Specification', () => {
   afterEach(cleanup)
 
-  test('It renders Login when isSignedIn false', async () => {
+  test('It renders Login when signedIn false', async () => {
     const state = {
       orm: orm.getEmptyState(),
       FeedList: {},
@@ -28,7 +28,7 @@ describe('Navigation Specification', () => {
       <ErrorBoundary>
         <Provider store={createMockStore(state)}>
           <NavigationContainer>
-            <RootNavigator isSignedIn={false} />
+            <RootNavigator signedIn={false} />
           </NavigationContainer>
         </Provider>
       </ErrorBoundary>

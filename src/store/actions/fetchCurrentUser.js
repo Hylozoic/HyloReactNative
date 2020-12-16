@@ -1,4 +1,4 @@
-export const FETCH_CURRENT_USER = 'FETCH_CURRENT_USER'
+import { FETCH_CURRENT_USER } from 'store/constants'
 
 export default function fetchCurrentUser () {
   return {

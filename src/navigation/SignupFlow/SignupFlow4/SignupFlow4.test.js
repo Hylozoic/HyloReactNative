@@ -23,7 +23,3 @@ describe('SignupFlow4', () => {
 
     expect(actual).toMatchSnapshot()
   })
-
-  it('has navigationOptions', () =>
-    expect(SignupFlow4.navigationOptions()).toMatchSnapshot())
-})

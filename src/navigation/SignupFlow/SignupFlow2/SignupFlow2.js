@@ -19,14 +19,6 @@ export default class SignupFlow2 extends React.Component {
     }
   }
 
-  static navigationOptions = () => ({
-    headerTitle: 'STEP 2/5',
-    headerStyle: styles.headerStyle,
-    headerTitleStyle: styles.headerTitleStyle,
-    headerTintColor: styles.headerTintColor,
-    headerBackTitle: null
-  })
-
   onChoice ({ local, remote }) {
     this.props.changeSetting('avatarUrl')(remote)
     this.setState({ localUri: local })
@@ -35,7 +27,6 @@ export default class SignupFlow2 extends React.Component {
   render () {
     const { currentUser, saveAndNext, avatarUrl } = this.props
     const { localUri, imagePickerPending } = this.state
-
     const imageSource = localUri
       ? { uri: localUri }
       : avatarUrl && { uri: avatarUrl }

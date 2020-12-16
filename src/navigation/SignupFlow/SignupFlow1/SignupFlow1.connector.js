@@ -44,25 +44,43 @@ export function mapDispatchToProps (dispatch, props) {
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
-  const goToNext = () => ownProps.navigation.navigate('SignupFlow2')
   const { name, email, password, currentUser, showPasswordField } = stateProps
   const {
     signup, updateUserSettings, updateLocalUserSettings, fetchCurrentUser
   } = dispatchProps
-  const saveFunc = currentUser ? updateUserSettings : signup
+  
+  const loadUserSettings = () => (
+    updateLocalUserSettings(pick([
+      'name', 'email', 'location', 'avatarUrl', 'settings'
+    ], currentUser.ref))
+  )
 
-  const loadUserSettings = currentUser
-    ? () => updateLocalUserSettings(pick([
-        'name', 'email', 'location', 'avatarUrl', 'settings'
-      ], currentUser.ref))
-    : () => {}
+  const signupOrUpdate = () => {
+    const params = omitBy(isNil, {
+      name,
+      email,
+      password: showPasswordField
+        ? password
+        : null
+    })
+    const saveFunc = currentUser
+      ? updateUserSettings
+      : signup
 
-  const signupOrUpdate = () => saveFunc(omitBy(isNil, {
-    name,
-    email,
-    password: showPasswordField ? password : null
-  }))
-    .then(({ error }) => !error && fetchCurrentUser().then(() => goToNext()))
+    return saveFunc(params)
+      .then(({ error }) => {
+        if (!error) {
+          // if (currentUser) {
+          //   ownProps.navigation.navigate('SignupFlow2')
+          // } else {
+            fetchCurrentUser()
+              .then(() => {
+                ownProps.navigation.navigate('SignupFlow2')
+              })
+          // }
+        }
+      })
+  }
 
   return {
     ...stateProps,

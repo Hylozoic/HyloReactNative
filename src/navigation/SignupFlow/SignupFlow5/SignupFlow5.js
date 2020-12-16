@@ -17,14 +17,6 @@ import { keyboardAvoidingViewProps as kavProps } from 'util/viewHelpers'
 import { isEmpty, flow, values, filter, map } from 'lodash/fp'
 
 export default class SignupFlow5 extends React.Component {
-  static navigationOptions = () => ({
-    headerTitle: 'STEP 5/5',
-    headerStyle: styles.headerStyle,
-    headerTitleStyle: styles.headerTitleStyle,
-    headerTintColor: styles.headerTintColor,
-    headerBackTitle: null
-  })
-
   state = {
     errors: {}
   }
@@ -92,6 +84,7 @@ export default class SignupFlow5 extends React.Component {
       makeChanges, showPasswordField, goToImage, goToSkills
     } = this.props
     const { errors } = this.state
+
     return (
       <KeyboardFriendlyView style={styles.container} {...kavProps}>
         <ScrollView>

@@ -1,5 +1,5 @@
 import currentNetworkAndCommunity from './currentNetworkAndCommunity'
-import { FETCH_CURRENT_USER, SELECT_COMMUNITY } from '../actions/fetchCurrentUser'
+import { FETCH_CURRENT_USER, SELECT_COMMUNITY } from 'store/constants'
 
 describe('on SELECT_COMMUNITY', () => {
   it('returns the payload', () => {

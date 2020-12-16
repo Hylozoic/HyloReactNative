@@ -42,9 +42,6 @@ it('hides image when no url and password when no password', () => {
   expect(actual).toMatchSnapshot()
 })
 
-it('has navigationOptions', () =>
-  expect(SignupFlow5.navigationOptions()).toMatchSnapshot())
-
 describe('updateField', () => {
   it('nulls the error and calls updateLocalSetting', () => {
     const props = {

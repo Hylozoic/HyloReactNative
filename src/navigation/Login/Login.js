@@ -9,7 +9,6 @@ import {
   TouchableOpacity,
   Image
 } from 'react-native'
-import SafeAreaView from 'react-native-safe-area-view'
 import { isIOS } from 'util/platform'
 import validator from 'validator'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
@@ -94,16 +93,17 @@ export default class Login extends React.Component {
         {!isConnected && <Text style={styles.errorBanner}>OFFLINE; TRYING TO RECONNECT...</Text>}
         {pending && <Text style={styles.banner}>LOGGING IN...</Text>}
         {bannerMessage && <Text style={styles.banner}>{bannerMessage}</Text>}
-
         <Image
           style={styles.logo}
           source={require('../../assets/merkaba-green-on-white.png')}
         />
         <Text style={styles.title}>Log in to Hylo</Text>
         {formError && <FormError />}
-        {!formError && <View style={styles.labelRow}>
-          <Text style={styles.labelText}>Your email address</Text>
-        </View>}
+        {!formError && (
+          <View style={styles.labelRow}>
+            <Text style={styles.labelText}>Your email address</Text>
+          </View>
+        )}
         <View style={styles.paddedRow}>
           <View style={emailIsValid ? styles.paddedBorderValid : styles.paddedBorder}>
             <View style={styles.leftInputView}>
@@ -120,10 +120,9 @@ export default class Login extends React.Component {
               />
             </View>
             <View style={styles.rightIconView}>
-              {emailIsValid && <EntypoIcon
-                name='check'
-                style={styles.iconGreen}
-                                />}
+              {emailIsValid && (
+                <EntypoIcon name='check' style={styles.iconGreen} />
+              )}
             </View>
           </View>
         </View>

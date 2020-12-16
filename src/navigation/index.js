@@ -189,10 +189,6 @@ function AppNavigator () {
       <App.Screen name='ThreadParticipants' component={ThreadParticipants} />
       <App.Screen name='TopicSupportComingSoon' component={TopicSupportComingSoon} />
       <App.Screen name='InviteExpired' component={InviteExpired} options={{ headerShown: false }} />
-      <App.Screen name='SignupFlow2' component={SignupFlow2} />
-      <App.Screen name='SignupFlow3' component={SignupFlow3} />
-      <App.Screen name='SignupFlow4' component={SignupFlow4} />
-      <App.Screen name='SignupFlow5' component={SignupFlow5} />
       <App.Screen name='Thread' component={Thread}
         options={({ navigation }) => createNavigationOptionsForHeader(navigation)}
       />
@@ -273,18 +269,85 @@ function AppWithDrawerNavigator () {
 }
 
 const Auth = createStackNavigator()
-function AuthNavigator () {
+function AuthNavigator (props) {
   const navigatorProps = {}
 
   return (
     <Auth.Navigator {...navigatorProps}>
-      <Auth.Screen name='Login' component={Login} options={{ headerShown: false, animationEnabled: false }} />
+      <Auth.Screen name='Login' component={Login}
+        initialParams={props}
+        options={{ headerShown: false, animationEnabled: false }}
+      />
       <Auth.Screen name='ForgotPassword' component={ForgotPassword}
         options={{ title: 'Reset Your Password' }} />
       <App.Screen name='Signup' component={Signup} options={{ headerShown: false }} />
-      <App.Screen name='SignupFlow1' component={SignupFlow1}
+      <App.Screen name='SignupFlow1' component={SignupFlow1} 
         options={{
           headerTitle: 'STEP 1/5',
+          headerBackTitleVisible: false,
+          headerStyle: {
+            backgroundColor: caribbeanGreen,
+            shadowColor: 'transparent'          
+          },
+          headerTitleStyle: {
+            color: 'white',
+            fontFamily: 'Circular-Bold',
+            fontSize: 12          
+          },
+          headerTintColor: white60onCaribbeanGreen
+        }}
+      />
+      <App.Screen name='SignupFlow2' component={SignupFlow2}
+        options={{
+          headerTitle: 'STEP 2/5',
+          headerBackTitleVisible: false,
+          headerStyle: {
+            backgroundColor: caribbeanGreen,
+            shadowColor: 'transparent'          
+          },
+          headerTitleStyle: {
+            color: 'white',
+            fontFamily: 'Circular-Bold',
+            fontSize: 12          
+          },
+          headerTintColor: white60onCaribbeanGreen
+        }}
+      />
+      <App.Screen name='SignupFlow3' component={SignupFlow3}
+        options={{
+          headerTitle: 'STEP 3/5',
+          headerBackTitleVisible: false,
+          headerStyle: {
+            backgroundColor: caribbeanGreen,
+            shadowColor: 'transparent'          
+          },
+          headerTitleStyle: {
+            color: 'white',
+            fontFamily: 'Circular-Bold',
+            fontSize: 12          
+          },
+          headerTintColor: white60onCaribbeanGreen
+        }}
+      />
+      <App.Screen name='SignupFlow4' component={SignupFlow4}
+        options={{
+          headerTitle: 'STEP 4/5',
+          headerBackTitleVisible: false,
+          headerStyle: {
+            backgroundColor: caribbeanGreen,
+            shadowColor: 'transparent'          
+          },
+          headerTitleStyle: {
+            color: 'white',
+            fontFamily: 'Circular-Bold',
+            fontSize: 12          
+          },
+          headerTintColor: white60onCaribbeanGreen
+        }}
+      />
+      <App.Screen name='SignupFlow5' component={SignupFlow5}
+        options={{
+          headerTitle: 'STEP 5/5',
           headerBackTitleVisible: false,
           headerStyle: {
             backgroundColor: caribbeanGreen,
@@ -302,8 +365,8 @@ function AuthNavigator () {
   )
 }
 
-export default function RootNavigator ({ isSignedIn }) {
-  return isSignedIn
-    ? <AppWithDrawerNavigator />
-    : <AuthNavigator />
+export default function RootNavigator ({ signedIn, signupInProgress }) {
+  return signupInProgress || !signedIn
+    ? <AuthNavigator signupInProgress={signupInProgress} />
+    : <AppWithDrawerNavigator />
 }

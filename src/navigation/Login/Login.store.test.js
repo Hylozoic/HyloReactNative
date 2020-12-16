@@ -1,6 +1,6 @@
 import { getPending } from './Login.store'
 import { LOGIN, LOGIN_WITH_FACEBOOK, LOGIN_WITH_GOOGLE } from './actions'
-import { FETCH_CURRENT_USER } from 'store/actions/fetchCurrentUser'
+import { FETCH_CURRENT_USER } from 'store/constants'
 
 describe('getPending', () => {
   const defaultPending = {

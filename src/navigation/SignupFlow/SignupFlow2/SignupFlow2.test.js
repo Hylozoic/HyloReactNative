@@ -64,6 +64,3 @@ it('handles choice', () => {
   expect(props.changeSetting.mock.calls).toEqual([['avatarUrl']])
   expect(instance.state).toMatchSnapshot()
 })
-
-it('has navigationOptions', () =>
-  expect(SignupFlow2.navigationOptions()).toMatchSnapshot())

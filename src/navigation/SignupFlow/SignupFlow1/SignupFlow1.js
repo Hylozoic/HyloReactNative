@@ -54,6 +54,7 @@ export default class SignupFlow1 extends React.Component {
   }
 
   submit = () => {
+    if (this.props.pending) return
     if (this.validate()) {
       this.props.signupOrUpdate()
     }
@@ -72,10 +73,6 @@ export default class SignupFlow1 extends React.Component {
   render () {
     const { name, email, password, confirmPassword, pending, showPasswordField } = this.props
     const { errors } = this.state
-
-    const submitUnlessPending = pending
-      ? () => {}
-      : this.submit
 
     return (
       <KeyboardFriendlyView style={styles.container} {...kavProps}>
@@ -122,12 +119,12 @@ export default class SignupFlow1 extends React.Component {
             toggleSecureTextEntry
             error={errors.confirmPassword}
             returnKeyType='go'
-            onSubmitEditing={submitUnlessPending}
+            onSubmitEditing={this.submit}
                                 />}
           <Button
             style={styles.continueButton}
             text={pending ? 'Saving...' : 'Continue'}
-            onPress={submitUnlessPending}
+            onPress={this.submit}
             disabled={!!pending}
           />
         </ScrollView>

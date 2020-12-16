@@ -21,9 +21,6 @@ it('matches last snapshot', () => {
   expect(actual).toMatchSnapshot()
 })
 
-it('has navigationOptions', () =>
-  expect(SignupFlow3.navigationOptions()).toMatchSnapshot())
-
 describe('saveAndNext', () => {
   it('blurs control and calls prop', () => {
     const props = {
