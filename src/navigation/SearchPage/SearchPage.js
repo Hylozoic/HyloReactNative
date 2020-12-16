@@ -4,7 +4,6 @@ import SafeAreaView from 'react-native-safe-area-view'
 import Loading from 'components/Loading'
 import Avatar from 'components/Avatar'
 import styles from './SearchPage.styles'
-import header from 'navigation/header'
 import Icon from 'components/Icon'
 import UnwrappedPostCard from 'components/PostCard'
 import PostHeader from 'components/PostCard/PostHeader'
@@ -162,7 +161,7 @@ export function PersonCard ({ person, goToPerson }) {
         <Avatar avatarUrl={avatarUrl} style={styles.avatar} />
         <View style={styles.nameAndLocation}>
           <Text style={styles.name}>{name}</Text>
-          {location.length > 0 && <Text style={styles.location}>{location}</Text>}
+          {location && location.length > 0 && <Text style={styles.location}>{location}</Text>}
         </View>
       </View>
     </TouchableOpacity>
