@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, ScrollView } from 'react-native'
+import { View, Text } from 'react-native'
 import SafeAreaView from 'react-native-safe-area-view'
 import SettingControl from 'components/SettingControl'
 import Button from 'components/Button'
@@ -71,7 +71,7 @@ export default class SignupFlow1 extends React.Component {
   render () {
     const { name, email, password, confirmPassword, pending, showPasswordField } = this.props
     const { errors } = this.state
-
+  
     return (
       <SafeAreaView style={styles.container}>
         <KeyboardFriendlyView {...kavProps}>

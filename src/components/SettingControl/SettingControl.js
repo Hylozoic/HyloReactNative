@@ -93,41 +93,39 @@ export default class SettingControl extends React.Component {
           onSubmitEditing={this.onSubmitEditing}
           editable={editable}
         />
-        {(toggleSecureTextEntry || toggleEditable) && <View style={styles.toggles}>
-          {toggleSecureTextEntry && <TouchableOpacity
-            onPress={this.togglePassword}
-            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
-                                    >
-            <EntypoIcon
-              name={securePassword ? 'eye' : 'eye-with-line'}
-              style={styles.eyeIcon}
-            />
-          </TouchableOpacity>}
-          {toggleEditable && <View
-            style={highlight && styles.highlight}
-                             >
-            <TouchableOpacity
-              onPress={this.toggleEditable}
-              hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
-            >
-              <EntypoIcon
-                name={editable ? 'check' : 'edit'}
-                style={styles.editIcon}
-              />
-            </TouchableOpacity>
-          </View>}
-                                                      </View>}
-        {!!error && <View style={[styles.errorWrapper, theme.errorWrapper]}>
-          {!theme.hideErrorTriangle && <Triangle
-            width={10}
-            height={5}
-            color='white'
-            direction='up'
-                                       />}
-          <View style={[styles.error, theme.error]}>
-            <Text style={styles.errorText}>{error}</Text>
+        {(toggleSecureTextEntry || toggleEditable) && (
+          <View style={styles.toggles}>
+            {toggleSecureTextEntry && (
+              <TouchableOpacity
+                onPress={this.togglePassword}
+                hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}>
+                <EntypoIcon
+                  name={securePassword ? 'eye' : 'eye-with-line'}
+                  style={styles.eyeIcon}
+                />
+              </TouchableOpacity>
+            )}
+            {toggleEditable && (
+              <View style={highlight && styles.highlight}>
+                <TouchableOpacity
+                  onPress={this.toggleEditable}
+                  hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}>
+                  <EntypoIcon name={editable ? 'check' : 'edit'} style={styles.editIcon} />
+                </TouchableOpacity>
+              </View>
+            )}
           </View>
-                    </View>}
+        )}
+        {!!error && (
+          <View style={[styles.errorWrapper, theme.errorWrapper]}>
+            {!theme.hideErrorTriangle && (
+              <Triangle width={10} height={5} color='white' direction='up' />
+            )}
+            <View style={[styles.error, theme.error]}>
+              <Text style={styles.errorText}>{error}</Text>
+            </View>
+          </View>
+        )}
       </View>
     )
   }

@@ -55,16 +55,14 @@ export default {
     marginBottom: 10
   },
   error: {
-    paddingVertical: 17,
+    paddingVertical: 8,
+    paddingHorizontal: 10,
     backgroundColor: 'white',
-    justifyContent: 'center',
-    alignItems: 'center',
-    flex: 1,
     borderRadius: 100
   },
   errorText: {
     color: amaranth,
-    fontSize: 12
+    fontSize: 10
   },
   highlight: {
     backgroundColor: '#99EEFF',
