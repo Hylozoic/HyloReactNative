@@ -43,6 +43,7 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
       navigation.closeDrawer()
       const { id } = community
       dispatchProps.selectCommunity(id)
+      navigation.navigate('Home', { communityId: id })
     }
   }
 }

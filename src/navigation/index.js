@@ -54,7 +54,7 @@ import SignupFlow3 from 'navigation/SignupFlow/SignupFlow3'
 import SignupFlow4 from 'navigation/SignupFlow/SignupFlow4'
 import SignupFlow5 from 'navigation/SignupFlow/SignupFlow5'
 import UserSettings from 'navigation/UserSettings'
-import { gunsmoke, caribbeanGreen } from 'style/colors'
+import { gunsmoke, caribbeanGreen, white, white60onCaribbeanGreen } from 'style/colors'
 
 const Tabs = createBottomTabNavigator()
 function TabsNavigator () {
@@ -103,12 +103,24 @@ function AppNavigator () {
 
   return (
     <App.Navigator {...navigatorProps}>
-      <App.Screen name='Main' component={TabsNavigator}
+      <App.Screen name='Home' component={TabsNavigator}
         options={({ navigation, route }) =>
           createNavigationOptionsForHeader(navigation, getFocusedRouteNameFromRoute(route))}
       />
       {/* Screens as modals outside of Tabs */}
       <App.Screen name='TopicFeed' component={Feed}
+        // it('sets the title to the community if there is a topic', () => {
+        //   const route = {
+        //     params: {
+        //       communityName: 'test community',
+        //       topicName: 'math'
+        //     }
+        //   }
+
+        //   expect(Feed.navigationOptions({ route })).toEqual({
+        //     headerTitle: 'test community'
+        //   })
+        // })
         options={({ route }) => ({
           // TODO: Not currently getting communityName into header?
           title: get('params.communityName', route)
@@ -186,9 +198,55 @@ function AppNavigator () {
       />
       <App.Screen name='JoinCommunity' component={JoinCommunity} options={{ headerShown: false}} />
       <App.Screen name='Loading' component={LoadingScreen} />
-      <App.Screen name='CreateCommunityName' component={CreateCommunityName} />
-      <App.Screen name='CreateCommunityUrl' component={CreateCommunityUrl} />
-      <App.Screen name='CreateCommunityReview' component={CreateCommunityReview} />
+      <App.Screen name='CreateCommunityName' component={CreateCommunityName}
+        options={{
+          headerTitle: 'STEP 1/3',
+          headerBackTitleVisible: false,
+          headerStyle: {
+            backgroundColor: caribbeanGreen,
+            shadowColor: 'transparent'          
+          },
+          headerTitleStyle: {
+            color: 'white',
+            fontFamily: 'Circular-Bold',
+            fontSize: 12          
+          },
+          headerTintColor: white60onCaribbeanGreen
+        }}
+      />
+      <App.Screen name='CreateCommunityUrl' component={CreateCommunityUrl}
+        options={{
+          headerTitle: 'STEP 2/3',
+          headerBackTitleVisible: false,
+          headerStyle: {
+            backgroundColor: caribbeanGreen,
+            shadowColor: 'transparent'          
+          },
+          headerTitleStyle: {
+            color: 'white',
+            fontFamily: 'Circular-Bold',
+            fontSize: 12          
+          },
+          headerTintColor: white60onCaribbeanGreen
+        }}
+      />
+      <App.Screen name='CreateCommunityReview' component={CreateCommunityReview}
+        // import createCommunityHeader from '../util/createCommunityHeader'
+        options={{
+          headerTitle: 'STEP 3/3',
+          headerBackTitleVisible: false,
+          headerStyle: {
+            backgroundColor: caribbeanGreen,
+            shadowColor: 'transparent'          
+          },
+          headerTitleStyle: {
+            color: 'white',
+            fontFamily: 'Circular-Bold',
+            fontSize: 12          
+          },
+          headerTintColor: white60onCaribbeanGreen
+        }}
+      />
       <App.Screen name='NotificationSettings' component={NotificationSettings} options={{ title: 'Notification Settings' }} />
       <App.Screen name='BlockedUsers' component={BlockedUsers} options={{ title: 'Blocked Users' }} />
       <App.Screen name='SearchPage' component={SearchPage} options={{ title: 'Search' }} />
@@ -224,7 +282,22 @@ function AuthNavigator () {
       <Auth.Screen name='ForgotPassword' component={ForgotPassword}
         options={{ title: 'Reset Your Password' }} />
       <App.Screen name='Signup' component={Signup} options={{ headerShown: false }} />
-      <App.Screen name='SignupFlow1' component={SignupFlow1} />
+      <App.Screen name='SignupFlow1' component={SignupFlow1}
+        options={{
+          headerTitle: 'STEP 1/5',
+          headerBackTitleVisible: false,
+          headerStyle: {
+            backgroundColor: caribbeanGreen,
+            shadowColor: 'transparent'          
+          },
+          headerTitleStyle: {
+            color: 'white',
+            fontFamily: 'Circular-Bold',
+            fontSize: 12          
+          },
+          headerTintColor: white60onCaribbeanGreen
+        }}
+      />
     </Auth.Navigator>
   )
 }

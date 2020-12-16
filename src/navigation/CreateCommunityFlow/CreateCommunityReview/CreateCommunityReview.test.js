@@ -97,8 +97,3 @@ it('creates an error on submit if the promise is rejected', () => {
       expect(instance.state.error).toBeTruthy()
     })
 })
-
-it('has navigationOptions', () => {
-  const navigation = jest.fn()
-  expect(CreateCommunityReview.navigationOptions(navigation)).toMatchSnapshot()
-})

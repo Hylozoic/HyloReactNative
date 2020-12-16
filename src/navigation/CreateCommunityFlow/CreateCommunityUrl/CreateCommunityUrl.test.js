@@ -94,11 +94,6 @@ it('does not call fetchCommunityExists on checkAndSubmit with malformed url', ()
   expect(props.fetchCommunityExists).toHaveBeenCalledTimes(0)
 })
 
-it('has navigationOptions', () => {
-  const navigation = jest.fn()
-  expect(CreateCommunityUrl.navigationOptions(navigation)).toMatchSnapshot()
-})
-
 describe('checkCommunityUrlThenRedirect', () => {
   it('stores the community url and redirects with appropriate url', () => {
     const result = {

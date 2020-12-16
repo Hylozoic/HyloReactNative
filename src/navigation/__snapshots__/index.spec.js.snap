@@ -106,6 +106,7 @@ exports[`Navigation Specification It renders Login when isSignedIn false 1`] = `
             style={
               Object {
                 "flex": 1,
+                "marginTop": 0,
               }
             }
           >
@@ -374,105 +375,6 @@ exports[`Navigation Specification It renders Login when isSignedIn false 1`] = `
                       </RCTScrollView>
                     </SafeAreaView>
                   </View>
-                  <View
-                    pointerEvents="box-none"
-                  >
-                    <View
-                      accessibilityElementsHidden={false}
-                      importantForAccessibility="auto"
-                      onLayout={[Function]}
-                      pointerEvents="box-none"
-                      style={null}
-                    >
-                      <View
-                        pointerEvents="box-none"
-                        style={
-                          Object {
-                            "bottom": 0,
-                            "left": 0,
-                            "position": "absolute",
-                            "right": 0,
-                            "top": 0,
-                            "zIndex": 0,
-                          }
-                        }
-                      >
-                        <View
-                          style={
-                            Object {
-                              "backgroundColor": "rgb(255, 255, 255)",
-                              "borderBottomColor": "rgb(216, 216, 216)",
-                              "flex": 1,
-                              "shadowColor": "rgb(216, 216, 216)",
-                              "shadowOffset": Object {
-                                "height": 0.5,
-                                "width": 0,
-                              },
-                              "shadowOpacity": 0.85,
-                              "shadowRadius": 0,
-                            }
-                          }
-                        />
-                      </View>
-                      <View
-                        pointerEvents="box-none"
-                        style={
-                          Object {
-                            "height": 64,
-                            "maxHeight": undefined,
-                            "minHeight": undefined,
-                            "opacity": undefined,
-                            "transform": undefined,
-                          }
-                        }
-                      >
-                        <View
-                          pointerEvents="none"
-                          style={
-                            Object {
-                              "height": 20,
-                            }
-                          }
-                        />
-                        <View
-                          pointerEvents="box-none"
-                          style={
-                            Object {
-                              "alignItems": "center",
-                              "flex": 1,
-                              "flexDirection": "row",
-                              "justifyContent": "center",
-                            }
-                          }
-                        >
-                          <View
-                            pointerEvents="box-none"
-                            style={
-                              Object {
-                                "marginHorizontal": 16,
-                              }
-                            }
-                          >
-                            <Text
-                              accessibilityRole="header"
-                              aria-level="1"
-                              numberOfLines={1}
-                              onLayout={[Function]}
-                              style={
-                                Object {
-                                  "color": "rgb(28, 28, 30)",
-                                  "fontSize": 17,
-                                  "fontWeight": "600",
-                                }
-                              }
-                            >
-                              Login
-                            </Text>
-                          </View>
-                        </View>
-                      </View>
-                    </View>
-                  </View>
                 </View>
               </View>
             </View>
@@ -480,6 +382,19 @@ exports[`Navigation Specification It renders Login when isSignedIn false 1`] = `
         </View>
       </View>
     </View>
+    <View
+      pointerEvents="box-none"
+      style={
+        Object {
+          "height": 64,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+          "zIndex": 1,
+        }
+      }
+    />
   </RNCSafeAreaProvider>
 </View>
 `;

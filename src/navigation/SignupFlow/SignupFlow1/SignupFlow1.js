@@ -13,14 +13,6 @@ import { any, values } from 'lodash/fp'
 import { keyboardAvoidingViewProps as kavProps } from 'util/viewHelpers'
 
 export default class SignupFlow1 extends React.Component {
-  static navigationOptions = () => ({
-    headerTitle: 'STEP 1/5',
-    headerStyle: styles.headerStyle,
-    headerTitleStyle: styles.headerTitleStyle,
-    headerTintColor: styles.headerTintColor,
-    headerBackTitle: null
-  })
-
   componentDidMount () {
     const { currentUser, loadUserSettings } = this.props
     // this is for the case where they logged in but hadn't finished sign up

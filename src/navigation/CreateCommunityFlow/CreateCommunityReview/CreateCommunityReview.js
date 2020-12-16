@@ -3,21 +3,15 @@ import {
   Text,
   View,
   TextInput,
-  TouchableOpacity,
-  ScrollView
+  TouchableOpacity
 } from 'react-native'
 import Button from 'components/Button'
 import KeyboardFriendlyView from 'navigation/KeyboardFriendlyView'
 import ErrorBubble from 'components/ErrorBubble'
-import createCommunityHeader from '../util/createCommunityHeader'
 import styles from '../CreateCommunityFlow.styles'
+import SafeAreaView from 'react-native-safe-area-view'
 
 export default class CreateCommunityReview extends React.Component {
-  static navigationOptions = ({ navigation, route }) => {
-    const title = 'STEP 3/3'
-    return createCommunityHeader(title, navigation)
-  }
-
   constructor (props) {
     super(props)
     this.state = {
@@ -51,42 +45,48 @@ export default class CreateCommunityReview extends React.Component {
   render () {
     const { error } = this.state
     return (
-      <ScrollView>
-        <KeyboardFriendlyView style={styles.container}>
-          <Text style={styles.header}>Everything look good?</Text>
-          <Text style={styles.description}>You can always come back and change your details at any time</Text>
-          <View style={styles.reviewTextInputContainer}>
-            <Text style={styles.textInputLabel}>What's the name of your community?</Text>
-            <View style={styles.textInputWithButton}>
-              <TextInput
-                style={styles.reviewTextInput}
-                value={this.state.communityName}
-                underlineColorAndroid={styles.androidInvisibleUnderline}
-                disabled
-              />
-              <TouchableOpacity onPress={this.props.goToCreateCommunityName} style={styles.editContainer}>
-                <Text style={styles.editText}>Edit</Text>
-              </TouchableOpacity>
-            </View>
+      <SafeAreaView style={styles.container}>
+        <KeyboardFriendlyView>
+          <View style={styles.header}>
+            <Text style={styles.heading}>Everything look good?</Text>
+            <Text style={styles.description}>You can always come back and change your details at any time</Text>
           </View>
-          <View style={styles.secondTextInputContainer}>
-            <Text style={styles.textInputLabel}>What's the url of your community?</Text>
-            <View style={styles.textInputWithButton}>
-              <TextInput
-                style={styles.reviewTextInput}
-                value={this.state.communityUrl}
-                underlineColorAndroid={styles.androidInvisibleUnderline}
-                disabled
-              />
-              <TouchableOpacity onPress={this.props.goToCreateCommunityUrl} style={styles.editContainer}>
-                <Text style={styles.editText}>Edit</Text>
-              </TouchableOpacity>
+          <View style={styles.content}>
+            <View style={styles.textInputContainer}>
+              <Text style={styles.textInputLabel}>What's the name of your community?</Text>
+              <View style={styles.textInputWithButton}>
+                <TextInput
+                  style={styles.textInput}
+                  value={this.state.communityName}
+                  underlineColorAndroid={styles.androidInvisibleUnderline}
+                  disabled
+                />
+                <TouchableOpacity onPress={this.props.goToCreateCommunityName} style={styles.editContainer}>
+                  <Text style={styles.editText}>Edit</Text>
+                </TouchableOpacity>
+              </View>
             </View>
+            <View style={styles.textInputContainer}>
+              <Text style={styles.textInputLabel}>What's the url of your community?</Text>
+              <View style={styles.textInputWithButton}>
+                <TextInput
+                  style={styles.textInput}
+                  value={this.state.communityUrl}
+                  underlineColorAndroid={styles.androidInvisibleUnderline}
+                  disabled
+                />
+                <TouchableOpacity onPress={this.props.goToCreateCommunityUrl} style={styles.editContainer}>
+                  <Text style={styles.editText}>Edit</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+            {error && <View style={styles.errorBubble}><ErrorBubble text={error} /></View>}
           </View>
-          {error && <View style={styles.errorBubble}><ErrorBubble text={error} /></View>}
-          <Button text="Let's Do This!" onPress={this.submit} style={styles.button} disabled={!!this.props.createCommunityPending} />
+          <View style={styles.footer}>
+            <Button text="Let's Do This!" onPress={this.submit} style={styles.button} disabled={!!this.props.createCommunityPending} />
+          </View>
         </KeyboardFriendlyView>
-      </ScrollView>
+      </SafeAreaView>
     )
   }
 }

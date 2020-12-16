@@ -2,9 +2,9 @@ import React from 'react'
 import {
   Text,
   View,
-  TextInput,
-  ScrollView
+  TextInput
 } from 'react-native'
+import SafeAreaView from 'react-native-safe-area-view'
 import { get } from 'lodash/fp'
 import ErrorBubble from 'components/ErrorBubble'
 import KeyboardFriendlyView from 'navigation/KeyboardFriendlyView'
@@ -15,15 +15,9 @@ import {
   removeUrlFromDomain
 } from '../util'
 import Button from 'components/Button'
-import createCommunityHeader from '../util/createCommunityHeader'
 import styles from '../CreateCommunityFlow.styles'
 
 export default class CreateCommunityUrl extends React.Component {
-  static navigationOptions = ({ navigation, route }) => {
-    const title = 'STEP 2/3'
-    return createCommunityHeader(title, navigation)
-  }
-
   constructor (props) {
     super(props)
     this.state = {
@@ -80,26 +74,32 @@ export default class CreateCommunityUrl extends React.Component {
   render () {
     const { error, communityUrl } = this.state
     return (
-      <ScrollView>
-        <KeyboardFriendlyView style={styles.container}>
-          <Text style={styles.header}>Choose an address for your community</Text>
-          <Text style={styles.description}>Your URL is the address that members will use to access your community online. The shorter the better!</Text>
-          <View style={styles.urlTextInputContainer}>
-            <Text style={styles.textInputLabel}>What's the address for your community?</Text>
-            <TextInput
-              style={styles.textInput}
-              onChangeText={communityUrl => this.setInput('communityUrl', removeUrlFromDomain(communityUrl))}
-              returnKeyType='next'
-              autoCapitalize='none'
-              value={formatDomainWithUrl(communityUrl)}
-              autoCorrect={false}
-              underlineColorAndroid={styles.androidInvisibleUnderline}
-            />
+      <SafeAreaView style={styles.container}>
+        <KeyboardFriendlyView>
+          <View style={styles.header}>
+            <Text style={styles.heading}>Choose an address for your community</Text>
+            <Text style={styles.description}>Your URL is the address that members will use to access your community online. The shorter the better!</Text>
           </View>
-          {error && <View style={styles.errorBubble}><ErrorBubble text={error} topArrow /></View>}
-          <Button text='Continue' onPress={this.checkAndSubmit} style={styles.button} disabled={!!this.props.fetchUrlPending} />
+          <View style={styles.content}>
+            <View style={styles.textInputContainer}>
+              <Text style={styles.textInputLabel}>What's the address for your community?</Text>
+              <TextInput
+                style={styles.textInput}
+                onChangeText={communityUrl => this.setInput('communityUrl', removeUrlFromDomain(communityUrl))}
+                returnKeyType='next'
+                autoCapitalize='none'
+                value={formatDomainWithUrl(communityUrl)}
+                autoCorrect={false}
+                underlineColorAndroid={styles.androidInvisibleUnderline}
+              />
+            </View>
+            {error && <View style={styles.errorBubble}><ErrorBubble text={error} topArrow /></View>}
+          </View>
+          <View style={styles.footer}>
+            <Button text='Continue' onPress={this.checkAndSubmit} style={styles.button} disabled={!!this.props.fetchUrlPending} />
+          </View>
         </KeyboardFriendlyView>
-      </ScrollView>
+      </SafeAreaView>
     )
   }
 }

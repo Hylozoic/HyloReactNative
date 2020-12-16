@@ -1,68 +1,55 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`has navigationOptions 1`] = `
-Object {
-  "color": "#FFFFFF",
-  "fontSize": 10,
-  "headerBackgroundColor": "#0DC39F",
-  "headerLeft": [Function],
-  "headerStyle": Object {
-    "backgroundColor": "#0DC39F",
-    "borderBottomWidth": 0,
-    "elevation": 0,
-    "shadowOffset": Object {
-      "height": 0,
-    },
-    "shadowRadius": 0,
-  },
-  "title": <Text>
-    STEP 2/3
-  </Text>,
-}
-`;
-
 exports[`matches last snapshot 1`] = `
-<ScrollView>
+<SafeAreaViewMock>
   <KeyboardFriendlyView>
-    <Text>
-      Choose an address for your community
-    </Text>
-    <Text>
-      Your URL is the address that members will use to access your community online. The shorter the better!
-    </Text>
     <View>
-      <Text>
-        What's the address for your community?
-      </Text>
-      <Component
-        allowFontScaling={true}
-        autoCapitalize="none"
-        autoCorrect={false}
-        onChangeText={[Function]}
-        rejectResponderTermination={true}
-        returnKeyType="next"
-        underlineColorAndroid="rgba(0,0,0,0)"
-      />
-    </View>
-    <Button
-      disabled={false}
-      onPress={[Function]}
-      text="Continue"
-    />
-  </KeyboardFriendlyView>
-</ScrollView>
-`;
-
-exports[`matches last snapshot when there is an error 1`] = `
-<RCTScrollView>
-  <View>
-    <KeyboardFriendlyView>
       <Text>
         Choose an address for your community
       </Text>
       <Text>
         Your URL is the address that members will use to access your community online. The shorter the better!
       </Text>
+    </View>
+    <View>
+      <View>
+        <Text>
+          What's the address for your community?
+        </Text>
+        <Component
+          allowFontScaling={true}
+          autoCapitalize="none"
+          autoCorrect={false}
+          onChangeText={[Function]}
+          rejectResponderTermination={true}
+          returnKeyType="next"
+          underlineColorAndroid="rgba(0,0,0,0)"
+        />
+      </View>
+    </View>
+    <View>
+      <Button
+        disabled={false}
+        onPress={[Function]}
+        text="Continue"
+      />
+    </View>
+  </KeyboardFriendlyView>
+</SafeAreaViewMock>
+`;
+
+exports[`matches last snapshot when there is an error 1`] = `
+<SafeAreaView>
+  <KeyboardFriendlyView>
+    <View>
+      <Text>
+        Choose an address for your community
+      </Text>
+      <Text>
+        Your URL is the address that members will use to access your community online. The shorter the better!
+      </Text>
+    </View>
+    <View>
       <View>
         <Text>
           What's the address for your community?
@@ -87,6 +74,8 @@ exports[`matches last snapshot when there is an error 1`] = `
           </View>
         </View>
       </View>
+    </View>
+    <View>
       <View>
         <View
           accessible={true}
@@ -108,21 +97,23 @@ exports[`matches last snapshot when there is an error 1`] = `
           </View>
         </View>
       </View>
-    </KeyboardFriendlyView>
-  </View>
-</RCTScrollView>
+    </View>
+  </KeyboardFriendlyView>
+</SafeAreaView>
 `;
 
 exports[`validates the url 1`] = `
-<RCTScrollView>
-  <View>
-    <KeyboardFriendlyView>
+<SafeAreaView>
+  <KeyboardFriendlyView>
+    <View>
       <Text>
         Choose an address for your community
       </Text>
       <Text>
         Your URL is the address that members will use to access your community online. The shorter the better!
       </Text>
+    </View>
+    <View>
       <View>
         <Text>
           What's the address for your community?
@@ -147,6 +138,8 @@ exports[`validates the url 1`] = `
           </View>
         </View>
       </View>
+    </View>
+    <View>
       <View>
         <View
           accessible={true}
@@ -168,21 +161,23 @@ exports[`validates the url 1`] = `
           </View>
         </View>
       </View>
-    </KeyboardFriendlyView>
-  </View>
-</RCTScrollView>
+    </View>
+  </KeyboardFriendlyView>
+</SafeAreaView>
 `;
 
 exports[`validates the url 2`] = `
-<RCTScrollView>
-  <View>
-    <KeyboardFriendlyView>
+<SafeAreaView>
+  <KeyboardFriendlyView>
+    <View>
       <Text>
         Choose an address for your community
       </Text>
       <Text>
         Your URL is the address that members will use to access your community online. The shorter the better!
       </Text>
+    </View>
+    <View>
       <View>
         <Text>
           What's the address for your community?
@@ -207,6 +202,8 @@ exports[`validates the url 2`] = `
           </View>
         </View>
       </View>
+    </View>
+    <View>
       <View>
         <View
           accessible={true}
@@ -228,7 +225,7 @@ exports[`validates the url 2`] = `
           </View>
         </View>
       </View>
-    </KeyboardFriendlyView>
-  </View>
-</RCTScrollView>
+    </View>
+  </KeyboardFriendlyView>
+</SafeAreaView>
 `;

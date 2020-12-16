@@ -1,90 +1,77 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`has navigationOptions 1`] = `
-Object {
-  "color": "#FFFFFF",
-  "fontSize": 10,
-  "headerBackgroundColor": "#0DC39F",
-  "headerLeft": [Function],
-  "headerStyle": Object {
-    "backgroundColor": "#0DC39F",
-    "borderBottomWidth": 0,
-    "elevation": 0,
-    "shadowOffset": Object {
-      "height": 0,
-    },
-    "shadowRadius": 0,
-  },
-  "title": <Text>
-    STEP 3/3
-  </Text>,
-}
-`;
-
 exports[`matches last snapshot 1`] = `
-<ScrollView>
+<SafeAreaViewMock>
   <KeyboardFriendlyView>
-    <Text>
-      Everything look good?
-    </Text>
-    <Text>
-      You can always come back and change your details at any time
-    </Text>
     <View>
-      <Text>
-        What's the name of your community?
-      </Text>
-      <View>
-        <Component
-          allowFontScaling={true}
-          disabled={true}
-          rejectResponderTermination={true}
-          underlineColorAndroid="rgba(0,0,0,0)"
-        />
-        <ForwardRef>
-          <Text>
-            Edit
-          </Text>
-        </ForwardRef>
-      </View>
-    </View>
-    <View>
-      <Text>
-        What's the url of your community?
-      </Text>
-      <View>
-        <Component
-          allowFontScaling={true}
-          disabled={true}
-          rejectResponderTermination={true}
-          underlineColorAndroid="rgba(0,0,0,0)"
-        />
-        <ForwardRef>
-          <Text>
-            Edit
-          </Text>
-        </ForwardRef>
-      </View>
-    </View>
-    <Button
-      disabled={false}
-      onPress={[Function]}
-      text="Let's Do This!"
-    />
-  </KeyboardFriendlyView>
-</ScrollView>
-`;
-
-exports[`matches last snapshot when visible is true 1`] = `
-<RCTScrollView>
-  <View>
-    <KeyboardFriendlyView>
       <Text>
         Everything look good?
       </Text>
       <Text>
         You can always come back and change your details at any time
       </Text>
+    </View>
+    <View>
+      <View>
+        <Text>
+          What's the name of your community?
+        </Text>
+        <View>
+          <Component
+            allowFontScaling={true}
+            disabled={true}
+            rejectResponderTermination={true}
+            underlineColorAndroid="rgba(0,0,0,0)"
+          />
+          <ForwardRef>
+            <Text>
+              Edit
+            </Text>
+          </ForwardRef>
+        </View>
+      </View>
+      <View>
+        <Text>
+          What's the url of your community?
+        </Text>
+        <View>
+          <Component
+            allowFontScaling={true}
+            disabled={true}
+            rejectResponderTermination={true}
+            underlineColorAndroid="rgba(0,0,0,0)"
+          />
+          <ForwardRef>
+            <Text>
+              Edit
+            </Text>
+          </ForwardRef>
+        </View>
+      </View>
+    </View>
+    <View>
+      <Button
+        disabled={false}
+        onPress={[Function]}
+        text="Let's Do This!"
+      />
+    </View>
+  </KeyboardFriendlyView>
+</SafeAreaViewMock>
+`;
+
+exports[`matches last snapshot when visible is true 1`] = `
+<SafeAreaView>
+  <KeyboardFriendlyView>
+    <View>
+      <Text>
+        Everything look good?
+      </Text>
+      <Text>
+        You can always come back and change your details at any time
+      </Text>
+    </View>
+    <View>
       <View>
         <Text>
           What's the name of your community?
@@ -150,6 +137,8 @@ exports[`matches last snapshot when visible is true 1`] = `
           </View>
         </View>
       </View>
+    </View>
+    <View>
       <View>
         <View
           accessible={true}
@@ -171,7 +160,7 @@ exports[`matches last snapshot when visible is true 1`] = `
           </View>
         </View>
       </View>
-    </KeyboardFriendlyView>
-  </View>
-</RCTScrollView>
+    </View>
+  </KeyboardFriendlyView>
+</SafeAreaView>
 `;

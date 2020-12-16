@@ -32,7 +32,6 @@ exports[`renders correctly if currentUserHasMemberships 1`] = `
       </View>
     }
     navigation={Object {}}
-    showMember={[Function]}
     showPost={[Function]}
     showTopic={[Function]}
     topicName="amazing"

@@ -10,7 +10,9 @@ beforeEach(() => {
 
 describe('mapStateToProps', () => {
   it('handles a null navigation object', () => {
-    const props = {}
+    const props = {
+      route: {}
+    }
     expect(mapStateToProps(state, props)).toEqual({
       community: undefined,
       currentUser: undefined,
