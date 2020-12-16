@@ -10,14 +10,8 @@ import KeyboardFriendlyView from 'navigation/KeyboardFriendlyView'
 import { keyboardAvoidingViewProps as kavProps } from 'util/viewHelpers'
 import ErrorBubble from 'components/ErrorBubble'
 import styles from '../CreateCommunityFlow.styles'
-import createCommunityHeader from '../util/createCommunityHeader'
 
 export default class CreateCommunityName extends React.Component {
-  static navigationOptions = ({ navigation, route }) => {
-    const title = 'STEP 1/3'
-    return createCommunityHeader(title, navigation)
-  }
-
   constructor (props) {
     super(props)
     this.state = {

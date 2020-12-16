@@ -9,7 +9,6 @@ import SafeAreaView from 'react-native-safe-area-view'
 import Avatar from 'components/Avatar'
 import Icon from 'components/Icon'
 import { keyboardAvoidingViewProps as kavProps } from 'util/viewHelpers'
-import header from 'navigation/header'
 import confirmDiscardChanges from 'util/confirmDiscardChanges'
 import LoadingScreen from 'navigation/LoadingScreen'
 import Button from 'components/Button'
@@ -21,14 +20,6 @@ import PersonPickerItemRow from 'navigation/ItemChooser/PersonPickerItemRow'
 import styles from './NewMessage.styles'
 
 export default class NewMessage extends React.Component {
-  static navigationOptions = ({ navigation, route }) => {
-    const confirmLeave = route.params.confirmLeave || (() => {})
-    return header(navigation, route, {
-      headerBackButton: () => confirmLeave(navigation.goBack),
-      title: 'New Message'
-    })
-  }
-
   constructor (props) {
     super(props)
     this.props.navigation.setParams({

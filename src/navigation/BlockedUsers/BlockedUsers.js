@@ -2,7 +2,6 @@ import React from 'react'
 import { View, Text, ScrollView, TouchableOpacity } from 'react-native'
 import LoadingScreen from 'navigation/LoadingScreen'
 import styles from './BlockedUsers.styles'
-import header from 'navigation/header'
 
 export default class BlockedUsers extends React.Component {
   unBlockUser = userId => () => this.props.unBlockUser(userId)

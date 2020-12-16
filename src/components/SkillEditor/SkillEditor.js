@@ -47,10 +47,12 @@ export default class SkillEditor extends React.Component {
             What skills are you known for? The more skills you add, the more relevant the content. Its like magic.
           </Text>
         </View>
-        {!isEmpty(userSkills) && <View style={[styles.userSkills, theme.userSkills]}>
-          <Text style={[styles.yourSkillsLabel, theme.yourSkillsLabel]}>Your Skills</Text>
-          <SkillCloud skills={userSkills} onPress={this.removeSkill} theme={theme} />
-                                 </View>}
+        {!isEmpty(userSkills) && (
+          <View style={[styles.userSkills, theme.userSkills]}>
+            <Text style={[styles.yourSkillsLabel, theme.yourSkillsLabel]}>Your Skills</Text>
+            <SkillCloud skills={userSkills} onPress={this.removeSkill} theme={theme} />
+          </View>
+        )}
         <SettingControl
           ref={c => { this.control = c }}
           style={styles.skillControl}

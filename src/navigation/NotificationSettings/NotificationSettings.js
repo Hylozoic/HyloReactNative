@@ -3,7 +3,6 @@ import { Image, View, Text, ScrollView, TouchableOpacity, Alert } from 'react-na
 import Loading from 'components/Loading'
 import Icon from 'components/Icon'
 import styles from './NotificationSettings.styles'
-import header from 'navigation/header'
 const allCommunitiesLogo = require('../../assets/hylo-merkaba.png')
 
 export default class NotificationSettings extends React.Component {
