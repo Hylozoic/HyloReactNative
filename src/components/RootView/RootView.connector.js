@@ -12,7 +12,7 @@ export function mapStateToProps (state, props) {
   const signupInProgress = get('settings.signupInProgress', currentUser)
   const loading = props.loading
     || state.pending[CHECK_SESSION_AND_SET_SIGNED_IN]
-    || state.pending[FETCH_CURRENT_USER]
+    || (state.pending[FETCH_CURRENT_USER] && !signupInProgress)
 
   return {
     loading,

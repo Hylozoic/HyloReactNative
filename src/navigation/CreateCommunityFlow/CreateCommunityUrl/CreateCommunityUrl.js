@@ -8,6 +8,7 @@ import SafeAreaView from 'react-native-safe-area-view'
 import { get } from 'lodash/fp'
 import ErrorBubble from 'components/ErrorBubble'
 import KeyboardFriendlyView from 'navigation/KeyboardFriendlyView'
+import { keyboardAvoidingViewProps as kavProps } from 'util/viewHelpers'
 import {
   slugValidatorRegex,
   invalidSlugMessage,
@@ -75,7 +76,7 @@ export default class CreateCommunityUrl extends React.Component {
     const { error, communityUrl } = this.state
     return (
       <SafeAreaView style={styles.container}>
-        <KeyboardFriendlyView>
+        <KeyboardFriendlyView {...kavProps}>
           <View style={styles.header}>
             <Text style={styles.heading}>Choose an address for your community</Text>
             <Text style={styles.description}>Your URL is the address that members will use to access your community online. The shorter the better!</Text>

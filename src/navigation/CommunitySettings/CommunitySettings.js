@@ -1,14 +1,14 @@
 import React from 'react'
 import { Text, View, Image, TouchableOpacity, TextInput, ScrollView } from 'react-native'
+import { some } from 'lodash/fp'
+import { showToast } from 'util/toast'
 import Loading from 'components/Loading'
 import confirmDiscardChanges from 'util/confirmDiscardChanges'
-import styles from './CommunitySettings.styles'
 import ImagePicker from 'components/ImagePicker'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
 import defaultBanner from 'assets/default-user-banner.jpg'
 import KeyboardFriendlyView from 'navigation/KeyboardFriendlyView'
-import { some } from 'lodash/fp'
-import { showToast } from 'util/toast'
+import styles from './CommunitySettings.styles'
 
 export default class CommunitySettings extends React.Component {
   constructor (props) {

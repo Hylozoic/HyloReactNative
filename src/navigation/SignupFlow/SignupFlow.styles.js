@@ -1,12 +1,25 @@
 import { caribbeanGreen, white80onCaribbeanGreen, white60onCaribbeanGreen } from 'style/colors'
 
 export default {
+  // From Community create flow
   container: {
-    paddingTop: 5,
-    paddingHorizontal: 16,
     backgroundColor: caribbeanGreen,
-    flex: 1
+    padding: 20,
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'flex-end',
+    alignItems: 'center'
   },
+  header: {},
+  content: {},
+  footer: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    marginBottom: 40
+  },
+
+  // 
+
   title: {
     color: 'white',
     fontSize: 20,
@@ -28,6 +41,7 @@ export default {
     fontSize: 16,
     marginLeft: 'auto'
   },
+  // 
   headerStyle: {
     backgroundColor: caribbeanGreen,
     shadowColor: 'transparent'

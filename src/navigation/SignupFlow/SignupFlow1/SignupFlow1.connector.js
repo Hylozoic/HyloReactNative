@@ -67,19 +67,11 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
       ? updateUserSettings
       : signup
 
+    // TODO: Still need to load currentuser (or capture from the api return?) when this is signup
     return saveFunc(params)
-      .then(({ error }) => {
-        if (!error) {
-          // if (currentUser) {
-          //   ownProps.navigation.navigate('SignupFlow2')
-          // } else {
-            fetchCurrentUser()
-              .then(() => {
-                ownProps.navigation.navigate('SignupFlow2')
-              })
-          // }
-        }
-      })
+      .then(({ error }) => (
+        !error && ownProps.navigation.navigate('SignupFlow2')
+      ))
   }
 
   return {

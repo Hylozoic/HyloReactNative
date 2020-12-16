@@ -21,6 +21,7 @@ export function mapStateToProps (state, props) {
   const goToResetPassword = () => props.navigation.navigate('ForgotPassword')
   return {
     pending,
+    signupInProgress: get('route.params.signupInProgress', props),
     bannerMessage: get('route.params.bannerMessage', props),
     formError,
     defaultEmail: state.session.defaultLoginEmail,

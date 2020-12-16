@@ -7,6 +7,7 @@ import {
 import SafeAreaView from 'react-native-safe-area-view'
 import Button from 'components/Button'
 import KeyboardFriendlyView from 'navigation/KeyboardFriendlyView'
+import { keyboardAvoidingViewProps as kavProps } from 'util/viewHelpers'
 import ErrorBubble from 'components/ErrorBubble'
 import styles from '../CreateCommunityFlow.styles'
 import createCommunityHeader from '../util/createCommunityHeader'
@@ -57,7 +58,7 @@ export default class CreateCommunityName extends React.Component {
     const { error, communityName } = this.state
     return (
       <SafeAreaView style={styles.container}>
-        <KeyboardFriendlyView>
+        <KeyboardFriendlyView {...kavProps}>
           <View style={styles.header}>
             <Text style={styles.heading}>Let's get started!</Text>
             <Text style={styles.description}>All good things start somewhere! Let's kick things off with a catchy name for your community.</Text>

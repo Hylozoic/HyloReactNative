@@ -24,12 +24,12 @@ export default {
     marginBottom: 15
   },
   // TODO: is this supposed to be here?
-  continueButton: {
-    height: 38,
-    width: 200,
-    borderRadius: 20,
-    backgroundColor: 'white'
-  },
+  // continueButton: {
+  //   height: 38,
+  //   width: 200,
+  //   borderRadius: 20,
+  //   backgroundColor: 'white'
+  // },
   buttonText: {
     fontFamily: 'Circular-Medium',
     fontSize: 16,

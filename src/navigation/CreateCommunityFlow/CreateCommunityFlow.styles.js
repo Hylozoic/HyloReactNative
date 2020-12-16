@@ -23,7 +23,8 @@ export default {
   content: {},
   footer: {
     flex: 1,
-    justifyContent: 'flex-end'
+    justifyContent: 'flex-end',
+    marginBottom: 40
   },
   heading: {
     color: white,
