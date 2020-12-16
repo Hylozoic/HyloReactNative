@@ -7,6 +7,7 @@ const bgImageHeight = bgImageWidth * 0.6
 
 export default {
   container: {
+    flex: 1,
     backgroundColor: 'white'
   },
   banner: loginStyles.banner,
