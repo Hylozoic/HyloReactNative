@@ -11,11 +11,13 @@ export const prefixes = [
 
 // Matched params are returned to the matched screen in `route.params`
 export const routesConfig = {
-  ':context(c|n|all)/:contextId?':                          'AppNavigator/Home/Home',
-  ':context(c|n|all)/:contextId/members':                   'AppNavigator/Home/Members',
+  // TODO: Add back leading slash?
+  '':                                                       'AppNavigator/Tabs/Home',
+  ':context(c|n|all)/:contextId?':                          'AppNavigator/Tabs/Home',
+  ':context(c|n|all)/:contextId/members':                   'AppNavigator/Tabs/Members',
   ':context(c|n)/:contextId/:topicName':                    'AppNavigator/TopicFeed',
-  'm/:id':                                                  'AppNavigator/MemberProfile',
-  ':context(c|n)/:contextId/m/:id':                         'AppNavigator/MemberProfile',
+  'm/:id':                                                  'AppNavigator/Member',
+  ':context(c|n)/:contextId/m/:id':                         'AppNavigator/Member',
   ':context(all)/p/:id':                                    'AppNavigator/PostDetails',
   ':context(c|n)/:contextId/p/:id':                         'AppNavigator/PostDetails',
   'p/:id':                                                  'AppNavigator/PostDetails',
@@ -35,6 +37,7 @@ export const routing = {
   prefixes,
   getStateFromPath: (path, options) => {
     const statePath = matchRouteToScreenPath(path, routesConfig)
+
     return statePath
       ? getStateFromPath(statePath)
       : getStateFromPath(path, options)

@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, TouchableOpacity, Image } from 'react-native'
+import { View, Text, Image } from 'react-native'
 import SafeAreaView from 'react-native-safe-area-view'
 import LinkButton from 'routing/LinkButton'
 import styles from './TopicSupportComingSoon.styles'
@@ -21,10 +21,7 @@ export default function TopicSupportComingSoon ({ style, navigation }) {
       </View>
       <Image style={styles.image} resizeMode='contain' source={axolotlImage} />
       <View style={styles.paddedRow}>
-        {/* <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Text>Test of navigation.goBack()</Text>
-        </TouchableOpacity> */}
-        <LinkButton to='/m/23247' style={styles.goBackButton}>
+        <LinkButton to='/' style={styles.goBackButton}>
           <Text style={styles.goBackButtonText}>Go Back</Text>
         </LinkButton>
       </View>

@@ -1,3 +1,4 @@
+import 'react-native-gesture-handler' // is this necessary?
 import React from 'react'
 import { Dimensions } from 'react-native'
 import { createDrawerNavigator } from '@react-navigation/drawer'
@@ -8,8 +9,7 @@ const AppWithDrawer = createDrawerNavigator()
 
 export default function AppWithDrawerNavigator () {
   const navigatorProps = {
-    hideStatusBar: true,
-    drawerType: 'front',
+    drawerType: 'slide',
     drawerStyle: {
       width: Dimensions.get('window').width * 0.9
     },

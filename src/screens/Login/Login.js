@@ -71,7 +71,7 @@ export default class Login extends React.Component {
   componentDidMount () {
     this.unsubscribeNetInfo = NetInfo.addEventListener(this.handleConnectivityChange)
     if (this.props.signupInProgress) {
-      // TODO: Decide whether to rest or simply navigate for returning sign-up
+      // TODO: Decide whether to reset or simply navigate for returning sign-up
       // this.props.navigation.reset({
       //   index: 0,
       //   routes: [{ name: 'SignupFlow1' }]

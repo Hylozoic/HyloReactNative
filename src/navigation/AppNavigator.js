@@ -39,7 +39,6 @@ const App = createStackNavigator()
 
 export default function AppNavigator () {
   const navigatorProps = {
-    mode: 'modal',
     headerShown: false,
     screenOptions: () => ({
       headerBackTitleVisible: false,
@@ -49,13 +48,13 @@ export default function AppNavigator () {
         fontFamily: 'Circular-Bold'
       },
       headerTintColor: gunsmoke,
-      cardStyle: { backgroundColor: '#FFF' }
+      cardStyle: { backgroundColor: '#FFF' },
     })
   }
   
   return (
     <App.Navigator {...navigatorProps}>
-      <App.Screen name='Home' component={TabsNavigator}
+      <App.Screen name='Tabs' component={TabsNavigator}
         options={buildScreenOptionsForTabsHeader} />
       <App.Screen name='Feed' component={Feed} />
       <App.Screen name='Member' component={MemberProfile} />

@@ -164,6 +164,7 @@ export default function header ({ goBack }, { params }, { headerBackButton, left
     headerRight: null,
     ...options
   }
+  // FOLLOW: https://github.com/react-navigation/react-navigation/issues/8709
   if (right) headerOptions.headerRight = () => (
     <HeaderRightButton {...right} disableOnClick={disableOnClick} />
   )
