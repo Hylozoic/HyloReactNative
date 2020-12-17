@@ -11,7 +11,7 @@ import {
 } from 'store/actions/fetchPosts'
 import {
   CREATE_POST, CREATE_PROJECT
-} from 'navigation/PostEditor/PostEditor.store'
+} from 'screens/PostEditor/PostEditor.store'
 import {
   RECEIVE_POST
 } from 'components/SocketListener/SocketListener.store'

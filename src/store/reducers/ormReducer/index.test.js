@@ -2,28 +2,28 @@ import orm from 'store/models'
 import ormReducer from './index'
 import {
   SET_TOPIC_SUBSCRIBE_PENDING
-} from 'navigation/Feed/Feed.store'
+} from 'screens/Feed/Feed.store'
 import {
   VOTE_ON_POST_PENDING
 } from 'components/PostCard/PostFooter/PostFooter.store'
 import {
   CREATE_COMMENT
-} from 'navigation/PostDetails/CommentEditor/CommentEditor.store'
+} from 'screens/PostDetails/CommentEditor/CommentEditor.store'
 import {
   USE_INVITATION
-} from 'navigation/JoinCommunity/JoinCommunity.store'
+} from 'screens/JoinCommunity/JoinCommunity.store'
 import {
   DELETE_COMMENT_PENDING
 } from 'components/Comment/Comment.store'
 import {
   UPDATE_THREAD_READ_TIME_PENDING
-} from 'navigation/Thread/Thread.store'
+} from 'screens/Thread/Thread.store'
 import {
   UPDATE_LAST_VIEWED_PENDING
-} from 'navigation/ThreadList/ThreadList.store'
+} from 'screens/ThreadList/ThreadList.store'
 import {
   UPDATE_NEW_NOTIFICATION_COUNT_PENDING
-} from 'navigation/NotificationsList/NotificationsList.store'
+} from 'screens/NotificationsList/NotificationsList.store'
 import {
   RESET_NEW_POST_COUNT_PENDING
 } from 'store/actions/resetNewPostCount'
@@ -35,10 +35,10 @@ import {
 } from 'components/PostCard/PostHeader/PostHeader.store'
 import {
   CREATE_COMMUNITY
-} from 'navigation/CreateCommunityFlow/CreateCommunityFlow.store'
+} from 'screens/CreateCommunityFlow/CreateCommunityFlow.store'
 import {
   UPDATE_MEMBERSHIP_SETTINGS_PENDING, UPDATE_ALL_MEMBERSHIP_SETTINGS_PENDING
-} from 'navigation/NotificationSettings/NotificationSettings.store'
+} from 'screens/NotificationSettings/NotificationSettings.store'
 import {
   JOIN_PROJECT_PENDING,
   LEAVE_PROJECT_PENDING,

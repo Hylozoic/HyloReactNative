@@ -10,6 +10,8 @@ import styles from './SkillEditor.styles'
 import { isEmpty } from 'lodash/fp'
 
 export default class SkillEditor extends React.Component {
+  controlRef = React.createRef()
+
   state = {
     showOther: true
   }
@@ -30,7 +32,7 @@ export default class SkillEditor extends React.Component {
 
   onPressOther = () => {
     this.setState({ showOther: false })
-    this.control && this.control.focus()
+    this.controlRef.current && this.controlRef.current.focus()
   }
 
   render () {
@@ -54,7 +56,7 @@ export default class SkillEditor extends React.Component {
           </View>
         )}
         <SettingControl
-          ref={c => { this.control = c }}
+          ref={this.controlRef}
           style={styles.skillControl}
           theme={theme.skillControl}
           label='How can you help?'

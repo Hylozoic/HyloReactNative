@@ -2,7 +2,7 @@ import queryResults, { buildKey, makeQueryResultsModelSelector, makeGetQueryResu
 import { FETCH_POSTS } from '../actions/fetchPosts'
 import {
   REMOVE_POST_PENDING
-} from '../../components/PostCard/PostHeader/PostHeader.store'
+} from 'components/PostCard/PostHeader/PostHeader.store'
 import { get } from 'lodash/fp'
 import orm from 'store/models'
 

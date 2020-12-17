@@ -2,7 +2,7 @@ import React from 'react'
 import { View, Text, Image } from 'react-native'
 import Button from 'components/Button'
 import styles from './CreateCommunityNotice.styles'
-const axolotlImage = require('../../assets/hey-axolotl.png')
+const axolotlImage = require('assets/hey-axolotl.png')
 
 function CreateCommunityNotice ({ goToCreateCommunityName, text }) {
   return (

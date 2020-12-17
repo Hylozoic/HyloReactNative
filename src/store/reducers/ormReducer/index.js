@@ -7,7 +7,7 @@ import clearCacheFor from './clearCacheFor'
 import { isPromise } from 'util/index'
 import {
   UPDATE_COMMUNITY_SETTINGS_PENDING
-} from 'navigation/CommunitySettings/CommunitySettings.store'
+} from 'screens/CommunitySettings/CommunitySettings.store'
 import {
   UPDATE_USER_SETTINGS_PENDING
 } from 'store/actions/updateUserSettings'
@@ -16,40 +16,40 @@ import {
 } from 'components/SkillEditor/SkillEditor.store'
 import {
   CREATE_COMMENT
-} from 'navigation/PostDetails/CommentEditor/CommentEditor.store'
+} from 'screens/PostDetails/CommentEditor/CommentEditor.store'
 import {
   SET_TOPIC_SUBSCRIBE_PENDING
-} from 'navigation/Feed/Feed.store'
+} from 'screens/Feed/Feed.store'
 import {
   MARK_ACTIVITY_READ, MARK_ALL_ACTIVITIES_READ, UPDATE_NEW_NOTIFICATION_COUNT_PENDING
-} from 'navigation/NotificationsList/NotificationsList.store'
+} from 'screens/NotificationsList/NotificationsList.store'
 import {
   CREATE_MESSAGE, CREATE_MESSAGE_PENDING, UPDATE_THREAD_READ_TIME_PENDING
-} from 'navigation/Thread/Thread.store'
+} from 'screens/Thread/Thread.store'
 import {
   VOTE_ON_POST_PENDING
 } from 'components/PostCard/PostFooter/PostFooter.store'
 import {
   USE_INVITATION
-} from 'navigation/JoinCommunity/JoinCommunity.store'
+} from 'screens/JoinCommunity/JoinCommunity.store'
 import {
   DELETE_COMMENT_PENDING
 } from 'components/Comment/Comment.store'
 import {
   UPDATE_LAST_VIEWED_PENDING
-} from 'navigation/ThreadList/ThreadList.store'
+} from 'screens/ThreadList/ThreadList.store'
 import {
   CREATE_COMMUNITY
-} from 'navigation/CreateCommunityFlow/CreateCommunityFlow.store'
+} from 'screens/CreateCommunityFlow/CreateCommunityFlow.store'
 import {
   UPDATE_MEMBERSHIP_SETTINGS_PENDING, UPDATE_ALL_MEMBERSHIP_SETTINGS_PENDING
-} from 'navigation/NotificationSettings/NotificationSettings.store'
+} from 'screens/NotificationSettings/NotificationSettings.store'
 import {
   RESET_NEW_POST_COUNT_PENDING
-} from '../../actions/resetNewPostCount'
+} from 'store/actions/resetNewPostCount'
 import {
   UPDATE_USER_SETTINGS
-} from 'navigation/SignupFlow/SignupFlow.store'
+} from 'screens/SignupFlow/SignupFlow.store'
 import {
   FETCH_CURRENT_USER,
   JOIN_PROJECT_PENDING,
@@ -209,17 +209,10 @@ export default function ormReducer (state = {}, action) {
       postMembership && postMembership.update({ pinned: !postMembership.pinned })
       break
 
-    case FETCH_CURRENT_USER: {
+    case FETCH_CURRENT_USER:
       const attrs = pick(['id', 'avatarUrl', 'name', 'location'], payload.data.me)
       session.Person.create(attrs)
       break
-    }
-
-    case UPDATE_USER_SETTINGS: {
-      const attrs = pick(['id', 'avatarUrl', 'name', 'location'], payload.data.updateMe)
-      session.Person.create(attrs)
-      break
-    }
 
     case CREATE_COMMUNITY:
       me = session.Me.first()

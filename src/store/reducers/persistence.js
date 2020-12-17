@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { debounce } from 'lodash'
 import { isDev } from 'config'
-import { LOGOUT } from 'navigation/Login/actions'
+import { LOGOUT } from 'screens/Login/actions'
 
 export const PERSISTED_STATE_KEY = 'persisted-app-state-v2'
 

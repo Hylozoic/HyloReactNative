@@ -16,7 +16,7 @@ describe('NotificationCard', () => {
         name: 'Wombat Aardvark'
       },
       createdAt: '1 mo ago',
-      onPress: () => navigate('PostDetails', { id: '1' })
+      onPress: () => navigate('Post Details', { id: '1' })
     }
   })
 

@@ -1,62 +1,69 @@
-import React, { PureComponent } from 'react'
+import React from 'react'
 import { StyleSheet, Text, TouchableOpacity } from 'react-native'
 import { HeaderBackButton } from '@react-navigation/stack'
-import { rhino60, rhino20, havelockBlue } from 'style/colors'
-import Icon from 'components/Icon'
 import { get } from 'lodash/fp'
+import confirmDiscardChanges from 'util/confirmDiscardChanges'
+import Icon from 'components/Icon'
+import {
+  caribbeanGreen,
+  white60onCaribbeanGreen,
+  rhino60,
+  rhino20,
+  havelockBlue
+} from 'style/colors'
 
 export const tintColor = rhino60
 
-export class HeaderButton extends PureComponent {
-  constructor (props) {
-    super(props)
-    const { disabled } = props
-    this.state = {
-      disabled
-    }
-  }
+export const buildScreenOptionsForWorkflow = params => ({
+  headerBackTitleVisible: false,
+  headerStyle: {
+    backgroundColor: caribbeanGreen,
+    shadowColor: 'transparent'          
+  },
+  headerTitleStyle: {
+    color: 'white',
+    fontFamily: 'Circular-Bold',
+    fontSize: 12          
+  },
+  headerTintColor: white60onCaribbeanGreen,
+  ...params
+})
 
-  static defaultProps = {
-    disableOnClick: true
-  }
-
-  componentDidUpdate (prevProps) {
-    const { disabled } = this.props
-    if (disabled !== prevProps.disabled) {
-      this.setState({ disabled })
-    }
-  }
-
-  onPress = () => {
-    const { disableOnClick } = this.props
-    if (disableOnClick === true) {
-      this.setState({ disabled: true })
-    }
-    this.props.onPress()
-  }
-
-  render () {
-    const { onPress, text } = this.props
-    const { disabled } = this.state
-
-    if (typeof onPress !== 'function') throw new Error('HeaderButton: onPress is not a function.')
-    
-    return (
-      <TouchableOpacity
-        style={{ marginRight: 12 }}
-        onPress={this.onPress}
-        hitSlop={{ top: 7, bottom: 7, left: 7, right: 7 }}
-        disabled={disabled}
-      >
-        {text === 'Close'
-          ? <Icon name='Ex' style={styles.exIcon} />
-          : <Text style={[styles.button, disabled && styles.disabled]}>{text}</Text>}
-      </TouchableOpacity>
-    )
-  }
+export function HeaderLeftCloseIcon ({ onPress, disableOnClick } ) {
+  if (typeof onPress !== 'function') throw new Error('LeftHeaderClose: onPress is not a function.')
+  
+  return (
+    <TouchableOpacity
+      style={{ marginRight: 12 }}
+      onPress={onPress}
+      hitSlop={{ top: 7, bottom: 7, left: 7, right: 7 }}
+      disabled={disableOnClick}
+    >
+      <Icon name='Ex' style={styles.exIcon} />
+    </TouchableOpacity>
+  )
 }
 
-const headerClose = goBack => <HeaderButton onPress={() => goBack()} text='Close' />
+export function HeaderRightButton ({
+  onPress,
+  text,
+  disableOnClick = true
+}) {
+  if (typeof onPress !== 'function') throw new Error('HeaderRightButton: onPress is not a function.')
+  
+  return (
+    <TouchableOpacity
+      style={{ marginRight: 12 }}
+      onPress={onPress}
+      hitSlop={{ top: 7, bottom: 7, left: 7, right: 7 }}
+      disabled={disableOnClick}
+    >
+      {text === 'Close'
+        ? <Icon name='Ex' style={styles.exIcon} />
+        : <Text style={[styles.button, disableOnClick && styles.disabled]}>{text}</Text>}
+    </TouchableOpacity>
+  )
+}
 
 // Helps to standardise the appearance and behaviour of headers.
 // Accepts an options argument and the navigation object from the component:
@@ -88,12 +95,62 @@ const headerClose = goBack => <HeaderButton onPress={() => goBack()} text='Close
 //       onPress: this.props.myDispatchedFunc,
 //       text: 'Dispatch me'
 //     }
-//     navigation.setParams({ headerRight: <HeaderButton {...right} /> })
+//     navigation.setParams({ headerRight: <HeaderRightButton {...right} /> })
 //   }
 //
 // This can all be placed in the connector and passed via mapDispatchToProps.
 // Of course, if you need even more customisation than this, don't use the
 // helper (or override parts of it using setParams in the component).
+
+
+// const headerLeft = editing
+//   ? () => (
+//       <HeaderBackButton
+//         label={''}
+//         onPress={() => confirmDiscardChanges({ onDiscard: navigation.goBack })}
+//       />
+//     )
+//   : () => <HeaderBackButton label={' '} onPress={navigation.goBack} />
+
+export function buildScreenOptions ({
+  headerLeftCloseIcon = false,
+  headerLeftOnPress: providedHeaderLeftOnPress,
+  headerLeftConfirm = false,
+  headerRightButtonLabel = 'Save',
+  headerRightButtonOnPress,
+  headerRightButtonDisabled = false,
+  ...otherOptions
+}) {
+
+  const options = {}
+
+  options.headerLeft = props => {
+    const headerLeftOnPress = providedHeaderLeftOnPress || props.onPress
+    const onPress = headerLeftConfirm
+      ? () => confirmDiscardChanges({ onDiscard: headerLeftOnPress })
+      : headerLeftOnPress
+
+    return headerLeftCloseIcon
+      ? <HeaderLeftCloseIcon {...props} onPress={onPress} />
+      : <HeaderBackButton {...props} onPress={onPress} />
+  }
+
+  if (headerRightButtonOnPress) {
+    options.headerRight = () => (
+      <HeaderRightButton
+        onPress={headerRightButtonOnPress}
+        text={headerRightButtonLabel}
+        disableOnClick={headerRightButtonDisabled}
+      />
+    )
+  }
+
+  return {
+    ...options,
+    ...otherOptions
+  }
+}
+
 export default function header ({ goBack }, { params }, { headerBackButton, left, right, title, options, disableOnClick } = {}) {
   const headerOptions = {
     ...params,
@@ -108,13 +165,13 @@ export default function header ({ goBack }, { params }, { headerBackButton, left
     ...options
   }
   if (right) headerOptions.headerRight = () => (
-    <HeaderButton {...right} disableOnClick={disableOnClick} />
+    <HeaderRightButton {...right} disableOnClick={disableOnClick} />
   )
   if (left) {
     headerOptions.headerLeft = () =>
       left === 'close'
-        ? headerClose(goBack)
-        : <HeaderButton {...left} disableOnClick={disableOnClick} />
+        ? <HeaderLeftCloseIcon onPress={goBack} />
+        : <HeaderRightButton {...left} disableOnClick={disableOnClick} />
   }
   if (headerBackButton) {
     headerOptions.headerLeft = () => (

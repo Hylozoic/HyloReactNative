@@ -1,4 +1,4 @@
-import { RECEIVE_PUSH_NOTIFICATION } from '../../actions/receivePushNotification'
+import { RECEIVE_PUSH_NOTIFICATION } from 'store/actions/receivePushNotification'
 import { showMessagesBadge } from 'store/reducers/ormReducer/util'
 
 export default function (session, action) {

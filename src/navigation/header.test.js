@@ -2,11 +2,11 @@ import 'react-native'
 import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import ReactTestRenderer from 'react-test-renderer'
-import { HeaderButton } from './header'
+import { HeaderRightButton } from './header'
 
 jest.mock('util/platform', () => ({ isIOS: true }))
 
-describe('HeaderButton', () => {
+describe('HeaderRightButton', () => {
   const defaultProps = {
     text: 'Press Me!',
     onPress: () => {},
@@ -16,7 +16,7 @@ describe('HeaderButton', () => {
   it('matches last snapshot', () => {
     const renderer = new ReactShallowRenderer()
 
-    renderer.render(<HeaderButton {...defaultProps} />)
+    renderer.render(<HeaderRightButton {...defaultProps} />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
@@ -28,7 +28,7 @@ describe('HeaderButton', () => {
       ...defaultProps,
       text: 'Close'
     }
-    renderer.render(<HeaderButton {...closeProps} />)
+    renderer.render(<HeaderRightButton {...closeProps} />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
@@ -38,13 +38,13 @@ describe('HeaderButton', () => {
       ...defaultProps,
       disabled: true
     }
-    const instance = ReactTestRenderer.create(<HeaderButton {...props} />).getInstance()
+    const instance = ReactTestRenderer.create(<HeaderRightButton {...props} />).getInstance()
     expect(instance.state.disabled).toEqual(true)
   })
 
   describe('componentDidUpdate', () => {
     it('changes state.disabled when prop changes', () => {
-      const instance = ReactTestRenderer.create(<HeaderButton {...defaultProps} />).getInstance()
+      const instance = ReactTestRenderer.create(<HeaderRightButton {...defaultProps} />).getInstance()
       instance.setState({ disabled: true })
       instance.componentDidUpdate({ disabled: true })
       expect(instance.state.disabled).toEqual(false)
@@ -57,7 +57,7 @@ describe('HeaderButton', () => {
         ...defaultProps,
         onPress: jest.fn()
       }
-      const instance = ReactTestRenderer.create(<HeaderButton {...props} />).getInstance()
+      const instance = ReactTestRenderer.create(<HeaderRightButton {...props} />).getInstance()
       instance.onPress()
       expect(instance.state.disabled).toEqual(true)
       expect(props.onPress).toHaveBeenCalled()
@@ -69,7 +69,7 @@ describe('HeaderButton', () => {
         onPress: jest.fn(),
         disableOnClick: false
       }
-      const instance = ReactTestRenderer.create(<HeaderButton {...props} />).getInstance()
+      const instance = ReactTestRenderer.create(<HeaderRightButton {...props} />).getInstance()
       instance.onPress()
       expect(instance.state.disabled).toEqual(false)
     })

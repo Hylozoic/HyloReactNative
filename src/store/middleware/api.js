@@ -1,5 +1,5 @@
 import { InteractionManager } from 'react-native'
-import fetchJSON from '../../util/fetchJSON'
+import fetchJSON from 'util/fetchJSON'
 
 export default function apiMiddleware (store) {
   return next => action => {

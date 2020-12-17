@@ -1,4 +1,4 @@
-import { isPromise } from '../../util/index'
+import { isPromise } from 'util/index'
 
 export default function pendingMiddleware (store) {
   return next => action => {

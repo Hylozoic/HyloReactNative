@@ -2,6 +2,8 @@ import React from 'react'
 import { UIManager, findNodeHandle, TouchableOpacity } from 'react-native'
 
 export default class PopupMenuButton extends React.PureComponent {
+  buttonRef = React.createRef()
+
   state = {
     open: false
   }
@@ -19,9 +21,9 @@ export default class PopupMenuButton extends React.PureComponent {
   }
 
   onPress = () => {
-    if (this.button && !this.state.open) {
+    if (this.buttonRef.current && !this.state.open) {
       UIManager.showPopupMenu(
-        findNodeHandle(this.button),
+        findNodeHandle(this.buttonRef.current),
         this.props.actions.map(a => a[0]),
         this.onError,
         this.onSelect
@@ -38,16 +40,10 @@ export default class PopupMenuButton extends React.PureComponent {
         style={this.props.style}
         hitSlop={hitSlop}
         onPress={this.onPress}
-        ref={this.onRef}
+        ref={this.buttonRef}
       >
         {this.props.children}
       </TouchableOpacity>
     )
-  }
-
-  onRef = button => {
-    if (!this.button) {
-      this.button = button
-    }
   }
 }

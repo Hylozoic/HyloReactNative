@@ -4,7 +4,7 @@ import { get } from 'lodash/fp'
 import styles from './MenuButton.styles.js'
 import { ALL_COMMUNITIES_ID } from 'store/models/Community'
 
-const allCommunitiesLogo = require('../../../../assets/All_Communities.png')
+const allCommunitiesLogo = require('assets/All_Communities.png')
 
 export default function MenuButton (props) {
   const { currentContext, openDrawer } = props

@@ -11,8 +11,8 @@ export const prefixes = [
 
 // Matched params are returned to the matched screen in `route.params`
 export const routesConfig = {
-  ':context(c|n|all)/:contextId?':                          'AppNavigator/Main/Home',
-  ':context(c|n|all)/:contextId/members':                   'AppNavigator/Main/Members',
+  ':context(c|n|all)/:contextId?':                          'AppNavigator/Home/Home',
+  ':context(c|n|all)/:contextId/members':                   'AppNavigator/Home/Members',
   ':context(c|n)/:contextId/:topicName':                    'AppNavigator/TopicFeed',
   'm/:id':                                                  'AppNavigator/MemberProfile',
   ':context(c|n)/:contextId/m/:id':                         'AppNavigator/MemberProfile',

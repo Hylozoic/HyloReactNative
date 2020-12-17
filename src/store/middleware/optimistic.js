@@ -1,6 +1,6 @@
 import { get } from 'lodash/fp'
-import { isPromise } from '../../util/index'
-import { SET_STATE } from '../constants'
+import { isPromise } from 'util/index'
+import { SET_STATE } from 'store/constants'
 
 export default function optimisticMiddleware (store) {
   return next => action => {

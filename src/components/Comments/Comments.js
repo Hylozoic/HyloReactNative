@@ -11,6 +11,8 @@ export default class Comments extends React.PureComponent {
     comments: array,
     fetchComments: func
   }
+  
+  scrollViewRef = React.createRef()
 
   renderComment = (comment) => {
     const {
@@ -30,11 +32,11 @@ export default class Comments extends React.PureComponent {
   }
 
   scrollToEnd = (animated = true) => {
-    this.scrollView.scrollToEnd({ animated })
+    this.scrollViewRef.current.scrollToEnd({ animated })
   }
 
   componentDidMount () {
-    this.scrollView.scrollToEnd({ animated: true })
+    this.scrollViewRef.current.scrollToEnd({ animated: true })
   }
 
   render () {
@@ -50,10 +52,7 @@ export default class Comments extends React.PureComponent {
 
     return (
       <View style={{ flex: 1 }}>
-        <ScrollView
-          ref={ref => { this.scrollView = ref }}
-          onContentSizeChange={this.scrollToEnd}
-        >
+        <ScrollView ref={this.scrollViewRef} onContentSizeChange={this.scrollToEnd}>
           {header}
           <ShowMore
             commentsLength={comments.length}

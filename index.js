@@ -1,4 +1,4 @@
-/* eslint-disable no-global-assign */
+import 'react-native-gesture-handler'
 import React, { Component } from 'react'
 import { Provider } from 'react-redux'
 import { AppRegistry, Platform, AppState } from 'react-native'
@@ -8,8 +8,10 @@ import OneSignal from 'react-native-onesignal'
 import { isDev } from 'config'
 import getStore from './src/store'
 import { name as appName } from './app.json'
-import ErrorBoundary from 'components/ErrorBoundary'
-import RootView from 'components/RootView'
+import { SafeAreaProvider } from 'react-native-safe-area-context'
+import ErrorBoundary from 'screens/ErrorBoundary'
+import VersionCheck from 'components/VersionCheck'
+import RootView from 'navigation/RootView'
 
 const store = getStore()
 
@@ -76,11 +78,14 @@ export default class AppContainer extends Component {
     const { openedPushNotification } = this.state
 
     return (
-      <ErrorBoundary>
-        <Provider store={store}>
-          <RootView openedPushNotification={openedPushNotification} />
-        </Provider>
-      </ErrorBoundary>
+      <SafeAreaProvider>
+        <ErrorBoundary>
+          <Provider store={store}>
+            <VersionCheck />
+            <RootView openedPushNotification={openedPushNotification} />
+          </Provider>
+        </ErrorBoundary>
+      </SafeAreaProvider>
     )
   }
 }

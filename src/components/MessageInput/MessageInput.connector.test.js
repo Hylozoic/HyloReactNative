@@ -1,5 +1,5 @@
 import { mapStateToProps, mapDispatchToProps } from './MessageInput.connector'
-import { MODULE_NAME } from 'navigation/NewMessage/NewMessage.store'
+import { MODULE_NAME } from 'screens/NewMessage/NewMessage.store'
 
 describe('mapStateToProps', () => {
   it('returns the right keys', () => {

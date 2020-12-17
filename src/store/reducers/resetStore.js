@@ -1,6 +1,6 @@
 import { pick } from 'lodash/fp'
 import { getEmptyState } from 'store'
-import { LOGOUT } from 'navigation/Login/actions'
+import { LOGOUT } from 'screens/Login/actions'
 import { RESET_STORE } from '../constants'
 import { reset } from './persistence'
 

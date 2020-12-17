@@ -9,10 +9,10 @@ export {
 } from './pushNotifications'
 export {
   ormSessionReducer as postEditorReducer
-} from 'navigation/PostEditor/PostEditor.store'
+} from 'screens/PostEditor/PostEditor.store'
 export {
   ormSessionReducer as invitePeopleReducer
-} from 'navigation/InvitePeople/InvitePeople.store'
+} from 'screens/InvitePeople/InvitePeople.store'
 export {
   ormSessionReducer as moderatorSettingsReducer
-} from 'navigation/ModeratorSettings/ModeratorSettings.store'
+} from 'screens/ModeratorSettings/ModeratorSettings.store'

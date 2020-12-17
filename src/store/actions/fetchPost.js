@@ -1,5 +1,5 @@
 import { get } from 'lodash/fp'
-import { FETCH_COMMENTS } from '../../components/Comments/Comments.store'
+import { FETCH_COMMENTS } from 'components/Comments/Comments.store'
 export const FETCH_POST = 'FETCH_POST'
 
 export function getPostFieldsFragment (withComments = true) {

@@ -8,7 +8,7 @@ import LinearGradient from 'react-native-linear-gradient'
 import { isUndefined } from 'lodash'
 import Button from 'components/Button'
 import { bannerlinearGradientColors } from 'style/colors'
-const bannerImage = require('../../assets/all-communities-banner.png')
+const bannerImage = require('assets/all-communities-banner.png')
 
 export default class FeedBanner extends React.PureComponent {
   state = {}

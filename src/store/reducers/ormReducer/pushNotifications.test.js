@@ -1,6 +1,6 @@
 import reducer from './pushNotifications'
 import orm from 'store/models'
-import { RECEIVE_PUSH_NOTIFICATION } from '../../actions/receivePushNotification'
+import { RECEIVE_PUSH_NOTIFICATION } from 'store/actions/receivePushNotification'
 
 it('toggles the messages badge for a thread-related PN', () => {
   const session = orm.session(orm.getEmptyState())

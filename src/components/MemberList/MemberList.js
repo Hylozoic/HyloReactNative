@@ -101,7 +101,6 @@ export default class MemberList extends React.Component {
             />
             <TextInput
               placeholder='Search Members'
-              ref={ref => { this.searchRef = ref }}
               onChangeText={onSearch}
               underlineColorAndroid='transparent' style={styles.searchInput}
             />

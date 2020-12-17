@@ -12,6 +12,7 @@ export default class SettingControl extends React.Component {
       editable: true,
       highlight: false
     }
+    this.inputRef = React.createRef()
   }
 
   componentDidMount () {
@@ -33,11 +34,11 @@ export default class SettingControl extends React.Component {
   }
 
   focus () {
-    this.input.focus()
+    this.inputRef.current.focus()
   }
 
   blur () {
-    this.input.blur()
+    this.inputRef.current.blur()
   }
 
   makeEditable () {
@@ -80,7 +81,7 @@ export default class SettingControl extends React.Component {
       <View style={[styles.control, style, theme.control]}>
         <Text style={[styles.label, theme.label]}>{label}</Text>
         <TextInput
-          ref={c => { this.input = c }}
+          ref={this.inputRef}
           style={[styles.textInput, theme.textInput]}
           onChangeText={onChange}
           value={value}

@@ -1,6 +1,6 @@
 const goToMemberMaker = navigation => id =>
   navigation
-    ? navigation.navigate('MemberProfile', { id })
+    ? navigation.navigate('Member', { id })
     : () => {}
 
 export default goToMemberMaker

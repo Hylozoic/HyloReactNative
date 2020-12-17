@@ -16,11 +16,11 @@ import styles from './InlineEditor.styles'
 import { MENTION_ENTITY_TYPE } from 'hylo-utils/constants'
 import scopedFetchPeopleAutocomplete from 'store/actions/scopedFetchPeopleAutocomplete'
 import scopedGetPeopleAutocomplete from 'store/selectors/scopedGetPeopleAutocomplete'
-import PersonPickerItemRow from 'navigation/ItemChooser/PersonPickerItemRow'
+import PersonPickerItemRow from 'screens/ItemChooser/PersonPickerItemRow'
 // Topics
 import fetchTopicsForCommunityId from 'store/actions/fetchTopicsForCommunityId'
 import getTopicsForAutocompleteWithNew from 'store/selectors/getTopicsForAutocompleteWithNew'
-import TopicRow from 'navigation/TopicList/TopicRow'
+import TopicRow from 'screens/TopicList/TopicRow'
 
 const minTextInputHeight = 18
 
@@ -32,6 +32,7 @@ export class InlineEditor extends React.PureComponent {
       pickerType: null,
       height: minTextInputHeight
     }
+    this.scrollViewRef = React.createRef()
   }
 
   insertTopic = topic => {
@@ -73,7 +74,7 @@ export class InlineEditor extends React.PureComponent {
           end: newSelectionStart
         }
       }))
-      this.editorInput.focus()
+      this.editorInputRef.current.focus()
     }, 100)
   }
 
@@ -130,7 +131,7 @@ export class InlineEditor extends React.PureComponent {
 
   handleSubmit = () => {
     this.setState(() => ({ selection: { start: 0, end: 0 } }))
-    this.editorInput.blur()
+    this.editorInputRef.current.blur()
     this.props.onSubmit(this.props.value)
   }
 
@@ -166,7 +167,7 @@ export class InlineEditor extends React.PureComponent {
             style={[styles.textInput, inputStyle]}
             underlineColorAndroid='transparent'
             value={value}
-            ref={(input) => { this.editorInput = input }}
+            ref={this.editorInputRef}
             onFocus={this._onFocus}
             onBlur={this._onBlur}
           />
