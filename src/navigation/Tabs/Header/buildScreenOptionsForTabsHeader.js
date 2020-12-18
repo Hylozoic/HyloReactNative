@@ -15,7 +15,7 @@ export default function buildScreenOptionsForTabsHeader ({ navigation, route }) 
 
   return {
     headerBackTitleVisible: false,
-    headerTitle: getFocusedRouteNameFromRoute(route),
+    headerTitle: getFocusedRouteNameFromRoute(route) ?? 'Home',
     headerTitleStyle: styles.headerTitle,
     headerLeft: () =>
       <MenuButton openDrawer={openDrawer} />,

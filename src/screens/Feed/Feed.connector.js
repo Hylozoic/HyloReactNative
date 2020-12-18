@@ -26,7 +26,6 @@ export function mapStateToProps (state, props) {
   // navigation parameter. In case of nav params the screen will load with a
   // back button and be added to the stack.
   const communityId = getRouteParam('communityId', props.route)
-    || getRouteParam('contextId', props.route)
     || getCurrentCommunityId(state, props)
   console.log('!!!! communityId', communityId)
   const communitySlugFromLink = getRouteParam('communitySlugFromLink', props.route)
