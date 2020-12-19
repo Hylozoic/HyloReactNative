@@ -23,7 +23,8 @@ module.exports = {
         ],
         root: ['./src'],
         alias: {
-          'config': './config'
+          'config': './config',
+          'assets': './assets'
         }
       }
     ]

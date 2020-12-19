@@ -1,7 +1,6 @@
 import { get, replace } from 'lodash/fp'
 import { createSelector } from 'reselect'
-import { fetchMapboxLocations } from 'services/mapbox'
-import convertMapboxToLocation from 'util/convertMapboxToLocation'
+import { fetchMapboxLocations, convertMapboxToLocation } from 'services/mapbox'
 
 export const MODULE_NAME = 'ItemChooser'
 export const SET_SEARCH_TERM = `${MODULE_NAME}/SET_SEARCH_TERM`

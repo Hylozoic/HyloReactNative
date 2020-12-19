@@ -3,7 +3,7 @@ import config from './config.json'
 import { createIconSet } from 'react-native-vector-icons'
 import * as colors from 'style/colors'
 
-const glyphMap = config.icons.reduce((m, { tags, defaultCode }) => {
+const glyphMap = config.icons.reduce((m, { icon: { tags, defaultCode } }) => {
   m[tags[0]] = defaultCode
   return m
 }, {})
