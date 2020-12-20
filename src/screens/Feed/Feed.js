@@ -31,7 +31,7 @@ export default class Feed extends React.Component {
 
   setHeader = () => {
     const { navigation, topicName, community } = this.props
-    const headerTitle = topicName ? get('name', community) : ''
+    const headerTitle = topicName ? get('name', community) : 'Home'
     navigation.setOptions({ headerTitle })
   }
 
@@ -46,8 +46,8 @@ export default class Feed extends React.Component {
       showMember,
       topicName,
       topicSubscribed,
-      postsTotal,
-      followersTotal,
+      topicPostsTotal,
+      topicFollowersTotal,
       goToCreateCommunityName,
       currentUserHasMemberships,
       hidePostPrompt,
@@ -81,22 +81,20 @@ export default class Feed extends React.Component {
           community={community}
           network={network}
           showPost={showPost}
-          all={all}
           goToCommunity={goToCommunity}
           header={
             <View>
               <FeedBanner
+                currentUser={currentUser}
                 community={community}
                 network={network}
-                currentUser={currentUser}
-                all={all}
                 newPost={newPost}
                 topicName={topicName}
-                postsTotal={postsTotal}
-                followersTotal={followersTotal}
+                topicPostsTotal={topicPostsTotal}
+                topicFollowersTotal={topicFollowersTotal}
                 topicSubscribed={topicSubscribed}
                 setTopicSubscribe={setTopicSubscribe}
-                hidePostPrompt={hidePostPrompt}
+                hidePostPrompt={all || hidePostPrompt}
                 theme={theme}
               />
               {this.props.belowBannerComponent}

@@ -1,4 +1,6 @@
 import { connect } from 'react-redux'
+import { get } from 'lodash/fp'
+import { showToast } from 'util/toast'
 import { ALL_COMMUNITIES_ID } from 'store/models/Community'
 import fetchPost from 'store/actions/fetchPost'
 import { createComment } from './CommentEditor/CommentEditor.store'
@@ -10,7 +12,6 @@ import makeGoToCommunity from 'store/actions/makeGoToCommunity'
 import joinProject from 'store/actions/joinProject'
 import leaveProject from 'store/actions/leaveProject'
 import goToMemberMaker from 'store/actions/goToMemberMaker'
-import { isNull, isUndefined, get } from 'lodash/fp'
 
 function getPostId (state, props) {
   return getRouteParam('id', props.route)
@@ -19,19 +20,20 @@ function getPostId (state, props) {
 export function mapStateToProps (state, props) {
   const id = getPostId(state, props)
   const currentUser = getMe(state, props)
-  const communityId = getCurrentCommunityId(state, props)
-  const post = getPresentedPost(state, { id, communityId })
+  const currentCommunityId = getCurrentCommunityId(state, props)
+  const post = getPresentedPost(state, { id, currentCommunityId })
   const isProject = get('type', post) === 'project'
   return {
     id,
     post,
     isProject,
-    currentUser
+    currentUser,
+    currentCommunityId
   }
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
-  const { id, post } = stateProps
+  const { id, post, currentCommunityId } = stateProps
   const { dispatch } = dispatchProps
   const { navigation, navigation: { navigate } } = ownProps
 
@@ -47,13 +49,11 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     editPost: () => navigate('Edit Post', { id }),
     goToMembers: () => navigate('Project Members', { id, members: get('members', post) }),
     showMember: goToMemberMaker({ navigate }),
-    showTopic: (topicName, communityId) => {
-      // All Communities and Network feed to topic nav
-      // currently not supported
-      if (communityId === ALL_COMMUNITIES_ID || (isNull(communityId) || isUndefined(communityId))) {
-        return navigate('Topics')
+    showTopic: (topicName) => {
+      if (!currentCommunityId || currentCommunityId === ALL_COMMUNITIES_ID) {
+        return showToast('Topics support for "All Communities" and Networks coming soon!')
       } else {
-        return navigate('Feed', { communityId, topicName })
+        return navigate('Topic Feed', { topicName })
       }
     }
   }

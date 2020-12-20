@@ -8,6 +8,7 @@ import LinearGradient from 'react-native-linear-gradient'
 import { isUndefined } from 'lodash'
 import Button from 'components/Button'
 import { bannerlinearGradientColors } from 'style/colors'
+
 const bannerImage = require('assets/all-communities-banner.png')
 
 export default class FeedBanner extends React.PureComponent {
@@ -28,12 +29,21 @@ export default class FeedBanner extends React.PureComponent {
 
   render () {
     const {
-      all, community, network, newPost, currentUser, topicSubscribed, topicName,
-      postsTotal, followersTotal, hidePostPrompt, theme
+      all,
+      community,
+      network,
+      newPost,
+      currentUser,
+      topicSubscribed,
+      topicName,
+      topicPostsTotal,
+      topicFollowersTotal,
+      hidePostPrompt,
+      theme
     } = this.props
 
     let bannerUrl, name, image
-    if (community && all) {
+    if (all) {
       name = 'All Communities'
       image = bannerImage
     } else if (network) {
@@ -50,9 +60,9 @@ export default class FeedBanner extends React.PureComponent {
       name = '#' + topicName
     }
 
-    const pluralFollowers = (followersTotal !== 1)
-    const pluralPosts = (postsTotal !== 1)
-    const showPostPrompt = !all && !hidePostPrompt
+    const pluralFollowers = (topicFollowersTotal !== 1)
+    const pluralPosts = (topicPostsTotal !== 1)
+    const showPostPrompt = !hidePostPrompt
 
     return (
       <View style={{ ...styles.container, ...theme.container }}>
@@ -66,15 +76,16 @@ export default class FeedBanner extends React.PureComponent {
             >
               {name}
             </Text>
-            {topicName &&
+            {topicName && (
               <View style={styles.topicInfo}>
                 <Text style={styles.subName}>
-                  <Icon name='Star' /> {followersTotal} subscriber{pluralFollowers && 's'}
+                  <Icon name='Star' /> {topicFollowersTotal} subscriber{pluralFollowers && 's'}
                 </Text>
                 <Text style={styles.subName}>
-                  <Icon name='Post' /> {postsTotal} post{pluralPosts && 's'}
+                  <Icon name='Post' /> {topicPostsTotal} post{pluralPosts && 's'}
                 </Text>
-              </View>}
+              </View>
+            )}
           </View>
           {!isUndefined(topicSubscribed) && <SubscribeButton
             active={topicSubscribed} onPress={this.toggleSubscribe}

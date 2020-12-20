@@ -74,13 +74,3 @@ export const getCommunityTopic = ormCreateSelector(
     }).first()
   }
 )
-
-export function getCommunitySearchObject (communityId, communitySlugFromLink) {
-  if (communitySlugFromLink) return { slug: communitySlugFromLink }
-  if (communityId) return { id: communityId }
-}
-
-export function getNetworkSearchObject (networkId, networkSlug) {
-  if (networkSlug) return { slug: networkSlug }
-  if (networkId) return { id: networkId }
-}

@@ -1,4 +1,7 @@
 import { StyleSheet } from 'react-native'
+import { white } from 'style/colors'
+// import { isIOS } from 'util/platform'
+
 
 export const styles = StyleSheet.create({
   controls: {
@@ -7,13 +10,20 @@ export const styles = StyleSheet.create({
     alignItems: 'center'
   },
   headerTitle: {
-    color: 'black',
+    color: white,
     fontFamily: 'Circular-Bold',
     fontSize: 18,
-    fontWeight: '200',
+    fontWeight: '200'
   },
+  // // Follow:
+  // // https://github.com/react-navigation/react-navigation/issues/7057#issuecomment-593086348
+  // headerTitleContainerStyle: {
+  //   width: isIOS ? '40%' : '75%',
+  //   alignItems: isIOS ? 'center' : 'flex-start'
+  // },
   icon: {
     opacity: 0.75,
+    color: white,
     backgroundColor: 'transparent',
     fontSize: 32,
     marginRight: 12

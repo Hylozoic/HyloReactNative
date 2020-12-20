@@ -208,25 +208,6 @@ export const getMembers = makeQueryResultsModelSelector(
   })
 )
 
-export const getMembersOld = ormCreateSelector(
-  orm,
-  state => state.orm,
-  getMemberResults,
-  state => getCurrentCommunity(state),
-  ({ Person }, results) => {
-    if (isEmpty(results) || isEmpty(results.ids)) return []
-
-    return Person.all()
-      .filter(x => includes(x.id, results.ids))
-      .orderBy(x => results.ids.indexOf(x.id))
-      .toModelArray()
-      .map(person => ({
-        ...person.ref,
-        skills: person.skills && person.skills.toModelArray()
-      }))
-  }
-)
-
 export const getHasMoreMembers = createSelector(
   getMemberResults,
   get('hasMore')

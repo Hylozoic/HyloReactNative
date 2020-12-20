@@ -1,6 +1,5 @@
 import React from 'react'
 import { FlatList, Text, View } from 'react-native'
-import { getFocusedRouteNameFromRoute } from '@react-navigation/native'
 import { find, get, isEmpty, includes } from 'lodash/fp'
 import { didPropsChange } from 'util/index'
 import styles from './FeedList.styles'
@@ -33,7 +32,7 @@ export default class FeedList extends React.Component {
     // the Home tab by hard-coding the tab name. This will have to be reworked to
     // allow opening topic feeds in the Topic tab, e.g.
     // TODO: See TAB_ROOTS
-    const isAFeedTab = props => includes(props.route.name, ['Feed', 'Members', 'Topics', 'Projects'])
+    const isAFeedTab = props => includes(props.route.name, ['Home', 'Members', 'Topics', 'Projects'])
     if (!isAFeedTab(this.props)) {
       return
     }
@@ -53,7 +52,6 @@ export default class FeedList extends React.Component {
   renderItem = ({ item }) => {
     const {
       communityId,
-      all,
       showPost,
       showMember,
       showTopic,
@@ -64,7 +62,7 @@ export default class FeedList extends React.Component {
       <PostRow
         postId={item}
         communityId={communityId}
-        shouldShowCommunities={all}
+        shouldShowCommunities={!communityId}
         showPost={showPost}
         showMember={showMember}
         showTopic={showTopic}
