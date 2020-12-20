@@ -1,5 +1,7 @@
 import 'react-native-gesture-handler'
 import React, { Component } from 'react'
+// Required for react-native-root-toast
+import { RootSiblingParent } from 'react-native-root-siblings'
 import { Provider } from 'react-redux'
 import { AppRegistry, Platform, AppState } from 'react-native'
 import Timer from 'react-native-background-timer'
@@ -79,12 +81,14 @@ export default class AppContainer extends Component {
 
     return (
       <SafeAreaProvider>
-        <ErrorBoundary>
-          <Provider store={store}>
-            <VersionCheck />
-            <RootView openedPushNotification={openedPushNotification} />
-          </Provider>
-        </ErrorBoundary>
+          <ErrorBoundary>
+            <RootSiblingParent>
+              <Provider store={store}>
+                <VersionCheck />
+                <RootView openedPushNotification={openedPushNotification} />
+              </Provider>
+            </RootSiblingParent>
+          </ErrorBoundary>
       </SafeAreaProvider>
     )
   }

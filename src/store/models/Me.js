@@ -2,6 +2,11 @@ import { attr, fk, many, Model } from 'redux-orm'
 import { find, get, maxBy } from 'lodash/fp'
 import PropTypes from 'prop-types'
 
+export const getLastViewedCommunity = memberships => {
+  const lastViewedMembership = maxBy(m => new Date(m.lastViewedAt), memberships)
+  return get('community', lastViewedMembership)
+}
+
 const Me = Model.createClass({
   toString () {
     return `Me: ${this.name}`
@@ -20,12 +25,8 @@ const Me = Model.createClass({
     return get('hasModeratorRole', membership)
   },
 
-  lastViewedMembership () {
-    return maxBy(m => new Date(m.lastViewedAt), this.memberships.toModelArray())
-  },
-
   lastViewedCommunity () {
-    return get('community', this.lastViewedMembership())
+    return getLastViewedCommunity(this.memberships.toModelArray())
   }
 })
 

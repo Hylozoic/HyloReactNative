@@ -5,7 +5,6 @@ import { act } from 'react-test-renderer'
 import { render } from '@testing-library/react-native'
 import RootNavigator from 'navigation'
 import { createMockStore } from 'util/testing'
-import ErrorBoundary from 'screens/ErrorBoundary'
 import { NavigationContainer } from '@react-navigation/native'
 
 // TODO: This is a first pass at using testing-library/react-native
@@ -20,16 +19,15 @@ describe('Navigation Specification', () => {
       FeedList: {},
       queryResults: {},
       pending: {},
-      session: {}
+      session: {},
+      currentNetworkAndCommunity: {}
     }
     const component = (
-      <ErrorBoundary>
-        <Provider store={createMockStore(state)}>
-          <NavigationContainer>
-            <RootNavigator signedIn={false} />
-          </NavigationContainer>
-        </Provider>
-      </ErrorBoundary>
+      <Provider store={createMockStore(state)}>
+        <NavigationContainer>
+          <RootNavigator />
+        </NavigationContainer>
+      </Provider>
     )
     const { toJSON } = render(component)
     // await findByAccessibilityRole('Header')

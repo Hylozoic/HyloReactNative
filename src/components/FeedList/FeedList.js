@@ -32,7 +32,8 @@ export default class FeedList extends React.Component {
     // This implementation causes a pretty strong coupling between FeedList and
     // the Home tab by hard-coding the tab name. This will have to be reworked to
     // allow opening topic feeds in the Topic tab, e.g.
-    const isAFeedTab = props => includes(props.route.name, ['Home', 'Projects'])
+    // TODO: See TAB_ROOTS
+    const isAFeedTab = props => includes(props.route.name, ['Feed', 'Members', 'Topics', 'Projects'])
     if (!isAFeedTab(this.props)) {
       return
     }
