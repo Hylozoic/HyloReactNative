@@ -1,5 +1,6 @@
 import { getPostFieldsFragment } from './fetchPost'
 import { get } from 'lodash/fp'
+import { ALL_COMMUNITIES_ID } from 'routing/helpers'
 
 export const FETCH_POSTS = 'FETCH_POSTS'
 
@@ -19,7 +20,7 @@ export default function fetchPosts (
     query = networkQuery
     extractModel = 'Network'
     getItems = get('payload.data.network.posts')
-  } else if (subject === 'all-communities') {
+  } else if (subject === ALL_COMMUNITIES_ID) {
     query = allCommunitiesQuery
     extractModel = 'Post'
     getItems = get('payload.data.posts')

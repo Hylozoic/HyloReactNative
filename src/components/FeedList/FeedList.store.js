@@ -1,4 +1,4 @@
-import { ALL_COMMUNITIES_ID } from 'store/models/Community'
+import { ALL_COMMUNITIES_ID } from 'routing/helpers'
 import { makeGetQueryResults } from 'store/reducers/queryResults'
 import { FETCH_POSTS } from 'store/actions/fetchPosts'
 import { FETCH_PROJECTS } from 'store/actions/fetchProjects'
@@ -96,7 +96,7 @@ export const getQueryProps = createCachedSelector(
     } else if (network) {
       subject = 'network'
     } else {
-      subject = 'all-communities'
+      subject = ALL_COMMUNITIES_ID
     }
 
     return omitBy(x => isNull(x) || isUndefined(x), {

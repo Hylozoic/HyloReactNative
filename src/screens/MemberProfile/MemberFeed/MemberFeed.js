@@ -29,7 +29,9 @@ export default class MemberFeed extends React.Component {
       header,
       fetchMoreItems,
       pending,
-      showPost
+      showPost,
+      showTopic,
+      showMember
     } = this.props
 
     const listHeaderComponent = (
@@ -58,7 +60,12 @@ export default class MemberFeed extends React.Component {
         <FlatList
           data={items}
           renderItem={({ item }) =>
-            <ContentRow item={item} itemType={itemType} showPost={showPost} />}
+            <ContentRow
+              item={item}
+              itemType={itemType}
+              showPost={showPost}
+              showTopic={showTopic}
+              showMember={showMember} />}
           keyExtractor={item => item.id}
           onEndReached={fetchMoreItems}
           ListHeaderComponent={listHeaderComponent}
@@ -70,12 +77,15 @@ export default class MemberFeed extends React.Component {
   }
 }
 
-export function ContentRow ({ item, itemType, showPost }) {
+export function ContentRow ({ item, itemType, showPost, showTopic, showMember }) {
   let content, postId
   if (itemType === 'post') {
     postId = item.id
     content = (
       <PostCard
+        shouldShowCommunities={true}
+        showMember={showMember}
+        showTopic={showTopic}
         post={item}
         creator={item.creator}
         commenters={item.commenters}

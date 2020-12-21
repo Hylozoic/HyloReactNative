@@ -10,7 +10,7 @@ import {
   presentThread,
   updateThreadReadTime
 } from './Thread.store'
-import { ALL_COMMUNITIES_ID } from 'store/models/Community'
+import { ALL_COMMUNITIES_ID } from 'routing/helpers'
 import getCurrentUserId from 'store/selectors/getCurrentUserId'
 import getCurrentNetworkId from 'store/selectors/getCurrentNetworkId'
 import getCurrentCommunityId from 'store/selectors/getCurrentCommunityId'

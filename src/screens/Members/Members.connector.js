@@ -4,7 +4,7 @@ import { omit, get } from 'lodash/fp'
 import getMe from 'store/selectors/getMe'
 import getCurrentCommunity from 'store/selectors/getCurrentCommunity'
 import getCurrentNetwork from 'store/selectors/getCurrentNetwork'
-import { ALL_COMMUNITIES_ID } from 'store/models/Community'
+import { ALL_COMMUNITIES_ID } from 'routing/helpers'
 import {
   FETCH_MEMBERS,
   fetchMembers,
@@ -30,7 +30,7 @@ export function makeFetchOpts (props) {
     subject = 'community'
     slug = get('slug', community)
   } else {
-    subject = 'all-communities'
+    subject = ALL_COMMUNITIES_ID
     slug = ALL_COMMUNITIES_ID
   }
 

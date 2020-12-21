@@ -59,7 +59,8 @@ export function mapDispatchToProps (dispatch, { navigation }) {
       fetchMemberComments,
       fetchMemberUpvotes
     }, dispatch),
-    showPost: id => navigation.navigate('Post Details', { id })
+    showPost: id => navigation.navigate('Post Details', { id }),
+    showTopic: topicName => navigation.navigate('Topic Feed', { topicName })
   }
 }
 

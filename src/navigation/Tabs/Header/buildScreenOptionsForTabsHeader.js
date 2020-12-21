@@ -9,7 +9,7 @@ import styles from './Header.styles'
 import { rhino80, black10onRhino, black10OnCaribbeanGreen } from 'style/colors'
 
 // TODO: Derive these from loaded navigator or otherwise from shape of navigation state?
-const TAB_ROOTS = ['Home', 'Members', 'Topics', 'Projects']
+export const TAB_ROOTS = ['Feed', 'Members', 'Topics', 'Projects']
 
 export default function buildScreenOptionsForTabsHeader ({ navigation, route }) {
   const isOnTabRoot = TAB_ROOTS.includes(route.name)
@@ -19,7 +19,7 @@ export default function buildScreenOptionsForTabsHeader ({ navigation, route }) 
 
   return {
     headerBackTitleVisible: false,
-    // headerTitle: getFocusedRouteNameFromRoute(route) ?? 'Home',
+    headerTitle: getFocusedRouteNameFromRoute(route) || route?.name,
     headerTitleStyle: styles.headerTitle,
     headerTitleContainerStyle: styles.headerTitleContainerStyle,
     headerStyle: {
