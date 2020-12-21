@@ -1,5 +1,6 @@
 import { getStateFromPath } from '@react-navigation/native'
 import { match } from 'path-to-regexp'
+import * as qs from 'query-string'
 
 export const prefixes = [
   'http://hylo.com',
@@ -11,64 +12,55 @@ export const prefixes = [
 
 // Matched params are returned to the matched screen in `route.params`
 export const routesConfig = {
-  // TODO: Add back leading slash?
-  '':                                                       'AppNavigator/Tabs/Home',
-  ':context(c|n|all)/:contextId?':                          'AppNavigator/Tabs/Home',
-  ':context(c|n|all)/:contextId/members':                   'AppNavigator/Tabs/Members',
-  ':context(c|n)/:contextId/:topicName':                    'AppNavigator/TopicFeed',
-  'm/:id':                                                  'AppNavigator/Member',
-  ':context(c|n)/:contextId/m/:id':                         'AppNavigator/Member',
-  ':context(all)/p/:id':                                    'AppNavigator/PostDetails',
-  ':context(c|n)/:contextId/p/:id':                         'AppNavigator/PostDetails',
-  'p/:id':                                                  'AppNavigator/PostDetails',
-  'p/:id/edit':                                             'AppNavigator/PostEditor',
-  ':context(c|n)/:contextId/p/:id/edit':                    'AppNavigator/PostEditor',
-  'settings/:section?':                                     'AppNavigator/UserSettings',
-  't/:id':                                                  'AppNavigator/Thread',
-  // TODO: I don't see a great reason that this              is still a constant
-  't':                                                      'AppNavigator/ThreadList',
-  'c/:slug/join/:accessCode':                               'AppNavigator/JoinCommunity',
-  'h/use-invitation/:token':                                'AppNavigator/JoinCommunity'
+  '/':                                                       'AppNavigator/Tabs/Home/Feed',
+  '/m/:id':                                                  'AppNavigator/Tabs/Members/Member',
+  '/:context(c|n|all)/:contextId?':                          'AppNavigator/Tabs/Home',
+  '/:context(c|n)/:contextId/:topicName':                    'AppNavigator/TopicFeed',
+  '/m':                                                      'AppNavigator/Tabs/Members',
+  '/:context(c|n)/:contextId/m/:id':                         'AppNavigator/Member',
+  '/:context(all)/p/:id':                                    'AppNavigator/PostDetails',
+  '/:context(c|n)/:contextId/p/:id':                         'AppNavigator/PostDetails',
+  '/p/:id':                                                  'AppNavigator/PostDetails',
+  '/p/:id/edit':                                             'AppNavigator/PostEditor',
+  '/:context(c|n)/:contextId/p/:id/edit':                    'AppNavigator/PostEditor',
+  '/settings/:section?':                                     'AppNavigator/UserSettings',
+  '/t/:id':                                                  'AppNavigator/Thread',
+  /// TODO: I don't see a great reason that this              is still a constant
+  '/t':                                                      'AppNavigator/ThreadList',
+  '/c/:slug/join/:accessCode':                               'AppNavigator/JoinCommunity',
+  '/h/use-invitation/:token':                                'AppNavigator/JoinCommunity'
   // AuthNavigator route...             
   // 'passwordResetTokenLogin/:userId/:loginToken/:nextURL':   'Login'
 }
 
 export const routing = {
   prefixes,
-  getStateFromPath: (path, options) => {
-    const statePath = matchRouteToScreenPath(path, routesConfig)
-
-    return statePath
-      ? getStateFromPath(statePath)
-      : getStateFromPath(path, options)
+  getStateFromPath: path => {
+    const matchedStatePath = matchRouteToScreenPath(path, routesConfig)
+    const statePath = matchedStatePath
+      ? matchedStatePath
+      : path
+    return getStateFromPath(statePath)
   },
-  config: { screens: {} }
+  getPathFromState: () => {}
 }
 
 // Matches path to routes and returns a screen path
 // with params appended as a querystring
 export function matchRouteToScreenPath (path, routes) {
   for (const pathMatcher in routes) {
-    const matched = match(pathMatcher)(path.slice(1, path.length))
+    const matched = match(pathMatcher)(path)
 
     if (matched) {
-      const screenPath = routes[pathMatcher]
-      const querystring = makeQuerystringFromParams(matched.params)
+      const screenPath = routes[pathMatcher]      
+      const querystring = qs.stringify(matched.params, {
+        encode: true,
+        strict: true
+      })
 
       return [ screenPath, querystring ].join('?')
     }
   }
-}
-
-export function makeQuerystringFromParams (params) {
-  const querystringParams = []
-
-  for (const key in params) {
-    const value = params[key]
-    querystringParams.push([key, value].join('='))
-  }
-
-  return querystringParams.join('&')
 }
 
 export default routing

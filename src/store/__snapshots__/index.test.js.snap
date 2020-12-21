@@ -49,10 +49,6 @@ Object {
   "Topics": Object {
     "term": "",
   },
-  "currentNetworkAndCommunity": Object {
-    "communityId": null,
-    "networkId": null,
-  },
   "mixpanel": null,
   "orm": Object {
     "Activity": Object {
@@ -268,7 +264,10 @@ Object {
   },
   "pending": Object {},
   "queryResults": Object {},
-  "session": Object {},
+  "session": Object {
+    "communityId": null,
+    "networkId": null,
+  },
 }
 `;
 

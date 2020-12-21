@@ -19,8 +19,7 @@ describe('Navigation Specification', () => {
       FeedList: {},
       queryResults: {},
       pending: {},
-      session: {},
-      currentNetworkAndCommunity: {}
+      session: {}
     }
     const component = (
       <Provider store={createMockStore(state)}>

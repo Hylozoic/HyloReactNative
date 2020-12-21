@@ -1,6 +1,6 @@
 import React from 'react'
 import { FlatList, Text, View } from 'react-native'
-import { find, get, isEmpty, includes } from 'lodash/fp'
+import { find, isEmpty, includes } from 'lodash/fp'
 import { didPropsChange } from 'util/index'
 import styles from './FeedList.styles'
 import PostRow from './PostRow'
@@ -32,18 +32,19 @@ export default class FeedList extends React.Component {
     // the Home tab by hard-coding the tab name. This will have to be reworked to
     // allow opening topic feeds in the Topic tab, e.g.
     // TODO: See TAB_ROOTS
-    const isAFeedTab = props => includes(props.route.name, ['Home', 'Members', 'Topics', 'Projects'])
-    if (!isAFeedTab(this.props)) {
-      return
-    }
+    // const isAFeedTab = props => includes(props.route.name, ['Feed', 'Topic Feed'])
+    // if (!isAFeedTab(this.props)) {
+    //   return
+    // }
     if (!prevProps.isFocused && this.props.isFocused) {
       return this.fetchOrShowCached()
     }
 
     if (prevProps.sortBy !== this.props.sortBy ||
         prevProps.filter !== this.props.filter ||
-        get('id', prevProps.community) !== get('id', this.props.community) ||
-        get('id', prevProps.network) !== get('id', this.props.network)) {
+        prevProps.community?.id !== this.props.community?.id ||
+        prevProps.network?.id !== this.props.network?.id
+    ) {
       this.fetchOrShowCached()
     }
   }

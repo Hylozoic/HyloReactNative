@@ -1,7 +1,6 @@
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { get } from 'lodash/fp'
-import { isEmpty } from 'lodash'
+import { isEmpty } from 'lodash/fp'
 import getMe from 'store/selectors/getMe'
 import getNetwork from 'store/selectors/getNetwork'
 import getCommunity from 'store/selectors/getCommunity'
@@ -37,10 +36,10 @@ export function setupCommunity (state, props) {
   const communityId = getRouteParam('communityId', props.route)
     || getCurrentCommunityId(state, props)
   const communitySlugFromLink = getRouteParam('communitySlugFromLink', props.route)
-  const community = get('ref', getCommunity(state, communitySlugFromLink
+  const community = getCommunity(state, communitySlugFromLink
     ? { slug: communitySlugFromLink }
-    : { id: communityId })
-  )
+    : { id: communityId }
+  )?.ref
 
   return community
 }
@@ -52,10 +51,10 @@ export function setupTopicProps (state, props, { community }) {
   if (!topicName) return {}
 
   const communityTopic = getCommunityTopic(state, { topicName, slug: community.slug })
-  const topic = get('topic.ref', communityTopic)
-  const topicSubscribed = communityTopic && communityTopic.isSubscribed
-  const topicPostsTotal = get('postsTotal', communityTopic)
-  const topicFollowersTotal = get('followersTotal', communityTopic)
+  const topic = communityTopic?.topic?.ref
+  const topicSubscribed = communityTopic?.isSubscribed
+  const topicPostsTotal = communityTopic?.postsTotal
+  const topicFollowersTotal = communityTopic?.followersTotal
 
   return {
     topic,
@@ -106,8 +105,8 @@ export function mapDispatchToProps (dispatch, { navigation }) {
 export function mergeProps (stateProps, dispatchProps, ownProps) {
   const { community, network, topic, topicName, topicSubscribed } = stateProps
   const { navigation } = ownProps
-  const communityId = get('id', community)
-  const slug = get('slug', community)
+  const communityId = community?.id
+  const slug = community?.slug
   return {
     ...stateProps,
     ...dispatchProps,

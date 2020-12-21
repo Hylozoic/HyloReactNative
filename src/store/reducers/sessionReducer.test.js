@@ -1,6 +1,10 @@
 import sessionReducer from './sessionReducer'
-import { CHECK_SESSION_AND_SET_SIGNED_IN } from 'store/constants'
 import { LOGIN } from 'screens/Login/actions'
+import { 
+  CHECK_SESSION_AND_SET_SIGNED_IN,
+  FETCH_CURRENT_USER,
+  SELECT_COMMUNITY
+} from 'store/constants'
 
 describe('on CHECK_SESSION_AND_SET_SIGNED_IN', () => {
   it('stores the payload', () => {
@@ -36,5 +40,62 @@ describe('on LOGIN', () => {
       signedIn: true,
       defaultLoginEmail: 'foo@bar.com'
     })
+  })
+})
+
+describe('on SELECT_COMMUNITY', () => {
+  it('returns the payload', () => {
+    const state = {
+    }
+    const action = {
+      type: SELECT_COMMUNITY,
+      payload: '123',
+    }
+    expect(sessionReducer(state, action))
+      .toMatchSnapshot()
+  })
+})
+
+describe('on FETCH_CURRENT_USER', () => {
+  it('handles a user with a membership', () => {
+    const state = {
+      id: 1
+    }
+    const action = {
+      type: FETCH_CURRENT_USER,
+      payload: {
+        data: {
+          me: {
+            memberships: [
+              {
+                community: {
+                  id: 34
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+    expect(sessionReducer(state, action))
+      .toMatchSnapshot()
+  })
+
+  it('handles a user with no memberships', () => {
+    const state = {
+      id: 1
+    }
+    const action = {
+      type: FETCH_CURRENT_USER,
+      payload: {
+        data: {
+          me: {
+            memberships: []
+          }
+        }
+      }
+    }
+    expect(sessionReducer(state, action))
+      .toMatchSnapshot()
   })
 })

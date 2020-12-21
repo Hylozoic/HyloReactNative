@@ -6,7 +6,6 @@ import { reset } from './persistence'
 
 export const KEYS_PRESERVED_ON_RESET = [
   'session',
-  'currentNetworkAndCommunity',
   'SocketListener'
 ]
 

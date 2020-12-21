@@ -17,7 +17,7 @@ it('mapStateToProps matches the latest snapshot', () => {
       entryUrl: 'http://www.hylo.com/a/path'
     },
     pending: {},
-    currentNetworkAndCommunity: { communityId: '7' },
+    session: { communityId: '7' },
     orm: session.state
   }
   const props = {

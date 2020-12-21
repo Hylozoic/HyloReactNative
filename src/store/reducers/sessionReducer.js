@@ -1,16 +1,24 @@
-import {
-  FETCH_CURRENT_USER,
-  CHECK_SESSION_AND_SET_SIGNED_IN
-} from 'store/constants'
+import { omit, get } from 'lodash/fp'
 import {
   LOGIN,
   LOGIN_WITH_FACEBOOK,
   LOGIN_WITH_GOOGLE
 } from 'screens/Login/actions'
-import { SIGNUP, UPDATE_USER_SETTINGS } from 'screens/SignupFlow/SignupFlow.store'
-import { omit, get } from 'lodash/fp'
+import {
+  SIGNUP,
+  UPDATE_USER_SETTINGS
+} from 'screens/SignupFlow/SignupFlow.store'
+import {
+  FETCH_CURRENT_USER,
+  CHECK_SESSION_AND_SET_SIGNED_IN,
+  SELECT_COMMUNITY,
+  SELECT_NETWORK
+} from 'store/constants'
 
-export default function sessionReducer (state = {}, action) {
+export default function sessionReducer (state = {
+  communityId: null,
+  networkId: null
+}, action) {
   const { type, error, payload, meta } = action
 
   if (error) {
@@ -57,6 +65,18 @@ export default function sessionReducer (state = {}, action) {
         ...state,
         signupInProgress: get('data.updateMe.settings.signupInProgress', payload)
       }
+    case SELECT_COMMUNITY:
+      return {
+        ...state,
+        communityId: payload,
+        networkId: null
+      }
+    case SELECT_NETWORK:
+      return {
+        ...state,
+        communityId: null,
+        networkId: payload
+      }  
   }
 
   return state

@@ -3,7 +3,6 @@ import resetStore from './resetStore'
 import ormReducer from './ormReducer'
 import pending from './pending'
 import queryResults from './queryResults'
-import currentNetworkAndCommunity from './currentNetworkAndCommunity'
 import sessionReducer from './sessionReducer'
 import mixpanelReducer from './mixpanel'
 import CommentEditor from 'screens/PostDetails/CommentEditor/CommentEditor.store'
@@ -29,7 +28,6 @@ export const combinedReducers = combineReducers({
   orm: ormReducer,
   pending,
   queryResults,
-  currentNetworkAndCommunity,
   session: sessionReducer,
   mixpanel: mixpanelReducer,
   CommentEditor,

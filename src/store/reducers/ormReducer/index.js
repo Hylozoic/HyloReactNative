@@ -66,20 +66,19 @@ export default function ormReducer (state = {}, action) {
     extractModelsFromAction(action, session)
   }
 
-  let me, skill, post, thread, community, membership
-
   switch (type) {
-    case CREATE_COMMENT:
-      post = session.Post.safeGet({ id: meta.postId })
-      me = session.Me.first()
+    case CREATE_COMMENT: {
+      const post = session.Post.safeGet({ id: meta.postId })
+      const me = session.Me.first()
 
       if (!post) break
       post.updateAppending({ commenters: [me.id] })
       post.update({ commentsTotal: (post.commentsTotal || 0) + 1 })
 
       break
+    }
 
-    case CREATE_MESSAGE_PENDING:
+    case CREATE_MESSAGE_PENDING: {
       session.Message.create({
         id: meta.tempId,
         messageThread: meta.messageThreadId,
@@ -88,8 +87,9 @@ export default function ormReducer (state = {}, action) {
         creator: session.Me.first().id
       })
       break
+    }
 
-    case CREATE_MESSAGE:
+    case CREATE_MESSAGE: {
       // remove the temporary message and then create the real one -- we do this
       // here instead of using meta.extractModel so it all happens in a single
       // reduce. we can't just update the temporary message because redux-orm
@@ -101,42 +101,48 @@ export default function ormReducer (state = {}, action) {
         modelName: 'Message'
       })
       break
+    }
 
-    case MARK_ACTIVITY_READ:
+    case MARK_ACTIVITY_READ: {
       if (session.Activity.hasId(meta.id)) {
         session.Activity.withId(meta.id).update({ unread: false })
       }
       break
+    }
 
-    case MARK_ALL_ACTIVITIES_READ:
+    case MARK_ALL_ACTIVITIES_READ: {
       session.Activity.all().update({ unread: false })
       break
+    }
 
-    case ADD_SKILL:
-      me = session.Me.first()
-      skill = session.Skill.create(payload.data.addSkill)
+    case ADD_SKILL: {
+      const me = session.Me.first()
+      const skill = session.Skill.create(payload.data.addSkill)
       me.updateAppending({ skills: [skill] })
       break
+    }
 
-    case REMOVE_SKILL:
-      me = session.Me.first()
-      skill = session.Skill.safeGet({ name: meta.name })
+    case REMOVE_SKILL: {
+      const me = session.Me.first()
+      const skill = session.Skill.safeGet({ name: meta.name })
       if (skill) {
         me.skills.remove(skill.id)
       }
       break
+    }
 
-    case VOTE_ON_POST_PENDING:
-      post = session.Post.withId(meta.postId)
+    case VOTE_ON_POST_PENDING: {
+      const post = session.Post.withId(meta.postId)
       if (post.myVote) {
         !meta.isUpvote && post.update({ myVote: false, votesTotal: (post.votesTotal || 1) - 1 })
       } else {
         meta.isUpvote && post.update({ myVote: true, votesTotal: (post.votesTotal || 0) + 1 })
       }
       break
+    }
 
-    case UPDATE_USER_SETTINGS_PENDING:
-      me = session.Me.first()
+    case UPDATE_USER_SETTINGS_PENDING: {
+      const me = session.Me.first()
       const changes = {
         ...meta.changes,
         settings: {
@@ -149,84 +155,95 @@ export default function ormReducer (state = {}, action) {
         session.Person.withId(me.id).update(changes)
       }
       break
+    }
 
-    case UPDATE_COMMUNITY_SETTINGS_PENDING:
-      community = session.Community.withId(meta.id)
+    case UPDATE_COMMUNITY_SETTINGS_PENDING: {
+      const community = session.Community.withId(meta.id)
       community.update(meta.changes)
-
-      membership = session.Membership.safeGet({ community: meta.id }).update({ forceUpdate: new Date() })
+      const membership = session.Membership.safeGet({ community: meta.id }).update({ forceUpdate: new Date() })
       break
+    }
 
-    case SET_TOPIC_SUBSCRIBE_PENDING:
-      const ct = session.CommunityTopic.get({
+    case SET_TOPIC_SUBSCRIBE_PENDING: {
+      const communityTopic = session.CommunityTopic.get({
         topic: meta.topicId, community: meta.communityId
       })
-      ct.update({
-        followersTotal: ct.followersTotal + (meta.isSubscribing ? 1 : -1),
+      communityTopic.update({
+        followersTotal: communityTopic.followersTotal + (meta.isSubscribing ? 1 : -1),
         isSubscribed: !!meta.isSubscribing
       })
       break
+    }
 
-    case USE_INVITATION:
-      me = session.Me.first()
+    case USE_INVITATION: {
+      const me = session.Me.first()
       me.updateAppending({ memberships: [payload.data.useInvitation.membership.id] })
       break
+    }
 
-    case DELETE_COMMENT_PENDING:
+    case DELETE_COMMENT_PENDING: {
       const comment = session.Comment.withId(meta.id)
-      post = comment.post
+      const post = comment.post
       post.update({ commentsTotal: post.commentsTotal - 1 })
       comment.delete()
       break
+    }
 
-    case UPDATE_LAST_VIEWED_PENDING:
-      me = session.Me.first()
-      me.update({
-        unseenThreadCount: 0
-      })
+    case UPDATE_LAST_VIEWED_PENDING: {
+      const me = session.Me.first()
+      me.update({ unseenThreadCount: 0 })
       break
+    }
 
-    case UPDATE_NEW_NOTIFICATION_COUNT_PENDING:
-      me = session.Me.first()
-      me.update({
-        newNotificationCount: 0
-      })
+    case UPDATE_NEW_NOTIFICATION_COUNT_PENDING: {
+      const me = session.Me.first()
+      me.update({ newNotificationCount: 0 })
       break
+    }
 
-    case RESET_NEW_POST_COUNT_PENDING:
+    case RESET_NEW_POST_COUNT_PENDING: {
       const { id } = meta.graphql.variables
-      membership = session.Membership.safeGet({ community: id })
+      const membership = session.Membership.safeGet({ community: id })
       if (!membership) break
       membership.update({ newPostCount: 0 })
       break
+    }
 
-    case PIN_POST_PENDING:
-      post = session.Post.withId(meta.postId)
+    case PIN_POST_PENDING: {
+      const post = session.Post.withId(meta.postId)
       // this line is to clear the selector memoization
       post.update({ _invalidate: (post._invalidate || 0) + 1 })
       const postMembership = post.postMemberships.filter(p =>
         Number(p.community) === Number(meta.communityId)).toModelArray()[0]
       postMembership && postMembership.update({ pinned: !postMembership.pinned })
       break
+    }
 
-    case FETCH_CURRENT_USER:
+    case FETCH_CURRENT_USER: {
+      const personId = payload.data?.me?.id
       const attrs = pick(['id', 'avatarUrl', 'name', 'location'], payload.data.me)
-      session.Person.create(attrs)
+      const person = session.Person.safeWithId(personId)
+      person
+        ? person.update(attrs)
+        : session.Person.create(attrs)
       break
+    }
 
-    case CREATE_COMMUNITY:
-      me = session.Me.first()
+    case CREATE_COMMUNITY: {
+      const me = session.Me.first()
       me.updateAppending({ memberships: [payload.data.createCommunity.id] })
       break
+    }
 
-    case JOIN_PROJECT_PENDING:
-      me = session.Me.first()
+    case JOIN_PROJECT_PENDING: {
+      const me = session.Me.first()
       session.ProjectMember.create({ post: meta.id, member: me.id })
       clearCacheFor(session.Post, meta.id)
       break
+    }
 
-    case LEAVE_PROJECT_PENDING:
-      me = session.Me.first()
+    case LEAVE_PROJECT_PENDING: {
+      const me = session.Me.first()
       session
         .ProjectMember
         .filter(member =>
@@ -237,14 +254,16 @@ export default function ormReducer (state = {}, action) {
         .forEach(member => member.delete())
       clearCacheFor(session.Post, meta.id)
       break
+    }
 
-    case UPDATE_THREAD_READ_TIME_PENDING:
-      thread = session.MessageThread.safeWithId(meta.id)
+    case UPDATE_THREAD_READ_TIME_PENDING: {
+      const thread = session.MessageThread.safeWithId(meta.id)
       if (thread) thread.update({ lastReadAt: new Date().toString() })
       break
+    }
 
-    case UPDATE_MEMBERSHIP_SETTINGS_PENDING:
-      membership = session.Membership.safeGet({ community: meta.communityId })
+    case UPDATE_MEMBERSHIP_SETTINGS_PENDING: {
+      const membership = session.Membership.safeGet({ community: meta.communityId })
       if (!membership) break
       membership.update({
         settings: {
@@ -253,8 +272,9 @@ export default function ormReducer (state = {}, action) {
         }
       })
       break
+    }
 
-    case UPDATE_ALL_MEMBERSHIP_SETTINGS_PENDING:
+    case UPDATE_ALL_MEMBERSHIP_SETTINGS_PENDING: {
       const memberships = session.Membership.all()
       memberships.toModelArray().map(membership => {
         membership.update({
@@ -265,8 +285,10 @@ export default function ormReducer (state = {}, action) {
         })
       })
       break
+    }
   }
 
   values(sessionReducers).forEach(fn => fn(session, action))
+
   return session.state
 }

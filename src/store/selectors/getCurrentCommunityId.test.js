@@ -10,7 +10,7 @@ describe('getCurrentCommunityId', () => {
   it('gets id from state', () => {
     const state = {
       orm: session.state,
-      currentNetworkAndCommunity: {
+      session: {
         communityId: 55
       }
     }
