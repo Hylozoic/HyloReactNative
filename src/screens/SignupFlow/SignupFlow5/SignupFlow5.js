@@ -77,7 +77,7 @@ export default class SignupFlow5 extends React.Component {
   finishSignup = () => {
     const { finishSignup } = this.props
     const unsavedControls = flow(values,
-      filter(c => c.current.isEditable()),
+      filter(c => c.current?.isEditable()),
       map(c => c.current.highlightCheck()))(this.controlRefs)
     if (unsavedControls.length === 0) finishSignup()
   }
