@@ -2,13 +2,13 @@
 import React from 'react'
 import { StyleSheet, Text, View, Alert } from 'react-native'
 import HTMLView from 'react-native-htmlview'
-import { present, sanitize, humanDate } from 'hylo-utils/text'
 import { get, isEmpty, filter, findLastIndex } from 'lodash/fp'
-
+import { present, sanitize, humanDate } from 'hylo-utils/text'
+import urlHandler from 'routing/urlHandler'
 import Avatar from 'components/Avatar'
 import PopupMenuButton from 'components/PopupMenuButton'
 import Icon from 'components/Icon'
-import urlHandler from 'routing/urlHandler'
+import LinkButton from 'routing/LinkButton'
 import styles from './Comment.styles'
 import { caribbeanGreen } from 'style/colors'
 
@@ -49,14 +49,20 @@ export default function Comment ({
       ? postTitle.substring(0, 40) + '...'
       : postTitle
   }
-
+  
+  const creatorUrl = `/m/${creator.id}`
+  
   return (
     <View style={[style, styles.container]}>
-      <Avatar avatarUrl={creator.avatarUrl} style={styles.avatar} />
+      <LinkButton to={creatorUrl}>
+        <Avatar avatarUrl={creator.avatarUrl} style={styles.avatar} />
+      </LinkButton>
       <View style={styles.details}>
         <View style={styles.header}>
           <View style={styles.meta}>
-            <Text style={styles.name}>{creator.name}</Text>
+            <LinkButton to={creatorUrl}>
+              <Text style={styles.name}>{creator.name}</Text>
+            </LinkButton>
             <Text style={styles.date}>{humanDate(createdAt)}</Text>
             {displayPostTitle &&
               <Text style={styles.date}>on "{postTitle}"</Text>}
