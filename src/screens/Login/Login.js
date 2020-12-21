@@ -1,6 +1,5 @@
 import React from 'react'
 import NetInfo from '@react-native-community/netinfo'
-import { get } from 'lodash/fp'
 import {
   ScrollView,
   Text,
@@ -27,6 +26,37 @@ export default class Login extends React.Component {
       isConnected: true
     }
     this.passwordInputRef = React.createRef()
+  }
+
+  async UNSAFE_componentWillMount () {
+    const { loginToken, loginByToken } = this.props
+    if (loginToken) {
+      const loginByTokenResponse = await loginByToken()
+      const errorMessage = loginByTokenResponse?.errorMessage
+      if (errorMessage) this.createErrorNotification(errorMessage)
+    }
+  }
+
+  componentDidMount () {
+    this.unsubscribeNetInfo = NetInfo.addEventListener(this.handleConnectivityChange)
+    if (this.props.signupInProgress) {
+      // TODO: Decide whether to reset or simply navigate for returning sign-up
+      // this.props.navigation.reset({
+      //   index: 0,
+      //   routes: [{
+      //     name: 'Signup',
+      //     index: 1,
+      //     routes: [{
+      //       name: 'SignupFlow1'
+      //     }]
+      //   }]
+      // })
+      this.props.navigation.navigate('Signup', { screen: 'SignupFlow1' })
+    }
+  }
+
+  componentWillUnmount () {
+    this.unsubscribeNetInfo()
   }
 
   login = () => {
@@ -57,31 +87,6 @@ export default class Login extends React.Component {
     if (key === 'email') {
       this.validateEmail(value)
     }
-  }
-
-  async UNSAFE_componentWillMount () {
-    const { loginToken, loginByToken } = this.props
-    if (loginToken) {
-      const loginByTokenResponse = await loginByToken()
-      const errorMessage = get('errorMessage', loginByTokenResponse)
-      if (errorMessage) this.createErrorNotification(errorMessage)
-    }
-  }
-
-  componentDidMount () {
-    this.unsubscribeNetInfo = NetInfo.addEventListener(this.handleConnectivityChange)
-    if (this.props.signupInProgress) {
-      // TODO: Decide whether to reset or simply navigate for returning sign-up
-      // this.props.navigation.reset({
-      //   index: 0,
-      //   routes: [{ name: 'SignupFlow1' }]
-      // })
-      this.props.navigation.navigate('SignupFlow1')
-    }
-  }
-
-  componentWillUnmount () {
-    this.unsubscribeNetInfo()
   }
 
   handleConnectivityChange = ({ isConnected }) => {

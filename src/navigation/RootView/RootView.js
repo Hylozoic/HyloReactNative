@@ -13,7 +13,9 @@ export default function RootView ({
   loadCurrentUserSession,
   openedPushNotification
 }) {
-  useMemo(() => { loadCurrentUserSession() }, [])
+  // TODO: Loading twice. Deternube what to memoize on to make sure
+  // this loads only once
+  useMemo(() => { loadCurrentUserSession() }, [signedIn])
 
   if (loading && !signupInProgress) {
     return (
@@ -27,9 +29,9 @@ export default function RootView ({
   return (
     <View style={styles.rootContainer}>
       <NavigationContainer linking={routing}>
-        {signupInProgress || !signedIn
-          ? <AuthNavigator signupInProgress={signupInProgress} />
-          : <AppWithDrawerNavigator />}
+        {signedIn && !signupInProgress
+          ? <AppWithDrawerNavigator />
+          : <AuthNavigator signupInProgress={signupInProgress} />}
       </NavigationContainer>
     </View>
   )

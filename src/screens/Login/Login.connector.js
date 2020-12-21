@@ -1,5 +1,4 @@
 import { connect } from 'react-redux'
-import { get } from 'lodash/fp'
 import {
   login,
   loginWithApple,
@@ -8,10 +7,8 @@ import {
   loginByToken
 } from './actions'
 import { getPending } from './Login.store'
-import { register as registerOneSignal } from 'util/onesignal'
-import registerDevice from 'store/actions/registerDevice'
 import fetchCurrentUser from 'store/actions/fetchCurrentUser'
-import { redirectAfterLogin } from 'routing/helpers'
+import getRouteParam from 'store/selectors/getRouteParam'
 // import { getNavigationAction } from 'routing/DeepLinkHandler/DeepLinkHandler.store'
 
 export function mapStateToProps (state, props) {
@@ -21,21 +18,20 @@ export function mapStateToProps (state, props) {
   const goToResetPassword = () => props.navigation.navigate('ForgotPassword')
   return {
     pending,
-    signupInProgress: get('route.params.signupInProgress', props),
-    bannerMessage: get('route.params.bannerMessage', props),
+    signupInProgress: getRouteParam('signupInProgress', props.route),
+    bannerMessage: getRouteParam('bannerMessage', props.route),
     formError,
     defaultEmail: state.session.defaultLoginEmail,
     goToSignup,
     goToResetPassword,
-    loginToken: decodeURIComponent(get('route.params.loginToken', props)),
-    loginTokenUserId: get('route.params.userId', props),
+    loginToken: decodeURIComponent(getRouteParam('loginToken', props.route)),
+    loginTokenUserId: getRouteParam('userId', props.route),
     // TODO: May bring back DeepLink
     // deepLinkAction: getNavigationAction(state)
   }
 }
 
 export const mapDispatchToProps = {
-  registerDevice,
   loginWithApple,
   loginWithFacebook,
   loginWithGoogle,
@@ -46,7 +42,6 @@ export const mapDispatchToProps = {
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
   const {
-    registerDevice,
     loginWithApple,
     loginWithGoogle,
     loginWithFacebook,
@@ -56,16 +51,9 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
   } = dispatchProps
   const finishLogin = async (action) => {
     if (action.error) {
-      const errorMessage = get('payload.response.body', action)
+      const errorMessage = action?.payload?.response?.body
       return errorMessage ? { errorMessage } : null
     }
-    registerOneSignal({ registerDevice })
-    const { error, payload } = await fetchCurrentUser()
-    return !error && redirectAfterLogin({
-      navigation: ownProps.navigation,
-      currentUser: payload.data.me,
-      action: stateProps.deepLinkAction
-    })
   }
 
   return {
