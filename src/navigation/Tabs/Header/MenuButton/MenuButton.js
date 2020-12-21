@@ -2,7 +2,7 @@ import React from 'react'
 import { View, Image, StatusBar } from 'react-native'
 import { get } from 'lodash/fp'
 import styles from './MenuButton.styles.js'
-import { ALL_COMMUNITIES_ID } from 'store/models/Community'
+import { ALL_COMMUNITIES_ID } from 'routing/helpers'
 import Icon from 'components/Icon'
 import { HeaderBackButton } from '@react-navigation/stack'
 

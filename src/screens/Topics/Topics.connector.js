@@ -62,7 +62,7 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     dispatchProps.fetchCommunityTopics(communityId, { first: null })
   const setTopicSubscribe = (topicId, isSubscribing) =>
     dispatchProps.setTopicSubscribe(topicId, communityId, isSubscribing)
-  const goToTopic = topicName => navigation.navigate('Feed', { topicName })
+  const goToTopic = topicName => navigation.navigate('Topic Feed', { topicName })
 
   return {
     ...ownProps,

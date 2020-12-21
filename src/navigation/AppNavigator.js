@@ -12,20 +12,15 @@ import CommunitySettings from 'screens/CommunitySettings'
 import CreateCommunityName from 'screens/CreateCommunityFlow/CreateCommunityName'
 import CreateCommunityReview from 'screens/CreateCommunityFlow/CreateCommunityReview'
 import CreateCommunityUrl from 'screens/CreateCommunityFlow/CreateCommunityUrl'
-import Feed from 'screens/Feed'
 import InviteExpired from 'screens/InviteExpired'
 import InvitePeople from 'screens/InvitePeople'
 import ItemChooserScreen from 'screens/ItemChooserScreen'
 import JoinCommunity from 'screens/JoinCommunity'
 import LoadingScreen from 'screens/LoadingScreen'
-import MemberProfile from 'screens/MemberProfile'
-import MemberDetails from 'screens/MemberProfile/MemberDetails'
-import MemberSkillEditor from 'screens/MemberProfile/MemberSkillEditor'
 import ModeratorSettings from 'screens/ModeratorSettings'
 import NotificationSettings from 'screens/NotificationSettings'
 import NotificationsList from 'screens/NotificationsList'
 import NewMessage from 'screens/NewMessage'
-import PostDetails from 'screens/PostDetails'
 import PostEditor from 'screens/PostEditor'
 import ProjectMembers from 'screens/ProjectMembers'
 import Thread from 'screens/Thread'
@@ -55,17 +50,10 @@ export default function AppNavigator () {
   return (
     <App.Navigator {...navigatorProps}>
       <App.Screen name='Tabs' component={TabsNavigator}
-        options={buildScreenOptionsForTabsHeader} />
-      <App.Screen name='Feed' component={Feed} />
-      <App.Screen name='Member' component={MemberProfile} />
-      <App.Screen name='MemberDetails' component={MemberDetails} />
-      <App.Screen name='MemberSkillEditor' component={MemberSkillEditor}
-        options={{ headerTitle: 'Edit Skills' }} />
+        options={{ headerShown: false }} />
       <App.Screen name='New Message' component={NewMessage}
         options={() => buildScreenOptions({ headerLeftConfirm: true })} />
       <App.Screen name='Edit Post' component={PostEditor} />
-      <App.Screen name='Post Details' component={PostDetails} options={{ headerTitle: 'Detail' }} />
-      <App.Screen name='Project Members' component={ProjectMembers} />
       <App.Screen name='Edit Account Info' component={UserSettings} />
       <App.Screen name='Community Settings' component={CommunitySettingsMenu} />
       <App.Screen name='Community Information' component={CommunitySettings} />

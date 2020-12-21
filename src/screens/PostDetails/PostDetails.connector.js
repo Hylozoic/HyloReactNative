@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { get } from 'lodash/fp'
 import { showToast } from 'util/toast'
-import { ALL_COMMUNITIES_ID } from 'store/models/Community'
+import { ALL_COMMUNITIES_ID } from 'routing/helpers'
 import fetchPost from 'store/actions/fetchPost'
 import { createComment } from './CommentEditor/CommentEditor.store'
 import { getPresentedPost } from 'store/selectors/getPost'

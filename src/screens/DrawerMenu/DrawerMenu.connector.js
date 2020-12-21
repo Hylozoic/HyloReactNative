@@ -9,7 +9,7 @@ import getCurrentNetworkId from 'store/selectors/getCurrentNetworkId'
 import { logout } from 'screens/Login/actions'
 import selectCommunity from 'store/actions/selectCommunity'
 import selectNetwork from 'store/actions/selectNetwork'
-import { ALL_COMMUNITIES_ID } from 'store/models/Community'
+import { ALL_COMMUNITIES_ID } from 'routing/helpers'
 import getCanModerate from 'store/selectors/getCanModerate'
 import getCurrentCommunity from 'store/selectors/getCurrentCommunity'
 import { createSelector } from 'reselect'
@@ -111,16 +111,16 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     ...ownProps,
     goToCommunity: community => {
       if (community.id === ALL_COMMUNITIES_ID) {
-        navigation.navigate('Home')
+        navigation.navigate('Feed')
       } else {
         navigation.closeDrawer()
-        navigation.navigate('Home')
+        navigation.navigate('Feed', { communityId: community.id, networkId: null })
       }
       dispatchProps.selectCommunity(community.id)
     },
     goToNetwork: network => {
       navigation.closeDrawer()
-      navigation.navigate('Home')
+      navigation.navigate('Feed', { communityId: null, networkId: network.id })
       dispatchProps.selectNetwork(network.id)
     },
     showSettings: () => {

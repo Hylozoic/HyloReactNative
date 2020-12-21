@@ -17,16 +17,24 @@ export default class MemberProfile extends React.Component {
   componentDidMount () {
     if (this.props.isBlocked) return this.props.navigation.goBack()
     this.props.fetchPerson()
+    this.setHeader()
   }
 
   componentDidUpdate (prevProps) {
     if (prevProps.id !== this.props.id) {
       this.props.fetchPerson()
+      this.setHeader()
     }
   }
 
   shouldComponentUpdate (nextProps) {
     return nextProps.isFocused
+  }
+
+  setHeader = () => {
+    const { navigation, topicName, community } = this.props
+    // TODO: Get current community name
+    navigation.setOptions({ headerTitle: ''  })
   }
 
   blockUser = () => {
