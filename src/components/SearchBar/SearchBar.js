@@ -17,7 +17,8 @@ export default function SearchBar ({
   onCancelText,
   onFocus,
   autoFocus = false,
-  loading
+  loading,
+  disabled = false
 }) {
   const Cancel = () => onCancelText
     ? <Text style={styles.cancelText}>{onCancelText}</Text>
@@ -36,7 +37,7 @@ export default function SearchBar ({
         autoCapitalize='none'
         autoCorrect={false}
         underlineColorAndroid='transparent'
-        editable
+        editable={!disabled}
       />
       {loading && <Loading style={styles.loading} />}
       {!loading && value.length > 0 && onCancel && <TouchableOpacity style={styles.cancel} onPress={onCancel}>

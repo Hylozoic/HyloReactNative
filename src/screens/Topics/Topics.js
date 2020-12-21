@@ -29,12 +29,12 @@ export default class Topics extends React.Component {
   }
 
   render () {
-    if (this.props.networkId) {
+    if (!this.props.community?.id) {
       return <TopicSupportComingSoon navigation={this.props.navigation} />
     }
 
     const {
-      community, topics, pending, setTopicSubscribe, goToTopic, term, setTerm
+      communityHasTopics, community, filteredTopics, pending, setTopicSubscribe, goToTopic, searchTerm, setTerm
     } = this.props
     const bannerUrl = get('bannerUrl', community)
     const name = get('name', community)
@@ -49,14 +49,17 @@ export default class Topics extends React.Component {
             <Text style={styles.title}>{name}</Text>
           </View>
           <SearchBar
-            value={term}
+            value={searchTerm}
             onChangeText={setTerm}
             placeholder='Search Topics'
+            disable={!communityHasTopics}
           />
-          {pending && isEmpty(topics)
+          {pending && isEmpty(filteredTopics)
             ? <Loading />
             : <TopicList
-                topics={topics}
+                communityHasTopics={communityHasTopics}
+                searchTerm={searchTerm}
+                filteredTopics={filteredTopics}
                 setTopicSubscribe={setTopicSubscribe}
                 goToTopic={goToTopic}
               />}
@@ -66,22 +69,32 @@ export default class Topics extends React.Component {
   }
 }
 
-export class TopicList extends React.Component {
-  render () {
-    const { topics, setTopicSubscribe, goToTopic } = this.props
-    return (
-      <View style={styles.topicList}>
-        {isEmpty(topics)
-          ? <Text style={styles.emptyList}>No topics match your search</Text>
-          : topics.map((topic, i) =>
-            <TopicRow
-              topic={topic} key={i} first={i === 0}
-              setTopicSubscribe={setTopicSubscribe}
-              goToTopic={goToTopic}
-            />)}
-      </View>
-    )
-  }
+export function TopicList ({
+  communityHasTopics,
+  filteredTopics,
+  setTopicSubscribe,
+  searchTerm,
+  goToTopic
+}) {
+  if (!communityHasTopics) return (
+    <View style={styles.topicList}>
+      <Text style={styles.emptyList}>No topics were found for this community</Text>
+    </View>
+  )
+  return (
+    <View style={styles.topicList}>
+      {isEmpty(filteredTopics) && searchTerm && (
+        <Text style={styles.emptyList}>No topics matched "{searchTerm}"</Text>
+      )}
+      {!isEmpty(filteredTopics) && filteredTopics.map((topic, i) => (
+        <TopicRow
+          topic={topic} key={i} first={i === 0}
+          setTopicSubscribe={setTopicSubscribe}
+          goToTopic={goToTopic}
+        />
+      ))}
+    </View>
+  )
 }
 
 export function TopicRow ({ topic, first, setTopicSubscribe, goToTopic }) {
