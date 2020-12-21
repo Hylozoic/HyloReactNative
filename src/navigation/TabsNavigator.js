@@ -27,9 +27,10 @@ export function HomeNavigator () {
     <Home.Navigator {...navigatorProps}>
       <Home.Screen name='Feed' component={Feed} />
       <Home.Screen name='Topic Feed' component={Feed} />
-      {/* <Home.Screen name='Member' component={MemberProfile} /> */}
       <Home.Screen name='Post Details' component={PostDetails} />
       <Home.Screen name='Project Members' component={ProjectMembers} />
+      <Home.Screen name='Member' component={MemberProfile} />
+      <Home.Screen name='MemberDetails' component={MemberDetails} />
     </Home.Navigator>
   )
 }
