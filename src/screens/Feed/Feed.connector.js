@@ -90,11 +90,9 @@ export function mapDispatchToProps (dispatch, { navigation }) {
     newPost: (communityId, topicName) =>
       navigation.navigate('Edit Post', { communityId, topicName }),
     showPost: id => navigation.navigate('Post Details', { id }),
-    showMember: id => navigation.navigate('Member', { id }),
+    showMember: id => navigation.navigate('Members', { screen: 'Member', id }),
     goToCommunity: makeGoToCommunity(dispatch, navigation),
-    goToCreateCommunityName: () => {
-      navigation.navigate('CreateCommunityName')
-    },
+    goToCreateCommunity: () => navigation.navigate('Create Community'),
     ...bindActionCreators({
       fetchCommunityTopic,
       setTopicSubscribe

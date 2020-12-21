@@ -4,6 +4,7 @@ import getCurrentNetwork from 'store/selectors/getCurrentNetwork'
 
 export function mapStateToProps (state) {
   const currentContext = getCurrentNetwork(state) || getCurrentCommunity(state)
+
   return {
     currentContext
   }

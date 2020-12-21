@@ -12,7 +12,7 @@ import moment from 'moment'
 import { validateTopicName } from 'hylo-utils/validators'
 import { rhino30 } from 'style/colors'
 import { showToast, hideToast } from 'util/toast'
-import { buildScreenOptions } from 'navigation/header'
+import { buildDefaultHeaderOptions } from 'navigation/header'
 import { MAX_TITLE_LENGTH } from './PostEditor.store'
 // ProjectMembers Chooser
 import scopedFetchPeopleAutocomplete from 'store/actions/scopedFetchPeopleAutocomplete'
@@ -78,16 +78,16 @@ export default class PostEditor extends React.Component {
     const headerTitle = isNewPost
       ? `New ${subject}`
       : `Edit ${subject}`
-    const options = buildScreenOptions({
+    navigation.setOptions(buildDefaultHeaderOptions({
       headerTitle,
+      headerLeftCloseIcon: true,
       headerLeftConfirm: true,
       headerRightButtonLabel: isSaving
         ? 'Saving...'
         : 'Save',
       headerRightButtonOnPress: this.save,
       headerRightButtonDisabled: isSaving
-    })
-    navigation.setOptions(options)
+    }))
   }
 
   componentDidMount () {

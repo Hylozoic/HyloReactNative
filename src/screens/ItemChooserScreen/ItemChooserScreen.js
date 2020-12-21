@@ -34,6 +34,26 @@ export default class ItemChooserScreen extends React.Component {
     })
   }
 
+  setHeader = () => {
+    const { navigation, route } = this.props
+    const done = route.params.done || (() => {})
+    const updateItems = route.params.updateItems
+    const cancel = route.params.cancel || (() => {})
+    const screenTitle = route.params.screenTitle
+    const headerParams = {
+      headerTitle: screenTitle,
+      headerLeftOnPress: cancel,
+      headerLeftCloseIcon: true
+    }
+    if (isFunction(updateItems)) {
+      headerParams.headerRightButtonLabel = 'Done'
+      headerParams.headerRightButtonOnPress = done
+    }
+    navigation.setOptions(
+      buildDefaultHeaderOptions(headerParams)
+    )
+  }
+
   cancel = () => {
     const { route, navigation } = this.props
     const { initialItems, chosenItems } = route.params
@@ -62,9 +82,10 @@ export default class ItemChooserScreen extends React.Component {
     this.props.navigation.setParams({ chosenItems })
 
   render () {
-    const screenTitle = this.props.route.params.screenTitle
-    const pickItem = this.props.route.params.pickItem
-    const updateItems = this.props.route.params.updateItems
+    const { route } = this.props
+    const screenTitle = route.params?.screenTitle
+    const pickItem = route.params?.pickItem
+    const updateItems = route.params?.updateItems
 
     return (
       <ItemChooser

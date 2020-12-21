@@ -1,14 +1,13 @@
 import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 import { isFunction } from 'lodash/fp'
-import header, { buildScreenOptions, buildScreenOptionsForWorkflow  } from 'navigation/header'
-import buildScreenOptionsForTabsHeader from 'navigation/Tabs/Header/buildScreenOptionsForTabsHeader'
+import { buildDefaultHeaderOptions, buildWorkflowHeaderOptions  } from 'navigation/header'
 // Navigation
 import TabsNavigator from 'navigation/TabsNavigator'
 // Screens
 import BlockedUsers from 'screens/BlockedUsers'
 import CommunitySettingsMenu from 'screens/CommunitySettingsMenu'
-import CommunitySettings from 'screens/CommunitySettings'
+import CommunitySettingsComponent from 'screens/CommunitySettings'
 import CreateCommunityName from 'screens/CreateCommunityFlow/CreateCommunityName'
 import CreateCommunityReview from 'screens/CreateCommunityFlow/CreateCommunityReview'
 import CreateCommunityUrl from 'screens/CreateCommunityFlow/CreateCommunityUrl'
@@ -30,47 +29,71 @@ import SearchPage from 'screens/SearchPage'
 import UserSettings from 'screens/UserSettings'
 import { gunsmoke } from 'style/colors'
 
-const App = createStackNavigator()
+const CreateCommunity = createStackNavigator()
+export function CreateCommunityNavigator () {
+  const navigatorProps = {}
+  return (
+    <CommunitySettings.Navigator {...navigatorProps}>
+      <CommunitySettings.Screen name='CreateCommunityName' component={CreateCommunityName}
+        options={buildWorkflowHeaderOptions({ headerTitle: 'STEP 1/3', headerLeftCloseIcon: true })} />
+      <CommunitySettings.Screen name='CreateCommunityUrl' component={CreateCommunityUrl}
+        options={buildWorkflowHeaderOptions({ headerTitle: 'STEP 2/3' })} />
+      <CommunitySettings.Screen name='CreateCommunityReview' component={CreateCommunityReview}
+        options={buildWorkflowHeaderOptions({ headerTitle: 'STEP 3/3' })} />
+    </CommunitySettings.Navigator>
+  )
+}
 
-export default function AppNavigator () {
+const CommunitySettings = createStackNavigator()
+export function CommunitySettingsNavigator () {
   const navigatorProps = {
-    headerShown: false,
-    screenOptions: () => ({
+    screenOptions: buildDefaultHeaderOptions({
+      headerLeftCloseIcon: false,
       headerBackTitleVisible: false,
-      headerTitleStyle: {
-        fontSize: 17,
-        color: 'black',
-        fontFamily: 'Circular-Bold'
-      },
-      headerTintColor: gunsmoke,
-      cardStyle: { backgroundColor: '#FFF' },
+      cardStyle: { backgroundColor: '#FFF' }
     })
   }
-  
+  return (
+    <CommunitySettings.Navigator {...navigatorProps}>
+      <CommunitySettings.Screen name='Community Settings' component={CommunitySettingsMenu} 
+        options={buildDefaultHeaderOptions({ headerLeftCloseIcon: true })} />
+      <CommunitySettings.Screen name='Community Information' component={CommunitySettingsComponent} />
+      <CommunitySettings.Screen name='Community Moderators' component={ModeratorSettings} />
+      <CommunitySettings.Screen name='Invite Members' component={InvitePeople}
+        options={{ headerTitle: 'Invite Members'}} />
+    </CommunitySettings.Navigator>
+  )
+}
+
+const App = createStackNavigator()
+export default function AppNavigator () {
+  const navigatorProps = {
+    mode: 'modal',
+    headerShown: false,
+    screenOptions: buildDefaultHeaderOptions({
+      headerLeftCloseIcon: true,
+      cardStyle: { backgroundColor: '#FFF' }
+    })
+  }
   return (
     <App.Navigator {...navigatorProps}>
       <App.Screen name='Tabs' component={TabsNavigator}
         options={{ headerShown: false }} />
-      <App.Screen name='New Message' component={NewMessage}
-        options={() => buildScreenOptions({ headerLeftConfirm: true })} />
+      <App.Screen name='New Message' component={NewMessage} />
       <App.Screen name='Edit Post' component={PostEditor} />
       <App.Screen name='Edit Account Info' component={UserSettings} />
-      <App.Screen name='Community Settings' component={CommunitySettingsMenu} />
-      <App.Screen name='Community Information' component={CommunitySettings} />
-      <App.Screen name='Community Moderators' component={ModeratorSettings} />
-      <App.Screen name='Invite Members' component={InvitePeople}
-        options={{ headerTitle: 'Invite Members'}} />
+      <App.Screen name='Community Settings' component={CommunitySettingsNavigator}
+        options={{ headerShown: false }} />
+      <App.Screen name='Create Community' component={CreateCommunityNavigator}
+        options={{ headerShown: false }} />
       <App.Screen name='Notifications' component={NotificationsList}
-        options={() => buildScreenOptions({ headerLeftCloseIcon: true })} />
+        options={() => buildDefaultHeaderOptions({ headerLeftCloseIcon: true })} />
       <App.Screen name='Messages' component={ThreadList}
-        options={({ navigation }) => buildScreenOptions({
+        options={({ navigation }) => buildDefaultHeaderOptions({
           headerLeftCloseIcon: true,
           headerRightButtonLabel: 'New',
           headerRightButtonOnPress: () => navigation.navigate('New Message')
         })} />
-      {/* 
-        TODO: Thread headerTitle should be link to ThreadParticipants
-      */}
       <App.Screen name='ThreadParticipants' component={ThreadParticipants}
         options={{ headerTitle: 'Participants' }} />
       <App.Screen name='Thread' component={Thread} />
@@ -80,36 +103,8 @@ export default function AppNavigator () {
         options={{ headerShown: false }} />
       <App.Screen name='JoinCommunity' component={JoinCommunity}
         options={{ headerShown: false}} />
-      <App.Screen name='CreateCommunityName' component={CreateCommunityName}
-        options={buildScreenOptionsForWorkflow({ headerTitle: 'STEP 1/3' })} />
-      <App.Screen name='CreateCommunityUrl' component={CreateCommunityUrl}
-        options={buildScreenOptionsForWorkflow({ headerTitle: 'STEP 2/3' })} />
-      <App.Screen name='CreateCommunityReview' component={CreateCommunityReview}
-        options={buildScreenOptionsForWorkflow({ headerTitle: 'STEP 3/3' })} />
       <App.Screen name='Search' component={SearchPage} />
-      {/* 
-        TODO: Convert this final header() to buildScreenOptions() and all done!
-        Maybe move this into ItemChooserScreen as an update header
-      */}
-      <App.Screen name='ItemChooserScreen' component={ItemChooserScreen}
-        options={({ navigation, route }) => {
-          const done = route.params.done || (() => {})
-          const updateItems = route.params.updateItems
-          const cancel = route.params.cancel || (() => {})
-          const screenTitle = route.params.screenTitle
-          const headerParams = {
-            title: screenTitle,
-            headerBackButton: cancel,
-            disableOnClick: false
-          }
-          if (isFunction(updateItems)) {
-            headerParams.right = {
-              text: 'Done',
-              onPress: done
-            }
-          }
-          return header(navigation, route, headerParams)
-        }} />
+      <App.Screen name='ItemChooserScreen' component={ItemChooserScreen} />
       <App.Screen name='Loading' component={LoadingScreen} />
     </App.Navigator>
   )

@@ -5,13 +5,23 @@ import NotificationCard from 'components/NotificationCard'
 import CreateCommunityNotice from 'components/CreateCommunityNotice'
 
 import styles from './NotificationsList.styles'
+import { buildDefaultHeaderOptions } from 'navigation/header'
 
 export default class NotificationsList extends Component {
   state = { ready: false }
 
+  setHeader = () => {
+    const { navigation, markAllActivitiesRead } = this.props
+    navigation.setOptions(buildDefaultHeaderOptions({
+      headerLeftCloseIcon: true,
+      headerRightButtonLabel: 'Mark as read',
+      headerRightButtonOnPress: markAllActivitiesRead
+    }))
+  }
+
   componentDidMount () {
     const { fetchNotifications, setRightButton, updateNewNotificationCount } = this.props
-    setRightButton()
+    this.setHeader()
     fetchNotifications()
     updateNewNotificationCount()
   }
@@ -31,7 +41,7 @@ export default class NotificationsList extends Component {
   keyExtractor = item => item.id
 
   render () {
-    const { hasMore, markActivityRead, notifications, pending, currentUserHasMemberships, goToCreateCommunityName } = this.props
+    const { hasMore, markActivityRead, notifications, pending, currentUserHasMemberships, goToCreateCommunity } = this.props
     const { ready } = this.state
     if (!ready || (pending && notifications.length === 0)) {
       return <LoadingScreen />
@@ -39,7 +49,7 @@ export default class NotificationsList extends Component {
     if (!currentUserHasMemberships) {
       return (
         <CreateCommunityNotice
-          goToCreateCommunityName={goToCreateCommunityName}
+          goToCreateCommunity={goToCreateCommunity}
           text='No notifications here, try creating your own Community!'
         />
       )

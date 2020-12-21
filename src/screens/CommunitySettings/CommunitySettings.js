@@ -3,7 +3,7 @@ import { Text, View, Image, TouchableOpacity, TextInput, ScrollView } from 'reac
 import { some } from 'lodash/fp'
 import { showToast } from 'util/toast'
 import Loading from 'components/Loading'
-import { buildScreenOptions } from 'navigation/header'
+import { buildDefaultHeaderOptions } from 'navigation/header'
 import ImagePicker from 'components/ImagePicker'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
 import defaultBanner from 'assets/default-user-banner.jpg'
@@ -22,13 +22,13 @@ export default class CommunitySettings extends React.Component {
   setHeader = () => {
     const { changed } = this.state
     const { navigation, pendingSave } = this.props
-    const options = buildScreenOptions({
+    navigation.setOptions(buildDefaultHeaderOptions({
+      headerBackTitleVisible: false,
       headerLeftConfirm: changed,
       headerRightButtonLabel: pendingSave ? 'Saving' : 'Save',
       headerRightButtonOnPress: this.saveChanges,
       headerRightButtonDisabled: !changed
-    })
-    navigation.setOptions(options)
+    }))
   }
 
   componentDidMount () {

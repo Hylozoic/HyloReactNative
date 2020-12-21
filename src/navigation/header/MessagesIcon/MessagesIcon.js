@@ -1,7 +1,6 @@
 import React from 'react'
-
 import BadgedIcon from 'components/BadgedIcon'
-import styles from '../Header.styles'
+import styles from '../header.styles'
 
 export default function MessagesIcon ({ showBadge, showMessages }) {
   return (
@@ -9,7 +8,7 @@ export default function MessagesIcon ({ showBadge, showMessages }) {
       name='Messages'
       action={showMessages}
       showBadge={showBadge}
-      style={styles.icon}
+      style={styles.headerIcon}
     />
   )
 }

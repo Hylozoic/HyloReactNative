@@ -1,16 +1,16 @@
 import React from 'react'
 import { View, Image, StatusBar } from 'react-native'
+import { HeaderBackButton } from '@react-navigation/stack'
 import { get } from 'lodash/fp'
-import styles from './MenuButton.styles.js'
 import { ALL_COMMUNITIES_ID } from 'routing/helpers'
 import Icon from 'components/Icon'
-import { HeaderBackButton } from '@react-navigation/stack'
+import styles from './MenuButton.styles.js'
 
 const allCommunitiesLogo = require('assets/All_Communities.png')
 
 export default function MenuButton ({
   currentContext,
-  isOnTabRoot,
+  atRoot,
   navigation
 }) {
   const avatarUrl = get('avatarUrl', currentContext)
@@ -18,7 +18,7 @@ export default function MenuButton ({
   const imageSource = ((id && id === ALL_COMMUNITIES_ID) || !avatarUrl)
     ? allCommunitiesLogo
     : { uri: avatarUrl }
-  const onPress = isOnTabRoot
+  const onPress = atRoot
     ? navigation.openDrawer
     : navigation.goBack
 
@@ -30,7 +30,7 @@ export default function MenuButton ({
         labelVisible={false}
         backImage={() => (
           <View style={styles.container}>
-            {isOnTabRoot
+            {atRoot
               ? <Icon name='Hamburger' style={styles.menuIcon} />
               : <Icon name='ArrowForward' style={styles.backIcon} />}
             <Image source={imageSource} style={styles.avatar} />

@@ -86,8 +86,8 @@ describe('mergeProps', () => {
       expect(ownProps.navigation.navigate).toHaveBeenCalledTimes(1)
     })
 
-    it('goToCreateCommunityName', () => {
-      props.goToCreateCommunityName()
+    it('goToCreateCommunity', () => {
+      props.goToCreateCommunity()
       expect(ownProps.navigation.navigate).toHaveBeenCalledTimes(1)
     })
 

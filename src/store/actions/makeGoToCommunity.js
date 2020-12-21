@@ -2,9 +2,8 @@ import selectCommunity from './selectCommunity'
 
 export default function makeGoToCommunity (dispatch, navigation) {
   return communityId => {
-    // TODO: Refresh navigation state on all the tabs back to root
-    //       note that once we get this far we're near not needing the selected community/network 
-    //       state storage... maybe
+    // TODO: Eliminate reset transition, or go back
+    // to navigate() magic for less ugly
     navigation.reset({
       id: 0,
       routes: [
@@ -20,7 +19,7 @@ export default function makeGoToCommunity (dispatch, navigation) {
                   name: 'Feed',
                   params: {
                     networkId: null,
-                    communityId: id
+                    communityId
                   }
                 }
               ]
@@ -29,7 +28,6 @@ export default function makeGoToCommunity (dispatch, navigation) {
         }
       ]
     })
-
     // navigation.navigate('Feed', {
     //   networkId: null,
     //   communityId

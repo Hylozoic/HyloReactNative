@@ -1,18 +1,9 @@
 import { StyleSheet } from 'react-native'
 import {
-  gunsmoke, rhino30, rhino80, caribbeanGreen, white60onCaribbeanGreen, amaranth, white
+  rhino30, rhino80, caribbeanGreen, white60onCaribbeanGreen, amaranth, white
 } from 'style/colors'
 
 export default {
-  header: {
-    backgroundColor: 'white'
-  },
-  headerTitleStyle: {
-    fontSize: 17,
-    color: 'black',
-    fontFamily: 'Circular-Bold'
-  },
-  headerTintColor: gunsmoke,
   container: {
     backgroundColor: 'white',
     flex: 1,

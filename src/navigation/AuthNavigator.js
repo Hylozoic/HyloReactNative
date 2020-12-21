@@ -1,6 +1,6 @@
 import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
-import { buildScreenOptionsForWorkflow } from 'navigation/header'
+import { buildWorkflowHeaderOptions } from 'navigation/header'
 import ForgotPassword from 'screens/ForgotPassword'
 import Login from 'screens/Login'
 import Signup from 'screens/Signup'
@@ -25,15 +25,15 @@ export default function AuthNavigator (props) {
         options={{ title: 'Reset Your Password' }} />
       <Auth.Screen name='Signup' component={Signup} options={{ headerShown: false }} />
       <Auth.Screen name='SignupFlow1' component={SignupFlow1} 
-        options={buildScreenOptionsForWorkflow({ title: 'STEP 1/5' })} />
+        options={buildWorkflowHeaderOptions({ title: 'STEP 1/5' })} />
       <Auth.Screen name='SignupFlow2' component={SignupFlow2}
-        options={buildScreenOptionsForWorkflow({ title: 'STEP 2/5' })} />
+        options={buildWorkflowHeaderOptions({ title: 'STEP 2/5' })} />
       <Auth.Screen name='SignupFlow3' component={SignupFlow3}
-        options={buildScreenOptionsForWorkflow({ title: 'STEP 3/5' })} />
+        options={buildWorkflowHeaderOptions({ title: 'STEP 3/5' })} />
       <Auth.Screen name='SignupFlow4' component={SignupFlow4}
-        options={buildScreenOptionsForWorkflow({ title: 'STEP 4/5' })} />
+        options={buildWorkflowHeaderOptions({ title: 'STEP 4/5' })} />
       <Auth.Screen name='SignupFlow5' component={SignupFlow5}
-        options={buildScreenOptionsForWorkflow({ title: 'STEP 5/5' })} />
+        options={buildWorkflowHeaderOptions({ title: 'STEP 5/5' })} />
     </Auth.Navigator>
   )
 }

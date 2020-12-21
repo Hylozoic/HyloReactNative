@@ -11,7 +11,7 @@ import {
   updateNewNotificationCount
 } from './NotificationsList.store'
 import getMemberships from 'store/selectors/getMemberships'
-import { HeaderRightButton } from 'navigation/header'
+import HeaderRightButton from 'navigation/header/HeaderRightButton'
 import { mapWhenFocused } from 'util/redux'
 
 const NOTIFICATIONS_PAGE_SIZE = 20
@@ -26,19 +26,13 @@ export function mapStateToProps (state, props) {
 }
 
 export function mapDispatchToProps (dispatch, { navigation }) {
-  const right = {
-    onPress: () => dispatch(markAllActivitiesRead()),
-    text: 'Mark as read'
-  }
   return {
     fetchNotifications: () => dispatch(fetchNotifications(NOTIFICATIONS_PAGE_SIZE)),
     fetchMore: offset => dispatch(fetchNotifications(NOTIFICATIONS_PAGE_SIZE, offset)),
+    markAllActivitiesRead: () => dispatch(markAllActivitiesRead()),
     markActivityRead: id => dispatch(markActivityRead(id)),
-    setRightButton: () => navigation.setParams({ headerRight: <HeaderRightButton {...right} /> }),
     updateNewNotificationCount: () => dispatch(updateNewNotificationCount()),
-    goToCreateCommunityName: () => {
-      navigation.navigate('CreateCommunityName')
-    }
+    goToCreateCommunity: () => navigation.navigate('Create Community')
   }
 }
 

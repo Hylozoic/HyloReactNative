@@ -20,31 +20,35 @@ export default class DrawerMenu extends React.PureComponent {
       name, avatarUrl, goToMyProfile,
       showSettings, networks, communities, currentContext,
       currentNetworkId, currentCommunityId, canModerateCurrentCommunity,
-      goToCreateCommunityName, goToCommunitySettingsMenu
+      goToCreateCommunity, goToCommunitySettingsMenu
     } = this.props
 
     const listSections = [
       {
         data: networks,
         label: 'Networked Communities',
-        renderItem: ({ item }) => <NetworkRow
-          network={item}
-          goToCommunity={this.onGoToCommunity}
-          goToNetwork={this.onGoToNetwork}
-          currentNetworkId={currentNetworkId}
-          currentCommunityId={!currentNetworkId && currentCommunityId}
-                                  />,
+        renderItem: ({ item }) => (
+          <NetworkRow
+            network={item}
+            goToCommunity={this.onGoToCommunity}
+            goToNetwork={this.onGoToNetwork}
+            currentNetworkId={currentNetworkId}
+            currentCommunityId={!currentNetworkId && currentCommunityId}
+          />
+        ),
         keyExtractor: item => 'n' + item.id
       },
       {
         data: communities,
         label: 'Independent Communities',
-        renderItem: ({ item }) => <CommunityRow
-          community={item}
-          goToCommunity={this.onGoToCommunity}
-          currentCommunityId={!currentNetworkId && currentCommunityId}
-          addPadding
-                                  />,
+        renderItem: ({ item }) => (
+          <CommunityRow
+            community={item}
+            goToCommunity={this.onGoToCommunity}
+            currentCommunityId={!currentNetworkId && currentCommunityId}
+            addPadding
+          />
+        ),
         keyExtractor: item => 'c' + item.id
       }
     ]
@@ -53,20 +57,28 @@ export default class DrawerMenu extends React.PureComponent {
 
     return (
       <View style={styles.parent}>
-        {!isAll && currentContext && <View style={styles.header}>
-          <Image source={{ uri: currentContext.avatarUrl }} style={styles.headerAvatar} />
-          <Text style={styles.headerText}>{currentContext.name}</Text>
-          {canModerateCurrentCommunity && <TouchableOpacity onPress={goToCommunitySettingsMenu} hitSlop={{ top: 5, bottom: 5, left: 10, right: 10 }} style={styles.headerSettingsButton}>
-            <Icon style={styles.headerSettingsButtonIcon} name='Settings' />
-            <Text style={styles.headerSettingsButtonText}>Settings</Text>
-          </TouchableOpacity>}
-                                     </View>}
+        {!isAll && currentContext && (
+          <View style={styles.header}>
+            <Image source={{ uri: currentContext.avatarUrl }} style={styles.headerAvatar} />
+            <Text style={styles.headerText}>{currentContext.name}</Text>
+            {canModerateCurrentCommunity && (
+              <TouchableOpacity
+                onPress={goToCommunitySettingsMenu}
+                hitSlop={{ top: 5, bottom: 5, left: 10, right: 10 }}
+                style={styles.headerSettingsButton}
+              >
+                <Icon style={styles.headerSettingsButtonIcon} name='Settings' />
+                <Text style={styles.headerSettingsButtonText}>Settings</Text>
+              </TouchableOpacity>
+            )}
+          </View>
+        )}
         <SectionList
           renderSectionHeader={SectionHeader}
           sections={listSections}
           stickySectionHeadersEnabled={false}
         />
-        <Button text='Create a Community' onPress={goToCreateCommunityName} style={styles.createCommunityButton} />
+        <Button text='Create a Community' onPress={goToCreateCommunity} style={styles.createCommunityButton} />
         <View style={styles.footer}>
           <TouchableOpacity onPress={goToMyProfile} style={styles.avatar}>
             <Image source={avatarUrl ? { uri: avatarUrl } : null} style={styles.avatar} />

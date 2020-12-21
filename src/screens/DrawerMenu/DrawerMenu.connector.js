@@ -129,8 +129,8 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     goToMyProfile: () => {
       navigation.navigate('Member', { id: currentUser.id })
     },
-    goToCreateCommunityName: () => {
-      navigation.navigate('CreateCommunityName')
+    goToCreateCommunity: () => {
+      navigation.navigate('Create Community')
     },
     goToCommunitySettingsMenu: canModerateCurrentCommunity && goToCommunitySettingsMenu
   }

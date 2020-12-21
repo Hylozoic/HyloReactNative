@@ -1,32 +1,33 @@
 import React from 'react'
+import { Text, View } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { createStackNavigator } from '@react-navigation/stack'
 import { isIOS } from 'util/platform'
-// Helpers
-import TabIcon from 'navigation/Tabs/TabIcon'
-import TabLabel from 'navigation/Tabs/TabLabel'
-import tabStyles from 'navigation/Tabs/Tabs.styles'
+// Helper Components
+import Icon from 'components/Icon'
+import { buildTabsHeaderOptions }  from 'navigation/header'
 // Screens
 import Feed from 'screens/Feed'
 import MembersComponent from 'screens/Members'
 import MemberProfile from 'screens/MemberProfile'
 import ProjectsComponent from 'screens/Projects'
 import TopicsComponent from 'screens/Topics'
-import buildScreenOptionsForTabsHeader from 'navigation/Tabs/Header/buildScreenOptionsForTabsHeader'
 import PostDetails from 'screens/PostDetails'
 import MemberDetails from 'screens/MemberProfile/MemberDetails'
 import MemberSkillEditor from 'screens/MemberProfile/MemberSkillEditor'
 import ProjectMembers from 'screens/ProjectMembers/ProjectMembers'
+import { caribbeanGreen } from 'style/colors'
 
 const Home = createStackNavigator()
 export function HomeNavigator () {
   const navigatorProps = {
-    screenOptions: buildScreenOptionsForTabsHeader
+    screenOptions: buildTabsHeaderOptions
   }
   return (
     <Home.Navigator {...navigatorProps}>
       <Home.Screen name='Feed' component={Feed} />
       <Home.Screen name='Topic Feed' component={Feed} />
+      {/* <Home.Screen name='Member' component={MemberProfile} /> */}
       <Home.Screen name='Post Details' component={PostDetails} />
       <Home.Screen name='Project Members' component={ProjectMembers} />
     </Home.Navigator>
@@ -36,7 +37,7 @@ export function HomeNavigator () {
 const Members = createStackNavigator()
 export function MembersNavigator () {
   const navigatorProps = {
-    screenOptions: buildScreenOptionsForTabsHeader
+    screenOptions: buildTabsHeaderOptions
   }
   return (
     <Members.Navigator {...navigatorProps}>
@@ -53,7 +54,7 @@ export function MembersNavigator () {
 const Topics = createStackNavigator()
 export function TopicsNavigator () {
   const navigatorProps = {
-    screenOptions: buildScreenOptionsForTabsHeader
+    screenOptions: buildTabsHeaderOptions
   }
   return (
     <Topics.Navigator {...navigatorProps}>
@@ -67,7 +68,7 @@ export function TopicsNavigator () {
 const Projects = createStackNavigator()
 export function ProjectsNavigator () {
   const navigatorProps = {
-    screenOptions: buildScreenOptionsForTabsHeader
+    screenOptions: buildTabsHeaderOptions
   }
   return (
     <Projects.Navigator {...navigatorProps}>
@@ -87,13 +88,30 @@ export default function TabsNavigator () {
       showLabel: true,
       pressColor: '#DCDCDC',
       indicatorStyle: { backgroundColor: 'white' },
-      style: isIOS ? tabStyles.tabNavigatorIOS : tabStyles.tabNavigatorAndroid
+      style: isIOS 
+        ? { backgroundColor: 'white' }
+        : { backgroundColor: 'white', borderTopWidth: StyleSheet.hairlineWidth }
     },
     screenOptions: ({ route }) => ({
-      tabBarIcon: ({ focused }) =>
-        <TabIcon name={route.name} focused={focused} />,
-      tabBarLabel: ({ focused }) =>
-        <TabLabel name={route.name} focused={focused} />
+      tabBarIcon: ({ focused }) => (
+        <Icon
+          name={route.name}
+          size={28}
+          color={focused ? caribbeanGreen : '#929292'}
+          style={{ paddingTop: isIOS ? 0 : 5 }}
+        />
+      ),      
+      tabBarLabel: ({ focused }) => (
+        <View style={{ textAlign: 'center', fontSize: 11, color: '#929292' }}>
+          <Text style={{
+            textAlign: 'center',
+            fontSize: 11,
+            color: focused ? caribbeanGreen : '#929292'
+          }}>
+            {route.name}
+          </Text>
+        </View>
+      )
     })
   }
 

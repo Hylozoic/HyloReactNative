@@ -8,7 +8,7 @@ Object {
   },
   "fetchCommunityTopic": [Function],
   "goToCommunity": [Function],
-  "goToCreateCommunityName": [Function],
+  "goToCreateCommunity": [Function],
   "newPost": [Function],
   "otherProp1": "foo1",
   "otherProp2": "foo2",

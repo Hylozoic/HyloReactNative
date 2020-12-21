@@ -48,7 +48,7 @@ export default class Feed extends React.Component {
       topicSubscribed,
       topicPostsTotal,
       topicFollowersTotal,
-      goToCreateCommunityName,
+      goToCreateCommunity,
       currentUserHasMemberships,
       hidePostPrompt,
       isProjectFeed,
@@ -63,7 +63,7 @@ export default class Feed extends React.Component {
     if (!currentUserHasMemberships) {
       return (
         <CreateCommunityNotice
-          goToCreateCommunityName={goToCreateCommunityName}
+          goToCreateCommunity={goToCreateCommunity}
           text='No posts here, try creating your own Community!'
         />
       )

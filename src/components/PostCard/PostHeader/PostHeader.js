@@ -135,19 +135,23 @@ export default class PostHeader extends React.PureComponent {
           {pinned && <Icon name='Pin' style={styles.pinIcon} />}
           {announcement && <Icon name='Announcement' style={styles.announcementIcon} />}
           {type && <PostLabel type={type} />}
-          {!hideMenu && <PostMenu
-            removePost={removePostWithConfirm}
-            deletePost={deletePostWithConfirm}
-            editPost={canEdit && this.handleEditPost}
-            flagPost={flagPost}
-            pinPost={pinPost}
-            pinned={pinned}
-                        />}
-          {flaggingVisible && <FlagContent
-            type='post'
-            linkData={linkData}
-            onClose={() => this.setState({ flaggingVisible: false })}
-                              />}
+          {!hideMenu && (
+            <PostMenu
+              removePost={removePostWithConfirm}
+              deletePost={deletePostWithConfirm}
+              editPost={canEdit && this.handleEditPost}
+              flagPost={flagPost}
+              pinPost={pinPost}
+              pinned={pinned}
+            />
+          )}
+          {flaggingVisible && (
+            <FlagContent
+              type='post'
+              linkData={linkData}
+              onClose={() => this.setState({ flaggingVisible: false })}
+            />
+          )}
         </View>
       </View>
     )

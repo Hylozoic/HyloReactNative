@@ -4,7 +4,7 @@ import Button from 'components/Button'
 import styles from './CreateCommunityNotice.styles'
 const axolotlImage = require('assets/hey-axolotl.png')
 
-function CreateCommunityNotice ({ goToCreateCommunityName, text }) {
+function CreateCommunityNotice ({ goToCreateCommunity, text }) {
   return (
     <View style={styles.container}>
       <Text style={styles.promptText}>{text}</Text>
@@ -12,7 +12,7 @@ function CreateCommunityNotice ({ goToCreateCommunityName, text }) {
       <Button
         text='Create a Community'
         style={styles.button}
-        onPress={goToCreateCommunityName}
+        onPress={goToCreateCommunity}
       />
     </View>
   )

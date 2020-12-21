@@ -5,7 +5,7 @@ import {
   TouchableOpacity,
   ScrollView
 } from 'react-native'
-import { buildScreenOptions } from 'navigation/header'
+import { buildDefaultHeaderOptions } from 'navigation/header'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
 import { debounce, find, isEmpty, pick } from 'lodash/fp'
 import { validateUser } from 'hylo-utils/validators'
@@ -13,7 +13,6 @@ import Icon from 'components/Icon'
 import Loading from 'components/Loading'
 import MemberHeader, { Control } from '../MemberHeader'
 import StarIcon from 'components/StarIcon'
-import { HeaderRightButton } from 'navigation/header'
 import styles from './MemberDetails.styles'
 
 export function editableFields (person) {
@@ -32,6 +31,24 @@ export default class MemberDetails extends React.Component {
     }
   }
 
+  setHeader = () => {
+    const { editing, changed } = this.state
+    const { isMe, navigation } = this.props
+    const subject = isMe
+      ? 'You'
+      : 'This Member'
+    const headerTitle = editing
+      ? 'Edit Your Profile'
+      : `About ${subject}`
+    navigation.setOptions(buildDefaultHeaderOptions({
+      headerTitle,
+      headerLeftConfirm: changed,
+      headerRightButtonLabel: editing ? 'Save' : null,
+      headerRightButtonOnPress: this.saveChanges,
+      headerRightButtonDisabled: !changed || !this.isValid()
+    }))
+  }
+
   componentDidMount () {
     this.props.fetchPerson()
   }
@@ -46,25 +63,6 @@ export default class MemberDetails extends React.Component {
       })
     }
     this.setHeader()
-  }
-
-  setHeader = () => {
-    const { editing, changed } = this.state
-    const { isMe, navigation } = this.props
-    const subject = isMe
-      ? 'You'
-      : 'This Member'
-    const headerTitle = editing
-      ? 'Edit Your Profile'
-      : `About ${subject}`
-    const options = buildScreenOptions({
-      headerTitle,
-      headerLeftConfirm: changed,
-      headerRightButtonLabel: editing ? 'Save' : null,
-      headerRightButtonOnPress: this.saveChanges,
-      headerRightButtonDisabled: !changed || !this.isValid()
-    })
-    navigation.setOptions(options)
   }
 
   // Errors are strings, or null
