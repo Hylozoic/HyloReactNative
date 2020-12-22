@@ -185,14 +185,16 @@ export default class PostDetails extends React.Component {
           <Comments
             ref={this.commentsRef}
             header={postCard}
-            footer={<CommentPrompt
-              currentUser={currentUser}
-              communityId={communityId}
-              submitting={submitting}
-              onChange={this.handleCommentOnChange}
-              onSubmit={this.handleCreateComment}
-              commentText={commentText}
-                    />}
+            footer={(
+              <CommentPrompt
+                currentUser={currentUser}
+                communityId={communityId}
+                submitting={submitting}
+                onChange={this.handleCommentOnChange}
+                onSubmit={this.handleCreateComment}
+                commentText={commentText}
+              />
+            )}
             postId={post.id}
             postPending={pending}
             showMember={showMember}

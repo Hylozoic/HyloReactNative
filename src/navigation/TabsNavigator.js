@@ -5,7 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import { isIOS } from 'util/platform'
 // Helper Components
 import Icon from 'components/Icon'
-import { buildTabsHeaderOptions }  from 'navigation/header'
+import { buildTabStackScreenOptions }  from 'navigation/header'
 // Screens
 import Feed from 'screens/Feed'
 import MembersComponent from 'screens/Members'
@@ -21,7 +21,7 @@ import { caribbeanGreen } from 'style/colors'
 const Home = createStackNavigator()
 export function HomeNavigator () {
   const navigatorProps = {
-    screenOptions: buildTabsHeaderOptions
+    screenOptions: buildTabStackScreenOptions
   }
   return (
     <Home.Navigator {...navigatorProps}>
@@ -38,7 +38,7 @@ export function HomeNavigator () {
 const Members = createStackNavigator()
 export function MembersNavigator () {
   const navigatorProps = {
-    screenOptions: buildTabsHeaderOptions
+    screenOptions: buildTabStackScreenOptions
   }
   return (
     <Members.Navigator {...navigatorProps}>
@@ -55,7 +55,7 @@ export function MembersNavigator () {
 const Topics = createStackNavigator()
 export function TopicsNavigator () {
   const navigatorProps = {
-    screenOptions: buildTabsHeaderOptions
+    screenOptions: buildTabStackScreenOptions
   }
   return (
     <Topics.Navigator {...navigatorProps}>
@@ -69,7 +69,7 @@ export function TopicsNavigator () {
 const Projects = createStackNavigator()
 export function ProjectsNavigator () {
   const navigatorProps = {
-    screenOptions: buildTabsHeaderOptions
+    screenOptions: buildTabStackScreenOptions
   }
   return (
     <Projects.Navigator {...navigatorProps}>
@@ -87,7 +87,8 @@ export default function TabsNavigator () {
     tabBarOptions: {
       showIcon: true,
       showLabel: true,
-      // TODO: Required for Android, not iOS. Set only for Android if makes undesirable animation in iOS.
+      // TODO: Required for Android, not iOS.
+      // Set only for Android if makes undesirable animation in iOS.
       keyboardHidesTabBar: true,
       pressColor: '#DCDCDC',
       indicatorStyle: { backgroundColor: 'white' },

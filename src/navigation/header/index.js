@@ -9,43 +9,84 @@ import MenuButton from 'navigation/header/MenuButton'
 import SearchIcon from 'navigation/header/SearchIcon'
 import MessagesIcon from 'navigation/header/MessagesIcon'
 import NotificationsIcon from 'navigation/header/NotificationsIcon'
-import { caribbeanGreen, rhino80, white60onCaribbeanGreen } from 'style/colors'
+import { black10onRhino, caribbeanGreen, white60onCaribbeanGreen } from 'style/colors'
 import styles from './header.styles'
 
-// Mostly the modal header
-export function buildDefaultHeaderOptions ({
+// Keep in sync with stack navigator root name changes in navigation/TabsNavigator
+// This won't be necessary once fully custom header is built
+export const TAB_STACK_ROOTS = [
+  'Feed',
+  'Members',
+  'Topics',
+  'Projects'
+]
+
+// TODO: Replace each of the below with a custom header component/s as per:
+// https://reactnavigation.org/docs/stack-navigator#header
+
+export function buildTabStackScreenOptions ({
+  navigation,
+  route,
+  rootsScreenNames = TAB_STACK_ROOTS || {},
+  ...otherOptions
+}) {
+  const atRoot = rootsScreenNames.includes(route?.name)
+  const options = {
+    headerBackTitleVisible: false,
+    headerTitle: getFocusedRouteNameFromRoute(route)
+      || route?.name,
+    headerTitleContainerStyle: styles.headerTitleContainerStyle,
+    headerTitleStyle: styles.headerTitleStyle,
+    headerTitleAlign: 'center',
+    headerStyle: styles.headerStyle,
+    headerLeft: () =>
+      <MenuButton atRoot={atRoot} navigation={navigation} />,
+    headerRight: () => atRoot && (
+      <View style={styles.headerRight}>
+        <SearchIcon showSearch={() => navigation.navigate('Search')} />
+        <MessagesIcon showMessages={() => navigation.navigate('Messages')} />
+        <NotificationsIcon showNotifications={() => navigation.navigate('Notifications')} />
+      </View>
+    )
+  }
+
+  return {
+    ...options,
+    ...otherOptions
+  }
+}
+
+export function buildModalScreenOptions ({
   headerLeftCloseIcon = false,
   headerLeftOnPress: providedHeaderLeftOnPress,
   headerLeftConfirm,
   headerRightButtonLabel = 'Save',
   headerRightButtonOnPress,
   headerRightButtonDisabled,
-  headerStyle = {
-    backgroundColor: 'white'
-  },
-  headerTitleStyle = {
-    color: 'black',
-    fontFamily: 'Circular-Bold',
-    fontSize: 17
-  },
-  headerTitleAlign = 'center',
   ...otherOptions
 }) {
-  const options = {}
-
-  options.headerLeft = props => {
-    const headerLeftOnPress = providedHeaderLeftOnPress || props.onPress
-    const onPress = headerLeftConfirm
-      ? () => confirmDiscardChanges({ onDiscard: headerLeftOnPress })
-      : headerLeftOnPress
-
-    return headerLeftCloseIcon
-      ? <HeaderLeftCloseIcon {...props} color={headerTitleStyle?.color ?? rhino80} onPress={onPress} />
-      : <HeaderBackButton {...props} onPress={onPress} />
-  }
-
-  if (headerRightButtonOnPress) {
-    options.headerRight = () => (
+  const headerTitleStyleColor = otherOptions?.headerTitleStyle?.color ?? black10onRhino
+  const options = {
+    headerTitleStyle: {
+      color: headerTitleStyleColor,
+      fontFamily: 'Circular-Bold',
+      fontSize: 17
+    },
+    headerStyle: {
+      backgroundColor: 'white'
+    },
+    headerTitleAlign: 'center',
+    headerLeft: props => {
+      const headerLeftOnPress = providedHeaderLeftOnPress || props.onPress
+      const onPress = headerLeftConfirm
+        ? () => confirmDiscardChanges({ onDiscard: headerLeftOnPress })
+        : headerLeftOnPress
+  
+      return headerLeftCloseIcon
+        ? <HeaderLeftCloseIcon {...props} color={headerTitleStyleColor} onPress={onPress} />
+        : <HeaderBackButton {...props} onPress={onPress} />
+    },
+    headerRight: () => headerRightButtonOnPress && (
       <HeaderRightButton
         label={headerRightButtonLabel}
         onPress={headerRightButtonOnPress}
@@ -55,48 +96,13 @@ export function buildDefaultHeaderOptions ({
   }
 
   return {
-    headerStyle,
-    headerTitleStyle,
-    headerTitleAlign,
     ...options,
     ...otherOptions
   }
 }
 
-// TODO: Derive these from loaded navigator or otherwise from shape of navigation state?
-export const TAB_ROOTS = ['Feed', 'Members', 'Topics', 'Projects']
-
-// Most generally a stack header
-export function buildTabsHeaderOptions ({
-  navigation,
-  route
-}, rootsScreenNames = TAB_ROOTS || {}) {
-  const atRoot = rootsScreenNames.includes(route.name)
-  const showSearch = () => navigation.navigate('Search')
-  const showMessages = () => navigation.navigate('Messages')
-  const showNotifications = () => navigation.navigate('Notifications')
-
-  return {
-    headerBackTitleVisible: false,
-    headerTitle: getFocusedRouteNameFromRoute(route) || route?.name,
-    headerTitleContainerStyle: styles.headerTitleContainerStyle,
-    headerTitleStyle: styles.headerTitleStyle,
-    headerTitleAlign: 'center',
-    headerStyle: styles.headerStyle,
-    headerLeft: () =>
-      <MenuButton atRoot={atRoot} navigation={navigation} />,
-    headerRight: () => atRoot && (
-      <View style={styles.headerRight}>
-        <SearchIcon showSearch={showSearch} />
-        <MessagesIcon showMessages={showMessages} />
-        <NotificationsIcon showNotifications={showNotifications} />
-      </View>
-    )
-  }
-}
-
-export const buildWorkflowHeaderOptions = params => {
-  return buildDefaultHeaderOptions({
+export const buildWorkflowModalScreenOptions = providedOptions => {
+  return buildModalScreenOptions({
     headerBackTitleVisible: false,
     headerStyle: {
       backgroundColor: caribbeanGreen,
@@ -108,6 +114,6 @@ export const buildWorkflowHeaderOptions = params => {
       fontSize: 12
     },
     headerTintColor: white60onCaribbeanGreen,
-    ...params
+    ...providedOptions
   })  
 }

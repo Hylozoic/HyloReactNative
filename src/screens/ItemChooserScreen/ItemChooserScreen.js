@@ -50,7 +50,7 @@ export default class ItemChooserScreen extends React.Component {
       headerParams.headerRightButtonOnPress = done
     }
     navigation.setOptions(
-      buildDefaultHeaderOptions(headerParams)
+      buildModalScreenOptions(headerParams)
     )
   }
 

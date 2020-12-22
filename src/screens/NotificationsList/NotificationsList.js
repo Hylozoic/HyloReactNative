@@ -5,14 +5,14 @@ import NotificationCard from 'components/NotificationCard'
 import CreateCommunityNotice from 'components/CreateCommunityNotice'
 
 import styles from './NotificationsList.styles'
-import { buildDefaultHeaderOptions } from 'navigation/header'
+import { buildModalScreenOptions } from 'navigation/header'
 
 export default class NotificationsList extends Component {
   state = { ready: false }
 
   setHeader = () => {
     const { navigation, markAllActivitiesRead } = this.props
-    navigation.setOptions(buildDefaultHeaderOptions({
+    navigation.setOptions(buildModalScreenOptions({
       headerLeftCloseIcon: true,
       headerRightButtonLabel: 'Mark as read',
       headerRightButtonOnPress: markAllActivitiesRead

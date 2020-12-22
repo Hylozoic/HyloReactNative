@@ -1,7 +1,7 @@
 import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 import { isFunction } from 'lodash/fp'
-import { buildDefaultHeaderOptions, buildWorkflowHeaderOptions  } from 'navigation/header'
+import { buildModalScreenOptions, buildWorkflowModalScreenOptions  } from 'navigation/header'
 // Navigation
 import TabsNavigator from 'navigation/TabsNavigator'
 // Screens
@@ -35,11 +35,11 @@ export function CreateCommunityNavigator () {
   return (
     <CommunitySettings.Navigator {...navigatorProps}>
       <CommunitySettings.Screen name='CreateCommunityName' component={CreateCommunityName}
-        options={buildWorkflowHeaderOptions({ headerTitle: 'STEP 1/3', headerLeftCloseIcon: true })} />
+        options={buildWorkflowModalScreenOptions({ headerTitle: 'STEP 1/3', headerLeftCloseIcon: true })} />
       <CommunitySettings.Screen name='CreateCommunityUrl' component={CreateCommunityUrl}
-        options={buildWorkflowHeaderOptions({ headerTitle: 'STEP 2/3' })} />
+        options={buildWorkflowModalScreenOptions({ headerTitle: 'STEP 2/3' })} />
       <CommunitySettings.Screen name='CreateCommunityReview' component={CreateCommunityReview}
-        options={buildWorkflowHeaderOptions({ headerTitle: 'STEP 3/3' })} />
+        options={buildWorkflowModalScreenOptions({ headerTitle: 'STEP 3/3' })} />
     </CommunitySettings.Navigator>
   )
 }
@@ -47,7 +47,7 @@ export function CreateCommunityNavigator () {
 const CommunitySettings = createStackNavigator()
 export function CommunitySettingsNavigator () {
   const navigatorProps = {
-    screenOptions: buildDefaultHeaderOptions({
+    screenOptions: buildModalScreenOptions({
       headerLeftCloseIcon: false,
       headerBackTitleVisible: false,
       cardStyle: { backgroundColor: '#FFF' }
@@ -56,7 +56,7 @@ export function CommunitySettingsNavigator () {
   return (
     <CommunitySettings.Navigator {...navigatorProps}>
       <CommunitySettings.Screen name='Community Settings' component={CommunitySettingsMenu} 
-        options={buildDefaultHeaderOptions({ headerLeftCloseIcon: true })} />
+        options={buildModalScreenOptions({ headerLeftCloseIcon: true })} />
       <CommunitySettings.Screen name='Community Information' component={CommunitySettingsComponent} />
       <CommunitySettings.Screen name='Community Moderators' component={ModeratorSettings} />
       <CommunitySettings.Screen name='Invite Members' component={InvitePeople}
@@ -70,7 +70,7 @@ export default function AppNavigator () {
   const navigatorProps = {
     mode: 'modal',
     headerShown: false,
-    screenOptions: buildDefaultHeaderOptions({
+    screenOptions: buildModalScreenOptions({
       headerLeftCloseIcon: true,
       cardStyle: { backgroundColor: '#FFF' }
     })
@@ -87,9 +87,9 @@ export default function AppNavigator () {
       <App.Screen name='Create Community' component={CreateCommunityNavigator}
         options={{ headerShown: false }} />
       <App.Screen name='Notifications' component={NotificationsList}
-        options={() => buildDefaultHeaderOptions({ headerLeftCloseIcon: true })} />
+        options={() => buildModalScreenOptions({ headerLeftCloseIcon: true })} />
       <App.Screen name='Messages' component={ThreadList}
-        options={({ navigation }) => buildDefaultHeaderOptions({
+        options={({ navigation }) => buildModalScreenOptions({
           headerLeftCloseIcon: true,
           headerRightButtonLabel: 'New',
           headerRightButtonOnPress: () => navigation.navigate('New Message')

@@ -5,7 +5,7 @@ import {
   TouchableOpacity,
   ScrollView
 } from 'react-native'
-import { buildDefaultHeaderOptions } from 'navigation/header'
+import { buildTabStackScreenOptions } from 'navigation/header'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
 import { debounce, find, isEmpty, pick } from 'lodash/fp'
 import { validateUser } from 'hylo-utils/validators'
@@ -33,24 +33,27 @@ export default class MemberDetails extends React.Component {
 
   setHeader = () => {
     const { editing, changed } = this.state
-    const { isMe, navigation } = this.props
+    const { isMe, navigation, route } = this.props
     const subject = isMe
       ? 'You'
       : 'This Member'
     const headerTitle = editing
       ? 'Edit Your Profile'
       : `About ${subject}`
-    navigation.setOptions(buildDefaultHeaderOptions({
+    navigation.setOptions(buildTabStackScreenOptions({
+      route,
+      navigation,
       headerTitle,
       headerLeftConfirm: changed,
       headerRightButtonLabel: editing ? 'Save' : null,
       headerRightButtonOnPress: this.saveChanges,
-      headerRightButtonDisabled: !changed || !this.isValid()
+      headerRightButtonDisabled: !changed || !this.isValid(),
     }))
   }
 
   componentDidMount () {
     this.props.fetchPerson()
+    this.setHeader()
   }
 
   componentDidUpdate (prevProps, prevState) {
