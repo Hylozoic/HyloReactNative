@@ -42,8 +42,7 @@ export default class ItemChooserScreen extends React.Component {
     const screenTitle = route.params.screenTitle
     const headerParams = {
       headerTitle: screenTitle,
-      headerLeftOnPress: cancel,
-      headerLeftCloseIcon: true
+      headerLeftOnPress: cancel
     }
     if (isFunction(updateItems)) {
       headerParams.headerRightButtonLabel = 'Done'

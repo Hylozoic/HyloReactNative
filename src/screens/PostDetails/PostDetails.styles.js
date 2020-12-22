@@ -40,8 +40,10 @@ export default {
     fontFamily: 'Circular-Book'
   },
   inlineEditor: {
-    marginBottom: isIOS ? 35 : 10,
+    marginBottom: 10,
     paddingTop: 10,
+    paddingBottom: 60,
+    paddingVertical: 20,
     paddingHorizontal: 10,
     borderTopColor: rhino30,
     borderTopWidth: 0.25

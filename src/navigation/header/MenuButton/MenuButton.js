@@ -18,7 +18,7 @@ export default function MenuButton ({
   const imageSource = ((id && id === ALL_COMMUNITIES_ID) || !avatarUrl)
     ? allCommunitiesLogo
     : { uri: avatarUrl }
-  const onPress = canGoBack
+  const onPress = !canGoBack
     ? navigation.openDrawer
     : navigation.goBack
 
@@ -30,7 +30,7 @@ export default function MenuButton ({
         labelVisible={false}
         backImage={() => (
           <View style={styles.container}>
-            {canGoBack
+            {!canGoBack
               ? <Icon name='Hamburger' style={styles.menuIcon} />
               : <Icon name='ArrowForward' style={styles.backIcon} />}
             <Image source={imageSource} style={styles.avatar} />

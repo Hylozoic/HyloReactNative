@@ -49,18 +49,15 @@ export function CommunitySettingsNavigator () {
   const navigatorProps = {
     screenOptions: buildModalScreenOptions({
       headerLeftCloseIcon: false,
-      headerBackTitleVisible: false,
-      cardStyle: { backgroundColor: '#FFF' }
+      headerBackTitleVisible: false
     })
   }
   return (
     <CommunitySettings.Navigator {...navigatorProps}>
-      <CommunitySettings.Screen name='Community Settings' component={CommunitySettingsMenu} 
-        options={buildModalScreenOptions({ headerLeftCloseIcon: true })} />
+      <CommunitySettings.Screen name='Community Settings' component={CommunitySettingsMenu} />
       <CommunitySettings.Screen name='Community Information' component={CommunitySettingsComponent} />
       <CommunitySettings.Screen name='Community Moderators' component={ModeratorSettings} />
-      <CommunitySettings.Screen name='Invite Members' component={InvitePeople}
-        options={{ headerTitle: 'Invite Members'}} />
+      <CommunitySettings.Screen name='Invite Members' component={InvitePeople} />
     </CommunitySettings.Navigator>
   )
 }
@@ -70,10 +67,7 @@ export default function AppNavigator () {
   const navigatorProps = {
     mode: 'modal',
     headerShown: false,
-    screenOptions: buildModalScreenOptions({
-      headerLeftCloseIcon: true,
-      cardStyle: { backgroundColor: '#FFF' }
-    })
+    screenOptions: buildModalScreenOptions
   }
   return (
     <App.Navigator {...navigatorProps}>
@@ -86,11 +80,9 @@ export default function AppNavigator () {
         options={{ headerShown: false }} />
       <App.Screen name='Create Community' component={CreateCommunityNavigator}
         options={{ headerShown: false }} />
-      <App.Screen name='Notifications' component={NotificationsList}
-        options={() => buildModalScreenOptions({ headerLeftCloseIcon: true })} />
+      <App.Screen name='Notifications' component={NotificationsList} />
       <App.Screen name='Messages' component={ThreadList}
         options={({ navigation }) => buildModalScreenOptions({
-          headerLeftCloseIcon: true,
           headerRightButtonLabel: 'New',
           headerRightButtonOnPress: () => navigation.navigate('New Message')
         })} />

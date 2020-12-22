@@ -52,7 +52,7 @@ export default {
   typeButtonRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingBottom: 10
+    marginTop: 10
   },
   typeButton: {
     box: {

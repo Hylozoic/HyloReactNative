@@ -1,11 +1,11 @@
 import React from 'react'
 import { StyleSheet, TouchableOpacity } from 'react-native'
 import Icon from 'components/Icon'
-import { rhino80 } from 'style/colors'
+import { white } from 'style/colors'
 
 export default function HeaderLeftCloseIcon ({
   onPress,
-  color = rhino80,
+  color = white,
   disabled
 } ) {
   if (typeof onPress !== 'function') throw new Error('LeftHeaderClose: onPress is not a function.')

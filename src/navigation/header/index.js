@@ -10,17 +10,13 @@ import MenuButton from 'navigation/header/MenuButton'
 import SearchIcon from 'navigation/header/SearchIcon'
 import MessagesIcon from 'navigation/header/MessagesIcon'
 import NotificationsIcon from 'navigation/header/NotificationsIcon'
-import { 
-  black10onRhino, caribbeanGreen, white60onCaribbeanGreen, white, rhino80
-} from 'style/colors'
+import {  caribbeanGreen, white60onCaribbeanGreen, white, rhino80, bigStone30 } from 'style/colors'
 
 // TODO: Replace each function below with a custom header component/s as per:
 // https://reactnavigation.org/docs/stack-navigator#header
 //
 // For now this list needs to be kept in sync with the names of the initial
-// routes for each stack in navigation/TabsNavigator
-// This won't be necessary once fully custom header is built (using passed
-// in canGoBack)
+// routes for each stack in navigation/TabsNavigator.
 export const TAB_STACK_ROOTS = [
   'Home',
   'Members',
@@ -34,7 +30,7 @@ export function buildTabStackScreenOptions ({
   rootsScreenNames = TAB_STACK_ROOTS || {},
   ...otherOptions
 }) {
-  const canGoBack = rootsScreenNames.includes(route?.name)
+  const canGoBack = !rootsScreenNames.includes(route?.name)
   const options = {
     headerBackTitleVisible: false,
     headerTitle: getFocusedRouteNameFromRoute(route)
@@ -78,7 +74,7 @@ export function buildTabStackScreenOptions ({
 }
 
 export function buildModalScreenOptions ({
-  headerLeftCloseIcon = false,
+  headerLeftCloseIcon = true,
   headerLeftOnPress: providedHeaderLeftOnPress,
   headerLeftConfirm,
   headerRightButtonLabel = 'Save',
@@ -86,16 +82,19 @@ export function buildModalScreenOptions ({
   headerRightButtonDisabled,
   ...otherOptions
 }) {
-  const headerTitleStyleColor = otherOptions?.headerTitleStyle?.color ?? black10onRhino
+  const headerTitleStyleColor = otherOptions?.headerTitleStyle?.color ?? white
   const options = {
+    cardStyle: {
+      backgroundColor: white
+    },
     headerTitleStyle: {
       color: headerTitleStyleColor,
-      fontFamily: 'Circular-Bold',
-      fontSize: 17
+      fontFamily: 'Circular-Bold'
     },
     headerStyle: {
-      backgroundColor: 'white'
+      backgroundColor: bigStone30
     },
+    headerTintColor: white,
     headerTitleAlign: 'center',
     headerLeft: props => {
       const headerLeftOnPress = providedHeaderLeftOnPress || props.onPress
@@ -125,12 +124,13 @@ export function buildModalScreenOptions ({
 export const buildWorkflowModalScreenOptions = providedOptions => {
   return buildModalScreenOptions({
     headerBackTitleVisible: false,
+    headerLeftCloseIcon: false,
     headerStyle: {
       backgroundColor: caribbeanGreen,
       shadowColor: 'transparent'          
     },
     headerTitleStyle: {
-      color: 'white',
+      color: white,
       fontFamily: 'Circular-Bold',
       fontSize: 12
     },

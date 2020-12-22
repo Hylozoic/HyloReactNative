@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet, Text, TouchableOpacity } from 'react-native'
-import { rhino20, havelockBlue } from 'style/colors'
+import { havelockBlue, ghost } from 'style/colors'
 
 export default function HeaderRightButton ({
   label,
@@ -24,12 +24,12 @@ export default function HeaderRightButton ({
 const styles = StyleSheet.create({
   button: {
     fontFamily: 'Circular-Book',
-    fontSize: 16,
-    paddingTop: 1,
+    fontSize: 17,
     color: havelockBlue,
     fontWeight: 'bold'
   },
   disabled: {
-    color: rhino20
+    color: ghost,
+    fontWeight: 'normal'
   }
 })

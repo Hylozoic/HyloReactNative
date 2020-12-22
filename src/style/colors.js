@@ -54,6 +54,8 @@ export const white40onCaribbeanGreen = fakeAlpha('#FFFFFF', 0.4, caribbeanGreen)
 export const white20onCaribbeanGreen = fakeAlpha('#FFFFFF', 0.2, caribbeanGreen)
 export const black10OnCaribbeanGreen = fakeAlpha('#000000', 0.1, caribbeanGreen)
 
+export const bigStone30 = fakeAlpha(bigStone, 0.3)
+
 export const bannerlinearGradientColors = [
   'rgba(0, 0, 0, 0)',
   'rgba(0, 0, 0, 0.1)',

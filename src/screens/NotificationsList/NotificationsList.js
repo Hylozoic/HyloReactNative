@@ -13,7 +13,6 @@ export default class NotificationsList extends Component {
   setHeader = () => {
     const { navigation, markAllActivitiesRead } = this.props
     navigation.setOptions(buildModalScreenOptions({
-      headerLeftCloseIcon: true,
       headerRightButtonLabel: 'Mark as read',
       headerRightButtonOnPress: markAllActivitiesRead
     }))

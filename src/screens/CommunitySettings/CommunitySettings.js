@@ -23,6 +23,7 @@ export default class CommunitySettings extends React.Component {
     const { changed } = this.state
     const { navigation, pendingSave } = this.props
     navigation.setOptions(buildModalScreenOptions({
+      headerLeftCloseIcon: false,
       headerBackTitleVisible: false,
       headerLeftConfirm: changed,
       headerRightButtonLabel: pendingSave ? 'Saving' : 'Save',

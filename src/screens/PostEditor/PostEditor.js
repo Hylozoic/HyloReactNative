@@ -80,7 +80,6 @@ export default class PostEditor extends React.Component {
       : `Edit ${subject}`
     navigation.setOptions(buildModalScreenOptions({
       headerTitle,
-      headerLeftCloseIcon: true,
       headerLeftConfirm: true,
       headerRightButtonLabel: isSaving
         ? 'Saving...'
@@ -410,10 +409,8 @@ export default class PostEditor extends React.Component {
           keyboardDismissMode='on-drag'
         >
           <View style={styles.scrollContent}>
-            {!isProject && (
+            {!isProject && <>
               <Text style={styles.sectionLabel}>What are you posting today?</Text>
-            )}
-            {!isProject && (
               <View style={[styles.typeButtonRow, styles.section]}>
                 {['discussion', 'request', 'offer', 'resource'].map(t => (
                   <TypeButton
@@ -422,7 +419,7 @@ export default class PostEditor extends React.Component {
                   />
                 ))}
               </View>
-            )}
+            </>}
             <Text style={styles.sectionLabel}>Title</Text>
             <View style={[ styles.section, styles.textInputWrapper ]}>
               <TextInput

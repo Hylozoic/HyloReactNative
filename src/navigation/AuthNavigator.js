@@ -12,38 +12,47 @@ import SignupFlow5 from 'screens/SignupFlow/SignupFlow5'
 
 const Signup = createStackNavigator()
 export function SignupNavigator () {
-  const navigatorProps = {}
+  const navigatorProps = {
+    screenOptions: buildWorkflowModalScreenOptions
+  }
   return (
     <Signup.Navigator {...navigatorProps}>
       <Signup.Screen name='Signup Intro' component={SignupComponent}
         options={{ headerShown: false }} />
       <Signup.Screen name='SignupFlow1' component={SignupFlow1} 
-        options={buildWorkflowModalScreenOptions({ title: 'STEP 1/5' })} />
+        options={{ headerTitle: 'STEP 1/5' }} />
       <Signup.Screen name='SignupFlow2' component={SignupFlow2}
-        options={buildWorkflowModalScreenOptions({ title: 'STEP 2/5' })} />
+        options={{ headerTitle: 'STEP 2/5' }} />
       <Signup.Screen name='SignupFlow3' component={SignupFlow3}
-        options={buildWorkflowModalScreenOptions({ title: 'STEP 3/5' })} />
+        options={{ headerTitle: 'STEP 3/5' }} />
       <Signup.Screen name='SignupFlow4' component={SignupFlow4}
-        options={buildWorkflowModalScreenOptions({ title: 'STEP 4/5' })} />
+        options={{ headerTitle: 'STEP 4/5' }} />
       <Signup.Screen name='SignupFlow5' component={SignupFlow5}
-        options={buildWorkflowModalScreenOptions({ title: 'STEP 5/5' })} />
+        options={{ headerTitle: 'STEP 5/5' }} />
     </Signup.Navigator>
   )
 }
 
 const Auth = createStackNavigator()
 export default function AuthNavigator (props) {
-  const navigatorProps = {}
+  const navigatorProps = {
+    screenOptions: {
+      headerShown: false
+    }
+  }
 
   return (
     <Auth.Navigator {...navigatorProps}>
       <Auth.Screen name='Login' component={Login}
-        options={{ headerShown: false, animationEnabled: false }}
+        options={{ animationEnabled: false }}
         initialParams={props} />
       <Auth.Screen name='ForgotPassword' component={ForgotPassword}
-        options={{ title: 'Reset Your Password' }} />
-      <Auth.Screen name='Signup' component={SignupNavigator}
-        options={{ headerShown: false }}  />
+        options={{
+          title: 'Reset Your Password',
+          headerShown: true,
+          headerBackTitleVisible: false
+        }} />
+      <Auth.Screen name='Signup' component={SignupNavigator} />
     </Auth.Navigator>
   )
 }
