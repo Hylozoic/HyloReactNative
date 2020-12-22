@@ -129,7 +129,6 @@ export default function TabsNavigator () {
       )
     })
   }
-
   return (
     <Tabs.Navigator {...navigatorProps}>
       <Tabs.Screen name='Home' component={HomeNavigator} />

@@ -48,8 +48,7 @@ export function buildTabStackScreenOptions ({
     headerTitleStyle: {
       color: white,
       fontFamily: 'Circular-Bold',
-      fontSize: 18,
-      fontWeight: '200'
+      fontSize: 18
     },
     headerTitleAlign: 'center',
     headerStyle: {
