@@ -61,23 +61,6 @@ export function buildDefaultHeaderOptions ({
   }
 }
 
-export const buildWorkflowHeaderOptions = params => {
-  return buildDefaultHeaderOptions({
-    headerBackTitleVisible: false,
-    headerStyle: {
-      backgroundColor: caribbeanGreen,
-      shadowColor: 'transparent'          
-    },
-    headerTitleStyle: {
-      color: 'white',
-      fontFamily: 'Circular-Bold',
-      fontSize: 12
-    },
-    headerTintColor: white60onCaribbeanGreen,
-    ...params
-  })  
-}
-
 // TODO: Derive these from loaded navigator or otherwise from shape of navigation state?
 export const TAB_ROOTS = ['Feed', 'Members', 'Topics', 'Projects']
 
@@ -107,4 +90,21 @@ export function buildTabsHeaderOptions ({
       </View>
     )
   }
+}
+
+export const buildWorkflowHeaderOptions = params => {
+  return buildDefaultHeaderOptions({
+    headerBackTitleVisible: false,
+    headerStyle: {
+      backgroundColor: caribbeanGreen,
+      shadowColor: 'transparent'          
+    },
+    headerTitleStyle: {
+      color: 'white',
+      fontFamily: 'Circular-Bold',
+      fontSize: 12
+    },
+    headerTintColor: white60onCaribbeanGreen,
+    ...params
+  })  
 }

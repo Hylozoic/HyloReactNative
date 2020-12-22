@@ -1,6 +1,6 @@
 import { white, rhino80, black10onRhino, black10OnCaribbeanGreen } from 'style/colors'
 import { StyleSheet } from 'react-native'
-// import { isIOS } from 'util/platform'
+import { isIOS } from 'util/platform'
 
 export default StyleSheet.create({
   headerStyle: {
@@ -12,6 +12,7 @@ export default StyleSheet.create({
     // // Follow: https://github.com/react-navigation/react-navigation/issues/7057#issuecomment-593086348
     // width: isIOS ? '40%' : '75%',
     // alignItems: isIOS ? 'center' : 'flex-start'
+    marginLeft: isIOS ? 0 : 10
   },
   headerTitleStyle: {
     color: white,
