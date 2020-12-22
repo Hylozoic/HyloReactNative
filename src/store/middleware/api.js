@@ -7,7 +7,7 @@ export default function apiMiddleware (store) {
 
     if (!payload || !payload.api) return next(action)
 
-    const { path, params, method, transform, retry } = payload.api
+    const { path, params, method, transform, retryOnError } = payload.api
     const fetcher = (resolve, reject) => {
       InteractionManager.runAfterInteractions(() =>
         fetchJSON(path, params, { method })
@@ -16,7 +16,7 @@ export default function apiMiddleware (store) {
       )
     }
     const handleError = (resolve, reject) => error => {
-      if (retry) {
+      if (retryOnError) {
         // TODO: Add exponential backoff
         setTimeout(() => fetcher(resolve, reject), 1000)
       } else {

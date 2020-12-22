@@ -7,8 +7,8 @@ export default async function checkSessionAndSetSignedIn () {
     ? {
         api: {
           path: '/noo/user/status',
-          transform: json => !!json.signedIn,
-          retry: true
+          retryOnError: true,
+          transform: json => !!json.signedIn
         }
       }
     : false
