@@ -87,6 +87,8 @@ export default function TabsNavigator () {
     tabBarOptions: {
       showIcon: true,
       showLabel: true,
+      // TODO: Required for Android, not iOS. Set only for Android if makes undesirable animation in iOS.
+      keyboardHidesTabBar: true,
       pressColor: '#DCDCDC',
       indicatorStyle: { backgroundColor: 'white' },
       style: isIOS 
