@@ -28,6 +28,7 @@ export function buildDefaultHeaderOptions ({
     fontFamily: 'Circular-Bold',
     fontSize: 17
   },
+  headerTitleAlign = 'center',
   ...otherOptions
 }) {
   const options = {}
@@ -56,6 +57,7 @@ export function buildDefaultHeaderOptions ({
   return {
     headerStyle,
     headerTitleStyle,
+    headerTitleAlign,
     ...options,
     ...otherOptions
   }
@@ -79,6 +81,7 @@ export function buildTabsHeaderOptions ({
     headerTitle: getFocusedRouteNameFromRoute(route) || route?.name,
     headerTitleContainerStyle: styles.headerTitleContainerStyle,
     headerTitleStyle: styles.headerTitleStyle,
+    headerTitleAlign: 'center',
     headerStyle: styles.headerStyle,
     headerLeft: () =>
       <MenuButton atRoot={atRoot} navigation={navigation} />,
