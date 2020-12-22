@@ -32,7 +32,7 @@ export class InlineEditor extends React.PureComponent {
       pickerType: null,
       height: minTextInputHeight
     }
-    this.scrollViewRef = React.createRef()
+    this.editorInputRef = React.createRef()
   }
 
   insertTopic = topic => {
@@ -104,14 +104,7 @@ export class InlineEditor extends React.PureComponent {
     })
   }
 
-  // Workaround to TextInput issues on Android: https://github.com/facebook/react-native/issues/17236
-  _selection () {
-    if (this.state.isFocused) { return this.props.selection }
-
-    return { start: 0, end: 0 }
-  }
-
-  _onFocus = () => {
+  handleFocus = () => {
     this.setState(() => ({
       isFocused: true,
       selection: { start: 1, end: 1 }
@@ -119,13 +112,13 @@ export class InlineEditor extends React.PureComponent {
     this.props.onFocusToggle && this.props.onFocusToggle(true)
   }
 
-  _onBlur = () => {
+  handleBlur = () => {
     if (isEmpty(trim(this.props.value))) this.props.onChange('')
     this.setState(() => ({ isFocused: false }))
     this.props.onFocusToggle && this.props.onFocusToggle(false)
   }
 
-  _onSelectionChange = ({ nativeEvent: { selection } }) => {
+  handleSelectionChange = ({ nativeEvent: { selection } }) => {
     this.setState(() => ({ selection }))
   }
 
@@ -160,30 +153,33 @@ export class InlineEditor extends React.PureComponent {
             onChangeText={onChange}
             blurOnSubmit={false}
             onContentSizeChange={event => this.setState({ height: Math.round(event.nativeEvent.contentSize.height) })}
-            selection={this._selection()}
-            onSelectionChange={this._onSelectionChange}
+            onSelectionChange={this.handleSelectionChange}
             placeholder={placeholder}
             placeholderTextColor={rhino30}
             style={[styles.textInput, inputStyle]}
             underlineColorAndroid='transparent'
             value={value}
             ref={this.editorInputRef}
-            onFocus={this._onFocus}
-            onBlur={this._onBlur}
+            onFocus={this.handleFocus}
+            onBlur={this.handleBlur}
           />
           {onSubmit && !isFocused && <SubmitButton submitting={submitting} active={!!isFocused} handleSubmit={this.handleSubmit} />}
         </View>
-        {isFocused && <View style={styles.toolbar}>
-          <View style={{ flex: 1, flexDirection: 'row' }}>
-            <TouchableOpacity hitSlop={hitSlop} onPress={this.openPersonPicker}>
-              <Text style={styles.toolbarButton}>@</Text>
-            </TouchableOpacity>
-            <TouchableOpacity hitSlop={hitSlop} onPress={this.openTopicsPicker}>
-              <Text style={styles.toolbarButton}>#</Text>
-            </TouchableOpacity>
+        {isFocused && (
+          <View style={styles.toolbar}>
+            <View style={{ flex: 1, flexDirection: 'row' }}>
+              <TouchableOpacity hitSlop={hitSlop} onPress={this.openPersonPicker}>
+                <Text style={styles.toolbarButton}>@</Text>
+              </TouchableOpacity>
+              <TouchableOpacity hitSlop={hitSlop} onPress={this.openTopicsPicker}>
+                <Text style={styles.toolbarButton}>#</Text>
+              </TouchableOpacity>
+            </View>
+            {onSubmit && (
+              <SubmitButton submitting={submitting} active={!!isFocused} handleSubmit={this.handleSubmit} />
+            )}
           </View>
-          {onSubmit && <SubmitButton submitting={submitting} active={!!isFocused} handleSubmit={this.handleSubmit} />}
-                      </View>}
+        )}
       </View>
     )
   }
