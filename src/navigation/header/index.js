@@ -17,7 +17,7 @@ import {
 // Keep in sync with stack navigator root name changes in navigation/TabsNavigator
 // This won't be necessary once fully custom header is built
 export const TAB_STACK_ROOTS = [
-  'Feed',
+  'Home',
   'Members',
   'Topics',
   'Projects'

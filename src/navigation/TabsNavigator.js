@@ -25,7 +25,8 @@ export function HomeNavigator () {
   }
   return (
     <Home.Navigator {...navigatorProps}>
-      <Home.Screen name='Feed' component={Feed} />
+      <Home.Screen name='Home' component={Feed} />
+      {/* In common  */}
       <Home.Screen name='Topic Feed' component={Feed} />
       <Home.Screen name='Post Details' component={PostDetails} />
       <Home.Screen name='Project Members' component={ProjectMembers} />
@@ -43,11 +44,14 @@ export function MembersNavigator () {
   return (
     <Members.Navigator {...navigatorProps}>
       <Members.Screen name='Members' component={MembersComponent} />
-      <Members.Screen name='Member' component={MemberProfile} />
-      <Members.Screen name='MemberDetails' component={MemberDetails} />
       <Members.Screen name='MemberSkillEditor' component={MemberSkillEditor}
         options={{ headerTitle: 'Edit Skills' }} />
-      <Members.Screen name='Post Details' component={PostDetails} />
+      {/* In common  */}
+      <Home.Screen name='Topic Feed' component={Feed} />
+      <Home.Screen name='Post Details' component={PostDetails} />
+      <Home.Screen name='Project Members' component={ProjectMembers} />
+      <Home.Screen name='Member' component={MemberProfile} />
+      <Home.Screen name='MemberDetails' component={MemberDetails} />
     </Members.Navigator>
   )
 }
@@ -60,8 +64,12 @@ export function TopicsNavigator () {
   return (
     <Topics.Navigator {...navigatorProps}>
       <Topics.Screen name='Topics' component={TopicsComponent} />
-      <Topics.Screen name='Topic Feed' component={Feed} />
-      <Topics.Screen name='Post Details' component={PostDetails} />
+      {/* In common  */}
+      <Home.Screen name='Topic Feed' component={Feed} />
+      <Home.Screen name='Post Details' component={PostDetails} />
+      <Home.Screen name='Project Members' component={ProjectMembers} />
+      <Home.Screen name='Member' component={MemberProfile} />
+      <Home.Screen name='MemberDetails' component={MemberDetails} />
     </Topics.Navigator>
   )
 }
@@ -74,9 +82,12 @@ export function ProjectsNavigator () {
   return (
     <Projects.Navigator {...navigatorProps}>
       <Projects.Screen name='Projects' component={ProjectsComponent} />
-      <Projects.Screen name='Post Details' component={PostDetails} />
-      <Projects.Screen name='Project Members' component={ProjectMembers} />
-      <Projects.Screen name='MemberDetails' component={MemberDetails} />
+      {/* In common  */}
+      <Home.Screen name='Topic Feed' component={Feed} />
+      <Home.Screen name='Post Details' component={PostDetails} />
+      <Home.Screen name='Project Members' component={ProjectMembers} />
+      <Home.Screen name='Member' component={MemberProfile} />
+      <Home.Screen name='MemberDetails' component={MemberDetails} />
     </Projects.Navigator>
   )
 }
