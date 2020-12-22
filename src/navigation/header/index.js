@@ -1,5 +1,5 @@
 import React from 'react'
-import { View } from 'react-native'
+import { View, Text } from 'react-native'
 import { HeaderBackButton } from '@react-navigation/stack'
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native'
 import confirmDiscardChanges from 'util/confirmDiscardChanges'
@@ -14,8 +14,13 @@ import {
   black10onRhino, caribbeanGreen, white60onCaribbeanGreen, white, rhino80
 } from 'style/colors'
 
-// Keep in sync with stack navigator root name changes in navigation/TabsNavigator
-// This won't be necessary once fully custom header is built
+// TODO: Replace each function below with a custom header component/s as per:
+// https://reactnavigation.org/docs/stack-navigator#header
+//
+// For now this list needs to be kept in sync with the names of the initial
+// routes for each stack in navigation/TabsNavigator
+// This won't be necessary once fully custom header is built (using passed
+// in canGoBack)
 export const TAB_STACK_ROOTS = [
   'Home',
   'Members',
@@ -23,16 +28,13 @@ export const TAB_STACK_ROOTS = [
   'Projects'
 ]
 
-// TODO: Replace each of the below with a custom header component/s as per:
-// https://reactnavigation.org/docs/stack-navigator#header
-
 export function buildTabStackScreenOptions ({
   navigation,
   route,
   rootsScreenNames = TAB_STACK_ROOTS || {},
   ...otherOptions
 }) {
-  const atRoot = rootsScreenNames.includes(route?.name)
+  const canGoBack = rootsScreenNames.includes(route?.name)
   const options = {
     headerBackTitleVisible: false,
     headerTitle: getFocusedRouteNameFromRoute(route)
@@ -56,8 +58,8 @@ export function buildTabStackScreenOptions ({
       // backgroundColor: black10OnCaribbeanGreen
     },  
     headerLeft: () =>
-      <MenuButton atRoot={atRoot} navigation={navigation} />,
-    headerRight: () => atRoot && (
+      <MenuButton canGoBack={canGoBack} navigation={navigation} />,
+    headerRight: () => !canGoBack && (
       <View style={{
         flex: 1,
         flexDirection: 'row',

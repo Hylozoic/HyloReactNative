@@ -10,7 +10,7 @@ const allCommunitiesLogo = require('assets/All_Communities.png')
 
 export default function MenuButton ({
   currentContext,
-  atRoot,
+  canGoBack,
   navigation
 }) {
   const avatarUrl = get('avatarUrl', currentContext)
@@ -18,7 +18,7 @@ export default function MenuButton ({
   const imageSource = ((id && id === ALL_COMMUNITIES_ID) || !avatarUrl)
     ? allCommunitiesLogo
     : { uri: avatarUrl }
-  const onPress = atRoot
+  const onPress = canGoBack
     ? navigation.openDrawer
     : navigation.goBack
 
@@ -30,7 +30,7 @@ export default function MenuButton ({
         labelVisible={false}
         backImage={() => (
           <View style={styles.container}>
-            {atRoot
+            {canGoBack
               ? <Icon name='Hamburger' style={styles.menuIcon} />
               : <Icon name='ArrowForward' style={styles.backIcon} />}
             <Image source={imageSource} style={styles.avatar} />
