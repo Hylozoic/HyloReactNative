@@ -25,35 +25,43 @@ export function mapStateToProps (state, props) {
   }
 }
 
-export function loadCurrentUserSession ({
-  checkSessionAndSetSignedIn,
+export function mapDispatchToProps (dispatch) {
+  return {
+    ...bindActionCreators({
+      checkSessionAndSetSignedIn,
+      fetchCurrentUser,
+      selectCommunity,
+      registerDevice
+    }, dispatch)
+  }
+}
+
+export function buildLoadCurrentUserSession ({
+  signedIn,
   fetchCurrentUser,
   selectCommunity,
   registerDevice
 }) {
   return async () => {
-    const { payload: signedIn } = await checkSessionAndSetSignedIn()
-    if (signedIn)  {
-      const currentUserRaw = await fetchCurrentUser()
-      const memberships = currentUserRaw?.payload?.data?.me?.memberships
-      const lastViewedCommunityId = getLastViewedCommunity(memberships)?.id
-      await selectCommunity(lastViewedCommunityId)
-      await registerOneSignal({ registerDevice })
-    }
+    if (!signedIn) return
+    const currentUserRaw = await fetchCurrentUser()
+    const memberships = currentUserRaw?.payload?.data?.me?.memberships
+    const lastViewedCommunityId = getLastViewedCommunity(memberships)?.id
+    await selectCommunity(lastViewedCommunityId)
+    await registerOneSignal({ registerDevice })
   }
 }
 
-export function mapDispatchToProps (dispatch) {
+export function mergeProps (stateProps, dispatchProps, ownProps) {
   return {
-    loadCurrentUserSession: loadCurrentUserSession(
-      bindActionCreators({
-        checkSessionAndSetSignedIn,
-        fetchCurrentUser,
-        selectCommunity,
-        registerDevice   
-      }, dispatch)
-    )
+    loadCurrentUserSession: buildLoadCurrentUserSession({
+      signedIn: stateProps.signedIn,
+      ...dispatchProps
+    }),
+    ...stateProps,
+    ...dispatchProps,
+    ...ownProps
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps)

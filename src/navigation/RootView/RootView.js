@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useEffect } from 'react'
 import { View } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native'
 import routing from 'routing'
@@ -10,17 +10,17 @@ export default function RootView ({
   loading,
   signedIn,
   signupInProgress,
+  checkSessionAndSetSignedIn,
   loadCurrentUserSession,
   openedPushNotification
 }) {
-  // TODO: Loading twice. Deternube what to memoize on to make sure
-  // this loads only once
-  useMemo(() => { loadCurrentUserSession() }, [signedIn])
+  useEffect(() => { checkSessionAndSetSignedIn() }, [])
+  useEffect(() => { loadCurrentUserSession() }, [signedIn])
 
   if (loading && !signupInProgress) {
     return (
       <View style={styles.loadingContainer}>
-        <Loading style={styles.loading} />
+        <Loading size='large' style={styles.loading} />
       </View>
     )
   }
