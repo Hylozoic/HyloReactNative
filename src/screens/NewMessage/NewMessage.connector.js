@@ -15,7 +15,11 @@ export function mapStateToProps (state, props) {
 
   return {
     recentContacts: getRecentContacts(state, props),
-    pending: isPendingFor(scopedFetchRecentContacts(MODULE_NAME), state)
+    pending: isPendingFor([
+      scopedFetchRecentContacts(MODULE_NAME),
+      findOrCreateThread,
+      createMessage
+    ], state)
   }
 }
 
