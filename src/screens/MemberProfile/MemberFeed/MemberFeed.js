@@ -31,7 +31,8 @@ export default class MemberFeed extends React.Component {
       pending,
       showPost,
       showTopic,
-      showMember
+      showMember,
+      goToCommunity
     } = this.props
 
     const listHeaderComponent = (
@@ -65,7 +66,8 @@ export default class MemberFeed extends React.Component {
               itemType={itemType}
               showPost={showPost}
               showTopic={showTopic}
-              showMember={showMember} />}
+              showMember={showMember}
+              goToCommunity={goToCommunity} />}
           keyExtractor={item => item.id}
           onEndReached={fetchMoreItems}
           ListHeaderComponent={listHeaderComponent}
@@ -77,12 +79,13 @@ export default class MemberFeed extends React.Component {
   }
 }
 
-export function ContentRow ({ item, itemType, showPost, showTopic, showMember }) {
+export function ContentRow ({ item, itemType, showPost, showTopic, showMember, goToCommunity }) {
   let content, postId
   if (itemType === 'post') {
     postId = item.id
     content = (
       <PostCard
+        goToCommunity={goToCommunity}
         shouldShowCommunities={true}
         showMember={showMember}
         showTopic={showTopic}

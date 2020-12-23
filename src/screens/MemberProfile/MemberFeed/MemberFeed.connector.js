@@ -1,5 +1,6 @@
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import makeGoToCommunity from 'store/actions/makeGoToCommunity'
 import {
   setChoice,
   getChoice,
@@ -59,6 +60,7 @@ export function mapDispatchToProps (dispatch, { navigation }) {
       fetchMemberComments,
       fetchMemberUpvotes
     }, dispatch),
+    goToCommunity: makeGoToCommunity(dispatch, navigation),
     showPost: id => navigation.navigate('Post Details', { id }),
     showTopic: topicName => navigation.navigate('Topic Feed', { topicName })
   }
