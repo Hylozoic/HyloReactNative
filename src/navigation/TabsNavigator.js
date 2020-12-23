@@ -16,7 +16,17 @@ import PostDetails from 'screens/PostDetails'
 import MemberDetails from 'screens/MemberProfile/MemberDetails'
 import MemberSkillEditor from 'screens/MemberProfile/MemberSkillEditor'
 import ProjectMembers from 'screens/ProjectMembers/ProjectMembers'
-import { caribbeanGreen } from 'style/colors'
+import { caribbeanGreen, gainsboro, gunsmoke, white } from 'style/colors'
+
+export function getScreensInCommon (Stack) {
+  return [
+    <Stack.Screen name='Topic Feed' key='Topic Feed' component={Feed} />,
+    <Stack.Screen name='Post Details' key='Post Details' component={PostDetails} />,
+    <Stack.Screen name='Project Members' key='Project Members' component={ProjectMembers} />,
+    <Stack.Screen name='Member' key='Member' component={MemberProfile} />,
+    <Stack.Screen name='MemberDetails' key='MemberDetails' component={MemberDetails} />,
+  ]
+}
 
 const Home = createStackNavigator()
 export function HomeNavigator () {
@@ -26,12 +36,7 @@ export function HomeNavigator () {
   return (
     <Home.Navigator {...navigatorProps}>
       <Home.Screen name='Home' component={Feed} />
-      {/* In common  */}
-      <Home.Screen name='Topic Feed' component={Feed} />
-      <Home.Screen name='Post Details' component={PostDetails} />
-      <Home.Screen name='Project Members' component={ProjectMembers} />
-      <Home.Screen name='Member' component={MemberProfile} />
-      <Home.Screen name='MemberDetails' component={MemberDetails} />
+      {getScreensInCommon(Home)}
     </Home.Navigator>
   )
 }
@@ -46,12 +51,7 @@ export function MembersNavigator () {
       <Members.Screen name='Members' component={MembersComponent} />
       <Members.Screen name='MemberSkillEditor' component={MemberSkillEditor}
         options={{ headerTitle: 'Edit Skills' }} />
-      {/* In common  */}
-      <Home.Screen name='Topic Feed' component={Feed} />
-      <Home.Screen name='Post Details' component={PostDetails} />
-      <Home.Screen name='Project Members' component={ProjectMembers} />
-      <Home.Screen name='Member' component={MemberProfile} />
-      <Home.Screen name='MemberDetails' component={MemberDetails} />
+      {getScreensInCommon(Home)}
     </Members.Navigator>
   )
 }
@@ -64,12 +64,7 @@ export function TopicsNavigator () {
   return (
     <Topics.Navigator {...navigatorProps}>
       <Topics.Screen name='Topics' component={TopicsComponent} />
-      {/* In common  */}
-      <Home.Screen name='Topic Feed' component={Feed} />
-      <Home.Screen name='Post Details' component={PostDetails} />
-      <Home.Screen name='Project Members' component={ProjectMembers} />
-      <Home.Screen name='Member' component={MemberProfile} />
-      <Home.Screen name='MemberDetails' component={MemberDetails} />
+      {getScreensInCommon(Home)}
     </Topics.Navigator>
   )
 }
@@ -82,12 +77,7 @@ export function ProjectsNavigator () {
   return (
     <Projects.Navigator {...navigatorProps}>
       <Projects.Screen name='Projects' component={ProjectsComponent} />
-      {/* In common  */}
-      <Home.Screen name='Topic Feed' component={Feed} />
-      <Home.Screen name='Post Details' component={PostDetails} />
-      <Home.Screen name='Project Members' component={ProjectMembers} />
-      <Home.Screen name='Member' component={MemberProfile} />
-      <Home.Screen name='MemberDetails' component={MemberDetails} />
+      {getScreensInCommon(Home)}
     </Projects.Navigator>
   )
 }
@@ -98,30 +88,30 @@ export default function TabsNavigator () {
     tabBarOptions: {
       showIcon: true,
       showLabel: true,
-      // TODO: Required for Android, not iOS.
-      // Set only for Android if makes undesirable animation in iOS.
-      keyboardHidesTabBar: true,
-      pressColor: '#DCDCDC',
-      indicatorStyle: { backgroundColor: 'white' },
+      // TODO: Required for Android, not iOS
+      // Set only for Android as it makes undesirable animation in iOS
+      keyboardHidesTabBar: isIOS ? false : true,
+      pressColor: gainsboro,
+      indicatorStyle: { backgroundColor: white },
       style: isIOS 
-        ? { backgroundColor: 'white' }
-        : { backgroundColor: 'white', borderTopWidth: StyleSheet.hairlineWidth }
+        ? { backgroundColor: white }
+        : { backgroundColor: white, borderTopWidth: StyleSheet.hairlineWidth }
     },
     screenOptions: ({ route }) => ({
       tabBarIcon: ({ focused }) => (
         <Icon
           name={route.name}
           size={28}
-          color={focused ? caribbeanGreen : '#929292'}
+          color={focused ? caribbeanGreen : gunsmoke}
           style={{ paddingTop: isIOS ? 0 : 5 }}
         />
       ),      
       tabBarLabel: ({ focused }) => (
-        <View style={{ textAlign: 'center', fontSize: 11, color: '#929292' }}>
+        <View style={{ textAlign: 'center', fontSize: 11, color: gunsmoke }}>
           <Text style={{
             textAlign: 'center',
             fontSize: 11,
-            color: focused ? caribbeanGreen : '#929292'
+            color: focused ? caribbeanGreen : gunsmoke
           }}>
             {route.name}
           </Text>
