@@ -32,7 +32,9 @@ export default class PostHeader extends React.PureComponent {
     this.props.editPost(this.props.postId)
   }
 
-  handleShowMember = () => this.props.showMember && this.props.showMember(this.props.creator.id)
+  handleShowMember = () => {
+    this.props.showMember && this.props.showMember(this.props.creator.id)
+  }
 
   topicKeyExtractor = item => item.id
 

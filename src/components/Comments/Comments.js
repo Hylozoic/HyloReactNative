@@ -23,10 +23,10 @@ export default class Comments extends React.PureComponent {
     return (
       <Comment
         comment={comment}
-        key={comment.id}
         showMember={showMember}
         showTopic={showTopic}
         slug={slug}
+        key={comment.id}
       />
     )
   }

@@ -20,30 +20,93 @@ import InlineEditor, { toHtml } from 'components/InlineEditor'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 import styles from './PostDetails.styles'
 
-export default class PostDetails extends React.Component {
-  static propTypes = {
-    post: shape({
-      id: any,
-      type: string,
-      creator: object,
-      imageUrl: string,
-      name: string,
-      details: string,
-      commenters: array,
-      upVotes: string,
-      updatedAt: string
-    }),
-    currentUser: shape({
-      id: any,
-      name: string,
-      avatarUrl: string
-    }),
-    editPost: func,
-    pending: bool,
-    showMember: func,
-    showTopic: func
-  }
+export function PostCardForDetails ({
+  post,
+  currentUser,
+  editPost,
+  isProject,
+  joinProject,
+  leaveProject,
+  showMember,
+  showTopic,
+  goToMembers,
+  goToCommunity
+}) {
+  const slug = get('communities.0.slug', post)
+  const isMember = find(member => member.id === currentUser.id, post.members)
+  const location = post.location || (post.locationObject && post.locationObject.fullText)
 
+  return (
+    <View style={styles.postCard}>
+      <PostHeader
+        creator={post.creator}
+        date={post.createdAt}
+        type={post.type}
+        editPost={editPost}
+        communities={post.communities}
+        slug={slug}
+        pinned={post.pinned}
+        topics={post.topics}
+        showTopic={showTopic}
+        postId={post.id}
+        showMember={showMember}
+        goToCommunity={goToCommunity}
+        announcement={post.announcement}
+        closeOnDelete
+      />
+      <PostImage imageUrls={post.imageUrls} linked />
+      <PostBody
+        type={post.type}
+        title={post.title}
+        details={post.details}
+        startTime={post.startTime}
+        endTime={post.endTime}
+        linkPreview={post.linkPreview}
+        slug={slug}
+        showMember={showMember}
+        showTopic={showTopic}
+      />
+      {!isEmpty(post.fileUrls) && <Files urls={post.fileUrls} />}
+      {isProject &&
+        <ProjectMembersSummary
+          members={post.members}
+          onPress={goToMembers}
+          dimension={34}
+          style={styles.projectMembersContainer}
+        />}
+      {isProject && <JoinProjectButton
+        style={styles.joinButton}
+        leaving={isMember}
+        onPress={isMember ? leaveProject : joinProject}
+                    />}
+      {!!location && (
+        <View style={styles.infoRow}>
+          <Icon style={styles.locationIcon} name='Location' />
+          <Text style={styles.infoRowInfo} selectable>{location}</Text>
+        </View>
+      )}
+      <PostCommunities
+        communities={post.communities}
+        includePublic={post.isPublic}
+        slug={slug}
+        style={[styles.infoRow]}
+        goToCommunity={goToCommunity}
+        shouldShowCommunities
+      />
+      <PostFooter
+        style={styles.postFooter}
+        id={post.id}
+        currentUser={currentUser}
+        commenters={post.commenters}
+        commentsTotal={post.commentsTotal}
+        votesTotal={post.votesTotal}
+        myVote={post.myVote}
+        showActivityLabel
+      />
+    </View>
+  )
+}
+export default class PostDetails extends React.Component {
   state = {
     commentText: ''
   }
@@ -87,16 +150,9 @@ export default class PostDetails extends React.Component {
     const {
       post,
       currentUser,
-      editPost,
       pending,
-      isProject,
-      joinProject,
-      leaveProject,
-      showMember,
-      goToMembers,
-      goToCommunity
+      showMember
     } = this.props
-
     const {
       commentText,
       submitting
@@ -109,82 +165,19 @@ export default class PostDetails extends React.Component {
     const isMember = find(member => member.id === currentUser.id, post.members)
     const location = post.location || (post.locationObject && post.locationObject.fullText)
 
-    const postCard = (
-      <View style={styles.postCard}>
-        <PostHeader
-          creator={post.creator}
-          date={post.createdAt}
-          type={post.type}
-          editPost={editPost}
-          communities={post.communities}
-          slug={slug}
-          pinned={post.pinned}
-          topics={post.topics}
-          showTopic={this.onShowTopic}
-          postId={post.id}
-          showMember={showMember}
-          goToCommunity={goToCommunity}
-          announcement={post.announcement}
-          closeOnDelete
-        />
-        <PostImage imageUrls={post.imageUrls} linked />
-        <PostBody
-          type={post.type}
-          title={post.title}
-          details={post.details}
-          startTime={post.startTime}
-          endTime={post.endTime}
-          linkPreview={post.linkPreview}
-          slug={slug}
-          showMember={showMember}
-          showTopic={this.onShowTopic}
-        />
-        {!isEmpty(post.fileUrls) && <Files urls={post.fileUrls} />}
-        {isProject &&
-          <ProjectMembersSummary
-            members={post.members}
-            onPress={goToMembers}
-            dimension={34}
-            style={styles.projectMembersContainer}
-          />}
-        {isProject && <JoinProjectButton
-          style={styles.joinButton}
-          leaving={isMember}
-          onPress={isMember ? leaveProject : joinProject}
-                      />}
-        {!!location && (
-          <View style={styles.infoRow}>
-            <Icon style={styles.locationIcon} name='Location' />
-            <Text style={styles.infoRowInfo} selectable>{location}</Text>
-          </View>
-        )}
-        <PostCommunities
-          communities={post.communities}
-          includePublic={post.isPublic}
-          slug={slug}
-          style={[styles.infoRow]}
-          goToCommunity={goToCommunity}
-          shouldShowCommunities
-        />
-        <PostFooter
-          style={styles.postFooter}
-          id={post.id}
-          currentUser={currentUser}
-          commenters={post.commenters}
-          commentsTotal={post.commentsTotal}
-          votesTotal={post.votesTotal}
-          myVote={post.myVote}
-          showActivityLabel
-        />
-      </View>
-    )
-
     return (
       <SafeAreaView style={{ flex: 1 }}>
         <KeyboardFriendlyView style={styles.container}>
           <Comments
             ref={this.commentsRef}
-            header={postCard}
+            header={(
+              <PostCardForDetails
+                {...this.props}
+                showTopic={this.onShowTopic}
+                isMember={isMember}
+                location={location}
+              />
+            )}
             footer={(
               <CommentPrompt
                 currentUser={currentUser}

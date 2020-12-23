@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 import React from 'react'
-import { StyleSheet, Text, View, Alert } from 'react-native'
+import { StyleSheet, Text, View, Alert, TouchableOpacity } from 'react-native'
 import HTMLView from 'react-native-htmlview'
 import { get, isEmpty, filter, findLastIndex } from 'lodash/fp'
 import { present, sanitize, humanDate } from 'hylo-utils/text'
@@ -8,7 +8,6 @@ import urlHandler from 'routing/urlHandler'
 import Avatar from 'components/Avatar'
 import PopupMenuButton from 'components/PopupMenuButton'
 import Icon from 'components/Icon'
-import LinkButton from 'routing/LinkButton'
 import styles from './Comment.styles'
 import { caribbeanGreen } from 'style/colors'
 
@@ -54,15 +53,15 @@ export default function Comment ({
   
   return (
     <View style={[style, styles.container]}>
-      <LinkButton to={creatorUrl}>
+      <TouchableOpacity onPress={() => showMember(creator.id)}>
         <Avatar avatarUrl={creator.avatarUrl} style={styles.avatar} />
-      </LinkButton>
+      </TouchableOpacity>
       <View style={styles.details}>
         <View style={styles.header}>
           <View style={styles.meta}>
-            <LinkButton to={creatorUrl}>
+            <TouchableOpacity onPress={() => showMember(creator.id)}>
               <Text style={styles.name}>{creator.name}</Text>
-            </LinkButton>
+            </TouchableOpacity>
             <Text style={styles.date}>{humanDate(createdAt)}</Text>
             {displayPostTitle &&
               <Text style={styles.date}>on "{postTitle}"</Text>}
