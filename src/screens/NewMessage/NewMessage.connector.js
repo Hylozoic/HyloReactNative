@@ -31,14 +31,17 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
   const { navigation } = ownProps
 
   const createMessage = (text, participantIds) => {
-    showLoadingModal(true)
+    // TODO: Bring back loading modal?
+    // showLoadingModal(true)
     return findOrCreateThread(participantIds)
       .then(resp => {
         const messageThreadId = get('payload.data.findOrCreateThread.id', resp)
         dispatchProps.createMessage(messageThreadId, text, true)
           .then(({ error }) => {
-            if (!error) navigation.navigate('Thread', { id: messageThreadId })
-            showLoadingModal(false)
+            if (!error) {
+              navigation.navigate('Thread', { id: messageThreadId })
+            }
+            // showLoadingModal(false)
           })
       })
   }

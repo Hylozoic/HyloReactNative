@@ -21,13 +21,34 @@ import NotificationSettings from 'screens/NotificationSettings'
 import NotificationsList from 'screens/NotificationsList'
 import NewMessage from 'screens/NewMessage'
 import PostEditor from 'screens/PostEditor'
-import ProjectMembers from 'screens/ProjectMembers'
 import Thread from 'screens/Thread'
 import ThreadList from 'screens/ThreadList'
 import ThreadParticipants from 'screens/ThreadParticipants'
 import SearchPage from 'screens/SearchPage'
 import UserSettings from 'screens/UserSettings'
-import { gunsmoke } from 'style/colors'
+
+const Messages = createStackNavigator()
+export function MessagesNavigator () {
+  const navigatorProps = {
+    screenOptions: buildModalScreenOptions({
+      headerLeftCloseIcon: false,
+      headerBackTitleVisible: false
+    })
+  }
+  return (
+    <Messages.Navigator {...navigatorProps}>
+      <Messages.Screen name='Messages' component={ThreadList}
+        options={({ navigation }) => buildModalScreenOptions({
+          headerRightButtonLabel: 'New',
+          headerRightButtonOnPress: () => navigation.navigate('New Message')
+        })} />
+      <App.Screen name='New Message' component={NewMessage} />
+      <Messages.Screen name='ThreadParticipants' component={ThreadParticipants}
+      options={{ headerTitle: 'Participants' }} />
+      <Messages.Screen name='Thread' component={Thread} />
+    </Messages.Navigator>
+  )
+}
 
 const CreateCommunity = createStackNavigator()
 export function CreateCommunityNavigator () {
@@ -73,22 +94,15 @@ export default function AppNavigator () {
     <App.Navigator {...navigatorProps}>
       <App.Screen name='Tabs' component={TabsNavigator}
         options={{ headerShown: false }} />
-      <App.Screen name='New Message' component={NewMessage} />
       <App.Screen name='Edit Post' component={PostEditor} />
       <App.Screen name='Edit Account Info' component={UserSettings} />
       <App.Screen name='Community Settings' component={CommunitySettingsNavigator}
         options={{ headerShown: false }} />
       <App.Screen name='Create Community' component={CreateCommunityNavigator}
         options={{ headerShown: false }} />
+      <App.Screen name='Messages' component={MessagesNavigator}
+        options={{ headerShown: false }} />
       <App.Screen name='Notifications' component={NotificationsList} />
-      <App.Screen name='Messages' component={ThreadList}
-        options={({ navigation }) => buildModalScreenOptions({
-          headerRightButtonLabel: 'New',
-          headerRightButtonOnPress: () => navigation.navigate('New Message')
-        })} />
-      <App.Screen name='ThreadParticipants' component={ThreadParticipants}
-        options={{ headerTitle: 'Participants' }} />
-      <App.Screen name='Thread' component={Thread} />
       <App.Screen name='Notification Settings' component={NotificationSettings} />
       <App.Screen name='Blocked Users' component={BlockedUsers} />
       <App.Screen name='InviteExpired' component={InviteExpired}
