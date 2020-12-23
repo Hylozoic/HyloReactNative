@@ -1,11 +1,11 @@
 import { Alert } from 'react-native'
 
-export default function confirmNavigate (onConfirm, options) {
+export default function confirmNavigate (onConfirm, options = {}) {
   options = {
     title: 'Changing context',
-    confirmationMessage: 'Are you sure you want to navigate away from this area?',
+    confirmationMessage: 'You sure you want to navigate away from this area?',
     confirmButtonText: 'Yes',
-    cancelButtonText: 'Cancel',
+    cancelButtonText: 'Stay',
     ...options
   }
 

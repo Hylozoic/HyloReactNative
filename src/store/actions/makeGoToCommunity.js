@@ -1,3 +1,4 @@
+import confirmNavigate from 'util/confirmNavigate'
 import selectCommunity from './selectCommunity'
 
 export default function makeGoToCommunity (dispatch, navigation) {
@@ -29,11 +30,17 @@ export default function makeGoToCommunity (dispatch, navigation) {
     //     }
     //   ]
     // })
-    navigation.navigate('Home', {
-      networkId: null,
-      communityId  
-    })
+    const goToCommunity = () => {
+      navigation.navigate('Home', {
+        networkId: null,
+        communityId  
+      })
+      dispatch(selectCommunity(communityId))
+    }
 
-    return dispatch(selectCommunity(communityId))
+    confirmNavigate(goToCommunity, {
+      title: 'Changing Communities',
+      confirmationMessage: 'Do you want to change context to this other community?'
+    })
   }
 }
