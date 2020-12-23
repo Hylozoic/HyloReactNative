@@ -87,15 +87,15 @@ export function buildModalScreenOptions ({
     cardStyle: {
       backgroundColor: white
     },
-    headerTitleStyle: {
-      color: headerTitleStyleColor,
-      fontFamily: 'Circular-Bold'
-    },
     headerStyle: {
       backgroundColor: bigStone30
     },
     headerTintColor: white,
     headerTitleAlign: 'center',
+    headerTitleStyle: {
+      color: headerTitleStyleColor,
+      fontFamily: 'Circular-Bold'
+    },
     headerLeft: props => {
       const headerLeftOnPress = providedHeaderLeftOnPress || props.onPress
       const onPress = headerLeftConfirm

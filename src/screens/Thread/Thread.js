@@ -1,19 +1,17 @@
 import React from 'react'
-import { FlatList } from 'react-native'
+import { FlatList, Text, TouchableOpacity } from 'react-native'
 import SafeAreaView from 'react-native-safe-area-view'
-import { any, arrayOf, bool, func, shape, string } from 'prop-types'
 import { throttle, debounce } from 'lodash'
 import { get } from 'lodash/fp'
 import Loading from 'components/Loading'
+import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 import MessageCard from 'components/MessageCard'
 import MessageInput from 'components/MessageInput'
 import NotificationOverlay from 'components/NotificationOverlay'
 import PeopleTyping from 'components/PeopleTyping'
 import SocketSubscriber from 'components/SocketSubscriber'
 import { getSocket } from 'util/websockets'
-
 import styles from './Thread.styles'
-import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 
 const BOTTOM_THRESHOLD = 10
 
@@ -36,7 +34,11 @@ export default class Thread extends React.Component {
     const { navigation, id, title } = this.props
     title && navigation.setOptions({
       headerTitle: title,
-      onPressTitle: () => navigation.navigate('ThreadParticipants', { id })
+      headerTitle: ({ style }) => (
+        <TouchableOpacity onPress={()=> navigation.navigate('ThreadParticipants', { id })}>
+          <Text style={style}>{title}</Text>
+        </TouchableOpacity>
+      )
     })
   }
 
