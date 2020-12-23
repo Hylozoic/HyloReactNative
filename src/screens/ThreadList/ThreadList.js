@@ -43,7 +43,7 @@ export default class ThreadList extends Component {
       showThread,
       refreshThreads,
       pendingRefresh,
-      isConnected
+      // isConnected
     } = this.props
     const { ready } = this.state
 
@@ -71,13 +71,15 @@ export default class ThreadList extends Component {
         />
         {!pending && threads.length === 0 &&
           <Text style={styles.center}>No active conversations</Text>}
-        {!isConnected && <NotificationOverlay
-          position='bottom'
-          type='error'
-          permanent
-          message='RECONNECTING...'
-          onPress={this.scrollToBottom}
-                         />}
+        {/* {!isConnected && (
+          <NotificationOverlay
+            position='bottom'
+            type='error'
+            permanent
+            message='RECONNECTING...'
+            onPress={this.scrollToBottom}
+          />
+        )} */}
       </View>
     )
   }

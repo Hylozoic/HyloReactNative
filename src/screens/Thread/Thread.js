@@ -18,30 +18,6 @@ import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 const BOTTOM_THRESHOLD = 10
 
 export default class Thread extends React.Component {
-  static propTypes = {
-    id: any,
-    createMessage: func.isRequired,
-    currentUserId: string.isRequired,
-    fetchMessages: func.isRequired,
-    messages: arrayOf(shape({
-      id: any,
-      createdAt: string,
-      creator: shape({
-        id: any,
-        name: string,
-        avatarUrl: string
-      }),
-      text: string,
-      suppressCreator: bool,
-      suppressDate: bool
-    })),
-    pending: any,
-    reconnectFetchMessages: func.isRequired,
-    setNavParams: func.isRequired,
-    title: string,
-    updateThreadReadTime: func.isRequired
-  }
-
   constructor (props) {
     super(props)
     this.state = {
@@ -56,13 +32,21 @@ export default class Thread extends React.Component {
     this.yOffset = 0
   }
 
+  getHeader () {
+    const { navigation, id, title } = this.props
+    title && navigation.setOptions({
+      headerTitle: title,
+      onPressTitle: () => navigation.navigate('ThreadParticipants', { id })
+    })
+  }
+
   componentDidMount () {
-    const { fetchMessages, reconnectFetchMessages, setNavParams } = this.props
+    const { fetchMessages, reconnectFetchMessages } = this.props
     getSocket().then(socket => socket.on('reconnect', reconnectFetchMessages))
     this.scrollToBottom()
     fetchMessages()
-    setNavParams()
     this.markAsRead()
+    this.getHeader()
   }
 
   UNSAFE_componentWillUpdate (nextProps) {
@@ -101,8 +85,8 @@ export default class Thread extends React.Component {
   }
 
   componentDidUpdate (prevProps) {
-    const { setNavParams, title, id, messages: { length } } = this.props
-    if (prevProps.title !== title) setNavParams()
+    const { title, id, messages: { length } } = this.props
+    if (prevProps.title !== title) this.setHeader()
     if (this.shouldScroll) this.scrollToBottom()
 
     if (prevProps.id !== id) {
@@ -131,7 +115,9 @@ export default class Thread extends React.Component {
 
   markAsRead = debounce(() => this.props.updateThreadReadTime(), 1000)
 
-  renderItem = ({ item }) => <MessageCard message={item} />
+  renderItem = ({ item }) => {
+    return <MessageCard message={item} showTopic={this.props.showTopic} />
+  }
 
   scrollHandler = ({ nativeEvent: { contentOffset } }) => {
     this.yOffset = contentOffset.y
@@ -149,7 +135,7 @@ export default class Thread extends React.Component {
     this.markAsRead()
   }
 
-  messageView = () => {
+  render () {
     const {
       id,
       messages,
@@ -158,52 +144,46 @@ export default class Thread extends React.Component {
       isConnected
     } = this.props
     const { newMessages, notify } = this.state
-    const showNotificationOverlay = notify || !isConnected
+    const showNotificationOverlay = notify // || !isConnected
     const overlayMessage = !isConnected
-      ? 'RECONNECTING...'
+      ? '' // 'RECONNECTING...'
       : `${newMessages} NEW MESSAGE${newMessages > 1 ? 'S' : ''}`
 
     return (
-      <SafeAreaView style={{flex: 1}}>
-        {pending && <Loading />}
-        <FlatList
-          style={styles.messageList}
-          data={messages}
-          inverted
-          keyExtractor={item => item.id}
-          onEndReached={() => this.fetchMore()}
-          onEndReachedThreshold={0.3}
-          onScroll={this.scrollHandler}
-          ref={this.messageListRef}
-          refreshing={!!pending}
-          renderItem={this.renderItem}
-        />
-        <MessageInput
-          blurOnSubmit={false}
-          multiline
-          onSubmit={this.createMessage}
-          sendIsTyping={sendIsTyping}
-          placeholder='Write something...'
-        />
-        <PeopleTyping />
-        {showNotificationOverlay && (
-          <NotificationOverlay
-            position='bottom'
-            type={isConnected ? 'info' : 'error'}
-            permanent={!isConnected}
-            message={overlayMessage}
-            onPress={this.scrollToBottom}
-          />
-        )}
-        <SocketSubscriber type='post' id={id} />
-      </SafeAreaView>
-    )
-  }
-
-  render () {
-    return (
       <KeyboardFriendlyView style={styles.container}>
-        {this.messageView()}
+        <SafeAreaView style={{flex: 1}}>
+          {pending && <Loading />}
+          <FlatList
+            style={styles.messageList}
+            data={messages}
+            inverted
+            keyExtractor={item => item.id}
+            onEndReached={() => this.fetchMore()}
+            onEndReachedThreshold={0.3}
+            onScroll={this.scrollHandler}
+            ref={this.messageListRef}
+            refreshing={!!pending}
+            renderItem={this.renderItem}
+          />
+          <MessageInput
+            blurOnSubmit={false}
+            multiline
+            onSubmit={this.createMessage}
+            sendIsTyping={sendIsTyping}
+            placeholder='Write something...'
+          />
+          <PeopleTyping />
+          {showNotificationOverlay && (
+            <NotificationOverlay
+              position='bottom'
+              type={isConnected ? 'info' : 'error'}
+              permanent={!isConnected}
+              message={overlayMessage}
+              onPress={this.scrollToBottom}
+            />
+          )}
+          <SocketSubscriber type='post' id={id} />
+        </SafeAreaView>
       </KeyboardFriendlyView>
     )
   }

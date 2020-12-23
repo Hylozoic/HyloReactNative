@@ -10,8 +10,8 @@ import Avatar from 'components/Avatar'
 
 import styles from './MessageCard.style'
 
-export default function MessageCard ({ message }) {
-  const { createdAt, creator, suppressCreator, suppressDate, text, showTopic, showMember } = message
+export default function MessageCard ({ message, showTopic, showMember }) {
+  const { createdAt, creator, suppressCreator, suppressDate, text } = message
 
   // TODO: move the linebreak replacement into the present function. See MBL-379
   const presentedText = present(
