@@ -8,6 +8,7 @@ import { get, isEmpty, compact } from 'lodash/fp'
 import { humanDate } from 'hylo-utils/text'
 import styles from './InvitePeople.styles'
 import { caribbeanGreen } from 'style/colors'
+import Loading from 'components/Loading'
 // https://github.com/react-native-community/react-native-tab-view/issues/547
 const initialLayout = {
   height: 0,
@@ -57,7 +58,7 @@ export default class InvitePeople extends Component {
   )
 
   _renderScene = ({ route }) => {
-    if (this.props.pending) return <Text>Loading...</Text>
+    if (this.props.pending) return <Loading />
     switch (route.key) {
       case '0':
         return (

@@ -20,6 +20,7 @@ export default function Loading ({
 
 const styles = {
   container: {
+    padding: 20,
     justifyContent: 'space-around'
   },
   text: {
