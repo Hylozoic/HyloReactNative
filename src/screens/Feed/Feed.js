@@ -9,11 +9,18 @@ import FeedBanner from 'components/FeedBanner'
 import SocketSubscriber from 'components/SocketSubscriber'
 import styles from './Feed.styles'
 
+export function setHeader ({
+  navigation, topicName, community
+}){
+  const headerTitle = topicName ? community?.name : 'Home'
+  navigation.setOptions({ headerTitle })
+}
+
 export default class Feed extends React.Component {
   componentDidMount () {
     const { fetchCommunityTopic } = this.props
     if (fetchCommunityTopic) fetchCommunityTopic()
-    this.setHeader()
+    setHeader(this.props)
   }
 
   componentDidUpdate (prevProps) {
@@ -21,18 +28,12 @@ export default class Feed extends React.Component {
       (get('id', prevProps.community) !== get('id', this.props.community)) ||
       (get('topicName', prevProps) !== get('topicName', this.props))
     ) {
-      this.setHeader()
+      setHeader(this.props)
     }
   }
 
   shouldComponentUpdate (nextProps) {
     return nextProps.isFocused && didPropsChange(this.props, nextProps)
-  }
-
-  setHeader = () => {
-    const { navigation, topicName, community } = this.props
-    const headerTitle = topicName ? get('name', community) : 'Home'
-    navigation.setOptions({ headerTitle })
   }
 
   render () {
