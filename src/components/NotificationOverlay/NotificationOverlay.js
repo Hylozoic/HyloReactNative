@@ -33,12 +33,12 @@ export default class NotificationOverlay extends React.Component {
     Animated.sequence(compact([
       Animated.timing(
         this.state.heightAnim,
-        { toValue: height, duration: 800 }
+        { toValue: height, duration: 800, useNativeDriver: false }
       ),
       !permanent && Animated.delay(4000),
       !permanent && Animated.timing(
         this.state.heightAnim,
-        { toValue: 0, duration: 800 }
+        { toValue: 0, duration: 800, useNativeDriver: false },
       )
     ])).start(({ finished }) => {
       if (finished && onComplete) onComplete()
@@ -54,7 +54,7 @@ export default class NotificationOverlay extends React.Component {
         styles[position + 'Position'],
         { height: this.state.heightAnim }
       ]}
-      >
+    >
         <TouchableOpacity onPress={onPress}>
           <Text style={[styles.message, styles[type]]}>
             {message}

@@ -20,7 +20,8 @@ export default class LoadingModal extends React.Component {
     Animated.timing(this.state.opacityAnim,
       {
         toValue: shouldDisplay ? 0.8 : 0,
-        duration: 700
+        duration: 700,
+        useNativeDriver: false
       }).start(() => {
       this.setState({ visible: nextProps.shouldDisplay })
     })
