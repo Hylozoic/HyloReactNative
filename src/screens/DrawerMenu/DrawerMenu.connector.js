@@ -111,23 +111,35 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     ...ownProps,
     goToCommunity: community => {
       if (community.id === ALL_COMMUNITIES_ID) {
-        navigation.navigate('Feed')
+        navigation.navigate('Home')
       } else {
         navigation.closeDrawer()
-        navigation.navigate('Feed', { communityId: community.id, networkId: null })
+        navigation.navigate('Home', {
+          screen: 'Home',
+          params: {
+            communityId: community.id,
+            networkId: null
+          } 
+        })
       }
       dispatchProps.selectCommunity(community.id)
     },
     goToNetwork: network => {
       navigation.closeDrawer()
-      navigation.navigate('Feed', { communityId: null, networkId: network.id })
+      navigation.navigate('Home', {
+        screen: 'Home',
+        params: {
+          communityId: null,
+          networkId: network.id
+        } 
+      })
       dispatchProps.selectNetwork(network.id)
     },
     showSettings: () => {
-      navigation.navigate('Edit Account Info', { name })
+      navigation.navigate('Edit Account Info')
     },
     goToMyProfile: () => {
-      navigation.navigate('Member', { id: currentUser.id })
+      navigation.navigate('Members', { screen: 'Member', params: { id: currentUser.id } })
     },
     goToCreateCommunity: () => {
       navigation.navigate('Create Community')

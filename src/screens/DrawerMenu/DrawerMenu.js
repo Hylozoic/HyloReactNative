@@ -164,32 +164,39 @@ export class NetworkRow extends React.PureComponent {
       <View style={[styles.networkRow, expanded ? styles.networkRowExpanded : styles.networkRowCollapsed]}>
         <TouchableOpacity onPress={this.openNetwork} style={[styles.rowTouchable, styles.networkRowTouchable]}>
           {imageSource && <Image source={imageSource} style={styles.networkAvatar} />}
-          <Text
-            style={styles.networkRowText} ellipsizeMode='tail'
-            numberOfLines={1}
-          >
+          <Text style={styles.networkRowText} ellipsizeMode='tail' numberOfLines={1}>
             {name}
           </Text>
-          {expandable && <TouchableOpacity onPress={this.toggleExpanded} style={styles.networkOpenWrapper}><EntypoIcon style={styles.networkOpenIcon} name={expanded ? 'chevron-down' : 'chevron-right'} /></TouchableOpacity>}
+          {expandable && (
+            <TouchableOpacity onPress={this.toggleExpanded} style={styles.networkOpenWrapper}>
+              <EntypoIcon style={styles.networkOpenIcon} name={expanded ? 'chevron-down' : 'chevron-right'} />
+            </TouchableOpacity>
+          )}
         </TouchableOpacity>
-        {expanded && expandable && <View style={styles.networkCommunities}>
-          {communities.map(c => <CommunityRow
-            key={c.id}
-            community={c}
-            goToCommunity={goToCommunity}
-            currentCommunityId={currentCommunityId}
-                                />)}
-          {seeAllExpanded && moreCommunities && nonMemberCommunities.map(c => <CommunityRow
-            key={c.id}
-            community={c}
-            goToCommunity={goToCommunity}
-            currentCommunityId={currentCommunityId}
-            isMember={false}
-                                                                              />)}
-          {moreCommunities && <TouchableOpacity onPress={this.toggleSeeAll}>
-            <Text style={styles.seeAll}>{seeAllExpanded ? 'See less' : 'See all'}</Text>
-          </TouchableOpacity>}
-                                   </View>}
+        {expanded && expandable && (
+          <View style={styles.networkCommunities}>
+            {communities.map(c => <CommunityRow
+              key={c.id}
+              community={c}
+              goToCommunity={goToCommunity}
+              currentCommunityId={currentCommunityId}
+                                  />)}
+            {seeAllExpanded && moreCommunities && nonMemberCommunities.map(c => (
+              <CommunityRow
+                key={c.id}
+                community={c}
+                goToCommunity={goToCommunity}
+                currentCommunityId={currentCommunityId}
+                isMember={false}
+                                                                                  />
+            ))}
+            {moreCommunities && (
+              <TouchableOpacity onPress={this.toggleSeeAll}>
+                <Text style={styles.seeAll}>{seeAllExpanded ? 'See less' : 'See all'}</Text>
+              </TouchableOpacity>
+            )}
+          </View>
+        )}
       </View>
     )
   }
@@ -210,9 +217,11 @@ export function CommunityRow ({ community, goToCommunity, currentCommunityId, ad
         >
           {name}
         </Text>
-        {!!newPostCount && <View style={styles.badge}>
-          <Text style={styles.badgeText}>{newPostCount}</Text>
-        </View>}
+        {!!newPostCount && (
+          <View style={styles.badge}>
+            <Text style={styles.badgeText}>{newPostCount}</Text>
+          </View>
+        )}
       </TouchableOpacity>
     </View>
   )
