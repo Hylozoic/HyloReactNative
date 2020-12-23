@@ -56,6 +56,7 @@ describe('Topics', () => {
     const props = {
       fetchCommunityTopics: () => {},
       community: {
+        id: 123,
         name: 'Foomunity',
         bannerUrl: 'community-banner.png'
       },
@@ -73,6 +74,7 @@ describe('Topics', () => {
     const props = {
       fetchCommunityTopics: () => {},
       community: {
+        id: 123,
         name: 'Foomunity',
         bannerUrl: 'community-banner.png'
       },

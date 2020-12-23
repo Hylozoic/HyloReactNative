@@ -15,7 +15,7 @@ export default function RootView ({
   openedPushNotification
 }) {
   useEffect(() => { checkSessionAndSetSignedIn() }, [])
-  useEffect(() => { loadCurrentUserSession() }, [signedIn])
+  useEffect(() => { loadCurrentUserSession() }, [ signedIn ])
 
   if (loading && !signupInProgress) {
     return (

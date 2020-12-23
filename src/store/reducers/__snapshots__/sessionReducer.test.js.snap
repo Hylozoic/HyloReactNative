@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`on FETCH_CURRENT_USER handles a user with a membership 1`] = `
+Object {
+  "id": 1,
+  "signedIn": true,
+  "signupInProgress": undefined,
+}
+`;
+
+exports[`on FETCH_CURRENT_USER handles a user with no memberships 1`] = `
+Object {
+  "id": 1,
+  "signedIn": true,
+  "signupInProgress": undefined,
+}
+`;
+
+exports[`on SELECT_COMMUNITY returns the payload 1`] = `
+Object {
+  "communityId": "123",
+  "networkId": null,
+}
+`;

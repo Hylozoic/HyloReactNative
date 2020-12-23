@@ -4,7 +4,7 @@ export default StyleSheet.create({
   notificationsList: {
     backgroundColor: 'white'
   },
-  center: { 
-    padding: 40
+  center: {
+    padding: 20
   }
 })

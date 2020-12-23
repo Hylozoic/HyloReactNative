@@ -19,7 +19,7 @@ export default class NotificationsList extends Component {
   }
 
   componentDidMount () {
-    const { fetchNotifications, setRightButton, updateNewNotificationCount } = this.props
+    const { fetchNotifications, updateNewNotificationCount } = this.props
     this.setHeader()
     fetchNotifications()
     updateNewNotificationCount()
