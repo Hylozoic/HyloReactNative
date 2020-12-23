@@ -27,6 +27,8 @@ export const amaranth = '#EE4266'
 export const gunsmoke = '#818A88'
 export const treePoppy = '#FF9D21'
 export const prim = '#F1DFEE'
+export const suvaGrey = '#929292'
+export const gainsboro = '#DCDCDC'
 
 // these colors are the equivalent of reducing the opacity of the colors named
 // above, on a white background. use these where possible, to avoid any impact

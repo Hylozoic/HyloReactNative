@@ -13,12 +13,8 @@ import joinProject from 'store/actions/joinProject'
 import leaveProject from 'store/actions/leaveProject'
 import goToMemberMaker from 'store/actions/goToMemberMaker'
 
-function getPostId (state, props) {
-  return getRouteParam('id', props.route)
-}
-
 export function mapStateToProps (state, props) {
-  const id = getPostId(state, props)
+  const id = getRouteParam('id', props.route)
   const currentUser = getMe(state, props)
   const currentCommunityId = getCurrentCommunityId(state, props)
   const post = getPresentedPost(state, { id, currentCommunityId })
