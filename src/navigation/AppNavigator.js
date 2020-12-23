@@ -42,10 +42,14 @@ export function MessagesNavigator () {
           headerRightButtonLabel: 'New',
           headerRightButtonOnPress: () => navigation.navigate('New Message')
         })} />
-      <App.Screen name='New Message' component={NewMessage} />
+      <Messages.Screen name='New Message' component={NewMessage} />
       <Messages.Screen name='ThreadParticipants' component={ThreadParticipants}
       options={{ headerTitle: 'Participants' }} />
-      <Messages.Screen name='Thread' component={Thread} />
+      <Messages.Screen name='Thread' component={Thread}
+        options={({ navigation }) => buildModalScreenOptions({
+          headerLeftCloseIcon: false,
+          headerLeftOnPress: () => navigation.navigate('Messages')
+        })} />
     </Messages.Navigator>
   )
 }
