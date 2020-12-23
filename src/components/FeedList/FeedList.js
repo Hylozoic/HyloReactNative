@@ -25,30 +25,17 @@ export default class FeedList extends React.Component {
   }
 
   componentDidUpdate (prevProps) {
-    // The first two checks below prevent data from being loaded until the Home
-    // tab is actually visible.
-    //
-    // This implementation causes a pretty strong coupling between FeedList and
-    // the Home tab by hard-coding the tab name. This will have to be reworked to
-    // allow opening topic feeds in the Topic tab, e.g.
-    // TODO: See TAB_ROOTS
-    // const isAFeedTab = props => includes(props.route.name, ['Feed', 'Topic Feed'])
-    // if (!isAFeedTab(this.props)) {
-    //   return
-    // }
-    if (!prevProps.isFocused && this.props.isFocused) {
-      return this.fetchOrShowCached()
-    }
-
-    if (prevProps.sortBy !== this.props.sortBy ||
+    if (
+        !prevProps.isFocused && this.props.isFocused  ||
+        prevProps.sortBy !== this.props.sortBy ||
         prevProps.filter !== this.props.filter ||
         prevProps.community?.id !== this.props.community?.id ||
+        prevProps.topicName !== this.props.topicName ||
         prevProps.network?.id !== this.props.network?.id
     ) {
       this.fetchOrShowCached()
     }
   }
-
 
   renderItem = ({ item }) => {
     const {
