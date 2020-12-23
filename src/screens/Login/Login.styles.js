@@ -49,7 +49,6 @@ const mixins = {
     top: 0,
     left: 0,
     right: 0,
-    marginTop: isIOS ? 20 : 0,
     zIndex: 2
   },
   socialLoginButton: {
@@ -163,6 +162,14 @@ export default {
     borderRadius: 5,
     minHeight: 45
   },
+  paddedBorderValid: {
+    flex: 1,
+    flexDirection: 'row',
+    borderWidth: StyleSheet.hairlineWidth,
+    borderRadius: 5,
+    minHeight: 45,
+    borderColor: caribbeanGreen
+  },
   loginButton: {
     flex: 1,
     flexDirection: 'row',
@@ -171,14 +178,6 @@ export default {
     borderRadius: 50,
     justifyContent: 'center',
     marginTop: 5
-  },
-  paddedBorderValid: {
-    flex: 1,
-    flexDirection: 'row',
-    borderWidth: StyleSheet.hairlineWidth,
-    borderRadius: 5,
-    minHeight: 40,
-    borderColor: caribbeanGreen
   },
   leftInputView: {
     height: 40,

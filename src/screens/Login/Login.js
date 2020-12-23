@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   Image
 } from 'react-native'
+import SafeAreaView from 'react-native-safe-area-view'
 import { isIOS } from 'util/platform'
 import validator from 'validator'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
@@ -40,17 +41,6 @@ export default class Login extends React.Component {
   componentDidMount () {
     this.unsubscribeNetInfo = NetInfo.addEventListener(this.handleConnectivityChange)
     if (this.props.signupInProgress) {
-      // TODO: Decide whether to reset or simply navigate for returning sign-up
-      // this.props.navigation.reset({
-      //   index: 0,
-      //   routes: [{
-      //     name: 'Signup',
-      //     index: 1,
-      //     routes: [{
-      //       name: 'SignupFlow1'
-      //     }]
-      //   }]
-      // })
       this.props.navigation.navigate('Signup', { screen: 'SignupFlow1' })
     }
   }
@@ -102,100 +92,101 @@ export default class Login extends React.Component {
     const { ssoError, emailIsValid, isConnected } = this.state
 
     return (
-      <ScrollView contentContainerStyle={styles.login} style={styles.container}>
-        {ssoError && <Text style={styles.errorBanner}>{ssoError}</Text>}
-        {!isConnected && <Text style={styles.errorBanner}>OFFLINE; TRYING TO RECONNECT...</Text>}
-        {pending && <Text style={styles.banner}>LOGGING IN...</Text>}
-        {bannerMessage && <Text style={styles.banner}>{bannerMessage}</Text>}
-        <Image
-          style={styles.logo}
-          source={require('assets/merkaba-green-on-white.png')}
-        />
-        <Text style={styles.title}>Log in to Hylo</Text>
-        {formError && <FormError />}
-        {!formError && (
+      <SafeAreaView>
+        <ScrollView contentContainerStyle={styles.login} style={styles.container}>
+          {ssoError && <Text style={styles.errorBanner}>{ssoError}</Text>}
+          {/* {!isConnected && <Text style={styles.errorBanner}>OFFLINE; TRYING TO RECONNECT...</Text>} */}
+          {pending && <Text style={styles.banner}>LOGGING IN...</Text>}
+          {bannerMessage && <Text style={styles.banner}>{bannerMessage}</Text>}
+          <Image
+            style={styles.logo}
+            source={require('assets/merkaba-green-on-white.png')}
+          />
+          <Text style={styles.title}>Log in to Hylo</Text>
+          {formError && <FormError />}
+          {!formError && (
+            <View style={styles.labelRow}>
+              <Text style={styles.labelText}>Your email address</Text>
+            </View>
+          )}
+          <View style={styles.paddedRow}>
+            <View style={emailIsValid ? styles.paddedBorderValid : styles.paddedBorder}>
+              <View style={styles.leftInputView}>
+                <TextInput
+                  style={styles.textInput}
+                  onChangeText={email => this.setInput('email', email)}
+                  returnKeyType='next'
+                  autoCapitalize='none'
+                  autoCorrect={false}
+                  keyboardType='email-address'
+                  // UPGRADE TODO: Fix with this: https://stackoverflow.com/a/59626713
+                  onSubmitEditing={() => this.passwordInputRef.current.focus() }
+                  underlineColorAndroid={styles.androidInvisibleUnderline}
+                />
+              </View>
+              <View style={styles.rightIconView}>
+                {emailIsValid && (
+                  <EntypoIcon name='check' style={styles.iconGreen} />
+                )}
+              </View>
+            </View>
+          </View>
           <View style={styles.labelRow}>
-            <Text style={styles.labelText}>Your email address</Text>
+            <Text style={styles.labelText}>Password</Text>
+            <TouchableOpacity onPress={goToResetPassword}>
+              <Text style={styles.forgotPasswordText}>Forgot your password?</Text>
+            </TouchableOpacity>
           </View>
-        )}
-        <View style={styles.paddedRow}>
-          <View style={emailIsValid ? styles.paddedBorderValid : styles.paddedBorder}>
-            <View style={styles.leftInputView}>
-              <TextInput
-                style={styles.textInput}
-                onChangeText={email => this.setInput('email', email)}
-                returnKeyType='next'
-                autoCapitalize='none'
-                autoCorrect={false}
-                keyboardType='email-address'
-                // UPGRADE TODO: Fix with this: https://stackoverflow.com/a/59626713
-                onSubmitEditing={() => focus(this.passwordInputRef.current)}
-                underlineColorAndroid={styles.androidInvisibleUnderline}
-              />
-            </View>
-            <View style={styles.rightIconView}>
-              {emailIsValid && (
-                <EntypoIcon name='check' style={styles.iconGreen} />
-              )}
-            </View>
-          </View>
-        </View>
-
-        <View style={styles.labelRow}>
-          <Text style={styles.labelText}>Password</Text>
-          <TouchableOpacity onPress={goToResetPassword}>
-            <Text style={styles.forgotPasswordText}>Forgot your password?</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.paddedRow}>
-          <View style={styles.paddedBorder}>
-            <View style={styles.leftInputView}>
-              <TextInput
-                style={styles.textInput}
-                secureTextEntry={this.state.securePassword}
-                autoCapitalize='none'
-                ref={this.passwordInputRef}
-                onChangeText={password => this.setInput('password', password)}
-                returnKeyType='go'
-                selectTextOnFocus
-                onSubmitEditing={() => this.login()}
-                underlineColorAndroid='rgba(0,0,0,0)'
-              />
-            </View>
-            <View style={styles.rightIconView}>
-              <EntypoIcon
-                name={this.state.securePassword ? 'eye' : 'eye-with-line'}
-                style={styles.iconOpaque}
-                onPress={this.togglePassword}
-              />
+          <View style={styles.paddedRow}>
+            <View style={styles.paddedBorder}>
+              <View style={styles.leftInputView}>
+                <TextInput
+                  style={styles.textInput}
+                  secureTextEntry={this.state.securePassword}
+                  autoCapitalize='none'
+                  ref={this.passwordInputRef}
+                  onChangeText={password => this.setInput('password', password)}
+                  returnKeyType='go'
+                  selectTextOnFocus
+                  onSubmitEditing={() => this.login()}
+                  underlineColorAndroid='rgba(0,0,0,0)'
+                />
+              </View>
+              <View style={styles.rightIconView}>
+                <EntypoIcon
+                  name={this.state.securePassword ? 'eye' : 'eye-with-line'}
+                  style={styles.iconOpaque}
+                  onPress={this.togglePassword}
+                />
+              </View>
             </View>
           </View>
-        </View>
-        <View style={styles.paddedRow}>
-          <TouchableOpacity onPress={this.login} style={styles.loginButton}>
-            <Text style={styles.loginText}>Log In</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.connectWith}>
-          <Text style={styles.connectWithText}>Or connect with:</Text>
-          {isIOS && <AppleLoginButton
-            style={styles.appleLoginButton}
-            onLoginFinished={loginWithApple}
-            createErrorNotification={this.createErrorNotification}
-          />}
-          <GoogleLoginButton
-            style={styles.googleLoginButton}
-            onLoginFinished={loginWithGoogle}
-            createErrorNotification={this.createErrorNotification}
-          />
-          <FbLoginButton
-            style={styles.facebookLoginButton}
-            onLoginFinished={loginWithFacebook}
-            createErrorNotification={this.createErrorNotification}
-          />
-        </View>
-        <SignupLink goToSignup={goToSignup} />
-      </ScrollView>
+          <View style={styles.paddedRow}>
+            <TouchableOpacity onPress={this.login} style={styles.loginButton}>
+              <Text style={styles.loginText}>Log In</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.connectWith}>
+            <Text style={styles.connectWithText}>Or connect with:</Text>
+            {isIOS && <AppleLoginButton
+              style={styles.appleLoginButton}
+              onLoginFinished={loginWithApple}
+              createErrorNotification={this.createErrorNotification}
+            />}
+            <GoogleLoginButton
+              style={styles.googleLoginButton}
+              onLoginFinished={loginWithGoogle}
+              createErrorNotification={this.createErrorNotification}
+            />
+            <FbLoginButton
+              style={styles.facebookLoginButton}
+              onLoginFinished={loginWithFacebook}
+              createErrorNotification={this.createErrorNotification}
+            />
+          </View>
+          <SignupLink goToSignup={goToSignup} />
+        </ScrollView>
+      </SafeAreaView>
     )
   }
 }

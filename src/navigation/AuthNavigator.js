@@ -9,6 +9,7 @@ import SignupFlow2 from 'screens/SignupFlow/SignupFlow2'
 import SignupFlow3 from 'screens/SignupFlow/SignupFlow3'
 import SignupFlow4 from 'screens/SignupFlow/SignupFlow4'
 import SignupFlow5 from 'screens/SignupFlow/SignupFlow5'
+import { white } from 'style/colors'
 
 const Signup = createStackNavigator()
 export function SignupNavigator () {
@@ -37,7 +38,10 @@ const Auth = createStackNavigator()
 export default function AuthNavigator (props) {
   const navigatorProps = {
     screenOptions: {
-      headerShown: false
+      headerShown: false,
+      cardStyle: {
+        backgroundColor: white
+      }
     }
   }
 
