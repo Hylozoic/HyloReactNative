@@ -79,7 +79,8 @@ export function CommunitySettingsNavigator () {
   }
   return (
     <CommunitySettings.Navigator {...navigatorProps}>
-      <CommunitySettings.Screen name='Community Settings' component={CommunitySettingsMenu} />
+      <CommunitySettings.Screen name='Community Settings' component={CommunitySettingsMenu}
+        options={buildModalScreenOptions({ headerLeftCloseIcon: true })} />
       <CommunitySettings.Screen name='Community Information' component={CommunitySettingsComponent} />
       <CommunitySettings.Screen name='Community Moderators' component={ModeratorSettings} />
       <CommunitySettings.Screen name='Invite Members' component={InvitePeople} />
