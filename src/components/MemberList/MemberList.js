@@ -6,13 +6,14 @@ import {
 import {
   View, FlatList, Text, TouchableOpacity, TextInput
 } from 'react-native'
+import { useScrollToTop } from '@react-navigation/native'
 import Avatar from 'components/Avatar'
 import Icon from 'components/Icon'
 import Loading from 'components/Loading'
 import PopupMenuButton from 'components/PopupMenuButton'
 import styles from './MemberList.styles'
 
-export default class MemberList extends React.Component {
+export class MemberList extends React.Component {
   static defaultProps = {
     // For all
     members: [],
@@ -80,7 +81,7 @@ export default class MemberList extends React.Component {
   render () {
     const { members, isServerSearch } = this.state
     const {
-      children, sortKeys, sortBy, setSort, fetchMoreMembers, pending, hideSortOptions
+      children, sortKeys, sortBy, setSort, fetchMoreMembers, pending, hideSortOptions, scrollRef
     } = this.props
     const onSearch = debounce(300, text => this.search(text))
     const actions = isServerSearch
@@ -118,6 +119,7 @@ export default class MemberList extends React.Component {
 
     return (
       <FlatList
+        ref={scrollRef}
         data={membersForFlatList}
         numColumns='2'
         renderItem={({ item }) => {
@@ -134,6 +136,14 @@ export default class MemberList extends React.Component {
       />
     )
   }
+}
+
+export default function(props) {
+  const ref = React.useRef(null)
+
+  useScrollToTop(ref)
+
+  return <MemberList {...props} scrollRef={ref} />
 }
 
 export function Member ({ member, showMember }) {

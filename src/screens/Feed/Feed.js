@@ -1,14 +1,12 @@
-import React, { useEffect } from 'react'
+import React, { useRef, useEffect } from 'react'
 import { View } from 'react-native'
-import { get } from 'lodash/fp'
-import { didPropsChange } from 'util/index'
+import { useScrollToTop } from '@react-navigation/native'
 import Loading from 'components/Loading'
 import CreateCommunityNotice from 'components/CreateCommunityNotice'
 import FeedList from 'components/FeedList'
 import FeedBanner from 'components/FeedBanner'
 import SocketSubscriber from 'components/SocketSubscriber'
 import styles from './Feed.styles'
-import fetchCommunityTopics from 'store/actions/fetchCommunityTopics'
 
 export function setHeader (navigation, topicName, community){
   const headerTitle = topicName ? community?.name : 'Home'
@@ -38,6 +36,8 @@ export default function Feed ({
   fetchCommunityTopic,
   belowBannerComponent
 }) {
+  const ref = useRef(null)
+
   useEffect(() => { fetchCommunityTopic() }, [ fetchCommunityTopic, topicName ])
   useEffect(() => { setHeader(navigation, topicName, community) }, [ topicName, community?.id ])
 
@@ -51,6 +51,8 @@ export default function Feed ({
     )
   }
 
+  useScrollToTop(ref)
+
   const all = !community && !topicName
   const theme = belowBannerComponent
     ? { container: { marginBottom: 0 } }
@@ -59,6 +61,7 @@ export default function Feed ({
   return (
     <View style={styles.container}>
       <FeedList
+        scrollRef={ref}
         community={community}
         network={network}
         showPost={showPost}

@@ -37,28 +37,6 @@ export default class FeedList extends React.Component {
     }
   }
 
-  renderItem = ({ item }) => {
-    const {
-      communityId,
-      showPost,
-      showMember,
-      showTopic,
-      goToCommunity
-    } = this.props
-
-    return (
-      <PostRow
-        postId={item}
-        communityId={communityId}
-        shouldShowCommunities={!communityId}
-        showPost={showPost}
-        showMember={showMember}
-        showTopic={showTopic}
-        goToCommunity={goToCommunity}
-      />
-    )
-  }
-
   keyExtractor = (item) => `post${item}`
 
   render () {
@@ -69,14 +47,16 @@ export default class FeedList extends React.Component {
       refreshPosts,
       fetchMorePosts,
       setFilter,
-      setSort
+      setSort,
+      scrollRef
     } = this.props
 
     return (
       <View style={styles.container}>
         <FlatList
+          ref={scrollRef}
           data={postIds}
-          renderItem={this.renderItem}
+          renderItem={({ item }) => renderItem({ ...this.props, item })}
           onRefresh={refreshPosts}
           refreshing={!!pendingRefresh}
           keyExtractor={this.keyExtractor}
@@ -103,6 +83,27 @@ export default class FeedList extends React.Component {
       </View>
     )
   }
+}
+
+export function renderItem ({
+  item,
+  communityId,
+  showPost,
+  showMember,
+  showTopic,
+  goToCommunity
+}) {
+  return (
+    <PostRow
+      postId={item}
+      communityId={communityId}
+      shouldShowCommunities={!communityId}
+      showPost={showPost}
+      showMember={showMember}
+      showTopic={showTopic}
+      goToCommunity={goToCommunity}
+    />
+  )
 }
 
 export const filterOptions = [

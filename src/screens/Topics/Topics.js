@@ -1,5 +1,6 @@
-import React from 'react'
-import { Text, ScrollView, Image, View, TouchableOpacity, TextInput } from 'react-native'
+import React, { useRef, useEffect } from 'react'
+import { Text, ScrollView, Image, View, TouchableOpacity } from 'react-native'
+import { useScrollToTop } from '@react-navigation/native'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 import Loading from 'components/Loading'
 import StarIcon from 'components/StarIcon'
@@ -12,61 +13,55 @@ import { isEmpty, get } from 'lodash/fp'
 import { bannerlinearGradientColors } from 'style/colors'
 import TopicSupportComingSoon from './TopicSupportComingSoon'
 
-export default class Topics extends React.Component {
-  componentDidMount () {
-    if (!this.props.networkId) {
-      this.props.fetchCommunityTopics()
-    }
-  }
+export default function Topics ({
+  communityHasTopics,
+  community,
+  filteredTopics,
+  pending,
+  setTopicSubscribe,
+  goToTopic,
+  searchTerm,
+  setTerm,
+  navigation,
+  fetchCommunityTopics
+}) {
+  if (!community?.id) return <TopicSupportComingSoon navigation={navigation} />
 
-  componentDidUpdate (prevProps) {
-    if (
-      (get('community.id', prevProps) !== get('community.id', this.props)) ||
-      (get('networkId', prevProps) && !get('networkId', this.props))
-    ) {
-      this.props.fetchCommunityTopics()
-    }
-  }
+  const ref = useRef(null)
+  
+  useScrollToTop(ref)
+  useEffect(() => { fetchCommunityTopics() }, [community.id])
 
-  render () {
-    if (!this.props.community?.id) {
-      return <TopicSupportComingSoon navigation={this.props.navigation} />
-    }
+  const bannerUrl = get('bannerUrl', community)
+  const name = get('name', community)
+  const image = { uri: bannerUrl }
 
-    const {
-      communityHasTopics, community, filteredTopics, pending, setTopicSubscribe, goToTopic, searchTerm, setTerm
-    } = this.props
-    const bannerUrl = get('bannerUrl', community)
-    const name = get('name', community)
-    const image = { uri: bannerUrl }
-
-    return (
-      <KeyboardFriendlyView style={styles.container}>
-        <ScrollView contentContainerStyle={styles.scrollContainer}>
-          <View style={styles.bannerContainer}>
-            {image && <Image source={image} style={styles.image} />}
-            <LinearGradient style={styles.gradient} colors={bannerlinearGradientColors} />
-            <Text style={styles.title}>{name}</Text>
-          </View>
-          <SearchBar
-            value={searchTerm}
-            onChangeText={setTerm}
-            placeholder='Search Topics'
-            disable={!communityHasTopics}
-          />
-          {pending && isEmpty(filteredTopics)
-            ? <Loading />
-            : <TopicList
-                communityHasTopics={communityHasTopics}
-                searchTerm={searchTerm}
-                filteredTopics={filteredTopics}
-                setTopicSubscribe={setTopicSubscribe}
-                goToTopic={goToTopic}
-              />}
-        </ScrollView>
-      </KeyboardFriendlyView>
-    )
-  }
+  return (
+    <KeyboardFriendlyView style={styles.container}>
+      <ScrollView ref={ref} contentContainerStyle={styles.scrollContainer}>
+        <View style={styles.bannerContainer}>
+          {image && <Image source={image} style={styles.image} />}
+          <LinearGradient style={styles.gradient} colors={bannerlinearGradientColors} />
+          <Text style={styles.title}>{name}</Text>
+        </View>
+        <SearchBar
+          value={searchTerm}
+          onChangeText={setTerm}
+          placeholder='Search Topics'
+          disable={!communityHasTopics}
+        />
+        {pending && isEmpty(filteredTopics)
+          ? <Loading />
+          : <TopicList
+              communityHasTopics={communityHasTopics}
+              searchTerm={searchTerm}
+              filteredTopics={filteredTopics}
+              setTopicSubscribe={setTopicSubscribe}
+              goToTopic={goToTopic}
+            />}
+      </ScrollView>
+    </KeyboardFriendlyView>
+  )
 }
 
 export function TopicList ({
