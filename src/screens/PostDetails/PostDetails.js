@@ -115,6 +115,9 @@ export default class PostDetails extends React.Component {
 
   componentDidMount () {
     this.props.fetchPost()
+    this.props.navigation.setOptions({
+      headerTitle: this.props.currentCommunity.name
+    })
   }
 
   shouldComponentUpdate (nextProps) {

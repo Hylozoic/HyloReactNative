@@ -4,6 +4,7 @@ import { showToast } from 'util/toast'
 import { ALL_COMMUNITIES_ID } from 'routing/helpers'
 import fetchPost from 'store/actions/fetchPost'
 import { createComment } from './CommentEditor/CommentEditor.store'
+import getCurrentCommunity from 'store/selectors/getCurrentCommunity'
 import { getPresentedPost } from 'store/selectors/getPost'
 import getCurrentCommunityId from 'store/selectors/getCurrentCommunityId'
 import getRouteParam from 'store/selectors/getRouteParam'
@@ -16,7 +17,8 @@ import goToMemberMaker from 'store/actions/goToMemberMaker'
 export function mapStateToProps (state, props) {
   const id = getRouteParam('id', props.route)
   const currentUser = getMe(state, props)
-  const currentCommunityId = getCurrentCommunityId(state, props)
+  const currentCommunity = getCurrentCommunity(state, props)
+  const currentCommunityId = getCurrentCommunity(state, props)
   const post = getPresentedPost(state, { id, currentCommunityId })
   const isProject = get('type', post) === 'project'
   return {
@@ -24,7 +26,8 @@ export function mapStateToProps (state, props) {
     post,
     isProject,
     currentUser,
-    currentCommunityId
+    currentCommunityId,
+    currentCommunity
   }
 }
 
