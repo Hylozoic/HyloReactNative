@@ -1,58 +1,32 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import { isEqual } from 'lodash/fp'
+import { isEqual, isFunction } from 'lodash/fp'
 import confirmDiscardChanges from 'util/confirmDiscardChanges'
 import ItemChooser from 'screens/ItemChooser'
+import { buildModalScreenOptions } from 'navigation/header'
 
 export default class ItemChooserScreen extends React.Component {
-  static propTypes = {
-    navigation: PropTypes.shape({
-      state: PropTypes.shape({
-        params: PropTypes.shape({
-          updateItems: PropTypes.func,
-          pickItem: PropTypes.func,
-          screenTitle: PropTypes.string.isRequired,
-          // Passed to ItemChooser
-          initialItems: PropTypes.array,
-          ItemRowComponent: PropTypes.func.isRequired,
-          searchPlaceholder: PropTypes.string,
-          fetchSearchSuggestions: PropTypes.func.isRequired,
-          getSearchSuggestions: PropTypes.func,
-          searchTermFilter: PropTypes.func,
-          style: PropTypes.object
-        })
-      })
-    })
-  }
-
-  constructor (props) {
-    super(props)
-    this.props.navigation.setParams({
-      done: this.done,
-      cancel: this.cancel,
-      chosenItems: this.props.route.params.initialItems
-    })
-  }
-
   setHeader = () => {
     const { navigation, route } = this.props
-    const done = route.params.done || (() => {})
-    const updateItems = route.params.updateItems
-    const cancel = route.params.cancel || (() => {})
-    const screenTitle = route.params.screenTitle
+    const { screenTitle, updateItems } = route.params
     const headerParams = {
       headerTitle: screenTitle,
-      headerLeftOnPress: cancel
+      headerLeftOnPress: this.cancel
     }
     if (isFunction(updateItems)) {
       headerParams.headerRightButtonLabel = 'Done'
-      headerParams.headerRightButtonOnPress = done
+      headerParams.headerRightButtonOnPress = this.done
     }
     navigation.setOptions(
       buildModalScreenOptions(headerParams)
     )
   }
 
+  componentDidMount () {
+    this.setHeader()
+  }
+
+  // TODO: Can be merged with setHeader using
+  // confirm options in buildModalScreenOptions
   cancel = () => {
     const { route, navigation } = this.props
     const { initialItems, chosenItems } = route.params
@@ -82,9 +56,7 @@ export default class ItemChooserScreen extends React.Component {
 
   render () {
     const { route } = this.props
-    const screenTitle = route.params?.screenTitle
-    const pickItem = route.params?.pickItem
-    const updateItems = route.params?.updateItems
+    const { screenTitle, pickItem, updateItems } = route?.params
 
     return (
       <ItemChooser
