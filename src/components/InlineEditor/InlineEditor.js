@@ -22,15 +22,12 @@ import fetchTopicsForCommunityId from 'store/actions/fetchTopicsForCommunityId'
 import getTopicsForAutocompleteWithNew from 'store/selectors/getTopicsForAutocompleteWithNew'
 import TopicRow from 'screens/TopicList/TopicRow'
 
-const minTextInputHeight = 18
-
 export class InlineEditor extends React.PureComponent {
   constructor (props) {
     super(props)
     this.state = {
       isFocused: false,
-      pickerType: null,
-      height: minTextInputHeight
+      pickerType: null
     }
     this.editorInputRef = React.createRef()
   }
@@ -139,46 +136,41 @@ export class InlineEditor extends React.PureComponent {
       style,
       inputStyle
     } = this.props
-    const { isFocused, height } = this.state
+    const { isFocused } = this.state
     const hitSlop = { top: 7, bottom: 7, left: 7, right: 7 }
-    // Calculates a height based on textInput content size with the following constraint: 40 < height < maxHeight
-    // const calculatedHeight = Math.round(Math.min(Math.max((isEmpty(value) ? minTextInputHeight : height) + (isFocused ? 45 : 0), minTextInputHeight), 190))
-
     return (
-      <View style={[styles.container, style]}>
-        <View style={styles.wrapper}>
+      <View
+        style={[styles.container, isFocused && styles.containerFocused, style]}
+        onFocus={this.handleFocus}
+        onBlur={this.handleBlur}
+      >
+        <View style={styles.entryAndActions}>
           <TextInput
             multiline
             editable={!!editable && !submitting}
             onChangeText={onChange}
             blurOnSubmit={false}
-            onContentSizeChange={event => this.setState({ height: Math.round(event.nativeEvent.contentSize.height) })}
             onSelectionChange={this.handleSelectionChange}
             placeholder={placeholder}
             placeholderTextColor={rhino30}
-            style={[styles.textInput, inputStyle]}
+            style={[styles.textInput]}
             underlineColorAndroid='transparent'
             value={value}
             ref={this.editorInputRef}
-            onFocus={this.handleFocus}
-            onBlur={this.handleBlur}
           />
-          {onSubmit && !isFocused && <SubmitButton submitting={submitting} active={!!isFocused} handleSubmit={this.handleSubmit} />}
-        </View>
-        {isFocused && (
           <View style={styles.toolbar}>
-            <View style={{ flex: 1, flexDirection: 'row' }}>
+            {isFocused && <>
               <TouchableOpacity hitSlop={hitSlop} onPress={this.openPersonPicker}>
                 <Text style={styles.toolbarButton}>@</Text>
               </TouchableOpacity>
               <TouchableOpacity hitSlop={hitSlop} onPress={this.openTopicsPicker}>
                 <Text style={styles.toolbarButton}>#</Text>
               </TouchableOpacity>
-            </View>
-            {onSubmit && (
-              <SubmitButton submitting={submitting} active={!!isFocused} handleSubmit={this.handleSubmit} />
-            )}
+            </>}
           </View>
+        </View>
+        {onSubmit && (
+          <SubmitButton style={styles.submitButton} submitting={submitting} active={!!isFocused} handleSubmit={this.handleSubmit} />
         )}
       </View>
     )
@@ -187,13 +179,13 @@ export class InlineEditor extends React.PureComponent {
 
 export default withNavigation(InlineEditor)
 
-export function SubmitButton ({ submitting, active, handleSubmit }) {
+export function SubmitButton ({ style, submitting, active, handleSubmit }) {
   if (submitting) {
-    return <View style={{ width: 30 }}><ActivityIndicator /></View>
+    return <View style={style}><ActivityIndicator /></View>
   } else {
     return (
-      <TouchableOpacity style={{ width: 30 }} hitSlop={{ top: 5, bottom: 10, left: 10, right: 10 }} onPress={handleSubmit}>
-        <MaterialIcon name='send' size={23} style={active && styles.activeButton} />
+      <TouchableOpacity hitSlop={{ top: 5, bottom: 10, left: 10, right: 10 }} disabled={!active} onPress={handleSubmit}>
+        <MaterialIcon name='send' size={23} style={[ style, active && styles.activeButton ]} />
       </TouchableOpacity>
     )
   }

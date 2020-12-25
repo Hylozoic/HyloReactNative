@@ -1,32 +1,40 @@
-import { azureRadiance } from 'style/colors'
+import { azureRadiance, gunsmoke, havelockBlue } from 'style/colors'
 import { Platform } from 'react-native'
 
 export default {
   container: {
     backgroundColor: 'white',
-    justifyContent: 'flex-start'
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-end',
+    padding: 15
   },
-  wrapper: {
-    alignItems: 'flex-start',
-    flexDirection: 'row'
+  containerFocused: {
+    marginBottom: 30
+  },
+  entryAndActions: {
+    flexDirection: 'column',
+    justifyContent: 'space-between'
   },
   textInput: {
-    flex: 1,
-    padding: 0,
-    margin: 0
+  },
+  submitButton: {
+    // paddingTop: 5,
+    color: gunsmoke
   },
   activeButton: {
     color: azureRadiance
   },
   toolbar: {
-    alignItems: 'flex-end',
-    paddingTop: 5,
-    flexDirection: 'row'
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
   },
   toolbarButton: {
-    paddingRight: 20,
+    marginTop: 10,
+    marginRight: 20,
     fontSize: 20,
-    fontWeight: '700'
+    fontWeight: '700',
+    color: azureRadiance
   },
   search: {
     ...Platform.select({
