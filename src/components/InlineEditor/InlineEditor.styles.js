@@ -7,10 +7,11 @@ export default {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'flex-end',
-    padding: 15
+    paddingVertical: 5,
+    paddingHorizontal: 15
   },
   containerFocused: {
-    marginBottom: 30
+    // marginBottom: 30
   },
   entryAndActions: {
     flexDirection: 'column',
@@ -19,8 +20,12 @@ export default {
   textInput: {
   },
   submitButton: {
-    // paddingTop: 5,
+    // alignSelf: 'start',
     color: gunsmoke
+  },
+  submitButtonEditing: {
+    // alignSelf: 'start'
+    // alignSelf
   },
   activeButton: {
     color: azureRadiance
@@ -30,7 +35,7 @@ export default {
     justifyContent: 'flex-start',
   },
   toolbarButton: {
-    marginTop: 10,
+    // marginTop: 10,
     marginRight: 20,
     fontSize: 20,
     fontWeight: '700',
