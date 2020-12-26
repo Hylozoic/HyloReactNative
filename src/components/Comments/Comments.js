@@ -3,15 +3,10 @@ import React from 'react'
 import { Text, TouchableOpacity, View, ScrollView } from 'react-native'
 import Comment from 'components/Comment'
 import Loading from 'components/Loading'
-import { func, array } from 'prop-types'
 import styles from './Comments.styles'
+import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 
-export default class Comments extends React.PureComponent {
-  static propTypes = {
-    comments: array,
-    fetchComments: func
-  }
-  
+export default class Comments extends React.PureComponent {  
   scrollViewRef = React.createRef()
 
   renderComment = (comment) => {
@@ -36,7 +31,7 @@ export default class Comments extends React.PureComponent {
   }
 
   componentDidMount () {
-    this.scrollViewRef.current.scrollToEnd({ animated: true })
+    this.scrollToEnd({ animated: true })
   }
 
   render () {
@@ -71,10 +66,10 @@ export default class Comments extends React.PureComponent {
   }
 }
 
-export function ShowMore ({ total, hasMore, fetchComments }) {
-  if (!hasMore) return null
-
+export function ShowMore ({ total = 0, hasMore, fetchComments }) {
   const extra = total - 10
+
+  if (!hasMore || extra < 1) return null
 
   return (
     <TouchableOpacity>

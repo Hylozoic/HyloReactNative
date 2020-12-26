@@ -67,11 +67,13 @@ export default function Comment ({
               <Text style={styles.date}>on "{postTitle}"</Text>}
           </View>
           <View style={styles.headerRight}>
-            {!hideMenu && <CommentMenu
-              deleteComment={deleteCommentWithConfirm}
-              removeComment={removeCommentWithConfirm}
-              editComment={editComment}
-                          />}
+            {!hideMenu && (
+              <CommentMenu
+                deleteComment={deleteCommentWithConfirm}
+                removeComment={removeCommentWithConfirm}
+                editComment={editComment}
+              />
+            )}
           </View>
 
         </View>

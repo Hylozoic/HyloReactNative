@@ -152,8 +152,8 @@ export default class Thread extends React.Component {
       : `${newMessages} NEW MESSAGE${newMessages > 1 ? 'S' : ''}`
 
     return (
-      <KeyboardFriendlyView style={styles.container}>
-        <SafeAreaView style={{flex: 1}}>
+      <SafeAreaView style={{flex: 1}}>
+        <KeyboardFriendlyView style={styles.container}>
           {pending && <Loading />}
           <FlatList
             style={styles.messageList}
@@ -185,8 +185,8 @@ export default class Thread extends React.Component {
             />
           )}
           <SocketSubscriber type='post' id={id} />
-        </SafeAreaView>
-      </KeyboardFriendlyView>
+        </KeyboardFriendlyView>
+      </SafeAreaView>
     )
   }
 }
