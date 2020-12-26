@@ -4,7 +4,6 @@ import { Text, TouchableOpacity, View, ScrollView } from 'react-native'
 import Comment from 'components/Comment'
 import Loading from 'components/Loading'
 import styles from './Comments.styles'
-import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 
 export default class Comments extends React.PureComponent {  
   scrollViewRef = React.createRef()

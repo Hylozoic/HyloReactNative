@@ -3,7 +3,6 @@ import React from 'react'
 import { Linking, View, Text, TouchableOpacity, Alert } from 'react-native'
 import SafeAreaView from 'react-native-safe-area-view'
 import { get, isEmpty, find } from 'lodash/fp'
-import { shape, any, object, string, func, array, bool } from 'prop-types'
 import Comments from 'components/Comments'
 import PostBody from 'components/PostCard/PostBody'
 import PostCommunities from 'components/PostCard/PostCommunities'
@@ -182,14 +181,17 @@ export default class PostDetails extends React.Component {
               />
             )}
             footer={(
-              <CommentPrompt
-                currentUser={currentUser}
-                communityId={communityId}
-                submitting={submitting}
-                onChange={this.handleCommentOnChange}
-                onSubmit={this.handleCreateComment}
-                commentText={commentText}
-              />
+              currentUser && (
+                <InlineEditor
+                  onChange={this.handleCommentOnChange}
+                  onSubmit={this.handleCreateComment}
+                  value={commentText}
+                  style={styles.inlineEditor}
+                  submitting={submitting}
+                  placeholder='Write a comment...'
+                  communityId={communityId}
+                />
+              )
             )}
             postId={post.id}
             postPending={pending}
@@ -202,22 +204,6 @@ export default class PostDetails extends React.Component {
       </SafeAreaView>
     )
   }
-}
-
-export function CommentPrompt ({ currentUser, onChange, onSubmit, submitting, commentText, communityId }) {
-  if (!currentUser) return null
-
-  return (
-    <InlineEditor
-      onChange={onChange}
-      onSubmit={onSubmit}
-      value={commentText}
-      style={styles.inlineEditor}
-      submitting={submitting}
-      placeholder='Write a comment...'
-      communityId={communityId}
-    />
-  )
 }
 
 export function Files ({ urls }) {

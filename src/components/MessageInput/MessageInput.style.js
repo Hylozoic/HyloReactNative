@@ -23,7 +23,8 @@ export default {
     fontSize: 14,
     lineHeight: 18,
     fontFamily: 'Circular-Book',
-    marginLeft: 5
+    marginLeft: 5,
+    paddingVertical: 0
   },
   sendButton: {
     fontSize: 36
