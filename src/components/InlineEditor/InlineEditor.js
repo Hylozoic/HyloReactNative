@@ -158,19 +158,19 @@ export class InlineEditor extends React.PureComponent {
             value={value}
             ref={this.editorInputRef}
           />
-          {isFocused && (
-            <View style={styles.toolbar}>
-                <TouchableOpacity hitSlop={hitSlop} onPress={this.openPersonPicker}>
-                  <Text style={styles.toolbarButton}>@</Text>
-                </TouchableOpacity>
-                <TouchableOpacity hitSlop={hitSlop} onPress={this.openTopicsPicker}>
-                  <Text style={styles.toolbarButton}>#</Text>
-                </TouchableOpacity>
-            </View>
-          )}
+          <View style={styles.toolbar}>
+            {isFocused && <>
+              <TouchableOpacity hitSlop={hitSlop} onPress={this.openPersonPicker}>
+                <Text style={styles.toolbarButton}>@</Text>
+              </TouchableOpacity>
+              <TouchableOpacity hitSlop={hitSlop} onPress={this.openTopicsPicker}>
+                <Text style={styles.toolbarButton}>#</Text>
+              </TouchableOpacity>
+            </>}
+          </View>
         </View>
         {onSubmit && (
-          <SubmitButton style={[ styles.submitButton, isFocused && styles.submitButtonEditing ]} submitting={submitting} active={!!isFocused} handleSubmit={this.handleSubmit} />
+          <SubmitButton style={styles.submitButton} submitting={submitting} active={!!isFocused} handleSubmit={this.handleSubmit} />
         )}
       </View>
     )
