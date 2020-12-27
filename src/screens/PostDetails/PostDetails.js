@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 import React from 'react'
-import { Linking, View, Text, TouchableOpacity, Alert } from 'react-native'
+import { Linking, View, Text, TouchableOpacity, Alert, Button as ReactButton } from 'react-native'
 import SafeAreaView from 'react-native-safe-area-view'
 import { get, isEmpty, find } from 'lodash/fp'
 import Comments from 'components/Comments'
@@ -16,8 +16,10 @@ import SocketSubscriber from 'components/SocketSubscriber'
 import { FileLabel } from 'screens/PostEditor/FileSelector'
 import Icon from 'components/Icon'
 import InlineEditor, { toHtml } from 'components/InlineEditor'
+import KeyboardAccessoryView from 'components/KeyboardAccessoryView'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 import styles from './PostDetails.styles'
+import { KeyboardAccessoryNavigation } from 'react-native-keyboard-accessory'
 
 export function PostCardForDetails ({
   post,
@@ -167,9 +169,9 @@ export default class PostDetails extends React.Component {
     const isMember = find(member => member.id === currentUser.id, post.members)
     const location = post.location || (post.locationObject && post.locationObject.fullText)
 
-    return (
-      <SafeAreaView style={{ flex: 1 }}>
-        <KeyboardFriendlyView style={styles.container}>
+    return (<>
+      <SafeAreaView style={styles.container}>
+        {/* <KeyboardFriendlyView style={styles.container}> */}
           <Comments
             ref={this.commentsRef}
             header={(
@@ -180,9 +182,29 @@ export default class PostDetails extends React.Component {
                 location={location}
               />
             )}
-            footer={(
-              currentUser && (
-                <InlineEditor
+            // footer={(
+            //   currentUser && (
+            //     <InlineEditor
+            //       onChange={this.handleCommentOnChange}
+            //       onSubmit={this.handleCreateComment}
+            //       value={commentText}
+            //       style={styles.inlineEditor}
+            //       submitting={submitting}
+            //       placeholder='Write a comment...'
+            //       communityId={communityId}
+            //     />
+            //   )
+            // )}
+            postId={post.id}
+            postPending={pending}
+            showMember={showMember}
+            showTopic={this.onShowTopic}
+            slug={slug}
+          />
+          <SocketSubscriber type='post' id={post.id} />
+        {/* </KeyboardFriendlyView> */}
+        <KeyboardAccessoryView>
+          <InlineEditor
                   onChange={this.handleCommentOnChange}
                   onSubmit={this.handleCreateComment}
                   value={commentText}
@@ -191,18 +213,9 @@ export default class PostDetails extends React.Component {
                   placeholder='Write a comment...'
                   communityId={communityId}
                 />
-              )
-            )}
-            postId={post.id}
-            postPending={pending}
-            showMember={showMember}
-            showTopic={this.onShowTopic}
-            slug={slug}
-          />
-          <SocketSubscriber type='post' id={post.id} />
-        </KeyboardFriendlyView>
+        </KeyboardAccessoryView>
       </SafeAreaView>
-    )
+    </>)
   }
 }
 

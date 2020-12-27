@@ -5,8 +5,8 @@ import { isIOS } from 'util/platform'
 export default function ({ children, ...props }) {
   const allProps = {
     ...props,
-    behavior: isIOS ? 'padding' : 'height',
-    keyboardVerticalOffset: isIOS ? 64 : 80
+    // behavior: isIOS ? 'padding' : 'height',
+    // keyboardVerticalOffset: isIOS ? 74 : 64
   }
   return <KeyboardAvoidingView {...allProps}>
     {children}

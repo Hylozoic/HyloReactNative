@@ -45,22 +45,19 @@ export default class Comments extends React.PureComponent {
     } = this.props
 
     return (
-      <View style={{ flex: 1 }}>
-        <ScrollView ref={this.scrollViewRef} onContentSizeChange={this.scrollToEnd}>
-          {header}
-          <ShowMore
-            commentsLength={comments.length}
-            total={total}
-            hasMore={hasMore}
-            fetchComments={fetchComments}
-          />
-          {pending && <View style={styles.loadingContainer}>
-            <Loading style={styles.loading} />
-          </View>}
-          {comments.map(this.renderComment)}
-        </ScrollView>
-        {footer}
-      </View>
+      <ScrollView ref={this.scrollViewRef} onContentSizeChange={this.scrollToEnd} style={{ flex: 1 }}>
+        {header}
+        <ShowMore
+          commentsLength={comments.length}
+          total={total}
+          hasMore={hasMore}
+          fetchComments={fetchComments}
+        />
+        {pending && <View style={styles.loadingContainer}>
+          <Loading style={styles.loading} />
+        </View>}
+        {comments.map(this.renderComment)}
+      </ScrollView>
     )
   }
 }

@@ -158,7 +158,7 @@ export class InlineEditor extends React.PureComponent {
             value={value}
             ref={this.editorInputRef}
           />
-          <View style={styles.toolbar}>
+          {/* <View style={styles.toolbar}>
             {isFocused && <>
               <TouchableOpacity hitSlop={hitSlop} onPress={this.openPersonPicker}>
                 <Text style={styles.toolbarButton}>@</Text>
@@ -167,7 +167,7 @@ export class InlineEditor extends React.PureComponent {
                 <Text style={styles.toolbarButton}>#</Text>
               </TouchableOpacity>
             </>}
-          </View>
+          </View> */}
         </View>
         {onSubmit && (
           <SubmitButton style={styles.submitButton} submitting={submitting} active={!!isFocused} handleSubmit={this.handleSubmit} />

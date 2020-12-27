@@ -2,17 +2,17 @@ import { isIOS } from 'util/platform'
 import { capeCod10, rhino60, rhino30, fuchsiaPink, prim, caribbeanGreen } from 'style/colors'
 
 export default {
-  postCard: {
-    marginBottom: 16
-  },
   container: {
     flex: 1,
     backgroundColor: 'white'
   },
+  postCard: {
+    marginBottom: 16
+  },
   postFooter: {
-    borderTopColor: capeCod10,
-    borderTopWidth: 1,
-    paddingTop: 10
+    // borderTopColor: capeCod10,
+    // borderTopWidth: 1,
+    // paddingTop: 10
   },
   imageMargin: {
     marginBottom: 12
@@ -40,8 +40,8 @@ export default {
     fontFamily: 'Circular-Book'
   },
   inlineEditor: {
-    borderTopColor: rhino30,
-    borderTopWidth: 0.25
+    // borderTopColor: rhino30,
+    // borderTopWidth: 0.25
   },
   files: {
     marginHorizontal: 18,

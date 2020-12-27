@@ -7,16 +7,19 @@ export default {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'flex-end',
-    padding: 15
+    margin: 0,
+    padding: 15,
+    // paddingBottom: 25
   },
   containerFocused: {
-    marginBottom: 30
+    // marginBottom: 15
   },
   entryAndActions: {
     flexDirection: 'column',
     justifyContent: 'space-between'
   },
   textInput: {
+    paddingVertical: 0
   },
   submitButton: {
     // paddingTop: 5,
@@ -27,7 +30,7 @@ export default {
   },
   toolbar: {
     flexDirection: 'row',
-    justifyContent: 'flex-start',
+    justifyContent: 'flex-start'
   },
   toolbarButton: {
     marginTop: 10,
