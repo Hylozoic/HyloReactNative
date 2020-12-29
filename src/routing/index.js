@@ -37,9 +37,7 @@ export const routing = {
   prefixes,
   getStateFromPath: path => {
     const matchedStatePath = matchRouteToScreenPath(path, routesConfig)
-    const statePath = matchedStatePath
-      ? matchedStatePath
-      : path
+    const statePath = matchedStatePath || path
     return getStateFromPath(statePath)
   },
   getPathFromState: () => {}
@@ -52,13 +50,13 @@ export function matchRouteToScreenPath (path, routes) {
     const matched = match(pathMatcher)(path)
 
     if (matched) {
-      const screenPath = routes[pathMatcher]      
+      const screenPath = routes[pathMatcher]
       const querystring = qs.stringify(matched.params, {
         encode: true,
         strict: true
       })
 
-      return [ screenPath, querystring ].join('?')
+      return [screenPath, querystring].join('?')
     }
   }
 }

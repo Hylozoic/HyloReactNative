@@ -1,6 +1,6 @@
 import React, { Component, PureComponent } from 'react'
 import { Dimensions, Text, View, TextInput, TouchableOpacity, ScrollView, Switch } from 'react-native'
-import { Clipboard } from '@react-native-community/clipboard'
+import Clipboard from '@react-native-community/clipboard'
 import { TabView, TabBar } from 'react-native-tab-view'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 import Button from 'components/Button'
@@ -9,6 +9,7 @@ import { humanDate } from 'hylo-utils/text'
 import styles from './InvitePeople.styles'
 import { caribbeanGreen } from 'style/colors'
 import Loading from 'components/Loading'
+
 // https://github.com/react-native-community/react-native-tab-view/issues/547
 const initialLayout = {
   height: 0,
@@ -114,7 +115,6 @@ export class SendInvitesPage extends PureComponent {
 
   copyToClipboard = () => {
     this.setState({ copied: true })
-
     Clipboard.setString(this.props.inviteLink)
 
     setTimeout(() => {

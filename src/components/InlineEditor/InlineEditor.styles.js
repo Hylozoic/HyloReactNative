@@ -1,28 +1,30 @@
-import { azureRadiance, gunsmoke, havelockBlue } from 'style/colors'
+import { azureRadiance, gunsmoke, havelockBlue, white } from 'style/colors'
 import { Platform } from 'react-native'
 
 export default {
   container: {
-    backgroundColor: 'white',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'flex-end',
-    margin: 0,
-    padding: 15,
-    // paddingBottom: 25
-  },
-  containerFocused: {
-    // marginBottom: 15
+    backgroundColor: 'white'
   },
   entryAndActions: {
+    padding: 8,
     flexDirection: 'column',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: white
   },
   textInput: {
-    paddingVertical: 0
+    // paddingVertical: 0,
+    flexGrow: 1,
+    maxHeight: 200,
+    borderWidth: 1,
+    borderRadius: 10,
+    borderColor: '#CCC',
+    padding: 10,
+    fontSize: 16,
+    marginRight: 10,
+    textAlignVertical: 'top'
   },
   submitButton: {
-    // paddingTop: 5,
     color: gunsmoke
   },
   activeButton: {

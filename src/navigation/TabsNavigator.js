@@ -5,7 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import { isIOS } from 'util/platform'
 // Helper Components
 import Icon from 'components/Icon'
-import { buildTabStackScreenOptions }  from 'navigation/header'
+import { buildTabStackScreenOptions } from 'navigation/header'
 // Screens
 import Feed from 'screens/Feed'
 import MembersComponent from 'screens/Members'
@@ -24,7 +24,7 @@ export function getScreensInCommon (Stack) {
     <Stack.Screen name='Post Details' key='Post Details' component={PostDetails} />,
     <Stack.Screen name='Project Members' key='Project Members' component={ProjectMembers} />,
     <Stack.Screen name='Member' key='Member' component={MemberProfile} />,
-    <Stack.Screen name='MemberDetails' key='MemberDetails' component={MemberDetails} />,
+    <Stack.Screen name='MemberDetails' key='MemberDetails' component={MemberDetails} />
   ]
 }
 
@@ -49,8 +49,11 @@ export function MembersNavigator () {
   return (
     <Members.Navigator {...navigatorProps}>
       <Members.Screen name='Members' component={MembersComponent} />
-      <Members.Screen name='MemberSkillEditor' component={MemberSkillEditor}
-        options={{ headerTitle: 'Edit Skills' }} />
+      <Members.Screen
+        name='MemberSkillEditor'
+        component={MemberSkillEditor}
+        options={{ headerTitle: 'Edit Skills' }}
+      />
       {getScreensInCommon(Home)}
     </Members.Navigator>
   )
@@ -90,10 +93,10 @@ export default function TabsNavigator () {
       showLabel: true,
       // TODO: Required for Android, not iOS
       // Set only for Android as it makes undesirable animation in iOS
-      keyboardHidesTabBar: isIOS ? false : true,
+      keyboardHidesTabBar: true, // !isIOS,
       pressColor: gainsboro,
       indicatorStyle: { backgroundColor: white },
-      style: isIOS 
+      style: isIOS
         ? { backgroundColor: white }
         : { backgroundColor: white, borderTopWidth: StyleSheet.hairlineWidth }
     },
@@ -105,14 +108,15 @@ export default function TabsNavigator () {
           color={focused ? caribbeanGreen : gunsmoke}
           style={{ paddingTop: isIOS ? 0 : 5 }}
         />
-      ),      
+      ),
       tabBarLabel: ({ focused }) => (
         <View style={{ textAlign: 'center', fontSize: 11, color: gunsmoke }}>
           <Text style={{
             textAlign: 'center',
             fontSize: 11,
             color: focused ? caribbeanGreen : gunsmoke
-          }}>
+          }}
+          >
             {route.name}
           </Text>
         </View>

@@ -169,53 +169,38 @@ export default class PostDetails extends React.Component {
     const isMember = find(member => member.id === currentUser.id, post.members)
     const location = post.location || (post.locationObject && post.locationObject.fullText)
 
-    return (<>
+    return (
       <SafeAreaView style={styles.container}>
-        {/* <KeyboardFriendlyView style={styles.container}> */}
-          <Comments
-            ref={this.commentsRef}
-            header={(
-              <PostCardForDetails
-                {...this.props}
-                showTopic={this.onShowTopic}
-                isMember={isMember}
-                location={location}
-              />
-            )}
-            // footer={(
-            //   currentUser && (
-            //     <InlineEditor
-            //       onChange={this.handleCommentOnChange}
-            //       onSubmit={this.handleCreateComment}
-            //       value={commentText}
-            //       style={styles.inlineEditor}
-            //       submitting={submitting}
-            //       placeholder='Write a comment...'
-            //       communityId={communityId}
-            //     />
-            //   )
-            // )}
-            postId={post.id}
-            postPending={pending}
-            showMember={showMember}
-            showTopic={this.onShowTopic}
-            slug={slug}
-          />
-          <SocketSubscriber type='post' id={post.id} />
-        {/* </KeyboardFriendlyView> */}
+        <Comments
+          ref={this.commentsRef}
+          header={(
+            <PostCardForDetails
+              {...this.props}
+              showTopic={this.onShowTopic}
+              isMember={isMember}
+              location={location}
+            />
+          )}
+          postId={post.id}
+          postPending={pending}
+          showMember={showMember}
+          showTopic={this.onShowTopic}
+          slug={slug}
+        />
+        <SocketSubscriber type='post' id={post.id} />
         <KeyboardAccessoryView>
           <InlineEditor
-                  onChange={this.handleCommentOnChange}
-                  onSubmit={this.handleCreateComment}
-                  value={commentText}
-                  style={styles.inlineEditor}
-                  submitting={submitting}
-                  placeholder='Write a comment...'
-                  communityId={communityId}
-                />
+            onChange={this.handleCommentOnChange}
+            onSubmit={this.handleCreateComment}
+            value={commentText}
+            style={styles.inlineEditor}
+            submitting={submitting}
+            placeholder='Write a comment...'
+            communityId={communityId}
+          />
         </KeyboardAccessoryView>
       </SafeAreaView>
-    </>)
+    )
   }
 }
 

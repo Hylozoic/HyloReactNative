@@ -153,12 +153,12 @@ export class InlineEditor extends React.PureComponent {
             onSelectionChange={this.handleSelectionChange}
             placeholder={placeholder}
             placeholderTextColor={rhino30}
-            style={[styles.textInput]}
+            style={[styles.textInput, inputStyle]}
             underlineColorAndroid='transparent'
             value={value}
             ref={this.editorInputRef}
           />
-          {/* <View style={styles.toolbar}>
+          <View style={styles.toolbar}>
             {isFocused && <>
               <TouchableOpacity hitSlop={hitSlop} onPress={this.openPersonPicker}>
                 <Text style={styles.toolbarButton}>@</Text>
@@ -166,12 +166,12 @@ export class InlineEditor extends React.PureComponent {
               <TouchableOpacity hitSlop={hitSlop} onPress={this.openTopicsPicker}>
                 <Text style={styles.toolbarButton}>#</Text>
               </TouchableOpacity>
-            </>}
-          </View> */}
+                          </>}
+          </View>
+          {onSubmit && isFocused && (
+            <SubmitButton style={styles.submitButton} submitting={submitting} active={!!isFocused} onSubmit={this.handleSubmit} />
+          )}
         </View>
-        {onSubmit && (
-          <SubmitButton style={styles.submitButton} submitting={submitting} active={!!isFocused} handleSubmit={this.handleSubmit} />
-        )}
       </View>
     )
   }
@@ -179,13 +179,13 @@ export class InlineEditor extends React.PureComponent {
 
 export default withNavigation(InlineEditor)
 
-export function SubmitButton ({ style, submitting, active, handleSubmit }) {
+export function SubmitButton ({ style, submitting, active, onSubmit }) {
   if (submitting) {
     return <View style={style}><ActivityIndicator /></View>
   } else {
     return (
-      <TouchableOpacity hitSlop={{ top: 5, bottom: 10, left: 10, right: 10 }} disabled={!active} onPress={handleSubmit}>
-        <MaterialIcon name='send' size={23} style={[ style, active && styles.activeButton ]} />
+      <TouchableOpacity hitSlop={{ top: 5, bottom: 10, left: 10, right: 10 }} disabled={!active} onPress={onSubmit}>
+        <MaterialIcon name='send' size={23} style={[style, active && styles.activeButton]} />
       </TouchableOpacity>
     )
   }

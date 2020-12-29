@@ -1,4 +1,3 @@
-import { isIOS } from 'util/platform'
 import { capeCod10, rhino60, rhino30, fuchsiaPink, prim, caribbeanGreen } from 'style/colors'
 
 export default {
@@ -40,8 +39,11 @@ export default {
     fontFamily: 'Circular-Book'
   },
   inlineEditor: {
-    // borderTopColor: rhino30,
-    // borderTopWidth: 0.25
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-end',
+    margin: 0,
+    padding: 15
   },
   files: {
     marginHorizontal: 18,

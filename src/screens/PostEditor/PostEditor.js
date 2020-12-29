@@ -114,7 +114,7 @@ export default class PostEditor extends React.Component {
   }
 
   _doSave = () => {
-    const { navigation, save } = this.props
+    const { save } = this.props
     const {
       fileUrls, imageUrls, title, detailsText,
       topics, type, announcementEnabled, members,
@@ -409,19 +409,21 @@ export default class PostEditor extends React.Component {
           keyboardDismissMode='on-drag'
         >
           <View style={styles.scrollContent}>
-            {!isProject && <>
-              <Text style={styles.sectionLabel}>What are you posting today?</Text>
-              <View style={[styles.typeButtonRow, styles.section]}>
-                {['discussion', 'request', 'offer', 'resource'].map(t => (
-                  <TypeButton
-                    type={t} key={t} selected={t === type}
-                    onPress={() => !isSaving && this.setState({ type: t })}
-                  />
-                ))}
-              </View>
-            </>}
+            {!isProject && (
+              <>
+                <Text style={styles.sectionLabel}>What are you posting today?</Text>
+                <View style={[styles.typeButtonRow, styles.section]}>
+                  {['discussion', 'request', 'offer', 'resource'].map(t => (
+                    <TypeButton
+                      type={t} key={t} selected={t === type}
+                      onPress={() => !isSaving && this.setState({ type: t })}
+                    />
+                  ))}
+                </View>
+              </>
+            )}
             <Text style={styles.sectionLabel}>Title</Text>
-            <View style={[ styles.section, styles.textInputWrapper ]}>
+            <View style={[styles.section, styles.textInputWrapper]}>
               <TextInput
                 style={styles.textInput}
                 editable={!isSaving}
@@ -478,7 +480,7 @@ export default class PostEditor extends React.Component {
             </TouchableOpacity>
 
             {isProject && (
-              <TouchableOpacity style={[ styles.section, styles.textInputWrapper ]} onPress={this.showProjectMembersEditor}>
+              <TouchableOpacity style={[styles.section, styles.textInputWrapper]} onPress={this.showProjectMembersEditor}>
                 <View style={styles.topicLabel}>
                   <Text style={styles.sectionLabel}>Members</Text>
                   <View style={styles.topicAddBorder}><Icon name='Plus' style={styles.topicAdd} /></View>
@@ -695,13 +697,15 @@ export function DatePickerWithLabel ({
         <Text style={styleTemplate.valueText}>{moment(date).format(dateFormat)}</Text>}
       {!date && !expanded &&
         <Text style={styleTemplate.placeholderText}>{placeholder}</Text>}
-      {expanded && <View style={{ flex: 1, alignItems: 'center' }}>
-        <DatePicker
-          date={date}
-          minimumDate={minimumDate}
-          onChange={onChange}
-        />
-                   </View>}
+      {expanded && (
+        <View style={{ flex: 1, alignItems: 'center' }}>
+          <DatePicker
+            date={date}
+            minimumDate={minimumDate}
+            onChange={onChange}
+          />
+        </View>
+      )}
     </TouchableOpacity>
   )
 }
