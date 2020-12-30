@@ -6,7 +6,7 @@ import {
 import { caribbeanGreen } from 'style/colors'
 import { propTypesForItemRowComponent } from 'screens/ItemChooser'
 import Avatar from 'components/Avatar'
-import RoundCheckbox from 'rn-round-checkbox'
+import RoundCheckbox from 'components/RoundCheckBox'
 
 export default function ProjectMemberItemRow ({
   item: person,
