@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { View } from 'react-native'
 import { HeaderBackButton } from '@react-navigation/stack'
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native'
 import confirmDiscardChanges from 'util/confirmDiscardChanges'
@@ -36,15 +36,15 @@ export function buildTabStackScreenOptions ({
     headerTitle: getFocusedRouteNameFromRoute(route)
       || route?.name,
     headerTitleContainerStyle: {
-      // // Follow: https://github.com/react-navigation/react-navigation/issues/7057#issuecomment-593086348
-      // width: isIOS ? '40%' : '75%',
-      // alignItems: isIOS ? 'center' : 'flex-start'
+      // Follow: https://github.com/react-navigation/react-navigation/issues/7057#issuecomment-593086348
+      width: isIOS ? '45%' : '35%',
+      alignItems: 'center',
       marginLeft: isIOS ? 0 : 10
     },
     headerTitleStyle: {
       color: white,
       fontFamily: 'Circular-Bold',
-      fontSize: 18
+      fontSize: 14
     },
     headerTitleAlign: 'center',
     headerStyle: {
@@ -54,7 +54,7 @@ export function buildTabStackScreenOptions ({
     },  
     headerLeft: () =>
       <MenuButton canGoBack={canGoBack} navigation={navigation} />,
-    headerRight: () => !canGoBack && (
+    headerRight: () =>  (
       <View style={{
         flex: 1,
         flexDirection: 'row',
@@ -94,7 +94,8 @@ export function buildModalScreenOptions ({
     headerTitleAlign: 'center',
     headerTitleStyle: {
       color: headerTitleStyleColor,
-      fontFamily: 'Circular-Bold'
+      fontFamily: 'Circular-Bold',
+      // maxWidth: '80%'
     },
     headerLeft: props => {
       const headerLeftOnPress = providedHeaderLeftOnPress || props.onPress

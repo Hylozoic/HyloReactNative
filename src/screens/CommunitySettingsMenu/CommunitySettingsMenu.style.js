@@ -13,10 +13,9 @@ export default {
   },
   headerText: {
     color: rhino,
-    backgroundColor: capeCod05,
-    padding: 5,
+    paddingVertical: 20,
     width: '90%',
-    textAlign: 'center',
+    textAlign: 'left',
     marginTop: 15,
     marginBottom: 10,
     borderRadius: 4,
