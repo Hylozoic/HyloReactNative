@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Image, StatusBar } from 'react-native'
+import { View, Image } from 'react-native'
 import { HeaderBackButton } from '@react-navigation/stack'
 import { get } from 'lodash/fp'
 import { ALL_COMMUNITIES_ID } from 'routing/helpers'
@@ -24,7 +24,6 @@ export default function MenuButton ({
 
   return (
     <View style={styles.container}>
-      <StatusBar barStyle='light-content' />
       <HeaderBackButton
         onPress={onPress}
         labelVisible={false}

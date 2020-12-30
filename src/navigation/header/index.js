@@ -4,6 +4,7 @@ import { HeaderBackButton } from '@react-navigation/stack'
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native'
 import confirmDiscardChanges from 'util/confirmDiscardChanges'
 import { isIOS } from 'util/platform'
+import FocusAwareStatusBar from 'components/FocusAwareStatusBar'
 import HeaderRightButton from 'navigation/header/HeaderRightButton'
 import HeaderLeftCloseIcon from 'navigation/header/HeaderLeftCloseIcon'
 import MenuButton from 'navigation/header/MenuButton'
@@ -52,8 +53,12 @@ export function buildTabStackScreenOptions ({
       // backgroundColor: black10onRhino
       // backgroundColor: black10OnCaribbeanGreen
     },  
-    headerLeft: () =>
-      <MenuButton canGoBack={canGoBack} navigation={navigation} />,
+    headerLeft: () => (
+      <>
+        <FocusAwareStatusBar barStyle='light-content' />
+        <MenuButton canGoBack={canGoBack} navigation={navigation} />
+      </>
+    ),
     headerRight: () =>  (
       <View style={{
         flex: 1,
@@ -103,9 +108,14 @@ export function buildModalScreenOptions ({
         ? () => confirmDiscardChanges({ onDiscard: headerLeftOnPress })
         : headerLeftOnPress
   
-      return headerLeftCloseIcon
-        ? <HeaderLeftCloseIcon {...props} color={headerTitleStyleColor} onPress={onPress} />
-        : <HeaderBackButton {...props} onPress={onPress} />
+      return (
+        <>
+          <FocusAwareStatusBar barStyle='dark-content' />
+          {headerLeftCloseIcon
+            ? <HeaderLeftCloseIcon {...props} color={headerTitleStyleColor} onPress={onPress} />
+            : <HeaderBackButton {...props} onPress={onPress} />}
+          </>
+      )
     },
     headerRight: () => headerRightButtonOnPress && (
       <HeaderRightButton

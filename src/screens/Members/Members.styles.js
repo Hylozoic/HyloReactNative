@@ -10,7 +10,7 @@ const bannerHeight = 132
 
 export default {
   container: {
-    backgroundColor: '#FFF',
+    backgroundColor: white,
     flex: 1
   },
   bannerContainer: {
