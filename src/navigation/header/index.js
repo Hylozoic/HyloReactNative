@@ -55,7 +55,7 @@ export function buildTabStackScreenOptions ({
     },  
     headerLeft: () => (
       <>
-        <FocusAwareStatusBar barStyle='light-content' />
+        <FocusAwareStatusBar barStyle='light-content' backgroundColor={rhino80} />
         <MenuButton canGoBack={canGoBack} navigation={navigation} />
       </>
     ),
@@ -85,6 +85,10 @@ export function buildModalScreenOptions ({
   headerRightButtonLabel = 'Save',
   headerRightButtonOnPress,
   headerRightButtonDisabled,
+  statusBarOptions = {
+    backgroundColor: rhino05,
+    barStyle: 'dark-content'
+  },
   ...otherOptions
 }) {
   const headerTitleStyleColor = otherOptions?.headerTitleStyle?.color ?? black10onRhino
@@ -110,7 +114,7 @@ export function buildModalScreenOptions ({
   
       return (
         <>
-          <FocusAwareStatusBar barStyle='dark-content' />
+          <FocusAwareStatusBar {...statusBarOptions} />
           {headerLeftCloseIcon
             ? <HeaderLeftCloseIcon {...props} color={headerTitleStyleColor} onPress={onPress} />
             : <HeaderBackButton {...props} onPress={onPress} />}
@@ -146,6 +150,10 @@ export const buildWorkflowModalScreenOptions = providedOptions => {
       fontSize: 12
     },
     headerTintColor: white60onCaribbeanGreen,
+    statusBarOptions: {
+      backgroundColor: caribbeanGreen,
+      barStyle: 'light-content'
+    },  
     ...providedOptions
   })  
 }
