@@ -192,7 +192,7 @@ export default class PostDetails extends React.Component {
           contentContainerStyle={{ marginBottom: 0, borderWidth: 0 }}
           // TODO: Calculate these!
           spaceBetweenKeyboardAndAccessoryView={isIOS ? -79 : 0}
-          contentOffsetKeyboardOpened={isIOS ? -79 : 0}
+          contentOffsetKeyboardOpened={isIOS ? -45 : 0}
           renderScrollable={this.renderPostDetails}>
             <InlineEditor
               onChange={this.handleCommentOnChange}
