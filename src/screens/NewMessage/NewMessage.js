@@ -30,8 +30,9 @@ export default class NewMessage extends React.Component {
     }
   }
 
-  UNSAFE_componentWillMount () {
+  componentDidMount () {
     this.props.fetchRecentContacts()
+    this.props.initialParticipants.forEach(this.addParticipant)
   }
 
   onBlurMessageInput = () => {

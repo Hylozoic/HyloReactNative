@@ -47,20 +47,14 @@ export default class Members extends React.Component {
             'showMember',
             'fetchMoreMembers'], this.props)}
         >
-          <Banner community={community} network={network} all={isAll} />
-          {showInviteButton && <Button
-            text='Invite People'
-            style={styles.button}
-            iconName='Invite'
-            onPress={this.goToInvitePeople}
-                               />}
+          <Banner community={community} network={network} all={isAll} handleInviteOnPress={this.goToInvitePeople} showInviteButton={showInviteButton} />
         </MemberList>
       </View>
     )
   }
 }
 
-export function Banner ({ community, network, all }) {
+export function Banner ({ community, network, all, showInviteButton, handleInviteOnPress }) {
   let bannerUrl, name
 
   if (network) {
@@ -81,6 +75,14 @@ export function Banner ({ community, network, all }) {
       <View style={styles.titleRow}>
         <Text style={styles.name}>{name}</Text>
       </View>
+      {showInviteButton && (
+        <Button
+          text='Invite People'
+          style={styles.button}
+          iconName='Invite'
+          onPress={handleInviteOnPress}
+        />
+      )}
     </View>
   )
 }

@@ -12,6 +12,7 @@ import PeopleTyping from 'components/PeopleTyping'
 import SocketSubscriber from 'components/SocketSubscriber'
 import { getSocket } from 'util/websockets'
 import styles from './Thread.styles'
+import { pictonBlue } from 'style/colors'
 
 const BOTTOM_THRESHOLD = 10
 
@@ -33,10 +34,9 @@ export default class Thread extends React.Component {
   getHeader () {
     const { navigation, id, title } = this.props
     title && navigation.setOptions({
-      headerTitle: title,
       headerTitle: ({ style }) => (
         <TouchableOpacity onPress={()=> navigation.navigate('ThreadParticipants', { id })}>
-          <Text style={style}>{title}</Text>
+          <Text style={{ ...style, color: pictonBlue }}>{title}</Text>
         </TouchableOpacity>
       )
     })

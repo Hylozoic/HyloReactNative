@@ -34,12 +34,9 @@ export default class MemberDetails extends React.Component {
   setHeader = () => {
     const { editing, changed } = this.state
     const { isMe, navigation, route } = this.props
-    const subject = isMe
-      ? 'You'
-      : 'This Member'
     const headerTitle = editing
       ? 'Edit Your Profile'
-      : `About ${subject}`
+      : `About`
     navigation.setOptions(buildTabStackScreenOptions({
       route,
       navigation,

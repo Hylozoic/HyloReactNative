@@ -12,7 +12,6 @@ import { mapWhenFocused, mergeWhenFocused } from 'util/redux'
 export function mapStateToProps (state, props) {
   const id = get('route.params.id', props)
   const editing = get('route.params.editing', props)
-
   const isBlocked = !!getBlockedUsers(state).find(i => get('id', i) === id)
   const person = getPerson(state, { id })
   const goToDetails = () => props.navigation.navigate('MemberDetails', { id })
@@ -53,7 +52,7 @@ export function makeOnPressMessages (currentUser, person, navigation) {
   if (!person || currentUser.id === person.id) return () => navigation.navigate('Messages')
   const { messageThreadId } = person
   if (messageThreadId) return () => navigation.navigate('Thread', { id: messageThreadId })
-  return () => navigation.navigate('New Message', { participants: [person.id] })
+  return () => navigation.navigate('Messages', { screen: 'New Message', params: { participantIds: [person.id] } })
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {

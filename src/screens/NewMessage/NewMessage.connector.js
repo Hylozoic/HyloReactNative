@@ -9,11 +9,17 @@ import {
   findOrCreateThread,
   MODULE_NAME
 } from './NewMessage.store.js'
+import getPerson from 'store/selectors/getPerson'
 
 export function mapStateToProps (state, props) {
   const getRecentContacts = scopedGetRecentContacts(null, { scope: MODULE_NAME })
+  const initialParticipantIds = props.route?.params?.participantIds
+  const initialParticipants = initialParticipantIds
+    ? initialParticipantIds.map(pId => getPerson(state, { personId: pId }))
+    : []
 
   return {
+    initialParticipants,
     recentContacts: getRecentContacts(state, props),
     pending: isPendingFor([
       scopedFetchRecentContacts(MODULE_NAME),

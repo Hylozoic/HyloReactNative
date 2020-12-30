@@ -1,10 +1,10 @@
 import { createSelector } from 'reselect'
 import { createSelector as ormCreateSelector } from 'redux-orm'
+import orm from 'store/models'
 import { get, pick, uniqueId, isEmpty } from 'lodash/fp'
 import { humanDate, sanitize, threadNames } from 'hylo-utils/text'
-
-import orm from 'store/models'
 import { makeGetQueryResults } from 'store/reducers/queryResults'
+import { firstName } from 'store/models/Person'
 
 export const BATCH_MINUTES = 5
 export const CREATE_MESSAGE = 'Thread/CREATE_MESSAGE'
@@ -137,20 +137,20 @@ export function presentThread (thread, currentUserId) {
     .participants
     .filter(p => p.id !== currentUserId)
     .toRefArray()
-    .map(firstName)
+    // .map(firstName)
   let title
   if (isEmpty(otherParticipants)) {
     title = 'You'
+  } else if (otherParticipants.length == 1) {
+    title = otherParticipants[0].name
   } else {
-    title = threadNames(otherParticipants)
+    title = threadNames(otherParticipants.map(firstName))
   }
   return {
     id: thread.id,
     title
   }
 }
-
-const firstName = person => person.name.split(' ')[0]
 
 export const getThread = ormCreateSelector(
   orm,
