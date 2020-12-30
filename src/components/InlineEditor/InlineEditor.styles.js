@@ -6,7 +6,6 @@ export default {
     flexDirection: 'row',
     backgroundColor: rhino05,
     padding: 8,
-    paddingVertical: 8,
     alignItems: 'flex-end',
     justifyContent: 'flex-end'
   },
@@ -18,7 +17,7 @@ export default {
     borderWidth: 1,
     borderRadius: 10,
     borderColor: '#CCC',
-    padding: 10,
+    paddingHorizontal: 10,
     paddingVertical: 5,
     maxHeight: 200
   },
@@ -31,6 +30,7 @@ export default {
     textAlignVertical: 'top'
   },
   toolbar: {
+    alignSelf: 'flex-end',
     flexDirection: 'row',
     justifyContent: 'flex-end',
     alignContent: 'flex-end'
