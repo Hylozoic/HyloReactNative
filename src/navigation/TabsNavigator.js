@@ -54,7 +54,7 @@ export function MembersNavigator () {
         component={MemberSkillEditor}
         options={{ headerTitle: 'Edit Skills' }}
       />
-      {getScreensInCommon(Home)}
+      {getScreensInCommon(Members)}
     </Members.Navigator>
   )
 }
@@ -67,7 +67,7 @@ export function TopicsNavigator () {
   return (
     <Topics.Navigator {...navigatorProps}>
       <Topics.Screen name='Topics' component={TopicsComponent} />
-      {getScreensInCommon(Home)}
+      {getScreensInCommon(Topics)}
     </Topics.Navigator>
   )
 }
@@ -80,7 +80,7 @@ export function ProjectsNavigator () {
   return (
     <Projects.Navigator {...navigatorProps}>
       <Projects.Screen name='Projects' component={ProjectsComponent} />
-      {getScreensInCommon(Home)}
+      {getScreensInCommon(Projects)}
     </Projects.Navigator>
   )
 }

@@ -32,8 +32,11 @@ export default function makeGoToCommunity (dispatch, navigation) {
     // })
     const goToCommunity = () => {
       navigation.navigate('Home', {
-        networkId: null,
-        communityId  
+          screen: 'Home',
+          params: {
+            networkId: null,
+            communityId
+          }
       })
       dispatch(selectCommunity(communityId))
     }

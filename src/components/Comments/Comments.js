@@ -20,7 +20,7 @@ export default forwardRef(({
     const scrollToEnd = useCallback((animated = true) => {
       scrollViewRef.current?.scrollToEnd({ animated })
     })
-    useEffect(() => { scrollToEnd() }, [comments])
+    useEffect(() => { scrollToEnd() })
     
     return (
       <ScrollView
