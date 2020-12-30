@@ -16,7 +16,7 @@ import PostDetails from 'screens/PostDetails'
 import MemberDetails from 'screens/MemberProfile/MemberDetails'
 import MemberSkillEditor from 'screens/MemberProfile/MemberSkillEditor'
 import ProjectMembers from 'screens/ProjectMembers/ProjectMembers'
-import { caribbeanGreen, gainsboro, gunsmoke, white } from 'style/colors'
+import { caribbeanGreen, gainsboro, gunsmoke, rhino05, rhino10, rhino20, white } from 'style/colors'
 
 export function getScreensInCommon (Stack) {
   return [
@@ -93,32 +93,32 @@ export default function TabsNavigator () {
       showLabel: true,
       // TODO: Required for Android, not iOS
       // Set only for Android as it makes undesirable animation in iOS
-      keyboardHidesTabBar: true, // !isIOS,
+      keyboardHidesTabBar: !isIOS,
       pressColor: gainsboro,
       indicatorStyle: { backgroundColor: white },
       style: isIOS
-        ? { backgroundColor: white }
-        : { backgroundColor: white, borderTopWidth: StyleSheet.hairlineWidth }
+        ? { backgroundColor: rhino05 }
+        : { backgroundColor: rhino05, borderTopWidth: StyleSheet.hairlineWidth }
     },
     screenOptions: ({ route }) => ({
       tabBarIcon: ({ focused }) => (
         <Icon
           name={route.name}
-          size={28}
+          size={24}
           color={focused ? caribbeanGreen : gunsmoke}
           style={{ paddingTop: isIOS ? 0 : 5 }}
         />
       ),
       tabBarLabel: ({ focused }) => (
         <View style={{ textAlign: 'center', fontSize: 11, color: gunsmoke }}>
-          <Text style={{
+          {/* <Text style={{
             textAlign: 'center',
             fontSize: 11,
             color: focused ? caribbeanGreen : gunsmoke
           }}
           >
             {route.name}
-          </Text>
+          </Text> */}
         </View>
       )
     })

@@ -139,17 +139,12 @@ export class InlineEditor extends React.PureComponent {
     const { isFocused } = this.state
     const hitSlop = { top: 7, bottom: 7, left: 7, right: 7 }
     return (
-      <View
-        style={[styles.container, isFocused && styles.containerFocused, style]}
-        onFocus={this.handleFocus}
-        onBlur={this.handleBlur}
-      >
-        <View style={styles.entryAndActions}>
+      <View style={[styles.container, style]} onFocus={this.handleFocus} onBlur={this.handleBlur}>
+        <View style={styles.textInputAndTools}>
           <TextInput
             multiline
             editable={!!editable && !submitting}
             onChangeText={onChange}
-            blurOnSubmit={false}
             onSelectionChange={this.handleSelectionChange}
             placeholder={placeholder}
             placeholderTextColor={rhino30}
@@ -159,19 +154,15 @@ export class InlineEditor extends React.PureComponent {
             ref={this.editorInputRef}
           />
           <View style={styles.toolbar}>
-            {isFocused && <>
-              <TouchableOpacity hitSlop={hitSlop} onPress={this.openPersonPicker}>
-                <Text style={styles.toolbarButton}>@</Text>
-              </TouchableOpacity>
-              <TouchableOpacity hitSlop={hitSlop} onPress={this.openTopicsPicker}>
-                <Text style={styles.toolbarButton}>#</Text>
-              </TouchableOpacity>
-                          </>}
+            <TouchableOpacity hitSlop={hitSlop} onPress={this.openPersonPicker}>
+              <Text style={styles.toolbarButton}>@</Text>
+            </TouchableOpacity>
+            <TouchableOpacity hitSlop={hitSlop} onPress={this.openTopicsPicker}>
+              <Text style={styles.toolbarButton}>#</Text>
+            </TouchableOpacity>
           </View>
-          {onSubmit && isFocused && (
-            <SubmitButton style={styles.submitButton} submitting={submitting} active={!!isFocused} onSubmit={this.handleSubmit} />
-          )}
         </View>
+        <SubmitButton style={{...styles.submitButton, display: (onSubmit && value.length > 0) ? 'flex' : 'none'}} submitting={submitting} active={value.length > 0} onSubmit={this.handleSubmit} />
       </View>
     )
   }
@@ -185,7 +176,7 @@ export function SubmitButton ({ style, submitting, active, onSubmit }) {
   } else {
     return (
       <TouchableOpacity hitSlop={{ top: 5, bottom: 10, left: 10, right: 10 }} disabled={!active} onPress={onSubmit}>
-        <MaterialIcon name='send' size={23} style={[style, active && styles.activeButton]} />
+        <MaterialIcon name='send' size={26} style={[style, active && styles.activeButton]} />
       </TouchableOpacity>
     )
   }

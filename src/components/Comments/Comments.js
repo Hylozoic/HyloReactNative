@@ -1,51 +1,33 @@
 /* eslint-disable camelcase */
-import React from 'react'
+import React, { forwardRef, useRef, useCallback, useEffect } from 'react'
 import { Text, TouchableOpacity, View, ScrollView } from 'react-native'
 import Comment from 'components/Comment'
 import Loading from 'components/Loading'
 import styles from './Comments.styles'
 
-export default class Comments extends React.PureComponent {  
-  scrollViewRef = React.createRef()
-
-  renderComment = (comment) => {
-    const {
-      showMember,
-      showTopic,
-      slug
-    } = this.props
+export default forwardRef(({
+  comments = [],
+  header,
+  pending,
+  total,
+  hasMore,
+  fetchComments,
+  showMember,
+  showTopic,
+  slug,
+  panHandlers
+}, scrollViewRef) => {
+    const scrollToEnd = useCallback((animated = true) => {
+      scrollViewRef.current?.scrollToEnd({ animated })
+    })
+    useEffect(() => { scrollToEnd() }, [scrollViewRef.current])
+    
     return (
-      <Comment
-        comment={comment}
-        showMember={showMember}
-        showTopic={showTopic}
-        slug={slug}
-        key={comment.id}
-      />
-    )
-  }
-
-  scrollToEnd = (animated = true) => {
-    this.scrollViewRef.current.scrollToEnd({ animated })
-  }
-
-  componentDidMount () {
-    this.scrollToEnd({ animated: true })
-  }
-
-  render () {
-    const {
-      comments = [],
-      header,
-      footer,
-      pending,
-      total,
-      hasMore,
-      fetchComments
-    } = this.props
-
-    return (
-      <ScrollView ref={this.scrollViewRef} onContentSizeChange={this.scrollToEnd} style={{ flex: 1 }}>
+      <ScrollView
+        ref={scrollViewRef}
+        // onContentSizeChange={scrollToEnd}
+        {...panHandlers}
+        keyboardDismissMode='interactive'>
         {header}
         <ShowMore
           commentsLength={comments.length}
@@ -56,11 +38,19 @@ export default class Comments extends React.PureComponent {
         {pending && <View style={styles.loadingContainer}>
           <Loading style={styles.loading} />
         </View>}
-        {comments.map(this.renderComment)}
+        {comments.map(comment => (
+          <Comment
+            comment={comment}
+            showMember={showMember}
+            showTopic={showTopic}
+            slug={slug}
+            key={comment.id}
+          />        
+        ))}
       </ScrollView>
     )
   }
-}
+)
 
 export function ShowMore ({ total = 0, hasMore, fetchComments }) {
   const extra = total - 10

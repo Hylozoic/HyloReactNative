@@ -10,7 +10,7 @@ import MenuButton from 'navigation/header/MenuButton'
 import SearchIcon from 'navigation/header/SearchIcon'
 import MessagesIcon from 'navigation/header/MessagesIcon'
 import NotificationsIcon from 'navigation/header/NotificationsIcon'
-import {  caribbeanGreen, white60onCaribbeanGreen, white, rhino80, black10onRhino } from 'style/colors'
+import {  caribbeanGreen, white60onCaribbeanGreen, white, rhino80, black10onRhino, rhino05 } from 'style/colors'
 
 // TODO: Replace each function below with a custom header component/s as per:
 // https://reactnavigation.org/docs/stack-navigator#header
@@ -88,7 +88,7 @@ export function buildModalScreenOptions ({
       backgroundColor: white
     },
     headerStyle: {
-      backgroundColor: white
+      backgroundColor: rhino05
     },
     headerTintColor: rhino80,
     headerTitleAlign: 'center',

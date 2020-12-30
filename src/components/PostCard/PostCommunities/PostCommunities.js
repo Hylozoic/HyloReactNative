@@ -77,10 +77,12 @@ export function CommunitiesListSummary ({ communities, goToCommunity, expandFunc
   return (
     <View style={[styles.communityList, styles.row]}>
       <TouchableOpacity onPress={() => goToCommunity && goToCommunity(communities[0].id)} style={{ flex: -1 }}><Text style={styles.linkText} numberOfLines={1}>{communities[0].name}</Text></TouchableOpacity>
-      {moreCommunities && <View style={[styles.row, { flex: 0 }]}>
-        <Text style={[styles.reminderText]}> and </Text>
-        <TouchableOpacity onPress={expandFunc}><Text style={styles.linkText}>{othersText(communities.length - 1)}</Text></TouchableOpacity>
-                          </View>}
+      {moreCommunities && (
+        <View style={[styles.row, { flex: 0 }]}>
+          <Text style={[styles.reminderText]}> and </Text>
+          <TouchableOpacity onPress={expandFunc}><Text style={styles.linkText}>{othersText(communities.length - 1)}</Text></TouchableOpacity>
+        </View>
+      )}
     </View>
   )
 }

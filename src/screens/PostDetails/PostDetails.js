@@ -1,8 +1,12 @@
 /* eslint-disable camelcase */
 import React from 'react'
-import { Linking, View, Text, TouchableOpacity, Alert, Button as ReactButton } from 'react-native'
+import { Linking, View, Text, TouchableOpacity, Alert } from 'react-native'
 import SafeAreaView from 'react-native-safe-area-view'
+import { KeyboardAccessoryView } from '@flyerhq/react-native-keyboard-accessory-view'
 import { get, isEmpty, find } from 'lodash/fp'
+import { isIOS } from 'util/platform'
+import { FileLabel } from 'screens/PostEditor/FileSelector'
+import SocketSubscriber from 'components/SocketSubscriber'
 import Comments from 'components/Comments'
 import PostBody from 'components/PostCard/PostBody'
 import PostCommunities from 'components/PostCard/PostCommunities'
@@ -12,14 +16,9 @@ import PostHeader from 'components/PostCard/PostHeader'
 import ProjectMembersSummary from 'components/ProjectMembersSummary'
 import LoadingScreen from 'screens/LoadingScreen'
 import Button from 'components/Button'
-import SocketSubscriber from 'components/SocketSubscriber'
-import { FileLabel } from 'screens/PostEditor/FileSelector'
-import Icon from 'components/Icon'
 import InlineEditor, { toHtml } from 'components/InlineEditor'
-import KeyboardAccessoryView from 'components/KeyboardAccessoryView'
-import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
+import Icon from 'components/Icon'
 import styles from './PostDetails.styles'
-import { KeyboardAccessoryNavigation } from 'react-native-keyboard-accessory'
 
 export function PostCardForDetails ({
   post,
@@ -68,18 +67,21 @@ export function PostCardForDetails ({
         showTopic={showTopic}
       />
       {!isEmpty(post.fileUrls) && <Files urls={post.fileUrls} />}
-      {isProject &&
+      {isProject && (
         <ProjectMembersSummary
           members={post.members}
           onPress={goToMembers}
           dimension={34}
           style={styles.projectMembersContainer}
-        />}
-      {isProject && <JoinProjectButton
-        style={styles.joinButton}
-        leaving={isMember}
-        onPress={isMember ? leaveProject : joinProject}
-                    />}
+        />
+      )}
+      {isProject && (
+        <JoinProjectButton
+          style={styles.joinButton}
+          leaving={isMember}
+          onPress={isMember ? leaveProject : joinProject}
+        />
+      )}
       {!!location && (
         <View style={styles.infoRow}>
           <Icon style={styles.locationIcon} name='Location' />
@@ -150,55 +152,59 @@ export default class PostDetails extends React.Component {
     this.setState(() => ({ commentText }))
   }
 
-  render () {
-    const {
-      post,
-      currentUser,
-      pending,
-      showMember
-    } = this.props
-    const {
-      commentText,
-      submitting
-    } = this.state
-
-    if (!post || !post.creator || !post.title) return <LoadingScreen />
-
+  renderPostDetails = (panHandlers) => {
+    const { post, currentUser, pending, showMember } = this.props
     const slug = get('communities.0.slug', post)
-    const communityId = get('communities.0.id', post)
     const isMember = find(member => member.id === currentUser.id, post.members)
     const location = post.location || (post.locationObject && post.locationObject.fullText)
 
     return (
-      <SafeAreaView style={styles.container}>
-        <Comments
-          ref={this.commentsRef}
-          header={(
-            <PostCardForDetails
-              {...this.props}
-              showTopic={this.onShowTopic}
-              isMember={isMember}
-              location={location}
-            />
-          )}
-          postId={post.id}
-          postPending={pending}
-          showMember={showMember}
-          showTopic={this.onShowTopic}
-          slug={slug}
-        />
-        <SocketSubscriber type='post' id={post.id} />
-        <KeyboardAccessoryView>
-          <InlineEditor
-            onChange={this.handleCommentOnChange}
-            onSubmit={this.handleCreateComment}
-            value={commentText}
-            style={styles.inlineEditor}
-            submitting={submitting}
-            placeholder='Write a comment...'
-            communityId={communityId}
+      <Comments
+        ref={this.commentsRef}
+        header={(
+          <PostCardForDetails
+            {...this.props}
+            showTopic={this.onShowTopic}
+            isMember={isMember}
+            location={location}
           />
+        )}
+        postId={post.id}
+        postPending={pending}
+        showMember={showMember}
+        showTopic={this.onShowTopic}
+        slug={slug}
+        panHandlers={panHandlers}
+      />
+    )
+  }
+
+  render () {
+    const { post } = this.props
+    const { commentText, submitting } = this.state
+    const communityId = get('communities.0.id', post)
+
+    if (!post?.creator || !post?.title) return <LoadingScreen />
+
+    return (
+      <SafeAreaView edges={['right', 'left', 'top']} style={styles.container}>
+        <KeyboardAccessoryView
+          contentContainerStyle={{ marginBottom: 0, borderWidth: 0 }}
+          // TODO: Calculate these!
+          spaceBetweenKeyboardAndAccessoryView={isIOS ? -79 : 0}
+          contentOffsetKeyboardOpened={isIOS ? -79 : 0}
+          renderScrollable={this.renderPostDetails}>
+            <InlineEditor
+              onChange={this.handleCommentOnChange}
+              onSubmit={this.handleCreateComment}
+              value={commentText}
+              style={styles.inlineEditor}
+              submitting={submitting}
+              placeholder='Write a comment...'
+              communityId={communityId}
+            />
         </KeyboardAccessoryView>
+        <SocketSubscriber type='post' id={post.id} />
       </SafeAreaView>
     )
   }

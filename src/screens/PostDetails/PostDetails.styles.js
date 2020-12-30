@@ -1,17 +1,12 @@
-import { capeCod10, rhino60, rhino30, fuchsiaPink, prim, caribbeanGreen } from 'style/colors'
+import { capeCod10, rhino60, rhino30, fuchsiaPink, prim, caribbeanGreen, white } from 'style/colors'
 
 export default {
   container: {
     flex: 1,
-    backgroundColor: 'white'
+    backgroundColor: white
   },
   postCard: {
     marginBottom: 16
-  },
-  postFooter: {
-    // borderTopColor: capeCod10,
-    // borderTopWidth: 1,
-    // paddingTop: 10
   },
   imageMargin: {
     marginBottom: 12
@@ -37,13 +32,6 @@ export default {
     fontSize: 13,
     color: rhino60,
     fontFamily: 'Circular-Book'
-  },
-  inlineEditor: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'flex-end',
-    margin: 0,
-    padding: 15
   },
   files: {
     marginHorizontal: 18,

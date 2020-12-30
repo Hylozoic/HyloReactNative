@@ -178,7 +178,8 @@ export default {
     borderTopWidth: StyleSheet.hairlineWidth,
     borderTopColor: capeCod40,
     backgroundColor: white,
-    padding: 8
+    padding: 8,
+    marginHorizontal: -16
   },
   bottomBarIcons: {
     flexDirection: 'row',
