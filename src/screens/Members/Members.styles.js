@@ -1,12 +1,10 @@
-import { capeCod, rhino, rhino50, ghost, white } from 'style/colors'
+import { white } from 'style/colors'
 
 const hasTextShadow = {
   textShadowColor: 'rgba(0, 0, 0, 0.25)',
   textShadowOffset: { width: 0, height: 2 },
   textShadowRadius: 7
 }
-
-const bannerHeight = 152
 
 export default {
   container: {
@@ -46,7 +44,7 @@ export default {
     ...hasTextShadow
   },
   // 
-  button: {
+  inviteButton: {
     width: 110,
     borderColor: 'transparent',
     marginLeft: 'auto',

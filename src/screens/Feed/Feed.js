@@ -50,9 +50,7 @@ export default function Feed ({
   newProject,
   fetchCommunityTopic
 }) {
-  const ref = useRef(null)
-
-  useEffect(() => { fetchCommunityTopic() }, [ fetchCommunityTopic, topicName ])
+  useEffect(() => { fetchCommunityTopic() }, [fetchCommunityTopic, topicName])
   useEffect(() => { setHeaderTitle(navigation, topicName, community, isProjectFeed) }, [topicName, community?.id, isProjectFeed])
 
   if (!currentUser) return <Loading style={{ flex: 1 }} />
@@ -65,6 +63,8 @@ export default function Feed ({
       />
     )
   }
+
+  const ref = useRef(null)
 
   useScrollToTop(ref)
 
@@ -93,7 +93,7 @@ export default function Feed ({
   const pluralPosts = (topicPostsTotal !== 1)
   const showPostPrompt = !isProjectFeed && !all && !topicName
   const feedListHeader = (
-    <View style={[styles.container, showPostPrompt ? styles.containerWithPostPrompt : {}]}>
+    <View style={[styles.bannerContainer, showPostPrompt ? styles.bannerContainerWithPostPrompt : {}]}>
       <Image source={image} style={styles.image} />
       <LinearGradient style={styles.gradient} colors={bannerlinearGradientColors} />
       <View style={styles.titleRow}>
@@ -112,37 +112,37 @@ export default function Feed ({
             </View>
           )}
         </View>
-        {!isUndefined(topicSubscribed) && (
-          <SubscribeButton active={topicSubscribed} onPress={setTopicSubscribe} />
-        )}
-        {!network?.id && isProjectFeed && (
-          <CreateProjectButton createProject={() => newProject(community?.id)} />
-        )}
       </View>
+      {!isUndefined(topicSubscribed) && (
+        <SubscribeButton active={topicSubscribed} onPress={setTopicSubscribe} />
+      )}
+      {!network?.id && isProjectFeed && (
+        <CreateProjectButton createProject={() => newProject(community?.id)} />
+      )}
       {showPostPrompt && <PostPrompt currentUser={currentUser} newPost={newPost} />}
       {!!currentUser && showPostPrompt && <View style={styles.promptShadow} />}
     </View>
   )
 
-  return (
-    <View style={styles.feedListContainer}>
-      <FeedList
-        scrollRef={ref}
-        community={community}
-        network={network}
-        showPost={showPost}
-        goToCommunity={goToCommunity}
-        header={feedListHeader}
-        route={route}
-        navigation={navigation}
-        showMember={showMember}
-        showTopic={showTopic}
-        topicName={topicName}
-        isProjectFeed={isProjectFeed}
-      />
-      {!topicName && community && <SocketSubscriber type='community' id={community.id} />}
-    </View>
-  )
+  return <>
+    <FeedList
+      scrollRef={ref}
+      community={community}
+      network={network}
+      showPost={showPost}
+      goToCommunity={goToCommunity}
+      header={feedListHeader}
+      route={route}
+      navigation={navigation}
+      showMember={showMember}
+      showTopic={showTopic}
+      topicName={topicName}
+      isProjectFeed={isProjectFeed}
+    />
+    {!topicName && community && (
+      <SocketSubscriber type='community' id={community.id} />
+    )}
+  </>
 }
 
 export function PostPrompt ({ currentUser, newPost }) {

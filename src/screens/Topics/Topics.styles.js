@@ -16,7 +16,10 @@ export default {
   bannerContainer: {
     zIndex: 10,
     height: 142,
-    marginBottom: 10
+    marginBottom: 10,
+    flexDirection: 'column',
+    alignItems: 'flex-end',
+    justifyContent: 'flex-end'
   },
   image: {
     height: 142,

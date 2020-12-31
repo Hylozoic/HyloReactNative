@@ -6,7 +6,7 @@ const feedMargin = 16
 export default {
   container: {
     backgroundColor: 'white',
-    minHeight: 100
+    flex: 1
   },
   listControls: {
     paddingTop: 12,

@@ -18,15 +18,15 @@ const hasTextShadow = {
 }
 
 export default {
-  feedListContainer: {
-    flex: 1,
-    backgroundColor: 'white'
-  },
-  container: {
+  bannerContainer: {
     zIndex: 10,
     height: 142,
+    marginBottom: 10,
+    flexDirection: 'column',
+    alignItems: 'flex-end',
+    justifyContent: 'flex-end'
   },
-  containerWithPostPrompt: {
+  bannerContainerWithPostPrompt: {
     marginBottom: 34
   },
   image: {
@@ -43,8 +43,7 @@ export default {
     position: 'absolute',
     left: 0,
     bottom: 56,
-    marginLeft: 16,
-    marginRight: 0,
+    marginHorizontal: 16,
     flexDirection: 'row',
     alignItems: 'flex-end'
   },
@@ -102,30 +101,34 @@ export default {
     fontStyle: 'italic'
   },
   unsubscribeButton: {
-    marginRight: 8,
     width: 130,
-    fontSize: 14,
-    height: 36,
     color: caribbeanGreen,
     backgroundColor: white,
-    borderColor: white
+    borderColor: 'transparent',
+    marginLeft: 'auto',
+    marginRight: 10,
+    marginBottom: 20,
+    height: 35,
+    fontSize: 14
   },
   subscribeButton: {
-    marginRight: 8,
     width: 130,
-    fontSize: 14,
-    height: 36,
-    color: caribbeanGreen,
-    backgroundColor: white,
-    borderColor: caribbeanGreen
+    color: white,
+    backgroundColor: caribbeanGreen,
+    borderColor: 'transparent',
+    marginLeft: 'auto',
+    marginRight: 10,
+    marginBottom: 20,
+    height: 35,
+    fontSize: 14
   },
   createProjectButton: {
     width: 150,
-    height: 35,
-    padding: 8,
     borderColor: 'transparent',
     marginLeft: 'auto',
-    marginBottom: -44,
-    fontSize: 14,
+    marginRight: 10,
+    marginBottom: 20,
+    height: 35,
+    fontSize: 14
   }
 }

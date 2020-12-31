@@ -38,7 +38,7 @@ export default function Topics ({
 
   return (
     <KeyboardFriendlyView style={styles.container}>
-      <ScrollView ref={ref} contentContainerStyle={styles.scrollContainer}>
+      <ScrollView ref={ref}>
         <View style={styles.bannerContainer}>
           {image && <Image source={image} style={styles.image} />}
           <LinearGradient style={styles.gradient} colors={bannerlinearGradientColors} />

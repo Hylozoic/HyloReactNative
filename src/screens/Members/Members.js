@@ -78,7 +78,7 @@ export function Banner ({ community, network, all, showInviteButton, handleInvit
       {showInviteButton && (
         <Button
           text='Invite'
-          style={styles.button}
+          style={styles.inviteButton}
           iconName='Invite'
           onPress={handleInviteOnPress}
         />
