@@ -15,11 +15,11 @@ export default function CommunitiesList ({
       communities={communitiesRow}
       onPress={onPress}
       RightIcon={RightIcon}
-      key={communitiesRow[0].id}
+      key={communitiesRow[0]?.id}
     />)
 }
 
-export function CommunityRow ({ communities, goToCommunity, onPress, RightIcon }) {
+export function CommunityRow ({ communities = [], goToCommunity, onPress, RightIcon }) {
   return (
     <View style={[styles.communityRow, styles.row]}>
       {communities.map(community =>
@@ -27,7 +27,7 @@ export function CommunityRow ({ communities, goToCommunity, onPress, RightIcon }
           community={community}
           goToCommunity={goToCommunity}
           onPress={onPress}
-          key={community.id}
+          key={community?.id}
           RightIcon={RightIcon}
         />)}
     </View>

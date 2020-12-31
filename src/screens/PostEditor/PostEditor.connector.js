@@ -31,9 +31,10 @@ export function mapStateToProps (state, props) {
   const defaultPost = selectedTopicName
     ? {
         detailsText: selectedTopicTag + ' ',
-        communities: [currentCommunity]
-      } : {
-        communities: [currentCommunity]
+        communities: currentCommunity && [currentCommunity]
+      } 
+    : {
+        communities: currentCommunity && [currentCommunity]
       }
   const postId = getPostId(state, props)
   const post = getPresentedPost(state, { id: postId })

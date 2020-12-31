@@ -1,13 +1,20 @@
 import React, { useRef, useEffect } from 'react'
-import { View } from 'react-native'
+import { Image, View, Text, TouchableOpacity } from 'react-native'
 import { useScrollToTop } from '@react-navigation/native'
+import Avatar from 'components/Avatar'
+import Icon from 'components/Icon'
+import NotificationOverlay from 'components/NotificationOverlay'
+import LinearGradient from 'react-native-linear-gradient'
+import { isUndefined } from 'lodash'
+import Button from 'components/Button'
+import { bannerlinearGradientColors } from 'style/colors'
 import Loading from 'components/Loading'
 import CreateCommunityNotice from 'components/CreateCommunityNotice'
 import FeedList from 'components/FeedList'
-import FeedBanner from 'components/FeedBanner'
 import SocketSubscriber from 'components/SocketSubscriber'
 import styles from './Feed.styles'
-import Button from 'components/Button'
+
+const allCommunitiesBannerImage = require('assets/all-communities-banner.png')
 
 export function setHeaderTitle (navigation, topicName, community, isProjectFeed) {
   let headerTitle 
@@ -61,35 +68,71 @@ export default function Feed ({
 
   useScrollToTop(ref)
 
-  const all = !community && !topicName
+  const all = !community && !topicName && !network
+
+  // From FeedBanner
+  let bannerUrl, name, image
+  if (all) {
+    name = 'All Communities'
+    image = allCommunitiesBannerImage
+  } else if (network) {
+    ({ bannerUrl, name } = network)
+    if (bannerUrl) image = { uri: bannerUrl }
+  } else if (community) {
+    ({ bannerUrl, name } = community)
+    if (bannerUrl) image = { uri: bannerUrl }
+  } else {
+    return null
+  }
+
+  if (topicName) {
+    name = '#' + topicName
+  }
+
+  const pluralFollowers = (topicFollowersTotal !== 1)
+  const pluralPosts = (topicPostsTotal !== 1)
+  const showPostPrompt = !hidePostPrompt
+  const feedListHeader = (
+    <View style={[styles.container, showPostPrompt ? styles.containerWithPostPrompt : {}]}>
+      <Image source={image} style={styles.image} />
+      <LinearGradient style={styles.gradient} colors={bannerlinearGradientColors} />
+      <View style={styles.titleRow}>
+        <View style={styles.title}>
+          <Text style={styles.name} numberOfLines={3}>
+            {name}
+          </Text>
+          {topicName && (
+            <View style={styles.topicInfo}>
+              <Text style={styles.subName}>
+                <Icon name='Star' /> {topicFollowersTotal} subscriber{pluralFollowers && 's'}
+              </Text>
+              <Text style={styles.subName}>
+                <Icon name='Post' /> {topicPostsTotal} post{pluralPosts && 's'}
+              </Text>
+            </View>
+          )}
+        </View>
+        {!isUndefined(topicSubscribed) && (
+          <SubscribeButton active={topicSubscribed} onPress={setTopicSubscribe} />
+        )}
+        {!network?.id && isProjectFeed && (
+          <CreateProjectButton createProject={() => newProject(community?.id)} />
+        )}
+      </View>
+      {showPostPrompt && <PostPrompt currentUser={currentUser} newPost={newPost} />}
+      {!!currentUser && showPostPrompt && <View style={styles.promptShadow} />}
+    </View>
+  )
 
   return (
-    <View style={styles.container}>
+    <View style={styles.feedListContainer}>
       <FeedList
         scrollRef={ref}
         community={community}
         network={network}
         showPost={showPost}
         goToCommunity={goToCommunity}
-        header={
-          <View>
-            <FeedBanner
-              currentUser={currentUser}
-              community={community}
-              network={network}
-              newPost={newPost}
-              topicName={topicName}
-              topicPostsTotal={topicPostsTotal}
-              topicFollowersTotal={topicFollowersTotal}
-              topicSubscribed={topicSubscribed}
-              setTopicSubscribe={setTopicSubscribe}
-              hidePostPrompt={all || isProjectFeed || hidePostPrompt}
-              rightSideButton={!network?.id && isProjectFeed && (
-                <CreateProjectButton createProject={() => newProject(community?.id)} />
-              )}
-            />
-          </View>
-        }
+        header={feedListHeader}
         route={route}
         navigation={navigation}
         showMember={showMember}
@@ -102,12 +145,52 @@ export default function Feed ({
   )
 }
 
+export function PostPrompt ({ currentUser, newPost }) {
+  if (!currentUser) return null
+  const { avatarUrl } = currentUser
+  return (
+    <View style={styles.postPrompt}>
+      <TouchableOpacity onPress={newPost} style={styles.promptButton}>
+        <Avatar avatarUrl={avatarUrl} style={styles.avatar} />
+        <Text style={styles.promptText}>{currentUser.firstName()}, what's on your mind?</Text>
+      </TouchableOpacity>
+    </View>
+  )
+}
+
+export function SubscribeButton ({ active, onPress }) {
+  const text = active ? 'Unsubscribe' : 'Subscribe'
+  const style = active ? styles.unsubscribeButton : styles.subscribeButton
+  return <Button onPress={onPress} style={style} iconName='Star' text={text} />
+}
+
 export function CreateProjectButton ({ createProject }) {
   return (
     <Button
-      style={styles.button}
+      style={styles.createProjectButton}
       text='Create Project'
       onPress={createProject}
     />
   )
 }
+
+// const toggleSubscribe = () => {
+//   this.setState({
+//     overlayMessage: this.props.topicSubscribed
+//       ? 'UNSUBSCRIBED FROM TOPIC'
+//       : 'SUBSCRIBED TO TOPIC'
+//   })
+//   setTopicSubscribe()
+// }
+//
+// resetOverlayMessage = () => {
+//   this.setState({ overlayMessage: null })
+// }
+//
+// {!!this.state.overlayMessage && (
+//   <NotificationOverlay
+//     message={this.state.overlayMessage}
+//     type='info'
+//     onComplete={this.resetOverlayMessage}
+//   />
+// )}

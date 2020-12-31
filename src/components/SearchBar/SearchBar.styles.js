@@ -6,6 +6,7 @@ export default {
     flexGrow: 1,
     flexShrink: 1,
     flexDirection: 'row',
+    alignItems: 'center',
     borderWidth: 1,
     padding: 3,
     borderColor: rhino50,
@@ -18,6 +19,8 @@ export default {
     backgroundColor: 'transparent'
   },
   searchInput: {
+    margin: 0,
+    padding: 0,
     top: 1,
     fontSize: 14,
     fontFamily: 'Circular-Book',
