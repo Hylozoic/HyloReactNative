@@ -81,8 +81,7 @@ export function mapStateToProps (state, props) {
 
   return {
     ...stateProps,
-    ...setupTopicProps(state, props, stateProps),
-    isProjectFeed: getRouteParam('isProjectFeed', props.route)
+    ...setupTopicProps(state, props, stateProps)
   }
 }
 

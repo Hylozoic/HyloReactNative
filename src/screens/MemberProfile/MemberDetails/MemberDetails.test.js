@@ -15,13 +15,15 @@ describe('MemberDetails', () => {
   const navigation = { setParams: () => {} }
   it('matches the last snapshot', () => {
     const renderer = new ReactShallowRenderer()
-    renderer.render(<MemberDetails
-      isFocused
-      person={{ id: 1 }}
-      goToCommunity={() => {}}
-      skills={['One']}
-      navigation={navigation}
-                    />)
+    renderer.render(
+      <MemberDetails
+        isFocused
+        person={{ id: 1 }}
+        goToCommunity={() => {}}
+        skills={['One']}
+        navigation={navigation}
+      />
+    )
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()

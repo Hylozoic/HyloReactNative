@@ -42,7 +42,6 @@ export default function Feed ({
   goToCreateCommunity,
   currentUserHasMemberships,
   hidePostPrompt,
-  isProjectFeed,
   goToCommunity,
   setTopicSubscribe,
   showTopic,
@@ -50,8 +49,14 @@ export default function Feed ({
   newProject,
   fetchCommunityTopic
 }) {
+  const isProjectFeed = route?.params?.isProjectFeed
+
   useEffect(() => { fetchCommunityTopic() }, [fetchCommunityTopic, topicName])
-  useEffect(() => { setHeaderTitle(navigation, topicName, community, isProjectFeed) }, [topicName, community?.id, isProjectFeed])
+  useEffect(() => { setHeaderTitle(navigation, topicName, community, isProjectFeed) }, [
+    topicName,
+    community?.id, 
+    isProjectFeed
+  ])
 
   if (!currentUser) return <Loading style={{ flex: 1 }} />
 
