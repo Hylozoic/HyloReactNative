@@ -33,10 +33,11 @@ export default function makeGoToCommunity (dispatch, navigation) {
     const goToCommunity = () => {
       navigation.navigate('Home', {
           screen: 'Home',
-          params: {
-            networkId: null,
-            communityId
-          }
+          // TODO: Add this when redux session.community/network/Id is deprecated
+          // params: {
+          //   networkId: null,
+          //   communityId
+          // }
       })
       dispatch(selectCommunity(communityId))
     }
