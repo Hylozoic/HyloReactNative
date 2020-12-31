@@ -6,7 +6,7 @@ const hasTextShadow = {
   textShadowRadius: 7
 }
 
-const bannerHeight = 132
+const bannerHeight = 152
 
 export default {
   container: {
@@ -15,23 +15,28 @@ export default {
   },
   bannerContainer: {
     zIndex: 10,
-    height: bannerHeight
+    height: 142,
+    marginBottom: 10,
+    flexDirection: 'column',
+    alignItems: 'flex-end',
+    justifyContent: 'flex-end'
   },
   image: {
-    height: bannerHeight,
+    height: 142,
     width: '100%',
     position: 'absolute'
   },
   gradient: {
-    height: bannerHeight,
+    height: 142,
     width: '100%',
     position: 'absolute'
   },
   titleRow: {
-    top: 46,
-    flexDirection: 'row',
-    marginLeft: 16,
-    marginRight: 16
+    position: 'absolute',
+    left: 0,
+    bottom: 56,
+    marginHorizontal: 16,
+    flexDirection: 'row'
   },
   name: {
     fontSize: 24,
@@ -40,12 +45,14 @@ export default {
     backgroundColor: 'transparent',
     ...hasTextShadow
   },
+  // 
   button: {
-    width: 185,
+    width: 110,
+    borderColor: 'transparent',
     marginLeft: 'auto',
-    marginRight: 'auto',
-    height: 40,
-    marginTop: 12,
+    marginRight: 10,
+    marginBottom: 20,
+    height: 35,
     fontSize: 14
   }
 }

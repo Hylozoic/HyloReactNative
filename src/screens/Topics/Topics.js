@@ -42,9 +42,12 @@ export default function Topics ({
         <View style={styles.bannerContainer}>
           {image && <Image source={image} style={styles.image} />}
           <LinearGradient style={styles.gradient} colors={bannerlinearGradientColors} />
-          <Text style={styles.title}>{name}</Text>
+          <View style={styles.titleRow}>
+            <Text style={styles.name}>{name}</Text>
+          </View>
         </View>
         <SearchBar
+          style={styles.searchBar}
           value={searchTerm}
           onChangeText={setTerm}
           placeholder='Search Topics'

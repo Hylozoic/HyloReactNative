@@ -3,25 +3,25 @@ import { isIOS } from 'util/platform'
 
 export default {
   searchBar: {
+    flexGrow: 1,
+    flexShrink: 1,
     flexDirection: 'row',
-    borderColor: rhino50,
     borderWidth: 1,
-    borderRadius: 32,
-    margin: 8,
-    height: 38
+    padding: 3,
+    borderColor: rhino50,
+    borderRadius: 32
   },
   searchIcon: {
+    marginLeft: 2,
     fontSize: 30,
     color: rhino50,
-    backgroundColor: 'transparent',
-    marginLeft: 5,
-    top: 4
+    backgroundColor: 'transparent'
   },
   searchInput: {
-    flex: 1,
-    position: 'relative',
-    top: isIOS ? 0 : 1,
-    fontFamily: 'Circular-Book'
+    top: 1,
+    fontSize: 14,
+    fontFamily: 'Circular-Book',
+    flex: 1
   },
   loading: {
     paddingHorizontal: 10

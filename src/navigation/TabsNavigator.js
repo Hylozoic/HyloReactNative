@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, View, StyleSheet } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { createStackNavigator } from '@react-navigation/stack'
 import { isIOS } from 'util/platform'
@@ -10,13 +10,12 @@ import { buildTabStackScreenOptions } from 'navigation/header'
 import Feed from 'screens/Feed'
 import MembersComponent from 'screens/Members'
 import MemberProfile from 'screens/MemberProfile'
-import ProjectsComponent from 'screens/Projects'
 import TopicsComponent from 'screens/Topics'
 import PostDetails from 'screens/PostDetails'
 import MemberDetails from 'screens/MemberProfile/MemberDetails'
 import MemberSkillEditor from 'screens/MemberProfile/MemberSkillEditor'
 import ProjectMembers from 'screens/ProjectMembers/ProjectMembers'
-import { caribbeanGreen, gainsboro, gunsmoke, rhino05, rhino10, rhino20, white } from 'style/colors'
+import { caribbeanGreen, gainsboro, gunsmoke, rhino05, white } from 'style/colors'
 
 export function getScreensInCommon (Stack) {
   return [
@@ -79,7 +78,7 @@ export function ProjectsNavigator () {
   }
   return (
     <Projects.Navigator {...navigatorProps}>
-      <Projects.Screen name='Projects' component={ProjectsComponent} />
+      <Projects.Screen name='Projects' component={Feed} initialParams={{ isProjectFeed: true }} />
       {getScreensInCommon(Projects)}
     </Projects.Navigator>
   )

@@ -11,7 +11,7 @@ import MemberList from 'components/MemberList'
 import { bannerlinearGradientColors } from 'style/colors'
 
 export default class Members extends React.Component {
-  goToInvitePeople = () => this.props.navigation.navigate('Invite Members')
+  goToInvitePeople = () => this.props.navigation.navigate('Community Settings', { screen: 'Invite Members' })
 
   shouldComponentUpdate (nextProps) {
     // TODO: test if children render...
@@ -77,7 +77,7 @@ export function Banner ({ community, network, all, showInviteButton, handleInvit
       </View>
       {showInviteButton && (
         <Button
-          text='Invite People'
+          text='Invite'
           style={styles.button}
           iconName='Invite'
           onPress={handleInviteOnPress}

@@ -10,7 +10,7 @@ import styles from './SearchBar.styles'
 import Loading from 'components/Loading'
 
 export default function SearchBar ({
-  value = '',
+  value,
   onChangeText,
   placeholder,
   onCancel,
@@ -18,14 +18,15 @@ export default function SearchBar ({
   onFocus,
   autoFocus = false,
   loading,
-  disabled = false
+  disabled = false,
+  style = {}
 }) {
   const Cancel = () => onCancelText
     ? <Text style={styles.cancelText}>{onCancelText}</Text>
     : <Icon name='Ex' style={styles.cancelButton} />
 
   return (
-    <View style={styles.searchBar}>
+    <View style={[styles.searchBar, style]}>
       <Icon style={styles.searchIcon} name='Search' />
       <TextInput
         autoFocus={autoFocus}
@@ -40,9 +41,11 @@ export default function SearchBar ({
         editable={!disabled}
       />
       {loading && <Loading style={styles.loading} />}
-      {!loading && value.length > 0 && onCancel && <TouchableOpacity style={styles.cancel} onPress={onCancel}>
-        <Cancel />
-                                                   </TouchableOpacity>}
+      {!loading && value?.length > 0 && onCancel && (
+        <TouchableOpacity style={styles.cancel} onPress={onCancel}>
+          <Cancel />
+        </TouchableOpacity>
+      )}
     </View>
   )
 }

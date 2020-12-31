@@ -21,11 +21,7 @@ import styles from './NewMessage.styles'
 export default class NewMessage extends React.Component {
   constructor (props) {
     super(props)
-    this.props.navigation.setParams({
-      confirmLeave: this.confirmLeave
-    })
     this.state = {
-      viewKey: 0,
       participants: []
     }
   }
@@ -33,11 +29,6 @@ export default class NewMessage extends React.Component {
   componentDidMount () {
     this.props.fetchRecentContacts()
     this.props.initialParticipants.forEach(this.addParticipant)
-  }
-
-  onBlurMessageInput = () => {
-    const { viewKey } = this.state
-    this.setState({ viewKey: viewKey + 1 })
   }
 
   createMessage = text => {
@@ -82,10 +73,7 @@ export default class NewMessage extends React.Component {
   }
 
   render () {
-    const {
-      pending,
-      mockViewKey // just for testing
-    } = this.props
+    const { pending } = this.props
 
     if (pending) return <LoadingScreen />
 
@@ -94,7 +82,7 @@ export default class NewMessage extends React.Component {
 
     return (
       <SafeAreaView style={{ flex: 1 }}>
-        <KeyboardFriendlyView style={styles.container} key={mockViewKey || this.state.viewKey}>
+        <KeyboardFriendlyView style={styles.container}>
           <ScrollView>
             <TouchableOpacity onPress={() => this.openParticipantChooser()} style={styles.participants}>
               {participants.map((participant, index) =>
@@ -116,7 +104,6 @@ export default class NewMessage extends React.Component {
             style={styles.messageInput}
             multiline
             onSubmit={this.createMessage}
-            onBlur={this.onBlurMessageInput}
             placeholder='Type your message here'
             emptyParticipants={emptyParticipantsList}
           />

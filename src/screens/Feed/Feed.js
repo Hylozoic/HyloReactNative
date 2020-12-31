@@ -7,9 +7,16 @@ import FeedList from 'components/FeedList'
 import FeedBanner from 'components/FeedBanner'
 import SocketSubscriber from 'components/SocketSubscriber'
 import styles from './Feed.styles'
+import Button from 'components/Button'
 
-export function setHeader (navigation, topicName, community){
-  const headerTitle = topicName ? community?.name : 'Home'
+export function setHeaderTitle (navigation, topicName, community, isProjectFeed) {
+  let headerTitle 
+  headerTitle = topicName
+    ? community?.name
+    : 'Home'
+  headerTitle = isProjectFeed
+    ? 'Projects'
+    : headerTitle
   navigation.setOptions({ headerTitle })
 }
 
@@ -33,15 +40,16 @@ export default function Feed ({
   setTopicSubscribe,
   showTopic,
   newPost,
-  fetchCommunityTopic,
-  belowBannerComponent
+  newProject,
+  fetchCommunityTopic
 }) {
   const ref = useRef(null)
 
   useEffect(() => { fetchCommunityTopic() }, [ fetchCommunityTopic, topicName ])
-  useEffect(() => { setHeader(navigation, topicName, community) }, [ topicName, community?.id ])
+  useEffect(() => { setHeaderTitle(navigation, topicName, community, isProjectFeed) }, [topicName, community?.id, isProjectFeed])
 
   if (!currentUser) return <Loading style={{ flex: 1 }} />
+
   if (!currentUserHasMemberships) {
     return (
       <CreateCommunityNotice
@@ -54,9 +62,6 @@ export default function Feed ({
   useScrollToTop(ref)
 
   const all = !community && !topicName
-  const theme = belowBannerComponent
-    ? { container: { marginBottom: 0 } }
-    : {}
 
   return (
     <View style={styles.container}>
@@ -78,10 +83,11 @@ export default function Feed ({
               topicFollowersTotal={topicFollowersTotal}
               topicSubscribed={topicSubscribed}
               setTopicSubscribe={setTopicSubscribe}
-              hidePostPrompt={all || hidePostPrompt}
-              theme={theme}
+              hidePostPrompt={all || isProjectFeed || hidePostPrompt}
+              rightSideButton={!network?.id && isProjectFeed && (
+                <CreateProjectButton createProject={() => newProject(community?.id)} />
+              )}
             />
-            {belowBannerComponent}
           </View>
         }
         route={route}
@@ -93,5 +99,15 @@ export default function Feed ({
       />
       {!topicName && community && <SocketSubscriber type='community' id={community.id} />}
     </View>
+  )
+}
+
+export function CreateProjectButton ({ createProject }) {
+  return (
+    <Button
+      style={styles.button}
+      text='Create Project'
+      onPress={createProject}
+    />
   )
 }

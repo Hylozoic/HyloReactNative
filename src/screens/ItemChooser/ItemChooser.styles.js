@@ -37,5 +37,8 @@ export default {
   },
   itemList: {
     marginBottom: 50
+  },
+  searchBar: {
+    margin: 10
   }
 }

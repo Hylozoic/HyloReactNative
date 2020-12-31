@@ -81,7 +81,8 @@ export function mapStateToProps (state, props) {
 
   return {
     ...stateProps,
-    ...setupTopicProps(state, props, stateProps)
+    ...setupTopicProps(state, props, stateProps),
+    isProjectFeed: getRouteParam('isProjectFeed', props.route)
   }
 }
 
@@ -89,6 +90,8 @@ export function mapDispatchToProps (dispatch, { navigation }) {
   return {
     newPost: (communityId, topicName) =>
       navigation.navigate('Edit Post', { communityId, topicName }),
+    newProject: (communityId) =>
+      navigation.navigate('Edit Post', { communityId, isProject: true }),
     showPost: id => navigation.navigate('Post Details', { id }),
     showMember: id => navigation.navigate('Member', { id }),
     goToCommunity: makeGoToCommunity(dispatch, navigation),

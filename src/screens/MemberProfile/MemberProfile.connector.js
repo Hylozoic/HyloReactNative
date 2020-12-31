@@ -51,7 +51,7 @@ export function mapDispatchToProps (dispatch, props) {
 export function makeOnPressMessages (currentUser, person, navigation) {
   if (!person || currentUser.id === person.id) return () => navigation.navigate('Messages')
   const { messageThreadId } = person
-  if (messageThreadId) return () => navigation.navigate('Thread', { id: messageThreadId })
+  if (messageThreadId) return () => navigation.navigate('Messages', { screen: 'Thread', params: { id: messageThreadId }})
   return () => navigation.navigate('Messages', { screen: 'New Message', params: { participantIds: [person.id] } })
 }
 

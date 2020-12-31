@@ -39,7 +39,7 @@ export default class FeedBanner extends React.PureComponent {
       topicPostsTotal,
       topicFollowersTotal,
       hidePostPrompt,
-      theme
+      rightSideButton
     } = this.props
 
     let bannerUrl, name, image
@@ -65,7 +65,7 @@ export default class FeedBanner extends React.PureComponent {
     const showPostPrompt = !hidePostPrompt
 
     return (
-      <View style={{ ...styles.container, ...theme.container }}>
+      <View style={[styles.container, showPostPrompt ? styles.containerWithPostPrompt : {}]}>
         <Image source={image} style={styles.image} />
         <LinearGradient style={styles.gradient} colors={bannerlinearGradientColors} />
         <View style={styles.titleRow}>
@@ -87,18 +87,20 @@ export default class FeedBanner extends React.PureComponent {
               </View>
             )}
           </View>
-          {!isUndefined(topicSubscribed) && <SubscribeButton
-            active={topicSubscribed} onPress={this.toggleSubscribe}
-                                            />}
+          {!isUndefined(topicSubscribed) && (
+            <SubscribeButton active={topicSubscribed} onPress={this.toggleSubscribe} />
+          )}
+          {rightSideButton}
         </View>
         {showPostPrompt && <PostPrompt currentUser={currentUser} newPost={newPost} />}
         {!!currentUser && showPostPrompt && <View style={styles.promptShadow} />}
-        {!!this.state.overlayMessage &&
+        {!!this.state.overlayMessage && (
           <NotificationOverlay
             message={this.state.overlayMessage}
             type='info'
             onComplete={this.resetOverlayMessage}
-          />}
+          />
+        )}
       </View>
     )
   }

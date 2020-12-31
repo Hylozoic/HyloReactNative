@@ -1,6 +1,47 @@
 import { capeCod, rhino, rhino50, ghost } from 'style/colors'
 
 export default {
+  listControls: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginHorizontal: 8,
+    marginBottom: 5
+  },
+  searchWrapper: {
+    marginRight: 10,
+    flexGrow: 1,
+    flexShrink: 1,
+    flexDirection: 'row',
+    borderWidth: 1,
+    padding: 3,
+    borderColor: rhino50,
+    borderRadius: 32
+  },
+  searchIcon: {
+    marginLeft: 2,
+    color: rhino50,
+    backgroundColor: 'transparent'
+  },
+  searchInput: {
+    top: 1,
+    fontSize: 14,
+    fontFamily: 'Circular-Book',
+    flex: 1
+  },
+  sortBy: {
+    flexDirection: 'row'
+  },
+  sortByText: {
+    color: rhino,
+    fontFamily: 'Circular-Book'
+  },
+  downArrow: {
+    top: 4,
+    marginLeft: 4,
+    fontSize: 12,
+    color: capeCod
+  },
+  // Member cells/cards
   cell: {
     flex: 1,
     margin: 8,
@@ -34,50 +75,5 @@ export default {
     color: rhino50,
     textAlign: 'center',
     padding: 10
-  },
-  listControls: {
-    flex: 1,
-    flexDirection: 'row'
-  },
-  searchWrapper: {
-    marginTop: 10,
-    marginHorizontal: 8,
-    marginBottom: 5,
-    flex: 1,
-    flexDirection: 'row',
-    borderWidth: 1,
-    height: 38,
-    borderColor: ghost,
-    borderRadius: 32
-  },
-  searchIcon: {
-    top: 4,
-    marginLeft: 5,
-    color: rhino50,
-    backgroundColor: 'transparent'
-  },
-  searchInput: {
-    top: 1,
-    fontSize: 14,
-    fontFamily: 'Circular-Book',
-    flex: 1
-  },
-  sortBy: {
-    flexDirection: 'row',
-    flex: 1,
-    width: 80,
-    marginTop: 21,
-    justifyContent: 'flex-end',
-    marginRight: 8
-  },
-  sortByText: {
-    color: rhino,
-    fontFamily: 'Circular-Book'
-  },
-  downArrow: {
-    top: 4,
-    marginLeft: 4,
-    fontSize: 12,
-    color: capeCod
   }
 }

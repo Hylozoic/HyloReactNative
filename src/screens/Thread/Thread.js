@@ -31,7 +31,7 @@ export default class Thread extends React.Component {
     this.yOffset = 0
   }
 
-  getHeader () {
+  setHeader () {
     const { navigation, id, title } = this.props
     title && navigation.setOptions({
       headerTitle: ({ style }) => (
@@ -48,7 +48,7 @@ export default class Thread extends React.Component {
     this.scrollToBottom()
     fetchMessages()
     this.markAsRead()
-    this.getHeader()
+    this.setHeader()
   }
 
   UNSAFE_componentWillUpdate (nextProps) {

@@ -219,13 +219,14 @@ export class ItemChooserListHeader extends React.Component {
     return (
       <View style={styles.listHeader}>
         <SearchBar
+          style={styles.searchBar}
           autoFocus={autoFocus}
           onFocus={onFocus}
           value={searchTerm}
           onChangeText={setSearchTerm}
           placeholder={searchPlaceholder}
-        // onCancel={clearSearchTerm}
-        // onCancelText='Clear'
+          // onCancel={clearSearchTerm}
+          // onCancelText='Clear'
           loading={loading}
         />
         {searchTerm && <View style={styles.listHeaderStatus}>

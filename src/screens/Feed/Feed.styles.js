@@ -6,10 +6,12 @@ export default {
     backgroundColor: 'white'
   },
   button: {
-    width: 200,
-    height: 40,
+    width: 150,
+    height: 35,
+    padding: 8,
+    borderColor: 'transparent',
     marginLeft: 'auto',
-    marginRight: 'auto',
+    marginBottom: -44,
     fontSize: 14
   },
   promptText: {

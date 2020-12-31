@@ -12,6 +12,7 @@ import Icon from 'components/Icon'
 import Loading from 'components/Loading'
 import PopupMenuButton from 'components/PopupMenuButton'
 import styles from './MemberList.styles'
+import SearchBar from 'components/SearchBar'
 
 export class MemberList extends React.Component {
   static defaultProps = {
@@ -81,7 +82,7 @@ export class MemberList extends React.Component {
   render () {
     const { members, isServerSearch } = this.state
     const {
-      children, sortKeys, sortBy, setSort, fetchMoreMembers, pending, hideSortOptions, scrollRef
+      children, sortKeys, sortBy, setSort, fetchMoreMembers, pending, hideSortOptions, scrollRef, search
     } = this.props
     const onSearch = debounce(300, text => this.search(text))
     const actions = isServerSearch
@@ -96,23 +97,16 @@ export class MemberList extends React.Component {
       <View>
         {children || null}
         <View style={styles.listControls}>
-          <View style={styles.searchWrapper}>
-            <Icon
-              style={styles.searchIcon} name='Search' size={30}
-            />
-            <TextInput
-              placeholder='Search Members'
-              onChangeText={onSearch}
-              underlineColorAndroid='transparent' style={styles.searchInput}
-            />
-          </View>
-
-          {!hideSortOptions && <PopupMenuButton actions={actions}>
-            <View style={styles.sortBy}>
+          <SearchBar
+            placeholder='Search Members'
+            onChangeText={onSearch}
+            style={styles.searchWrapper} />
+          {!hideSortOptions && (
+            <PopupMenuButton actions={actions} style={styles.sortBy}>
               <Text style={styles.sortByText}>{sortKeys && sortKeys[sortBy]}</Text>
               <Icon name='ArrowDown' style={styles.downArrow} />
-            </View>
-          </PopupMenuButton>}
+            </PopupMenuButton>
+          )}
         </View>
       </View>
     )

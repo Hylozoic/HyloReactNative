@@ -7,9 +7,8 @@ const postPromptShape = {
   borderRadius: 4,
   left: 0,
   right: 0,
-  bottom: 0,
-  marginLeft: 16,
-  marginRight: 16
+  bottom: -26,
+  marginHorizontal: 16
 }
 
 const hasTextShadow = {
@@ -21,27 +20,28 @@ const hasTextShadow = {
 export default {
   container: {
     zIndex: 10,
-    height: 173,
-    marginBottom: 24
+    height: 142,
+  },
+  containerWithPostPrompt: {
+    marginBottom: 34
   },
   image: {
-    height: 152,
+    height: 142,
     width: '100%',
     position: 'absolute'
   },
   gradient: {
-    height: 152,
+    height: 142,
     width: '100%',
     position: 'absolute'
   },
   titleRow: {
     position: 'absolute',
     left: 0,
-    right: 0,
-    bottom: 66,
-    flexDirection: 'row',
+    bottom: 56,
     marginLeft: 16,
-    marginRight: 16,
+    marginRight: 0,
+    flexDirection: 'row',
     alignItems: 'flex-end'
   },
   title: {
@@ -51,9 +51,11 @@ export default {
     fontSize: 24,
     fontFamily: 'Circular-Black',
     color: white,
+    textAlign: 'left',
     backgroundColor: 'transparent',
     ...hasTextShadow
   },
+  //
   topicInfo: {
     flexDirection: 'row',
     flexWrap: 'wrap'
@@ -72,7 +74,7 @@ export default {
     paddingVertical: 8,
     backgroundColor: white,
     borderWidth: isIOS ? 0 : 1,
-    borderColor: capeCod10
+    borderColor: capeCod10,
   },
   promptShadow: {
     ...postPromptShape,
@@ -96,6 +98,7 @@ export default {
     fontStyle: 'italic'
   },
   unsubscribeButton: {
+    marginRight: 8,
     width: 130,
     fontSize: 14,
     height: 36,
@@ -104,6 +107,7 @@ export default {
     borderColor: white
   },
   subscribeButton: {
+    marginRight: 8,
     width: 130,
     fontSize: 14,
     height: 36,
