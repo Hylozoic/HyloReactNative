@@ -91,7 +91,7 @@ export default function Feed ({
 
   const pluralFollowers = (topicFollowersTotal !== 1)
   const pluralPosts = (topicPostsTotal !== 1)
-  const showPostPrompt = !hidePostPrompt
+  const showPostPrompt = !isProjectFeed && !all && !topicName
   const feedListHeader = (
     <View style={[styles.container, showPostPrompt ? styles.containerWithPostPrompt : {}]}>
       <Image source={image} style={styles.image} />
