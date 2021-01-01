@@ -1,6 +1,5 @@
 import { mapStateToProps } from './Comments.connector'
-import { FETCH_COMMENTS } from './Comments.store'
-import { FETCH_POST } from 'store/actions/fetchPost'
+import { FETCH_COMMENTS, FETCH_POST } from 'store/constants'
 
 describe('mapStateToProps', () => {
   it('sets pending correctly', () => {

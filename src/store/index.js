@@ -1,6 +1,6 @@
 import { applyMiddleware, createStore, compose } from 'redux'
-import orm from './models'
-import rootReducer, { combinedReducers } from './reducers'
+import rootReducer from './reducers'
+import getEmptyState from './getEmptyState'
 
 import middleware from './middleware'
 
@@ -40,7 +40,3 @@ export default function getStore () {
 //   return getEmptyState()
 // }
 // }
-
-export function getEmptyState () {
-  return combinedReducers({ orm: orm.getEmptyState() }, { type: '' })
-}

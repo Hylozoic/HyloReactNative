@@ -1,9 +1,5 @@
-import { fetchComments, getComments } from './Comments.store'
+import { getComments } from './Comments.store'
 import orm from 'store/models'
-
-it('matches the last snapshot for fetchComments', () => {
-  expect(fetchComments(1, { cursor: 20 })).toMatchSnapshot()
-})
 
 describe('getComments', () => {
   let session
