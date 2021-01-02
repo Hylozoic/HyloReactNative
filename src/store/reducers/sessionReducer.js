@@ -12,12 +12,15 @@ import {
   FETCH_CURRENT_USER,
   CHECK_SESSION_AND_SET_SIGNED_IN,
   SELECT_COMMUNITY,
-  SELECT_NETWORK
+  SELECT_NETWORK,
+  STORE_RETURN_TO_PATH
 } from 'store/constants'
 
 export default function sessionReducer (state = {
   communityId: null,
-  networkId: null
+  networkId: null,
+  signupInProgress: null,
+  returnToPath: null
 }, action) {
   const { type, error, payload, meta } = action
 
@@ -76,7 +79,12 @@ export default function sessionReducer (state = {
         ...state,
         communityId: null,
         networkId: payload
-      }  
+      }
+    case STORE_RETURN_TO_PATH:
+      return {
+        ...state,
+        returnToPath: payload
+      }
   }
 
   return state

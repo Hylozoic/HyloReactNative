@@ -9,7 +9,6 @@ export const prefixes = [
   'https://www.hylo.com',
   'hyloapp://'
 ]
-
 // Matched params are returned to the matched screen in `route.params`
 export const routesConfig = {
   '/':                                                       'AppNavigator/Tabs/Home/Feed',
@@ -25,10 +24,12 @@ export const routesConfig = {
   '/:context(c|n)/:contextId/p/:id/edit':                    'AppNavigator/PostEditor',
   '/settings/:section?':                                     'AppNavigator/UserSettings',
   '/t/:id':                                                  'AppNavigator/Thread',
-  /// TODO: I don't see a great reason that this              is still a constant
+  /// TODO: I don't see a great reason that this is still a constant
   '/t':                                                      'AppNavigator/ThreadList',
-  '/c/:slug/join/:accessCode':                               'AppNavigator/JoinCommunity',
-  '/h/use-invitation/:token':                                'AppNavigator/JoinCommunity'
+  '/c/:slug/join/:accessCode?':                              'JoinCommunity',
+  // http://hylo.com/h/use-invitation?token=ebda24b2-d5d7-4d10-8558-b160e6f5d362&email=lorenjohnson+invitetest111@gmail.com&utm_swu=9555
+  '/h/use-invitation/:token?':                               'JoinCommunity',
+  '/signup':                                                 'Signup'
   // AuthNavigator route...             
   // 'passwordResetTokenLogin/:userId/:loginToken/:nextURL':   'Login'
 }
@@ -38,6 +39,7 @@ export const routing = {
   getStateFromPath: path => {
     const matchedStatePath = matchRouteToScreenPath(path, routesConfig)
     const statePath = matchedStatePath || path
+
     return getStateFromPath(statePath)
   },
   getPathFromState: () => {}
@@ -45,20 +47,44 @@ export const routing = {
 
 // Matches path to routes and returns a screen path
 // with params appended as a querystring
-export function matchRouteToScreenPath (path, routes) {
-  for (const pathMatcher in routes) {
-    const matched = match(pathMatcher)(path)
+export function matchRouteToScreenPath (incomingPathAndQuery, routes) {
+  const [incomingPath, incomingQueryString] = incomingPathAndQuery.split('?')
 
+  for (const pathMatcher in routes) {
+    const matched = match(pathMatcher)(incomingPath)
     if (matched) {
       const screenPath = routes[pathMatcher]
-      const querystring = qs.stringify(matched.params, {
+      const screenQueryString = qs.stringify(matched.params, {
         encode: true,
         strict: true
       })
+      const screenAndIncomingQueryString = [screenQueryString, incomingQueryString]
+        .filter(Boolean)
+        .join('&')
 
-      return [screenPath, querystring].join('?')
+      return [screenPath, screenAndIncomingQueryString]
+        .filter(Boolean)
+        .join('?')
     }
   }
 }
 
 export default routing
+
+// TODO: Leftover notes... Delete
+// export const ROUTE_NOT_FOUND_SCREEN = 'RouteNotFound'
+// if (navigationState?.routes[0]?.name == ROUTE_NOT_FOUND_SCREEN) {
+//   navigationState.routes[0].params = {
+//     notFoundPathAndQuery: statePath
+//   } 
+// }
+
+// // No match found
+// const screenPath = ROUTE_NOT_FOUND_SCREEN
+// const routeParams = { notFoundPathAndQuery: incomingPathAndQuery }
+// const routeParamsQueryString = qs.stringify(routeParams, {
+//   encode: true,
+//   strict: true
+// })
+
+// return [screenPath, routeParamsQueryString].join('?')

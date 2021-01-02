@@ -10,10 +10,8 @@ import CommunitySettingsComponent from 'screens/CommunitySettings'
 import CreateCommunityName from 'screens/CreateCommunityFlow/CreateCommunityName'
 import CreateCommunityReview from 'screens/CreateCommunityFlow/CreateCommunityReview'
 import CreateCommunityUrl from 'screens/CreateCommunityFlow/CreateCommunityUrl'
-import InviteExpired from 'screens/InviteExpired'
 import InvitePeople from 'screens/InvitePeople'
 import ItemChooserScreen from 'screens/ItemChooserScreen'
-import JoinCommunity from 'screens/JoinCommunity'
 import LoadingScreen from 'screens/LoadingScreen'
 import ModeratorSettings from 'screens/ModeratorSettings'
 import NotificationSettings from 'screens/NotificationSettings'
@@ -128,14 +126,6 @@ export default function AppNavigator () {
       <App.Screen name='Notifications' component={NotificationsList} />
       <App.Screen name='Notification Settings' component={NotificationSettings} />
       <App.Screen name='Blocked Users' component={BlockedUsers} />
-      <App.Screen
-        name='InviteExpired' component={InviteExpired}
-        options={{ headerShown: false }}
-      />
-      <App.Screen
-        name='JoinCommunity' component={JoinCommunity}
-        options={{ headerShown: false }}
-      />
       <App.Screen name='Search' component={SearchPage} />
       <App.Screen name='ItemChooserScreen' component={ItemChooserScreen} />
       <App.Screen name='Loading' component={LoadingScreen} />

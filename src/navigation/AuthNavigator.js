@@ -10,6 +10,9 @@ import SignupFlow3 from 'screens/SignupFlow/SignupFlow3'
 import SignupFlow4 from 'screens/SignupFlow/SignupFlow4'
 import SignupFlow5 from 'screens/SignupFlow/SignupFlow5'
 import { white } from 'style/colors'
+import JoinCommunity from 'screens/JoinCommunity'
+import InviteExpired from 'screens/InviteExpired'
+import RouteNotFound from 'screens/RouteNotFound'
 
 const Signup = createStackNavigator()
 export function SignupNavigator () {
@@ -57,6 +60,9 @@ export default function AuthNavigator (props) {
           headerBackTitleVisible: false
         }} />
       <Auth.Screen name='Signup' component={SignupNavigator} />
+      <Auth.Screen name='JoinCommunity' component={JoinCommunity} />
+      <Auth.Screen name='InviteExpired' component={InviteExpired} />
+      <Auth.Screen name='RouteNotFound' component={RouteNotFound} />
     </Auth.Navigator>
   )
 }

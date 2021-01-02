@@ -5,20 +5,24 @@ import getMe from 'store/selectors/getMe'
 import makeGoToCommunity from 'store/actions/makeGoToCommunity'
 import getRouteParam from 'store/selectors/getRouteParam'
 import { checkInvitation, useInvitation } from './JoinCommunity.store'
-import { resetToAppRoute, resetToMainRoute } from 'routing/helpers'
 
 export function mapStateToProps (state, props) {
+  console.log('!!!!!!!!! JoinCommunity:', props.route.params)
   const { navigation } = props
+  const signedIn = state.session?.signedIn
+
   return {
+    signedIn,
     currentUser: getMe(state),
     invitationCodes: {
       invitationToken: getRouteParam('token', props.route) ||
         getRouteParam('invitationToken', props.route),
       accessCode: getRouteParam('accessCode', props.route)
     },
-    navToSignup: () => resetToAppRoute(navigation, 'Signup'),
-    navToInviteExpired: () => resetToAppRoute(navigation, 'InviteExpired'),
-    goToHome: () => resetToMainRoute(navigation)
+    navToSignup: () => navigation.navigate('Signup'),
+    navToInviteExpired: () => navigation.navigate('InviteExpired'),
+    // TODO: Should be to Login if not logged-in
+    goToHome: () => navigation.navigate('Home', { screen: 'Home' })
   }
 }
 
@@ -37,8 +41,8 @@ export function makeCheckInvitation (stateProps, dispatchProps) {
   const { checkInvitation } = dispatchProps
   const getInviteValid = get('payload.data.checkInvitation.valid')
 
-  return () =>
-    checkInvitation(invitationCodes)
+  return () => {
+    return checkInvitation(invitationCodes)
       .then(result => {
         const isValidInvite = getInviteValid(result)
         // NOTE: Not currently clearing the entryUrl on a failed check
@@ -47,14 +51,14 @@ export function makeCheckInvitation (stateProps, dispatchProps) {
         // to the community associated with the already claimed invite.
         isValidInvite ? navToSignup() : navToInviteExpired()
       })
-    // NOTE: if something fails in the process of checking the
-    // invitation the user will be forwarded on to the Signup
-    // page given that we don't know if there is an issue (expired)
-    // with the invite or if there was just some other issue.
-    // SO in this case the user will still be prompted to
-    // continue to signup (or login) and JoinCommunity will
-    // be tried again upon signing in.
-      .catch(err => err && navToSignup())
+      .catch(err => {
+        console.log('!!! error when checking invite:', err)
+        // TODO: Display toast that there was an error with the invite
+        return signedIn
+          ? goToHome()
+          : navToSignup()
+      })
+    }
 }
 
 export function makeJoinCommunity (stateProps, dispatchProps) {
@@ -62,7 +66,7 @@ export function makeJoinCommunity (stateProps, dispatchProps) {
   const { useInvitation, goToCommunity } = dispatchProps
   const getCommunityId = get('payload.data.useInvitation.membership.community.id')
   return () =>
-    useInvitation(currentUser, invitationCodes)
+    useInvitation(currentUser?.id, invitationCodes)
       .then(result => {
         const communityId = getCommunityId(result)
         communityId ? goToCommunity(communityId) : goToHome()

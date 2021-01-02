@@ -54,3 +54,22 @@ const styles = {
     marginBottom: 15
   }
 }
+
+// TODO: DELETE ME -- just notes at this point
+// import { View, Linking } from 'react-native'
+// import { useDispatch, useSelector } from 'react-redux'
+// import { STORE_RETURN_TO_PATH } from 'store/constants'
+// const dispatch = useDispatch()
+// const returnToPath = useSelector(state => state.session.returnToPath)
+// if (signedIn && !signupInProgress && returnToPath) {
+//   console.log('!!!! returnToPath:', returnToPath)
+//   dispatch({
+//     type: STORE_RETURN_TO_PATH,
+//     payload: null
+//   })
+
+//   Linking.openURL('hyloapp://' + 'm')
+
+//   return null
+// }
+// //    forward to the link saved?import { NavigationContainer } from '@react-navigation/native'

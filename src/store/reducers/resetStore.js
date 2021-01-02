@@ -1,5 +1,5 @@
 import { pick } from 'lodash/fp'
-import { getEmptyState } from 'store/getEmptyState'
+import getEmptyState from 'store/getEmptyState'
 import { LOGOUT } from 'screens/Login/actions'
 import { RESET_STORE } from '../constants'
 import { reset } from './persistence'
