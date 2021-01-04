@@ -7,7 +7,6 @@ import {
   loginByToken
 } from './actions'
 import { getPending } from './Login.store'
-import fetchCurrentUser from 'store/actions/fetchCurrentUser'
 import getRouteParam from 'store/selectors/getRouteParam'
 // import { getNavigationAction } from 'routing/DeepLinkHandler/DeepLinkHandler.store'
 
@@ -36,8 +35,7 @@ export const mapDispatchToProps = {
   loginWithFacebook,
   loginWithGoogle,
   login,
-  loginByToken,
-  fetchCurrentUser
+  loginByToken
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
@@ -46,8 +44,7 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     loginWithGoogle,
     loginWithFacebook,
     login,
-    loginByToken,
-    fetchCurrentUser
+    loginByToken
   } = dispatchProps
   const finishLogin = async (action) => {
     if (action.error) {

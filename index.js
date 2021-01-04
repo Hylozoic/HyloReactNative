@@ -8,14 +8,12 @@ import Timer from 'react-native-background-timer'
 import * as Sentry from '@sentry/react-native'
 import OneSignal from 'react-native-onesignal'
 import { isDev } from 'config'
-import getStore from './src/store'
+import store from './src/store'
 import { name as appName } from './app.json'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import ErrorBoundary from 'screens/ErrorBoundary'
 import VersionCheck from 'components/VersionCheck'
 import RootView from 'navigation/RootView'
-
-const store = getStore()
 
 if (!isDev) {
   Sentry.init({ dsn: process.env.SENTRY_DSN_URL })

@@ -1,6 +1,12 @@
-import { getStateFromPath } from '@react-navigation/native'
+import { Linking } from 'react-native'
+import { getStateFromPath as getStateFromPathDefault } from '@react-navigation/native'
 import { match } from 'path-to-regexp'
 import * as qs from 'query-string'
+import { parse } from 'url'
+import store from 'store'
+import getSignedIn from 'store/selectors/getSignedIn'
+import getReturnToPath from 'store/selectors/getReturnToPath'
+import setReturnToPath from 'store/actions/setReturnToPath'
 
 export const prefixes = [
   'http://hylo.com',
@@ -34,17 +40,6 @@ export const routesConfig = {
   // 'passwordResetTokenLogin/:userId/:loginToken/:nextURL':   'Login'
 }
 
-export const routing = {
-  prefixes,
-  getStateFromPath: path => {
-    const matchedStatePath = matchRouteToScreenPath(path, routesConfig)
-    const statePath = matchedStatePath || path
-
-    return getStateFromPath(statePath)
-  },
-  getPathFromState: () => {}
-}
-
 // Matches path to routes and returns a screen path
 // with params appended as a querystring
 export function matchRouteToScreenPath (incomingPathAndQuery, routes) {
@@ -69,22 +64,58 @@ export function matchRouteToScreenPath (incomingPathAndQuery, routes) {
   }
 }
 
+export const getStateFromReturnToPath = () => {
+  const returnToPath = getReturnToPath(store.getState())
+
+  if (!returnToPath) return null
+
+  return routing.getStateFromPath(returnToPath)
+}
+
+export const routing = {
+  prefixes,
+
+  async getInitialURL() {
+    const url = await Linking.getInitialURL()
+    const signedIn = getSignedIn(store.getState())
+
+    if (url != null) {
+      if (!signedIn) {
+        const path = parse(url).path
+        store.dispatch(setReturnToPath(path))
+      } else {
+        return url
+      }
+    }
+  },
+
+  subscribe(listener) {
+    const onReceiveURL = ({ url }) => {
+      const signedIn = getSignedIn(store.getState())
+
+      if (!signedIn) {
+        const path = parse(url).path
+        store.dispatch(setReturnToPath(path))
+      } else {
+        return listener(url)
+      }
+    }
+
+    Linking.addEventListener('url', onReceiveURL)
+
+    return () => {
+      Linking.removeEventListener('url', onReceiveURL)
+    }
+  },
+
+  getStateFromPath: path => {
+    const matchedStatePath = matchRouteToScreenPath(path, routesConfig)
+    const statePath = matchedStatePath || path
+  
+    return getStateFromPathDefault(statePath)
+  },
+
+  getPathFromState: () => {}
+}
+
 export default routing
-
-// TODO: Leftover notes... Delete
-// export const ROUTE_NOT_FOUND_SCREEN = 'RouteNotFound'
-// if (navigationState?.routes[0]?.name == ROUTE_NOT_FOUND_SCREEN) {
-//   navigationState.routes[0].params = {
-//     notFoundPathAndQuery: statePath
-//   } 
-// }
-
-// // No match found
-// const screenPath = ROUTE_NOT_FOUND_SCREEN
-// const routeParams = { notFoundPathAndQuery: incomingPathAndQuery }
-// const routeParamsQueryString = qs.stringify(routeParams, {
-//   encode: true,
-//   strict: true
-// })
-
-// return [screenPath, routeParamsQueryString].join('?')

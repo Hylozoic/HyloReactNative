@@ -1,7 +1,7 @@
 import confirmNavigate from 'util/confirmNavigate'
 import selectCommunity from './selectCommunity'
 
-export default function makeGoToCommunity (dispatch, navigation) {
+export default function makeGoToCommunity (dispatch, navigation, confirm = true) {
   return communityId => {
     // Note: This is a good opportunity for a reset,
     // but the screen transition is ugly so sticking
@@ -31,7 +31,7 @@ export default function makeGoToCommunity (dispatch, navigation) {
     //   ]
     // })
     const goToCommunity = () => {
-      navigation.navigate('Home', {
+      navigation.navigate('App', {
           screen: 'Home',
           // TODO: Add this when redux session.community/network/Id is deprecated
           // params: {
@@ -41,10 +41,13 @@ export default function makeGoToCommunity (dispatch, navigation) {
       })
       dispatch(selectCommunity(communityId))
     }
-
-    confirmNavigate(goToCommunity, {
-      title: 'Changing Communities',
-      confirmationMessage: 'Do you want to change context to this other community?'
-    })
+    if (confirm) {
+      confirmNavigate(goToCommunity, {
+        title: 'Changing Communities',
+        confirmationMessage: 'Do you want to change context to this other community?'
+      })
+     } else  {
+      goToCommunity()
+     }
   }
 }

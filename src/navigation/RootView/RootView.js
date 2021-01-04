@@ -1,10 +1,13 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, createRef } from 'react'
 import { View } from 'react-native'
+import { useDispatch } from 'react-redux'
 import { NavigationContainer } from '@react-navigation/native'
 import routing from 'routing'
 import Loading from 'components/Loading'
 import AuthNavigator from 'navigation/AuthNavigator'
 import AppWithDrawerNavigator from 'navigation/AppWithDrawerNavigator'
+import { getStateFromReturnToPath } from 'routing'
+import setReturnToPath from 'store/actions/setReturnToPath'
 
 export default function RootView ({
   loading,
@@ -12,10 +15,12 @@ export default function RootView ({
   signupInProgress,
   checkSessionAndSetSignedIn,
   loadCurrentUserSession,
+  returnToPath,
   openedPushNotification
 }) {
   useEffect(() => { checkSessionAndSetSignedIn() }, [])
-  useEffect(() => { loadCurrentUserSession() }, [ signedIn ])
+  useEffect(() => { signedIn && loadCurrentUserSession() }, [signedIn])
+  useEffect(() => { console.log('!!!! singupinprogress changing, returnToPath:', signupInProgress, returnToPath)}, [signupInProgress, returnToPath])
 
   if (loading && !signupInProgress) {
     return (
@@ -25,10 +30,9 @@ export default function RootView ({
     )
   }
 
-  // TODO: Deeplink handling using openedPushNotification
   return (
     <View style={styles.rootContainer}>
-      <NavigationContainer linking={routing}>
+      <NavigationContainer linking={routing} initialState={getStateFromReturnToPath()}>
         {signedIn && !signupInProgress
           ? <AppWithDrawerNavigator />
           : <AuthNavigator signupInProgress={signupInProgress} />}

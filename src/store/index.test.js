@@ -1,4 +1,5 @@
-import getStore, { getEmptyState } from './index'
+import store from './index'
+import getEmptyState from './getEmptyState'
 
 jest.mock('react-native-onesignal', () => ({
   addEventListener: jest.fn()
@@ -8,12 +9,6 @@ jest.mock('../util/session', () => ({
 }))
 
 describe('getStore', () => {
-  let store
-
-  beforeAll(() => {
-    store = getStore()
-  })
-
   it('works', () => {
     expect(store).toMatchSnapshot()
   })

@@ -4,7 +4,7 @@ import getEmptyState from './getEmptyState'
 
 import middleware from './middleware'
 
-export default function getStore () {
+export function getStore () {
   const emptyState = getEmptyState()
   const store = (undefined === window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__)
     ? createStore(rootReducer, emptyState, compose(applyMiddleware(...middleware)))
@@ -24,6 +24,10 @@ export default function getStore () {
 
   return store
 }
+
+const store = getStore()
+
+export default store
 
 // TODO: AsyncStorage is currently bugged with remote debugger:
 // https://github.com/facebook/react-native/issues/12830

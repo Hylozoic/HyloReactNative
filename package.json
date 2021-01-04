@@ -42,7 +42,6 @@
     "js-htmlencode": "^0.3.0",
     "lodash": "^4.17.13",
     "moment": "^2.27.0",
-    "parse": "^1.9.2",
     "path-to-regexp": "^6.2.0",
     "prop-types": "^15.6.0",
     "query-string": "^6.13.6",

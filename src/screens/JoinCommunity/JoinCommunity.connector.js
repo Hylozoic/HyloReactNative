@@ -5,11 +5,11 @@ import getMe from 'store/selectors/getMe'
 import makeGoToCommunity from 'store/actions/makeGoToCommunity'
 import getRouteParam from 'store/selectors/getRouteParam'
 import { checkInvitation, useInvitation } from './JoinCommunity.store'
+import getSignedIn from 'store/selectors/getSignedIn'
 
 export function mapStateToProps (state, props) {
-  console.log('!!!!!!!!! JoinCommunity:', props.route.params)
   const { navigation } = props
-  const signedIn = state.session?.signedIn
+  const signedIn = getSignedIn(state)
 
   return {
     signedIn,
@@ -28,7 +28,7 @@ export function mapStateToProps (state, props) {
 
 export function mapDispatchToProps (dispatch, { navigation }) {
   return {
-    goToCommunity: makeGoToCommunity(dispatch, navigation),
+    goToCommunity: makeGoToCommunity(dispatch, navigation, false),
     ...bindActionCreators({
       checkInvitation,
       useInvitation
