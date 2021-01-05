@@ -108,18 +108,7 @@ export default function TabsNavigator () {
           style={{ paddingTop: isIOS ? 0 : 5 }}
         />
       ),
-      tabBarLabel: ({ focused }) => (
-        <View style={{ textAlign: 'center', fontSize: 11, color: gunsmoke }}>
-          {/* <Text style={{
-            textAlign: 'center',
-            fontSize: 11,
-            color: focused ? caribbeanGreen : gunsmoke
-          }}
-          >
-            {route.name}
-          </Text> */}
-        </View>
-      )
+      tabBarLabel: () => null
     })
   }
   return (

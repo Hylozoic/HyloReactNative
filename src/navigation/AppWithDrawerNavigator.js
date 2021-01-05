@@ -8,7 +8,6 @@ import JoinCommunity from 'screens/JoinCommunity'
 import InviteExpired from 'screens/InviteExpired'
 
 const AppWithDrawer = createDrawerNavigator()
-
 export default function AppWithDrawerNavigator () {
   const navigatorProps = {
     drawerType: 'slide',

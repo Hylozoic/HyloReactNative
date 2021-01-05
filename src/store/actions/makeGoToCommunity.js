@@ -1,7 +1,7 @@
 import confirmNavigate from 'util/confirmNavigate'
 import { navigate } from 'navigation/RootNavigation'
 
-export default function makeGoToCommunity (dispatch, navigation, confirm = true) {
+export default function makeGoToCommunity (confirm = true) {
   return communityId => {
     const goToCommunity = () => {
       navigate('Feed', {

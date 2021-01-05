@@ -17,6 +17,12 @@ export const prefixes = [
 ]
 // Matched params are returned to the matched screen in `route.params`
 export const routesConfig = {
+  '/c/:slug/join/:accessCode?':                              'JoinCommunity',
+  // http://hylo.com/h/use-invitation?token=ebda24b2-d5d7-4d10-8558-b160e6f5d362&email=lorenjohnson+invitetest111@gmail.com&utm_swu=9555
+  '/h/use-invitation/:token?':                               'JoinCommunity',
+  '/signup':                                                 'Signup',
+  // AuthNavigator route...             
+  // 'passwordResetTokenLogin/:userId/:loginToken/:nextURL':   'Login',
   '/':                                                       'AppNavigator/Tabs/Home/Feed',
   '/m/:id':                                                  'AppNavigator/Tabs/Members/Member',
   '/:context(c|n|all)/:communityId':                         'AppNavigator/Tabs/Home/Feed',
@@ -31,13 +37,7 @@ export const routesConfig = {
   '/settings/:section?':                                     'AppNavigator/UserSettings',
   '/t/:id':                                                  'AppNavigator/Thread',
   /// TODO: I don't see a great reason that this is still a constant
-  '/t':                                                      'AppNavigator/ThreadList',
-  '/c/:slug/join/:accessCode?':                              'JoinCommunity',
-  // http://hylo.com/h/use-invitation?token=ebda24b2-d5d7-4d10-8558-b160e6f5d362&email=lorenjohnson+invitetest111@gmail.com&utm_swu=9555
-  '/h/use-invitation/:token?':                               'JoinCommunity',
-  '/signup':                                                 'Signup'
-  // AuthNavigator route...             
-  // 'passwordResetTokenLogin/:userId/:loginToken/:nextURL':   'Login'
+  '/t':                                                      'AppNavigator/ThreadList'
 }
 
 // Matches path to routes and returns a screen path
@@ -97,6 +97,7 @@ export const routing = {
         const path = parse(url).path
         store.dispatch(setReturnToPath(path))
       } else {
+        console.log('!!! here listening -- url:', url)
         return listener(url)
       }
     }
@@ -110,7 +111,7 @@ export const routing = {
 
   getStateFromPath: path => {
     const matchedStatePath = matchRouteToScreenPath(path, routesConfig)
-    const statePath = matchedStatePath || path
+    const statePath = matchedStatePath ?? ''
   
     return getStateFromPathDefault(statePath)
   },

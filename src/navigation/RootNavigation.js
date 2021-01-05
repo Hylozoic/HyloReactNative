@@ -14,15 +14,10 @@ export function navigate(name, params) {
 
 export function reset(newState) {
   if (isReadyRef.current && navigationRef.current) {
-    // navigationRef.current.dispatch(state => {
-    //   console.log('!!! state:'. state)
-    //   // return CommonActions.reset(navigationRef.current.dangerouslyGetState())
-    // })
     navigationRef.current.dispatch(state => {
-      console.log('!!!!! state', state)
       return CommonActions.reset(newState)
     })
   } else {
-    console.log('!!! navigation reset ignored', state)
+    console.log('!!! navigation reset ignored', newState)
   }
 }
