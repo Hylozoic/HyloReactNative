@@ -321,7 +321,7 @@ exports[`NetworkRow shows all communities link 1`] = `
     <Image
       source={
         Object {
-          "testUri": "../../../src/assets/All_Communities2.png",
+          "testUri": "../../../assets/All_Communities2.png",
         }
       }
     />

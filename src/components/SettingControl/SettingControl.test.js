@@ -55,24 +55,6 @@ describe('on toggleEditable', () => {
   })
 })
 
-describe('on focus', () => {
-  it('calls input.focus ', () => {
-    const instance = ReactTestRenderer.create(<SettingControl />).root.instance
-    instance.input.focus = jest.fn()
-    instance.focus()
-    expect(instance.input.focus).toHaveBeenCalled()
-  })
-})
-
-describe('on blur', () => {
-  it('calls input.blur ', () => {
-    const instance = ReactTestRenderer.create(<SettingControl />).root.instance
-    instance.input.blur = jest.fn()
-    instance.blur()
-    expect(instance.input.blur).toHaveBeenCalled()
-  })
-})
-
 describe('on makeEditable', () => {
   it('sets the state', () => {
     const instance = ReactTestRenderer.create(<SettingControl toggleEditable />).root.instance

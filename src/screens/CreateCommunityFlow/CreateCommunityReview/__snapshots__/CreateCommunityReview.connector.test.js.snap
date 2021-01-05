@@ -4,7 +4,6 @@ exports[`mapDispatchToProps maps the action generators 1`] = `
 Object {
   "clearNameAndUrlFromStore": [Function],
   "createCommunity": [Function],
-  "selectCommunity": [Function],
 }
 `;
 
@@ -44,12 +43,6 @@ Array [
   Array [
     Object {
       "type": "CreateCommunityFlow/CLEAR_NAME_AND_URL_FROM_STORE",
-    },
-  ],
-  Array [
-    Object {
-      "payload": "community-id",
-      "type": "SELECT_COMMUNITY",
     },
   ],
 ]

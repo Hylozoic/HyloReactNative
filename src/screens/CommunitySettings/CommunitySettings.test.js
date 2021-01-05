@@ -22,8 +22,7 @@ describe('CommunitySettings', () => {
       params: {}
     },
     navigation: {
-      setParams: jest.fn(),
-      getParam: jest.fn()
+      setOptions: jest.fn()
     },
     isFocused: true,
     fetchCommunitySettings: jest.fn(),

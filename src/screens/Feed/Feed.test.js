@@ -1,11 +1,14 @@
 import 'react-native'
 import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
-import TestRenderer from 'react-test-renderer'
+import { act } from 'react-test-renderer'
+import { render } from '@testing-library/react-native'
 import Feed from './Feed'
 import { Provider } from 'react-redux'
 import orm from 'store/models'
 import { createMockStore } from 'util/testing'
+import { NavigationContainer } from '@react-navigation/native'
+import { createStackNavigator } from '@react-navigation/stack'
 
 it('renders correctly if currentUserHasMemberships', () => {
   const community = {
@@ -18,17 +21,20 @@ it('renders correctly if currentUserHasMemberships', () => {
 
   const renderer = new ReactShallowRenderer()
   renderer.render(
-    <Feed
-      community={community}
-      currentUser={currentUser}
-      currentUserHasMemberships
-      navigation={{}}
-      newPost={newPost}
-      showPost={() => {}}
-      editPost={() => {}}
-      goToCommunity={() => {}}
-      topicName='amazing'
-    />
+    <NavigationContainer>
+      <Feed
+        community={community}
+        currentUser={currentUser}
+        currentUserHasMemberships
+        navigation={{}}
+        route={{}}
+        newPost={newPost}
+        showPost={() => {}}
+        editPost={() => {}}
+        goToCommunity={() => {}}
+        topicName='amazing'
+      />
+    </NavigationContainer>
   )
   const actual = renderer.getRenderOutput()
 
@@ -46,24 +52,26 @@ it('renders correctly if currentUserHasMemberships is false', () => {
 
   const renderer = new ReactShallowRenderer()
   renderer.render(
-    <Feed
-      community={community}
-      currentUser={currentUser}
-      currentUserHasMemberships={false}
-      navigation={{}}
-      newPost={newPost}
-      showPost={() => {}}
-      editPost={() => {}}
-      goToCommunity={() => {}}
-      topicName='amazing'
-    />
+    <NavigationContainer>
+      <Feed
+        community={community}
+        currentUser={currentUser}
+        currentUserHasMemberships={false}
+        navigation={{}}
+        newPost={newPost}
+        showPost={() => {}}
+        editPost={() => {}}
+        goToCommunity={() => {}}
+        topicName='amazing'
+      />
+    </NavigationContainer>
   )
   const actual = renderer.getRenderOutput()
 
   expect(actual).toMatchSnapshot()
 })
 
-it('calls fetchCommunityTopic on componentDidMount', () => {
+it('calls fetchCommunityTopic on componentDidMount', async () => {
   const state = {
     orm: orm.getEmptyState(),
     FeedList: {},
@@ -72,25 +80,40 @@ it('calls fetchCommunityTopic on componentDidMount', () => {
   }
 
   const props = {
-    navigation: { state: { key: 1 } },
+    navigation: {},
     fetchCommunityTopic: jest.fn(),
     showTopic: jest.fn(),
     showMember: jest.fn(),
     goToCommunity: jest.fn(),
     setTopicSubscribe: jest.fn(),
-    newPost: jest.fn()
+    newPost: jest.fn(),
+    topicName: 'test-topic'
   }
 
-  const renderer = TestRenderer.create(
+  const TestStack = createStackNavigator()
+
+  const component = (
     <Provider store={createMockStore(state)}>
-      <Feed {...props} />
+      <NavigationContainer>
+        <TestStack.Navigator>
+          <TestStack.Screen name='Feed'>
+            {screenProps => (
+              <Feed {...props} {...screenProps} />
+            )}
+          </TestStack.Screen>
+        </TestStack.Navigator>
+      </NavigationContainer>
     </Provider>
   )
+  const { toJSON } = render(component)
 
-  const feed = renderer.root.findByType(Feed).instance
-  feed.componentDidMount()
-  expect(props.fetchCommunityTopic).toBeCalled()
+  expect(props.fetchCommunityTopic).toHaveBeenCalledTimes(1)
+
+  await act(async () => {
+    expect(toJSON()).toMatchSnapshot()
+  })
 })
+
 
 // From FeedBanner
 //
@@ -196,3 +219,12 @@ it('calls fetchCommunityTopic on componentDidMount', () => {
 //     expect(actual).toMatchSnapshot()
 //   })
 // })
+
+
+
+
+
+
+
+
+

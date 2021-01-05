@@ -2,7 +2,7 @@ import React from 'react'
 import { Provider } from 'react-redux'
 import { createMockStore } from 'util/testing'
 import { render } from '@testing-library/react-native'
-import RootView from 'components/RootView'
+import RootView from 'navigation/RootView'
 import { CHECK_SESSION_AND_SET_SIGNED_IN } from 'store/constants'
 
 describe('RootView', () => {

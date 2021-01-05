@@ -2,6 +2,11 @@
 
 exports[`mapsStateToProps 1`] = `
 Object {
+  "currentCommunity": null,
+  "currentCommunityId": null,
+  "currentNetwork": Object {
+    "id": undefined,
+  },
   "currentUser": undefined,
   "id": "1",
   "isProject": false,
@@ -89,37 +94,7 @@ Array [
 ]
 `;
 
-exports[`mergeProps maps 1`] = `
-Object {
-  "createComment": [Function],
-  "currentUser": Object {
-    "id": "currentuser",
-  },
-  "dispatch": [MockFunction],
-  "editPost": [Function],
-  "fetchPost": [Function],
-  "goToCommunity": [Function],
-  "goToMembers": [Function],
-  "id": "testpost",
-  "isFocused": true,
-  "isProject": false,
-  "joinProject": [Function],
-  "leaveProject": [Function],
-  "navigation": Object {
-    "navigate": [MockFunction],
-  },
-  "post": Object {
-    "id": "testpost",
-  },
-  "route": Object {
-    "params": Object {
-      "id": "1",
-    },
-  },
-  "showMember": [Function],
-  "showTopic": [Function],
-}
-`;
+exports[`mergeProps maps 1`] = `undefined`;
 
 exports[`mergeProps showMember 1`] = `
 Array [

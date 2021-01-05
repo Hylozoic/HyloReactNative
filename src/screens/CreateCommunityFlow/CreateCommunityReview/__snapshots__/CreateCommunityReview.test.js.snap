@@ -2,10 +2,7 @@
 
 exports[`matches last snapshot 1`] = `
 <SafeAreaViewMock>
-  <KeyboardFriendlyView
-    behavior="padding"
-    keyboardVerticalOffset={64}
-  >
+  <KeyboardFriendlyView>
     <View>
       <Text>
         Everything look good?
@@ -65,10 +62,7 @@ exports[`matches last snapshot 1`] = `
 
 exports[`matches last snapshot when visible is true 1`] = `
 <SafeAreaView>
-  <KeyboardFriendlyView
-    behavior="padding"
-    keyboardVerticalOffset={64}
-  >
+  <KeyboardFriendlyView>
     <View>
       <Text>
         Everything look good?

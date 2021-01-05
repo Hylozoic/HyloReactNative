@@ -4,7 +4,7 @@ exports[`AllCommunitiesSettingsRow matches the last snapshot 1`] = `
 <SettingsRow
   imageSrc={
     Object {
-      "testUri": "../../../src/assets/hylo-merkaba.png",
+      "testUri": "../../../assets/hylo-merkaba.png",
     }
   }
   name="All Communities"

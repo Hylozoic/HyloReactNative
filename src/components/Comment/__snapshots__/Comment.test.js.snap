@@ -54,15 +54,23 @@ exports[`commentMenu returns removeComment 1`] = `
 
 exports[`renders correctly 1`] = `
 <View>
-  <Avatar
-    avatarUrl="foo.png"
-  />
+  <ForwardRef
+    onPress={[Function]}
+  >
+    <Avatar
+      avatarUrl="foo.png"
+    />
+  </ForwardRef>
   <View>
     <View>
       <View>
-        <Text>
-          Ishamel
-        </Text>
+        <ForwardRef
+          onPress={[Function]}
+        >
+          <Text>
+            Ishamel
+          </Text>
+        </ForwardRef>
         <Text>
           
         </Text>
@@ -109,15 +117,23 @@ exports[`renders correctly 1`] = `
 
 exports[`shows the post title when displayPostTitle is true 1`] = `
 <View>
-  <Avatar
-    avatarUrl="foo.png"
-  />
+  <ForwardRef
+    onPress={[Function]}
+  >
+    <Avatar
+      avatarUrl="foo.png"
+    />
+  </ForwardRef>
   <View>
     <View>
       <View>
-        <Text>
-          Ishamel
-        </Text>
+        <ForwardRef
+          onPress={[Function]}
+        >
+          <Text>
+            Ishamel
+          </Text>
+        </ForwardRef>
         <Text>
           
         </Text>

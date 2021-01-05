@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`matches last snapshot 1`] = `
-<View>
+<SafeAreaViewMock>
   <View>
     <Text>
       We're working on expanding #topics to more places.
@@ -16,18 +16,18 @@ exports[`matches last snapshot 1`] = `
     resizeMode="contain"
     source={
       Object {
-        "testUri": "../../../src/assets/Axolotyl_Digging.png",
+        "testUri": "../../../assets/Axolotyl_Digging.png",
       }
     }
   />
   <View>
-    <ForwardRef
-      onPress={[Function]}
+    <LinkButton
+      to="/"
     >
       <Text>
         Go Back
       </Text>
-    </ForwardRef>
+    </LinkButton>
   </View>
-</View>
+</SafeAreaViewMock>
 `;

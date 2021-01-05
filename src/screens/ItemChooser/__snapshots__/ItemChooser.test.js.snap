@@ -179,7 +179,6 @@ exports[`ItemChooser full renders as expected 1`] = `
         placeholder="Begin type to searching"
         rejectResponderTermination={true}
         underlineColorAndroid="transparent"
-        value=""
       />
     </View>
   </View>

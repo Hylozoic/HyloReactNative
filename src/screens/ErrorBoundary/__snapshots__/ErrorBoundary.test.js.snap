@@ -22,7 +22,7 @@ exports[`displays an error when a child component throws an error 1`] = `
   <Image
     source={
       Object {
-        "testUri": "../../../src/assets/Axel_Fretting.png",
+        "testUri": "../../../assets/Axel_Fretting.png",
       }
     }
   />

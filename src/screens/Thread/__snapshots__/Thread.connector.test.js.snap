@@ -151,20 +151,7 @@ Array [
 ]
 `;
 
-exports[`mapDispatchToProps creates actions 3`] = `
-Array [
-  Array [
-    "TopicSupportComingSoon",
-  ],
-  Array [
-    "Feed",
-    Object {
-      "communityId": 123,
-      "topicName": "topicName",
-    },
-  ],
-]
-`;
+exports[`mapDispatchToProps creates actions 3`] = `Array []`;
 
 exports[`mapStateToProps returns the right keys 1`] = `
 Object {
@@ -175,6 +162,7 @@ Object {
   "isConnected": undefined,
   "messages": Array [],
   "networkId": undefined,
+  "participants": undefined,
   "pending": undefined,
   "title": undefined,
 }

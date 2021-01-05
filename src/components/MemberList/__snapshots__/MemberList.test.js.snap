@@ -6,28 +6,17 @@ exports[`MemberList renders with default props with default non-server search 1`
   ListHeaderComponent={
     <View>
       <View>
-        <View>
-          <Icon
-            name="Search"
-            size={30}
-          />
-          <Component
-            allowFontScaling={true}
-            onChangeText={[Function]}
-            placeholder="Search Members"
-            rejectResponderTermination={true}
-            underlineColorAndroid="transparent"
-          />
-        </View>
+        <SearchBar
+          onChangeText={[Function]}
+          placeholder="Search Members"
+        />
         <PopupMenuButton
           actions={Array []}
         >
-          <View>
-            <Text />
-            <Icon
-              name="ArrowDown"
-            />
-          </View>
+          <Text />
+          <Icon
+            name="ArrowDown"
+          />
         </PopupMenuButton>
       </View>
     </View>
@@ -66,28 +55,17 @@ exports[`MemberList runs call for new results if server search 1`] = `
   ListHeaderComponent={
     <View>
       <View>
-        <View>
-          <Icon
-            name="Search"
-            size={30}
-          />
-          <Component
-            allowFontScaling={true}
-            onChangeText={[Function]}
-            placeholder="Search Members"
-            rejectResponderTermination={true}
-            underlineColorAndroid="transparent"
-          />
-        </View>
+        <SearchBar
+          onChangeText={[Function]}
+          placeholder="Search Members"
+        />
         <PopupMenuButton
           actions={Array []}
         >
-          <View>
-            <Text />
-            <Icon
-              name="ArrowDown"
-            />
-          </View>
+          <Text />
+          <Icon
+            name="ArrowDown"
+          />
         </PopupMenuButton>
       </View>
     </View>
@@ -126,28 +104,17 @@ exports[`MemberList server search fetches new results when search provided 1`] =
   ListHeaderComponent={
     <View>
       <View>
-        <View>
-          <Icon
-            name="Search"
-            size={30}
-          />
-          <Component
-            allowFontScaling={true}
-            onChangeText={[Function]}
-            placeholder="Search Members"
-            rejectResponderTermination={true}
-            underlineColorAndroid="transparent"
-          />
-        </View>
+        <SearchBar
+          onChangeText={[Function]}
+          placeholder="Search Members"
+        />
         <PopupMenuButton
           actions={Array []}
         >
-          <View>
-            <Text />
-            <Icon
-              name="ArrowDown"
-            />
-          </View>
+          <Text />
+          <Icon
+            name="ArrowDown"
+          />
         </PopupMenuButton>
       </View>
     </View>
@@ -185,10 +152,13 @@ exports[`MemberList server search fetches new results when search provided 1`] =
           <View>
             <Icon
               name="Search"
-              size={30}
             />
             <TextInput
               allowFontScaling={true}
+              autoCapitalize="none"
+              autoCorrect={false}
+              autoFocus={false}
+              editable={true}
               onChangeText={[Function]}
               placeholder="Search Members"
               rejectResponderTermination={true}
@@ -214,12 +184,10 @@ exports[`MemberList server search fetches new results when search provided 1`] =
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
           >
-            <View>
-              <Text />
-              <Icon
-                name="ArrowDown"
-              />
-            </View>
+            <Text />
+            <Icon
+              name="ArrowDown"
+            />
           </View>
         </View>
       </View>

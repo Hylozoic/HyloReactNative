@@ -14,7 +14,7 @@ exports[`InviteExpired matches the last snapshot 1`] = `
     resizeMode="stretch"
     source={
       Object {
-        "testUri": "../../../src/assets/Axel_Fretting.png",
+        "testUri": "../../../assets/Axel_Fretting.png",
       }
     }
   />

@@ -1,5 +1,10 @@
 import { mapStateToProps, mapDispatchToProps, mergeProps } from './Feed.connector'
 import orm from 'store/models'
+import { showToast } from 'util/toast'
+
+jest.mock('util/toast', () => ({
+  showToast: jest.fn()
+}))
 
 let session, state
 
@@ -56,8 +61,8 @@ describe('mapStateToProps', () => {
       community: community.ref,
       currentUser,
       network: null,
-      followersTotal: 10,
-      postsTotal: 20,
+      topicFollowersTotal: 10,
+      topicPostsTotal: 20,
       topic: topic.ref,
       topicName: 'logistics',
       topicSubscribed: false,
@@ -91,11 +96,11 @@ describe('mergeProps', () => {
   let navigation, dispatch, dispatchProps, stateProps, ownProps
 
   beforeEach(() => {
-    navigation = { navigate: jest.fn() }
+    navigation = { navigate: jest.fn(), push: jest.fn() }
     dispatch = jest.fn(x => x)
     dispatchProps = mapDispatchToProps(dispatch, { navigation })
     stateProps = { community: { id: '12', slug: 'life' }, otherProp1: 'foo1' }
-    ownProps = { otherProp2: 'foo2' }
+    ownProps = { otherProp2: 'foo2', navigation }
   })
 
   it('binds communityId to functions from dispatchProps', () => {
@@ -104,11 +109,11 @@ describe('mergeProps', () => {
 
     props.newPost()
     expect(navigation.navigate)
-      .toBeCalledWith('PostEditor', { communityId: '12', topicName: undefined })
+      .toBeCalledWith('Edit Post', { communityId: '12', topicName: undefined })
 
     props.showTopic('disarmament')
-    expect(navigation.navigate)
-      .toBeCalledWith('Feed', { communityId: '12', topicName: 'disarmament' })
+    expect(navigation.push)
+      .toBeCalledWith('Topic Feed', { communityId: '12', topicName: 'disarmament' })
   })
 
   it('binds networkId to showTopic from dispatchProps', () => {
@@ -123,7 +128,7 @@ describe('mergeProps', () => {
     )
 
     props.showTopic('anything')
-    expect(navigation.navigate).toBeCalledWith('Topics')
+    expect(showToast).toBeCalled()
   })
 
   it('sets up fetchCommunityTopic', () => {

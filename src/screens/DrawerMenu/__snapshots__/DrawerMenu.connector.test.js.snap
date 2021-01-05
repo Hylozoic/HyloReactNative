@@ -22,13 +22,8 @@ Object {
     "avatarUrl": "someUrl",
   },
   "currentCommunityId": "7",
-  "currentContext": SessionBoundModel {
-    "_fields": Object {
-      "avatarUrl": "someUrl",
-      "id": "7",
-      "name": "someName",
-    },
-    "avatarUrl": "someUrl",
+  "currentContext": Object {
+    "id": undefined,
   },
   "currentNetworkId": undefined,
   "currentUser": SessionBoundModel {

@@ -28,31 +28,16 @@ exports[`SubscribeStar matches last snapshot 1`] = `
 
 exports[`TopicList matches last snapshot 1`] = `
 <View>
-  <TopicRow
-    first={true}
-    goToTopic={[Function]}
-    setTopicSubscribe={[Function]}
-    topic={1}
-  />
-  <TopicRow
-    first={false}
-    goToTopic={[Function]}
-    setTopicSubscribe={[Function]}
-    topic={2}
-  />
-  <TopicRow
-    first={false}
-    goToTopic={[Function]}
-    setTopicSubscribe={[Function]}
-    topic={3}
-  />
+  <Text>
+    No topics were found for this community
+  </Text>
 </View>
 `;
 
 exports[`TopicList matches last snapshot with empty list 1`] = `
 <View>
   <Text>
-    No topics match your search
+    No topics were found for this community
   </Text>
 </View>
 `;

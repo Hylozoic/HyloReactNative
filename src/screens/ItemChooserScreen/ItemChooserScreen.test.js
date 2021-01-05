@@ -30,8 +30,7 @@ const testProps = {
     }
   },
   navigation: {
-    setParams: jest.fn(),
-    getParam: jest.fn()
+    setOptions: jest.fn()
   }
 }
 

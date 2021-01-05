@@ -12,35 +12,60 @@ exports[`renders SubmitButton when submitting 1`] = `
 `;
 
 exports[`renders as expected 1`] = `
-<View>
+<View
+  onBlur={[Function]}
+  onFocus={[Function]}
+>
   <View>
     <Component
       allowFontScaling={true}
-      blurOnSubmit={false}
       editable={true}
       multiline={true}
-      onBlur={[Function]}
       onChangeText={[MockFunction]}
-      onContentSizeChange={[Function]}
-      onFocus={[Function]}
       onSelectionChange={[Function]}
       placeholder="Place Holder"
       placeholderTextColor="#c0c6cd"
       rejectResponderTermination={true}
-      selection={
-        Object {
-          "end": 0,
-          "start": 0,
-        }
-      }
       underlineColorAndroid="transparent"
       value="some text"
     />
-    <SubmitButton
-      active={false}
-      handleSubmit={[Function]}
-      submitting={false}
-    />
+    <View>
+      <ForwardRef
+        hitSlop={
+          Object {
+            "bottom": 7,
+            "left": 7,
+            "right": 7,
+            "top": 7,
+          }
+        }
+        onPress={[Function]}
+      >
+        <Text>
+          @
+        </Text>
+      </ForwardRef>
+      <ForwardRef
+        hitSlop={
+          Object {
+            "bottom": 7,
+            "left": 7,
+            "right": 7,
+            "top": 7,
+          }
+        }
+        onPress={[Function]}
+      >
+        <Text>
+          #
+        </Text>
+      </ForwardRef>
+    </View>
   </View>
+  <SubmitButton
+    active={true}
+    onSubmit={[Function]}
+    submitting={false}
+  />
 </View>
 `;

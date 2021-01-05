@@ -130,23 +130,6 @@ exports[`ThreadList handles pending correctly with threads 1`] = `
       </View>
     </View>
   </RCTScrollView>
-  <View>
-    <View
-      accessible={true}
-      focusable={false}
-      onClick={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-    >
-      <Text>
-        RECONNECTING...
-      </Text>
-    </View>
-  </View>
 </View>
 `;
 
@@ -219,22 +202,5 @@ exports[`ThreadList renders correctly 1`] = `
       </View>
     </View>
   </RCTScrollView>
-  <View>
-    <View
-      accessible={true}
-      focusable={false}
-      onClick={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-    >
-      <Text>
-        RECONNECTING...
-      </Text>
-    </View>
-  </View>
 </View>
 `;

@@ -2,10 +2,7 @@
 
 exports[`matches last snapshot 1`] = `
 <SafeAreaViewMock>
-  <KeyboardFriendlyView
-    behavior="padding"
-    keyboardVerticalOffset={64}
-  >
+  <KeyboardFriendlyView>
     <View>
       <Text>
         Choose an address for your community
@@ -43,10 +40,7 @@ exports[`matches last snapshot 1`] = `
 
 exports[`matches last snapshot when there is an error 1`] = `
 <SafeAreaView>
-  <KeyboardFriendlyView
-    behavior="padding"
-    keyboardVerticalOffset={64}
-  >
+  <KeyboardFriendlyView>
     <View>
       <Text>
         Choose an address for your community
@@ -110,10 +104,7 @@ exports[`matches last snapshot when there is an error 1`] = `
 
 exports[`validates the url 1`] = `
 <SafeAreaView>
-  <KeyboardFriendlyView
-    behavior="padding"
-    keyboardVerticalOffset={64}
-  >
+  <KeyboardFriendlyView>
     <View>
       <Text>
         Choose an address for your community
@@ -177,10 +168,7 @@ exports[`validates the url 1`] = `
 
 exports[`validates the url 2`] = `
 <SafeAreaView>
-  <KeyboardFriendlyView
-    behavior="padding"
-    keyboardVerticalOffset={64}
-  >
+  <KeyboardFriendlyView>
     <View>
       <Text>
         Choose an address for your community

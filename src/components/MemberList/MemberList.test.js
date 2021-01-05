@@ -4,7 +4,7 @@ import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import ReactTestRenderer from 'react-test-renderer'
 import { simulate } from 'util/testing'
-import MemberList from './MemberList'
+import { MemberList } from './MemberList'
 
 const lodash = jest.requireActual('lodash/fp')
 lodash.debounce = (_, fn) => fn
@@ -13,6 +13,7 @@ describe('MemberList', () => {
   it('renders with default props with default non-server search', () => {
     const renderer = new ReactShallowRenderer()
     const testProps = {
+      navigation: {},
       members: [
         { id: '1', name: 'Loren' },
         { id: '2', name: 'Robbie' }

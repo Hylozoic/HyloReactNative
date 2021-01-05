@@ -1,15 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`MenuButton renders correctly 1`] = `
-<ForwardRef
-  onPress={[MockFunction]}
->
-  <Image
-    source={
-      Object {
-        "testUri": "../../../src/assets/All_Communities.png",
-      }
-    }
+<View>
+  <HeaderBackButton
+    backImage={[Function]}
+    labelVisible={false}
+    onPress={[MockFunction]}
   />
-</ForwardRef>
+</View>
 `;

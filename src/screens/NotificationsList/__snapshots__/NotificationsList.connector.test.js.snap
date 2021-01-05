@@ -6,7 +6,7 @@ Object {
   "fetchNotifications": [Function],
   "goToCreateCommunity": [Function],
   "markActivityRead": [Function],
-  "setRightButton": [Function],
+  "markAllActivitiesRead": [Function],
   "updateNewNotificationCount": [Function],
 }
 `;

@@ -71,22 +71,5 @@ Array [
       "type": "LOGIN_WITH_FACEBOOK",
     },
   ],
-  Array [
-    Object {
-      "graphql": Object {
-        "query": "mutation ($playerId: String, $platform: String, $version: String) {
-        registerDevice(playerId: $playerId, platform: $platform, version: $version) {
-          success
-        }
-      }",
-        "variables": Object {
-          "platform": "ios_dev",
-          "playerId": 5,
-          "version": "2",
-        },
-      },
-      "type": "REGISTER_DEVICE",
-    },
-  ],
 ]
 `;

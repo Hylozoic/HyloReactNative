@@ -5,10 +5,14 @@ import MenuButton from './MenuButton'
 describe('MenuButton', () => {
   it('renders correctly', () => {
     const renderer = new ReactShallowRenderer()
-    const openDrawer = jest.fn()
-    renderer.render(<MenuButton openDrawer={openDrawer} />)
+    const props = {
+      navigation: {
+        openDrawer: jest.fn(),
+        goBack: jest.fn()
+      }
+    }
+    renderer.render(<MenuButton {...props} />)
     const actual = renderer.getRenderOutput()
-    expect(actual.props.onPress).toBe(openDrawer)
     expect(actual).toMatchSnapshot()
   })
 })

@@ -2,6 +2,8 @@
 
 exports[`mapStateToProps returns the right keys 1`] = `
 Object {
-  "currentContext": null,
+  "currentContext": Object {
+    "id": undefined,
+  },
 }
 `;

@@ -267,6 +267,8 @@ Object {
   "session": Object {
     "communityId": null,
     "networkId": null,
+    "returnToPath": null,
+    "signupInProgress": null,
   },
 }
 `;

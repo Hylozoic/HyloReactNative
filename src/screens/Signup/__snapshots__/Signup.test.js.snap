@@ -19,14 +19,14 @@ exports[`matches last snapshot 1`] = `
     }
     source={
       Object {
-        "testUri": "../../../src/assets/signin_background.png",
+        "testUri": "../../../assets/signin_background.png",
       }
     }
   >
     <Image
       source={
         Object {
-          "testUri": "../../../src/assets/merkaba_white.png",
+          "testUri": "../../../assets/merkaba_white.png",
         }
       }
     />

@@ -12,11 +12,13 @@ Object {
 exports[`mapStateToProps returns the right keys 1`] = `
 Object {
   "community": null,
-  "network": null,
-  "networkId": undefined,
+  "communityHasTopics": false,
+  "filteredTopics": Array [],
+  "network": Object {
+    "id": undefined,
+  },
   "pending": true,
-  "term": undefined,
-  "topics": Array [],
+  "searchTerm": undefined,
 }
 `;
 
@@ -26,12 +28,10 @@ Object {
     "id": 132,
   },
   "fetchCommunityTopics": [Function],
-  "goToComingSoon": [Function],
   "goToTopic": [Function],
   "navigation": Object {
     "navigate": [MockFunction],
   },
   "setTopicSubscribe": [Function],
-  "shouldRedirect": false,
 }
 `;

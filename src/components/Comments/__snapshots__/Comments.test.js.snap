@@ -1,48 +1,43 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Comments renders correctly 1`] = `
-<View>
-  <ScrollView
-    onContentSizeChange={[Function]}
-  >
-    <Text>
-      Some React Code
-    </Text>
-    <ShowMore
-      commentsLength={3}
-      fetchComments={[Function]}
-      hasMore={true}
-      total={17}
-    />
-    <View>
-      <Loading />
-    </View>
-    <Memo(Connect(Comment))
-      comment={
-        Object {
-          "id": 1,
-        }
-      }
-    />
-    <Memo(Connect(Comment))
-      comment={
-        Object {
-          "id": 2,
-        }
-      }
-    />
-    <Memo(Connect(Comment))
-      comment={
-        Object {
-          "id": 3,
-        }
-      }
-    />
-  </ScrollView>
+<ScrollView
+  keyboardDismissMode="interactive"
+>
   <Text>
-    Some More Code
+    Some React Code
   </Text>
-</View>
+  <ShowMore
+    commentsLength={3}
+    fetchComments={[Function]}
+    hasMore={true}
+    total={17}
+  />
+  <View>
+    <Loading />
+  </View>
+  <Memo(Connect(Comment))
+    comment={
+      Object {
+        "id": 1,
+      }
+    }
+  />
+  <Memo(Connect(Comment))
+    comment={
+      Object {
+        "id": 2,
+      }
+    }
+  />
+  <Memo(Connect(Comment))
+    comment={
+      Object {
+        "id": 3,
+      }
+    }
+  />
+</ScrollView>
 `;
 
 exports[`ShowMore renders correctly 1`] = `

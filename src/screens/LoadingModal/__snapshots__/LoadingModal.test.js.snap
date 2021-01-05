@@ -7,7 +7,7 @@ exports[`matches last snapshot when visible is true 1`] = `
   <View>
     <ActivityIndicator
       animating={true}
-      color="#999999"
+      color="#818A88"
       hidesWhenStopped={true}
       size="small"
     />

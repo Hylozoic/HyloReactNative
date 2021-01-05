@@ -2,10 +2,7 @@
 
 exports[`displays an error message without a community name with checkAndSubmit 1`] = `
 <SafeAreaView>
-  <KeyboardFriendlyView
-    behavior="padding"
-    keyboardVerticalOffset={64}
-  >
+  <KeyboardFriendlyView>
     <View>
       <Text>
         Let's get started!
@@ -70,10 +67,7 @@ exports[`displays an error message without a community name with checkAndSubmit 
 
 exports[`matches last snapshot 1`] = `
 <SafeAreaViewMock>
-  <KeyboardFriendlyView
-    behavior="padding"
-    keyboardVerticalOffset={64}
-  >
+  <KeyboardFriendlyView>
     <View>
       <Text>
         Let's get started!

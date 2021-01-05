@@ -1,38 +1,40 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`PostEditor renders a new editor correctly 1`] = `
-<_default>
+<KeyboardFriendlyView>
   <ScrollView
     keyboardDismissMode="on-drag"
     keyboardShouldPersistTaps="handled"
     onContentSizeChange={[Function]}
   >
     <View>
-      <Text>
-        What are you posting today?
-      </Text>
-      <View>
-        <TypeButton
-          onPress={[Function]}
-          selected={true}
-          type="discussion"
-        />
-        <TypeButton
-          onPress={[Function]}
-          selected={false}
-          type="request"
-        />
-        <TypeButton
-          onPress={[Function]}
-          selected={false}
-          type="offer"
-        />
-        <TypeButton
-          onPress={[Function]}
-          selected={false}
-          type="resource"
-        />
-      </View>
+      <React.Fragment>
+        <Text>
+          What are you posting today?
+        </Text>
+        <View>
+          <TypeButton
+            onPress={[Function]}
+            selected={true}
+            type="discussion"
+          />
+          <TypeButton
+            onPress={[Function]}
+            selected={false}
+            type="request"
+          />
+          <TypeButton
+            onPress={[Function]}
+            selected={false}
+            type="offer"
+          />
+          <TypeButton
+            onPress={[Function]}
+            selected={false}
+            type="resource"
+          />
+        </View>
+      </React.Fragment>
       <Text>
         Title
       </Text>
@@ -67,6 +69,7 @@ exports[`PostEditor renders a new editor correctly 1`] = `
         onFocusToggle={[Function]}
         onInsertTopic={[Function]}
         placeholder="What else should we know?"
+        submitting={false}
         value=""
       />
       <ForwardRef
@@ -121,7 +124,7 @@ exports[`PostEditor renders a new editor correctly 1`] = `
     showImagePicker={[Function]}
     toggleAnnoucement={[Function]}
   />
-</_default>
+</KeyboardFriendlyView>
 `;
 
 exports[`PostEditor renders correctly while saving 1`] = `
@@ -1262,38 +1265,40 @@ exports[`PostEditor renders correctly while saving 2`] = `
 `;
 
 exports[`PostEditor renders with a post 1`] = `
-<_default>
+<KeyboardFriendlyView>
   <ScrollView
     keyboardDismissMode="on-drag"
     keyboardShouldPersistTaps="handled"
     onContentSizeChange={[Function]}
   >
     <View>
-      <Text>
-        What are you posting today?
-      </Text>
-      <View>
-        <TypeButton
-          onPress={[Function]}
-          selected={true}
-          type="discussion"
-        />
-        <TypeButton
-          onPress={[Function]}
-          selected={false}
-          type="request"
-        />
-        <TypeButton
-          onPress={[Function]}
-          selected={false}
-          type="offer"
-        />
-        <TypeButton
-          onPress={[Function]}
-          selected={false}
-          type="resource"
-        />
-      </View>
+      <React.Fragment>
+        <Text>
+          What are you posting today?
+        </Text>
+        <View>
+          <TypeButton
+            onPress={[Function]}
+            selected={true}
+            type="discussion"
+          />
+          <TypeButton
+            onPress={[Function]}
+            selected={false}
+            type="request"
+          />
+          <TypeButton
+            onPress={[Function]}
+            selected={false}
+            type="offer"
+          />
+          <TypeButton
+            onPress={[Function]}
+            selected={false}
+            type="resource"
+          />
+        </View>
+      </React.Fragment>
       <Text>
         Title
       </Text>
@@ -1328,6 +1333,7 @@ exports[`PostEditor renders with a post 1`] = `
         onFocusToggle={[Function]}
         onInsertTopic={[Function]}
         placeholder="What else should we know?"
+        submitting={false}
         value=""
       />
       <ForwardRef
@@ -1413,7 +1419,7 @@ exports[`PostEditor renders with a post 1`] = `
     showImagePicker={[Function]}
     toggleAnnoucement={[Function]}
   />
-</_default>
+</KeyboardFriendlyView>
 `;
 
 exports[`TypeButton renders correctly 1`] = `

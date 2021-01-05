@@ -5,8 +5,10 @@ Object {
   "fetchMemberComments": [Function],
   "fetchMemberPosts": [Function],
   "fetchMemberUpvotes": [Function],
+  "goToCommunity": [Function],
   "setChoice": [Function],
   "showPost": [Function],
+  "showTopic": [Function],
 }
 `;
 

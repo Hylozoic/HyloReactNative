@@ -11,6 +11,7 @@ Object {
 
 exports[`mapStateToProps returns the right keys and gets the pending values 1`] = `
 Object {
+  "initialParticipants": Array [],
   "pending": false,
   "recentContacts": Array [],
 }

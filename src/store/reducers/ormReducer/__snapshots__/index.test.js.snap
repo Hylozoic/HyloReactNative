@@ -6,6 +6,11 @@ Object {
   "id": 123,
   "location": "Spain",
   "name": "Maurice",
+  "settings": Object {
+    "setting1": 1,
+    "setting2": 2,
+  },
+  "tagline": "lalala",
 }
 `;
 

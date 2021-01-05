@@ -2,10 +2,7 @@
 
 exports[`matches last snapshot 1`] = `
 <SafeAreaViewMock>
-  <KeyboardFriendlyView
-    behavior="padding"
-    keyboardVerticalOffset={64}
-  >
+  <KeyboardFriendlyView>
     <View
       styles={Object {}}
     >

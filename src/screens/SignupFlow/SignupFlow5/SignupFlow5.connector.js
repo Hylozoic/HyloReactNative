@@ -42,7 +42,6 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
   const finishSignup = () => {
     updateLocalUserSettings(defaultUserSettings)
     updateUserSettings({ settings: { signupInProgress: false } })
-    navigation.navigate('Feed')
   }
   const updateSetting = (key, value) => updateUserSettings({ [key]: value })
   const updateLocalSetting = (key, value) => updateLocalUserSettings({ [key]: value })

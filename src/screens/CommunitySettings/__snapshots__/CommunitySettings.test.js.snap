@@ -57,7 +57,7 @@ exports[`CommunitySettings matches the last snapshot 1`] = `
     }
   }
 >
-  <_default>
+  <KeyboardFriendlyView>
     <Component
       allowFontScaling={true}
       onChangeText={[Function]}
@@ -97,6 +97,6 @@ exports[`CommunitySettings matches the last snapshot 1`] = `
       rejectResponderTermination={true}
       underlineColorAndroid="transparent"
     />
-  </_default>
+  </KeyboardFriendlyView>
 </ScrollView>
 `;

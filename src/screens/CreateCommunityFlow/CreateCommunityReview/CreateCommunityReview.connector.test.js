@@ -31,7 +31,6 @@ describe('mapDispatchToProps', () => {
     expect(dispatchProps).toMatchSnapshot()
     dispatchProps.createCommunity(communityName, communityUrl)
     dispatchProps.clearNameAndUrlFromStore()
-    dispatchProps.selectCommunity('community-id')
     expect(dispatch).toHaveBeenCalled()
     expect(dispatch.mock.calls).toMatchSnapshot()
   })
@@ -65,6 +64,5 @@ describe('mergeProps', () => {
 
     mergedProps.goToCommunity(community)
     expect(ownProps.navigation.navigate).toHaveBeenCalled()
-    expect(dispatchProps.selectCommunity).toHaveBeenCalledWith(community.id)
   })
 })

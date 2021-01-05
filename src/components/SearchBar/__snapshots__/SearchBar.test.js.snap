@@ -13,7 +13,6 @@ exports[`ItemChooserScreen renders as expected (without value) 1`] = `
     editable={true}
     rejectResponderTermination={true}
     underlineColorAndroid="transparent"
-    value=""
   />
 </View>
 `;
@@ -31,7 +30,6 @@ exports[`ItemChooserScreen renders as expected when loading 1`] = `
     editable={true}
     rejectResponderTermination={true}
     underlineColorAndroid="transparent"
-    value=""
   />
   <Loading />
 </View>
@@ -69,7 +67,6 @@ exports[`ItemChooserScreen renders with placeholder 1`] = `
     placeholder="Search anything"
     rejectResponderTermination={true}
     underlineColorAndroid="transparent"
-    value=""
   />
 </View>
 `;
