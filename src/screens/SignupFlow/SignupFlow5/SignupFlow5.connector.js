@@ -42,11 +42,7 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
   const finishSignup = () => {
     updateLocalUserSettings(defaultUserSettings)
     updateUserSettings({ settings: { signupInProgress: false } })
-    if (deepLinkAction) {
-      redirectAfterLogin({ navigation, action: deepLinkAction })
-    } else {
-      resetToMainRoute(navigation)
-    }
+    navigation.navigate('Feed')
   }
   const updateSetting = (key, value) => updateUserSettings({ [key]: value })
   const updateLocalSetting = (key, value) => updateLocalUserSettings({ [key]: value })

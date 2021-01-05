@@ -60,7 +60,7 @@ export function mapDispatchToProps (dispatch, { navigation }) {
       fetchMemberComments,
       fetchMemberUpvotes
     }, dispatch),
-    goToCommunity: makeGoToCommunity(dispatch, navigation),
+    goToCommunity: makeGoToCommunity(),
     showPost: id => navigation.navigate('Post Details', { id }),
     showTopic: topicName => navigation.navigate('Topic Feed', { topicName })
   }

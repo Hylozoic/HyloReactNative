@@ -19,9 +19,9 @@ export const prefixes = [
 export const routesConfig = {
   '/':                                                       'AppNavigator/Tabs/Home/Feed',
   '/m/:id':                                                  'AppNavigator/Tabs/Members/Member',
-  '/:context(c|n|all)/:contextId?':                          'AppNavigator/Tabs/Home',
+  '/:context(c|n|all)/:communityId':                         'AppNavigator/Tabs/Home/Feed',
   '/:context(c|n)/:contextId/:topicName':                    'AppNavigator/TopicFeed',
-  '/m':                                                      'AppNavigator/Tabs/Members',
+  '/m':                                                      'AppNavigator/Tabs/Members/Members',
   '/:context(c|n)/:contextId/m/:id':                         'AppNavigator/Member',
   '/:context(all)/p/:id':                                    'AppNavigator/PostDetails',
   '/:context(c|n)/:contextId/p/:id':                         'AppNavigator/PostDetails',

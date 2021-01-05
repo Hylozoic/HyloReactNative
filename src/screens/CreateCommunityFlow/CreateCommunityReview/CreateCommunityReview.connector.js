@@ -23,7 +23,6 @@ export function mapDispatchToProps (dispatch, props) {
   return {
     createCommunity: (name, slug) => dispatch(createCommunity(name, slug)),
     clearNameAndUrlFromStore: () => dispatch(clearNameAndUrlFromStore()),
-    selectCommunity: (id) => dispatch(selectCommunity(id))
   }
 }
 
@@ -41,9 +40,7 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     },
     goToCommunity: community => {
       navigation.closeDrawer()
-      const { id } = community
-      dispatchProps.selectCommunity(id)
-      navigation.navigate('Home', { communityId: id })
+      navigation.navigate('Feed', { communityId: community?.id })
     }
   }
 }

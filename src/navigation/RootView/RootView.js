@@ -1,4 +1,4 @@
-import React, { useEffect, createRef } from 'react'
+import React, { useEffect, useState } from 'react'
 import { View } from 'react-native'
 import { useDispatch } from 'react-redux'
 import { NavigationContainer } from '@react-navigation/native'
@@ -8,6 +8,7 @@ import AuthNavigator from 'navigation/AuthNavigator'
 import AppWithDrawerNavigator from 'navigation/AppWithDrawerNavigator'
 import { getStateFromReturnToPath } from 'routing'
 import setReturnToPath from 'store/actions/setReturnToPath'
+import { reset, navigationRef, isReadyRef } from 'navigation/RootNavigation'
 
 export default function RootView ({
   loading,
@@ -18,9 +19,18 @@ export default function RootView ({
   returnToPath,
   openedPushNotification
 }) {
+  const dispatch = useDispatch()
+  const [initialState, setInitialState] = useState()
+
   useEffect(() => { checkSessionAndSetSignedIn() }, [])
   useEffect(() => { signedIn && loadCurrentUserSession() }, [signedIn])
-  useEffect(() => { console.log('!!!! singupinprogress changing, returnToPath:', signupInProgress, returnToPath)}, [signupInProgress, returnToPath])
+  useEffect(() => { 
+    if (!loading && signedIn && !signupInProgress && returnToPath) {
+      setInitialState(routing.getStateFromPath(returnToPath))
+      reset(routing.getStateFromPath(returnToPath))
+      dispatch(setReturnToPath(null))
+    }
+  }, [loading, signedIn, signupInProgress, returnToPath])
 
   if (loading && !signupInProgress) {
     return (
@@ -29,10 +39,25 @@ export default function RootView ({
       </View>
     )
   }
+  console.log('!!! initialState:', initialState)
 
   return (
     <View style={styles.rootContainer}>
-      <NavigationContainer linking={routing} initialState={getStateFromReturnToPath()}>
+      <NavigationContainer
+        // initialState={returnToPath && routing.getStateFromPath(returnToPath)}
+        initialState={initialState}
+        linking={routing}
+        ref={navigationRef}
+        onReady={() => {
+          isReadyRef.current = true
+          console.log('!!! is ready:', isReadyRef, !loading && signedIn && !signupInProgress && returnToPath)
+          // if (!loading && signedIn && !signupInProgress && returnToPath) {
+          //   setInitialState(routing.getStateFromPath(returnToPath))
+          //   // dispatch(setReturnToPath(null))
+          // }
+      
+        }}
+      >
         {signedIn && !signupInProgress
           ? <AppWithDrawerNavigator />
           : <AuthNavigator signupInProgress={signupInProgress} />}

@@ -13,6 +13,8 @@ import {
   getCommunityTopic,
   setTopicSubscribe
 } from './Feed.store'
+import selectCommunity from 'store/actions/selectCommunity'
+import selectNetwork from 'store/actions/selectNetwork'
 import getMemberships from 'store/selectors/getMemberships'
 import getRouteParam from 'store/selectors/getRouteParam'
 import { showToast } from 'util/toast'
@@ -93,11 +95,13 @@ export function mapDispatchToProps (dispatch, { navigation }) {
       navigation.navigate('Edit Post', { communityId, isProject: true }),
     showPost: id => navigation.navigate('Post Details', { id }),
     showMember: id => navigation.navigate('Member', { id }),
-    goToCommunity: makeGoToCommunity(dispatch, navigation),
+    goToCommunity: makeGoToCommunity(),
     goToCreateCommunity: () => navigation.navigate('Create Community'),
     ...bindActionCreators({
       fetchCommunityTopic,
-      setTopicSubscribe
+      setTopicSubscribe,
+      selectCommunity,
+      selectNetwork
     }, dispatch)
   }
 }

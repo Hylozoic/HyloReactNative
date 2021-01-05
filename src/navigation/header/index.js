@@ -19,7 +19,7 @@ import {  caribbeanGreen, white60onCaribbeanGreen, white, rhino80, black10onRhin
 // For now this list needs to be kept in sync with the names of the initial
 // routes for each stack in navigation/TabsNavigator.
 export const TAB_STACK_ROOTS = [
-  'Home',
+  'Feed',
   'Members',
   'Topics',
   'Projects'

@@ -13,10 +13,12 @@ import makeGoToCommunity from 'store/actions/makeGoToCommunity'
 import joinProject from 'store/actions/joinProject'
 import leaveProject from 'store/actions/leaveProject'
 import goToMemberMaker from 'store/actions/goToMemberMaker'
+import getCurrentNetwork from 'store/selectors/getCurrentNetwork'
 
 export function mapStateToProps (state, props) {
   const id = getRouteParam('id', props.route)
   const currentUser = getMe(state, props)
+  const currentNetwork = getCurrentNetwork(state, props)
   const currentCommunity = getCurrentCommunity(state, props)
   const currentCommunityId = getCurrentCommunity(state, props)
   const post = getPresentedPost(state, { id, currentCommunityId })
@@ -27,14 +29,15 @@ export function mapStateToProps (state, props) {
     isProject,
     currentUser,
     currentCommunityId,
-    currentCommunity
+    currentCommunity,
+    currentNetwork
   }
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
   const { id, post, currentCommunityId } = stateProps
   const { dispatch } = dispatchProps
-  const { navigation, navigation: { navigate } } = ownProps
+  const { navigation } = ownProps
 
   return {
     ...stateProps,
@@ -44,15 +47,15 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     createComment: value => dispatch(createComment(id, value)),
     joinProject: () => dispatch(joinProject(id)),
     leaveProject: () => dispatch(leaveProject(id)),
-    goToCommunity: makeGoToCommunity(dispatch, navigation),
-    editPost: () => navigate('Edit Post', { id }),
-    goToMembers: () => navigate('Project Members', { id, members: get('members', post) }),
+    goToCommunity: makeGoToCommunity(),
+    editPost: () => navigation.navigate('Edit Post', { id }),
+    goToMembers: () => navigation.navigate('Project Members', { id, members: get('members', post) }),
     showMember: goToMemberMaker({ navigate }),
     showTopic: (topicName) => {
       if (!currentCommunityId || currentCommunityId === ALL_COMMUNITIES_ID) {
         return showToast('Topics support for "All Communities" and Networks coming soon!')
       } else {
-        return navigate('Topic Feed', { topicName })
+        return navigation.navigate('Topic Feed', { topicName })
       }
     }
   }

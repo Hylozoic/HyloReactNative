@@ -39,7 +39,7 @@ export function mapStateToProps (state, props) {
 
 export function mapDispatchToProps (dispatch, props) {
   return {
-    goToCommunity: makeGoToCommunity(dispatch, props.navigation),
+    goToCommunity: makeGoToCommunity(),
     ...bindActionCreators({
       fetchPerson,
       updateUserSettings,

@@ -111,27 +111,24 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     ...ownProps,
     goToCommunity: community => {
       if (community.id === ALL_COMMUNITIES_ID) {
-        navigation.navigate('Home')
+        navigation.navigate('Feed', {
+          communityId: null,
+          networkId: null
+        })
       } else {
         navigation.closeDrawer()
-        navigation.navigate('Home', {
-          screen: 'Home',
-          params: {
-            communityId: community.id,
-            networkId: null
-          } 
+        navigation.navigate('Feed', {
+          communityId: community.id,
+          networkId: null
         })
       }
       dispatchProps.selectCommunity(community.id)
     },
     goToNetwork: network => {
       navigation.closeDrawer()
-      navigation.navigate('Home', {
-        screen: 'Home',
-        params: {
-          communityId: null,
-          networkId: network.id
-        } 
+      navigation.navigate('Feed', {
+        communityId: null,
+        networkId: network.id
       })
       dispatchProps.selectNetwork(network.id)
     },

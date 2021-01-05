@@ -7,25 +7,25 @@ export const MAIN_ROUTE_PATH = 'main'
 export const ALL_COMMUNITIES_ID = 'all-communities'
 
 export function resetToAuthRoute (navigation, routeName) {
-  return navigation.dispatch({
-    type: 'Navigation/NAVIGATE',
-    routeName: 'AuthNavigator',
-    action: {
-      type: 'Navigation/NAVIGATE',
-      routeName: routeName
-    }
-  })
+  // return navigation.dispatch({
+  //   type: 'Navigation/NAVIGATE',
+  //   routeName: 'AuthNavigator',
+  //   action: {
+  //     type: 'Navigation/NAVIGATE',
+  //     routeName: routeName
+  //   }
+  // })
 }
 
 export function resetToAppRoute (navigation, routeName) {
-  return navigation.dispatch({
-    type: 'Navigation/NAVIGATE',
-    routeName: 'AppNavigator',
-    action: {
-      type: 'Navigation/NAVIGATE',
-      routeName: routeName
-    }
-  })
+  // return navigation.dispatch({
+  //   type: 'Navigation/NAVIGATE',
+  //   routeName: 'AppNavigator',
+  //   action: {
+  //     type: 'Navigation/NAVIGATE',
+  //     routeName: routeName
+  //   }
+  // })
 }
 
 export function resetToMainRoute (navigation) {

@@ -34,7 +34,7 @@ export function HomeNavigator () {
   }
   return (
     <Home.Navigator {...navigatorProps}>
-      <Home.Screen name='Home' component={Feed} />
+      <Home.Screen name='Feed' component={Feed} />
       {getScreensInCommon(Home)}
     </Home.Navigator>
   )

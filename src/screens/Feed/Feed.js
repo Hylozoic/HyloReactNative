@@ -3,7 +3,7 @@ import { Image, View, Text, TouchableOpacity } from 'react-native'
 import { useScrollToTop } from '@react-navigation/native'
 import Avatar from 'components/Avatar'
 import Icon from 'components/Icon'
-import NotificationOverlay from 'components/NotificationOverlay'
+// import NotificationOverlay from 'components/NotificationOverlay'
 import LinearGradient from 'react-native-linear-gradient'
 import { isUndefined } from 'lodash'
 import Button from 'components/Button'
@@ -41,16 +41,21 @@ export default function Feed ({
   topicFollowersTotal,
   goToCreateCommunity,
   currentUserHasMemberships,
-  hidePostPrompt,
   goToCommunity,
   setTopicSubscribe,
   showTopic,
   newPost,
   newProject,
-  fetchCommunityTopic
+  fetchCommunityTopic,
+  selectCommunity,
+  selectNetwork
 }) {
   const isProjectFeed = route?.params?.isProjectFeed
+  const ref = useRef(null)
 
+  useScrollToTop(ref)
+  useEffect(() => { community?.id && selectCommunity(community.id) }, [community?.id])
+  useEffect(() => { network?.id && selectNetwork(network.id) }, [network?.id])
   useEffect(() => { fetchCommunityTopic() }, [fetchCommunityTopic, topicName])
   useEffect(() => { setHeaderTitle(navigation, topicName, community, isProjectFeed) }, [
     topicName,
@@ -68,10 +73,6 @@ export default function Feed ({
       />
     )
   }
-
-  const ref = useRef(null)
-
-  useScrollToTop(ref)
 
   const all = !community && !topicName && !network
 
