@@ -50,7 +50,7 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     goToCommunity: makeGoToCommunity(),
     editPost: () => navigation.navigate('Edit Post', { id }),
     goToMembers: () => navigation.navigate('Project Members', { id, members: get('members', post) }),
-    showMember: goToMemberMaker({ navigate }),
+    showMember: goToMemberMaker(navigation),
     showTopic: (topicName) => {
       if (!currentCommunityId || currentCommunityId === ALL_COMMUNITIES_ID) {
         return showToast('Topics support for "All Communities" and Networks coming soon!')

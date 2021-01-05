@@ -15,20 +15,6 @@ exports[`matches the last snapshot for mapDispatchToProps 2`] = `
 Array [
   Array [
     Object {
-      "headerRight": <HeaderButton
-        disableOnClick={true}
-        onPress={[Function]}
-        text="Mark as read"
-      />,
-    },
-  ],
-]
-`;
-
-exports[`matches the last snapshot for mapDispatchToProps 3`] = `
-Array [
-  Array [
-    Object {
       "graphql": Object {
         "query": "mutation ($changes: MeInput) {
         updateMe(changes: $changes) {

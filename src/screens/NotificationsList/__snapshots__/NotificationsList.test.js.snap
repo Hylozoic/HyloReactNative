@@ -129,7 +129,7 @@ exports[`NotificationsList matches the renders CreateCommunityNotice if user doe
   <Image
     source={
       Object {
-        "testUri": "../../../src/assets/hey-axolotl.png",
+        "testUri": "../../../assets/hey-axolotl.png",
       }
     }
   />

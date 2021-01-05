@@ -10,7 +10,9 @@ jest.mock('react-native-onesignal', () => ({
   inFocusDisplaying: jest.fn()
 }))
 
-const props = {}
+const props = {
+  route: {}
+}
 
 describe('mapStateToProps', () => {
   it('returns a default email from the session', () => {
@@ -66,37 +68,5 @@ describe('mapDispatchToProps', () => {
     const username = 'name'
     const password = 'pass'
     expect(dispatchProps.login(username, password)).toMatchSnapshot()
-  })
-})
-
-describe('mergeProps', () => {
-  it('adds finishLogin', () => {
-    const dispatch = jest.fn(x => Promise.resolve(x))
-    const dispatchProps = bindActionCreators(mapDispatchToProps, dispatch)
-    dispatchProps.fetchCurrentUser = jest.fn(() =>
-      Promise.resolve({
-        payload: {
-          data: {
-            me: { id: 1 }
-          }
-        }
-      }))
-
-    const stateProps = {
-      deepLinkAction: { type: 'foo', params: { id: 'bar' } }
-    }
-
-    const ownProps = {
-      navigation: { dispatch: jest.fn() }
-    }
-
-    const mergedProps = mergeProps(stateProps, dispatchProps, ownProps)
-    return mergedProps.loginWithFacebook('token')
-      .then(() => {
-        expect(dispatch).toHaveBeenCalled()
-        expect(dispatch.mock.calls).toMatchSnapshot()
-        expect(OneSignal.registerForPushNotifications).toBeCalled()
-        expect(ownProps.navigation.dispatch).toHaveBeenCalledWith(stateProps.deepLinkAction)
-      })
   })
 })

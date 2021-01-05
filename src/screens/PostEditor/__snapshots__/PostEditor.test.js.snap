@@ -506,30 +506,111 @@ exports[`PostEditor renders correctly while saving 1`] = `
                             <Text>
                               Details
                             </Text>
-                            <View>
+                            <View
+                              onBlur={[Function]}
+                              onFocus={[Function]}
+                            >
                               <View>
                                 <TextInput
                                   allowFontScaling={true}
-                                  blurOnSubmit={false}
                                   editable={true}
                                   multiline={true}
-                                  onBlur={[Function]}
                                   onChangeText={[Function]}
-                                  onContentSizeChange={[Function]}
-                                  onFocus={[Function]}
                                   onSelectionChange={[Function]}
                                   placeholder="What else should we know?"
                                   placeholderTextColor="#c0c6cd"
                                   rejectResponderTermination={true}
-                                  selection={
-                                    Object {
-                                      "end": 0,
-                                      "start": 0,
-                                    }
-                                  }
                                   underlineColorAndroid="transparent"
                                   value=""
                                 />
+                                <View>
+                                  <View
+                                    accessible={true}
+                                    focusable={true}
+                                    hitSlop={
+                                      Object {
+                                        "bottom": 7,
+                                        "left": 7,
+                                        "right": 7,
+                                        "top": 7,
+                                      }
+                                    }
+                                    onClick={[Function]}
+                                    onResponderGrant={[Function]}
+                                    onResponderMove={[Function]}
+                                    onResponderRelease={[Function]}
+                                    onResponderTerminate={[Function]}
+                                    onResponderTerminationRequest={[Function]}
+                                    onStartShouldSetResponder={[Function]}
+                                  >
+                                    <Text>
+                                      @
+                                    </Text>
+                                  </View>
+                                  <View
+                                    accessible={true}
+                                    focusable={true}
+                                    hitSlop={
+                                      Object {
+                                        "bottom": 7,
+                                        "left": 7,
+                                        "right": 7,
+                                        "top": 7,
+                                      }
+                                    }
+                                    onClick={[Function]}
+                                    onResponderGrant={[Function]}
+                                    onResponderMove={[Function]}
+                                    onResponderRelease={[Function]}
+                                    onResponderTerminate={[Function]}
+                                    onResponderTerminationRequest={[Function]}
+                                    onStartShouldSetResponder={[Function]}
+                                  >
+                                    <Text>
+                                      #
+                                    </Text>
+                                  </View>
+                                </View>
+                              </View>
+                              <View
+                                accessible={true}
+                                focusable={true}
+                                hitSlop={
+                                  Object {
+                                    "bottom": 10,
+                                    "left": 10,
+                                    "right": 10,
+                                    "top": 5,
+                                  }
+                                }
+                                onClick={[Function]}
+                                onResponderGrant={[Function]}
+                                onResponderMove={[Function]}
+                                onResponderRelease={[Function]}
+                                onResponderTerminate={[Function]}
+                                onResponderTerminationRequest={[Function]}
+                                onStartShouldSetResponder={[Function]}
+                              >
+                                <Text
+                                  allowFontScaling={false}
+                                  style={
+                                    Array [
+                                      Object {
+                                        "color": undefined,
+                                        "fontSize": 26,
+                                      },
+                                      undefined,
+                                      Object {
+                                        "fontFamily": "Material Icons",
+                                        "fontStyle": "normal",
+                                        "fontWeight": "normal",
+                                      },
+                                      Object {},
+                                    ]
+                                  }
+                                >
+                                  
+                                </Text>
                               </View>
                             </View>
                             <View
@@ -1037,29 +1118,78 @@ exports[`PostEditor renders correctly while saving 2`] = `
                             <Text>
                               Details
                             </Text>
-                            <View>
+                            <View
+                              onBlur={[Function]}
+                              onFocus={[Function]}
+                            >
                               <View>
                                 <TextInput
                                   allowFontScaling={true}
-                                  blurOnSubmit={false}
                                   editable={false}
                                   multiline={true}
-                                  onBlur={[Function]}
                                   onChangeText={[Function]}
-                                  onContentSizeChange={[Function]}
-                                  onFocus={[Function]}
                                   onSelectionChange={[Function]}
                                   placeholder="What else should we know?"
                                   placeholderTextColor="#c0c6cd"
                                   rejectResponderTermination={true}
-                                  selection={
-                                    Object {
-                                      "end": 0,
-                                      "start": 0,
-                                    }
-                                  }
                                   underlineColorAndroid="transparent"
                                   value=""
+                                />
+                                <View>
+                                  <View
+                                    accessible={true}
+                                    focusable={true}
+                                    hitSlop={
+                                      Object {
+                                        "bottom": 7,
+                                        "left": 7,
+                                        "right": 7,
+                                        "top": 7,
+                                      }
+                                    }
+                                    onClick={[Function]}
+                                    onResponderGrant={[Function]}
+                                    onResponderMove={[Function]}
+                                    onResponderRelease={[Function]}
+                                    onResponderTerminate={[Function]}
+                                    onResponderTerminationRequest={[Function]}
+                                    onStartShouldSetResponder={[Function]}
+                                  >
+                                    <Text>
+                                      @
+                                    </Text>
+                                  </View>
+                                  <View
+                                    accessible={true}
+                                    focusable={true}
+                                    hitSlop={
+                                      Object {
+                                        "bottom": 7,
+                                        "left": 7,
+                                        "right": 7,
+                                        "top": 7,
+                                      }
+                                    }
+                                    onClick={[Function]}
+                                    onResponderGrant={[Function]}
+                                    onResponderMove={[Function]}
+                                    onResponderRelease={[Function]}
+                                    onResponderTerminate={[Function]}
+                                    onResponderTerminationRequest={[Function]}
+                                    onStartShouldSetResponder={[Function]}
+                                  >
+                                    <Text>
+                                      #
+                                    </Text>
+                                  </View>
+                                </View>
+                              </View>
+                              <View>
+                                <ActivityIndicator
+                                  animating={true}
+                                  color="#999999"
+                                  hidesWhenStopped={true}
+                                  size="small"
                                 />
                               </View>
                             </View>

@@ -86,7 +86,7 @@ exports[`mergeProps editPost 1`] = `
 Array [
   "navigate",
   Array [
-    "PostEditor",
+    "Edit Post",
     Object {
       "id": "testpost",
     },
@@ -94,13 +94,43 @@ Array [
 ]
 `;
 
-exports[`mergeProps maps 1`] = `undefined`;
+exports[`mergeProps maps 1`] = `
+Object {
+  "createComment": [Function],
+  "currentUser": Object {
+    "id": "currentuser",
+  },
+  "dispatch": [MockFunction],
+  "editPost": [Function],
+  "fetchPost": [Function],
+  "goToCommunity": [Function],
+  "goToMembers": [Function],
+  "id": "testpost",
+  "isFocused": true,
+  "isProject": false,
+  "joinProject": [Function],
+  "leaveProject": [Function],
+  "navigation": Object {
+    "navigate": [MockFunction],
+  },
+  "post": Object {
+    "id": "testpost",
+  },
+  "route": Object {
+    "params": Object {
+      "id": "1",
+    },
+  },
+  "showMember": [Function],
+  "showTopic": [Function],
+}
+`;
 
 exports[`mergeProps showMember 1`] = `
 Array [
   "navigate",
   Array [
-    "MemberProfile",
+    "Member",
     Object {
       "id": 1,
     },
@@ -109,14 +139,11 @@ Array [
 `;
 
 exports[`mergeProps showTopic 1`] = `
-Array [
-  "navigate",
-  Array [
-    "Feed",
-    Object {
-      "communityId": 4,
-      "topicName": "mytopicname",
-    },
-  ],
-]
+RootSiblingsManager {
+  "id": "root-sibling-1",
+  "manager": Object {
+    "destroy": [Function],
+    "update": [Function],
+  },
+}
 `;

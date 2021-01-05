@@ -36,7 +36,10 @@ describe('NotificationsList', () => {
           unread: false
         }
       ],
-      setRightButton: () => {}
+      setRightButton: () => {},
+      navigation: {
+        setOptions: jest.fn()
+      }
     }
   })
 

@@ -18,7 +18,10 @@ describe('MemberProfile', () => {
       fetchPerson: jest.fn(),
       id: 1,
       isFocused: true,
-      person: { id: 1 }
+      person: { id: 1 },
+      navigation: {
+        setOptions: jest.fn()
+      }
     }
   })
 

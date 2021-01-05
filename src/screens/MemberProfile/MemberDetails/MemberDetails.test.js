@@ -5,6 +5,7 @@ import ReactTestRenderer from 'react-test-renderer'
 import MemberDetails, { MemberBio, MemberSkills, MemberCommunities, CommunityRow } from './MemberDetails'
 import { pick } from 'lodash/fp'
 
+jest.mock('@react-navigation/native')
 // Ugly, but seems to be necessary to dodge issues with debounce and timers
 // (see https://github.com/facebook/jest/issues/3465)
 jest.unmock('lodash')
@@ -12,7 +13,10 @@ const lodash = jest.requireActual('lodash/fp')
 lodash.debounce = (_, fn) => fn
 
 describe('MemberDetails', () => {
-  const navigation = { setParams: () => {} }
+  const navigation = {
+    setOptions: () => {},
+    state: {}
+  }
   it('matches the last snapshot', () => {
     const renderer = new ReactShallowRenderer()
     renderer.render(
@@ -131,7 +135,7 @@ describe('MemberDetails', () => {
   })
 
   describe('saveChanges', () => {
-    it('calls updateUserSettings', () => {
+    it('calls updateUserSettings', async () => {
       const props = {
         isFocused: true,
         person: {},
@@ -148,7 +152,7 @@ describe('MemberDetails', () => {
         },
         editing: true
       })
-      instance.saveChanges()
+      await instance.saveChanges()
       expect(instance.state.editing).toEqual(false)
       expect(props.updateUserSettings).toHaveBeenCalledWith(instance.state.person)
     })
@@ -210,11 +214,11 @@ describe('MemberBio', () => {
   describe('focus', () => {
     it('calls control.focus', () => {
       const instance = ReactTestRenderer.create(<MemberBio person={{}} />).getInstance()
-      instance.control = {
+      instance.controlRef.current = {
         focus: jest.fn()
       }
       instance.focus()
-      expect(instance.control.focus).toHaveBeenCalled()
+      expect(instance.controlRef.current.focus).toHaveBeenCalled()
     })
   })
 })

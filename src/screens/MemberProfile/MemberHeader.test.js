@@ -66,11 +66,11 @@ describe('Control', () => {
   describe('focus', () => {
     it('calls input.focus', () => {
       const instance = ReactTestRenderer.create(<Control />).getInstance()
-      instance.input = {
+      instance.inputRef.current = {
         focus: jest.fn()
       }
       instance.focus()
-      expect(instance.input.focus).toHaveBeenCalled()
+      expect(instance.inputRef.current.focus).toHaveBeenCalled()
     })
   })
 })

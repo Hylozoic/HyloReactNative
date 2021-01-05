@@ -57,19 +57,3 @@ Promise {
   "_X": null,
 }
 `;
-
-exports[`mergeProps adds finishLogin 1`] = `
-Array [
-  Array [
-    Object {
-      "payload": Object {
-        "api": Object {
-          "method": "post",
-          "path": "/noo/login/facebook-token/oauth?access_token=token",
-        },
-      },
-      "type": "LOGIN_WITH_FACEBOOK",
-    },
-  ],
-]
-`;

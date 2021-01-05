@@ -23,14 +23,6 @@ Object {
 
 exports[`mergeProps merges the props 1`] = `
 Object {
-  "deepLinkAction": Object {
-    "params": Object {
-      "accessCode": "foo",
-      "slug": "sandbox",
-    },
-    "routeName": "UseAccessCode",
-    "type": "Navigation/NAVIGATE",
-  },
   "finishSignup": [Function],
   "goToImage": [Function],
   "goToSkills": [Function],

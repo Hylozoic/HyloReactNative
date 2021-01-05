@@ -73,10 +73,10 @@ describe('SkillEditor', () => {
     it('calls the prop and sets state', () => {
       const instance = ReactTestRenderer.create(<SkillEditor {...defaultProps} />).getInstance()
       instance.setState({ showOther: true })
-      instance.control.focus = jest.fn()
+      instance.controlRef.current.focus = jest.fn()
       instance.onPressOther()
       expect(instance.state.showOther).toEqual(false)
-      expect(instance.control.focus).toHaveBeenCalled()
+      expect(instance.controlRef.current.focus).toHaveBeenCalled()
     })
   })
 })

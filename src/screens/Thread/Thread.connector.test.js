@@ -47,35 +47,3 @@ describe('mapDispatchToProps', () => {
     expect(props.navigation.navigate.mock.calls).toMatchSnapshot()
   })
 })
-
-describe('mergeProps', () => {
-  it('creates setNavParams when title is defined', () => {
-    const setParams = jest.fn()
-    const navigate = jest.fn()
-    const ownProps = {
-      navigation: {
-        setParams,
-        navigate
-      }
-    }
-    const communityId = 123
-    const networkId = 456
-    const stateProps = {
-      id: 12,
-      title: 'Jon and 3 others',
-      communityId,
-      networkId
-    }
-    const dispatchProps = {
-      showTopic: jest.fn()
-    }
-    const mergedProps = mergeProps(stateProps, dispatchProps, ownProps)
-    expect(dispatchProps.showTopic).toHaveBeenCalledWith(communityId, networkId)
-    mergedProps.setNavParams()
-    expect(setParams).toHaveBeenCalled()
-    const { title, onPressTitle } = setParams.mock.calls[0][0]
-    expect(title).toEqual(stateProps.title)
-    onPressTitle()
-    expect(navigate).toHaveBeenCalledWith('ThreadParticipants', { id: stateProps.id })
-  })
-})

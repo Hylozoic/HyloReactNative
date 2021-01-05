@@ -25,6 +25,7 @@ describe('NewMessage', () => {
       suggestions={suggestions}
       currentUser={currentUser}
       participants={participants}
+      initialParticipants={[]}
       addParticipant={() => {}}
       removeParticipant={() => {}}
       setParticipantInput={() => {}}
@@ -80,16 +81,5 @@ describe('NewMessage', () => {
       queryResults: {},
       pending: {}
     }
-
-    it('increments the view key', () => {
-      const instance = ReactTestRenderer.create(
-        <Provider store={createMockStore(state)}>
-          <NewMessage {...props} />
-        </Provider>
-      ).root.findByType(NewMessage).instance
-      instance.setState({ viewKey: 2 })
-      instance.onBlurMessageInput()
-      expect(instance.state.viewKey).toEqual(3)
-    })
   })
 })

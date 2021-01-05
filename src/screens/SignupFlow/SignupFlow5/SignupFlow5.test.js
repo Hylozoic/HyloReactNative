@@ -138,21 +138,25 @@ describe('finishSignup', () => {
       finishSignup: jest.fn()
     }
 
-    const controls = {
+    const controlRefs = {
       saved: {
-        isEditable: () => false,
-        highlightCheck: jest.fn()
+        current: {
+          isEditable: () => false,
+          highlightCheck: jest.fn()
+        }
       },
       unsaved: {
-        isEditable: () => true,
-        highlightCheck: jest.fn()
+        current: {
+          isEditable: () => true,
+          highlightCheck: jest.fn()
+        }
       }
     }
     const instance = ReactTestRenderer.create(<SignupFlow5 {...props} />).root.instance
-    instance.controls = controls
+    instance.controlRefs = controlRefs
     instance.finishSignup()
     expect(props.finishSignup).not.toHaveBeenCalled()
-    expect(controls.saved.highlightCheck).not.toHaveBeenCalled()
-    expect(controls.unsaved.highlightCheck).toHaveBeenCalled()
+    expect(controlRefs.saved.current.highlightCheck).not.toHaveBeenCalled()
+    expect(controlRefs.unsaved.current.highlightCheck).toHaveBeenCalled()
   })
 })

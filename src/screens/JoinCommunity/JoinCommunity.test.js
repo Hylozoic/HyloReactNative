@@ -1,197 +1,42 @@
 import 'react-native'
 import React from 'react'
-import TestRenderer from 'react-test-renderer'
 import JoinCommunity from './JoinCommunity'
+import { createMockStore } from 'util/testing'
+import { Provider } from 'react-redux'
+import { act } from 'react-test-renderer'
+import { render } from '@testing-library/react-native'
+import { NavigationContainer } from '@react-navigation/native'
+import { navigate } from 'navigation/RootNavigation'
+import { checkInvitation as checkInvitationAction, useInvitation } from './JoinCommunity.store'
 
+jest.mock('navigation/RootNavigation')
+jest.mock('./JoinCommunity.store')
 jest.mock('screens/LoadingScreen', () => 'LoadingScreen')
 
 it('calls useInvitation', async () => {
+  let rendered
   const props = {
-    checkOrUseInvitation: jest.fn()
+    route: { params: {} },
+    navigation: {}
   }
-  await TestRenderer.create(<JoinCommunity {...props} />)
-  expect(props.checkOrUseInvitation).toHaveBeenCalled()
+  const state = {
+    session: {
+      signedIn: false
+    }
+  }
+  const component = (
+    <Provider store={createMockStore(state)}>
+      <NavigationContainer>
+        <JoinCommunity {...props} />
+      </NavigationContainer>
+    </Provider>
+  )
+  const { toJSON } = render(component)
+
+  await act(async () => {
+    rendered = toJSON()
+  })
+
+  expect(rendered).toMatchSnapshot()  
+  expect(navigate).toHaveBeenCalledWith('Login')
 })
-
-// TODO: From deprecated connector, re-integrate here on component
-// import orm from 'store/models'
-// import {
-//   mapStateToProps,
-//   mapDispatchToProps,
-//   makeJoinCommunity,
-//   makeCheckInvitation,
-//   mergeProps
-// } from './JoinCommunity.connector'
-
-// let session, defaultState
-
-// beforeEach(() => {
-//   session = orm.mutableSession(orm.getEmptyState())
-//   defaultState = { orm: session.state }
-// })
-
-// describe('mapStateToProps', () => {
-//   it('gets props from navigation object', () => {
-//     const testProps = {
-//       route: {
-//         params: {
-//           token: 'anytoken',
-//           invitationToken: 'anyinvitationtoken',
-//           accessCode: 'anyaccesscode'
-//         }
-//       }
-//     }
-//     expect(mapStateToProps(defaultState, testProps).invitationCodes).toEqual({
-//       invitationToken: testProps.route.params.token,
-//       accessCode: testProps.route.params.accessCode
-//     })
-//   })
-// })
-
-// test('mapDispatchToProps', () => {
-//   const navigation = {
-//     dispatch: testOutput => testOutput
-//   }
-//   const result = mapDispatchToProps(jest.fn(), navigation)
-//   expect(result).toMatchSnapshot()
-// })
-
-// describe('makeJoinCommunity', () => {
-//   const currentCommunityId = 'defaultcommunityid'
-//   const stateProps = {
-//     currentUser: { id: 'currentuser' },
-//     currentCommunityId,
-//     invitationCodes: {
-//       invitationToken: 'invitationtoken',
-//       accessCode: 'accesscode'
-//     },
-//     goToHome: jest.fn()
-//   }
-
-//   it('should forward to the joined community when one is returned', () => {
-//     const joinedCommunityId = 'joinedcommunity'
-//     const result = {
-//       payload: {
-//         data: {
-//           useInvitation: {
-//             membership: {
-//               community: {
-//                 id: joinedCommunityId
-//               }
-//             }
-//           }
-//         }
-//       }
-//     }
-//     const dispatchProps = {
-//       useInvitation: jest.fn(() => Promise.resolve(result)),
-//       goToCommunity: jest.fn(),
-//       dispatch: jest.fn()
-//     }
-//     return makeJoinCommunity(stateProps, dispatchProps)()
-//       .then(result => {
-//         expect(dispatchProps.goToCommunity).toHaveBeenCalledWith(joinedCommunityId)
-//         return expect(dispatchProps.useInvitation).toHaveBeenCalled(result)
-//       })
-//   })
-
-//   it('should forward to the current community when a joined community is not returned', () => {
-//     const result = {}
-//     const dispatchProps = {
-//       useInvitation: jest.fn(() => Promise.resolve(result)),
-//       goToCommunity: jest.fn(),
-//       dispatch: jest.fn()
-//     }
-//     return makeJoinCommunity(stateProps, dispatchProps)()
-//       .then(result => {
-//         expect(stateProps.goToHome).toHaveBeenCalled()
-//         return expect(dispatchProps.useInvitation).toHaveBeenCalled(result)
-//       })
-//   })
-// })
-
-// test('mergeProps', () => {
-//   const currentUserPOJO = { name: 'me' }
-//   const stateProps = {
-//     communityId: 'anything',
-//     currentUser: currentUserPOJO,
-//     currentCommunityId: 'default',
-//     invitationCodes: {}
-//   }
-//   const dispatchProps = {
-//     useInvitation: jest.fn()
-//   }
-//   const ownProps = {
-//     route: {
-//       params: {
-//         token: 'anytoken',
-//         invitationToken: 'anyinvitationtoken',
-//         accessCode: 'anyaccesscode'
-//       }
-//     }
-//   }
-//   const result = mergeProps(stateProps, dispatchProps, ownProps)
-//   expect(result).toMatchSnapshot()
-// })
-
-// describe('makeCheckInvitation', () => {
-//   const checkInvitationResponse = (valid) => ({
-//     payload: {
-//       data: {
-//         checkInvitation: {
-//           valid
-//         }
-//       }
-//     }
-//   })
-
-//   it('should forward to signup page if invite is valid', () => {
-//     const stateProps = {
-//       invitationCodes: {},
-//       navToSignup: jest.fn(),
-//       navToInviteExpired: jest.fn()
-//     }
-//     const dispatchProps = {
-//       checkInvitation: () =>
-//         Promise.resolve(checkInvitationResponse(true))
-//     }
-//     return makeCheckInvitation(stateProps, dispatchProps)()
-//       .then(() => {
-//         expect(stateProps.navToInviteExpired).not.toHaveBeenCalled()
-//         return expect(stateProps.navToSignup).toHaveBeenCalled()
-//       })
-//   })
-
-//   it('should forward to invite expired page if invite is invalid', () => {
-//     const stateProps = {
-//       invitationCodes: {},
-//       navToSignup: jest.fn(),
-//       navToInviteExpired: jest.fn()
-//     }
-//     const dispatchProps = {
-//       checkInvitation: () =>
-//         Promise.resolve(checkInvitationResponse(false))
-//     }
-//     return makeCheckInvitation(stateProps, dispatchProps)()
-//       .then(() => {
-//         expect(stateProps.navToSignup).not.toHaveBeenCalled()
-//         return expect(stateProps.navToInviteExpired).toHaveBeenCalled()
-//       })
-//   })
-
-//   it('should forward to signup page if an error occurs in checking the invite', () => {
-//     const stateProps = {
-//       invitationCodes: {},
-//       navToSignup: jest.fn(),
-//       navToInviteExpired: jest.fn()
-//     }
-//     const dispatchProps = {
-//       checkInvitation: () => Promise.reject(new Error('anything'))
-//     }
-//     return makeCheckInvitation(stateProps, dispatchProps)()
-//       .then(() => {
-//         expect(stateProps.navToInviteExpired).not.toHaveBeenCalled()
-//         return expect(stateProps.navToSignup).toHaveBeenCalled()
-//       })
-//   })
-// })

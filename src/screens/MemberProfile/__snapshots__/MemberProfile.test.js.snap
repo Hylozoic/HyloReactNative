@@ -92,6 +92,11 @@ exports[`MemberProfile doesnt have the flag content option 1`] = `
     </View>
   }
   id={1}
+  navigation={
+    Object {
+      "setOptions": [MockFunction],
+    }
+  }
 />
 `;
 
@@ -122,6 +127,11 @@ exports[`MemberProfile matches the last snapshot 1`] = `
     </View>
   }
   id={1}
+  navigation={
+    Object {
+      "setOptions": [MockFunction],
+    }
+  }
 />
 `;
 

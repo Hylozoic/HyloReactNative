@@ -38,8 +38,6 @@ it('matches the last snapshot for mapDispatchToProps', () => {
   const props = { navigation: { setParams: jest.fn() } }
   const dispatchProps = mapDispatchToProps(dispatch, props)
   expect(dispatchProps).toMatchSnapshot()
-  dispatchProps.setRightButton()
-  expect(props.navigation.setParams.mock.calls).toMatchSnapshot()
   dispatchProps.updateNewNotificationCount()
   expect(dispatch.mock.calls).toMatchSnapshot()
 })

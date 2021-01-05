@@ -28,9 +28,9 @@ describe('saveAndNext', () => {
       saveAndNext: jest.fn()
     }
     const instance = ReactTestRenderer.create(<SignupFlow3 {...props} />).root.instance
-    instance.control.blur = jest.fn()
+    instance.controlRef.current.blur = jest.fn()
     instance.saveAndNext()
     expect(props.saveAndNext).toHaveBeenCalled()
-    expect(instance.control.blur).toHaveBeenCalled()
+    expect(instance.controlRef.current.blur).toHaveBeenCalled()
   })
 })

@@ -9,7 +9,10 @@ import getMe from 'store/selectors/getMe'
 import { navigate } from 'navigation/RootNavigation'
 import { checkInvitation as checkInvitationAction, useInvitation } from './JoinCommunity.store'
 
-export default function JoinCommunity ({ route, navigation }) {
+export default function JoinCommunity ({
+  route,
+  navigation
+}) {
   const dispatch = useDispatch()
   const signedIn = useSelector(getSignedIn)
   const currentUser = useSelector(getMe)
@@ -23,12 +26,13 @@ export default function JoinCommunity ({ route, navigation }) {
 
   useEffect(() => { 
     const checkInviteAndJoin = async () => {
+      if (!signedIn) return navigate('Login')
       try {
         const checkInviteResult = await dispatch(checkInvitationAction(invitationCodes))
         const getInviteValid = get('payload.data.checkInvitation.valid')
         const inviteValid = getInviteValid(checkInviteResult)
   
-        if (signedIn && inviteValid) {
+        if (inviteValid) {
           const joinResult = await dispatch(useInvitation(currentUser.id, invitationCodes))
           const getCommunityId = get('payload.data.useInvitation.membership.community.id')
           const communityId = getCommunityId(joinResult)

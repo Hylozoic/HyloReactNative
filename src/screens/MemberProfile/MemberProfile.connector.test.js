@@ -47,14 +47,14 @@ describe('makeOnPressMessages', () => {
     const messageThreadId = 99
     const onPressMessages = makeOnPressMessages({ id: 1 }, { id: 2, messageThreadId }, navigation)
     onPressMessages()
-    expect(navigation.navigate).toHaveBeenCalledWith('Thread', { id: messageThreadId })
+    expect(navigation.navigate).toHaveBeenCalledWith('Messages', { screen: 'Thread', params: { id: messageThreadId } })
   })
 
   it('navigates to new message page when there is no existing thread', () => {
     const otherPersonId = 2
     const onPressMessages = makeOnPressMessages({ id: 1 }, { id: otherPersonId }, navigation)
     onPressMessages()
-    expect(navigation.navigate).toHaveBeenCalledWith('New Message', { participants: [otherPersonId] })
+    expect(navigation.navigate).toHaveBeenCalledWith('Messages', { screen: 'New Message', params: { participantIds: [otherPersonId] } })
   })
 })
 
