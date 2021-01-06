@@ -20,7 +20,8 @@
     "postinstall": "(find node_modules -type f -name .babelrc | grep -v /react-native/ | xargs rm) || true",
     "postversion": "react-native-version",
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest"
+    "test": "jest",
+    "clean": "react-native-clean-project"
   },
   "dependencies": {
     "@flyerhq/react-native-keyboard-accessory-view": "^2.1.0",
@@ -109,6 +110,7 @@
     "jest-environment-node": "^26.6.2",
     "jest-simple-reporter": "^0.1.0",
     "metro-react-native-babel-preset": "^0.59.0",
+    "react-native-clean-project": "^3.4.0",
     "react-native-version": "^4.0.0",
     "react-test-renderer": "16.13.1",
     "remote-redux-devtools": "^0.5.16",
@@ -141,7 +143,7 @@
     ],
     "timers": "fake",
     "transformIgnorePatterns": [
-      "node_modules/(?!(jest-)?react-native|@react-native-community|@react-navigation|rn-round-checkbox|@invertase|@flyerhq\/react-native-keyboard-accessory-view)"
+      "node_modules/(?!(jest-)?react-native|@react-native-community|@react-navigation|rn-round-checkbox|@invertase|@flyerhq/react-native-keyboard-accessory-view)"
     ]
   },
   "standard": {
