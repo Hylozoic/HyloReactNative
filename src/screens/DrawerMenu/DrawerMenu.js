@@ -7,7 +7,7 @@ import SocketListener from 'components/SocketListener'
 import Button from 'components/Button'
 import Icon from 'components/Icon'
 import { isEmpty } from 'lodash/fp'
-import { ALL_COMMUNITIES_ID } from 'routing/helpers'
+import { ALL_COMMUNITIES_ID } from 'navigation/linking/helpers'
 
 const allCommunitiesImage = require('assets/All_Communities2.png')
 

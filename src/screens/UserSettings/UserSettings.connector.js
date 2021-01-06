@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { get } from 'lodash/fp'
-import { resetToMainRoute } from 'routing/helpers'
+import { resetToMainRoute } from 'navigation/linking/helpers'
 import { logout, loginWithFacebook } from 'screens/Login/actions'
 import updateUserSettings from 'store/actions/updateUserSettings'
 import { unlinkAccount } from './UserSettings.store'

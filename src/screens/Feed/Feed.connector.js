@@ -7,7 +7,7 @@ import getCommunity from 'store/selectors/getCommunity'
 import getCurrentCommunityId from 'store/selectors/getCurrentCommunityId'
 import getCurrentNetworkId from 'store/selectors/getCurrentNetworkId'
 import makeGoToCommunity from 'store/actions/makeGoToCommunity'
-import { ALL_COMMUNITIES_ID } from 'routing/helpers'
+import { ALL_COMMUNITIES_ID } from 'navigation/linking/helpers'
 import {
   fetchCommunityTopic,
   getCommunityTopic,

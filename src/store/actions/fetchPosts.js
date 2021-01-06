@@ -1,6 +1,6 @@
 import { getPostFieldsFragment } from './fetchPost'
 import { get } from 'lodash/fp'
-import { ALL_COMMUNITIES_ID } from 'routing/helpers'
+import { ALL_COMMUNITIES_ID } from 'navigation/linking/helpers'
 
 export const FETCH_POSTS = 'FETCH_POSTS'
 

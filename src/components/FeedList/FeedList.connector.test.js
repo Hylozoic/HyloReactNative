@@ -4,7 +4,7 @@ import { times } from 'lodash/fp'
 import { mapStateToProps, mergeProps, shouldResetNewPostCount } from './FeedList.connector'
 import { MODULE_NAME, defaultState, defaultSortBy } from './FeedList.store'
 import { FETCH_POSTS } from 'store/actions/fetchPosts'
-import { ALL_COMMUNITIES_ID } from 'routing/helpers'
+import { ALL_COMMUNITIES_ID } from 'navigation/linking/helpers'
 
 describe('mapStateToProps', () => {
   let state

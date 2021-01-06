@@ -8,7 +8,6 @@ import {
 } from './actions'
 import { getPending } from './Login.store'
 import getRouteParam from 'store/selectors/getRouteParam'
-// import { getNavigationAction } from 'routing/DeepLinkHandler/DeepLinkHandler.store'
 
 export function mapStateToProps (state, props) {
   const formError = state.session.loginError

@@ -7,7 +7,7 @@ import sessionReducer from './sessionReducer'
 import mixpanelReducer from './mixpanel'
 import CommentEditor from 'screens/PostDetails/CommentEditor/CommentEditor.store'
 // TODO: May bring back
-// import DeepLinkHandler from 'routing/DeepLinkHandler/DeepLinkHandler.store'
+// import DeepLinkHandler from 'navigation/linking/DeepLinkHandler/DeepLinkHandler.store'
 import FeedList from 'components/FeedList/FeedList.store'
 import ItemChooser from 'screens/ItemChooser/ItemChooser.store'
 import LoadingModal from 'screens/LoadingModal/LoadingModal.store'

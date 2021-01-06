@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Text, Image } from 'react-native'
 import SafeAreaView from 'react-native-safe-area-view'
-import LinkButton from 'routing/LinkButton'
+import LinkButton from 'navigation/linking/LinkButton'
 import styles from './TopicSupportComingSoon.styles'
 
 const axolotlImage = require('assets/Axolotyl_Digging.png')

@@ -1,4 +1,4 @@
-import { ALL_COMMUNITIES_ID } from 'routing/helpers'
+import { ALL_COMMUNITIES_ID } from 'navigation/linking/helpers'
 import { makeGetQueryResults } from 'store/reducers/queryResults'
 import { FETCH_POSTS } from 'store/actions/fetchPosts'
 import { FETCH_PROJECTS } from 'store/actions/fetchProjects'

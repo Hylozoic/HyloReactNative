@@ -1,5 +1,5 @@
 import { mapStateToProps, mapDispatchToProps, mergeProps } from './Thread.connector'
-import { ALL_COMMUNITIES_ID } from 'routing/helpers'
+import { ALL_COMMUNITIES_ID } from 'navigation/linking/helpers'
 
 jest.mock('util/websockets', () => ({
   sendIsTyping: jest.fn()

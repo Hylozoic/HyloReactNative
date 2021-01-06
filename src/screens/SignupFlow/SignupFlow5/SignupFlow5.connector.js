@@ -8,9 +8,9 @@ import {
 } from '../SignupFlow.store.js'
 import { getMySkillsFromOrm } from 'components/SkillEditor/SkillEditor.store'
 import { isEmpty } from 'lodash/fp'
-import { redirectAfterLogin, resetToMainRoute } from 'routing/helpers'
+import { redirectAfterLogin, resetToMainRoute } from 'navigation/linking/helpers'
 // TODO: May bring back DeepLinkHandler...
-// import { getNavigationAction } from 'routing/DeepLinkHandler/DeepLinkHandler.store'
+// import { getNavigationAction } from 'navigation/linking/DeepLinkHandler/DeepLinkHandler.store'
 
 export function mapStateToProps (state, props) {
   const { name, email, password, confirmPassword, location, avatarUrl } = getUserSettings(state)
