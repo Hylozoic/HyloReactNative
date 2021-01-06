@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { View } from 'react-native'
 import { useDispatch } from 'react-redux'
+import { getActionFromState } from '@react-navigation/native'
 import { NavigationContainer } from '@react-navigation/native'
-import routing from 'routing'
+import linking, { getStateFromReturnToPath } from 'navigation/linking'
 import Loading from 'components/Loading'
 import AuthNavigator from 'navigation/AuthNavigator'
 import AppWithDrawerNavigator from 'navigation/AppWithDrawerNavigator'
-import { getStateFromReturnToPath } from 'routing'
 import setReturnToPath from 'store/actions/setReturnToPath'
-import { reset, navigationRef, isReadyRef } from 'navigation/RootNavigation'
+import { reset, navigate, navigationRef, isReadyRef } from 'navigation/RootNavigation'
 
 export default function RootView ({
   loading,
@@ -25,12 +25,17 @@ export default function RootView ({
   useEffect(() => { checkSessionAndSetSignedIn() }, [])
   useEffect(() => { signedIn && loadCurrentUserSession() }, [signedIn])
   useEffect(() => { 
-    if (!loading && signedIn && !signupInProgress && returnToPath) {
-      setInitialState(routing.getStateFromPath(returnToPath))
-      reset(routing.getStateFromPath(returnToPath))
-      dispatch(setReturnToPath(null))
+    if (!loading && signedIn && !signupInProgress && returnToPath && navigationRef?.current) {
+      // setInitialState(linking.getStateFromPath(returnToPath))
+      // reset(linking.getStateFromPath(returnToPath))
+      const state = linking.getStateFromPath(returnToPath)
+      const action = getActionFromState(state)
+      console.log('!!! action:', action)
+
+      navigationRef.current.dispatch(action)
+      // dispatch(setReturnToPath(null))
     }
-  }, [loading, signedIn, signupInProgress, returnToPath])
+  }, [loading, signedIn, signupInProgress, returnToPath, navigationRef])
 
   if (loading && !signupInProgress) {
     return (
@@ -39,24 +44,14 @@ export default function RootView ({
       </View>
     )
   }
-  console.log('!!! initialState:', initialState)
 
   return (
     <View style={styles.rootContainer}>
       <NavigationContainer
-        // initialState={returnToPath && routing.getStateFromPath(returnToPath)}
-        initialState={initialState}
-        linking={routing}
+        // initialState={initialState}
+        linking={linking}
         ref={navigationRef}
-        onReady={() => {
-          isReadyRef.current = true
-          console.log('!!! is ready:', isReadyRef, !loading && signedIn && !signupInProgress && returnToPath)
-          // if (!loading && signedIn && !signupInProgress && returnToPath) {
-          //   setInitialState(routing.getStateFromPath(returnToPath))
-          //   // dispatch(setReturnToPath(null))
-          // }
-      
-        }}
+        onReady={() => { isReadyRef.current = true }}
       >
         {signedIn && !signupInProgress
           ? <AppWithDrawerNavigator />
