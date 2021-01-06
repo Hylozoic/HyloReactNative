@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Navigation Specification renders Login when signedIn false 1`] = `<View />`;

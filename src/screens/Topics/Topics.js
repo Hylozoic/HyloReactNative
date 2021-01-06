@@ -30,7 +30,7 @@ export default function Topics ({
   const ref = useRef(null)
   
   useScrollToTop(ref)
-  useEffect(() => { fetchCommunityTopics() }, [community.id])
+  useEffect(() => { community?.id && fetchCommunityTopics() }, [community.id])
 
   const bannerUrl = get('bannerUrl', community)
   const name = get('name', community)

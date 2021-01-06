@@ -1,62 +1,31 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`RootView loading with signupInProgress - matches snapshot 1`] = `
-<View>
-  <RNCSafeAreaProvider
-    onInsetsChange={[Function]}
-    style={
-      Array [
-        Object {
-          "flex": 1,
-        },
-        undefined,
-      ]
-    }
-  />
-</View>
-`;
-
 exports[`RootView loading without signupInProgress - matches snapshot 1`] = `
 <View>
   <View>
     <ActivityIndicator
       animating={true}
-      color="#999999"
+      color="#818A88"
       hidesWhenStopped={true}
-      size="small"
+      size="large"
     />
   </View>
 </View>
 `;
 
-exports[`RootView signedIn and signupInProgress matches snapshot 1`] = `
+exports[`RootView no loading indicator when signupInProgress - matches snapshot 1`] = `
 <View>
-  <RNCSafeAreaProvider
-    onInsetsChange={[Function]}
-    style={
-      Array [
-        Object {
-          "flex": 1,
-        },
-        undefined,
-      ]
-    }
-  />
+  <View>
+    <ActivityIndicator
+      animating={true}
+      color="#818A88"
+      hidesWhenStopped={true}
+      size="large"
+    />
+  </View>
 </View>
 `;
 
-exports[`RootView signedIn but not signupInProgress matches snapshot 1`] = `
-<View>
-  <RNCSafeAreaProvider
-    onInsetsChange={[Function]}
-    style={
-      Array [
-        Object {
-          "flex": 1,
-        },
-        undefined,
-      ]
-    }
-  />
-</View>
-`;
+exports[`RootView signedIn and signupInProgress matches snapshot 1`] = `<View />`;
+
+exports[`RootView signedIn but not signupInProgress matches snapshot 1`] = `<View />`;

@@ -67,57 +67,13 @@ exports[`TopicRow matches last snapshot 1`] = `
 </ForwardRef>
 `;
 
-exports[`Topics "Support Coming Soon" displays when a networkId is selected 1`] = `
-<SafeAreaView>
-  <View>
-    <Text>
-      We're working on expanding #topics to more places.
-    </Text>
-  </View>
-  <View>
-    <Text>
-      In the meantime, click a #topic from an individual community to see posts from that community.
-    </Text>
-  </View>
-  <Image
-    resizeMode="contain"
-    source={
-      Object {
-        "testUri": "../../../src/assets/Axolotyl_Digging.png",
-      }
-    }
-  />
-  <View>
-    <View
-      accessible={true}
-      focusable={true}
-      onClick={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-    >
-      <Text>
-        Test of navigation.goBack()
-      </Text>
-    </View>
-  </View>
-</SafeAreaView>
-`;
+exports[`Topics "Support Coming Soon" displayed when no community id 1`] = `<TopicSupportComingSoon />`;
 
-exports[`Topics "Support Coming Soon" not displayed when a networkId is not selected, fetches 1`] = `
+exports[`Topics "Support Coming Soon" not displayed when a community id is present, fetches 1`] = `
 <View
   onLayout={[Function]}
 >
-  <RCTScrollView
-    contentContainerStyle={
-      Object {
-        "flexGrow": 1,
-      }
-    }
-  >
+  <RCTScrollView>
     <View>
       <View>
         <Image
@@ -139,7 +95,9 @@ exports[`Topics "Support Coming Soon" not displayed when a networkId is not sele
         >
           MockLinearGradient
         </div>
-        <Text />
+        <View>
+          <Text />
+        </View>
       </View>
       <View>
         <Icon
@@ -154,12 +112,11 @@ exports[`Topics "Support Coming Soon" not displayed when a networkId is not sele
           placeholder="Search Topics"
           rejectResponderTermination={true}
           underlineColorAndroid="transparent"
-          value=""
         />
       </View>
       <View>
         <Text>
-          No topics match your search
+          No topics were found for this community
         </Text>
       </View>
     </View>
@@ -171,13 +128,7 @@ exports[`Topics renders correctly a community and topics 1`] = `
 <View
   onLayout={[Function]}
 >
-  <RCTScrollView
-    contentContainerStyle={
-      Object {
-        "flexGrow": 1,
-      }
-    }
-  >
+  <RCTScrollView>
     <View>
       <View>
         <Image
@@ -199,9 +150,11 @@ exports[`Topics renders correctly a community and topics 1`] = `
         >
           MockLinearGradient
         </div>
-        <Text>
-          Foomunity
-        </Text>
+        <View>
+          <Text>
+            Foomunity
+          </Text>
+        </View>
       </View>
       <View>
         <Icon
@@ -216,199 +169,12 @@ exports[`Topics renders correctly a community and topics 1`] = `
           placeholder="Search Topics"
           rejectResponderTermination={true}
           underlineColorAndroid="transparent"
-          value=""
         />
       </View>
       <View>
-        <View
-          accessible={true}
-          focusable={true}
-          onClick={[Function]}
-          onResponderGrant={[Function]}
-          onResponderMove={[Function]}
-          onResponderRelease={[Function]}
-          onResponderTerminate={[Function]}
-          onResponderTerminationRequest={[Function]}
-          onStartShouldSetResponder={[Function]}
-        >
-          <View
-            accessible={true}
-            focusable={true}
-            hitSlop={
-              Object {
-                "bottom": 10,
-                "left": 15,
-                "right": 15,
-                "top": 10,
-              }
-            }
-            onClick={[Function]}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
-          >
-            <View>
-              <View />
-              <Icon
-                name="Star"
-              />
-            </View>
-          </View>
-          <Text>
-            #
-          </Text>
-          <View>
-            <Text
-              allowFontScaling={false}
-              style={
-                Array [
-                  Object {
-                    "color": undefined,
-                    "fontSize": 12,
-                  },
-                  undefined,
-                  Object {
-                    "fontFamily": "Entypo",
-                    "fontStyle": "normal",
-                    "fontWeight": "normal",
-                  },
-                  Object {},
-                ]
-              }
-            >
-              
-            </Text>
-          </View>
-        </View>
-        <View
-          accessible={true}
-          focusable={true}
-          onClick={[Function]}
-          onResponderGrant={[Function]}
-          onResponderMove={[Function]}
-          onResponderRelease={[Function]}
-          onResponderTerminate={[Function]}
-          onResponderTerminationRequest={[Function]}
-          onStartShouldSetResponder={[Function]}
-        >
-          <View
-            accessible={true}
-            focusable={true}
-            hitSlop={
-              Object {
-                "bottom": 10,
-                "left": 15,
-                "right": 15,
-                "top": 10,
-              }
-            }
-            onClick={[Function]}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
-          >
-            <View>
-              <View />
-              <Icon
-                name="Star"
-              />
-            </View>
-          </View>
-          <Text>
-            #
-          </Text>
-          <View>
-            <Text
-              allowFontScaling={false}
-              style={
-                Array [
-                  Object {
-                    "color": undefined,
-                    "fontSize": 12,
-                  },
-                  undefined,
-                  Object {
-                    "fontFamily": "Entypo",
-                    "fontStyle": "normal",
-                    "fontWeight": "normal",
-                  },
-                  Object {},
-                ]
-              }
-            >
-              
-            </Text>
-          </View>
-        </View>
-        <View
-          accessible={true}
-          focusable={true}
-          onClick={[Function]}
-          onResponderGrant={[Function]}
-          onResponderMove={[Function]}
-          onResponderRelease={[Function]}
-          onResponderTerminate={[Function]}
-          onResponderTerminationRequest={[Function]}
-          onStartShouldSetResponder={[Function]}
-        >
-          <View
-            accessible={true}
-            focusable={true}
-            hitSlop={
-              Object {
-                "bottom": 10,
-                "left": 15,
-                "right": 15,
-                "top": 10,
-              }
-            }
-            onClick={[Function]}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
-          >
-            <View>
-              <View />
-              <Icon
-                name="Star"
-              />
-            </View>
-          </View>
-          <Text>
-            #
-          </Text>
-          <View>
-            <Text
-              allowFontScaling={false}
-              style={
-                Array [
-                  Object {
-                    "color": undefined,
-                    "fontSize": 12,
-                  },
-                  undefined,
-                  Object {
-                    "fontFamily": "Entypo",
-                    "fontStyle": "normal",
-                    "fontWeight": "normal",
-                  },
-                  Object {},
-                ]
-              }
-            >
-              
-            </Text>
-          </View>
-        </View>
+        <Text>
+          No topics were found for this community
+        </Text>
       </View>
     </View>
   </RCTScrollView>
@@ -419,13 +185,7 @@ exports[`Topics renders correctly with pending=true 1`] = `
 <View
   onLayout={[Function]}
 >
-  <RCTScrollView
-    contentContainerStyle={
-      Object {
-        "flexGrow": 1,
-      }
-    }
-  >
+  <RCTScrollView>
     <View>
       <View>
         <Image
@@ -447,9 +207,11 @@ exports[`Topics renders correctly with pending=true 1`] = `
         >
           MockLinearGradient
         </div>
-        <Text>
-          Foomunity
-        </Text>
+        <View>
+          <Text>
+            Foomunity
+          </Text>
+        </View>
       </View>
       <View>
         <Icon
@@ -464,199 +226,15 @@ exports[`Topics renders correctly with pending=true 1`] = `
           placeholder="Search Topics"
           rejectResponderTermination={true}
           underlineColorAndroid="transparent"
-          value=""
         />
       </View>
       <View>
-        <View
-          accessible={true}
-          focusable={true}
-          onClick={[Function]}
-          onResponderGrant={[Function]}
-          onResponderMove={[Function]}
-          onResponderRelease={[Function]}
-          onResponderTerminate={[Function]}
-          onResponderTerminationRequest={[Function]}
-          onStartShouldSetResponder={[Function]}
-        >
-          <View
-            accessible={true}
-            focusable={true}
-            hitSlop={
-              Object {
-                "bottom": 10,
-                "left": 15,
-                "right": 15,
-                "top": 10,
-              }
-            }
-            onClick={[Function]}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
-          >
-            <View>
-              <View />
-              <Icon
-                name="Star"
-              />
-            </View>
-          </View>
-          <Text>
-            #
-          </Text>
-          <View>
-            <Text
-              allowFontScaling={false}
-              style={
-                Array [
-                  Object {
-                    "color": undefined,
-                    "fontSize": 12,
-                  },
-                  undefined,
-                  Object {
-                    "fontFamily": "Entypo",
-                    "fontStyle": "normal",
-                    "fontWeight": "normal",
-                  },
-                  Object {},
-                ]
-              }
-            >
-              
-            </Text>
-          </View>
-        </View>
-        <View
-          accessible={true}
-          focusable={true}
-          onClick={[Function]}
-          onResponderGrant={[Function]}
-          onResponderMove={[Function]}
-          onResponderRelease={[Function]}
-          onResponderTerminate={[Function]}
-          onResponderTerminationRequest={[Function]}
-          onStartShouldSetResponder={[Function]}
-        >
-          <View
-            accessible={true}
-            focusable={true}
-            hitSlop={
-              Object {
-                "bottom": 10,
-                "left": 15,
-                "right": 15,
-                "top": 10,
-              }
-            }
-            onClick={[Function]}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
-          >
-            <View>
-              <View />
-              <Icon
-                name="Star"
-              />
-            </View>
-          </View>
-          <Text>
-            #
-          </Text>
-          <View>
-            <Text
-              allowFontScaling={false}
-              style={
-                Array [
-                  Object {
-                    "color": undefined,
-                    "fontSize": 12,
-                  },
-                  undefined,
-                  Object {
-                    "fontFamily": "Entypo",
-                    "fontStyle": "normal",
-                    "fontWeight": "normal",
-                  },
-                  Object {},
-                ]
-              }
-            >
-              
-            </Text>
-          </View>
-        </View>
-        <View
-          accessible={true}
-          focusable={true}
-          onClick={[Function]}
-          onResponderGrant={[Function]}
-          onResponderMove={[Function]}
-          onResponderRelease={[Function]}
-          onResponderTerminate={[Function]}
-          onResponderTerminationRequest={[Function]}
-          onStartShouldSetResponder={[Function]}
-        >
-          <View
-            accessible={true}
-            focusable={true}
-            hitSlop={
-              Object {
-                "bottom": 10,
-                "left": 15,
-                "right": 15,
-                "top": 10,
-              }
-            }
-            onClick={[Function]}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
-          >
-            <View>
-              <View />
-              <Icon
-                name="Star"
-              />
-            </View>
-          </View>
-          <Text>
-            #
-          </Text>
-          <View>
-            <Text
-              allowFontScaling={false}
-              style={
-                Array [
-                  Object {
-                    "color": undefined,
-                    "fontSize": 12,
-                  },
-                  undefined,
-                  Object {
-                    "fontFamily": "Entypo",
-                    "fontStyle": "normal",
-                    "fontWeight": "normal",
-                  },
-                  Object {},
-                ]
-              }
-            >
-              
-            </Text>
-          </View>
-        </View>
+        <ActivityIndicator
+          animating={true}
+          color="#818A88"
+          hidesWhenStopped={true}
+          size="small"
+        />
       </View>
     </View>
   </RCTScrollView>

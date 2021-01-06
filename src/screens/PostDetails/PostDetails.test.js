@@ -54,6 +54,7 @@ const props = {
   createComment: jest.fn(() => Promise.resolve({ success: true })),
   goToCommunity: jest.fn(),
   navigation: {
+    setOptions: jest.fn(),
     setParams: jest.fn(),
     getParam: jest.fn()
   }
@@ -134,18 +135,6 @@ describe('PostDetails', () => {
 
     instance.handleCommentOnChange('something or nothing')
     expect(instance.state.commentText).toEqual('something or nothing')
-  })
-})
-
-describe('CommentPrompt', () => {
-  it('renders correctly', () => {
-    const renderer = new ReactShallowRenderer()
-    renderer.render(<CommentPrompt
-      currentUser={currentUser}
-                    />)
-    const actual = renderer.getRenderOutput()
-
-    expect(actual).toMatchSnapshot()
   })
 })
 

@@ -3,13 +3,16 @@ import React from 'react'
 import { render } from '@testing-library/react-native'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import Topics, { TopicList, TopicRow, SubscribeStar } from './Topics'
+import './TopicSupportComingSoon'
+import '@react-navigation/native'
+
+jest.mock('./TopicSupportComingSoon', () => 'TopicSupportComingSoon')
+jest.mock('@react-navigation/native')
 
 describe('Topics', () => {
   describe('"Support Coming Soon"', () => {
-    it('displays when a networkId is selected', () => {
+    it('displayed when no community id', () => {
       const props = {
-        networkId: 'has-a-network-id',
-        community: { id: 123 },
         fetchCommunityTopics: jest.fn()
       }
       const { toJSON } = render(
@@ -19,7 +22,7 @@ describe('Topics', () => {
       expect(toJSON()).toMatchSnapshot()
     })
 
-    it("not displayed when a networkId is not selected, fetches", () => {
+    it("not displayed when a community id is present, fetches", () => {
       const props = {
         community: { id: 123 },
         fetchCommunityTopics: jest.fn()
@@ -31,10 +34,8 @@ describe('Topics', () => {
       expect(toJSON()).toMatchSnapshot()
     })
 
-    it('fetches when rerendered without a networkId', () => {
+    it('fetches when rerendered with a communityId', () => {
       const propsBefore = {
-        networkId: 'has-a-network-id',
-        community: { id: 123 },
         fetchCommunityTopics: jest.fn()
       }
       const propsAfter = {

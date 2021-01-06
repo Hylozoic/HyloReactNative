@@ -1,11 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`CommentPrompt renders correctly 1`] = `
-<withNavigation(InlineEditor)
-  placeholder="Write a comment..."
-/>
-`;
-
 exports[`Files renders correctly 1`] = `
 <View>
   <View
@@ -70,130 +64,36 @@ exports[`JoinProjectButton renders as expected when leaving 1`] = `
 `;
 
 exports[`PostDetails renders correctly 1`] = `
-<SafeAreaViewMock>
-  <_default>
-    <Connect(Comments)
-      footer={
-        <CommentPrompt
-          commentText=""
-          currentUser={
-            Object {
-              "avatarUrl": "me.png",
-              "firstName": [Function],
-              "id": 123,
-            }
-          }
-          onChange={[Function]}
-          onSubmit={[Function]}
-        />
+<SafeAreaViewMock
+  edges={
+    Array [
+      "right",
+      "left",
+      "top",
+    ]
+  }
+>
+  <Memo
+    contentContainerStyle={
+      Object {
+        "borderWidth": 0,
+        "marginBottom": 0,
       }
-      header={
-        <View>
-          <withNavigation(Connect(PostHeader))
-            closeOnDelete={true}
-            communities={
-              Array [
-                Object {
-                  "slug": "foom",
-                },
-              ]
-            }
-            creator={
-              Object {
-                "id": "77",
-                "name": "Houdini",
-              }
-            }
-            date="2017-05-19T23:24:58Z"
-            editPost={[MockFunction]}
-            goToCommunity={[MockFunction]}
-            pinned={true}
-            postId="91"
-            showMember={[MockFunction]}
-            showTopic={[Function]}
-            slug="foom"
-            topics={
-              Array [
-                Object {
-                  "id": "1",
-                  "name": "topic1",
-                },
-              ]
-            }
-            type="request"
-          />
-          <PostImage
-            imageUrls={
-              Array [
-                "foom.png",
-              ]
-            }
-            linked={true}
-          />
-          <PostBody
-            details="Lo"
-            showMember={[MockFunction]}
-            showTopic={[Function]}
-            slug="foom"
-            title="Hi"
-            type="request"
-          />
-          <Files
-            urls={
-              Array [
-                "http://foo.com/foo.pdf",
-                "http://foo.com/bar.zip",
-              ]
-            }
-          />
-          <PostCommunities
-            communities={
-              Array [
-                Object {
-                  "slug": "foom",
-                },
-              ]
-            }
-            goToCommunity={[MockFunction]}
-            shouldShowCommunities={true}
-            slug="foom"
-          />
-          <Memo(Connect(PostFooter))
-            commenters={
-              Array [
-                Object {
-                  "id": 9,
-                },
-                Object {
-                  "id": 7,
-                },
-              ]
-            }
-            commentsTotal={12}
-            currentUser={
-              Object {
-                "avatarUrl": "me.png",
-                "firstName": [Function],
-                "id": 123,
-              }
-            }
-            id="91"
-            myVote={true}
-            showActivityLabel={true}
-            votesTotal={8}
-          />
-        </View>
-      }
-      postId="91"
-      postPending={false}
-      showMember={[MockFunction]}
-      showTopic={[Function]}
-      slug="foom"
+    }
+    contentOffsetKeyboardOpened={-45}
+    renderScrollable={[Function]}
+    spaceBetweenKeyboardAndAccessoryView={-79}
+  >
+    <withNavigation(InlineEditor)
+      onChange={[Function]}
+      onSubmit={[Function]}
+      placeholder="Write a comment..."
+      value=""
     />
-    <Memo(Connect(SocketSubscriber))
-      id="91"
-      type="post"
-    />
-  </_default>
+  </Memo>
+  <Memo(Connect(SocketSubscriber))
+    id="91"
+    type="post"
+  />
 </SafeAreaViewMock>
 `;

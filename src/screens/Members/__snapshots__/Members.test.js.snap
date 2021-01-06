@@ -89,30 +89,20 @@ exports[`renders correctly with no community and isAll 1`] = `
       <View>
         <Banner
           all={true}
+          handleInviteOnPress={[Function]}
         />
         <View>
-          <View>
-            <Icon
-              name="Search"
-              size={30}
-            />
-            <Component
-              allowFontScaling={true}
-              onChangeText={[Function]}
-              placeholder="Search Members"
-              rejectResponderTermination={true}
-              underlineColorAndroid="transparent"
-            />
-          </View>
+          <SearchBar
+            onChangeText={[Function]}
+            placeholder="Search Members"
+          />
           <PopupMenuButton
             actions={Array []}
           >
-            <View>
-              <Text />
-              <Icon
-                name="ArrowDown"
-              />
-            </View>
+            <Text />
+            <Icon
+              name="ArrowDown"
+            />
           </PopupMenuButton>
         </View>
       </View>
@@ -211,10 +201,13 @@ exports[`renders correctly with no community and isAll 1`] = `
             <View>
               <Icon
                 name="Search"
-                size={30}
               />
               <TextInput
                 allowFontScaling={true}
+                autoCapitalize="none"
+                autoCorrect={false}
+                autoFocus={false}
+                editable={true}
                 onChangeText={[Function]}
                 placeholder="Search Members"
                 rejectResponderTermination={true}
@@ -240,12 +233,10 @@ exports[`renders correctly with no community and isAll 1`] = `
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
             >
-              <View>
-                <Text />
-                <Icon
-                  name="ArrowDown"
-                />
-              </View>
+              <Text />
+              <Icon
+                name="ArrowDown"
+              />
             </View>
           </View>
         </View>
@@ -411,35 +402,21 @@ exports[`renders with invite button when a moderator 1`] = `
       <View>
         <Banner
           all={true}
-        />
-        <Button
-          iconName="Invite"
-          onPress={[Function]}
-          text="Invite People"
+          handleInviteOnPress={[Function]}
+          showInviteButton={true}
         />
         <View>
-          <View>
-            <Icon
-              name="Search"
-              size={30}
-            />
-            <Component
-              allowFontScaling={true}
-              onChangeText={[Function]}
-              placeholder="Search Members"
-              rejectResponderTermination={true}
-              underlineColorAndroid="transparent"
-            />
-          </View>
+          <SearchBar
+            onChangeText={[Function]}
+            placeholder="Search Members"
+          />
           <PopupMenuButton
             actions={Array []}
           >
-            <View>
-              <Text />
-              <Icon
-                name="ArrowDown"
-              />
-            </View>
+            <Text />
+            <Icon
+              name="ArrowDown"
+            />
           </PopupMenuButton>
         </View>
       </View>
@@ -533,27 +510,27 @@ exports[`renders with invite button when a moderator 1`] = `
                 All Communities
               </Text>
             </View>
-          </View>
-          <View>
-            <View
-              accessible={true}
-              focusable={true}
-              onClick={[Function]}
-              onResponderGrant={[Function]}
-              onResponderMove={[Function]}
-              onResponderRelease={[Function]}
-              onResponderTerminate={[Function]}
-              onResponderTerminationRequest={[Function]}
-              onStartShouldSetResponder={[Function]}
-            >
-              <View>
+            <View>
+              <View
+                accessible={true}
+                focusable={true}
+                onClick={[Function]}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+              >
                 <View>
-                  <Icon
-                    name="Invite"
-                  />
-                  <Text>
-                    Invite People
-                  </Text>
+                  <View>
+                    <Icon
+                      name="Invite"
+                    />
+                    <Text>
+                      Invite
+                    </Text>
+                  </View>
                 </View>
               </View>
             </View>
@@ -562,10 +539,13 @@ exports[`renders with invite button when a moderator 1`] = `
             <View>
               <Icon
                 name="Search"
-                size={30}
               />
               <TextInput
                 allowFontScaling={true}
+                autoCapitalize="none"
+                autoCorrect={false}
+                autoFocus={false}
+                editable={true}
                 onChangeText={[Function]}
                 placeholder="Search Members"
                 rejectResponderTermination={true}
@@ -591,12 +571,10 @@ exports[`renders with invite button when a moderator 1`] = `
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
             >
-              <View>
-                <Text />
-                <Icon
-                  name="ArrowDown"
-                />
-              </View>
+              <Text />
+              <Icon
+                name="ArrowDown"
+              />
             </View>
           </View>
         </View>

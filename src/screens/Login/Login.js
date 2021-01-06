@@ -46,7 +46,7 @@ export default class Login extends React.Component {
   }
 
   componentWillUnmount () {
-    this.unsubscribeNetInfo()
+    this.unsubscribeNetInfo && this.unsubscribeNetInfo()
   }
 
   login = () => {
