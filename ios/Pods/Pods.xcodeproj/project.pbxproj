@@ -622,6 +622,7 @@
 		2CB41CAE7FB6CB2255BBAAA627F37EA2 /* RCTDiffClampAnimatedNode.m in Sources */ = {isa = PBXBuildFile; fileRef = ACF24EC4BB67835F30F2405CEBE079FC /* RCTDiffClampAnimatedNode.m */; settings = {COMPILER_FLAGS = "-DFOLLY_NO_CONFIG -DFOLLY_MOBILE=1 -DFOLLY_USE_LIBCPP=1 -Wno-comma -Wno-shorten-64-to-32 -Wno-nullability-completeness"; }; };
 		2CC837A409769A25C2DE02BDBACE84C7 /* RCTGIFImageDecoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 0107CDF97ACE0171CA1688B002836EB5 /* RCTGIFImageDecoder.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		2CE163ED3117BA5498D6B5918D706779 /* RCTStatusBarManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 08910802ECFF20EC5F8C63A87A22EBB4 /* RCTStatusBarManager.mm */; settings = {COMPILER_FLAGS = "-DFOLLY_NO_CONFIG -DFOLLY_MOBILE=1 -DFOLLY_USE_LIBCPP=1 -Wno-comma -Wno-shorten-64-to-32 -Wno-nullability-completeness"; }; };
+		2CFCB4CF85B49C6B63BB759EA9D76575 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F3E1E71649B0000105CF3C0896B225 /* GCDAsyncSocket.m */; };
 		2D289369E46E979C9FF8F68D1A1293AC /* Uri.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4A93EDC9AB4D1D256511AAB9CB16A63 /* Uri.cpp */; settings = {COMPILER_FLAGS = "-DFOLLY_HAVE_PTHREAD=1 -DFOLLY_NO_CONFIG -DFOLLY_MOBILE=1 -DFOLLY_USE_LIBCPP=1 -DFOLLY_HAVE_LIBGFLAGS=0 -DFOLLY_HAVE_LIBJEMALLOC=0 -DFOLLY_HAVE_PREADV=0 -DFOLLY_HAVE_PWRITEV=0 -DFOLLY_HAVE_TFO=0 -DFOLLY_USE_SYMBOLIZER=0\n    -frtti\n    -fexceptions\n    -std=c++14\n    -Wno-error\n    -Wno-unused-local-typedefs\n    -Wno-unused-variable\n    -Wno-sign-compare\n    -Wno-comment\n    -Wno-return-type\n    -Wno-global-constructors"; }; };
 		2D4242978EE350167E885917C1977CB1 /* EventHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F55E19F36A5311AA6A48A449A3889179 /* EventHandler.cpp */; settings = {COMPILER_FLAGS = "-DFOLLY_HAVE_PTHREAD=1 -DFOLLY_NO_CONFIG -DFOLLY_MOBILE=1 -DFOLLY_USE_LIBCPP=1 -DFOLLY_HAVE_LIBGFLAGS=0 -DFOLLY_HAVE_LIBJEMALLOC=0 -DFOLLY_HAVE_PREADV=0 -DFOLLY_HAVE_PWRITEV=0 -DFOLLY_HAVE_TFO=0 -DFOLLY_USE_SYMBOLIZER=0\n    -frtti\n    -fexceptions\n    -std=c++14\n    -Wno-error\n    -Wno-unused-local-typedefs\n    -Wno-unused-variable\n    -Wno-sign-compare\n    -Wno-comment\n    -Wno-return-type\n    -Wno-global-constructors"; }; };
 		2D42E04F816B3D9929A538CF47035CF3 /* RCTRootView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B1B4E3120C59E1B47B146636C12F63A /* RCTRootView.m */; settings = {COMPILER_FLAGS = "-DFOLLY_NO_CONFIG -DFOLLY_MOBILE=1 -DFOLLY_USE_LIBCPP=1 -Wno-comma -Wno-shorten-64-to-32 -Wno-documentation"; }; };
@@ -642,6 +643,7 @@
 		2E6EDCB5895597AC8380564C3CE9B480 /* SentryCrashStackEntryMapper.h in Headers */ = {isa = PBXBuildFile; fileRef = D74B4BE691C094C8D81E2A1B8D8515B8 /* SentryCrashStackEntryMapper.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		2EB0A5D3144A0456F8B498DFCE4E52A4 /* RCTFPSGraph.m in Sources */ = {isa = PBXBuildFile; fileRef = 746B3DC09EF6AB1D2BB53F3373E3E109 /* RCTFPSGraph.m */; settings = {COMPILER_FLAGS = "-DFOLLY_NO_CONFIG -DFOLLY_MOBILE=1 -DFOLLY_USE_LIBCPP=1 -Wno-comma -Wno-shorten-64-to-32 -Wno-nullability-completeness"; }; };
 		2ED480C2621F1D85F60F715DCB735B4F /* AtomicUnorderedMap.h in Headers */ = {isa = PBXBuildFile; fileRef = B76F351552224550953EB8677AFBF208 /* AtomicUnorderedMap.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		2EF451A980660F39F52CFE588EEC8F68 /* CocoaAsyncSocket-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A34F9D6906A8116983C6291576BE5A74 /* CocoaAsyncSocket-dummy.m */; };
 		2F193344C263AEE70C03AF05B52BF290 /* TimekeeperScheduledExecutor.h in Headers */ = {isa = PBXBuildFile; fileRef = C0DEB59BD8A9F9B3C83F9B203B69FE31 /* TimekeeperScheduledExecutor.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		2F20C34ABAB1F4E6BB2F6C7BFD0AFF4F /* FBSDKUserDataStore.h in Headers */ = {isa = PBXBuildFile; fileRef = DED2D9D6F7794E6BE12523166244247B /* FBSDKUserDataStore.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		2F41F77DC1D2DAF9A87602B9FF66E89E /* RCTScrollViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 40B060D7794F9C7D04B88895AE929CB5 /* RCTScrollViewManager.m */; settings = {COMPILER_FLAGS = "-DFOLLY_NO_CONFIG -DFOLLY_MOBILE=1 -DFOLLY_USE_LIBCPP=1 -Wno-comma -Wno-shorten-64-to-32 -Wno-documentation"; }; };
@@ -751,7 +753,6 @@
 		39BF7EDA8EDC4391604D1AFFEF7EE00E /* RNLongPressHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = D25DD8222905C3B64857EE55F37FD026 /* RNLongPressHandler.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		39C7B8CBC7FF6C71A08118BE63C072A0 /* Peertalk.h in Headers */ = {isa = PBXBuildFile; fileRef = 89F62982CA86D8F5A153FADD209292C7 /* Peertalk.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		3A01FAA8B94D5EBA762E3735FB6CD98A /* AtFork.h in Headers */ = {isa = PBXBuildFile; fileRef = 663A282ECF0A869382C0AB7D3468E21F /* AtFork.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		3A25A0B031EDD3B74BB39D3AD8967E3D /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 6380D5F00C3165D83D5F1B87921E28FB /* GCDAsyncUdpSocket.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		3A35732F6EA507960E93F5950A06BB1D /* GTMAppAuth.h in Headers */ = {isa = PBXBuildFile; fileRef = 41CE671CC4484F3A3791804FB65BA9B5 /* GTMAppAuth.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		3A758E4BB74593FC69CF6D1539496DC9 /* RNCWKProcessPoolManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 969115118DC5EBD985A55F7D3A21669E /* RNCWKProcessPoolManager.m */; };
 		3AA4EB7527F7FA53AC101137D3CD220A /* RCTPlatform.h in Headers */ = {isa = PBXBuildFile; fileRef = BF9AEC4FBAA64D627732F5AE0606C210 /* RCTPlatform.h */; settings = {ATTRIBUTES = (Project, ); }; };
@@ -931,7 +932,6 @@
 		4AFA4C1E8A2ED8789634FB89273DB369 /* RCTRefreshableProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 1DFEE67BBCB917A693A6DDD85FB08521 /* RCTRefreshableProtocol.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		4B172F0B15A80C540399781C46BDA686 /* Hardware.h in Headers */ = {isa = PBXBuildFile; fileRef = 8852F8250CA94BFAA93F6859A9CEC663 /* Hardware.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		4B32ACAF8807D0788A64E278354E9410 /* RCTFBSDKShareButtonManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 58E30EFE93CAE77ABA44B17F848F0810 /* RCTFBSDKShareButtonManager.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		4B3964B71F74D3D48482B3D853DA94E5 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F3E1E71649B0000105CF3C0896B225 /* GCDAsyncSocket.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		4B4632104D0ED5FBE76E1170635949D5 /* FBSDKDeviceViewControllerBase.m in Sources */ = {isa = PBXBuildFile; fileRef = BAB102A229F4915B8809810B1B912F42 /* FBSDKDeviceViewControllerBase.m */; };
 		4B49DE2B636CB4B21506843F816E3197 /* DeviceUID.h in Headers */ = {isa = PBXBuildFile; fileRef = BC5C4D2B85A4EF41008A45547116247B /* DeviceUID.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		4B4D463D879DD54448FEE6A39532717D /* NSArray+SentrySanitize.h in Headers */ = {isa = PBXBuildFile; fileRef = BC416CA6B68EBE5302396D853B7DEE9D /* NSArray+SentrySanitize.h */; settings = {ATTRIBUTES = (Project, ); }; };
@@ -1140,6 +1140,7 @@
 		5DC754A38CFC8199AE026F767D3CE12C /* AutomaticTracksConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = D0177CC28E2297356CCCA200CBD85617 /* AutomaticTracksConstants.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		5DD4D54355292BE69BC86D28D0346DCA /* IOBuf.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EED5DDA7D04EDC0615A20690A0C76932 /* IOBuf.cpp */; settings = {COMPILER_FLAGS = "-DFOLLY_HAVE_PTHREAD=1 -DFOLLY_NO_CONFIG -DFOLLY_MOBILE=1 -DFOLLY_USE_LIBCPP=1 -DFOLLY_HAVE_LIBGFLAGS=0 -DFOLLY_HAVE_LIBJEMALLOC=0 -DFOLLY_HAVE_PREADV=0 -DFOLLY_HAVE_PWRITEV=0 -DFOLLY_HAVE_TFO=0 -DFOLLY_USE_SYMBOLIZER=0\n    -frtti\n    -fexceptions\n    -std=c++14\n    -Wno-error\n    -Wno-unused-local-typedefs\n    -Wno-unused-variable\n    -Wno-sign-compare\n    -Wno-comment\n    -Wno-return-type\n    -Wno-global-constructors"; }; };
 		5DFB19044C115DC79B518822BE2EF93A /* RNGoogleSignInButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C5B5C2E02960AC8E2B33E8625832005 /* RNGoogleSignInButton.m */; };
+		5E2500118A397A383D4018C3DF7F0583 /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 6380D5F00C3165D83D5F1B87921E28FB /* GCDAsyncUdpSocket.m */; };
 		5E265E2B437E81EE713C522FB1699DDE /* Invoke.h in Headers */ = {isa = PBXBuildFile; fileRef = 441231FB05314FE929907A82CEF38A18 /* Invoke.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		5E4F1CA9FA99812F19A0E5426F585D5C /* React-Core-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 9622BC6B0E505CB6A58E18B2EA2AD727 /* React-Core-umbrella.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		5E6154123A2101B497CAD1E439CDAB6C /* RCTRedBoxSetEnabled.h in Headers */ = {isa = PBXBuildFile; fileRef = 244C9D4B142FBAC3DE07BDC61C08753D /* RCTRedBoxSetEnabled.h */; settings = {ATTRIBUTES = (Project, ); }; };
@@ -2888,7 +2889,6 @@
 		FA1163382C4A607A7048971EDB606F3F /* FBSDKShareMediaContent.h in Headers */ = {isa = PBXBuildFile; fileRef = ED81636EA29570C553613D5C69E37AEC /* FBSDKShareMediaContent.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		FA15587319D1F0B86E1CC668567DC67A /* RCTConvert+FBSDKAccessToken.h in Headers */ = {isa = PBXBuildFile; fileRef = D1419658E8C9CA02AEE9AC1EFFEA1DCE /* RCTConvert+FBSDKAccessToken.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		FA311B5C445F5E34F692D8D45C26BBA2 /* FBSDKCameraEffectArguments.h in Headers */ = {isa = PBXBuildFile; fileRef = E35BEA64A7BE5ACEC40FAD58E5CFB6C6 /* FBSDKCameraEffectArguments.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		FA4347EF4A800F16CE57D834D4859D8D /* CocoaAsyncSocket-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A34F9D6906A8116983C6291576BE5A74 /* CocoaAsyncSocket-dummy.m */; };
 		FA4598D1D431954A9A4A7CA6B1F76171 /* FBSDKBridgeAPIRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7698B730926E2F0D3ED5BFC6DE358137 /* FBSDKBridgeAPIRequest.m */; };
 		FA46213F3BFF31482398AB61C8A10E0C /* Flipper-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = F7B5080AFFC4C8BE2B202C3577D51C12 /* Flipper-dummy.m */; };
 		FA491EDD9D1968F0280779163D4BAAE5 /* SentryTransportFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = 557A3EC5B496C8E3A60AF9BE34884C37 /* SentryTransportFactory.h */; settings = {ATTRIBUTES = (Project, ); }; };
@@ -17433,7 +17433,7 @@
 			buildConfigurationList = BF535641E00BECC6FFAF53CFB25A8755 /* Build configuration list for PBXNativeTarget "CocoaAsyncSocket" */;
 			buildPhases = (
 				83268A4608982FCFF93FA48DCC883251 /* Headers */,
-				A6B708BDDA38EEF515F2383D1BB1E85A /* Sources */,
+				EE677DEB0818C5AF1142B26C6F07EB02 /* Sources */,
 				20BA100C85EA53F9E47A90738553B93B /* Frameworks */,
 			);
 			buildRules = (
@@ -19854,16 +19854,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A6B708BDDA38EEF515F2383D1BB1E85A /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				FA4347EF4A800F16CE57D834D4859D8D /* CocoaAsyncSocket-dummy.m in Sources */,
-				4B3964B71F74D3D48482B3D853DA94E5 /* GCDAsyncSocket.m in Sources */,
-				3A25A0B031EDD3B74BB39D3AD8967E3D /* GCDAsyncUdpSocket.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		A808B6B14B0539FB1216080970600402 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -20140,6 +20130,16 @@
 			files = (
 				1F91056AB2E5BDE9FEF3F26B1103E5F6 /* react-native-background-timer-dummy.m in Sources */,
 				B3D7A8D8919292B71A7E53674AAD7917 /* RNBackgroundTimer.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EE677DEB0818C5AF1142B26C6F07EB02 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2EF451A980660F39F52CFE588EEC8F68 /* CocoaAsyncSocket-dummy.m in Sources */,
+				2CFCB4CF85B49C6B63BB759EA9D76575 /* GCDAsyncSocket.m in Sources */,
+				5E2500118A397A383D4018C3DF7F0583 /* GCDAsyncUdpSocket.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -23889,6 +23889,31 @@
 			};
 			name = Debug;
 		};
+		7539930807244CDC08478F60EA1B2ABC /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7819203BC0AEA72B963F2E034EFC7096 /* CocoaAsyncSocket.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				GCC_PREFIX_HEADER = "Target Support Files/CocoaAsyncSocket/CocoaAsyncSocket-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_MODULE_NAME = CocoaAsyncSocket;
+				PRODUCT_NAME = CocoaAsyncSocket;
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		7674FBF62EE7325DD4BBAA8D477F2896 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C38E1CDA4A3E36AA9D4FC2C07143E29A /* Pods-OneSignalNotificationServiceExtension.debug.xcconfig */;
@@ -24142,6 +24167,30 @@
 			};
 			name = Release;
 		};
+		82EFC84FCF8830EC94A951450F1D64C4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 577BF882F4CE8E432071F9F493E11974 /* CocoaAsyncSocket.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				GCC_PREFIX_HEADER = "Target Support Files/CocoaAsyncSocket/CocoaAsyncSocket-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_MODULE_NAME = CocoaAsyncSocket;
+				PRODUCT_NAME = CocoaAsyncSocket;
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
 		83044D888EB5FE42E974243D6B8CF6B3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = CDB207C4849214A2B68CCA49A2A5B1BA /* react-native-mixpanel.debug.xcconfig */;
@@ -24385,30 +24434,6 @@
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
-		};
-		91163032528A92C2D0A5FA42EA05675B /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 577BF882F4CE8E432071F9F493E11974 /* CocoaAsyncSocket.debug.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				GCC_PREFIX_HEADER = "Target Support Files/CocoaAsyncSocket/CocoaAsyncSocket-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_MODULE_NAME = CocoaAsyncSocket;
-				PRODUCT_NAME = CocoaAsyncSocket;
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
 		};
 		93BD0A133962F82AD13AD47F46438BCB /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -24963,31 +24988,6 @@
 				PRIVATE_HEADERS_FOLDER_PATH = "";
 				PRODUCT_MODULE_NAME = AppAuth;
 				PRODUCT_NAME = AppAuth;
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		B4D7C3B6E4BDB99FE002C794322F896F /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7819203BC0AEA72B963F2E034EFC7096 /* CocoaAsyncSocket.release.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				GCC_PREFIX_HEADER = "Target Support Files/CocoaAsyncSocket/CocoaAsyncSocket-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_MODULE_NAME = CocoaAsyncSocket;
-				PRODUCT_NAME = CocoaAsyncSocket;
 				PUBLIC_HEADERS_FOLDER_PATH = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -26440,8 +26440,8 @@
 		BF535641E00BECC6FFAF53CFB25A8755 /* Build configuration list for PBXNativeTarget "CocoaAsyncSocket" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				91163032528A92C2D0A5FA42EA05675B /* Debug */,
-				B4D7C3B6E4BDB99FE002C794322F896F /* Release */,
+				82EFC84FCF8830EC94A951450F1D64C4 /* Debug */,
+				7539930807244CDC08478F60EA1B2ABC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
