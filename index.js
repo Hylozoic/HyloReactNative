@@ -1,4 +1,5 @@
 import 'react-native-gesture-handler'
+import { enableScreens } from 'react-native-screens'
 import React, { Component } from 'react'
 // Required for react-native-root-toast
 import { RootSiblingParent } from 'react-native-root-siblings'
@@ -30,6 +31,8 @@ if (Platform.OS === 'android') {
 }
 
 AppRegistry.registerComponent(appName, () => AppContainer)
+
+enableScreens()
 
 export default class AppContainer extends Component {
   constructor (properties) {
