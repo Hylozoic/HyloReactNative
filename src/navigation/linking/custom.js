@@ -7,15 +7,16 @@ import store from 'store'
 import getSignedIn from 'store/selectors/getSignedIn'
 import getReturnToPath from 'store/selectors/getReturnToPath'
 import setReturnToPath from 'store/actions/setReturnToPath'
+import { navigationRef } from 'navigation/RootNavigation'
+import { getActionFromState } from '@react-navigation/native'
 
-export const prefixes = [
-  'http://hylo.com',
-  'http://www.hylo.com',
-  'https://hylo.com',
-  'https://www.hylo.com',
-  'hyloapp://'
-]
-// Matched params are returned to the matched screen in `route.params`
+// NOTE: This custom routing config and utilities
+// This way of mapping screens to paths is being used
+// in alternate to the default linking config.screens
+// route mapping as the current version of react-navigation
+// doesn't allow for multiple paths to match to the same
+// screen.
+
 export const routesConfig = {
   '/c/:slug/join/:accessCode?':                              'JoinCommunity',
   // http://hylo.com/h/use-invitation?token=ebda24b2-d5d7-4d10-8558-b160e6f5d362&email=lorenjohnson+invitetest111@gmail.com&utm_swu=9555
@@ -36,12 +37,24 @@ export const routesConfig = {
   '/:context(c|n)/:contextId/p/:id/edit':                    'AppNavigator/PostEditor',
   '/settings/:section?':                                     'AppNavigator/UserSettings',
   '/t/:id':                                                  'AppNavigator/Thread',
-  /// TODO: I don't see a great reason that this is still a constant
   '/t':                                                      'AppNavigator/ThreadList'
 }
 
-// Matches path to routes and returns a screen path
-// with params appended as a querystring
+export const navigateToLinkingPath = linkingPath => {
+  // setInitialState(linking.getStateFromPath(returnToPath))
+  // reset(linking.getStateFromPath(returnToPath))
+  const state = getStateFromPath(returnToPath)
+  const action = getActionFromState(state)
+  console.log('!!! action:', action)
+
+  navigationRef.current.dispatch(state => {
+    console.log('!!!! state:', state)
+    return action
+  })
+}
+
+// Matches path to routes and returns a react-navigation screen path
+// (accordingly params appended as a querystring)
 export function matchRouteToScreenPath (incomingPathAndQuery, routes) {
   const [incomingPath, incomingQueryString] = incomingPathAndQuery.split('?')
 
@@ -72,51 +85,65 @@ export const getStateFromReturnToPath = () => {
   return routing.getStateFromPath(returnToPath)
 }
 
-export const routing = {
-  prefixes,
+const getInitialURL = async () => {
+  const url = await Linking.getInitialURL()
+  const signedIn = getSignedIn(store.getState())
 
-  async getInitialURL() {
-    const url = await Linking.getInitialURL()
-    const signedIn = getSignedIn(store.getState())
-
-    if (url != null) {
-      if (!signedIn) {
-        const path = parse(url).path
-        store.dispatch(setReturnToPath(path))
-      } else {
-        return url
-      }
+  if (url != null) {
+    if (!signedIn) {
+      const path = parse(url).path
+      store.dispatch(setReturnToPath(path))
+    } else {
+      return url
     }
-  },
-
-  subscribe(listener) {
-    const onReceiveURL = ({ url }) => {
-      const signedIn = getSignedIn(store.getState())
-
-      if (!signedIn) {
-        const path = parse(url).path
-        store.dispatch(setReturnToPath(path))
-      } else {
-        console.log('!!! here listening -- url:', url)
-        return listener(url)
-      }
-    }
-
-    Linking.addEventListener('url', onReceiveURL)
-
-    return () => {
-      Linking.removeEventListener('url', onReceiveURL)
-    }
-  },
-
-  getStateFromPath: path => {
-    const matchedStatePath = matchRouteToScreenPath(path, routesConfig)
-    const statePath = matchedStatePath ?? ''
-  
-    return getStateFromPathDefault(statePath)
-  },
-
-  getPathFromState: () => {}
+  }
 }
 
-export default routing
+const subscribe = listener => {
+  const onReceiveURL = ({ url }) => {
+    const signedIn = getSignedIn(store.getState())
+
+    if (!signedIn) {
+      const path = parse(url).path
+      store.dispatch(setReturnToPath(path))
+    } else {
+      // const path = parse(url).path
+      // const state = getStateFromPath(path)
+      // // const action = getActionFromState(state)    
+      // reset(state)
+      return listener(url)
+    }
+  }
+
+  Linking.addEventListener('url', onReceiveURL)
+
+  return () => {
+    Linking.removeEventListener('url', onReceiveURL)
+  }
+}
+
+const getStateFromPath = path => {
+  const matchedStatePath = matchRouteToScreenPath(path, routesConfig)
+  const statePath = matchedStatePath ?? ''
+
+  return getStateFromPathDefault(statePath)
+}
+
+// React Navigation linking config
+//
+
+export const prefixes = [
+  'http://hylo.com',
+  'http://www.hylo.com',
+  'https://hylo.com',
+  'https://www.hylo.com',
+  'hyloapp://'
+]
+
+export default {
+  prefixes,
+  getInitialURL,
+  subscribe,
+  getStateFromPath,
+  getPathFromState: () => {}
+}

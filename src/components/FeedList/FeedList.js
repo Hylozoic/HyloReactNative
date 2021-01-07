@@ -17,7 +17,7 @@ export default class FeedList extends React.Component {
   }
 
   componentDidMount () {
-    this.fetchOrShowCached()
+    this.props.isFocused && this.fetchOrShowCached()
   }
 
   shouldComponentUpdate (nextProps) {

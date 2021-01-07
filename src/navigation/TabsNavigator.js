@@ -87,6 +87,15 @@ export function ProjectsNavigator () {
 const Tabs = createBottomTabNavigator()
 export default function TabsNavigator () {
   const navigatorProps = {
+    //
+    // NOTE: This is required so the home tab is available 
+    //       when path linking into the app to a child tab.
+    // 
+    //       Lazy loading so make sure to check for focus
+    //       before fetching for the initial screen on 
+    //       any Tab stack.
+    //
+    lazy: false,
     tabBarOptions: {
       showIcon: true,
       showLabel: true,

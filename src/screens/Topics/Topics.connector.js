@@ -10,8 +10,8 @@ import { get } from 'lodash/fp'
 
 export function mapStateToProps (state, props) {
   const searchTerm = getTerm(state)
-  const community = getCurrentCommunity(state, props)
   const network = getCurrentNetwork(state, props)
+  const community = !network && getCurrentCommunity(state, props)
   const pending = state.pending[FETCH_COMMUNITY_TOPICS]
   const queryResultParams = {
     id: get('id', community),

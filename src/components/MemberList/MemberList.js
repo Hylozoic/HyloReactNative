@@ -43,6 +43,7 @@ export class MemberList extends React.Component {
     }
   }
 
+  // TODO: Probably best to move fetching up to Members screen
   fetchMembers () {
     const { members, fetchMembers, hasMore } = this.props
     if (this.state.isServerSearch && isEmpty(members) && hasMore !== false) fetchMembers()
@@ -58,7 +59,7 @@ export class MemberList extends React.Component {
   }
 
   componentDidMount () {
-    this.fetchMembers()
+    this.props.isFocused && this.fetchMembers()
   }
 
   componentDidUpdate (prevProps) {
@@ -69,6 +70,7 @@ export class MemberList extends React.Component {
     }
     if (this.state.isServerSearch) {
       if (some(key => this.props[key] !== prevProps[key], [
+        'isFocused',
         'slug',
         'networkSlug',
         'sortBy',

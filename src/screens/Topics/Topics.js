@@ -1,6 +1,6 @@
-import React, { useRef, useEffect } from 'react'
+import React, { useRef, useCallback } from 'react'
 import { Text, ScrollView, Image, View, TouchableOpacity } from 'react-native'
-import { useScrollToTop } from '@react-navigation/native'
+import { useFocusEffect, useScrollToTop } from '@react-navigation/native'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 import Loading from 'components/Loading'
 import StarIcon from 'components/StarIcon'
@@ -30,7 +30,11 @@ export default function Topics ({
   const ref = useRef(null)
   
   useScrollToTop(ref)
-  useEffect(() => { community?.id && fetchCommunityTopics() }, [community.id])
+  useFocusEffect(
+    useCallback(() => {
+      community?.id && fetchCommunityTopics()
+    }, [community.id])
+  )
 
   const bannerUrl = get('bannerUrl', community)
   const name = get('name', community)

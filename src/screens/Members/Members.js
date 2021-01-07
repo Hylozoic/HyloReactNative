@@ -34,6 +34,7 @@ export default class Members extends React.Component {
         <MemberList
           isServerSearch
           {...pick([
+            'isFocused',
             'hasMore',
             'members',
             'pending',

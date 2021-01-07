@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { View } from 'react-native'
 import { useDispatch } from 'react-redux'
-import { getActionFromState } from '@react-navigation/native'
 import { NavigationContainer } from '@react-navigation/native'
-import linking, { getStateFromReturnToPath } from 'navigation/linking'
 import Loading from 'components/Loading'
 import AuthNavigator from 'navigation/AuthNavigator'
 import AppWithDrawerNavigator from 'navigation/AppWithDrawerNavigator'
+import customLinking, { navigateToLinkingPath } from 'navigation/linking/custom'
+import { navigationRef, isReadyRef } from 'navigation/RootNavigation'
 import setReturnToPath from 'store/actions/setReturnToPath'
-import { reset, navigate, navigationRef, isReadyRef } from 'navigation/RootNavigation'
 
 export default function RootView ({
   loading,
@@ -26,16 +25,13 @@ export default function RootView ({
   useEffect(() => { signedIn && loadCurrentUserSession() }, [signedIn])
   useEffect(() => { 
     if (!loading && signedIn && !signupInProgress && returnToPath && navigationRef?.current) {
-      // setInitialState(linking.getStateFromPath(returnToPath))
-      // reset(linking.getStateFromPath(returnToPath))
-      const state = linking.getStateFromPath(returnToPath)
-      const action = getActionFromState(state)
-      console.log('!!! action:', action)
-
-      navigationRef.current.dispatch(action)
-      // dispatch(setReturnToPath(null))
+      navigateToLinkingPath(returnToPath)
+      dispatch(setReturnToPath(null))
     }
-  }, [loading, signedIn, signupInProgress, returnToPath, navigationRef])
+  }, [loading, signedIn, signupInProgress, returnToPath, navigationRef, isReadyRef.current])
+  useEffect(() => {
+    console.log('!!!! openedPushNotification:', openedPushNotification)
+  }, [openedPushNotification])
 
   if (loading && !signupInProgress) {
     return (
@@ -49,7 +45,7 @@ export default function RootView ({
     <View style={styles.rootContainer}>
       <NavigationContainer
         // initialState={initialState}
-        linking={linking}
+        linking={customLinking}
         ref={navigationRef}
         onReady={() => { isReadyRef.current = true }}
       >
