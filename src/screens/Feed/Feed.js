@@ -54,6 +54,7 @@ export default function Feed ({
   const ref = useRef(null)
 
   useScrollToTop(ref)
+  // TODO: selectCommunity should probably be moved back into goToCommuity function
   useEffect(() => { community?.id && selectCommunity(community.id) }, [community?.id])
   useEffect(() => { network?.id && selectNetwork(network.id) }, [network?.id])
   useEffect(() => { fetchCommunityTopic() }, [fetchCommunityTopic, topicName])

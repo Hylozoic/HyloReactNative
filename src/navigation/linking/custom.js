@@ -41,16 +41,9 @@ export const routesConfig = {
 }
 
 export const navigateToLinkingPath = linkingPath => {
-  // setInitialState(linking.getStateFromPath(returnToPath))
-  // reset(linking.getStateFromPath(returnToPath))
-  const state = getStateFromPath(returnToPath)
+  const state = getStateFromPath(linkingPath)
   const action = getActionFromState(state)
-  console.log('!!! action:', action)
-
-  navigationRef.current.dispatch(state => {
-    console.log('!!!! state:', state)
-    return action
-  })
+  navigationRef.current.dispatch(action)
 }
 
 // Matches path to routes and returns a react-navigation screen path

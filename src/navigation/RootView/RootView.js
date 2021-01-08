@@ -19,16 +19,34 @@ export default function RootView ({
   openedPushNotification
 }) {
   const dispatch = useDispatch()
-  const [initialState, setInitialState] = useState()
 
   useEffect(() => { checkSessionAndSetSignedIn() }, [])
   useEffect(() => { signedIn && loadCurrentUserSession() }, [signedIn])
   useEffect(() => { 
-    if (!loading && signedIn && !signupInProgress && returnToPath && navigationRef?.current) {
-      navigateToLinkingPath(returnToPath)
-      dispatch(setReturnToPath(null))
+    if (
+      !loading &&
+      !signupInProgress &&
+      signedIn &&
+      returnToPath &&
+      isReadyRef.current &&
+      navigationRef.current
+    ) {
+      // TODO: A temporary hack because there really doesn't seem
+      // a reliable way to tell when we're ready to navigate
+      setTimeout(
+        () => {
+          navigateToLinkingPath(returnToPath)
+          dispatch(setReturnToPath(null))
+        },
+        2000
+      )
     }
-  }, [loading, signedIn, signupInProgress, returnToPath, navigationRef, isReadyRef.current])
+  }, [
+    loading,
+    signupInProgress,
+    signedIn,
+    returnToPath
+  ])
   useEffect(() => {
     console.log('!!!! openedPushNotification:', openedPushNotification)
   }, [openedPushNotification])
@@ -44,7 +62,6 @@ export default function RootView ({
   return (
     <View style={styles.rootContainer}>
       <NavigationContainer
-        // initialState={initialState}
         linking={customLinking}
         ref={navigationRef}
         onReady={() => { isReadyRef.current = true }}
