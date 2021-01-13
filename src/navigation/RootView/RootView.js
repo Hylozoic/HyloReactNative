@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { View } from 'react-native'
+import React, { useEffect } from 'react'
+import { View, Linking, InteractionManager } from 'react-native'
 import { useDispatch } from 'react-redux'
 import { NavigationContainer } from '@react-navigation/native'
 import Loading from 'components/Loading'
@@ -32,13 +32,16 @@ export default function RootView ({
       navigationRef.current
     ) {
       // TODO: A temporary hack because there really doesn't seem
-      // a reliable way to tell when we're ready to navigate
+      // a reliable way to tell when we're ready to navigate.
+      //
+      // * Try with callBackRef pattern...
+      // * Why doesn't this work?: Linking.openURL(`hyloapp://${returnToPath}`)
       setTimeout(
         () => {
           navigateToLinkingPath(returnToPath)
           dispatch(setReturnToPath(null))
         },
-        2000
+        1000
       )
     }
   }, [

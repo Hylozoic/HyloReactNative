@@ -10,13 +10,20 @@ import setReturnToPath from 'store/actions/setReturnToPath'
 import { navigationRef } from 'navigation/RootNavigation'
 import { getActionFromState } from '@react-navigation/native'
 
+export const prefixes = [
+  'http://hylo.com',
+  'http://www.hylo.com',
+  'https://hylo.com',
+  'https://www.hylo.com',
+  'hyloapp://'
+]
+
 // NOTE: This custom routing config and utilities
 // This way of mapping screens to paths is being used
 // in alternate to the default linking config.screens
 // route mapping as the current version of react-navigation
 // doesn't allow for multiple paths to match to the same
 // screen.
-
 export const routesConfig = {
   '/c/:slug/join/:accessCode?':                              'JoinCommunity',
   // http://hylo.com/h/use-invitation?token=ebda24b2-d5d7-4d10-8558-b160e6f5d362&email=lorenjohnson+invitetest111@gmail.com&utm_swu=9555
@@ -70,14 +77,6 @@ export function matchRouteToScreenPath (incomingPathAndQuery, routes) {
   }
 }
 
-export const getStateFromReturnToPath = () => {
-  const returnToPath = getReturnToPath(store.getState())
-
-  if (!returnToPath) return null
-
-  return routing.getStateFromPath(returnToPath)
-}
-
 const getInitialURL = async () => {
   const url = await Linking.getInitialURL()
   const signedIn = getSignedIn(store.getState())
@@ -116,6 +115,8 @@ const subscribe = listener => {
 }
 
 const getStateFromPath = path => {
+  // TODO: Path should start with '/`,
+  // catch exception or correct if not
   const matchedStatePath = matchRouteToScreenPath(path, routesConfig)
   const statePath = matchedStatePath ?? ''
 
@@ -124,14 +125,6 @@ const getStateFromPath = path => {
 
 // React Navigation linking config
 //
-
-export const prefixes = [
-  'http://hylo.com',
-  'http://www.hylo.com',
-  'https://hylo.com',
-  'https://www.hylo.com',
-  'hyloapp://'
-]
 
 export default {
   prefixes,

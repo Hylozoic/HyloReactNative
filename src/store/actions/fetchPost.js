@@ -105,13 +105,15 @@ export function getPostFieldsFragment (withComments = true) {
   }`
 }
 
-export default function fetchPost (id, opts = {}) {
+export default function fetchPost (id, opts = {
+  withComments: false
+}) {
   return {
     type: FETCH_POST,
     graphql: {
       query: `query ($id: ID) {
         post(id: $id) {
-          ${getPostFieldsFragment(true)}
+          ${getPostFieldsFragment(opts.withComments)}
         }
       }`,
       variables: {

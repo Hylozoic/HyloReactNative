@@ -3,12 +3,10 @@ import getMe from 'store/selectors/getMe'
 import { isEmpty } from 'lodash/fp'
 import { getHasMoreComments, getComments } from './Comments.store'
 import fetchComments from 'store/actions/fetchComments'
-import { FETCH_COMMENTS, FETCH_POST } from 'store/constants'
+import { FETCH_COMMENTS } from 'store/constants'
 
 export function mapStateToProps (state, props) {
-  const pending = props.postPending ||
-    state.pending[FETCH_COMMENTS] ||
-    state.pending[FETCH_POST]
+  const pending = state.pending[FETCH_COMMENTS]
   const { comments, total } = getComments(state, props)
   return {
     comments,
@@ -38,4 +36,4 @@ export const mergeProps = (stateProps, dispatchProps, ownProps) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps, mergeProps, { forwardRef: true })
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps)

@@ -38,7 +38,8 @@ export function MessagesNavigator () {
         name='Messages' component={ThreadList}
         options={({ navigation }) => buildModalScreenOptions({
           headerRightButtonLabel: 'New',
-          headerRightButtonOnPress: () => navigation.navigate('New Message')
+          headerRightButtonOnPress: () => navigation.navigate('New Message'),
+          headerLeftOnPress: () => navigation.navigate('Tabs')
         })}
       />
       <Messages.Screen name='New Message' component={NewMessage} />

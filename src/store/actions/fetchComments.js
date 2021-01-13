@@ -26,7 +26,7 @@ export default function fetchComments (id, opts = {}) {
       }`,
       variables: {
         id,
-        cursor: opts.cursor
+        cursor: opts.cursor || null
       }
     },
     meta: {

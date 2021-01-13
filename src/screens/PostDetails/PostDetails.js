@@ -114,8 +114,6 @@ export default class PostDetails extends React.Component {
     commentText: ''
   }
 
-  commentsRef = React.createRef()
-
   componentDidMount () {
     this.props.fetchPost()
     this.props.navigation.setOptions({
@@ -142,8 +140,6 @@ export default class PostDetails extends React.Component {
             this.setState(() => ({ submitting: false }))
           } else {
             this.setState(() => ({ commentText: '', submitting: false }))
-            // Scrolls to the last comment (the one that was created)
-            this.commentsRef.current.scrollToEnd()
           }
         })
     }
@@ -154,14 +150,13 @@ export default class PostDetails extends React.Component {
   }
 
   renderPostDetails = (panHandlers) => {
-    const { post, currentUser, pending, showMember } = this.props
+    const { post, currentUser, showMember } = this.props
     const slug = get('communities.0.slug', post)
     const isMember = find(member => member.id === currentUser.id, post.members)
     const location = post.location || (post.locationObject && post.locationObject.fullText)
 
     return (
       <Comments
-        ref={this.commentsRef}
         header={(
           <PostCardForDetails
             {...this.props}
@@ -171,7 +166,6 @@ export default class PostDetails extends React.Component {
           />
         )}
         postId={post.id}
-        postPending={pending}
         showMember={showMember}
         showTopic={this.onShowTopic}
         slug={slug}
@@ -191,7 +185,7 @@ export default class PostDetails extends React.Component {
       <SafeAreaView edges={['right', 'left', 'top']} style={styles.container}>
         <KeyboardAccessoryView
           contentContainerStyle={{ marginBottom: 0, borderWidth: 0 }}
-          // TODO: Calculate these!
+          // TODO: Calculate these?
           spaceBetweenKeyboardAndAccessoryView={isIOS ? -79 : 0}
           contentOffsetKeyboardOpened={isIOS ? -45 : 0}
           renderScrollable={this.renderPostDetails}>

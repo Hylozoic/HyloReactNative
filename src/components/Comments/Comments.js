@@ -1,11 +1,11 @@
 /* eslint-disable camelcase */
-import React, { forwardRef, useRef, useCallback, useEffect } from 'react'
+import React, { useRef, useLayoutEffect, useCallback, useEffect } from 'react'
 import { Text, TouchableOpacity, View, ScrollView } from 'react-native'
 import Comment from 'components/Comment'
 import Loading from 'components/Loading'
 import styles from './Comments.styles'
 
-export default forwardRef(({
+export default function Comments ({
   comments = [],
   header,
   pending,
@@ -16,41 +16,46 @@ export default forwardRef(({
   showTopic,
   slug,
   panHandlers
-}, scrollViewRef) => {
-    const scrollToEnd = useCallback((animated = true) => {
-      scrollViewRef.current?.scrollToEnd({ animated })
-    })
-    useEffect(() => { scrollToEnd() })
-    
-    return (
-      <ScrollView
-        ref={scrollViewRef}
-        // onContentSizeChange={scrollToEnd}
-        {...panHandlers}
-        keyboardDismissMode='interactive'>
-        {header}
-        <ShowMore
-          commentsLength={comments.length}
-          total={total}
-          hasMore={hasMore}
-          fetchComments={fetchComments}
+}) {
+  useEffect(() => { fetchComments() }, [])
+  useLayoutEffect(() => {
+    // NOTE: `setTimeout` used here as their
+    // seems no other reliable way to guarantee
+    // the bottom is available before scrolling
+    if (!pending && total > 0) setTimeout(() => (
+      scrollViewRef.current?.scrollToEnd()
+    ))
+  }, [pending, total])
+
+  const scrollViewRef = useRef()
+
+  return (
+    <ScrollView
+      ref={scrollViewRef}
+      keyboardDismissMode='interactive'
+      {...panHandlers}>
+      {header}
+      <ShowMore
+        commentsLength={comments.length}
+        total={total}
+        hasMore={hasMore}
+        fetchComments={fetchComments}
+      />
+      {pending && <View style={styles.loadingContainer}>
+        <Loading style={styles.loading} />
+      </View>}
+      {comments.map(comment => (
+        <Comment
+          comment={comment}
+          showMember={showMember}
+          showTopic={showTopic}
+          slug={slug}
+          key={comment.id}
         />
-        {pending && <View style={styles.loadingContainer}>
-          <Loading style={styles.loading} />
-        </View>}
-        {comments.map(comment => (
-          <Comment
-            comment={comment}
-            showMember={showMember}
-            showTopic={showTopic}
-            slug={slug}
-            key={comment.id}
-          />        
-        ))}
-      </ScrollView>
-    )
-  }
-)
+      ))}
+    </ScrollView>
+  )
+}
 
 export function ShowMore ({ total = 0, hasMore, fetchComments }) {
   const extra = total - 10
