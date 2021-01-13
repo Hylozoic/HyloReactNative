@@ -78,7 +78,8 @@ describe('MemberList', () => {
       const testProps = {
         isServerSearch: true,
         search: 'test',
-        fetchMembers: jest.fn()
+        fetchMembers: jest.fn(),
+        isFocused: true
       }
       const renderer = ReactTestRenderer.create(
         <MemberList {...testProps} />

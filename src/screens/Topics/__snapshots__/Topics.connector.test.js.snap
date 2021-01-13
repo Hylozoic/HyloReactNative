@@ -11,7 +11,7 @@ Object {
 
 exports[`mapStateToProps returns the right keys 1`] = `
 Object {
-  "community": null,
+  "community": false,
   "communityHasTopics": false,
   "filteredTopics": Array [],
   "network": Object {

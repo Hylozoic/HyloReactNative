@@ -1,6 +1,6 @@
 import React, { useRef, useCallback } from 'react'
 import { Text, ScrollView, Image, View, TouchableOpacity } from 'react-native'
-import { useFocusEffect, useScrollToTop } from '@react-navigation/native'
+import { useFocusEffect, useIsFocused, useScrollToTop } from '@react-navigation/native'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 import Loading from 'components/Loading'
 import StarIcon from 'components/StarIcon'
@@ -28,7 +28,7 @@ export default function Topics ({
   if (!community?.id) return <TopicSupportComingSoon navigation={navigation} />
 
   const ref = useRef(null)
-  
+
   useScrollToTop(ref)
   useFocusEffect(
     useCallback(() => {

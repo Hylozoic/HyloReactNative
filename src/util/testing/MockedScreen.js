@@ -14,7 +14,7 @@ export default function MockedNavigator ({
       <Stack.Navigator>
         <Stack.Screen
           name='MockedScreen'
-          component={component || (() => children)}
+          component={() => children}
           {...otherProps}
         />
       </Stack.Navigator>

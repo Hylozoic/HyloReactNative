@@ -1,25 +1,29 @@
 import 'react-native'
 import React from 'react'
 import { render } from '@testing-library/react-native'
-import ReactShallowRenderer from 'react-test-renderer/shallow'
+import MockedScreen from 'util/testing/MockedScreen'
 import Topics, { TopicList, TopicRow, SubscribeStar } from './Topics'
-import './TopicSupportComingSoon'
-import '@react-navigation/native'
-
-jest.mock('./TopicSupportComingSoon', () => 'TopicSupportComingSoon')
-jest.mock('@react-navigation/native')
 
 describe('Topics', () => {
+
   describe('"Support Coming Soon"', () => {
-    it('displayed when no community id', () => {
+    it('displayed when no community id', async () => {
       const props = {
         fetchCommunityTopics: jest.fn()
       }
+      const navContextValue = {
+        isFocused: () => true,
+        addListener: jest.fn(() => jest.fn())
+      }
       const { toJSON } = render(
-        <Topics {...props} />
+        <MockedScreen>
+          <Topics {...props} />
+        </MockedScreen>
       )
+      // jest.runOnlyPendingTimers()
+      // expect(await findByText('expanding')).toBeTruthy()
       expect(props.fetchCommunityTopics).not.toBeCalled()
-      expect(toJSON()).toMatchSnapshot()
+      expect(toJSON).toMatchSnapshot()
     })
 
     it("not displayed when a community id is present, fetches", () => {
@@ -27,11 +31,17 @@ describe('Topics', () => {
         community: { id: 123 },
         fetchCommunityTopics: jest.fn()
       }
-      const { toJSON } = render(
-        <Topics {...props} />
+      const navContextValue = {
+        isFocused: () => true,
+        addListener: jest.fn(() => jest.fn())
+      }
+      const { getByText } = render(
+        <MockedScreen>
+          <Topics {...props} />
+        </MockedScreen>
       )
       expect(props.fetchCommunityTopics).toBeCalled()
-      expect(toJSON()).toMatchSnapshot()
+      expect(getByText('No topics were found for this community'))
     })
 
     it('fetches when rerendered with a communityId', () => {
@@ -43,10 +53,14 @@ describe('Topics', () => {
         fetchCommunityTopics: jest.fn()
       }
       const { rerender } = render(
-        <Topics {...propsBefore} />
+        <MockedScreen>
+          <Topics {...propsBefore} />
+        </MockedScreen>
       )
       rerender(
-        <Topics {...propsAfter} />
+        <MockedScreen>
+          <Topics {...propsAfter} />
+        </MockedScreen>
       )
       expect(propsBefore.fetchCommunityTopics).not.toBeCalled()
       expect(propsAfter.fetchCommunityTopics).toBeCalled()
@@ -66,7 +80,9 @@ describe('Topics', () => {
       goToTopic: () => {}
     }
     const { toJSON } = render(
-      <Topics {...props} />
+      <MockedScreen>
+        <Topics {...props} />
+      </MockedScreen>
     )
     expect(toJSON()).toMatchSnapshot()
   })
@@ -85,7 +101,9 @@ describe('Topics', () => {
       goToTopic: () => {}
     }
     const { toJSON } = render(
-      <Topics {...props} />
+      <MockedScreen>
+        <Topics {...props} />
+      </MockedScreen>
     )
     expect(toJSON()).toMatchSnapshot()
   })
@@ -100,10 +118,14 @@ describe('Topics', () => {
       fetchCommunityTopics: jest.fn()
     }
     const { rerender } = render(
-      <Topics {...propsBefore} />
+      <MockedScreen>
+        <Topics {...propsBefore} />
+      </MockedScreen>
     )
     rerender(
-      <Topics {...propsAfter} />
+      <MockedScreen>
+        <Topics {...propsAfter} />
+      </MockedScreen>
     )
     expect(propsBefore.fetchCommunityTopics).toBeCalled()
     expect(propsAfter.fetchCommunityTopics).toBeCalled()
@@ -113,14 +135,20 @@ describe('Topics', () => {
 describe('TopicList', () => {
   it('matches last snapshot', () => {
     const props = {
-      topics: [1, 2, 3],
+      community: { id: '1' },
+      communityHasTopics: true,
+      filteredTopics: [
+        { name: 'discussion', newPostCount: 1, isSubscribe: false },
+        { name: 'tech', newPostCount: 10, isSubscribe: false },
+        { name: 'ecotherapy', newPostCount: 2, isSubscribe: true }
+      ],
       setTopicSubscribe: () => {},
       goToTopic: () => {}
     }
-    const renderer = new ReactShallowRenderer()
-    renderer.render(<TopicList {...props} />)
-    const actual = renderer.getRenderOutput()
-    expect(actual).toMatchSnapshot()
+    const { toJSON } = render(
+      <TopicList {...props} />
+    )
+    expect(toJSON()).toMatchSnapshot()
   })
 
   it('matches last snapshot with empty list', () => {
@@ -129,10 +157,10 @@ describe('TopicList', () => {
       setTopicSubscribe: () => {},
       goToTopic: () => {}
     }
-    const renderer = new ReactShallowRenderer()
-    renderer.render(<TopicList {...props} />)
-    const actual = renderer.getRenderOutput()
-    expect(actual).toMatchSnapshot()
+    const { toJSON } = render(
+      <TopicList {...props} />
+    )
+    expect(toJSON()).toMatchSnapshot()
   })
 })
 
@@ -147,10 +175,10 @@ describe('TopicRow', () => {
       setTopicSubscribe: () => {},
       goToTopic: () => {}
     }
-    const renderer = new ReactShallowRenderer()
-    renderer.render(<TopicRow {...props} />)
-    const actual = renderer.getRenderOutput()
-    expect(actual).toMatchSnapshot()
+    const { toJSON } = render(
+      <TopicRow {...props} />
+    )
+    expect(toJSON()).toMatchSnapshot()
   })
 })
 
@@ -160,9 +188,9 @@ describe('SubscribeStar', () => {
       isSubscribed: true,
       onPress: () => {}
     }
-    const renderer = new ReactShallowRenderer()
-    renderer.render(<SubscribeStar {...props} />)
-    const actual = renderer.getRenderOutput()
-    expect(actual).toMatchSnapshot()
+    const { toJSON } = render(
+      <SubscribeStar {...props} />
+    )
+    expect(toJSON()).toMatchSnapshot()
   })
 })
