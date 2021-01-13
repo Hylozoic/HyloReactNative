@@ -321,8 +321,6 @@ exports[`TopicRow matches last snapshot 1`] = `
 </View>
 `;
 
-exports[`Topics "Support Coming Soon" displayed when no community id 1`] = `[Function]`;
-
 exports[`Topics renders correctly a community and topics 1`] = `
 <View
   style={

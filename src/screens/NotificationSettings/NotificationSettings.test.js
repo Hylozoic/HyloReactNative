@@ -17,9 +17,9 @@ describe('NotificationSettings', () => {
       },
       memberships: [
         {
-          id: 11,
+          id: '11',
           community: {
-            id: 12,
+            id: '12',
             avatarUrl: 'foo1.png'
           },
           settings: {
@@ -28,9 +28,9 @@ describe('NotificationSettings', () => {
           }
         },
         {
-          id: 21,
+          id: '21',
           community: {
-            id: 22,
+            id: '22',
             avatarUrl: 'foo2.png'
           },
           settings: {
@@ -39,7 +39,7 @@ describe('NotificationSettings', () => {
           }
         }
       ],
-      currentUser: { id: 1 },
+      currentUser: { id: '1' },
       unlinkAccount: () => {}
     }
 
@@ -78,10 +78,12 @@ describe('NotificationSettings', () => {
         },
         updateAllMemberships: jest.fn(),
         memberships: [{
+          id: '11',
           community: {
             id: '1'
           }
         }, {
+          id: '12',
           community: {
             id: '2'
           }

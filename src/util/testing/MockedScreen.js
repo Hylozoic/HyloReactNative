@@ -6,7 +6,6 @@ const Stack = createStackNavigator()
 
 export default function MockedNavigator ({
   children,
-  component,
   ...otherProps
 }) {
   return (
@@ -14,9 +13,10 @@ export default function MockedNavigator ({
       <Stack.Navigator>
         <Stack.Screen
           name='MockedScreen'
-          component={() => children}
           {...otherProps}
-        />
+        >
+          {children}
+        </Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
   )

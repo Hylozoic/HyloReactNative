@@ -7,23 +7,17 @@ import Topics, { TopicList, TopicRow, SubscribeStar } from './Topics'
 describe('Topics', () => {
 
   describe('"Support Coming Soon"', () => {
-    it('displayed when no community id', async () => {
+    it('displayed when no community id', () => {
       const props = {
         fetchCommunityTopics: jest.fn()
       }
-      const navContextValue = {
-        isFocused: () => true,
-        addListener: jest.fn(() => jest.fn())
-      }
-      const { toJSON } = render(
+      const { getByText } = render(
         <MockedScreen>
-          <Topics {...props} />
+          {() => <Topics {...props} />}
         </MockedScreen>
       )
-      // jest.runOnlyPendingTimers()
-      // expect(await findByText('expanding')).toBeTruthy()
       expect(props.fetchCommunityTopics).not.toBeCalled()
-      expect(toJSON).toMatchSnapshot()
+      getByText("We're working on expanding #topics to more places.")
     })
 
     it("not displayed when a community id is present, fetches", () => {
@@ -31,13 +25,9 @@ describe('Topics', () => {
         community: { id: 123 },
         fetchCommunityTopics: jest.fn()
       }
-      const navContextValue = {
-        isFocused: () => true,
-        addListener: jest.fn(() => jest.fn())
-      }
       const { getByText } = render(
         <MockedScreen>
-          <Topics {...props} />
+          {() => <Topics {...props} />}
         </MockedScreen>
       )
       expect(props.fetchCommunityTopics).toBeCalled()
@@ -54,12 +44,12 @@ describe('Topics', () => {
       }
       const { rerender } = render(
         <MockedScreen>
-          <Topics {...propsBefore} />
+          {() => <Topics {...propsBefore} />}
         </MockedScreen>
       )
       rerender(
         <MockedScreen>
-          <Topics {...propsAfter} />
+          {() => <Topics {...propsAfter} />}
         </MockedScreen>
       )
       expect(propsBefore.fetchCommunityTopics).not.toBeCalled()
@@ -81,7 +71,7 @@ describe('Topics', () => {
     }
     const { toJSON } = render(
       <MockedScreen>
-        <Topics {...props} />
+        {() => <Topics {...props} />}
       </MockedScreen>
     )
     expect(toJSON()).toMatchSnapshot()
@@ -102,7 +92,7 @@ describe('Topics', () => {
     }
     const { toJSON } = render(
       <MockedScreen>
-        <Topics {...props} />
+        {() => <Topics {...props} />}
       </MockedScreen>
     )
     expect(toJSON()).toMatchSnapshot()
@@ -119,12 +109,12 @@ describe('Topics', () => {
     }
     const { rerender } = render(
       <MockedScreen>
-        <Topics {...propsBefore} />
+        {() => <Topics {...propsBefore} />}
       </MockedScreen>
     )
     rerender(
       <MockedScreen>
-        <Topics {...propsAfter} />
+        {() => <Topics {...propsAfter} />}
       </MockedScreen>
     )
     expect(propsBefore.fetchCommunityTopics).toBeCalled()

@@ -63,10 +63,8 @@ describe('PostEditor', () => {
         route={route}
         save={save} />
     )
-    act(() => {
-      const actual = renderer.getRenderOutput()
-      expect(actual).toMatchSnapshot()
-    })
+    const actual = renderer.getRenderOutput()
+    expect(actual).toMatchSnapshot()
   })
 
   it('renders with a post', () => {
@@ -91,7 +89,7 @@ describe('PostEditor', () => {
     const renderer = TestRenderer.create(
       <Provider store={createMockStore()}>
         <MockedScreen>
-          <PostEditor
+          {() => <PostEditor
             isFocused
             shouldShowTypeChooser
             fetchPost={jest.fn()}
@@ -99,7 +97,7 @@ describe('PostEditor', () => {
             navigation={navigation}
             post={mockPost}
             save={save}
-          />
+          />}
         </MockedScreen>
       </Provider>
     )
@@ -118,28 +116,29 @@ describe('PostEditor', () => {
     expect(root.instance.state.type).toBe('offer')
   })
 
-  it('renders correctly while saving', () => {
+  it('renders correctly while saving', async () => {
     const save = jest.fn(() => Promise.resolve())
     const renderer = TestRenderer.create(
       <Provider store={createMockStore()}>
         <MockedScreen>
-          <PostEditor
+          {() => <PostEditor
             fetchPost={jest.fn()}
             isFocused
             save={save}
             navigation={navigation}
             route={route}
             post={mockPost}
-          />
+          />}
         </MockedScreen>
-      </Provider>)
-
+      </Provider>
+    )
     expect(renderer.toJSON()).toMatchSnapshot()
 
     const instance = renderer.root.findByType(PostEditor).instance
-    instance.setState({ type: 'request' })
-    instance.save()
-    
+    await act(async () => {
+      await instance.setState({ type: 'request' })
+      await instance.save()
+    })
     // TODO: Mock build header
     // expect(navigation.setOptions).toHaveBeenCalledTimes(2)
     // expect(navigation.setOptions).toHaveBeenCalledWith(expect.objectContaining({
@@ -147,80 +146,87 @@ describe('PostEditor', () => {
     // }))
     expect(save).toHaveBeenCalled()
     expect(instance.state.isSaving).toBeTruthy()
-
     expect(renderer.toJSON()).toMatchSnapshot()
   })
 
-  it('calls alert when announcementEnabled', () => {
+  it('calls alert when announcementEnabled', async () => {
     const save = jest.fn(() => Promise.resolve())
     const renderer = TestRenderer.create(
       <Provider store={createMockStore()}>
         <MockedScreen>
-          <PostEditor
+          {() => <PostEditor
             fetchPost={jest.fn()}
             isFocused
             save={save}
             navigation={navigation}
             route={route}
             post={mockPost}
-          />
+          />}
         </MockedScreen>
-      </Provider>)
-
+      </Provider>
+    )
     const instance = renderer.root.findByType(PostEditor).instance
-    instance.setState({ type: 'request', announcementEnabled: true })
-    instance.save()
-
+    await act(async () => {
+      await instance.setState({ type: 'request', announcementEnabled: true })
+      await instance.save()
+    })
     expect(Alert.alert).toHaveBeenCalled()
     expect(save).not.toHaveBeenCalled()
     expect(instance.state.isSaving).toBeTruthy()
   })
 
-  it('toggles announcement', () => {
+  it('toggles announcement', async () => {
     const save = jest.fn(() => Promise.resolve())
     const renderer = TestRenderer.create(
       <Provider store={createMockStore()}>
         <MockedScreen>
-          <PostEditor
+          {() => <PostEditor
             isFocused
             fetchPost={jest.fn()}
             save={save}
             navigation={navigation}
             route={route}
             post={mockPost}
-          />
+          />}
         </MockedScreen>
-      </Provider>)
+      </Provider>
+    )
     jest.mock('util/toast', () => ({
       showToast: jest.fn(),
       hideToast: jest.fn()
     }))
     const instance = renderer.root.findByType(PostEditor).instance
     expect(instance.toast).not.toBeDefined()
-    instance.toggleAnnoucement()
+    await act(async () => {
+      await instance.toggleAnnoucement()
+    })
     expect(instance.toast).toBeDefined()
     expect(instance.state.announcementEnabled).toBeTruthy()
-    instance.toggleAnnoucement()
+    await act(async () => {
+      await instance.toggleAnnoucement()
+    })
     expect(instance.state.announcementEnabled).toBeFalsy()
   })
 
-  it('has image methods', () => {
+  it('has image methods', async () => {
     const renderer = TestRenderer.create(
       <Provider store={createMockStore()}>
         <MockedScreen>
-          <PostEditor
+          {() => <PostEditor
             isFocused
             fetchPost={jest.fn()}
             navigation={navigation}
             route={route}
             imageUrls={['http://foo.com/foo.png']}
             post={mockPost}
-          />
+          />}
         </MockedScreen>
-      </Provider>)
-
+      </Provider>
+    )
     const instance = renderer.root.findByType(PostEditor).instance
-    instance.addImage({ remote: 'http://bar.com/bar.png' })
+    await act(async () => {
+      await instance.addImage({ remote: 'http://bar.com/bar.png' })
+    })
     expect(instance.state.imageUrls).toEqual([
       'http://foo.com/foo.png',
       'http://bar.com/bar.png'
@@ -232,23 +238,25 @@ describe('PostEditor', () => {
     ])
   })
 
-  it('showsAlert', () => {
+  it('showsAlert', async () => {
     const renderer = TestRenderer.create(
       <Provider store={createMockStore()}>
         <MockedScreen>
-          <PostEditor
+          {() => <PostEditor
             isFocused
             fetchPost={jest.fn()}
             navigation={navigation}
             route={route}
             imageUrls={['http://foo.com/foo.png']}
             post={mockPost}
-          />
+          />}
         </MockedScreen>
-      </Provider>)
-
+      </Provider>
+    )
     const instance = renderer.root.findByType(PostEditor).instance
-    instance.showAlert('alert message')
+    await act(async () => {
+      await instance.showAlert('alert message')
+    })
     expect(Alert.alert).toHaveBeenCalledWith('alert message')
   })
 
@@ -261,7 +269,7 @@ describe('PostEditor', () => {
       const renderer = TestRenderer.create(
         <Provider store={createMockStore()}>
           <MockedScreen>
-            <PostEditor
+            {() => <PostEditor
               isFocused
               upload={upload}
               fetchPost={jest.fn()}
@@ -270,13 +278,15 @@ describe('PostEditor', () => {
               route={route}
               imageUrls={['http://foo.com/foo.png']}
               post={mockPost}
-            />
+            />}
           </MockedScreen>
         </Provider>
       )
       const instance = renderer.root.findByType(PostEditor).instance
       jest.spyOn(instance, 'addFile')
-      instance.showFilePicker()
+      await act(async () => {
+        await instance.showFilePicker()
+      })
       expect(instance.state.filePickerPending).toBeTruthy()
       await act(async () => {
         await DocumentPicker.finishShow(null, {
@@ -300,7 +310,7 @@ describe('PostEditor', () => {
     const renderer = TestRenderer.create(
       <Provider store={createMockStore()}>
         <MockedScreen>
-          <PostEditor
+          {() => <PostEditor
             isFocused
             upload={upload}
             fileUrls={[]}
@@ -309,13 +319,15 @@ describe('PostEditor', () => {
             route={route}
             imageUrls={['http://foo.com/foo.png']}
             post={mockPost}
-          />
+          />}
         </MockedScreen>
-      </Provider>)
-
+      </Provider>
+    )
     const instance = renderer.root.findByType(PostEditor).instance
     jest.spyOn(instance, 'addImage')
-    instance.showImagePicker()
+    await act(async () => {
+      await instance.showImagePicker()
+    })
     expect(instance.state.imagePickerPending).toBeTruthy()
     await act(async () => {
       await RNImagePicker.finishImagePicker({
@@ -328,11 +340,11 @@ describe('PostEditor', () => {
     expect(instance.addImage).toHaveBeenCalledWith({ local: 'file:///tmp/bar.jpg', remote: 'https:/storage.hylo.com/foo.pdf' })
   })
 
-  it('has file methods', () => {
+  it('has file methods', async () => {
     const renderer = TestRenderer.create(
       <Provider store={createMockStore()}>
-        <MockedScreen>          
-          <PostEditor
+        <MockedScreen>
+          {() => <PostEditor
             isFocused
             fetchPost={jest.fn()}
             navigation={navigation}
@@ -340,66 +352,73 @@ describe('PostEditor', () => {
             postId={mockPost.id}
             fileUrls={['http://foo.com/foo.pdf']}
             post={mockPost}
-          />
+          />}
         </MockedScreen>
-      </Provider>)
+      </Provider>
+    )
 
     const instance = renderer.root.findByType(PostEditor).instance
-
-    instance.addFile({ remote: 'http://bar.com/bar.pdf' })
+    await act(async () => {
+      await instance.addFile({ remote: 'http://bar.com/bar.pdf' })
+    })
     expect(instance.state.fileUrls).toEqual([
       'http://foo.com/foo.pdf',
       'http://bar.com/bar.pdf'
     ])
-
-    instance.removeFile('http://foo.com/foo.pdf')
+    await act(async () => {
+      await instance.removeFile('http://foo.com/foo.pdf')
+    })
     expect(instance.state.fileUrls).toEqual([
       'http://bar.com/bar.pdf'
     ])
   })
 
-  it('updates the title', () => {
+  it('updates the title', async () => {
     const save = jest.fn(() => Promise.resolve())
     const renderer = TestRenderer.create(
       <Provider store={createMockStore()}>
         <MockedScreen>
-          <PostEditor
+          {() => <PostEditor
             fetchPost={jest.fn()}
             isFocused
             save={save}
             navigation={navigation}
             route={route}
             post={mockPost}
-          />
+          />}
         </MockedScreen>
-      </Provider>)
-
+      </Provider>
+    )
     const instance = renderer.root.findByType(PostEditor).instance
     const someTitle = 'some title'
-    instance.updateTitle(someTitle)
+    await act(async () => {
+      await instance.updateTitle(someTitle)
+    })
     expect(instance.state.title).toEqual(someTitle)
     expect(instance.state.titleLengthError).toBeFalsy()
   })
 
-  it('displays an error if the title is too long', () => {
+  it('displays an error if the title is too long', async () => {
     const save = jest.fn(() => Promise.resolve())
     const renderer = TestRenderer.create(
       <Provider store={createMockStore()}>
         <MockedScreen>
-          <PostEditor
+          {() => <PostEditor
             fetchPost={jest.fn()}
             isFocused
             save={save}
             navigation={navigation}
             route={route}
             post={mockPost}
-          />
+          />}
         </MockedScreen>
-      </Provider>)
-
+      </Provider>
+    )
     const instance = renderer.root.findByType(PostEditor).instance
     const longTitle = 'longTitlelongTitlelongTitlelongTitlelongTitlelongTitlelongTitlelongTitlelongTitlelongTitlelongTitlelongTitle'
-    instance.updateTitle(longTitle)
+    await act(async () => {
+      await instance.updateTitle(longTitle)
+    })
     expect(instance.state.titleLengthError).toBeTruthy()
   })
 })
@@ -408,11 +427,13 @@ describe('TypeButton', () => {
   it('renders correctly', () => {
     const renderer = new ReactShallowRenderer()
     const type = 'discussion'
-    renderer.render(<TypeButton
-      type={type}
-      key={type}
-      onPress={jest.fn()}
-                    />)
+    renderer.render(
+      <TypeButton
+        type={type}
+        key={type}
+        onPress={jest.fn()}
+      />
+    )
     const actual = renderer.getRenderOutput()
     expect(actual).toMatchSnapshot()
   })

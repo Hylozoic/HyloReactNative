@@ -59,10 +59,12 @@ export default class NotificationSettings extends React.Component {
         <MessageSettingsRow
           settings={messageSettings}
           updateMessageSettings={this.updateMessageSettings}
+          key={'messageSettings'}
         />
         <AllCommunitiesSettingsRow
           settings={allCommunitiesSettings}
           updateAllCommunities={this.updateAllCommunitiesAlert}
+          key={'allCommunitiesSetting'}
         />
         {memberships.map(
           membership => (

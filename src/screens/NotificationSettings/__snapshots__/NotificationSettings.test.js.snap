@@ -75,9 +75,9 @@ exports[`NotificationSettings matches the last snapshot 1`] = `
       Object {
         "community": Object {
           "avatarUrl": "foo1.png",
-          "id": 12,
+          "id": "12",
         },
-        "id": 11,
+        "id": "11",
         "settings": Object {
           "sendEmail": true,
           "sendPushNotifications": false,
@@ -91,9 +91,9 @@ exports[`NotificationSettings matches the last snapshot 1`] = `
       Object {
         "community": Object {
           "avatarUrl": "foo2.png",
-          "id": 22,
+          "id": "22",
         },
-        "id": 21,
+        "id": "21",
         "settings": Object {
           "sendEmail": false,
           "sendPushNotifications": true,
