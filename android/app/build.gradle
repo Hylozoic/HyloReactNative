@@ -8,8 +8,7 @@ buildscript {
 }
 
 apply plugin: 'com.onesignal.androidsdk.onesignal-gradle-plugin'
-
-apply plugin: "com.android.application"
+apply plugin: 'com.android.application'
 
 import com.android.build.OutputFile
 
@@ -180,11 +179,6 @@ android {
     buildTypes {
         debug {
             signingConfig signingConfigs.debug
-            // manifestPlaceholders = [
-            //     onesignal_app_id: DEBUG_ONESIGNAL_APP_ID,
-            //     onesignal_google_project_number: "REMOTE"
-            // ]
-
         }
         release {
             // Caution! In production, you need to generate your own keystore file.
@@ -192,10 +186,6 @@ android {
             signingConfig signingConfigs.release
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
-            // manifestPlaceholders = [
-            //     onesignal_app_id: RELEASE_ONESIGNAL_APP_ID,
-            //     onesignal_google_project_number: "REMOTE"
-            // ]
         }
     }
 
@@ -224,6 +214,7 @@ dependencies {
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules
     implementation 'io.intercom.android:intercom-sdk:6.+'
+    implementation 'com.onesignal:OneSignal:[4.0.0, 4.99.99]'
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
       exclude group:'com.facebook.fbjni'

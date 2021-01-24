@@ -43,19 +43,14 @@ export default class AppContainer extends Component {
     }
     // Uncomment for OneSignal debugging
     // OneSignal.setLogLevel(6, 0)
-    OneSignal.init(isDev
+    OneSignal.setAppId(isDev
       ? process.env.ONESIGNAL_APP_ID_DEBUG
-      : process.env.ONESIGNAL_APP_ID_RELEASE,
-    {
-      kOSSettingsKeyAutoPrompt: false,
-      kOSSettingsKeyInAppLaunchURL: false,
-      kOSSettingsKeyInFocusDisplayOption: 2
-    }
+      : process.env.ONESIGNAL_APP_ID_RELEASE
     )
-    OneSignal.addEventListener('opened', this.handleOpenedPushNotification)
-    // Controls what should happen if a notification is received while the app is open. 2 means that the notification will go directly to the device's notification center.
-    // 0 = None, 1 = InAppAlert, 2 = Notification
-    OneSignal.inFocusDisplaying(0)
+    OneSignal.setNotificationOpenedHandler(this.handleOpenedPushNotification)
+    OneSignal.setNotificationWillShowInForegroundHandler(notifReceivedEvent => {
+      notifReceivedEvent.complete()
+    })
   }
 
   componentDidMount () {
@@ -64,7 +59,7 @@ export default class AppContainer extends Component {
 
   componentWillUnmount () {
     AppState.removeEventListener('change', this.handleAppStateChange)
-    OneSignal.removeEventListener('opened', this.handleOpenedPushNotification)
+    OneSignal.clearHandlers()
   }
 
   handleAppStateChange = nextAppState => {

@@ -5,9 +5,7 @@ import { bindActionCreators } from 'redux'
 jest.mock('react-native-onesignal', () => ({
   // eslint-disable-next-line standard/no-callback-literal
   getPermissionSubscriptionState: jest.fn(callback => callback({ userId: 5 })),
-  addEventListener: jest.fn(),
-  registerForPushNotifications: jest.fn(),
-  inFocusDisplaying: jest.fn()
+  addEventListener: jest.fn()
 }))
 
 const props = {

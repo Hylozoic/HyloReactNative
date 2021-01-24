@@ -102,7 +102,7 @@ PODS:
     - GTMSessionFetcher/Core (= 1.5.0)
   - Intercom (6.0.2)
   - Mixpanel (3.6.4)
-  - OneSignal (2.16.1)
+  - OneSignal (3.1.0)
   - OpenSSL-Universal (1.0.2.20):
     - OpenSSL-Universal/Static (= 1.0.2.20)
   - OpenSSL-Universal/Static (1.0.2.20)
@@ -304,8 +304,8 @@ PODS:
     - React
   - react-native-netinfo (5.9.9):
     - React-Core
-  - react-native-onesignal (3.9.3):
-    - OneSignal (= 2.16.1)
+  - react-native-onesignal (4.0.3):
+    - OneSignal (= 3.1.0)
     - React (< 1.0.0, >= 0.13.0)
   - react-native-restart (0.0.17):
     - React
@@ -392,7 +392,7 @@ PODS:
     - React-Core
   - RNScreens (2.16.1):
     - React-Core
-  - RNSentry (2.1.0):
+  - RNSentry (2.1.1):
     - React-Core
     - Sentry (= 6.0.9)
   - RNVectorIcons (7.1.0):
@@ -433,7 +433,7 @@ DEPENDENCIES:
   - GoogleSignIn (~> 5.0.2)
   - Intercom
   - Mixpanel
-  - OneSignal (< 3.0, >= 2.11.2)
+  - OneSignal (< 5.0, >= 2.9.3)
   - RCTRequired (from `../node_modules/react-native/Libraries/RCTRequired`)
   - RCTTypeSafety (from `../node_modules/react-native/Libraries/TypeSafety`)
   - React (from `../node_modules/react-native/`)
@@ -483,7 +483,7 @@ DEPENDENCIES:
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
-  trunk:
+  https://github.com/CocoaPods/Specs:
     - AppAuth
     - boost-for-react-native
     - CocoaAsyncSocket
@@ -638,7 +638,7 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: b3503b20a988c4e20cc189aa798fd18220133f52
   Intercom: 523417d82ed1a8c635cc7f97b266eb8bd0bd9d85
   Mixpanel: 8e0867f15e861deebdd1cf9098547fb570157032
-  OneSignal: 5f6514ec2b931306eb067acb124afbb2e49970af
+  OneSignal: a5853b3c7f7bce791353a15db019b5ccd5b8585b
   OpenSSL-Universal: ff34003318d5e1163e9529b08470708e389ffcdd
   RCTRequired: 082f10cd3f905d6c124597fd1c14f6f2655ff65e
   RCTTypeSafety: 8c9c544ecbf20337d069e4ae7fd9a377aadf504b
@@ -659,7 +659,7 @@ SPEC CHECKSUMS:
   react-native-intercom: ddc3a81f883b9089649dbaf4c02e3b3ad271b6d1
   react-native-mixpanel: 5d0bcea791fd938c35138be2d00e50e19b9de601
   react-native-netinfo: 0212ce8604e88edf686f1481b925b17a42a52449
-  react-native-onesignal: f92b6fae16388422f1b5d73b2c31e7000f481ae8
+  react-native-onesignal: a69eeb12486e7739ed8f180e6ddd915be77721ba
   react-native-restart: d19a0f8d053d065fe64cd2baebb6487111c77149
   react-native-safe-area-context: b6e0e284002381d2ff29fa4fff42b4d8282e3c94
   react-native-webview: cf5527893252b3b036eea024a1da6996f7344c74
@@ -682,12 +682,12 @@ SPEC CHECKSUMS:
   RNGoogleSignin: ccf71ee4b6cfd324fd788a41e457e2043838c0d9
   RNReanimated: e03f7425cb7a38dcf1b644d680d1bfc91c3337ad
   RNScreens: 45c457af3d2ee9e08fc01e70da87e653d46b1198
-  RNSentry: 51972e3fe50e2fb38ae459af8c87d61f63f364db
+  RNSentry: 6b46b6fc1d715a378fbaa5d7d43bc9ce99b500e5
   RNVectorIcons: bc69e6a278b14842063605de32bec61f0b251a59
   Sentry: 388c9dc093b2fd3a264466a5c5b21e25959610a9
   Yoga: 4bd86afe9883422a7c4028c00e34790f560923d6
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: ea7fc269a7eb0dd232c2b90d42287cfc1f053c6d
+PODFILE CHECKSUM: aa7cbb7b0577bab81f5b98da58c578cf17a3d26e
 
-COCOAPODS: 1.9.3
+COCOAPODS: 1.10.1
