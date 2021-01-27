@@ -5,7 +5,7 @@ import {
   TouchableOpacity,
   ScrollView
 } from 'react-native'
-import { buildTabStackScreenOptions } from 'navigation/header'
+import { buildTabStackScreenOptions, buildModalScreenOptions } from 'navigation/header'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
 import { debounce, find, isEmpty, pick } from 'lodash/fp'
 import { validateUser } from 'hylo-utils/validators'
@@ -33,19 +33,27 @@ export default class MemberDetails extends React.Component {
 
   setHeader = () => {
     const { editing, changed } = this.state
-    const { isMe, navigation, route } = this.props
+    const { navigation, route } = this.props
     const headerTitle = editing
       ? 'Edit Your Profile'
       : `About`
-    navigation.setOptions(buildTabStackScreenOptions({
-      route,
-      navigation,
-      headerTitle,
-      headerLeftConfirm: changed,
-      headerRightButtonLabel: editing ? 'Save' : null,
-      headerRightButtonOnPress: this.saveChanges,
-      headerRightButtonDisabled: !changed || !this.isValid(),
-    }))
+    if (editing) {
+      navigation.setOptions(buildModalScreenOptions({
+        route,
+        navigation,
+        headerTitle,
+        headerLeftConfirm: changed,
+        headerRightButtonLabel: editing ? 'Save' : null,
+        headerRightButtonOnPress: this.saveChanges,
+        headerRightButtonDisabled: !changed || !this.isValid()
+      }))
+    } else {  
+      navigation.setOptions(buildTabStackScreenOptions({
+        route,
+        navigation,
+        headerTitle
+      }))
+    }
   }
 
   componentDidMount () {
@@ -99,7 +107,7 @@ export default class MemberDetails extends React.Component {
   saveChanges = async () => {
     if (this.isValid()) {
       await this.props.updateUserSettings(this.state.person)
-      this.setState({ editing: false, changed: false })
+      this.setState(() => ({ editing: false, changed: false }))
     }
   }
 
