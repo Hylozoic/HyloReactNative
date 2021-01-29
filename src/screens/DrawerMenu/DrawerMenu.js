@@ -7,9 +7,6 @@ import SocketListener from 'components/SocketListener'
 import Button from 'components/Button'
 import Icon from 'components/Icon'
 import { isEmpty } from 'lodash/fp'
-import { ALL_COMMUNITIES_ID } from 'navigation/linking/helpers'
-
-const allCommunitiesImage = require('assets/All_Communities2.png')
 
 export default class DrawerMenu extends React.PureComponent {
   onGoToCommunity = (community) => this.props.goToCommunity(community)
@@ -53,11 +50,9 @@ export default class DrawerMenu extends React.PureComponent {
       }
     ]
 
-    const isAll = currentNetworkId && currentNetworkId === ALL_COMMUNITIES_ID
-
     return (
       <View style={styles.parent}>
-        {!isAll && currentContext && (
+        {currentContext && (
           <View style={styles.header}>
             <Image source={{ uri: currentContext.avatarUrl }} style={styles.headerAvatar} />
             <Text style={styles.headerText}>{currentContext.name}</Text>
@@ -153,17 +148,13 @@ export class NetworkRow extends React.PureComponent {
   render () {
     const { network, goToCommunity, currentCommunityId } = this.props
     const { expanded, seeAllExpanded } = this.state
-    const { id, avatarUrl, name, communities, nonMemberCommunities } = network
-    const isAll = id === ALL_COMMUNITIES_ID
-    const imageSource = isAll
-      ? allCommunitiesImage
-      : avatarUrl && { uri: avatarUrl }
+    const { avatarUrl, name, communities, nonMemberCommunities } = network
     const expandable = !isEmpty(communities)
     const moreCommunities = !isEmpty(nonMemberCommunities)
     return (
       <View style={[styles.networkRow, expanded ? styles.networkRowExpanded : styles.networkRowCollapsed]}>
         <TouchableOpacity onPress={this.openNetwork} style={[styles.rowTouchable, styles.networkRowTouchable]}>
-          {imageSource && <Image source={imageSource} style={styles.networkAvatar} />}
+          {avatarUrl && <Image source={{ uri: avatarUrl }} style={styles.networkAvatar} />}
           <Text style={styles.networkRowText} ellipsizeMode='tail' numberOfLines={1}>
             {name}
           </Text>

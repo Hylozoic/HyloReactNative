@@ -1,6 +1,5 @@
 import { connect } from 'react-redux'
 import { get } from 'lodash/fp'
-
 import {
   getSort,
   getFilter,
@@ -15,7 +14,6 @@ import {
 } from './FeedList.store'
 import fetchPosts, { FETCH_POSTS } from 'store/actions/fetchPosts'
 import fetchProjects, { FETCH_PROJECTS } from 'store/actions/fetchProjects'
-
 import resetNewPostCount from 'store/actions/resetNewPostCount'
 
 export function mapStateToProps (state, props) {
@@ -24,7 +22,7 @@ export function mapStateToProps (state, props) {
   const { community, network, topicName, isProjectFeed } = props
 
   const queryProps = getQueryProps(state, {
-    community: community,
+    community,
     network,
     sortBy,
     filter: isProjectFeed ? 'project' : filter,
@@ -46,7 +44,7 @@ export function mapStateToProps (state, props) {
     pending: !!pending,
     networkId: get('id', network),
     pendingRefresh: !!(pending && pending.extractQueryResults.reset),
-    queryProps // this is just here so mergeProps can use it,
+    queryProps // this is just here so mergeProps can use it
   }
 }
 
@@ -59,9 +57,9 @@ export function shouldResetNewPostCount ({ subject, sortBy, filter, topic }) {
 export function mergeProps (stateProps, dispatchProps, ownProps) {
   const { hasMore, pending, postIds, queryProps } = stateProps
   const { community, isProjectFeed } = ownProps
-
-  const fetchPostsOrProjects = isProjectFeed ? dispatchProps.fetchProjects : dispatchProps.fetchPosts
-
+  const fetchPostsOrProjects = isProjectFeed
+    ? dispatchProps.fetchProjects
+    : dispatchProps.fetchPosts
   const fetchMorePosts = hasMore && !pending
     ? () => fetchPostsOrProjects({ ...queryProps, offset: postIds.length })
     : () => {}

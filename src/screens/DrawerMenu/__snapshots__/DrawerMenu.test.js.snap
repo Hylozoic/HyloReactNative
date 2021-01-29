@@ -318,13 +318,6 @@ exports[`NetworkRow shows all communities link 1`] = `
   <ForwardRef
     onPress={[Function]}
   >
-    <Image
-      source={
-        Object {
-          "testUri": "../../../assets/All_Communities2.png",
-        }
-      }
-    />
     <Text
       ellipsizeMode="tail"
       numberOfLines={1}

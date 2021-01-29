@@ -10,7 +10,6 @@ import {
   presentThread,
   updateThreadReadTime
 } from './Thread.store'
-import { ALL_COMMUNITIES_ID } from 'navigation/linking/helpers'
 import getCurrentUserId from 'store/selectors/getCurrentUserId'
 import getCurrentNetworkId from 'store/selectors/getCurrentNetworkId'
 import getCurrentCommunityId from 'store/selectors/getCurrentCommunityId'
@@ -47,9 +46,7 @@ export function mapDispatchToProps (dispatch, { navigation, route }) {
     updateThreadReadTime: () => dispatch(updateThreadReadTime(threadId)),
     showMember: id => confirmNavigate(() => navigation.navigate('Member', { id })),
     showTopic: (communityId, networkId) => topicName => {
-      // All Communities and Network feed to topic nav
-      // currently not supported
-      if (networkId || communityId === ALL_COMMUNITIES_ID) {
+      if (networkId) {
         confirmNavigate(() => navigation.navigate('Topics'))
       } else {
         confirmNavigate(() => navigation.navigate('Topic Feed', { communityId, topicName }))

@@ -22,8 +22,13 @@ Object {
     "avatarUrl": "someUrl",
   },
   "currentCommunityId": "7",
-  "currentContext": Object {
-    "id": undefined,
+  "currentContext": SessionBoundModel {
+    "_fields": Object {
+      "avatarUrl": "someUrl",
+      "id": "7",
+      "name": "someName",
+    },
+    "avatarUrl": "someUrl",
   },
   "currentNetworkId": undefined,
   "currentUser": SessionBoundModel {
@@ -36,9 +41,13 @@ Object {
   "name": "meUser",
   "networks": Array [
     Object {
+      "avatarUrl": undefined,
+      "bannerUrl": undefined,
       "communities": Array [],
+      "headerAvatarUrl": undefined,
       "id": "all-communities",
       "name": "All Communities",
+      "slug": "all-communities",
     },
   ],
 }
@@ -106,9 +115,13 @@ Object {
   ],
   "networks": Array [
     Object {
+      "avatarUrl": undefined,
+      "bannerUrl": undefined,
       "communities": Array [],
+      "headerAvatarUrl": undefined,
       "id": "all-communities",
       "name": "All Communities",
+      "slug": "all-communities",
     },
     Object {
       "communities": Array [

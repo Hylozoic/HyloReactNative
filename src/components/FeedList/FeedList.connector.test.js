@@ -4,7 +4,7 @@ import { times } from 'lodash/fp'
 import { mapStateToProps, mergeProps, shouldResetNewPostCount } from './FeedList.connector'
 import { MODULE_NAME, defaultState, defaultSortBy } from './FeedList.store'
 import { FETCH_POSTS } from 'store/actions/fetchPosts'
-import { ALL_COMMUNITIES_ID } from 'navigation/linking/helpers'
+import { ALL_COMMUNITIES_ID } from 'store/models/Network'
 
 describe('mapStateToProps', () => {
   let state
@@ -31,16 +31,16 @@ describe('mapStateToProps', () => {
 
   it('returns empty posts and default query props if no results exist', () => {
     expect(mapStateToProps(state, { id: 'bar' })).toEqual({
+      communityId: undefined,
       postIds: [],
       hasMore: undefined,
       pending: false,
       pendingRefresh: false,
       filter: defaultState.filter,
       sortBy: defaultState.sortBy,
+      networkId: undefined,
       queryProps: {
-        slug: ALL_COMMUNITIES_ID,
-        sortBy: 'updated',
-        subject: ALL_COMMUNITIES_ID
+        sortBy: 'updated'
       }
     })
   })

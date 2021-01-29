@@ -1,10 +1,7 @@
 import React from 'react'
-import {
-  View, Text, Image
-} from 'react-native'
+import { View, Text, Image } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import { get, pick } from 'lodash/fp'
-import { DEFAULT_BANNER } from 'store/models/Community'
 import styles from './Members.styles'
 import Button from 'components/Button'
 import MemberList from 'components/MemberList'
@@ -19,15 +16,9 @@ export default class Members extends React.Component {
   }
 
   render () {
-    const {
-      community,
-      network,
-      canModerate,
-      isAll
-    } = this.props
-
-    const showInviteButton = get('allowCommunityInvites', community) || canModerate
-    // sort of a hack since members need to be even since it's rows of 2.  fixes flexbox
+    const { community, network, canModerate } = this.props
+    const showInviteButton = !network &&
+      (get('allowCommunityInvites', community) || canModerate)
 
     return (
       <View style={styles.container}>
@@ -48,23 +39,25 @@ export default class Members extends React.Component {
             'showMember',
             'fetchMoreMembers'], this.props)}
         >
-          <Banner community={community} network={network} all={isAll} handleInviteOnPress={this.goToInvitePeople} showInviteButton={showInviteButton} />
+          <Banner
+            community={community}
+            network={network}
+            handleInviteOnPress={this.goToInvitePeople}
+            showInviteButton={showInviteButton}
+          />
         </MemberList>
       </View>
     )
   }
 }
 
-export function Banner ({ community, network, all, showInviteButton, handleInviteOnPress }) {
+export function Banner ({ community, network, showInviteButton, handleInviteOnPress }) {
   let bannerUrl, name
 
   if (network) {
     ({ bannerUrl, name } = network)
   } else if (community) {
     ({ bannerUrl, name } = community)
-  } else if (all) {
-    name = 'All Communities'
-    bannerUrl = DEFAULT_BANNER
   } else {
     return null
   }

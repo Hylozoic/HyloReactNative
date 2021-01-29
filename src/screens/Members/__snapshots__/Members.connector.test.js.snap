@@ -21,9 +21,9 @@ Object {
 exports[`makeFetchOpts handles no community or network 1`] = `
 Object {
   "search": "fee",
-  "slug": "all-communities",
+  "slug": undefined,
   "sortBy": "join",
-  "subject": "all-communities",
+  "subject": undefined,
 }
 `;
 
@@ -54,24 +54,22 @@ Object {
   },
   "fetchOpts": Object {
     "search": undefined,
-    "slug": undefined,
+    "slug": "tom",
     "sortBy": undefined,
-    "subject": "network",
+    "subject": "community",
   },
   "hasMore": undefined,
-  "isAll": false,
   "members": Array [],
-  "network": Object {
-    "id": undefined,
-  },
+  "network": null,
   "pending": undefined,
   "search": undefined,
-  "slug": undefined,
+  "slug": "tom",
   "sortBy": undefined,
   "sortKeys": Object {
+    "join": "Newest",
     "location": "Location",
     "name": "Name",
   },
-  "subject": "network",
+  "subject": "community",
 }
 `;

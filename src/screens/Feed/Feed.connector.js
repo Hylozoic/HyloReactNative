@@ -7,7 +7,6 @@ import getCommunity from 'store/selectors/getCommunity'
 import getCurrentCommunityId from 'store/selectors/getCurrentCommunityId'
 import getCurrentNetworkId from 'store/selectors/getCurrentNetworkId'
 import makeGoToCommunity from 'store/actions/makeGoToCommunity'
-import { ALL_COMMUNITIES_ID } from 'navigation/linking/helpers'
 import {
   fetchCommunityTopic,
   getCommunityTopic,
@@ -118,7 +117,7 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     newPost: () => dispatchProps.newPost(communityId, topicName),
     showTopic: selectedTopicName => {
       if (selectedTopicName == topicName) return
-      if (network || !communityId || communityId === ALL_COMMUNITIES_ID) {
+      if (network) {
         return showToast('Topics support for "All Communities" and Networks coming soon!')
       }
       if (topicName) {

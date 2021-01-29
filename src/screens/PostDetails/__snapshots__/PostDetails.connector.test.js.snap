@@ -3,10 +3,7 @@
 exports[`mapsStateToProps 1`] = `
 Object {
   "currentCommunity": null,
-  "currentCommunityId": null,
-  "currentNetwork": Object {
-    "id": undefined,
-  },
+  "currentNetwork": null,
   "currentUser": undefined,
   "id": "1",
   "isProject": false,
@@ -139,11 +136,13 @@ Array [
 `;
 
 exports[`mergeProps showTopic 1`] = `
-RootSiblingsManager {
-  "id": "root-sibling-1",
-  "manager": Object {
-    "destroy": [Function],
-    "update": [Function],
-  },
-}
+Array [
+  "navigate",
+  Array [
+    "Topic Feed",
+    Object {
+      "topicName": "mytopicname",
+    },
+  ],
+]
 `;

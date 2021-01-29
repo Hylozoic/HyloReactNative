@@ -1,12 +1,10 @@
 import { connect } from 'react-redux'
 import { get } from 'lodash/fp'
 import { showToast } from 'util/toast'
-import { ALL_COMMUNITIES_ID } from 'navigation/linking/helpers'
 import fetchPost from 'store/actions/fetchPost'
 import { createComment } from './CommentEditor/CommentEditor.store'
 import getCurrentCommunity from 'store/selectors/getCurrentCommunity'
 import { getPresentedPost } from 'store/selectors/getPost'
-import getCurrentCommunityId from 'store/selectors/getCurrentCommunityId'
 import getRouteParam from 'store/selectors/getRouteParam'
 import getMe from 'store/selectors/getMe'
 import makeGoToCommunity from 'store/actions/makeGoToCommunity'
@@ -20,22 +18,20 @@ export function mapStateToProps (state, props) {
   const currentUser = getMe(state, props)
   const currentNetwork = getCurrentNetwork(state, props)
   const currentCommunity = getCurrentCommunity(state, props)
-  const currentCommunityId = getCurrentCommunity(state, props)
-  const post = getPresentedPost(state, { id, currentCommunityId })
+  const post = getPresentedPost(state, { id, currentCommunityId: currentCommunity?.id })
   const isProject = get('type', post) === 'project'
   return {
     id,
     post,
     isProject,
     currentUser,
-    currentCommunityId,
     currentCommunity,
     currentNetwork
   }
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
-  const { id, post, currentCommunityId } = stateProps
+  const { id, post, currentNetwork } = stateProps
   const { dispatch } = dispatchProps
   const { navigation } = ownProps
 
@@ -52,7 +48,7 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     goToMembers: () => navigation.navigate('Project Members', { id, members: get('members', post) }),
     showMember: goToMemberMaker(navigation),
     showTopic: (topicName) => {
-      if (!currentCommunityId || currentCommunityId === ALL_COMMUNITIES_ID) {
+      if (currentNetwork) {
         return showToast('Topics support for "All Communities" and Networks coming soon!')
       } else {
         return navigation.navigate('Topic Feed', { topicName })
