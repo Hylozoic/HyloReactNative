@@ -1,32 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Banner matches snapshot when all is true 1`] = `
-<View>
-  <Image
-    source={
-      Object {
-        "uri": "https://d3ngex8q79bk55.cloudfront.net/misc/default_community_banner.jpg",
-      }
-    }
-  />
-  <MockLinearGradient
-    colors={
-      Array [
-        "rgba(0, 0, 0, 0)",
-        "rgba(0, 0, 0, 0.1)",
-        "rgba(0, 0, 0, 0.3)",
-        "rgba(0, 0, 0, 0.6)",
-      ]
-    }
-  />
-  <View>
-    <Text>
-      All Communities
-    </Text>
-  </View>
-</View>
-`;
-
 exports[`Banner matches snapshot with community 1`] = `
 <View>
   <Image
@@ -81,14 +54,13 @@ exports[`Banner matches snapshot with network 1`] = `
 </View>
 `;
 
-exports[`renders correctly with no community and isAll 1`] = `
+exports[`renders correctly with no community (all communities default) 1`] = `
 <View>
   <RCTScrollView
     ListFooterComponent={null}
     ListHeaderComponent={
       <View>
         <Banner
-          all={true}
           handleInviteOnPress={[Function]}
         />
         <View>
@@ -171,32 +143,6 @@ exports[`renders correctly with no community and isAll 1`] = `
         onLayout={[Function]}
       >
         <View>
-          <View>
-            <Image
-              source={
-                Object {
-                  "uri": "https://d3ngex8q79bk55.cloudfront.net/misc/default_community_banner.jpg",
-                }
-              }
-            />
-            <div
-              colors={
-                Array [
-                  "rgba(0, 0, 0, 0)",
-                  "rgba(0, 0, 0, 0.1)",
-                  "rgba(0, 0, 0, 0.3)",
-                  "rgba(0, 0, 0, 0.6)",
-                ]
-              }
-            >
-              MockLinearGradient
-            </div>
-            <View>
-              <Text>
-                All Communities
-              </Text>
-            </View>
-          </View>
           <View>
             <View>
               <Icon
@@ -401,7 +347,7 @@ exports[`renders with invite button when a moderator 1`] = `
     ListHeaderComponent={
       <View>
         <Banner
-          all={true}
+          community={Object {}}
           handleInviteOnPress={[Function]}
           showInviteButton={true}
         />
@@ -489,7 +435,7 @@ exports[`renders with invite button when a moderator 1`] = `
             <Image
               source={
                 Object {
-                  "uri": "https://d3ngex8q79bk55.cloudfront.net/misc/default_community_banner.jpg",
+                  "uri": undefined,
                 }
               }
             />
@@ -506,9 +452,7 @@ exports[`renders with invite button when a moderator 1`] = `
               MockLinearGradient
             </div>
             <View>
-              <Text>
-                All Communities
-              </Text>
+              <Text />
             </View>
             <View>
               <View

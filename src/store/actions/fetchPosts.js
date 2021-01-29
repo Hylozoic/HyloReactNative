@@ -1,6 +1,6 @@
 import { getPostFieldsFragment } from './fetchPost'
 import { get } from 'lodash/fp'
-import { ALL_COMMUNITIES_ID } from 'navigation/linking/helpers'
+import { ALL_COMMUNITIES_ID } from 'store/models/Network'
 
 export const FETCH_POSTS = 'FETCH_POSTS'
 
@@ -17,13 +17,15 @@ export default function fetchPosts (
     extractModel = 'Community'
     getItems = get('payload.data.community.posts')
   } else if (subject === 'network') {
-    query = networkQuery
-    extractModel = 'Network'
-    getItems = get('payload.data.network.posts')
-  } else if (subject === ALL_COMMUNITIES_ID) {
-    query = allCommunitiesQuery
-    extractModel = 'Post'
-    getItems = get('payload.data.posts')
+    if (networkSlug === ALL_COMMUNITIES_ID) {
+      query = allCommunitiesQuery
+      extractModel = 'Post'
+      getItems = get('payload.data.posts')  
+    } else {
+      query = networkQuery
+      extractModel = 'Network'
+      getItems = get('payload.data.network.posts')
+    }
   } else if (subject === 'project') {
     query = communityQuery
     extractModel = 'Community'

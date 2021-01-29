@@ -52,7 +52,7 @@ export function buildTabStackScreenOptions ({
       backgroundColor: rhino80
       // backgroundColor: black10onRhino
       // backgroundColor: black10OnCaribbeanGreen
-    },  
+    },
     headerLeft: () => (
       <>
         <FocusAwareStatusBar barStyle='light-content' backgroundColor={rhino80} />

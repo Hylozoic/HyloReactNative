@@ -9,7 +9,7 @@ import getCurrentNetworkId from 'store/selectors/getCurrentNetworkId'
 import { logout } from 'screens/Login/actions'
 import selectCommunity from 'store/actions/selectCommunity'
 import selectNetwork from 'store/actions/selectNetwork'
-import { ALL_COMMUNITIES_ID } from 'navigation/linking/helpers'
+import { ALL_COMMUNITIES_NETWORK } from 'store/models/Network'
 import getCanModerate from 'store/selectors/getCanModerate'
 import getCurrentCommunity from 'store/selectors/getCurrentCommunity'
 import { createSelector } from 'reselect'
@@ -47,11 +47,7 @@ export function partitionCommunities (memberships) {
   })
 
   const networks = [
-    {
-      id: ALL_COMMUNITIES_ID,
-      name: 'All Communities',
-      communities: []
-    }
+    ALL_COMMUNITIES_NETWORK
   ].concat(values(omit('independent', reduced)))
 
   // pulls out the communities we are already a member of from the nonMemberCommunities array
@@ -110,18 +106,11 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     ...dispatchProps,
     ...ownProps,
     goToCommunity: community => {
-      if (community.id === ALL_COMMUNITIES_ID) {
-        navigation.navigate('Feed', {
-          communityId: null,
-          networkId: null
-        })
-      } else {
-        navigation.closeDrawer()
-        navigation.navigate('Feed', {
-          communityId: community.id,
-          networkId: null
-        })
-      }
+      navigation.closeDrawer()
+      navigation.navigate('Feed', {
+        communityId: community.id,
+        networkId: null
+      })
       dispatchProps.selectCommunity(community.id)
     },
     goToNetwork: network => {

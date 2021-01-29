@@ -2,22 +2,17 @@ import React from 'react'
 import { View, Image } from 'react-native'
 import { HeaderBackButton } from '@react-navigation/stack'
 import { get } from 'lodash/fp'
-import { ALL_COMMUNITIES_ID } from 'navigation/linking/helpers'
 import Icon from 'components/Icon'
 import styles from './MenuButton.styles.js'
 
-const allCommunitiesLogo = require('assets/All_Communities.png')
 
 export default function MenuButton ({
   currentContext,
   canGoBack,
   navigation
 }) {
-  const avatarUrl = get('avatarUrl', currentContext)
-  const id = get('id', currentContext)
-  const imageSource = ((id && id === ALL_COMMUNITIES_ID) || !avatarUrl)
-    ? allCommunitiesLogo
-    : { uri: avatarUrl }
+  const avatarUrl = get('headerAvatarUrl', currentContext)
+    || get('avatarUrl', currentContext)
   const onPress = !canGoBack
     ? navigation.openDrawer
     : navigation.goBack
@@ -32,7 +27,7 @@ export default function MenuButton ({
             {!canGoBack
               ? <Icon name='Hamburger' style={styles.menuIcon} />
               : <Icon name='ArrowForward' style={styles.backIcon} />}
-            <Image source={imageSource} style={styles.avatar} />
+            <Image source={{ uri: avatarUrl }} style={styles.avatar} />
           </View>
         )}        
       />

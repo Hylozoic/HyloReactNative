@@ -3,7 +3,7 @@ import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import ReactTestRenderer from 'react-test-renderer'
 import DrawerMenu, { SectionHeader, NetworkRow, CommunityRow, TextButton } from './DrawerMenu'
-import { ALL_COMMUNITIES_ID } from 'navigation/linking/helpers'
+import { ALL_COMMUNITIES_NETWORK } from 'store/models/Network'
 
 describe('DrawerMenu', () => {
   const minProps = {
@@ -127,16 +127,13 @@ describe('NetworkRow', () => {
 
   it('shows all communities link', () => {
     const renderer = new ReactShallowRenderer()
-    const network = {
-      id: ALL_COMMUNITIES_ID,
-      name: 'All Communities',
-      communities: []
-    }
-    renderer.render(<NetworkRow
-      network={network}
-      goToCommunity={() => {}}
-      currentCommunityId={1}
-                    />)
+    const network = ALL_COMMUNITIES_NETWORK
+    renderer.render(
+      <NetworkRow
+        network={network}
+        goToCommunity={() => {}}
+      />
+    )
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()

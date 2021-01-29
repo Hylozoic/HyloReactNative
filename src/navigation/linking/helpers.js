@@ -4,7 +4,6 @@ import { get } from 'lodash/fp'
 
 export const MAIN_ROUTE_NAME = 'Main'
 export const MAIN_ROUTE_PATH = 'main'
-export const ALL_COMMUNITIES_ID = 'all-communities'
 
 export function resetToAuthRoute (navigation, routeName) {
   // return navigation.dispatch({

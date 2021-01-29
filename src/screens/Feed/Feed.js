@@ -13,8 +13,7 @@ import CreateCommunityNotice from 'components/CreateCommunityNotice'
 import FeedList from 'components/FeedList'
 import SocketSubscriber from 'components/SocketSubscriber'
 import styles from './Feed.styles'
-
-const allCommunitiesBannerImage = require('assets/all-communities-banner.png')
+import { ALL_COMMUNITIES_ID } from 'store/models/Network'
 
 export function setHeaderTitle (navigation, topicName, community, isProjectFeed) {
   let headerTitle 
@@ -54,7 +53,7 @@ export default function Feed ({
   const ref = useRef(null)
 
   useScrollToTop(ref)
-  // TODO: selectCommunity should probably be moved back into goToCommuity function
+  // TODO: selectCommunity should probably be moved back into goToCommunity function
   useEffect(() => { community?.id && selectCommunity(community.id) }, [community?.id])
   useEffect(() => { network?.id && selectNetwork(network.id) }, [network?.id])
   useEffect(() => { fetchCommunityTopic() }, [fetchCommunityTopic, topicName])
@@ -75,14 +74,11 @@ export default function Feed ({
     )
   }
 
-  const all = !community && !topicName && !network
+  const all = network?.id === ALL_COMMUNITIES_ID
 
   // From FeedBanner
   let bannerUrl, name, image
-  if (all) {
-    name = 'All Communities'
-    image = allCommunitiesBannerImage
-  } else if (network) {
+  if (network) {
     ({ bannerUrl, name } = network)
     if (bannerUrl) image = { uri: bannerUrl }
   } else if (community) {

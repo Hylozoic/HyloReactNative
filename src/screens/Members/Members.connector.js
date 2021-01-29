@@ -4,7 +4,6 @@ import { omit, get } from 'lodash/fp'
 import getMe from 'store/selectors/getMe'
 import getCurrentCommunity from 'store/selectors/getCurrentCommunity'
 import getCurrentNetwork from 'store/selectors/getCurrentNetwork'
-import { ALL_COMMUNITIES_ID } from 'navigation/linking/helpers'
 import {
   FETCH_MEMBERS,
   fetchMembers,
@@ -29,9 +28,6 @@ export function makeFetchOpts (props) {
   } else if (community) {
     subject = 'community'
     slug = get('slug', community)
-  } else {
-    subject = ALL_COMMUNITIES_ID
-    slug = ALL_COMMUNITIES_ID
   }
 
   return {
@@ -72,7 +68,6 @@ export function mapStateToProps (state, props) {
     community,
     network,
     canModerate,
-    isAll: slug === ALL_COMMUNITIES_ID,
     subject,
     fetchOpts,
     hasMore: getHasMoreMembers(state, getOpts),
