@@ -1,6 +1,6 @@
 import testPayloads from './ModelExtractor.test.json'
 import ModelExtractor from './index'
-import orm from 'store/models'
+import orm from '../../models'
 
 const payload = testPayloads['FETCH_POSTS for me']
 const payload2 = testPayloads['FETCH_POSTS for community']
@@ -135,7 +135,13 @@ it('handles a query set root', () => {
 
 it('handles null children', () => {
   const extractor = new ModelExtractor(orm.session(orm.getEmptyState()))
-  extractor.walk(testPayloads.FETCH_ACTIVITY.data.activity, 'Activity')
+  extractor.walk(testPayloads['FETCH_ACTIVITY'].data.activity, 'Activity')
+  expect(extractor.mergedNodes()).toMatchSnapshot()
+})
+
+it('creates a polymorphicChildId when __typename field is present', () => {
+  const extractor = new ModelExtractor(orm.session(orm.getEmptyState()))
+  extractor.walk(testPayloads['FETCH_SEARCH'].data.search, 'SearchResult')
   expect(extractor.mergedNodes()).toMatchSnapshot()
 })
 

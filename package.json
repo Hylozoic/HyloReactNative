@@ -80,7 +80,7 @@
     "redux": "^4.0.5",
     "redux-flipper": "^1.4.2",
     "redux-logger": "^3.0.6",
-    "redux-orm": "Hylozoic/redux-orm#createclass2-dist",
+    "redux-orm": "^0.16.2",
     "redux-promise": "^0.6.0",
     "reselect": "^4.0.0",
     "rn-round-checkbox": "^1.0.0",

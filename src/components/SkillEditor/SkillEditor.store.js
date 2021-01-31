@@ -104,7 +104,6 @@ export function setUserSkills (userSkills) {
 
 export const getMySkillsFromOrm = ormCreateSelector(
   orm,
-  state => state.orm,
   ({ Me }) => {
     const me = Me.first()
     return me ? me.skills.toModelArray() : []

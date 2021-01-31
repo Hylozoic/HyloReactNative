@@ -7,14 +7,14 @@ export const getLastViewedCommunity = memberships => {
   return get('community', lastViewedMembership)
 }
 
-const Me = Model.createClass({
+class Me extends Model {
   toString () {
     return `Me: ${this.name}`
-  },
+  }
 
   firstName () {
     return this.name ? this.name.split(' ')[0] : null
-  },
+  }
 
   canModerate (community) {
     const memberships = this.memberships.toRefArray
@@ -23,12 +23,12 @@ const Me = Model.createClass({
     const membership = find(m =>
       m.community === get('id', community), memberships)
     return get('hasModeratorRole', membership)
-  },
+  }
 
   lastViewedCommunity () {
     return getLastViewedCommunity(this.memberships.toModelArray())
   }
-})
+}
 
 export default Me
 

@@ -84,7 +84,7 @@ Array [
 exports[`mapStateToProps returns the right keys 1`] = `
 Object {
   "avatarUrl": undefined,
-  "currentUser": undefined,
+  "currentUser": null,
 }
 `;
 

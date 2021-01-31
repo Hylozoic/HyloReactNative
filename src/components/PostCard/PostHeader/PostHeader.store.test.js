@@ -22,9 +22,9 @@ describe('ormSessionReducer', () => {
       }
     }
 
-    expect(session.Post.hasId('1')).toBeTruthy()
+    expect(session.Post.idExists('1')).toBeTruthy()
     ormSessionReducer(session, action)
-    expect(session.Post.hasId('1')).toBeFalsy()
+    expect(session.Post.idExists('1')).toBeFalsy()
   })
 
   it('handles REMOVE_POST', () => {

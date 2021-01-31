@@ -12,7 +12,7 @@ Object {
 exports[`mapStateToProps sets up cancel 1`] = `
 Object {
   "cancel": [Function],
-  "currentUser": undefined,
+  "currentUser": null,
   "goToBlockedUsers": [Function],
   "goToNotificationSettings": [Function],
   "resettingPassword": false,

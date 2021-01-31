@@ -7,7 +7,6 @@ import { ALL_COMMUNITIES_NETWORK } from 'store/models/Network'
 // gets network from slug OR id
 const getNetwork = ormCreateSelector(
   orm,
-  state => state.orm,
   (_, props) => get('id', props),
   (_, props) => get('slug', props),
   ({ Network }, id, slug) => {

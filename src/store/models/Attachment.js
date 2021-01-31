@@ -1,11 +1,11 @@
 import { attr, fk, Model } from 'redux-orm'
 import { basename } from 'util/index'
 
-const Attachment = Model.createClass({
+class Attachment extends Model {
   toString () {
     return `Attachment (${this.type}): ${this.url}`
   }
-})
+}
 
 export default Attachment
 

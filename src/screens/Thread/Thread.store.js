@@ -154,14 +154,12 @@ export function presentThread (thread, currentUserId) {
 
 export const getThread = ormCreateSelector(
   orm,
-  state => state.orm,
   (_, { route }) => route.params.id,
   ({ MessageThread }, id) => MessageThread.safeWithId(id)
 )
 
 export const getAndPresentMessages = ormCreateSelector(
   orm,
-  state => state.orm,
   (_, { route }) => route.params.id,
   ({ Message }, id) =>
     Message.filter(m => m.messageThread === id)

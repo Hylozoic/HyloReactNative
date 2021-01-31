@@ -5,7 +5,6 @@ import { get } from 'lodash/fp'
 
 const getPost = ormCreateSelector(
   orm,
-  state => state.orm,
   (state, props) => props.id,
   ({ Post }, id) => Post.safeGet({ id })
 )

@@ -15,11 +15,11 @@ export const ALL_COMMUNITIES_NETWORK = {
   communities: []
 }
 
-const Network = Model.createClass({
+class Network extends Model {
   toString () {
     return `Network: ${this.name}`
   }
-})
+}
 
 export default Network
 

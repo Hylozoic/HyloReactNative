@@ -24,14 +24,12 @@ function topicsResultsWithNew (session, autocomplete) {
 
 export const getTopicsForAutocomplete = ormCreateSelector(
   orm,
-  state => state.orm,
   (_, { autocomplete }) => autocomplete,
   topicsResults
 )
 
 export const getTopicsForAutocompleteWithNew = ormCreateSelector(
   orm,
-  state => state.orm,
   (_, { autocomplete }) => autocomplete,
   topicsResultsWithNew
 )

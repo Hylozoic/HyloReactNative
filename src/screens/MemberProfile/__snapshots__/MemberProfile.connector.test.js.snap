@@ -11,7 +11,12 @@ Object {
 
 exports[`mapStateToProps maps the state to the props 1`] = `
 Object {
-  "currentUser": undefined,
+  "currentUser": SessionBoundModel {
+    "_fields": Object {
+      "id": "1",
+    },
+    "id": "1",
+  },
   "editing": undefined,
   "goToDetails": [Function],
   "goToEdit": [Function],

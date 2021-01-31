@@ -104,7 +104,7 @@ export default function ormReducer (state = {}, action) {
     }
 
     case MARK_ACTIVITY_READ: {
-      if (session.Activity.hasId(meta.id)) {
+      if (session.Activity.idExists(meta.id)) {
         session.Activity.withId(meta.id).update({ unread: false })
       }
       break
@@ -151,7 +151,7 @@ export default function ormReducer (state = {}, action) {
         }
       }
       me.update(changes)
-      if (session.Person.hasId(me.id)) {
+      if (session.Person.idExists(me.id)) {
         session.Person.withId(me.id).update(changes)
       }
       break

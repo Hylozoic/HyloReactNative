@@ -1,10 +1,10 @@
 import { attr, Model } from 'redux-orm'
 
-const Topic = Model.createClass({
+class Topic extends Model {
   toString () {
     return `Topic: ${this.name}`
   }
-})
+}
 
 export default Topic
 

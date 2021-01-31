@@ -7,7 +7,6 @@ import { get } from 'lodash/fp'
  */
 const getCommunity = ormCreateSelector(
   orm,
-  state => state.orm,
   (state, props) => get('id', props),
   (state, props) => get('slug', props),
   ({ Community }, id, slug) => Community.safeGet({ id, slug })

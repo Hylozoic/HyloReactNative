@@ -1,17 +1,17 @@
 import { attr, many, Model } from 'redux-orm'
 
-const MessageThread = Model.createClass({
+class MessageThread extends Model {
   isUnread () {
     return new Date(this.lastReadAt) < new Date(this.updatedAt)
-  },
+  }
 
   isUpdatedSince (date) {
     return new Date(this.updatedAt) > date
-  },
+  }
 
   toString () {
     return `MessageThread: ${this.id}`
-  },
+  }
 
   newMessageReceived (bumpUnreadCount) {
     const update = bumpUnreadCount
@@ -19,7 +19,7 @@ const MessageThread = Model.createClass({
       : { updatedAt: new Date().toString() }
     this.update(update)
     return this
-  },
+  }
 
   markAsRead () {
     this.update({
@@ -28,7 +28,7 @@ const MessageThread = Model.createClass({
     })
     return this
   }
-})
+}
 
 export default MessageThread
 

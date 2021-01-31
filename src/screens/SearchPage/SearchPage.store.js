@@ -133,7 +133,6 @@ const getSearchResultResults = makeGetQueryResults(FETCH_SEARCH)
 
 export const getSearchResults = ormCreateSelector(
   orm,
-  state => state.orm,
   getSearchResultResults,
   (session, results) => {
     if (isEmpty(results) || isEmpty(results.ids)) return []

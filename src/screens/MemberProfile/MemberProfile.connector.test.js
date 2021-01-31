@@ -1,14 +1,25 @@
+import orm from 'store/models'
 import { mapStateToProps, mapDispatchToProps, makeOnPressMessages, mergeProps } from './MemberProfile.connector'
 import { FETCH_PERSON } from './MemberProfile.store'
 
+let ormSession
+
 describe('mapStateToProps', () => {
+  beforeAll(() => {
+    ormSession = orm.session(orm.getEmptyState())
+    ormSession.Me.create({ id: '1' })
+  })
+
   it('maps the state to the props', () => {
     const id = 123
     const route = { params: { id } }
     const navigation = {
       navigate: jest.fn()
     }
-    const state = { pending: { [FETCH_PERSON]: null } }
+    const state = {
+      orm: ormSession.state,
+      pending: { [FETCH_PERSON]: null }
+    }
     const props = mapStateToProps(state, { route, navigation })
     expect(props).toMatchSnapshot()
     props.goToDetails()

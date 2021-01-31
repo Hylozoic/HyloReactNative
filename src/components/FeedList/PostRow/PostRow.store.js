@@ -11,7 +11,6 @@ import { some } from 'lodash'
 export const makeGetPost = () => {
   const _getPost = ormCreateSelector(
     orm,
-    state => state.orm,
     (state, props) => props.id,
     ({ Post }, id) => {
       const post = Post.safeGet({ id })
@@ -48,7 +47,6 @@ const makeArrayRefEqualSelector = arrayRefSelector => createArrayRefEqualSelecto
 export const makeGetPostCommenters = () => {
   return makeArrayRefEqualSelector(ormCreateSelector(
     orm,
-    state => state.orm,
     (state, props) => props.id,
     ({ Post }, id) => Post.safeGet({ id }).commenters.toRefArray()
   ))
@@ -57,7 +55,6 @@ export const makeGetPostCommenters = () => {
 export const makeGetPostCommunities = () => {
   return makeArrayRefEqualSelector(ormCreateSelector(
     orm,
-    state => state.orm,
     (state, props) => props.id,
     ({ Post }, id) => Post.safeGet({ id }).communities.toRefArray()
   ))
@@ -66,7 +63,6 @@ export const makeGetPostCommunities = () => {
 export const makeGetPostTopics = () => {
   return makeArrayRefEqualSelector(ormCreateSelector(
     orm,
-    state => state.orm,
     (state, props) => props.id,
     ({ Post }, id) => Post.safeGet({ id }).topics.toRefArray()
   ))
@@ -75,7 +71,6 @@ export const makeGetPostTopics = () => {
 export const makeGetPostImageUrls = () => {
   const selector = ormCreateSelector(
     orm,
-    state => state.orm,
     (state, props) => props.id,
     ({ Post }, id) => Post.safeGet({ id }).images().orderBy(get('position')).toRefArray()
   )
@@ -88,7 +83,6 @@ export const makeGetPostImageUrls = () => {
 export const makeGetPostIsPinned = () => {
   return ormCreateSelector(
     orm,
-    state => state.orm,
     (state, props) => props.id,
     (state, props) => props.communityId,
     ({ Post }, id, communityId) => {
@@ -102,7 +96,6 @@ export const makeGetPostIsPinned = () => {
 export const makeGetPostCreator = () => {
   return ormCreateSelector(
     orm,
-    state => state.orm,
     (state, props) => props.id,
     ({ Post }, id) => Post.safeGet({ id }).creator.ref
   )

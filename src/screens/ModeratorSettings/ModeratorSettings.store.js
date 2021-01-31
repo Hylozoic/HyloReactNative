@@ -166,7 +166,6 @@ export function removeModerator (personId, communityId, isRemoveFromCommunity) {
 // expects props to be of the form {communityId}
 export const getModerators = ormCreateSelector(
   orm,
-  state => state.orm,
   (state, props) => props.communityId,
   ({ Community }, id) => {
     const community = Community.safeGet({ id })

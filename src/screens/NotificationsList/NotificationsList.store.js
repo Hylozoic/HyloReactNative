@@ -234,7 +234,6 @@ export const getHasMoreNotifications = createSelector(
 
 export const getNotifications = ormCreateSelector(
   orm,
-  state => state.orm,
   (_, { navigation }) => navigation,
   (session, navigation) => session.Notification
     .all()

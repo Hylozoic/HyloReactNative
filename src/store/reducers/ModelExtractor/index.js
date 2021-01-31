@@ -1,10 +1,11 @@
-import { Attribute, ForeignKey, ManyToMany } from 'redux-orm/lib/fields'
+import { Attribute, ForeignKey, ManyToMany } from 'redux-orm'
 import { compact, filter, mapValues } from 'lodash'
 import { isUndefined, omitBy } from 'lodash/fp'
 
 export default class ModelExtractor {
   static addAll ({ session, root, modelName, ...opts }) {
     if (!root) return
+
     const extractor = new ModelExtractor(session, opts)
     extractor.walk(root, modelName)
     extractor.addAll()
@@ -20,7 +21,7 @@ export default class ModelExtractor {
     const method = this.options.append ? 'updateAppending' : 'update'
     this.mergedNodes().forEach(({ modelName, payload }) => {
       const model = this.session[modelName]
-      model.hasId(payload.id)
+      model.idExists(payload.id)
         ? model.withId(payload.id)[method](payload)
         : model.create(payload)
     })
@@ -39,7 +40,7 @@ export default class ModelExtractor {
     }
 
     const normalized = omitBy(isUndefined, mapValues(node, (value, key) => {
-      let type = model.fields[key]
+      var type = model.fields[key]
 
       if (value && value.__typename) {
         const polymorphicChildId = this._walkOne(value, value.__typename)
@@ -55,7 +56,8 @@ export default class ModelExtractor {
       }
 
       if (type instanceof ManyToMany) {
-        return this._walkMany(value, type.toModelName)
+        const typeModelName = type.toModelName === 'this' ? modelName : type.toModelName
+        return this._walkMany(value, typeModelName)
       }
 
       if (!type && key in model.prototype) {
@@ -74,7 +76,8 @@ export default class ModelExtractor {
         }
 
         if (type instanceof ManyToMany) {
-          return this._walkMany(value, type.toModelName)
+          const typeModelName = type.toModelName === 'this' ? modelName : type.toModelName
+          return this._walkMany(value, typeModelName)
         }
       }
 

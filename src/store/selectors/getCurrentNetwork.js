@@ -6,7 +6,6 @@ import { ALL_COMMUNITIES_NETWORK } from 'store/models/Network'
 
 const getCurrentNetwork = ormCreateSelector(
   orm,
-  state => state.orm,
   getCurrentNetworkId,
   (session, id) => {
     // TODO: Initial load this into the ORM

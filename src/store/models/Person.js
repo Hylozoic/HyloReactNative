@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types'
 import { attr, fk, many, Model } from 'redux-orm'
 
-const Person = Model.createClass({
+class Person extends Model {
   toString () {
     return `Person: ${this.name}`
   }
-})
+}
 
 export default Person
 
