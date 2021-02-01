@@ -377,12 +377,12 @@
 					04BF1DDD248F357F00ECC3A2 = {
 						CreatedOnToolsVersion = 11.5;
 						DevelopmentTeam = L4KZBPS2F3;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = L4KZBPS2F3;
 						LastSwiftMigration = 1160;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -869,10 +869,10 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = L4KZBPS2F3;
+				DEVELOPMENT_TEAM = "";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -881,7 +881,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hylo.HyloA.OneSignalNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "match Development com.hylo.HyloA.OneSignalNotificationServiceExtension";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -930,11 +930,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = HyloReactNative/HyloReactNative.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 35;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 36;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = L4KZBPS2F3;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = HyloReactNative/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -945,7 +945,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hylo.HyloA;
 				PRODUCT_NAME = Hylo;
-				PROVISIONING_PROFILE_SPECIFIER = "match Development com.hylo.HyloA";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "HyloReactNative-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -965,7 +965,7 @@
 				CODE_SIGN_ENTITLEMENTS = HyloReactNative/HyloReactNativeRelease.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 35;
+				CURRENT_PROJECT_VERSION = 36;
 				DEVELOPMENT_TEAM = L4KZBPS2F3;
 				INFOPLIST_FILE = HyloReactNative/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;

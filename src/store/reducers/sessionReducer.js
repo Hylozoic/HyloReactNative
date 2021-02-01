@@ -1,6 +1,7 @@
 import { omit, get } from 'lodash/fp'
 import {
   LOGIN,
+  LOGIN_WITH_APPLE,
   LOGIN_WITH_FACEBOOK,
   LOGIN_WITH_GOOGLE
 } from 'screens/Login/actions'
@@ -44,6 +45,7 @@ export default function sessionReducer (state = {
         signedIn: true,
         defaultLoginEmail: meta.email
       }
+    case LOGIN_WITH_APPLE:
     case LOGIN_WITH_FACEBOOK:
     case LOGIN_WITH_GOOGLE:
       return {
