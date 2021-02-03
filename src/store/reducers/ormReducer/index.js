@@ -111,7 +111,7 @@ export default function ormReducer (state = {}, action) {
     }
 
     case MARK_ALL_ACTIVITIES_READ: {
-      session.Activity.all().update({ unread: false })
+      session?.Activity.all().update({ unread: false })
       break
     }
 

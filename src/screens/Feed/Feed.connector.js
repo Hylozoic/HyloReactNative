@@ -71,7 +71,6 @@ export function setupTopicProps (state, props, { community }) {
 // * If there is a Network and a Community the Network is preferred
 export function mapStateToProps (state, props) {
   const stateProps = {}
-
   stateProps.currentUser = getMe(state)
   stateProps.currentUserHasMemberships = !isEmpty(getMemberships(state))  
   stateProps.network = setupNetwork(state, props, stateProps)

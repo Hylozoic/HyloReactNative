@@ -55,6 +55,6 @@ export function updateAllMemberships (communityIds, settings) {
 export const getMemberships = ormCreateSelector(
   orm,
   session => {
-    return session.Membership.all().toModelArray()
+    return session?.Membership.all().toModelArray()
   }
 )

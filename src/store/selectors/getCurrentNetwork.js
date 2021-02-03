@@ -10,7 +10,7 @@ const getCurrentNetwork = ormCreateSelector(
   (session, id) => {
     // TODO: Initial load this into the ORM
     if (id === ALL_COMMUNITIES_ID) return ALL_COMMUNITIES_NETWORK
-    return session.Network.safeGet({ id })
+    return session?.Network.safeGet({ id })
   }
 )
 

@@ -11,10 +11,10 @@ Object {
 
 exports[`mapStateToProps returns the right keys 1`] = `
 Object {
-  "community": null,
+  "community": undefined,
   "communityHasTopics": false,
   "filteredTopics": Array [],
-  "network": null,
+  "network": undefined,
   "pending": true,
   "searchTerm": undefined,
 }

@@ -7,6 +7,6 @@ Object {
   "isConnected": true,
   "pending": undefined,
   "pendingRefresh": false,
-  "threads": Array [],
+  "threads": undefined,
 }
 `;

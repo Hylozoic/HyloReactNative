@@ -61,12 +61,11 @@ export function setTopicSubscribe (topicId, communityId, isSubscribing) {
 
 export const getCommunityTopic = ormCreateSelector(
   orm,
-  get('orm'),
   (state, props) => props.topicName,
   (state, props) => props.slug,
   (session, topicName, slug) => {
     const topic = session.Topic.safeGet({ name: topicName })
-    const community = session.Community.safeGet({ slug })
+    const community = session?.Community.safeGet({ slug })
     if (!topic || !community) return false
 
     return session.CommunityTopic.filter({

@@ -6,7 +6,7 @@ import { get } from 'lodash/fp'
 const getPost = ormCreateSelector(
   orm,
   (state, props) => props.id,
-  ({ Post }, id) => Post.safeGet({ id })
+  (session, id) => session?.Post.safeGet({ id })
 )
 
 export default getPost

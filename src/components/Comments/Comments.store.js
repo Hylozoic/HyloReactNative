@@ -11,7 +11,7 @@ export const getComments = ormCreateSelector(
   orm,
   (_, props) => props.postId,
   (session, id) => {
-    if (!session.Post.idExists(id)) return []
+    if (!session?.Post.idExists(id)) return []
     const post = session.Post.withId(id)
 
     return {

@@ -55,7 +55,7 @@ describe('selectors/refiners', () => {
 
   beforeEach(() => {
     navigation.navigate = jest.fn()
-    session = orm.mutableSession(orm.getEmptyState())
+    session = orm.session(orm.getEmptyState())
     session.Activity.create({
       actor: '1',
       action: 'commentMention',

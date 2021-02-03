@@ -5,6 +5,6 @@ import { createSelector as ormCreateSelector } from 'redux-orm'
 const getCurrentCommunity = ormCreateSelector(
   orm,
   getCurrentCommunityId,
-  (session, id) => session.Community.safeGet({ id })
+  (session, id) => session?.Community.safeGet({ id })
 )
 export default getCurrentCommunity

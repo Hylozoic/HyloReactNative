@@ -14,7 +14,7 @@ Object {
     "sendEmail": true,
     "sendPushNotifications": true,
   },
-  "memberships": Array [],
+  "memberships": undefined,
   "messageSettings": undefined,
 }
 `;

@@ -160,7 +160,7 @@ Object {
   "hasMore": undefined,
   "id": undefined,
   "isConnected": undefined,
-  "messages": Array [],
+  "messages": undefined,
   "networkId": undefined,
   "participants": undefined,
   "pending": undefined,

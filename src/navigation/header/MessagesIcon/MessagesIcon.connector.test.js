@@ -1,23 +1,16 @@
 import { mapStateToProps } from './MessagesIcon.connector'
+import orm from 'store/models'
 
 describe('mapStateToProps', () => {
-  const state = {
-    orm: {
-      Me: {
-        items: ['1'],
-        itemsById: {
-          1: {
-            unseenThreadCount: 12
-          }
-        },
-        meta: {
-          maxId: 1
-        }
-      }
-    }
-  }
   it('returns showBadge', () => {
+    const session = orm.session(orm.getEmptyState())
+    session.Me.create({
+      name: 'me',
+      unseenThreadCount: 12
+    })
+    const state = { orm: session.state }
     const stateProps = mapStateToProps(state, {})
+
     expect(stateProps.showBadge).toEqual(true)
   })
 })

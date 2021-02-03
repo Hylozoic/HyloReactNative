@@ -1,7 +1,5 @@
 import { connect } from 'react-redux'
-import {
-  getThread
-} from '../Thread/Thread.store'
+import { getThread } from '../Thread/Thread.store'
 import getCurrentUserId from 'store/selectors/getCurrentUserId'
 
 export function mapStateToProps (state, props) {

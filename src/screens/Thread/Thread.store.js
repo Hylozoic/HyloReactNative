@@ -155,14 +155,14 @@ export function presentThread (thread, currentUserId) {
 export const getThread = ormCreateSelector(
   orm,
   (_, { route }) => route.params.id,
-  ({ MessageThread }, id) => MessageThread.safeWithId(id)
+  (session, id) => session?.MessageThread.safeWithId(id)
 )
 
 export const getAndPresentMessages = ormCreateSelector(
   orm,
   (_, { route }) => route.params.id,
-  ({ Message }, id) =>
-    Message.filter(m => m.messageThread === id)
+  (session, id) =>
+    session?.Message.filter(m => m.messageThread === id)
       .orderBy(m => Number(m.id), 'desc')
       .toModelArray()
       .map(refineMessage)
