@@ -125,7 +125,7 @@ export function setSort (sortBy) {
   }
 }
 
-export function fetchMembers ({ subject, slug, sortBy, offset, search }) {
+export function fetchMembers ({ slug, sortBy, offset, search }) {
   return fetchGroupMembers(slug, sortBy, offset, search)
 }
 

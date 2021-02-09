@@ -71,7 +71,7 @@ export default function sessionReducer (state = {
     case SELECT_GROUP:
       return {
         ...state,
-        groupId: null
+        groupId: payload
       }
     case STORE_RETURN_TO_PATH:
       return {
