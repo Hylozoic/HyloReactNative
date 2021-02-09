@@ -15,11 +15,6 @@ it('passes a reset option', () => {
   expect(action.meta.extractQueryResults.reset).toBeTruthy()
 })
 
-it('constructs a network fetchPosts action', () => {
-  const action = fetchPosts({ subject: 'network' })
-  expect(action).toMatchSnapshot()
-})
-
 it('constructs a project fetchPosts action', () => {
   const action = fetchPosts({ subject: 'project' })
   expect(action).toMatchSnapshot()

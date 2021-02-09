@@ -34,25 +34,3 @@ it('renders with invite button when a moderator', () => {
   const renderer = TestRenderer.create(<Members canModerate group={{}} members={members} />)
   expect(renderer).toMatchSnapshot()
 })
-
-describe('Banner', () => {
-  it('returns null if group, netowrk and all are all falsy', () => {
-    expect(Banner({})).toBe(null)
-  })
-
-  it('matches snapshot with group', () => {
-    const group = {
-      name: 'Foomunity',
-      bannerUrl: 'foom.png'
-    }
-    expect(Banner({ group })).toMatchSnapshot()
-  })
-
-  it('matches snapshot with network', () => {
-    const network = {
-      name: 'Foom Network',
-      bannerUrl: 'foomn.png'
-    }
-    expect(Banner({ network })).toMatchSnapshot()
-  })
-})

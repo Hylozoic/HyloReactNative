@@ -4,10 +4,7 @@ import { navigate } from 'navigation/RootNavigation'
 export default function makeGoToGroup (confirm = true) {
   return groupId => {
     const goToGroup = () => {
-      navigate('Feed', {
-        networkId: null,
-        groupId
-      })
+      navigate('Feed', { groupId })
 
     }
     if (confirm) {

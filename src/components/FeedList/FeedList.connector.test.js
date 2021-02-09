@@ -4,7 +4,7 @@ import { times } from 'lodash/fp'
 import { mapStateToProps, mergeProps, shouldResetNewPostCount } from './FeedList.connector'
 import { MODULE_NAME, defaultState, defaultSortBy } from './FeedList.store'
 import { FETCH_POSTS } from 'store/actions/fetchPosts'
-import { ALL_COMMUNITIES_ID } from 'store/models/Network'
+import { ALL_GROUPS_ID } from 'store/models/Group'
 
 describe('mapStateToProps', () => {
   let state
@@ -38,7 +38,6 @@ describe('mapStateToProps', () => {
       pendingRefresh: false,
       filter: defaultState.filter,
       sortBy: defaultState.sortBy,
-      networkId: undefined,
       queryProps: {
         sortBy: 'updated'
       }
@@ -55,27 +54,6 @@ describe('mapStateToProps', () => {
       hasMore: true,
       pending: false,
       groupId: 10,
-      networkId: undefined,
-      pendingRefresh: false,
-      filter: defaultState.filter,
-      sortBy: defaultState.sortBy,
-      queryProps: {
-        subject: 'group',
-        slug: 'foo',
-        sortBy: 'updated'
-      }
-    })
-  })
-
-  it('returns posts for a network ', () => {
-    expect(mapStateToProps(state, { group: { slug: 'foo' } })).toEqual({
-      postIds: [
-        '1',
-        '3',
-        '2'
-      ],
-      hasMore: true,
-      pending: false,
       pendingRefresh: false,
       filter: defaultState.filter,
       sortBy: defaultState.sortBy,
@@ -209,8 +187,8 @@ describe('mergeProps', () => {
         queryProps: {
           filter: 'foo',
           sortBy: 'bar',
-          slug: ALL_COMMUNITIES_ID,
-          subject: ALL_COMMUNITIES_ID
+          slug: ALL_GROUPS_ID,
+          subject: ALL_GROUPS_ID
         }
       },
       dispatchProps,
@@ -221,8 +199,8 @@ describe('mergeProps', () => {
     expect(fetchPosts).toHaveBeenCalledWith({
       filter: 'foo',
       sortBy: 'bar',
-      slug: ALL_COMMUNITIES_ID,
-      subject: ALL_COMMUNITIES_ID
+      slug: ALL_GROUPS_ID,
+      subject: ALL_GROUPS_ID
     }, undefined)
     fetchPosts.mockClear()
 

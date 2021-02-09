@@ -130,10 +130,6 @@ it('calls fetchGroupTopic on componentDidMount', async () => {
 //   bannerUrl: 'group.png'
 // }
 
-// const network = {
-//   id: '2',
-//   bannerUrl: 'network.png'
-// }
 // const currentUser = {
 //   id: '2',
 //   avatarUrl: 'user.png',
@@ -167,10 +163,9 @@ it('calls fetchGroupTopic on componentDidMount', async () => {
 //     expect(actual).toMatchSnapshot()
 //   })
 
-//   it('renders correctly with a network and user', () => {
+//   it('renders correctly with a user', () => {
 //     const renderer = new ReactShallowRenderer()
 //     renderer.render(<FeedBanner
-//       network={network}
 //       currentUser={currentUser}
 //       newPost={newPost}
 //                     />)

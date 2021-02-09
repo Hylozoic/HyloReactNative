@@ -1,4 +1,8 @@
+import { Image } from 'react-native'
 import { attr, many, Model, fk } from 'redux-orm'
+import allGroupsBannerImage from 'assets/all-groups-banner.png'
+import allGroupsAvatarUrl from 'assets/All_Groups2.png'
+import allGroupshHeaderAvatarUrl from 'assets/All_Groups.png'
 
 export const GROUP_ACCESSIBILITY = {
   Closed: 0,
@@ -89,4 +93,14 @@ export const accessibilityString = (accessibility) => {
 
 export const visibilityString = (visibility) => {
   return Object.keys(GROUP_VISIBILITY).find(key => GROUP_VISIBILITY[key] === visibility)
+}
+
+export const ALL_GROUPS_GROUP = {
+  id: ALL_GROUPS_ID,
+  slug: ALL_GROUPS_ID,
+  headerAvatarUrl: Image.resolveAssetSource(allGroupshHeaderAvatarUrl).uri,
+  avatarUrl: Image.resolveAssetSource(allGroupsAvatarUrl).uri,
+  bannerUrl: Image.resolveAssetSource(allGroupsBannerImage).uri,
+  name: 'All Groups',
+  groups: []
 }

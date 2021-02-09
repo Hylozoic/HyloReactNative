@@ -16,9 +16,8 @@ export default class Members extends React.Component {
   }
 
   render () {
-    const { group, network, canModerate } = this.props
-    const showInviteButton = !network &&
-      (get('allowGroupInvites', group) || canModerate)
+    const { group, canModerate } = this.props
+    const showInviteButton = get('allowGroupInvites', group) || canModerate
 
     return (
       <View style={styles.container}>
@@ -39,29 +38,20 @@ export default class Members extends React.Component {
             'showMember',
             'fetchMoreMembers'], this.props)}
         >
-          <Banner
+          {group && <Banner
+            bannerUrl={group.bannerUrl}
+            name={group.name}
             group={group}
-            network={network}
             handleInviteOnPress={this.goToInvitePeople}
             showInviteButton={showInviteButton}
-          />
+          />}
         </MemberList>
       </View>
     )
   }
 }
 
-export function Banner ({ group, network, showInviteButton, handleInviteOnPress }) {
-  let bannerUrl, name
-
-  if (network) {
-    ({ bannerUrl, name } = network)
-  } else if (group) {
-    ({ bannerUrl, name } = group)
-  } else {
-    return null
-  }
-
+export function Banner ({ name, bannerUrl, showInviteButton, handleInviteOnPress }) {
   return (
     <View style={styles.bannerContainer}>
       <Image source={{ uri: bannerUrl }} style={styles.image} />

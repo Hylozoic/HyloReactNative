@@ -11,12 +11,10 @@ import makeGoToGroup from 'store/actions/makeGoToGroup'
 import joinProject from 'store/actions/joinProject'
 import leaveProject from 'store/actions/leaveProject'
 import goToMemberMaker from 'store/actions/goToMemberMaker'
-import getCurrentNetwork from 'store/selectors/getCurrentNetwork'
 
 export function mapStateToProps (state, props) {
   const id = getRouteParam('id', props.route)
   const currentUser = getMe(state, props)
-  const currentNetwork = getCurrentNetwork(state, props)
   const currentGroup = getCurrentGroup(state, props)
   const post = getPresentedPost(state, { id, currentGroupId: currentGroup?.id })
   const isProject = get('type', post) === 'project'
@@ -25,13 +23,12 @@ export function mapStateToProps (state, props) {
     post,
     isProject,
     currentUser,
-    currentGroup,
-    currentNetwork
+    currentGroup
   }
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
-  const { id, post, currentNetwork } = stateProps
+  const { id, post } = stateProps
   const { dispatch } = dispatchProps
   const { navigation } = ownProps
 
@@ -47,12 +44,9 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     editPost: () => navigation.navigate('Edit Post', { id }),
     goToMembers: () => navigation.navigate('Project Members', { id, members: get('members', post) }),
     showMember: goToMemberMaker(navigation),
-    showTopic: (topicName) => {
-      if (currentNetwork) {
-        return showToast('Topics support for "All Groups" and Networks coming soon!')
-      } else {
+    showTopic: topicName => {
+        // return showToast('Topics support for "All Groups" and Networks coming soon!')
         return navigation.navigate('Topic Feed', { topicName })
-      }
     }
   }
 }

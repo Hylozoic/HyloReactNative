@@ -31,8 +31,7 @@ export class MemberList extends React.Component {
     setSort: () => {},
     fetchMembers: () => {},
     fetchMoreMembers: () => {},
-    slug: '',
-    networkSlug: ''
+    slug: ''
   }
 
   constructor (props) {
@@ -72,7 +71,6 @@ export class MemberList extends React.Component {
       if (some(key => this.props[key] !== prevProps[key], [
         'isFocused',
         'slug',
-        'networkSlug',
         'sortBy',
         'search'
       ])) {

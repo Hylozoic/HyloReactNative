@@ -30,8 +30,7 @@ export default class FeedList extends React.Component {
         prevProps.sortBy !== this.props.sortBy ||
         prevProps.filter !== this.props.filter ||
         prevProps.group?.id !== this.props.group?.id ||
-        prevProps.topicName !== this.props.topicName ||
-        prevProps.network?.id !== this.props.network?.id
+        prevProps.topicName !== this.props.topicName
     ) {
       this.fetchOrShowCached()
     }

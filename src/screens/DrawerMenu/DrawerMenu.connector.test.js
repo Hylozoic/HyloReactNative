@@ -39,8 +39,7 @@ describe('mergeProps', () => {
       name: 'Roy Rogers'
     }
     dispatchProps = {
-      selectGroup: jest.fn(x => x),
-      selectNetwork: jest.fn(x => x)
+      selectGroup: jest.fn(x => x)
     }
     ownProps = {
       navigation: {
@@ -69,13 +68,6 @@ describe('mergeProps', () => {
       expect(ownProps.navigation.navigate).toHaveBeenCalledTimes(1)
     })
 
-    it('goToNetwork', () => {
-      const network = { id: 'testnetwork' }
-      props.goToNetwork(network)
-      expect(dispatchProps.selectNetwork).toHaveBeenCalledTimes(1)
-      expect(ownProps.navigation.navigate).toHaveBeenCalledTimes(1)
-    })
-
     it('should showSetting', () => {
       props.showSettings()
       expect(ownProps.navigation.navigate).toHaveBeenCalledTimes(1)
@@ -95,78 +87,5 @@ describe('mergeProps', () => {
       props.goToGroupSettingsMenu()
       expect(ownProps.navigation.navigate).toHaveBeenCalledTimes(1)
     })
-  })
-})
-
-describe('partitionGroups', () => {
-  it('separates independent groups from networked groups', () => {
-    const memberships = [
-      {
-        group: {
-          ref: {
-            id: '1',
-            name: 'one'
-          },
-          network: {
-            ref: {
-              id: '1',
-              name: 'networkOne'
-            }
-          }
-        }
-      },
-      {
-        group: {
-          ref: {
-            id: '2',
-            name: 'two'
-          }
-        }
-      },
-      {
-        group: {
-          ref: {
-            id: '3',
-            name: 'three'
-          },
-          network: {
-            ref: {
-              id: '2',
-              name: 'networkTwo',
-              groups: {
-                toRefArray: () => [
-                  { id: '1', name: 'one' },
-                  { id: '2', name: 'two' },
-                  { id: '3', name: 'three' }
-                ]
-              }
-            }
-          }
-        }
-      },
-      {
-        group: {
-          ref: {
-            id: '4',
-            name: 'four'
-          },
-          network: {
-            ref: {
-              id: '1',
-              name: 'networkOne'
-            }
-          }
-        }
-      },
-      {
-        group: {
-          ref: {
-            id: '5',
-            name: 'five'
-          }
-        }
-      }
-    ]
-    expect(partitionGroups(memberships)).toMatchSnapshot()
   })
 })

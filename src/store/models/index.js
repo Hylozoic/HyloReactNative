@@ -13,7 +13,6 @@ import Person from './Person'
 import PersonConnection from './PersonConnection'
 import Message from './Message'
 import MessageThread from './MessageThread'
-import Network from './Network'
 import Notification from './Notification'
 import Post, { PostFollower, PostCommenter, ProjectMember } from './Post'
 import PostMembership from './PostMembership'
@@ -38,7 +37,6 @@ orm.register(
   Membership,
   Message,
   MessageThread,
-  Network,
   Notification,
   Person,
   PersonConnection,

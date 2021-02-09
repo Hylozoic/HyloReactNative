@@ -118,7 +118,6 @@ export default class PostDetails extends React.Component {
     this.props.fetchPost()
     this.props.navigation.setOptions({
       headerTitle: this.props.currentGroup?.name
-        || this.props.currentNetwork?.name
     })
   }
 

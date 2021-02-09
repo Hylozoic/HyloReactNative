@@ -3,7 +3,7 @@ import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import ReactTestRenderer from 'react-test-renderer'
 import DrawerMenu, { SectionHeader, NetworkRow, GroupRow, TextButton } from './DrawerMenu'
-import { ALL_COMMUNITIES_NETWORK } from 'store/models/Network'
+import { ALL_GROUPS_GROUP } from 'store/models/Group'
 
 describe('DrawerMenu', () => {
   const minProps = {
@@ -127,7 +127,7 @@ describe('NetworkRow', () => {
 
   it('shows all groups link', () => {
     const renderer = new ReactShallowRenderer()
-    const network = ALL_COMMUNITIES_NETWORK
+    const network = ALL_GROUPS_GROUP
     renderer.render(
       <NetworkRow
         network={network}

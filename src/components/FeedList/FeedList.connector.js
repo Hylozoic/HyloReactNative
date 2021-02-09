@@ -19,11 +19,10 @@ import resetNewPostCount from 'store/actions/resetNewPostCount'
 export function mapStateToProps (state, props) {
   const sortBy = getSort(state, props)
   const filter = getFilter(state, props)
-  const { group, network, topicName, isProjectFeed } = props
+  const { group, topicName, isProjectFeed } = props
 
   const queryProps = getQueryProps(state, {
     group,
-    network,
     sortBy,
     filter: isProjectFeed ? 'project' : filter,
     topicName,
@@ -42,7 +41,6 @@ export function mapStateToProps (state, props) {
     filter,
     hasMore,
     pending: !!pending,
-    networkId: get('id', network),
     pendingRefresh: !!(pending && pending.extractQueryResults.reset),
     queryProps // this is just here so mergeProps can use it
   }

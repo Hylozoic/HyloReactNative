@@ -18,7 +18,6 @@ Object {
 
 exports[`on SELECT_GROUP returns the payload 1`] = `
 Object {
-  "groupId": "123",
-  "networkId": null,
+  "groupId": "123"
 }
 `;

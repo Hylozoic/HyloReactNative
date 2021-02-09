@@ -3,21 +3,8 @@ import { MODULE_NAME } from './Members.store'
 import orm from 'store/models'
 
 describe('makeFetchOpts', () => {
-  it('handles a network', () => {
-    const props = {
-      network: {
-        slug: 'netslug'
-      },
-      group: null,
-      sortBy: 'join',
-      search: 'fee'
-    }
-    expect(makeFetchOpts(props)).toMatchSnapshot()
-  })
-
   it('handles a group', () => {
     const props = {
-      network: null,
       group: {
         slug: 'comslug'
       },
@@ -27,9 +14,8 @@ describe('makeFetchOpts', () => {
     expect(makeFetchOpts(props)).toMatchSnapshot()
   })
 
-  it('handles no group or network', () => {
+  it('handles no group', () => {
     const props = {
-      network: null,
       group: null,
       sortBy: 'join',
       search: 'fee'
@@ -76,7 +62,7 @@ describe('mergeProps', () => {
     stateProps = { hasMore: true, members: [], pending: false }
   })
 
-  it('makes fetchMembers a no-op when there is no group or network', () => {
+  it('makes fetchMembers a no-op when there is no group', () => {
     const props = mergeProps(stateProps, dispatchProps)
     expect(props.fetchMembers()).toEqual(undefined)
     expect(dispatchProps.fetchMembers).not.toBeCalled()

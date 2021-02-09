@@ -1,9 +1,7 @@
 import { connect } from 'react-redux'
 import { omit, get } from 'lodash/fp'
-// import { mapWhenFocused } from 'util/redux'
 import getMe from 'store/selectors/getMe'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
-import getCurrentNetwork from 'store/selectors/getCurrentNetwork'
 import {
   FETCH_MEMBERS,
   fetchMembers,
@@ -16,22 +14,17 @@ import {
 } from './Members.store'
 
 export function makeFetchOpts (props) {
-  const { group, network, sortBy } = props
+  const { group, sortBy } = props
 
   let subject, slug, sortByName
 
-  if (network) {
-    subject = 'network'
-    slug = get('slug', network)
-    // can't sort network members by join date
-    if (sortBy === 'join') sortByName = 'name'
-  } else if (group) {
+  if (group) {
     subject = 'group'
     slug = get('slug', group)
   }
 
   return {
-    ...omit(['group', 'network', 'sortBy'], props),
+    ...omit(['group', 'sortBy'], props),
     sortBy: sortByName || sortBy,
     subject,
     slug
@@ -42,22 +35,22 @@ export function makeFetchOpts (props) {
 export function sortKeysFactory (subject) {
   const sortKeys = {
     name: 'Name',
-    location: 'Location'
+    location: 'Location',
+    join: 'Newest'
   }
-  if (subject !== 'network') sortKeys.join = 'Newest'
+
   return sortKeys
 }
 
 export function mapStateToProps (state, props) {
   const currentUser = getMe(state, props)
   const group = getCurrentGroup(state, props)
-  const network = getCurrentNetwork(state, props)
 
   const canModerate = currentUser && currentUser.canModerate(group)
   const search = getSearch(state)
   const sortBy = getSort(state)
 
-  const fetchOpts = makeFetchOpts({ group, network, sortBy, search })
+  const fetchOpts = makeFetchOpts({ group, sortBy, search })
   const { slug, subject } = fetchOpts
 
   const getOpts = omit('subject', fetchOpts)
@@ -66,7 +59,6 @@ export function mapStateToProps (state, props) {
   return {
     currentUser,
     group,
-    network,
     canModerate,
     subject,
     fetchOpts,
@@ -91,8 +83,8 @@ export function mapDispatchToProps (dispatch, props) {
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
-  const { hasMore, pending, members, fetchOpts, group, network } = stateProps
-  const fetchMembers = (group || network)
+  const { hasMore, pending, members, fetchOpts, group } = stateProps
+  const fetchMembers = group
     ? () => dispatchProps.fetchMembers(fetchOpts)
     : () => {}
   const offset = members.length

@@ -13,7 +13,7 @@ import CreateGroupNotice from 'components/CreateGroupNotice'
 import FeedList from 'components/FeedList'
 import SocketSubscriber from 'components/SocketSubscriber'
 import styles from './Feed.styles'
-import { ALL_COMMUNITIES_ID } from 'store/models/Network'
+// import { ALL_GROUPS_ID } from 'store/models/Group'
 
 export function setHeaderTitle (navigation, topicName, group, isProjectFeed) {
   let headerTitle 
@@ -28,7 +28,6 @@ export function setHeaderTitle (navigation, topicName, group, isProjectFeed) {
 
 export default function Feed ({
   group,
-  network,
   currentUser,
   route,
   navigation,
@@ -46,8 +45,7 @@ export default function Feed ({
   newPost,
   newProject,
   fetchGroupTopic,
-  selectGroup,
-  selectNetwork
+  selectGroup
 }) {
   const isProjectFeed = route?.params?.isProjectFeed
   const ref = useRef(null)
@@ -55,7 +53,6 @@ export default function Feed ({
   useScrollToTop(ref)
   // TODO: selectGroup should probably be moved back into goToGroup function
   useEffect(() => { group?.id && selectGroup(group.id) }, [group?.id])
-  useEffect(() => { network?.id && selectNetwork(network.id) }, [network?.id])
   useEffect(() => { fetchGroupTopic() }, [fetchGroupTopic, topicName])
   useEffect(() => { setHeaderTitle(navigation, topicName, group, isProjectFeed) }, [
     topicName,
@@ -74,24 +71,17 @@ export default function Feed ({
     )
   }
 
-  const all = network?.id === ALL_COMMUNITIES_ID
+  // const all = network?.id === ALL_GROUPS_ID
+  const all = false
 
-  // From FeedBanner
-  let bannerUrl, name, image
-  if (network) {
-    ({ bannerUrl, name } = network)
-    if (bannerUrl) image = { uri: bannerUrl }
-  } else if (group) {
-    ({ bannerUrl, name } = group)
-    if (bannerUrl) image = { uri: bannerUrl }
-  } else {
-    return null
-  }
+  if (!group) return null
 
-  if (topicName) {
-    name = '#' + topicName
-  }
-
+  const name = topicName
+    ? '#' + topicName
+    : group.name
+  const image = group.bannerUrl
+    ? { uri: group.bannerUrl }
+    : null
   const pluralFollowers = (topicFollowersTotal !== 1)
   const pluralPosts = (topicPostsTotal !== 1)
   const showPostPrompt = !isProjectFeed && !all && !topicName
@@ -119,7 +109,7 @@ export default function Feed ({
       {!isUndefined(topicSubscribed) && (
         <SubscribeButton active={topicSubscribed} onPress={setTopicSubscribe} />
       )}
-      {!network?.id && isProjectFeed && (
+      {isProjectFeed && (
         <CreateProjectButton createProject={() => newProject(group?.id)} />
       )}
       {showPostPrompt && <PostPrompt currentUser={currentUser} newPost={newPost} />}
@@ -131,7 +121,6 @@ export default function Feed ({
     <FeedList
       scrollRef={ref}
       group={group}
-      network={network}
       showPost={showPost}
       goToGroup={goToGroup}
       header={feedListHeader}

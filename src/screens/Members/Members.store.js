@@ -66,72 +66,6 @@ query ($slug: String, $first: Int, $sortBy: String, $offset: Int, $search: Strin
   }
 }`
 
-export const networkMembersQuery = `
-query ($slug: String, $first: Int, $sortBy: String, $offset: Int, $search: String) {
-  network (slug: $slug) {
-    id
-    name
-    slug
-    avatarUrl
-    bannerUrl
-    memberCount
-    members (first: $first, sortBy: $sortBy, offset: $offset, search: $search) {
-      items {
-        id
-        name
-        bio
-        avatarUrl
-        location
-        locationObject {
-          id
-          addressNumber
-          addressStreet
-          bbox {
-            lat
-            lng
-          }
-          center {
-            lat
-            lng
-          }
-          city
-          country
-          fullText
-          locality
-          neighborhood
-          region
-        }
-        tagline
-        skills {
-          hasMore
-          items {
-            id
-            name
-          }
-        }
-      }
-      hasMore
-    }
-  }
-}`
-
-export function fetchNetworkMembers (slug, sortBy, offset, search) {
-  return {
-    type: FETCH_MEMBERS,
-    graphql: {
-      query: networkMembersQuery,
-      variables: { slug, first: 20, offset, sortBy, search }
-    },
-    meta: {
-      extractModel: 'Network',
-      extractQueryResults: {
-        getItems: get('payload.data.network.members'),
-        getParams: (action) => ({ ...get('meta.graphql.variables', action), memberSubject: 'network' })
-      }
-    }
-  }
-}
-
 export function fetchGroupMembers (slug, sortBy, offset, search) {
   return {
     type: FETCH_MEMBERS,
@@ -192,9 +126,7 @@ export function setSort (sortBy) {
 }
 
 export function fetchMembers ({ subject, slug, sortBy, offset, search }) {
-  return subject === 'network'
-    ? fetchNetworkMembers(slug, sortBy, offset, search)
-    : fetchGroupMembers(slug, sortBy, offset, search)
+  return fetchGroupMembers(slug, sortBy, offset, search)
 }
 
 const getMemberResults = makeGetQueryResults(FETCH_MEMBERS)

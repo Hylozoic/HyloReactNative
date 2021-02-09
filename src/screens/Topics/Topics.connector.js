@@ -1,6 +1,5 @@
 import { connect } from 'react-redux'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
-import getCurrentNetwork from 'store/selectors/getCurrentNetwork'
 import selectGroup from 'store/actions/selectGroup'
 import fetchGroupTopics, { FETCH_GROUP_TOPICS } from 'store/actions/fetchGroupTopics'
 import {
@@ -10,8 +9,7 @@ import { get } from 'lodash/fp'
 
 export function mapStateToProps (state, props) {
   const searchTerm = getTerm(state)
-  const network = getCurrentNetwork(state, props)
-  const group = !network && getCurrentGroup(state, props)
+  const group = getCurrentGroup(state, props)
   const pending = state.pending[FETCH_GROUP_TOPICS]
   const queryResultParams = {
     id: get('id', group),
@@ -35,7 +33,6 @@ export function mapStateToProps (state, props) {
     group,
     groupHasTopics,
     filteredTopics,
-    network,
     searchTerm
   }
 }

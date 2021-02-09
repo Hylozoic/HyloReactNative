@@ -21,7 +21,6 @@ describe('mapStateToProps', () => {
   //   expect(mapStateToProps(state, props)).toEqual({
   //     group: undefined,
   //     currentUser: undefined,
-  //     network: null,
   //     topic: undefined,
   //     topicSubscribed: undefined,
   //     topicName: undefined,
@@ -72,7 +71,6 @@ describe('mapStateToProps', () => {
     expect(firstMapping).toEqual({
       group: group.ref,
       currentUser,
-      network: null,
       topicName: 'logistics',
       currentUserHasMemberships: false,
       topicFollowersTotal: 10,

@@ -263,7 +263,6 @@ posts(
     "variables": Object {
       "filter": "project",
       "first": 20,
-      "networkSlug": undefined,
       "offset": undefined,
       "search": undefined,
       "slug": undefined,
@@ -407,7 +406,6 @@ posts(
     "variables": Object {
       "filter": undefined,
       "first": 20,
-      "networkSlug": undefined,
       "offset": undefined,
       "search": undefined,
       "slug": undefined,
