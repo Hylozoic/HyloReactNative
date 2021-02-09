@@ -1,7 +1,7 @@
-import getCurrentgroupId from './getCurrentgroupId'
+import getCurrentGroupId from './getCurrentGroupId'
 import orm from '../models'
 
-describe('getCurrentgroupId', () => {
+describe('getCurrentGroupId', () => {
   let session
   beforeEach(() => {
     session = orm.session(orm.getEmptyState())
@@ -14,7 +14,7 @@ describe('getCurrentgroupId', () => {
         groupId: 55
       }
     }
-    const groupId = getCurrentgroupId(state)
+    const groupId = getCurrentGroupId(state)
     expect(groupId).toBe(55)
   })
 
@@ -31,7 +31,7 @@ describe('getCurrentgroupId', () => {
     })
 
     const state = { orm: session.state }
-    const groupId = getCurrentgroupId(state)
+    const groupId = getCurrentGroupId(state)
     expect(groupId).toBe(group1.id)
   })
 })

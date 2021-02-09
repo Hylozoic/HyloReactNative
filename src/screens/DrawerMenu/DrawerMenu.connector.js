@@ -4,7 +4,7 @@ import { pullAllBy } from 'lodash'
 import getCurrentNetwork from 'store/selectors/getCurrentNetwork'
 import getMe from 'store/selectors/getMe'
 import getMemberships from 'store/selectors/getMemberships'
-import getCurrentgroupId from 'store/selectors/getCurrentgroupId'
+import getCurrentGroupId from 'store/selectors/getCurrentGroupId'
 import getCurrentNetworkId from 'store/selectors/getCurrentNetworkId'
 import { logout } from 'screens/Login/actions'
 import selectGroup from 'store/actions/selectGroup'
@@ -81,7 +81,7 @@ export function mapStateToProps (state, props) {
     groups,
     currentContext,
     canModerateCurrentGroup: !currentNetworkId && getCanModerate(state),
-    currentGroupId: getCurrentgroupId(state, props),
+    currentGroupId: getCurrentGroupId(state, props),
     currentGroup: getCurrentGroup(state),
     currentNetworkId
   }

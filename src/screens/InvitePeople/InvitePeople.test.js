@@ -1,11 +1,11 @@
 import React from 'react'
-import Clipboard from '@react-native-group/clipboard'
+import Clipboard from '@react-native-community/clipboard'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import InvitePeople, { PendingInvitesPage, SendInvitesPage, PendingInviteRow, parseEmailList } from './InvitePeople'
 import ReactTestRenderer from 'react-test-renderer'
 
-// @react-native-group/clipboard
-jest.mock('@react-native-group/clipboard/', () => ({
+// @react-native-community/clipboard
+jest.mock('@react-native-community/clipboard/', () => ({
   setString: jest.fn()
 }))
 jest.mock('react-native-reanimated', () => require('react-native-reanimated/mock'))

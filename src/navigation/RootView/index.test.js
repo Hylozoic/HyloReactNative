@@ -5,10 +5,10 @@ import { render } from '@testing-library/react-native'
 import RootView from 'navigation/RootView'
 import { CHECK_SESSION_AND_SET_SIGNED_IN } from 'store/constants'
 import orm from 'store/models'
-// import NetInfo from '@react-native-group/netinfo'
+// import NetInfo from '@react-native-community/netinfo'
 import { getSessionCookie } from 'util/session'
 import { ACTION_APPROVED_JOIN_REQUEST } from 'store/models/Notification'
-// jest.mock('@react-native-group/netinfo')
+// jest.mock('@react-native-community/netinfo')
 
 jest.mock('util/session', () => {
   getSessionCookie: jest.fn()

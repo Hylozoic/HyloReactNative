@@ -4,7 +4,7 @@ import { isEmpty } from 'lodash/fp'
 import getMe from 'store/selectors/getMe'
 import getNetwork from 'store/selectors/getNetwork'
 import getGroup from 'store/selectors/getGroup'
-import getCurrentgroupId from 'store/selectors/getCurrentgroupId'
+import getCurrentGroupId from 'store/selectors/getCurrentGroupId'
 import getCurrentNetworkId from 'store/selectors/getCurrentNetworkId'
 import makeGoToGroup from 'store/actions/makeGoToGroup'
 import {
@@ -35,7 +35,7 @@ export function setupNetwork (state, props) {
 
 export function setupGroup (state, props) {
   const groupId = getRouteParam('groupId', props.route)
-    || getCurrentgroupId(state, props)
+    || getCurrentGroupId(state, props)
   const groupSlugFromLink = getRouteParam('groupSlugFromLink', props.route)
   const group = getGroup(state, groupSlugFromLink
     ? { slug: groupSlugFromLink }

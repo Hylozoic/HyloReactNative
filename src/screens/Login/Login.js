@@ -1,5 +1,5 @@
 import React from 'react'
-import NetInfo from '@react-native-group/netinfo'
+import NetInfo from '@react-native-community/netinfo'
 import {
   ScrollView,
   Text,

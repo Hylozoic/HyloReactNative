@@ -1,6 +1,6 @@
 import React, { Component, PureComponent } from 'react'
 import { Dimensions, Text, View, TextInput, TouchableOpacity, ScrollView, Switch } from 'react-native'
-import Clipboard from '@react-native-group/clipboard'
+import Clipboard from '@react-native-community/clipboard'
 import { TabView, TabBar } from 'react-native-tab-view'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 import Button from 'components/Button'
@@ -10,7 +10,7 @@ import styles from './InvitePeople.styles'
 import { caribbeanGreen } from 'style/colors'
 import Loading from 'components/Loading'
 
-// https://github.com/react-native-group/react-native-tab-view/issues/547
+// https://github.com/react-native-community/react-native-tab-view/issues/547
 const initialLayout = {
   height: 0,
   width: Dimensions.get('window').width

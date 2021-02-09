@@ -3,7 +3,7 @@ import './Model.extension'
 import Activity from './Activity'
 import Attachment from './Attachment'
 import Comment from './Comment'
-import Group, { GroupModerator } from './Group'
+import Group, { GroupConnection, GroupModerator } from './Group'
 import GroupTopic from './GroupTopic'
 import Invitation from './Invitation'
 import Location from './Location'
@@ -29,6 +29,7 @@ orm.register(
   Attachment,
   Comment,
   Group,
+  GroupConnection,
   GroupModerator,
   GroupTopic,
   Invitation,

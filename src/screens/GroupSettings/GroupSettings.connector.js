@@ -1,10 +1,10 @@
 import { connect } from 'react-redux'
-import getCurrentgroupId from 'store/selectors/getCurrentgroupId'
+import getCurrentGroupId from 'store/selectors/getCurrentGroupId'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import { fetchGroupSettings, updateGroupSettings, UPDATE_GROUP_SETTINGS } from './GroupSettings.store'
 
 export function mapStateToProps (state, props) {
-  const groupId = getCurrentgroupId(state, props)
+  const groupId = getCurrentGroupId(state, props)
   const group = getCurrentGroup(state, props)
   const pendingSave = !!state.pending[UPDATE_GROUP_SETTINGS]
   return {

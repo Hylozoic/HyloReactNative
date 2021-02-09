@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import getGroup from 'store/selectors/getGroup'
-import getCurrentgroupId from 'store/selectors/getCurrentgroupId'
+import getCurrentGroupId from 'store/selectors/getCurrentGroupId'
 import getMe from 'store/selectors/getMe'
 
 import {
@@ -15,7 +15,7 @@ import getPerson from 'store/selectors/getPerson'
 import { includes } from 'lodash/fp'
 
 export function mapStateToProps (state, props) {
-  const groupId = getCurrentgroupId(state, props)
+  const groupId = getCurrentGroupId(state, props)
   const group = getGroup(state, { id: groupId })
   const moderators = getModerators(state, { groupId })
   const moderatorIds = moderators.map(m => m.id)

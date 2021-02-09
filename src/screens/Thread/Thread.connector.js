@@ -12,13 +12,13 @@ import {
 } from './Thread.store'
 import getCurrentUserId from 'store/selectors/getCurrentUserId'
 import getCurrentNetworkId from 'store/selectors/getCurrentNetworkId'
-import getCurrentgroupId from 'store/selectors/getCurrentgroupId'
+import getCurrentGroupId from 'store/selectors/getCurrentGroupId'
 import { sendIsTyping } from 'util/websockets'
 import confirmNavigate from 'util/confirmNavigate'
 
 export function mapStateToProps (state, props) {
   const currentUserId = getCurrentUserId(state)
-  const groupId = getCurrentgroupId(state)
+  const groupId = getCurrentGroupId(state)
   const networkId = getCurrentNetworkId(state)
   const { id, title, participants } = presentThread(getThread(state, props), currentUserId) || {}
   const messages = getAndPresentMessages(state, props)

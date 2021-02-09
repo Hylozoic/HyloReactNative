@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import getGroup from 'store/selectors/getGroup'
-import getCurrentgroupId from 'store/selectors/getCurrentgroupId'
+import getCurrentGroupId from 'store/selectors/getCurrentGroupId'
 // import getMe from 'store/selectors/getMe'
 import {
   regenerateAccessCode, fetchGroupSettings, FETCH_GROUP_SETTINGS,
@@ -14,7 +14,7 @@ import {
 } from './InvitePeople.store'
 
 export function mapStateToProps (state, props) {
-  const groupId = getCurrentgroupId(state, props)
+  const groupId = getCurrentGroupId(state, props)
   const group = getGroup(state, { id: groupId })
   const pending = state.pending[FETCH_GROUP_SETTINGS]
   const pendingCreate = state.pending[CREATE_INVITATIONS]
