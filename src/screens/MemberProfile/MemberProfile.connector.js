@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux'
 import { get } from 'lodash/fp'
 import { getPerson, fetchPerson } from './MemberProfile.store'
 import blockUser from 'store/actions/blockUser'
-import makeGoToCommunity from 'store/actions/makeGoToCommunity'
+import makeGoToGroup from 'store/actions/makeGoToGroup'
 import getMe from 'store/selectors/getMe'
 import getBlockedUsers from 'store/selectors/getBlockedUsers'
 import updateUserSettings from 'store/actions/updateUserSettings'
@@ -39,7 +39,7 @@ export function mapStateToProps (state, props) {
 
 export function mapDispatchToProps (dispatch, props) {
   return {
-    goToCommunity: makeGoToCommunity(),
+    goToGroup: makeGoToGroup(),
     ...bindActionCreators({
       fetchPerson,
       updateUserSettings,

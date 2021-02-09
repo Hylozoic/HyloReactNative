@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Banner matches snapshot with community 1`] = `
+exports[`Banner matches snapshot with group 1`] = `
 <View>
   <Image
     source={
@@ -54,7 +54,7 @@ exports[`Banner matches snapshot with network 1`] = `
 </View>
 `;
 
-exports[`renders correctly with no community (all communities default) 1`] = `
+exports[`renders correctly with no group (all groups default) 1`] = `
 <View>
   <RCTScrollView
     ListFooterComponent={null}
@@ -347,7 +347,7 @@ exports[`renders with invite button when a moderator 1`] = `
     ListHeaderComponent={
       <View>
         <Banner
-          community={Object {}}
+          group={Object {}}
           handleInviteOnPress={[Function]}
           showInviteButton={true}
         />

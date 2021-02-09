@@ -12,7 +12,7 @@ Object {
   $topic: ID,
   $first: Int
 ) {
-  community(slug: $slug, updateLastViewed: true) {
+  group(slug: $slug, updateLastViewed: true) {
     id
     slug
     name
@@ -85,7 +85,7 @@ posts(
   }
   votesTotal
   myVote
-  communities {
+  groups {
     id
     name
     slug
@@ -99,7 +99,7 @@ posts(
   postMemberships {
     id
     pinned
-    community {
+    group {
       id
     }
   }
@@ -134,7 +134,7 @@ posts(
   },
   "meta": Object {
     "afterInteractions": true,
-    "extractModel": "Community",
+    "extractModel": "Group",
     "extractQueryResults": Object {
       "getItems": [Function],
       "reset": undefined,

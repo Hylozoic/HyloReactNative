@@ -1,8 +1,8 @@
-import { SELECT_NETWORK } from 'store/constants'
+import { SELECT_GROUP } from 'store/constants'
 
 export default function selectNetwork (id) {
   return {
-    type: SELECT_NETWORK,
+    type: SELECT_GROUP,
     payload: id
   }
 }

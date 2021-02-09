@@ -22,7 +22,7 @@ export default function MemberFeed ({
   showPost,
   showTopic,
   showMember,
-  goToCommunity
+  goToGroup
 }) {
   useEffect(() => { fetchItems() }, [ id, choice ])
 
@@ -58,7 +58,7 @@ export default function MemberFeed ({
             showPost={showPost}
             showTopic={showTopic}
             showMember={showMember}
-            goToCommunity={goToCommunity} />}
+            goToGroup={goToGroup} />}
         keyExtractor={item => item.id}
         onEndReached={fetchMoreItems}
         ListHeaderComponent={listHeaderComponent}
@@ -69,20 +69,20 @@ export default function MemberFeed ({
   )
 }
 
-export function ContentRow ({ item, itemType, showPost, showTopic, showMember, goToCommunity }) {
+export function ContentRow ({ item, itemType, showPost, showTopic, showMember, goToGroup }) {
   let content, postId
   if (itemType === 'post') {
     postId = item.id
     content = (
       <PostCard
-        goToCommunity={goToCommunity}
-        shouldShowCommunities={true}
+        goToGroup={goToGroup}
+        shouldShowGroups={true}
         showMember={showMember}
         showTopic={showTopic}
         post={item}
         creator={item.creator}
         commenters={item.commenters}
-        communities={item.communities}
+        groups={item.groups}
         topics={item.topics}
       />
     )

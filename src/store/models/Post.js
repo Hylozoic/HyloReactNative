@@ -66,9 +66,9 @@ Post.fields = {
     through: 'PostFollower',
     throughFields: ['post', 'follower']
   }),
-  communities: many('Community'),
+  groups: many('Group'),
   postMemberships: many('PostMembership'),
-  communitiesTotal: attr(),
+  groupsTotal: attr(),
   commenters: many({
     to: 'Person',
     relatedName: 'postsCommented',
@@ -140,6 +140,6 @@ export const POST_PROP_TYPES = {
   updatedAt: PropTypes.string,
   imageUrl: PropTypes.string,
   linkPreview: PropTypes.object,
-  communities: PropTypes.array,
+  groups: PropTypes.array,
   isPublic: PropTypes.boolean
 }

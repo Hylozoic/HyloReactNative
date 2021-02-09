@@ -18,7 +18,7 @@ import scopedFetchPeopleAutocomplete from 'store/actions/scopedFetchPeopleAutoco
 import scopedGetPeopleAutocomplete from 'store/selectors/scopedGetPeopleAutocomplete'
 import PersonPickerItemRow from 'screens/ItemChooser/PersonPickerItemRow'
 // Topics
-import fetchTopicsForCommunityId from 'store/actions/fetchTopicsForCommunityId'
+import fetchTopicsForGroupId from 'store/actions/fetchTopicsForGroupId'
 import getTopicsForAutocompleteWithNew from 'store/selectors/getTopicsForAutocompleteWithNew'
 import TopicRow from 'screens/TopicList/TopicRow'
 
@@ -96,7 +96,7 @@ export class InlineEditor extends React.PureComponent {
       ItemRowComponent: TopicRow,
       pickItem: this.insertTopic,
       searchPlaceholder: 'Search for a topic by name',
-      fetchSearchSuggestions: fetchTopicsForCommunityId(this.props.communityId),
+      fetchSearchSuggestions: fetchTopicsForGroupId(this.props.groupId),
       getSearchSuggestions: getTopicsForAutocompleteWithNew
     })
   }

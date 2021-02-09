@@ -170,19 +170,19 @@ export function PersonCard ({ person, goToPerson }) {
 
 export function PostCard ({ post, goToPost }) {
   const goToThisPost = () => goToPost(post.id)
-  const { creator, communities } = post
+  const { creator, groups } = post
   return (
     <TouchableOpacity onPress={goToThisPost} style={styles.postWrapper}>
       <UnwrappedPostCard
         creator={creator}
         showDetails={goToThisPost}
         showMember={goToThisPost}
-        goToCommunity={goToThisPost}
+        goToGroup={goToThisPost}
         post={post}
-        communities={communities}
+        groups={groups}
         hideMenu
         hideDetails
-        shouldShowCommunities
+        shouldShowGroups
       />
     </TouchableOpacity>
   )
@@ -203,7 +203,7 @@ export function CommentCard ({ comment, goToPost }) {
           postId={post.id}
           showMember={goToThisPost}
           showTopic={goToThisPost}
-          goToCommunity={goToThisPost}
+          goToGroup={goToThisPost}
           announcement={post.announcement}
           hideMenu
           smallAvatar

@@ -3,7 +3,7 @@
 exports[`getEmptyState matches last snapshot 1`] = `
 Object {
   "CommentEditor": Object {},
-  "CreateCommunityFlow": Object {},
+  "CreateGroupFlow": Object {},
   "FeedList": Object {
     "filter": null,
     "sortBy": "updated",
@@ -56,7 +56,7 @@ Object {
       "indexes": Object {
         "actor": Object {},
         "comment": Object {},
-        "community": Object {},
+        "group": Object {},
         "post": Object {},
       },
       "items": Array [],
@@ -81,7 +81,7 @@ Object {
       "itemsById": Object {},
       "meta": Object {},
     },
-    "Community": Object {
+    "Group": Object {
       "indexes": Object {
         "network": Object {},
       },
@@ -89,36 +89,36 @@ Object {
       "itemsById": Object {},
       "meta": Object {},
     },
-    "CommunityMembers": Object {
+    "GroupMembers": Object {
       "indexes": Object {
-        "fromCommunityId": Object {},
+        "fromgroupId": Object {},
         "toPersonId": Object {},
       },
       "items": Array [],
       "itemsById": Object {},
       "meta": Object {},
     },
-    "CommunityModerator": Object {
+    "GroupModerator": Object {
       "indexes": Object {
-        "community": Object {},
+        "group": Object {},
         "moderator": Object {},
       },
       "items": Array [],
       "itemsById": Object {},
       "meta": Object {},
     },
-    "CommunityPosts": Object {
+    "GroupPosts": Object {
       "indexes": Object {
-        "fromCommunityId": Object {},
+        "fromgroupId": Object {},
         "toPostId": Object {},
       },
       "items": Array [],
       "itemsById": Object {},
       "meta": Object {},
     },
-    "CommunityTopic": Object {
+    "GroupTopic": Object {
       "indexes": Object {
-        "community": Object {},
+        "group": Object {},
         "topic": Object {},
       },
       "items": Array [],
@@ -127,7 +127,7 @@ Object {
     },
     "Invitation": Object {
       "indexes": Object {
-        "community": Object {},
+        "group": Object {},
       },
       "items": Array [],
       "itemsById": Object {},
@@ -203,7 +203,7 @@ Object {
     },
     "Membership": Object {
       "indexes": Object {
-        "community": Object {},
+        "group": Object {},
       },
       "items": Array [],
       "itemsById": Object {},
@@ -239,10 +239,10 @@ Object {
       "itemsById": Object {},
       "meta": Object {},
     },
-    "NetworkCommunities": Object {
+    "NetworkGroups": Object {
       "indexes": Object {
         "fromNetworkId": Object {},
-        "toCommunityId": Object {},
+        "togroupId": Object {},
       },
       "items": Array [],
       "itemsById": Object {},
@@ -326,10 +326,10 @@ Object {
       "itemsById": Object {},
       "meta": Object {},
     },
-    "PostCommunities": Object {
+    "PostGroups": Object {
       "indexes": Object {
         "fromPostId": Object {},
-        "toCommunityId": Object {},
+        "togroupId": Object {},
       },
       "items": Array [],
       "itemsById": Object {},
@@ -346,7 +346,7 @@ Object {
     },
     "PostMembership": Object {
       "indexes": Object {
-        "community": Object {},
+        "group": Object {},
       },
       "items": Array [],
       "itemsById": Object {},
@@ -410,7 +410,7 @@ Object {
   "pending": Object {},
   "queryResults": Object {},
   "session": Object {
-    "communityId": null,
+    "groupId": null,
     "networkId": null,
     "returnToPath": null,
     "signupInProgress": null,

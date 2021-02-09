@@ -35,7 +35,7 @@ export default {
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: rhino30
   },
-  communityAvatar: {
+  groupAvatar: {
     height: 22,
     width: 22,
     borderRadius: 4,

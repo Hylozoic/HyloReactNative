@@ -8,7 +8,7 @@ describe('makeMapStateToProps', () => {
     const session = orm.session(orm.getEmptyState())
     const postId = '10'
 
-    session.Community.create({ id: '1' })
+    session.Group.create({ id: '1' })
     session.Topic.create({ id: '2', slug: 'slugger', name: 'namer' })
     session.Person.create({ id: '3', avatarUrl: 'someUrl', name: 'foo' })
     session.Attachment.create({
@@ -19,14 +19,14 @@ describe('makeMapStateToProps', () => {
     })
     session.PostMembership.create({
       id: '333',
-      community: '1',
+      group: '1',
       pinned: true
     })
 
     session.Post.create({
       id: postId,
       creator: '3',
-      communities: ['1'],
+      groups: ['1'],
       topics: ['2'],
       commenters: ['3'],
       postMemberships: ['333']
@@ -42,7 +42,7 @@ describe('makeMapStateToProps', () => {
     expect(mapStateToProps(state, { postId: 100000 })).toEqual(
       {
         commenters: null,
-        communities: null,
+        groups: null,
         creator: null,
         imageUrls: null,
         isPinned: null,
@@ -54,10 +54,10 @@ describe('makeMapStateToProps', () => {
 
   it('returns post and attributes', () => {
     const mapStateToProps = makeMapStateToProps()
-    expect(mapStateToProps(state, { postId: 10, communityId: 1 })).toEqual(
+    expect(mapStateToProps(state, { postId: 10, groupId: 1 })).toEqual(
       {
         commenters: [{ avatarUrl: 'someUrl', id: '3', name: 'foo' }],
-        communities: [{ id: '1' }],
+        groups: [{ id: '1' }],
         creator: { avatarUrl: 'someUrl', id: '3', name: 'foo' },
         isPinned: true,
         imageUrls: ['someImageUrl'],

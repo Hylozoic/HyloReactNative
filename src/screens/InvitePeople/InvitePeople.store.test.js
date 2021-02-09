@@ -4,7 +4,7 @@ import {
   RESEND_INVITATION_PENDING,
   EXPIRE_INVITATION_PENDING,
   REINVITE_ALL_PENDING,
-  allowCommunityInvites
+  allowGroupInvites
 } from './InvitePeople.store'
 import orm from 'store/models'
 
@@ -15,7 +15,7 @@ describe('InvitePeople.store.ormSessionReducer', () => {
   })
 
   it('responds to CREATE_INVITATIONS', () => {
-    session.Community.create({ id: '5' })
+    session.Group.create({ id: '5' })
 
     const action = {
       type: CREATE_INVITATIONS,
@@ -30,16 +30,16 @@ describe('InvitePeople.store.ormSessionReducer', () => {
           }
         }
       },
-      meta: { communityId: '5' }
+      meta: { groupId: '5' }
     }
 
     ormSessionReducer(session, action)
     const now = new Date().getTime()
     const invitations = session.Invitation.all().toRefArray()
     expect(invitations).toEqual([
-      expect.objectContaining({ email: 'foo5@bar.com', community: '5' }),
-      expect.objectContaining({ email: 'foo6@bar.com', community: '5' }),
-      expect.objectContaining({ email: 'foo7@bar.com', community: '5' })
+      expect.objectContaining({ email: 'foo5@bar.com', group: '5' }),
+      expect.objectContaining({ email: 'foo6@bar.com', group: '5' }),
+      expect.objectContaining({ email: 'foo7@bar.com', group: '5' })
     ])
     invitations.forEach(i => {
       const createdAt = new Date(i.createdAt).getTime()
@@ -68,24 +68,24 @@ describe('InvitePeople.store.ormSessionReducer', () => {
   })
 
   it('responds to REINVITE_ALL_PENDING', () => {
-    session.Community.create({ id: '1' })
-    session.Invitation.create({ id: '2', community: '1' })
-    session.Invitation.create({ id: '3', community: '1' })
-    session.Invitation.create({ id: '4', community: '1' })
+    session.Group.create({ id: '1' })
+    session.Invitation.create({ id: '2', group: '1' })
+    session.Invitation.create({ id: '3', group: '1' })
+    session.Invitation.create({ id: '4', group: '1' })
     session.Invitation.create({ id: '5' })
     const action = {
       type: REINVITE_ALL_PENDING,
-      meta: { communityId: '1' }
+      meta: { groupId: '1' }
     }
     ormSessionReducer(session, action)
     expect(
-      session.Invitation.filter(i => i.community === '1')
+      session.Invitation.filter(i => i.group === '1')
         .toRefArray().map(i => i.resent)
     ).toEqual([true, true, true])
     expect(session.Invitation.withId('5').resent).toBeFalsy()
   })
 
-  it('matches the last snapshot for allowCommunityInvites', () => {
-    expect(allowCommunityInvites('1', false)).toMatchSnapshot()
+  it('matches the last snapshot for allowGroupInvites', () => {
+    expect(allowGroupInvites('1', false)).toMatchSnapshot()
   })
 })

@@ -21,7 +21,7 @@ import SkillEditor from 'components/SkillEditor/SkillEditor.store'
 import SignupFlow from 'screens/SignupFlow/SignupFlow.store'
 import SocketListener from 'components/SocketListener/SocketListener.store'
 import Topics from 'screens/Topics/Topics.store'
-import CreateCommunityFlow from 'screens/CreateCommunityFlow/CreateCommunityFlow.store'
+import CreateGroupFlow from 'screens/CreateGroupFlow/CreateGroupFlow.store'
 import SearchPage from 'screens/SearchPage/SearchPage.store'
 
 export const combinedReducers = combineReducers({
@@ -46,7 +46,7 @@ export const combinedReducers = combineReducers({
   SkillEditor,
   SocketListener,
   Topics,
-  CreateCommunityFlow
+  CreateGroupFlow
 })
 
 const composeReducers = (...reducers) => (state, action) =>

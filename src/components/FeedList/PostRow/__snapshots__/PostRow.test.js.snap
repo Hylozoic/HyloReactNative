@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`PostRow only displays communities in the selected network 1`] = `
+exports[`PostRow only displays groups in the selected network 1`] = `
 <View>
   <ForwardRef
     activeOpacity={0.6}
@@ -9,24 +9,24 @@ exports[`PostRow only displays communities in the selected network 1`] = `
   >
     <View>
       <PostCard
-        goToCommunity={[Function]}
+        goToGroup={[Function]}
         post={
           Object {
-            "communities": Array [
+            "groups": Array [
               Object {
-                "name": "community1",
+                "name": "group1",
                 "network": Object {
                   "id": 1,
                 },
               },
               Object {
-                "name": "community2",
+                "name": "group2",
                 "network": Object {
                   "id": 2,
                 },
               },
               Object {
-                "name": "community3",
+                "name": "group3",
                 "network": Object {
                   "id": 1,
                 },
@@ -50,7 +50,7 @@ exports[`PostRow renders correctly 1`] = `
   >
     <View>
       <PostCard
-        goToCommunity={[Function]}
+        goToGroup={[Function]}
         post={
           Object {
             "id": 1,

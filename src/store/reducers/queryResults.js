@@ -65,24 +65,24 @@ export default function (state = {}, action) {
   return state
 }
 
-function matchNewPostIntoQueryResults (state, { id, type, communities }) {
+function matchNewPostIntoQueryResults (state, { id, type, groups }) {
   /* about this:
       we add the post id into queryResult sets that are based on time of
       creation because we know that the post just created is the latest
       so we can prepend it. we have to match the different variations which
       can be implicit or explicit about sorting by 'updated'.
   */
-  return reduce((memo, community) => {
+  return reduce((memo, group) => {
     const queriesToMatch = [
-      { slug: community.slug },
-      { slug: community.slug, filter: type },
-      { slug: community.slug, sortBy: 'updated' },
-      { slug: community.slug, sortBy: 'updated', filter: type }
+      { slug: group.slug },
+      { slug: group.slug, filter: type },
+      { slug: group.slug, sortBy: 'updated' },
+      { slug: group.slug, sortBy: 'updated', filter: type }
     ]
     return reduce((innerMemo, params) => {
       return prependIdForCreate(innerMemo, FETCH_POSTS, params, id)
     }, memo, queriesToMatch)
-  }, state, communities)
+  }, state, groups)
 }
 
 function prependIdForCreate (state, type, params, id) {

@@ -3,7 +3,7 @@ import { Image, View, Text, ScrollView, TouchableOpacity, Alert } from 'react-na
 import Loading from 'components/Loading'
 import Icon from 'components/Icon'
 import styles from './NotificationSettings.styles'
-const allCommunitiesLogo = require('assets/hylo-merkaba.png')
+const allGroupsLogo = require('assets/hylo-merkaba.png')
 
 export default class NotificationSettings extends React.Component {
   updateMessageSettings = changes => {
@@ -29,29 +29,29 @@ export default class NotificationSettings extends React.Component {
     })
   }
 
-  updateAllCommunities = changes => {
+  updateAllGroups = changes => {
     const { memberships, updateAllMemberships } = this.props
-    updateAllMemberships(memberships.map(m => m.community.id), changes)
+    updateAllMemberships(memberships.map(m => m.group.id), changes)
   }
 
-  updateAllCommunitiesAlert = changes => {
+  updateAllGroupsAlert = changes => {
     const key = ('sendEmail' in changes) ? 'sendEmail' : 'sendPushNotifications'
 
     const type = key === 'sendEmail' ? 'Email' : 'Push Notifications'
     const onOrOff = changes[key] ? 'ON' : 'OFF'
-    const numCommunities = this.props.memberships.length
+    const numGroups = this.props.memberships.length
 
     return Alert.alert(
-      `You wish to turn ${onOrOff} ${type} for all communities?`,
-      `This will affect ${numCommunities} ${numCommunities === 1 ? 'community' : 'communities'}`,
+      `You wish to turn ${onOrOff} ${type} for all groups?`,
+      `This will affect ${numGroups} ${numGroups === 1 ? 'group' : 'groups'}`,
       [
-        { text: `Turn ${onOrOff}`, onPress: () => this.updateAllCommunities(changes) },
+        { text: `Turn ${onOrOff}`, onPress: () => this.updateAllGroups(changes) },
         { text: 'Cancel', style: 'cancel' }
       ])
   }
 
   render () {
-    const { messageSettings, allCommunitiesSettings, memberships, updateMembershipSettings } = this.props
+    const { messageSettings, allGroupsSettings, memberships, updateMembershipSettings } = this.props
     if (!messageSettings) return <Loading />
 
     return (
@@ -61,17 +61,17 @@ export default class NotificationSettings extends React.Component {
           updateMessageSettings={this.updateMessageSettings}
           key={'messageSettings'}
         />
-        <AllCommunitiesSettingsRow
-          settings={allCommunitiesSettings}
-          updateAllCommunities={this.updateAllCommunitiesAlert}
-          key={'allCommunitiesSetting'}
+        <AllGroupsSettingsRow
+          settings={allGroupsSettings}
+          updateAllGroups={this.updateAllGroupsAlert}
+          key={'allGroupsSetting'}
         />
         {memberships.map(
           membership => (
             <MembershipSettingsRow
               key={membership.id}
               membership={membership}
-              updateMembershipSettings={changes => updateMembershipSettings(membership.community.id, changes)}
+              updateMembershipSettings={changes => updateMembershipSettings(membership.group.id, changes)}
             />
           )
         )}
@@ -91,13 +91,13 @@ export function MessageSettingsRow ({ settings, updateMessageSettings }) {
   )
 }
 
-export function AllCommunitiesSettingsRow ({ settings, updateAllCommunities }) {
+export function AllGroupsSettingsRow ({ settings, updateAllGroups }) {
   return (
     <SettingsRow
-      imageSrc={allCommunitiesLogo}
-      name='All Communities'
+      imageSrc={allGroupsLogo}
+      name='All Groups'
       settings={settings}
-      update={updateAllCommunities}
+      update={updateAllGroups}
     />
   )
 }
@@ -105,8 +105,8 @@ export function AllCommunitiesSettingsRow ({ settings, updateAllCommunities }) {
 export function MembershipSettingsRow ({ membership, updateMembershipSettings }) {
   return (
     <SettingsRow
-      imageUrl={membership.community.avatarUrl}
-      name={membership.community.name}
+      imageUrl={membership.group.avatarUrl}
+      name={membership.group.name}
       settings={membership.settings}
       update={updateMembershipSettings}
     />
@@ -134,7 +134,7 @@ export class SettingsRow extends React.Component {
       <View style={styles.settingsRow}>
         <View style={styles.nameRow}>
           {iconName && <Icon name={iconName} style={styles.avatarIcon} />}
-          {!iconName && <Image source={source} style={styles.communityAvatar} />}
+          {!iconName && <Image source={source} style={styles.groupAvatar} />}
           <Text style={styles.name} numberOfLines={1}>{name}</Text>
           <TouchableOpacity onPress={this.toggleExpand} style={styles.arrowWrapper}>
             {expanded ? <Icon name='ArrowUp' style={styles.arrowIcon} /> : <Icon name='ArrowDown' style={styles.arrowIcon} />}

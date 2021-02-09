@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import ReactTestRenderer from 'react-test-renderer'
-import NotificationSettings, { MessageSettingsRow, AllCommunitiesSettingsRow, MembershipSettingsRow, SettingsRow, SettingsIcon } from './NotificationSettings'
+import NotificationSettings, { MessageSettingsRow, AllGroupsSettingsRow, MembershipSettingsRow, SettingsRow, SettingsIcon } from './NotificationSettings'
 
 describe('NotificationSettings', () => {
   it('matches the last snapshot', () => {
@@ -11,14 +11,14 @@ describe('NotificationSettings', () => {
         sendEmail: true,
         sendPushNotifications: false
       },
-      allCommunitiesSettings: {
+      allGroupsSettings: {
         sendEmail: false,
         sendPushNotifications: true
       },
       memberships: [
         {
           id: '11',
-          community: {
+          group: {
             id: '12',
             avatarUrl: 'foo1.png'
           },
@@ -29,7 +29,7 @@ describe('NotificationSettings', () => {
         },
         {
           id: '21',
-          community: {
+          group: {
             id: '22',
             avatarUrl: 'foo2.png'
           },
@@ -70,7 +70,7 @@ describe('NotificationSettings', () => {
     })
   })
 
-  describe('updateAllCommunities', () => {
+  describe('updateAllGroups', () => {
     it('calls updateAllMemberships', () => {
       const props = {
         messageSettings: {
@@ -79,12 +79,12 @@ describe('NotificationSettings', () => {
         updateAllMemberships: jest.fn(),
         memberships: [{
           id: '11',
-          community: {
+          group: {
             id: '1'
           }
         }, {
           id: '12',
-          community: {
+          group: {
             id: '2'
           }
         }]
@@ -92,7 +92,7 @@ describe('NotificationSettings', () => {
       const instance = ReactTestRenderer.create(
         <NotificationSettings {...props} />
       ).getInstance()
-      instance.updateAllCommunities({ sendPushNotifications: true })
+      instance.updateAllGroups({ sendPushNotifications: true })
       expect(props.updateAllMemberships).toHaveBeenCalledWith(['1', '2'], { sendPushNotifications: true })
     })
   })
@@ -113,15 +113,15 @@ describe('MessageSettingsRow', () => {
   })
 })
 
-describe('AllCommunitiesSettingsRow', () => {
+describe('AllGroupsSettingsRow', () => {
   it('matches the last snapshot', () => {
     const renderer = new ReactShallowRenderer()
     const props = {
       settings: { sendEmail: true },
-      updateAllCommunities: () => {}
+      updateAllGroups: () => {}
     }
 
-    renderer.render(<AllCommunitiesSettingsRow {...props} />)
+    renderer.render(<AllGroupsSettingsRow {...props} />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
@@ -136,7 +136,7 @@ describe('MembershipSettingsRow', () => {
         settings: {
           sendEmail: true
         },
-        community: {
+        group: {
           name: 'Foomunity',
           avatarUrl: 'foo.png'
         }

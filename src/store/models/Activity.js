@@ -15,7 +15,7 @@ Activity.fields = {
   actor: fk('Person'),
   post: fk('Post'),
   comment: fk('Comment'),
-  community: fk('Community'),
+  group: fk('Group'),
   unread: attr(),
   action: attr(),
   meta: attr()

@@ -100,7 +100,7 @@ export default class PostHeader extends React.PureComponent {
     const removePostWithConfirm = removePost
       ? () => Alert.alert(
           'Confirm Removal',
-          'Are you sure you want to remove this post from this community?',
+          'Are you sure you want to remove this post from this group?',
           [
             { text: 'Yes', onPress: () => removePost() },
             { text: 'Cancel', style: 'cancel' }
@@ -166,7 +166,7 @@ export function PostMenu ({ deletePost, editPost, flagPost, removePost, pinPost,
   // If the function is defined, than it's a valid action
   const flagLabel = 'Flag This Post'
   const deleteLabel = 'Delete This Post'
-  const removeLabel = 'Remove Post From Community'
+  const removeLabel = 'Remove Post From Group'
   const pinLabel = pinned ? 'Unpin' : 'Pin'
 
   const actions = filter(x => x[1], [

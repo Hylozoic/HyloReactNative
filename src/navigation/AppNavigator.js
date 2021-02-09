@@ -5,11 +5,11 @@ import { buildModalScreenOptions, buildWorkflowModalScreenOptions } from 'naviga
 import TabsNavigator from 'navigation/TabsNavigator'
 // Screens
 import BlockedUsers from 'screens/BlockedUsers'
-import CommunitySettingsMenu from 'screens/CommunitySettingsMenu'
-import CommunitySettingsComponent from 'screens/CommunitySettings'
-import CreateCommunityName from 'screens/CreateCommunityFlow/CreateCommunityName'
-import CreateCommunityReview from 'screens/CreateCommunityFlow/CreateCommunityReview'
-import CreateCommunityUrl from 'screens/CreateCommunityFlow/CreateCommunityUrl'
+import GroupSettingsMenu from 'screens/GroupSettingsMenu'
+import GroupSettingsComponent from 'screens/GroupSettings'
+import CreateGroupName from 'screens/CreateGroupFlow/CreateGroupName'
+import CreateGroupReview from 'screens/CreateGroupFlow/CreateGroupReview'
+import CreateGroupUrl from 'screens/CreateGroupFlow/CreateGroupUrl'
 import InvitePeople from 'screens/InvitePeople'
 import ItemChooserScreen from 'screens/ItemChooserScreen'
 import LoadingScreen from 'screens/LoadingScreen'
@@ -58,29 +58,29 @@ export function MessagesNavigator () {
   )
 }
 
-const CreateCommunity = createStackNavigator()
-export function CreateCommunityNavigator () {
+const CreateGroup = createStackNavigator()
+export function CreateGroupNavigator () {
   const navigatorProps = {}
   return (
-    <CreateCommunity.Navigator {...navigatorProps}>
-      <CreateCommunity.Screen
-        name='CreateCommunityName' component={CreateCommunityName}
+    <CreateGroup.Navigator {...navigatorProps}>
+      <CreateGroup.Screen
+        name='CreateGroupName' component={CreateGroupName}
         options={buildWorkflowModalScreenOptions({ headerTitle: 'STEP 1/3', headerLeftCloseIcon: true })}
       />
-      <CreateCommunity.Screen
-        name='CreateCommunityUrl' component={CreateCommunityUrl}
+      <CreateGroup.Screen
+        name='CreateGroupUrl' component={CreateGroupUrl}
         options={buildWorkflowModalScreenOptions({ headerTitle: 'STEP 2/3' })}
       />
-      <CreateCommunity.Screen
-        name='CreateCommunityReview' component={CreateCommunityReview}
+      <CreateGroup.Screen
+        name='CreateGroupReview' component={CreateGroupReview}
         options={buildWorkflowModalScreenOptions({ headerTitle: 'STEP 3/3' })}
       />
-    </CreateCommunity.Navigator>
+    </CreateGroup.Navigator>
   )
 }
 
-const CommunitySettings = createStackNavigator()
-export function CommunitySettingsNavigator () {
+const GroupSettings = createStackNavigator()
+export function GroupSettingsNavigator () {
   const navigatorProps = {
     screenOptions: buildModalScreenOptions({
       headerLeftCloseIcon: false,
@@ -88,15 +88,15 @@ export function CommunitySettingsNavigator () {
     })
   }
   return (
-    <CommunitySettings.Navigator {...navigatorProps}>
-      <CommunitySettings.Screen
-        name='Community Settings' component={CommunitySettingsMenu}
+    <GroupSettings.Navigator {...navigatorProps}>
+      <GroupSettings.Screen
+        name='Group Settings' component={GroupSettingsMenu}
         options={buildModalScreenOptions({ headerLeftCloseIcon: true })}
       />
-      <CommunitySettings.Screen name='Community Information' component={CommunitySettingsComponent} />
-      <CommunitySettings.Screen name='Community Moderators' component={ModeratorSettings} />
-      <CommunitySettings.Screen name='Invite Members' component={InvitePeople} />
-    </CommunitySettings.Navigator>
+      <GroupSettings.Screen name='Group Information' component={GroupSettingsComponent} />
+      <GroupSettings.Screen name='Group Moderators' component={ModeratorSettings} />
+      <GroupSettings.Screen name='Invite Members' component={InvitePeople} />
+    </GroupSettings.Navigator>
   )
 }
 
@@ -113,11 +113,11 @@ export default function AppNavigator () {
       <App.Screen name='Edit Post' component={PostEditor} />
       <App.Screen name='Edit Account Info' component={UserSettings} />
       <App.Screen
-        name='Community Settings' component={CommunitySettingsNavigator}
+        name='Group Settings' component={GroupSettingsNavigator}
         options={{ headerShown: false }}
       />
       <App.Screen
-        name='Create Community' component={CreateCommunityNavigator}
+        name='Create Group' component={CreateGroupNavigator}
         options={{ headerShown: false }}
       />
       <App.Screen

@@ -13,7 +13,7 @@ exports[`CommentCard matches the last snapshot 1`] = `
         }
       }
       date={123}
-      goToCommunity={[Function]}
+      goToGroup={[Function]}
       hideMenu={true}
       pinned={false}
       postId={2}
@@ -80,7 +80,7 @@ exports[`PostCard matches the last snapshot 1`] = `
         "id": 2,
       }
     }
-    goToCommunity={[Function]}
+    goToGroup={[Function]}
     hideDetails={true}
     hideMenu={true}
     post={
@@ -91,7 +91,7 @@ exports[`PostCard matches the last snapshot 1`] = `
         "id": 1,
       }
     }
-    shouldShowCommunities={true}
+    shouldShowGroups={true}
     showDetails={[Function]}
     showMember={[Function]}
   />

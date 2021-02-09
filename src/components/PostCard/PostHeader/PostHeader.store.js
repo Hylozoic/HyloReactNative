@@ -51,24 +51,24 @@ export function removePost (postId, slug) {
   }
 }
 
-export function pinPost (postId, communityId) {
+export function pinPost (postId, groupId) {
   return {
     type: PIN_POST,
     graphql: {
-      query: `mutation ($postId: ID, $communityId: ID) {
-        pinPost(postId: $postId, communityId: $communityId) {
+      query: `mutation ($postId: ID, $groupId: ID) {
+        pinPost(postId: $postId, groupId: $groupId) {
           success
         }
       }`,
       variables: {
         postId,
-        communityId
+        groupId
       }
     },
     meta: {
       optimistic: true,
       postId,
-      communityId
+      groupId
     }
   }
 }
@@ -81,9 +81,9 @@ export function ormSessionReducer ({ Post }, { type, meta }) {
 
     case REMOVE_POST_PENDING:
       const post = Post.withId(meta.postId)
-      const communities = post.communities.filter(c =>
+      const groups = post.groups.filter(c =>
         c.slug !== meta.slug).toModelArray()
-      post.update({ communities })
+      post.update({ groups })
       break
   }
 }

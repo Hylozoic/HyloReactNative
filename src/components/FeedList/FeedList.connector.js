@@ -19,10 +19,10 @@ import resetNewPostCount from 'store/actions/resetNewPostCount'
 export function mapStateToProps (state, props) {
   const sortBy = getSort(state, props)
   const filter = getFilter(state, props)
-  const { community, network, topicName, isProjectFeed } = props
+  const { group, network, topicName, isProjectFeed } = props
 
   const queryProps = getQueryProps(state, {
-    community,
+    group,
     network,
     sortBy,
     filter: isProjectFeed ? 'project' : filter,
@@ -30,14 +30,14 @@ export function mapStateToProps (state, props) {
     isProjectFeed
   })
   const pending = isProjectFeed ? state.pending[FETCH_PROJECTS] : state.pending[FETCH_POSTS]
-  const communityId = get('community.id', props)
+  const groupId = get('group.id', props)
 
   const postIds = isProjectFeed ? getProjectIds(state, queryProps) : getPostIds(state, queryProps)
   const hasMore = isProjectFeed ? getHasMoreProjects(state, queryProps) : getHasMorePosts(state, queryProps)
 
   return {
     postIds,
-    communityId,
+    groupId,
     sortBy,
     filter,
     hasMore,
@@ -51,12 +51,12 @@ export function mapStateToProps (state, props) {
 const mapDispatchToProps = { setFilter, setSort, fetchPosts, fetchProjects, resetNewPostCount }
 
 export function shouldResetNewPostCount ({ subject, sortBy, filter, topic }) {
-  return subject === 'community' && !topic && sortBy === defaultSortBy && !filter
+  return subject === 'group' && !topic && sortBy === defaultSortBy && !filter
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
   const { hasMore, pending, postIds, queryProps } = stateProps
-  const { community, isProjectFeed } = ownProps
+  const { group, isProjectFeed } = ownProps
   const fetchPostsOrProjects = isProjectFeed
     ? dispatchProps.fetchProjects
     : dispatchProps.fetchPosts
@@ -65,9 +65,9 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     : () => {}
   const fetchPostsAndResetCount = (params, opts) => {
     const promises = [fetchPostsOrProjects(params, opts)]
-    const communityID = get('id', community)
+    const groupId = get('id', group)
     if (shouldResetNewPostCount(queryProps)) {
-      promises.push(dispatchProps.resetNewPostCount(communityID, 'Membership'))
+      promises.push(dispatchProps.resetNewPostCount(groupId, 'Membership'))
     }
     return Promise.all(promises)
   }

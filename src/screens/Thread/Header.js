@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
 
     // Required to avoid font-weight bug where RN goes looking for
     // CustomFontName_bold.ttf, which doesn't exist:
-    // https://github.com/react-community/react-navigation/issues/542#issuecomment-283663786
+    // https://github.com/react-group/react-navigation/issues/542#issuecomment-283663786
     fontWeight: '200'
   }
 })

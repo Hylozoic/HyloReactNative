@@ -165,7 +165,7 @@ export default {
     flexDirection: 'row',
     marginBottom: 0
   },
-  communityRemoveIcon: {
+  groupRemoveIcon: {
     color: rhino30,
     fontSize: 16,
     marginLeft: 10

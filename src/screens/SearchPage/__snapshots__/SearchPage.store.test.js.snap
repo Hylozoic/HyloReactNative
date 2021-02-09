@@ -78,7 +78,7 @@ Object {
   }
   votesTotal
   myVote
-  communities {
+  groups {
     id
     name
     slug
@@ -92,7 +92,7 @@ Object {
   postMemberships {
     id
     pinned
-    community {
+    group {
       id
     }
   }

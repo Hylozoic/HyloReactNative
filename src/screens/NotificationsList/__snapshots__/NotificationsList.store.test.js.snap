@@ -89,7 +89,7 @@ Object {
   }
   votesTotal
   myVote
-  communities {
+  groups {
     id
     name
     slug
@@ -103,7 +103,7 @@ Object {
   postMemberships {
     id
     pinned
-    community {
+    group {
       id
     }
   }
@@ -122,7 +122,7 @@ Object {
     total
   }
               }
-              community {
+              group {
                 id
                 name
                 slug
@@ -222,7 +222,7 @@ Object {
 exports[`selectors/refiners refineActivity matches the previous ACTION_APPROVED_JOIN_REQUEST snapshot 1`] = `
 Object {
   "body": "approved your request to join",
-  "community": "Aardvarks Alert",
+  "group": "Aardvarks Alert",
   "header": "Join Request Approved",
   "onPress": [Function],
 }
@@ -250,7 +250,7 @@ Object {
 exports[`selectors/refiners refineActivity matches the previous ACTION_JOIN_REQUEST snapshot 1`] = `
 Object {
   "body": "asked to join",
-  "community": "Aardvarks Alert",
+  "group": "Aardvarks Alert",
   "header": "New join request",
   "nameInHeader": true,
   "onPress": [Function],

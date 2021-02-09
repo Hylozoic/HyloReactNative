@@ -9,40 +9,40 @@ import Icon from 'components/Icon'
 import { isEmpty } from 'lodash/fp'
 
 export default class DrawerMenu extends React.PureComponent {
-  onGoToCommunity = (community) => this.props.goToCommunity(community)
+  onGoToGroup = (group) => this.props.goToGroup(group)
   onGoToNetwork = (network) => this.props.goToNetwork(network)
 
   render () {
     const {
       name, avatarUrl, goToMyProfile,
-      showSettings, networks, communities, currentContext,
-      currentNetworkId, currentCommunityId, canModerateCurrentCommunity,
-      goToCreateCommunity, goToCommunitySettingsMenu
+      showSettings, networks, groups, currentContext,
+      currentNetworkId, currentGroupId, canModerateCurrentGroup,
+      goToCreateGroup, goToGroupSettingsMenu
     } = this.props
 
     const listSections = [
       {
         data: networks,
-        label: 'Networked Communities',
+        label: 'Networked Groups',
         renderItem: ({ item }) => (
           <NetworkRow
             network={item}
-            goToCommunity={this.onGoToCommunity}
+            goToGroup={this.onGoToGroup}
             goToNetwork={this.onGoToNetwork}
             currentNetworkId={currentNetworkId}
-            currentCommunityId={!currentNetworkId && currentCommunityId}
+            currentGroupId={!currentNetworkId && currentGroupId}
           />
         ),
         keyExtractor: item => 'n' + item.id
       },
       {
-        data: communities,
-        label: 'Independent Communities',
+        data: groups,
+        label: 'Independent Groups',
         renderItem: ({ item }) => (
-          <CommunityRow
-            community={item}
-            goToCommunity={this.onGoToCommunity}
-            currentCommunityId={!currentNetworkId && currentCommunityId}
+          <GroupRow
+            group={item}
+            goToGroup={this.onGoToGroup}
+            currentGroupId={!currentNetworkId && currentGroupId}
             addPadding
           />
         ),
@@ -56,9 +56,9 @@ export default class DrawerMenu extends React.PureComponent {
           <View style={styles.header}>
             <Image source={{ uri: currentContext.avatarUrl }} style={styles.headerAvatar} />
             <Text style={styles.headerText}>{currentContext.name}</Text>
-            {canModerateCurrentCommunity && (
+            {canModerateCurrentGroup && (
               <TouchableOpacity
-                onPress={goToCommunitySettingsMenu}
+                onPress={goToGroupSettingsMenu}
                 hitSlop={{ top: 5, bottom: 5, left: 10, right: 10 }}
                 style={styles.headerSettingsButton}
               >
@@ -73,7 +73,7 @@ export default class DrawerMenu extends React.PureComponent {
           sections={listSections}
           stickySectionHeadersEnabled={false}
         />
-        <Button text='Create a Community' onPress={goToCreateCommunity} style={styles.createCommunityButton} />
+        <Button text='Create a Group' onPress={goToCreateGroup} style={styles.createGroupButton} />
         <View style={styles.footer}>
           <TouchableOpacity onPress={goToMyProfile} style={styles.avatar}>
             <Image source={avatarUrl ? { uri: avatarUrl } : null} style={styles.avatar} />
@@ -97,7 +97,7 @@ DrawerMenu.propTypes = {
   name: PropTypes.string.isRequired,
   avatarUrl: PropTypes.string,
   networks: PropTypes.array,
-  communities: PropTypes.array,
+  groups: PropTypes.array,
   goToMyProfile: PropTypes.func.isRequired,
   showSettings: PropTypes.func.isRequired
 }
@@ -122,8 +122,8 @@ export function SectionHeader ({ section }) {
 export class NetworkRow extends React.PureComponent {
   constructor (props) {
     super(props)
-    const expanded = props.network.communities.reduce((acc, community) =>
-      acc || !!community.newPostCount,
+    const expanded = props.network.groups.reduce((acc, group) =>
+      acc || !!group.newPostCount,
     false)
     this.state = {
       expanded,
@@ -146,11 +146,11 @@ export class NetworkRow extends React.PureComponent {
   openNetwork = () => this.props.goToNetwork(this.props.network)
 
   render () {
-    const { network, goToCommunity, currentCommunityId } = this.props
+    const { network, goToGroup, currentGroupId } = this.props
     const { expanded, seeAllExpanded } = this.state
-    const { avatarUrl, name, communities, nonMemberCommunities } = network
-    const expandable = !isEmpty(communities)
-    const moreCommunities = !isEmpty(nonMemberCommunities)
+    const { avatarUrl, name, groups, nonMemberGroups } = network
+    const expandable = !isEmpty(groups)
+    const moreGroups = !isEmpty(nonMemberGroups)
     return (
       <View style={[styles.networkRow, expanded ? styles.networkRowExpanded : styles.networkRowCollapsed]}>
         <TouchableOpacity onPress={this.openNetwork} style={[styles.rowTouchable, styles.networkRowTouchable]}>
@@ -165,23 +165,23 @@ export class NetworkRow extends React.PureComponent {
           )}
         </TouchableOpacity>
         {expanded && expandable && (
-          <View style={styles.networkCommunities}>
-            {communities.map(c => <CommunityRow
+          <View style={styles.networkGroups}>
+            {groups.map(c => <GroupRow
               key={c.id}
-              community={c}
-              goToCommunity={goToCommunity}
-              currentCommunityId={currentCommunityId}
+              group={c}
+              goToGroup={goToGroup}
+              currentGroupId={currentGroupId}
                                   />)}
-            {seeAllExpanded && moreCommunities && nonMemberCommunities.map(c => (
-              <CommunityRow
+            {seeAllExpanded && moreGroups && nonMemberGroups.map(c => (
+              <GroupRow
                 key={c.id}
-                community={c}
-                goToCommunity={goToCommunity}
-                currentCommunityId={currentCommunityId}
+                group={c}
+                goToGroup={goToGroup}
+                currentGroupId={currentGroupId}
                 isMember={false}
                                                                                   />
             ))}
-            {moreCommunities && (
+            {moreGroups && (
               <TouchableOpacity onPress={this.toggleSeeAll}>
                 <Text style={styles.seeAll}>{seeAllExpanded ? 'See less' : 'See all'}</Text>
               </TouchableOpacity>
@@ -193,17 +193,17 @@ export class NetworkRow extends React.PureComponent {
   }
 }
 
-export function CommunityRow ({ community, goToCommunity, currentCommunityId, addPadding, isMember = true }) {
-  const { id, avatarUrl, name } = community
-  const newPostCount = Math.min(99, community.newPostCount)
-  const highlight = id === currentCommunityId
+export function GroupRow ({ group, goToGroup, currentGroupId, addPadding, isMember = true }) {
+  const { id, avatarUrl, name } = group
+  const newPostCount = Math.min(99, group.newPostCount)
+  const highlight = id === currentGroupId
   return (
-    <View style={[styles.communityRow, addPadding && styles.defaultPadding]}>
-      <TouchableOpacity onPress={() => goToCommunity(community)} style={styles.rowTouchable}>
+    <View style={[styles.groupRow, addPadding && styles.defaultPadding]}>
+      <TouchableOpacity onPress={() => goToGroup(group)} style={styles.rowTouchable}>
         {!!avatarUrl &&
-          <Image source={{ uri: avatarUrl }} style={styles.communityAvatar} />}
+          <Image source={{ uri: avatarUrl }} style={styles.groupAvatar} />}
         <Text
-          style={[styles.communityRowText, highlight && styles.highlight, isMember && styles.isMember]} ellipsizeMode='tail'
+          style={[styles.groupRowText, highlight && styles.highlight, isMember && styles.isMember]} ellipsizeMode='tail'
           numberOfLines={1}
         >
           {name}

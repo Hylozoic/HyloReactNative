@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
-import getCommunity from 'store/selectors/getCommunity'
-import getCurrentCommunityId from 'store/selectors/getCurrentCommunityId'
+import getGroup from 'store/selectors/getGroup'
+import getCurrentgroupId from 'store/selectors/getCurrentgroupId'
 import getMe from 'store/selectors/getMe'
 
 import {
@@ -15,9 +15,9 @@ import getPerson from 'store/selectors/getPerson'
 import { includes } from 'lodash/fp'
 
 export function mapStateToProps (state, props) {
-  const communityId = getCurrentCommunityId(state, props)
-  const community = getCommunity(state, { id: communityId })
-  const moderators = getModerators(state, { communityId })
+  const groupId = getCurrentgroupId(state, props)
+  const group = getGroup(state, { id: groupId })
+  const moderators = getModerators(state, { groupId })
   const moderatorIds = moderators.map(m => m.id)
   const moderatorSuggestions = state.ModeratorSettings
     .filter(personId => !includes(personId, moderatorIds))
@@ -26,7 +26,7 @@ export function mapStateToProps (state, props) {
 
   return {
     currentUser,
-    community,
+    group,
     moderators,
     moderatorSuggestions
   }
@@ -34,18 +34,18 @@ export function mapStateToProps (state, props) {
 
 export function mapDispatchToProps (dispatch, { navigation }) {
   return {
-    addModeratorMaker: (id, communityId) => dispatch(addModerator(id, communityId)),
-    removeModeratorMaker: (id, isRemoveFromCommunity, communityId) => dispatch(removeModerator(id, communityId, isRemoveFromCommunity)),
-    fetchModeratorsMaker: communitySlug => () => dispatch(fetchModerators(communitySlug)),
+    addModeratorMaker: (id, groupId) => dispatch(addModerator(id, groupId)),
+    removeModeratorMaker: (id, isRemoveFromGroup, groupId) => dispatch(removeModerator(id, groupId, isRemoveFromGroup)),
+    fetchModeratorsMaker: groupSlug => () => dispatch(fetchModerators(groupSlug)),
     showMember: id => navigation.navigate('Member', { id }),
-    fetchModeratorSuggestionsMaker: (communityId, autocomplete) => dispatch(fetchModeratorSuggestions(communityId, autocomplete)),
+    fetchModeratorSuggestionsMaker: (groupId, autocomplete) => dispatch(fetchModeratorSuggestions(groupId, autocomplete)),
     clearModeratorSuggestions: () => dispatch(clearModeratorSuggestions())
   }
 }
 
 export const mergeProps = (stateProps, dispatchProps, ownProps) => {
-  const communitySlug = stateProps.community && stateProps.community.slug
-  const communityId = stateProps.community && stateProps.community.id
+  const groupSlug = stateProps.group && stateProps.group.slug
+  const groupId = stateProps.group && stateProps.group.id
 
   const {
     addModeratorMaker,
@@ -58,10 +58,10 @@ export const mergeProps = (stateProps, dispatchProps, ownProps) => {
     ...stateProps,
     ...dispatchProps,
     ...ownProps,
-    addModerator: (id) => addModeratorMaker(id, communityId),
-    removeModerator: (id, isRemoveFromCommunity) => removeModeratorMaker(id, isRemoveFromCommunity, communityId),
-    fetchModeratorSuggestions: (autocomplete) => fetchModeratorSuggestionsMaker(communityId, autocomplete),
-    fetchModerators: communitySlug ? fetchModeratorsMaker(communitySlug) : () => {}
+    addModerator: (id) => addModeratorMaker(id, groupId),
+    removeModerator: (id, isRemoveFromGroup) => removeModeratorMaker(id, isRemoveFromGroup, groupId),
+    fetchModeratorSuggestions: (autocomplete) => fetchModeratorSuggestionsMaker(groupId, autocomplete),
+    fetchModerators: groupSlug ? fetchModeratorsMaker(groupSlug) : () => {}
   }
 }
 

@@ -8,17 +8,17 @@ describe('makeFetchOpts', () => {
       network: {
         slug: 'netslug'
       },
-      community: null,
+      group: null,
       sortBy: 'join',
       search: 'fee'
     }
     expect(makeFetchOpts(props)).toMatchSnapshot()
   })
 
-  it('handles a community', () => {
+  it('handles a group', () => {
     const props = {
       network: null,
-      community: {
+      group: {
         slug: 'comslug'
       },
       sortBy: 'join',
@@ -27,10 +27,10 @@ describe('makeFetchOpts', () => {
     expect(makeFetchOpts(props)).toMatchSnapshot()
   })
 
-  it('handles no community or network', () => {
+  it('handles no group or network', () => {
     const props = {
       network: null,
-      community: null,
+      group: null,
       sortBy: 'join',
       search: 'fee'
     }
@@ -39,14 +39,14 @@ describe('makeFetchOpts', () => {
 })
 
 describe('mapStateToProps', () => {
-  it('handles null value for lastViewedCommunity', () => {
+  it('handles null value for lastViewedGroup', () => {
     const session = orm.session(orm.getEmptyState())
-    const community = session.Community.create({ id: 10, slug: 'tom' })
+    const group = session.Group.create({ id: 10, slug: 'tom' })
     session.Me.create({
       id: 123,
       memberships: [session.Membership.create({
         id: '345',
-        community: community.id,
+        group: group.id,
         hasModeratorRole: true
       })]
     })
@@ -57,7 +57,7 @@ describe('mapStateToProps', () => {
       pending: {},
       queryResults: {}
     }
-    session.Community.create({})
+    session.Group.create({})
     expect(mapStateToProps(state)).toMatchSnapshot()
   })
 })
@@ -76,7 +76,7 @@ describe('mergeProps', () => {
     stateProps = { hasMore: true, members: [], pending: false }
   })
 
-  it('makes fetchMembers a no-op when there is no community or network', () => {
+  it('makes fetchMembers a no-op when there is no group or network', () => {
     const props = mergeProps(stateProps, dispatchProps)
     expect(props.fetchMembers()).toEqual(undefined)
     expect(dispatchProps.fetchMembers).not.toBeCalled()

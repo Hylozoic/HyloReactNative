@@ -2,7 +2,7 @@ import 'react-native'
 import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import ReactTestRenderer from 'react-test-renderer'
-import DrawerMenu, { SectionHeader, NetworkRow, CommunityRow, TextButton } from './DrawerMenu'
+import DrawerMenu, { SectionHeader, NetworkRow, GroupRow, TextButton } from './DrawerMenu'
 import { ALL_COMMUNITIES_NETWORK } from 'store/models/Network'
 
 describe('DrawerMenu', () => {
@@ -10,16 +10,16 @@ describe('DrawerMenu', () => {
     name: 'Roy Rogers',
     avatarUrl: 'http://anyurl',
     memberships: [],
-    goToCommunity: () => {},
+    goToGroup: () => {},
     goToMyProfile: () => {},
     showSettings: () => {},
-    currentCommunityId: 12,
-    canModerateCurrentCommunity: true,
+    currentGroupId: 12,
+    canModerateCurrentGroup: true,
     networks: [],
-    goToCommunitySettingsMenu: jest.fn(),
-    currentCommunity: { name: 'foo', avatarUrl: 'someurl' },
+    goToGroupSettingsMenu: jest.fn(),
+    currentGroup: { name: 'foo', avatarUrl: 'someurl' },
     currentContext: { name: 'foo', avatarUrl: 'someurl' },
-    communities: []
+    groups: []
   }
 
   it('matches the last snapshot', () => {
@@ -28,9 +28,9 @@ describe('DrawerMenu', () => {
         id: 1,
         name: 'Network'
       }],
-      communities: [{
+      groups: [{
         id: 2,
-        name: 'Community'
+        name: 'Group'
       }]
     }
     const renderer = new ReactShallowRenderer()
@@ -43,7 +43,7 @@ describe('DrawerMenu', () => {
 describe('SectionHeader', () => {
   it('matches the last snapshot', () => {
     const renderer = new ReactShallowRenderer()
-    renderer.render(<SectionHeader section={{ label: 'Networked Communities' }} />)
+    renderer.render(<SectionHeader section={{ label: 'Networked Groups' }} />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
@@ -57,7 +57,7 @@ describe('NetworkRow', () => {
       id: 1,
       avatarUrl: 'network.png',
       name: 'Network Name',
-      communities: [{
+      groups: [{
         id: 1,
         avatarUrl: 'foo.png',
         name: 'Foom',
@@ -66,27 +66,27 @@ describe('NetworkRow', () => {
     }
     renderer.render(<NetworkRow
       network={network}
-      goToCommunity={() => {}}
-      currentCommunityId={1}
+      goToGroup={() => {}}
+      currentGroupId={1}
                     />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
   })
 
-  it('renders correctly with nonMemberCommunities', () => {
+  it('renders correctly with nonMemberGroups', () => {
     const renderer = new ReactShallowRenderer()
     const network = {
       id: 1,
       avatarUrl: 'network.png',
       name: 'Network Name',
-      communities: [{
+      groups: [{
         id: 1,
         avatarUrl: 'foo.png',
         name: 'Foom',
         newPostCount: 1
       }],
-      nonMemberCommunities: [{
+      nonMemberGroups: [{
         id: 2,
         avatarUrl: 'twofoo.png',
         name: 'Twoom',
@@ -95,8 +95,8 @@ describe('NetworkRow', () => {
     }
     renderer.render(<NetworkRow
       network={network}
-      goToCommunity={() => {}}
-      currentCommunityId={1}
+      goToGroup={() => {}}
+      currentGroupId={1}
                     />)
     const actual = renderer.getRenderOutput()
 
@@ -108,7 +108,7 @@ describe('NetworkRow', () => {
     const network = {
       id: 1,
       name: 'Network Name',
-      communities: [{
+      groups: [{
         id: 1,
         avatarUrl: 'foo.png',
         name: 'Foom',
@@ -117,21 +117,21 @@ describe('NetworkRow', () => {
     }
     renderer.render(<NetworkRow
       network={network}
-      goToCommunity={() => {}}
-      currentCommunityId={1}
+      goToGroup={() => {}}
+      currentGroupId={1}
                     />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
   })
 
-  it('shows all communities link', () => {
+  it('shows all groups link', () => {
     const renderer = new ReactShallowRenderer()
     const network = ALL_COMMUNITIES_NETWORK
     renderer.render(
       <NetworkRow
         network={network}
-        goToCommunity={() => {}}
+        goToGroup={() => {}}
       />
     )
     const actual = renderer.getRenderOutput()
@@ -139,12 +139,12 @@ describe('NetworkRow', () => {
     expect(actual).toMatchSnapshot()
   })
 
-  it('sets expanded to false when no new posts in communities', () => {
+  it('sets expanded to false when no new posts in groups', () => {
     const props = {
       network: {
         name: '',
         avatarUrl: '',
-        communities: [
+        groups: [
           { id: 1, newPostCount: 0 },
           { id: 2, newPostCount: 0 }
         ]
@@ -154,12 +154,12 @@ describe('NetworkRow', () => {
     expect(instance.state.expanded).toEqual(false)
   })
 
-  it('sets expanded to true when there are new posts in communities', () => {
+  it('sets expanded to true when there are new posts in groups', () => {
     const props = {
       network: {
         name: '',
         avatarUrl: '',
-        communities: [
+        groups: [
           { id: 1, newPostCount: 1 },
           { id: 2, newPostCount: 0 }
         ]
@@ -174,7 +174,7 @@ describe('NetworkRow', () => {
       network: {
         name: '',
         avatarUrl: '',
-        communities: []
+        groups: []
       }
     }
     it('toggles expanded state', () => {
@@ -187,19 +187,19 @@ describe('NetworkRow', () => {
   })
 })
 
-describe('CommunityRow', () => {
+describe('GroupRow', () => {
   it('matches the last snapshot', () => {
     const renderer = new ReactShallowRenderer()
-    const community = {
+    const group = {
       id: 1,
       avatarUrl: 'foo.png',
       name: 'Foom',
       newPostCount: 7
     }
-    renderer.render(<CommunityRow
-      community={community}
-      goToCommunity={() => {}}
-      currentCommunityId={2}
+    renderer.render(<GroupRow
+      group={group}
+      goToGroup={() => {}}
+      currentGroupId={2}
                     />)
     const actual = renderer.getRenderOutput()
 
@@ -208,32 +208,32 @@ describe('CommunityRow', () => {
 
   it('hides badge when no newPostCount', () => {
     const renderer = new ReactShallowRenderer()
-    const community = {
+    const group = {
       id: 1,
       avatarUrl: 'foo.png',
       name: 'Foom'
     }
-    renderer.render(<CommunityRow
-      community={community}
-      goToCommunity={() => {}}
-      currentCommunityId={2}
+    renderer.render(<GroupRow
+      group={group}
+      goToGroup={() => {}}
+      currentGroupId={2}
                     />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
   })
 
-  it('highlights when matching currentCommunityId', () => {
+  it('highlights when matching currentGroupId', () => {
     const renderer = new ReactShallowRenderer()
-    const community = {
+    const group = {
       id: 1,
       avatarUrl: 'foo.png',
       name: 'Foom'
     }
-    renderer.render(<CommunityRow
-      community={community}
-      goToCommunity={() => {}}
-      currentCommunityId={community.id}
+    renderer.render(<GroupRow
+      group={group}
+      goToGroup={() => {}}
+      currentGroupId={group.id}
                     />)
     const actual = renderer.getRenderOutput()
 

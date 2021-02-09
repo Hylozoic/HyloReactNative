@@ -3,16 +3,16 @@ import { get } from 'lodash/fp'
 import orm from 'store/models'
 
 const MODULE_NAME = 'Feed'
-export const FETCH_COMMUNITY_TOPIC = `${MODULE_NAME}/FETCH_COMMUNITY_TOPIC`
+export const FETCH_GROUP_TOPIC = `${MODULE_NAME}/FETCH_GROUP_TOPIC`
 export const SET_TOPIC_SUBSCRIBE = `${MODULE_NAME}/SET_TOPIC_SUBSCRIBE`
 export const SET_TOPIC_SUBSCRIBE_PENDING = SET_TOPIC_SUBSCRIBE + '_PENDING'
 
-export function fetchCommunityTopic (topicName, communitySlug) {
+export function fetchGroupTopic (topicName, groupSlug) {
   return {
-    type: FETCH_COMMUNITY_TOPIC,
+    type: FETCH_GROUP_TOPIC,
     graphql: {
-      query: `query ($topicName: String, $communitySlug: String) {
-        communityTopic(topicName: $topicName, communitySlug: $communitySlug) {
+      query: `query ($topicName: String, $groupSlug: String) {
+        groupTopic(topicName: $topicName, groupSlug: $groupSlug) {
           id
           isSubscribed
           followersTotal
@@ -21,32 +21,32 @@ export function fetchCommunityTopic (topicName, communitySlug) {
             id
             name
           }
-          community {
+          group {
             id
           }
         }
       }`,
-      variables: { topicName, communitySlug }
+      variables: { topicName, groupSlug }
     },
     meta: {
       afterInteractions: true,
-      extractModel: 'CommunityTopic'
+      extractModel: 'GroupTopic'
     }
   }
 }
 
-export function setTopicSubscribe (topicId, communityId, isSubscribing) {
+export function setTopicSubscribe (topicId, groupId, isSubscribing) {
   return {
     type: SET_TOPIC_SUBSCRIBE,
     graphql: {
-      query: `mutation($topicId: ID, $communityId: ID, $isSubscribing: Boolean) {
-        subscribe(topicId: $topicId, communityId: $communityId, isSubscribing: $isSubscribing) {
+      query: `mutation($topicId: ID, $groupId: ID, $isSubscribing: Boolean) {
+        subscribe(topicId: $topicId, groupId: $groupId, isSubscribing: $isSubscribing) {
           success
         }
       }`,
       variables: {
         topicId,
-        communityId,
+        groupId,
         isSubscribing
       }
     },
@@ -54,22 +54,22 @@ export function setTopicSubscribe (topicId, communityId, isSubscribing) {
       optimistic: true,
       isSubscribing,
       topicId,
-      communityId
+      groupId
     }
   }
 }
 
-export const getCommunityTopic = ormCreateSelector(
+export const getGroupTopic = ormCreateSelector(
   orm,
   (state, props) => props.topicName,
   (state, props) => props.slug,
   (session, topicName, slug) => {
     const topic = session.Topic.safeGet({ name: topicName })
-    const community = session?.Community.safeGet({ slug })
-    if (!topic || !community) return false
+    const group = session?.Group.safeGet({ slug })
+    if (!topic || !group) return false
 
-    return session.CommunityTopic.filter({
-      topic: topic.id, community: community.id
+    return session.GroupTopic.filter({
+      topic: topic.id, group: group.id
     }).first()
   }
 )

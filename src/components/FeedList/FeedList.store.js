@@ -80,31 +80,27 @@ export const getHasMoreProjects = createSelector(getProjectResults, get('hasMore
 
 // Create a cached selector since we don't want multiple onscreen feedlists to clobber the cache between each other.
 export const getQueryProps = createCachedSelector(
-  (_, props) => props.community,
-  (_, props) => props.network,
+  (_, props) => props.group,
   (_, props) => props.sortBy,
   (_, props) => props.filter,
   (_, props) => props.topicName,
-  (community, network, sortBy, filter, topicName, isProjectFeed) => {
+  (group, sortBy, filter, topicName, isProjectFeed) => {
     let subject
 
     if (isProjectFeed) {
       subject = 'project'
-    } else if (community) {
-      subject = 'community'
-    } else if (network) {
-      subject = 'network'
+    } else if (group) {
+      subject = 'group'
     }
 
     return omitBy(x => isNull(x) || isUndefined(x), {
       sortBy,
       filter,
       subject,
-      slug: get('slug', community),
-      networkSlug: get('slug', network),
+      slug: get('slug', group),
       topic: topicName
     })
   }
 )(
-  (state, props) => `${get('community.id', props)}:${get('network.id', props)}:${get('topicName', props)}`
+  (state, props) => `${get('group.id', props)}:${get('topicName', props)}`
 )

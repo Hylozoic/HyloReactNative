@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GroupSettingsMenu matches the last snapshot 1`] = `
+<FlatList
+  ListHeaderComponent={
+    <View>
+      <Text>
+        foo
+      </Text>
+    </View>
+  }
+  data={
+    Array [
+      Object {
+        "name": "Edit Group Info",
+        "navigate": "Group Information",
+      },
+      Object {
+        "name": "Group Moderators",
+        "navigate": "Group Moderators",
+      },
+      Object {
+        "name": "Invite Members",
+        "navigate": "Invite Members",
+      },
+    ]
+  }
+  disableVirtualization={false}
+  horizontal={false}
+  initialNumToRender={10}
+  keyExtractor={[Function]}
+  maxToRenderPerBatch={10}
+  numColumns={1}
+  onEndReachedThreshold={2}
+  removeClippedSubviews={false}
+  renderItem={[Function]}
+  scrollEventThrottle={50}
+  updateCellsBatchingPeriod={50}
+  windowSize={21}
+/>
+`;

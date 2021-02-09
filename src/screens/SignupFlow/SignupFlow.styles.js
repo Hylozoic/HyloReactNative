@@ -1,7 +1,7 @@
 import { caribbeanGreen, white80onCaribbeanGreen, white60onCaribbeanGreen } from 'style/colors'
 
 export default {
-  // From Community create flow
+  // From Group create flow
   container: {
     backgroundColor: caribbeanGreen,
     padding: 20,

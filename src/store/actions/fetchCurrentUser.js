@@ -35,41 +35,6 @@ export default function fetchCurrentUser () {
           newNotificationCount
           unseenThreadCount
           intercomHash
-          memberships {
-            id
-            lastViewedAt
-            newPostCount
-            hasModeratorRole
-            settings {
-              sendPushNotifications
-              sendEmail
-            }
-            community {
-              id
-              name
-              slug
-              avatarUrl
-              bannerUrl
-              network {
-                id
-                name
-                slug
-                avatarUrl
-                bannerUrl
-                communities(first: 300) {
-                  items {
-                    id
-                    name
-                    slug
-                    avatarUrl
-                    network {
-                      id
-                    }
-                  }
-                }
-              }
-            }
-          }
           skills (first: 100) {
             total
             hasMore
@@ -86,6 +51,59 @@ export default function fetchCurrentUser () {
             signupInProgress
             dmNotifications
           }
+          memberships {
+            id
+            lastViewedAt
+            newPostCount
+            hasModeratorRole
+            settings {
+              sendEmail
+              sendPushNotifications
+            }
+            person {
+              id
+            }
+            group {
+              id
+              name
+              slug
+              memberCount
+              avatarUrl
+              groupTopics(subscribed: true) {
+                total
+                hasMore
+                items {
+                  id
+                  topic {
+                    id
+                    name
+                  }
+                  newPostCount
+                  postsTotal
+                  followersTotal
+                  isSubscribed
+                }
+              }
+              parentGroups {
+                items {
+                  id
+                  avatarUrl
+                  memberCount
+                  name
+                  slug
+                }
+              }
+              childGroups(first: 300) {
+                items {
+                  id
+                  avatarUrl
+                  memberCount
+                  name
+                  slug
+                }
+              }
+            }
+          }          
         }
       }`
     },

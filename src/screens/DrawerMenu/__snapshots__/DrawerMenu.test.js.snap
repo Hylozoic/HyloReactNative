@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`CommunityRow hides badge when no newPostCount 1`] = `
+exports[`GroupRow hides badge when no newPostCount 1`] = `
 <View>
   <ForwardRef
     onPress={[Function]}
@@ -22,7 +22,7 @@ exports[`CommunityRow hides badge when no newPostCount 1`] = `
 </View>
 `;
 
-exports[`CommunityRow highlights when matching currentCommunityId 1`] = `
+exports[`GroupRow highlights when matching currentGroupId 1`] = `
 <View>
   <ForwardRef
     onPress={[Function]}
@@ -44,7 +44,7 @@ exports[`CommunityRow highlights when matching currentCommunityId 1`] = `
 </View>
 `;
 
-exports[`CommunityRow matches the last snapshot 1`] = `
+exports[`GroupRow matches the last snapshot 1`] = `
 <View>
   <ForwardRef
     onPress={[Function]}
@@ -123,18 +123,18 @@ exports[`DrawerMenu matches the last snapshot 1`] = `
             },
           ],
           "keyExtractor": [Function],
-          "label": "Networked Communities",
+          "label": "Networked Groups",
           "renderItem": [Function],
         },
         Object {
           "data": Array [
             Object {
               "id": 2,
-              "name": "Community",
+              "name": "Group",
             },
           ],
           "keyExtractor": [Function],
-          "label": "Independent Communities",
+          "label": "Independent Groups",
           "renderItem": [Function],
         },
       ]
@@ -144,7 +144,7 @@ exports[`DrawerMenu matches the last snapshot 1`] = `
     windowSize={21}
   />
   <Button
-    text="Create a Community"
+    text="Create a Group"
   />
   <View>
     <ForwardRef
@@ -200,8 +200,8 @@ exports[`NetworkRow hides image when no avatarUrl 1`] = `
     </ForwardRef>
   </ForwardRef>
   <View>
-    <CommunityRow
-      community={
+    <GroupRow
+      group={
         Object {
           "avatarUrl": "foo.png",
           "id": 1,
@@ -209,8 +209,8 @@ exports[`NetworkRow hides image when no avatarUrl 1`] = `
           "newPostCount": 1,
         }
       }
-      currentCommunityId={1}
-      goToCommunity={[Function]}
+      currentGroupId={1}
+      goToGroup={[Function]}
     />
   </View>
 </View>
@@ -245,8 +245,8 @@ exports[`NetworkRow matches the last snapshot 1`] = `
     </ForwardRef>
   </ForwardRef>
   <View>
-    <CommunityRow
-      community={
+    <GroupRow
+      group={
         Object {
           "avatarUrl": "foo.png",
           "id": 1,
@@ -254,14 +254,14 @@ exports[`NetworkRow matches the last snapshot 1`] = `
           "newPostCount": 1,
         }
       }
-      currentCommunityId={1}
-      goToCommunity={[Function]}
+      currentGroupId={1}
+      goToGroup={[Function]}
     />
   </View>
 </View>
 `;
 
-exports[`NetworkRow renders correctly with nonMemberCommunities 1`] = `
+exports[`NetworkRow renders correctly with nonMemberGroups 1`] = `
 <View>
   <ForwardRef
     onPress={[Function]}
@@ -290,8 +290,8 @@ exports[`NetworkRow renders correctly with nonMemberCommunities 1`] = `
     </ForwardRef>
   </ForwardRef>
   <View>
-    <CommunityRow
-      community={
+    <GroupRow
+      group={
         Object {
           "avatarUrl": "foo.png",
           "id": 1,
@@ -299,8 +299,8 @@ exports[`NetworkRow renders correctly with nonMemberCommunities 1`] = `
           "newPostCount": 1,
         }
       }
-      currentCommunityId={1}
-      goToCommunity={[Function]}
+      currentGroupId={1}
+      goToGroup={[Function]}
     />
     <ForwardRef
       onPress={[Function]}
@@ -313,7 +313,7 @@ exports[`NetworkRow renders correctly with nonMemberCommunities 1`] = `
 </View>
 `;
 
-exports[`NetworkRow shows all communities link 1`] = `
+exports[`NetworkRow shows all groups link 1`] = `
 <View>
   <ForwardRef
     onPress={[Function]}
@@ -322,7 +322,7 @@ exports[`NetworkRow shows all communities link 1`] = `
       ellipsizeMode="tail"
       numberOfLines={1}
     >
-      All Communities
+      All Groups
     </Text>
   </ForwardRef>
 </View>

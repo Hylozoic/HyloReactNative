@@ -15,7 +15,7 @@ export const MAX_TITLE_LENGTH = 100
 export const projectEndpointFragment = `createProject(data: {
   title: $title
   details: $details
-  communityIds: $communityIds
+  groupIds: $groupIds
   imageUrls: $imageUrls
   fileUrls: $fileUrls
   announcement: $announcement
@@ -28,7 +28,7 @@ export function createPost (post) {
     type,
     title,
     details,
-    communities,
+    groups,
     startTime,
     endTime,
     location,
@@ -39,7 +39,7 @@ export function createPost (post) {
     memberIds = [],
     sendAnnouncement
   } = post
-  const communityIds = communities.map(c => c.id)
+  const groupIds = groups.map(c => c.id)
   const preprocessedDetails = divToP(details)
   return {
     type: CREATE_POST,
@@ -48,7 +48,7 @@ export function createPost (post) {
         $type: String
         $title: String
         $details: String
-        $communityIds: [String]
+        $groupIds: [String]
         $startTime: Date
         $endTime: Date
         $location: String
@@ -63,7 +63,7 @@ export function createPost (post) {
           type: $type
           title: $title
           details: $details
-          communityIds: $communityIds
+          groupIds: $groupIds
           startTime: $startTime
           endTime: $endTime
           location: $location
@@ -81,7 +81,7 @@ export function createPost (post) {
         type,
         title,
         details: preprocessedDetails,
-        communityIds,
+        groupIds,
         startTime,
         endTime,
         location,
@@ -108,7 +108,7 @@ export function createProject (post) {
   const {
     title,
     details,
-    communities,
+    groups,
     startTime,
     endTime,
     location,
@@ -119,7 +119,7 @@ export function createProject (post) {
     memberIds = [],
     sendAnnouncement
   } = post
-  const communityIds = communities.map(c => c.id)
+  const groupIds = groups.map(c => c.id)
   const preprocessedDetails = divToP(details)
   return {
     type: CREATE_PROJECT,
@@ -127,7 +127,7 @@ export function createProject (post) {
       query: `mutation (
         $title: String
         $details: String
-        $communityIds: [String]
+        $groupIds: [String]
         $startTime: Date
         $endTime: Date
         $location: String
@@ -141,7 +141,7 @@ export function createProject (post) {
         createProject(data: {
           title: $title
           details: $details
-          communityIds: $communityIds
+          groupIds: $groupIds
           startTime: $startTime
           endTime: $endTime
           location: $location
@@ -158,7 +158,7 @@ export function createProject (post) {
       variables: {
         title,
         details: preprocessedDetails,
-        communityIds,
+        groupIds,
         startTime,
         endTime,
         location,
@@ -187,7 +187,7 @@ export function updatePost (post) {
     type,
     title,
     details,
-    communities,
+    groups,
     startTime,
     endTime,
     location,
@@ -197,7 +197,7 @@ export function updatePost (post) {
     topicNames = [],
     memberIds = []
   } = post
-  const communityIds = communities.map(c => c.id)
+  const groupIds = groups.map(c => c.id)
   const preprocessedDetails = divToP(details)
   return {
     type: UPDATE_POST,
@@ -206,7 +206,7 @@ export function updatePost (post) {
         $type: String
         $title: String
         $details: String
-        $communityIds: [String]
+        $groupIds: [String]
         $startTime: Date
         $endTime: Date
         $location: String
@@ -220,7 +220,7 @@ export function updatePost (post) {
           type: $type
           title: $title
           details: $details
-          communityIds: $communityIds
+          groupIds: $groupIds
           startTime: $startTime
           endTime: $endTime
           location: $location
@@ -238,7 +238,7 @@ export function updatePost (post) {
         type,
         title,
         details: preprocessedDetails,
-        communityIds,
+        groupIds,
         startTime,
         endTime,
         location,

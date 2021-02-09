@@ -144,7 +144,7 @@ exports[`InvitePeople renders SendInvitesPage 1`] = `
     <View>
       <View>
         <Text>
-          Let anyone in this community send invites
+          Let anyone in this group send invites
         </Text>
         <View>
           <Switch
@@ -158,7 +158,7 @@ exports[`InvitePeople renders SendInvitesPage 1`] = `
         </View>
       </View>
       <Text>
-        Anyone with this link can join the community
+        Anyone with this link can join the group
       </Text>
       <Text>
         https://hylo.com/invitepathhere
@@ -188,7 +188,7 @@ exports[`InvitePeople renders SendInvitesPage 1`] = `
         onChangeText={[Function]}
         rejectResponderTermination={true}
         underlineColorAndroid="rgba(0,0,0,0)"
-        value="Hey! Here's an invite to the Axolotle community on Hylo."
+        value="Hey! Here's an invite to the Axolotle group on Hylo."
       />
       <Button
         disabled={true}

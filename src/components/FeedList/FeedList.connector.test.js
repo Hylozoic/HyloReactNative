@@ -13,7 +13,7 @@ describe('mapStateToProps', () => {
     const session = orm.session(orm.getEmptyState())
 
     times(i => {
-      session.Post.create({ id: i.toString(), communities: ['1'] })
+      session.Post.create({ id: i.toString(), groups: ['1'] })
     }, 5)
 
     state = {
@@ -31,7 +31,7 @@ describe('mapStateToProps', () => {
 
   it('returns empty posts and default query props if no results exist', () => {
     expect(mapStateToProps(state, { id: 'bar' })).toEqual({
-      communityId: undefined,
+      groupId: undefined,
       postIds: [],
       hasMore: undefined,
       pending: false,
@@ -46,7 +46,7 @@ describe('mapStateToProps', () => {
   })
 
   it('returns posts in the correct order', () => {
-    expect(mapStateToProps(state, { community: { slug: 'foo', id: 10 } })).toEqual({
+    expect(mapStateToProps(state, { group: { slug: 'foo', id: 10 } })).toEqual({
       postIds: [
         '1',
         '3',
@@ -54,13 +54,13 @@ describe('mapStateToProps', () => {
       ],
       hasMore: true,
       pending: false,
-      communityId: 10,
+      groupId: 10,
       networkId: undefined,
       pendingRefresh: false,
       filter: defaultState.filter,
       sortBy: defaultState.sortBy,
       queryProps: {
-        subject: 'community',
+        subject: 'group',
         slug: 'foo',
         sortBy: 'updated'
       }
@@ -68,7 +68,7 @@ describe('mapStateToProps', () => {
   })
 
   it('returns posts for a network ', () => {
-    expect(mapStateToProps(state, { community: { slug: 'foo' } })).toEqual({
+    expect(mapStateToProps(state, { group: { slug: 'foo' } })).toEqual({
       postIds: [
         '1',
         '3',
@@ -80,7 +80,7 @@ describe('mapStateToProps', () => {
       filter: defaultState.filter,
       sortBy: defaultState.sortBy,
       queryProps: {
-        subject: 'community',
+        subject: 'group',
         slug: 'foo',
         sortBy: 'updated'
       }
@@ -101,7 +101,7 @@ describe('mergeProps', () => {
   it('sets up fetchPostsAndResetCount', () => {
     const stateProps = {
       queryProps: {
-        subject: 'community',
+        subject: 'group',
         sortBy: defaultSortBy
       }
     }
@@ -112,7 +112,7 @@ describe('mergeProps', () => {
     }
 
     const ownProps = {
-      community: {
+      group: {
         id: 1
       }
     }
@@ -121,16 +121,16 @@ describe('mergeProps', () => {
     return merged.fetchPosts()
       .then(() => {
         expect(dispatchProps.fetchPosts).toHaveBeenCalledWith({
-          sortBy: 'updated', subject: 'community'
+          sortBy: 'updated', subject: 'group'
         }, undefined)
-        expect(dispatchProps.resetNewPostCount).toHaveBeenCalledWith(ownProps.community.id, 'Membership')
+        expect(dispatchProps.resetNewPostCount).toHaveBeenCalledWith(ownProps.group.id, 'Membership')
       })
   })
 
   it('sets up fetchPostsAndResetCount without calling resetNewPostCount', () => {
     const stateProps = {
       queryProps: {
-        subject: 'community',
+        subject: 'group',
         sortBy: defaultSortBy,
         filter: 'some filter'
       }
@@ -142,7 +142,7 @@ describe('mergeProps', () => {
     }
 
     const ownProps = {
-      community: {
+      group: {
         id: 1
       }
     }
@@ -151,7 +151,7 @@ describe('mergeProps', () => {
     return merged.fetchPosts()
       .then(() => {
         expect(dispatchProps.fetchPosts).toHaveBeenCalledWith({
-          sortBy: 'updated', subject: 'community', filter: 'some filter'
+          sortBy: 'updated', subject: 'group', filter: 'some filter'
         }, undefined)
         expect(dispatchProps.resetNewPostCount).not.toHaveBeenCalled()
       })
@@ -164,7 +164,7 @@ describe('mergeProps', () => {
       hasMore: true,
       postIds: [1, 2, 3, 4],
       queryProps: {
-        subject: 'community',
+        subject: 'group',
         slug: 'food',
         sortBy: 'latest',
         filter: 'request',
@@ -173,7 +173,7 @@ describe('mergeProps', () => {
     }
 
     const ownProps = {
-      community: {
+      group: {
         id: 1
       }
     }
@@ -186,7 +186,7 @@ describe('mergeProps', () => {
       filter: stateProps.filter,
       sortBy: stateProps.sortBy,
       slug: 'food',
-      subject: 'community',
+      subject: 'group',
       topic: 'eggs'
     }, undefined)
     fetchPosts.mockClear()
@@ -196,7 +196,7 @@ describe('mergeProps', () => {
       filter: stateProps.filter,
       sortBy: stateProps.sortBy,
       slug: 'food',
-      subject: 'community',
+      subject: 'group',
       offset: 4,
       topic: 'eggs'
     })
@@ -237,7 +237,7 @@ describe('mergeProps', () => {
       hasMore: true,
       postIds: [1, 2, 3, 4],
       queryProps: {
-        subject: 'community',
+        subject: 'group',
         slug: 'food',
         sortBy: 'latest',
         filter: 'request',
@@ -246,7 +246,7 @@ describe('mergeProps', () => {
     }
 
     const ownProps = {
-      community: {
+      group: {
         id: 1
       },
       isProjectFeed: true
@@ -262,7 +262,7 @@ describe('mergeProps', () => {
       filter: stateProps.filter,
       sortBy: stateProps.sortBy,
       slug: 'food',
-      subject: 'community',
+      subject: 'group',
       topic: 'eggs'
     }, undefined)
     expect(fetchPosts).not.toHaveBeenCalled()
@@ -272,28 +272,28 @@ describe('mergeProps', () => {
 describe('shouldResetNewPostCount', () => {
   it('returns true appropriately', () => {
     const props = {
-      subject: 'community',
+      subject: 'group',
       sortBy: defaultSortBy
     }
     expect(shouldResetNewPostCount(props)).toEqual(true)
   })
-  it('returns false with a subject that does not equal "community"', () => {
+  it('returns false with a subject that does not equal "group"', () => {
     const props = {
-      subject: 'all communities',
+      subject: 'all groups',
       sortBy: defaultSortBy
     }
     expect(shouldResetNewPostCount(props)).toEqual(false)
   })
   it('returns false with a non-default sortBy', () => {
     const props = {
-      subject: 'community',
+      subject: 'group',
       sortBy: 'non-default'
     }
     expect(shouldResetNewPostCount(props)).toEqual(false)
   })
   it('returns false with a filter', () => {
     const props = {
-      subject: 'community',
+      subject: 'group',
       sortBy: defaultSortBy,
       filter: 'any filter'
     }
@@ -301,7 +301,7 @@ describe('shouldResetNewPostCount', () => {
   })
   it('returns false with a topic', () => {
     const props = {
-      subject: 'community',
+      subject: 'group',
       sortBy: defaultSortBy,
       topic: 'any topic'
     }

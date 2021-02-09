@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import {
   makeGetPost,
   makeGetPostCommenters,
-  makeGetPostCommunities,
+  makeGetPostGroups,
   makeGetPostCreator,
   makeGetPostTopics,
   makeGetPostImageUrls,
@@ -12,7 +12,7 @@ import {
 export const makeMapStateToProps = () => {
   const getPost = makeGetPost()
   const getPostCommenters = makeGetPostCommenters()
-  const getPostCommunities = makeGetPostCommunities()
+  const getPostGroups = makeGetPostGroups()
   const getPostCreator = makeGetPostCreator()
   const getPostTopics = makeGetPostTopics()
   const getPostImageUrls = makeGetPostImageUrls()
@@ -23,11 +23,11 @@ export const makeMapStateToProps = () => {
     return {
       post: post,
       commenters: post && getPostCommenters(state, { id: props.postId }),
-      communities: post && getPostCommunities(state, { id: props.postId }),
+      groups: post && getPostGroups(state, { id: props.postId }),
       creator: post && getPostCreator(state, { id: props.postId }),
       imageUrls: post && getPostImageUrls(state, { id: props.postId }),
       topics: post && getPostTopics(state, { id: props.postId }),
-      isPinned: post && getPostIsPinned(state, { id: props.postId, communityId: props.communityId })
+      isPinned: post && getPostIsPinned(state, { id: props.postId, groupId: props.groupId })
     }
   }
   return mapStateToProps

@@ -5,7 +5,7 @@ import PostHeader from './PostHeader'
 import PostBody from './PostBody'
 import PostImage from './PostImage'
 import PostFooter from './PostFooter'
-import PostCommunities from './PostCommunities'
+import PostGroups from './PostGroups'
 import samplePost from './samplePost'
 import { get } from 'lodash/fp'
 import { capeCod10 } from 'style/colors'
@@ -26,7 +26,7 @@ export default class PostCard extends React.PureComponent {
     creator: object,
     isPinned: bool,
     commenters: array,
-    communities: array,
+    groups: array,
     imageUrls: array,
     topics: array,
     fetchPost: func,
@@ -44,19 +44,18 @@ export default class PostCard extends React.PureComponent {
       post,
       creator,
       commenters,
-      communities,
+      groups,
       imageUrls,
       isPinned,
       topics,
       showMember,
       showTopic,
-      goToCommunity,
-      selectedNetworkId,
+      goToGroup,
       hideMenu,
       hideDetails,
-      shouldShowCommunities
+      shouldShowGroups
     } = this.props
-    const slug = get('0.slug', communities)
+    const slug = get('0.slug', groups)
 
     return (
       <View style={styles.container}>
@@ -87,14 +86,13 @@ export default class PostCard extends React.PureComponent {
           shouldTruncate
           hideDetails={hideDetails}
         />
-        <PostCommunities
-          style={styles.communities}
-          shouldShowCommunities={shouldShowCommunities}
-          communities={communities}
+        <PostGroups
+          style={styles.groups}
+          shouldShowGroups={shouldShowGroups}
+          groups={groups}
           includePublic={post.isPublic}
           slug={slug}
-          selectedNetworkId={selectedNetworkId}
-          goToCommunity={goToCommunity}
+          goToGroup={goToGroup}
         />
         <PostFooter
           id={post.id}
@@ -115,7 +113,7 @@ const styles = {
     borderRadius: 4,
     backgroundColor: 'white'
   },
-  communities: {
+  groups: {
     paddingHorizontal: 12
   },
   imageMargin: {

@@ -18,7 +18,7 @@ Array [
         $type: String
         $title: String
         $details: String
-        $communityIds: [String]
+        $groupIds: [String]
         $startTime: Date
         $endTime: Date
         $location: String
@@ -32,7 +32,7 @@ Array [
           type: $type
           title: $title
           details: $details
-          communityIds: $communityIds
+          groupIds: $groupIds
           startTime: $startTime
           endTime: $endTime
           location: $location
@@ -109,7 +109,7 @@ Array [
   }
   votesTotal
   myVote
-  communities {
+  groups {
     id
     name
     slug
@@ -123,7 +123,7 @@ Array [
   postMemberships {
     id
     pinned
-    community {
+    group {
       id
     }
   }
@@ -144,7 +144,7 @@ Array [
         }
       }",
         "variables": Object {
-          "communityIds": Array [
+          "groupIds": Array [
             1,
           ],
           "details": "",
@@ -248,7 +248,7 @@ Array [
   }
   votesTotal
   myVote
-  communities {
+  groups {
     id
     name
     slug
@@ -262,7 +262,7 @@ Array [
   postMemberships {
     id
     pinned
-    community {
+    group {
       id
     }
   }
@@ -303,7 +303,7 @@ Array [
 exports[`PostEditor mapStateToProps maps 1`] = `
 Object {
   "canModerate": true,
-  "communityOptions": Array [
+  "groupOptions": Array [
     Object {
       "id": "7",
     },
@@ -318,7 +318,7 @@ Object {
   "pendingDetailsText": false,
   "post": Object {
     "commenters": Array [],
-    "communities": Array [
+    "groups": Array [
       Object {
         "id": "7",
       },

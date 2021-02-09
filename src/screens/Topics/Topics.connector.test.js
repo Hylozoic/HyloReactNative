@@ -1,12 +1,12 @@
 import { mapStateToProps, mapDispatchToProps, mergeProps } from './Topics.connector'
 import { MODULE_NAME } from './Topics.store'
-import { FETCH_COMMUNITY_TOPICS } from 'store/actions/fetchCommunityTopics'
+import { FETCH_GROUP_TOPICS } from 'store/actions/fetchGroupTopics'
 
 describe('mapStateToProps', () => {
   it('returns the right keys', () => {
     const state = {
       pending: {
-        [FETCH_COMMUNITY_TOPICS]: true
+        [FETCH_GROUP_TOPICS]: true
       },
       queryResults: {},
       [MODULE_NAME]: {}
@@ -23,17 +23,17 @@ describe('mapDispatchToProps', () => {
 
 describe('mergeProps', () => {
   it('sets up functions', () => {
-    const communityId = 132
+    const groupId = 132
     const topicId = 444
     const isSubscribing = true
     const topicName = 'mice'
     const stateProps = {
-      community: {
-        id: communityId
+      group: {
+        id: groupId
       }
     }
     const dispatchProps = {
-      fetchCommunityTopics: jest.fn(),
+      fetchGroupTopics: jest.fn(),
       setTopicSubscribe: jest.fn()
     }
     const ownProps = {
@@ -43,10 +43,10 @@ describe('mergeProps', () => {
     }
     const mergedProps = mergeProps(stateProps, dispatchProps, ownProps)
     expect(mergedProps).toMatchSnapshot()
-    mergedProps.fetchCommunityTopics()
-    expect(dispatchProps.fetchCommunityTopics).toHaveBeenCalledWith(communityId, { first: null })
+    mergedProps.fetchGroupTopics()
+    expect(dispatchProps.fetchGroupTopics).toHaveBeenCalledWith(groupId, { first: null })
     mergedProps.setTopicSubscribe(topicId, isSubscribing)
-    expect(dispatchProps.setTopicSubscribe).toHaveBeenCalledWith(topicId, communityId, isSubscribing)
+    expect(dispatchProps.setTopicSubscribe).toHaveBeenCalledWith(topicId, groupId, isSubscribing)
     mergedProps.goToTopic(topicName)
     expect(ownProps.navigation.navigate).toHaveBeenCalledWith('Topic Feed', { topicName: topicName })
   })

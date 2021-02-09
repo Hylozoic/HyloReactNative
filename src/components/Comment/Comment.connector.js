@@ -1,14 +1,14 @@
 import { connect } from 'react-redux'
 import { deleteComment } from './Comment.store'
-import getCommunity from 'store/selectors/getCommunity'
+import getGroup from 'store/selectors/getGroup'
 import getMe from 'store/selectors/getMe'
 
 export function mapStateToProps (state, props) {
   const { comment } = props
   const currentUser = getMe(state, props)
-  const community = getCommunity(state, { slug: props.slug })
+  const group = getGroup(state, { slug: props.slug })
   const isCreator = currentUser && comment.creator.id === currentUser.id
-  const canModerate = currentUser && currentUser.canModerate(community)
+  const canModerate = currentUser && currentUser.canModerate(group)
 
   return {
     canModerate,

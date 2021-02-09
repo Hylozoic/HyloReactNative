@@ -1,11 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`makeFetchOpts handles a community 1`] = `
+exports[`makeFetchOpts handles a group 1`] = `
 Object {
   "search": "fee",
   "slug": "comslug",
   "sortBy": "join",
-  "subject": "community",
+  "subject": "group",
 }
 `;
 
@@ -18,7 +18,7 @@ Object {
 }
 `;
 
-exports[`makeFetchOpts handles no community or network 1`] = `
+exports[`makeFetchOpts handles no group or network 1`] = `
 Object {
   "search": "fee",
   "slug": undefined,
@@ -36,10 +36,10 @@ Object {
 }
 `;
 
-exports[`mapStateToProps handles null value for lastViewedCommunity 1`] = `
+exports[`mapStateToProps handles null value for lastViewedGroup 1`] = `
 Object {
   "canModerate": true,
-  "community": SessionBoundModel {
+  "group": SessionBoundModel {
     "_fields": Object {
       "id": 10,
       "slug": "tom",
@@ -56,7 +56,7 @@ Object {
     "search": undefined,
     "slug": "tom",
     "sortBy": undefined,
-    "subject": "community",
+    "subject": "group",
   },
   "hasMore": undefined,
   "members": Array [],
@@ -70,6 +70,6 @@ Object {
     "location": "Location",
     "name": "Name",
   },
-  "subject": "community",
+  "subject": "group",
 }
 `;

@@ -7,12 +7,12 @@ export const UPDATE_MEMBERSHIP_SETTINGS_PENDING = `${UPDATE_MEMBERSHIP_SETTINGS}
 export const UPDATE_ALL_MEMBERSHIP_SETTINGS = `${MODULE_NAME}/UPDATE_ALL_MEMBERSHIP_SETTINGS`
 export const UPDATE_ALL_MEMBERSHIP_SETTINGS_PENDING = `${UPDATE_ALL_MEMBERSHIP_SETTINGS}_PENDING`
 
-export function updateMembershipSettings (communityId, settings) {
+export function updateMembershipSettings (groupId, settings) {
   return {
     type: UPDATE_MEMBERSHIP_SETTINGS,
     graphql: {
-      query: `mutation ($communityId: ID, $data: MembershipInput) {
-        updateMembership(communityId: $communityId, data: $data) {
+      query: `mutation ($groupId: ID, $data: MembershipInput) {
+        updateMembership(groupId: $groupId, data: $data) {
           id
         }
       }`,
@@ -20,20 +20,20 @@ export function updateMembershipSettings (communityId, settings) {
         data: {
           settings
         },
-        communityId: communityId
+        groupId: groupId
       }
     },
     meta: {
-      communityId,
+      groupId,
       settings,
       optimistic: true
     }
   }
 }
 
-export function updateAllMemberships (communityIds, settings) {
-  const subqueries = communityIds.map(communityId => `
-    alias${communityId}: updateMembership(communityId: ${communityId}, data: {settings: ${JSON.stringify(settings).replace(/"/g, '')}}) {
+export function updateAllMemberships (groupIds, settings) {
+  const subqueries = groupIds.map(groupId => `
+    alias${groupId}: updateMembership(groupId: ${groupId}, data: {settings: ${JSON.stringify(settings).replace(/"/g, '')}}) {
       id
     }
   `).join()

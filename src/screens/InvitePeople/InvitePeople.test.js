@@ -1,11 +1,11 @@
 import React from 'react'
-import Clipboard from '@react-native-community/clipboard'
+import Clipboard from '@react-native-group/clipboard'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import InvitePeople, { PendingInvitesPage, SendInvitesPage, PendingInviteRow, parseEmailList } from './InvitePeople'
 import ReactTestRenderer from 'react-test-renderer'
 
-// @react-native-community/clipboard
-jest.mock('@react-native-community/clipboard/', () => ({
+// @react-native-group/clipboard
+jest.mock('@react-native-group/clipboard/', () => ({
   setString: jest.fn()
 }))
 jest.mock('react-native-reanimated', () => require('react-native-reanimated/mock'))
@@ -20,34 +20,34 @@ describe('InvitePeople', () => {
     expect(actual).toMatchSnapshot()
   })
 
-  it('fetches communities on update', () => {
+  it('fetches groups on update', () => {
     const props = {
-      community: { slug: 'foo' },
-      fetchCommunitySettings: jest.fn()
+      group: { slug: 'foo' },
+      fetchGroupSettings: jest.fn()
     }
     const prevPropsSameSlug = {
-      community: { slug: 'foo' },
-      fetchCommunitySettings: jest.fn()
+      group: { slug: 'foo' },
+      fetchGroupSettings: jest.fn()
     }
 
     const prevPropsDifferentSlug = {
-      community: { slug: 'bar' },
-      fetchCommunitySettings: jest.fn()
+      group: { slug: 'bar' },
+      fetchGroupSettings: jest.fn()
     }
 
     const instance = ReactTestRenderer.create(<InvitePeople {...props} />).getInstance()
 
-    expect(props.fetchCommunitySettings).toHaveBeenCalledTimes(1)
+    expect(props.fetchGroupSettings).toHaveBeenCalledTimes(1)
     instance.componentDidUpdate(prevPropsSameSlug)
-    expect(props.fetchCommunitySettings).toHaveBeenCalledTimes(1)
+    expect(props.fetchGroupSettings).toHaveBeenCalledTimes(1)
     instance.componentDidUpdate(prevPropsDifferentSlug)
-    expect(props.fetchCommunitySettings).toHaveBeenCalledTimes(2)
+    expect(props.fetchGroupSettings).toHaveBeenCalledTimes(2)
   })
 
   it('handles tab-view functions', () => {
     const props = {
-      community: { slug: 'foo' },
-      fetchCommunitySettings: jest.fn()
+      group: { slug: 'foo' },
+      fetchGroupSettings: jest.fn()
     }
 
     const instance = ReactTestRenderer.create(<InvitePeople {...props} />).getInstance()
@@ -78,7 +78,7 @@ describe('InvitePeople', () => {
 
   it('renders SendInvitesPage', () => {
     const renderer = new ReactShallowRenderer()
-    renderer.render(<SendInvitesPage inviteLink='https://hylo.com/invitepathhere' communityName='Axolotle' />)
+    renderer.render(<SendInvitesPage inviteLink='https://hylo.com/invitepathhere' groupName='Axolotle' />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
@@ -163,17 +163,17 @@ describe('InvitePeople', () => {
     expect(actual).toMatchSnapshot()
   })
 
-  it('has toggleAllowCommunityInvites and calls the function to make the request on the server', () => {
-    const allowCommunityInvites = jest.fn(() => new Promise(() => {}))
+  it('has toggleAllowGroupInvites and calls the function to make the request on the server', () => {
+    const allowGroupInvites = jest.fn(() => new Promise(() => {}))
     const props = {
-      communityId: 1,
-      communityMembersCanInvite: false,
-      allowCommunityInvites,
-      fetchCommunitySettings: jest.fn(() => new Promise(() => {}))
+      groupId: 1,
+      groupMembersCanInvite: false,
+      allowGroupInvites,
+      fetchGroupSettings: jest.fn(() => new Promise(() => {}))
     }
     const instance = ReactTestRenderer.create(<SendInvitesPage {...props} />).getInstance()
-    instance.toggleAllowCommunityInvites()
-    expect(allowCommunityInvites).toBeCalled()
-    expect(instance.state.communityMembersCanInvite).toBeTruthy()
+    instance.toggleAllowGroupInvites()
+    expect(allowGroupInvites).toBeCalled()
+    expect(instance.state.groupMembersCanInvite).toBeTruthy()
   })
 })

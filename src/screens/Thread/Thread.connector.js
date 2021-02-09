@@ -12,20 +12,20 @@ import {
 } from './Thread.store'
 import getCurrentUserId from 'store/selectors/getCurrentUserId'
 import getCurrentNetworkId from 'store/selectors/getCurrentNetworkId'
-import getCurrentCommunityId from 'store/selectors/getCurrentCommunityId'
+import getCurrentgroupId from 'store/selectors/getCurrentgroupId'
 import { sendIsTyping } from 'util/websockets'
 import confirmNavigate from 'util/confirmNavigate'
 
 export function mapStateToProps (state, props) {
   const currentUserId = getCurrentUserId(state)
-  const communityId = getCurrentCommunityId(state)
+  const groupId = getCurrentgroupId(state)
   const networkId = getCurrentNetworkId(state)
   const { id, title, participants } = presentThread(getThread(state, props), currentUserId) || {}
   const messages = getAndPresentMessages(state, props)
   return {
     id,
     currentUserId,
-    communityId,
+    groupId,
     networkId,
     hasMore: getHasMoreMessages(state, { id }),
     messages,
@@ -45,23 +45,23 @@ export function mapDispatchToProps (dispatch, { navigation, route }) {
     sendIsTyping: () => sendIsTyping(threadId, true),
     updateThreadReadTime: () => dispatch(updateThreadReadTime(threadId)),
     showMember: id => confirmNavigate(() => navigation.navigate('Member', { id })),
-    showTopic: (communityId, networkId) => topicName => {
+    showTopic: (groupId, networkId) => topicName => {
       if (networkId) {
         confirmNavigate(() => navigation.navigate('Topics'))
       } else {
-        confirmNavigate(() => navigation.navigate('Topic Feed', { communityId, topicName }))
+        confirmNavigate(() => navigation.navigate('Topic Feed', { groupId, topicName }))
       }
     }
   }
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
-  const { communityId, networkId } = stateProps
+  const { groupId, networkId } = stateProps
   return {
     ...ownProps,
     ...dispatchProps,
     ...stateProps,
-    showTopic: dispatchProps.showTopic(communityId, networkId)
+    showTopic: dispatchProps.showTopic(groupId, networkId)
   }
 }
 

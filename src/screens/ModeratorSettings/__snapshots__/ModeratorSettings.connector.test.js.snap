@@ -16,8 +16,8 @@ Array [
   Array [
     Object {
       "graphql": Object {
-        "query": "mutation ($personId: ID, $communityId: ID) {
-        addModerator(personId: $personId, communityId: $communityId) {
+        "query": "mutation ($personId: ID, $groupId: ID) {
+        addModerator(personId: $personId, groupId: $groupId) {
           id
           moderators (first: 100) {
             items {
@@ -29,12 +29,12 @@ Array [
         }
       }",
         "variables": Object {
-          "communityId": 33,
+          "groupId": 33,
           "personId": 22,
         },
       },
       "meta": Object {
-        "communityId": 33,
+        "groupId": 33,
         "optimistic": true,
         "personId": 22,
       },
@@ -44,8 +44,8 @@ Array [
   Array [
     Object {
       "graphql": Object {
-        "query": "mutation ($personId: ID, $communityId: ID, $isRemoveFromCommunity: Boolean) {
-        removeModerator(personId: $personId, communityId: $communityId, isRemoveFromCommunity: $isRemoveFromCommunity) {
+        "query": "mutation ($personId: ID, $groupId: ID, $isRemoveFromGroup: Boolean) {
+        removeModerator(personId: $personId, groupId: $groupId, isRemoveFromGroup: $isRemoveFromGroup) {
           id
           moderators (first: 100) {
             items {
@@ -57,14 +57,14 @@ Array [
         }
       }",
         "variables": Object {
-          "communityId": 33,
-          "isRemoveFromCommunity": true,
+          "groupId": 33,
+          "isRemoveFromGroup": true,
           "personId": 22,
         },
       },
       "meta": Object {
-        "communityId": 33,
-        "isRemoveFromCommunity": true,
+        "groupId": 33,
+        "isRemoveFromGroup": true,
         "optimistic": true,
         "personId": 22,
       },
@@ -75,7 +75,7 @@ Array [
     Object {
       "graphql": Object {
         "query": "query ($id: ID, $autocomplete: String) {
-        community (id: $id) {
+        group (id: $id) {
           id
           members (first: 10, autocomplete: $autocomplete) {
             hasMore
@@ -93,7 +93,7 @@ Array [
         },
       },
       "meta": Object {
-        "extractModel": "Community",
+        "extractModel": "Group",
       },
       "type": "ModeratorSettings/FETCH_MODERATOR_SUGGESTIONS",
     },
@@ -119,7 +119,7 @@ Array [
 
 exports[`mapStateToProps works 1`] = `
 Object {
-  "community": SessionBoundModel {
+  "group": SessionBoundModel {
     "_fields": Object {
       "id": "99",
       "slug": "foo",
@@ -151,8 +151,8 @@ Object {
 exports[`mergeProps merges the props 1`] = `
 Object {
   "graphql": Object {
-    "query": "mutation ($personId: ID, $communityId: ID) {
-        addModerator(personId: $personId, communityId: $communityId) {
+    "query": "mutation ($personId: ID, $groupId: ID) {
+        addModerator(personId: $personId, groupId: $groupId) {
           id
           moderators (first: 100) {
             items {
@@ -164,12 +164,12 @@ Object {
         }
       }",
     "variables": Object {
-      "communityId": "99",
+      "groupId": "99",
       "personId": 10,
     },
   },
   "meta": Object {
-    "communityId": "99",
+    "groupId": "99",
     "optimistic": true,
     "personId": 10,
   },
@@ -180,8 +180,8 @@ Object {
 exports[`mergeProps merges the props 2`] = `
 Object {
   "graphql": Object {
-    "query": "mutation ($personId: ID, $communityId: ID, $isRemoveFromCommunity: Boolean) {
-        removeModerator(personId: $personId, communityId: $communityId, isRemoveFromCommunity: $isRemoveFromCommunity) {
+    "query": "mutation ($personId: ID, $groupId: ID, $isRemoveFromGroup: Boolean) {
+        removeModerator(personId: $personId, groupId: $groupId, isRemoveFromGroup: $isRemoveFromGroup) {
           id
           moderators (first: 100) {
             items {
@@ -193,14 +193,14 @@ Object {
         }
       }",
     "variables": Object {
-      "communityId": "99",
-      "isRemoveFromCommunity": true,
+      "groupId": "99",
+      "isRemoveFromGroup": true,
       "personId": 10,
     },
   },
   "meta": Object {
-    "communityId": "99",
-    "isRemoveFromCommunity": true,
+    "groupId": "99",
+    "isRemoveFromGroup": true,
     "optimistic": true,
     "personId": 10,
   },
@@ -212,7 +212,7 @@ exports[`mergeProps merges the props 3`] = `
 Object {
   "graphql": Object {
     "query": "query ($id: ID, $autocomplete: String) {
-        community (id: $id) {
+        group (id: $id) {
           id
           members (first: 10, autocomplete: $autocomplete) {
             hasMore
@@ -230,7 +230,7 @@ Object {
     },
   },
   "meta": Object {
-    "extractModel": "Community",
+    "extractModel": "Group",
   },
   "type": "ModeratorSettings/FETCH_MODERATOR_SUGGESTIONS",
 }
@@ -240,7 +240,7 @@ exports[`mergeProps merges the props 4`] = `
 Object {
   "graphql": Object {
     "query": "query ($slug: String) {
-        community (slug: $slug) {
+        group (slug: $slug) {
           id
           name
           slug
@@ -259,7 +259,7 @@ Object {
     },
   },
   "meta": Object {
-    "extractModel": "Community",
+    "extractModel": "Group",
   },
   "type": "ModeratorSettings/FETCH_MODERATORS",
 }
@@ -270,7 +270,7 @@ Object {
   "addModerator": [Function],
   "addModeratorMaker": [Function],
   "clearModeratorSuggestions": [Function],
-  "community": SessionBoundModel {
+  "group": SessionBoundModel {
     "_fields": Object {
       "id": "99",
       "slug": "foo",

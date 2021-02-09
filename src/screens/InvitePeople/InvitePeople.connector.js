@@ -1,29 +1,29 @@
 import { connect } from 'react-redux'
-import getCommunity from 'store/selectors/getCommunity'
-import getCurrentCommunityId from 'store/selectors/getCurrentCommunityId'
+import getGroup from 'store/selectors/getGroup'
+import getCurrentgroupId from 'store/selectors/getCurrentgroupId'
 // import getMe from 'store/selectors/getMe'
 import {
-  regenerateAccessCode, fetchCommunitySettings, FETCH_COMMUNITY_SETTINGS,
+  regenerateAccessCode, fetchGroupSettings, FETCH_GROUP_SETTINGS,
   CREATE_INVITATIONS,
   createInvitations,
   getPendingInvites,
   expireInvitation,
   resendInvitation,
   reinviteAll,
-  allowCommunityInvites
+  allowGroupInvites
 } from './InvitePeople.store'
 
 export function mapStateToProps (state, props) {
-  const communityId = getCurrentCommunityId(state, props)
-  const community = getCommunity(state, { id: communityId })
-  const pending = state.pending[FETCH_COMMUNITY_SETTINGS]
+  const groupId = getCurrentgroupId(state, props)
+  const group = getGroup(state, { id: groupId })
+  const pending = state.pending[FETCH_GROUP_SETTINGS]
   const pendingCreate = state.pending[CREATE_INVITATIONS]
 
-  const inviteLink = 'https://www.hylo.com' + community.invitePath
-  const invites = getPendingInvites(state, { communityId: community.id })
+  const inviteLink = 'https://www.hylo.com' + group.invitePath
+  const invites = getPendingInvites(state, { groupId: group.id })
 
   return {
-    community,
+    group,
     inviteLink,
     pending,
     pendingCreate,
@@ -33,20 +33,20 @@ export function mapStateToProps (state, props) {
 
 export function mapDispatchToProps (dispatch, props) {
   return {
-    fetchCommunitySettingsMaker: communityId => () => dispatch(fetchCommunitySettings(communityId)),
-    regenerateAccessCodeMaker: communityId => () => dispatch(regenerateAccessCode(communityId)),
-    createInvitationsMaker: communityId => (emails, message) => dispatch(createInvitations(communityId, emails, message)),
+    fetchGroupSettingsMaker: groupId => () => dispatch(fetchGroupSettings(groupId)),
+    regenerateAccessCodeMaker: groupId => () => dispatch(regenerateAccessCode(groupId)),
+    createInvitationsMaker: groupId => (emails, message) => dispatch(createInvitations(groupId, emails, message)),
     expireInvitation: (invitationToken) => dispatch(expireInvitation(invitationToken)),
     resendInvitation: (invitationToken) => dispatch(resendInvitation(invitationToken)),
-    reinviteAllMaker: communityId => () => dispatch(reinviteAll(communityId)),
-    allowCommunityInvites: (communityId, setAllow) => dispatch(allowCommunityInvites(communityId, setAllow))
+    reinviteAllMaker: groupId => () => dispatch(reinviteAll(groupId)),
+    allowGroupInvites: (groupId, setAllow) => dispatch(allowGroupInvites(groupId, setAllow))
   }
 }
 
 export const mergeProps = (stateProps, dispatchProps, ownProps) => {
-  const communityId = stateProps.community && stateProps.community.id
+  const groupId = stateProps.group && stateProps.group.id
   const {
-    fetchCommunitySettingsMaker,
+    fetchGroupSettingsMaker,
     reinviteAllMaker,
     regenerateAccessCodeMaker,
     createInvitationsMaker
@@ -56,10 +56,10 @@ export const mergeProps = (stateProps, dispatchProps, ownProps) => {
     ...stateProps,
     ...dispatchProps,
     ...ownProps,
-    fetchCommunitySettings: communityId ? fetchCommunitySettingsMaker(communityId) : () => {},
-    regenerateAccessCode: regenerateAccessCodeMaker(communityId),
-    createInvitations: createInvitationsMaker(communityId),
-    reinviteAll: reinviteAllMaker(communityId)
+    fetchGroupSettings: groupId ? fetchGroupSettingsMaker(groupId) : () => {},
+    regenerateAccessCode: regenerateAccessCodeMaker(groupId),
+    createInvitations: createInvitationsMaker(groupId),
+    reinviteAll: reinviteAllMaker(groupId)
   }
 }
 

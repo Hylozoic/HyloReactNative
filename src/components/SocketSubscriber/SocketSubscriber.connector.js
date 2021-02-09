@@ -3,7 +3,7 @@ import { getSocket, socketUrl } from 'util/websockets'
 
 function mapDispatchToProps (dispatch, props) {
   const { id, type } = props
-  if (!['post', 'community'].includes(type)) {
+  if (!['post', 'group'].includes(type)) {
     throw new Error(`unrecognized SocketSubscriber type "${type}"`)
   }
 

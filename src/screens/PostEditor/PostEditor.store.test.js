@@ -6,7 +6,7 @@ const post = {
   details: 'details',
   startTime: 'startTime',
   endTime: 'endTime',
-  communities: [1]
+  groups: [1]
 }
 
 describe('createPost', () => {

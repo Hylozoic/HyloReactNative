@@ -3,7 +3,7 @@
 exports[`mapDispatchToProps matches the last snapshot 1`] = `
 Object {
   "logout": [Function],
-  "selectCommunity": [Function],
+  "selectGroup": [Function],
   "selectNetwork": [Function],
 }
 `;
@@ -11,9 +11,9 @@ Object {
 exports[`mapStateToProps matches the latest snapshot 1`] = `
 Object {
   "avatarUrl": undefined,
-  "canModerateCurrentCommunity": undefined,
-  "communities": Array [],
-  "currentCommunity": SessionBoundModel {
+  "canModerateCurrentGroup": undefined,
+  "groups": Array [],
+  "currentGroup": SessionBoundModel {
     "_fields": Object {
       "avatarUrl": "someUrl",
       "id": "7",
@@ -21,7 +21,7 @@ Object {
     },
     "avatarUrl": "someUrl",
   },
-  "currentCommunityId": "7",
+  "currentGroupId": "7",
   "currentContext": SessionBoundModel {
     "_fields": Object {
       "avatarUrl": "someUrl",
@@ -43,11 +43,11 @@ Object {
     Object {
       "avatarUrl": undefined,
       "bannerUrl": undefined,
-      "communities": Array [],
+      "groups": Array [],
       "headerAvatarUrl": undefined,
-      "id": "all-communities",
-      "name": "All Communities",
-      "slug": "all-communities",
+      "id": "all-groups",
+      "name": "All Groups",
+      "slug": "all-groups",
     },
   ],
 }
@@ -55,13 +55,13 @@ Object {
 
 exports[`mergeProps matches snapshot 1`] = `
 Object {
-  "canModerateCurrentCommunity": true,
+  "canModerateCurrentGroup": true,
   "currentUser": Object {
     "id": "anyid",
   },
-  "goToCommunity": [Function],
-  "goToCommunitySettingsMenu": [Function],
-  "goToCreateCommunity": [Function],
+  "goToGroup": [Function],
+  "goToGroupSettingsMenu": [Function],
+  "goToCreateGroup": [Function],
   "goToMyProfile": [Function],
   "goToNetwork": [Function],
   "name": "Roy Rogers",
@@ -69,7 +69,7 @@ Object {
     "closeDrawer": [MockFunction],
     "navigate": [MockFunction],
   },
-  "selectCommunity": [MockFunction],
+  "selectGroup": [MockFunction],
   "selectNetwork": [MockFunction],
   "showSettings": [Function],
 }
@@ -77,13 +77,13 @@ Object {
 
 exports[`mergeProps matches snapshot 2`] = `
 Object {
-  "canModerateCurrentCommunity": false,
+  "canModerateCurrentGroup": false,
   "currentUser": Object {
     "id": "anyid",
   },
-  "goToCommunity": [Function],
-  "goToCommunitySettingsMenu": false,
-  "goToCreateCommunity": [Function],
+  "goToGroup": [Function],
+  "goToGroupSettingsMenu": false,
+  "goToCreateGroup": [Function],
   "goToMyProfile": [Function],
   "goToNetwork": [Function],
   "name": "Roy Rogers",
@@ -91,15 +91,15 @@ Object {
     "closeDrawer": [MockFunction],
     "navigate": [MockFunction],
   },
-  "selectCommunity": [MockFunction],
+  "selectGroup": [MockFunction],
   "selectNetwork": [MockFunction],
   "showSettings": [Function],
 }
 `;
 
-exports[`partitionCommunities separates independent communities from networked communities 1`] = `
+exports[`partitionGroups separates independent groups from networked groups 1`] = `
 Object {
-  "communities": Array [
+  "groups": Array [
     Object {
       "id": "2",
       "name": "two",
@@ -117,19 +117,19 @@ Object {
     Object {
       "avatarUrl": undefined,
       "bannerUrl": undefined,
-      "communities": Array [],
+      "groups": Array [],
       "headerAvatarUrl": undefined,
-      "id": "all-communities",
-      "name": "All Communities",
-      "slug": "all-communities",
+      "id": "all-groups",
+      "name": "All Groups",
+      "slug": "all-groups",
     },
     Object {
-      "communities": Array [
+      "groups": Array [
         Object {
           "id": "1",
           "name": "one",
           "network": Object {
-            "communities": undefined,
+            "groups": undefined,
             "id": "1",
             "name": "networkOne",
           },
@@ -139,7 +139,7 @@ Object {
           "id": "4",
           "name": "four",
           "network": Object {
-            "communities": undefined,
+            "groups": undefined,
             "id": "1",
             "name": "networkOne",
           },
@@ -148,15 +148,15 @@ Object {
       ],
       "id": "1",
       "name": "networkOne",
-      "nonMemberCommunities": undefined,
+      "nonMemberGroups": undefined,
     },
     Object {
-      "communities": Array [
+      "groups": Array [
         Object {
           "id": "3",
           "name": "three",
           "network": Object {
-            "communities": undefined,
+            "groups": undefined,
             "id": "2",
             "name": "networkTwo",
           },
@@ -165,7 +165,7 @@ Object {
       ],
       "id": "2",
       "name": "networkTwo",
-      "nonMemberCommunities": undefined,
+      "nonMemberGroups": undefined,
     },
   ],
 }

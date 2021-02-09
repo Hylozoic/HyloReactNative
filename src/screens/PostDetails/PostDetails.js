@@ -9,7 +9,7 @@ import { FileLabel } from 'screens/PostEditor/FileSelector'
 import SocketSubscriber from 'components/SocketSubscriber'
 import Comments from 'components/Comments'
 import PostBody from 'components/PostCard/PostBody'
-import PostCommunities from 'components/PostCard/PostCommunities'
+import PostGroups from 'components/PostCard/PostGroups'
 import PostImage from 'components/PostCard/PostImage'
 import PostFooter from 'components/PostCard/PostFooter'
 import PostHeader from 'components/PostCard/PostHeader'
@@ -30,9 +30,9 @@ export function PostCardForDetails ({
   showMember,
   showTopic,
   goToMembers,
-  goToCommunity
+  goToGroup
 }) {
-  const slug = get('communities.0.slug', post)
+  const slug = get('groups.0.slug', post)
   const isMember = find(member => member.id === currentUser.id, post.members)
   const location = post.location || (post.locationObject && post.locationObject.fullText)
 
@@ -43,14 +43,14 @@ export function PostCardForDetails ({
         date={post.createdAt}
         type={post.type}
         editPost={editPost}
-        communities={post.communities}
+        groups={post.groups}
         slug={slug}
         pinned={post.pinned}
         topics={post.topics}
         showTopic={showTopic}
         postId={post.id}
         showMember={showMember}
-        goToCommunity={goToCommunity}
+        goToGroup={goToGroup}
         announcement={post.announcement}
         closeOnDelete
       />
@@ -88,13 +88,13 @@ export function PostCardForDetails ({
           <Text style={styles.infoRowInfo} selectable>{location}</Text>
         </View>
       )}
-      <PostCommunities
-        communities={post.communities}
+      <PostGroups
+        groups={post.groups}
         includePublic={post.isPublic}
         slug={slug}
         style={[styles.infoRow]}
-        goToCommunity={goToCommunity}
-        shouldShowCommunities
+        goToGroup={goToGroup}
+        shouldShowGroups
       />
       <PostFooter
         style={styles.postFooter}
@@ -117,7 +117,7 @@ export default class PostDetails extends React.Component {
   componentDidMount () {
     this.props.fetchPost()
     this.props.navigation.setOptions({
-      headerTitle: this.props.currentCommunity?.name
+      headerTitle: this.props.currentGroup?.name
         || this.props.currentNetwork?.name
     })
   }
@@ -126,7 +126,7 @@ export default class PostDetails extends React.Component {
     return !!nextProps.isFocused
   }
 
-  onShowTopic = (topicId) => this.props.showTopic(topicId, get('post.communities.0.id', this.props))
+  onShowTopic = (topicId) => this.props.showTopic(topicId, get('post.groups.0.id', this.props))
 
   handleCreateComment = (commentText) => {
     const commentTextAsHtml = toHtml(commentText)
@@ -151,7 +151,7 @@ export default class PostDetails extends React.Component {
 
   renderPostDetails = (panHandlers) => {
     const { post, currentUser, showMember } = this.props
-    const slug = get('communities.0.slug', post)
+    const slug = get('groups.0.slug', post)
     const isMember = find(member => member.id === currentUser.id, post.members)
     const location = post.location || (post.locationObject && post.locationObject.fullText)
 
@@ -177,7 +177,7 @@ export default class PostDetails extends React.Component {
   render () {
     const { post } = this.props
     const { commentText, submitting } = this.state
-    const communityId = get('communities.0.id', post)
+    const groupId = get('groups.0.id', post)
 
     if (!post?.creator || !post?.title) return <LoadingScreen />
 
@@ -196,7 +196,7 @@ export default class PostDetails extends React.Component {
               style={styles.inlineEditor}
               submitting={submitting}
               placeholder='Write a comment...'
-              communityId={communityId}
+              groupId={groupId}
             />
         </KeyboardAccessoryView>
         <SocketSubscriber type='post' id={post.id} />

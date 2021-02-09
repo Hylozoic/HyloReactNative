@@ -6,12 +6,12 @@ it('rejects a bad subject value', () => {
   }).toThrow('FETCH_POSTS with subject=foo is not implemented')
 })
 
-it('sets updateLastViewed to true when fetching for a community', () => {
-  expect(fetchPosts({ subject: 'community' })).toMatchSnapshot()
+it('sets updateLastViewed to true when fetching for a group', () => {
+  expect(fetchPosts({ subject: 'group' })).toMatchSnapshot()
 })
 
 it('passes a reset option', () => {
-  const action = fetchPosts({ subject: 'community', slug: 'foo' }, { reset: true })
+  const action = fetchPosts({ subject: 'group', slug: 'foo' }, { reset: true })
   expect(action.meta.extractQueryResults.reset).toBeTruthy()
 })
 

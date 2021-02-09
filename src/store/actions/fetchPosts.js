@@ -12,13 +12,13 @@ export default function fetchPosts (
 ) {
   let query, extractModel, getItems, projectFilter
 
-  if (subject === 'community') {
-    query = communityQuery
-    extractModel = 'Community'
-    getItems = get('payload.data.community.posts')
+  if (subject === 'group') {
+    query = groupQuery
+    extractModel = 'Group'
+    getItems = get('payload.data.group.posts')
   } else if (subject === 'network') {
     if (networkSlug === ALL_COMMUNITIES_ID) {
-      query = allCommunitiesQuery
+      query = allGroupsQuery
       extractModel = 'Post'
       getItems = get('payload.data.posts')  
     } else {
@@ -27,9 +27,9 @@ export default function fetchPosts (
       getItems = get('payload.data.network.posts')
     }
   } else if (subject === 'project') {
-    query = communityQuery
-    extractModel = 'Community'
-    getItems = get('payload.data.community.posts')
+    query = groupQuery
+    extractModel = 'Group'
+    getItems = get('payload.data.group.posts')
     projectFilter = 'project'
   } else {
     throw new Error(`FETCH_POSTS with subject=${subject} is not implemented`)
@@ -77,7 +77,7 @@ posts(
   }
 }`
 
-const communityQuery = `query (
+const groupQuery = `query (
   $slug: String,
   $sortBy: String,
   $offset: Int,
@@ -86,7 +86,7 @@ const communityQuery = `query (
   $topic: ID,
   $first: Int
 ) {
-  community(slug: $slug, updateLastViewed: true) {
+  group(slug: $slug, updateLastViewed: true) {
     id
     slug
     name
@@ -112,7 +112,7 @@ const networkQuery = `query (
   }
 }`
 
-const allCommunitiesQuery = `query (
+const allGroupsQuery = `query (
   $sortBy: String,
   $offset: Int,
   $search: String,

@@ -13,11 +13,11 @@ import {
   addUserTyping,
   clearUserTyping
 } from 'components/PeopleTyping/PeopleTyping.store'
-import getCurrentCommunity from 'store/selectors/getCurrentCommunity'
+import getCurrentGroup from 'store/selectors/getCurrentGroup'
 
 export function mapStateToProps (state, props) {
   return {
-    community: getCurrentCommunity(state, props)
+    group: getCurrentGroup(state, props)
   }
 }
 
@@ -44,12 +44,12 @@ export function mapDispatchToProps (dispatch, props) {
 }
 
 export function mergeProps (stateProps, dispatchProps) {
-  const communityId = get('id', stateProps.community)
+  const groupId = get('id', stateProps.group)
   return {
     ...stateProps,
     ...dispatchProps,
     receivePost: data => {
-      return dispatchProps.receivePost(data, communityId)
+      return dispatchProps.receivePost(data, groupId)
     }
   }
 }

@@ -2,9 +2,9 @@ import { attr, fk, many, Model } from 'redux-orm'
 import { find, get, maxBy } from 'lodash/fp'
 import PropTypes from 'prop-types'
 
-export const getLastViewedCommunity = memberships => {
+export const getLastViewedGroup = memberships => {
   const lastViewedMembership = maxBy(m => new Date(m.lastViewedAt), memberships)
-  return get('community', lastViewedMembership)
+  return get('group', lastViewedMembership)
 }
 
 class Me extends Model {
@@ -16,17 +16,17 @@ class Me extends Model {
     return this.name ? this.name.split(' ')[0] : null
   }
 
-  canModerate (community) {
+  canModerate (group) {
     const memberships = this.memberships.toRefArray
       ? this.memberships.toRefArray()
       : this.memberships
     const membership = find(m =>
-      m.community === get('id', community), memberships)
+      m.group === get('id', group), memberships)
     return get('hasModeratorRole', membership)
   }
 
-  lastViewedCommunity () {
-    return getLastViewedCommunity(this.memberships.toModelArray())
+  lastViewedGroup () {
+    return getLastViewedGroup(this.memberships.toModelArray())
   }
 }
 

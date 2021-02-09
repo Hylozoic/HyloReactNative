@@ -52,11 +52,11 @@ export const makeGetPostCommenters = () => {
   ))
 }
 
-export const makeGetPostCommunities = () => {
+export const makeGetPostGroups = () => {
   return makeArrayRefEqualSelector(ormCreateSelector(
     orm,
     (state, props) => props.id,
-    ({ Post }, id) => Post.safeGet({ id }).communities.toRefArray()
+    ({ Post }, id) => Post.safeGet({ id }).groups.toRefArray()
   ))
 }
 
@@ -84,10 +84,10 @@ export const makeGetPostIsPinned = () => {
   return ormCreateSelector(
     orm,
     (state, props) => props.id,
-    (state, props) => props.communityId,
-    ({ Post }, id, communityId) => {
+    (state, props) => props.groupId,
+    ({ Post }, id, groupId) => {
       const postMembership = Post.safeGet({ id }).postMemberships.filter(p =>
-        Number(p.community) === Number(communityId)).toRefArray()[0]
+        Number(p.group) === Number(groupId)).toRefArray()[0]
       return postMembership && !!postMembership.pinned
     }
   )

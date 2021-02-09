@@ -26,7 +26,7 @@ export function fetchPerson (id) {
             id
             role
             hasModeratorRole
-            community {
+            group {
               id
               name
               slug

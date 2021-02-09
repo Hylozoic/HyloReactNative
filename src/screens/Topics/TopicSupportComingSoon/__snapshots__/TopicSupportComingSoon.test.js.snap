@@ -9,7 +9,7 @@ exports[`matches last snapshot 1`] = `
   </View>
   <View>
     <Text>
-      In the meantime, click a #topic from an individual community to see posts from that community.
+      In the meantime, click a #topic from an individual group to see posts from that group.
     </Text>
   </View>
   <Image

@@ -25,15 +25,15 @@ export const prefixes = [
 // doesn't allow for multiple paths to match to the same
 // screen.
 export const routesConfig = {
-  '/c/:slug/join/:accessCode?':                              'JoinCommunity',
+  '/c/:slug/join/:accessCode?':                              'JoinGroup',
   // http://hylo.com/h/use-invitation?token=ebda24b2-d5d7-4d10-8558-b160e6f5d362&email=lorenjohnson+invitetest111@gmail.com&utm_swu=9555
-  '/h/use-invitation/:token?':                               'JoinCommunity',
+  '/h/use-invitation/:token?':                               'JoinGroup',
   '/signup':                                                 'Signup',
   // AuthNavigator route...             
   // 'passwordResetTokenLogin/:userId/:loginToken/:nextURL':   'Login',
   '/':                                                       'AppNavigator/Tabs/Home/Feed',
   '/m/:id':                                                  'AppNavigator/Tabs/Members/Member',
-  '/:context(c|n|all)/:communityId':                         'AppNavigator/Tabs/Home/Feed',
+  '/:context(c|n|all)/:groupId':                         'AppNavigator/Tabs/Home/Feed',
   '/:context(c|n)/:contextId/:topicName':                    'AppNavigator/TopicFeed',
   '/m':                                                      'AppNavigator/Tabs/Members/Members',
   '/:context(c|n)/:contextId/m/:id':                         'AppNavigator/Member',

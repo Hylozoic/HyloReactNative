@@ -19,16 +19,16 @@ import scopedFetchPeopleAutocomplete from 'store/actions/scopedFetchPeopleAutoco
 import scopedGetPeopleAutocomplete from 'store/selectors/scopedGetPeopleAutocomplete'
 import ProjectMemberItemRow from 'screens/ItemChooser/ProjectMemberItemRow'
 // Topics Picker
-import fetchTopicsForCommunityId from 'store/actions/fetchTopicsForCommunityId'
+import fetchTopicsForGroupId from 'store/actions/fetchTopicsForGroupId'
 import getTopicsForAutocompleteWithNew from 'store/selectors/getTopicsForAutocompleteWithNew'
 import TopicRow from 'screens/TopicList/TopicRow'
-// Community Chooser
-import CommunityChooserItemRow from 'screens/ItemChooser/CommunityChooserItemRow'
+// Group Chooser
+import GroupChooserItemRow from 'screens/ItemChooser/GroupChooserItemRow'
 // Location Picker
 import { locationSearch } from 'screens/ItemChooser/ItemChooser.store'
 import LocationPickerItemRow from 'screens/ItemChooser/LocationPickerItemRow'
 //
-import CommunitiesList from 'components/CommunitiesList'
+import GroupsList from 'components/GroupsList'
 import ProjectMembersSummary from 'components/ProjectMembersSummary'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 import Icon from 'components/Icon'
@@ -49,7 +49,7 @@ export default class PostEditor extends React.Component {
       scrollViewHeight: 0,
       title: get('title', post) || '',
       type: get('type', post) || (isProject ? 'project' : 'discussion'),
-      communities: get('communities', post) || [],
+      groups: get('groups', post) || [],
       imageUrls,
       fileUrls,
       topics: get('topics', post) || [],
@@ -118,13 +118,13 @@ export default class PostEditor extends React.Component {
     const {
       fileUrls, imageUrls, title, detailsText,
       topics, type, announcementEnabled, members,
-      communities, startTime, endTime, location,
+      groups, startTime, endTime, location,
       locationObject
     } = this.state
     const postData = {
       type,
       details: toHtml(detailsText),
-      communities,
+      groups,
       memberIds: members.map(m => m.id),
       fileUrls,
       imageUrls,
@@ -151,7 +151,7 @@ export default class PostEditor extends React.Component {
     if (announcementEnabled) {
       Alert.alert(
         'MAKE AN ANNOUNCEMENT',
-        'This means that all members of this community will receive an instant email and push notification about this Post. \n(This feature is available to moderators only.)',
+        'This means that all members of this group will receive an instant email and push notification about this Post. \n(This feature is available to moderators only.)',
         [
           { text: 'Send It', onPress: this._doSave },
           {
@@ -184,18 +184,18 @@ export default class PostEditor extends React.Component {
     })
   }
 
-  addCommunity = community => {
+  addGroup = group => {
     this.setState(state => ({
-      communities: uniqBy(
+      groups: uniqBy(
         c => c.id,
-        [...this.state.communities, community]
+        [...this.state.groups, group]
       )
     }))
   }
 
-  removeCommunity = communityId => {
+  removeGroup = groupId => {
     this.setState(state => ({
-      communities: this.state.communities.filter(c => c.id !== communityId)
+      groups: this.state.groups.filter(c => c.id !== groupId)
     }))
   }
 
@@ -244,7 +244,7 @@ export default class PostEditor extends React.Component {
   //  - a maximum of three topics per post are allowed
   //  - topics must be unique
   //  - priority is given to topics already on the post (preserve order)
-  // TODO: support topics from more than one community, for crossposting
+  // TODO: support topics from more than one group, for crossposting
   insertUniqueTopics = (topicCandidates, topicsPicked) => {
     const topics = uniqBy(
       t => t.name,
@@ -314,25 +314,25 @@ export default class PostEditor extends React.Component {
       searchPlaceholder: 'Search for a topic by name',
       ItemRowComponent: TopicRow,
       pickItem: this.insertTopicFromPicker,
-      // FIX: Will only find topics for first community
-      fetchSearchSuggestions: fetchTopicsForCommunityId(get('[0].id', this.state.communities)),
+      // FIX: Will only find topics for first group
+      fetchSearchSuggestions: fetchTopicsForGroupId(get('[0].id', this.state.groups)),
       getSearchSuggestions: getTopicsForAutocompleteWithNew
     })
   }
 
-  showCommunitiesEditor = () => {
-    const { navigation, communityOptions } = this.props
-    const screenTitle = 'Post in Communities'
+  showGroupsEditor = () => {
+    const { navigation, groupOptions } = this.props
+    const screenTitle = 'Post in Groups'
     navigation.navigate('ItemChooserScreen', {
       screenTitle,
-      searchPlaceholder: 'Search for community by name',
-      defaultSuggestedItemsLabel: 'Your Communities',
-      defaultSuggestedItems: communityOptions,
-      ItemRowComponent: CommunityChooserItemRow,
-      pickItem: this.addCommunity,
+      searchPlaceholder: 'Search for group by name',
+      defaultSuggestedItemsLabel: 'Your Groups',
+      defaultSuggestedItems: groupOptions,
+      ItemRowComponent: GroupChooserItemRow,
+      pickItem: this.addGroup,
       fetchSearchSuggestions: () => ({ type: 'none' }),
       getSearchSuggestions: (_, { autocomplete: searchTerm }) =>
-        communityOptions.filter(c => c.name.match(searchTerm))
+        groupOptions.filter(c => c.name.match(searchTerm))
     })
   }
 
@@ -341,7 +341,7 @@ export default class PostEditor extends React.Component {
     const screenTitle = 'Choose a Location'
     const initialSearchTerm = get('location', this.state) || get('locationObject.fullText', this.state)
     // TODO: Get current location to send as proximity for location search
-    // const curLocation = locationObject || get('0.locationObject', communities) || get('locationObject', currentUser)
+    // const curLocation = locationObject || get('0.locationObject', groups) || get('locationObject', currentUser)
     navigation.navigate('ItemChooserScreen', {
       screenTitle,
       searchPlaceholder: 'Search for your location',
@@ -379,11 +379,11 @@ export default class PostEditor extends React.Component {
   }
 
   render () {
-    const { currentCommunity, canModerate, post, pendingDetailsText, isProject } = this.props
+    const { currentGroup, canModerate, post, pendingDetailsText, isProject } = this.props
     const {
       fileUrls, imageUrls, isSaving, topics, title, detailsText, type,
       filePickerPending, imagePickerPending, announcementEnabled,
-      detailsFocused, titleLengthError, members, communities,
+      detailsFocused, titleLengthError, members, groups,
       startTime, endTime, location, locationObject
     } = this.state
     const canHaveTimeframe = type !== 'discussion'
@@ -456,7 +456,7 @@ export default class PostEditor extends React.Component {
               editable={!pendingDetailsText}
               submitting={isSaving}
               placeholder={detailsPlaceholder}
-              communityId={get('id', currentCommunity)}
+              groupId={get('id', currentGroup)}
               autoGrow={false}
               onFocusToggle={isFocused => this.setState({ detailsFocused: isFocused })}
               onInsertTopic={this.insertEditorTopic}
@@ -535,21 +535,21 @@ export default class PostEditor extends React.Component {
                 styles.section,
                 styles.textInputWrapper
               ]}
-              onPress={this.showCommunitiesEditor}
+              onPress={this.showGroupsEditor}
             >
               <View style={styles.topicLabel}>
                 <Text style={styles.sectionLabel}>Post In</Text>
                 <View style={styles.topicAddBorder}><Icon name='Plus' style={styles.topicAdd} /></View>
               </View>
-              <CommunitiesList
-                communities={communities}
+              <GroupsList
+                groups={groups}
                 columns={1}
-                onPress={this.removeCommunity}
+                onPress={this.removeGroup}
                 RightIcon={iconProps =>
-                  <Icon name='Ex' style={styles.communityRemoveIcon} {...iconProps} />}
+                  <Icon name='Ex' style={styles.groupRemoveIcon} {...iconProps} />}
               />
-              {communities.length < 1 &&
-                <Text style={styles.textInputPlaceholder}>Select which communities to post in.</Text>}
+              {groups.length < 1 &&
+                <Text style={styles.textInputPlaceholder}>Select which groups to post in.</Text>}
             </TouchableOpacity>
 
             {!isEmpty(imageUrls) && (
@@ -608,12 +608,12 @@ export function Toolbar ({ post, canModerate, filePickerPending, imagePickerPend
   )
 }
 
-export function Communities ({ onPress, communities, placeholder }) {
-  if (communities.length > 0) {
-    return communities.map((community, index) =>
+export function Groups ({ onPress, groups, placeholder }) {
+  if (groups.length > 0) {
+    return groups.map((group, index) =>
       <TouchableOpacity onPress={onPress} style={styles.topicPill}>
-        <Text style={styles.topicText}>#{community.name}</Text>
-        <Icon name='Ex' style={styles.removeCommunity} />
+        <Text style={styles.topicText}>#{group.name}</Text>
+        <Icon name='Ex' style={styles.removeGroup} />
       </TouchableOpacity>
     )
   }

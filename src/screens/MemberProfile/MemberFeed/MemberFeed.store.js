@@ -104,7 +104,7 @@ export function fetchMemberUpvotes ({ id, first = 20, offset }) {
                   avatarUrl
                 }
                 commentersTotal
-                communities {
+                groups {
                   id
                   name
                 }
@@ -171,7 +171,7 @@ export const getMemberPosts = makeQueryResultsModelSelector(
     ...post.ref,
     creator: post.creator,
     commenters: post.commenters.toRefArray(),
-    communities: post.communities.toRefArray(),
+    groups: post.groups.toRefArray(),
     topics: post.topics.toRefArray()
   })
 )
@@ -201,6 +201,6 @@ export const getMemberUpvotes = makeQueryResultsModelSelector(
     ...vote.post.ref,
     creator: vote.post.creator,
     commenters: vote.post.commenters.toModelArray(),
-    communities: vote.post.communities.toModelArray()
+    groups: vote.post.groups.toModelArray()
   })
 )

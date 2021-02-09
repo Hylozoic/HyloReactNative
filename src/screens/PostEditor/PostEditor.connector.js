@@ -4,7 +4,7 @@ import { mapWhenFocused } from 'util/redux'
 import { getPresentedPost } from 'store/selectors/getPost'
 import isPendingFor from 'store/selectors/isPendingFor'
 import getCanModerate from 'store/selectors/getCanModerate'
-import getCurrentCommunity from 'store/selectors/getCurrentCommunity'
+import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import getMe from 'store/selectors/getMe'
 import upload from 'store/actions/upload'
 import fetchPost from 'store/actions/fetchPost'
@@ -22,19 +22,19 @@ function getPostId (state, props) {
 }
 
 export function mapStateToProps (state, props) {
-  const currentCommunity = get('ref', getCurrentCommunity(state))
+  const currentGroup = get('ref', getCurrentGroup(state))
   const currentUser = getMe(state, props)
-  const communityOptions = props.communityOptions ||
-    (currentUser && currentUser.memberships.toModelArray().map(m => m.community.ref))
+  const groupOptions = props.groupOptions ||
+    (currentUser && currentUser.memberships.toModelArray().map(m => m.group.ref))
   const selectedTopicName = get('route.params.topicName', props)
   const selectedTopicTag = createTopicTag({ name: selectedTopicName })
   const defaultPost = selectedTopicName
     ? {
         detailsText: selectedTopicTag + ' ',
-        communities: currentCommunity && [currentCommunity]
+        groups: currentGroup && [currentGroup]
       } 
     : {
-        communities: currentCommunity && [currentCommunity]
+        groups: currentGroup && [currentGroup]
       }
   const postId = getPostId(state, props)
   const post = getPresentedPost(state, { id: postId })
@@ -43,7 +43,7 @@ export function mapStateToProps (state, props) {
 
   return {
     post: post || defaultPost,
-    communityOptions,
+    groupOptions,
     imageUrls: post ? post.imageUrls : [],
     fileUrls: post ? post.fileUrls : [],
     isNewPost: isEmpty(postId),
@@ -70,8 +70,8 @@ export function mapDispatchToProps (dispatch, props) {
         return Promise.reject(new Error(`Title cannot be more than ${MAX_TITLE_LENGTH} characters`))
       }
 
-      if (isEmpty(postData.communities)) {
-        return Promise.reject(new Error('You must select a community'))
+      if (isEmpty(postData.groups)) {
+        return Promise.reject(new Error('You must select a group'))
       }
 
       if (postId) postData.id = postId

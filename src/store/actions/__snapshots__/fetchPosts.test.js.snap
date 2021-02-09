@@ -80,7 +80,7 @@ posts(
   }
   votesTotal
   myVote
-  communities {
+  groups {
     id
     name
     slug
@@ -94,7 +94,7 @@ posts(
   postMemberships {
     id
     pinned
-    community {
+    group {
       id
     }
   }
@@ -151,7 +151,7 @@ Object {
   $topic: ID,
   $first: Int
 ) {
-  community(slug: $slug, updateLastViewed: true) {
+  group(slug: $slug, updateLastViewed: true) {
     id
     slug
     name
@@ -224,7 +224,7 @@ posts(
   }
   votesTotal
   myVote
-  communities {
+  groups {
     id
     name
     slug
@@ -238,7 +238,7 @@ posts(
   postMemberships {
     id
     pinned
-    community {
+    group {
       id
     }
   }
@@ -273,7 +273,7 @@ posts(
   },
   "meta": Object {
     "afterInteractions": true,
-    "extractModel": "Community",
+    "extractModel": "Group",
     "extractQueryResults": Object {
       "getItems": [Function],
       "reset": undefined,
@@ -283,7 +283,7 @@ posts(
 }
 `;
 
-exports[`sets updateLastViewed to true when fetching for a community 1`] = `
+exports[`sets updateLastViewed to true when fetching for a group 1`] = `
 Object {
   "graphql": Object {
     "query": "query (
@@ -295,7 +295,7 @@ Object {
   $topic: ID,
   $first: Int
 ) {
-  community(slug: $slug, updateLastViewed: true) {
+  group(slug: $slug, updateLastViewed: true) {
     id
     slug
     name
@@ -368,7 +368,7 @@ posts(
   }
   votesTotal
   myVote
-  communities {
+  groups {
     id
     name
     slug
@@ -382,7 +382,7 @@ posts(
   postMemberships {
     id
     pinned
-    community {
+    group {
       id
     }
   }
@@ -417,7 +417,7 @@ posts(
   },
   "meta": Object {
     "afterInteractions": true,
-    "extractModel": "Community",
+    "extractModel": "Group",
     "extractQueryResults": Object {
       "getItems": [Function],
       "reset": undefined,

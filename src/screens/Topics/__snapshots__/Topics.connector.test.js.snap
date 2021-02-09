@@ -2,8 +2,8 @@
 
 exports[`mapDispatchToProps returns the right keys 1`] = `
 Object {
-  "fetchCommunityTopics": [Function],
-  "selectCommunity": [Function],
+  "fetchGroupTopics": [Function],
+  "selectGroup": [Function],
   "setTerm": [Function],
   "setTopicSubscribe": [Function],
 }
@@ -11,8 +11,8 @@ Object {
 
 exports[`mapStateToProps returns the right keys 1`] = `
 Object {
-  "community": undefined,
-  "communityHasTopics": false,
+  "group": undefined,
+  "groupHasTopics": false,
   "filteredTopics": Array [],
   "network": undefined,
   "pending": true,
@@ -22,10 +22,10 @@ Object {
 
 exports[`mergeProps sets up functions 1`] = `
 Object {
-  "community": Object {
+  "group": Object {
     "id": 132,
   },
-  "fetchCommunityTopics": [Function],
+  "fetchGroupTopics": [Function],
   "goToTopic": [Function],
   "navigation": Object {
     "navigate": [MockFunction],

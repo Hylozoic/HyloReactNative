@@ -3,8 +3,8 @@ import './Model.extension'
 import Activity from './Activity'
 import Attachment from './Attachment'
 import Comment from './Comment'
-import Community, { CommunityModerator } from './Community'
-import CommunityTopic from './CommunityTopic'
+import Group, { GroupModerator } from './Group'
+import GroupTopic from './GroupTopic'
 import Invitation from './Invitation'
 import Location from './Location'
 import Me from './Me'
@@ -28,9 +28,9 @@ orm.register(
   Activity,
   Attachment,
   Comment,
-  Community,
-  CommunityModerator,
-  CommunityTopic,
+  Group,
+  GroupModerator,
+  GroupTopic,
   Invitation,
   Location,
   Me,

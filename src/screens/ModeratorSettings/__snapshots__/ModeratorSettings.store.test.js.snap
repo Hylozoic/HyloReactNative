@@ -3,8 +3,8 @@
 exports[`addModerator 1`] = `
 Object {
   "graphql": Object {
-    "query": "mutation ($personId: ID, $communityId: ID) {
-        addModerator(personId: $personId, communityId: $communityId) {
+    "query": "mutation ($personId: ID, $groupId: ID) {
+        addModerator(personId: $personId, groupId: $groupId) {
           id
           moderators (first: 100) {
             items {
@@ -16,12 +16,12 @@ Object {
         }
       }",
     "variables": Object {
-      "communityId": 111,
+      "groupId": 111,
       "personId": 123,
     },
   },
   "meta": Object {
-    "communityId": 111,
+    "groupId": 111,
     "optimistic": true,
     "personId": 123,
   },
@@ -39,7 +39,7 @@ exports[`fetchModeratorSuggestions 1`] = `
 Object {
   "graphql": Object {
     "query": "query ($id: ID, $autocomplete: String) {
-        community (id: $id) {
+        group (id: $id) {
           id
           members (first: 10, autocomplete: $autocomplete) {
             hasMore
@@ -57,7 +57,7 @@ Object {
     },
   },
   "meta": Object {
-    "extractModel": "Community",
+    "extractModel": "Group",
   },
   "type": "ModeratorSettings/FETCH_MODERATOR_SUGGESTIONS",
 }
@@ -67,7 +67,7 @@ exports[`fetchModerators 1`] = `
 Object {
   "graphql": Object {
     "query": "query ($slug: String) {
-        community (slug: $slug) {
+        group (slug: $slug) {
           id
           name
           slug
@@ -82,11 +82,11 @@ Object {
         }
       }",
     "variables": Object {
-      "slug": "mycommunity",
+      "slug": "mygroup",
     },
   },
   "meta": Object {
-    "extractModel": "Community",
+    "extractModel": "Group",
   },
   "type": "ModeratorSettings/FETCH_MODERATORS",
 }
@@ -95,8 +95,8 @@ Object {
 exports[`removeModerator 1`] = `
 Object {
   "graphql": Object {
-    "query": "mutation ($personId: ID, $communityId: ID, $isRemoveFromCommunity: Boolean) {
-        removeModerator(personId: $personId, communityId: $communityId, isRemoveFromCommunity: $isRemoveFromCommunity) {
+    "query": "mutation ($personId: ID, $groupId: ID, $isRemoveFromGroup: Boolean) {
+        removeModerator(personId: $personId, groupId: $groupId, isRemoveFromGroup: $isRemoveFromGroup) {
           id
           moderators (first: 100) {
             items {
@@ -108,14 +108,14 @@ Object {
         }
       }",
     "variables": Object {
-      "communityId": 111,
-      "isRemoveFromCommunity": true,
+      "groupId": 111,
+      "isRemoveFromGroup": true,
       "personId": 123,
     },
   },
   "meta": Object {
-    "communityId": 111,
-    "isRemoveFromCommunity": true,
+    "groupId": 111,
+    "isRemoveFromGroup": true,
     "optimistic": true,
     "personId": 123,
   },

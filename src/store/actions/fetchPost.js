@@ -71,7 +71,7 @@ export function getPostFieldsFragment (withComments = true) {
   }
   votesTotal
   myVote
-  communities {
+  groups {
     id
     name
     slug
@@ -85,7 +85,7 @@ export function getPostFieldsFragment (withComments = true) {
   postMemberships {
     id
     pinned
-    community {
+    group {
       id
     }
   }

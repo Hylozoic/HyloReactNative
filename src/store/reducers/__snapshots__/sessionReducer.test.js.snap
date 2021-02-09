@@ -16,9 +16,9 @@ Object {
 }
 `;
 
-exports[`on SELECT_COMMUNITY returns the payload 1`] = `
+exports[`on SELECT_GROUP returns the payload 1`] = `
 Object {
-  "communityId": "123",
+  "groupId": "123",
   "networkId": null,
 }
 `;

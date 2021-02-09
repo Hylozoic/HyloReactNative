@@ -4,42 +4,42 @@ import { pullAllBy } from 'lodash'
 import getCurrentNetwork from 'store/selectors/getCurrentNetwork'
 import getMe from 'store/selectors/getMe'
 import getMemberships from 'store/selectors/getMemberships'
-import getCurrentCommunityId from 'store/selectors/getCurrentCommunityId'
+import getCurrentgroupId from 'store/selectors/getCurrentgroupId'
 import getCurrentNetworkId from 'store/selectors/getCurrentNetworkId'
 import { logout } from 'screens/Login/actions'
-import selectCommunity from 'store/actions/selectCommunity'
+import selectGroup from 'store/actions/selectGroup'
 import selectNetwork from 'store/actions/selectNetwork'
 import { ALL_COMMUNITIES_NETWORK } from 'store/models/Network'
 import getCanModerate from 'store/selectors/getCanModerate'
-import getCurrentCommunity from 'store/selectors/getCurrentCommunity'
+import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import { createSelector } from 'reselect'
 
-export function partitionCommunities (memberships) {
-  const allCommunities = memberships.map(m => ({
-    ...m.community.ref,
-    network: m.community.network && {
-      ...get('network.ref', m.community),
-      communities: get('network.communities', m.community) && get('network.communities', m.community).toRefArray()
+export function partitionGroups (memberships) {
+  const allGroups = memberships.map(m => ({
+    ...m.group.ref,
+    network: m.group.network && {
+      ...get('network.ref', m.group),
+      groups: get('network.groups', m.group) && get('network.groups', m.group).toRefArray()
     },
     newPostCount: m.newPostCount
   }))
 
-  const reduced = allCommunities.reduce((acc, community) => {
-    if (community.network) {
-      if (acc[community.network.id]) {
-        acc[community.network.id].communities = acc[community.network.id].communities.concat([community])
+  const reduced = allGroups.reduce((acc, group) => {
+    if (group.network) {
+      if (acc[group.network.id]) {
+        acc[group.network.id].groups = acc[group.network.id].groups.concat([group])
         return acc
       } else {
-        acc[community.network.id] = {
-          ...community.network,
-          communities: [community],
-          // add all network communities here, some will be removed a few lines down
-          nonMemberCommunities: community.network.communities
+        acc[group.network.id] = {
+          ...group.network,
+          groups: [group],
+          // add all network groups here, some will be removed a few lines down
+          nonMemberGroups: group.network.groups
         }
         return acc
       }
     } else {
-      acc.independent = acc.independent.concat([community])
+      acc.independent = acc.independent.concat([group])
       return acc
     }
   }, {
@@ -50,26 +50,26 @@ export function partitionCommunities (memberships) {
     ALL_COMMUNITIES_NETWORK
   ].concat(values(omit('independent', reduced)))
 
-  // pulls out the communities we are already a member of from the nonMemberCommunities array
+  // pulls out the groups we are already a member of from the nonMemberGroups array
   each(n => {
-    pullAllBy(n.nonMemberCommunities, n.communities, 'id')
+    pullAllBy(n.nonMemberGroups, n.groups, 'id')
   })(networks)
 
   return {
     networks,
-    communities: reduced.independent
+    groups: reduced.independent
   }
 }
 
-const getPartitionCommunities = createSelector(
+const getPartitionGroups = createSelector(
   getMemberships,
-  (memberships) => partitionCommunities(memberships)
+  (memberships) => partitionGroups(memberships)
 )
 
 export function mapStateToProps (state, props) {
-  const { networks, communities } = getPartitionCommunities(state)
+  const { networks, groups } = getPartitionGroups(state)
 
-  const currentContext = getCurrentNetwork(state) || getCurrentCommunity(state)
+  const currentContext = getCurrentNetwork(state) || getCurrentGroup(state)
   const currentNetworkId = getCurrentNetworkId(state, props)
 
   const currentUser = getMe(state)
@@ -78,45 +78,45 @@ export function mapStateToProps (state, props) {
     name: get('name', currentUser) || 'you',
     avatarUrl: get('avatarUrl', currentUser),
     networks,
-    communities,
+    groups,
     currentContext,
-    canModerateCurrentCommunity: !currentNetworkId && getCanModerate(state),
-    currentCommunityId: getCurrentCommunityId(state, props),
-    currentCommunity: getCurrentCommunity(state),
+    canModerateCurrentGroup: !currentNetworkId && getCanModerate(state),
+    currentGroupId: getCurrentgroupId(state, props),
+    currentGroup: getCurrentGroup(state),
     currentNetworkId
   }
 }
 
 export const mapDispatchToProps = {
   logout,
-  selectCommunity,
+  selectGroup,
   selectNetwork
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
-  const { currentUser, name, canModerateCurrentCommunity } = stateProps
+  const { currentUser, name, canModerateCurrentGroup } = stateProps
   const { navigation } = ownProps
 
-  const goToCommunitySettingsMenu = () => {
-    navigation.navigate('Community Settings')
+  const goToGroupSettingsMenu = () => {
+    navigation.navigate('Group Settings')
   }
 
   return {
     ...stateProps,
     ...dispatchProps,
     ...ownProps,
-    goToCommunity: community => {
+    goToGroup: group => {
       navigation.closeDrawer()
       navigation.navigate('Feed', {
-        communityId: community.id,
+        groupId: group.id,
         networkId: null
       })
-      dispatchProps.selectCommunity(community.id)
+      dispatchProps.selectGroup(group.id)
     },
     goToNetwork: network => {
       navigation.closeDrawer()
       navigation.navigate('Feed', {
-        communityId: null,
+        groupId: null,
         networkId: network.id
       })
       dispatchProps.selectNetwork(network.id)
@@ -127,10 +127,10 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     goToMyProfile: () => {
       navigation.navigate('Members', { screen: 'Member', params: { id: currentUser.id } })
     },
-    goToCreateCommunity: () => {
-      navigation.navigate('Create Community')
+    goToCreateGroup: () => {
+      navigation.navigate('Create Group')
     },
-    goToCommunitySettingsMenu: canModerateCurrentCommunity && goToCommunitySettingsMenu
+    goToGroupSettingsMenu: canModerateCurrentGroup && goToGroupSettingsMenu
   }
 }
 

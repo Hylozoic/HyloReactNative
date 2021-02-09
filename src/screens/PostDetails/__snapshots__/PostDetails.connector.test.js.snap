@@ -2,14 +2,14 @@
 
 exports[`mapsStateToProps 1`] = `
 Object {
-  "currentCommunity": null,
+  "currentGroup": null,
   "currentNetwork": null,
   "currentUser": undefined,
   "id": "1",
   "isProject": false,
   "post": Object {
     "commenters": Array [],
-    "communities": Array [
+    "groups": Array [
       Object {
         "id": "2",
         "name": "Home",
@@ -100,7 +100,7 @@ Object {
   "dispatch": [MockFunction],
   "editPost": [Function],
   "fetchPost": [Function],
-  "goToCommunity": [Function],
+  "goToGroup": [Function],
   "goToMembers": [Function],
   "id": "testpost",
   "isFocused": true,

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { FlatList, TouchableOpacity, View, Text } from 'react-native'
 import LoadingScreen from 'screens/LoadingScreen'
 import NotificationCard from 'components/NotificationCard'
-import CreateCommunityNotice from 'components/CreateCommunityNotice'
+import CreateGroupNotice from 'components/CreateGroupNotice'
 
 import styles from './NotificationsList.styles'
 import { buildModalScreenOptions } from 'navigation/header'
@@ -40,16 +40,16 @@ export default class NotificationsList extends Component {
   keyExtractor = item => item.id
 
   render () {
-    const { hasMore, markActivityRead, notifications, pending, currentUserHasMemberships, goToCreateCommunity } = this.props
+    const { hasMore, markActivityRead, notifications, pending, currentUserHasMemberships, goToCreateGroup } = this.props
     const { ready } = this.state
     if (!ready || (pending && notifications.length === 0)) {
       return <LoadingScreen />
     }
     if (!currentUserHasMemberships) {
       return (
-        <CreateCommunityNotice
-          goToCreateCommunity={goToCreateCommunity}
-          text='No notifications here, try creating your own Community!'
+        <CreateGroupNotice
+          goToCreateGroup={goToCreateGroup}
+          text='No notifications here, try creating your own Group!'
         />
       )
     }

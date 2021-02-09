@@ -5,7 +5,7 @@ import { createSelector } from 'reselect'
 import { createSelector as ormCreateSelector } from 'redux-orm'
 import { get, includes, isEmpty } from 'lodash/fp'
 import orm from 'store/models'
-import getCurrentCommunity from 'store/selectors/getCurrentCommunity'
+import getCurrentGroup from 'store/selectors/getCurrentGroup'
 
 export const MODULE_NAME = 'Members'
 
@@ -18,9 +18,9 @@ export const defaultState = {
   sortBy: 'join'
 }
 
-export const communityMembersQuery = `
+export const groupMembersQuery = `
 query ($slug: String, $first: Int, $sortBy: String, $offset: Int, $search: String) {
-  community (slug: $slug) {
+  group (slug: $slug) {
     id
     name
     avatarUrl
@@ -132,18 +132,18 @@ export function fetchNetworkMembers (slug, sortBy, offset, search) {
   }
 }
 
-export function fetchCommunityMembers (slug, sortBy, offset, search) {
+export function fetchGroupMembers (slug, sortBy, offset, search) {
   return {
     type: FETCH_MEMBERS,
     graphql: {
-      query: communityMembersQuery,
+      query: groupMembersQuery,
       variables: { slug, first: 20, offset, sortBy, search }
     },
     meta: {
-      extractModel: 'Community',
+      extractModel: 'Group',
       extractQueryResults: {
-        getItems: get('payload.data.community.members'),
-        getParams: (action) => ({ ...get('meta.graphql.variables', action), memberSubject: 'community' })
+        getItems: get('payload.data.group.members'),
+        getParams: (action) => ({ ...get('meta.graphql.variables', action), memberSubject: 'group' })
       }
     }
   }
@@ -194,7 +194,7 @@ export function setSort (sortBy) {
 export function fetchMembers ({ subject, slug, sortBy, offset, search }) {
   return subject === 'network'
     ? fetchNetworkMembers(slug, sortBy, offset, search)
-    : fetchCommunityMembers(slug, sortBy, offset, search)
+    : fetchGroupMembers(slug, sortBy, offset, search)
 }
 
 const getMemberResults = makeGetQueryResults(FETCH_MEMBERS)

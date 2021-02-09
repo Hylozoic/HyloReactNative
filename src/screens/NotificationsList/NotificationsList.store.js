@@ -53,7 +53,7 @@ export function fetchNotifications (first = 20, offset = 0) {
               post {
                 ${getPostFieldsFragment(true)}
               }
-              community {
+              group {
                 id
                 name
                 slug
@@ -140,7 +140,7 @@ export function presentedText (text) {
   return decode(stripped.substring(0, NOTIFICATION_TEXT_MAX))
 }
 
-export function refineActivity ({ action, actor, comment, community, post, meta }, { navigate }) {
+export function refineActivity ({ action, actor, comment, group, post, meta }, { navigate }) {
   switch (action) {
     case ACTION_COMMENT_MENTION:
       return {
@@ -180,7 +180,7 @@ export function refineActivity ({ action, actor, comment, community, post, meta 
     case ACTION_JOIN_REQUEST:
       return {
         body: 'asked to join',
-        community: community.name,
+        group: group.name,
         header: 'New join request',
         nameInHeader: true,
         onPress: () => navigate('Settings')
@@ -189,9 +189,9 @@ export function refineActivity ({ action, actor, comment, community, post, meta 
     case ACTION_APPROVED_JOIN_REQUEST:
       return {
         body: 'approved your request to join',
-        community: community.name,
+        group: group.name,
         header: 'Join Request Approved',
-        onPress: () => navigate('Feed', { communityId: community.id })
+        onPress: () => navigate('Feed', { groupId: group.id })
       }
     case ACTION_ANNOUNCEMENT:
       return {

@@ -11,7 +11,7 @@ const defaultSkills = [
   'Photography',
   'Facilitation',
   'Media',
-  'Community Organizing',
+  'Group Organizing',
   'Technology',
   'Social Media',
   'Event Planning',

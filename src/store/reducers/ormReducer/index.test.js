@@ -11,7 +11,7 @@ import {
 } from 'screens/PostDetails/CommentEditor/CommentEditor.store'
 import {
   USE_INVITATION
-} from 'screens/JoinCommunity/JoinCommunity.store'
+} from 'screens/JoinGroup/JoinGroup.store'
 import {
   DELETE_COMMENT_PENDING
 } from 'components/Comment/Comment.store'
@@ -34,8 +34,8 @@ import {
   PIN_POST_PENDING
 } from 'components/PostCard/PostHeader/PostHeader.store'
 import {
-  CREATE_COMMUNITY
-} from 'screens/CreateCommunityFlow/CreateCommunityFlow.store'
+  CREATE_GROUP
+} from 'screens/CreateGroupFlow/CreateGroupFlow.store'
 import {
   UPDATE_MEMBERSHIP_SETTINGS_PENDING, UPDATE_ALL_MEMBERSHIP_SETTINGS_PENDING
 } from 'screens/NotificationSettings/NotificationSettings.store'
@@ -55,7 +55,7 @@ it('responds to an action with meta.extractModel', () => {
         post: {
           id: '1',
           title: 'Cat on the loose',
-          communities: [
+          groups: [
             {
               id: '1',
               name: 'Neighborhood'
@@ -76,7 +76,7 @@ it('responds to an action with meta.extractModel', () => {
   const newState = ormReducer(state, action)
 
   expect(newState).toMatchObject({
-    Community: {
+    Group: {
       items: ['1'],
       itemsById: { 1: { id: '1', name: 'Neighborhood' } }
     },
@@ -88,9 +88,9 @@ it('responds to an action with meta.extractModel', () => {
       items: ['1'],
       itemsById: { 1: { id: '1', title: 'Cat on the loose', creator: '2' } }
     },
-    PostCommunities: {
+    PostGroups: {
       items: [0],
-      itemsById: { 0: { fromPostId: '1', toCommunityId: '1', id: 0 } }
+      itemsById: { 0: { fromPostId: '1', togroupId: '1', id: 0 } }
     }
   })
 })
@@ -135,22 +135,22 @@ it('handles CREATE_COMMENT', () => {
 
 it('handles SET_TOPIC_SUBSCRIBE_PENDING', () => {
   const session = orm.session(orm.getEmptyState())
-  session.CommunityTopic.create({
-    topic: '1', community: '1', isSubscribed: false, followersTotal: 3
+  session.GroupTopic.create({
+    topic: '1', group: '1', isSubscribed: false, followersTotal: 3
   })
   const action = {
     type: SET_TOPIC_SUBSCRIBE_PENDING,
     meta: {
       topicId: '1',
-      communityId: '1',
+      groupId: '1',
       isSubscribing: true
     }
   }
 
   const newState = ormReducer(session.state, action)
   const newSession = orm.session(newState)
-  expect(newSession.CommunityTopic.first().followersTotal).toBe(4)
-  expect(newSession.CommunityTopic.first().isSubscribed).toBeTruthy()
+  expect(newSession.GroupTopic.first().followersTotal).toBe(4)
+  expect(newSession.GroupTopic.first().isSubscribed).toBeTruthy()
 })
 
 describe('handles VOTE_ON_POST_PENDING', () => {
@@ -198,16 +198,16 @@ describe('handles USE_INVITATION', () => {
   it('should link the new Membership to MeMemberships', () => {
     const session = orm.mutableSession(orm.getEmptyState())
     const meId = 'meId'
-    const community1Id = 'community1Id'
-    const community2Id = 'community2Id'
+    const group1Id = 'group1Id'
+    const group2Id = 'group2Id'
     const membership1Id = 'membership1Id'
     const membership2Id = 'membership2Id'
 
     session.Me.create({ id: meId })
-    session.Community.create({ id: community1Id, name: 'community 1' })
-    session.Community.create({ id: community2Id, name: 'community 2' })
-    session.Membership.create({ id: membership1Id, community: community1Id, person: meId })
-    session.Membership.create({ id: membership2Id, community: community2Id, person: meId }) // const me = session.Me.first()
+    session.Group.create({ id: group1Id, name: 'group 1' })
+    session.Group.create({ id: group2Id, name: 'group 2' })
+    session.Membership.create({ id: membership1Id, group: group1Id, person: meId })
+    session.Membership.create({ id: membership2Id, group: group2Id, person: meId }) // const me = session.Me.first()
 
     const action = {
       type: USE_INVITATION,
@@ -314,8 +314,8 @@ describe('on RESET_NEW_POST_COUNT_PENDING', () => {
 
   const session = orm.session(orm.getEmptyState())
   session.Me.create({ id: 1 })
-  session.Community.create({ id: 1, name: 'community 1' })
-  session.Membership.create({ id: 1, community: 1, person: 1 })
+  session.Group.create({ id: 1, name: 'group 1' })
+  session.Membership.create({ id: 1, group: 1, person: 1 })
   expect(session.Membership.first().newPostCount).toEqual(undefined)
   const newSession = orm.session(ormReducer(session.state, action))
   expect(newSession.Membership.first().newPostCount).toEqual(0)
@@ -391,16 +391,16 @@ describe('on FETCH_CURRENT_USER', () => {
 
 describe('on PIN_POST_PENDING', () => {
   const session = orm.session(orm.getEmptyState())
-  const community = session.Community.create({ id: '1', slug: 'foo' })
+  const group = session.Group.create({ id: '1', slug: 'foo' })
   const postId = 123
   const postMembership = session.PostMembership.create({
     pinned: false,
-    community: community
+    group: group
   })
 
   session.Post.create({
     id: postId,
-    communities: [community],
+    groups: [group],
     postMemberships: [postMembership]
   })
 
@@ -408,7 +408,7 @@ describe('on PIN_POST_PENDING', () => {
     type: PIN_POST_PENDING,
     meta: {
       postId,
-      communityId: community.id
+      groupId: group.id
     }
   }
 
@@ -446,21 +446,21 @@ describe('on UPDATE_THREAD_READ_TIME_PENDING', () => {
   })
 })
 
-describe('handles CREATE_COMMUNITY', () => {
-  it('should link the new Community to MeMemberships', () => {
+describe('handles CREATE_GROUP', () => {
+  it('should link the new Group to MeMemberships', () => {
     const session = orm.mutableSession(orm.getEmptyState())
     const meId = 'meId'
-    const communityId = 'communityId'
+    const groupId = 'groupId'
     const membershipId = 'membershipId'
     session.Me.create({ id: meId })
-    session.Community.create({ id: communityId, name: 'community 1' })
-    session.Membership.create({ id: membershipId, community: communityId, person: meId })
+    session.Group.create({ id: groupId, name: 'group 1' })
+    session.Membership.create({ id: membershipId, group: groupId, person: meId })
 
     const action = {
-      type: CREATE_COMMUNITY,
+      type: CREATE_GROUP,
       payload: {
         data: {
-          createCommunity: {
+          createGroup: {
             id: membershipId
           }
         }
@@ -479,11 +479,11 @@ describe('on UPDATE_MEMBERSHIP_SETTINGS_PENDING', () => {
   it('should update the membership settings', () => {
     const session = orm.mutableSession(orm.getEmptyState())
     const meId = 'meId'
-    const communityId = 'communityId'
+    const groupId = 'groupId'
     const membershipId = 'membershipId'
     session.Me.create({ id: meId })
-    session.Community.create({ id: communityId, name: 'community 1' })
-    session.Membership.create({ id: membershipId, community: communityId, person: meId, settings: {} })
+    session.Group.create({ id: groupId, name: 'group 1' })
+    session.Membership.create({ id: membershipId, group: groupId, person: meId, settings: {} })
 
     const action = {
       type: UPDATE_MEMBERSHIP_SETTINGS_PENDING,
@@ -491,7 +491,7 @@ describe('on UPDATE_MEMBERSHIP_SETTINGS_PENDING', () => {
         settings: {
           sendEmail: true
         },
-        communityId
+        groupId
       }
     }
 

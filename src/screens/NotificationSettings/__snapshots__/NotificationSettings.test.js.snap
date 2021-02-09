@@ -1,13 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AllCommunitiesSettingsRow matches the last snapshot 1`] = `
+exports[`AllGroupsSettingsRow matches the last snapshot 1`] = `
 <SettingsRow
   imageSrc={
     Object {
       "testUri": "../../../assets/hylo-merkaba.png",
     }
   }
-  name="All Communities"
+  name="All Groups"
   settings={
     Object {
       "sendEmail": true,
@@ -61,19 +61,19 @@ exports[`NotificationSettings matches the last snapshot 1`] = `
     }
     updateMessageSettings={[Function]}
   />
-  <AllCommunitiesSettingsRow
+  <AllGroupsSettingsRow
     settings={
       Object {
         "sendEmail": false,
         "sendPushNotifications": true,
       }
     }
-    updateAllCommunities={[Function]}
+    updateAllGroups={[Function]}
   />
   <MembershipSettingsRow
     membership={
       Object {
-        "community": Object {
+        "group": Object {
           "avatarUrl": "foo1.png",
           "id": "12",
         },
@@ -89,7 +89,7 @@ exports[`NotificationSettings matches the last snapshot 1`] = `
   <MembershipSettingsRow
     membership={
       Object {
-        "community": Object {
+        "group": Object {
           "avatarUrl": "foo2.png",
           "id": "22",
         },

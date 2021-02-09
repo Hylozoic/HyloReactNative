@@ -15,7 +15,7 @@ const props = {
   onSubmit: jest.fn(),
   value: 'some text',
   placeholder: 'Place Holder',
-  communityId: 10,
+  groupId: 10,
   route: {
     params: {}
   },

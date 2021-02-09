@@ -4,7 +4,7 @@ exports[`behaves as expected 1`] = `
 Object {
   "graphql": Object {
     "query": "mutation($id: ID, $data: MembershipInput) {
-    updateMembership(communityId: $id, data: $data) {
+    updateMembership(groupId: $id, data: $data) {
       id
     }
   }",
