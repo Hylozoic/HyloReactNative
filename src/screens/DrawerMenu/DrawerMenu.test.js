@@ -3,7 +3,7 @@ import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import ReactTestRenderer from 'react-test-renderer'
 import DrawerMenu, { SectionHeader, NetworkRow, GroupRow, TextButton } from './DrawerMenu'
-import { ALL_GROUPS_GROUP } from 'store/models/Group'
+import { ALL_GROUP } from 'store/models/Group'
 
 describe('DrawerMenu', () => {
   const minProps = {
@@ -18,7 +18,6 @@ describe('DrawerMenu', () => {
     networks: [],
     goToGroupSettingsMenu: jest.fn(),
     currentGroup: { name: 'foo', avatarUrl: 'someurl' },
-    currentContext: { name: 'foo', avatarUrl: 'someurl' },
     groups: []
   }
 
@@ -127,7 +126,7 @@ describe('NetworkRow', () => {
 
   it('shows all groups link', () => {
     const renderer = new ReactShallowRenderer()
-    const network = ALL_GROUPS_GROUP
+    const network = ALL_GROUP
     renderer.render(
       <NetworkRow
         network={network}

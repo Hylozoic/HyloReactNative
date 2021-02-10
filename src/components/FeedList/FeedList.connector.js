@@ -30,7 +30,6 @@ export function mapStateToProps (state, props) {
   })
   const pending = isProjectFeed ? state.pending[FETCH_PROJECTS] : state.pending[FETCH_POSTS]
   const groupId = get('group.id', props)
-
   const postIds = isProjectFeed ? getProjectIds(state, queryProps) : getPostIds(state, queryProps)
   const hasMore = isProjectFeed ? getHasMoreProjects(state, queryProps) : getHasMorePosts(state, queryProps)
 

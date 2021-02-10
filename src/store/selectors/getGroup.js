@@ -1,14 +1,23 @@
 import orm from '../models'
 import { createSelector as ormCreateSelector } from 'redux-orm'
 import { get } from 'lodash/fp'
+import { ALL_GROUP_ID, PUBLIC_GROUP, PUBLIC_GROUP_ID } from 'store/models/Group'
+import { ALL_GROUP } from 'store/models/Group'
 
-/**
- * gets group from slug OR id
- */
 const getGroup = ormCreateSelector(
   orm,
-  (state, props) => get('id', props),
-  (state, props) => get('slug', props),
-  ({ Group }, id, slug) => Group.safeGet({ id, slug })
+  (_, props) => get('id', props),
+  (_, props) => get('slug', props),
+  ({ Group }, id, slug) => {
+    console.log(id, slug)
+    if (id === ALL_GROUP_ID || slug === ALL_GROUP_ID) {
+      return ALL_GROUP
+    }
+    if (id === PUBLIC_GROUP_ID || slug === PUBLIC_GROUP_ID) {
+      return PUBLIC_GROUP
+    }
+
+    return Group.safeGet({ id, slug })
+  }
 )
 export default getGroup

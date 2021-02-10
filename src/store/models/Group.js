@@ -3,6 +3,7 @@ import { attr, many, Model, fk } from 'redux-orm'
 import allGroupsBannerImage from 'assets/all-groups-banner.png'
 import allGroupsAvatarUrl from 'assets/All_Groups2.png'
 import allGroupshHeaderAvatarUrl from 'assets/All_Groups.png'
+import publicGroupAvatarUrl from 'assets/public.png'
 
 export const GROUP_ACCESSIBILITY = {
   Closed: 0,
@@ -81,12 +82,6 @@ Group.fields = {
 export const DEFAULT_BANNER = 'https://d3ngex8q79bk55.cloudfront.net/misc/default_community_banner.jpg'
 export const DEFAULT_AVATAR = 'https://d3ngex8q79bk55.cloudfront.net/misc/default_community_avatar.png'
 
-export const ALL_GROUPS_ID = 'all-groups'
-export const ALL_GROUPS_AVATAR_PATH = '/assets/white-merkaba.png'
-
-export const PUBLIC_CONTEXT_ID = 'public-context'
-export const PUBLIC_CONTEXT_AVATAR_PATH = '/public.svg'
-
 export const accessibilityString = (accessibility) => {
   return Object.keys(GROUP_ACCESSIBILITY).find(key => GROUP_ACCESSIBILITY[key] === accessibility)
 }
@@ -95,12 +90,26 @@ export const visibilityString = (visibility) => {
   return Object.keys(GROUP_VISIBILITY).find(key => GROUP_VISIBILITY[key] === visibility)
 }
 
-export const ALL_GROUPS_GROUP = {
-  id: ALL_GROUPS_ID,
-  slug: ALL_GROUPS_ID,
+export const ALL_GROUP_ID = 'all-groups'
+export const ALL_GROUP_AVATAR_PATH = '/assets/white-merkaba.png'
+export const ALL_GROUP = {
+  id: ALL_GROUP_ID,
+  slug: ALL_GROUP_ID,
   headerAvatarUrl: Image.resolveAssetSource(allGroupshHeaderAvatarUrl).uri,
   avatarUrl: Image.resolveAssetSource(allGroupsAvatarUrl).uri,
   bannerUrl: Image.resolveAssetSource(allGroupsBannerImage).uri,
   name: 'All Groups',
+  groups: []
+}
+
+export const PUBLIC_GROUP_ID = 'public-context'
+export const PUBLIC_GROUP_AVATAR_PATH = '/public.svg'
+export const PUBLIC_GROUP = {
+  id: PUBLIC_GROUP_ID,
+  slug: PUBLIC_GROUP_ID,
+  headerAvatarUrl: Image.resolveAssetSource(allGroupshHeaderAvatarUrl).uri,
+  avatarUrl: Image.resolveAssetSource(publicGroupAvatarUrl).uri,
+  bannerUrl: Image.resolveAssetSource(publicGroupAvatarUrl).uri,
+  name: 'Public Groups & Posts',
   groups: []
 }

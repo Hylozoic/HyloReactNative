@@ -13,7 +13,7 @@ import CreateGroupNotice from 'components/CreateGroupNotice'
 import FeedList from 'components/FeedList'
 import SocketSubscriber from 'components/SocketSubscriber'
 import styles from './Feed.styles'
-// import { ALL_GROUPS_ID } from 'store/models/Group'
+// import { ALL_GROUP_ID } from 'store/models/Group'
 
 export function setHeaderTitle (navigation, topicName, group, isProjectFeed) {
   let headerTitle 
@@ -71,7 +71,7 @@ export default function Feed ({
     )
   }
 
-  // const all = network?.id === ALL_GROUPS_ID
+  // const all = network?.id === ALL_GROUP_ID
   const all = false
 
   if (!group) return null

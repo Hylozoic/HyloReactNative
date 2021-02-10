@@ -15,19 +15,7 @@ import getMemberships from 'store/selectors/getMemberships'
 import getRouteParam from 'store/selectors/getRouteParam'
 import { showToast } from 'util/toast'
 
-export function setupGroup (state, props) {
-  const groupId = getRouteParam('groupId', props.route)
-    || getCurrentGroupId(state, props)
-  const groupSlugFromLink = getRouteParam('groupSlugFromLink', props.route)
-  const group = getGroup(state, groupSlugFromLink
-    ? { slug: groupSlugFromLink }
-    : { id: groupId }
-  )?.ref
-
-  return group
-}
-
-export function setupTopicProps (state, props, { group }) {
+export function setupTopicProps (state, props, group) {
   const topicName = props.topicName
     || getRouteParam('topicName', props.route)
 
@@ -50,13 +38,22 @@ export function setupTopicProps (state, props, { group }) {
 
 export function mapStateToProps (state, props) {
   const stateProps = {}
-  stateProps.currentUser = getMe(state)
-  stateProps.currentUserHasMemberships = !isEmpty(getMemberships(state))  
-  stateProps.group = setupGroup(state, props, stateProps)
+  const currentUser = getMe(state)
+  const currentUserHasMemberships = !isEmpty(getMemberships(state))  
+  // Group
+  const groupId = getRouteParam('groupId', props.route)
+    || getCurrentGroupId(state, props)
+  const groupSlugFromLink = getRouteParam('groupSlugFromLink', props.route)
+  const group = getGroup(state, groupSlugFromLink
+    ? { slug: groupSlugFromLink }
+    : { id: groupId }
+  )
 
   return {
-    ...stateProps,
-    ...setupTopicProps(state, props, stateProps)
+    currentUser,
+    currentUserHasMemberships,
+    group,
+    ...setupTopicProps(state, props, group)
   }
 }
 

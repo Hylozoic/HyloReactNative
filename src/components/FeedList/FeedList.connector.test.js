@@ -4,7 +4,7 @@ import { times } from 'lodash/fp'
 import { mapStateToProps, mergeProps, shouldResetNewPostCount } from './FeedList.connector'
 import { MODULE_NAME, defaultState, defaultSortBy } from './FeedList.store'
 import { FETCH_POSTS } from 'store/actions/fetchPosts'
-import { ALL_GROUPS_ID } from 'store/models/Group'
+import { ALL_GROUP_ID } from 'store/models/Group'
 
 describe('mapStateToProps', () => {
   let state
@@ -187,8 +187,8 @@ describe('mergeProps', () => {
         queryProps: {
           filter: 'foo',
           sortBy: 'bar',
-          slug: ALL_GROUPS_ID,
-          subject: ALL_GROUPS_ID
+          slug: ALL_GROUP_ID,
+          subject: ALL_GROUP_ID
         }
       },
       dispatchProps,
@@ -199,8 +199,8 @@ describe('mergeProps', () => {
     expect(fetchPosts).toHaveBeenCalledWith({
       filter: 'foo',
       sortBy: 'bar',
-      slug: ALL_GROUPS_ID,
-      subject: ALL_GROUPS_ID
+      slug: ALL_GROUP_ID,
+      subject: ALL_GROUP_ID
     }, undefined)
     fetchPosts.mockClear()
 
