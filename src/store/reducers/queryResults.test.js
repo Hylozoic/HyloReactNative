@@ -1,5 +1,5 @@
 import queryResults, { buildKey, makeQueryResultsModelSelector, makeGetQueryResults } from './queryResults'
-import { FETCH_POSTS } from '../actions/fetchPosts'
+import { FETCH_POSTS } from 'store/constants'
 import {
   REMOVE_POST_PENDING
 } from 'components/PostCard/PostHeader/PostHeader.store'

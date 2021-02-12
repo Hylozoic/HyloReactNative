@@ -16,23 +16,15 @@ import {
 export function makeFetchOpts (props) {
   const { group, sortBy } = props
 
-  let subject, slug, sortByName
-
-  if (group) {
-    subject = 'group'
-    slug = get('slug', group)
-  }
-
   return {
     ...omit(['group', 'sortBy'], props),
-    sortBy: sortByName || sortBy,
-    subject,
-    slug
+    sortBy: sortBy,
+    slug: get('slug', group)
   }
 }
 
 // these keys must match the values that hylo-node can handle
-export function sortKeysFactory (subject) {
+export function sortKeysFactory () {
   const sortKeys = {
     name: 'Name',
     location: 'Location',
@@ -45,29 +37,26 @@ export function sortKeysFactory (subject) {
 export function mapStateToProps (state, props) {
   const currentUser = getMe(state, props)
   const group = getCurrentGroup(state, props)
-
   const canModerate = currentUser && currentUser.canModerate(group)
   const search = getSearch(state)
   const sortBy = getSort(state)
-
   const fetchOpts = makeFetchOpts({ group, sortBy, search })
-  const { slug, subject } = fetchOpts
+  const { slug } = fetchOpts
+  const getOpts = fetchOpts
 
-  const getOpts = omit('subject', fetchOpts)
-  getOpts.memberSubject = fetchOpts.subject
+  getOpts.memberContext = fetchOpts.context
 
   return {
     currentUser,
     group,
     canModerate,
-    subject,
     fetchOpts,
     hasMore: getHasMoreMembers(state, getOpts),
     members: getMembers(state, getOpts),
     pending: state.pending[FETCH_MEMBERS],
     search,
     slug,
-    sortKeys: sortKeysFactory(subject),
+    sortKeys: sortKeysFactory(),
     // Use the sortBy that has been adjusted in the case of networks (see makeFetchOpts)
     sortBy: fetchOpts.sortBy
   }

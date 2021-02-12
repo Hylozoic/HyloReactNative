@@ -16,7 +16,6 @@ export default function samplePost () {
     id: 'FAKE_' + faker.random.number(),
     type: faker.random.arrayElement(['offer', 'request', 'discussion']),
     title: 'We put this together as a PDF for hand-out at your next event or university class',
-    context: 'Stop Wombat Walrus',
     imageUrl: faker.internet.avatar(),
     details: 'Feel free to print and distribute or if you would like to suggest anything we have missed or better clarity, let us know!',
     votesTotal: faker.random.number(),

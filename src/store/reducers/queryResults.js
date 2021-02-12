@@ -138,13 +138,16 @@ export function buildKey (type, params) {
 export const queryParamWhitelist = [
   'id',
   'slug',
+  'groupSlug',
+  'groupSlugs',
   'sortBy',
   'search',
   'autocomplete',
   'filter',
   'topic',
   'type',
-  'memberSubject'
+  'isPublic',
+  'memberContext'
 ]
 
 export function makeQueryResultsModelSelector (resultsSelector, modelName, transform = i => i) {

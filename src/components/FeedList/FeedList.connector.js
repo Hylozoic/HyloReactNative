@@ -7,31 +7,28 @@ import {
   setFilter,
   getPostIds,
   getHasMorePosts,
-  getProjectIds,
-  getHasMoreProjects,
   defaultSortBy,
   getQueryProps
 } from './FeedList.store'
-import fetchPosts, { FETCH_POSTS } from 'store/actions/fetchPosts'
-import fetchProjects, { FETCH_PROJECTS } from 'store/actions/fetchProjects'
+import { FETCH_POSTS } from 'store/constants'
+import fetchPosts from 'store/actions/fetchPosts'
 import resetNewPostCount from 'store/actions/resetNewPostCount'
+import { ALL_GROUP_ID, PUBLIC_GROUP_ID } from 'store/models/Group'
 
 export function mapStateToProps (state, props) {
+  const { group, topicName, isProjectFeed } = props
   const sortBy = getSort(state, props)
   const filter = getFilter(state, props)
-  const { group, topicName, isProjectFeed } = props
-
   const queryProps = getQueryProps(state, {
     group,
     sortBy,
     filter: isProjectFeed ? 'project' : filter,
-    topicName,
-    isProjectFeed
+    topicName
   })
-  const pending = isProjectFeed ? state.pending[FETCH_PROJECTS] : state.pending[FETCH_POSTS]
+  const pending = state.pending[FETCH_POSTS]
   const groupId = get('group.id', props)
-  const postIds = isProjectFeed ? getProjectIds(state, queryProps) : getPostIds(state, queryProps)
-  const hasMore = isProjectFeed ? getHasMoreProjects(state, queryProps) : getHasMorePosts(state, queryProps)
+  const postIds = getPostIds(state, queryProps)
+  const hasMore = getHasMorePosts(state, queryProps)
 
   return {
     postIds,
@@ -45,23 +42,24 @@ export function mapStateToProps (state, props) {
   }
 }
 
-const mapDispatchToProps = { setFilter, setSort, fetchPosts, fetchProjects, resetNewPostCount }
+const mapDispatchToProps = { setFilter, setSort, fetchPosts, resetNewPostCount }
 
-export function shouldResetNewPostCount ({ subject, sortBy, filter, topic }) {
-  return subject === 'group' && !topic && sortBy === defaultSortBy && !filter
+export function shouldResetNewPostCount ({ slug, sortBy, filter, topic }) {
+  return slug !== ALL_GROUP_ID
+    && slug !== PUBLIC_GROUP_ID
+    && !topic && sortBy === defaultSortBy
+    && !filter
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
   const { hasMore, pending, postIds, queryProps } = stateProps
-  const { group, isProjectFeed } = ownProps
-  const fetchPostsOrProjects = isProjectFeed
-    ? dispatchProps.fetchProjects
-    : dispatchProps.fetchPosts
+  const { group } = ownProps
+  const { fetchPosts } = dispatchProps
   const fetchMorePosts = hasMore && !pending
-    ? () => fetchPostsOrProjects({ ...queryProps, offset: postIds.length })
+    ? () => fetchPosts({ ...queryProps, offset: postIds.length })
     : () => {}
   const fetchPostsAndResetCount = (params, opts) => {
-    const promises = [fetchPostsOrProjects(params, opts)]
+    const promises = [fetchPosts(params, opts)]
     const groupId = get('id', group)
     if (shouldResetNewPostCount(queryProps)) {
       promises.push(dispatchProps.resetNewPostCount(groupId, 'Membership'))

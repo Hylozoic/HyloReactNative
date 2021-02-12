@@ -15,7 +15,9 @@ export function mapStateToProps (state, props) {
     PUBLIC_GROUP,
     ALL_GROUP
   ]
-  const myGroups = memberships.map(m => m.group.ref)
+  const myGroups = memberships
+    .map(m => m.group.ref)
+    .sort((a, b) => a.name.localeCompare(b.name))
   const currentUser = getMe(state)
 
   return {
