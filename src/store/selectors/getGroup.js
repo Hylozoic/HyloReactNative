@@ -9,7 +9,6 @@ const getGroup = ormCreateSelector(
   (_, props) => get('id', props),
   (_, props) => get('slug', props),
   ({ Group }, id, slug) => {
-    console.log(id, slug)
     if (id === ALL_GROUP_ID || slug === ALL_GROUP_ID) {
       return ALL_GROUP
     }

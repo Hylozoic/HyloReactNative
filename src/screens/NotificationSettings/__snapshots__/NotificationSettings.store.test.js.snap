@@ -34,12 +34,12 @@ Object {
         }
       }",
     "variables": Object {
-      "groupId": 123,
       "data": Object {
         "settings": Object {
           "sendEmail": true,
         },
       },
+      "groupId": 123,
     },
   },
   "meta": Object {

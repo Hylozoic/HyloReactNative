@@ -4,7 +4,6 @@ exports[`mapDispatchToProps matches the last snapshot 1`] = `
 Object {
   "logout": [Function],
   "selectGroup": [Function],
-  "selectNetwork": [Function],
 }
 `;
 
@@ -12,7 +11,6 @@ exports[`mapStateToProps matches the latest snapshot 1`] = `
 Object {
   "avatarUrl": undefined,
   "canModerateCurrentGroup": undefined,
-  "groups": Array [],
   "currentGroup": SessionBoundModel {
     "_fields": Object {
       "avatarUrl": "someUrl",
@@ -22,15 +20,6 @@ Object {
     "avatarUrl": "someUrl",
   },
   "currentGroupId": "7",
-  "currentContext": SessionBoundModel {
-    "_fields": Object {
-      "avatarUrl": "someUrl",
-      "id": "7",
-      "name": "someName",
-    },
-    "avatarUrl": "someUrl",
-  },
-  "currentNetworkId": undefined,
   "currentUser": SessionBoundModel {
     "_fields": Object {
       "id": "33",
@@ -38,8 +27,18 @@ Object {
     },
     "id": "33",
   },
+  "myGroups": Array [],
   "name": "meUser",
-  "networks": Array [
+  "topGroups": Array [
+    Object {
+      "avatarUrl": undefined,
+      "bannerUrl": undefined,
+      "groups": Array [],
+      "headerAvatarUrl": undefined,
+      "id": "public-context",
+      "name": "Public Groups & Posts",
+      "slug": "public-context",
+    },
     Object {
       "avatarUrl": undefined,
       "bannerUrl": undefined,
@@ -59,18 +58,16 @@ Object {
   "currentUser": Object {
     "id": "anyid",
   },
+  "goToCreateGroup": [Function],
   "goToGroup": [Function],
   "goToGroupSettingsMenu": [Function],
-  "goToCreateGroup": [Function],
   "goToMyProfile": [Function],
-  "goToNetwork": [Function],
   "name": "Roy Rogers",
   "navigation": Object {
     "closeDrawer": [MockFunction],
     "navigate": [MockFunction],
   },
   "selectGroup": [MockFunction],
-  "selectNetwork": [MockFunction],
   "showSettings": [Function],
 }
 `;
@@ -81,92 +78,16 @@ Object {
   "currentUser": Object {
     "id": "anyid",
   },
+  "goToCreateGroup": [Function],
   "goToGroup": [Function],
   "goToGroupSettingsMenu": false,
-  "goToCreateGroup": [Function],
   "goToMyProfile": [Function],
-  "goToNetwork": [Function],
   "name": "Roy Rogers",
   "navigation": Object {
     "closeDrawer": [MockFunction],
     "navigate": [MockFunction],
   },
   "selectGroup": [MockFunction],
-  "selectNetwork": [MockFunction],
   "showSettings": [Function],
-}
-`;
-
-exports[`partitionGroups separates independent groups from networked groups 1`] = `
-Object {
-  "groups": Array [
-    Object {
-      "id": "2",
-      "name": "two",
-      "network": undefined,
-      "newPostCount": undefined,
-    },
-    Object {
-      "id": "5",
-      "name": "five",
-      "network": undefined,
-      "newPostCount": undefined,
-    },
-  ],
-  "networks": Array [
-    Object {
-      "avatarUrl": undefined,
-      "bannerUrl": undefined,
-      "groups": Array [],
-      "headerAvatarUrl": undefined,
-      "id": "all-groups",
-      "name": "All Groups",
-      "slug": "all-groups",
-    },
-    Object {
-      "groups": Array [
-        Object {
-          "id": "1",
-          "name": "one",
-          "network": Object {
-            "groups": undefined,
-            "id": "1",
-            "name": "networkOne",
-          },
-          "newPostCount": undefined,
-        },
-        Object {
-          "id": "4",
-          "name": "four",
-          "network": Object {
-            "groups": undefined,
-            "id": "1",
-            "name": "networkOne",
-          },
-          "newPostCount": undefined,
-        },
-      ],
-      "id": "1",
-      "name": "networkOne",
-      "nonMemberGroups": undefined,
-    },
-    Object {
-      "groups": Array [
-        Object {
-          "id": "3",
-          "name": "three",
-          "network": Object {
-            "groups": undefined,
-            "id": "2",
-            "name": "networkTwo",
-          },
-          "newPostCount": undefined,
-        },
-      ],
-      "id": "2",
-      "name": "networkTwo",
-      "nonMemberGroups": undefined,
-    },
-  ],
 }
 `;

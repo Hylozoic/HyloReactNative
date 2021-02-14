@@ -9,8 +9,8 @@ Object {
 
 exports[`mapStateToProps returns the right keys 1`] = `
 Object {
-  "groupUrl": "my-url",
   "fetchUrlPending": true,
+  "groupUrl": "my-url",
   "urlExists": false,
 }
 `;

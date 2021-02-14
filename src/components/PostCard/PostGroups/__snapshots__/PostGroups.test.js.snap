@@ -125,7 +125,7 @@ exports[`PostGroups matches last snapshot when expanded 1`] = `
       <Image
         source={
           Object {
-            "uri": "https://d3ngex8q79bk55.cloudfront.net/misc/default_group_avatar.png",
+            "uri": "https://d3ngex8q79bk55.cloudfront.net/misc/default_community_avatar.png",
           }
         }
       />
@@ -151,7 +151,7 @@ exports[`PostGroups matches last snapshot when expanded 1`] = `
       <Image
         source={
           Object {
-            "uri": "https://d3ngex8q79bk55.cloudfront.net/misc/default_group_avatar.png",
+            "uri": "https://d3ngex8q79bk55.cloudfront.net/misc/default_community_avatar.png",
           }
         }
       />
@@ -165,7 +165,9 @@ exports[`PostGroups matches last snapshot when expanded 1`] = `
 </View>
 `;
 
-exports[`PostGroups renders when in one group and shouldShowGroups is true 1`] = `
+exports[`PostGroups renders when in one group and shouldShowGroups is true 1`] = `null`;
+
+exports[`PostGroups returns null when in one group and shouldShowGroups is false 1`] = `
 <View>
   <View>
     <Text>
@@ -208,5 +210,3 @@ exports[`PostGroups renders when in one group and shouldShowGroups is true 1`] =
   </View>
 </View>
 `;
-
-exports[`PostGroups returns null when in one group and shouldShowGroups is false 1`] = `null`;

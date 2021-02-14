@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect'
-import { postsQueryFragment } from 'store/actions/fetchPosts'
+import postsQueryFragment from 'graphql/fragments/postsQueryFragment'
 import { get } from 'lodash/fp'
 import {
   makeGetQueryResults, makeQueryResultsModelSelector
@@ -22,7 +22,8 @@ export function fetchMemberPosts ({ id, first = 10, offset }) {
         $search: String,
         $filter: String,
         $first: Int,
-        $topic: ID
+        $topic: ID,
+        $boundingBox: [PointInput]
       ) {
         person (id: $id) {
           id

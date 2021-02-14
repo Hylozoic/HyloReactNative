@@ -119,32 +119,15 @@ Array [
 
 exports[`mapStateToProps works 1`] = `
 Object {
-  "group": SessionBoundModel {
-    "_fields": Object {
-      "id": "99",
-      "slug": "foo",
-    },
-    "slug": "foo",
-  },
   "currentUser": SessionBoundModel {
     "_fields": Object {
       "id": "1",
     },
     "id": "1",
   },
+  "group": null,
   "moderatorSuggestions": Array [],
-  "moderators": Array [
-    SessionBoundModel {
-      "_fields": Object {
-        "id": "1",
-      },
-    },
-    SessionBoundModel {
-      "_fields": Object {
-        "id": "2",
-      },
-    },
-  ],
+  "moderators": Array [],
 }
 `;
 
@@ -164,12 +147,12 @@ Object {
         }
       }",
     "variables": Object {
-      "groupId": "99",
+      "groupId": null,
       "personId": 10,
     },
   },
   "meta": Object {
-    "groupId": "99",
+    "groupId": null,
     "optimistic": true,
     "personId": 10,
   },
@@ -193,13 +176,13 @@ Object {
         }
       }",
     "variables": Object {
-      "groupId": "99",
+      "groupId": null,
       "isRemoveFromGroup": true,
       "personId": 10,
     },
   },
   "meta": Object {
-    "groupId": "99",
+    "groupId": null,
     "isRemoveFromGroup": true,
     "optimistic": true,
     "personId": 10,
@@ -226,7 +209,7 @@ Object {
       }",
     "variables": Object {
       "autocomplete": "autocomplete",
-      "id": "99",
+      "id": null,
     },
   },
   "meta": Object {
@@ -236,47 +219,13 @@ Object {
 }
 `;
 
-exports[`mergeProps merges the props 4`] = `
-Object {
-  "graphql": Object {
-    "query": "query ($slug: String) {
-        group (slug: $slug) {
-          id
-          name
-          slug
-          moderators (first: 100) {
-            hasMore
-            items {
-              id
-              name
-              avatarUrl
-            }
-          }
-        }
-      }",
-    "variables": Object {
-      "slug": "foo",
-    },
-  },
-  "meta": Object {
-    "extractModel": "Group",
-  },
-  "type": "ModeratorSettings/FETCH_MODERATORS",
-}
-`;
+exports[`mergeProps merges the props 4`] = `undefined`;
 
 exports[`mergeProps merges the props 5`] = `
 Object {
   "addModerator": [Function],
   "addModeratorMaker": [Function],
   "clearModeratorSuggestions": [Function],
-  "group": SessionBoundModel {
-    "_fields": Object {
-      "id": "99",
-      "slug": "foo",
-    },
-    "slug": "foo",
-  },
   "currentUser": SessionBoundModel {
     "_fields": Object {
       "id": "1",
@@ -287,19 +236,9 @@ Object {
   "fetchModeratorSuggestionsMaker": [Function],
   "fetchModerators": [Function],
   "fetchModeratorsMaker": [Function],
+  "group": null,
   "moderatorSuggestions": Array [],
-  "moderators": Array [
-    SessionBoundModel {
-      "_fields": Object {
-        "id": "1",
-      },
-    },
-    SessionBoundModel {
-      "_fields": Object {
-        "id": "2",
-      },
-    },
-  ],
+  "moderators": Array [],
   "removeModerator": [Function],
   "removeModeratorMaker": [Function],
   "showMember": [Function],

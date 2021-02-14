@@ -2,6 +2,6 @@
 
 exports[`mapStateToProps matches the latest snapshot 1`] = `
 Object {
-  "groupName": "bar",
+  "groupname": null,
 }
 `;

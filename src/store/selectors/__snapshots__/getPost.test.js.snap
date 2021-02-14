@@ -11,12 +11,12 @@ SessionBoundModel {
 exports[`presentPost matches the snapshot 1`] = `
 Object {
   "commenters": Array [],
-  "groups": Array [],
   "creator": Object {
     "id": "10",
   },
   "fileAttachments": Array [],
   "fileUrls": Array [],
+  "groups": Array [],
   "id": 324,
   "imageUrls": Array [],
   "linkPreview": undefined,

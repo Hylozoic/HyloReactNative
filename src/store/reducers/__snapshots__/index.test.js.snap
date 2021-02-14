@@ -55,7 +55,6 @@ Object {
   "queryResults": Object {},
   "session": Object {
     "groupId": null,
-    "networkId": null,
     "returnToPath": null,
     "signupInProgress": null,
   },

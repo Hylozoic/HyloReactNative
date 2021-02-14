@@ -116,10 +116,6 @@ Array [
     "modelName": "Post",
     "payload": Object {
       "commentsTotal": "1",
-      "groups": Array [
-        "1836",
-      ],
-      "groupsTotal": "1",
       "createdAt": "Sat Mar 18 2017 10:48:43 GMT+1300 (NZDT)",
       "creator": "46816",
       "details": "<p><a href=\\"https://wombat.life\\">https://wombat.life</a></p>
@@ -131,6 +127,10 @@ Array [
       ],
       "followersTotal": "1",
       "fulfilledAt": null,
+      "groups": Array [
+        "1836",
+      ],
+      "groupsTotal": "1",
       "id": "30002",
       "startsAt": null,
       "title": "Hello",
@@ -151,10 +151,6 @@ Array [
     "modelName": "Post",
     "payload": Object {
       "commentsTotal": "1",
-      "groups": Array [
-        "1836",
-      ],
-      "groupsTotal": "1",
       "createdAt": "Sat Mar 18 2017 10:49:43 GMT+1300 (NZDT)",
       "creator": "46816",
       "details": "<p>So true.</p>",
@@ -164,6 +160,10 @@ Array [
       ],
       "followersTotal": "1",
       "fulfilledAt": null,
+      "groups": Array [
+        "1836",
+      ],
+      "groupsTotal": "1",
       "id": "30003",
       "startsAt": null,
       "title": "Yup",

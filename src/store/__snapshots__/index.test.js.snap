@@ -83,7 +83,16 @@ Object {
     },
     "Group": Object {
       "indexes": Object {
-        "network": Object {},
+        "locationId": Object {},
+      },
+      "items": Array [],
+      "itemsById": Object {},
+      "meta": Object {},
+    },
+    "GroupConnection": Object {
+      "indexes": Object {
+        "childGroup": Object {},
+        "parentGroup": Object {},
       },
       "items": Array [],
       "itemsById": Object {},
@@ -91,7 +100,7 @@ Object {
     },
     "GroupMembers": Object {
       "indexes": Object {
-        "fromgroupId": Object {},
+        "fromGroupId": Object {},
         "toPersonId": Object {},
       },
       "items": Array [],
@@ -109,7 +118,7 @@ Object {
     },
     "GroupPosts": Object {
       "indexes": Object {
-        "fromgroupId": Object {},
+        "fromGroupId": Object {},
         "toPostId": Object {},
       },
       "items": Array [],
@@ -233,39 +242,6 @@ Object {
       "itemsById": Object {},
       "meta": Object {},
     },
-    "Network": Object {
-      "indexes": Object {},
-      "items": Array [],
-      "itemsById": Object {},
-      "meta": Object {},
-    },
-    "NetworkGroups": Object {
-      "indexes": Object {
-        "fromNetworkId": Object {},
-        "togroupId": Object {},
-      },
-      "items": Array [],
-      "itemsById": Object {},
-      "meta": Object {},
-    },
-    "NetworkMembers": Object {
-      "indexes": Object {
-        "fromNetworkId": Object {},
-        "toPersonId": Object {},
-      },
-      "items": Array [],
-      "itemsById": Object {},
-      "meta": Object {},
-    },
-    "NetworkPosts": Object {
-      "indexes": Object {
-        "fromNetworkId": Object {},
-        "toPostId": Object {},
-      },
-      "items": Array [],
-      "itemsById": Object {},
-      "meta": Object {},
-    },
     "Notification": Object {
       "indexes": Object {
         "activity": Object {},
@@ -326,19 +302,19 @@ Object {
       "itemsById": Object {},
       "meta": Object {},
     },
-    "PostGroups": Object {
+    "PostFollower": Object {
       "indexes": Object {
-        "fromPostId": Object {},
-        "togroupId": Object {},
+        "follower": Object {},
+        "post": Object {},
       },
       "items": Array [],
       "itemsById": Object {},
       "meta": Object {},
     },
-    "PostFollower": Object {
+    "PostGroups": Object {
       "indexes": Object {
-        "follower": Object {},
-        "post": Object {},
+        "fromPostId": Object {},
+        "toGroupId": Object {},
       },
       "items": Array [],
       "itemsById": Object {},
@@ -411,7 +387,6 @@ Object {
   "queryResults": Object {},
   "session": Object {
     "groupId": null,
-    "networkId": null,
     "returnToPath": null,
     "signupInProgress": null,
   },

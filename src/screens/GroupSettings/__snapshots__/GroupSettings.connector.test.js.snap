@@ -2,21 +2,8 @@
 
 exports[`GroupSettings.connector mapStateToProps works 1`] = `
 Object {
-  "group": SessionBoundModel {
-    "_fields": Object {
-      "avatarUrl": "someAvatarUrl",
-      "bannerUrl": "someBannerUrl",
-      "description": "some group description",
-      "id": "99",
-      "name": "Some Group Name",
-      "slug": "foo",
-    },
-    "avatarUrl": "someAvatarUrl",
-    "bannerUrl": "someBannerUrl",
-    "description": "some group description",
-    "slug": "foo",
-  },
-  "groupId": "99",
+  "group": null,
+  "groupId": undefined,
   "pendingSave": false,
 }
 `;

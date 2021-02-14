@@ -146,8 +146,7 @@ export const queryParamWhitelist = [
   'filter',
   'topic',
   'type',
-  'isPublic',
-  'memberContext'
+  'isPublic'
 ]
 
 export function makeQueryResultsModelSelector (resultsSelector, modelName, transform = i => i) {

@@ -77,7 +77,7 @@ export function fetchGroupMembers (slug, sortBy, offset, search) {
       extractModel: 'Group',
       extractQueryResults: {
         getItems: get('payload.data.group.members'),
-        getParams: (action) => ({ ...get('meta.graphql.variables', action), memberContext: 'groups' })
+        getParams: (action) => ({ ...get('meta.graphql.variables', action) })
       }
     }
   }

@@ -50,9 +50,9 @@ Array [
 
 exports[`mapStateToProps returns the right keys 1`] = `
 Object {
+  "createGroupPending": true,
   "groupName": "name",
   "groupUrl": "my-url",
-  "createGroupPending": true,
 }
 `;
 
@@ -62,9 +62,9 @@ Object {
     "groupName": "name",
     "groupUrl": "my-url",
   },
-  "goToGroup": [Function],
   "goToCreateGroupName": [Function],
   "goToCreateGroupUrl": [Function],
+  "goToGroup": [Function],
   "navigation": Object {
     "closeDrawer": [MockFunction],
     "navigate": [MockFunction],

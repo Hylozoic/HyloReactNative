@@ -11,10 +11,9 @@ Object {
 
 exports[`mapStateToProps returns the right keys 1`] = `
 Object {
+  "filteredTopics": Array [],
   "group": undefined,
   "groupHasTopics": false,
-  "filteredTopics": Array [],
-  "network": undefined,
   "pending": true,
   "searchTerm": undefined,
 }
@@ -22,11 +21,11 @@ Object {
 
 exports[`mergeProps sets up functions 1`] = `
 Object {
+  "fetchGroupTopics": [Function],
+  "goToTopic": [Function],
   "group": Object {
     "id": 132,
   },
-  "fetchGroupTopics": [Function],
-  "goToTopic": [Function],
   "navigation": Object {
     "navigate": [MockFunction],
   },

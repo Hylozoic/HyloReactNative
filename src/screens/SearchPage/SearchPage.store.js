@@ -2,7 +2,7 @@ import orm from 'store/models'
 import { createSelector } from 'reselect'
 import { createSelector as ormCreateSelector } from 'redux-orm'
 import { makeGetQueryResults } from 'store/reducers/queryResults'
-import { getPostFieldsFragment } from 'store/actions/fetchPost'
+import postFieldsFragment from 'graphql/fragments/postFieldsFragment'
 import { get, isEmpty, includes } from 'lodash/fp'
 
 export const MODULE_NAME = 'SearchPage'
@@ -83,7 +83,7 @@ export function fetchSearchResults ({ search, offset = 0, filter }) {
                 }
               }
               ... on Post {
-                ${getPostFieldsFragment(false)}
+                ${postFieldsFragment(false)}
               }
               ... on Comment {
                 id

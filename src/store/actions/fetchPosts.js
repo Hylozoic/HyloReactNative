@@ -1,4 +1,3 @@
-import { getPostFieldsFragment } from './fetchPost'
 import { get } from 'lodash/fp'
 import { ALL_GROUP_ID, PUBLIC_GROUP_ID } from 'store/models/Group'
 import { FETCH_POSTS } from 'store/constants'
@@ -149,7 +148,7 @@ const publicPostsQuery = `query (
 // ) {
 //   hasMore
 //   items {
-//     ${getPostFieldsFragment(false)}
+//     ${postFieldsFragment(false)}
 //   }
 // }`
 

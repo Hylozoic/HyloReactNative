@@ -44,8 +44,6 @@ export function mapStateToProps (state, props) {
   const { slug } = fetchOpts
   const getOpts = fetchOpts
 
-  getOpts.memberContext = fetchOpts.context
-
   return {
     currentUser,
     group,

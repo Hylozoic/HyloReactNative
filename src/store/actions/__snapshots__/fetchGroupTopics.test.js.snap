@@ -15,8 +15,7 @@ query (
 ) {
   group (id: $id) {
     id
-    
-groupTopics(
+    groupTopics(
   first: $first,
   offset: $offset,
   sortBy: $sortBy,
@@ -28,10 +27,15 @@ groupTopics(
   total
   items {
     id
-    postsTotal
     followersTotal
+    isDefault
     isSubscribed
     newPostCount
+    postsTotal
+    visibility
+    group {
+      id
+    }
     topic {
       id
       name
@@ -66,9 +70,15 @@ exports[`matches snapshot without groupId 1`] = `
 Object {
   "graphql": Object {
     "query": "
-query ($first: Int, $offset: Int, $subscribed: Boolean, $autocomplete: String) {
-  
-groupTopics(
+query (
+  $first: Int,
+  $offset: Int,
+  $sortBy: String,
+  $order: String,
+  $subscribed: Boolean,
+  $autocomplete: String
+) {
+  groupTopics(
   first: $first,
   offset: $offset,
   sortBy: $sortBy,
@@ -80,10 +90,15 @@ groupTopics(
   total
   items {
     id
-    postsTotal
     followersTotal
+    isDefault
     isSubscribed
     newPostCount
+    postsTotal
+    visibility
+    group {
+      id
+    }
     topic {
       id
       name

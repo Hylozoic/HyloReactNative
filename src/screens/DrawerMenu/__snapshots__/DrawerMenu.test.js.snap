@@ -1,76 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`GroupRow hides badge when no newPostCount 1`] = `
-<View>
-  <ForwardRef
-    onPress={[Function]}
-  >
-    <Image
-      source={
-        Object {
-          "uri": "foo.png",
-        }
-      }
-    />
-    <Text
-      ellipsizeMode="tail"
-      numberOfLines={1}
-    >
-      Foom
-    </Text>
-  </ForwardRef>
-</View>
-`;
-
-exports[`GroupRow highlights when matching currentGroupId 1`] = `
-<View>
-  <ForwardRef
-    onPress={[Function]}
-  >
-    <Image
-      source={
-        Object {
-          "uri": "foo.png",
-        }
-      }
-    />
-    <Text
-      ellipsizeMode="tail"
-      numberOfLines={1}
-    >
-      Foom
-    </Text>
-  </ForwardRef>
-</View>
-`;
-
-exports[`GroupRow matches the last snapshot 1`] = `
-<View>
-  <ForwardRef
-    onPress={[Function]}
-  >
-    <Image
-      source={
-        Object {
-          "uri": "foo.png",
-        }
-      }
-    />
-    <Text
-      ellipsizeMode="tail"
-      numberOfLines={1}
-    >
-      Foom
-    </Text>
-    <View>
-      <Text>
-        7
-      </Text>
-    </View>
-  </ForwardRef>
-</View>
-`;
-
 exports[`DrawerMenu matches the last snapshot 1`] = `
 <View>
   <View>
@@ -175,6 +104,77 @@ exports[`DrawerMenu matches the last snapshot 1`] = `
     </View>
   </View>
   <Memo(Connect(SocketListener)) />
+</View>
+`;
+
+exports[`GroupRow hides badge when no newPostCount 1`] = `
+<View>
+  <ForwardRef
+    onPress={[Function]}
+  >
+    <Image
+      source={
+        Object {
+          "uri": "foo.png",
+        }
+      }
+    />
+    <Text
+      ellipsizeMode="tail"
+      numberOfLines={1}
+    >
+      Foom
+    </Text>
+  </ForwardRef>
+</View>
+`;
+
+exports[`GroupRow highlights when matching currentGroupId 1`] = `
+<View>
+  <ForwardRef
+    onPress={[Function]}
+  >
+    <Image
+      source={
+        Object {
+          "uri": "foo.png",
+        }
+      }
+    />
+    <Text
+      ellipsizeMode="tail"
+      numberOfLines={1}
+    >
+      Foom
+    </Text>
+  </ForwardRef>
+</View>
+`;
+
+exports[`GroupRow matches the last snapshot 1`] = `
+<View>
+  <ForwardRef
+    onPress={[Function]}
+  >
+    <Image
+      source={
+        Object {
+          "uri": "foo.png",
+        }
+      }
+    />
+    <Text
+      ellipsizeMode="tail"
+      numberOfLines={1}
+    >
+      Foom
+    </Text>
+    <View>
+      <Text>
+        7
+      </Text>
+    </View>
+  </ForwardRef>
 </View>
 `;
 
@@ -331,7 +331,7 @@ exports[`NetworkRow shows all groups link 1`] = `
 exports[`SectionHeader matches the last snapshot 1`] = `
 <View>
   <Text>
-    NETWORKED COMMUNITIES
+    NETWORKED GROUPS
   </Text>
 </View>
 `;

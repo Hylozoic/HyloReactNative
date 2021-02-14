@@ -1,7 +1,7 @@
 import { get } from 'lodash/fp'
 import { divToP, textLength } from 'hylo-utils/text'
 import { AnalyticsEvents } from 'hylo-utils/constants'
-import { getPostFieldsFragment } from 'store/actions/fetchPost'
+import postFieldsFragment from 'graphql/fragments/postFieldsFragment'
 
 export const MODULE_NAME = 'PostEditor'
 export const CREATE_POST = `${MODULE_NAME}/CREATE_POST`
@@ -74,7 +74,7 @@ export function createPost (post) {
           topicNames: $topicNames
           memberIds: $memberIds
         }) {
-          ${getPostFieldsFragment(false)}
+          ${postFieldsFragment(false)}
         }
       }`,
       variables: {
@@ -152,7 +152,7 @@ export function createProject (post) {
           topicNames: $topicNames
           memberIds: $memberIds
         }) {
-          ${getPostFieldsFragment(false)}
+          ${postFieldsFragment(false)}
         }
       }`,
       variables: {
@@ -230,7 +230,7 @@ export function updatePost (post) {
           topicNames: $topicNames
           memberIds: $memberIds
         }) {
-          ${getPostFieldsFragment(true)}
+          ${postFieldsFragment(true)}
         }
       }`,
       variables: {

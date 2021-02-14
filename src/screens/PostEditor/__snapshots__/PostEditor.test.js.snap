@@ -674,7 +674,7 @@ exports[`PostEditor renders correctly while saving 1`] = `
                                   <Image
                                     source={
                                       Object {
-                                        "uri": "https://d3ngex8q79bk55.cloudfront.net/misc/default_group_avatar.png",
+                                        "uri": "https://d3ngex8q79bk55.cloudfront.net/misc/default_community_avatar.png",
                                       }
                                     }
                                   />
@@ -1329,7 +1329,7 @@ exports[`PostEditor renders correctly while saving 2`] = `
                                   <Image
                                     source={
                                       Object {
-                                        "uri": "https://d3ngex8q79bk55.cloudfront.net/misc/default_group_avatar.png",
+                                        "uri": "https://d3ngex8q79bk55.cloudfront.net/misc/default_community_avatar.png",
                                       }
                                     }
                                   />
@@ -1536,13 +1536,13 @@ exports[`PostEditor renders with a post 1`] = `
     announcementEnabled={false}
     post={
       Object {
+        "details": "myDetails",
         "groups": Array [
           Object {
             "id": 1,
             "name": "Group 1",
           },
         ],
-        "details": "myDetails",
       }
     }
     showFilePicker={[Function]}
