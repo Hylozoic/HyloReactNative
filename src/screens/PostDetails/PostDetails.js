@@ -20,95 +20,6 @@ import InlineEditor, { toHtml } from 'components/InlineEditor'
 import Icon from 'components/Icon'
 import styles from './PostDetails.styles'
 
-export function PostCardForDetails ({
-  post,
-  currentUser,
-  editPost,
-  isProject,
-  joinProject,
-  leaveProject,
-  showMember,
-  showTopic,
-  goToMembers,
-  goToGroup
-}) {
-  const slug = get('groups.0.slug', post)
-  const isMember = find(member => member.id === currentUser.id, post.members)
-  const location = post.location || (post.locationObject && post.locationObject.fullText)
-
-  return (
-    <View style={styles.postCard}>
-      <PostHeader
-        creator={post.creator}
-        date={post.createdAt}
-        type={post.type}
-        editPost={editPost}
-        groups={post.groups}
-        slug={slug}
-        pinned={post.pinned}
-        topics={post.topics}
-        showTopic={showTopic}
-        postId={post.id}
-        showMember={showMember}
-        goToGroup={goToGroup}
-        announcement={post.announcement}
-        closeOnDelete
-      />
-      <PostImage imageUrls={post.imageUrls} linked />
-      <PostBody
-        type={post.type}
-        title={post.title}
-        details={post.details}
-        startTime={post.startTime}
-        endTime={post.endTime}
-        linkPreview={post.linkPreview}
-        slug={slug}
-        showMember={showMember}
-        showTopic={showTopic}
-      />
-      {!isEmpty(post.fileUrls) && <Files urls={post.fileUrls} />}
-      {isProject && (
-        <ProjectMembersSummary
-          members={post.members}
-          onPress={goToMembers}
-          dimension={34}
-          style={styles.projectMembersContainer}
-        />
-      )}
-      {isProject && (
-        <JoinProjectButton
-          style={styles.joinButton}
-          leaving={isMember}
-          onPress={isMember ? leaveProject : joinProject}
-        />
-      )}
-      {!!location && (
-        <View style={styles.infoRow}>
-          <Icon style={styles.locationIcon} name='Location' />
-          <Text style={styles.infoRowInfo} selectable>{location}</Text>
-        </View>
-      )}
-      <PostGroups
-        groups={post.groups}
-        includePublic={post.isPublic}
-        slug={slug}
-        style={[styles.infoRow]}
-        goToGroup={goToGroup}
-        shouldShowGroups
-      />
-      <PostFooter
-        style={styles.postFooter}
-        id={post.id}
-        currentUser={currentUser}
-        commenters={post.commenters}
-        commentsTotal={post.commentsTotal}
-        votesTotal={post.votesTotal}
-        myVote={post.myVote}
-        showActivityLabel
-      />
-    </View>
-  )
-}
 export default class PostDetails extends React.Component {
   state = {
     commentText: ''
@@ -202,6 +113,96 @@ export default class PostDetails extends React.Component {
       </SafeAreaView>
     )
   }
+}
+
+export function PostCardForDetails ({
+  post,
+  currentUser,
+  editPost,
+  isProject,
+  joinProject,
+  leaveProject,
+  showMember,
+  showTopic,
+  goToMembers,
+  goToGroup
+}) {
+  const slug = get('groups.0.slug', post)
+  const isMember = find(member => member.id === currentUser.id, post.members)
+  const location = post.location || (post.locationObject && post.locationObject.fullText)
+
+  return (
+    <View style={styles.postCard}>
+      <PostHeader
+        creator={post.creator}
+        date={post.createdAt}
+        type={post.type}
+        editPost={editPost}
+        groups={post.groups}
+        slug={slug}
+        pinned={post.pinned}
+        topics={post.topics}
+        showTopic={showTopic}
+        postId={post.id}
+        showMember={showMember}
+        goToGroup={goToGroup}
+        announcement={post.announcement}
+        closeOnDelete
+      />
+      <PostImage imageUrls={post.imageUrls} linked />
+      <PostBody
+        type={post.type}
+        title={post.title}
+        details={post.details}
+        startTime={post.startTime}
+        endTime={post.endTime}
+        linkPreview={post.linkPreview}
+        slug={slug}
+        showMember={showMember}
+        showTopic={showTopic}
+      />
+      {!isEmpty(post.fileUrls) && <Files urls={post.fileUrls} />}
+      {isProject && (
+        <ProjectMembersSummary
+          members={post.members}
+          onPress={goToMembers}
+          dimension={34}
+          style={styles.projectMembersContainer}
+        />
+      )}
+      {isProject && (
+        <JoinProjectButton
+          style={styles.joinButton}
+          leaving={isMember}
+          onPress={isMember ? leaveProject : joinProject}
+        />
+      )}
+      {!!location && (
+        <View style={styles.infoRow}>
+          <Icon style={styles.locationIcon} name='Location' />
+          <Text style={styles.infoRowInfo} selectable>{location}</Text>
+        </View>
+      )}
+      <PostGroups
+        groups={post.groups}
+        includePublic={post.isPublic}
+        slug={slug}
+        style={[styles.infoRow]}
+        goToGroup={goToGroup}
+        shouldShowGroups
+      />
+      <PostFooter
+        style={styles.postFooter}
+        id={post.id}
+        currentUser={currentUser}
+        commenters={post.commenters}
+        commentsTotal={post.commentsTotal}
+        votesTotal={post.votesTotal}
+        myVote={post.myVote}
+        showActivityLabel
+      />
+    </View>
+  )
 }
 
 export function Files ({ urls }) {
