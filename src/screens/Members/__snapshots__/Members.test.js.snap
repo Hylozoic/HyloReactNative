@@ -6,9 +6,6 @@ exports[`renders correctly with no group (all groups default) 1`] = `
     ListFooterComponent={null}
     ListHeaderComponent={
       <View>
-        <Banner
-          handleInviteOnPress={[Function]}
-        />
         <View>
           <SearchBar
             onChangeText={[Function]}

@@ -1,46 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`PostRow only displays groups in the selected network 1`] = `
-<View>
-  <ForwardRef
-    activeOpacity={0.6}
-    delayPressIn={50}
-    onPress={[Function]}
-  >
-    <View>
-      <PostCard
-        goToGroup={[Function]}
-        post={
-          Object {
-            "groups": Array [
-              Object {
-                "name": "group1",
-                "network": Object {
-                  "id": 1,
-                },
-              },
-              Object {
-                "name": "group2",
-                "network": Object {
-                  "id": 2,
-                },
-              },
-              Object {
-                "name": "group3",
-                "network": Object {
-                  "id": 1,
-                },
-              },
-            ],
-            "id": 1,
-          }
-        }
-      />
-    </View>
-  </ForwardRef>
-</View>
-`;
-
 exports[`PostRow renders correctly 1`] = `
 <View>
   <ForwardRef

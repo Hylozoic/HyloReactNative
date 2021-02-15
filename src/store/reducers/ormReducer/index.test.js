@@ -90,7 +90,7 @@ it('responds to an action with meta.extractModel', () => {
     },
     PostGroups: {
       items: [0],
-      itemsById: { 0: { fromPostId: '1', togroupId: '1', id: 0 } }
+      itemsById: { 0: { fromPostId: '1', toGroupId: '1', id: 0 } }
     }
   })
 })

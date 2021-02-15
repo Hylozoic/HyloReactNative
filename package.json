@@ -39,7 +39,7 @@
     "@sentry/react-native": "^2.1.1",
     "cheerio": "0.22.0",
     "ent": "^2.2.0",
-    "hylo-utils": "https://github.com/Hylozoic/hylo-utils#db14807109706",
+    "hylo-utils": "https://github.com/Hylozoic/hylo-utils#2ff4926",
     "js-htmlencode": "^0.3.0",
     "lodash": "^4.17.13",
     "moment": "^2.27.0",

@@ -9,14 +9,13 @@ Object {
       "slug": "foo",
     },
     "inviteLink": "/38adslkjlkj3",
-    "slug": "foo",
   },
   "inviteLink": "https://www.hylo.comundefined",
   "invites": Array [
     SessionBoundModel {
       "_fields": Object {
-        "group": "99",
         "email": "john@doe.com",
+        "group": "99",
         "id": "33",
       },
     },
@@ -93,20 +92,20 @@ Object {
         }
       }",
     "variables": Object {
-      "groupId": "99",
       "data": Object {
         "emails": Array [
           "john@doe.com",
         ],
         "message": "MyMessage",
       },
+      "groupId": "99",
     },
   },
   "meta": Object {
-    "groupId": "99",
     "emails": Array [
       "john@doe.com",
     ],
+    "groupId": "99",
     "optimistic": true,
   },
   "type": "InvitePeople/CREATE_INVITATIONS",
@@ -182,8 +181,8 @@ Object {
         }
       }",
     "variables": Object {
-      "groupId": 1,
       "data": true,
+      "groupId": 1,
     },
   },
   "meta": Object {
@@ -197,6 +196,11 @@ Object {
 exports[`mergeProps merges the props 8`] = `
 Object {
   "allowGroupInvites": [Function],
+  "createInvitations": [Function],
+  "createInvitationsMaker": [Function],
+  "expireInvitation": [Function],
+  "fetchGroupSettings": [Function],
+  "fetchGroupSettingsMaker": [Function],
   "group": SessionBoundModel {
     "_fields": Object {
       "id": "99",
@@ -204,19 +208,13 @@ Object {
       "slug": "foo",
     },
     "inviteLink": "/38adslkjlkj3",
-    "slug": "foo",
   },
-  "createInvitations": [Function],
-  "createInvitationsMaker": [Function],
-  "expireInvitation": [Function],
-  "fetchGroupSettings": [Function],
-  "fetchGroupSettingsMaker": [Function],
   "inviteLink": "https://www.hylo.comundefined",
   "invites": Array [
     SessionBoundModel {
       "_fields": Object {
-        "group": "99",
         "email": "john@doe.com",
+        "group": "99",
         "id": "33",
       },
     },

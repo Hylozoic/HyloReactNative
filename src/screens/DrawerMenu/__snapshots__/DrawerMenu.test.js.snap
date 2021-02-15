@@ -45,25 +45,14 @@ exports[`DrawerMenu matches the last snapshot 1`] = `
     sections={
       Array [
         Object {
-          "data": Array [
-            Object {
-              "id": 1,
-              "name": "Network",
-            },
-          ],
+          "data": undefined,
           "keyExtractor": [Function],
-          "label": "Networked Groups",
           "renderItem": [Function],
         },
         Object {
-          "data": Array [
-            Object {
-              "id": 2,
-              "name": "Group",
-            },
-          ],
+          "data": undefined,
           "keyExtractor": [Function],
-          "label": "Independent Groups",
+          "label": "My Groups",
           "renderItem": [Function],
         },
       ]
@@ -174,156 +163,6 @@ exports[`GroupRow matches the last snapshot 1`] = `
         7
       </Text>
     </View>
-  </ForwardRef>
-</View>
-`;
-
-exports[`NetworkRow hides image when no avatarUrl 1`] = `
-<View>
-  <ForwardRef
-    onPress={[Function]}
-  >
-    <Text
-      ellipsizeMode="tail"
-      numberOfLines={1}
-    >
-      Network Name
-    </Text>
-    <ForwardRef
-      onPress={[Function]}
-    >
-      <Icon
-        allowFontScaling={false}
-        name="chevron-down"
-        size={12}
-      />
-    </ForwardRef>
-  </ForwardRef>
-  <View>
-    <GroupRow
-      group={
-        Object {
-          "avatarUrl": "foo.png",
-          "id": 1,
-          "name": "Foom",
-          "newPostCount": 1,
-        }
-      }
-      currentGroupId={1}
-      goToGroup={[Function]}
-    />
-  </View>
-</View>
-`;
-
-exports[`NetworkRow matches the last snapshot 1`] = `
-<View>
-  <ForwardRef
-    onPress={[Function]}
-  >
-    <Image
-      source={
-        Object {
-          "uri": "network.png",
-        }
-      }
-    />
-    <Text
-      ellipsizeMode="tail"
-      numberOfLines={1}
-    >
-      Network Name
-    </Text>
-    <ForwardRef
-      onPress={[Function]}
-    >
-      <Icon
-        allowFontScaling={false}
-        name="chevron-down"
-        size={12}
-      />
-    </ForwardRef>
-  </ForwardRef>
-  <View>
-    <GroupRow
-      group={
-        Object {
-          "avatarUrl": "foo.png",
-          "id": 1,
-          "name": "Foom",
-          "newPostCount": 1,
-        }
-      }
-      currentGroupId={1}
-      goToGroup={[Function]}
-    />
-  </View>
-</View>
-`;
-
-exports[`NetworkRow renders correctly with nonMemberGroups 1`] = `
-<View>
-  <ForwardRef
-    onPress={[Function]}
-  >
-    <Image
-      source={
-        Object {
-          "uri": "network.png",
-        }
-      }
-    />
-    <Text
-      ellipsizeMode="tail"
-      numberOfLines={1}
-    >
-      Network Name
-    </Text>
-    <ForwardRef
-      onPress={[Function]}
-    >
-      <Icon
-        allowFontScaling={false}
-        name="chevron-down"
-        size={12}
-      />
-    </ForwardRef>
-  </ForwardRef>
-  <View>
-    <GroupRow
-      group={
-        Object {
-          "avatarUrl": "foo.png",
-          "id": 1,
-          "name": "Foom",
-          "newPostCount": 1,
-        }
-      }
-      currentGroupId={1}
-      goToGroup={[Function]}
-    />
-    <ForwardRef
-      onPress={[Function]}
-    >
-      <Text>
-        See all
-      </Text>
-    </ForwardRef>
-  </View>
-</View>
-`;
-
-exports[`NetworkRow shows all groups link 1`] = `
-<View>
-  <ForwardRef
-    onPress={[Function]}
-  >
-    <Text
-      ellipsizeMode="tail"
-      numberOfLines={1}
-    >
-      All Groups
-    </Text>
   </ForwardRef>
 </View>
 `;

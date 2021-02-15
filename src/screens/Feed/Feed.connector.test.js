@@ -69,7 +69,7 @@ describe('mapStateToProps', () => {
     const secondMapping = mapStateToProps(state, secondProps)
 
     expect(firstMapping).toEqual({
-      group: group.ref,
+      group,
       currentUser,
       topicName: 'logistics',
       currentUserHasMemberships: false,
@@ -78,7 +78,7 @@ describe('mapStateToProps', () => {
       topic: topic.ref,
       topicSubscribed: false
     })
-    expect(firstMapping.group === secondMapping.group).toBeTruthy()
+    expect(firstMapping.group.id === secondMapping.group.id).toBeTruthy()
   })
 
 })

@@ -28,13 +28,6 @@ Object {
 exports[`mapStateToProps handles null value for lastViewedGroup 1`] = `
 Object {
   "canModerate": true,
-  "group": SessionBoundModel {
-    "_fields": Object {
-      "id": 10,
-      "slug": "tom",
-    },
-    "slug": "tom",
-  },
   "currentUser": SessionBoundModel {
     "_fields": Object {
       "id": 123,
@@ -45,11 +38,15 @@ Object {
     "search": undefined,
     "slug": "tom",
     "sortBy": undefined,
-    "subject": "group",
+  },
+  "group": SessionBoundModel {
+    "_fields": Object {
+      "id": 10,
+      "slug": "tom",
+    },
   },
   "hasMore": undefined,
   "members": Array [],
-  "network": null,
   "pending": undefined,
   "search": undefined,
   "slug": "tom",
@@ -59,6 +56,5 @@ Object {
     "location": "Location",
     "name": "Name",
   },
-  "subject": "group",
 }
 `;

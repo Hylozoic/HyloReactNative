@@ -1,5 +1,6 @@
 import { get } from 'lodash/fp'
 import { FETCH_POST, FETCH_COMMENTS } from 'store/constants'
+import postFieldsFragment from 'graphql/fragments/postFieldsFragment'
 
 export default function fetchPost (id, opts = {
   withComments: false

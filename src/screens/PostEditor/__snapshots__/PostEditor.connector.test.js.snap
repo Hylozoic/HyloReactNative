@@ -235,9 +235,35 @@ Array [
         post(id: $id) {
           
   id
+  announcement
   title
   details
   type
+  creator {
+    id
+    name
+    avatarUrl
+  }
+  createdAt
+  updatedAt
+  isPublic
+  fulfilledAt
+  startTime
+  endTime
+  myEventResponse
+  commenters(first: 3) {
+    id
+    name
+    avatarUrl
+  }
+  commentersTotal
+  
+  linkPreview {
+    id
+    title
+    url
+    imageUrl
+  }
   location
   locationObject {
     id
@@ -258,45 +284,20 @@ Array [
     neighborhood
     region
   }
-  announcement
-  creator {
-    id
-    name
-    avatarUrl
-    tagline
-  }
-  createdAt
-  updatedAt
-  isPublic
-  fulfilledAt
-  startTime
-  endTime
-  myEventResponse
-  commenters(first: 3) {
-    id
-    name
-    avatarUrl
-  }
-  commentersTotal
-  commentsTotal
-  
-  linkPreview {
-    title
-    url
-    imageUrl
-  }
   votesTotal
   myVote
+  acceptContributions
+  totalContributions
   groups {
     id
     name
     slug
   }
   attachments {
-    id
-    position
     type
     url
+    position
+    id
   }
   postMemberships {
     id
@@ -312,12 +313,44 @@ Array [
     followersTotal
   }
   members {
+    total
+    hasMore
     items {
       id
       name
       avatarUrl
+      bio
+      tagline
+      location
+      skills (first: 100) {
+        items {
+          id
+          name
+        }
+      }
     }
+  }
+  eventInvitations {
     total
+    hasMore
+    items {
+      id
+      response
+      person {
+        id
+        name
+        avatarUrl
+        bio
+        tagline
+        location
+        skills (first: 100) {
+          items {
+            id
+            name
+          }
+        }
+      }
+    }
   }
         }
       }",
@@ -342,12 +375,12 @@ Array [
 exports[`PostEditor mapStateToProps maps 1`] = `
 Object {
   "canModerate": true,
+  "fileUrls": Array [],
   "groupOptions": Array [
     Object {
       "id": "7",
     },
   ],
-  "fileUrls": Array [],
   "imageUrls": Array [
     "bar.png",
     "foo.png",
@@ -357,6 +390,11 @@ Object {
   "pendingDetailsText": false,
   "post": Object {
     "commenters": Array [],
+    "creator": Object {
+      "id": "10",
+    },
+    "fileAttachments": Array [],
+    "fileUrls": Array [],
     "groups": Array [
       Object {
         "id": "7",
@@ -365,11 +403,6 @@ Object {
         "id": "8",
       },
     ],
-    "creator": Object {
-      "id": "10",
-    },
-    "fileAttachments": Array [],
-    "fileUrls": Array [],
     "id": "1",
     "imageUrls": Array [
       "bar.png",

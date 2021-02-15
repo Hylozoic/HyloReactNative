@@ -125,9 +125,25 @@ Object {
     },
     "id": "1",
   },
-  "group": null,
+  "group": SessionBoundModel {
+    "_fields": Object {
+      "id": "99",
+      "slug": "foo",
+    },
+  },
   "moderatorSuggestions": Array [],
-  "moderators": Array [],
+  "moderators": Array [
+    SessionBoundModel {
+      "_fields": Object {
+        "id": "1",
+      },
+    },
+    SessionBoundModel {
+      "_fields": Object {
+        "id": "2",
+      },
+    },
+  ],
 }
 `;
 
@@ -147,12 +163,12 @@ Object {
         }
       }",
     "variables": Object {
-      "groupId": null,
+      "groupId": "99",
       "personId": 10,
     },
   },
   "meta": Object {
-    "groupId": null,
+    "groupId": "99",
     "optimistic": true,
     "personId": 10,
   },
@@ -176,13 +192,13 @@ Object {
         }
       }",
     "variables": Object {
-      "groupId": null,
+      "groupId": "99",
       "isRemoveFromGroup": true,
       "personId": 10,
     },
   },
   "meta": Object {
-    "groupId": null,
+    "groupId": "99",
     "isRemoveFromGroup": true,
     "optimistic": true,
     "personId": 10,
@@ -209,7 +225,7 @@ Object {
       }",
     "variables": Object {
       "autocomplete": "autocomplete",
-      "id": null,
+      "id": "99",
     },
   },
   "meta": Object {
@@ -219,7 +235,34 @@ Object {
 }
 `;
 
-exports[`mergeProps merges the props 4`] = `undefined`;
+exports[`mergeProps merges the props 4`] = `
+Object {
+  "graphql": Object {
+    "query": "query ($slug: String) {
+        group (slug: $slug) {
+          id
+          name
+          slug
+          moderators (first: 100) {
+            hasMore
+            items {
+              id
+              name
+              avatarUrl
+            }
+          }
+        }
+      }",
+    "variables": Object {
+      "slug": "foo",
+    },
+  },
+  "meta": Object {
+    "extractModel": "Group",
+  },
+  "type": "ModeratorSettings/FETCH_MODERATORS",
+}
+`;
 
 exports[`mergeProps merges the props 5`] = `
 Object {
@@ -236,9 +279,25 @@ Object {
   "fetchModeratorSuggestionsMaker": [Function],
   "fetchModerators": [Function],
   "fetchModeratorsMaker": [Function],
-  "group": null,
+  "group": SessionBoundModel {
+    "_fields": Object {
+      "id": "99",
+      "slug": "foo",
+    },
+  },
   "moderatorSuggestions": Array [],
-  "moderators": Array [],
+  "moderators": Array [
+    SessionBoundModel {
+      "_fields": Object {
+        "id": "1",
+      },
+    },
+    SessionBoundModel {
+      "_fields": Object {
+        "id": "2",
+      },
+    },
+  ],
   "removeModerator": [Function],
   "removeModeratorMaker": [Function],
   "showMember": [Function],
