@@ -57,6 +57,7 @@ Object {
     avatarUrl
   }
   commentersTotal
+  commentsTotal
   
   linkPreview {
     id
@@ -241,6 +242,7 @@ Object {
     avatarUrl
   }
   commentersTotal
+  commentsTotal
   
   linkPreview {
     id
@@ -427,6 +429,7 @@ Object {
     avatarUrl
   }
   commentersTotal
+  commentsTotal
   comments(first: 10, order: \\"desc\\") {
     items {
       id
