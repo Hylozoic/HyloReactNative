@@ -340,20 +340,20 @@ const labelStyles = {
       color: mangoYellow
     }
   },
+  event: {
+    box: {
+      backgroundColor: 'rgba(254, 72, 80, .2)'
+    },
+    text: {
+      color: 'rgba(254, 72, 80, 1)'
+    }
+  },
   project: {
     box: {
       backgroundColor: prim
     },
     text: {
       color: fuchsiaPink
-    }
-  },
-  event: {
-    box: {
-      backgroundColor: '#EAE6FA'
-    },
-    text: {
-      color: '#9883E5'
     }
   }
 }

@@ -109,7 +109,8 @@ export const filterOptions = [
   { id: null, label: 'All Posts' },
   { id: 'discussion', label: 'Discussions' },
   { id: 'request', label: 'Requests' },
-  { id: 'offer', label: 'Offers' }
+  { id: 'offer', label: 'Offers' },
+  { id: 'event', label: 'Events' }
 ]
 
 // const sortOptions = [
