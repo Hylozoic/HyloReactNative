@@ -1,16 +1,34 @@
 import React from 'react'
 import { isEqual, isFunction } from 'lodash/fp'
-import confirmDiscardChanges from 'util/confirmDiscardChanges'
 import ItemChooser from 'screens/ItemChooser'
 import { buildModalScreenOptions } from 'navigation/header'
 
 export default class ItemChooserScreen extends React.Component {
+  componentDidMount () {
+    const { route } = this.props
+    const { initialItems } = route.params
+    this.updateItems(initialItems)
+    this.setHeader()
+  }
+
+  componentDidUpdate (prevProps) {
+    const { route } = this.props
+    const { initialItems, chosenItems } = route.params
+    if (
+      !isEqual(prevProps.chosenItems, chosenItems) ||
+      !isEqual(prevProps.initialItems, initialItems)
+    ) {
+      this.setHeader()
+    }
+  }
+
   setHeader = () => {
     const { navigation, route } = this.props
-    const { screenTitle, updateItems } = route.params
+    const { screenTitle, updateItems, initialItems, chosenItems } = route.params
     const headerParams = {
       headerTitle: screenTitle,
-      headerLeftOnPress: this.cancel
+      headerLeftOnPress: navigation.goBack,
+      headerLeftConfirm: !isEqual(chosenItems, initialItems)
     }
     if (isFunction(updateItems)) {
       headerParams.headerRightButtonLabel = 'Done'
@@ -19,22 +37,6 @@ export default class ItemChooserScreen extends React.Component {
     navigation.setOptions(
       buildModalScreenOptions(headerParams)
     )
-  }
-
-  componentDidMount () {
-    this.setHeader()
-  }
-
-  // TODO: Can be merged with setHeader using
-  // confirm options in buildModalScreenOptions
-  cancel = () => {
-    const { route, navigation } = this.props
-    const { initialItems, chosenItems } = route.params
-    const changed = !isEqual(chosenItems, initialItems)
-    confirmDiscardChanges({
-      hasChanges: changed,
-      onDiscard: navigation.goBack
-    })
   }
 
   done = () => {

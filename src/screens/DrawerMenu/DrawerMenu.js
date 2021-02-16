@@ -11,31 +11,26 @@ export default function DrawerMenu ({
   name, avatarUrl, goToMyProfile, goToCreateGroup,
   showSettings, goToGroupSettingsMenu
 }) {
+  const renderItem =  ({ item }) => (
+    <GroupRow
+      group={item}
+      goToGroup={goToGroup}
+      currentGroupId={currentGroupId}
+      addPadding
+    />
+  )
+  const keyExtractor = item => 'c' + item.id
   const listSections = [
     {
       data: topGroups,
-      renderItem: ({ item }) => (
-        <GroupRow
-          group={item}
-          goToGroup={goToGroup}
-          currentGroupId={currentGroupId}
-          addPadding
-        />
-      ),
-      keyExtractor: item => 'c' + item.id
+      renderItem,
+      keyExtractor
     },
     {
       label: 'My Groups',
       data: myGroups,
-      renderItem: ({ item }) => (
-        <GroupRow
-          group={item}
-          goToGroup={goToGroup}
-          currentGroupId={currentGroupId}
-          addPadding
-        />
-      ),
-      keyExtractor: item => 'c' + item.id
+      renderItem,
+      keyExtractor
     }
   ]
 
@@ -91,11 +86,11 @@ export function TextButton ({ text, onPress }) {
 }
 
 export function SectionHeader ({ section }) {
-  if (!section.label) return null
-
   return (
     <View style={styles.sectionHeader}>
-      <Text style={styles.sectionHeaderText}>{section.label.toUpperCase()}</Text>
+      {section.label && (
+        <Text style={styles.sectionHeaderText}>{section.label.toUpperCase()}</Text>
+      )}
     </View>
   )
 }
