@@ -12,6 +12,9 @@ import PopupMenuButton from 'components/PopupMenuButton'
 import { filter, get, isEmpty } from 'lodash/fp'
 import styles from './MemberHeader.styles'
 import { AXOLOTL_ID } from 'store/models/Person'
+// // Location Picker
+// import { locationSearch } from 'screens/ItemChooser/ItemChooser.store'
+// import LocationPickerItemRow from 'screens/ItemChooser/LocationPickerItemRow'
 
 export default function MemberHeader ({
   person,
@@ -30,6 +33,23 @@ export default function MemberHeader ({
   const { name, location, tagline } = person
   const blockUser = blockUserWithConfirmationFun(props.blockUser, name)
   const isAxolotl = AXOLOTL_ID === get('id', person)
+
+  // const showLocationEditor = () => {
+  //   const { navigation } = this.props
+  //   const screenTitle = 'Choose a Location'
+  //   const initialSearchTerm = get('location', this.state) || get('locationObject.fullText', this.state)
+  //   // TODO: Get current location to send as proximity for location search
+  //   // const curLocation = locationObject || get('0.locationObject', groups) || get('locationObject', currentUser)
+  //   navigation.navigate('ItemChooserScreen', {
+  //     screenTitle,
+  //     searchPlaceholder: 'Search for your location',
+  //     initialSearchTerm,
+  //     ItemRowComponent: LocationPickerItemRow,
+  //     pickItem: this.setLocation,
+  //     searchTermFilter: searchTerm => searchTerm,
+  //     fetchSearchSuggestions: locationSearch
+  //   })
+  // }
 
   return (
     <View style={styles.header}>
