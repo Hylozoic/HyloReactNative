@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ItemChooserScreen renders as expected (without value) 1`] = `
+exports[`ItemChooser renders as expected (without value) 1`] = `
 <View>
   <Icon
     name="Search"
@@ -17,7 +17,7 @@ exports[`ItemChooserScreen renders as expected (without value) 1`] = `
 </View>
 `;
 
-exports[`ItemChooserScreen renders as expected when loading 1`] = `
+exports[`ItemChooser renders as expected when loading 1`] = `
 <View>
   <Icon
     name="Search"
@@ -35,7 +35,7 @@ exports[`ItemChooserScreen renders as expected when loading 1`] = `
 </View>
 `;
 
-exports[`ItemChooserScreen renders as expected with value 1`] = `
+exports[`ItemChooser renders as expected with value 1`] = `
 <View>
   <Icon
     name="Search"
@@ -53,7 +53,7 @@ exports[`ItemChooserScreen renders as expected with value 1`] = `
 </View>
 `;
 
-exports[`ItemChooserScreen renders with placeholder 1`] = `
+exports[`ItemChooser renders with placeholder 1`] = `
 <View>
   <Icon
     name="Search"

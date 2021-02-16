@@ -40,7 +40,7 @@ export default function MemberHeader ({
   //   const initialSearchTerm = get('location', this.state) || get('locationObject.fullText', this.state)
   //   // TODO: Get current location to send as proximity for location search
   //   // const curLocation = locationObject || get('0.locationObject', groups) || get('locationObject', currentUser)
-  //   navigation.navigate('ItemChooserScreen', {
+  //   navigation.navigate('ItemChooser', {
   //     screenTitle,
   //     searchPlaceholder: 'Search for your location',
   //     initialSearchTerm,

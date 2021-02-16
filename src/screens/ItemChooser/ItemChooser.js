@@ -7,7 +7,8 @@ import {
   TouchableOpacity
 } from 'react-native'
 import SafeAreaView from 'react-native-safe-area-view'
-import { debounce } from 'lodash/fp'
+import { isEqual, isFunction, debounce } from 'lodash/fp'
+import { buildModalScreenOptions } from 'navigation/header'
 import SearchBar from 'components/SearchBar'
 import styles from './ItemChooser.styles'
 
@@ -68,36 +69,76 @@ export default class ItemChooser extends React.Component {
     }
   }
 
+  // componentDidUpdate (prevProps) {
+  //   const { route } = this.props
+  //   const { initialItems, chosenItems } = route.params
+  //   if (
+  //     !isEqual(prevProps.chosenItems, chosenItems) ||
+  //     !isEqual(prevProps.initialItems, initialItems)
+  //   ) {
+  //     this.setHeader()
+  //   }
+  // }
+
   componentDidMount () {
-    const { initialSearchTerm } = this.props
+    const { route, initialSearchTerm } = this.props
+    const { initialItems,  pickItem, updateItems } = route.params
+    if (updateItems) this.updateItems(initialItems)
     if (initialSearchTerm) this.setSearchTerm(initialSearchTerm)
+    this.setHeader()
   }
 
   componentWillUnmount () {
     this.clearSearchTerm()
   }
 
-  addItem = (item) => {
+  setHeader = () => {
+    const { navigation, route } = this.props
+    const { screenTitle, updateItems, initialItems, chosenItems } = route.params
+    const headerParams = {
+      headerTitle: screenTitle,
+      headerLeftOnPress: navigation.goBack,
+      headerLeftConfirm: !isEqual(chosenItems, initialItems)
+    }
+    if (isFunction(updateItems)) {
+      headerParams.headerRightButtonLabel = 'Done'
+      headerParams.headerRightButtonOnPress = this.done
+    }
+    navigation.setOptions(
+      buildModalScreenOptions(headerParams)
+    )
+  }
+
+  done = () => {
+    this.updateItems(chosenItems)
+    navigation.goBack()
+  }
+
+  addItem = item => {
     const updatedItems = this.state.chosenItems.concat(item)
     this.updateItems(updatedItems)
   }
 
-  removeItem = (item) => {
+  removeItem = item => {
     const updatedItems = this.state.chosenItems.filter(p => p.id !== item.id)
     this.updateItems(updatedItems)
   }
 
-  updateItems (updatedItems) {
+  updateItems = updatedItems => {
     this.setState(state => ({
       chosenItems: updatedItems
     }))
-    this.props.updateItems(updatedItems)
+    this.props.route.params.updateItems(updatedItems)
   }
 
-  pickItem = (item) => this.props.pickItem(item)
+  pickItem = item => {
+    this.props.route.params.pickItem(item)
+    this.props.navigation.goBack()
+  }
 
-  setupItemSections = (suggestedItems) => {
-    const { searchTerm, defaultSuggestedItems, defaultSuggestedItemsLabel, updateItems } = this.props
+  setupItemSections = suggestedItems => {
+    const { searchTerm, route } = this.props
+    const { defaultSuggestedItems, defaultSuggestedItemsLabel, updateItems } = route.params
     const { chosenItems, initialItems } = this.state
     const chosenItemIds = chosenItems.map(p => p.id)
     const initialItemIds = initialItems.map(item => item.id)
@@ -137,18 +178,19 @@ export default class ItemChooser extends React.Component {
     return sections
   }
 
-  setSearchTerm = (searchTerm) => {
+  setSearchTerm = searchTerm => {
     this.props.setSearchTerm(searchTerm)
     this.fetchSearchSuggestions(searchTerm)
   }
 
-  fetchSearchSuggestions = debounce(400, (searchTerm) =>
-    this.props.fetchSearchSuggestions(searchTerm))
+  fetchSearchSuggestions = debounce(400, searchTerm => {
+    this.props.fetchSearchSuggestions(searchTerm)
+  })
 
   clearSearchTerm = () => this.props.setSearchTerm()
 
   renderItemRowComponent = ({ item }) => {
-    const { ItemRowComponent } = this.props
+    const { ItemRowComponent } = this.props.route.params
     const toggleChosen = item.chosen ? this.removeItem : this.addItem
     const chooseItem = () => this.addItem(item)
     const unChooseItem = () => this.removeItem(item)
@@ -167,9 +209,9 @@ export default class ItemChooser extends React.Component {
   }
 
   render () {
-    const { searchTerm, style } = this.props
+    const { searchTerm, style, suggestedItems } = this.props
     const headerText = searchTerm ? `Matching "${searchTerm}"` : undefined
-    const sections = this.setupItemSections(this.props.suggestedItems)
+    const sections = this.setupItemSections(suggestedItems)
 
     return (
       <SafeAreaView style={style}>
@@ -229,14 +271,16 @@ export class ItemChooserListHeader extends React.Component {
           // onCancelText='Clear'
           loading={loading}
         />
-        {searchTerm && <View style={styles.listHeaderStatus}>
-          <Text style={styles.listHeaderText}>
-            <Text>{headerText}</Text>
-          </Text>
-          <TouchableOpacity onPress={clearSearchTerm}>
-            <Text style={styles.listHeaderClear}>Clear Search</Text>
-          </TouchableOpacity>
-                       </View>}
+        {searchTerm && (
+          <View style={styles.listHeaderStatus}>
+            <Text style={styles.listHeaderText}>
+              <Text>{headerText}</Text>
+            </Text>
+            <TouchableOpacity onPress={clearSearchTerm}>
+              <Text style={styles.listHeaderClear}>Clear Search</Text>
+            </TouchableOpacity>
+          </View>
+        )}
       </View>
     )
   }

@@ -1,7 +1,7 @@
 import 'react-native'
 import React from 'react'
 import TestRenderer from 'react-test-renderer'
-import ItemChooserScreen from './ItemChooserScreen'
+import ItemChooser from './ItemChooser'
 import { Provider } from 'react-redux'
 import { createMockStore } from 'util/testing'
 
@@ -41,11 +41,11 @@ const testProps = {
 // test that cancel does what is expected for pickItem
 // test pickItem
 
-describe('ItemChooserScreen', () => {
+describe('ItemChooser', () => {
   it('renders as expected', () => {
     const renderer = TestRenderer.create(
       <Provider store={createMockStore(state)}>
-        <ItemChooserScreen {...testProps} />
+        <ItemChooser {...testProps} />
       </Provider>
     )
     expect(renderer.toJSON()).toMatchSnapshot()

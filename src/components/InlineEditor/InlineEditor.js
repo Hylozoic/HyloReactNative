@@ -78,7 +78,7 @@ export class InlineEditor extends React.PureComponent {
   openPersonPicker = () => {
     const { navigation } = this.props
     const screenTitle = 'Mention'
-    navigation.navigate('ItemChooserScreen', {
+    navigation.navigate('ItemChooser', {
       screenTitle,
       ItemRowComponent: PersonPickerItemRow,
       pickItem: this.insertMention,
@@ -91,7 +91,7 @@ export class InlineEditor extends React.PureComponent {
   openTopicsPicker = () => {
     const { navigation } = this.props
     const screenTitle = 'Pick a Topic'
-    navigation.navigate('ItemChooserScreen', {
+    navigation.navigate('ItemChooser', {
       screenTitle,
       ItemRowComponent: TopicRow,
       pickItem: this.insertTopic,

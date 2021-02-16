@@ -1,3 +1,3 @@
-import component from './ItemChooserScreen'
+import component from './ItemChooser'
 
 export default component

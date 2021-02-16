@@ -3,7 +3,7 @@ import { isEqual, isFunction } from 'lodash/fp'
 import ItemChooser from 'screens/ItemChooser'
 import { buildModalScreenOptions } from 'navigation/header'
 
-export default class ItemChooserScreen extends React.Component {
+export default class ItemChooser extends React.Component {
   componentDidMount () {
     const { route } = this.props
     const { initialItems } = route.params

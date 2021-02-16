@@ -65,7 +65,7 @@ export default class NewMessage extends React.Component {
       defaultSuggestedItemsLabel: 'Recent Contacts',
       defaultSuggestedItems: recentContacts
     }
-    this.props.navigation.navigate('ItemChooserScreen', chooserProps)
+    this.props.navigation.navigate('ItemChooser', chooserProps)
   }
 
   confirmLeave = (onLeave) => {
