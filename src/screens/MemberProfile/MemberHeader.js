@@ -12,9 +12,7 @@ import PopupMenuButton from 'components/PopupMenuButton'
 import { filter, get, isEmpty } from 'lodash/fp'
 import styles from './MemberHeader.styles'
 import { AXOLOTL_ID } from 'store/models/Person'
-// // Location Picker
-// import { locationSearch } from 'screens/ItemChooser/ItemChooser.store'
-// import LocationPickerItemRow from 'screens/ItemChooser/LocationPickerItemRow'
+import LocationPicker from 'screens/ItemChooser/LocationPicker'
 
 export default function MemberHeader ({
   person,
@@ -26,6 +24,7 @@ export default function MemberHeader ({
   updateSetting = () => {},
   saveChanges,
   errors = {},
+  navigation,
   ...props
 }) {
   if (!person) return null
@@ -34,22 +33,15 @@ export default function MemberHeader ({
   const blockUser = blockUserWithConfirmationFun(props.blockUser, name)
   const isAxolotl = AXOLOTL_ID === get('id', person)
 
-  // const showLocationEditor = () => {
-  //   const { navigation } = this.props
-  //   const screenTitle = 'Choose a Location'
-  //   const initialSearchTerm = get('location', this.state) || get('locationObject.fullText', this.state)
-  //   // TODO: Get current location to send as proximity for location search
-  //   // const curLocation = locationObject || get('0.locationObject', groups) || get('locationObject', currentUser)
-  //   navigation.navigate('ItemChooser', {
-  //     screenTitle,
-  //     searchPlaceholder: 'Search for your location',
-  //     initialSearchTerm,
-  //     ItemRowComponent: LocationPickerItemRow,
-  //     pickItem: this.setLocation,
-  //     searchTermFilter: searchTerm => searchTerm,
-  //     fetchSearchSuggestions: locationSearch
-  //   })
-  // }
+  const showLocationPicker = () => {
+    LocationPicker({
+      navigation,
+      initialSearchTerm: get('location', person)
+        || get('locationObject.fullText', person),
+      // TODO: Properly handle location change (see PostEditor line 202)
+      onPick: updateSetting('location')
+    })
+  }
 
   return (
     <View style={styles.header}>
@@ -75,7 +67,7 @@ export default function MemberHeader ({
         value={location}
         placeholder='Location'
         editable={editable}
-        onChangeText={updateSetting('location')}
+        onPress={showLocationPicker}
         isMe={isMe}
       />
       <Control
@@ -105,6 +97,7 @@ export function blockUserWithConfirmationFun (blockUserFun, name) {
       ])
   }
 }
+
 export class Control extends React.Component {
   inputRef = React.createRef()
 
@@ -113,13 +106,18 @@ export class Control extends React.Component {
   render () {
     const {
       value, onChangeText, editable = false, style, multiline,
-      hideEditIcon, error, placeholder, isMe
+      hideEditIcon, error, placeholder, isMe, onPress
     } = this.props
     return (
       <View style={[styles.control, editable && styles.editableControl]}>
         <View style={styles.controlInputRow}>
-          {editable || !multiline
-            ? <TextInput
+          {editable && onPress && (
+            <TouchableOpacity onPress={onPress}>
+              <Text>{value}</Text>
+            </TouchableOpacity>
+          )}
+          {!onPress && (editable || !multiline) && (
+            <TextInput
                 ref={this.inputRef}
                 style={[styles.controlInput, style]}
                 value={value}
@@ -130,8 +128,9 @@ export class Control extends React.Component {
                 numberOfLines={multiline ? 8 : 1}
                 underlineColorAndroid='transparent'
               />
-            : <Text>{value}</Text>}
-          {editable && !hideEditIcon && <TouchableOpacity onPress={this.focus} style={styles.editIconWrapper}>
+          )}
+          {!onPress || (!editable || multiline) && <Text>{value}</Text>}
+          {editable && !hideEditIcon && <TouchableOpacity onPress={onPress || this.focus} style={styles.editIconWrapper}>
             <EntypoIcon name='edit' style={styles.editIcon} />
           </TouchableOpacity>}
         </View>

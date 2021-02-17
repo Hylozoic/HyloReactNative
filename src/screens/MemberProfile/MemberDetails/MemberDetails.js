@@ -112,7 +112,7 @@ export default class MemberDetails extends React.Component {
   }
 
   render () {
-    const { goToGroup, goToSkills, isMe, person, skills, onPressMessages } = this.props
+    const { goToGroup, goToSkills, isMe, person, skills, onPressMessages, navigation } = this.props
     const { editing, errors } = this.state
     const personEdits = this.state.person
 
@@ -129,6 +129,7 @@ export default class MemberDetails extends React.Component {
           editable={editing}
           updateSetting={this.updateSetting}
           errors={errors}
+          navigation={navigation}
         />
         <MemberBio
           person={personEdits}

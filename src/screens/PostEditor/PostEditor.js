@@ -14,6 +14,9 @@ import { rhino30 } from 'style/colors'
 import { showToast, hideToast } from 'util/toast'
 import { buildModalScreenOptions } from 'navigation/header'
 import { MAX_TITLE_LENGTH } from './PostEditor.store'
+import LocationPicker from 'screens/ItemChooser/LocationPicker'
+
+// TODO: Convert all 3 of the below to LocationPicker style calls
 // ProjectMembers Chooser
 import scopedFetchPeopleAutocomplete from 'store/actions/scopedFetchPeopleAutocomplete'
 import scopedGetPeopleAutocomplete from 'store/selectors/scopedGetPeopleAutocomplete'
@@ -24,11 +27,8 @@ import getTopicsForAutocompleteWithNew from 'store/selectors/getTopicsForAutocom
 import TopicRow from 'screens/TopicList/TopicRow'
 // Group Chooser
 import GroupChooserItemRow from 'screens/ItemChooser/GroupChooserItemRow'
-// Location Picker
-import { locationSearch } from 'screens/ItemChooser/ItemChooser.store'
-import LocationPickerItemRow from 'screens/ItemChooser/LocationPickerItemRow'
-//
 import GroupsList from 'components/GroupsList'
+
 import ProjectMembersSummary from 'components/ProjectMembersSummary'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 import Icon from 'components/Icon'
@@ -209,8 +209,8 @@ export default class PostEditor extends React.Component {
       this.setState(() => ({ location: null }))
       pollingFindOrCreateLocation(
         locationData,
-        locationObject => this.setState(() => ({ locationObject })
-        ))
+        locationObject => this.setState(() => ({ locationObject }))
+      )
     }
   }
 
@@ -336,20 +336,12 @@ export default class PostEditor extends React.Component {
     })
   }
 
-  showLocationEditor = () => {
-    const { navigation } = this.props
-    const screenTitle = 'Choose a Location'
-    const initialSearchTerm = get('location', this.state) || get('locationObject.fullText', this.state)
-    // TODO: Get current location to send as proximity for location search
-    // const curLocation = locationObject || get('0.locationObject', groups) || get('locationObject', currentUser)
-    navigation.navigate('ItemChooser', {
-      screenTitle,
-      searchPlaceholder: 'Search for your location',
-      initialSearchTerm,
-      ItemRowComponent: LocationPickerItemRow,
-      pickItem: this.setLocation,
-      searchTermFilter: searchTerm => searchTerm,
-      fetchSearchSuggestions: locationSearch
+  showLocationPicker = () => {
+    LocationPicker({
+      navigation: this.props.navigation,      
+      initialSearchTerm: get('location', this.state)
+        || get('locationObject.fullText', this.state),
+      onPick: this.setLocation
     })
   }
 
@@ -519,7 +511,7 @@ export default class PostEditor extends React.Component {
                   styles.textInputWrapper,
                   styles.topics
                 ]}
-                onPress={this.showLocationEditor}
+                onPress={this.showLocationPicker}
               >
                 <View style={styles.topicLabel}>
                   <Text style={styles.sectionLabel}>Location</Text>
