@@ -13,6 +13,7 @@ exports[`Control matches the last snapshot 1`] = `
       underlineColorAndroid="transparent"
       value="a"
     />
+    true
     <ForwardRef
       onPress={[Function]}
     >
@@ -51,7 +52,7 @@ exports[`MemberHeader matches the last snapshot 1`] = `
   </View>
   <Control
     isMe={true}
-    onChangeText={[Function]}
+    onPress={[Function]}
     placeholder="Location"
     value="whale"
   />
