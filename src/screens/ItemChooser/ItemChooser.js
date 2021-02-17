@@ -23,13 +23,12 @@ export const propTypesForItemRowComponent = {
 
 export default class ItemChooser extends React.Component {
   static propTypes = {
-    scope: PropTypes.string.isRequired,
+    // From screen / route.params
+    screenTitle: PropTypes.string,
+    ItemRowComponent: PropTypes.func.isRequired,
     fetchSearchSuggestions: PropTypes.func.isRequired,
     getSearchSuggestions: PropTypes.func,
-    setSearchTerm: PropTypes.func.isRequired,
-    ItemRowComponent: PropTypes.func.isRequired,
     pickItem: PropTypes.func,
-    done: PropTypes.func,
     updateItems: PropTypes.func,
     initialItems: PropTypes.arrayOf(
       PropTypes.shape({
@@ -42,10 +41,13 @@ export default class ItemChooser extends React.Component {
       })
     ),
     defaultSuggestedItemsLabel: PropTypes.string,
+    searchTermFilter: PropTypes.func,
+    searchPlaceholder: PropTypes.string,
+    // Regular props mostly from connector
+    setSearchTerm: PropTypes.func.isRequired,
     searchTerm: PropTypes.string,
     suggestedItems: PropTypes.array,
     loading: PropTypes.bool,
-    searchPlaceholder: PropTypes.string,
     style: PropTypes.object
   }
 
@@ -69,20 +71,14 @@ export default class ItemChooser extends React.Component {
     }
   }
 
-  // componentDidUpdate (prevProps) {
-  //   const { route } = this.props
-  //   const { initialItems, chosenItems } = route.params
-  //   if (
-  //     !isEqual(prevProps.chosenItems, chosenItems) ||
-  //     !isEqual(prevProps.initialItems, initialItems)
-  //   ) {
-  //     this.setHeader()
-  //   }
-  // }
+  componentDidUpdate () {
+    if (!isEqual(this.props.initialItems, this.state.chosenItems)) {
+      this.setHeader()
+    }
+  }
 
   componentDidMount () {
-    const { route, initialSearchTerm } = this.props
-    const { initialItems,  pickItem, updateItems } = route.params
+    const { initialSearchTerm, initialItems,  pickItem, updateItems } = this.props
     if (updateItems) this.updateItems(initialItems)
     if (initialSearchTerm) this.setSearchTerm(initialSearchTerm)
     this.setHeader()
@@ -93,8 +89,8 @@ export default class ItemChooser extends React.Component {
   }
 
   setHeader = () => {
-    const { navigation, route } = this.props
-    const { screenTitle, updateItems, initialItems, chosenItems } = route.params
+    const { navigation, screenTitle, updateItems } = this.props
+    const { chosenItems, initialItems } = this.state
     const headerParams = {
       headerTitle: screenTitle,
       headerLeftOnPress: navigation.goBack,
@@ -110,7 +106,9 @@ export default class ItemChooser extends React.Component {
   }
 
   done = () => {
-    this.updateItems(chosenItems)
+    const { navigation } = this.props
+    const { chosenItems } = this.state
+    this.props.updateItems(chosenItems)
     navigation.goBack()
   }
 
@@ -125,20 +123,16 @@ export default class ItemChooser extends React.Component {
   }
 
   updateItems = updatedItems => {
-    this.setState(state => ({
-      chosenItems: updatedItems
-    }))
-    this.props.route.params.updateItems(updatedItems)
+    this.setState(state => ({ chosenItems: updatedItems }))
   }
 
   pickItem = item => {
-    this.props.route.params.pickItem(item)
+    this.props.pickItem(item)
     this.props.navigation.goBack()
   }
 
   setupItemSections = suggestedItems => {
-    const { searchTerm, route } = this.props
-    const { defaultSuggestedItems, defaultSuggestedItemsLabel, updateItems } = route.params
+    const { searchTerm, defaultSuggestedItems, defaultSuggestedItemsLabel, updateItems } = this.props
     const { chosenItems, initialItems } = this.state
     const chosenItemIds = chosenItems.map(p => p.id)
     const initialItemIds = initialItems.map(item => item.id)
@@ -190,7 +184,7 @@ export default class ItemChooser extends React.Component {
   clearSearchTerm = () => this.props.setSearchTerm()
 
   renderItemRowComponent = ({ item }) => {
-    const { ItemRowComponent } = this.props.route.params
+    const { ItemRowComponent } = this.props
     const toggleChosen = item.chosen ? this.removeItem : this.addItem
     const chooseItem = () => this.addItem(item)
     const unChooseItem = () => this.removeItem(item)

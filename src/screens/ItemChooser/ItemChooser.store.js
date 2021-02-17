@@ -8,19 +8,19 @@ export const SET_SEARCH_SUGGESTIONS = `${MODULE_NAME}/SET_SEARCH_SUGGESTIONS`
 
 export const getModule = state => state[MODULE_NAME]
 
-export const getScope = (_, props) => props.route.params.screenTitle
+export const getScreenTitle = (_, props) => props.route.params.screenTitle
   ? props.route.params.screenTitle
   : 'defaultItemChooser'
 
 export const getSearchTerm = createSelector(
   getModule,
-  getScope,
+  getScreenTitle,
   (module, scope) => get([scope, 'searchTerm'], module)
 )
 
 export const getSearchSuggestions = createSelector(
   getModule,
-  getScope,
+  getScreenTitle,
   (module, scope) => get([scope, 'searchSuggestions'], module)
 )
 
