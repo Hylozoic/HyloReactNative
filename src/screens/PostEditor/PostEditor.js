@@ -132,7 +132,7 @@ export default class PostEditor extends React.Component {
       startTime: startTime && startTime.getTime(),
       endTime: endTime && endTime.getTime(),
       location: location,
-      locationId: locationObject && locationObject.id
+      locationId: locationObject && locationObject.id !== 'NEW' && locationObject.id
     }
 
     return save(postData)
@@ -320,15 +320,10 @@ export default class PostEditor extends React.Component {
   showLocationPicker = () => {
     LocationPicker({
       navigation: this.props.navigation,      
-      initialSearchTerm: get('location', this.state)
-        || get('locationObject.fullText', this.state),
-      onPick: (locationObject) => {
-        if (locationObject.id == 'NEW') {
-          this.setState(() => ({ location: locationText, locationObject: null }))
-        } else {
-          this.setState(() => ({ location: null, locationObject }))
-        }
-      }
+      initialSearchTerm: get('location', this.state) ||
+        get('locationObject.fullText', this.state),
+      onPick: (locationObject) => this.setState(() =>
+        ({ location: locationObject.fullText, locationObject }))
     })
   }
 
