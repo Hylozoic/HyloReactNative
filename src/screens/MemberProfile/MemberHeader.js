@@ -12,7 +12,8 @@ import PopupMenuButton from 'components/PopupMenuButton'
 import { filter, get, isEmpty } from 'lodash/fp'
 import styles from './MemberHeader.styles'
 import { AXOLOTL_ID } from 'store/models/Person'
-import LocationPicker from 'screens/ItemChooser/LocationPicker'
+import LocationPicker from 'screens/LocationPicker/LocationPicker'
+import Control from 'screens/MemberProfile/Control'
 
 export default function MemberHeader ({
   person,
@@ -29,17 +30,20 @@ export default function MemberHeader ({
 }) {
   if (!person) return null
 
-  const { name, location, tagline } = person
+  const { name, tagline } = person
+  const locationText = get('location', person)
+    || get('locationObject.fullText', person)
   const blockUser = blockUserWithConfirmationFun(props.blockUser, name)
   const isAxolotl = AXOLOTL_ID === get('id', person)
-
   const showLocationPicker = () => {
     LocationPicker({
       navigation,
-      initialSearchTerm: get('location', person)
-        || get('locationObject.fullText', person),
-      // TODO: Properly handle location change (see PostEditor line 202)
-      onPick: updateSetting('location')
+      initialSearchTerm: locationText,
+      onPick: location => {
+        // TODO: Figure-out how to handle locationObject selection from here
+        //       LocationPicker is doing what it should
+        updateSetting('location', location?.fullText)
+      }
     })
   }
 
@@ -51,7 +55,7 @@ export default function MemberHeader ({
           value={name}
           placeholder='Name'
           editable={editable}
-          onChangeText={updateSetting('name')}
+          onChangeText={value => updateSetting('name', value)}
           error={errors.name}
           isMe={isMe}
         />
@@ -64,7 +68,7 @@ export default function MemberHeader ({
       </View>
       <Control
         style={styles.location}
-        value={location}
+        value={locationText}
         placeholder='Location'
         editable={editable}
         onPress={showLocationPicker}
@@ -75,7 +79,7 @@ export default function MemberHeader ({
         value={tagline}
         placeholder='Short Description'
         editable={editable}
-        onChangeText={updateSetting('tagline')}
+        onChangeText={value => updateSetting('tagline', value)}
         isMe={isMe}
       />
     </View>
@@ -95,48 +99,6 @@ export function blockUserWithConfirmationFun (blockUserFun, name) {
         { text: `Block ${name}`, onPress: (blockedUserId) => blockUserFun(blockedUserId) },
         { text: 'Cancel', style: 'cancel' }
       ])
-  }
-}
-
-export class Control extends React.Component {
-  inputRef = React.createRef()
-
-  focus = () => this.inputRef.current && this.inputRef.current.focus()
-
-  render () {
-    const {
-      value, onChangeText, editable = false, style, multiline,
-      hideEditIcon, error, placeholder, isMe, onPress
-    } = this.props
-    return (
-      <View style={[styles.control, editable && styles.editableControl]}>
-        <View style={styles.controlInputRow}>
-          {editable && onPress && (
-            <TouchableOpacity onPress={onPress}>
-              <Text>{value}</Text>
-            </TouchableOpacity>
-          )}
-          {!onPress && (editable || !multiline) && (
-            <TextInput
-                ref={this.inputRef}
-                style={[styles.controlInput, style]}
-                value={value}
-                onChangeText={onChangeText}
-                editable={editable}
-                placeholder={isMe ? placeholder : ''}
-                multiline={multiline}
-                numberOfLines={multiline ? 8 : 1}
-                underlineColorAndroid='transparent'
-              />
-          )}
-          {!onPress || (!editable || multiline) && <Text>{value}</Text>}
-          {editable && !hideEditIcon && <TouchableOpacity onPress={onPress || this.focus} style={styles.editIconWrapper}>
-            <EntypoIcon name='edit' style={styles.editIcon} />
-          </TouchableOpacity>}
-        </View>
-        {!!error && <View style={styles.controlError}><Text style={styles.controlErrorText}>{error}</Text></View>}
-      </View>
-    )
   }
 }
 

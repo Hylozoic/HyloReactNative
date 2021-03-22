@@ -39,35 +39,5 @@ export default {
     fontSize: 16,
     color: rhino80,
     fontFamily: 'Circular-Book'
-  },
-  control: {
-    flex: 1
-  },
-  editableControl: {
-    marginBottom: 5
-  },
-  controlInputRow: {
-    flexDirection: 'row',
-    alignItems: 'center'
-  },
-  controlInput: {
-    textAlignVertical: 'top',
-    flex: 1
-  },
-  editIconWrapper: {
-    marginRight: 10
-  },
-  editIcon: {
-    color: rhino60,
-    fontSize: 16
-  },
-  controlError: {
-    paddingTop: 5,
-    paddingBottom: 3
-  },
-  controlErrorText: {
-    fontSize: 13,
-    fontFamily: 'Circular-Book',
-    color: amaranth
   }
 }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import {
   Text,
   View,
@@ -11,14 +11,14 @@ import { debounce, find, isEmpty, pick } from 'lodash/fp'
 import { validateUser } from 'hylo-utils/validators'
 import Icon from 'components/Icon'
 import Loading from 'components/Loading'
-import MemberHeader, { Control } from '../MemberHeader'
+import MemberHeader from 'screens/MemberProfile/MemberHeader'
+import Control from 'screens/MemberProfile/Control'
 import StarIcon from 'components/StarIcon'
 import styles from './MemberDetails.styles'
 
 export function editableFields (person) {
   return pick(['name', 'location', 'tagline', 'bio'], person)
 }
-
 export default class MemberDetails extends React.Component {
   constructor (props) {
     super(props)
@@ -61,15 +61,7 @@ export default class MemberDetails extends React.Component {
     this.setHeader()
   }
 
-  componentDidUpdate (prevProps, prevState) {
-    if (prevProps.id !== this.props.id) {
-      this.props.fetchPerson()
-    }
-    if (prevProps.person !== this.props.person) {
-      this.setState({
-        person: editableFields(this.props.person)
-      })
-    }
+  componentDidUpdate (prevProps) {
     this.setHeader()
   }
 
@@ -81,27 +73,26 @@ export default class MemberDetails extends React.Component {
   }
 
   validate = debounce(500, () => {
-    this.setState(
-      {
-        errors: {
-          // TODO: validate more fields!
-          name: validateUser.name(this.state.person.name)
-        }
-      })
+    this.setState({
+      errors: {
+        // TODO: validate more fields!
+        name: validateUser.name(this.state.person.name)
+      }
+    })
   })
 
   editProfile = () => {
     this.setState({ editing: true })
   }
 
-  updateSetting = setting => value => {
+  updateSetting = (setting, value) => {
     this.setState({
-        person: {
-          ...this.state.person,
-          [setting]: value
-        },
-        changed: true
-      }, this.validate)
+      person: {
+        ...this.state.person,
+        [setting]: value
+      },
+      changed: true
+    }, this.validate)
   }
 
   saveChanges = async () => {
@@ -152,38 +143,33 @@ export default class MemberDetails extends React.Component {
   }
 }
 
-export class MemberBio extends React.Component {
-  controlRef = React.createRef()
+export function MemberBio (props) {
+  const { person: { bio }, editable, updateSetting, isMe } = props
+  const controlRef = useRef()
+  const focus = () => controlRef.current && controlRef.current.focus()
 
-  focus = () => {
-    this.controlRef.current && this.controlRef.current.focus()
-  }
-
-  render () {
-    const { person: { bio }, editable, updateSetting, isMe } = this.props
-    if (isEmpty(bio) && !editable) return null
-    return (
-      <View style={styles.bioContainer}>
-        <View style={styles.labelWrapper}>
-          <Text style={styles.sectionLabel}>About Me</Text>
-          {editable && <TouchableOpacity onPress={this.focus}>
-            <EntypoIcon name='edit' style={styles.editIcon} />
-          </TouchableOpacity>}
-        </View>
-        <Control
-          ref={this.controlRef}
-          style={styles.bio}
-          value={bio}
-          placeholder='Description'
-          editable={editable}
-          onChangeText={updateSetting('bio')}
-          isMe={isMe}
-          multiline
-          hideEditIcon
-        />
+  if (isEmpty(bio) && !editable) return null
+  return (
+    <View style={styles.bioContainer}>
+      <View style={styles.labelWrapper}>
+        <Text style={styles.sectionLabel}>About Me</Text>
+        {editable && <TouchableOpacity onPress={focus}>
+          <EntypoIcon name='edit' style={styles.editIcon} />
+        </TouchableOpacity>}
       </View>
-    )
-  }
+      <Control
+        ref={controlRef}
+        style={styles.bio}
+        value={bio}
+        placeholder='Description'
+        editable={editable}
+        onChangeText={value => updateSetting('bio', value)}
+        isMe={isMe}
+        multiline
+        hideEditIcon
+      />
+    </View>
+  )
 }
 
 export function MemberSkills ({ skills, editable, goToSkills }) {
