@@ -1,6 +1,6 @@
 // Location Picker
-import { locationSearch } from 'screens/ItemChooser/ItemChooser.store'
-import LocationPickerItemRow from 'screens/ItemChooser/LocationPickerItemRow'
+import { locationSearch } from 'screens/LocationPicker/LocationPicker.store'
+import LocationPickerItemRow from 'screens/LocationPicker/LocationPickerItemRow'
 
 export default function LocationPicker ({
   screenTitle = 'Choose a Location',

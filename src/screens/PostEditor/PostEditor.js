@@ -14,7 +14,7 @@ import { rhino30 } from 'style/colors'
 import { showToast, hideToast } from 'util/toast'
 import { buildModalScreenOptions } from 'navigation/header'
 import { MAX_TITLE_LENGTH } from './PostEditor.store'
-import LocationPicker from 'screens/ItemChooser/LocationPicker'
+import LocationPicker from 'screens/LocationPicker/LocationPicker'
 
 // TODO: Convert all 3 of the below to LocationPicker style calls
 // ProjectMembers Chooser
@@ -90,9 +90,7 @@ export default class PostEditor extends React.Component {
   }
 
   componentDidMount () {
-    const { navigation, isNewPost, pollingFindOrCreateLocation } = this.props
-    // For Location Selector
-    navigation.setParams({ pollingFindOrCreateLocation })
+    const { isNewPost } = this.props
     if (!isNewPost) {
       this.props.fetchPost()
     }
@@ -198,23 +196,6 @@ export default class PostEditor extends React.Component {
       groups: this.state.groups.filter(c => c.id !== groupId)
     }))
   }
-
-  setLocation = locationData => {
-    const pollingFindOrCreateLocation = this.props.route.params.pollingFindOrCreateLocation
-    const isPlainTextResult = (get('id', locationData) === 'NEW')
-
-    if (isPlainTextResult) {
-      this.setState(() => ({ location: locationData.fullText }))
-    } else {
-      this.setState(() => ({ location: null }))
-      pollingFindOrCreateLocation(
-        locationData,
-        locationObject => this.setState(() => ({ locationObject }))
-      )
-    }
-  }
-
-  removeLocation = () => this.setState(state => ({ locationObject: null }))
 
   removeFile = url => {
     this.setState({
@@ -341,7 +322,13 @@ export default class PostEditor extends React.Component {
       navigation: this.props.navigation,      
       initialSearchTerm: get('location', this.state)
         || get('locationObject.fullText', this.state),
-      onPick: this.setLocation
+      onPick: (locationObject) => {
+        if (locationObject.id == 'NEW') {
+          this.setState(() => ({ location: locationText, locationObject: null }))
+        } else {
+          this.setState(() => ({ location: null, locationObject }))
+        }
+      }
     })
   }
 

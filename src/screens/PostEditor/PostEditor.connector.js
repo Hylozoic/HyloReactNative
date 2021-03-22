@@ -8,7 +8,6 @@ import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import getMe from 'store/selectors/getMe'
 import upload from 'store/actions/upload'
 import fetchPost from 'store/actions/fetchPost'
-import { pollingFindOrCreateLocation } from 'store/actions/findOrCreateLocation'
 import { createTopicTag } from 'components/InlineEditor/InlineEditor'
 import {
   createPost,
@@ -87,8 +86,7 @@ export function mapDispatchToProps (dispatch, props) {
         })
     },
     upload: (type, id, file) => dispatch(upload(type, id, file)),
-    fetchPost: () => dispatch(fetchPost(postId)),
-    pollingFindOrCreateLocation: (locationData, callback) => pollingFindOrCreateLocation(dispatch, locationData, callback)
+    fetchPost: () => dispatch(fetchPost(postId))
   }
 }
 

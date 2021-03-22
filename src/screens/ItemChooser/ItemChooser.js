@@ -188,7 +188,7 @@ export default class ItemChooser extends React.Component {
     const toggleChosen = item.chosen ? this.removeItem : this.addItem
     const chooseItem = () => this.addItem(item)
     const unChooseItem = () => this.removeItem(item)
-    const pickItem = () => this.pickItem(item)
+    const pickItem = transformedItem => this.pickItem(transformedItem || item)
 
     return (
       <ItemRowComponent
