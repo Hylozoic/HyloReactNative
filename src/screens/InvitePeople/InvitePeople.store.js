@@ -3,7 +3,7 @@ import orm from 'store/models'
 
 export const MODULE_NAME = 'InvitePeople'
 export const REGENERATE_ACCESS_CODE = `${MODULE_NAME}/REGENERATE_ACCESS_CODE`
-export const FETCH_COMMUNITY_SETTINGS = `${MODULE_NAME}/FETCH_COMMUNITY_SETTINGS`
+export const FETCH_GROUP_SETTINGS = `${MODULE_NAME}/FETCH_GROUP_SETTINGS`
 export const CREATE_INVITATIONS = `${MODULE_NAME}/CREATE_INVITATIONS`
 export const CREATE_INVITATIONS_PENDING = `${MODULE_NAME}/CREATE_INVITATIONS_PENDING`
 
@@ -16,19 +16,19 @@ export const RESEND_INVITATION_PENDING = `${MODULE_NAME}/RESEND_INVITATION_PENDI
 export const REINVITE_ALL = `${MODULE_NAME}/REINVITE_ALL`
 export const REINVITE_ALL_PENDING = `${MODULE_NAME}/REINVITE_ALL_PENDING`
 
-export const ALLOW_COMMUNITY_INVITES = `${MODULE_NAME}/ALLOW_COMMUNITY_INVITES`
+export const ALLOW_GROUP_INVITES = `${MODULE_NAME}/ALLOW_GROUP_INVITES`
 
-export function fetchCommunitySettings (communityId) {
+export function fetchGroupSettings (groupId) {
   return {
-    type: FETCH_COMMUNITY_SETTINGS,
+    type: FETCH_GROUP_SETTINGS,
     graphql: {
-      query: `query ($communityId: ID) {
-        community (id: $communityId) {
+      query: `query ($groupId: ID) {
+        group (id: $groupId) {
           id
           name
           slug
           invitePath
-          allowCommunityInvites
+          allowGroupInvites
           pendingInvitations (first: 100) {
             hasMore
             items {
@@ -41,41 +41,41 @@ export function fetchCommunitySettings (communityId) {
         }
       }`,
       variables: {
-        communityId
+        groupId
       }
     },
     meta: {
-      extractModel: 'Community'
+      extractModel: 'Group'
     }
   }
 }
 
-export function regenerateAccessCode (communityId) {
+export function regenerateAccessCode (groupId) {
   return {
     type: REGENERATE_ACCESS_CODE,
     graphql: {
-      query: `mutation ($communityId: ID) {
-        regenerateAccessCode(communityId: $communityId) {
+      query: `mutation ($groupId: ID) {
+        regenerateAccessCode(groupId: $groupId) {
           id
           invitePath
         }
       }`,
       variables: {
-        communityId
+        groupId
       }
     },
     meta: {
-      extractModel: 'Community'
+      extractModel: 'Group'
     }
   }
 }
 
-export function createInvitations (communityId, emails, message) {
+export function createInvitations (groupId, emails, message) {
   return {
     type: CREATE_INVITATIONS,
     graphql: {
-      query: `mutation ($communityId: ID, $data: InviteInput) {
-        createInvitation(communityId: $communityId, data: $data) {
+      query: `mutation ($groupId: ID, $data: InviteInput) {
+        createInvitation(groupId: $groupId, data: $data) {
           invitations {
             id,
             email,
@@ -86,7 +86,7 @@ export function createInvitations (communityId, emails, message) {
         }
       }`,
       variables: {
-        communityId,
+        groupId,
         data: {
           emails,
           message
@@ -94,28 +94,28 @@ export function createInvitations (communityId, emails, message) {
       }
     },
     meta: {
-      communityId,
+      groupId,
       emails,
       optimistic: true
     }
   }
 }
 
-export function reinviteAll (communityId) {
+export function reinviteAll (groupId) {
   return {
     type: REINVITE_ALL,
     graphql: {
-      query: `mutation ($communityId: ID) {
-        reinviteAll(communityId: $communityId) {
+      query: `mutation ($groupId: ID) {
+        reinviteAll(groupId: $groupId) {
           success
         }
       }`,
       variables: {
-        communityId
+        groupId
       }
     },
     meta: {
-      communityId,
+      groupId,
       optimistic: true
     }
   }
@@ -161,41 +161,40 @@ export function resendInvitation (invitationToken) {
   }
 }
 
-export function allowCommunityInvites (communityId, data) {
+export function allowGroupInvites (groupId, data) {
   return {
-    type: ALLOW_COMMUNITY_INVITES,
+    type: ALLOW_GROUP_INVITES,
     graphql: {
-      query: `mutation ($communityId: ID, $data: Boolean) {
-        allowCommunityInvites(communityId: $communityId, data: $data) {
+      query: `mutation ($groupId: ID, $data: Boolean) {
+        allowGroupInvites(groupId: $groupId, data: $data) {
           id
         }
       }`,
       variables: {
-        communityId,
+        groupId,
         data
       }
     },
     meta: {
-      communityId,
+      groupId,
       optimistic: true
     }
   }
 }
 
-// expects props to be of the form {communityId}
+// expects props to be of the form {groupId}
 export const getPendingInvites = ormCreateSelector(
   orm,
-  state => state.orm,
-  (state, props) => props.communityId,
+  (state, props) => props.groupId,
   ({ Invitation }, id) =>
-    Invitation.filter(i => i.community === id)
+    Invitation.filter(i => i.group === id)
       .orderBy(i => -new Date(i.createdAt))
       .toModelArray()
 )
 
 export function ormSessionReducer (session, { type, meta, payload }) {
-  const { Community, Invitation } = session
-  let community, invite
+  const { Group, Invitation } = session
+  let group, invite
 
   switch (type) {
     case CREATE_INVITATIONS:
@@ -205,7 +204,7 @@ export function ormSessionReducer (session, { type, meta, payload }) {
           id: Math.random().toString().substring(2, 7),
           createdAt: new Date().toString(),
           lastSentAt: new Date().toString(),
-          community: meta.communityId
+          group: meta.groupId
         })
       })
       break
@@ -222,8 +221,8 @@ export function ormSessionReducer (session, { type, meta, payload }) {
       break
 
     case REINVITE_ALL_PENDING:
-      community = Community.withId(meta.communityId)
-      community.pendingInvitations.update({ resent: true, lastSentAt: new Date() })
+      group = Group.withId(meta.groupId)
+      group.pendingInvitations.update({ resent: true, lastSentAt: new Date() })
       break
   }
 }

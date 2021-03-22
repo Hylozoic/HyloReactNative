@@ -15,21 +15,21 @@ export const FETCH_MODERATORS = `${MODULE_NAME}/FETCH_MODERATORS`
 const defaultState = []
 
 export function ormSessionReducer (session, { type, meta, payload }) {
-  const { Community, Person } = session
-  let community, person
+  const { Group, Person } = session
+  let group, person
 
   switch (type) {
     case REMOVE_MODERATOR_PENDING:
-      community = Community.withId(meta.communityId)
-      const moderators = community.moderators.filter(m =>
+      group = Group.withId(meta.groupId)
+      const moderators = group.moderators.filter(m =>
         m.id !== meta.personId)
         .toModelArray()
-      community.update({ moderators })
+      group.update({ moderators })
       break
 
     case ADD_MODERATOR_PENDING:
       person = Person.withId(meta.personId)
-      Community.withId(meta.communityId).updateAppending({ moderators: [person] })
+      Group.withId(meta.groupId).updateAppending({ moderators: [person] })
       break
   }
 }
@@ -40,7 +40,7 @@ export default function reducer (state = defaultState, action) {
 
   switch (type) {
     case FETCH_MODERATOR_SUGGESTIONS:
-      return payload.data.community.members.items.map(m => m.id)
+      return payload.data.group.members.items.map(m => m.id)
     case CLEAR_MODERATOR_SUGGESTIONS:
       return []
     default:
@@ -53,7 +53,7 @@ export function fetchModerators (slug) {
     type: FETCH_MODERATORS,
     graphql: {
       query: `query ($slug: String) {
-        community (slug: $slug) {
+        group (slug: $slug) {
           id
           name
           slug
@@ -72,7 +72,7 @@ export function fetchModerators (slug) {
       }
     },
     meta: {
-      extractModel: 'Community'
+      extractModel: 'Group'
     }
   }
 }
@@ -82,7 +82,7 @@ export function fetchModeratorSuggestions (id, autocomplete) {
     type: FETCH_MODERATOR_SUGGESTIONS,
     graphql: {
       query: `query ($id: ID, $autocomplete: String) {
-        community (id: $id) {
+        group (id: $id) {
           id
           members (first: 10, autocomplete: $autocomplete) {
             hasMore
@@ -99,7 +99,7 @@ export function fetchModeratorSuggestions (id, autocomplete) {
       }
     },
     meta: {
-      extractModel: 'Community'
+      extractModel: 'Group'
     }
   }
 }
@@ -110,12 +110,12 @@ export function clearModeratorSuggestions () {
   }
 }
 
-export function addModerator (personId, communityId) {
+export function addModerator (personId, groupId) {
   return {
     type: ADD_MODERATOR,
     graphql: {
-      query: `mutation ($personId: ID, $communityId: ID) {
-        addModerator(personId: $personId, communityId: $communityId) {
+      query: `mutation ($personId: ID, $groupId: ID) {
+        addModerator(personId: $personId, groupId: $groupId) {
           id
           moderators (first: 100) {
             items {
@@ -126,22 +126,22 @@ export function addModerator (personId, communityId) {
           }
         }
       }`,
-      variables: { personId, communityId }
+      variables: { personId, groupId }
     },
     meta: {
       personId,
-      communityId,
+      groupId,
       optimistic: true
     }
   }
 }
 
-export function removeModerator (personId, communityId, isRemoveFromCommunity) {
+export function removeModerator (personId, groupId, isRemoveFromGroup) {
   return {
     type: REMOVE_MODERATOR,
     graphql: {
-      query: `mutation ($personId: ID, $communityId: ID, $isRemoveFromCommunity: Boolean) {
-        removeModerator(personId: $personId, communityId: $communityId, isRemoveFromCommunity: $isRemoveFromCommunity) {
+      query: `mutation ($personId: ID, $groupId: ID, $isRemoveFromGroup: Boolean) {
+        removeModerator(personId: $personId, groupId: $groupId, isRemoveFromGroup: $isRemoveFromGroup) {
           id
           moderators (first: 100) {
             items {
@@ -152,25 +152,24 @@ export function removeModerator (personId, communityId, isRemoveFromCommunity) {
           }
         }
       }`,
-      variables: { personId, communityId, isRemoveFromCommunity }
+      variables: { personId, groupId, isRemoveFromGroup }
     },
     meta: {
       personId,
-      communityId,
-      isRemoveFromCommunity,
+      groupId,
+      isRemoveFromGroup,
       optimistic: true
     }
   }
 }
 
-// expects props to be of the form {communityId}
+// expects props to be of the form {groupId}
 export const getModerators = ormCreateSelector(
   orm,
-  state => state.orm,
-  (state, props) => props.communityId,
-  ({ Community }, id) => {
-    const community = Community.safeGet({ id })
-    if (!community) return []
-    return community.moderators.toModelArray()
+  (state, props) => props.groupId,
+  ({ Group }, id) => {
+    const group = Group.safeGet({ id })
+    if (!group) return []
+    return group.moderators.toModelArray()
   }
 )

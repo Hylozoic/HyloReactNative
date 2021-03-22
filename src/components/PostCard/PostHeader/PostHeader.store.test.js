@@ -6,10 +6,10 @@ import {
 import orm from 'store/models'
 
 describe('ormSessionReducer', () => {
-  let session, community
+  let session, group
   beforeEach(() => {
     session = orm.session(orm.getEmptyState())
-    community = session.Community.create({ id: 20, slug: 'postheadertest' })
+    group = session.Group.create({ id: 20, slug: 'postheadertest' })
   })
 
   it('handles DELETE_POST', () => {
@@ -22,13 +22,13 @@ describe('ormSessionReducer', () => {
       }
     }
 
-    expect(session.Post.hasId('1')).toBeTruthy()
+    expect(session.Post.idExists('1')).toBeTruthy()
     ormSessionReducer(session, action)
-    expect(session.Post.hasId('1')).toBeFalsy()
+    expect(session.Post.idExists('1')).toBeFalsy()
   })
 
   it('handles REMOVE_POST', () => {
-    session.Post.create({ id: '11', communities: [community] })
+    session.Post.create({ id: '11', groups: [group] })
 
     const action = {
       type: REMOVE_POST_PENDING,
@@ -38,8 +38,8 @@ describe('ormSessionReducer', () => {
       }
     }
 
-    expect(session.Post.withId(11).communities.toRefArray()).toHaveLength(1)
+    expect(session.Post.withId(11).groups.toRefArray()).toHaveLength(1)
     ormSessionReducer(session, action)
-    expect(session.Post.withId(11).communities.toRefArray()).toHaveLength(0)
+    expect(session.Post.withId(11).groups.toRefArray()).toHaveLength(0)
   })
 })

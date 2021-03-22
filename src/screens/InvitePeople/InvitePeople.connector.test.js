@@ -4,15 +4,15 @@ import orm from 'store/models'
 let state
 beforeAll(() => {
   const session = orm.session(orm.getEmptyState())
-  const community = session.Community.create({ id: '99', slug: 'foo', inviteLink: '/38adslkjlkj3' })
-  session.Community.create({ id: '88', slug: 'bar', inviteLink: '/dfaseadfd' })
-  session.Invitation.create({ id: '33', email: 'john@doe.com', community: community.id })
+  const group = session.Group.create({ id: '99', slug: 'foo', inviteLink: '/38adslkjlkj3' })
+  session.Group.create({ id: '88', slug: 'bar', inviteLink: '/dfaseadfd' })
+  session.Invitation.create({ id: '33', email: 'john@doe.com', group: group.id })
 
   session.Me.create({
     id: '1',
     memberships: [session.Membership.create({
       id: '345',
-      community: community.id,
+      group: group.id,
       hasModeratorRole: true
     })]
   })
@@ -41,13 +41,13 @@ describe('mergeProps', () => {
     const stateProps = mapStateToProps(state, { route: { params: { id: 1 } } })
     const dispatchProps = mapDispatchToProps(dispatch, stateProps)
     const mergedProps = mergeProps(stateProps, dispatchProps, ownProps)
-    expect(mergedProps.fetchCommunitySettings()).toMatchSnapshot()
+    expect(mergedProps.fetchGroupSettings()).toMatchSnapshot()
     expect(mergedProps.regenerateAccessCode()).toMatchSnapshot()
     expect(mergedProps.createInvitations(['john@doe.com'], 'MyMessage')).toMatchSnapshot()
     expect(mergedProps.reinviteAll()).toMatchSnapshot()
     expect(mergedProps.expireInvitation(10)).toMatchSnapshot()
     expect(mergedProps.resendInvitation(10)).toMatchSnapshot()
-    expect(mergedProps.allowCommunityInvites(1, true)).toMatchSnapshot()
+    expect(mergedProps.allowGroupInvites(1, true)).toMatchSnapshot()
     expect(mergedProps).toMatchSnapshot()
   })
 })

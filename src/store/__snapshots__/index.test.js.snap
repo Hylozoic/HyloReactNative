@@ -3,7 +3,7 @@
 exports[`getEmptyState matches last snapshot 1`] = `
 Object {
   "CommentEditor": Object {},
-  "CreateCommunityFlow": Object {},
+  "CreateGroupFlow": Object {},
   "FeedList": Object {
     "filter": null,
     "sortBy": "updated",
@@ -51,212 +51,333 @@ Object {
   },
   "mixpanel": null,
   "orm": Object {
+    "@@_______REDUX_ORM_STATE_FLAG": true,
     "Activity": Object {
+      "indexes": Object {
+        "actor": Object {},
+        "comment": Object {},
+        "group": Object {},
+        "post": Object {},
+      },
       "items": Array [],
       "itemsById": Object {},
       "meta": Object {},
     },
     "Attachment": Object {
+      "indexes": Object {
+        "comment": Object {},
+        "post": Object {},
+      },
       "items": Array [],
       "itemsById": Object {},
       "meta": Object {},
     },
     "Comment": Object {
+      "indexes": Object {
+        "creator": Object {},
+        "post": Object {},
+      },
       "items": Array [],
       "itemsById": Object {},
       "meta": Object {},
     },
-    "Community": Object {
+    "Group": Object {
+      "indexes": Object {
+        "locationId": Object {},
+      },
       "items": Array [],
       "itemsById": Object {},
       "meta": Object {},
     },
-    "CommunityMembers": Object {
+    "GroupConnection": Object {
+      "indexes": Object {
+        "childGroup": Object {},
+        "parentGroup": Object {},
+      },
       "items": Array [],
       "itemsById": Object {},
       "meta": Object {},
     },
-    "CommunityModerator": Object {
+    "GroupMembers": Object {
+      "indexes": Object {
+        "fromGroupId": Object {},
+        "toPersonId": Object {},
+      },
       "items": Array [],
       "itemsById": Object {},
       "meta": Object {},
     },
-    "CommunityPosts": Object {
+    "GroupModerator": Object {
+      "indexes": Object {
+        "group": Object {},
+        "moderator": Object {},
+      },
       "items": Array [],
       "itemsById": Object {},
       "meta": Object {},
     },
-    "CommunityTopic": Object {
+    "GroupPosts": Object {
+      "indexes": Object {
+        "fromGroupId": Object {},
+        "toPostId": Object {},
+      },
+      "items": Array [],
+      "itemsById": Object {},
+      "meta": Object {},
+    },
+    "GroupTopic": Object {
+      "indexes": Object {
+        "group": Object {},
+        "topic": Object {},
+      },
       "items": Array [],
       "itemsById": Object {},
       "meta": Object {},
     },
     "Invitation": Object {
+      "indexes": Object {
+        "group": Object {},
+      },
       "items": Array [],
       "itemsById": Object {},
       "meta": Object {},
     },
     "Location": Object {
+      "indexes": Object {},
       "items": Array [],
       "itemsById": Object {},
       "meta": Object {},
     },
     "Me": Object {
+      "indexes": Object {
+        "locationId": Object {},
+      },
       "items": Array [],
       "itemsById": Object {},
       "meta": Object {},
     },
     "MeBlockedUsers": Object {
+      "indexes": Object {
+        "fromMeId": Object {},
+        "toPersonId": Object {},
+      },
       "items": Array [],
       "itemsById": Object {},
       "meta": Object {},
     },
     "MeMemberships": Object {
+      "indexes": Object {
+        "fromMeId": Object {},
+        "toMembershipId": Object {},
+      },
       "items": Array [],
       "itemsById": Object {},
       "meta": Object {},
     },
     "MeMessageThreads": Object {
+      "indexes": Object {
+        "fromMeId": Object {},
+        "toMessageThreadId": Object {},
+      },
       "items": Array [],
       "itemsById": Object {},
       "meta": Object {},
     },
     "MeNotifications": Object {
+      "indexes": Object {
+        "fromMeId": Object {},
+        "toNotificationId": Object {},
+      },
       "items": Array [],
       "itemsById": Object {},
       "meta": Object {},
     },
     "MePosts": Object {
+      "indexes": Object {
+        "fromMeId": Object {},
+        "toPostId": Object {},
+      },
       "items": Array [],
       "itemsById": Object {},
       "meta": Object {},
     },
     "MeSkills": Object {
+      "indexes": Object {
+        "fromMeId": Object {},
+        "toSkillId": Object {},
+      },
       "items": Array [],
       "itemsById": Object {},
       "meta": Object {},
     },
     "Membership": Object {
+      "indexes": Object {
+        "group": Object {},
+      },
       "items": Array [],
       "itemsById": Object {},
       "meta": Object {},
     },
     "Message": Object {
+      "indexes": Object {
+        "creator": Object {},
+        "messageThread": Object {},
+      },
       "items": Array [],
       "itemsById": Object {},
       "meta": Object {},
     },
     "MessageThread": Object {
+      "indexes": Object {},
       "items": Array [],
       "itemsById": Object {},
       "meta": Object {},
     },
     "MessageThreadParticipants": Object {
-      "items": Array [],
-      "itemsById": Object {},
-      "meta": Object {},
-    },
-    "Network": Object {
-      "items": Array [],
-      "itemsById": Object {},
-      "meta": Object {},
-    },
-    "NetworkCommunities": Object {
-      "items": Array [],
-      "itemsById": Object {},
-      "meta": Object {},
-    },
-    "NetworkMembers": Object {
-      "items": Array [],
-      "itemsById": Object {},
-      "meta": Object {},
-    },
-    "NetworkPosts": Object {
+      "indexes": Object {
+        "fromMessageThreadId": Object {},
+        "toPersonId": Object {},
+      },
       "items": Array [],
       "itemsById": Object {},
       "meta": Object {},
     },
     "Notification": Object {
+      "indexes": Object {
+        "activity": Object {},
+      },
       "items": Array [],
       "itemsById": Object {},
       "meta": Object {},
     },
     "Person": Object {
+      "indexes": Object {
+        "locationId": Object {},
+      },
       "items": Array [],
       "itemsById": Object {},
       "meta": Object {},
     },
     "PersonConnection": Object {
+      "indexes": Object {
+        "person": Object {},
+      },
       "items": Array [],
       "itemsById": Object {},
       "meta": Object {},
     },
     "PersonMemberships": Object {
+      "indexes": Object {
+        "fromPersonId": Object {},
+        "toMembershipId": Object {},
+      },
       "items": Array [],
       "itemsById": Object {},
       "meta": Object {},
     },
     "PersonSkills": Object {
+      "indexes": Object {
+        "fromPersonId": Object {},
+        "toSkillId": Object {},
+      },
       "items": Array [],
       "itemsById": Object {},
       "meta": Object {},
     },
     "Post": Object {
+      "indexes": Object {
+        "creator": Object {},
+        "locationId": Object {},
+      },
       "items": Array [],
       "itemsById": Object {},
       "meta": Object {},
     },
     "PostCommenter": Object {
-      "items": Array [],
-      "itemsById": Object {},
-      "meta": Object {},
-    },
-    "PostCommunities": Object {
+      "indexes": Object {
+        "commenter": Object {},
+        "post": Object {},
+      },
       "items": Array [],
       "itemsById": Object {},
       "meta": Object {},
     },
     "PostFollower": Object {
+      "indexes": Object {
+        "follower": Object {},
+        "post": Object {},
+      },
+      "items": Array [],
+      "itemsById": Object {},
+      "meta": Object {},
+    },
+    "PostGroups": Object {
+      "indexes": Object {
+        "fromPostId": Object {},
+        "toGroupId": Object {},
+      },
       "items": Array [],
       "itemsById": Object {},
       "meta": Object {},
     },
     "PostMembership": Object {
+      "indexes": Object {
+        "group": Object {},
+      },
       "items": Array [],
       "itemsById": Object {},
       "meta": Object {},
     },
     "PostPostMemberships": Object {
+      "indexes": Object {
+        "fromPostId": Object {},
+        "toPostMembershipId": Object {},
+      },
       "items": Array [],
       "itemsById": Object {},
       "meta": Object {},
     },
     "PostTopics": Object {
+      "indexes": Object {
+        "fromPostId": Object {},
+        "toTopicId": Object {},
+      },
       "items": Array [],
       "itemsById": Object {},
       "meta": Object {},
     },
     "ProjectMember": Object {
+      "indexes": Object {
+        "member": Object {},
+        "post": Object {},
+      },
       "items": Array [],
       "itemsById": Object {},
       "meta": Object {},
     },
     "SearchResult": Object {
+      "indexes": Object {},
       "items": Array [],
       "itemsById": Object {},
       "meta": Object {},
     },
     "Skill": Object {
+      "indexes": Object {},
       "items": Array [],
       "itemsById": Object {},
       "meta": Object {},
     },
     "Topic": Object {
+      "indexes": Object {},
       "items": Array [],
       "itemsById": Object {},
       "meta": Object {},
     },
     "Vote": Object {
+      "indexes": Object {
+        "post": Object {},
+        "voter": Object {},
+      },
       "items": Array [],
       "itemsById": Object {},
       "meta": Object {},
@@ -265,8 +386,7 @@ Object {
   "pending": Object {},
   "queryResults": Object {},
   "session": Object {
-    "communityId": null,
-    "networkId": null,
+    "groupId": null,
     "returnToPath": null,
     "signupInProgress": null,
   },

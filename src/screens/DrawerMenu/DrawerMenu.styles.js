@@ -132,7 +132,7 @@ export default {
     paddingTop: 5,
     paddingBottom: 3
   },
-  communityRow: {
+  groupRow: {
     marginLeft: 10,
     paddingVertical: 10
   },
@@ -140,13 +140,13 @@ export default {
     marginLeft: 5,
     marginRight: 11
   },
-  communityAvatar: {
+  groupAvatar: {
     height: 21,
     width: 21,
     marginRight: 8,
     borderRadius: 4
   },
-  communityRowText: {
+  groupRowText: {
     fontFamily: 'Circular-Book',
     color: rhino40,
     flex: 1,
@@ -171,7 +171,7 @@ export default {
     color: 'white',
     fontSize: 12
   },
-  createCommunityButton: {
+  createGroupButton: {
     backgroundColor: black10onRhino,
     paddingTop: 15,
     paddingBottom: 15,

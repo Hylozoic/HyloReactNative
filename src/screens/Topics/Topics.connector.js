@@ -1,20 +1,18 @@
 import { connect } from 'react-redux'
-import getCurrentCommunity from 'store/selectors/getCurrentCommunity'
-import getCurrentNetwork from 'store/selectors/getCurrentNetwork'
-import selectCommunity from 'store/actions/selectCommunity'
-import fetchCommunityTopics, { FETCH_COMMUNITY_TOPICS } from 'store/actions/fetchCommunityTopics'
+import getCurrentGroup from 'store/selectors/getCurrentGroup'
+import selectGroup from 'store/actions/selectGroup'
+import fetchGroupTopics, { FETCH_GROUP_TOPICS } from 'store/actions/fetchGroupTopics'
 import {
-  getCommunityTopics, presentCommunityTopic, setTopicSubscribe, getTerm, setTerm
+  getGroupTopics, presentGroupTopic, setTopicSubscribe, getTerm, setTerm
 } from './Topics.store'
 import { get } from 'lodash/fp'
 
 export function mapStateToProps (state, props) {
   const searchTerm = getTerm(state)
-  const network = getCurrentNetwork(state, props)
-  const community = !network && getCurrentCommunity(state, props)
-  const pending = state.pending[FETCH_COMMUNITY_TOPICS]
+  const group = getCurrentGroup(state, props)
+  const pending = state.pending[FETCH_GROUP_TOPICS]
   const queryResultParams = {
-    id: get('id', community),
+    id: get('id', group),
     autocomplete: ''
   }
   const topicFilter = ct => ct.topic.name.toLowerCase().indexOf(searchTerm?.toLowerCase()) > -1
@@ -23,45 +21,44 @@ export function mapStateToProps (state, props) {
     if (!a.isSubscribed && b.isSubscribed) return 1
     return a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1
   }
-  const allTopics = getCommunityTopics(state, queryResultParams)
-  const communityHasTopics = allTopics.length > 0
+  const allTopics = getGroupTopics(state, queryResultParams)
+  const groupHasTopics = allTopics.length > 0
   const filteredTopics = allTopics
     .filter(topicFilter)
-    .map(presentCommunityTopic)
+    .map(presentGroupTopic)
     .sort(topicSort)
 
   return {
     pending,
-    community,
-    communityHasTopics,
+    group,
+    groupHasTopics,
     filteredTopics,
-    network,
     searchTerm
   }
 }
 
 export const mapDispatchToProps = {
-  fetchCommunityTopics,
+  fetchGroupTopics,
   setTopicSubscribe,
   setTerm,
-  selectCommunity
+  selectGroup
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
-  const { community } = stateProps
+  const { group } = stateProps
   const { navigation } = ownProps
-  const communityId = community?.id
-  const fetchCommunityTopics = () =>
-    dispatchProps.fetchCommunityTopics(communityId, { first: null })
+  const groupId = group?.id
+  const fetchGroupTopics = () =>
+    dispatchProps.fetchGroupTopics(groupId, { first: null })
   const setTopicSubscribe = (topicId, isSubscribing) =>
-    dispatchProps.setTopicSubscribe(topicId, communityId, isSubscribing)
+    dispatchProps.setTopicSubscribe(topicId, groupId, isSubscribing)
   const goToTopic = topicName => navigation.navigate('Topic Feed', { topicName })
 
   return {
     ...ownProps,
     ...stateProps,
     ...dispatchProps,
-    fetchCommunityTopics,
+    fetchGroupTopics,
     setTopicSubscribe,
     goToTopic
   }

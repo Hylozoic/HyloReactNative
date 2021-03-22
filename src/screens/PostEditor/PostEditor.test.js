@@ -34,8 +34,8 @@ jest.mock('react-native-image-picker')
 
 const mockPost = {
   details: 'myDetails',
-  communities: [
-    { id: 1, name: 'Community 1' }
+  groups: [
+    { id: 1, name: 'Group 1' }
   ]
 }
 

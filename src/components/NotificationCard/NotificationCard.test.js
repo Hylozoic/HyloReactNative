@@ -74,7 +74,7 @@ describe('NotificationCard', () => {
     const notification = {
       ...notificationBase,
       body: 'requested to join',
-      community: 'Hydroponic Gardening',
+      group: 'Hydroponic Gardening',
       header: 'New join request',
       nameInHeader: true,
       onPress: () => navigate('Settings')
@@ -88,9 +88,9 @@ describe('NotificationCard', () => {
     const notification = {
       ...notificationBase,
       body: 'approved your request to join',
-      community: 'Hydroponic Gardening',
+      group: 'Hydroponic Gardening',
       header: 'Join Request Approved',
-      onPress: () => navigate('Feed', { communityId: '2' })
+      onPress: () => navigate('Feed', { groupId: '2' })
     }
     const renderer = new ReactShallowRenderer()
     renderer.render(<NotificationCard notification={notification} />)

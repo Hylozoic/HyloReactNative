@@ -18,7 +18,7 @@ const post = {
     id: '77',
     name: 'Houdini'
   },
-  communities: [{ slug: 'foom' }],
+  groups: [{ slug: 'foom' }],
   createdAt: '2017-05-19T23:24:58Z',
   imageUrls: ['foom.png'],
   title: 'Hi',
@@ -52,7 +52,7 @@ const props = {
   showMember: jest.fn(),
   showTopic: jest.fn(),
   createComment: jest.fn(() => Promise.resolve({ success: true })),
-  goToCommunity: jest.fn(),
+  goToGroup: jest.fn(),
   navigation: {
     setOptions: jest.fn(),
     setParams: jest.fn(),

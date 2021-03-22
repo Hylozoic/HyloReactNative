@@ -9,16 +9,15 @@ import { isUndefined } from 'lodash'
 import Button from 'components/Button'
 import { bannerlinearGradientColors } from 'style/colors'
 import Loading from 'components/Loading'
-import CreateCommunityNotice from 'components/CreateCommunityNotice'
+import CreateGroupNotice from 'components/CreateGroupNotice'
 import FeedList from 'components/FeedList'
 import SocketSubscriber from 'components/SocketSubscriber'
 import styles from './Feed.styles'
-import { ALL_COMMUNITIES_ID } from 'store/models/Network'
 
-export function setHeaderTitle (navigation, topicName, community, isProjectFeed) {
+export function setHeaderTitle (navigation, topicName, group, isProjectFeed) {
   let headerTitle 
   headerTitle = topicName
-    ? community?.name
+    ? group?.name
     : 'Home'
   headerTitle = isProjectFeed
     ? 'Projects'
@@ -27,8 +26,7 @@ export function setHeaderTitle (navigation, topicName, community, isProjectFeed)
 }
 
 export default function Feed ({
-  community,
-  network,
+  group,
   currentUser,
   route,
   navigation,
@@ -38,28 +36,26 @@ export default function Feed ({
   topicSubscribed,
   topicPostsTotal,
   topicFollowersTotal,
-  goToCreateCommunity,
+  goToCreateGroup,
   currentUserHasMemberships,
-  goToCommunity,
+  goToGroup,
   setTopicSubscribe,
   showTopic,
   newPost,
   newProject,
-  fetchCommunityTopic,
-  selectCommunity,
-  selectNetwork
+  fetchGroupTopic,
+  selectGroup
 }) {
   const isProjectFeed = route?.params?.isProjectFeed
   const ref = useRef(null)
 
   useScrollToTop(ref)
-  // TODO: selectCommunity should probably be moved back into goToCommunity function
-  useEffect(() => { community?.id && selectCommunity(community.id) }, [community?.id])
-  useEffect(() => { network?.id && selectNetwork(network.id) }, [network?.id])
-  useEffect(() => { fetchCommunityTopic() }, [fetchCommunityTopic, topicName])
-  useEffect(() => { setHeaderTitle(navigation, topicName, community, isProjectFeed) }, [
+  // TODO: selectGroup should probably be moved back into goToGroup function
+  useEffect(() => { group?.id && selectGroup(group.id) }, [group?.id])
+  useEffect(() => { fetchGroupTopic() }, [fetchGroupTopic, topicName])
+  useEffect(() => { setHeaderTitle(navigation, topicName, group, isProjectFeed) }, [
     topicName,
-    community?.id, 
+    group?.id, 
     isProjectFeed
   ])
 
@@ -67,34 +63,24 @@ export default function Feed ({
 
   if (!currentUserHasMemberships) {
     return (
-      <CreateCommunityNotice
-        goToCreateCommunity={goToCreateCommunity}
-        text='No posts here, try creating your own Community!'
+      <CreateGroupNotice
+        goToCreateGroup={goToCreateGroup}
+        text='No posts here, try creating your own Group!'
       />
     )
   }
 
-  const all = network?.id === ALL_COMMUNITIES_ID
+  if (!group) return null
 
-  // From FeedBanner
-  let bannerUrl, name, image
-  if (network) {
-    ({ bannerUrl, name } = network)
-    if (bannerUrl) image = { uri: bannerUrl }
-  } else if (community) {
-    ({ bannerUrl, name } = community)
-    if (bannerUrl) image = { uri: bannerUrl }
-  } else {
-    return null
-  }
-
-  if (topicName) {
-    name = '#' + topicName
-  }
-
+  const name = topicName
+    ? '#' + topicName
+    : group.name
+  const image = group.bannerUrl
+    ? { uri: group.bannerUrl }
+    : null
   const pluralFollowers = (topicFollowersTotal !== 1)
   const pluralPosts = (topicPostsTotal !== 1)
-  const showPostPrompt = !isProjectFeed && !all && !topicName
+  const showPostPrompt = !isProjectFeed && !topicName
   const feedListHeader = (
     <View style={[styles.bannerContainer, showPostPrompt ? styles.bannerContainerWithPostPrompt : {}]}>
       <Image source={image} style={styles.image} />
@@ -119,8 +105,8 @@ export default function Feed ({
       {!isUndefined(topicSubscribed) && (
         <SubscribeButton active={topicSubscribed} onPress={setTopicSubscribe} />
       )}
-      {!network?.id && isProjectFeed && (
-        <CreateProjectButton createProject={() => newProject(community?.id)} />
+      {isProjectFeed && (
+        <CreateProjectButton createProject={() => newProject(group?.id)} />
       )}
       {showPostPrompt && <PostPrompt currentUser={currentUser} newPost={newPost} />}
       {!!currentUser && showPostPrompt && <View style={styles.promptShadow} />}
@@ -130,10 +116,9 @@ export default function Feed ({
   return <>
     <FeedList
       scrollRef={ref}
-      community={community}
-      network={network}
+      group={group}
       showPost={showPost}
-      goToCommunity={goToCommunity}
+      goToGroup={goToGroup}
       header={feedListHeader}
       route={route}
       navigation={navigation}
@@ -142,8 +127,8 @@ export default function Feed ({
       topicName={topicName}
       isProjectFeed={isProjectFeed}
     />
-    {!topicName && community && (
-      <SocketSubscriber type='community' id={community.id} />
+    {!topicName && group && (
+      <SocketSubscriber type='group' id={group.id} />
     )}
   </>
 }

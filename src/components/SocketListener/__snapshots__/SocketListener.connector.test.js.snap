@@ -4,7 +4,7 @@ exports[`returns the expected value 1`] = `
 Object {
   "addUserTyping": [Function],
   "clearUserTyping": [Function],
-  "community": SessionBoundModel {
+  "group": SessionBoundModel {
     "_fields": Object {
       "id": "7",
     },

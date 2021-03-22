@@ -5,7 +5,7 @@ Object {
   "fetchMemberComments": [Function],
   "fetchMemberPosts": [Function],
   "fetchMemberUpvotes": [Function],
-  "goToCommunity": [Function],
+  "goToGroup": [Function],
   "setChoice": [Function],
   "showPost": [Function],
   "showTopic": [Function],

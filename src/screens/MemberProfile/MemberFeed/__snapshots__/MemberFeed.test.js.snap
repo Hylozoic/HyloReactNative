@@ -30,7 +30,7 @@ exports[`ContentRow shows a PostCard when itemType is post 1`] = `
           "id": 2,
         }
       }
-      shouldShowCommunities={true}
+      shouldShowGroups={true}
     />
   </View>
 </ForwardRef>

@@ -1,5 +1,25 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`creates a polymorphicChildId when __typename field is present 1`] = `
+Array [
+  Object {
+    "modelName": "Post",
+    "payload": Object {
+      "__typename": "Post",
+      "id": "2",
+      "title": "Hey",
+    },
+  },
+  Object {
+    "modelName": "SearchResult",
+    "payload": Object {
+      "content": "Post-2",
+      "id": "1",
+    },
+  },
+]
+`;
+
 exports[`handles null children 1`] = `
 Array [
   Object {
@@ -16,7 +36,7 @@ Array [
 exports[`produces a flat list from a "nested-totals-style" response 1`] = `
 Array [
   Object {
-    "modelName": "Community",
+    "modelName": "Group",
     "payload": Object {
       "avatarUrl": "http://foo.com/avatar.png",
       "bannerUrl": "http://foo.com/banner.png",
@@ -33,7 +53,7 @@ Array [
   Object {
     "modelName": "Post",
     "payload": Object {
-      "communities": Array [
+      "groups": Array [
         "1",
       ],
       "id": "2",
@@ -43,7 +63,7 @@ Array [
   Object {
     "modelName": "Post",
     "payload": Object {
-      "communities": Array [
+      "groups": Array [
         "1",
       ],
       "id": "3",
@@ -73,7 +93,7 @@ Array [
     },
   },
   Object {
-    "modelName": "Community",
+    "modelName": "Group",
     "payload": Object {
       "id": "1836",
       "members": Array [
@@ -96,10 +116,6 @@ Array [
     "modelName": "Post",
     "payload": Object {
       "commentsTotal": "1",
-      "communities": Array [
-        "1836",
-      ],
-      "communitiesTotal": "1",
       "createdAt": "Sat Mar 18 2017 10:48:43 GMT+1300 (NZDT)",
       "creator": "46816",
       "details": "<p><a href=\\"https://wombat.life\\">https://wombat.life</a></p>
@@ -111,6 +127,10 @@ Array [
       ],
       "followersTotal": "1",
       "fulfilledAt": null,
+      "groups": Array [
+        "1836",
+      ],
+      "groupsTotal": "1",
       "id": "30002",
       "startsAt": null,
       "title": "Hello",
@@ -131,10 +151,6 @@ Array [
     "modelName": "Post",
     "payload": Object {
       "commentsTotal": "1",
-      "communities": Array [
-        "1836",
-      ],
-      "communitiesTotal": "1",
       "createdAt": "Sat Mar 18 2017 10:49:43 GMT+1300 (NZDT)",
       "creator": "46816",
       "details": "<p>So true.</p>",
@@ -144,6 +160,10 @@ Array [
       ],
       "followersTotal": "1",
       "fulfilledAt": null,
+      "groups": Array [
+        "1836",
+      ],
+      "groupsTotal": "1",
       "id": "30003",
       "startsAt": null,
       "title": "Yup",

@@ -6,8 +6,8 @@ import extractModelsFromAction from '../ModelExtractor/extractModelsFromAction'
 import clearCacheFor from './clearCacheFor'
 import { isPromise } from 'util/index'
 import {
-  UPDATE_COMMUNITY_SETTINGS_PENDING
-} from 'screens/CommunitySettings/CommunitySettings.store'
+  UPDATE_GROUP_SETTINGS_PENDING
+} from 'screens/GroupSettings/GroupSettings.store'
 import {
   UPDATE_USER_SETTINGS_PENDING
 } from 'store/actions/updateUserSettings'
@@ -31,7 +31,7 @@ import {
 } from 'components/PostCard/PostFooter/PostFooter.store'
 import {
   USE_INVITATION
-} from 'screens/JoinCommunity/JoinCommunity.store'
+} from 'screens/JoinGroup/JoinGroup.store'
 import {
   DELETE_COMMENT_PENDING
 } from 'components/Comment/Comment.store'
@@ -39,8 +39,8 @@ import {
   UPDATE_LAST_VIEWED_PENDING
 } from 'screens/ThreadList/ThreadList.store'
 import {
-  CREATE_COMMUNITY
-} from 'screens/CreateCommunityFlow/CreateCommunityFlow.store'
+  CREATE_GROUP
+} from 'screens/CreateGroupFlow/CreateGroupFlow.store'
 import {
   UPDATE_MEMBERSHIP_SETTINGS_PENDING, UPDATE_ALL_MEMBERSHIP_SETTINGS_PENDING
 } from 'screens/NotificationSettings/NotificationSettings.store'
@@ -104,14 +104,14 @@ export default function ormReducer (state = {}, action) {
     }
 
     case MARK_ACTIVITY_READ: {
-      if (session.Activity.hasId(meta.id)) {
+      if (session.Activity.idExists(meta.id)) {
         session.Activity.withId(meta.id).update({ unread: false })
       }
       break
     }
 
     case MARK_ALL_ACTIVITIES_READ: {
-      session.Activity.all().update({ unread: false })
+      session?.Activity.all().update({ unread: false })
       break
     }
 
@@ -151,25 +151,25 @@ export default function ormReducer (state = {}, action) {
         }
       }
       me.update(changes)
-      if (session.Person.hasId(me.id)) {
+      if (session.Person.idExists(me.id)) {
         session.Person.withId(me.id).update(changes)
       }
       break
     }
 
-    case UPDATE_COMMUNITY_SETTINGS_PENDING: {
-      const community = session.Community.withId(meta.id)
-      community.update(meta.changes)
-      const membership = session.Membership.safeGet({ community: meta.id }).update({ forceUpdate: new Date() })
+    case UPDATE_GROUP_SETTINGS_PENDING: {
+      const group = session.Group.withId(meta.id)
+      group.update(meta.changes)
+      const membership = session.Membership.safeGet({ group: meta.id }).update({ forceUpdate: new Date() })
       break
     }
 
     case SET_TOPIC_SUBSCRIBE_PENDING: {
-      const communityTopic = session.CommunityTopic.get({
-        topic: meta.topicId, community: meta.communityId
+      const groupTopic = session.GroupTopic.get({
+        topic: meta.topicId, group: meta.groupId
       })
-      communityTopic.update({
-        followersTotal: communityTopic.followersTotal + (meta.isSubscribing ? 1 : -1),
+      groupTopic.update({
+        followersTotal: groupTopic.followersTotal + (meta.isSubscribing ? 1 : -1),
         isSubscribed: !!meta.isSubscribing
       })
       break
@@ -203,7 +203,7 @@ export default function ormReducer (state = {}, action) {
 
     case RESET_NEW_POST_COUNT_PENDING: {
       const { id } = meta.graphql.variables
-      const membership = session.Membership.safeGet({ community: id })
+      const membership = session.Membership.safeGet({ group: id })
       if (!membership) break
       membership.update({ newPostCount: 0 })
       break
@@ -214,7 +214,7 @@ export default function ormReducer (state = {}, action) {
       // this line is to clear the selector memoization
       post.update({ _invalidate: (post._invalidate || 0) + 1 })
       const postMembership = post.postMemberships.filter(p =>
-        Number(p.community) === Number(meta.communityId)).toModelArray()[0]
+        Number(p.group) === Number(meta.groupId)).toModelArray()[0]
       postMembership && postMembership.update({ pinned: !postMembership.pinned })
       break
     }
@@ -229,9 +229,9 @@ export default function ormReducer (state = {}, action) {
       break
     }
 
-    case CREATE_COMMUNITY: {
+    case CREATE_GROUP: {
       const me = session.Me.first()
-      me.updateAppending({ memberships: [payload.data.createCommunity.id] })
+      me.updateAppending({ memberships: [payload.data.createGroup.id] })
       break
     }
 
@@ -263,7 +263,7 @@ export default function ormReducer (state = {}, action) {
     }
 
     case UPDATE_MEMBERSHIP_SETTINGS_PENDING: {
-      const membership = session.Membership.safeGet({ community: meta.communityId })
+      const membership = session.Membership.safeGet({ group: meta.groupId })
       if (!membership) break
       membership.update({
         settings: {

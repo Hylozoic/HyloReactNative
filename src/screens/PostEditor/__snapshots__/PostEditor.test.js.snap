@@ -106,14 +106,14 @@ exports[`PostEditor renders a new editor correctly 1`] = `
             />
           </View>
         </View>
-        <CommunitiesList
+        <GroupsList
           RightIcon={[Function]}
           columns={1}
-          communities={Array []}
+          groups={Array []}
           onPress={[Function]}
         />
         <Text>
-          Select which communities to post in.
+          Select which groups to post in.
         </Text>
       </ForwardRef>
     </View>
@@ -681,7 +681,7 @@ exports[`PostEditor renders correctly while saving 1`] = `
                                   <Text
                                     numberOfLines={1}
                                   >
-                                    Community 1
+                                    Group 1
                                   </Text>
                                   <Icon
                                     name="Ex"
@@ -1336,7 +1336,7 @@ exports[`PostEditor renders correctly while saving 2`] = `
                                   <Text
                                     numberOfLines={1}
                                   >
-                                    Community 1
+                                    Group 1
                                   </Text>
                                   <Icon
                                     name="Ex"
@@ -1500,14 +1500,14 @@ exports[`PostEditor renders with a post 1`] = `
             />
           </View>
         </View>
-        <CommunitiesList
+        <GroupsList
           RightIcon={[Function]}
           columns={1}
-          communities={
+          groups={
             Array [
               Object {
                 "id": 1,
-                "name": "Community 1",
+                "name": "Group 1",
               },
             ]
           }
@@ -1536,13 +1536,13 @@ exports[`PostEditor renders with a post 1`] = `
     announcementEnabled={false}
     post={
       Object {
-        "communities": Array [
+        "details": "myDetails",
+        "groups": Array [
           Object {
             "id": 1,
-            "name": "Community 1",
+            "name": "Group 1",
           },
         ],
-        "details": "myDetails",
       }
     }
     showFilePicker={[Function]}

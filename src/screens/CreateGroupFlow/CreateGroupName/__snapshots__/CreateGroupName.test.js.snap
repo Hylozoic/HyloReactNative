@@ -1,0 +1,103 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`displays an error message without a group name with checkAndSubmit 1`] = `
+<SafeAreaView>
+  <KeyboardFriendlyView>
+    <View>
+      <Text>
+        Let's get started!
+      </Text>
+      <Text>
+        All good things start somewhere! Let's kick things off with a catchy name for your group.
+      </Text>
+    </View>
+    <View>
+      <View>
+        <Text>
+          What's the name of your group?
+        </Text>
+        <TextInput
+          allowFontScaling={true}
+          autoCapitalize="none"
+          autoCorrect={false}
+          onChangeText={[Function]}
+          rejectResponderTermination={true}
+          returnKeyType="next"
+          underlineColorAndroid="rgba(0,0,0,0)"
+          value=""
+        />
+      </View>
+      <View>
+        <View>
+          <View />
+          <View>
+            <Text>
+              Please enter a group name
+            </Text>
+          </View>
+        </View>
+      </View>
+    </View>
+    <View>
+      <View>
+        <View
+          accessible={true}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+        >
+          <View>
+            <View>
+              <Text>
+                Continue
+              </Text>
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
+  </KeyboardFriendlyView>
+</SafeAreaView>
+`;
+
+exports[`matches last snapshot 1`] = `
+<SafeAreaViewMock>
+  <KeyboardFriendlyView>
+    <View>
+      <Text>
+        Let's get started!
+      </Text>
+      <Text>
+        All good things start somewhere! Let's kick things off with a catchy name for your group.
+      </Text>
+    </View>
+    <View>
+      <View>
+        <Text>
+          What's the name of your group?
+        </Text>
+        <Component
+          allowFontScaling={true}
+          autoCapitalize="none"
+          autoCorrect={false}
+          onChangeText={[Function]}
+          rejectResponderTermination={true}
+          returnKeyType="next"
+          underlineColorAndroid="rgba(0,0,0,0)"
+        />
+      </View>
+    </View>
+    <View>
+      <Button
+        onPress={[Function]}
+        text="Continue"
+      />
+    </View>
+  </KeyboardFriendlyView>
+</SafeAreaViewMock>
+`;

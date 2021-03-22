@@ -8,7 +8,7 @@ import MemberList from 'components/MemberList'
 import { bannerlinearGradientColors } from 'style/colors'
 
 export default class Members extends React.Component {
-  goToInvitePeople = () => this.props.navigation.navigate('Community Settings', { screen: 'Invite Members' })
+  goToInvitePeople = () => this.props.navigation.navigate('Group Settings', { screen: 'Invite Members' })
 
   shouldComponentUpdate (nextProps) {
     // TODO: test if children render...
@@ -16,9 +16,8 @@ export default class Members extends React.Component {
   }
 
   render () {
-    const { community, network, canModerate } = this.props
-    const showInviteButton = !network &&
-      (get('allowCommunityInvites', community) || canModerate)
+    const { group, canModerate } = this.props
+    const showInviteButton = get('allowGroupInvites', group) || canModerate
 
     return (
       <View style={styles.container}>
@@ -39,29 +38,20 @@ export default class Members extends React.Component {
             'showMember',
             'fetchMoreMembers'], this.props)}
         >
-          <Banner
-            community={community}
-            network={network}
+          {group && <Banner
+            bannerUrl={group.bannerUrl}
+            name={group.name}
+            group={group}
             handleInviteOnPress={this.goToInvitePeople}
             showInviteButton={showInviteButton}
-          />
+          />}
         </MemberList>
       </View>
     )
   }
 }
 
-export function Banner ({ community, network, showInviteButton, handleInviteOnPress }) {
-  let bannerUrl, name
-
-  if (network) {
-    ({ bannerUrl, name } = network)
-  } else if (community) {
-    ({ bannerUrl, name } = community)
-  } else {
-    return null
-  }
-
+export function Banner ({ name, bannerUrl, showInviteButton, handleInviteOnPress }) {
   return (
     <View style={styles.bannerContainer}>
       <Image source={{ uri: bannerUrl }} style={styles.image} />

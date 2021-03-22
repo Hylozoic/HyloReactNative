@@ -12,7 +12,7 @@ describe('ModeratorSettings', () => {
   const props = {
     moderators: [{ id: 10, name: 'John Current', avatarUrl: 'http://aurl.com' }, { id: 11, name: 'John Other', avatarUrl: 'http://aurl.com' }],
     currentUser: { id: 10 },
-    community: { name: 'Community Time' },
+    group: { name: 'Group Time' },
     fetchModerators: jest.fn(),
     addModerator: jest.fn(),
     moderatorSuggestions: [],
@@ -31,16 +31,16 @@ describe('ModeratorSettings', () => {
 
   it('fetches molderators on update', () => {
     const props = {
-      community: { slug: 'foo' },
+      group: { slug: 'foo' },
       fetchModerators: jest.fn()
     }
     const prevPropsSameSlug = {
-      community: { slug: 'foo' },
+      group: { slug: 'foo' },
       fetchModerators: jest.fn()
     }
 
     const prevPropsDifferentSlug = {
-      community: { slug: 'bar' },
+      group: { slug: 'bar' },
       fetchModerators: jest.fn()
     }
 

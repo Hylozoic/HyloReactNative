@@ -1,10 +1,10 @@
 import { attr, fk, Model } from 'redux-orm'
 
-const Activity = Model.createClass({
+class Activity extends Model {
   toString () {
     return `Message: ${this.id}`
   }
-})
+}
 
 export default Activity
 
@@ -15,7 +15,7 @@ Activity.fields = {
   actor: fk('Person'),
   post: fk('Post'),
   comment: fk('Comment'),
-  community: fk('Community'),
+  group: fk('Group'),
   unread: attr(),
   action: attr(),
   meta: attr()

@@ -2,7 +2,7 @@
 // NOTE: This is not being used as there is currently no
 //       screens.config option which allows for multiple
 //       paths to match to each screen, which is currently
-//       one of our requirememts mostly due to join community.
+//       one of our requirememts mostly due to join group.
 
 const prefixes = [
   'http://hylo.com',
@@ -13,7 +13,7 @@ const prefixes = [
 ]
 
 const screens = {
-  JoinCommunity: 'join',
+  JoinGroup: 'join',
   AppNavigator: {
     screens: {
       Messages: 'messages',

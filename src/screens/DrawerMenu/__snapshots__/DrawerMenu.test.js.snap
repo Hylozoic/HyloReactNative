@@ -1,76 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`CommunityRow hides badge when no newPostCount 1`] = `
-<View>
-  <ForwardRef
-    onPress={[Function]}
-  >
-    <Image
-      source={
-        Object {
-          "uri": "foo.png",
-        }
-      }
-    />
-    <Text
-      ellipsizeMode="tail"
-      numberOfLines={1}
-    >
-      Foom
-    </Text>
-  </ForwardRef>
-</View>
-`;
-
-exports[`CommunityRow highlights when matching currentCommunityId 1`] = `
-<View>
-  <ForwardRef
-    onPress={[Function]}
-  >
-    <Image
-      source={
-        Object {
-          "uri": "foo.png",
-        }
-      }
-    />
-    <Text
-      ellipsizeMode="tail"
-      numberOfLines={1}
-    >
-      Foom
-    </Text>
-  </ForwardRef>
-</View>
-`;
-
-exports[`CommunityRow matches the last snapshot 1`] = `
-<View>
-  <ForwardRef
-    onPress={[Function]}
-  >
-    <Image
-      source={
-        Object {
-          "uri": "foo.png",
-        }
-      }
-    />
-    <Text
-      ellipsizeMode="tail"
-      numberOfLines={1}
-    >
-      Foom
-    </Text>
-    <View>
-      <Text>
-        7
-      </Text>
-    </View>
-  </ForwardRef>
-</View>
-`;
-
 exports[`DrawerMenu matches the last snapshot 1`] = `
 <View>
   <View>
@@ -116,25 +45,14 @@ exports[`DrawerMenu matches the last snapshot 1`] = `
     sections={
       Array [
         Object {
-          "data": Array [
-            Object {
-              "id": 1,
-              "name": "Network",
-            },
-          ],
+          "data": undefined,
           "keyExtractor": [Function],
-          "label": "Networked Communities",
           "renderItem": [Function],
         },
         Object {
-          "data": Array [
-            Object {
-              "id": 2,
-              "name": "Community",
-            },
-          ],
+          "data": undefined,
           "keyExtractor": [Function],
-          "label": "Independent Communities",
+          "label": "My Groups",
           "renderItem": [Function],
         },
       ]
@@ -144,7 +62,7 @@ exports[`DrawerMenu matches the last snapshot 1`] = `
     windowSize={21}
   />
   <Button
-    text="Create a Community"
+    text="Create a Group"
   />
   <View>
     <ForwardRef
@@ -178,45 +96,7 @@ exports[`DrawerMenu matches the last snapshot 1`] = `
 </View>
 `;
 
-exports[`NetworkRow hides image when no avatarUrl 1`] = `
-<View>
-  <ForwardRef
-    onPress={[Function]}
-  >
-    <Text
-      ellipsizeMode="tail"
-      numberOfLines={1}
-    >
-      Network Name
-    </Text>
-    <ForwardRef
-      onPress={[Function]}
-    >
-      <Icon
-        allowFontScaling={false}
-        name="chevron-down"
-        size={12}
-      />
-    </ForwardRef>
-  </ForwardRef>
-  <View>
-    <CommunityRow
-      community={
-        Object {
-          "avatarUrl": "foo.png",
-          "id": 1,
-          "name": "Foom",
-          "newPostCount": 1,
-        }
-      }
-      currentCommunityId={1}
-      goToCommunity={[Function]}
-    />
-  </View>
-</View>
-`;
-
-exports[`NetworkRow matches the last snapshot 1`] = `
+exports[`GroupRow hides badge when no newPostCount 1`] = `
 <View>
   <ForwardRef
     onPress={[Function]}
@@ -224,7 +104,7 @@ exports[`NetworkRow matches the last snapshot 1`] = `
     <Image
       source={
         Object {
-          "uri": "network.png",
+          "uri": "foo.png",
         }
       }
     />
@@ -232,36 +112,13 @@ exports[`NetworkRow matches the last snapshot 1`] = `
       ellipsizeMode="tail"
       numberOfLines={1}
     >
-      Network Name
+      Foom
     </Text>
-    <ForwardRef
-      onPress={[Function]}
-    >
-      <Icon
-        allowFontScaling={false}
-        name="chevron-down"
-        size={12}
-      />
-    </ForwardRef>
   </ForwardRef>
-  <View>
-    <CommunityRow
-      community={
-        Object {
-          "avatarUrl": "foo.png",
-          "id": 1,
-          "name": "Foom",
-          "newPostCount": 1,
-        }
-      }
-      currentCommunityId={1}
-      goToCommunity={[Function]}
-    />
-  </View>
 </View>
 `;
 
-exports[`NetworkRow renders correctly with nonMemberCommunities 1`] = `
+exports[`GroupRow highlights when matching currentGroupId 1`] = `
 <View>
   <ForwardRef
     onPress={[Function]}
@@ -269,7 +126,7 @@ exports[`NetworkRow renders correctly with nonMemberCommunities 1`] = `
     <Image
       source={
         Object {
-          "uri": "network.png",
+          "uri": "foo.png",
         }
       }
     />
@@ -277,53 +134,35 @@ exports[`NetworkRow renders correctly with nonMemberCommunities 1`] = `
       ellipsizeMode="tail"
       numberOfLines={1}
     >
-      Network Name
+      Foom
     </Text>
-    <ForwardRef
-      onPress={[Function]}
-    >
-      <Icon
-        allowFontScaling={false}
-        name="chevron-down"
-        size={12}
-      />
-    </ForwardRef>
   </ForwardRef>
-  <View>
-    <CommunityRow
-      community={
+</View>
+`;
+
+exports[`GroupRow matches the last snapshot 1`] = `
+<View>
+  <ForwardRef
+    onPress={[Function]}
+  >
+    <Image
+      source={
         Object {
-          "avatarUrl": "foo.png",
-          "id": 1,
-          "name": "Foom",
-          "newPostCount": 1,
+          "uri": "foo.png",
         }
       }
-      currentCommunityId={1}
-      goToCommunity={[Function]}
     />
-    <ForwardRef
-      onPress={[Function]}
+    <Text
+      ellipsizeMode="tail"
+      numberOfLines={1}
     >
+      Foom
+    </Text>
+    <View>
       <Text>
-        See all
+        7
       </Text>
-    </ForwardRef>
-  </View>
-</View>
-`;
-
-exports[`NetworkRow shows all communities link 1`] = `
-<View>
-  <ForwardRef
-    onPress={[Function]}
-  >
-    <Text
-      ellipsizeMode="tail"
-      numberOfLines={1}
-    >
-      All Communities
-    </Text>
+    </View>
   </ForwardRef>
 </View>
 `;
@@ -331,7 +170,7 @@ exports[`NetworkRow shows all communities link 1`] = `
 exports[`SectionHeader matches the last snapshot 1`] = `
 <View>
   <Text>
-    NETWORKED COMMUNITIES
+    NETWORKED GROUPS
   </Text>
 </View>
 `;

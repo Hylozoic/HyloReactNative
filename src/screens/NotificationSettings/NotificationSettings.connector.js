@@ -14,7 +14,7 @@ export const getMessageSettings = createSelector(
   })
 )
 
-export const getAllCommunitiesSettings = createSelector(
+export const getAllGroupsSettings = createSelector(
   getMemberships,
   memberships => ({
     sendEmail: every(m => m.settings.sendEmail, memberships),
@@ -26,7 +26,7 @@ export function mapStateToProps (state, props) {
   return {
     messageSettings: getMessageSettings(state, props),
     memberships: getMemberships(state, props),
-    allCommunitiesSettings: getAllCommunitiesSettings(state, props)
+    allGroupsSettings: getAllGroupsSettings(state, props)
   }
 }
 

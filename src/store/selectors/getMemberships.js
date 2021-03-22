@@ -3,9 +3,8 @@ import orm from 'store/models'
 
 const getMemberships = ormCreateSelector(
   orm,
-  state => state.orm,
   session => {
-    const me = session.Me.first()
+    const me = session?.Me.first()
     if (!me) return []
     return me.memberships.toModelArray()
   }

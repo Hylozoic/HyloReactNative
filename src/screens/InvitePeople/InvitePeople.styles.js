@@ -64,12 +64,12 @@ export default {
     borderTopWidth: StyleSheet.hairlineWidth,
     borderTopColor: capeCod40
   },
-  joinCommunityText: {
+  joinGroupText: {
     marginTop: 20,
     marginLeft: 18,
     marginBottom: 6
   },
-  joinCommunityLink: {
+  joinGroupLink: {
     color: caribbeanGreen,
     marginLeft: 18,
     marginBottom: 24
@@ -143,7 +143,7 @@ export default {
     alignItems: 'stretch',
     minHeight: screenHeight
   },
-  allowCommunityInvites: {
+  allowGroupInvites: {
     backgroundColor: rhino10,
     display: 'flex',
     flexDirection: 'row',
@@ -152,7 +152,7 @@ export default {
     paddingTop: 20,
     paddingBottom: 15
   },
-  allowCommunityInvitesSwitch: {
+  allowGroupInvitesSwitch: {
     paddingLeft: 14,
     marginTop: -6
   },

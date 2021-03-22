@@ -244,7 +244,7 @@ exports[`TopicList matches last snapshot 1`] = `
 exports[`TopicList matches last snapshot with empty list 1`] = `
 <View>
   <Text>
-    No topics were found for this community
+    No topics were found for this group
   </Text>
 </View>
 `;
@@ -321,7 +321,7 @@ exports[`TopicRow matches last snapshot 1`] = `
 </View>
 `;
 
-exports[`Topics renders correctly a community and topics 1`] = `
+exports[`Topics renders correctly a group and topics 1`] = `
 <View
   style={
     Object {
@@ -615,7 +615,7 @@ exports[`Topics renders correctly a community and topics 1`] = `
                             <Image
                               source={
                                 Object {
-                                  "uri": "community-banner.png",
+                                  "uri": "group-banner.png",
                                 }
                               }
                             />
@@ -654,7 +654,7 @@ exports[`Topics renders correctly a community and topics 1`] = `
                           </View>
                           <View>
                             <Text>
-                              No topics were found for this community
+                              No topics were found for this group
                             </Text>
                           </View>
                         </View>
@@ -966,7 +966,7 @@ exports[`Topics renders correctly with pending=true 1`] = `
                             <Image
                               source={
                                 Object {
-                                  "uri": "community-banner.png",
+                                  "uri": "group-banner.png",
                                 }
                               }
                             />

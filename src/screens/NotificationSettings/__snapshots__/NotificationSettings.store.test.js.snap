@@ -5,11 +5,11 @@ Object {
   "graphql": Object {
     "query": "mutation {
     
-    alias123: updateMembership(communityId: 123, data: {settings: {sendEmail:true}}) {
+    alias123: updateMembership(groupId: 123, data: {settings: {sendEmail:true}}) {
       id
     }
   ,
-    alias456: updateMembership(communityId: 456, data: {settings: {sendEmail:true}}) {
+    alias456: updateMembership(groupId: 456, data: {settings: {sendEmail:true}}) {
       id
     }
   
@@ -28,22 +28,22 @@ Object {
 exports[`updateMembershipSettings matches snapshot 1`] = `
 Object {
   "graphql": Object {
-    "query": "mutation ($communityId: ID, $data: MembershipInput) {
-        updateMembership(communityId: $communityId, data: $data) {
+    "query": "mutation ($groupId: ID, $data: MembershipInput) {
+        updateMembership(groupId: $groupId, data: $data) {
           id
         }
       }",
     "variables": Object {
-      "communityId": 123,
       "data": Object {
         "settings": Object {
           "sendEmail": true,
         },
       },
+      "groupId": 123,
     },
   },
   "meta": Object {
-    "communityId": 123,
+    "groupId": 123,
     "optimistic": true,
     "settings": Object {
       "sendEmail": true,

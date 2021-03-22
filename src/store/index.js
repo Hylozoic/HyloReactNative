@@ -34,13 +34,12 @@ export default store
 // If we reinstated this, we'd need to rewire the currently synchronous store
 // load in index.js
 // export async function getInitialState () {
-// if (!isDev) return getEmptyState()
-
-// try {
-//   const state = await AsyncStorage.getItem(PERSISTED_STATE_KEY)
-//   return state ? JSON.parse(state) : getEmptyState()
-// } catch (e) {
-//   console.log("Couldn't retrieve state from AsyncStorage!")
-//   return getEmptyState()
-// }
+//   if (!isDev) return getEmptyState()
+//   try {
+//     const state = await AsyncStorage.getItem(PERSISTED_STATE_KEY)
+//     return state ? JSON.parse(state) : getEmptyState()
+//   } catch (e) {
+//     console.log("Couldn't retrieve state from AsyncStorage!")
+//     return getEmptyState()
+//   }
 // }

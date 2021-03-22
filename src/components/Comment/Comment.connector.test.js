@@ -10,19 +10,19 @@ beforeEach(() => {
 
 describe('mapStateToProps', () => {
   it('maps', () => {
-    const community = session.Community.create({ id: '7', slug: 'world' })
+    const group = session.Group.create({ id: '7', slug: 'world' })
     session.Me.create({
       name: 'me',
       id: 10,
       memberships: [session.Membership.create({
         id: '345',
-        community: community.id,
+        group: group.id,
         hasModeratorRole: true
       })]
     })
 
     const props = {
-      slug: community.slug,
+      slug: group.slug,
       comment: {
         creator: {
           id: 10

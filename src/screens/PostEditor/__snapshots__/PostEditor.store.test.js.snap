@@ -7,7 +7,7 @@ Object {
         $type: String
         $title: String
         $details: String
-        $communityIds: [String]
+        $groupIds: [String]
         $startTime: Date
         $endTime: Date
         $location: String
@@ -22,7 +22,7 @@ Object {
           type: $type
           title: $title
           details: $details
-          communityIds: $communityIds
+          groupIds: $groupIds
           startTime: $startTime
           endTime: $endTime
           location: $location
@@ -35,9 +35,36 @@ Object {
         }) {
           
   id
+  announcement
   title
   details
   type
+  creator {
+    id
+    name
+    avatarUrl
+  }
+  createdAt
+  updatedAt
+  isPublic
+  fulfilledAt
+  startTime
+  endTime
+  myEventResponse
+  commenters(first: 3) {
+    id
+    name
+    avatarUrl
+  }
+  commentersTotal
+  commentsTotal
+  
+  linkPreview {
+    id
+    title
+    url
+    imageUrl
+  }
   location
   locationObject {
     id
@@ -58,50 +85,25 @@ Object {
     neighborhood
     region
   }
-  announcement
-  creator {
-    id
-    name
-    avatarUrl
-    tagline
-  }
-  createdAt
-  updatedAt
-  isPublic
-  fulfilledAt
-  startTime
-  endTime
-  myEventResponse
-  commenters(first: 3) {
-    id
-    name
-    avatarUrl
-  }
-  commentersTotal
-  commentsTotal
-  
-  linkPreview {
-    title
-    url
-    imageUrl
-  }
   votesTotal
   myVote
-  communities {
+  acceptContributions
+  totalContributions
+  groups {
     id
     name
     slug
   }
   attachments {
-    id
-    position
     type
     url
+    position
+    id
   }
   postMemberships {
     id
     pinned
-    community {
+    group {
       id
     }
   }
@@ -112,23 +114,55 @@ Object {
     followersTotal
   }
   members {
+    total
+    hasMore
     items {
       id
       name
       avatarUrl
+      bio
+      tagline
+      location
+      skills (first: 100) {
+        items {
+          id
+          name
+        }
+      }
     }
+  }
+  eventInvitations {
     total
+    hasMore
+    items {
+      id
+      response
+      person {
+        id
+        name
+        avatarUrl
+        bio
+        tagline
+        location
+        skills (first: 100) {
+          items {
+            id
+            name
+          }
+        }
+      }
+    }
   }
         }
       }",
     "variables": Object {
       "announcement": undefined,
-      "communityIds": Array [
-        undefined,
-      ],
       "details": "details",
       "endTime": "endTime",
       "fileUrls": Array [],
+      "groupIds": Array [
+        undefined,
+      ],
       "imageUrls": Array [],
       "location": undefined,
       "locationId": undefined,
@@ -158,7 +192,7 @@ Object {
         $type: String
         $title: String
         $details: String
-        $communityIds: [String]
+        $groupIds: [String]
         $startTime: Date
         $endTime: Date
         $location: String
@@ -173,7 +207,7 @@ Object {
           type: $type
           title: $title
           details: $details
-          communityIds: $communityIds
+          groupIds: $groupIds
           startTime: $startTime
           endTime: $endTime
           location: $location
@@ -186,9 +220,36 @@ Object {
         }) {
           
   id
+  announcement
   title
   details
   type
+  creator {
+    id
+    name
+    avatarUrl
+  }
+  createdAt
+  updatedAt
+  isPublic
+  fulfilledAt
+  startTime
+  endTime
+  myEventResponse
+  commenters(first: 3) {
+    id
+    name
+    avatarUrl
+  }
+  commentersTotal
+  commentsTotal
+  
+  linkPreview {
+    id
+    title
+    url
+    imageUrl
+  }
   location
   locationObject {
     id
@@ -209,50 +270,25 @@ Object {
     neighborhood
     region
   }
-  announcement
-  creator {
-    id
-    name
-    avatarUrl
-    tagline
-  }
-  createdAt
-  updatedAt
-  isPublic
-  fulfilledAt
-  startTime
-  endTime
-  myEventResponse
-  commenters(first: 3) {
-    id
-    name
-    avatarUrl
-  }
-  commentersTotal
-  commentsTotal
-  
-  linkPreview {
-    title
-    url
-    imageUrl
-  }
   votesTotal
   myVote
-  communities {
+  acceptContributions
+  totalContributions
+  groups {
     id
     name
     slug
   }
   attachments {
-    id
-    position
     type
     url
+    position
+    id
   }
   postMemberships {
     id
     pinned
-    community {
+    group {
       id
     }
   }
@@ -263,23 +299,55 @@ Object {
     followersTotal
   }
   members {
+    total
+    hasMore
     items {
       id
       name
       avatarUrl
+      bio
+      tagline
+      location
+      skills (first: 100) {
+        items {
+          id
+          name
+        }
+      }
     }
+  }
+  eventInvitations {
     total
+    hasMore
+    items {
+      id
+      response
+      person {
+        id
+        name
+        avatarUrl
+        bio
+        tagline
+        location
+        skills (first: 100) {
+          items {
+            id
+            name
+          }
+        }
+      }
+    }
   }
         }
       }",
     "variables": Object {
       "announcement": undefined,
-      "communityIds": Array [
-        undefined,
-      ],
       "details": "details",
       "endTime": "endTime",
       "fileUrls": Array [],
+      "groupIds": Array [
+        undefined,
+      ],
       "imageUrls": Array [],
       "location": undefined,
       "locationId": undefined,
@@ -313,7 +381,7 @@ Object {
         $type: String
         $title: String
         $details: String
-        $communityIds: [String]
+        $groupIds: [String]
         $startTime: Date
         $endTime: Date
         $location: String
@@ -327,7 +395,7 @@ Object {
           type: $type
           title: $title
           details: $details
-          communityIds: $communityIds
+          groupIds: $groupIds
           startTime: $startTime
           endTime: $endTime
           location: $location
@@ -339,9 +407,55 @@ Object {
         }) {
           
   id
+  announcement
   title
   details
   type
+  creator {
+    id
+    name
+    avatarUrl
+  }
+  createdAt
+  updatedAt
+  isPublic
+  fulfilledAt
+  startTime
+  endTime
+  myEventResponse
+  commenters(first: 3) {
+    id
+    name
+    avatarUrl
+  }
+  commentersTotal
+  commentsTotal
+  comments(first: 10, order: \\"desc\\") {
+    items {
+      id
+      text
+      creator {
+        id
+        name
+        avatarUrl
+      }
+      attachments {
+        id
+        position
+        type
+        url
+      }
+      createdAt
+    }
+    total
+    hasMore
+  }
+  linkPreview {
+    id
+    title
+    url
+    imageUrl
+  }
   location
   locationObject {
     id
@@ -362,63 +476,25 @@ Object {
     neighborhood
     region
   }
-  announcement
-  creator {
-    id
-    name
-    avatarUrl
-    tagline
-  }
-  createdAt
-  updatedAt
-  isPublic
-  fulfilledAt
-  startTime
-  endTime
-  myEventResponse
-  commenters(first: 3) {
-    id
-    name
-    avatarUrl
-  }
-  commentersTotal
-  commentsTotal
-  comments(first: 10, order: \\"desc\\") {
-        items {
-          id
-          text
-          creator {
-            id
-            name
-            avatarUrl
-          }
-          createdAt
-        }
-        total
-        hasMore
-      }
-  linkPreview {
-    title
-    url
-    imageUrl
-  }
   votesTotal
   myVote
-  communities {
+  acceptContributions
+  totalContributions
+  groups {
     id
     name
     slug
   }
   attachments {
-    id
-    position
     type
     url
+    position
+    id
   }
   postMemberships {
     id
     pinned
-    community {
+    group {
       id
     }
   }
@@ -429,22 +505,54 @@ Object {
     followersTotal
   }
   members {
+    total
+    hasMore
     items {
       id
       name
       avatarUrl
+      bio
+      tagline
+      location
+      skills (first: 100) {
+        items {
+          id
+          name
+        }
+      }
     }
+  }
+  eventInvitations {
     total
+    hasMore
+    items {
+      id
+      response
+      person {
+        id
+        name
+        avatarUrl
+        bio
+        tagline
+        location
+        skills (first: 100) {
+          items {
+            id
+            name
+          }
+        }
+      }
+    }
   }
         }
       }",
     "variables": Object {
-      "communityIds": Array [
-        undefined,
-      ],
       "details": "details",
       "endTime": "endTime",
       "fileUrls": Array [],
+      "groupIds": Array [
+        undefined,
+      ],
       "id": 1,
       "imageUrls": Array [],
       "location": undefined,

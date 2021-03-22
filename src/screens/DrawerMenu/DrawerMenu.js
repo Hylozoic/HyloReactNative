@@ -1,105 +1,80 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { Image, Text, TouchableOpacity, View, SectionList } from 'react-native'
-import EntypoIcon from 'react-native-vector-icons/Entypo'
 import styles from './DrawerMenu.styles'
 import SocketListener from 'components/SocketListener'
 import Button from 'components/Button'
 import Icon from 'components/Icon'
-import { isEmpty } from 'lodash/fp'
 
-export default class DrawerMenu extends React.PureComponent {
-  onGoToCommunity = (community) => this.props.goToCommunity(community)
-  onGoToNetwork = (network) => this.props.goToNetwork(network)
+export default function DrawerMenu ({
+  topGroups, myGroups, goToGroup,
+  currentGroup, currentGroupId, canModerateCurrentGroup,
+  name, avatarUrl, goToMyProfile, goToCreateGroup,
+  showSettings, goToGroupSettingsMenu
+}) {
+  const renderItem =  ({ item }) => (
+    <GroupRow
+      group={item}
+      goToGroup={goToGroup}
+      currentGroupId={currentGroupId}
+      addPadding
+    />
+  )
+  const keyExtractor = item => 'c' + item.id
+  const listSections = [
+    {
+      data: topGroups,
+      renderItem,
+      keyExtractor
+    },
+    {
+      label: 'My Groups',
+      data: myGroups,
+      renderItem,
+      keyExtractor
+    }
+  ]
 
-  render () {
-    const {
-      name, avatarUrl, goToMyProfile,
-      showSettings, networks, communities, currentContext,
-      currentNetworkId, currentCommunityId, canModerateCurrentCommunity,
-      goToCreateCommunity, goToCommunitySettingsMenu
-    } = this.props
-
-    const listSections = [
-      {
-        data: networks,
-        label: 'Networked Communities',
-        renderItem: ({ item }) => (
-          <NetworkRow
-            network={item}
-            goToCommunity={this.onGoToCommunity}
-            goToNetwork={this.onGoToNetwork}
-            currentNetworkId={currentNetworkId}
-            currentCommunityId={!currentNetworkId && currentCommunityId}
-          />
-        ),
-        keyExtractor: item => 'n' + item.id
-      },
-      {
-        data: communities,
-        label: 'Independent Communities',
-        renderItem: ({ item }) => (
-          <CommunityRow
-            community={item}
-            goToCommunity={this.onGoToCommunity}
-            currentCommunityId={!currentNetworkId && currentCommunityId}
-            addPadding
-          />
-        ),
-        keyExtractor: item => 'c' + item.id
-      }
-    ]
-
-    return (
-      <View style={styles.parent}>
-        {currentContext && (
-          <View style={styles.header}>
-            <Image source={{ uri: currentContext.avatarUrl }} style={styles.headerAvatar} />
-            <Text style={styles.headerText}>{currentContext.name}</Text>
-            {canModerateCurrentCommunity && (
-              <TouchableOpacity
-                onPress={goToCommunitySettingsMenu}
-                hitSlop={{ top: 5, bottom: 5, left: 10, right: 10 }}
-                style={styles.headerSettingsButton}
-              >
-                <Icon style={styles.headerSettingsButtonIcon} name='Settings' />
-                <Text style={styles.headerSettingsButtonText}>Settings</Text>
-              </TouchableOpacity>
-            )}
-          </View>
-        )}
-        <SectionList
-          renderSectionHeader={SectionHeader}
-          sections={listSections}
-          stickySectionHeadersEnabled={false}
-        />
-        <Button text='Create a Community' onPress={goToCreateCommunity} style={styles.createCommunityButton} />
-        <View style={styles.footer}>
-          <TouchableOpacity onPress={goToMyProfile} style={styles.avatar}>
-            <Image source={avatarUrl ? { uri: avatarUrl } : null} style={styles.avatar} />
-          </TouchableOpacity>
-          <View style={styles.footerContent}>
-            <Text style={styles.footerTopText} numberOfLines={1}>
-              Hello, {name}!
-            </Text>
-            <View style={styles.footerButtons}>
-              <TextButton text='Settings' onPress={showSettings} />
-            </View>
+  return (
+    <View style={styles.parent}>
+      {currentGroup && (
+        <View style={styles.header}>
+          <Image source={{ uri: currentGroup.avatarUrl }} style={styles.headerAvatar} />
+          <Text style={styles.headerText}>{currentGroup.name}</Text>
+          {canModerateCurrentGroup && (
+            <TouchableOpacity
+              onPress={goToGroupSettingsMenu}
+              hitSlop={{ top: 5, bottom: 5, left: 10, right: 10 }}
+              style={styles.headerSettingsButton}
+            >
+              <Icon style={styles.headerSettingsButtonIcon} name='Settings' />
+              <Text style={styles.headerSettingsButtonText}>Settings</Text>
+            </TouchableOpacity>
+          )}
+        </View>
+      )}
+      <SectionList
+        renderSectionHeader={SectionHeader}
+        sections={listSections}
+        stickySectionHeadersEnabled={false}
+      />
+      <Button text='Create a Group' onPress={goToCreateGroup} style={styles.createGroupButton} />
+      <View style={styles.footer}>
+        <TouchableOpacity onPress={goToMyProfile} style={styles.avatar}>
+          <Image source={avatarUrl ? { uri: avatarUrl } : null} style={styles.avatar} />
+        </TouchableOpacity>
+        <View style={styles.footerContent}>
+          <Text style={styles.footerTopText} numberOfLines={1}>
+            Hello, {name}!
+          </Text>
+          <View style={styles.footerButtons}>
+            <TextButton text='Settings' onPress={showSettings} />
           </View>
         </View>
-        {/* putting SocketListener here so it's only rendered after login */}
-        <SocketListener />
       </View>
-    )
-  }
-}
-DrawerMenu.propTypes = {
-  name: PropTypes.string.isRequired,
-  avatarUrl: PropTypes.string,
-  networks: PropTypes.array,
-  communities: PropTypes.array,
-  goToMyProfile: PropTypes.func.isRequired,
-  showSettings: PropTypes.func.isRequired
+      {/* putting SocketListener here so it's only rendered after login */}
+      <SocketListener />
+    </View>
+  )
 }
 
 export function TextButton ({ text, onPress }) {
@@ -111,99 +86,26 @@ export function TextButton ({ text, onPress }) {
 }
 
 export function SectionHeader ({ section }) {
-  const { label } = section
   return (
     <View style={styles.sectionHeader}>
-      <Text style={styles.sectionHeaderText}>{label.toUpperCase()}</Text>
+      {section.label && (
+        <Text style={styles.sectionHeaderText}>{section.label.toUpperCase()}</Text>
+      )}
     </View>
   )
 }
 
-export class NetworkRow extends React.PureComponent {
-  constructor (props) {
-    super(props)
-    const expanded = props.network.communities.reduce((acc, community) =>
-      acc || !!community.newPostCount,
-    false)
-    this.state = {
-      expanded,
-      seeAllExpanded: false
-    }
-  }
-
-  toggleExpanded = () => {
-    this.setState({
-      expanded: !this.state.expanded
-    })
-  }
-
-  toggleSeeAll = () => {
-    this.setState({
-      seeAllExpanded: !this.state.seeAllExpanded
-    })
-  }
-
-  openNetwork = () => this.props.goToNetwork(this.props.network)
-
-  render () {
-    const { network, goToCommunity, currentCommunityId } = this.props
-    const { expanded, seeAllExpanded } = this.state
-    const { avatarUrl, name, communities, nonMemberCommunities } = network
-    const expandable = !isEmpty(communities)
-    const moreCommunities = !isEmpty(nonMemberCommunities)
-    return (
-      <View style={[styles.networkRow, expanded ? styles.networkRowExpanded : styles.networkRowCollapsed]}>
-        <TouchableOpacity onPress={this.openNetwork} style={[styles.rowTouchable, styles.networkRowTouchable]}>
-          {avatarUrl && <Image source={{ uri: avatarUrl }} style={styles.networkAvatar} />}
-          <Text style={styles.networkRowText} ellipsizeMode='tail' numberOfLines={1}>
-            {name}
-          </Text>
-          {expandable && (
-            <TouchableOpacity onPress={this.toggleExpanded} style={styles.networkOpenWrapper}>
-              <EntypoIcon style={styles.networkOpenIcon} name={expanded ? 'chevron-down' : 'chevron-right'} />
-            </TouchableOpacity>
-          )}
-        </TouchableOpacity>
-        {expanded && expandable && (
-          <View style={styles.networkCommunities}>
-            {communities.map(c => <CommunityRow
-              key={c.id}
-              community={c}
-              goToCommunity={goToCommunity}
-              currentCommunityId={currentCommunityId}
-                                  />)}
-            {seeAllExpanded && moreCommunities && nonMemberCommunities.map(c => (
-              <CommunityRow
-                key={c.id}
-                community={c}
-                goToCommunity={goToCommunity}
-                currentCommunityId={currentCommunityId}
-                isMember={false}
-                                                                                  />
-            ))}
-            {moreCommunities && (
-              <TouchableOpacity onPress={this.toggleSeeAll}>
-                <Text style={styles.seeAll}>{seeAllExpanded ? 'See less' : 'See all'}</Text>
-              </TouchableOpacity>
-            )}
-          </View>
-        )}
-      </View>
-    )
-  }
-}
-
-export function CommunityRow ({ community, goToCommunity, currentCommunityId, addPadding, isMember = true }) {
-  const { id, avatarUrl, name } = community
-  const newPostCount = Math.min(99, community.newPostCount)
-  const highlight = id === currentCommunityId
+export function GroupRow ({ group, goToGroup, currentGroupId, addPadding, isMember = true }) {
+  const { id, avatarUrl, name } = group
+  const newPostCount = Math.min(99, group.newPostCount)
+  const highlight = id === currentGroupId
   return (
-    <View style={[styles.communityRow, addPadding && styles.defaultPadding]}>
-      <TouchableOpacity onPress={() => goToCommunity(community)} style={styles.rowTouchable}>
+    <View style={[styles.groupRow, addPadding && styles.defaultPadding]}>
+      <TouchableOpacity onPress={() => goToGroup(group)} style={styles.rowTouchable}>
         {!!avatarUrl &&
-          <Image source={{ uri: avatarUrl }} style={styles.communityAvatar} />}
+          <Image source={{ uri: avatarUrl }} style={styles.groupAvatar} />}
         <Text
-          style={[styles.communityRowText, highlight && styles.highlight, isMember && styles.isMember]} ellipsizeMode='tail'
+          style={[styles.groupRowText, highlight && styles.highlight, isMember && styles.isMember]} ellipsizeMode='tail'
           numberOfLines={1}
         >
           {name}
@@ -217,3 +119,78 @@ export function CommunityRow ({ community, goToCommunity, currentCommunityId, ad
     </View>
   )
 }
+
+// TODO: To be ParentGroupRow
+// export class NetworkRow extends React.PureComponent {
+//   constructor (props) {
+//     super(props)
+//     const expanded = props.network.groups.reduce((acc, group) =>
+//       acc || !!group.newPostCount,
+//     false)
+//     this.state = {
+//       expanded,
+//       seeAllExpanded: false
+//     }
+//   }
+
+//   toggleExpanded = () => {
+//     this.setState({
+//       expanded: !this.state.expanded
+//     })
+//   }
+
+//   toggleSeeAll = () => {
+//     this.setState({
+//       seeAllExpanded: !this.state.seeAllExpanded
+//     })
+//   }
+
+//   openNetwork = () => this.props.goToNetwork(this.props.network)
+
+//   render () {
+//     const { network, goToGroup, currentGroupId } = this.props
+//     const { expanded, seeAllExpanded } = this.state
+//     const { avatarUrl, name, groups, nonMemberGroups } = network
+//     const expandable = !isEmpty(groups)
+//     const moreGroups = !isEmpty(nonMemberGroups)
+//     return (
+//       <View style={[styles.networkRow, expanded ? styles.networkRowExpanded : styles.networkRowCollapsed]}>
+//         <TouchableOpacity onPress={this.openNetwork} style={[styles.rowTouchable, styles.networkRowTouchable]}>
+//           {avatarUrl && <Image source={{ uri: avatarUrl }} style={styles.networkAvatar} />}
+//           <Text style={styles.networkRowText} ellipsizeMode='tail' numberOfLines={1}>
+//             {name}
+//           </Text>
+//           {expandable && (
+//             <TouchableOpacity onPress={this.toggleExpanded} style={styles.networkOpenWrapper}>
+//               <EntypoIcon style={styles.networkOpenIcon} name={expanded ? 'chevron-down' : 'chevron-right'} />
+//             </TouchableOpacity>
+//           )}
+//         </TouchableOpacity>
+//         {expanded && expandable && (
+//           <View style={styles.networkGroups}>
+//             {groups.map(c => <GroupRow
+//               key={c.id}
+//               group={c}
+//               goToGroup={goToGroup}
+//               currentGroupId={currentGroupId}
+//                                   />)}
+//             {seeAllExpanded && moreGroups && nonMemberGroups.map(c => (
+//               <GroupRow
+//                 key={c.id}
+//                 group={c}
+//                 goToGroup={goToGroup}
+//                 currentGroupId={currentGroupId}
+//                 isMember={false}
+//                                                                                   />
+//             ))}
+//             {moreGroups && (
+//               <TouchableOpacity onPress={this.toggleSeeAll}>
+//                 <Text style={styles.seeAll}>{seeAllExpanded ? 'See less' : 'See all'}</Text>
+//               </TouchableOpacity>
+//             )}
+//           </View>
+//         )}
+//       </View>
+//     )
+//   }
+// }

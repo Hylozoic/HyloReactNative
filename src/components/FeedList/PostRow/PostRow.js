@@ -9,8 +9,8 @@ export default class PostRow extends React.PureComponent {
 
   render () {
     const {
-      post, commenters, communities, creator, topics, imageUrls, isPinned,
-      showMember, showTopic, goToCommunity, shouldShowCommunities
+      post, commenters, groups, creator, topics, imageUrls, isPinned,
+      showMember, showTopic, goToGroup, shouldShowGroups
     } = this.props
 
     if (!post) return null
@@ -22,15 +22,15 @@ export default class PostRow extends React.PureComponent {
             <PostCard
               post={post}
               commenters={commenters}
-              communities={communities}
+              groups={groups}
               topics={topics}
               creator={creator}
               imageUrls={imageUrls}
               isPinned={isPinned}
               showMember={showMember}
               showTopic={showTopic}
-              goToCommunity={goToCommunity}
-              shouldShowCommunities={shouldShowCommunities}
+              goToGroup={goToGroup}
+              shouldShowGroups={shouldShowGroups}
             />
           </View>
         </TouchableOpacity>

@@ -8,9 +8,9 @@ let state, props, stateProps, dispatchProps
 
 beforeAll(() => {
   const session = orm.session(orm.getEmptyState())
-  session.Community.create({ id: '2', name: 'Home' })
+  session.Group.create({ id: '2', name: 'Home' })
   session.Person.create({ id: '10' })
-  session.Post.create({ id: '1', communities: ['2'], creator: '10' })
+  session.Post.create({ id: '1', groups: ['2'], creator: '10' })
   session.Attachment.create({
     id: '1',
     post: '1',

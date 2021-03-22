@@ -1,21 +1,21 @@
 import { makeGetQueryResults, makeQueryResultsModelSelector } from 'store/reducers/queryResults'
-import { FETCH_COMMUNITY_TOPICS } from 'store/actions/fetchCommunityTopics'
+import { FETCH_GROUP_TOPICS } from 'store/actions/fetchGroupTopics'
 export { setTopicSubscribe } from 'screens/Feed/Feed.store'
 
 export const MODULE_NAME = 'Topics'
 export const SET_TERM = `${MODULE_NAME}/SET_TERM`
 
-const getCommunityTopicResults = makeGetQueryResults(FETCH_COMMUNITY_TOPICS)
+const getGroupTopicResults = makeGetQueryResults(FETCH_GROUP_TOPICS)
 
-export const getCommunityTopics = makeQueryResultsModelSelector(
-  getCommunityTopicResults,
-  'CommunityTopic')
+export const getGroupTopics = makeQueryResultsModelSelector(
+  getGroupTopicResults,
+  'GroupTopic')
 
-export function presentCommunityTopic (communityTopic) {
+export function presentGroupTopic (groupTopic) {
   return {
-    ...communityTopic.topic.ref,
-    isSubscribed: communityTopic.isSubscribed,
-    newPostCount: communityTopic.newPostCount
+    ...groupTopic.topic.ref,
+    isSubscribed: groupTopic.isSubscribed,
+    newPostCount: groupTopic.newPostCount
   }
 }
 

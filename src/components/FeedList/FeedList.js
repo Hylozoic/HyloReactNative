@@ -29,9 +29,8 @@ export default class FeedList extends React.Component {
         !prevProps.isFocused && this.props.isFocused  ||
         prevProps.sortBy !== this.props.sortBy ||
         prevProps.filter !== this.props.filter ||
-        prevProps.community?.id !== this.props.community?.id ||
-        prevProps.topicName !== this.props.topicName ||
-        prevProps.network?.id !== this.props.network?.id
+        prevProps.group?.id !== this.props.group?.id ||
+        prevProps.topicName !== this.props.topicName
     ) {
       this.fetchOrShowCached()
     }
@@ -87,21 +86,21 @@ export default class FeedList extends React.Component {
 
 export function renderItem ({
   item,
-  communityId,
+  groupId,
   showPost,
   showMember,
   showTopic,
-  goToCommunity
+  goToGroup
 }) {
   return (
     <PostRow
       postId={item}
-      communityId={communityId}
-      shouldShowCommunities={!communityId}
+      groupId={groupId}
+      shouldShowGroups={!groupId}
       showPost={showPost}
       showMember={showMember}
       showTopic={showTopic}
-      goToCommunity={goToCommunity}
+      goToGroup={goToGroup}
     />
   )
 }
@@ -110,7 +109,8 @@ export const filterOptions = [
   { id: null, label: 'All Posts' },
   { id: 'discussion', label: 'Discussions' },
   { id: 'request', label: 'Requests' },
-  { id: 'offer', label: 'Offers' }
+  { id: 'offer', label: 'Offers' },
+  { id: 'event', label: 'Events' }
 ]
 
 // const sortOptions = [

@@ -10,11 +10,11 @@ Object {
 
 exports[`mapStateToProps matches last snapshot 1`] = `
 Object {
-  "allCommunitiesSettings": Object {
+  "allGroupsSettings": Object {
     "sendEmail": true,
     "sendPushNotifications": true,
   },
-  "memberships": Array [],
+  "memberships": undefined,
   "messageSettings": undefined,
 }
 `;

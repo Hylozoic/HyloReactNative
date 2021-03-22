@@ -97,7 +97,7 @@ exports[`NotificationCard matches the last snapshot for a join approved 1`] = `
       approved your request to join
       <Text>
         $
-         community
+         group
       </Text>
     </Text>
     <Text>
@@ -134,7 +134,7 @@ exports[`NotificationCard matches the last snapshot for a join request 1`] = `
       requested to join
       <Text>
         $
-         community
+         group
       </Text>
     </Text>
     <Text>

@@ -34,12 +34,12 @@ export default class InvitePeople extends Component {
   }
 
   componentDidMount () {
-    this.props.fetchCommunitySettings()
+    this.props.fetchGroupSettings()
   }
 
   componentDidUpdate (prevProps, prevState) {
-    if (get('community.slug', prevProps) !== get('community.slug', this.props)) {
-      this.props.fetchCommunitySettings()
+    if (get('group.slug', prevProps) !== get('group.slug', this.props)) {
+      this.props.fetchGroupSettings()
     }
   }
 
@@ -66,12 +66,12 @@ export default class InvitePeople extends Component {
           <SendInvitesPage
             inviteLink={this.props.inviteLink}
             pendingCreate={this.props.pendingCreate}
-            communityName={this.props.community.name}
-            communityId={this.props.community.id}
-            communityMembersCanInvite={this.props.community.allowCommunityInvites}
+            groupName={this.props.group.name}
+            groupId={this.props.group.id}
+            groupMembersCanInvite={this.props.group.allowGroupInvites}
             createInvitations={this.props.createInvitations}
             regenerateAccessCode={this.props.regenerateAccessCode}
-            allowCommunityInvites={this.props.allowCommunityInvites}
+            allowGroupInvites={this.props.allowGroupInvites}
           />
         )
       case '1':
@@ -108,8 +108,8 @@ export class SendInvitesPage extends PureComponent {
     this.state = {
       emails: '',
       copied: false,
-      inputText: `Hey! Here's an invite to the ${this.props.communityName} community on Hylo.`,
-      communityMembersCanInvite: get('communityMembersCanInvite', props)
+      inputText: `Hey! Here's an invite to the ${this.props.groupName} group on Hylo.`,
+      groupMembersCanInvite: get('groupMembersCanInvite', props)
     }
   }
 
@@ -162,13 +162,13 @@ export class SendInvitesPage extends PureComponent {
       })
   }
 
-  toggleAllowCommunityInvites = () => {
-    const { communityMembersCanInvite } = this.state
-    const { communityId } = this.props
-    this.setState({ communityMembersCanInvite: !communityMembersCanInvite })
-    this.props.allowCommunityInvites(communityId, !communityMembersCanInvite)
+  toggleAllowGroupInvites = () => {
+    const { groupMembersCanInvite } = this.state
+    const { groupId } = this.props
+    this.setState({ groupMembersCanInvite: !groupMembersCanInvite })
+    this.props.allowGroupInvites(groupId, !groupMembersCanInvite)
       .then(({ error }) => {
-        if (error) this.setState({ communityMembersCanInvite })
+        if (error) this.setState({ groupMembersCanInvite })
       })
   }
 
@@ -180,7 +180,7 @@ export class SendInvitesPage extends PureComponent {
       successMessage,
       errorMessage,
       sending,
-      communityMembersCanInvite
+      groupMembersCanInvite
     } = this.state
 
     const {
@@ -193,18 +193,18 @@ export class SendInvitesPage extends PureComponent {
       <ScrollView>
         <KeyboardFriendlyView style={styles.keyboardFriendlyContainer}>
           <View style={styles.container}>
-            <View style={styles.allowCommunityInvites}>
-              <Text>Let anyone in this community send invites</Text>
-              <View style={styles.allowCommunityInvitesSwitch}>
+            <View style={styles.allowGroupInvites}>
+              <Text>Let anyone in this group send invites</Text>
+              <View style={styles.allowGroupInvitesSwitch}>
                 <Switch
-                  onValueChange={this.toggleAllowCommunityInvites}
-                  value={communityMembersCanInvite}
+                  onValueChange={this.toggleAllowGroupInvites}
+                  value={groupMembersCanInvite}
                   trackColor={{ true: caribbeanGreen }}
                 />
               </View>
             </View>
-            <Text style={styles.joinCommunityText}>Anyone with this link can join the community</Text>
-            {inviteLink && <Text style={styles.joinCommunityLink}>{inviteLink}</Text>}
+            <Text style={styles.joinGroupText}>Anyone with this link can join the group</Text>
+            {inviteLink && <Text style={styles.joinGroupLink}>{inviteLink}</Text>}
             {!inviteLink && <Text>No link has been set yet</Text>}
 
             <View style={styles.buttonRow}>

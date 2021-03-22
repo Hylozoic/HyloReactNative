@@ -32,8 +32,8 @@ export default class MemberProfile extends React.Component {
   }
 
   setHeader = () => {
-    const { navigation, topicName, community } = this.props
-    // TODO: Get current community name
+    const { navigation, topicName, group } = this.props
+    // TODO: Get current group name
     navigation.setOptions({ headerTitle: ''  })
   }
 

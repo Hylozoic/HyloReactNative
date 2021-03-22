@@ -3,7 +3,7 @@
 exports[`sets up the expected reducers 1`] = `
 Object {
   "CommentEditor": Object {},
-  "CreateCommunityFlow": Object {},
+  "CreateGroupFlow": Object {},
   "FeedList": Object {
     "filter": null,
     "sortBy": "updated",
@@ -54,8 +54,7 @@ Object {
   "pending": Object {},
   "queryResults": Object {},
   "session": Object {
-    "communityId": null,
-    "networkId": null,
+    "groupId": null,
     "returnToPath": null,
     "signupInProgress": null,
   },

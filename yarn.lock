@@ -671,7 +671,7 @@
     core-js-pure "^3.0.0"
     regenerator-runtime "^0.13.4"
 
-"@babel/runtime@^7.0.0", "@babel/runtime@^7.12.1", "@babel/runtime@^7.8.4":
+"@babel/runtime@^7.0.0", "@babel/runtime@^7.11.2", "@babel/runtime@^7.12.1", "@babel/runtime@^7.8.4":
   version "7.12.5"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.12.5.tgz#410e7e487441e1b360c29be715d870d9b985882e"
   integrity sha512-plcc+hbExy3McchJCEQG3knOsuh3HH+Prx1P6cLIkET/0dLuQDEnrT+s27Axgc9bqfsmNUNHfscgMUdBpC9xfg==
@@ -2602,7 +2602,7 @@ babel-preset-jest@^26.6.2:
     babel-plugin-jest-hoist "^26.6.2"
     babel-preset-current-node-syntax "^1.0.0"
 
-babel-runtime@^6.18.0, babel-runtime@^6.22.0, babel-runtime@^6.26.0, babel-runtime@^6.6.1:
+babel-runtime@^6.18.0, babel-runtime@^6.22.0, babel-runtime@^6.26.0:
   version "6.26.0"
   resolved "https://registry.yarnpkg.com/babel-runtime/-/babel-runtime-6.26.0.tgz#965c7058668e82b55d7bfe04ff2337bc8b5647fe"
   integrity sha1-llxwWGaOgrVde/4E/yM3vItWR/4=
@@ -5184,9 +5184,9 @@ human-signals@^1.1.1:
   resolved "https://registry.yarnpkg.com/human-signals/-/human-signals-1.1.1.tgz#c5b1cd14f50aeae09ab6c59fe63ba3395fe4dfa3"
   integrity sha512-SEQu7vl8KjNL2eoGBLF3+wAjpsNfA9XMlXAYj/3EdaNfAlxKthD1xjEQfGOUhllCGGJVNY34bRr6lPINhNjyZw==
 
-"hylo-utils@https://github.com/Hylozoic/hylo-utils#db14807109706":
+"hylo-utils@https://github.com/Hylozoic/hylo-utils#2ff4926":
   version "1.2.4"
-  resolved "https://github.com/Hylozoic/hylo-utils#db14807109706f3540cf49f9164e300e995faa3d"
+  resolved "https://github.com/Hylozoic/hylo-utils#2ff4926916472cd15c0459a5a7162b9984a4700e"
   dependencies:
     buffer "^5.0.6"
     cheerio "^1.0.0-rc.3"
@@ -5238,12 +5238,13 @@ immediate@~3.0.5:
   resolved "https://registry.yarnpkg.com/immediate/-/immediate-3.0.6.tgz#9db1dbd0faf8de6fbe0f5dd5e56bb606280de69b"
   integrity sha1-nbHb0Pr43m++D13V5Wu2BigN5ps=
 
-immutable-ops@^0.5.2:
-  version "0.5.2"
-  resolved "https://registry.yarnpkg.com/immutable-ops/-/immutable-ops-0.5.2.tgz#3803d9bc65821bf4aaedf2f3542ec8714b73646a"
-  integrity sha1-OAPZvGWCG/Sq7fLzVC7IcUtzZGo=
+immutable-ops@^0.7.0:
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/immutable-ops/-/immutable-ops-0.7.0.tgz#e48d0283c813a4f6f64a159d0007043d9ab05dc8"
+  integrity sha512-5tOOKVgMr3fzSX92vMJTf8CchlVxSmMm1m7nnv4pXZ6w5feLmBFIAFA1arQ+TM785kd0nzV1kUvDWlytpEnQZw==
   dependencies:
-    ramda "^0.22.1"
+    "@babel/runtime" "^7.0.0"
+    ramda "^0.26.1"
 
 immutable@^3.8.1:
   version "3.8.2"
@@ -6758,7 +6759,7 @@ lodash.uniq@^4.5.0:
   resolved "https://registry.yarnpkg.com/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
   integrity sha1-0CJTc662Uq3BvILklFM5qEJ1R3M=
 
-lodash@^4.12.0, lodash@^4.17.10, lodash@^4.17.11, lodash@^4.17.12, lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.19, lodash@^4.17.4, lodash@^4.3.0:
+lodash@^4.17.10, lodash@^4.17.11, lodash@^4.17.12, lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.19, lodash@^4.17.4, lodash@^4.3.0:
   version "4.17.20"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.20.tgz#b44a9b6297bcb698f1c51a3545a2b3b368d59c52"
   integrity sha512-PlhdFcillOINfeV7Ni6oF1TAEayyZBoZ8bcshTHqOYJYlrqzRK5hagpagky5o4HfCzzd1TRkXPMFq6cKk9rGmA==
@@ -8265,11 +8266,6 @@ r2@^2.0.1:
     node-fetch "^2.0.0-alpha.8"
     typedarray-to-buffer "^3.1.2"
 
-ramda@^0.22.1:
-  version "0.22.1"
-  resolved "https://registry.yarnpkg.com/ramda/-/ramda-0.22.1.tgz#031da0c3df417c5b33c96234757eb37033f36a0e"
-  integrity sha1-Ax2gw99BfFszyWI0dX6zcDPzag4=
-
 ramda@^0.26.1:
   version "0.26.1"
   resolved "https://registry.yarnpkg.com/ramda/-/ramda-0.26.1.tgz#8d41351eb8111c55353617fc3bbffad8e4d35d06"
@@ -8279,6 +8275,11 @@ range-parser@~1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/range-parser/-/range-parser-1.2.1.tgz#3cf37023d199e1c24d1a55b84800c2f3e6468031"
   integrity sha512-Hrgsx+orqoygnmhFbKaHE6c296J+HTAQXoxEF6gNupROmmGJRoyzfG3ccAveqCBrwr/2yxQ5BVd/GTl5agOwSg==
+
+re-reselect@^3.4.0:
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/re-reselect/-/re-reselect-3.4.0.tgz#0f2303f3c84394f57f0cd31fea08a1ca4840a7cd"
+  integrity sha512-JsecfN+JlckncVXTWFWjn0Vk6uInl8GSf4eEd9tTk5qXHlgqkPdILpnYpgZcISXNYAzvfvsCZviaDk8AxyS5sg==
 
 re-reselect@^4.0.0:
   version "4.0.0"
@@ -8719,14 +8720,16 @@ redux-logger@^3.0.6:
   dependencies:
     deep-diff "^0.3.5"
 
-redux-orm@Hylozoic/redux-orm#createclass2-dist:
-  version "0.9.4"
-  resolved "https://codeload.github.com/Hylozoic/redux-orm/tar.gz/02d4cb60b7b2c70c090c54a0ac38c887874f18e5"
+redux-orm@^0.16.2:
+  version "0.16.2"
+  resolved "https://registry.yarnpkg.com/redux-orm/-/redux-orm-0.16.2.tgz#7ba50f4cfa6180487da984cb91bc6916bcec17a9"
+  integrity sha512-bUFBZSaswbZxNi5c4o4rs5JNEllb8IiY5UDrdOutLI4u3Mc3EwfQQGMD7lQZcSrfeqy/msSAWGbjYHfXKa71pQ==
   dependencies:
-    babel-runtime "^6.6.1"
-    immutable-ops "^0.5.2"
-    lodash "^4.12.0"
-    reselect "^2.5.4"
+    "@babel/runtime" "^7.11.2"
+    immutable-ops "^0.7.0"
+    lodash "^4.17.15"
+    re-reselect "^3.4.0"
+    reselect "^3.0.1"
 
 redux-promise@^0.6.0:
   version "0.6.0"
@@ -8950,11 +8953,6 @@ reselect-tools@^0.0.6:
   integrity sha1-joTufrxG1UPeErGx6XJYHhTfJxY=
   dependencies:
     reselect "^3.0.1"
-
-reselect@^2.5.4:
-  version "2.5.4"
-  resolved "https://registry.yarnpkg.com/reselect/-/reselect-2.5.4.tgz#b7d23fdf00b83fa7ad0279546f8dbbbd765c7047"
-  integrity sha1-t9I/3wC4P6etAnlUb427vXZccEc=
 
 reselect@^3.0.1:
   version "3.0.1"

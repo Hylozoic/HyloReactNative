@@ -1,6 +1,5 @@
 import { makeGetQueryResults } from 'store/reducers/queryResults'
-import { FETCH_POSTS } from 'store/actions/fetchPosts'
-import { FETCH_PROJECTS } from 'store/actions/fetchProjects'
+import { FETCH_POSTS } from 'store/constants'
 import { createSelector } from 'reselect'
 import { get, isEmpty, isNull, isUndefined, omitBy } from 'lodash/fp'
 import createCachedSelector from 're-reselect'
@@ -69,42 +68,20 @@ export const getPostIds = createSelector(
 
 export const getHasMorePosts = createSelector(getPostResults, get('hasMore'))
 
-const getProjectResults = makeGetQueryResults(FETCH_PROJECTS)
-
-export const getProjectIds = createSelector(
-  getProjectResults,
-  results => isEmpty(results) ? [] : results.ids
-)
-
-export const getHasMoreProjects = createSelector(getProjectResults, get('hasMore'))
-
 // Create a cached selector since we don't want multiple onscreen feedlists to clobber the cache between each other.
 export const getQueryProps = createCachedSelector(
-  (_, props) => props.community,
-  (_, props) => props.network,
+  (_, props) => props.group,
   (_, props) => props.sortBy,
   (_, props) => props.filter,
   (_, props) => props.topicName,
-  (community, network, sortBy, filter, topicName, isProjectFeed) => {
-    let subject
-
-    if (isProjectFeed) {
-      subject = 'project'
-    } else if (community) {
-      subject = 'community'
-    } else if (network) {
-      subject = 'network'
-    }
-
+  (group, sortBy, filter, topicName) => {
     return omitBy(x => isNull(x) || isUndefined(x), {
       sortBy,
       filter,
-      subject,
-      slug: get('slug', community),
-      networkSlug: get('slug', network),
+      slug: get('slug', group),
       topic: topicName
     })
   }
 )(
-  (state, props) => `${get('community.id', props)}:${get('network.id', props)}:${get('topicName', props)}`
+  (_, props) => `${get('group.id', props)}:${get('topicName', props)}`
 )

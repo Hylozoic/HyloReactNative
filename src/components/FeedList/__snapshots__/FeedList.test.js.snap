@@ -61,6 +61,10 @@ exports[`ListControl renders correctly 1`] = `
         "Offers",
         [Function],
       ],
+      Array [
+        "Events",
+        [Function],
+      ],
     ]
   }
 >
@@ -94,6 +98,10 @@ exports[`ListControls renders correctly 1`] = `
         Object {
           "id": "offer",
           "label": "Offers",
+        },
+        Object {
+          "id": "event",
+          "label": "Events",
         },
       ]
     }

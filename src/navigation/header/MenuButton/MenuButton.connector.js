@@ -1,12 +1,9 @@
 import { connect } from 'react-redux'
-import getCurrentCommunity from 'store/selectors/getCurrentCommunity'
-import getCurrentNetwork from 'store/selectors/getCurrentNetwork'
+import getCurrentGroup from 'store/selectors/getCurrentGroup'
 
 export function mapStateToProps (state) {
-  const currentContext = getCurrentNetwork(state) || getCurrentCommunity(state)
-
   return {
-    currentContext
+    currentContext: getCurrentGroup(state)
   }
 }
 

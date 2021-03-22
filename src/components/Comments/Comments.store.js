@@ -9,10 +9,9 @@ export const MODULE_NAME = 'Comments'
 
 export const getComments = ormCreateSelector(
   orm,
-  state => state.orm,
   (_, props) => props.postId,
   (session, id) => {
-    if (!session.Post.hasId(id)) return []
+    if (!session?.Post.idExists(id)) return []
     const post = session.Post.withId(id)
 
     return {

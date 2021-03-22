@@ -3,8 +3,8 @@ import './Model.extension'
 import Activity from './Activity'
 import Attachment from './Attachment'
 import Comment from './Comment'
-import Community, { CommunityModerator } from './Community'
-import CommunityTopic from './CommunityTopic'
+import Group, { GroupConnection, GroupModerator } from './Group'
+import GroupTopic from './GroupTopic'
 import Invitation from './Invitation'
 import Location from './Location'
 import Me from './Me'
@@ -13,7 +13,6 @@ import Person from './Person'
 import PersonConnection from './PersonConnection'
 import Message from './Message'
 import MessageThread from './MessageThread'
-import Network from './Network'
 import Notification from './Notification'
 import Post, { PostFollower, PostCommenter, ProjectMember } from './Post'
 import PostMembership from './PostMembership'
@@ -22,21 +21,22 @@ import Skill from './Skill'
 import Topic from './Topic'
 import Vote from './Vote'
 
-export const orm = new ORM()
+const orm = new ORM({ stateSelector: state => state.orm })
+
 orm.register(
   Activity,
   Attachment,
   Comment,
-  Community,
-  CommunityModerator,
-  CommunityTopic,
+  Group,
+  GroupConnection,
+  GroupModerator,
+  GroupTopic,
   Invitation,
   Location,
   Me,
   Membership,
   Message,
   MessageThread,
-  Network,
   Notification,
   Person,
   PersonConnection,

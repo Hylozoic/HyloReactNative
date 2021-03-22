@@ -26,7 +26,7 @@ export function fetchPerson (id) {
             id
             role
             hasModeratorRole
-            community {
+            group {
               id
               name
               slug
@@ -54,7 +54,6 @@ export function fetchPerson (id) {
 
 export const getPerson = ormCreateSelector(
   orm,
-  state => state.orm,
   (_, { id }) => id,
   (session, id) => {
     const person = session.Person.safeGet({ id })

@@ -3,7 +3,7 @@ import { LOGIN } from 'screens/Login/actions'
 import { 
   CHECK_SESSION_AND_SET_SIGNED_IN,
   FETCH_CURRENT_USER,
-  SELECT_COMMUNITY
+  SELECT_GROUP
 } from 'store/constants'
 
 describe('on CHECK_SESSION_AND_SET_SIGNED_IN', () => {
@@ -43,12 +43,12 @@ describe('on LOGIN', () => {
   })
 })
 
-describe('on SELECT_COMMUNITY', () => {
+describe('on SELECT_GROUP', () => {
   it('returns the payload', () => {
     const state = {
     }
     const action = {
-      type: SELECT_COMMUNITY,
+      type: SELECT_GROUP,
       payload: '123',
     }
     expect(sessionReducer(state, action))
@@ -68,7 +68,7 @@ describe('on FETCH_CURRENT_USER', () => {
           me: {
             memberships: [
               {
-                community: {
+                group: {
                   id: 34
                 }
               }

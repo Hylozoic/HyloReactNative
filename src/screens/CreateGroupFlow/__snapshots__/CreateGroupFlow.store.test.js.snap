@@ -1,0 +1,71 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`clearNameAndUrlFromStore matches snapshot 1`] = `
+Object {
+  "type": "CreateGroupFlow/CLEAR_NAME_AND_URL_FROM_STORE",
+}
+`;
+
+exports[`fetchGroupExists matches snapshot 1`] = `
+Object {
+  "graphql": Object {
+    "query": "
+        query ($slug: String) {
+          groupExists (slug: $slug) {
+            exists
+          }
+        }
+      ",
+    "variables": Object {
+      "slug": "group_name",
+    },
+  },
+  "type": "CreateGroupFlow/FETCH_URL_EXISTS",
+}
+`;
+
+exports[`saveGroupName matches snapshot 1`] = `
+Object {
+  "payload": "group name",
+  "type": "CreateGroupFlow/SAVE_GROUP_NAME",
+}
+`;
+
+exports[`saveGroupUrl matches snapshot 1`] = `
+Object {
+  "payload": "group_name",
+  "type": "CreateGroupFlow/SAVE_GROUP_URL",
+}
+`;
+
+exports[`showLoadingModal matches snapshot 1`] = `
+Object {
+  "graphql": Object {
+    "query": "mutation ($data: GroupInput) {
+        createGroup(data: $data) {
+          id
+          hasModeratorRole
+          group {
+            id
+            name
+            slug
+          }
+        }
+      }
+      ",
+    "variables": Object {
+      "data": Object {
+        "name": "group name",
+        "slug": "group_name",
+      },
+    },
+  },
+  "meta": Object {
+    "analytics": "Group Created",
+    "extractModel": "Membership",
+    "name": "group name",
+    "slug": "group_name",
+  },
+  "type": "CreateGroupFlow/CREATE_GROUP",
+}
+`;

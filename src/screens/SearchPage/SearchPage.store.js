@@ -2,7 +2,7 @@ import orm from 'store/models'
 import { createSelector } from 'reselect'
 import { createSelector as ormCreateSelector } from 'redux-orm'
 import { makeGetQueryResults } from 'store/reducers/queryResults'
-import { getPostFieldsFragment } from 'store/actions/fetchPost'
+import postFieldsFragment from 'graphql/fragments/postFieldsFragment'
 import { get, isEmpty, includes } from 'lodash/fp'
 
 export const MODULE_NAME = 'SearchPage'
@@ -83,7 +83,7 @@ export function fetchSearchResults ({ search, offset = 0, filter }) {
                 }
               }
               ... on Post {
-                ${getPostFieldsFragment(false)}
+                ${postFieldsFragment(false)}
               }
               ... on Comment {
                 id
@@ -133,7 +133,6 @@ const getSearchResultResults = makeGetQueryResults(FETCH_SEARCH)
 
 export const getSearchResults = ormCreateSelector(
   orm,
-  state => state.orm,
   getSearchResultResults,
   (session, results) => {
     if (isEmpty(results) || isEmpty(results.ids)) return []
@@ -158,7 +157,7 @@ export function presentSearchResult (searchResult, session) {
       ...content.ref,
       creator: content.creator,
       commenters: content.commenters.toModelArray(),
-      communities: content.communities.toModelArray(),
+      groups: content.groups.toModelArray(),
       linkPreview: content.linkPreview,
       fileAttachments: content.attachments.filter(a => a.type === 'file').toModelArray()
     }

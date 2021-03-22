@@ -3,6 +3,6 @@
 exports[`mapStateToProps returns the right keys 1`] = `
 Object {
   "goToParticipant": [Function],
-  "participants": null,
+  "participants": undefined,
 }
 `;

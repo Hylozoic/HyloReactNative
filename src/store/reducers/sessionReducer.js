@@ -12,14 +12,12 @@ import {
 import {
   FETCH_CURRENT_USER,
   CHECK_SESSION_AND_SET_SIGNED_IN,
-  SELECT_COMMUNITY,
-  SELECT_NETWORK,
+  SELECT_GROUP,
   STORE_RETURN_TO_PATH
 } from 'store/constants'
 
 export default function sessionReducer (state = {
-  communityId: null,
-  networkId: null,
+  groupId: null,
   signupInProgress: null,
   returnToPath: null
 }, action) {
@@ -70,17 +68,10 @@ export default function sessionReducer (state = {
         ...state,
         signupInProgress: get('data.updateMe.settings.signupInProgress', payload)
       }
-    case SELECT_COMMUNITY:
+    case SELECT_GROUP:
       return {
         ...state,
-        communityId: payload,
-        networkId: null
-      }
-    case SELECT_NETWORK:
-      return {
-        ...state,
-        communityId: null,
-        networkId: payload
+        groupId: payload
       }
     case STORE_RETURN_TO_PATH:
       return {

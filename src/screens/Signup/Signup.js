@@ -45,7 +45,7 @@ export default class Signup extends React.Component {
         <View style={styles.paddedContainer}>
           <Text style={styles.title}>Sign up to get started with Hylo</Text>
           {error && <View style={styles.errorWrapper}><Text style={styles.error}>{error}</Text></View>}
-          <Text style={styles.subTitle}>Stay connected, organized and engaged with your community.</Text>
+          <Text style={styles.subTitle}>Stay connected, organized and engaged with your group.</Text>
           <Button text='Sign Up' style={styles.signupButton} onPress={goToSignupFlow} />
           <View style={styles.connectWith}>
             <Text style={styles.connectWithText}>Or sign up using:</Text>

@@ -132,7 +132,7 @@ export function ormSessionReducer (session, action) {
       const { notification: { activity } } = payload.data
       Me.first().increment('newNotificationCount')
 
-      if (activity.action === 'newComment' && Post.hasId(activity.post.id)) {
+      if (activity.action === 'newComment' && Post.idExists(activity.post.id)) {
         const post = Post.withId(activity.post.id)
         post.increment('commentsTotal')
       }
@@ -144,7 +144,7 @@ export function ormSessionReducer (session, action) {
 
     case RECEIVE_MESSAGE:
       const { message: { messageThread, createdAt } } = payload.data
-      if (MessageThread.hasId(messageThread)) {
+      if (MessageThread.idExists(messageThread)) {
         MessageThread.withId(messageThread).update({ updatedAt: createdAt })
       }
 

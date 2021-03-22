@@ -1,9 +1,7 @@
 import { connect } from 'react-redux'
 import { omit, get } from 'lodash/fp'
-// import { mapWhenFocused } from 'util/redux'
 import getMe from 'store/selectors/getMe'
-import getCurrentCommunity from 'store/selectors/getCurrentCommunity'
-import getCurrentNetwork from 'store/selectors/getCurrentNetwork'
+import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import {
   FETCH_MEMBERS,
   fetchMembers,
@@ -16,66 +14,47 @@ import {
 } from './Members.store'
 
 export function makeFetchOpts (props) {
-  const { community, network, sortBy } = props
-
-  let subject, slug, sortByName
-
-  if (network) {
-    subject = 'network'
-    slug = get('slug', network)
-    // can't sort network members by join date
-    if (sortBy === 'join') sortByName = 'name'
-  } else if (community) {
-    subject = 'community'
-    slug = get('slug', community)
-  }
+  const { group, sortBy } = props
 
   return {
-    ...omit(['community', 'network', 'sortBy'], props),
-    sortBy: sortByName || sortBy,
-    subject,
-    slug
+    ...omit(['group', 'sortBy'], props),
+    sortBy: sortBy,
+    slug: get('slug', group)
   }
 }
 
 // these keys must match the values that hylo-node can handle
-export function sortKeysFactory (subject) {
+export function sortKeysFactory () {
   const sortKeys = {
     name: 'Name',
-    location: 'Location'
+    location: 'Location',
+    join: 'Newest'
   }
-  if (subject !== 'network') sortKeys.join = 'Newest'
+
   return sortKeys
 }
 
 export function mapStateToProps (state, props) {
   const currentUser = getMe(state, props)
-  const community = getCurrentCommunity(state, props)
-  const network = getCurrentNetwork(state, props)
-
-  const canModerate = currentUser && currentUser.canModerate(community)
+  const group = getCurrentGroup(state, props)
+  const canModerate = currentUser && currentUser.canModerate(group)
   const search = getSearch(state)
   const sortBy = getSort(state)
-
-  const fetchOpts = makeFetchOpts({ community, network, sortBy, search })
-  const { slug, subject } = fetchOpts
-
-  const getOpts = omit('subject', fetchOpts)
-  getOpts.memberSubject = fetchOpts.subject
+  const fetchOpts = makeFetchOpts({ group, sortBy, search })
+  const { slug } = fetchOpts
+  const getOpts = fetchOpts
 
   return {
     currentUser,
-    community,
-    network,
+    group,
     canModerate,
-    subject,
     fetchOpts,
     hasMore: getHasMoreMembers(state, getOpts),
     members: getMembers(state, getOpts),
     pending: state.pending[FETCH_MEMBERS],
     search,
     slug,
-    sortKeys: sortKeysFactory(subject),
+    sortKeys: sortKeysFactory(),
     // Use the sortBy that has been adjusted in the case of networks (see makeFetchOpts)
     sortBy: fetchOpts.sortBy
   }
@@ -91,8 +70,8 @@ export function mapDispatchToProps (dispatch, props) {
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
-  const { hasMore, pending, members, fetchOpts, community, network } = stateProps
-  const fetchMembers = (community || network)
+  const { hasMore, pending, members, fetchOpts, group } = stateProps
+  const fetchMembers = group
     ? () => dispatchProps.fetchMembers(fetchOpts)
     : () => {}
   const offset = members.length

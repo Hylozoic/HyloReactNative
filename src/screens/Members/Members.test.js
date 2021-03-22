@@ -10,7 +10,7 @@ jest.mock('@react-navigation/compat', () => ({
   withNavigationFocus: component => component
 }))
 
-it('renders correctly with no community (all communities default)', () => {
+it('renders correctly with no group (all groups default)', () => {
   const members = [
     { id: '1', name: 'Foo Lane', location: 'here', bio: 'Hello!', avatarUrl: 'foo.gif' },
     { id: '2', name: 'Bar Jones', location: 'there', bio: 'Not a stork', avatarUrl: 'bar.png' },
@@ -31,28 +31,6 @@ it('renders with invite button when a moderator', () => {
     { id: '5', avatarUrl: 'woof.png' }
   ]
 
-  const renderer = TestRenderer.create(<Members canModerate community={{}} members={members} />)
+  const renderer = TestRenderer.create(<Members canModerate group={{}} members={members} />)
   expect(renderer).toMatchSnapshot()
-})
-
-describe('Banner', () => {
-  it('returns null if community, netowrk and all are all falsy', () => {
-    expect(Banner({})).toBe(null)
-  })
-
-  it('matches snapshot with community', () => {
-    const community = {
-      name: 'Foomunity',
-      bannerUrl: 'foom.png'
-    }
-    expect(Banner({ community })).toMatchSnapshot()
-  })
-
-  it('matches snapshot with network', () => {
-    const network = {
-      name: 'Foom Network',
-      bannerUrl: 'foomn.png'
-    }
-    expect(Banner({ network })).toMatchSnapshot()
-  })
 })

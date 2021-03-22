@@ -1,68 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Banner matches snapshot with community 1`] = `
-<View>
-  <Image
-    source={
-      Object {
-        "uri": "foom.png",
-      }
-    }
-  />
-  <MockLinearGradient
-    colors={
-      Array [
-        "rgba(0, 0, 0, 0)",
-        "rgba(0, 0, 0, 0.1)",
-        "rgba(0, 0, 0, 0.3)",
-        "rgba(0, 0, 0, 0.6)",
-      ]
-    }
-  />
-  <View>
-    <Text>
-      Foomunity
-    </Text>
-  </View>
-</View>
-`;
-
-exports[`Banner matches snapshot with network 1`] = `
-<View>
-  <Image
-    source={
-      Object {
-        "uri": "foomn.png",
-      }
-    }
-  />
-  <MockLinearGradient
-    colors={
-      Array [
-        "rgba(0, 0, 0, 0)",
-        "rgba(0, 0, 0, 0.1)",
-        "rgba(0, 0, 0, 0.3)",
-        "rgba(0, 0, 0, 0.6)",
-      ]
-    }
-  />
-  <View>
-    <Text>
-      Foom Network
-    </Text>
-  </View>
-</View>
-`;
-
-exports[`renders correctly with no community (all communities default) 1`] = `
+exports[`renders correctly with no group (all groups default) 1`] = `
 <View>
   <RCTScrollView
     ListFooterComponent={null}
     ListHeaderComponent={
       <View>
-        <Banner
-          handleInviteOnPress={[Function]}
-        />
         <View>
           <SearchBar
             onChangeText={[Function]}
@@ -347,7 +290,7 @@ exports[`renders with invite button when a moderator 1`] = `
     ListHeaderComponent={
       <View>
         <Banner
-          community={Object {}}
+          group={Object {}}
           handleInviteOnPress={[Function]}
           showInviteButton={true}
         />

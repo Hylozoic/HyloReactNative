@@ -3,17 +3,15 @@
 exports[`mapDispatchToProps matches the last snapshot 1`] = `
 Object {
   "logout": [Function],
-  "selectCommunity": [Function],
-  "selectNetwork": [Function],
+  "selectGroup": [Function],
 }
 `;
 
 exports[`mapStateToProps matches the latest snapshot 1`] = `
 Object {
   "avatarUrl": undefined,
-  "canModerateCurrentCommunity": undefined,
-  "communities": Array [],
-  "currentCommunity": SessionBoundModel {
+  "canModerateCurrentGroup": undefined,
+  "currentGroup": SessionBoundModel {
     "_fields": Object {
       "avatarUrl": "someUrl",
       "id": "7",
@@ -21,16 +19,7 @@ Object {
     },
     "avatarUrl": "someUrl",
   },
-  "currentCommunityId": "7",
-  "currentContext": SessionBoundModel {
-    "_fields": Object {
-      "avatarUrl": "someUrl",
-      "id": "7",
-      "name": "someName",
-    },
-    "avatarUrl": "someUrl",
-  },
-  "currentNetworkId": undefined,
+  "currentGroupId": "7",
   "currentUser": SessionBoundModel {
     "_fields": Object {
       "id": "33",
@@ -38,16 +27,26 @@ Object {
     },
     "id": "33",
   },
+  "myGroups": Array [],
   "name": "meUser",
-  "networks": Array [
+  "topGroups": Array [
     Object {
       "avatarUrl": undefined,
       "bannerUrl": undefined,
-      "communities": Array [],
+      "groups": Array [],
       "headerAvatarUrl": undefined,
-      "id": "all-communities",
-      "name": "All Communities",
-      "slug": "all-communities",
+      "id": "public-context",
+      "name": "Public Groups & Posts",
+      "slug": "public-context",
+    },
+    Object {
+      "avatarUrl": undefined,
+      "bannerUrl": undefined,
+      "groups": Array [],
+      "headerAvatarUrl": undefined,
+      "id": "all-groups",
+      "name": "All Groups",
+      "slug": "all-groups",
     },
   ],
 }
@@ -55,118 +54,40 @@ Object {
 
 exports[`mergeProps matches snapshot 1`] = `
 Object {
-  "canModerateCurrentCommunity": true,
+  "canModerateCurrentGroup": true,
   "currentUser": Object {
     "id": "anyid",
   },
-  "goToCommunity": [Function],
-  "goToCommunitySettingsMenu": [Function],
-  "goToCreateCommunity": [Function],
+  "goToCreateGroup": [Function],
+  "goToGroup": [Function],
+  "goToGroupSettingsMenu": [Function],
   "goToMyProfile": [Function],
-  "goToNetwork": [Function],
   "name": "Roy Rogers",
   "navigation": Object {
     "closeDrawer": [MockFunction],
     "navigate": [MockFunction],
   },
-  "selectCommunity": [MockFunction],
-  "selectNetwork": [MockFunction],
+  "selectGroup": [MockFunction],
   "showSettings": [Function],
 }
 `;
 
 exports[`mergeProps matches snapshot 2`] = `
 Object {
-  "canModerateCurrentCommunity": false,
+  "canModerateCurrentGroup": false,
   "currentUser": Object {
     "id": "anyid",
   },
-  "goToCommunity": [Function],
-  "goToCommunitySettingsMenu": false,
-  "goToCreateCommunity": [Function],
+  "goToCreateGroup": [Function],
+  "goToGroup": [Function],
+  "goToGroupSettingsMenu": false,
   "goToMyProfile": [Function],
-  "goToNetwork": [Function],
   "name": "Roy Rogers",
   "navigation": Object {
     "closeDrawer": [MockFunction],
     "navigate": [MockFunction],
   },
-  "selectCommunity": [MockFunction],
-  "selectNetwork": [MockFunction],
+  "selectGroup": [MockFunction],
   "showSettings": [Function],
-}
-`;
-
-exports[`partitionCommunities separates independent communities from networked communities 1`] = `
-Object {
-  "communities": Array [
-    Object {
-      "id": "2",
-      "name": "two",
-      "network": undefined,
-      "newPostCount": undefined,
-    },
-    Object {
-      "id": "5",
-      "name": "five",
-      "network": undefined,
-      "newPostCount": undefined,
-    },
-  ],
-  "networks": Array [
-    Object {
-      "avatarUrl": undefined,
-      "bannerUrl": undefined,
-      "communities": Array [],
-      "headerAvatarUrl": undefined,
-      "id": "all-communities",
-      "name": "All Communities",
-      "slug": "all-communities",
-    },
-    Object {
-      "communities": Array [
-        Object {
-          "id": "1",
-          "name": "one",
-          "network": Object {
-            "communities": undefined,
-            "id": "1",
-            "name": "networkOne",
-          },
-          "newPostCount": undefined,
-        },
-        Object {
-          "id": "4",
-          "name": "four",
-          "network": Object {
-            "communities": undefined,
-            "id": "1",
-            "name": "networkOne",
-          },
-          "newPostCount": undefined,
-        },
-      ],
-      "id": "1",
-      "name": "networkOne",
-      "nonMemberCommunities": undefined,
-    },
-    Object {
-      "communities": Array [
-        Object {
-          "id": "3",
-          "name": "three",
-          "network": Object {
-            "communities": undefined,
-            "id": "2",
-            "name": "networkTwo",
-          },
-          "newPostCount": undefined,
-        },
-      ],
-      "id": "2",
-      "name": "networkTwo",
-      "nonMemberCommunities": undefined,
-    },
-  ],
 }
 `;

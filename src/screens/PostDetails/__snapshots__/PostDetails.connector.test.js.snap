@@ -2,19 +2,12 @@
 
 exports[`mapsStateToProps 1`] = `
 Object {
-  "currentCommunity": null,
-  "currentNetwork": null,
+  "currentGroup": null,
   "currentUser": undefined,
   "id": "1",
   "isProject": false,
   "post": Object {
     "commenters": Array [],
-    "communities": Array [
-      Object {
-        "id": "2",
-        "name": "Home",
-      },
-    ],
     "creator": Object {
       "id": "10",
     },
@@ -28,6 +21,12 @@ Object {
     ],
     "fileUrls": Array [
       "http://foo.com/foo.pdf",
+    ],
+    "groups": Array [
+      Object {
+        "id": "2",
+        "name": "Home",
+      },
     ],
     "id": "1",
     "imageUrls": Array [
@@ -100,7 +99,7 @@ Object {
   "dispatch": [MockFunction],
   "editPost": [Function],
   "fetchPost": [Function],
-  "goToCommunity": [Function],
+  "goToGroup": [Function],
   "goToMembers": [Function],
   "id": "testpost",
   "isFocused": true,

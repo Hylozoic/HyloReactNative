@@ -52,17 +52,17 @@ export default {
     textAlignVertical: 'top',
     textAlign: 'center'
   },
-  communitiesContainer: {
+  groupsContainer: {
     paddingBottom: 15
   },
-  communityRow: {
+  groupRow: {
     flexDirection: 'row',
     marginBottom: 7
   },
   starIcon: {
     marginRight: 5
   },
-  communityName: {
+  groupName: {
     color: caribbeanGreen,
     fontSize: 16,
     fontFamily: 'Circular-Book',

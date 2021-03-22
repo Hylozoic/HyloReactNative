@@ -155,13 +155,12 @@ exports[`mapDispatchToProps creates actions 3`] = `Array []`;
 
 exports[`mapStateToProps returns the right keys 1`] = `
 Object {
-  "communityId": undefined,
   "currentUserId": undefined,
+  "groupId": undefined,
   "hasMore": undefined,
   "id": undefined,
   "isConnected": undefined,
-  "messages": Array [],
-  "networkId": undefined,
+  "messages": undefined,
   "participants": undefined,
   "pending": undefined,
   "title": undefined,

@@ -5,7 +5,7 @@ import { createSelector } from 'reselect'
 import { createSelector as ormCreateSelector } from 'redux-orm'
 import { get, includes, isEmpty } from 'lodash/fp'
 import orm from 'store/models'
-import getCurrentCommunity from 'store/selectors/getCurrentCommunity'
+import getCurrentGroup from 'store/selectors/getCurrentGroup'
 
 export const MODULE_NAME = 'Members'
 
@@ -18,9 +18,9 @@ export const defaultState = {
   sortBy: 'join'
 }
 
-export const communityMembersQuery = `
+export const groupMembersQuery = `
 query ($slug: String, $first: Int, $sortBy: String, $offset: Int, $search: String) {
-  community (slug: $slug) {
+  group (slug: $slug) {
     id
     name
     avatarUrl
@@ -66,84 +66,18 @@ query ($slug: String, $first: Int, $sortBy: String, $offset: Int, $search: Strin
   }
 }`
 
-export const networkMembersQuery = `
-query ($slug: String, $first: Int, $sortBy: String, $offset: Int, $search: String) {
-  network (slug: $slug) {
-    id
-    name
-    slug
-    avatarUrl
-    bannerUrl
-    memberCount
-    members (first: $first, sortBy: $sortBy, offset: $offset, search: $search) {
-      items {
-        id
-        name
-        bio
-        avatarUrl
-        location
-        locationObject {
-          id
-          addressNumber
-          addressStreet
-          bbox {
-            lat
-            lng
-          }
-          center {
-            lat
-            lng
-          }
-          city
-          country
-          fullText
-          locality
-          neighborhood
-          region
-        }
-        tagline
-        skills {
-          hasMore
-          items {
-            id
-            name
-          }
-        }
-      }
-      hasMore
-    }
-  }
-}`
-
-export function fetchNetworkMembers (slug, sortBy, offset, search) {
+export function fetchGroupMembers (slug, sortBy, offset, search) {
   return {
     type: FETCH_MEMBERS,
     graphql: {
-      query: networkMembersQuery,
+      query: groupMembersQuery,
       variables: { slug, first: 20, offset, sortBy, search }
     },
     meta: {
-      extractModel: 'Network',
+      extractModel: 'Group',
       extractQueryResults: {
-        getItems: get('payload.data.network.members'),
-        getParams: (action) => ({ ...get('meta.graphql.variables', action), memberSubject: 'network' })
-      }
-    }
-  }
-}
-
-export function fetchCommunityMembers (slug, sortBy, offset, search) {
-  return {
-    type: FETCH_MEMBERS,
-    graphql: {
-      query: communityMembersQuery,
-      variables: { slug, first: 20, offset, sortBy, search }
-    },
-    meta: {
-      extractModel: 'Community',
-      extractQueryResults: {
-        getItems: get('payload.data.community.members'),
-        getParams: (action) => ({ ...get('meta.graphql.variables', action), memberSubject: 'community' })
+        getItems: get('payload.data.group.members'),
+        getParams: (action) => ({ ...get('meta.graphql.variables', action) })
       }
     }
   }
@@ -191,10 +125,8 @@ export function setSort (sortBy) {
   }
 }
 
-export function fetchMembers ({ subject, slug, sortBy, offset, search }) {
-  return subject === 'network'
-    ? fetchNetworkMembers(slug, sortBy, offset, search)
-    : fetchCommunityMembers(slug, sortBy, offset, search)
+export function fetchMembers ({ slug, sortBy, offset, search }) {
+  return fetchGroupMembers(slug, sortBy, offset, search)
 }
 
 const getMemberResults = makeGetQueryResults(FETCH_MEMBERS)

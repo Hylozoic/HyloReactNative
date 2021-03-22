@@ -26,9 +26,36 @@ Object {
               ... on Post {
                 
   id
+  announcement
   title
   details
   type
+  creator {
+    id
+    name
+    avatarUrl
+  }
+  createdAt
+  updatedAt
+  isPublic
+  fulfilledAt
+  startTime
+  endTime
+  myEventResponse
+  commenters(first: 3) {
+    id
+    name
+    avatarUrl
+  }
+  commentersTotal
+  commentsTotal
+  
+  linkPreview {
+    id
+    title
+    url
+    imageUrl
+  }
   location
   locationObject {
     id
@@ -49,50 +76,25 @@ Object {
     neighborhood
     region
   }
-  announcement
-  creator {
-    id
-    name
-    avatarUrl
-    tagline
-  }
-  createdAt
-  updatedAt
-  isPublic
-  fulfilledAt
-  startTime
-  endTime
-  myEventResponse
-  commenters(first: 3) {
-    id
-    name
-    avatarUrl
-  }
-  commentersTotal
-  commentsTotal
-  
-  linkPreview {
-    title
-    url
-    imageUrl
-  }
   votesTotal
   myVote
-  communities {
+  acceptContributions
+  totalContributions
+  groups {
     id
     name
     slug
   }
   attachments {
-    id
-    position
     type
     url
+    position
+    id
   }
   postMemberships {
     id
     pinned
-    community {
+    group {
       id
     }
   }
@@ -103,12 +105,44 @@ Object {
     followersTotal
   }
   members {
+    total
+    hasMore
     items {
       id
       name
       avatarUrl
+      bio
+      tagline
+      location
+      skills (first: 100) {
+        items {
+          id
+          name
+        }
+      }
     }
+  }
+  eventInvitations {
     total
+    hasMore
+    items {
+      id
+      response
+      person {
+        id
+        name
+        avatarUrl
+        bio
+        tagline
+        location
+        skills (first: 100) {
+          items {
+            id
+            name
+          }
+        }
+      }
+    }
   }
               }
               ... on Comment {

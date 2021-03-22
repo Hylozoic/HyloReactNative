@@ -10,7 +10,7 @@ export const fetchPeopleAutocompleteQuery =
       avatarUrl
       memberships {
         id
-        community {
+        group {
           id
           name
         }

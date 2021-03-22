@@ -1,10 +1,10 @@
 import { attr, fk, Model } from 'redux-orm'
 
-const Invitation = Model.createClass({
+class Invitation extends Model {
   toString () {
     return `Invitation: ${this.id}`
   }
-})
+}
 
 export default Invitation
 
@@ -15,5 +15,5 @@ Invitation.fields = {
   createdAt: attr(),
   lastSentAt: attr(),
   resent: attr(),
-  community: fk('Community', 'pendingInvitations')
+  group: fk('Group', 'pendingInvitations')
 }

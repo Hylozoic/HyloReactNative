@@ -3,48 +3,48 @@ import Attachment from './Attachment'
 import { get } from 'lodash/fp'
 import PropTypes from 'prop-types'
 
-export const PostFollower = Model.createClass({})
+export class PostFollower extends Model {}
 PostFollower.modelName = 'PostFollower'
 PostFollower.fields = {
   post: fk('Post', 'postfollowers'),
   follower: fk('Person', 'postfollowers')
 }
 
-export const PostCommenter = Model.createClass({})
+export class PostCommenter extends Model {}
 PostCommenter.modelName = 'PostCommenter'
 PostCommenter.fields = {
   post: fk('Post', 'postcommenters'),
   commenter: fk('Person', 'postcommenters')
 }
 
-export const ProjectMember = Model.createClass({})
+export class ProjectMember extends Model {}
 ProjectMember.modelName = 'ProjectMember'
 ProjectMember.fields = {
   post: fk('Post', 'projectmembers'),
   member: fk('Person', 'projectmembers')
 }
 
-const Post = Model.createClass({
+class Post extends Model {
   toString () {
     return `Post: ${this.name}`
-  },
+  }
 
   images () {
     return this.attachments.filter(x => x.type === Attachment.Type.IMAGE)
-  },
+  }
 
   getImageUrls () {
     return this.images().orderBy(get('position')).toRefArray().map(x => x.url)
-  },
+  }
 
   files () {
     return this.attachments.filter(x => x.type === Attachment.Type.FILE)
-  },
+  }
 
   getFileUrls () {
     return this.files().orderBy(get('position')).toRefArray().map(get('url'))
   }
-})
+}
 
 export default Post
 
@@ -66,9 +66,9 @@ Post.fields = {
     through: 'PostFollower',
     throughFields: ['post', 'follower']
   }),
-  communities: many('Community'),
+  groups: many('Group'),
   postMemberships: many('PostMembership'),
-  communitiesTotal: attr(),
+  groupsTotal: attr(),
   commenters: many({
     to: 'Person',
     relatedName: 'postsCommented',
@@ -140,6 +140,6 @@ export const POST_PROP_TYPES = {
   updatedAt: PropTypes.string,
   imageUrl: PropTypes.string,
   linkPreview: PropTypes.object,
-  communities: PropTypes.array,
+  groups: PropTypes.array,
   isPublic: PropTypes.boolean
 }

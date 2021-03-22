@@ -2,14 +2,14 @@ import {
   mapStateToProps,
   mapDispatchToProps,
   mergeProps,
-  partitionCommunities
+  partitionGroups
 } from './DrawerMenu.connector'
 import orm from 'store/models'
 
 it('mapStateToProps matches the latest snapshot', () => {
   const session = orm.session(orm.getEmptyState())
   session.Me.create({ id: '33', name: 'meUser' })
-  session.Community.create({ id: '7', avatarUrl: 'someUrl', name: 'someName' })
+  session.Group.create({ id: '7', avatarUrl: 'someUrl', name: 'someName' })
 
   const state = {
     session: {
@@ -17,7 +17,7 @@ it('mapStateToProps matches the latest snapshot', () => {
       entryUrl: 'http://www.hylo.com/a/path'
     },
     pending: {},
-    session: { communityId: '7' },
+    session: { groupId: '7' },
     orm: session.state
   }
   const props = {
@@ -35,12 +35,11 @@ describe('mergeProps', () => {
   beforeEach(() => {
     stateProps = {
       currentUser: { id: 'anyid' },
-      canModerateCurrentCommunity: true,
+      canModerateCurrentGroup: true,
       name: 'Roy Rogers'
     }
     dispatchProps = {
-      selectCommunity: jest.fn(x => x),
-      selectNetwork: jest.fn(x => x)
+      selectGroup: jest.fn(x => x)
     }
     ownProps = {
       navigation: {
@@ -53,26 +52,19 @@ describe('mergeProps', () => {
 
   it('matches snapshot', () => {
     expect(props).toMatchSnapshot()
-    expect(props.goToCommunitySettingsMenu).toBeDefined()
+    expect(props.goToGroupSettingsMenu).toBeDefined()
 
-    stateProps.canModerateCurrentCommunity = false
+    stateProps.canModerateCurrentGroup = false
     const propsNonModerator = mergeProps(stateProps, dispatchProps, ownProps)
     expect(propsNonModerator).toMatchSnapshot()
-    expect(propsNonModerator.goToCommunitySettingsMenu).toBeFalsy()
+    expect(propsNonModerator.goToGroupSettingsMenu).toBeFalsy()
   })
 
   describe('canModerate functions are bound', () => {
-    it('goToCommunity', () => {
-      const community = { id: 'testcommunity' }
-      props.goToCommunity(community)
-      expect(dispatchProps.selectCommunity).toHaveBeenCalled()
-      expect(ownProps.navigation.navigate).toHaveBeenCalledTimes(1)
-    })
-
-    it('goToNetwork', () => {
-      const network = { id: 'testnetwork' }
-      props.goToNetwork(network)
-      expect(dispatchProps.selectNetwork).toHaveBeenCalledTimes(1)
+    it('goToGroup', () => {
+      const group = { id: 'testgroup' }
+      props.goToGroup(group)
+      expect(dispatchProps.selectGroup).toHaveBeenCalled()
       expect(ownProps.navigation.navigate).toHaveBeenCalledTimes(1)
     })
 
@@ -86,87 +78,14 @@ describe('mergeProps', () => {
       expect(ownProps.navigation.navigate).toHaveBeenCalledTimes(1)
     })
 
-    it('goToCreateCommunity', () => {
-      props.goToCreateCommunity()
+    it('goToCreateGroup', () => {
+      props.goToCreateGroup()
       expect(ownProps.navigation.navigate).toHaveBeenCalledTimes(1)
     })
 
-    it('goToCommunitySettingsMenu', () => {
-      props.goToCommunitySettingsMenu()
+    it('goToGroupSettingsMenu', () => {
+      props.goToGroupSettingsMenu()
       expect(ownProps.navigation.navigate).toHaveBeenCalledTimes(1)
     })
-  })
-})
-
-describe('partitionCommunities', () => {
-  it('separates independent communities from networked communities', () => {
-    const memberships = [
-      {
-        community: {
-          ref: {
-            id: '1',
-            name: 'one'
-          },
-          network: {
-            ref: {
-              id: '1',
-              name: 'networkOne'
-            }
-          }
-        }
-      },
-      {
-        community: {
-          ref: {
-            id: '2',
-            name: 'two'
-          }
-        }
-      },
-      {
-        community: {
-          ref: {
-            id: '3',
-            name: 'three'
-          },
-          network: {
-            ref: {
-              id: '2',
-              name: 'networkTwo',
-              communities: {
-                toRefArray: () => [
-                  { id: '1', name: 'one' },
-                  { id: '2', name: 'two' },
-                  { id: '3', name: 'three' }
-                ]
-              }
-            }
-          }
-        }
-      },
-      {
-        community: {
-          ref: {
-            id: '4',
-            name: 'four'
-          },
-          network: {
-            ref: {
-              id: '1',
-              name: 'networkOne'
-            }
-          }
-        }
-      },
-      {
-        community: {
-          ref: {
-            id: '5',
-            name: 'five'
-          }
-        }
-      }
-    ]
-    expect(partitionCommunities(memberships)).toMatchSnapshot()
   })
 })

@@ -2,60 +2,30 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { isEmpty } from 'lodash/fp'
 import getMe from 'store/selectors/getMe'
-import getNetwork from 'store/selectors/getNetwork'
-import getCommunity from 'store/selectors/getCommunity'
-import getCurrentCommunityId from 'store/selectors/getCurrentCommunityId'
-import getCurrentNetworkId from 'store/selectors/getCurrentNetworkId'
-import makeGoToCommunity from 'store/actions/makeGoToCommunity'
+import getGroup from 'store/selectors/getGroup'
+import getCurrentGroupId from 'store/selectors/getCurrentGroupId'
+import makeGoToGroup from 'store/actions/makeGoToGroup'
 import {
-  fetchCommunityTopic,
-  getCommunityTopic,
+  fetchGroupTopic,
+  getGroupTopic,
   setTopicSubscribe
 } from './Feed.store'
-import selectCommunity from 'store/actions/selectCommunity'
-import selectNetwork from 'store/actions/selectNetwork'
+import selectGroup from 'store/actions/selectGroup'
 import getMemberships from 'store/selectors/getMemberships'
 import getRouteParam from 'store/selectors/getRouteParam'
 import { showToast } from 'util/toast'
 
-export function setupNetwork (state, props) {
-  const networkId = getRouteParam('networkId', props.route)
-    || getCurrentNetworkId(state, props)
-
-  if (!networkId) return null
-
-  const networkSlug = getRouteParam('networkSlug', props.route)
-  const network = getNetwork(state, networkSlug
-    ? { slug: networkSlug }
-    : { id: networkId }
-  )
-
-  return network
-}
-
-export function setupCommunity (state, props) {
-  const communityId = getRouteParam('communityId', props.route)
-    || getCurrentCommunityId(state, props)
-  const communitySlugFromLink = getRouteParam('communitySlugFromLink', props.route)
-  const community = getCommunity(state, communitySlugFromLink
-    ? { slug: communitySlugFromLink }
-    : { id: communityId }
-  )?.ref
-
-  return community
-}
-
-export function setupTopicProps (state, props, { community }) {
+export function setupTopicProps (state, props, group) {
   const topicName = props.topicName
     || getRouteParam('topicName', props.route)
 
   if (!topicName) return {}
 
-  const communityTopic = getCommunityTopic(state, { topicName, slug: community.slug })
-  const topic = communityTopic?.topic?.ref
-  const topicSubscribed = communityTopic?.isSubscribed
-  const topicPostsTotal = communityTopic?.postsTotal
-  const topicFollowersTotal = communityTopic?.followersTotal
+  const groupTopic = getGroupTopic(state, { topicName, slug: group.slug })
+  const topic = groupTopic?.topic?.ref
+  const topicSubscribed = groupTopic?.isSubscribed
+  const topicPostsTotal = groupTopic?.postsTotal
+  const topicFollowersTotal = groupTopic?.followersTotal
 
   return {
     topic,
@@ -66,71 +36,69 @@ export function setupTopicProps (state, props, { community }) {
   }
 }
 
-// The fundamental logic reflect here:
-// * If there is a Network, there is not Community nor Topic
-// * If there is a Network and a Community the Network is preferred
 export function mapStateToProps (state, props) {
   const stateProps = {}
-
-  stateProps.currentUser = getMe(state)
-  stateProps.currentUserHasMemberships = !isEmpty(getMemberships(state))  
-  stateProps.network = setupNetwork(state, props, stateProps)
-
-  if (stateProps.network) return stateProps
-
-  stateProps.community = setupCommunity(state, props, stateProps)
+  const currentUser = getMe(state)
+  const currentUserHasMemberships = !isEmpty(getMemberships(state))  
+  // Group
+  const groupId = getRouteParam('groupId', props.route)
+    || getCurrentGroupId(state, props)
+  const groupSlugFromLink = getRouteParam('groupSlugFromLink', props.route)
+  const group = getGroup(state, groupSlugFromLink
+    ? { slug: groupSlugFromLink }
+    : { id: groupId }
+  )
 
   return {
-    ...stateProps,
-    ...setupTopicProps(state, props, stateProps)
+    currentUser,
+    currentUserHasMemberships,
+    group,
+    ...setupTopicProps(state, props, group)
   }
 }
 
 export function mapDispatchToProps (dispatch, { navigation }) {
   return {
-    newPost: (communityId, topicName) =>
-      navigation.navigate('Edit Post', { communityId, topicName }),
-    newProject: (communityId) =>
-      navigation.navigate('Edit Post', { communityId, isProject: true }),
+    newPost: (groupId, topicName) =>
+      navigation.navigate('Edit Post', { groupId, topicName }),
+    newProject: (groupId) =>
+      navigation.navigate('Edit Post', { groupId, isProject: true }),
     showPost: id => navigation.navigate('Post Details', { id }),
     showMember: id => navigation.navigate('Member', { id }),
-    goToCommunity: makeGoToCommunity(),
-    goToCreateCommunity: () => navigation.navigate('Create Community'),
+    goToGroup: makeGoToGroup(),
+    goToCreateGroup: () => navigation.navigate('Create Group'),
     ...bindActionCreators({
-      fetchCommunityTopic,
+      fetchGroupTopic,
       setTopicSubscribe,
-      selectCommunity,
-      selectNetwork
+      selectGroup,
     }, dispatch)
   }
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
-  const { community, network, topic, topicName, topicSubscribed } = stateProps
+  const { group, topic, topicName, topicSubscribed } = stateProps
   const { navigation } = ownProps
-  const communityId = community?.id
-  const slug = community?.slug
+  const groupId = group?.id
+  const slug = group?.slug
   return {
     ...stateProps,
     ...dispatchProps,
     ...ownProps,
-    newPost: () => dispatchProps.newPost(communityId, topicName),
+    newPost: () => dispatchProps.newPost(groupId, topicName),
     showTopic: selectedTopicName => {
       if (selectedTopicName == topicName) return
-      if (network) {
-        return showToast('Topics support for "All Communities" and Networks coming soon!')
-      }
+      //   return showToast('Topics support for "All Groups" and Networks coming soon!')
       if (topicName) {
         navigation.setParams({ topicName: selectedTopicName })
       } else {
-        navigation.push('Topic Feed', { communityId, topicName: selectedTopicName })
+        navigation.push('Topic Feed', { groupId, topicName: selectedTopicName })
       }
     },
-    fetchCommunityTopic: topicName && slug
-      ? () => dispatchProps.fetchCommunityTopic(topicName, slug)
+    fetchGroupTopic: topicName && slug
+      ? () => dispatchProps.fetchGroupTopic(topicName, slug)
       : () => {},
-    setTopicSubscribe: topic && communityId
-      ? () => dispatchProps.setTopicSubscribe(topic.id, communityId, !topicSubscribed)
+    setTopicSubscribe: topic && groupId
+      ? () => dispatchProps.setTopicSubscribe(topic.id, groupId, !topicSubscribed)
       : () => {}
   }
 }

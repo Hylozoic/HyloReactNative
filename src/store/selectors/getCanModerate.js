@@ -1,12 +1,12 @@
 import getMe from './getMe'
-import getCurrentCommunity from './getCurrentCommunity'
+import getCurrentGroup from './getCurrentGroup'
 
 import { createSelector } from 'reselect'
 
 const getCanModerate = createSelector(
   getMe,
-  getCurrentCommunity,
-  (currentUser, currentCommunity) => (currentUser && currentUser.canModerate(currentCommunity))
+  getCurrentGroup,
+  (currentUser, currentGroup) => (currentUser && currentUser.canModerate(currentGroup))
 )
 
 export default getCanModerate

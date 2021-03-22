@@ -1,0 +1,102 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GroupSettings GroupBanner matches the last snapshot 1`] = `
+<View>
+  <ImagePicker
+    id={1}
+    onChoice={[Function]}
+    onPendingChange={[Function]}
+    title="Change Banner"
+    type="groupBanner"
+  >
+    <Image
+      source={
+        Object {
+          "uri": "yay.png",
+        }
+      }
+    />
+    <EditButton
+      isLoading={false}
+    />
+  </ImagePicker>
+  <View>
+    <ImagePicker
+      id={1}
+      onChoice={[Function]}
+      onPendingChange={[Function]}
+      title="Change Avatar"
+      type="groupAvatar"
+    >
+      <View>
+        <Image
+          source={
+            Object {
+              "uri": "pong.png",
+            }
+          }
+        />
+        <EditButton
+          isLoading={false}
+        />
+      </View>
+    </ImagePicker>
+  </View>
+</View>
+`;
+
+exports[`GroupSettings GroupBanner shows local images if present 1`] = `undefined`;
+
+exports[`GroupSettings matches the last snapshot 1`] = `
+<ScrollView
+  contentContainerStyle={
+    Object {
+      "backgroundColor": "#FFFFFF",
+      "paddingHorizontal": 16,
+      "paddingTop": 20,
+    }
+  }
+>
+  <KeyboardFriendlyView>
+    <Component
+      allowFontScaling={true}
+      onChangeText={[Function]}
+      rejectResponderTermination={true}
+      underlineColorAndroid="transparent"
+    />
+    <GroupBanner
+      group={
+        Object {
+          "avatarUrl": "someAvatarUrl.com",
+          "bannerUrl": "someBannerUrl.com",
+          "description": "some description",
+          "id": 10,
+          "name": "Group Time",
+        }
+      }
+      isFocused={true}
+      updateGroupSettings={[MockFunction]}
+    />
+    <Text>
+      DESCRIPTION
+    </Text>
+    <Component
+      allowFontScaling={true}
+      multiline={true}
+      numberOfLines={5}
+      onChangeText={[Function]}
+      rejectResponderTermination={true}
+      underlineColorAndroid="transparent"
+    />
+    <Text>
+      LOCATION
+    </Text>
+    <Component
+      allowFontScaling={true}
+      onChangeText={[Function]}
+      rejectResponderTermination={true}
+      underlineColorAndroid="transparent"
+    />
+  </KeyboardFriendlyView>
+</ScrollView>
+`;

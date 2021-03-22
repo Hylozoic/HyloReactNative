@@ -7,7 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Added
+- Holonic Architecture (Groups) conversion
+- Public Groups
+- Event type to feed filter
 ### Changed
+- Upgraded ReduxORM
+- Updated Event label to match web
 ### Fixed
 
 ## [3.0.3] - 2020-01-31

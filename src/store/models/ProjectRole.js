@@ -1,10 +1,10 @@
 import { attr, fk, Model } from 'redux-orm'
 
-const ProjectRole = Model.createClass({
+class ProjectRole extends Model {
   toString () {
     return `Attachment (${this.type}): ${this.url}`
   }
-})
+}
 
 export default ProjectRole
 

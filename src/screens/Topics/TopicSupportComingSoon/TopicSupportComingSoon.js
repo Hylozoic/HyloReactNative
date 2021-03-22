@@ -16,7 +16,7 @@ export default function TopicSupportComingSoon ({ style, navigation }) {
       </View>
       <View style={styles.paddedRow}>
         <Text style={styles.bodyText}>
-          In the meantime, click a #topic from an individual community to see posts from that community.
+          In the meantime, click a #topic from an individual group to see posts from that group.
         </Text>
       </View>
       <Image style={styles.image} resizeMode='contain' source={axolotlImage} />

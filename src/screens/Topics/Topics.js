@@ -14,8 +14,8 @@ import { bannerlinearGradientColors } from 'style/colors'
 import TopicSupportComingSoon from './TopicSupportComingSoon'
 
 export default function Topics ({
-  communityHasTopics,
-  community,
+  groupHasTopics,
+  group,
   filteredTopics,
   pending,
   setTopicSubscribe,
@@ -23,21 +23,21 @@ export default function Topics ({
   searchTerm,
   setTerm,
   navigation,
-  fetchCommunityTopics
+  fetchGroupTopics
 }) {
-  if (!community?.id) return <TopicSupportComingSoon navigation={navigation} />
+  if (!group?.id) return <TopicSupportComingSoon navigation={navigation} />
 
   const ref = useRef(null)
 
   useScrollToTop(ref)
   useFocusEffect(
     useCallback(() => {
-      community?.id && fetchCommunityTopics()
-    }, [community.id])
+      group?.id && fetchGroupTopics()
+    }, [group.id])
   )
 
-  const bannerUrl = get('bannerUrl', community)
-  const name = get('name', community)
+  const bannerUrl = get('bannerUrl', group)
+  const name = get('name', group)
   const image = { uri: bannerUrl }
 
   return (
@@ -55,12 +55,12 @@ export default function Topics ({
           value={searchTerm}
           onChangeText={setTerm}
           placeholder='Search Topics'
-          disable={!communityHasTopics}
+          disable={!groupHasTopics}
         />
         {pending && isEmpty(filteredTopics)
           ? <Loading />
           : <TopicList
-              communityHasTopics={communityHasTopics}
+              groupHasTopics={groupHasTopics}
               searchTerm={searchTerm}
               filteredTopics={filteredTopics}
               setTopicSubscribe={setTopicSubscribe}
@@ -72,15 +72,15 @@ export default function Topics ({
 }
 
 export function TopicList ({
-  communityHasTopics,
+  groupHasTopics,
   filteredTopics,
   setTopicSubscribe,
   searchTerm,
   goToTopic
 }) {
-  if (!communityHasTopics) return (
+  if (!groupHasTopics) return (
     <View style={styles.topicList}>
-      <Text style={styles.emptyList}>No topics were found for this community</Text>
+      <Text style={styles.emptyList}>No topics were found for this group</Text>
     </View>
   )
   return (

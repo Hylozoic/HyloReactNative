@@ -11,7 +11,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 
 it('renders correctly if currentUserHasMemberships', () => {
-  const community = {
+  const group = {
     id: '1'
   }
   const currentUser = {
@@ -23,7 +23,7 @@ it('renders correctly if currentUserHasMemberships', () => {
   renderer.render(
     <NavigationContainer>
       <Feed
-        community={community}
+        group={group}
         currentUser={currentUser}
         currentUserHasMemberships
         navigation={{}}
@@ -31,7 +31,7 @@ it('renders correctly if currentUserHasMemberships', () => {
         newPost={newPost}
         showPost={() => {}}
         editPost={() => {}}
-        goToCommunity={() => {}}
+        goToGroup={() => {}}
         topicName='amazing'
       />
     </NavigationContainer>
@@ -42,7 +42,7 @@ it('renders correctly if currentUserHasMemberships', () => {
 })
 
 it('renders correctly if currentUserHasMemberships is false', () => {
-  const community = {
+  const group = {
     id: '1'
   }
   const currentUser = {
@@ -54,14 +54,14 @@ it('renders correctly if currentUserHasMemberships is false', () => {
   renderer.render(
     <NavigationContainer>
       <Feed
-        community={community}
+        group={group}
         currentUser={currentUser}
         currentUserHasMemberships={false}
         navigation={{}}
         newPost={newPost}
         showPost={() => {}}
         editPost={() => {}}
-        goToCommunity={() => {}}
+        goToGroup={() => {}}
         topicName='amazing'
       />
     </NavigationContainer>
@@ -71,7 +71,7 @@ it('renders correctly if currentUserHasMemberships is false', () => {
   expect(actual).toMatchSnapshot()
 })
 
-it('calls fetchCommunityTopic on componentDidMount', async () => {
+it('calls fetchGroupTopic on componentDidMount', async () => {
   const state = {
     orm: orm.getEmptyState(),
     FeedList: {},
@@ -81,10 +81,10 @@ it('calls fetchCommunityTopic on componentDidMount', async () => {
 
   const props = {
     navigation: {},
-    fetchCommunityTopic: jest.fn(),
+    fetchGroupTopic: jest.fn(),
     showTopic: jest.fn(),
     showMember: jest.fn(),
-    goToCommunity: jest.fn(),
+    goToGroup: jest.fn(),
     setTopicSubscribe: jest.fn(),
     newPost: jest.fn(),
     topicName: 'test-topic'
@@ -107,7 +107,7 @@ it('calls fetchCommunityTopic on componentDidMount', async () => {
   )
   const { toJSON } = render(component)
 
-  expect(props.fetchCommunityTopic).toHaveBeenCalledTimes(1)
+  expect(props.fetchGroupTopic).toHaveBeenCalledTimes(1)
 
   await act(async () => {
     expect(toJSON()).toMatchSnapshot()
@@ -125,15 +125,11 @@ it('calls fetchCommunityTopic on componentDidMount', async () => {
 
 // jest.mock('react-native-linear-gradient')
 
-// const community = {
+// const group = {
 //   id: '1',
-//   bannerUrl: 'community.png'
+//   bannerUrl: 'group.png'
 // }
 
-// const network = {
-//   id: '2',
-//   bannerUrl: 'network.png'
-// }
 // const currentUser = {
 //   id: '2',
 //   avatarUrl: 'user.png',
@@ -143,11 +139,11 @@ it('calls fetchCommunityTopic on componentDidMount', async () => {
 // const newPost = () => {}
 
 // describe('FeedBanner', () => {
-//   it('renders correctly with all=true, and no community or user', () => {
+//   it('renders correctly with all=true, and no group or user', () => {
 //     const renderer = new ReactShallowRenderer()
 //     renderer.render(<FeedBanner
 //       all
-//       community={{ id: 'anything' }}
+//       group={{ id: 'anything' }}
 //       newPost={newPost}
 //                     />)
 //     const actual = renderer.getRenderOutput()
@@ -155,10 +151,10 @@ it('calls fetchCommunityTopic on componentDidMount', async () => {
 //     expect(actual).toMatchSnapshot()
 //   })
 
-//   it('renders correctly with a community and user', () => {
+//   it('renders correctly with a group and user', () => {
 //     const renderer = new ReactShallowRenderer()
 //     renderer.render(<FeedBanner
-//       community={community}
+//       group={group}
 //       currentUser={currentUser}
 //       newPost={newPost}
 //                     />)
@@ -167,10 +163,9 @@ it('calls fetchCommunityTopic on componentDidMount', async () => {
 //     expect(actual).toMatchSnapshot()
 //   })
 
-//   it('renders correctly with a network and user', () => {
+//   it('renders correctly with a user', () => {
 //     const renderer = new ReactShallowRenderer()
 //     renderer.render(<FeedBanner
-//       network={network}
 //       currentUser={currentUser}
 //       newPost={newPost}
 //                     />)
@@ -183,7 +178,7 @@ it('calls fetchCommunityTopic on componentDidMount', async () => {
 //     const setTopicSubscribe = jest.fn()
 //     const renderer = TestRenderer.create(
 //       <FeedBanner
-//         community={{ name: 'Earth' }}
+//         group={{ name: 'Earth' }}
 //         topicSubscribed={false}
 //         setTopicSubscribe={setTopicSubscribe}
 //       />

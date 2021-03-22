@@ -6,8 +6,8 @@ import Avatar from 'components/Avatar'
 
 import styles from './NotificationCard.styles'
 
-const renderCommunity = community => community
-  ? <Text style={styles.community}>${' community'}</Text>
+const renderGroup = group => group
+  ? <Text style={styles.group}>${' group'}</Text>
   : null
 
 const renderFirstName = ({ name }) =>
@@ -31,7 +31,7 @@ export default function NotificationCard ({ notification }) {
     actor,
     avatarSeparator,
     body,
-    community,
+    group,
     createdAt,
     header,
     topic,
@@ -56,7 +56,7 @@ export default function NotificationCard ({ notification }) {
         <Text style={styles.text} numberOfLines={2}>
           {renderFirstName(actor)}
           {body}
-          {renderCommunity(community)}
+          {renderGroup(group)}
         </Text>
         <Text style={styles.date}>{createdAt}</Text>
       </View>
@@ -72,7 +72,7 @@ NotificationCard.propTypes = {
       name: string,
       avatarUrl: string
     }),
-    community: string,
+    group: string,
     createdAt: string,
     body: string,
     header: string,

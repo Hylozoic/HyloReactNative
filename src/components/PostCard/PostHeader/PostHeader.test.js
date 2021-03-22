@@ -3,7 +3,7 @@ import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import PostHeader, { PostMenu, PostLabel } from './PostHeader'
 
-it('renders correctly with all=true, and no community or user', () => {
+it('renders correctly with all=true, and no group or user', () => {
   const creator = {
     id: 24,
     name: 'Zeus',
@@ -28,13 +28,13 @@ it('renders correctly with all=true, and no community or user', () => {
   expect(actual).toMatchSnapshot()
 })
 
-it('renders correctly when showCommunity is true', () => {
+it('renders correctly when showGroup is true', () => {
   const creator = {
     name: 'Zeus',
     tagline: 'Go!',
     avatarUrl: 'foo.png'
   }
-  const communities = [
+  const groups = [
     {
       id: 1,
       name: 'Olympus'
@@ -43,8 +43,8 @@ it('renders correctly when showCommunity is true', () => {
   const renderer = new ReactShallowRenderer()
   renderer.render(<PostHeader
     creator={creator}
-    communities={communities}
-    showCommunity
+    groups={groups}
+    showGroup
     pinned={false}
     postId={20}
     slug='olympus'
@@ -65,7 +65,7 @@ it('renders correctly with no flagging', () => {
     tagline: 'Go!',
     avatarUrl: 'foo.png'
   }
-  const communities = [
+  const groups = [
     {
       id: 1,
       name: 'Olympus'
@@ -74,8 +74,8 @@ it('renders correctly with no flagging', () => {
   const renderer = new ReactShallowRenderer()
   renderer.render(<PostHeader
     creator={creator}
-    communities={communities}
-    showCommunity
+    groups={groups}
+    showGroup
     postId={20}
     slug='olympus'
     canFlag={false}

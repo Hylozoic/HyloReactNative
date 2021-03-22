@@ -24,9 +24,55 @@ Object {
               post {
                 
   id
+  announcement
   title
   details
   type
+  creator {
+    id
+    name
+    avatarUrl
+  }
+  createdAt
+  updatedAt
+  isPublic
+  fulfilledAt
+  startTime
+  endTime
+  myEventResponse
+  commenters(first: 3) {
+    id
+    name
+    avatarUrl
+  }
+  commentersTotal
+  commentsTotal
+  comments(first: 10, order: \\"desc\\") {
+    items {
+      id
+      text
+      creator {
+        id
+        name
+        avatarUrl
+      }
+      attachments {
+        id
+        position
+        type
+        url
+      }
+      createdAt
+    }
+    total
+    hasMore
+  }
+  linkPreview {
+    id
+    title
+    url
+    imageUrl
+  }
   location
   locationObject {
     id
@@ -47,63 +93,25 @@ Object {
     neighborhood
     region
   }
-  announcement
-  creator {
-    id
-    name
-    avatarUrl
-    tagline
-  }
-  createdAt
-  updatedAt
-  isPublic
-  fulfilledAt
-  startTime
-  endTime
-  myEventResponse
-  commenters(first: 3) {
-    id
-    name
-    avatarUrl
-  }
-  commentersTotal
-  commentsTotal
-  comments(first: 10, order: \\"desc\\") {
-        items {
-          id
-          text
-          creator {
-            id
-            name
-            avatarUrl
-          }
-          createdAt
-        }
-        total
-        hasMore
-      }
-  linkPreview {
-    title
-    url
-    imageUrl
-  }
   votesTotal
   myVote
-  communities {
+  acceptContributions
+  totalContributions
+  groups {
     id
     name
     slug
   }
   attachments {
-    id
-    position
     type
     url
+    position
+    id
   }
   postMemberships {
     id
     pinned
-    community {
+    group {
       id
     }
   }
@@ -114,15 +122,47 @@ Object {
     followersTotal
   }
   members {
+    total
+    hasMore
     items {
       id
       name
       avatarUrl
+      bio
+      tagline
+      location
+      skills (first: 100) {
+        items {
+          id
+          name
+        }
+      }
     }
+  }
+  eventInvitations {
     total
+    hasMore
+    items {
+      id
+      response
+      person {
+        id
+        name
+        avatarUrl
+        bio
+        tagline
+        location
+        skills (first: 100) {
+          items {
+            id
+            name
+          }
+        }
+      }
+    }
   }
               }
-              community {
+              group {
                 id
                 name
                 slug
@@ -222,7 +262,7 @@ Object {
 exports[`selectors/refiners refineActivity matches the previous ACTION_APPROVED_JOIN_REQUEST snapshot 1`] = `
 Object {
   "body": "approved your request to join",
-  "community": "Aardvarks Alert",
+  "group": "Aardvarks Alert",
   "header": "Join Request Approved",
   "onPress": [Function],
 }
@@ -250,7 +290,7 @@ Object {
 exports[`selectors/refiners refineActivity matches the previous ACTION_JOIN_REQUEST snapshot 1`] = `
 Object {
   "body": "asked to join",
-  "community": "Aardvarks Alert",
+  "group": "Aardvarks Alert",
   "header": "New join request",
   "nameInHeader": true,
   "onPress": [Function],

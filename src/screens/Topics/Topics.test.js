@@ -7,40 +7,40 @@ import Topics, { TopicList, TopicRow, SubscribeStar } from './Topics'
 describe('Topics', () => {
 
   describe('"Support Coming Soon"', () => {
-    it('displayed when no community id', () => {
+    it('displayed when no group id', () => {
       const props = {
-        fetchCommunityTopics: jest.fn()
+        fetchGroupTopics: jest.fn()
       }
       const { getByText } = render(
         <MockedScreen>
           {() => <Topics {...props} />}
         </MockedScreen>
       )
-      expect(props.fetchCommunityTopics).not.toBeCalled()
+      expect(props.fetchGroupTopics).not.toBeCalled()
       getByText("We're working on expanding #topics to more places.")
     })
 
-    it("not displayed when a community id is present, fetches", () => {
+    it("not displayed when a group id is present, fetches", () => {
       const props = {
-        community: { id: 123 },
-        fetchCommunityTopics: jest.fn()
+        group: { id: 123 },
+        fetchGroupTopics: jest.fn()
       }
       const { getByText } = render(
         <MockedScreen>
           {() => <Topics {...props} />}
         </MockedScreen>
       )
-      expect(props.fetchCommunityTopics).toBeCalled()
-      expect(getByText('No topics were found for this community'))
+      expect(props.fetchGroupTopics).toBeCalled()
+      expect(getByText('No topics were found for this group'))
     })
 
-    it('fetches when rerendered with a communityId', () => {
+    it('fetches when rerendered with a groupId', () => {
       const propsBefore = {
-        fetchCommunityTopics: jest.fn()
+        fetchGroupTopics: jest.fn()
       }
       const propsAfter = {
-        community: { id: 123 },
-        fetchCommunityTopics: jest.fn()
+        group: { id: 123 },
+        fetchGroupTopics: jest.fn()
       }
       const { rerender } = render(
         <MockedScreen>
@@ -52,18 +52,18 @@ describe('Topics', () => {
           {() => <Topics {...propsAfter} />}
         </MockedScreen>
       )
-      expect(propsBefore.fetchCommunityTopics).not.toBeCalled()
-      expect(propsAfter.fetchCommunityTopics).toBeCalled()
+      expect(propsBefore.fetchGroupTopics).not.toBeCalled()
+      expect(propsAfter.fetchGroupTopics).toBeCalled()
     })
   })
 
-  it('renders correctly a community and topics', () => {
+  it('renders correctly a group and topics', () => {
     const props = {
-      fetchCommunityTopics: () => {},
-      community: {
+      fetchGroupTopics: () => {},
+      group: {
         id: 123,
         name: 'Foomunity',
-        bannerUrl: 'community-banner.png'
+        bannerUrl: 'group-banner.png'
       },
       topics: [1, 2, 3],
       setTopicSubscribe: () => {},
@@ -79,11 +79,11 @@ describe('Topics', () => {
 
   it('renders correctly with pending=true', () => {
     const props = {
-      fetchCommunityTopics: () => {},
-      community: {
+      fetchGroupTopics: () => {},
+      group: {
         id: 123,
         name: 'Foomunity',
-        bannerUrl: 'community-banner.png'
+        bannerUrl: 'group-banner.png'
       },
       topics: [1, 2, 3],
       pending: true,
@@ -98,14 +98,14 @@ describe('Topics', () => {
     expect(toJSON()).toMatchSnapshot()
   })
 
-  it('refetches when rerendered with a different communityId', () => {
+  it('refetches when rerendered with a different groupId', () => {
     const propsBefore = {
-      community: { id: 333 },
-      fetchCommunityTopics: jest.fn()
+      group: { id: 333 },
+      fetchGroupTopics: jest.fn()
     }
     const propsAfter = {
-      community: { id: 222 },
-      fetchCommunityTopics: jest.fn()
+      group: { id: 222 },
+      fetchGroupTopics: jest.fn()
     }
     const { rerender } = render(
       <MockedScreen>
@@ -117,16 +117,16 @@ describe('Topics', () => {
         {() => <Topics {...propsAfter} />}
       </MockedScreen>
     )
-    expect(propsBefore.fetchCommunityTopics).toBeCalled()
-    expect(propsAfter.fetchCommunityTopics).toBeCalled()
+    expect(propsBefore.fetchGroupTopics).toBeCalled()
+    expect(propsAfter.fetchGroupTopics).toBeCalled()
   })
 })
 
 describe('TopicList', () => {
   it('matches last snapshot', () => {
     const props = {
-      community: { id: '1' },
-      communityHasTopics: true,
+      group: { id: '1' },
+      groupHasTopics: true,
       filteredTopics: [
         { name: 'discussion', newPostCount: 1, isSubscribe: false },
         { name: 'tech', newPostCount: 10, isSubscribe: false },

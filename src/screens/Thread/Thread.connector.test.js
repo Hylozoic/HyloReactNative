@@ -1,5 +1,5 @@
 import { mapStateToProps, mapDispatchToProps, mergeProps } from './Thread.connector'
-import { ALL_COMMUNITIES_ID } from 'store/models/Network'
+import { ALL_GROUP_ID } from 'store/models/Group'
 
 jest.mock('util/websockets', () => ({
   sendIsTyping: jest.fn()
@@ -42,7 +42,7 @@ describe('mapDispatchToProps', () => {
     dispatchProps.sendIsTyping()
     dispatchProps.updateThreadReadTime()
     expect(dispatch.mock.calls).toMatchSnapshot()
-    dispatchProps.showTopic(null, ALL_COMMUNITIES_ID)('topicName')
+    dispatchProps.showTopic(null, ALL_GROUP_ID)('topicName')
     dispatchProps.showTopic(123)('topicName')
     expect(props.navigation.navigate.mock.calls).toMatchSnapshot()
   })

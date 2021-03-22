@@ -1,5 +1,5 @@
 import queryResults, { buildKey, makeQueryResultsModelSelector, makeGetQueryResults } from './queryResults'
-import { FETCH_POSTS } from '../actions/fetchPosts'
+import { FETCH_POSTS } from 'store/constants'
 import {
   REMOVE_POST_PENDING
 } from 'components/PostCard/PostHeader/PostHeader.store'
@@ -19,7 +19,7 @@ it('adds data to empty state', () => {
     type: FETCH_POSTS,
     payload: {
       data: {
-        community: {
+        group: {
           posts: {
             total: 22,
             items: [{ id: 7 }, { id: 8 }, { id: 9 }],
@@ -31,7 +31,7 @@ it('adds data to empty state', () => {
     meta: {
       graphql: { variables },
       extractQueryResults: {
-        getItems: get('payload.data.community.posts')
+        getItems: get('payload.data.group.posts')
       }
     }
   }
@@ -58,7 +58,7 @@ it('appends to existing data, ignoring duplicates', () => {
     type: FETCH_POSTS,
     payload: {
       data: {
-        community: {
+        group: {
           posts: {
             total: 22,
             items: [{ id: 7 }, { id: 8 }, { id: 9 }],
@@ -70,7 +70,7 @@ it('appends to existing data, ignoring duplicates', () => {
     meta: {
       graphql: { variables },
       extractQueryResults: {
-        getItems: get('payload.data.community.posts')
+        getItems: get('payload.data.group.posts')
       }
     }
   }
@@ -133,7 +133,7 @@ it('replaces existing data when the "reset" option is set', () => {
     type: FETCH_POSTS,
     payload: {
       data: {
-        community: {
+        group: {
           posts: {
             total: 22,
             items: [{ id: 7 }, { id: 8 }, { id: 9 }],
@@ -145,7 +145,7 @@ it('replaces existing data when the "reset" option is set', () => {
     meta: {
       graphql: { variables },
       extractQueryResults: {
-        getItems: get('payload.data.community.posts'),
+        getItems: get('payload.data.group.posts'),
         reset: true
       }
     }
@@ -166,7 +166,7 @@ it('uses getType and getParams from extractQueryResults', () => {
     type: 'DIFFERENT_TYPE',
     payload: {
       data: {
-        community: {
+        group: {
           posts: {
             total: 22,
             items: [{ id: 7 }, { id: 8 }, { id: 9 }],
@@ -183,7 +183,7 @@ it('uses getType and getParams from extractQueryResults', () => {
       extractQueryResults: {
         getType: () => FETCH_POSTS,
         getParams: () => variables,
-        getItems: get('payload.data.community.posts')
+        getItems: get('payload.data.group.posts')
       }
     }
   }

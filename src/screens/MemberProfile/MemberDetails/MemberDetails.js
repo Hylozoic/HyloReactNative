@@ -112,7 +112,7 @@ export default class MemberDetails extends React.Component {
   }
 
   render () {
-    const { goToCommunity, goToSkills, isMe, person, skills, onPressMessages } = this.props
+    const { goToGroup, goToSkills, isMe, person, skills, onPressMessages } = this.props
     const { editing, errors } = this.state
     const personEdits = this.state.person
 
@@ -141,9 +141,9 @@ export default class MemberDetails extends React.Component {
           editable={editing}
           goToSkills={goToSkills}
         />
-        <MemberCommunities
+        <MemberGroups
           person={person}
-          goToCommunity={goToCommunity}
+          goToGroup={goToGroup}
           editing={editing}
         />
       </ScrollView>
@@ -205,31 +205,31 @@ export function MemberSkills ({ skills, editable, goToSkills }) {
   )
 }
 
-export function MemberCommunities ({ person: { memberships }, goToCommunity, editing }) {
+export function MemberGroups ({ person: { memberships }, goToGroup, editing }) {
   if (isEmpty(memberships)) return null
 
   return (
-    <View style={styles.communitiesContainer}>
-      <Text style={styles.sectionLabel}>My Hylo Communities</Text>
+    <View style={styles.groupsContainer}>
+      <Text style={styles.sectionLabel}>My Hylo Groups</Text>
       {memberships.map(membership =>
-        <CommunityRow membership={membership} key={membership.id} goToCommunity={goToCommunity} editing={editing} />)}
+        <GroupRow membership={membership} key={membership.id} goToGroup={goToGroup} editing={editing} />)}
     </View>
   )
 }
 
-export function CommunityRow ({ membership, goToCommunity, editing }) {
-  const { community, hasModeratorRole } = membership
+export function GroupRow ({ membership, goToGroup, editing }) {
+  const { group, hasModeratorRole } = membership
 
   const formatCount = count => {
     if (count < 1000) return `${count}`
     return `${Number(count / 1000).toFixed(1)}k`
   }
-  const memberCount = formatCount(community.memberCount)
+  const memberCount = formatCount(group.memberCount)
   return (
-    <View style={styles.communityRow}>
+    <View style={styles.groupRow}>
       {hasModeratorRole && <StarIcon style={styles.starIcon} />}
-      <TouchableOpacity onPress={() => goToCommunity(community.id)} disabled={editing}>
-        <Text style={styles.communityName}>{community.name}</Text>
+      <TouchableOpacity onPress={() => goToGroup(group.id)} disabled={editing}>
+        <Text style={styles.groupName}>{group.name}</Text>
       </TouchableOpacity>
       <Text style={styles.memberCount}>{memberCount}</Text>
       <Icon name='Members' style={styles.memberIcon} />

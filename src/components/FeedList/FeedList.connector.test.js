@@ -3,8 +3,8 @@ import { buildKey } from 'store/reducers/queryResults'
 import { times } from 'lodash/fp'
 import { mapStateToProps, mergeProps, shouldResetNewPostCount } from './FeedList.connector'
 import { MODULE_NAME, defaultState, defaultSortBy } from './FeedList.store'
-import { FETCH_POSTS } from 'store/actions/fetchPosts'
-import { ALL_COMMUNITIES_ID } from 'store/models/Network'
+import { FETCH_POSTS } from 'store/constants'
+import { ALL_GROUP_ID } from 'store/models/Group'
 
 describe('mapStateToProps', () => {
   let state
@@ -13,7 +13,7 @@ describe('mapStateToProps', () => {
     const session = orm.session(orm.getEmptyState())
 
     times(i => {
-      session.Post.create({ id: i.toString(), communities: ['1'] })
+      session.Post.create({ id: i.toString(), groups: ['1'] })
     }, 5)
 
     state = {
@@ -31,14 +31,13 @@ describe('mapStateToProps', () => {
 
   it('returns empty posts and default query props if no results exist', () => {
     expect(mapStateToProps(state, { id: 'bar' })).toEqual({
-      communityId: undefined,
+      groupId: undefined,
       postIds: [],
       hasMore: undefined,
       pending: false,
       pendingRefresh: false,
       filter: defaultState.filter,
       sortBy: defaultState.sortBy,
-      networkId: undefined,
       queryProps: {
         sortBy: 'updated'
       }
@@ -46,7 +45,7 @@ describe('mapStateToProps', () => {
   })
 
   it('returns posts in the correct order', () => {
-    expect(mapStateToProps(state, { community: { slug: 'foo', id: 10 } })).toEqual({
+    expect(mapStateToProps(state, { group: { slug: 'foo', id: 10 } })).toEqual({
       postIds: [
         '1',
         '3',
@@ -54,33 +53,11 @@ describe('mapStateToProps', () => {
       ],
       hasMore: true,
       pending: false,
-      communityId: 10,
-      networkId: undefined,
+      groupId: 10,
       pendingRefresh: false,
       filter: defaultState.filter,
       sortBy: defaultState.sortBy,
       queryProps: {
-        subject: 'community',
-        slug: 'foo',
-        sortBy: 'updated'
-      }
-    })
-  })
-
-  it('returns posts for a network ', () => {
-    expect(mapStateToProps(state, { community: { slug: 'foo' } })).toEqual({
-      postIds: [
-        '1',
-        '3',
-        '2'
-      ],
-      hasMore: true,
-      pending: false,
-      pendingRefresh: false,
-      filter: defaultState.filter,
-      sortBy: defaultState.sortBy,
-      queryProps: {
-        subject: 'community',
         slug: 'foo',
         sortBy: 'updated'
       }
@@ -101,7 +78,6 @@ describe('mergeProps', () => {
   it('sets up fetchPostsAndResetCount', () => {
     const stateProps = {
       queryProps: {
-        subject: 'community',
         sortBy: defaultSortBy
       }
     }
@@ -112,7 +88,7 @@ describe('mergeProps', () => {
     }
 
     const ownProps = {
-      community: {
+      group: {
         id: 1
       }
     }
@@ -121,16 +97,15 @@ describe('mergeProps', () => {
     return merged.fetchPosts()
       .then(() => {
         expect(dispatchProps.fetchPosts).toHaveBeenCalledWith({
-          sortBy: 'updated', subject: 'community'
+          sortBy: 'updated'
         }, undefined)
-        expect(dispatchProps.resetNewPostCount).toHaveBeenCalledWith(ownProps.community.id, 'Membership')
+        expect(dispatchProps.resetNewPostCount).toHaveBeenCalledWith(ownProps.group.id, 'Membership')
       })
   })
 
   it('sets up fetchPostsAndResetCount without calling resetNewPostCount', () => {
     const stateProps = {
       queryProps: {
-        subject: 'community',
         sortBy: defaultSortBy,
         filter: 'some filter'
       }
@@ -142,7 +117,7 @@ describe('mergeProps', () => {
     }
 
     const ownProps = {
-      community: {
+      group: {
         id: 1
       }
     }
@@ -151,7 +126,7 @@ describe('mergeProps', () => {
     return merged.fetchPosts()
       .then(() => {
         expect(dispatchProps.fetchPosts).toHaveBeenCalledWith({
-          sortBy: 'updated', subject: 'community', filter: 'some filter'
+          sortBy: 'updated', filter: 'some filter'
         }, undefined)
         expect(dispatchProps.resetNewPostCount).not.toHaveBeenCalled()
       })
@@ -164,7 +139,6 @@ describe('mergeProps', () => {
       hasMore: true,
       postIds: [1, 2, 3, 4],
       queryProps: {
-        subject: 'community',
         slug: 'food',
         sortBy: 'latest',
         filter: 'request',
@@ -173,7 +147,7 @@ describe('mergeProps', () => {
     }
 
     const ownProps = {
-      community: {
+      group: {
         id: 1
       }
     }
@@ -186,7 +160,6 @@ describe('mergeProps', () => {
       filter: stateProps.filter,
       sortBy: stateProps.sortBy,
       slug: 'food',
-      subject: 'community',
       topic: 'eggs'
     }, undefined)
     fetchPosts.mockClear()
@@ -196,7 +169,6 @@ describe('mergeProps', () => {
       filter: stateProps.filter,
       sortBy: stateProps.sortBy,
       slug: 'food',
-      subject: 'community',
       offset: 4,
       topic: 'eggs'
     })
@@ -209,8 +181,7 @@ describe('mergeProps', () => {
         queryProps: {
           filter: 'foo',
           sortBy: 'bar',
-          slug: ALL_COMMUNITIES_ID,
-          subject: ALL_COMMUNITIES_ID
+          slug: ALL_GROUP_ID
         }
       },
       dispatchProps,
@@ -221,50 +192,11 @@ describe('mergeProps', () => {
     expect(fetchPosts).toHaveBeenCalledWith({
       filter: 'foo',
       sortBy: 'bar',
-      slug: ALL_COMMUNITIES_ID,
-      subject: ALL_COMMUNITIES_ID
+      slug: ALL_GROUP_ID
     }, undefined)
     fetchPosts.mockClear()
 
     merged2.fetchMorePosts()
-    expect(fetchPosts).not.toHaveBeenCalled()
-  })
-
-  it('calls fetchProjects when isProjectFeed', () => {
-    const stateProps = {
-      sortBy: 'latest',
-      filter: 'request',
-      hasMore: true,
-      postIds: [1, 2, 3, 4],
-      queryProps: {
-        subject: 'community',
-        slug: 'food',
-        sortBy: 'latest',
-        filter: 'request',
-        topic: 'eggs'
-      }
-    }
-
-    const ownProps = {
-      community: {
-        id: 1
-      },
-      isProjectFeed: true
-    }
-    const fetchPosts = jest.fn()
-    const fetchProjects = jest.fn()
-
-    const dispatchProps = { fetchPosts, fetchProjects }
-    const merged = mergeProps(stateProps, dispatchProps, ownProps)
-
-    merged.fetchPosts()
-    expect(fetchProjects).toHaveBeenCalledWith({
-      filter: stateProps.filter,
-      sortBy: stateProps.sortBy,
-      slug: 'food',
-      subject: 'community',
-      topic: 'eggs'
-    }, undefined)
     expect(fetchPosts).not.toHaveBeenCalled()
   })
 })
@@ -272,28 +204,25 @@ describe('mergeProps', () => {
 describe('shouldResetNewPostCount', () => {
   it('returns true appropriately', () => {
     const props = {
-      subject: 'community',
       sortBy: defaultSortBy
     }
     expect(shouldResetNewPostCount(props)).toEqual(true)
   })
-  it('returns false with a subject that does not equal "community"', () => {
+  it('returns false if not a real "group"', () => {
     const props = {
-      subject: 'all communities',
+      slug: ALL_GROUP_ID,
       sortBy: defaultSortBy
     }
     expect(shouldResetNewPostCount(props)).toEqual(false)
   })
   it('returns false with a non-default sortBy', () => {
     const props = {
-      subject: 'community',
       sortBy: 'non-default'
     }
     expect(shouldResetNewPostCount(props)).toEqual(false)
   })
   it('returns false with a filter', () => {
     const props = {
-      subject: 'community',
       sortBy: defaultSortBy,
       filter: 'any filter'
     }
@@ -301,7 +230,6 @@ describe('shouldResetNewPostCount', () => {
   })
   it('returns false with a topic', () => {
     const props = {
-      subject: 'community',
       sortBy: defaultSortBy,
       topic: 'any topic'
     }

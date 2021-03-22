@@ -37,9 +37,8 @@ const getThreadResults = makeGetQueryResults(FETCH_THREADS)
 
 export const getThreads = ormCreateSelector(
   orm,
-  get('orm'),
-  ({ MessageThread }) =>
-    MessageThread
+  session =>
+    session?.MessageThread
       .all()
       .orderBy(thread => -new Date(thread.updatedAt))
       .toModelArray().map(thread => ({

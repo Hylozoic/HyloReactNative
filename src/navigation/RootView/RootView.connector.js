@@ -6,8 +6,8 @@ import checkSessionAndSetSignedIn from 'store/actions/checkSessionAndSetSignedIn
 import fetchCurrentUser from 'store/actions/fetchCurrentUser'
 import getMe from 'store/selectors/getMe'
 import { CHECK_SESSION_AND_SET_SIGNED_IN, FETCH_CURRENT_USER } from 'store/constants'
-import selectCommunity from 'store/actions/selectCommunity'
-import { getLastViewedCommunity } from 'store/models/Me'
+import selectGroup from 'store/actions/selectGroup'
+import { getLastViewedGroup } from 'store/models/Me'
 import getSignedIn from 'store/selectors/getSignedIn'
 import getSignupInProgress from 'store/selectors/getSignupInProgress'
 import getReturnToPath from 'store/selectors/getReturnToPath'
@@ -34,7 +34,7 @@ export function mapDispatchToProps (dispatch) {
     ...bindActionCreators({
       checkSessionAndSetSignedIn,
       fetchCurrentUser,
-      selectCommunity,
+      selectGroup,
       registerDevice
     }, dispatch)
   }
@@ -42,14 +42,14 @@ export function mapDispatchToProps (dispatch) {
 
 export function buildLoadCurrentUserSession ({
   fetchCurrentUser,
-  selectCommunity,
+  selectGroup,
   registerDevice
 }) {
   return async () => {
     const currentUserRaw = await fetchCurrentUser()
     const memberships = currentUserRaw?.payload?.data?.me?.memberships
-    const lastViewedCommunityId = getLastViewedCommunity(memberships)?.id
-    await selectCommunity(lastViewedCommunityId)
+    const lastViewedgroupId = getLastViewedGroup(memberships)?.id
+    await selectGroup(lastViewedgroupId)
     await registerOneSignal({ registerDevice })
   }
 }

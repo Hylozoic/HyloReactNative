@@ -1,22 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`InvitePeople.store.ormSessionReducer matches the last snapshot for allowCommunityInvites 1`] = `
+exports[`InvitePeople.store.ormSessionReducer matches the last snapshot for allowGroupInvites 1`] = `
 Object {
   "graphql": Object {
-    "query": "mutation ($communityId: ID, $data: Boolean) {
-        allowCommunityInvites(communityId: $communityId, data: $data) {
+    "query": "mutation ($groupId: ID, $data: Boolean) {
+        allowGroupInvites(groupId: $groupId, data: $data) {
           id
         }
       }",
     "variables": Object {
-      "communityId": "1",
       "data": false,
+      "groupId": "1",
     },
   },
   "meta": Object {
-    "communityId": "1",
+    "groupId": "1",
     "optimistic": true,
   },
-  "type": "InvitePeople/ALLOW_COMMUNITY_INVITES",
+  "type": "InvitePeople/ALLOW_GROUP_INVITES",
 }
 `;

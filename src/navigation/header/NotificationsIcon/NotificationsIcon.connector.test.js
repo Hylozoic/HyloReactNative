@@ -1,22 +1,14 @@
 import { mapStateToProps } from './NotificationsIcon.connector'
+import orm from 'store/models'
 
 describe('mapStateToProps', () => {
-  const state = {
-    orm: {
-      Me: {
-        items: ['1'],
-        itemsById: {
-          1: {
-            newNotificationCount: 12
-          }
-        },
-        meta: {
-          maxId: 1
-        }
-      }
-    }
-  }
   it('returns showBadge', () => {
+    const session = orm.session(orm.getEmptyState())
+    session.Me.create({
+      name: 'me',
+      newNotificationCount: 12
+    })
+    const state = { orm: session.state }
     const stateProps = mapStateToProps(state, {})
     expect(stateProps.showBadge).toEqual(true)
   })

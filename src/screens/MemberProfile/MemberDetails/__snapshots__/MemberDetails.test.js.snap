@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`CommunityRow handles high member count and moderator role 1`] = `
+exports[`GroupRow handles high member count and moderator role 1`] = `
 <View>
   <StarIcon />
   <ForwardRef
@@ -19,7 +19,7 @@ exports[`CommunityRow handles high member count and moderator role 1`] = `
 </View>
 `;
 
-exports[`CommunityRow matches the last snapshot 1`] = `
+exports[`GroupRow matches the last snapshot 1`] = `
 <View>
   <ForwardRef
     onPress={[Function]}
@@ -55,26 +55,26 @@ exports[`MemberBio matches the last snapshot 1`] = `
 </View>
 `;
 
-exports[`MemberCommunities matches the last snapshot 1`] = `
+exports[`MemberGroups matches the last snapshot 1`] = `
 <View>
   <Text>
-    My Hylo Communities
+    My Hylo Groups
   </Text>
-  <CommunityRow
+  <GroupRow
     membership={
       Object {
         "id": 1,
       }
     }
   />
-  <CommunityRow
+  <GroupRow
     membership={
       Object {
         "id": 2,
       }
     }
   />
-  <CommunityRow
+  <GroupRow
     membership={
       Object {
         "id": 3,

@@ -91,7 +91,7 @@ exports[`PostMenu returns a popupmenu when removePost 1`] = `
   actions={
     Array [
       Array [
-        "Remove Post From Community",
+        "Remove Post From Group",
         [Function],
       ],
     ]
@@ -114,7 +114,7 @@ exports[`PostMenu returns a popupmenu when removePost 1`] = `
 
 exports[`PostMenu returns null when no actions 1`] = `null`;
 
-exports[`renders correctly when showCommunity is true 1`] = `
+exports[`renders correctly when showGroup is true 1`] = `
 <View>
   <View>
     <ForwardRef
@@ -154,7 +154,7 @@ exports[`renders correctly when showCommunity is true 1`] = `
 </View>
 `;
 
-exports[`renders correctly with all=true, and no community or user 1`] = `
+exports[`renders correctly with all=true, and no group or user 1`] = `
 <View>
   <View>
     <ForwardRef

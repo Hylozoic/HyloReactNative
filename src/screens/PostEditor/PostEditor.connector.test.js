@@ -1,28 +1,28 @@
 import { mapStateToProps, mapDispatchToProps } from './PostEditor.connector'
 import orm from 'store/models'
 
-const communityId = 1
+const groupId = 1
 const id = 1
 const details = 'details'
-let community1, community2
+let group1, group2
 let props, state
 
 describe('PostEditor mapStateToProps', () => {
   beforeEach(() => {
     const session = orm.session(orm.getEmptyState())
-    community1 = session.Community.create({ id: '7' })
+    group1 = session.Group.create({ id: '7' })
     session.Me.create({
       id: '10',
       memberships: [session.Membership.create({
         id: '345',
-        community: community1.id,
+        group: group1.id,
         hasModeratorRole: true
       })]
     })
     session.Person.create({ id: '10' })
 
-    community2 = session.Community.create({ id: '8' })
-    session.Post.create({ id: '1', communities: [community1.id, '8'], creator: '10' })
+    group2 = session.Group.create({ id: '8' })
+    session.Post.create({ id: '1', groups: [group1.id, '8'], creator: '10' })
     session.Attachment.create({
       id: '2', post: '1', type: 'image', url: 'foo.png', position: 1
     })
@@ -39,7 +39,7 @@ describe('PostEditor mapStateToProps', () => {
     props = {
       route: {
         params: {
-          communityId,
+          groupId,
           id
         }
       },
@@ -53,17 +53,17 @@ describe('PostEditor mapStateToProps', () => {
     expect(mapStateToProps(state, props)).toMatchSnapshot()
   })
 
-  it('returns communities', () => {
-    expect(mapStateToProps(state, props).post.communities).toEqual([community1.ref, community2.ref])
+  it('returns groups', () => {
+    expect(mapStateToProps(state, props).post.groups).toEqual([group1.ref, group2.ref])
   })
 
   it('returns a post', () => {
     expect(mapStateToProps(state, props).post).toBeDefined()
   })
 
-  it('sets communities and imageUrls from post', () => {
+  it('sets groups and imageUrls from post', () => {
     const stateProps = mapStateToProps(state, props)
-    expect(stateProps.post.communities).toEqual([community1.ref, community2.ref])
+    expect(stateProps.post.groups).toEqual([group1.ref, group2.ref])
     expect(stateProps.imageUrls).toEqual(['bar.png', 'foo.png'])
   })
 })
@@ -74,7 +74,7 @@ describe('PostEditor mapDispatchToProps', () => {
     const props = {
       route: {
         params: {
-          communityId,
+          groupId,
           id
         }
       },
@@ -94,7 +94,7 @@ describe('PostEditor mapDispatchToProps', () => {
     const props = {
       route: {
         params: {
-          communityId,
+          groupId,
           id
         }
       },
@@ -108,15 +108,15 @@ describe('PostEditor mapDispatchToProps', () => {
 
     const postData = {
       title: '',
-      communities: []
+      groups: []
     }
 
     await expect(dispatchProps.save(postData)).rejects.toHaveProperty('message', 'Title cannot be blank')
 
     postData.title = 'a title'
-    await expect(dispatchProps.save(postData)).rejects.toHaveProperty('message', 'You must select a community')
+    await expect(dispatchProps.save(postData)).rejects.toHaveProperty('message', 'You must select a group')
 
-    postData.communities = [{ id: 1 }]
+    postData.groups = [{ id: 1 }]
     await expect(dispatchProps.save(postData)).resolves.toBeDefined()
 
     expect(dispatch).toHaveBeenCalled()

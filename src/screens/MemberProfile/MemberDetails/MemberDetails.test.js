@@ -2,7 +2,7 @@ import 'react-native'
 import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import ReactTestRenderer from 'react-test-renderer'
-import MemberDetails, { MemberBio, MemberSkills, MemberCommunities, CommunityRow } from './MemberDetails'
+import MemberDetails, { MemberBio, MemberSkills, MemberGroups, GroupRow } from './MemberDetails'
 import { pick } from 'lodash/fp'
 
 jest.mock('@react-navigation/native')
@@ -23,7 +23,7 @@ describe('MemberDetails', () => {
       <MemberDetails
         isFocused
         person={{ id: 1 }}
-        goToCommunity={() => {}}
+        goToGroup={() => {}}
         skills={['One']}
         navigation={navigation}
       />
@@ -255,7 +255,7 @@ describe('MemberSkills', () => {
   })
 })
 
-describe('MemberCommunities', () => {
+describe('MemberGroups', () => {
   it('matches the last snapshot', () => {
     const person = {
       memberships: [
@@ -266,7 +266,7 @@ describe('MemberCommunities', () => {
     }
 
     const renderer = new ReactShallowRenderer()
-    renderer.render(<MemberCommunities
+    renderer.render(<MemberGroups
       person={person}
                     />)
     const actual = renderer.getRenderOutput()
@@ -280,7 +280,7 @@ describe('MemberCommunities', () => {
     }
 
     const renderer = new ReactShallowRenderer()
-    renderer.render(<MemberCommunities
+    renderer.render(<MemberGroups
       person={person}
                     />)
     const actual = renderer.getRenderOutput()
@@ -289,10 +289,10 @@ describe('MemberCommunities', () => {
   })
 })
 
-describe('CommunityRow', () => {
+describe('GroupRow', () => {
   it('matches the last snapshot', () => {
     const membership = {
-      community: {
+      group: {
         id: 23,
         name: 'Great Place',
         memberCount: 432
@@ -301,7 +301,7 @@ describe('CommunityRow', () => {
     }
 
     const renderer = new ReactShallowRenderer()
-    renderer.render(<CommunityRow
+    renderer.render(<GroupRow
       membership={membership}
                     />)
     const actual = renderer.getRenderOutput()
@@ -311,7 +311,7 @@ describe('CommunityRow', () => {
 
   it('handles high member count and moderator role', () => {
     const membership = {
-      community: {
+      group: {
         id: 23,
         name: 'Greater Place',
         memberCount: 24495
@@ -320,7 +320,7 @@ describe('CommunityRow', () => {
     }
 
     const renderer = new ReactShallowRenderer()
-    renderer.render(<CommunityRow
+    renderer.render(<GroupRow
       membership={membership}
                     />)
     const actual = renderer.getRenderOutput()

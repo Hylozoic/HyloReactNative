@@ -32,7 +32,7 @@ export function mapDispatchToProps (dispatch, { navigation }) {
     markAllActivitiesRead: () => dispatch(markAllActivitiesRead()),
     markActivityRead: id => dispatch(markActivityRead(id)),
     updateNewNotificationCount: () => dispatch(updateNewNotificationCount()),
-    goToCreateCommunity: () => navigation.navigate('Create Community')
+    goToCreateGroup: () => navigation.navigate('Create Group')
   }
 }
 

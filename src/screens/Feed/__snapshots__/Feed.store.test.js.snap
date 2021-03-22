@@ -1,10 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`matches snapshot for fetchCommunityTopic 1`] = `
+exports[`matches snapshot for fetchGroupTopic 1`] = `
 Object {
   "graphql": Object {
-    "query": "query ($topicName: String, $communitySlug: String) {
-        communityTopic(topicName: $topicName, communitySlug: $communitySlug) {
+    "query": "query ($topicName: String, $groupSlug: String) {
+        groupTopic(topicName: $topicName, groupSlug: $groupSlug) {
           id
           isSubscribed
           followersTotal
@@ -13,40 +13,40 @@ Object {
             id
             name
           }
-          community {
+          group {
             id
           }
         }
       }",
     "variables": Object {
-      "communitySlug": "my-community",
+      "groupSlug": "my-group",
       "topicName": "news",
     },
   },
   "meta": Object {
     "afterInteractions": true,
-    "extractModel": "CommunityTopic",
+    "extractModel": "GroupTopic",
   },
-  "type": "Feed/FETCH_COMMUNITY_TOPIC",
+  "type": "Feed/FETCH_GROUP_TOPIC",
 }
 `;
 
 exports[`matches snapshot for setTopicSubscribe 1`] = `
 Object {
   "graphql": Object {
-    "query": "mutation($topicId: ID, $communityId: ID, $isSubscribing: Boolean) {
-        subscribe(topicId: $topicId, communityId: $communityId, isSubscribing: $isSubscribing) {
+    "query": "mutation($topicId: ID, $groupId: ID, $isSubscribing: Boolean) {
+        subscribe(topicId: $topicId, groupId: $groupId, isSubscribing: $isSubscribing) {
           success
         }
       }",
     "variables": Object {
-      "communityId": 2,
+      "groupId": 2,
       "isSubscribing": true,
       "topicId": 1,
     },
   },
   "meta": Object {
-    "communityId": 2,
+    "groupId": 2,
     "isSubscribing": true,
     "optimistic": true,
     "topicId": 1,

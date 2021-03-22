@@ -9,7 +9,7 @@ import { FileLabel } from 'screens/PostEditor/FileSelector'
 import SocketSubscriber from 'components/SocketSubscriber'
 import Comments from 'components/Comments'
 import PostBody from 'components/PostCard/PostBody'
-import PostCommunities from 'components/PostCard/PostCommunities'
+import PostGroups from 'components/PostCard/PostGroups'
 import PostImage from 'components/PostCard/PostImage'
 import PostFooter from 'components/PostCard/PostFooter'
 import PostHeader from 'components/PostCard/PostHeader'
@@ -19,6 +19,101 @@ import Button from 'components/Button'
 import InlineEditor, { toHtml } from 'components/InlineEditor'
 import Icon from 'components/Icon'
 import styles from './PostDetails.styles'
+
+export default class PostDetails extends React.Component {
+  state = {
+    commentText: ''
+  }
+
+  componentDidMount () {
+    this.props.fetchPost()
+    this.props.navigation.setOptions({
+      headerTitle: this.props.currentGroup?.name
+    })
+  }
+
+  shouldComponentUpdate (nextProps) {
+    return !!nextProps.isFocused
+  }
+
+  onShowTopic = (topicId) => this.props.showTopic(topicId, get('post.groups.0.id', this.props))
+
+  handleCreateComment = (commentText) => {
+    const commentTextAsHtml = toHtml(commentText)
+
+    if (!isEmpty(commentTextAsHtml)) {
+      this.setState(() => ({ submitting: true }))
+      return this.props.createComment(commentTextAsHtml)
+        .then(({ error }) => {
+          if (error) {
+            Alert.alert("Your comment couldn't be saved; please try again.")
+            this.setState(() => ({ submitting: false }))
+          } else {
+            this.setState(() => ({ commentText: '', submitting: false }))
+          }
+        })
+    }
+  }
+
+  handleCommentOnChange = (commentText) => {
+    this.setState(() => ({ commentText }))
+  }
+
+  renderPostDetails = (panHandlers) => {
+    const { post, currentUser, showMember } = this.props
+    const slug = get('groups.0.slug', post)
+    const isMember = find(member => member.id === currentUser.id, post.members)
+    const location = post.location || (post.locationObject && post.locationObject.fullText)
+
+    return (
+      <Comments
+        header={(
+          <PostCardForDetails
+            {...this.props}
+            showTopic={this.onShowTopic}
+            isMember={isMember}
+            location={location}
+          />
+        )}
+        postId={post.id}
+        showMember={showMember}
+        showTopic={this.onShowTopic}
+        slug={slug}
+        panHandlers={panHandlers}
+      />
+    )
+  }
+
+  render () {
+    const { post } = this.props
+    const { commentText, submitting } = this.state
+    const groupId = get('groups.0.id', post)
+
+    if (!post?.creator || !post?.title) return <LoadingScreen />
+
+    return (
+      <SafeAreaView edges={['right', 'left', 'top']} style={styles.container}>
+        <KeyboardAccessoryView
+          contentContainerStyle={{ marginBottom: 0, borderWidth: 0 }}
+          // TODO: Calculate these?
+          spaceBetweenKeyboardAndAccessoryView={isIOS ? -79 : 0}
+          contentOffsetKeyboardOpened={isIOS ? -45 : 0}
+          renderScrollable={this.renderPostDetails}>
+            <InlineEditor
+              onChange={this.handleCommentOnChange}
+              onSubmit={this.handleCreateComment}
+              value={commentText}
+              style={styles.inlineEditor}
+              submitting={submitting}
+              placeholder='Write a comment...'
+              groupId={groupId}
+            />
+        </KeyboardAccessoryView>
+        <SocketSubscriber type='post' id={post.id} />
+      </SafeAreaView>
+    )
+  }
+}
 
 export function PostCardForDetails ({
   post,
@@ -30,9 +125,9 @@ export function PostCardForDetails ({
   showMember,
   showTopic,
   goToMembers,
-  goToCommunity
+  goToGroup
 }) {
-  const slug = get('communities.0.slug', post)
+  const slug = get('groups.0.slug', post)
   const isMember = find(member => member.id === currentUser.id, post.members)
   const location = post.location || (post.locationObject && post.locationObject.fullText)
 
@@ -43,14 +138,14 @@ export function PostCardForDetails ({
         date={post.createdAt}
         type={post.type}
         editPost={editPost}
-        communities={post.communities}
+        groups={post.groups}
         slug={slug}
         pinned={post.pinned}
         topics={post.topics}
         showTopic={showTopic}
         postId={post.id}
         showMember={showMember}
-        goToCommunity={goToCommunity}
+        goToGroup={goToGroup}
         announcement={post.announcement}
         closeOnDelete
       />
@@ -88,13 +183,13 @@ export function PostCardForDetails ({
           <Text style={styles.infoRowInfo} selectable>{location}</Text>
         </View>
       )}
-      <PostCommunities
-        communities={post.communities}
+      <PostGroups
+        groups={post.groups}
         includePublic={post.isPublic}
         slug={slug}
         style={[styles.infoRow]}
-        goToCommunity={goToCommunity}
-        shouldShowCommunities
+        goToGroup={goToGroup}
+        shouldShowGroups
       />
       <PostFooter
         style={styles.postFooter}
@@ -108,101 +203,6 @@ export function PostCardForDetails ({
       />
     </View>
   )
-}
-export default class PostDetails extends React.Component {
-  state = {
-    commentText: ''
-  }
-
-  componentDidMount () {
-    this.props.fetchPost()
-    this.props.navigation.setOptions({
-      headerTitle: this.props.currentCommunity?.name
-        || this.props.currentNetwork?.name
-    })
-  }
-
-  shouldComponentUpdate (nextProps) {
-    return !!nextProps.isFocused
-  }
-
-  onShowTopic = (topicId) => this.props.showTopic(topicId, get('post.communities.0.id', this.props))
-
-  handleCreateComment = (commentText) => {
-    const commentTextAsHtml = toHtml(commentText)
-
-    if (!isEmpty(commentTextAsHtml)) {
-      this.setState(() => ({ submitting: true }))
-      return this.props.createComment(commentTextAsHtml)
-        .then(({ error }) => {
-          if (error) {
-            Alert.alert("Your comment couldn't be saved; please try again.")
-            this.setState(() => ({ submitting: false }))
-          } else {
-            this.setState(() => ({ commentText: '', submitting: false }))
-          }
-        })
-    }
-  }
-
-  handleCommentOnChange = (commentText) => {
-    this.setState(() => ({ commentText }))
-  }
-
-  renderPostDetails = (panHandlers) => {
-    const { post, currentUser, showMember } = this.props
-    const slug = get('communities.0.slug', post)
-    const isMember = find(member => member.id === currentUser.id, post.members)
-    const location = post.location || (post.locationObject && post.locationObject.fullText)
-
-    return (
-      <Comments
-        header={(
-          <PostCardForDetails
-            {...this.props}
-            showTopic={this.onShowTopic}
-            isMember={isMember}
-            location={location}
-          />
-        )}
-        postId={post.id}
-        showMember={showMember}
-        showTopic={this.onShowTopic}
-        slug={slug}
-        panHandlers={panHandlers}
-      />
-    )
-  }
-
-  render () {
-    const { post } = this.props
-    const { commentText, submitting } = this.state
-    const communityId = get('communities.0.id', post)
-
-    if (!post?.creator || !post?.title) return <LoadingScreen />
-
-    return (
-      <SafeAreaView edges={['right', 'left', 'top']} style={styles.container}>
-        <KeyboardAccessoryView
-          contentContainerStyle={{ marginBottom: 0, borderWidth: 0 }}
-          // TODO: Calculate these?
-          spaceBetweenKeyboardAndAccessoryView={isIOS ? -79 : 0}
-          contentOffsetKeyboardOpened={isIOS ? -45 : 0}
-          renderScrollable={this.renderPostDetails}>
-            <InlineEditor
-              onChange={this.handleCommentOnChange}
-              onSubmit={this.handleCreateComment}
-              value={commentText}
-              style={styles.inlineEditor}
-              submitting={submitting}
-              placeholder='Write a comment...'
-              communityId={communityId}
-            />
-        </KeyboardAccessoryView>
-        <SocketSubscriber type='post' id={post.id} />
-      </SafeAreaView>
-    )
-  }
 }
 
 export function Files ({ urls }) {

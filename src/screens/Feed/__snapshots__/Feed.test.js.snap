@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`calls fetchCommunityTopic on componentDidMount 1`] = `
+exports[`calls fetchGroupTopic on componentDidMount 1`] = `
 <View
   style={
     Object {
@@ -330,11 +330,6 @@ exports[`renders correctly if currentUserHasMemberships 1`] = `
   >
     <ForwardRef(BaseNavigationContainer)>
       <Feed
-        community={
-          Object {
-            "id": "1",
-          }
-        }
         currentUser={
           Object {
             "id": "2",
@@ -342,7 +337,12 @@ exports[`renders correctly if currentUserHasMemberships 1`] = `
         }
         currentUserHasMemberships={true}
         editPost={[Function]}
-        goToCommunity={[Function]}
+        goToGroup={[Function]}
+        group={
+          Object {
+            "id": "1",
+          }
+        }
         navigation={Object {}}
         newPost={[Function]}
         route={Object {}}
@@ -379,11 +379,6 @@ exports[`renders correctly if currentUserHasMemberships is false 1`] = `
   >
     <ForwardRef(BaseNavigationContainer)>
       <Feed
-        community={
-          Object {
-            "id": "1",
-          }
-        }
         currentUser={
           Object {
             "id": "2",
@@ -391,7 +386,12 @@ exports[`renders correctly if currentUserHasMemberships is false 1`] = `
         }
         currentUserHasMemberships={false}
         editPost={[Function]}
-        goToCommunity={[Function]}
+        goToGroup={[Function]}
+        group={
+          Object {
+            "id": "1",
+          }
+        }
         navigation={Object {}}
         newPost={[Function]}
         showPost={[Function]}

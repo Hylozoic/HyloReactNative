@@ -55,12 +55,12 @@ describe('selectors/refiners', () => {
 
   beforeEach(() => {
     navigation.navigate = jest.fn()
-    session = orm.mutableSession(orm.getEmptyState())
+    session = orm.session(orm.getEmptyState())
     session.Activity.create({
       actor: '1',
       action: 'commentMention',
       comment: '1',
-      community: null,
+      group: null,
       createdAt: 'Wed Oct 04 2017 00:06:56 GMT+1300 (NZDT)',
       id: '1',
       meta: { reasons: [] },
@@ -76,7 +76,7 @@ describe('selectors/refiners', () => {
       id: '1',
       text: '<a href="#" data-entity-type="mention" data-user-id="86895">Rich Churcher</a>'
     })
-    session.Community.create({ id: '222', name: 'Aardvarks Alert' })
+    session.Group.create({ id: '222', name: 'Aardvarks Alert' })
     session.Notification.create({ id: '1', activity: '1' })
     session.Notification.create({ id: '2', activity: '2' })
     session.Person.create({
@@ -151,14 +151,14 @@ describe('selectors/refiners', () => {
     })
 
     it('matches the previous ACTION_JOIN_REQUEST snapshot', () => {
-      session.Activity.withId('1').update({ action: 'joinRequest', community: '222' })
+      session.Activity.withId('1').update({ action: 'joinRequest', group: '222' })
       const notification = session.Notification.withId('1')
       const actual = store.refineActivity(notification.activity, navigation)
       expect(actual).toMatchSnapshot()
     })
 
     it('navigates to Settings for ACTION_JOIN_REQUEST', () => {
-      session.Activity.withId('1').update({ action: 'joinRequest', community: '222' })
+      session.Activity.withId('1').update({ action: 'joinRequest', group: '222' })
       const notification = session.Notification.withId('1')
       const actual = store.refineActivity(notification.activity, navigation)
       actual.onPress()
@@ -166,18 +166,18 @@ describe('selectors/refiners', () => {
     })
 
     it('matches the previous ACTION_APPROVED_JOIN_REQUEST snapshot', () => {
-      session.Activity.withId('1').update({ action: 'approvedJoinRequest', community: '222' })
+      session.Activity.withId('1').update({ action: 'approvedJoinRequest', group: '222' })
       const notification = session.Notification.withId('1')
       const actual = store.refineActivity(notification.activity, navigation)
       expect(actual).toMatchSnapshot()
     })
 
-    it('navigates to Feed (community) for ACTION_APPROVED_JOIN_REQUEST', () => {
-      session.Activity.withId('1').update({ action: 'approvedJoinRequest', community: '222' })
+    it('navigates to Feed (group) for ACTION_APPROVED_JOIN_REQUEST', () => {
+      session.Activity.withId('1').update({ action: 'approvedJoinRequest', group: '222' })
       const notification = session.Notification.withId('1')
       const actual = store.refineActivity(notification.activity, navigation)
       actual.onPress()
-      expect(navigation.navigate).toHaveBeenCalledWith('Feed', { communityId: '222' })
+      expect(navigation.navigate).toHaveBeenCalledWith('Feed', { groupId: '222' })
     })
 
     it('matches the previous ACTION_ANNOUNCEMENT snapshot', () => {

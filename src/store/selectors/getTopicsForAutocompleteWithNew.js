@@ -2,7 +2,7 @@ import { createSelector as ormCreateSelector } from 'redux-orm'
 import orm from 'store/models'
 import { validateTopicName } from 'hylo-utils/validators'
 
-// FIXME this could return topics that are not in the current community
+// FIXME this could return topics that are not in the current group
 function topicsResults (session, autocomplete) {
   const searchTerm = autocomplete && autocomplete.toLowerCase()
   const results = session.Topic.all()
@@ -24,14 +24,12 @@ function topicsResultsWithNew (session, autocomplete) {
 
 export const getTopicsForAutocomplete = ormCreateSelector(
   orm,
-  state => state.orm,
   (_, { autocomplete }) => autocomplete,
   topicsResults
 )
 
 export const getTopicsForAutocompleteWithNew = ormCreateSelector(
   orm,
-  state => state.orm,
   (_, { autocomplete }) => autocomplete,
   topicsResultsWithNew
 )
