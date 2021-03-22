@@ -13,7 +13,6 @@ import CreateGroupNotice from 'components/CreateGroupNotice'
 import FeedList from 'components/FeedList'
 import SocketSubscriber from 'components/SocketSubscriber'
 import styles from './Feed.styles'
-// import { ALL_GROUP_ID } from 'store/models/Group'
 
 export function setHeaderTitle (navigation, topicName, group, isProjectFeed) {
   let headerTitle 
@@ -71,9 +70,6 @@ export default function Feed ({
     )
   }
 
-  // const all = network?.id === ALL_GROUP_ID
-  const all = false
-
   if (!group) return null
 
   const name = topicName
@@ -84,7 +80,7 @@ export default function Feed ({
     : null
   const pluralFollowers = (topicFollowersTotal !== 1)
   const pluralPosts = (topicPostsTotal !== 1)
-  const showPostPrompt = !isProjectFeed && !all && !topicName
+  const showPostPrompt = !isProjectFeed && !topicName
   const feedListHeader = (
     <View style={[styles.bannerContainer, showPostPrompt ? styles.bannerContainerWithPostPrompt : {}]}>
       <Image source={image} style={styles.image} />
