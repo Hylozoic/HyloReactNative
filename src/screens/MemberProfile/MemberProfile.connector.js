@@ -11,15 +11,16 @@ import { mapWhenFocused, mergeWhenFocused } from 'util/redux'
 
 export function mapStateToProps (state, props) {
   const id = get('route.params.id', props)
+  const currentUser = getMe(state, props)
+  const person = id ? getPerson(state, { id }) : currentUser
+  const isMe = Number(get('id', currentUser)) === Number(id)
+
   const editing = get('route.params.editing', props)
   const isBlocked = !!getBlockedUsers(state).find(i => get('id', i) === id)
-  const person = getPerson(state, { id })
   const goToDetails = () => props.navigation.navigate('MemberDetails', { id })
   const goToEdit = () => props.navigation.navigate('MemberDetails', { id, editing: true })
   const goToSkills = () => props.navigation.navigate('MemberSkillEditor', { id })
-  const currentUser = getMe(state, props)
   const skills = person ? person.skills : []
-  const isMe = Number(get('id', currentUser)) === Number(id)
   const navigation = props.navigation
 
   return {
@@ -85,7 +86,7 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
 }
 
 export default connect(
-  mapWhenFocused(mapStateToProps),
-  mapWhenFocused(mapDispatchToProps),
-  mergeWhenFocused(mergeProps)
+  mapStateToProps,
+  mapDispatchToProps,
+  mergeProps
 )

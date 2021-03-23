@@ -19,10 +19,10 @@ import {  caribbeanGreen, white60onCaribbeanGreen, white, rhino80, black10onRhin
 // For now this list needs to be kept in sync with the names of the initial
 // routes for each stack in navigation/TabsNavigator.
 export const TAB_STACK_ROOTS = [
-  'Feed',
-  'Members',
-  'Topics',
-  'Projects'
+  'Group Navigation',
+  'Messages',
+  'Search',
+  'Profile'
 ]
 
 export function buildTabStackScreenOptions ({
@@ -65,8 +65,8 @@ export function buildTabStackScreenOptions ({
         flexDirection: 'row',
         alignItems: 'center'
       }}>
-        <SearchIcon showSearch={() => navigation.navigate('Search')} />
-        <MessagesIcon showMessages={() => navigation.navigate('Messages')} />
+        {/* <SearchIcon showSearch={() => navigation.navigate('Search')} />
+        <MessagesIcon showMessages={() => navigation.navigate('Messages')} /> */}
         <NotificationsIcon showNotifications={() => navigation.navigate('Notifications')} />
       </View>
     )

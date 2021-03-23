@@ -16,47 +16,8 @@ import LoadingScreen from 'screens/LoadingScreen'
 import ModeratorSettings from 'screens/ModeratorSettings'
 import NotificationSettings from 'screens/NotificationSettings'
 import NotificationsList from 'screens/NotificationsList'
-import NewMessage from 'screens/NewMessage'
 import PostEditor from 'screens/PostEditor'
-import Thread from 'screens/Thread'
-import ThreadList from 'screens/ThreadList'
-import ThreadParticipants from 'screens/ThreadParticipants'
-import SearchPage from 'screens/SearchPage'
 import UserSettings from 'screens/UserSettings'
-
-const Messages = createStackNavigator()
-export function MessagesNavigator () {
-  const navigatorProps = {
-    screenOptions: buildModalScreenOptions({
-      headerLeftCloseIcon: false,
-      headerBackTitleVisible: false
-    })
-  }
-  return (
-    <Messages.Navigator {...navigatorProps}>
-      <Messages.Screen
-        name='Messages' component={ThreadList}
-        options={({ navigation }) => buildModalScreenOptions({
-          headerRightButtonLabel: 'New',
-          headerRightButtonOnPress: () => navigation.navigate('New Message'),
-          headerLeftOnPress: () => navigation.navigate('Tabs')
-        })}
-      />
-      <Messages.Screen name='New Message' component={NewMessage} />
-      <Messages.Screen
-        name='ThreadParticipants' component={ThreadParticipants}
-        options={{ headerTitle: 'Participants' }}
-      />
-      <Messages.Screen
-        name='Thread' component={Thread}
-        options={({ navigation }) => buildModalScreenOptions({
-          headerLeftCloseIcon: false,
-          headerLeftOnPress: () => navigation.navigate('Messages')
-        })}
-      />
-    </Messages.Navigator>
-  )
-}
 
 const CreateGroup = createStackNavigator()
 export function CreateGroupNavigator () {
@@ -120,14 +81,9 @@ export default function AppNavigator () {
         name='Create Group' component={CreateGroupNavigator}
         options={{ headerShown: false }}
       />
-      <App.Screen
-        name='Messages' component={MessagesNavigator}
-        options={{ headerShown: false }}
-      />
       <App.Screen name='Notifications' component={NotificationsList} />
       <App.Screen name='Notification Settings' component={NotificationSettings} />
       <App.Screen name='Blocked Users' component={BlockedUsers} />
-      <App.Screen name='Search' component={SearchPage} />
       <App.Screen name='ItemChooserScreen' component={ItemChooserScreen} />
       <App.Screen name='Loading' component={LoadingScreen} />
     </App.Navigator>

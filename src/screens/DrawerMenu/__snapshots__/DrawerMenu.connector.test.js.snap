@@ -36,7 +36,7 @@ Object {
       "groups": Array [],
       "headerAvatarUrl": undefined,
       "id": "public-context",
-      "name": "Public Groups & Posts",
+      "name": "Public Groups",
       "slug": "public-context",
     },
     Object {
@@ -45,7 +45,7 @@ Object {
       "groups": Array [],
       "headerAvatarUrl": undefined,
       "id": "all-groups",
-      "name": "All Groups",
+      "name": "All My Groups",
       "slug": "all-groups",
     },
   ],

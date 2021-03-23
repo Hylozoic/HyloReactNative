@@ -95,7 +95,7 @@ export function AllGroupsSettingsRow ({ settings, updateAllGroups }) {
   return (
     <SettingsRow
       imageSrc={allGroupsLogo}
-      name='All Groups'
+      name='All My Groups'
       settings={settings}
       update={updateAllGroups}
     />

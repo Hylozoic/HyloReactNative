@@ -7,7 +7,7 @@ exports[`AllGroupsSettingsRow matches the last snapshot 1`] = `
       "testUri": "../../../assets/hylo-merkaba.png",
     }
   }
-  name="All Groups"
+  name="All My Groups"
   settings={
     Object {
       "sendEmail": true,

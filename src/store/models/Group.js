@@ -98,7 +98,7 @@ export const ALL_GROUP = {
   headerAvatarUrl: Image.resolveAssetSource(allGroupshHeaderAvatarUrl).uri,
   avatarUrl: Image.resolveAssetSource(allGroupsAvatarUrl).uri,
   bannerUrl: Image.resolveAssetSource(allGroupsBannerImage).uri,
-  name: 'All Groups',
+  name: 'All My Groups',
   groups: []
 }
 
@@ -110,6 +110,6 @@ export const PUBLIC_GROUP = {
   headerAvatarUrl: Image.resolveAssetSource(allGroupshHeaderAvatarUrl).uri,
   avatarUrl: Image.resolveAssetSource(publicGroupAvatarUrl).uri,
   bannerUrl: Image.resolveAssetSource(publicGroupAvatarUrl).uri,
-  name: 'Public Groups & Posts',
+  name: 'Public Groups',
   groups: []
 }

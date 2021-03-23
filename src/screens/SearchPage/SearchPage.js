@@ -73,23 +73,21 @@ export default class SearchPage extends React.Component {
       : null
 
     return (
-      <SafeAreaView style={styles.flatListContainer}>
-        <FlatList
-          data={searchResults}
-          renderItem={({ item }) =>
-            <SearchResult
-              searchResult={item}
-              goToPost={goToPost}
-              goToPerson={goToPerson}
-            />}
-          onRefresh={this.onRefresh}
-          refreshing={refreshing}
-          keyExtractor={(item) => item.id}
-          onEndReached={() => this.fetchMore()}
-          ListHeaderComponent={listHeaderComponent}
-          ListFooterComponent={listFooterComponent}
-        />
-      </SafeAreaView>
+      <FlatList
+        data={searchResults}
+        renderItem={({ item }) =>
+          <SearchResult
+            searchResult={item}
+            goToPost={goToPost}
+            goToPerson={goToPerson}
+          />}
+        onRefresh={this.onRefresh}
+        refreshing={refreshing}
+        keyExtractor={(item) => item.id}
+        onEndReached={() => this.fetchMore()}
+        ListHeaderComponent={listHeaderComponent}
+        ListFooterComponent={listFooterComponent}
+      />
     )
   }
 }

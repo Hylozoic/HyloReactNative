@@ -58,7 +58,7 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
 }
 
 export default connect(
-  mapWhenFocused(mapStateToProps),
+  mapStateToProps,
   mapDispatchToProps,
-  mergeWhenFocused(mergeProps)
+  mergeProps
 )

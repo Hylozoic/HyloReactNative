@@ -197,7 +197,7 @@ export function MemberSkills ({ skills, editable, goToSkills }) {
         </TouchableOpacity>}
       </View>
       <TouchableOpacity onPress={goToSkills} disabled={!editable}>
-        <View style={styles.skills}>{skills.map(skill =>
+        <View style={styles.skills}>{skills.toModelArray().map(skill =>
           <Text style={styles.skill} key={skill.id}>{skill.name.toUpperCase()}</Text>)}
         </View>
       </TouchableOpacity>
@@ -211,7 +211,7 @@ export function MemberGroups ({ person: { memberships }, goToGroup, editing }) {
   return (
     <View style={styles.groupsContainer}>
       <Text style={styles.sectionLabel}>My Hylo Groups</Text>
-      {memberships.map(membership =>
+      {memberships.toModelArray().map(membership =>
         <GroupRow membership={membership} key={membership.id} goToGroup={goToGroup} editing={editing} />)}
     </View>
   )
