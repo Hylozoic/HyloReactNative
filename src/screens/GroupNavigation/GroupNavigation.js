@@ -5,11 +5,12 @@ import { capeCod, white, caribbeanGreen, alabaster, rhino30, rhino } from 'style
 import Icon from 'components/Icon'
 
 const GROUP_NAVIGATION_ITEMS = [
+    { label: 'Create', iconName: 'Create', screen: 'Create' },
     { label: 'Home', iconName: 'Home', screen: 'Home' },
-    { label: 'Feed', iconName: 'Eye', screen: 'Feed' },
+    { label: 'Stream', iconName: 'Stream', screen: 'Feed' },
     { label: 'Projects', iconName: 'Projects', screen: 'Projects' },
     { label: 'Events', iconName: 'Events', screen: 'Events'  },
-    { label: 'People', iconName: 'Person', screen: 'Members' },
+    { label: 'Members', iconName: 'Person', screen: 'Members' },
     { label: 'Groups', iconName: 'Share', screen: 'Group Relationships' }
 ]
 

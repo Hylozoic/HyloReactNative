@@ -23,6 +23,7 @@ import Thread from 'screens/Thread'
 import ThreadList from 'screens/ThreadList'
 import ThreadParticipants from 'screens/ThreadParticipants'
 import SearchPage from 'screens/SearchPage'
+import Avatar from 'components/Avatar'
 
 const Messages = createStackNavigator()
 export function MessagesNavigator () {
@@ -145,7 +146,13 @@ export default function TabsNavigator () {
       <Tabs.Screen name='Home' component={HomeNavigator} />
       <Tabs.Screen name='Search' component={SearchNavigator} />
       <Tabs.Screen name='Messages' component={MessagesNavigator} />
-      <Tabs.Screen name='Profile' component={MyProfileNavigator} />
+      <Tabs.Screen
+        name='Profile'
+        component={MyProfileNavigator}
+        options={{
+          tabBarIcon: ({ focused }) =>  <Avatar size='small' avatarUrl='https://lh3.googleusercontent.com/proxy/fFXFx0MCV_ytFfhj22hK80p_HjBDp-eSjvRY2tOQHBgxlpMO-CagvQrf8HV09xSabY1kpVjcZ8DHB477Gg5nW04Ov9Vb-MqjmmoyNphYcAZ6mVgeJ89mkBgOJhqY4eMe8kAW' />
+        }}
+      />
     </Tabs.Navigator>
   )
 }
