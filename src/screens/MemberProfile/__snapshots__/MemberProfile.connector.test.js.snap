@@ -28,7 +28,6 @@ Object {
     "navigate": [MockFunction],
   },
   "person": null,
-  "skills": Array [],
 }
 `;
 

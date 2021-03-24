@@ -24,7 +24,6 @@ describe('MemberDetails', () => {
         isFocused
         person={{ id: 1 }}
         goToGroup={() => {}}
-        skills={['One']}
         navigation={navigation}
       />
     )
@@ -57,7 +56,9 @@ describe('MemberDetails', () => {
           location: 'here',
           tagline: 'rock',
           bio: 'stuff',
-          omitable: 'should be omitted'
+          omitable: 'should be omitted',
+          skills: { toRefArray: jest.fn(() => []) },
+          memberships: { toModelArray: jest.fn(() => []) }
         },
         fetchPerson: () => {},
         navigation
@@ -74,7 +75,16 @@ describe('MemberDetails', () => {
     it('returns true when name is present', () => {
       const props = {
         isFocused: true,
-        person: {},
+        person: {
+          id: 1,
+          name: 'don',
+          location: 'here',
+          tagline: 'rock',
+          bio: 'stuff',
+          omitable: 'should be omitted',
+          skills: { toRefArray: jest.fn(() => []) },
+          memberships: { toModelArray: jest.fn(() => []) }
+        },
         fetchPerson: () => {},
         navigation
       }
@@ -90,14 +100,31 @@ describe('MemberDetails', () => {
     it('returns false and sets error when name is empty', () => {
       const props = {
         isFocused: true,
-        person: {},
+        person: {
+          id: 1,
+          location: 'here',
+          tagline: 'rock',
+          bio: 'stuff',
+          omitable: 'should be omitted',
+          skills: { toRefArray: jest.fn(() => []) },
+          memberships: { toModelArray: jest.fn(() => []) }
+        },
         fetchPerson: () => {},
         navigation
       }
 
       const instance = ReactTestRenderer.create(<MemberDetails {...props} />).getInstance()
       instance.setState({
-        person: { name: '' }
+        person: {
+          id: 1,
+          name: '',
+          location: 'here',
+          tagline: 'rock',
+          bio: 'stuff',
+          omitable: 'should be omitted',
+          skills: { toRefArray: jest.fn(() => []) },
+          memberships: { toModelArray: jest.fn(() => []) }
+        },
       })
       instance.validate()
       expect(instance.state.errors.name).toEqual('Name must not consist solely of whitespace.')
@@ -123,7 +150,16 @@ describe('MemberDetails', () => {
     it('updates state.person', () => {
       const props = {
         isFocused: true,
-        person: {},
+        person: {
+          id: 1,
+          name: 'don',
+          location: 'here',
+          tagline: 'rock',
+          bio: 'stuff',
+          omitable: 'should be omitted',
+          skills: { toRefArray: jest.fn(() => []) },
+          memberships: { toModelArray: jest.fn(() => []) }
+        },
         fetchPerson: () => {},
         navigation
       }
@@ -138,7 +174,16 @@ describe('MemberDetails', () => {
     it('calls updateUserSettings', async () => {
       const props = {
         isFocused: true,
-        person: {},
+        person: {
+          id: 1,
+          name: 'don',
+          location: 'here',
+          tagline: 'rock',
+          bio: 'stuff',
+          omitable: 'should be omitted',
+          skills: { toRefArray: jest.fn(() => []) },
+          memberships: { toModelArray: jest.fn(() => []) }
+        },
         fetchPerson: () => {},
         updateUserSettings: jest.fn(),
         navigation
@@ -160,7 +205,16 @@ describe('MemberDetails', () => {
     it("returns false and doesn't call updateUserSettings when validate is false", () => {
       const props = {
         isFocused: true,
-        person: {},
+        person: {
+          id: 1,
+          name: 'don',
+          location: 'here',
+          tagline: 'rock',
+          bio: 'stuff',
+          omitable: 'should be omitted',
+          skills: { toRefArray: jest.fn(() => []) },
+          memberships: { toModelArray: jest.fn(() => []) }
+        },
         fetchPerson: () => {},
         updateUserSettings: jest.fn(),
         navigation
@@ -232,9 +286,9 @@ describe('MemberSkills', () => {
     ]
 
     const renderer = new ReactShallowRenderer()
-    renderer.render(<MemberSkills
-      skills={skills}
-                    />)
+    renderer.render(
+      <MemberSkills skills={skills} />
+    )
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()

@@ -6,10 +6,10 @@ import Icon from 'components/Icon'
 
 const GROUP_NAVIGATION_ITEMS = [
     { label: 'Create', iconName: 'Create', screen: 'Create' },
-    { label: 'Home', iconName: 'Home', screen: 'Home' },
+    // { label: 'Home', iconName: 'Home', screen: 'Home' },
     { label: 'Stream', iconName: 'Stream', screen: 'Feed' },
     { label: 'Projects', iconName: 'Projects', screen: 'Projects' },
-    { label: 'Events', iconName: 'Events', screen: 'Events'  },
+    // { label: 'Events', iconName: 'Events', screen: 'Events'  },
     { label: 'Members', iconName: 'Person', screen: 'Members' },
     { label: 'Groups', iconName: 'Share', screen: 'Group Relationships' }
 ]

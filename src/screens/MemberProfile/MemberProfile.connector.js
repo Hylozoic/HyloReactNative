@@ -1,10 +1,11 @@
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { get } from 'lodash/fp'
-import { getPerson, fetchPerson } from './MemberProfile.store'
+import { fetchPerson } from './MemberProfile.store'
 import blockUser from 'store/actions/blockUser'
 import makeGoToGroup from 'store/actions/makeGoToGroup'
 import getMe from 'store/selectors/getMe'
+import getPerson from 'store/selectors/getPerson'
 import getBlockedUsers from 'store/selectors/getBlockedUsers'
 import updateUserSettings from 'store/actions/updateUserSettings'
 import { mapWhenFocused, mergeWhenFocused } from 'util/redux'
@@ -12,7 +13,7 @@ import { mapWhenFocused, mergeWhenFocused } from 'util/redux'
 export function mapStateToProps (state, props) {
   const id = get('route.params.id', props)
   const currentUser = getMe(state, props)
-  const person = id ? getPerson(state, { id }) : currentUser
+  const person = id ? getPerson(state, { personId: id }) : currentUser
   const isMe = Number(get('id', currentUser)) === Number(id)
 
   const editing = get('route.params.editing', props)
@@ -20,7 +21,6 @@ export function mapStateToProps (state, props) {
   const goToDetails = () => props.navigation.navigate('MemberDetails', { id })
   const goToEdit = () => props.navigation.navigate('MemberDetails', { id, editing: true })
   const goToSkills = () => props.navigation.navigate('MemberSkillEditor', { id })
-  const skills = person ? person.skills : []
   const navigation = props.navigation
 
   return {
@@ -29,7 +29,6 @@ export function mapStateToProps (state, props) {
     editing,
     person,
     currentUser,
-    skills,
     goToDetails,
     goToEdit,
     goToSkills,

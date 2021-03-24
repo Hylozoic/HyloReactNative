@@ -8,7 +8,6 @@ Array [
       "id": "membership1Id",
       "person": "meId",
     },
-    "person": "meId",
   },
   SessionBoundModel {
     "_fields": Object {
@@ -16,7 +15,6 @@ Array [
       "id": "membership2Id",
       "person": "meId",
     },
-    "person": "meId",
   },
 ]
 `;

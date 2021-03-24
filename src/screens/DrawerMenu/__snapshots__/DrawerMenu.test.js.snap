@@ -4,6 +4,19 @@ exports[`DrawerMenu matches the last snapshot 1`] = `
 <View>
   <View>
     <Image
+      source={null}
+    />
+    <MockLinearGradient
+      colors={
+        Array [
+          "rgba(0, 0, 0, 0)",
+          "rgba(0, 0, 0, 0.1)",
+          "rgba(0, 0, 0, 0.3)",
+          "rgba(0, 0, 0, 0.6)",
+        ]
+      }
+    />
+    <Image
       source={
         Object {
           "uri": "someurl",
@@ -33,6 +46,7 @@ exports[`DrawerMenu matches the last snapshot 1`] = `
     </ForwardRef>
   </View>
   <SectionList
+    SectionSeparatorComponent={[Function]}
     data={Array []}
     disableVirtualization={false}
     horizontal={false}
@@ -52,7 +66,6 @@ exports[`DrawerMenu matches the last snapshot 1`] = `
         Object {
           "data": undefined,
           "keyExtractor": [Function],
-          "label": "My Groups",
           "renderItem": [Function],
         },
       ]
@@ -64,34 +77,6 @@ exports[`DrawerMenu matches the last snapshot 1`] = `
   <Button
     text="Create a Group"
   />
-  <View>
-    <ForwardRef
-      onPress={[Function]}
-    >
-      <Image
-        source={
-          Object {
-            "uri": "http://anyurl",
-          }
-        }
-      />
-    </ForwardRef>
-    <View>
-      <Text
-        numberOfLines={1}
-      >
-        Hello, 
-        Roy Rogers
-        !
-      </Text>
-      <View>
-        <TextButton
-          onPress={[Function]}
-          text="Settings"
-        />
-      </View>
-    </View>
-  </View>
   <Memo(Connect(SocketListener)) />
 </View>
 `;

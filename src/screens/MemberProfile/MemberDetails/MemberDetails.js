@@ -137,12 +137,12 @@ export default class MemberDetails extends React.Component {
           isMe={isMe}
         />
         <MemberSkills
-          skills={skills}
+          skills={person.skills.toRefArray()}
           editable={editing}
           goToSkills={goToSkills}
         />
         <MemberGroups
-          person={person}
+          memberships={person.memberships.toModelArray()}
           goToGroup={goToGroup}
           editing={editing}
         />
@@ -197,7 +197,7 @@ export function MemberSkills ({ skills, editable, goToSkills }) {
         </TouchableOpacity>}
       </View>
       <TouchableOpacity onPress={goToSkills} disabled={!editable}>
-        <View style={styles.skills}>{skills.toModelArray().map(skill =>
+        <View style={styles.skills}>{skills.map(skill =>
           <Text style={styles.skill} key={skill.id}>{skill.name.toUpperCase()}</Text>)}
         </View>
       </TouchableOpacity>
@@ -205,13 +205,13 @@ export function MemberSkills ({ skills, editable, goToSkills }) {
   )
 }
 
-export function MemberGroups ({ person: { memberships }, goToGroup, editing }) {
+export function MemberGroups ({ memberships, goToGroup, editing }) {
   if (isEmpty(memberships)) return null
 
   return (
     <View style={styles.groupsContainer}>
-      <Text style={styles.sectionLabel}>My Hylo Groups</Text>
-      {memberships.toModelArray().map(membership =>
+      <Text style={styles.sectionLabel}>My Groups</Text>
+      {memberships.map(membership =>
         <GroupRow membership={membership} key={membership.id} goToGroup={goToGroup} editing={editing} />)}
     </View>
   )

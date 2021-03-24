@@ -99,7 +99,7 @@ exports[`PostCard matches the last snapshot 1`] = `
 `;
 
 exports[`SearchPage matches the last snapshot 1`] = `
-<SafeAreaViewMock>
+<View>
   <FlatList
     ListFooterComponent={<Loading />}
     ListHeaderComponent={
@@ -147,7 +147,7 @@ exports[`SearchPage matches the last snapshot 1`] = `
     updateCellsBatchingPeriod={50}
     windowSize={21}
   />
-</SafeAreaViewMock>
+</View>
 `;
 
 exports[`SearchResult works with Comment 1`] = `

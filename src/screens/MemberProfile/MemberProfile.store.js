@@ -51,17 +51,3 @@ export function fetchPerson (id) {
     }
   }
 }
-
-export const getPerson = ormCreateSelector(
-  orm,
-  (_, { id }) => id,
-  (session, id) => {
-    const person = session.Person.safeGet({ id })
-    if (!person) return null
-    return {
-      ...person.ref,
-      skills: person.skills.toRefArray(),
-      memberships: person.memberships.toModelArray()
-    }
-  }
-)
