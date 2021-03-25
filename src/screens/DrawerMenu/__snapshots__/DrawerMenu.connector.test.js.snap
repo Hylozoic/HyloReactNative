@@ -33,19 +33,29 @@ Object {
     Object {
       "avatarUrl": undefined,
       "bannerUrl": undefined,
-      "groups": Array [],
+      "childGroups": Object {
+        "toModelArray": [Function],
+      },
       "headerAvatarUrl": undefined,
       "id": "public-context",
       "name": "Public Groups",
+      "parentGroups": Object {
+        "toModelArray": [Function],
+      },
       "slug": "public-context",
     },
     Object {
       "avatarUrl": undefined,
       "bannerUrl": undefined,
-      "groups": Array [],
+      "childGroups": Object {
+        "toModelArray": [Function],
+      },
       "headerAvatarUrl": undefined,
       "id": "all-groups",
       "name": "All My Groups",
+      "parentGroups": Object {
+        "toModelArray": [Function],
+      },
       "slug": "all-groups",
     },
   ],
