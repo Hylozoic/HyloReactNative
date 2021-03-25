@@ -152,8 +152,7 @@ export const ALL_GROUP = {
   headerAvatarUrl: Image.resolveAssetSource(allGroupshHeaderAvatarUrl).uri,
   avatarUrl: Image.resolveAssetSource(allGroupsAvatarUrl).uri,
   bannerUrl: Image.resolveAssetSource(allGroupsBannerImage).uri,
-  name: 'All My Groups',
-  groups: []
+  name: 'All My Groups'
 }
 
 export const PUBLIC_GROUP_ID = 'public-context'
@@ -164,6 +163,5 @@ export const PUBLIC_GROUP = {
   headerAvatarUrl: Image.resolveAssetSource(allGroupshHeaderAvatarUrl).uri,
   avatarUrl: Image.resolveAssetSource(publicGroupAvatarUrl).uri,
   bannerUrl: Image.resolveAssetSource(publicGroupAvatarUrl).uri,
-  name: 'Public Groups',
-  groups: []
+  name: 'Public Groups'
 }
