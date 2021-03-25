@@ -1,30 +1,36 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import { Text, View, TouchableOpacity, StyleSheet } from 'react-native'
-import { rhino, rhino10, rhino50, white } from 'style/colors'
+import { getChildGroups, getParentGroups } from 'store/selectors/getGroupRelationships'
 import Icon from 'components/Icon'
+import { rhino, white } from 'style/colors'
 
-const GROUP_NAVIGATION_ITEMS = [
-    { label: 'Create', iconName: 'Create', screen: 'Create' },
+export default function GroupNavigation ({ navigation }) {
+  const navItems = [
+    { label: 'Create', iconName: 'Create', screen: 'Edit Post' },
     // { label: 'Home', iconName: 'Home', screen: 'Home' },
     { label: 'Stream', iconName: 'Stream', screen: 'Feed' },
     { label: 'Projects', iconName: 'Projects', screen: 'Projects' },
     // { label: 'Events', iconName: 'Events', screen: 'Events'  },
-    { label: 'Members', iconName: 'Person', screen: 'Members' },
-    { label: 'Groups', iconName: 'Share', screen: 'Group Relationships' }
-]
+    { label: 'Members', iconName: 'Person', screen: 'Members' }
+  ]
+  const childGroups = useSelector(getChildGroups)
+  const parentGroups = useSelector(getParentGroups)
+  if (childGroups.length > 0 || parentGroups.length > 0) {
+    navItems.push({ label: 'Groups', iconName: 'Share', screen: 'Group Relationships' })
+  }
 
-export default function GroupNavigation ({ group, navigation }) {
-  return <View style={styles.container}>
-    {GROUP_NAVIGATION_ITEMS.map(item => {
-      return (
+  return (
+    <View style={styles.container}>
+      {navItems.map(item => (
         <NavItem {...item} onPress={() => navigation.navigate(item.screen)} />
-      )
-    })}
-    <View style={styles.divider} />
-    <View style={styles.navItems}>
-      <NavItem label='Topics' iconName='Topics' onPress={() => navigation.navigate('Topics')} />
+      ))}
+      <View style={styles.divider} />
+      <View style={styles.navItems}>
+        <NavItem label='Topics' iconName='Topics' onPress={() => navigation.navigate('Topics')} />
+      </View>
     </View>
-  </View>
+  )
 }
 
 export function NavItem ({ label, iconName, onPress }) {
@@ -35,6 +41,7 @@ export function NavItem ({ label, iconName, onPress }) {
     </TouchableOpacity>
   )
 }
+
 export const styles = {
   container: {
     backgroundColor: white,
@@ -56,6 +63,5 @@ export const styles = {
   },
   navItemLabel: {
     fontSize: 24
-
   }
 }
