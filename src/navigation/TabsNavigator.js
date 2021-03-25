@@ -150,7 +150,11 @@ export default function TabsNavigator () {
         name='Profile'
         component={MyProfileNavigator}
         options={{
-          tabBarIcon: ({ focused }) =>  <Avatar size='small' avatarUrl='https://lh3.googleusercontent.com/proxy/fFXFx0MCV_ytFfhj22hK80p_HjBDp-eSjvRY2tOQHBgxlpMO-CagvQrf8HV09xSabY1kpVjcZ8DHB477Gg5nW04Ov9Vb-MqjmmoyNphYcAZ6mVgeJ89mkBgOJhqY4eMe8kAW' />
+          tabBarIcon: ({ focused }) => 
+            <Avatar
+              size='small'
+              avatarUrl='http://www.brunningonline.net/simon/blog/archives/South%20Park%20Avatar.jpg'
+            />
         }}
       />
     </Tabs.Navigator>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Image, Text, TouchableOpacity, View, SectionList } from 'react-native'
+import { Image, Text, TouchableOpacity, View, SectionList, ImageBackground } from 'react-native'
 import styles from './DrawerMenu.styles'
 import SocketListener from 'components/SocketListener'
 import Button from 'components/Button'
@@ -38,29 +38,26 @@ export default function DrawerMenu ({
     ? { uri: currentGroup.bannerUrl }
     : null
 
-
   return (
-    <View style={styles.parent}>
+    <View style={styles.container}>
       {currentGroup && (
-        <View style={[styles.header]}>
-          <Image source={groupBannerImage} style={styles.headerBannerImage} />
-          <LinearGradient style={styles.headerBannerGradient} colors={bannerlinearGradientColors} />
-
-          <Image source={{ uri: currentGroup.avatarUrl }} style={styles.headerAvatar} />
-
-          <Text style={styles.headerText}>{currentGroup.name}</Text>
-
-          {canModerateCurrentGroup && (
-            <TouchableOpacity
-              onPress={goToGroupSettingsMenu}
-              hitSlop={{ top: 5, bottom: 5, left: 10, right: 10 }}
-              style={styles.headerSettingsButton}
-            >
-              <Icon style={styles.headerSettingsButtonIcon} name='Settings' />
-              <Text style={styles.headerSettingsButtonText}>Settings</Text>
-            </TouchableOpacity>
-          )}
-        </View>
+          <ImageBackground source={groupBannerImage} style={styles.headerBackgroundImage}>
+            {/* <LinearGradient style={styles.headerBannerGradient} colors={bannerlinearGradientColors} /> */}
+            <View style={[styles.headerContent]}>
+              <Image source={{ uri: currentGroup.avatarUrl }} style={styles.headerAvatar} />
+              <Text style={styles.headerText}>{currentGroup.name}</Text>
+              {canModerateCurrentGroup && (
+                <TouchableOpacity
+                  onPress={goToGroupSettingsMenu}
+                  hitSlop={{ top: 5, bottom: 5, left: 10, right: 10 }}
+                  style={styles.headerSettingsButton}
+                >
+                  <Icon style={styles.headerSettingsButtonIcon} name='Settings' />
+                  <Text style={styles.headerSettingsButtonText}>Settings</Text>
+                </TouchableOpacity>
+              )}
+          </View>
+        </ImageBackground>
       )}
       <SectionList
         renderSectionHeader={SectionHeader}

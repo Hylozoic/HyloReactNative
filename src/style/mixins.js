@@ -12,8 +12,4 @@ export default {
     fontSize: 18,
     lineHeight: 42
   },
-
-  belowStatusBar: {
-    paddingTop: isIOS ? 20 : 0
-  }
 }

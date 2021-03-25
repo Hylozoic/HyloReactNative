@@ -4,36 +4,24 @@ import {
   bigStone, rhino, rhino50, persimmon, rhino40, black10onRhino, white, rhino30
 } from 'style/colors'
 
-const defaultPadding = {
-  paddingHorizontal: 15
-}
-
 export default {
-  defaultPadding,
-  parent: {
+  container: {
     flex: 1,
     backgroundColor: rhino
   },
 
   // Header
-  header: {
-    height: 160,
-    flexDirection: 'column',
-    alignItems: 'center',
+  headerBackgroundImage: {
+    paddingTop: 40,
+    padding: 15,
     marginBottom: 10
   },
-  headerBannerGradient: {
-    height: 160,
-    width: '100%',
-    position: 'absolute'
-  },
-  headerBannerImage: {
-    height: 160,
-    width: '100%',
-    position: 'absolute'
+  // headerBannerGradient: {},
+  headerContent: {
+    flexDirection: 'column',
+    alignItems: 'center',
   },
   headerAvatar: {
-    marginTop: 40,
     height: 42,
     width: 42,
     borderRadius: 4
@@ -60,16 +48,16 @@ export default {
     color: white,
     fontSize: 16
   },
+
+  // Groups rows
   sectionHeader: {
-    ...defaultPadding,
+    paddingHorizontal: 15
   },
   sectionHeaderText: {
     color: rhino50,
     fontFamily: 'Circular-Book',
     fontSize: 12
   },
-
-  // Groups rows
   groupSectionSeparator: {
     marginHorizontal: 20,
     marginTop: 10,

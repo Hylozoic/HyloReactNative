@@ -1,7 +1,6 @@
 import React from 'react'
-import { Text, View, Image, TouchableOpacity, TextInput, ScrollView } from 'react-native'
-// import { some } from 'lodash/fp'
-import { capeCod, white, caribbeanGreen, alabaster, rhino30, rhino } from 'style/colors'
+import { Text, View, TouchableOpacity, StyleSheet } from 'react-native'
+import { rhino, rhino10, rhino50, white } from 'style/colors'
 import Icon from 'components/Icon'
 
 const GROUP_NAVIGATION_ITEMS = [
@@ -18,20 +17,34 @@ export default function GroupNavigation ({ group, navigation }) {
   return <View style={styles.container}>
     {GROUP_NAVIGATION_ITEMS.map(item => {
       return (
-        <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate(item.screen)} key={item.label}>
-          <Icon style={styles.navItemIcon} name={item.iconName} />
-          <Text style={styles.navItemLabel}>{item.label}</Text>
-        </TouchableOpacity>
+        <NavItem {...item} onPress={() => navigation.navigate(item.screen)} />
       )
     })}
+    <View style={styles.divider} />
+    <View style={styles.navItems}>
+      <NavItem label='Topics' iconName='Topics' onPress={() => navigation.navigate('Topics')} />
+    </View>
   </View>
 }
 
+export function NavItem ({ label, iconName, onPress }) {
+  return (
+    <TouchableOpacity style={styles.navItem} onPress={onPress} key={label}>
+      <Icon style={styles.navItemIcon} name={iconName} />
+      <Text style={styles.navItemLabel}>{label}</Text>
+    </TouchableOpacity>
+  )
+}
 export const styles = {
   container: {
     backgroundColor: white,
     flex: 1,
     padding: 20
+  },
+  divider: {
+    marginVertical: 20,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: rhino
   },
   navItem: {
     flexDirection: 'row',

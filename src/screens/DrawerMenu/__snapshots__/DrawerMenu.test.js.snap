@@ -2,49 +2,40 @@
 
 exports[`DrawerMenu matches the last snapshot 1`] = `
 <View>
-  <View>
-    <Image
-      source={null}
-    />
-    <MockLinearGradient
-      colors={
-        Array [
-          "rgba(0, 0, 0, 0)",
-          "rgba(0, 0, 0, 0.1)",
-          "rgba(0, 0, 0, 0.3)",
-          "rgba(0, 0, 0, 0.6)",
-        ]
-      }
-    />
-    <Image
-      source={
-        Object {
-          "uri": "someurl",
+  <ImageBackground
+    source={null}
+  >
+    <View>
+      <Image
+        source={
+          Object {
+            "uri": "someurl",
+          }
         }
-      }
-    />
-    <Text>
-      foo
-    </Text>
-    <ForwardRef
-      hitSlop={
-        Object {
-          "bottom": 5,
-          "left": 10,
-          "right": 10,
-          "top": 5,
-        }
-      }
-      onPress={[MockFunction]}
-    >
-      <Icon
-        name="Settings"
       />
       <Text>
-        Settings
+        foo
       </Text>
-    </ForwardRef>
-  </View>
+      <ForwardRef
+        hitSlop={
+          Object {
+            "bottom": 5,
+            "left": 10,
+            "right": 10,
+            "top": 5,
+          }
+        }
+        onPress={[MockFunction]}
+      >
+        <Icon
+          name="Settings"
+        />
+        <Text>
+          Settings
+        </Text>
+      </ForwardRef>
+    </View>
+  </ImageBackground>
   <SectionList
     SectionSeparatorComponent={[Function]}
     data={Array []}
