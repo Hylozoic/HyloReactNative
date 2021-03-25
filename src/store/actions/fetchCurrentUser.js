@@ -69,6 +69,7 @@ export default function fetchCurrentUser () {
               slug
               memberCount
               avatarUrl
+              bannerUrl
               groupTopics(subscribed: true) {
                 total
                 hasMore
@@ -88,6 +89,7 @@ export default function fetchCurrentUser () {
                 items {
                   id
                   avatarUrl
+                  bannerUrl
                   memberCount
                   name
                   slug
@@ -97,6 +99,7 @@ export default function fetchCurrentUser () {
                 items {
                   id
                   avatarUrl
+                  bannerUrl
                   memberCount
                   name
                   slug
