@@ -11,15 +11,18 @@ export default {
   },
 
   // Header
-  headerBackgroundImage: {
-    paddingTop: 40,
-    padding: 15,
-    marginBottom: 10
+  headerBackgroundImage: {},
+  headerBannerGradient: {
+    position: 'absolute',
+    width: '100%',
+    height: '100%'
   },
-  // headerBannerGradient: {},
   headerContent: {
     flexDirection: 'column',
     alignItems: 'center',
+    padding: 15,
+    paddingTop: 40,
+    marginBottom: 10
   },
   headerAvatar: {
     height: 42,
@@ -30,7 +33,10 @@ export default {
     fontFamily: 'Circular-Bold',
     color: white,
     marginTop: 6,
-    fontSize: 20
+    fontSize: 20,
+    textShadowColor: 'rgba(0, 0, 0, 0.25)',
+    textShadowOffset: { width: 0, height: 2 },
+    textShadowRadius: 7
   },
   headerSettingsButton: {
     flexDirection: 'row',

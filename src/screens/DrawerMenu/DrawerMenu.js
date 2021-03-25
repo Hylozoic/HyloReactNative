@@ -41,21 +41,21 @@ export default function DrawerMenu ({
   return (
     <View style={styles.container}>
       {currentGroup && (
-          <ImageBackground source={groupBannerImage} style={styles.headerBackgroundImage}>
-            {/* <LinearGradient style={styles.headerBannerGradient} colors={bannerlinearGradientColors} /> */}
-            <View style={[styles.headerContent]}>
-              <Image source={{ uri: currentGroup.avatarUrl }} style={styles.headerAvatar} />
-              <Text style={styles.headerText}>{currentGroup.name}</Text>
-              {canModerateCurrentGroup && (
-                <TouchableOpacity
-                  onPress={goToGroupSettingsMenu}
-                  hitSlop={{ top: 5, bottom: 5, left: 10, right: 10 }}
-                  style={styles.headerSettingsButton}
-                >
-                  <Icon style={styles.headerSettingsButtonIcon} name='Settings' />
-                  <Text style={styles.headerSettingsButtonText}>Settings</Text>
-                </TouchableOpacity>
-              )}
+        <ImageBackground source={groupBannerImage} style={styles.headerBackgroundImage}>
+          <LinearGradient style={styles.headerBannerGradient} colors={bannerlinearGradientColors} />
+          <View style={[styles.headerContent]}>
+            <Image source={{ uri: currentGroup.avatarUrl }} style={styles.headerAvatar} />
+            <Text style={styles.headerText}>{currentGroup.name}</Text>
+            {canModerateCurrentGroup && (
+              <TouchableOpacity
+                onPress={goToGroupSettingsMenu}
+                hitSlop={{ top: 5, bottom: 5, left: 10, right: 10 }}
+                style={styles.headerSettingsButton}
+              >
+                <Icon style={styles.headerSettingsButtonIcon} name='Settings' />
+                <Text style={styles.headerSettingsButtonText}>Settings</Text>
+              </TouchableOpacity>
+            )}
           </View>
         </ImageBackground>
       )}
