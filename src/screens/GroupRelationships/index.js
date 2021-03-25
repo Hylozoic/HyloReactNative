@@ -1,3 +1,4 @@
 import component from './GroupRelationships'
+import connector from './GroupRelationships.connector'
 
-export default component
+export default connector(component)

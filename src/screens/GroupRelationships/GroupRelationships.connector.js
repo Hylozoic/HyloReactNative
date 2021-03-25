@@ -1,9 +1,9 @@
-import { get } from 'lodash/fp'
 import { connect } from 'react-redux'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import { getChildGroups, getParentGroups } from 'store/selectors/getGroupRelationships'
 import getMyJoinRequests from 'store/selectors/getMyJoinRequests'
 import getMemberships from 'store/selectors/getMemberships'
+import selectGroup from 'store/actions/selectGroup'
 
 export function mapStateToProps (state, props) {
   const group = getCurrentGroup(state, props)
@@ -20,17 +20,32 @@ export function mapStateToProps (state, props) {
   })
 
   return {
-    childGroups,
     group,
     memberships,
-    parentGroups,
-    routeParams: get('match.params', props)
+    childGroups,
+    parentGroups
   }
 }
 
-export function mapDispatchToProps (dispatch, props) {
+export const mapDispatchToProps = {
+  selectGroup
+}
+
+export function mergeProps (stateProps, dispatchProps, ownProps) {
+  const { navigation } = ownProps
+
   return {
+    ...stateProps,
+    ...dispatchProps,
+    ...ownProps,
+    goToGroup: group => {
+      navigation.closeDrawer()
+      navigation.navigate('Group Navigation', {
+        groupId: group.id
+      })
+      dispatchProps.selectGroup(group.id)
+    }
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps)

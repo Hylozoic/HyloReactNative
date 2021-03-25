@@ -1,11 +1,11 @@
 import { createSelector as ormCreateSelector } from 'redux-orm'
 import orm from 'store/models'
 import { GROUP_RELATIONSHIP_TYPE } from 'store/models/GroupRelationshipInvite'
-import getGroupForCurrentRoute from 'store/selectors/getGroupForCurrentRoute'
+import getCurrentGroup from 'store/selectors/getCurrentGroup'
 
 export const getChildGroups = ormCreateSelector(
   orm,
-  getGroupForCurrentRoute,
+  getCurrentGroup,
   (session, group) => {
     return group.childGroups.toModelArray().sort((a, b) => a.name.localeCompare(b.name))
   }
@@ -13,7 +13,7 @@ export const getChildGroups = ormCreateSelector(
 
 export const getParentGroups = ormCreateSelector(
   orm,
-  getGroupForCurrentRoute,
+  getCurrentGroup,
   (session, group) => {
     return group.parentGroups.toModelArray().sort((a, b) => a.name.localeCompare(b.name))
   }
@@ -21,7 +21,7 @@ export const getParentGroups = ormCreateSelector(
 
 export const getGroupInvitesFrom = ormCreateSelector(
   orm,
-  getGroupForCurrentRoute,
+  getCurrentGroup,
   (session, group) => {
     return session.GroupRelationshipInvite.filter(i => i.fromGroup === group.id).toModelArray()
   }
@@ -29,7 +29,7 @@ export const getGroupInvitesFrom = ormCreateSelector(
 
 export const getGroupInvitesTo = ormCreateSelector(
   orm,
-  getGroupForCurrentRoute,
+  getCurrentGroup,
   (session, group) => {
     return session.GroupRelationshipInvite.filter(i => i.toGroup === group.id).toModelArray()
   }
