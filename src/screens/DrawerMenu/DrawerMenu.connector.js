@@ -41,10 +41,6 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
   const { currentUser, name, canModerateCurrentGroup } = stateProps
   const { navigation } = ownProps
 
-  const goToGroupSettingsMenu = () => {
-    navigation.navigate('Group Settings')
-  }
-
   return {
     ...stateProps,
     ...dispatchProps,
@@ -56,16 +52,16 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
       })
       dispatchProps.selectGroup(group.id)
     },
-    showSettings: () => {
-      navigation.navigate('Edit Account Info')
-    },
     goToMyProfile: () => {
       navigation.navigate('Members', { screen: 'Member', params: { id: currentUser.id } })
     },
     goToCreateGroup: () => {
       navigation.navigate('Create Group')
     },
-    goToGroupSettingsMenu: canModerateCurrentGroup && goToGroupSettingsMenu
+    goToGroupSettingsMenu: () => canModerateCurrentGroup &&
+      navigation.navigate('Group Settings'),
+    goToInvitePeople: () => canModerateCurrentGroup &&
+      navigation.navigate('Group Settings', { screen: 'Invite Members' })
   }
 }
 

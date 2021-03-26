@@ -22,42 +22,36 @@ export default {
     alignItems: 'center',
     padding: 15,
     paddingTop: 40,
-    marginBottom: 10
+    paddingBottom: 20
   },
   headerAvatar: {
     height: 42,
     width: 42,
-    borderRadius: 4
+    borderRadius: 4,
+    marginBottom: 6
   },
   headerText: {
     fontFamily: 'Circular-Bold',
+    marginBottom: 10,
     color: white,
-    marginTop: 6,
     fontSize: 20,
     textShadowColor: 'rgba(0, 0, 0, 0.25)',
     textShadowOffset: { width: 0, height: 2 },
     textShadowRadius: 7
   },
-  headerSettingsButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginTop: 10
+  currentGroupButtons: {
+    flexDirection: 'row'
   },
-  headerSettingsButtonIcon: {
-    fontFamily: 'Circular-Book',
-    color: white,
-    marginRight: 6,
-    fontSize: 16
+  currentGroupButton: {
+    flex: 0.33,
+    paddingHorizontal: 5,
+    backgroundColor: 'none'
   },
-  headerSettingsButtonText: {
-    fontFamily: 'Circular-Book',
-    color: white,
-    fontSize: 16
-  },
+
 
   // Groups rows
   sectionHeader: {
-    paddingHorizontal: 15
+    marginTop: 20
   },
   sectionHeaderText: {
     color: rhino50,
@@ -65,8 +59,8 @@ export default {
     fontSize: 12
   },
   groupSectionSeparator: {
-    marginHorizontal: 20,
-    marginTop: 10,
+    marginHorizontal: 15,
+    marginTop: -10,
     marginBottom: 10,
     borderBottomColor: rhino30,
     borderBottomWidth: StyleSheet.hairlineWidth
@@ -77,7 +71,8 @@ export default {
   },
   groupRow: {
     marginLeft: 10,
-    paddingVertical: 10
+    paddingVertical: 10,
+    paddingHorizontal: 10
   },
   allFeedsIcon: {
     marginLeft: 5,

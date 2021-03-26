@@ -1,16 +1,18 @@
 import React from 'react'
-import { Image, Text, TouchableOpacity, View, SectionList, ImageBackground } from 'react-native'
+import {
+  Image, Text, TouchableOpacity,
+  View, SectionList, ImageBackground
+} from 'react-native'
 import styles from './DrawerMenu.styles'
 import SocketListener from 'components/SocketListener'
 import Button from 'components/Button'
-import Icon from 'components/Icon'
 import LinearGradient from 'react-native-linear-gradient'
 import { bannerlinearGradientColors } from 'style/colors'
 
 export default function DrawerMenu ({
   topGroups, myGroups, goToGroup,
   currentGroup, currentGroupId, canModerateCurrentGroup,
-  goToCreateGroup, goToGroupSettingsMenu
+  goToCreateGroup, goToGroupSettingsMenu, goToInvitePeople
 }) {
   const renderItem =  ({ item }) => (
     <GroupRow
@@ -47,14 +49,16 @@ export default function DrawerMenu ({
             <Image source={{ uri: currentGroup.avatarUrl }} style={styles.headerAvatar} />
             <Text style={styles.headerText}>{currentGroup.name}</Text>
             {canModerateCurrentGroup && (
-              <TouchableOpacity
-                onPress={goToGroupSettingsMenu}
-                hitSlop={{ top: 5, bottom: 5, left: 10, right: 10 }}
-                style={styles.headerSettingsButton}
-              >
-                <Icon style={styles.headerSettingsButtonIcon} name='Settings' />
-                <Text style={styles.headerSettingsButtonText}>Settings</Text>
-              </TouchableOpacity>
+              <View style={styles.currentGroupButtons}>
+                <Button style={styles.currentGroupButton} 
+                  iconName='Settings'
+                  onPress={goToGroupSettingsMenu}
+                  text='Settings' />
+                <Button style={styles.currentGroupButton} 
+                  iconName='Invite'
+                  onPress={goToInvitePeople}
+                  text='Invite' />
+              </View>
             )}
           </View>
         </ImageBackground>
