@@ -38,7 +38,7 @@ export function buildTabStackScreenOptions ({
       || route?.name,
     headerTitleContainerStyle: {
       // Follow: https://github.com/react-navigation/react-navigation/issues/7057#issuecomment-593086348
-      width: isIOS ? '45%' : '35%',
+      width: isIOS ? '55%' : '45%',
       alignItems: 'center',
       marginLeft: isIOS ? 0 : 10
     },
@@ -65,8 +65,6 @@ export function buildTabStackScreenOptions ({
         flexDirection: 'row',
         alignItems: 'center'
       }}>
-        {/* <SearchIcon showSearch={() => navigation.navigate('Search')} />
-        <MessagesIcon showMessages={() => navigation.navigate('Messages')} /> */}
         <NotificationsIcon showNotifications={() => navigation.navigate('Notifications')} />
       </View>
     )

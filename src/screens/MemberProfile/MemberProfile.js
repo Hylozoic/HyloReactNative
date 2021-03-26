@@ -48,6 +48,7 @@ export default class MemberProfile extends React.Component {
       canFlag,
       goToDetails,
       goToEdit,
+      goToEditAccount,
       id,
       isFocused,
       isMe,
@@ -89,6 +90,7 @@ export default class MemberProfile extends React.Component {
             onPressMessages={onPressMessages}
             isMe={isMe}
             editProfile={goToEdit}
+            editAccount={goToEditAccount}
           />
           <ReadMoreButton goToDetails={goToDetails} />
         </View>

@@ -21,6 +21,7 @@ Object {
   "editing": undefined,
   "goToDetails": [Function],
   "goToEdit": [Function],
+  "goToEditAccount": [Function],
   "goToSkills": [Function],
   "id": 123,
   "isBlocked": false,

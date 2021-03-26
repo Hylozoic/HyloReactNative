@@ -24,6 +24,7 @@ export function mapStateToProps (state, props) {
   const isBlocked = !!getBlockedUsers(state).find(i => get('id', i) === id)
   const goToDetails = () => props.navigation.navigate('MemberDetails', { id })
   const goToEdit = () => props.navigation.navigate('MemberDetails', { id, editing: true })
+  const goToEditAccount = () => props.navigation.navigate('Edit Account Info')
   const goToSkills = () => props.navigation.navigate('MemberSkillEditor', { id })
   const navigation = props.navigation
 
@@ -36,6 +37,7 @@ export function mapStateToProps (state, props) {
     currentGroup,
     goToDetails,
     goToEdit,
+    goToEditAccount,
     goToSkills,
     isMe,
     navigation
@@ -89,8 +91,4 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-  mergeProps
-)
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps)
