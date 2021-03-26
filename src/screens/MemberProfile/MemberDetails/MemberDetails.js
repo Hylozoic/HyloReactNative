@@ -42,6 +42,7 @@ export default class MemberDetails extends React.Component {
         route,
         navigation,
         headerTitle,
+        headerLeftOnPress: () => this.saveChanges(),
         headerLeftConfirm: changed,
         headerRightButtonLabel: editing ? 'Save' : null,
         headerRightButtonOnPress: this.saveChanges,
@@ -112,7 +113,7 @@ export default class MemberDetails extends React.Component {
   }
 
   render () {
-    const { goToGroup, goToSkills, isMe, person, skills, onPressMessages } = this.props
+    const { goToGroup, goToSkills, isMe, person, onPressMessages } = this.props
     const { editing, errors } = this.state
     const personEdits = this.state.person
 

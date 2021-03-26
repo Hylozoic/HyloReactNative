@@ -9,6 +9,8 @@ export default function fetchCurrentUser () {
           id
           name
           email
+          bio
+          tagline    
           location
           locationObject {
             id

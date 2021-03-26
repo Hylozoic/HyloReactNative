@@ -11,10 +11,12 @@ import updateUserSettings from 'store/actions/updateUserSettings'
 import { mapWhenFocused, mergeWhenFocused } from 'util/redux'
 
 export function mapStateToProps (state, props) {
-  const id = get('route.params.id', props)
   const currentUser = getMe(state, props)
-  const person = id ? getPerson(state, { personId: id }) : currentUser
-  const isMe = Number(get('id', currentUser)) === Number(id)
+  const id = get('route.params.id', props)
+  const person = id
+    ? getPerson(state, { personId: id })
+    : currentUser
+  const isMe = Number(get('id', currentUser)) === Number(get('id', person))
 
   const editing = get('route.params.editing', props)
   const isBlocked = !!getBlockedUsers(state).find(i => get('id', i) === id)
