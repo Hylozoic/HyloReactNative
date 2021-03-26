@@ -1,4 +1,5 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import { StyleSheet } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { createStackNavigator } from '@react-navigation/stack'
@@ -24,6 +25,7 @@ import ThreadList from 'screens/ThreadList'
 import ThreadParticipants from 'screens/ThreadParticipants'
 import SearchPage from 'screens/SearchPage'
 import Avatar from 'components/Avatar'
+import getMe from 'store/selectors/getMe'
 
 const Messages = createStackNavigator()
 export function MessagesNavigator () {
@@ -133,7 +135,7 @@ export default function TabsNavigator () {
       tabBarIcon: ({ focused }) => (
         <Icon
           name={route.name}
-          size={24}
+          size={30}
           color={focused ? caribbeanGreen : gunsmoke}
           style={{ paddingTop: isIOS ? 0 : 5 }}
         />
@@ -141,6 +143,8 @@ export default function TabsNavigator () {
       tabBarLabel: () => null
     })
   }
+  const currentUser = useSelector(getMe)
+
   return (
     <Tabs.Navigator {...navigatorProps}>
       <Tabs.Screen name='Home' component={HomeNavigator} />
@@ -151,10 +155,7 @@ export default function TabsNavigator () {
         component={MyProfileNavigator}
         options={{
           tabBarIcon: ({ focused }) => 
-            <Avatar
-              size='small'
-              avatarUrl='http://www.brunningonline.net/simon/blog/archives/South%20Park%20Avatar.jpg'
-            />
+            <Avatar size='medium' avatarUrl={currentUser.avatarUrl} />
         }}
       />
     </Tabs.Navigator>
