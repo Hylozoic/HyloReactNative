@@ -6,13 +6,15 @@ import Icon from 'components/Icon'
 import { rhino, white } from 'style/colors'
 
 export default function GroupNavigation ({ navigation }) {
+  const { navigate } = navigation
   const navItems = [
-    { label: 'Create', iconName: 'Create', screen: 'Edit Post' },
+    { label: 'Create', iconName: 'Create',
+      onPress: () => navigate('Edit Post', { id: null }) },
     // { label: 'Home', iconName: 'Home', screen: 'Home' },
-    { label: 'Stream', iconName: 'Stream', screen: 'Feed' },
-    { label: 'Projects', iconName: 'Projects', screen: 'Projects' },
+    { label: 'Stream', iconName: 'Stream', onPress: () => navigate('Feed') },
+    { label: 'Projects', iconName: 'Projects', onPress: () =>  navigate('Projects') },
     // { label: 'Events', iconName: 'Events', screen: 'Events'  },
-    { label: 'Members', iconName: 'Person', screen: 'Members' }
+    { label: 'Members', iconName: 'Person', onPress: () => navigate('Members') }
   ]
   const childGroups = useSelector(getChildGroups)
   const parentGroups = useSelector(getParentGroups)
@@ -23,7 +25,7 @@ export default function GroupNavigation ({ navigation }) {
   return (
     <View style={styles.container}>
       {navItems.map(item => (
-        <NavItem {...item} onPress={() => navigation.navigate(item.screen)} />
+        <NavItem {...item} />
       ))}
       <View style={styles.divider} />
       <View style={styles.navItems}>
