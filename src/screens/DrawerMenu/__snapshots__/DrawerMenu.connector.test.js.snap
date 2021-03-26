@@ -71,6 +71,7 @@ Object {
   "goToCreateGroup": [Function],
   "goToGroup": [Function],
   "goToGroupSettingsMenu": [Function],
+  "goToInvitePeople": [Function],
   "goToMyProfile": [Function],
   "name": "Roy Rogers",
   "navigation": Object {
@@ -78,7 +79,6 @@ Object {
     "navigate": [MockFunction],
   },
   "selectGroup": [MockFunction],
-  "showSettings": [Function],
 }
 `;
 
@@ -90,7 +90,8 @@ Object {
   },
   "goToCreateGroup": [Function],
   "goToGroup": [Function],
-  "goToGroupSettingsMenu": false,
+  "goToGroupSettingsMenu": [Function],
+  "goToInvitePeople": [Function],
   "goToMyProfile": [Function],
   "name": "Roy Rogers",
   "navigation": Object {
@@ -98,6 +99,5 @@ Object {
     "navigate": [MockFunction],
   },
   "selectGroup": [MockFunction],
-  "showSettings": [Function],
 }
 `;

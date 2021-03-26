@@ -26,24 +26,17 @@ exports[`DrawerMenu matches the last snapshot 1`] = `
       <Text>
         foo
       </Text>
-      <ForwardRef
-        hitSlop={
-          Object {
-            "bottom": 5,
-            "left": 10,
-            "right": 10,
-            "top": 5,
-          }
-        }
-        onPress={[MockFunction]}
-      >
-        <Icon
-          name="Settings"
+      <View>
+        <Button
+          iconName="Settings"
+          onPress={[MockFunction]}
+          text="Settings"
         />
-        <Text>
-          Settings
-        </Text>
-      </ForwardRef>
+        <Button
+          iconName="Invite"
+          text="Invite"
+        />
+      </View>
     </View>
   </ImageBackground>
   <SectionList
