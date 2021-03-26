@@ -80,6 +80,32 @@ exports[`ThreadList fetches threads initially when empty 1`] = `
 
 exports[`ThreadList handles pending correctly with threads 1`] = `
 <View>
+  <View>
+    <View>
+      <View
+        accessible={true}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+      >
+        <View>
+          <View>
+            <Icon
+              name="Plus"
+            />
+            <Text>
+              New
+            </Text>
+          </View>
+        </View>
+      </View>
+    </View>
+  </View>
   <RCTScrollView
     data={
       Array [
@@ -143,6 +169,32 @@ exports[`ThreadList handles when there are no threads correctly 1`] = `
 
 exports[`ThreadList renders correctly 1`] = `
 <View>
+  <View>
+    <View>
+      <View
+        accessible={true}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+      >
+        <View>
+          <View>
+            <Icon
+              name="Plus"
+            />
+            <Text>
+              New
+            </Text>
+          </View>
+        </View>
+      </View>
+    </View>
+  </View>
   <RCTScrollView
     data={
       Array [

@@ -6,6 +6,8 @@ import LoadingScreen from 'screens/LoadingScreen'
 import NotificationOverlay from 'components/NotificationOverlay'
 import ThreadCard from 'components/ThreadCard'
 import styles from './ThreadList.styles'
+import Button from 'components/Button'
+import { caribbeanGreen, rhino20 } from 'style/colors'
 
 export default class ThreadList extends Component {
   state = { ready: false }
@@ -43,6 +45,7 @@ export default class ThreadList extends Component {
       showThread,
       refreshThreads,
       pendingRefresh,
+      navigation,
       // isConnected
     } = this.props
     const { ready } = this.state
@@ -54,6 +57,13 @@ export default class ThreadList extends Component {
 
     return (
       <View style={styles.threadList}>
+        {/* TODO: Style new button / bar better */}
+        <View style={{ backgroundColor: rhino20, padding: 10,
+    justifyContent: 'center',
+    alignItems: 'center'}}>
+          <Button style={{ backgroundColor: caribbeanGreen, maxWidth: 100 }} text='New' iconName='Plus'
+            onPress={() => navigation.navigate('New Message')} />
+        </View>
         <FlatList
           data={threads}
           keyExtractor={this._keyExtractor}
