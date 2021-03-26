@@ -66,12 +66,13 @@ export default function fetchCurrentUser () {
               id
             }
             group {
-              id
-              name
-              slug
-              memberCount
               avatarUrl
               bannerUrl
+              description
+              id
+              memberCount
+              name
+              slug
               groupTopics(subscribed: true) {
                 total
                 hasMore
@@ -92,6 +93,7 @@ export default function fetchCurrentUser () {
                   id
                   avatarUrl
                   bannerUrl
+                  description
                   memberCount
                   name
                   slug
@@ -102,6 +104,7 @@ export default function fetchCurrentUser () {
                   id
                   avatarUrl
                   bannerUrl
+                  description
                   memberCount
                   name
                   slug
