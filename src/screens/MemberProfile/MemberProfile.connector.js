@@ -9,9 +9,11 @@ import getPerson from 'store/selectors/getPerson'
 import getBlockedUsers from 'store/selectors/getBlockedUsers'
 import updateUserSettings from 'store/actions/updateUserSettings'
 import { mapWhenFocused, mergeWhenFocused } from 'util/redux'
+import getCurrentGroup from 'store/selectors/getCurrentGroup'
 
 export function mapStateToProps (state, props) {
   const currentUser = getMe(state, props)
+  const currentGroup = getCurrentGroup(state, props)
   const id = get('route.params.id', props)
   const person = id
     ? getPerson(state, { personId: id })
@@ -31,6 +33,7 @@ export function mapStateToProps (state, props) {
     editing,
     person,
     currentUser,
+    currentGroup,
     goToDetails,
     goToEdit,
     goToSkills,

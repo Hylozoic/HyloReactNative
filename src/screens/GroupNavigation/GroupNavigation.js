@@ -4,8 +4,16 @@ import { Text, View, TouchableOpacity, StyleSheet } from 'react-native'
 import { getChildGroups, getParentGroups } from 'store/selectors/getGroupRelationships'
 import Icon from 'components/Icon'
 import { rhino, white } from 'style/colors'
+import { useFocusEffect } from '@react-navigation/core'
+import getCurrentGroup from 'store/selectors/getCurrentGroup'
 
 export default function GroupNavigation ({ navigation }) {
+  const currentGroup = useSelector(getCurrentGroup)
+
+  useFocusEffect(() => {
+    navigation.setOptions({ headerTitle: currentGroup.name  })
+  }, [])
+
   const { navigate } = navigation
   const navItems = [
     { label: 'Create', iconName: 'Create',
@@ -18,8 +26,9 @@ export default function GroupNavigation ({ navigation }) {
   ]
   const childGroups = useSelector(getChildGroups)
   const parentGroups = useSelector(getParentGroups)
+
   if (childGroups.length > 0 || parentGroups.length > 0) {
-    navItems.push({ label: 'Groups', iconName: 'Share', screen: 'Group Relationships' })
+    navItems.push({ label: 'Groups', iconName: 'Share', onPress: () => navigate('Group Relationships') })
   }
 
   return (

@@ -1,13 +1,22 @@
 import React from 'react'
+import { useFocusEffect } from '@react-navigation/core'
+import { useSelector } from 'react-redux'
 import { View, Image, Text, SectionList, TouchableOpacity } from 'react-native'
+import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import styles from './GroupRelationships.styles'
 
 export default function GroupRelationships ({
-    group,
     childGroups,
     parentGroups,
-    goToGroup
+    goToGroup,
+    navigation
 }) {
+  const currentGroup = useSelector(getCurrentGroup)
+
+  useFocusEffect(() => {
+    navigation.setOptions({ headerTitle: currentGroup.name  })
+  }, [])
+
   const renderItem =  ({ item }) => (
     <GroupRow
       group={item}
@@ -31,10 +40,7 @@ export default function GroupRelationships ({
 
   return (
     <View>
-      <SectionList
-        sections={listSections}
-        stickySectionHeadersEnabled={false}
-      />
+      <SectionList sections={listSections} stickySectionHeadersEnabled={false} />
     </View>
   )
 }
@@ -42,6 +48,7 @@ export default function GroupRelationships ({
 export function GroupRow ({ group, goToGroup }) {
     const { id, avatarUrl, name } = group
     const newPostCount = Math.min(99, group.newPostCount)
+
     return (
       <TouchableOpacity onPress={() => goToGroup(group)} style={styles.groupRow}>
         {!!avatarUrl &&

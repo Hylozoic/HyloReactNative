@@ -33,10 +33,10 @@ export default class MemberDetails extends React.Component {
 
   setHeader = () => {
     const { editing, changed } = this.state
-    const { navigation, route } = this.props
+    const { navigation, route, currentGroup } = this.props
     const headerTitle = editing
       ? 'Edit Your Profile'
-      : `About`
+      : currentGroup?.name
     if (editing) {
       navigation.setOptions(buildModalScreenOptions({
         route,

@@ -11,6 +11,7 @@ Object {
 
 exports[`mapStateToProps maps the state to the props 1`] = `
 Object {
+  "currentGroup": null,
   "currentUser": SessionBoundModel {
     "_fields": Object {
       "id": "1",
