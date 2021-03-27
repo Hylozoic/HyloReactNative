@@ -9,7 +9,7 @@ import Button from 'components/Button'
 import LinearGradient from 'react-native-linear-gradient'
 import { bannerlinearGradientColors } from 'style/colors'
 
-export default function GroupPreview ({ route, navigation }) {
+export default function GroupDetail ({ route, navigation }) {
   const groupId = route.params.groupId
   const group = useSelector(state => getGroup(state, { id: groupId }))
 

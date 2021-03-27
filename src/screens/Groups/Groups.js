@@ -3,14 +3,14 @@ import { useFocusEffect } from '@react-navigation/core'
 import { useSelector } from 'react-redux'
 import { View, Image, Text, SectionList, TouchableOpacity } from 'react-native'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
-import styles from './GroupRelationships.styles'
+import styles from './Groups.styles'
 import getMemberships from 'store/selectors/getMemberships'
 
-export default function GroupRelationships ({
+export default function Groups ({
     childGroups,
     parentGroups,
     goToGroup,
-    goToGroupPreview,
+    goToGroupDetail,
     navigation
 }) {
   const currentGroup = useSelector(getCurrentGroup)
@@ -23,7 +23,7 @@ export default function GroupRelationships ({
     <GroupRow
       group={item}
       goToGroup={goToGroup}
-      goToGroupPreview={goToGroupPreview}
+      goToGroupDetail={goToGroupDetail}
       addPadding
     />
   )
@@ -55,11 +55,11 @@ export default function GroupRelationships ({
   )
 }
 
-export function GroupRow ({ group, goToGroup, goToGroupPreview }) {
+export function GroupRow ({ group, goToGroup, goToGroupDetail }) {
     const { avatarUrl, description, name, memberCount, childGroups } = group
     const childGroupsCount = childGroups.count()
     const isMember = useSelector(getMemberships).find(m => m.group.id === group.id) || false
-    const onPressFunc = isMember ? goToGroup : goToGroupPreview
+    const onPressFunc = isMember ? goToGroup : goToGroupDetail
     return (
       <TouchableOpacity onPress={() => onPressFunc(group)} style={styles.groupRow}>
         {!!avatarUrl && (

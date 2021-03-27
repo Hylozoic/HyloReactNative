@@ -42,8 +42,8 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
       navigation.navigate('Group Navigation', { groupId: group.id })
       dispatchProps.selectGroup(group.id)
     },
-    goToGroupPreview: group => {
-      navigation.navigate('Group Preview', { groupId: group.id })
+    goToGroupDetail: group => {
+      navigation.navigate('Group Details', { groupId: group.id })
     }
   }
 }
