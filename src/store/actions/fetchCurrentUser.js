@@ -66,6 +66,7 @@ export default function fetchCurrentUser () {
               id
             }
             group {
+              accessibility
               avatarUrl
               bannerUrl
               description
@@ -73,41 +74,61 @@ export default function fetchCurrentUser () {
               memberCount
               name
               slug
+              visibility
+              settings {
+                allowGroupInvites
+                askJoinQuestions
+                publicMemberDirectory
+              }
               groupTopics(subscribed: true) {
                 total
                 hasMore
                 items {
+                  followersTotal
                   id
+                  isSubscribed
+                  newPostCount
+                  postsTotal
                   topic {
                     id
                     name
                   }
-                  newPostCount
-                  postsTotal
-                  followersTotal
-                  isSubscribed
                 }
               }
               parentGroups {
                 items {
-                  id
+                  accessibility
                   avatarUrl
                   bannerUrl
                   description
+                  id
                   memberCount
                   name
                   slug
+                  visibility
+                  settings {
+                    allowGroupInvites
+                    askJoinQuestions
+                    publicMemberDirectory
+                  }
                 }
               }
               childGroups(first: 300) {
                 items {
-                  id
+                  accessibility
                   avatarUrl
                   bannerUrl
                   description
+                  id
                   memberCount
                   name
                   slug
+                  visibility
+                  settings {
+                    allowGroupInvites
+                    askJoinQuestions
+                    publicMemberDirectory
+                  }
                 }
               }
             }

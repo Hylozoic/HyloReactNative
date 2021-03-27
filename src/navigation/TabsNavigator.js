@@ -19,6 +19,7 @@ import ProjectMembers from 'screens/ProjectMembers/ProjectMembers'
 import GroupNavigation from 'screens/GroupNavigation'
 import { caribbeanGreen, gainsboro, gunsmoke, rhino05, white } from 'style/colors'
 import GroupRelationships from 'screens/GroupRelationships'
+import GroupPreview from 'screens/GroupPreview'
 import NewMessage from 'screens/NewMessage'
 import Thread from 'screens/Thread'
 import ThreadList from 'screens/ThreadList'
@@ -92,6 +93,7 @@ export function HomeNavigator () {
         options={{ headerTitle: 'Edit Skills' }}
       />
       <Home.Screen name='Group Relationships' component={GroupRelationships} />
+      <Home.Screen name='Group Preview' component={GroupPreview} />
       <Home.Screen name='Topics' component={TopicsComponent} />
     </Home.Navigator>
   )

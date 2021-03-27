@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native'
 import { isIOS } from 'util/platform'
 import {
-  bigStone, rhino, rhino50, persimmon, rhino40, black10onRhino, white, rhino30, rhino10, rhino60, rhino80
+  bigStone, rhino, rhino50, persimmon, rhino40, black10onRhino, white, rhino30, rhino10, rhino60, rhino80, rhino20
 } from 'style/colors'
 
 export default {
@@ -14,11 +14,22 @@ export default {
     fontSize: 18
   },
   groupRow: {
-    padding: 15,
-    borderBottomWidth: StyleSheet.hairlineWidth
+    padding: 10,
+    borderTopWidth: StyleSheet.hairlineWidth,
+    borderTopColor: rhino60,
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  groupAvatar: {
+    height: 42,
+    width: 42,
+    marginHorizontal: 10
+  },
+  groupRowRight: {
+    marginRight: 82
   },
   groupRowText: {
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
   groupRowCounts: {
     color: rhino60,

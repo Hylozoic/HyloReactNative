@@ -39,11 +39,11 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     ...dispatchProps,
     ...ownProps,
     goToGroup: group => {
-      navigation.closeDrawer()
-      navigation.navigate('Group Navigation', {
-        groupId: group.id
-      })
+      navigation.navigate('Group Navigation', { groupId: group.id })
       dispatchProps.selectGroup(group.id)
+    },
+    goToGroupPreview: group => {
+      navigation.navigate('Group Preview', { groupId: group.id })
     }
   }
 }
