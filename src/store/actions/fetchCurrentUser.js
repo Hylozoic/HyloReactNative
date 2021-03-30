@@ -53,6 +53,16 @@ export default function fetchCurrentUser () {
             signupInProgress
             dmNotifications
           }
+          joinRequests(status: 0) {
+            items {
+              id
+              status
+              createdAt
+              group {
+                id
+              }
+            }
+          }
           memberships {
             id
             lastViewedAt
@@ -75,10 +85,23 @@ export default function fetchCurrentUser () {
               name
               slug
               visibility
-              settings {
-                allowGroupInvites
-                askJoinQuestions
-                publicMemberDirectory
+              childGroups(first: 300) {
+                items {
+                  accessibility
+                  avatarUrl
+                  bannerUrl
+                  description
+                  id
+                  memberCount
+                  name
+                  slug
+                  visibility
+                  settings {
+                    allowGroupInvites
+                    askJoinQuestions
+                    publicMemberDirectory
+                  }
+                }
               }
               groupTopics(subscribed: true) {
                 total
@@ -113,23 +136,8 @@ export default function fetchCurrentUser () {
                   }
                 }
               }
-              childGroups(first: 300) {
-                items {
-                  accessibility
-                  avatarUrl
-                  bannerUrl
-                  description
-                  id
-                  memberCount
-                  name
-                  slug
-                  visibility
-                  settings {
-                    allowGroupInvites
-                    askJoinQuestions
-                    publicMemberDirectory
-                  }
-                }
+              settings {
+                allowGroupInvites
               }
             }
           }          
