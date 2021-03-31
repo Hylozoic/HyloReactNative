@@ -24,16 +24,16 @@ it('displays an error message without a group name with checkAndSubmit', () => {
 
 it('stores the group name and redirects with a group name with checkAndSubmit', () => {
   const props = {
-    saveGroupName: jest.fn(),
-    goToCreateGroupUrl: jest.fn()
+    updateGroupData: jest.fn(),
+    goToNextStep: jest.fn()
   }
   const groupName = 'groupName'
   const renderer = ReactTestRenderer.create(<CreateGroupName {...props} />)
   const instance = renderer.getInstance()
   instance.setState({ groupName })
   instance.checkAndSubmit()
-  expect(props.saveGroupName).toHaveBeenCalledWith(groupName)
-  expect(props.goToCreateGroupUrl).toHaveBeenCalled()
+  expect(props.updateGroupData).toHaveBeenCalledWith({ name: groupName })
+  expect(props.goToNextStep).toHaveBeenCalled()
 })
 
 it('clears error from state with clearErrors', () => {

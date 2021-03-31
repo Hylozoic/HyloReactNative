@@ -1,25 +1,26 @@
 import { connect } from 'react-redux'
 import {
-  saveGroupUrl,
+  updateGroupData,
   FETCH_URL_EXISTS,
   fetchGroupExists,
-  getGroupUrlExists
+  getGroupUrlExists,
+  getGroupData
 } from '../CreateGroupFlow.store'
 
 export function mapStateToProps (state, props) {
   const urlExists = getGroupUrlExists(state)
-  const groupUrl = state.CreateGroupFlow.groupUrl
+  const groupData = getGroupData(state)
   const fetchUrlPending = state.pending[FETCH_URL_EXISTS]
   return {
     urlExists,
-    groupUrl,
+    groupData,
     fetchUrlPending
   }
 }
 
 export const mapDispatchToProps = {
   fetchGroupExists,
-  saveGroupUrl
+  updateGroupData
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {

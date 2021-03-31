@@ -1,44 +1,36 @@
 import { AnalyticsEvents } from 'hylo-utils/constants'
 
 export const MODULE_NAME = 'CreateGroupFlow'
-export const SAVE_GROUP_NAME = `${MODULE_NAME}/SAVE_GROUP_NAME`
-export const SAVE_GROUP_URL = `${MODULE_NAME}/SAVE_GROUP_URL`
-export const SAVE_GROUP_VISIBILITY_ACCESSIBILITY = `${MODULE_NAME}/SAVE_GROUP_VISIBILITY_ACCESSIBILITY`
-export const SAVE_GROUP_PARENT_GROUP_IDS = `${MODULE_NAME}/SAVE_GROUP_PARENT_GROUP_IDS`
+export const UPDATE_GROUP_DATA = `${MODULE_NAME}/UPDATE_GROUP_DATA`
 export const FETCH_URL_EXISTS = `${MODULE_NAME}/FETCH_URL_EXISTS`
 export const CREATE_GROUP = `${MODULE_NAME}/CREATE_GROUP`
 export const CLEAR_CREATE_GROUP_STORE = `${MODULE_NAME}/CLEAR_CREATE_GROUP_STORE`
 export const FETCH_GROUP_EXISTS = `${MODULE_NAME}/FETCH_URL_EXISTS`
 
-export default function reducer (state = {}, action) {
+export const defaultState = {
+  groupData: {
+    name: '',
+    url: '',
+    visibility: null,
+    accessibility: null,
+    groupParentGroupIds: []
+  },
+  urlExists: false
+}
+
+export default function reducer (state = defaultState, action) {
   const { type, payload } = action
   switch (type) {
-    case SAVE_GROUP_NAME:
+    case UPDATE_GROUP_DATA:
       return {
         ...state,
-        groupName: payload
-      }
-    case SAVE_GROUP_URL:
-      return {
-        ...state,
-        groupUrl: payload
-      }
-    case SAVE_GROUP_VISIBILITY_ACCESSIBILITY:
-      return {
-        ...state,
-        visibilityAccessibility: payload
-      }
-    case SAVE_GROUP_PARENT_GROUP_IDS:
-      return {
-        ...state,
-        parentGroupIds: payload
+        groupData: {
+          ...state.groupData,
+          ...payload
+        }
       }
     case CLEAR_CREATE_GROUP_STORE:
-      return {
-        ...state,
-        groupUrl: null,
-        groupName: null
-      }
+      return defaultState
     case FETCH_URL_EXISTS:
       return {
         ...state,
@@ -48,7 +40,7 @@ export default function reducer (state = {}, action) {
   return state
 }
 
-export function createGroup (name, slug) {
+export function createGroup (groupData) {
   return {
     type: CREATE_GROUP,
     graphql: {
@@ -60,21 +52,25 @@ export function createGroup (name, slug) {
             id
             name
             slug
+            parentGroups {
+              items {
+                id
+              }
+            }
+          }
+          person {
+            id
           }
         }
       }
       `,
       variables: {
-        data: {
-          name,
-          slug
-        }
+        data: groupData
       }
     },
     meta: {
       extractModel: 'Membership',
-      slug,
-      name,
+      ...groupData,
       analytics: AnalyticsEvents.GROUP_CREATED
     }
   }
@@ -98,48 +94,23 @@ export function fetchGroupExists (slug) {
   }
 }
 
-export function saveGroupName (name) {
+export function updateGroupData (groupData) {
   return {
-    type: SAVE_GROUP_NAME,
-    payload: name
+    type: UPDATE_GROUP_DATA,
+    payload: groupData
   }
 }
 
-export function saveGroupUrl (url) {
-  return {
-    type: SAVE_GROUP_URL,
-    payload: url
-  }
+export function getGroupData (state) {
+  return state[MODULE_NAME]?.groupData
 }
 
-export function saveGroupVisibilityAccessibility (visibilityAccessibility) {
-  return {
-    type: SAVE_GROUP_VISIBILITY_ACCESSIBILITY,
-    payload: visibilityAccessibility
-  }
-}
-
-export function saveGroupParentGroupIds (parentGroupIds) {
-  return {
-    type: SAVE_GROUP_PARENT_GROUP_IDS,
-    payload: parentGroupIds
-  }
+export function getGroupUrlExists (state) {
+  return state[MODULE_NAME].urlExists
 }
 
 export function clearCreateGroupStore () {
   return {
     type: CLEAR_CREATE_GROUP_STORE
   }
-}
-
-export function getGroupName (state) {
-  return state[MODULE_NAME].groupName
-}
-
-export function getGroupUrl (state) {
-  return state[MODULE_NAME].groupUrl
-}
-
-export function getGroupUrlExists (state) {
-  return state[MODULE_NAME].urlExists
 }

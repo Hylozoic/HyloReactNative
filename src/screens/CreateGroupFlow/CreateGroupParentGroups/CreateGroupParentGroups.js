@@ -5,7 +5,7 @@ import SafeAreaView from 'react-native-safe-area-view'
 import Button from 'components/Button'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 import styles from '../CreateGroupFlow.styles'
-import { saveGroupParentGroupIds } from '../CreateGroupFlow.store'
+import { updateGroupData } from '../CreateGroupFlow.store'
 import getMemberships from 'store/selectors/getMemberships'
 // NOTE: Make a local copy of this if modification is needed
 import ItemChooserItemRow from 'screens/ItemChooser/ItemChooserItemRow'
@@ -29,7 +29,7 @@ export default function CreateGroupParentGroups ({ navigation }) {
   const clear = () => setParentGroupIds([])
 
   const checkAndSubmit = () => {
-    dispatch(saveGroupParentGroupIds(parentGroupIds))
+    dispatch(updateGroupData({ parentIds: parentGroupIds }))
     navigation.navigate('CreateGroupReview')
   }
 

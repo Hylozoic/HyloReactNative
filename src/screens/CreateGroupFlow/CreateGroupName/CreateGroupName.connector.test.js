@@ -8,7 +8,9 @@ const groupName = 'name'
 
 const state = {
   [MODULE_NAME]: {
-    groupName
+    groupData: { 
+      name: groupName
+    }
   }
 }
 
@@ -20,8 +22,8 @@ describe('mapStateToProps', () => {
 
 describe('mapDispatchToProps', () => {
   it('maps the action generators', () => {
-    expect(mapDispatchToProps.hasOwnProperty('saveGroupName')).toBeTruthy()
-    expect(mapDispatchToProps.saveGroupName(groupName)).toMatchSnapshot()
+    expect(mapDispatchToProps.hasOwnProperty('updateGroupData')).toBeTruthy()
+    expect(mapDispatchToProps.updateGroupData({ name: groupName })).toMatchSnapshot()
   })
 })
 

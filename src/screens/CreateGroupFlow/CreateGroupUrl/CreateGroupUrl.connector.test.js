@@ -9,7 +9,9 @@ const groupUrl = 'my-url'
 
 const state = {
   [MODULE_NAME]: {
-    groupUrl,
+    groupData: {
+      url: groupUrl
+    },
     urlExists: false
   },
   pending: {
@@ -26,8 +28,8 @@ describe('mapStateToProps', () => {
 describe('mapDispatchToProps', () => {
   it('maps the action generators', () => {
     expect(mapDispatchToProps.hasOwnProperty('fetchGroupExists')).toBeTruthy()
-    expect(mapDispatchToProps.hasOwnProperty('saveGroupUrl')).toBeTruthy()
-    expect(mapDispatchToProps.saveGroupUrl(groupUrl)).toMatchSnapshot()
+    expect(mapDispatchToProps.hasOwnProperty('updateGroupData')).toBeTruthy()
+    expect(mapDispatchToProps.updateGroupData({ url: groupUrl })).toMatchSnapshot()
   })
 })
 

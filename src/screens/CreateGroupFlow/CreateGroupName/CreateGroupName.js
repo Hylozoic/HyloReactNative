@@ -14,7 +14,7 @@ export default class CreateGroupName extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      groupName: this.props.groupName
+      groupName: this.props.groupData?.name
     }
   }
 
@@ -43,8 +43,8 @@ export default class CreateGroupName extends React.Component {
       })
       return
     }
-    this.props.saveGroupName(groupName)
-    this.props.goToCreateGroupUrl()
+    this.props.updateGroupData({ name: groupName })
+    this.props.goToNextStep()
   }
 
   render () {

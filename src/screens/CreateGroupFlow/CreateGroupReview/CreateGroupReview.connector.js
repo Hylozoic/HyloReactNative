@@ -1,27 +1,21 @@
 import { connect } from 'react-redux'
-import selectGroup from 'store/actions/selectGroup'
 import {
   createGroup,
   clearCreateGroupStore,
-  CREATE_GROUP,
-  getGroupName,
-  getGroupUrl
+  getGroupData,
+  CREATE_GROUP
 } from '../CreateGroupFlow.store'
 
 export function mapStateToProps (state, props) {
-  const groupName = getGroupName(state)
-  const groupUrl = getGroupUrl(state)
-  const createGroupPending = state.pending[CREATE_GROUP]
   return {
-    groupName,
-    groupUrl,
-    createGroupPending
+    groupData: getGroupData(state),
+    createGroupPending: state.pending[CREATE_GROUP]
   }
 }
 
 export function mapDispatchToProps (dispatch, props) {
   return {
-    createGroup: (name, slug) => dispatch(createGroup(name, slug)),
+    createGroup: groupData => dispatch(createGroup(groupData)),
     clearCreateGroupStore: () => dispatch(clearCreateGroupStore()),
   }
 }

@@ -10,16 +10,16 @@ import {
   GROUP_ACCESSIBILITY, GROUP_VISIBILITY,
   visibilityDescription, accessibilityDescription
 } from 'store/models/Group'
-import { saveGroupVisibilityAccessibility } from '../CreateGroupFlow.store'
+import { updateGroupData } from '../CreateGroupFlow.store'
 import { white } from 'style/colors'
 
 export default function CreateGroupVisibilityAccessibility ({ navigation }) {
   const dispatch = useDispatch()
-  const [visibility, setVisibility] = useState('')
-  const [accessibility, setAccessibility] = useState('')
+  const [visibility, setVisibility] = useState(GROUP_VISIBILITY.Hidden)
+  const [accessibility, setAccessibility] = useState(GROUP_ACCESSIBILITY.Closed)
 
   const checkAndSubmit = () => {
-    dispatch(saveGroupVisibilityAccessibility([visibility, accessibility]))
+    dispatch(updateGroupData({ visibility, accessibility }))
     navigation.navigate('CreateGroupParentGroups')
   }
 

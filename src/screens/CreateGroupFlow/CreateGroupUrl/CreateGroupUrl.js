@@ -21,7 +21,7 @@ export default class CreateGroupUrl extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      groupUrl: this.props.groupUrl
+      groupUrl: this.props.groupData?.url
     }
   }
 
@@ -61,12 +61,12 @@ export default class CreateGroupUrl extends React.Component {
 
   checkAndSubmit = () => {
     const { groupUrl } = this.state
-    const { fetchGroupExists, saveGroupUrl, goToNextStep } = this.props
+    const { fetchGroupExists, updateGroupData, goToNextStep } = this.props
     if (!this.validate(groupUrl)) return
     return checkGroupUrlThenRedirect(groupUrl,
       fetchGroupExists,
       this.setErrorMessage,
-      saveGroupUrl,
+      updateGroupData,
       goToNextStep
     )
   }
@@ -104,7 +104,7 @@ export default class CreateGroupUrl extends React.Component {
   }
 }
 
-export function checkGroupUrlThenRedirect (groupUrl, fetchGroupExists, setErrorMessage, saveGroupUrl, goToNextStep) {
+export function checkGroupUrlThenRedirect (groupUrl, fetchGroupExists, setErrorMessage, updateGroupData, goToNextStep) {
   return fetchGroupExists(groupUrl)
     .then((data) => {
       const error = get('error', data)
@@ -118,7 +118,7 @@ export function checkGroupUrlThenRedirect (groupUrl, fetchGroupExists, setErrorM
         return
       }
       if (groupExists === false) {
-        saveGroupUrl(groupUrl)
+        updateGroupData({ url: groupUrl })
         goToNextStep()
         return
       }

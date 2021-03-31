@@ -1,15 +1,14 @@
 import { connect } from 'react-redux'
-import { saveGroupName, getGroupName } from '../CreateGroupFlow.store'
+import { updateGroupData, getGroupData } from '../CreateGroupFlow.store'
 
 export function mapStateToProps (state, props) {
-  const groupName = getGroupName(state)
   return {
-    groupName
+    groupData: getGroupData(state)
   }
 }
 
 export const mapDispatchToProps = {
-  saveGroupName
+  updateGroupData
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
@@ -18,7 +17,7 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     ...stateProps,
     ...dispatchProps,
     ...ownProps,
-    goToCreateGroupUrl: () => {
+    goToNextStep: () => {
       navigation.navigate('CreateGroupUrl')
     },
     navigation
