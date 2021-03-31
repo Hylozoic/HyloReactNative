@@ -28,8 +28,8 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     ...stateProps,
     ...dispatchProps,
     ...ownProps,
-    goToCreateGroupReview: () => {
-      navigation.navigate('CreateGroupReview')
+    goToNextStep: () => {
+      navigation.navigate('CreateGroupVisibilityAccessibility')
     }
   }
 }

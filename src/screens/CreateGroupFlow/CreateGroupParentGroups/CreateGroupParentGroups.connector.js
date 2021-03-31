@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { saveGroupName, getGroupName } from '../CreateGroupParentGroups.store'
+import { saveGroupName, getGroupName } from '../CreateGroupFlow.store'
 
 export function mapStateToProps (state, props) {
   const groupName = getGroupName(state)
