@@ -1,5 +1,5 @@
 import HeaderRightButton from 'navigation/header/HeaderRightButton'
-import { rhino10, rhino20, white } from 'style/colors'
+import { rhino10, rhino20, rhino80, white } from 'style/colors'
 
 const styles = {
   container: {
@@ -43,6 +43,11 @@ const styles = {
   },
   groupDescription: {
     marginBottom: 10
+  },
+  alreadyRequestedText: {
+    padding: 15,
+    color: white,
+    backgroundColor: rhino80
   },
   joinQuestions: {
     marginBottom: 10

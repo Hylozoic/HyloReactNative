@@ -22,8 +22,9 @@ export default function GroupDetail ({
 
   const join = () => {
     const answers = []
-    questionAnswers.forEach((questionId, answer) =>
-      answers.append({ questionId, answer }))
+    for (const questionId in questionAnswers) {
+      answers.push({ questionId: parseInt(questionId), answer: questionAnswers[questionId] })
+    }
     createJoinRequest(group.id, answers)
     navigation.navigate('Group Relationships')
   }
@@ -49,6 +50,9 @@ export default function GroupDetail ({
       </ImageBackground>
       <View style={styles.mainContent}>
         <Text style={styles.groupDescription}>{group.description}</Text>
+        {alreadyRequested && (
+          <Text style={styles.alreadyRequestedText}>Your request to join this group is pending moderator approval.</Text>
+        )}
         {!canJoin && !alreadyRequested && (
           <Text>{accessibilityDescription(group.accessibility)}</Text>
         )}
@@ -65,9 +69,6 @@ export default function GroupDetail ({
           </View>
         )}
         {canJoin && <Button style={styles.joinButton} onPress={join} text='Join' />}
-        {alreadyRequested && (
-          <Text>Your request to join this group is pending moderator approval.</Text>
-        )}
       </View>
     </ScrollView>
   )
