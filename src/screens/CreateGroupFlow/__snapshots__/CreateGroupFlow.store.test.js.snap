@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`clearNameAndUrlFromStore matches snapshot 1`] = `
+exports[`clearCreateGroupStore matches snapshot 1`] = `
 Object {
-  "type": "CreateGroupFlow/CLEAR_NAME_AND_URL_FROM_STORE",
+  "type": "CreateGroupFlow/CLEAR_CREATE_GROUP_STORE",
 }
 `;
 

@@ -2,7 +2,7 @@
 
 exports[`mapDispatchToProps maps the action generators 1`] = `
 Object {
-  "clearNameAndUrlFromStore": [Function],
+  "clearCreateGroupStore": [Function],
   "createGroup": [Function],
 }
 `;
@@ -42,7 +42,7 @@ Array [
   ],
   Array [
     Object {
-      "type": "CreateGroupFlow/CLEAR_NAME_AND_URL_FROM_STORE",
+      "type": "CreateGroupFlow/CLEAR_CREATE_GROUP_STORE",
     },
   ],
 ]

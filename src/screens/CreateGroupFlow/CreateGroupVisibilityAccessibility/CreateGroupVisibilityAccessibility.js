@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import {
   Text,
   View,
@@ -14,26 +15,21 @@ import {
   GROUP_ACCESSIBILITY, GROUP_VISIBILITY,
   visibilityDescription, accessibilityDescription
 } from 'store/models/Group'
-// import { saveGroupName, getGroupName } from '../CreateGroupFlow.store'
+import { saveGroupVisibilityAccessibility } from '../CreateGroupFlow.store'
 
 export default function CreateGroupVisibilityAccessibility ({
-  // accessibility, visibility
+  navigation
 }) {
+  const dispatch = useDispatch()
   const [errors, setErrors] = useState([])
   const [visibility, setVisibility] = useState('')
   const [accessibility, setAccessibility] = useState('')
 
   const checkAndSubmit = () => {
-    const { groupName } = this.state
-
     setErrors([])
-
-    if (!groupName || groupName.length === 0) {
-      setErrors(['Please enter a group name'])
-    } else {
-      console.log('!!! visibility, accessibility:', visibility, accessibility)
-      // HOLONIC TODO: save into CreateGroupFlow store, go to next step
-    }
+    console.log('!!! visibility, accessibility:', visibility, accessibility)
+    dispatch(saveGroupVisibilityAccessibility([visibility, accessibility]))
+    navigation.navigate('CreateGroupReview')
   }
 
   return (
@@ -41,23 +37,26 @@ export default function CreateGroupVisibilityAccessibility ({
       <KeyboardFriendlyView>
         <View style={styles.header}>
           <Text style={styles.heading}>Visibility and Accessibility</Text>
-          <Text style={styles.description}>...</Text>
+          {/* HOLONIC TODO: Write a description here of visibility and accessibility? */}
+          {/* <Text style={styles.description}>...</Text> */}
         </View>
         <View style={styles.content}>
-          <View style={styles.textInputContainer}>
-            <Text style={styles.textInputLabel}>Who can see this group?</Text>
-            <Picker selectedValue={visibility} onValueChange={setVisibility}>
-              {Object.keys(GROUP_VISIBILITY).map(visibilityKey => (
-                <Picker.Item label={visibilityDescription(visibilityKey)} value={GROUP_VISIBILITY[visibilityKey]} />
-              ))}              
+          <View style={styles.pickerContainer}>
+            <Text style={styles.pickerLabel}>Who can see this group?</Text>
+            <Picker style={styles.picker} itemStyle={styles.pickerItem} selectedValue={visibility} onValueChange={setVisibility}>
+              {Object.values(GROUP_VISIBILITY).map(visibilityValue => (
+                <Picker.Item label={visibilityDescription(visibilityValue)}
+                  value={visibilityValue} key={visibilityValue} />
+              ))}
             </Picker>
           </View>
-          <View style={styles.textInputContainer}>
-            <Text style={styles.textInputLabel}>Who can join this group?</Text>
-            <Picker selectedValue={accessibility} onValueChange={setAccessibility}>
-              {Object.keys(GROUP_ACCESSIBILITY).map(accessibilityKey => (
-                <Picker.Item label={accessibilityDescription(accessibilityKey)} value={GROUP_ACCESSIBILITY[accessibilityKey]} />
-              ))}              
+          <View style={styles.pickerContainer}>
+            <Text style={styles.pickerLabel}>Who can join this group?</Text>
+            <Picker style={styles.picker} itemStyle={styles.pickerItem} selectedValue={accessibility} onValueChange={value => setAccessibility(value)}>
+              {Object.values(GROUP_ACCESSIBILITY).map(accessibilityValue => (
+                <Picker.Item label={accessibilityDescription(accessibilityValue)}
+                  value={accessibilityValue} key={accessibilityValue} />
+              ))}
             </Picker>
           </View>
           {/* {error && <View style={styles.errorBubble}><ErrorBubble text={error} topArrow /></View>} */}

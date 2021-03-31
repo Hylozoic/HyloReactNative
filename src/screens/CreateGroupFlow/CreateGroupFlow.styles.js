@@ -74,5 +74,22 @@ export default {
     fontSize: 16,
     marginTop: 10
   },
+  pickerContainer: {
+    marginBottom: 50
+  },
+  pickerLabel: {
+    fontSize: 16,
+    color: white,
+    fontWeight: 'bold',
+    marginBottom: 10
+  },
+  picker: {
+    minWidth: '100%',
+    backgroundColor: white,
+    borderRadius: 15,
+  },
+  pickerItem: {
+    height: 130
+  },
   androidInvisibleUnderline: 'rgba(0,0,0,0)'
 }

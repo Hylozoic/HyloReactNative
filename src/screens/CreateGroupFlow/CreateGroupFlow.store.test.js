@@ -4,10 +4,10 @@ import reducer,
   fetchGroupExists,
   saveGroupUrl,
   saveGroupName,
-  clearNameAndUrlFromStore,
+  clearCreateGroupStore,
   SAVE_GROUP_NAME,
   SAVE_GROUP_URL,
-  CLEAR_NAME_AND_URL_FROM_STORE,
+  CLEAR_CREATE_GROUP_STORE,
   FETCH_URL_EXISTS
 }
   from './CreateGroupFlow.store'
@@ -42,9 +42,9 @@ describe('reducer', () => {
       expect(newState.groupUrl).toEqual(url)
     })
   })
-  describe('on CLEAR_NAME_AND_URL_FROM_STORE', () => {
+  describe('on CLEAR_CREATE_GROUP_STORE', () => {
     const action = {
-      type: CLEAR_NAME_AND_URL_FROM_STORE
+      type: CLEAR_CREATE_GROUP_STORE
     }
     it('sets display', () => {
       const state = {
@@ -94,6 +94,6 @@ describe('saveGroupUrl', () => {
   it('matches snapshot', () => expect(saveGroupUrl(url)).toMatchSnapshot())
 })
 
-describe('clearNameAndUrlFromStore', () => {
-  it('matches snapshot', () => expect(clearNameAndUrlFromStore()).toMatchSnapshot())
+describe('clearCreateGroupStore', () => {
+  it('matches snapshot', () => expect(clearCreateGroupStore()).toMatchSnapshot())
 })

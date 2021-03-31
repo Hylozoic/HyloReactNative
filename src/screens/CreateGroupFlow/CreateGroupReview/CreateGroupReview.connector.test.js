@@ -30,7 +30,7 @@ describe('mapDispatchToProps', () => {
     const dispatchProps = mapDispatchToProps(dispatch)
     expect(dispatchProps).toMatchSnapshot()
     dispatchProps.createGroup(groupName, groupUrl)
-    dispatchProps.clearNameAndUrlFromStore()
+    dispatchProps.clearCreateGroupStore()
     expect(dispatch).toHaveBeenCalled()
     expect(dispatch.mock.calls).toMatchSnapshot()
   })

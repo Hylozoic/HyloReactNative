@@ -36,7 +36,7 @@ it('calls createGroup on submit', () => {
 
   const props = {
     createGroup: jest.fn(() => Promise.resolve(result)),
-    clearNameAndUrlFromStore: jest.fn(),
+    clearCreateGroupStore: jest.fn(),
     goToGroup: jest.fn()
   }
   const groupName = 'groupName'
@@ -50,7 +50,7 @@ it('calls createGroup on submit', () => {
   return instance.submit()
     .then(() => {
       expect(props.createGroup).toHaveBeenCalledWith(groupName, groupUrl)
-      expect(props.clearNameAndUrlFromStore).toHaveBeenCalled()
+      expect(props.clearCreateGroupStore).toHaveBeenCalled()
       expect(props.goToGroup).toHaveBeenCalledWith(result.payload.data.createGroup.group)
     })
 })
@@ -61,7 +61,7 @@ it('creates an error on submit if an error is returned', () => {
   }
   const props = {
     createGroup: jest.fn(() => Promise.resolve(result)),
-    clearNameAndUrlFromStore: jest.fn(),
+    clearCreateGroupStore: jest.fn(),
     goToGroup: jest.fn()
   }
   const groupName = 'groupName'
@@ -81,7 +81,7 @@ it('creates an error on submit if an error is returned', () => {
 it('creates an error on submit if the promise is rejected', () => {
   const props = {
     createGroup: jest.fn(() => Promise.reject(new Error(''))),
-    clearNameAndUrlFromStore: jest.fn(),
+    clearCreateGroupStore: jest.fn(),
     goToGroup: jest.fn()
   }
   const groupName = 'groupName'

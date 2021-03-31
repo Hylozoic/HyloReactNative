@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import selectGroup from 'store/actions/selectGroup'
 import {
   createGroup,
-  clearNameAndUrlFromStore,
+  clearCreateGroupStore,
   CREATE_GROUP,
   getGroupName,
   getGroupUrl
@@ -22,7 +22,7 @@ export function mapStateToProps (state, props) {
 export function mapDispatchToProps (dispatch, props) {
   return {
     createGroup: (name, slug) => dispatch(createGroup(name, slug)),
-    clearNameAndUrlFromStore: () => dispatch(clearNameAndUrlFromStore()),
+    clearCreateGroupStore: () => dispatch(clearCreateGroupStore()),
   }
 }
 

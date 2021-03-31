@@ -3,9 +3,11 @@ import { AnalyticsEvents } from 'hylo-utils/constants'
 export const MODULE_NAME = 'CreateGroupFlow'
 export const SAVE_GROUP_NAME = `${MODULE_NAME}/SAVE_GROUP_NAME`
 export const SAVE_GROUP_URL = `${MODULE_NAME}/SAVE_GROUP_URL`
+export const SAVE_GROUP_VISIBILITY_ACCESSIBILITY = `${MODULE_NAME}/SAVE_GROUP_VISIBILITY_ACCESSIBILITY`
+export const SAVE_GROUP_PARENT_GROUP_IDS = `${MODULE_NAME}/SAVE_GROUP_PARENT_GROUP_IDS`
 export const FETCH_URL_EXISTS = `${MODULE_NAME}/FETCH_URL_EXISTS`
 export const CREATE_GROUP = `${MODULE_NAME}/CREATE_GROUP`
-export const CLEAR_NAME_AND_URL_FROM_STORE = `${MODULE_NAME}/CLEAR_NAME_AND_URL_FROM_STORE`
+export const CLEAR_CREATE_GROUP_STORE = `${MODULE_NAME}/CLEAR_CREATE_GROUP_STORE`
 export const FETCH_GROUP_EXISTS = `${MODULE_NAME}/FETCH_URL_EXISTS`
 
 export default function reducer (state = {}, action) {
@@ -21,7 +23,17 @@ export default function reducer (state = {}, action) {
         ...state,
         groupUrl: payload
       }
-    case CLEAR_NAME_AND_URL_FROM_STORE:
+    case SAVE_GROUP_VISIBILITY_ACCESSIBILITY:
+      return {
+        ...state,
+        visibilityAccessibility: payload
+      }
+    case SAVE_GROUP_PARENT_GROUP_IDS:
+      return {
+        ...state,
+        parentGroupIds: payload
+      }
+    case CLEAR_CREATE_GROUP_STORE:
       return {
         ...state,
         groupUrl: null,
@@ -100,9 +112,23 @@ export function saveGroupUrl (url) {
   }
 }
 
-export function clearNameAndUrlFromStore () {
+export function saveGroupVisibilityAccessibility (visibilityAccessibility) {
   return {
-    type: CLEAR_NAME_AND_URL_FROM_STORE
+    type: SAVE_GROUP_VISIBILITY_ACCESSIBILITY,
+    payload: visibilityAccessibility
+  }
+}
+
+export function saveGroupParentGroupIds (parentGroupIds) {
+  return {
+    type: SAVE_GROUP_PARENT_GROUP_IDS,
+    payload: parentGroupIds
+  }
+}
+
+export function clearCreateGroupStore () {
+  return {
+    type: CLEAR_CREATE_GROUP_STORE
   }
 }
 

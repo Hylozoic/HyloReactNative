@@ -23,7 +23,7 @@ export default class CreateGroupReview extends React.Component {
 
   submit = () => {
     const { groupName, groupUrl } = this.state
-    const { createGroup, clearNameAndUrlFromStore, goToGroup } = this.props
+    const { createGroup, clearCreateGroupStore, goToGroup } = this.props
     return createGroup(groupName, groupUrl)
       .then((data) => {
         if (data.error) {
@@ -32,7 +32,7 @@ export default class CreateGroupReview extends React.Component {
           })
           return
         }
-        clearNameAndUrlFromStore()
+        clearCreateGroupStore()
         goToGroup(data.payload.data.createGroup.group)
       })
       .catch(() => {
