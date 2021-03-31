@@ -1,4 +1,5 @@
-import { white } from 'style/colors'
+import HeaderRightButton from 'navigation/header/HeaderRightButton'
+import { rhino10, rhino20, white } from 'style/colors'
 
 const styles = {
   container: {
@@ -18,7 +19,7 @@ const styles = {
     alignItems: 'center',
     padding: 15,
     paddingTop: 40,
-    paddingBottom: 20
+    paddingBottom: 10
   },
   headerAvatar: {
     height: 42,
@@ -41,8 +42,25 @@ const styles = {
     padding: 15
   },
   groupDescription: {
-    marginBottom: 15
-  }
+    marginBottom: 10
+  },
+  joinQuestions: {
+    marginBottom: 10
+  },
+  joinQuestion: {
+    marginBottom: 10
+  },
+  joinQuestionText: {
+    fontSize: 14,
+    fontWeight: 'bold'
+  },
+  joinQuestionAnswerInput: {
+    fontSize: 12,
+    marginTop: 10,
+    backgroundColor: rhino20,
+    padding: 10
+  },
+  joinButton: {}
 }
 
 export default styles

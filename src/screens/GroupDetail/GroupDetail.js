@@ -1,64 +1,49 @@
-import React, { useCallback, useEffect, useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { Image, Text, View, ImageBackground, TextInput } from 'react-native'
-import getGroup from 'store/selectors/getGroup'
+import React, { useEffect, useState } from 'react'
+import { Image, Text, ScrollView, View, ImageBackground, TextInput } from 'react-native'
 import { accessibilityDescription, GROUP_VISIBILITY, GROUP_ACCESSIBILITY } from 'store/models/Group'
 import Button from 'components/Button'
 import LinearGradient from 'react-native-linear-gradient'
 import { bannerlinearGradientColors } from 'style/colors'
 import styles from './GroupDetail.styles'
-// Store stuff
-import useAsyncAction from 'util/useAsyncAction'
-import {
-  JOIN_GROUP, CREATE_JOIN_REQUEST,  FETCH_GROUP_JOIN_QUESTIONS
-} from 'store/constants'
 import Loading from 'components/Loading'
-import getMyJoinRequests from 'store/selectors/getMyJoinRequests'
 
-export default function GroupDetail ({ route, navigation }) {
-  const dispatch = useDispatch()
-  const groupId = route.params.groupId
-  const group = useSelector(state => getGroup(state, { id: groupId }))
-  const joinRequests = useSelector(getMyJoinRequests)
-  const alreadyRequested = joinRequests.find(r => r.group.id === groupId)
-  const askJoinQuestions = group.settings.askJoinQuestions
-  // !alreadyRequested && askJoinQuestions && 
+export default function GroupDetail ({
+  loading, group, alreadyRequested,
+  navigation, fetchGroupJoinSettings,
+  createJoinRequest
+}) {
+  useEffect(() => { fetchGroupJoinSettings(group.id) }, [])
 
-  const [load, loading] = useAsyncAction(() => fetchGroupJoinQuestions(groupId), [groupId])
-  useEffect(() => { load() }, [])
+  const [questionAnswers, setAnswer] = useState({})
 
-  const joinQuestion = group.joinQuestions.toRefArray()
-  const [questionAnswers, setQuestionAnswers] = useState(
-    joinQuestion.map(({ questionId, text }) => ({ questionId, text, answer: '' }))
-  )
-
-  if (loading) return <Loading />
-
-  const setAnswer = index => answerValue => {
-    setQuestionAnswers(prevAnswers => {
-      const newAnswers = [ ...prevAnswers ]
-      newAnswers[index].answer = answerValue
-      return newAnswers
-    })
+  const setQuestionAnswer = questionId => answer => {
+    setAnswer(currentAnswers => ({ ...currentAnswers, [questionId]: answer }))
   }
 
   const join = () => {
-    const answers = questionAnswers.map(({ questionId, answer }) => ({ questionId, answer }))
-    dispatch(createJoinRequest(groupId, answers))
+    const answers = []
+    questionAnswers.forEach((questionId, answer) =>
+      answers.append({ questionId, answer }))
+    createJoinRequest(group.id, answers)
     navigation.navigate('Group Relationships')
   }
 
-  const canJoin = !alreadyRequested && [GROUP_ACCESSIBILITY.Open, GROUP_ACCESSIBILITY.Restricted]
-    .includes(group.accessibility)
-
+  const canJoin = !alreadyRequested &&
+    [GROUP_ACCESSIBILITY.Open, GROUP_ACCESSIBILITY.Restricted].includes(group.accessibility)
+  const askJoinQuestions = group.settings.askJoinQuestions
+  const joinQuestions = canJoin && askJoinQuestions
+    ? group.joinQuestions.toRefArray()
+    : []
   const groupBannerImage = group.bannerUrl ? { uri: group.bannerUrl } : null
 
+  if (loading) return <Loading />
+
   return (
-    <View style={styles.container}>
-      <ImageBackground source={groupBannerImage} style={styles.headerBackgroundImage}>
+    <ScrollView style={styles.container}>
+      <ImageBackground style={styles.headerBackgroundImage} source={groupBannerImage}>
         <LinearGradient style={styles.headerBannerGradient} colors={bannerlinearGradientColors} />
         <View style={styles.headerContent}>
-          <Image source={{ uri: group.avatarUrl }} style={styles.headerAvatar} />
+          <Image style={styles.headerAvatar} source={{ uri: group.avatarUrl }} />
           <Text style={styles.headerText}>{group.name}</Text>
         </View>  
       </ImageBackground>
@@ -67,106 +52,23 @@ export default function GroupDetail ({ route, navigation }) {
         {!canJoin && !alreadyRequested && (
           <Text>{accessibilityDescription(group.accessibility)}</Text>
         )}
-        {canJoin && askJoinQuestions && questionAnswers.map((question, index) => (
-          <View key={index}>
-            <Text style={{ fontSize: 40 }}>{question.text}</Text>
-            <TextInput onChangeText={setAnswer(index)} />
+        {canJoin && joinQuestions.length > 0 && (
+          <View style={styles.joinQuestions}>
+            {joinQuestions.map((question, index) => (
+              <View style={styles.joinQuestion} key={index}>
+                <Text style={styles.joinQuestionText}>{question.text}</Text>
+                <TextInput style={styles.joinQuestionAnswerInput}
+                  multiline={true}
+                  onChangeText={setQuestionAnswer(question.questionId)} />
+              </View>
+            ))}
           </View>
-        ))}
-        {canJoin && <Button onPress={join} text='Join' />}
+        )}
+        {canJoin && <Button style={styles.joinButton} onPress={join} text='Join' />}
         {alreadyRequested && (
           <Text>Your request to join this group is pending moderator approval.</Text>
         )}
       </View>
-    </View>
+    </ScrollView>
   )
-}
-
-export function joinGroup (groupId) {
-  return {
-    type: JOIN_GROUP,
-    graphql: {
-      query: `mutation ($groupId: ID) {
-        joinGroup(groupId: $groupId) {
-          id
-          role
-          hasModeratorRole
-          group {
-            id
-            name
-            slug
-          }
-          person {
-            id
-          }
-        }
-      }`,
-      variables: {
-        groupId
-      }
-    },
-    meta: {
-      extractModel: 'Membership',
-      groupId,
-      optimistic: true
-    }
-  }
-}
-
-export function createJoinRequest (groupId, questionAnswers) {
-  return {
-    type: CREATE_JOIN_REQUEST,
-    graphql: {
-      query: `mutation ($groupId: ID, $questionAnswers: [QuestionAnswerInput]) {
-        createJoinRequest(groupId: $groupId, questionAnswers: $questionAnswers) {
-          request {
-            id
-            user {
-              id
-            }
-            group {
-              id
-            }
-            createdAt
-            updatedAt
-            status
-          }
-        }
-      }`,
-      variables: { groupId, questionAnswers }
-    },
-    meta: {
-      groupId,
-      optimistic: true
-    }
-  }
-}
-
-export function fetchGroupJoinQuestions (groupId) {
-  return {
-    type: FETCH_GROUP_JOIN_QUESTIONS,
-    graphql: {
-      query: `
-        query ($groupId: ID) {
-          group (id: $groupId) {
-            id
-            joinQuestions {
-              items {
-                id
-                questionId
-                text
-              }
-            }
-          }
-        }
-      `,
-      variables: {
-        groupId
-      }
-    },
-    meta: {
-      afterInteractions: true,
-      extractModel: 'Group'
-    }
-  }
 }

@@ -1,11 +1,11 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { Text, View, TouchableOpacity, StyleSheet } from 'react-native'
+import { Text, ScrollView, View, TouchableOpacity } from 'react-native'
 import { getChildGroups, getParentGroups } from 'store/selectors/getGroupRelationships'
 import Icon from 'components/Icon'
-import { rhino, white } from 'style/colors'
 import { useFocusEffect } from '@react-navigation/core'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
+import styles from './GroupNavigation.styles'
 
 export default function GroupNavigation ({ navigation }) {
   const currentGroup = useSelector(getCurrentGroup)
@@ -15,64 +15,39 @@ export default function GroupNavigation ({ navigation }) {
   }, [])
 
   const { navigate } = navigation
+  // TODO: Add icons to set for "Create", "Stream", "Groups",
+  //       as well as "Home" and "Events" (for the future)
   const navItems = [
-    { label: 'Create', iconName: 'Create',
-      onPress: () => navigate('Edit Post', { id: null }) },
-    // { label: 'Home', iconName: 'Home', screen: 'Home' },
-    { label: 'Stream', iconName: 'Stream', onPress: () => navigate('Feed') },
-    { label: 'Projects', iconName: 'Projects', onPress: () =>  navigate('Projects') },
-    // { label: 'Events', iconName: 'Events', screen: 'Events'  },
-    { label: 'Members', iconName: 'Person', onPress: () => navigate('Members') }
+    { label: 'Create', iconName: 'Members', onPress: () => navigate('Edit Post', { id: null }) },
+    { label: 'Stream', iconName: 'Members', onPress: () => navigate('Feed') },
+    { label: 'Projects', iconName: 'Projects', onPress: () =>  navigate('Projects') }
   ]
   const childGroups = useSelector(getChildGroups)
   const parentGroups = useSelector(getParentGroups)
+
+  // TODO: Only show in Single Group context (not Public or All Groups)
+  if (true) {
+    navItems.push({ label: 'Members', iconName: 'Person', onPress: () => navigate('Members') })
+  }
 
   if (childGroups.length > 0 || parentGroups.length > 0) {
     navItems.push({ label: 'Groups', iconName: 'Share', onPress: () => navigate('Group Relationships') })
   }
 
-  return (
-    <View style={styles.container}>
-      {navItems.map(item => (
-        <NavItem {...item} />
-      ))}
-      <View style={styles.divider} />
-      <View style={styles.navItems}>
-        <NavItem label='Topics' iconName='Topics' onPress={() => navigation.navigate('Topics')} />
-      </View>
-    </View>
-  )
-}
-
-export function NavItem ({ label, iconName, onPress }) {
-  return (
+  const NavItem  = ({ label, iconName, onPress }) => (
     <TouchableOpacity style={styles.navItem} onPress={onPress} key={label}>
       <Icon style={styles.navItemIcon} name={iconName} />
       <Text style={styles.navItemLabel}>{label}</Text>
     </TouchableOpacity>
   )
-}
-
-export const styles = {
-  container: {
-    backgroundColor: white,
-    flex: 1,
-    padding: 20
-  },
-  divider: {
-    marginVertical: 20,
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: rhino
-  },
-  navItem: {
-    flexDirection: 'row',
-    paddingBottom: 10
-  },
-  navItemIcon: {
-    fontSize: 24,
-    paddingRight: 10
-  },
-  navItemLabel: {
-    fontSize: 24
-  }
+  
+  return (
+    <ScrollView style={styles.container}>
+      {navItems.map(item => <NavItem {...item} key={item.label} /> )}
+      <View style={styles.divider} />
+      <View style={styles.navItems}>
+        <NavItem label='Topics' iconName='Topics' onPress={() => navigate('Topics')} />
+      </View>
+    </ScrollView>
+  )
 }

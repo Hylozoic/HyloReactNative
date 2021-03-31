@@ -19,6 +19,7 @@ export default function Groups ({
     navigation.setOptions({ headerTitle: currentGroup.name  })
   }, [])
 
+  const listSections = []
   const renderItem =  ({ item }) => (
     <GroupRow
       group={item}
@@ -28,7 +29,6 @@ export default function Groups ({
     />
   )
   const keyExtractor = item => 'g' + item.id
-  const listSections = []
 
   if (parentGroups.length > 0) listSections.push({
     title: `${currentGroup.name} is a part of ${parentGroups.length} Group(s)`,
@@ -44,14 +44,14 @@ export default function Groups ({
     keyExtractor
   })
 
+  const renderSectionHeader =  ({ section: { title } }) => (
+    <Text style={styles.sectionHeader}>{title}</Text>
+  )
+
   return (
-    <View style={styles.container}>
-      <SectionList sections={listSections} stickySectionHeadersEnabled={false}
-        renderSectionHeader={({ section: { title } }) => (
-          <Text style={styles.sectionHeader}>{title}</Text>
-        )}
-      />
-    </View>
+    <SectionList style={styles.container} sections={listSections} stickySectionHeadersEnabled={false}
+      renderSectionHeader={renderSectionHeader}
+    />
   )
 }
 
@@ -60,6 +60,7 @@ export function GroupRow ({ group, goToGroup, goToGroupDetail }) {
     const childGroupsCount = childGroups.count()
     const isMember = useSelector(getMemberships).find(m => m.group.id === group.id) || false
     const onPressFunc = isMember ? goToGroup : goToGroupDetail
+
     return (
       <TouchableOpacity onPress={() => onPressFunc(group)} style={styles.groupRow}>
         {!!avatarUrl && (

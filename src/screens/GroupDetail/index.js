@@ -1,3 +1,4 @@
 import component from './GroupDetail'
+import connector from './GroupDetail.connector'
 
-export default component
+export default connector(component)
