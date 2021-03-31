@@ -128,7 +128,7 @@ export function ListControls ({ filter: listFilter, sortBy, setFilter, setSort, 
     <View style={[styles.listControls, hideListFilter ? styles.listControlsSingleItem : {}]}>
       {!hideListFilter &&
         <ListControl selected={listFilter} onChange={setFilter} options={filterOptions} />}
-      {/* TODO: disabled  */}
+      {/* NOTE: disabled  */}
       {/* <ListControl selected={sortBy} onChange={setSort} options={sortOptions} /> */}
     </View>
   )

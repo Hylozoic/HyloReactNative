@@ -15,7 +15,7 @@ export default function GroupNavigation ({ navigation }) {
   }, [])
 
   const { navigate } = navigation
-  // TODO: Add icons to set for "Create", "Stream", "Groups",
+  // HOLONIC TODO: Add icons to set for "Create", "Stream", "Groups",
   //       as well as "Home" and "Events" (for the future)
   const navItems = [
     { label: 'Create', iconName: 'Members', onPress: () => navigate('Edit Post', { id: null }) },

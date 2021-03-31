@@ -27,6 +27,7 @@ export const mapDispatchToProps = {
 
 export default connect(mapStateToProps, mapDispatchToProps)
 
+// HOLONIC TODO: Move to store file ?
 // Actions
 
 export function joinGroup (groupId) {

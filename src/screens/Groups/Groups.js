@@ -67,9 +67,23 @@ export function GroupRow ({ group, goToGroup, goToGroupDetail }) {
           <Image source={{ uri: avatarUrl }} style={styles.groupAvatar} />
         )}
         <View style={styles.groupRowRight}>
-          <Text style={[styles.groupRowText]} ellipsizeMode='tail' numberOfLines={1}>
+          <Text style={styles.groupRowText} ellipsizeMode='tail' numberOfLines={1}>
             {name}
           </Text>
+          {/* HOLONIC TODO: Add visibility icons / text? */}
+          {/* HOLONIC TODO: Add status icons / text */}
+          <Text>{group.memberStatus}</Text>
+          {/* Status code from evo */}
+          {/* {group.memberStatus === 'member' ? (
+            <div styleName='status-tag'><Icon name='Complete' styleName='member-complete' /> <b>Member</b></div>
+          ) : group.memberStatus === 'requested'
+            ? (
+              <div styleName='status-tag'><b>Membership Requested</b></div>
+            ) : (
+              <div styleName='status-tag'><Icon name='CirclePlus' styleName='join-group' /> <b>Join</b></div>
+            )
+          } */}
+
           <Text style={[styles.groupRowCounts]}>
             {memberCount} Members {childGroupsCount > 0 ? ` | ${childGroupsCount} Groups` : ''}
           </Text>
