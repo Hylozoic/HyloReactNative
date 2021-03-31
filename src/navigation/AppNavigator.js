@@ -26,15 +26,23 @@ export function CreateGroupNavigator () {
     <CreateGroup.Navigator {...navigatorProps}>
       <CreateGroup.Screen
         name='CreateGroupName' component={CreateGroupName}
-        options={buildWorkflowModalScreenOptions({ headerTitle: 'STEP 1/3', headerLeftCloseIcon: true })}
+        options={buildWorkflowModalScreenOptions({ headerTitle: 'STEP 1/6', headerLeftCloseIcon: true })}
       />
       <CreateGroup.Screen
         name='CreateGroupUrl' component={CreateGroupUrl}
-        options={buildWorkflowModalScreenOptions({ headerTitle: 'STEP 2/3' })}
+        options={buildWorkflowModalScreenOptions({ headerTitle: 'STEP 2/6' })}
+      />
+      <CreateGroup.Screen
+        name='CreateGroupVisibilityAccessibility' component={CreateGroupVisibilityAccessibility}
+        options={buildWorkflowModalScreenOptions({ headerTitle: 'STEP 4/6' })}
+      />
+      <CreateGroup.Screen
+        name='CreateGroupParentGroups' component={CreateGroupParentGroups}
+        options={buildWorkflowModalScreenOptions({ headerTitle: 'STEP 5/6' })}
       />
       <CreateGroup.Screen
         name='CreateGroupReview' component={CreateGroupReview}
-        options={buildWorkflowModalScreenOptions({ headerTitle: 'STEP 3/3' })}
+        options={buildWorkflowModalScreenOptions({ headerTitle: 'STEP 6/6' })}
       />
       {/* HOLONIC TODO: Add Group Protected, Restricted and Parent Groups selector */}
     </CreateGroup.Navigator>
