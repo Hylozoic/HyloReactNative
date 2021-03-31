@@ -21,7 +21,7 @@ Object {
     "groupUrl": "my-url",
     "urlExists": false,
   },
-  "goToCreateGroupReview": [Function],
+  "goToNextStep": [Function],
   "navigation": Object {
     "navigate": [MockFunction],
   },
