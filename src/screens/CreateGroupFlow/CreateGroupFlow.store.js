@@ -10,10 +10,10 @@ export const FETCH_GROUP_EXISTS = `${MODULE_NAME}/FETCH_URL_EXISTS`
 export const defaultState = {
   groupData: {
     name: '',
-    url: '',
+    slug: '',
     visibility: null,
     accessibility: null,
-    groupParentGroupIds: []
+    parentIds: []
   },
   urlExists: false
 }

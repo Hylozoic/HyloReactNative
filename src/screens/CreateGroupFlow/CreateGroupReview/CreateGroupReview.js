@@ -6,24 +6,32 @@ import {
   TextInput,
   TouchableOpacity
 } from 'react-native'
-import Button from 'components/Button'
-import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
-import styles from '../CreateGroupFlow.styles'
-import SafeAreaView from 'react-native-safe-area-view'
-import ErrorBubble from 'components/ErrorBubble'
-
 import {
-  createGroup,
-  clearCreateGroupStore,
+  createGroup as createGroupAction,
+  clearCreateGroupStore as clearCreateGroupStoreAction,
+  getGroupData,
   CREATE_GROUP
 } from '../CreateGroupFlow.store'
+import Button from 'components/Button'
+import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
+import SafeAreaView from 'react-native-safe-area-view'
+import ErrorBubble from 'components/ErrorBubble'
+import { formatDomainWithUrl } from '../util'
+import styles from '../CreateGroupFlow.styles'
 
-
-export default function CreateGroupReview ({
-  createGroup, clearCreateGroupStore, groupData,
-  goToCreateGroupUrl, goToCreateGroupName, createGroupPending
-}) {
+export default function CreateGroupReview ({ navigation }) {
   const [error, setError] = useState(null)
+  const dispatch = useDispatch()
+  const groupData = useSelector(getGroupData)
+  const createGroupPending = useSelector(state => state.pending[CREATE_GROUP])
+  const createGroup = groupData => dispatch(createGroupAction(groupData))
+  const clearCreateGroupStore = () => dispatch(clearCreateGroupStoreAction())
+  const goToCreateGroupName = () => navigation.navigate('CreateGroupName')
+  const goToCreateGroupUrl = () => navigation.navigate('CreateGroupUrl')
+  const goToGroup = group => {
+    navigation.closeDrawer()
+    navigation.navigate('Feed', { groupId: group?.id })
+  }
 
   const submit = () => {
     return createGroup(groupData)
@@ -67,7 +75,7 @@ export default function CreateGroupReview ({
             <View style={styles.textInputWithButton}>
               <TextInput
                 style={styles.textInput}
-                value={groupData.url}
+                value={formatDomainWithUrl(groupData.slug)}
                 underlineColorAndroid={styles.androidInvisibleUnderline}
                 disabled
               />

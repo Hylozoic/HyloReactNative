@@ -2,23 +2,29 @@
 
 exports[`mapDispatchToProps maps the action generators 1`] = `
 Object {
-  "payload": "name",
-  "type": "CreateGroupFlow/SAVE_GROUP_NAME",
+  "payload": Object {
+    "name": "name",
+  },
+  "type": "CreateGroupFlow/UPDATE_GROUP_DATA",
 }
 `;
 
 exports[`mapStateToProps returns the right keys 1`] = `
 Object {
-  "groupName": "name",
+  "groupData": Object {
+    "name": "name",
+  },
 }
 `;
 
 exports[`mergeProps merges the props 1`] = `
 Object {
   "CreateGroupFlow": Object {
-    "groupName": "name",
+    "groupData": Object {
+      "name": "name",
+    },
   },
-  "goToCreateGroupUrl": [Function],
+  "goToNextStep": [Function],
   "navigation": Object {
     "navigate": [MockFunction],
   },

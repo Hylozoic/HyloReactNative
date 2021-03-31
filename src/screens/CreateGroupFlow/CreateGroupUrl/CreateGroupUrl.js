@@ -21,7 +21,7 @@ export default class CreateGroupUrl extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      groupUrl: this.props.groupData?.url
+      slug: this.props.groupData?.slug
     }
   }
 
@@ -46,13 +46,13 @@ export default class CreateGroupUrl extends React.Component {
     })
   }
 
-  validate (groupUrl) {
+  validate (slug) {
     this.clearErrors()
-    if (!groupUrl || groupUrl.length === 0) {
+    if (!slug || slug.length === 0) {
       this.setErrorMessage('Please enter a URL')
       return false
     }
-    if (!slugValidatorRegex.test(groupUrl)) {
+    if (!slugValidatorRegex.test(slug)) {
       this.setErrorMessage(invalidSlugMessage)
       return false
     }
@@ -60,10 +60,10 @@ export default class CreateGroupUrl extends React.Component {
   }
 
   checkAndSubmit = () => {
-    const { groupUrl } = this.state
+    const { slug } = this.state
     const { fetchGroupExists, updateGroupData, goToNextStep } = this.props
-    if (!this.validate(groupUrl)) return
-    return checkGroupUrlThenRedirect(groupUrl,
+    if (!this.validate(slug)) return
+    return checkGroupUrlThenRedirect(slug,
       fetchGroupExists,
       this.setErrorMessage,
       updateGroupData,
@@ -72,7 +72,7 @@ export default class CreateGroupUrl extends React.Component {
   }
 
   render () {
-    const { error, groupUrl } = this.state
+    const { error, slug } = this.state
     return (
       <SafeAreaView style={styles.container}>
         <KeyboardFriendlyView>
@@ -85,10 +85,10 @@ export default class CreateGroupUrl extends React.Component {
               <Text style={styles.textInputLabel}>What's the address for your group?</Text>
               <TextInput
                 style={styles.textInput}
-                onChangeText={groupUrl => this.setInput('groupUrl', removeUrlFromDomain(groupUrl))}
+                onChangeText={slug => this.setInput('slug', removeUrlFromDomain(slug))}
                 returnKeyType='next'
                 autoCapitalize='none'
-                value={formatDomainWithUrl(groupUrl)}
+                value={formatDomainWithUrl(slug)}
                 autoCorrect={false}
                 underlineColorAndroid={styles.androidInvisibleUnderline}
               />
@@ -104,8 +104,8 @@ export default class CreateGroupUrl extends React.Component {
   }
 }
 
-export function checkGroupUrlThenRedirect (groupUrl, fetchGroupExists, setErrorMessage, updateGroupData, goToNextStep) {
-  return fetchGroupExists(groupUrl)
+export function checkGroupUrlThenRedirect (slug, fetchGroupExists, setErrorMessage, updateGroupData, goToNextStep) {
+  return fetchGroupExists(slug)
     .then((data) => {
       const error = get('error', data)
       const groupExists = get('payload.data.groupExists.exists', data)
@@ -118,7 +118,7 @@ export function checkGroupUrlThenRedirect (groupUrl, fetchGroupExists, setErrorM
         return
       }
       if (groupExists === false) {
-        updateGroupData({ url: groupUrl })
+        updateGroupData({ slug })
         goToNextStep()
         return
       }

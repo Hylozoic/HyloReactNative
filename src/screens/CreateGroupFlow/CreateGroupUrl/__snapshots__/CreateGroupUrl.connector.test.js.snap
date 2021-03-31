@@ -2,15 +2,19 @@
 
 exports[`mapDispatchToProps maps the action generators 1`] = `
 Object {
-  "payload": "my-url",
-  "type": "CreateGroupFlow/SAVE_GROUP_URL",
+  "payload": Object {
+    "url": "my-url",
+  },
+  "type": "CreateGroupFlow/UPDATE_GROUP_DATA",
 }
 `;
 
 exports[`mapStateToProps returns the right keys 1`] = `
 Object {
   "fetchUrlPending": true,
-  "groupUrl": "my-url",
+  "groupData": Object {
+    "url": "my-url",
+  },
   "urlExists": false,
 }
 `;
@@ -18,7 +22,9 @@ Object {
 exports[`mergeProps merges the props 1`] = `
 Object {
   "CreateGroupFlow": Object {
-    "groupUrl": "my-url",
+    "groupData": Object {
+      "url": "my-url",
+    },
     "urlExists": false,
   },
   "goToNextStep": [Function],

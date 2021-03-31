@@ -5,41 +5,31 @@ import reducer,
   saveGroupUrl,
   saveGroupName,
   clearCreateGroupStore,
-  SAVE_GROUP_NAME,
+  UPDATE_GROUP_NAME,
   SAVE_GROUP_URL,
   CLEAR_CREATE_GROUP_STORE,
-  FETCH_URL_EXISTS
+  FETCH_URL_EXISTS,
+  defaultState
 }
   from './CreateGroupFlow.store'
 
 const name = 'group name'
-const url = 'group_name'
+const slug = 'group_name'
 
 describe('reducer', () => {
-  describe('on SAVE_GROUP_NAME', () => {
+  describe('on UPDATE_GROUP_NAME', () => {
     const action = {
-      type: SAVE_GROUP_NAME,
+      type: UPDATE_GROUP_NAME,
       payload: name
     }
     it('sets display', () => {
       const state = {
-        groupName: null
+        group: {
+          name: null
+        }
       }
       const newState = reducer(state, action)
-      expect(newState.groupName).toEqual(name)
-    })
-  })
-  describe('on SAVE_GROUP_URL', () => {
-    const action = {
-      type: SAVE_GROUP_URL,
-      payload: url
-    }
-    it('sets display', () => {
-      const state = {
-        groupUrl: null
-      }
-      const newState = reducer(state, action)
-      expect(newState.groupUrl).toEqual(url)
+      expect(newState.groupData.name).toEqual(name)
     })
   })
   describe('on CLEAR_CREATE_GROUP_STORE', () => {
@@ -48,12 +38,13 @@ describe('reducer', () => {
     }
     it('sets display', () => {
       const state = {
-        groupName: name,
-        groupUrl: url
+        groupData: {
+          name,
+          slug: url
+        }
       }
       const newState = reducer(state, action)
-      expect(newState.groupName).toEqual(null)
-      expect(newState.groupUrl).toEqual(null)
+      expect(newState).toEqual({defaultState)
     })
   })
   describe('on FETCH_URL_EXISTS', () => {
@@ -86,13 +77,6 @@ describe('fetchGroupExists', () => {
   it('matches snapshot', () => expect(fetchGroupExists(url)).toMatchSnapshot())
 })
 
-describe('saveGroupName', () => {
-  it('matches snapshot', () => expect(saveGroupName(name)).toMatchSnapshot())
-})
-
-describe('saveGroupUrl', () => {
-  it('matches snapshot', () => expect(saveGroupUrl(url)).toMatchSnapshot())
-})
 
 describe('clearCreateGroupStore', () => {
   it('matches snapshot', () => expect(clearCreateGroupStore()).toMatchSnapshot())

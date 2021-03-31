@@ -14,22 +14,22 @@ import { TouchableOpacity } from 'react-native-gesture-handler'
 
 export default function CreateGroupParentGroups ({ navigation }) {
   const dispatch = useDispatch()
-  const [parentGroupIds, setParentGroupIds] = useState([])
+  const [parentIds, setParentGroupIds] = useState([])
   const memberships = useSelector(getMemberships)
   const myGroups = memberships
     .map(m => m.group.ref)
     .sort((a, b) => a.name.localeCompare(b.name))
 
-  const isChosen = item => !!parentGroupIds.find(groupId => groupId == item.id)
+  const isChosen = item => !!parentIds.find(groupId => groupId == item.id)
 
-  const toggleChosen = item => parentGroupIds.find(groupId => groupId == item.id)
-    ? setParentGroupIds(parentGroupIds.filter(groupId => groupId !== item.id))
-    : setParentGroupIds([...parentGroupIds, item.id])
+  const toggleChosen = item => parentIds.find(groupId => groupId == item.id)
+    ? setParentGroupIds(parentIds.filter(groupId => groupId !== item.id))
+    : setParentGroupIds([...parentIds, item.id])
   
   const clear = () => setParentGroupIds([])
 
   const checkAndSubmit = () => {
-    dispatch(updateGroupData({ parentIds: parentGroupIds }))
+    dispatch(updateGroupData({ parentIds }))
     navigation.navigate('CreateGroupReview')
   }
 

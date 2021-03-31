@@ -3,7 +3,16 @@
 exports[`sets up the expected reducers 1`] = `
 Object {
   "CommentEditor": Object {},
-  "CreateGroupFlow": Object {},
+  "CreateGroupFlow": Object {
+    "groupData": Object {
+      "accessibility": null,
+      "name": "",
+      "parentIds": Array [],
+      "slug": "",
+      "visibility": null,
+    },
+    "urlExists": false,
+  },
   "FeedList": Object {
     "filter": null,
     "sortBy": "updated",
