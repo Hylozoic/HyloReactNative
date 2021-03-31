@@ -1,75 +1,79 @@
-import React from 'react'
-import {
-  Text,
-  View,
-  TextInput
-} from 'react-native'
+import React, { useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { Text, View, FlatList } from 'react-native'
 import SafeAreaView from 'react-native-safe-area-view'
 import Button from 'components/Button'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
-import ErrorBubble from 'components/ErrorBubble'
 import styles from '../CreateGroupFlow.styles'
-import { saveGroupName, getGroupName } from '../CreateGroupFlow.store'
+import { saveGroupParentGroupIds } from '../CreateGroupFlow.store'
+import getMemberships from 'store/selectors/getMemberships'
+// NOTE: Make a local copy of this if modification is needed
+import ItemChooserItemRow from 'screens/ItemChooser/ItemChooserItemRow'
+import { white } from 'style/colors'
+import { TouchableOpacity } from 'react-native-gesture-handler'
 
-export default function CreateGroupParentGroups ({
+export default function CreateGroupParentGroups ({ navigation }) {
+  const dispatch = useDispatch()
+  const [parentGroupIds, setParentGroupIds] = useState([])
+  const memberships = useSelector(getMemberships)
+  const myGroups = memberships
+    .map(m => m.group.ref)
+    .sort((a, b) => a.name.localeCompare(b.name))
 
-}) {
-  const setInput = (key, value) => {
-    this.setState({
-      ...this.state,
-      [key]: value
-    })
-  }
-  const { error, groupName } = this.state
+  const isChosen = item => !!parentGroupIds.find(groupId => groupId == item.id)
 
-  const clearErrors = () => {
-    this.setState({
-      ...this.state,
-      error: null
-    })
-  }
+  const toggleChosen = item => parentGroupIds.find(groupId => groupId == item.id)
+    ? setParentGroupIds(parentGroupIds.filter(groupId => groupId !== item.id))
+    : setParentGroupIds([...parentGroupIds, item.id])
+  
+  const clear = () => setParentGroupIds([])
 
-  checkAndSubmit = () => {
-    const { groupName } = this.state
-
-    this.clearErrors()
-    if (!groupName || groupName.length === 0) {
-      this.setState({
-        ...this.state,
-        error: 'Please enter a group name'
-      })
-      return
-    }
-    this.props.saveGroupName(groupName)
-    this.props.goToCreateGroupUrl()
+  const checkAndSubmit = () => {
+    dispatch(saveGroupParentGroupIds(parentGroupIds))
+    navigation.navigate('CreateGroupReview')
   }
 
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardFriendlyView>
-        <View style={styles.header}>
-          <Text style={styles.heading}>Who can see and join this group?</Text>
-          <Text style={styles.description}>All good things start somewhere! Let's kick things off with a catchy name for your group.</Text>
-        </View>
-        <View style={styles.content}>
-          <View style={styles.textInputContainer}>
-            <Text style={styles.textInputLabel}>What's the name of your group?</Text>
-            <TextInput
-              style={styles.textInput}
-              onChangeText={groupName => this.setInput('groupName', groupName)}
-              returnKeyType='next'
-              autoCapitalize='none'
-              value={groupName}
-              autoCorrect={false}
-              underlineColorAndroid={styles.androidInvisibleUnderline}
-            />
-          </View>
-          {error && <View style={styles.errorBubble}><ErrorBubble text={error} topArrow /></View>}
-        </View>
+        <Text style={styles.heading}>Is this group a member of other groups?</Text>
+        <Text style={stepStyles.subHeading}>Please select below:</Text>
+        <FlatList style={stepStyles.parentGroupListContainer} data={myGroups}
+          renderItem={({ item }) => (
+            <ItemChooserItemRow item={item}
+              chosen={isChosen(item)}
+              toggleChosen={toggleChosen} />
+          )
+        } />
+        <TouchableOpacity onPress={clear}>
+          <Text style={stepStyles.clearButton}>Clear</Text>
+        </TouchableOpacity>
         <View style={styles.footer}>
-          <Button text='Continue' onPress={this.checkAndSubmit} style={styles.button} />
+          <Button text='Continue' onPress={checkAndSubmit} style={styles.button} />
         </View>
       </KeyboardFriendlyView>
     </SafeAreaView>
   )
+}
+
+const stepStyles = {
+  subHeading: {
+    color: white,
+    marginTop: 10,
+    marginBottom: 10
+  },
+  clearButton: {
+    color: white,
+    marginTop: 10,
+    marginRight: 20,
+    fontWeight: 'bold',
+    alignSelf: 'flex-end'
+  },
+  parentGroupListContainer: {
+    minWidth: '90%',
+    padding: 0,
+    backgroundColor: white,
+    borderRadius: 15,
+    maxHeight: '40%'
+  }
 }

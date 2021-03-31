@@ -8,38 +8,38 @@ import { propTypesForItemRowComponent } from 'screens/ItemChooser'
 import Avatar from 'components/Avatar'
 import RoundCheckbox from 'components/RoundCheckBox'
 
-export default function ProjectMemberItemRow ({
-  item: person,
+export default function ItemChooserItemRow ({
+  item,
   chosen,
   toggleChosen
 }) {
   return (
-    <TouchableOpacity style={styles.personRow} onPress={() => toggleChosen(person)}>
-      <Avatar style={styles.personAvatar} avatarUrl={person.avatarUrl} dimension={30} />
-      <Text style={styles.personName}>{person.name}</Text>
+    <TouchableOpacity style={styles.itemRow} onPress={() => toggleChosen(item)}>
+      <Avatar style={styles.itemAvatar} avatarUrl={item.avatarUrl} dimension={30} />
+      <Text style={styles.itemName}>{item.name}</Text>
       <RoundCheckbox
         style={styles.checkbox}
         checked={chosen}
         backgroundColor={caribbeanGreen}
-        onValueChange={() => toggleChosen(person)}
+        onValueChange={() => toggleChosen(item)}
       />
     </TouchableOpacity>
   )
 }
-ProjectMemberItemRow.propTypes = propTypesForItemRowComponent
+ItemChooserItemRow.propTypes = propTypesForItemRowComponent
 
 const styles = {
-  personRow: {
+  itemRow: {
     padding: 15,
     paddingBottom: 0,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'flex-start'
   },
-  personAvatar: {
+  itemAvatar: {
     marginRight: 12
   },
-  personName: {
+  itemName: {
     fontFamily: 'Circular-Bold',
     flex: 1
   },

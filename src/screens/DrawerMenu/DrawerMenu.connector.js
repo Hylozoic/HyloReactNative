@@ -10,11 +10,11 @@ import getCanModerate from 'store/selectors/getCanModerate'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
 
 export function mapStateToProps (state, props) {
-  const memberships = getMemberships(state)
   const topGroups = [
     PUBLIC_GROUP,
     ALL_GROUP
   ]
+  const memberships = getMemberships(state)
   const myGroups = memberships
     .map(m => m.group.ref)
     .sort((a, b) => a.name.localeCompare(b.name))

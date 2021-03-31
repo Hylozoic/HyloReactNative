@@ -20,6 +20,7 @@ import PostEditor from 'screens/PostEditor'
 import UserSettings from 'screens/UserSettings'
 import CreateGroupVisibilityAccessibility
   from 'screens/CreateGroupFlow/CreateGroupVisibilityAccessibility/CreateGroupVisibilityAccessibility'
+import CreateGroupParentGroups from 'screens/CreateGroupFlow/CreateGroupParentGroups'
 
 const CreateGroup = createStackNavigator()
 export function CreateGroupNavigator () {
@@ -38,10 +39,10 @@ export function CreateGroupNavigator () {
         name='CreateGroupVisibilityAccessibility' component={CreateGroupVisibilityAccessibility}
         options={buildWorkflowModalScreenOptions({ headerTitle: 'STEP 4/6' })}
       />
-      {/* <CreateGroup.Screen
+      <CreateGroup.Screen
         name='CreateGroupParentGroups' component={CreateGroupParentGroups}
         options={buildWorkflowModalScreenOptions({ headerTitle: 'STEP 5/6' })}
-      /> */}
+      />
       <CreateGroup.Screen
         name='CreateGroupReview' component={CreateGroupReview}
         options={buildWorkflowModalScreenOptions({ headerTitle: 'STEP 6/6' })}

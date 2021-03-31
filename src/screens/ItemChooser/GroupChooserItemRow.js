@@ -1,15 +1,9 @@
 import React from 'react'
-import {
-  Text,
-  TouchableOpacity
-} from 'react-native'
+import { Text, TouchableOpacity } from 'react-native'
 import { propTypesForItemRowComponent } from 'screens/ItemChooser'
 import Avatar from 'components/Avatar'
 
-export default function GroupChooserItemRow ({
-  item,
-  onPress
-}) {
+export default function GroupChooserItemRow ({ item, onPress }) {
   return (
     <TouchableOpacity style={styles.groupRow} onPress={() => onPress(item)}>
       <Avatar style={styles.groupAvatar} avatarUrl={item.avatarUrl} dimension={30} />
@@ -17,6 +11,7 @@ export default function GroupChooserItemRow ({
     </TouchableOpacity>
   )
 }
+
 GroupChooserItemRow.propTypes = propTypesForItemRowComponent
 
 const styles = {

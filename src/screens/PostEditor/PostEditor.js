@@ -17,7 +17,6 @@ import { MAX_TITLE_LENGTH } from './PostEditor.store'
 // ProjectMembers Chooser
 import scopedFetchPeopleAutocomplete from 'store/actions/scopedFetchPeopleAutocomplete'
 import scopedGetPeopleAutocomplete from 'store/selectors/scopedGetPeopleAutocomplete'
-import ProjectMemberItemRow from 'screens/ItemChooser/ProjectMemberItemRow'
 // Topics Picker
 import fetchTopicsForGroupId from 'store/actions/fetchTopicsForGroupId'
 import getTopicsForAutocompleteWithNew from 'store/selectors/getTopicsForAutocompleteWithNew'
@@ -39,6 +38,7 @@ import ImageSelector from './ImageSelector'
 import InlineEditor, { toHtml } from 'components/InlineEditor'
 import ErrorBubble from 'components/ErrorBubble'
 import styles from './PostEditor.styles'
+import ItemChooserItemRow from 'screens/ItemChooser/ItemChooserItemRow'
 
 export default class PostEditor extends React.Component {
   constructor (props) {
@@ -298,7 +298,7 @@ export default class PostEditor extends React.Component {
     navigation.navigate('ItemChooserScreen', {
       screenTitle,
       searchPlaceholder: 'Type in the names of people to add to project',
-      ItemRowComponent: ProjectMemberItemRow,
+      ItemRowComponent: ItemChooserItemRow,
       initialItems: members,
       updateItems: this.updateMembers,
       fetchSearchSuggestions: scopedFetchPeopleAutocomplete,

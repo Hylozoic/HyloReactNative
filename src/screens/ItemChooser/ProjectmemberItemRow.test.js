@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
-import ProjectMemberItemRow from './ProjectMemberItemRow'
+import ItemChooserItemRow from './ItemChooserItemRow'
 
 it('renders as expected', () => {
   const props = {
@@ -8,6 +8,6 @@ it('renders as expected', () => {
     onPress: () => {}
   }
   const renderer = new ReactShallowRenderer()
-  renderer.render(<ProjectMemberItemRow {...props} />)
+  renderer.render(<ItemChooserItemRow {...props} />)
   expect(renderer.getRenderOutput()).toMatchSnapshot()
 })

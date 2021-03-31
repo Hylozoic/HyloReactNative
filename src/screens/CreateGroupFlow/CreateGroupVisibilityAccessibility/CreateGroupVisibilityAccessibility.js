@@ -1,14 +1,9 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import {
-  Text,
-  View,
-  TextInput
-} from 'react-native'
+import { Text, View } from 'react-native'
 import SafeAreaView from 'react-native-safe-area-view'
 import Button from 'components/Button'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
-import ErrorBubble from 'components/ErrorBubble'
 import styles from '../CreateGroupFlow.styles'
 import { Picker } from '@react-native-picker/picker'
 import {
@@ -16,34 +11,30 @@ import {
   visibilityDescription, accessibilityDescription
 } from 'store/models/Group'
 import { saveGroupVisibilityAccessibility } from '../CreateGroupFlow.store'
+import { white } from 'style/colors'
 
-export default function CreateGroupVisibilityAccessibility ({
-  navigation
-}) {
+export default function CreateGroupVisibilityAccessibility ({ navigation }) {
   const dispatch = useDispatch()
-  const [errors, setErrors] = useState([])
   const [visibility, setVisibility] = useState('')
   const [accessibility, setAccessibility] = useState('')
 
   const checkAndSubmit = () => {
-    setErrors([])
-    console.log('!!! visibility, accessibility:', visibility, accessibility)
     dispatch(saveGroupVisibilityAccessibility([visibility, accessibility]))
-    navigation.navigate('CreateGroupReview')
+    navigation.navigate('CreateGroupParentGroups')
   }
 
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardFriendlyView>
-        <View style={styles.header}>
+        {/* <View style={styles.header}> */}
           <Text style={styles.heading}>Visibility and Accessibility</Text>
           {/* HOLONIC TODO: Write a description here of visibility and accessibility? */}
           {/* <Text style={styles.description}>...</Text> */}
-        </View>
+        {/* </View> */}
         <View style={styles.content}>
-          <View style={styles.pickerContainer}>
-            <Text style={styles.pickerLabel}>Who can see this group?</Text>
-            <Picker style={styles.picker} itemStyle={styles.pickerItem} selectedValue={visibility} onValueChange={setVisibility}>
+          <View style={stepStyles.pickerContainer}>
+            <Text style={stepStyles.pickerLabel}>Who can see this group?</Text>
+            <Picker style={stepStyles.picker} itemStyle={stepStyles.pickerItem} selectedValue={visibility} onValueChange={setVisibility}>
               {Object.values(GROUP_VISIBILITY).map(visibilityValue => (
                 <Picker.Item label={visibilityDescription(visibilityValue)}
                   value={visibilityValue} key={visibilityValue} />
@@ -51,15 +42,14 @@ export default function CreateGroupVisibilityAccessibility ({
             </Picker>
           </View>
           <View style={styles.pickerContainer}>
-            <Text style={styles.pickerLabel}>Who can join this group?</Text>
-            <Picker style={styles.picker} itemStyle={styles.pickerItem} selectedValue={accessibility} onValueChange={value => setAccessibility(value)}>
+            <Text style={stepStyles.pickerLabel}>Who can join this group?</Text>
+            <Picker style={stepStyles.picker} itemStyle={stepStyles.pickerItem} selectedValue={accessibility} onValueChange={value => setAccessibility(value)}>
               {Object.values(GROUP_ACCESSIBILITY).map(accessibilityValue => (
                 <Picker.Item label={accessibilityDescription(accessibilityValue)}
                   value={accessibilityValue} key={accessibilityValue} />
               ))}
             </Picker>
           </View>
-          {/* {error && <View style={styles.errorBubble}><ErrorBubble text={error} topArrow /></View>} */}
         </View>
         <View style={styles.footer}>
           <Button text='Continue' onPress={checkAndSubmit} style={styles.button} />
@@ -68,3 +58,25 @@ export default function CreateGroupVisibilityAccessibility ({
     </SafeAreaView>
   )
 }
+
+const stepStyles = {
+  pickerContainer: {
+    marginBottom: 50
+  },
+  pickerLabel: {
+    fontSize: 16,
+    color: white,
+    fontWeight: 'bold',
+    marginBottom: 10
+  },
+  picker: {
+    minWidth: '90%',
+    backgroundColor: white,
+    borderRadius: 15
+  },
+  pickerItem: {
+    fontSize: 14,
+    height: 130
+  },
+}
+
