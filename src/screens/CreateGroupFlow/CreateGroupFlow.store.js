@@ -1,6 +1,7 @@
 import { createSelector as ormCreateSelector } from 'redux-orm'
 import orm from 'store/models'
 import { AnalyticsEvents } from 'hylo-utils/constants'
+import { GROUP_ACCESSIBILITY, GROUP_VISIBILITY } from 'store/models/Group'
 
 export const MODULE_NAME = 'CreateGroupFlow'
 export const UPDATE_GROUP_DATA = `${MODULE_NAME}/UPDATE_GROUP_DATA`
@@ -10,11 +11,12 @@ export const CLEAR_CREATE_GROUP_STORE = `${MODULE_NAME}/CLEAR_CREATE_GROUP_STORE
 export const FETCH_GROUP_EXISTS = `${MODULE_NAME}/FETCH_URL_EXISTS`
 
 export const defaultState = {
+  // New Group Defaults
   groupData: {
     name: '',
     slug: '',
-    visibility: null,
-    accessibility: null,
+    visibility: GROUP_VISIBILITY.Hidden, 
+    accessibility: GROUP_ACCESSIBILITY.Closed,
     parentIds: []
   },
   urlExists: false

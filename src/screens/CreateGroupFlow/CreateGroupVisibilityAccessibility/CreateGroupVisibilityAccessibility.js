@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { Text, View } from 'react-native'
 import SafeAreaView from 'react-native-safe-area-view'
 import Button from 'components/Button'
@@ -10,13 +10,14 @@ import {
   GROUP_ACCESSIBILITY, GROUP_VISIBILITY,
   visibilityDescription, accessibilityDescription
 } from 'store/models/Group'
-import { updateGroupData } from '../CreateGroupFlow.store'
+import { getGroupData, updateGroupData } from '../CreateGroupFlow.store'
 import { white } from 'style/colors'
 
 export default function CreateGroupVisibilityAccessibility ({ navigation }) {
+  const groupData = useSelector(getGroupData)
   const dispatch = useDispatch()
-  const [visibility, setVisibility] = useState(GROUP_VISIBILITY.Hidden)
-  const [accessibility, setAccessibility] = useState(GROUP_ACCESSIBILITY.Closed)
+  const [visibility, setVisibility] = useState(groupData.visibility)
+  const [accessibility, setAccessibility] = useState(groupData.accessibility)
 
   const checkAndSubmit = () => {
     dispatch(updateGroupData({ visibility, accessibility }))
