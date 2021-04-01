@@ -28,7 +28,11 @@ export function fetchGroupSettings (groupId) {
           name
           slug
           invitePath
-          allowGroupInvites
+          settings {
+            allowGroupInvites
+            askJoinQuestions
+            publicMemberDirectory
+          }
           pendingInvitations (first: 100) {
             hasMore
             items {

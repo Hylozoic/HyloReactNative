@@ -68,10 +68,10 @@ export default class InvitePeople extends Component {
             pendingCreate={this.props.pendingCreate}
             groupName={this.props.group.name}
             groupId={this.props.group.id}
-            groupMembersCanInvite={this.props.group.allowGroupInvites}
+            groupMembersCanInvite={this.props.group.settings.allowGroupInvites}
             createInvitations={this.props.createInvitations}
             regenerateAccessCode={this.props.regenerateAccessCode}
-            allowGroupInvites={this.props.allowGroupInvites}
+            setAllowGroupInvites={this.props.setAllowGroupInvites}
           />
         )
       case '1':
@@ -166,7 +166,7 @@ export class SendInvitesPage extends PureComponent {
     const { groupMembersCanInvite } = this.state
     const { groupId } = this.props
     this.setState({ groupMembersCanInvite: !groupMembersCanInvite })
-    this.props.allowGroupInvites(groupId, !groupMembersCanInvite)
+    this.props.setAllowGroupInvites(groupId, !groupMembersCanInvite)
       .then(({ error }) => {
         if (error) this.setState({ groupMembersCanInvite })
       })

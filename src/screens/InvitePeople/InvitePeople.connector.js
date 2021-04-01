@@ -9,9 +9,11 @@ import {
   getPendingInvites,
   expireInvitation,
   resendInvitation,
-  reinviteAll,
-  allowGroupInvites
+  reinviteAll
 } from './InvitePeople.store'
+import {
+  updateGroupSettings
+} from 'screens/GroupSettings/GroupSettings.store'
 
 export function mapStateToProps (state, props) {
   const groupId = getCurrentGroupId(state, props)
@@ -39,7 +41,8 @@ export function mapDispatchToProps (dispatch, props) {
     expireInvitation: (invitationToken) => dispatch(expireInvitation(invitationToken)),
     resendInvitation: (invitationToken) => dispatch(resendInvitation(invitationToken)),
     reinviteAllMaker: groupId => () => dispatch(reinviteAll(groupId)),
-    allowGroupInvites: (groupId, setAllow) => dispatch(allowGroupInvites(groupId, setAllow))
+    setAllowGroupInvites: (groupId, allowGroupInvites) =>
+      dispatch(updateGroupSettings(groupId, { settings: { allowGroupInvites } }))
   }
 }
 
