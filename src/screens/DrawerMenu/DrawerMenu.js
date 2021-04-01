@@ -73,7 +73,7 @@ export default function DrawerMenu ({
         sections={listSections}
         stickySectionHeadersEnabled={false}
       />
-      <Button text='Create a Group' onPress={goToCreateGroup} style={styles.createGroupButton} />
+      <Button text='Start a Group' onPress={goToCreateGroup} style={styles.createGroupButton} />
       {/* putting SocketListener here so it's only rendered after login */}
       <SocketListener />
     </View>

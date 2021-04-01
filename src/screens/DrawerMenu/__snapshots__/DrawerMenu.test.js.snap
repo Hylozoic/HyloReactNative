@@ -69,7 +69,7 @@ exports[`DrawerMenu matches the last snapshot 1`] = `
     windowSize={21}
   />
   <Button
-    text="Create a Group"
+    text="Start a Group"
   />
   <Memo(Connect(SocketListener)) />
 </View>

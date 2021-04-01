@@ -148,7 +148,7 @@ exports[`NotificationsList matches the renders CreateGroupNotice if user does no
       <View>
         <View>
           <Text>
-            Create a Group
+            Start a Group
           </Text>
         </View>
       </View>
