@@ -1,3 +1,24 @@
+// :TODO: clean this up and use proper query fragments?
+const CommentFieldsFragment = `
+  id
+  text
+  creator {
+    id
+    name
+    avatarUrl
+  }
+  attachments {
+    id
+    position
+    type
+    url
+  }
+  parentComment {
+    id
+  }
+  createdAt
+`
+
 const postFieldsFragment = withComments => `
   id
   announcement
@@ -22,23 +43,19 @@ const postFieldsFragment = withComments => `
     avatarUrl
   }
   commentersTotal
-  commentsTotal
   ${withComments ? `comments(first: 10, order: "desc") {
     items {
-      id
-      text
-      creator {
-        id
-        name
-        avatarUrl
+      ${CommentFieldsFragment}
+      childComments(first: 10, order: "desc") {
+        items {
+          ${CommentFieldsFragment}
+          post {
+            id
+          }
+        }
+        total
+        hasMore
       }
-      attachments {
-        id
-        position
-        type
-        url
-      }
-      createdAt
     }
     total
     hasMore
@@ -71,12 +88,13 @@ const postFieldsFragment = withComments => `
   }
   votesTotal
   myVote
-  acceptContributions
-  totalContributions
   groups {
     id
     name
     slug
+    settings {
+      publicMemberDirectory
+    }
   }
   attachments {
     type
@@ -107,12 +125,6 @@ const postFieldsFragment = withComments => `
       bio
       tagline
       location
-      skills (first: 100) {
-        items {
-          id
-          name
-        }
-      }
     }
   }
   eventInvitations {
@@ -128,14 +140,9 @@ const postFieldsFragment = withComments => `
         bio
         tagline
         location
-        skills (first: 100) {
-          items {
-            id
-            name
-          }
-        }
       }
     }
-  }`
+  }
+`
 
 export default postFieldsFragment

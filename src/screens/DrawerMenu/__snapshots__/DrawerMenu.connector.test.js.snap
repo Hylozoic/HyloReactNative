@@ -37,12 +37,12 @@ Object {
         "toModelArray": [Function],
       },
       "headerAvatarUrl": undefined,
-      "id": "public-context",
+      "id": "public",
       "name": "Public Groups",
       "parentGroups": Object {
         "toModelArray": [Function],
       },
-      "slug": "public-context",
+      "slug": "public",
     },
     Object {
       "avatarUrl": undefined,
@@ -51,12 +51,12 @@ Object {
         "toModelArray": [Function],
       },
       "headerAvatarUrl": undefined,
-      "id": "all-groups",
+      "id": "all",
       "name": "All My Groups",
       "parentGroups": Object {
         "toModelArray": [Function],
       },
-      "slug": "all-groups",
+      "slug": "all",
     },
   ],
 }

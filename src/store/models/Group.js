@@ -144,7 +144,7 @@ Group.fields = {
 export const DEFAULT_BANNER = 'https://d3ngex8q79bk55.cloudfront.net/misc/default_community_banner.jpg'
 export const DEFAULT_AVATAR = 'https://d3ngex8q79bk55.cloudfront.net/misc/default_community_avatar.png'
 
-export const ALL_GROUP_ID = 'all-groups'
+export const ALL_GROUP_ID = 'all'
 export const ALL_GROUP_AVATAR_PATH = '/assets/white-merkaba.png'
 export const ALL_GROUP = {
   id: ALL_GROUP_ID,
@@ -157,7 +157,7 @@ export const ALL_GROUP = {
   childGroups: { toModelArray: () => [] },
 }
 
-export const PUBLIC_GROUP_ID = 'public-context'
+export const PUBLIC_GROUP_ID = 'public'
 export const PUBLIC_GROUP_AVATAR_PATH = '/public.svg'
 export const PUBLIC_GROUP = {
   id: PUBLIC_GROUP_ID,
