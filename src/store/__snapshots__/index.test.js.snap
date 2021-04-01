@@ -5,11 +5,11 @@ Object {
   "CommentEditor": Object {},
   "CreateGroupFlow": Object {
     "groupData": Object {
-      "accessibility": null,
+      "accessibility": 0,
       "name": "",
       "parentIds": Array [],
       "slug": "",
-      "visibility": null,
+      "visibility": 0,
     },
     "urlExists": false,
   },
