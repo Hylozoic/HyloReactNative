@@ -18,7 +18,7 @@ export default {
     justifyContent: 'center'
   },
   header: {
-    marginBottom: '20%'
+    marginBottom: 20
   },
   content: {},
   footer: {
@@ -44,7 +44,7 @@ export default {
     alignSelf: 'flex-end'
   },
   textInputContainer: {
-    marginBottom: 20,
+    marginBottom: 10,
     ...mixins.underline
   },
   textInputLabel: {
@@ -55,7 +55,6 @@ export default {
     color: white,
     fontSize: 18,
     fontWeight: 'bold',
-    marginTop: 10,
     marginBottom: 20
   },
   errorBubble: {

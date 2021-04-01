@@ -23,9 +23,18 @@ export default function CreateGroupVisibilityAccessibility ({ navigation }) {
     navigation.navigate('CreateGroupParentGroups')
   }
 
+  /*
+    HOLONIC TODO: The picker component I found for this doesn't seem to allow wrapping
+                  which is making it a bad fit. We probably need a different picker.
+
+                  This may be the best alternative:
+
+                  https://github.com/lawnstarter/react-native-picker-select
+
+  */
   return (
     <SafeAreaView style={styles.container}>
-      <KeyboardFriendlyView>
+      <View>
         {/* <View style={styles.header}> */}
           <Text style={styles.heading}>Visibility and Accessibility</Text>
           {/* HOLONIC TODO: Write a description here of visibility and accessibility? */}
@@ -56,7 +65,7 @@ export default function CreateGroupVisibilityAccessibility ({ navigation }) {
         <View style={styles.footer}>
           <Button text='Continue' onPress={checkAndSubmit} style={styles.button} />
         </View>
-      </KeyboardFriendlyView>
+      </View>
     </SafeAreaView>
   )
 }

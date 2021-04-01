@@ -35,8 +35,9 @@ export default function CreateGroupParentGroups ({ navigation }) {
     navigation.navigate('CreateGroupReview')
   }
 
-  
-
+  /*
+    HOLONIC TODO: Not certain this should be shown to everyone (i.e. Tibet's remarks as well)
+  */
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardFriendlyView>
@@ -44,9 +45,7 @@ export default function CreateGroupParentGroups ({ navigation }) {
         <Text style={stepStyles.subHeading}>Please select below:</Text>
         <FlatList style={stepStyles.parentGroupListContainer} data={parentGroupOptions}
           renderItem={({ item }) => (
-            <ItemChooserItemRow item={item}
-              chosen={isChosen(item)}
-              toggleChosen={toggleChosen} />
+            <ItemChooserItemRow item={item} chosen={isChosen(item)} toggleChosen={toggleChosen} />
           )
         } />
         <TouchableOpacity onPress={clear}>
@@ -78,6 +77,6 @@ const stepStyles = {
     padding: 0,
     backgroundColor: white,
     borderRadius: 15,
-    maxHeight: '40%'
+    maxHeight: '50%'
   }
 }

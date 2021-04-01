@@ -1,3 +1,5 @@
+import { createSelector as ormCreateSelector } from 'redux-orm'
+import orm from 'store/models'
 import { AnalyticsEvents } from 'hylo-utils/constants'
 
 export const MODULE_NAME = 'CreateGroupFlow'
@@ -114,3 +116,12 @@ export function clearCreateGroupStore () {
     type: CLEAR_CREATE_GROUP_STORE
   }
 }
+
+export const getNewGroupParentGroups = ormCreateSelector(
+  orm,
+  getGroupData,
+  (session, { parentIds }) => session.Group.all()
+    .toRefArray()
+    .filter(g => parentIds.includes(g.id))
+    .sort((a, b) => a.name.localeCompare(b.name))
+)
