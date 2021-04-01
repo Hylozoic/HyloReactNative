@@ -10,7 +10,7 @@ export function formatDomainWithUrl (groupDomain) {
   return formattedDomain
 }
 
-export function removeUrlFromDomain (groupDomain) {
+export function removeDomainFromURL (groupDomain) {
   if (!groupDomain) return
   return groupDomain.replace('hylo.com/c/', '')
 }

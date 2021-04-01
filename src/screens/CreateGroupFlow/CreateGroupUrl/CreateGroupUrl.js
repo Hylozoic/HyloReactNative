@@ -1,107 +1,80 @@
-import React from 'react'
-import {
-  Text,
-  View,
-  TextInput
-} from 'react-native'
+import React, { useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { Text, View, TextInput } from 'react-native'
 import SafeAreaView from 'react-native-safe-area-view'
 import { get } from 'lodash/fp'
 import ErrorBubble from 'components/ErrorBubble'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 import {
-  slugValidatorRegex,
-  invalidSlugMessage,
-  formatDomainWithUrl,
-  removeUrlFromDomain
+  slugValidatorRegex, invalidSlugMessage,
+  formatDomainWithUrl, removeDomainFromURL
 } from '../util'
+import {
+  updateGroupData, fetchGroupExists, getGroupData
+} from '../CreateGroupFlow.store'
 import Button from 'components/Button'
 import styles from '../CreateGroupFlow.styles'
+import isPendingFor from 'store/selectors/isPendingFor'
 
-export default class CreateGroupUrl extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      slug: this.props.groupData?.slug
+export default function CreateGroupUrl ({ navigation }) {
+  const dispatch = useDispatch()
+  const fetchUrlPending = useSelector(state => isPendingFor(fetchGroupExists, state))
+
+  const groupData = useSelector(getGroupData)
+  const [error, setError] = useState()
+  const [groupSlug, providedSetGroupSlug] = useState(groupData.slug)
+
+  const setGroupSlug = slug => {
+    setError()
+    return providedSetGroupSlug(slug)
+  }
+
+  const checkAndSubmit = async () => {
+    if (!groupSlug || groupSlug.length === 0) {
+      setError('Please enter a URL')
+      return
     }
-  }
-
-  setInput (key, value) {
-    this.setState({
-      ...this.state,
-      [key]: value
-    })
-  }
-
-  clearErrors = () => {
-    this.setState({
-      ...this.state,
-      error: null
-    })
-  }
-
-  setErrorMessage = (error) => {
-    this.setState({
-      ...this.state,
-      error
-    })
-  }
-
-  validate (slug) {
-    this.clearErrors()
-    if (!slug || slug.length === 0) {
-      this.setErrorMessage('Please enter a URL')
-      return false
+    if (!slugValidatorRegex.test(groupSlug)) {
+      setError(invalidSlugMessage)
+      return
     }
-    if (!slugValidatorRegex.test(slug)) {
-      this.setErrorMessage(invalidSlugMessage)
-      return false
-    }
-    return true
-  }
 
-  checkAndSubmit = () => {
-    const { slug } = this.state
-    const { fetchGroupExists, updateGroupData, goToNextStep } = this.props
-    if (!this.validate(slug)) return
-    return checkGroupUrlThenRedirect(slug,
-      fetchGroupExists,
-      this.setErrorMessage,
-      updateGroupData,
-      goToNextStep
+    return checkGroupUrlThenRedirect(groupSlug,
+      params => dispatch(fetchGroupExists(params)),
+      setError,
+      params => dispatch(updateGroupData(params)),
+      () => navigation.navigate('CreateGroupVisibilityAccessibility')
     )
   }
 
-  render () {
-    const { error, slug } = this.state
-    return (
-      <SafeAreaView style={styles.container}>
-        <KeyboardFriendlyView>
-          <View style={styles.header}>
-            <Text style={styles.heading}>Choose an address for your group</Text>
-            <Text style={styles.description}>Your URL is the address that members will use to access your group online. The shorter the better!</Text>
+  return (
+    <SafeAreaView style={styles.container}>
+      <KeyboardFriendlyView>
+        <View style={styles.header}>
+          <Text style={styles.heading}>Choose an address for your group</Text>
+          <Text style={styles.description}>Your URL is the address that members will use to access your group online. The shorter the better!</Text>
+        </View>
+        <View style={styles.content}>
+          <View style={styles.textInputContainer}>
+            <Text style={styles.textInputLabel}>What's the address for your group?</Text>
+            <TextInput
+              style={styles.textInput}
+              onChangeText={slug => setGroupSlug(removeDomainFromURL(slug))}
+              returnKeyType='next'
+              autoCapitalize='none'
+              value={formatDomainWithUrl(groupSlug)}
+              autoCorrect={false}
+              underlineColorAndroid={styles.androidInvisibleUnderline}
+            />
           </View>
-          <View style={styles.content}>
-            <View style={styles.textInputContainer}>
-              <Text style={styles.textInputLabel}>What's the address for your group?</Text>
-              <TextInput
-                style={styles.textInput}
-                onChangeText={slug => this.setInput('slug', removeUrlFromDomain(slug))}
-                returnKeyType='next'
-                autoCapitalize='none'
-                value={formatDomainWithUrl(slug)}
-                autoCorrect={false}
-                underlineColorAndroid={styles.androidInvisibleUnderline}
-              />
-            </View>
-            {error && <View style={styles.errorBubble}><ErrorBubble text={error} topArrow /></View>}
-          </View>
-          <View style={styles.footer}>
-            <Button text='Continue' onPress={this.checkAndSubmit} style={styles.button} disabled={!!this.props.fetchUrlPending} />
-          </View>
-        </KeyboardFriendlyView>
-      </SafeAreaView>
-    )
-  }
+          {error && <View style={styles.errorBubble}><ErrorBubble text={error} topArrow /></View>}
+        </View>
+        <View style={styles.footer}>
+          <Button text='Continue' onPress={checkAndSubmit} style={styles.button} disabled={!!fetchUrlPending} />
+        </View>
+      </KeyboardFriendlyView>
+    </SafeAreaView>
+  )
 }
 
 export function checkGroupUrlThenRedirect (slug, fetchGroupExists, setErrorMessage, updateGroupData, goToNextStep) {

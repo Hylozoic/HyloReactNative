@@ -1,4 +1,4 @@
-import { formatDomainWithUrl, removeUrlFromDomain } from './index'
+import { formatDomainWithUrl, removeDomainFromURL } from './index'
 
 const url = 'foo'
 const formattedUrl = `hylo.com/c/${url}`
@@ -9,8 +9,8 @@ describe('formatDomainWithUrl', () => {
   })
 })
 
-describe('removeUrlFromDomain', () => {
+describe('removeDomainFromURL', () => {
   it('works as expected', () => {
-    expect(removeUrlFromDomain(formattedUrl)).toEqual(url)
+    expect(removeDomainFromURL(formattedUrl)).toEqual(url)
   })
 })
