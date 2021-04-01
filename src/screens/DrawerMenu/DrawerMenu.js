@@ -36,8 +36,8 @@ export default function DrawerMenu ({
     }
   ]
 
-  const groupBannerImage = currentGroup.bannerUrl
-    ? { uri: currentGroup.bannerUrl }
+  const groupBannerImage = currentGroup?.bannerUrl
+    ? { uri: currentGroup?.bannerUrl }
     : null
 
   return (

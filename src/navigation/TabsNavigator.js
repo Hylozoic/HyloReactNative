@@ -177,7 +177,7 @@ export default function TabsNavigator () {
               borderColor: focused ? caribbeanGreen : rhino05 }}
               dimension={34}
               hasBorder
-              avatarUrl={currentUser.avatarUrl}
+              avatarUrl={currentUser?.avatarUrl}
             />
           )
         }}

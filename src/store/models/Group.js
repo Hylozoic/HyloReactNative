@@ -141,6 +141,7 @@ Group.fields = {
   visibility: attr()
 }
 
+export const isContextGroup = slug => [ALL_GROUP_ID, PUBLIC_GROUP_ID].includes(slug)
 export const DEFAULT_BANNER = 'https://d3ngex8q79bk55.cloudfront.net/misc/default_community_banner.jpg'
 export const DEFAULT_AVATAR = 'https://d3ngex8q79bk55.cloudfront.net/misc/default_community_avatar.png'
 

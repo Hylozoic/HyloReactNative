@@ -6,32 +6,31 @@ import Icon from 'components/Icon'
 import { useFocusEffect } from '@react-navigation/core'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import styles from './GroupNavigation.styles'
+import { isContextGroup } from 'store/models/Group'
 
 export default function GroupNavigation ({ navigation }) {
   const currentGroup = useSelector(getCurrentGroup)
 
   useFocusEffect(() => {
-    navigation.setOptions({ headerTitle: currentGroup.name  })
+    navigation.setOptions({ headerTitle: currentGroup?.name  })
   })
 
   const { navigate } = navigation
-  // HOLONIC TODO: Add icons to set for "Create", "Stream", "Groups",
-  //       as well as "Home" and "Events" (for the future)
   const navItems = [
     { label: 'Create', iconName: 'Create', onPress: () => navigate('Edit Post', { id: null }) },
     { label: 'Stream', iconName: 'Stream', onPress: () => navigate('Feed') },
-    { label: 'Projects', iconName: 'Projects', onPress: () =>  navigate('Projects') }
+    { label: 'Projects', iconName: 'Projects', onPress: () => navigate('Projects') }
   ]
   const childGroups = useSelector(getChildGroups)
   const parentGroups = useSelector(getParentGroups)
 
-  // TODO: Only show in Single Group context (not Public or All Groups)
-  if (true) {
+  if (!isContextGroup(currentGroup?.slug)) {
     navItems.push({ label: 'Members', iconName: 'Members', onPress: () => navigate('Members') })
   }
 
-  if (childGroups.length > 0 || parentGroups.length > 0) {
-    navItems.push({ label: 'Groups', iconName: 'Groups', onPress: () => navigate('Group Relationships') })
+  if (childGroups?.length > 0 || parentGroups?.length > 0) {
+    navItems.push({ label: 'Groups', iconName: 'Groups',
+      onPress: () => navigate('Group Relationships') })
   }
 
   const NavItem  = ({ label, iconName, onPress }) => (

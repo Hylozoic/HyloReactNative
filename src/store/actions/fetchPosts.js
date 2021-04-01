@@ -1,5 +1,5 @@
 import { get } from 'lodash/fp'
-import { ALL_GROUP_ID, PUBLIC_GROUP_ID } from 'store/models/Group'
+import { isContextGroup } from 'store/models/Group'
 import { FETCH_POSTS } from 'store/constants'
 import postsQueryFragment from 'graphql/fragments/postsQueryFragment'
 import groupViewPostsQueryFragment from 'graphql/fragments/groupViewPostsQueryFragment'
@@ -7,7 +7,7 @@ import groupViewPostsQueryFragment from 'graphql/fragments/groupViewPostsQueryFr
 export default function fetchPosts ({ context, slug, sortBy, offset, search, filter, topic }) {
   var query, extractModel, getItems
 
-  if (slug === ALL_GROUP_ID || slug === PUBLIC_GROUP_ID) {
+  if (isContextGroup(slug)) {
     query = postsQuery
     extractModel = 'Post'
     getItems = get('payload.data.posts')
