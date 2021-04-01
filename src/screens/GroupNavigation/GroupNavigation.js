@@ -18,8 +18,8 @@ export default function GroupNavigation ({ navigation }) {
   // HOLONIC TODO: Add icons to set for "Create", "Stream", "Groups",
   //       as well as "Home" and "Events" (for the future)
   const navItems = [
-    { label: 'Create', iconName: 'Members', onPress: () => navigate('Edit Post', { id: null }) },
-    { label: 'Stream', iconName: 'Members', onPress: () => navigate('Feed') },
+    { label: 'Create', iconName: 'Create', onPress: () => navigate('Edit Post', { id: null }) },
+    { label: 'Stream', iconName: 'Stream', onPress: () => navigate('Feed') },
     { label: 'Projects', iconName: 'Projects', onPress: () =>  navigate('Projects') }
   ]
   const childGroups = useSelector(getChildGroups)
@@ -27,11 +27,11 @@ export default function GroupNavigation ({ navigation }) {
 
   // TODO: Only show in Single Group context (not Public or All Groups)
   if (true) {
-    navItems.push({ label: 'Members', iconName: 'Person', onPress: () => navigate('Members') })
+    navItems.push({ label: 'Members', iconName: 'Members', onPress: () => navigate('Members') })
   }
 
   if (childGroups.length > 0 || parentGroups.length > 0) {
-    navItems.push({ label: 'Groups', iconName: 'Share', onPress: () => navigate('Group Relationships') })
+    navItems.push({ label: 'Groups', iconName: 'Groups', onPress: () => navigate('Group Relationships') })
   }
 
   const NavItem  = ({ label, iconName, onPress }) => (
@@ -40,7 +40,7 @@ export default function GroupNavigation ({ navigation }) {
       <Text style={styles.navItemLabel}>{label}</Text>
     </TouchableOpacity>
   )
-  
+
   return (
     <ScrollView style={styles.container}>
       {navItems.map(item => <NavItem {...item} key={item.label} /> )}
