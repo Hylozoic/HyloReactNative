@@ -17,7 +17,7 @@ export default function Groups ({
 
   useFocusEffect(() => {
     navigation.setOptions({ headerTitle: currentGroup.name  })
-  }, [])
+  })
 
   const listSections = []
   const renderItem =  ({ item }) => (

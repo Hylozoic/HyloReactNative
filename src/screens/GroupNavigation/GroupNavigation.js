@@ -12,7 +12,7 @@ export default function GroupNavigation ({ navigation }) {
 
   useFocusEffect(() => {
     navigation.setOptions({ headerTitle: currentGroup.name  })
-  }, [])
+  })
 
   const { navigate } = navigation
   // HOLONIC TODO: Add icons to set for "Create", "Stream", "Groups",

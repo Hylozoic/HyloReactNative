@@ -78,6 +78,7 @@ export function buildTabStackScreenOptions ({
 
 export function buildModalScreenOptions ({
   headerLeftCloseIcon = true,
+  headerLeftLabel,
   headerLeftOnPress: providedHeaderLeftOnPress,
   headerLeftConfirm,
   headerRightButtonLabel = 'Save',
@@ -109,13 +110,15 @@ export function buildModalScreenOptions ({
       const onPress = headerLeftConfirm
         ? () => confirmDiscardChanges({ onDiscard: headerLeftOnPress })
         : headerLeftOnPress
-  
+      const label = headerLeftLabel
+        ? headerLeftLabel
+        : props.label 
       return (
         <>
           <FocusAwareStatusBar {...statusBarOptions} />
           {headerLeftCloseIcon
             ? <HeaderLeftCloseIcon {...props} color={headerTitleStyleColor} onPress={onPress} />
-            : <HeaderBackButton {...props} onPress={onPress} />}
+            : <HeaderBackButton {...props} label={label} onPress={onPress} />}
           </>
       )
     },
