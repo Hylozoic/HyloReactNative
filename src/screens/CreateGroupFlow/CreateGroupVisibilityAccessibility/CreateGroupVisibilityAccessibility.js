@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Text, View } from 'react-native'
 import SafeAreaView from 'react-native-safe-area-view'
 import Button from 'components/Button'
-import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 import styles from '../CreateGroupFlow.styles'
 import { Picker } from '@react-native-picker/picker'
 import {
@@ -84,7 +83,8 @@ const stepStyles = {
   picker: {
     minWidth: '90%',
     backgroundColor: white,
-    borderRadius: 15
+    borderRadius: 15,
+    // flexWrap: 'wrap'
   },
   pickerItem: {
     fontSize: 14,
