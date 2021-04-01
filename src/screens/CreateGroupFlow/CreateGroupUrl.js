@@ -5,18 +5,17 @@ import SafeAreaView from 'react-native-safe-area-view'
 import { get } from 'lodash/fp'
 import ErrorBubble from 'components/ErrorBubble'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
+import Button from 'components/Button'
+import isPendingFor from 'store/selectors/isPendingFor'
 import {
   slugValidatorRegex, invalidSlugMessage,
   formatDomainWithUrl, removeDomainFromURL
-} from '../util'
-import {
-  updateGroupData, fetchGroupExists, getGroupData
-} from '../CreateGroupFlow.store'
-import Button from 'components/Button'
-import styles from '../CreateGroupFlow.styles'
-import isPendingFor from 'store/selectors/isPendingFor'
+} from './util'
+import { updateGroupData, fetchGroupExists, getGroupData } from './CreateGroupFlow.store'
+import styles from './CreateGroupFlow.styles'
 
 export default function CreateGroupUrl ({ navigation }) {
+  const nextScreen = 'CreateGroupVisibilityAccessibility'
   const dispatch = useDispatch()
   const fetchUrlPending = useSelector(state => isPendingFor(fetchGroupExists, state))
 
@@ -43,7 +42,7 @@ export default function CreateGroupUrl ({ navigation }) {
       params => dispatch(fetchGroupExists(params)),
       setError,
       params => dispatch(updateGroupData(params)),
-      () => navigation.navigate('CreateGroupVisibilityAccessibility')
+      () => navigation.navigate(nextScreen)
     )
   }
 

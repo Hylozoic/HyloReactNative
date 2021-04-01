@@ -3,16 +3,17 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Text, View } from 'react-native'
 import SafeAreaView from 'react-native-safe-area-view'
 import Button from 'components/Button'
-import styles from '../CreateGroupFlow.styles'
 import { Picker } from '@react-native-picker/picker'
 import {
   GROUP_ACCESSIBILITY, GROUP_VISIBILITY,
   visibilityDescription, accessibilityDescription
 } from 'store/models/Group'
-import { getGroupData, updateGroupData } from '../CreateGroupFlow.store'
 import { white } from 'style/colors'
+import { getGroupData, updateGroupData } from './CreateGroupFlow.store'
+import styles from './CreateGroupFlow.styles'
 
 export default function CreateGroupVisibilityAccessibility ({ navigation }) {
+  const nextScreen = 'CreateGroupParentGroups'
   const groupData = useSelector(getGroupData)
   const dispatch = useDispatch()
   const [visibility, setVisibility] = useState(groupData.visibility)
@@ -20,7 +21,7 @@ export default function CreateGroupVisibilityAccessibility ({ navigation }) {
 
   const checkAndSubmit = () => {
     dispatch(updateGroupData({ visibility, accessibility }))
-    navigation.navigate('CreateGroupParentGroups')
+    navigation.navigate(nextScreen)
   }
 
   /*

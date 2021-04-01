@@ -1,19 +1,27 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Text, View, TextInput } from 'react-native'
 import SafeAreaView from 'react-native-safe-area-view'
-import { getGroupData, updateGroupData } from '../CreateGroupFlow.store'
 import Button from 'components/Button'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 import ErrorBubble from 'components/ErrorBubble'
-import styles from '../CreateGroupFlow.styles'
+import getCurrentGroupId from 'store/selectors/getCurrentGroupId'
+import { getGroupData, getEdited, updateGroupData } from './CreateGroupFlow.store'
+import styles from './CreateGroupFlow.styles'
 
 export default function CreateGroupName ({ navigation }) {
+  const nextScreen = 'CreateGroupUrl'
   const dispatch = useDispatch()
-  const groupData = useSelector(getGroupData)
-
+  // Add current group in as pre-selected as a parent group 
+  const edited = useSelector(getEdited)
+  const currentGroupId = useSelector(getCurrentGroupId)
+  useEffect(() => {
+    if (!edited) dispatch(updateGroupData({ parentIds: [currentGroupId] }))
+  }, [])
+  const groupData = useSelector(getGroupData)  
   const [error, setError] = useState()
   const [groupName, providedSetGroupName] = useState(groupData.name)
+
 
   const setGroupName = name => {
     setError()
@@ -26,7 +34,7 @@ export default function CreateGroupName ({ navigation }) {
       return
     }
     dispatch(updateGroupData({ name: groupName }))
-    navigation.navigate('CreateGroupUrl')
+    navigation.navigate(nextScreen)
   }
 
   return (

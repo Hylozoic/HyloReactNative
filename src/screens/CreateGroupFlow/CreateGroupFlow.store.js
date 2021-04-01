@@ -19,7 +19,8 @@ export const defaultState = {
     accessibility: GROUP_ACCESSIBILITY.Closed,
     parentIds: []
   },
-  urlExists: false
+  urlExists: false,
+  edited: false
 }
 
 export default function reducer (state = defaultState, action) {
@@ -31,14 +32,16 @@ export default function reducer (state = defaultState, action) {
         groupData: {
           ...state.groupData,
           ...payload
-        }
+        },
+        edited: true
       }
     case CLEAR_CREATE_GROUP_STORE:
       return defaultState
     case FETCH_URL_EXISTS:
       return {
         ...state,
-        urlExists: action.payload.data.groupExists.exists
+        urlExists: action.payload.data.groupExists.exists,
+        edited: true
       }
   }
   return state
@@ -111,6 +114,10 @@ export function getGroupData (state) {
 
 export function getGroupUrlExists (state) {
   return state[MODULE_NAME].urlExists
+}
+
+export function getEdited (state) {
+  return state[MODULE_NAME]?.edited
 }
 
 export function clearCreateGroupStore () {

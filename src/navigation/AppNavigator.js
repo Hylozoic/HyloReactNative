@@ -4,12 +4,15 @@ import { buildModalScreenOptions, buildWorkflowModalScreenOptions } from 'naviga
 // Navigation
 import TabsNavigator from 'navigation/TabsNavigator'
 // Screens
+import CreateGroupName from 'screens/CreateGroupFlow/CreateGroupName'
+import CreateGroupUrl from 'screens/CreateGroupFlow/CreateGroupUrl'
+import CreateGroupVisibilityAccessibility
+  from 'screens/CreateGroupFlow/CreateGroupVisibilityAccessibility'
+import CreateGroupParentGroups from 'screens/CreateGroupFlow/CreateGroupParentGroups'
+import CreateGroupReview from 'screens/CreateGroupFlow/CreateGroupReview'
 import BlockedUsers from 'screens/BlockedUsers'
 import GroupSettingsMenu from 'screens/GroupSettingsMenu'
 import GroupSettingsComponent from 'screens/GroupSettings'
-import CreateGroupName from 'screens/CreateGroupFlow/CreateGroupName'
-import CreateGroupReview from 'screens/CreateGroupFlow/CreateGroupReview'
-import CreateGroupUrl from 'screens/CreateGroupFlow/CreateGroupUrl'
 import InvitePeople from 'screens/InvitePeople'
 import ItemChooserScreen from 'screens/ItemChooserScreen'
 import LoadingScreen from 'screens/LoadingScreen'
@@ -18,9 +21,6 @@ import NotificationSettings from 'screens/NotificationSettings'
 import NotificationsList from 'screens/NotificationsList'
 import PostEditor from 'screens/PostEditor'
 import UserSettings from 'screens/UserSettings'
-import CreateGroupVisibilityAccessibility
-  from 'screens/CreateGroupFlow/CreateGroupVisibilityAccessibility/CreateGroupVisibilityAccessibility'
-import CreateGroupParentGroups from 'screens/CreateGroupFlow/CreateGroupParentGroups'
 
 const CreateGroup = createStackNavigator()
 export function CreateGroupNavigator () {

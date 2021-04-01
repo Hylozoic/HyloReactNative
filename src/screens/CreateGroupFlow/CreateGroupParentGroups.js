@@ -4,16 +4,17 @@ import { Text, View, FlatList } from 'react-native'
 import SafeAreaView from 'react-native-safe-area-view'
 import Button from 'components/Button'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
-import styles from '../CreateGroupFlow.styles'
-import { getGroupData, updateGroupData } from '../CreateGroupFlow.store'
 import getMemberships from 'store/selectors/getMemberships'
 // NOTE: Make a local copy of this if modification is needed
 import ItemChooserItemRow from 'screens/ItemChooser/ItemChooserItemRow'
 import { white } from 'style/colors'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { GROUP_ACCESSIBILITY } from 'store/models/Group'
+import { getGroupData, updateGroupData } from './CreateGroupFlow.store'
+import styles from './CreateGroupFlow.styles'
 
 export default function CreateGroupParentGroups ({ navigation }) {
+  const nextScreen = 'CreateGroupReview'
   const groupData = useSelector(getGroupData)
   const dispatch = useDispatch()
   const [parentIds, setParentGroupIds] = useState(groupData.parentIds)
@@ -32,8 +33,10 @@ export default function CreateGroupParentGroups ({ navigation }) {
   const clear = () => setParentGroupIds([])
 
   const checkAndSubmit = () => {
+    // Extra step necessary to reject a current group selection which isn't valid
+    parentIds.filter(id => parentGroupOptions.find(validId => id == validId))
     dispatch(updateGroupData({ parentIds }))
-    navigation.navigate('CreateGroupReview')
+    navigation.navigate(nextScreen)
   }
 
   /*

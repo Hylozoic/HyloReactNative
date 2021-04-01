@@ -4,6 +4,7 @@ exports[`getEmptyState matches last snapshot 1`] = `
 Object {
   "CommentEditor": Object {},
   "CreateGroupFlow": Object {
+    "edited": false,
     "groupData": Object {
       "accessibility": 0,
       "name": "",
