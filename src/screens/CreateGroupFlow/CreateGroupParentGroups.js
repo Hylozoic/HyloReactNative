@@ -33,7 +33,7 @@ export default function CreateGroupParentGroups ({ navigation }) {
   const clear = () => setParentGroupIds([])
 
   const checkAndSubmit = () => {
-    // Extra step necessary to reject a current group selection which isn't valid
+    // Extra step necessary to reject a default group selection which isn't valid
     parentIds.filter(id => parentGroupOptions.find(validId => id == validId))
     dispatch(updateGroupData({ parentIds }))
     navigation.navigate(nextScreen)

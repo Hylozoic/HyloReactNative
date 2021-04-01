@@ -15,8 +15,8 @@ export const defaultState = {
   groupData: {
     name: '',
     slug: '',
-    visibility: GROUP_VISIBILITY.Hidden, 
-    accessibility: GROUP_ACCESSIBILITY.Closed,
+    visibility: GROUP_VISIBILITY.Protected, 
+    accessibility: GROUP_ACCESSIBILITY.Restricted,
     parentIds: []
   },
   urlExists: false,

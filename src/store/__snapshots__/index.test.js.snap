@@ -6,11 +6,11 @@ Object {
   "CreateGroupFlow": Object {
     "edited": false,
     "groupData": Object {
-      "accessibility": 0,
+      "accessibility": 1,
       "name": "",
       "parentIds": Array [],
       "slug": "",
-      "visibility": 0,
+      "visibility": 1,
     },
     "urlExists": false,
   },
