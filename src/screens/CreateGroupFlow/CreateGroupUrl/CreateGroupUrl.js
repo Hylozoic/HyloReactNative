@@ -114,7 +114,7 @@ export function checkGroupUrlThenRedirect (slug, fetchGroupExists, setErrorMessa
         return
       }
       if (groupExists) {
-        setErrorMessage('This url already exists. Please choose another one.')
+        setErrorMessage('This URL already exists. Please choose another one.')
         return
       }
       if (groupExists === false) {
