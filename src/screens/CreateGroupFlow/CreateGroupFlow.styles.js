@@ -52,10 +52,11 @@ export default {
     fontWeight: 'bold'
   },
   textInput: {
-    minHeight: 40,
     color: white,
     fontSize: 18,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    marginTop: 10,
+    marginBottom: 20
   },
   errorBubble: {
     marginTop: 8

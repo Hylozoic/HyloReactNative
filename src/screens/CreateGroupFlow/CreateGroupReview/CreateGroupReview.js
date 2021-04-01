@@ -4,7 +4,8 @@ import {
   Text,
   View,
   TextInput,
-  TouchableOpacity
+  TouchableOpacity,
+  ScrollView
 } from 'react-native'
 import {
   createGroup as createGroupAction,
@@ -18,6 +19,7 @@ import SafeAreaView from 'react-native-safe-area-view'
 import ErrorBubble from 'components/ErrorBubble'
 import { formatDomainWithUrl } from '../util'
 import styles from '../CreateGroupFlow.styles'
+import { accessibilityDescription, GROUP_VISIBILITY, visibilityDescription } from 'store/models/Group'
 
 export default function CreateGroupReview ({ navigation }) {
   const [error, setError] = useState(null)
@@ -28,6 +30,8 @@ export default function CreateGroupReview ({ navigation }) {
   const clearCreateGroupStore = () => dispatch(clearCreateGroupStoreAction())
   const goToCreateGroupName = () => navigation.navigate('CreateGroupName')
   const goToCreateGroupUrl = () => navigation.navigate('CreateGroupUrl')
+  const goToCreateGroupVisibilityAccessibility = () =>
+    navigation.navigate('CreateGroupVisibilityAccessibility')
   const goToGroup = group => {
     navigation.closeDrawer()
     navigation.navigate('Feed', { groupId: group?.id })
@@ -50,7 +54,7 @@ export default function CreateGroupReview ({ navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <KeyboardFriendlyView>
+      <ScrollView>
         <View style={styles.header}>
           <Text style={styles.heading}>Everything look good?</Text>
           <Text style={styles.description}>You can always come back and change your details at any time</Text>
@@ -70,6 +74,7 @@ export default function CreateGroupReview ({ navigation }) {
               </TouchableOpacity>
             </View>
           </View>
+
           <View style={styles.textInputContainer}>
             <Text style={styles.textInputLabel}>What's the URL of your group?</Text>
             <View style={styles.textInputWithButton}>
@@ -85,6 +90,39 @@ export default function CreateGroupReview ({ navigation }) {
             </View>
           </View>
         </View>
+
+        <View style={styles.textInputContainer}>
+          <Text style={styles.textInputLabel}>Who can see this group?</Text>
+          <View style={styles.textInputWithButton}>
+            <TextInput
+              style={styles.textInput}
+              multiline
+              value={visibilityDescription(groupData.visibility)}
+              underlineColorAndroid={styles.androidInvisibleUnderline}
+              disabled
+            />
+            <TouchableOpacity onPress={goToCreateGroupVisibilityAccessibility} style={styles.editContainer}>
+              <Text style={styles.editText}>Edit</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+
+        <View style={styles.textInputContainer}>
+          <Text style={styles.textInputLabel}>Who can join this group?</Text>
+          <View style={styles.textInputWithButton}>
+            <TextInput
+              style={styles.textInput}
+              multiline
+              value={accessibilityDescription(groupData.accessibility)}
+              underlineColorAndroid={styles.androidInvisibleUnderline}
+              disabled
+            />
+            <TouchableOpacity onPress={goToCreateGroupVisibilityAccessibility} style={styles.editContainer}>
+              <Text style={styles.editText}>Edit</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+
         {error && <View style={styles.errorBubble}><ErrorBubble text={error} /></View>}
         <View style={styles.footer}>
           <Button
@@ -94,7 +132,7 @@ export default function CreateGroupReview ({ navigation }) {
             disabled={!!createGroupPending}
           />
         </View>
-      </KeyboardFriendlyView>
+      </ScrollView>
     </SafeAreaView>
   )
 }

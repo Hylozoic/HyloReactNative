@@ -34,6 +34,7 @@ export default function CreateGroupVisibilityAccessibility ({ navigation }) {
         <View style={styles.content}>
           <View style={stepStyles.pickerContainer}>
             <Text style={stepStyles.pickerLabel}>Who can see this group?</Text>
+            {/* HOLONIC TODO: Wrap text in picker (doesn't seem possible), or use a different picker? */}
             <Picker style={stepStyles.picker} itemStyle={stepStyles.pickerItem} selectedValue={visibility} onValueChange={setVisibility}>
               {Object.values(GROUP_VISIBILITY).map(visibilityValue => (
                 <Picker.Item label={visibilityDescription(visibilityValue)}
@@ -43,6 +44,7 @@ export default function CreateGroupVisibilityAccessibility ({ navigation }) {
           </View>
           <View style={styles.pickerContainer}>
             <Text style={stepStyles.pickerLabel}>Who can join this group?</Text>
+            {/* HOLONIC TODO: Wrap text in picker (doesn't seem possible), or use a different picker? */}
             <Picker style={stepStyles.picker} itemStyle={stepStyles.pickerItem} selectedValue={accessibility} onValueChange={value => setAccessibility(value)}>
               {Object.values(GROUP_ACCESSIBILITY).map(accessibilityValue => (
                 <Picker.Item label={accessibilityDescription(accessibilityValue)}

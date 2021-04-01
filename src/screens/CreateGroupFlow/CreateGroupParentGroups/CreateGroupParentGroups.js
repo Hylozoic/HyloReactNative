@@ -11,13 +11,15 @@ import getMemberships from 'store/selectors/getMemberships'
 import ItemChooserItemRow from 'screens/ItemChooser/ItemChooserItemRow'
 import { white } from 'style/colors'
 import { TouchableOpacity } from 'react-native-gesture-handler'
+import { GROUP_ACCESSIBILITY } from 'store/models/Group'
 
 export default function CreateGroupParentGroups ({ navigation }) {
   const dispatch = useDispatch()
   const [parentIds, setParentGroupIds] = useState([])
   const memberships = useSelector(getMemberships)
-  const myGroups = memberships
-    .map(m => m.group.ref)
+  const parentGroupOptions = memberships
+    .filter(m => m.hasModeratorRole || m.group.accessibility === GROUP_ACCESSIBILITY.Open)
+    .map((m) => m.group)
     .sort((a, b) => a.name.localeCompare(b.name))
 
   const isChosen = item => !!parentIds.find(groupId => groupId == item.id)
@@ -33,12 +35,14 @@ export default function CreateGroupParentGroups ({ navigation }) {
     navigation.navigate('CreateGroupReview')
   }
 
+  
+
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardFriendlyView>
         <Text style={styles.heading}>Is this group a member of other groups?</Text>
         <Text style={stepStyles.subHeading}>Please select below:</Text>
-        <FlatList style={stepStyles.parentGroupListContainer} data={myGroups}
+        <FlatList style={stepStyles.parentGroupListContainer} data={parentGroupOptions}
           renderItem={({ item }) => (
             <ItemChooserItemRow item={item}
               chosen={isChosen(item)}

@@ -47,7 +47,6 @@ export function CreateGroupNavigator () {
         name='CreateGroupReview' component={CreateGroupReview}
         options={buildWorkflowModalScreenOptions({ headerTitle: 'STEP 6/6' })}
       />
-      {/* HOLONIC TODO: Add Group Protected, Restricted and Parent Groups selector */}
     </CreateGroup.Navigator>
   )
 }
