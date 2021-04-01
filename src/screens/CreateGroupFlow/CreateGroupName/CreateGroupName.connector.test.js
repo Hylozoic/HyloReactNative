@@ -36,7 +36,7 @@ describe('mergeProps', () => {
     }
     const mergedProps = mergeProps(state, {}, ownProps)
     expect(mergedProps).toMatchSnapshot()
-    mergedProps.goToCreateGroupUrl()
+    mergedProps.goToNextStep()
     expect(ownProps.navigation.navigate).toHaveBeenCalled()
   })
 })

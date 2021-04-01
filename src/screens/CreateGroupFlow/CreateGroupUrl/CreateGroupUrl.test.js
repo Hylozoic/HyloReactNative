@@ -41,43 +41,40 @@ it('updates state with setInput', () => {
 })
 
 it('sets the initial state with the initial groupUrl prop value', () => {
-  const groupUrl = 'groupUrl'
-  const props = {
-    groupUrl
-  }
+  const groupSlug = 'groupSlug'
+  const props = { groupData: { slug: groupSlug } }
   const renderer = ReactTestRenderer.create(<CreateGroupUrl {...props} />)
   const instance = renderer.getInstance()
-  expect(instance.state.groupUrl).toEqual(groupUrl)
+  expect(instance.state.slug).toEqual(groupSlug)
 })
 
 it('validates the url', () => {
   const renderer = ReactTestRenderer.create(<CreateGroupUrl />)
   const instance = renderer.getInstance()
 
-  let groupUrl = ''
-  instance.validate(groupUrl)
+  let groupSlug = ''
+  instance.validate(groupSlug)
   expect(renderer.toJSON()).toMatchSnapshot()
 
-  groupUrl = 'symbols-fail-regex-*^%'
-  instance.validate(groupUrl)
+  groupSlug = 'symbols-fail-regex-*^%'
+  instance.validate(groupSlug)
   expect(renderer.toJSON()).toMatchSnapshot()
 
-  groupUrl = 'passing-url'
-  expect(instance.validate(groupUrl)).toBeTruthy()
+  groupSlug = 'passing-url'
+  expect(instance.validate(groupSlug)).toBeTruthy()
 })
 
 it('calls fetchGroupExists on checkAndSubmit', () => {
+  const groupSlug = 'passing-url'
   const props = {
+    groupData: { slug: groupSlug },
     fetchGroupExists: jest.fn(() => Promise.resolve({}))
   }
-  const groupUrl = 'passing-url'
   const renderer = ReactTestRenderer.create(<CreateGroupUrl {...props} />)
   const instance = renderer.getInstance()
-  instance.setState({
-    groupUrl
-  })
+  instance.setState({ slug: groupSlug })
   instance.checkAndSubmit()
-  expect(props.fetchGroupExists).toHaveBeenCalledWith(groupUrl)
+  expect(props.fetchGroupExists).toHaveBeenCalledWith(groupSlug)
 })
 
 it('does not call fetchGroupExists on checkAndSubmit with malformed url', () => {
@@ -108,18 +105,18 @@ describe('checkGroupUrlThenRedirect', () => {
     const fetchGroupExists = jest.fn(() => Promise.resolve(result))
     const goToCreateGroupReview = jest.fn()
     const setErrorMessage = jest.fn()
-    const saveGroupUrl = jest.fn()
+    const updateGroupData = jest.fn()
 
-    const groupUrl = 'group-url'
+    const groupSlug = 'group-url'
 
     return checkGroupUrlThenRedirect(
-      groupUrl,
+      groupSlug,
       fetchGroupExists,
       setErrorMessage,
-      saveGroupUrl,
+      updateGroupData,
       goToCreateGroupReview
     ).then(() => {
-      expect(saveGroupUrl).toHaveBeenCalledWith(groupUrl)
+      expect(updateGroupData).toHaveBeenCalledWith({ slug: groupSlug })
       expect(goToCreateGroupReview).toHaveBeenCalled()
     })
   })

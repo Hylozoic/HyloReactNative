@@ -22,16 +22,16 @@ describe('InvitePeople', () => {
 
   it('fetches groups on update', () => {
     const props = {
-      group: { slug: 'foo' },
+      group: { slug: 'foo', settings: { setAllowGroupInvites: false } },
       fetchGroupSettings: jest.fn()
     }
     const prevPropsSameSlug = {
-      group: { slug: 'foo' },
+      group: { slug: 'foo', settings: { setAllowGroupInvites: false } },
       fetchGroupSettings: jest.fn()
     }
 
     const prevPropsDifferentSlug = {
-      group: { slug: 'bar' },
+      group: { slug: 'bar', settings: { setAllowGroupInvites: false } },
       fetchGroupSettings: jest.fn()
     }
 
@@ -46,7 +46,7 @@ describe('InvitePeople', () => {
 
   it('handles tab-view functions', () => {
     const props = {
-      group: { slug: 'foo' },
+      group: { slug: 'foo', settings: { setAllowGroupInvites: false } },
       fetchGroupSettings: jest.fn()
     }
 
@@ -164,16 +164,16 @@ describe('InvitePeople', () => {
   })
 
   it('has toggleAllowGroupInvites and calls the function to make the request on the server', () => {
-    const allowGroupInvites = jest.fn(() => new Promise(() => {}))
+    const setAllowGroupInvites = jest.fn(() => new Promise(() => {}))
     const props = {
       groupId: 1,
       groupMembersCanInvite: false,
-      allowGroupInvites,
+      setAllowGroupInvites,
       fetchGroupSettings: jest.fn(() => new Promise(() => {}))
     }
     const instance = ReactTestRenderer.create(<SendInvitesPage {...props} />).getInstance()
     instance.toggleAllowGroupInvites()
-    expect(allowGroupInvites).toBeCalled()
+    expect(setAllowGroupInvites).toBeCalled()
     expect(instance.state.groupMembersCanInvite).toBeTruthy()
   })
 })

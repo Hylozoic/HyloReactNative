@@ -57,9 +57,7 @@ it('updates state with setInput', () => {
 
 it('sets the initial state with the initial groupName prop value', () => {
   const groupName = 'groupName'
-  const props = {
-    groupName
-  }
+  const props = { groupData: { name: groupName } }
   const renderer = ReactTestRenderer.create(<CreateGroupName {...props} />)
   const instance = renderer.getInstance()
   expect(instance.state.groupName).toEqual(groupName)

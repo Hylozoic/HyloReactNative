@@ -24,20 +24,6 @@ Object {
 }
 `;
 
-exports[`saveGroupName matches snapshot 1`] = `
-Object {
-  "payload": "group name",
-  "type": "CreateGroupFlow/SAVE_GROUP_NAME",
-}
-`;
-
-exports[`saveGroupUrl matches snapshot 1`] = `
-Object {
-  "payload": "group_name",
-  "type": "CreateGroupFlow/SAVE_GROUP_URL",
-}
-`;
-
 exports[`showLoadingModal matches snapshot 1`] = `
 Object {
   "graphql": Object {
@@ -49,6 +35,14 @@ Object {
             id
             name
             slug
+            parentGroups {
+              items {
+                id
+              }
+            }
+          }
+          person {
+            id
           }
         }
       }

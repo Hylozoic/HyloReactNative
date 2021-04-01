@@ -17,21 +17,6 @@ const name = 'group name'
 const slug = 'group_name'
 
 describe('reducer', () => {
-  describe('on UPDATE_GROUP_NAME', () => {
-    const action = {
-      type: UPDATE_GROUP_NAME,
-      payload: name
-    }
-    it('sets display', () => {
-      const state = {
-        group: {
-          name: null
-        }
-      }
-      const newState = reducer(state, action)
-      expect(newState.groupData.name).toEqual(name)
-    })
-  })
   describe('on CLEAR_CREATE_GROUP_STORE', () => {
     const action = {
       type: CLEAR_CREATE_GROUP_STORE
@@ -40,11 +25,11 @@ describe('reducer', () => {
       const state = {
         groupData: {
           name,
-          slug: url
+          slug
         }
       }
       const newState = reducer(state, action)
-      expect(newState).toEqual({defaultState)
+      expect(newState).toEqual(defaultState)
     })
   })
   describe('on FETCH_URL_EXISTS', () => {
@@ -70,11 +55,11 @@ describe('reducer', () => {
 })
 
 describe('showLoadingModal', () => {
-  it('matches snapshot', () => expect(createGroup(name, url)).toMatchSnapshot())
+  it('matches snapshot', () => expect(createGroup({ name, slug })).toMatchSnapshot())
 })
 
 describe('fetchGroupExists', () => {
-  it('matches snapshot', () => expect(fetchGroupExists(url)).toMatchSnapshot())
+  it('matches snapshot', () => expect(fetchGroupExists(slug)).toMatchSnapshot())
 })
 
 
