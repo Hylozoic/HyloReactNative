@@ -5,7 +5,7 @@ import SafeAreaView from 'react-native-safe-area-view'
 import Button from 'components/Button'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 import styles from '../CreateGroupFlow.styles'
-import { updateGroupData } from '../CreateGroupFlow.store'
+import { getGroupData, updateGroupData } from '../CreateGroupFlow.store'
 import getMemberships from 'store/selectors/getMemberships'
 // NOTE: Make a local copy of this if modification is needed
 import ItemChooserItemRow from 'screens/ItemChooser/ItemChooserItemRow'
@@ -14,8 +14,9 @@ import { TouchableOpacity } from 'react-native-gesture-handler'
 import { GROUP_ACCESSIBILITY } from 'store/models/Group'
 
 export default function CreateGroupParentGroups ({ navigation }) {
+  const groupData = useSelector(getGroupData)
   const dispatch = useDispatch()
-  const [parentIds, setParentGroupIds] = useState([])
+  const [parentIds, setParentGroupIds] = useState(groupData.parentIds)
   const memberships = useSelector(getMemberships)
   const parentGroupOptions = memberships
     .filter(m => m.hasModeratorRole || m.group.accessibility === GROUP_ACCESSIBILITY.Open)
