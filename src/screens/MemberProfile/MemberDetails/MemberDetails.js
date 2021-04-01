@@ -14,6 +14,7 @@ import Loading from 'components/Loading'
 import MemberHeader, { Control } from '../MemberHeader'
 import StarIcon from 'components/StarIcon'
 import styles from './MemberDetails.styles'
+import confirmDiscardChanges from 'util/confirmDiscardChanges'
 
 export function editableFields (person) {
   return pick(['name', 'location', 'tagline', 'bio'], person)
@@ -33,7 +34,7 @@ export default class MemberDetails extends React.Component {
 
   setHeader = () => {
     const { editing, changed } = this.state
-    const { navigation, route, currentGroup } = this.props
+    const { navigation, route, currentGroup, logout } = this.props
     const headerTitle = editing
       ? 'Edit Your Profile'
       : currentGroup?.name
@@ -47,6 +48,19 @@ export default class MemberDetails extends React.Component {
         headerRightButtonLabel: editing ? 'Save' : null,
         headerRightButtonOnPress: this.saveChanges,
         headerRightButtonDisabled: !changed || !this.isValid()
+      }))
+    } else if (route.name == 'My Profile') {
+      navigation.setOptions(buildModalScreenOptions({
+        headerTitle: 'My Profile',
+        headerLeftOnPress: () => navigation.navigate('Home'),
+        headerRightButtonLabel: 'Logout',
+        headerRightButtonOnPress: () => confirmDiscardChanges({
+          title: 'Logout',
+          confirmationMessage: 'Are you sure you want to logout?',
+          continueButtonText: 'Cancel',
+          disgardButtonText: 'Yes',
+          onDiscard: logout
+        })
       }))
     } else {  
       navigation.setOptions(buildTabStackScreenOptions({

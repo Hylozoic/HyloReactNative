@@ -5,6 +5,7 @@ Object {
   "blockUser": [Function],
   "fetchPerson": [Function],
   "goToGroup": [Function],
+  "logout": [Function],
   "updateUserSettings": [Function],
 }
 `;

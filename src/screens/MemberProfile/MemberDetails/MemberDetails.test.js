@@ -17,6 +17,10 @@ describe('MemberDetails', () => {
     setOptions: () => {},
     state: {}
   }
+  const route = {
+    name: 'MemberProfile'
+  }
+
   it('matches the last snapshot', () => {
     const renderer = new ReactShallowRenderer()
     renderer.render(
@@ -25,6 +29,7 @@ describe('MemberDetails', () => {
         person={{ id: 1 }}
         goToGroup={() => {}}
         navigation={navigation}
+        route={route}
       />
     )
     const actual = renderer.getRenderOutput()
@@ -34,7 +39,7 @@ describe('MemberDetails', () => {
 
   it("returns Loading when there's no person", () => {
     const renderer = new ReactShallowRenderer()
-    renderer.render(<MemberDetails isFocused navigation={navigation} />)
+    renderer.render(<MemberDetails isFocused navigation={navigation} route={route} />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
@@ -47,7 +52,6 @@ describe('MemberDetails', () => {
           id: 2
         }
       }
-
       const props = {
         isFocused: true,
         person: {
@@ -61,7 +65,8 @@ describe('MemberDetails', () => {
           memberships: { toModelArray: jest.fn(() => []) }
         },
         fetchPerson: () => {},
-        navigation
+        navigation,
+        route
       }
 
       const instance = ReactTestRenderer.create(<MemberDetails {...props} />).getInstance()
@@ -86,7 +91,8 @@ describe('MemberDetails', () => {
           memberships: { toModelArray: jest.fn(() => []) }
         },
         fetchPerson: () => {},
-        navigation
+        navigation,
+        route
       }
 
       const instance = ReactTestRenderer.create(<MemberDetails {...props} />).getInstance()
@@ -110,7 +116,8 @@ describe('MemberDetails', () => {
           memberships: { toModelArray: jest.fn(() => []) }
         },
         fetchPerson: () => {},
-        navigation
+        navigation,
+        route
       }
 
       const instance = ReactTestRenderer.create(<MemberDetails {...props} />).getInstance()
@@ -137,7 +144,8 @@ describe('MemberDetails', () => {
         isFocused: true,
         person: {},
         fetchPerson: () => {},
-        navigation
+        navigation,
+        route
       }
 
       const instance = ReactTestRenderer.create(<MemberDetails {...props} />).getInstance()
@@ -161,7 +169,8 @@ describe('MemberDetails', () => {
           memberships: { toModelArray: jest.fn(() => []) }
         },
         fetchPerson: () => {},
-        navigation
+        navigation,
+        route
       }
 
       const instance = ReactTestRenderer.create(<MemberDetails {...props} />).getInstance()
@@ -186,7 +195,8 @@ describe('MemberDetails', () => {
         },
         fetchPerson: () => {},
         updateUserSettings: jest.fn(),
-        navigation
+        navigation,
+        route
       }
 
       const instance = ReactTestRenderer.create(<MemberDetails {...props} />).getInstance()
@@ -217,7 +227,8 @@ describe('MemberDetails', () => {
         },
         fetchPerson: () => {},
         updateUserSettings: jest.fn(),
-        navigation
+        navigation,
+        route
       }
 
       const instance = ReactTestRenderer.create(<MemberDetails {...props} />).getInstance()

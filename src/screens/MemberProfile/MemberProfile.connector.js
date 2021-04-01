@@ -10,6 +10,7 @@ import getBlockedUsers from 'store/selectors/getBlockedUsers'
 import updateUserSettings from 'store/actions/updateUserSettings'
 import { mapWhenFocused, mergeWhenFocused } from 'util/redux'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
+import { logout } from 'screens/Login/actions'
 
 export function mapStateToProps (state, props) {
   const currentUser = getMe(state, props)
@@ -50,7 +51,8 @@ export function mapDispatchToProps (dispatch, props) {
     ...bindActionCreators({
       fetchPerson,
       updateUserSettings,
-      blockUser
+      blockUser,
+      logout
     }, dispatch)
   }
 }

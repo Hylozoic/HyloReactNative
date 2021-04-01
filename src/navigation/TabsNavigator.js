@@ -6,7 +6,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import { isIOS } from 'util/platform'
 // Helper Components
 import Icon from 'components/Icon'
-import { buildTabStackScreenOptions } from 'navigation/header'
+import { buildModalScreenOptions, buildTabStackScreenOptions } from 'navigation/header'
 // Screens
 import Feed from 'screens/Feed'
 import MembersComponent from 'screens/Members'
@@ -30,30 +30,39 @@ import getMe from 'store/selectors/getMe'
 
 const Messages = createStackNavigator()
 export function MessagesNavigator () {
-  const navigatorProps = {
-    screenOptions: buildTabStackScreenOptions
-  }
+  const navigatorProps = {}
   return (
     <Messages.Navigator {...navigatorProps}>
       <Messages.Screen
         name='Messages' component={ThreadList}
-        // options={({ navigation }) => buildModalScreenOptions({
-        //   headerRightButtonLabel: 'New',
-        //   headerRightButtonOnPress: () => navigation.navigate('New Message'),
-        //   headerLeftOnPress: () => navigation.navigate('Tabs')
-        // })}
+        options={({ navigation }) => buildModalScreenOptions({
+          headerRightButtonLabel: 'New',
+          headerRightButtonOnPress: () => navigation.navigate('New Message'),
+          headerLeftOnPress: () => navigation.navigate('Home')
+        })}
       />
-      <Messages.Screen name='New Message' component={NewMessage} />
+      <Messages.Screen
+        name='New Message' component={NewMessage}
+        options={({ navigation }) => buildModalScreenOptions({
+          headerLeftCloseIcon: false,
+          headerLeftLabel: ' '
+        })}
+      />
       <Messages.Screen
         name='ThreadParticipants' component={ThreadParticipants}
-        options={{ headerTitle: 'Participants' }}
+        options={({ navigation }) => buildModalScreenOptions({
+          headerLeftCloseIcon: false,
+          headerLeftLabel: ' ',
+          headerTitle: 'Participants'
+        })}
       />
       <Messages.Screen
         name='Thread' component={Thread}
-        // options={({ navigation }) => buildModalScreenOptions({
-        //   headerLeftCloseIcon: false,
-        //   headerLeftOnPress: () => navigation.navigate('Messages')
-        // })}
+        options={({ navigation }) => buildModalScreenOptions({
+          headerLeftCloseIcon: false,
+          headerLeftLabel: ' ',
+          headerLeftOnPress: () => navigation.navigate('Messages')
+        })}
       />
     </Messages.Navigator>
   )
@@ -61,12 +70,14 @@ export function MessagesNavigator () {
 
 const Search = createStackNavigator()
 export function SearchNavigator () {
-  const navigatorProps = {
-    screenOptions: buildTabStackScreenOptions
-  }
+  const navigatorProps = {}
   return (
     <Search.Navigator {...navigatorProps}>
-      <Search.Screen name='Search' component={SearchPage} />
+      <Search.Screen name='Search' component={SearchPage}
+        options={({ navigation }) => buildModalScreenOptions({
+          headerLeftOnPress: () => navigation.navigate('Home')
+        })}        
+      />
     </Search.Navigator>
   )
 }
@@ -102,10 +113,14 @@ export function HomeNavigator () {
 const MyProfile = createStackNavigator()
 export function MyProfileNavigator () {
   const navigatorProps = {
-    screenOptions: buildTabStackScreenOptions
+    // screenOptions: buildTabStackScreenOptions
   }
   return <MyProfile.Navigator {...navigatorProps}>
-    <MyProfile.Screen name='My Profile' key='MemberDetails' component={MemberDetails} />
+    <MyProfile.Screen name='My Profile' component={MemberDetails}
+        options={({ navigation }) => buildModalScreenOptions({
+          headerLeftOnPress: () => navigation.navigate('Home')
+        })}
+     />
   </MyProfile.Navigator>
 }
 
@@ -156,8 +171,15 @@ export default function TabsNavigator () {
         name='Profile'
         component={MyProfileNavigator}
         options={{
-          tabBarIcon: ({ focused }) => 
-            <Avatar size='medium' avatarUrl={currentUser.avatarUrl} />
+          tabBarIcon: ({ focused }) => (
+            <Avatar style={{
+              borderWidth: 2,
+              borderColor: focused ? caribbeanGreen : rhino05 }}
+              dimension={34}
+              hasBorder
+              avatarUrl={currentUser.avatarUrl}
+            />
+          )
         }}
       />
     </Tabs.Navigator>

@@ -67,7 +67,10 @@ export function GroupSettingsNavigator () {
       />
       <GroupSettings.Screen name='Group Information' component={GroupSettingsComponent} />
       <GroupSettings.Screen name='Group Moderators' component={ModeratorSettings} />
-      <GroupSettings.Screen name='Invite Members' component={InvitePeople} />
+      <GroupSettings.Screen
+        name='Invite Members' component={InvitePeople}
+        options={buildModalScreenOptions({ headerTitle: 'Invite', headerLeftCloseIcon: true })}
+      />
     </GroupSettings.Navigator>
   )
 }
