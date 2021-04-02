@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native'
 import { isIOS } from 'util/platform'
 import {
-  bigStone, rhino, rhino50, persimmon, rhino40, black10onRhino, white, rhino30, rhino10, rhino60, rhino80, rhino20
+  bigStone, rhino, rhino50, persimmon, rhino40, black10onRhino, white, rhino30, rhino10, rhino60, rhino80, rhino20, nevada, slateGrey80, gunsmoke
 } from 'style/colors'
 
 export default {
@@ -10,6 +10,7 @@ export default {
   },
   sectionHeader: {
     fontWeight: 'bold',
+    color: rhino80,
     padding: 15,
     fontSize: 18
   },
@@ -31,16 +32,17 @@ export default {
     marginRight: 82
   },
   groupRowText: {
+    color: bigStone,
     fontWeight: 'bold',
     marginBottom: 5
   },
   groupRowCounts: {
-    color: rhino60,
+    color: gunsmoke,
     fontSize: 12,
     marginBottom: 5
   },
   groupRowDescription: {
-    color: rhino80
+    color: gunsmoke
   },
   badge: {
     backgroundColor: persimmon,
@@ -60,9 +62,11 @@ export default {
   },
   groupStatusIcon: {
     fontSize: 14,
-    marginRight: 5
+    marginRight: 5,
+    color: rhino80
   },
   groupStatusText: {
     fontSize: 14,
+    color: rhino80
   }
 }
