@@ -1,9 +1,9 @@
 import postFieldsFragment from 'graphql/fragments/postFieldsFragment'
 
-// TODO: change to showing aggregate tree of posts by doing
+// Change to showing aggregate tree of posts by doing
 // posts: viewPosts(
 const groupViewPostsQueryFragment = `
-posts(
+posts: viewPosts(
   boundingBox: $boundingBox,
   filter: $filter,
   first: $first,

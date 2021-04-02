@@ -16,14 +16,16 @@ export function fetchMemberPosts ({ id, first = 10, offset }) {
     type: FETCH_MEMBER_POSTS,
     graphql: {
       query: `query MemberPosts (
-        $id: ID,
-        $sortBy: String,
-        $offset: Int,
-        $search: String,
+        $boundingBox: [PointInput],
         $filter: String,
         $first: Int,
-        $topic: ID,
-        $boundingBox: [PointInput]
+        $groupSlugs: [String],
+        $id: ID,
+        $offset: Int,
+        $context: String,
+        $search: String,
+        $sortBy: String,
+        $topic: ID
       ) {
         person (id: $id) {
           id
