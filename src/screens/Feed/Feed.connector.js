@@ -87,7 +87,7 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     newPost: () => dispatchProps.newPost(groupId, topicName),
     showTopic: selectedTopicName => {
       if (selectedTopicName == topicName) return
-      //   return showToast('Topics support for "All Groups" and Networks coming soon!')
+      //   return showToast('Topics support for "All My Groups" and Networks coming soon!')
       if (topicName) {
         navigation.setParams({ topicName: selectedTopicName })
       } else {

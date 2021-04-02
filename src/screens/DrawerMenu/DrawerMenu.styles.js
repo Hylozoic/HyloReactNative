@@ -1,148 +1,86 @@
 import { StyleSheet } from 'react-native'
 import { isIOS } from 'util/platform'
-import mixins from 'style/mixins'
 import {
-  bigStone, mirage, rhino, rhino50, persimmon, rhino40, black10onRhino, white
+  bigStone, rhino, rhino50, persimmon, rhino40, black10onRhino, white, rhino30
 } from 'style/colors'
 
-const defaultPadding = {
-  paddingHorizontal: 15
-}
-
 export default {
-  defaultPadding,
-  parent: {
-    ...mixins.belowStatusBar,
+  container: {
     flex: 1,
     backgroundColor: rhino
   },
-  search: {
-    backgroundColor: mirage,
-    height: 36,
-    borderRadius: 36,
-    marginLeft: 15,
-    marginRight: 20,
-    borderWidth: 0.5,
-    borderColor: 'black',
-    marginBottom: 0,
-    flex: 1,
+
+  // Header
+  headerBackgroundImage: {},
+  headerBannerGradient: {
+    position: 'absolute',
+    width: '100%',
+    height: '100%'
+  },
+  headerContent: {
+    flexDirection: 'column',
+    alignItems: 'center',
+    padding: 15,
+    paddingTop: 40,
+    paddingBottom: 20
+  },
+  headerAvatar: {
+    height: 42,
+    width: 42,
+    borderRadius: 4,
+    marginBottom: 6
+  },
+  headerText: {
+    fontFamily: 'Circular-Bold',
+    marginBottom: 10,
+    color: white,
+    fontSize: 20,
+    textShadowColor: 'rgba(0, 0, 0, 0.25)',
+    textShadowOffset: { width: 0, height: 2 },
+    textShadowRadius: 7
+  },
+  currentGroupButtons: {
     flexDirection: 'row'
   },
-  searchIcon: {
-    color: 'white',
-    opacity: 0.5,
-    backgroundColor: 'transparent',
-    fontSize: 24,
-    marginTop: 8,
-    marginLeft: 12
+  currentGroupButton: {
+    flex: 0.33,
+    paddingHorizontal: 5,
+    backgroundColor: 'none'
   },
-  searchText: {
-    marginTop: 10,
-    marginLeft: 6,
-    marginRight: 15,
-    color: 'white',
-    opacity: 0.5,
-    fontSize: 15
-  },
-  footer: {
-    backgroundColor: bigStone,
-    padding: 10,
-    paddingBottom: isIOS ? 30 : 10,
-    flexDirection: 'row',
-    alignItems: 'stretch'
-  },
-  footerContent: {
-    flex: 1,
-    marginLeft: 10
-  },
-  avatar: {
-    width: 40,
-    height: 40,
-    borderRadius: 20
-  },
-  footerTopText: {
-    color: 'white',
-    fontSize: 16
-  },
-  footerText: {
-    color: 'white',
-    fontSize: 14
-  },
-  footerButtons: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginTop: 4
-  },
-  footerButton: {
-    marginRight: 30
-  },
+
+
+  // Groups rows
   sectionHeader: {
-    ...defaultPadding,
-    marginTop: 10,
-    marginBottom: 10
+    marginTop: 20
   },
   sectionHeaderText: {
     color: rhino50,
     fontFamily: 'Circular-Book',
     fontSize: 12
   },
-  networkRow: {
-    ...defaultPadding
-  },
-  networkRowCollapsed: {
-    paddingTop: 10
-  },
-  networkRowExpanded: {
-    backgroundColor: black10onRhino,
-    paddingTop: 10,
-    paddingBottom: 5
+  groupSectionSeparator: {
+    marginHorizontal: 15,
+    marginTop: -10,
+    marginBottom: 10,
+    borderBottomColor: rhino30,
+    borderBottomWidth: StyleSheet.hairlineWidth
   },
   rowTouchable: {
     flexDirection: 'row',
     alignItems: 'center'
   },
-  networkRowTouchable: {
-    marginBottom: 5
-  },
-  networkAvatar: {
-    height: 32,
-    width: 32,
-    marginRight: 8,
-    borderRadius: 4
-  },
-  networkRowText: {
-    fontFamily: 'Circular-Bold',
-    color: 'white',
-    flex: 1,
-    fontSize: 15
-  },
-  networkOpenWrapper: {
-    borderLeftWidth: 1,
-    borderColor: rhino40,
-    paddingLeft: 14
-  },
-  networkOpenIcon: {
-    color: 'white',
-    fontSize: 25
-  },
-  seeAll: {
-    color: rhino40,
-    textAlign: 'center',
-    paddingTop: 5,
-    paddingBottom: 3
-  },
   groupRow: {
     marginLeft: 10,
-    paddingVertical: 10
+    paddingVertical: 10,
+    paddingHorizontal: 10
   },
   allFeedsIcon: {
     marginLeft: 5,
     marginRight: 11
   },
   groupAvatar: {
-    height: 21,
-    width: 21,
+    height: 24,
+    width: 24,
     marginRight: 8,
     borderRadius: 4
   },
@@ -150,7 +88,7 @@ export default {
     fontFamily: 'Circular-Book',
     color: rhino40,
     flex: 1,
-    fontSize: 15
+    fontSize: 16
   },
   highlight: {
     color: 'white',
@@ -171,6 +109,8 @@ export default {
     color: 'white',
     fontSize: 12
   },
+
+  // Footer
   createGroupButton: {
     backgroundColor: black10onRhino,
     paddingTop: 15,
@@ -180,42 +120,33 @@ export default {
     paddingRight: '7%',
     paddingLeft: '7%'
   },
-  header: {
-    width: '94%',
-    marginLeft: '3%',
-    flexDirection: 'column',
-    alignItems: 'center',
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderColor: white,
-    paddingBottom: 18,
-    marginBottom: 10
-  },
-  headerAvatar: {
-    marginTop: 18,
-    height: 42,
-    width: 42,
-    borderRadius: 4
-  },
-  headerText: {
-    fontFamily: 'Circular-Bold',
-    color: white,
-    marginTop: 10,
-    fontSize: 24
-  },
-  headerSettingsButton: {
+  footer: {
+    backgroundColor: bigStone,
+    padding: 10,
+    paddingBottom: isIOS ? 30 : 10,
     flexDirection: 'row',
-    alignItems: 'center',
-    marginTop: 15
+    alignItems: 'stretch'
   },
-  headerSettingsButtonIcon: {
-    fontFamily: 'Circular-Book',
-    color: white,
-    marginRight: 6,
+  footerContent: {
+    flex: 1,
+    marginLeft: 10
+  },
+  footerTopText: {
+    color: 'white',
     fontSize: 16
   },
-  headerSettingsButtonText: {
-    fontFamily: 'Circular-Book',
-    color: white,
-    fontSize: 18
-  }
+  footerText: {
+    color: 'white',
+    fontSize: 14
+  },
+  footerButtons: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 4
+  },
+  footerButton: {
+    marginRight: 30
+  },
+
 }

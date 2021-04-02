@@ -3,7 +3,17 @@
 exports[`getEmptyState matches last snapshot 1`] = `
 Object {
   "CommentEditor": Object {},
-  "CreateGroupFlow": Object {},
+  "CreateGroupFlow": Object {
+    "edited": false,
+    "groupData": Object {
+      "accessibility": 1,
+      "name": "",
+      "parentIds": Array [],
+      "slug": "",
+      "visibility": 1,
+    },
+    "urlExists": false,
+  },
   "FeedList": Object {
     "filter": null,
     "sortBy": "updated",
@@ -75,7 +85,17 @@ Object {
     "Comment": Object {
       "indexes": Object {
         "creator": Object {},
+        "parentComment": Object {},
         "post": Object {},
+      },
+      "items": Array [],
+      "itemsById": Object {},
+      "meta": Object {},
+    },
+    "EventInvitation": Object {
+      "indexes": Object {
+        "event": Object {},
+        "person": Object {},
       },
       "items": Array [],
       "itemsById": Object {},
@@ -89,10 +109,18 @@ Object {
       "itemsById": Object {},
       "meta": Object {},
     },
-    "GroupConnection": Object {
+    "GroupJoinQuestion": Object {
       "indexes": Object {
-        "childGroup": Object {},
-        "parentGroup": Object {},
+        "group": Object {},
+      },
+      "items": Array [],
+      "itemsById": Object {},
+      "meta": Object {},
+    },
+    "GroupJoinQuestions": Object {
+      "indexes": Object {
+        "fromGroupId": Object {},
+        "toGroupJoinQuestionId": Object {},
       },
       "items": Array [],
       "itemsById": Object {},
@@ -125,6 +153,25 @@ Object {
       "itemsById": Object {},
       "meta": Object {},
     },
+    "GroupRelationship": Object {
+      "indexes": Object {
+        "childGroup": Object {},
+        "parentGroup": Object {},
+      },
+      "items": Array [],
+      "itemsById": Object {},
+      "meta": Object {},
+    },
+    "GroupRelationshipInvite": Object {
+      "indexes": Object {
+        "createdBy": Object {},
+        "fromGroup": Object {},
+        "toGroup": Object {},
+      },
+      "items": Array [],
+      "itemsById": Object {},
+      "meta": Object {},
+    },
     "GroupTopic": Object {
       "indexes": Object {
         "group": Object {},
@@ -137,6 +184,32 @@ Object {
     "Invitation": Object {
       "indexes": Object {
         "group": Object {},
+      },
+      "items": Array [],
+      "itemsById": Object {},
+      "meta": Object {},
+    },
+    "JoinRequest": Object {
+      "indexes": Object {
+        "group": Object {},
+        "user": Object {},
+      },
+      "items": Array [],
+      "itemsById": Object {},
+      "meta": Object {},
+    },
+    "JoinRequestQuestionAnswer": Object {
+      "indexes": Object {
+        "question": Object {},
+      },
+      "items": Array [],
+      "itemsById": Object {},
+      "meta": Object {},
+    },
+    "JoinRequestQuestionAnswers": Object {
+      "indexes": Object {
+        "fromJoinRequestId": Object {},
+        "toJoinRequestQuestionAnswerId": Object {},
       },
       "items": Array [],
       "itemsById": Object {},
@@ -160,6 +233,15 @@ Object {
       "indexes": Object {
         "fromMeId": Object {},
         "toPersonId": Object {},
+      },
+      "items": Array [],
+      "itemsById": Object {},
+      "meta": Object {},
+    },
+    "MeJoinRequests": Object {
+      "indexes": Object {
+        "fromMeId": Object {},
+        "toJoinRequestId": Object {},
       },
       "items": Array [],
       "itemsById": Object {},
@@ -213,6 +295,7 @@ Object {
     "Membership": Object {
       "indexes": Object {
         "group": Object {},
+        "person": Object {},
       },
       "items": Array [],
       "itemsById": Object {},
@@ -242,6 +325,15 @@ Object {
       "itemsById": Object {},
       "meta": Object {},
     },
+    "MySkillsToLearn": Object {
+      "indexes": Object {
+        "me": Object {},
+        "skillToLearn": Object {},
+      },
+      "items": Array [],
+      "itemsById": Object {},
+      "meta": Object {},
+    },
     "Notification": Object {
       "indexes": Object {
         "activity": Object {},
@@ -266,19 +358,19 @@ Object {
       "itemsById": Object {},
       "meta": Object {},
     },
-    "PersonMemberships": Object {
+    "PersonSkills": Object {
       "indexes": Object {
         "fromPersonId": Object {},
-        "toMembershipId": Object {},
+        "toSkillId": Object {},
       },
       "items": Array [],
       "itemsById": Object {},
       "meta": Object {},
     },
-    "PersonSkills": Object {
+    "PersonSkillsToLearn": Object {
       "indexes": Object {
-        "fromPersonId": Object {},
-        "toSkillId": Object {},
+        "person": Object {},
+        "skillToLearn": Object {},
       },
       "items": Array [],
       "itemsById": Object {},
@@ -351,6 +443,12 @@ Object {
         "member": Object {},
         "post": Object {},
       },
+      "items": Array [],
+      "itemsById": Object {},
+      "meta": Object {},
+    },
+    "Question": Object {
+      "indexes": Object {},
       "items": Array [],
       "itemsById": Object {},
       "meta": Object {},

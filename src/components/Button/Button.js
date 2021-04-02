@@ -32,9 +32,9 @@ export default function Button (props) {
     ], providedStyles)
   }
 
-  const backgroundColor = (disabled
+  const backgroundColor = disabled
     ? providedStyles.disabledBackgroundColor
-    : providedStyles.backgroundColor) || caribbeanGreen
+    : providedStyles.backgroundColor || caribbeanGreen
   const buttonStyle = { ...styles.button, backgroundColor, height, borderRadius, borderColor }
   const textStyle = { ...styles.text, color, fontSize }
   const iconStyle = { ...styles.icon, color, ...providedStyles.icon }

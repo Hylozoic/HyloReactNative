@@ -33,20 +33,30 @@ Object {
     Object {
       "avatarUrl": undefined,
       "bannerUrl": undefined,
-      "groups": Array [],
+      "childGroups": Object {
+        "toModelArray": [Function],
+      },
       "headerAvatarUrl": undefined,
-      "id": "public-context",
-      "name": "Public Groups & Posts",
-      "slug": "public-context",
+      "id": "public",
+      "name": "Public Groups",
+      "parentGroups": Object {
+        "toModelArray": [Function],
+      },
+      "slug": "public",
     },
     Object {
       "avatarUrl": undefined,
       "bannerUrl": undefined,
-      "groups": Array [],
+      "childGroups": Object {
+        "toModelArray": [Function],
+      },
       "headerAvatarUrl": undefined,
-      "id": "all-groups",
-      "name": "All Groups",
-      "slug": "all-groups",
+      "id": "all",
+      "name": "All My Groups",
+      "parentGroups": Object {
+        "toModelArray": [Function],
+      },
+      "slug": "all",
     },
   ],
 }
@@ -61,6 +71,7 @@ Object {
   "goToCreateGroup": [Function],
   "goToGroup": [Function],
   "goToGroupSettingsMenu": [Function],
+  "goToInvitePeople": [Function],
   "goToMyProfile": [Function],
   "name": "Roy Rogers",
   "navigation": Object {
@@ -68,7 +79,6 @@ Object {
     "navigate": [MockFunction],
   },
   "selectGroup": [MockFunction],
-  "showSettings": [Function],
 }
 `;
 
@@ -80,7 +90,8 @@ Object {
   },
   "goToCreateGroup": [Function],
   "goToGroup": [Function],
-  "goToGroupSettingsMenu": false,
+  "goToGroupSettingsMenu": [Function],
+  "goToInvitePeople": [Function],
   "goToMyProfile": [Function],
   "name": "Roy Rogers",
   "navigation": Object {
@@ -88,6 +99,5 @@ Object {
     "navigate": [MockFunction],
   },
   "selectGroup": [MockFunction],
-  "showSettings": [Function],
 }
 `;

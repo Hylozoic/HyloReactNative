@@ -14,6 +14,7 @@ import Loading from 'components/Loading'
 import MemberHeader, { Control } from '../MemberHeader'
 import StarIcon from 'components/StarIcon'
 import styles from './MemberDetails.styles'
+import confirmDiscardChanges from 'util/confirmDiscardChanges'
 
 export function editableFields (person) {
   return pick(['name', 'location', 'tagline', 'bio'], person)
@@ -33,19 +34,33 @@ export default class MemberDetails extends React.Component {
 
   setHeader = () => {
     const { editing, changed } = this.state
-    const { navigation, route } = this.props
+    const { navigation, route, currentGroup, logout } = this.props
     const headerTitle = editing
       ? 'Edit Your Profile'
-      : `About`
+      : currentGroup?.name
     if (editing) {
       navigation.setOptions(buildModalScreenOptions({
         route,
         navigation,
         headerTitle,
+        headerLeftOnPress: () => this.saveChanges(),
         headerLeftConfirm: changed,
         headerRightButtonLabel: editing ? 'Save' : null,
         headerRightButtonOnPress: this.saveChanges,
         headerRightButtonDisabled: !changed || !this.isValid()
+      }))
+    } else if (route.name == 'My Profile') {
+      navigation.setOptions(buildModalScreenOptions({
+        headerTitle: 'My Profile',
+        headerLeftOnPress: () => navigation.navigate('Home'),
+        headerRightButtonLabel: 'Logout',
+        headerRightButtonOnPress: () => confirmDiscardChanges({
+          title: 'Logout',
+          confirmationMessage: 'Are you sure you want to logout?',
+          continueButtonText: 'Cancel',
+          disgardButtonText: 'Yes',
+          onDiscard: logout
+        })
       }))
     } else {  
       navigation.setOptions(buildTabStackScreenOptions({
@@ -112,7 +127,7 @@ export default class MemberDetails extends React.Component {
   }
 
   render () {
-    const { goToGroup, goToSkills, isMe, person, skills, onPressMessages } = this.props
+    const { goToGroup, goToSkills, isMe, person, goToEditAccount, onPressMessages } = this.props
     const { editing, errors } = this.state
     const personEdits = this.state.person
 
@@ -125,6 +140,7 @@ export default class MemberDetails extends React.Component {
           isMe={isMe}
           onPressMessages={onPressMessages}
           editProfile={this.editProfile}
+          editAccount={goToEditAccount}
           saveChanges={this.saveChanges}
           editable={editing}
           updateSetting={this.updateSetting}
@@ -137,12 +153,12 @@ export default class MemberDetails extends React.Component {
           isMe={isMe}
         />
         <MemberSkills
-          skills={skills}
+          skills={person.skills.toRefArray()}
           editable={editing}
           goToSkills={goToSkills}
         />
         <MemberGroups
-          person={person}
+          memberships={person.memberships.toModelArray()}
           goToGroup={goToGroup}
           editing={editing}
         />
@@ -205,12 +221,12 @@ export function MemberSkills ({ skills, editable, goToSkills }) {
   )
 }
 
-export function MemberGroups ({ person: { memberships }, goToGroup, editing }) {
+export function MemberGroups ({ memberships, goToGroup, editing }) {
   if (isEmpty(memberships)) return null
 
   return (
     <View style={styles.groupsContainer}>
-      <Text style={styles.sectionLabel}>My Hylo Groups</Text>
+      <Text style={styles.sectionLabel}>My Groups</Text>
       {memberships.map(membership =>
         <GroupRow membership={membership} key={membership.id} goToGroup={goToGroup} editing={editing} />)}
     </View>

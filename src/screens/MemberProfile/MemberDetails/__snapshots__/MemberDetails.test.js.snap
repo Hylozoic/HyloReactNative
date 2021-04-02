@@ -55,38 +55,11 @@ exports[`MemberBio matches the last snapshot 1`] = `
 </View>
 `;
 
-exports[`MemberGroups matches the last snapshot 1`] = `
-<View>
-  <Text>
-    My Hylo Groups
-  </Text>
-  <GroupRow
-    membership={
-      Object {
-        "id": 1,
-      }
-    }
-  />
-  <GroupRow
-    membership={
-      Object {
-        "id": 2,
-      }
-    }
-  />
-  <GroupRow
-    membership={
-      Object {
-        "id": 3,
-      }
-    }
-  />
-</View>
-`;
-
 exports[`MemberDetails matches the last snapshot 1`] = `<Loading />`;
 
 exports[`MemberDetails returns Loading when there's no person 1`] = `<Loading />`;
+
+exports[`MemberGroups matches the last snapshot 1`] = `null`;
 
 exports[`MemberSkills matches the last snapshot 1`] = `
 <View>

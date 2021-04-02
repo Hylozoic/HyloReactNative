@@ -2,37 +2,45 @@
 
 exports[`DrawerMenu matches the last snapshot 1`] = `
 <View>
-  <View>
-    <Image
-      source={
-        Object {
-          "uri": "someurl",
-        }
+  <ImageBackground
+    source={null}
+  >
+    <MockLinearGradient
+      colors={
+        Array [
+          "rgba(0, 0, 0, 0)",
+          "rgba(0, 0, 0, 0.1)",
+          "rgba(0, 0, 0, 0.3)",
+          "rgba(0, 0, 0, 0.6)",
+        ]
       }
     />
-    <Text>
-      foo
-    </Text>
-    <ForwardRef
-      hitSlop={
-        Object {
-          "bottom": 5,
-          "left": 10,
-          "right": 10,
-          "top": 5,
+    <View>
+      <Image
+        source={
+          Object {
+            "uri": "someurl",
+          }
         }
-      }
-      onPress={[MockFunction]}
-    >
-      <Icon
-        name="Settings"
       />
       <Text>
-        Settings
+        foo
       </Text>
-    </ForwardRef>
-  </View>
+      <View>
+        <Button
+          iconName="Settings"
+          onPress={[MockFunction]}
+          text="Settings"
+        />
+        <Button
+          iconName="Invite"
+          text="Invite"
+        />
+      </View>
+    </View>
+  </ImageBackground>
   <SectionList
+    SectionSeparatorComponent={[Function]}
     data={Array []}
     disableVirtualization={false}
     horizontal={false}
@@ -52,7 +60,6 @@ exports[`DrawerMenu matches the last snapshot 1`] = `
         Object {
           "data": undefined,
           "keyExtractor": [Function],
-          "label": "My Groups",
           "renderItem": [Function],
         },
       ]
@@ -62,36 +69,8 @@ exports[`DrawerMenu matches the last snapshot 1`] = `
     windowSize={21}
   />
   <Button
-    text="Create a Group"
+    text="Start a Group"
   />
-  <View>
-    <ForwardRef
-      onPress={[Function]}
-    >
-      <Image
-        source={
-          Object {
-            "uri": "http://anyurl",
-          }
-        }
-      />
-    </ForwardRef>
-    <View>
-      <Text
-        numberOfLines={1}
-      >
-        Hello, 
-        Roy Rogers
-        !
-      </Text>
-      <View>
-        <TextButton
-          onPress={[Function]}
-          text="Settings"
-        />
-      </View>
-    </View>
-  </View>
   <Memo(Connect(SocketListener)) />
 </View>
 `;

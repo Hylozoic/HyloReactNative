@@ -36,11 +36,6 @@ exports[`MemberHeader matches the last snapshot 1`] = `
       value="Jonas"
     />
     <View>
-      <ForwardRef>
-        <Icon
-          name="Messages"
-        />
-      </ForwardRef>
       <MemberMenu
         blockUser={[Function]}
         flagMember={[Function]}
@@ -51,6 +46,7 @@ exports[`MemberHeader matches the last snapshot 1`] = `
   </View>
   <Control
     isMe={true}
+    multiline={true}
     onChangeText={[Function]}
     placeholder="Location"
     value="whale"

@@ -1,25 +1,32 @@
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { get } from 'lodash/fp'
-import { getPerson, fetchPerson } from './MemberProfile.store'
+import { fetchPerson } from './MemberProfile.store'
 import blockUser from 'store/actions/blockUser'
 import makeGoToGroup from 'store/actions/makeGoToGroup'
 import getMe from 'store/selectors/getMe'
+import getPerson from 'store/selectors/getPerson'
 import getBlockedUsers from 'store/selectors/getBlockedUsers'
 import updateUserSettings from 'store/actions/updateUserSettings'
 import { mapWhenFocused, mergeWhenFocused } from 'util/redux'
+import getCurrentGroup from 'store/selectors/getCurrentGroup'
+import { logout } from 'screens/Login/actions'
 
 export function mapStateToProps (state, props) {
+  const currentUser = getMe(state, props)
+  const currentGroup = getCurrentGroup(state, props)
   const id = get('route.params.id', props)
+  const person = id
+    ? getPerson(state, { personId: id })
+    : currentUser
+  const isMe = Number(get('id', currentUser)) === Number(get('id', person))
+
   const editing = get('route.params.editing', props)
   const isBlocked = !!getBlockedUsers(state).find(i => get('id', i) === id)
-  const person = getPerson(state, { id })
   const goToDetails = () => props.navigation.navigate('MemberDetails', { id })
   const goToEdit = () => props.navigation.navigate('MemberDetails', { id, editing: true })
+  const goToEditAccount = () => props.navigation.navigate('Edit Account Info')
   const goToSkills = () => props.navigation.navigate('MemberSkillEditor', { id })
-  const currentUser = getMe(state, props)
-  const skills = person ? person.skills : []
-  const isMe = Number(get('id', currentUser)) === Number(id)
   const navigation = props.navigation
 
   return {
@@ -28,9 +35,10 @@ export function mapStateToProps (state, props) {
     editing,
     person,
     currentUser,
-    skills,
+    currentGroup,
     goToDetails,
     goToEdit,
+    goToEditAccount,
     goToSkills,
     isMe,
     navigation
@@ -43,7 +51,8 @@ export function mapDispatchToProps (dispatch, props) {
     ...bindActionCreators({
       fetchPerson,
       updateUserSettings,
-      blockUser
+      blockUser,
+      logout
     }, dispatch)
   }
 }
@@ -84,8 +93,4 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
   }
 }
 
-export default connect(
-  mapWhenFocused(mapStateToProps),
-  mapWhenFocused(mapDispatchToProps),
-  mergeWhenFocused(mergeProps)
-)
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps)

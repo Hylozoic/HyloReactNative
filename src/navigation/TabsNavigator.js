@@ -1,11 +1,12 @@
 import React from 'react'
-import { View, StyleSheet } from 'react-native'
+import { useSelector } from 'react-redux'
+import { StyleSheet } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { createStackNavigator } from '@react-navigation/stack'
 import { isIOS } from 'util/platform'
 // Helper Components
 import Icon from 'components/Icon'
-import { buildTabStackScreenOptions } from 'navigation/header'
+import { buildModalScreenOptions, buildTabStackScreenOptions } from 'navigation/header'
 // Screens
 import Feed from 'screens/Feed'
 import MembersComponent from 'screens/Members'
@@ -15,16 +16,70 @@ import PostDetails from 'screens/PostDetails'
 import MemberDetails from 'screens/MemberProfile/MemberDetails'
 import MemberSkillEditor from 'screens/MemberProfile/MemberSkillEditor'
 import ProjectMembers from 'screens/ProjectMembers/ProjectMembers'
+import GroupNavigation from 'screens/GroupNavigation'
 import { caribbeanGreen, gainsboro, gunsmoke, rhino05, white } from 'style/colors'
+import Groups from 'screens/Groups'
+import GroupDetail from 'screens/GroupDetail'
+import NewMessage from 'screens/NewMessage'
+import Thread from 'screens/Thread'
+import ThreadList from 'screens/ThreadList'
+import ThreadParticipants from 'screens/ThreadParticipants'
+import SearchPage from 'screens/SearchPage'
+import Avatar from 'components/Avatar'
+import getMe from 'store/selectors/getMe'
 
-export function getScreensInCommon (Stack) {
-  return [
-    <Stack.Screen name='Topic Feed' key='Topic Feed' component={Feed} />,
-    <Stack.Screen name='Post Details' key='Post Details' component={PostDetails} />,
-    <Stack.Screen name='Project Members' key='Project Members' component={ProjectMembers} />,
-    <Stack.Screen name='Member' key='Member' component={MemberProfile} />,
-    <Stack.Screen name='MemberDetails' key='MemberDetails' component={MemberDetails} />
-  ]
+const Messages = createStackNavigator()
+export function MessagesNavigator () {
+  const navigatorProps = {}
+  return (
+    <Messages.Navigator {...navigatorProps}>
+      <Messages.Screen
+        name='Messages' component={ThreadList}
+        options={({ navigation }) => buildModalScreenOptions({
+          headerRightButtonLabel: 'New',
+          headerRightButtonOnPress: () => navigation.navigate('New Message'),
+          headerLeftOnPress: () => navigation.navigate('Home')
+        })}
+      />
+      <Messages.Screen
+        name='New Message' component={NewMessage}
+        options={({ navigation }) => buildModalScreenOptions({
+          headerLeftCloseIcon: false,
+          headerLeftLabel: ' '
+        })}
+      />
+      <Messages.Screen
+        name='ThreadParticipants' component={ThreadParticipants}
+        options={({ navigation }) => buildModalScreenOptions({
+          headerLeftCloseIcon: false,
+          headerLeftLabel: ' ',
+          headerTitle: 'Participants'
+        })}
+      />
+      <Messages.Screen
+        name='Thread' component={Thread}
+        options={({ navigation }) => buildModalScreenOptions({
+          headerLeftCloseIcon: false,
+          headerLeftLabel: ' ',
+          headerLeftOnPress: () => navigation.navigate('Messages')
+        })}
+      />
+    </Messages.Navigator>
+  )
+}
+
+const Search = createStackNavigator()
+export function SearchNavigator () {
+  const navigatorProps = {}
+  return (
+    <Search.Navigator {...navigatorProps}>
+      <Search.Screen name='Search' component={SearchPage}
+        options={({ navigation }) => buildModalScreenOptions({
+          headerLeftOnPress: () => navigation.navigate('Home')
+        })}        
+      />
+    </Search.Navigator>
+  )
 }
 
 const Home = createStackNavigator()
@@ -34,54 +89,39 @@ export function HomeNavigator () {
   }
   return (
     <Home.Navigator {...navigatorProps}>
+      <Home.Screen name='Group Navigation' component={GroupNavigation} />
       <Home.Screen name='Feed' component={Feed} />
-      {getScreensInCommon(Home)}
-    </Home.Navigator>
-  )
-}
-
-const Members = createStackNavigator()
-export function MembersNavigator () {
-  const navigatorProps = {
-    screenOptions: buildTabStackScreenOptions
-  }
-  return (
-    <Members.Navigator {...navigatorProps}>
-      <Members.Screen name='Members' component={MembersComponent} />
-      <Members.Screen
+      <Home.Screen name='Topic Feed' key='Topic Feed' component={Feed} />
+      <Home.Screen name='Post Details' key='Post Details' component={PostDetails} />
+      <Home.Screen name='Projects' component={Feed} initialParams={{ isProjectFeed: true }} />
+      <Home.Screen name='Project Members' key='Project Members' component={ProjectMembers} />
+      <Home.Screen name='Members' component={MembersComponent} />
+      <Home.Screen name='Member' key='Member' component={MemberProfile} />
+      <Home.Screen name='MemberDetails' key='MemberDetails' component={MemberDetails} />
+      <Home.Screen
         name='MemberSkillEditor'
         component={MemberSkillEditor}
         options={{ headerTitle: 'Edit Skills' }}
       />
-      {getScreensInCommon(Members)}
-    </Members.Navigator>
+      <Home.Screen name='Group Relationships' component={Groups} />
+      <Home.Screen name='Group Details' component={GroupDetail} />
+      <Home.Screen name='Topics' component={TopicsComponent} />
+    </Home.Navigator>
   )
 }
 
-const Topics = createStackNavigator()
-export function TopicsNavigator () {
+const MyProfile = createStackNavigator()
+export function MyProfileNavigator () {
   const navigatorProps = {
-    screenOptions: buildTabStackScreenOptions
+    // screenOptions: buildTabStackScreenOptions
   }
-  return (
-    <Topics.Navigator {...navigatorProps}>
-      <Topics.Screen name='Topics' component={TopicsComponent} />
-      {getScreensInCommon(Topics)}
-    </Topics.Navigator>
-  )
-}
-
-const Projects = createStackNavigator()
-export function ProjectsNavigator () {
-  const navigatorProps = {
-    screenOptions: buildTabStackScreenOptions
-  }
-  return (
-    <Projects.Navigator {...navigatorProps}>
-      <Projects.Screen name='Projects' component={Feed} initialParams={{ isProjectFeed: true }} />
-      {getScreensInCommon(Projects)}
-    </Projects.Navigator>
-  )
+  return <MyProfile.Navigator {...navigatorProps}>
+    <MyProfile.Screen name='My Profile' component={MemberDetails}
+        options={({ navigation }) => buildModalScreenOptions({
+          headerLeftOnPress: () => navigation.navigate('Home')
+        })}
+     />
+  </MyProfile.Navigator>
 }
 
 const Tabs = createBottomTabNavigator()
@@ -112,7 +152,7 @@ export default function TabsNavigator () {
       tabBarIcon: ({ focused }) => (
         <Icon
           name={route.name}
-          size={24}
+          size={30}
           color={focused ? caribbeanGreen : gunsmoke}
           style={{ paddingTop: isIOS ? 0 : 5 }}
         />
@@ -120,12 +160,28 @@ export default function TabsNavigator () {
       tabBarLabel: () => null
     })
   }
+  const currentUser = useSelector(getMe)
+
   return (
     <Tabs.Navigator {...navigatorProps}>
       <Tabs.Screen name='Home' component={HomeNavigator} />
-      <Tabs.Screen name='Members' component={MembersNavigator} />
-      <Tabs.Screen name='Topics' component={TopicsNavigator} />
-      <Tabs.Screen name='Projects' component={ProjectsNavigator} />
+      <Tabs.Screen name='Search' component={SearchNavigator} />
+      <Tabs.Screen name='Messages' component={MessagesNavigator} />
+      <Tabs.Screen
+        name='Profile'
+        component={MyProfileNavigator}
+        options={{
+          tabBarIcon: ({ focused }) => (
+            <Avatar style={{
+              borderWidth: 2,
+              borderColor: focused ? caribbeanGreen : rhino05 }}
+              dimension={34}
+              hasBorder
+              avatarUrl={currentUser?.avatarUrl}
+            />
+          )
+        }}
+      />
     </Tabs.Navigator>
   )
 }

@@ -25,7 +25,7 @@ export const prefixes = [
 // doesn't allow for multiple paths to match to the same
 // screen.
 export const routesConfig = {
-  '/c/:slug/join/:accessCode?':                              'JoinGroup',
+  '/groups/:slug/join/:accessCode?':                              'JoinGroup',
   // http://hylo.com/h/use-invitation?token=ebda24b2-d5d7-4d10-8558-b160e6f5d362&email=lorenjohnson+invitetest111@gmail.com&utm_swu=9555
   '/h/use-invitation/:token?':                               'JoinGroup',
   '/signup':                                                 'Signup',

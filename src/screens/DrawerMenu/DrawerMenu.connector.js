@@ -10,11 +10,11 @@ import getCanModerate from 'store/selectors/getCanModerate'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
 
 export function mapStateToProps (state, props) {
-  const memberships = getMemberships(state)
   const topGroups = [
     PUBLIC_GROUP,
     ALL_GROUP
   ]
+  const memberships = getMemberships(state)
   const myGroups = memberships
     .map(m => m.group.ref)
     .sort((a, b) => a.name.localeCompare(b.name))
@@ -41,23 +41,16 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
   const { currentUser, name, canModerateCurrentGroup } = stateProps
   const { navigation } = ownProps
 
-  const goToGroupSettingsMenu = () => {
-    navigation.navigate('Group Settings')
-  }
-
   return {
     ...stateProps,
     ...dispatchProps,
     ...ownProps,
     goToGroup: group => {
       navigation.closeDrawer()
-      navigation.navigate('Feed', {
+      navigation.navigate('Group Navigation', {
         groupId: group.id
       })
       dispatchProps.selectGroup(group.id)
-    },
-    showSettings: () => {
-      navigation.navigate('Edit Account Info')
     },
     goToMyProfile: () => {
       navigation.navigate('Members', { screen: 'Member', params: { id: currentUser.id } })
@@ -65,7 +58,10 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     goToCreateGroup: () => {
       navigation.navigate('Create Group')
     },
-    goToGroupSettingsMenu: canModerateCurrentGroup && goToGroupSettingsMenu
+    goToGroupSettingsMenu: () => canModerateCurrentGroup &&
+      navigation.navigate('Group Settings'),
+    goToInvitePeople: () => canModerateCurrentGroup &&
+      navigation.navigate('Group Settings', { screen: 'Invite Members' })
   }
 }
 

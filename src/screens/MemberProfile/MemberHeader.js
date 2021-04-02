@@ -19,6 +19,7 @@ export default function MemberHeader ({
   onPressMessages,
   isMe,
   editProfile,
+  editAccount,
   editable,
   updateSetting = () => {},
   saveChanges,
@@ -44,16 +45,20 @@ export default function MemberHeader ({
           isMe={isMe}
         />
         <View style={styles.icons}>
-          <TouchableOpacity onPress={onPressMessages}>
+          {!isMe &&<TouchableOpacity onPress={onPressMessages}>
             <Icon name='Messages' style={styles.icon} />
-          </TouchableOpacity>
-          <MemberMenu {... { flagMember, isMe, editProfile, saveChanges, editable, blockUser, isAxolotl }} />
+          </TouchableOpacity>}
+          <MemberMenu {...{
+            flagMember, isMe, editProfile, editAccount,
+            saveChanges, editable, blockUser, isAxolotl
+          }} />
         </View>
       </View>
       <Control
         style={styles.location}
         value={location}
         placeholder='Location'
+        multiline
         editable={editable}
         onChangeText={updateSetting('location')}
         isMe={isMe}
@@ -110,7 +115,7 @@ export class Control extends React.Component {
                 numberOfLines={multiline ? 8 : 1}
                 underlineColorAndroid='transparent'
               />
-            : <Text>{value}</Text>}
+            : <Text style={style}>{value}</Text>}
           {editable && !hideEditIcon && <TouchableOpacity onPress={this.focus} style={styles.editIconWrapper}>
             <EntypoIcon name='edit' style={styles.editIcon} />
           </TouchableOpacity>}
@@ -121,11 +126,15 @@ export class Control extends React.Component {
   }
 }
 
-export function MemberMenu ({ flagMember, isMe, blockUser, editProfile, saveChanges, editable, isAxolotl }) {
+export function MemberMenu ({
+  flagMember, isMe, blockUser, editProfile,
+  editAccount, saveChanges, editable, isAxolotl
+}) {
   // If the function is defined, than it's a valid action
 
   const actions = filter(x => x[1], [
-    ['Edit', isMe && !editable && editProfile],
+    ['Edit Profile', isMe && !editable && editProfile],
+    ['Edit Account', isMe && !editable && editAccount],
     ['Save Changes', isMe && editable && saveChanges],
     ['Flag This Member', !isMe && flagMember],
     ['Block This Member', !isMe && !isAxolotl && blockUser]

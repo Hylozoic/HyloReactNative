@@ -10,7 +10,7 @@ function CreateGroupNotice ({ goToCreateGroup, text }) {
       <Text style={styles.promptText}>{text}</Text>
       <Image style={styles.image} source={axolotlImage} />
       <Button
-        text='Create a Group'
+        text='Start a Group'
         style={styles.button}
         onPress={goToCreateGroup}
       />

@@ -11,7 +11,6 @@ import {
   updateNewNotificationCount
 } from './NotificationsList.store'
 import getMemberships from 'store/selectors/getMemberships'
-import HeaderRightButton from 'navigation/header/HeaderRightButton'
 import { mapWhenFocused } from 'util/redux'
 
 const NOTIFICATIONS_PAGE_SIZE = 20

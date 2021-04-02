@@ -44,10 +44,7 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     editPost: () => navigation.navigate('Edit Post', { id }),
     goToMembers: () => navigation.navigate('Project Members', { id, members: get('members', post) }),
     showMember: goToMemberMaker(navigation),
-    showTopic: topicName => {
-        // return showToast('Topics support for "All Groups" and Networks coming soon!')
-        return navigation.navigate('Topic Feed', { topicName })
-    }
+    showTopic: topicName => navigation.navigate('Topic Feed', { topicName })
   }
 }
 

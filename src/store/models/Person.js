@@ -1,6 +1,13 @@
 import PropTypes from 'prop-types'
 import { attr, fk, many, Model } from 'redux-orm'
 
+export class PersonSkillsToLearn extends Model {}
+PersonSkillsToLearn.modelName = 'PersonSkillsToLearn'
+PersonSkillsToLearn.fields = {
+  person: fk('Person', 'personSkillsToLearn'),
+  skillToLearn: fk('Skill', 'personSkillsToLearn')
+}
+
 class Person extends Model {
   toString () {
     return `Person: ${this.name}`
@@ -26,9 +33,13 @@ Person.fields = {
     to: 'Location',
     as: 'locationObject'
   }),
-  memberships: many('Membership'),
-  membershipsTotal: attr(),
-  skills: many('Skill'),
+  skills: many({ to: 'Skill', as: 'skills', relatedName: 'peopleHaving' }),
+  skillsToLearn: many({
+    to: 'Skill',
+    relatedName: 'peopleLearning',
+    through: 'PersonSkillsToLearn',
+    throughFields: [ 'person', 'skillToLearn' ]
+  }),
   postsTotal: attr(),
   votesTotal: attr()
 }
@@ -43,5 +54,6 @@ export const PERSON_PROP_TYPES = {
 }
 
 export const firstName = person => person.name.split(' ')[0]
+export const twitterUrl = twitterName => twitterName && `https://twitter.com/${twitterName}`
 
 export const AXOLOTL_ID = '13986'

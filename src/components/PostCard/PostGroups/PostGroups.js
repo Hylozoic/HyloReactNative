@@ -4,11 +4,7 @@ import Icon from 'components/Icon'
 import GroupsList from 'components/GroupsList'
 import { Text, View, TouchableOpacity } from 'react-native'
 import { rhino30, caribbeanGreen } from 'style/colors'
-
-export const PUBLIC_GROUP = {
-  id: 'PUBLIC',
-  name: 'Public'
-}
+import { PUBLIC_GROUP } from 'store/models/Group'
 
 export default class PostGroups extends React.PureComponent {
   static defaultState = {

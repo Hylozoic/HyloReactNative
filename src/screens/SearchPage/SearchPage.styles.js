@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native'
-import { capeCod40, rhino, rhino30, rhino60, capeCod10 } from 'style/colors'
+import { capeCod40, rhino, rhino30, rhino60, capeCod10, white } from 'style/colors'
 
 const cardMargin = 15
 const cardPadding = 10
@@ -9,12 +9,9 @@ const row = {
 }
 
 export default {
-  scrollContainer: {
-
-  },
   flatListContainer: {
     flex: 1,
-    paddingBottom: 15
+    backgroundColor: white
   },
   row,
   searchBar: {

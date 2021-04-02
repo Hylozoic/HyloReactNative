@@ -23,7 +23,7 @@ export const propTypesForItemRowComponent = {
 export default class ItemChooser extends React.Component {
   static propTypes = {
     scope: PropTypes.string.isRequired,
-    fetchSearchSuggestions: PropTypes.func.isRequired,
+    fetchSearchSuggestions: PropTypes.func,
     getSearchSuggestions: PropTypes.func,
     setSearchTerm: PropTypes.func.isRequired,
     ItemRowComponent: PropTypes.func.isRequired,
@@ -143,7 +143,7 @@ export default class ItemChooser extends React.Component {
   }
 
   fetchSearchSuggestions = debounce(400, (searchTerm) =>
-    this.props.fetchSearchSuggestions(searchTerm))
+    this.props.fetchSearchSuggestions && this.props.fetchSearchSuggestions(searchTerm))
 
   clearSearchTerm = () => this.props.setSearchTerm()
 

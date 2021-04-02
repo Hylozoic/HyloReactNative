@@ -32,8 +32,7 @@ export default {
   location: {
     fontSize: 14,
     color: rhino50,
-    fontFamily: 'Circular-Book',
-    marginBottom: 2
+    fontFamily: 'Circular-Book'
   },
   tagline: {
     fontSize: 16,
@@ -48,7 +47,8 @@ export default {
   },
   controlInputRow: {
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
+    marginBottom: 10
   },
   controlInput: {
     textAlignVertical: 'top',

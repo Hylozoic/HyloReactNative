@@ -6,6 +6,8 @@ import LoadingScreen from 'screens/LoadingScreen'
 import NotificationOverlay from 'components/NotificationOverlay'
 import ThreadCard from 'components/ThreadCard'
 import styles from './ThreadList.styles'
+import Button from 'components/Button'
+import { caribbeanGreen, rhino20 } from 'style/colors'
 
 export default class ThreadList extends Component {
   state = { ready: false }

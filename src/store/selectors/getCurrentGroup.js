@@ -1,12 +1,12 @@
 import orm from '../models'
 import getCurrentGroupId from './getCurrentGroupId'
-import { createSelector as ormCreateSelector } from 'redux-orm'
+import { createSelector } from 'reselect'
+import getGroup from './getGroup'
 
-const getCurrentGroup = ormCreateSelector(
-  orm,
+const getCurrentGroup = createSelector(
+  state => state,
   getCurrentGroupId,
-  (session, currentGroupid) =>
-    session?.Group.safeGet({ id: currentGroupid })
+  (state, currentGroupId) => getGroup(state, { id: currentGroupId })
 )
 
 export default getCurrentGroup

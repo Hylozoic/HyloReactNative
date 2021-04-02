@@ -19,6 +19,7 @@ describe('MemberProfile', () => {
       id: 1,
       isFocused: true,
       person: { id: 1 },
+      currentGroup: { name: 'current group name' },
       navigation: {
         setOptions: jest.fn()
       }

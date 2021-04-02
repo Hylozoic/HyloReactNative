@@ -1,5 +1,5 @@
-import getMemberships from './getMemberships'
 import orm from '../models'
+import getMemberships from './getMemberships'
 
 it('gets all groups on current user', () => {
   const session = orm.mutableSession(orm.getEmptyState())

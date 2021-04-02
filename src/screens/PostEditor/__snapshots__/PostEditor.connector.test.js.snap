@@ -66,23 +66,55 @@ Array [
     avatarUrl
   }
   commentersTotal
-  commentsTotal
   comments(first: 10, order: \\"desc\\") {
     items {
-      id
-      text
-      creator {
-        id
-        name
-        avatarUrl
+      
+  id
+  text
+  creator {
+    id
+    name
+    avatarUrl
+  }
+  attachments {
+    id
+    position
+    type
+    url
+  }
+  parentComment {
+    id
+  }
+  createdAt
+
+      childComments(first: 10, order: \\"desc\\") {
+        items {
+          
+  id
+  text
+  creator {
+    id
+    name
+    avatarUrl
+  }
+  attachments {
+    id
+    position
+    type
+    url
+  }
+  parentComment {
+    id
+  }
+  createdAt
+
+          post {
+            id
+          }
+        }
+        total
+        hasMore
       }
-      attachments {
-        id
-        position
-        type
-        url
-      }
-      createdAt
     }
     total
     hasMore
@@ -115,12 +147,13 @@ Array [
   }
   votesTotal
   myVote
-  acceptContributions
-  totalContributions
   groups {
     id
     name
     slug
+    settings {
+      publicMemberDirectory
+    }
   }
   attachments {
     type
@@ -151,12 +184,6 @@ Array [
       bio
       tagline
       location
-      skills (first: 100) {
-        items {
-          id
-          name
-        }
-      }
     }
   }
   eventInvitations {
@@ -172,15 +199,10 @@ Array [
         bio
         tagline
         location
-        skills (first: 100) {
-          items {
-            id
-            name
-          }
-        }
       }
     }
   }
+
         }
       }",
         "variables": Object {
@@ -258,7 +280,6 @@ Array [
     avatarUrl
   }
   commentersTotal
-  commentsTotal
   
   linkPreview {
     id
@@ -288,12 +309,13 @@ Array [
   }
   votesTotal
   myVote
-  acceptContributions
-  totalContributions
   groups {
     id
     name
     slug
+    settings {
+      publicMemberDirectory
+    }
   }
   attachments {
     type
@@ -324,12 +346,6 @@ Array [
       bio
       tagline
       location
-      skills (first: 100) {
-        items {
-          id
-          name
-        }
-      }
     }
   }
   eventInvitations {
@@ -345,15 +361,10 @@ Array [
         bio
         tagline
         location
-        skills (first: 100) {
-          items {
-            id
-            name
-          }
-        }
       }
     }
   }
+
         }
       }",
         "variables": Object {

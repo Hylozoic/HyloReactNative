@@ -68,10 +68,10 @@ export default class InvitePeople extends Component {
             pendingCreate={this.props.pendingCreate}
             groupName={this.props.group.name}
             groupId={this.props.group.id}
-            groupMembersCanInvite={this.props.group.allowGroupInvites}
+            groupMembersCanInvite={this.props.group.settings.allowGroupInvites}
             createInvitations={this.props.createInvitations}
             regenerateAccessCode={this.props.regenerateAccessCode}
-            allowGroupInvites={this.props.allowGroupInvites}
+            setAllowGroupInvites={this.props.setAllowGroupInvites}
           />
         )
       case '1':
@@ -166,7 +166,7 @@ export class SendInvitesPage extends PureComponent {
     const { groupMembersCanInvite } = this.state
     const { groupId } = this.props
     this.setState({ groupMembersCanInvite: !groupMembersCanInvite })
-    this.props.allowGroupInvites(groupId, !groupMembersCanInvite)
+    this.props.setAllowGroupInvites(groupId, !groupMembersCanInvite)
       .then(({ error }) => {
         if (error) this.setState({ groupMembersCanInvite })
       })
@@ -193,7 +193,8 @@ export class SendInvitesPage extends PureComponent {
       <ScrollView>
         <KeyboardFriendlyView style={styles.keyboardFriendlyContainer}>
           <View style={styles.container}>
-            <View style={styles.allowGroupInvites}>
+            {/* TODO: This feature is not yet used, but this part was done */}
+            {/* <View style={styles.allowGroupInvites}>
               <Text>Let anyone in this group send invites</Text>
               <View style={styles.allowGroupInvitesSwitch}>
                 <Switch
@@ -202,7 +203,7 @@ export class SendInvitesPage extends PureComponent {
                   trackColor={{ true: caribbeanGreen }}
                 />
               </View>
-            </View>
+            </View> */}
             <Text style={styles.joinGroupText}>Anyone with this link can join the group</Text>
             {inviteLink && <Text style={styles.joinGroupLink}>{inviteLink}</Text>}
             {!inviteLink && <Text>No link has been set yet</Text>}

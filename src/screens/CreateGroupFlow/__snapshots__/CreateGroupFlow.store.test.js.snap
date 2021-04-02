@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`clearNameAndUrlFromStore matches snapshot 1`] = `
+exports[`clearCreateGroupStore matches snapshot 1`] = `
 Object {
-  "type": "CreateGroupFlow/CLEAR_NAME_AND_URL_FROM_STORE",
+  "type": "CreateGroupFlow/CLEAR_CREATE_GROUP_STORE",
 }
 `;
 
@@ -24,20 +24,6 @@ Object {
 }
 `;
 
-exports[`saveGroupName matches snapshot 1`] = `
-Object {
-  "payload": "group name",
-  "type": "CreateGroupFlow/SAVE_GROUP_NAME",
-}
-`;
-
-exports[`saveGroupUrl matches snapshot 1`] = `
-Object {
-  "payload": "group_name",
-  "type": "CreateGroupFlow/SAVE_GROUP_URL",
-}
-`;
-
 exports[`showLoadingModal matches snapshot 1`] = `
 Object {
   "graphql": Object {
@@ -46,9 +32,92 @@ Object {
           id
           hasModeratorRole
           group {
+            
+  id
+  accessibility
+  avatarUrl
+  bannerUrl
+  description
+  name
+  settings {
+    allowGroupInvites
+    askJoinQuestions
+    publicMemberDirectory
+  }
+  slug
+  visibility
+  parentGroups {
+    items {
+      id
+      accessibility
+      avatarUrl
+      name
+      slug
+      visibility
+      childGroups(first: 300) {
+        items {
+          id
+        }
+      }
+    }
+  }
+  childGroups {
+    items {
+      id
+      accessibility
+      avatarUrl
+      name
+      slug
+      visibility
+    }
+  }
+  memberCount
+  members(first: 8, sortBy: \\"name\\", order: \\"desc\\") {
+    items {
+      id
+      name
+      avatarUrl
+    }
+  }
+  moderators {
+    items {
+      id
+      name
+      avatarUrl
+    }
+  }
+  location
+  locationObject {
+    id
+    addressNumber
+    addressStreet
+    bbox {
+      lat
+      lng
+    }
+    center {
+      lat
+      lng
+    }
+    city
+    country
+    fullText
+    locality
+    neighborhood
+    region
+  }
+  
+  joinQuestions {
+    items {
+      id
+      questionId
+      text
+    }
+  }
+
+          }
+          person {
             id
-            name
-            slug
           }
         }
       }

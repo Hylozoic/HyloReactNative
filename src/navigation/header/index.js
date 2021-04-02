@@ -19,10 +19,10 @@ import {  caribbeanGreen, white60onCaribbeanGreen, white, rhino80, black10onRhin
 // For now this list needs to be kept in sync with the names of the initial
 // routes for each stack in navigation/TabsNavigator.
 export const TAB_STACK_ROOTS = [
-  'Feed',
-  'Members',
-  'Topics',
-  'Projects'
+  'Group Navigation',
+  'Messages',
+  'Search',
+  'Profile'
 ]
 
 export function buildTabStackScreenOptions ({
@@ -38,7 +38,7 @@ export function buildTabStackScreenOptions ({
       || route?.name,
     headerTitleContainerStyle: {
       // Follow: https://github.com/react-navigation/react-navigation/issues/7057#issuecomment-593086348
-      width: isIOS ? '45%' : '35%',
+      width: isIOS ? '55%' : '45%',
       alignItems: 'center',
       marginLeft: isIOS ? 0 : 10
     },
@@ -65,8 +65,6 @@ export function buildTabStackScreenOptions ({
         flexDirection: 'row',
         alignItems: 'center'
       }}>
-        <SearchIcon showSearch={() => navigation.navigate('Search')} />
-        <MessagesIcon showMessages={() => navigation.navigate('Messages')} />
         <NotificationsIcon showNotifications={() => navigation.navigate('Notifications')} />
       </View>
     )
@@ -80,6 +78,7 @@ export function buildTabStackScreenOptions ({
 
 export function buildModalScreenOptions ({
   headerLeftCloseIcon = true,
+  headerLeftLabel,
   headerLeftOnPress: providedHeaderLeftOnPress,
   headerLeftConfirm,
   headerRightButtonLabel = 'Save',
@@ -111,13 +110,15 @@ export function buildModalScreenOptions ({
       const onPress = headerLeftConfirm
         ? () => confirmDiscardChanges({ onDiscard: headerLeftOnPress })
         : headerLeftOnPress
-  
+      const label = headerLeftLabel
+        ? headerLeftLabel
+        : props.label 
       return (
         <>
           <FocusAwareStatusBar {...statusBarOptions} />
           {headerLeftCloseIcon
             ? <HeaderLeftCloseIcon {...props} color={headerTitleStyleColor} onPress={onPress} />
-            : <HeaderBackButton {...props} onPress={onPress} />}
+            : <HeaderBackButton {...props} label={label} onPress={onPress} />}
           </>
       )
     },

@@ -3,13 +3,15 @@ import './Model.extension'
 import Activity from './Activity'
 import Attachment from './Attachment'
 import Comment from './Comment'
-import Group, { GroupConnection, GroupModerator } from './Group'
+import EventInvitation from './EventInvitation'
+import Group, { GroupRelationship, GroupModerator, GroupJoinQuestion } from './Group'
+import GroupRelationshipInvite from './GroupRelationshipInvite'
 import GroupTopic from './GroupTopic'
 import Invitation from './Invitation'
 import Location from './Location'
-import Me from './Me'
+import Me, { MySkillsToLearn } from './Me'
 import Membership from './Membership'
-import Person from './Person'
+import Person, { PersonSkillsToLearn } from './Person'
 import PersonConnection from './PersonConnection'
 import Message from './Message'
 import MessageThread from './MessageThread'
@@ -20,31 +22,40 @@ import SearchResult from './SearchResult'
 import Skill from './Skill'
 import Topic from './Topic'
 import Vote from './Vote'
+import JoinRequest, { JoinRequestQuestionAnswer, Question } from './JoinRequest'
 
-const orm = new ORM({ stateSelector: state => state.orm })
+export const orm = new ORM({ stateSelector: state => state.orm })
 
 orm.register(
   Activity,
   Attachment,
   Comment,
+  EventInvitation,
   Group,
-  GroupConnection,
+  GroupJoinQuestion,
   GroupModerator,
+  GroupRelationship,
+  GroupRelationshipInvite,
   GroupTopic,
   Invitation,
+  JoinRequest,
+  JoinRequestQuestionAnswer,
   Location,
   Me,
   Membership,
   Message,
   MessageThread,
+  MySkillsToLearn,
   Notification,
   Person,
   PersonConnection,
+  PersonSkillsToLearn,
   Post,
-  PostFollower,
   PostCommenter,
+  PostFollower,
   PostMembership,
   ProjectMember,
+  Question,
   SearchResult,
   Skill,
   Topic,
