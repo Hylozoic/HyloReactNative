@@ -10,7 +10,7 @@ const iosHost = isDev && isIOS &&
 // API_HOST_DEV in which is used in the development environment
 // and builds
 const devHost = isDev && process.env.API_HOST_DEV
-const HOST = androidHost || iosHost || devHost || process.env.API_HOST_OVERRIDE || process.env.API_HOST
+const HOST = androidHost || iosHost || devHost || process.env.API_HOST
 
 export default HOST
 
