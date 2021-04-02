@@ -2,6 +2,7 @@ import { createSelector as ormCreateSelector } from 'redux-orm'
 import orm from 'store/models'
 import { AnalyticsEvents } from 'hylo-utils/constants'
 import { GROUP_ACCESSIBILITY, GROUP_VISIBILITY } from 'store/models/Group'
+import groupFieldsFragment from 'graphql/fragments/groupFieldsFragment'
 
 export const MODULE_NAME = 'CreateGroupFlow'
 export const UPDATE_GROUP_DATA = `${MODULE_NAME}/UPDATE_GROUP_DATA`
@@ -56,14 +57,7 @@ export function createGroup (groupData) {
           id
           hasModeratorRole
           group {
-            id
-            name
-            slug
-            parentGroups {
-              items {
-                id
-              }
-            }
+            ${groupFieldsFragment({ withJoinQuestions: true })}
           }
           person {
             id
