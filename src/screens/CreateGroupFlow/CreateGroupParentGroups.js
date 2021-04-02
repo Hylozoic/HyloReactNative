@@ -39,9 +39,6 @@ export default function CreateGroupParentGroups ({ navigation }) {
     navigation.navigate(nextScreen)
   }
 
-  /*
-    HOLONIC TODO: Not certain this should be shown to everyone (i.e. Tibet's remarks as well)
-  */
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardFriendlyView>

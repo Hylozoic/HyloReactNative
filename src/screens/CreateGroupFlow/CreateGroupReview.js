@@ -49,9 +49,6 @@ export default function CreateGroupReview ({ navigation }) {
       })
   }
 
-  /*
-    HOLONIC TODO: This whole presentation has gotten cluttered, too white and green... etc
-  */
   return (
     <SafeAreaView style={styles.container}>
       <View>
@@ -114,14 +111,7 @@ export default function CreateGroupReview ({ navigation }) {
             disabled
           />
         </View>
-
-      {/*
-        HOLONIC TODO: Needs help --
-                      This will not scroll if this list gets long,
-                      also probably better to wrap them onto
-                      one or two lines...
-      */}
-      {parentGroups.length > 0 && (
+        {parentGroups.length > 0 && (
           <View style={styles.textInputContainer}>
             <View style={stepStyles.itemHeader}>
               <Text style={stepStyles.textInputLabel}>Is this group a member of other groups?</Text>
@@ -149,7 +139,7 @@ export default function CreateGroupReview ({ navigation }) {
 }
 
 const GroupRow = ({ group }) => (
-  <View style={stepStyles.groupRow}>
+  <View style={stepStyles.groupRow} key={group.name}>
     <Avatar style={stepStyles.groupAvatar} avatarUrl={group.avatarUrl} dimension={20} />
     <Text style={stepStyles.groupName}>{group.name}</Text>
   </View>
@@ -172,8 +162,8 @@ const stepStyles = {
     fontSize: 16,
     fontWeight: 'bold',
     marginBottom: 25,
-    // NOTE: Was only needed for multiline text inputs
-    // in iOS (haven't tested in Android)
+    // HOLONIC TODO: Was only needed for multiline text inputs
+    //               in iOS (haven't tested in Android)
     paddingTop: -5
   },
   itemHeader: {
@@ -181,22 +171,22 @@ const stepStyles = {
     justifyContent: 'space-between'
   },
   groupRows: {
-    marginBottom: 10,
+    marginTop: 10,
     minWidth: '90%',
     justifyContent: 'flex-start',
     flexWrap: 'wrap'
   },
   groupRow: {
-    // padding: 15,
+    marginBottom: 10,
     paddingBottom: 0,
     flexDirection: 'row',
   },
   groupAvatar: {
-    marginRight: 12
+    marginRight: 14
   },
   groupName: {
     fontFamily: 'Circular-Bold',
-    fontSize: 12,
+    fontSize: 14,
     color: white,
     flex: 1
   },
