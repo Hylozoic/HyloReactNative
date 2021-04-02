@@ -38,7 +38,7 @@ Object {
       },
       "headerAvatarUrl": undefined,
       "id": "public",
-      "name": "Public Groups",
+      "name": "Public Groups & Posts",
       "parentGroups": Object {
         "toModelArray": [Function],
       },

@@ -138,9 +138,9 @@ export default class PostEditor extends React.Component {
     }
 
     return save(postData)
-      .catch(e => {
-        this.setState({ isSaving: false })
-      })
+      // .catch(e => {
+      //   this.setState({ isSaving: false })
+      // })
   }
 
   save = () => {

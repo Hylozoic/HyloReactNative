@@ -20,14 +20,17 @@ export function mapStateToProps (state, props) {
     ? getPerson(state, { personId: id })
     : currentUser
   const isMe = Number(get('id', currentUser)) === Number(get('id', person))
+  const navigation = props.navigation
+  const { navigate } = navigation
 
   const editing = get('route.params.editing', props)
   const isBlocked = !!getBlockedUsers(state).find(i => get('id', i) === id)
-  const goToDetails = () => props.navigation.navigate('MemberDetails', { id })
-  const goToEdit = () => props.navigation.navigate('MemberDetails', { id, editing: true })
-  const goToEditAccount = () => props.navigation.navigate('Edit Account Info')
-  const goToSkills = () => props.navigation.navigate('MemberSkillEditor', { id })
-  const navigation = props.navigation
+  const goToDetails = () => navigate('MemberDetails', { id })
+  const goToEdit = () => navigate('MemberDetails', { id, editing: true })
+  const goToEditAccount = () => navigate('Edit Account Info')
+  const goToSkills = () => navigate('MemberSkillEditor', { id })
+  const goToManageNotifications = () => navigate('Notification Settings')
+  const goToBlockedUsers = () => navigate('Blocked Users')
 
   return {
     isBlocked,
@@ -40,6 +43,8 @@ export function mapStateToProps (state, props) {
     goToEdit,
     goToEditAccount,
     goToSkills,
+    goToManageNotifications,
+    goToBlockedUsers,
     isMe,
     navigation
   }

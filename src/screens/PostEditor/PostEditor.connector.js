@@ -82,7 +82,10 @@ export function mapDispatchToProps (dispatch, props) {
             // TODO: handle API errors more appropriately
             throw new Error('Error submitting post')
           }
-          navigation.goBack()
+          const id = payload?.data?.createPost?.id
+
+          navigation.navigate('Post Details', { id })
+
           return Promise.resolve({})
         })
     },

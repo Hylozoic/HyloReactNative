@@ -18,8 +18,10 @@ export default function MemberHeader ({
   flagMember,
   onPressMessages,
   isMe,
-  editProfile,
-  editAccount,
+  goToEdit,
+  goToEditAccount,
+  goToManageNotifications,
+  goToBlockedUsers,
   editable,
   updateSetting = () => {},
   saveChanges,
@@ -49,8 +51,9 @@ export default function MemberHeader ({
             <Icon name='Messages' style={styles.icon} />
           </TouchableOpacity>}
           <MemberMenu {...{
-            flagMember, isMe, editProfile, editAccount,
-            saveChanges, editable, blockUser, isAxolotl
+            flagMember, isMe, saveChanges, editable, blockUser,
+            isAxolotl, goToEdit, goToEditAccount,
+            goToManageNotifications, goToBlockedUsers
           }} />
         </View>
       </View>
@@ -127,14 +130,16 @@ export class Control extends React.Component {
 }
 
 export function MemberMenu ({
-  flagMember, isMe, blockUser, editProfile,
-  editAccount, saveChanges, editable, isAxolotl
+  flagMember, isMe, blockUser, saveChanges, editable,
+  isAxolotl, goToEdit, goToEditAccount,
+  goToManageNotifications, goToBlockedUsers
 }) {
   // If the function is defined, than it's a valid action
-
   const actions = filter(x => x[1], [
-    ['Edit Profile', isMe && !editable && editProfile],
-    ['Edit Account', isMe && !editable && editAccount],
+    ['Edit Profile', isMe && !editable && goToEdit],
+    ['Edit Account', isMe && !editable && goToEditAccount],
+    ['Manage Notifications', isMe && !editable && goToManageNotifications],
+    ['Blocked Users', isMe && !editable && goToBlockedUsers],
     ['Save Changes', isMe && editable && saveChanges],
     ['Flag This Member', !isMe && flagMember],
     ['Block This Member', !isMe && !isAxolotl && blockUser]

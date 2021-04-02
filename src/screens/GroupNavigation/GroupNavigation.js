@@ -6,7 +6,7 @@ import Icon from 'components/Icon'
 import { useFocusEffect } from '@react-navigation/core'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import styles from './GroupNavigation.styles'
-import { isContextGroup } from 'store/models/Group'
+import { isContextGroup, PUBLIC_GROUP_ID } from 'store/models/Group'
 
 export default function GroupNavigation ({ navigation }) {
   const currentGroup = useSelector(getCurrentGroup)
@@ -43,10 +43,14 @@ export default function GroupNavigation ({ navigation }) {
   return (
     <ScrollView style={styles.container}>
       {navItems.map(item => <NavItem {...item} key={item.label} /> )}
-      <View style={styles.divider} />
-      <View style={styles.navItems}>
-        <NavItem label='Topics' iconName='Topics' onPress={() => navigate('Topics')} />
-      </View>
+      {currentGroup.id !== PUBLIC_GROUP_ID && (
+        <>
+          <View style={styles.divider} />
+          <View style={styles.navItems}>
+            <NavItem label='Topics' iconName='Topics' onPress={() => navigate('Topics')} />
+          </View>
+        </>
+      )}
     </ScrollView>
   )
 }

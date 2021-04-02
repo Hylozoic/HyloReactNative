@@ -49,6 +49,8 @@ export default class MemberProfile extends React.Component {
       goToDetails,
       goToEdit,
       goToEditAccount,
+      goToManageNotifications,
+      goToBlockedUsers,
       id,
       isFocused,
       isMe,
@@ -73,7 +75,6 @@ export default class MemberProfile extends React.Component {
       id,
       type: 'member'
     }
-
     const header = (
       <View>
         <MemberBanner
@@ -89,8 +90,10 @@ export default class MemberProfile extends React.Component {
             blockUser={this.blockUser}
             onPressMessages={onPressMessages}
             isMe={isMe}
-            editProfile={goToEdit}
-            editAccount={goToEditAccount}
+            goToEdit={goToEdit}
+            goToEditAccount={goToEditAccount}
+            goToManageNotifications={goToManageNotifications}
+            goToBlockedUsers={goToBlockedUsers}
           />
           <ReadMoreButton goToDetails={goToDetails} />
         </View>

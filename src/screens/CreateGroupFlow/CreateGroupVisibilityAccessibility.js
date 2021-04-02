@@ -24,12 +24,12 @@ export default function CreateGroupVisibilityAccessibility ({ navigation }) {
   const [accessibility, setAccessibility] = useState(groupData.accessibility)
 
   const groupVisibilityOptions = Object.keys(GROUP_VISIBILITY).map(label => ({
-    label: visibilityDescription(GROUP_VISIBILITY[label]),
+    label: label + ': ' + visibilityDescription(GROUP_VISIBILITY[label]),
     iconName: visibilityIcon(GROUP_VISIBILITY[label]),
     value: GROUP_VISIBILITY[label]
   }))
   const groupAccessibilityOptions = Object.keys(GROUP_ACCESSIBILITY).map(label => ({
-    label: accessibilityDescription(GROUP_ACCESSIBILITY[label]),
+    label: label + ': ' + accessibilityDescription(GROUP_ACCESSIBILITY[label]),
     iconName: accessibilityIcon(GROUP_ACCESSIBILITY[label]),
     value: GROUP_ACCESSIBILITY[label]
   }))

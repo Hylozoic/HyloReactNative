@@ -166,7 +166,7 @@ export const PUBLIC_GROUP = {
   headerAvatarUrl: Image.resolveAssetSource(allGroupshHeaderAvatarUrl).uri,
   avatarUrl: Image.resolveAssetSource(publicGroupAvatarUrl).uri,
   bannerUrl: Image.resolveAssetSource(publicGroupAvatarUrl).uri,
-  name: 'Public Groups',
+  name: 'Public Groups & Posts',
   parentGroups: { toModelArray: () => [] },
   childGroups: { toModelArray: () => [] }
 }

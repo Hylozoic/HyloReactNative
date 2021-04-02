@@ -127,7 +127,10 @@ export default class MemberDetails extends React.Component {
   }
 
   render () {
-    const { goToGroup, goToSkills, isMe, person, goToEditAccount, onPressMessages } = this.props
+    const { 
+      goToEditAccount, goToManageNotifications, goToBlockedUsers,
+      goToGroup, goToSkills, isMe, person, onPressMessages
+    } = this.props
     const { editing, errors } = this.state
     const personEdits = this.state.person
 
@@ -139,8 +142,10 @@ export default class MemberDetails extends React.Component {
           person={personEdits}
           isMe={isMe}
           onPressMessages={onPressMessages}
-          editProfile={this.editProfile}
-          editAccount={goToEditAccount}
+          goToManageNotifications={goToManageNotifications}
+          goToBlockedUsers={goToBlockedUsers}
+          goToEdit={this.editProfile}
+          goToEditAccount={goToEditAccount}
           saveChanges={this.saveChanges}
           editable={editing}
           updateSetting={this.updateSetting}
