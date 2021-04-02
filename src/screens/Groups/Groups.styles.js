@@ -23,13 +23,16 @@ export default {
   groupAvatar: {
     height: 42,
     width: 42,
-    marginHorizontal: 10
+    marginLeft: 5,
+    marginRight: 10,
+    alignSelf: 'flex-start'
   },
   groupRowRight: {
     marginRight: 82
   },
   groupRowText: {
     fontWeight: 'bold',
+    marginBottom: 5
   },
   groupRowCounts: {
     color: rhino60,
@@ -50,5 +53,16 @@ export default {
   badgeText: {
     color: 'white',
     fontSize: 12
+  },
+  groupStatus: {
+    flexDirection: 'row',
+    marginBottom: 5
+  },
+  groupStatusIcon: {
+    fontSize: 14,
+    marginRight: 5
+  },
+  groupStatusText: {
+    fontSize: 14,
   }
 }

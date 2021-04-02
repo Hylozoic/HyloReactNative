@@ -29,7 +29,7 @@ export function accessibilityIcon (a) {
     case GROUP_ACCESSIBILITY.Restricted:
       return 'Hand'
     case GROUP_ACCESSIBILITY.Open:
-      return 'Enter-Door'
+      return 'Open-Door'
   }
 }
 

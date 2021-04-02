@@ -26,7 +26,6 @@ export default function GroupDetail ({
       answers.push({ questionId: parseInt(questionId), answer: questionAnswers[questionId] })
     }
     createJoinRequest(group.id, answers)
-    navigation.navigate('Group Relationships')
   }
 
   const canJoin = !alreadyRequested &&
@@ -50,10 +49,15 @@ export default function GroupDetail ({
       </ImageBackground>
       <View style={styles.mainContent}>
         <Text style={styles.groupDescription}>{group.description}</Text>
+        {/* {!canJoin && (
+          <Text>'This group is invitation only'</Text>
+        )} */}
         {alreadyRequested && (
-          <Text style={styles.alreadyRequestedText}>Your request to join this group is pending moderator approval.</Text>
+          <Text style={styles.alreadyRequestedText}>
+            Your request to join this group is pending moderator approval.
+          </Text>
         )}
-        {!canJoin && !alreadyRequested && (
+        {!alreadyRequested && (
           <Text>{accessibilityDescription(group.accessibility)}</Text>
         )}
         {canJoin && joinQuestions.length > 0 && (
