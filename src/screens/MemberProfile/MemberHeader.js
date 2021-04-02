@@ -58,6 +58,7 @@ export default function MemberHeader ({
         style={styles.location}
         value={location}
         placeholder='Location'
+        multiline
         editable={editable}
         onChangeText={updateSetting('location')}
         isMe={isMe}
@@ -114,7 +115,7 @@ export class Control extends React.Component {
                 numberOfLines={multiline ? 8 : 1}
                 underlineColorAndroid='transparent'
               />
-            : <Text>{value}</Text>}
+            : <Text style={style}>{value}</Text>}
           {editable && !hideEditIcon && <TouchableOpacity onPress={this.focus} style={styles.editIconWrapper}>
             <EntypoIcon name='edit' style={styles.editIcon} />
           </TouchableOpacity>}

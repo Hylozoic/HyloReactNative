@@ -142,21 +142,6 @@ exports[`InvitePeople renders SendInvitesPage 1`] = `
 <ScrollView>
   <KeyboardFriendlyView>
     <View>
-      <View>
-        <Text>
-          Let anyone in this group send invites
-        </Text>
-        <View>
-          <Switch
-            onValueChange={[Function]}
-            trackColor={
-              Object {
-                "true": "#0DC39F",
-              }
-            }
-          />
-        </View>
-      </View>
       <Text>
         Anyone with this link can join the group
       </Text>

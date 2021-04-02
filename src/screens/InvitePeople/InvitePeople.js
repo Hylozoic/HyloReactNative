@@ -193,7 +193,8 @@ export class SendInvitesPage extends PureComponent {
       <ScrollView>
         <KeyboardFriendlyView style={styles.keyboardFriendlyContainer}>
           <View style={styles.container}>
-            <View style={styles.allowGroupInvites}>
+            {/* TODO: This feature is not yet used, but this part was done */}
+            {/* <View style={styles.allowGroupInvites}>
               <Text>Let anyone in this group send invites</Text>
               <View style={styles.allowGroupInvitesSwitch}>
                 <Switch
@@ -202,7 +203,7 @@ export class SendInvitesPage extends PureComponent {
                   trackColor={{ true: caribbeanGreen }}
                 />
               </View>
-            </View>
+            </View> */}
             <Text style={styles.joinGroupText}>Anyone with this link can join the group</Text>
             {inviteLink && <Text style={styles.joinGroupLink}>{inviteLink}</Text>}
             {!inviteLink && <Text>No link has been set yet</Text>}

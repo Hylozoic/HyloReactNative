@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Text, View, TextInput, TouchableOpacity} from 'react-native'
+import {
+  Text, View, TextInput, ScrollView, TouchableOpacity
+} from 'react-native'
 import Button from 'components/Button'
 // import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 import SafeAreaView from 'react-native-safe-area-view'
@@ -51,7 +53,7 @@ export default function CreateGroupReview ({ navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View>
+      <ScrollView>
         <View style={styles.header}>
           <Text style={styles.heading}>Everything look good?</Text>
           <Text style={styles.description}>You can always come back and change your details at any time</Text>
@@ -118,7 +120,7 @@ export default function CreateGroupReview ({ navigation }) {
               <EditButton onPress={goToCreateGroupParentGroups} />
             </View>
             <View style={stepStyles.groupRows}>
-              {parentGroups.map(parentGroup => <GroupRow group={parentGroup} />)}
+              {parentGroups.map(parentGroup => <GroupRow group={parentGroup} key={parentGroup.id} />)}
             </View>
           </View>
         )}
@@ -133,7 +135,7 @@ export default function CreateGroupReview ({ navigation }) {
             disabled={!!createGroupPending}
           />
         </View>
-      </View>
+      </ScrollView>
     </SafeAreaView>
   )
 }

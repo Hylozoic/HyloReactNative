@@ -50,14 +50,14 @@ export default function CreateGroupVisibilityAccessibility ({ navigation }) {
             <Text style={stepStyles.optionsLabel}>Who can see this group?</Text>
             {groupVisibilityOptions.map(option => (
               <Option option={option} chosen={option.value === visibility}
-                onPress={setVisibility} />
+                onPress={setVisibility} key={option.value} />
             ))}
           </View>
           <View style={styles.optionsContainer}>
             <Text style={stepStyles.optionsLabel}>Who can join this group?</Text>
             {groupAccessibilityOptions.map(option => (
               <Option option={option} chosen={option.value === accessibility}
-                onPress={setAccessibility} />
+                onPress={setAccessibility} key={option.value} />
             ))}
           </View>
         </View>
@@ -91,7 +91,7 @@ export function Option ({ option, chosen, onPress }) {
         iconColor={white20onCaribbeanGreen}
         borderColor={white}
         backgroundColor={white}
-        onValueChange={() => toggleChosen(option.value)} />
+        onValueChange={() => onPress(option.value)} />
       <Icon style={optionStyles.optionIcon} name={option.iconName} />
       <Text style={optionStyles.optionsLabel}>{option.label}</Text>
     </TouchableOpacity>
