@@ -11,7 +11,6 @@ import EntypoIcon from 'react-native-vector-icons/Entypo'
 import LinearGradient from 'react-native-linear-gradient'
 import { isEmpty, get } from 'lodash/fp'
 import { bannerlinearGradientColors } from 'style/colors'
-import TopicSupportComingSoon from './TopicSupportComingSoon'
 
 export default function Topics ({
   groupHasTopics,
@@ -22,11 +21,8 @@ export default function Topics ({
   goToTopic,
   searchTerm,
   setTerm,
-  navigation,
   fetchGroupTopics
 }) {
-  if (!group?.id) return <TopicSupportComingSoon navigation={navigation} />
-
   const ref = useRef(null)
 
   useScrollToTop(ref)

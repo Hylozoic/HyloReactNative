@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Image, Text, ScrollView, View, ImageBackground, TextInput } from 'react-native'
-import { accessibilityDescription, GROUP_VISIBILITY, GROUP_ACCESSIBILITY } from 'store/models/Group'
+import { accessibilityDescription, GROUP_ACCESSIBILITY } from 'store/models/Group'
 import Button from 'components/Button'
 import LinearGradient from 'react-native-linear-gradient'
 import { bannerlinearGradientColors } from 'style/colors'
@@ -9,8 +9,7 @@ import Loading from 'components/Loading'
 
 export default function GroupDetail ({
   loading, group, alreadyRequested,
-  navigation, fetchGroupJoinSettings,
-  createJoinRequest
+  fetchGroupJoinSettings, createJoinRequest
 }) {
   useEffect(() => { fetchGroupJoinSettings(group.id) }, [])
 
@@ -35,6 +34,9 @@ export default function GroupDetail ({
     ? group.joinQuestions.toRefArray()
     : []
   const groupBannerImage = group.bannerUrl ? { uri: group.bannerUrl } : null
+  const joinButtonText = group.accessibility === GROUP_ACCESSIBILITY.Restricted
+    ? 'Request Membership'
+    : 'Join'
 
   if (loading) return <Loading />
 
@@ -72,7 +74,7 @@ export default function GroupDetail ({
             ))}
           </View>
         )}
-        {canJoin && <Button style={styles.joinButton} onPress={join} text='Join' />}
+        {canJoin && <Button style={styles.joinButton} onPress={join} text={joinButtonText} />}
       </View>
     </ScrollView>
   )

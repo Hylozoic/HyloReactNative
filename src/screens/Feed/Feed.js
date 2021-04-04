@@ -52,7 +52,7 @@ export default function Feed ({
   useScrollToTop(ref)
   // TODO: selectGroup should probably be moved back into goToGroup function
   useEffect(() => { group?.id && selectGroup(group.id) }, [group?.id])
-  useEffect(() => { fetchGroupTopic() }, [fetchGroupTopic, topicName])
+  useEffect(() => { fetchGroupTopic() }, [])
   useEffect(() => { setHeaderTitle(navigation, topicName, group, isProjectFeed) }, [
     topicName,
     group?.id, 
