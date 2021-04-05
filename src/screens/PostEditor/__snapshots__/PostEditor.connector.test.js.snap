@@ -66,6 +66,7 @@ Array [
     avatarUrl
   }
   commentersTotal
+  commentsTotal
   comments(first: 10, order: \\"desc\\") {
     items {
       
@@ -280,6 +281,7 @@ Array [
     avatarUrl
   }
   commentersTotal
+  commentsTotal
   
   linkPreview {
     id

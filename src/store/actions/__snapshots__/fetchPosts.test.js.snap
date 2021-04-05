@@ -64,6 +64,7 @@ posts: viewPosts(
     avatarUrl
   }
   commentersTotal
+  commentsTotal
   
   linkPreview {
     id
