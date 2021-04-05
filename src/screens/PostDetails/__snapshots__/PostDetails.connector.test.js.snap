@@ -6,6 +6,7 @@ Object {
   "currentUser": undefined,
   "id": "1",
   "isProject": false,
+  "memberships": Array [],
   "post": Object {
     "commenters": Array [],
     "creator": Object {

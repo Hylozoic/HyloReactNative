@@ -11,10 +11,12 @@ import updateUserSettings from 'store/actions/updateUserSettings'
 import { mapWhenFocused, mergeWhenFocused } from 'util/redux'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import { logout } from 'screens/Login/actions'
+import getMemberships from 'store/selectors/getMemberships'
 
 export function mapStateToProps (state, props) {
   const currentUser = getMe(state, props)
   const currentGroup = getCurrentGroup(state, props)
+  const memberships = getMemberships(state)
   const id = get('route.params.id', props)
   const person = id
     ? getPerson(state, { personId: id })
@@ -39,6 +41,7 @@ export function mapStateToProps (state, props) {
     person,
     currentUser,
     currentGroup,
+    memberships,
     goToDetails,
     goToEdit,
     goToEditAccount,
@@ -52,7 +55,7 @@ export function mapStateToProps (state, props) {
 
 export function mapDispatchToProps (dispatch, props) {
   return {
-    goToGroup: makeGoToGroup(),
+    goToGroup: makeGoToGroup(dispatch),
     ...bindActionCreators({
       fetchPerson,
       updateUserSettings,
@@ -70,7 +73,7 @@ export function makeOnPressMessages (currentUser, person, navigation) {
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
-  const { id, currentUser, person, isMe } = stateProps
+  const { id, currentUser, currentGroup, memberships, person, isMe } = stateProps
   const { navigation } = ownProps
 
   const fetchPerson = () => dispatchProps.fetchPerson(id)
@@ -85,6 +88,7 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
   const updateUserSettings = isMe ? dispatchProps.updateUserSettings : () => {}
 
   const goToMemberProfile = () => navigation.navigate('Member', { id })
+  const goToGroup = groupId => dispatchProps.goToGroup(groupId, memberships, currentGroup.id)
 
   return {
     ...stateProps,
@@ -94,7 +98,8 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     canFlag,
     fetchPerson,
     onPressMessages,
-    goToMemberProfile
+    goToMemberProfile,
+    goToGroup
   }
 }
 

@@ -29,6 +29,7 @@ Object {
   "id": 123,
   "isBlocked": false,
   "isMe": false,
+  "memberships": Array [],
   "navigation": Object {
     "navigate": [MockFunction],
   },
@@ -43,6 +44,7 @@ Object {
     "id": 1,
   },
   "fetchPerson": [Function],
+  "goToGroup": [Function],
   "goToMemberProfile": [Function],
   "id": 78,
   "isMe": true,

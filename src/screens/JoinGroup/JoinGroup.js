@@ -16,7 +16,7 @@ export default function JoinGroup ({
   const dispatch = useDispatch()
   const signedIn = useSelector(getSignedIn)
   const currentUser = useSelector(getMe)
-  const goToGroup = makeGoToGroup(false)
+  const goToGroup = makeGoToGroup(dispatch, false)
   const navToInviteExpired = () => navigation.navigate('InviteExpired')
   const invitationCodes = {
     invitationToken: getRouteParam('token', route) ||
