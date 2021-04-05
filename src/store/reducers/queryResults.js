@@ -6,30 +6,22 @@
 // to "Location". And both of these lists are different from what should be
 // shown when something has been typed into the search field.
 
-import {
-  FETCH_POSTS
-} from 'store/actions/fetchPosts'
-import {
-  CREATE_POST, CREATE_PROJECT
-} from 'screens/PostEditor/PostEditor.store'
-import {
-  RECEIVE_POST
-} from 'components/SocketListener/SocketListener.store'
-import {
-  REMOVE_POST_PENDING
-} from 'components/PostCard/PostHeader/PostHeader.store'
-
 import { get, isNull, omitBy, pick, reduce, uniq, isEmpty, includes } from 'lodash/fp'
 import { createSelector as ormCreateSelector } from 'redux-orm'
 import orm from 'store/models'
 import { mapValues } from 'lodash'
+
+import { FETCH_POSTS } from 'store/actions/fetchPosts'
+import { CREATE_POST, CREATE_PROJECT } from 'screens/PostEditor/PostEditor.store'
+import { RECEIVE_POST } from 'components/SocketListener/SocketListener.store'
+import { REMOVE_POST_PENDING } from 'components/PostCard/PostHeader/PostHeader.store'
+
 // reducer
 
 export default function (state = {}, action) {
   const { type, payload, error, meta } = action
   if (error) return state
   let root
-
   const { extractQueryResults } = meta || {}
   if (extractQueryResults && payload) {
     const { getItems, getParams, getType, reset } = extractQueryResults

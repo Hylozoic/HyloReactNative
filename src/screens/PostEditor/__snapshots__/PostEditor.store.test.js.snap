@@ -168,7 +168,10 @@ Object {
       "eventName": "Post Created",
       "isAnnouncement": undefined,
     },
-    "extractModel": "Post",
+    "extractModel": Object {
+      "getRoot": [Function],
+      "modelName": "Post",
+    },
   },
   "type": "PostEditor/CREATE_POST",
 }
@@ -346,7 +349,10 @@ Object {
       "eventName": "Post Created",
       "isAnnouncement": undefined,
     },
-    "extractModel": "Post",
+    "extractModel": Object {
+      "getRoot": [Function],
+      "modelName": "Post",
+    },
   },
   "type": "PostEditor/CREATE_POST",
 }
