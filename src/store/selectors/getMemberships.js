@@ -6,7 +6,7 @@ const getMemberships = ormCreateSelector(
   session => {
     const me = session?.Me.first()
     if (!me) return []
-    return me.memberships.toModelArray()
+    return session.Membership.filter({ person: me.id }).toModelArray()
   }
 )
 

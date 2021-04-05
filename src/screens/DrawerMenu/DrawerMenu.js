@@ -108,7 +108,8 @@ export function GroupRow ({ group, goToGroup, currentGroupId, addPadding, isMemb
         {!!avatarUrl &&
           <Image source={{ uri: avatarUrl }} style={styles.groupAvatar} />}
         <Text
-          style={[styles.groupRowText, highlight && styles.highlight, isMember && styles.isMember]} ellipsizeMode='tail'
+          style={[styles.groupRowText, highlight && styles.highlight, isMember && styles.isMember]}
+          ellipsizeMode='tail'
           numberOfLines={1}
         >
           {name}

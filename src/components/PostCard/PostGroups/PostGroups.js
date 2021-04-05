@@ -22,12 +22,8 @@ export default class PostGroups extends React.PureComponent {
     })
   }
 
-  goToGroupWithPublic = groupId => groupId == PUBLIC_GROUP.id
-    ? null
-    : this.props.goToGroup(groupId)
-
   render () {
-    const { groups: providedGroups, includePublic, shouldShowGroups, style } = this.props
+    const { groups: providedGroups, goToGroup, includePublic, shouldShowGroups, style } = this.props
     const { expanded } = this.state
     const groups = includePublic
       ? [...providedGroups, PUBLIC_GROUP]
@@ -41,7 +37,7 @@ export default class PostGroups extends React.PureComponent {
     const content = (
       <View style={styles.row}>
         <Text style={styles.reminderText}>Posted In: </Text>
-        <GroupsListSummary groups={groups} expandFunc={this.toggleExpanded} goToGroup={this.goToGroupWithPublic} />
+        <GroupsListSummary groups={groups} expandFunc={this.toggleExpanded} goToGroup={goToGroup} />
         <TouchableOpacity onPress={this.toggleExpanded} style={styles.arrowButton}>
           <Icon name='ArrowDown' style={styles.arrowIcon} />
         </TouchableOpacity>
@@ -55,7 +51,7 @@ export default class PostGroups extends React.PureComponent {
             <Icon name='ArrowUp' style={styles.arrowIcon} />
           </TouchableOpacity>
         </View>
-        <GroupsList groups={groups} onPress={this.goToGroupWithPublic} />
+        <GroupsList groups={groups} onPress={goToGroup} />
       </>
     )
 

@@ -98,13 +98,10 @@ export function HomeNavigator () {
       <Home.Screen name='Members' component={MembersComponent} />
       <Home.Screen name='Member' key='Member' component={MemberProfile} />
       <Home.Screen name='MemberDetails' key='MemberDetails' component={MemberDetails} />
-      <Home.Screen
-        name='MemberSkillEditor'
-        component={MemberSkillEditor}
-        options={{ headerTitle: 'Edit Skills' }}
-      />
+      <Home.Screen name='MemberSkillEditor' key='MemberSkillEditor' component={MemberSkillEditor}
+        options={{ headerTitle: 'Edit Skills' }} />
       <Home.Screen name='Group Relationships' component={Groups} />
-      <Home.Screen name='Group Details' component={GroupDetail} />
+      <Home.Screen name='Group Detail' component={GroupDetail} />
       <Home.Screen name='Topics' component={TopicsComponent} />
     </Home.Navigator>
   )
