@@ -94,7 +94,10 @@ export function createPost (post) {
       }
     },
     meta: {
-      extractModel: 'Post',
+      extractModel: {
+        modelName: 'Post',
+        getRoot: get('createPost')
+      },
       analytics: {
         eventName: AnalyticsEvents.POST_CREATED,
         detailsLength: textLength(preprocessedDetails),
@@ -171,7 +174,10 @@ export function createProject (post) {
       }
     },
     meta: {
-      extractModel: 'Post',
+      extractModel: {
+        modelName: 'Post',
+        getRoot: get('createProject')
+      },
       analytics: {
         eventName: AnalyticsEvents.POST_CREATED,
         detailsLength: textLength(preprocessedDetails),

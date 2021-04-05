@@ -78,12 +78,16 @@ export default class PostEditor extends React.Component {
     const headerTitle = isNewPost
       ? `New ${subject}`
       : `Edit ${subject}`
+    const headerRightButtonLabel = isSaving
+      ? 'Saving...'
+      : isNewPost
+        ? 'Post'
+        : 'Save'
+
     navigation.setOptions(buildModalScreenOptions({
       headerTitle,
       headerLeftConfirm: true,
-      headerRightButtonLabel: isSaving
-        ? 'Saving...'
-        : 'Save',
+      headerRightButtonLabel,
       headerRightButtonOnPress: this.save,
       headerRightButtonDisabled: isSaving
     }))
