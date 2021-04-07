@@ -41,6 +41,10 @@ export default function Comment ({
       { text: 'Yes', onPress: () => removeComment() },
       { text: 'Cancel', style: 'cancel' }
     ]) : null
+  
+    const handleCommentReply = () => {
+      console.log('!!! Comment Reply')
+    }
 
   let postTitle = get('title', post)
   if (displayPostTitle && postTitle) {
@@ -67,6 +71,10 @@ export default function Comment ({
               <Text style={styles.date}>on "{postTitle}"</Text>}
           </View>
           <View style={styles.headerRight}>
+            <TouchableOpacity style={styles.replyLink} onPress={handleCommentReply}>
+              <Icon style={styles.replyLinkIcon} name='Reply' />
+              <Text style={styles.replyLinkText}>Reply</Text>
+            </TouchableOpacity>
             {!hideMenu && (
               <CommentMenu
                 deleteComment={deleteCommentWithConfirm}
@@ -109,7 +117,7 @@ export function CommentMenu ({ deleteComment, removeComment, editComment }) {
   return (
     <PopupMenuButton
       actions={actions}
-      hitSlop={{ top: 20, bottom: 10, left: 10, right: 15 }}
+      hitSlop={{ top: 20, bottom: 10, left: 0, right: 15 }}
       destructiveButtonIndex={destructiveButtonIndex}
     >
       <Icon name='More' style={styles.menuIcon} />

@@ -1,4 +1,4 @@
-import { limedSpruce, slateGrey80, nevada, rhino50 } from 'style/colors'
+import { limedSpruce, slateGrey80, nevada, rhino50, white } from 'style/colors'
 
 export default {
   container: {
@@ -35,6 +35,23 @@ export default {
     color: limedSpruce,
     fontFamily: 'Circular-Bold',
     fontSize: 14
+  },
+  replyLink: {
+    flexDirection: 'row',
+    borderWidth: 1,
+    borderColor: slateGrey80,
+    padding: 3,
+    borderRadius: 5
+  },
+  replyLinkText: {
+    fontSize: 12,
+    color: slateGrey80,
+    marginLeft: 5
+  },
+  replyLinkIcon: {
+    transform: [{rotateY: '180deg'}],
+    fontSize: 12,
+    color: slateGrey80
   },
   date: {
     color: slateGrey80,

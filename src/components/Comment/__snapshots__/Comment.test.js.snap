@@ -14,7 +14,7 @@ exports[`commentMenu renders correctly 1`] = `
   hitSlop={
     Object {
       "bottom": 10,
-      "left": 10,
+      "left": 0,
       "right": 15,
       "top": 20,
     }
@@ -40,7 +40,7 @@ exports[`commentMenu returns removeComment 1`] = `
   hitSlop={
     Object {
       "bottom": 10,
-      "left": 10,
+      "left": 0,
       "right": 15,
       "top": 20,
     }
@@ -76,6 +76,16 @@ exports[`renders correctly 1`] = `
         </Text>
       </View>
       <View>
+        <ForwardRef
+          onPress={[Function]}
+        >
+          <Icon
+            name="Reply"
+          />
+          <Text>
+            Reply
+          </Text>
+        </ForwardRef>
         <CommentMenu
           deleteComment={[Function]}
           removeComment={null}
@@ -144,6 +154,16 @@ exports[`shows the post title when displayPostTitle is true 1`] = `
         </Text>
       </View>
       <View>
+        <ForwardRef
+          onPress={[Function]}
+        >
+          <Icon
+            name="Reply"
+          />
+          <Text>
+            Reply
+          </Text>
+        </ForwardRef>
         <CommentMenu
           deleteComment={null}
           removeComment={null}
