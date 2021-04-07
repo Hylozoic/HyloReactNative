@@ -11,7 +11,7 @@ import { createSelector as ormCreateSelector } from 'redux-orm'
 import orm from 'store/models'
 import { mapValues } from 'lodash'
 
-import { FETCH_POSTS } from 'store/actions/fetchPosts'
+import { FETCH_POSTS } from 'store/constants'
 import { CREATE_POST, CREATE_PROJECT } from 'screens/PostEditor/PostEditor.store'
 import { RECEIVE_POST } from 'components/SocketListener/SocketListener.store'
 import { REMOVE_POST_PENDING } from 'components/PostCard/PostHeader/PostHeader.store'
@@ -79,6 +79,7 @@ function matchNewPostIntoQueryResults (state, { id, type, groups }) {
 
 function prependIdForCreate (state, type, params, id) {
   const key = buildKey(type, params)
+
   if (!state[key]) return state
 
   return {
