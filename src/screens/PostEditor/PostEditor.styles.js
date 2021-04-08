@@ -11,8 +11,23 @@ import {
   rhino30,
   westSide,
   capeCod40,
-  white
+  white,
+  prim,
+  fuchsiaPink,
+  slateGrey80
 } from 'style/colors'
+
+const typeSelectorDefaults = {
+  // backgroundColor: fakeAlpha(havelockBlue, 0.2),
+  fontSize: 12,
+  fontWeight: 'bold',
+  borderRadius: 5,
+  borderColor: havelockBlue,
+  borderWidth: StyleSheet.hairlineWidth,
+  color: havelockBlue,
+  padding: 10,
+  paddingRight: 50
+}
 
 export default {
   container: {
@@ -50,11 +65,25 @@ export default {
   detailsEditorContainer: {
   },
   typeButtonRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    // flexDirection: 'row',
+    // justifyContent: 'space-between',
     marginTop: 10
   },
+  typeButtonIcon: {
+    fontSize: 20,
+    marginTop: 8,
+    marginRight: 10,
+    color: havelockBlue
+  },
   typeButton: {
+    inputIOS: {
+      paddingRight: 50,
+      backgroundColor: fakeAlpha(havelockBlue, 0.2),
+      color: havelockBlue
+    },
+    inputAndroid: {
+      paddingRight: 30
+    },
     box: {
       borderRadius: 4,
       backgroundColor: rhino10,
@@ -69,19 +98,25 @@ export default {
       fontFamily: 'Circular-Bold'
     },
     discussion: {
-      box: {
-        backgroundColor: fakeAlpha(havelockBlue, 0.2)
+      inputIOS: {
+        ...typeSelectorDefaults,
+        // backgroundColor: fakeAlpha(havelockBlue, 0.2),
+        borderColor: havelockBlue,
+        color: havelockBlue,        
       },
-      text: {
-        color: havelockBlue
-      }
+      inputAndroid: {
+        ...typeSelectorDefaults,
+        // backgroundColor: fakeAlpha(havelockBlue, 0.2),
+        borderColor: havelockBlue,
+        color: havelockBlue,        
+      },
     },
-    request: {
+    event: {
       box: {
-        backgroundColor: fakeAlpha(westSide, 0.2)
+        backgroundColor: 'rgba(254, 72, 80, .2)'
       },
       text: {
-        color: westSide
+        color: 'rgba(254, 72, 80, 1)'
       }
     },
     offer: {
@@ -98,6 +133,22 @@ export default {
       },
       text: {
         color: mangoYellow
+      }
+    },
+    project: {
+      box: {
+        backgroundColor: fakeAlpha(westSide, 0.2)
+      },
+      text: {
+        color: westSide
+      }
+    },
+    request: {
+      box: {
+        backgroundColor: prim
+      },
+      text: {
+        color: fuchsiaPink
       }
     }
   },

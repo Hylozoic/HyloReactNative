@@ -26,8 +26,13 @@ export function mapStateToProps (state, props) {
   const currentUser = getMe(state, props)
   const groupOptions = props.groupOptions ||
     (currentUser && currentUser.memberships.toModelArray().map(m => m.group.ref))
+  const postId = getPostId(state, props)
+  const post = getPresentedPost(state, { id: postId })
+  const isProject = get('route.params.isProject', props)
+  // Setup new post with defaults from routing
   const selectedTopicName = get('route.params.topicName', props)
   const selectedTopicTag = createTopicTag({ name: selectedTopicName })
+  const providedType = get('route.params.type', props)
   const defaultPost = selectedTopicName
     ? {
         detailsText: selectedTopicTag + ' ',
@@ -36,10 +41,7 @@ export function mapStateToProps (state, props) {
     : {
         groups: currentGroup && [currentGroup]
       }
-  const postId = getPostId(state, props)
-  const post = getPresentedPost(state, { id: postId })
-  const isProject = get('route.params.isProject', props) ||
-    get('type', post) === 'project'
+  if (providedType) defaultPost.type = providedType
 
   return {
     post: post || defaultPost,
@@ -56,9 +58,6 @@ export function mapStateToProps (state, props) {
 export function mapDispatchToProps (dispatch, props) {
   const { navigation, isProject } = props
   const postId = getPostId(null, props)
-  const saveAction = postId
-    ? updatePost
-    : isProject ? createProject : createPost
 
   return {
     save: postData => {
@@ -76,13 +75,19 @@ export function mapDispatchToProps (dispatch, props) {
 
       if (postId) postData.id = postId
 
+      const saveAction = postId
+        ? updatePost
+        : postData.type == 'project'
+          ? createProject
+          : createPost
+  
       return dispatch(saveAction(postData))
         .then(({ error, payload }) => {
           if (error) {
             // TODO: handle API errors more appropriately
             throw new Error('Error submitting post')
           }
-          const id = payload?.data?.createPost?.id
+          const id = payload?.data?.createPost?.id || payload?.data?.createProject?.id
 
           navigation.navigate('Post Details', { id })
 

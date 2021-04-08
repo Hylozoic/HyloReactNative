@@ -7,13 +7,14 @@ import {
   View,
   Alert
 } from 'react-native'
-import { get, uniq, uniqBy, isEmpty } from 'lodash/fp'
+import { get, uniq, uniqBy, isEmpty, capitalize } from 'lodash/fp'
 import moment from 'moment'
 import { validateTopicName } from 'hylo-utils/validators'
-import { rhino30 } from 'style/colors'
+import { fakeAlpha, fuchsiaPink, havelockBlue, jade, mangoYellow, rhino30, westSide } from 'style/colors'
 import { showToast, hideToast } from 'util/toast'
 import { buildModalScreenOptions } from 'navigation/header'
 import { MAX_TITLE_LENGTH } from './PostEditor.store'
+import RNPickerSelect from 'react-native-picker-select'
 // ProjectMembers Chooser
 import scopedFetchPeopleAutocomplete from 'store/actions/scopedFetchPeopleAutocomplete'
 import scopedGetPeopleAutocomplete from 'store/selectors/scopedGetPeopleAutocomplete'
@@ -43,12 +44,12 @@ import ItemChooserItemRow from 'screens/ItemChooser/ItemChooserItemRow'
 export default class PostEditor extends React.Component {
   constructor (props) {
     super(props)
-    const { post, imageUrls, fileUrls, isProject } = props
+    const { post, imageUrls, fileUrls } = props
     this.scrollView = React.createRef()
     this.state = {
       scrollViewHeight: 0,
       title: get('title', post) || '',
-      type: get('type', post) || (isProject ? 'project' : 'discussion'),
+      type: get('type', post) || 'discussion',
       groups: get('groups', post) || [],
       imageUrls,
       fileUrls,
@@ -71,10 +72,8 @@ export default class PostEditor extends React.Component {
 
   setHeader = () => {
     const { isSaving } = this.state
-    const { navigation, isNewPost, isProject } = this.props
-    const subject = isProject
-      ? 'Project'
-      : 'Post'
+    const { navigation, isNewPost } = this.props
+    const subject = capitalize(this.state?.type || '')
     const headerTitle = isNewPost
       ? `New ${subject}`
       : `Edit ${subject}`
@@ -103,18 +102,20 @@ export default class PostEditor extends React.Component {
     this.setHeader()
   }
 
-  componentDidUpdate (prevProps, prevState) {
-    if (prevState.isSaving !== this.state.isSaving) {
-      this.setHeader()
-    }
-  }
-
   shouldComponentUpdate (nextProps, nextState) {
     return nextProps.isFocused
   }
 
   handleDetailsOnChange = (detailsText) => {
     this.setState({ detailsText })
+  }
+
+  handleTypeOnChange = type => {
+    !this.state.isSaving && this.setState({ type }, this.setHeader)
+  }
+
+  setIsSaving = isSaving => {
+    this.setState({ isSaving }, this.setHeader)
   }
 
   _doSave = () => {
@@ -142,15 +143,13 @@ export default class PostEditor extends React.Component {
     }
 
     return save(postData)
-      // .catch(e => {
-      //   this.setState({ isSaving: false })
-      // })
+      .catch(e => { this.setIsSaving(false) })
   }
 
   save = () => {
     const { announcementEnabled } = this.state
 
-    this.setState({ isSaving: true })
+    this.setIsSaving(true)
 
     if (announcementEnabled) {
       Alert.alert(
@@ -161,7 +160,7 @@ export default class PostEditor extends React.Component {
           {
             text: 'Go Back',
             style: 'cancel',
-            onPress: () => this.setState({ isSaving: false })
+            onPress: () => this.setIsSaving(false)
           }
         ])
     } else {
@@ -383,7 +382,7 @@ export default class PostEditor extends React.Component {
   }
 
   render () {
-    const { currentGroup, canModerate, post, pendingDetailsText, isProject } = this.props
+    const { currentGroup, canModerate, post, pendingDetailsText } = this.props
     const {
       fileUrls, imageUrls, isSaving, topics, title, detailsText, type,
       filePickerPending, imagePickerPending, announcementEnabled,
@@ -402,6 +401,7 @@ export default class PostEditor extends React.Component {
       showImagePicker: this.showImagePicker,
       showFilePicker: this.showFilePicker
     }
+    const isProject = type == 'project'
 
     return (
       <KeyboardFriendlyView style={styles.container}>
@@ -413,19 +413,10 @@ export default class PostEditor extends React.Component {
           keyboardDismissMode='on-drag'
         >
           <View style={styles.scrollContent}>
-            {!isProject && (
-              <>
-                <Text style={styles.sectionLabel}>What are you posting today?</Text>
-                <View style={[styles.typeButtonRow, styles.section]}>
-                  {['discussion', 'request', 'offer', 'resource'].map(t => (
-                    <TypeButton
-                      type={t} key={t} selected={t === type}
-                      onPress={() => !isSaving && this.setState({ type: t })}
-                    />
-                  ))}
-                </View>
-              </>
-            )}
+            <View style={[styles.typeButtonRow, styles.section]}>
+              {/* <Text style={styles.sectionLabel}>What are you posting today?</Text> */}
+              <TypeSelector value={type} onValueChange={this.handleTypeOnChange} disabled={isSaving} />
+            </View>
             <Text style={styles.sectionLabel}>Title</Text>
             <View style={[styles.section, styles.textInputWrapper]}>
               <TextInput
@@ -600,6 +591,24 @@ const detailsPlaceholder = 'What else should we know?'
 
 const topicsPlaceholder = 'Add topics.'
 
+export function TypeSelector (props) {
+  return (
+    <RNPickerSelect {...props}
+      style={styles.typeButton[props.value]}
+      useNativeAndroidPickerStyle={false}
+      items={[
+          { label: 'Discussion'.toUpperCase(), value: 'discussion', color: havelockBlue },
+          { label: 'Event'.toUpperCase(), value: 'event', color: 'rgba(254, 72, 80, 1)' },
+          { label: 'Offer'.toUpperCase(), value: 'offer', color: jade },
+          { label: 'Resource'.toUpperCase(), value: 'resource', color: mangoYellow },
+          { label: 'Project'.toUpperCase(), value: 'project', color: westSide },
+          { label: 'Request'.toUpperCase(), value: 'request', color: fuchsiaPink }
+      ]}
+      Icon={() => <Icon name='ArrowDown' style={styles.typeButtonIcon} />}
+    />
+  )
+}
+
 export function Toolbar ({ post, canModerate, filePickerPending, imagePickerPending, announcementEnabled, toggleAnnoucement, showFilePicker, showImagePicker }) {
   return (
     <View style={styles.bottomBar}>
@@ -638,20 +647,6 @@ export function TopicPill ({ topic, topic: { name }, onPress }) {
     <TouchableOpacity onPress={onPress} style={styles.topicPill}>
       <Text style={styles.topicText}>#{name.toLowerCase()}</Text>
       <Icon name='Ex' style={styles.topicRemove} />
-    </TouchableOpacity>
-  )
-}
-
-export function TypeButton ({ type, selected, onPress }) {
-  const s = styles.typeButton
-  return (
-    <TouchableOpacity
-      onPress={onPress}
-      style={[s.box, selected && s[type].box]}
-    >
-      <Text style={[s.text, selected && s[type].text]}>
-        {type.toUpperCase()}
-      </Text>
     </TouchableOpacity>
   )
 }
