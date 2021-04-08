@@ -401,7 +401,6 @@ Object {
     "foo.png",
   ],
   "isNewPost": true,
-  "isProject": false,
   "pendingDetailsText": false,
   "post": Object {
     "commenters": Array [],

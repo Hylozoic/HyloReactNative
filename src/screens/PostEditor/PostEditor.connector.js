@@ -28,7 +28,6 @@ export function mapStateToProps (state, props) {
     (currentUser && currentUser.memberships.toModelArray().map(m => m.group.ref))
   const postId = getPostId(state, props)
   const post = getPresentedPost(state, { id: postId })
-  const isProject = get('route.params.isProject', props)
   // Setup new post with defaults from routing
   const selectedTopicName = get('route.params.topicName', props)
   const selectedTopicTag = createTopicTag({ name: selectedTopicName })
@@ -49,14 +48,13 @@ export function mapStateToProps (state, props) {
     imageUrls: post ? post.imageUrls : [],
     fileUrls: post ? post.fileUrls : [],
     isNewPost: isEmpty(postId),
-    isProject,
     canModerate: getCanModerate(state),
     pendingDetailsText: isPendingFor(fetchPost, state)
   }
 }
 
 export function mapDispatchToProps (dispatch, props) {
-  const { navigation, isProject } = props
+  const { navigation } = props
   const postId = getPostId(null, props)
 
   return {

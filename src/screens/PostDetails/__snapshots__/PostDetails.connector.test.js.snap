@@ -104,7 +104,6 @@ Object {
   "goToMembers": [Function],
   "id": "testpost",
   "isFocused": true,
-  "isProject": false,
   "joinProject": [Function],
   "leaveProject": [Function],
   "navigation": Object {

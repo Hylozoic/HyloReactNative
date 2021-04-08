@@ -62,40 +62,25 @@ export default {
     padding: 0,
     margin: 0
   },
-  detailsEditorContainer: {
+  detailsEditorContainer: {},
+  section: {
+    marginBottom: 8,
+    paddingBottom: 8
   },
-  typeButtonRow: {
-    // flexDirection: 'row',
-    // justifyContent: 'space-between',
-    marginTop: 10
+  sectionLabel: {
+    fontFamily: 'Circular-Bold'
   },
-  typeButtonIcon: {
-    fontSize: 20,
-    marginTop: 8,
-    marginRight: 10,
-    color: havelockBlue
-  },
-  typeButton: {
-    inputIOS: {
-      paddingRight: 50,
-      backgroundColor: fakeAlpha(havelockBlue, 0.2),
-      color: havelockBlue
+
+  // Type Selector
+  typeSelector: {
+    row: {
+      marginTop: 10
     },
-    inputAndroid: {
-      paddingRight: 30
-    },
-    box: {
-      borderRadius: 4,
-      backgroundColor: rhino10,
-      paddingVertical: 10,
-      width: '23%'
-    },
-    text: {
-      color: limedSpruce,
-      letterSpacing: 0.8,
-      fontSize: 10,
-      textAlign: 'center',
-      fontFamily: 'Circular-Bold'
+    icon: {
+      fontSize: 20,
+      marginTop: 8,
+      marginRight: 10,
+      color: havelockBlue  
     },
     discussion: {
       inputIOS: {
@@ -106,59 +91,77 @@ export default {
       },
       inputAndroid: {
         ...typeSelectorDefaults,
-        // backgroundColor: fakeAlpha(havelockBlue, 0.2),
         borderColor: havelockBlue,
         color: havelockBlue,        
       },
     },
     event: {
-      box: {
-        backgroundColor: 'rgba(254, 72, 80, .2)'
+      inputIOS: {
+        ...typeSelectorDefaults,
+        // backgroundColor: 'rgba(254, 72, 80, .2)'
+        borderColor: 'rgba(254, 72, 80, 1)',
+        color: 'rgba(254, 72, 80, 1)',        
       },
-      text: {
+      inputAndroid: {
+        ...typeSelectorDefaults,
+        borderColor: 'rgba(254, 72, 80, 1)',
         color: 'rgba(254, 72, 80, 1)'
       }
     },
     offer: {
-      box: {
-        backgroundColor: fakeAlpha(jade, 0.2)
+      inputIOS: {
+        ...typeSelectorDefaults,
+        // backgroundColor: fakeAlpha(jade, 0.2)
+        borderColor: jade,
+        color: jade,        
       },
-      text: {
-        color: jade
+      inputAndroid: {
+        ...typeSelectorDefaults,
+        borderColor: jade,
+        color: jade,        
       }
     },
     resource: {
-      box: {
-        backgroundColor: fakeAlpha(mangoYellow, 0.2)
+      inputIOS: {
+        ...typeSelectorDefaults,
+        // backgroundColor: fakeAlpha(mangoYellow, 0.2)
+        borderColor: mangoYellow,
+        color: mangoYellow,        
       },
-      text: {
-        color: mangoYellow
+      inputAndroid: {
+        ...typeSelectorDefaults,
+        borderColor: mangoYellow,
+        color: mangoYellow,        
       }
     },
     project: {
-      box: {
-        backgroundColor: fakeAlpha(westSide, 0.2)
+      inputIOS: {
+        ...typeSelectorDefaults,
+        // backgroundColor: fakeAlpha(westSide, 0.2)
+        borderColor: westSide,
+        color: westSide,        
       },
-      text: {
-        color: westSide
+      inputAndroid: {
+        ...typeSelectorDefaults,
+        borderColor: westSide,
+        color: westSide,        
       }
     },
     request: {
-      box: {
-        backgroundColor: prim
+      inputIOS: {
+        ...typeSelectorDefaults,
+        // backgroundColor: prim
+        borderColor: fuchsiaPink,
+        color: fuchsiaPink,        
       },
-      text: {
-        color: fuchsiaPink
+      inputAndroid: {
+        ...typeSelectorDefaults,
+        borderColor: fuchsiaPink,
+        color: fuchsiaPink,        
       }
     }
   },
-  section: {
-    marginBottom: 8,
-    paddingBottom: 8
-  },
-  sectionLabel: {
-    fontFamily: 'Circular-Bold'
-  },
+  
   topics: {
     justifyContent: 'center',
     display: 'flex',

@@ -413,7 +413,7 @@ export default class PostEditor extends React.Component {
           keyboardDismissMode='on-drag'
         >
           <View style={styles.scrollContent}>
-            <View style={[styles.typeButtonRow, styles.section]}>
+            <View style={[styles.typeSelector.row, styles.section]}>
               {/* <Text style={styles.sectionLabel}>What are you posting today?</Text> */}
               <TypeSelector value={type} onValueChange={this.handleTypeOnChange} disabled={isSaving} />
             </View>
@@ -594,17 +594,23 @@ const topicsPlaceholder = 'Add topics.'
 export function TypeSelector (props) {
   return (
     <RNPickerSelect {...props}
-      style={styles.typeButton[props.value]}
+      style={styles.typeSelector[props.value]}
       useNativeAndroidPickerStyle={false}
       items={[
-          { label: 'Discussion'.toUpperCase(), value: 'discussion', color: havelockBlue },
-          { label: 'Event'.toUpperCase(), value: 'event', color: 'rgba(254, 72, 80, 1)' },
-          { label: 'Offer'.toUpperCase(), value: 'offer', color: jade },
-          { label: 'Resource'.toUpperCase(), value: 'resource', color: mangoYellow },
-          { label: 'Project'.toUpperCase(), value: 'project', color: westSide },
-          { label: 'Request'.toUpperCase(), value: 'request', color: fuchsiaPink }
+          { label: 'Discussion'.toUpperCase(), value: 'discussion',
+            color: styles.typeSelector['discussion'].inputIOS.color },
+          { label: 'Event'.toUpperCase(), value: 'event',
+            color: styles.typeSelector['event'].inputIOS.color },
+          { label: 'Offer'.toUpperCase(), value: 'offer',
+            color: styles.typeSelector['offer'].inputIOS.color },
+          { label: 'Resource'.toUpperCase(), value: 'resource',
+            color: styles.typeSelector['resource'].inputIOS.color },
+          { label: 'Project'.toUpperCase(), value: 'project',
+            color: styles.typeSelector['project'].inputIOS.color },
+          { label: 'Request'.toUpperCase(), value: 'request',
+            color: styles.typeSelector['request'].inputIOS.color }
       ]}
-      Icon={() => <Icon name='ArrowDown' style={styles.typeButtonIcon} />}
+      Icon={() => <Icon name='ArrowDown' style={styles.typeSelector.icon} />}
     />
   )
 }

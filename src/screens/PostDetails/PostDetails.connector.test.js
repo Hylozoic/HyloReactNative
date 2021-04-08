@@ -44,7 +44,6 @@ beforeAll(() => {
   stateProps = {
     id: 'testpost',
     post: { id: 'testpost' },
-    isProject: false,
     currentUser: { id: 'currentuser' }
   }
 

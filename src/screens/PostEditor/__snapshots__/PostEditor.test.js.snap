@@ -8,33 +8,13 @@ exports[`PostEditor renders a new editor correctly 1`] = `
     onContentSizeChange={[Function]}
   >
     <View>
-      <React.Fragment>
-        <Text>
-          What are you posting today?
-        </Text>
-        <View>
-          <TypeButton
-            onPress={[Function]}
-            selected={true}
-            type="discussion"
-          />
-          <TypeButton
-            onPress={[Function]}
-            selected={false}
-            type="request"
-          />
-          <TypeButton
-            onPress={[Function]}
-            selected={false}
-            type="offer"
-          />
-          <TypeButton
-            onPress={[Function]}
-            selected={false}
-            type="resource"
-          />
-        </View>
-      </React.Fragment>
+      <View>
+        <TypeSelector
+          disabled={false}
+          onValueChange={[Function]}
+          value="discussion"
+        />
+      </View>
       <Text>
         Title
       </Text>
@@ -422,69 +402,184 @@ exports[`PostEditor renders correctly while saving 1`] = `
                       >
                         <View>
                           <View>
-                            <Text>
-                              What are you posting today?
-                            </Text>
                             <View>
-                              <View
-                                accessible={true}
-                                focusable={true}
-                                onClick={[Function]}
-                                onResponderGrant={[Function]}
-                                onResponderMove={[Function]}
-                                onResponderRelease={[Function]}
-                                onResponderTerminate={[Function]}
-                                onResponderTerminationRequest={[Function]}
-                                onStartShouldSetResponder={[Function]}
-                              >
-                                <Text>
-                                  DISCUSSION
-                                </Text>
-                              </View>
-                              <View
-                                accessible={true}
-                                focusable={true}
-                                onClick={[Function]}
-                                onResponderGrant={[Function]}
-                                onResponderMove={[Function]}
-                                onResponderRelease={[Function]}
-                                onResponderTerminate={[Function]}
-                                onResponderTerminationRequest={[Function]}
-                                onStartShouldSetResponder={[Function]}
-                              >
-                                <Text>
-                                  REQUEST
-                                </Text>
-                              </View>
-                              <View
-                                accessible={true}
-                                focusable={true}
-                                onClick={[Function]}
-                                onResponderGrant={[Function]}
-                                onResponderMove={[Function]}
-                                onResponderRelease={[Function]}
-                                onResponderTerminate={[Function]}
-                                onResponderTerminationRequest={[Function]}
-                                onStartShouldSetResponder={[Function]}
-                              >
-                                <Text>
-                                  OFFER
-                                </Text>
-                              </View>
-                              <View
-                                accessible={true}
-                                focusable={true}
-                                onClick={[Function]}
-                                onResponderGrant={[Function]}
-                                onResponderMove={[Function]}
-                                onResponderRelease={[Function]}
-                                onResponderTerminate={[Function]}
-                                onResponderTerminationRequest={[Function]}
-                                onStartShouldSetResponder={[Function]}
-                              >
-                                <Text>
-                                  RESOURCE
-                                </Text>
+                              <View>
+                                <View
+                                  accessible={true}
+                                  focusable={true}
+                                  onClick={[Function]}
+                                  onResponderGrant={[Function]}
+                                  onResponderMove={[Function]}
+                                  onResponderRelease={[Function]}
+                                  onResponderTerminate={[Function]}
+                                  onResponderTerminationRequest={[Function]}
+                                  onStartShouldSetResponder={[Function]}
+                                  testID="ios_touchable_wrapper"
+                                >
+                                  <View
+                                    pointerEvents="box-only"
+                                  >
+                                    <TextInput
+                                      allowFontScaling={true}
+                                      editable={false}
+                                      rejectResponderTermination={true}
+                                      testID="text_input"
+                                      underlineColorAndroid="transparent"
+                                      value="DISCUSSION"
+                                    />
+                                    <View
+                                      testID="icon_container"
+                                    >
+                                      <Icon
+                                        name="ArrowDown"
+                                      />
+                                    </View>
+                                  </View>
+                                </View>
+                                <Modal
+                                  hardwareAccelerated={false}
+                                  onOrientationChange={[Function]}
+                                  supportedOrientations={
+                                    Array [
+                                      "portrait",
+                                      "landscape",
+                                    ]
+                                  }
+                                  testID="ios_modal"
+                                  transparent={true}
+                                  visible={false}
+                                >
+                                  <View
+                                    accessible={true}
+                                    focusable={true}
+                                    onClick={[Function]}
+                                    onResponderGrant={[Function]}
+                                    onResponderMove={[Function]}
+                                    onResponderRelease={[Function]}
+                                    onResponderTerminate={[Function]}
+                                    onResponderTerminationRequest={[Function]}
+                                    onStartShouldSetResponder={[Function]}
+                                    testID="ios_modal_top"
+                                  />
+                                  <View
+                                    testID="input_accessory_view"
+                                  >
+                                    <View>
+                                      <View
+                                        accessible={true}
+                                        focusable={true}
+                                        onClick={[Function]}
+                                        onResponderGrant={[Function]}
+                                        onResponderMove={[Function]}
+                                        onResponderRelease={[Function]}
+                                        onResponderTerminate={[Function]}
+                                        onResponderTerminationRequest={[Function]}
+                                        onStartShouldSetResponder={[Function]}
+                                      >
+                                        <View />
+                                      </View>
+                                      <View
+                                        accessible={true}
+                                        focusable={true}
+                                        onClick={[Function]}
+                                        onResponderGrant={[Function]}
+                                        onResponderMove={[Function]}
+                                        onResponderRelease={[Function]}
+                                        onResponderTerminate={[Function]}
+                                        onResponderTerminationRequest={[Function]}
+                                        onStartShouldSetResponder={[Function]}
+                                      >
+                                        <View />
+                                      </View>
+                                    </View>
+                                    <View
+                                      accessible={true}
+                                      focusable={true}
+                                      hitSlop={
+                                        Object {
+                                          "bottom": 4,
+                                          "left": 4,
+                                          "right": 4,
+                                          "top": 4,
+                                        }
+                                      }
+                                      onClick={[Function]}
+                                      onResponderGrant={[Function]}
+                                      onResponderMove={[Function]}
+                                      onResponderRelease={[Function]}
+                                      onResponderTerminate={[Function]}
+                                      onResponderTerminationRequest={[Function]}
+                                      onStartShouldSetResponder={[Function]}
+                                      testID="done_button"
+                                    >
+                                      <View
+                                        testID="needed_for_touchable"
+                                      >
+                                        <Text
+                                          allowFontScaling={false}
+                                          testID="done_text"
+                                        >
+                                          Done
+                                        </Text>
+                                      </View>
+                                    </View>
+                                  </View>
+                                  <View>
+                                    <View>
+                                      <RNCPicker
+                                        items={
+                                          Array [
+                                            Object {
+                                              "label": "Select an item...",
+                                              "testID": undefined,
+                                              "textColor": 4288585892,
+                                              "value": null,
+                                            },
+                                            Object {
+                                              "label": "DISCUSSION",
+                                              "testID": undefined,
+                                              "textColor": 4282491356,
+                                              "value": "discussion",
+                                            },
+                                            Object {
+                                              "label": "EVENT",
+                                              "testID": undefined,
+                                              "textColor": 4294854736,
+                                              "value": "event",
+                                            },
+                                            Object {
+                                              "label": "OFFER",
+                                              "testID": undefined,
+                                              "textColor": 4278633584,
+                                              "value": "offer",
+                                            },
+                                            Object {
+                                              "label": "RESOURCE",
+                                              "testID": undefined,
+                                              "textColor": 4294825289,
+                                              "value": "resource",
+                                            },
+                                            Object {
+                                              "label": "PROJECT",
+                                              "testID": undefined,
+                                              "textColor": 4294940434,
+                                              "value": "project",
+                                            },
+                                            Object {
+                                              "label": "REQUEST",
+                                              "testID": undefined,
+                                              "textColor": 4290470056,
+                                              "value": "request",
+                                            },
+                                          ]
+                                        }
+                                        onChange={[Function]}
+                                        selectedIndex={1}
+                                        testID="ios_picker"
+                                      />
+                                    </View>
+                                  </View>
+                                </Modal>
                               </View>
                             </View>
                             <Text>
@@ -1034,69 +1129,184 @@ exports[`PostEditor renders correctly while saving 2`] = `
                       >
                         <View>
                           <View>
-                            <Text>
-                              What are you posting today?
-                            </Text>
                             <View>
-                              <View
-                                accessible={true}
-                                focusable={true}
-                                onClick={[Function]}
-                                onResponderGrant={[Function]}
-                                onResponderMove={[Function]}
-                                onResponderRelease={[Function]}
-                                onResponderTerminate={[Function]}
-                                onResponderTerminationRequest={[Function]}
-                                onStartShouldSetResponder={[Function]}
-                              >
-                                <Text>
-                                  DISCUSSION
-                                </Text>
-                              </View>
-                              <View
-                                accessible={true}
-                                focusable={true}
-                                onClick={[Function]}
-                                onResponderGrant={[Function]}
-                                onResponderMove={[Function]}
-                                onResponderRelease={[Function]}
-                                onResponderTerminate={[Function]}
-                                onResponderTerminationRequest={[Function]}
-                                onStartShouldSetResponder={[Function]}
-                              >
-                                <Text>
-                                  REQUEST
-                                </Text>
-                              </View>
-                              <View
-                                accessible={true}
-                                focusable={true}
-                                onClick={[Function]}
-                                onResponderGrant={[Function]}
-                                onResponderMove={[Function]}
-                                onResponderRelease={[Function]}
-                                onResponderTerminate={[Function]}
-                                onResponderTerminationRequest={[Function]}
-                                onStartShouldSetResponder={[Function]}
-                              >
-                                <Text>
-                                  OFFER
-                                </Text>
-                              </View>
-                              <View
-                                accessible={true}
-                                focusable={true}
-                                onClick={[Function]}
-                                onResponderGrant={[Function]}
-                                onResponderMove={[Function]}
-                                onResponderRelease={[Function]}
-                                onResponderTerminate={[Function]}
-                                onResponderTerminationRequest={[Function]}
-                                onStartShouldSetResponder={[Function]}
-                              >
-                                <Text>
-                                  RESOURCE
-                                </Text>
+                              <View>
+                                <View
+                                  accessible={true}
+                                  focusable={true}
+                                  onClick={[Function]}
+                                  onResponderGrant={[Function]}
+                                  onResponderMove={[Function]}
+                                  onResponderRelease={[Function]}
+                                  onResponderTerminate={[Function]}
+                                  onResponderTerminationRequest={[Function]}
+                                  onStartShouldSetResponder={[Function]}
+                                  testID="ios_touchable_wrapper"
+                                >
+                                  <View
+                                    pointerEvents="box-only"
+                                  >
+                                    <TextInput
+                                      allowFontScaling={true}
+                                      editable={false}
+                                      rejectResponderTermination={true}
+                                      testID="text_input"
+                                      underlineColorAndroid="transparent"
+                                      value="REQUEST"
+                                    />
+                                    <View
+                                      testID="icon_container"
+                                    >
+                                      <Icon
+                                        name="ArrowDown"
+                                      />
+                                    </View>
+                                  </View>
+                                </View>
+                                <Modal
+                                  hardwareAccelerated={false}
+                                  onOrientationChange={[Function]}
+                                  supportedOrientations={
+                                    Array [
+                                      "portrait",
+                                      "landscape",
+                                    ]
+                                  }
+                                  testID="ios_modal"
+                                  transparent={true}
+                                  visible={false}
+                                >
+                                  <View
+                                    accessible={true}
+                                    focusable={true}
+                                    onClick={[Function]}
+                                    onResponderGrant={[Function]}
+                                    onResponderMove={[Function]}
+                                    onResponderRelease={[Function]}
+                                    onResponderTerminate={[Function]}
+                                    onResponderTerminationRequest={[Function]}
+                                    onStartShouldSetResponder={[Function]}
+                                    testID="ios_modal_top"
+                                  />
+                                  <View
+                                    testID="input_accessory_view"
+                                  >
+                                    <View>
+                                      <View
+                                        accessible={true}
+                                        focusable={true}
+                                        onClick={[Function]}
+                                        onResponderGrant={[Function]}
+                                        onResponderMove={[Function]}
+                                        onResponderRelease={[Function]}
+                                        onResponderTerminate={[Function]}
+                                        onResponderTerminationRequest={[Function]}
+                                        onStartShouldSetResponder={[Function]}
+                                      >
+                                        <View />
+                                      </View>
+                                      <View
+                                        accessible={true}
+                                        focusable={true}
+                                        onClick={[Function]}
+                                        onResponderGrant={[Function]}
+                                        onResponderMove={[Function]}
+                                        onResponderRelease={[Function]}
+                                        onResponderTerminate={[Function]}
+                                        onResponderTerminationRequest={[Function]}
+                                        onStartShouldSetResponder={[Function]}
+                                      >
+                                        <View />
+                                      </View>
+                                    </View>
+                                    <View
+                                      accessible={true}
+                                      focusable={true}
+                                      hitSlop={
+                                        Object {
+                                          "bottom": 4,
+                                          "left": 4,
+                                          "right": 4,
+                                          "top": 4,
+                                        }
+                                      }
+                                      onClick={[Function]}
+                                      onResponderGrant={[Function]}
+                                      onResponderMove={[Function]}
+                                      onResponderRelease={[Function]}
+                                      onResponderTerminate={[Function]}
+                                      onResponderTerminationRequest={[Function]}
+                                      onStartShouldSetResponder={[Function]}
+                                      testID="done_button"
+                                    >
+                                      <View
+                                        testID="needed_for_touchable"
+                                      >
+                                        <Text
+                                          allowFontScaling={false}
+                                          testID="done_text"
+                                        >
+                                          Done
+                                        </Text>
+                                      </View>
+                                    </View>
+                                  </View>
+                                  <View>
+                                    <View>
+                                      <RNCPicker
+                                        items={
+                                          Array [
+                                            Object {
+                                              "label": "Select an item...",
+                                              "testID": undefined,
+                                              "textColor": 4288585892,
+                                              "value": null,
+                                            },
+                                            Object {
+                                              "label": "DISCUSSION",
+                                              "testID": undefined,
+                                              "textColor": 4282491356,
+                                              "value": "discussion",
+                                            },
+                                            Object {
+                                              "label": "EVENT",
+                                              "testID": undefined,
+                                              "textColor": 4294854736,
+                                              "value": "event",
+                                            },
+                                            Object {
+                                              "label": "OFFER",
+                                              "testID": undefined,
+                                              "textColor": 4278633584,
+                                              "value": "offer",
+                                            },
+                                            Object {
+                                              "label": "RESOURCE",
+                                              "testID": undefined,
+                                              "textColor": 4294825289,
+                                              "value": "resource",
+                                            },
+                                            Object {
+                                              "label": "PROJECT",
+                                              "testID": undefined,
+                                              "textColor": 4294940434,
+                                              "value": "project",
+                                            },
+                                            Object {
+                                              "label": "REQUEST",
+                                              "testID": undefined,
+                                              "textColor": 4290470056,
+                                              "value": "request",
+                                            },
+                                          ]
+                                        }
+                                        onChange={[Function]}
+                                        selectedIndex={6}
+                                        testID="ios_picker"
+                                      />
+                                    </View>
+                                  </View>
+                                </Modal>
                               </View>
                             </View>
                             <Text>
@@ -1402,33 +1612,13 @@ exports[`PostEditor renders with a post 1`] = `
     onContentSizeChange={[Function]}
   >
     <View>
-      <React.Fragment>
-        <Text>
-          What are you posting today?
-        </Text>
-        <View>
-          <TypeButton
-            onPress={[Function]}
-            selected={true}
-            type="discussion"
-          />
-          <TypeButton
-            onPress={[Function]}
-            selected={false}
-            type="request"
-          />
-          <TypeButton
-            onPress={[Function]}
-            selected={false}
-            type="offer"
-          />
-          <TypeButton
-            onPress={[Function]}
-            selected={false}
-            type="resource"
-          />
-        </View>
-      </React.Fragment>
+      <View>
+        <TypeSelector
+          disabled={false}
+          onValueChange={[Function]}
+          value="discussion"
+        />
+      </View>
       <Text>
         Title
       </Text>
@@ -1553,11 +1743,67 @@ exports[`PostEditor renders with a post 1`] = `
 `;
 
 exports[`TypeButton renders correctly 1`] = `
-<ForwardRef
-  onPress={[MockFunction]}
->
-  <Text>
-    DISCUSSION
-  </Text>
-</ForwardRef>
+<RNPickerSelect
+  Icon={[Function]}
+  InputAccessoryView={null}
+  disabled={false}
+  doneText="Done"
+  fixAndroidTouchableBug={false}
+  itemKey={null}
+  items={
+    Array [
+      Object {
+        "color": "#41A1DC",
+        "label": "DISCUSSION",
+        "value": "discussion",
+      },
+      Object {
+        "color": "rgba(254, 72, 80, 1)",
+        "label": "EVENT",
+        "value": "event",
+      },
+      Object {
+        "color": "#06C470",
+        "label": "OFFER",
+        "value": "offer",
+      },
+      Object {
+        "color": "#FDD549",
+        "label": "RESOURCE",
+        "value": "resource",
+      },
+      Object {
+        "color": "#FF9712",
+        "label": "PROJECT",
+        "value": "project",
+      },
+      Object {
+        "color": "#BB60A8",
+        "label": "REQUEST",
+        "value": "request",
+      },
+    ]
+  }
+  modalProps={Object {}}
+  onClose={null}
+  onDonePress={null}
+  onDownArrow={null}
+  onOpen={null}
+  onUpArrow={null}
+  onValueChange={[MockFunction]}
+  pickerProps={Object {}}
+  placeholder={
+    Object {
+      "color": "#9EA0A4",
+      "label": "Select an item...",
+      "value": null,
+    }
+  }
+  style={Object {}}
+  textInputProps={Object {}}
+  touchableDoneProps={Object {}}
+  touchableWrapperProps={Object {}}
+  useNativeAndroidPickerStyle={false}
+  value="discussion"
+/>
 `;
