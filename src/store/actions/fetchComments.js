@@ -1,32 +1,17 @@
-import { get } from 'lodash/fp'
 import { FETCH_COMMENTS } from 'store/constants'
+import { get } from 'lodash/fp'
+import commentsQuery from 'graphql/queries/commentsQuery'
 
 export default function fetchComments (id, opts = {}) {
+  const { cursor } = opts
+
   return {
     type: FETCH_COMMENTS,
     graphql: {
-      query: `query ($id: ID, $cursor: ID) {
-        post(id: $id) {
-          id
-          comments(first: 10, cursor: $cursor, order: "desc") {
-            items {
-              id
-              text
-              creator {
-                id
-                name
-                avatarUrl
-              }
-              createdAt
-            }
-            total
-            hasMore
-          }
-        }
-      }`,
+      query: commentsQuery,
       variables: {
         id,
-        cursor: opts.cursor || null
+        cursor: cursor || null
       }
     },
     meta: {

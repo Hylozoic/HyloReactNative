@@ -1,12 +1,7 @@
-import { uniqueId } from 'lodash/fp'
-import { divToP } from 'hylo-utils/text'
-import { AnalyticsEvents } from 'hylo-utils/constants'
+import { CREATE_COMMENT } from 'store/constants'
 
 export const MODULE_NAME = 'CommentEditor'
 export const SET_COMMENT_EDITS = `${MODULE_NAME}/SET_COMMENT_EDITS`
-export const CREATE_COMMENT = `${MODULE_NAME}/CREATE_COMMENT`
-export const EDIT_COMMENT = `${MODULE_NAME}/CREATE_COMMENT`
-export const UPDATE_COMMENT = `${MODULE_NAME}/UPDATE_COMMENT_PENDING`
 
 export function setCommentEdits (postId, text, commentId) {
   return {
@@ -28,65 +23,4 @@ export default function reducer (state = {}, action) {
 
 export function getCommentEdits (state, { postId }) {
   return state[MODULE_NAME][postId]
-}
-
-export function createComment (postId, text) {
-  const preprocessedText = divToP(text)
-  return {
-    type: CREATE_COMMENT,
-    graphql: {
-      query: `mutation ($postId: String, $text: String) {
-        createComment(data: {postId: $postId, text: $text}) {
-          id
-          text
-          post {
-            id
-          }
-          createdAt
-          creator {
-            id
-          }
-        }
-      }`,
-      variables: {
-        postId,
-        text: preprocessedText
-      }
-    },
-    meta: {
-      optimistic: true,
-      extractModel: 'Comment',
-      tempId: uniqueId(`post${postId}_`),
-      postId,
-      text: preprocessedText,
-      analytics: AnalyticsEvents.COMMENT_CREATED
-    }
-  }
-}
-
-export function updateComment (id, text) {
-  return {
-    type: UPDATE_COMMENT,
-    graphql: {
-      query: `mutation ($id: ID, $data: CommentInput) {
-        updateComment(id: $id, data: $data) {
-            id
-            text
-        }
-      }`,
-      variables: {
-        id,
-        data: {
-          text
-        }
-      }
-    },
-    meta: {
-      optimistic: true,
-      id,
-      data: {
-        text
-      }
-    }
-  }
 }

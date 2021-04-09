@@ -73,7 +73,7 @@ Array [
         "tempId": "posttestpost_1",
         "text": "some comment",
       },
-      "type": "CommentEditor/CREATE_COMMENT",
+      "type": "CREATE_COMMENT",
     },
   ],
 ]

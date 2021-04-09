@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { StyleSheet, Text, View, Alert, TouchableOpacity } from 'react-native'
 import HTMLView from 'react-native-htmlview'
 import { get, isEmpty, filter, findLastIndex } from 'lodash/fp'
@@ -10,6 +10,10 @@ import PopupMenuButton from 'components/PopupMenuButton'
 import Icon from 'components/Icon'
 import styles from './Comment.styles'
 import { caribbeanGreen } from 'style/colors'
+import SubComments from 'components/Comments'
+import { TextInput } from 'react-native-gesture-handler'
+
+const INITIAL_SUBCOMMENTS_DISPLAYED = 2
 
 export default function Comment ({
   comment,
@@ -18,82 +22,106 @@ export default function Comment ({
   slug,
   style,
   displayPostTitle,
+  allowReply = true,
+  onReplyComment,
   deleteComment,
   removeComment,
   editComment,
-  hideMenu
+  hideMenu,
+  // Not currently being used
+  updateComment,
+  fetchChildComments
 }) {
   const { creator, text, createdAt, post } = comment
   const presentedText = present(sanitize(text), { slug })
 
-  const deleteCommentWithConfirm = deleteComment ? () => Alert.alert(
+  const deleteCommentWithConfirm = deleteComment ? commentId => Alert.alert(
     'Confirm Delete',
     'Are you sure you want to delete this comment?',
     [
-      { text: 'Yes', onPress: () => deleteComment() },
+      { text: 'Yes', onPress: () => deleteComment(commentId) },
       { text: 'Cancel', style: 'cancel' }
     ]) : null
 
-  const removeCommentWithConfirm = removeComment ? () => Alert.alert(
+  const removeCommentWithConfirm = removeComment ? commentId => Alert.alert(
     'Moderator: Confirm Delete',
     'Are you sure you want to remove this comment?',
     [
-      { text: 'Yes', onPress: () => removeComment() },
+      { text: 'Yes', onPress: () => removeComment(commentId) },
       { text: 'Cancel', style: 'cancel' }
     ]) : null
   
-    const handleCommentReply = () => {
-      console.log('!!! Comment Reply')
-    }
-
   let postTitle = get('title', post)
+
   if (displayPostTitle && postTitle) {
     postTitle = postTitle.length > 40
       ? postTitle.substring(0, 40) + '...'
       : postTitle
   }
+
+  let { childComments } = comment
   
-  const creatorUrl = `/m/${creator.id}`
+  childComments = childComments && childComments.slice(-INITIAL_SUBCOMMENTS_DISPLAYED)
   
   return (
-    <View style={[style, styles.container]}>
-      <TouchableOpacity onPress={() => showMember(creator.id)}>
-        <Avatar avatarUrl={creator.avatarUrl} style={styles.avatar} />
-      </TouchableOpacity>
-      <View style={styles.details}>
-        <View style={styles.header}>
-          <View style={styles.meta}>
-            <TouchableOpacity onPress={() => showMember(creator.id)}>
-              <Text style={styles.name}>{creator.name}</Text>
-            </TouchableOpacity>
-            <Text style={styles.date}>{humanDate(createdAt)}</Text>
-            {displayPostTitle &&
-              <Text style={styles.date}>on "{postTitle}"</Text>}
-          </View>
-          <View style={styles.headerRight}>
-            <TouchableOpacity style={styles.replyLink} onPress={handleCommentReply}>
-              <Icon style={styles.replyLinkIcon} name='Reply' />
-              <Text style={styles.replyLinkText}>Reply</Text>
-            </TouchableOpacity>
-            {!hideMenu && (
-              <CommentMenu
-                deleteComment={deleteCommentWithConfirm}
-                removeComment={removeCommentWithConfirm}
-                editComment={editComment}
-              />
-            )}
-          </View>
-
+    <>
+      <View style={{ marginLeft: 50 }}>
+        <View>
+          <SubComments
+            commentId={comment.id}
+            showMember={showMember}
+            showTopic={showTopic}
+            slug={slug}
+            allowReply={false}
+            onReplyComment={null}
+            deleteComment={deleteComment}
+            removeComment={removeComment}
+            editComment={editComment}
+            hideMenu={hideMenu}
+            key={comment.id}
+          />
         </View>
-        <HTMLView
-          addLineBreaks={false}
-          onLinkPress={url => urlHandler(url, showMember, showTopic, slug)}
-          stylesheet={richTextStyles}
-          textComponentProps={{ style: styles.text }}
-          value={presentedText}
-        />
       </View>
-    </View>
+      <View style={[style, styles.container]}>
+        <TouchableOpacity onPress={() => showMember(creator.id)}>
+          <Avatar avatarUrl={creator.avatarUrl} style={styles.avatar} />
+        </TouchableOpacity>
+        <View style={styles.details}>
+          <View style={styles.header}>
+            <View style={styles.meta}>
+              <TouchableOpacity onPress={() => showMember(creator.id)}>
+                <Text style={styles.name}>{creator.name}</Text>
+              </TouchableOpacity>
+              <Text style={styles.date}>{humanDate(createdAt)}</Text>
+              {displayPostTitle &&
+                <Text style={styles.date}>on "{postTitle}"</Text>}
+            </View>
+            <View style={styles.headerRight}>
+              {allowReply && (
+                <TouchableOpacity style={styles.replyLink} onPress={onReplyComment}>
+                  <Icon style={styles.replyLinkIcon} name='Reply' />
+                  <Text style={styles.replyLinkText}>Reply</Text>
+                </TouchableOpacity>
+              )}
+              {!hideMenu && (
+                <CommentMenu
+                  deleteComment={() => deleteCommentWithConfirm(comment.id)}
+                  removeComment={() => removeCommentWithConfirm(comment.id)}
+                  editComment={editComment}
+                />
+              )}
+            </View>
+          </View>
+          <HTMLView
+            addLineBreaks={false}
+            onLinkPress={url => urlHandler(url, showMember, showTopic, slug)}
+            stylesheet={richTextStyles}
+            textComponentProps={{ style: styles.text }}
+            value={presentedText}
+          />
+        </View>
+      </View>
+    </>
   )
 }
 

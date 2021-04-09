@@ -1,59 +1,68 @@
 /* eslint-disable camelcase */
-import React, { useRef, useLayoutEffect, useCallback, useEffect } from 'react'
+import React, { useRef, useLayoutEffect, useState, useCallback, useEffect } from 'react'
 import { Text, TouchableOpacity, View, ScrollView } from 'react-native'
 import Comment from 'components/Comment'
 import Loading from 'components/Loading'
 import styles from './Comments.styles'
+import { FlatList } from 'react-native-gesture-handler'
 
 export default function Comments ({
   comments = [],
-  header,
+  allowReply = true,
+  header = null,
   pending,
   total,
   hasMore,
   fetchComments,
+  style = {},
   showMember,
   showTopic,
   slug,
   panHandlers
 }) {
   useEffect(() => { fetchComments() }, [])
-  useLayoutEffect(() => {
-    // NOTE: `setTimeout` used here as their
-    // seems no other reliable way to guarantee
-    // the bottom is available before scrolling
-    if (!pending && total > 0) setTimeout(() => (
-      scrollViewRef.current?.scrollToEnd()
-    ))
-  }, [pending, total])
 
   const scrollViewRef = useRef()
 
+  const handleReply = comment => {
+    scrollViewRef.current?.scrollToIndex({
+      index: comments.findIndex(c => c.id == comment.id)
+    })
+  }
+
+  const renderItem = comment => {
+    return <Comment comment={comment.item}
+      allowReply={allowReply}
+      onReply={handleReply}
+      showMember={showMember}
+      showTopic={showTopic}
+      slug={slug}
+      key={comment.item.id} />
+  }
+
+  // TOO: Re-integrate "Show more" and pending...
+  //     <ShowMore
+  //       commentsLength={comments.length}
+  //       total={total}
+  //       hasMore={hasMore}
+  //       fetchComments={fetchComments}
+  //     />
+  //     {pending && <View style={styles.loadingContainer}>
+  //       <Loading style={styles.loading} />
+  //     </View>}
+  
   return (
-    <ScrollView
+    <FlatList
+      style={style}
       ref={scrollViewRef}
+      data={comments}
+      keyExtractor={comment => comment.id}
+      renderItem={renderItem}
       keyboardDismissMode='interactive'
-      {...panHandlers}>
-      {header}
-      <ShowMore
-        commentsLength={comments.length}
-        total={total}
-        hasMore={hasMore}
-        fetchComments={fetchComments}
-      />
-      {pending && <View style={styles.loadingContainer}>
-        <Loading style={styles.loading} />
-      </View>}
-      {comments.map(comment => (
-        <Comment
-          comment={comment}
-          showMember={showMember}
-          showTopic={showTopic}
-          slug={slug}
-          key={comment.id}
-        />
-      ))}
-    </ScrollView>
+      ListFooterComponent={header}
+      inverted
+      initialScrollIndex={0}
+      {...panHandlers} />
   )
 }
 
