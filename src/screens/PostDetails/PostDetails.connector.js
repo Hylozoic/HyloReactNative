@@ -47,7 +47,7 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     ...dispatchProps,
     ...ownProps,
     fetchPost: () => dispatch(fetchPost(id)),
-    createComment: value => dispatch(createComment(id, value)),
+    createComment: text => dispatch(createComment({ postId: id, text })),
     joinProject: () => dispatch(joinProject(id)),
     leaveProject: () => dispatch(leaveProject(id)),
     goToGroup: groupId => dispatchProps.goToGroup(groupId, memberships, currentGroup.id),

@@ -10,11 +10,9 @@ import fetchComments from 'store/actions/fetchComments'
 import { FETCH_COMMENTS } from 'store/constants'
 
 export function mapStateToProps (state, props) {
-  const comments = getComments(state, props)
-
   return {
     // Get comments by postId OR commentId
-    comments,
+    comments: getComments(state, props),
     total: getTotalComments(state, { id: props.commentId || props.postId }),
     hasMore: getHasMoreComments(state, { id: props.commentId || props.postId }),
     currentUser: getMe(state),

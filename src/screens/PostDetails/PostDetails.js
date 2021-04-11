@@ -81,7 +81,7 @@ export default class PostDetails extends React.Component {
         showMember={showMember}
         showTopic={this.onShowTopic}
         slug={slug}
-        onReply={() => this.editorRef?.current?.editorInputRef.current.focus()}
+        editorRef={this.editorRef}
         panHandlers={panHandlers}
       />
     )

@@ -9,7 +9,7 @@ import { FlatList } from 'react-native-gesture-handler'
 export default function Comments ({
   commentId,
   postId,
-  onReply,
+  editorRef,
   onReplyToParent,
   comments = [],
   header = null,
@@ -28,24 +28,26 @@ export default function Comments ({
   const scrollViewRef = useRef()
 
   const replyMaker = comment => () => {
-    // For recursive sub-comment context, will run the parent's comment 
+    // For recursive sub-comment context, will reply to the parent's comment 
     if (onReplyToParent) return onReplyToParent()
 
     scrollViewRef.current?.scrollToIndex({
       index: comments.findIndex(c => c.id == comment.id)
     })
-
-    onReply()
+    
+    editorRef.current?.editorInputRef.current.clear()
+    editorRef.current?.editorInputRef.current.focus()
+    // editorRef?.current?.insertMention(post.creator)
   }
 
-  const renderItem = comment => {
-    return <Comment comment={comment.item}
+  const renderItem = ({ item: comment }) => {
+    return <Comment comment={comment}
       scrollViewRef={scrollViewRef}
-      replyMaker={replyMaker}
+      handleReply={replyMaker(comment)}
       showMember={showMember}
       showTopic={showTopic}
       slug={slug}
-      key={comment.item.id} />
+      key={comment.id} />
   }
 
   // TOO: Re-integrate "Show more" and pending...

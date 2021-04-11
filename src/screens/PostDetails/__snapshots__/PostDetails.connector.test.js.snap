@@ -84,8 +84,8 @@ mutation CreateCommentMutation (
         "variables": Object {
           "attachments": undefined,
           "parentCommentId": undefined,
-          "postId": undefined,
-          "text": undefined,
+          "postId": "testpost",
+          "text": "some comment",
         },
       },
       "meta": Object {
@@ -93,9 +93,9 @@ mutation CreateCommentMutation (
         "attachments": undefined,
         "extractModel": "Comment",
         "optimistic": true,
-        "postId": undefined,
-        "tempId": "postundefined_1",
-        "text": "",
+        "postId": "testpost",
+        "tempId": "posttestpost_1",
+        "text": "some comment",
       },
       "type": "CREATE_COMMENT",
     },

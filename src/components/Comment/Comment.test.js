@@ -19,7 +19,7 @@ it('renders correctly', () => {
 
   const renderer = new ReactShallowRenderer()
   renderer.render(
-    <Comment comment={comment} deleteComment={jest.fn()} replyMaker={jest.fn()} style={style} />
+    <Comment comment={comment} deleteComment={jest.fn()} handleReply={jest.fn()} style={style} />
   )
   const actual = renderer.getRenderOutput()
 
@@ -46,7 +46,7 @@ it('shows the post title when displayPostTitle is true', () => {
 
   const renderer = new ReactShallowRenderer()
   renderer.render(
-    <Comment comment={comment} style={style} replyMaker={jest.fn()} displayPostTitle />
+    <Comment comment={comment} style={style} handleReply={jest.fn()} displayPostTitle />
   )
   const actual = renderer.getRenderOutput()
 

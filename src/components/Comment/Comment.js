@@ -21,7 +21,7 @@ export default function Comment ({
   slug,
   style,
   displayPostTitle,
-  replyMaker,
+  handleReply,
   deleteComment,
   removeComment,
   editComment,
@@ -29,7 +29,6 @@ export default function Comment ({
 }) {
   const { creator, text, createdAt, post } = comment
   const presentedText = present(sanitize(text), { slug })
-  const handleReply = replyMaker(comment)
 
   const deleteCommentWithConfirm = deleteComment ? commentId => Alert.alert(
     'Confirm Delete',
@@ -89,7 +88,7 @@ export default function Comment ({
                 <Text style={styles.date}>on "{postTitle}"</Text>}
             </View>
             <View style={styles.headerRight}>
-              {replyMaker && (
+              {handleReply && (
                 <TouchableOpacity style={styles.replyLink} onPress={handleReply}>
                   <Icon style={styles.replyLinkIcon} name='Reply' />
                   <Text style={styles.replyLinkText}>Reply</Text>

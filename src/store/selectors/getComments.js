@@ -39,7 +39,7 @@ export const getComments = createSelector(
       if (!post) return []
   
       comments = post.comments.filter({ parentComment: null })
-        // .orderBy(naturalOrdering)
+        .orderBy(c => -Number(c.id))
         .toModelArray()
         .map(normaliseCommentModel(post))
     }
