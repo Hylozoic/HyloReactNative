@@ -11,7 +11,6 @@ import Icon from 'components/Icon'
 import styles from './Comment.styles'
 import { caribbeanGreen } from 'style/colors'
 import SubComments from 'components/Comments'
-import { TextInput } from 'react-native-gesture-handler'
 
 const INITIAL_SUBCOMMENTS_DISPLAYED = 2
 

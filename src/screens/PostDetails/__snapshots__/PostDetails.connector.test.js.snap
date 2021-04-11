@@ -47,31 +47,55 @@ Array [
   Array [
     Object {
       "graphql": Object {
-        "query": "mutation ($postId: String, $text: String) {
-        createComment(data: {postId: $postId, text: $text}) {
-          id
-          text
-          post {
-            id
-          }
-          createdAt
-          creator {
-            id
-          }
-        }
-      }",
+        "query": "
+mutation CreateCommentMutation (
+  $postId: String,
+  $parentCommentId: String,
+  $text: String,
+  $attachments: [AttachmentInput],
+) {
+  createComment(data: {
+    postId: $postId,
+    parentCommentId: $parentCommentId,
+    text: $text,
+    attachments: $attachments,
+  }) {
+    id
+    text
+    post {
+      id
+    }
+    creator {
+      id
+    }
+    attachments {
+      type
+      url
+      position
+      id
+    }
+    parentComment {
+      id
+    }
+    createdAt
+  }
+}
+",
         "variables": Object {
-          "postId": "testpost",
-          "text": "some comment",
+          "attachments": undefined,
+          "parentCommentId": undefined,
+          "postId": undefined,
+          "text": undefined,
         },
       },
       "meta": Object {
         "analytics": "Comment Created",
+        "attachments": undefined,
         "extractModel": "Comment",
         "optimistic": true,
-        "postId": "testpost",
-        "tempId": "posttestpost_1",
-        "text": "some comment",
+        "postId": undefined,
+        "tempId": "postundefined_1",
+        "text": "",
       },
       "type": "CREATE_COMMENT",
     },

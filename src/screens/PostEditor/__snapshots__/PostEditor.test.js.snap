@@ -34,7 +34,7 @@ exports[`PostEditor renders a new editor correctly 1`] = `
       <Text>
         Details
       </Text>
-      <withNavigation(InlineEditor)
+      <ForwardRef
         autoGrow={false}
         editable={true}
         inputStyle={
@@ -1638,7 +1638,7 @@ exports[`PostEditor renders with a post 1`] = `
       <Text>
         Details
       </Text>
-      <withNavigation(InlineEditor)
+      <ForwardRef
         autoGrow={false}
         editable={true}
         inputStyle={

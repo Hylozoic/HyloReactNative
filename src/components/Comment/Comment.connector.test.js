@@ -5,7 +5,10 @@ let session, state
 
 beforeEach(() => {
   session = orm.mutableSession(orm.getEmptyState())
-  state = { orm: session.state }
+  state = {
+    orm: session.state,
+    queryResults: {}
+  }
 })
 
 describe('mapStateToProps', () => {
@@ -39,7 +42,8 @@ describe('mapStateToProps', () => {
 
 describe('mergeProps', () => {
   const dispatchProps = {
-    deleteComment: jest.fn()
+    deleteComment: jest.fn(),
+    fetchCommentsMaker: jest.fn()
   }
 
   it('returns removeComment when moderator', () => {

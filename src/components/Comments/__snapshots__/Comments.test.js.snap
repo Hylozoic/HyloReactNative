@@ -1,43 +1,31 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Comments renders correctly 1`] = `
-<ScrollView
-  keyboardDismissMode="interactive"
->
-  <Text>
-    Some React Code
-  </Text>
-  <ShowMore
-    commentsLength={3}
-    fetchComments={[Function]}
-    hasMore={true}
-    total={17}
-  />
-  <View>
-    <Loading />
-  </View>
-  <Memo(Connect(Comment))
-    comment={
+<ForwardRef
+  ListFooterComponent={
+    <Text>
+      Some React Code
+    </Text>
+  }
+  data={
+    Array [
       Object {
         "id": 1,
-      }
-    }
-  />
-  <Memo(Connect(Comment))
-    comment={
+      },
       Object {
         "id": 2,
-      }
-    }
-  />
-  <Memo(Connect(Comment))
-    comment={
+      },
       Object {
         "id": 3,
-      }
-    }
-  />
-</ScrollView>
+      },
+    ]
+  }
+  initialScrollIndex={0}
+  inverted={true}
+  keyExtractor={[Function]}
+  keyboardDismissMode="interactive"
+  renderItem={[Function]}
+/>
 `;
 
 exports[`ShowMore renders correctly 1`] = `
