@@ -7,8 +7,11 @@ import styles from './Comments.styles'
 import { FlatList } from 'react-native-gesture-handler'
 
 export default function Comments ({
+  commentId,
+  postId,
+  onReply,
+  onReplyToParent,
   comments = [],
-  allowReply = true,
   header = null,
   pending,
   total,
@@ -20,20 +23,25 @@ export default function Comments ({
   slug,
   panHandlers
 }) {
-  useEffect(() => { fetchComments() }, [])
+  useEffect(() => { if (!commentId) fetchComments() }, [])
 
   const scrollViewRef = useRef()
 
-  const handleReply = comment => {
+  const replyMaker = comment => () => {
+    // For recursive sub-comment context, will run the parent's comment 
+    if (onReplyToParent) return onReplyToParent()
+
     scrollViewRef.current?.scrollToIndex({
       index: comments.findIndex(c => c.id == comment.id)
     })
+
+    onReply()
   }
 
   const renderItem = comment => {
     return <Comment comment={comment.item}
-      allowReply={allowReply}
-      onReply={handleReply}
+      scrollViewRef={scrollViewRef}
+      replyMaker={replyMaker}
       showMember={showMember}
       showTopic={showTopic}
       slug={slug}

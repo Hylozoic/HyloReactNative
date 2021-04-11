@@ -11,7 +11,6 @@ import { FETCH_COMMENTS } from 'store/constants'
 
 export function mapStateToProps (state, props) {
   const comments = getComments(state, props)
-  console.log('!!! comments:', comments)
 
   return {
     // Get comments by postId OR commentId
@@ -29,7 +28,7 @@ export const mapDispatchToProps = (dispatch, props) => {
   return {
     fetchCommentsMaker: cursor => () => {
       // For now ignoring if querying on parent commentId (has more?)...
-      if (!commentId) dispatch(fetchComments(postId, { cursor }))
+      dispatch(fetchComments(postId, { cursor }))
     },
     // Not currently used
     createComment: commentParams => dispatch(createComment({ postId, ...commentParams }))

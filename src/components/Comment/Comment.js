@@ -22,18 +22,15 @@ export default function Comment ({
   slug,
   style,
   displayPostTitle,
-  allowReply = true,
-  onReplyComment,
+  replyMaker,
   deleteComment,
   removeComment,
   editComment,
-  hideMenu,
-  // Not currently being used
-  updateComment,
-  fetchChildComments
+  hideMenu
 }) {
   const { creator, text, createdAt, post } = comment
   const presentedText = present(sanitize(text), { slug })
+  const handleReply = replyMaker(comment)
 
   const deleteCommentWithConfirm = deleteComment ? commentId => Alert.alert(
     'Confirm Delete',
@@ -65,23 +62,19 @@ export default function Comment ({
   
   return (
     <>
-      <View style={{ marginLeft: 50 }}>
-        <View>
-          <SubComments
-            commentId={comment.id}
-            showMember={showMember}
-            showTopic={showTopic}
-            slug={slug}
-            allowReply={false}
-            onReplyComment={null}
-            deleteComment={deleteComment}
-            removeComment={removeComment}
-            editComment={editComment}
-            hideMenu={hideMenu}
-            key={comment.id}
-          />
-        </View>
-      </View>
+      <SubComments
+        style={{ marginLeft: 50 }}
+        commentId={comment.id}
+        showMember={showMember}
+        showTopic={showTopic}
+        slug={slug}
+        deleteComment={deleteComment}
+        removeComment={removeComment}
+        editComment={editComment}
+        hideMenu={hideMenu}
+        key={comment.id}
+        onReplyToParent={handleReply}
+      />
       <View style={[style, styles.container]}>
         <TouchableOpacity onPress={() => showMember(creator.id)}>
           <Avatar avatarUrl={creator.avatarUrl} style={styles.avatar} />
@@ -97,8 +90,8 @@ export default function Comment ({
                 <Text style={styles.date}>on "{postTitle}"</Text>}
             </View>
             <View style={styles.headerRight}>
-              {allowReply && (
-                <TouchableOpacity style={styles.replyLink} onPress={onReplyComment}>
+              {replyMaker && (
+                <TouchableOpacity style={styles.replyLink} onPress={handleReply}>
                   <Icon style={styles.replyLinkIcon} name='Reply' />
                   <Text style={styles.replyLinkText}>Reply</Text>
                 </TouchableOpacity>

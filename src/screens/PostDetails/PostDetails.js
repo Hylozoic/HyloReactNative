@@ -25,6 +25,8 @@ export default class PostDetails extends React.Component {
     commentText: ''
   }
 
+  editorRef = React.createRef()
+
   componentDidMount () {
     this.props.fetchPost()
     this.props.navigation.setOptions({
@@ -79,6 +81,7 @@ export default class PostDetails extends React.Component {
         showMember={showMember}
         showTopic={this.onShowTopic}
         slug={slug}
+        onReply={() => this.editorRef?.current?.editorInputRef.current.focus()}
         panHandlers={panHandlers}
       />
     )
@@ -90,7 +93,7 @@ export default class PostDetails extends React.Component {
     const groupId = get('groups.0.id', post)
 
     if (!post?.creator || !post?.title) return <LoadingScreen />
-
+  
     return (
       <SafeAreaView edges={['right', 'left', 'top']} style={styles.container}>
         <KeyboardAccessoryView
@@ -99,7 +102,9 @@ export default class PostDetails extends React.Component {
           spaceBetweenKeyboardAndAccessoryView={isIOS ? -79 : 0}
           contentOffsetKeyboardOpened={isIOS ? -45 : 0}
           renderScrollable={this.renderPostDetails}>
+            <Text>Comment on "such and such"</Text>
             <InlineEditor
+              ref={this.editorRef}
               onChange={this.handleCommentOnChange}
               onSubmit={this.handleCreateComment}
               value={commentText}
