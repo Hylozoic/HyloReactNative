@@ -114,9 +114,9 @@ export default class PostDetails extends React.Component {
     const location = post.location || (post.locationObject && post.locationObject.fullText)
 
     return (
-      <Comments
+      <Comments style={styles.commentsScrollView}
         scrollViewRef={this.scrollViewRef}
-        replyMaker={this.commentReplyMaker}
+        onReply={this.onCommentReply}
         header={(
           <PostCardForDetails
             {...this.props}

@@ -21,12 +21,10 @@ export default function Comment ({
   slug,
   style,
   displayPostTitle,
-  handleReply,
   deleteComment,
   removeComment,
   editComment,
   hideMenu,
-  replyMaker,
   onReply
 }) {
   const { creator, text, createdAt, post } = comment
@@ -73,7 +71,6 @@ export default function Comment ({
         editComment={editComment}
         hideMenu={hideMenu}
         key={comment.id}
-        replyMaker={replyMaker}
         onReply={onReply}
       />
       <View style={[style, styles.container]}>
@@ -92,7 +89,7 @@ export default function Comment ({
             </View>
             <View style={styles.headerRight}>
               {onReply && (
-                <TouchableOpacity style={styles.replyLink} onPress={onReply}>
+                <TouchableOpacity style={styles.replyLink} onPress={() => onReply(comment)}>
                   <Icon style={styles.replyLinkIcon} name='Reply' />
                   <Text style={styles.replyLinkText}>Reply</Text>
                 </TouchableOpacity>
@@ -101,6 +98,7 @@ export default function Comment ({
                 <CommentMenu
                   deleteComment={() => deleteCommentWithConfirm(comment.id)}
                   removeComment={() => removeCommentWithConfirm(comment.id)}
+                  replyComment={() => onReply(comment)}
                   editComment={editComment}
                 />
               )}
@@ -119,14 +117,14 @@ export default function Comment ({
   )
 }
 
-export function CommentMenu ({ deleteComment, removeComment, editComment }) {
+export function CommentMenu ({ replyComment, deleteComment, removeComment, editComment }) {
   // If the function is defined, than it's a valid action
   const removeLabel = 'Remove Comment'
   const deleteLabel = 'Delete Comment'
-  const editLabel = 'Edit Comment'
 
   const actions = filter(x => x[1], [
-    [editLabel, editComment],
+    ['Reply', replyComment],
+    ['Edit Comment', editComment],
     [deleteLabel, deleteComment],
     [removeLabel, removeComment]
   ])

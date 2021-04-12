@@ -11,7 +11,7 @@ export default function Comments ({
   commentId,
   postId,
   comments = [],
-  header = null,
+  header: providedHeader = null,
   pending,
   total,
   hasMore,
@@ -22,44 +22,46 @@ export default function Comments ({
   slug,
   panHandlers,
   scrollViewRef,
-  replyMaker,
   onReply
 }) {
   useEffect(() => { if (!commentId) fetchComments() }, [])
 
   const renderItem = ({ item: comment }) => {
     return <Comment comment={comment}
-      onReply={replyMaker({ onReply, comment })}
-      replyMaker={replyMaker}
+      onReply={onReply}
       showMember={showMember}
       showTopic={showTopic}
       slug={slug}
       key={comment.id} />
   }
-
-  // TOO: Re-integrate "Show more" and pending...
-  //     <ShowMore
-  //       commentsLength={comments.length}
-  //       total={total}
-  //       hasMore={hasMore}
-  //       fetchComments={fetchComments}
-  //     />
-  //     {pending && <View style={styles.loadingContainer}>
-  //       <Loading style={styles.loading} />
-  //     </View>}
   
+  const header = () => (
+    <>
+      {providedHeader}
+      <ShowMore
+        commentsLength={comments.length}
+        total={total}
+        hasMore={hasMore}
+        fetchComments={fetchComments}
+      />
+      {pending && <View style={styles.loadingContainer}>
+        <Loading style={styles.loading} />
+      </View>}
+    </>
+  )
+
   return (
-    <FlatList
-      style={style}
+    <FlatList style={style}
+      inverted
       ref={scrollViewRef}
       data={comments}
       keyExtractor={comment => comment.id}
-      renderItem={renderItem}
-      keyboardDismissMode='interactive'
-      ListFooterComponent={header}
-      inverted
       initialScrollIndex={0}
-      {...panHandlers} />
+      renderItem={renderItem}
+      ListFooterComponent={header}
+      keyboardDismissMode='interactive'
+      {...panHandlers}
+    />
   )
 }
 
