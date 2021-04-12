@@ -25,7 +25,8 @@ export default function Comment ({
   deleteComment,
   removeComment,
   editComment,
-  hideMenu
+  hideMenu,
+  setCommentPrompt
 }) {
   const { creator, text, createdAt, post } = comment
   const presentedText = present(sanitize(text), { slug })
@@ -66,6 +67,7 @@ export default function Comment ({
         showMember={showMember}
         showTopic={showTopic}
         slug={slug}
+        setCommentPrompt={setCommentPrompt}
         deleteComment={deleteComment}
         removeComment={removeComment}
         editComment={editComment}

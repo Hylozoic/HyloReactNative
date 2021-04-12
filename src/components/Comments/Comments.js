@@ -10,6 +10,7 @@ export default function Comments ({
   commentId,
   postId,
   editorRef,
+  setCommentPrompt,
   onReplyToParent,
   comments = [],
   header = null,
@@ -27,9 +28,12 @@ export default function Comments ({
 
   const scrollViewRef = useRef()
 
-  const replyMaker = comment => () => {
+  const replyMaker = comment => (resetPrompt = true) => {
     // For recursive sub-comment context, will reply to the parent's comment 
-    if (onReplyToParent) return onReplyToParent()
+    if (resetPrompt) setCommentPrompt(comment)
+    if (onReplyToParent) return onReplyToParent(false)
+
+    // Reply to actual comment creator
 
     scrollViewRef.current?.scrollToIndex({
       index: comments.findIndex(c => c.id == comment.id)
@@ -38,12 +42,14 @@ export default function Comments ({
     editorRef.current?.editorInputRef.current.clear()
     editorRef.current?.editorInputRef.current.focus()
     // editorRef?.current?.insertMention(post.creator)
+    // Also, highlight current entry we're commenting to in flatlist?
   }
 
   const renderItem = ({ item: comment }) => {
     return <Comment comment={comment}
       scrollViewRef={scrollViewRef}
       handleReply={replyMaker(comment)}
+      setCommentPrompt={setCommentPrompt}
       showMember={showMember}
       showTopic={showTopic}
       slug={slug}

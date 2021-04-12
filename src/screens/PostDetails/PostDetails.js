@@ -22,7 +22,8 @@ import styles from './PostDetails.styles'
 
 export default class PostDetails extends React.Component {
   state = {
-    commentText: ''
+    commentText: '',
+    commentPrompt: null
   }
 
   editorRef = React.createRef()
@@ -61,6 +62,14 @@ export default class PostDetails extends React.Component {
     this.setState(() => ({ commentText }))
   }
 
+  setCommentPrompt = comment => {
+    if (comment.parentComment) {
+      this.setState({ commentPrompt: `Replying to ${comment.creator.name}` })    
+    } else {
+      this.setState({ commentPrompt: null })
+    }
+  }
+
   renderPostDetails = (panHandlers) => {
     const { post, currentUser, showMember } = this.props
     const slug = get('groups.0.slug', post)
@@ -82,6 +91,7 @@ export default class PostDetails extends React.Component {
         showTopic={this.onShowTopic}
         slug={slug}
         editorRef={this.editorRef}
+        setCommentPrompt={this.setCommentPrompt}
         panHandlers={panHandlers}
       />
     )
@@ -89,26 +99,33 @@ export default class PostDetails extends React.Component {
 
   render () {
     const { post } = this.props
-    const { commentText, submitting } = this.state
+    const { commentText, commentPrompt, submitting } = this.state
     const groupId = get('groups.0.id', post)
 
     if (!post?.creator || !post?.title) return <LoadingScreen />
   
     return (
-      <SafeAreaView edges={['right', 'left', 'top']} style={styles.container}>
+      <SafeAreaView style={styles.container} edges={['right', 'left', 'top']} keyboardShouldPersistTaps={true}>
         <KeyboardAccessoryView
           contentContainerStyle={{ marginBottom: 0, borderWidth: 0 }}
           // TODO: Calculate these?
           spaceBetweenKeyboardAndAccessoryView={isIOS ? -79 : 0}
           contentOffsetKeyboardOpened={isIOS ? -45 : 0}
           renderScrollable={this.renderPostDetails}>
-            <Text>Comment on "such and such"</Text>
+            {commentPrompt && (
+              <View style={styles.commentPrompt}>
+                <Text style={styles.commentPromptText}>{commentPrompt}</Text>
+                <TouchableOpacity onPress={() => {}}>
+                  <Text style={styles.commentPromptClearLink}>Cancel</Text>
+                </TouchableOpacity>
+              </View>
+            )}
             <InlineEditor
+              style={styles.inlineEditor}
               ref={this.editorRef}
               onChange={this.handleCommentOnChange}
               onSubmit={this.handleCreateComment}
               value={commentText}
-              style={styles.inlineEditor}
               submitting={submitting}
               placeholder='Write a comment...'
               groupId={groupId}
