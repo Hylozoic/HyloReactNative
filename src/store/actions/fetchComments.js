@@ -23,7 +23,7 @@ export function fetchChildComments (commentId, opts = {}) {
     meta: {
       extractModel: 'Comment',
       extractQueryResults: {
-        getItems: get('payload.data.comment')
+        getItems: get('payload.data.comment.childComments')
       }
     }
   }
@@ -44,7 +44,8 @@ export function fetchPostComments (postId, opts = {}) {
     meta: {
       extractModel: 'Post',
       extractQueryResults: {
-        getItems: get('payload.data.post.comments')
+        getItems: get('payload.data.post.comments'),
+        extractSubComments: true
       }
     }
   }

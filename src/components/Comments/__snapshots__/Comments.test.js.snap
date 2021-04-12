@@ -2,11 +2,7 @@
 
 exports[`Comments renders correctly 1`] = `
 <ForwardRef
-  ListFooterComponent={
-    <Text>
-      Some React Code
-    </Text>
-  }
+  ListFooterComponent={[Function]}
   data={
     Array [
       Object {
@@ -34,9 +30,9 @@ exports[`ShowMore renders correctly 1`] = `
     onPress={[Function]}
   >
     View 
-    7
+    NaN
      previous comment
-    s
+    
   </Text>
 </ForwardRef>
 `;

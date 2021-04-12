@@ -84,9 +84,6 @@ exports[`PostDetails renders correctly 1`] = `
     renderScrollable={[Function]}
     spaceBetweenKeyboardAndAccessoryView={-79}
   >
-    <Text>
-      Comment on "such and such"
-    </Text>
     <ForwardRef
       onChange={[Function]}
       onSubmit={[Function]}

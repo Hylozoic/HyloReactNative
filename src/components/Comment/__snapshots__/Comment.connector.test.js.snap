@@ -8,27 +8,6 @@ Object {
   },
   "deleteComment": [Function],
   "editComment": null,
-  "fetchChildComments": undefined,
-  "fetchCommentsMaker": [MockFunction] {
-    "calls": Array [
-      Array [
-        false,
-      ],
-      Array [
-        false,
-      ],
-    ],
-    "results": Array [
-      Object {
-        "type": "return",
-        "value": undefined,
-      },
-      Object {
-        "type": "return",
-        "value": undefined,
-      },
-    ],
-  },
   "isCreator": true,
   "removeComment": null,
   "updateComment": [Function],
@@ -43,34 +22,6 @@ Object {
   },
   "deleteComment": null,
   "editComment": null,
-  "fetchChildComments": undefined,
-  "fetchCommentsMaker": [MockFunction] {
-    "calls": Array [
-      Array [
-        false,
-      ],
-      Array [
-        false,
-      ],
-      Array [
-        false,
-      ],
-    ],
-    "results": Array [
-      Object {
-        "type": "return",
-        "value": undefined,
-      },
-      Object {
-        "type": "return",
-        "value": undefined,
-      },
-      Object {
-        "type": "return",
-        "value": undefined,
-      },
-    ],
-  },
   "isCreator": false,
   "removeComment": null,
   "updateComment": null,
@@ -85,20 +36,6 @@ Object {
   },
   "deleteComment": null,
   "editComment": null,
-  "fetchChildComments": undefined,
-  "fetchCommentsMaker": [MockFunction] {
-    "calls": Array [
-      Array [
-        false,
-      ],
-    ],
-    "results": Array [
-      Object {
-        "type": "return",
-        "value": undefined,
-      },
-    ],
-  },
   "removeComment": [Function],
   "updateComment": null,
 }

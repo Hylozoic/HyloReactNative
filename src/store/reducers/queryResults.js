@@ -10,7 +10,6 @@ import { get, isNull, omitBy, pick, reduce, uniq, isEmpty, includes } from 'loda
 import { createSelector as ormCreateSelector } from 'redux-orm'
 import orm from 'store/models'
 import { mapValues } from 'lodash'
-import Comment from 'store/models/Comment'
 
 import { FETCH_COMMENTS, FETCH_POSTS } from 'store/constants'
 import { CREATE_POST, CREATE_PROJECT } from 'screens/PostEditor/PostEditor.store'
@@ -25,16 +24,15 @@ export default function (state = {}, action) {
   if (error) return state
 
   let root
+  const extractQueryResults = meta?.extractQueryResults
 
   // Special case for post query- needs to extract subcomments as well.
   // Toplevel comments are handled by standard extractQueryResults (below).
-  if (type === FETCH_COMMENTS) {
-    state = {
-      ...state,
-      ...matchSubCommentsIntoQueryResults(state, action)}
+  if (extractQueryResults?.extractSubComments) {
+    state = matchSubCommentsIntoQueryResults(state, action)
   }
 
-  if (meta?.extractQueryResults && payload) {
+  if (extractQueryResults && payload) {
     const { getItems, getParams, getType, reset } = meta.extractQueryResults
 
     return {
@@ -98,12 +96,8 @@ function matchNewPostIntoQueryResults (state, { id, type, groups }) {
 }
 
 export function matchSubCommentsIntoQueryResults (state, { payload, meta }) {
-  let toplevelComments = meta.extractQueryResults.getItems({ payload })
-  toplevelComments = get('items', toplevelComments) || toplevelComments
-  toplevelComments = [].concat(toplevelComments)
-  
-  console.log('!!!!! topLevelComments', toplevelComments)
-  
+  const toplevelComments = get(`data.post.comments.items`, payload)
+
   toplevelComments.forEach(comment => {
     state = addIds(state, {
       type: FETCH_COMMENTS,
@@ -134,9 +128,6 @@ export function addIds (state, { type, params, data, reset }) {
   if (!data) return state
 
   const { items, total, hasMore } = data
-
-  console.log('!!!!!! items in addIds:', items, data)
-
   const key = buildKey(type, params)
   const existingIds = (!reset && get('ids', state[key])) || []
   return {

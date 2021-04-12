@@ -81,19 +81,10 @@ exports[`renders correctly 1`] = `
           </Text>
         </View>
         <View>
-          <ForwardRef
-            onPress={[MockFunction]}
-          >
-            <Icon
-              name="Reply"
-            />
-            <Text>
-              Reply
-            </Text>
-          </ForwardRef>
           <CommentMenu
             deleteComment={[Function]}
             removeComment={[Function]}
+            replyComment={[Function]}
           />
         </View>
       </View>
@@ -164,19 +155,10 @@ exports[`shows the post title when displayPostTitle is true 1`] = `
           </Text>
         </View>
         <View>
-          <ForwardRef
-            onPress={[MockFunction]}
-          >
-            <Icon
-              name="Reply"
-            />
-            <Text>
-              Reply
-            </Text>
-          </ForwardRef>
           <CommentMenu
             deleteComment={[Function]}
             removeComment={[Function]}
+            replyComment={[Function]}
           />
         </View>
       </View>

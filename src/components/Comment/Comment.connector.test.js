@@ -42,8 +42,7 @@ describe('mapStateToProps', () => {
 
 describe('mergeProps', () => {
   const dispatchProps = {
-    deleteComment: jest.fn(),
-    fetchCommentsMaker: jest.fn()
+    deleteComment: jest.fn()
   }
 
   it('returns removeComment when moderator', () => {
