@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { StyleSheet, Text, View, Alert, TouchableOpacity } from 'react-native'
 import HTMLView from 'react-native-htmlview'
 import { get, isEmpty, filter, findLastIndex } from 'lodash/fp'
@@ -8,11 +8,9 @@ import urlHandler from 'navigation/linking/urlHandler'
 import Avatar from 'components/Avatar'
 import PopupMenuButton from 'components/PopupMenuButton'
 import Icon from 'components/Icon'
+import SubComments from 'components/Comments'
 import styles from './Comment.styles'
 import { caribbeanGreen } from 'style/colors'
-import SubComments from 'components/Comments'
-
-const INITIAL_SUBCOMMENTS_DISPLAYED = 2
 
 export default function Comment ({
   comment,
@@ -54,10 +52,6 @@ export default function Comment ({
       : postTitle
   }
 
-  let { childComments } = comment
-  
-  childComments = childComments && childComments.slice(-INITIAL_SUBCOMMENTS_DISPLAYED)
-  
   return (
     <>
       <SubComments
@@ -107,7 +101,7 @@ export default function Comment ({
           <HTMLView
             addLineBreaks={false}
             onLinkPress={url => urlHandler(url, showMember, showTopic, slug)}
-            stylesheet={richTextStyles}
+            stylesheet={styles.richTextStyles}
             textComponentProps={{ style: styles.text }}
             value={presentedText}
           />
@@ -144,13 +138,3 @@ export function CommentMenu ({ replyComment, deleteComment, removeComment, editC
     </PopupMenuButton>
   )
 }
-
-const richTextStyles = StyleSheet.create({
-  a: {
-    color: caribbeanGreen
-  },
-  p: {
-    marginTop: 3,
-    marginBottom: 3
-  }
-})

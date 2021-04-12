@@ -1,4 +1,4 @@
-import { limedSpruce, slateGrey80, nevada, rhino50, white } from 'style/colors'
+import { limedSpruce, slateGrey80, nevada, rhino50, caribbeanGreen } from 'style/colors'
 
 export default {
   container: {
@@ -67,5 +67,14 @@ export default {
     // Tested and it seems fine, but if comment layout looks word somewhere, try
     // removing this line.
     height: 0
+  },
+  richTextStyles: {
+    a: {
+      color: caribbeanGreen
+    },
+    p: {
+      marginTop: 3,
+      marginBottom: 3
+    }
   }
 }

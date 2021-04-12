@@ -10,34 +10,32 @@ import fetchComments from 'store/actions/fetchComments'
 import { FETCH_COMMENTS } from 'store/constants'
 
 export function mapStateToProps (state, props) {
+  const { commentId, postId } = props
+  // Get Comments from queryCache as either
+  // children of a Post or another Comment
+  const queryCacheParams = {}
+
+  if (commentId) queryCacheParams.commentId = commentId
+  if (postId) queryCacheParams.postId = postId
+
   return {
-    // Get comments by postId OR commentId
-    comments: getComments(state, props),
-    total: getTotalComments(state, { id: props.commentId || props.postId }),
-    hasMore: getHasMoreComments(state, { id: props.commentId || props.postId }),
+    queryCacheParams,
+    comments: getComments(state, queryCacheParams),
+    total: getTotalComments(state, queryCacheParams),
+    hasMore: getHasMoreComments(state, queryCacheParams),
     currentUser: getMe(state),
     pending: state.pending[FETCH_COMMENTS]
   }
 }
 
-export const mapDispatchToProps = (dispatch, props) => {
-
-  const { postId, commentId, scrollToBottom } = props
-  return {
-    fetchCommentsMaker: cursor => () => {
-      // For now ignoring if querying on parent commentId (has more?)...
-      dispatch(fetchComments(postId, { cursor }))
-    },
-    // Not currently used
-    createComment: commentParams => dispatch(createComment({ postId, ...commentParams }))
-  }
+export const mapDispatchToProps = {
+  fetchComments
 }
-
+  
 export const mergeProps = (stateProps, dispatchProps, ownProps) => {
-  const { comments } = stateProps
-  const { fetchCommentsMaker } = dispatchProps
-  const cursor = !isEmpty(comments) && comments[0].id
-  const fetchComments = fetchCommentsMaker(cursor)
+  const { comments, queryCacheParams } = stateProps
+  const cursor = !isEmpty(comments) && comments[comments.length - 1].id
+  const fetchComments = () => dispatchProps.fetchComments(queryCacheParams, { cursor })
 
   return {
     ...ownProps,

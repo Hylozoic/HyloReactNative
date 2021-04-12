@@ -1,15 +1,13 @@
 /* eslint-disable camelcase */
-import React, { useRef, useLayoutEffect, useState, useCallback, useEffect } from 'react'
-import { Text, TouchableOpacity, View, ScrollView } from 'react-native'
+import React, { useEffect } from 'react'
+import { Text, TouchableOpacity, View, } from 'react-native'
 import Comment from 'components/Comment'
 import Loading from 'components/Loading'
 import styles from './Comments.styles'
 import { FlatList } from 'react-native-gesture-handler'
-import { logout } from 'screens/Login/actions'
 
 export default function Comments ({
   commentId,
-  postId,
   comments = [],
   header: providedHeader = null,
   pending,
@@ -26,15 +24,6 @@ export default function Comments ({
 }) {
   useEffect(() => { if (!commentId) fetchComments() }, [])
 
-  const renderItem = ({ item: comment }) => {
-    return <Comment comment={comment}
-      onReply={onReply}
-      showMember={showMember}
-      showTopic={showTopic}
-      slug={slug}
-      key={comment.id} />
-  }
-  
   const header = () => (
     <>
       {providedHeader}
@@ -50,6 +39,15 @@ export default function Comments ({
     </>
   )
 
+  const renderItem = ({ item: comment }) => {
+    return <Comment comment={comment}
+      onReply={onReply}
+      showMember={showMember}
+      showTopic={showTopic}
+      slug={slug}
+      key={comment.id} />
+  }
+  
   return (
     <FlatList style={style}
       inverted
@@ -65,8 +63,8 @@ export default function Comments ({
   )
 }
 
-export function ShowMore ({ total = 0, hasMore, fetchComments }) {
-  const extra = total - 10
+export function ShowMore ({ total = 0, commentsLength, hasMore, fetchComments }) {
+  const extra = total - commentsLength
 
   if (!hasMore || extra < 1) return null
 

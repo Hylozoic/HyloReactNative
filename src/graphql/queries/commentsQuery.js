@@ -1,16 +1,19 @@
 import commentFieldsFragment from 'graphql/fragments/commentFieldsFragment'
 
+export const DEFAULT_INITIAL_COMMENTS = 10
+export const DEFAULT_INITIAL_SUBCOMMENTS = 2
+
 export default `
 query CommentsQuery (
-  $id: ID,
+  $postId: ID,
   $cursor: ID
 ) {
-  post(id: $id) {
+  post(id: $postId) {
     id
-    comments(first: 10, cursor: $cursor, order: "desc") {
+    comments(first: ${DEFAULT_INITIAL_COMMENTS}, cursor: $cursor, order: "desc") {
       items {
         ${commentFieldsFragment}
-        childComments {
+        childComments(first: ${DEFAULT_INITIAL_SUBCOMMENTS}, order: "desc") {
           items {
             ${commentFieldsFragment}
             post {

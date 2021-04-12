@@ -1,8 +1,35 @@
 import { FETCH_COMMENTS } from 'store/constants'
 import { get } from 'lodash/fp'
 import commentsQuery from 'graphql/queries/commentsQuery'
+import subCommentsQuery from 'graphql/queries/subCommentsQuery'
 
-export default function fetchComments (id, opts = {}) {
+export default function fetchComments ({ commentId, postId }, opts = {}) {
+  if (commentId) return fetchChildComments(commentId, opts)
+  if (postId) return fetchPostComments(postId, opts)
+}
+
+export function fetchChildComments (commentId, opts = {}) {
+  const { cursor } = opts
+
+  return {
+    type: FETCH_COMMENTS,
+    graphql: {
+      query: subCommentsQuery,
+      variables: {
+        commentId,
+        cursor: cursor || null
+      }
+    },
+    meta: {
+      extractModel: 'Comment',
+      extractQueryResults: {
+        getItems: get('payload.data.comment')
+      }
+    }
+  }
+}
+
+export function fetchPostComments (postId, opts = {}) {
   const { cursor } = opts
 
   return {
@@ -10,7 +37,7 @@ export default function fetchComments (id, opts = {}) {
     graphql: {
       query: commentsQuery,
       variables: {
-        id,
+        postId,
         cursor: cursor || null
       }
     },

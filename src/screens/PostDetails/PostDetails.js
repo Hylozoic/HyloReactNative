@@ -63,47 +63,29 @@ export default class PostDetails extends React.Component {
   }
 
   setCommentPrompt = comment => {
-    if (comment.parentComment) {
-      this.setState({ commentPrompt: `Replying to ${comment.creator.name}` })    
-    } else {
-      this.setState({ commentPrompt: null })
-    }
+    this.setState({ commentPrompt: `Replying to ${comment.creator.name}` })    
+  }
+
+  onCommentReplyCancel = () => {
+    this.setState({ commentPrompt: null })    
+    // unhighlight/deselect current entry we're commenting to in flatlist      
+    this.editorRef.current?.editorInputRef.current.clear()
+    this.editorRef.current?.editorInputRef.current.blur()
   }
 
   onCommentReply = comment => {
     // For recursive sub-comment context, will reply to the parent's comment 
     const currentScrollView = this.scrollViewRef.current
-
     if (currentScrollView) {
       this.setCommentPrompt(comment)
       const commentIdScrollTarget = comment.parentComment || comment.id
       currentScrollView.scrollToIndex({
         index: currentScrollView.props.data.findIndex(c => c.id == commentIdScrollTarget)
       })
-      
+      // highlight/select current entry we're commenting to in flatlist      
       this.editorRef.current?.editorInputRef.current.clear()
-      this.editorRef.current?.editorInputRef.current.focus()
       // editorRef?.current?.insertMention(post.creator)
-      // highlight/select current entry we're commenting to in flatlist
-    }
-  }
-
-  commentReplyMaker = ({ comment, onReply }) => (resetPrompt = true) => {
-    // For recursive sub-comment context, will reply to the parent's comment 
-    const currentScrollView = this.scrollViewRef.current
-
-    if (currentScrollView) {
-      if (resetPrompt) this.setCommentPrompt(comment)
-      if (onReply) return onReply(false)
-
-      currentScrollView.scrollToIndex({
-        index: currentScrollView.props.data.findIndex(c => c.id == comment.id)
-      })
-      
-      this.editorRef.current?.editorInputRef.current.clear()
       this.editorRef.current?.editorInputRef.current.focus()
-      // editorRef?.current?.insertMention(post.creator)
-      // highlight/select current entry we're commenting to in flatlist
     }
   }
 
@@ -115,6 +97,7 @@ export default class PostDetails extends React.Component {
 
     return (
       <Comments style={styles.commentsScrollView}
+        postId={post.id}
         scrollViewRef={this.scrollViewRef}
         onReply={this.onCommentReply}
         header={(
@@ -126,7 +109,6 @@ export default class PostDetails extends React.Component {
           />
         )}
         slug={slug}
-        postId={post.id}
         showMember={showMember}
         showTopic={this.onShowTopic}
         panHandlers={panHandlers}
@@ -142,7 +124,7 @@ export default class PostDetails extends React.Component {
     if (!post?.creator || !post?.title) return <LoadingScreen />
   
     return (
-      <SafeAreaView style={styles.container} edges={['right', 'left', 'top']} keyboardShouldPersistTaps={true}>
+      <SafeAreaView style={styles.container} edges={['right', 'left', 'top']}>
         <KeyboardAccessoryView
           contentContainerStyle={{ marginBottom: 0, borderWidth: 0 }}
           // TODO: Calculate these?
@@ -152,7 +134,7 @@ export default class PostDetails extends React.Component {
             {commentPrompt && (
               <View style={styles.commentPrompt}>
                 <Text style={styles.commentPromptText}>{commentPrompt}</Text>
-                <TouchableOpacity onPress={() => {}}>
+                <TouchableOpacity onPress={this.onCommentReplyCancel}>
                   <Text style={styles.commentPromptClearLink}>Cancel</Text>
                 </TouchableOpacity>
               </View>
