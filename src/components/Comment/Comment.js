@@ -26,7 +26,8 @@ export default function Comment ({
   removeComment,
   editComment,
   hideMenu,
-  setCommentPrompt
+  replyMaker,
+  onReply
 }) {
   const { creator, text, createdAt, post } = comment
   const presentedText = present(sanitize(text), { slug })
@@ -67,13 +68,13 @@ export default function Comment ({
         showMember={showMember}
         showTopic={showTopic}
         slug={slug}
-        setCommentPrompt={setCommentPrompt}
         deleteComment={deleteComment}
         removeComment={removeComment}
         editComment={editComment}
         hideMenu={hideMenu}
         key={comment.id}
-        onReplyToParent={handleReply}
+        replyMaker={replyMaker}
+        onReply={onReply}
       />
       <View style={[style, styles.container]}>
         <TouchableOpacity onPress={() => showMember(creator.id)}>
@@ -90,8 +91,8 @@ export default function Comment ({
                 <Text style={styles.date}>on "{postTitle}"</Text>}
             </View>
             <View style={styles.headerRight}>
-              {handleReply && (
-                <TouchableOpacity style={styles.replyLink} onPress={handleReply}>
+              {onReply && (
+                <TouchableOpacity style={styles.replyLink} onPress={onReply}>
                   <Icon style={styles.replyLinkIcon} name='Reply' />
                   <Text style={styles.replyLinkText}>Reply</Text>
                 </TouchableOpacity>

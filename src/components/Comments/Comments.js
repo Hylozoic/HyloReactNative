@@ -5,13 +5,11 @@ import Comment from 'components/Comment'
 import Loading from 'components/Loading'
 import styles from './Comments.styles'
 import { FlatList } from 'react-native-gesture-handler'
+import { logout } from 'screens/Login/actions'
 
 export default function Comments ({
   commentId,
   postId,
-  editorRef,
-  setCommentPrompt,
-  onReplyToParent,
   comments = [],
   header = null,
   pending,
@@ -22,34 +20,17 @@ export default function Comments ({
   showMember,
   showTopic,
   slug,
-  panHandlers
+  panHandlers,
+  scrollViewRef,
+  replyMaker,
+  onReply
 }) {
   useEffect(() => { if (!commentId) fetchComments() }, [])
 
-  const scrollViewRef = useRef()
-
-  const replyMaker = comment => (resetPrompt = true) => {
-    // For recursive sub-comment context, will reply to the parent's comment 
-    if (resetPrompt) setCommentPrompt(comment)
-    if (onReplyToParent) return onReplyToParent(false)
-
-    // Reply to actual comment creator
-
-    scrollViewRef.current?.scrollToIndex({
-      index: comments.findIndex(c => c.id == comment.id)
-    })
-    
-    editorRef.current?.editorInputRef.current.clear()
-    editorRef.current?.editorInputRef.current.focus()
-    // editorRef?.current?.insertMention(post.creator)
-    // Also, highlight current entry we're commenting to in flatlist?
-  }
-
   const renderItem = ({ item: comment }) => {
     return <Comment comment={comment}
-      scrollViewRef={scrollViewRef}
-      handleReply={replyMaker(comment)}
-      setCommentPrompt={setCommentPrompt}
+      onReply={replyMaker({ onReply, comment })}
+      replyMaker={replyMaker}
       showMember={showMember}
       showTopic={showTopic}
       slug={slug}

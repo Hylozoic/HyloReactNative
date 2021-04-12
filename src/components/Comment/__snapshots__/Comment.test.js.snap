@@ -57,7 +57,6 @@ exports[`renders correctly 1`] = `
   <Memo(Connect(Comments))
     commentId={1}
     deleteComment={[MockFunction]}
-    onReplyToParent={[MockFunction]}
   />
   <View>
     <ForwardRef
@@ -136,7 +135,6 @@ exports[`shows the post title when displayPostTitle is true 1`] = `
 <React.Fragment>
   <Memo(Connect(Comments))
     commentId={1}
-    onReplyToParent={[MockFunction]}
   />
   <View>
     <ForwardRef

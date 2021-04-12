@@ -25,7 +25,7 @@ export default class PostDetails extends React.Component {
     commentText: '',
     commentPrompt: null
   }
-
+  scrollViewRef = React.createRef()
   editorRef = React.createRef()
 
   componentDidMount () {
@@ -70,6 +70,43 @@ export default class PostDetails extends React.Component {
     }
   }
 
+  onCommentReply = comment => {
+    // For recursive sub-comment context, will reply to the parent's comment 
+    const currentScrollView = this.scrollViewRef.current
+
+    if (currentScrollView) {
+      this.setCommentPrompt(comment)
+      const commentIdScrollTarget = comment.parentComment || comment.id
+      currentScrollView.scrollToIndex({
+        index: currentScrollView.props.data.findIndex(c => c.id == commentIdScrollTarget)
+      })
+      
+      this.editorRef.current?.editorInputRef.current.clear()
+      this.editorRef.current?.editorInputRef.current.focus()
+      // editorRef?.current?.insertMention(post.creator)
+      // highlight/select current entry we're commenting to in flatlist
+    }
+  }
+
+  commentReplyMaker = ({ comment, onReply }) => (resetPrompt = true) => {
+    // For recursive sub-comment context, will reply to the parent's comment 
+    const currentScrollView = this.scrollViewRef.current
+
+    if (currentScrollView) {
+      if (resetPrompt) this.setCommentPrompt(comment)
+      if (onReply) return onReply(false)
+
+      currentScrollView.scrollToIndex({
+        index: currentScrollView.props.data.findIndex(c => c.id == comment.id)
+      })
+      
+      this.editorRef.current?.editorInputRef.current.clear()
+      this.editorRef.current?.editorInputRef.current.focus()
+      // editorRef?.current?.insertMention(post.creator)
+      // highlight/select current entry we're commenting to in flatlist
+    }
+  }
+
   renderPostDetails = (panHandlers) => {
     const { post, currentUser, showMember } = this.props
     const slug = get('groups.0.slug', post)
@@ -78,6 +115,8 @@ export default class PostDetails extends React.Component {
 
     return (
       <Comments
+        scrollViewRef={this.scrollViewRef}
+        replyMaker={this.commentReplyMaker}
         header={(
           <PostCardForDetails
             {...this.props}
@@ -86,12 +125,10 @@ export default class PostDetails extends React.Component {
             location={location}
           />
         )}
+        slug={slug}
         postId={post.id}
         showMember={showMember}
         showTopic={this.onShowTopic}
-        slug={slug}
-        editorRef={this.editorRef}
-        setCommentPrompt={this.setCommentPrompt}
         panHandlers={panHandlers}
       />
     )
