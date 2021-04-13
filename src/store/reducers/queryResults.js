@@ -28,7 +28,7 @@ export default function (state = {}, action) {
 
   // Special case for post query- needs to extract subcomments as well.
   // Toplevel comments are handled by standard extractQueryResults (below).
-  if (extractQueryResults?.extractSubComments) {
+  if (extractQueryResults?.extractSubComments && payload) {
     state = matchSubCommentsIntoQueryResults(state, action)
   }
 

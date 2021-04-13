@@ -31,10 +31,7 @@ export function mapStateToProps (state, props) {
 }
 
 export function mapDispatchToProps (dispatch) {
-  return {
-    goToGroup: makeGoToGroup(dispatch),
-    dispatch
-  }
+  return { dispatch }
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
@@ -47,10 +44,10 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     ...dispatchProps,
     ...ownProps,
     fetchPost: () => dispatch(fetchPost(id)),
-    createComment: text => dispatch(createComment({ postId: id, text })),
+    createComment: params => dispatch(createComment({ ...params, postId: id })),
     joinProject: () => dispatch(joinProject(id)),
     leaveProject: () => dispatch(leaveProject(id)),
-    goToGroup: groupId => dispatchProps.goToGroup(groupId, memberships, currentGroup.id),
+    goToGroup: groupId => makeGoToGroup(dispatch)(groupId, memberships, currentGroup.id),
     editPost: () => navigation.navigate('Edit Post', { id }),
     goToMembers: () => navigation.navigate('Project Members', { id, members: get('members', post) }),
     showMember: goToMemberMaker(navigation),

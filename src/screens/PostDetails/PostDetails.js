@@ -23,7 +23,8 @@ import styles from './PostDetails.styles'
 export default class PostDetails extends React.Component {
   state = {
     commentText: '',
-    commentPrompt: null
+    commentPrompt: null,
+    replyingToCommentId: null
   }
   scrollViewRef = React.createRef()
   editorRef = React.createRef()
@@ -41,20 +42,23 @@ export default class PostDetails extends React.Component {
 
   onShowTopic = (topicId) => this.props.showTopic(topicId, get('post.groups.0.id', this.props))
 
-  handleCreateComment = (commentText) => {
+  handleCreateComment = async commentText => {
     const commentTextAsHtml = toHtml(commentText)
 
     if (!isEmpty(commentTextAsHtml)) {
       this.setState(() => ({ submitting: true }))
-      return this.props.createComment(commentTextAsHtml)
-        .then(({ error }) => {
-          if (error) {
-            Alert.alert("Your comment couldn't be saved; please try again.")
-            this.setState(() => ({ submitting: false }))
-          } else {
-            this.setState(() => ({ commentText: '', submitting: false }))
-          }
-        })
+
+      const { error } = await this.props.createComment({
+        text: commentTextAsHtml,
+        parentCommentId: this.state.replyingToCommentId
+      })
+
+      if (error) {
+        Alert.alert("Your comment couldn't be saved; please try again.")
+        this.setState(() => ({ submitting: false }))
+      } else {
+        this.setState(() => ({ commentText: '', submitting: false }))
+      }
     }
   }
 
@@ -62,30 +66,32 @@ export default class PostDetails extends React.Component {
     this.setState(() => ({ commentText }))
   }
 
-  setCommentPrompt = comment => {
-    this.setState({ commentPrompt: `Replying to ${comment.creator.name}` })    
+  handleCommentReplyCancel = () => {
+    this.setState({ commentPrompt: null, commentText: '' })
+    // unhighlight/deselect current entry we're commenting to in flatlist
+    this.editorRef?.editorInputRef.current.clear()
+    this.editorRef?.editorInputRef.current.blur()
   }
 
-  onCommentReplyCancel = () => {
-    this.setState({ commentPrompt: null })    
-    // unhighlight/deselect current entry we're commenting to in flatlist      
-    this.editorRef.current?.editorInputRef.current.clear()
-    this.editorRef.current?.editorInputRef.current.blur()
-  }
-
-  onCommentReply = comment => {
+  handleCommentReply = (comment, { mention = false }) => {
     // For recursive sub-comment context, will reply to the parent's comment 
     const currentScrollView = this.scrollViewRef.current
+
     if (currentScrollView) {
-      this.setCommentPrompt(comment)
-      const commentIdScrollTarget = comment.parentComment || comment.id
+      this.setState({ commentPrompt: `Replying to ${comment.creator.name}`, commentText: '' })
+      const replyingToCommentId = comment.parentComment || comment.id
+      this.setState({ replyingToCommentId })
+      // TODO: This will currently scroll to the parent entry, which means to the bottom
+      //       of all it's child comments.
+      //       We likely will want the scroll to happen within the subcomment list
+      //       if commenting 
       currentScrollView.scrollToIndex({
-        index: currentScrollView.props.data.findIndex(c => c.id == commentIdScrollTarget)
+        index: currentScrollView.props.data.findIndex(c => c.id == replyingToCommentId)
       })
-      // highlight/select current entry we're commenting to in flatlist      
-      this.editorRef.current?.editorInputRef.current.clear()
-      // editorRef?.current?.insertMention(post.creator)
-      this.editorRef.current?.editorInputRef.current.focus()
+      // TODO: highlight/select current entry we're commenting to in flatlist      
+      this.editorRef?.editorInputRef.current.clear()
+      if (mention) this.editorRef?.insertMention(comment.creator)
+      this.editorRef?.editorInputRef.current.focus()
     }
   }
 
@@ -99,7 +105,7 @@ export default class PostDetails extends React.Component {
       <Comments style={styles.commentsScrollView}
         postId={post.id}
         scrollViewRef={this.scrollViewRef}
-        onReply={this.onCommentReply}
+        onReply={this.handleCommentReply}
         header={(
           <PostCardForDetails
             {...this.props}
@@ -134,14 +140,14 @@ export default class PostDetails extends React.Component {
             {commentPrompt && (
               <View style={styles.commentPrompt}>
                 <Text style={styles.commentPromptText}>{commentPrompt}</Text>
-                <TouchableOpacity onPress={this.onCommentReplyCancel}>
+                <TouchableOpacity onPress={this.handleCommentReplyCancel}>
                   <Text style={styles.commentPromptClearLink}>Cancel</Text>
                 </TouchableOpacity>
               </View>
             )}
             <InlineEditor
               style={styles.inlineEditor}
-              ref={this.editorRef}
+              onRef={elem => this.editorRef = elem}
               onChange={this.handleCommentOnChange}
               onSubmit={this.handleCreateComment}
               value={commentText}

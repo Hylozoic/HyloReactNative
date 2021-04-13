@@ -67,57 +67,57 @@ export default function Comment ({
         key={comment.id}
         onReply={onReply}
       />
-      <View style={[style, styles.container]}>
-        <TouchableOpacity onPress={() => showMember(creator.id)}>
-          <Avatar avatarUrl={creator.avatarUrl} style={styles.avatar} />
-        </TouchableOpacity>
-        <View style={styles.details}>
-          <View style={styles.header}>
-            <View style={styles.meta}>
-              <TouchableOpacity onPress={() => showMember(creator.id)}>
-                <Text style={styles.name}>{creator.name}</Text>
-              </TouchableOpacity>
-              <Text style={styles.date}>{humanDate(createdAt)}</Text>
-              {displayPostTitle &&
-                <Text style={styles.date}>on "{postTitle}"</Text>}
-            </View>
-            <View style={styles.headerRight}>
-              {onReply && (
-                <TouchableOpacity style={styles.replyLink} onPress={() => onReply(comment)}>
-                  <Icon style={styles.replyLinkIcon} name='Reply' />
-                  <Text style={styles.replyLinkText}>Reply</Text>
+      <TouchableOpacity onPress={() => onReply(comment, { mention: false })}>
+        <View style={[style, styles.container]}>
+          <TouchableOpacity onPress={() => showMember(creator.id)}>
+            <Avatar avatarUrl={creator.avatarUrl} style={styles.avatar} />
+          </TouchableOpacity>
+          <View style={styles.details}>
+            <View style={styles.header}>
+              <View style={styles.meta}>
+                <TouchableOpacity onPress={() => showMember(creator.id)}>
+                  <Text style={styles.name}>{creator.name}</Text>
                 </TouchableOpacity>
-              )}
-              {!hideMenu && (
-                <CommentMenu
-                  deleteComment={() => deleteCommentWithConfirm(comment.id)}
-                  removeComment={() => removeCommentWithConfirm(comment.id)}
-                  replyComment={() => onReply(comment)}
-                  editComment={editComment}
-                />
-              )}
+                <Text style={styles.date}>{humanDate(createdAt)}</Text>
+                {displayPostTitle &&
+                  <Text style={styles.date}>on "{postTitle}"</Text>}
+              </View>
+              <View style={styles.headerRight}>
+                {onReply && (
+                  <TouchableOpacity style={styles.replyLink} onPress={() => onReply(comment, { mention: !!comment.parentComment })}>
+                    <Icon style={styles.replyLinkIcon} name='Reply' />
+                    <Text style={styles.replyLinkText}>Reply</Text>
+                  </TouchableOpacity>
+                )}
+                {!hideMenu && (
+                  <CommentMenu
+                    deleteComment={() => deleteCommentWithConfirm(comment.id)}
+                    removeComment={() => removeCommentWithConfirm(comment.id)}
+                    editComment={editComment}
+                  />
+                )}
+              </View>
             </View>
+            <HTMLView
+              addLineBreaks={false}
+              onLinkPress={url => urlHandler(url, showMember, showTopic, slug)}
+              stylesheet={styles.richTextStyles}
+              textComponentProps={{ style: styles.text }}
+              value={presentedText}
+            />
           </View>
-          <HTMLView
-            addLineBreaks={false}
-            onLinkPress={url => urlHandler(url, showMember, showTopic, slug)}
-            stylesheet={styles.richTextStyles}
-            textComponentProps={{ style: styles.text }}
-            value={presentedText}
-          />
         </View>
-      </View>
+      </TouchableOpacity>
     </>
   )
 }
 
-export function CommentMenu ({ replyComment, deleteComment, removeComment, editComment }) {
+export function CommentMenu ({ deleteComment, removeComment, editComment }) {
   // If the function is defined, than it's a valid action
   const removeLabel = 'Remove Comment'
   const deleteLabel = 'Delete Comment'
 
   const actions = filter(x => x[1], [
-    ['Reply', replyComment],
     ['Edit Comment', editComment],
     [deleteLabel, deleteComment],
     [removeLabel, removeComment]

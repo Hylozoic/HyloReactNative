@@ -167,9 +167,7 @@ export class InlineEditor extends React.Component {
   }
 }
 
-export default React.forwardRef((props, ref) => (
-  <InlineEditor {...props} ref={ref} />
-))
+export default withNavigation(InlineEditor)
 
 export function SubmitButton ({ style, submitting, active, onSubmit }) {
   if (submitting) {

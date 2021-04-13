@@ -58,67 +58,70 @@ exports[`renders correctly 1`] = `
     commentId={1}
     deleteComment={[MockFunction]}
   />
-  <View>
-    <ForwardRef
-      onPress={[Function]}
-    >
-      <Avatar
-        avatarUrl="foo.png"
-      />
-    </ForwardRef>
+  <ForwardRef
+    onPress={[Function]}
+  >
     <View>
+      <ForwardRef
+        onPress={[Function]}
+      >
+        <Avatar
+          avatarUrl="foo.png"
+        />
+      </ForwardRef>
       <View>
         <View>
-          <ForwardRef
-            onPress={[Function]}
-          >
+          <View>
+            <ForwardRef
+              onPress={[Function]}
+            >
+              <Text>
+                Ishamel
+              </Text>
+            </ForwardRef>
             <Text>
-              Ishamel
+              
             </Text>
-          </ForwardRef>
-          <Text>
-            
-          </Text>
+          </View>
+          <View>
+            <CommentMenu
+              deleteComment={[Function]}
+              removeComment={[Function]}
+            />
+          </View>
         </View>
-        <View>
-          <CommentMenu
-            deleteComment={[Function]}
-            removeComment={[Function]}
-            replyComment={[Function]}
-          />
-        </View>
+        <HtmlView
+          RootComponent={[Function]}
+          addLineBreaks={false}
+          onError={[Function]}
+          onLinkLongPress={null}
+          onLinkPress={[Function]}
+          stylesheet={
+            Object {
+              "a": Object {
+                "color": "#0DC39F",
+              },
+              "p": Object {
+                "marginBottom": 3,
+                "marginTop": 3,
+              },
+            }
+          }
+          textComponentProps={
+            Object {
+              "style": Object {
+                "color": "#5D757A",
+                "fontFamily": "Circular-Book",
+                "fontSize": 14,
+                "height": 0,
+              },
+            }
+          }
+          value="<p>tick followed tock followed tick followed tock</p>"
+        />
       </View>
-      <HtmlView
-        RootComponent={[Function]}
-        addLineBreaks={false}
-        onError={[Function]}
-        onLinkLongPress={null}
-        onLinkPress={[Function]}
-        stylesheet={
-          Object {
-            "a": Object {
-              "color": "#0DC39F",
-            },
-            "p": Object {
-              "marginBottom": 3,
-              "marginTop": 3,
-            },
-          }
-        }
-        textComponentProps={
-          Object {
-            "style": Object {
-              "color": "#5D757A",
-              "fontFamily": "Circular-Book",
-              "fontSize": 14,
-              "height": 0,
-            },
-          }
-        }
-        value="<p>tick followed tock followed tick followed tock</p>"
-      />
     </View>
-  </View>
+  </ForwardRef>
 </React.Fragment>
 `;
 
@@ -127,71 +130,74 @@ exports[`shows the post title when displayPostTitle is true 1`] = `
   <Memo(Connect(Comments))
     commentId={1}
   />
-  <View>
-    <ForwardRef
-      onPress={[Function]}
-    >
-      <Avatar
-        avatarUrl="foo.png"
-      />
-    </ForwardRef>
+  <ForwardRef
+    onPress={[Function]}
+  >
     <View>
+      <ForwardRef
+        onPress={[Function]}
+      >
+        <Avatar
+          avatarUrl="foo.png"
+        />
+      </ForwardRef>
       <View>
         <View>
-          <ForwardRef
-            onPress={[Function]}
-          >
+          <View>
+            <ForwardRef
+              onPress={[Function]}
+            >
+              <Text>
+                Ishamel
+              </Text>
+            </ForwardRef>
             <Text>
-              Ishamel
+              
             </Text>
-          </ForwardRef>
-          <Text>
-            
-          </Text>
-          <Text>
-            on "
-            What's good? A long enough post title to...
-            "
-          </Text>
+            <Text>
+              on "
+              What's good? A long enough post title to...
+              "
+            </Text>
+          </View>
+          <View>
+            <CommentMenu
+              deleteComment={[Function]}
+              removeComment={[Function]}
+            />
+          </View>
         </View>
-        <View>
-          <CommentMenu
-            deleteComment={[Function]}
-            removeComment={[Function]}
-            replyComment={[Function]}
-          />
-        </View>
+        <HtmlView
+          RootComponent={[Function]}
+          addLineBreaks={false}
+          onError={[Function]}
+          onLinkLongPress={null}
+          onLinkPress={[Function]}
+          stylesheet={
+            Object {
+              "a": Object {
+                "color": "#0DC39F",
+              },
+              "p": Object {
+                "marginBottom": 3,
+                "marginTop": 3,
+              },
+            }
+          }
+          textComponentProps={
+            Object {
+              "style": Object {
+                "color": "#5D757A",
+                "fontFamily": "Circular-Book",
+                "fontSize": 14,
+                "height": 0,
+              },
+            }
+          }
+          value="<p>tick followed tock followed tick followed tock</p>"
+        />
       </View>
-      <HtmlView
-        RootComponent={[Function]}
-        addLineBreaks={false}
-        onError={[Function]}
-        onLinkLongPress={null}
-        onLinkPress={[Function]}
-        stylesheet={
-          Object {
-            "a": Object {
-              "color": "#0DC39F",
-            },
-            "p": Object {
-              "marginBottom": 3,
-              "marginTop": 3,
-            },
-          }
-        }
-        textComponentProps={
-          Object {
-            "style": Object {
-              "color": "#5D757A",
-              "fontFamily": "Circular-Book",
-              "fontSize": 14,
-              "height": 0,
-            },
-          }
-        }
-        value="<p>tick followed tock followed tick followed tock</p>"
-      />
     </View>
-  </View>
+  </ForwardRef>
 </React.Fragment>
 `;

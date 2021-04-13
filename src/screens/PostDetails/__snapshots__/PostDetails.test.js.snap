@@ -84,8 +84,9 @@ exports[`PostDetails renders correctly 1`] = `
     renderScrollable={[Function]}
     spaceBetweenKeyboardAndAccessoryView={-79}
   >
-    <ForwardRef
+    <withNavigation(InlineEditor)
       onChange={[Function]}
+      onRef={[Function]}
       onSubmit={[Function]}
       placeholder="Write a comment..."
       value=""
