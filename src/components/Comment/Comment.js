@@ -8,9 +8,7 @@ import urlHandler from 'navigation/linking/urlHandler'
 import Avatar from 'components/Avatar'
 import PopupMenuButton from 'components/PopupMenuButton'
 import Icon from 'components/Icon'
-import SubComments from 'components/Comments'
 import styles from './Comment.styles'
-import { caribbeanGreen } from 'style/colors'
 
 export default function Comment ({
   comment,
@@ -53,62 +51,48 @@ export default function Comment ({
   }
 
   return (
-    <>
-      <SubComments
-        style={{ marginLeft: 50 }}
-        commentId={comment.id}
-        showMember={showMember}
-        showTopic={showTopic}
-        slug={slug}
-        deleteComment={deleteComment}
-        removeComment={removeComment}
-        editComment={editComment}
-        hideMenu={hideMenu}
-        key={comment.id}
-        onReply={onReply}
-      />
-      <TouchableOpacity onPress={() => onReply(comment, { mention: false })}>
-        <View style={[style, styles.container]}>
-          <TouchableOpacity onPress={() => showMember(creator.id)}>
-            <Avatar avatarUrl={creator.avatarUrl} style={styles.avatar} />
-          </TouchableOpacity>
-          <View style={styles.details}>
-            <View style={styles.header}>
-              <View style={styles.meta}>
-                <TouchableOpacity onPress={() => showMember(creator.id)}>
-                  <Text style={styles.name}>{creator.name}</Text>
-                </TouchableOpacity>
-                <Text style={styles.date}>{humanDate(createdAt)}</Text>
-                {displayPostTitle &&
-                  <Text style={styles.date}>on "{postTitle}"</Text>}
-              </View>
-              <View style={styles.headerRight}>
-                {onReply && (
-                  <TouchableOpacity style={styles.replyLink} onPress={() => onReply(comment, { mention: !!comment.parentComment })}>
-                    <Icon style={styles.replyLinkIcon} name='Reply' />
-                    <Text style={styles.replyLinkText}>Reply</Text>
-                  </TouchableOpacity>
-                )}
-                {!hideMenu && (
-                  <CommentMenu
-                    deleteComment={() => deleteCommentWithConfirm(comment.id)}
-                    removeComment={() => removeCommentWithConfirm(comment.id)}
-                    editComment={editComment}
-                  />
-                )}
-              </View>
+
+    <TouchableOpacity onPress={() => onReply(comment, { mention: false })}>
+      <View style={[style, styles.container]}>
+        <TouchableOpacity onPress={() => showMember(creator.id)}>
+          <Avatar avatarUrl={creator.avatarUrl} style={styles.avatar} />
+        </TouchableOpacity>
+        <View style={styles.details}>
+          <View style={styles.header}>
+            <View style={styles.meta}>
+              <TouchableOpacity onPress={() => showMember(creator.id)}>
+                <Text style={styles.name}>{creator.name}</Text>
+              </TouchableOpacity>
+              <Text style={styles.date}>{humanDate(createdAt)}</Text>
+              {displayPostTitle &&
+                <Text style={styles.date}>on "{postTitle}"</Text>}
             </View>
-            <HTMLView
-              addLineBreaks={false}
-              onLinkPress={url => urlHandler(url, showMember, showTopic, slug)}
-              stylesheet={styles.richTextStyles}
-              textComponentProps={{ style: styles.text }}
-              value={presentedText}
-            />
+            <View style={styles.headerRight}>
+              {onReply && (
+                <TouchableOpacity style={styles.replyLink} onPress={() => onReply(comment, { mention: !!comment.parentComment })}>
+                  <Icon style={styles.replyLinkIcon} name='Reply' />
+                  <Text style={styles.replyLinkText}>Reply</Text>
+                </TouchableOpacity>
+              )}
+              {!hideMenu && (
+                <CommentMenu
+                  deleteComment={() => deleteCommentWithConfirm(comment.id)}
+                  removeComment={() => removeCommentWithConfirm(comment.id)}
+                  editComment={editComment}
+                />
+              )}
+            </View>
           </View>
+          <HTMLView
+            addLineBreaks={false}
+            onLinkPress={url => urlHandler(url, showMember, showTopic, slug)}
+            stylesheet={styles.richTextStyles}
+            textComponentProps={{ style: styles.text }}
+            value={presentedText}
+          />
         </View>
-      </TouchableOpacity>
-    </>
+      </View>
+    </TouchableOpacity>
   )
 }
 

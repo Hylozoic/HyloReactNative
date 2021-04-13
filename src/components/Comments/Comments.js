@@ -5,6 +5,7 @@ import Comment from 'components/Comment'
 import Loading from 'components/Loading'
 import styles from './Comments.styles'
 import { FlatList } from 'react-native-gesture-handler'
+import SubComments from 'components/Comments'
 
 export default function Comments ({
   commentId,
@@ -40,14 +41,24 @@ export default function Comments ({
   )
 
   const renderItem = ({ item: comment }) => {
-    return <Comment comment={comment}
-      onReply={onReply}
-      showMember={showMember}
-      showTopic={showTopic}
-      slug={slug}
-      key={comment.id} />
+    return <>
+      <SubComments
+        style={{ marginLeft: 50 }}
+        commentId={comment.id}
+        showMember={showMember}
+        showTopic={showTopic}
+        onReply={onReply}
+        slug={slug}
+      />
+      <Comment comment={comment}
+        onReply={onReply}
+        showMember={showMember}
+        showTopic={showTopic}
+        slug={slug}
+        key={comment.id} />
+    </>
   }
-  
+
   return (
     <FlatList style={style}
       inverted
