@@ -42,14 +42,26 @@ export default function Comments ({
 
   const renderItem = ({ item: comment }) => {
     return <>
-      <SubComments
-        style={{ marginLeft: 50 }}
-        commentId={comment.id}
-        showMember={showMember}
-        showTopic={showTopic}
-        onReply={onReply}
-        slug={slug}
-      />
+      {!comment.parentComment && (
+        <SubComments
+          style={{ marginLeft: 50 }}
+          commentId={comment.id}
+          showMember={showMember}
+          showTopic={showTopic}
+          onReply={onReply}
+          slug={slug}
+          // TODO: To achieved subcomment list scrolling --
+          //       1) Wrap Comments in a forwardRef and change scrollViewRef
+          //          to commentsRef.current.scrollViewRef (in PostDetails usage).
+          //       2) Create a parentCommentId keyed list of subcomment refs
+          //          (maybe `const subCommentsScrollViewRefs = useRef({})` and
+          //          `sunCommentsScrollViewRefs.current[commentId])?
+          //  ref: https://mattclaffey.medium.com/adding-react-refs-to-an-array-of-items-96e9a12ab40c
+          //  ref: https://www.reddit.com/r/reactnative/comments/aewpd6/access_scrollview_ref_child_inside_flatlist/
+          //  ref: https://stackoverflow.com/questions/59411210/array-of-refs-in-functional-component-to-change-classnames-of-individual-items-v
+          // scrollViewRef={subCommentsScrollViewRef}
+        />
+      )}
       <Comment comment={comment}
         onReply={onReply}
         showMember={showMember}
