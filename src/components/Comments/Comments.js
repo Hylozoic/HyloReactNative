@@ -1,10 +1,9 @@
 /* eslint-disable camelcase */
-import React, { useEffect, useRef, forwardRef } from 'react'
-import { Text, TouchableOpacity, View, } from 'react-native'
+import React, { useEffect, useRef, useImperativeHandle, forwardRef } from 'react'
+import { Text, TouchableOpacity, View, FlatList } from 'react-native'
 import Comment from 'components/Comment'
 import Loading from 'components/Loading'
 import styles from './Comments.styles'
-import { FlatList } from 'react-native-gesture-handler'
 import SubComments from 'components/Comments'
 
 function Comments ({
@@ -22,7 +21,16 @@ function Comments ({
   panHandlers,
   onReply
 }, ref) {
+
   useEffect(() => { if (!commentId) fetchComments() }, [])
+
+  const mainListRef = useRef()
+  const subListRefs = useRef({})
+
+  useImperativeHandle(ref, () => ({
+    mainListRef,
+    subListRefs
+  }))
 
   const header = () => (
     <>
@@ -49,6 +57,7 @@ function Comments ({
           showTopic={showTopic}
           onReply={onReply}
           slug={slug}
+          ref={ref => subListRefs.current[comment.id] = ref}
           // TODO: To achieved subcomment list scrolling --
           //       1) Wrap Comments in a forwardRef and change flatListRef
           //          to commentsRef.current.flatListRef (in PostDetails usage).
@@ -73,7 +82,7 @@ function Comments ({
   return (
     <FlatList style={style}
       inverted
-      ref={ref}
+      ref={mainListRef}
       data={comments}
       keyExtractor={comment => comment.id}
       initialScrollIndex={0}

@@ -26,7 +26,7 @@ export default class PostDetails extends React.Component {
     commentPrompt: null,
     replyingToCommentId: null
   }
-  flatListRef = React.createRef()
+  commentsRef = React.createRef()
   editorRef = React.createRef()
 
   componentDidMount () {
@@ -75,7 +75,10 @@ export default class PostDetails extends React.Component {
 
   handleCommentReply = (comment, { mention = false }) => {
     // For recursive sub-comment context, will reply to the parent's comment 
-    const currentScrollView = this.flatListRef.current
+    // console.log('!!!!!! this.commentsRef?.current', this.commentsRef?.current.subListRefs.current[comment.parentComment].mainListRef.scrollToIndex(2))
+    // console.log('!!! this.commentsRef?.current.subListRefs.current[comment.parentComment].mainListRef.current', this.commentsRef?.current.subListRefs.current[comment.parentComment].mainListRef.current.scrollToIndex)
+    // this.commentsRef?.current.subListRefs?.current[comment.parentComment].mainListRef.current.scrollToEnd()
+    const currentScrollView = this.commentsRef?.current.mainListRef?.current
 
     if (currentScrollView) {
       this.setState({ commentPrompt: `Replying to ${comment.creator.name}`, commentText: '' })
@@ -103,7 +106,7 @@ export default class PostDetails extends React.Component {
 
     return (
       <Comments style={styles.commentsScrollView}
-        ref={this.flatListRef}
+        ref={this.commentsRef}
         postId={post.id}
         onReply={this.handleCommentReply}
         header={(
@@ -126,7 +129,7 @@ export default class PostDetails extends React.Component {
     const { post } = this.props
     const { commentText, commentPrompt, submitting } = this.state
     const groupId = get('groups.0.id', post)
-    console.log('!!!!!!!!!!!!!!!!!!!', this.flatListRef)
+    console.log('!!!!!!!!!!!!!!!!!!!', this.commentsRef)
     if (!post?.creator || !post?.title) return <LoadingScreen />
   
     return (
