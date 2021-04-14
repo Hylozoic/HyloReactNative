@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import React, { useEffect, forwardRef } from 'react'
+import React, { useEffect, useRef, forwardRef } from 'react'
 import { Text, TouchableOpacity, View, } from 'react-native'
 import Comment from 'components/Comment'
 import Loading from 'components/Loading'
@@ -20,9 +20,8 @@ function Comments ({
   showTopic,
   slug,
   panHandlers,
-  scrollViewRef,
   onReply
-}) {
+}, ref) {
   useEffect(() => { if (!commentId) fetchComments() }, [])
 
   const header = () => (
@@ -51,15 +50,15 @@ function Comments ({
           onReply={onReply}
           slug={slug}
           // TODO: To achieved subcomment list scrolling --
-          //       1) Wrap Comments in a forwardRef and change scrollViewRef
-          //          to commentsRef.current.scrollViewRef (in PostDetails usage).
+          //       1) Wrap Comments in a forwardRef and change flatListRef
+          //          to commentsRef.current.flatListRef (in PostDetails usage).
           //       2) Create a parentCommentId keyed list of subcomment refs
           //          (maybe `const subCommentsScrollViewRefs = useRef({})` and
           //          `sunCommentsScrollViewRefs.current[commentId])?
           //  ref: https://mattclaffey.medium.com/adding-react-refs-to-an-array-of-items-96e9a12ab40c
           //  ref: https://www.reddit.com/r/reactnative/comments/aewpd6/access_scrollview_ref_child_inside_flatlist/
           //  ref: https://stackoverflow.com/questions/59411210/array-of-refs-in-functional-component-to-change-classnames-of-individual-items-v
-          // scrollViewRef={subCommentsScrollViewRef}
+          // flatListRef={subCommentsScrollViewRef}
         />
       )}
       <Comment comment={comment}
@@ -74,7 +73,7 @@ function Comments ({
   return (
     <FlatList style={style}
       inverted
-      ref={scrollViewRef}
+      ref={ref}
       data={comments}
       keyExtractor={comment => comment.id}
       initialScrollIndex={0}

@@ -26,7 +26,7 @@ export default class PostDetails extends React.Component {
     commentPrompt: null,
     replyingToCommentId: null
   }
-  scrollViewRef = React.createRef()
+  flatListRef = React.createRef()
   editorRef = React.createRef()
 
   componentDidMount () {
@@ -75,7 +75,7 @@ export default class PostDetails extends React.Component {
 
   handleCommentReply = (comment, { mention = false }) => {
     // For recursive sub-comment context, will reply to the parent's comment 
-    const currentScrollView = this.scrollViewRef.current
+    const currentScrollView = this.flatListRef.current
 
     if (currentScrollView) {
       this.setState({ commentPrompt: `Replying to ${comment.creator.name}`, commentText: '' })
@@ -103,8 +103,8 @@ export default class PostDetails extends React.Component {
 
     return (
       <Comments style={styles.commentsScrollView}
+        ref={this.flatListRef}
         postId={post.id}
-        scrollViewRef={this.scrollViewRef}
         onReply={this.handleCommentReply}
         header={(
           <PostCardForDetails
@@ -126,7 +126,7 @@ export default class PostDetails extends React.Component {
     const { post } = this.props
     const { commentText, commentPrompt, submitting } = this.state
     const groupId = get('groups.0.id', post)
-
+    console.log('!!!!!!!!!!!!!!!!!!!', this.flatListRef)
     if (!post?.creator || !post?.title) return <LoadingScreen />
   
     return (
