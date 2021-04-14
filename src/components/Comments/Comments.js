@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import React, { useEffect } from 'react'
+import React, { useEffect, forwardRef } from 'react'
 import { Text, TouchableOpacity, View, } from 'react-native'
 import Comment from 'components/Comment'
 import Loading from 'components/Loading'
@@ -7,7 +7,7 @@ import styles from './Comments.styles'
 import { FlatList } from 'react-native-gesture-handler'
 import SubComments from 'components/Comments'
 
-export default function Comments ({
+function Comments ({
   commentId,
   comments = [],
   header: providedHeader = null,
@@ -85,6 +85,8 @@ export default function Comments ({
     />
   )
 }
+
+export default forwardRef(Comments)
 
 export function ShowMore ({ total = 0, commentsLength, hasMore, fetchComments }) {
   const extra = total - commentsLength
