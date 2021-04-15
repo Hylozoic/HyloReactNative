@@ -24,7 +24,7 @@ export default class PostDetails extends React.Component {
   state = {
     commentText: '',
     commentPrompt: null,
-    parentCommentId: null
+    reaplyingToCommentId: null
   }
   commentsRef = React.createRef()
   editorRef = React.createRef()
@@ -40,7 +40,8 @@ export default class PostDetails extends React.Component {
     return !!nextProps.isFocused
   }
 
-  onShowTopic = (topicId) => this.props.showTopic(topicId, get('post.groups.0.id', this.props))
+  onShowTopic = (topicId) =>
+    this.props.showTopic(topicId, get('post.groups.0.id', this.props))
 
   handleCreateComment = async commentText => {
     const commentTextAsHtml = toHtml(commentText)
@@ -50,7 +51,7 @@ export default class PostDetails extends React.Component {
 
       const { error } = await this.props.createComment({
         text: commentTextAsHtml,
-        parentCommentId: this.state.parentCommentId
+        parentCommentId: this.state.reaplyingToCommentId
       })
 
       if (error) {
@@ -68,43 +69,23 @@ export default class PostDetails extends React.Component {
 
   handleCommentReplyCancel = () => {
     this.setState({ commentPrompt: null, commentText: '' })
-    // unhighlight/deselect current entry we're commenting to in flatlist
+    this.commentsRef?.current.highlightComment(null)
     this.editorRef?.editorInputRef.current.clear()
     this.editorRef?.editorInputRef.current.blur()
   }
 
   handleCommentReply = (comment, { mention = false }) => {
-    // For recursive sub-comment context, will reply to the parent's comment 
-    // console.log('!!!!!! this.commentsRef?.current', this.commentsRef?.current.subListRefs.current[comment.parentComment].mainListRef.scrollToIndex(2))
-    // console.log('!!! this.commentsRef?.current.subListRefs.current[comment.parentComment].mainListRef.current', this.commentsRef?.current.subListRefs.current[comment.parentComment].mainListRef.current.scrollToIndex)
-    // this.commentsRef?.current.subListRefs?.current[comment.parentComment].mainListRef.current.scrollToEnd()
-    const currentScrollView = this.commentsRef?.current
+    this.setState({ commentPrompt: `Replying to ${comment.creator.name}`, commentText: '' })
+    this.setState({ reaplyingToCommentId: comment.parentComment || comment.id })
 
-    if (currentScrollView) {
-      this.setState({ commentPrompt: `Replying to ${comment.creator.name}`, commentText: '' })
-      const parentCommentId = comment.parentComment || comment.id
-      const subCommentId = comment.parentComment ? comment.id : null
+    const currentCommentsRef = this.commentsRef.current
+    this.commentsRef?.current.highlightComment(comment)
+    this.commentsRef?.current.scrollToComment(comment)
 
-      this.setState({ parentCommentId })
-      // TODO: This will currently scroll to the parent entry, which means to the bottom
-      //       of all it's child comments.
-      //       We likely will want the scroll to happen within the subcomment list
-      //       if commenting 
-      const section = currentScrollView.props.sections.find(section => parentCommentId == section.comment.id)
-      const sectionIndex = section.comment.sectionIndex
-      const itemIndex = section.data.find(subComment => subCommentId == subComment.id)?.itemIndex || 0
-      console.log('!!!! parentCommentId, sectionIndex, itemIndex:', comment, sectionIndex, itemIndex)
-
-      currentScrollView.scrollToLocation({
-        sectionIndex,
-        itemIndex
-        // viewPosition: 0
-      })
-      // TODO: highlight/select current entry we're commenting to in flatlist      
-      this.editorRef?.editorInputRef.current.clear()
-      if (mention) this.editorRef?.insertMention(comment.creator)
-      this.editorRef?.editorInputRef.current.focus()
-    }
+    // TODO: highlight/select current entry we're commenting to in flatlist      
+    this.editorRef?.editorInputRef.current.clear()
+    if (mention) this.editorRef?.insertMention(comment.creator)
+    this.editorRef?.editorInputRef.current.focus()
   }
 
   renderPostDetails = (panHandlers) => {

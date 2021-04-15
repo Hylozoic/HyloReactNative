@@ -22,16 +22,14 @@ export const getComments = createSelector(
       .toModelArray()
       .map(normaliseCommentModel)
     const parentComments = comments.filter(c => !c.parentComment)
+
     return reduce.convert({cap: false})((commentsWithSubComments, comment, index) => {
       return commentsWithSubComments = [
         ...commentsWithSubComments,
         {
-          comment: {
-            sectionIndex: index,
-            itemIndex: 0,
-            ...comment
-          },
-          data: comments
+          sectionIndex: index,
+          ...comment,
+          subComments: comments
             .filter(sc => sc.parentComment == comment.id)
             .map((c, i) => ({
               sectionIndex: index,

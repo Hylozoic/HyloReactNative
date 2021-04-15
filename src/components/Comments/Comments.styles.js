@@ -1,3 +1,4 @@
+import HeaderRightButton from 'navigation/header/HeaderRightButton'
 import { caribbeanGreen } from 'style/colors'
 
 export default {
@@ -19,5 +20,12 @@ export default {
     marginBottom: 20,
     fontSize: 13,
     color: caribbeanGreen
+  },
+  subComment: {
+    marginLeft: 40
+  },
+  highlighted: {
+    backgroundColor: 'rgb(255,255,224)',
+    padding: 10
   }
 }

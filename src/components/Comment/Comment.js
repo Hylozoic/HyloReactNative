@@ -51,9 +51,8 @@ export default function Comment ({
   }
 
   return (
-
     <TouchableOpacity onPress={() => onReply(comment, { mention: false })}>
-      <View style={[style, styles.container]}>
+      <View style={[styles.container, style]}>
         <TouchableOpacity onPress={() => showMember(creator.id)}>
           <Avatar avatarUrl={creator.avatarUrl} style={styles.avatar} />
         </TouchableOpacity>
