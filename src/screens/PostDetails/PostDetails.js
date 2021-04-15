@@ -24,7 +24,7 @@ export default class PostDetails extends React.Component {
   state = {
     commentText: '',
     commentPrompt: null,
-    replyingToCommentId: null
+    parentCommentId: null
   }
   commentsRef = React.createRef()
   editorRef = React.createRef()
@@ -50,7 +50,7 @@ export default class PostDetails extends React.Component {
 
       const { error } = await this.props.createComment({
         text: commentTextAsHtml,
-        parentCommentId: this.state.replyingToCommentId
+        parentCommentId: this.state.parentCommentId
       })
 
       if (error) {
@@ -78,18 +78,27 @@ export default class PostDetails extends React.Component {
     // console.log('!!!!!! this.commentsRef?.current', this.commentsRef?.current.subListRefs.current[comment.parentComment].mainListRef.scrollToIndex(2))
     // console.log('!!! this.commentsRef?.current.subListRefs.current[comment.parentComment].mainListRef.current', this.commentsRef?.current.subListRefs.current[comment.parentComment].mainListRef.current.scrollToIndex)
     // this.commentsRef?.current.subListRefs?.current[comment.parentComment].mainListRef.current.scrollToEnd()
-    const currentScrollView = this.commentsRef?.current.mainListRef?.current
+    const currentScrollView = this.commentsRef?.current
 
     if (currentScrollView) {
       this.setState({ commentPrompt: `Replying to ${comment.creator.name}`, commentText: '' })
-      const replyingToCommentId = comment.parentComment || comment.id
-      this.setState({ replyingToCommentId })
+      const parentCommentId = comment.parentComment || comment.id
+      const subCommentId = comment.parentComment ? comment.id : null
+
+      this.setState({ parentCommentId })
       // TODO: This will currently scroll to the parent entry, which means to the bottom
       //       of all it's child comments.
       //       We likely will want the scroll to happen within the subcomment list
       //       if commenting 
-      currentScrollView.scrollToIndex({
-        index: currentScrollView.props.data.findIndex(c => c.id == replyingToCommentId)
+      const section = currentScrollView.props.sections.find(section => parentCommentId == section.comment.id)
+      const sectionIndex = section.comment.sectionIndex
+      const itemIndex = section.data.find(subComment => subCommentId == subComment.id)?.itemIndex || 0
+      console.log('!!!! parentCommentId, sectionIndex, itemIndex:', comment, sectionIndex, itemIndex)
+
+      currentScrollView.scrollToLocation({
+        sectionIndex,
+        itemIndex
+        // viewPosition: 0
       })
       // TODO: highlight/select current entry we're commenting to in flatlist      
       this.editorRef?.editorInputRef.current.clear()
@@ -129,7 +138,7 @@ export default class PostDetails extends React.Component {
     const { post } = this.props
     const { commentText, commentPrompt, submitting } = this.state
     const groupId = get('groups.0.id', post)
-    console.log('!!!!!!!!!!!!!!!!!!!', this.commentsRef)
+
     if (!post?.creator || !post?.title) return <LoadingScreen />
   
     return (

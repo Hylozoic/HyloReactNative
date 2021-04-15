@@ -1,8 +1,8 @@
 import { createSelector } from 'reselect'
-import { get } from 'lodash/fp'
+import { get, reduce } from 'lodash/fp'
 import orm from 'store/models'
 import { FETCH_COMMENTS } from 'store/constants'
-import { makeGetQueryResults } from 'store/reducers/queryResults'
+import { makeGetQueryResults, matchSubCommentsIntoQueryResults } from 'store/reducers/queryResults'
 
 const normaliseCommentModel = comment => ({
   ...comment.ref,
@@ -15,22 +15,32 @@ export const getComments = createSelector(
   state => orm.session(state.orm),
   (_, props) => props.commentId,
   (_, props) => props.postId,
-  ({ Post, Comment }, commentId, postId) => {
-    if (commentId) {
-      return Comment.filter({ parentComment: commentId })
-        .orderBy(c => -Number(c.id))
-        .toModelArray()
-        .map(normaliseCommentModel)
-    } else {
-      const post = Post.withId(postId)
-
-      if (!post) return []
-  
-      return post.comments.filter({ parentComment: null })
-        .orderBy(c => -Number(c.id))
-        .toModelArray()
-        .map(normaliseCommentModel)
-    }
+  ({ Comment }, parentComment, post) => {
+    const comments = Comment
+      .filter({ post })
+      .orderBy(c => -Number(c.id))
+      .toModelArray()
+      .map(normaliseCommentModel)
+    const parentComments = comments.filter(c => !c.parentComment)
+    return reduce.convert({cap: false})((commentsWithSubComments, comment, index) => {
+      return commentsWithSubComments = [
+        ...commentsWithSubComments,
+        {
+          comment: {
+            sectionIndex: index,
+            itemIndex: 0,
+            ...comment
+          },
+          data: comments
+            .filter(sc => sc.parentComment == comment.id)
+            .map((c, i) => ({
+              sectionIndex: index,
+              itemIndex: i + 1,
+              ...c
+            }))
+        }
+      ]
+    }, [], parentComments)
   }
 )
 

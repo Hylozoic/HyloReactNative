@@ -1,19 +1,23 @@
 /* eslint-disable camelcase */
-import React, { useEffect, useRef, useImperativeHandle, forwardRef } from 'react'
-import { Text, TouchableOpacity, View, FlatList } from 'react-native'
+import React, { useEffect, forwardRef } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Text, TouchableOpacity, View, SectionList } from 'react-native'
 import Comment from 'components/Comment'
 import Loading from 'components/Loading'
 import styles from './Comments.styles'
-import SubComments from 'components/Comments'
+import { isEmpty } from 'lodash/fp'
+import {
+  getHasMoreComments,
+  getComments,
+  getTotalComments
+} from 'store/selectors/getComments'
+import fetchCommentsAction from 'store/actions/fetchComments'
+import { FETCH_COMMENTS } from 'store/constants'
+import fetchComments from 'store/actions/fetchComments'
 
 function Comments ({
-  commentId,
-  comments = [],
+  postId,
   header: providedHeader = null,
-  pending,
-  total,
-  hasMore,
-  fetchComments,
   style = {},
   showMember,
   showTopic,
@@ -21,16 +25,17 @@ function Comments ({
   panHandlers,
   onReply
 }, ref) {
+  const dispatch = useDispatch()
+  const comments = useSelector(state => getComments(state, { postId })) || []
+  const total = useSelector(state => getTotalComments(state, { postId }))
+  const hasMore = useSelector(state => getHasMoreComments(state, { postId }))
+  const pending = useSelector(state => state.pending[FETCH_COMMENTS])
+  const cursor = !isEmpty(comments) && comments[comments.length - 1].comment.id
+  const fetchComments = () => dispatch(fetchCommentsAction({ postId }, { cursor }))
 
-  useEffect(() => { if (!commentId) fetchComments() }, [])
+  const sections = comments
 
-  const mainListRef = useRef()
-  const subListRefs = useRef({})
-
-  useImperativeHandle(ref, () => ({
-    mainListRef,
-    subListRefs
-  }))
+  useEffect(() => { fetchComments() }, [])
 
   const header = () => (
     <>
@@ -39,7 +44,7 @@ function Comments ({
         commentsLength={comments.length}
         total={total}
         hasMore={hasMore}
-        fetchComments={fetchComments}
+        fetchComments={() => { fetchComments() }}
       />
       {pending && <View style={styles.loadingContainer}>
         <Loading style={styles.loading} />
@@ -47,47 +52,39 @@ function Comments ({
     </>
   )
 
-  const renderItem = ({ item: comment }) => {
+  const renderComment = ({ section: { comment }}) => (
+    <Comment comment={comment}
+      onReply={onReply}
+      showMember={showMember}
+      showTopic={showTopic}
+      slug={slug}
+      key={comment.id} />
+  )
+
+  const renderSubComment = ({ item: comment }) => {
     return <>
-      {!comment.parentComment && (
-        <SubComments
-          style={{ marginLeft: 50 }}
-          commentId={comment.id}
+      <View style={{ marginLeft: 40 }}>
+        <Comment
+          comment={comment}
+          onReply={onReply}
           showMember={showMember}
           showTopic={showTopic}
-          onReply={onReply}
           slug={slug}
-          ref={ref => subListRefs.current[comment.id] = ref}
-          // TODO: To achieved subcomment list scrolling --
-          //       1) Wrap Comments in a forwardRef and change flatListRef
-          //          to commentsRef.current.flatListRef (in PostDetails usage).
-          //       2) Create a parentCommentId keyed list of subcomment refs
-          //          (maybe `const subCommentsScrollViewRefs = useRef({})` and
-          //          `sunCommentsScrollViewRefs.current[commentId])?
-          //  ref: https://mattclaffey.medium.com/adding-react-refs-to-an-array-of-items-96e9a12ab40c
-          //  ref: https://www.reddit.com/r/reactnative/comments/aewpd6/access_scrollview_ref_child_inside_flatlist/
-          //  ref: https://stackoverflow.com/questions/59411210/array-of-refs-in-functional-component-to-change-classnames-of-individual-items-v
-          // flatListRef={subCommentsScrollViewRef}
-        />
-      )}
-      <Comment comment={comment}
-        onReply={onReply}
-        showMember={showMember}
-        showTopic={showTopic}
-        slug={slug}
-        key={comment.id} />
+          key={comment.id} />
+      </View>
     </>
   }
 
   return (
-    <FlatList style={style}
+    <SectionList style={style}
+      ref={ref}
       inverted
-      ref={mainListRef}
-      data={comments}
+      ListFooterComponent={header}
+      renderSectionFooter={renderComment}
+      renderItem={renderSubComment}
+      sections={sections}
       keyExtractor={comment => comment.id}
       initialScrollIndex={0}
-      renderItem={renderItem}
-      ListFooterComponent={header}
       keyboardDismissMode='interactive'
       {...panHandlers}
     />
