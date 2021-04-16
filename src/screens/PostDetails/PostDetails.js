@@ -22,7 +22,7 @@ import styles from './PostDetails.styles'
 
 export default class PostDetails extends React.Component {
   state = {
-    commentPrompt: null,
+    replyingToName: null,
     commentText: '',
     reaplyingToCommentId: null
   }
@@ -69,7 +69,7 @@ export default class PostDetails extends React.Component {
   }
 
   handleCommentReplyCancel = callback => {
-    this.setState({ commentPrompt: null, commentText: '' }, () => {
+    this.setState({ replyingToName: null, commentText: '' }, () => {
       this.commentsRef?.current.highlightComment(null)
       this.editorRef?.editorInputRef.current.clear()
       this.editorRef?.editorInputRef.current.blur()
@@ -79,7 +79,7 @@ export default class PostDetails extends React.Component {
 
   handleCommentReply = (comment, { mention = false }) => {
     this.handleCommentReplyCancel(() => {
-      this.setState({ commentPrompt: `Replying to ${comment.creator.name}`, commentText: '' })
+      this.setState({ replyingToName: comment.creator.name, commentText: '' })
       this.setState({ reaplyingToCommentId: comment.parentComment || comment.id })
   
       this.commentsRef?.current.highlightComment(comment)
@@ -123,7 +123,7 @@ export default class PostDetails extends React.Component {
 
   render () {
     const { post } = this.props
-    const { commentText, commentPrompt, submitting } = this.state
+    const { commentText, replyingToName, submitting } = this.state
     const groupId = get('groups.0.id', post)
 
     if (!post?.creator || !post?.title) return <LoadingScreen />
@@ -136,9 +136,11 @@ export default class PostDetails extends React.Component {
           spaceBetweenKeyboardAndAccessoryView={isIOS ? -79 : 0}
           contentOffsetKeyboardOpened={isIOS ? -45 : 0}
           renderScrollable={this.renderPostDetails}>
-            {commentPrompt && (
+            {replyingToName && (
               <View style={styles.commentPrompt}>
-                <Text style={styles.commentPromptText}>{commentPrompt}</Text>
+                <Text style={styles.commentPromptText}>
+                  Replying to <Text style={{ fontWeight: 'bold' }}>
+                    {replyingToName}</Text> {'\u00B7'} </Text>
                 <TouchableOpacity onPress={() => this.handleCommentReplyCancel()}>
                   <Text style={styles.commentPromptClearLink}>Cancel</Text>
                 </TouchableOpacity>

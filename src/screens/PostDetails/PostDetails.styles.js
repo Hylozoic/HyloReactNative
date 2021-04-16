@@ -1,4 +1,4 @@
-import { capeCod10, rhino60, rhino30, fuchsiaPink, prim, caribbeanGreen, white, rhino05, havelockBlue } from 'style/colors'
+import { capeCod10, rhino60, rhino30, fuchsiaPink, prim, caribbeanGreen, white, rhino05, havelockBlue, rhino, rhino80 } from 'style/colors'
 
 export default {
   container: {
@@ -55,13 +55,14 @@ export default {
   commentPrompt: {
     paddingHorizontal: 10,
     paddingTop: 10,
+    paddingBottom: 5,
     backgroundColor: rhino05,
-    flexDirection: 'row',
-    justifyContent: 'space-between'
+    flexDirection: 'row'
   },
   commentPromptText: {
+    color: rhino80
   },
   commentPromptClearLink: {
-    color: havelockBlue
+    color: rhino
   }
 }
