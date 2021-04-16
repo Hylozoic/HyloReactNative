@@ -11,8 +11,23 @@ import {
   rhino30,
   westSide,
   capeCod40,
-  white
+  white,
+  prim,
+  fuchsiaPink,
+  slateGrey80
 } from 'style/colors'
+
+const typeSelectorDefaults = {
+  // backgroundColor: fakeAlpha(havelockBlue, 0.2),
+  fontSize: 12,
+  fontWeight: 'bold',
+  borderRadius: 5,
+  borderColor: havelockBlue,
+  borderWidth: StyleSheet.hairlineWidth,
+  color: havelockBlue,
+  padding: 10,
+  paddingRight: 50
+}
 
 export default {
   container: {
@@ -47,60 +62,7 @@ export default {
     padding: 0,
     margin: 0
   },
-  detailsEditorContainer: {
-  },
-  typeButtonRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginTop: 10
-  },
-  typeButton: {
-    box: {
-      borderRadius: 4,
-      backgroundColor: rhino10,
-      paddingVertical: 10,
-      width: '23%'
-    },
-    text: {
-      color: limedSpruce,
-      letterSpacing: 0.8,
-      fontSize: 10,
-      textAlign: 'center',
-      fontFamily: 'Circular-Bold'
-    },
-    discussion: {
-      box: {
-        backgroundColor: fakeAlpha(havelockBlue, 0.2)
-      },
-      text: {
-        color: havelockBlue
-      }
-    },
-    request: {
-      box: {
-        backgroundColor: fakeAlpha(westSide, 0.2)
-      },
-      text: {
-        color: westSide
-      }
-    },
-    offer: {
-      box: {
-        backgroundColor: fakeAlpha(jade, 0.2)
-      },
-      text: {
-        color: jade
-      }
-    },
-    resource: {
-      box: {
-        backgroundColor: fakeAlpha(mangoYellow, 0.2)
-      },
-      text: {
-        color: mangoYellow
-      }
-    }
-  },
+  detailsEditorContainer: {},
   section: {
     marginBottom: 8,
     paddingBottom: 8
@@ -108,6 +70,98 @@ export default {
   sectionLabel: {
     fontFamily: 'Circular-Bold'
   },
+
+  // Type Selector
+  typeSelector: {
+    row: {
+      marginTop: 10
+    },
+    icon: {
+      fontSize: 20,
+      marginTop: 8,
+      marginRight: 10,
+      color: havelockBlue  
+    },
+    discussion: {
+      inputIOS: {
+        ...typeSelectorDefaults,
+        // backgroundColor: fakeAlpha(havelockBlue, 0.2),
+        borderColor: havelockBlue,
+        color: havelockBlue,        
+      },
+      inputAndroid: {
+        ...typeSelectorDefaults,
+        borderColor: havelockBlue,
+        color: havelockBlue,        
+      },
+    },
+    event: {
+      inputIOS: {
+        ...typeSelectorDefaults,
+        // backgroundColor: 'rgba(254, 72, 80, .2)'
+        borderColor: 'rgba(254, 72, 80, 1)',
+        color: 'rgba(254, 72, 80, 1)',        
+      },
+      inputAndroid: {
+        ...typeSelectorDefaults,
+        borderColor: 'rgba(254, 72, 80, 1)',
+        color: 'rgba(254, 72, 80, 1)'
+      }
+    },
+    offer: {
+      inputIOS: {
+        ...typeSelectorDefaults,
+        // backgroundColor: fakeAlpha(jade, 0.2)
+        borderColor: jade,
+        color: jade,        
+      },
+      inputAndroid: {
+        ...typeSelectorDefaults,
+        borderColor: jade,
+        color: jade,        
+      }
+    },
+    resource: {
+      inputIOS: {
+        ...typeSelectorDefaults,
+        // backgroundColor: fakeAlpha(mangoYellow, 0.2)
+        borderColor: mangoYellow,
+        color: mangoYellow,        
+      },
+      inputAndroid: {
+        ...typeSelectorDefaults,
+        borderColor: mangoYellow,
+        color: mangoYellow,        
+      }
+    },
+    project: {
+      inputIOS: {
+        ...typeSelectorDefaults,
+        // backgroundColor: fakeAlpha(westSide, 0.2)
+        borderColor: westSide,
+        color: westSide,        
+      },
+      inputAndroid: {
+        ...typeSelectorDefaults,
+        borderColor: westSide,
+        color: westSide,        
+      }
+    },
+    request: {
+      inputIOS: {
+        ...typeSelectorDefaults,
+        // backgroundColor: prim
+        borderColor: fuchsiaPink,
+        color: fuchsiaPink,        
+      },
+      inputAndroid: {
+        ...typeSelectorDefaults,
+        borderColor: fuchsiaPink,
+        color: fuchsiaPink,        
+      }
+    }
+  },
+  
   topics: {
     justifyContent: 'center',
     display: 'flex',

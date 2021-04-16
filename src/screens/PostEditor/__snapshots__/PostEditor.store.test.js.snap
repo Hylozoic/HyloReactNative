@@ -87,12 +87,13 @@ Object {
   }
   votesTotal
   myVote
-  acceptContributions
-  totalContributions
   groups {
     id
     name
     slug
+    settings {
+      publicMemberDirectory
+    }
   }
   attachments {
     type
@@ -123,12 +124,6 @@ Object {
       bio
       tagline
       location
-      skills (first: 100) {
-        items {
-          id
-          name
-        }
-      }
     }
   }
   eventInvitations {
@@ -144,15 +139,10 @@ Object {
         bio
         tagline
         location
-        skills (first: 100) {
-          items {
-            id
-            name
-          }
-        }
       }
     }
   }
+
         }
       }",
     "variables": Object {
@@ -179,7 +169,10 @@ Object {
       "eventName": "Post Created",
       "isAnnouncement": undefined,
     },
-    "extractModel": "Post",
+    "extractModel": Object {
+      "getRoot": [Function],
+      "modelName": "Post",
+    },
   },
   "type": "PostEditor/CREATE_POST",
 }
@@ -272,12 +265,13 @@ Object {
   }
   votesTotal
   myVote
-  acceptContributions
-  totalContributions
   groups {
     id
     name
     slug
+    settings {
+      publicMemberDirectory
+    }
   }
   attachments {
     type
@@ -308,12 +302,6 @@ Object {
       bio
       tagline
       location
-      skills (first: 100) {
-        items {
-          id
-          name
-        }
-      }
     }
   }
   eventInvitations {
@@ -329,15 +317,10 @@ Object {
         bio
         tagline
         location
-        skills (first: 100) {
-          items {
-            id
-            name
-          }
-        }
       }
     }
   }
+
         }
       }",
     "variables": Object {
@@ -368,7 +351,10 @@ Object {
       "eventName": "Post Created",
       "isAnnouncement": undefined,
     },
-    "extractModel": "Post",
+    "extractModel": Object {
+      "getRoot": [Function],
+      "modelName": "Post",
+    },
   },
   "type": "PostEditor/CREATE_POST",
 }
@@ -432,20 +418,53 @@ Object {
   commentsTotal
   comments(first: 10, order: \\"desc\\") {
     items {
-      id
-      text
-      creator {
-        id
-        name
-        avatarUrl
+      
+  id
+  text
+  creator {
+    id
+    name
+    avatarUrl
+  }
+  attachments {
+    id
+    position
+    type
+    url
+  }
+  parentComment {
+    id
+  }
+  createdAt
+
+      childComments(first: 10, order: \\"desc\\") {
+        items {
+          
+  id
+  text
+  creator {
+    id
+    name
+    avatarUrl
+  }
+  attachments {
+    id
+    position
+    type
+    url
+  }
+  parentComment {
+    id
+  }
+  createdAt
+
+          post {
+            id
+          }
+        }
+        total
+        hasMore
       }
-      attachments {
-        id
-        position
-        type
-        url
-      }
-      createdAt
     }
     total
     hasMore
@@ -478,12 +497,13 @@ Object {
   }
   votesTotal
   myVote
-  acceptContributions
-  totalContributions
   groups {
     id
     name
     slug
+    settings {
+      publicMemberDirectory
+    }
   }
   attachments {
     type
@@ -514,12 +534,6 @@ Object {
       bio
       tagline
       location
-      skills (first: 100) {
-        items {
-          id
-          name
-        }
-      }
     }
   }
   eventInvitations {
@@ -535,15 +549,10 @@ Object {
         bio
         tagline
         location
-        skills (first: 100) {
-          items {
-            id
-            name
-          }
-        }
       }
     }
   }
+
         }
       }",
     "variables": Object {

@@ -22,8 +22,12 @@ import styles from './PostDetails.styles'
 
 export default class PostDetails extends React.Component {
   state = {
-    commentText: ''
+    commentPrompt: null,
+    commentText: '',
+    reaplyingToCommentId: null
   }
+  commentsRef = React.createRef()
+  editorRef = React.createRef()
 
   componentDidMount () {
     this.props.fetchPost()
@@ -36,27 +40,58 @@ export default class PostDetails extends React.Component {
     return !!nextProps.isFocused
   }
 
-  onShowTopic = (topicId) => this.props.showTopic(topicId, get('post.groups.0.id', this.props))
+  onShowTopic = (topicId) =>
+    this.props.showTopic(topicId, get('post.groups.0.id', this.props))
 
-  handleCreateComment = (commentText) => {
+  handleCreateComment = async commentText => {
     const commentTextAsHtml = toHtml(commentText)
 
     if (!isEmpty(commentTextAsHtml)) {
       this.setState(() => ({ submitting: true }))
-      return this.props.createComment(commentTextAsHtml)
-        .then(({ error }) => {
-          if (error) {
-            Alert.alert("Your comment couldn't be saved; please try again.")
-            this.setState(() => ({ submitting: false }))
-          } else {
-            this.setState(() => ({ commentText: '', submitting: false }))
-          }
-        })
+
+      const { error } = await this.props.createComment({
+        text: commentTextAsHtml,
+        parentCommentId: this.state.reaplyingToCommentId
+      })
+
+      this.setState(() => ({ submitting: false }))
+
+      if (error) {
+        Alert.alert("Your comment couldn't be saved; please try again.")
+      } else {
+        this.handleCommentReplyCancel()
+      }
     }
   }
 
   handleCommentOnChange = (commentText) => {
     this.setState(() => ({ commentText }))
+  }
+
+  handleCommentReplyCancel = callback => {
+    this.setState({ commentPrompt: null, commentText: '' }, () => {
+      this.commentsRef?.current.highlightComment(null)
+      this.editorRef?.editorInputRef.current.clear()
+      this.editorRef?.editorInputRef.current.blur()
+      callback && callback()
+    })
+  }
+
+  handleCommentReply = (comment, { mention = false }) => {
+    this.handleCommentReplyCancel(() => {
+      this.setState({ commentPrompt: `Replying to ${comment.creator.name}`, commentText: '' })
+      this.setState({ reaplyingToCommentId: comment.parentComment || comment.id })
+  
+      this.commentsRef?.current.highlightComment(comment)
+      this.commentsRef?.current.scrollToComment(comment)
+  
+      // TODO: highlight/select current entry we're commenting to in flatlist      
+      this.editorRef?.editorInputRef.current.clear()
+  
+      if (mention) this.editorRef?.insertMention(comment.creator)
+  
+      this.editorRef?.editorInputRef.current.focus()  
+    })
   }
 
   renderPostDetails = (panHandlers) => {
@@ -66,7 +101,10 @@ export default class PostDetails extends React.Component {
     const location = post.location || (post.locationObject && post.locationObject.fullText)
 
     return (
-      <Comments
+      <Comments style={styles.commentsScrollView}
+        ref={this.commentsRef}
+        postId={post.id}
+        onReply={this.handleCommentReply}
         header={(
           <PostCardForDetails
             {...this.props}
@@ -75,10 +113,9 @@ export default class PostDetails extends React.Component {
             location={location}
           />
         )}
-        postId={post.id}
+        slug={slug}
         showMember={showMember}
         showTopic={this.onShowTopic}
-        slug={slug}
         panHandlers={panHandlers}
       />
     )
@@ -86,24 +123,33 @@ export default class PostDetails extends React.Component {
 
   render () {
     const { post } = this.props
-    const { commentText, submitting } = this.state
+    const { commentText, commentPrompt, submitting } = this.state
     const groupId = get('groups.0.id', post)
 
     if (!post?.creator || !post?.title) return <LoadingScreen />
-
+  
     return (
-      <SafeAreaView edges={['right', 'left', 'top']} style={styles.container}>
+      <SafeAreaView style={styles.container} edges={['right', 'left', 'top']}>
         <KeyboardAccessoryView
           contentContainerStyle={{ marginBottom: 0, borderWidth: 0 }}
           // TODO: Calculate these?
           spaceBetweenKeyboardAndAccessoryView={isIOS ? -79 : 0}
           contentOffsetKeyboardOpened={isIOS ? -45 : 0}
           renderScrollable={this.renderPostDetails}>
+            {commentPrompt && (
+              <View style={styles.commentPrompt}>
+                <Text style={styles.commentPromptText}>{commentPrompt}</Text>
+                <TouchableOpacity onPress={() => this.handleCommentReplyCancel()}>
+                  <Text style={styles.commentPromptClearLink}>Cancel</Text>
+                </TouchableOpacity>
+              </View>
+            )}
             <InlineEditor
+              style={styles.inlineEditor}
+              onRef={elem => this.editorRef = elem}
               onChange={this.handleCommentOnChange}
               onSubmit={this.handleCreateComment}
               value={commentText}
-              style={styles.inlineEditor}
               submitting={submitting}
               placeholder='Write a comment...'
               groupId={groupId}

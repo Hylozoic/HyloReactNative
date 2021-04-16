@@ -76,7 +76,8 @@ describe('mapStateToProps', () => {
       topicFollowersTotal: 10,
       topicPostsTotal: 20,
       topic: topic.ref,
-      topicSubscribed: false
+      topicSubscribed: false,
+      memberships: []
     })
     expect(firstMapping.group.id === secondMapping.group.id).toBeTruthy()
   })

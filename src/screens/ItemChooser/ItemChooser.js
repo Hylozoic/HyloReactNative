@@ -177,9 +177,10 @@ export default class ItemChooser extends React.Component {
     this.fetchSearchSuggestions(searchTerm)
   }
 
-  fetchSearchSuggestions = debounce(400, searchTerm => {
-    this.props.fetchSearchSuggestions(searchTerm)
-  })
+  fetchSearchSuggestions = debounce(400, (searchTerm) =>
+    this.props.fetchSearchSuggestions
+    && this.props.fetchSearchSuggestions(searchTerm)
+  )
 
   clearSearchTerm = () => this.props.setSearchTerm()
 

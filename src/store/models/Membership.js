@@ -12,5 +12,9 @@ Membership.modelName = 'Membership'
 Membership.fields = {
   id: attr(),
   group: fk('Group', 'memberships'),
-  newPostCount: attr()
+  hasModeratorRole: attr(),
+  lastViewAt: attr(),
+  newPostCount: attr(),
+  person: fk('Person', 'memberships'),
+  settings: attr()
 }

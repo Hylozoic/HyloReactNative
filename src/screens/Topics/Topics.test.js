@@ -5,58 +5,6 @@ import MockedScreen from 'util/testing/MockedScreen'
 import Topics, { TopicList, TopicRow, SubscribeStar } from './Topics'
 
 describe('Topics', () => {
-
-  describe('"Support Coming Soon"', () => {
-    it('displayed when no group id', () => {
-      const props = {
-        fetchGroupTopics: jest.fn()
-      }
-      const { getByText } = render(
-        <MockedScreen>
-          {() => <Topics {...props} />}
-        </MockedScreen>
-      )
-      expect(props.fetchGroupTopics).not.toBeCalled()
-      getByText("We're working on expanding #topics to more places.")
-    })
-
-    it("not displayed when a group id is present, fetches", () => {
-      const props = {
-        group: { id: 123 },
-        fetchGroupTopics: jest.fn()
-      }
-      const { getByText } = render(
-        <MockedScreen>
-          {() => <Topics {...props} />}
-        </MockedScreen>
-      )
-      expect(props.fetchGroupTopics).toBeCalled()
-      expect(getByText('No topics were found for this group'))
-    })
-
-    it('fetches when rerendered with a groupId', () => {
-      const propsBefore = {
-        fetchGroupTopics: jest.fn()
-      }
-      const propsAfter = {
-        group: { id: 123 },
-        fetchGroupTopics: jest.fn()
-      }
-      const { rerender } = render(
-        <MockedScreen>
-          {() => <Topics {...propsBefore} />}
-        </MockedScreen>
-      )
-      rerender(
-        <MockedScreen>
-          {() => <Topics {...propsAfter} />}
-        </MockedScreen>
-      )
-      expect(propsBefore.fetchGroupTopics).not.toBeCalled()
-      expect(propsAfter.fetchGroupTopics).toBeCalled()
-    })
-  })
-
   it('renders correctly a group and topics', () => {
     const props = {
       fetchGroupTopics: () => {},

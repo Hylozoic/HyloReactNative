@@ -3,14 +3,14 @@ export const invalidSlugMessage = 'URLs must have between 2 and 40 characters, a
 
 export function formatDomainWithUrl (groupDomain) {
   if (!groupDomain) return
-  let formattedDomain = groupDomain.replace(/hylo\.com\/c\/?/, '')
+  let formattedDomain = groupDomain.replace(/hylo\.com\/groups\/?/, '')
   if (formattedDomain !== '') {
-    formattedDomain = 'hylo.com/c/' + formattedDomain
+    formattedDomain = 'hylo.com/groups/' + formattedDomain
   }
   return formattedDomain
 }
 
-export function removeUrlFromDomain (groupDomain) {
+export function removeDomainFromURL (groupDomain) {
   if (!groupDomain) return
-  return groupDomain.replace('hylo.com/c/', '')
+  return groupDomain.replace('hylo.com/groups/', '')
 }

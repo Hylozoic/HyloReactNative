@@ -5,7 +5,10 @@ let session, state
 
 beforeEach(() => {
   session = orm.mutableSession(orm.getEmptyState())
-  state = { orm: session.state }
+  state = {
+    orm: session.state,
+    queryResults: {}
+  }
 })
 
 describe('mapStateToProps', () => {

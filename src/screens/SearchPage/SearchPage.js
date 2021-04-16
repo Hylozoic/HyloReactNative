@@ -73,7 +73,7 @@ export default class SearchPage extends React.Component {
       : null
 
     return (
-      <SafeAreaView style={styles.flatListContainer}>
+      <View style={styles.flatListContainer}>
         <FlatList
           data={searchResults}
           renderItem={({ item }) =>
@@ -89,7 +89,7 @@ export default class SearchPage extends React.Component {
           ListHeaderComponent={listHeaderComponent}
           ListFooterComponent={listFooterComponent}
         />
-      </SafeAreaView>
+      </View>
     )
   }
 }

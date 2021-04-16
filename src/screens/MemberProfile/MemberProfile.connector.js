@@ -1,26 +1,38 @@
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { get } from 'lodash/fp'
-import { getPerson, fetchPerson } from './MemberProfile.store'
+import { fetchPerson } from './MemberProfile.store'
 import blockUser from 'store/actions/blockUser'
 import makeGoToGroup from 'store/actions/makeGoToGroup'
 import getMe from 'store/selectors/getMe'
+import getPerson from 'store/selectors/getPerson'
 import getBlockedUsers from 'store/selectors/getBlockedUsers'
 import updateUserSettings from 'store/actions/updateUserSettings'
 import { mapWhenFocused, mergeWhenFocused } from 'util/redux'
+import getCurrentGroup from 'store/selectors/getCurrentGroup'
+import { logout } from 'screens/Login/actions'
+import getMemberships from 'store/selectors/getMemberships'
 
 export function mapStateToProps (state, props) {
+  const currentUser = getMe(state, props)
+  const currentGroup = getCurrentGroup(state, props)
+  const memberships = getMemberships(state)
   const id = get('route.params.id', props)
+  const person = id
+    ? getPerson(state, { personId: id })
+    : currentUser
+  const isMe = Number(get('id', currentUser)) === Number(get('id', person))
+  const navigation = props.navigation
+  const { navigate } = navigation
+
   const editing = get('route.params.editing', props)
   const isBlocked = !!getBlockedUsers(state).find(i => get('id', i) === id)
-  const person = getPerson(state, { id })
-  const goToDetails = () => props.navigation.navigate('MemberDetails', { id })
-  const goToEdit = () => props.navigation.navigate('MemberDetails', { id, editing: true })
-  const goToSkills = () => props.navigation.navigate('MemberSkillEditor', { id })
-  const currentUser = getMe(state, props)
-  const skills = person ? person.skills : []
-  const isMe = Number(get('id', currentUser)) === Number(id)
-  const navigation = props.navigation
+  const goToDetails = () => navigate('MemberDetails', { id })
+  const goToEdit = () => navigate('MemberDetails', { id, editing: true })
+  const goToEditAccount = () => navigate('Edit Account Info')
+  const goToSkills = () => navigate('MemberSkillEditor', { id })
+  const goToManageNotifications = () => navigate('Notification Settings')
+  const goToBlockedUsers = () => navigate('Blocked Users')
 
   return {
     isBlocked,
@@ -28,10 +40,14 @@ export function mapStateToProps (state, props) {
     editing,
     person,
     currentUser,
-    skills,
+    currentGroup,
+    memberships,
     goToDetails,
     goToEdit,
+    goToEditAccount,
     goToSkills,
+    goToManageNotifications,
+    goToBlockedUsers,
     isMe,
     navigation
   }
@@ -39,11 +55,12 @@ export function mapStateToProps (state, props) {
 
 export function mapDispatchToProps (dispatch, props) {
   return {
-    goToGroup: makeGoToGroup(),
+    goToGroup: makeGoToGroup(dispatch),
     ...bindActionCreators({
       fetchPerson,
       updateUserSettings,
-      blockUser
+      blockUser,
+      logout
     }, dispatch)
   }
 }
@@ -56,7 +73,7 @@ export function makeOnPressMessages (currentUser, person, navigation) {
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
-  const { id, currentUser, person, isMe } = stateProps
+  const { id, currentUser, currentGroup, memberships, person, isMe } = stateProps
   const { navigation } = ownProps
 
   const fetchPerson = () => dispatchProps.fetchPerson(id)
@@ -71,6 +88,7 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
   const updateUserSettings = isMe ? dispatchProps.updateUserSettings : () => {}
 
   const goToMemberProfile = () => navigation.navigate('Member', { id })
+  const goToGroup = groupId => dispatchProps.goToGroup(groupId, memberships, currentGroup.id)
 
   return {
     ...stateProps,
@@ -80,12 +98,9 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     canFlag,
     fetchPerson,
     onPressMessages,
-    goToMemberProfile
+    goToMemberProfile,
+    goToGroup
   }
 }
 
-export default connect(
-  mapWhenFocused(mapStateToProps),
-  mapWhenFocused(mapDispatchToProps),
-  mergeWhenFocused(mergeProps)
-)
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps)

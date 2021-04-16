@@ -9,6 +9,8 @@ export default function fetchCurrentUser () {
           id
           name
           email
+          bio
+          tagline    
           location
           locationObject {
             id
@@ -51,6 +53,16 @@ export default function fetchCurrentUser () {
             signupInProgress
             dmNotifications
           }
+          joinRequests(status: 0) {
+            items {
+              id
+              status
+              createdAt
+              group {
+                id
+              }
+            }
+          }
           memberships {
             id
             lastViewedAt
@@ -64,43 +76,68 @@ export default function fetchCurrentUser () {
               id
             }
             group {
+              accessibility
+              avatarUrl
+              bannerUrl
+              description
               id
+              memberCount
               name
               slug
-              memberCount
-              avatarUrl
+              visibility
+              childGroups(first: 300) {
+                items {
+                  accessibility
+                  avatarUrl
+                  bannerUrl
+                  description
+                  id
+                  memberCount
+                  name
+                  slug
+                  visibility
+                  settings {
+                    allowGroupInvites
+                    askJoinQuestions
+                    publicMemberDirectory
+                  }
+                }
+              }
               groupTopics(subscribed: true) {
                 total
                 hasMore
                 items {
+                  followersTotal
                   id
+                  isSubscribed
+                  newPostCount
+                  postsTotal
                   topic {
                     id
                     name
                   }
-                  newPostCount
-                  postsTotal
-                  followersTotal
-                  isSubscribed
                 }
               }
               parentGroups {
                 items {
-                  id
+                  accessibility
                   avatarUrl
+                  bannerUrl
+                  description
+                  id
                   memberCount
                   name
                   slug
+                  visibility
+                  settings {
+                    allowGroupInvites
+                    askJoinQuestions
+                    publicMemberDirectory
+                  }
                 }
               }
-              childGroups(first: 300) {
-                items {
-                  id
-                  avatarUrl
-                  memberCount
-                  name
-                  slug
-                }
+              settings {
+                allowGroupInvites
               }
             }
           }          

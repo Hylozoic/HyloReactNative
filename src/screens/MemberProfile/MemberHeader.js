@@ -2,12 +2,9 @@ import React from 'react'
 import {
   View,
   TouchableOpacity,
-  TextInput,
-  Text,
-  Alert
+  Alert,Text
 } from 'react-native'
 import Icon from 'components/Icon'
-import EntypoIcon from 'react-native-vector-icons/Entypo'
 import PopupMenuButton from 'components/PopupMenuButton'
 import { filter, get, isEmpty } from 'lodash/fp'
 import styles from './MemberHeader.styles'
@@ -20,7 +17,10 @@ export default function MemberHeader ({
   flagMember,
   onPressMessages,
   isMe,
-  editProfile,
+  goToEdit,
+  goToEditAccount,
+  goToManageNotifications,
+  goToBlockedUsers,
   editable,
   updateSetting = () => {},
   saveChanges,
@@ -60,16 +60,21 @@ export default function MemberHeader ({
           isMe={isMe}
         />
         <View style={styles.icons}>
-          <TouchableOpacity onPress={onPressMessages}>
+          {!isMe &&<TouchableOpacity onPress={onPressMessages}>
             <Icon name='Messages' style={styles.icon} />
-          </TouchableOpacity>
-          <MemberMenu {... { flagMember, isMe, editProfile, saveChanges, editable, blockUser, isAxolotl }} />
+          </TouchableOpacity>}
+          <MemberMenu {...{
+            flagMember, isMe, saveChanges, editable, blockUser,
+            isAxolotl, goToEdit, goToEditAccount,
+            goToManageNotifications, goToBlockedUsers
+          }} />
         </View>
       </View>
       <Control
         style={styles.location}
         value={locationText}
         placeholder='Location'
+        multiline
         editable={editable}
         onPress={showLocationPicker}
         isMe={isMe}
@@ -102,11 +107,17 @@ export function blockUserWithConfirmationFun (blockUserFun, name) {
   }
 }
 
-export function MemberMenu ({ flagMember, isMe, blockUser, editProfile, saveChanges, editable, isAxolotl }) {
+export function MemberMenu ({
+  flagMember, isMe, blockUser, saveChanges, editable,
+  isAxolotl, goToEdit, goToEditAccount,
+  goToManageNotifications, goToBlockedUsers
+}) {
   // If the function is defined, than it's a valid action
-
   const actions = filter(x => x[1], [
-    ['Edit', isMe && !editable && editProfile],
+    ['Edit Profile', isMe && !editable && goToEdit],
+    ['Edit Account', isMe && !editable && goToEditAccount],
+    ['Manage Notifications', isMe && !editable && goToManageNotifications],
+    ['Blocked Users', isMe && !editable && goToBlockedUsers],
     ['Save Changes', isMe && editable && saveChanges],
     ['Flag This Member', !isMe && flagMember],
     ['Block This Member', !isMe && !isAxolotl && blockUser]

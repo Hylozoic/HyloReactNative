@@ -6,22 +6,10 @@ import postFieldsFragment from 'graphql/fragments/postFieldsFragment'
 export const MODULE_NAME = 'PostEditor'
 export const CREATE_POST = `${MODULE_NAME}/CREATE_POST`
 export const CREATE_PROJECT = `${MODULE_NAME}/CREATE_PROJECT`
-
 export const UPDATE_POST = `${MODULE_NAME}/UPDATE_POST`
 export const UPDATE_POST_PENDING = `${UPDATE_POST}_PENDING`
 
 export const MAX_TITLE_LENGTH = 100
-
-export const projectEndpointFragment = `createProject(data: {
-  title: $title
-  details: $details
-  groupIds: $groupIds
-  imageUrls: $imageUrls
-  fileUrls: $fileUrls
-  announcement: $announcement
-  topicNames: $topicNames
-  memberIds: $memberIds
-})`
 
 export function createPost (post) {
   const {
@@ -94,7 +82,10 @@ export function createPost (post) {
       }
     },
     meta: {
-      extractModel: 'Post',
+      extractModel: {
+        modelName: 'Post',
+        getRoot: get('createPost')
+      },
       analytics: {
         eventName: AnalyticsEvents.POST_CREATED,
         detailsLength: textLength(preprocessedDetails),
@@ -171,7 +162,10 @@ export function createProject (post) {
       }
     },
     meta: {
-      extractModel: 'Post',
+      extractModel: {
+        modelName: 'Post',
+        getRoot: get('createProject')
+      },
       analytics: {
         eventName: AnalyticsEvents.POST_CREATED,
         detailsLength: textLength(preprocessedDetails),

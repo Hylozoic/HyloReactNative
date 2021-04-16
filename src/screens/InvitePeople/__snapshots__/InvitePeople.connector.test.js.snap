@@ -34,7 +34,11 @@ Object {
           name
           slug
           invitePath
-          allowGroupInvites
+          settings {
+            allowGroupInvites
+            askJoinQuestions
+            publicMemberDirectory
+          }
           pendingInvitations (first: 100) {
             hasMore
             items {
@@ -175,27 +179,48 @@ Object {
 exports[`mergeProps merges the props 7`] = `
 Object {
   "graphql": Object {
-    "query": "mutation ($groupId: ID, $data: Boolean) {
-        allowGroupInvites(groupId: $groupId, data: $data) {
+    "query": "mutation ($id: ID, $changes: GroupInput) {
+        updateGroupSettings(id: $id, changes: $changes) {
           id
+          settings {
+            allowGroupInvites
+            askJoinQuestions
+            publicMemberDirectory
+          }
+          joinQuestions {
+            items {
+              id
+              questionId
+              text
+            }
+          }
         }
       }",
     "variables": Object {
-      "data": true,
-      "groupId": 1,
+      "changes": Object {
+        "settings": Object {
+          "allowGroupInvites": true,
+        },
+      },
+      "id": 1,
     },
   },
   "meta": Object {
-    "groupId": 1,
+    "changes": Object {
+      "settings": Object {
+        "allowGroupInvites": true,
+      },
+    },
+    "extractModel": "Group",
+    "id": 1,
     "optimistic": true,
   },
-  "type": "InvitePeople/ALLOW_GROUP_INVITES",
+  "type": "GroupSettings/UPDATE_GROUP_SETTINGS",
 }
 `;
 
 exports[`mergeProps merges the props 8`] = `
 Object {
-  "allowGroupInvites": [Function],
   "createInvitations": [Function],
   "createInvitationsMaker": [Function],
   "expireInvitation": [Function],
@@ -226,5 +251,6 @@ Object {
   "reinviteAll": [Function],
   "reinviteAllMaker": [Function],
   "resendInvitation": [Function],
+  "setAllowGroupInvites": [Function],
 }
 `;

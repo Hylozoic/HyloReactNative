@@ -78,12 +78,13 @@ Object {
   }
   votesTotal
   myVote
-  acceptContributions
-  totalContributions
   groups {
     id
     name
     slug
+    settings {
+      publicMemberDirectory
+    }
   }
   attachments {
     type
@@ -114,12 +115,6 @@ Object {
       bio
       tagline
       location
-      skills (first: 100) {
-        items {
-          id
-          name
-        }
-      }
     }
   }
   eventInvitations {
@@ -135,15 +130,10 @@ Object {
         bio
         tagline
         location
-        skills (first: 100) {
-          items {
-            id
-            name
-          }
-        }
       }
     }
   }
+
               }
               ... on Comment {
                 id

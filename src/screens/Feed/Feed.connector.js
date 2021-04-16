@@ -37,9 +37,9 @@ export function setupTopicProps (state, props, group) {
 }
 
 export function mapStateToProps (state, props) {
-  const stateProps = {}
   const currentUser = getMe(state)
-  const currentUserHasMemberships = !isEmpty(getMemberships(state))  
+  const memberships = getMemberships(state)
+  const currentUserHasMemberships = !isEmpty(memberships)  
   // Group
   const groupId = getRouteParam('groupId', props.route)
     || getCurrentGroupId(state, props)
@@ -53,6 +53,7 @@ export function mapStateToProps (state, props) {
     currentUser,
     currentUserHasMemberships,
     group,
+    memberships,
     ...setupTopicProps(state, props, group)
   }
 }
@@ -62,10 +63,10 @@ export function mapDispatchToProps (dispatch, { navigation }) {
     newPost: (groupId, topicName) =>
       navigation.navigate('Edit Post', { groupId, topicName }),
     newProject: (groupId) =>
-      navigation.navigate('Edit Post', { groupId, isProject: true }),
+      navigation.navigate('Edit Post', { groupId, type: 'project' }),
     showPost: id => navigation.navigate('Post Details', { id }),
     showMember: id => navigation.navigate('Member', { id }),
-    goToGroup: makeGoToGroup(),
+    goToGroup: makeGoToGroup(dispatch),
     goToCreateGroup: () => navigation.navigate('Create Group'),
     ...bindActionCreators({
       fetchGroupTopic,
@@ -76,7 +77,7 @@ export function mapDispatchToProps (dispatch, { navigation }) {
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
-  const { group, topic, topicName, topicSubscribed } = stateProps
+  const { group, memberships, topic, topicName, topicSubscribed } = stateProps
   const { navigation } = ownProps
   const groupId = group?.id
   const slug = group?.slug
@@ -85,9 +86,10 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     ...dispatchProps,
     ...ownProps,
     newPost: () => dispatchProps.newPost(groupId, topicName),
+    goToGroup: groupId => dispatchProps.goToGroup(groupId, memberships, group.id),
     showTopic: selectedTopicName => {
       if (selectedTopicName == topicName) return
-      //   return showToast('Topics support for "All Groups" and Networks coming soon!')
+      //   return showToast('Topics support for "All My Groups" and Networks coming soon!')
       if (topicName) {
         navigation.setParams({ topicName: selectedTopicName })
       } else {

@@ -1,6 +1,6 @@
 {
   "name": "HyloReactNative",
-  "version": "3.0.3",
+  "version": "3.1.2",
   "private": true,
   "scripts": {
     "android": "react-native run-android",
@@ -25,17 +25,19 @@
   },
   "dependencies": {
     "@flyerhq/react-native-keyboard-accessory-view": "^2.1.0",
+    "@hookstate/core": "^3.0.6",
     "@invertase/react-native-apple-authentication": "^2.1.0",
     "@react-native-async-storage/async-storage": "^1.13.2",
     "@react-native-community/clipboard": "^1.5.1",
     "@react-native-community/google-signin": "^4.0.3",
     "@react-native-community/masked-view": "^0.1.10",
     "@react-native-community/netinfo": "^5.9.9",
-    "@react-navigation/bottom-tabs": "^5.11.2",
+    "@react-native-community/picker": "^1.8.1",
+    "@react-navigation/bottom-tabs": "^5.11.8",
     "@react-navigation/compat": "^5.3.10",
-    "@react-navigation/drawer": "^5.11.4",
-    "@react-navigation/native": "^5.8.10",
-    "@react-navigation/stack": "^5.12.8",
+    "@react-navigation/drawer": "^5.12.4",
+    "@react-navigation/native": "^5.9.3",
+    "@react-navigation/stack": "^5.14.3",
     "@sentry/react-native": "^2.1.1",
     "cheerio": "0.22.0",
     "ent": "^2.2.0",
@@ -63,6 +65,7 @@
     "react-native-linear-gradient": "^2.5.6",
     "react-native-mixpanel": "^1.2.0",
     "react-native-onesignal": "^4.0.3",
+    "react-native-picker-select": "^8.0.4",
     "react-native-prompt-android": "^1.0.0",
     "react-native-reanimated": "^1.13.2",
     "react-native-restart": "^0.0.17",
@@ -143,7 +146,7 @@
     ],
     "timers": "fake",
     "transformIgnorePatterns": [
-      "node_modules/(?!(jest-)?react-native|@react-native-community|@react-navigation|rn-round-checkbox|@invertase|@flyerhq/react-native-keyboard-accessory-view)"
+      "node_modules/(?!(jest-)?react-native|@react-native-community|@react-navigation|rn-round-checkbox|@invertase|@flyerhq/react-native-keyboard-accessory-view|@react-native-picker)"
     ]
   },
   "standard": {

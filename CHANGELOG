@@ -1,19 +1,39 @@
-
 # Changelog
 All notable changes to HyloReactNative (the Hylo mobile app) will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [UNRELEASED]
+### Added
+- More advanced type selector for Post Editor 
+### Changed
+- Projects can now be created from the main Post Editor window, not only via New Project
+- Swaps color for "Request" and "Project" in accordance with web
+### Fixed
+- Issue with Post Editor such that it would not forward to a newly created project
+
+## [3.1.2]
+### Fixed
+- New Post not appearing in feed
+- "No comments" always showing even when there were comments
+
+## [3.1.0]
 ### Added
 - Holonic Architecture (Groups) conversion
 - Public Groups
 - Event type to feed filter
+- Group subnavigation menu
+- Related Groups listing 
+- Related Group detail page including join options
 ### Changed
 - Upgraded ReduxORM
+- Drawer and tab navigation redesign (moving Search and Messages to tabs, etc)
 - Updated Event label to match web
+- Updated Group Creation to include Visibility and Accessibility options
+- Updated Group Creation to include related group option
 ### Fixed
+- Public and All My Groups now pull the expected posts
 
 ## [3.0.3] - 2020-01-31
 ### Fixed

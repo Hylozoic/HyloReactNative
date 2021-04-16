@@ -1,4 +1,4 @@
-import { limedSpruce, slateGrey80, nevada, rhino50 } from 'style/colors'
+import { limedSpruce, slateGrey80, nevada, rhino50, caribbeanGreen } from 'style/colors'
 
 export default {
   container: {
@@ -36,6 +36,23 @@ export default {
     fontFamily: 'Circular-Bold',
     fontSize: 14
   },
+  replyLink: {
+    flexDirection: 'row',
+    borderWidth: 1,
+    borderColor: slateGrey80,
+    padding: 3,
+    borderRadius: 5
+  },
+  replyLinkText: {
+    fontSize: 12,
+    color: slateGrey80,
+    marginLeft: 5
+  },
+  replyLinkIcon: {
+    transform: [{rotateY: '180deg'}],
+    fontSize: 12,
+    color: slateGrey80
+  },
   date: {
     color: slateGrey80,
     fontFamily: 'Circular-Book',
@@ -50,5 +67,14 @@ export default {
     // Tested and it seems fine, but if comment layout looks word somewhere, try
     // removing this line.
     height: 0
+  },
+  richTextStyles: {
+    a: {
+      color: caribbeanGreen
+    },
+    p: {
+      marginTop: 3,
+      marginBottom: 3
+    }
   }
 }

@@ -57,7 +57,6 @@ describe('mergeProps', () => {
     stateProps.canModerateCurrentGroup = false
     const propsNonModerator = mergeProps(stateProps, dispatchProps, ownProps)
     expect(propsNonModerator).toMatchSnapshot()
-    expect(propsNonModerator.goToGroupSettingsMenu).toBeFalsy()
   })
 
   describe('canModerate functions are bound', () => {
@@ -65,11 +64,6 @@ describe('mergeProps', () => {
       const group = { id: 'testgroup' }
       props.goToGroup(group)
       expect(dispatchProps.selectGroup).toHaveBeenCalled()
-      expect(ownProps.navigation.navigate).toHaveBeenCalledTimes(1)
-    })
-
-    it('should showSetting', () => {
-      props.showSettings()
       expect(ownProps.navigation.navigate).toHaveBeenCalledTimes(1)
     })
 

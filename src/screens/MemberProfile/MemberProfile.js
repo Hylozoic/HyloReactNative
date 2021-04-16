@@ -21,9 +21,8 @@ export default class MemberProfile extends React.Component {
   }
 
   setHeader = () => {
-    const { navigation, topicName, group } = this.props
-    // TODO: Get current group name
-    navigation.setOptions({ headerTitle: ''  })
+    const { navigation, currentGroup } = this.props
+    navigation.setOptions({ headerTitle: currentGroup.name  })
   }
 
   blockUser = () => {
@@ -38,6 +37,9 @@ export default class MemberProfile extends React.Component {
       canFlag,
       goToDetails,
       goToEdit,
+      goToEditAccount,
+      goToManageNotifications,
+      goToBlockedUsers,
       id,
       isFocused,
       isMe,
@@ -62,7 +64,6 @@ export default class MemberProfile extends React.Component {
       id,
       type: 'member'
     }
-
     const header = (
       <View>
         <MemberBanner
@@ -78,15 +79,17 @@ export default class MemberProfile extends React.Component {
             blockUser={this.blockUser}
             onPressMessages={onPressMessages}
             isMe={isMe}
-            editProfile={goToEdit}
+            goToEdit={goToEdit}
+            goToEditAccount={goToEditAccount}
+            goToManageNotifications={goToManageNotifications}
+            goToBlockedUsers={goToBlockedUsers}
           />
           <ReadMoreButton goToDetails={goToDetails} />
         </View>
-        {flaggingVisible && <FlagContent
-          type='member'
-          linkData={linkData}
-          onClose={() => this.setState({ flaggingVisible: false })}
-                            />}
+        {flaggingVisible && (
+          <FlagContent type='member' linkData={linkData}
+            onClose={() => this.setState({ flaggingVisible: false })} />
+        )}
       </View>
     )
 

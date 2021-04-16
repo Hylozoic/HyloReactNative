@@ -1,42 +1,54 @@
+import { createSelector as ormCreateSelector } from 'redux-orm'
+import orm from 'store/models'
 import { AnalyticsEvents } from 'hylo-utils/constants'
+import { GROUP_ACCESSIBILITY, GROUP_VISIBILITY } from 'store/models/Group'
+import groupFieldsFragment from 'graphql/fragments/groupFieldsFragment'
 
 export const MODULE_NAME = 'CreateGroupFlow'
-export const SAVE_GROUP_NAME = `${MODULE_NAME}/SAVE_GROUP_NAME`
-export const SAVE_GROUP_URL = `${MODULE_NAME}/SAVE_GROUP_URL`
+export const UPDATE_GROUP_DATA = `${MODULE_NAME}/UPDATE_GROUP_DATA`
 export const FETCH_URL_EXISTS = `${MODULE_NAME}/FETCH_URL_EXISTS`
 export const CREATE_GROUP = `${MODULE_NAME}/CREATE_GROUP`
-export const CLEAR_NAME_AND_URL_FROM_STORE = `${MODULE_NAME}/CLEAR_NAME_AND_URL_FROM_STORE`
+export const CLEAR_CREATE_GROUP_STORE = `${MODULE_NAME}/CLEAR_CREATE_GROUP_STORE`
 export const FETCH_GROUP_EXISTS = `${MODULE_NAME}/FETCH_URL_EXISTS`
 
-export default function reducer (state = {}, action) {
+export const defaultState = {
+  // New Group Defaults
+  groupData: {
+    name: '',
+    slug: '',
+    visibility: GROUP_VISIBILITY.Protected, 
+    accessibility: GROUP_ACCESSIBILITY.Restricted,
+    parentIds: []
+  },
+  urlExists: false,
+  edited: false
+}
+
+export default function reducer (state = defaultState, action) {
   const { type, payload } = action
   switch (type) {
-    case SAVE_GROUP_NAME:
+    case UPDATE_GROUP_DATA:
       return {
         ...state,
-        groupName: payload
+        groupData: {
+          ...state.groupData,
+          ...payload
+        },
+        edited: true
       }
-    case SAVE_GROUP_URL:
-      return {
-        ...state,
-        groupUrl: payload
-      }
-    case CLEAR_NAME_AND_URL_FROM_STORE:
-      return {
-        ...state,
-        groupUrl: null,
-        groupName: null
-      }
+    case CLEAR_CREATE_GROUP_STORE:
+      return defaultState
     case FETCH_URL_EXISTS:
       return {
         ...state,
-        urlExists: action.payload.data.groupExists.exists
+        urlExists: action.payload.data.groupExists.exists,
+        edited: true
       }
   }
   return state
 }
 
-export function createGroup (name, slug) {
+export function createGroup (groupData) {
   return {
     type: CREATE_GROUP,
     graphql: {
@@ -45,24 +57,21 @@ export function createGroup (name, slug) {
           id
           hasModeratorRole
           group {
+            ${groupFieldsFragment({ withJoinQuestions: true })}
+          }
+          person {
             id
-            name
-            slug
           }
         }
       }
       `,
       variables: {
-        data: {
-          name,
-          slug
-        }
+        data: groupData
       }
     },
     meta: {
       extractModel: 'Membership',
-      slug,
-      name,
+      ...groupData,
       analytics: AnalyticsEvents.GROUP_CREATED
     }
   }
@@ -86,34 +95,36 @@ export function fetchGroupExists (slug) {
   }
 }
 
-export function saveGroupName (name) {
+export function updateGroupData (groupData) {
   return {
-    type: SAVE_GROUP_NAME,
-    payload: name
+    type: UPDATE_GROUP_DATA,
+    payload: groupData
   }
 }
 
-export function saveGroupUrl (url) {
-  return {
-    type: SAVE_GROUP_URL,
-    payload: url
-  }
-}
-
-export function clearNameAndUrlFromStore () {
-  return {
-    type: CLEAR_NAME_AND_URL_FROM_STORE
-  }
-}
-
-export function getGroupName (state) {
-  return state[MODULE_NAME].groupName
-}
-
-export function getGroupUrl (state) {
-  return state[MODULE_NAME].groupUrl
+export function getGroupData (state) {
+  return state[MODULE_NAME]?.groupData
 }
 
 export function getGroupUrlExists (state) {
   return state[MODULE_NAME].urlExists
 }
+
+export function getEdited (state) {
+  return state[MODULE_NAME]?.edited
+}
+
+export function clearCreateGroupStore () {
+  return {
+    type: CLEAR_CREATE_GROUP_STORE
+  }
+}
+
+export const getNewGroupParentGroups = ormCreateSelector(
+  orm,
+  getGroupData,
+  (session, { parentIds }) => session.Group.all()
+    .toRefArray()
+    .filter(g => parentIds.includes(g.id))
+    .sort((a, b) => a.name.localeCompare(b.name))
+)

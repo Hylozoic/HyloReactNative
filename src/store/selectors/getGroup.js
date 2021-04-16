@@ -8,7 +8,7 @@ const getGroup = ormCreateSelector(
   orm,
   (_, props) => get('id', props),
   (_, props) => get('slug', props),
-  ({ Group }, id, slug) => {
+  (session, id, slug) => {
     if (id === ALL_GROUP_ID || slug === ALL_GROUP_ID) {
       return ALL_GROUP
     }
@@ -16,7 +16,7 @@ const getGroup = ormCreateSelector(
       return PUBLIC_GROUP
     }
 
-    return Group.safeGet({ id, slug })
+    return session?.Group.safeGet({ id, slug })
   }
 )
 export default getGroup

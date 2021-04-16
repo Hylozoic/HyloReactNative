@@ -5,12 +5,14 @@ Object {
   "blockUser": [Function],
   "fetchPerson": [Function],
   "goToGroup": [Function],
+  "logout": [Function],
   "updateUserSettings": [Function],
 }
 `;
 
 exports[`mapStateToProps maps the state to the props 1`] = `
 Object {
+  "currentGroup": null,
   "currentUser": SessionBoundModel {
     "_fields": Object {
       "id": "1",
@@ -18,17 +20,20 @@ Object {
     "id": "1",
   },
   "editing": undefined,
+  "goToBlockedUsers": [Function],
   "goToDetails": [Function],
   "goToEdit": [Function],
+  "goToEditAccount": [Function],
+  "goToManageNotifications": [Function],
   "goToSkills": [Function],
   "id": 123,
   "isBlocked": false,
   "isMe": false,
+  "memberships": Array [],
   "navigation": Object {
     "navigate": [MockFunction],
   },
   "person": null,
-  "skills": Array [],
 }
 `;
 
@@ -39,6 +44,7 @@ Object {
     "id": 1,
   },
   "fetchPerson": [Function],
+  "goToGroup": [Function],
   "goToMemberProfile": [Function],
   "id": 78,
   "isMe": true,

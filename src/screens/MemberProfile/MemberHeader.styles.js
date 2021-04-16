@@ -4,7 +4,7 @@ import {
 
 export default {
   header: {
-    marginBottom: 15
+    marginBottom: 0
   },
   nameRow: {
     flexDirection: 'row',
@@ -30,12 +30,13 @@ export default {
     color: rhino60
   },
   location: {
-    fontSize: 14,
-    color: rhino50,
+    fontSize: 16,
+    color: rhino80,
     fontFamily: 'Circular-Book',
-    marginBottom: 2
+    marginBottom: 10
   },
   tagline: {
+    marginBottom: 10,
     fontSize: 16,
     color: rhino80,
     fontFamily: 'Circular-Book'

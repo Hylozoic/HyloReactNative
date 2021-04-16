@@ -1,70 +1,133 @@
 /* eslint-disable camelcase */
-import React, { useRef, useLayoutEffect, useCallback, useEffect } from 'react'
-import { Text, TouchableOpacity, View, ScrollView } from 'react-native'
+import React, { useEffect, useState, useRef, useImperativeHandle, forwardRef } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Text, TouchableOpacity, View, SectionList } from 'react-native'
 import Comment from 'components/Comment'
 import Loading from 'components/Loading'
 import styles from './Comments.styles'
+import { isEmpty, omit } from 'lodash/fp'
+import {
+  getHasMoreComments,
+  getComments,
+  getTotalComments
+} from 'store/selectors/getComments'
+import fetchCommentsAction from 'store/actions/fetchComments'
+import { FETCH_COMMENTS } from 'store/constants'
 
-export default function Comments ({
-  comments = [],
-  header,
-  pending,
-  total,
-  hasMore,
-  fetchComments,
+function Comments ({
+  postId,
+  header: providedHeader = null,
+  style = {},
   showMember,
   showTopic,
   slug,
-  panHandlers
-}) {
+  panHandlers,
+  onReply
+}, ref) {
+  const dispatch = useDispatch()
+  const comments = useSelector(state => getComments(state, { postId })) || []
+  const pending = useSelector(state => state.pending[FETCH_COMMENTS])
+  const fetchComments = () => dispatch(fetchCommentsAction({ postId }))
+  const sections = comments.map(comment => ({
+    comment: omit(['subComments'], comment),
+    data: comment.subComments
+  }))
+  const [highlightedComment, highlightComment] = useState()
+  const commentsListRef = useRef()
+
+  const scrollToComment = comment => {
+    const parentCommentId = comment.parentComment || comment.id
+    const subCommentId = comment.parentComment ? comment.id : null
+    const section = sections.find(section => parentCommentId == section.comment.id)
+    const sectionIndex = section.comment.sectionIndex
+    const itemIndex = section.data.find(subComment => subCommentId == subComment.id)?.itemIndex
+      || section.data.length + 1
+
+    commentsListRef?.current.scrollToLocation({ sectionIndex, itemIndex })
+  }
+
+  useImperativeHandle(ref, () => ({
+    scrollToComment,
+    highlightComment
+  }))
+
+
   useEffect(() => { fetchComments() }, [])
-  useLayoutEffect(() => {
-    // NOTE: `setTimeout` used here as their
-    // seems no other reliable way to guarantee
-    // the bottom is available before scrolling
-    if (!pending && total > 0) setTimeout(() => (
-      scrollViewRef.current?.scrollToEnd()
-    ))
-  }, [pending, total])
 
-  const scrollViewRef = useRef()
-
-  return (
-    <ScrollView
-      ref={scrollViewRef}
-      keyboardDismissMode='interactive'
-      {...panHandlers}>
-      {header}
-      <ShowMore
-        commentsLength={comments.length}
-        total={total}
-        hasMore={hasMore}
-        fetchComments={fetchComments}
-      />
+  const header = () => (
+    <>
+      {providedHeader}
+      <ShowMore postId={postId} />
       {pending && <View style={styles.loadingContainer}>
         <Loading style={styles.loading} />
       </View>}
-      {comments.map(comment => (
-        <Comment
-          comment={comment}
-          showMember={showMember}
-          showTopic={showTopic}
-          slug={slug}
-          key={comment.id}
-        />
-      ))}
-    </ScrollView>
+    </>
+  )
+
+  const renderComment = ({ section: { comment }}) => {
+    return <>
+      <ShowMore commentId={comment.id} style={styles.subCommentsShowMore} />
+      <Comment style={
+          comment.id == highlightedComment?.id && styles.highlighted
+        }
+        comment={comment}
+        onReply={onReply}
+        showMember={showMember}
+        showTopic={showTopic}
+        slug={slug}
+        key={comment.id} />
+    </>
+  }
+
+  const renderSubComment = ({ item: comment }) => {
+    return (
+      <Comment style={[
+          comment.id == highlightedComment?.id && styles.highlighted,
+          styles.subComment
+        ]}
+        comment={comment}
+        onReply={onReply}
+        showMember={showMember}
+        showTopic={showTopic}
+        slug={slug}
+        key={comment.id} />
+    )
+  }
+
+  return (
+    <SectionList style={style}
+      ref={commentsListRef}
+      inverted
+      ListFooterComponent={header}
+      renderSectionFooter={renderComment}
+      renderItem={renderSubComment}
+      sections={sections}
+      keyExtractor={comment => comment.id}
+      initialScrollIndex={0}
+      keyboardDismissMode='interactive'
+      {...panHandlers}
+    />
   )
 }
 
-export function ShowMore ({ total = 0, hasMore, fetchComments }) {
-  const extra = total - 10
+export default forwardRef(Comments)
+
+export function ShowMore ({ postId, commentId, style = {}  }) {
+  const queryParams = commentId ? { commentId } : { postId }
+  const dispatch = useDispatch()
+  const fetchComments = () => dispatch(fetchCommentsAction(queryParams, { cursor }))
+  const comments = useSelector(state => getComments(state, queryParams)) || []
+  const cursor = !isEmpty(comments) && comments[comments.length - 1].id
+  const total = useSelector(state => getTotalComments(state, queryParams)) || 0
+  const hasMore = useSelector(state => getHasMoreComments(state, queryParams))
+
+  const extra = total - comments.length
 
   if (!hasMore || extra < 1) return null
 
   return (
     <TouchableOpacity>
-      <Text style={styles.showMore} onPress={fetchComments}>
+      <Text style={[styles.showMore, style]} onPress={fetchComments}>
         View {extra} previous comment{extra > 1 ? 's' : ''}
       </Text>
     </TouchableOpacity>

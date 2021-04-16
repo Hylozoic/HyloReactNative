@@ -79,7 +79,7 @@ describe('PostEditor mapDispatchToProps', () => {
         }
       },
       navigation: {
-        goBack: jest.fn()
+        navigate: jest.fn()
       }
     }
     const dispatchProps = mapDispatchToProps(dispatch, props)
@@ -99,7 +99,7 @@ describe('PostEditor mapDispatchToProps', () => {
         }
       },
       navigation: {
-        goBack: jest.fn()
+        navigate: jest.fn()
       }
     }
     const dispatch = jest.fn(val => Promise.resolve(val))

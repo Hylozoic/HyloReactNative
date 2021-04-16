@@ -1,4 +1,4 @@
-import React, { createRef } from 'react'
+import React, { useRef } from 'react'
 import {
   View,
   TouchableOpacity,
@@ -6,72 +6,56 @@ import {
   Text
 } from 'react-native'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
-import { rhino60, amaranth } from 'style/colors'
+import { rhino60, amaranth, rhino50 } from 'style/colors'
 
-export default class Control extends React.Component {
-  inputRef = createRef()
+export default function Control ({
+  value,
+  onChangeText,
+  editable = false,
+  multiline,
+  isMe,
+  onPress,
+  hideEditIcon,
+  error,
+  placeholder,
+  style
+}) {
+  const inputRef = useRef()
+  const focus = () => inputRef.current?.focus()
 
-  focus = () => this.inputRef.current && this.inputRef.current.focus()
-
-  render () {  
-    const {
-      value,
-      onChangeText,
-      editable = false,
-      multiline,
-      isMe,
-      onPress,
-      hideEditIcon,
-      error,
-      placeholder,
-      style
-    } = this.props
-
-    if (editable && onPress) {
-      return (
-        <View style={[styles.control, editable && styles.editableControl]}>
-          <View style={styles.controlInputRow}>
-            <TouchableOpacity onPress={onPress}>
-              <Text>{value}</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      )
-    }
-
-    return (
-      <View style={[styles.control, editable && styles.editableControl]}>
-        <View style={styles.controlInputRow}>
-          {!editable && (
-            <Text style={style}>{value}</Text>
-          )}
-          {editable && (<>
-            <TextInput
-              ref={this.inputRef}
-              style={[styles.controlInput, style]}
-              value={value}
-              onChangeText={onChangeText}
-              editable={editable}
-              placeholder={isMe ? placeholder : ''}
-              multiline={multiline}
-              numberOfLines={multiline ? 8 : 1}
-              underlineColorAndroid='transparent'
-            />
-            {!hideEditIcon && (
-              <TouchableOpacity onPress={this.focus} style={styles.editIconWrapper}>
-                <EntypoIcon name='edit' style={styles.editIcon} />
-              </TouchableOpacity>
-            )}  
-          </>)}
-        </View>
-        {!!error && (
-          <View style={styles.controlError}>
-            <Text style={styles.controlErrorText}>{error}</Text>
-          </View>
+  return (
+    <View style={[styles.control, editable && styles.editableControl]}>
+      <View style={styles.controlInputRow}>
+        {!editable && !!value && (
+          <Text style={style}>{value}</Text>
         )}
+        {editable && (<>
+          <TextInput
+            ref={inputRef}
+            onFocus={onPress}
+            style={[styles.controlInput, style]}
+            value={value}
+            onChangeText={onChangeText}
+            editable={editable}
+            placeholder={isMe ? placeholder : ''}
+            multiline={multiline}
+            numberOfLines={multiline ? 8 : 1}
+            underlineColorAndroid='transparent'
+          />
+          {!hideEditIcon && (
+            <TouchableOpacity onPress={focus} style={styles.editIconWrapper}>
+              <EntypoIcon name='edit' style={styles.editIcon} />
+            </TouchableOpacity>
+          )}  
+        </>)}
       </View>
-    )
-  }
+      {!!error && (
+        <View style={styles.controlError}>
+          <Text style={styles.controlErrorText}>{error}</Text>
+        </View>
+      )}
+    </View>
+  )
 }
 
 const styles = {

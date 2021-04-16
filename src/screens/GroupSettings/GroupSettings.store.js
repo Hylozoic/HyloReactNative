@@ -7,57 +7,65 @@ export function fetchGroupSettings (id) {
   return {
     type: FETCH_GROUP_SETTINGS,
     graphql: {
-      query: `query ($id: ID) {
-        group (id: $id) {
-          id
-          name
-          slug
-          avatarUrl
-          bannerUrl
-          description
-          location
-          locationObject {
+      query: `
+        query ($id: ID) {
+          group (id: $id) {
             id
-            addressNumber
-            addressStreet
-            bbox {
-              lat
-              lng
+            accessibility
+            avatarUrl
+            bannerUrl
+            description
+            location
+            invitePath
+            name
+            settings {
+              allowGroupInvites
+              askJoinQuestions
+              publicMemberDirectory
             }
-            center {
-              lat
-              lng
+            slug
+            visibility
+            childGroups (first: 100) {
+              items {
+                id
+                name
+                avatarUrl
+              }
             }
-            city
-            country
-            fullText
-            locality
-            neighborhood
-            region
-          }
-          settings
-          invitePath
-          hidden
-          allowGroupInvites
-          pendingInvitations (first: 100) {
-            hasMore
-            items {
-              id
-              email
-              createdAt
-              lastSentAt
+            moderators (first: 100) {
+              hasMore
+              items {
+                id
+                name
+                avatarUrl
+              }
             }
-          }
-          moderators (first: 100) {
-            hasMore
-            items {
-              id
-              name
-              avatarUrl
+            parentGroups (first: 100) {
+              items {
+                id
+                name
+                avatarUrl
+              }
+            }
+            pendingInvitations {
+              hasMore
+              items {
+                id
+                email
+                createdAt
+                lastSentAt
+              }
+            }
+            joinQuestions {
+              items {
+                id
+                questionId
+                text
+              }
             }
           }
         }
-      }`,
+      `,
       variables: {
         id
       }
@@ -76,6 +84,18 @@ export function updateGroupSettings (id, changes) {
       query: `mutation ($id: ID, $changes: GroupInput) {
         updateGroupSettings(id: $id, changes: $changes) {
           id
+          settings {
+            allowGroupInvites
+            askJoinQuestions
+            publicMemberDirectory
+          }
+          joinQuestions {
+            items {
+              id
+              questionId
+              text
+            }
+          }
         }
       }`,
       variables: {
@@ -85,6 +105,7 @@ export function updateGroupSettings (id, changes) {
     meta: {
       id,
       changes,
+      extractModel: 'Group',
       optimistic: true
     }
   }

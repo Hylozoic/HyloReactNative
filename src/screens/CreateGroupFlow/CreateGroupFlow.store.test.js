@@ -4,56 +4,32 @@ import reducer,
   fetchGroupExists,
   saveGroupUrl,
   saveGroupName,
-  clearNameAndUrlFromStore,
-  SAVE_GROUP_NAME,
+  clearCreateGroupStore,
+  UPDATE_GROUP_NAME,
   SAVE_GROUP_URL,
-  CLEAR_NAME_AND_URL_FROM_STORE,
-  FETCH_URL_EXISTS
+  CLEAR_CREATE_GROUP_STORE,
+  FETCH_URL_EXISTS,
+  defaultState
 }
   from './CreateGroupFlow.store'
 
 const name = 'group name'
-const url = 'group_name'
+const slug = 'group_name'
 
 describe('reducer', () => {
-  describe('on SAVE_GROUP_NAME', () => {
+  describe('on CLEAR_CREATE_GROUP_STORE', () => {
     const action = {
-      type: SAVE_GROUP_NAME,
-      payload: name
+      type: CLEAR_CREATE_GROUP_STORE
     }
     it('sets display', () => {
       const state = {
-        groupName: null
+        groupData: {
+          name,
+          slug
+        }
       }
       const newState = reducer(state, action)
-      expect(newState.groupName).toEqual(name)
-    })
-  })
-  describe('on SAVE_GROUP_URL', () => {
-    const action = {
-      type: SAVE_GROUP_URL,
-      payload: url
-    }
-    it('sets display', () => {
-      const state = {
-        groupUrl: null
-      }
-      const newState = reducer(state, action)
-      expect(newState.groupUrl).toEqual(url)
-    })
-  })
-  describe('on CLEAR_NAME_AND_URL_FROM_STORE', () => {
-    const action = {
-      type: CLEAR_NAME_AND_URL_FROM_STORE
-    }
-    it('sets display', () => {
-      const state = {
-        groupName: name,
-        groupUrl: url
-      }
-      const newState = reducer(state, action)
-      expect(newState.groupName).toEqual(null)
-      expect(newState.groupUrl).toEqual(null)
+      expect(newState).toEqual(defaultState)
     })
   })
   describe('on FETCH_URL_EXISTS', () => {
@@ -79,21 +55,14 @@ describe('reducer', () => {
 })
 
 describe('showLoadingModal', () => {
-  it('matches snapshot', () => expect(createGroup(name, url)).toMatchSnapshot())
+  it('matches snapshot', () => expect(createGroup({ name, slug })).toMatchSnapshot())
 })
 
 describe('fetchGroupExists', () => {
-  it('matches snapshot', () => expect(fetchGroupExists(url)).toMatchSnapshot())
+  it('matches snapshot', () => expect(fetchGroupExists(slug)).toMatchSnapshot())
 })
 
-describe('saveGroupName', () => {
-  it('matches snapshot', () => expect(saveGroupName(name)).toMatchSnapshot())
-})
 
-describe('saveGroupUrl', () => {
-  it('matches snapshot', () => expect(saveGroupUrl(url)).toMatchSnapshot())
-})
-
-describe('clearNameAndUrlFromStore', () => {
-  it('matches snapshot', () => expect(clearNameAndUrlFromStore()).toMatchSnapshot())
+describe('clearCreateGroupStore', () => {
+  it('matches snapshot', () => expect(clearCreateGroupStore()).toMatchSnapshot())
 })

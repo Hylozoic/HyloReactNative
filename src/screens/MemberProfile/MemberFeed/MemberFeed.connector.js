@@ -1,6 +1,8 @@
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import makeGoToGroup from 'store/actions/makeGoToGroup'
+import getCurrentGroupId from 'store/selectors/getCurrentGroupId'
+import getMemberships from 'store/selectors/getMemberships'
 import {
   setChoice,
   getChoice,
@@ -22,6 +24,8 @@ export function mapStateToProps (state, props) {
   const choice = getChoice(state, props)
   let items = []
   let itemType, hasMore, pending
+  const currentGroupId = getCurrentGroupId(state)
+  const memberships = getMemberships(state)
 
   switch (choice) {
     case 'Posts':
@@ -48,6 +52,8 @@ export function mapStateToProps (state, props) {
     items,
     itemType,
     hasMore,
+    currentGroupId,
+    memberships,
     pending
   }
 }
@@ -60,14 +66,14 @@ export function mapDispatchToProps (dispatch, { navigation }) {
       fetchMemberComments,
       fetchMemberUpvotes
     }, dispatch),
-    goToGroup: makeGoToGroup(),
+    goToGroup: makeGoToGroup(dispatch),
     showPost: id => navigation.navigate('Post Details', { id }),
     showTopic: topicName => navigation.navigate('Topic Feed', { topicName })
   }
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
-  const { choice, hasMore, items } = stateProps
+  const { choice, hasMore, items, currentGroupId, memberships } = stateProps
   const { id } = ownProps
   const fetchFunction = {
     Posts: dispatchProps.fetchMemberPosts,
@@ -81,13 +87,15 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
   const fetchMoreItems = hasMore
     ? () => fetchFunction({ id, offset })
     : () => {}
+  const goToGroup = groupId => dispatchProps.goToGroup(groupId, memberships, currentGroupId)
 
   return {
     ...stateProps,
     ...dispatchProps,
     ...ownProps,
     fetchItems,
-    fetchMoreItems
+    fetchMoreItems,
+    goToGroup
   }
 }
 

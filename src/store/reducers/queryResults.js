@@ -6,54 +6,62 @@
 // to "Location". And both of these lists are different from what should be
 // shown when something has been typed into the search field.
 
-import {
-  FETCH_POSTS
-} from 'store/actions/fetchPosts'
-import {
-  CREATE_POST, CREATE_PROJECT
-} from 'screens/PostEditor/PostEditor.store'
-import {
-  RECEIVE_POST
-} from 'components/SocketListener/SocketListener.store'
-import {
-  REMOVE_POST_PENDING
-} from 'components/PostCard/PostHeader/PostHeader.store'
-
 import { get, isNull, omitBy, pick, reduce, uniq, isEmpty, includes } from 'lodash/fp'
 import { createSelector as ormCreateSelector } from 'redux-orm'
 import orm from 'store/models'
 import { mapValues } from 'lodash'
+
+import { FETCH_COMMENTS, FETCH_POSTS } from 'store/constants'
+import { CREATE_POST, CREATE_PROJECT } from 'screens/PostEditor/PostEditor.store'
+import { RECEIVE_POST } from 'components/SocketListener/SocketListener.store'
+import { REMOVE_POST_PENDING } from 'components/PostCard/PostHeader/PostHeader.store'
+
 // reducer
 
 export default function (state = {}, action) {
   const { type, payload, error, meta } = action
-  if (error) return state
-  let root
 
-  const { extractQueryResults } = meta || {}
+  if (error) return state
+
+  let root
+  const extractQueryResults = meta?.extractQueryResults
+
+  // Special case for post query- needs to extract subcomments as well.
+  // Toplevel comments are handled by standard extractQueryResults (below).
+  if (extractQueryResults?.extractSubComments && payload) {
+    state = matchSubCommentsIntoQueryResults(state, action)
+  }
+
   if (extractQueryResults && payload) {
-    const { getItems, getParams, getType, reset } = extractQueryResults
-    return addIds(state, {
-      type: getType ? getType(action) : action.type,
-      params: getParams ? getParams(action) : meta.graphql.variables,
-      data: getItems(action),
-      reset
-    })
+    const { getItems, getParams, getType, reset } = meta.extractQueryResults
+
+    return {
+      ...state,
+      ...addIds(state, {
+        type: getType ? getType(action) : action.type,
+        params: getParams ? getParams(action) : meta.graphql.variables,
+        data: getItems(action),
+        reset
+      })
+    }
   }
 
   switch (type) {
-    case CREATE_POST:
+    case CREATE_POST: {
       root = payload.data.createPost
       return matchNewPostIntoQueryResults(state, root)
+    }
 
-    case CREATE_PROJECT:
+    case CREATE_PROJECT: {
       root = payload.data.createProject
       return matchNewPostIntoQueryResults(state, root)
+    }
 
-    case RECEIVE_POST:
+    case RECEIVE_POST: {
       return matchNewPostIntoQueryResults(state, payload.data.post)
+    }
 
-    case REMOVE_POST_PENDING:
+    case REMOVE_POST_PENDING: {
       return mapValues(state, (results, key) => {
         if (get('params.slug', JSON.parse(key)) !== meta.slug) return results
         return {
@@ -61,7 +69,9 @@ export default function (state = {}, action) {
           ids: results.ids.filter(id => id !== meta.postId)
         }
       })
+    }
   }
+
   return state
 }
 
@@ -85,8 +95,23 @@ function matchNewPostIntoQueryResults (state, { id, type, groups }) {
   }, state, groups)
 }
 
+export function matchSubCommentsIntoQueryResults (state, { payload, meta }) {
+  const toplevelComments = get(`data.post.comments.items`, payload)
+
+  toplevelComments.forEach(comment => {
+    state = addIds(state, {
+      type: FETCH_COMMENTS,
+      params: { commentId: comment.id },
+      data: get(`childComments`, comment) || {}
+    })
+  })
+
+  return state
+}
+
 function prependIdForCreate (state, type, params, id) {
   const key = buildKey(type, params)
+
   if (!state[key]) return state
 
   return {
@@ -101,6 +126,7 @@ function prependIdForCreate (state, type, params, id) {
 
 export function addIds (state, { type, params, data, reset }) {
   if (!data) return state
+
   const { items, total, hasMore } = data
   const key = buildKey(type, params)
   const existingIds = (!reset && get('ids', state[key])) || []
@@ -137,6 +163,8 @@ export function buildKey (type, params) {
 
 export const queryParamWhitelist = [
   'id',
+  'postId',
+  'commentId',
   'slug',
   'groupSlug',
   'groupSlugs',

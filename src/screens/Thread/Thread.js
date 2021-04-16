@@ -35,7 +35,7 @@ export default class Thread extends React.Component {
     const { navigation, id, title } = this.props
     title && navigation.setOptions({
       headerTitle: ({ style }) => (
-        <TouchableOpacity onPress={()=> navigation.navigate('ThreadParticipants', { id })}>
+        <TouchableOpacity onPress={() => navigation.navigate('ThreadParticipants', { id })}>
           <Text style={{ ...style, color: pictonBlue }}>{title}</Text>
         </TouchableOpacity>
       )

@@ -13,6 +13,7 @@ export default function RootView ({
   loading,
   signedIn,
   signupInProgress,
+  currentUser,
   checkSessionAndSetSignedIn,
   loadCurrentUserSession,
   returnToPath,
@@ -69,7 +70,7 @@ export default function RootView ({
         ref={navigationRef}
         onReady={() => { isReadyRef.current = true }}
       >
-        {signedIn && !signupInProgress
+        {signedIn && !signupInProgress && currentUser
           ? <AppWithDrawerNavigator />
           : <AuthNavigator signupInProgress={signupInProgress} />}
       </NavigationContainer>
