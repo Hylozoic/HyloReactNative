@@ -274,8 +274,8 @@ PODS:
   - React-jsinspector (0.63.4)
   - react-native-background-timer (2.4.1):
     - React-Core
-  - react-native-date-picker (2.7.13):
-    - React
+  - react-native-date-picker (3.2.10):
+    - React-Core
   - react-native-document-picker (2.3.0):
     - React
   - react-native-fbsdk (2.0.0):
@@ -656,7 +656,7 @@ SPEC CHECKSUMS:
   React-jsiexecutor: 93bd528844ad21dc07aab1c67cb10abae6df6949
   React-jsinspector: 58aef7155bc9a9683f5b60b35eccea8722a4f53a
   react-native-background-timer: 17ea5e06803401a379ebf1f20505b793ac44d0fe
-  react-native-date-picker: 4468aeac8de6a6e351b56be0014d4fd35476de4c
+  react-native-date-picker: 242eec7af56cea5fb2706d5db5d3837060b3884b
   react-native-document-picker: 8508bfda34be6c24a2cbecbe515b15108658c183
   react-native-fbsdk: 00c15d138bba6d4efa628670886fc58cec858c19
   react-native-flipper: 7077153889f54d57e1f61c579da23426f0bb5e39
