@@ -286,7 +286,6 @@
 		0C3719E599A206E3EBE469AC1601B5D7 /* UIImage+MPAverageColor.h in Headers */ = {isa = PBXBuildFile; fileRef = 34CD43A449C9D8A9480AAFA59EBD3E9A /* UIImage+MPAverageColor.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		0C386E251013B7025F4AD73B227B7DDF /* FBSDKEventBinding.h in Headers */ = {isa = PBXBuildFile; fileRef = B921BE3BA26E200DE88126892D50603D /* FBSDKEventBinding.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		0C80E64EA9D761EA9EAABB00459520D0 /* SentryCrash.h in Headers */ = {isa = PBXBuildFile; fileRef = FE8658720EE08839EC26E5E6CA8E6CE6 /* SentryCrash.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		0C86E4B6183C8CE5D8F0379F3DA6FDBB /* DatePicker.h in Headers */ = {isa = PBXBuildFile; fileRef = 735104F9399327BA008690F3F3F757D6 /* DatePicker.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		0CA8037128DBC7C6B80D9DFBFDEE0249 /* SKSwizzle.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9492601D2464158B2A9AEBD946F17453 /* SKSwizzle.mm */; settings = {COMPILER_FLAGS = "-DDEBUG=1 -DFLIPPER_OSS=1 -DFB_SONARKIT_ENABLED=1 -DFOLLY_NO_CONFIG -DFOLLY_MOBILE=1 -DFOLLY_USE_LIBCPP=1 -DFOLLY_HAVE_LIBGFLAGS=0 -DFOLLY_HAVE_LIBJEMALLOC=0 -DFOLLY_HAVE_PREADV=0 -DFOLLY_HAVE_PWRITEV=0 -DFOLLY_HAVE_TFO=0 -DFOLLY_USE_SYMBOLIZER=0"; }; };
 		0CB439EC8390DEAA279C59EC8332FF73 /* FBSDKDialogConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = DE5FBC07E91C21F4BC6797D6308CEFDB /* FBSDKDialogConfiguration.m */; };
 		0CB7FAF3F9DC9A4C0D5CA9665F132AA6 /* OIDIDToken.h in Headers */ = {isa = PBXBuildFile; fileRef = 6ADFFE45F45CF4CF5F208FF2B7D6F552 /* OIDIDToken.h */; settings = {ATTRIBUTES = (Project, ); }; };
@@ -479,6 +478,7 @@
 		1D1DAD525D425A5095E47AB858C5B222 /* Observable.h in Headers */ = {isa = PBXBuildFile; fileRef = C47FF2A3E00893791C14D01F33D5507E /* Observable.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		1D2D50950655DAE3B11E210CBFCB74F0 /* ThreadName.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AB7586386DA7F22A2083ACD061DB6E8 /* ThreadName.cpp */; settings = {COMPILER_FLAGS = "-DFOLLY_HAVE_PTHREAD=1 -DFOLLY_NO_CONFIG -DFOLLY_MOBILE=1 -DFOLLY_USE_LIBCPP=1 -DFOLLY_HAVE_LIBGFLAGS=0 -DFOLLY_HAVE_LIBJEMALLOC=0 -DFOLLY_HAVE_PREADV=0 -DFOLLY_HAVE_PWRITEV=0 -DFOLLY_HAVE_TFO=0 -DFOLLY_USE_SYMBOLIZER=0\n    -frtti\n    -fexceptions\n    -std=c++14\n    -Wno-error\n    -Wno-unused-local-typedefs\n    -Wno-unused-variable\n    -Wno-sign-compare\n    -Wno-comment\n    -Wno-return-type\n    -Wno-global-constructors"; }; };
 		1D327B249FB84F8E75C871538179B5E4 /* RCTSurfaceSizeMeasureMode.mm in Sources */ = {isa = PBXBuildFile; fileRef = F4B5A5AE39CF75C551F886FB33D66632 /* RCTSurfaceSizeMeasureMode.mm */; settings = {COMPILER_FLAGS = "-DFOLLY_NO_CONFIG -DFOLLY_MOBILE=1 -DFOLLY_USE_LIBCPP=1 -Wno-comma -Wno-shorten-64-to-32 -Wno-documentation"; }; };
+		1D4777AD884E6E055E5D6ECF11B56C4F /* RNDatePickerManager.h in Headers */ = {isa = PBXBuildFile; fileRef = F7659C37756B8F4BD5B836CF39719EAB /* RNDatePickerManager.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		1D51F58A081D82F43FCB2EC135558ADD /* FBSDKShareDialogMode.h in Headers */ = {isa = PBXBuildFile; fileRef = 0B760EF6CDFA0D408E2A3B5BC6F927E0 /* FBSDKShareDialogMode.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		1D6A58FD181EBDE6A514EAA87CFA2795 /* fixed-dtoa.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E73CB2D4E9BF337DB87A085998A149E /* fixed-dtoa.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		1D7243F0352D331FE5D51376AE27675C /* ErrorCode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E2B0ED90C881455EA6BAB016C81D200E /* ErrorCode.cpp */; settings = {COMPILER_FLAGS = "-DFOLLY_NO_CONFIG -DFOLLY_MOBILE=1 -DFOLLY_USE_LIBCPP=1 -DFOLLY_HAVE_LIBGFLAGS=0 -DFOLLY_HAVE_LIBJEMALLOC=0 -DFOLLY_HAVE_PREADV=0 -DFOLLY_HAVE_PWRITEV=0 -DFOLLY_HAVE_TFO=0 -DFOLLY_USE_SYMBOLIZER=0  -frtti\n    -fexceptions\n    -std=c++14\n    -Wno-error\n    -Wno-unused-local-typedefs\n    -Wno-unused-variable\n    -Wno-sign-compare\n    -Wno-comment\n    -Wno-return-type\n    -Wno-global-constructors"; }; };
@@ -624,7 +624,6 @@
 		290CD72BE2BC27C25CE00091B1E103CE /* RCTSurfaceRootShadowView.h in Headers */ = {isa = PBXBuildFile; fileRef = 717C816465B6988D09BD104949DAD383 /* RCTSurfaceRootShadowView.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		291523BA3293603D9FDDD58229F91877 /* IPAddress.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C90352D7E6462CDD9B557E3204C1467 /* IPAddress.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		29754062726360C67042AC1524E2BDA3 /* SentryRateLimitParser.h in Headers */ = {isa = PBXBuildFile; fileRef = D40CCBF2C121C17262D3E078300FB0EB /* SentryRateLimitParser.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		298C88A255FDF53614AD0A9E982FD953 /* DatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = B30ABDF174A4E4BEA19C6D3B8D01B33D /* DatePicker.m */; };
 		298D7227FD48ECA740D80392124FB40E /* FBSDKTriStateBOOL.h in Headers */ = {isa = PBXBuildFile; fileRef = 2A027C3FF41E4F9FBB0C5CF4F9A2434E /* FBSDKTriStateBOOL.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		29B3F22F7B9F5DF05DC6BEEF8D57F0DB /* Cast.h in Headers */ = {isa = PBXBuildFile; fileRef = 93BA0C27A67DBBEA847E0574D8B5EC9E /* Cast.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		29D9DAC4F8A742D7F1247565FAE1F2E5 /* String-inl.h in Headers */ = {isa = PBXBuildFile; fileRef = C0242692C059C36A61F05C139B640829 /* String-inl.h */; settings = {ATTRIBUTES = (Project, ); }; };
@@ -921,7 +920,6 @@
 		44B47BA60E528A76918BD5F3E1FBBDE5 /* React-jsiexecutor-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1974B81485EB67161022AFB86724E038 /* React-jsiexecutor-dummy.m */; };
 		44B7F7A5CD70BDF0285FAFC6A15DAF4B /* Benchmarks.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04B562E12DC51C7492B159231205E51C /* Benchmarks.cpp */; settings = {COMPILER_FLAGS = "-DFOLLY_NO_CONFIG -DFOLLY_MOBILE=1 -DFOLLY_USE_LIBCPP=1 -DFOLLY_HAVE_LIBGFLAGS=0 -DFOLLY_HAVE_LIBJEMALLOC=0 -DFOLLY_HAVE_PREADV=0 -DFOLLY_HAVE_PWRITEV=0 -DFOLLY_HAVE_TFO=0 -DFOLLY_USE_SYMBOLIZER=0  -frtti\n    -fexceptions\n    -std=c++14\n    -Wno-error\n    -Wno-unused-local-typedefs\n    -Wno-unused-variable\n    -Wno-sign-compare\n    -Wno-comment\n    -Wno-return-type\n    -Wno-global-constructors"; }; };
 		44EA2E8B954A641766F58BADC624A0F1 /* MPClassDescription.h in Headers */ = {isa = PBXBuildFile; fileRef = 682AC824E922721956D273B3FB523F57 /* MPClassDescription.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		44FD8C079EC3FFE73D8F90409D0AF700 /* RNDatePickerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 131DC1793B40011C3C3836E56814FA84 /* RNDatePickerManager.m */; };
 		45101BDEA445C0B66FD86916CA017789 /* YGValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 92D87CA98D1FF3C0161EEFE3A7910751 /* YGValue.cpp */; settings = {COMPILER_FLAGS = "-fno-omit-frame-pointer -fexceptions -Wall -Werror -std=c++1y -fPIC -fno-objc-arc"; }; };
 		451D7F030A77B1B39F05C203D366443B /* fixed-dtoa.cc in Sources */ = {isa = PBXBuildFile; fileRef = 039D9800983B3D9656B33626F955D85F /* fixed-dtoa.cc */; settings = {COMPILER_FLAGS = "-Wno-unreachable-code"; }; };
 		45382A46D409E509E1EA5706BDBF8CAC /* RCTPointerEvents.h in Headers */ = {isa = PBXBuildFile; fileRef = 63BE5956E351B2261CCE06A4497418BB /* RCTPointerEvents.h */; settings = {ATTRIBUTES = (Project, ); }; };
@@ -1113,7 +1111,6 @@
 		563943DFE175084FA51457667C71C913 /* ParallelMap.h in Headers */ = {isa = PBXBuildFile; fileRef = D9D00217F42AE2EA1AF868A913D1EE64 /* ParallelMap.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		565A40C9715DD79B31B0702BA634E8AE /* UIColor+SKSonarValueCoder.h in Headers */ = {isa = PBXBuildFile; fileRef = B5729C2AEFDF2E5A6EBA6123A150EBA1 /* UIColor+SKSonarValueCoder.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		5673C62F6DCF67CE4F4DBD634F9CE1F2 /* FBSDKAppLinkNavigation.h in Headers */ = {isa = PBXBuildFile; fileRef = 2A9046470616DC3E41AA7D535F574C53 /* FBSDKAppLinkNavigation.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		568B0175F85A743FA4D7F77A9E3E2E07 /* react-native-date-picker-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = F2463177CB8E4B4C5A2A5B4344C889B1 /* react-native-date-picker-dummy.m */; };
 		5696AE5767AE9C7CF6B32E39FF447EC8 /* JSCExecutorFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = 5034D3E8C5D0D55D7BB41680FCB0A373 /* JSCExecutorFactory.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		56B7EDF2D059818DC3B10542418DC307 /* RCTTiming.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7A81466AD072E444CA603D6D68406534 /* RCTTiming.mm */; settings = {COMPILER_FLAGS = "-DFOLLY_NO_CONFIG -DFOLLY_MOBILE=1 -DFOLLY_USE_LIBCPP=1 -Wno-comma -Wno-shorten-64-to-32 -Wno-nullability-completeness"; }; };
 		56D9D099D3E26672A9BB982A11499D22 /* SysUio.h in Headers */ = {isa = PBXBuildFile; fileRef = A27592643848FB22010F20466D73646E /* SysUio.h */; settings = {ATTRIBUTES = (Project, ); }; };
@@ -1218,7 +1215,6 @@
 		5FA8AAD7F10BEF8AA3CD5E812D125273 /* ConnectionFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = 55CC1FB28B48CFC2C9611AAD8A430EAB /* ConnectionFactory.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		5FBC723D1CFD6F95F9DE700481BB9361 /* DistributedMutexSpecializations.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C132FA9360489B7820916BA703E6080 /* DistributedMutexSpecializations.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		5FCB782504492337DAAE6237D5AF5B0B /* FBSDKGraphErrorRecoveryProcessor.h in Headers */ = {isa = PBXBuildFile; fileRef = 14A13A2DC83657A58A82EA0FE25D9CC1 /* FBSDKGraphErrorRecoveryProcessor.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		5FF52F4ADB4A47C07E1BECF32E45DD6D /* RNDatePickerManager.h in Headers */ = {isa = PBXBuildFile; fileRef = F7659C37756B8F4BD5B836CF39719EAB /* RNDatePickerManager.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		602E512B9EF1143E0997B4F2A9BF37F3 /* ChannelRequester.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9AD5252EC24E01D1F27ACC0952DD2AC /* ChannelRequester.cpp */; settings = {COMPILER_FLAGS = "-DFOLLY_NO_CONFIG -DFOLLY_MOBILE=1 -DFOLLY_USE_LIBCPP=1 -DFOLLY_HAVE_LIBGFLAGS=0 -DFOLLY_HAVE_LIBJEMALLOC=0 -DFOLLY_HAVE_PREADV=0 -DFOLLY_HAVE_PWRITEV=0 -DFOLLY_HAVE_TFO=0 -DFOLLY_USE_SYMBOLIZER=0  -frtti\n    -fexceptions\n    -std=c++14\n    -Wno-error\n    -Wno-unused-local-typedefs\n    -Wno-unused-variable\n    -Wno-sign-compare\n    -Wno-comment\n    -Wno-return-type\n    -Wno-global-constructors"; }; };
 		60401F7E5563349E5813113802D49B04 /* SentryCrashMonitor_User.h in Headers */ = {isa = PBXBuildFile; fileRef = 608D25F8DD9F2D6593C773E7FE97F5F3 /* SentryCrashMonitor_User.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		606C273A43BC3B42032556684E1FE48C /* StreamsWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D237021B6C68AB0115405BD8134B19B /* StreamsWriter.h */; settings = {ATTRIBUTES = (Project, ); }; };
@@ -2216,6 +2212,7 @@
 		BC323B6DCA2374CA77C151E9EF54ED52 /* OpenSSLUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7B69BA2799EC975F640DACEEA2A3E077 /* OpenSSLUtils.cpp */; settings = {COMPILER_FLAGS = "-DFOLLY_HAVE_PTHREAD=1 -DFOLLY_NO_CONFIG -DFOLLY_MOBILE=1 -DFOLLY_USE_LIBCPP=1 -DFOLLY_HAVE_LIBGFLAGS=0 -DFOLLY_HAVE_LIBJEMALLOC=0 -DFOLLY_HAVE_PREADV=0 -DFOLLY_HAVE_PWRITEV=0 -DFOLLY_HAVE_TFO=0 -DFOLLY_USE_SYMBOLIZER=0\n    -frtti\n    -fexceptions\n    -std=c++14\n    -Wno-error\n    -Wno-unused-local-typedefs\n    -Wno-unused-variable\n    -Wno-sign-compare\n    -Wno-comment\n    -Wno-return-type\n    -Wno-global-constructors"; }; };
 		BC43436B7A389099FB30A0648616EAB0 /* OIDClientMetadataParameters.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C837EBA3380B33735122A2A0C89A14A /* OIDClientMetadataParameters.m */; };
 		BC48A88FFD7B0547FC13FF8235CDFC57 /* ScheduledExecutor.h in Headers */ = {isa = PBXBuildFile; fileRef = 1DE760D905957825CE753B49C4DD4C13 /* ScheduledExecutor.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		BC49F363E6DA5777CC616CD37CCAFC45 /* RNDatePickerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 131DC1793B40011C3C3836E56814FA84 /* RNDatePickerManager.m */; };
 		BC5EAB512E89F8FCACF11F7AD8512405 /* HazptrObj.h in Headers */ = {isa = PBXBuildFile; fileRef = F05CAB6788B99671887BFE0061E2868F /* HazptrObj.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		BC6DDE0FC219DF4F0117A09E8BABEBBC /* RCTLayoutAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F0AFB76B219D1CFA99C83358CD9FBEB /* RCTLayoutAnimation.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		BCA6EC4CF8165633C884EA710F273DCC /* RecordIO.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C74ADEE2ED307655F2E223E9218223A /* RecordIO.h */; settings = {ATTRIBUTES = (Project, ); }; };
@@ -2669,6 +2666,7 @@
 		E627DB4862A1C3085037245F787DEB3B /* RCTInspectorDevServerHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BC2CF05E059F7E19A693E6F6F7E69F9 /* RCTInspectorDevServerHelper.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		E64DA1509C4696399355C2AAB0B0C1BD /* FBSDKAppEventsState.m in Sources */ = {isa = PBXBuildFile; fileRef = EC6A4213C0B1BD9F19E96F60A072506C /* FBSDKAppEventsState.m */; };
 		E65EF18C07E672CB43B446D70A3A3D52 /* RCTProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 20A577F6249C9ACCE05A6AED0E09DF71 /* RCTProfile.m */; settings = {COMPILER_FLAGS = "-DFOLLY_NO_CONFIG -DFOLLY_MOBILE=1 -DFOLLY_USE_LIBCPP=1 -Wno-comma -Wno-shorten-64-to-32 -Wno-documentation"; }; };
+		E661C58544E3B51F80E9AAF2F2427C46 /* DatePicker.h in Headers */ = {isa = PBXBuildFile; fileRef = 735104F9399327BA008690F3F3F757D6 /* DatePicker.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		E6674C645666ABBDBD3B91D8D4DAA410 /* AsymmetricMemoryBarrier.h in Headers */ = {isa = PBXBuildFile; fileRef = 81E1EC01258C478D7761774A0145B4C9 /* AsymmetricMemoryBarrier.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		E6798617A699955B7598606A4BD719BB /* UIView+React.h in Headers */ = {isa = PBXBuildFile; fileRef = 232C5E4C1F83A4F3E40A176323B315DD /* UIView+React.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		E6C37EB3EF73E5F9105857852F21AC7B /* MemoryIdler.h in Headers */ = {isa = PBXBuildFile; fileRef = 22EC23061D30E7A34531D58B89937CA9 /* MemoryIdler.h */; settings = {ATTRIBUTES = (Project, ); }; };
@@ -2926,6 +2924,7 @@
 		FBBA2435EA0C30174F07806BD2F59954 /* OIDServiceDiscovery.m in Sources */ = {isa = PBXBuildFile; fileRef = 708D4772E7D2448542F9D4EE4699C69A /* OIDServiceDiscovery.m */; };
 		FBC1D497462C2AD661A9EB357D2015F5 /* SysResource.h in Headers */ = {isa = PBXBuildFile; fileRef = 714A29CE9432930AF8CAEABF67CDED12 /* SysResource.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		FBC1DE4DED3201D61E5A0BC445113987 /* FlipperRSocketResponder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CEF8ED497B2AE271866387BB62D5E74C /* FlipperRSocketResponder.cpp */; settings = {COMPILER_FLAGS = "-DFLIPPER_OSS=1 -DFB_SONARKIT_ENABLED=1 -DFOLLY_NO_CONFIG -DFOLLY_MOBILE=1 -DFOLLY_USE_LIBCPP=1 -DFOLLY_HAVE_LIBGFLAGS=0 -DFOLLY_HAVE_LIBJEMALLOC=0 -DFOLLY_HAVE_PREADV=0 -DFOLLY_HAVE_PWRITEV=0 -DFOLLY_HAVE_TFO=0 -DFOLLY_USE_SYMBOLIZER=0 -Wall\n    -std=c++14\n    -Wno-global-constructors"; }; };
+		FC2A3CE1EBC53F18A3FE097203B45E74 /* react-native-date-picker-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = F2463177CB8E4B4C5A2A5B4344C889B1 /* react-native-date-picker-dummy.m */; };
 		FC44580813E3E7238E14E1FAA7455696 /* RCTNetworkPlugins.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0B64FA1D376141CA25F8FEB10CDBC358 /* RCTNetworkPlugins.mm */; settings = {COMPILER_FLAGS = "-DFOLLY_NO_CONFIG -DFOLLY_MOBILE=1 -DFOLLY_USE_LIBCPP=1 -Wno-comma -Wno-shorten-64-to-32 -Wno-nullability-completeness"; }; };
 		FC88A484B40D8A70F7B830E5BA8762E5 /* SpookyHashV2.h in Headers */ = {isa = PBXBuildFile; fileRef = 6CBD6AC7A67070BF5F3F4C87E2E9FACA /* SpookyHashV2.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		FC8E30B8A91C9549F29402AC309BC611 /* IndexedMemPool.h in Headers */ = {isa = PBXBuildFile; fileRef = 146668BFDA6C8ACAC523310EAB5FCA96 /* IndexedMemPool.h */; settings = {ATTRIBUTES = (Project, ); }; };
@@ -2960,6 +2959,7 @@
 		FED26BC403EB96432B41617FBBE56A31 /* Traits.h in Headers */ = {isa = PBXBuildFile; fileRef = 86F284E7AC79FBA40C8F26F274474DE3 /* Traits.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		FED3E0266AE7D44D43801F24C1B50249 /* RCTBackedTextInputDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = A3A7B6D5FD1D50282AF6F8521D68661C /* RCTBackedTextInputDelegate.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		FF059B48BC5D0CADFF998120B726F021 /* SpookyHashV1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A627C0E75457194AFF95EC88607F1DF4 /* SpookyHashV1.cpp */; settings = {COMPILER_FLAGS = "-DFOLLY_HAVE_PTHREAD=1 -DFOLLY_NO_CONFIG -DFOLLY_MOBILE=1 -DFOLLY_USE_LIBCPP=1 -DFOLLY_HAVE_LIBGFLAGS=0 -DFOLLY_HAVE_LIBJEMALLOC=0 -DFOLLY_HAVE_PREADV=0 -DFOLLY_HAVE_PWRITEV=0 -DFOLLY_HAVE_TFO=0 -DFOLLY_USE_SYMBOLIZER=0\n    -frtti\n    -fexceptions\n    -std=c++14\n    -Wno-error\n    -Wno-unused-local-typedefs\n    -Wno-unused-variable\n    -Wno-sign-compare\n    -Wno-comment\n    -Wno-return-type\n    -Wno-global-constructors"; }; };
+		FF131F7C04B25FCAE8EB95B5C7B321D0 /* DatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = B30ABDF174A4E4BEA19C6D3B8D01B33D /* DatePicker.m */; };
 		FF163162CB3DBBEEE59B3F1DB6B197EF /* RCTBridgeDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 40BF03CD8AED6A63283E16796C3F1F94 /* RCTBridgeDelegate.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		FF6048F48555885A8EFAFB330BEAB301 /* RNTapHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 147FECD49F921A6C69BC80ADC24BE4DB /* RNTapHandler.m */; };
 		FF609997127017820E5819AE65BB0F68 /* RCTAnimatedNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B1B3E2716B9910DB9D045E247ADB92F /* RCTAnimatedNode.h */; settings = {ATTRIBUTES = (Project, ); }; };
@@ -3501,6 +3501,13 @@
 			remoteGlobalIDString = 2AB2EF542954AB1C999E03BFEF8DE806;
 			remoteInfo = DoubleConversion;
 		};
+		425EA809694E3E06F6C89483CC6B8AD9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7ACAA9BE580DD31A5CB9D97C45D9492D;
+			remoteInfo = "React-Core";
+		};
 		43032A4C1DC9227D6605A6C4D1381606 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
@@ -3710,13 +3717,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 6FE9147F8AAA4DE676C190F680F47AE2;
 			remoteInfo = "React-RCTLinking";
-		};
-		5DBC3CA1F24072537EC4678AF8869475 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 1BEE828C124E6416179B904A9F66D794;
-			remoteInfo = React;
 		};
 		5FB3752B58FFA90ADC4BDDBA35C7D638 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -8515,13 +8515,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		0223D7DB1F1B06688CC83464A8F97022 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		02E4686331F4F18CEDFA84A5669A332F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -8754,6 +8747,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		638096299202ECA39902254A49EF61C8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		659A5EB0F8BA51923CB773C3E03AE8C9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -15336,6 +15336,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		500723D7AE28C31AA310F26806125DE3 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E661C58544E3B51F80E9AAF2F2427C46 /* DatePicker.h in Headers */,
+				1D4777AD884E6E055E5D6ECF11B56C4F /* RNDatePickerManager.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		575848ADB2B4981F4D1B9236B23FB45E /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -15638,15 +15647,6 @@
 			files = (
 				4B49DE2B636CB4B21506843F816E3197 /* DeviceUID.h in Headers */,
 				C0F52565A7DF4F73440C0424D40BBAA9 /* RNDeviceInfo.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		88CC2292131DE2CA7F9D856929E36737 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				0C86E4B6183C8CE5D8F0379F3DA6FDBB /* DatePicker.h in Headers */,
-				5FF52F4ADB4A47C07E1BECF32E45DD6D /* RNDatePickerManager.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -17704,16 +17704,16 @@
 		};
 		7F5C619B7AF69366DE35F2742D20F0B1 /* react-native-date-picker */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6F8A4488A3D08C3D669653ACB05307F3 /* Build configuration list for PBXNativeTarget "react-native-date-picker" */;
+			buildConfigurationList = 240885F590F506BD616224C48E74F788 /* Build configuration list for PBXNativeTarget "react-native-date-picker" */;
 			buildPhases = (
-				88CC2292131DE2CA7F9D856929E36737 /* Headers */,
-				DCC6C65BD51FD14BCF6CD70E3C16BC78 /* Sources */,
-				0223D7DB1F1B06688CC83464A8F97022 /* Frameworks */,
+				500723D7AE28C31AA310F26806125DE3 /* Headers */,
+				C5A3068A6CC0EE5961B46F875D5B22D1 /* Sources */,
+				659A5EB0F8BA51923CB773C3E03AE8C9 /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				201367F65DFED6974D12A683BDB82F18 /* PBXTargetDependency */,
+				5A1226C52555DD5B956C693DC87A7D7A /* PBXTargetDependency */,
 			);
 			name = "react-native-date-picker";
 			productName = "react-native-date-picker";
@@ -19926,6 +19926,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C5A3068A6CC0EE5961B46F875D5B22D1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FF131F7C04B25FCAE8EB95B5C7B321D0 /* DatePicker.m in Sources */,
+				FC2A3CE1EBC53F18A3FE097203B45E74 /* react-native-date-picker-dummy.m in Sources */,
+				BC49F363E6DA5777CC616CD37CCAFC45 /* RNDatePickerManager.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C73167A78D2F8BA4F6459F1417D22150 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -20184,16 +20194,6 @@
 				3DE89688DA0E030ED3FD57D86CC2DBC4 /* jsilib-posix.cpp in Sources */,
 				1DD732729C6C8C9B3F2569B4700D9FBD /* jsilib-windows.cpp in Sources */,
 				256C24284A122A0AAF8B61747D684140 /* React-jsi-dummy.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		DCC6C65BD51FD14BCF6CD70E3C16BC78 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				298C88A255FDF53614AD0A9E982FD953 /* DatePicker.m in Sources */,
-				568B0175F85A743FA4D7F77A9E3E2E07 /* react-native-date-picker-dummy.m in Sources */,
-				44FD8C079EC3FFE73D8F90409D0AF700 /* RNDatePickerManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -20637,12 +20637,6 @@
 			name = RCTTypeSafety;
 			target = D20469A9A1E5CFB26045EAEBE3F88E5E /* RCTTypeSafety */;
 			targetProxy = B10D0E4E78C5B4C14ECBBCB2B3FBFDA3 /* PBXContainerItemProxy */;
-		};
-		201367F65DFED6974D12A683BDB82F18 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = React;
-			target = 1BEE828C124E6416179B904A9F66D794 /* React */;
-			targetProxy = 5DBC3CA1F24072537EC4678AF8869475 /* PBXContainerItemProxy */;
 		};
 		21157D9BFB1422F1E98508050B681406 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -21099,6 +21093,12 @@
 			name = "React-RCTImage";
 			target = 4F265533AAB7C8985856EC78A33164BB /* React-RCTImage */;
 			targetProxy = C3E610EAA9F87F76019B5701B13DF35D /* PBXContainerItemProxy */;
+		};
+		5A1226C52555DD5B956C693DC87A7D7A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "React-Core";
+			target = 7ACAA9BE580DD31A5CB9D97C45D9492D /* React-Core */;
+			targetProxy = 425EA809694E3E06F6C89483CC6B8AD9 /* PBXContainerItemProxy */;
 		};
 		5B05E28AA10249190819214E4E50830A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -22928,29 +22928,6 @@
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
-		};
-		308CF1B73DF7EBC56A6B2B15055255B2 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 26290D7882699538E1DECD7C5FA0FD27 /* react-native-date-picker.debug.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				GCC_PREFIX_HEADER = "Target Support Files/react-native-date-picker/react-native-date-picker-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_MODULE_NAME = react_native_date_picker;
-				PRODUCT_NAME = "react-native-date-picker";
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
 		};
 		30E563909E5CD29A7765BD1286B37BAE /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -24951,6 +24928,30 @@
 			};
 			name = Release;
 		};
+		AF95B4D6C89E841B9A3A9CE135B53A9F /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D0B25852976C568F04014379D568BAF2 /* react-native-date-picker.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				GCC_PREFIX_HEADER = "Target Support Files/react-native-date-picker/react-native-date-picker-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_MODULE_NAME = react_native_date_picker;
+				PRODUCT_NAME = "react-native-date-picker";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		B39753F71EEEACA3CE249E2438612F49 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = CA7810B96ED61317EABC8DD53361445C /* FlipperKit.release.xcconfig */;
@@ -25231,6 +25232,29 @@
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
+		};
+		CD2DB7795240A7FB717DF36330146A95 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 26290D7882699538E1DECD7C5FA0FD27 /* react-native-date-picker.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				GCC_PREFIX_HEADER = "Target Support Files/react-native-date-picker/react-native-date-picker-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_MODULE_NAME = react_native_date_picker;
+				PRODUCT_NAME = "react-native-date-picker";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
 		};
 		CD48E4F9901E5BFA47847AA4C909A5B8 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -25693,30 +25717,6 @@
 			};
 			name = Release;
 		};
-		EC0FA271A96C4C506089C06635242BB2 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = D0B25852976C568F04014379D568BAF2 /* react-native-date-picker.release.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				GCC_PREFIX_HEADER = "Target Support Files/react-native-date-picker/react-native-date-picker-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_MODULE_NAME = react_native_date_picker;
-				PRODUCT_NAME = "react-native-date-picker";
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
 		ECB806201EC4DC90C595577F9176AA54 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F620B95DE80F4FFB0CAFFB547B3E76CB /* react-native-webview.release.xcconfig */;
@@ -26047,6 +26047,15 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		240885F590F506BD616224C48E74F788 /* Build configuration list for PBXNativeTarget "react-native-date-picker" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CD2DB7795240A7FB717DF36330146A95 /* Debug */,
+				AF95B4D6C89E841B9A3A9CE135B53A9F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		26780B61FE9FD27DD1CEFC027F6AF63A /* Build configuration list for PBXNativeTarget "react-native-safe-area-context" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -26250,15 +26259,6 @@
 			buildConfigurations = (
 				21656DCD997E3AA763004437D7637D61 /* Debug */,
 				53ED814B89B86696D92FAD8F7A00DFCA /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		6F8A4488A3D08C3D669653ACB05307F3 /* Build configuration list for PBXNativeTarget "react-native-date-picker" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				308CF1B73DF7EBC56A6B2B15055255B2 /* Debug */,
-				EC0FA271A96C4C506089C06635242BB2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
