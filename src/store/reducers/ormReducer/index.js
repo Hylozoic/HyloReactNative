@@ -60,6 +60,7 @@ export default function ormReducer (state = {}, action) {
   if (error) return state
 
   const {
+    Activity,
     Comment,
     Group,
     GroupRelationship,
