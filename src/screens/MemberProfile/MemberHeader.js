@@ -40,9 +40,8 @@ export default function MemberHeader ({
       navigation,
       initialSearchTerm: locationText,
       onPick: location => {
-        // TODO: Figure-out how to handle locationObject selection from here
-        //       LocationPicker is doing what it should
         updateSetting('location', location?.fullText)
+        updateSetting('locationId', location?.id)
       }
     })
   }

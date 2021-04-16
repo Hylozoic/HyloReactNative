@@ -14,7 +14,6 @@ import Icon from 'components/Icon'
 import Loading from 'components/Loading'
 import MemberHeader from 'screens/MemberProfile/MemberHeader'
 import Control from 'screens/MemberProfile/Control'
-import StarIcon from 'components/StarIcon'
 import styles from './MemberDetails.styles'
 import confirmDiscardChanges from 'util/confirmDiscardChanges'
 
@@ -168,9 +167,10 @@ export default class MemberDetails extends React.Component {
 export function MemberBio (props) {
   const { person: { bio }, editable, updateSetting, isMe } = props
   const controlRef = useRef()
-  const focus = () => controlRef.current && controlRef.current.focus()
+  const focus = () => controlRef.current?.focus()
 
   if (isEmpty(bio) && !editable) return null
+
   return (
     <View style={styles.bioContainer}>
       <View style={styles.labelWrapper}>
