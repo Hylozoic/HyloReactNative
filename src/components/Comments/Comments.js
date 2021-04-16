@@ -40,8 +40,8 @@ function Comments ({
     const subCommentId = comment.parentComment ? comment.id : null
     const section = sections.find(section => parentCommentId == section.comment.id)
     const sectionIndex = section.comment.sectionIndex
-    const itemIndex = section.data
-      .find(subComment => subCommentId == subComment.id)?.itemIndex || section.data.length + 1
+    const itemIndex = section.data.find(subComment => subCommentId == subComment.id)?.itemIndex
+      || section.data.length + 1
 
     commentsListRef?.current.scrollToLocation({ sectionIndex, itemIndex })
   }
@@ -66,7 +66,7 @@ function Comments ({
 
   const renderComment = ({ section: { comment }}) => {
     return <>
-      <ShowMore commentId={comment.id} />
+      <ShowMore commentId={comment.id} style={styles.subCommentsShowMore} />
       <Comment style={
           comment.id == highlightedComment?.id && styles.highlighted
         }
@@ -112,7 +112,7 @@ function Comments ({
 
 export default forwardRef(Comments)
 
-export function ShowMore ({ postId, commentId  }) {
+export function ShowMore ({ postId, commentId, style = {}  }) {
   const queryParams = commentId ? { commentId } : { postId }
   const dispatch = useDispatch()
   const fetchComments = () => dispatch(fetchCommentsAction(queryParams, { cursor }))
@@ -127,7 +127,7 @@ export function ShowMore ({ postId, commentId  }) {
 
   return (
     <TouchableOpacity>
-      <Text style={styles.showMore} onPress={fetchComments}>
+      <Text style={[styles.showMore, style]} onPress={fetchComments}>
         View {extra} previous comment{extra > 1 ? 's' : ''}
       </Text>
     </TouchableOpacity>

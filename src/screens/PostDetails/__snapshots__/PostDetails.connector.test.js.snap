@@ -91,7 +91,6 @@ mutation CreateCommentMutation (
       "meta": Object {
         "analytics": "Comment Created",
         "attachments": undefined,
-        "extractModel": "Comment",
         "optimistic": true,
         "postId": "testpost",
         "tempId": "posttestpost_1",

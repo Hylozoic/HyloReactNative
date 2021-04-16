@@ -22,8 +22,8 @@ import styles from './PostDetails.styles'
 
 export default class PostDetails extends React.Component {
   state = {
-    commentText: '',
     commentPrompt: null,
+    commentText: '',
     reaplyingToCommentId: null
   }
   commentsRef = React.createRef()
@@ -54,11 +54,12 @@ export default class PostDetails extends React.Component {
         parentCommentId: this.state.reaplyingToCommentId
       })
 
+      this.setState(() => ({ submitting: false }))
+
       if (error) {
         Alert.alert("Your comment couldn't be saved; please try again.")
-        this.setState(() => ({ submitting: false }))
       } else {
-        this.setState(() => ({ commentText: '', submitting: false }))
+        this.handleCommentReplyCancel()
       }
     }
   }
@@ -67,25 +68,30 @@ export default class PostDetails extends React.Component {
     this.setState(() => ({ commentText }))
   }
 
-  handleCommentReplyCancel = () => {
-    this.setState({ commentPrompt: null, commentText: '' })
-    this.commentsRef?.current.highlightComment(null)
-    this.editorRef?.editorInputRef.current.clear()
-    this.editorRef?.editorInputRef.current.blur()
+  handleCommentReplyCancel = callback => {
+    this.setState({ commentPrompt: null, commentText: '' }, () => {
+      this.commentsRef?.current.highlightComment(null)
+      this.editorRef?.editorInputRef.current.clear()
+      this.editorRef?.editorInputRef.current.blur()
+      callback && callback()
+    })
   }
 
   handleCommentReply = (comment, { mention = false }) => {
-    this.setState({ commentPrompt: `Replying to ${comment.creator.name}`, commentText: '' })
-    this.setState({ reaplyingToCommentId: comment.parentComment || comment.id })
-
-    const currentCommentsRef = this.commentsRef.current
-    this.commentsRef?.current.highlightComment(comment)
-    this.commentsRef?.current.scrollToComment(comment)
-
-    // TODO: highlight/select current entry we're commenting to in flatlist      
-    this.editorRef?.editorInputRef.current.clear()
-    if (mention) this.editorRef?.insertMention(comment.creator)
-    this.editorRef?.editorInputRef.current.focus()
+    this.handleCommentReplyCancel(() => {
+      this.setState({ commentPrompt: `Replying to ${comment.creator.name}`, commentText: '' })
+      this.setState({ reaplyingToCommentId: comment.parentComment || comment.id })
+  
+      this.commentsRef?.current.highlightComment(comment)
+      this.commentsRef?.current.scrollToComment(comment)
+  
+      // TODO: highlight/select current entry we're commenting to in flatlist      
+      this.editorRef?.editorInputRef.current.clear()
+  
+      if (mention) this.editorRef?.insertMention(comment.creator)
+  
+      this.editorRef?.editorInputRef.current.focus()  
+    })
   }
 
   renderPostDetails = (panHandlers) => {
@@ -133,7 +139,7 @@ export default class PostDetails extends React.Component {
             {commentPrompt && (
               <View style={styles.commentPrompt}>
                 <Text style={styles.commentPromptText}>{commentPrompt}</Text>
-                <TouchableOpacity onPress={this.handleCommentReplyCancel}>
+                <TouchableOpacity onPress={() => this.handleCommentReplyCancel()}>
                   <Text style={styles.commentPromptClearLink}>Cancel</Text>
                 </TouchableOpacity>
               </View>
