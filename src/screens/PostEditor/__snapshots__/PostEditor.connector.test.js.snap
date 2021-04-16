@@ -3,7 +3,6 @@
 exports[`PostEditor mapDispatchToProps calls save correctly 1`] = `
 Object {
   "fetchPost": [Function],
-  "pollingFetchLocation": [Function],
   "save": [Function],
   "upload": [Function],
 }
@@ -244,7 +243,6 @@ Array [
 exports[`PostEditor mapDispatchToProps maps the action generators 1`] = `
 Object {
   "fetchPost": [Function],
-  "pollingFetchLocation": [Function],
   "save": [Function],
   "upload": [Function],
 }

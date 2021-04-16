@@ -2,7 +2,13 @@
 
 exports[`GroupRow handles high member count and moderator role 1`] = `
 <View>
-  <StarIcon />
+  <Image
+    source={
+      Object {
+        "uri": undefined,
+      }
+    }
+  />
   <ForwardRef
     onPress={[Function]}
   >
@@ -10,6 +16,9 @@ exports[`GroupRow handles high member count and moderator role 1`] = `
       Greater Place
     </Text>
   </ForwardRef>
+  <Icon
+    name="Star"
+  />
   <Text>
     24.5k
   </Text>
@@ -21,6 +30,13 @@ exports[`GroupRow handles high member count and moderator role 1`] = `
 
 exports[`GroupRow matches the last snapshot 1`] = `
 <View>
+  <Image
+    source={
+      Object {
+        "uri": undefined,
+      }
+    }
+  />
   <ForwardRef
     onPress={[Function]}
   >
@@ -37,24 +53,6 @@ exports[`GroupRow matches the last snapshot 1`] = `
 </View>
 `;
 
-exports[`MemberBio matches the last snapshot 1`] = `
-<View>
-  <View>
-    <Text>
-      About Me
-    </Text>
-  </View>
-  <Control
-    hideEditIcon={true}
-    isMe={true}
-    multiline={true}
-    onChangeText={[Function]}
-    placeholder="Description"
-    value="I live I die!"
-  />
-</View>
-`;
-
 exports[`MemberDetails matches the last snapshot 1`] = `<Loading />`;
 
 exports[`MemberDetails returns Loading when there's no person 1`] = `<Loading />`;
@@ -65,7 +63,7 @@ exports[`MemberSkills matches the last snapshot 1`] = `
 <View>
   <View>
     <Text>
-      My Skills
+      MY SKILLS
     </Text>
   </View>
   <ForwardRef

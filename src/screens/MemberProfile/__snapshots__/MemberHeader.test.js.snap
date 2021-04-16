@@ -1,32 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Control matches the last snapshot 1`] = `
-<View>
-  <View>
-    <Component
-      allowFontScaling={true}
-      editable={true}
-      multiline={true}
-      numberOfLines={8}
-      placeholder="b"
-      rejectResponderTermination={true}
-      underlineColorAndroid="transparent"
-      value="a"
-    />
-    true
-    <ForwardRef
-      onPress={[Function]}
-    >
-      <Icon
-        allowFontScaling={false}
-        name="edit"
-        size={12}
-      />
-    </ForwardRef>
-  </View>
-</View>
-`;
-
 exports[`MemberHeader matches the last snapshot 1`] = `
 <View>
   <View>
@@ -47,6 +20,7 @@ exports[`MemberHeader matches the last snapshot 1`] = `
   </View>
   <Control
     isMe={true}
+    multiline={true}
     onPress={[Function]}
     placeholder="Location"
     value="whale"

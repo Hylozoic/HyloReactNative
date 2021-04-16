@@ -23,15 +23,4 @@ describe('Control', () => {
 
     expect(actual).toMatchSnapshot()
   })
-
-  describe('focus', () => {
-    it('calls input.focus', () => {
-      const instance = ReactTestRenderer.create(<Control />).getInstance()
-      instance.inputRef.current = {
-        focus: jest.fn()
-      }
-      instance.focus()
-      expect(instance.inputRef.current.focus).toHaveBeenCalled()
-    })
-  })
 })

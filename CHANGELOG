@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Projects can now be created from the main Post Editor window, not only via New Project
 - Swaps color for "Request" and "Project" in accordance with web
+- Improves Profile view and edit Profile UX
 ### Fixed
 - Issue with Post Editor such that it would not forward to a newly created project
 
