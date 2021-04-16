@@ -9,6 +9,7 @@ import EntypoIcon from 'react-native-vector-icons/Entypo'
 import defaultBanner from 'assets/default-user-banner.jpg'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 import styles from './GroupSettings.styles'
+import LocationPicker from 'screens/LocationPicker/LocationPicker'
 
 export default class GroupSettings extends React.Component {
   constructor (props) {
@@ -77,6 +78,17 @@ export default class GroupSettings extends React.Component {
     }))
   }
 
+  showLocationPicker = locationText => {
+    LocationPicker({
+      navigation: this.props.navigation,
+      initialSearchTerm: locationText,
+      onPick: location => {
+        this.updateField('location')(location?.fullText)
+        this.updateField('locationId')(location?.id)
+      }
+    })
+  }
+
   saveChanges = () => {
     return this.props.updateGroupSettings(this.state.edits)
       .then(({ error }) => {
@@ -127,7 +139,7 @@ export default class GroupSettings extends React.Component {
           <TextInput
             style={styles.input}
             value={location}
-            onChangeText={this.updateField('location')}
+            onFocus={() => this.showLocationPicker(location)}
             underlineColorAndroid='transparent'
           />
         </KeyboardFriendlyView>

@@ -2,19 +2,14 @@ import { isIOS } from 'util/platform'
 import { StyleSheet } from 'react-native'
 import {
   caribbeanGreen,
-  fakeAlpha,
   havelockBlue,
   jade,
-  limedSpruce,
   mangoYellow,
-  rhino10,
   rhino30,
   westSide,
   capeCod40,
   white,
-  prim,
-  fuchsiaPink,
-  slateGrey80
+  fuchsiaPink
 } from 'style/colors'
 
 const typeSelectorDefaults = {
@@ -64,6 +59,7 @@ export default {
   },
   detailsEditorContainer: {},
   section: {
+    display: 'inline',
     marginBottom: 8,
     paddingBottom: 8
   },
