@@ -2,6 +2,7 @@ import { attr, fk, many, Model } from 'redux-orm'
 import Attachment from './Attachment'
 import { get } from 'lodash/fp'
 import PropTypes from 'prop-types'
+import { butterflyBush, caribbeanGreen, fakeAlpha, flushOrange, gold, pictonBlue, sunsetOrange } from 'style/colors'
 
 export class PostFollower extends Model {}
 PostFollower.modelName = 'PostFollower'
@@ -94,33 +95,33 @@ Post.fields = {
 
 export const POST_TYPES = {
   discussion: {
-    primaryColor: 'rgba(0, 163, 227, 1)', // $color-picton-blue
-    backgroundColor: 'rgba(0, 163, 227, .2)', // $color-link-water
+    primaryColor: pictonBlue,
+    backgroundColor: fakeAlpha(pictonBlue, 0.2),
     map: false
   },
   event: {
-    primaryColor: 'rgba(254, 72, 80, 1)', // $color-medium-purple
-    backgroundColor: 'rgba(254, 72, 80, .2)', // $color-moon-raker
+    primaryColor: sunsetOrange,
+    backgroundColor: fakeAlpha(sunsetOrange, 0.2),
     map: true
   },
   offer: {
-    primaryColor: 'rgba(0, 199, 157, 1)', // $color-caribbean-green
-    backgroundColor: 'rgba(0, 199, 157, .2)', // $color-iceberg;
+    primaryColor: caribbeanGreen,
+    backgroundColor: fakeAlpha(caribbeanGreen, 0.2),
     map: true
   },
   resource: {
-    primaryColor: 'rgba(255, 212, 3, 1)', // $color-mango-yellow;
-    backgroundColor: 'rgba(255, 212, 3, .2)',
+    primaryColor: gold,
+    backgroundColor: fakeAlpha(gold, 0.2),
     map: true
   },
   project: {
-    primaryColor: 'rgba(252, 128, 0, 1)', // $color-fuchsia-pink;
-    backgroundColor: 'rgba(252, 128, 0, .2)', // $color-prim;
+    primaryColor: flushOrange,
+    backgroundColor: fakeAlpha(flushOrange, 0.2),
     map: false
   },
   request: {
-    primaryColor: 'rgba(102, 75, 165, 1)', // $color-persimmon;
-    backgroundColor: 'rgba(102, 75, 165, .2)', // $color-peach-schnapps;
+    primaryColor: butterflyBush,
+    backgroundColor: fakeAlpha(butterflyBush, 0.2),
     map: true
   }
 }

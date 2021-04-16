@@ -220,7 +220,7 @@ export function PostCardForDetails ({
       )}
       {isProject && (
         <JoinProjectButton
-          style={styles.joinButton}
+          style={styles.projectJoinButton}
           leaving={isMember}
           onPress={isMember ? leaveProject : joinProject}
         />

@@ -5,19 +5,13 @@ import { humanDate } from 'hylo-utils/text'
 import {
   rhino30,
   rhino50,
-  caribbeanGreen,
-  prim,
-  fuchsiaPink,
-  mangoYellow,
-  havelockBlue,
-  westSide,
-  jade,
-  fakeAlpha
+  caribbeanGreen
 } from 'style/colors'
 import Avatar from 'components/Avatar'
 import Icon from 'components/Icon'
 import PopupMenuButton from 'components/PopupMenuButton'
 import FlagContent from 'components/FlagContent'
+import { POST_TYPES } from 'store/models/Post'
 
 export default class PostHeader extends React.PureComponent {
   constructor (props) {
@@ -310,50 +304,50 @@ const labelStyles = {
   },
   discussion: {
     box: {
-      backgroundColor: fakeAlpha(havelockBlue, 0.2)
+      backgroundColor: POST_TYPES.discussion.backgroundColor,
     },
     text: {
-      color: havelockBlue
+      color: POST_TYPES.discussion.primaryColor
     }
   },
   event: {
     box: {
-      backgroundColor: 'rgba(254, 72, 80, .2)'
+      backgroundColor: POST_TYPES.event.backgroundColor,
     },
     text: {
-      color: 'rgba(254, 72, 80, 1)'
+      color: POST_TYPES.event.primaryColor
     }
   },
   offer: {
     box: {
-      backgroundColor: fakeAlpha(jade, 0.2)
+      backgroundColor: POST_TYPES.offer.backgroundColor,
     },
     text: {
-      color: jade
+      color: POST_TYPES.offer.primaryColor
     }
   },
   resource: {
     box: {
-      backgroundColor: fakeAlpha(mangoYellow, 0.2)
+      backgroundColor: POST_TYPES.resource.backgroundColor,
     },
     text: {
-      color: mangoYellow
+      color: POST_TYPES.resource.primaryColor
     }
   },
   project: {
     box: {
-      backgroundColor: fakeAlpha(westSide, 0.2)
+      backgroundColor: POST_TYPES.project.backgroundColor,
     },
     text: {
-      color: westSide
+      color: POST_TYPES.project.primaryColor
     }
   },
   request: {
     box: {
-      backgroundColor: prim
+      backgroundColor: POST_TYPES.request.backgroundColor,
     },
     text: {
-      color: fuchsiaPink
+      color: POST_TYPES.request.primaryColor
     }
   }
 }

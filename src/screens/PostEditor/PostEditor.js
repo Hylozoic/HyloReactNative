@@ -386,7 +386,7 @@ export default class PostEditor extends React.Component {
           keyboardDismissMode='on-drag'
         >
           <View style={styles.scrollContent}>
-            <View style={[styles.typeSelector.row, styles.section]}>
+            <View style={[styles.typeSelector.row, styles.section, { marginTop: -3 }]}>
               {/* <Text style={styles.sectionLabel}>What are you posting today?</Text> */}
               <TypeSelector value={type} onValueChange={this.handleTypeOnChange} disabled={isSaving} />
             </View>

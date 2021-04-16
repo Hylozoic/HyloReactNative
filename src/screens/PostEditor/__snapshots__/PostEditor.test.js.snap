@@ -538,7 +538,7 @@ exports[`PostEditor renders correctly while saving 1`] = `
                                             Object {
                                               "label": "DISCUSSION",
                                               "testID": undefined,
-                                              "textColor": 4282491356,
+                                              "textColor": 4282425821,
                                               "value": "discussion",
                                             },
                                             Object {
@@ -550,25 +550,25 @@ exports[`PostEditor renders correctly while saving 1`] = `
                                             Object {
                                               "label": "OFFER",
                                               "testID": undefined,
-                                              "textColor": 4278633584,
+                                              "textColor": 4279092127,
                                               "value": "offer",
                                             },
                                             Object {
                                               "label": "RESOURCE",
                                               "testID": undefined,
-                                              "textColor": 4294825289,
+                                              "textColor": 4294956035,
                                               "value": "resource",
                                             },
                                             Object {
                                               "label": "PROJECT",
                                               "testID": undefined,
-                                              "textColor": 4294940434,
+                                              "textColor": 4294737920,
                                               "value": "project",
                                             },
                                             Object {
                                               "label": "REQUEST",
                                               "testID": undefined,
-                                              "textColor": 4290470056,
+                                              "textColor": 4284894117,
                                               "value": "request",
                                             },
                                           ]
@@ -1265,7 +1265,7 @@ exports[`PostEditor renders correctly while saving 2`] = `
                                             Object {
                                               "label": "DISCUSSION",
                                               "testID": undefined,
-                                              "textColor": 4282491356,
+                                              "textColor": 4282425821,
                                               "value": "discussion",
                                             },
                                             Object {
@@ -1277,25 +1277,25 @@ exports[`PostEditor renders correctly while saving 2`] = `
                                             Object {
                                               "label": "OFFER",
                                               "testID": undefined,
-                                              "textColor": 4278633584,
+                                              "textColor": 4279092127,
                                               "value": "offer",
                                             },
                                             Object {
                                               "label": "RESOURCE",
                                               "testID": undefined,
-                                              "textColor": 4294825289,
+                                              "textColor": 4294956035,
                                               "value": "resource",
                                             },
                                             Object {
                                               "label": "PROJECT",
                                               "testID": undefined,
-                                              "textColor": 4294940434,
+                                              "textColor": 4294737920,
                                               "value": "project",
                                             },
                                             Object {
                                               "label": "REQUEST",
                                               "testID": undefined,
-                                              "textColor": 4290470056,
+                                              "textColor": 4284894117,
                                               "value": "request",
                                             },
                                           ]
@@ -1753,32 +1753,32 @@ exports[`TypeButton renders correctly 1`] = `
   items={
     Array [
       Object {
-        "color": "#41A1DC",
+        "color": "#40A1DD",
         "label": "DISCUSSION",
         "value": "discussion",
       },
       Object {
-        "color": "rgba(254, 72, 80, 1)",
+        "color": "#FE4850",
         "label": "EVENT",
         "value": "event",
       },
       Object {
-        "color": "#06C470",
+        "color": "#0DC39F",
         "label": "OFFER",
         "value": "offer",
       },
       Object {
-        "color": "#FDD549",
+        "color": "#FFD403",
         "label": "RESOURCE",
         "value": "resource",
       },
       Object {
-        "color": "#FF9712",
+        "color": "#FC8000",
         "label": "PROJECT",
         "value": "project",
       },
       Object {
-        "color": "#BB60A8",
+        "color": "#664BA5",
         "label": "REQUEST",
         "value": "request",
       },

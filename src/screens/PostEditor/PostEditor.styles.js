@@ -1,27 +1,23 @@
 import { isIOS } from 'util/platform'
 import { StyleSheet } from 'react-native'
+import { POST_TYPES } from 'store/models/Post'
 import {
   caribbeanGreen,
-  havelockBlue,
-  jade,
-  mangoYellow,
   rhino30,
-  westSide,
   capeCod40,
   white,
-  fuchsiaPink
+  black
 } from 'style/colors'
 
 const typeSelectorDefaults = {
-  // backgroundColor: fakeAlpha(havelockBlue, 0.2),
   fontSize: 12,
   fontWeight: 'bold',
   borderRadius: 5,
-  borderColor: havelockBlue,
-  borderWidth: StyleSheet.hairlineWidth,
-  color: havelockBlue,
-  padding: 10,
-  paddingRight: 50
+  borderWidth: 0,
+  color: white,
+  padding: isIOS ? 15 : 5,
+  paddingLeft: 10,
+  paddingRight: 0
 }
 
 export default {
@@ -73,86 +69,80 @@ export default {
     },
     icon: {
       fontSize: 20,
-      marginTop: 8,
+      marginTop: isIOS ? 12 : 8,
       marginRight: 10,
-      color: havelockBlue  
+      color: black
     },
     discussion: {
       inputIOS: {
         ...typeSelectorDefaults,
-        // backgroundColor: fakeAlpha(havelockBlue, 0.2),
-        borderColor: havelockBlue,
-        color: havelockBlue,        
+        backgroundColor: POST_TYPES['discussion'].backgroundColor,
+        color: POST_TYPES['discussion'].primaryColor
       },
       inputAndroid: {
         ...typeSelectorDefaults,
-        borderColor: havelockBlue,
-        color: havelockBlue,        
+        backgroundColor: POST_TYPES['discussion'].backgroundColor,
+        color: POST_TYPES['discussion'].primaryColor
       },
     },
     event: {
       inputIOS: {
         ...typeSelectorDefaults,
-        // backgroundColor: 'rgba(254, 72, 80, .2)'
-        borderColor: 'rgba(254, 72, 80, 1)',
-        color: 'rgba(254, 72, 80, 1)',        
+        backgroundColor: POST_TYPES['event'].backgroundColor,
+        color: POST_TYPES['event'].primaryColor
       },
       inputAndroid: {
         ...typeSelectorDefaults,
-        borderColor: 'rgba(254, 72, 80, 1)',
-        color: 'rgba(254, 72, 80, 1)'
+        backgroundColor: POST_TYPES['event'].backgroundColor,
+        color: POST_TYPES['event'].primaryColor
       }
     },
     offer: {
       inputIOS: {
         ...typeSelectorDefaults,
-        // backgroundColor: fakeAlpha(jade, 0.2)
-        borderColor: jade,
-        color: jade,        
+        backgroundColor: POST_TYPES['offer'].backgroundColor,
+        color: POST_TYPES['offer'].primaryColor
       },
       inputAndroid: {
         ...typeSelectorDefaults,
-        borderColor: jade,
-        color: jade,        
+        backgroundColor: POST_TYPES['offer'].backgroundColor,
+        color: POST_TYPES['offer'].primaryColor
       }
     },
     resource: {
       inputIOS: {
         ...typeSelectorDefaults,
-        // backgroundColor: fakeAlpha(mangoYellow, 0.2)
-        borderColor: mangoYellow,
-        color: mangoYellow,        
+        backgroundColor: POST_TYPES['resource'].backgroundColor,
+        color: POST_TYPES['resource'].primaryColor
       },
       inputAndroid: {
         ...typeSelectorDefaults,
-        borderColor: mangoYellow,
-        color: mangoYellow,        
+        backgroundColor: POST_TYPES['resource'].backgroundColor,
+        color: POST_TYPES['resource'].primaryColor
       }
     },
     project: {
       inputIOS: {
         ...typeSelectorDefaults,
-        // backgroundColor: fakeAlpha(westSide, 0.2)
-        borderColor: westSide,
-        color: westSide,        
+        backgroundColor: POST_TYPES['project'].backgroundColor,
+        color: POST_TYPES['project'].primaryColor
       },
       inputAndroid: {
         ...typeSelectorDefaults,
-        borderColor: westSide,
-        color: westSide,        
+        backgroundColor: POST_TYPES['project'].backgroundColor,
+        color: POST_TYPES['project'].primaryColor
       }
     },
     request: {
       inputIOS: {
         ...typeSelectorDefaults,
-        // backgroundColor: prim
-        borderColor: fuchsiaPink,
-        color: fuchsiaPink,        
+        backgroundColor: POST_TYPES['request'].backgroundColor,
+        color: POST_TYPES['request'].primaryColor
       },
       inputAndroid: {
         ...typeSelectorDefaults,
-        borderColor: fuchsiaPink,
-        color: fuchsiaPink,        
+        backgroundColor: POST_TYPES['request'].backgroundColor,
+        color: POST_TYPES['request'].primaryColor
       }
     }
   },
