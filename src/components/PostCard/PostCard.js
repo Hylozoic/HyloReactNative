@@ -97,7 +97,7 @@ export default class PostCard extends React.PureComponent {
         <PostFooter
           id={post.id}
           commenters={commenters}
-          commentsTotal={post.commentsTotal}
+          commentersTotal={post.commentersTotal}
           votesTotal={post.votesTotal}
           myVote={post.myVote}
         />

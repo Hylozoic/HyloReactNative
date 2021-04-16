@@ -2,11 +2,7 @@ import React from 'react'
 import { View, Text, TouchableOpacity, Alert, FlatList } from 'react-native'
 import { get, filter, isEmpty } from 'lodash/fp'
 import { humanDate } from 'hylo-utils/text'
-import {
-  rhino30,
-  rhino50,
-  caribbeanGreen
-} from 'style/colors'
+import { rhino30, rhino50, caribbeanGreen } from 'style/colors'
 import Avatar from 'components/Avatar'
 import Icon from 'components/Icon'
 import PopupMenuButton from 'components/PopupMenuButton'

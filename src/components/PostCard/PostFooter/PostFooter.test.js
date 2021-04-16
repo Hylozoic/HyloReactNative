@@ -8,8 +8,13 @@ it('renders as expected', () => {
     <PostFooter
       myVote
       votesTotal={71}
-      commentsTotal={36}
+      commentersTotal={19}
       vote={() => {}}
+      type='request'
+      currentUser={{}}
+      members={[]}
+      eventAttendees={[]}
+      showActivityLabel
       commenters={[
         { avatarUrl: 'a.png' },
         { avatarUrl: 'b.png' },

@@ -11,9 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Adds geocoded Location selector to Group settings edit
 ### Changed
 - Projects can now be created from the main Post Editor window, not only via New Project
-- Swaps color for "Request" and "Project" in accordance with web
+- Update Post type colors to be consistent between web and mobile
 - Improves Profile view and edit Profile UX
 - Upgrade react-native-data-picker to latest version
+- Update Post Activity on Card and Detail views to be same as web
 ### Fixed
 - Keyboard covering Edit Group Settings (in Android) #436
 - Issue with Post Editor such that it would not forward to a newly created project

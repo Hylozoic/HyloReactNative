@@ -1,10 +1,10 @@
 import React from 'react'
 import { View, Text, TouchableOpacity } from 'react-native'
-import { slice, uniqBy } from 'lodash/fp'
+import { get, find, sortBy } from 'lodash/fp'
 import Avatar from 'components/Avatar'
 import Icon from 'components/Icon'
 import {
-  caribbeanGreen, rhino30, rhino80, slateGrey80
+  caribbeanGreen, rhino30, rhino50, rhino60, rhino80, slateGrey80
 } from 'style/colors'
 import { string, array, number, func } from 'prop-types'
 
@@ -21,42 +21,127 @@ export default class PostFooter extends React.PureComponent {
     const {
       style,
       commenters,
-      commentsTotal,
+      type,
+      currentUser,
+      commentersTotal,
+      members,
+      eventAttendees,
       votesTotal,
       myVote,
       vote,
       showActivityLabel
     } = this.props
     const voteStyle = myVote ? styles.votes.active : styles.votes.inactive
-    const commentsText = commentsTotal
-      ? `${commentsTotal} comment${commentsTotal === 1 ? '' : 's'}`
-      : 'No comments'
+
+    switch (type) {
+      case 'project':
+        peopleRowResult = peopleSetup(
+          members,
+          members.length,
+          get('id', currentUser),
+          {
+            emptyMessage: 'No project members',
+            phraseSingular: 'is a member',
+            mePhraseSingular: 'are a member',
+            pluralPhrase: 'are members'
+          }
+        )
+        break
+      case 'event':
+        peopleRowResult = peopleSetup(
+          eventAttendees,
+          eventAttendees.length,
+          get('id', currentUser),
+          {
+            emptyMessage: 'No one is attending yet',
+            phraseSingular: 'is attending',
+            mePhraseSingular: 'are attending',
+            pluralPhrase: 'attending'
+          }
+        )
+        break
+      default:
+        peopleRowResult = peopleSetup(
+          commenters,
+          commentersTotal,
+          get('id', currentUser),
+          {
+            emptyMessage: 'Be the first to comment',
+            phraseSingular: 'commented',
+            mePhraseSingular: 'commented',
+            pluralPhrase: 'commented'
+          }
+        )
+    }
+    
+    const { caption, avatarUrls } = peopleRowResult
 
     return (
-      <View style={[styles.container, style]}>
-        {showActivityLabel && <Text style={styles.activityLabel}>Activity</Text>}
-        <View style={styles.comments}>
-          {slice(0, 3, uniqBy('id', commenters)).map((c, index) => {
-            return (
-              <Avatar
-                key={index}
-                avatarUrl={c.avatarUrl}
-                size='small'
-                hasBorder
-                hasOverlap={index > 0}
-                zIndex={3 - index}
-              />
-            )
-          })}
-          <Text style={styles.commentsText}>{commentsText}</Text>
+      <>
+        {showActivityLabel && <Text style={styles.activityLabel}>ACTIVITY</Text>}
+        <View style={[styles.container, style]}>
+          <View style={styles.comments}>
+            {avatarUrls.slice(0, 3).map((avatarUrl, index) => {
+              return (
+                <Avatar
+                  key={index}
+                  avatarUrl={avatarUrl}
+                  size='small'
+                  hasBorder
+                  hasOverlap={index > 0}
+                  zIndex={3 - index}
+                />
+              )
+            })}
+            <Text style={styles.commentsText}>{caption}</Text>
+          </View>
+          <TouchableOpacity style={styles.votes.container} onPress={vote}>
+            <Icon name='ArrowUp' style={[styles.votes.icon, voteStyle]} />
+            <Text style={[styles.votes.text, voteStyle]}>{votesTotal}</Text>
+          </TouchableOpacity>
         </View>
-        <TouchableOpacity style={styles.votes.container} onPress={vote}>
-          <Icon name='ArrowUp' style={[styles.votes.icon, voteStyle]} />
-          <Text style={[styles.votes.text, voteStyle]}>{votesTotal}</Text>
-        </TouchableOpacity>
-      </View>
+      </>
     )
   }
+}
+
+export const peopleSetup = (
+  people,
+  peopleTotal,
+  excludePersonId,
+  phrases = {
+    emptyMessage: 'Be the first to comment',
+    phraseSingular: 'commented',
+    mePhraseSingular: 'commented',
+    pluralPhrase: 'commented'
+  }
+) => {
+  const currentUserIsMember = find(c => c.id === excludePersonId, people)
+  const sortedPeople = currentUserIsMember && people.length === 2
+    ? sortBy(c => c.id !== excludePersonId, people) // me first
+    : sortBy(c => c.id === excludePersonId, people) // me last
+  const firstName = person => person.id === excludePersonId ? 'You' : person.name.split(' ')[0]
+  const {
+    emptyMessage,
+    phraseSingular,
+    mePhraseSingular,
+    pluralPhrase
+  } = phrases
+  let names = ''
+  let phrase = pluralPhrase
+
+  if (sortedPeople.length === 0) return { caption: emptyMessage, avatarUrls: [] }
+  if (sortedPeople.length === 1) {
+    phrase = currentUserIsMember ? mePhraseSingular : phraseSingular
+    names = firstName(sortedPeople[0])
+  } else if (sortedPeople.length === 2) {
+    names = `${firstName(sortedPeople[0])} and ${firstName(sortedPeople[1])}`
+  } else {
+    names = `${firstName(sortedPeople[0])}, ${firstName(sortedPeople[1])} and ${peopleTotal - 2} other${peopleTotal - 2 > 1 ? 's' : ''}`
+  }
+  const caption = `${names} ${phrase}`
+  const avatarUrls = people.map(p => p.avatarUrl)
+  return { caption, avatarUrls }
 }
 
 const styles = {
@@ -67,8 +152,10 @@ const styles = {
     paddingLeft: 12
   },
   activityLabel: {
-    color: rhino80,
-    fontSize: 18,
+    color: rhino60,
+    fontSize: 12,
+    paddingLeft: 12,
+    fontWeight: 'bold',
     fontFamily: 'Circular-Book',
     marginRight: 8
   },
@@ -78,7 +165,7 @@ const styles = {
     alignItems: 'center'
   },
   commentsText: {
-    paddingLeft: 6,
+    paddingLeft: 0,
     color: rhino30,
     fontSize: 13,
     fontFamily: 'Circular-Book'

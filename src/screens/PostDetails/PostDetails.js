@@ -242,9 +242,11 @@ export function PostCardForDetails ({
       <PostFooter
         style={styles.postFooter}
         id={post.id}
+        type={post.type}
         currentUser={currentUser}
         commenters={post.commenters}
-        commentsTotal={post.commentsTotal}
+        commentersTotal={post.commentersTotal}
+        members={post.members}
         votesTotal={post.votesTotal}
         myVote={post.myVote}
         showActivityLabel

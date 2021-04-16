@@ -23,7 +23,7 @@ const post = {
   imageUrls: ['foom.png'],
   title: 'Hi',
   details: 'Lo',
-  commenters: [{ id: 9 }, { id: 7 }],
+  commenters: [{ id: 9, name: 'Jebobo Crustacean' }, { id: 7, name: 'Lobster Science' }],
   commentsTotal: 12,
   votesTotal: 8,
   myVote: true,
