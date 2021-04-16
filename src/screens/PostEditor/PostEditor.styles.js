@@ -59,7 +59,6 @@ export default {
   },
   detailsEditorContainer: {},
   section: {
-    display: 'inline',
     marginBottom: 8,
     paddingBottom: 8
   },

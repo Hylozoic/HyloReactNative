@@ -79,12 +79,12 @@ export function mapDispatchToProps (dispatch, props) {
           : createPost
   
       return dispatch(saveAction(postData))
-        .then(({ error, payload }) => {
+        .then(({ meta, error, payload }) => {
           if (error) {
             // TODO: handle API errors more appropriately
             throw new Error('Error submitting post')
           }
-          const id = payload?.data?.createPost?.id || payload?.data?.createProject?.id
+          const id = meta.extractModel?.getRoot(payload?.data)?.id
 
           navigation.navigate('Post Details', { id })
 
