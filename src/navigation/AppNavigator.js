@@ -14,7 +14,7 @@ import BlockedUsers from 'screens/BlockedUsers'
 import GroupSettingsMenu from 'screens/GroupSettingsMenu'
 import GroupSettingsComponent from 'screens/GroupSettings'
 import InvitePeople from 'screens/InvitePeople'
-import ItemChooserScreen from 'screens/ItemChooserScreen'
+import ItemChooser from 'screens/ItemChooser'
 import LoadingScreen from 'screens/LoadingScreen'
 import ModeratorSettings from 'screens/ModeratorSettings'
 import NotificationSettings from 'screens/NotificationSettings'
@@ -98,7 +98,7 @@ export default function AppNavigator () {
       <App.Screen name='Notifications' component={NotificationsList} />
       <App.Screen name='Notification Settings' component={NotificationSettings} />
       <App.Screen name='Blocked Users' component={BlockedUsers} />
-      <App.Screen name='ItemChooserScreen' component={ItemChooserScreen} />
+      <App.Screen name='ItemChooser' component={ItemChooser} />
       <App.Screen name='Loading' component={LoadingScreen} />
     </App.Navigator>
   )

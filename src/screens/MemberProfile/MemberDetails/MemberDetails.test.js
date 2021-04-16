@@ -45,37 +45,6 @@ describe('MemberDetails', () => {
     expect(actual).toMatchSnapshot()
   })
 
-  describe('componentDidMount', () => {
-    it('sets the state when person changes', () => {
-      const prevProps = {
-        person: {
-          id: 2
-        }
-      }
-      const props = {
-        isFocused: true,
-        person: {
-          id: 1,
-          name: 'don',
-          location: 'here',
-          tagline: 'rock',
-          bio: 'stuff',
-          omitable: 'should be omitted',
-          skills: { toRefArray: jest.fn(() => []) },
-          memberships: { toModelArray: jest.fn(() => []) }
-        },
-        fetchPerson: () => {},
-        navigation,
-        route
-      }
-
-      const instance = ReactTestRenderer.create(<MemberDetails {...props} />).getInstance()
-      instance.setState({ person: {} })
-      instance.componentDidUpdate(prevProps, {})
-      expect(instance.state.person).toEqual(pick(['name', 'location', 'tagline', 'bio'], props.person))
-    })
-  })
-
   describe('validate', () => {
     it('returns true when name is present', () => {
       const props = {
@@ -154,31 +123,6 @@ describe('MemberDetails', () => {
     })
   })
 
-  describe('updateSetting', () => {
-    it('updates state.person', () => {
-      const props = {
-        isFocused: true,
-        person: {
-          id: 1,
-          name: 'don',
-          location: 'here',
-          tagline: 'rock',
-          bio: 'stuff',
-          omitable: 'should be omitted',
-          skills: { toRefArray: jest.fn(() => []) },
-          memberships: { toModelArray: jest.fn(() => []) }
-        },
-        fetchPerson: () => {},
-        navigation,
-        route
-      }
-
-      const instance = ReactTestRenderer.create(<MemberDetails {...props} />).getInstance()
-      instance.updateSetting('name')('joe')
-      expect(instance.state.person.name).toEqual('joe')
-    })
-  })
-
   describe('saveChanges', () => {
     it('calls updateUserSettings', async () => {
       const props = {
@@ -241,49 +185,6 @@ describe('MemberDetails', () => {
       instance.saveChanges()
       expect(instance.state.editing).toEqual(true)
       expect(props.updateUserSettings).not.toHaveBeenCalled()
-    })
-  })
-})
-
-describe('MemberBio', () => {
-  it('matches the last snapshot', () => {
-    const person = {
-      bio: 'I live I die!'
-    }
-
-    const renderer = new ReactShallowRenderer()
-    renderer.render(<MemberBio
-      person={person}
-      updateSetting={() => () => {}}
-      isMe
-                    />)
-    const actual = renderer.getRenderOutput()
-
-    expect(actual).toMatchSnapshot()
-  })
-
-  it('returns null when bio is empty', () => {
-    const person = {
-      bio: ''
-    }
-
-    const renderer = new ReactShallowRenderer()
-    renderer.render(<MemberBio
-      person={person}
-                    />)
-    const actual = renderer.getRenderOutput()
-
-    expect(actual).toBeNull()
-  })
-
-  describe('focus', () => {
-    it('calls control.focus', () => {
-      const instance = ReactTestRenderer.create(<MemberBio person={{}} />).getInstance()
-      instance.controlRef.current = {
-        focus: jest.fn()
-      }
-      instance.focus()
-      expect(instance.controlRef.current.focus).toHaveBeenCalled()
     })
   })
 })

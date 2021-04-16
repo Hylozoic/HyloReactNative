@@ -22,15 +22,13 @@ import fetchTopicsForGroupId from 'store/actions/fetchTopicsForGroupId'
 import getTopicsForAutocompleteWithNew from 'store/selectors/getTopicsForAutocompleteWithNew'
 import TopicRow from 'screens/TopicList/TopicRow'
 
-export class InlineEditor extends React.PureComponent {
-  constructor (props) {
-    super(props)
-    this.state = {
-      isFocused: false,
-      pickerType: null
-    }
-    this.editorInputRef = React.createRef()
+export class InlineEditor extends React.Component {
+  state = {
+    isFocused: false,
+    pickerType: null
   }
+
+  editorInputRef = React.createRef()
 
   insertTopic = topic => {
     const markup = createTopicTag(topic)
@@ -78,7 +76,7 @@ export class InlineEditor extends React.PureComponent {
   openPersonPicker = () => {
     const { navigation } = this.props
     const screenTitle = 'Mention'
-    navigation.navigate('ItemChooserScreen', {
+    navigation.navigate('ItemChooser', {
       screenTitle,
       ItemRowComponent: PersonPickerItemRow,
       pickItem: this.insertMention,
@@ -91,7 +89,7 @@ export class InlineEditor extends React.PureComponent {
   openTopicsPicker = () => {
     const { navigation } = this.props
     const screenTitle = 'Pick a Topic'
-    navigation.navigate('ItemChooserScreen', {
+    navigation.navigate('ItemChooser', {
       screenTitle,
       ItemRowComponent: TopicRow,
       pickItem: this.insertTopic,
@@ -138,6 +136,7 @@ export class InlineEditor extends React.PureComponent {
     } = this.props
     const { isFocused } = this.state
     const hitSlop = { top: 7, bottom: 7, left: 7, right: 7 }
+
     return (
       <View style={[styles.container, style]} onFocus={this.handleFocus} onBlur={this.handleBlur}>
         <View style={styles.textInputAndTools}>

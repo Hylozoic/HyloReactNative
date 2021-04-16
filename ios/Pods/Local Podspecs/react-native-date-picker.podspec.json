@@ -1,6 +1,6 @@
 {
   "name": "react-native-date-picker",
-  "version": "2.7.13",
+  "version": "3.2.10",
   "summary": "React Native Date Picker component for Android and iOS",
   "authors": {
     "henninghall": "henning.hall@hotmail.com"
@@ -15,7 +15,7 @@
   },
   "source_files": "ios/RNDatePicker/*.{h,m}",
   "dependencies": {
-    "React": [
+    "React-Core": [
 
     ]
   }

@@ -86,6 +86,7 @@ exports[`PostDetails renders correctly 1`] = `
   >
     <withNavigation(InlineEditor)
       onChange={[Function]}
+      onRef={[Function]}
       onSubmit={[Function]}
       placeholder="Write a comment..."
       value=""

@@ -2,16 +2,15 @@ import React from 'react'
 import {
   View,
   TouchableOpacity,
-  TextInput,
-  Text,
-  Alert
+  Alert,Text
 } from 'react-native'
 import Icon from 'components/Icon'
-import EntypoIcon from 'react-native-vector-icons/Entypo'
 import PopupMenuButton from 'components/PopupMenuButton'
 import { filter, get, isEmpty } from 'lodash/fp'
 import styles from './MemberHeader.styles'
 import { AXOLOTL_ID } from 'store/models/Person'
+import LocationPicker from 'screens/LocationPicker/LocationPicker'
+import Control from 'screens/MemberProfile/Control'
 
 export default function MemberHeader ({
   person,
@@ -26,13 +25,26 @@ export default function MemberHeader ({
   updateSetting = () => {},
   saveChanges,
   errors = {},
+  navigation,
   ...props
 }) {
   if (!person) return null
 
-  const { name, location, tagline } = person
+  const { name, tagline } = person
+  const locationText = get('location', person)
+    || get('locationObject.fullText', person)
   const blockUser = blockUserWithConfirmationFun(props.blockUser, name)
   const isAxolotl = AXOLOTL_ID === get('id', person)
+  const showLocationPicker = () => {
+    LocationPicker({
+      navigation,
+      initialSearchTerm: locationText,
+      onPick: location => {
+        updateSetting('location', location?.fullText)
+        updateSetting('locationId', location?.id)
+      }
+    })
+  }
 
   return (
     <View style={styles.header}>
@@ -42,7 +54,7 @@ export default function MemberHeader ({
           value={name}
           placeholder='Name'
           editable={editable}
-          onChangeText={updateSetting('name')}
+          onChangeText={value => updateSetting('name', value)}
           error={errors.name}
           isMe={isMe}
         />
@@ -59,11 +71,11 @@ export default function MemberHeader ({
       </View>
       <Control
         style={styles.location}
-        value={location}
+        value={locationText}
         placeholder='Location'
         multiline
         editable={editable}
-        onChangeText={updateSetting('location')}
+        onPress={showLocationPicker}
         isMe={isMe}
       />
       <Control
@@ -71,7 +83,7 @@ export default function MemberHeader ({
         value={tagline}
         placeholder='Short Description'
         editable={editable}
-        onChangeText={updateSetting('tagline')}
+        onChangeText={value => updateSetting('tagline', value)}
         isMe={isMe}
       />
     </View>
@@ -91,41 +103,6 @@ export function blockUserWithConfirmationFun (blockUserFun, name) {
         { text: `Block ${name}`, onPress: (blockedUserId) => blockUserFun(blockedUserId) },
         { text: 'Cancel', style: 'cancel' }
       ])
-  }
-}
-export class Control extends React.Component {
-  inputRef = React.createRef()
-
-  focus = () => this.inputRef.current && this.inputRef.current.focus()
-
-  render () {
-    const {
-      value, onChangeText, editable = false, style, multiline,
-      hideEditIcon, error, placeholder, isMe
-    } = this.props
-    return (
-      <View style={[styles.control, editable && styles.editableControl]}>
-        <View style={styles.controlInputRow}>
-          {editable || !multiline
-            ? <TextInput
-                ref={this.inputRef}
-                style={[styles.controlInput, style]}
-                value={value}
-                onChangeText={onChangeText}
-                editable={editable}
-                placeholder={isMe ? placeholder : ''}
-                multiline={multiline}
-                numberOfLines={multiline ? 8 : 1}
-                underlineColorAndroid='transparent'
-              />
-            : <Text style={style}>{value}</Text>}
-          {editable && !hideEditIcon && <TouchableOpacity onPress={this.focus} style={styles.editIconWrapper}>
-            <EntypoIcon name='edit' style={styles.editIcon} />
-          </TouchableOpacity>}
-        </View>
-        {!!error && <View style={styles.controlError}><Text style={styles.controlErrorText}>{error}</Text></View>}
-      </View>
-    )
   }
 }
 

@@ -316,12 +316,12 @@ const labelStyles = {
       color: havelockBlue
     }
   },
-  request: {
+  event: {
     box: {
-      backgroundColor: fakeAlpha(westSide, 0.2)
+      backgroundColor: 'rgba(254, 72, 80, .2)'
     },
     text: {
-      color: westSide
+      color: 'rgba(254, 72, 80, 1)'
     }
   },
   offer: {
@@ -340,15 +340,15 @@ const labelStyles = {
       color: mangoYellow
     }
   },
-  event: {
+  project: {
     box: {
-      backgroundColor: 'rgba(254, 72, 80, .2)'
+      backgroundColor: fakeAlpha(westSide, 0.2)
     },
     text: {
-      color: 'rgba(254, 72, 80, 1)'
+      color: westSide
     }
   },
-  project: {
+  request: {
     box: {
       backgroundColor: prim
     },

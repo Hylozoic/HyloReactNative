@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import TestRenderer from 'react-test-renderer'
-import PostEditor, { TypeButton } from './PostEditor'
+import PostEditor, { TypeSelector } from './PostEditor'
 import { Alert } from 'react-native'
 import { Provider } from 'react-redux'
 import { createMockStore } from 'util/testing'
@@ -82,38 +82,6 @@ describe('PostEditor', () => {
     )
     const actual = renderer.getRenderOutput()
     expect(actual).toMatchSnapshot()
-  })
-
-  it('presses buttons', () => {
-    const save = jest.fn(() => Promise.resolve())
-    const renderer = TestRenderer.create(
-      <Provider store={createMockStore()}>
-        <MockedScreen>
-          {() => <PostEditor
-            isFocused
-            shouldShowTypeChooser
-            fetchPost={jest.fn()}
-            route={route}
-            navigation={navigation}
-            post={mockPost}
-            save={save}
-          />}
-        </MockedScreen>
-      </Provider>
-    )
-    const root = renderer.root.findByType(PostEditor)
-
-    // Discussion type button
-    root.findAllByType(TypeButton)[0].props.onPress()
-    expect(root.instance.state.type).toBe('discussion')
-
-    // request type button
-    root.findAllByType(TypeButton)[1].props.onPress()
-    expect(root.instance.state.type).toBe('request')
-
-    // Offer type button
-    root.findAllByType(TypeButton)[2].props.onPress()
-    expect(root.instance.state.type).toBe('offer')
   })
 
   it('renders correctly while saving', async () => {
@@ -428,11 +396,7 @@ describe('TypeButton', () => {
     const renderer = new ReactShallowRenderer()
     const type = 'discussion'
     renderer.render(
-      <TypeButton
-        type={type}
-        key={type}
-        onPress={jest.fn()}
-      />
+      <TypeSelector value={type} onValueChange={jest.fn()} />
     )
     const actual = renderer.getRenderOutput()
     expect(actual).toMatchSnapshot()

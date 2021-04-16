@@ -6,9 +6,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [UNRELEASED]
 ### Added
+- More advanced type selector for Post Editor
+- Adds geocoded Location selector to Profile edit
+- Adds geocoded Location selector to Group settings edit
 ### Changed
+- Projects can now be created from the main Post Editor window, not only via New Project
+- Swaps color for "Request" and "Project" in accordance with web
+- Improves Profile view and edit Profile UX
+- Upgrade react-native-data-picker to latest version
 ### Fixed
 - Keyboard covering Edit Group Settings (in Android) #436
+- Issue with Post Editor such that it would not forward to a newly created project
 
 ## [3.1.2]
 ### Fixed

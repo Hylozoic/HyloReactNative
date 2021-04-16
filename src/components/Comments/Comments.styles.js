@@ -1,5 +1,9 @@
 import { caribbeanGreen } from 'style/colors'
 
+export const subCommentIndentation = {
+  marginLeft: 40
+}
+
 export default {
   loadingContainer: {
     position: 'absolute',
@@ -19,5 +23,16 @@ export default {
     marginBottom: 20,
     fontSize: 13,
     color: caribbeanGreen
+  },
+  subComment: {
+    ...subCommentIndentation
+  },
+  subCommentsShowMore: {
+    ...subCommentIndentation
+  },
+  highlighted: {
+    borderRadius: 5,
+    backgroundColor: 'rgb(255,255,224)',
+    padding: 10
   }
 }

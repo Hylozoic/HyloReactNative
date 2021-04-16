@@ -1,5 +1,6 @@
+import { StyleSheet } from 'react-native'
 import {
-  nevada, ghost, rhino, rhino50, rhino30, caribbeanGreen
+  nevada, ghost, rhino, rhino50, rhino30, caribbeanGreen, rhino80, rhino60
 } from 'style/colors'
 import headerStyles from '../MemberHeader.styles.js'
 
@@ -16,22 +17,23 @@ export default {
     position: 'relative'
   },
   sectionLabel: {
-    color: rhino,
-    fontSize: 18,
-    marginBottom: 10
+    color: rhino60,
+    fontSize: 14,
+    marginTop: 10,
+    marginBottom: 8
   },
   bioContainer: {
-    marginTop: 10,
-    marginBottom: 10
+    // marginTop: 10,
+    // marginBottom: 10
   },
   bio: {
     color: nevada,
     fontFamily: 'Circular-Book',
-    fontSize: 14,
-    marginBottom: 15
+    fontSize: 16,
+    marginBottom: 10
   },
   skillsContainer: {
-    marginBottom: 25
+    marginBottom: 10
   },
   skills: {
     flexDirection: 'row',
@@ -40,7 +42,6 @@ export default {
   skill: {
     paddingHorizontal: 10,
     marginRight: 8,
-    marginBottom: 8,
     borderRadius: 12,
     height: 24,
     fontFamily: 'Circular-Book',
@@ -48,19 +49,18 @@ export default {
     color: rhino50,
     borderWidth: 1,
     borderColor: ghost,
-    lineHeight: 18,
+    lineHeight: 22,
     textAlignVertical: 'top',
     textAlign: 'center'
   },
   groupsContainer: {
-    paddingBottom: 15
   },
   groupRow: {
+    paddingVertical: 15,
+    borderTopWidth: StyleSheet.hairlineWidth,
+    borderTopColor: rhino60,
     flexDirection: 'row',
-    marginBottom: 7
-  },
-  starIcon: {
-    marginRight: 5
+    alignItems: 'center'
   },
   groupName: {
     color: caribbeanGreen,
@@ -68,9 +68,15 @@ export default {
     fontFamily: 'Circular-Book',
     letterSpacing: 0.22
   },
+  starIcon: {
+    alignSelf: 'center',
+    color: caribbeanGreen,
+    marginLeft: 5
+  },
   memberCount: {
     marginLeft: 'auto',
-    color: rhino,
+    color: rhino50,
+    fontSize: 16,
     marginRight: 3
   },
   memberIcon: {
@@ -81,5 +87,12 @@ export default {
     ...headerStyles.editIcon,
     top: 5,
     marginLeft: 10
-  }
+  },
+  groupAvatar: {
+    height: 24,
+    width: 24,
+    marginLeft: 5,
+    marginRight: 10,
+    alignSelf: 'flex-start'
+  },
 }

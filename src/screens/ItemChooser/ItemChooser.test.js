@@ -19,8 +19,30 @@ const testProps = {
   onFocus: jest.fn(),
   autoFocus: true,
   initialItems: [],
-  scope: 'test'
+  route: {
+    params: {
+      screenTitle: 'Screen Title',
+      initialItems: items,
+      ItemRowComponent: item => null,
+      fetchSearchSuggestions: () => {
+        return { type: 'test-search' }
+      },
+      getSearchSuggestions: () => items,
+      updateItems: jest.fn()
+    }
+  },
+  navigation: {
+    setParams: jest.fn(),
+    setOptions: jest.fn()
+  }
 }
+
+// TODO: Pending tests
+// snapshot test difference between render of pick vs choose itemschooser?
+// test for updateItems
+// test that done for update Items and cancel do what are expected
+// test that cancel does what is expected for pickItem
+// test pickItem
 
 describe('ItemChooser', () => {
   it('shallow renders as expected', () => {

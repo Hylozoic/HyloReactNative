@@ -7,14 +7,8 @@ import {
   VOTE_ON_POST_PENDING
 } from 'components/PostCard/PostFooter/PostFooter.store'
 import {
-  CREATE_COMMENT
-} from 'screens/PostDetails/CommentEditor/CommentEditor.store'
-import {
   USE_INVITATION
 } from 'screens/JoinGroup/JoinGroup.store'
-import {
-  DELETE_COMMENT_PENDING
-} from 'components/Comment/Comment.store'
 import {
   UPDATE_THREAD_READ_TIME_PENDING
 } from 'screens/Thread/Thread.store'
@@ -40,6 +34,8 @@ import {
   UPDATE_MEMBERSHIP_SETTINGS_PENDING, UPDATE_ALL_MEMBERSHIP_SETTINGS_PENDING
 } from 'screens/NotificationSettings/NotificationSettings.store'
 import {
+  CREATE_COMMENT,
+  DELETE_COMMENT_PENDING,
   JOIN_PROJECT_PENDING,
   LEAVE_PROJECT_PENDING,
   FETCH_CURRENT_USER
