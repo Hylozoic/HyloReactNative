@@ -63,6 +63,7 @@ Array [
       "confirmPassword": "",
       "email": "",
       "location": "",
+      "locationId": null,
       "name": "",
       "password": "",
       "settings": Object {},

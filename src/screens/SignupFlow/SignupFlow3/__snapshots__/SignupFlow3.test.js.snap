@@ -17,6 +17,7 @@ exports[`matches last snapshot 1`] = `
       <View>
         <SettingControl
           label="Where do you call home"
+          onFocus={[Function]}
           value="Hull"
         />
       </View>
