@@ -25,6 +25,7 @@ Object {
     "creator": Object {
       "id": "10",
     },
+    "eventInvitations": Array [],
     "fileAttachments": Array [
       Object {
         "id": "1",
