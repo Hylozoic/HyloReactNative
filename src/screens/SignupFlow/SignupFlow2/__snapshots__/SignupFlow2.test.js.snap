@@ -8,7 +8,7 @@ Object {
 `;
 
 exports[`handles localUri 1`] = `
-<View>
+<SafeAreaView>
   <View>
     <ImagePicker
       id="1"
@@ -52,11 +52,11 @@ exports[`handles localUri 1`] = `
       </View>
     </View>
   </View>
-</View>
+</SafeAreaView>
 `;
 
 exports[`handles no image 1`] = `
-<View>
+<SafeAreaViewMock>
   <View>
     <ImagePicker
       id="1"
@@ -81,11 +81,11 @@ exports[`handles no image 1`] = `
     onPress={[Function]}
     text="Continue"
   />
-</View>
+</SafeAreaViewMock>
 `;
 
 exports[`matches last snapshot 1`] = `
-<View>
+<SafeAreaViewMock>
   <View>
     <ImagePicker
       id="1"
@@ -112,5 +112,5 @@ exports[`matches last snapshot 1`] = `
     onPress={[Function]}
     text="Continue"
   />
-</View>
+</SafeAreaViewMock>
 `;

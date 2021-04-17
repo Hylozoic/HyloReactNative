@@ -2,7 +2,20 @@
 
 exports[`mapsStateToProps 1`] = `
 Object {
-  "currentGroup": null,
+  "currentGroup": Object {
+    "avatarUrl": undefined,
+    "bannerUrl": undefined,
+    "childGroups": Object {
+      "toModelArray": [Function],
+    },
+    "headerAvatarUrl": undefined,
+    "id": "all",
+    "name": "All My Groups",
+    "parentGroups": Object {
+      "toModelArray": [Function],
+    },
+    "slug": "all",
+  },
   "currentUser": undefined,
   "id": "1",
   "isProject": false,

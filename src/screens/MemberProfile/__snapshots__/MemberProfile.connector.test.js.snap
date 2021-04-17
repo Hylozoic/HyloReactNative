@@ -12,7 +12,20 @@ Object {
 
 exports[`mapStateToProps maps the state to the props 1`] = `
 Object {
-  "currentGroup": null,
+  "currentGroup": Object {
+    "avatarUrl": undefined,
+    "bannerUrl": undefined,
+    "childGroups": Object {
+      "toModelArray": [Function],
+    },
+    "headerAvatarUrl": undefined,
+    "id": "all",
+    "name": "All My Groups",
+    "parentGroups": Object {
+      "toModelArray": [Function],
+    },
+    "slug": "all",
+  },
   "currentUser": SessionBoundModel {
     "_fields": Object {
       "id": "1",
