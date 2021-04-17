@@ -7,7 +7,7 @@ import Avatar from 'components/Avatar'
 import styles from './NotificationCard.styles'
 
 const renderGroup = group => group
-  ? <Text style={styles.group}>${' group'}</Text>
+  ? <Text style={styles.group}>{` ${group}`}</Text>
   : null
 
 const renderFirstName = ({ name }) =>

@@ -96,8 +96,7 @@ exports[`NotificationCard matches the last snapshot for a join approved 1`] = `
       </Text>
       approved your request to join
       <Text>
-        $
-         group
+         Hydroponic Gardening
       </Text>
     </Text>
     <Text>
@@ -133,8 +132,7 @@ exports[`NotificationCard matches the last snapshot for a join request 1`] = `
       </Text>
       requested to join
       <Text>
-        $
-         group
+         Hydroponic Gardening
       </Text>
     </Text>
     <Text>
