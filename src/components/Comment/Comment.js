@@ -21,7 +21,7 @@ export default function Comment ({
   removeComment,
   editComment,
   hideMenu,
-  onReply
+  onReply = () => {}
 }) {
   const { creator, text, createdAt, post } = comment
   const presentedText = present(sanitize(text), { slug })

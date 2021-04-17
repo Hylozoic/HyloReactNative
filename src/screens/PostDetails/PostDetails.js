@@ -19,6 +19,7 @@ import Button from 'components/Button'
 import InlineEditor, { toHtml } from 'components/InlineEditor'
 import Icon from 'components/Icon'
 import styles from './PostDetails.styles'
+import respondToEvent from 'store/actions/respondToEvent'
 
 export default class PostDetails extends React.Component {
   state = {
@@ -95,7 +96,7 @@ export default class PostDetails extends React.Component {
   }
 
   renderPostDetails = (panHandlers) => {
-    const { post, currentUser, showMember } = this.props
+    const { post, currentUser, respondToEvent, showMember } = this.props
     const slug = get('groups.0.slug', post)
     const isMember = find(member => member.id === currentUser.id, post.members)
     const location = post.location || (post.locationObject && post.locationObject.fullText)
@@ -108,6 +109,7 @@ export default class PostDetails extends React.Component {
         header={(
           <PostCardForDetails
             {...this.props}
+            respondToEvent={respondToEvent}
             showTopic={this.onShowTopic}
             isMember={isMember}
             location={location}
@@ -164,16 +166,17 @@ export default class PostDetails extends React.Component {
 }
 
 export function PostCardForDetails ({
-  post,
   currentUser,
   editPost,
+  goToGroup,
+  goToMembers,
   isProject,
   joinProject,
   leaveProject,
+  post,
+  respondToEvent,
   showMember,
-  showTopic,
-  goToMembers,
-  goToGroup
+  showTopic
 }) {
   const slug = get('groups.0.slug', post)
   const isMember = find(member => member.id === currentUser.id, post.members)
@@ -199,15 +202,17 @@ export function PostCardForDetails ({
       />
       <PostImage imageUrls={post.imageUrls} linked />
       <PostBody
-        type={post.type}
-        title={post.title}
         details={post.details}
-        startTime={post.startTime}
         endTime={post.endTime}
         linkPreview={post.linkPreview}
-        slug={slug}
+        myEventResponse={post.myEventResponse}
+        respondToEvent={respondToEvent}
         showMember={showMember}
         showTopic={showTopic}
+        slug={slug}
+        startTime={post.startTime}
+        title={post.title}
+        type={post.type}
       />
       {!isEmpty(post.fileUrls) && <Files urls={post.fileUrls} />}
       {isProject && (

@@ -149,6 +149,7 @@ Object {
   "post": Object {
     "id": "testpost",
   },
+  "respondToEvent": [Function],
   "route": Object {
     "params": Object {
       "id": "1",

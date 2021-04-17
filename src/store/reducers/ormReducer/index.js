@@ -50,7 +50,8 @@ import {
   JOIN_PROJECT_PENDING,
   LEAVE_PROJECT_PENDING,
   DELETE_GROUP_RELATIONSHIP,
-  UPDATE_COMMENT_PENDING
+  UPDATE_COMMENT_PENDING,
+  RESPOND_TO_EVENT_PENDING
 } from 'store/constants'
 import { PIN_POST_PENDING } from 'components/PostCard/PostHeader/PostHeader.store'
 
@@ -158,6 +159,12 @@ export default function ormReducer (state = {}, action) {
       break
     }
 
+    case RESPOND_TO_EVENT_PENDING: {
+      const event = Post.withId(meta.id)
+      event.update({ myEventResponse: meta.response })
+      break
+    }
+  
     case UPDATE_USER_SETTINGS_PENDING: {
       const me = Me.first()
       const changes = {

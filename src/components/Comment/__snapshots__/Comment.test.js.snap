@@ -79,6 +79,16 @@ exports[`renders correctly 1`] = `
           </Text>
         </View>
         <View>
+          <ForwardRef
+            onPress={[Function]}
+          >
+            <Icon
+              name="Reply"
+            />
+            <Text>
+              Reply
+            </Text>
+          </ForwardRef>
           <CommentMenu
             deleteComment={[Function]}
             removeComment={[Function]}
@@ -151,6 +161,16 @@ exports[`shows the post title when displayPostTitle is true 1`] = `
           </Text>
         </View>
         <View>
+          <ForwardRef
+            onPress={[Function]}
+          >
+            <Icon
+              name="Reply"
+            />
+            <Text>
+              Reply
+            </Text>
+          </ForwardRef>
           <CommentMenu
             deleteComment={[Function]}
             removeComment={[Function]}

@@ -12,6 +12,7 @@ import joinProject from 'store/actions/joinProject'
 import leaveProject from 'store/actions/leaveProject'
 import goToMemberMaker from 'store/actions/goToMemberMaker'
 import getMemberships from 'store/selectors/getMemberships'
+import respondToEvent from 'store/actions/respondToEvent'
 
 export function mapStateToProps (state, props) {
   const id = getRouteParam('id', props.route)
@@ -51,7 +52,8 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     editPost: () => navigation.navigate('Edit Post', { id }),
     goToMembers: () => navigation.navigate('Project Members', { id, members: get('members', post) }),
     showMember: goToMemberMaker(navigation),
-    showTopic: topicName => navigation.navigate('Topic Feed', { topicName })
+    showTopic: topicName => navigation.navigate('Topic Feed', { topicName }),
+    respondToEvent: response => dispatch(respondToEvent(id, response))
   }
 }
 
