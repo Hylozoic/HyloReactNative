@@ -1,37 +1,31 @@
 import React from 'react'
 import { View, Text, TouchableOpacity } from 'react-native'
-import { get, find, sortBy } from 'lodash/fp'
+import { get, find, filter, sortBy } from 'lodash/fp'
 import Avatar from 'components/Avatar'
 import Icon from 'components/Icon'
-import {
-  caribbeanGreen, rhino30, rhino50, rhino60, rhino80, slateGrey80
-} from 'style/colors'
-import { string, array, number, func } from 'prop-types'
+import { RESPONSES } from 'store/models/EventInvitation'
+import { caribbeanGreen, rhino30, rhino60, slateGrey80 } from 'style/colors'
 
 export default class PostFooter extends React.PureComponent {
-  static propTypes = {
-    id: string,
-    commenters: array,
-    commentersTotal: number,
-    votesTotal: number,
-    vote: func
-  }
-
   render () {
     const {
-      style,
       commenters,
-      type,
-      currentUser,
       commentersTotal,
+      currentUser,
+      eventInvitations,
       members,
-      eventAttendees,
-      votesTotal,
       myVote,
+      showActivityLabel,
+      style,
+      type,
       vote,
-      showActivityLabel
+      votesTotal
     } = this.props
     const voteStyle = myVote ? styles.votes.active : styles.votes.inactive
+
+    const eventAttendees = filter(ei => ei.response === RESPONSES.YES, eventInvitations)
+
+    let peopleRowResult
 
     switch (type) {
       case 'project':

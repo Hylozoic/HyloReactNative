@@ -98,6 +98,8 @@ export default class PostCard extends React.PureComponent {
           id={post.id}
           commenters={commenters}
           commentersTotal={post.commentersTotal}
+          members={post.members}
+          eventInvitations={post.eventInvitations}
           votesTotal={post.votesTotal}
           myVote={post.myVote}
         />

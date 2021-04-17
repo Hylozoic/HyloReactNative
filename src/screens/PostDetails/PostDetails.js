@@ -247,6 +247,7 @@ export function PostCardForDetails ({
         commenters={post.commenters}
         commentersTotal={post.commentersTotal}
         members={post.members}
+        eventInvitations={post.eventInvitations}
         votesTotal={post.votesTotal}
         myVote={post.myVote}
         showActivityLabel

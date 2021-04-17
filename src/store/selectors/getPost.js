@@ -27,7 +27,18 @@ export const presentPost = (post, groupId) => {
     imageUrls: post.getImageUrls(),
     pinned,
     topics: post.topics.toRefArray(),
-    members: post.members.toRefArray()
+    members: post.members.toModelArray().map(person => {
+      return {
+        ...person.ref,
+        skills: person.skills.toRefArray()
+      }
+    }),
+    eventInvitations: post.eventInvitations.toModelArray().map(eventInvitation => {
+      return {
+        response: eventInvitation.response,
+        ...eventInvitation.person.ref
+      }
+    })
   }
 }
 
