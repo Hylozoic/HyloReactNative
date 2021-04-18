@@ -9,7 +9,7 @@ groups(
   groupSlugs: $groupSlugs
 ) {
   items {
-    ${groupFieldsFragment(false)}
+    ${groupFieldsFragment({ withTopics: false })}
   }
 }`
 

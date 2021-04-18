@@ -110,6 +110,33 @@ Object {
       "itemsById": Object {},
       "meta": Object {},
     },
+    "GroupActiveProjects": Object {
+      "indexes": Object {
+        "fromGroupId": Object {},
+        "toPostId": Object {},
+      },
+      "items": Array [],
+      "itemsById": Object {},
+      "meta": Object {},
+    },
+    "GroupAnnouncements": Object {
+      "indexes": Object {
+        "fromGroupId": Object {},
+        "toPostId": Object {},
+      },
+      "items": Array [],
+      "itemsById": Object {},
+      "meta": Object {},
+    },
+    "GroupGroupToGroupJoinQuestions": Object {
+      "indexes": Object {
+        "fromGroupId": Object {},
+        "toGroupToGroupJoinQuestionId": Object {},
+      },
+      "items": Array [],
+      "itemsById": Object {},
+      "meta": Object {},
+    },
     "GroupJoinQuestion": Object {
       "indexes": Object {
         "group": Object {},
@@ -145,10 +172,28 @@ Object {
       "itemsById": Object {},
       "meta": Object {},
     },
+    "GroupOpenOffersAndRequests": Object {
+      "indexes": Object {
+        "fromGroupId": Object {},
+        "toPostId": Object {},
+      },
+      "items": Array [],
+      "itemsById": Object {},
+      "meta": Object {},
+    },
     "GroupPosts": Object {
       "indexes": Object {
         "fromGroupId": Object {},
         "toPostId": Object {},
+      },
+      "items": Array [],
+      "itemsById": Object {},
+      "meta": Object {},
+    },
+    "GroupPrerequisite": Object {
+      "indexes": Object {
+        "forGroup": Object {},
+        "prerequisiteGroup": Object {},
       },
       "items": Array [],
       "itemsById": Object {},
@@ -173,10 +218,53 @@ Object {
       "itemsById": Object {},
       "meta": Object {},
     },
+    "GroupRelationshipInviteQuestionAnswers": Object {
+      "indexes": Object {
+        "fromGroupRelationshipInviteId": Object {},
+        "toGroupToGroupJoinRequestQuestionAnswerId": Object {},
+      },
+      "items": Array [],
+      "itemsById": Object {},
+      "meta": Object {},
+    },
+    "GroupSuggestedSkills": Object {
+      "indexes": Object {
+        "fromGroupId": Object {},
+        "toSkillId": Object {},
+      },
+      "items": Array [],
+      "itemsById": Object {},
+      "meta": Object {},
+    },
+    "GroupToGroupJoinQuestion": Object {
+      "indexes": Object {
+        "group": Object {},
+      },
+      "items": Array [],
+      "itemsById": Object {},
+      "meta": Object {},
+    },
+    "GroupToGroupJoinRequestQuestionAnswer": Object {
+      "indexes": Object {
+        "question": Object {},
+      },
+      "items": Array [],
+      "itemsById": Object {},
+      "meta": Object {},
+    },
     "GroupTopic": Object {
       "indexes": Object {
         "group": Object {},
         "topic": Object {},
+      },
+      "items": Array [],
+      "itemsById": Object {},
+      "meta": Object {},
+    },
+    "GroupUpcomingEvents": Object {
+      "indexes": Object {
+        "fromGroupId": Object {},
+        "toPostId": Object {},
       },
       "items": Array [],
       "itemsById": Object {},
