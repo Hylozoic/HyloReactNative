@@ -25,7 +25,7 @@ export default function GroupDetail ({ navigation, route }) {
   const dispatch = useDispatch()
   const groupId = route.params.groupId
 
-  useEffect(() => { dispatch(fetchGroupDetailsAction(groupId)) }, [])
+  useEffect(() => { dispatch(fetchGroupDetailsAction(groupId)) }, [groupId])
 
   const loading = useSelector(state => isPendingFor([JOIN_GROUP, CREATE_JOIN_REQUEST,  FETCH_GROUP_DETAILS], state))
   const group = useSelector(state => presentGroup(getGroup(state, { id: groupId })))
