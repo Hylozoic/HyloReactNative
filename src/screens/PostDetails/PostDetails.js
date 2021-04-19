@@ -129,7 +129,7 @@ export default class PostDetails extends React.Component {
     const groupId = get('groups.0.id', post)
 
     if (!post?.creator || !post?.title) return <LoadingScreen />
-  
+
     return (
       <SafeAreaView style={styles.container} edges={['right', 'left', 'top']}>
         <KeyboardAccessoryView

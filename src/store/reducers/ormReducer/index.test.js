@@ -34,7 +34,6 @@ import {
   UPDATE_MEMBERSHIP_SETTINGS_PENDING, UPDATE_ALL_MEMBERSHIP_SETTINGS_PENDING
 } from 'screens/NotificationSettings/NotificationSettings.store'
 import {
-  CREATE_COMMENT,
   DELETE_COMMENT_PENDING,
   JOIN_PROJECT_PENDING,
   LEAVE_PROJECT_PENDING,
@@ -104,29 +103,6 @@ it('ignores an action with meta.extractModel that is a promise', () => {
 
   const newState = ormReducer(state, action)
   expect(newState).toEqual(state)
-})
-
-it('handles CREATE_COMMENT', () => {
-  const session = orm.session(orm.getEmptyState())
-  session.Post.create({
-    id: '10'
-  })
-  session.Me.create({
-    id: '3322'
-  })
-  session.Person.create({ id: '3322' })
-
-  const action = {
-    type: CREATE_COMMENT,
-    meta: {
-      postId: '10'
-    }
-  }
-
-  const newState = ormReducer(session.state, action)
-  const newSession = orm.session(newState)
-  expect(newSession.Post.withId('10').commentsTotal).toEqual(1)
-  expect(newSession.Post.withId('10').commenters.toRefArray()).toEqual([{ id: '3322' }])
 })
 
 it('handles SET_TOPIC_SUBSCRIBE_PENDING', () => {

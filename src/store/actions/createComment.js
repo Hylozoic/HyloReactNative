@@ -25,8 +25,7 @@ export default function createComment ({
     },
     meta: {
       optimistic: true,
-      // TODO: Not entirely sure why this is causing a bug or why it's not required
-      // extractModel: 'Comment',
+      extractModel: 'Comment',
       tempId: uniqueId(`post${postId}_`),
       postId,
       text: preprocessedText,
