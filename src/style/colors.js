@@ -1,34 +1,34 @@
 import tinycolor from 'tinycolor2'
 
 // when adding a color, use http://chir.ag/projects/name-that-color/ to name it.
+export const alabaster = '#F8F8F8'
+export const amaranth = '#EE4266'
 export const azureRadiance = '#007AFF'
-export const capeCod = '#363D3C'
 export const bigStone = '#142132'
+export const black = 'black'
+export const butterflyBush = '#664BA5'
+export const capeCod = '#363D3C'
+export const caribbeanGreen = '#0DC39F'
 export const derby = '#FFEEDA'
+export const flushOrange = '#FC8000'
+export const gainsboro = '#DCDCDC'
 export const ghost = '#CCD1D7'
-export const havelockBlue = '#41A1DC' // discussion
-export const jade = '#06C470' // offer
+export const gold = '#FFD403'
+export const gunsmoke = '#818A88'
+// Used for links, can probably be replaced everywhere by Picton Blue
+export const havelockBlue = '#41A1DC'
 export const limedSpruce = '#38474A'
-export const mangoYellow = '#FDD549' // resource
+export const linkWater = '#D9ECF8'
 export const mineralGreen = '#304843'
 export const mirage = '#1F2C3D'
 export const nevada = '#5D757A'
 export const persimmon = '#FE6848'
+export const pictonBlue = '#40A1DD'
 export const rhino = '#2C4059'
 export const slateGrey = '#67768A'
-export const westSide = '#FF9712' // request
-export const caribbeanGreen = '#0DC39F' // primary green
-export const black = 'black'
-export const alabaster = '#F8F8F8'
-export const linkWater = '#D9ECF8'
-export const fuchsiaPink = '#BB60A8'
-export const pictonBlue = '#40A1DD'
-export const amaranth = '#EE4266'
-export const gunsmoke = '#818A88'
-export const treePoppy = '#FF9D21'
-export const prim = '#F1DFEE'
+export const sunsetOrange = '#FE4850'
 export const suvaGrey = '#929292'
-export const gainsboro = '#DCDCDC'
+export const treePoppy = '#FF9D21'
 
 // these colors are the equivalent of reducing the opacity of the colors named
 // above, on a white background. use these where possible, to avoid any impact

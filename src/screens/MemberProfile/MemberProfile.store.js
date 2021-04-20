@@ -21,6 +21,25 @@ export function fetchPerson (id) {
           url
           tagline
           location
+          locationObject {
+            id
+            addressNumber
+            addressStreet
+            bbox {
+              lat
+              lng
+            }
+            center {
+              lat
+              lng
+            }
+            city
+            country
+            fullText
+            locality
+            neighborhood
+            region
+          }
           messageThreadId
           memberships {
             id

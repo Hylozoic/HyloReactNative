@@ -12,6 +12,7 @@ export const defaultUserSettings = {
   password: '',
   confirmPassword: '',
   location: '',
+  locationId: null,
   avatarUrl: '',
   settings: {}
 }

@@ -7,7 +7,8 @@ import {
   TouchableOpacity
 } from 'react-native'
 import SafeAreaView from 'react-native-safe-area-view'
-import { debounce } from 'lodash/fp'
+import { isEqual, isFunction, debounce } from 'lodash/fp'
+import { buildModalScreenOptions } from 'navigation/header'
 import SearchBar from 'components/SearchBar'
 import styles from './ItemChooser.styles'
 
@@ -22,13 +23,12 @@ export const propTypesForItemRowComponent = {
 
 export default class ItemChooser extends React.Component {
   static propTypes = {
-    scope: PropTypes.string.isRequired,
-    fetchSearchSuggestions: PropTypes.func,
-    getSearchSuggestions: PropTypes.func,
-    setSearchTerm: PropTypes.func.isRequired,
+    // From screen / route.params
+    screenTitle: PropTypes.string,
     ItemRowComponent: PropTypes.func.isRequired,
+    fetchSearchSuggestions: PropTypes.func.isRequired,
+    getSearchSuggestions: PropTypes.func,
     pickItem: PropTypes.func,
-    done: PropTypes.func,
     updateItems: PropTypes.func,
     initialItems: PropTypes.arrayOf(
       PropTypes.shape({
@@ -41,10 +41,13 @@ export default class ItemChooser extends React.Component {
       })
     ),
     defaultSuggestedItemsLabel: PropTypes.string,
+    searchTermFilter: PropTypes.func,
+    searchPlaceholder: PropTypes.string,
+    // Regular props mostly from connector
+    setSearchTerm: PropTypes.func.isRequired,
     searchTerm: PropTypes.string,
     suggestedItems: PropTypes.array,
     loading: PropTypes.bool,
-    searchPlaceholder: PropTypes.string,
     style: PropTypes.object
   }
 
@@ -68,35 +71,67 @@ export default class ItemChooser extends React.Component {
     }
   }
 
+  componentDidUpdate () {
+    if (!isEqual(this.props.initialItems, this.state.chosenItems)) {
+      this.setHeader()
+    }
+  }
+
   componentDidMount () {
-    const { initialSearchTerm } = this.props
+    const { initialSearchTerm, initialItems,  pickItem, updateItems } = this.props
+    if (updateItems) this.updateItems(initialItems)
     if (initialSearchTerm) this.setSearchTerm(initialSearchTerm)
+    this.setHeader()
   }
 
   componentWillUnmount () {
     this.clearSearchTerm()
   }
 
-  addItem = (item) => {
+  setHeader = () => {
+    const { navigation, screenTitle, updateItems } = this.props
+    const { chosenItems, initialItems } = this.state
+    const headerParams = {
+      headerTitle: screenTitle,
+      headerLeftOnPress: navigation.goBack,
+      headerLeftConfirm: !isEqual(chosenItems, initialItems)
+    }
+    if (isFunction(updateItems)) {
+      headerParams.headerRightButtonLabel = 'Done'
+      headerParams.headerRightButtonOnPress = this.done
+    }
+    navigation.setOptions(
+      buildModalScreenOptions(headerParams)
+    )
+  }
+
+  done = () => {
+    const { navigation } = this.props
+    const { chosenItems } = this.state
+    this.props.updateItems(chosenItems)
+    navigation.goBack()
+  }
+
+  addItem = item => {
     const updatedItems = this.state.chosenItems.concat(item)
     this.updateItems(updatedItems)
   }
 
-  removeItem = (item) => {
+  removeItem = item => {
     const updatedItems = this.state.chosenItems.filter(p => p.id !== item.id)
     this.updateItems(updatedItems)
   }
 
-  updateItems (updatedItems) {
-    this.setState(state => ({
-      chosenItems: updatedItems
-    }))
-    this.props.updateItems(updatedItems)
+  updateItems = updatedItems => {
+    this.setState(state => ({ chosenItems: updatedItems }))
   }
 
-  pickItem = (item) => this.props.pickItem(item)
+  pickItem = item => {
+    this.props.pickItem(item)
+    this.props.navigation.goBack()
+  }
 
-  setupItemSections = (suggestedItems) => {
+  setupItemSections = suggestedItems => {
     const { searchTerm, defaultSuggestedItems, defaultSuggestedItemsLabel, updateItems } = this.props
     const { chosenItems, initialItems } = this.state
     const chosenItemIds = chosenItems.map(p => p.id)
@@ -137,13 +172,15 @@ export default class ItemChooser extends React.Component {
     return sections
   }
 
-  setSearchTerm = (searchTerm) => {
+  setSearchTerm = searchTerm => {
     this.props.setSearchTerm(searchTerm)
     this.fetchSearchSuggestions(searchTerm)
   }
 
   fetchSearchSuggestions = debounce(400, (searchTerm) =>
-    this.props.fetchSearchSuggestions && this.props.fetchSearchSuggestions(searchTerm))
+    this.props.fetchSearchSuggestions
+    && this.props.fetchSearchSuggestions(searchTerm)
+  )
 
   clearSearchTerm = () => this.props.setSearchTerm()
 
@@ -152,7 +189,7 @@ export default class ItemChooser extends React.Component {
     const toggleChosen = item.chosen ? this.removeItem : this.addItem
     const chooseItem = () => this.addItem(item)
     const unChooseItem = () => this.removeItem(item)
-    const pickItem = () => this.pickItem(item)
+    const pickItem = transformedItem => this.pickItem(transformedItem || item)
 
     return (
       <ItemRowComponent
@@ -167,9 +204,9 @@ export default class ItemChooser extends React.Component {
   }
 
   render () {
-    const { searchTerm, style } = this.props
+    const { searchTerm, style, suggestedItems } = this.props
     const headerText = searchTerm ? `Matching "${searchTerm}"` : undefined
-    const sections = this.setupItemSections(this.props.suggestedItems)
+    const sections = this.setupItemSections(suggestedItems)
 
     return (
       <SafeAreaView style={style}>
@@ -229,14 +266,16 @@ export class ItemChooserListHeader extends React.Component {
           // onCancelText='Clear'
           loading={loading}
         />
-        {searchTerm && <View style={styles.listHeaderStatus}>
-          <Text style={styles.listHeaderText}>
-            <Text>{headerText}</Text>
-          </Text>
-          <TouchableOpacity onPress={clearSearchTerm}>
-            <Text style={styles.listHeaderClear}>Clear Search</Text>
-          </TouchableOpacity>
-                       </View>}
+        {searchTerm && (
+          <View style={styles.listHeaderStatus}>
+            <Text style={styles.listHeaderText}>
+              <Text>{headerText}</Text>
+            </Text>
+            <TouchableOpacity onPress={clearSearchTerm}>
+              <Text style={styles.listHeaderClear}>Clear Search</Text>
+            </TouchableOpacity>
+          </View>
+        )}
       </View>
     )
   }

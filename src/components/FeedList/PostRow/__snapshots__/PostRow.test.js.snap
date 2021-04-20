@@ -15,6 +15,7 @@ exports[`PostRow renders correctly 1`] = `
             "id": 1,
           }
         }
+        respondToEvent={[Function]}
       />
     </View>
   </ForwardRef>

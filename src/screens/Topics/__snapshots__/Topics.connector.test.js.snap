@@ -12,7 +12,20 @@ Object {
 exports[`mapStateToProps returns the right keys 1`] = `
 Object {
   "filteredTopics": Array [],
-  "group": undefined,
+  "group": Object {
+    "avatarUrl": undefined,
+    "bannerUrl": undefined,
+    "childGroups": Object {
+      "toModelArray": [Function],
+    },
+    "headerAvatarUrl": undefined,
+    "id": "all",
+    "name": "All My Groups",
+    "parentGroups": Object {
+      "toModelArray": [Function],
+    },
+    "slug": "all",
+  },
   "groupHasTopics": false,
   "pending": true,
   "searchTerm": undefined,

@@ -1,5 +1,30 @@
+import { fetchMapboxLocations, convertMapboxToLocation } from 'services/mapbox'
 import { get } from 'lodash/fp'
-import { FIND_OR_CREATE_LOCATION } from 'store/constants'
+import { SET_SEARCH_SUGGESTIONS } from 'screens/ItemChooser/ItemChooser.store'
+
+export const FIND_OR_CREATE_LOCATION = 'FIND_OR_CREATE_LOCATION'
+
+export async function locationSearch (scope, searchTerm, proximity) {
+  const mapboxLocations = await fetchMapboxLocations(searchTerm, { proximity })
+  let locations = mapboxLocations
+    .features
+    .map(feature => ({
+      ...convertMapboxToLocation(feature),
+      id: feature.id
+    }))
+  locations = [
+    { id: 'NEW', fullText: searchTerm },
+    ...locations
+  ]
+
+  return {
+    type: SET_SEARCH_SUGGESTIONS,
+    payload: {
+      scope,
+      searchSuggestions: locations
+    }
+  }
+}
 
 export const FindOrCreateLocationMutation = `mutation (
   $accuracy: String,
@@ -55,7 +80,7 @@ export const FindOrCreateLocationMutation = `mutation (
   }
 }`
 
-export default function findOrCreateLocation (data, query = FindOrCreateLocationMutation) {
+export function findOrCreateLocation (data, query = FindOrCreateLocationMutation) {
   return {
     type: FIND_OR_CREATE_LOCATION,
     graphql: {

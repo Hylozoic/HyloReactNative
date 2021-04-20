@@ -2,7 +2,20 @@
 
 exports[`mapsStateToProps 1`] = `
 Object {
-  "currentGroup": null,
+  "currentGroup": Object {
+    "avatarUrl": undefined,
+    "bannerUrl": undefined,
+    "childGroups": Object {
+      "toModelArray": [Function],
+    },
+    "headerAvatarUrl": undefined,
+    "id": "all",
+    "name": "All My Groups",
+    "parentGroups": Object {
+      "toModelArray": [Function],
+    },
+    "slug": "all",
+  },
   "currentUser": undefined,
   "id": "1",
   "isProject": false,
@@ -12,6 +25,7 @@ Object {
     "creator": Object {
       "id": "10",
     },
+    "eventInvitations": Array [],
     "fileAttachments": Array [
       Object {
         "id": "1",
@@ -33,8 +47,10 @@ Object {
     "imageUrls": Array [
       "http://foo.com/bar.png",
     ],
+    "isPublic": undefined,
     "linkPreview": undefined,
     "members": Array [],
+    "myEventResponse": "no",
     "pinned": undefined,
     "topics": Array [],
   },
@@ -47,33 +63,57 @@ Array [
   Array [
     Object {
       "graphql": Object {
-        "query": "mutation ($postId: String, $text: String) {
-        createComment(data: {postId: $postId, text: $text}) {
-          id
-          text
-          post {
-            id
-          }
-          createdAt
-          creator {
-            id
-          }
-        }
-      }",
+        "query": "
+mutation CreateCommentMutation (
+  $postId: String,
+  $parentCommentId: String,
+  $text: String,
+  $attachments: [AttachmentInput],
+) {
+  createComment(data: {
+    postId: $postId,
+    parentCommentId: $parentCommentId,
+    text: $text,
+    attachments: $attachments,
+  }) {
+    id
+    text
+    post {
+      id
+    }
+    creator {
+      id
+    }
+    attachments {
+      type
+      url
+      position
+      id
+    }
+    parentComment {
+      id
+    }
+    createdAt
+  }
+}
+",
         "variables": Object {
+          "attachments": undefined,
+          "parentCommentId": undefined,
           "postId": "testpost",
           "text": "some comment",
         },
       },
       "meta": Object {
         "analytics": "Comment Created",
+        "attachments": undefined,
         "extractModel": "Comment",
         "optimistic": true,
         "postId": "testpost",
         "tempId": "posttestpost_1",
         "text": "some comment",
       },
-      "type": "CommentEditor/CREATE_COMMENT",
+      "type": "CREATE_COMMENT",
     },
   ],
 ]
@@ -104,7 +144,6 @@ Object {
   "goToMembers": [Function],
   "id": "testpost",
   "isFocused": true,
-  "isProject": false,
   "joinProject": [Function],
   "leaveProject": [Function],
   "navigation": Object {
@@ -113,6 +152,7 @@ Object {
   "post": Object {
     "id": "testpost",
   },
+  "respondToEvent": [Function],
   "route": Object {
     "params": Object {
       "id": "1",

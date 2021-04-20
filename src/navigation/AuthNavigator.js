@@ -10,6 +10,7 @@ import SignupFlow3 from 'screens/SignupFlow/SignupFlow3'
 import SignupFlow4 from 'screens/SignupFlow/SignupFlow4'
 import SignupFlow5 from 'screens/SignupFlow/SignupFlow5'
 import { white } from 'style/colors'
+import ItemChooser from 'screens/ItemChooser'
 
 const Signup = createStackNavigator()
 export function SignupNavigator () {
@@ -30,6 +31,7 @@ export function SignupNavigator () {
         options={{ headerTitle: 'STEP 4/5' }} />
       <Signup.Screen name='SignupFlow5' component={SignupFlow5}
         options={{ headerTitle: 'STEP 5/5' }} />
+      <Signup.Screen name='ItemChooser' component={ItemChooser} />
     </Signup.Navigator>
   )
 }

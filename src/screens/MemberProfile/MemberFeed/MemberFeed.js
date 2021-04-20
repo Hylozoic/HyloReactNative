@@ -69,7 +69,7 @@ export default function MemberFeed ({
   )
 }
 
-export function ContentRow ({ item, itemType, showPost, showTopic, showMember, goToGroup }) {
+export function ContentRow ({ item, itemType, showPost, showTopic, showMember, goToGroup, respondToEvent }) {
   let content, postId
   if (itemType === 'post') {
     postId = item.id
@@ -80,6 +80,7 @@ export function ContentRow ({ item, itemType, showPost, showTopic, showMember, g
         showMember={showMember}
         showTopic={showTopic}
         post={item}
+        respondToEvent={response => respondToEvent(postId, response)}
         creator={item.creator}
         commenters={item.commenters}
         groups={item.groups}

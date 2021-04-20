@@ -19,11 +19,16 @@ import Button from 'components/Button'
 import InlineEditor, { toHtml } from 'components/InlineEditor'
 import Icon from 'components/Icon'
 import styles from './PostDetails.styles'
+import respondToEvent from 'store/actions/respondToEvent'
 
 export default class PostDetails extends React.Component {
   state = {
-    commentText: ''
+    replyingToName: null,
+    commentText: '',
+    reaplyingToCommentId: null
   }
+  commentsRef = React.createRef()
+  editorRef = React.createRef()
 
   componentDidMount () {
     this.props.fetchPost()
@@ -36,22 +41,27 @@ export default class PostDetails extends React.Component {
     return !!nextProps.isFocused
   }
 
-  onShowTopic = (topicId) => this.props.showTopic(topicId, get('post.groups.0.id', this.props))
+  onShowTopic = (topicId) =>
+    this.props.showTopic(topicId, get('post.groups.0.id', this.props))
 
-  handleCreateComment = (commentText) => {
+  handleCreateComment = async commentText => {
     const commentTextAsHtml = toHtml(commentText)
 
     if (!isEmpty(commentTextAsHtml)) {
       this.setState(() => ({ submitting: true }))
-      return this.props.createComment(commentTextAsHtml)
-        .then(({ error }) => {
-          if (error) {
-            Alert.alert("Your comment couldn't be saved; please try again.")
-            this.setState(() => ({ submitting: false }))
-          } else {
-            this.setState(() => ({ commentText: '', submitting: false }))
-          }
-        })
+
+      const { error } = await this.props.createComment({
+        text: commentTextAsHtml,
+        parentCommentId: this.state.reaplyingToCommentId
+      })
+
+      this.setState(() => ({ submitting: false }))
+
+      if (error) {
+        Alert.alert("Your comment couldn't be saved; please try again.")
+      } else {
+        this.handleCommentReplyCancel()
+      }
     }
   }
 
@@ -59,26 +69,55 @@ export default class PostDetails extends React.Component {
     this.setState(() => ({ commentText }))
   }
 
+  handleCommentReplyCancel = callback => {
+    this.setState({ replyingToName: null, commentText: '' }, () => {
+      this.commentsRef?.current.highlightComment(null)
+      this.editorRef?.editorInputRef.current.clear()
+      this.editorRef?.editorInputRef.current.blur()
+      callback && callback()
+    })
+  }
+
+  handleCommentReply = (comment, { mention = false }) => {
+    this.handleCommentReplyCancel(() => {
+      this.setState({ replyingToName: comment.creator.name, commentText: '' })
+      this.setState({ reaplyingToCommentId: comment.parentComment || comment.id })
+  
+      this.commentsRef?.current.highlightComment(comment)
+      this.commentsRef?.current.scrollToComment(comment)
+  
+      // TODO: highlight/select current entry we're commenting to in flatlist      
+      this.editorRef?.editorInputRef.current.clear()
+  
+      if (mention) this.editorRef?.insertMention(comment.creator)
+  
+      this.editorRef?.editorInputRef.current.focus()  
+    })
+  }
+
   renderPostDetails = (panHandlers) => {
-    const { post, currentUser, showMember } = this.props
+    const { post, currentUser, respondToEvent, showMember } = this.props
     const slug = get('groups.0.slug', post)
     const isMember = find(member => member.id === currentUser.id, post.members)
     const location = post.location || (post.locationObject && post.locationObject.fullText)
 
     return (
-      <Comments
+      <Comments style={styles.commentsScrollView}
+        ref={this.commentsRef}
+        postId={post.id}
+        onReply={this.handleCommentReply}
         header={(
           <PostCardForDetails
             {...this.props}
+            respondToEvent={respondToEvent}
             showTopic={this.onShowTopic}
             isMember={isMember}
             location={location}
           />
         )}
-        postId={post.id}
+        slug={slug}
         showMember={showMember}
         showTopic={this.onShowTopic}
-        slug={slug}
         panHandlers={panHandlers}
       />
     )
@@ -86,24 +125,35 @@ export default class PostDetails extends React.Component {
 
   render () {
     const { post } = this.props
-    const { commentText, submitting } = this.state
+    const { commentText, replyingToName, submitting } = this.state
     const groupId = get('groups.0.id', post)
 
     if (!post?.creator || !post?.title) return <LoadingScreen />
 
     return (
-      <SafeAreaView edges={['right', 'left', 'top']} style={styles.container}>
+      <SafeAreaView style={styles.container} edges={['right', 'left', 'top']}>
         <KeyboardAccessoryView
           contentContainerStyle={{ marginBottom: 0, borderWidth: 0 }}
           // TODO: Calculate these?
           spaceBetweenKeyboardAndAccessoryView={isIOS ? -79 : 0}
           contentOffsetKeyboardOpened={isIOS ? -45 : 0}
           renderScrollable={this.renderPostDetails}>
+            {replyingToName && (
+              <View style={styles.commentPrompt}>
+                <Text style={styles.commentPromptText}>
+                  Replying to <Text style={{ fontWeight: 'bold' }}>
+                    {replyingToName}</Text> {'\u00B7'} </Text>
+                <TouchableOpacity onPress={() => this.handleCommentReplyCancel()}>
+                  <Text style={styles.commentPromptClearLink}>Cancel</Text>
+                </TouchableOpacity>
+              </View>
+            )}
             <InlineEditor
+              style={styles.inlineEditor}
+              onRef={elem => this.editorRef = elem}
               onChange={this.handleCommentOnChange}
               onSubmit={this.handleCreateComment}
               value={commentText}
-              style={styles.inlineEditor}
               submitting={submitting}
               placeholder='Write a comment...'
               groupId={groupId}
@@ -116,16 +166,17 @@ export default class PostDetails extends React.Component {
 }
 
 export function PostCardForDetails ({
-  post,
   currentUser,
   editPost,
+  goToGroup,
+  goToMembers,
   isProject,
   joinProject,
   leaveProject,
+  post,
+  respondToEvent,
   showMember,
-  showTopic,
-  goToMembers,
-  goToGroup
+  showTopic
 }) {
   const slug = get('groups.0.slug', post)
   const isMember = find(member => member.id === currentUser.id, post.members)
@@ -151,15 +202,17 @@ export function PostCardForDetails ({
       />
       <PostImage imageUrls={post.imageUrls} linked />
       <PostBody
-        type={post.type}
-        title={post.title}
         details={post.details}
-        startTime={post.startTime}
         endTime={post.endTime}
         linkPreview={post.linkPreview}
-        slug={slug}
+        myEventResponse={post.myEventResponse}
+        respondToEvent={respondToEvent}
         showMember={showMember}
         showTopic={showTopic}
+        slug={slug}
+        startTime={post.startTime}
+        title={post.title}
+        type={post.type}
       />
       {!isEmpty(post.fileUrls) && <Files urls={post.fileUrls} />}
       {isProject && (
@@ -172,7 +225,7 @@ export function PostCardForDetails ({
       )}
       {isProject && (
         <JoinProjectButton
-          style={styles.joinButton}
+          style={styles.projectJoinButton}
           leaving={isMember}
           onPress={isMember ? leaveProject : joinProject}
         />
@@ -194,9 +247,12 @@ export function PostCardForDetails ({
       <PostFooter
         style={styles.postFooter}
         id={post.id}
+        type={post.type}
         currentUser={currentUser}
         commenters={post.commenters}
-        commentsTotal={post.commentsTotal}
+        commentersTotal={post.commentersTotal}
+        members={post.members}
+        eventInvitations={post.eventInvitations}
         votesTotal={post.votesTotal}
         myVote={post.myVote}
         showActivityLabel

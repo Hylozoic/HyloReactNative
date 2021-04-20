@@ -84,6 +84,7 @@ Array [
 exports[`mapStateToProps returns the right keys 1`] = `
 Object {
   "location": undefined,
+  "locationId": undefined,
 }
 `;
 

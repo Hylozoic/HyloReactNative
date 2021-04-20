@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { View, ScrollView, Text } from 'react-native'
 import SafeAreaView from 'react-native-safe-area-view'
 import SettingControl from 'components/SettingControl'
 import Button from 'components/Button'
@@ -76,68 +76,70 @@ export default class SignupFlow1 extends React.Component {
   
     return (
       <SafeAreaView style={styles.container}>
-        <KeyboardFriendlyView>
-          <View style={styles.header}>
-            <Text style={styles.title}>Hi there stranger!</Text>
-            <Text style={styles.subTitle}>
-              To kick things off, tell us a bit more about yourself and get your account off the ground.
-            </Text>
-          </View>
-          <View style={styles.content}>
-            <SettingControl
-              label='Your Full Name'
-              value={name}
-              onChange={value => this.updateField('name', value)}
-              error={errors.name}
-              returnKeyType='next'
-              onSubmitEditing={() => this.emailControlRef.current.focus()}
-            />
-            <SettingControl
-              ref={this.emailControlRef}
-              label='Email Address'
-              value={email}
-              keyboardType='email-address'
-              autoCapitalize='none'
-              autoCorrect={false}
-              onChange={value => this.updateField('email', value)}
-              error={errors.email}
-              returnKeyType='next'
-              onSubmitEditing={() => this.passwordControlRef.current.focus()}
-            />
-            {showPasswordField && (
+        <ScrollView>
+          <KeyboardFriendlyView>
+            <View style={styles.header}>
+              <Text style={styles.title}>Hi there stranger!</Text>
+              <Text style={styles.subTitle}>
+                To kick things off, tell us a bit more about yourself and get your account off the ground.
+              </Text>
+            </View>
+            <View style={styles.content}>
               <SettingControl
-                ref={this.passwordControlRef}
-                label='Password'
-                value={password}
-                onChange={value => this.updateField('password', value)}
-                toggleSecureTextEntry
-                error={errors.password}
+                label='Your Full Name'
+                value={name}
+                onChange={value => this.updateField('name', value)}
+                error={errors.name}
                 returnKeyType='next'
-                onSubmitEditing={() => this.confirmPasswordControlRef.current.focus()}
+                onSubmitEditing={() => this.emailControlRef.current.focus()}
               />
-            )}
-            {showPasswordField && (
               <SettingControl
-                ref={this.confirmPasswordControlRef}
-                label='Confirm Password'
-                value={confirmPassword}
-                onChange={value => this.updateField('confirmPassword', value)}
-                toggleSecureTextEntry
-                error={errors.confirmPassword}
-                returnKeyType='go'
-                onSubmitEditing={this.submit}
+                ref={this.emailControlRef}
+                label='Email Address'
+                value={email}
+                keyboardType='email-address'
+                autoCapitalize='none'
+                autoCorrect={false}
+                onChange={value => this.updateField('email', value)}
+                error={errors.email}
+                returnKeyType='next'
+                onSubmitEditing={() => this.passwordControlRef.current.focus()}
               />
-            )}
-          </View>
-          <View style={styles.footer}>
-            <Button
-              style={styles.continueButton}
-              text={pending ? 'Saving...' : 'Continue'}
-              onPress={this.submit}
-              disabled={!!pending}
-            />
-          </View>
-        </KeyboardFriendlyView>
+              {showPasswordField && (
+                <SettingControl
+                  ref={this.passwordControlRef}
+                  label='Password'
+                  value={password}
+                  onChange={value => this.updateField('password', value)}
+                  toggleSecureTextEntry
+                  error={errors.password}
+                  returnKeyType='next'
+                  onSubmitEditing={() => this.confirmPasswordControlRef.current.focus()}
+                />
+              )}
+              {showPasswordField && (
+                <SettingControl
+                  ref={this.confirmPasswordControlRef}
+                  label='Confirm Password'
+                  value={confirmPassword}
+                  onChange={value => this.updateField('confirmPassword', value)}
+                  toggleSecureTextEntry
+                  error={errors.confirmPassword}
+                  returnKeyType='go'
+                  onSubmitEditing={this.submit}
+                />
+              )}
+            </View>
+            <View style={styles.footer}>
+              <Button
+                style={styles.continueButton}
+                text={pending ? 'Saving...' : 'Continue'}
+                onPress={this.submit}
+                disabled={!!pending}
+              />
+            </View>
+          </KeyboardFriendlyView>
+        </ScrollView>
       </SafeAreaView>
     )
   }

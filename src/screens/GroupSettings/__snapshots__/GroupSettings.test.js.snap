@@ -93,7 +93,7 @@ exports[`GroupSettings matches the last snapshot 1`] = `
     </Text>
     <Component
       allowFontScaling={true}
-      onChangeText={[Function]}
+      onFocus={[Function]}
       rejectResponderTermination={true}
       underlineColorAndroid="transparent"
     />

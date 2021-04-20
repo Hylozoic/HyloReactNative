@@ -1,4 +1,8 @@
-import { capeCod10, rhino60, rhino30, fuchsiaPink, prim, caribbeanGreen, white } from 'style/colors'
+import { POST_TYPES } from 'store/models/Post'
+import {
+  capeCod10, rhino60, rhino30, caribbeanGreen,
+  white, rhino05, rhino, rhino80
+} from 'style/colors'
 
 export default {
   container: {
@@ -37,9 +41,9 @@ export default {
     marginHorizontal: 18,
     marginBottom: 18
   },
-  joinButton: {
-    backgroundColor: prim,
-    color: fuchsiaPink,
+  projectJoinButton: {
+    backgroundColor: POST_TYPES.project.backgroundColor,
+    color: POST_TYPES.project.primaryColor,
     marginHorizontal: 12,
     marginBottom: 10
   },
@@ -51,5 +55,18 @@ export default {
   },
   memberCount: {
     color: caribbeanGreen
+  },
+  commentPrompt: {
+    paddingHorizontal: 10,
+    paddingTop: 10,
+    paddingBottom: 5,
+    backgroundColor: rhino05,
+    flexDirection: 'row'
+  },
+  commentPromptText: {
+    color: rhino80
+  },
+  commentPromptClearLink: {
+    color: rhino
   }
 }

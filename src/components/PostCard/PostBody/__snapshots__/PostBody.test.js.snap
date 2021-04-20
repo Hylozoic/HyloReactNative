@@ -2,9 +2,11 @@
 
 exports[`matches the last snapshot 1`] = `
 <View>
-  <Text>
-    Combined breaks and links
-  </Text>
+  <View>
+    <Text>
+      Combined breaks and links
+    </Text>
+  </View>
   <View>
     <Text
       onLongPress={null}

@@ -41,19 +41,20 @@ export default class PostCard extends React.PureComponent {
 
   render () {
     const {
-      post,
-      creator,
       commenters,
+      creator,
+      goToGroup,
       groups,
+      hideDetails,
+      hideMenu,
       imageUrls,
       isPinned,
-      topics,
+      post,
+      respondToEvent,
+      shouldShowGroups,
       showMember,
       showTopic,
-      goToGroup,
-      hideMenu,
-      hideDetails,
-      shouldShowGroups
+      topics
     } = this.props
     const slug = get('0.slug', groups)
 
@@ -74,17 +75,19 @@ export default class PostCard extends React.PureComponent {
         />
         <PostImage imageUrls={imageUrls} />
         <PostBody
-          type={post.type}
-          title={post.title}
           details={post.details}
-          startTime={post.startTime}
           endTime={post.endTime}
+          hideDetails={hideDetails}
           linkPreview={post.linkPreview}
-          slug={slug}
+          myEventResponse={post.myEventResponse}
+          respondToEvent={respondToEvent}
+          shouldTruncate
           showMember={showMember}
           showTopic={showTopic}
-          shouldTruncate
-          hideDetails={hideDetails}
+          slug={slug}
+          startTime={post.startTime}
+          title={post.title}
+          type={post.type}
         />
         <PostGroups
           style={styles.groups}
@@ -97,7 +100,9 @@ export default class PostCard extends React.PureComponent {
         <PostFooter
           id={post.id}
           commenters={commenters}
-          commentsTotal={post.commentsTotal}
+          commentersTotal={post.commentersTotal}
+          members={post.members}
+          eventInvitations={post.eventInvitations}
           votesTotal={post.votesTotal}
           myVote={post.myVote}
         />

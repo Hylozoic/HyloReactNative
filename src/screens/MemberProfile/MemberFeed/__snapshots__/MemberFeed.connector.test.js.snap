@@ -6,6 +6,7 @@ Object {
   "fetchMemberPosts": [Function],
   "fetchMemberUpvotes": [Function],
   "goToGroup": [Function],
+  "respondToEvent": [Function],
   "setChoice": [Function],
   "showPost": [Function],
   "showTopic": [Function],

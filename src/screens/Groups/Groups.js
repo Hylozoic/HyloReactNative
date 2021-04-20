@@ -59,7 +59,7 @@ export default function Groups ({
 
 export function GroupRow ({ group, goToGroup, goToGroupDetail }) {
   const { avatarUrl, description, name, memberCount, childGroups } = group
-  const childGroupsCount = childGroups.count()
+  const childGroupsCount = childGroups?.count()
   const isMember = useSelector(getMemberships).find(m => m.group.id === group.id) || false
   const onPressFunc = isMember ? goToGroup : goToGroupDetail
   const statusText = group.memberStatus === 'member'

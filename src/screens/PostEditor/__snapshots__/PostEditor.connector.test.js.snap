@@ -3,7 +3,6 @@
 exports[`PostEditor mapDispatchToProps calls save correctly 1`] = `
 Object {
   "fetchPost": [Function],
-  "pollingFindOrCreateLocation": [Function],
   "save": [Function],
   "upload": [Function],
 }
@@ -244,7 +243,6 @@ Array [
 exports[`PostEditor mapDispatchToProps maps the action generators 1`] = `
 Object {
   "fetchPost": [Function],
-  "pollingFindOrCreateLocation": [Function],
   "save": [Function],
   "upload": [Function],
 }
@@ -401,13 +399,13 @@ Object {
     "foo.png",
   ],
   "isNewPost": true,
-  "isProject": false,
   "pendingDetailsText": false,
   "post": Object {
     "commenters": Array [],
     "creator": Object {
       "id": "10",
     },
+    "eventInvitations": Array [],
     "fileAttachments": Array [],
     "fileUrls": Array [],
     "groups": Array [
@@ -423,8 +421,10 @@ Object {
       "bar.png",
       "foo.png",
     ],
+    "isPublic": undefined,
     "linkPreview": undefined,
     "members": Array [],
+    "myEventResponse": "no",
     "pinned": undefined,
     "topics": Array [],
   },

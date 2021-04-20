@@ -7,13 +7,16 @@ import {
   View,
   Alert
 } from 'react-native'
-import { get, uniq, uniqBy, isEmpty } from 'lodash/fp'
+import { get, uniq, uniqBy, isEmpty, capitalize } from 'lodash/fp'
 import moment from 'moment'
 import { validateTopicName } from 'hylo-utils/validators'
 import { rhino30 } from 'style/colors'
 import { showToast, hideToast } from 'util/toast'
 import { buildModalScreenOptions } from 'navigation/header'
 import { MAX_TITLE_LENGTH } from './PostEditor.store'
+import RNPickerSelect from 'react-native-picker-select'
+import LocationPicker from 'screens/LocationPicker/LocationPicker'
+// TODO: Convert all 3 of the below to LocationPicker style calls
 // ProjectMembers Chooser
 import scopedFetchPeopleAutocomplete from 'store/actions/scopedFetchPeopleAutocomplete'
 import scopedGetPeopleAutocomplete from 'store/selectors/scopedGetPeopleAutocomplete'
@@ -23,11 +26,8 @@ import getTopicsForAutocompleteWithNew from 'store/selectors/getTopicsForAutocom
 import TopicRow from 'screens/TopicList/TopicRow'
 // Group Chooser
 import GroupChooserItemRow from 'screens/ItemChooser/GroupChooserItemRow'
-// Location Picker
-import { locationSearch } from 'screens/ItemChooser/ItemChooser.store'
-import LocationPickerItemRow from 'screens/ItemChooser/LocationPickerItemRow'
-//
 import GroupsList from 'components/GroupsList'
+
 import ProjectMembersSummary from 'components/ProjectMembersSummary'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 import Icon from 'components/Icon'
@@ -43,12 +43,12 @@ import ItemChooserItemRow from 'screens/ItemChooser/ItemChooserItemRow'
 export default class PostEditor extends React.Component {
   constructor (props) {
     super(props)
-    const { post, imageUrls, fileUrls, isProject } = props
+    const { post, imageUrls, fileUrls } = props
     this.scrollView = React.createRef()
     this.state = {
       scrollViewHeight: 0,
       title: get('title', post) || '',
-      type: get('type', post) || (isProject ? 'project' : 'discussion'),
+      type: get('type', post) || 'discussion',
       groups: get('groups', post) || [],
       imageUrls,
       fileUrls,
@@ -71,10 +71,8 @@ export default class PostEditor extends React.Component {
 
   setHeader = () => {
     const { isSaving } = this.state
-    const { navigation, isNewPost, isProject } = this.props
-    const subject = isProject
-      ? 'Project'
-      : 'Post'
+    const { navigation, isNewPost } = this.props
+    const subject = capitalize(this.state?.type || '')
     const headerTitle = isNewPost
       ? `New ${subject}`
       : `Edit ${subject}`
@@ -94,19 +92,11 @@ export default class PostEditor extends React.Component {
   }
 
   componentDidMount () {
-    const { navigation, isNewPost, pollingFindOrCreateLocation } = this.props
-    // For Location Selector
-    navigation.setParams({ pollingFindOrCreateLocation })
+    const { isNewPost } = this.props
     if (!isNewPost) {
       this.props.fetchPost()
     }
     this.setHeader()
-  }
-
-  componentDidUpdate (prevProps, prevState) {
-    if (prevState.isSaving !== this.state.isSaving) {
-      this.setHeader()
-    }
   }
 
   shouldComponentUpdate (nextProps, nextState) {
@@ -115,6 +105,14 @@ export default class PostEditor extends React.Component {
 
   handleDetailsOnChange = (detailsText) => {
     this.setState({ detailsText })
+  }
+
+  handleTypeOnChange = type => {
+    !this.state.isSaving && this.setState({ type }, this.setHeader)
+  }
+
+  setIsSaving = isSaving => {
+    this.setState({ isSaving }, this.setHeader)
   }
 
   _doSave = () => {
@@ -138,19 +136,17 @@ export default class PostEditor extends React.Component {
       startTime: startTime && startTime.getTime(),
       endTime: endTime && endTime.getTime(),
       location: location,
-      locationId: locationObject && locationObject.id
+      locationId: locationObject && locationObject.id !== 'NEW' && locationObject.id
     }
 
     return save(postData)
-      // .catch(e => {
-      //   this.setState({ isSaving: false })
-      // })
+      .catch(e => { this.setIsSaving(false) })
   }
 
   save = () => {
     const { announcementEnabled } = this.state
 
-    this.setState({ isSaving: true })
+    this.setIsSaving(true)
 
     if (announcementEnabled) {
       Alert.alert(
@@ -161,7 +157,7 @@ export default class PostEditor extends React.Component {
           {
             text: 'Go Back',
             style: 'cancel',
-            onPress: () => this.setState({ isSaving: false })
+            onPress: () => this.setIsSaving(false)
           }
         ])
     } else {
@@ -202,23 +198,6 @@ export default class PostEditor extends React.Component {
       groups: this.state.groups.filter(c => c.id !== groupId)
     }))
   }
-
-  setLocation = locationData => {
-    const pollingFindOrCreateLocation = this.props.route.params.pollingFindOrCreateLocation
-    const isPlainTextResult = (get('id', locationData) === 'NEW')
-
-    if (isPlainTextResult) {
-      this.setState(() => ({ location: locationData.fullText }))
-    } else {
-      this.setState(() => ({ location: null }))
-      pollingFindOrCreateLocation(
-        locationData,
-        locationObject => this.setState(() => ({ locationObject })
-        ))
-    }
-  }
-
-  removeLocation = () => this.setState(state => ({ locationObject: null }))
 
   removeFile = url => {
     this.setState({
@@ -299,7 +278,7 @@ export default class PostEditor extends React.Component {
     const { navigation } = this.props
     const { members } = this.state
     const screenTitle = 'Project Members'
-    navigation.navigate('ItemChooserScreen', {
+    navigation.navigate('ItemChooser', {
       screenTitle,
       searchPlaceholder: 'Type in the names of people to add to project',
       ItemRowComponent: ItemChooserItemRow,
@@ -313,7 +292,7 @@ export default class PostEditor extends React.Component {
   showTopicsPicker = () => {
     const { navigation } = this.props
     const screenTitle = 'Pick a Topic'
-    navigation.navigate('ItemChooserScreen', {
+    navigation.navigate('ItemChooser', {
       screenTitle,
       searchPlaceholder: 'Search for a topic by name',
       ItemRowComponent: TopicRow,
@@ -327,7 +306,7 @@ export default class PostEditor extends React.Component {
   showGroupsEditor = () => {
     const { navigation, groupOptions } = this.props
     const screenTitle = 'Post in Groups'
-    navigation.navigate('ItemChooserScreen', {
+    navigation.navigate('ItemChooser', {
       screenTitle,
       searchPlaceholder: 'Search for group by name',
       defaultSuggestedItemsLabel: 'Your Groups',
@@ -340,20 +319,13 @@ export default class PostEditor extends React.Component {
     })
   }
 
-  showLocationEditor = () => {
-    const { navigation } = this.props
-    const screenTitle = 'Choose a Location'
-    const initialSearchTerm = get('location', this.state) || get('locationObject.fullText', this.state)
-    // TODO: Get current location to send as proximity for location search
-    // const curLocation = locationObject || get('0.locationObject', groups) || get('locationObject', currentUser)
-    navigation.navigate('ItemChooserScreen', {
-      screenTitle,
-      searchPlaceholder: 'Search for your location',
-      initialSearchTerm,
-      ItemRowComponent: LocationPickerItemRow,
-      pickItem: this.setLocation,
-      searchTermFilter: searchTerm => searchTerm,
-      fetchSearchSuggestions: locationSearch
+  showLocationPicker = () => {
+    LocationPicker({
+      navigation: this.props.navigation,      
+      initialSearchTerm: get('location', this.state) ||
+        get('locationObject.fullText', this.state),
+      onPick: (locationObject) => this.setState(() =>
+        ({ location: locationObject.fullText, locationObject }))
     })
   }
 
@@ -383,7 +355,7 @@ export default class PostEditor extends React.Component {
   }
 
   render () {
-    const { currentGroup, canModerate, post, pendingDetailsText, isProject } = this.props
+    const { currentGroup, canModerate, post, pendingDetailsText } = this.props
     const {
       fileUrls, imageUrls, isSaving, topics, title, detailsText, type,
       filePickerPending, imagePickerPending, announcementEnabled,
@@ -402,6 +374,7 @@ export default class PostEditor extends React.Component {
       showImagePicker: this.showImagePicker,
       showFilePicker: this.showFilePicker
     }
+    const isProject = type == 'project'
 
     return (
       <KeyboardFriendlyView style={styles.container}>
@@ -413,19 +386,10 @@ export default class PostEditor extends React.Component {
           keyboardDismissMode='on-drag'
         >
           <View style={styles.scrollContent}>
-            {!isProject && (
-              <>
-                <Text style={styles.sectionLabel}>What are you posting today?</Text>
-                <View style={[styles.typeButtonRow, styles.section]}>
-                  {['discussion', 'request', 'offer', 'resource'].map(t => (
-                    <TypeButton
-                      type={t} key={t} selected={t === type}
-                      onPress={() => !isSaving && this.setState({ type: t })}
-                    />
-                  ))}
-                </View>
-              </>
-            )}
+            <View style={[styles.typeSelector.row, styles.section, { marginTop: -3 }]}>
+              {/* <Text style={styles.sectionLabel}>What are you posting today?</Text> */}
+              <TypeSelector value={type} onValueChange={this.handleTypeOnChange} disabled={isSaving} />
+            </View>
             <Text style={styles.sectionLabel}>Title</Text>
             <View style={[styles.section, styles.textInputWrapper]}>
               <TextInput
@@ -523,7 +487,7 @@ export default class PostEditor extends React.Component {
                   styles.textInputWrapper,
                   styles.topics
                 ]}
-                onPress={this.showLocationEditor}
+                onPress={this.showLocationPicker}
               >
                 <View style={styles.topicLabel}>
                   <Text style={styles.sectionLabel}>Location</Text>
@@ -600,6 +564,30 @@ const detailsPlaceholder = 'What else should we know?'
 
 const topicsPlaceholder = 'Add topics.'
 
+export function TypeSelector (props) {
+  return (
+    <RNPickerSelect {...props}
+      style={styles.typeSelector[props.value]}
+      useNativeAndroidPickerStyle={false}
+      items={[
+          { label: 'Discussion'.toUpperCase(), value: 'discussion',
+            color: styles.typeSelector['discussion'].inputIOS.color },
+          { label: 'Event'.toUpperCase(), value: 'event',
+            color: styles.typeSelector['event'].inputIOS.color },
+          { label: 'Offer'.toUpperCase(), value: 'offer',
+            color: styles.typeSelector['offer'].inputIOS.color },
+          { label: 'Resource'.toUpperCase(), value: 'resource',
+            color: styles.typeSelector['resource'].inputIOS.color },
+          { label: 'Project'.toUpperCase(), value: 'project',
+            color: styles.typeSelector['project'].inputIOS.color },
+          { label: 'Request'.toUpperCase(), value: 'request',
+            color: styles.typeSelector['request'].inputIOS.color }
+      ]}
+      Icon={() => <Icon name='ArrowDown' style={styles.typeSelector.icon} />}
+    />
+  )
+}
+
 export function Toolbar ({ post, canModerate, filePickerPending, imagePickerPending, announcementEnabled, toggleAnnoucement, showFilePicker, showImagePicker }) {
   return (
     <View style={styles.bottomBar}>
@@ -638,20 +626,6 @@ export function TopicPill ({ topic, topic: { name }, onPress }) {
     <TouchableOpacity onPress={onPress} style={styles.topicPill}>
       <Text style={styles.topicText}>#{name.toLowerCase()}</Text>
       <Icon name='Ex' style={styles.topicRemove} />
-    </TouchableOpacity>
-  )
-}
-
-export function TypeButton ({ type, selected, onPress }) {
-  const s = styles.typeButton
-  return (
-    <TouchableOpacity
-      onPress={onPress}
-      style={[s.box, selected && s[type].box]}
-    >
-      <Text style={[s.text, selected && s[type].text]}>
-        {type.toUpperCase()}
-      </Text>
     </TouchableOpacity>
   )
 }

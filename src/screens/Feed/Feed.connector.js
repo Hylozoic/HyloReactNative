@@ -63,7 +63,7 @@ export function mapDispatchToProps (dispatch, { navigation }) {
     newPost: (groupId, topicName) =>
       navigation.navigate('Edit Post', { groupId, topicName }),
     newProject: (groupId) =>
-      navigation.navigate('Edit Post', { groupId, isProject: true }),
+      navigation.navigate('Edit Post', { groupId, type: 'project' }),
     showPost: id => navigation.navigate('Post Details', { id }),
     showMember: id => navigation.navigate('Member', { id }),
     goToGroup: makeGoToGroup(dispatch),

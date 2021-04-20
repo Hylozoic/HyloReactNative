@@ -39,20 +39,6 @@ describe('MemberProfile', () => {
     expect(renderer.getRenderOutput()).toMatchSnapshot()
   })
 
-  it('loads a new user when user id changes', () => {
-    const renderer = ReactTestRenderer.create(<MemberProfile {...props} />)
-    renderer.getInstance().componentDidUpdate({ id: 2 })
-    // Once for the first render, once for the update
-    expect(props.fetchPerson.mock.calls.length).toBe(2)
-  })
-
-  it('does nothing if unfocused', () => {
-    const renderer = ReactTestRenderer.create(<MemberProfile {...props} />)
-    const nextProps = { isFocused: false }
-    const actual = renderer.getInstance().shouldComponentUpdate(nextProps)
-    expect(actual).toBe(false)
-  })
-
   it('shows loading without a person', () => {
     props.person = undefined
     const renderer = new ReactShallowRenderer()

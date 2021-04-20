@@ -44,7 +44,6 @@ beforeAll(() => {
   stateProps = {
     id: 'testpost',
     post: { id: 'testpost' },
-    isProject: false,
     currentUser: { id: 'currentuser' }
   }
 
@@ -69,7 +68,7 @@ describe('mergeProps', () => {
   })
 
   it('createComment', () => {
-    expect(mergedProps.createComment('some comment')).toMatchSnapshot()
+    expect(mergedProps.createComment({ text: 'some comment' })).toMatchSnapshot()
   })
 
   it('showTopic', () => {

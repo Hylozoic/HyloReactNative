@@ -23,7 +23,7 @@ const post = {
   imageUrls: ['foom.png'],
   title: 'Hi',
   details: 'Lo',
-  commenters: [{ id: 9 }, { id: 7 }],
+  commenters: [{ id: 9, name: 'Jebobo Crustacean' }, { id: 7, name: 'Lobster Science' }],
   commentsTotal: 12,
   votesTotal: 8,
   myVote: true,
@@ -90,8 +90,7 @@ describe('PostDetails', () => {
     await act(async () => (
       instance.handleCreateComment('some text [amention:3332] #topic <some encoded stuff>')
     ))
-    // expect(instance.state.submitting).toBeTruthy()
-    expect(props.createComment).toHaveBeenCalledWith('some text <a href="#" data-entity-type="mention" data-user-id="3332">amention</a> #topic &lt;some encoded stuff&gt;')
+    expect(props.createComment).toHaveBeenCalledWith({ text: 'some text <a href="#" data-entity-type="mention" data-user-id="3332">amention</a> #topic &lt;some encoded stuff&gt;', "parentCommentId": null })
     expect(instance.state.submitting).toBeFalsy()
     expect(instance.state.commentText).toBe('')
   })

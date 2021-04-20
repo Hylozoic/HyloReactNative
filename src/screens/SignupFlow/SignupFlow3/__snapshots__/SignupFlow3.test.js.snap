@@ -2,29 +2,32 @@
 
 exports[`matches last snapshot 1`] = `
 <SafeAreaViewMock>
-  <KeyboardFriendlyView>
-    <View
-      styles={Object {}}
-    >
-      <Text>
-        Add your location
-      </Text>
-      <Text>
-        Add your location to see more relevant content and find people and projects near you.
-      </Text>
-    </View>
-    <View>
-      <SettingControl
-        label="Where do you call home"
-        value="Hull"
-      />
-    </View>
-    <View>
-      <Button
-        onPress={[Function]}
-        text="Continue"
-      />
-    </View>
-  </KeyboardFriendlyView>
+  <ScrollView>
+    <KeyboardFriendlyView>
+      <View
+        styles={Object {}}
+      >
+        <Text>
+          Add your location
+        </Text>
+        <Text>
+          Add your location to see more relevant content and find people and projects near you.
+        </Text>
+      </View>
+      <View>
+        <SettingControl
+          label="Where do you call home"
+          onFocus={[Function]}
+          value="Hull"
+        />
+      </View>
+      <View>
+        <Button
+          onPress={[Function]}
+          text="Continue"
+        />
+      </View>
+    </KeyboardFriendlyView>
+  </ScrollView>
 </SafeAreaViewMock>
 `;

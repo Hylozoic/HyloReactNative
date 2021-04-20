@@ -226,8 +226,32 @@ exports[`ItemChooser shallow renders as expected 1`] = `
     fetchSearchSuggestions={[Function]}
     getSearchSuggestions={[Function]}
     initialItems={Array []}
+    navigation={
+      Object {
+        "setOptions": [MockFunction],
+        "setParams": [MockFunction],
+      }
+    }
     onFocus={[MockFunction]}
-    scope="test"
+    route={
+      Object {
+        "params": Object {
+          "ItemRowComponent": [Function],
+          "fetchSearchSuggestions": [Function],
+          "getSearchSuggestions": [Function],
+          "initialItems": Array [
+            Object {
+              "id": "member1",
+            },
+            Object {
+              "id": "member2",
+            },
+          ],
+          "screenTitle": "Screen Title",
+          "updateItems": [MockFunction],
+        },
+      }
+    }
     searchPlaceholder="Begin type to searching"
     setSearchTerm={[Function]}
     suggestedItems={Array []}

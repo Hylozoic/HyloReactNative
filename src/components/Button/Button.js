@@ -44,8 +44,8 @@ export default function Button (props) {
       <TouchableOpacity disabled={disabled} onPress={disabled ? () => {} : onPress} style={styles.wrapper}>
         <View style={buttonStyle}>
           <View style={styles.buttonInner}>
-            {customIconRender && customIconRender({ ...props, name: iconName, style: iconStyle })}
-            {!customIconRender && iconName && <Icon name={iconName} style={iconStyle} />}
+            {!!customIconRender && customIconRender({ ...props, name: iconName, style: iconStyle })}
+            {!customIconRender && !!iconName && <Icon name={iconName} style={iconStyle} />}
             <Text style={textStyle}>{text}</Text>
           </View>
         </View>

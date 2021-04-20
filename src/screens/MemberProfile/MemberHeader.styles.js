@@ -4,7 +4,7 @@ import {
 
 export default {
   header: {
-    marginBottom: 15
+    marginBottom: 0
   },
   nameRow: {
     flexDirection: 'row',
@@ -30,44 +30,15 @@ export default {
     color: rhino60
   },
   location: {
-    fontSize: 14,
-    color: rhino50,
-    fontFamily: 'Circular-Book'
+    fontSize: 16,
+    color: rhino80,
+    fontFamily: 'Circular-Book',
+    marginBottom: 10
   },
   tagline: {
+    marginBottom: 10,
     fontSize: 16,
     color: rhino80,
     fontFamily: 'Circular-Book'
-  },
-  control: {
-    flex: 1
-  },
-  editableControl: {
-    marginBottom: 5
-  },
-  controlInputRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 10
-  },
-  controlInput: {
-    textAlignVertical: 'top',
-    flex: 1
-  },
-  editIconWrapper: {
-    marginRight: 10
-  },
-  editIcon: {
-    color: rhino60,
-    fontSize: 16
-  },
-  controlError: {
-    paddingTop: 5,
-    paddingBottom: 3
-  },
-  controlErrorText: {
-    fontSize: 13,
-    fontFamily: 'Circular-Book',
-    color: amaranth
   }
 }

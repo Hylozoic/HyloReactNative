@@ -4,29 +4,29 @@ import { StyleSheet } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { createStackNavigator } from '@react-navigation/stack'
 import { isIOS } from 'util/platform'
+import getMe from 'store/selectors/getMe'
 // Helper Components
 import Icon from 'components/Icon'
 import { buildModalScreenOptions, buildTabStackScreenOptions } from 'navigation/header'
+import Avatar from 'components/Avatar'
 // Screens
 import Feed from 'screens/Feed'
-import MembersComponent from 'screens/Members'
-import MemberProfile from 'screens/MemberProfile'
-import TopicsComponent from 'screens/Topics'
-import PostDetails from 'screens/PostDetails'
-import MemberDetails from 'screens/MemberProfile/MemberDetails'
-import MemberSkillEditor from 'screens/MemberProfile/MemberSkillEditor'
-import ProjectMembers from 'screens/ProjectMembers/ProjectMembers'
-import GroupNavigation from 'screens/GroupNavigation'
-import { caribbeanGreen, gainsboro, gunsmoke, rhino05, white } from 'style/colors'
-import Groups from 'screens/Groups'
 import GroupDetail from 'screens/GroupDetail'
+import GroupNavigation from 'screens/GroupNavigation'
+import Groups from 'screens/Groups'
+import MemberDetails from 'screens/MemberProfile/MemberDetails'
+import MemberProfile from 'screens/MemberProfile'
+import MembersComponent from 'screens/Members'
+import MemberSkillEditor from 'screens/MemberProfile/MemberSkillEditor'
 import NewMessage from 'screens/NewMessage'
+import PostDetails from 'screens/PostDetails'
+import ProjectMembers from 'screens/ProjectMembers/ProjectMembers'
+import SearchPage from 'screens/SearchPage'
 import Thread from 'screens/Thread'
 import ThreadList from 'screens/ThreadList'
 import ThreadParticipants from 'screens/ThreadParticipants'
-import SearchPage from 'screens/SearchPage'
-import Avatar from 'components/Avatar'
-import getMe from 'store/selectors/getMe'
+import TopicsComponent from 'screens/Topics'
+import { caribbeanGreen, gainsboro, gunsmoke, rhino05, white } from 'style/colors'
 
 const Messages = createStackNavigator()
 export function MessagesNavigator () {
@@ -85,7 +85,9 @@ export function SearchNavigator () {
 const Home = createStackNavigator()
 export function HomeNavigator () {
   const navigatorProps = {
-    screenOptions: buildTabStackScreenOptions
+    screenOptions: props => ({
+      ...buildTabStackScreenOptions(props)
+    })
   }
   return (
     <Home.Navigator {...navigatorProps}>
@@ -98,8 +100,6 @@ export function HomeNavigator () {
       <Home.Screen name='Members' component={MembersComponent} />
       <Home.Screen name='Member' key='Member' component={MemberProfile} />
       <Home.Screen name='MemberDetails' key='MemberDetails' component={MemberDetails} />
-      <Home.Screen name='MemberSkillEditor' key='MemberSkillEditor' component={MemberSkillEditor}
-        options={{ headerTitle: 'Edit Skills' }} />
       <Home.Screen name='Group Relationships' component={Groups} />
       <Home.Screen name='Group Detail' component={GroupDetail} />
       <Home.Screen name='Topics' component={TopicsComponent} />
@@ -118,6 +118,8 @@ export function MyProfileNavigator () {
           headerLeftOnPress: () => navigation.navigate('Home')
         })}
      />
+    <MyProfile.Screen name='MemberSkillEditor' key='MemberSkillEditor' component={MemberSkillEditor}
+      options={{ headerTitle: 'Edit Skills' }} />
   </MyProfile.Navigator>
 }
 

@@ -7,7 +7,7 @@ const testProps = {
   placeholder: undefined
 }
 
-describe('ItemChooserScreen', () => {
+describe('ItemChooser', () => {
   it('renders as expected (without value)', () => {
     const renderer = new ReactShallowRenderer()
     renderer.render(<SearchBar {...testProps} />)

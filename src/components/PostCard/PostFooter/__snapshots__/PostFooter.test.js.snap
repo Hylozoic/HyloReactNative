@@ -1,28 +1,47 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders as expected 1`] = `
-<View>
+<React.Fragment>
+  <Text>
+    ACTIVITY
+  </Text>
   <View>
-    <Avatar
-      avatarUrl="a.png"
-      hasBorder={true}
-      hasOverlap={false}
-      size="small"
-      zIndex={3}
-    />
-    <Text>
-      36 comments
-    </Text>
+    <View>
+      <Avatar
+        avatarUrl="a.png"
+        hasBorder={true}
+        hasOverlap={false}
+        size="small"
+        zIndex={3}
+      />
+      <Avatar
+        avatarUrl="b.png"
+        hasBorder={true}
+        hasOverlap={true}
+        size="small"
+        zIndex={2}
+      />
+      <Avatar
+        avatarUrl="c.png"
+        hasBorder={true}
+        hasOverlap={true}
+        size="small"
+        zIndex={1}
+      />
+      <Text>
+        You, You and 17 others commented
+      </Text>
+    </View>
+    <ForwardRef
+      onPress={[Function]}
+    >
+      <Icon
+        name="ArrowUp"
+      />
+      <Text>
+        71
+      </Text>
+    </ForwardRef>
   </View>
-  <ForwardRef
-    onPress={[Function]}
-  >
-    <Icon
-      name="ArrowUp"
-    />
-    <Text>
-      71
-    </Text>
-  </ForwardRef>
-</View>
+</React.Fragment>
 `;

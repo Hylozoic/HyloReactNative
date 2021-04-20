@@ -1,6 +1,5 @@
 import { get, replace } from 'lodash/fp'
 import { createSelector } from 'reselect'
-import { fetchMapboxLocations, convertMapboxToLocation } from 'services/mapbox'
 
 export const MODULE_NAME = 'ItemChooser'
 export const SET_SEARCH_TERM = `${MODULE_NAME}/SET_SEARCH_TERM`
@@ -8,17 +7,19 @@ export const SET_SEARCH_SUGGESTIONS = `${MODULE_NAME}/SET_SEARCH_SUGGESTIONS`
 
 export const getModule = state => state[MODULE_NAME]
 
-export const getScope = (_, props) => props.scope ? props.scope : 'defaultItemChooser'
+export const getScreenTitle = (_, props) => props.route.params.screenTitle
+  ? props.route.params.screenTitle
+  : 'defaultItemChooser'
 
 export const getSearchTerm = createSelector(
   getModule,
-  getScope,
+  getScreenTitle,
   (module, scope) => get([scope, 'searchTerm'], module)
 )
 
 export const getSearchSuggestions = createSelector(
   getModule,
-  getScope,
+  getScreenTitle,
   (module, scope) => get([scope, 'searchSuggestions'], module)
 )
 
@@ -51,28 +52,6 @@ export function setSearchSuggestions (scope, searchSuggestions = []) {
     payload: {
       scope,
       searchSuggestions
-    }
-  }
-}
-
-export async function locationSearch (scope, searchTerm, proximity) {
-  const mapboxLocations = await fetchMapboxLocations(searchTerm, { proximity })
-  let locations = mapboxLocations
-    .features
-    .map(feature => ({
-      ...convertMapboxToLocation(feature),
-      id: feature.id
-    }))
-  locations = [
-    { id: 'NEW', fullText: searchTerm },
-    ...locations
-  ]
-
-  return {
-    type: SET_SEARCH_SUGGESTIONS,
-    payload: {
-      scope,
-      searchSuggestions: locations
     }
   }
 }

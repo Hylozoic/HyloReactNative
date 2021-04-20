@@ -1,5 +1,6 @@
 import { get, first, orderBy } from 'lodash/fp'
 import { createSelector } from 'reselect'
+import { ALL_GROUP_ID } from 'store/models/Group'
 import getMemberships from 'store/selectors/getMemberships'
 
 const getLastViewedGroup = createSelector(
@@ -16,7 +17,7 @@ const getLastViewedGroup = createSelector(
 const getCurrentGroupId = createSelector(
   state => get('groupId', state.session),
   getLastViewedGroup,
-  (currentGroupId, lastViewedGroup) => currentGroupId || lastViewedGroup?.id
+  (currentGroupId, lastViewedGroup) => currentGroupId || lastViewedGroup?.id || ALL_GROUP_ID
 )
 
 export default getCurrentGroupId

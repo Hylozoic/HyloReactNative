@@ -104,13 +104,10 @@ const tabs = [
 export function TabBar ({ filter, setSearchFilter }) {
   return (
     <View style={styles.tabBar}>
-      {tabs.map(({ id, label }) => <Tab
-        key={id}
-        id={id}
-        label={label}
-        filter={filter}
-        setSearchFilter={setSearchFilter}
-                                   />)}
+      {tabs.map(({ id, label }) => (
+        <Tab key={id} id={id} label={label}
+          filter={filter} setSearchFilter={setSearchFilter} />
+      ))}
     </View>
   )
 }
@@ -136,10 +133,7 @@ export function SearchResult ({ searchResult, goToPost, goToPerson }) {
       break
     case 'Post':
       component = (
-        <PostCard
-          post={content}
-          goToPost={goToPost}
-        />
+        <PostCard post={content} goToPost={goToPost} />
       )
       break
     case 'Comment':
@@ -161,7 +155,7 @@ export function PersonCard ({ person, goToPerson }) {
         <Avatar avatarUrl={avatarUrl} style={styles.avatar} />
         <View style={styles.nameAndLocation}>
           <Text style={styles.name}>{name}</Text>
-          {location && location.length > 0 && <Text style={styles.location}>{location}</Text>}
+          {location?.length > 0 && <Text style={styles.location}>{location}</Text>}
         </View>
       </View>
     </TouchableOpacity>

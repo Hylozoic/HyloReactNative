@@ -1,4 +1,5 @@
 import { connect } from 'react-redux'
+import respondToEvent from 'store/actions/respondToEvent'
 import {
   makeGetPost,
   makeGetPostCommenters,
@@ -33,4 +34,8 @@ export const makeMapStateToProps = () => {
   return mapStateToProps
 }
 
-export default connect(makeMapStateToProps)
+export const mapDispatchToProps = {
+  respondToEvent
+}
+
+export default connect(makeMapStateToProps, mapDispatchToProps)

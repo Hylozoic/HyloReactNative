@@ -1,18 +1,24 @@
 import { isIOS } from 'util/platform'
 import { StyleSheet } from 'react-native'
+import { POST_TYPES } from 'store/models/Post'
 import {
   caribbeanGreen,
-  fakeAlpha,
-  havelockBlue,
-  jade,
-  limedSpruce,
-  mangoYellow,
-  rhino10,
   rhino30,
-  westSide,
   capeCod40,
-  white
+  white,
+  black
 } from 'style/colors'
+
+const typeSelectorDefaults = {
+  fontSize: 12,
+  fontWeight: 'bold',
+  borderRadius: 5,
+  borderWidth: 0,
+  color: white,
+  padding: isIOS ? 15 : 5,
+  paddingLeft: 10,
+  paddingRight: 0
+}
 
 export default {
   container: {
@@ -47,60 +53,7 @@ export default {
     padding: 0,
     margin: 0
   },
-  detailsEditorContainer: {
-  },
-  typeButtonRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginTop: 10
-  },
-  typeButton: {
-    box: {
-      borderRadius: 4,
-      backgroundColor: rhino10,
-      paddingVertical: 10,
-      width: '23%'
-    },
-    text: {
-      color: limedSpruce,
-      letterSpacing: 0.8,
-      fontSize: 10,
-      textAlign: 'center',
-      fontFamily: 'Circular-Bold'
-    },
-    discussion: {
-      box: {
-        backgroundColor: fakeAlpha(havelockBlue, 0.2)
-      },
-      text: {
-        color: havelockBlue
-      }
-    },
-    request: {
-      box: {
-        backgroundColor: fakeAlpha(westSide, 0.2)
-      },
-      text: {
-        color: westSide
-      }
-    },
-    offer: {
-      box: {
-        backgroundColor: fakeAlpha(jade, 0.2)
-      },
-      text: {
-        color: jade
-      }
-    },
-    resource: {
-      box: {
-        backgroundColor: fakeAlpha(mangoYellow, 0.2)
-      },
-      text: {
-        color: mangoYellow
-      }
-    }
-  },
+  detailsEditorContainer: {},
   section: {
     marginBottom: 8,
     paddingBottom: 8
@@ -108,6 +61,92 @@ export default {
   sectionLabel: {
     fontFamily: 'Circular-Bold'
   },
+
+  // Type Selector
+  typeSelector: {
+    row: {
+      marginTop: 10
+    },
+    icon: {
+      fontSize: 20,
+      marginTop: isIOS ? 12 : 8,
+      marginRight: 10,
+      color: black
+    },
+    discussion: {
+      inputIOS: {
+        ...typeSelectorDefaults,
+        backgroundColor: POST_TYPES['discussion'].backgroundColor,
+        color: POST_TYPES['discussion'].primaryColor
+      },
+      inputAndroid: {
+        ...typeSelectorDefaults,
+        backgroundColor: POST_TYPES['discussion'].backgroundColor,
+        color: POST_TYPES['discussion'].primaryColor
+      },
+    },
+    event: {
+      inputIOS: {
+        ...typeSelectorDefaults,
+        backgroundColor: POST_TYPES['event'].backgroundColor,
+        color: POST_TYPES['event'].primaryColor
+      },
+      inputAndroid: {
+        ...typeSelectorDefaults,
+        backgroundColor: POST_TYPES['event'].backgroundColor,
+        color: POST_TYPES['event'].primaryColor
+      }
+    },
+    offer: {
+      inputIOS: {
+        ...typeSelectorDefaults,
+        backgroundColor: POST_TYPES['offer'].backgroundColor,
+        color: POST_TYPES['offer'].primaryColor
+      },
+      inputAndroid: {
+        ...typeSelectorDefaults,
+        backgroundColor: POST_TYPES['offer'].backgroundColor,
+        color: POST_TYPES['offer'].primaryColor
+      }
+    },
+    resource: {
+      inputIOS: {
+        ...typeSelectorDefaults,
+        backgroundColor: POST_TYPES['resource'].backgroundColor,
+        color: POST_TYPES['resource'].primaryColor
+      },
+      inputAndroid: {
+        ...typeSelectorDefaults,
+        backgroundColor: POST_TYPES['resource'].backgroundColor,
+        color: POST_TYPES['resource'].primaryColor
+      }
+    },
+    project: {
+      inputIOS: {
+        ...typeSelectorDefaults,
+        backgroundColor: POST_TYPES['project'].backgroundColor,
+        color: POST_TYPES['project'].primaryColor
+      },
+      inputAndroid: {
+        ...typeSelectorDefaults,
+        backgroundColor: POST_TYPES['project'].backgroundColor,
+        color: POST_TYPES['project'].primaryColor
+      }
+    },
+    request: {
+      inputIOS: {
+        ...typeSelectorDefaults,
+        backgroundColor: POST_TYPES['request'].backgroundColor,
+        color: POST_TYPES['request'].primaryColor
+      },
+      inputAndroid: {
+        ...typeSelectorDefaults,
+        backgroundColor: POST_TYPES['request'].backgroundColor,
+        color: POST_TYPES['request'].primaryColor
+      }
+    }
+  },
+  
   topics: {
     justifyContent: 'center',
     display: 'flex',

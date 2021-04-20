@@ -64,6 +64,7 @@ export default class SettingControl extends React.Component {
       label,
       value,
       onChange,
+      onFocus,
       toggleSecureTextEntry,
       toggleEditable,
       keyboardType,
@@ -84,6 +85,7 @@ export default class SettingControl extends React.Component {
           ref={this.inputRef}
           style={[styles.textInput, theme.textInput]}
           onChangeText={onChange}
+          onFocus={onFocus}
           value={value}
           secureTextEntry={toggleSecureTextEntry && securePassword}
           textContentType='oneTimeCode'

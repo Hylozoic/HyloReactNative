@@ -3,11 +3,15 @@ import { StyleSheet, Text, View } from 'react-native'
 import HTMLView from 'react-native-htmlview'
 import { decode } from 'ent'
 import moment from 'moment'
+import { isEmpty } from 'lodash/fp'
 import { present, sanitize } from 'hylo-utils/text'
 import urlHandler from 'navigation/linking/urlHandler'
 import LinkPreview from 'components/PostCard/LinkPreview'
-import { white20onCaribbeanGreen } from 'style/colors'
+import { caribbeanGreen, white, white20onCaribbeanGreen } from 'style/colors'
 import richTextStyles from 'style/richTextStyles'
+import Icon from 'components/Icon'
+import { humanResponse, RESPONSES } from 'store/models/EventInvitation'
+import PopupMenuButton from 'components/PopupMenuButton'
 
 const MAX_DETAILS_LENGTH = 144
 
@@ -46,6 +50,8 @@ export default class PostBody extends React.PureComponent {
       startTime,
       endTime,
       linkPreview,
+      myEventResponse,
+      respondToEvent,
       slug,
       shouldTruncate
     } = this.props
@@ -77,7 +83,11 @@ export default class PostBody extends React.PureComponent {
       <View style={styles.container}>
         {timeWindow &&
           <Text style={styles.resourceEndsAt}>{timeWindow}</Text>}
-        <PostTitle title={decodedTitle} />
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+          <PostTitle title={decodedTitle} />
+          {type === 'event' && !!respondToEvent &&
+            <EventRSVP myEventResponse={isEmpty(myEventResponse) ? RESPONSES.NO : myEventResponse} respondToEvent={respondToEvent} />}
+        </View>
         <HTMLView
           onLinkPress={this.handleLinkPress}
           addLineBreaks={false}
@@ -89,6 +99,24 @@ export default class PostBody extends React.PureComponent {
       </View>
     )
   }
+}
+
+export function EventRSVP ({ myEventResponse, respondToEvent }) {
+  const actions = [
+    [ humanResponse(RESPONSES.YES), () => respondToEvent(RESPONSES.YES) ],
+    [ humanResponse(RESPONSES.INTERESTED), () => respondToEvent(RESPONSES.INTERESTED) ],
+    [ humanResponse(RESPONSES.NO), () => respondToEvent(RESPONSES.NO) ]
+  ]
+
+  return (
+    <PopupMenuButton actions={actions}>
+      <View style={styles.RSVPOption}>
+        <Text style={styles.RSVPOptionText}>{humanResponse(myEventResponse)} |</Text>
+        <Icon name='ArrowDown' color={white} style={styles.RSVPOptionText} />
+      </View>
+
+    </PopupMenuButton>
+  )
 }
 
 export function PostTitle ({ title, style }) {
@@ -112,7 +140,8 @@ const styles = StyleSheet.create({
     color: '#363D3C',
     fontSize: 19,
     fontFamily: 'Circular-Medium',
-    marginBottom: 12
+    marginBottom: 12,
+    flex: 1
   },
   details: {
     marginTop: 12,
@@ -120,5 +149,22 @@ const styles = StyleSheet.create({
     fontSize: 14,
     lineHeight: 20,
     fontFamily: 'Circular-Book'
+  },
+  RSVPOption: {
+    backgroundColor: caribbeanGreen,
+    borderRadius: 20,
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center'
+  },
+  RSVPOptionText: {
+    color: white,
+    fontSize: 12
+  },
+  RSVPOptionIcon: {
+    fontSize: 14,
+    marginTop: 1
   }
 })

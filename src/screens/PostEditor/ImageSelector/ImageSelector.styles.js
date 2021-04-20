@@ -2,7 +2,7 @@ import { rhino10, limedSpruce } from 'style/colors'
 import { Dimensions } from 'react-native'
 import postEditorStyles from '../PostEditor.styles'
 
-const screenPadding = postEditorStyles.scrollContainer.paddingHorizontal
+const screenPadding = 0 // postEditorStyles.scrollContainer.paddingHorizontal
 const containerWidth = Dimensions.get('window').width - 2 * screenPadding
 const buttonMargin = 10
 const buttonWidth = (containerWidth - 2 * buttonMargin) / 3

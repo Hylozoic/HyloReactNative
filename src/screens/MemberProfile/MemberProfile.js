@@ -20,17 +20,6 @@ export default class MemberProfile extends React.Component {
     this.setHeader()
   }
 
-  componentDidUpdate (prevProps) {
-    if (prevProps.id !== this.props.id) {
-      this.props.fetchPerson()
-      this.setHeader()
-    }
-  }
-
-  shouldComponentUpdate (nextProps) {
-    return nextProps.isFocused
-  }
-
   setHeader = () => {
     const { navigation, currentGroup } = this.props
     navigation.setOptions({ headerTitle: currentGroup.name  })

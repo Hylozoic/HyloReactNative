@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import makeGoToGroup from 'store/actions/makeGoToGroup'
+import respondToEvent from 'store/actions/respondToEvent'
 import getCurrentGroupId from 'store/selectors/getCurrentGroupId'
 import getMemberships from 'store/selectors/getMemberships'
 import {
@@ -64,7 +65,8 @@ export function mapDispatchToProps (dispatch, { navigation }) {
       setChoice,
       fetchMemberPosts,
       fetchMemberComments,
-      fetchMemberUpvotes
+      fetchMemberUpvotes,
+      respondToEvent
     }, dispatch),
     goToGroup: makeGoToGroup(dispatch),
     showPost: id => navigation.navigate('Post Details', { id }),

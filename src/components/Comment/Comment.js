@@ -9,7 +9,6 @@ import Avatar from 'components/Avatar'
 import PopupMenuButton from 'components/PopupMenuButton'
 import Icon from 'components/Icon'
 import styles from './Comment.styles'
-import { caribbeanGreen } from 'style/colors'
 
 export default function Comment ({
   comment,
@@ -21,71 +20,78 @@ export default function Comment ({
   deleteComment,
   removeComment,
   editComment,
-  hideMenu
+  hideMenu,
+  onReply = () => {}
 }) {
   const { creator, text, createdAt, post } = comment
   const presentedText = present(sanitize(text), { slug })
 
-  const deleteCommentWithConfirm = deleteComment ? () => Alert.alert(
+  const deleteCommentWithConfirm = deleteComment ? commentId => Alert.alert(
     'Confirm Delete',
     'Are you sure you want to delete this comment?',
     [
-      { text: 'Yes', onPress: () => deleteComment() },
+      { text: 'Yes', onPress: () => deleteComment(commentId) },
       { text: 'Cancel', style: 'cancel' }
     ]) : null
 
-  const removeCommentWithConfirm = removeComment ? () => Alert.alert(
+  const removeCommentWithConfirm = removeComment ? commentId => Alert.alert(
     'Moderator: Confirm Delete',
     'Are you sure you want to remove this comment?',
     [
-      { text: 'Yes', onPress: () => removeComment() },
+      { text: 'Yes', onPress: () => removeComment(commentId) },
       { text: 'Cancel', style: 'cancel' }
     ]) : null
-
+  
   let postTitle = get('title', post)
+
   if (displayPostTitle && postTitle) {
     postTitle = postTitle.length > 40
       ? postTitle.substring(0, 40) + '...'
       : postTitle
   }
-  
-  const creatorUrl = `/m/${creator.id}`
-  
-  return (
-    <View style={[style, styles.container]}>
-      <TouchableOpacity onPress={() => showMember(creator.id)}>
-        <Avatar avatarUrl={creator.avatarUrl} style={styles.avatar} />
-      </TouchableOpacity>
-      <View style={styles.details}>
-        <View style={styles.header}>
-          <View style={styles.meta}>
-            <TouchableOpacity onPress={() => showMember(creator.id)}>
-              <Text style={styles.name}>{creator.name}</Text>
-            </TouchableOpacity>
-            <Text style={styles.date}>{humanDate(createdAt)}</Text>
-            {displayPostTitle &&
-              <Text style={styles.date}>on "{postTitle}"</Text>}
-          </View>
-          <View style={styles.headerRight}>
-            {!hideMenu && (
-              <CommentMenu
-                deleteComment={deleteCommentWithConfirm}
-                removeComment={removeCommentWithConfirm}
-                editComment={editComment}
-              />
-            )}
-          </View>
 
+  return (
+    <TouchableOpacity onPress={() => onReply(comment, { mention: false })}>
+      <View style={[styles.container, style]}>
+        <TouchableOpacity onPress={() => showMember(creator.id)}>
+          <Avatar avatarUrl={creator.avatarUrl} style={styles.avatar} />
+        </TouchableOpacity>
+        <View style={styles.details}>
+          <View style={styles.header}>
+            <View style={styles.meta}>
+              <TouchableOpacity onPress={() => showMember(creator.id)}>
+                <Text style={styles.name}>{creator.name}</Text>
+              </TouchableOpacity>
+              <Text style={styles.date}>{humanDate(createdAt)}</Text>
+              {displayPostTitle &&
+                <Text style={styles.date}>on "{postTitle}"</Text>}
+            </View>
+            <View style={styles.headerRight}>
+              {onReply && (
+                <TouchableOpacity style={styles.replyLink} onPress={() => onReply(comment, { mention: !!comment.parentComment })}>
+                  <Icon style={styles.replyLinkIcon} name='Reply' />
+                  <Text style={styles.replyLinkText}>Reply</Text>
+                </TouchableOpacity>
+              )}
+              {!hideMenu && (
+                <CommentMenu
+                  deleteComment={() => deleteCommentWithConfirm(comment.id)}
+                  removeComment={() => removeCommentWithConfirm(comment.id)}
+                  editComment={editComment}
+                />
+              )}
+            </View>
+          </View>
+          <HTMLView
+            addLineBreaks={false}
+            onLinkPress={url => urlHandler(url, showMember, showTopic, slug)}
+            stylesheet={styles.richTextStyles}
+            textComponentProps={{ style: styles.text }}
+            value={presentedText}
+          />
         </View>
-        <HTMLView
-          addLineBreaks={false}
-          onLinkPress={url => urlHandler(url, showMember, showTopic, slug)}
-          stylesheet={richTextStyles}
-          textComponentProps={{ style: styles.text }}
-          value={presentedText}
-        />
       </View>
-    </View>
+    </TouchableOpacity>
   )
 }
 
@@ -93,10 +99,9 @@ export function CommentMenu ({ deleteComment, removeComment, editComment }) {
   // If the function is defined, than it's a valid action
   const removeLabel = 'Remove Comment'
   const deleteLabel = 'Delete Comment'
-  const editLabel = 'Edit Comment'
 
   const actions = filter(x => x[1], [
-    [editLabel, editComment],
+    ['Edit Comment', editComment],
     [deleteLabel, deleteComment],
     [removeLabel, removeComment]
   ])
@@ -109,20 +114,10 @@ export function CommentMenu ({ deleteComment, removeComment, editComment }) {
   return (
     <PopupMenuButton
       actions={actions}
-      hitSlop={{ top: 20, bottom: 10, left: 10, right: 15 }}
+      hitSlop={{ top: 20, bottom: 10, left: 0, right: 15 }}
       destructiveButtonIndex={destructiveButtonIndex}
     >
       <Icon name='More' style={styles.menuIcon} />
     </PopupMenuButton>
   )
 }
-
-const richTextStyles = StyleSheet.create({
-  a: {
-    color: caribbeanGreen
-  },
-  p: {
-    marginTop: 3,
-    marginBottom: 3
-  }
-})

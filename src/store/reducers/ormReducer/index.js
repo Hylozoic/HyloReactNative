@@ -15,9 +15,6 @@ import {
   ADD_SKILL, REMOVE_SKILL
 } from 'components/SkillEditor/SkillEditor.store'
 import {
-  CREATE_COMMENT
-} from 'screens/PostDetails/CommentEditor/CommentEditor.store'
-import {
   SET_TOPIC_SUBSCRIBE_PENDING
 } from 'screens/Feed/Feed.store'
 import {
@@ -33,9 +30,6 @@ import {
   USE_INVITATION
 } from 'screens/JoinGroup/JoinGroup.store'
 import {
-  DELETE_COMMENT_PENDING
-} from 'components/Comment/Comment.store'
-import {
   UPDATE_LAST_VIEWED_PENDING
 } from 'screens/ThreadList/ThreadList.store'
 import {
@@ -48,15 +42,17 @@ import {
   RESET_NEW_POST_COUNT_PENDING
 } from 'store/actions/resetNewPostCount'
 import {
-  UPDATE_USER_SETTINGS
-} from 'screens/SignupFlow/SignupFlow.store'
-import {
   CANCEL_JOIN_REQUEST,
+  CREATE_COMMENT_PENDING,
+  CREATE_COMMENT,
   CREATE_JOIN_REQUEST,
+  DELETE_COMMENT_PENDING,
+  DELETE_GROUP_RELATIONSHIP,
   FETCH_CURRENT_USER,
   JOIN_PROJECT_PENDING,
   LEAVE_PROJECT_PENDING,
-  DELETE_GROUP_RELATIONSHIP
+  RESPOND_TO_EVENT_PENDING,
+  UPDATE_COMMENT_PENDING
 } from 'store/constants'
 import { PIN_POST_PENDING } from 'components/PostCard/PostHeader/PostHeader.store'
 
@@ -66,6 +62,7 @@ export default function ormReducer (state = {}, action) {
   if (error) return state
 
   const {
+    Activity,
     Comment,
     Group,
     GroupRelationship,
@@ -89,15 +86,24 @@ export default function ormReducer (state = {}, action) {
   }
 
   switch (type) {
-    case CREATE_COMMENT: {
-      const post = Post.safeGet({ id: meta.postId })
-      const me = Me.first()
-
-      if (!post) break
-      post.updateAppending({ commenters: [me.id] })
-      post.update({ commentsTotal: (post.commentsTotal || 0) + 1 })
-
+    case CREATE_COMMENT_PENDING: {
+      Comment.create({
+        id: meta.tempId,
+        post: meta.postId,
+        text: meta.text,
+        creator: Me.first().id })
       break
+    }
+
+    case CREATE_COMMENT: {
+      Comment.withId(meta.tempId).delete()
+      if (!PostCommenter.safeGet({ post: meta.postId, commenter: Me.first().id })) {
+        PostCommenter.create({ post: meta.postId, commenter: Me.first().id })
+        // we can assume the following because the backend returns the results pre-sorted
+        // with the currentUser at the beginning
+        const p = Post.withId(meta.postId)
+        p.update({ commentersTotal: p.commentersTotal + 1 })
+      }
     }
 
     case CREATE_MESSAGE_PENDING: {
@@ -163,6 +169,12 @@ export default function ormReducer (state = {}, action) {
       break
     }
 
+    case RESPOND_TO_EVENT_PENDING: {
+      const event = Post.withId(meta.id)
+      event.update({ myEventResponse: meta.response })
+      break
+    }
+  
     case UPDATE_USER_SETTINGS_PENDING: {
       const me = Me.first()
       const changes = {
@@ -220,6 +232,12 @@ export default function ormReducer (state = {}, action) {
           clearCacheFor(Group, meta.childId)
         }
       }
+      break
+    }
+
+    case UPDATE_COMMENT_PENDING: {
+      comment = Comment.withId(meta.id)
+      comment.update(meta.data)
       break
     }
 
