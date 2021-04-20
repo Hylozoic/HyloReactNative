@@ -33,7 +33,7 @@ export default {
     marginBottom: 10
   },
   skillsContainer: {
-    marginBottom: 10
+    marginBottom: 5
   },
   skills: {
     flexDirection: 'row',
@@ -42,6 +42,7 @@ export default {
   skill: {
     paddingHorizontal: 10,
     marginRight: 8,
+    marginBottom: 8,
     borderRadius: 12,
     height: 24,
     fontFamily: 'Circular-Book',
@@ -56,7 +57,7 @@ export default {
   groupsContainer: {
   },
   groupRow: {
-    paddingVertical: 15,
+    paddingVertical: 10,
     borderTopWidth: StyleSheet.hairlineWidth,
     borderTopColor: rhino60,
     flexDirection: 'row',

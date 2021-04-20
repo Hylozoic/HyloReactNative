@@ -11,6 +11,7 @@ import { getLastViewedGroup } from 'store/models/Me'
 import getSignedIn from 'store/selectors/getSignedIn'
 import getSignupInProgress from 'store/selectors/getSignupInProgress'
 import getReturnToPath from 'store/selectors/getReturnToPath'
+import { navigationRef } from 'navigation/RootNavigation'
 
 export function mapStateToProps (state, props) {
   const currentUser = getMe(state, props)

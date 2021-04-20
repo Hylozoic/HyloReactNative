@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from 'react-native'
 import HTMLView from 'react-native-htmlview'
 import { decode } from 'ent'
 import moment from 'moment'
+import { isEmpty } from 'lodash/fp'
 import { present, sanitize } from 'hylo-utils/text'
 import urlHandler from 'navigation/linking/urlHandler'
 import LinkPreview from 'components/PostCard/LinkPreview'
@@ -11,7 +12,6 @@ import richTextStyles from 'style/richTextStyles'
 import Icon from 'components/Icon'
 import { humanResponse, RESPONSES } from 'store/models/EventInvitation'
 import PopupMenuButton from 'components/PopupMenuButton'
-import Post from 'store/models/Post'
 
 const MAX_DETAILS_LENGTH = 144
 
@@ -86,7 +86,7 @@ export default class PostBody extends React.PureComponent {
         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
           <PostTitle title={decodedTitle} />
           {type === 'event' && !!respondToEvent &&
-            <EventRSVP myEventResponse={myEventResponse} respondToEvent={respondToEvent} />}
+            <EventRSVP myEventResponse={isEmpty(myEventResponse) ? RESPONSES.NO : myEventResponse} respondToEvent={respondToEvent} />}
         </View>
         <HTMLView
           onLinkPress={this.handleLinkPress}
@@ -110,9 +110,9 @@ export function EventRSVP ({ myEventResponse, respondToEvent }) {
 
   return (
     <PopupMenuButton actions={actions}>
-      <View style={{ backgroundColor: caribbeanGreen, borderRadius: 20, paddingHorizontal: 10, paddingVertical: 5, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-        <Text style={{ color: white, fontSize: 12 }}>{humanResponse(myEventResponse)} |</Text>
-        <Icon name='ArrowDown' color={white} style={{ fontSize: 14, marginTop: 1 }} />
+      <View style={styles.RSVPOption}>
+        <Text style={styles.RSVPOptionText}>{humanResponse(myEventResponse)} |</Text>
+        <Icon name='ArrowDown' color={white} style={styles.RSVPOptionText} />
       </View>
 
     </PopupMenuButton>
@@ -140,7 +140,8 @@ const styles = StyleSheet.create({
     color: '#363D3C',
     fontSize: 19,
     fontFamily: 'Circular-Medium',
-    marginBottom: 12
+    marginBottom: 12,
+    flex: 1
   },
   details: {
     marginTop: 12,
@@ -148,5 +149,22 @@ const styles = StyleSheet.create({
     fontSize: 14,
     lineHeight: 20,
     fontFamily: 'Circular-Book'
+  },
+  RSVPOption: {
+    backgroundColor: caribbeanGreen,
+    borderRadius: 20,
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center'
+  },
+  RSVPOptionText: {
+    color: white,
+    fontSize: 12
+  },
+  RSVPOptionIcon: {
+    fontSize: 14,
+    marginTop: 1
   }
 })

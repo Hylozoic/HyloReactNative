@@ -1,5 +1,5 @@
 import HeaderRightButton from 'navigation/header/HeaderRightButton'
-import { rhino10, rhino20, rhino80, white } from 'style/colors'
+import { caribbeanGreen, rhino, rhino05, rhino10, rhino20, rhino80, white, amaranth, pictonBlue, gunsmoke, rhino60, bigStone } from 'style/colors'
 
 const styles = {
   container: {
@@ -39,10 +39,12 @@ const styles = {
 
   // Main content
   mainContent: {
-    padding: 15
+    padding: 40,
+    paddingTop: 20
   },
   groupDescription: {
-    marginBottom: 10
+    marginBottom: 20,
+    color: rhino80
   },
   alreadyRequestedText: {
     padding: 15,
@@ -65,7 +67,25 @@ const styles = {
     backgroundColor: rhino20,
     padding: 10
   },
-  joinButton: {}
+  joinButton: {
+    backgroundColor: pictonBlue
+  },
+
+  // 
+  joinStatusBox: {
+    backgroundColor: amaranth,
+    padding: 10,
+    color: white,
+    borderRadius: 2,
+    // borderWidth: 1,
+    fontWeight: 'bold',
+    overflow: 'hidden'
+  },
+  accessibilityMessage: {
+    fontWeight: 'bold',
+    marginBottom: 10,
+    color: rhino80
+  }
 }
 
 export default styles

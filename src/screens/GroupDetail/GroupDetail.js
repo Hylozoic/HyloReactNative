@@ -19,38 +19,41 @@ import { GroupRow } from 'screens/Groups/Groups'
 import LinearGradient from 'react-native-linear-gradient'
 import { bannerlinearGradientColors } from 'style/colors'
 import styles from './GroupDetail.styles'
-
+import getMemberships from 'store/selectors/getMemberships'
 
 export default function GroupDetail ({ navigation, route }) {
   const dispatch = useDispatch()
   const groupId = route.params.groupId
-
+  const myMemberships = useSelector(getMemberships)
+  
   useEffect(() => { dispatch(fetchGroupDetailsAction(groupId)) }, [groupId])
 
   const loading = useSelector(state => isPendingFor([JOIN_GROUP, CREATE_JOIN_REQUEST,  FETCH_GROUP_DETAILS], state))
   const group = useSelector(state => presentGroup(getGroup(state, { id: groupId })))
+  const isMember = myMemberships.find(m => m.group.id === group?.id)
   const hasPendingRequest = useSelector(getMyJoinRequests).find(r => r.group.id === groupId)
-
   const [questionAnswers, setAnswer] = useState({})
 
   const setQuestionAnswer = questionId => answer => {
     setAnswer(currentAnswers => ({ ...currentAnswers, [questionId]: answer }))
   }
 
-  const joinGroup = () => {
+  const joinGroup = async () => {
     const answers = []
     for (const questionId in questionAnswers) {
       answers.push({ questionId: parseInt(questionId), answer: questionAnswers[questionId] })
     }
-    dispatch(joinRequestAction(group.id))
+    await dispatch(joinRequestAction(group.id))
+    // await dispatch(fetchGroupDetailsAction(group.id))
   }
 
-  const createJoinRequest = () => {
+  const createJoinRequest = async () => {
     const answers = []
     for (const questionId in questionAnswers) {
       answers.push({ questionId: parseInt(questionId), answer: questionAnswers[questionId] })
     }
-    dispatch(createJoinRequestAction(group.id, answers))
+    await dispatch(createJoinRequestAction(group.id, answers))
+    // await dispatch(fetchGroupDetailsAction(group.id))
   }
 
   const goToGroupDetail = group => {
@@ -59,8 +62,9 @@ export default function GroupDetail ({ navigation, route }) {
 
   const canJoin = !hasPendingRequest &&
     [GROUP_ACCESSIBILITY.Open, GROUP_ACCESSIBILITY.Restricted].includes(group.accessibility)
+
   const joinQuestions = canJoin && group.settings?.askJoinQuestions
-    ? group.joinQuestions.toRefArray()
+    ? group.joinQuestions
     : []
   const groupBannerImage = group.bannerUrl ? { uri: group.bannerUrl } : null
 
@@ -77,7 +81,10 @@ export default function GroupDetail ({ navigation, route }) {
       </ImageBackground>
       <View style={styles.mainContent}>
         <Text style={styles.groupDescription}>{group.description}</Text>
-        {group.prerequisiteGroups?.length > 0
+        {isMember && (
+          <Text style={styles.joinStatusBox}>You are a member</Text>
+        )}
+        {!isMember && (group.prerequisiteGroups?.length > 0
           ? (
             <View style={styles.prerequisiteGroups}>
               <Text>{group.name} is only accessible to members of the following group(s). To join {group.name} visit each of the groups below and become a member:</Text>
@@ -95,23 +102,23 @@ export default function GroupDetail ({ navigation, route }) {
             ) : group.accessibility === GROUP_ACCESSIBILITY.Open
               ? (
                 <View style={styles.requestOption}>
-                  <Text style={styles.requestHint}>Anyone can join this group!</Text>
+                  <Text style={styles.accessibilityMessage}>Anyone can join this group!</Text>
                   <JoinQuestionsAndButton joinQuestions={joinQuestions} setQuestionAnswer={setQuestionAnswer}
                       joinButtonOnPress={joinGroup} joinButtonText='Join' />
                 </View>
               ) : group.accessibility === GROUP_ACCESSIBILITY.Restricted
                   ? hasPendingRequest
                     ? (
-                      <Text style={styles.requestPending}>Request to join pending</Text>
+                      <Text style={styles.joinStatusBox}>Request to join pending</Text>
                     ) : (
                       <JoinQuestionsAndButton joinQuestions={joinQuestions} setQuestionAnswer={setQuestionAnswer}
                         joinButtonOnPress={createJoinRequest} joinButtonText='Request Membership' />
                   ) : (
-                    <Text style={styles.requestOption}> {/* Closed group */}
+                    <Text style={styles.joinStatusBox}> {/* Closed group */}
                       This is group is invitation only
                     </Text>
                   )
-        }
+        )}
       </View>
     </ScrollView>
   )

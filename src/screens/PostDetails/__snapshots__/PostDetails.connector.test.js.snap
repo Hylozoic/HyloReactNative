@@ -47,8 +47,10 @@ Object {
     "imageUrls": Array [
       "http://foo.com/bar.png",
     ],
+    "isPublic": undefined,
     "linkPreview": undefined,
     "members": Array [],
+    "myEventResponse": "no",
     "pinned": undefined,
     "topics": Array [],
   },

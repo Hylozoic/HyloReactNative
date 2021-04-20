@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`presentPost matches the snapshot 1`] = `
+Object {
+  "commenters": Array [],
+  "creator": Object {
+    "id": "10",
+  },
+  "eventInvitations": Array [],
+  "fileAttachments": Array [],
+  "fileUrls": Array [],
+  "groups": Array [],
+  "id": 324,
+  "imageUrls": Array [],
+  "isPublic": undefined,
+  "linkPreview": undefined,
+  "members": Array [],
+  "myEventResponse": "no",
+  "pinned": true,
+  "topics": Array [],
+}
+`;

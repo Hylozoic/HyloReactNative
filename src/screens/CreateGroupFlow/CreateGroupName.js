@@ -8,6 +8,7 @@ import ErrorBubble from 'components/ErrorBubble'
 import getCurrentGroupId from 'store/selectors/getCurrentGroupId'
 import { getGroupData, getEdited, updateGroupData } from './CreateGroupFlow.store'
 import styles from './CreateGroupFlow.styles'
+import { ALL_GROUP_ID } from 'store/models/Group'
 
 export default function CreateGroupName ({ navigation }) {
   const nextScreen = 'CreateGroupUrl'
@@ -16,7 +17,7 @@ export default function CreateGroupName ({ navigation }) {
   const edited = useSelector(getEdited)
   const currentGroupId = useSelector(getCurrentGroupId)
   useEffect(() => {
-    if (!edited) dispatch(updateGroupData({ parentIds: [currentGroupId] }))
+    if (!edited && currentGroupId !== ALL_GROUP_ID) dispatch(updateGroupData({ parentIds: [currentGroupId] }))
   }, [])
   const groupData = useSelector(getGroupData)  
   const [error, setError] = useState()

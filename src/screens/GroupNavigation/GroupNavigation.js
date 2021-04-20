@@ -8,7 +8,8 @@ import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import styles from './GroupNavigation.styles'
 import { isContextGroup, PUBLIC_GROUP_ID } from 'store/models/Group'
 
-export default function GroupNavigation ({ navigation }) {
+export default function GroupNavigation ({ navigation, route }) {
+
   const currentGroup = useSelector(getCurrentGroup)
 
   useFocusEffect(() => {
@@ -39,6 +40,12 @@ export default function GroupNavigation ({ navigation }) {
       <Text style={styles.navItemLabel}>{label}</Text>
     </TouchableOpacity>
   )
+
+  // if (!navigation.canGoBack()) {
+  //   navigation.navigate('Feed')
+  //   return null
+  // }
+
 
   return (
     <ScrollView style={styles.container}>

@@ -1,6 +1,6 @@
 import { CREATE_JOIN_REQUEST } from 'store/constants'
 
-export function createJoinRequest (groupId, questionAnswers) {
+export default function createJoinRequest (groupId, questionAnswers) {
   return {
     type: CREATE_JOIN_REQUEST,
     graphql: {

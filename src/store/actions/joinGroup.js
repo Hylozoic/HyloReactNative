@@ -1,6 +1,6 @@
 import { JOIN_GROUP } from 'store/constants'
 
-export function joinGroup (groupId) {
+export default function joinGroup (groupId) {
   return {
     type: JOIN_GROUP,
     graphql: {
