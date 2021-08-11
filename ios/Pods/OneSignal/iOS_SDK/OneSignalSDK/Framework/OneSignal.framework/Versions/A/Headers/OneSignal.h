@@ -294,16 +294,16 @@ typedef NS_ENUM(NSInteger, OSNotificationPermission) {
 
 @end
 
-@interface OSEmailSubscriptionState : NSObject
-@property (readonly, nonatomic, nullable) NSString* emailUserId; // The new Email user ID
-@property (readonly, nonatomic, nullable) NSString *emailAddress;
-@property (readonly, nonatomic) BOOL isSubscribed;
-- (NSDictionary* _Nonnull)toDictionary;
-@end
-
 @interface OSSubscriptionStateChanges : NSObject
 @property (readonly, nonnull) OSSubscriptionState* to;
 @property (readonly, nonnull) OSSubscriptionState* from;
+- (NSDictionary* _Nonnull)toDictionary;
+@end
+
+@interface OSEmailSubscriptionState : NSObject
+@property (readonly, nonatomic, nullable) NSString *emailUserId; // The new Email user ID
+@property (readonly, nonatomic, nullable) NSString *emailAddress;
+@property (readonly, nonatomic) BOOL isSubscribed;
 - (NSDictionary* _Nonnull)toDictionary;
 @end
 
@@ -311,6 +311,23 @@ typedef NS_ENUM(NSInteger, OSNotificationPermission) {
 @property (readonly, nonnull) OSEmailSubscriptionState* to;
 @property (readonly, nonnull) OSEmailSubscriptionState* from;
 - (NSDictionary* _Nonnull)toDictionary;
+@end
+
+@interface OSSMSSubscriptionState : NSObject
+@property (readonly, nonatomic, nullable) NSString* smsUserId;
+@property (readonly, nonatomic, nullable) NSString *smsNumber;
+@property (readonly, nonatomic) BOOL isSubscribed;
+- (NSDictionary* _Nonnull)toDictionary;
+@end
+
+@interface OSSMSSubscriptionStateChanges : NSObject
+@property (readonly, nonnull) OSSMSSubscriptionState* to;
+@property (readonly, nonnull) OSSMSSubscriptionState* from;
+- (NSDictionary* _Nonnull)toDictionary;
+@end
+
+@protocol OSPermissionObserver <NSObject>
+- (void)onOSPermissionChanged:(OSPermissionStateChanges* _Nonnull)stateChanges;
 @end
 
 @protocol OSSubscriptionObserver <NSObject>
@@ -321,8 +338,8 @@ typedef NS_ENUM(NSInteger, OSNotificationPermission) {
 - (void)onOSEmailSubscriptionChanged:(OSEmailSubscriptionStateChanges* _Nonnull)stateChanges;
 @end
 
-@protocol OSPermissionObserver <NSObject>
-- (void)onOSPermissionChanged:(OSPermissionStateChanges* _Nonnull)stateChanges;
+@protocol OSSMSSubscriptionObserver <NSObject>
+- (void)onOSSMSSubscriptionChanged:(OSSMSSubscriptionStateChanges* _Nonnull)stateChanges;
 @end
 
 @interface OSDeviceState : NSObject
@@ -368,6 +385,20 @@ typedef NS_ENUM(NSInteger, OSNotificationPermission) {
 @property (readonly, nullable) NSString* emailAddress;
 
 @property (readonly) BOOL isEmailSubscribed;
+
+/**
+ * Get the user sms id
+ * @return sms id if user sms number was registered, otherwise null
+ */
+@property (readonly, nullable) NSString* smsUserId;
+/**
+ * Get the user sms number, number may start with + and continue with numbers or contain only numbers
+ * e.g: +11231231231 or 11231231231
+ * @return sms number if set, otherwise null
+ */
+@property (readonly, nullable) NSString* smsNumber;
+
+@property (readonly) BOOL isSMSSubscribed;
 
 // Convert the class into a NSDictionary
 - (NSDictionary *_Nonnull)jsonRepresentation;
@@ -457,7 +488,8 @@ typedef void (^OSInAppMessageClickBlock)(OSInAppMessageAction * _Nonnull action)
 // iOS 10 only
 // Process from Notification Service Extension.
 // Used for iOS Media Attachemtns and Action Buttons.
-+ (UNMutableNotificationContent*)didReceiveNotificationExtensionRequest:(UNNotificationRequest* _Nonnull)request withMutableNotificationContent:(UNMutableNotificationContent* _Nullable)replacementContent;
++ (UNMutableNotificationContent*)didReceiveNotificationExtensionRequest:(UNNotificationRequest* _Nonnull)request withMutableNotificationContent:(UNMutableNotificationContent* _Nullable)replacementContent __deprecated_msg("Please use didReceiveNotificationExtensionRequest:withMutableNotificationContent:withContentHandler: instead.");
++ (UNMutableNotificationContent*)didReceiveNotificationExtensionRequest:(UNNotificationRequest* _Nonnull)request withMutableNotificationContent:(UNMutableNotificationContent* _Nullable)replacementContent withContentHandler:(void (^)(UNNotificationContent *_Nonnull))contentHandler;
 + (UNMutableNotificationContent*)serviceExtensionTimeWillExpireRequest:(UNNotificationRequest* _Nonnull)request withMutableNotificationContent:(UNMutableNotificationContent* _Nullable)replacementContent;
 
 #pragma mark Tags
@@ -485,6 +517,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (void)addEmailSubscriptionObserver:(NSObject<OSEmailSubscriptionObserver>*)observer;
 + (void)removeEmailSubscriptionObserver:(NSObject<OSEmailSubscriptionObserver>*)observer;
+
++ (void)addSMSSubscriptionObserver:(NSObject<OSSMSSubscriptionObserver>*)observer;
++ (void)removeSMSSubscriptionObserver:(NSObject<OSSMSSubscriptionObserver>*)observer;
 NS_ASSUME_NONNULL_END
 
 #pragma mark Email
@@ -507,6 +542,35 @@ typedef void (^OSEmailSuccessBlock)();
 + (void)logoutEmail;
 + (void)logoutEmailWithSuccess:(OSEmailSuccessBlock _Nullable)successBlock withFailure:(OSEmailFailureBlock _Nullable)failureBlock;
 
+#pragma mark SMS
+// Typedefs defining completion blocks for SMS & simultaneous HTTP requests
+typedef void (^OSSMSFailureBlock)(NSError *error);
+typedef void (^OSSMSSuccessBlock)(NSDictionary *results);
+
+// Allows you to set the SMS for this user. SMS number may start with + and continue with numbers or contain only numbers
+// e.g: +11231231231 or 11231231231
+// SMS Auth Token is a (recommended) optional parameter that should *NOT* be generated on the client.
+// For security purposes, the smsAuthToken should be generated by your backend server.
+// If you do not have a backend server for your application, use the version of thge setSMSNumber: method without an smsAuthToken parameter.
++ (void)setSMSNumber:(NSString * _Nonnull)smsNumber withSMSAuthHashToken:(NSString * _Nullable)hashToken;
++ (void)setSMSNumber:(NSString * _Nonnull)smsNumber withSMSAuthHashToken:(NSString * _Nullable)hashToken withSuccess:(OSSMSSuccessBlock _Nullable)successBlock withFailure:(OSSMSFailureBlock _Nullable)failureBlock;
+
+// Sets SMS without an authentication token
++ (void)setSMSNumber:(NSString * _Nonnull)smsNumber;
++ (void)setSMSNumber:(NSString * _Nonnull)smsNumber withSuccess:(OSSMSSuccessBlock _Nullable)successBlock withFailure:(OSSMSFailureBlock _Nullable)failureBlock;
+
+// Logs the device out of the current sms number.
++ (void)logoutSMSNumber;
++ (void)logoutSMSNumberWithSuccess:(OSSMSSuccessBlock _Nullable)successBlock withFailure:(OSSMSFailureBlock _Nullable)failureBlock;
+
+#pragma mark Language
+// Typedefs defining completion blocks for updating language
+typedef void (^OSUpdateLanguageFailureBlock)(NSError *error);
+typedef void (^OSUpdateLanguageSuccessBlock)();
+
+// Language input ISO 639-1 code representation for user input language
++ (void)setLanguage:(NSString * _Nonnull)language;
++ (void)setLanguage:(NSString * _Nonnull)language withSuccess:(OSUpdateLanguageSuccessBlock _Nullable)successBlock withFailure:(OSUpdateLanguageFailureBlock)failureBlock;
 
 #pragma mark External User Id
 // Typedefs defining completion blocks for updating the external user id

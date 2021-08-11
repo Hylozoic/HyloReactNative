@@ -8414,10 +8414,10 @@ react-native-mixpanel@^1.2.0:
   resolved "https://registry.yarnpkg.com/react-native-mixpanel/-/react-native-mixpanel-1.2.5.tgz#1d3348625a82786e860c5a41d3d9d73939f2eeda"
   integrity sha512-Xbpcj99Wo4NJa/Idp/nLY5m9r/H+v7szRWfQGxZGxDFiqz3VPs87c7hTMQP9OpgId6BFycxWGbkJOptiDSKqQQ==
 
-react-native-onesignal@^4.0.3:
-  version "4.0.3"
-  resolved "https://registry.yarnpkg.com/react-native-onesignal/-/react-native-onesignal-4.0.3.tgz#a55f856ff8f7cac36cc0bcce33dd474707ad59eb"
-  integrity sha512-QdBKsYAWn52g7sOG8NsKAHVgnF7PZ6Kk9fB98f/0nyJElvjff/mUWGE4waKUuwM2uh4c/EOX4n3P7Q/Wmz5Bvg==
+react-native-onesignal@^4.2.0:
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/react-native-onesignal/-/react-native-onesignal-4.2.0.tgz#0e98ab83f7d9d9b2d64c53c90266646d69097a17"
+  integrity sha512-UFPBfjgfGOdUH796B/Fv84g322l5ApWtOMwsFtPi856yu4b23St7r/SzT3OqbGJeglk4ADpfka0+981zQbfblg==
   dependencies:
     invariant "^2.2.2"
 

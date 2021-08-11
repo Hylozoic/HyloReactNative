@@ -1,6 +1,6 @@
 {
   "name": "react-native-onesignal",
-  "version": "4.0.3",
+  "version": "4.2.0",
   "summary": "React Native OneSignal SDK",
   "homepage": "https://github.com/OneSignal/react-native-onesignal",
   "license": "MIT",
@@ -12,7 +12,7 @@
   },
   "source": {
     "git": "https://github.com/OneSignal/react-native-onesignal.git",
-    "tag": "4.0.3"
+    "tag": "4.2.0"
   },
   "source_files": "ios/RCTOneSignal/*.{h,m}",
   "static_framework": true,
@@ -21,8 +21,8 @@
       ">= 0.13.0",
       "< 1.0.0"
     ],
-    "OneSignal": [
-      "3.1.0"
+    "OneSignalXCFramework": [
+      "3.5.3"
     ]
   }
 }

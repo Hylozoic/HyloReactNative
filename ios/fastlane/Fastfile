@@ -22,6 +22,18 @@ platform :ios do
       app_name: "hylo OneSignalNotificationServiceExtension",
       skip_itc: true
     )
+    match(
+      app_identifier: ["com.hylo.HyloA", "com.hylo.HyloA.OneSignalNotificationServiceExtension"],
+      type: "development",
+    )
+    match(
+      app_identifier: ["com.hylo.HyloA", "com.hylo.HyloA.OneSignalNotificationServiceExtension"],
+      type: "appstore",
+    )
+    match(
+      app_identifier: ["com.hylo.HyloA", "com.hylo.HyloA.OneSignalNotificationServiceExtension"],
+      type: "adhoc"
+    )
   end
 
   desc "Submit a new Beta Build to Apple TestFlight."

@@ -64,7 +64,7 @@
     "react-native-intercom": "^15.0.0",
     "react-native-linear-gradient": "^2.5.6",
     "react-native-mixpanel": "^1.2.0",
-    "react-native-onesignal": "^4.0.3",
+    "react-native-onesignal": "^4.2.0",
     "react-native-picker-select": "^8.0.4",
     "react-native-prompt-android": "^1.0.0",
     "react-native-reanimated": "^1.13.2",

@@ -1425,7 +1425,7 @@ Files in folly/external/farmhash licensed as follows
    limitations under the License.
 </string>
 			<key>License</key>
-			<string>Apache License, Version 2.0</string>
+			<string>Apache</string>
 			<key>Title</key>
 			<string>GTMAppAuth</string>
 			<key>Type</key>
@@ -2225,7 +2225,7 @@ Includes portions from BSMobileProvision:
 			<key>License</key>
 			<string>MIT</string>
 			<key>Title</key>
-			<string>OneSignal</string>
+			<string>OneSignalXCFramework</string>
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 		</dict>

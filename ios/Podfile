@@ -4,13 +4,12 @@ require_relative '../node_modules/@react-native-community/cli-platform-ios/nativ
 # THIS LINE SHOULDN'T BE NECESSARY AND CAN POTENTIALLY BE REMOVED
 source 'https://github.com/CocoaPods/Specs.git' 
 
-platform :ios, '10.0'
+platform :ios, '11.0'
 
 target 'HyloReactNative' do
   # Added
   pod 'Intercom'
   pod 'Mixpanel'
-  # pod 'OneSignal', '>= 2.11.2', '< 3.0'
   pod 'GoogleSignIn', '~> 5.0.2'
 
   config = use_native_modules!
@@ -29,20 +28,25 @@ target 'HyloReactNative' do
   use_flipper!({ 'Flipper-Folly' => '2.5.3', 'Flipper' => '0.87.0', 'Flipper-RSocket' => '1.3.1' })
   post_install do |installer|
     flipper_post_install(installer)
-    # Added to support react-native-intercom (~v15), can likely be removed in later updates
-    # installer.pods_project.targets.each do |t|
-    #   t.build_configurations.each do |config|
-    #     config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '10.0'
+
+
+    installer.pods_project.build_configurations.each do |config|
+      config.build_settings["EXCLUDED_ARCHS[sdk=iphonesimulator*]"] = "arm64"
+    end
+    # # Added to support react-native-intercom (~v15), can likely be removed in later updates
+    # installer.pods_project.targets.each do |target|
+    #   target.build_configurations.each do |config|
+    #     config.build_settings.delete 'ARCHS'
     #   end
     # end
     installer.pods_project.targets.each do |target|
       target.build_configurations.each do |config|
-        config.build_settings.delete 'ARCHS'
+       config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '11.0'
       end
-    end
+     end
   end
 end
 
 target 'OneSignalNotificationServiceExtension' do
-  pod 'OneSignal', '>= 2.9.3', '< 5.0'
+  pod 'OneSignal', '>= 3.5', '< 4.0'
 end
