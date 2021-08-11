@@ -47,6 +47,8 @@ export default class AppContainer extends Component {
       ? process.env.ONESIGNAL_APP_ID_DEBUG
       : process.env.ONESIGNAL_APP_ID_RELEASE
     )
+    // Prompt for push on iOS
+    OneSignal.promptForPushNotificationsWithUserResponse()
     OneSignal.setNotificationOpenedHandler(this.handleOpenedPushNotification)
     OneSignal.setNotificationWillShowInForegroundHandler(notifReceivedEvent => {
       notifReceivedEvent.complete()
