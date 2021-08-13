@@ -33,7 +33,7 @@ export function mapStateToProps (state, props) {
   const providedType = get('route.params.type', props)
   const defaultPost = selectedTopicName
     ? {
-        detailsText: selectedTopicTag + ' ',
+        details: selectedTopicTag + ' ',
         groups: currentGroup && [currentGroup]
       } 
     : {

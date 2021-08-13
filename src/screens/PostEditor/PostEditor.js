@@ -57,7 +57,7 @@ export default class PostEditor extends React.Component {
       topicsPicked: false,
       announcementEnabled: false,
       detailsFocused: false,
-      detailsText: get('detailsText', post) || '',
+      detailsText: get('details', post) || '',
       titleLengthError: false,
       startTime: get('startTime', post) ? (new Date(get('startTime', post))) : null,
       endTime: get('endTime', post) ? (new Date(get('endTime', post))) : null,
