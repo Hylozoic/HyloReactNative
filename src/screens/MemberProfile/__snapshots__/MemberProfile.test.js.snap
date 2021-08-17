@@ -139,7 +139,7 @@ exports[`MemberProfile shows loading without a person 1`] = `<Loading />`;
 
 exports[`ReadMoreButton matches the last snapshot 1`] = `
 <View>
-  <ForwardRef
+  <TouchableOpacity
     onPress={[Function]}
   >
     <View>
@@ -147,6 +147,6 @@ exports[`ReadMoreButton matches the last snapshot 1`] = `
         Read More
       </Text>
     </View>
-  </ForwardRef>
+  </TouchableOpacity>
 </View>
 `;

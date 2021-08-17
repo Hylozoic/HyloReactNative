@@ -9,13 +9,13 @@ exports[`GroupRow handles high member count and moderator role 1`] = `
       }
     }
   />
-  <ForwardRef
+  <TouchableOpacity
     onPress={[Function]}
   >
     <Text>
       Greater Place
     </Text>
-  </ForwardRef>
+  </TouchableOpacity>
   <Icon
     name="Star"
   />
@@ -37,13 +37,13 @@ exports[`GroupRow matches the last snapshot 1`] = `
       }
     }
   />
-  <ForwardRef
+  <TouchableOpacity
     onPress={[Function]}
   >
     <Text>
       Great Place
     </Text>
-  </ForwardRef>
+  </TouchableOpacity>
   <Text>
     432
   </Text>
@@ -66,7 +66,7 @@ exports[`MemberSkills matches the last snapshot 1`] = `
       MY SKILLS
     </Text>
   </View>
-  <ForwardRef
+  <TouchableOpacity
     disabled={true}
   >
     <View>
@@ -80,6 +80,6 @@ exports[`MemberSkills matches the last snapshot 1`] = `
         DAY
       </Text>
     </View>
-  </ForwardRef>
+  </TouchableOpacity>
 </View>
 `;

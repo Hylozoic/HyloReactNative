@@ -58,10 +58,8 @@ exports[`GroupSettings matches the last snapshot 1`] = `
   }
 >
   <KeyboardFriendlyView>
-    <Component
-      allowFontScaling={true}
+    <TextInput
       onChangeText={[Function]}
-      rejectResponderTermination={true}
       underlineColorAndroid="transparent"
     />
     <GroupBanner
@@ -80,21 +78,17 @@ exports[`GroupSettings matches the last snapshot 1`] = `
     <Text>
       DESCRIPTION
     </Text>
-    <Component
-      allowFontScaling={true}
+    <TextInput
       multiline={true}
       numberOfLines={5}
       onChangeText={[Function]}
-      rejectResponderTermination={true}
       underlineColorAndroid="transparent"
     />
     <Text>
       LOCATION
     </Text>
-    <Component
-      allowFontScaling={true}
+    <TextInput
       onFocus={[Function]}
-      rejectResponderTermination={true}
       underlineColorAndroid="transparent"
     />
   </KeyboardFriendlyView>

@@ -4,17 +4,15 @@ exports[`Control matches the last snapshot 1`] = `
 <View>
   <View>
     <React.Fragment>
-      <Component
-        allowFontScaling={true}
+      <TextInput
         editable={true}
         multiline={true}
         numberOfLines={8}
         placeholder="b"
-        rejectResponderTermination={true}
         underlineColorAndroid="transparent"
         value="a"
       />
-      <ForwardRef
+      <TouchableOpacity
         onPress={[Function]}
       >
         <Icon
@@ -22,7 +20,7 @@ exports[`Control matches the last snapshot 1`] = `
           name="edit"
           size={12}
         />
-      </ForwardRef>
+      </TouchableOpacity>
     </React.Fragment>
   </View>
 </View>

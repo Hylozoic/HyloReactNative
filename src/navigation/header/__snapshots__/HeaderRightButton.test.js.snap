@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`HeaderRightButton matches last snapshot 1`] = `
-<ForwardRef
+<TouchableOpacity
   disabled={false}
   hitSlop={
     Object {
@@ -14,5 +14,5 @@ exports[`HeaderRightButton matches last snapshot 1`] = `
   onPress={[Function]}
 >
   <Text />
-</ForwardRef>
+</TouchableOpacity>
 `;

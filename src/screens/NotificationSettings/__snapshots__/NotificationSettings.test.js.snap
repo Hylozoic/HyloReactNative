@@ -106,13 +106,13 @@ exports[`NotificationSettings matches the last snapshot 1`] = `
 `;
 
 exports[`SettingsIcon matches the last snapshot 1`] = `
-<ForwardRef
+<TouchableOpacity
   onPress={[Function]}
 >
   <Icon
     name="FooRow"
   />
-</ForwardRef>
+</TouchableOpacity>
 `;
 
 exports[`SettingsRow matches snapshot when expanded 1`] = `
@@ -149,7 +149,9 @@ exports[`SettingsRow matches snapshot when expanded 1`] = `
   <View>
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
+      nativeID="animatedComponent"
       onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
@@ -164,7 +166,9 @@ exports[`SettingsRow matches snapshot when expanded 1`] = `
     </View>
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
+      nativeID="animatedComponent"
       onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
@@ -196,13 +200,13 @@ exports[`SettingsRow matches the last snapshot 1`] = `
     >
       Foo Row
     </Text>
-    <ForwardRef
+    <TouchableOpacity
       onPress={[Function]}
     >
       <Icon
         name="ArrowDown"
       />
-    </ForwardRef>
+    </TouchableOpacity>
   </View>
 </View>
 `;
@@ -218,13 +222,13 @@ exports[`SettingsRow matches the last snapshot with iconName 1`] = `
     >
       Foo Row
     </Text>
-    <ForwardRef
+    <TouchableOpacity
       onPress={[Function]}
     >
       <Icon
         name="ArrowDown"
       />
-    </ForwardRef>
+    </TouchableOpacity>
   </View>
 </View>
 `;

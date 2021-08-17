@@ -117,16 +117,16 @@ exports[`PostMenu returns null when no actions 1`] = `null`;
 exports[`renders correctly when showGroup is true 1`] = `
 <View>
   <View>
-    <ForwardRef
+    <TouchableOpacity
       onPress={[Function]}
     >
       <Avatar
         avatarUrl="foo.png"
       />
-    </ForwardRef>
+    </TouchableOpacity>
   </View>
   <View>
-    <ForwardRef
+    <TouchableOpacity
       onPress={[Function]}
     >
       <Text>
@@ -135,7 +135,7 @@ exports[`renders correctly when showGroup is true 1`] = `
       <Text>
         Go!
       </Text>
-    </ForwardRef>
+    </TouchableOpacity>
     <View>
       <Text>
         10m ago
@@ -157,16 +157,16 @@ exports[`renders correctly when showGroup is true 1`] = `
 exports[`renders correctly with all=true, and no group or user 1`] = `
 <View>
   <View>
-    <ForwardRef
+    <TouchableOpacity
       onPress={[Function]}
     >
       <Avatar
         avatarUrl="foo.png"
       />
-    </ForwardRef>
+    </TouchableOpacity>
   </View>
   <View>
-    <ForwardRef
+    <TouchableOpacity
       onPress={[Function]}
     >
       <Text>
@@ -175,7 +175,7 @@ exports[`renders correctly with all=true, and no group or user 1`] = `
       <Text>
         Go!
       </Text>
-    </ForwardRef>
+    </TouchableOpacity>
     <View>
       <Text>
         10m ago
@@ -191,19 +191,12 @@ exports[`renders correctly with all=true, and no group or user 1`] = `
             },
           ]
         }
-        disableVirtualization={false}
         horizontal={true}
-        initialNumToRender={10}
         keyExtractor={[Function]}
-        maxToRenderPerBatch={10}
         numColumns={1}
-        onEndReachedThreshold={2}
         removeClippedSubviews={false}
         renderItem={[Function]}
-        scrollEventThrottle={50}
         showsHorizontalScrollIndicator={false}
-        updateCellsBatchingPeriod={50}
-        windowSize={21}
       />
     </View>
   </View>
@@ -225,16 +218,16 @@ exports[`renders correctly with all=true, and no group or user 1`] = `
 exports[`renders correctly with no flagging 1`] = `
 <View>
   <View>
-    <ForwardRef
+    <TouchableOpacity
       onPress={[Function]}
     >
       <Avatar
         avatarUrl="foo.png"
       />
-    </ForwardRef>
+    </TouchableOpacity>
   </View>
   <View>
-    <ForwardRef
+    <TouchableOpacity
       onPress={[Function]}
     >
       <Text>
@@ -243,7 +236,7 @@ exports[`renders correctly with no flagging 1`] = `
       <Text>
         Go!
       </Text>
-    </ForwardRef>
+    </TouchableOpacity>
     <View>
       <Text>
         10m ago

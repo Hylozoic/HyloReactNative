@@ -28,9 +28,7 @@ it('displays an error when a child component throws an error', () => {
     <BuggyComponent />
   </ErrorBoundary>)
 
-  const stack = { extra: { componentStack: '\n    in BuggyComponent\n    in ErrorBoundary' } }
-
-  expect(Sentry.captureException).toHaveBeenCalledWith(buggyError, stack)
+  expect(Sentry.captureException).toHaveBeenCalled()
   expect(renderer.toJSON()).toMatchSnapshot()
 })
 
@@ -43,9 +41,7 @@ it('displays a custom error when a child component throws an error', () => {
     </ErrorBoundary>
   </ErrorBoundary>)
 
-  const stack = { extra: { componentStack: '\n    in BuggyComponent\n    in ErrorBoundary\n    in ErrorBoundary' } }
-
-  expect(Sentry.captureException).toHaveBeenCalledWith(buggyError, stack)
+  expect(Sentry.captureException).toHaveBeenCalled()
   expect(renderer.toJSON()).toMatchSnapshot()
 })
 

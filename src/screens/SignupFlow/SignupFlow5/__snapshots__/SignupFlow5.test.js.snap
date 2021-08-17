@@ -33,7 +33,7 @@ exports[`hides image when no url and password when no password 1`] = `
       toggleEditable={true}
       value="hill"
     />
-    <ForwardRef>
+    <TouchableOpacity>
       <Text>
         Skills
       </Text>
@@ -45,7 +45,7 @@ exports[`hides image when no url and password when no password 1`] = `
           ]
         }
       />
-    </ForwardRef>
+    </TouchableOpacity>
     <View>
       <Button
         onPress={[Function]}
@@ -70,7 +70,7 @@ exports[`matches last snapshot 1`] = `
       You can always come back and change your details at any time.
     </Text>
     <View>
-      <ForwardRef>
+      <TouchableOpacity>
         <Image
           source={
             Object {
@@ -78,7 +78,7 @@ exports[`matches last snapshot 1`] = `
             }
           }
         />
-      </ForwardRef>
+      </TouchableOpacity>
     </View>
     <SettingControl
       label="Your Full Name"
@@ -104,7 +104,7 @@ exports[`matches last snapshot 1`] = `
       toggleEditable={true}
       value="hill"
     />
-    <ForwardRef>
+    <TouchableOpacity>
       <Text>
         Skills
       </Text>
@@ -116,7 +116,7 @@ exports[`matches last snapshot 1`] = `
           ]
         }
       />
-    </ForwardRef>
+    </TouchableOpacity>
     <View>
       <Button
         onPress={[Function]}

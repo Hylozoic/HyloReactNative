@@ -38,12 +38,8 @@ exports[`Thread matches the last snapshot 1`] = `
           },
         ]
       }
-      disableVirtualization={false}
-      horizontal={false}
-      initialNumToRender={10}
       inverted={true}
       keyExtractor={[Function]}
-      maxToRenderPerBatch={10}
       numColumns={1}
       onEndReached={[Function]}
       onEndReachedThreshold={0.3}
@@ -51,9 +47,6 @@ exports[`Thread matches the last snapshot 1`] = `
       refreshing={false}
       removeClippedSubviews={false}
       renderItem={[Function]}
-      scrollEventThrottle={50}
-      updateCellsBatchingPeriod={50}
-      windowSize={21}
     />
     <MessageInput
       blurOnSubmit={false}

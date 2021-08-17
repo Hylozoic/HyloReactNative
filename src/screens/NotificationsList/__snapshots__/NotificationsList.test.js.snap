@@ -19,17 +19,13 @@ exports[`NotificationsList matches the last snapshot 1`] = `
         },
       ]
     }
-    disableVirtualization={false}
     getItem={[Function]}
     getItemCount={[Function]}
-    horizontal={false}
-    initialNumToRender={10}
     keyExtractor={[Function]}
-    maxToRenderPerBatch={10}
     onContentSizeChange={[Function]}
     onEndReached={[Function]}
-    onEndReachedThreshold={2}
     onLayout={[Function]}
+    onMomentumScrollBegin={[Function]}
     onMomentumScrollEnd={[Function]}
     onScroll={[Function]}
     onScrollBeginDrag={[Function]}
@@ -38,9 +34,7 @@ exports[`NotificationsList matches the last snapshot 1`] = `
     renderItem={[Function]}
     scrollEventThrottle={50}
     stickyHeaderIndices={Array []}
-    updateCellsBatchingPeriod={50}
     viewabilityConfigCallbackPairs={Array []}
-    windowSize={21}
   >
     <View>
       <View
@@ -49,7 +43,9 @@ exports[`NotificationsList matches the last snapshot 1`] = `
         <View>
           <View
             accessible={true}
+            collapsable={false}
             focusable={true}
+            nativeID="animatedComponent"
             onClick={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
@@ -98,7 +94,7 @@ exports[`NotificationsList matches the last snapshot 1`] = `
 
 exports[`NotificationsList matches the last snapshot for NotificationRow 1`] = `
 <View>
-  <ForwardRef
+  <TouchableOpacity
     onPress={[Function]}
   >
     <NotificationCard
@@ -117,7 +113,7 @@ exports[`NotificationsList matches the last snapshot for NotificationRow 1`] = `
         }
       }
     />
-  </ForwardRef>
+  </TouchableOpacity>
 </View>
 `;
 
@@ -136,7 +132,9 @@ exports[`NotificationsList matches the renders CreateGroupNotice if user does no
   <View>
     <View
       accessible={true}
+      collapsable={false}
       focusable={false}
+      nativeID="animatedComponent"
       onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}

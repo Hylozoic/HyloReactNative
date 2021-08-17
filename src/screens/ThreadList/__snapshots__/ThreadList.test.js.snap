@@ -4,7 +4,9 @@ exports[`MessageRow calls showThread 1`] = `
 <View>
   <View
     accessible={true}
+    collapsable={false}
     focusable={true}
+    nativeID="animatedComponent"
     onClick={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
@@ -46,7 +48,7 @@ exports[`MessageRow calls showThread 1`] = `
 
 exports[`MessageRow renders correctly 1`] = `
 <View>
-  <ForwardRef
+  <TouchableOpacity
     onPress={[Function]}
   >
     <ThreadCard
@@ -68,7 +70,7 @@ exports[`MessageRow renders correctly 1`] = `
         ]
       }
     />
-  </ForwardRef>
+  </TouchableOpacity>
 </View>
 `;
 
@@ -88,16 +90,12 @@ exports[`ThreadList handles pending correctly with threads 1`] = `
         },
       ]
     }
-    disableVirtualization={false}
     getItem={[Function]}
     getItemCount={[Function]}
-    horizontal={false}
-    initialNumToRender={10}
     keyExtractor={[Function]}
-    maxToRenderPerBatch={10}
     onContentSizeChange={[Function]}
-    onEndReachedThreshold={2}
     onLayout={[Function]}
+    onMomentumScrollBegin={[Function]}
     onMomentumScrollEnd={[Function]}
     onScroll={[Function]}
     onScrollBeginDrag={[Function]}
@@ -106,9 +104,7 @@ exports[`ThreadList handles pending correctly with threads 1`] = `
     renderItem={[Function]}
     scrollEventThrottle={50}
     stickyHeaderIndices={Array []}
-    updateCellsBatchingPeriod={50}
     viewabilityConfigCallbackPairs={Array []}
-    windowSize={21}
   >
     <View>
       <View
@@ -117,7 +113,9 @@ exports[`ThreadList handles pending correctly with threads 1`] = `
         <View>
           <View
             accessible={true}
+            collapsable={false}
             focusable={true}
+            nativeID="animatedComponent"
             onClick={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
@@ -160,16 +158,12 @@ exports[`ThreadList renders correctly 1`] = `
         },
       ]
     }
-    disableVirtualization={false}
     getItem={[Function]}
     getItemCount={[Function]}
-    horizontal={false}
-    initialNumToRender={10}
     keyExtractor={[Function]}
-    maxToRenderPerBatch={10}
     onContentSizeChange={[Function]}
-    onEndReachedThreshold={2}
     onLayout={[Function]}
+    onMomentumScrollBegin={[Function]}
     onMomentumScrollEnd={[Function]}
     onScroll={[Function]}
     onScrollBeginDrag={[Function]}
@@ -178,9 +172,7 @@ exports[`ThreadList renders correctly 1`] = `
     renderItem={[Function]}
     scrollEventThrottle={50}
     stickyHeaderIndices={Array []}
-    updateCellsBatchingPeriod={50}
     viewabilityConfigCallbackPairs={Array []}
-    windowSize={21}
   >
     <View>
       <View
@@ -189,7 +181,9 @@ exports[`ThreadList renders correctly 1`] = `
         <View>
           <View
             accessible={true}
+            collapsable={false}
             focusable={true}
+            nativeID="animatedComponent"
             onClick={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}

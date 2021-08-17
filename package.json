@@ -147,7 +147,7 @@
     ],
     "timers": "fake",
     "transformIgnorePatterns": [
-      "node_modules/(?!(jest-)?react-native|@react-native-community|@react-navigation|rn-round-checkbox|@invertase|@flyerhq/react-native-keyboard-accessory-view|@react-native-picker)"
+      "node_modules/(?!(jest-)?@react-native|react-native|@react-native-community|@react-navigation|rn-round-checkbox|@invertase|@flyerhq/react-native-keyboard-accessory-view|@react-native-picker)"
     ]
   },
   "standard": {

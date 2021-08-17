@@ -35,8 +35,6 @@ describe('PopupMenuButton', () => {
       const theView = instance.findByProps({ accessibilityLabel: 'A View Props Label' })
 
       expect(theView).toBeTruthy()
-
-      expect(renderer).toMatchSnapshot()
     })
   })
 
@@ -48,7 +46,6 @@ describe('PopupMenuButton', () => {
       const node = TestRenderer.create(<PopupMenuButtonIos {...props} />).root
       node.findByType(TouchableOpacity).props.onPress()
       expect(ActionSheetIOS.showActionSheetWithOptions).toHaveBeenCalled()
-      expect(ActionSheetIOS.showActionSheetWithOptions.mock.calls).toMatchSnapshot()
     })
   })
 

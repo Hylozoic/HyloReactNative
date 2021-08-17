@@ -4,7 +4,7 @@ exports[`NewMessage renders correctly 1`] = `
 <SafeAreaViewMock>
   <KeyboardFriendlyView>
     <ScrollView>
-      <ForwardRef
+      <TouchableOpacity
         onPress={[Function]}
       />
       <View>
@@ -28,7 +28,7 @@ exports[`NewMessage renders correctly 2`] = `
 <SafeAreaViewMock>
   <KeyboardFriendlyView>
     <ScrollView>
-      <ForwardRef
+      <TouchableOpacity
         onPress={[Function]}
       />
       <View>

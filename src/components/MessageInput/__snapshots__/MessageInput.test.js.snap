@@ -2,14 +2,12 @@
 
 exports[`matches the last snapshot 1`] = `
 <View>
-  <Component
-    allowFontScaling={true}
+  <TextInput
     onChangeText={[Function]}
     onContentSizeChange={[Function]}
     onSubmit={[Function]}
     placeholder="Wombats..."
     placeholderTextColor="#c0c6cd"
-    rejectResponderTermination={true}
     style={
       Object {
         "flex": 2,
@@ -23,12 +21,12 @@ exports[`matches the last snapshot 1`] = `
     }
     underlineColorAndroid="transparent"
   />
-  <ForwardRef
+  <TouchableOpacity
     onPress={[Function]}
   >
     <Icon
       name="Send"
     />
-  </ForwardRef>
+  </TouchableOpacity>
 </View>
 `;

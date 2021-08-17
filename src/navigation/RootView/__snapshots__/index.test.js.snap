@@ -4,9 +4,7 @@ exports[`RootView loading without signupInProgress - matches snapshot 1`] = `
 <View>
   <View>
     <ActivityIndicator
-      animating={true}
       color="#818A88"
-      hidesWhenStopped={true}
       size="large"
     />
   </View>
@@ -17,9 +15,7 @@ exports[`RootView no loading indicator when signupInProgress - matches snapshot 
 <View>
   <View>
     <ActivityIndicator
-      animating={true}
       color="#818A88"
-      hidesWhenStopped={true}
       size="large"
     />
   </View>

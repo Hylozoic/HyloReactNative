@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ContentRow shows a Comment when itemType is comment 1`] = `
-<ForwardRef
+<TouchableOpacity
   onPress={[Function]}
 >
   <View>
@@ -16,11 +16,11 @@ exports[`ContentRow shows a Comment when itemType is comment 1`] = `
       displayPostTitle={true}
     />
   </View>
-</ForwardRef>
+</TouchableOpacity>
 `;
 
 exports[`ContentRow shows a PostCard when itemType is post 1`] = `
-<ForwardRef
+<TouchableOpacity
   onPress={[Function]}
 >
   <View>
@@ -34,17 +34,17 @@ exports[`ContentRow shows a PostCard when itemType is post 1`] = `
       shouldShowGroups={true}
     />
   </View>
-</ForwardRef>
+</TouchableOpacity>
 `;
 
 exports[`FeedTab matches the last snapshot 1`] = `
-<ForwardRef
+<TouchableOpacity
   onPress={[Function]}
 >
   <Text>
     Posts
   </Text>
-</ForwardRef>
+</TouchableOpacity>
 `;
 
 exports[`MemberProfile matches the last snapshot 1`] = `
@@ -97,19 +97,11 @@ exports[`MemberProfile matches the last snapshot 1`] = `
         },
       ]
     }
-    disableVirtualization={false}
-    horizontal={false}
-    initialNumToRender={10}
     keyExtractor={[Function]}
-    maxToRenderPerBatch={10}
     numColumns={1}
     onEndReached={[Function]}
-    onEndReachedThreshold={2}
     removeClippedSubviews={false}
     renderItem={[Function]}
-    scrollEventThrottle={50}
-    updateCellsBatchingPeriod={50}
-    windowSize={21}
   />
 </View>
 `;

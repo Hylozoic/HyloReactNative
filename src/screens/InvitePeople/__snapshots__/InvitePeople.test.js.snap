@@ -82,7 +82,7 @@ exports[`InvitePeople renders PendingInviteRow 1`] = `
       just now
     </Text>
     <View>
-      <ForwardRef
+      <TouchableOpacity
         hitSlop={
           Object {
             "bottom": 10,
@@ -96,8 +96,8 @@ exports[`InvitePeople renders PendingInviteRow 1`] = `
         <Text>
           Expire
         </Text>
-      </ForwardRef>
-      <ForwardRef
+      </TouchableOpacity>
+      <TouchableOpacity
         hitSlop={
           Object {
             "bottom": 10,
@@ -111,7 +111,7 @@ exports[`InvitePeople renders PendingInviteRow 1`] = `
         <Text>
           Resend
         </Text>
-      </ForwardRef>
+      </TouchableOpacity>
     </View>
   </View>
 </View>
@@ -158,20 +158,16 @@ exports[`InvitePeople renders SendInvitesPage 1`] = `
           text="Copy Link"
         />
       </View>
-      <Component
-        allowFontScaling={true}
+      <TextInput
         onChangeText={[Function]}
         placeholder="Type email addresses"
-        rejectResponderTermination={true}
         underlineColorAndroid="rgba(0,0,0,0)"
         value=""
       />
-      <Component
-        allowFontScaling={true}
+      <TextInput
         multiline={true}
         numberOfLines={5}
         onChangeText={[Function]}
-        rejectResponderTermination={true}
         underlineColorAndroid="rgba(0,0,0,0)"
         value="Hey! Here's an invite to the Axolotle group on Hylo."
       />

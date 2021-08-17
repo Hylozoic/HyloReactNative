@@ -41,15 +41,7 @@ exports[`DrawerMenu matches the last snapshot 1`] = `
   </ImageBackground>
   <SectionList
     SectionSeparatorComponent={[Function]}
-    data={Array []}
-    disableVirtualization={false}
-    horizontal={false}
-    initialNumToRender={10}
-    keyExtractor={[Function]}
-    maxToRenderPerBatch={10}
-    onEndReachedThreshold={2}
     renderSectionHeader={[Function]}
-    scrollEventThrottle={50}
     sections={
       Array [
         Object {
@@ -65,8 +57,6 @@ exports[`DrawerMenu matches the last snapshot 1`] = `
       ]
     }
     stickySectionHeadersEnabled={false}
-    updateCellsBatchingPeriod={50}
-    windowSize={21}
   />
   <Button
     text="Start a Group"
@@ -77,7 +67,7 @@ exports[`DrawerMenu matches the last snapshot 1`] = `
 
 exports[`GroupRow hides badge when no newPostCount 1`] = `
 <View>
-  <ForwardRef
+  <TouchableOpacity
     onPress={[Function]}
   >
     <Image
@@ -93,13 +83,13 @@ exports[`GroupRow hides badge when no newPostCount 1`] = `
     >
       Foom
     </Text>
-  </ForwardRef>
+  </TouchableOpacity>
 </View>
 `;
 
 exports[`GroupRow highlights when matching currentGroupId 1`] = `
 <View>
-  <ForwardRef
+  <TouchableOpacity
     onPress={[Function]}
   >
     <Image
@@ -115,13 +105,13 @@ exports[`GroupRow highlights when matching currentGroupId 1`] = `
     >
       Foom
     </Text>
-  </ForwardRef>
+  </TouchableOpacity>
 </View>
 `;
 
 exports[`GroupRow matches the last snapshot 1`] = `
 <View>
-  <ForwardRef
+  <TouchableOpacity
     onPress={[Function]}
   >
     <Image
@@ -142,7 +132,7 @@ exports[`GroupRow matches the last snapshot 1`] = `
         7
       </Text>
     </View>
-  </ForwardRef>
+  </TouchableOpacity>
 </View>
 `;
 
@@ -155,7 +145,7 @@ exports[`SectionHeader matches the last snapshot 1`] = `
 `;
 
 exports[`TextButton renders 1`] = `
-<ForwardRef
+<TouchableOpacity
   hitSlop={
     Object {
       "bottom": 10,
@@ -169,5 +159,5 @@ exports[`TextButton renders 1`] = `
   <Text>
     anything
   </Text>
-</ForwardRef>
+</TouchableOpacity>
 `;

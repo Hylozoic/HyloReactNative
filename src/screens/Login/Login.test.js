@@ -4,6 +4,14 @@ import TestRenderer from 'react-test-renderer'
 import Login, { FormError, SignupLink } from './Login'
 
 jest.mock('util/platform', () => ({ isIOS: false }))
+jest.mock('@react-native-google-signin/google-signin', () => ({
+  GoogleSignin: {
+    hasPlayServices: jest.fn(),
+    signIn: jest.fn(() => Promise.resolve()),
+    getTokens: jest.fn(() => ({ accessToken: 'faketoken' })),
+    configure: jest.fn()
+  } 
+}))
 
 describe('Login', () => {
   it('renders correctly', () => {

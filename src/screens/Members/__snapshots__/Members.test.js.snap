@@ -58,17 +58,13 @@ exports[`renders correctly with no group (all groups default) 1`] = `
         },
       ]
     }
-    disableVirtualization={false}
     getItem={[Function]}
     getItemCount={[Function]}
-    horizontal={false}
-    initialNumToRender={10}
     keyExtractor={[Function]}
-    maxToRenderPerBatch={10}
     onContentSizeChange={[Function]}
     onEndReached={[Function]}
-    onEndReachedThreshold={2}
     onLayout={[Function]}
+    onMomentumScrollBegin={[Function]}
     onMomentumScrollEnd={[Function]}
     onScroll={[Function]}
     onScrollBeginDrag={[Function]}
@@ -77,9 +73,7 @@ exports[`renders correctly with no group (all groups default) 1`] = `
     renderItem={[Function]}
     scrollEventThrottle={50}
     stickyHeaderIndices={Array []}
-    updateCellsBatchingPeriod={50}
     viewabilityConfigCallbackPairs={Array []}
-    windowSize={21}
   >
     <View>
       <View
@@ -92,19 +86,18 @@ exports[`renders correctly with no group (all groups default) 1`] = `
                 name="Search"
               />
               <TextInput
-                allowFontScaling={true}
                 autoCapitalize="none"
                 autoCorrect={false}
                 autoFocus={false}
                 editable={true}
                 onChangeText={[Function]}
                 placeholder="Search Members"
-                rejectResponderTermination={true}
                 underlineColorAndroid="transparent"
               />
             </View>
             <View
               accessible={true}
+              collapsable={false}
               focusable={true}
               hitSlop={
                 Object {
@@ -114,6 +107,7 @@ exports[`renders correctly with no group (all groups default) 1`] = `
                   "top": 5,
                 }
               }
+              nativeID="animatedComponent"
               onClick={[Function]}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
@@ -136,7 +130,9 @@ exports[`renders correctly with no group (all groups default) 1`] = `
         <View>
           <View
             accessible={true}
+            collapsable={false}
             focusable={true}
+            nativeID="animatedComponent"
             onClick={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
@@ -170,7 +166,9 @@ exports[`renders correctly with no group (all groups default) 1`] = `
           </View>
           <View
             accessible={true}
+            collapsable={false}
             focusable={true}
+            nativeID="animatedComponent"
             onClick={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
@@ -210,7 +208,9 @@ exports[`renders correctly with no group (all groups default) 1`] = `
         <View>
           <View
             accessible={true}
+            collapsable={false}
             focusable={true}
+            nativeID="animatedComponent"
             onClick={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
@@ -241,7 +241,9 @@ exports[`renders correctly with no group (all groups default) 1`] = `
           </View>
           <View
             accessible={true}
+            collapsable={false}
             focusable={true}
+            nativeID="animatedComponent"
             onClick={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
@@ -346,17 +348,13 @@ exports[`renders with invite button when a moderator 1`] = `
         },
       ]
     }
-    disableVirtualization={false}
     getItem={[Function]}
     getItemCount={[Function]}
-    horizontal={false}
-    initialNumToRender={10}
     keyExtractor={[Function]}
-    maxToRenderPerBatch={10}
     onContentSizeChange={[Function]}
     onEndReached={[Function]}
-    onEndReachedThreshold={2}
     onLayout={[Function]}
+    onMomentumScrollBegin={[Function]}
     onMomentumScrollEnd={[Function]}
     onScroll={[Function]}
     onScrollBeginDrag={[Function]}
@@ -365,9 +363,7 @@ exports[`renders with invite button when a moderator 1`] = `
     renderItem={[Function]}
     scrollEventThrottle={50}
     stickyHeaderIndices={Array []}
-    updateCellsBatchingPeriod={50}
     viewabilityConfigCallbackPairs={Array []}
-    windowSize={21}
   >
     <View>
       <View
@@ -400,7 +396,9 @@ exports[`renders with invite button when a moderator 1`] = `
             <View>
               <View
                 accessible={true}
+                collapsable={false}
                 focusable={true}
+                nativeID="animatedComponent"
                 onClick={[Function]}
                 onResponderGrant={[Function]}
                 onResponderMove={[Function]}
@@ -428,19 +426,18 @@ exports[`renders with invite button when a moderator 1`] = `
                 name="Search"
               />
               <TextInput
-                allowFontScaling={true}
                 autoCapitalize="none"
                 autoCorrect={false}
                 autoFocus={false}
                 editable={true}
                 onChangeText={[Function]}
                 placeholder="Search Members"
-                rejectResponderTermination={true}
                 underlineColorAndroid="transparent"
               />
             </View>
             <View
               accessible={true}
+              collapsable={false}
               focusable={true}
               hitSlop={
                 Object {
@@ -450,6 +447,7 @@ exports[`renders with invite button when a moderator 1`] = `
                   "top": 5,
                 }
               }
+              nativeID="animatedComponent"
               onClick={[Function]}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
@@ -472,7 +470,9 @@ exports[`renders with invite button when a moderator 1`] = `
         <View>
           <View
             accessible={true}
+            collapsable={false}
             focusable={true}
+            nativeID="animatedComponent"
             onClick={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
@@ -506,7 +506,9 @@ exports[`renders with invite button when a moderator 1`] = `
           </View>
           <View
             accessible={true}
+            collapsable={false}
             focusable={true}
+            nativeID="animatedComponent"
             onClick={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
@@ -546,7 +548,9 @@ exports[`renders with invite button when a moderator 1`] = `
         <View>
           <View
             accessible={true}
+            collapsable={false}
             focusable={true}
+            nativeID="animatedComponent"
             onClick={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
@@ -577,7 +581,9 @@ exports[`renders with invite button when a moderator 1`] = `
           </View>
           <View
             accessible={true}
+            collapsable={false}
             focusable={true}
+            nativeID="animatedComponent"
             onClick={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}

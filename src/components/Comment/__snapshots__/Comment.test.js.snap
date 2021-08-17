@@ -53,33 +53,33 @@ exports[`commentMenu returns removeComment 1`] = `
 `;
 
 exports[`renders correctly 1`] = `
-<ForwardRef
+<TouchableOpacity
   onPress={[Function]}
 >
   <View>
-    <ForwardRef
+    <TouchableOpacity
       onPress={[Function]}
     >
       <Avatar
         avatarUrl="foo.png"
       />
-    </ForwardRef>
+    </TouchableOpacity>
     <View>
       <View>
         <View>
-          <ForwardRef
+          <TouchableOpacity
             onPress={[Function]}
           >
             <Text>
               Ishamel
             </Text>
-          </ForwardRef>
+          </TouchableOpacity>
           <Text>
             
           </Text>
         </View>
         <View>
-          <ForwardRef
+          <TouchableOpacity
             onPress={[Function]}
           >
             <Icon
@@ -88,7 +88,7 @@ exports[`renders correctly 1`] = `
             <Text>
               Reply
             </Text>
-          </ForwardRef>
+          </TouchableOpacity>
           <CommentMenu
             deleteComment={[Function]}
             removeComment={[Function]}
@@ -126,31 +126,31 @@ exports[`renders correctly 1`] = `
       />
     </View>
   </View>
-</ForwardRef>
+</TouchableOpacity>
 `;
 
 exports[`shows the post title when displayPostTitle is true 1`] = `
-<ForwardRef
+<TouchableOpacity
   onPress={[Function]}
 >
   <View>
-    <ForwardRef
+    <TouchableOpacity
       onPress={[Function]}
     >
       <Avatar
         avatarUrl="foo.png"
       />
-    </ForwardRef>
+    </TouchableOpacity>
     <View>
       <View>
         <View>
-          <ForwardRef
+          <TouchableOpacity
             onPress={[Function]}
           >
             <Text>
               Ishamel
             </Text>
-          </ForwardRef>
+          </TouchableOpacity>
           <Text>
             
           </Text>
@@ -161,7 +161,7 @@ exports[`shows the post title when displayPostTitle is true 1`] = `
           </Text>
         </View>
         <View>
-          <ForwardRef
+          <TouchableOpacity
             onPress={[Function]}
           >
             <Icon
@@ -170,7 +170,7 @@ exports[`shows the post title when displayPostTitle is true 1`] = `
             <Text>
               Reply
             </Text>
-          </ForwardRef>
+          </TouchableOpacity>
           <CommentMenu
             deleteComment={[Function]}
             removeComment={[Function]}
@@ -208,5 +208,5 @@ exports[`shows the post title when displayPostTitle is true 1`] = `
       />
     </View>
   </View>
-</ForwardRef>
+</TouchableOpacity>
 `;

@@ -22,21 +22,13 @@ exports[`FeedList renders correctly 1`] = `
         3,
       ]
     }
-    disableVirtualization={false}
-    horizontal={false}
-    initialNumToRender={10}
     keyExtractor={[Function]}
-    maxToRenderPerBatch={10}
     numColumns={1}
     onEndReached={[Function]}
-    onEndReachedThreshold={2}
     onRefresh={[Function]}
     refreshing={false}
     removeClippedSubviews={false}
     renderItem={[Function]}
-    scrollEventThrottle={50}
-    updateCellsBatchingPeriod={50}
-    windowSize={21}
   />
 </View>
 `;

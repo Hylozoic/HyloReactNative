@@ -28,9 +28,10 @@ exports[`displays an error when a child component throws an error 1`] = `
   />
   <View
     accessibilityRole="button"
-    accessibilityState={Object {}}
     accessible={true}
+    collapsable={false}
     focusable={true}
+    nativeID="animatedComponent"
     onClick={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}

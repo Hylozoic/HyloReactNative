@@ -5,23 +5,20 @@ exports[`matches last snapshot 1`] = `
   <Text>
     Name
   </Text>
-  <Component
-    allowFontScaling={true}
+  <TextInput
     autoCapitalize="words"
     autoCorrect={true}
     editable={true}
     keyboardType="email-address"
     onChangeText={[Function]}
     onSubmitEditing={[Function]}
-    rejectResponderTermination={true}
     returnKeyType="next"
     secureTextEntry={true}
     textContentType="oneTimeCode"
-    underlineColorAndroid="transparent"
     value="Joe Bloggs"
   />
   <View>
-    <ForwardRef
+    <TouchableOpacity
       hitSlop={
         Object {
           "bottom": 10,
@@ -37,9 +34,9 @@ exports[`matches last snapshot 1`] = `
         name="eye"
         size={12}
       />
-    </ForwardRef>
+    </TouchableOpacity>
     <View>
-      <ForwardRef
+      <TouchableOpacity
         hitSlop={
           Object {
             "bottom": 10,
@@ -55,7 +52,7 @@ exports[`matches last snapshot 1`] = `
           name="check"
           size={12}
         />
-      </ForwardRef>
+      </TouchableOpacity>
     </View>
   </View>
   <View>

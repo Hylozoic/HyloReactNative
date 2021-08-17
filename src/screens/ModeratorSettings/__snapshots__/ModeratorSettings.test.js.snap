@@ -8,7 +8,7 @@ exports[`ModeratorSettings matches the last snapshot 1`] = `
         Group Time
       </Text>
       <View>
-        <ForwardRef
+        <TouchableOpacity
           onPress={[Function]}
         >
           <Text>
@@ -18,7 +18,7 @@ exports[`ModeratorSettings matches the last snapshot 1`] = `
             />
              Add New
           </Text>
-        </ForwardRef>
+        </TouchableOpacity>
       </View>
     </View>
   }
@@ -36,24 +36,16 @@ exports[`ModeratorSettings matches the last snapshot 1`] = `
       },
     ]
   }
-  disableVirtualization={false}
-  horizontal={false}
-  initialNumToRender={10}
   keyExtractor={[Function]}
   keyboardShouldPersistTaps="always"
-  maxToRenderPerBatch={10}
   numColumns={1}
-  onEndReachedThreshold={2}
   removeClippedSubviews={false}
   renderItem={[Function]}
-  scrollEventThrottle={50}
-  updateCellsBatchingPeriod={50}
-  windowSize={21}
 />
 `;
 
 exports[`ModeratorSettings renders ModeratorRow 1`] = `
-<ForwardRef
+<TouchableOpacity
   onPress={[Function]}
 >
   <Avatar
@@ -62,7 +54,7 @@ exports[`ModeratorSettings renders ModeratorRow 1`] = `
   <Text>
     John Current
   </Text>
-  <ForwardRef
+  <TouchableOpacity
     hitSlop={
       Object {
         "bottom": 15,
@@ -76,12 +68,12 @@ exports[`ModeratorSettings renders ModeratorRow 1`] = `
     <Text>
       Remove
     </Text>
-  </ForwardRef>
-</ForwardRef>
+  </TouchableOpacity>
+</TouchableOpacity>
 `;
 
 exports[`ModeratorSettings renders ModeratorRow without removeModerator 1`] = `
-<ForwardRef
+<TouchableOpacity
   onPress={[Function]}
 >
   <Avatar
@@ -90,7 +82,7 @@ exports[`ModeratorSettings renders ModeratorRow without removeModerator 1`] = `
   <Text>
     John Current
   </Text>
-</ForwardRef>
+</TouchableOpacity>
 `;
 
 exports[`ModeratorSettings shows the Search component appropriately 1`] = `
@@ -101,7 +93,7 @@ exports[`ModeratorSettings shows the Search component appropriately 1`] = `
         Group Time
       </Text>
       <View>
-        <ForwardRef
+        <TouchableOpacity
           onPress={[Function]}
         >
           <Text>
@@ -111,7 +103,7 @@ exports[`ModeratorSettings shows the Search component appropriately 1`] = `
             />
              Add New
           </Text>
-        </ForwardRef>
+        </TouchableOpacity>
       </View>
     </View>
   }
@@ -129,17 +121,13 @@ exports[`ModeratorSettings shows the Search component appropriately 1`] = `
       },
     ]
   }
-  disableVirtualization={false}
   getItem={[Function]}
   getItemCount={[Function]}
-  horizontal={false}
-  initialNumToRender={10}
   keyExtractor={[Function]}
   keyboardShouldPersistTaps="always"
-  maxToRenderPerBatch={10}
   onContentSizeChange={[Function]}
-  onEndReachedThreshold={2}
   onLayout={[Function]}
+  onMomentumScrollBegin={[Function]}
   onMomentumScrollEnd={[Function]}
   onScroll={[Function]}
   onScrollBeginDrag={[Function]}
@@ -148,9 +136,7 @@ exports[`ModeratorSettings shows the Search component appropriately 1`] = `
   renderItem={[Function]}
   scrollEventThrottle={50}
   stickyHeaderIndices={Array []}
-  updateCellsBatchingPeriod={50}
   viewabilityConfigCallbackPairs={Array []}
-  windowSize={21}
 >
   <View>
     <View

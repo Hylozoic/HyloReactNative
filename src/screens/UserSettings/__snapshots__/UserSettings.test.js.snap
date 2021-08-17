@@ -6,13 +6,13 @@ exports[`Footer matches the last snapshot without saveChanges 1`] = `
     disabled={true}
     text="Save Changes"
   />
-  <ForwardRef
+  <TouchableOpacity
     onPress={[Function]}
   >
     <Text>
       Cancel
     </Text>
-  </ForwardRef>
+  </TouchableOpacity>
   <Button
     onPress={[Function]}
     text="Logout"
@@ -27,13 +27,13 @@ exports[`Footer matches the last snapshot without saveChanges 2`] = `
     onPress={[Function]}
     text="Save Changes"
   />
-  <ForwardRef
+  <TouchableOpacity
     onPress={[Function]}
   >
     <Text>
       Cancel
     </Text>
-  </ForwardRef>
+  </TouchableOpacity>
   <Button
     onPress={[Function]}
     text="Logout"
@@ -69,13 +69,13 @@ exports[`SocialAccounts matches the last snapshot 1`] = `
 exports[`SocialControl matches the last snapshot linked 1`] = `
 <View>
   <Text />
-  <ForwardRef
+  <TouchableOpacity
     onPress={[Function]}
   >
     <Text>
       Unlink
     </Text>
-  </ForwardRef>
+  </TouchableOpacity>
 </View>
 `;
 
@@ -91,13 +91,13 @@ exports[`SocialControl matches the last snapshot loading 1`] = `
 exports[`SocialControl matches the last snapshot unlinked 1`] = `
 <View>
   <Text />
-  <ForwardRef
+  <TouchableOpacity
     onPress={[Function]}
   >
     <Text>
       Link
     </Text>
-  </ForwardRef>
+  </TouchableOpacity>
 </View>
 `;
 
@@ -271,7 +271,9 @@ exports[`UserSettings matches snapshot with state set 1`] = `
         />
         <View
           accessible={true}
+          collapsable={false}
           focusable={true}
+          nativeID="animatedComponent"
           onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
@@ -487,13 +489,13 @@ exports[`UserSettings matches the last snapshot 1`] = `
         <Text>
           PASSWORD
         </Text>
-        <ForwardRef
+        <TouchableOpacity
           onPress={[Function]}
         >
           <Text>
             Change Password
           </Text>
-        </ForwardRef>
+        </TouchableOpacity>
       </View>
       <SocialAccounts
         loginWithFacebook={[Function]}

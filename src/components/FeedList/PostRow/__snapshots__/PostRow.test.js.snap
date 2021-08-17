@@ -2,7 +2,7 @@
 
 exports[`PostRow renders correctly 1`] = `
 <View>
-  <ForwardRef
+  <TouchableOpacity
     activeOpacity={0.6}
     delayPressIn={50}
     onPress={[Function]}
@@ -18,6 +18,6 @@ exports[`PostRow renders correctly 1`] = `
         respondToEvent={[Function]}
       />
     </View>
-  </ForwardRef>
+  </TouchableOpacity>
 </View>
 `;

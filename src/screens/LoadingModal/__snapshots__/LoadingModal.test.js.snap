@@ -2,13 +2,13 @@
 
 exports[`matches last snapshot when visible is true 1`] = `
 <View
+  collapsable={false}
+  nativeID="animatedComponent"
   useNativeDriver={true}
 >
   <View>
     <ActivityIndicator
-      animating={true}
       color="#818A88"
-      hidesWhenStopped={true}
       size="small"
     />
   </View>

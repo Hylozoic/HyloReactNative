@@ -5,13 +5,11 @@ exports[`ItemChooser renders as expected (without value) 1`] = `
   <Icon
     name="Search"
   />
-  <Component
-    allowFontScaling={true}
+  <TextInput
     autoCapitalize="none"
     autoCorrect={false}
     autoFocus={false}
     editable={true}
-    rejectResponderTermination={true}
     underlineColorAndroid="transparent"
   />
 </View>
@@ -22,13 +20,11 @@ exports[`ItemChooser renders as expected when loading 1`] = `
   <Icon
     name="Search"
   />
-  <Component
-    allowFontScaling={true}
+  <TextInput
     autoCapitalize="none"
     autoCorrect={false}
     autoFocus={false}
     editable={true}
-    rejectResponderTermination={true}
     underlineColorAndroid="transparent"
   />
   <Loading />
@@ -40,13 +36,11 @@ exports[`ItemChooser renders as expected with value 1`] = `
   <Icon
     name="Search"
   />
-  <Component
-    allowFontScaling={true}
+  <TextInput
     autoCapitalize="none"
     autoCorrect={false}
     autoFocus={false}
     editable={true}
-    rejectResponderTermination={true}
     underlineColorAndroid="transparent"
     value="Anything"
   />
@@ -58,14 +52,12 @@ exports[`ItemChooser renders with placeholder 1`] = `
   <Icon
     name="Search"
   />
-  <Component
-    allowFontScaling={true}
+  <TextInput
     autoCapitalize="none"
     autoCorrect={false}
     autoFocus={false}
     editable={true}
     placeholder="Search anything"
-    rejectResponderTermination={true}
     underlineColorAndroid="transparent"
   />
 </View>

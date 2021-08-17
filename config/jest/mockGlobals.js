@@ -49,9 +49,6 @@ jest.mock('react-native-reanimated', () => {
   return Reanimated
 })
 
-// Silence the warning: Animated: `useNativeDriver` is not supported because the native animated module is missing
-jest.mock('react-native/Libraries/Animated/src/NativeAnimatedHelper')
-
 // Mock this globally @see https://github.com/l-urence/react-native-autocomplete-input#known-issues
 jest.mock('react-native-autocomplete-input', () => 'Autocomplete')
 jest.mock('react-native-mixpanel')
@@ -61,7 +58,8 @@ jest.mock('react-native-device-info', () => {
   }
 })
 jest.mock('react-native-intercom', () => {}, { virtual: true })
-jest.mock('react-native/Libraries/Animated/src/NativeAnimatedHelper')
+jest.mock('@react-native-google-signin/google-signin', () => ({ GoogleSignin: { configure: () => {} } }))
+jest.mock('react-native/Libraries/Animated/NativeAnimatedHelper')
 jest.mock('react-native-background-timer', () => {})
 jest.mock('@sentry/react-native', () => ({
   init: jest.fn()

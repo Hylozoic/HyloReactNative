@@ -2,7 +2,7 @@
 
 exports[`disables 1`] = `
 <View>
-  <ForwardRef
+  <TouchableOpacity
     disabled={true}
     onPress={[Function]}
   >
@@ -13,13 +13,13 @@ exports[`disables 1`] = `
         </Text>
       </View>
     </View>
-  </ForwardRef>
+  </TouchableOpacity>
 </View>
 `;
 
 exports[`matches last snapshot 1`] = `
 <View>
-  <ForwardRef
+  <TouchableOpacity
     disabled={false}
     onPress={[Function]}
   >
@@ -30,6 +30,6 @@ exports[`matches last snapshot 1`] = `
         </Text>
       </View>
     </View>
-  </ForwardRef>
+  </TouchableOpacity>
 </View>
 `;

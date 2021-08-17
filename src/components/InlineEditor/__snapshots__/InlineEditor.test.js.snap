@@ -2,12 +2,7 @@
 
 exports[`renders SubmitButton when submitting 1`] = `
 <View>
-  <ActivityIndicator
-    animating={true}
-    color="#999999"
-    hidesWhenStopped={true}
-    size="small"
-  />
+  <ActivityIndicator />
 </View>
 `;
 
@@ -17,20 +12,18 @@ exports[`renders as expected 1`] = `
   onFocus={[Function]}
 >
   <View>
-    <Component
-      allowFontScaling={true}
+    <TextInput
       editable={true}
       multiline={true}
       onChangeText={[MockFunction]}
       onSelectionChange={[Function]}
       placeholder="Place Holder"
       placeholderTextColor="#c0c6cd"
-      rejectResponderTermination={true}
       underlineColorAndroid="transparent"
       value="some text"
     />
     <View>
-      <ForwardRef
+      <TouchableOpacity
         hitSlop={
           Object {
             "bottom": 7,
@@ -44,8 +37,8 @@ exports[`renders as expected 1`] = `
         <Text>
           @
         </Text>
-      </ForwardRef>
-      <ForwardRef
+      </TouchableOpacity>
+      <TouchableOpacity
         hitSlop={
           Object {
             "bottom": 7,
@@ -59,7 +52,7 @@ exports[`renders as expected 1`] = `
         <Text>
           #
         </Text>
-      </ForwardRef>
+      </TouchableOpacity>
     </View>
   </View>
   <SubmitButton

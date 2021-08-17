@@ -169,7 +169,6 @@ exports[`ItemChooser full renders as expected 1`] = `
         name="Search"
       />
       <TextInput
-        allowFontScaling={true}
         autoCapitalize="none"
         autoCorrect={false}
         autoFocus={true}
@@ -177,7 +176,6 @@ exports[`ItemChooser full renders as expected 1`] = `
         onChangeText={[Function]}
         onFocus={[MockFunction]}
         placeholder="Begin type to searching"
-        rejectResponderTermination={true}
         underlineColorAndroid="transparent"
       />
     </View>
@@ -185,17 +183,13 @@ exports[`ItemChooser full renders as expected 1`] = `
   <RCTScrollView
     ListFooterComponent={<View />}
     data={Array []}
-    disableVirtualization={false}
     getItem={[Function]}
     getItemCount={[Function]}
-    horizontal={false}
-    initialNumToRender={10}
     keyExtractor={[Function]}
     keyboardShouldPersistTaps="handled"
-    maxToRenderPerBatch={10}
     onContentSizeChange={[Function]}
-    onEndReachedThreshold={2}
     onLayout={[Function]}
+    onMomentumScrollBegin={[Function]}
     onMomentumScrollEnd={[Function]}
     onScroll={[Function]}
     onScrollBeginDrag={[Function]}
@@ -203,8 +197,6 @@ exports[`ItemChooser full renders as expected 1`] = `
     renderItem={[Function]}
     scrollEventThrottle={50}
     stickyHeaderIndices={Array []}
-    updateCellsBatchingPeriod={50}
-    windowSize={21}
   >
     <View>
       <View
@@ -258,21 +250,12 @@ exports[`ItemChooser shallow renders as expected 1`] = `
   />
   <SectionList
     ListFooterComponent={<View />}
-    data={Array []}
-    disableVirtualization={false}
-    horizontal={false}
-    initialNumToRender={10}
     keyExtractor={[Function]}
     keyboardShouldPersistTaps="handled"
-    maxToRenderPerBatch={10}
-    onEndReachedThreshold={2}
     renderItem={[Function]}
     renderSectionHeader={[Function]}
-    scrollEventThrottle={50}
     sections={Array []}
     stickySectionHeadersEnabled={true}
-    updateCellsBatchingPeriod={50}
-    windowSize={21}
   />
 </SafeAreaViewMock>
 `;

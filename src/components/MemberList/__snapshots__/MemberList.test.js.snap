@@ -33,19 +33,11 @@ exports[`MemberList renders with default props with default non-server search 1`
       },
     ]
   }
-  disableVirtualization={false}
-  horizontal={false}
-  initialNumToRender={10}
   keyExtractor={[Function]}
-  maxToRenderPerBatch={10}
   numColumns="2"
   onEndReached={false}
-  onEndReachedThreshold={2}
   removeClippedSubviews={false}
   renderItem={[Function]}
-  scrollEventThrottle={50}
-  updateCellsBatchingPeriod={50}
-  windowSize={21}
 />
 `;
 
@@ -82,19 +74,11 @@ exports[`MemberList runs call for new results if server search 1`] = `
       },
     ]
   }
-  disableVirtualization={false}
-  horizontal={false}
-  initialNumToRender={10}
   keyExtractor={[Function]}
-  maxToRenderPerBatch={10}
   numColumns="2"
   onEndReached={[Function]}
-  onEndReachedThreshold={2}
   removeClippedSubviews={false}
   renderItem={[Function]}
-  scrollEventThrottle={50}
-  updateCellsBatchingPeriod={50}
-  windowSize={21}
 />
 `;
 
@@ -120,17 +104,13 @@ exports[`MemberList server search fetches new results when search provided 1`] =
     </View>
   }
   data={Array []}
-  disableVirtualization={false}
   getItem={[Function]}
   getItemCount={[Function]}
-  horizontal={false}
-  initialNumToRender={10}
   keyExtractor={[Function]}
-  maxToRenderPerBatch={10}
   onContentSizeChange={[Function]}
   onEndReached={[Function]}
-  onEndReachedThreshold={2}
   onLayout={[Function]}
+  onMomentumScrollBegin={[Function]}
   onMomentumScrollEnd={[Function]}
   onScroll={[Function]}
   onScrollBeginDrag={[Function]}
@@ -139,9 +119,7 @@ exports[`MemberList server search fetches new results when search provided 1`] =
   renderItem={[Function]}
   scrollEventThrottle={50}
   stickyHeaderIndices={Array []}
-  updateCellsBatchingPeriod={50}
   viewabilityConfigCallbackPairs={Array []}
-  windowSize={21}
 >
   <View>
     <View
@@ -154,19 +132,18 @@ exports[`MemberList server search fetches new results when search provided 1`] =
               name="Search"
             />
             <TextInput
-              allowFontScaling={true}
               autoCapitalize="none"
               autoCorrect={false}
               autoFocus={false}
               editable={true}
               onChangeText={[Function]}
               placeholder="Search Members"
-              rejectResponderTermination={true}
               underlineColorAndroid="transparent"
             />
           </View>
           <View
             accessible={true}
+            collapsable={false}
             focusable={true}
             hitSlop={
               Object {
@@ -176,6 +153,7 @@ exports[`MemberList server search fetches new results when search provided 1`] =
                 "top": 5,
               }
             }
+            nativeID="animatedComponent"
             onClick={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}

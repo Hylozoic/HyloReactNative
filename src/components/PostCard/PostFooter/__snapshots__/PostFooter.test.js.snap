@@ -32,7 +32,7 @@ exports[`renders as expected 1`] = `
         You, You and 17 others commented
       </Text>
     </View>
-    <ForwardRef
+    <TouchableOpacity
       onPress={[Function]}
     >
       <Icon
@@ -41,7 +41,7 @@ exports[`renders as expected 1`] = `
       <Text>
         71
       </Text>
-    </ForwardRef>
+    </TouchableOpacity>
   </View>
 </React.Fragment>
 `;

@@ -1,12 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders as expected 1`] = `
-<ForwardRef
+<TouchableOpacity
   onPress={[Function]}
 >
   <Avatar
     dimension={30}
   />
   <Text />
-</ForwardRef>
+</TouchableOpacity>
 `;

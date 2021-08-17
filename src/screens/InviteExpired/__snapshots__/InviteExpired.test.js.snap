@@ -19,13 +19,13 @@ exports[`InviteExpired matches the last snapshot 1`] = `
     }
   />
   <View>
-    <ForwardRef
+    <TouchableOpacity
       onPress={[Function]}
     >
       <Text>
         Log In
       </Text>
-    </ForwardRef>
+    </TouchableOpacity>
   </View>
 </View>
 `;
