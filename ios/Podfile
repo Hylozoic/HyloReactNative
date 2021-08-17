@@ -1,9 +1,6 @@
 require_relative '../node_modules/react-native/scripts/react_native_pods'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
 
-# THIS LINE SHOULDN'T BE NECESSARY AND CAN POTENTIALLY BE REMOVED
-source 'https://github.com/CocoaPods/Specs.git' 
-
 platform :ios, '11'
 
 target 'HyloReactNative' do
