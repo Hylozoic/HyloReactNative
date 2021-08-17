@@ -1,5 +1,5 @@
 import React from 'react'
-import { GoogleSignin } from '@react-native-community/google-signin'
+import { GoogleSignin } from '@react-native-google-signin/google-signin'
 import Button from 'components/Button'
 
 export default class GoogleLoginButton extends React.Component {

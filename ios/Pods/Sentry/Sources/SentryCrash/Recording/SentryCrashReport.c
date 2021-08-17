@@ -873,8 +873,8 @@ writeStackContents(const SentryCrashReportWriter *const writer, const char *cons
         + (uintptr_t)(kStackContentsPushedDistance * (int)sizeof(sp)
             * sentrycrashcpu_stackGrowDirection() * -1);
     uintptr_t highAddress = sp
-        + (uintptr_t)(
-            kStackContentsPoppedDistance * (int)sizeof(sp) * sentrycrashcpu_stackGrowDirection());
+        + (uintptr_t)(kStackContentsPoppedDistance * (int)sizeof(sp)
+            * sentrycrashcpu_stackGrowDirection());
     if (highAddress < lowAddress) {
         uintptr_t tmp = lowAddress;
         lowAddress = highAddress;
@@ -1097,6 +1097,8 @@ writeThread(const SentryCrashReportWriter *const writer, const char *const key,
         "Writing thread %x (index %d). is crashed: %d", thread, threadIndex, isCrashedThread);
 
     SentryCrashStackCursor stackCursor;
+    stackCursor.async_caller = NULL;
+
     bool hasBacktrace = getStackCursor(crash, machineContext, &stackCursor);
 
     writer->beginObject(writer, key);
@@ -1128,6 +1130,8 @@ writeThread(const SentryCrashReportWriter *const writer, const char *const key,
         }
     }
     writer->endContainer(writer);
+
+    sentrycrash_async_backtrace_decref(stackCursor.async_caller);
 }
 
 /** Write information about all threads to the report.
