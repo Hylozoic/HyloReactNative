@@ -99,8 +99,6 @@ EOM
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_resource "${PODS_ROOT}/FBSDKCoreKit/FacebookSDKStrings.bundle"
   install_resource "${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle"
-  install_resource "${PODS_ROOT}/Intercom/Intercom/Intercom.framework/Versions/A/Resources/Intercom.bundle"
-  install_resource "${PODS_ROOT}/Intercom/Intercom/Intercom.framework/Versions/A/Resources/IntercomTranslations.bundle"
   install_resource "${PODS_ROOT}/Mixpanel/Mixpanel/Images/MPArrowLeft.png"
   install_resource "${PODS_ROOT}/Mixpanel/Mixpanel/Images/MPArrowLeft@2x.png"
   install_resource "${PODS_ROOT}/Mixpanel/Mixpanel/Images/MPArrowRight.png"
@@ -139,8 +137,6 @@ fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "${PODS_ROOT}/FBSDKCoreKit/FacebookSDKStrings.bundle"
   install_resource "${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle"
-  install_resource "${PODS_ROOT}/Intercom/Intercom/Intercom.framework/Versions/A/Resources/Intercom.bundle"
-  install_resource "${PODS_ROOT}/Intercom/Intercom/Intercom.framework/Versions/A/Resources/IntercomTranslations.bundle"
   install_resource "${PODS_ROOT}/Mixpanel/Mixpanel/Images/MPArrowLeft.png"
   install_resource "${PODS_ROOT}/Mixpanel/Mixpanel/Images/MPArrowLeft@2x.png"
   install_resource "${PODS_ROOT}/Mixpanel/Mixpanel/Images/MPArrowRight.png"

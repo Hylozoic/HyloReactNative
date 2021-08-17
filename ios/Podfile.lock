@@ -101,7 +101,7 @@ PODS:
     - AppAuth/Core (~> 1.4)
     - GTMSessionFetcher/Core (~> 1.5)
   - GTMSessionFetcher/Core (1.6.1)
-  - Intercom (6.0.2)
+  - Intercom (9.3.6)
   - libevent (2.1.12)
   - Mixpanel (3.6.5)
   - OneSignal (3.6.1)
@@ -326,8 +326,8 @@ PODS:
     - React-Core
   - react-native-image-picker (1.1.0):
     - React
-  - react-native-intercom (15.0.0):
-    - Intercom (~> 6.0.0)
+  - react-native-intercom (21.1.0):
+    - Intercom (~> 9.3.6)
     - React
   - react-native-mixpanel (1.2.5):
     - Mixpanel (~> 3.6.0)
@@ -467,8 +467,6 @@ DEPENDENCIES:
   - FlipperKit/FlipperKitUserDefaultsPlugin (= 0.93.0)
   - FlipperKit/SKIOSNetworkPlugin (= 0.93.0)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
-  - Intercom
-  - Mixpanel
   - OneSignal (< 4.0, >= 3.5)
   - RCT-Folly (from `../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec`)
   - RCTRequired (from `../node_modules/react-native/Libraries/RCTRequired`)
@@ -543,14 +541,15 @@ SPEC REPOS:
     - GoogleSignIn
     - GTMAppAuth
     - GTMSessionFetcher
-    - Intercom
     - libevent
-    - Mixpanel
     - OneSignal
     - OneSignalXCFramework
     - OpenSSL-Universal
     - Sentry
     - YogaKit
+  trunk:
+    - Intercom
+    - Mixpanel
 
 EXTERNAL SOURCES:
   BVLinearGradient:
@@ -687,7 +686,7 @@ SPEC CHECKSUMS:
   GoogleSignIn: 7137d297ddc022a7e0aa4619c86d72c909fa7213
   GTMAppAuth: ad5c2b70b9a8689e1a04033c9369c4915bfcbe89
   GTMSessionFetcher: 36689134877faeb055b27dfa4ccc9ceaa42e029e
-  Intercom: 523417d82ed1a8c635cc7f97b266eb8bd0bd9d85
+  Intercom: d44bd4264f61a3e343cac46d7b88d4db0f860077
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
   Mixpanel: de8296d8568806ab17bfced0f823c908b808e1e0
   OneSignal: ce8d6dd77450aa653dc2f6a22f3372570030260a
@@ -710,7 +709,7 @@ SPEC CHECKSUMS:
   react-native-fbsdk: 00c15d138bba6d4efa628670886fc58cec858c19
   react-native-flipper: d6e247954bd180572acd775dabecaef6ce967b1e
   react-native-image-picker: 7a85cf7b0a53845f03ae52fb4592a2748ded069b
-  react-native-intercom: ddc3a81f883b9089649dbaf4c02e3b3ad271b6d1
+  react-native-intercom: 0f5a88141d3c2a9fc7858eca48dd8101012f47cd
   react-native-mixpanel: 5d0bcea791fd938c35138be2d00e50e19b9de601
   react-native-netinfo: 30fb89fa913c342be82a887b56e96be6d71201dd
   react-native-onesignal: a7e433eec906c928954de4f124b6886418386bb4
@@ -745,6 +744,6 @@ SPEC CHECKSUMS:
   Yoga: 1561f557b0c2b6047a91f7619f666134e2288916
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: 6ed54620b157a0843db1d69e9d07a529b07ac0ea
+PODFILE CHECKSUM: e62e7ab84e6fc3672f184930c0d8257014876760
 
 COCOAPODS: 1.10.2

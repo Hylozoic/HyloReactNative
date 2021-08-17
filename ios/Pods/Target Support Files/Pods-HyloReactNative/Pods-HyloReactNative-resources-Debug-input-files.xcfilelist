@@ -1,8 +1,6 @@
 ${PODS_ROOT}/Target Support Files/Pods-HyloReactNative/Pods-HyloReactNative-resources.sh
 ${PODS_ROOT}/FBSDKCoreKit/FacebookSDKStrings.bundle
 ${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle
-${PODS_ROOT}/Intercom/Intercom/Intercom.framework/Versions/A/Resources/Intercom.bundle
-${PODS_ROOT}/Intercom/Intercom/Intercom.framework/Versions/A/Resources/IntercomTranslations.bundle
 ${PODS_ROOT}/Mixpanel/Mixpanel/Images/MPArrowLeft.png
 ${PODS_ROOT}/Mixpanel/Mixpanel/Images/MPArrowLeft@2x.png
 ${PODS_ROOT}/Mixpanel/Mixpanel/Images/MPArrowRight.png

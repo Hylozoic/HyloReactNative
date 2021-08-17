@@ -1,6 +1,6 @@
 {
   "name": "react-native-intercom",
-  "version": "15.0.0",
+  "version": "21.1.0",
   "license": {
     "type": "MIT"
   },
@@ -33,7 +33,7 @@
 
     ],
     "Intercom": [
-      "~> 6.0.0"
+      "~> 9.3.6"
     ]
   }
 }
