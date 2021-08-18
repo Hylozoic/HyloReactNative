@@ -11,6 +11,7 @@
 		026202985F894FECBEB14483 /* Circular-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 424B542986F0407EBC606DAD /* Circular-Bold.ttf */; };
 		0407DD5F25005EC500C570E9 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		047E7D7724F4C77C00A9668E /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 047E7D7624F4C77C00A9668E /* Default-568h@2x.png */; };
+		04B273B526CCB40200CFDAB1 /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 04B273B426CCB40200CFDAB1 /* main.jsbundle */; };
 		04BF1DE1248F357F00ECC3A2 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BF1DE0248F357F00ECC3A2 /* NotificationService.swift */; };
 		04BF1DE5248F357F00ECC3A2 /* OneSignalNotificationServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 04BF1DDE248F357F00ECC3A2 /* OneSignalNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		04F54BA224F4D59500031D32 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F54BA124F4D59500031D32 /* File.swift */; };
@@ -68,9 +69,9 @@
 		020FBB255010482BBBDDC4C2 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = ../assets/fonts/FontAwesome.ttf; sourceTree = "<group>"; };
 		0401F47A248F311C002E45AC /* HyloReactNativeRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = HyloReactNativeRelease.entitlements; path = HyloReactNative/HyloReactNativeRelease.entitlements; sourceTree = "<group>"; };
 		0401F47B248F312A002E45AC /* HyloReactNative.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = HyloReactNative.entitlements; path = HyloReactNative/HyloReactNative.entitlements; sourceTree = "<group>"; };
-		0427C3FB247B8D3600C5E188 /* main.jsbundle */ = {isa = PBXFileReference; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
 		046CBD2626C41FC800793670 /* OneSignalNotificationServiceExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OneSignalNotificationServiceExtension.entitlements; sourceTree = "<group>"; };
 		047E7D7624F4C77C00A9668E /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		04B273B426CCB40200CFDAB1 /* main.jsbundle */ = {isa = PBXFileReference; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
 		04BF1DDE248F357F00ECC3A2 /* OneSignalNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = OneSignalNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		04BF1DE0248F357F00ECC3A2 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		04BF1DE2248F357F00ECC3A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -180,7 +181,6 @@
 			children = (
 				0401F47B248F312A002E45AC /* HyloReactNative.entitlements */,
 				0401F47A248F311C002E45AC /* HyloReactNativeRelease.entitlements */,
-				0427C3FB247B8D3600C5E188 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -228,6 +228,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				04B273B426CCB40200CFDAB1 /* main.jsbundle */,
 				047E7D7624F4C77C00A9668E /* Default-568h@2x.png */,
 				13B07FAE1A68108700A75B9A /* HyloReactNative */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
@@ -420,6 +421,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04B273B526CCB40200CFDAB1 /* main.jsbundle in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				2A804B4D29AB42A8945C7445 /* Circular-Black.ttf in Resources */,
 				6473B41DA7624F5D8B9BA1E2 /* Circular-BlackItalic.ttf in Resources */,
