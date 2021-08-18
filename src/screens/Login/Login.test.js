@@ -12,6 +12,14 @@ jest.mock('@react-native-google-signin/google-signin', () => ({
     configure: jest.fn()
   } 
 }))
+jest.mock('react-native-fbsdk-next', () => ({
+  LoginManager: {
+    logInWithReadPermissions: jest.fn()
+  },
+  AccessToken: {
+    getCurrentAccessToken: jest.fn()
+  }
+}))
 
 describe('Login', () => {
   it('renders correctly', () => {

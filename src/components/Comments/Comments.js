@@ -106,6 +106,12 @@ function Comments ({
       initialScrollIndex={0}
       keyboardDismissMode='interactive'
       {...panHandlers}
+      // NOTE: Because inverted this will make the "footer" rise to the top
+      // of the view when the content is shorter than full height
+      contentContainerStyle={{
+        flexGrow: 1,
+        justifyContent: 'flex-end'
+      }}
     />
   )
 }
