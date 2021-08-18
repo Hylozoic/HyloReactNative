@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Text, ScrollView, TouchableOpacity } from 'react-native'
 import SafeAreaView from 'react-native-safe-area-view'
-import { LoginManager, AccessToken } from 'react-native-fbsdk'
+import { LoginManager, AccessToken } from 'react-native-fbsdk-next'
 import { get, any, values, isNil } from 'lodash/fp'
 import validator from 'validator'
 import prompt from 'react-native-prompt-android'

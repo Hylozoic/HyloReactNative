@@ -21,9 +21,9 @@
 #import <Photos/Photos.h>
 
 #ifdef FBSDKCOCOAPODS
-#import <FBSDKCoreKit/FBSDKCoreKit+Internal.h>
+ #import <FBSDKCoreKit/FBSDKCoreKit+Internal.h>
 #else
-#import "FBSDKCoreKit+Internal.h"
+ #import "FBSDKCoreKit+Internal.h"
 #endif
 #import "FBSDKHashtag.h"
 #import "FBSDKShareUtility.h"
@@ -78,52 +78,52 @@
 {
   NSMutableDictionary<NSString *, id> *updatedParameters = [NSMutableDictionary dictionaryWithDictionary:existingParameters];
 
-  NSMutableDictionary<NSString *, id> *videoParameters = [[NSMutableDictionary alloc] init];
+  NSMutableDictionary<NSString *, id> *videoParameters = [NSMutableDictionary new];
   if (_video.videoAsset) {
     if (bridgeOptions & FBSDKShareBridgeOptionsVideoAsset) {
       // bridge the PHAsset.localIdentifier
       [FBSDKTypeUtility dictionary:videoParameters
-                          setObject:_video.videoAsset.localIdentifier
-                             forKey:@"assetIdentifier"];
+                         setObject:_video.videoAsset.localIdentifier
+                            forKey:@"assetIdentifier"];
     } else {
       // bridge the legacy "assets-library" URL from AVAsset
       [FBSDKTypeUtility dictionary:videoParameters
-                          setObject:_video.videoAsset.videoURL
-                             forKey:@"assetURL"];
+                         setObject:_video.videoAsset.videoURL
+                            forKey:@"assetURL"];
     }
   } else if (_video.data) {
     if (bridgeOptions & FBSDKShareBridgeOptionsVideoData) {
       // bridge the data
       [FBSDKTypeUtility dictionary:videoParameters
-                          setObject:_video.data
-                             forKey:@"data"];
+                         setObject:_video.data
+                            forKey:@"data"];
     }
   } else if (_video.videoURL) {
     if ([_video.videoURL.scheme.lowercaseString isEqualToString:@"assets-library"]) {
       // bridge the legacy "assets-library" URL
       [FBSDKTypeUtility dictionary:videoParameters
-                          setObject:_video.videoURL
-                             forKey:@"assetURL"];
+                         setObject:_video.videoURL
+                            forKey:@"assetURL"];
     } else if (_video.videoURL.isFileURL) {
       if (bridgeOptions & FBSDKShareBridgeOptionsVideoData) {
         // load the contents of the file and bridge the data
         NSData *data = [NSData dataWithContentsOfURL:_video.videoURL options:NSDataReadingMappedIfSafe error:NULL];
         [FBSDKTypeUtility dictionary:videoParameters
-                            setObject:data
-                               forKey:@"data"];
+                           setObject:data
+                              forKey:@"data"];
       }
     }
   }
 
   if (_video.previewPhoto) {
     [FBSDKTypeUtility dictionary:videoParameters
-                        setObject:[FBSDKShareUtility convertPhoto:_video.previewPhoto]
-                           forKey:@"previewPhoto"];
+                       setObject:[FBSDKShareUtility convertPhoto:_video.previewPhoto]
+                          forKey:@"previewPhoto"];
   }
 
   [FBSDKTypeUtility dictionary:updatedParameters
-                      setObject:videoParameters
-                         forKey:@"video"];
+                     setObject:videoParameters
+                        forKey:@"video"];
 
   return updatedParameters;
 }
@@ -168,15 +168,15 @@
 
 - (BOOL)isEqualToShareVideoContent:(FBSDKShareVideoContent *)content
 {
-  return (content &&
-          [FBSDKInternalUtility object:_contentURL isEqualToObject:content.contentURL] &&
-          [FBSDKInternalUtility object:_hashtag isEqualToObject:content.hashtag] &&
-          [FBSDKInternalUtility object:_peopleIDs isEqualToObject:content.peopleIDs] &&
-          [FBSDKInternalUtility object:_placeID isEqualToObject:content.placeID] &&
-          [FBSDKInternalUtility object:_ref isEqualToObject:content.ref] &&
-          [FBSDKInternalUtility object:_pageID isEqualToObject:content.pageID] &&
-          [FBSDKInternalUtility object:_shareUUID isEqualToObject:content.shareUUID] &&
-          [FBSDKInternalUtility object:_video isEqualToObject:content.video]);
+  return (content
+    && [FBSDKInternalUtility object:_contentURL isEqualToObject:content.contentURL]
+    && [FBSDKInternalUtility object:_hashtag isEqualToObject:content.hashtag]
+    && [FBSDKInternalUtility object:_peopleIDs isEqualToObject:content.peopleIDs]
+    && [FBSDKInternalUtility object:_placeID isEqualToObject:content.placeID]
+    && [FBSDKInternalUtility object:_ref isEqualToObject:content.ref]
+    && [FBSDKInternalUtility object:_pageID isEqualToObject:content.pageID]
+    && [FBSDKInternalUtility object:_shareUUID isEqualToObject:content.shareUUID]
+    && [FBSDKInternalUtility object:_video isEqualToObject:content.video]);
 }
 
 #pragma mark - NSCoding
@@ -217,7 +217,7 @@
 
 - (id)copyWithZone:(NSZone *)zone
 {
-  FBSDKShareVideoContent *copy = [[FBSDKShareVideoContent alloc] init];
+  FBSDKShareVideoContent *copy = [FBSDKShareVideoContent new];
   copy->_contentURL = [_contentURL copy];
   copy->_hashtag = [_hashtag copy];
   copy->_peopleIDs = [_peopleIDs copy];

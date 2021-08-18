@@ -1,6 +1,6 @@
 import React from 'react'
 import MaterialGroupIcon from 'react-native-vector-icons/FontAwesome5'
-import { AccessToken, LoginManager } from 'react-native-fbsdk'
+import { AccessToken, LoginManager } from 'react-native-fbsdk-next'
 import Button from 'components/Button'
 
 export const permissions = ['public_profile', 'email']

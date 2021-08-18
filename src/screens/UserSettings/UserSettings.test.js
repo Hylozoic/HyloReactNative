@@ -4,10 +4,10 @@ import ReactShallowRenderer from 'react-test-renderer/shallow'
 import ReactTestRenderer from 'react-test-renderer'
 import UserSettings, { SocialAccounts, SocialControl, Footer } from './UserSettings'
 import { omit } from 'lodash/fp'
-import { LoginManager, AccessToken } from 'react-native-fbsdk'
+import { LoginManager, AccessToken } from 'react-native-fbsdk-next'
 import Toast from 'react-native-root-toast'
 
-jest.mock('react-native-fbsdk', () => ({
+jest.mock('react-native-fbsdk-next', () => ({
   LoginManager: {
     logInWithReadPermissions: jest.fn()
   },

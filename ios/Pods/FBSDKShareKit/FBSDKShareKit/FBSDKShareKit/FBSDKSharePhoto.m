@@ -21,9 +21,9 @@
 #import <Photos/Photos.h>
 
 #ifdef FBSDKCOCOAPODS
-#import <FBSDKCoreKit/FBSDKCoreKit+Internal.h>
+ #import <FBSDKCoreKit/FBSDKCoreKit+Internal.h>
 #else
-#import "FBSDKCoreKit+Internal.h"
+ #import "FBSDKCoreKit+Internal.h"
 #endif
 #import "FBSDKShareConstants.h"
 
@@ -39,7 +39,7 @@ NSString *const kFBSDKSharePhotoCaptionKey = @"caption";
 
 + (instancetype)photoWithImage:(UIImage *)image userGenerated:(BOOL)userGenerated
 {
-  FBSDKSharePhoto *photo = [[self alloc] init];
+  FBSDKSharePhoto *photo = [self new];
   photo.image = image;
   photo.userGenerated = userGenerated;
   return photo;
@@ -47,7 +47,7 @@ NSString *const kFBSDKSharePhotoCaptionKey = @"caption";
 
 + (instancetype)photoWithImageURL:(NSURL *)imageURL userGenerated:(BOOL)userGenerated
 {
-  FBSDKSharePhoto *photo = [[self alloc] init];
+  FBSDKSharePhoto *photo = [self new];
   photo.imageURL = imageURL;
   photo.userGenerated = userGenerated;
   return photo;
@@ -55,7 +55,7 @@ NSString *const kFBSDKSharePhotoCaptionKey = @"caption";
 
 + (instancetype)photoWithPhotoAsset:(PHAsset *)photoAsset userGenerated:(BOOL)userGenerated
 {
-  FBSDKSharePhoto *photo = [[self alloc] init];
+  FBSDKSharePhoto *photo = [self new];
   photo.photoAsset = photoAsset;
   photo.userGenerated = userGenerated;
   return photo;
@@ -111,12 +111,12 @@ NSString *const kFBSDKSharePhotoCaptionKey = @"caption";
 
 - (BOOL)isEqualToSharePhoto:(FBSDKSharePhoto *)photo
 {
-  return (photo &&
-          (_userGenerated == photo.userGenerated) &&
-          [FBSDKInternalUtility object:_image isEqualToObject:photo.image] &&
-          [FBSDKInternalUtility object:_imageURL isEqualToObject:photo.imageURL] &&
-          [FBSDKInternalUtility object:_photoAsset isEqualToObject:photo.photoAsset] &&
-          [FBSDKInternalUtility object:_caption isEqualToObject:photo.caption]);
+  return (photo
+    && (_userGenerated == photo.userGenerated)
+    && [FBSDKInternalUtility object:_image isEqualToObject:photo.image]
+    && [FBSDKInternalUtility object:_imageURL isEqualToObject:photo.imageURL]
+    && [FBSDKInternalUtility object:_photoAsset isEqualToObject:photo.photoAsset]
+    && [FBSDKInternalUtility object:_caption isEqualToObject:photo.caption]);
 }
 
 #pragma mark - FBSDKSharingValidation
@@ -221,7 +221,7 @@ NSString *const kFBSDKSharePhotoCaptionKey = @"caption";
 
 - (id)copyWithZone:(NSZone *)zone
 {
-  FBSDKSharePhoto *copy = [[FBSDKSharePhoto alloc] init];
+  FBSDKSharePhoto *copy = [FBSDKSharePhoto new];
   copy->_image = [_image copy];
   copy->_imageURL = [_imageURL copy];
   copy->_photoAsset = [_photoAsset copy];

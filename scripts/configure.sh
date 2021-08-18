@@ -32,14 +32,15 @@ echo "creating ios/debug.xcconfig"
 
 cat > ios/debug.xcconfig <<EOL
 FACEBOOK_APP_ID = $FACEBOOK_APP_ID_DEBUG
+FACEBOOK_CLIENT_TOKEN = $FACEBOOK_CLIENT_TOKEN_DEBUG
 ONESIGNAL_APP_ID = $ONESIGNAL_APP_ID_DEBUG
-
 EOL
 
 echo "creating ios/release.xcconfig"
 
 cat > ios/release.xcconfig <<EOL
 FACEBOOK_APP_ID = $FACEBOOK_APP_ID_RELEASE
+FACEBOOK_CLIENT_TOKEN = $FACEBOOK_CLIENT_TOKEN_RELEASE
 ONESIGNAL_APP_ID = $ONESIGNAL_APP_ID_RELEASE
 
 EOL
@@ -50,6 +51,7 @@ mkdir -p android/app/src/debug/res/values
 cat > android/app/src/debug/res/values/strings.xml <<EOL
 <resources>
     <string name="facebook_app_id">$FACEBOOK_APP_ID_DEBUG</string>
+    <string name="facebook_client_token">$FACEBOOK_CLIENT_TOKEN_DEBUG</string>
 </resources>
 
 EOL
@@ -60,6 +62,7 @@ mkdir -p android/app/src/release/res/values
 cat > android/app/src/release/res/values/strings.xml <<EOL
 <resources>
     <string name="facebook_app_id">$FACEBOOK_APP_ID_RELEASE</string>
+    <string name="facebook_client_token">$FACEBOOK_CLIENT_TOKEN_RELEASE</string>
 </resources>
 
 EOL

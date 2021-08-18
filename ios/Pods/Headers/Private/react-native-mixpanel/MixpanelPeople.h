@@ -1,1 +1,0 @@
-../../../../../node_modules/react-native-mixpanel/RNMixpanel/MixpanelPeople.h

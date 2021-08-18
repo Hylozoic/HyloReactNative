@@ -21,9 +21,9 @@
 #import "FBSDKHashtag.h"
 
 #ifdef FBSDKCOCOAPODS
-#import <FBSDKCoreKit/FBSDKCoreKit+Internal.h>
+ #import <FBSDKCoreKit/FBSDKCoreKit+Internal.h>
 #else
-#import "FBSDKCoreKit+Internal.h"
+ #import "FBSDKCoreKit+Internal.h"
 #endif
 #import "FBSDKShareConstants.h"
 #import "FBSDKShareLinkContent.h"
@@ -118,19 +118,19 @@
 + (void)buildAsyncWebPhotoContent:(FBSDKSharePhotoContent *)content
                 completionHandler:(FBSDKWebPhotoContentBlock)completion
 {
-  void(^stageImageCompletion)(NSArray<NSString *> *) = ^(NSArray<NSString *> *stagedURIs) {
+  void (^stageImageCompletion)(NSArray<NSString *> *) = ^(NSArray<NSString *> *stagedURIs) {
     NSString *const methodName = @"share";
     NSMutableDictionary<NSString *, id> *const parameters =
-      [[FBSDKShareUtility parametersForShareContent:content
-                                      bridgeOptions:FBSDKShareBridgeOptionsWebHashtag
-                              shouldFailOnDataError:NO] mutableCopy];
+    [[FBSDKShareUtility parametersForShareContent:content
+                                    bridgeOptions:FBSDKShareBridgeOptionsWebHashtag
+                            shouldFailOnDataError:NO] mutableCopy];
     [parameters removeObjectForKey:@"photos"];
     NSString *const stagedURIJSONString = [FBSDKBasicUtility JSONStringForObject:stagedURIs
                                                                            error:nil
                                                             invalidObjectHandler:NULL];
     [FBSDKTypeUtility dictionary:parameters
-                        setObject:stagedURIJSONString
-                           forKey:@"media"];
+                       setObject:stagedURIJSONString
+                          forKey:@"media"];
     [FBSDKTypeUtility dictionary:parameters setObject:[FBSDKShareUtility buildWebShareTags:content.peopleIDs] forKey:@"tags"];
     if (completion != NULL) {
       completion(YES, methodName, [parameters copy]);
@@ -146,7 +146,7 @@
   NSMutableDictionary<NSString *, id> *parameters = nil;
   if ([content isKindOfClass:[FBSDKShareLinkContent class]]) {
     FBSDKShareLinkContent *linkContent = (FBSDKShareLinkContent *)content;
-    parameters = [[NSMutableDictionary alloc] init];
+    parameters = [NSMutableDictionary new];
     [FBSDKTypeUtility dictionary:parameters setObject:linkContent.contentURL forKey:@"link"];
     [FBSDKTypeUtility dictionary:parameters setObject:linkContent.quote forKey:@"quote"];
     [FBSDKTypeUtility dictionary:parameters setObject:[self hashtagStringFromHashtag:linkContent.hashtag] forKey:@"hashtag"];
@@ -175,10 +175,12 @@
                        canvasSize:(CGSize)canvasSize
                        circleSize:(CGSize)circleSize
 {
-  CGRect circleFrame = CGRectMake((canvasSize.width - circleSize.width) / 2.0,
-                                  (canvasSize.height - circleSize.height) / 2.0,
-                                  circleSize.width,
-                                  circleSize.height);
+  CGRect circleFrame = CGRectMake(
+    (canvasSize.width - circleSize.width) / 2.0,
+    (canvasSize.height - circleSize.height) / 2.0,
+    circleSize.width,
+    circleSize.height
+  );
   UIGraphicsBeginImageContextWithOptions(canvasSize, NO, 0);
   CGContextRef context = UIGraphicsGetCurrentContext();
   [color setFill];
@@ -192,7 +194,7 @@
                                               bridgeOptions:(FBSDKShareBridgeOptions)bridgeOptions
                                       shouldFailOnDataError:(BOOL)shouldFailOnDataError
 {
-  NSMutableDictionary<NSString *, id> *parameters = [[NSMutableDictionary alloc] init];
+  NSMutableDictionary<NSString *, id> *parameters = [NSMutableDictionary new];
 
   // FBSDKSharingContent parameters
   NSString *const hashtagString = [self hashtagStringFromHashtag:shareContent.hashtag];
@@ -280,8 +282,7 @@
 {
   if (![self validateRequiredValue:shareContent name:@"shareContent" error:errorRef]) {
     return NO;
-  }
-  else if ([shareContent respondsToSelector:@selector(validateWithOptions:error:)]) {
+  } else if ([shareContent respondsToSelector:@selector(validateWithOptions:error:)]) {
     return [shareContent validateWithOptions:bridgeOptions error:errorRef];
   } else {
     if (errorRef != NULL) {
@@ -309,7 +310,7 @@
   if ([object isKindOfClass:[FBSDKSharePhoto class]]) {
     object = [self convertPhoto:(FBSDKSharePhoto *)object];
   } else if ([object isKindOfClass:[NSArray class]]) {
-    NSMutableArray *array = [[NSMutableArray alloc] init];
+    NSMutableArray *array = [NSMutableArray new];
     for (id item in (NSArray *)object) {
       [FBSDKTypeUtility array:array addObject:[self _convertObject:item]];
     }
@@ -323,7 +324,7 @@
   if (!photo) {
     return nil;
   }
-  NSMutableDictionary<NSString *, id> *dictionary = [[NSMutableDictionary alloc] init];
+  NSMutableDictionary<NSString *, id> *dictionary = [NSMutableDictionary new];
   [FBSDKTypeUtility dictionary:dictionary setObject:@(photo.userGenerated) forKey:@"user_generated"];
   [FBSDKTypeUtility dictionary:dictionary setObject:photo.caption forKey:@"caption"];
 
@@ -332,7 +333,7 @@
 }
 
 + (void)_stageImagesForPhotoContent:(FBSDKSharePhotoContent *)content
-              withCompletionHandler:(void(^)(NSArray<NSString *> *))completion
+              withCompletionHandler:(void (^)(NSArray<NSString *> *))completion
 {
   __block NSMutableArray<NSString *> *stagedURIs = [NSMutableArray array];
   dispatch_group_t group = dispatch_group_create();
@@ -340,8 +341,8 @@
     if (photo.image != nil) {
       dispatch_group_enter(group);
       NSDictionary *stagingParameters = @{
-                                          @"file" : photo.image,
-                                          };
+        @"file" : photo.image,
+      };
       FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:@"me/staging_resources"
                                                                      parameters:stagingParameters
                                                                      HTTPMethod:@"POST"];
@@ -355,11 +356,12 @@
     }
   }
 
-  dispatch_group_notify(group, dispatch_get_main_queue(), ^{
-    if (completion != NULL) {
-      completion([stagedURIs copy]);
-    }
-  });
+  dispatch_group_notify(group,
+    dispatch_get_main_queue(), ^{
+      if (completion != NULL) {
+        completion([stagedURIs copy]);
+      }
+    });
 }
 
 + (void)_testObject:(id)object containsMedia:(BOOL *)containsMediaRef containsPhotos:(BOOL *)containsPhotosRef containsVideos:(BOOL *)containsVideosRef
@@ -483,10 +485,10 @@
 
 + (BOOL)validateRequiredValue:(id)value name:(NSString *)name error:(NSError *__autoreleasing *)errorRef
 {
-  if (!value ||
-      ([value isKindOfClass:[NSString class]] && !((NSString *)value).length) ||
-      ([value isKindOfClass:[NSArray class]] && !((NSArray *)value).count) ||
-      ([value isKindOfClass:[NSDictionary class]] && !((NSDictionary *)value).count)) {
+  if (!value
+      || ([value isKindOfClass:[NSString class]] && !((NSString *)value).length)
+      || ([value isKindOfClass:[NSArray class]] && !((NSArray *)value).count)
+      || ([value isKindOfClass:[NSDictionary class]] && !((NSDictionary *)value).count)) {
     if (errorRef != NULL) {
       *errorRef = [FBSDKError requiredArgumentErrorWithDomain:FBSDKShareErrorDomain
                                                          name:name

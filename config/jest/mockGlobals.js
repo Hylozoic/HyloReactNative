@@ -51,7 +51,7 @@ jest.mock('react-native-reanimated', () => {
 
 // Mock this globally @see https://github.com/l-urence/react-native-autocomplete-input#known-issues
 jest.mock('react-native-autocomplete-input', () => 'Autocomplete')
-jest.mock('react-native-mixpanel')
+jest.mock('mixpanel-react-native')
 jest.mock('react-native-device-info', () => {
   return {
     getVersion: jest.fn()

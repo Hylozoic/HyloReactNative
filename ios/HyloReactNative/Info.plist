@@ -55,10 +55,12 @@
 	<false />
 	<key>FacebookAppID</key>
 	<string>$(FACEBOOK_APP_ID)</string>
-	<key>FacebookAutoLogAppEventsEnabled</key>
-	<false />
+	<key>FacebookClientToken</key>
+	<string>$(FACEBOOK_CLIENT_TOKEN)</string>
 	<key>FacebookDisplayName</key>
 	<string>Hylo</string>
+	<key>FacebookAutoLogAppEventsEnabled</key>
+	<false />
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false />
 	<key>LSApplicationQueriesSchemes</key>

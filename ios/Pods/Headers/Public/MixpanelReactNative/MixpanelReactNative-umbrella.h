@@ -1,0 +1,1 @@
+../../../Target Support Files/MixpanelReactNative/MixpanelReactNative-umbrella.h

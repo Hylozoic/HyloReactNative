@@ -3,4 +3,5 @@
     <string name="app_name">Hylo</string>
     <string name="link_schema">HyloApp</string>
     <string name="facebook_app_id">Facebook App ID</string>
+    <string name="facebook_client_token">Facebook Client ID</string>
 </resources>
