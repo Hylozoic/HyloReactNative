@@ -13,7 +13,6 @@
 		046EBCC726CCFC1D008EE5CD /* release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 046EBCC526CCFC1D008EE5CD /* release.xcconfig */; };
 		046EBCC826CCFC1D008EE5CD /* debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 046EBCC626CCFC1D008EE5CD /* debug.xcconfig */; };
 		047E7D7724F4C77C00A9668E /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 047E7D7624F4C77C00A9668E /* Default-568h@2x.png */; };
-		04B273B526CCB40200CFDAB1 /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 04B273B426CCB40200CFDAB1 /* main.jsbundle */; };
 		04BF1DE1248F357F00ECC3A2 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BF1DE0248F357F00ECC3A2 /* NotificationService.swift */; };
 		04BF1DE5248F357F00ECC3A2 /* OneSignalNotificationServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 04BF1DDE248F357F00ECC3A2 /* OneSignalNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		04F54BA224F4D59500031D32 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F54BA124F4D59500031D32 /* File.swift */; };
@@ -75,7 +74,6 @@
 		046EBCC526CCFC1D008EE5CD /* release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = release.xcconfig; sourceTree = "<group>"; };
 		046EBCC626CCFC1D008EE5CD /* debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = debug.xcconfig; sourceTree = "<group>"; };
 		047E7D7624F4C77C00A9668E /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		04B273B426CCB40200CFDAB1 /* main.jsbundle */ = {isa = PBXFileReference; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
 		04BF1DDE248F357F00ECC3A2 /* OneSignalNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = OneSignalNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		04BF1DE0248F357F00ECC3A2 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		04BF1DE2248F357F00ECC3A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -234,7 +232,6 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				04B273B426CCB40200CFDAB1 /* main.jsbundle */,
 				047E7D7624F4C77C00A9668E /* Default-568h@2x.png */,
 				13B07FAE1A68108700A75B9A /* HyloReactNative */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
@@ -427,7 +424,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04B273B526CCB40200CFDAB1 /* main.jsbundle in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				046EBCC726CCFC1D008EE5CD /* release.xcconfig in Resources */,
 				2A804B4D29AB42A8945C7445 /* Circular-Black.ttf in Resources */,
@@ -460,7 +456,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export SENTRY_PROPERTIES=sentry.properties\nexport EXTRA_PACKAGER_ARGS=\"--sourcemap-output $DERIVED_FILE_DIR/main.jsbundle.map\"\nexport NODE_BINARY=$(which node)\n../node_modules/@sentry/cli/bin/sentry-cli react-native xcode\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
+			shellScript = "# This line can go away once RN and/or Sentry fix happens. Also potentially relates to babel-module-resolver: https://github.com/facebook/react-native/issues/29351#issuecomment-659663621, https://github.com/facebook/react-native/issues/29351#issuecomment-657929014 and others..\ncd $PROJECT_DIR/..\n\nexport NODE_BINARY=$(which node)\nexport EXTRA_PACKAGER_ARGS=\"--sourcemap-output $DERIVED_FILE_DIR/main.jsbundle.map\"\n\n# ios/ path prefix is related to issue noted above \nexport SENTRY_PROPERTIES=ios/sentry.properties\n\nnode_modules/@sentry/cli/bin/sentry-cli react-native xcode node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
 		227B5E86E2F850A3F23018E8 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -547,7 +543,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export SENTRY_PROPERTIES=sentry.properties\n../node_modules/@sentry/cli/bin/sentry-cli upload-dsym\n";
+			shellScript = "export SENTRY_PROPERTIES=sentry.properties\n\n../node_modules/@sentry/cli/bin/sentry-cli upload-dif \"$DWARF_DSYM_FOLDER_PATH\"\n";
 		};
 		BD77F275CD9C4C87D9263949 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
