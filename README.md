@@ -13,6 +13,10 @@
 9. `yarn start`
 10. `yarn run android` or `yarn run ios`
 
+## Boot Splash Screen
+
+Currently the splash screen on boot for both iOS and Android is handled by `react-native-boot-splash` and is limited to using only a centered icon with a choice of background color. It can be readily re-generated using the provided cli utility with the library, see: [react-native-bootstrap#asset-generation](https://github.com/zoontek/react-native-bootsplash#assets-generation)
+
 ## Additional Docs for Hylo App Dev
 
 The canonical source for documentation is currently at: [Hylo Confluence](https://hylozoic.atlassian.net/wiki/spaces/DEV/pages/425986/Getting+Started).
