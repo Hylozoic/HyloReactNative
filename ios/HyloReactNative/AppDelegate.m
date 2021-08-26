@@ -6,9 +6,13 @@
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
 #import <React/RCTLinkingManager.h>
-#import <RNGoogleSignin/RNGoogleSignin.h>
+
+// Added libraries
+#import "RNBootSplash.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <RNGoogleSignin/RNGoogleSignin.h>
 #import <Intercom/Intercom.h>
+
 #ifdef FB_SONARKIT_ENABLED
 #import <FlipperKit/FlipperClient.h>
 #import <FlipperKitLayoutPlugin/FlipperKitLayoutPlugin.h>
@@ -59,6 +63,9 @@ static void InitializeFlipper(UIApplication *application) {
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
+
+  // react-native-bootsplash
+  [RNBootSplash initWithStoryboard:@"BootSplash" rootView:rootView];
   //  For Facebook SDK
   [[FBSDKApplicationDelegate sharedInstance]
     application:application

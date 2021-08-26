@@ -18,33 +18,34 @@
       <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
       <meta-data android:name="com.facebook.sdk.ClientToken" android:value="@string/facebook_client_token"/>
       <activity
-          android:name=".SplashActivity"
-          android:label="@string/app_name"
-          android:theme="@style/SplashTheme"
-          android:launchMode="singleTask">
-          <intent-filter>
-              <action android:name="android.intent.action.MAIN" />
-              <category android:name="android.intent.category.DEFAULT" />
-              <category android:name="android.intent.category.LAUNCHER" />
-          </intent-filter>
-      </activity>
-      <activity
         android:name=".MainActivity"
         android:label="@string/app_name"
         android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
+        android:exported="true"
         android:launchMode="singleTask"
         android:windowSoftInputMode="adjustResize">
+      </activity>
+      <!-- react-native-boot-splash  -->
+      <activity
+        android:name="com.zoontek.rnbootsplash.RNBootSplashActivity"
+        android:theme="@style/BootTheme"
+        android:launchMode="singleTask">
         <intent-filter>
-            <action android:name="android.intent.action.VIEW" />
-            <category android:name="android.intent.category.DEFAULT" />
-            <category android:name="android.intent.category.BROWSABLE" />
-            <data android:scheme="@string/link_schema" />
-            <data android:scheme="http" android:host="hylo.com" />
-            <data android:scheme="https" android:host="hylo.com" />
-            <data android:scheme="http" android:host="www.hylo.com" />
-            <data android:scheme="https" android:host="www.hylo.com" />
-            <data android:scheme="hyloapp" android:host="home" />
-            <data android:scheme="hyloapp" />
+          <action android:name="android.intent.action.MAIN" />
+          <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        <!-- Deep linking intent-filter moved from MainActivity to react-native-boot-splash as per setup instructions -->
+        <intent-filter>
+          <action android:name="android.intent.action.VIEW" />
+          <category android:name="android.intent.category.DEFAULT" />
+          <category android:name="android.intent.category.BROWSABLE" />
+          <data android:scheme="@string/link_schema" />
+          <data android:scheme="http" android:host="hylo.com" />
+          <data android:scheme="https" android:host="hylo.com" />
+          <data android:scheme="http" android:host="www.hylo.com" />
+          <data android:scheme="https" android:host="www.hylo.com" />
+          <data android:scheme="hyloapp" android:host="home" />
+          <data android:scheme="hyloapp" />
         </intent-filter>
       </activity>
       <activity android:name=".OneSignalConfigActivity" android:launchMode="singleTop" />

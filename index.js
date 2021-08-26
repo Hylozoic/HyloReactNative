@@ -56,11 +56,11 @@ export default class AppContainer extends Component {
   }
 
   componentDidMount () {
-    AppState.addEventListener('change', this.handleAppStateChange)
+    this.setState({ subscription: AppState.addEventListener('change', this.handleAppStateChange) })
   }
 
   componentWillUnmount () {
-    AppState.removeEventListener('change', this.handleAppStateChange)
+    this.state.subscription && this.state.subscription.remove()
     OneSignal.clearHandlers()
   }
 

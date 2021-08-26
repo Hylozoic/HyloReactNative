@@ -67,5 +67,14 @@ jest.mock('@sentry/react-native', () => ({
 import mockRNCNetInfo from '@react-native-community/netinfo/jest/netinfo-mock.js'
 jest.mock('@react-native-community/netinfo', () => mockRNCNetInfo)
 
+// react-native-boot-splash
+jest.mock("react-native-bootsplash", () => {
+  return {
+    hide: jest.fn().mockResolvedValueOnce(),
+    show: jest.fn().mockResolvedValueOnce(),
+    getVisibilityStatus: jest.fn().mockResolvedValue("hidden"),
+  };
+});
+
 global.XMLHttpRequest = jest.fn()
 global.window = {}

@@ -107,11 +107,9 @@ const subscribe = listener => {
     }
   }
 
-  Linking.addEventListener('url', onReceiveURL)
+  const eventSubscription = Linking.addEventListener('url', onReceiveURL)
 
-  return () => {
-    Linking.removeEventListener('url', onReceiveURL)
-  }
+  return () => eventSubscription.remove()
 }
 
 const getStateFromPath = path => {

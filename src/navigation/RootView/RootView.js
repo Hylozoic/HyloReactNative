@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { View, Linking, InteractionManager } from 'react-native'
 import { useDispatch } from 'react-redux'
 import { NavigationContainer } from '@react-navigation/native'
+import RNBootSplash from "react-native-bootsplash"
 import Loading from 'components/Loading'
 import AuthNavigator from 'navigation/AuthNavigator'
 import AppWithDrawerNavigator from 'navigation/AppWithDrawerNavigator'
@@ -68,7 +69,10 @@ export default function RootView ({
       <NavigationContainer
         linking={customLinking}
         ref={navigationRef}
-        onReady={() => { isReadyRef.current = true }}
+        onReady={() => { 
+          isReadyRef.current = true
+          RNBootSplash.hide()
+        }}
       >
         {signedIn && !signupInProgress && currentUser
           ? <AppWithDrawerNavigator />
