@@ -3,10 +3,15 @@
 <plist version="1.0">
 <dict>
 	<key>aps-environment</key>
-	<string>production</string>
+	<string>development</string>
 	<key>com.apple.developer.applesignin</key>
 	<array>
 		<string>Default</string>
+	</array>
+	<key>com.apple.developer.associated-domains</key>
+	<array>
+		<string>applinks:hylo.com</string>
+		<string>applinks:www.hylo.com</string>
 	</array>
 	<key>com.apple.developer.icloud-container-identifiers</key>
 	<array>
