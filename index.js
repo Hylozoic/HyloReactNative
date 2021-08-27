@@ -43,9 +43,11 @@ export default class AppContainer extends Component {
     }
     // Uncomment for OneSignal debugging
     // OneSignal.setLogLevel(6, 0)
-    OneSignal.setAppId(isDev
-      ? process.env.ONESIGNAL_APP_ID_DEBUG
-      : process.env.ONESIGNAL_APP_ID_RELEASE
+    OneSignal.setAppId(
+      // isDev
+      // ? process.env.ONESIGNAL_APP_ID_DEBUG
+      // : 
+      process.env.ONESIGNAL_APP_ID_RELEASE
     )
     // Prompt for push on iOS
     OneSignal.promptForPushNotificationsWithUserResponse(() => {})
