@@ -82,7 +82,7 @@ static void InitializeFlipper(UIApplication *application) {
 
 - (BOOL)application:(UIApplication *)application
   openURL:(NSURL *)url
-  options:(nonnull NSDictionary<NSString *,id> *)options
+  options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
 {
   BOOL handledFB = [[FBSDKApplicationDelegate sharedInstance]
     application:application
