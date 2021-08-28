@@ -8561,10 +8561,10 @@ react-native-linear-gradient@^2.5.6:
   resolved "https://registry.yarnpkg.com/react-native-linear-gradient/-/react-native-linear-gradient-2.5.6.tgz#96215cbc5ec7a01247a20890888aa75b834d44a0"
   integrity sha512-HDwEaXcQIuXXCV70O+bK1rizFong3wj+5Q/jSyifKFLg0VWF95xh8XQgfzXwtq0NggL9vNjPKXa016KuFu+VFg==
 
-react-native-onesignal@^4.2.0:
-  version "4.2.0"
-  resolved "https://registry.yarnpkg.com/react-native-onesignal/-/react-native-onesignal-4.2.0.tgz#0e98ab83f7d9d9b2d64c53c90266646d69097a17"
-  integrity sha512-UFPBfjgfGOdUH796B/Fv84g322l5ApWtOMwsFtPi856yu4b23St7r/SzT3OqbGJeglk4ADpfka0+981zQbfblg==
+react-native-onesignal@^4.3.0:
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/react-native-onesignal/-/react-native-onesignal-4.3.0.tgz#69f99cbf04fb2fa2792641b54e97a48edab33402"
+  integrity sha512-Ancw3jimAR3unrgKNOFuXnkMlvp+nl1vHbseVPBAcjfN9CkdvbFdX7tVkj4pPW2jDn6urITefgRQq67wB7pD2A==
   dependencies:
     invariant "^2.2.2"
 

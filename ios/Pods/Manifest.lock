@@ -110,7 +110,7 @@ PODS:
     - Mixpanel-swift (= 2.9.3)
     - React
   - OneSignal (3.6.1)
-  - OneSignalXCFramework (3.5.3)
+  - OneSignalXCFramework (3.6.1)
   - OpenSSL-Universal (1.1.180)
   - RCT-Folly (2021.04.26.00):
     - boost-for-react-native
@@ -334,10 +334,10 @@ PODS:
   - react-native-intercom (21.1.0):
     - Intercom (~> 9.3.6)
     - React
-  - react-native-netinfo (5.9.10):
+  - react-native-netinfo (6.0.1):
     - React-Core
-  - react-native-onesignal (4.2.0):
-    - OneSignalXCFramework (= 3.5.3)
+  - react-native-onesignal (4.3.0):
+    - OneSignalXCFramework (= 3.6.1)
     - React (< 1.0.0, >= 0.13.0)
   - react-native-restart (0.0.17):
     - React
@@ -697,7 +697,7 @@ SPEC CHECKSUMS:
   Mixpanel-swift: 05ab116526c72e0e66a6a2feb9005e933c414347
   MixpanelReactNative: e1f94cea875b9ad58517cd9798155de33fdcab7d
   OneSignal: ce8d6dd77450aa653dc2f6a22f3372570030260a
-  OneSignalXCFramework: 4e08d8353adec161c3d9174e2572c849e1225c9f
+  OneSignalXCFramework: 674dd48705d0e1842a7c950177ae7569dbfc261c
   OpenSSL-Universal: 1aa4f6a6ee7256b83db99ec1ccdaa80d10f9af9b
   RCT-Folly: 0dd9e1eb86348ecab5ba76f910b56f4b5fef3c46
   RCTRequired: 564b40c9e3d5f4d766333577782408770a61dae9
@@ -717,8 +717,8 @@ SPEC CHECKSUMS:
   react-native-flipper: d6e247954bd180572acd775dabecaef6ce967b1e
   react-native-image-picker: 7a85cf7b0a53845f03ae52fb4592a2748ded069b
   react-native-intercom: 0f5a88141d3c2a9fc7858eca48dd8101012f47cd
-  react-native-netinfo: 30fb89fa913c342be82a887b56e96be6d71201dd
-  react-native-onesignal: a7e433eec906c928954de4f124b6886418386bb4
+  react-native-netinfo: 7cb7877ff31ebeb3d03ce0b4fbb616f121ddd859
+  react-native-onesignal: f829833463ec574cad5e83d1a3e3eed607a3bc3c
   react-native-restart: d19a0f8d053d065fe64cd2baebb6487111c77149
   react-native-safe-area-context: 61c8c484a3a9e7d1fda19f7b1794b35bbfd2262a
   react-native-webview: cf5527893252b3b036eea024a1da6996f7344c74
