@@ -456,7 +456,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# This line can go away once RN and/or Sentry fix happens. Also potentially relates to babel-module-resolver: https://github.com/facebook/react-native/issues/29351#issuecomment-659663621, https://github.com/facebook/react-native/issues/29351#issuecomment-657929014 and others..\ncd $PROJECT_DIR/..\n\nexport NODE_BINARY=$(which node)\nexport EXTRA_PACKAGER_ARGS=\"--sourcemap-output $DERIVED_FILE_DIR/main.jsbundle.map\"\n\n# ios/ path prefix is related to issue noted above \nexport SENTRY_PROPERTIES=ios/sentry.properties\n\nnode_modules/@sentry/cli/bin/sentry-cli react-native xcode node_modules/react-native/scripts/react-native-xcode.sh\n";
+			shellScript = "if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n    export SKIP_BUNDLING=true\nfi\n\n# This line can go away once RN and/or Sentry fix happens. Also potentially relates to babel-module-resolver: https://github.com/facebook/react-native/issues/29351#issuecomment-659663621, https://github.com/facebook/react-native/issues/29351#issuecomment-657929014 and others..\ncd $PROJECT_DIR/..\n\nexport NODE_BINARY=$(which node)\nexport EXTRA_PACKAGER_ARGS=\"--sourcemap-output $DERIVED_FILE_DIR/main.jsbundle.map\"\n\n# ios/ path prefix is related to issue noted above \nexport SENTRY_PROPERTIES=ios/sentry.properties\n\nnode_modules/@sentry/cli/bin/sentry-cli react-native xcode node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
 		227B5E86E2F850A3F23018E8 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
