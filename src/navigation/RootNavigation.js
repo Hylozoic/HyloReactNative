@@ -3,7 +3,7 @@ import { CommonActions, useNavigationContainerRef } from '@react-navigation/nati
 import React from 'react'
 
 export const isReadyRef = React.createRef()
-export const navigationRef = React.createRef() // useNavigationContainerRef()
+export const navigationRef = React.createRef()
 
 export function navigate(name, params) {
   if (isReadyRef.current && navigationRef.current) {
