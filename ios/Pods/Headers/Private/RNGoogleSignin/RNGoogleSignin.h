@@ -1,1 +1,1 @@
-../../../../../node_modules/@react-native-google-signin/google-signin/ios/RNGoogleSignin/RNGoogleSignin.h
+../../../../../node_modules/@react-native-google-signin/google-signin/ios/RNGoogleSignin.h

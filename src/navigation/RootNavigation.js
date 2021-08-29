@@ -1,8 +1,9 @@
-import { CommonActions } from '@react-navigation/native'
+import { CommonActions, useNavigationContainerRef } from '@react-navigation/native'
+
 import React from 'react'
 
 export const isReadyRef = React.createRef()
-export const navigationRef = React.createRef()
+export const navigationRef = React.createRef() // useNavigationContainerRef()
 
 export function navigate(name, params) {
   if (isReadyRef.current && navigationRef.current) {

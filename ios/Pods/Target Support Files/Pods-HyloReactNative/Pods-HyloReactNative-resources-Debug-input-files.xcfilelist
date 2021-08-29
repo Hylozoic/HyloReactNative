@@ -1,6 +1,6 @@
 ${PODS_ROOT}/Target Support Files/Pods-HyloReactNative/Pods-HyloReactNative-resources.sh
 ${PODS_CONFIGURATION_BUILD_DIR}/FBSDKCoreKit/FacebookSDKStrings.bundle
-${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle
+${PODS_CONFIGURATION_BUILD_DIR}/GoogleSignIn/GoogleSignIn.bundle
 ${PODS_ROOT}/Mixpanel-swift/Sources/MiniNotificationViewController.xib
 ${PODS_ROOT}/Mixpanel-swift/Sources/placeholder-image.png
 ${PODS_ROOT}/Mixpanel-swift/Sources/TakeoverNotificationViewController~ipad.xib

@@ -98,7 +98,7 @@ EOM
 }
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_resource "${PODS_CONFIGURATION_BUILD_DIR}/FBSDKCoreKit/FacebookSDKStrings.bundle"
-  install_resource "${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle"
+  install_resource "${PODS_CONFIGURATION_BUILD_DIR}/GoogleSignIn/GoogleSignIn.bundle"
   install_resource "${PODS_ROOT}/Mixpanel-swift/Sources/MiniNotificationViewController.xib"
   install_resource "${PODS_ROOT}/Mixpanel-swift/Sources/placeholder-image.png"
   install_resource "${PODS_ROOT}/Mixpanel-swift/Sources/TakeoverNotificationViewController~ipad.xib"
@@ -124,7 +124,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "${PODS_CONFIGURATION_BUILD_DIR}/FBSDKCoreKit/FacebookSDKStrings.bundle"
-  install_resource "${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle"
+  install_resource "${PODS_CONFIGURATION_BUILD_DIR}/GoogleSignIn/GoogleSignIn.bundle"
   install_resource "${PODS_ROOT}/Mixpanel-swift/Sources/MiniNotificationViewController.xib"
   install_resource "${PODS_ROOT}/Mixpanel-swift/Sources/placeholder-image.png"
   install_resource "${PODS_ROOT}/Mixpanel-swift/Sources/TakeoverNotificationViewController~ipad.xib"

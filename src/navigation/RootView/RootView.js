@@ -1,13 +1,14 @@
 import React, { useEffect } from 'react'
 import { View, Linking, InteractionManager } from 'react-native'
 import { useDispatch } from 'react-redux'
-import { NavigationContainer } from '@react-navigation/native'
+import { NavigationContainer, useNavigationContainerRef } from '@react-navigation/native'
+import { useFlipper } from '@react-navigation/devtools';
 import RNBootSplash from "react-native-bootsplash"
 import Loading from 'components/Loading'
 import AuthNavigator from 'navigation/AuthNavigator'
 import AppWithDrawerNavigator from 'navigation/AppWithDrawerNavigator'
 import customLinking, { navigateToLinkingPath } from 'navigation/linking/custom'
-import { navigationRef, isReadyRef } from 'navigation/RootNavigation'
+import { isReadyRef } from 'navigation/RootNavigation'
 import setReturnToPath from 'store/actions/setReturnToPath'
 
 export default function RootView ({
@@ -21,6 +22,9 @@ export default function RootView ({
   openedPushNotification
 }) {
   const dispatch = useDispatch()
+  const navigationRef = useNavigationContainerRef()
+
+  useFlipper(navigationRef)
 
   useEffect(() => { checkSessionAndSetSignedIn() }, [])
   useEffect(() => { signedIn && loadCurrentUserSession() }, [signedIn])
