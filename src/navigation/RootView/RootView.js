@@ -24,34 +24,34 @@ export default function RootView ({
   
   useEffect(() => { checkSessionAndSetSignedIn() }, [])
   useEffect(() => { signedIn && loadCurrentUserSession() }, [signedIn])
-  useEffect(() => { 
-    if (
-      !loading &&
-      !signupInProgress &&
-      signedIn &&
-      returnToPath &&
-      isReadyRef.current &&
-      navigationRef.current
-    ) {
-      // TODO: A temporary hack because there really doesn't seem
-      // a reliable way to tell when we're ready to navigate.
-      //
-      // * Try with callBackRef pattern...
-      // * Why doesn't this work?: Linking.openURL(`hyloapp://${returnToPath}`)
-      setTimeout(
-        () => {
-          navigateToLinkingPath(returnToPath)
-          dispatch(setReturnToPath(null))
-        },
-        1000
-      )
-    }
-  }, [
-    loading,
-    signupInProgress,
-    signedIn,
-    returnToPath
-  ])
+  // useEffect(() => { 
+  //   if (
+  //     !loading &&
+  //     !signupInProgress &&
+  //     signedIn &&
+  //     returnToPath &&
+  //     isReadyRef.current &&
+  //     navigationRef.current
+  //   ) {
+  //     // TODO: A temporary hack because there really doesn't seem
+  //     // a reliable way to tell when we're ready to navigate.
+  //     //
+  //     // * Try with callBackRef pattern...
+  //     // * Why doesn't this work?: Linking.openURL(`hyloapp://${returnToPath}`)
+  //     setTimeout(
+  //       () => {
+  //         navigateToLinkingPath(returnToPath)
+  //         dispatch(setReturnToPath(null))
+  //       },
+  //       1000
+  //     )
+  //   }
+  // }, [
+  //   loading,
+  //   signupInProgress,
+  //   signedIn,
+  //   returnToPath
+  // ])
   useEffect(() => {
     console.log('!!!! openedPushNotification:', openedPushNotification)
   }, [openedPushNotification])

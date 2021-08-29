@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { register as registerOneSignal } from 'util/onesignal'
+import OneSignal from 'react-native-onesignal'
 import registerDevice from 'store/actions/registerDevice'
 import checkSessionAndSetSignedIn from 'store/actions/checkSessionAndSetSignedIn'
 import fetchCurrentUser from 'store/actions/fetchCurrentUser'
@@ -52,6 +53,8 @@ export function buildLoadCurrentUserSession ({
     const lastViewedgroupId = getLastViewedGroup(memberships)?.id
     await selectGroup(lastViewedgroupId)
     await registerOneSignal({ registerDevice })
+    // Prompt for push on iOS
+    OneSignal.promptForPushNotificationsWithUserResponse(() => {})
   }
 }
 
