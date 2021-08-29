@@ -126,28 +126,32 @@ export function MyProfileNavigator () {
 const Tabs = createBottomTabNavigator()
 export default function TabsNavigator () {
   const navigatorProps = {
-    //
-    // NOTE: This is required so the home tab is available 
-    //       when path linking into the app to a child tab.
-    // 
-    //       Lazy loading so make sure to check for focus
-    //       before fetching for the initial screen on 
-    //       any Tab stack.
-    //
-    lazy: false,
-    tabBarOptions: {
-      showIcon: true,
-      showLabel: true,
+    screenOptions: ({ route }) => ({
+      //
+      // NOTE: This is required so the home tab is available 
+      //       when path linking into the app to a child tab.
+      // 
+      //       Lazy loading so make sure to check for focus
+      //       before fetching for the initial screen on 
+      //       any Tab stack.
+      lazy: false,
       // TODO: Required for Android, not iOS
       // Set only for Android as it makes undesirable animation in iOS
-      keyboardHidesTabBar: !isIOS,
-      pressColor: gainsboro,
-      indicatorStyle: { backgroundColor: white },
-      style: isIOS
-        ? { backgroundColor: rhino05 }
-        : { backgroundColor: rhino05, borderTopWidth: StyleSheet.hairlineWidth }
-    },
-    screenOptions: ({ route }) => ({
+      tabBarHideOnKeyboard: !isIOS,
+      tabBarShowIcon: true,
+      tabBarShowLabel: true,
+      tabBarPressColor: gainsboro,
+      tabBarIndicatorStyle: { backgroundColor: white },
+      tabBarStyle: isIOS ?
+        {
+          display: 'flex',
+          backgroundColor: rhino05
+        } : {
+          display: 'flex',
+          backgroundColor: rhino05,
+          borderTopWidth: StyleSheet.hairlineWidth
+        },
+      tabBarShowLabel: true,
       tabBarIcon: ({ focused }) => (
         <Icon
           name={route.name}
@@ -156,7 +160,8 @@ export default function TabsNavigator () {
           style={{ paddingTop: isIOS ? 0 : 5 }}
         />
       ),
-      tabBarLabel: () => null
+      tabBarLabel: () => null,
+      headerShown: false
     })
   }
   const currentUser = useSelector(getMe)

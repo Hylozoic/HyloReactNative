@@ -1,6 +1,6 @@
 import React from 'react'
 import { View } from 'react-native'
-import { HeaderBackButton } from '@react-navigation/stack'
+import { HeaderBackButton } from '@react-navigation/elements'
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native'
 import confirmDiscardChanges from 'util/confirmDiscardChanges'
 import { isIOS } from 'util/platform'
@@ -92,6 +92,7 @@ export function buildModalScreenOptions ({
 }) {
   const headerTitleStyleColor = otherOptions?.headerTitleStyle?.color ?? black10onRhino
   const options = {
+    presentation: 'modal',
     cardStyle: {
       backgroundColor: white
     },

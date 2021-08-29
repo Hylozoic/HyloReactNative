@@ -78,8 +78,6 @@ export function GroupSettingsNavigator () {
 const App = createStackNavigator()
 export default function AppNavigator () {
   const navigatorProps = {
-    mode: 'modal',
-    headerShown: false,
     screenOptions: buildModalScreenOptions
   }
   return (

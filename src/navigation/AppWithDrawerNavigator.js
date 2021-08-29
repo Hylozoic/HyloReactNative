@@ -14,7 +14,10 @@ export default function AppWithDrawerNavigator () {
     drawerStyle: {
       width: Dimensions.get('window').width * 0.9
     },
-    drawerContent: props => <DrawerMenu {...props} />
+    drawerContent: props => <DrawerMenu {...props} />,
+    screenOptions: {
+      headerShown: false
+    }    
   }
 
   return (

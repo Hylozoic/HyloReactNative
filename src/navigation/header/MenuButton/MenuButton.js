@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, Image } from 'react-native'
-import { HeaderBackButton } from '@react-navigation/stack'
+import { HeaderBackButton } from '@react-navigation/elements'
 import { get } from 'lodash/fp'
 import Icon from 'components/Icon'
 import styles from './MenuButton.styles.js'
