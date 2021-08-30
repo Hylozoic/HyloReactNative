@@ -1,5 +1,5 @@
 import confirmNavigate from 'util/confirmNavigate'
-import { navigate } from 'navigation/RootNavigation'
+import { navigate } from 'navigation/utils'
 import selectGroup from 'store/actions/selectGroup'
 import { ALL_GROUP_ID, PUBLIC_GROUP_ID } from 'store/models/Group'
 

@@ -13,7 +13,7 @@ import { white } from 'style/colors'
 import ItemChooser from 'screens/ItemChooser'
 
 const Signup = createStackNavigator()
-export function SignupNavigator () {
+export default function SignupNavigator () {
   const navigatorProps = {
     screenOptions: buildWorkflowModalScreenOptions
   }
@@ -33,32 +33,5 @@ export function SignupNavigator () {
         options={{ headerTitle: 'STEP 5/5' }} />
       <Signup.Screen name='ItemChooser' component={ItemChooser} />
     </Signup.Navigator>
-  )
-}
-
-const Auth = createStackNavigator()
-export default function AuthNavigator (props) {
-  const navigatorProps = {
-    screenOptions: {
-      headerShown: false,
-      cardStyle: {
-        backgroundColor: white
-      }
-    }
-  }
-
-  return (
-    <Auth.Navigator {...navigatorProps}>
-      <Auth.Screen name='Login' component={Login}
-        options={{ animationEnabled: false }}
-        initialParams={props} />
-      <Auth.Screen name='ForgotPassword' component={ForgotPassword}
-        options={{
-          title: 'Reset Your Password',
-          headerShown: true,
-          headerBackTitleVisible: false
-        }} />
-      <Auth.Screen name='Signup' component={SignupNavigator} />
-    </Auth.Navigator>
   )
 }

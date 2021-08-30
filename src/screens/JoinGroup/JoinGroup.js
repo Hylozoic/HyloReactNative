@@ -6,7 +6,7 @@ import getSignedIn from 'store/selectors/getSignedIn'
 import makeGoToGroup from 'store/actions/makeGoToGroup'
 import getRouteParam from 'store/selectors/getRouteParam'
 import getMe from 'store/selectors/getMe'
-import { navigate } from 'navigation/RootNavigation'
+import { navigate } from 'navigation/utils'
 import { checkInvitation as checkInvitationAction, useInvitation } from './JoinGroup.store'
 
 export default function JoinGroup ({

@@ -4,10 +4,9 @@ import { useDispatch } from 'react-redux'
 import { NavigationContainer } from '@react-navigation/native'
 import RNBootSplash from "react-native-bootsplash"
 import Loading from 'components/Loading'
-import AuthNavigator from 'navigation/AuthNavigator'
-import AppWithDrawerNavigator from 'navigation/AppWithDrawerNavigator'
+import RootNavigator from 'navigation/RootNavigator'
 import customLinking, { navigateToLinkingPath } from 'navigation/linking/custom'
-import { navigationRef, isReadyRef } from 'navigation/RootNavigation'
+import { navigationRef, isReadyRef } from 'navigation/utils'
 import setReturnToPath from 'store/actions/setReturnToPath'
 
 export default function RootView ({
@@ -74,9 +73,11 @@ export default function RootView ({
           RNBootSplash.hide()
         }}
       >
-        {signedIn && !signupInProgress && currentUser
-          ? <AppWithDrawerNavigator />
-          : <AuthNavigator signupInProgress={signupInProgress} />}
+        <RootNavigator
+          signedIn={signedIn}
+          signupInProgress={signupInProgress}
+          currentUser={currentUser}
+        />
       </NavigationContainer>
     </View>
   )
