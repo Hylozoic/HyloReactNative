@@ -3,13 +3,13 @@ import { Text, View, Image, TouchableOpacity, TextInput, ScrollView } from 'reac
 import { some } from 'lodash/fp'
 import { showToast } from 'util/toast'
 import Loading from 'components/Loading'
-import { buildModalScreenOptions } from 'navigation/header'
 import ImagePicker from 'components/ImagePicker'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
 import defaultBanner from 'assets/default-user-banner.jpg'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 import styles from './GroupSettings.styles'
 import LocationPicker from 'screens/LocationPicker/LocationPicker'
+import ModalHeader from 'navigation/header/ModalHeader'
 
 export default class GroupSettings extends React.Component {
   constructor (props) {
@@ -23,14 +23,17 @@ export default class GroupSettings extends React.Component {
   setHeader = () => {
     const { changed } = this.state
     const { navigation, pendingSave } = this.props
-    navigation.setOptions(buildModalScreenOptions({
-      headerLeftCloseIcon: false,
-      headerBackTitleVisible: false,
-      headerLeftConfirm: changed,
-      headerRightButtonLabel: pendingSave ? 'Saving' : 'Save',
-      headerRightButtonOnPress: this.saveChanges,
-      headerRightButtonDisabled: !changed
-    }))
+    navigation.setOptions({
+      header: props =>
+        <ModalHeader {...props}
+          headerLeftCloseIcon={false}
+          headerBackTitleVisible={false}
+          headerLeftConfirm={changed}
+          headerRightButtonLabel={pendingSave ? 'Saving' : 'Save'}
+          headerRightButtonOnPress={this.saveChanges}
+          headerRightButtonDisabled={!changed}
+        />
+    })
   }
 
   componentDidMount () {

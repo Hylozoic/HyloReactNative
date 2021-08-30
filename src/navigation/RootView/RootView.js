@@ -5,8 +5,8 @@ import { NavigationContainer } from '@react-navigation/native'
 import RNBootSplash from "react-native-bootsplash"
 import Loading from 'components/Loading'
 import RootNavigator from 'navigation/RootNavigator'
-import customLinking, { navigateToLinkingPath } from 'navigation/linking/custom'
 import { navigationRef, isReadyRef } from 'navigation/utils'
+import customLinking, { navigateToLinkingPath } from 'navigation/linking/custom'
 import setReturnToPath from 'store/actions/setReturnToPath'
 
 export default function RootView ({

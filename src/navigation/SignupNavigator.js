@@ -1,6 +1,6 @@
 import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
-import { buildWorkflowModalScreenOptions } from 'navigation/header'
+import { WorkflowModalHeader } from './header/ModalHeader'
 import ForgotPassword from 'screens/ForgotPassword'
 import Login from 'screens/Login'
 import SignupComponent from 'screens/Signup'
@@ -9,13 +9,14 @@ import SignupFlow2 from 'screens/SignupFlow/SignupFlow2'
 import SignupFlow3 from 'screens/SignupFlow/SignupFlow3'
 import SignupFlow4 from 'screens/SignupFlow/SignupFlow4'
 import SignupFlow5 from 'screens/SignupFlow/SignupFlow5'
-import { white } from 'style/colors'
 import ItemChooser from 'screens/ItemChooser'
 
 const Signup = createStackNavigator()
 export default function SignupNavigator () {
   const navigatorProps = {
-    screenOptions: buildWorkflowModalScreenOptions
+    screenOptions: {
+      header: headerProps => <WorkflowModalHeader {...headerProps} />
+    }
   }
   return (
     <Signup.Navigator {...navigatorProps}>

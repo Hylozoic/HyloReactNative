@@ -12,7 +12,6 @@ import moment from 'moment'
 import { validateTopicName } from 'hylo-utils/validators'
 import { rhino30 } from 'style/colors'
 import { showToast, hideToast } from 'util/toast'
-import { buildModalScreenOptions } from 'navigation/header'
 import { MAX_TITLE_LENGTH } from './PostEditor.store'
 import RNPickerSelect from 'react-native-picker-select'
 import LocationPicker from 'screens/LocationPicker/LocationPicker'
@@ -39,6 +38,7 @@ import InlineEditor, { toHtml } from 'components/InlineEditor'
 import ErrorBubble from 'components/ErrorBubble'
 import styles from './PostEditor.styles'
 import ItemChooserItemRow from 'screens/ItemChooser/ItemChooserItemRow'
+import ModalHeader from 'navigation/header/ModalHeader'
 
 export default class PostEditor extends React.Component {
   constructor (props) {
@@ -81,14 +81,16 @@ export default class PostEditor extends React.Component {
       : isNewPost
         ? 'Post'
         : 'Save'
-
-    navigation.setOptions(buildModalScreenOptions({
+    const headerProps = {
       headerTitle,
       headerLeftConfirm: true,
       headerRightButtonLabel,
       headerRightButtonOnPress: this.save,
       headerRightButtonDisabled: isSaving
-    }))
+    }
+    navigation.setOptions({
+      header: props => <ModalHeader {...props} {...headerProps} />
+    })
   }
 
   componentDidMount () {

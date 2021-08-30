@@ -12,6 +12,7 @@ export default class NotificationsList extends Component {
 
   setHeader = () => {
     const { navigation, markAllActivitiesRead } = this.props
+    // TODO: Convert to Custom Header
     navigation.setOptions(buildModalScreenOptions({
       headerRightButtonLabel: 'Mark as read',
       headerRightButtonOnPress: markAllActivitiesRead

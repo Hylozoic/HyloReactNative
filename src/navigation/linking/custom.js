@@ -31,20 +31,20 @@ export const routesConfig = {
   '/signup':                                                 'Signup',
   // AuthNavigator route...             
   // 'passwordResetTokenLogin/:userId/:loginToken/:nextURL':   'Login',
-  '/':                                                       'AppNavigator/Tabs/Home/Feed',
-  '/m/:id':                                                  'AppNavigator/Tabs/Members/Member',
-  '/:context(c|n|all)/:groupId':                         'AppNavigator/Tabs/Home/Feed',
-  '/:context(c|n)/:contextId/:topicName':                    'AppNavigator/TopicFeed',
-  '/m':                                                      'AppNavigator/Tabs/Members/Members',
-  '/:context(c|n)/:contextId/m/:id':                         'AppNavigator/Member',
-  '/:context(all)/p/:id':                                    'AppNavigator/PostDetails',
-  '/:context(c|n)/:contextId/p/:id':                         'AppNavigator/PostDetails',
-  '/p/:id':                                                  'AppNavigator/PostDetails',
-  '/p/:id/edit':                                             'AppNavigator/PostEditor',
-  '/:context(c|n)/:contextId/p/:id/edit':                    'AppNavigator/PostEditor',
-  '/settings/:section?':                                     'AppNavigator/UserSettings',
-  '/t/:id':                                                  'AppNavigator/Thread',
-  '/t':                                                      'AppNavigator/ThreadList'
+  '/':                                                       'RootNavigator/Tabs/Home/Feed',
+  '/m/:id':                                                  'RootNavigator/Tabs/Members/Member',
+  '/:context(c|n|all)/:groupId':                             'RootNavigator/Tabs/Home/Feed',
+  '/:context(c|n)/:contextId/:topicName':                    'RootNavigator/TopicFeed',
+  '/m':                                                      'RootNavigator/Tabs/Members/Members',
+  '/:context(c|n)/:contextId/m/:id':                         'RootNavigator/Member',
+  '/:context(all)/p/:id':                                    'RootNavigator/PostDetails',
+  '/:context(c|n)/:contextId/p/:id':                         'RootNavigator/PostDetails',
+  '/p/:id':                                                  'RootNavigator/PostDetails',
+  '/p/:id/edit':                                             'RootNavigator/PostEditor',
+  '/:context(c|n)/:contextId/p/:id/edit':                    'RootNavigator/PostEditor',
+  '/settings/:section?':                                     'RootNavigator/UserSettings',
+  '/t/:id':                                                  'RootNavigator/Thread',
+  '/t':                                                      'RootNavigator/ThreadList'
 }
 
 export const navigateToLinkingPath = linkingPath => {

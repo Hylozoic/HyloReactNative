@@ -1,6 +1,6 @@
 import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
-import { buildWorkflowModalScreenOptions } from 'navigation/header'
+import { WorkflowModalHeader } from './header/ModalHeader'
 // Screens
 import CreateGroupName from 'screens/CreateGroupFlow/CreateGroupName'
 import CreateGroupUrl from 'screens/CreateGroupFlow/CreateGroupUrl'
@@ -16,23 +16,44 @@ export default function CreateGroupNavigator () {
     <CreateGroup.Navigator {...navigatorProps}>
       <CreateGroup.Screen
         name='CreateGroupName' component={CreateGroupName}
-        options={buildWorkflowModalScreenOptions({ headerTitle: 'STEP 1/6', headerLeftCloseIcon: true })}
+        options={{
+          header: headerProps => <WorkflowModalHeader {...headerProps}
+            headerTitle='STEP 1/5'
+            headerLeftCloseIcon={true}
+          />
+        }}
       />
       <CreateGroup.Screen
         name='CreateGroupUrl' component={CreateGroupUrl}
-        options={buildWorkflowModalScreenOptions({ headerTitle: 'STEP 2/6' })}
+        options={{
+          header: headerProps => <WorkflowModalHeader {...headerProps}
+            headerTitle='STEP 2/5'
+          />
+        }}
       />
       <CreateGroup.Screen
         name='CreateGroupVisibilityAccessibility' component={CreateGroupVisibilityAccessibility}
-        options={buildWorkflowModalScreenOptions({ headerTitle: 'STEP 4/6' })}
+        options={{
+          header: headerProps => <WorkflowModalHeader {...headerProps}
+            headerTitle='STEP 3/5'
+          />
+        }}
       />
       <CreateGroup.Screen
         name='CreateGroupParentGroups' component={CreateGroupParentGroups}
-        options={buildWorkflowModalScreenOptions({ headerTitle: 'STEP 5/6' })}
+        options={{
+          header: headerProps => <WorkflowModalHeader {...headerProps}
+            headerTitle='STEP 4/5'
+          />
+        }}
       />
       <CreateGroup.Screen
         name='CreateGroupReview' component={CreateGroupReview}
-        options={buildWorkflowModalScreenOptions({ headerTitle: 'STEP 6/6' })}
+        options={{
+          header: headerProps => <WorkflowModalHeader {...headerProps}
+            headerTitle='STEP 5/5'
+          />
+        }}
       />
     </CreateGroup.Navigator>
   )

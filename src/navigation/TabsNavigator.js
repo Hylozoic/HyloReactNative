@@ -7,8 +7,9 @@ import { isIOS } from 'util/platform'
 import getMe from 'store/selectors/getMe'
 // Helper Components
 import Icon from 'components/Icon'
-import { buildModalScreenOptions, buildTabStackScreenOptions } from 'navigation/header'
+import { buildTabStackScreenOptions } from 'navigation/header'
 import Avatar from 'components/Avatar'
+import ModalHeader from 'navigation/header/ModalHeader'
 // Screens
 import Feed from 'screens/Feed'
 import GroupDetail from 'screens/GroupDetail'
@@ -34,35 +35,47 @@ export function MessagesNavigator () {
   return (
     <Messages.Navigator {...navigatorProps}>
       <Messages.Screen
-        name='Messages' component={ThreadList}
-        options={({ navigation }) => buildModalScreenOptions({
-          headerRightButtonLabel: 'New',
-          headerRightButtonOnPress: () => navigation.navigate('New Message'),
-          headerLeftOnPress: () => navigation.navigate('Home')
-        })}
+        name='Messages'
+        component={ThreadList}
+        options={{
+          header: headerProps => <ModalHeader {...headerProps}
+            headerRightButtonLabel='New'
+            headerRightButtonOnPress={() => headerProps.navigation.navigate('New Message')}
+            headerLeftOnPress={() => headerProps.navigation.navigate('Home')}
+          />
+        }}
       />
       <Messages.Screen
-        name='New Message' component={NewMessage}
-        options={({ navigation }) => buildModalScreenOptions({
-          headerLeftCloseIcon: false,
-          headerLeftLabel: ' '
-        })}
+        name='New Message'
+        component={NewMessage}
+        options={{
+          header: headerProps => <ModalHeader {...headerProps}
+            headerLeftCloseIcon={false}
+            headerLeftLabel=''
+          />
+        }}
       />
       <Messages.Screen
-        name='ThreadParticipants' component={ThreadParticipants}
-        options={({ navigation }) => buildModalScreenOptions({
-          headerLeftCloseIcon: false,
-          headerLeftLabel: ' ',
-          headerTitle: 'Participants'
-        })}
+        name='ThreadParticipants'
+        component={ThreadParticipants}
+        options={{
+          header: headerProps => <ModalHeader {...headerProps}
+            headerLeftCloseIcon={false}
+            headerLeftLabel=''
+            headerTitle='Participants'
+          />
+        }}
       />
       <Messages.Screen
-        name='Thread' component={Thread}
-        options={({ navigation }) => buildModalScreenOptions({
-          headerLeftCloseIcon: false,
-          headerLeftLabel: ' ',
-          headerLeftOnPress: () => navigation.navigate('Messages')
-        })}
+        name='Thread'
+        component={Thread}
+        options={{
+          header: headerProps => <ModalHeader {...headerProps}
+            headerLeftCloseIcon={false}
+            headerLeftLabel=''
+            headerLeftOnPress={() => headerProps.navigation.navigate('Messages')}
+          />
+        }}
       />
     </Messages.Navigator>
   )
@@ -73,10 +86,13 @@ export function SearchNavigator () {
   const navigatorProps = {}
   return (
     <Search.Navigator {...navigatorProps}>
-      <Search.Screen name='Search' component={SearchPage}
-        options={({ navigation }) => buildModalScreenOptions({
-          headerLeftOnPress: () => navigation.navigate('Home')
-        })}        
+      <Search.Screen name='Search'
+        component={SearchPage}
+        options={{
+          header: headerProps => <ModalHeader {...headerProps}
+            headerLeftOnPress={() => headerProps.navigation.navigate('Home')}
+          />
+        }}
       />
     </Search.Navigator>
   )
@@ -113,10 +129,15 @@ export function MyProfileNavigator () {
     // screenOptions: buildTabStackScreenOptions
   }
   return <MyProfile.Navigator {...navigatorProps}>
-    <MyProfile.Screen name='My Profile' component={MemberDetails}
-        options={({ navigation }) => buildModalScreenOptions({
-          headerLeftOnPress: () => navigation.navigate('Home')
-        })}
+    <MyProfile.Screen name='My Profile'
+        component={MemberDetails}
+        options={{
+          header: headerProps => <ModalHeader {...headerProps}
+            headerLeftCloseIcon={false}
+            headerLeftLabel=''
+            headerLeftOnPress={() => headerProps.navigation.navigate('Home')}
+          />
+        }}
      />
     <MyProfile.Screen name='MemberSkillEditor' key='MemberSkillEditor' component={MemberSkillEditor}
       options={{ headerTitle: 'Edit Skills' }} />

@@ -1,6 +1,6 @@
 import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
-import { buildModalScreenOptions } from 'navigation/header'
+import ModalHeader from 'navigation/header/ModalHeader'
 // Screens
 import GroupSettingsMenu from 'screens/GroupSettingsMenu'
 import GroupSettingsComponent from 'screens/GroupSettings'
@@ -10,22 +10,24 @@ import ModeratorSettings from 'screens/ModeratorSettings'
 const GroupSettings = createStackNavigator()
 export default function GroupSettingsNavigator () {
   const navigatorProps = {
-    screenOptions: buildModalScreenOptions({
-      headerLeftCloseIcon: false,
-      headerBackTitleVisible: false
-    })
+    screenOptions: {
+      header: props => <ModalHeader {...props}
+        headerLeftCloseIcon={false}
+        headerBackTitleVisible={false}
+      />
+    }
   }
   return (
     <GroupSettings.Navigator {...navigatorProps}>
       <GroupSettings.Screen
         name='Group Settings' component={GroupSettingsMenu}
-        options={buildModalScreenOptions({ headerLeftCloseIcon: true })}
+        options={{ header: headerProps => <ModalHeader {...headerProps} headerLeftCloseIcon /> }}
       />
       <GroupSettings.Screen name='Group Information' component={GroupSettingsComponent} />
       <GroupSettings.Screen name='Group Moderators' component={ModeratorSettings} />
       <GroupSettings.Screen
         name='Invite Members' component={InvitePeople}
-        options={buildModalScreenOptions({ headerTitle: 'Invite', headerLeftCloseIcon: true })}
+        options={{ header: headerProps => <ModalHeader {...headerProps} headerTitle='Invite' headerLeftCloseIcon /> }}
       />
     </GroupSettings.Navigator>
   )

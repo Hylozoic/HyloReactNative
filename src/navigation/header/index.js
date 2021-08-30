@@ -107,7 +107,7 @@ export function buildModalScreenOptions ({
       // maxWidth: '80%'
     },
     headerLeft: props => {
-      const headerLeftOnPress = providedHeaderLeftOnPress || props.onPress
+      const headerLeftOnPress = providedHeaderLeftOnPress
       const onPress = headerLeftConfirm
         ? () => confirmDiscardChanges({ onDiscard: headerLeftOnPress })
         : headerLeftOnPress

@@ -8,7 +8,7 @@ export default function HeaderRightButton ({
   disabled = false
 }) {
   if (typeof onPress !== 'function') throw new Error('HeaderRightButton: onPress is not a function.')
-  
+  console.log('!!!! HeaderRightButton rendering:', label)
   return (
     <TouchableOpacity
       style={{ marginRight: 12 }}

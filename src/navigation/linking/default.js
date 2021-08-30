@@ -14,7 +14,7 @@ const prefixes = [
 
 const screens = {
   JoinGroup: 'join',
-  AppNavigator: {
+  RootNavigator: {
     screens: {
       Messages: 'messages',
       Tabs: {

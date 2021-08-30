@@ -8,7 +8,7 @@ import {
 } from 'react-native'
 import SafeAreaView from 'react-native-safe-area-view'
 import { isEqual, isFunction, debounce } from 'lodash/fp'
-import { buildModalScreenOptions } from 'navigation/header'
+import ModalHeader from 'navigation/header/ModalHeader'
 import SearchBar from 'components/SearchBar'
 import styles from './ItemChooser.styles'
 
@@ -91,18 +91,18 @@ export default class ItemChooser extends React.Component {
   setHeader = () => {
     const { navigation, screenTitle, updateItems } = this.props
     const { chosenItems, initialItems } = this.state
-    const headerParams = {
+    const headerProps = {
       headerTitle: screenTitle,
-      headerLeftOnPress: navigation.goBack,
       headerLeftConfirm: !isEqual(chosenItems, initialItems)
     }
     if (isFunction(updateItems)) {
-      headerParams.headerRightButtonLabel = 'Done'
-      headerParams.headerRightButtonOnPress = this.done
+      headerProps.headerRightButtonLabel = 'Done'
+      headerProps.headerRightButtonOnPress = this.done
     }
-    navigation.setOptions(
-      buildModalScreenOptions(headerParams)
-    )
+    navigation.setOptions({
+      headerShown: true,
+      header: props => <ModalHeader {...props} {...headerProps} />
+    })
   }
 
   done = () => {

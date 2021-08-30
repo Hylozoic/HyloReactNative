@@ -39,6 +39,7 @@ export default class MemberDetails extends React.Component {
       ? 'Edit Your Profile'
       : currentGroup?.name
     if (editing) {
+      // TODO: Convert to Custom Header
       navigation.setOptions(buildModalScreenOptions({
         route,
         navigation,
