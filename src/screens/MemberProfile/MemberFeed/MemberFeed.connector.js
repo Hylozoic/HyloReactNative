@@ -68,7 +68,7 @@ export function mapDispatchToProps (dispatch, { navigation }) {
       fetchMemberUpvotes,
       respondToEvent
     }, dispatch),
-    goToGroup: makeGoToGroup(dispatch),
+    goToGroup: makeGoToGroup(navigation, dispatch),
     showPost: id => navigation.navigate('Post Details', { id }),
     showTopic: topicName => navigation.navigate('Topic Feed', { topicName })
   }

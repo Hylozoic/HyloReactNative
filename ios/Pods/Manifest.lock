@@ -100,7 +100,7 @@ PODS:
   - GTMAppAuth (1.2.2):
     - AppAuth/Core (~> 1.4)
     - GTMSessionFetcher/Core (~> 1.5)
-  - GTMSessionFetcher/Core (1.6.1)
+  - GTMSessionFetcher/Core (1.7.0)
   - Intercom (9.3.6)
   - libevent (2.1.12)
   - Mixpanel-swift (2.9.3):
@@ -326,7 +326,7 @@ PODS:
   - react-native-fbsdk-next/Share (4.3.0):
     - FBSDKShareKit (~> 9.3)
     - React-Core
-  - react-native-flipper (0.93.0):
+  - react-native-flipper (0.105.0):
     - React-Core
   - react-native-image-picker (1.1.0):
     - React
@@ -722,7 +722,7 @@ SPEC CHECKSUMS:
   glog: 5337263514dd6f09803962437687240c5dc39aa4
   GoogleSignIn: fd381840dbe7c1137aa6dc30849a5c3e070c034a
   GTMAppAuth: ad5c2b70b9a8689e1a04033c9369c4915bfcbe89
-  GTMSessionFetcher: 36689134877faeb055b27dfa4ccc9ceaa42e029e
+  GTMSessionFetcher: 43748f93435c2aa068b1cbe39655aaf600652e91
   Intercom: d44bd4264f61a3e343cac46d7b88d4db0f860077
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
   Mixpanel-swift: 05ab116526c72e0e66a6a2feb9005e933c414347
@@ -744,7 +744,7 @@ SPEC CHECKSUMS:
   react-native-date-picker: 96a07ca27a6225da8a3935324d85046028456b0f
   react-native-document-picker: 8508bfda34be6c24a2cbecbe515b15108658c183
   react-native-fbsdk-next: 19e974b071047b7ed1dad86a9dc3fe77dff76b8c
-  react-native-flipper: d6e247954bd180572acd775dabecaef6ce967b1e
+  react-native-flipper: 5626e75999bce12c90f587d4f8e2199afd4fe1f9
   react-native-image-picker: 7a85cf7b0a53845f03ae52fb4592a2748ded069b
   react-native-intercom: 0f5a88141d3c2a9fc7858eca48dd8101012f47cd
   react-native-netinfo: 7cb7877ff31ebeb3d03ce0b4fbb616f121ddd859
@@ -782,6 +782,6 @@ SPEC CHECKSUMS:
   Yoga: aa0cb45287ebe1004c02a13f279c55a95f1572f4
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: c05c174ca43f1e08f1982cacaf993cddf29409ea
+PODFILE CHECKSUM: c47eae65643906035623cd0fef555c249096b53f
 
 COCOAPODS: 1.10.2

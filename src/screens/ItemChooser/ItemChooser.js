@@ -101,7 +101,8 @@ export default class ItemChooser extends React.Component {
     }
     navigation.setOptions({
       headerShown: true,
-      header: props => <ModalHeader {...props} {...headerProps} />
+      headerRightButtonLabel: 'Done',
+      headerRightButtonOnPress: this.done
     })
   }
 

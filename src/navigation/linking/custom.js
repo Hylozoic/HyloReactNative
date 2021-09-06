@@ -7,7 +7,6 @@ import store from 'store'
 import getSignedIn from 'store/selectors/getSignedIn'
 import getReturnToPath from 'store/selectors/getReturnToPath'
 import setReturnToPath from 'store/actions/setReturnToPath'
-import { navigationRef } from 'navigation/utils'
 import { getActionFromState } from '@react-navigation/native'
 
 export const prefixes = [
@@ -47,10 +46,10 @@ export const routesConfig = {
   '/t':                                                      'RootNavigator/ThreadList'
 }
 
-export const navigateToLinkingPath = linkingPath => {
+export const navigateToLinkingPath = (navigationRef, linkingPath) => {
   const state = getStateFromPath(linkingPath)
   const action = getActionFromState(state)
-  navigationRef.current.dispatch(action)
+  navigationRef.current?.dispatch(action)
 }
 
 // Matches path to routes and returns a react-navigation screen path

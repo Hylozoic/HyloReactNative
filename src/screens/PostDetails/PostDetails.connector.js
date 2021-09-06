@@ -48,7 +48,7 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     createComment: params => dispatch(createComment({ ...params, postId: id })),
     joinProject: () => dispatch(joinProject(id)),
     leaveProject: () => dispatch(leaveProject(id)),
-    goToGroup: groupId => makeGoToGroup(dispatch)(groupId, memberships, currentGroup.id),
+    goToGroup: groupId => makeGoToGroup(navigation, dispatch)(groupId, memberships, currentGroup.id),
     editPost: () => navigation.navigate('Edit Post', { id }),
     goToMembers: () => navigation.navigate('Project Members', { id, members: get('members', post) }),
     showMember: goToMemberMaker(navigation),

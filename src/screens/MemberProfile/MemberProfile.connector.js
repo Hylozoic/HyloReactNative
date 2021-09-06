@@ -55,7 +55,7 @@ export function mapStateToProps (state, props) {
 
 export function mapDispatchToProps (dispatch, props) {
   return {
-    goToGroup: makeGoToGroup(dispatch),
+    goToGroup: makeGoToGroup(props.navigation, dispatch),
     ...bindActionCreators({
       fetchPerson,
       updateUserSettings,

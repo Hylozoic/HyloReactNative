@@ -7,8 +7,6 @@ import { createMockStore } from 'util/testing'
 import { NavigationContainer } from '@react-navigation/native'
 import RootView from 'navigation/RootView'
 
-jest.mock('navigation/utils')
-
 // TODO: This is a first pass at using testing-library/react-native
 // and I was able to make it work for a basic snapshot test, but nothing else
 // due to a current bug with an await/timeout error when using any of the other

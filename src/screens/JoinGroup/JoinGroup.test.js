@@ -6,10 +6,8 @@ import { Provider } from 'react-redux'
 import { act } from 'react-test-renderer'
 import { render } from '@testing-library/react-native'
 import { NavigationContainer } from '@react-navigation/native'
-import { navigate } from 'navigation/utils'
 import { checkInvitation as checkInvitationAction, useInvitation } from './JoinGroup.store'
 
-jest.mock('navigation/utils')
 jest.mock('./JoinGroup.store')
 jest.mock('screens/LoadingScreen', () => 'LoadingScreen')
 
@@ -38,5 +36,4 @@ it('calls useInvitation', async () => {
   })
 
   expect(rendered).toMatchSnapshot()  
-  expect(navigate).toHaveBeenCalledWith('Login')
 })

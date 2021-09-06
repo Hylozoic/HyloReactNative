@@ -13,12 +13,19 @@ import styles from './ModeratorSettings.styles'
 export default class ModeratorSettings extends Component {
   componentDidMount () {
     this.props.fetchModerators()
+    this.setHeader()
   }
 
   componentDidUpdate (prevProps, prevState) {
     if (get('group.slug', prevProps) !== get('group.slug', this.props)) {
       this.props.fetchModerators()
     }
+  }
+
+  setHeader = () => {
+    this.props.navigation?.setOptions({
+      title: this.props.group.name
+    })
   }
 
   removeModerator = (id) => {

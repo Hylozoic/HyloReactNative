@@ -22,6 +22,15 @@ export default class GroupSettings extends React.Component {
   setHeader = () => {
     const { changed } = this.state
     const { navigation, pendingSave } = this.props
+    // navigation.setOptions({
+    //   title: this.props.group?.name,
+    //   headerLeftCloseIcon: false,
+    //   headerBackTitleVisible: false,
+    //   headerLeftConfirm: changed,
+    //   headerRightButtonLabel: pendingSave ? 'Saving' : 'Save',
+    //   headerRightButtonOnPress: this.saveChanges,
+    //   headerRightButtonDisabled: !changed
+    // })
     navigation.setOptions({
       header: props =>
         <ModalHeader {...props}

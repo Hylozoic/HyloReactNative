@@ -1,9 +1,8 @@
 import confirmNavigate from 'util/confirmNavigate'
-import { navigate } from 'navigation/utils'
 import selectGroup from 'store/actions/selectGroup'
 import { ALL_GROUP_ID, PUBLIC_GROUP_ID } from 'store/models/Group'
 
-export default function makeGoToGroup (dispatch, confirm = true) {
+export default function makeGoToGroup ({ navigate }, dispatch, confirm = true) {
   return (groupId, myMemberships, currentGroupId) => {
     if (groupId == currentGroupId) return
 

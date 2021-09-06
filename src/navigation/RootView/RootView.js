@@ -1,13 +1,14 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { View, Linking, InteractionManager } from 'react-native'
-import { useDispatch } from 'react-redux'
-import { NavigationContainer } from '@react-navigation/native'
+import { NavigationContainer, useNavigationContainerRef, createNavigationContainerRef } from '@react-navigation/native'
+import { useFlipper, useReduxDevToolsExtension } from '@react-navigation/devtools'
 import RNBootSplash from "react-native-bootsplash"
 import Loading from 'components/Loading'
 import RootNavigator from 'navigation/RootNavigator'
-import { navigationRef, isReadyRef } from 'navigation/utils'
 import customLinking, { navigateToLinkingPath } from 'navigation/linking/custom'
 import setReturnToPath from 'store/actions/setReturnToPath'
+
+// const navigationRef = createNavigationContainerRef()
 
 export default function RootView ({
   loading,
@@ -19,8 +20,18 @@ export default function RootView ({
   returnToPath,
   openedPushNotification
 }) {
-  const dispatch = useDispatch()
+  const isReadyRef = useRef()
+  const navigationRef = useNavigationContainerRef()
+
+  // if (typeof(HermesInternal) === "undefined") {
+  //   console.log("Hermes is not enabled");
+  // } else {
+  //   console.log("Hermes is enabled");
+  // }
   
+  useFlipper(navigationRef)
+  // useReduxDevToolsExtension(navigationRef)
+
   useEffect(() => { checkSessionAndSetSignedIn() }, [])
   useEffect(() => { signedIn && loadCurrentUserSession() }, [signedIn])
   // useEffect(() => { 
@@ -39,7 +50,7 @@ export default function RootView ({
   //     // * Why doesn't this work?: Linking.openURL(`hyloapp://${returnToPath}`)
   //     setTimeout(
   //       () => {
-  //         navigateToLinkingPath(returnToPath)
+  //         navigateToLinkingPath(navigationRef, returnToPath)
   //         dispatch(setReturnToPath(null))
   //       },
   //       1000
