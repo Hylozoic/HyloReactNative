@@ -92,7 +92,7 @@ export default class ItemChooser extends React.Component {
     const { navigation, screenTitle, updateItems } = this.props
     const { chosenItems, initialItems } = this.state
     const headerProps = {
-      headerTitle: screenTitle,
+      title: screenTitle,
       headerLeftConfirm: !isEqual(chosenItems, initialItems)
     }
     if (isFunction(updateItems)) {

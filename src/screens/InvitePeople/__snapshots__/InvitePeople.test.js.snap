@@ -32,16 +32,12 @@ exports[`InvitePeople handles tab-view functions 3`] = `<PendingInvitesPage />`;
 
 exports[`InvitePeople matches the last snapshot 1`] = `
 <TabView
-  gestureHandlerProps={Object {}}
   initialLayout={
     Object {
       "height": 0,
       "width": 750,
     }
   }
-  keyboardDismissMode="auto"
-  lazy={false}
-  lazyPreloadDistance={0}
   navigationState={
     Object {
       "index": 0,
@@ -58,15 +54,8 @@ exports[`InvitePeople matches the last snapshot 1`] = `
     }
   }
   onIndexChange={[Function]}
-  removeClippedSubviews={false}
-  renderLazyPlaceholder={[Function]}
-  renderPager={[Function]}
   renderScene={[Function]}
   renderTabBar={[Function]}
-  springConfig={Object {}}
-  swipeEnabled={true}
-  tabBarPosition="top"
-  timingConfig={Object {}}
 />
 `;
 

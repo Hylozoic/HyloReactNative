@@ -23,15 +23,15 @@ export default function SignupNavigator () {
       <Signup.Screen name='Signup Intro' component={SignupComponent}
         options={{ headerShown: false }} />
       <Signup.Screen name='SignupFlow1' component={SignupFlow1} 
-        options={{ headerTitle: 'STEP 1/5' }} />
+        options={{ title: 'STEP 1/5' }} />
       <Signup.Screen name='SignupFlow2' component={SignupFlow2}
-        options={{ headerTitle: 'STEP 2/5' }} />
+        options={{ title: 'STEP 2/5' }} />
       <Signup.Screen name='SignupFlow3' component={SignupFlow3}
-        options={{ headerTitle: 'STEP 3/5' }} />
+        options={{ title: 'STEP 3/5' }} />
       <Signup.Screen name='SignupFlow4' component={SignupFlow4}
-        options={{ headerTitle: 'STEP 4/5' }} />
+        options={{ title: 'STEP 4/5' }} />
       <Signup.Screen name='SignupFlow5' component={SignupFlow5}
-        options={{ headerTitle: 'STEP 5/5' }} />
+        options={{ title: 'STEP 5/5' }} />
       <Signup.Screen name='ItemChooser' component={ItemChooser} />
     </Signup.Navigator>
   )

@@ -8,8 +8,6 @@ import FocusAwareStatusBar from 'components/FocusAwareStatusBar'
 import HeaderRightButton from 'navigation/header/HeaderRightButton'
 import HeaderLeftCloseIcon from 'navigation/header/HeaderLeftCloseIcon'
 import MenuButton from 'navigation/header/MenuButton'
-import SearchIcon from 'navigation/header/SearchIcon'
-import MessagesIcon from 'navigation/header/MessagesIcon'
 import NotificationsIcon from 'navigation/header/NotificationsIcon'
 import {  caribbeanGreen, white60onCaribbeanGreen, white, rhino80, black10onRhino, rhino05 } from 'style/colors'
 

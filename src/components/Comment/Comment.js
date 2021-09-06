@@ -96,10 +96,10 @@ export default function Comment ({
 }
 
 export function CommentMenu ({ deleteComment, removeComment, editComment }) {
-  // If the function is defined, than it's a valid action
   const removeLabel = 'Remove Comment'
   const deleteLabel = 'Delete Comment'
 
+  // If the function is defined, than it's a valid action
   const actions = filter(x => x[1], [
     ['Edit Comment', editComment],
     [deleteLabel, deleteComment],

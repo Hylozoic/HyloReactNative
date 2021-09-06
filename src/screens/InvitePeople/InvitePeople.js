@@ -43,10 +43,7 @@ export default class InvitePeople extends Component {
     }
   }
 
-  _handleIndexChange = index =>
-    this.setState({
-      index
-    })
+  _handleIndexChange = index => this.setState({ index })
 
   _renderTabBar = props => (
     <TabBar

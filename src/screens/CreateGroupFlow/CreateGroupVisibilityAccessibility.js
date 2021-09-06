@@ -116,7 +116,6 @@ const optionStyles = {
     color: white
   },
   optionsLabel: {
-    // HOLONIC TODO: Confirm formatting in Android
     marginTop: -4,
     marginLeft: 10,
     fontFamily: 'Circular-Bold',

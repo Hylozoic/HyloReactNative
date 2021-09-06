@@ -1,22 +1,24 @@
 import React, { Component } from 'react'
 import { FlatList, TouchableOpacity, View, Text } from 'react-native'
+import ModalHeader from 'navigation/header/ModalHeader'
 import LoadingScreen from 'screens/LoadingScreen'
 import NotificationCard from 'components/NotificationCard'
 import CreateGroupNotice from 'components/CreateGroupNotice'
 
 import styles from './NotificationsList.styles'
-import { buildModalScreenOptions } from 'navigation/header'
 
 export default class NotificationsList extends Component {
   state = { ready: false }
 
   setHeader = () => {
     const { navigation, markAllActivitiesRead } = this.props
-    // TODO: Convert to Custom Header
-    navigation.setOptions(buildModalScreenOptions({
-      headerRightButtonLabel: 'Mark as read',
-      headerRightButtonOnPress: markAllActivitiesRead
-    }))
+    navigation.setOptions({
+      header: props =>
+        <ModalHeader {...props}
+          headerRightButtonLabel='Mark as read'
+          headerRightButtonOnPress={markAllActivitiesRead}
+        />
+    })
   }
 
   componentDidMount () {

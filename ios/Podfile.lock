@@ -338,6 +338,8 @@ PODS:
   - react-native-onesignal (4.3.0):
     - OneSignalXCFramework (= 3.6.1)
     - React (< 1.0.0, >= 0.13.0)
+  - react-native-pager-view (5.4.1):
+    - React-Core
   - react-native-restart (0.0.17):
     - React
   - react-native-safe-area-context (3.3.0):
@@ -427,8 +429,35 @@ PODS:
   - RNGoogleSignin (7.0.0-alpha.1):
     - GoogleSignIn (~> 6.0.2)
     - React-Core
-  - RNReanimated (1.13.3):
+  - RNReanimated (2.2.0):
+    - DoubleConversion
+    - FBLazyVector
+    - FBReactNativeSpec
+    - glog
+    - RCT-Folly
+    - RCTRequired
+    - RCTTypeSafety
+    - React
+    - React-callinvoker
     - React-Core
+    - React-Core/DevSupport
+    - React-Core/RCTWebSocket
+    - React-CoreModules
+    - React-cxxreact
+    - React-jsi
+    - React-jsiexecutor
+    - React-jsinspector
+    - React-RCTActionSheet
+    - React-RCTAnimation
+    - React-RCTBlob
+    - React-RCTImage
+    - React-RCTLinking
+    - React-RCTNetwork
+    - React-RCTSettings
+    - React-RCTText
+    - React-RCTVibration
+    - ReactCommon/turbomodule/core
+    - Yoga
   - RNScreens (3.6.0):
     - React-Core
     - React-RCTImage
@@ -472,7 +501,7 @@ DEPENDENCIES:
   - FlipperKit/SKIOSNetworkPlugin (= 0.93.0)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
   - MixpanelReactNative (from `../node_modules/mixpanel-react-native`)
-  - OneSignalXCFramework (< 4.0, >= 3.0.0)
+  - OneSignalXCFramework (< 4.0, >= 3.4.3)
   - RCT-Folly (from `../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec`)
   - RCTRequired (from `../node_modules/react-native/Libraries/RCTRequired`)
   - RCTTypeSafety (from `../node_modules/react-native/Libraries/TypeSafety`)
@@ -495,6 +524,7 @@ DEPENDENCIES:
   - react-native-intercom (from `../node_modules/react-native-intercom`)
   - "react-native-netinfo (from `../node_modules/@react-native-community/netinfo`)"
   - react-native-onesignal (from `../node_modules/react-native-onesignal`)
+  - react-native-pager-view (from `../node_modules/react-native-pager-view`)
   - react-native-restart (from `../node_modules/react-native-restart`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - react-native-webview (from `../node_modules/react-native-webview`)
@@ -607,6 +637,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-community/netinfo"
   react-native-onesignal:
     :path: "../node_modules/react-native-onesignal"
+  react-native-pager-view:
+    :path: "../node_modules/react-native-pager-view"
   react-native-restart:
     :path: "../node_modules/react-native-restart"
   react-native-safe-area-context:
@@ -717,6 +749,7 @@ SPEC CHECKSUMS:
   react-native-intercom: 0f5a88141d3c2a9fc7858eca48dd8101012f47cd
   react-native-netinfo: 7cb7877ff31ebeb3d03ce0b4fbb616f121ddd859
   react-native-onesignal: f829833463ec574cad5e83d1a3e3eed607a3bc3c
+  react-native-pager-view: 43f51f45f37ec9715f6c188e4af46ccdf79872e8
   react-native-restart: d19a0f8d053d065fe64cd2baebb6487111c77149
   react-native-safe-area-context: 61c8c484a3a9e7d1fda19f7b1794b35bbfd2262a
   react-native-webview: cf5527893252b3b036eea024a1da6996f7344c74
@@ -741,7 +774,7 @@ SPEC CHECKSUMS:
   RNDeviceInfo: 9b6aba9ffaed69ecb72bd13c7bcb0debf277bc9f
   RNGestureHandler: a479ebd5ed4221a810967000735517df0d2db211
   RNGoogleSignin: 7082d5be7c6476e8f833281e36809d4aef175bf8
-  RNReanimated: 514a11da3a2bcc6c3dfd9de32b38e2b9bf101926
+  RNReanimated: 7245c2ff6dca3b42b6f77e800adf85ce68532759
   RNScreens: eb0dfb2d6b21d2d7f980ad46b14eb306d2f1062e
   RNSentry: 68644ef607b780551cc555f084869764f2566652
   RNVectorIcons: bc69e6a278b14842063605de32bec61f0b251a59
@@ -749,6 +782,6 @@ SPEC CHECKSUMS:
   Yoga: aa0cb45287ebe1004c02a13f279c55a95f1572f4
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: f92f155147494a763fd94e9a4f2c351903c04100
+PODFILE CHECKSUM: c05c174ca43f1e08f1982cacaf993cddf29409ea
 
 COCOAPODS: 1.10.2

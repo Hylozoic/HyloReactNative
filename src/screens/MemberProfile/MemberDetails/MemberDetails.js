@@ -6,7 +6,6 @@ import {
   ScrollView,
   Image
 } from 'react-native'
-import { buildTabStackScreenOptions, buildModalScreenOptions } from 'navigation/header'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
 import { debounce, find, isEmpty, pick } from 'lodash/fp'
 import { validateUser } from 'hylo-utils/validators'
@@ -16,6 +15,7 @@ import MemberHeader from 'screens/MemberProfile/MemberHeader'
 import Control from 'screens/MemberProfile/Control'
 import styles from './MemberDetails.styles'
 import confirmDiscardChanges from 'util/confirmDiscardChanges'
+import ModalHeader, { TabStackHeader } from 'navigation/header/ModalHeader'
 
 export function editableFields (person) {
   return pick(['name', 'location', 'tagline', 'bio'], person)
@@ -35,40 +35,43 @@ export default class MemberDetails extends React.Component {
   setHeader = () => {
     const { editing, changed } = this.state
     const { navigation, route, currentGroup, logout } = this.props
-    const headerTitle = editing
+    const title = editing
       ? 'Edit Your Profile'
       : currentGroup?.name
     if (editing) {
-      // TODO: Convert to Custom Header
-      navigation.setOptions(buildModalScreenOptions({
-        route,
-        navigation,
-        headerTitle,
-        headerLeftOnPress: () => this.saveChanges(),
-        headerLeftConfirm: changed,
-        headerRightButtonLabel: editing ? 'Save' : null,
-        headerRightButtonOnPress: this.saveChanges,
-        headerRightButtonDisabled: !changed || !this.isValid()
-      }))
+      navigation.setOptions({
+        header: headerProps =>
+          <ModalHeader {...headerProps}
+            title={title}
+            headerLeftOnPress={this.saveChanges}
+            headerLeftConfirm={changed}
+            headerRightButtonLabel={editing ? 'Save' : null}
+            headerRightButtonOnPress={this.saveChanges}
+            headerRightButtonDisabled={!changed || !this.isValid()}
+          />
+      })
     } else if (route.name == 'My Profile') {
-      navigation.setOptions(buildModalScreenOptions({
-        headerTitle: 'My Profile',
-        headerLeftOnPress: () => navigation.navigate('Home'),
-        headerRightButtonLabel: 'Logout',
-        headerRightButtonOnPress: () => confirmDiscardChanges({
-          title: 'Logout',
-          confirmationMessage: 'Are you sure you want to logout?',
-          continueButtonText: 'Cancel',
-          disgardButtonText: 'Yes',
-          onDiscard: logout
-        })
-      }))
+      navigation.setOptions({
+        header: headerProps =>
+          <ModalHeader {...headerProps}
+            title='My Profile'
+            headerLeftOnPress={() => navigation.navigate('Home')}
+            headerLeftConfirm={changed}
+            headerRightButtonLabel='Logout'
+            headerRightButtonOnPress={() => confirmDiscardChanges({
+              title: 'Logout',
+              confirmationMessage: 'Are you sure you want to logout?',
+              continueButtonText: 'Cancel',
+              disgardButtonText: 'Yes',
+              onDiscard: logout
+            })}
+          />
+      })
     } else {  
-      navigation.setOptions(buildTabStackScreenOptions({
-        route,
-        navigation,
-        headerTitle
-      }))
+      navigation.setOptions({
+        header: headerProps =>
+          <TabStackHeader {...headerProps} title />
+      })
     }
   }
 

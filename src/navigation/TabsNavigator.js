@@ -9,7 +9,7 @@ import getMe from 'store/selectors/getMe'
 import Icon from 'components/Icon'
 import { buildTabStackScreenOptions } from 'navigation/header'
 import Avatar from 'components/Avatar'
-import ModalHeader from 'navigation/header/ModalHeader'
+import ModalHeader, { TabStackHeader } from 'navigation/header/ModalHeader'
 // Screens
 import Feed from 'screens/Feed'
 import GroupDetail from 'screens/GroupDetail'
@@ -62,7 +62,7 @@ export function MessagesNavigator () {
           header: headerProps => <ModalHeader {...headerProps}
             headerLeftCloseIcon={false}
             headerLeftLabel=''
-            headerTitle='Participants'
+            title='Participants'
           />
         }}
       />
@@ -101,9 +101,9 @@ export function SearchNavigator () {
 const Home = createStackNavigator()
 export function HomeNavigator () {
   const navigatorProps = {
-    screenOptions: props => ({
-      ...buildTabStackScreenOptions(props)
-    })
+    screenOptions: {
+      header: headerProps => <TabStackHeader {...headerProps} />
+    }
   }
   return (
     <Home.Navigator {...navigatorProps}>
@@ -140,7 +140,7 @@ export function MyProfileNavigator () {
         }}
      />
     <MyProfile.Screen name='MemberSkillEditor' key='MemberSkillEditor' component={MemberSkillEditor}
-      options={{ headerTitle: 'Edit Skills' }} />
+      options={{ title: 'Edit Skills' }} />
   </MyProfile.Navigator>
 }
 

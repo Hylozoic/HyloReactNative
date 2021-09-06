@@ -73,7 +73,7 @@ export default class PostEditor extends React.Component {
     const { isSaving } = this.state
     const { navigation, isNewPost } = this.props
     const subject = capitalize(this.state?.type || '')
-    const headerTitle = isNewPost
+    const title = isNewPost
       ? `New ${subject}`
       : `Edit ${subject}`
     const headerRightButtonLabel = isSaving
@@ -82,7 +82,7 @@ export default class PostEditor extends React.Component {
         ? 'Post'
         : 'Save'
     const headerProps = {
-      headerTitle,
+      title,
       headerLeftConfirm: true,
       headerRightButtonLabel,
       headerRightButtonOnPress: this.save,

@@ -43,7 +43,7 @@ export default {
     flexDirection: 'row'
   },
   currentGroupButton: {
-    flex: 0.33,
+    flex: 0.4,
     paddingHorizontal: 5,
     backgroundColor: 'none'
   },

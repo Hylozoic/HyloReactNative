@@ -13,7 +13,7 @@ export default function GroupNavigation ({ navigation, route }) {
   const currentGroup = useSelector(getCurrentGroup)
 
   useFocusEffect(() => {
-    navigation.setOptions({ headerTitle: currentGroup?.name  })
+    navigation.setOptions({ title: currentGroup?.name  })
   })
 
   const { navigate } = navigation

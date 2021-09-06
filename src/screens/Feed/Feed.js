@@ -22,7 +22,7 @@ export function setHeaderTitle (navigation, topicName, group, isProjectFeed) {
   headerTitle = isProjectFeed
     ? 'Projects'
     : headerTitle
-  navigation.setOptions({ headerTitle })
+  navigation.setOptions({ title: headerTitle })
 }
 
 export default function Feed ({

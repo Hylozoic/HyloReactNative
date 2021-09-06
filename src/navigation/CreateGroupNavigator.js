@@ -18,7 +18,7 @@ export default function CreateGroupNavigator () {
         name='CreateGroupName' component={CreateGroupName}
         options={{
           header: headerProps => <WorkflowModalHeader {...headerProps}
-            headerTitle='STEP 1/5'
+            title='STEP 1/5'
             headerLeftCloseIcon={true}
           />
         }}
@@ -27,7 +27,7 @@ export default function CreateGroupNavigator () {
         name='CreateGroupUrl' component={CreateGroupUrl}
         options={{
           header: headerProps => <WorkflowModalHeader {...headerProps}
-            headerTitle='STEP 2/5'
+            title='STEP 2/5'
           />
         }}
       />
@@ -35,7 +35,7 @@ export default function CreateGroupNavigator () {
         name='CreateGroupVisibilityAccessibility' component={CreateGroupVisibilityAccessibility}
         options={{
           header: headerProps => <WorkflowModalHeader {...headerProps}
-            headerTitle='STEP 3/5'
+            title='STEP 3/5'
           />
         }}
       />
@@ -43,7 +43,7 @@ export default function CreateGroupNavigator () {
         name='CreateGroupParentGroups' component={CreateGroupParentGroups}
         options={{
           header: headerProps => <WorkflowModalHeader {...headerProps}
-            headerTitle='STEP 4/5'
+            title='STEP 4/5'
           />
         }}
       />
@@ -51,7 +51,7 @@ export default function CreateGroupNavigator () {
         name='CreateGroupReview' component={CreateGroupReview}
         options={{
           header: headerProps => <WorkflowModalHeader {...headerProps}
-            headerTitle='STEP 5/5'
+            title='STEP 5/5'
           />
         }}
       />
