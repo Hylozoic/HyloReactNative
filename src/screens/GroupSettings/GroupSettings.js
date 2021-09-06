@@ -2,6 +2,7 @@ import React from 'react'
 import { Text, View, Image, TouchableOpacity, TextInput, ScrollView } from 'react-native'
 import { some } from 'lodash/fp'
 import { showToast } from 'util/toast'
+import { ModalHeader } from 'navigation/headers'
 import Loading from 'components/Loading'
 import ImagePicker from 'components/ImagePicker'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
@@ -9,8 +10,6 @@ import defaultBanner from 'assets/default-user-banner.jpg'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 import styles from './GroupSettings.styles'
 import LocationPicker from 'screens/LocationPicker/LocationPicker'
-import ModalHeader from 'navigation/header/ModalHeader'
-
 export default class GroupSettings extends React.Component {
   constructor (props) {
     super(props)

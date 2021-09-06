@@ -15,7 +15,7 @@ import MemberHeader from 'screens/MemberProfile/MemberHeader'
 import Control from 'screens/MemberProfile/Control'
 import styles from './MemberDetails.styles'
 import confirmDiscardChanges from 'util/confirmDiscardChanges'
-import ModalHeader, { TabStackHeader } from 'navigation/header/ModalHeader'
+import { ModalHeader, TabStackHeader } from 'navigation/headers'
 
 export function editableFields (person) {
   return pick(['name', 'location', 'tagline', 'bio'], person)

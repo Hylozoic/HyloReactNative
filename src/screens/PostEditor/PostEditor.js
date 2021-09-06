@@ -14,6 +14,7 @@ import { rhino30 } from 'style/colors'
 import { showToast, hideToast } from 'util/toast'
 import { MAX_TITLE_LENGTH } from './PostEditor.store'
 import RNPickerSelect from 'react-native-picker-select'
+import { ModalHeader } from 'navigation/headers'
 import LocationPicker from 'screens/LocationPicker/LocationPicker'
 // TODO: Convert all 3 of the below to LocationPicker style calls
 // ProjectMembers Chooser
@@ -38,7 +39,6 @@ import InlineEditor, { toHtml } from 'components/InlineEditor'
 import ErrorBubble from 'components/ErrorBubble'
 import styles from './PostEditor.styles'
 import ItemChooserItemRow from 'screens/ItemChooser/ItemChooserItemRow'
-import ModalHeader from 'navigation/header/ModalHeader'
 
 export default class PostEditor extends React.Component {
   constructor (props) {

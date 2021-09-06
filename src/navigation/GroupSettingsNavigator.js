@@ -1,6 +1,6 @@
 import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
-import ModalHeader from 'navigation/header/ModalHeader'
+import { ModalHeader } from 'navigation/headers'
 // Screens
 import GroupSettingsMenu from 'screens/GroupSettingsMenu'
 import GroupSettingsComponent from 'screens/GroupSettings'

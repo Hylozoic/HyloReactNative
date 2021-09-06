@@ -1,4 +1,4 @@
-import HeaderRightButton from 'navigation/header/HeaderRightButton'
+import HeaderRightButton from 'navigation/headers/HeaderRightButton'
 import { caribbeanGreen, rhino, rhino05, rhino10, rhino20, rhino80, white, amaranth, pictonBlue, gunsmoke, rhino60, bigStone } from 'style/colors'
 
 const styles = {

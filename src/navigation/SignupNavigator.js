@@ -1,6 +1,6 @@
 import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
-import { WorkflowModalHeader } from './header/ModalHeader'
+import { WorkflowModalHeader } from 'navigation/headers'
 import ForgotPassword from 'screens/ForgotPassword'
 import Login from 'screens/Login'
 import SignupComponent from 'screens/Signup'

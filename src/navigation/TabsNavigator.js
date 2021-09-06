@@ -7,9 +7,8 @@ import { isIOS } from 'util/platform'
 import getMe from 'store/selectors/getMe'
 // Helper Components
 import Icon from 'components/Icon'
-import { buildTabStackScreenOptions } from 'navigation/header'
 import Avatar from 'components/Avatar'
-import ModalHeader, { TabStackHeader } from 'navigation/header/ModalHeader'
+import { ModalHeader, TabStackHeader } from 'navigation/headers'
 // Screens
 import Feed from 'screens/Feed'
 import GroupDetail from 'screens/GroupDetail'

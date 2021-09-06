@@ -15,14 +15,14 @@ import SocketSubscriber from 'components/SocketSubscriber'
 import styles from './Feed.styles'
 
 export function setHeaderTitle (navigation, topicName, group, isProjectFeed) {
-  let headerTitle 
-  headerTitle = topicName
+  let title 
+  title = topicName
     ? group?.name
     : 'Home'
-  headerTitle = isProjectFeed
+  title = isProjectFeed
     ? 'Projects'
-    : headerTitle
-  navigation.setOptions({ title: headerTitle })
+    : title
+  navigation.setOptions({ title })
 }
 
 export default function Feed ({

@@ -8,7 +8,7 @@ import {
 } from 'react-native'
 import SafeAreaView from 'react-native-safe-area-view'
 import { isEqual, isFunction, debounce } from 'lodash/fp'
-import ModalHeader from 'navigation/header/ModalHeader'
+import { ModalHeader } from 'navigation/headers'
 import SearchBar from 'components/SearchBar'
 import styles from './ItemChooser.styles'
 

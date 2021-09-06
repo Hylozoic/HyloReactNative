@@ -2,7 +2,7 @@ import React from 'react'
 import {
   View,
   TouchableOpacity,
-  Alert,Text
+  Alert
 } from 'react-native'
 import Icon from 'components/Icon'
 import PopupMenuButton from 'components/PopupMenuButton'

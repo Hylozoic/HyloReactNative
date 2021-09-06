@@ -4,7 +4,7 @@ import React from 'react'
 import { Dimensions } from 'react-native'
 import { createDrawerNavigator } from '@react-navigation/drawer'
 import { white } from 'style/colors'
-import ModalHeader from 'navigation/header/ModalHeader'
+import { ModalHeader } from 'navigation/headers'
 // Navigation
 import SignupNavigator from 'navigation/SignupNavigator'
 import TabsNavigator from 'navigation/TabsNavigator'
@@ -38,7 +38,7 @@ export default function RootStack (props) {
       headerShown: false
     }    
   }
-
+  // TODO: Convert headers look into header here
   return <Root.Navigator {...navigatorProps}>
     {fullyAuthorized ? <>
         <Root.Group screenOptions={{

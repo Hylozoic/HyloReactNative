@@ -22,7 +22,7 @@ export default class MemberProfile extends React.Component {
 
   setHeader = () => {
     const { navigation, currentGroup } = this.props
-    navigation.setOptions({ headerTitle: currentGroup.name  })
+    navigation.setOptions({ title: currentGroup.name  })
   }
 
   blockUser = () => {

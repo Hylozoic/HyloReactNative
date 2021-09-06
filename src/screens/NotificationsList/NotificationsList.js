@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { FlatList, TouchableOpacity, View, Text } from 'react-native'
-import ModalHeader from 'navigation/header/ModalHeader'
+import { ModalHeader } from 'navigation/headers'
 import LoadingScreen from 'screens/LoadingScreen'
 import NotificationCard from 'components/NotificationCard'
 import CreateGroupNotice from 'components/CreateGroupNotice'
