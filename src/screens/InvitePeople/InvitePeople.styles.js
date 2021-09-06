@@ -5,7 +5,8 @@ const screenHeight = Dimensions.get('window').height
 
 export default {
   container: {
-    backgroundColor: white
+    backgroundColor: white,
+    paddingTop: 20
   },
   tabbar: {
     backgroundColor: white

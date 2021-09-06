@@ -33,19 +33,18 @@ export default function RootStack (props) {
     drawerStyle: {
       width: Dimensions.get('window').width * 0.9
     },
-    drawerContent: props => fullyAuthorized ? <DrawerMenu {...props} /> : <></>,
+    drawerContent: props => fullyAuthorized
+      ? <DrawerMenu {...props} />
+      : <></>,
     screenOptions: {
-      headerShown: false
+      headerShown: true
     }    
   }
-  // TODO: Convert headers look into header here
   return <Root.Navigator {...navigatorProps}>
     {fullyAuthorized ? <>
         <Root.Group screenOptions={{
           headerShown: true
-          // header: props => <ModalHeader {...props} headerShown />
         }}>
-          {/* screenOptions: buildModalScreenOptions */}
           <Root.Screen name='Tabs' component={TabsNavigator} options={{ headerShown: false }} />
           <Root.Screen name='Edit Post' component={PostEditor} />
           <Root.Screen name='Edit Account Info' component={UserSettings} />
@@ -62,7 +61,6 @@ export default function RootStack (props) {
           <Root.Screen name='Blocked Users' component={BlockedUsers} />
           <Root.Screen name='ItemChooser' component={ItemChooser} />
           <Root.Screen name='Loading' component={LoadingScreen} />
-          {/*  */}
         </Root.Group>
         <Root.Screen name='JoinGroup' component={JoinGroup} />
         <Root.Screen name='InviteExpired' component={InviteExpired} />

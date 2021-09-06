@@ -71,7 +71,6 @@ export default class ModeratorSettings extends Component {
         keyExtractor={item => item.id.toString()}
         renderItem={this._renderModeratorRow}
         ListHeaderComponent={<View style={styles.headerContainer}>
-          <Text style={styles.headerText}>{group.name}</Text>
           <View style={styles.addNewContainer}>
             <TouchableOpacity onPress={this.openPersonPicker}>
               <Text style={styles.addNewButton}><Icon name='Plus' green /> Add New</Text>

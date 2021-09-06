@@ -41,6 +41,7 @@ export default StyleSheet.create({
   },
   addNewContainer: {
     width: '90%',
+    paddingVertical: 20,
     padding: 5
   },
   addNewButton: {
