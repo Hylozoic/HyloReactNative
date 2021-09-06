@@ -2,13 +2,6 @@
 
 exports[`GroupSettingsMenu matches the last snapshot 1`] = `
 <FlatList
-  ListHeaderComponent={
-    <View>
-      <Text>
-        foo
-      </Text>
-    </View>
-  }
   data={
     Array [
       Object {

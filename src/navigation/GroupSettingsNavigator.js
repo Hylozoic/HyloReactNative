@@ -28,7 +28,7 @@ export default function GroupSettingsNavigator () {
       <GroupSettings.Screen
         name='Invite Members' component={InvitePeople}
         options={{ header: headerProps =>
-          <ModalHeader {...headerProps} title='Invite' headerLeftCloseIcon />
+          <ModalHeader {...headerProps} headerLeftCloseIcon />
         }}
       />
     </GroupSettings.Navigator>

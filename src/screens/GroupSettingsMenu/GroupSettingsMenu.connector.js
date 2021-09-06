@@ -5,7 +5,7 @@ export function mapStateToProps (state, props) {
   const group = getCurrentGroup(state, props)
 
   return {
-    groupname: group && group.name
+    groupName: group && group.name
   }
 }
 

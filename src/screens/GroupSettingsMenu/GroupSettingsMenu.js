@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useLayoutEffect } from 'react'
 import { TouchableOpacity, Text, FlatList, View } from 'react-native'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
 import styles from './GroupSettingsMenu.style'
@@ -15,15 +15,16 @@ export const menuItems = [{
 }]
 
 export default function GroupSettingsMenu ({ groupName, navigation }) {
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      title: groupName
+    });
+  }, [navigation, groupName])
+
   return (
     <FlatList
       style={styles.container}
       data={menuItems}
-      ListHeaderComponent={
-        <View style={styles.headerContainer}>
-          <Text style={styles.headerText}>{groupName}</Text>
-        </View>
-      }
       keyExtractor={(item, index) => index.toString()}
       renderItem={({ item }) => (
         <TouchableOpacity onPress={() => navigation.navigate(item.navigate)} style={styles.item}>

@@ -25,6 +25,7 @@ export default class GroupSettings extends React.Component {
     navigation.setOptions({
       header: props =>
         <ModalHeader {...props}
+          title={this.props.group?.name}
           headerLeftCloseIcon={false}
           headerBackTitleVisible={false}
           headerLeftConfirm={changed}
