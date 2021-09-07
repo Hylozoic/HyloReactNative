@@ -83,7 +83,7 @@ export default function Comment ({
             </View>
           </View>
           <HTMLView
-            addLineBreaks={false}
+            addLineBreaks={true}
             onLinkPress={url => urlHandler(url, showMember, showTopic, slug)}
             stylesheet={styles.richTextStyles}
             textComponentProps={{ style: styles.text }}
