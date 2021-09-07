@@ -36,6 +36,7 @@ export default {
     color: havelockBlue
   },
   itemList: {
+    backgroundColor: white,
     marginBottom: 50
   },
   searchBar: {

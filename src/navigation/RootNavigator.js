@@ -20,6 +20,7 @@ import NotificationSettings from 'screens/NotificationSettings'
 import NotificationsList from 'screens/NotificationsList'
 import PostEditor from 'screens/PostEditor'
 import UserSettings from 'screens/UserSettings'
+import { white } from 'style/colors'
 
 const Root = createStackNavigator()
 export default function RootNavigator (props) {

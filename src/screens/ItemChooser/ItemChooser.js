@@ -11,6 +11,7 @@ import { isEqual, isFunction, debounce } from 'lodash/fp'
 import { ModalHeader } from 'navigation/headers'
 import SearchBar from 'components/SearchBar'
 import styles from './ItemChooser.styles'
+import { white } from 'style/colors'
 
 export const propTypesForItemRowComponent = {
   item: PropTypes.object.isRequired,
@@ -98,6 +99,7 @@ export default class ItemChooser extends React.Component {
       headerProps.headerRightButtonOnPress = this.done
     }
     navigation.setOptions({
+      cardStyle: { backgroundColor: white },
       header: props => <ModalHeader {...props} {...headerProps} />
     })
   }

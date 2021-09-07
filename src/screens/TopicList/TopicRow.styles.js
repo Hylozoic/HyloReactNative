@@ -21,7 +21,8 @@ export default StyleSheet.create({
   },
   topicTitle: {
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
+    marginBottom: -5
   },
   topicDetails: {
     flexDirection: 'row',

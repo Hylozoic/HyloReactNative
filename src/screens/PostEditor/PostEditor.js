@@ -317,7 +317,7 @@ export default class PostEditor extends React.Component {
       pickItem: this.addGroup,
       fetchSearchSuggestions: () => ({ type: 'none' }),
       getSearchSuggestions: (_, { autocomplete: searchTerm }) =>
-        groupOptions.filter(c => c.name.match(searchTerm))
+        groupOptions.filter(c => c.name.toLowerCase().match(searchTerm?.toLowerCase()))
     })
   }
 
