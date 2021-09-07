@@ -8,6 +8,37 @@ import RootNavigator from 'navigation/RootNavigator'
 import customLinking, { navigateToLinkingPath } from 'navigation/linking/custom'
 import setReturnToPath from 'store/actions/setReturnToPath'
 
+const linking = {
+  prefixes: ['https://www.hylo.com', 'https://hylo.com', 'hyloapp://'],
+  config: {
+    screens: {
+      Drawer: {
+        screens: {
+          Tabs: {
+            initialRouteName: 'Home',
+            screens: {
+              Home: {
+                initialRouteName: 'Feed',
+                screens: {
+                  'Post Details': {
+                    path: 'all/post/:id',
+                    // exact: true
+                  }
+                }
+              },
+              Messages: {
+                initialRouteName: 'Messages',
+                screens: {
+                  Thread: '/messages/:messageId'
+                }
+              }        
+            }
+          }
+        }
+      }
+    }
+  }
+}
 // const initialState = {
 //   name: 'Tabs',
 //   state: {
@@ -103,11 +134,14 @@ export default function RootView ({
   return (
     <View style={styles.rootContainer}>
       <NavigationContainer
-        linking={customLinking}
+        linking={linking}
         ref={navigationRef}
-        onReady={() => { 
+        onReady={async () => { 
           isReadyRef.current = true
-          fullyAuthorized && navigationRef.current?.navigate('Tabs', { screen: 'Home', params: { screen: 'Feed' } })
+          const initialUrl = await Linking.getInitialURL()
+          if (!initialUrl && fullyAuthorized) {
+            navigationRef.current?.navigate('Tabs', { screen: 'Home', params: { screen: 'Feed' } })
+          }
           !loading && RNBootSplash.hide()
         }}
         // initialState={initialState}
