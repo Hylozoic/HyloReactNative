@@ -95,6 +95,8 @@ export function ModalHeader ({
       backgroundColor: rhino10,
       ...options.headerStyle
     },
+    // Should we just `...options` this and alike?
+    headerTitle: options.headerTitle,
     title: getHeaderTitle(options, route.name),
     headerTintColor: rhino80,
     headerTitleAlign: 'center',

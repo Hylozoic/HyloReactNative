@@ -30,7 +30,7 @@ export default function RootNavigator (props) {
   return <Root.Navigator {...navigatorProps}>
     {fullyAuthorized && <>
       <Root.Screen name='Tabs' component={DrawerNavigator} options={{ headerShown: false }} />
-      <Root.Group  screenOptions={{ presentation: 'modal' }}>
+      <Root.Group  screenOptions={{ presentation: 'modal', header: ModalHeader }}>
         <Root.Screen name='Edit Post' component={PostEditor} />
         <Root.Screen name='Edit Account Info' component={UserSettings} />
         <Root.Screen name='Group Settings' component={GroupSettingsNavigator} />
