@@ -24,7 +24,7 @@ import { white } from 'style/colors'
 
 const Root = createStackNavigator()
 export default function RootNavigator (props) {
-  const { signedIn, signupInProgress, currentUser } = props
+  const { signupInProgress, currentUser } = props
   const fullyAuthorized = !signupInProgress && currentUser
   const navigatorProps = {}
   return <Root.Navigator {...navigatorProps}>
