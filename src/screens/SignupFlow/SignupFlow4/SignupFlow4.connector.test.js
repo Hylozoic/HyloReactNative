@@ -1,14 +1,46 @@
-import { mapStateToProps } from './SignupFlow4.connector'
+import { mapStateToProps, mapDispatchToProps, mergeProps } from './SignupFlow4.connector'
+import { MODULE_NAME } from '../SignupFlow.store'
 
 describe('mapStateToProps', () => {
-  it('sets up goToNext', () => {
-    const props = {
-      navigation: {
-        navigate: jest.fn()
+  it('returns the right keys', () => {
+    const state = {
+      [MODULE_NAME]: {
+        userSettings: {}
       }
     }
-    const stateProps = mapStateToProps({}, props)
-    stateProps.goToNext()
-    expect(props.navigation.navigate).toHaveBeenCalledWith('SignupFlow5')
+    expect(mapStateToProps(state, {})).toMatchSnapshot()
+  })
+})
+
+describe('mapDispatchToProps', () => {
+  it('maps the action generators', () => {
+    expect(mapDispatchToProps).toMatchSnapshot()
+  })
+})
+
+describe('mergeProps', () => {
+  it('merges the props', () => {
+    const stateProps = {
+      storedSkills: ['a', 'b', 'c']
+    }
+    const dispatchProps = {
+      updateUserSettings: jest.fn(),
+      updateLocalUserSettings: jest.fn()
+    }
+    const ownProps = {
+      navigation: {
+        navigate: jest.fn(),
+        dispatch: jest.fn()
+      }
+    }
+    const mergedProps = mergeProps(stateProps, dispatchProps, ownProps)
+    expect(mergedProps).toMatchSnapshot()
+    mergedProps.finishSignup()
+    expect(dispatchProps.updateUserSettings).toHaveBeenCalled()
+    expect(dispatchProps.updateUserSettings.mock.calls)
+      .toMatchSnapshot()
+    expect(dispatchProps.updateLocalUserSettings).toHaveBeenCalled()
+    expect(dispatchProps.updateLocalUserSettings.mock.calls)
+      .toMatchSnapshot()
   })
 })

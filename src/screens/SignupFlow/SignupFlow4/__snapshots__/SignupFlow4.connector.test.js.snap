@@ -25,7 +25,6 @@ exports[`mergeProps merges the props 1`] = `
 Object {
   "finishSignup": [Function],
   "goToImage": [Function],
-  "goToSkills": [Function],
   "makeChanges": [Function],
   "navigation": Object {
     "dispatch": [MockFunction],

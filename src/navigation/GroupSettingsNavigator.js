@@ -20,17 +20,11 @@ export default function GroupSettingsNavigator ({ navigation, route }) {
       headerTitleStyle: { color: white },
       headerStyle: { backgroundColor: rhino60 },
       presentation: 'modal',
-      // header: ModalHeader
+      header: ModalHeader
     })
   }, [navigation, route])
 
-  const navigatorProps = {
-    // options: {
-    // },
-    screenOptions: {
-      // headerStyle: { backgroundColor: linkWater }
-    }
-  }
+  const navigatorProps = {}
   return (
     <GroupSettings.Navigator {...navigatorProps}>
       <GroupSettings.Screen

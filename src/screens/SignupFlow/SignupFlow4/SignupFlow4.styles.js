@@ -1,51 +1,45 @@
-import { black10OnCaribbeanGreen } from 'style/colors'
+import { white40onCaribbeanGreen } from 'style/colors'
 import styles from '../SignupFlow.styles'
-
-const containerPadding = {
-  paddingHorizontal: 16
-}
+import controlStyles from 'components/SettingControl/SettingControl.styles'
 
 export default {
   ...styles,
-  container: {
-    ...styles.container,
+  subTitle: {
+    ...styles.subTitle,
+    marginBottom: 20
+  },
+  imageWrapper: {
+    alignItems: 'center'
+  },
+  image: {
+    width: 90,
+    height: 90,
+    borderRadius: 45,
+    marginHorizontal: 'auto'
+  },
+  skillsLabel: {
+    ...controlStyles.label,
+    marginBottom: 10
+  },
+  skillCloud: {
+    justifyContent: 'flex-start',
     paddingHorizontal: 0
   },
-  skillEditor: {
-    title: {
-      ...containerPadding,
-      ...styles.title
-    },
-    subTitle: {
-      ...containerPadding,
-      ...styles.subTitle,
-      marginBottom: 20
-    },
-    containerPadding,
-    userSkills: {
-      backgroundColor: black10OnCaribbeanGreen,
-      ...containerPadding
-    },
-    yourSkillsLabel: {
-      ...styles.subTitle,
-      marginBottom: 10
-    },
-    skillControl: {
-      control: {
-        ...containerPadding,
-        marginTop: 18
-      }
-    },
-    skillCloud: {
-      ...containerPadding,
-      flexDirection: 'row',
-      flexWrap: 'wrap',
-      justifyContent: 'center',
-      marginBottom: 10
-    },
-    continueButton: {
-      ...styles.continueButton,
-      marginRight: 16
-    }
+  buttonRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 10,
+    paddingBottom: 20
+  },
+  changesButton: {
+    ...styles.continueButton,
+    backgroundColor: white40onCaribbeanGreen,
+    borderColor: 'white',
+    color: 'white',
+    fontSize: 14,
+    marginLeft: 0
+  },
+  continueButton: {
+    ...styles.continueButton
   }
 }

@@ -1,67 +1,124 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`SignupFlow4 matches last snapshot 1`] = `
-<SafeAreaViewMock>
+exports[`hides image when no url and password when no password 1`] = `
+<KeyboardFriendlyView>
   <ScrollView>
-    <KeyboardFriendlyView>
-      <Memo(Connect(SkillEditor))
-        doneLabel="Continue"
-        theme={
-          Object {
-            "containerPadding": Object {
-              "paddingHorizontal": 16,
-            },
-            "continueButton": Object {
-              "backgroundColor": "white",
-              "color": "#0DC39F",
-              "disabledBackgroundColor": "#9ee7d9",
-              "fontSize": 16,
-              "height": 38,
-              "marginLeft": "auto",
-              "marginRight": 16,
-              "width": 132,
-            },
-            "skillCloud": Object {
-              "flexDirection": "row",
-              "flexWrap": "wrap",
-              "justifyContent": "center",
-              "marginBottom": 10,
-              "paddingHorizontal": 16,
-            },
-            "skillControl": Object {
-              "control": Object {
-                "marginTop": 18,
-                "paddingHorizontal": 16,
-              },
-            },
-            "subTitle": Object {
-              "color": "#cff3ec",
-              "fontFamily": "Circular-Book",
-              "fontSize": 14,
-              "marginBottom": 20,
-              "paddingHorizontal": 16,
-            },
-            "title": Object {
-              "color": "white",
-              "fontFamily": "Circular-Bold",
-              "fontSize": 20,
-              "marginBottom": 8,
-              "paddingHorizontal": 16,
-            },
-            "userSkills": Object {
-              "backgroundColor": "#0cb08f",
-              "paddingHorizontal": 16,
-            },
-            "yourSkillsLabel": Object {
-              "color": "#cff3ec",
-              "fontFamily": "Circular-Book",
-              "fontSize": 14,
-              "marginBottom": 10,
-            },
-          }
-        }
+    <Text>
+      Everything looking good?
+    </Text>
+    <Text>
+      You can always come back and change your details at any time.
+    </Text>
+    <SettingControl
+      label="Your Full Name"
+      onChange={[Function]}
+      onSubmitEditing={[Function]}
+      toggleEditable={true}
+      value="Hill"
+    />
+    <SettingControl
+      autoCapitalize="none"
+      autoCorrect={false}
+      keyboardType="email-address"
+      label="Email Address"
+      onChange={[Function]}
+      onSubmitEditing={[Function]}
+      toggleEditable={true}
+      value="jill@hill.com"
+    />
+    <SettingControl
+      label="Location"
+      onChange={[Function]}
+      onSubmitEditing={[Function]}
+      toggleEditable={true}
+      value="hill"
+    />
+    <View>
+      <Button
+        onPress={[Function]}
+        text="Make Changes"
       />
-    </KeyboardFriendlyView>
+      <Button
+        onPress={[Function]}
+        text="Finish"
+      />
+    </View>
   </ScrollView>
-</SafeAreaViewMock>
+</KeyboardFriendlyView>
+`;
+
+exports[`matches last snapshot 1`] = `
+<KeyboardFriendlyView>
+  <ScrollView>
+    <Text>
+      Everything looking good?
+    </Text>
+    <Text>
+      You can always come back and change your details at any time.
+    </Text>
+    <View>
+      <TouchableOpacity>
+        <Image
+          source={
+            Object {
+              "uri": "mill.png",
+            }
+          }
+        />
+      </TouchableOpacity>
+    </View>
+    <SettingControl
+      label="Your Full Name"
+      onChange={[Function]}
+      onSubmitEditing={[Function]}
+      toggleEditable={true}
+      value="Hill"
+    />
+    <SettingControl
+      autoCapitalize="none"
+      autoCorrect={false}
+      keyboardType="email-address"
+      label="Email Address"
+      onChange={[Function]}
+      onSubmitEditing={[Function]}
+      toggleEditable={true}
+      value="jill@hill.com"
+    />
+    <SettingControl
+      label="Location"
+      onChange={[Function]}
+      onSubmitEditing={[Function]}
+      toggleEditable={true}
+      value="hill"
+    />
+    <View>
+      <Button
+        onPress={[Function]}
+        text="Make Changes"
+      />
+      <Button
+        onPress={[Function]}
+        text="Finish"
+      />
+    </View>
+  </ScrollView>
+</KeyboardFriendlyView>
+`;
+
+exports[`validate returns false and populates state when the props are bad 1`] = `
+Object {
+  "confirmPassword": "Passwords must match",
+  "email": "Must be a valid email",
+  "name": "Name must not consist solely of whitespace.",
+  "password": "Password must be at least 9 characters.",
+}
+`;
+
+exports[`validate returns true when the props are good 1`] = `
+Object {
+  "confirmPassword": false,
+  "email": false,
+  "name": null,
+  "password": null,
+}
 `;
