@@ -13,7 +13,7 @@ export default function makeGoToGroup ({ navigate }, dispatch, confirm = true) {
     if (canViewGroup) {
       const goToGroup = () => {
         dispatch(selectGroup(groupId))
-        navigate('Group Navigation', { groupId })
+        navigate('Feed', { groupId })
       }
       confirm
         ? confirmNavigate(goToGroup, {

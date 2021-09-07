@@ -6,7 +6,7 @@ exports[`GroupSettingsMenu matches the last snapshot 1`] = `
     Array [
       Object {
         "name": "Edit Group Info",
-        "navigate": "Group Information",
+        "navigate": "Edit Group Info",
       },
       Object {
         "name": "Group Moderators",

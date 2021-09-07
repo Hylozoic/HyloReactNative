@@ -1,6 +1,6 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, createRef } from 'react'
 import { View, Linking, InteractionManager } from 'react-native'
-import { NavigationContainer, useNavigationContainerRef, createNavigationContainerRef } from '@react-navigation/native'
+import { NavigationContainer, createNavigationContainerRef } from '@react-navigation/native'
 import { useFlipper, useReduxDevToolsExtension } from '@react-navigation/devtools'
 import RNBootSplash from "react-native-bootsplash"
 import Loading from 'components/Loading'
@@ -8,21 +8,46 @@ import RootNavigator from 'navigation/RootNavigator'
 import customLinking, { navigateToLinkingPath } from 'navigation/linking/custom'
 import setReturnToPath from 'store/actions/setReturnToPath'
 
-// const navigationRef = createNavigationContainerRef()
+// const initialState = {
+//   name: 'Tabs',
+//   state: {
+//     routes: [
+//       {
+//         name: 'Home', 
+//         state: {
+//           routes: [
+//             { name: 'Group Navigation' },
+//             { name: 'Feed' }
+//           ]
+//         }
+//       }
+//     ]
+//   }
+// }
+// const initialState = {
+//   routes: [{
+//     screen: 'Tabs',
+//     params: {
+//       screen: 'Home',
+//       params: {
+//         screen: 'Group Navigation',
+//         // initial: false
+//       }
+//     }
+//   }]
+// }
+export const isReadyRef = createRef()
+export const navigationRef = createNavigationContainerRef()
 
 export default function RootView ({
   loading,
   signedIn,
   signupInProgress,
   currentUser,
-  checkSessionAndSetSignedIn,
   loadCurrentUserSession,
   returnToPath,
   openedPushNotification
 }) {
-  const isReadyRef = useRef()
-  const navigationRef = useNavigationContainerRef()
-
   // if (typeof(HermesInternal) === "undefined") {
   //   console.log("Hermes is not enabled");
   // } else {
@@ -32,8 +57,8 @@ export default function RootView ({
   useFlipper(navigationRef)
   // useReduxDevToolsExtension(navigationRef)
 
-  useEffect(() => { checkSessionAndSetSignedIn() }, [])
-  useEffect(() => { signedIn && loadCurrentUserSession() }, [signedIn])
+  // useEffect(() => { checkSessionAndSetSignedIn() }, [])
+  useEffect(() => { loadCurrentUserSession() }, [signedIn])
   // useEffect(() => { 
   //   if (
   //     !loading &&
@@ -73,6 +98,7 @@ export default function RootView ({
       </View>
     )
   }
+  const fullyAuthorized = !signupInProgress && currentUser
 
   return (
     <View style={styles.rootContainer}>
@@ -81,8 +107,11 @@ export default function RootView ({
         ref={navigationRef}
         onReady={() => { 
           isReadyRef.current = true
-          RNBootSplash.hide()
+          fullyAuthorized && navigationRef.current?.navigate('Tabs', { screen: 'Home', params: { screen: 'Feed' } })
+          !loading && RNBootSplash.hide()
         }}
+        // initialState={initialState}
+        // onStateChange={state => console.log('!!! nav state:', state.routes)}
       >
         <RootNavigator
           signedIn={signedIn}

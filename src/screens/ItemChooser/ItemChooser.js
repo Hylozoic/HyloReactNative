@@ -72,9 +72,7 @@ export default class ItemChooser extends React.Component {
   }
 
   componentDidUpdate () {
-    if (!isEqual(this.props.initialItems, this.state.chosenItems)) {
-      this.setHeader()
-    }
+    this.setHeader()
   }
 
   componentDidMount () {
@@ -100,9 +98,7 @@ export default class ItemChooser extends React.Component {
       headerProps.headerRightButtonOnPress = this.done
     }
     navigation.setOptions({
-      headerShown: true,
-      headerRightButtonLabel: 'Done',
-      headerRightButtonOnPress: this.done
+      header: props => <ModalHeader {...props} {...headerProps} />
     })
   }
 

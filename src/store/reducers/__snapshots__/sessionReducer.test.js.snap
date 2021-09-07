@@ -1,5 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`on FETCH_CURRENT_USER handles a not signed-in 1`] = `
+Object {
+  "id": 1,
+  "signedIn": false,
+  "signupInProgress": undefined,
+}
+`;
+
 exports[`on FETCH_CURRENT_USER handles a user with a membership 1`] = `
 Object {
   "id": 1,

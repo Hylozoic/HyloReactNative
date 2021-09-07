@@ -4,9 +4,6 @@ exports[`ModeratorSettings matches the last snapshot 1`] = `
 <FlatList
   ListHeaderComponent={
     <View>
-      <Text>
-        Group Time
-      </Text>
       <View>
         <TouchableOpacity
           onPress={[Function]}
@@ -89,9 +86,6 @@ exports[`ModeratorSettings shows the Search component appropriately 1`] = `
 <RCTScrollView
   ListHeaderComponent={
     <View>
-      <Text>
-        Group Time
-      </Text>
       <View>
         <TouchableOpacity
           onPress={[Function]}
@@ -143,9 +137,6 @@ exports[`ModeratorSettings shows the Search component appropriately 1`] = `
       onLayout={[Function]}
     >
       <View>
-        <Text>
-          Group Time
-        </Text>
         <View>
           <View
             accessible={true}

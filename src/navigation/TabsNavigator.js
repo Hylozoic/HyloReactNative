@@ -40,7 +40,6 @@ export function MessagesNavigator () {
           header: headerProps => <ModalHeader {...headerProps}
             headerRightButtonLabel='New'
             headerRightButtonOnPress={() => headerProps.navigation.navigate('New Message')}
-            headerLeftOnPress={() => headerProps.navigation.navigate('Home')}
           />
         }}
       />
@@ -124,9 +123,7 @@ export function HomeNavigator () {
 
 const MyProfile = createStackNavigator()
 export function MyProfileNavigator () {
-  const navigatorProps = {
-    // screenOptions: buildTabStackScreenOptions
-  }
+  const navigatorProps = {}
   return <MyProfile.Navigator {...navigatorProps}>
     <MyProfile.Screen name='My Profile'
         component={MemberDetails}
@@ -138,8 +135,10 @@ export function MyProfileNavigator () {
           />
         }}
      />
-    <MyProfile.Screen name='MemberSkillEditor' key='MemberSkillEditor' component={MemberSkillEditor}
-      options={{ title: 'Edit Skills' }} />
+    <MyProfile.Screen name='MemberSkillEditor' key='MemberSkillEditor'
+      component={MemberSkillEditor}
+      options={{ title: '' }}
+    />
   </MyProfile.Navigator>
 }
 

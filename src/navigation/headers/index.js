@@ -10,7 +10,8 @@ import HeaderLeftCloseIcon from 'navigation/headers/HeaderLeftCloseIcon'
 import NotificationsIcon from 'navigation/headers/NotificationsIcon'
 import MenuButton from 'navigation/headers/MenuButton'
 import {
-  white, caribbeanGreen, white60onCaribbeanGreen, black10onRhino, rhino05, rhino80
+  white, caribbeanGreen, white60onCaribbeanGreen,
+  black10onRhino, rhino05, rhino80, rhino10
 } from 'style/colors'
 
 // For now this list needs to be kept in sync with the names of the initial
@@ -88,23 +89,18 @@ export function ModalHeader ({
   },
   ...otherProps
 }) {
-  const headerTitleStyleColor = otherProps?.headerTitleStyle?.color ?? black10onRhino
+  const headerTitleStyleColor = options.headerTitleStyle?.color ?? black10onRhino
   const props = {
-    presentation: 'modal',
-    cardStyle: {
-      backgroundColor: white
-    },
     headerStyle: {
-      backgroundColor: rhino05,
-      // ...otherProps.headerStyle
+      backgroundColor: rhino10,
+      ...options.headerStyle
     },
     title: getHeaderTitle(options, route.name),
-    headerTitle: options.headerTitle,
     headerTintColor: rhino80,
     headerTitleAlign: 'center',
     headerTitleStyle: {
       color: headerTitleStyleColor,
-      fontFamily: 'Circular-Bold',
+      fontFamily: 'Circular-Bold'
       // maxWidth: '80%'
     },
     headerLeft: props => {
@@ -117,14 +113,14 @@ export function ModalHeader ({
         : headerLeftOnPress
       const label = headerLeftLabel
         ? headerLeftLabel
-        : props.label 
+        : props.label
       return (
         <>
           <FocusAwareStatusBar {...statusBarOptions} />
           {headerLeftCloseIcon
             ? <HeaderLeftCloseIcon {...props} color={headerTitleStyleColor} onPress={onPress} />
             : <HeaderBackButton {...props} label={label} onPress={onPress} />}
-          </>
+        </>
       )
     },
     headerRight: () => headerRightButtonOnPress && (
@@ -134,6 +130,9 @@ export function ModalHeader ({
         disabled={headerRightButtonDisabled}
       />
     )
+  }
+  if (options.presentation) {
+    props.headerStatusBarHeight = 0
   }
 
   return <Header {...props} {...otherProps} />

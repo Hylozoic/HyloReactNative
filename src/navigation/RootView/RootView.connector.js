@@ -3,10 +3,9 @@ import { bindActionCreators } from 'redux'
 import { register as registerOneSignal } from 'util/onesignal'
 import OneSignal from 'react-native-onesignal'
 import registerDevice from 'store/actions/registerDevice'
-import checkSessionAndSetSignedIn from 'store/actions/checkSessionAndSetSignedIn'
 import fetchCurrentUser from 'store/actions/fetchCurrentUser'
 import getMe from 'store/selectors/getMe'
-import { CHECK_SESSION_AND_SET_SIGNED_IN, FETCH_CURRENT_USER } from 'store/constants'
+import { FETCH_CURRENT_USER } from 'store/constants'
 import selectGroup from 'store/actions/selectGroup'
 import { getLastViewedGroup } from 'store/models/Me'
 import getSignedIn from 'store/selectors/getSignedIn'
@@ -18,8 +17,7 @@ export function mapStateToProps (state, props) {
   const signedIn = getSignedIn(state)
   const signupInProgress = getSignupInProgress(state)
   const returnToPath = getReturnToPath(state)
-  const loading = state.pending[CHECK_SESSION_AND_SET_SIGNED_IN]
-    || state.pending[FETCH_CURRENT_USER]
+  const loading = state.pending[FETCH_CURRENT_USER]
 
   return {
     loading,
@@ -33,7 +31,6 @@ export function mapStateToProps (state, props) {
 export function mapDispatchToProps (dispatch) {
   return {
     ...bindActionCreators({
-      checkSessionAndSetSignedIn,
       fetchCurrentUser,
       selectGroup,
       registerDevice
@@ -48,12 +45,14 @@ export function buildLoadCurrentUserSession ({
 }) {
   return async () => {
     const currentUserRaw = await fetchCurrentUser()
-    const memberships = currentUserRaw?.payload?.data?.me?.memberships
-    const lastViewedgroupId = getLastViewedGroup(memberships)?.id
-    await selectGroup(lastViewedgroupId)
-    await registerOneSignal({ registerDevice })
-    // Prompt for push on iOS
-    OneSignal.promptForPushNotificationsWithUserResponse(() => {})
+    if (currentUserRaw?.payload?.data?.me) {
+      const memberships = currentUserRaw?.payload?.data?.me?.memberships
+      const lastViewedgroupId = getLastViewedGroup(memberships)?.id
+      await selectGroup(lastViewedgroupId)
+      await registerOneSignal({ registerDevice })
+      // Prompt for push on iOS
+      OneSignal.promptForPushNotificationsWithUserResponse(() => {})
+    }
   }
 }
 

@@ -3,7 +3,7 @@ import { Provider } from 'react-redux'
 import { createMockStore } from 'util/testing'
 import { render } from '@testing-library/react-native'
 import RootView from 'navigation/RootView'
-import { CHECK_SESSION_AND_SET_SIGNED_IN } from 'store/constants'
+import { FETCH_CURRENT_USER } from 'store/constants'
 import orm from 'store/models'
 // import NetInfo from '@react-native-community/netinfo'
 import { getSessionCookie } from 'util/session'
@@ -25,7 +25,7 @@ describe('RootView', () => {
   it('loading without signupInProgress - matches snapshot', async () => {
     const state = {
       orm: ormSession.state,
-      pending: { CHECK_SESSION_AND_SET_SIGNED_IN },
+      pending: { FETCH_CURRENT_USER },
       session: {
         signupInProgress: false
       },
@@ -41,7 +41,7 @@ describe('RootView', () => {
   it('no loading indicator when signupInProgress - matches snapshot', async () => {
     const state = {
       orm: ormSession.state,
-      pending: { CHECK_SESSION_AND_SET_SIGNED_IN },
+      pending: { FETCH_CURRENT_USER },
       session: {
         signupInProgress: false
       }

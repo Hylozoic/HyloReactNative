@@ -5,7 +5,6 @@ import { get } from 'lodash/fp'
 import Icon from 'components/Icon'
 import styles from './MenuButton.styles.js'
 
-
 export default function MenuButton ({
   currentContext,
   canGoBack,

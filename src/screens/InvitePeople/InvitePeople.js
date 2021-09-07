@@ -33,15 +33,8 @@ export default class InvitePeople extends Component {
     ]
   }
 
-  setHeader = () => {
-    this.props.navigation?.setOptions({
-      title: this.props.group.name
-    })
-  }
-
   componentDidMount () {
     this.props.fetchGroupSettings()
-    this.setHeader()
   }
 
   componentDidUpdate (prevProps, prevState) {

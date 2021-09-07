@@ -50,8 +50,6 @@ export default function sessionReducer (state = {
         ...omit('loginError', state),
         signedIn: true
       }
-    case CHECK_SESSION_AND_SET_SIGNED_IN:
-      return { ...state, signedIn: payload }
     case SIGNUP:
       return {
         ...state,
@@ -60,7 +58,7 @@ export default function sessionReducer (state = {
     case FETCH_CURRENT_USER:
       return {
         ...state,
-        signedIn: true,
+        signedIn: !!get('data.me', payload),
         signupInProgress: get('data.me.settings.signupInProgress', payload)
       }
     case UPDATE_USER_SETTINGS:

@@ -5,7 +5,7 @@ import styles from './GroupSettingsMenu.style'
 
 export const menuItems = [{
   name: 'Edit Group Info',
-  navigate: 'Group Information'
+  navigate: 'Edit Group Info'
 }, {
   name: 'Group Moderators',
   navigate: 'Group Moderators'

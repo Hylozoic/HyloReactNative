@@ -1,20 +1,9 @@
 import sessionReducer from './sessionReducer'
 import { LOGIN } from 'screens/Login/actions'
 import { 
-  CHECK_SESSION_AND_SET_SIGNED_IN,
   FETCH_CURRENT_USER,
   SELECT_GROUP
 } from 'store/constants'
-
-describe('on CHECK_SESSION_AND_SET_SIGNED_IN', () => {
-  it('stores the payload', () => {
-    const action = {
-      type: CHECK_SESSION_AND_SET_SIGNED_IN,
-      payload: true
-    }
-    expect(sessionReducer({}, action)).toEqual({ signedIn: true })
-  })
-})
 
 describe('on LOGIN', () => {
   it('stores an error message', () => {
@@ -92,6 +81,22 @@ describe('on FETCH_CURRENT_USER', () => {
           me: {
             memberships: []
           }
+        }
+      }
+    }
+    expect(sessionReducer(state, action))
+      .toMatchSnapshot()
+  })
+
+  it('handles a not signed-in', () => {
+    const state = {
+      id: 1
+    }
+    const action = {
+      type: FETCH_CURRENT_USER,
+      payload: {
+        data: {
+          me: null
         }
       }
     }
