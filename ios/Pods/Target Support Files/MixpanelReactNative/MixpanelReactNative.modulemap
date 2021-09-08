@@ -1,6 +1,0 @@
-module MixpanelReactNative {
-  umbrella header "MixpanelReactNative-umbrella.h"
-
-  export *
-  module * { export * }
-}

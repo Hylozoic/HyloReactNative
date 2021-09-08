@@ -1,1 +1,0 @@
-../../../../../node_modules/react-native-flipper/ios/FlipperReactNativeJavaScriptPluginManager.h

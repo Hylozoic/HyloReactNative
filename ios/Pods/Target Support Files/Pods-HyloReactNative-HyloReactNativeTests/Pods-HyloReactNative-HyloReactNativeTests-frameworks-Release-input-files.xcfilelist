@@ -1,5 +1,0 @@
-${PODS_ROOT}/Target Support Files/Pods-HyloReactNative-HyloReactNativeTests/Pods-HyloReactNative-HyloReactNativeTests-frameworks.sh
-${PODS_XCFRAMEWORKS_BUILD_DIR}/Intercom/Intercom.framework/Intercom
-${PODS_XCFRAMEWORKS_BUILD_DIR}/OneSignalXCFramework/OneSignal.framework/OneSignal
-${PODS_XCFRAMEWORKS_BUILD_DIR}/OpenSSL-Universal/OpenSSL.framework/OpenSSL
-${PODS_XCFRAMEWORKS_BUILD_DIR}/hermes-engine/hermes.framework/hermes
