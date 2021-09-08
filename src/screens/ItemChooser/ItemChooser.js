@@ -99,7 +99,6 @@ export default class ItemChooser extends React.Component {
       headerProps.headerRightButtonOnPress = this.done
     }
     navigation.setOptions({
-      cardStyle: { backgroundColor: white },
       header: props => <ModalHeader {...props} {...headerProps} />
     })
   }

@@ -26,7 +26,11 @@ const Root = createStackNavigator()
 export default function RootNavigator (props) {
   const { signupInProgress, currentUser } = props
   const fullyAuthorized = !signupInProgress && currentUser
-  const navigatorProps = {}
+  const navigatorProps = {
+    screenOptions: {
+      cardStyle: { backgroundColor: white }
+    }
+  }
   return <Root.Navigator {...navigatorProps}>
     {fullyAuthorized && <>
       <Root.Screen name='Drawer' component={DrawerNavigator} options={{ headerShown: false }} />
