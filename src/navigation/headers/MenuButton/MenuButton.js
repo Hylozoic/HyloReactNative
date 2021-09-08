@@ -12,10 +12,10 @@ export default function MenuButton ({
 }) {
   const avatarUrl = get('headerAvatarUrl', currentContext)
     || get('avatarUrl', currentContext)
-  const onPress = !canGoBack
+  let onPress = !navigation.canGoBack()
     ? navigation.openDrawer
     : navigation.goBack
-
+  console.log('!!!! navigation', navigation.canGoBack())
   return (
     <HeaderBackButton
       onPress={onPress}

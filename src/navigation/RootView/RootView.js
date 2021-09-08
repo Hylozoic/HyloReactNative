@@ -1,7 +1,7 @@
 import React, { useEffect, createRef } from 'react'
 import { View, Linking, InteractionManager } from 'react-native'
 import { NavigationContainer, createNavigationContainerRef } from '@react-navigation/native'
-import { useFlipper, useReduxDevToolsExtension } from '@react-navigation/devtools'
+import { useFlipper } from '@react-navigation/devtools'
 import RNBootSplash from "react-native-bootsplash"
 import Loading from 'components/Loading'
 import RootNavigator from 'navigation/RootNavigator'
@@ -85,8 +85,9 @@ export default function RootView ({
   //   console.log("Hermes is enabled");
   // }
   
-  useFlipper(navigationRef)
-  // useReduxDevToolsExtension(navigationRef)
+  // Currently a bug with React Navigation Flipper plugin, follow:
+  // https://github.com/react-navigation/react-navigation/issues/9850
+  // useFlipper(navigationRef)
 
   // useEffect(() => { checkSessionAndSetSignedIn() }, [])
   useEffect(() => { loadCurrentUserSession() }, [signedIn])

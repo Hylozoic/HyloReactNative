@@ -14,7 +14,7 @@ import FeedList from 'components/FeedList'
 import SocketSubscriber from 'components/SocketSubscriber'
 import styles from './Feed.styles'
 
-export function setHeaderTitle (navigation, topicName, group, isProjectFeed) {
+export function headerTitle (topicName, group, isProjectFeed) {
   let title 
   title = topicName
     ? group?.name
@@ -22,7 +22,7 @@ export function setHeaderTitle (navigation, topicName, group, isProjectFeed) {
   title = isProjectFeed
     ? 'Projects'
     : title
-  navigation.setOptions({ title })
+  return title
 }
 
 export default function Feed ({
@@ -54,7 +54,10 @@ export default function Feed ({
   useEffect(() => { group?.id && selectGroup(group.id) }, [group?.id])
   useEffect(() => { fetchGroupTopic() }, [])
   useEffect(() => {
-    setHeaderTitle(navigation, topicName, group, isProjectFeed)
+    navigation.setOptions({
+      title: headerTitle(topicName, group, isProjectFeed)
+      
+    })
   }, [
     topicName,
     group?.id, 

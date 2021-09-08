@@ -9,10 +9,10 @@
 
 #include <folly/Executor.h>
 #include <folly/io/async/EventBase.h>
-#include <rsocket/RSocket.h>
 #include <mutex>
 #include "FlipperConnectionManager.h"
 #include "FlipperInitConfig.h"
+#include "FlipperSocket.h"
 #include "FlipperState.h"
 
 namespace facebook {
@@ -21,9 +21,7 @@ namespace flipper {
 class ConnectionEvents;
 class ConnectionContextStore;
 class FlipperRSocketResponder;
-
-rsocket::Payload toRSocketPayload(folly::dynamic data);
-
+class FlipperConnectionManagerWrapper;
 class FlipperConnectionManagerImpl : public FlipperConnectionManager {
   friend ConnectionEvents;
 
@@ -66,13 +64,16 @@ class FlipperConnectionManagerImpl : public FlipperConnectionManager {
 
   folly::EventBase* flipperEventBase_;
   folly::EventBase* connectionEventBase_;
-  std::unique_ptr<rsocket::RSocketClient> client_;
+
+  std::unique_ptr<FlipperSocket> client_;
+
   bool connectionIsTrusted_;
   int failedConnectionAttempts_ = 0;
   std::shared_ptr<ConnectionContextStore> contextStore_;
+  std::shared_ptr<FlipperConnectionManagerWrapper> implWrapper_;
 
   void startSync();
-  bool doCertificateExchange();
+  bool connectAndExchangeCertificate();
   bool connectSecurely();
   bool isCertificateExchangeNeeded();
   void requestSignedCertFromFlipper();
