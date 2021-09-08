@@ -1,11 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`MenuButton renders correctly 1`] = `
-<View>
-  <HeaderBackButton
-    backImage={[Function]}
-    labelVisible={false}
-    onPress={[MockFunction]}
-  />
-</View>
+<HeaderBackButton
+  backImage={[Function]}
+  labelVisible={false}
+  onPress={[MockFunction]}
+/>
 `;

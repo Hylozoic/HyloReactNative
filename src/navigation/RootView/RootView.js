@@ -21,15 +21,14 @@ const linking = {
                 initialRouteName: 'Feed',
                 screens: {
                   'Post Details': {
-                    path: 'all/post/:id',
-                    // exact: true
+                    path: 'all/post/:id'
                   }
                 }
               },
               Messages: {
                 initialRouteName: 'Messages',
                 screens: {
-                  Thread: '/messages/:messageId'
+                  Thread: '/messages/:id'
                 }
               }        
             }
