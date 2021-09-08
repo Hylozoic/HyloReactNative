@@ -53,7 +53,9 @@ export default function Feed ({
   // TODO: This is now happening in goToGroup so can be removed
   useEffect(() => { group?.id && selectGroup(group.id) }, [group?.id])
   useEffect(() => { fetchGroupTopic() }, [])
-  useEffect(() => { setHeaderTitle(navigation, topicName, group, isProjectFeed) }, [
+  useEffect(() => {
+    setHeaderTitle(navigation, topicName, group, isProjectFeed)
+  }, [
     topicName,
     group?.id, 
     isProjectFeed

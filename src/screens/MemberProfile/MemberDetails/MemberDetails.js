@@ -69,8 +69,9 @@ export default class MemberDetails extends React.Component {
       })
     } else {  
       navigation.setOptions({
+        title,
         header: headerProps =>
-          <TabStackHeader {...headerProps} title />
+          <TabStackHeader {...headerProps} />
       })
     }
   }

@@ -30,7 +30,11 @@ import { caribbeanGreen, gainsboro, gunsmoke, rhino05, white } from 'style/color
 
 const Messages = createStackNavigator()
 export function MessagesNavigator () {
-  const navigatorProps = {}
+  const navigatorProps = {
+    screenOptions: {
+      headerMode: 'float'
+    }
+  }
   return (
     <Messages.Navigator {...navigatorProps}>
       <Messages.Screen
@@ -49,7 +53,6 @@ export function MessagesNavigator () {
         options={{
           header: headerProps => <ModalHeader {...headerProps}
             headerLeftCloseIcon={false}
-            headerLeftLabel=''
           />
         }}
       />
@@ -59,7 +62,6 @@ export function MessagesNavigator () {
         options={{
           header: headerProps => <ModalHeader {...headerProps}
             headerLeftCloseIcon={false}
-            headerLeftLabel=''
             title='Participants'
           />
         }}
@@ -70,7 +72,6 @@ export function MessagesNavigator () {
         options={{
           header: headerProps => <ModalHeader {...headerProps}
             headerLeftCloseIcon={false}
-            headerLeftLabel=''
             headerLeftOnPress={() => headerProps.navigation.navigate('Messages')}
           />
         }}
@@ -100,6 +101,7 @@ const Home = createStackNavigator()
 export function HomeNavigator () {
   const navigatorProps = {
     screenOptions: {
+      headerMode: 'float',
       header: headerProps => <TabStackHeader {...headerProps} />
     }
   }
@@ -113,7 +115,7 @@ export function HomeNavigator () {
       <Home.Screen name='Project Members' key='Project Members' component={ProjectMembers} />
       <Home.Screen name='Members' component={MembersComponent} />
       <Home.Screen name='Member' key='Member' component={MemberProfile} />
-      <Home.Screen name='MemberDetails' key='MemberDetails' component={MemberDetails} />
+      <Home.Screen name='Member Details' component={MemberDetails} />
       <Home.Screen name='Group Relationships' component={Groups} />
       <Home.Screen name='Group Detail' component={GroupDetail} />
       <Home.Screen name='Topics' component={TopicsComponent} />
@@ -123,22 +125,17 @@ export function HomeNavigator () {
 
 const MyProfile = createStackNavigator()
 export function MyProfileNavigator () {
-  const navigatorProps = {}
+  const navigatorProps = {
+    screenOptions: {
+      headerMode: 'float',
+      header: headerProps => <ModalHeader {...headerProps}
+        headerLeftCloseIcon={false}
+      />
+    }
+  }
   return <MyProfile.Navigator {...navigatorProps}>
-    <MyProfile.Screen name='My Profile'
-        component={MemberDetails}
-        options={{
-          header: headerProps => <ModalHeader {...headerProps}
-            headerLeftCloseIcon={false}
-            headerLeftLabel=''
-            headerLeftOnPress={() => headerProps.navigation.navigate('Home')}
-          />
-        }}
-     />
-    <MyProfile.Screen name='MemberSkillEditor' key='MemberSkillEditor'
-      component={MemberSkillEditor}
-      options={{ title: '' }}
-    />
+    <MyProfile.Screen name='My Profile' component={MemberDetails} />
+    <MyProfile.Screen name='Edit Your Skills' component={MemberSkillEditor} />
   </MyProfile.Navigator>
 }
 

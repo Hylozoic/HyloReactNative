@@ -17,19 +17,17 @@ export default function MenuButton ({
     : navigation.goBack
 
   return (
-    <View style={styles.container}>
-      <HeaderBackButton
-        onPress={onPress}
-        labelVisible={false}
-        backImage={() => (
-          <View style={styles.container}>
-            {!canGoBack
-              ? <Icon name='Hamburger' style={styles.menuIcon} />
-              : <Icon name='ArrowForward' style={styles.backIcon} />}
-            <Image source={{ uri: avatarUrl }} style={styles.avatar} />
-          </View>
-        )}        
-      />
-    </View>
+    <HeaderBackButton
+      onPress={onPress}
+      labelVisible={false}
+      backImage={() => (
+        <View style={styles.container}>
+          {!canGoBack
+            ? <Icon name='Hamburger' style={styles.menuIcon} />
+            : <Icon name='ArrowForward' style={styles.backIcon} />}
+          <Image source={{ uri: avatarUrl }} style={styles.avatar} />
+        </View>
+      )}        
+    />
   )
 }

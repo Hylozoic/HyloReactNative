@@ -23,10 +23,10 @@ describe('mapStateToProps', () => {
     const props = mapStateToProps(state, { route, navigation })
     expect(props).toMatchSnapshot()
     props.goToDetails()
-    expect(navigation.navigate).toHaveBeenCalledWith('MemberDetails', { id })
+    expect(navigation.navigate).toHaveBeenCalledWith('Member Details', { id })
     navigation.navigate.mockClear()
     props.goToEdit()
-    expect(navigation.navigate).toHaveBeenCalledWith('MemberDetails', { id, editing: true })
+    expect(navigation.navigate).toHaveBeenCalledWith('Member Details', { id, editing: true })
   })
 })
 
