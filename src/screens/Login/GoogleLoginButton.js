@@ -27,7 +27,7 @@ export default class GoogleLoginButton extends React.Component {
 
       this.props.onLoginFinished(accessToken)
     } catch (error) {
-      console.log('!!! error in GoogleLoginButton', error)
+      process.env.NODE_ENV !== 'test' && console.log('!!! error in GoogleLoginButton', error)
       this.props.createErrorNotification('COULD NOT SIGN IN WITH YOUR GOOGLE ACCOUNT')
     }
   }

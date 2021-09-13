@@ -104,7 +104,7 @@ export default function reducer (state = defaultState, action) {
 }
 
 export function getSearch (state) {
-  return state[MODULE_NAME].search
+  return state[MODULE_NAME]?.search
 }
 
 export function setSearch (search) {

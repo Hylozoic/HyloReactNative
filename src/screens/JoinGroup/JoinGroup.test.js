@@ -3,37 +3,36 @@ import React from 'react'
 import JoinGroup from './JoinGroup'
 import { createMockStore } from 'util/testing'
 import { Provider } from 'react-redux'
-import { act } from 'react-test-renderer'
 import { render } from '@testing-library/react-native'
 import { NavigationContainer } from '@react-navigation/native'
 import { checkInvitation as checkInvitationAction, useInvitation } from './JoinGroup.store'
+import { createStackNavigator } from '@react-navigation/stack'
+import Login from 'screens/Login'
+import getEmptyState from 'store/getEmptyState'
 
-jest.mock('./JoinGroup.store')
-jest.mock('screens/LoadingScreen', () => 'LoadingScreen')
 
-it('calls useInvitation', async () => {
-  let rendered
+it('forwards to Login when not signedIn', async () => {
   const props = {
     route: { params: {} },
     navigation: {}
   }
   const state = {
+    ...getEmptyState(),
     session: {
       signedIn: false
     }
   }
-  const component = (
+  const TestNavigator = createStackNavigator()
+  const { getByText } = render(
     <Provider store={createMockStore(state)}>
       <NavigationContainer>
-        <JoinGroup {...props} />
+        <TestNavigator.Navigator>
+          <TestNavigator.Screen name='JoinGroup' component={JoinGroup} />
+          <TestNavigator.Screen name='Login' component={Login} />
+        </TestNavigator.Navigator>
       </NavigationContainer>
     </Provider>
   )
-  const { toJSON } = render(component)
 
-  await act(async () => {
-    rendered = toJSON()
-  })
-
-  expect(rendered).toMatchSnapshot()  
+  expect(getByText('Log in to Hylo')).toBeTruthy()  
 })

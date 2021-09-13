@@ -51,21 +51,21 @@ describe('makeOnPressMessages', () => {
   it("navigates to thread list when it's your profile", () => {
     const onPressMessages = makeOnPressMessages({ id: 1 }, { id: 1 }, navigation)
     onPressMessages()
-    expect(navigation.navigate).toHaveBeenCalledWith('Messages')
+    expect(navigation.navigate).toHaveBeenCalledWith('Messages Tab')
   })
 
   it('navigates to existing thread when there is one', () => {
     const messageThreadId = 99
     const onPressMessages = makeOnPressMessages({ id: 1 }, { id: 2, messageThreadId }, navigation)
     onPressMessages()
-    expect(navigation.navigate).toHaveBeenCalledWith('Messages', { screen: 'Thread', params: { id: messageThreadId } })
+    expect(navigation.navigate).toHaveBeenCalledWith('Messages Tab', { screen: 'Thread', params: { id: messageThreadId } })
   })
 
   it('navigates to new message page when there is no existing thread', () => {
     const otherPersonId = 2
     const onPressMessages = makeOnPressMessages({ id: 1 }, { id: otherPersonId }, navigation)
     onPressMessages()
-    expect(navigation.navigate).toHaveBeenCalledWith('Messages', { screen: 'New Message', params: { participantIds: [otherPersonId] } })
+    expect(navigation.navigate).toHaveBeenCalledWith('Messages Tab', { screen: 'New Message', params: { participantIds: [otherPersonId] } })
   })
 })
 

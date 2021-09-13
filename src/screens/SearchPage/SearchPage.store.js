@@ -51,11 +51,11 @@ export function setSearchFilter (filter) {
 }
 
 export function getSearchTerm (state) {
-  return state[MODULE_NAME].search
+  return state[MODULE_NAME]?.search
 }
 
 export function getSearchFilter (state) {
-  return state[MODULE_NAME].filter
+  return state[MODULE_NAME]?.filter
 }
 
 export function fetchSearchResults ({ search, offset = 0, filter }) {

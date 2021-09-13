@@ -21,20 +21,22 @@ import NotificationsList from 'screens/NotificationsList'
 import PostEditor from 'screens/PostEditor'
 import UserSettings from 'screens/UserSettings'
 import { white } from 'style/colors'
+import PostDetails from 'screens/PostDetails'
+import MemberDetails from 'screens/MemberProfile/MemberDetails'
 
 const Root = createStackNavigator()
-export default function RootNavigator (props) {
-  const { signupInProgress, currentUser } = props
-  const fullyAuthorized = !signupInProgress && currentUser
+export default function RootNavigator ({ fullyAuthorized }) {
   const navigatorProps = {
     screenOptions: {
       cardStyle: { backgroundColor: white }
     }
   }
+
   return <Root.Navigator {...navigatorProps}>
+    {/* Logged in */}
     {fullyAuthorized && <>
       <Root.Screen name='Drawer' component={DrawerNavigator} options={{ headerShown: false }} />
-      <Root.Group  screenOptions={{ presentation: 'modal', header: ModalHeader }}>
+      <Root.Group screenOptions={{ presentation: 'modal', header: ModalHeader }}>
         <Root.Screen name='Edit Post' component={PostEditor} />
         <Root.Screen name='Edit Account Info' component={UserSettings} />
         <Root.Screen name='Group Settings' component={GroupSettingsNavigator} />
@@ -44,19 +46,25 @@ export default function RootNavigator (props) {
         <Root.Screen name='Notification Settings' component={NotificationSettings} />
         <Root.Screen name='Blocked Users' component={BlockedUsers} />
         <Root.Screen name='ItemChooser' component={ItemChooser} />
+        {/* NOT YET USED */}
+        <Root.Screen name='Post Details Modal' component={PostDetails} />
+        <Root.Screen name='Member Details Modal' component={MemberDetails} />
       </Root.Group>
       <Root.Screen name='Loading' component={LoadingScreen} />
       <Root.Screen name='JoinGroup' component={JoinGroup} />
       <Root.Screen name='InviteExpired' component={InviteExpired} />
     </>}
+    {/* Not logged-in or Signing-up */}
     {!fullyAuthorized && <>
       <Root.Group screenOptions={{
         headerShown: false,
         header: headerProps => <ModalHeader {...headerProps} />
       }}>
         <Root.Screen name='Login' component={Login}
-          options={{ animationEnabled: false }}
-          initialParams={props} />
+          options={{
+            animationEnabled: false
+          }}
+        />
         <Root.Screen name='ForgotPassword' component={ForgotPassword}
           options={{
             headerShown: true,

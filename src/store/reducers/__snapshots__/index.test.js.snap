@@ -67,6 +67,7 @@ Object {
   "session": Object {
     "groupId": null,
     "returnToPath": null,
+    "signedIn": false,
     "signupInProgress": null,
   },
 }
