@@ -20,7 +20,8 @@ export default function GroupSettingsNavigator ({ navigation, route }) {
       headerTitleStyle: { color: white },
       headerStyle: { backgroundColor: rhino60 },
       presentation: 'modal',
-      header: ModalHeader
+      header: headerProps =>
+        <ModalHeader {...headerProps} />
     })
   }, [navigation, route])
 

@@ -7,12 +7,15 @@ import SignupFlow2 from 'screens/SignupFlow/SignupFlow2'
 import SignupFlow3 from 'screens/SignupFlow/SignupFlow3'
 import SignupFlow4 from 'screens/SignupFlow/SignupFlow4'
 import ItemChooser from 'screens/ItemChooser'
+import { white } from 'style/colors'
 
 const Signup = createStackNavigator()
 export default function SignupNavigator () {
   const navigatorProps = {
     screenOptions: {
-      header: headerProps => <WorkflowModalHeader {...headerProps} />
+      cardStyle: { backgroundColor: white },
+      header: headerProps =>
+        <WorkflowModalHeader {...headerProps} />
     }
   }
   return (

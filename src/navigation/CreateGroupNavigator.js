@@ -8,52 +8,43 @@ import CreateGroupVisibilityAccessibility
   from 'screens/CreateGroupFlow/CreateGroupVisibilityAccessibility'
 import CreateGroupParentGroups from 'screens/CreateGroupFlow/CreateGroupParentGroups'
 import CreateGroupReview from 'screens/CreateGroupFlow/CreateGroupReview'
+import { white } from 'style/colors'
 
 const CreateGroup = createStackNavigator()
 export default function CreateGroupNavigator () {
-  const navigatorProps = {}
+  const navigatorProps = {
+    presentation: 'modal',
+    screenOptions: {
+      header: headerProps =>
+        <WorkflowModalHeader {...headerProps} headerStatusBarHeight={0} />
+    },
+  }
   return (
     <CreateGroup.Navigator {...navigatorProps}>
       <CreateGroup.Screen
-        name='CreateGroupName' component={CreateGroupName}
-        options={{
-          header: headerProps => <WorkflowModalHeader {...headerProps}
-            title='STEP 1/5'
-            headerLeftCloseIcon={true}
-          />
-        }}
+        name='CreateGroupName'
+        component={CreateGroupName}
+        options={{ title: 'STEP 1/5', headerLeftCloseIcon: true }}
       />
       <CreateGroup.Screen
-        name='CreateGroupUrl' component={CreateGroupUrl}
-        options={{
-          header: headerProps => <WorkflowModalHeader {...headerProps}
-            title='STEP 2/5'
-          />
-        }}
+        name='CreateGroupUrl'
+        component={CreateGroupUrl}
+        options={{ title: 'STEP 2/5' }}
       />
       <CreateGroup.Screen
-        name='CreateGroupVisibilityAccessibility' component={CreateGroupVisibilityAccessibility}
-        options={{
-          header: headerProps => <WorkflowModalHeader {...headerProps}
-            title='STEP 3/5'
-          />
-        }}
+        name='CreateGroupVisibilityAccessibility'
+        component={CreateGroupVisibilityAccessibility}
+        options={{ title: 'STEP 3/5' }}
       />
       <CreateGroup.Screen
-        name='CreateGroupParentGroups' component={CreateGroupParentGroups}
-        options={{
-          header: headerProps => <WorkflowModalHeader {...headerProps}
-            title='STEP 4/5'
-          />
-        }}
+        name='CreateGroupParentGroups'
+        component={CreateGroupParentGroups}
+        options={{ title: 'STEP 4/5' }}
       />
       <CreateGroup.Screen
-        name='CreateGroupReview' component={CreateGroupReview}
-        options={{
-          header: headerProps => <WorkflowModalHeader {...headerProps}
-            title='STEP 5/5'
-          />
-        }}
+        name='CreateGroupReview'
+        component={CreateGroupReview}
+        options={{ title: 'STEP 5/5' }}
       />
     </CreateGroup.Navigator>
   )

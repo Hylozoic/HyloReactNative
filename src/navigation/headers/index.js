@@ -18,9 +18,9 @@ import {
 // routes for each stack in navigation/TabsNavigator.
 export const TAB_STACK_ROOTS = [
   'Group Navigation',
-  'Messages',
-  'Search',
-  'Profile'
+  'Messages Tab',
+  'Search Tab',
+  'Profile Tab'
 ]
 
 export const TabStackHeader = ({
@@ -76,7 +76,7 @@ export function ModalHeader ({
   options,
   back,
   // custom props
-  headerLeftCloseIcon = true,
+  headerLeftCloseIcon: providedHeaderLeftCloseIcon = true,
   headerLeftLabel,
   headerLeftOnPress: providedHeaderLeftOnPress,
   headerLeftConfirm,
@@ -89,13 +89,15 @@ export function ModalHeader ({
   },
   ...otherProps
 }) {
-  const headerTitleStyleColor = options.headerTitleStyle?.color ?? black10onRhino
+  const headerLeftCloseIcon = options.headerLeftCloseIcon ?? providedHeaderLeftCloseIcon
+  const headerTitleStyleColor = otherProps.headerTitleStyle?.color
+    || (options.headerTitleStyle?.color ?? black10onRhino)
   const props = {
+    headerStatusBarHeight: options.headerStatusBarHeight ?? (options.presentation ? 0 : undefined),
     headerStyle: {
       backgroundColor: rhino10,
       ...options.headerStyle
     },
-    // Should we just `...options` this and alike?
     headerTitle: options.headerTitle,
     title: getHeaderTitle(options, route.name),
     headerTintColor: rhino80,
@@ -132,9 +134,6 @@ export function ModalHeader ({
         disabled={headerRightButtonDisabled}
       />
     )
-  }
-  if (options.presentation) {
-    props.headerStatusBarHeight = 0
   }
 
   return <Header {...props} {...otherProps} />
