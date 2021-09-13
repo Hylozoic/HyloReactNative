@@ -22,7 +22,13 @@ export function mapStateToProps (state, props) {
   const hasMore = getHasMoreSearchResults(state, queryResultProps)
   const pending = !!state.pending[FETCH_SEARCH]
 
-  const goToPost = id => props.navigation.navigate('Home', { screen: 'Post Details', params: { id } })
+  // TODO: Make these appear in modals?
+  // const goToPost = id => props.navigation.navigate('Post Details Modal', { id })
+  // const goToPerson = id => props.navigation.navigate('Member Details Modal', { id })
+
+  // TODO: Fix back links on Home Tab when navigating this way,
+  // currently causes a crash if trying to go back from Post Details or Member
+  const goToPost = id => props.navigation.navigate('Home Tab', { screen: 'Post Details', params: { id } })
   const goToPerson = id => props.navigation.navigate('Members', { screen: 'Member', params: { id } })
 
   return {

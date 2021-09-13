@@ -55,7 +55,7 @@ export default class MemberDetails extends React.Component {
         header: headerProps =>
           <ModalHeader {...headerProps}
             title='My Profile'
-            headerLeftOnPress={() => navigation.navigate('Home')}
+            headerLeftOnPress={() => navigation.navigate('Home Tab')}
             headerLeftConfirm={changed}
             headerRightButtonLabel='Logout'
             headerRightButtonOnPress={() => confirmDiscardChanges({

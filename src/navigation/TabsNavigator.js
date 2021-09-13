@@ -89,7 +89,7 @@ export function SearchNavigator () {
         component={SearchPage}
         options={{
           header: headerProps => <ModalHeader {...headerProps}
-            headerLeftOnPress={() => headerProps.navigation.navigate('Home')}
+            headerLeftOnPress={() => headerProps.navigation.navigate('Home Tab')}
           />
         }}
       />
@@ -154,7 +154,6 @@ export default function TabsNavigator () {
       // TODO: Required for Android, not iOS
       // Set only for Android as it makes undesirable animation in iOS
       tabBarHideOnKeyboard: !isIOS,
-      tabBarShowIcon: true,
       tabBarShowLabel: true,
       tabBarPressColor: gainsboro,
       tabBarIndicatorStyle: { backgroundColor: white },
@@ -170,7 +169,7 @@ export default function TabsNavigator () {
       tabBarShowLabel: true,
       tabBarIcon: ({ focused }) => (
         <Icon
-          name={route.name}
+          name={route.name.split(' Tab')[0]}
           size={30}
           color={focused ? caribbeanGreen : gunsmoke}
           style={{ paddingTop: isIOS ? 0 : 5 }}
@@ -184,11 +183,11 @@ export default function TabsNavigator () {
 
   return (
     <Tabs.Navigator {...navigatorProps}>
-      <Tabs.Screen name='Home' component={HomeNavigator} />
-      <Tabs.Screen name='Search' component={SearchNavigator} />
-      <Tabs.Screen name='Messages' component={MessagesNavigator} />
+      <Tabs.Screen name='Home Tab' component={HomeNavigator} />
+      <Tabs.Screen name='Search Tab' component={SearchNavigator} />
+      <Tabs.Screen name='Messages Tab' component={MessagesNavigator} />
       <Tabs.Screen
-        name='Profile'
+        name='Profile Tab'
         component={MyProfileNavigator}
         options={{
           tabBarIcon: ({ focused }) => (
