@@ -1,71 +1,15 @@
-import React, { useEffect, createRef } from 'react'
-import { View, Linking, InteractionManager } from 'react-native'
+import React, { useEffect, useState, createRef } from 'react'
+import { View, Linking } from 'react-native'
 import { NavigationContainer, createNavigationContainerRef } from '@react-navigation/native'
-import { useFlipper } from '@react-navigation/devtools'
+// Currently a bug with React Navigation Flipper plugin, follow:
+// https://github.com/react-navigation/react-navigation/issues/9850
+// import { useFlipper } from '@react-navigation/devtools'
 import RNBootSplash from "react-native-bootsplash"
 import Loading from 'components/Loading'
 import RootNavigator from 'navigation/RootNavigator'
-import customLinking, { navigateToLinkingPath } from 'navigation/linking/custom'
-import setReturnToPath from 'store/actions/setReturnToPath'
+import OneSignal from 'react-native-onesignal'
+import linking, { openURLinkApp } from 'navigation/linking'
 
-const linking = {
-  prefixes: ['https://www.hylo.com', 'https://hylo.com', 'hyloapp://'],
-  config: {
-    screens: {
-      Drawer: {
-        screens: {
-          Tabs: {
-            initialRouteName: 'Home',
-            screens: {
-              Home: {
-                initialRouteName: 'Feed',
-                screens: {
-                  'Post Details': {
-                    path: 'all/post/:id'
-                  }
-                }
-              },
-              Messages: {
-                initialRouteName: 'Messages',
-                screens: {
-                  Thread: '/messages/:id'
-                }
-              }        
-            }
-          }
-        }
-      }
-    }
-  }
-}
-// const initialState = {
-//   name: 'Tabs',
-//   state: {
-//     routes: [
-//       {
-//         name: 'Home', 
-//         state: {
-//           routes: [
-//             { name: 'Group Navigation' },
-//             { name: 'Feed' }
-//           ]
-//         }
-//       }
-//     ]
-//   }
-// }
-// const initialState = {
-//   routes: [{
-//     screen: 'Tabs',
-//     params: {
-//       screen: 'Home',
-//       params: {
-//         screen: 'Group Navigation',
-//         // initial: false
-//       }
-//     }
-//   }]
-// }
 export const isReadyRef = createRef()
 export const navigationRef = createNavigationContainerRef()
 
@@ -75,52 +19,41 @@ export default function RootView ({
   signupInProgress,
   currentUser,
   loadCurrentUserSession,
-  returnToPath,
-  openedPushNotification
+  setReturnToPath,
+  returnToPath
 }) {
-  // if (typeof(HermesInternal) === "undefined") {
-  //   console.log("Hermes is not enabled");
-  // } else {
-  //   console.log("Hermes is enabled");
-  // }
-  
-  // Currently a bug with React Navigation Flipper plugin, follow:
-  // https://github.com/react-navigation/react-navigation/issues/9850
-  // useFlipper(navigationRef)
+  const fullyAuthorized = !signupInProgress && currentUser
 
-  // useEffect(() => { checkSessionAndSetSignedIn() }, [])
-  useEffect(() => { loadCurrentUserSession() }, [signedIn])
-  // useEffect(() => { 
-  //   if (
-  //     !loading &&
-  //     !signupInProgress &&
-  //     signedIn &&
-  //     returnToPath &&
-  //     isReadyRef.current &&
-  //     navigationRef.current
-  //   ) {
-  //     // TODO: A temporary hack because there really doesn't seem
-  //     // a reliable way to tell when we're ready to navigate.
-  //     //
-  //     // * Try with callBackRef pattern...
-  //     // * Why doesn't this work?: Linking.openURL(`hyloapp://${returnToPath}`)
-  //     setTimeout(
-  //       () => {
-  //         navigateToLinkingPath(navigationRef, returnToPath)
-  //         dispatch(setReturnToPath(null))
-  //       },
-  //       1000
-  //     )
-  //   }
-  // }, [
-  //   loading,
-  //   signupInProgress,
-  //   signedIn,
-  //   returnToPath
-  // ])
+  // Capture initialURL
   useEffect(() => {
-    console.log('!!!! openedPushNotification:', openedPushNotification)
-  }, [openedPushNotification])
+    const checkInitialURL = async () => {
+      const initialPath = await Linking.getInitialURL()
+      if (initialPath) setReturnToPath(initialPath)
+    }
+    checkInitialURL()
+  }, [])
+
+  // Handle returnToPath
+  useEffect(() => { 
+    if (isReadyRef.current && fullyAuthorized && returnToPath) {
+      openURLinkApp(returnToPath)
+      setReturnToPath(null)
+    }
+  })
+
+  // Handle Push Notifications opened
+  useEffect(() => OneSignal.setNotificationOpenedHandler(({ notification }) => {
+    const path = notification?.additionalData?.path
+    if (isReadyRef.current && fullyAuthorized) {
+      openURLinkApp(path)
+    } else {
+      setReturnToPath(path)
+    }
+  }), [])
+
+  // Handle loading of currentUser if already "signedIn" via Login screen
+  // or on app launch when signedIn status is not yet known
+  useEffect(() => { (!signedIn || (signedIn && !currentUser)) && loadCurrentUserSession() }, [signedIn])
 
   if (loading && !signupInProgress) {
     return (
@@ -129,32 +62,61 @@ export default function RootView ({
       </View>
     )
   }
-  const fullyAuthorized = !signupInProgress && currentUser
 
   return (
     <View style={styles.rootContainer}>
       <NavigationContainer
         linking={linking}
         ref={navigationRef}
+        initialState={initialState}
         onReady={async () => { 
           isReadyRef.current = true
-          const initialUrl = await Linking.getInitialURL()
-          if (!initialUrl && fullyAuthorized) {
-            navigationRef.current?.navigate('Tabs', { screen: 'Home', params: { screen: 'Feed' } })
-          }
+          // NOTE: Another option for handling initial state:
+          // if (!initialURL && fullyAuthorized) {
+          //   navigationRef.current?.navigate('Tabs', { screen: 'Home Tab', params: { screen: 'Feed' } })
+          // }
           !loading && RNBootSplash.hide()
         }}
-        // initialState={initialState}
-        // onStateChange={state => console.log('!!! nav state:', state.routes)}
+        // NOTE: Uncomment below to get a map of the state
+        // onStateChange={state => console.log('!!! onStateChange:', state.routes)}
       >
-        <RootNavigator
-          signedIn={signedIn}
-          signupInProgress={signupInProgress}
-          currentUser={currentUser}
-        />
+        <RootNavigator fullyAuthorized={fullyAuthorized} />
       </NavigationContainer>
     </View>
   )
+}
+
+export const initialState = {
+  routes: [
+    {
+      name: 'Drawer',
+      state: {
+        routes: [
+          {
+            name: 'Tabs',
+            state: {
+              routes: [
+                {
+                  name: 'Home Tab',
+                  state: {
+                    initialRouteName: 'Feed',
+                    routes: [
+                      {
+                        name: 'Group Navigation'
+                      },
+                      {
+                        name: 'Feed'
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
 }
 
 const styles = {
@@ -174,22 +136,3 @@ const styles = {
     marginBottom: 15
   }
 }
-
-// TODO: DELETE ME -- just notes at this point
-// import { View, Linking } from 'react-native'
-// import { useDispatch, useSelector } from 'react-redux'
-// import { STORE_RETURN_TO_PATH } from 'store/constants'
-// const dispatch = useDispatch()
-// const returnToPath = useSelector(state => state.session.returnToPath)
-// if (signedIn && !signupInProgress && returnToPath) {
-//   console.log('!!!! returnToPath:', returnToPath)
-//   dispatch({
-//     type: STORE_RETURN_TO_PATH,
-//     payload: null
-//   })
-
-//   Linking.openURL('hyloapp://' + 'm')
-
-//   return null
-// }
-// //    forward to the link saved?import { NavigationContainer } from '@react-navigation/native'

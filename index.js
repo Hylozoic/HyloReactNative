@@ -43,12 +43,13 @@ export default class AppContainer extends Component {
     }
     // Uncomment for OneSignal debugging
     // OneSignal.setLogLevel(6, 0)
+
+    // TODO: Fix this **** CURRENTLY using Production PUSH notification ID for dev
     OneSignal.setAppId(process.env.ONESIGNAL_APP_ID_RELEASE)
     // OneSignal.setAppId(isDev
     //   ? process.env.ONESIGNAL_APP_ID_DEBUG
     //   : process.env.ONESIGNAL_APP_ID_RELEASE
     // )
-    OneSignal.setNotificationOpenedHandler(this.handleOpenedPushNotification)
     OneSignal.setNotificationWillShowInForegroundHandler(notifReceivedEvent => {
       notifReceivedEvent.complete()
     })
@@ -70,11 +71,8 @@ export default class AppContainer extends Component {
     this.setState({ appState: nextAppState })
   }
 
-  handleOpenedPushNotification = ({ notification }) =>
-    this.setState({ openedPushNotification: notification.payload })
-
   render () {
-    const { openedPushNotification } = this.state
+    const { pathFromPushNotification } = this.state
 
     return (
       <SafeAreaProvider>
@@ -82,7 +80,7 @@ export default class AppContainer extends Component {
             <RootSiblingParent>
               <Provider store={store}>
                 <VersionCheck />
-                <RootView openedPushNotification={openedPushNotification} />
+                <RootView pathFromPushNotification={pathFromPushNotification} />
               </Provider>
             </RootSiblingParent>
           </ErrorBoundary>

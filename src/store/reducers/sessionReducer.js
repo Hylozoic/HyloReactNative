@@ -11,13 +11,13 @@ import {
 } from 'screens/SignupFlow/SignupFlow.store'
 import {
   FETCH_CURRENT_USER,
-  CHECK_SESSION_AND_SET_SIGNED_IN,
   SELECT_GROUP,
   STORE_RETURN_TO_PATH
 } from 'store/constants'
 
 export default function sessionReducer (state = {
   groupId: null,
+  signedIn: false,
   signupInProgress: null,
   returnToPath: null
 }, action) {
@@ -38,17 +38,13 @@ export default function sessionReducer (state = {
 
   switch (type) {
     case LOGIN:
-      return {
-        ...omit('loginError', state),
-        signedIn: true,
-        defaultLoginEmail: meta.email
-      }
     case LOGIN_WITH_APPLE:
     case LOGIN_WITH_FACEBOOK:
     case LOGIN_WITH_GOOGLE:
       return {
         ...omit('loginError', state),
-        signedIn: true
+        signedIn: true,
+        defaultLoginEmail: meta?.email
       }
     case SIGNUP:
       return {

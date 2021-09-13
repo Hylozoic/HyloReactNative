@@ -11,6 +11,7 @@ import { getLastViewedGroup } from 'store/models/Me'
 import getSignedIn from 'store/selectors/getSignedIn'
 import getSignupInProgress from 'store/selectors/getSignupInProgress'
 import getReturnToPath from 'store/selectors/getReturnToPath'
+import setReturnToPath from 'store/actions/setReturnToPath'
 
 export function mapStateToProps (state, props) {
   const currentUser = getMe(state, props)
@@ -33,7 +34,8 @@ export function mapDispatchToProps (dispatch) {
     ...bindActionCreators({
       fetchCurrentUser,
       selectGroup,
-      registerDevice
+      registerDevice,
+      setReturnToPath
     }, dispatch)
   }
 }
