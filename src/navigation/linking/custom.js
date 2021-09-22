@@ -5,7 +5,6 @@ import * as qs from 'query-string'
 import { parse } from 'url'
 import store from 'store'
 import getSignedIn from 'store/selectors/getSignedIn'
-import getReturnToPath from 'store/selectors/getReturnToPath'
 import setReturnToPath from 'store/actions/setReturnToPath'
 import { getActionFromState } from '@react-navigation/native'
 
@@ -24,26 +23,26 @@ export const prefixes = [
 // doesn't allow for multiple paths to match to the same
 // screen.
 export const routesConfig = {
-  '/groups/:slug/join/:accessCode?':                              'JoinGroup',
+  '/groups/:slug/join/:accessCode?':                         'JoinGroup',
   // http://hylo.com/h/use-invitation?token=ebda24b2-d5d7-4d10-8558-b160e6f5d362&email=lorenjohnson+invitetest111@gmail.com&utm_swu=9555
   '/h/use-invitation/:token?':                               'JoinGroup',
   '/signup':                                                 'Signup',
   // AuthNavigator route...             
   // 'passwordResetTokenLogin/:userId/:loginToken/:nextURL':   'Login',
-  '/':                                                       'RootNavigator/Tabs/Home/Feed',
-  '/m/:id':                                                  'RootNavigator/Tabs/Members/Member',
-  '/:context(c|n|all)/:groupId':                             'RootNavigator/Tabs/Home/Feed',
-  '/:context(c|n)/:contextId/:topicName':                    'RootNavigator/TopicFeed',
-  '/m':                                                      'RootNavigator/Tabs/Members/Members',
-  '/:context(c|n)/:contextId/m/:id':                         'RootNavigator/Member',
-  '/:context(all)/p/:id':                                    'RootNavigator/PostDetails',
-  '/:context(c|n)/:contextId/p/:id':                         'RootNavigator/PostDetails',
-  '/p/:id':                                                  'RootNavigator/PostDetails',
-  '/p/:id/edit':                                             'RootNavigator/PostEditor',
-  '/:context(c|n)/:contextId/p/:id/edit':                    'RootNavigator/PostEditor',
-  '/settings/:section?':                                     'RootNavigator/UserSettings',
-  '/t/:id':                                                  'RootNavigator/Thread',
-  '/t':                                                      'RootNavigator/ThreadList'
+  '/':                                                       'Drawer/Tabs/Home Tab/Feed',
+  '/members/:id':                                            'RootNavigator/Tabs/Members/Member',
+  '/:context(groups)/:groupId':                              'Drawer/Tabs/Home Tab/Feed',
+  '/:context(groups)/:contextId/:topicName':                 'RootNavigator/TopicFeed',
+  '/members':                                                'Drawer/Tabs/Home Tab/Members',
+  '/:context(groups)/:contextId/members/:id':                'Drawer/Tabs/Home Tab/Member',
+  '/:context(groups)/post/:id':                              'Drawer/Tabs/Home Tab/Post Details',
+  '/:context(groups)/:contextId/post/:id':                   'Drawer/Tabs/Home Tab/Post Details',
+  '/post/:id':                                               'Drawer/Tabs/Home Tab/Post Details',
+  '/post/:id/edit':                                          'Drawer/Edit Post',
+  '/:context(groups)/:contextId/post/:id/edit':              'Drawer/Edit Post',
+  '/settings/:section?':                                     'Drawer/Profile Tab/My Profile',
+  '/messages/:id':                                           'Drawer/Messages Tab/Thread',
+  '/messages':                                               'Drawer/Messages Tab/Messages'
 }
 
 export const navigateToLinkingPath = (navigationRef, linkingPath) => {
@@ -59,6 +58,7 @@ export function matchRouteToScreenPath (incomingPathAndQuery, routes) {
 
   for (const pathMatcher in routes) {
     const matched = match(pathMatcher)(incomingPath)
+
     if (matched) {
       const screenPath = routes[pathMatcher]
       const screenQueryString = qs.stringify(matched.params, {
