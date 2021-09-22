@@ -28,16 +28,16 @@ import ThreadParticipants from 'screens/ThreadParticipants'
 import TopicsComponent from 'screens/Topics'
 import { caribbeanGreen, gainsboro, gunsmoke, rhino05, white } from 'style/colors'
 
-const Messages = createStackNavigator()
-export function MessagesNavigator () {
+const MessagesTab = createStackNavigator()
+export function MessagesTabNavigator () {
   const navigatorProps = {
     screenOptions: {
       headerMode: 'float'
     }
   }
   return (
-    <Messages.Navigator {...navigatorProps}>
-      <Messages.Screen
+    <MessagesTab.Navigator {...navigatorProps}>
+      <MessagesTab.Screen
         name='Messages'
         component={ThreadList}
         options={{
@@ -47,7 +47,7 @@ export function MessagesNavigator () {
           />
         }}
       />
-      <Messages.Screen
+      <MessagesTab.Screen
         name='New Message'
         component={NewMessage}
         options={{
@@ -56,7 +56,7 @@ export function MessagesNavigator () {
           />
         }}
       />
-      <Messages.Screen
+      <MessagesTab.Screen
         name='ThreadParticipants'
         component={ThreadParticipants}
         options={{
@@ -66,7 +66,7 @@ export function MessagesNavigator () {
           />
         }}
       />
-      <Messages.Screen
+      <MessagesTab.Screen
         name='Thread'
         component={Thread}
         options={{
@@ -76,16 +76,16 @@ export function MessagesNavigator () {
           />
         }}
       />
-    </Messages.Navigator>
+    </MessagesTab.Navigator>
   )
 }
 
-const Search = createStackNavigator()
-export function SearchNavigator () {
+const SearchTab = createStackNavigator()
+export function SearchTabNavigator () {
   const navigatorProps = {}
   return (
-    <Search.Navigator {...navigatorProps}>
-      <Search.Screen name='Search'
+    <SearchTab.Navigator {...navigatorProps}>
+      <SearchTab.Screen name='Search'
         component={SearchPage}
         options={{
           header: headerProps => <ModalHeader {...headerProps}
@@ -93,12 +93,12 @@ export function SearchNavigator () {
           />
         }}
       />
-    </Search.Navigator>
+    </SearchTab.Navigator>
   )
 }
 
-const Home = createStackNavigator()
-export function HomeNavigator () {
+const HomeTab = createStackNavigator()
+export function HomeTabNavigator () {
   const navigatorProps = {
     screenOptions: {
       headerMode: 'float',
@@ -106,20 +106,20 @@ export function HomeNavigator () {
     }
   }
   return (
-    <Home.Navigator {...navigatorProps}>
-      <Home.Screen name='Group Navigation' component={GroupNavigation} />
-      <Home.Screen name='Feed' component={Feed} />
-      <Home.Screen name='Topic Feed' key='Topic Feed' component={Feed} />
-      <Home.Screen name='Post Details' key='Post Details' component={PostDetails} />
-      <Home.Screen name='Projects' component={Feed} initialParams={{ isProjectFeed: true }} />
-      <Home.Screen name='Project Members' key='Project Members' component={ProjectMembers} />
-      <Home.Screen name='Members' component={MembersComponent} />
-      <Home.Screen name='Member' key='Member' component={MemberProfile} />
-      <Home.Screen name='Member Details' component={MemberDetails} />
-      <Home.Screen name='Group Relationships' component={Groups} />
-      <Home.Screen name='Group Detail' component={GroupDetail} />
-      <Home.Screen name='Topics' component={TopicsComponent} />
-    </Home.Navigator>
+    <HomeTab.Navigator {...navigatorProps}>
+      <HomeTab.Screen name='Group Navigation' component={GroupNavigation} />
+      <HomeTab.Screen name='Feed' component={Feed} />
+      <HomeTab.Screen name='Topic Feed' key='Topic Feed' component={Feed} />
+      <HomeTab.Screen name='Post Details' key='Post Details' component={PostDetails} />
+      <HomeTab.Screen name='Projects' component={Feed} initialParams={{ isProjectFeed: true }} />
+      <HomeTab.Screen name='Project Members' key='Project Members' component={ProjectMembers} />
+      <HomeTab.Screen name='Members' component={MembersComponent} />
+      <HomeTab.Screen name='Member' key='Member' component={MemberProfile} />
+      <HomeTab.Screen name='Member Details' component={MemberDetails} />
+      <HomeTab.Screen name='Group Relationships' component={Groups} />
+      <HomeTab.Screen name='Group Detail' component={GroupDetail} />
+      <HomeTab.Screen name='Topics' component={TopicsComponent} />
+    </HomeTab.Navigator>
   )
 }
 
@@ -183,9 +183,9 @@ export default function TabsNavigator () {
 
   return (
     <Tabs.Navigator {...navigatorProps}>
-      <Tabs.Screen name='Home Tab' component={HomeNavigator} />
-      <Tabs.Screen name='Search Tab' component={SearchNavigator} />
-      <Tabs.Screen name='Messages Tab' component={MessagesNavigator} />
+      <Tabs.Screen name='Home Tab' component={HomeTabNavigator} />
+      <Tabs.Screen name='Search Tab' component={SearchTabNavigator} />
+      <Tabs.Screen name='Messages Tab' component={MessagesTabNavigator} />
       <Tabs.Screen
         name='Profile Tab'
         component={MyProfileNavigator}
