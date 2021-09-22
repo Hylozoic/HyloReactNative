@@ -29,6 +29,7 @@ export class MemberProfile extends React.Component {
 
   setHeader = () => {
     const { navigation, currentGroup } = this.props
+    if (route.name === 'Member - Modal') return
     navigation.setOptions({ title: currentGroup.name  })
   }
 
@@ -105,7 +106,9 @@ export class MemberProfile extends React.Component {
 }
 
 export default function (props) {
-  useGroupSelect()
+  if (props.route.name !== 'Member Details - Modal') {
+    useGroupSelect()
+  }
 
   return <MemberProfile {...props} />
 }

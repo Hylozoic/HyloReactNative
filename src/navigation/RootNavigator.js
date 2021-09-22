@@ -22,7 +22,7 @@ import PostEditor from 'screens/PostEditor'
 import UserSettings from 'screens/UserSettings'
 import { white } from 'style/colors'
 import PostDetails from 'screens/PostDetails'
-import MemberDetails from 'screens/MemberProfile/MemberDetails'
+import MemberProfile from 'screens/MemberProfile/MemberProfile'
 
 const Root = createStackNavigator()
 export default function RootNavigator ({ fullyAuthorized }) {
@@ -45,9 +45,6 @@ export default function RootNavigator ({ fullyAuthorized }) {
         <Root.Screen name='Notifications' component={NotificationsList} />
         <Root.Screen name='Notification Settings' component={NotificationSettings} />
         <Root.Screen name='Blocked Users' component={BlockedUsers} />
-        {/* NOT YET USED */}
-        <Root.Screen name='Post Details Modal' component={PostDetails} />
-        <Root.Screen name='Member Details Modal' component={MemberDetails} />
       </Root.Group>
     </>}
     {/* Not logged-in or Signing-up */}
@@ -71,6 +68,10 @@ export default function RootNavigator ({ fullyAuthorized }) {
     </>}
     {/* Screens always available */}
     <Root.Group screenOptions={{ presentation: 'modal', header: ModalHeader }}>
+      <Root.Screen name='Post Details - Modal' component={PostDetails}
+        options={{ title: 'Post Details' }} />
+      <Root.Screen name='Member - Modal' component={MemberProfile}
+        options={{ title: 'Member' }} />
       <Root.Screen name='JoinGroup' component={JoinGroup}
         options={{ title: 'Joining Group...' }} />
       <Root.Screen name='InviteExpired' component={InviteExpired} />

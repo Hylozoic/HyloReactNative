@@ -43,7 +43,8 @@ export class PostDetails extends React.Component {
   }
 
   setHeader = () => {
-    const { navigation, currentGroup } = this.props
+    const { navigation, route, currentGroup } = this.props
+    if (route.name == 'Post Details - Modal') return
     navigation.setOptions({ title: currentGroup?.name  })
   }
 
