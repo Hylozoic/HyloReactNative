@@ -18,6 +18,7 @@ export default function DrawerNavigator () {
     },
     drawerContent: props => <DrawerMenu {...props} />
   }
+
   return <Drawer.Navigator {...navigatorProps}>
     <Drawer.Screen name='Tabs' component={TabsNavigator} options={{ headerShown: false }} />
   </Drawer.Navigator>

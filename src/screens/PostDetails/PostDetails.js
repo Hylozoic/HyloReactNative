@@ -20,8 +20,9 @@ import InlineEditor, { toHtml } from 'components/InlineEditor'
 import Icon from 'components/Icon'
 import styles from './PostDetails.styles'
 import respondToEvent from 'store/actions/respondToEvent'
+import useGroupSelect from 'navigation/useSelectGroup'
 
-export default class PostDetails extends React.Component {
+export class PostDetails extends React.Component {
   state = {
     replyingToName: null,
     commentText: '',
@@ -32,9 +33,18 @@ export default class PostDetails extends React.Component {
 
   componentDidMount () {
     this.props.fetchPost()
-    this.props.navigation.setOptions({
-      title: this.props.currentGroup?.name
-    })
+    this.setHeader()
+  }
+  
+  componentDidUpdate(prevProps) {
+    if (prevProps.currentGroup?.name !== this.props.currentGroup?.name) {
+      this.setHeader()
+    }
+  }
+
+  setHeader = () => {
+    const { navigation, currentGroup } = this.props
+    navigation.setOptions({ title: currentGroup?.name  })
   }
 
   shouldComponentUpdate (nextProps) {
@@ -85,8 +95,6 @@ export default class PostDetails extends React.Component {
   
       this.commentsRef?.current.highlightComment(comment)
       this.commentsRef?.current.scrollToComment(comment)
-  
-      // TODO: highlight/select current entry we're commenting to in flatlist      
       this.editorRef?.editorInputRef.current.clear()
   
       if (mention) this.editorRef?.insertMention(comment.creator)
@@ -163,6 +171,12 @@ export default class PostDetails extends React.Component {
       </SafeAreaView>
     )
   }
+}
+
+export default function (props) {
+  useGroupSelect()
+
+  return <PostDetails {...props} />
 }
 
 export function PostCardForDetails ({

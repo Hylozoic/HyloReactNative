@@ -2,8 +2,6 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { isEmpty } from 'lodash/fp'
 import getMe from 'store/selectors/getMe'
-import getGroup from 'store/selectors/getGroup'
-import getCurrentGroupId from 'store/selectors/getCurrentGroupId'
 import makeGoToGroup from 'store/actions/makeGoToGroup'
 import {
   fetchGroupTopic,
@@ -13,7 +11,7 @@ import {
 import selectGroup from 'store/actions/selectGroup'
 import getMemberships from 'store/selectors/getMemberships'
 import getRouteParam from 'store/selectors/getRouteParam'
-import { showToast } from 'util/toast'
+import getCurrentGroup from 'store/selectors/getCurrentGroup'
 
 export function setupTopicProps (state, props, group) {
   const topicName = props.topicName
@@ -40,14 +38,7 @@ export function mapStateToProps (state, props) {
   const currentUser = getMe(state)
   const memberships = getMemberships(state)
   const currentUserHasMemberships = !isEmpty(memberships)  
-  // Group
-  const groupId = getRouteParam('groupId', props.route)
-    || getCurrentGroupId(state, props)
-  const groupSlugFromLink = getRouteParam('groupSlugFromLink', props.route)
-  const group = getGroup(state, groupSlugFromLink
-    ? { slug: groupSlugFromLink }
-    : { id: groupId }
-  )
+  const group = getCurrentGroup(state)
 
   return {
     currentUser,
@@ -89,7 +80,6 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     goToGroup: groupId => dispatchProps.goToGroup(groupId, memberships, group.id),
     showTopic: selectedTopicName => {
       if (selectedTopicName == topicName) return
-      //   return showToast('Topics support for "All My Groups" and Networks coming soon!')
       if (topicName) {
         navigation.setParams({ topicName: selectedTopicName })
       } else {

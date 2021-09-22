@@ -8,8 +8,9 @@ import ImagePicker from 'components/ImagePicker'
 import FlagContent from 'components/FlagContent'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
 import defaultBanner from 'assets/default-user-banner.jpg'
+import useGroupSelect from 'navigation/useSelectGroup'
 
-export default class MemberProfile extends React.Component {
+export class MemberProfile extends React.Component {
   state = {
     flaggingVisible: false
   }
@@ -18,6 +19,12 @@ export default class MemberProfile extends React.Component {
     if (this.props.isBlocked) return this.props.navigation.goBack()
     this.props.fetchPerson()
     this.setHeader()
+  }
+
+  componentDidUpdate (prevProps) {
+    if (prevProps.currentGroup?.name !== this.props.currentGroup?.name) {
+      this.setHeader()
+    }
   }
 
   setHeader = () => {
@@ -95,6 +102,12 @@ export default class MemberProfile extends React.Component {
 
     return <MemberFeed id={id} header={header} navigation={navigation} />
   }
+}
+
+export default function (props) {
+  useGroupSelect()
+
+  return <MemberProfile {...props} />
 }
 
 export class MemberBanner extends React.Component {

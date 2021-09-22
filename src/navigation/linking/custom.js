@@ -28,21 +28,21 @@ export const routesConfig = {
   '/h/use-invitation/:token?':                               'JoinGroup',
   '/signup':                                                 'Signup',
   // AuthNavigator route...             
-  // 'passwordResetTokenLogin/:userId/:loginToken/:nextURL':   'Login',
+  // 'passwordResetTokenLogin/:userId/:loginToken/:nextURL': 'Login',
   '/':                                                       'Drawer/Tabs/Home Tab/Feed',
-  '/members/:id':                                            'RootNavigator/Tabs/Members/Member',
-  '/:context(groups)/:groupId':                              'Drawer/Tabs/Home Tab/Feed',
-  '/:context(groups)/:contextId/:topicName':                 'RootNavigator/TopicFeed',
+  '/members/:id':                                            'Drawer/Tabs/Members/Member',
+  '/:context(groups)/:groupSlugFromLink':                    'Drawer/Tabs/Home Tab/Feed',
+  '/:context(groups)/:groupSlugFromLink/topics/:topicName':  'Drawer/Tabs/Home Tab/Topic Feed',
   '/members':                                                'Drawer/Tabs/Home Tab/Members',
-  '/:context(groups)/:contextId/members/:id':                'Drawer/Tabs/Home Tab/Member',
+  '/:context(groups)/:groupSlugFromLink/members/:id':        'Drawer/Tabs/Home Tab/Member',
   '/:context(groups)/post/:id':                              'Drawer/Tabs/Home Tab/Post Details',
-  '/:context(groups)/:contextId/post/:id':                   'Drawer/Tabs/Home Tab/Post Details',
+  '/:context(groups)/:groupSlugFromLink/post/:id':           'Drawer/Tabs/Home Tab/Post Details',
   '/post/:id':                                               'Drawer/Tabs/Home Tab/Post Details',
-  '/post/:id/edit':                                          'Drawer/Edit Post',
-  '/:context(groups)/:contextId/post/:id/edit':              'Drawer/Edit Post',
-  '/settings/:section?':                                     'Drawer/Profile Tab/My Profile',
-  '/messages/:id':                                           'Drawer/Messages Tab/Thread',
-  '/messages':                                               'Drawer/Messages Tab/Messages'
+  '/post/:id/edit':                                          'Edit Post',
+  '/:context(groups)/:groupSlugFromLink/post/:id/edit':      'Edit Post',
+  '/settings/:section?':                                     'Drawer/Tabs/Profile Tab/My Profile',
+  '/messages/:id':                                           'Drawer/Tabs/Messages Tab/Thread',
+  '/messages':                                               'Drawer/Tabs/Messages Tab/Messages'
 }
 
 export const navigateToLinkingPath = (navigationRef, linkingPath) => {

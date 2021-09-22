@@ -1,36 +1,32 @@
 import { mapStateToProps, mapDispatchToProps, mergeProps } from './Feed.connector'
 import orm from 'store/models'
-import { showToast } from 'util/toast'
-
-jest.mock('util/toast', () => ({
-  showToast: jest.fn()
-}))
-
-// let session, state
 
 describe('mapStateToProps', () => {
-  beforeAll(() => {
-    // session = orm.session(orm.getEmptyState())
-    // state = { orm: session.state }
-  })
-  
-  // it('handles a null navigation object', () => {
-  //   const props = {
-  //     route: {}
-  //   }
-  //   expect(mapStateToProps(state, props)).toEqual({
-  //     group: undefined,
-  //     currentUser: undefined,
-  //     topic: undefined,
-  //     topicSubscribed: undefined,
-  //     topicName: undefined,
-  //     followersTotal: undefined,
-  //     postsTotal: undefined,
-  //     currentUserHasMemberships: false
-  //   })
-  // })
+  it('gets current user and group', () => {
+    const session = orm.session()
+    const currentUser = session.Me.create({ name: 'me' })
+    const group = session.Group.create({
+      id: '7',
+      slug: 'world'
+    })
+    const sessionState = {
+      groupId: '7'
+    }
+    const state = {
+      orm: session.state,
+      session: sessionState
+    }
+    const mapping = mapStateToProps(state, {})
 
-  it('gets props from navigation object', () => {
+    expect(mapping).toEqual({
+      group,
+      currentUser,
+      currentUserHasMemberships: false,
+      memberships: []
+    })
+  })
+
+  it('gets topic feed with topic provided in route', () => {
     const session = orm.session()
     const currentUser = session.Me.create({ name: 'me' })
     const group = session.Group.create({
@@ -48,27 +44,23 @@ describe('mapStateToProps', () => {
       followersTotal: 10,
       postsTotal: 20
     })
-    const state = { orm: session.state }
+    const sessionState = {
+      groupId: '7'
+    }
+    const state = {
+      orm: session.state,
+      session: sessionState
+    }
     const props = {
       route: {
         params: {
-          topicName: 'logistics',
-          groupId: '7'
+          topicName: 'logistics'
         }
       }
     }
-    const secondProps = {
-      route: {
-        params: {
-          topicName: 'logistics',
-          groupSlugFromLink: 'world'
-        }
-      }
-    }
-    const firstMapping = mapStateToProps(state, props)
-    const secondMapping = mapStateToProps(state, secondProps)
+    const mapping = mapStateToProps(state, props)
 
-    expect(firstMapping).toEqual({
+    expect(mapping).toEqual({
       group,
       currentUser,
       topicName: 'logistics',
@@ -79,9 +71,7 @@ describe('mapStateToProps', () => {
       topicSubscribed: false,
       memberships: []
     })
-    expect(firstMapping.group.id === secondMapping.group.id).toBeTruthy()
   })
-
 })
 
 //   it('has topicSubscribed=true when subscribed', async () => {

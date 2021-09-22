@@ -105,6 +105,7 @@ export function HomeTabNavigator () {
       header: headerProps => <TabStackHeader {...headerProps} />
     }
   }
+
   return (
     <HomeTab.Navigator {...navigatorProps}>
       <HomeTab.Screen name='Group Navigation' component={GroupNavigation} />

@@ -13,6 +13,7 @@ import CreateGroupNotice from 'components/CreateGroupNotice'
 import FeedList from 'components/FeedList'
 import SocketSubscriber from 'components/SocketSubscriber'
 import styles from './Feed.styles'
+import useGroupSelect from 'navigation/useSelectGroup'
 
 export function headerTitle (topicName, group, isProjectFeed) {
   let title 
@@ -49,14 +50,11 @@ export default function Feed ({
   const isProjectFeed = route?.params?.isProjectFeed
   const ref = useRef(null)
 
-  useScrollToTop(ref)
-  // TODO: This is now happening in goToGroup so can be removed
-  useEffect(() => { group?.id && selectGroup(group.id) }, [group?.id])
+  useGroupSelect()
   useEffect(() => { fetchGroupTopic() }, [])
   useEffect(() => {
     navigation.setOptions({
       title: headerTitle(topicName, group, isProjectFeed)
-      
     })
   }, [
     topicName,
