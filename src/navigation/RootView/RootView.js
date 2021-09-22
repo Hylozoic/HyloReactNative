@@ -9,6 +9,7 @@ import Loading from 'components/Loading'
 import RootNavigator from 'navigation/RootNavigator'
 import OneSignal from 'react-native-onesignal'
 import linking, { openURLinkApp } from 'navigation/linking'
+import customLinking from 'navigation/linking/custom'
 
 export const isReadyRef = createRef()
 export const navigationRef = createNavigationContainerRef()
@@ -66,9 +67,9 @@ export default function RootView ({
   return (
     <View style={styles.rootContainer}>
       <NavigationContainer
-        linking={linking}
+        linking={customLinking}
         ref={navigationRef}
-        initialState={initialState}
+        initialState={INITIAL_NAV_STATE}
         onReady={async () => { 
           isReadyRef.current = true
           // NOTE: Another option for handling initial state:
@@ -86,7 +87,7 @@ export default function RootView ({
   )
 }
 
-export const initialState = {
+export const INITIAL_NAV_STATE = {
   routes: [
     {
       name: 'Drawer',
