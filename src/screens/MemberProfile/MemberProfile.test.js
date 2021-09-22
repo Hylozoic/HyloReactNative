@@ -6,6 +6,9 @@ import MemberProfile, { MemberBanner, EditButton, ReadMoreButton } from './Membe
 import ImagePicker from 'components/ImagePicker'
 import defaultBanner from 'assets/default-user-banner.jpg'
 
+// TODO: Fix tests to have test Redux store for Redux hooks:
+//       https://gist.github.com/krawaller/e5d40217658fa132f3c3904987e467cd
+
 jest.mock('components/ImagePicker', props => 'ImagePicker')
 jest.mock('./MemberFeed', () => 'MemberFeed')
 

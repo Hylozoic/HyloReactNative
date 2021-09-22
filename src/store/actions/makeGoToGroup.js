@@ -4,6 +4,9 @@ import { ALL_GROUP_ID, PUBLIC_GROUP_ID } from 'store/models/Group'
 
 export default function makeGoToGroup ({ navigate }, dispatch, confirm = true) {
   return (groupId, myMemberships, currentGroupId) => {
+    if (!myMemberships) {
+      throw new Error('Must provide current user memberships as 2nd parameter')
+    }
     if (groupId == currentGroupId) return
 
     const canViewGroup = myMemberships.find(m => m.group.id === groupId)

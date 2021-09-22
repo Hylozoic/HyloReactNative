@@ -10,7 +10,6 @@ import { createStackNavigator } from '@react-navigation/stack'
 import Login from 'screens/Login'
 import getEmptyState from 'store/getEmptyState'
 
-
 it('forwards to Login when not signedIn', async () => {
   const props = {
     route: { params: {} },

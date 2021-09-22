@@ -70,10 +70,12 @@ export default function RootNavigator ({ fullyAuthorized }) {
       </Root.Group>
     </>}
     {/* Screens always available */}
-    <Root.Screen name='JoinGroup' component={JoinGroup} />
-    <Root.Screen name='InviteExpired' component={InviteExpired} />
-    <Root.Screen name='ItemChooser' component={ItemChooser}
-      options={{ presentation: 'modal', header: ModalHeader }} />
+    <Root.Group screenOptions={{ presentation: 'modal', header: ModalHeader }}>
+      <Root.Screen name='JoinGroup' component={JoinGroup}
+        options={{ title: 'Joining Group...' }} />
+      <Root.Screen name='InviteExpired' component={InviteExpired} />
+      <Root.Screen name='ItemChooser' component={ItemChooser} />
+    </Root.Group>
     <Root.Screen name='Loading' component={LoadingScreen} />
   </Root.Navigator>
 }

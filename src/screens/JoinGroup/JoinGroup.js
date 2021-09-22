@@ -1,12 +1,11 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { get } from 'lodash/fp'
-import { useNavigationContainerRef } from '@react-navigation/native'
 import LoadingScreen from 'screens/LoadingScreen'
 import getSignedIn from 'store/selectors/getSignedIn'
 import makeGoToGroup from 'store/actions/makeGoToGroup'
 import getRouteParam from 'store/selectors/getRouteParam'
-import getMe from 'store/selectors/getMe'
+import getMemberships from 'store/selectors/getMemberships'
 import { checkInvitation as checkInvitationAction, useInvitation } from './JoinGroup.store'
 
 export default function JoinGroup ({
@@ -15,15 +14,14 @@ export default function JoinGroup ({
 }) {
   const dispatch = useDispatch()
   const signedIn = useSelector(getSignedIn)
-  const currentUser = useSelector(getMe)
+  const memberships = useSelector(getMemberships)
+
   const goToGroup = makeGoToGroup(navigation, dispatch, false)
   const navToInviteExpired = () => navigation?.navigate('InviteExpired')
   const invitationCodes = {
-    invitationToken: getRouteParam('token', route) ||
-      getRouteParam('invitationToken', route),
+    invitationToken: getRouteParam('invitationToken', route),
     accessCode: getRouteParam('accessCode', route)
   }
-  const navigationRef = useNavigationContainerRef()
 
   useEffect(() => { 
     const checkInviteAndJoin = async () => {
@@ -34,14 +32,15 @@ export default function JoinGroup ({
         const inviteValid = getInviteValid(checkInviteResult)
   
         if (inviteValid) {
-          const joinResult = await dispatch(useInvitation(currentUser.id, invitationCodes))
-          const getgroupId = get('payload.data.useInvitation.membership.group.id')
-          const groupId = getgroupId(joinResult)
+          const joinResult = await dispatch(useInvitation(invitationCodes))
+          const getGroupId = get('payload.data.useInvitation.membership.group.id')
+          const groupId = getGroupId(joinResult)
           groupId
-            ? goToGroup(groupId)
+            ? goToGroup(groupId, memberships)
             : navigation?.navigate('Home Tab')
         } else {
-          navigation?.navigate('Home Tab') // TODO: navToInviteExpired()
+          // TODO: navToInviteExpired()
+          navigation?.navigate('Home Tab')
         }
       } catch (err) {
         // TODO: Display toast that there was an error with the invite

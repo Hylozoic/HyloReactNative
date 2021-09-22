@@ -8,6 +8,9 @@ import { createMockStore } from 'util/testing'
 import MockedScreen from 'util/testing/MockedScreen'
 import orm from 'store/models'
 
+// TODO: Fix tests to have test Redux store for Redux hooks:
+//       https://gist.github.com/krawaller/e5d40217658fa132f3c3904987e467cd
+
 jest.mock('util/websockets', () => ({
   getSocket: Promise.resolve
 }))
