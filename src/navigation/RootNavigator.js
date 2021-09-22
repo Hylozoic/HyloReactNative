@@ -45,14 +45,10 @@ export default function RootNavigator ({ fullyAuthorized }) {
         <Root.Screen name='Notifications' component={NotificationsList} />
         <Root.Screen name='Notification Settings' component={NotificationSettings} />
         <Root.Screen name='Blocked Users' component={BlockedUsers} />
-        <Root.Screen name='ItemChooser' component={ItemChooser} />
         {/* NOT YET USED */}
         <Root.Screen name='Post Details Modal' component={PostDetails} />
         <Root.Screen name='Member Details Modal' component={MemberDetails} />
       </Root.Group>
-      <Root.Screen name='Loading' component={LoadingScreen} />
-      <Root.Screen name='JoinGroup' component={JoinGroup} />
-      <Root.Screen name='InviteExpired' component={InviteExpired} />
     </>}
     {/* Not logged-in or Signing-up */}
     {!fullyAuthorized && <>
@@ -73,5 +69,11 @@ export default function RootNavigator ({ fullyAuthorized }) {
         <Root.Screen name='Signup' component={SignupNavigator} />
       </Root.Group>
     </>}
+    {/* Screens always available */}
+    <Root.Screen name='JoinGroup' component={JoinGroup} />
+    <Root.Screen name='InviteExpired' component={InviteExpired} />
+    <Root.Screen name='ItemChooser' component={ItemChooser}
+      options={{ presentation: 'modal', header: ModalHeader }} />
+    <Root.Screen name='Loading' component={LoadingScreen} />
   </Root.Navigator>
 }
