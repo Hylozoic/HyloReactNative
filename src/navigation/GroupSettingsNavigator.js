@@ -26,6 +26,7 @@ export default function GroupSettingsNavigator ({ navigation, route }) {
   }, [navigation, route])
 
   const navigatorProps = {}
+
   return (
     <GroupSettings.Navigator {...navigatorProps}>
       <GroupSettings.Screen

@@ -68,5 +68,10 @@ export default {
   },
   commentPromptClearLink: {
     color: rhino
+  },
+  promptContentContainer: {
+    backgroundColor: rhino05,
+    marginBottom: 0,
+    borderWidth: 0
   }
 }

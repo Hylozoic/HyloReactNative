@@ -89,7 +89,11 @@ export function ContentRow ({ item, itemType, showPost, showTopic, showMember, g
     )
   } else {
     postId = item.post.id
-    content = <Comment comment={item} displayPostTitle />
+    content = <Comment
+      onPress={() => showPost(postId)}
+      comment={item}
+      displayPostTitle
+    />
   }
   return (
     <TouchableOpacity onPress={() => showPost(postId)}>

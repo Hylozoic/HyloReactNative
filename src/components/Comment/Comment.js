@@ -21,7 +21,8 @@ export default function Comment ({
   removeComment,
   editComment,
   hideMenu,
-  onReply = () => {}
+  onReply,
+  onPress: providedOnPress
 }) {
   const { creator, text, createdAt, post } = comment
   const presentedText = present(sanitize(text), { slug })
@@ -50,8 +51,12 @@ export default function Comment ({
       : postTitle
   }
 
+  const onPress = providedOnPress
+    ? providedOnPress
+    : onReply && (() => onReply(comment, { mention: false }))
+
   return (
-    <TouchableOpacity onPress={() => onReply(comment, { mention: false })}>
+    <TouchableOpacity onPress={onPress}>
       <View style={[styles.container, style]}>
         <TouchableOpacity onPress={() => showMember(creator.id)}>
           <Avatar avatarUrl={creator.avatarUrl} style={styles.avatar} />
