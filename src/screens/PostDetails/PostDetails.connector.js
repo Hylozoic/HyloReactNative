@@ -38,7 +38,7 @@ export function mapDispatchToProps (dispatch) {
 export function mergeProps (stateProps, dispatchProps, ownProps) {
   const { id, post, currentGroup, memberships  } = stateProps
   const { dispatch } = dispatchProps
-  const { navigation } = ownProps
+  const { navigation, route } = ownProps
 
   return {
     ...stateProps,
@@ -51,7 +51,7 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     goToGroup: groupId => makeGoToGroup(navigation, dispatch)(groupId, memberships, currentGroup.id),
     editPost: () => navigation.navigate('Edit Post', { id }),
     goToMembers: () => navigation.navigate('Project Members', { id, members: get('members', post) }),
-    showMember: goToMemberMaker(navigation),
+    showMember: goToMemberMaker(navigation, route),
     showTopic: topicName => navigation.navigate('Topic Feed', { topicName }),
     respondToEvent: response => dispatch(respondToEvent(id, response))
   }

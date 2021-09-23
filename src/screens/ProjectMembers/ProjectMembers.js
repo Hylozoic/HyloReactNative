@@ -7,7 +7,7 @@ import goToMemberMaker from 'store/actions/goToMemberMaker'
 
 export default function ProjectMembers ({ route, navigation }) {
   const { members } = route.params
-  const showMember = goToMemberMaker(navigation)
+  const showMember = goToMemberMaker(navigation, route)
 
   return (
     <View style={styles.container}>
