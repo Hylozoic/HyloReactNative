@@ -60,6 +60,8 @@ export default class SearchPage extends React.Component {
               value={searchTerm}
               onChangeText={text => setSearchTerm(text)}
               style={styles.textInput}
+              autoCapitalize='none'
+              autoCorrect={false}
               underlineColorAndroid='transparent'
             />
           </View>
