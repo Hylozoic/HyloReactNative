@@ -69,7 +69,7 @@ export function mapDispatchToProps (dispatch, { navigation }) {
       respondToEvent
     }, dispatch),
     goToGroup: makeGoToGroup(navigation, dispatch),
-    showPost: id => navigation.navigate('Post Details', { id }),
+    showPost: id => navigation.navigate('Post Details - Modal', { id }),
     showTopic: topicName => navigation.navigate('Topic Feed', { topicName })
   }
 }

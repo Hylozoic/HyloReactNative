@@ -22,7 +22,7 @@ import PostEditor from 'screens/PostEditor'
 import UserSettings from 'screens/UserSettings'
 import { white } from 'style/colors'
 import PostDetails from 'screens/PostDetails'
-import MemberProfile from 'screens/MemberProfile/MemberProfile'
+import MemberProfile from 'screens/MemberProfile'
 
 const Root = createStackNavigator()
 export default function RootNavigator ({ fullyAuthorized }) {

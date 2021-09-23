@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Text, View, Image, TouchableOpacity } from 'react-native'
 import Loading from 'components/Loading'
 import styles from './MemberProfile.styles'
@@ -10,109 +10,90 @@ import EntypoIcon from 'react-native-vector-icons/Entypo'
 import defaultBanner from 'assets/default-user-banner.jpg'
 import useGroupSelect from 'navigation/useSelectGroup'
 
-export class MemberProfile extends React.Component {
-  state = {
-    flaggingVisible: false
-  }
-
-  componentDidMount () {
-    if (this.props.isBlocked) return this.props.navigation.goBack()
-    this.props.fetchPerson()
-    this.setHeader()
-  }
-
-  componentDidUpdate (prevProps) {
-    if (prevProps.currentGroup?.name !== this.props.currentGroup?.name) {
-      this.setHeader()
-    }
-  }
-
-  setHeader = () => {
-    const { navigation, currentGroup } = this.props
-    if (route.name === 'Member - Modal') return
-    navigation.setOptions({ title: currentGroup.name  })
-  }
-
-  blockUser = () => {
-    const { person, blockUser } = this.props
-    blockUser(person.id)
-      .then(() => this.props.navigation.goBack())
-  }
-
-  render () {
-    const {
-      isBlocked,
-      canFlag,
-      goToDetails,
-      goToEdit,
-      goToEditAccount,
-      goToManageNotifications,
-      goToBlockedUsers,
-      id,
-      isFocused,
-      isMe,
-      onPressMessages,
-      person,
-      updateUserSettings,
-      navigation
-    } = this.props
-    const { flaggingVisible } = this.state
-
-    if (!person) return <Loading />
-
-    let flagMember
-    if (canFlag) {
-      flagMember = () => {
-        this.setState({ flaggingVisible: true })
-      }
-    }
-
-    // Used to generate a link to this post from the backend.
-    const linkData = {
-      id,
-      type: 'member'
-    }
-    const header = (
-      <View>
-        <MemberBanner
-          isFocused={isFocused}
-          isMe={isMe}
-          person={person}
-          updateUserSettings={updateUserSettings}
-        />
-        <View style={styles.marginContainer}>
-          <MemberHeader
-            person={person}
-            flagMember={flagMember}
-            blockUser={this.blockUser}
-            onPressMessages={onPressMessages}
-            isMe={isMe}
-            goToEdit={goToEdit}
-            goToEditAccount={goToEditAccount}
-            goToManageNotifications={goToManageNotifications}
-            goToBlockedUsers={goToBlockedUsers}
-          />
-          <ReadMoreButton goToDetails={goToDetails} />
-        </View>
-        {flaggingVisible && (
-          <FlagContent type='member' linkData={linkData}
-            onClose={() => this.setState({ flaggingVisible: false })} />
-        )}
-      </View>
-    )
-
-    return <MemberFeed id={id} header={header} navigation={navigation} />
-  }
+export const setHeader = ({ route, navigation, currentGroup }) => {
+  if (route.name === 'Member - Modal') return
+  navigation.setOptions({ title: currentGroup.name  })
 }
 
-export default function (props) {
-  if (props.route.name !== 'Member Details - Modal') {
+export const blockUserWithNav = async ({ navigation, person, blockUser }) => {
+  await blockUser(person.id)
+  navigation.goBack()
+}
+
+export default function MemberProfile ({
+  isBlocked,
+  canFlag,
+  goToDetails,
+  goToEdit,
+  goToEditAccount,
+  goToManageNotifications,
+  goToBlockedUsers,
+  id,
+  isFocused,
+  isMe,
+  onPressMessages,
+  person,
+  updateUserSettings,
+  navigation,
+  route,
+  fetchPerson,
+  currentGroup
+}) {
+  const [flaggingVisible, setFlaggingVisible] = useState(false)
+
+  // Don't force selected group switch if this is a modal (generalize into useGroupSelect for any modal?)
+  if (route.name !== 'Member Details - Modal') {
     useGroupSelect()
   }
 
-  return <MemberProfile {...props} />
-}
+  useEffect(() => {
+    if (isBlocked) return navigation.goBack()
+    fetchPerson()
+    setHeader({ route, navigation, currentGroup })  
+  }, [id])
 
+  useEffect(() => {
+    setHeader({ route, navigation, currentGroup })
+  }, [currentGroup?.name])
+
+  if (!person) return <Loading />
+
+  // Used to generate a link to this post from the backend.
+  const linkData = {
+    id,
+    type: 'member'
+  }
+  const header = (
+    <View>
+      <MemberBanner
+        isFocused={isFocused}
+        isMe={isMe}
+        person={person}
+        updateUserSettings={updateUserSettings}
+      />
+      <View style={styles.marginContainer}>
+        <MemberHeader
+          person={person}
+          flagMember={canFlag && (() => setFlaggingVisible(true))}
+          blockUser={() => blockUser({ navigation, person, blockUser })}
+          onPressMessages={onPressMessages}
+          isMe={isMe}
+          goToEdit={goToEdit}
+          goToEditAccount={goToEditAccount}
+          goToManageNotifications={goToManageNotifications}
+          goToBlockedUsers={goToBlockedUsers}
+        />
+        <ReadMoreButton goToDetails={goToDetails} />
+      </View>
+      {flaggingVisible && (
+        <FlagContent type='member' linkData={linkData}
+          onClose={() => setFlaggingVisible(false)} />
+      )}
+    </View>
+  )
+
+  return <MemberFeed id={id} header={header} navigation={navigation} />
+}
 export class MemberBanner extends React.Component {
   state = {
     avatarPickerPending: false,
