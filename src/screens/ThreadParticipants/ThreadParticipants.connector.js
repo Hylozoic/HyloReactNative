@@ -8,7 +8,7 @@ export function mapStateToProps (state, props) {
   const participants = thread && thread.participants.filter(p => p.id !== currentUserId).toRefArray()
   return {
     participants,
-    goToParticipant: id => props.navigation.navigate('Member', { id })
+    goToParticipant: id => props.navigation.navigate('Member - Modal', { id })
   }
 }
 

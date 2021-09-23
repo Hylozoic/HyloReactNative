@@ -10,7 +10,6 @@ import getMe from 'store/selectors/getMe'
 import makeGoToGroup from 'store/actions/makeGoToGroup'
 import joinProject from 'store/actions/joinProject'
 import leaveProject from 'store/actions/leaveProject'
-import goToMemberMaker from 'store/actions/goToMemberMaker'
 import getMemberships from 'store/selectors/getMemberships'
 import respondToEvent from 'store/actions/respondToEvent'
 
@@ -51,7 +50,13 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     goToGroup: groupId => makeGoToGroup(navigation, dispatch)(groupId, memberships, currentGroup.id),
     editPost: () => navigation.navigate('Edit Post', { id }),
     goToMembers: () => navigation.navigate('Project Members', { id, members: get('members', post) }),
-    showMember: goToMemberMaker(navigation, route),
+    showMember: id => {
+      if (route?.name === 'Post Details - Modal') {
+        navigation.navigate('Member - Modal', { id })
+      } else {
+        navigation.navigate('Member', { id })
+      }
+    },
     showTopic: topicName => navigation.navigate('Topic Feed', { topicName }),
     respondToEvent: response => dispatch(respondToEvent(id, response))
   }

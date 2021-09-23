@@ -37,7 +37,7 @@ export function mapDispatchToProps (dispatch, { navigation }) {
     addModeratorMaker: (id, groupId) => dispatch(addModerator(id, groupId)),
     removeModeratorMaker: (id, isRemoveFromGroup, groupId) => dispatch(removeModerator(id, groupId, isRemoveFromGroup)),
     fetchModeratorsMaker: groupSlug => () => dispatch(fetchModerators(groupSlug)),
-    showMember: id => navigation.navigate('Member', { id }),
+    showMember: id => navigation.navigate('Member - Modal', { id }),
     fetchModeratorSuggestionsMaker: (groupId, autocomplete) => dispatch(fetchModeratorSuggestions(groupId, autocomplete)),
     clearModeratorSuggestions: () => dispatch(clearModeratorSuggestions())
   }
