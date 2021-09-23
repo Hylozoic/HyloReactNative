@@ -1,6 +1,6 @@
 import React from 'react'
-import { View, Text, ScrollView, TouchableOpacity } from 'react-native'
-import SafeAreaView from 'react-native-safe-area-view'
+import { SafeAreaView, View, Text, ScrollView, TouchableOpacity } from 'react-native'
+// import SafeAreaView from 'react-native-safe-area-view'
 import { LoginManager, AccessToken } from 'react-native-fbsdk-next'
 import { get, any, values, isNil } from 'lodash/fp'
 import validator from 'validator'
@@ -130,10 +130,6 @@ export default class UserSettings extends React.Component {
     })
   }
 
-  cancel = () => {
-    this.confirmLeave(this.props.cancel)
-  }
-
   logout = () => {
     this.confirmLeave(this.props.logout)
   }
@@ -168,7 +164,9 @@ export default class UserSettings extends React.Component {
   render () {
     const { currentUser, updateUserSettings, unlinkAccount, goToNotificationSettings, goToBlockedUsers } = this.props
     const { editingPassword, edits: { email, password, confirmPassword, facebookUrl, twitterName }, errors, changed } = this.state
+
     if (!currentUser) return <Loading />
+
     return (
       <SafeAreaView style={{ flex: 1 }}>
         <KeyboardFriendlyView style={styles.container}>
@@ -235,7 +233,9 @@ export default class UserSettings extends React.Component {
             <View style={styles.notificationSettingsWrapper}>
               <Button text='Notification Settings' onPress={goToNotificationSettings} style={styles.notificationSettings} />
             </View>
-            <Footer saveChanges={changed && this.saveChanges} cancel={this.cancel} logout={this.logout} />
+            <View style={styles.footer}>
+              <Button text='Save Changes' onPress={changed && this.saveChanges} style={styles.save} disabled={!changed} />
+            </View>
           </ScrollView>
         </KeyboardFriendlyView>
       </SafeAreaView>
@@ -314,16 +314,4 @@ export class SocialControl extends React.Component {
       </View>
     )
   }
-}
-
-export function Footer ({ saveChanges, cancel, logout }) {
-  return (
-    <View style={styles.footer}>
-      <Button text='Save Changes' onPress={saveChanges} style={styles.save} disabled={!saveChanges} />
-      <TouchableOpacity onPress={cancel}>
-        <Text style={styles.cancel}>Cancel</Text>
-      </TouchableOpacity>
-      <Button text='Logout' onPress={logout} style={styles.logoutButton} />
-    </View>
-  )
 }

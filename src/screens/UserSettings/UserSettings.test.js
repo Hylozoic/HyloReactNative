@@ -286,17 +286,6 @@ describe('UserSettings', () => {
     })
   })
 
-  describe('logout', () => {
-    it('calls confirmLeave, passing in logout', () => {
-      const logout = () => {}
-      const confirmLeave = jest.fn(fn => fn())
-      const instance = ReactTestRenderer.create(<UserSettings logout={logout} />).root.instance
-      instance.confirmLeave = confirmLeave
-      instance.logout()
-      expect(confirmLeave).toHaveBeenCalledWith(logout)
-    })
-  })
-
   describe('loginWithFacebook', () => {
     describe('when cancelled', () => {
       beforeEach(() => {
