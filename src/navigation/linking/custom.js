@@ -1,12 +1,13 @@
 import { Linking } from 'react-native'
+import { isString } from 'lodash/fp'
 import { getStateFromPath as getStateFromPathDefault } from '@react-navigation/native'
 import { match } from 'path-to-regexp'
 import * as qs from 'query-string'
-import { parse } from 'url'
 import store from 'store'
 import getSignedIn from 'store/selectors/getSignedIn'
 import setReturnToPath from 'store/actions/setReturnToPath'
 import { getActionFromState } from '@react-navigation/native'
+import { navigationRef } from 'navigation/RootView/RootView'
 
 export const prefixes = [
   'http://hylo.com',
@@ -27,7 +28,7 @@ export const routesConfig = {
   // http://hylo.com/h/use-invitation?token=ebda24b2-d5d7-4d10-8558-b160e6f5d362&email=lorenjohnson+invitetest111@gmail.com&utm_swu=9555
   '/h/use-invitation/:invitationToken?':                     'JoinGroup',
   '/signup':                                                 'Signup',
-  // AuthNavigator route...             
+  // '/noo/login/token'                            :           { screen: 'Login', authRequired: false },
   // 'passwordResetTokenLogin/:userId/:loginToken/:nextURL': 'Login',
   '/':                                                       'Drawer/Tabs/Home Tab/Feed',
   '/members/:id':                                            'Member - Modal',
@@ -45,9 +46,10 @@ export const routesConfig = {
   '/messages':                                               'Drawer/Tabs/Messages Tab/Messages'
 }
 
-export const navigateToLinkingPath = (navigationRef, linkingPath) => {
+export const navigateToLinkingPath = (linkingPath) => {
   const state = getStateFromPath(linkingPath)
   const action = getActionFromState(state)
+
   navigationRef.current?.dispatch(action)
 }
 
@@ -57,11 +59,11 @@ export function matchRouteToScreenPath (incomingPathAndQuery, routes) {
   const [incomingPath, incomingQueryString] = incomingPathAndQuery.split('?')
 
   for (const pathMatcher in routes) {
-    const matched = match(pathMatcher)(incomingPath)
+    const pathMatch = match(pathMatcher)(incomingPath)
 
-    if (matched) {
-      const screenPath = routes[pathMatcher]
-      const screenQueryString = qs.stringify(matched.params, {
+    if (pathMatch) {
+      const routeMatch = routes[pathMatcher]
+      const screenQueryString = qs.stringify(pathMatch.params, {
         encode: true,
         strict: true
       })
@@ -69,7 +71,7 @@ export function matchRouteToScreenPath (incomingPathAndQuery, routes) {
         .filter(Boolean)
         .join('&')
 
-      return [screenPath, screenAndIncomingQueryString]
+      return [routeMatch, screenAndIncomingQueryString]
         .filter(Boolean)
         .join('?')
     }
@@ -77,17 +79,12 @@ export function matchRouteToScreenPath (incomingPathAndQuery, routes) {
 }
 
 const getInitialURL = async () => {
-  const url = await Linking.getInitialURL()
-  const signedIn = getSignedIn(store.getState())
+  const initialURL = await Linking.getInitialURL()
 
-  if (url != null) {
-    if (!signedIn) {
-      const path = parse(url).path
-      store.dispatch(setReturnToPath(path))
-    } else {
-      return url
-    }
-  }
+  if (initialURL) store.dispatch(setReturnToPath(initialURL))
+
+  // Purposesly doesn't return to have
+  // the effect of disabling default initialURL handling
 }
 
 const subscribe = listener => {
@@ -95,13 +92,8 @@ const subscribe = listener => {
     const signedIn = getSignedIn(store.getState())
 
     if (!signedIn) {
-      const path = parse(url).path
-      store.dispatch(setReturnToPath(path))
+      store.dispatch(setReturnToPath(url))
     } else {
-      // const path = parse(url).path
-      // const state = getStateFromPath(path)
-      // // const action = getActionFromState(state)    
-      // reset(state)
       return listener(url)
     }
   }

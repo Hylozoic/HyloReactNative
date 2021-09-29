@@ -1,6 +1,6 @@
 // import presentTopic from 'store/presenters/presentTopic'
 
-import { RESPONSES } from "store/models/EventInvitation"
+import { RESPONSES } from 'store/models/EventInvitation'
 
 export default (post, groupId) => {
   if (!post) return null

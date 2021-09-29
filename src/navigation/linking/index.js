@@ -43,10 +43,14 @@ export const linking = {
   }
 }
 
-export function openURLinkApp (pathOrURL) {
+// NOTE: Does not work in the case of initialURL,
+// see navigation/linking/custom/navigateToLinkingPath
+// for replacement
+export async function openPathOrURLInApp (pathOrURL) {
   const { pathname } = url.parse(pathOrURL)
-  if (pathname) {
-    Linking.openURL('hyloapp://' + pathname)
+  const targetURL = 'hyloapp://' + pathname
+  if (await Linking.canOpenURL(targetURL)) {
+    await Linking.openURL(targetURL)
   }
 }
 

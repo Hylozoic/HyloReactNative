@@ -10,7 +10,6 @@ import {
 import { getPending } from './Login.store'
 import getRouteParam from 'store/selectors/getRouteParam'
 import getSignupInProgress from 'store/selectors/getSignupInProgress'
-import { buildLoadCurrentUserSession } from 'navigation/RootView/RootView.connector'
 
 export function mapStateToProps (state, props) {
   const formError = state.session.loginError
