@@ -24,12 +24,12 @@ export const prefixes = [
 // doesn't allow for multiple paths to match to the same
 // screen.
 export const routesConfig = {
-  '/groups/:slug/join/:accessCode?':                         'JoinGroup',
-  // http://hylo.com/h/use-invitation?token=ebda24b2-d5d7-4d10-8558-b160e6f5d362&email=lorenjohnson+invitetest111@gmail.com&utm_swu=9555
-  '/h/use-invitation/:invitationToken?':                     'JoinGroup',
-  '/signup':                                                 'Signup',
-  // '/noo/login/token'                            :           { screen: 'Login', authRequired: false },
+  '/noo/login/token':                                        'Login',
   // 'passwordResetTokenLogin/:userId/:loginToken/:nextURL': 'Login',
+  '/groups/:slug/join/:accessCode':                          'JoinGroup',
+  // http://hylo.com/h/use-invitation?token=ebda24b2-d5d7-4d10-8558-b160e6f5d362&email=lorenjohnson+invitetest111@gmail.com&utm_swu=9555
+  '/h/use-invitation':                                       'JoinGroup',
+  '/signup':                                                 'Signup',
   '/':                                                       'Drawer/Tabs/Home Tab/Feed',
   '/members/:id':                                            'Member - Modal',
   '/:context(groups)/:groupSlugFromLink':                    'Drawer/Tabs/Home Tab/Feed',
@@ -46,11 +46,22 @@ export const routesConfig = {
   '/messages':                                               'Drawer/Tabs/Messages Tab/Messages'
 }
 
-export const navigateToLinkingPath = (linkingPath) => {
+export const navigateToLinkingPath = (linkingPath, authed) => {
   const state = getStateFromPath(linkingPath)
+
+  if (!state) {
+    store.dispatch(setReturnToPath(null))
+    return
+  }
+
   const action = getActionFromState(state)
 
+  // NOTE: This will thrown an error in dev when navigating to a state object 
+  // with authed screens when not fully authed, it can be ignored.
+  // The path will still be used once auth'd, and non-auth screens will get navigated
+  // to.
   navigationRef.current?.dispatch(action)
+  store.dispatch(setReturnToPath(null))
 }
 
 // Matches path to routes and returns a react-navigation screen path

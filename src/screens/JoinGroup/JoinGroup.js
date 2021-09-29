@@ -19,7 +19,7 @@ export default function JoinGroup ({
   const goToGroup = makeGoToGroup(navigation, dispatch, false)
   const navToInviteExpired = () => navigation?.navigate('InviteExpired')
   const invitationCodes = {
-    invitationToken: getRouteParam('invitationToken', route),
+    invitationToken: getRouteParam('token', route),
     accessCode: getRouteParam('accessCode', route)
   }
 

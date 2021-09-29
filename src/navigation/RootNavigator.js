@@ -37,6 +37,10 @@ export default function RootNavigator ({ fullyAuthorized }) {
     {fullyAuthorized && <>
       <Root.Screen name='Drawer' component={DrawerNavigator} options={{ headerShown: false }} />
       <Root.Group screenOptions={{ presentation: 'modal', header: ModalHeader }}>
+        <Root.Screen name='Post Details - Modal' component={PostDetails}
+          options={{ title: 'Post Details' }} />
+        <Root.Screen name='Member - Modal' component={MemberProfile}
+          options={{ title: 'Member' }} />
         <Root.Screen name='Edit Post' component={PostEditor} />
         <Root.Screen name='Edit Account Info' component={UserSettings} />
         <Root.Screen name='Group Settings' component={GroupSettingsNavigator} />
@@ -68,10 +72,6 @@ export default function RootNavigator ({ fullyAuthorized }) {
     </>}
     {/* Screens always available */}
     <Root.Group screenOptions={{ presentation: 'modal', header: ModalHeader }}>
-      <Root.Screen name='Post Details - Modal' component={PostDetails}
-        options={{ title: 'Post Details' }} />
-      <Root.Screen name='Member - Modal' component={MemberProfile}
-        options={{ title: 'Member' }} />
       <Root.Screen name='JoinGroup' component={JoinGroup}
         options={{ title: 'Joining Group...' }} />
       <Root.Screen name='InviteExpired' component={InviteExpired} />

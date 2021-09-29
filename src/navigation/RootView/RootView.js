@@ -24,23 +24,16 @@ export default function RootView ({
   const [navIsReady, setNavIsReady] = useState(false)
   const fullyAuthorized = !signupInProgress && currentUser
 
-  // Handle returnToPath
-  useEffect(() => {
-    if (navIsReady && fullyAuthorized && returnToPath) {
-      navigateToLinkingPath(returnToPath)
-      setReturnToPath(null)
-    }
-  }, [navIsReady, fullyAuthorized, returnToPath])
-
   // Handle Push Notifications opened
   useEffect(() => OneSignal.setNotificationOpenedHandler(({ notification }) => {
     const path = notification?.additionalData?.path
-    if (navIsReady && fullyAuthorized) {
-      navigateToLinkingPath(path)
-    } else {
-      setReturnToPath(path)
-    }
+    if (navIsReady) navigateToLinkingPath(path)
   }), [])
+
+  // Handle returnToPath
+  useEffect(() => {
+    if (navIsReady && returnToPath) navigateToLinkingPath(returnToPath)
+  }, [navIsReady, fullyAuthorized, returnToPath])
 
   // Handle loading of currentUser if already "signedIn" via Login screen
   // or on app launch when signedIn status is not yet known
@@ -61,7 +54,7 @@ export default function RootView ({
       <NavigationContainer
         linking={customLinking}
         ref={navigationRef}
-        initialState={INITIAL_NAV_STATE}
+        initialState={fullyAuthorized ? INITIAL_NAV_STATE : null}
         onReady={() => { 
           setNavIsReady(true)
           !loading && RNBootSplash.hide()

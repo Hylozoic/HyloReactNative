@@ -24,8 +24,9 @@ export function mapStateToProps (state, props) {
     defaultEmail: state.session?.defaultLoginEmail,
     goToSignup,
     goToResetPassword,
-    loginToken: decodeURIComponent(getRouteParam('loginToken', props.route)),
-    loginTokenUserId: getRouteParam('userId', props.route)
+    returnToURLFromLink: decodeURIComponent(getRouteParam('n', props.route)),
+    loginToken: decodeURIComponent(getRouteParam('t', props.route) || getRouteParam('loginToken', props.route)),
+    loginTokenUserId: getRouteParam('u', props.route) || getRouteParam('userId', props.route)
   }
 }
 
