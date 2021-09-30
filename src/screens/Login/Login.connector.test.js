@@ -1,5 +1,4 @@
 import { mapDispatchToProps, mapStateToProps, mergeProps } from './Login.connector'
-import OneSignal from 'react-native-onesignal'
 import { bindActionCreators } from 'redux'
 
 jest.mock('react-native-onesignal', () => ({

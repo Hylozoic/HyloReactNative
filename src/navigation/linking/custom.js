@@ -1,10 +1,8 @@
 import { Linking } from 'react-native'
-import { isString } from 'lodash/fp'
 import { getStateFromPath as getStateFromPathDefault } from '@react-navigation/native'
 import { match } from 'path-to-regexp'
 import * as qs from 'query-string'
 import store from 'store'
-import getSignedIn from 'store/selectors/getSignedIn'
 import setReturnToPath from 'store/actions/setReturnToPath'
 import { getActionFromState } from '@react-navigation/native'
 import { navigationRef } from 'navigation/RootView/RootView'
@@ -24,7 +22,7 @@ export const prefixes = [
 // doesn't allow for multiple paths to match to the same
 // screen.
 export const routesConfig = {
-  '/noo/login/token':                                        'Login',
+  '/noo/login/token':                                        'LoginByTokenHandler',
   // 'passwordResetTokenLogin/:userId/:loginToken/:nextURL': 'Login',
   '/groups/:slug/join/:accessCode':                          'JoinGroup',
   // http://hylo.com/h/use-invitation?token=ebda24b2-d5d7-4d10-8558-b160e6f5d362&email=lorenjohnson+invitetest111@gmail.com&utm_swu=9555
@@ -100,13 +98,8 @@ const getInitialURL = async () => {
 
 const subscribe = listener => {
   const onReceiveURL = ({ url }) => {
-    const signedIn = getSignedIn(store.getState())
-
-    if (!signedIn) {
-      store.dispatch(setReturnToPath(url))
-    } else {
-      return listener(url)
-    }
+    store.dispatch(setReturnToPath(url))
+    return listener(url)
   }
 
   const eventSubscription = Linking.addEventListener('url', onReceiveURL)

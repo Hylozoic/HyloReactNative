@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { View } from 'react-native'
+import { View, SafeAreaView } from 'react-native'
 import { NavigationContainer, createNavigationContainerRef } from '@react-navigation/native'
 // Currently a bug with React Navigation Flipper plugin, follow:
 // https://github.com/react-navigation/react-navigation/issues/9850
@@ -18,7 +18,6 @@ export default function RootView ({
   signupInProgress,
   currentUser,
   loadCurrentUserSession,
-  setReturnToPath,
   returnToPath
 }) {
   const [navIsReady, setNavIsReady] = useState(false)
@@ -32,7 +31,10 @@ export default function RootView ({
 
   // Handle returnToPath
   useEffect(() => {
-    if (navIsReady && returnToPath) navigateToLinkingPath(returnToPath)
+    if (navIsReady && returnToPath) {
+      console.log('!!!! navigating to returnToPath and clearing it:', returnToPath)
+      navigateToLinkingPath(returnToPath)
+    }
   }, [navIsReady, fullyAuthorized, returnToPath])
 
   // Handle loading of currentUser if already "signedIn" via Login screen
@@ -42,10 +44,11 @@ export default function RootView ({
   }, [signedIn])
 
   if (loading && !signupInProgress) {
+
     return (
-      <View style={styles.loadingContainer}>
-        <Loading size='large' style={styles.loading} />
-      </View>
+      <SafeAreaView style={styles.loadingContainer}>
+        <Loading size='large' />
+      </SafeAreaView>
     )
   }
 
@@ -106,16 +109,9 @@ const styles = {
     flex: 1
   },
   loadingContainer: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  loading: {
-    marginBottom: 15
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center'
   }
 }
 

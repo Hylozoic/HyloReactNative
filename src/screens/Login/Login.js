@@ -29,15 +29,6 @@ export default class Login extends React.Component {
     this.passwordInputRef = React.createRef()
   }
 
-  async UNSAFE_componentWillMount () {
-    const { loginToken, loginByToken } = this.props
-    if (loginToken) {
-      const loginByTokenResponse = await loginByToken()
-      const errorMessage = loginByTokenResponse?.errorMessage
-      if (errorMessage) this.createErrorNotification(errorMessage)
-    }
-  }
-
   componentDidMount () {
     this.unsubscribeNetInfo = NetInfo.addEventListener(this.handleConnectivityChange)
     if (this.props.signupInProgress) {
@@ -95,6 +86,7 @@ export default class Login extends React.Component {
       <SafeAreaView>
         <ScrollView contentContainerStyle={styles.login} style={styles.container}>
           {ssoError && <Text style={styles.errorBanner}>{ssoError}</Text>}
+          {/* TODO: Bring back online status message / toast */}
           {/* {!isConnected && <Text style={styles.errorBanner}>OFFLINE; TRYING TO RECONNECT...</Text>} */}
           {pending && <Text style={styles.banner}>LOGGING IN...</Text>}
           {bannerMessage && <Text style={styles.banner}>{bannerMessage}</Text>}

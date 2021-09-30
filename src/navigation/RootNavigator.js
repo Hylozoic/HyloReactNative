@@ -23,6 +23,7 @@ import UserSettings from 'screens/UserSettings'
 import { white } from 'style/colors'
 import PostDetails from 'screens/PostDetails'
 import MemberProfile from 'screens/MemberProfile'
+import LoginByTokenHandler from 'screens/LoginByTokenHandler'
 
 const Root = createStackNavigator()
 export default function RootNavigator ({ fullyAuthorized }) {
@@ -71,6 +72,7 @@ export default function RootNavigator ({ fullyAuthorized }) {
       </Root.Group>
     </>}
     {/* Screens always available */}
+    <Root.Screen name='LoginByTokenHandler' options={{ headerShown: false }} component={LoginByTokenHandler} />
     <Root.Group screenOptions={{ presentation: 'modal', header: ModalHeader }}>
       <Root.Screen name='JoinGroup' component={JoinGroup}
         options={{ title: 'Joining Group...' }} />

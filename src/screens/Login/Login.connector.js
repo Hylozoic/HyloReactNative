@@ -1,12 +1,11 @@
 import { connect } from 'react-redux'
 import {
-  logout,
   login,
   loginWithApple,
   loginWithFacebook,
-  loginWithGoogle,
-  loginByToken
+  loginWithGoogle
 } from './actions'
+import logout from 'store/actions/logout'
 import { getPending } from './Login.store'
 import getRouteParam from 'store/selectors/getRouteParam'
 import getSignupInProgress from 'store/selectors/getSignupInProgress'
@@ -35,8 +34,7 @@ export const mapDispatchToProps = {
   login,
   loginWithApple,
   loginWithFacebook,
-  loginWithGoogle,
-  loginByToken
+  loginWithGoogle
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
@@ -45,10 +43,9 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     login,
     loginWithApple,
     loginWithGoogle,
-    loginWithFacebook,
-    loginByToken
+    loginWithFacebook
   } = dispatchProps
-  const finishLogin = async (action) => {
+  const finishLogin = (action) => {
     if (action.error) {
       const errorMessage = action?.payload?.response?.body
       return errorMessage ? { errorMessage } : null
@@ -73,14 +70,6 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
       await logout()
       const action = await loginWithGoogle(token)
       return finishLogin(action)
-    },
-    loginByToken: async () => {
-      const { loginTokenUserId, loginToken } = stateProps
-      if (loginTokenUserId) {
-        await logout()
-        const action = await loginByToken(loginTokenUserId, loginToken)
-        return finishLogin(action)
-      }
     },
     login: async (email, password) => {
       await logout()

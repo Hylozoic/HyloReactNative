@@ -10,7 +10,7 @@ import getBlockedUsers from 'store/selectors/getBlockedUsers'
 import updateUserSettings from 'store/actions/updateUserSettings'
 import { mapWhenFocused, mergeWhenFocused } from 'util/redux'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
-import { logout } from 'screens/Login/actions'
+import logout from 'store/actions/logout'
 import getMemberships from 'store/selectors/getMemberships'
 
 export function mapStateToProps (state, props) {

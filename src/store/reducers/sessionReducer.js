@@ -5,6 +5,7 @@ import {
   LOGIN_WITH_FACEBOOK,
   LOGIN_WITH_GOOGLE
 } from 'screens/Login/actions'
+import { LOGIN_BY_TOKEN } from 'store/constants'
 import {
   SIGNUP,
   UPDATE_USER_SETTINGS
@@ -26,6 +27,7 @@ export default function sessionReducer (state = {
   if (error) {
     switch (type) {
       case LOGIN:
+      case LOGIN_BY_TOKEN:
       case LOGIN_WITH_FACEBOOK:
       case LOGIN_WITH_GOOGLE:
         return {
@@ -38,6 +40,7 @@ export default function sessionReducer (state = {
 
   switch (type) {
     case LOGIN:
+    case LOGIN_BY_TOKEN:
     case LOGIN_WITH_APPLE:
     case LOGIN_WITH_FACEBOOK:
     case LOGIN_WITH_GOOGLE:
