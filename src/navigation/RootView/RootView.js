@@ -9,6 +9,7 @@ import Loading from 'components/Loading'
 import RootNavigator from 'navigation/RootNavigator'
 import OneSignal from 'react-native-onesignal'
 import customLinking, { navigateToLinkingPath } from 'navigation/linking/custom'
+import SocketListener from 'components/SocketListener'
 
 export const navigationRef = createNavigationContainerRef()
 
@@ -58,6 +59,7 @@ export default function RootView ({
 
   return (
     <View style={styles.rootContainer}>
+      {fullyAuthorized && <SocketListener />}
       <NavigationContainer
         linking={customLinking}
         ref={navigationRef}

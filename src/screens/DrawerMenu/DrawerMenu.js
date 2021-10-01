@@ -4,7 +4,6 @@ import {
   View, SectionList, ImageBackground
 } from 'react-native'
 import styles from './DrawerMenu.styles'
-import SocketListener from 'components/SocketListener'
 import Button from 'components/Button'
 import LinearGradient from 'react-native-linear-gradient'
 import { bannerlinearGradientColors } from 'style/colors'
@@ -74,8 +73,6 @@ export default function DrawerMenu ({
         stickySectionHeadersEnabled={false}
       />
       <Button text='Start a Group' onPress={goToCreateGroup} style={styles.createGroupButton} />
-      {/* putting SocketListener here so it's only rendered after login */}
-      <SocketListener />
     </View>
   )
 }

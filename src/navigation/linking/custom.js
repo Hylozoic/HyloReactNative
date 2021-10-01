@@ -44,7 +44,7 @@ export const routesConfig = {
   '/messages':                                               'Drawer/Tabs/Messages Tab/Messages'
 }
 
-export const navigateToLinkingPath = (linkingPath, authed) => {
+export const navigateToLinkingPath = (linkingPath) => {
   const state = getStateFromPath(linkingPath)
 
   if (!state) {
