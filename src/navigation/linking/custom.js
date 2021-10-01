@@ -59,6 +59,9 @@ export const navigateToLinkingPath = (linkingPath) => {
   // with authed screens when not fully authed, it can be ignored.
   // The path will still be used once auth'd, and non-auth screens will get navigated
   // to.
+  
+  // TODO: Will get stuck on loading screen without something like this
+  // navigationRef.current?.dispatch(StackActions.pop(1))
   navigationRef.current?.dispatch(action)
   store.dispatch(setReturnToPath(null))
 }
