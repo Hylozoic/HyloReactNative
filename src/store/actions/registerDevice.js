@@ -13,7 +13,7 @@ export default function registerDevice (playerId) {
       }`,
       variables: {
         playerId,
-        platform: Platform.OS + (__DEV__ ? '_dev' : ''), // TODO determine if in simulator
+        platform: Platform.OS + (__DEV__ ? '_dev' : ''),
         version: '2' // TODO supply real version here
       }
     }

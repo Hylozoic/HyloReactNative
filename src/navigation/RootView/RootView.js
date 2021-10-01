@@ -18,7 +18,8 @@ export default function RootView ({
   signupInProgress,
   currentUser,
   loadCurrentUserSession,
-  returnToPath
+  returnToPath,
+  setReturnToPath
 }) {
   const [navIsReady, setNavIsReady] = useState(false)
   const fullyAuthorized = !signupInProgress && currentUser
@@ -26,13 +27,15 @@ export default function RootView ({
   // Handle Push Notifications opened
   useEffect(() => OneSignal.setNotificationOpenedHandler(({ notification }) => {
     const path = notification?.additionalData?.path
-    if (navIsReady) navigateToLinkingPath(path)
+    setReturnToPath(path)
   }), [])
 
   // Handle returnToPath
   useEffect(() => {
     if (navIsReady && returnToPath) {
       console.log('!!!! navigating to returnToPath and clearing it:', returnToPath)
+      // TODO: Make sure that auth path links don't get navigated to too early in the case
+      // if (fullyAuthorized || returnToPath is in non-auth paths list ((create in custom linking file)
       navigateToLinkingPath(returnToPath)
     }
   }, [navIsReady, fullyAuthorized, returnToPath])
@@ -40,11 +43,12 @@ export default function RootView ({
   // Handle loading of currentUser if already "signedIn" via Login screen
   // or on app launch when signedIn status is not yet known
   useEffect(() => {
-    (!signedIn || (signedIn && !currentUser)) && loadCurrentUserSession()
+    if (!signedIn || (signedIn && !currentUser)) {
+      loadCurrentUserSession()
+    }
   }, [signedIn])
 
   if (loading && !signupInProgress) {
-
     return (
       <SafeAreaView style={styles.loadingContainer}>
         <Loading size='large' />
