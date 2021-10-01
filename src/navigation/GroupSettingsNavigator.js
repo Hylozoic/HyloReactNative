@@ -30,7 +30,7 @@ export default function GroupSettingsNavigator ({ navigation, route }) {
   return (
     <GroupSettings.Navigator {...navigatorProps}>
       <GroupSettings.Screen
-        name='Group Settings' component={GroupSettingsMenu}
+        name='Group Settings Menu' component={GroupSettingsMenu}
         options={{ headerShown: false }}
       />
       <GroupSettings.Screen

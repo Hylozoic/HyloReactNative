@@ -23,7 +23,6 @@ export const prefixes = [
 // screen.
 export const routesConfig = {
   '/noo/login/token':                                        'LoginByTokenHandler',
-  // 'passwordResetTokenLogin/:userId/:loginToken/:nextURL': 'Login',
   '/groups/:slug/join/:accessCode':                          'JoinGroup',
   // http://hylo.com/h/use-invitation?token=ebda24b2-d5d7-4d10-8558-b160e6f5d362&email=lorenjohnson+invitetest111@gmail.com&utm_swu=9555
   '/h/use-invitation':                                       'JoinGroup',
