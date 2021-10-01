@@ -37,20 +37,22 @@ export default function JoinGroup ({
           const groupId = getGroupId(joinResult)
           groupId
             ? goToGroup(groupId, memberships)
-            : navigation?.navigate('Home Tab')
+            : navigation?.navigate('Home Tab', { screen: 'Feed'})
         } else {
           // TODO: navToInviteExpired()
-          navigation?.navigate('Home Tab')
+          navigation?.navigate('Home Tab', { screen: 'Feed'})
         }
       } catch (err) {
         // TODO: Display toast that there was an error with the invite
         console.log('!!! error when checking invite or joining group:', err)
-        navigation?.navigate('Home Tab')
+        navigation?.navigate('Home Tab', { screen: 'Feed'})
       }
     }
 
     checkInviteAndJoin()
   }, [])
 
-  return <LoadingScreen />
+  return (
+    <LoadingScreen />
+  )
 }

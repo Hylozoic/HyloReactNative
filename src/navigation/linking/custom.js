@@ -19,14 +19,15 @@ export const prefixes = [
 // This way of mapping screens to paths is being used
 // in alternate to the default linking config.screens
 // route mapping as the current version of react-navigation
-// doesn't allow for multiple paths to match to the same
+// doesn't have a way to map multiple paths to the same
 // screen.
 export const routesConfig = {
+  // Doesn't require auth
   '/noo/login/token':                                        'LoginByTokenHandler',
-  '/groups/:slug/join/:accessCode':                          'JoinGroup',
-  // http://hylo.com/h/use-invitation?token=ebda24b2-d5d7-4d10-8558-b160e6f5d362&email=lorenjohnson+invitetest111@gmail.com&utm_swu=9555
-  '/h/use-invitation':                                       'JoinGroup',
   '/signup':                                                 'Signup',
+  // Requires auth
+  '/groups/:slug/join/:accessCode':                          'JoinGroup',
+  '/h/use-invitation':                                       'JoinGroup',
   '/':                                                       'Drawer/Tabs/Home Tab/Feed',
   '/members/:id':                                            'Member - Modal',
   '/:context(groups)/:groupSlugFromLink':                    'Drawer/Tabs/Home Tab/Feed',
@@ -38,6 +39,7 @@ export const routesConfig = {
   '/post/:id':                                               'Post Details - Modal',
   '/post/:id/edit':                                          'Edit Post',
   '/:context(groups)/:groupSlugFromLink/post/:id/edit':      'Edit Post',
+  '/settings/account':                                       'Edit Account Info',
   '/settings/:section?':                                     'Drawer/Tabs/Profile Tab/My Profile',
   '/messages/:id':                                           'Drawer/Tabs/Messages Tab/Thread',
   '/messages':                                               'Drawer/Tabs/Messages Tab/Messages'
@@ -91,8 +93,8 @@ const getInitialURL = async () => {
 
   if (initialURL) store.dispatch(setReturnToPath(initialURL))
 
-  // Purposesly doesn't return to have
-  // the effect of disabling default initialURL handling
+  // NOTE: This function intentionally doesn't return to have which
+  // has the effect of disabling the default initialURL handling
 }
 
 const subscribe = listener => {

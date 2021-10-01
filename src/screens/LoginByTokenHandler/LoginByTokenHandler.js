@@ -1,12 +1,11 @@
 import React, { useEffect } from 'react'
-import { SafeAreaView } from 'react-native'
-import Loading from 'components/Loading'
 import { useDispatch, useSelector } from 'react-redux'
 import getRouteParam from 'store/selectors/getRouteParam'
 import loginByToken from 'store/actions/loginByToken'
 import logout from 'store/actions/logout'
 import getSignupInProgress from 'store/selectors/getSignupInProgress'
 import setReturnToPath from 'store/actions/setReturnToPath'
+import LoadingScreen from 'screens/LoadingScreen'
 
 export default function LoginByTokenHandler ({ navigation, route }) {
   const dispatch = useDispatch()
@@ -35,16 +34,6 @@ export default function LoginByTokenHandler ({ navigation, route }) {
   }, [loginToken])
 
   return (
-    <SafeAreaView style={styles.container}>
-      <Loading size='large' />
-    </SafeAreaView>
+    <LoadingScreen />
   )
-}
-
-const styles = {
-  container: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center'
-  }
 }

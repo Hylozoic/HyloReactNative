@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import { View, SafeAreaView } from 'react-native'
+import { View } from 'react-native'
 import { NavigationContainer, createNavigationContainerRef } from '@react-navigation/native'
 // Currently a bug with React Navigation Flipper plugin, follow:
 // https://github.com/react-navigation/react-navigation/issues/9850
 // import { useFlipper } from '@react-navigation/devtools'
 import RNBootSplash from 'react-native-bootsplash'
-import Loading from 'components/Loading'
 import RootNavigator from 'navigation/RootNavigator'
 import OneSignal from 'react-native-onesignal'
 import customLinking, { navigateToLinkingPath } from 'navigation/linking/custom'
 import SocketListener from 'components/SocketListener'
+import LoadingScreen from 'screens/LoadingScreen'
 
 export const navigationRef = createNavigationContainerRef()
 
@@ -51,9 +51,7 @@ export default function RootView ({
 
   if (loading && !signupInProgress) {
     return (
-      <SafeAreaView style={styles.loadingContainer}>
-        <Loading size='large' />
-      </SafeAreaView>
+      <LoadingScreen />
     )
   }
 
@@ -113,11 +111,6 @@ export const INITIAL_NAV_STATE = {
 const styles = {
   rootContainer: {
     flex: 1
-  },
-  loadingContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center'
   }
 }
 
