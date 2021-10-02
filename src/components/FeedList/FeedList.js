@@ -63,14 +63,15 @@ export default class FeedList extends React.Component {
           ListHeaderComponent={
             <View>
               {this.props.header}
-              <ListControls
-                filter={this.props.filter}
-                sortBy={this.props.sortBy}
-                setFilter={setFilter}
-                setSort={setSort}
-                pending={this.props.pending}
-                hideListFilter={isProjectFeed}
-              />
+              {!isProjectFeed && (
+                <ListControls
+                  filter={this.props.filter}
+                  sortBy={this.props.sortBy}
+                  setFilter={setFilter}
+                  setSort={setSort}
+                  pending={this.props.pending}
+                />
+              )}
             </View>
           }
           ListFooterComponent={
@@ -106,30 +107,31 @@ export function renderItem ({
 }
 
 export const filterOptions = [
-  { id: null, label: 'All Posts' },
+  { id: null, label: 'All' },
   { id: 'discussion', label: 'Discussions' },
-  { id: 'request', label: 'Requests' },
+  { id: 'event', label: 'Events' },
   { id: 'offer', label: 'Offers' },
-  { id: 'event', label: 'Events' }
+  { id: 'project', label: 'Projects' },
+  { id: 'request', label: 'Requests' },
+  { id: 'resource', label: 'Resources' }
 ]
 
-// const sortOptions = [
-//   {id: 'updated', label: 'Latest'},
-//   {id: 'votes', label: 'Popular'}
-// ]
+const sortOptions = [
+  {id: 'updated', label: 'Latest Activity'},
+  {id: 'created', label: 'Post Date'},
+  {id: 'votes', label: 'Popular'}
+]
 
 const optionText = (id, options) => {
   const option = find(o => o.id === id, options) || options[0]
   return option.label
 }
 
-export function ListControls ({ filter: listFilter, sortBy, setFilter, setSort, hideListFilter }) {
+export function ListControls ({ filter: listFilter, sortBy, setFilter, setSort }) {
   return (
-    <View style={[styles.listControls, hideListFilter ? styles.listControlsSingleItem : {}]}>
-      {!hideListFilter &&
-        <ListControl selected={listFilter} onChange={setFilter} options={filterOptions} />}
-      {/* NOTE: disabled  */}
-      {/* <ListControl selected={sortBy} onChange={setSort} options={sortOptions} /> */}
+    <View style={[styles.listControls]}>
+      <ListControl selected={sortBy} onChange={setSort} options={sortOptions} />
+      <ListControl selected={listFilter} onChange={setFilter} options={filterOptions} />
     </View>
   )
 }
