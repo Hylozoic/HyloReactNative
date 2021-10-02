@@ -122,7 +122,7 @@ export default {
     height: 35,
     fontSize: 14
   },
-  createProjectButton: {
+  newPostButton: {
     width: 150,
     borderColor: 'transparent',
     marginLeft: 'auto',

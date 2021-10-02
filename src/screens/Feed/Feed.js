@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react'
 import { Image, View, Text, TouchableOpacity } from 'react-native'
-import { useScrollToTop } from '@react-navigation/native'
+import { capitalize } from 'lodash/fp'
 import Avatar from 'components/Avatar'
 import Icon from 'components/Icon'
 // import NotificationOverlay from 'components/NotificationOverlay'
@@ -14,15 +14,14 @@ import FeedList from 'components/FeedList'
 import SocketSubscriber from 'components/SocketSubscriber'
 import styles from './Feed.styles'
 import useGroupSelect from 'navigation/useSelectGroup'
+import getRouteParam from 'store/selectors/getRouteParam'
 
-export function headerTitle (topicName, group, isProjectFeed) {
+export function headerTitle (topicName, group, feedType) {
   let title 
   title = topicName
     ? group?.name
     : 'Home'
-  title = isProjectFeed
-    ? 'Projects'
-    : title
+  title = feedType ? capitalize(feedType + 's') : title
   return title
 }
 
@@ -43,24 +42,18 @@ export default function Feed ({
   setTopicSubscribe,
   showTopic,
   newPost,
-  newProject,
-  fetchGroupTopic,
-  selectGroup
+  fetchGroupTopic
 }) {
-  const isProjectFeed = route?.params?.isProjectFeed
+  const feedType = getRouteParam('feedType', route)
   const ref = useRef(null)
 
   useGroupSelect()
   useEffect(() => { fetchGroupTopic() }, [])
   useEffect(() => {
     navigation.setOptions({
-      title: headerTitle(topicName, group, isProjectFeed)
+      title: headerTitle(topicName, group, feedType)
     })
-  }, [
-    topicName,
-    group?.id, 
-    isProjectFeed
-  ])
+  }, [topicName, group?.id, feedType])
 
   if (!currentUser) return <Loading style={{ flex: 1 }} />
 
@@ -83,7 +76,7 @@ export default function Feed ({
     : null
   const pluralFollowers = (topicFollowersTotal !== 1)
   const pluralPosts = (topicPostsTotal !== 1)
-  const showPostPrompt = !isProjectFeed && !topicName
+  const showPostPrompt = !feedType && !topicName
   const feedListHeader = (
     <View style={[styles.bannerContainer, showPostPrompt ? styles.bannerContainerWithPostPrompt : {}]}>
       <Image source={image} style={styles.image} />
@@ -108,11 +101,15 @@ export default function Feed ({
       {!isUndefined(topicSubscribed) && (
         <SubscribeButton active={topicSubscribed} onPress={setTopicSubscribe} />
       )}
-      {isProjectFeed && (
-        <CreateProjectButton createProject={() => newProject(group?.id)} />
+      {feedType && (
+        <Button
+          style={styles.newPostButton}
+          text={`Create ${capitalize(feedType)}`}
+          onPress={() => newPost({ type: feedType })}
+        />      
       )}
-      {showPostPrompt && <PostPrompt currentUser={currentUser} newPost={newPost} />}
-      {!!currentUser && showPostPrompt && <View style={styles.promptShadow} />}
+      {!feedType && <PostPrompt currentUser={currentUser} newPost={newPost} />}
+      {!!currentUser && !feedType && <View style={styles.promptShadow} />}
     </View>
   )
 
@@ -128,7 +125,7 @@ export default function Feed ({
       showMember={showMember}
       showTopic={showTopic}
       topicName={topicName}
-      isProjectFeed={isProjectFeed}
+      feedType={feedType}
     />
     {!topicName && group && (
       <SocketSubscriber type='group' id={group.id} />
@@ -153,16 +150,6 @@ export function SubscribeButton ({ active, onPress }) {
   const text = active ? 'Unsubscribe' : 'Subscribe'
   const style = active ? styles.unsubscribeButton : styles.subscribeButton
   return <Button onPress={onPress} style={style} iconName='Star' text={text} />
-}
-
-export function CreateProjectButton ({ createProject }) {
-  return (
-    <Button
-      style={styles.createProjectButton}
-      text='Create Project'
-      onPress={createProject}
-    />
-  )
 }
 
 // const toggleSubscribe = () => {

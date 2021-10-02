@@ -51,14 +51,7 @@ export function mapStateToProps (state, props) {
 
 export function mapDispatchToProps (dispatch, { navigation }) {
   return {
-    newPost: (groupId, topicName) =>
-      navigation.navigate('Edit Post', { groupId, topicName }),
-    newProject: (groupId) =>
-      navigation.navigate('Edit Post', { groupId, type: 'project' }),
-    showPost: id => navigation.navigate('Post Details', { id }),
-    showMember: id => navigation.navigate('Member', { id }),
     goToGroup: makeGoToGroup(navigation, dispatch),
-    goToCreateGroup: () => navigation.navigate('Create Group'),
     ...bindActionCreators({
       fetchGroupTopic,
       setTopicSubscribe,
@@ -76,7 +69,11 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     ...stateProps,
     ...dispatchProps,
     ...ownProps,
-    newPost: () => dispatchProps.newPost(groupId, topicName),
+    newPost: (params = {}) =>
+      navigation.navigate('Edit Post', { groupId, ...params }),
+    showPost: id => navigation.navigate('Post Details', { id }),
+    goToCreateGroup: () => navigation.navigate('Create Group'),
+    showMember: id => navigation.navigate('Member', { id }),
     goToGroup: groupId => dispatchProps.goToGroup(groupId, memberships, group.id),
     showTopic: selectedTopicName => {
       if (selectedTopicName == topicName) return

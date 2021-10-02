@@ -20,7 +20,8 @@ export default function GroupNavigation ({ navigation, route }) {
   const navItems = [
     { label: 'Create', iconName: 'Create', onPress: () => navigate('Edit Post', { id: null }) },
     { label: 'Stream', iconName: 'Stream', onPress: () => navigate('Feed') },
-    { label: 'Projects', iconName: 'Projects', onPress: () => navigate('Projects') }
+    { label: 'Projects', iconName: 'Projects', onPress: () => navigate('Projects') },
+    { label: 'Events', iconName: 'Events', onPress: () => navigate('Events') }
   ]
   const childGroups = useSelector(getChildGroups)
   const parentGroups = useSelector(getParentGroups)

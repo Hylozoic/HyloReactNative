@@ -1,12 +1,11 @@
 import React from 'react'
-import { FlatList, Text, View } from 'react-native'
-import { find, isEmpty, includes } from 'lodash/fp'
+import { FlatList, View } from 'react-native'
+import { isEmpty } from 'lodash/fp'
 import { didPropsChange } from 'util/index'
 import styles from './FeedList.styles'
 import PostRow from './PostRow'
+import ListControl from 'components/ListControl'
 import Loading from 'components/Loading'
-import Icon from 'components/Icon'
-import PopupMenuButton from 'components/PopupMenuButton'
 
 export default class FeedList extends React.Component {
   fetchOrShowCached () {
@@ -42,12 +41,14 @@ export default class FeedList extends React.Component {
     const {
       postIds,
       pendingRefresh,
-      isProjectFeed,
       refreshPosts,
       fetchMorePosts,
       setFilter,
       setSort,
-      scrollRef
+      scrollRef,
+      sortBy,
+      feedType,
+      filter
     } = this.props
 
     return (
@@ -63,15 +64,12 @@ export default class FeedList extends React.Component {
           ListHeaderComponent={
             <View>
               {this.props.header}
-              {!isProjectFeed && (
-                <ListControls
-                  filter={this.props.filter}
-                  sortBy={this.props.sortBy}
-                  setFilter={setFilter}
-                  setSort={setSort}
-                  pending={this.props.pending}
-                />
-              )}
+              {!feedType && <>
+                <View style={[styles.listControls]}>
+                  <ListControl selected={sortBy} onChange={setSort} options={sortOptions} />
+                  <ListControl selected={filter} onChange={setFilter} options={filterOptions} />
+                </View>
+              </>}
             </View>
           }
           ListFooterComponent={
@@ -121,34 +119,3 @@ const sortOptions = [
   {id: 'created', label: 'Post Date'},
   {id: 'votes', label: 'Popular'}
 ]
-
-const optionText = (id, options) => {
-  const option = find(o => o.id === id, options) || options[0]
-  return option.label
-}
-
-export function ListControls ({ filter: listFilter, sortBy, setFilter, setSort }) {
-  return (
-    <View style={[styles.listControls]}>
-      <ListControl selected={sortBy} onChange={setSort} options={sortOptions} />
-      <ListControl selected={listFilter} onChange={setFilter} options={filterOptions} />
-    </View>
-  )
-}
-
-export function ListControl ({ selected, options, onChange }) {
-  const actions = options.map(option => [
-    option.label,
-    () => onChange(option.id)
-  ])
-
-  return (
-    <PopupMenuButton
-      actions={actions}
-      style={styles.listControl}
-    >
-      <Text style={styles.optionText}>{optionText(selected, options)}</Text>
-      <Icon name='ArrowDown' style={[styles.optionText, styles.downArrow]} />
-    </PopupMenuButton>
-  )
-}

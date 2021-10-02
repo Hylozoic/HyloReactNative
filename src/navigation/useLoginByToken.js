@@ -6,6 +6,8 @@ import logout from 'store/actions/logout'
 import setReturnToPath from 'store/actions/setReturnToPath'
 import { useRoute } from '@react-navigation/core'
 
+// NOTE: THIS IS NOT USED - Retained for reference and possible later adaptation
+
 // NOTE: This forces selection of the group provided in a deeplink to the group feed
 // Generalize skipping this if in any modal?
 export default function useLoginByToken () {

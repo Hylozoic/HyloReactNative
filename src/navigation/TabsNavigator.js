@@ -112,8 +112,9 @@ export function HomeTabNavigator () {
       <HomeTab.Screen name='Feed' component={Feed} />
       <HomeTab.Screen name='Topic Feed' key='Topic Feed' component={Feed} />
       <HomeTab.Screen name='Post Details' key='Post Details' component={PostDetails} />
-      <HomeTab.Screen name='Projects' component={Feed} initialParams={{ isProjectFeed: true }} />
+      <HomeTab.Screen name='Projects' component={Feed} initialParams={{ feedType: 'project' }} />
       <HomeTab.Screen name='Project Members' key='Project Members' component={ProjectMembers} />
+      <HomeTab.Screen name='Events' component={Feed} initialParams={{ feedType: 'event' }} />
       <HomeTab.Screen name='Members' component={MembersComponent} />
       <HomeTab.Screen name='Member' key='Member' component={MemberProfile} />
       <HomeTab.Screen name='Member Details' component={MemberDetails} />

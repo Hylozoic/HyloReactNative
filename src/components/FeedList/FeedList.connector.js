@@ -16,13 +16,13 @@ import resetNewPostCount from 'store/actions/resetNewPostCount'
 import { ALL_GROUP_ID, PUBLIC_GROUP_ID } from 'store/models/Group'
 
 export function mapStateToProps (state, props) {
-  const { group, topicName, isProjectFeed } = props
+  const { group, topicName } = props
   const sortBy = getSort(state, props)
-  const filter = getFilter(state, props)
+  const filter = props?.feedType || getFilter(state, props)
   const queryProps = getQueryProps(state, {
     group,
     sortBy,
-    filter: isProjectFeed ? 'project' : filter,
+    filter,
     topicName
   })
   const pending = state.pending[FETCH_POSTS]
