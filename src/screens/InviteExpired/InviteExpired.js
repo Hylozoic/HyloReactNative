@@ -23,7 +23,7 @@ export default function InviteExpired ({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.headerText}>Sorry, this Invitation has expired or already been used</Text>
+        <Text style={styles.headerText}>This Invitation has expired or already been used</Text>
         <Text style={{ height: 40 }}></Text>
         <Text style={styles.bodyText}>Contact your moderator for another one.</Text>
       </View>
