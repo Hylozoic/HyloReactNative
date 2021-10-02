@@ -8,7 +8,7 @@ import { useRoute } from '@react-navigation/core'
 
 // NOTE: This forces selection of the group provided in a deeplink to the group feed
 // Generalize skipping this if in any modal?
-export default function useGroupSelect () {
+export default function useLoginByToken () {
   const dispatch = useDispatch()
   const route = useRoute()
   const loginToken = decodeURIComponent(getRouteParam('t', route) || getRouteParam('loginToken', route))

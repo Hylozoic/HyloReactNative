@@ -15,9 +15,7 @@ export default function JoinGroup ({
   const dispatch = useDispatch()
   const signedIn = useSelector(getSignedIn)
   const memberships = useSelector(getMemberships)
-
   const goToGroup = makeGoToGroup(navigation, dispatch, false)
-  const navToInviteExpired = () => navigation?.navigate('InviteExpired')
   const invitationCodes = {
     invitationToken: getRouteParam('token', route),
     accessCode: getRouteParam('accessCode', route)
@@ -35,12 +33,12 @@ export default function JoinGroup ({
           const joinResult = await dispatch(useInvitation(invitationCodes))
           const getGroupId = get('payload.data.useInvitation.membership.group.id')
           const groupId = getGroupId(joinResult)
+
           groupId
             ? goToGroup(groupId, memberships)
             : navigation?.navigate('Home Tab', { screen: 'Feed'})
         } else {
-          // TODO: navToInviteExpired()
-          navigation?.navigate('Home Tab', { screen: 'Feed'})
+          navigation?.replace('InviteExpired')
         }
       } catch (err) {
         // TODO: Display toast that there was an error with the invite

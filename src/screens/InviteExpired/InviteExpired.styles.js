@@ -1,6 +1,7 @@
 import {
   rhino60,
-  caribbeanGreen
+  caribbeanGreen,
+  black10onRhino
 } from 'style/colors'
 import { isIOS } from 'util/platform'
 
@@ -28,7 +29,7 @@ export default {
     paddingHorizontal: 52
   },
   headerText: {
-    color: rhino60,
+    color: black10onRhino,
     fontSize: 24,
     fontWeight: 'bold',
     fontFamily: 'Circular-Bold',

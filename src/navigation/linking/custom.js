@@ -1,11 +1,13 @@
 import { Linking } from 'react-native'
+import { isString, reject } from 'lodash/fp'
 import { getStateFromPath as getStateFromPathDefault } from '@react-navigation/native'
+import { CommonActions } from '@react-navigation/native'
 import { match } from 'path-to-regexp'
 import * as qs from 'query-string'
 import store from 'store'
 import setReturnToPath from 'store/actions/setReturnToPath'
 import { getActionFromState } from '@react-navigation/native'
-import { navigationRef } from 'navigation/RootView/RootView'
+import { INITIAL_NAV_STATE, navigationRef } from 'navigation/RootView/RootView'
 
 export const prefixes = [
   'http://hylo.com',
@@ -22,10 +24,8 @@ export const prefixes = [
 // doesn't have a way to map multiple paths to the same
 // screen.
 export const routesConfig = {
-  // Doesn't require auth
-  '/noo/login/token':                                        'LoginByTokenHandler',
-  '/signup':                                                 'Signup',
-  // Requires auth
+  '/noo/login/token':                                        { screenPath: 'LoginByTokenHandler', noAuth: true },
+  '/signup':                                                 { screenPath: 'Signup', noAuth: true },
   '/groups/:slug/join/:accessCode':                          'JoinGroup',
   '/h/use-invitation':                                       'JoinGroup',
   '/':                                                       'Drawer/Tabs/Home Tab/Feed',
@@ -45,7 +45,7 @@ export const routesConfig = {
   '/messages':                                               'Drawer/Tabs/Messages Tab/Messages'
 }
 
-export const navigateToLinkingPath = (linkingPath) => {
+export const navigateToLinkingPath = async (linkingPath, authed) => {
   const state = getStateFromPath(linkingPath)
 
   if (!state) {
@@ -54,16 +54,15 @@ export const navigateToLinkingPath = (linkingPath) => {
   }
 
   const action = getActionFromState(state)
+  const noAuth = action.payload?.params?.noAuth
 
-  // NOTE: This will thrown an error in dev when navigating to a state object 
-  // with authed screens when not fully authed, it can be ignored.
-  // The path will still be used once auth'd, and non-auth screens will get navigated
-  // to.
-  
-  // TODO: Will get stuck on loading screen without something like this
-  // navigationRef.current?.dispatch(StackActions.pop(1))
-  navigationRef.current?.dispatch(action)
-  store.dispatch(setReturnToPath(null))
+  if (noAuth || authed) {
+    if (authed) {
+      await navigationRef.current?.dispatch(CommonActions.reset(INITIAL_NAV_STATE))
+    }
+    await navigationRef.current?.dispatch(action)
+    store.dispatch(setReturnToPath(null))
+  }
 }
 
 // Matches path to routes and returns a react-navigation screen path
@@ -75,12 +74,25 @@ export function matchRouteToScreenPath (incomingPathAndQuery, routes) {
     const pathMatch = match(pathMatcher)(incomingPath)
 
     if (pathMatch) {
-      const routeMatch = routes[pathMatcher]
+      const routeMatchWithOptions = routes[pathMatcher]
+      let routeMatch = routeMatchWithOptions
+      let options = {}
+
+      // Collecting custom route options if present
+      if (!isString(routeMatchWithOptions)) {
+        routeMatch = routeMatchWithOptions?.screenPath
+        options = reject('screenPath', routeMatchWithOptions)
+      }
+
+      const optionsQueryString = qs.stringify(options, {
+        encode: true,
+        strict: true
+      })
       const screenQueryString = qs.stringify(pathMatch.params, {
         encode: true,
         strict: true
       })
-      const screenAndIncomingQueryString = [screenQueryString, incomingQueryString]
+      const screenAndIncomingQueryString = [optionsQueryString, screenQueryString, incomingQueryString]
         .filter(Boolean)
         .join('&')
 
@@ -112,16 +124,12 @@ const subscribe = listener => {
 }
 
 const getStateFromPath = path => {
-  // TODO: Path should start with '/`,
-  // catch exception or correct if not
-  const matchedStatePath = matchRouteToScreenPath(path, routesConfig)
-  const statePath = matchedStatePath ?? ''
+  const statePath = matchRouteToScreenPath(path, routesConfig)
 
-  return getStateFromPathDefault(statePath)
+  return getStateFromPathDefault(statePath ?? '')
 }
 
 // React Navigation linking config
-//
 
 export default {
   prefixes,

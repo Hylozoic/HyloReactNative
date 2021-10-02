@@ -34,10 +34,7 @@ export default function RootView ({
   // Handle returnToPath
   useEffect(() => {
     if (navIsReady && returnToPath) {
-      console.log('!!!! navigating to returnToPath and clearing it:', returnToPath)
-      // TODO: Make sure that auth path links don't get navigated to too early in the case
-      // if (fullyAuthorized || returnToPath is in non-auth paths list ((create in custom linking file)
-      navigateToLinkingPath(returnToPath)
+      navigateToLinkingPath(returnToPath, fullyAuthorized)
     }
   }, [navIsReady, fullyAuthorized, returnToPath])
 
