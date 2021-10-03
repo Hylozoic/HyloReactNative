@@ -53,7 +53,7 @@ export default class ImagePicker extends Component {
   render () {
     let { children, style, iconStyle, disabled } = this.props
     const { pending } = this.state
-    const MenuElement = disabled ? View : PopupMenuButton
+    const MenuElement = (disabled || pending) ? View : PopupMenuButton
     const imagePickerOptions = [
       ['Choose from libary', this.showPicker],
       ['Take photo', this.showPickerCamera]

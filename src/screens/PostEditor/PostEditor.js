@@ -32,14 +32,12 @@ import ProjectMembersSummary from 'components/ProjectMembersSummary'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 import Icon from 'components/Icon'
 import FileSelector, { showFilePicker } from './FileSelector'
-import { showImagePicker, showImagePickerCamera } from 'components/ImagePicker/ImagePicker'
 import DatePicker from 'components/DatePicker'
 import ImageSelector from './ImageSelector'
 import InlineEditor, { toHtml } from 'components/InlineEditor'
 import ErrorBubble from 'components/ErrorBubble'
 import styles from './PostEditor.styles'
 import ItemChooserItemRow from 'screens/ItemChooser/ItemChooserItemRow'
-import PopupMenuButton from 'components/PopupMenuButton/PopupMenuButton.ios'
 
 export default class PostEditor extends React.Component {
   constructor (props) {
@@ -345,27 +343,11 @@ export default class PostEditor extends React.Component {
     })
   }
 
-  showImagePicker = (imagePickerFunc = showImagePicker) => {
-    this.setState({ imagePickerPending: true })
-    imagePickerFunc({
-      selectionLimit: 10,
-      upload: this.props.upload,
-      type: 'post',
-      id: get('post.id', this.props),
-      onChoice: this.addImage,
-      onError: this.showAlert,
-      onCancel: () => this.setState({ imagePickerPending: false }),
-      onComplete: () => this.setState({ imagePickerPending: false })
-    })
-  }
-  
-  showImagePickerCamera = () => this.showImagePicker(showImagePickerCamera)
-
   render () {
     const { currentGroup, canModerate, post, pendingDetailsText } = this.props
     const {
       fileUrls, imageUrls, isSaving, topics, title, detailsText, type,
-      filePickerPending, imagePickerPending, announcementEnabled, detailsFocused,
+      filePickerPending, announcementEnabled, detailsFocused,
       titleLengthError, members, groups, startTime, endTime, location,
       locationObject
     } = this.state
@@ -375,12 +357,11 @@ export default class PostEditor extends React.Component {
       post,
       canModerate,
       filePickerPending,
-      imagePickerPending,
       announcementEnabled,
       toggleAnnoucement: this.toggleAnnoucement,
-      showImagePicker: this.showImagePicker,
-      showImagePickerCamera: this.showImagePickerCamera,
       showFilePicker: this.showFilePicker,
+      addImage: this.addImage,
+      showAlert: this.showAlert
     }
     const isProject = type == 'project'
 
@@ -597,21 +578,23 @@ export function TypeSelector (props) {
 }
 
 export function Toolbar ({
-  post, canModerate, filePickerPending, imagePickerPending, announcementEnabled,
-  toggleAnnoucement, showFilePicker, showImagePicker, showImagePickerCamera
+  post, canModerate, filePickerPending, announcementEnabled,
+  toggleAnnoucement, showFilePicker, addImage, showAlert
 }) {
-  const imagePickerOptions = [
-    ['Choose from libary', showImagePicker],
-    ['Take photo', showImagePickerCamera]
-  ]
 
   return (
     <View style={styles.bottomBar}>
       <View style={styles.bottomBarIcons}>
-        <TouchableOpacity onPress={showFilePicker}><Icon name={filePickerPending ? 'Clock' : 'Paperclip'} style={styles.bottomBarIcon} /></TouchableOpacity>
-        <PopupMenuButton actions={imagePickerOptions}>
-          <Icon name={imagePickerPending ? 'Clock' : 'AddImage'} style={styles.bottomBarIcon} />
-        </PopupMenuButton>
+        <TouchableOpacity onPress={showFilePicker}>
+          <Icon name={filePickerPending ? 'Clock' : 'Paperclip'} style={styles.bottomBarIcon} />
+        </TouchableOpacity>
+        <ImagePicker
+          iconStyle={styles.bottomBarIcon}
+          type='post'
+          id={get('post.id', post)}
+          selectionLimit={10}
+          onChoice={addImage}
+          onError={showAlert} />
         {isEmpty(post) && canModerate && <TouchableOpacity onPress={toggleAnnoucement}><Icon name='Announcement' style={styles.annoucementIcon} color={announcementEnabled ? 'caribbeanGreen' : 'rhino30'} /></TouchableOpacity>}
       </View>
     </View>
