@@ -97,9 +97,10 @@ exports[`PostEditor renders a new editor correctly 1`] = `
     </View>
   </ScrollView>
   <Toolbar
+    addImage={[Function]}
     announcementEnabled={false}
+    showAlert={[Function]}
     showFilePicker={[Function]}
-    showImagePicker={[Function]}
     toggleAnnoucement={[Function]}
   />
 </KeyboardFriendlyView>
@@ -746,6 +747,14 @@ exports[`PostEditor renders correctly while saving 1`] = `
                               accessible={true}
                               collapsable={false}
                               focusable={true}
+                              hitSlop={
+                                Object {
+                                  "bottom": 5,
+                                  "left": 5,
+                                  "right": 5,
+                                  "top": 5,
+                                }
+                              }
                               nativeID="animatedComponent"
                               onClick={[Function]}
                               onResponderGrant={[Function]}
@@ -1428,7 +1437,17 @@ exports[`PostEditor renders correctly while saving 2`] = `
                             </View>
                             <View
                               accessible={true}
+                              collapsable={false}
                               focusable={true}
+                              hitSlop={
+                                Object {
+                                  "bottom": 5,
+                                  "left": 5,
+                                  "right": 5,
+                                  "top": 5,
+                                }
+                              }
+                              nativeID="animatedComponent"
                               onClick={[Function]}
                               onResponderGrant={[Function]}
                               onResponderMove={[Function]}
@@ -1574,6 +1593,7 @@ exports[`PostEditor renders with a post 1`] = `
     </View>
   </ScrollView>
   <Toolbar
+    addImage={[Function]}
     announcementEnabled={false}
     post={
       Object {
@@ -1586,8 +1606,8 @@ exports[`PostEditor renders with a post 1`] = `
         ],
       }
     }
+    showAlert={[Function]}
     showFilePicker={[Function]}
-    showImagePicker={[Function]}
     toggleAnnoucement={[Function]}
   />
 </KeyboardFriendlyView>

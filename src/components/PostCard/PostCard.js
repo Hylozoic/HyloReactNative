@@ -9,6 +9,7 @@ import PostGroups from './PostGroups'
 import samplePost from './samplePost'
 import { get } from 'lodash/fp'
 import { capeCod10 } from 'style/colors'
+import Files from 'components/Files'
 import { shape, any, object, string, func, array, bool } from 'prop-types'
 
 export default class PostCard extends React.PureComponent {
@@ -48,6 +49,7 @@ export default class PostCard extends React.PureComponent {
       hideDetails,
       hideMenu,
       imageUrls,
+      fileUrls,
       isPinned,
       post,
       respondToEvent,
@@ -89,6 +91,7 @@ export default class PostCard extends React.PureComponent {
           title={post.title}
           type={post.type}
         />
+        <Files urls={fileUrls} />
         <PostGroups
           style={styles.groups}
           shouldShowGroups={shouldShowGroups}

@@ -5,7 +5,6 @@ import {
   Text,
   TouchableOpacity
 } from 'react-native'
-import SafeAreaView from 'react-native-safe-area-view'
 import Avatar from 'components/Avatar'
 import Icon from 'components/Icon'
 import confirmDiscardChanges from 'util/confirmDiscardChanges'
@@ -81,34 +80,32 @@ export default class NewMessage extends React.Component {
     const emptyParticipantsList = participants.length === 0
 
     return (
-      <SafeAreaView style={{ flex: 1 }}>
-        <KeyboardFriendlyView style={styles.container}>
-          <ScrollView>
-            <TouchableOpacity onPress={() => this.openParticipantChooser()} style={styles.participants}>
-              {participants.map((participant, index) =>
-                <Participant
-                  participant={participant}
-                  onPress={this.handleRemoveParticipant}
-                  key={index}
-                />)}
-            </TouchableOpacity>
-            <View style={styles.addParticipantButtonWrapper}>
-              <Button
-                text='Add Participant'
-                style={styles.addParticipantButton}
-                onPress={() => this.openParticipantChooser()}
-              />
-            </View>
-          </ScrollView>
-          <MessageInput
-            style={styles.messageInput}
-            multiline
-            onSubmit={this.createMessage}
-            placeholder='Type your message here'
-            emptyParticipants={emptyParticipantsList}
-          />
-        </KeyboardFriendlyView>
-      </SafeAreaView>
+      <KeyboardFriendlyView style={styles.container}>
+        <ScrollView>
+          <TouchableOpacity onPress={() => this.openParticipantChooser()} style={styles.participants}>
+            {participants.map((participant, index) =>
+              <Participant
+                participant={participant}
+                onPress={this.handleRemoveParticipant}
+                key={index}
+              />)}
+          </TouchableOpacity>
+          <View style={styles.addParticipantButtonWrapper}>
+            <Button
+              text='Add Participant'
+              style={styles.addParticipantButton}
+              onPress={() => this.openParticipantChooser()}
+            />
+          </View>
+        </ScrollView>
+        <MessageInput
+          style={styles.messageInput}
+          multiline
+          onSubmit={this.createMessage}
+          placeholder='Type your message here'
+          emptyParticipants={emptyParticipantsList}
+        />
+      </KeyboardFriendlyView>
     )
   }
 }

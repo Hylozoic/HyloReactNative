@@ -331,9 +331,9 @@ export default class PostEditor extends React.Component {
     })
   }
 
-  showFilePicker = () => {
+  showFilePicker = async () => {
     this.setState({ filePickerPending: true })
-    showFilePicker({
+    await showFilePicker({
       upload: this.props.upload,
       type: 'post',
       id: get('post.id', this.props),
@@ -377,7 +377,6 @@ export default class PostEditor extends React.Component {
         >
           <View style={styles.scrollContent}>
             <View style={[styles.typeSelector.row, styles.section, { marginTop: -3 }]}>
-              {/* <Text style={styles.sectionLabel}>What are you posting today?</Text> */}
               <TypeSelector value={type} onValueChange={this.handleTypeOnChange} disabled={isSaving} />
             </View>
             <Text style={styles.sectionLabel}>Title</Text>
@@ -470,6 +469,7 @@ export default class PostEditor extends React.Component {
                 />
               </>
             )}
+
             {canHaveLocation && (
               <TouchableOpacity
                 style={[
@@ -532,11 +532,9 @@ export default class PostEditor extends React.Component {
                 />
               </View>
             )}
-
-            {detailsFocused && <Toolbar {...toolbarProps} />}
           </View>
         </ScrollView>
-        {!detailsFocused && <Toolbar {...toolbarProps} />}
+        <Toolbar {...toolbarProps} />
       </KeyboardFriendlyView>
     )
   }

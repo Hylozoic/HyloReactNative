@@ -7,7 +7,8 @@ import {
   makeGetPostCreator,
   makeGetPostTopics,
   makeGetPostImageUrls,
-  makeGetPostIsPinned
+  makeGetPostIsPinned,
+  makeGetPostFileUrls
 } from './PostRow.store'
 
 export const makeMapStateToProps = () => {
@@ -17,6 +18,7 @@ export const makeMapStateToProps = () => {
   const getPostCreator = makeGetPostCreator()
   const getPostTopics = makeGetPostTopics()
   const getPostImageUrls = makeGetPostImageUrls()
+  const getPostFileUrls = makeGetPostFileUrls()
   const getPostIsPinned = makeGetPostIsPinned()
 
   const mapStateToProps = (state, props) => {
@@ -27,6 +29,7 @@ export const makeMapStateToProps = () => {
       groups: post && getPostGroups(state, { id: props.postId }),
       creator: post && getPostCreator(state, { id: props.postId }),
       imageUrls: post && getPostImageUrls(state, { id: props.postId }),
+      fileUrls: post && getPostFileUrls(state, { id: props.postId }),
       topics: post && getPostTopics(state, { id: props.postId }),
       isPinned: post && getPostIsPinned(state, { id: props.postId, groupId: props.groupId })
     }

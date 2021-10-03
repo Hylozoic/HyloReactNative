@@ -55,7 +55,7 @@ export default class ImagePicker extends Component {
     const { pending } = this.state
     const MenuElement = (disabled || pending) ? View : PopupMenuButton
     const imagePickerOptions = [
-      ['Choose from libary', this.showPicker],
+      ['Choose from library', this.showPicker],
       ['Take photo', this.showPickerCamera]
     ]
 
@@ -111,7 +111,7 @@ export async function showImagePicker ({
               name: asset.fileName,
               type: asset.type
             }
-            const { payload, error} = await upload(type, id, file)
+            const { payload, error } = await upload(type, id, file)
 
             if (error) {
               onError && onError(payload.message)

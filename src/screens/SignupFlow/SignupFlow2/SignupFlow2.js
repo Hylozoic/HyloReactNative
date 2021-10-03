@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, Image, Text } from 'react-native'
-import SafeAreaView from 'react-native-safe-area-view'
+import { SafeAreaView } from 'react-native-safe-area-context'
 import ImagePicker from 'components/ImagePicker'
 import Button from 'components/Button'
 import Icon from 'components/Icon'
@@ -42,6 +42,7 @@ export default class SignupFlow2 extends React.Component {
           <ImagePicker
             title='Upload a Photo'
             type='userAvatar'
+            cameraType='front'
             id={currentUser.id}
             onChoice={choice => this.onChoice(choice)}
             onPendingChange={pending => this.setState({ imagePickerPending: pending })}

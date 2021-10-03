@@ -1,46 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Footer matches the last snapshot without saveChanges 1`] = `
-<View>
-  <Button
-    disabled={true}
-    text="Save Changes"
-  />
-  <TouchableOpacity
-    onPress={[Function]}
-  >
-    <Text>
-      Cancel
-    </Text>
-  </TouchableOpacity>
-  <Button
-    onPress={[Function]}
-    text="Logout"
-  />
-</View>
-`;
-
-exports[`Footer matches the last snapshot without saveChanges 2`] = `
-<View>
-  <Button
-    disabled={false}
-    onPress={[Function]}
-    text="Save Changes"
-  />
-  <TouchableOpacity
-    onPress={[Function]}
-  >
-    <Text>
-      Cancel
-    </Text>
-  </TouchableOpacity>
-  <Button
-    onPress={[Function]}
-    text="Logout"
-  />
-</View>
-`;
-
 exports[`SocialAccounts matches the last snapshot 1`] = `
 <View>
   <Text>
@@ -155,7 +114,9 @@ Array [
 `;
 
 exports[`UserSettings matches snapshot with state set 1`] = `
-<SafeAreaView>
+<RCTSafeAreaView
+  emulateUnlessSupported={true}
+>
   <View
     onLayout={[Function]}
   >
@@ -399,51 +360,15 @@ exports[`UserSettings matches snapshot with state set 1`] = `
               </View>
             </View>
           </View>
-          <View
-            accessible={true}
-            focusable={true}
-            onClick={[Function]}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
-          >
-            <Text>
-              Cancel
-            </Text>
-          </View>
-          <View>
-            <View
-              accessible={true}
-              focusable={true}
-              onClick={[Function]}
-              onResponderGrant={[Function]}
-              onResponderMove={[Function]}
-              onResponderRelease={[Function]}
-              onResponderTerminate={[Function]}
-              onResponderTerminationRequest={[Function]}
-              onStartShouldSetResponder={[Function]}
-            >
-              <View>
-                <View>
-                  <Text>
-                    Logout
-                  </Text>
-                </View>
-              </View>
-            </View>
-          </View>
         </View>
       </View>
     </RCTScrollView>
   </View>
-</SafeAreaView>
+</RCTSafeAreaView>
 `;
 
 exports[`UserSettings matches the last snapshot 1`] = `
-<SafeAreaViewMock>
+<ForwardRef(SafeAreaView)>
   <KeyboardFriendlyView>
     <ScrollView
       contentContainerStyle={
@@ -514,14 +439,16 @@ exports[`UserSettings matches the last snapshot 1`] = `
           text="Notification Settings"
         />
       </View>
-      <Footer
-        cancel={[Function]}
-        logout={[Function]}
-        saveChanges={false}
-      />
+      <View>
+        <Button
+          disabled={true}
+          onPress={false}
+          text="Save Changes"
+        />
+      </View>
     </ScrollView>
   </KeyboardFriendlyView>
-</SafeAreaViewMock>
+</ForwardRef(SafeAreaView)>
 `;
 
 exports[`UserSettings updateField sets the state 1`] = `

@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Text, View, TextInput } from 'react-native'
-import SafeAreaView from 'react-native-safe-area-view'
 import { get } from 'lodash/fp'
 import ErrorBubble from 'components/ErrorBubble'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
@@ -47,7 +46,7 @@ export default function CreateGroupUrl ({ navigation }) {
   }
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <KeyboardFriendlyView>
         <View style={styles.header}>
           <Text style={styles.heading}>Choose an address for your group</Text>
@@ -72,7 +71,7 @@ export default function CreateGroupUrl ({ navigation }) {
           <Button text='Continue' onPress={checkAndSubmit} style={styles.button} disabled={!!fetchUrlPending} />
         </View>
       </KeyboardFriendlyView>
-    </SafeAreaView>
+    </View>
   )
 }
 

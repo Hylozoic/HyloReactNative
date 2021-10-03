@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   Image
 } from 'react-native'
-import SafeAreaView from 'react-native-safe-area-view'
+import { SafeAreaView } from 'react-native-safe-area-context'
 import { isIOS } from 'util/platform'
 import validator from 'validator'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
@@ -83,7 +83,7 @@ export default class Login extends React.Component {
     const { ssoError, emailIsValid, isConnected } = this.state
 
     return (
-      <SafeAreaView>
+      <SafeAreaView style={{ flex: 1 }}>
         <ScrollView contentContainerStyle={styles.login} style={styles.container}>
           {ssoError && <Text style={styles.errorBanner}>{ssoError}</Text>}
           {/* TODO: Bring back online status message / toast */}

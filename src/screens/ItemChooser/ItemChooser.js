@@ -6,7 +6,6 @@ import {
   View,
   TouchableOpacity
 } from 'react-native'
-import SafeAreaView from 'react-native-safe-area-view'
 import { isEqual, isFunction, debounce } from 'lodash/fp'
 import { ModalHeader } from 'navigation/headers'
 import SearchBar from 'components/SearchBar'
@@ -207,7 +206,7 @@ export default class ItemChooser extends React.Component {
     const sections = this.setupItemSections(suggestedItems)
 
     return (
-      <SafeAreaView style={style}>
+      <View style={style}>
         <ItemChooserListHeader
           {...this.props}
           autoFocus
@@ -225,7 +224,7 @@ export default class ItemChooser extends React.Component {
           stickySectionHeadersEnabled
           keyboardShouldPersistTaps='handled'
         />
-      </SafeAreaView>
+      </View>
     )
   }
 }

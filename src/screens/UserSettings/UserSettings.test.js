@@ -2,7 +2,7 @@ import { Alert } from 'react-native'
 import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import ReactTestRenderer from 'react-test-renderer'
-import UserSettings, { SocialAccounts, SocialControl, Footer } from './UserSettings'
+import UserSettings, { SocialAccounts, SocialControl } from './UserSettings'
 import { omit } from 'lodash/fp'
 import { LoginManager, AccessToken } from 'react-native-fbsdk-next'
 import Toast from 'react-native-root-toast'
@@ -274,18 +274,7 @@ describe('UserSettings', () => {
       Alert.alert = origAlert
     })
   })
-
-  describe('cancel', () => {
-    it('calls confirmLeave, passing in cancel', () => {
-      const cancel = () => {}
-      const confirmLeave = jest.fn(fn => fn())
-      const instance = ReactTestRenderer.create(<UserSettings cancel={cancel} />).root.instance
-      instance.confirmLeave = confirmLeave
-      instance.cancel()
-      expect(confirmLeave).toHaveBeenCalledWith(cancel)
-    })
-  })
-
+  
   describe('loginWithFacebook', () => {
     describe('when cancelled', () => {
       beforeEach(() => {
@@ -454,28 +443,5 @@ describe('SocialControl', () => {
       expect(props.unlinkAccount).toHaveBeenCalledWith(props.provider)
       expect(props.onChange).toHaveBeenCalledWith(false)
     })
-  })
-})
-
-describe('Footer', () => {
-  const props = {
-    cancel: () => {},
-    logout: () => {}
-  }
-
-  it('matches the last snapshot without saveChanges', () => {
-    const renderer = new ReactShallowRenderer()
-    renderer.render(<Footer {...props} />)
-    const actual = renderer.getRenderOutput()
-
-    expect(actual).toMatchSnapshot()
-  })
-
-  it('matches the last snapshot without saveChanges', () => {
-    const renderer = new ReactShallowRenderer()
-    renderer.render(<Footer {...props} saveChanges={() => {}} />)
-    const actual = renderer.getRenderOutput()
-
-    expect(actual).toMatchSnapshot()
   })
 })

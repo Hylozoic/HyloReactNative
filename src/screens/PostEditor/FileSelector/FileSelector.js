@@ -2,7 +2,7 @@ import React from 'react'
 import PopupMenuButton from 'components/PopupMenuButton'
 import { Text, View } from 'react-native'
 import Icon from 'components/Icon'
-import { DocumentPicker, DocumentPickerUtil } from 'react-native-document-picker'
+import DocumentPicker from 'react-native-document-picker'
 import styles from './FileSelector.styles'
 import { cleanName } from 'store/models/Attachment'
 
@@ -15,29 +15,49 @@ export default function FileSelector (props) {
   )
 }
 
-export function showFilePicker ({ upload, type, id, onAdd, onError, onComplete }) {
-  DocumentPicker.show({
-    filetype: [DocumentPickerUtil.allFiles()]
-  }, (err, result) => {
-    if (err) {
-      return onComplete && onComplete(err.message)
-    }
+export async function showFilePicker ({
+  upload, type, id, onAdd, onError, onCancel, onComplete,
+  allowMultiSelection = true
+}) {
+  try {
+    const documents = await DocumentPicker.pick({
+      type: [DocumentPicker.types.allFiles],
+      allowMultiSelection
+    })
+    let fileUploaders = []
 
-    const file = {
-      uri: result.uri,
-      name: result.fileName,
-      type: result.type
+    documents.forEach(document => {
+      fileUploaders = [
+        ...fileUploaders,
+        (async () => {
+          const file = {
+            uri: document.uri,
+            name: document.name,
+            type: document.type
+          }
+          const { payload, error } = await upload(type, id, file)
+
+          if (error) {
+            onError && onError(payload.message)
+          } else {
+            onAdd && onAdd({ local: document.uri, remote: payload.url })
+          }
+        })()
+      ]
+    })
+
+    const uploadedFiles = await Promise.all(fileUploaders)
+
+    onComplete && onComplete(uploadedFiles)
+  } catch (error) {
+    console.log('!!!!! error:', error)
+    // TODO: Always onComplete?
+    if (DocumentPicker.isCancel(error)) {
+      onCancel && onCancel()
+    } else {
+      onComplete && onComplete(error.message)
     }
-    return upload(type, id, file)
-      .then(({ payload: { url, message }, error }) => {
-        onComplete && onComplete()
-        if (error) {
-          return onError && onError(message)
-        } else {
-          onAdd({ local: result.uri, remote: url })
-        }
-      })
-  })
+  }
 }
 
 function renderFileButton (url, buttonIndex, onRemove) {

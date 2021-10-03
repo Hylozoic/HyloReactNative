@@ -1,6 +1,5 @@
 import React from 'react'
 import { FlatList, Text, TouchableOpacity } from 'react-native'
-import SafeAreaView from 'react-native-safe-area-view'
 import { throttle, debounce } from 'lodash'
 import { get } from 'lodash/fp'
 import Loading from 'components/Loading'
@@ -152,41 +151,39 @@ export default class Thread extends React.Component {
       : `${newMessages} NEW MESSAGE${newMessages > 1 ? 'S' : ''}`
 
     return (
-      <SafeAreaView style={{flex: 1}}>
-        <KeyboardFriendlyView style={styles.container}>
-          {pending && <Loading />}
-          <FlatList
-            style={styles.messageList}
-            data={messages}
-            inverted
-            keyExtractor={item => item.id}
-            onEndReached={() => this.fetchMore()}
-            onEndReachedThreshold={0.3}
-            onScroll={this.scrollHandler}
-            ref={this.messageListRef}
-            refreshing={!!pending}
-            renderItem={this.renderItem}
+      <KeyboardFriendlyView style={styles.container}>
+        {pending && <Loading />}
+        <FlatList
+          style={styles.messageList}
+          data={messages}
+          inverted
+          keyExtractor={item => item.id}
+          onEndReached={() => this.fetchMore()}
+          onEndReachedThreshold={0.3}
+          onScroll={this.scrollHandler}
+          ref={this.messageListRef}
+          refreshing={!!pending}
+          renderItem={this.renderItem}
+        />
+        <MessageInput
+          blurOnSubmit={false}
+          multiline
+          onSubmit={this.createMessage}
+          sendIsTyping={sendIsTyping}
+          placeholder='Write something...'
+        />
+        <PeopleTyping />
+        {showNotificationOverlay && (
+          <NotificationOverlay
+            position='bottom'
+            type={isConnected ? 'info' : 'error'}
+            permanent={!isConnected}
+            message={overlayMessage}
+            onPress={this.scrollToBottom}
           />
-          <MessageInput
-            blurOnSubmit={false}
-            multiline
-            onSubmit={this.createMessage}
-            sendIsTyping={sendIsTyping}
-            placeholder='Write something...'
-          />
-          <PeopleTyping />
-          {showNotificationOverlay && (
-            <NotificationOverlay
-              position='bottom'
-              type={isConnected ? 'info' : 'error'}
-              permanent={!isConnected}
-              message={overlayMessage}
-              onPress={this.scrollToBottom}
-            />
-          )}
-          <SocketSubscriber type='post' id={id} />
-        </KeyboardFriendlyView>
-      </SafeAreaView>
+        )}
+        <SocketSubscriber type='post' id={id} />
+      </KeyboardFriendlyView>
     )
   }
 }

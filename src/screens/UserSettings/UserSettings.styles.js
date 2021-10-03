@@ -86,7 +86,7 @@ export default {
     width: 170,
     height: 43,
     fontSize: 16,
-    marginBottom: 5,
+    marginBottom: 30,
     disabledBackgroundColor: white60onCaribbeanGreen
   },
   cancel: {

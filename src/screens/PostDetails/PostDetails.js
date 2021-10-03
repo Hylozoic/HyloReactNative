@@ -1,18 +1,18 @@
 /* eslint-disable camelcase */
 import React from 'react'
-import { Linking, View, Text, TouchableOpacity, Alert } from 'react-native'
-import SafeAreaView from 'react-native-safe-area-view'
+import { View, Text, TouchableOpacity, Alert } from 'react-native'
+import { SafeAreaView } from 'react-native-safe-area-context'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { KeyboardAccessoryView } from '@flyerhq/react-native-keyboard-accessory-view'
 import { get, isEmpty, find } from 'lodash/fp'
 import { isIOS } from 'util/platform'
 import useGroupSelect from 'navigation/useSelectGroup'
-import { FileLabel } from 'screens/PostEditor/FileSelector'
 import SocketSubscriber from 'components/SocketSubscriber'
 import Comments from 'components/Comments'
 import PostBody from 'components/PostCard/PostBody'
 import PostGroups from 'components/PostCard/PostGroups'
 import PostImage from 'components/PostCard/PostImage'
+import Files from 'components/Files'
 import PostFooter from 'components/PostCard/PostFooter'
 import PostHeader from 'components/PostCard/PostHeader'
 import ProjectMembersSummary from 'components/ProjectMembersSummary'
@@ -44,7 +44,7 @@ export class PostDetails extends React.Component {
 
   setHeader = () => {
     const { navigation, route, currentGroup } = this.props
-    if (route.name == 'Post Details - Modal') return
+    if (route?.name == 'Post Details - Modal') return
     navigation.setOptions({ title: currentGroup?.name  })
   }
 
@@ -139,7 +139,7 @@ export class PostDetails extends React.Component {
 
     if (!post?.creator || !post?.title) return <LoadingScreen />
     
-    const isModal = this.props.route.name == 'Post Details - Modal'
+    const isModal = this.props.route?.name == 'Post Details - Modal'
 
     return (
       <SafeAreaView style={styles.container} edges={['right', 'left', 'top']}>
@@ -235,7 +235,7 @@ export function PostCardForDetails ({
         title={post.title}
         type={post.type}
       />
-      {!isEmpty(post.fileUrls) && <Files urls={post.fileUrls} />}
+      <Files urls={post.fileUrls} />
       {isProject && (
         <ProjectMembersSummary
           members={post.members}
@@ -281,21 +281,6 @@ export function PostCardForDetails ({
     </View>
   )
 }
-
-export function Files ({ urls }) {
-  return (
-    <View style={styles.files}>
-      {urls.map(url =>
-        <TouchableOpacity key={url} onPress={openUrlFn(url)}>
-          <FileLabel url={url} />
-        </TouchableOpacity>
-      )}
-    </View>
-  )
-}
-
-const openUrlFn = url => () =>
-  Linking.canOpenURL(url).then(ok => ok && Linking.openURL(url))
 
 export function JoinProjectButton ({ style, onPress, leaving }) {
   const text = leaving ? 'Leave Project' : 'Join Project'

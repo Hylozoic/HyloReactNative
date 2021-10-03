@@ -6,7 +6,8 @@ import {
   rhino30,
   capeCod40,
   white,
-  black
+  black,
+  capeCod05
 } from 'style/colors'
 
 const typeSelectorDefaults = {
@@ -216,8 +217,10 @@ export default {
     flexDirection: 'row',
     borderTopWidth: StyleSheet.hairlineWidth,
     borderTopColor: capeCod40,
-    backgroundColor: white,
-    padding: 8,
+    backgroundColor: capeCod05,
+    padding: isIOS ? 8 : 4,
+    paddingBottom: isIOS ? 30 : 4,
+    paddingLeft: isIOS ? 20 : 10,
     marginHorizontal: -16
   },
   bottomBarIcons: {
@@ -225,14 +228,12 @@ export default {
     flex: 1
   },
   bottomBarIcon: {
+    paddingRight: 5,
     fontSize: 46,
     color: rhino30
   },
   annoucementIcon: {
     fontSize: 46
-  },
-  search: {
-    marginTop: isIOS ? 20 : null
   },
   errorView: {
     marginTop: -18,

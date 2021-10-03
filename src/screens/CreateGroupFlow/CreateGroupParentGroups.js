@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Text, View, FlatList } from 'react-native'
-import SafeAreaView from 'react-native-safe-area-view'
 import Button from 'components/Button'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 import getMemberships from 'store/selectors/getMemberships'
@@ -40,7 +39,7 @@ export default function CreateGroupParentGroups ({ navigation }) {
   }
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <KeyboardFriendlyView>
         <Text style={styles.heading}>Is this group a member of other groups?</Text>
         <Text style={stepStyles.subHeading}>Please select below:</Text>
@@ -56,7 +55,7 @@ export default function CreateGroupParentGroups ({ navigation }) {
           <Button text='Continue' onPress={checkAndSubmit} style={styles.button} />
         </View>
       </KeyboardFriendlyView>
-    </SafeAreaView>
+    </View>
   )
 }
 

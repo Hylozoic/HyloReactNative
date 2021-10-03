@@ -328,8 +328,8 @@ PODS:
     - React-Core
   - react-native-date-picker (3.3.2):
     - React-Core
-  - react-native-document-picker (2.3.0):
-    - React
+  - react-native-document-picker (6.1.1):
+    - React-Core
   - react-native-fbsdk-next (4.3.0):
     - React-Core
     - react-native-fbsdk-next/Core (= 4.3.0)
@@ -360,7 +360,7 @@ PODS:
     - React-Core
   - react-native-restart (0.0.17):
     - React
-  - react-native-safe-area-context (3.3.0):
+  - react-native-safe-area-context (3.3.2):
     - React-Core
   - react-native-webview (9.4.0):
     - React
@@ -741,7 +741,7 @@ SPEC CHECKSUMS:
   React-jsinspector: 41e58e5b8e3e0bf061fdf725b03f2144014a8fb0
   react-native-background-timer: 17ea5e06803401a379ebf1f20505b793ac44d0fe
   react-native-date-picker: 96a07ca27a6225da8a3935324d85046028456b0f
-  react-native-document-picker: 8508bfda34be6c24a2cbecbe515b15108658c183
+  react-native-document-picker: b95a0f0a22fd37d56cea697f84bc3893b2141d15
   react-native-fbsdk-next: 19e974b071047b7ed1dad86a9dc3fe77dff76b8c
   react-native-flipper: 5626e75999bce12c90f587d4f8e2199afd4fe1f9
   react-native-image-picker: 92f51a85a62c2d829dcbd0dda5af99e6f988a113
@@ -750,7 +750,7 @@ SPEC CHECKSUMS:
   react-native-onesignal: f829833463ec574cad5e83d1a3e3eed607a3bc3c
   react-native-pager-view: 43f51f45f37ec9715f6c188e4af46ccdf79872e8
   react-native-restart: d19a0f8d053d065fe64cd2baebb6487111c77149
-  react-native-safe-area-context: 61c8c484a3a9e7d1fda19f7b1794b35bbfd2262a
+  react-native-safe-area-context: 584dc04881deb49474363f3be89e4ca0e854c057
   react-native-webview: cf5527893252b3b036eea024a1da6996f7344c74
   React-perflogger: fd28ee1f2b5b150b00043f0301d96bd417fdc339
   React-RCTActionSheet: 7f3fa0855c346aa5d7c60f9ced16e067db6d29fa

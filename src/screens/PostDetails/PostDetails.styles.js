@@ -37,10 +37,6 @@ export default {
     color: rhino60,
     fontFamily: 'Circular-Book'
   },
-  files: {
-    marginHorizontal: 18,
-    marginBottom: 18
-  },
   projectJoinButton: {
     backgroundColor: POST_TYPES.project.backgroundColor,
     color: POST_TYPES.project.primaryColor,

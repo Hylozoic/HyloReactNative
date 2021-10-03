@@ -80,6 +80,18 @@ export const makeGetPostImageUrls = () => {
   )
 }
 
+export const makeGetPostFileUrls = () => {
+  const selector = ormCreateSelector(
+    orm,
+    (state, props) => props.id,
+    ({ Post }, id) => Post.safeGet({ id }).files().orderBy(get('position')).toRefArray()
+  )
+  return createArrayRefEqualSelector(
+    selector,
+    arr => isEmpty(arr) ? emptyArray : arr.map(x => x.url)
+  )
+}
+
 export const makeGetPostIsPinned = () => {
   return ormCreateSelector(
     orm,

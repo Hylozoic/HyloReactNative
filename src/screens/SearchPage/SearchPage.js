@@ -1,6 +1,5 @@
 import React from 'react'
 import { View, Text, TextInput, FlatList, TouchableOpacity } from 'react-native'
-import SafeAreaView from 'react-native-safe-area-view'
 import Loading from 'components/Loading'
 import Avatar from 'components/Avatar'
 import styles from './SearchPage.styles'

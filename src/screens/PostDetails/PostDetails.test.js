@@ -72,11 +72,14 @@ const state = {
 
 describe('PostDetails', () => {
   it('renders correctly', () => {
-    const renderer = new ReactShallowRenderer()
-    renderer.render(<PostDetails {...props} />)
-    const actual = renderer.getRenderOutput()
-
-    expect(actual).toMatchSnapshot()
+    const renderer = TestRenderer.create(
+      <Provider store={createMockStore(state)}>
+        <MockedScreen>
+          {() => <PostDetails {...props} />}
+        </MockedScreen>
+      </Provider>
+    )
+    expect(renderer.toJSON()).toMatchSnapshot()
   })
 
   it('handleCreateComment success', async () => {
@@ -87,6 +90,7 @@ describe('PostDetails', () => {
         </MockedScreen>
       </Provider>
     )
+    console.log('!!!!!! here', renderer.toJSON())
     const instance = renderer.root.findByType(PostDetails).instance
     const commentText = 'some text [amention:0] #topic <some encoded stuff>'
     instance.setState({ commentText })

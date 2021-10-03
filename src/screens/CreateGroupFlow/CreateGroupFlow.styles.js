@@ -55,7 +55,7 @@ export default {
     color: white,
     fontSize: 18,
     fontWeight: 'bold',
-    marginVertical: 10
+    marginVertical: isIOS ? 10 : 1,
   },
   errorBubble: {
     marginTop: 8

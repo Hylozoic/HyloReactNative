@@ -52,9 +52,9 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     goToMembers: () => navigation.navigate('Project Members', { id, members: get('members', post) }),
     showMember: id => {
       if (route?.name === 'Post Details - Modal') {
-        navigation.navigate('Member - Modal', { id })
+        return navigation.navigate('Member - Modal', { id })
       } else {
-        navigation.navigate('Member', { id })
+        return navigation.navigate('Member', { id })
       }
     },
     showTopic: topicName => navigation.navigate('Topic Feed', { topicName }),

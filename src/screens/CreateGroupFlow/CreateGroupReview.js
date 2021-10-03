@@ -4,11 +4,8 @@ import {
   Text, View, TextInput, ScrollView, TouchableOpacity
 } from 'react-native'
 import Button from 'components/Button'
-// import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
-import SafeAreaView from 'react-native-safe-area-view'
 import ErrorBubble from 'components/ErrorBubble'
 import { accessibilityDescription, visibilityDescription } from 'store/models/Group'
-import Icon from 'components/Icon'
 import { white } from 'style/colors'
 import Avatar from 'components/Avatar'
 import { formatDomainWithUrl } from './util'
@@ -17,6 +14,7 @@ import {
   getNewGroupParentGroups, CREATE_GROUP
 } from './CreateGroupFlow.store'
 import styles from './CreateGroupFlow.styles'
+import { isIOS } from 'util/platform'
 
 export default function CreateGroupReview ({ navigation }) {
   const [error, setError] = useState(null)
@@ -52,8 +50,8 @@ export default function CreateGroupReview ({ navigation }) {
   }
 
   return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView>
+    <View style={styles.container}>
+      <ScrollView style={{ flex: 1 }}>
         <View style={styles.header}>
           <Text style={styles.heading}>Everything look good?</Text>
           <Text style={styles.description}>You can always come back and change your details at any time</Text>
@@ -131,12 +129,12 @@ export default function CreateGroupReview ({ navigation }) {
           <Button
             text="Let's Do This!"
             onPress={submit}
-            style={styles.button}
+            style={{ ...styles.button, marginTop: 20 }}
             disabled={!!createGroupPending}
           />
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   )
 }
 
@@ -163,10 +161,8 @@ const stepStyles = {
     color: white,
     fontSize: 16,
     fontWeight: 'bold',
-    marginBottom: 25,
-    // HOLONIC TODO: Was only needed for multiline text inputs
-    //               in iOS (haven't tested in Android)
-    paddingTop: -5
+    padding: 0,
+    paddingBottom: 25
   },
   itemHeader: {
     flexDirection: 'row',

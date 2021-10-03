@@ -268,46 +268,7 @@ describe('PostEditor', () => {
       expect(instance.addFile).toHaveBeenCalledWith({ local: 'file:///somewhere/foo.pdf', remote: 'https:/storage.hylo.com/foo.pdf' })
     // })
   })
-
-  it('showImagePicker', async () => {
-    const upload = jest.fn(() => Promise.resolve({
-      payload: {
-        url: 'https:/storage.hylo.com/foo.pdf'
-      }
-    }))
-    const renderer = TestRenderer.create(
-      <Provider store={createMockStore()}>
-        <MockedScreen>
-          {() => <PostEditor
-            isFocused
-            upload={upload}
-            fileUrls={[]}
-            fetchPost={jest.fn()}
-            navigation={navigation}
-            route={route}
-            imageUrls={['http://foo.com/foo.png']}
-            post={mockPost}
-          />}
-        </MockedScreen>
-      </Provider>
-    )
-    const instance = renderer.root.findByType(PostEditor).instance
-    jest.spyOn(instance, 'addImage')
-    await act(async () => {
-      await instance.showImagePicker()
-    })
-    expect(instance.state.imagePickerPending).toBeTruthy()
-    await act(async () => {
-      await RNImagePicker.finishImagePicker({
-        uri: 'file:///tmp/bar.jpg',
-        fileName: 'bar.jpg'
-      })
-    })
-    expect(instance.state.imagePickerPending).toBeFalsy()
-    expect(upload).toHaveBeenCalled()
-    expect(instance.addImage).toHaveBeenCalledWith({ local: 'file:///tmp/bar.jpg', remote: 'https:/storage.hylo.com/foo.pdf' })
-  })
-
+  
   it('has file methods', async () => {
     const renderer = TestRenderer.create(
       <Provider store={createMockStore()}>

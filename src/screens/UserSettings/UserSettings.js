@@ -1,7 +1,7 @@
 import React from 'react'
-import { SafeAreaView, View, Text, ScrollView, TouchableOpacity } from 'react-native'
+import { View, Text, ScrollView, TouchableOpacity } from 'react-native'
 import { LoginManager, AccessToken } from 'react-native-fbsdk-next'
-import { get, any, values, isNil } from 'lodash/fp'
+import { any, values, isNil } from 'lodash/fp'
 import validator from 'validator'
 import prompt from 'react-native-prompt-android'
 import { validateUser } from 'hylo-utils/validators'
@@ -167,7 +167,7 @@ export default class UserSettings extends React.Component {
     if (!currentUser) return <Loading />
 
     return (
-      <SafeAreaView style={{ flex: 1 }}>
+      <View style={{ flex: 1 }}>
         <KeyboardFriendlyView style={styles.container}>
           <ScrollView contentContainerStyle={styles.scrollContainer}>
             <SettingControl
@@ -237,7 +237,7 @@ export default class UserSettings extends React.Component {
             </View>
           </ScrollView>
         </KeyboardFriendlyView>
-      </SafeAreaView>
+      </View>
     )
   }
 }

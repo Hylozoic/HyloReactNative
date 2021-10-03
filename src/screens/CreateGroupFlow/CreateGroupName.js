@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Text, View, TextInput } from 'react-native'
-import SafeAreaView from 'react-native-safe-area-view'
+import { SafeAreaView } from 'react-native-safe-area-context'
 import Button from 'components/Button'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 import ErrorBubble from 'components/ErrorBubble'
@@ -39,7 +39,7 @@ export default function CreateGroupName ({ navigation }) {
   }
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <KeyboardFriendlyView>
         <View style={styles.header}>
           <Text style={styles.heading}>Let's get started!</Text>
@@ -64,6 +64,6 @@ export default function CreateGroupName ({ navigation }) {
           <Button text='Continue' onPress={checkAndSubmit} style={styles.button} />
         </View>
       </KeyboardFriendlyView>
-    </SafeAreaView>
+    </View>
   )
 }

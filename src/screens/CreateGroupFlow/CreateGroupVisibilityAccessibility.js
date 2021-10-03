@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Text, View } from 'react-native'
-import SafeAreaView from 'react-native-safe-area-view'
 import Button from 'components/Button'
 import RoundCheckbox from 'components/RoundCheckBox'
 import Icon from 'components/Icon'
@@ -40,7 +39,7 @@ export default function CreateGroupVisibilityAccessibility ({ navigation }) {
   }
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <KeyboardFriendlyView style={{ flex: 1 }}>
         {/* <View style={styles.header}>
           <Text style={styles.heading}>Visibility and Accessibility</Text>
@@ -65,7 +64,7 @@ export default function CreateGroupVisibilityAccessibility ({ navigation }) {
           <Button text='Continue' onPress={checkAndSubmit} style={styles.button} />
         </View>
       </KeyboardFriendlyView>
-    </SafeAreaView>
+    </View>
   )
 }
 
