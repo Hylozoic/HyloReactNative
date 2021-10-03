@@ -246,7 +246,9 @@ export class SendInvitesPage extends PureComponent {
 export function PendingInvitesPage ({ invites, expireInvitation, resendInvitation, reinviteAll }) {
   return (
     <ScrollView style={styles.pendingInvitesList}>
-      <Button text='Resend All' onPress={reinviteAll} style={styles.resendAllButton} />
+      {!isEmpty(invites) && (
+        <Button text='Resend All' onPress={reinviteAll} style={styles.resendAllButton} />
+      )}
       {isEmpty(invites)
         ? <Text style={styles.emptyList}>No pending invites</Text>
         : invites.map((invite, i) =>
