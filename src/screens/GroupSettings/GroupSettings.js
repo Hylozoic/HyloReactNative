@@ -10,7 +10,6 @@ import defaultBanner from 'assets/default-user-banner.jpg'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 import styles from './GroupSettings.styles'
 import LocationPicker from 'screens/LocationPicker/LocationPicker'
-import { white } from 'style/colors'
 export default class GroupSettings extends React.Component {
   constructor (props) {
     super(props)
@@ -173,7 +172,6 @@ export class GroupBanner extends React.Component {
   render () {
     const { group: { id, avatarUrl, bannerUrl } } = this.props
     const { avatarPickerPending, bannerPickerPending, avatarLocalUri, bannerLocalUri } = this.state
-
     const avatarSource = avatarLocalUri
       ? { uri: avatarLocalUri }
       : avatarUrl && { uri: avatarUrl }

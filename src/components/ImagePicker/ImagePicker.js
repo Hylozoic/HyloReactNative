@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { TouchableOpacity } from 'react-native'
+import { View } from 'react-native'
 import Icon from 'components/Icon'
-import RNImagePicker from 'react-native-image-picker'
+import { launchImageLibrary, launchCamera } from 'react-native-image-picker'
+import PopupMenuButton from 'components/PopupMenuButton'
 
 /*
 Example usage:
@@ -17,6 +18,7 @@ Example usage:
 if you don't pass any children, icons of an image and a clock will be shown for
 non-pending and pending states respectively
 */
+
 export default class ImagePicker extends Component {
   state = { pending: false }
 
@@ -28,9 +30,22 @@ export default class ImagePicker extends Component {
 
   showPicker = () => {
     if (this.state.pending) return
+    
     this.setPending(true)
     showImagePicker({
       ...this.props,
+      onCancel: () => this.setPending(false),
+      onComplete: () => this.setPending(false)
+    })
+  }
+
+  showPickerCamera = () => {
+    if (this.state.pending) return
+
+    this.setPending(true)
+    showImagePickerCamera({
+      ...this.props,
+      onCancel: () => this.setPending(false),
       onComplete: () => this.setPending(false)
     })
   }
@@ -38,6 +53,11 @@ export default class ImagePicker extends Component {
   render () {
     let { children, style, iconStyle, disabled } = this.props
     const { pending } = this.state
+    const MenuElement = disabled ? View : PopupMenuButton
+    const imagePickerOptions = [
+      ['Choose from libary', this.showPicker],
+      ['Take photo', this.showPickerCamera]
+    ]
 
     if (!children) {
       children = pending
@@ -46,58 +66,65 @@ export default class ImagePicker extends Component {
     }
 
     return (
-      <TouchableOpacity
-        style={style}
-        onPress={() => !pending && this.showPicker()}
-        disabled={disabled}
-      >
+      <MenuElement actions={imagePickerOptions} style={style}>
         {children}
-      </TouchableOpacity>
+      </MenuElement>
     )
   }
 }
 
-export function showImagePicker ({
-  title = 'Choose an image',
+export async function showImagePickerCamera (params) {
+  return showImagePicker({ pickerFunc: launchCamera, ...params })
+}
+
+export async function showImagePicker ({
+  pickerFunc = launchImageLibrary,
   onChoice,
   onCancel,
   onError,
   onComplete,
   type,
   id = 'new',
-  upload
+  upload,
+  selectionLimit = 1
 }) {
   const pickerOptions = {
-    title,
-    // TODO: fix take photo option on ios, then remove this
-    takePhotoButtonTitle: null,
-    storageOptions: {
-      skipBackup: true,
-      path: 'images'
-    }
+    selectionLimit,
+    mediaType: 'photo'
   }
 
-  RNImagePicker.showImagePicker(pickerOptions, result => {
+  pickerFunc(pickerOptions, async result => {
     if (result.didCancel) {
       onCancel && onCancel()
     } else if (result.error) {
       onError && onError(result.error)
     } else {
-      const file = {
-        uri: result.uri,
-        name: result.fileName,
-        type: result.type
-      }
+      const { assets } = result
+      let fileUploaders = []
 
-      return upload(type, id, file)
-        .then(({ payload, error }) => {
-          if (error) {
-            onError && onError(payload.message)
-          } else {
-            onChoice({ local: result.uri, remote: payload.url })
-          }
-          onComplete && onComplete()
-        })
+      assets.forEach(asset => {
+        fileUploaders = [
+          ...fileUploaders,
+          (async () => {
+            const file = {
+              uri: asset.uri,
+              name: asset.fileName,
+              type: asset.type
+            }
+            const { payload, error} = await upload(type, id, file)
+
+            if (error) {
+              onError && onError(payload.message)
+            } else {
+              onChoice && onChoice({ local: asset.uri, remote: payload.url })
+            }
+          })()
+        ]
+      })
+
+      const uploadedFiles = await Promise.all(fileUploaders)
+
+      onComplete && onComplete(uploadedFiles)
     }
   })
 }

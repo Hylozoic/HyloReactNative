@@ -32,13 +32,14 @@ import ProjectMembersSummary from 'components/ProjectMembersSummary'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 import Icon from 'components/Icon'
 import FileSelector, { showFilePicker } from './FileSelector'
+import { showImagePicker, showImagePickerCamera } from 'components/ImagePicker/ImagePicker'
 import DatePicker from 'components/DatePicker'
-import { showImagePicker } from 'components/ImagePicker'
 import ImageSelector from './ImageSelector'
 import InlineEditor, { toHtml } from 'components/InlineEditor'
 import ErrorBubble from 'components/ErrorBubble'
 import styles from './PostEditor.styles'
 import ItemChooserItemRow from 'screens/ItemChooser/ItemChooserItemRow'
+import PopupMenuButton from 'components/PopupMenuButton/PopupMenuButton.ios'
 
 export default class PostEditor extends React.Component {
   constructor (props) {
@@ -339,13 +340,15 @@ export default class PostEditor extends React.Component {
       id: get('post.id', this.props),
       onAdd: this.addFile,
       onError: this.showAlert,
-      onComplete: () => this.setState({ filePickerPending: false })
+      onComplete: () => this.setState({ filePickerPending: false }),
+      onCancel: () => this.setState({ filePickerPending: false })
     })
   }
 
-  showImagePicker = () => {
+  showImagePicker = (imagePickerFunc = showImagePicker) => {
     this.setState({ imagePickerPending: true })
-    showImagePicker({
+    imagePickerFunc({
+      selectionLimit: 10,
       upload: this.props.upload,
       type: 'post',
       id: get('post.id', this.props),
@@ -355,14 +358,16 @@ export default class PostEditor extends React.Component {
       onComplete: () => this.setState({ imagePickerPending: false })
     })
   }
+  
+  showImagePickerCamera = () => this.showImagePicker(showImagePickerCamera)
 
   render () {
     const { currentGroup, canModerate, post, pendingDetailsText } = this.props
     const {
       fileUrls, imageUrls, isSaving, topics, title, detailsText, type,
-      filePickerPending, imagePickerPending, announcementEnabled,
-      detailsFocused, titleLengthError, members, groups,
-      startTime, endTime, location, locationObject
+      filePickerPending, imagePickerPending, announcementEnabled, detailsFocused,
+      titleLengthError, members, groups, startTime, endTime, location,
+      locationObject
     } = this.state
     const canHaveTimeframe = type !== 'discussion'
     const canHaveLocation = type !== 'discussion'
@@ -374,7 +379,8 @@ export default class PostEditor extends React.Component {
       announcementEnabled,
       toggleAnnoucement: this.toggleAnnoucement,
       showImagePicker: this.showImagePicker,
-      showFilePicker: this.showFilePicker
+      showImagePickerCamera: this.showImagePickerCamera,
+      showFilePicker: this.showFilePicker,
     }
     const isProject = type == 'project'
 
@@ -590,12 +596,22 @@ export function TypeSelector (props) {
   )
 }
 
-export function Toolbar ({ post, canModerate, filePickerPending, imagePickerPending, announcementEnabled, toggleAnnoucement, showFilePicker, showImagePicker }) {
+export function Toolbar ({
+  post, canModerate, filePickerPending, imagePickerPending, announcementEnabled,
+  toggleAnnoucement, showFilePicker, showImagePicker, showImagePickerCamera
+}) {
+  const imagePickerOptions = [
+    ['Choose from libary', showImagePicker],
+    ['Take photo', showImagePickerCamera]
+  ]
+
   return (
     <View style={styles.bottomBar}>
       <View style={styles.bottomBarIcons}>
         <TouchableOpacity onPress={showFilePicker}><Icon name={filePickerPending ? 'Clock' : 'Paperclip'} style={styles.bottomBarIcon} /></TouchableOpacity>
-        <TouchableOpacity onPress={showImagePicker}><Icon name={imagePickerPending ? 'Clock' : 'AddImage'} style={styles.bottomBarIcon} /></TouchableOpacity>
+        <PopupMenuButton actions={imagePickerOptions}>
+          <Icon name={imagePickerPending ? 'Clock' : 'AddImage'} style={styles.bottomBarIcon} />
+        </PopupMenuButton>
         {isEmpty(post) && canModerate && <TouchableOpacity onPress={toggleAnnoucement}><Icon name='Announcement' style={styles.annoucementIcon} color={announcementEnabled ? 'caribbeanGreen' : 'rhino30'} /></TouchableOpacity>}
       </View>
     </View>

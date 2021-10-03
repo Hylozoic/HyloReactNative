@@ -45,9 +45,8 @@ export default class SignupFlow2 extends React.Component {
             id={currentUser.id}
             onChoice={choice => this.onChoice(choice)}
             onPendingChange={pending => this.setState({ imagePickerPending: pending })}
-          >
-            {imagePickerChildren}
-          </ImagePicker>
+            children={imagePickerChildren}
+          /> 
           <View><Text style={styles.title}>Upload a Photo</Text></View>
         </View>
         <Button

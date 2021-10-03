@@ -91,6 +91,8 @@
 	<string>Allow access to your location for use in geo-coding notifications when using application</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Send photos to help resolve app issues</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Take photos to add to your posts</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Circular-Black.ttf</string>
