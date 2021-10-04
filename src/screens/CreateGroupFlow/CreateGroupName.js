@@ -21,13 +21,10 @@ export default function CreateGroupName ({ navigation }) {
   const groupData = useSelector(getGroupData)  
   const [error, setError] = useState()
   const [groupName, providedSetGroupName] = useState(groupData.name)
-
-
   const setGroupName = name => {
     setError()
     return providedSetGroupName(name)
   }
-
   const checkAndSubmit = () => {
     if (!groupName || groupName.length === 0) {
       setError('Please enter a group name')

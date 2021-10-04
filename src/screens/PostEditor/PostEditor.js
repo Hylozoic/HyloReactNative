@@ -10,7 +10,7 @@ import {
 import { get, uniq, uniqBy, isEmpty, capitalize } from 'lodash/fp'
 import moment from 'moment'
 import { validateTopicName } from 'hylo-utils/validators'
-import { rhino30, white } from 'style/colors'
+import { rhino30 } from 'style/colors'
 import { showToast, hideToast } from 'util/toast'
 import { MAX_TITLE_LENGTH } from './PostEditor.store'
 import RNPickerSelect from 'react-native-picker-select'
