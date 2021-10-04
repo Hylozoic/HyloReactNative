@@ -6,14 +6,13 @@ import {
   ScrollView,
   TouchableOpacity
 } from 'react-native'
+import { isEmpty, flow, values, filter, map } from 'lodash/fp'
 import { validateUser } from 'hylo-utils/validators'
 import validator from 'validator'
-import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 import SettingControl from 'components/SettingControl'
 import Button from 'components/Button'
+import LocationPicker from 'screens/LocationPicker/LocationPicker'
 import styles from './SignupFlow4.styles'
-// import { SkillCloud } from 'components/SkillEditor/SkillEditor'
-import { isEmpty, flow, values, filter, map } from 'lodash/fp'
 
 export default class SignupFlow4 extends React.Component {
   state = {
@@ -38,6 +37,21 @@ export default class SignupFlow4 extends React.Component {
     } else {
       setTimeout(() => this.controlRefs[fieldKey || key].current.makeEditable(), 50)
     }
+  }
+
+  showLocationPicker = locationText  => {
+    const { navigation, changeSetting } = this.props
+
+    LocationPicker({
+      navigation,
+      initialSearchTerm: locationText,
+      onPick: location => {
+        this.updateField('location', location?.fullText)
+        this.updateField('locationId', location?.id)
+        this.updateSetting('location', location?.fullText)
+        this.updateSetting('locationId', location?.id)
+      }
+    })
   }
 
   validate (key) {
@@ -90,67 +104,70 @@ export default class SignupFlow4 extends React.Component {
     const { errors } = this.state
 
     return (
-      <KeyboardFriendlyView style={styles.container}>
+      <View style={styles.container}>
         <ScrollView>
-          <Text style={styles.title}>Everything looking good?</Text>
-          <Text style={styles.subTitle}>
-            You can always come back and change your details at any time.
-          </Text>
-          {!isEmpty(avatarUrl) && <View style={styles.imageWrapper}>
-            <TouchableOpacity onPress={goToImage}>
-              <Image style={styles.image} source={{ uri: avatarUrl }} />
-            </TouchableOpacity>
-          </View>}
-          <SettingControl
-            ref={this.controlRefs.name}
-            label='Your Full Name'
-            value={name}
-            toggleEditable
-            error={errors.name}
-            onChange={value => this.updateField('name', value)}
-            onSubmitEditing={() => this.updateSetting('name', name)}
-          />
-          <SettingControl
-            ref={c => { this.controlRefs.email = c }}
-            label='Email Address'
-            value={email}
-            keyboardType='email-address'
-            autoCapitalize='none'
-            autoCorrect={false}
-            toggleEditable
-            error={errors.email}
-            onChange={value => this.updateField('email', value)}
-            onSubmitEditing={() => this.updateSetting('email', email)}
-          />
-          {showPasswordField && <SettingControl
-            ref={this.controlRefs.password}
-            label='Password'
-            value={password}
-            toggleSecureTextEntry
-            toggleEditable
-            error={errors.password}
-            onChange={value => this.updateField('password', value)}
-            onSubmitEditing={() => this.updateSetting('password', password)}
-                                />}
-          {showPasswordField && <SettingControl
-            ref={this.controlRefs.confirmPassword}
-            label='Confirm Password'
-            value={confirmPassword}
-            toggleSecureTextEntry
-            toggleEditable
-            error={errors.confirmPassword}
-            onChange={value => this.updateField('confirmPassword', value)}
-            onSubmitEditing={() => this.updateSetting('password', password, 'confirmPassword')}
-                                />}
-          <SettingControl
-            ref={this.controlRefs.location}
-            label='Location'
-            value={location}
-            toggleEditable
-            onChange={value => this.updateField('location', value)}
-            onSubmitEditing={() => this.updateSetting('location', location)}
-          />
-          <View style={styles.buttonRow}>
+          <View style={styles.header}>
+            <Text style={styles.title}>Everything looking good?</Text>
+            <Text style={styles.subTitle}>
+              You can always come back and change your details at any time.
+            </Text>
+          </View>
+          <View style={styles.content}>
+            {!isEmpty(avatarUrl) && <View style={styles.imageWrapper}>
+              <TouchableOpacity onPress={goToImage}>
+                <Image style={styles.image} source={{ uri: avatarUrl }} />
+              </TouchableOpacity>
+            </View>}
+            <SettingControl
+              ref={this.controlRefs.name}
+              label='Your Full Name'
+              value={name}
+              toggleEditable
+              error={errors.name}
+              onChange={value => this.updateField('name', value)}
+              onSubmitEditing={() => this.updateSetting('name', name)}
+            />
+            <SettingControl
+              ref={c => { this.controlRefs.email = c }}
+              label='Email Address'
+              value={email}
+              keyboardType='email-address'
+              autoCapitalize='none'
+              autoCorrect={false}
+              toggleEditable
+              error={errors.email}
+              onChange={value => this.updateField('email', value)}
+              onSubmitEditing={() => this.updateSetting('email', email)}
+            />
+            {showPasswordField && <SettingControl
+              ref={this.controlRefs.password}
+              label='Password'
+              value={password}
+              toggleSecureTextEntry
+              toggleEditable
+              error={errors.password}
+              onChange={value => this.updateField('password', value)}
+              onSubmitEditing={() => this.updateSetting('password', password)}
+            />}
+            {showPasswordField && <SettingControl
+              ref={this.controlRefs.confirmPassword}
+              label='Confirm Password'
+              value={confirmPassword}
+              toggleSecureTextEntry
+              toggleEditable
+              error={errors.confirmPassword}
+              onChange={value => this.updateField('confirmPassword', value)}
+              onSubmitEditing={() => this.updateSetting('password', password, 'confirmPassword')}
+            />}
+            <SettingControl
+              ref={this.controlRef}
+              label='Where do you call home'
+              value={location}
+              toggleEditable
+              onFocus={() => this.showLocationPicker(location)}
+            />
+          </View>
+          <View style={styles.footer}>
             <Button
               style={styles.changesButton}
               text='Make Changes'
@@ -163,7 +180,7 @@ export default class SignupFlow4 extends React.Component {
             />
           </View>
         </ScrollView>
-      </KeyboardFriendlyView>
+      </View>
     )
   }
 }

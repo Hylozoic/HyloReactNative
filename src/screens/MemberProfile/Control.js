@@ -6,7 +6,7 @@ import {
   Text
 } from 'react-native'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
-import { rhino60, amaranth, rhino50 } from 'style/colors'
+import { rhino60, amaranth } from 'style/colors'
 
 export default class Control extends React.Component {
   inputRef = createRef()

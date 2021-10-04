@@ -10,17 +10,17 @@ const imagePickerChild = {
 
 export default {
   ...styles,
+  header: {
+    ...styles.header,
+    alignItems: 'center'
+  },
+  content: {
+    ...styles.content,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
   image: {
     ...imagePickerChild
-  },
-  pickerContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    flex: 1
-  },
-  continueButton: {
-    ...styles.continueButton,
-    marginBottom: 20
   },
   imagePickerBackground: {
     ...imagePickerChild,

@@ -123,6 +123,9 @@ export default {
       paddingVertical: 0,
       paddingBottom: 10
     },
+    eyeIcon: {
+      color: rhino30
+    },
     hideErrorTriangle: true
   }
 }

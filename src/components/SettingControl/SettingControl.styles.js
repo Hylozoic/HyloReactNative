@@ -2,7 +2,8 @@ import {
   caribbeanGreen,
   white60onCaribbeanGreen,
   white40onCaribbeanGreen,
-  amaranth
+  amaranth,
+  white
 } from 'style/colors'
 
 export default {
@@ -31,12 +32,12 @@ export default {
   toggles: {
     flexDirection: 'row',
     top: 20,
-    right: 20,
+    right: 0,
     position: 'absolute'
   },
   eyeIcon: {
     fontSize: 20,
-    opacity: 0.5,
+    color: white40onCaribbeanGreen,
     marginRight: 10
   },
   editIcon: {

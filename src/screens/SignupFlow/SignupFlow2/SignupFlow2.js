@@ -1,6 +1,5 @@
 import React from 'react'
 import { View, Image, Text } from 'react-native'
-import { SafeAreaView } from 'react-native-safe-area-context'
 import ImagePicker from 'components/ImagePicker'
 import Button from 'components/Button'
 import Icon from 'components/Icon'
@@ -37,10 +36,12 @@ export default class SignupFlow2 extends React.Component {
         )
 
     return (
-      <SafeAreaView style={styles.container}>
-        <View style={styles.pickerContainer}>
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <Text style={styles.title}>Upload a Photo</Text>
+        </View>
+        <View style={styles.content}>
           <ImagePicker
-            title='Upload a Photo'
             type='userAvatar'
             cameraType='front'
             id={currentUser.id}
@@ -48,14 +49,15 @@ export default class SignupFlow2 extends React.Component {
             onPendingChange={pending => this.setState({ imagePickerPending: pending })}
             children={imagePickerChildren}
           /> 
-          <View><Text style={styles.title}>Upload a Photo</Text></View>
         </View>
-        <Button
-          style={styles.continueButton}
-          text='Continue'
-          onPress={saveAndNext}
-        />
-      </SafeAreaView>
+        <View style={styles.footer}>
+          <Button
+            style={styles.continueButton}
+            text='Continue'
+            onPress={saveAndNext}
+          />
+        </View>
+      </View>
     )
   }
 }

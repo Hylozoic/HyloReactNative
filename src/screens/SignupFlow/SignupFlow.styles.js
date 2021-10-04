@@ -5,17 +5,19 @@ export default {
   container: {
     backgroundColor: caribbeanGreen,
     padding: 20,
+    paddingBottom: 0,
     flex: 1,
-    flexDirection: 'column',
     justifyContent: 'flex-end',
-    alignItems: 'center'
   },
   header: {},
-  content: {},
+  content: {
+    flexGrow: 1
+  },
   footer: {
     flex: 1,
-    justifyContent: 'flex-end',
-    marginBottom: 40
+    flexDirection: 'row',
+    alignItems: 'flex-end',
+    paddingBottom: 40
   },
 
   // 

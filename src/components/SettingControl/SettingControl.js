@@ -104,7 +104,7 @@ export default class SettingControl extends React.Component {
                 hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}>
                 <EntypoIcon
                   name={securePassword ? 'eye' : 'eye-with-line'}
-                  style={styles.eyeIcon}
+                  style={[styles.eyeIcon,, theme.eyeIcon]}
                 />
               </TouchableOpacity>
             )}

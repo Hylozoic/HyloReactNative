@@ -4,11 +4,16 @@ import controlStyles from 'components/SettingControl/SettingControl.styles'
 
 export default {
   ...styles,
+  footer: {
+    ...styles.footer,
+    marginTop: 20
+  },
   subTitle: {
     ...styles.subTitle,
     marginBottom: 20
   },
   imageWrapper: {
+    marginBottom: 20,
     alignItems: 'center'
   },
   image: {
@@ -38,8 +43,5 @@ export default {
     color: 'white',
     fontSize: 14,
     marginLeft: 0
-  },
-  continueButton: {
-    ...styles.continueButton
   }
 }
